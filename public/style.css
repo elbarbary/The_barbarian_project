@@ -311,6 +311,7 @@ body {
     font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: 0.5px;
+    white-space: nowrap;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -835,28 +836,56 @@ body {
 
     .hero-links {
         flex-direction: column;
-        align-items: stretch;
-        max-width: 300px;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        max-width: 340px;
         margin-left: auto;
         margin-right: auto;
     }
 
+    .hero-link {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.9rem 1.2rem;
+    }
+
     #mainNav {
         display: none;
-        /* simple hidden for mobile, could add hamburger */
+    }
+
+    .skills-container {
+        padding: 2rem 1.2rem;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .skills-container .section-title {
+        font-size: 2.2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .timeline-card {
         margin-left: 0;
         padding: 1.5rem;
-    }
-
-    .timeline-card::before,
-    .timeline-card::after {
-        display: none;
+        max-width: 95vw;
+        left: 50%;
+        width: 95%;
     }
 
     .contact-links {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-card {
+        width: 100%;
+        max-width: 340px;
+        padding: 1.8rem;
     }
 }

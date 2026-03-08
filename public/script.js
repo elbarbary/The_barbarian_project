@@ -45,28 +45,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Phase 1: Load first 60 frames sequentially for smooth initial playback
+    // Load all 360 frames in batches of 20, dismiss preloader when done
     async function startLoading() {
-        // Load first frame immediately to prevent black flash
+        // Load first frame immediately to prevent black flash during loading
         await loadFrame(1);
         renderFrame(0);
 
-        // Load first 60 frames in batches of 10 (avoids browser connection flooding)
-        const phase1 = [];
-        for (let i = 2; i <= 60; i++) phase1.push(i);
-
-        for (let b = 0; b < phase1.length; b += 10) {
-            const batch = phase1.slice(b, b + 10).map(i => loadFrame(i));
-            await Promise.all(batch);
-            if (imagesLoaded >= 20 && !preloaderDismissed) dismissPreloader();
-        }
-
-        // Phase 2: Load remaining frames in background
-        for (let b = 61; b <= frameCount; b += 15) {
+        // Load all remaining frames in parallel batches of 20
+        for (let b = 2; b <= frameCount; b += 20) {
             const batch = [];
-            for (let i = b; i < Math.min(b + 15, frameCount + 1); i++) batch.push(loadFrame(i));
+            for (let i = b; i < Math.min(b + 20, frameCount + 1); i++) {
+                batch.push(loadFrame(i));
+            }
             await Promise.all(batch);
         }
+
+        // All frames loaded — dismiss the preloader
+        dismissPreloader();
     }
 
     startLoading();
