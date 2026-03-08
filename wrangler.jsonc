@@ -1,0 +1,18 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "thebarbarianproject",
+    "compatibility_date": "2024-03-08",
+    "pages_build_output_dir": ".",
+    "rules": [
+        {
+            "type": "Data",
+            "globs": [
+                "**/*.jpg",
+                "**/*.css",
+                "**/*.js",
+                "**/*.html"
+            ],
+            "fallthrough": true
+        }
+    ]
+}
