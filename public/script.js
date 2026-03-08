@@ -19,15 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         img.onload = () => {
             imagesLoaded++;
-            progressEl.style.width = `${(imagesLoaded / frameCount) * 100}%`;
+            // Update progress bar based on the first 30 frames to feel responsive
+            const initialLoadTarget = 30;
+            if (imagesLoaded <= initialLoadTarget) {
+                progressEl.style.width = `${(imagesLoaded / initialLoadTarget) * 100}%`;
+            }
 
             // Render the first frame as soon as it's ready so the screen isn't black
             if (imagesLoaded === 1) {
                 renderFrame(0);
             }
 
-            if (imagesLoaded === frameCount) {
-                // All loaded, fade out preloader
+            if (imagesLoaded === initialLoadTarget) {
+                // Enough initial frames loaded, fade out preloader quickly
                 setTimeout(() => {
                     preloaderEl.style.opacity = '0';
                     setTimeout(() => {
@@ -40,10 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         img.onerror = () => {
-            // Fallback in case a frame is missing (e.g. AI processing hasn't finished)
+            // Fallback in case a frame is missing
             // Still count as loaded to prevent locking the UI forever
             imagesLoaded++;
-            if (imagesLoaded === frameCount) {
+            const initialLoadTarget = 30;
+
+            if (imagesLoaded === initialLoadTarget) {
                 setTimeout(() => {
                     preloaderEl.style.opacity = '0';
                     setTimeout(() => {
