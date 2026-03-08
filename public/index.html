@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ahmed Elbarbary — Computer Engineer, AI Specialist, and Data Scientist. Portfolio showcasing projects, experience, and achievements from AUC.">
+    <title>Ahmed Elbarbary — Journey Through Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-train">🚂</div>
+            <div class="loader-text">Boarding the train...</div>
+            <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
+        </div>
+    </div>
+
+    <!-- Fixed canvas background for train animation -->
+    <canvas id="trainCanvas"></canvas>
+
+    <!-- Dark overlay on canvas for readability -->
+    <div id="canvasOverlay"></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav">
+        <div class="nav-logo">AE</div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#timeline" class="nav-link">Journey</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Scroll container that drives the animation -->
+    <div id="scrollContainer">
+
+        <!-- Hero Section -->
+        <section id="hero" class="section hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">Computer Engineer · AI Specialist · Data Scientist</div>
+                <h1 class="hero-name">Ahmed<br><span class="hero-name-accent">Elbarbary</span></h1>
+                <p class="hero-tagline">A journey through innovation, leadership, and engineering excellence</p>
+                <div class="hero-links">
+                    <a href="mailto:elbarbary@aucegypt.edu" class="hero-link">
+                        <span class="link-icon">✉</span> elbarbary@aucegypt.edu
+                    </a>
+                    <a href="https://www.linkedin.com/in/ahmed-yousef-elbarbary" target="_blank" class="hero-link">
+                        <span class="link-icon">in</span> LinkedIn
+                    </a>
+                    <a href="tel:+201002027807" class="hero-link">
+                        <span class="link-icon">☎</span> +20 100 202 7807
+                    </a>
+                </div>
+                <div class="scroll-indicator">
+                    <div class="scroll-text">Scroll to begin the journey</div>
+                    <div class="scroll-arrow">↓</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="section">
+            <div class="timeline-container">
+
+                <!-- ═══════════ 2025-2026 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2025">
+                    <div class="year-badge">2025 – 2026</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Experience</div>
+                    <h3 class="card-title">Session Lead — Udacity (DECI Winter)</h3>
+                    <p class="card-date">Oct 2025 – May 2026</p>
+                    <p class="card-desc">Selected as a Session Lead for the DECI Winter cohort, supporting learners in Python, SQL, and core ML topics including regression models, model evaluation, and gradient descent optimization.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Experience</div>
+                    <h3 class="card-title">Network Infrastructure Engineer Intern — Nokia</h3>
+                    <p class="card-date">Jun 2025 – Jul 2025</p>
+                    <p class="card-desc">Built and configured IP/MPLS routers in a simulated lab environment. Passed the RNS1 internal technical assessment with a high grade, validating proficiency in network configuration and troubleshooting.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Experience</div>
+                    <h3 class="card-title">AI Engineer Intern — Library LLT, AUC</h3>
+                    <p class="card-date">May 2025 – Jun 2025</p>
+                    <p class="card-desc">Developed a Python-based OCR + LLM pipeline to digitize and analyze 19th–20th century multilingual (French, Arabic) handwritten documents. Contributed to a React + Flask web application for non-technical users.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Extracurricular</div>
+                    <h3 class="card-title">Team Captain — AUC Powerlifting Team</h3>
+                    <p class="card-date">Fall 2025 – Spring 2026</p>
+                    <p class="card-desc">Led training and strategy for the university team, securing top positions in national collegiate competitions. Won multiple Gold and Silver medals in regional powerlifting competitions.</p>
+                </div>
+
+                <!-- ═══════════ 2024-2025 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2024">
+                    <div class="year-badge">2024 – 2025</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Autonomous AI Hedge Fund — <a href="https://qbitmind.org" target="_blank">qbitmind.org</a></h3>
+                    <p class="card-desc">Architected a multi-agent autonomous trading system using GPT and Gemini models for committee-based investment strategies. Developed a self-optimizing "Reviewer" agent with market research RAG and live production dashboard with real-time P&L tracking.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Food Ordering Mobile App — <a href="https://vitore.org" target="_blank">Vitore.org</a></h3>
+                    <p class="card-desc">Developed a full-stack Flutter application with Gemini API and Firebase backend. Implemented secure user authentication, real-time data synchronization, and seamless payment integration.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Financial Analysis Tool — <a href="https://sabas.store" target="_blank">sabas.store</a></h3>
+                    <p class="card-desc">Engineered an AI-powered financial extraction tool using Gemini models and advanced prompt engineering to parse and analyze income statements, balance sheets, and cash flows.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Ultra-Low-Power KWS (FPGA/AI)</h3>
+                    <p class="card-desc">Prototyped an on-device Key Word Spotting system with analog/time-domain front-end and INT8/Binary models. Achieved sub-mJ inference energy consumption through quantized CNN-GRU architectures.</p>
+                </div>
+
+                <!-- ═══════════ 2023-2024 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2023">
+                    <div class="year-badge">2023 – 2024</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Leadership</div>
+                    <h3 class="card-title">Chairperson — First-Year Experience (FYE) Program, AUC</h3>
+                    <p class="card-date">Fall 2022 – Fall 2025</p>
+                    <p class="card-desc">Recruited, trained, and led 50+ peer leaders per semester, managing a total workforce of over 250 facilitators to deliver orientation events for 1,000+ students per year. Built Python automation scripts for demographic-based group assignment.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Leadership</div>
+                    <h3 class="card-title">President — Anti-Cancer Team (ACT), AUC</h3>
+                    <p class="card-date">Spring 2023 – Fall 2023</p>
+                    <p class="card-desc">Directed club strategy and operations, leading 100+ members to organize high-impact visits to 57357 Cancer Hospital. Spearheaded the "Let's Make the Hopes Pink" campaign with Baheya Hospital, raising funds for 500+ attendees.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Autonomous Robotic Vehicle</h3>
+                    <p class="card-desc">Engineered an autonomous vehicle using Raspberry Pi (C++ & Python) featuring line-following, ultrasonic collision avoidance, and a robotic arm for real-time object manipulation using custom control algorithms.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category project">Project</div>
+                    <h3 class="card-title">Used Car Market Data Pipeline</h3>
+                    <p class="card-desc">Automated a web scraping pipeline using Python and Selenium to extract OLX used-car listings. Cleaned and transformed raw data via Pandas for ingestion into a relational database for market analysis.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category award">Award</div>
+                    <h3 class="card-title">🥈 2nd Place — SU RealLife Competition</h3>
+                    <p class="card-desc">Secured second place in the Student Union RealLife competition at AUC.</p>
+                </div>
+
+                <!-- ═══════════ 2022-2023 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2022">
+                    <div class="year-badge">2022 – 2023</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Experience</div>
+                    <h3 class="card-title">Events Head — FYE Program, AUC</h3>
+                    <p class="card-date">Fall 2022 – Spring 2023</p>
+                    <p class="card-desc">Organized and managed engaging events for over 1,000 first-year students. Delivered informative sessions and created interactive educational games to facilitate learning and community building.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Leadership</div>
+                    <h3 class="card-title">Logistics Head — Mass Communication Association, AUC</h3>
+                    <p class="card-date">Fall 2022 – Spring 2023</p>
+                    <p class="card-desc">Orchestrated logistics for major events, managing vendor procurement, equipment setup, and on-ground operations. Communicated committee visions to bring events to life.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Experience</div>
+                    <h3 class="card-title">Residential Advisor Trainee — AUC</h3>
+                    <p class="card-date">Fall 2022</p>
+                    <p class="card-desc">Collaborated with the Residential Office to coordinate events, enhance student communication, and contribute to a lively residential community.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Activity</div>
+                    <h3 class="card-title">Business Association — AUC</h3>
+                    <p class="card-date">Fall 2022</p>
+                    <p class="card-desc">Organized events and talks by the club. Completed crisis management training.</p>
+                </div>
+
+                <!-- ═══════════ 2021-2022 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2021">
+                    <div class="year-badge">2021 – 2022</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category education">Education</div>
+                    <h3 class="card-title">🎓 B.Sc. Computer Engineering — The American University in Cairo</h3>
+                    <p class="card-date">Started Fall 2021 · Expected May 2026</p>
+                    <p class="card-desc">Specialization in AI, with Honors. Double major with Data Science. Minors: Business Administration, Economics. GPA: 3.6/4.0</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Activity</div>
+                    <h3 class="card-title">Student Union — AUC</h3>
+                    <p class="card-date">Fall 2021 – Fall 2022</p>
+                    <p class="card-desc">Organized Tamer Hosny's concert managing the VIP gate and crowd control. Ran SU Market operations with bi-weekly refilling and cashier duties. Collected and distributed 2,200+ student packs.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category activity">Activity</div>
+                    <h3 class="card-title">AUC Rowing Team</h3>
+                    <p class="card-date">Fall 2021 – Fall 2022</p>
+                    <p class="card-desc">Competed as a member of the AUC Rowing Team.</p>
+                </div>
+
+                <div class="timeline-card two-col" data-aos="fade-up">
+                    <div class="card-category activity">Clubs & Societies</div>
+                    <h3 class="card-title">Multiple Club Memberships — AUC</h3>
+                    <p class="card-date">Fall 2021 – Spring 2022</p>
+                    <div class="card-clubs">
+                        <span class="club-tag">Robotics Club — Operations</span>
+                        <span class="club-tag">Musicana — Logistics</span>
+                        <span class="club-tag">Economics & Finance Club — Marketing</span>
+                        <span class="club-tag">Debate Society — HR</span>
+                        <span class="club-tag">Anti-Cancer Team — Member</span>
+                    </div>
+                </div>
+
+                <!-- ═══════════ 2019-2021 ═══════════ -->
+                <div class="timeline-year-marker" data-year="2019">
+                    <div class="year-badge">2019 – 2021</div>
+                    <div class="year-line"></div>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category education">Education</div>
+                    <h3 class="card-title">🏫 Menoufia STEM School</h3>
+                    <p class="card-date">Graduated August 2021</p>
+                    <p class="card-desc">Academic Diploma from one of Egypt's prestigious STEM high schools.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category award">Award</div>
+                    <h3 class="card-title">🏆 Ranked 21st Nationwide in STEM Education</h3>
+                    <p class="card-desc">Achieved 21st rank across the country in the highly competitive STEM high school diploma examinations.</p>
+                </div>
+
+                <div class="timeline-card" data-aos="fade-up">
+                    <div class="card-category experience">Leadership</div>
+                    <h3 class="card-title">Head — Fablab Team, Menoufia STEM School</h3>
+                    <p class="card-date">Fall 2019 – Spring 2020</p>
+                    <p class="card-desc">Organized sessions teaching students how to use Arduino. Coordinated robot competitions with the Semicolon team.</p>
+                </div>
+
+                <!-- End of timeline -->
+                <div class="timeline-end">
+                    <div class="end-line"></div>
+                    <div class="end-badge">Where it all began ✨</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section skills-section">
+            <div class="skills-container">
+                <h2 class="section-title">Technical Arsenal</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Dart</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">AI & Data Science</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag highlight">PyTorch</span>
+                            <span class="skill-tag highlight">TensorFlow</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">NumPy</span>
+                            <span class="skill-tag highlight">Computer Vision</span>
+                            <span class="skill-tag highlight">Transformers</span>
+                            <span class="skill-tag highlight">LLMs</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">Web & Frameworks</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Flutter</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">.NET</span>
+                            <span class="skill-tag">Qt</span>
+                            <span class="skill-tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">Tools & DevOps</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Verilog</span>
+                            <span class="skill-tag">GTKWave</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group-title">Spoken Languages</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">English — Fluent</span>
+                            <span class="skill-tag">Arabic — Native</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Footer -->
+        <section id="contact" class="section contact-section">
+            <div class="contact-container">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="contact-subtitle">Always open to new opportunities and conversations.</p>
+                <div class="contact-links">
+                    <a href="mailto:elbarbary@aucegypt.edu" class="contact-card">
+                        <div class="contact-icon">✉</div>
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">elbarbary@aucegypt.edu</div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ahmed-yousef-elbarbary" target="_blank" class="contact-card">
+                        <div class="contact-icon">in</div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">ahmed-yousef-elbarbary</div>
+                    </a>
+                    <a href="tel:+201002027807" class="contact-card">
+                        <div class="contact-icon">☎</div>
+                        <div class="contact-label">Phone</div>
+                        <div class="contact-value">+20 100 202 7807</div>
+                    </a>
+                </div>
+                <div class="footer-text">
+                    <p>© 2025 Ahmed Elbarbary. Built with passion.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
