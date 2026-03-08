@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Always start at the very top — prevent browser scroll restoration mid-page
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // --- Configuration ---
     // Using the 360 high-quality frames extracted directly from the video sequence
     const framesDir = 'frames_video';
