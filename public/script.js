@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     preloaderEl.style.opacity = '0';
                     setTimeout(() => {
                         preloaderEl.style.display = 'none';
-                        // Trigger initial draw
-                        window.dispatchEvent(new Event('scroll'));
+                        // Force immediate render of scroll state
+                        setTimeout(() => handleScroll(), 50);
                     }, 800);
                 }, 500);
             }

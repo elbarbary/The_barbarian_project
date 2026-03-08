@@ -268,7 +268,9 @@ body {
 .hero-name-accent {
     background: linear-gradient(135deg, #FFDF73 0%, var(--accent-gold) 50%, #B8860B 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
     font-style: italic;
     font-weight: 700;
     display: inline-block;
@@ -641,7 +643,9 @@ body {
     font-weight: 800;
     background: linear-gradient(135deg, #FFDF73 0%, var(--accent-gold) 50%, #B8860B 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .skills-grid {
@@ -657,11 +661,8 @@ body {
     padding: 2.5rem 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.skill-group.aos-animate {
+    opacity: 1;
+    transform: translateY(0);
     animation: fadeUp 0.8s ease forwards;
 }
 
@@ -745,7 +746,9 @@ body {
     margin-bottom: 1rem;
     background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .contact-subtitle {
