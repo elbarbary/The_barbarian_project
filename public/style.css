@@ -444,54 +444,16 @@ body {
 
 /* Timeline Cards */
 .timeline-card {
-    background: rgba(15, 15, 20, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(15, 15, 20, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 2.5rem;
-    margin-bottom: 3rem;
-    margin-left: 3rem;
-    position: relative;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-}
-
-.timeline-card:hover {
-    transform: translateY(-8px) scale(1.02) !important;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-    border-color: rgba(212, 175, 55, 0.3);
-}
-
-.timeline-card::before {
-    content: '';
-    position: absolute;
-    left: -3rem;
-    top: 3rem;
-    width: 1.5rem;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.timeline-card::after {
-    content: '';
-    position: absolute;
-    left: -3.4rem;
-    top: 2.6rem;
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 50%;
-    background: var(--bg-color);
-    border: 2px solid var(--accent-gold);
-    box-shadow: 0 0 10px var(--accent-gold-dim);
-    transition: background 0.3s ease;
-}
-
-.timeline-card:hover::after {
-    background: var(--accent-gold);
-    box-shadow: 0 0 15px var(--accent-gold);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .card-category {
