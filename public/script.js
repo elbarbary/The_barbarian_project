@@ -47,9 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Phase 1: Load first 60 frames sequentially for smooth initial playback
     async function startLoading() {
+        // Load first frame immediately to prevent black flash
+        await loadFrame(1);
+        renderFrame(0);
+
         // Load first 60 frames in batches of 10 (avoids browser connection flooding)
         const phase1 = [];
-        for (let i = 1; i <= 60; i++) phase1.push(i);
+        for (let i = 2; i <= 60; i++) phase1.push(i);
 
         for (let b = 0; b < phase1.length; b += 10) {
             const batch = phase1.slice(b, b + 10).map(i => loadFrame(i));
