@@ -1,211 +1,108 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* ═══════════════════════════════════════════════════════════════
+   THE BARBARIAN PROJECT — Liquid Glass
+   Reveal on scroll · pointer glare · nav state · count-up
+   ═══════════════════════════════════════════════════════════════ */
+(() => {
+  'use strict';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Always start at the very top — prevent browser scroll restoration mid-page
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
+  /* ─── reveal on scroll ───────────────────────────────────────── */
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduced) {
+    reveals.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        // gentle stagger for siblings entering together
+        const group = e.target.parentElement;
+        const peers = group ? [...group.querySelectorAll(':scope > .reveal')] : [e.target];
+        const idx = Math.max(0, peers.indexOf(e.target));
+        e.target.style.transitionDelay = Math.min(idx * 70, 350) + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach((el) => io.observe(el));
+  }
 
-    // --- Configuration ---
-    // Using the 360 high-quality frames extracted directly from the video sequence
-    const framesDir = 'frames_video';
-    const frameCount = 360;
+  /* ─── nav scrolled state ─────────────────────────────────────── */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-    // --- Preloading ---
-    // Pre-allocate all image slots
-    const images = new Array(frameCount);
-    let imagesLoaded = 0;
-    const progressEl = document.getElementById('loaderProgress');
-    const preloaderEl = document.getElementById('preloader');
-    let preloaderDismissed = false;
-
-    function dismissPreloader() {
-        if (preloaderDismissed) return;
-        preloaderDismissed = true;
-        setTimeout(() => {
-            preloaderEl.style.opacity = '0';
-            setTimeout(() => {
-                preloaderEl.style.display = 'none';
-                setTimeout(() => handleScroll(), 50);
-            }, 800);
-        }, 300);
-    }
-
-    function loadFrame(i) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            const frameNum = i.toString().padStart(3, '0');
-            img.src = `${framesDir}/frame-${frameNum}.jpg`;
-            img.onload = img.onerror = () => {
-                images[i - 1] = img;
-                imagesLoaded++;
-                const pct = Math.min(100, Math.round((imagesLoaded / frameCount) * 100));
-                progressEl.style.width = `${pct}%`;
-                if (imagesLoaded === 1) renderFrame(0);
-                resolve();
-            };
-        });
-    }
-
-    // Load all 360 frames in batches of 20, dismiss preloader when done
-    async function startLoading() {
-        // Load first frame immediately to prevent black flash during loading
-        await loadFrame(1);
-        renderFrame(0);
-
-        // Load all remaining frames in parallel batches of 20
-        for (let b = 2; b <= frameCount; b += 20) {
-            const batch = [];
-            for (let i = b; i < Math.min(b + 20, frameCount + 1); i++) {
-                batch.push(loadFrame(i));
-            }
-            await Promise.all(batch);
-        }
-
-        // All frames loaded — dismiss the preloader
-        dismissPreloader();
-    }
-
-    startLoading();
-
-    // --- Canvas Animation ---
-    const canvas = document.getElementById('trainCanvas');
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const scrollContainer = document.getElementById('scrollContainer');
-
-    let currentFrameIndex = 0;
-
-    // Resize canvas to cover window exactly
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        // Re-draw current frame
-        renderFrame(currentFrameIndex);
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function renderFrame(index) {
-        if (!images[index] || !images[index].complete || images[index].naturalWidth === 0) return;
-
-        const img = images[index];
-        const canvasRatio = canvas.width / canvas.height;
-        const imgRatio = img.width / img.height;
-
-        let drawWidth, drawHeight, offsetX, offsetY;
-
-        // "object-fit: cover" logic for canvas
-        if (canvasRatio > imgRatio) {
-            drawWidth = canvas.width;
-            drawHeight = drawWidth / imgRatio;
-            offsetX = 0;
-            offsetY = (canvas.height - drawHeight) / 2;
-        } else {
-            drawHeight = canvas.height;
-            drawWidth = drawHeight * imgRatio;
-            offsetX = (canvas.width - drawWidth) / 2;
-            offsetY = 0;
-        }
-
-        // Draw frame
-        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-    }
-
-    // Scroll mapping
-    const handleScroll = () => {
-        const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        const scrollHeight = Math.max(
-            document.body.scrollHeight,
-            document.documentElement.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.offsetHeight,
-            document.body.clientHeight,
-            document.documentElement.clientHeight
-        );
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        const maxScroll = scrollHeight - windowHeight;
-
-        let scrollFraction = maxScroll > 0 ? (scrollTop / maxScroll) : 0;
-
-        // Ensure within bounds
-        if (scrollFraction < 0) scrollFraction = 0;
-        if (scrollFraction > 1) scrollFraction = 1;
-
-        // Map to frame index
-        // Limit to frameCount - 1
-        let frameIndex = Math.min(
-            frameCount - 1,
-            Math.floor(scrollFraction * frameCount)
-        );
-
-        if (frameIndex !== currentFrameIndex) {
-            currentFrameIndex = frameIndex;
-            // Use requestAnimationFrame for smooth drawing
-            requestAnimationFrame(() => renderFrame(frameIndex));
-        }
-
-        // --- Animate timeline cards moving left-to-right ---
-        const timelineContainer = document.querySelector('.timeline-container');
-        const timelineCards = Array.from(document.querySelectorAll('.timeline-year-marker, .timeline-card'));
-
-        if (timelineContainer && timelineCards.length > 0) {
-            const tlRect = timelineContainer.getBoundingClientRect();
-            let tlProgress = -tlRect.top / (tlRect.height - windowHeight);
-            if (tlProgress < 0) tlProgress = 0;
-            if (tlProgress > 1) tlProgress = 1;
-
-            const totalItems = timelineCards.length;
-            const slice = 1.0 / totalItems;
-
-            timelineCards.forEach((card, index) => {
-                const itemCenter = (index + 0.5) * slice;
-                const dist = (tlProgress - itemCenter) / slice;
-
-                if (dist > -2.0 && dist < 2.0 && tlRect.top < windowHeight && tlRect.bottom > 0) {
-                    const opacity = Math.max(0, 1 - Math.abs(dist) * 0.8);
-                    card.style.opacity = opacity;
-
-                    const translateX = dist * (window.innerWidth * 0.45);
-                    const translateY = dist * -50;
-                    const rotateZ = -2;
-
-                    card.style.transform = `translate(calc(-50% + ${translateX}px), ${translateY}px) rotate(${rotateZ}deg)`;
-                    card.style.pointerEvents = opacity > 0.6 ? 'auto' : 'none';
-                } else {
-                    card.style.opacity = 0;
-                    card.style.pointerEvents = 'none';
-                }
-            });
-        }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // --- Navigation & Header ---
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
+  /* ─── pointer glare on tilt cards ────────────────────────────── */
+  if (!reduced && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.card-tilt').forEach((card) => {
+      card.addEventListener('pointermove', (ev) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((ev.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((ev.clientY - r.top) / r.height * 100) + '%');
+      });
     });
+  }
 
-    // --- Intersection Observer for Fade-Ups ---
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
+  /* ─── count-up stats ─────────────────────────────────────────── */
+  const nums = document.querySelectorAll('.stat-num[data-count]');
+  if (nums.length) {
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        countIO.unobserve(el);
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || '';
+        if (reduced) { el.textContent = target + suffix; return; }
+        const dur = 1100;
+        const start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased) + (p === 1 ? suffix : '');
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    nums.forEach((n) => countIO.observe(n));
+  }
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('aos-animate');
-                observer.unobserve(entry.target);
-            }
+  /* ─── subtle parallax on gradient orbs (mouse) ───────────────── */
+  if (!reduced && window.matchMedia('(hover: hover)').matches) {
+    const orbs = document.querySelectorAll('.orb');
+    let raf = null;
+    window.addEventListener('pointermove', (ev) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const dx = (ev.clientX / window.innerWidth - 0.5);
+        const dy = (ev.clientY / window.innerHeight - 0.5);
+        orbs.forEach((orb, i) => {
+          const depth = (i + 1) * 8;
+          orb.style.marginLeft = (dx * depth) + 'px';
+          orb.style.marginTop = (dy * depth) + 'px';
         });
-    }, observerOptions);
+        raf = null;
+      });
+    }, { passive: true });
+  }
 
-    const fadeElements = document.querySelectorAll('.hero-badge, .hero-name, .hero-tagline, .hero-links, .skill-group');
-    fadeElements.forEach(el => observer.observe(el));
-});
+  /* ─── guide topic filter ─────────────────────────────────────── */
+  const chips = document.querySelectorAll('.gchip');
+  const guides = document.querySelectorAll('.guide[data-cat]');
+  if (chips.length && guides.length) {
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        const filter = chip.dataset.filter;
+        chips.forEach((c) => {
+          const on = c === chip;
+          c.classList.toggle('is-active', on);
+          c.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        guides.forEach((g) => {
+          g.classList.toggle('is-hidden', filter !== 'all' && g.dataset.cat !== filter);
+        });
+      });
+    });
+  }
+})();

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <clipPath id="sq-ot"><rect x="0" y="0" width="120" height="120" rx="27"/></clipPath>
+    <linearGradient id="ot-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#B93A2B"/>
+      <stop offset="1" stop-color="#E8842C"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#sq-ot)">
+    <rect width="120" height="120" fill="url(#ot-bg)"/>
+    <!-- star -->
+    <path d="M98 17 l2.4 5.9 5.9 2.4 -5.9 2.4 -2.4 5.9 -2.4 -5.9 -5.9 -2.4 5.9 -2.4 z" fill="#FFFFFF" opacity="0.95"/>
+    <!-- dot -->
+    <circle cx="26" cy="82" r="4" fill="#FFFFFF" opacity="0.9"/>
+    <!-- whisk, rotated -->
+    <g transform="rotate(-38 60 60)" fill="none" stroke="#FFFFFF" stroke-linecap="round">
+      <!-- handle -->
+      <rect x="55.5" y="12" width="9" height="34" rx="4.5" fill="#FFFFFF" stroke="none"/>
+      <rect x="57.5" y="46" width="5" height="6" fill="#FFFFFF" stroke="none"/>
+      <!-- wires -->
+      <path d="M60 52 C 44 62, 44 88, 60 104" stroke-width="3.6"/>
+      <path d="M60 52 C 76 62, 76 88, 60 104" stroke-width="3.6"/>
+      <path d="M60 52 C 52 62, 52 88, 60 104" stroke-width="3.2"/>
+      <path d="M60 52 C 68 62, 68 88, 60 104" stroke-width="3.2"/>
+      <path d="M60 52 L 60 104" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

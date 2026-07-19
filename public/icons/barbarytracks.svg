@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <clipPath id="sq-bt"><rect x="0" y="0" width="120" height="120" rx="27"/></clipPath>
+    <linearGradient id="bt-b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCEFEC"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#sq-bt)">
+    <rect width="120" height="120" fill="#4E9E96"/>
+    <rect width="120" height="60" fill="#FFFFFF" opacity="0.05"/>
+    <text x="60" y="86" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="72" text-anchor="middle" fill="url(#bt-b)">B</text>
+  </g>
+</svg>

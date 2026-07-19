@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <clipPath id="sq-cc"><rect x="0" y="0" width="120" height="120" rx="27"/></clipPath>
+  </defs>
+  <g clip-path="url(#sq-cc)">
+    <rect width="120" height="120" fill="#F1ECDF"/>
+    <rect x="3" y="3" width="114" height="114" rx="24" fill="none" stroke="#E3DCC9" stroke-width="2"/>
+    <!-- CC in italic serif -->
+    <text x="60" y="74" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="58" letter-spacing="-6" text-anchor="middle" fill="#17150F">CC</text>
+    <!-- zigzag underline -->
+    <path d="M28 86 L44 82 L58 87 L74 82 L92 86" fill="none" stroke="#9A4A32" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <clipPath id="sq-ly"><rect x="0" y="0" width="120" height="120" rx="27"/></clipPath>
+    <radialGradient id="ly-pearl" cx="0.4" cy="0.35" r="0.9">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9B7CC"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#sq-ly)">
+    <rect width="120" height="120" fill="#F6D9E6"/>
+    <g transform="translate(60 62)">
+      <!-- five petals -->
+      <g fill="#F3C3D8" stroke="#C8336B" stroke-width="3" stroke-linejoin="round">
+        <g id="ly-p"><path d="M0 -8 C -12 -18, -10 -38, 0 -44 C 10 -38, 12 -18, 0 -8 Z"/></g>
+        <use href="#ly-p" transform="rotate(72)"/>
+        <use href="#ly-p" transform="rotate(144)"/>
+        <use href="#ly-p" transform="rotate(216)"/>
+        <use href="#ly-p" transform="rotate(288)"/>
+      </g>
+      <!-- dots between petals -->
+      <g fill="#C8336B">
+        <circle cx="0" cy="-30" r="0" />
+        <g id="ly-d"><circle cx="0" cy="-34" r="2.2" transform="rotate(36)"/></g>
+        <use href="#ly-d" transform="rotate(72)"/>
+        <use href="#ly-d" transform="rotate(144)"/>
+        <use href="#ly-d" transform="rotate(216)"/>
+        <use href="#ly-d" transform="rotate(288)"/>
+      </g>
+      <!-- pearl center -->
+      <circle cx="0" cy="0" r="7.5" fill="url(#ly-pearl)" stroke="#C8336B" stroke-width="2.5"/>
+    </g>
+  </g>
+</svg>
