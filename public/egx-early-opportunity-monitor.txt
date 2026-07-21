@@ -1,0 +1,71 @@
+Daily EGX / Thndr Early-Opportunity Monitor
+
+Objective
+Find only early, public-evidence stock setups on the Egyptian Exchange that may develop over the coming days or weeks. Do not recommend a stock merely because it is already a top gainer. The goal is to detect fresh material catalysts or credible early accumulation before most of the price move has happened.
+
+Coverage
+1. Scan every EGX stock currently available on Thndr. If an exact current Thndr list is unavailable, scan the broad EGX universe and clearly state the coverage limitation.
+2. Search everything newly published since the previous run. Prioritize sources in this order:
+   - Egyptian Exchange announcements and attachments.
+   - Financial Regulatory Authority releases.
+   - Company investor-relations releases and financial statements.
+   - Mubasher, Arab Finance, Al Borsa, Hapi, and other reputable financial publications.
+   - Social media only for unconfirmed rumors; never treat a rumor as evidence without a primary source.
+3. Compare the findings with previous reports and highlight only new or materially changed signals.
+
+Look for two opportunity types
+1. Fresh, specific, economically material catalysts that may not yet be fully reflected in price: debt settlements, acquisitions or tender offers, project awards and contracts, capital increases, subscription results, bonus shares or splits, treasury shares, ownership transfers, major-shareholder purchases, board decisions, and genuine earnings surprises.
+2. Early accumulation: abnormal volume, closes near the session high, the first abnormal price-and-volume date, repeated buying, ownership changes, and the same investor appearing in multiple companies within ten trading sessions.
+
+Required calculations for every serious candidate
+- Current price and exact quote date and time.
+- Catalyst publication date and time, primary-source link, and expected event date if one exists.
+- Price change before the catalyst, since the catalyst, over five sessions, one month, and three months.
+- RV20: latest-session volume divided by the median volume of the preceding 20 sessions.
+- Close location within the session range.
+- Normal 30-day traded value, free float, and ownership concentration.
+- Materiality versus market capitalization, annual revenue, profit, assets, or outstanding shares.
+- Latest revenue, operating-profit, and net-profit trends, separating operating improvement from one-off gains.
+- For a disclosed buyer: name, shares purchased, ownership before and after, average price, transaction date, disclosure date, broker, and other recent disclosed positions.
+
+Preferred early confirmation
+- RV20 of at least 3x.
+- The price was still up less than approximately 8% when the signal was first detected.
+- A close near the session high.
+- A breakout from a base rather than an extension after several limit-up sessions.
+- Enough normal traded value to enter and exit without dominating the order book.
+
+Penalties and rejection rules
+- Price already up more than 20% in five sessions: subtract up to 4 points.
+- Two or more completed limit-up sessions: subtract up to 3 points.
+- Company says it knows of no information explaining the move: subtract up to 4 points.
+- Severe illiquidity, valuation, dilution, governance, or exit risk: subtract up to 3 points.
+- Reject routine or economically immaterial filings, uncatalyzed low-float squeezes, stale news, and moves already captured by price.
+- A major-shareholder disclosure is confirmation after a transaction, not proof of advance information and not a guarantee of further gains.
+
+Opportunity score
+- Fresh, specific, material disclosure: 0 to +4.
+- Economic importance: 0 to +3.
+- Early price-and-volume confirmation: 0 to +2.
+- Repeat-buyer or ownership-cluster evidence: 0 to +2.
+- Clear dated catalyst in the coming weeks: 0 to +2.
+- Apply all penalties above.
+
+Only rank candidates scoring 6 or more, and only when the setup also has acceptable entry and exit liquidity. A high score means the stock deserves deeper research; it is not an instruction to buy.
+
+Output format
+1. Start with one clear status line. If nothing qualifies, write exactly: "No qualified early opportunity today."
+2. If candidates qualify, rank no more than five. For each one report:
+   - Ticker and company.
+   - Current price and timestamp.
+   - Exact catalyst or accumulation evidence with primary-source links.
+   - Materiality calculation.
+   - RV20, price performance, normal liquidity, free float, and ownership concentration.
+   - Relevant financial-statement trend.
+   - Stage: early, developing, or late.
+   - Opportunity score and confidence.
+   - What would confirm the setup, what would invalidate it, and a reasonable time-stop for re-evaluation.
+3. Add a separate Watch / Rejected section explaining why tempting movers failed.
+4. Distinguish verified facts, calculations, and inference. Never claim that a stock is guaranteed to rise. Never fabricate missing data. If a required figure cannot be verified, say so.
+
+Keep the report concise, source-linked, and timestamped in Africa/Cairo time.
