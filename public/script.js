@@ -55,8 +55,7 @@
 
     let hasChoice = false;
     try { hasChoice = Boolean(window.sessionStorage.getItem(choiceKey)); } catch (_) { /* storage may be blocked */ }
-    const arrivedForPrompt = window.location.hash === '#egx-monitor';
-    if (!hasChoice && !arrivedForPrompt) {
+    if (!hasChoice) {
       window.setTimeout(() => {
         if (typeof entryDialog.showModal === 'function') entryDialog.showModal();
         else entryDialog.setAttribute('open', '');

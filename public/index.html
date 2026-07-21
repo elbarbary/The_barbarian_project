@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Barbarian Project — Ahmed Elbarbary</title>
-<meta name="description" content="I'm learning every skill it takes to build a startup — one at a time, in public. Explore five shipped apps and copy my free daily EGX opportunity-monitor prompt.">
+<meta name="description" content="I'm learning every skill it takes to build a startup — one at a time, in public. Explore five shipped apps and the resources I publish along the way.">
 <meta property="og:title" content="The Barbarian Project — Ahmed Elbarbary">
 <meta property="og:description" content="Building in public from Cairo. Five apps shipped, one at a time. Now Head of Content at YOZO.">
 <meta property="og:type" content="website">
@@ -37,13 +37,13 @@
   <h2 id="entryTitle">What did you come for?</h2>
   <p id="entryDescription">Take the complete research prompt behind the daily monitor, or keep wandering through the things I build.</p>
   <div class="entry-actions">
-    <a class="entry-action entry-action-prompt" href="#egx-monitor" data-entry-choice="prompt">
+    <a class="entry-action entry-action-prompt" href="egx-monitor.html" data-entry-choice="prompt">
       <span class="entry-action-label">I want the prompt</span>
-      <span class="entry-action-meta">Free · no email gate <span aria-hidden="true">↓</span></span>
+      <span class="entry-action-meta">Open the free resource <span aria-hidden="true">→</span></span>
     </a>
     <button class="entry-action entry-action-explore" type="button" data-entry-choice="explore">
       <span class="entry-action-label">I'm here to explore</span>
-      <span class="entry-action-meta">Show me the work <span aria-hidden="true">→</span></span>
+      <span class="entry-action-meta">Stay on the homepage <span aria-hidden="true">→</span></span>
     </button>
   </div>
   <p class="entry-fine">The monitor finds public signals. It does not predict or guarantee returns.</p>
@@ -53,9 +53,8 @@
 <nav class="nav glass" id="nav">
   <a class="nav-brand" href="#top"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
   <div class="nav-links">
-    <a href="#egx-monitor">Prompt</a>
+    <a href="#guides">Resources</a>
     <a href="#work">Work</a>
-    <a href="#guides">Guides</a>
     <a class="nav-sec" href="#now">YOZO</a>
     <a class="nav-sec" href="#journey">Journey</a>
     <a class="nav-cta" href="#contact">Say hi</a>
@@ -81,7 +80,7 @@
 
       <div class="hero-cta reveal">
         <a class="btn btn-primary" href="#work">See what shipped <span aria-hidden="true">↓</span></a>
-        <a class="btn btn-lime" href="#guides">Free guides <span aria-hidden="true">↓</span></a>
+        <a class="btn btn-lime" href="#guides">Free resources <span aria-hidden="true">↓</span></a>
         <a class="btn btn-glass" href="https://instagram.com/the_barbarian_project" target="_blank" rel="noopener">Follow the mess <span aria-hidden="true">↗</span></a>
       </div>
 
@@ -215,71 +214,12 @@
     </div>
   </section>
 
-  <!-- ═══════════ EGX MONITOR PROMPT ═══════════ -->
-  <section class="section section-resource" id="egx-monitor" aria-labelledby="monitor-h">
-    <div class="shell">
-      <div class="resource-head reveal">
-        <div>
-          <p class="kicker">Free field note · updated July 2026</p>
-          <h2 class="section-title" id="monitor-h">The daily EGX<br><span>early-opportunity monitor.</span></h2>
-        </div>
-        <p class="resource-lede">This public-ready version keeps the full scoring and rejection logic I use to search filings, material news, and unusual accumulation—without my local file paths.</p>
-      </div>
-
-      <ul class="monitor-signals reveal" aria-label="What the prompt looks for">
-        <li><span>01</span> Fresh material disclosures</li>
-        <li><span>02</span> RV20 abnormal volume</li>
-        <li><span>03</span> Repeat-buyer clusters</li>
-        <li><span>04</span> Anti-chasing penalties</li>
-      </ul>
-
-      <div class="monitor-layout">
-        <aside class="setup-note reveal" aria-labelledby="setup-h">
-          <p class="setup-index">SETUP / 3 STEPS</p>
-          <h3 id="setup-h">Make it run at 9 AM.</h3>
-          <ol class="setup-steps">
-            <li><span>1</span><p><strong>Copy “schedule + prompt”.</strong> It includes the task, cadence, timezone, and full research rules.</p></li>
-            <li><span>2</span><p><strong>Paste it into ChatGPT or Codex.</strong> Ask it to create a standalone scheduled task.</p></li>
-            <li><span>3</span><p><strong>Review the first runs in Scheduled.</strong> Keep the sources; tune the threshold, never the evidence.</p></li>
-          </ol>
-          <a class="setup-doc" href="https://learn.chatgpt.com/docs/automations" target="_blank" rel="noopener">Official scheduled-task guide <span aria-hidden="true">↗</span></a>
-          <p class="setup-local">Using local files? Keep the desktop app running and the project available when the task is due.</p>
-        </aside>
-
-        <article class="prompt-panel reveal" aria-labelledby="prompt-panel-h">
-          <div class="prompt-topbar">
-            <div>
-              <span class="prompt-live"><i aria-hidden="true"></i> READY TO COPY</span>
-              <h3 id="prompt-panel-h">Daily EGX / Thndr monitor</h3>
-            </div>
-            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
-          </div>
-
-          <div class="prompt-window" id="promptWindow">
-            <pre id="automationPrompt" tabindex="0" aria-label="Daily EGX automation prompt">Loading the prompt…</pre>
-          </div>
-
-          <div class="prompt-actions">
-            <button class="btn btn-primary prompt-copy" id="copyScheduledPrompt" type="button">Copy schedule + prompt <span aria-hidden="true">↗</span></button>
-            <button class="btn btn-glass prompt-copy" id="copyPromptOnly" type="button">Copy prompt only</button>
-            <a class="prompt-download" href="egx-early-opportunity-monitor.txt" download>Download .txt</a>
-          </div>
-        </article>
-      </div>
-
-      <div class="monitor-truth reveal">
-        <span>Important</span>
-        <p>This is a research workflow, not financial advice or a prediction engine. A disclosure appears after the transaction; a high score means “research this first,” not “buy this now.”</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══════════ GUIDES ═══════════ -->
   <section class="section" id="guides" aria-labelledby="g-h">
     <div class="shell">
       <div class="section-head reveal">
         <p class="kicker">Free · updated as I go</p>
-        <h2 class="section-title" id="g-h">Guides &amp; materials.</h2>
+        <h2 class="section-title" id="g-h">Resources &amp; guides.</h2>
         <p class="section-lede">Whatever I figure out building this stuff, I write up and leave here —
           free to use, no guru stuff. Mobile apps, shipping to the stores, AI, content, design.
           New ones land <em>as I go</em>.</p>
@@ -304,7 +244,7 @@
           <span class="guide-cat">AI × Research</span>
           <h3 class="guide-title">Daily EGX early-opportunity monitor</h3>
           <p class="guide-desc">The complete prompt, scoring system, rejection rules, and three-step scheduled-task setup.</p>
-          <div class="guide-foot"><span class="guide-type">Prompt</span><a class="guide-go" href="#egx-monitor">Open &amp; copy ↓</a></div>
+          <div class="guide-foot"><span class="guide-type">Free prompt</span><a class="guide-go" href="egx-monitor.html">Open resource →</a></div>
         </article>
 
         <article class="guide glass reveal card-tilt" data-cat="mobile" style="--accent:#1E37E6;">

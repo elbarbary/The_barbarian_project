@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily EGX Opportunity Monitor — The Barbarian Project</title>
+<meta name="description" content="Copy the daily EGX and Thndr early-opportunity research prompt, including its scoring, rejection rules, and 9 AM scheduled-task setup.">
+<meta property="og:title" content="Daily EGX Opportunity Monitor — The Barbarian Project">
+<meta property="og:description" content="A free research prompt for finding fresh EGX disclosures, unusual volume, and repeat-buyer accumulation without chasing weekly gainers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thebarbarianproject.com/egx-monitor.html">
+<meta name="theme-color" content="#F4F3FB">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%231E37E6"/><stop offset="0.5" stop-color="%23C8336B"/><stop offset="1" stop-color="%23CDE84A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(%23g)"/><text x="32" y="44" font-family="Arial Black,Arial" font-weight="900" font-size="30" text-anchor="middle" fill="white">B</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="resource-page">
+<a class="skip-link" href="#monitor">Skip to the resource</a>
+
+<div class="canvas" aria-hidden="true">
+  <span class="orb orb-blue"></span>
+  <span class="orb orb-violet"></span>
+  <span class="orb orb-rose"></span>
+  <span class="orb orb-lime"></span>
+  <span class="orb orb-cyan"></span>
+</div>
+<div class="noise" aria-hidden="true"></div>
+
+<nav class="nav glass" id="nav" aria-label="Resource navigation">
+  <a class="nav-brand" href="index.html"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
+  <div class="nav-links">
+    <a class="resource-nav-back" href="index.html#guides">← Resources</a>
+    <a class="nav-cta" href="#prompt-panel-h">Copy prompt</a>
+  </div>
+</nav>
+
+<main class="resource-main" id="monitor">
+  <section class="section section-resource" aria-labelledby="monitor-h">
+    <div class="shell">
+      <a class="resource-back reveal" href="index.html#guides">← Back to all resources</a>
+
+      <div class="resource-head reveal">
+        <div>
+          <p class="kicker">Free field note · updated July 2026</p>
+          <h1 class="section-title" id="monitor-h">The daily EGX<br><span>early-opportunity monitor.</span></h1>
+        </div>
+        <p class="resource-lede">The complete public-ready research workflow I use to search filings, material news, and unusual accumulation—before a stock becomes a weekly-gainers story.</p>
+      </div>
+
+      <ul class="monitor-signals reveal" aria-label="What the prompt looks for">
+        <li><span>01</span> Fresh material disclosures</li>
+        <li><span>02</span> RV20 abnormal volume</li>
+        <li><span>03</span> Repeat-buyer clusters</li>
+        <li><span>04</span> Anti-chasing penalties</li>
+      </ul>
+
+      <div class="monitor-layout">
+        <aside class="setup-note reveal" aria-labelledby="setup-h">
+          <p class="setup-index">SETUP / 3 STEPS</p>
+          <h2 id="setup-h">Make it run at 9 AM.</h2>
+          <ol class="setup-steps">
+            <li><span>1</span><p><strong>Copy “schedule + prompt”.</strong> It includes the task, cadence, timezone, and full research rules.</p></li>
+            <li><span>2</span><p><strong>Paste it into ChatGPT or Codex.</strong> Ask it to create a standalone scheduled task.</p></li>
+            <li><span>3</span><p><strong>Review the first runs in Scheduled.</strong> Keep the sources; tune the threshold, never the evidence.</p></li>
+          </ol>
+          <a class="setup-doc" href="https://learn.chatgpt.com/docs/automations" target="_blank" rel="noopener">Official scheduled-task guide <span aria-hidden="true">↗</span></a>
+          <p class="setup-local">Using local files? Keep the desktop app running and the project available when the task is due.</p>
+        </aside>
+
+        <article class="prompt-panel reveal" aria-labelledby="prompt-panel-h">
+          <div class="prompt-topbar">
+            <div>
+              <span class="prompt-live"><i aria-hidden="true"></i> READY TO COPY</span>
+              <h2 id="prompt-panel-h">Daily EGX / Thndr monitor</h2>
+            </div>
+            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+          </div>
+
+          <div class="prompt-window" id="promptWindow">
+            <pre id="automationPrompt" tabindex="0" aria-label="Daily EGX automation prompt">Loading the prompt…</pre>
+          </div>
+
+          <div class="prompt-actions">
+            <button class="btn btn-primary prompt-copy" id="copyScheduledPrompt" type="button">Copy schedule + prompt <span aria-hidden="true">↗</span></button>
+            <button class="btn btn-glass prompt-copy" id="copyPromptOnly" type="button">Copy prompt only</button>
+            <a class="prompt-download" href="egx-early-opportunity-monitor.txt" download>Download .txt</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="monitor-truth reveal">
+        <span>Important</span>
+        <p>This is a research workflow, not financial advice or a prediction engine. A disclosure appears after the transaction; a high score means “research this first,” not “buy this now.”</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <p class="foot-line">© 2026 Ahmed Elbarbary — The Barbarian Project</p>
+    <p class="foot-note"><a class="foot-back" href="index.html">Return to the homepage</a></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
