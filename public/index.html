@@ -35,24 +35,25 @@
   <button class="entry-close" type="button" data-entry-choice="explore" aria-label="Close and explore the website">×</button>
   <p class="entry-kicker"><span class="pulse"></span> Came from the EGX video?</p>
   <h2 id="entryTitle">What did you come for?</h2>
-  <p id="entryDescription">Take the complete research prompt behind the daily monitor, or keep wandering through the things I build.</p>
+  <p id="entryDescription">Read today’s evidence-led EGX watchlist, or take the complete prompt and build the monitor yourself.</p>
   <div class="entry-actions">
-    <a class="entry-action entry-action-prompt" href="egx-monitor.html" data-entry-choice="prompt">
-      <span class="entry-action-label">I want the prompt</span>
-      <span class="entry-action-meta">Open the free resource <span aria-hidden="true">→</span></span>
+    <a class="entry-action entry-action-prompt" href="egx-insights.html" data-entry-choice="insights">
+      <span class="entry-action-label">Today’s insights</span>
+      <span class="entry-action-meta">Open the latest run <span aria-hidden="true">→</span></span>
     </a>
-    <button class="entry-action entry-action-explore" type="button" data-entry-choice="explore">
-      <span class="entry-action-label">I'm here to explore</span>
-      <span class="entry-action-meta">Stay on the homepage <span aria-hidden="true">→</span></span>
-    </button>
+    <a class="entry-action entry-action-explore" href="egx-monitor.html" data-entry-choice="prompt">
+      <span class="entry-action-label">I want the prompt</span>
+      <span class="entry-action-meta">Build my own monitor <span aria-hidden="true">→</span></span>
+    </a>
   </div>
-  <p class="entry-fine">The monitor finds public signals. It does not predict or guarantee returns.</p>
+  <p class="entry-fine">Not here for EGX? Close this and keep exploring. The monitor finds public signals; it does not predict returns.</p>
 </dialog>
 
 <!-- ═══════════ floating glass nav ═══════════ -->
 <nav class="nav glass" id="nav">
   <a class="nav-brand" href="#top"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
   <div class="nav-links">
+    <a href="#egx-daily">EGX</a>
     <a href="#guides">Resources</a>
     <a href="#work">Work</a>
     <a class="nav-sec" href="#now">YOZO</a>
@@ -93,6 +94,47 @@
     </div>
     <a class="scroll-hint reveal" href="#now" aria-label="Scroll down"><span></span></a>
   </header>
+
+  <!-- ═══════════ DAILY EGX INSIGHTS ═══════════ -->
+  <section class="section section-egx-home" id="egx-daily" aria-labelledby="egx-home-h">
+    <div class="shell">
+      <div class="egx-home-feature reveal">
+        <div class="egx-home-copy">
+          <p class="kicker kicker-lime">Daily EGX / Thndr research</p>
+          <h2 id="egx-home-h">Signals before they<br><span>become the story.</span></h2>
+          <p class="egx-home-lede">A catalyst-first scan of every Thndr stock, cross-checked against the broader EGX. Read the evidence, confirmation levels, and the movers that failed the test.</p>
+
+          <!-- EGX_DAILY_HOME_START: the automation refreshes this summary each run. -->
+          <div class="egx-home-status">
+            <span class="egx-home-live"><i aria-hidden="true"></i> Latest run · 23 July 2026</span>
+            <strong>No qualified early opportunity today.</strong>
+            <small>Last updated 23 July 2026 · 4:02 PM Cairo</small>
+          </div>
+          <!-- EGX_DAILY_HOME_END -->
+
+          <div class="egx-home-actions">
+            <a class="btn btn-lime" href="egx-insights.html">Read today’s insights <span aria-hidden="true">→</span></a>
+            <a class="egx-home-prompt" href="egx-monitor.html">Get the monitor prompt</a>
+          </div>
+        </div>
+
+        <aside class="egx-home-tape" aria-label="Latest EGX watch summary">
+          <div class="egx-tape-head">
+            <span>Closest watches</span>
+            <small>Score 6 qualifies</small>
+          </div>
+          <!-- EGX_DAILY_TAPE_START: the automation refreshes these watch rows each run. -->
+          <ol class="egx-tape-list">
+            <li><span>01</span><strong>BONY</strong><em>Score 5</em><small>RV20 2.18×</small></li>
+            <li><span>02</span><strong>ATQA</strong><em>Score 2</em><small>RV20 3.60×</small></li>
+            <li><span>03</span><strong>ACGC</strong><em>Score −1</em><small>RV20 7.46×</small></li>
+          </ol>
+          <!-- EGX_DAILY_TAPE_END -->
+          <p>I am not telling you to invest. I am just sharing research insights.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══════════ NOW — YOZO ═══════════ -->
   <section class="section" id="now" aria-labelledby="now-h">
@@ -241,10 +283,18 @@
 
         <article class="guide glass reveal card-tilt guide-live" data-cat="ai" style="--accent:#7C3AED;">
           <div class="guide-shine" aria-hidden="true"></div>
-          <span class="guide-cat">AI × Research</span>
-          <h3 class="guide-title">Daily EGX early-opportunity monitor</h3>
+          <span class="guide-cat">EGX × Daily research</span>
+          <h3 class="guide-title">Today’s early-opportunity insights</h3>
+          <p class="guide-desc">The latest ranked watchlist, source links, confirmation levels, and the tempting movers that failed.</p>
+          <div class="guide-foot"><span class="guide-type">Updated daily</span><a class="guide-go" href="egx-insights.html">Read insights →</a></div>
+        </article>
+
+        <article class="guide glass reveal card-tilt guide-live" data-cat="ai" style="--accent:#C8336B;">
+          <div class="guide-shine" aria-hidden="true"></div>
+          <span class="guide-cat">AI × Automation</span>
+          <h3 class="guide-title">Build the daily EGX monitor</h3>
           <p class="guide-desc">The complete prompt, scoring system, rejection rules, and three-step scheduled-task setup.</p>
-          <div class="guide-foot"><span class="guide-type">Free prompt</span><a class="guide-go" href="egx-monitor.html">Open resource →</a></div>
+          <div class="guide-foot"><span class="guide-type">Free prompt</span><a class="guide-go" href="egx-monitor.html">Copy the prompt →</a></div>
         </article>
 
         <article class="guide glass reveal card-tilt" data-cat="mobile" style="--accent:#1E37E6;">
