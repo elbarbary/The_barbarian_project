@@ -218,4 +218,35 @@
       });
     });
   }
+
+  /* ─── investigation reading progress + chapter state ───────── */
+  const reportProgress = document.getElementById('reportProgress');
+  const chapterLinks = [...document.querySelectorAll('.chapter-rail a[href^="#"]')];
+  if (reportProgress) {
+    const updateReportProgress = () => {
+      const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const ratio = Math.min(1, Math.max(0, window.scrollY / scrollable));
+      reportProgress.style.transform = `scaleX(${ratio})`;
+    };
+    updateReportProgress();
+    window.addEventListener('scroll', updateReportProgress, { passive: true });
+  }
+
+  if (chapterLinks.length) {
+    const chapters = chapterLinks
+      .map((link) => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+    const chapterIO = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (!visible) return;
+      chapterLinks.forEach((link) => {
+        const active = link.getAttribute('href') === `#${visible.target.id}`;
+        link.classList.toggle('is-active', active);
+        if (active) link.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+      });
+    }, { rootMargin: '-20% 0px -68% 0px', threshold: 0 });
+    chapters.forEach((chapter) => chapterIO.observe(chapter));
+  }
 })();
