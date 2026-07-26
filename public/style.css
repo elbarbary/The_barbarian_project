@@ -465,15 +465,20 @@ body::before {
 .kwin-home-numbers dt { color: rgba(245,242,255,0.4); font-size: 0.61rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .kwin-home-numbers dd { margin-top: 6px; color: #f5f2ff; font: 700 clamp(1.2rem, 2.7vw, 1.8rem)/1 var(--f-display); letter-spacing: -0.04em; }
 .kwin-home-numbers small { display: block; margin-top: 6px; color: rgba(245,242,255,0.34); font-size: 0.58rem; line-height: 1.35; }
-.guide-investigation {
+.guide-live.guide-investigation {
   grid-column: 1 / -1; min-height: 320px;
   color: #f5f2ff; background:
     radial-gradient(60% 100% at 100% 0%, rgba(124,58,237,0.45), transparent 66%),
     #211a43; border-color: rgba(255,255,255,0.15);
 }
+.guide-investigation.glass::after {
+  opacity: 0.22;
+  background: linear-gradient(180deg, rgba(255,255,255,0.34) 0%, transparent 18%);
+}
 .guide-investigation .guide-cat, .guide-investigation .guide-desc, .guide-investigation .guide-type { color: rgba(245,242,255,0.6); }
 .guide-investigation .guide-title { max-width: 15ch; color: #f5f2ff; font-size: clamp(2rem, 5vw, 4rem); }
 .guide-investigation .guide-go { color: #dff17e; border-color: rgba(205,232,74,0.34); }
+.guide-live.guide-investigation .guide-go:hover { color: #f1ffae; }
 
 /* ─── Homepage daily EGX doorway ─────────────────────────────── */
 .section-egx-home { padding-top: clamp(24px, 5vw, 64px); }
