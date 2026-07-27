@@ -154,7 +154,7 @@
 
       <figure class="master-map reveal">
         <div class="master-map-scroll">
-        <svg viewBox="0 0 1280 1010" role="img" aria-labelledby="mm-title mm-desc">
+        <svg viewBox="0 0 1280 1070" role="img" aria-labelledby="mm-title mm-desc">
           <title id="mm-title">Complete KWIN, ENTAD, ADIB, Assiut and consortium ownership and money map</title>
           <desc id="mm-desc">ADIB Egypt holds 64.75 percent of KWIN and 40 percent of ENTAD. KWIN holds 51.22 percent of ENTAD while ENTAD held 25.25 percent of KWIN, forming a circular loop. KWIN controls 89.46 percent of Assiut Agricultural; ENTAD controls about 99.77 percent of the AARE real-estate company, which has negative equity. AITG, delisted in July 2021, sold EGP 24.25 million of stakes to KWIN and EGP 11.87 million to ENTAD in 2023. The Abu El-Eyoun consortium paid EGP 139.32 million for AITG in a 2021 cash tender offer, and KWIN was still owed EGP 34.69 million by the lead bidder at the end of 2021. Between September 2025 and July 2026 ENTAD released 945,911 KWIN shares into the public float for about EGP 79.93 million.</desc>
           <defs>
@@ -164,56 +164,56 @@
             <marker id="mm-a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#F0A868"/></marker>
           </defs>
 
-          <!-- the big outcome arc: ENTAD releases shares into the float -->
-          <path class="mm-link mm-link-loop" d="M1010 328 C1195 246 1232 58 940 46 C700 36 420 38 306 74" marker-end="url(#mm-a-lime)"/>
-
-          <!-- control -->
-          <path class="mm-link mm-link-own" d="M830 170 C700 240 560 270 424 326" marker-end="url(#mm-a-white)"/>
-          <path class="mm-link mm-link-own" d="M960 170 C955 230 960 280 968 326" marker-end="url(#mm-a-white)"/>
-          <path class="mm-link mm-link-own" d="M255 170 C258 230 262 280 270 326" marker-end="url(#mm-a-white)"/>
+          <!-- control, from the apex down -->
+          <path class="mm-link mm-link-own" d="M540 142 C460 230 350 310 322 394" marker-end="url(#mm-a-white)"/>
+          <path class="mm-link mm-link-own" d="M740 142 C820 230 920 310 958 394" marker-end="url(#mm-a-white)"/>
+          <path class="mm-link mm-link-own" d="M205 308 C212 340 222 370 236 394" marker-end="url(#mm-a-white)"/>
 
           <!-- the loop -->
-          <path class="mm-link mm-link-loop" d="M484 374 C600 330 692 330 804 372" marker-end="url(#mm-a-lime)"/>
-          <path class="mm-link mm-link-loop mm-link-treasury" d="M804 448 C700 498 590 498 486 450" marker-end="url(#mm-a-lime)"/>
+          <path class="mm-link mm-link-loop" d="M484 448 C580 405 700 405 804 446" marker-end="url(#mm-a-lime)"/>
+          <path class="mm-link mm-link-loop mm-link-treasury" d="M806 518 C700 558 580 558 486 520" marker-end="url(#mm-a-lime)"/>
 
           <!-- subsidiaries -->
-          <path class="mm-link mm-link-own" d="M250 488 C215 530 190 570 172 604" marker-end="url(#mm-a-white)"/>
-          <path class="mm-link mm-link-own" d="M1010 488 C1030 530 1040 570 1048 604" marker-end="url(#mm-a-white)"/>
+          <path class="mm-link mm-link-own" d="M420 562 C360 610 250 650 190 684" marker-end="url(#mm-a-white)"/>
+          <path class="mm-link mm-link-own" d="M1010 562 C1020 610 1010 650 1005 684" marker-end="url(#mm-a-white)"/>
 
           <!-- 2023 asset sales back into the group -->
-          <path class="mm-link mm-link-money" d="M428 636 C370 620 348 552 364 494" marker-end="url(#mm-a-cyan)"/>
-          <path class="mm-link mm-link-money" d="M792 636 C860 618 902 552 932 494" marker-end="url(#mm-a-cyan)"/>
+          <path class="mm-link mm-link-money" d="M432 686 C405 655 408 605 442 564" marker-end="url(#mm-a-cyan)"/>
+          <path class="mm-link mm-link-money" d="M736 686 C790 658 840 610 876 564" marker-end="url(#mm-a-cyan)"/>
 
           <!-- 2021 cash tender -->
-          <path class="mm-link mm-link-money" d="M610 836 L610 712" marker-end="url(#mm-a-cyan)"/>
+          <path class="mm-link mm-link-money" d="M580 916 L580 792" marker-end="url(#mm-a-cyan)"/>
 
           <!-- the unproven route -->
-          <path class="mm-link mm-link-unproven" d="M300 488 C330 590 330 730 420 878" marker-end="url(#mm-a-amber)"/>
+          <path class="mm-link mm-link-unproven" d="M360 562 C340 670 340 830 394 940" marker-end="url(#mm-a-amber)"/>
+
+          <!-- the outcome: ENTAD releases shares into the float (drawn last so it reads on top) -->
+          <path class="mm-link mm-link-loop" d="M900 396 C800 330 620 300 480 288 C430 283 380 272 338 258" marker-end="url(#mm-a-lime)"/>
 
           <!-- nodes -->
-          <g class="mm-node mm-node-float"><rect x="90" y="74" width="330" height="96" rx="26"/><text x="255" y="118">Public float</text><text class="mm-sub" x="255" y="146">≈10% in 2023 → ≈19% after Jul 2026</text></g>
-          <g class="mm-node"><rect x="770" y="74" width="340" height="96" rx="26"/><text x="940" y="118">ADIB Egypt</text><text class="mm-sub" x="940" y="146">former controller · common control</text></g>
+          <g class="mm-node mm-node-apex"><rect x="450" y="20" width="380" height="118" rx="28"/><text class="mm-big" x="640" y="64" style="font-size:34px">ADIB Egypt</text><text class="mm-sub" x="640" y="94">the control layer above everything</text><text class="mm-sub" x="640" y="118">64.75% of KWIN · 40% of ENTAD</text></g>
 
-          <g class="mm-node mm-node-kwin"><rect x="150" y="330" width="330" height="156" rx="32"/><text class="mm-big" x="315" y="392">KWIN</text><text class="mm-sub" x="315" y="424">listed · 10.5m shares</text><text class="mm-sub" x="315" y="452">the company at the centre</text></g>
-          <g class="mm-node mm-node-entad"><rect x="810" y="330" width="330" height="156" rx="32"/><text class="mm-big" x="975" y="392">ENTAD</text><text class="mm-sub" x="975" y="424">private · not listed</text><text class="mm-sub" x="975" y="452">KWIN subsidiary from 30 Apr 2023</text></g>
+          <g class="mm-node mm-node-float"><rect x="60" y="200" width="270" height="104" rx="28"/><text x="195" y="242">Public float</text><text class="mm-sub" x="195" y="270">≈10% in 2023</text><text class="mm-sub" x="195" y="292">≈19% after Jul 2026</text></g>
 
-          <g class="mm-node"><rect x="40" y="610" width="260" height="96" rx="24"/><text x="170" y="652">Assiut Agricultural</text><text class="mm-sub" x="170" y="680">89.46% KWIN-controlled</text></g>
-          <g class="mm-node mm-node-warn"><rect x="430" y="610" width="360" height="96" rx="24"/><text x="610" y="652">AITG / Assiut Islamic</text><text class="mm-sub" x="610" y="680">delisted Jul 2021 · left the group</text></g>
-          <g class="mm-node mm-node-warn"><rect x="900" y="610" width="300" height="96" rx="24"/><text x="1050" y="652">AARE real estate</text><text class="mm-sub" x="1050" y="680">≈99.77% ENTAD · negative equity</text></g>
+          <g class="mm-node mm-node-kwin"><rect x="150" y="400" width="330" height="160" rx="32"/><text class="mm-big" x="315" y="464">KWIN</text><text class="mm-sub" x="315" y="496">listed · 10.5m shares</text><text class="mm-sub" x="315" y="524">the company at the centre</text></g>
+          <g class="mm-node mm-node-entad"><rect x="810" y="400" width="330" height="160" rx="32"/><text class="mm-big" x="975" y="464">ENTAD</text><text class="mm-sub" x="975" y="496">private · not listed</text><text class="mm-sub" x="975" y="524">KWIN subsidiary from 30 Apr 2023</text></g>
 
-          <g class="mm-node"><rect x="430" y="840" width="360" height="104" rx="24"/><text x="610" y="884">Abu El-Eyoun consortium</text><text class="mm-sub" x="610" y="912">11 disclosed bidders · led by Amr</text></g>
+          <g class="mm-node"><rect x="40" y="690" width="270" height="96" rx="24"/><text x="175" y="732">Assiut Agricultural</text><text class="mm-sub" x="175" y="760">89.46% KWIN-controlled</text></g>
+          <g class="mm-node mm-node-warn"><rect x="400" y="690" width="360" height="96" rx="24"/><text x="580" y="732">AITG / Assiut Islamic</text><text class="mm-sub" x="580" y="760">delisted Jul 2021 · left the group</text></g>
+          <g class="mm-node mm-node-warn"><rect x="850" y="690" width="310" height="96" rx="24"/><text x="1005" y="732">AARE real estate</text><text class="mm-sub" x="1005" y="760">≈99.77% ENTAD · negative equity</text></g>
+
+          <g class="mm-node"><rect x="400" y="920" width="360" height="104" rx="24"/><text x="580" y="964">Abu El-Eyoun consortium</text><text class="mm-sub" x="580" y="992">11 disclosed bidders · led by Amr</text></g>
 
           <!-- pills -->
-          <g class="mm-pill"><rect x="556" y="234" width="104" height="34" rx="17"/><text x="608" y="256">64.75%</text></g>
-          <g class="mm-pill"><rect x="984" y="238" width="86" height="34" rx="17"/><text x="1027" y="260">40%</text></g>
-          <g class="mm-pill"><rect x="126" y="238" width="130" height="34" rx="17"/><text x="191" y="260">10 → 19%</text></g>
-          <g class="mm-pill mm-pill-lime"><rect x="590" y="322" width="104" height="34" rx="17"/><text x="642" y="344">51.22%</text></g>
-          <g class="mm-pill mm-pill-lime"><rect x="590" y="464" width="104" height="34" rx="17"/><text x="642" y="486">25.25%</text></g>
-          <g class="mm-pill mm-pill-lime"><rect x="470" y="26" width="352" height="38" rx="19"/><text x="646" y="50">945,911 shares → ≈EGP 79.93m</text></g>
-          <g class="mm-pill mm-pill-cyan"><rect x="286" y="540" width="126" height="32" rx="16"/><text x="349" y="561">EGP 24.25m</text></g>
-          <g class="mm-pill mm-pill-cyan"><rect x="856" y="540" width="126" height="32" rx="16"/><text x="919" y="561">EGP 11.87m</text></g>
-          <g class="mm-pill mm-pill-cyan"><rect x="536" y="758" width="148" height="32" rx="16"/><text x="610" y="779">EGP 139.32m</text></g>
-          <g class="mm-pill mm-pill-amber"><rect x="252" y="756" width="196" height="32" rx="16"/><text x="350" y="777">EGP 34.69m owed</text></g>
+          <g class="mm-pill"><rect x="284" y="333" width="108" height="34" rx="17"/><text x="338" y="355">64.75%</text></g>
+          <g class="mm-pill"><rect x="897" y="333" width="86" height="34" rx="17"/><text x="940" y="355">40%</text></g>
+          <g class="mm-pill mm-pill-lime"><rect x="593" y="396" width="104" height="34" rx="17"/><text x="645" y="418">51.22%</text></g>
+          <g class="mm-pill mm-pill-lime"><rect x="593" y="536" width="104" height="34" rx="17"/><text x="645" y="558">25.25%</text></g>
+          <g class="mm-pill mm-pill-lime"><rect x="464" y="281" width="352" height="38" rx="19"/><text x="640" y="305">945,911 shares → ≈EGP 79.93m</text></g>
+          <g class="mm-pill mm-pill-cyan"><rect x="355" y="600" width="126" height="32" rx="16"/><text x="418" y="621">EGP 24.25m</text></g>
+          <g class="mm-pill mm-pill-cyan"><rect x="765" y="600" width="126" height="32" rx="16"/><text x="828" y="621">EGP 11.87m</text></g>
+          <g class="mm-pill mm-pill-cyan"><rect x="506" y="843" width="148" height="32" rx="16"/><text x="580" y="864">EGP 139.32m</text></g>
+          <g class="mm-pill mm-pill-amber"><rect x="260" y="839" width="196" height="32" rx="16"/><text x="358" y="860">EGP 34.69m owed</text></g>
         </svg>
         </div>
         <ul class="map-key">
@@ -393,6 +393,29 @@
           <li><i style="--seg:var(--c-rest)"></i>Public float · <b>10.004%</b></li>
         </ul>
         <p class="chart-note">Combined, ADIB and ENTAD held <b>89.99619%</b> — short of 90% by <b>400 shares</b>, roughly four ten-thousandths of one per cent. ADIB's own December 2023 takeover disclosure gave a slightly different 89.992%, a 440-share discrepancy that may be timing, rounding or an inconsistency. The proximity is meaningful context; it is <b>not</b> evidence that the threshold was deliberately managed.</p>
+      </figure>
+
+      <figure class="mini-chart reveal">
+        <figcaption class="mini-chart-head">
+          <span class="evidence-label label-fact">ENTAD's register · 4,690,831 shares</span>
+          <h3>And who owns the other side of the loop</h3>
+          <p>KWIN's 51.22% and ADIB's 40% leave roughly 8.79% of ENTAD unaccounted for in most write-ups. The registered capital table names it.</p>
+        </figcaption>
+        <div class="stack-wrap">
+          <div class="stack-bar" role="img" aria-label="ENTAD ownership: KWIN 51.22 percent, ADIB 39.99 percent, Servico 7.39 percent, individual shareholders 1.40 percent">
+            <span class="stack-seg" style="--w:51.22%;--seg:var(--c-1)"></span>
+            <span class="stack-seg" style="--w:39.99%;--seg:var(--c-2)"></span>
+            <span class="stack-seg" style="--w:7.39%;--seg:var(--c-3)"></span>
+            <span class="stack-seg stack-rest" style="--w:1.40%"></span>
+          </div>
+        </div>
+        <ul class="stack-legend" role="list">
+          <li><i style="--seg:var(--c-1)"></i>KWIN · <b>51.22%</b> — 2,402,663 shares</li>
+          <li><i style="--seg:var(--c-2)"></i>ADIB Egypt · <b>39.99%</b> — 1,875,631 shares</li>
+          <li><i style="--seg:var(--c-3)"></i>Servico (سيرفيكو) · <b>7.39%</b> — 346,862 shares</li>
+          <li><i style="--seg:var(--c-rest)"></i>Individual shareholders · <b>1.40%</b> — 65,678 shares</li>
+        </ul>
+        <p class="chart-note">The residual is <b>Servico</b> — Youth for Investment &amp; General Services (شركة الشباب للاستثمار والخدمات العامة) — plus a small retail tail. Servico is the same counterparty that sold KWIN its first 762,646 ENTAD shares in 2015 at EGP 13.57; it kept 346,862. It is also inside the loop: ENTAD's own 2019 investment note carried <b>604,025 Servico shares</b>, written down to nil — so ENTAD and Servico hold each other too.<br><br><b>How firm is this?</b> The two ends are solid. ADIB's stake is confirmed at <b>40.00% as at 31 December 2025</b> in its board report and audited separate statements, and has not moved in a decade. KWIN's 51.22% is established by its own filings. The register table reconciles to both: it sums exactly to 4,690,831 shares and rolls forward to <b>51.2204%</b> and <b>39.985%</b> — figures a fabricated table would not reproduce to four decimals.<br><br><b>As-of caveat:</b> the Servico and individual lines come from ENTAD's registered Article-7 capital table as reproduced in a 2020 independent fair-value report (built on the 31 December 2019 audited accounts), published on the EGX site. No later filing updating those two lines was located, so the residual is either still Servico plus individuals or has since passed to an undisclosed third party — it cannot have gone to KWIN or ADIB, whose current stakes are fully accounted for. The table's own percentages are loosely rounded; the share counts are exact and reconcile to within 3 shares.</p>
       </figure>
 
       <div class="map-explainer">

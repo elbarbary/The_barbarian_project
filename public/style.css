@@ -1398,6 +1398,7 @@ body::before {
 .mm-node-kwin .mm-sub { fill: rgba(23,18,47,0.62); }
 .mm-node-entad rect { fill: #5040b7; stroke: rgba(245,242,255,0.28); }
 .mm-node-float rect { stroke: rgba(205,232,74,0.42); stroke-dasharray: 7 6; }
+.mm-node-apex rect { fill: rgba(245,242,255,0.13); stroke: rgba(245,242,255,0.4); stroke-width: 1.5; }
 .mm-node-warn rect { fill: rgba(240,168,104,0.09); stroke: rgba(240,168,104,0.3); }
 .mm-pill rect { fill: #f5f2ff; }
 .mm-pill text { fill: #17122f; font: 700 14px var(--f-body); text-anchor: middle; }
