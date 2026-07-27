@@ -1463,7 +1463,28 @@ body::before {
 .bar-fill { position: absolute; top: 0; bottom: 0; left: 0; width: var(--w); min-width: 3px; background: var(--c-1); border-radius: 3px 5px 5px 3px; }
 .bar-fill-mute { background: var(--c-rest); }
 .bar-value { color: var(--c-ink); font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.bar-value small { display: block; color: var(--c-mut); font-size: 0.62rem; font-weight: 500; }
+.bar-value small { display: block; margin-top: 3px; color: var(--c-mut); font-size: 0.62rem; font-weight: 500; }
+.bar-value em {
+  display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c-1) 16%, transparent);
+  color: var(--c-1); font-size: 0.62rem; font-style: normal; font-weight: 700; vertical-align: 1px;
+}
+.section-dark .bar-value em { background: rgba(205,232,74,0.16); }
+/* a plain unit label — deliberately NOT the pill, which marks the bar's own value */
+.bar-value .unit { color: var(--c-mut); font-size: 0.66rem; font-weight: 500; }
+.bar-value small b { color: var(--c-ink); font-weight: 700; }
+
+/* callout inside a chart card */
+.note-callout {
+  margin-top: 20px; padding: 20px 22px;
+  background: color-mix(in srgb, var(--c-1) 7%, transparent);
+  border: 1px solid var(--c-line); border-radius: var(--r-md);
+}
+.note-callout h4 { color: var(--c-ink); font: 700 0.86rem/1.35 var(--f-display); letter-spacing: -0.01em; }
+.note-callout p, .note-callout li { color: var(--c-mut); font-size: 0.72rem; line-height: 1.62; }
+.note-callout p { margin-top: 10px; }
+.note-callout ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; }
+.note-callout b { color: var(--c-ink); font-weight: 700; }
 
 /* stacked share bar */
 .stack-wrap { position: relative; padding-top: 34px; }
@@ -1516,6 +1537,68 @@ body::before {
 .stair-tick { fill: var(--c-mut); font: 500 12px var(--f-body); }
 .stair-lab { fill: var(--c-ink); font: 700 13px var(--f-body); }
 .stair-sub { fill: var(--c-mut); font: 500 11.5px var(--f-body); }
+
+/* ─── click-to-expand charts ─────────────────────────────────── */
+.master-map, .mini-chart { position: relative; cursor: zoom-in; }
+.chart-expand {
+  position: absolute; top: 14px; right: 14px; z-index: 3;
+  display: inline-flex; gap: 6px; align-items: center;
+  padding: 7px 13px; border-radius: 999px; cursor: zoom-in;
+  background: var(--glass-strong); border: 1px solid var(--glass-border); color: var(--ink-70);
+  font: 600 0.63rem var(--f-body); letter-spacing: 0.02em;
+  opacity: 0; transform: translateY(-4px); transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.section-dark .chart-expand, .master-map .chart-expand {
+  background: rgba(245,242,255,0.1); border-color: rgba(245,242,255,0.2); color: rgba(245,242,255,0.82);
+}
+.master-map:hover .chart-expand, .mini-chart:hover .chart-expand,
+.chart-expand:focus-visible { opacity: 1; transform: none; }
+.chart-expand:hover { color: var(--ink); border-color: var(--ink-35); }
+.section-dark .chart-expand:hover, .master-map .chart-expand:hover { color: #fff; border-color: rgba(245,242,255,0.45); }
+@media (hover: none) { .chart-expand { opacity: 1; transform: none; } }
+
+body.has-lightbox { overflow: hidden; }
+.chart-lightbox {
+  position: fixed; inset: 0; z-index: 999;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: clamp(12px, 3vw, 40px); overflow: auto; cursor: zoom-out;
+  background: rgba(9, 6, 22, 0.93);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  opacity: 0; transition: opacity 0.22s var(--ease);
+}
+.chart-lightbox.is-open { opacity: 1; }
+.chart-lightbox-stage {
+  display: flex; flex-direction: column; width: min(1500px, 100%); margin: auto; cursor: default;
+}
+.chart-lightbox .is-expanded {
+  margin: 0; cursor: default;
+  /* opaque: the card must not let the backdrop bleed through */
+  background: #fbfaff; -webkit-backdrop-filter: none; backdrop-filter: none;
+  box-shadow: 0 40px 100px -40px rgba(0,0,0,0.7);
+  transform: scale(0.985); transition: transform 0.22s var(--ease);
+}
+.chart-lightbox .is-expanded.mini-chart-dark { background: #1a1533; border-color: rgba(245,242,255,0.14); }
+.chart-lightbox .is-expanded.master-map {
+  background:
+    linear-gradient(rgba(245,242,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,242,255,0.03) 1px, transparent 1px),
+    #120d26;
+  background-size: 44px 44px;
+}
+.chart-lightbox.is-open .is-expanded { transform: none; }
+.chart-lightbox .master-map-scroll { overflow: visible; }
+.chart-lightbox .is-expanded svg { min-width: 0 !important; width: 100%; }
+.chart-lightbox-close {
+  align-self: flex-end; display: inline-flex; gap: 8px; align-items: center; margin: 0 0 14px;
+  padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  background: rgba(245,242,255,0.12); border: 1px solid rgba(245,242,255,0.24); color: #f5f2ff;
+  font: 600 0.72rem var(--f-body);
+}
+.chart-lightbox-close:hover { background: rgba(245,242,255,0.2); }
+@media (prefers-reduced-motion: reduce) {
+  .chart-lightbox, .chart-lightbox .is-expanded { transition: none; }
+}
 
 @media (max-width: 760px) {
   /* .bar-rows li is display:contents, so the columns live on the list itself */

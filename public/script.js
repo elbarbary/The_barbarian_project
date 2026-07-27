@@ -249,4 +249,81 @@
     }, { rootMargin: '-20% 0px -68% 0px', threshold: 0 });
     chapters.forEach((chapter) => chapterIO.observe(chapter));
   }
+
+  /* ─── click a chart to open it full screen ───────────────────── */
+  const figures = document.querySelectorAll('.master-map, .mini-chart');
+  if (figures.length) {
+    let overlay = null;
+    let lastFocus = null;
+
+    const close = () => {
+      if (!overlay) return;
+      overlay.classList.remove('is-open');
+      document.body.classList.remove('has-lightbox');
+      const dying = overlay;
+      overlay = null;
+      setTimeout(() => dying.remove(), reduced ? 0 : 220);
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    };
+
+    const open = (figure) => {
+      if (overlay) return;
+      lastFocus = document.activeElement;
+      overlay = document.createElement('div');
+      overlay.className = 'chart-lightbox';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', 'Expanded chart');
+
+      const stage = document.createElement('div');
+      stage.className = 'chart-lightbox-stage';
+
+      const shut = document.createElement('button');
+      shut.type = 'button';
+      shut.className = 'chart-lightbox-close';
+      shut.setAttribute('aria-label', 'Close expanded chart');
+      shut.innerHTML = '<span aria-hidden="true">✕</span> Close';
+
+      const clone = figure.cloneNode(true);
+      clone.classList.add('is-expanded');
+      // the clone leaves its section, so carry the dark palette across explicitly
+      if (figure.closest('.section-dark')) clone.classList.add('mini-chart-dark');
+      clone.removeAttribute('tabindex');
+      clone.removeAttribute('role');
+      clone.querySelectorAll('.chart-expand').forEach((b) => b.remove());
+      // let wide diagrams use the full width of the screen
+      clone.querySelectorAll('svg').forEach((svg) => { svg.style.minWidth = '0'; });
+
+      stage.append(shut, clone);
+      overlay.append(stage);
+      document.body.append(overlay);
+      document.body.classList.add('has-lightbox');
+      requestAnimationFrame(() => overlay.classList.add('is-open'));
+      shut.focus({ preventScroll: true });
+
+      shut.addEventListener('click', close);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay || e.target === stage) close(); });
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay) close();
+    });
+
+    figures.forEach((figure) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'chart-expand';
+      btn.innerHTML = '<span aria-hidden="true">⤢</span> Expand';
+      btn.setAttribute('aria-label', 'Open this chart full screen');
+      btn.addEventListener('click', (e) => { e.stopPropagation(); open(figure); });
+      figure.append(btn);
+
+      figure.addEventListener('click', (e) => {
+        if (overlay) return;
+        if (e.target.closest('a, button')) return;             // don't hijack links
+        if (window.getSelection && String(window.getSelection())) return; // don't fight text selection
+        open(figure);
+      });
+    });
+  }
 })();
