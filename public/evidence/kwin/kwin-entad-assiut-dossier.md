@@ -1,6 +1,6 @@
 # KWIN–ENTAD–Assiut Equity-Network Dossier
 
-Research cutoff: 25 July 2026
+Research cutoff: 25 July 2026  
 Companies and people in scope: Cairo National for Investment and Securities (KWIN), the National Company for Trade and Development (ENTAD), Abu Dhabi Islamic Bank–Egypt (ADIB Egypt), Assiut Islamic National for Trade and Development (Assiut Islamic/AITG), Assiut Agricultural Development, Abu Dhabi Islamic Real Estate Investment, Amr Ibrahim Abu El‑Eyoun, and Dr Mohamed Ahmed Mohamed Shalaby.
 
 ## Purpose and evidentiary standard
@@ -103,6 +103,37 @@ ENTAD is not publicly traded. Public corporate profiles describe it as the Natio
 - it owns almost all of the Abu Dhabi Islamic Real Estate Investment subsidiary;
 - it bought and sold group-company shares;
 - after KWIN acquired 51.22%, it became KWIN’s controlled subsidiary.
+
+### 1.2a ENTAD's own capital table — who owns the other side of the loop
+
+**Added 27 July 2026, read directly from the primary document.** Earlier passes established KWIN at 51.22% and ADIB at 40% of ENTAD but never named the residual ~8.79%. It is now sourced.
+
+The fair-value report on ENTAD's share prepared by **Moore Stephens Egypt for Financial Services**, an FRA-licensed independent financial advisor (licence no. 1733), commissioned by Alexandria for Investment & Securities and built on ENTAD's audited 31 December 2019 accounts, reproduces ENTAD's registered Article-7 capital table on page 11. It is filed on the EGX site as bulletin attachment 244058_3. ENTAD's issued and paid-up capital is EGP 46,908,310 — **4,690,831 shares** of EGP 10 par.
+
+| Shareholder | Shares | % as printed | EGP |
+|---|---:|---:|---:|
+| مصرف أبو ظبى الإسلامى — ADIB Egypt | 1,875,631 | 40.00 | 18,756,310 |
+| شركة القاهرة الوطنية للإستثمارات المالية — KWIN | 1,367,250 | 29.10 | 13,672,500 |
+| شركة أسيوط الإسلامية الوطنية للتجارة و التنمية — AITG | 738,420 | 15.70 | 7,384,200 |
+| **شركة الشباب لإلستثمار و الخدمات العامة (سيرفيكو) — Servico** | **346,862** | **7.40** | 3,468,620 |
+| شركة الإسكندرية للإستثمارات المالية — Alexandria | 296,990 | 6.30 | 2,969,900 |
+| **مساهمون أفراد — individual shareholders** | **65,678** | **1.50** | 656,780 |
+| **Total** | **4,690,831** | **100** | **46,908,310** |
+
+The table reconciles to everything already established:
+
+`KWIN 1,367,250 + 296,990 (Sep 2020) + 738,423 (Apr 2023) = 2,402,663 = 51.2204%`
+
+`residual = 4,690,831 − 2,402,663 − 1,875,631 = 412,537 = 8.7945%`, against Servico 346,862 + individuals 65,678 = **412,540**. The three-share difference is the register's 738,420 versus the executed 738,423. ADIB's 1,875,631 is 39.985%, matching its stated 40%.
+
+Corroboration and limits:
+
+- ADIB's consolidated accounts report its **direct and indirect** ENTAD interest as **73.16%**, which is exactly `40.00% + (64.75% × 51.22%)`. That arithmetic leaves no room for any other ADIB group company to hold ENTAD shares, so the residual sits outside ADIB's consolidated perimeter.
+- ADIB's 40.00% is confirmed current at 31 December 2025 in its board report and audited separate statements, and is unchanged since at least 2015 at a constant carrying cost.
+- Servico is the same counterparty that sold KWIN 762,646 ENTAD shares in June 2015 at EGP 13.57; a September 2013 KWIN general assembly had approved buying 804,904 from it. Retaining 346,862 is consistent with that history.
+- **A further circularity:** the same report's investment note shows ENTAD holding **604,025 Servico shares**, carried at EGP 3,020,405 and written down to nil market value. ENTAD and Servico hold each other, as ENTAD and KWIN do.
+- The same report records that ENTAD "does not currently carry out any activities and generated no revenue from operations," supporting the dormant-holding-vehicle reading below.
+- **As-of limit:** the Servico and individual lines are the registered structure as at the 2020 report. No later filing updating them was located. The residual is therefore either still Servico plus individuals or has since passed to an undisclosed third party; it cannot have passed to KWIN or ADIB, whose stakes are fully accounted for. Quote the share counts, not the report's percentages, which are loosely rounded (it prints 1.50% where 65,678 shares give 1.40%).
 
 That makes ENTAD economically useful to the group: it can warehouse strategic stakes, move blocks among group entities, and later sell them to the market. None of those functions is inherently illegal. The legal questions arise from related-party approval, fair value, cross-ownership limits, treasury-share treatment, voting, disclosure, and whether transaction financing was fully transparent.
 
