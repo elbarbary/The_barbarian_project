@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cash or Trash — The Barbarian Project</title>
+<meta name="description" content="Reading all ~224 companies on the Egyptian Exchange, one at a time, and scoring each one Cash or Trash on six pillars — with the evidence shown.">
+<meta property="og:title" content="Cash or Trash — every stock on the EGX, scored">
+<meta property="og:description" content="Six pillars, one verdict, every number sourced. Not investment advice — a study of the whole exchange.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thebarbarianproject.com/cash-or-trash.html">
+<meta name="theme-color" content="#17122F">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%231E37E6"/><stop offset="0.5" stop-color="%237C3AED"/><stop offset="1" stop-color="%23CDE84A"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(%23g)"/><text x="32" y="44" font-family="Arial Black,Arial" font-weight="900" font-size="30" text-anchor="middle" fill="white">$</text></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="investigation-page">
+<a class="skip-link" href="#series">Skip to the series</a>
+
+<div class="canvas" aria-hidden="true">
+  <span class="orb orb-blue"></span>
+  <span class="orb orb-violet"></span>
+  <span class="orb orb-rose"></span>
+  <span class="orb orb-lime"></span>
+  <span class="orb orb-cyan"></span>
+</div>
+<div class="noise" aria-hidden="true"></div>
+<div class="report-progress" id="reportProgress" aria-hidden="true"></div>
+
+<nav class="nav glass investigation-nav" id="nav">
+  <a class="nav-brand" href="index.html"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
+  <div class="nav-links">
+    <a class="resource-nav-back" href="index.html">← Home</a>
+    <a class="nav-sec" href="#pillars">The six pillars</a>
+    <a class="nav-sec" href="#board">Leaderboard</a>
+    <a class="nav-cta" href="#rules">The rules</a>
+  </div>
+</nav>
+
+<main id="series">
+  <header class="dossier-hero">
+    <div class="dossier-grid" aria-hidden="true"></div>
+    <div class="shell">
+      <a class="dossier-back reveal" href="index.html">← Back to The Barbarian Project</a>
+      <div class="dossier-hero-layout">
+        <div class="dossier-hero-copy">
+          <div class="dossier-stamp reveal">
+            <span>New series</span>
+            <span>Started 29 July 2026</span>
+          </div>
+          <p class="dossier-code reveal">EGX / ALL 224 COMPANIES</p>
+          <h1 class="reveal">Cash<br>or <em>Trash.</em></h1>
+          <p class="dossier-deck reveal">I'm going to read every listed company on the Egyptian Exchange — all ~224 of them — and score each one on six pillars. Then I'll say the quiet part: is this worth owning, or isn't it. Every number cited, every verdict reversible, all the misses kept on the board.</p>
+          <div class="dossier-hero-actions reveal">
+            <a class="btn btn-lime" href="#board">See the leaderboard <span aria-hidden="true">↓</span></a>
+            <a class="dossier-text-link" href="#pillars">How the scoring works</a>
+          </div>
+        </div>
+
+        <aside class="dossier-cover reveal" aria-label="Series status">
+          <div class="dossier-cover-top">
+            <span>PROGRESS</span>
+            <span>EGX</span>
+          </div>
+          <p>Scored so far</p>
+          <strong>2<span style="opacity:.4"> / 224</span></strong>
+          <ul>
+            <li><i class="fact-dot"></i> 💰 Cash — worth researching</li>
+            <li><i class="event-dot"></i> 🪙 Loose change — something real, wrong price</li>
+            <li><i class="question-dot"></i> 🗑️ Trash — not at this price</li>
+            <li><i class="hypothesis-dot"></i> ☠️ Toxic — problems beyond valuation</li>
+          </ul>
+          <small>I am not telling you to invest. I am just studying the EGX.</small>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav class="chapter-rail" aria-label="Series sections">
+    <div class="shell">
+      <a href="#why">Why</a>
+      <a href="#pillars">Six pillars</a>
+      <a href="#bands">Verdicts</a>
+      <a href="#board">Leaderboard</a>
+      <a href="#rules">Rules</a>
+    </div>
+  </nav>
+
+  <section class="dossier-section" id="why" aria-labelledby="why-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">00 / The premise</p>
+          <h2 id="why-h">The whole exchange is<br><em>smaller than my chemistry syllabus.</em></h2>
+        </div>
+        <p>That's a joke. It might also be true — and that's exactly the point. The EGX is small enough that one person can genuinely read all of it. So I'm going to.</p>
+      </div>
+
+      <div class="whole-reads">
+        <article class="report-card reveal">
+          <span class="evidence-label label-fact">The problem</span>
+          <h3>Most EGX coverage is a chart with an opinion attached.</h3>
+          <p>A price line, an arrow, a target. Nobody shows you the balance sheet, the free float, or whether last year's profit was a one-off asset sale dressed up as a business.</p>
+        </article>
+        <article class="report-card reveal">
+          <span class="evidence-label label-fact">The method</span>
+          <h3>Same six questions, every company, every time.</h3>
+          <p>Six pillars scored −10 to +10. Every figure carries a source and a date. The verdict is about the <b>stock at today's price</b> — not about whether the people running it are any good.</p>
+        </article>
+        <article class="report-card reveal">
+          <span class="evidence-label label-question">The honest bit</span>
+          <h3>A great company can be Trash.</h3>
+          <p>And a boring one can be Cash. Price is half the verdict. If I score something Trash and it triples, that entry stays on the board with its original date attached.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dossier-section section-dark" id="pillars" aria-labelledby="pillars-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">01 / The scoring</p>
+          <h2 id="pillars-h">Six pillars.<br><em>−10 to +10 each.</em></h2>
+        </div>
+        <p>Total range −60 to +60. No pillar is scored from a chart, a tip or a rumour — only from filings, financial statements and exchange data.</p>
+      </div>
+
+      <div class="pillar-grid">
+        <article class="dark-card reveal"><span class="pillar-n">01</span>
+          <h3>Valuation</h3>
+          <p>What you pay versus what you get. Earnings multiples, price against <b>look-through</b> book value, and market cap against what the assets are realistically worth.</p></article>
+        <article class="dark-card reveal"><span class="pillar-n">02</span>
+          <h3>Earnings quality</h3>
+          <p>Is the profit real and repeatable? One-off disposals, FX gains and revaluations get stripped out. Profit recognised but not <b>collected</b> is penalised.</p></article>
+        <article class="dark-card reveal"><span class="pillar-n">03</span>
+          <h3>Growth</h3>
+          <p>Three-year revenue and profit trend, plus the direction of the latest quarter. A collapsing quarter overrides a good three-year record.</p></article>
+        <article class="dark-card reveal"><span class="pillar-n">04</span>
+          <h3>Balance sheet</h3>
+          <p>Can it survive a bad year? Leverage, negative equity anywhere in the group, rescheduled debt, and weak subsidiaries hidden outside the headline numbers.</p></article>
+        <article class="dark-card reveal"><span class="pillar-n">05</span>
+          <h3>Tradability</h3>
+          <p>The pillar everyone ignores. Free float, median daily traded value, and <b>days-to-exit</b>. If you can't sell it, the quoted price isn't a price.</p></article>
+        <article class="dark-card reveal"><span class="pillar-n">06</span>
+          <h3>Governance</h3>
+          <p>Regulator findings, restatements, related-party density, circular holdings, filing timeliness — and, as a positive, whether the company answers the exchange when asked.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dossier-section section-tinted" id="bands" aria-labelledby="bands-h">
+    <div class="shell report-shell">
+      <div class="report-heading reveal">
+        <p class="report-index">02 / The verdict</p>
+        <h2 id="bands-h">Four bands.<br><em>One line each.</em></h2>
+      </div>
+      <div class="band-row">
+        <article class="band band-cash reveal"><b>💰 CASH</b><span>+20 and above</span><p>Worth researching further as an investment.</p></article>
+        <article class="band band-mid reveal"><b>🪙 LOOSE CHANGE</b><span>+5 to +19</span><p>Something real here, but the price or the risk is in the way.</p></article>
+        <article class="band band-trash reveal"><b>🗑️ TRASH</b><span>−29 to +4</span><p>Not an investment at this price.</p></article>
+        <article class="band band-toxic reveal"><b>☠️ TOXIC</b><span>−30 and below</span><p>Structural problems beyond valuation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dossier-section" id="board" aria-labelledby="board-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">03 / The leaderboard</p>
+          <h2 id="board-h">Scored so far:<br><em>two of 224.</em></h2>
+        </div>
+        <p>Both from work already published on this site. Each entry shows its six pillar scores, the flags, and the single fact that would flip the verdict.</p>
+      </div>
+
+      <!-- KWIN -->
+      <article class="score-card reveal">
+        <header class="score-head">
+          <div>
+            <span class="verdict verdict-toxic">☠️ TOXIC</span>
+            <h3>KWIN <small>Cairo National for Investment &amp; Securities</small></h3>
+          </div>
+          <div class="score-total"><b>−50</b><span>of −60 … +60</span></div>
+        </header>
+        <ul class="flag-row">
+          <li>🚩 Governance</li><li>📉 One-off earnings</li><li>🔄 Circular ownership</li>
+        </ul>
+        <ul class="div-rows" role="list">
+          <li><span class="div-name">Valuation</span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−10</b></li>
+          <li><span class="div-name">Earnings quality</span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−10</b></li>
+          <li><span class="div-name">Growth</span><span class="div-track"><i class="div-bar div-neg" style="--w:40%;--l:10%"></i></span><b class="div-val neg">−8</b></li>
+          <li><span class="div-name">Balance sheet</span><span class="div-track"><i class="div-bar div-neg" style="--w:40%;--l:10%"></i></span><b class="div-val neg">−8</b></li>
+          <li><span class="div-name">Tradability</span><span class="div-track"><i class="div-bar div-neg" style="--w:20%;--l:30%"></i></span><b class="div-val neg">−4</b></li>
+          <li><span class="div-name">Governance</span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−10</b></li>
+        </ul>
+        <div class="div-axis"><span>−10</span><span>0</span><span>+10</span></div>
+        <p class="chart-note"><b>The case:</b> EGP 1.045bn quoted against ≈EGP 135.8m of estimated look-through NAV — <b>7.7×</b>. <b>82.49%</b> of FY2025 profit was a single property sale, and only EGP 12m of the EGP 36m price had been collected. Q1 2026 profit fell <b>88.6%</b>. Add an FRA objection under Listing Rule 39, an FRA profit-distribution noncompliance, an EGP 10,000 EGX fine, a restated 2023 consolidation, and a company that told the exchange it had no explanation for its own share price.<br><br><b>What would flip it:</b> the missing January 2021 agreements and settlement trail, plus one clean recurring-profit year without disposals.</p>
+        <a class="dossier-text-link" href="kwin-investigation.html">Read the full KWIN file →</a>
+      </article>
+
+      <!-- BIOC -->
+      <article class="score-card reveal">
+        <header class="score-head">
+          <div>
+            <span class="verdict verdict-trash">🗑️ TRASH</span>
+            <h3>BIOC <small>GlaxoSmithKline S.A.E.</small></h3>
+          </div>
+          <div class="score-total"><b>−25</b><span>of −60 … +60</span></div>
+        </header>
+        <ul class="flag-row">
+          <li>⚠️ Thin float</li><li>🔒 Can't exit</li>
+        </ul>
+        <p class="score-lede">The company isn't the problem. <b>The price and the float are.</b></p>
+        <ul class="div-rows" role="list">
+          <li><span class="div-name">Valuation</span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−10</b></li>
+          <li><span class="div-name">Earnings quality</span><span class="div-track"><i class="div-bar div-neg" style="--w:20%;--l:30%"></i></span><b class="div-val neg">−4</b></li>
+          <li><span class="div-name">Growth</span><span class="div-track"><i class="div-bar div-neg" style="--w:45%;--l:5%"></i></span><b class="div-val neg">−9</b></li>
+          <li><span class="div-name">Balance sheet</span><span class="div-track"><i class="div-bar div-pos" style="--w:20%;--l:50%"></i></span><b class="div-val pos">+4</b></li>
+          <li><span class="div-name">Tradability</span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−10</b></li>
+          <li><span class="div-name">Governance</span><span class="div-track"><i class="div-bar div-pos" style="--w:20%;--l:50%"></i></span><b class="div-val pos">+4</b></li>
+        </ul>
+        <div class="div-axis"><span>−10</span><span>0</span><span>+10</span></div>
+        <p class="chart-note"><b>The case:</b> at EGP 194 the stock trades on roughly <b>102× trailing earnings</b> while Q1 2026 profit fell <b>92%</b> and sales fell 18%. But the killer is the float: <b>2.91% — 2,434,272 shares</b>. In one session <b>45.8% of the entire float</b> changed hands, and across ten sessions the float turned over <b>3.54 times</b>. Governance actually scores positive — the company answered the exchange promptly and its ownership filings are clean.<br><br><b>Structural note:</b> BIOC was added to <b>EGX70 EWI and EGX100 EWI</b> in the review announced 27 January 2026. Index inclusion forces buying into an almost non-existent float — a mechanical driver, not a company event.<br><br><b>What would flip it:</b> a real free float. At 2.91%, the quoted price is not a price you can transact at scale in either direction.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="dossier-section section-dark" id="rules" aria-labelledby="rules-h">
+    <div class="shell report-shell">
+      <div class="report-heading reveal">
+        <p class="report-index">04 / The rules I hold myself to</p>
+        <h2 id="rules-h">So you can<br><em>check my work.</em></h2>
+      </div>
+      <ol class="rule-list">
+        <li class="reveal"><b>Every number cites a source and an as-of date.</b> No figure goes in without one.</li>
+        <li class="reveal"><b>Price and fundamentals are dated together.</b> Never today's market cap against an eighteen-month-old book value without saying so.</li>
+        <li class="reveal"><b>The corporate-action sanitizer runs first.</b> A bonus issue or split can manufacture a fake percentage. Share count is checked before and after.</li>
+        <li class="reveal"><b>Score the stock, not the story.</b> No verdict rests on momentum, a chart pattern, a tip channel or a rumour.</li>
+        <li class="reveal"><b>Every entry names what would flip it.</b> If I can't say that, I don't understand it well enough to publish.</li>
+        <li class="reveal"><b>The misses stay up.</b> When a Trash call triples or a Cash call sinks, the entry keeps its original date and score.</li>
+      </ol>
+      <p style="margin-top:30px"><a class="dossier-text-link" href="evidence/cash-or-trash/criteria.md">Open the full scoring criteria ↗</a></p>
+    </div>
+  </section>
+
+  <section class="dossier-end">
+    <div class="shell">
+      <div class="dossier-end-card reveal">
+        <p class="report-index">222 to go.</p>
+        <h2>A great company can be Trash.<br><em>Price is half the verdict.</em></h2>
+        <div class="dossier-hero-actions">
+          <a class="btn btn-lime" href="index.html">Back to the homepage <span aria-hidden="true">→</span></a>
+          <a class="dossier-text-link" href="kwin-investigation.html">Read the KWIN file ↗</a>
+        </div>
+        <small>I am not telling you to invest in anything. This is a study of the Egyptian Exchange, not financial advice. Every verdict is my opinion, formed from public filings, with the evidence shown so you can disagree with it.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <p>The Barbarian Project — research in public, with the uncertainty left in.</p>
+    <a href="https://thebarbarianproject.com">thebarbarianproject.com</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
