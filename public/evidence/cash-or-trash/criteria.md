@@ -119,6 +119,30 @@ Full file: `outputs/kwin_entad_assiut_equity_network_dossier_2026-07-25.md`
 
 ### 🗑️ TRASH
 
+**AMES — Alexandria New Medical Center · score −15 · 31 Jul 2026**
+Flags: ⚠️ THIN FLOAT · 🔒 CAN'T EXIT · 🚩 GOVERNANCE
+
+*One 38-year-old hospital in Smouha, Alexandria, carrying more market value than the whole Cleopatra group.*
+
+| Pillar | Score | Basis |
+|---|---:|---|
+| Valuation | −10 | **520.9× TTM earnings**, 61.1× sales fully diluted (265.3× / 31.1× on shares actually listed — reproduces S&P's published ratios), 72.3× post-money book, 342× EV/EBITDA, **0.19% earnings yield** |
+| Earnings quality | −3 | TTM operating cash flow **EGP 9.62m against EGP 56.36m of net income = 17.1% conversion**; free cash flow −EGP 6.15m. Profit is standalone with no revaluation gains, but it is booked far faster than collected |
+| Growth | +3 | FY2025 revenue **+32.5% to EGP 467.89m**, net profit **+84.6% to EGP 55.04m** — a genuine turnaround, but decelerating hard into Q1 2026 (+11.9% / +15.4%) and much of the EGP growth is inflation pass-through |
+| Balance sheet | +5 | **Net cash.** EGP 285.90m equity, EGP 40.64m cash, no reported debt at 31 Mar 2026, plus EGP 120m of subscription proceeds. Held back only because the entire post-money book (~EGP 406m) is **1.4% of the market cap** |
+| Tradability | −8 | Free float **3.90961%** per the company's own 21 July filing = 9,562,178 shares fully diluted, of which only **4,873,952 (EGP 585m) were actually listed**. Turnover ran at ~11.9% of the listed float *every session* |
+| Governance | −2 | Genuinely mixed. Positives: KPMG Hazem Hassan, on-time filings, answered the exchange **pre-open at 09:16 on 14 July**. Negatives: EGP 10,000 EGX penalty (Art. 52) on this very capital increase; a **second** "no information" denial in under two years; the 2024 Al Ahly "project of the century" walk-back after an EGX suspension; 9 of 11 board seats represent the 96.088% holders who were themselves subscribing at par |
+
+**The capital increase, decoded.** EGP 120m raised at **EGP 1 par against a ~EGP 62 market price — a ~98% discount.** The famous **476.93× oversubscription** was ~EGP 1.47bn of cash chasing **3,091,984 shares worth EGP 3.09m** — a 0.21% allocation. The ratio is a function of a tiny denominator (1.26% of the pre-increase share count), not demand for the business. Proceeds were EGP 120m either way, and no filing earmarks them to a named project.
+
+*Note: the press widely printed 3,019,984 uncovered shares. The FRA figure is 3,091,984, and 120,000,000 − 116,908,016 = 3,091,984. The press number is a digit transposition.*
+
+**Ownership:** LimeVest Partners Healthcare **61.358%** + Tawasol Holdings **34.733%** = **96.088%**, following a 2022 mandatory tender offer at EGP 49/share that valued 100% of the company at ~EGP 763m — **EGP 6.13 split-adjusted, against EGP 120.03 today.**
+
+**Versus Cleopatra Hospitals (CLHO):** AMES carries **122% of CLHO's market cap** on **6.6% of its revenue, 6.8% of its owner profit and 4.0% of its EBITDA** — one facility against fourteen. Peer multiples and the 2022 control price independently converge on **≈EGP 6–7.4 a share.**
+
+**What would flip it:** roughly 18× the current profit, or a price near the peer-implied EGP 6–7.4. Note the company denied knowing any reason for the move on **14 July — five days before BIOC did the same** — and the stock broke two sessions later, −16.20% on 16 July.
+
 **BIOC — GlaxoSmithKline S.A.E. · score −25 · 29 Jul 2026**
 Flags: ⚠️ THIN FLOAT · 🔒 CAN'T EXIT
 
@@ -143,7 +167,13 @@ Full file: `outputs/` (BIOC forensic work, July 2026)
 
 ## Progress
 
-**2 of ~224 scored.**
+**3 of ~224 scored.**
+
+### A recurring lesson from the first three
+
+All three are thin-float names, and in every case the *vendor* float number was wrong or misleading.
+TradingView reported AMES at **27.22%** free float; the company's own filing says **3.90961%** — off by
+seven times. Always take the float from an Article 30 filing, never from a data vendor.
 
 ## Disclaimer
 
