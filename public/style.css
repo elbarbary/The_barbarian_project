@@ -1557,6 +1557,8 @@ body::before {
 .bar-track { position: relative; height: 26px; }
 .bar-fill { position: absolute; top: 0; bottom: 0; left: 0; width: var(--w); min-width: 3px; background: var(--c-1); border-radius: 3px 5px 5px 3px; }
 .bar-fill-mute { background: var(--c-rest); }
+/* "today" is a different kind of thing from the historical bids, not more of the same */
+.bar-fill-now { background: var(--c-3); }
 .bar-value { color: var(--c-ink); font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bar-value small { display: block; margin-top: 3px; color: var(--c-mut); font-size: 0.62rem; font-weight: 500; }
 .bar-value em {
