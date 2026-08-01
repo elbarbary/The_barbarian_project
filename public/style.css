@@ -1424,6 +1424,21 @@ body::before {
 .whole-reads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
 @media (max-width: 900px) { .whole-reads { grid-template-columns: 1fr; } }
 
+/* ─── cash or trash · homepage feature ───────────────────────── */
+.section-cot-home { padding-top: clamp(24px, 5vw, 64px); }
+.cot-feature { --accent: #cde84a; }
+.cot-pillars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; padding: 0; list-style: none; }
+.cot-pillars li {
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(245,242,255,0.07); border: 1px solid rgba(245,242,255,0.14);
+  color: rgba(245,242,255,0.72); font-size: 0.68rem; font-weight: 600;
+}
+.cot-board li { align-items: baseline; }
+.cot-board em { font-size: 0.7rem !important; }
+.cot-board .v-toxic { color: #f0a868; }
+.cot-board .v-trash { color: #f6a8c9; }
+.cot-board strong { color: #f5f2ff; }
+
 /* ─── cash or trash ──────────────────────────────────────────── */
 .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .pillar-n {
