@@ -169,22 +169,78 @@
         </div>
 
         <!-- EGX_DAILY_SCORECARD_START: update every recorded signal and watch; never remove losers or relabel watches. -->
-        <section class="daily-panel reveal" aria-labelledby="signal-scorecard-h">
-          <p class="kicker">Scanner results · marked to market</p>
-          <h3 id="signal-scorecard-h">What happened after publication—up or down.</h3>
-          <p>Prices are the 2 August 2026 session closes from a 15-minute-delayed feed captured at 4:35:27 PM Cairo. Returns use the first price printed when each ticker entered the monitor, so the baseline cannot be reset after a loss. This is price-path accountability, not model portfolio P&amp;L: conditional entry rules and sub-6 watches remain separate.</p>
-          <dl class="decision-list">
-            <div><dt>TALM · qualified conditional · +13.10%</dt><dd>The 29 July report was the monitor’s only score-6 qualifier, using the completed 28 July close of EGP 16.33. Latest price is EGP 18.47. The EGP 16.49 price trigger traded, which is +12.01% to the latest close, but the full entry package did not confirm because 29 July closed only 50.6% up its range versus the required ≥75%. Honest result: the scanner identified the direction, while the rule-based entry remained unconfirmed.</dd></div>
-            <div><dt>PHAR · watch only · +30.00%</dt><dd>First published 27 July at EGP 96.00 with a 5/13 score; latest price is EGP 124.80. It never passed the 6-point gate and is now late after a 20% session and +36.39% one-week move. The rise is real, but it is not retroactively counted as a qualified recommendation.</dd></div>
-            <div><dt>ARVA / AMII · watch only · +28.48%</dt><dd>First published 26 July at EGP 12.29 with a 4/13 score; latest price under the new AMII ticker is EGP 15.79. The incomplete order disclosure and governance risk kept it below threshold. The price increase stays visible even though the setup never qualified.</dd></div>
-            <div><dt>MASR · watch only · +0.50%</dt><dd>First published 28 July at EGP 8.03 with a 5/13 score; latest price is EGP 8.07. Its material bookings update never gained the required RV20 and close-strength confirmation.</dd></div>
-            <div><dt>BONY · watch only · −4.55%</dt><dd>First published 22 July at EGP 5.06 with a 5/13 score; latest price is EGP 4.83. The bonus-share event remained value-neutral and volume never confirmed the EGP 5.14 gate. This row will be adjusted after the 6 August bonus listing if the quoted series is mechanically rebased.</dd></div>
-            <div><dt>ACGC · rejected · −0.83%</dt><dd>Rejected from the start on 22 July at EGP 10.89 and −1/13 because the relevant filing exposed overdue reporting and information-quality risk. Latest price is EGP 10.80. It is included so rejected and negative outcomes do not disappear.</dd></div>
-            <div><dt>Scorecard totals</dt><dd>Qualified conditional signals: 1. Positive published price paths: 1 of 1. Fully confirmed rule-based entries: 0. The sub-6 watch audit is three positive, one negative; the explicit reject is negative. The scorecard will retain every result rather than reporting only winners.</dd></div>
-          </dl>
-          <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-TALM/" target="_blank" rel="noopener">TALM delayed quote and chart <span aria-hidden="true">↗</span></a>
-          <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-PHAR/" target="_blank" rel="noopener">PHAR delayed quote and chart <span aria-hidden="true">↗</span></a>
-          <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-AMII/" target="_blank" rel="noopener">AMII delayed quote and chart <span aria-hidden="true">↗</span></a>
+        <section class="daily-panel result-scorecard reveal" aria-labelledby="signal-scorecard-h">
+          <div class="scorecard-heading">
+            <div>
+              <p class="kicker">Scanner results · marked to market</p>
+              <h3 id="signal-scorecard-h">What happened next.</h3>
+            </div>
+            <p>2 August 2026 close <span>Captured 4:35:27 PM Cairo · 15-minute-delayed feed</span></p>
+          </div>
+
+          <div class="scorecard-summary" aria-label="Scanner result summary">
+            <div><strong>1</strong><span>qualified signal</span></div>
+            <div><strong>1 / 1</strong><span>positive price path</span></div>
+            <div><strong>0</strong><span>confirmed rule entries</span></div>
+            <div><strong>3 ↑ · 1 ↓</strong><span>sub-6 watch audit</span></div>
+          </div>
+
+          <article class="scorecard-feature" aria-label="TALM qualified conditional result">
+            <div class="scorecard-feature-copy">
+              <div class="result-meta"><span class="result-badge result-qualified">Qualified conditional</span><span>29 July · 6/13</span></div>
+              <h4>TALM</h4>
+              <p>The scanner caught the direction. The EGP 16.49 trigger traded, but the required ≥75% close-strength test failed at 50.6%, so the rule-based entry remained unconfirmed.</p>
+            </div>
+            <div class="scorecard-feature-move">
+              <strong>+13.10%</strong>
+              <div class="price-route"><span><small>Published</small>EGP 16.33</span><i aria-hidden="true">→</i><span><small>Latest</small>EGP 18.47</span></div>
+              <small>+12.01% from the price trigger</small>
+            </div>
+          </article>
+
+          <div class="outcome-ledger" role="list" aria-label="Published watch and rejection outcomes">
+            <article class="outcome-row outcome-up" role="listitem">
+              <div class="outcome-identity"><strong>PHAR</strong><span class="result-badge result-watch">Watch only</span></div>
+              <div class="outcome-prices"><span>EGP 96.00</span><i aria-hidden="true">→</i><span>EGP 124.80</span></div>
+              <strong class="outcome-return">+30.00%</strong>
+              <p>5/13 on 27 July. The rise is real; it never passed the qualification gate and is now late.</p>
+            </article>
+            <article class="outcome-row outcome-up" role="listitem">
+              <div class="outcome-identity"><strong>ARVA / AMII</strong><span class="result-badge result-watch">Watch only</span></div>
+              <div class="outcome-prices"><span>EGP 12.29</span><i aria-hidden="true">→</i><span>EGP 15.79</span></div>
+              <strong class="outcome-return">+28.48%</strong>
+              <p>4/13 on 26 July. The incomplete order disclosure and governance risk kept it below threshold.</p>
+            </article>
+            <article class="outcome-row outcome-flat" role="listitem">
+              <div class="outcome-identity"><strong>MASR</strong><span class="result-badge result-watch">Watch only</span></div>
+              <div class="outcome-prices"><span>EGP 8.03</span><i aria-hidden="true">→</i><span>EGP 8.07</span></div>
+              <strong class="outcome-return">+0.50%</strong>
+              <p>5/13 on 28 July. Material bookings, but no qualifying RV20 or close-strength confirmation.</p>
+            </article>
+            <article class="outcome-row outcome-down" role="listitem">
+              <div class="outcome-identity"><strong>BONY</strong><span class="result-badge result-watch">Watch only</span></div>
+              <div class="outcome-prices"><span>EGP 5.06</span><i aria-hidden="true">→</i><span>EGP 4.83</span></div>
+              <strong class="outcome-return">−4.55%</strong>
+              <p>5/13 on 22 July. Volume never confirmed; adjust the baseline if the 6 August bonus listing rebases the series.</p>
+            </article>
+            <article class="outcome-row outcome-down" role="listitem">
+              <div class="outcome-identity"><strong>ACGC</strong><span class="result-badge result-reject">Rejected</span></div>
+              <div class="outcome-prices"><span>EGP 10.89</span><i aria-hidden="true">→</i><span>EGP 10.80</span></div>
+              <strong class="outcome-return">−0.83%</strong>
+              <p>−1/13 on 22 July. Reporting and information-quality risk made this a rejection from day one.</p>
+            </article>
+          </div>
+
+          <div class="scorecard-footnote">
+            <strong>Nothing disappears.</strong>
+            <p>Every return starts at the first price printed by the monitor. Winners, losers, watches and rejects stay visible; price-path performance is not portfolio P&amp;L unless the complete entry rule confirms.</p>
+          </div>
+
+          <div class="scorecard-sources">
+            <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-TALM/" target="_blank" rel="noopener">TALM chart <span aria-hidden="true">↗</span></a>
+            <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-PHAR/" target="_blank" rel="noopener">PHAR chart <span aria-hidden="true">↗</span></a>
+            <a class="insight-source" href="https://www.tradingview.com/symbols/EGX-AMII/" target="_blank" rel="noopener">AMII chart <span aria-hidden="true">↗</span></a>
+          </div>
         </section>
         <!-- EGX_DAILY_SCORECARD_END -->
 
