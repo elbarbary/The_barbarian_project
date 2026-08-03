@@ -68,6 +68,35 @@
         <li><span>04</span> Anti-chasing penalties</li>
       </ul>
 
+      <!-- SCORING CRITERIA — hand-maintained, deliberately OUTSIDE the automation markers -->
+      <section class="daily-panel scoring-panel reveal" id="how-scored" aria-labelledby="scoring-h">
+        <p class="kicker">How a stock gets scored</p>
+        <h2 id="scoring-h">Nine components.<br><span>Six qualifies.</span></h2>
+        <p class="scoring-lede">Every candidate is scored the same way, every run. Five components add points for evidence; four subtract them for the ways a setup is already too late or too risky. <b>The score is a research-ranking aid — it is not a buy signal.</b> A high score means the situation deserves a closer look, nothing more.</p>
+
+        <ul class="div-rows scoring-rows" role="list">
+          <li><span class="div-name">Fresh, specific, material disclosure<small>a real filing, not a rumour or a press mention</small></span><span class="div-track"><i class="div-bar div-pos" style="--w:50%;--l:50%"></i></span><b class="div-val pos">+4</b></li>
+          <li><span class="div-name">Economic importance to the company<small>is the news big relative to <em>this</em> company's size?</small></span><span class="div-track"><i class="div-bar div-pos" style="--w:37.5%;--l:50%"></i></span><b class="div-val pos">+3</b></li>
+          <li><span class="div-name">Volume and early price confirmation<small>RV20 — volume against its own 20-session median</small></span><span class="div-track"><i class="div-bar div-pos" style="--w:25%;--l:50%"></i></span><b class="div-val pos">+2</b></li>
+          <li><span class="div-name">Repeat-buyer or ownership cluster<small>the same holder building, disclosure after disclosure</small></span><span class="div-track"><i class="div-bar div-pos" style="--w:25%;--l:50%"></i></span><b class="div-val pos">+2</b></li>
+          <li><span class="div-name">A clear dated catalyst ahead<small>something on the calendar, not a vague hope</small></span><span class="div-track"><i class="div-bar div-pos" style="--w:25%;--l:50%"></i></span><b class="div-val pos">+2</b></li>
+          <li><span class="div-name">Already up more than 20% in five sessions<small>the anti-chasing penalty</small></span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−4</b></li>
+          <li><span class="div-name">Company denies knowing why it moved<small>told the exchange it has no explanation</small></span><span class="div-track"><i class="div-bar div-neg" style="--w:50%;--l:0%"></i></span><b class="div-val neg">−4</b></li>
+          <li><span class="div-name">Two or more completed limit-ups<small>EGP's ±20% band already used up</small></span><span class="div-track"><i class="div-bar div-neg" style="--w:37.5%;--l:12.5%"></i></span><b class="div-val neg">−3</b></li>
+          <li><span class="div-name">Severe valuation, dilution or exit risk<small>including a float too thin to sell into</small></span><span class="div-track"><i class="div-bar div-neg" style="--w:37.5%;--l:12.5%"></i></span><b class="div-val neg">−3</b></li>
+        </ul>
+        <div class="div-axis"><span>−4</span><span>0</span><span>+4</span></div>
+
+        <div class="scoring-bands">
+          <div class="scoring-band"><b>+13</b><span>best possible score</span></div>
+          <div class="scoring-band scoring-band-hi"><b>+6</b><span>the qualifying line — researched first</span></div>
+          <div class="scoring-band"><b>−14</b><span>worst possible score</span></div>
+        </div>
+
+        <p class="scoring-note"><b>The penalties can outweigh everything.</b> A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). That is deliberate: the scanner is built to find things <em>before</em> they move, so a name that has already run is penalised harder than good news can reward it. Most days nothing qualifies — and that is the scanner working, not failing.</p>
+        <p class="scoring-note scoring-note-fine">Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction — every signal is tracked afterwards in the marked-to-market ledger below, including the ones that went wrong.</p>
+      </section>
+
       <!-- EGX_DAILY_REPORT_START: the automation replaces this report block each run. -->
       <section class="daily-report" aria-labelledby="daily-report-h">
         <div class="daily-report-head reveal">

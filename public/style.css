@@ -1356,6 +1356,61 @@ body::before {
 .section-dark .report-heading h2 em { color: #dff17e; }
 .section-dark .report-heading > p:last-child, .section-dark .report-heading-row > p { color: rgba(245,242,255,0.55); }
 
+/* CIRA plain-language brief */
+.cira-plain {
+  background: linear-gradient(180deg, rgba(255,255,255,0.56), rgba(244,243,251,0.22));
+  border-bottom: 1px solid rgba(34,27,61,0.06);
+}
+.plain-ledger { list-style: none; border-top: 1px solid rgba(34,27,61,0.13); }
+.plain-ledger li {
+  display: grid; grid-template-columns: 48px minmax(0, 1fr) minmax(140px, auto); gap: 28px;
+  align-items: start; padding: 28px 0; border-bottom: 1px solid rgba(34,27,61,0.13);
+}
+.plain-ledger li > span {
+  color: var(--violet); font: 600 0.72rem/1 var(--f-body); letter-spacing: 0.08em;
+}
+.plain-ledger h3 { font: 700 clamp(1.15rem, 2.2vw, 1.55rem)/1.1 var(--f-display); letter-spacing: -0.035em; }
+.plain-ledger p { max-width: 62ch; margin-top: 9px; color: var(--ink-50); font-size: 0.78rem; line-height: 1.65; }
+.plain-ledger li > strong {
+  justify-self: end; color: var(--ink); font: 700 clamp(1rem, 2vw, 1.35rem)/1.1 var(--f-display);
+  letter-spacing: -0.025em; text-align: right;
+}
+.plain-verdict {
+  display: grid; grid-template-columns: minmax(220px, 0.75fr) 1.25fr; gap: clamp(30px, 6vw, 80px);
+  align-items: center; margin-top: 34px; padding: clamp(28px, 5vw, 50px); color: #f5f2ff;
+  background: #211a43; border-radius: 28px; box-shadow: 0 30px 70px -42px rgba(33,26,67,0.86);
+}
+.plain-verdict > p { font: 700 clamp(2rem, 4.6vw, 4rem)/0.94 var(--f-display); letter-spacing: -0.055em; }
+.plain-verdict > p em { display: block; color: #dff17e; font-family: var(--f-serif); font-weight: 400; }
+.plain-verdict > div { display: grid; }
+.plain-verdict span { padding: 13px 0; color: rgba(245,242,255,0.6); border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.72rem; line-height: 1.5; }
+.plain-verdict span:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
+.plain-verdict b { display: inline-block; min-width: 138px; color: #f5f2ff; }
+
+/* CIRA creator desk */
+.creator-desk { background: rgba(205,232,74,0.08); border-block: 1px solid rgba(34,27,61,0.06); }
+.creator-lead {
+  display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 22px 48px; padding: clamp(28px, 5vw, 52px);
+  color: #f5f2ff; background: #211a43; border-radius: 28px;
+  box-shadow: 0 30px 70px -42px rgba(33,26,67,0.86);
+}
+.creator-lead span { color: #dff17e; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+.creator-lead h3 { max-width: 12ch; margin-top: 14px; font: 700 clamp(2rem, 4vw, 3.6rem)/0.95 var(--f-display); letter-spacing: -0.05em; }
+.creator-lead blockquote { align-self: center; color: #fff; font: 600 clamp(1.3rem, 2.5vw, 2rem)/1.55 var(--f-display); }
+.creator-lead > p { grid-column: 2; color: rgba(245,242,255,0.52); font-size: 0.68rem; line-height: 1.6; }
+.creator-lead > p b { color: #dff17e; }
+.creator-angle-list { list-style: none; margin-top: 24px; border-top: 1px solid rgba(34,27,61,0.14); }
+.creator-angle-list li {
+  display: grid; grid-template-columns: 46px minmax(0, 1.25fr) minmax(240px, 0.75fr); gap: 26px;
+  align-items: start; padding: 30px 0; border-bottom: 1px solid rgba(34,27,61,0.14);
+}
+.creator-angle-list li > span { color: var(--violet); font: 600 0.72rem/1 var(--f-body); }
+.creator-angle-list h3 { font: 700 1.08rem/1.15 var(--f-display); letter-spacing: -0.025em; }
+.creator-angle-list blockquote { margin-top: 10px; color: var(--ink); font: 600 clamp(1rem, 1.8vw, 1.3rem)/1.65 var(--f-display); }
+.creator-angle-list li > p { color: var(--ink-50); font-size: 0.72rem; line-height: 1.62; }
+.creator-note { max-width: 78ch; margin-top: 30px; color: var(--ink-50); font-size: 0.74rem; line-height: 1.65; }
+.creator-note b { color: var(--ink); }
+
 .finding-ledger { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 16px; }
 .finding-ledger article {
   position: relative; overflow: hidden; min-width: 0; padding: clamp(26px, 4vw, 42px);
@@ -1622,6 +1677,45 @@ body::before {
 .score-lede b { color: #a8154e; }
 
 /* diverging pillar bars — cool = positive, warm = negative, neutral centre */
+
+.egx-tape-how { color: var(--violet); font: 600 0.66rem var(--f-body); text-decoration: none; white-space: nowrap; }
+.egx-tape-how:hover { text-decoration: underline; }
+
+/* ── scanner scoring criteria ───────────────────────────────── */
+.scoring-panel { margin-top: clamp(26px, 3.4vw, 40px); }
+.scoring-panel h2 { margin-top: 10px; color: var(--ink); font: 700 clamp(1.3rem, 2.8vw, 1.9rem)/1.1 var(--f-display); letter-spacing: -0.03em; }
+.scoring-panel h2 span { color: var(--violet); font-family: var(--f-serif); font-style: italic; font-weight: 400; }
+.scoring-lede { margin-top: 14px; max-width: 74ch; color: var(--ink-70); font-size: 0.82rem; line-height: 1.65; }
+.scoring-lede b { color: var(--ink); font-weight: 700; }
+
+/* wider label column — these rows carry a subtitle the pillar rows don't */
+.scoring-rows li { grid-template-columns: minmax(190px, 1.35fr) minmax(0, 1fr) 46px; gap: 16px; align-items: start; }
+.scoring-rows .div-name { padding-top: 3px; line-height: 1.35; }
+.scoring-rows .div-name small { display: block; margin-top: 3px; color: var(--ink-50); font-size: 0.66rem; font-weight: 400; line-height: 1.45; }
+.scoring-rows .div-track { align-self: center; }
+.scoring-rows + .div-axis { grid-template-columns: minmax(190px, 1.35fr) minmax(0, 1fr) 46px; gap: 16px; }
+
+.scoring-bands { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.scoring-band {
+  flex: 1 1 150px; padding: 14px 16px; border: 1px solid var(--hairline); border-radius: var(--r-sm);
+  background: rgba(34,27,61,0.02);
+}
+.scoring-band b { display: block; color: var(--ink); font: 800 1.3rem var(--f-display); font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.scoring-band span { display: block; margin-top: 3px; color: var(--ink-50); font-size: 0.66rem; line-height: 1.4; }
+.scoring-band-hi { border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.06); }
+.scoring-band-hi b { color: var(--violet); }
+.scoring-note { margin-top: 18px; max-width: 76ch; color: var(--ink-70); font-size: 0.76rem; line-height: 1.62; }
+.scoring-note b { color: var(--ink); font-weight: 700; }
+.scoring-note-fine { margin-top: 10px; color: var(--ink-50); font-size: 0.7rem; }
+
+@media (max-width: 620px) {
+  .scoring-rows li { grid-template-columns: 1fr 46px; gap: 6px 12px; }
+  .scoring-rows .div-name { grid-column: 1 / -1; }
+  .scoring-rows .div-track { grid-column: 1; }
+  .scoring-rows + .div-axis { grid-template-columns: 1fr 46px; }
+  .scoring-rows + .div-axis span { grid-column: 1; }
+}
+
 .div-rows { display: grid; gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
 .div-rows li { display: grid; grid-template-columns: minmax(96px, 150px) minmax(0,1fr) 44px; gap: 14px; align-items: center; }
 .div-name { font-size: 0.74rem; font-weight: 600; color: var(--ink-70); }
@@ -2094,6 +2188,10 @@ body.has-lightbox { overflow: hidden; }
   .dossier-cover { max-width: 560px; }
   .report-heading-row { grid-template-columns: 1fr; gap: 18px; }
   .report-heading-row > p { max-width: 60ch; }
+  .plain-verdict, .creator-lead { grid-template-columns: 1fr; }
+  .creator-lead > p { grid-column: 1; }
+  .creator-angle-list li { grid-template-columns: 40px minmax(0, 1fr); }
+  .creator-angle-list li > p { grid-column: 2; }
   .map-explainer, .sales-questions { grid-template-columns: 1fr; }
   .property-story, .receivable-stage { grid-template-columns: 1fr; }
   .family-allocation { grid-template-columns: 1fr; }
@@ -2192,6 +2290,11 @@ body.has-lightbox { overflow: hidden; }
   .dossier-hero-actions { align-items: stretch; }
   .dossier-hero-actions .btn { justify-content: center; width: 100%; }
   .dossier-text-link { margin: 0 auto; }
+  .plain-ledger li { grid-template-columns: 32px minmax(0, 1fr); gap: 12px 14px; }
+  .plain-ledger li > strong { grid-column: 2; justify-self: start; text-align: left; }
+  .plain-verdict b { display: block; min-width: 0; margin-bottom: 3px; }
+  .creator-lead { padding: 28px 22px; }
+  .creator-angle-list li { grid-template-columns: 28px minmax(0, 1fr); gap: 10px 14px; }
   .finding-ledger { grid-template-columns: 1fr; }
   .finding-big { grid-row: auto; }
   .finding-wide { grid-column: auto; display: block; }
