@@ -131,8 +131,8 @@
     copyScheduledButton.addEventListener('click', async () => {
       if (!automationPrompt) return;
       const scheduleRequest = [
-        'Create a standalone scheduled task that runs every day at 9:00 AM in the Africa/Cairo timezone.',
-        'Use the prompt below for every run. Return each result in Scheduled and compare with previous reports when they are available.',
+        'Create three standalone scheduled tasks for EGX trading days in the Africa/Cairo timezone: pre-open at 9:00 AM, post-open at 10:45 AM, and near-close at 2:50 PM.',
+        'Use the prompt below for every checkpoint. Let each checkpoint read the shared permanent ledger and prior checkpoint, return only new or materially changed evidence, and never keep one task waiting between checkpoints.',
         '',
         automationPrompt
       ].join('\n');
