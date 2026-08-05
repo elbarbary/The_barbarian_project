@@ -206,25 +206,123 @@
       <!-- EGX_DAILY_REPORT_END -->
 
       <!-- EGX_DAILY_PORTFOLIO_START: permanent model-portfolio ledger; never erase prior trades. -->
-      <section class="daily-report" aria-labelledby="model-portfolio-h">
+      <section class="daily-report model-portfolio" aria-labelledby="model-portfolio-h">
         <div class="daily-section-title reveal">
           <div>
-            <p class="kicker">EGP 10,000 model portfolio · inception 5 August 2026</p>
-            <h2 id="model-portfolio-h">One small starter. Most capital stays cash.</h2>
+            <p class="kicker">Model portfolio · started with EGP 10,000 on 5 August 2026</p>
+            <h2 id="model-portfolio-h">Where the EGP 10,000 stands now.</h2>
           </div>
-          <p>Simulation only—no brokerage order was placed. The first allocation uses the best early, sufficiently liquid candidate while respecting the missing volume confirmation and tomorrow’s bonus-share adjustment.</p>
+          <p>This is a simulation, not a real brokerage account. Read the total first, then the one open position and the rules for holding or exiting it.</p>
         </div>
 
-        <section class="daily-panel reveal" aria-labelledby="portfolio-ledger-h">
-          <p class="kicker">Open position · trade 001</p>
-          <h3 id="portfolio-ledger-h">BUY NCCW · 400 shares at EGP 7.26</h3>
-          <dl class="decision-list">
-            <div><dt>Entry and cost</dt><dd>Model fill at the exact delayed quote captured 10:20:38 AM Cairo: 400 whole shares × EGP 7.26 = EGP 2,904.00 gross. Assumed all-in fees/slippage are 0.25%, or EGP 7.26. Total cash used EGP 2,911.26; remaining cash EGP 7,088.74. Gross allocation is 29.04% of initial capital.</dd></div>
-            <div><dt>Status and mark</dt><dd>Starter allocation in a 6/13 conditional research qualifier; <b>not a confirmed rule entry</b>. Marked at EGP 7.12 at 2:56:41 PM Cairo: market value EGP 2,848.00, unrealized P&amp;L −EGP 56.00 before exit friction, realized P&amp;L EGP 0.00, cash EGP 7,088.74, total equity EGP 9,936.74 and return since inception −0.63% after assumed entry friction. Action: hold; no add or trim.</dd></div>
-            <div><dt>Risk and reward</dt><dd>Pre-bonus invalidation EGP 6.80; initial targets EGP 7.80 / 8.35; time-stop 12 August. Original price risk to invalidation is EGP 184.00; remaining mark-to-stop price risk is EGP 128.00. Including entry friction, maximum original risk is EGP 191.26, or 1.91% of initial capital. Reward/risk from entry to the two targets remains 1.17× / 2.37×. Exit if the adjusted equivalent of EGP 6.80 breaks; do not average down.</dd></div>
-            <div><dt>Corporate action</dt><dd>The position is modeled cum-entitlement. When the 20% bonus is credited, increase the ledger from 400 to 480 shares and divide entry, stop and targets by 1.2: adjusted entry EGP 6.05, stop EGP 5.67 and targets EGP 6.50 / 6.96. This preserves cost and economic exposure; the bonus itself is not profit.</dd></div>
-            <div><dt>Sizing logic</dt><dd>The material contract and normal EGP 20.52m liquidity supported a starter, while missing execution economics, weak latest operations and no full-session confirmation argued against full deployment. The completed tape validated that restraint: RV20 reached only 2.16× and close strength fell to 35.7%. Keeping 70.89% cash protects expected value; add only after the complete adjusted confirmation package.</dd></div>
+        <section class="portfolio-board reveal" aria-labelledby="portfolio-ledger-h">
+          <header class="portfolio-board-head">
+            <div>
+              <p class="kicker">Portfolio now · marked 5 August at 2:56:41 PM Cairo</p>
+              <h3 id="portfolio-ledger-h">EGP 9,936.74 total</h3>
+              <p>Started with EGP 10,000. The portfolio is down EGP 63.26 after the stock move and assumed entry costs.</p>
+            </div>
+            <span class="portfolio-status">Hold · do not add</span>
+          </header>
+
+          <dl class="portfolio-snapshot" aria-label="Portfolio summary">
+            <div>
+              <dt>Total value now</dt>
+              <dd>EGP 9,936.74</dd>
+              <small>Cash plus the stock’s current value</small>
+            </div>
+            <div class="portfolio-negative">
+              <dt>Change since start</dt>
+              <dd>−EGP 63.26</dd>
+              <small>−0.63% including assumed entry cost</small>
+            </div>
+            <div>
+              <dt>Cash not invested</dt>
+              <dd>EGP 7,088.74</dd>
+              <small>71.3% of today’s total</small>
+            </div>
+            <div>
+              <dt>NCCW value now</dt>
+              <dd>EGP 2,848.00</dd>
+              <small>28.7% of today’s total</small>
+            </div>
           </dl>
+
+          <div class="portfolio-allocation" aria-label="Current allocation: 71.3% cash and 28.7% NCCW">
+            <div class="portfolio-allocation-copy">
+              <strong>Most of the money is protected in cash.</strong>
+              <span>Total value = EGP 7,088.74 cash + EGP 2,848.00 NCCW</span>
+            </div>
+            <div class="allocation-track" aria-hidden="true">
+              <span class="allocation-cash" style="--allocation:71.3%"></span>
+              <span class="allocation-stock"></span>
+            </div>
+            <div class="allocation-legend">
+              <span><i class="allocation-cash-dot"></i>Cash <b>71.3%</b></span>
+              <span><i class="allocation-stock-dot"></i>NCCW <b>28.7%</b></span>
+            </div>
+          </div>
+
+          <div class="portfolio-position">
+            <div class="portfolio-position-identity">
+              <p>Open position · trade 001</p>
+              <h4>NCCW</h4>
+              <strong>400 shares</strong>
+              <span>Small starter position · the full entry signal has not confirmed</span>
+            </div>
+            <dl class="portfolio-position-numbers">
+              <div><dt>Paid per share</dt><dd>EGP 7.26</dd></div>
+              <div><dt>Price now</dt><dd>EGP 7.12</dd></div>
+              <div class="portfolio-negative"><dt>Stock change</dt><dd>−EGP 56.00</dd></div>
+              <div><dt>Current stock value</dt><dd>EGP 2,848.00</dd></div>
+            </dl>
+          </div>
+
+          <section class="portfolio-decision" aria-labelledby="portfolio-decision-h">
+            <div class="portfolio-decision-intro">
+              <p class="kicker">The decision map</p>
+              <h4 id="portfolio-decision-h">What happens next</h4>
+              <p>These are pre-written rules. The portfolio should not improvise because the price moves.</p>
+            </div>
+            <dl class="portfolio-rules">
+              <div class="portfolio-rule-now">
+                <dt>Right now</dt>
+                <dd>Hold 400 shares. Do not buy more.</dd>
+              </div>
+              <div class="portfolio-rule-stop">
+                <dt>Exit line</dt>
+                <dd>EGP 6.80 before the bonus adjustment; EGP 5.67 afterward.</dd>
+              </div>
+              <div>
+                <dt>Consider adding only if</dt>
+                <dd>After adjustment: close at or above EGP 6.07, RV20 at least 3×, close strength at least 75%, and traded value at least EGP 20m.</dd>
+              </div>
+              <div>
+                <dt>First targets</dt>
+                <dd>EGP 7.80 / 8.35 before adjustment; EGP 6.50 / 6.96 afterward.</dd>
+              </div>
+              <div>
+                <dt>Review date</dt>
+                <dd>12 August. Reassess if the entry still has not confirmed.</dd>
+              </div>
+            </dl>
+          </section>
+
+          <div class="portfolio-bonus" role="note" aria-label="Bonus-share adjustment explained">
+            <span>6 August adjustment</span>
+            <p><strong>400 shares become 480, but this is not free profit.</strong> The share count rises 20% while the comparable price levels divide by 1.2: entry EGP 6.05, exit line EGP 5.67, targets EGP 6.50 / 6.96. Total economic exposure stays the same at the adjustment.</p>
+          </div>
+
+          <details class="portfolio-math">
+            <summary>See the full cost, risk and sizing math</summary>
+            <dl>
+              <div><dt>What the model paid</dt><dd>400 shares × EGP 7.26 = EGP 2,904.00. Assumed fees/slippage were EGP 7.26, so total cash used was EGP 2,911.26.</dd></div>
+              <div><dt>What created the EGP 63.26 decline</dt><dd>The shares lost EGP 56.00 in market value and the model included EGP 7.26 of assumed entry cost. No profit or loss has been realized because the position remains open.</dd></div>
+              <div><dt>Risk if the exit line breaks</dt><dd>Original maximum risk including entry cost was EGP 191.26, or 1.91% of the initial portfolio. From the current mark to the pre-adjustment EGP 6.80 exit line, the remaining price risk is EGP 128.00.</dd></div>
+              <div><dt>Why the position is small</dt><dd>The contract is material and normal liquidity is acceptable, but execution economics, recent operations and full-session confirmation remain weak. RV20 finished at 2.16× and close strength at 35.7%, so 70.89% of the original cash was deliberately left unused.</dd></div>
+              <div><dt>Reward versus risk at entry</dt><dd>The two original targets offered approximately 1.17× and 2.37× the price risk to the exit line. Do not average down; add only after the complete confirmation package.</dd></div>
+            </dl>
+          </details>
         </section>
       </section>
       <!-- EGX_DAILY_PORTFOLIO_END -->

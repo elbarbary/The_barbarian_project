@@ -908,6 +908,144 @@ body::before {
 .daily-panel-warm { background: rgba(255,246,249,0.62); }
 .daily-panel h3 { margin-top: 8px; font: 700 clamp(1.35rem, 3vw, 2rem)/1.08 var(--f-display); letter-spacing: -0.03em; }
 
+/* Model portfolio — answer the money question before exposing the trade math */
+.model-portfolio .daily-section-title h2 {
+  max-width: 14ch; font: 700 clamp(2rem, 4.6vw, 3.65rem)/0.98 var(--f-display);
+  letter-spacing: -0.05em;
+}
+.portfolio-board {
+  container-type: inline-size; overflow: hidden;
+  background: rgba(255,255,255,0.62); border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg); box-shadow: var(--shadow), inset 0 1px 0 var(--glass-hi);
+  backdrop-filter: blur(var(--blur)) saturate(150%); -webkit-backdrop-filter: blur(var(--blur)) saturate(150%);
+}
+.portfolio-board-head {
+  display: grid; gap: 20px; align-items: end; padding: clamp(24px, 5vw, 46px);
+  color: #f5f2ff; background:
+    radial-gradient(72% 155% at 100% 0%, rgba(124,58,237,0.58), transparent 62%),
+    radial-gradient(55% 110% at 0% 100%, rgba(30,55,230,0.34), transparent 72%),
+    #211a43;
+}
+.portfolio-board-head .kicker { color: #dff17e; }
+.portfolio-board-head h3 {
+  margin-top: 11px; font: 750 clamp(2.55rem, 7vw, 5.35rem)/0.88 var(--f-display);
+  letter-spacing: -0.07em; font-variant-numeric: tabular-nums;
+}
+.portfolio-board-head div > p:last-child {
+  max-width: 59ch; margin-top: 18px; color: rgba(245,242,255,0.66);
+  font-size: 0.79rem; line-height: 1.55;
+}
+.portfolio-status {
+  display: inline-flex; width: max-content; min-height: 36px; align-items: center;
+  padding: 8px 13px; color: #26213d; background: var(--lime); border-radius: var(--r-pill);
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.portfolio-snapshot {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px;
+  background: rgba(34,27,61,0.09); border-bottom: 1px solid rgba(34,27,61,0.09);
+}
+.portfolio-snapshot > div { min-width: 0; padding: clamp(18px, 4vw, 29px); background: rgba(250,249,253,0.82); }
+.portfolio-snapshot dt,
+.portfolio-position-numbers dt,
+.portfolio-rules dt {
+  color: var(--ink-35); font-size: 0.6rem; font-weight: 750; letter-spacing: 0.075em; text-transform: uppercase;
+}
+.portfolio-snapshot dd {
+  margin-top: 7px; color: var(--ink); font: 750 clamp(1.15rem, 3vw, 1.75rem)/1.05 var(--f-display);
+  letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+}
+.portfolio-snapshot small { display: block; margin-top: 8px; color: var(--ink-50); font-size: 0.63rem; line-height: 1.4; }
+.portfolio-negative dd { color: #b32460; }
+.portfolio-allocation { padding: clamp(22px, 4vw, 34px) clamp(24px, 5vw, 46px); }
+.portfolio-allocation-copy { display: grid; gap: 4px; }
+.portfolio-allocation-copy strong { color: var(--ink); font: 700 clamp(1rem, 2vw, 1.25rem)/1.2 var(--f-display); }
+.portfolio-allocation-copy span { color: var(--ink-50); font-size: 0.68rem; line-height: 1.45; }
+.allocation-track {
+  display: flex; height: 12px; margin-top: 18px; overflow: hidden;
+  background: rgba(34,27,61,0.07); border-radius: var(--r-pill);
+  box-shadow: inset 0 1px 2px rgba(34,27,61,0.12);
+}
+.allocation-track span { display: block; }
+.allocation-cash { width: var(--allocation); background: #d5eb64; }
+.allocation-stock { flex: 1; background: #39306f; }
+.allocation-legend { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 12px; }
+.allocation-legend span { display: inline-flex; gap: 7px; align-items: center; color: var(--ink-50); font-size: 0.65rem; }
+.allocation-legend i { width: 8px; height: 8px; border-radius: 50%; }
+.allocation-cash-dot { background: #c5dd4e; }
+.allocation-stock-dot { background: #39306f; }
+.allocation-legend b { color: var(--ink); font-weight: 750; }
+.portfolio-position {
+  display: grid; gap: 24px; padding: clamp(26px, 5vw, 46px); color: #f5f2ff; background: #211a43;
+  border-block: 1px solid rgba(255,255,255,0.12);
+}
+.portfolio-position-identity p { color: rgba(245,242,255,0.44); font-size: 0.62rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+.portfolio-position-identity h4 { margin-top: 17px; color: #dff17e; font: 800 clamp(3.15rem, 8vw, 5.75rem)/0.82 var(--f-display); letter-spacing: -0.075em; }
+.portfolio-position-identity > strong { display: block; margin-top: 16px; color: #fff; font: 700 1.2rem/1.1 var(--f-display); }
+.portfolio-position-identity > span { display: block; max-width: 38ch; margin-top: 7px; color: rgba(245,242,255,0.53); font-size: 0.68rem; line-height: 1.45; }
+.portfolio-position-numbers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: rgba(255,255,255,0.12); }
+.portfolio-position-numbers > div { min-width: 0; padding: 17px; background: rgba(255,255,255,0.055); }
+.portfolio-position-numbers dt { color: rgba(245,242,255,0.42); }
+.portfolio-position-numbers dd {
+  margin-top: 7px; color: #fff; font: 700 clamp(1rem, 2.2vw, 1.35rem)/1.05 var(--f-display);
+  letter-spacing: -0.035em; font-variant-numeric: tabular-nums;
+}
+.portfolio-position-numbers .portfolio-negative dd { color: #ff8eb9; }
+.portfolio-decision { display: grid; gap: 26px; padding: clamp(28px, 5vw, 46px); }
+.portfolio-decision-intro h4 { margin-top: 8px; font: 700 clamp(1.75rem, 4vw, 2.7rem)/1 var(--f-display); letter-spacing: -0.045em; }
+.portfolio-decision-intro > p:last-child { max-width: 48ch; margin-top: 12px; color: var(--ink-50); font-size: 0.72rem; line-height: 1.5; }
+.portfolio-rules { display: grid; gap: 1px; background: rgba(34,27,61,0.09); }
+.portfolio-rules > div { min-width: 0; padding: 19px; background: rgba(250,249,253,0.9); }
+.portfolio-rules dd { margin-top: 7px; color: var(--ink-70); font-size: 0.72rem; font-weight: 600; line-height: 1.48; }
+.portfolio-rule-now { background: rgba(205,232,74,0.2) !important; }
+.portfolio-rule-now dt { color: #596e12; }
+.portfolio-rule-now dd { color: var(--ink); font: 700 1rem/1.35 var(--f-display); }
+.portfolio-rule-stop { background: rgba(225,29,116,0.065) !important; }
+.portfolio-rule-stop dt { color: #9a245b; }
+.portfolio-bonus {
+  display: grid; gap: 9px; margin: 0 clamp(24px, 5vw, 46px); padding: 20px 0;
+  border-block: 1px solid rgba(34,27,61,0.1);
+}
+.portfolio-bonus > span { color: var(--blue); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+.portfolio-bonus p { color: var(--ink-50); font-size: 0.72rem; line-height: 1.55; }
+.portfolio-bonus strong { color: var(--ink); }
+.portfolio-math { margin: 0 clamp(24px, 5vw, 46px) clamp(24px, 5vw, 42px); border-bottom: 1px solid rgba(34,27,61,0.1); }
+.portfolio-math summary {
+  position: relative; min-height: 48px; padding: 16px 36px 16px 0; cursor: pointer; list-style: none;
+  color: var(--ink); font: 700 0.8rem/1.3 var(--f-display);
+}
+.portfolio-math summary::-webkit-details-marker { display: none; }
+.portfolio-math summary::after {
+  content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  color: var(--blue); font: 500 1.25rem/1 var(--f-display);
+}
+.portfolio-math[open] summary::after { content: "−"; }
+.portfolio-math summary:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 2px; }
+.portfolio-math dl { padding-bottom: 12px; }
+.portfolio-math dl > div { display: grid; gap: 5px; padding: 14px 0; border-top: 1px solid rgba(34,27,61,0.08); }
+.portfolio-math dt { color: var(--ink); font: 700 0.75rem/1.35 var(--f-display); }
+.portfolio-math dd { color: var(--ink-50); font-size: 0.7rem; line-height: 1.5; }
+
+@container (min-width: 640px) {
+  .portfolio-board-head { grid-template-columns: minmax(0, 1fr) auto; }
+  .portfolio-status { justify-self: end; }
+  .portfolio-bonus { grid-template-columns: minmax(145px, 0.35fr) minmax(0, 1.65fr); gap: 24px; }
+  .portfolio-math dl > div { grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1.65fr); gap: 22px; }
+}
+@container (min-width: 760px) {
+  .portfolio-snapshot { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .portfolio-position { grid-template-columns: minmax(210px, 0.68fr) minmax(0, 1.32fr); align-items: end; }
+  .portfolio-decision { grid-template-columns: minmax(200px, 0.44fr) minmax(0, 1.56fr); align-items: start; }
+  .portfolio-rules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portfolio-rule-now { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; }
+}
+@container (min-width: 980px) {
+  .portfolio-rules { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .portfolio-rules > div { grid-column: span 2; }
+  .portfolio-rules > div:nth-child(4),
+  .portfolio-rules > div:nth-child(5) { grid-column: span 3; }
+  .portfolio-rule-now { grid-row: auto; }
+}
+
 /* Scanner scorecard — editorial market tape, not portfolio theatre */
 .result-scorecard { position: relative; overflow: hidden; padding: clamp(24px, 4.5vw, 44px); }
 .result-scorecard::before {
