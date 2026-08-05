@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="The Barbarian Project">
+  <defs>
+    <linearGradient id="brand" x1="72" y1="48" x2="450" y2="464" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1E37E6"/>
+      <stop offset="0.55" stop-color="#C8336B"/>
+      <stop offset="1" stop-color="#CDE84A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="124" fill="url(#brand)"/>
+  <rect x="132" y="104" width="76" height="304" rx="16" fill="#FFFFFF"/>
+  <path fill="#FFFFFF" d="M188 104h94c72 0 116 34 116 89 0 34-18 60-49 74 40 13 63 44 63 84 0 68-53 57-134 57h-90V104Zm76 126h18c27 0 43-12 43-34 0-22-16-33-46-33h-15v67Zm0 119h24c34 0 52-14 52-39 0-25-19-38-54-38h-22v77Z"/>
+</svg>
