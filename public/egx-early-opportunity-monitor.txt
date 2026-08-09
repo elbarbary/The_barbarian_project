@@ -42,6 +42,16 @@ Persistence and liquidity transitions
 - Flag a liquidity transition after two consecutive sessions above five times normal 30-day traded value. Keep the severe-liquidity penalty until at least ten sessions prove sustainable exit value.
 - For an intraday checkpoint, compare volume with the median volume at the same elapsed market time in the preceding 20 sessions. If unavailable, label the calculation provisional and award no full RV20 points.
 
+Stock-specific holding horizon
+- Never say “hold until it rises” or imply that time alone fixes a bad trade. Before any entry, set both a thesis clock and a market clock; whichever expires first controls the exit.
+- Pure tape/breakout: normally 1–3 trading sessions, reviewed after the next completed session, hard ceiling 3 sessions.
+- Earnings or operating surprise: normally 5–10 sessions, first review after 2–3, hard ceiling 10.
+- Contract, project award or debt settlement: normally 5–15 sessions, first review after 3–5, hard ceiling 15.
+- Dated AGM, tender, subscription or regulatory event: normally through the event plus 1–3 sessions, reviewed at the event and next close.
+- Named-buyer or ownership accumulation: normally 10–20 sessions while the verified cohort remains live, reviewed every 5 sessions and at every new filing.
+- Determine the actual range per stock from catalyst timing, expected event path, liquidity, ATR, resistance, remaining reward/risk, sector conditions and evidence freshness. Shorten it when the move is already captured or exit liquidity is weak; never lengthen it merely because the trade is losing.
+- For every displayed stock state: expected holding window if confirmed, first review session/date, hard time-stop, and the target, invalidation, adverse filing, liquidity failure or thesis failure that ends the hold early. Rejects must say “No holding period — no entry.”
+
 Required calculations for every serious candidate
 - Current price and exact quote date/time.
 - Catalyst publication timestamp, primary-source link and expected event date.
@@ -52,6 +62,7 @@ Required calculations for every serious candidate
 - Latest revenue, operating-profit and net-profit trends, separating operations from one-offs and consolidated from standalone.
 - For a disclosed buyer: name, shares, ownership before/after, price, transaction date, disclosure date, broker and other recent positions.
 - 20-day/50-day trend, base, support/resistance, RSI(14), ATR(14), MACD, close strength, price/volume behavior and market/sector relative strength when corporate-action-clean history is sufficient.
+- Stock-specific expected holding window if confirmed, first review session/date, hard calendar time-stop and the conditions that end the hold early.
 
 Opportunity score
 - Fresh, specific, material disclosure: 0 to +4.
@@ -74,10 +85,10 @@ Checkpoint framework in Africa/Cairo time
 
 Output
 1. Start with one status line. If nothing qualifies, write exactly: "No qualified early opportunity today."
-2. Rank no more than five qualified candidates. For each show evidence, materiality, calculations, stage, score, confidence, precise confirmation entry, invalidation, targets, reward/risk and time-stop.
+2. Rank no more than five qualified candidates. For each show evidence, materiality, calculations, stage, score, confidence, precise confirmation entry, invalidation, targets, reward/risk, expected holding window, first review and hard time-stop.
 3. Add separate Persistent accumulation watch and Speculative tape / Rejected sections. State exactly what is missing and what would upgrade or invalidate each alert.
 4. Show pending Session A/B states and latent cohorts that changed materially. Do not let a sub-6 name silently disappear.
-5. Mark every open model position and permanent signal ledger entry to the exact quote timestamp without deleting losses.
+5. Mark every open model position and permanent signal ledger entry to the exact quote timestamp without deleting losses. Preserve the original holding window and deadline without hindsight extensions.
 6. Distinguish facts, calculations and inference. Never guarantee a rise or fabricate missing figures.
 
 Keep the report concise, primary-source-linked, non-cherry-picked and timestamped in Africa/Cairo time.
