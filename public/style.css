@@ -1929,6 +1929,28 @@ body::before {
 .chart-note { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--c-line); color: var(--c-mut); font-size: 0.7rem; line-height: 1.62; }
 .chart-note b { color: var(--c-ink); font-weight: 600; }
 
+/* per-report source list — collapsed by default so it never competes with the case */
+.card-sources { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--c-line); }
+.card-sources > summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 7px;
+  color: var(--c-mut); font: 700 0.6rem/1 var(--f-body); letter-spacing: 0.09em; text-transform: uppercase;
+}
+.card-sources > summary::-webkit-details-marker { display: none; }
+.card-sources > summary::after { content: "+"; font-size: 0.85rem; font-weight: 600; line-height: 1; }
+.card-sources[open] > summary::after { content: "–"; }
+.card-sources > summary:hover { color: var(--c-ink); }
+.card-sources ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.card-sources li {
+  position: relative; padding-left: 15px; color: var(--c-mut);
+  font-size: 0.66rem; line-height: 1.55; overflow-wrap: anywhere;
+}
+.card-sources li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 1px; background: currentColor; opacity: 0.55; }
+.card-sources li.src-gap { margin-top: 5px; padding-top: 11px; border-top: 1px dashed var(--c-line); }
+.card-sources li.src-gap::before { display: none; }
+.card-sources a { color: inherit; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.card-sources a:hover { color: var(--c-ink); }
+.card-sources b { color: var(--c-ink); font-weight: 600; }
+
 /* horizontal bar rows — one shared grid so every row uses the same scale */
 .bar-rows {
   display: grid; grid-template-columns: minmax(140px, 240px) minmax(0, 1fr) max-content;
