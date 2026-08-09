@@ -14,7 +14,8 @@ Most EGX coverage is a price chart with an opinion attached. This series asks on
 company and answers it the same way every time: **if you had to own this business, would you?**
 
 The verdict is about the *stock at today's price*, not about whether the people running it are good
-at their jobs. A fine company at an absurd price is Trash. A dull company at a cheap price can be Cash.
+at their jobs. A fine company at an absurd price is not Cash — at best it is **Recyclable**, and if the
+price is absurd enough it is Trash. A dull company at a cheap price can be Cash.
 
 ## The six pillars
 
@@ -72,8 +73,16 @@ whether the company answers the exchange promptly when asked.
 |---:|---|---|
 | **+20 and above** | 💰 **CASH** | Worth researching further as an investment |
 | **+5 to +19** | 🪙 **LOOSE CHANGE** | Something real here, but the price or the risk is in the way |
-| **−29 to +4** | 🗑️ **TRASH** | Not an investment at this price |
+| **−9 to +4** | ♻️ **RECYCLABLE** | A real business at the wrong price. Nothing structurally broken — come back when the price moves |
+| **−29 to −10** | 🗑️ **TRASH** | Not an investment at this price |
 | **−30 and below** | ☠️ **TOXIC** | Structural problems beyond valuation |
+
+**Why Recyclable exists.** The first version of this framework had one band from −29 to +4, which put a
+company whose only fault was its price in the same bin as one carrying a regulator finding and a
+non-recurring earnings base. Those are not the same object. **Trash is thrown away; recyclable material
+gets used again** — the business is sound and the entry is waiting on a number, usually the price. It is
+still **not a buy**, and it is still on the negative side of the board. It is the band you re-read first
+when the market falls.
 
 ## Flags (badges, not scores)
 
@@ -167,67 +176,6 @@ Full file: `outputs/kwin_entad_assiut_equity_network_dossier_2026-07-25.md`
 - Not established and recorded as such: the 26 January 2021 agreements and the settlement trail
 
 ### 🗑️ TRASH
-
-**CIRA — Cairo for Investment and Real Estate Development · score −1 · 3 Aug 2026** *(rev. 4 Aug, primary filings)*
-Flags: ⚠️ THIN FLOAT *(borderline — 11.30%)* · 🔒 CAN'T EXIT *(conditional)*
-
-*The best business this series has examined. Still not a buy at EGP 36.80.*
-
-Those two statements are not in conflict. The framework scores **a security at a price**, not a company
-in the abstract. At −1 it sits in the upper part of the Trash band, **6 points below the Loose Change
-line at +5** — not adjacent to it. An earlier version of this entry said −4 was "one point below Loose
-Change"; that was simply wrong arithmetic and is corrected here.
-
-| Pillar | Score | Basis |
-|---|---:|---|
-| Valuation | −3 | 21.3× TTM attributable earnings, 20–26× forward (Q4 is a loss quarter, so the 9M EPS must not be annualised), 8.63× book, 0.93% dividend yield, at the 52-week high after +110% in 4.5 months. **Revised from −5 on 4 Aug.** The original mark leaned on a 4.69% earnings yield against a 19% policy rate — but the whole EGX yields well under the deposit rate, so that comparison scores every Egyptian equity as Trash and says nothing about CIRA. On the evidence that *is* CIRA-specific, it is **cheaper than its direct peer Taaleem (23.5× / 13.8× EV/EBITDA) and cheaper than its sector (25.8×)**, with far better returns (ROE 36.5% vs 13.9%). Expensive enough to need strong growth to justify — but not at the harsh end of the band |
-| Earnings quality | **+5** | The best mark in the series. Historical-cost basis so revaluation gains are impossible; no disposal gains; flagged one-offs **4.4% of PBT**; management's "normalised" profit is **lower** than statutory. Trade receivables **fell 3.1%** while revenue rose 35%, against deferred revenue of **9.0× the receivable** — tuition is collected before it is taught |
-| Growth | **+6** | 9M revenue **+35.5%** decomposes to students **+19.3%** × revenue-per-student **+13.5%** against ~12.7% CPI — real pricing ≈ **+0.5%**, so growth is ~20% real and almost entirely volume. Higher Ed (69% of revenue) took a **+1.0% nominal fee rise = −10.5% in real terms** while adding 10,100 students. Q3 **accelerated** (+44.5% revenue). Docked from +9 because it is not repeatable: seat utilisation is **88%** higher-ed and **93.6%** K-12, faculties grew 0%, and the replacement campus has slipped ~2 years |
-| Balance sheet | −1 | **Revised from −2 on 4 Aug after reading the filing itself** (Arabic 9M consolidated statements to 31 May 2026, note 14). Verified: total borrowings incl. accrued interest **EGP 1,994,361,020** — matching to the pound — and QNB loan (2) does carry a covenant to keep *total liabilities ÷ equity* **≤ 1.2:1**, against an actual **2.63×** (7,976,263,317 ÷ 3,037,865,681), and 4.45× a year earlier. That tension is real and unwaived. **But three aggravating claims did not survive contact with the filing.** The borrowings were **not** all reclassified as current — note 14 splits them **EGP 1,339.8m current / EGP 654.5m non-current**, and the non-current balance *rose* year on year. The Kuwait Finance House covenant is a *different* test — bank loans ÷ equity ≤ 1.5, stated explicitly on a consolidated basis — which CIRA **passes at 0.66×**. And no breach declaration appears anywhere in four pages of the loans note. Against the covenant tension: net debt **1.24× EBITDA**, interest cover 3.2×, no default, no going-concern language, instalments current |
-| Tradability | −4 | Filed float **11.30%** (Article 30, 31 May 2026) — the vendor figure held this time. Free-float cap ~EGP 2.43bn is genuinely dealable, ~EGP 52m/day traded, EGP 10m exits in under a session. But Social Impact Capital holds **88.68%**, 1.3pp from 90%; CIRA is in **no EGX index**, having been dropped from the EGX70 EWI after the tender offer gutted the float; and current liquidity is rally-dependent |
-| Governance | −4 | EGP 5,000 EGX penalty (22 Apr 2026, Art. 46) for missing the quarterly financials — *the same decision fined listed subsidiary CAED for the identical failure*, making it a group control weakness. Filing lags of 57/54/50 days. **Two exchange-imposed trading suspensions in 19 months**, both from CIRA's own filing failures. Its flagship investor deck of 20 July 2026 misstates its own ownership (an old pre-tender chart copied forward), contradicting note 1 of the statements filed the same day |
-
-**The Q4 trap.** Do **not** annualise the 9M EPS of EGP 2.13. CIRA's fourth quarter (June–August) books
-~9.5 months of revenue against 12 months of cost and is structurally loss-making — Q4 adjusted net profit
-was −EGP 331.3m in FY23/24 and −EGP 333.5m in FY24/25. Naive annualisation manufactures a flattering 13×.
-Realistic FY25/26 EPS is ~EGP 1.43–1.86, i.e. **20–26× forward**.
-
-**The buildings are not on the balance sheet.** Over nine months PP&E rose EGP 96.4m, work in progress was
-**unchanged to the pound**, and investment in associates rose EGP 251.7m. The campuses are being built inside
-JVs — Al Ahly CIRA, Cairo Egypt for Education with Elsewedy Capital, Egyptian Alliance for Education with
-NBE. Capex is disclosed nowhere, and CIRA's economic share of the new seats is not established.
-
-**Peer context.** Against Taaleem at EGP 18.50, CIRA is **~9% cheaper on P/E (21.3× vs 23.5×) and ~16%
-cheaper on EV/EBITDA (10.1× vs 12.1×)** despite faster growth. Cheaper than an expensive peer is not cheap,
-but it means the valuation mark is about the absolute price, not about CIRA being the sector's outlier.
-
-**What moved it.** The May leg has a public explanation: 6 May, EGX approved the temporary listing of Egypt
-Education Platform and CIRA rose 9.9% on 8.7× median volume; 10 May, Al Borsa reported a SAR 450m Saudi
-expansion. A sector re-rating on visible catalysts — which is precisely the problem for a buyer arriving now.
-
-**What would flip it.** **Price alone: EGP 20–22** moves valuation from −5 to +3/+4 and the total into Loose
-Change with nothing else changing. At today's price it needs a filed covenant waiver *plus* a funded,
-dated capacity pipeline *plus* a governance clean-up.
-
-**Practical price map** *(from the independent review addendum, and softer than the framework by design —
-the framework demands a margin of safety, the map describes a live decision)*:
-above 37 don't chase · 32–35 fair-value/hold · 28–31 staged accumulation for a 3–5 year holder ·
-23–27 attractive risk/reward · **20–22 strong margin of safety.**
-
-Full files: `outputs/cira_research_dossier_2026-08-03.md`,
-`outputs/cira_independent_investment_review_2026-08-03.md`, `outputs/cira_adjudication_2026-08-03.txt`
-
-**Sources**
-- CIRA Arabic 9M consolidated financial statements to 31 May 2026 — **note 14** (borrowings EGP 1,994,361,020; the QNB total-liabilities/equity ≤1.2:1 covenant; the Kuwait Finance House bank-loans/equity ≤1.5 test, passed at 0.66×; the split of EGP 1,339.8m current / EGP 654.5m non-current) and note 1 (ownership)
-- Free float **11.30%** — company Article 30 disclosure, 31 May 2026 (vendor said 11.32%; corroborated)
-- MCDR custody data — 275,357,825 shares (47.24% of capital) classified frozen; explained by the pledge disclosed in note 14, including *«رهن كامل أسهم شركة الأهلي سيرا للخدمات التعليمية لصالح البنك»*
-- EGX listing-committee decision, 22 April 2026 — EGP 5,000 penalty under Article 46, the same decision also fining listed subsidiary CAED for the identical failure
-- The two exchange-imposed trading suspensions in 19 months, both arising from CIRA's own filing failures
-- CIRA investor presentation, 20 July 2026 — the ownership chart that contradicts note 1 of the statements filed the same day
-- Peer marks from Taaleem (TALM) published financials
-- Egyptian delisting and squeeze-out mechanics: Listing Rules on the 90% proration threshold, the 75% EGM plus majority-of-minorities requirement for voluntary delisting, and the dissenting-shareholder price defined as the **higher** of the preceding month's high or the three-month average close
-- Full dossier: `outputs/cira_research_dossier_2026-08-03.md`; price history `outputs/cira_price_history_2026-08-03.json`
-- **Not established, and recorded as such:** capex on the new JV seats, and CIRA's economic share of them
 
 **AMES — Alexandria New Medical Center · score −17 · 31 Jul 2026** *(rev. 1 Aug)*
 Flags: ⚠️ THIN FLOAT · 🔒 CAN'T EXIT · 🚩 GOVERNANCE
@@ -402,9 +350,84 @@ Full file: `outputs/` (BIOC forensic work, July 2026)
 - Daily OHLC, volume and float-turnover arithmetic — exchange feed
 - Weekly forensic scan context: `outputs/egx_weekly_gainers_forensic_2026-07-24.md`
 
+### ♻️ RECYCLABLE
+
+**CIRA — Cairo for Investment and Real Estate Development · score −1 · 3 Aug 2026** *(rev. 4 Aug, primary filings; band revised 8 Aug)*
+Flags: ⚠️ THIN FLOAT *(borderline — 11.30%)* · 🔒 CAN'T EXIT *(conditional)*
+
+*The best business this series has examined. Still not a buy at EGP 36.80.*
+
+Those two statements are not in conflict. The framework scores **a security at a price**, not a company
+in the abstract. **Reclassified from Trash to Recyclable on 8 August**, when the band was added — the
+score did not change, the shelf did. CIRA is the case that made the old band untenable: a company with
+the best earnings-quality mark in the series (+5) was sitting in the same bin as a company whose
+regulator could not find its head office. Nothing here is structurally broken. The price is the problem,
+and prices move.
+
+At −1 it sits in the upper part of the Recyclable band, **6 points below the Loose Change line at +5** —
+not adjacent to it. An earlier version of this entry said −4 was "one point below Loose Change"; that
+was simply wrong arithmetic and is corrected here.
+
+| Pillar | Score | Basis |
+|---|---:|---|
+| Valuation | −3 | 21.3× TTM attributable earnings, 20–26× forward (Q4 is a loss quarter, so the 9M EPS must not be annualised), 8.63× book, 0.93% dividend yield, at the 52-week high after +110% in 4.5 months. **Revised from −5 on 4 Aug.** The original mark leaned on a 4.69% earnings yield against a 19% policy rate — but the whole EGX yields well under the deposit rate, so that comparison scores every Egyptian equity as Trash and says nothing about CIRA. On the evidence that *is* CIRA-specific, it is **cheaper than its direct peer Taaleem (23.5× / 13.8× EV/EBITDA) and cheaper than its sector (25.8×)**, with far better returns (ROE 36.5% vs 13.9%). Expensive enough to need strong growth to justify — but not at the harsh end of the band |
+| Earnings quality | **+5** | The best mark in the series. Historical-cost basis so revaluation gains are impossible; no disposal gains; flagged one-offs **4.4% of PBT**; management's "normalised" profit is **lower** than statutory. Trade receivables **fell 3.1%** while revenue rose 35%, against deferred revenue of **9.0× the receivable** — tuition is collected before it is taught |
+| Growth | **+6** | 9M revenue **+35.5%** decomposes to students **+19.3%** × revenue-per-student **+13.5%** against ~12.7% CPI — real pricing ≈ **+0.5%**, so growth is ~20% real and almost entirely volume. Higher Ed (69% of revenue) took a **+1.0% nominal fee rise = −10.5% in real terms** while adding 10,100 students. Q3 **accelerated** (+44.5% revenue). Docked from +9 because it is not repeatable: seat utilisation is **88%** higher-ed and **93.6%** K-12, faculties grew 0%, and the replacement campus has slipped ~2 years |
+| Balance sheet | −1 | **Revised from −2 on 4 Aug after reading the filing itself** (Arabic 9M consolidated statements to 31 May 2026, note 14). Verified: total borrowings incl. accrued interest **EGP 1,994,361,020** — matching to the pound — and QNB loan (2) does carry a covenant to keep *total liabilities ÷ equity* **≤ 1.2:1**, against an actual **2.63×** (7,976,263,317 ÷ 3,037,865,681), and 4.45× a year earlier. That tension is real and unwaived. **But three aggravating claims did not survive contact with the filing.** The borrowings were **not** all reclassified as current — note 14 splits them **EGP 1,339.8m current / EGP 654.5m non-current**, and the non-current balance *rose* year on year. The Kuwait Finance House covenant is a *different* test — bank loans ÷ equity ≤ 1.5, stated explicitly on a consolidated basis — which CIRA **passes at 0.66×**. And no breach declaration appears anywhere in four pages of the loans note. Against the covenant tension: net debt **1.24× EBITDA**, interest cover 3.2×, no default, no going-concern language, instalments current |
+| Tradability | −4 | Filed float **11.30%** (Article 30, 31 May 2026) — the vendor figure held this time. Free-float cap ~EGP 2.43bn is genuinely dealable, ~EGP 52m/day traded, EGP 10m exits in under a session. But Social Impact Capital holds **88.68%**, 1.3pp from 90%; CIRA is in **no EGX index**, having been dropped from the EGX70 EWI after the tender offer gutted the float; and current liquidity is rally-dependent |
+| Governance | −4 | EGP 5,000 EGX penalty (22 Apr 2026, Art. 46) for missing the quarterly financials — *the same decision fined listed subsidiary CAED for the identical failure*, making it a group control weakness. Filing lags of 57/54/50 days. **Two exchange-imposed trading suspensions in 19 months**, both from CIRA's own filing failures. Its flagship investor deck of 20 July 2026 misstates its own ownership (an old pre-tender chart copied forward), contradicting note 1 of the statements filed the same day |
+
+**The Q4 trap.** Do **not** annualise the 9M EPS of EGP 2.13. CIRA's fourth quarter (June–August) books
+~9.5 months of revenue against 12 months of cost and is structurally loss-making — Q4 adjusted net profit
+was −EGP 331.3m in FY23/24 and −EGP 333.5m in FY24/25. Naive annualisation manufactures a flattering 13×.
+Realistic FY25/26 EPS is ~EGP 1.43–1.86, i.e. **20–26× forward**.
+
+**The buildings are not on the balance sheet.** Over nine months PP&E rose EGP 96.4m, work in progress was
+**unchanged to the pound**, and investment in associates rose EGP 251.7m. The campuses are being built inside
+JVs — Al Ahly CIRA, Cairo Egypt for Education with Elsewedy Capital, Egyptian Alliance for Education with
+NBE. Capex is disclosed nowhere, and CIRA's economic share of the new seats is not established.
+
+**Peer context.** Against Taaleem at EGP 18.50, CIRA is **~9% cheaper on P/E (21.3× vs 23.5×) and ~16%
+cheaper on EV/EBITDA (10.1× vs 12.1×)** despite faster growth. Cheaper than an expensive peer is not cheap,
+but it means the valuation mark is about the absolute price, not about CIRA being the sector's outlier.
+
+**What moved it.** The May leg has a public explanation: 6 May, EGX approved the temporary listing of Egypt
+Education Platform and CIRA rose 9.9% on 8.7× median volume; 10 May, Al Borsa reported a SAR 450m Saudi
+expansion. A sector re-rating on visible catalysts — which is precisely the problem for a buyer arriving now.
+
+**What would flip it.** **Price alone: EGP 20–22** moves valuation from −5 to +3/+4 and the total into Loose
+Change with nothing else changing. At today's price it needs a filed covenant waiver *plus* a funded,
+dated capacity pipeline *plus* a governance clean-up.
+
+**Practical price map** *(from the independent review addendum, and softer than the framework by design —
+the framework demands a margin of safety, the map describes a live decision)*:
+above 37 don't chase · 32–35 fair-value/hold · 28–31 staged accumulation for a 3–5 year holder ·
+23–27 attractive risk/reward · **20–22 strong margin of safety.**
+
+Full files: `outputs/cira_research_dossier_2026-08-03.md`,
+`outputs/cira_independent_investment_review_2026-08-03.md`, `outputs/cira_adjudication_2026-08-03.txt`
+
+**Sources**
+- CIRA Arabic 9M consolidated financial statements to 31 May 2026 — **note 14** (borrowings EGP 1,994,361,020; the QNB total-liabilities/equity ≤1.2:1 covenant; the Kuwait Finance House bank-loans/equity ≤1.5 test, passed at 0.66×; the split of EGP 1,339.8m current / EGP 654.5m non-current) and note 1 (ownership)
+- Free float **11.30%** — company Article 30 disclosure, 31 May 2026 (vendor said 11.32%; corroborated)
+- MCDR custody data — 275,357,825 shares (47.24% of capital) classified frozen; explained by the pledge disclosed in note 14, including *«رهن كامل أسهم شركة الأهلي سيرا للخدمات التعليمية لصالح البنك»*
+- EGX listing-committee decision, 22 April 2026 — EGP 5,000 penalty under Article 46, the same decision also fining listed subsidiary CAED for the identical failure
+- The two exchange-imposed trading suspensions in 19 months, both arising from CIRA's own filing failures
+- CIRA investor presentation, 20 July 2026 — the ownership chart that contradicts note 1 of the statements filed the same day
+- Peer marks from Taaleem (TALM) published financials
+- Egyptian delisting and squeeze-out mechanics: Listing Rules on the 90% proration threshold, the 75% EGM plus majority-of-minorities requirement for voluntary delisting, and the dissenting-shareholder price defined as the **higher** of the preceding month's high or the three-month average close
+- Full dossier: `outputs/cira_research_dossier_2026-08-03.md`; price history `outputs/cira_price_history_2026-08-03.json`
+- **Not established, and recorded as such:** capex on the new JV seats, and CIRA's economic share of them
+
 ## Progress
 
-**6 of ~224 scored.**
+**6 of ~224 scored.** 💰 Cash 0 · 🪙 Loose change 0 · ♻️ Recyclable 1 · 🗑️ Trash 3 · ☠️ Toxic 2.
+
+**Band change, 8 August 2026 — recorded because the rules require it.** ♻️ **RECYCLABLE** was added
+between Loose Change and Trash, and Trash was narrowed from −29..+4 to **−29..−10**. **No score changed.**
+The only entry that moved shelf is **CIRA at −1**, from Trash to Recyclable. AMES (−17), NCCW (−20) and
+BIOC (−25) all sit at −10 or below and stay Trash; KWIN and DGTZ are unaffected. If a future rescore
+pushes something across the new line, that reclassification gets its own dated note, same as this one.
 
 ### A recurring lesson from the first six
 

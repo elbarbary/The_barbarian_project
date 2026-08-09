@@ -1466,6 +1466,7 @@ body::before {
 .dossier-cover li i { flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; }
 .fact-dot { background: #cde84a; }
 .event-dot { background: #22d3ee; }
+.recycle-dot { background: #4fd39c; }
 .question-dot { background: #ffb45f; }
 .hypothesis-dot { background: #f083b3; }
 .dossier-cover > small { position: relative; z-index: 1; display: block; margin-top: 30px; color: rgba(245,242,255,0.34); font-size: 0.61rem; line-height: 1.5; }
@@ -1711,6 +1712,7 @@ body::before {
 .cot-board em { font-size: 0.7rem !important; }
 .cot-board .v-toxic { color: #f0a868; }
 .cot-board .v-trash { color: #f6a8c9; }
+.cot-board .v-recycle { color: #8ee0b6; }
 .cot-board strong { color: #f5f2ff; }
 
 /* ─── cash or trash ──────────────────────────────────────────── */
@@ -1724,7 +1726,7 @@ body::before {
 .pillar-grid p { margin-top: 12px; color: rgba(245,242,255,0.56); font-size: 0.76rem; line-height: 1.6; }
 .pillar-grid b { color: #f5f2ff; font-weight: 600; }
 
-.band-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.band-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .band {
   padding: 26px 24px; border-radius: var(--r-md);
   background: var(--glass-strong); border: 1px solid var(--glass-border); box-shadow: var(--shadow);
@@ -1734,6 +1736,7 @@ body::before {
 .band p { margin-top: 14px; color: var(--ink-50); font-size: 0.76rem; line-height: 1.55; }
 .band-cash  { border-color: rgba(94,116,18,0.4);  background: linear-gradient(rgba(205,232,74,0.14), transparent), var(--glass-strong); }
 .band-mid   { border-color: rgba(21,144,171,0.32); }
+.band-recycle { border-color: rgba(16,138,92,0.34); background: linear-gradient(rgba(16,138,92,0.10), transparent), var(--glass-strong); }
 .band-trash { border-color: rgba(194,24,91,0.28); }
 .band-toxic { border-color: rgba(34,27,61,0.4); background: linear-gradient(rgba(34,27,61,0.08), transparent), var(--glass-strong); }
 
@@ -1818,6 +1821,7 @@ body::before {
 .verdict { display: inline-block; padding: 7px 14px; border-radius: 999px; font: 700 0.7rem var(--f-body); letter-spacing: 0.04em; }
 .verdict-toxic { background: rgba(34,27,61,0.9); color: #f5f2ff; }
 .verdict-trash { background: rgba(194,24,91,0.14); color: #a8154e; border: 1px solid rgba(194,24,91,0.3); }
+.verdict-recycle { background: rgba(16,138,92,0.14); color: #0c6e49; border: 1px solid rgba(16,138,92,0.34); }
 .verdict-cash  { background: rgba(205,232,74,0.28); color: #4d600e; }
 .score-total { text-align: right; }
 .score-total b { display: block; font: 800 clamp(2.4rem,5vw,3.4rem)/1 var(--f-display); letter-spacing: -0.05em; color: var(--ink); }
@@ -1891,6 +1895,9 @@ body::before {
 .rule-list li { color: rgba(245,242,255,0.6); font-size: 0.84rem; line-height: 1.6; }
 .rule-list b { color: #f5f2ff; font-weight: 700; }
 
+@media (max-width: 1180px) {
+  .band-row { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 900px) {
   .pillar-grid, .band-row { grid-template-columns: 1fr 1fr; }
 }
