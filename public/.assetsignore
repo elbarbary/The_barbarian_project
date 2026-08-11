@@ -1,0 +1,7 @@
+.assetsignore
+.wrangler
+**/.wrangler
+wrangler.jsonc
+**/.DS_Store
+**/.git
+**/node_modules
