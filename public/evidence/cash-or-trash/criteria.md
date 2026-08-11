@@ -419,9 +419,80 @@ Full files: `outputs/cira_research_dossier_2026-08-03.md`,
 - Full dossier: `outputs/cira_research_dossier_2026-08-03.md`; price history `outputs/cira_price_history_2026-08-03.json`
 - **Not established, and recorded as such:** capex on the new JV seats, and CIRA's economic share of them
 
+### 💰 CASH
+
+**MCQE — Misr Cement Qena · score +20 · 11 Aug 2026**
+Flags: ⚠️ THIN FLOAT · 🔒 LIMIT-PRICE / EXIT RISK · ❗ DATA-VENDOR MISMATCH
+
+*The first stock in the series to clear Cash — by one point, and not as a short-term chase after +20%.*
+
+The price is timestamped: **EGP 243.60 at 11:16:02 AM Cairo, a delayed intraday quote rather than the
+closing price.** At 96m shares that is EGP 23.386bn of market value. Reconstructing profit attributable to
+MCQE owners from the primary consolidated statements gives TTM profit of **EGP 2.600bn** and EPS of
+**EGP 27.09**, so P/E is **8.99×**, not the stale vendor figure. Parent book equity was EGP 3.578bn, so P/B
+is 6.54×. Approximate net cash is EGP 1.52bn.
+
+| Pillar | Score | Basis |
+|---|---:|---|
+| Valuation | **+2** | 8.99× TTM owner earnings and roughly 5.3× EV/EBITDA are reasonable absolutely, but above ARCC/MBSC/SCEM after the +20% move; P/B 6.54× |
+| Earnings quality | **+5** | Profit is operating; net other income was only EGP 20.7m. FY2025 CFO EGP 3.054bn versus EGP 2.558bn total profit. H1 CFO fell 52.4% as inventory, debtors and EGP 765.6m tax absorbed cash, preventing a higher score |
+| Growth | **+7** | H1 revenue **+27.3%**, owner-attributable profit **+94.5%**, gross margin **32.6% → 40.8%**. Q2 owner profit remained +43.5% YoY but fell about 19.9% sequentially, so acceleration is not unlimited |
+| Balance sheet | **+8** | Approx. EGP 1.52bn net cash, 1.69× current ratio, EGP 238m bank facilities, unmodified limited review |
+| Tradability | **−6** | The signed H1 note leaves only **8.39% / 8,062,054 shares** under “other shareholders”. EGP 14m normal and EGP 64m confirmation-session value are workable for small positions, but the 20% limit shows how quickly the exit can disappear |
+| Governance | **+4** | Timely H1 filing, unmodified review, named ownership and disclosed related parties; no current enforcement finding located. Deduction for inconsistent IR/vendor ownership data and extreme strategic-holder concentration |
+
+**The earnings are real.** H1 revenue was EGP 4.939bn versus EGP 3.878bn. Gross profit was EGP 2.016bn
+versus EGP 1.265bn. Total group profit rose 82.4% to EGP 1.430bn, but the correct figure for MCQE owners is
+**EGP 1.166896bn**, +94.5%, because EGP 263.237m belongs to minorities. The manufacturing note supplies the
+most interesting bridge: sales rose 27.3%, while electricity and power cost **fell 4.3%**, from EGP 1.523bn
+to EGP 1.457bn — **39.3% of sales became 29.5%**. This does not prove one energy project caused the saving,
+but it does prove the margin improvement is inside cost of sales rather than a property disposal.
+
+**The float correction changes the story.** The monitor originally printed an estimated **18.66%** free
+float and one vendor now shows 42.73m shares. The signed H1 ownership note names eight holders with
+**91.61%**, leaving only **8.39%** under other shareholders. The 439,328 shares traded by the 11:16 quote
+were about **5.45% of that entire pool**. The original opportunity score remains preserved at 9/13;
+re-running the information set with the official float produces roughly 8/13 and smaller sizing, but still
+qualifies a small model position after EGP 64.47m traded on 10 August.
+
+**The scanner did not fail to confirm it.** The 6 August post-filing session had heavy volume but only 15.8%
+close strength after touching EGP 200, so rejection was correct. On 10 August MCQE closed EGP 203 with RV20
+3.92×, 85.7% close strength and EGP 64.47m traded value, completing the saved package. It opened 11 August
+at EGP 203, inside the EGP 205 cap. The portfolio workflow waited for later depth instead of booking the
+verified opening print. That is permanently recorded as a **timing/execution miss**, with no backdated P&L.
+The saved EGP 215.20 / 221.30 targets would ordinarily have forced an exit before EGP 243.60; do not pretend
+the model would automatically have captured the full limit-up.
+
+**Two strategic accumulation tracks had already removed supply.** Mohamed Ashraf Omar bought 9.6m shares
+from Ahly Capital at EGP 23.25 on 27 March 2025 for EGP 223.2m, later crossing 15.023% and reaching 17.99%.
+That original block is marked at EGP 2.339bn at the intraday price, about EGP 2.115bn above cost if retained.
+MBSC bought 9.966m shares at EGP 30.089 on 22 May 2025 for EGP 299.870m and later reached 12.99%. It explored
+buying up to 33%, but rejected the Competition Authority's conditional undertakings and the application was
+shelved; no current approval or renewed deal is established. These facts explain scarce supply. They do not
+prove either holder caused the 11 August move or possessed non-public information.
+
+**What would flip it down:** H2 margin normalisation, another period of weak cash conversion, or a rise above
+roughly EGP 270–300 without a matching earnings upgrade. **What would strengthen it:** high-30s gross margin
+holding, working-capital cash reversing and the filed other-shareholder pool rising above 10%.
+
+Full file: `outputs/mcqe_research_dossier_2026-08-11.md`
+
+**Sources**
+- MCQE H1 2026 consolidated statements, pages 4–5, 8, 24 and 27 — [company PDF](https://misrcementgroup.com/wp-content/uploads/2026/08/Misr-Cement-Group-IR-Downloads-Financial-Statements-June-2026-Consolidated-English.pdf)
+- MCQE FY2025 consolidated statements — [company PDF](https://misrcementgroup.com/wp-content/uploads/2026/03/Misr-Cement-Group-IR-Downloads-Financial-Statements-December-2025-Consolidated-English.pdf)
+- H1 announcement and delayed intraday quote — [Mubasher](https://www.mubasher.info/markets/EGX/stocks/MCQE/news)
+- Alternative-fuel and IPP plan, 24 June 2026 — [Mubasher news/4631572](https://www.mubasher.info/news/4631572/)
+- Mohamed Ashraf Omar's EGP 223.2m block — [Hapi, 27 March 2025](https://hapijournal.com/2025/03/27/%D8%A7%D9%84%D8%A3%D9%87%D9%84%D9%8A-%D9%83%D8%A7%D8%A8%D9%8A%D8%AA%D8%A7%D9%84-%D8%AA%D9%82%D9%84%D8%B5-%D8%AD%D8%B5%D8%AA%D9%87%D8%A7-%D9%81%D9%8A-%D9%85%D8%B5%D8%B1-%D9%84%D9%84%D8%A3%D8%B3%D9%85/)
+- His 295,000-share Article 29 purchase — [Hapi, 4 June 2025](https://hapijournal.com/2025/06/04/%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3-%D8%A7%D9%84%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A-%D9%84%D8%B4%D8%B1%D9%83%D8%A9-%D9%83%D9%88%D9%86%D9%83%D9%88%D8%B1%D8%AF-%D9%84%D9%84%D8%AA%D9%86%D9%85%D9%8A/)
+- MBSC's 9.966m-share purchase — [Hapi, 22 May 2025](https://hapijournal.com/2025/05/22/%D9%85%D8%B5%D8%B1-%D8%A8%D9%86%D9%8A-%D8%B3%D9%88%D9%8A%D9%81-%D9%84%D9%84%D8%A3%D8%B3%D9%85%D9%86%D8%AA-%D8%AA%D8%B1%D9%81%D8%B9-%D8%AD%D8%B5%D8%AA%D9%87%D8%A7-%D9%81%D9%8A-%D9%85%D8%B5%D8%B1-%D9%84/)
+- MBSC's explanation of the shelved 33% application — [Mubasher news/4491423](https://www.mubasher.info/news/4491423/)
+- Daily OHLC and volume through 10 August — [StockAnalysis history](https://stockanalysis.com/quote/egx/MCQE/history/)
+- Peer comparison screens — [ARCC](https://stockanalysis.com/quote/egx/ARCC/statistics/), [MBSC](https://stockanalysis.com/quote/egx/MBSC/statistics/), [SCEM](https://stockanalysis.com/quote/egx/SCEM/statistics/)
+- **Not established:** identity of 11 August ordinary-market buyers; manipulation or inside information; a revived/approved 33% MBSC transaction; full Mohamed Ashraf Omar cost basis; exact savings from the energy programme
+
 ## Progress
 
-**6 of ~224 scored.** 💰 Cash 0 · 🪙 Loose change 0 · ♻️ Recyclable 1 · 🗑️ Trash 3 · ☠️ Toxic 2.
+**7 of ~224 scored.** 💰 Cash 1 · 🪙 Loose change 0 · ♻️ Recyclable 1 · 🗑️ Trash 3 · ☠️ Toxic 2.
 
 **Band change, 8 August 2026 — recorded because the rules require it.** ♻️ **RECYCLABLE** was added
 between Loose Change and Trash, and Trash was narrowed from −29..+4 to **−29..−10**. **No score changed.**
@@ -429,7 +500,7 @@ The only entry that moved shelf is **CIRA at −1**, from Trash to Recyclable. A
 BIOC (−25) all sit at −10 or below and stay Trash; KWIN and DGTZ are unaffected. If a future rescore
 pushes something across the new line, that reclassification gets its own dated note, same as this one.
 
-### A recurring lesson from the first six
+### A recurring lesson from the first seven
 
 The first three are thin-float names, and in every case the *vendor* float number was wrong or misleading.
 TradingView reported AMES at **27.22%** free float; the company's own filing says **3.90961%** — off by
@@ -468,6 +539,13 @@ delisting rules, and I generalised it into something it never said.
 primary-sourced.)*
 
 **CIRA inverts the lesson without repealing it.** Its vendor float of 11.32% was *corroborated* by the Article 30 filing at 11.30%. The rule is not "vendors are always wrong" — it is "never rely on a vendor without checking". Checking is cheap; the AMES error was 7× and inverted the conclusion.
+
+**MCQE proves the error can survive inside the scanner.** The daily monitor carried an estimated 18.66%
+float and another public vendor showed 42.73m shares. The signed H1 note showed only **8.39% / 8.062m other
+shares**. The earnings catalyst was still valid and EGP 64.47m of confirmation-session value made a small
+model entry workable, but the wrong float underpriced limit risk, inflated the historical opportunity score
+by roughly one point and hid the cleanest explanation for the +20% move. Standing rule strengthened:
+**primary ownership verification happens before qualification, not during the later Cash or Trash audit.**
 
 ### Two method rules earned the hard way (added 1 Aug 2026)
 

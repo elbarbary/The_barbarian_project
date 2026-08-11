@@ -1812,6 +1812,7 @@ body::before {
 
 .score-card {
   margin-top: 26px; padding: clamp(24px, 3.4vw, 40px);
+  scroll-margin-top: 9rem;
   background: var(--glass-strong); border: 1px solid var(--glass-border);
   border-radius: var(--r-lg); box-shadow: var(--shadow);
 }
