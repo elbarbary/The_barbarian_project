@@ -1175,6 +1175,22 @@ body::before {
 }
 .signal-board-head h3 span { color: var(--blue); font-family: var(--f-serif); font-style: italic; font-weight: 400; }
 .signal-board-head > p { color: var(--ink-50); font-size: 0.78rem; line-height: 1.55; }
+.signal-glossary {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(22px, 5vw, 56px);
+  margin: 0 0 22px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(34,27,61,0.1);
+  border-bottom: 1px solid rgba(34,27,61,0.1);
+}
+.signal-glossary h4 { margin-top: 6px; color: var(--ink); font: 750 1.12rem/1.1 var(--f-display); letter-spacing: -0.025em; }
+.signal-glossary > div > p:last-child { margin-top: 9px; color: var(--ink-50); font-size: 0.68rem; line-height: 1.5; }
+.signal-glossary dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+.signal-glossary dl > div { padding: 10px 0; border-top: 1px solid rgba(34,27,61,0.08); }
+.signal-glossary dt { color: var(--ink); font: 750 0.7rem/1.35 var(--f-display); }
+.signal-glossary dt span { color: var(--ink-50); font-size: 0.61rem; font-weight: 650; }
+.signal-glossary dd { margin-top: 4px; color: var(--ink-50); font-size: 0.66rem; line-height: 1.5; }
 .signal-stack {
   overflow: hidden;
   border: 1px solid rgba(34,27,61,0.1);
@@ -1242,6 +1258,21 @@ body::before {
 .signal-levels dd,
 .sector-member-grid dd { margin-top: 6px; color: var(--ink); font-size: 0.69rem; font-weight: 600; line-height: 1.48; }
 .signal-levels .signal-level-stop { background: rgba(255,239,243,0.9); }
+.entry-checklist { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; counter-reset: entry-step; }
+.entry-checklist li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 7px; align-items: start; counter-increment: entry-step; }
+.entry-checklist li::before {
+  content: counter(entry-step);
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  color: #3d490b;
+  border-radius: 50%;
+  background: rgba(205,232,74,0.5);
+  font: 750 0.54rem/1 var(--f-display);
+}
+.entry-checklist-note { margin-top: 10px; padding-top: 9px; border-top: 1px solid rgba(34,27,61,0.08); color: var(--ink-50); font-size: 0.64rem; font-weight: 550; }
 .signal-gates {
   display: flex;
   flex-wrap: wrap;
@@ -1267,6 +1298,15 @@ body::before {
 .signal-research[open] summary::after { content: '−'; }
 .signal-research > div { padding: 8px 0 4px; color: var(--ink-50); font-size: 0.73rem; line-height: 1.62; }
 .signal-research > div p + p { margin-top: 12px; }
+.research-walkthrough > section { display: grid; grid-template-columns: minmax(140px, 0.35fr) minmax(0, 1.65fr); gap: 22px; padding: 17px 0; border-top: 1px solid rgba(34,27,61,0.08); }
+.research-walkthrough > section:first-child { border-top: 0; }
+.research-walkthrough h5 { color: var(--ink); font: 750 0.77rem/1.35 var(--f-display); }
+.research-walkthrough section > p { color: var(--ink-50); font-size: 0.72rem; line-height: 1.62; }
+.calculation-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px 18px; }
+.calculation-list > div { padding: 8px 0; border-top: 1px solid rgba(34,27,61,0.07); }
+.calculation-list > div:nth-child(-n+2) { border-top: 0; }
+.calculation-list dt { color: var(--ink-50); font: 700 0.58rem/1.35 var(--f-display); letter-spacing: 0.04em; text-transform: uppercase; }
+.calculation-list dd { margin-top: 4px; color: var(--ink); font-size: 0.66rem; font-weight: 600; line-height: 1.5; }
 .signal-sources { display: flex; flex-wrap: wrap; gap: 9px; }
 .signal-sources .insight-source { margin-top: 14px; }
 
@@ -2541,6 +2581,7 @@ body.has-lightbox { overflow: hidden; }
   .daily-section-title { grid-template-columns: 1fr; gap: 14px; }
   .signal-board-head,
   .sector-context-head { grid-template-columns: 1fr; gap: 16px; }
+  .signal-glossary { grid-template-columns: 1fr; gap: 14px; }
   .sector-stage { justify-self: start; text-align: left; }
   .signal-card-head { grid-template-columns: 34px minmax(0, 1fr); }
   .signal-quote { grid-column: 2; text-align: left; }
@@ -2631,6 +2672,10 @@ body.has-lightbox { overflow: hidden; }
   .signal-action > p { grid-column: 1; }
   .signal-levels,
   .sector-member-grid { grid-template-columns: 1fr; }
+  .signal-glossary dl,
+  .calculation-list { grid-template-columns: 1fr; }
+  .calculation-list > div:nth-child(2) { border-top: 1px solid rgba(34,27,61,0.07); }
+  .research-walkthrough > section { grid-template-columns: 1fr; gap: 6px; }
   .signal-levels,
   .signal-gates,
   .signal-research { margin-left: 0; }
