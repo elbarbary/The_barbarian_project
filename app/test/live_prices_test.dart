@@ -76,6 +76,20 @@ void main() {
       expect(merged, same(published));
     });
 
+    // The directory decides what exists. When the feed briefly stopped
+    // filtering ISIN-keyed rows, ten phantom listings landed in the app's stock
+    // map and were counted in Home's risers and fallers.
+    test('the feed may update a company but never add one', () {
+      final merged = fakeQuotes({
+        'COMI': 139.25,
+        'EGS385S1C012': 4.2,
+      }).mergedOver(published);
+
+      expect(merged.quoteFor('COMI')!.close, 139.25);
+      expect(merged.quoteFor('EGS385S1C012'), isNull);
+      expect(merged.stocks.length, published.stocks.length);
+    });
+
     test('the session date is not overwritten by the live feed', () {
       final merged = fakeQuotes({'COMI': 139.25}).mergedOver(published);
 

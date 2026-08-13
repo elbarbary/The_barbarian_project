@@ -62,10 +62,18 @@ abstract class QuoteSnapshot with _$QuoteSnapshot {
   /// Anything the feed does not carry keeps its published value, so a company
   /// that has dropped off the scanner still shows its last close rather than
   /// vanishing from the list.
+  ///
+  /// The feed may only **update** companies, never add them. The directory
+  /// decides what exists: it drops rows the exchange keys by ISIN rather than
+  /// ticker, and when the feed briefly stopped dropping them too they arrived
+  /// here as ten phantom listings and were counted in Home's risers and
+  /// fallers. Treating the published snapshot as the universe means a change of
+  /// mind upstream cannot invent companies inside the app.
   MarketSnapshot mergedOver(MarketSnapshot published) {
     if (isEmpty) return published;
     final merged = Map<String, StockQuote>.of(published.stocks);
     for (final entry in quotes.entries) {
+      if (!merged.containsKey(entry.key)) continue;
       merged[entry.key] = entry.value.toStockQuote();
     }
     return published.copyWith(stocks: merged);
