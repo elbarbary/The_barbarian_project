@@ -63,6 +63,24 @@ def text(html: str) -> str:
 BANNED = ("hard stop", "exit below", "buyer price", "review session",
           "holding period", "holding horizon")
 
+# Trade mechanics the report writes as a dated clause rather than a phrase, so
+# a literal word list cannot see them. The report's house style is
+#
+#   If confirmed: 3–5 sessions · review 16 August · hard 20 August · exit on …
+#
+# which carries a holding horizon, a review date, a stop date and an exit
+# condition — every one of them forward-looking trade mechanics (spec §8).
+# These survived because the clauses are joined by "·", which the splitter did
+# not break on, and because "review 16 August" matches none of BANNED.
+BANNED_PATTERNS = (
+    re.compile(r"\bif (independently )?confirmed\b", re.I),
+    re.compile(r"\b\d+\s*[–—-]\s*\d+\s+sessions?\b", re.I),
+    re.compile(r"\breview\s+\d", re.I),
+    re.compile(r"\bhard\s+(stop\s+)?\d", re.I),
+    re.compile(r"\bexit\s+(on|below|at|before)\b", re.I),
+    re.compile(r"\bfirst review\b", re.I),
+)
+
 
 def sanitize(note: str | None) -> str | None:
     """Drop sentences that carry forward-looking trade mechanics (spec §8).
@@ -78,17 +96,23 @@ def sanitize(note: str | None) -> str | None:
     if not note:
         return None
     keep = []
-    # Split on sentence ends *and* on em-dashes and semicolons: the report
-    # often appends a stop or a review date as a clause rather than a sentence.
-    for sentence in re.split(r"(?<=[.!?])\s+|\s+—\s+|;\s+", note):
+    # Split on sentence ends *and* on the separators the report uses to append
+    # a stop, a horizon or a review date as a clause: em-dash, semicolon and
+    # the middle dot it strings mechanics together with.
+    for sentence in re.split(r"(?<=[.!?])\s+|\s+—\s+|;\s+|\s*·\s*", note):
         low = sentence.lower()
         if "no holding period" in low or "no entry" in low:
             keep.append(sentence)
             continue
         if any(word in low for word in BANNED):
             continue
+        if any(p.search(sentence) for p in BANNED_PATTERNS):
+            continue
         keep.append(sentence)
     cleaned = " ".join(keep).strip()
+    # A clause dropped mid-sentence can leave a dangling connector.
+    cleaned = re.sub(r"\s+([.,;:])", r"\1", cleaned)
+    cleaned = re.sub(r"[,;:]\s*$", ".", cleaned).strip()
     return cleaned or None
 
 

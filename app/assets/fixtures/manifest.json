@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "data_version": "dd3f552317d9fc17",
-  "generated_at": "2026-08-13T10:43:57+00:00",
+  "data_version": "e917d75ad05c11c2",
+  "generated_at": "2026-08-13T10:50:21+00:00",
   "market_date": "2026-08-13",
   "versions": {
     "market": 64364739,
     "companies": 67212150,
-    "opportunities": 32210323,
+    "opportunities": 67890199,
     "cash_or_trash": 79954636
   }
 }
