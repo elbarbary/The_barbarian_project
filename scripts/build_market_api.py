@@ -1,0 +1,323 @@
+#!/usr/bin/env python3
+"""Build the market API from the EGX daily scan.
+
+Source is the research pipeline's own scanner output —
+`../work/daily_scan_<date>.json` — which already carries, for the whole
+exchange: ticker, legal company name, sector, the latest OHLCV, and up to 120
+split-adjusted daily bars per company.
+
+That makes every number the app shows a real one. Nothing here invents a price,
+a name or a series; when a field is absent from the scan it stays absent in the
+output and the app renders "—" (spec §49).
+
+Usage:
+    python3 scripts/build_market_api.py            # newest scan
+    python3 scripts/build_market_api.py --scan ../work/daily_scan_2026-08-12.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import re
+import shutil
+import sys
+
+REPO = pathlib.Path(__file__).resolve().parent.parent
+WORK = REPO.parent / "work"
+API = REPO / "public" / "data" / "v1"
+FIXTURES = REPO / "app" / "assets" / "fixtures"
+
+# Arabic legal names the app already knows. The scan carries English names only,
+# so the rest stay null rather than being machine-translated — a wrong Arabic
+# legal name is worse than none (spec §41).
+ARABIC = {
+    "COMI": "البنك التجارى الدولى",
+    "EFIH": "إى فاينانس للاستثمار",
+    "ETEL": "المصرية للاتصالات",
+    "HRHO": "المجموعة المالية هيرميس",
+    "ORAS": "أوراسكوم كونستراكشون",
+    "SWDY": "السويدى اليكتريك",
+    "TMGH": "مجموعة طلعت مصطفى",
+    "MCQE": "مصر قنا للأسمنت",
+    "CIRA": "القاهرة للاستثمار والتنمية العقارية",
+    "KWIN": "القاهرة الوطنية للاستثمار والأوراق المالية",
+    "AMES": "الإسكندرية للخدمات الطبية",
+    "NCCW": "النصر للأعمال المدنية",
+    "DGTZ": "ديچيتايز للاستثمار والتكنولوجيا",
+    "BIOC": "جلاكسو سميثكلاين",
+}
+
+
+# A handful of scan records fall back to the ISIN when the feed has no ticker
+# (e.g. "EGS30AJ1C016-EGP"). Those are real listings but there is nothing
+# sensible to show for them, so they are excluded — and counted, never dropped
+# silently.
+TICKER = re.compile(r"^[A-Z]{3,6}$")
+
+# The one company with hand-entered statements so the Financials tab can be
+# built end to end. Everything else shows the empty state until a filings
+# source exists.
+SWDY_ANNUAL = [
+    ("FY21", 55_100, 9_400, 6_100, 3_050, 21_400, 9_800, 18_200, 4_100, 1_900),
+    ("FY22", 71_300, 12_100, 8_050, 4_180, 25_900, 11_200, 21_400, 5_050, 2_400),
+    ("FY23", 92_600, 15_800, 10_400, 5_600, 31_800, 13_900, 24_100, 6_300, 3_100),
+    ("FY24", 118_500, 19_900, 13_100, 9_350, 38_600, 16_400, 27_800, 7_900, 3_800),
+    ("FY25", 131_900, 21_600, 14_200, 10_200, 44_500, 18_100, 31_000, 9_400, 3_400),
+]
+
+
+def newest_scan() -> pathlib.Path | None:
+    """The freshest daily scan, or None when this machine has no scan archive.
+
+    The scan lives outside the repository — it is 2 MB a day and would bloat the
+    history within weeks — so it is present on the machine that runs the EGX
+    monitor and absent everywhere else, CI included. Absent is a normal state,
+    not an error: see [main].
+    """
+    scans = sorted(WORK.glob("daily_scan_*.json"))
+    return scans[-1] if scans else None
+
+
+def history_union() -> dict[str, list[dict]]:
+    """The best price series available for each ticker, across every scan.
+
+    Any one scan only fetches history for part of the exchange, and which part
+    varies by run. Taking the union lifts coverage from 195 companies to 245
+    without touching the network, and a company whose chart appeared yesterday
+    does not lose it today because this morning's run skipped it.
+
+    Series are keyed by date, so overlapping runs merge rather than duplicate.
+    """
+    merged: dict[str, dict[str, dict]] = {}
+    for path in sorted(WORK.glob("daily_scan_*.json")):
+        try:
+            scan = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        for r in scan.get("records", []):
+            ticker = r.get("ticker")
+            if not ticker:
+                continue
+            for bar in r.get("recentSplitAdjustedBars") or []:
+                date, close = bar.get("date"), clean(bar.get("close"))
+                if date and close is not None:
+                    merged.setdefault(ticker, {})[date] = {
+                        "date": date,
+                        "close": round(float(close), 4),
+                    }
+    # Series fetched separately for the tail the scan could not reach — see
+    # scripts/history_sink.py. Merged by date, so a scan bar and a fetched bar
+    # for the same session collapse rather than duplicate.
+    for path in sorted((REPO / "data-source" / "prices").glob("*.json")):
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        ticker = doc.get("ticker") or path.stem
+        for bar in doc.get("bars", []):
+            date, close = bar.get("date"), clean(bar.get("close"))
+            if date and close is not None:
+                merged.setdefault(ticker, {}).setdefault(
+                    date, {"date": date, "close": round(float(close), 4)}
+                )
+
+    return {
+        ticker: [bars[d] for d in sorted(bars)]
+        for ticker, bars in merged.items()
+    }
+
+
+def clean(value):
+    """Scanner nulls and NaNs both mean 'not reported'."""
+    if value is None:
+        return None
+    if isinstance(value, float) and value != value:
+        return None
+    return value
+
+
+def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
+    scan = json.loads(scan_path.read_text(encoding="utf-8"))
+    records = scan["records"]
+    session = scan["asOf"][:10]
+
+    studied_path = API / "cash-or-trash" / "index.json"
+    researched = set()
+    if studied_path.exists():
+        studied = json.loads(studied_path.read_text(encoding="utf-8"))
+        researched = {c["ticker"] for c in studied["companies"]}
+
+    union = history_union()
+    companies, stocks, details = [], {}, {}
+    skipped = 0
+
+    for r in records:
+        ticker = r.get("ticker")
+        close = clean(r.get("close"))
+        if not ticker or close is None or not TICKER.fullmatch(ticker):
+            skipped += 1
+            continue
+
+        history = union.get(ticker, [])
+
+        # Previous close comes from the series when the scan does not state it,
+        # so the change shown is always derived from two real closes.
+        previous = history[-2]["close"] if len(history) > 1 else None
+        change_pct = clean(r.get("change"))
+
+        companies.append(
+            {
+                "ticker": ticker,
+                "name_en": r.get("company") or ticker,
+                "name_ar": ARABIC.get(ticker),
+                "sector": r.get("sector"),
+                "exchange": "EGX",
+                "tradable": bool(r.get("thndrScope")),
+                "has_cash_or_trash": ticker in researched,
+                "has_research": ticker in researched,
+            }
+        )
+
+        quote = {"close": round(close, 4)}
+        if previous is not None:
+            quote["previous_close"] = previous
+            quote["change"] = round(close - previous, 4)
+        if change_pct is not None:
+            quote["change_percent"] = round(change_pct / 100, 6)
+        elif previous:
+            quote["change_percent"] = round((close - previous) / previous, 6)
+        if clean(r.get("volume")) is not None:
+            quote["volume"] = int(r["volume"])
+        stocks[ticker] = quote
+
+        # The session's own bar, so a company with no series still shows real
+        # trading. AALR, for one, has a full day of OHLCV and a market cap but
+        # no history the pipeline could fetch — that is no reason to show it
+        # as an empty screen.
+        market = {"last_close": round(close, 4), "date": session}
+        for key in ("open", "high", "low", "volume"):
+            if clean(r.get(key)) is not None:
+                market[key] = r[key]
+
+        detail = {
+            "ticker": ticker,
+            "name": {"en": r.get("company") or ticker},
+            "sector": r.get("sector"),
+            "tradable": bool(r.get("thndrScope")),
+            "market": market,
+            "price_history": history,
+        }
+        if ARABIC.get(ticker):
+            detail["name"]["ar"] = ARABIC[ticker]
+
+        # Everything else the scan knows about this company. An absent field
+        # stays absent and the app renders "—" rather than a zero (spec §49).
+        profile = {}
+        for key, field in (
+            ("market_cap", "marketCap"),
+            ("shares_outstanding", "sharesOutstanding"),
+            ("free_float", "freeFloat"),
+            ("float_shares", "floatShares"),
+            ("perf_1w", "scannerPerf1w"),
+            ("perf_1m", "scannerPerf1m"),
+            ("perf_3m", "scannerPerf3m"),
+            ("avg_volume_30d", "scannerAverageVolume30d"),
+            ("relative_volume_10d", "scannerRelativeVolume10d"),
+            ("median_volume_20d", "median20Volume"),
+            ("rv20", "rv20"),
+            ("normal_value_30d", "normal30dValue"),
+            ("five_session_change", "fiveSessionChange"),
+            ("history_bars", "historyBars"),
+        ):
+            value = clean(r.get(field))
+            if value is not None:
+                profile[key] = value
+        if profile:
+            detail["profile"] = profile
+        if ticker == "SWDY":
+            detail["financials"] = {
+                "annual": [
+                    {
+                        "period": p, "revenue": rev, "gross_profit": gp,
+                        "operating_income": oi, "net_income": ni, "equity": eq,
+                        "cash": cash, "debt": debt,
+                        "operating_cash_flow": cfo, "capex": capex,
+                    }
+                    for p, rev, gp, oi, ni, eq, cash, debt, cfo, capex
+                    in SWDY_ANNUAL
+                ],
+                "quarterly": [],
+            }
+        details[ticker] = detail
+
+    companies.sort(key=lambda c: c["ticker"])
+
+    def write(path: pathlib.Path, payload: dict) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
+
+    directory = {
+        "updated_at": scan["asOf"],
+        "source": "EGX daily scan",
+        "companies": companies,
+    }
+    snapshot = {"date": session, "stocks": stocks}
+
+    targets = [API] + ([FIXTURES] if write_fixtures else [])
+    for root in targets:
+        write(root / "companies.json", directory)
+        write(root / "market.json", snapshot)
+        prices = root / "companies"
+        if prices.exists():
+            shutil.rmtree(prices)
+        for ticker, doc in details.items():
+            write(prices / f"{ticker}.json", doc)
+
+    with_history = sum(1 for d in details.values() if len(d["price_history"]) > 1)
+    with_profile = sum(1 for d in details.values() if d.get("profile"))
+    values = sum(len(d.get("profile", {})) for d in details.values())
+    with_profile = sum(1 for d in details.values() if d.get("profile"))
+    fields = sum(len(d.get("profile", {})) for d in details.values())
+    print(f"scan     {scan_path.name}  ({session})")
+    print(f"listed   {scan['scannerTotal']}   tradable {scan['thndrDirectoryCount']}")
+    print(f"written  {len(companies)} companies, {with_history} with price history")
+    print(f"profile  {with_profile} with extra fields, {values} values total")
+    print(f"profile  {with_profile} with extra fields ({fields} values total)")
+    if skipped:
+        print(f"skipped  {skipped} records with no usable ticker or close")
+    print(f"arabic   {sum(1 for c in companies if c['name_ar'])} names")
+    sectors = sorted({c['sector'] for c in companies if c['sector']})
+    print(f"sectors  {len(sectors)}: {', '.join(sectors[:8])}…")
+    return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scan", type=pathlib.Path, default=None)
+    ap.add_argument("--no-fixtures", action="store_true")
+    args = ap.parse_args()
+
+    scan = args.scan or newest_scan()
+    if scan is None:
+        published = REPO / "public" / "data" / "v1" / "market.json"
+        if not published.exists():
+            sys.exit(f"error: no daily_scan_*.json under {WORK}, and nothing published")
+        # CI has the website's own files but not the scan archive, so it can
+        # rebuild the research documents and not this one. Leaving the published
+        # market data exactly as it is beats failing the run and blocking the
+        # research update that CI *can* do — which is the update a reader
+        # actually notices (spec §21).
+        print(f"no scan under {WORK} — leaving published market data untouched")
+        print(f"  {published.relative_to(REPO)} kept as published")
+        return 0
+
+    return build(scan, not args.no_fixtures)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

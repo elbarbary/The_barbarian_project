@@ -1,0 +1,395 @@
+{
+  "screen": "Post detail (phone 5 of 8, label \"Post detail\") — /Users/barbary/Documents/Codex/2026-07-13/fin/thebarbarianproject/design/The Barbarian.dc.html lines 519-563 (screen body), 755-760 (composer overlay, isPost-only), 761-804 (shared scrim + bottom nav), 893-897 (like/save interaction styles), 982-987 (comment seed data)",
+  "summary": "A single community post (\"Question\" about SWDY margins) rendered in full with its author, body, engagement counts, and a flat-with-one-indent-level comment thread beneath it. A glass composer bar is pinned above the bottom nav so the user can add to the thread without leaving the screen.",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Status bar (shared chrome, overlay)",
+      "description": "Simulated iOS status bar drawn by the canvas mock, pinned to the top of the phone shell above the scrolling content. In a real Flutter app this is the OS status bar; what matters for the build is that it reserves 54px and that content must not scroll under it visibly (it is pointer-events:none and NOT backed by a blur or fill, so content DOES scroll behind it — the design relies on the 54px top padding of the scroll container to keep content clear).",
+      "layout": "position:absolute; top:0; left:0; right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Left child: text \"9:41\". Right child: display:flex; align-items:center; gap:5px containing three bars — (a) 16x9px, border-radius:2px, background:#1B1917, opacity:.85; (b) 5x9px, border-radius:1px, background:#1B1917, opacity:.5; (c) 22x10px, border-radius:3px, background:#1B1917, opacity:.85."
+    },
+    {
+      "order": 2,
+      "name": "Scroll container + screen root",
+      "description": "The single scrolling surface for the whole screen. All non-pinned content lives here. Scrollbars are hidden globally (*::-webkit-scrollbar{width:0;height:0;display:none}). The screen root is a vertical stack whose 18px gap governs the spacing between every top-level block below; the individual blocks add their own internal margins on top of that.",
+      "layout": "Scroll container (line 53, shared by all screens): position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; padding:54px 16px 124px; box-sizing:border-box. Inside a phone shell of exactly 390x844px, border-radius:46px, overflow:hidden, background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%). Content column width therefore = 390 - 16 - 16 = 358px. Screen root (line 520): display:flex; flex-direction:column; gap:18px; animation:bRise 240ms ease-out. bRise keyframes (line 19): from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)}."
+    },
+    {
+      "order": 3,
+      "name": "Header action row",
+      "description": "Back button on the leading edge; bookmark and overflow buttons on the trailing edge. IMPORTANT: on this screen the bookmark and overflow buttons have NO onClick handler and NO state binding — they are static decoration. The identical-looking bookmark button on the Research reader screen (line 569) DOES bind onClick={{p.toggleSave}} style={{p.saveStyle}}; this screen does not. Only the back button is interactive here.",
+      "layout": "Row: padding-top:6px; display:flex; align-items:center; justify-content:space-between. (So the row's visual top edge sits 54+6=60px from the top of the 844px shell.)\n\nBack button (onClick={{p.back}}): width:42px; height:42px; border-radius:16px; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.08); display:flex; align-items:center; justify-content:center; font:300 20px/1 Outfit,sans-serif; color:#1B1917; cursor:pointer. Glyph: \"‹\" (U+2039 SINGLE LEFT-POINTING ANGLE QUOTATION MARK).\n\nTrailing group: display:flex; gap:8px.\n  Bookmark button: width:42px; height:42px; border-radius:16px; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.08); display:flex; align-items:center; justify-content:center; color:#1B1917. Child SVG: width=16 height=16 viewBox=\"0 0 15 15\" containing <rect x=\"3\" y=\"1.5\" width=\"9\" height=\"12\" rx=\"2.4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"/>. No cursor:pointer, no handler.\n  Overflow button: width:42px; height:42px; border-radius:16px; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.08); display:flex; align-items:center; justify-content:center; font:400 13px/1 Outfit,sans-serif; letter-spacing:.08em; color:#1B1917. Glyph: \"···\" (three U+00B7 MIDDLE DOT). No cursor:pointer, no handler.\n\nTotal trailing group width = 42+8+42 = 92px."
+    },
+    {
+      "order": 4,
+      "name": "Post block — kind + ticker chip row",
+      "description": "Two pills identifying the post type and the company it is filed against. The kind chip is outline-only (ember hairline, no fill); the ticker chip is a solid ink pill and is the only tappable element in this row.",
+      "layout": "Row: display:flex; align-items:center; gap:8px. This row is the first child of the post block <div> and has no top margin, so it is separated from the header row by the root's 18px gap only.\n\nKind chip (\"Question\"): padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C. No background fill. No letter-spacing. Rendered height = 10 + 5 + 5 = 20px.\n\nTicker chip (\"SWDY ›\", onClick={{p.goCompany}}): padding:5px 11px; border-radius:999px; background:#1B1917; font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.06em; color:#F5F1EC; cursor:pointer. Trailing glyph is \"›\" (U+203A) preceded by a normal space, inside the same text node."
+    },
+    {
+      "order": 5,
+      "name": "Post block — title",
+      "description": "The post headline. Single display-weight line of Outfit, wraps naturally; the seed copy wraps to two lines at 358px content width.",
+      "layout": "margin-top:16px; font:300 30px/1.12 Outfit,sans-serif; letter-spacing:-0.02em; color:#1B1917. Computed: fontSize 30px, line box 33.6px, letterSpacing -0.6px, weight 300."
+    },
+    {
+      "order": 6,
+      "name": "Post block — author row",
+      "description": "Striped placeholder avatar plus a single text line carrying the author name in ink and the relative age in muted grey. The age and name are one text run, not two columns.",
+      "layout": "margin-top:16px; display:flex; align-items:center; gap:10px.\n  Avatar: width:34px; height:34px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px) — 45° diagonal stripes, 3px band of #D9D2CA then 3px band of #E8E2DB, 6px period. No border, no shadow.\n  Byline: font:400 13px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#1B1917. Text \"Mostafa H.\" then a nested <span style=\"color:#9A938C\"> containing \" · 6h ago\" (leading space, U+00B7, space)."
+    },
+    {
+      "order": 7,
+      "name": "Post block — body",
+      "description": "The full post text. Longest block on the screen; no truncation, no 'read more'.",
+      "layout": "margin-top:16px; font:400 15px/1.55 'IBM Plex Sans Arabic',sans-serif; color:#3D3833. Computed line box 23.25px. Note #3D3833 is a body-text ink not in the named palette — it is used ONLY for post body and comment body on this screen."
+    },
+    {
+      "order": 8,
+      "name": "Post block — engagement meta row",
+      "description": "Upvote affordance (the only stateful control on the screen) and a static comment count, separated from the body by a 1px inset top hairline. The comment count here is hard-coded '48 comments', matching the seed post record (comments: 48, line 978).",
+      "layout": "margin-top:16px; padding-top:14px; box-shadow:inset 0 1px 0 rgba(27,25,23,.10) (a 1px top rule drawn INSIDE the box, full 358px width); display:flex; align-items:center; gap:18px; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums.\n\n  Like span (onClick={{p.toggleLike}}, style={{p.likeStyle}}): 'display:flex;align-items:center;gap:6px;cursor:pointer;transition:color 200ms ease-out;color:' + (liked ? '#E8621C' : '#7A736D'). Content is the single text node \"▲ {{p.likeCount}}\" — likeCount = 131 when not liked, 132 when liked. NOTE: gap:6px is declared but has no effect, because the ▲ and the number are one text node separated by an ordinary space, not two flex children. Reproduce the visual as \"▲ 131\" with a normal space.\n\n  Comments span: no style of its own, inherits font:400 13px/1 'IBM Plex Sans Arabic' and color:#7A736D from the row. Static text \"48 comments\". Not tappable."
+    },
+    {
+      "order": 9,
+      "name": "\"Thread\" section label",
+      "description": "Eyebrow label opening the comment section. Same eyebrow treatment used elsewhere in the app.",
+      "layout": "font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.76px at 11px); text-transform:uppercase; color:#7A736D. Authored text is \"Thread\", rendered \"THREAD\". No margin of its own — separated above and below by the root 18px gap."
+    },
+    {
+      "order": 10,
+      "name": "Comment thread list",
+      "description": "Vertical list of comments. Nesting is expressed purely by a per-item wrap style supplied in the data (c.wrap), not by real tree structure — the list is flat and only one indent level exists in the seed data. Template declares hint-placeholder-count=\"3\" but the seed array (lines 982-987) holds 4 items.",
+      "layout": "Container: display:flex; flex-direction:column; gap:20px. sc-for list={{comments}} as=\"c\".\n\nPer-item wrapper style comes from c.wrap:\n  - Top-level items (index 0 \"Nour S.\", index 3 \"Dalia K.\"): wrap = '' — no padding, no rail, full 358px.\n  - Nested items (index 1 \"Mostafa H.\", index 2 \"Hazem F.\"): wrap = 'padding-left:18px;box-shadow:inset 1px 0 0 rgba(27,25,23,.14)' — an 18px leading indent and a 1px vertical rail drawn inside the leading edge, spanning the full height of that comment block only (it does not run continuously between comments; the 20px gaps are unruled).\n\nInside every item:\n  Header row: display:flex; align-items:center; gap:9px.\n    Avatar: width:26px; height:26px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px) — identical gradient to the 34px post avatar, so the stripe pitch does NOT scale with the avatar.\n    Byline: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#1B1917, containing {{c.who}} then a nested <span style=\"color:#9A938C\"> with \" · {{c.ago}}\" (note: comment ages render as bare \"5h\" with no \"ago\" suffix, unlike the post byline's \"6h ago\").\n  Body: margin-top:8px; font:400 14px/1.55 'IBM Plex Sans Arabic',sans-serif; color:#3D3833.\n  Action row: margin-top:8px; display:flex; gap:16px; font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#9A938C; font-variant-numeric:tabular-nums. Two spans: \"▲ {{c.likes}}\" and \"Reply\". Neither has an onClick, a cursor, or a hover/active style — both are static on this screen."
+    },
+    {
+      "order": 11,
+      "name": "Bottom spacer",
+      "description": "Fixed-height strut at the end of the scroll content that guarantees the last comment can clear the pinned composer bar.",
+      "layout": "height:64px; flex:none. Combined with the scroll container's padding-bottom:124px this yields 188px of clear space below the last comment (composer occupies the band from 104px to 166px above the shell bottom, nav from 22px to 88px)."
+    },
+    {
+      "order": 12,
+      "name": "Composer bar (pinned overlay, isPost only)",
+      "description": "Dark glass pill floating above the bottom nav, containing a placeholder line and an ember send button. It is display-only in the design: there is no text input, no onClick on the pill or the send button, and no focused/typing state. It is rendered inside its own sc-if value=\"{{p.isPost}}\" block at line 755-760, i.e. it is the one piece of the shared bottom chrome that is unique to this screen.",
+      "layout": "position:absolute; left:16px; right:16px; bottom:104px; z-index:6; display:flex; align-items:center; gap:10px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); -webkit-backdrop-filter:blur(26px) saturate(180%); box-shadow:0 14px 32px rgba(27,25,23,.22), 0 1px 0 rgba(255,255,255,.28) inset, 0 0 0 1px rgba(255,255,255,.13); border-radius:999px; padding:12px 12px 12px 20px.\n  Resulting box: 358px wide, 38+12+12 = 62px tall, spanning y=678..740 in the 844px shell.\n  Placeholder span: flex:1; font:400 14px/1 'IBM Plex Sans Arabic',sans-serif; color:#8E8781. Text \"Add to the thread…\" (U+2026 ellipsis).\n  Send button: width:38px; height:38px; flex:none; border-radius:999px; background:#E8621C; display:flex; align-items:center; justify-content:center; font:400 16px/1 Outfit,sans-serif; color:#FFF. Glyph \"↑\" (U+2191). No shadow, no handler, no pressed state.\n  Vertical gap between the composer's bottom edge (bottom:104px) and the nav's top edge (bottom:22px + height:66px = 88px) is 16px."
+    },
+    {
+      "order": 13,
+      "name": "Bottom scrim (shared, pinned)",
+      "description": "Non-interactive gradient veil that fades scrolling content out behind the composer and nav. Sits BELOW the composer (z-index 5 vs 6) and below the nav (z-index 7).",
+      "layout": "position:absolute; left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; background:linear-gradient(180deg, rgba(232,225,216,0) 0%, rgba(230,222,213,.34) 52%, rgba(227,220,212,.62) 100%)."
+    },
+    {
+      "order": 14,
+      "name": "Bottom navigation (shared, pinned) — Pit slot active",
+      "description": "The shared four-item glass nav. Only one thing about it is distinctive on this screen: the Post detail phone is seeded as mk('post','pit') (line 820), so nav === 'pit' and the third slot (The Pit) is the selected one — the selection pill sits at translateX(200%) and the Pit icon renders in accent-on-dark. Full nav geometry included because the composer must be positioned relative to it.",
+      "layout": "Bar: position:absolute; left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); display:flex; align-items:center; padding:0 6px; box-sizing:border-box; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset.\n  Selection pill (Pit variant, line 765): position:absolute; left:6px; top:6px; bottom:6px; width:calc((100% - 12px)/4); transform:translateX(200%); border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%); box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18); animation:bPill 320ms cubic-bezier(.32,1.2,.44,1).\n  Top sheen: position:absolute; left:14px; right:14px; top:1px; height:1px; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%); pointer-events:none.\n  Each slot: position:relative; z-index:1; flex:1; height:66px; column flex; centered; gap:5px; cursor:pointer.\n  Active (Pit) content: color:#FF8340, icon svg 21x21 viewBox 0 0 20 20 = <circle cx=8 cy=8.5 r=5.5 fill=currentColor/> + <circle cx=13 cy=12 r=5.5 fill=currentColor opacity=.5/>, plus a 4x4px border-radius:999px dot, background:#FF8340, box-shadow:0 0 8px rgba(255,131,64,.9).\n  Inactive slots (Home, Market, You): color:rgba(245,241,236,.76), same 21x21 icons, no dot, no gap child."
+    }
+  ],
+  "components": [
+    {
+      "name": "Icon action button (42 square)",
+      "description": "The header's rounded-square glass-lite button. Three instances on this screen: back (interactive), bookmark (static here), overflow (static here). Identical shell in all three; only the child glyph/SVG and the presence of onClick differ.",
+      "styling": "width:42px; height:42px; border-radius:16px; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.08); display:flex; align-items:center; justify-content:center; color:#1B1917. Back adds font:300 20px/1 Outfit + cursor:pointer. Overflow adds font:400 13px/1 Outfit + letter-spacing:.08em. No border, no pressed/active style defined anywhere on this screen.",
+      "likelyShared": true
+    },
+    {
+      "name": "Save/bookmark toggle (stateful variant — NOT used here)",
+      "description": "Same 42px shell, but driven by p.saveStyle/p.toggleSave. Only the Research reader screen (line 569) wires it. Documented because the parent asked for saveStyle and because the Post detail bookmark looks identical but is inert — do not accidentally wire it.",
+      "styling": "p.saveStyle = 'width:42px;height:42px;border-radius:16px;box-shadow:0 8px 24px rgba(27,25,23,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 200ms ease-out;background:' + (saved ? '#1B1917' : '#F7F4F0') + ';color:' + (saved ? '#F5F1EC' : '#1B1917'). Note there is NO border-radius or shape change between states — only background and foreground invert, over a 200ms ease-out 'all' transition. Saved state carries no icon change (same outline bookmark rect), so the saved state is signalled by inversion only.",
+      "likelyShared": true
+    },
+    {
+      "name": "Kind chip (outlined ember)",
+      "description": "Post-type pill. On this screen the value is \"Question\"; the seed post list (lines 978-980) shows the vocabulary is Question / Analysis / Source, with an `ember:true/false` flag deciding outlined-ember vs a plain treatment used on the feed cards.",
+      "styling": "padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C; no fill. Height 20px.",
+      "likelyShared": true
+    },
+    {
+      "name": "Ticker chip (solid ink, tappable)",
+      "description": "Links the post to its company. Trailing chevron signals navigation.",
+      "styling": "padding:5px 11px; border-radius:999px; background:#1B1917; font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.06em (0.6px); color:#F5F1EC; cursor:pointer. Label \"SWDY ›\". Height 20px.",
+      "likelyShared": true
+    },
+    {
+      "name": "Striped placeholder avatar",
+      "description": "Identity placeholder — no photo, no initials. Two sizes on this screen (34px for the post author, 26px for commenters) using the SAME gradient definition, so stripe pitch is constant, not proportional.",
+      "styling": "border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px). Sizes 34x34 and 26x26.",
+      "likelyShared": true
+    },
+    {
+      "name": "Byline with relative age",
+      "description": "Author name in ink with a muted middle-dot-separated age appended inside the same text run.",
+      "styling": "Post: font:400 13px/1.3 'IBM Plex Sans Arabic'; color:#1B1917; age span color:#9A938C, text \" · 6h ago\". Comment: font:400 12px/1.3 'IBM Plex Sans Arabic'; color:#1B1917; age span color:#9A938C, text \" · 5h\" (no \"ago\").",
+      "likelyShared": true
+    },
+    {
+      "name": "Upvote affordance (like toggle)",
+      "description": "The only stateful control on the screen. Toggles p.liked, which swaps the text colour and bumps the count by exactly 1 (131 ↔ 132, hard-coded).",
+      "styling": "p.likeStyle = 'display:flex;align-items:center;gap:6px;cursor:pointer;transition:color 200ms ease-out;color:' + (liked ? '#E8621C' : '#7A736D'). Inherited font from the meta row: 400 13px/1 'IBM Plex Sans Arabic', font-variant-numeric:tabular-nums. Content \"▲ 131\" / \"▲ 132\". The gap:6px is inert (single text child).",
+      "likelyShared": true
+    },
+    {
+      "name": "Engagement meta row",
+      "description": "Hairline-topped row holding the like toggle and the comment count.",
+      "styling": "margin-top:16px; padding-top:14px; box-shadow:inset 0 1px 0 rgba(27,25,23,.10); display:flex; align-items:center; gap:18px; font:400 13px/1 'IBM Plex Sans Arabic'; color:#7A736D; font-variant-numeric:tabular-nums.",
+      "likelyShared": true
+    },
+    {
+      "name": "Section eyebrow label",
+      "description": "All-caps wide-tracked micro label opening a section (\"Thread\" here).",
+      "styling": "font:400 11px/1 'IBM Plex Sans Arabic'; letter-spacing:.16em; text-transform:uppercase; color:#7A736D.",
+      "likelyShared": true
+    },
+    {
+      "name": "Comment item (root + nested variants)",
+      "description": "One comment. Two variants driven entirely by the data field c.wrap: root (no decoration) and nested (18px indent + 1px leading rail). Contains avatar+byline header, body, and a static action row.",
+      "styling": "Root wrap: ''. Nested wrap: 'padding-left:18px;box-shadow:inset 1px 0 0 rgba(27,25,23,.14)'. Header: flex row, gap:9px, avatar 26px. Body: margin-top:8px; font:400 14px/1.55 'IBM Plex Sans Arabic'; color:#3D3833. Actions: margin-top:8px; flex gap:16px; font:400 11px/1 'IBM Plex Sans Arabic'; color:#9A938C; font-variant-numeric:tabular-nums; children \"▲ 34\" and \"Reply\", both inert.",
+      "likelyShared": false
+    },
+    {
+      "name": "Glass composer bar",
+      "description": "Pinned dark-glass input affordance with an ember circular send button. Rendered only when isPost.",
+      "styling": "left:16px; right:16px; bottom:104px; z-index:6; height 62px (padding:12px 12px 12px 20px around a 38px button); border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); box-shadow:0 14px 32px rgba(27,25,23,.22), 0 1px 0 rgba(255,255,255,.28) inset, 0 0 0 1px rgba(255,255,255,.13); gap:10px. Placeholder: flex:1; font:400 14px/1 'IBM Plex Sans Arabic'; color:#8E8781. Send: 38x38; border-radius:999px; background:#E8621C; font:400 16px/1 Outfit; color:#FFF; glyph ↑.",
+      "likelyShared": false
+    },
+    {
+      "name": "Bottom scrim gradient",
+      "description": "Fade veil under the pinned chrome, shared by every screen.",
+      "styling": "left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; linear-gradient(180deg, rgba(232,225,216,0) 0%, rgba(230,222,213,.34) 52%, rgba(227,220,212,.62) 100%).",
+      "likelyShared": true
+    },
+    {
+      "name": "Glass bottom navigation",
+      "description": "Shared 4-slot nav; Pit slot active on this screen. Fully described in section 14.",
+      "styling": "left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); blur(26px) saturate(180%); padding:0 6px; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset.",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "9:41",
+      "role": "status bar clock (mock chrome)"
+    },
+    {
+      "text": "‹",
+      "role": "back button glyph (U+2039)"
+    },
+    {
+      "text": "···",
+      "role": "overflow button glyph (three U+00B7)"
+    },
+    {
+      "text": "Question",
+      "role": "post kind chip"
+    },
+    {
+      "text": "SWDY ›",
+      "role": "ticker chip / navigation to company (chevron U+203A)"
+    },
+    {
+      "text": "Why did SWDY margins fall in Q3?",
+      "role": "post title / page heading"
+    },
+    {
+      "text": "Mostafa H.",
+      "role": "post author name"
+    },
+    {
+      "text": " · 6h ago",
+      "role": "post age, muted continuation of the byline"
+    },
+    {
+      "text": "Gross margin came in at 16.3% against 17.9% last quarter. Copper was flat over the period, so input costs don't explain it. Is this the cable mix shifting toward lower-margin export contracts, or a one-off on the Saudi project?",
+      "role": "post body"
+    },
+    {
+      "text": "▲ 131",
+      "role": "upvote affordance, default (unliked) state"
+    },
+    {
+      "text": "▲ 132",
+      "role": "upvote affordance, liked state"
+    },
+    {
+      "text": "48 comments",
+      "role": "static comment count in the post meta row"
+    },
+    {
+      "text": "Thread",
+      "role": "section eyebrow label (rendered uppercase as THREAD)"
+    },
+    {
+      "text": "Nour S.",
+      "role": "comment 1 author"
+    },
+    {
+      "text": " · 5h",
+      "role": "comment 1 age"
+    },
+    {
+      "text": "Look at the segment note. Cables held up; it is the turnkey projects line that dropped 210bps.",
+      "role": "comment 1 body"
+    },
+    {
+      "text": "▲ 34",
+      "role": "comment 1 like count (static)"
+    },
+    {
+      "text": "Mostafa H.",
+      "role": "comment 2 author (nested)"
+    },
+    {
+      "text": " · 4h",
+      "role": "comment 2 age"
+    },
+    {
+      "text": "That is the Saudi award being recognised at a lower stage margin, then. Makes sense.",
+      "role": "comment 2 body (nested)"
+    },
+    {
+      "text": "▲ 12",
+      "role": "comment 2 like count (static)"
+    },
+    {
+      "text": "Hazem F.",
+      "role": "comment 3 author (nested)"
+    },
+    {
+      "text": " · 3h",
+      "role": "comment 3 age"
+    },
+    {
+      "text": "Worth adding that FX on imported inputs was a 40bps drag this quarter, disclosed in note 14.",
+      "role": "comment 3 body (nested)"
+    },
+    {
+      "text": "▲ 21",
+      "role": "comment 3 like count (static)"
+    },
+    {
+      "text": "Dalia K.",
+      "role": "comment 4 author"
+    },
+    {
+      "text": " · 2h",
+      "role": "comment 4 age"
+    },
+    {
+      "text": "Management guided to 17% for the full year on the call. They are keeping it.",
+      "role": "comment 4 body"
+    },
+    {
+      "text": "▲ 8",
+      "role": "comment 4 like count (static)"
+    },
+    {
+      "text": "Reply",
+      "role": "comment action label (repeated on every comment, inert in the design)"
+    },
+    {
+      "text": "Add to the thread…",
+      "role": "composer placeholder (U+2026)"
+    },
+    {
+      "text": "↑",
+      "role": "composer send button glyph (U+2191)"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink: title, bylines, header button glyphs, ticker chip fill)",
+      "#242120 (ink-raised — NOT used on this screen)",
+      "#F7F4F0 (paper: header button fills)",
+      "#F5F1EC (ticker chip label on ink; saved-state foreground in saveStyle)",
+      "#3D3833 (body ink — post body and comment bodies; not in the supplied palette list)",
+      "#7A736D (text-3: meta row, Thread eyebrow, unliked upvote)",
+      "#9A938C (text-4: age spans, comment action row)",
+      "#8E8781 (text-4 alt: composer placeholder only)",
+      "#E8621C (accent: kind chip text + hairline, liked upvote, composer send fill)",
+      "rgba(232,98,28,.55) (kind chip inset 1px border)",
+      "#FF8340 (accent-on-dark: active nav icon + dot)",
+      "#D9D2CA and #E8E2DB (avatar stripe pair)",
+      "rgba(27,25,23,.08) (header button drop shadow)",
+      "rgba(27,25,23,.10) (meta row inset top hairline)",
+      "rgba(27,25,23,.14) (nested comment inset leading rail)",
+      "rgba(27,25,23,.58) (composer + nav glass fill)",
+      "rgba(27,25,23,.22) / rgba(27,25,23,.26) (composer / nav drop shadow)",
+      "rgba(255,255,255,.28) and rgba(255,255,255,.30) (inset top sheen on composer / nav)",
+      "rgba(255,255,255,.13) (1px glass hairline on composer and nav)",
+      "rgba(255,255,255,.42) (nav top sheen gradient midpoint)",
+      "rgba(255,255,255,.20) → rgba(255,255,255,.07) (nav selection pill gradient)",
+      "rgba(255,255,255,.32) inset / rgba(0,0,0,.18) (nav selection pill shadows)",
+      "rgba(255,255,255,.05) (nav inner bottom sheen)",
+      "rgba(245,241,236,.76) (inactive nav icon)",
+      "rgba(255,131,64,.9) (active nav dot glow)",
+      "#FFFFFF (composer send glyph)",
+      "scrim stops: rgba(232,225,216,0) → rgba(230,222,213,.34) @52% → rgba(227,220,212,.62)",
+      "shell backdrop: linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%)"
+    ],
+    "fontStyles": [
+      "500 13px/1 'IBM Plex Sans Arabic' + tabular-nums (status bar)",
+      "300 20px/1 Outfit (back chevron)",
+      "400 13px/1 Outfit, letter-spacing .08em (overflow ···)",
+      "500 10px/1 'IBM Plex Sans Arabic' (kind chip)",
+      "500 10px/1 'IBM Plex Sans Arabic', letter-spacing .06em (ticker chip)",
+      "300 30px/1.12 Outfit, letter-spacing -0.02em (post title)",
+      "400 13px/1.3 'IBM Plex Sans Arabic' (post byline)",
+      "400 15px/1.55 'IBM Plex Sans Arabic' (post body)",
+      "400 13px/1 'IBM Plex Sans Arabic' + tabular-nums (post meta row / like)",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing .16em, uppercase (Thread eyebrow)",
+      "400 12px/1.3 'IBM Plex Sans Arabic' (comment byline)",
+      "400 14px/1.55 'IBM Plex Sans Arabic' (comment body)",
+      "400 11px/1 'IBM Plex Sans Arabic' + tabular-nums (comment actions)",
+      "400 14px/1 'IBM Plex Sans Arabic' (composer placeholder)",
+      "400 16px/1 Outfit (composer send arrow)",
+      "Families loaded: Outfit 200;300;400;500 and IBM Plex Sans Arabic 300;400;500 (Google Fonts, line 14). Only 300/400/500 of each are used on this screen."
+    ],
+    "radii": [
+      "16px (header action buttons)",
+      "999px (chips, avatars, composer pill, send button, nav bar, nav selection pill, nav dot)",
+      "2.4 (SVG rx on the bookmark rect, in a 15x15 viewBox scaled to 16px)",
+      "46px (phone shell, canvas chrome only)",
+      "1px / 2px / 3px (status bar indicator pills, canvas chrome only)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.08) — header action buttons",
+      "inset 0 0 0 1px rgba(232,98,28,.55) — kind chip border",
+      "inset 0 1px 0 rgba(27,25,23,.10) — meta row top hairline",
+      "inset 1px 0 0 rgba(27,25,23,.14) — nested comment leading rail",
+      "0 14px 32px rgba(27,25,23,.22), 0 1px 0 rgba(255,255,255,.28) inset, 0 0 0 1px rgba(255,255,255,.13) — composer",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — nav bar",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — nav selection pill",
+      "0 0 8px rgba(255,131,64,.9) — active nav dot glow",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (canvas chrome only, do not build)"
+    ],
+    "spacing": [
+      "Screen root vertical gap: 18px",
+      "Scroll container padding: 54px top / 16px sides / 124px bottom",
+      "Header row padding-top: 6px; trailing button gap: 8px",
+      "Chip row gap: 8px; chip padding: 5px 11px",
+      "Post block internal rhythm: margin-top 16px before title, author row, body, and meta row",
+      "Meta row: padding-top 14px, item gap 18px",
+      "Post author row gap: 10px",
+      "Comment list gap: 20px; comment header gap: 9px; comment body/actions margin-top: 8px; comment action gap: 16px",
+      "Nested comment indent: 18px",
+      "Bottom spacer: 64px",
+      "Composer: bottom 104px, side inset 16px, padding 12px 12px 12px 20px, gap 10px",
+      "Nav: bottom 22px, side inset 16px, height 66px, padding 0 6px, pill inset 6px",
+      "Scrim height: 118px",
+      "Status bar: height 54px, padding 0 26px, gap 5px"
+    ]
+  },
+  "interactions": [
+    "Screen entrance: the whole content column plays `bRise` — 240ms ease-out, opacity 0→1 and transform translateY(4px)→0. Applied once to the root, not staggered per child.",
+    "Back button (only interactive header control): onClick={{p.back}} → this.go(i, s.prev || fallback). For the Post detail phone the seed is mk('post','pit') with prev:null, so the fallback chain resolves to 'pit' — back goes to The Pit. Once you have navigated to this screen from elsewhere, s.prev holds the actual previous route. No press/ripple/active style is defined.",
+    "Ticker chip \"SWDY ›\": onClick={{p.goCompany}} = g('company') — called with NO nav argument, so the route changes to the Company screen while the bottom-nav highlight stays on whatever it was (Pit here). Worth mirroring: navigating to a company from a post does not move the tab selection.",
+    "Upvote toggle: onClick={{p.toggleLike}} flips state.liked. Visual change = text colour #7A736D → #E8621C with `transition:color 200ms ease-out`, and the count text 131 → 132. Nothing else changes — no scale, no glyph swap, no haptic, no fill.",
+    "Bookmark button, overflow (···) button, comment ▲ counts, comment \"Reply\" labels, the \"48 comments\" text, the composer field and the composer send button all have NO handlers and no cursor:pointer in this design. They are visual placeholders. Do not invent behaviour for them; if the product needs them, that behaviour is unspecified here.",
+    "Bottom nav: all four slots keep their onClick handlers on this screen (goHome/goMarket/goPit/goYou), each of which also sets nav, so tapping any of them replaces the Post detail route entirely. The Pit slot is the active one; its selection pill animates with `bPill` 320ms cubic-bezier(.32,1.2,.44,1) (opacity 0→1 only — the keyframe has no transform, the position is set statically by translateX(200%)).",
+    "No pressed/active state exists anywhere on this screen. For contrast: The Pit's floating compose button (line 753) does declare style-active=\"transform:scale(0.94)\" with transition:transform 220ms ease-out — that is the house press treatment if you need one, but it is not applied to any Post detail control.",
+    "No scroll-linked behaviour is specified: the header row scrolls away with the content (it is in-flow, not sticky), and the composer/nav/scrim stay pinned regardless of scroll position."
+  ],
+  "flutterNotes": "STRUCTURE. Scaffold(extendBody: true) with a Stack: [scrolling content, scrim, composer, nav]. Content = SingleChildScrollView(padding: EdgeInsets.fromLTRB(16, 54, 16, 124)) wrapping a Column(crossAxisAlignment: start) with 18px gaps — use Column(spacing: 18) or interleave SizedBox(height: 18). Kill the scrollbar with ScrollConfiguration(behavior: …copyWith(scrollbars: false)). The 54px top pad is the mock's status-bar allowance; on device use max(MediaQuery.padding.top, 54) or keep 54 literal if you want pixel parity with the canvas. The header row is in-flow (scrolls away) — do NOT make it a SliverAppBar.\n\nINSET SHADOWS ARE BORDERS, NOT SHADOWS. Flutter has no inset box-shadow. Translate: (a) kind chip `inset 0 0 0 1px rgba(232,98,28,.55)` → Container(decoration: ShapeDecoration(shape: StadiumBorder(side: BorderSide(color: Color(0x8CE8621C), width: 1)))); (b) meta row `inset 0 1px 0 rgba(27,25,23,.10)` → Container(decoration: BoxDecoration(border: Border(top: BorderSide(color: Color(0x1A1B1917), width: 1))), padding: EdgeInsets.only(top: 14)); (c) nested comment `inset 1px 0 0 rgba(27,25,23,.14)` → Container(decoration: BoxDecoration(border: Border(left: BorderSide(color: Color(0x241B1917), width: 1))), padding: EdgeInsets.only(left: 18)) — but see RTL below, this must become BorderDirectional(start:) with EdgeInsetsDirectional. Alpha conversions used: .08→0x14, .10→0x1A, .13→0x21, .14→0x24, .22→0x38, .26→0x42, .28→0x47, .30→0x4D, .55→0x8C, .58→0x94.\n\nGLASS. Composer and nav both need ClipRRect(borderRadius: StadiumBorder-equivalent = BorderRadius.circular(999)) + BackdropFilter(ImageFilter.blur(sigmaX: 13, sigmaY: 13)) — CSS blur(26px) is a 26px radius ≈ sigma 13. `saturate(180%)` has no direct equivalent; approximate with ColorFilter.matrix on a saturation matrix composed into the same ImageFilter, or drop it and accept a slightly flatter glass. Fill Color(0x941B1917) over the blur. The 1px glass hairline rgba(255,255,255,.13) is a border, not a shadow — put it on the same ShapeDecoration. The `0 1px 0 inset` white sheen and `0 -8px 20px inset` bottom sheen need a hand-painted overlay (a 1px top LinearGradient sliver and a bottom vertical gradient inside the clip) — cheapest faithful approach is a CustomPaint layer inside the ClipRRect.\n\nTYPOGRAPHY. CSS `font: W Spx/L` maps directly: TextStyle(fontWeight, fontSize: S, height: L) — Flutter `height` is a unitless multiplier exactly like CSS unitless line-height. letter-spacing em→px: -0.02em @30px = -0.6; .06em @10px = 0.6; .08em @13px = 1.04; .16em @11px = 1.76. font-variant-numeric:tabular-nums → fontFeatures: [FontFeature.tabularFigures()] on the meta row, comment action row and status bar. Load Outfit (300/400/500 used here) and IBM Plex Sans Arabic (400/500 used here) as bundled assets — a strict CSP/offline build cannot fetch Google Fonts. Set a global TextStyle with height applied per-widget; do not rely on Material defaults.\n\nGLYPH RISK — READ THIS. The design leans on characters that Outfit and IBM Plex Sans Arabic may not cover: ‹ (U+2039), › (U+203A), ▲ (U+25B2 BLACK UP-POINTING TRIANGLE), ↑ (U+2191), ··· (U+00B7 ×3), … (U+2026). Verify each in the shipped font files. If ▲ or ↑ are missing you will get tofu — draw them instead (a 3-point Path for the triangle, Icons.arrow_upward for send) and hand-tune size to match a 13px/11px text run. Do not silently substitute Material icons for ‹ — its 300-weight Outfit form is thin and distinctive; a CustomPaint chevron is closer.\n\nAVATAR GRADIENT. repeating-linear-gradient(135deg, #D9D2CA 0 3px, #E8E2DB 3px 6px) has no Flutter equivalent. Easiest faithful build: ClipOval + CustomPainter drawing 3px-wide bands at 45° across the bounds. Alternative: LinearGradient with tileMode: TileMode.repeated, GradientRotation(pi/4) and stops [0,0.5,0.5,1] — but you must compute begin/end so one period spans exactly 6px at that rotation, which differs between the 34px and 26px avatars. Note the design does NOT scale the stripe with the avatar: both sizes use the same 3px/6px pitch, so a CustomPainter parameterised in absolute px is the correct model.\n\nANIMATIONS. bRise → a 240ms Curves.easeOut FadeTransition + SlideTransition(Offset(0, 4/height) → Offset.zero), run once on route entry. Like toggle → AnimatedDefaultTextStyle(duration: 200ms, curve: Curves.easeOut) so the colour tweens; keep the count in the same Text so it swaps instantly (the design does not animate the number). bPill on the nav → 320ms Cubic(.32, 1.2, .44, 1) — that curve overshoots (y>1), so use Cubic directly, not Curves.easeOutBack.\n\nLISTS. The comment thread is FLAT — indentation comes from a per-item `wrap` string in the data, not a tree. Model it as `List<Comment>` with an `int depth` (0 or 1 in the seed data) and render depth>0 with the indent+rail decoration. Do not build a recursive tree widget; the design has no affordance for depth ≥ 2 and no collapse/expand. Use a Column inside the scroll view (only 4 items) rather than a nested ListView.\n\nHIT TARGETS. The 42px header buttons are just under the 44px guideline — wrap in a 44/48px GestureDetector with behavior: HitTestBehavior.opaque without changing the painted 42px box. The like affordance is a 13px text run and \"Reply\"/\"▲ n\" are 11px runs: give them padding inside the tap target (or MaterialTapTargetSize.padded) — but the visual margins (gap 18px on the meta row, 16px in the comment actions) must stay exactly as specified, so expand the hit area outward with a Stack/Transform rather than adding padding that shifts layout.\n\nRTL / ARABIC (direction-sensitive items — all must be mirrored):\n• Back glyph ‹ must become › in RTL. Use Directionality to pick the glyph, or a mirrored CustomPaint.\n• Ticker chip trailing chevron \"SWDY ›\" must lead-flip to \"‹ SWDY\" (or mirror the glyph); its letter-spacing .06em applies to a Latin ticker that stays LTR — wrap the ticker itself in Directionality(TextDirection.ltr) so \"SWDY\" never reorders inside an RTL run.\n• Nested comment indent + rail: use EdgeInsetsDirectional.only(start: 18) and BorderDirectional(start: …) so the rail lands on the right in Arabic.\n• Composer padding is asymmetric (12/12/12/20, 20px on the leading side) → EdgeInsetsDirectional.fromSTEB(20, 12, 12, 12). The ↑ send glyph is direction-neutral and must NOT be mirrored.\n• Header row (back leading, actions trailing) mirrors automatically with Row + MainAxisAlignment.spaceBetween under Directionality — no manual work, but verify.\n• Bylines \"Name · 6h ago\" and \"▲ 131\": the ▲ prefix and the numeral must not get reordered by the bidi algorithm. Compose them as separate Text spans with explicit direction, or insert LRM/RLM marks. Digits: decide now whether Arabic locale uses Arabic-Indic numerals — if yes, tabular-nums behaviour must be re-verified in IBM Plex Sans Arabic.\n• The bottom-nav selection pill uses transform:translateX(200%) — in RTL the slot order reverses, so compute the pill offset from the resolved slot index under Directionality, not from a hard-coded 200%.\n• The avatar stripe angle (135deg) is cosmetic; mirroring it to 45deg in RTL is optional and not specified.\n\nPRODUCT-RULE FLAGS (things the design leaves you exposed on):\n• Colour-alone violation: the liked state is signalled ONLY by #7A736D→#E8621C on an unchanged \"▲\" glyph, and saveStyle likewise only inverts fill. That breaks the stated \"verdict/state must never be communicated by colour alone\" rule. Recommend a filled-vs-outlined triangle (or a weight/underline change) for liked, and a filled-vs-outline bookmark for saved, keeping the exact colours. Flag to design rather than shipping colour-only.\n• Staleness labelling: every age string here is a pre-baked literal (\"6h ago\", \"5h\", \"4h\", \"3h\", \"2h\") in the seed data. In the real app these must be derived from an authoritative timestamp and re-rendered as time passes, not frozen at fetch time. The percentages inside the post body (\"16.3%\", \"17.9%\", \"210bps\", \"40bps\") are user-authored prose, not app data — do not style them as live figures and do not attach a freshness badge to them.\n• Nothing on this screen introduces BUY/SELL/TARGET/STOP/EXPECTED RETURN semantics; the post-kind vocabulary is Question / Analysis / Source (from the seed data at lines 978-980). Keep it that way — the outlined-ember chip is a *kind* marker, not a signal.\n\nNOT SPECIFIED (do not guess): dark mode for this screen (the canvas header claims \"dark-first\" but every value here is the light palette); pressed/hover/focus states for any Post detail control; composer focused/typing/keyboard-avoidance layout; comment pagination or a \"load more\" for the 48 comments when only 4 are shown; overflow-menu contents; empty/error/loading variants of this screen (the States screen at lines 696-751 covers generic ones, which I did not read); and any moderation UI beyond the \"reported\" state referenced in the States screen."
+}

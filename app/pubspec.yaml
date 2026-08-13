@@ -1,0 +1,66 @@
+name: barbarian
+description: "The Barbarian — EGX research, market data and community."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  dio: ^5.11.0
+  fl_chart: ^1.2.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.3.2
+  freezed_annotation: ^3.1.0
+  go_router: ^17.5.0
+  intl: ^0.20.2
+  json_annotation: ^4.12.0
+  liquid_glass_renderer: ^0.2.0-dev.4
+  path_provider: ^2.1.6
+  shared_preferences: ^2.5.5
+  webview_flutter: ^4.14.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.15.1
+  freezed: ^3.2.5
+  json_serializable: ^6.14.1
+  shared_preferences_platform_interface: ^2.4.2
+
+flutter:
+  uses-material-design: true
+
+  # Asset globs do not recurse, so every fixture subdirectory is listed.
+  assets:
+    - assets/fixtures/
+    - assets/fixtures/companies/
+    - assets/fixtures/cash-or-trash/
+    - assets/fixtures/opportunities/
+
+  # The website's own faces — Bricolage Grotesque (display) and Space Grotesk
+  # (body) — plus IBM Plex Sans Arabic, which covers the Arabic neither of them
+  # does. All three are SIL Open Font License 1.1 and their licence texts ship
+  # alongside the binaries in assets/fonts/ (spec §40).
+  #
+  # The two site faces are variable; styles set FontVariation('wght', n) for
+  # exact weights rather than relying on Flutter picking a static instance.
+  fonts:
+    - family: BricolageGrotesque
+      fonts:
+        - asset: assets/fonts/BricolageGrotesque-Variable.ttf
+    - family: SpaceGrotesk
+      fonts:
+        - asset: assets/fonts/SpaceGrotesk-Variable.ttf
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: assets/fonts/IBMPlexSansArabic-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSansArabic-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSansArabic-Medium.ttf
+          weight: 500

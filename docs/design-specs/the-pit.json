@@ -1,0 +1,423 @@
+{
+  "screen": "The Pit (community feed) — phone index 3, route `pit`, nav tab `pit`",
+  "summary": "The Pit is the community discussion feed: a large display title with a live-population line, a three-way pill segmented control (Following / Latest / Popular, default Latest), and a vertical list of post cards each carrying a kind chip, a ticker chip, title, excerpt, author line and a like/comment/save footer. It is the only screen that renders the orange circular compose FAB, and it sits on the shared glass bottom nav with the Pit tab lit.",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Phone shell + scroll viewport (shared frame)",
+      "description": "The screen is drawn inside the canvas phone mock. Outer frame is 390x844 with a 46px corner radius and overflow hidden, filled with the vertical page gradient. All Pit content lives in a single absolutely-positioned scroll container that fills the frame; the 54px top padding clears the status bar and the 124px bottom padding clears the glass nav + scrim. Usable content width is 390 - 16 - 16 = 358px. Scrollbars are hidden globally (`*::-webkit-scrollbar{width:0;height:0;display:none}` plus `scrollbar-width:none`).",
+      "layout": "frame: position:relative; width:390px; height:844px; border-radius:46px; overflow:hidden; background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%); box-shadow:0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07). scroller: position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; padding:54px 16px 124px; box-sizing:border-box. Root font-family on the canvas: Outfit,system-ui,sans-serif"
+    },
+    {
+      "order": 2,
+      "name": "Status bar (shared chrome, non-interactive)",
+      "description": "Fixed faux iOS status bar over the scroll area. Left is the time '9:41'; right is three abstract indicator pills (signal / wifi / battery) with differing opacities. pointer-events:none so it never intercepts taps.",
+      "layout": "position:absolute; top:0; left:0; right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Right group: display:flex; align-items:center; gap:5px — pill A 16x9px border-radius:2px background:#1B1917 opacity:.85; pill B 5x9px border-radius:1px background:#1B1917 opacity:.5; pill C 22x10px border-radius:3px background:#1B1917 opacity:.85"
+    },
+    {
+      "order": 3,
+      "name": "Screen root column",
+      "description": "Single flex column holding header, tab bar and the post list. Enters with the shared bRise animation (used identically on every screen in this design).",
+      "layout": "display:flex; flex-direction:column; gap:20px; animation:bRise 240ms ease-out. @keyframes bRise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}"
+    },
+    {
+      "order": 4,
+      "name": "Header block (title + population line)",
+      "description": "Title 'The Pit' in Outfit Light 36px, with a secondary line beneath giving community size and daily activity. The wrapper is a flex row with align-items:flex-end / justify-content:space-between but contains only one child — there is no right-hand action on this screen; the row exists so a trailing control could be dropped in without relayout.",
+      "layout": "wrapper: padding-top:6px; display:flex; align-items:flex-end; justify-content:space-between. Title: font:300 36px/1 Outfit,sans-serif; letter-spacing:-0.03em; color:#1B1917. Sub: margin-top:8px; font:400 13px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums"
+    },
+    {
+      "order": 5,
+      "name": "Segmented tab bar — Following / Latest / Popular",
+      "description": "Pill-in-pill segmented control. Track is a paper-coloured 999px pill with 4px internal padding and 4px gaps; the selected segment gets a white fill plus its own soft shadow, unselected segments are transparent with muted text. Exactly one is selected; component state key is `pit` with values 'following' | 'latest' | 'popular', seeded to 'latest' — so Latest is the ON tab in the default render. Each segment is flex:1, so at 358px content width each measures (358 - 8 padding - 8 gaps) / 3 = 114px wide, 35px tall (11 + 13 + 11); the track is 43px tall.",
+      "layout": "track: display:flex; gap:4px; background:#F7F4F0; border-radius:999px; padding:4px; box-shadow:0 8px 24px rgba(27,25,23,.06). TAB_ON: flex:1; text-align:center; padding:11px 0; border-radius:999px; background:#FFFFFF; box-shadow:0 4px 12px rgba(27,25,23,.10); font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; cursor:pointer; transition:all 220ms ease-out. TAB_OFF: flex:1; text-align:center; padding:11px 0; border-radius:999px; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; cursor:pointer; transition:all 220ms ease-out (no background, no shadow)"
+    },
+    {
+      "order": 6,
+      "name": "Post list",
+      "description": "Vertical stack of post cards driven by `sc-for list=\"{{ posts }}\" as=\"o\"` with hint-placeholder-count=3. Three seed posts are rendered. NOTE: the design does not filter or reorder the list per tab — the same three posts render for Following / Latest / Popular. Per-tab datasets are NOT specified in the file.",
+      "layout": "display:flex; flex-direction:column; gap:12px"
+    },
+    {
+      "order": 7,
+      "name": "Post card (repeated x3)",
+      "description": "Paper card containing, top to bottom: a chip row, a tappable title+excerpt block, an author row with a striped avatar, and a hairline-separated metrics footer. The whole card scales down slightly while pressed.",
+      "layout": "background:#F7F4F0; border-radius:28px; padding:20px; box-shadow:0 8px 24px rgba(27,25,23,.08); transition:transform 220ms ease-out; active state: transform:scale(0.99). Inner content width = 358 - 40 = 318px"
+    },
+    {
+      "order": 8,
+      "name": "Post card — chip row",
+      "description": "Row of up to two chips: a kind chip (Question / Analysis / Source) rendered in one of two mutually-exclusive variants, then the black ticker chip. The ember variant renders when `o.ember` is true, the plain variant when `o.plain` is true; they are separate sc-if blocks, never both true in the seed data. The plain block carries hint-placeholder-val=true so placeholder previews show the plain chip. The ticker chip is a separate tap target from the rest of the card.",
+      "layout": "row: display:flex; align-items:center; gap:8px. Ember chip: padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C; background transparent (card #F7F4F0 shows through). Plain chip: padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(27,25,23,.18); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F. Ticker chip: padding:5px 11px; border-radius:999px; background:#1B1917; font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.06em; color:#F5F1EC; cursor:pointer. All chips are 20px tall (5+10+5)"
+    },
+    {
+      "order": 9,
+      "name": "Post card — title + excerpt (tap target -> post detail)",
+      "description": "A single wrapper div with cursor:pointer and onClick=goPost containing the headline and the two-to-three line excerpt. Text is not clamped in the design — no line-clamp, no ellipsis, no max-height; cards grow with content.",
+      "layout": "wrapper: cursor:pointer. Title: margin-top:14px; font:300 22px/1.22 Outfit,sans-serif; letter-spacing:-0.01em; color:#1B1917. Body: margin-top:10px; font:400 14px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#5C554F"
+    },
+    {
+      "order": 10,
+      "name": "Post card — author row",
+      "description": "28px circular avatar rendered as a diagonal two-tone stripe pattern (no photo, no initials in this design), followed by the author name in ink and the relative age in a muted colour, separated by a middle dot. The separator lives inside the muted span and includes a leading space: `{{o.author}}<span> · {{o.ago}}</span>`.",
+      "layout": "row: margin-top:16px; display:flex; align-items:center; gap:10px. Avatar: width:28px; height:28px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px). Text: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; age span color:#9A938C"
+    },
+    {
+      "order": 11,
+      "name": "Post card — metrics footer",
+      "description": "Separated from the body by a 1px inset top hairline (implemented as an inset box-shadow, not a border). Contains a like count with a circle-and-bar glyph, a comment count with a rounded-rect bubble glyph, and a right-pushed Save action with a bookmark glyph. In this screen the counts and Save are STATIC — the like/save toggles (toggleLike, likeStyle, toggleSave, saveStyle, likeCount 131/132) exist in the component but are wired to the Post detail screen, not to these cards. Icons inherit the row colour via currentColor (#7A736D).",
+      "layout": "row: margin-top:16px; padding-top:14px; box-shadow:inset 0 1px 0 rgba(27,25,23,.08); display:flex; align-items:center; gap:18px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums. Each item: display:flex; align-items:center; gap:6px. Save item additionally: margin-left:auto. Icons all width=15 height=15 viewBox='0 0 15 15', stroke-width 1.4, stroke/fill currentColor"
+    },
+    {
+      "order": 12,
+      "name": "Compose FAB (Pit-only chrome)",
+      "description": "Rendered by the shared trailing chrome under `sc-if p.isPit` — this is the ONLY screen that shows it. A 62px orange gradient circle with a light '+', floating above the nav bar at the right edge. Purely visual in the design: no onClick handler is bound.",
+      "layout": "position:absolute; right:20px; bottom:108px; width:62px; height:62px; border-radius:999px; background:linear-gradient(180deg,#F0752E 0%,#E8621C 100%); box-shadow:0 14px 30px rgba(232,98,28,.38), 0 1px 0 rgba(255,255,255,.42) inset, 0 0 0 1px rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center; font:200 32px/1 Outfit,sans-serif; color:#FFF; z-index:8; cursor:pointer; transition:transform 220ms ease-out; active: transform:scale(0.94)"
+    },
+    {
+      "order": 13,
+      "name": "Bottom scrim + glass nav (shared, Pit tab active)",
+      "description": "A non-interactive fade scrim sits behind the floating glass nav. The nav has four equal tabs (Home, Market, Pit, You); on this screen `nav === 'pit'` so the selected pill is translated to the third slot and the Pit icon is accent-orange with a glowing 4px dot beneath it. Inactive icons are near-white at 76% and carry no dot. Only describe/rebuild this once; the Pit-specific part is the pill offset + lit Pit icon.",
+      "layout": "scrim: position:absolute; left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%). Bar: position:absolute; left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); display:flex; align-items:center; padding:0 6px; box-sizing:border-box; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset. Selected pill (Pit): position:absolute; left:6px; top:6px; bottom:6px; width:calc((100% - 12px) / 4); transform:translateX(200%); border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%); box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18); animation:bPill 320ms cubic-bezier(.32,1.2,.44,1). Top sheen: position:absolute; left:14px; right:14px; top:1px; height:1px; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%). Each tab: position:relative; z-index:1; flex:1; height:66px; column flex; align/justify center; gap:5px. Pit icon svg 21x21 viewBox '0 0 20 20': circle cx=8 cy=8.5 r=5.5 fill currentColor + circle cx=13 cy=12 r=5.5 fill currentColor opacity=.5. Active colour #FF8340 + dot 4x4px border-radius:999px background:#FF8340 box-shadow:0 0 8px rgba(255,131,64,.9). Inactive colour rgba(245,241,236,.76), no dot"
+    },
+    {
+      "order": 14,
+      "name": "Specified-but-not-rendered-here: Following empty state",
+      "description": "Lives on the STATES screen and is clearly the Pit 'Following' empty case. Rebuild it as the empty state for the Following tab. Copy is verbatim from the design.",
+      "layout": "background:#F7F4F0; border-radius:28px; padding:28px 20px; box-shadow:0 8px 24px rgba(27,25,23,.06); text-align:center. Title: font:300 22px/1.2 Outfit,sans-serif; color:#1B1917. Sub: margin-top:8px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D"
+    },
+    {
+      "order": 15,
+      "name": "Specified-but-not-rendered-here: reported post card",
+      "description": "Also on the STATES screen; it is a post-card variant, so it belongs to the Pit feed. Replaces a post card in place with an 'Under review' chip, an explanation and an Undo affordance. Note the smaller radius (24px) and padding (18px) versus a live post card.",
+      "layout": "card: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06). Chip: padding:5px 11px; border-radius:999px; background:rgba(27,25,23,.08); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F. Body: margin-top:12px; font:400 14px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Undo: margin-top:12px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917"
+    }
+  ],
+  "components": [
+    {
+      "name": "segmented tab pill (TAB_ON / TAB_OFF)",
+      "description": "One of three equal-width segments inside a 999px track. Selected = white fill + shadow + ink text; unselected = transparent + muted text. Cross-fades over 220ms ease-out. Shared constants defined once in the component script (lines ~867-868) and reused by every segmented control in the app.",
+      "styling": "ON: flex:1; text-align:center; padding:11px 0; border-radius:999px; background:#FFFFFF; box-shadow:0 4px 12px rgba(27,25,23,.10); font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; transition:all 220ms ease-out. OFF: identical minus background/box-shadow, color:#7A736D. Track: display:flex; gap:4px; background:#F7F4F0; border-radius:999px; padding:4px; box-shadow:0 8px 24px rgba(27,25,23,.06). Measured: segment 114x35px at 358px content width, track 43px tall",
+      "likelyShared": true
+    },
+    {
+      "name": "kind chip — ember variant",
+      "description": "Outlined accent chip naming the post type. Used for 'Question' in the seed data (o.ember === true). Outline only; no fill.",
+      "styling": "padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C; height 20px",
+      "likelyShared": true
+    },
+    {
+      "name": "kind chip — plain variant",
+      "description": "Outlined neutral chip naming the post type. Used for 'Analysis' and 'Source' (o.plain === true).",
+      "styling": "padding:5px 11px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(27,25,23,.18); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F; height 20px",
+      "likelyShared": true
+    },
+    {
+      "name": "ticker chip (solid ink)",
+      "description": "Black pill carrying the subject symbol; taps through to the Company screen (onClick = p.goCompany). Note: in the seed data post 2 uses the value 'Banking' — a sector, not a listed ticker — while still using the same chip and the same goCompany tap target. Sector-vs-ticker routing is NOT distinguished in the design.",
+      "styling": "padding:5px 11px; border-radius:999px; background:#1B1917; font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.06em (=0.6px at 10px); color:#F5F1EC; cursor:pointer; height 20px",
+      "likelyShared": true
+    },
+    {
+      "name": "post card",
+      "description": "The feed row. Chip row -> tappable title/excerpt block -> author row -> hairline footer. Two distinct tap targets inside (ticker chip, title/excerpt block); the card itself has a press-scale transition but no own onClick in the markup.",
+      "styling": "background:#F7F4F0; border-radius:28px; padding:20px; box-shadow:0 8px 24px rgba(27,25,23,.08); transition:transform 220ms ease-out; style-active: transform:scale(0.99)",
+      "likelyShared": true
+    },
+    {
+      "name": "striped avatar",
+      "description": "Placeholder identity mark: a circle filled with 3px diagonal stripes alternating two hairline greys. No image, no initials, no ring.",
+      "styling": "width:28px; height:28px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px) — 6px period, bands perpendicular to a vector pointing bottom-right, i.e. stripes read as '/'",
+      "likelyShared": true
+    },
+    {
+      "name": "metric item (icon + count)",
+      "description": "Icon-plus-number pair used for likes and comments in the card footer. Icon colour comes from the parent row via currentColor.",
+      "styling": "display:flex; align-items:center; gap:6px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums. Like glyph: svg 15x15 viewBox '0 0 15 15' — circle cx=7.5 cy=7.5 r=6.2 fill=none stroke=currentColor stroke-width=1.4, plus rect x=6.7 y=4 width=1.6 height=7 rx=.8 fill=currentColor. Comment glyph: svg 15x15 — rect x=1 y=2 width=13 height=9.5 rx=3.2 fill=none stroke=currentColor stroke-width=1.4 (bubble with no tail)",
+      "likelyShared": true
+    },
+    {
+      "name": "save action",
+      "description": "Right-aligned bookmark glyph plus the literal word 'Save'. Static in this screen — no saved/unsaved variant is rendered on the Pit card (the filled/ink saved variant exists only on the Post detail screen as `saveStyle`).",
+      "styling": "display:flex; align-items:center; gap:6px; margin-left:auto; same 12px muted type as the metrics. Glyph: svg 15x15 viewBox '0 0 15 15' — rect x=3 y=1.5 width=9 height=12 rx=2.4 fill=none stroke=currentColor stroke-width=1.4",
+      "likelyShared": false
+    },
+    {
+      "name": "compose FAB",
+      "description": "Orange gradient circle with a hairline-light '+'. Only rendered when the route is Pit. No handler bound in the design.",
+      "styling": "62x62px; border-radius:999px; background:linear-gradient(180deg,#F0752E 0%,#E8621C 100%); box-shadow:0 14px 30px rgba(232,98,28,.38), 0 1px 0 rgba(255,255,255,.42) inset, 0 0 0 1px rgba(255,255,255,.16); font:200 32px/1 Outfit,sans-serif; color:#FFF; positioned right:20px bottom:108px; z-index:8; active transform:scale(0.94) over 220ms ease-out",
+      "likelyShared": false
+    },
+    {
+      "name": "glass bottom nav",
+      "description": "Shared four-tab floating nav with a translucent dark glass body, a sliding selection pill and a lit-dot indicator on the active tab. On this screen the pill sits in slot 3 (translateX(200%)) and the Pit icon is #FF8340.",
+      "styling": "see section 13 for full values. Bar 66px tall, inset left/right 16px, bottom 22px, radius 999px, background rgba(27,25,23,.58) + backdrop-filter blur(26px) saturate(180%)",
+      "likelyShared": true
+    },
+    {
+      "name": "screen display title",
+      "description": "Outfit Light 36px screen heading. Compare: Market/other screens use 30px — The Pit uses the larger 36px size.",
+      "styling": "font:300 36px/1 Outfit,sans-serif; letter-spacing:-0.03em; color:#1B1917; preceded by 6px padding-top on its wrapper",
+      "likelyShared": true
+    },
+    {
+      "name": "stale-data pill (available, not used here)",
+      "description": "The design system's 'showing data from N ago' banner, defined on the STATES screen. The Pit screen does NOT render it, but the product rule about labelling stale data means you will likely need it if the feed is served from cache.",
+      "styling": "display:flex; align-items:center; gap:10px; background:rgba(27,25,23,.06); border-radius:999px; padding:11px 16px. Dot: 7x7px; border-radius:999px; background:#7A736D; flex:none. Text: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#5C554F",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "The Pit",
+      "role": "screen title (h1)"
+    },
+    {
+      "text": "2,418 investors · 61 active today",
+      "role": "subtitle / community stats line (tabular numerals, middle-dot separator)"
+    },
+    {
+      "text": "Following",
+      "role": "segment label (tab 1, unselected by default)"
+    },
+    {
+      "text": "Latest",
+      "role": "segment label (tab 2, SELECTED by default — state pit:'latest')"
+    },
+    {
+      "text": "Popular",
+      "role": "segment label (tab 3, unselected by default)"
+    },
+    {
+      "text": "Question",
+      "role": "post 1 kind chip (ember/accent variant)"
+    },
+    {
+      "text": "SWDY",
+      "role": "post 1 ticker chip"
+    },
+    {
+      "text": "Why did SWDY margins fall in Q3?",
+      "role": "post 1 title"
+    },
+    {
+      "text": "Gross margin at 16.3% against 17.9% last quarter, with copper flat. Mix shift or one-off?",
+      "role": "post 1 excerpt/body"
+    },
+    {
+      "text": "Mostafa H.",
+      "role": "post 1 author"
+    },
+    {
+      "text": "6h",
+      "role": "post 1 relative age"
+    },
+    {
+      "text": "131",
+      "role": "post 1 like count"
+    },
+    {
+      "text": "48",
+      "role": "post 1 comment count"
+    },
+    {
+      "text": "Analysis",
+      "role": "post 2 kind chip (plain variant)"
+    },
+    {
+      "text": "Banking",
+      "role": "post 2 ticker chip (a sector name in the ticker slot)"
+    },
+    {
+      "text": "Deposit growth vs T-bill yields: the carry is closing",
+      "role": "post 2 title"
+    },
+    {
+      "text": "Three of the four listed banks are now funding at rates that make the T-bill trade marginal. Numbers inside.",
+      "role": "post 2 excerpt/body"
+    },
+    {
+      "text": "Nour S.",
+      "role": "post 2 author"
+    },
+    {
+      "text": "11h",
+      "role": "post 2 relative age"
+    },
+    {
+      "text": "84",
+      "role": "post 2 like count"
+    },
+    {
+      "text": "17",
+      "role": "post 2 comment count"
+    },
+    {
+      "text": "Source",
+      "role": "post 3 kind chip (plain variant)"
+    },
+    {
+      "text": "ORAS",
+      "role": "post 3 ticker chip"
+    },
+    {
+      "text": "Backlog update filed this morning — USD 7.2bn",
+      "role": "post 3 title"
+    },
+    {
+      "text": "Straight from the disclosure. Egypt share down to 41%, which is the lowest it has been since 2019.",
+      "role": "post 3 excerpt/body"
+    },
+    {
+      "text": "Hazem F.",
+      "role": "post 3 author"
+    },
+    {
+      "text": "1d",
+      "role": "post 3 relative age"
+    },
+    {
+      "text": "42",
+      "role": "post 3 like count"
+    },
+    {
+      "text": "9",
+      "role": "post 3 comment count"
+    },
+    {
+      "text": "Save",
+      "role": "card footer action label (static, right-aligned)"
+    },
+    {
+      "text": "+",
+      "role": "compose FAB glyph"
+    },
+    {
+      "text": " · ",
+      "role": "separator inside the muted author-age span (leading space is part of the span)"
+    },
+    {
+      "text": "9:41",
+      "role": "status bar time (frame chrome)"
+    },
+    {
+      "text": "Nothing in your feed",
+      "role": "empty-state heading for the Following tab (from STATES screen)"
+    },
+    {
+      "text": "You follow 0 investors. Switch to Latest, or start the thread yourself.",
+      "role": "empty-state body for the Following tab (from STATES screen)"
+    },
+    {
+      "text": "Under review",
+      "role": "reported-post chip (from STATES screen)"
+    },
+    {
+      "text": "You reported this post. It stays hidden from your feed while a moderator looks at it.",
+      "role": "reported-post body (from STATES screen)"
+    },
+    {
+      "text": "Undo",
+      "role": "reported-post action (from STATES screen)"
+    },
+    {
+      "text": "Showing data from 2 hours ago",
+      "role": "stale-data pill text (from STATES screen; not rendered on Pit but the pattern to use)"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink — title, author name, ticker chip fill, selected tab text)",
+      "#242120 (ink-raised — not used on this screen)",
+      "#F7F4F0 (paper — post card, tab track)",
+      "#FFFFFF (selected tab fill, nav pill knob elsewhere)",
+      "#F5F1EC (bg / text on ink — ticker chip label)",
+      "#EDE8E2 -> #E3DCD4 (phone frame gradient, 180deg)",
+      "#5C554F (text-2 — post excerpt, plain chip label)",
+      "#7A736D (text-3 — subtitle, unselected tab text, footer metrics, icon currentColor)",
+      "#9A938C (text-4 — relative age span)",
+      "#8E8781 (text-4 alt — not used on this screen)",
+      "#E8621C (accent — ember chip text, FAB gradient end)",
+      "#F0752E (FAB gradient start)",
+      "#FF8340 (accent-on-dark — active nav icon + dot)",
+      "#D9D2CA (hairline dark — avatar stripe A)",
+      "#E8E2DB (hairline light — avatar stripe B)",
+      "rgba(232,98,28,.55) (ember chip inner border)",
+      "rgba(27,25,23,.18) (plain chip inner border)",
+      "rgba(27,25,23,.08) (card shadow colour; footer hairline; reported chip fill)",
+      "rgba(27,25,23,.06) (tab track shadow; stale pill fill)",
+      "rgba(27,25,23,.10) (selected tab shadow)",
+      "rgba(27,25,23,.58) (nav glass fill)",
+      "rgba(232,98,28,.38) (FAB glow)",
+      "rgba(255,255,255,.42) / .16 (FAB inner highlight / ring)",
+      "rgba(245,241,236,.76) (inactive nav icon)"
+    ],
+    "fontStyles": [
+      "300 36px/1 Outfit, letter-spacing -0.03em — screen title",
+      "400 13px/1.4 'IBM Plex Sans Arabic', tabular-nums — subtitle",
+      "400 13px/1 'IBM Plex Sans Arabic' — segment labels (both ON and OFF)",
+      "500 10px/1 'IBM Plex Sans Arabic' — kind chips",
+      "500 10px/1 'IBM Plex Sans Arabic', letter-spacing .06em — ticker chip",
+      "300 22px/1.22 Outfit, letter-spacing -0.01em — post title",
+      "400 14px/1.5 'IBM Plex Sans Arabic' — post excerpt",
+      "400 12px/1.3 'IBM Plex Sans Arabic' — author line",
+      "400 12px/1 'IBM Plex Sans Arabic', tabular-nums — footer metrics",
+      "200 32px/1 Outfit — FAB '+'",
+      "500 13px/1 'IBM Plex Sans Arabic', tabular-nums — status bar",
+      "300 22px/1.2 Outfit — empty-state title (STATES)",
+      "400 13px/1.5 'IBM Plex Sans Arabic' — empty-state body (STATES)"
+    ],
+    "radii": [
+      "46px — phone frame",
+      "999px — tab track, tab segments, chips, avatar, FAB, nav bar, nav pill",
+      "28px — post card; also empty-state card",
+      "24px — reported-post card",
+      "3px / 2px / 1px — status bar indicator pills",
+      "2.4px, 3.2px, .8px — SVG icon corner radii (in a 15x15 viewBox)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.08) — post card",
+      "0 8px 24px rgba(27,25,23,.06) — segmented tab track (and empty-state cards)",
+      "0 4px 12px rgba(27,25,23,.10) — selected tab segment",
+      "inset 0 0 0 1px rgba(232,98,28,.55) — ember chip border",
+      "inset 0 0 0 1px rgba(27,25,23,.18) — plain chip border",
+      "inset 0 1px 0 rgba(27,25,23,.08) — post footer top hairline",
+      "0 14px 30px rgba(232,98,28,.38), 0 1px 0 rgba(255,255,255,.42) inset, 0 0 0 1px rgba(255,255,255,.16) — FAB",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — nav bar",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — nav selection pill",
+      "0 0 8px rgba(255,131,64,.9) — active nav dot glow",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone frame (canvas only)"
+    ],
+    "spacing": [
+      "scroll padding 54px / 16px / 124px (top / sides / bottom)",
+      "root column gap 20px",
+      "header wrapper padding-top 6px; title->subtitle 8px",
+      "tab track padding 4px; tab gap 4px; tab padding 11px 0",
+      "post list gap 12px",
+      "card padding 20px",
+      "chip row gap 8px; chip padding 5px 11px",
+      "title margin-top 14px; body margin-top 10px",
+      "author row margin-top 16px, gap 10px; avatar 28x28",
+      "footer margin-top 16px, padding-top 14px, item gap 18px, icon-to-number gap 6px",
+      "FAB right 20px, bottom 108px, size 62px",
+      "nav bar left/right 16px, bottom 22px, height 66px, inner padding 0 6px",
+      "scrim height 118px",
+      "status bar height 54px, padding 0 26px, indicator gap 5px"
+    ]
+  },
+  "interactions": [
+    "Tab 'Following' — onClick sets state.pit = 'following'; the segment swaps from TAB_OFF to TAB_ON. Transition: `all 220ms ease-out` (background, box-shadow and colour cross-fade; the design does NOT slide a shared pill in this control, unlike the bottom nav).",
+    "Tab 'Latest' — onClick sets state.pit = 'latest'. This is the seeded default, so Latest renders as TAB_ON on first paint.",
+    "Tab 'Popular' — onClick sets state.pit = 'popular'.",
+    "IMPORTANT: switching tabs in the design changes ONLY the pill styling. The `posts` array is not filtered, sorted or replaced. No per-tab dataset, no loading state on switch, and no list transition are specified.",
+    "Ticker chip tap (p.goCompany) — routes to the Company screen (route 'company'); does not change the bottom-nav selection (goCompany is called with no nav argument, so `nav` stays 'pit' and the Pit tab remains lit).",
+    "Title/excerpt block tap (p.goPost) — routes to the Post detail screen (route 'post'); again no nav change, Pit tab stays lit. The previous route is stored in `prev` so the detail screen's back button returns here.",
+    "Post card press — `style-active: transform:scale(0.99)` with `transition:transform 220ms ease-out`. Applies to the whole card even though the card itself has no tap handler.",
+    "FAB press — `style-active: transform:scale(0.94)` with `transition:transform 220ms ease-out`. No onClick is bound in the design; the destination compose screen is NOT specified.",
+    "Screen entry — the root column plays `bRise` 240ms ease-out: opacity 0 -> 1 and translateY(4px) -> 0.",
+    "Bottom-nav selection pill — `bPill` 320ms cubic-bezier(.32,1.2,.44,1) (opacity 0 -> 1 with a slight overshoot curve); the pill's position is set by transform translateX(n*100%), 200% for Pit.",
+    "Like / comment / Save in the card footer — NO interaction in this screen. They are plain static spans. The like toggle (accent #E8621C, count 131<->132, `transition:color 200ms ease-out`) and the save toggle (42x42 button, radius 16px, ink fill #1B1917 / icon #F5F1EC when saved, `transition:all 200ms ease-out`) exist only on the Post detail screen.",
+    "Not specified anywhere in the file: pull-to-refresh, infinite scroll / pagination, scroll-to-top on re-tapping the Pit nav tab, unread badge, long-press menu, report affordance entry point (only the resulting 'Under review' card is designed), and the FAB destination."
+  ],
+  "flutterNotes": "STRUCTURE\n- Scaffold with `extendBody: true` and a `Stack`: (1) scrollable content, (2) bottom scrim, (3) glass nav, (4) FAB. Do NOT use Scaffold.floatingActionButton — the FAB here is at exactly right:20, bottom:108 relative to the frame, which does not match any FloatingActionButtonLocation. Use `Positioned(right: 20, bottom: 108)`.\n- Content: `CustomScrollView`/`ListView` with `padding: EdgeInsets.fromLTRB(16, 54, 16, 124)`. Wrap with `ScrollConfiguration(behavior: ...copyWith(scrollbars: false))`. The 54px top pad is the status-bar clearance in the mock; on a real device use `MediaQuery.padding.top` and keep the 124px bottom as `22 + 66 + 36` clearance above the home indicator.\n- Root column `gap: 20` → use `Column(children: [...])` with `SizedBox(height: 20)` separators, or a `Column` + `spacing: 20` (Flutter 3.27+).\n\nTYPE\n- Two families: `Outfit` for display (weights 200/300/400/500) and `IBM Plex Sans Arabic` for all UI labels, numerals and Arabic (weights 300/400/500). Register both in pubspec with the exact weights.\n- CSS `font: W SIZE/LH` maps to `TextStyle(fontWeight, fontSize, height: LH)`. `/1` means `height: 1.0` — set it explicitly or Flutter's default line height will inflate chip and tab heights and break the measured 20px/35px boxes.\n- `letter-spacing` is in em: -0.03em at 36px = -1.08px; -0.01em at 22px = -0.22px; .06em at 10px = 0.6px. Flutter's `letterSpacing` is logical px, so multiply yourself.\n- `font-variant-numeric: tabular-nums` → `fontFeatures: [FontFeature.tabularFigures()]` on the subtitle, the footer metrics and the status bar. Without it the like/comment counts jitter.\n\nCOLOUR / ALPHA CONVERSIONS (rgba -> ARGB)\n- rgba(27,25,23,.08) = 0x141B1917 · .06 = 0x0F1B1917 · .10 = 0x1A1B1917 · .18 = 0x2E1B1917 · .58 = 0x941B1917 · .26 = 0x421B1917\n- rgba(232,98,28,.55) = 0x8CE8621C · .38 = 0x61E8621C\n- rgba(245,241,236,.76) = 0xC2F5F1EC · rgba(255,131,64,.9) = 0xE6FF8340\n- rgba(255,255,255,.42/.32/.30/.20/.16/.13/.07/.05) = 0x6B/0x51/0x4D/0x33/0x29/0x21/0x12/0x0D white.\n\nSHADOWS\n- CSS `0 Ypx Bpx rgba(...)` → `BoxShadow(offset: Offset(0, Y), blurRadius: B, color: ...)`. CSS blur B ≈ 2σ, and Flutter's blurRadius is already ≈2σ, so use the number as-is; it matches closely enough at these sizes.\n- `box-shadow: inset 0 0 0 1px C` is NOT a shadow — it is a 1px inner border. Use `BoxDecoration(border: Border.all(color: C, width: 1), borderRadius: ...)`. This is how both kind chips get their outline; getting this wrong makes the chips 2px wider.\n- `box-shadow: inset 0 1px 0 rgba(27,25,23,.08)` on the card footer is a 1px top hairline. Use `Container(decoration: BoxDecoration(border: Border(top: BorderSide(color: Color(0x141B1917), width: 1))), padding: EdgeInsets.only(top: 14))`.\n\nTRICKY BITS\n1. Striped avatar. `repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px)` has no Flutter equivalent. Build it with `ClipOval(child: SizedBox(28,28, child: CustomPaint(painter: _Stripes())))` — fill #E8E2DB, then draw 3px-wide #D9D2CA bands on a 6px period along an axis rotated so the bands run bottom-left→top-right (\"/\"). Alternatively a `RotationTransition`-free `Transform.rotate(angle: -pi/4)` over a repeating `LinearGradient` with hard stops (`stops: [0, .5, .5, 1]`, `tileMode: TileMode.repeated`) sized so one tile = 6px along the gradient axis.\n2. Glass nav + FAB gradient. `backdrop-filter: blur(26px) saturate(180%)` → `ClipRRect(borderRadius: BorderRadius.circular(999)) + BackdropFilter(filter: ImageFilter.blur(sigmaX: 13, sigmaY: 13))` (CSS blur radius ≈ 2σ, so 26px ≈ σ13) with a `Color(0x941B1917)` overlay on top. Flutter has no saturate filter — either accept the loss or add a `ColorFilter.matrix` saturation matrix chained via `ImageFilter.compose`. Inset highlight shadows (`0 1px 0 rgba(255,255,255,.30) inset`) have no BoxShadow equivalent: draw them as 1px gradient strips (the design already does this separately for the top sheen at left:14/right:14/top:1).\n3. Selection pill offset. `width: calc((100% - 12px)/4)` with `translateX(200%)` — compute as `(navWidth - 12) / 4` and left = `6 + 2 * pillWidth`. Animate with `AnimatedPositioned` (320ms, `Curves.easeOutBack`-ish; the exact curve is cubic-bezier(.32,1.2,.44,1) → `Cubic(0.32, 1.2, 0.44, 1.0)`).\n4. Card press scale. `style-active: transform:scale(0.99)` → `GestureDetector` + `AnimatedScale(scale: _pressed ? 0.99 : 1.0, duration: 220ms, curve: Curves.easeOut)`. Same pattern for the FAB at 0.94. Note the card has NO tap handler of its own — only the ticker chip and the title/excerpt block are tappable — so use `Listener`/`onTapDown` for the press feedback and keep two separate `GestureDetector`s inside for navigation.\n5. Icons. Rebuild the three 15x15 footer glyphs as `CustomPainter` (or inline SVG via flutter_svg) using the exact geometry listed in the section notes; stroke width 1.4, `PaintingStyle.stroke`, `strokeCap`/join default, colour #7A736D. The nav Pit icon is two filled circles in a 20x20 viewBox scaled to 21x21 — r=5.5 at (8,8.5) full opacity and r=5.5 at (13,12) at 50% opacity, both `currentColor`.\n6. Segmented control: `flex:1` segments → `Row(children: [Expanded(...), SizedBox(4), Expanded(...), SizedBox(4), Expanded(...)])` inside a 999px `Container` with `padding: EdgeInsets.all(4)`. Animate with `AnimatedContainer(duration: 220ms, curve: Curves.easeOut)` per segment — the design cross-fades each segment's own decoration; it does not slide a shared indicator.\n7. Post text is unclamped in the design (no line-clamp / ellipsis / fixed card height). If you clamp for production that is a deviation — decide deliberately and pick maxLines with `TextOverflow.ellipsis`.\n\nPRODUCT-RULE COMPLIANCE (must hold in the rebuild)\n- Nothing on this screen expresses BUY / SELL / TARGET / STOP / EXPECTED RETURN, and nothing should be added. The chips are epistemic labels (Question / Analysis / Source), not recommendations. Keep them that way.\n- The only colour-carrying semantic is the ember kind chip (#E8621C for 'Question'). It is already accompanied by its text label, so it satisfies the never-colour-alone rule — do not replace the label with a coloured dot. Likewise the active nav tab pairs colour with a dot indicator, and 'Under review' pairs its grey chip with the word.\n- Nothing on this screen is labelled with data age except the per-post relative timestamps (6h / 11h / 1d). The subtitle '2,418 investors · 61 active today' reads as live and has no age label — if the counts are cached, add the stale-data pill (rgba(27,25,23,.06) 999px pill, 11px 16px padding, 7px #7A736D dot, 12px/1.3 #5C554F text) directly under the header, inside the 20px root gap.\n- Accessibility: the like/comment/save glyphs have no text alternative in the markup. Add `Semantics(label: '131 likes' / '48 comments' / 'Save post')` — the numbers alone are ambiguous.\n\nRTL / ARABIC (direction-sensitive items, all must flip)\n- `margin-left: auto` on the Save item → use `Spacer()` inside the Row so it end-aligns automatically, or `EdgeInsetsDirectional`. A hard-coded left margin will strand Save on the wrong side.\n- FAB at `right: 20px` → `PositionedDirectional(end: 20, bottom: 108)`.\n- Nav selection pill `translateX(200%)` → in RTL the tab order mirrors, so compute the offset from the start edge with `PositionedDirectional` rather than a raw left/translate.\n- Author line `{name} · {ago}` — the middle dot with its leading space is a bidi hazard. Build it as a single `RichText` with explicit `TextDirection` and consider `‏`/`‎` marks, or lay the two spans out in a Row so the separator cannot reorder.\n- Chip row order (kind chip, then ticker chip) reverses in RTL — correct, and `Row` handles it if you avoid `Directionality.of` overrides.\n- The 135deg avatar stripe gradient mirrors under `Directionality` in CSS-like systems but will NOT in a CustomPainter; decide whether to mirror it (cosmetic only).\n- `letter-spacing: .06em` on the ticker chip must be dropped for Arabic text — letter-spacing breaks Arabic joining. Apply it only when the label matches `[A-Z]+`.\n- Tabular numerals: the counts, the '2,418' figure and the ages must stay Latin-digit or be converted with a locale-aware formatter; the design uses Latin digits with a comma thousands separator.\n- `text-align: center` inside the tab segments is direction-neutral; the header title uses default (start) alignment and will flip correctly.\n\nNOT READ / NOT SPECIFIED — do not invent\n- Per-tab post datasets, sort order semantics for 'Popular', and any pagination.\n- The FAB's destination screen and the compose flow.\n- Any loading skeleton specific to the Pit list (the STATES screen only shows a generic 96px + 2x64px dimmed-40% placeholder set with the note 'Static dimmed placeholders at 40% — no shimmer').\n- Error state for the feed (the STATES screen has no feed-failure card).\n- Dark theme values for this screen. The canvas header calls the app 'dark-first' but every value on the Pit screen is the light palette; no dark tokens exist in the file."
+}

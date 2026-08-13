@@ -1,0 +1,281 @@
+{
+  "screen": "States (empty / loading / error / reported) — phone index 7, route `states`, canvas label \"States\"",
+  "summary": "A specimen sheet of every non-happy-path surface in The Barbarian: a stale-data banner, an empty watchlist, an empty feed, a no-search-result, a loading skeleton set and a reported-post card, stacked in one scroll. In the shipped app these are six separate states belonging to six different screens — this canvas screen exists to fix their exact copy, geometry and tone, not to be built as a single page.",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Phone frame + status bar + scroll container (shared chrome, lines 46-53)",
+      "description": "Every screen sits in a 390x844 shell. Status bar is an absolutely-positioned overlay above the scroller (z-index 6, pointer-events:none) showing \"9:41\" at the start edge and three battery/signal blocks at the end edge. The screen body is a full-bleed scroller whose top padding (54px) clears the status bar and whose bottom padding (124px) clears the floating nav bar.",
+      "layout": "Shell: width:390px; height:844px; border-radius:46px; overflow:hidden; background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%); box-shadow:0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07); position:relative. Status bar: position:absolute; top:0; left:0; right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Battery cluster: display:flex; align-items:center; gap:5px; three bars — 16x9px radius 2px #1B1917 opacity .85, then 5x9px radius 1px #1B1917 opacity .5, then 22x10px radius 3px #1B1917 opacity .85. Scroller: position:absolute; inset:0; overflow-y:auto; scrollbar-width:none (::-webkit-scrollbar width:0;height:0;display:none); padding:54px 16px 124px; box-sizing:border-box."
+    },
+    {
+      "order": 2,
+      "name": "States root stack",
+      "description": "Single vertical stack holding all six state specimens; enters with the shared page-rise animation.",
+      "layout": "display:flex; flex-direction:column; gap:22px; animation:bRise 240ms ease-out. @keyframes bRise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}. Rendered inside sc-if value=\"{{ p.isStates }}\" (route === 'states')."
+    },
+    {
+      "order": 3,
+      "name": "Screen title \"States\"",
+      "description": "Large display title, same treatment as other screen titles in the app.",
+      "layout": "padding-top:6px; font:300 30px/1.05 Outfit,sans-serif; letter-spacing:-0.03em; color:#1B1917. No margin other than the 22px parent gap."
+    },
+    {
+      "order": 4,
+      "name": "Stale-data banner (pill)",
+      "description": "Full-width capsule that labels the age of the data. A neutral grey dot leads the text — the dot is decorative, the age is carried entirely by the string, so this satisfies the never-colour-alone rule.",
+      "layout": "Container: display:flex; align-items:center; gap:10px; background:rgba(27,25,23,.06); border-radius:999px; padding:11px 16px. (No explicit width — stretches to the flex-column cross size, i.e. full content width = 390 - 32 = 358px.) Dot: width:7px; height:7px; border-radius:999px; background:#7A736D; flex:none. Text: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#5C554F."
+    },
+    {
+      "order": 5,
+      "name": "Empty watchlist card",
+      "description": "Centred card with two ghost watchlist tiles at 40% opacity above the headline, body copy, and a dark pill CTA that navigates to Market.",
+      "layout": "Card: background:#F7F4F0; border-radius:28px; padding:28px 20px; box-shadow:0 8px 24px rgba(27,25,23,.06); text-align:center. Ghost tile grid: display:grid; grid-template-columns:1fr 1fr; gap:10px; opacity:.4; margin-bottom:20px; each tile height:56px; border-radius:16px; background:rgba(27,25,23,.10) (two tiles, no content). Headline: font:300 22px/1.2 Outfit,sans-serif; color:#1B1917. Body: margin-top:8px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. CTA: margin-top:18px; display:inline-block; padding:12px 22px; border-radius:999px; background:#1B1917; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#F5F1EC; cursor:pointer; onClick={{ p.goMarket }}. No hover/active/pressed style is declared on the CTA in the markup."
+    },
+    {
+      "order": 6,
+      "name": "Empty feed card",
+      "description": "Same card shell as the empty watchlist, but text-only: headline plus one line of body. No ghost tiles and no CTA — the recovery actions are named inside the sentence (\"Switch to Latest\") rather than rendered as controls.",
+      "layout": "Card: background:#F7F4F0; border-radius:28px; padding:28px 20px; box-shadow:0 8px 24px rgba(27,25,23,.06); text-align:center. Headline: font:300 22px/1.2 Outfit,sans-serif; color:#1B1917. Body: margin-top:8px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D."
+    },
+    {
+      "order": 7,
+      "name": "No-search-result group",
+      "description": "A bare wrapper div (no background) holding a filled search pill echoing the user's query, with the failure explanation as plain text below the pill — not inside it.",
+      "layout": "Wrapper: plain <div>, no styles. Search pill: display:flex; align-items:center; gap:10px; background:#F7F4F0; border-radius:999px; padding:14px 18px; box-shadow:0 8px 24px rgba(27,25,23,.06). Magnifier icon: svg width:17 height:17 viewBox=\"0 0 17 17\"; style flex:none; color:#7A736D; children = <circle cx=\"7.2\" cy=\"7.2\" r=\"5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/> and <rect x=\"10.6\" y=\"11.3\" width=\"5.4\" height=\"1.5\" rx=\".75\" transform=\"rotate(45 10.6 11.3)\" fill=\"currentColor\"/>. Query text: font:400 14px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917 (rendered as <span>, no flex:1, no ellipsis declared). Explanation: margin-top:14px; padding:0 4px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D."
+    },
+    {
+      "order": 8,
+      "name": "Loading group (skeletons)",
+      "description": "An uppercase eyebrow label, then a 40%-opacity skeleton set: one tall block over a two-up row. Explicitly static — the annotation under it forbids shimmer.",
+      "layout": "Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px. Skeleton stack: display:flex; flex-direction:column; gap:10px; opacity:.4. Block 1: height:96px; border-radius:24px; background:rgba(27,25,23,.12). Row: display:flex; gap:10px; two children each flex:1; height:64px; border-radius:20px; background:rgba(27,25,23,.12). Annotation: margin-top:10px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#9A938C. No animation of any kind is declared on the skeletons."
+    },
+    {
+      "order": 9,
+      "name": "Post-reported group",
+      "description": "Uppercase eyebrow, then a card carrying a neutral \"Under review\" chip, an explanation of what reporting did, and a plain-text Undo affordance.",
+      "layout": "Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px. Card: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06). Chip row: display:flex; align-items:center; gap:8px (single chip today; the row exists so more chips can join). Chip: padding:5px 11px; border-radius:999px; background:rgba(27,25,23,.08); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F. Body: margin-top:12px; font:400 14px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Undo: margin-top:12px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917 — start-aligned, no underline, no background, and NO onClick handler in the design markup."
+    },
+    {
+      "order": 10,
+      "name": "Shared bottom navigation (frame, lines 761-804)",
+      "description": "Renders on this screen because it lives outside the per-screen sc-if. The States phone is seeded with nav:'home' (state.ph[7] = mk('states','home')), so the Home tab is the active one: sliding pill at slot 0, #FF8340 icon and a 4px accent dot under it. This screen renders NOTHING distinctive in the nav — the Pit compose FAB (sc-if p.isPit) and the post composer bar (sc-if p.isPost) are both absent.",
+      "layout": "Scrim: position:absolute; left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%). Bar: position:absolute; left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); display:flex; align-items:center; padding:0 6px; box-sizing:border-box; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset. Active pill: position:absolute; left:6px; top:6px; bottom:6px; width:calc((100% - 12px) / 4); border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%); box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18); animation:bPill 320ms cubic-bezier(.32,1.2,.44,1); positioned by transform:translateX(0/100%/200%/300%). Top sheen: position:absolute; left:14px; right:14px; top:1px; height:1px; background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%). Each tab: flex:1; height:66px; column-flex centred; gap:5px; z-index:1. Active icon colour #FF8340 + dot width:4px;height:4px;border-radius:999px;background:#FF8340;box-shadow:0 0 8px rgba(255,131,64,.9). Inactive icon colour rgba(245,241,236,.76), no dot. Icons are 21x21 svg on viewBox 0 0 20 20."
+    }
+  ],
+  "components": [
+    {
+      "name": "StaleDataPill",
+      "description": "Capsule that states how old the displayed data is. Dot + label. Reused anywhere the app shows cached prices/filings; the age string is mandatory — the product rule is that stale data is always labelled with its age and never implied to be live.",
+      "styling": "display:flex; align-items:center; gap:10px; background:rgba(27,25,23,.06); border-radius:999px; padding:11px 16px. Dot 7x7px, border-radius:999px, background:#7A736D, flex:none. Label font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#5C554F.",
+      "likelyShared": true
+    },
+    {
+      "name": "EmptyStateCard",
+      "description": "Centred paper card used for both empty watchlist and empty feed. Slots: optional ghost-tile block, headline, body, optional dark pill CTA.",
+      "styling": "background:#F7F4F0; border-radius:28px; padding:28px 20px; box-shadow:0 8px 24px rgba(27,25,23,.06); text-align:center. Headline font:300 22px/1.2 Outfit,sans-serif; color:#1B1917. Body margin-top:8px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D.",
+      "likelyShared": true
+    },
+    {
+      "name": "GhostTileGrid",
+      "description": "Two placeholder watchlist tiles shown above the empty-watchlist headline to preview what the filled state looks like.",
+      "styling": "display:grid; grid-template-columns:1fr 1fr; gap:10px; opacity:.4; margin-bottom:20px. Tile: height:56px; border-radius:16px; background:rgba(27,25,23,.10).",
+      "likelyShared": false
+    },
+    {
+      "name": "PillButtonDark (primary CTA)",
+      "description": "Ink-filled capsule button. Only instance here is \"Browse companies\".",
+      "styling": "display:inline-block; padding:12px 22px; border-radius:999px; background:#1B1917; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#F5F1EC; cursor:pointer. margin-top:18px in this context. No declared pressed/hover state.",
+      "likelyShared": true
+    },
+    {
+      "name": "SearchQueryPill",
+      "description": "Read-only echo of the search box with a hand-built magnifier icon; used to show what query produced the no-result message.",
+      "styling": "display:flex; align-items:center; gap:10px; background:#F7F4F0; border-radius:999px; padding:14px 18px; box-shadow:0 8px 24px rgba(27,25,23,.06). Icon 17x17 svg, color:#7A736D, circle cx7.2 cy7.2 r5 stroke-width 1.5 + rect 5.4x1.5 rx.75 rotated 45deg about (10.6,11.3). Query font:400 14px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917.",
+      "likelyShared": true
+    },
+    {
+      "name": "SectionEyebrow",
+      "description": "Uppercase tracked micro-label above a group (\"Loading\", \"Post reported\"). Same pattern used elsewhere in the canvas header.",
+      "styling": "font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px.",
+      "likelyShared": true
+    },
+    {
+      "name": "SkeletonBlock",
+      "description": "Static dimmed placeholder rectangle. Three sizes appear: 96px tall / radius 24 (card), and 64px tall / radius 20 (half-width pair). Opacity is applied to the wrapping stack (.4), not the individual blocks.",
+      "styling": "background:rgba(27,25,23,.12); border-radius:24px (tall) or 20px (short); heights 96px / 64px; short ones flex:1 inside a display:flex;gap:10px row. Wrapper: display:flex; flex-direction:column; gap:10px; opacity:.4. No shimmer/animation.",
+      "likelyShared": true
+    },
+    {
+      "name": "StatusChipNeutral",
+      "description": "Small neutral status chip; instance here is \"Under review\". Text-carried state, no colour semantics.",
+      "styling": "padding:5px 11px; border-radius:999px; background:rgba(27,25,23,.08); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F.",
+      "likelyShared": true
+    },
+    {
+      "name": "ModerationCard",
+      "description": "Card for a post that the user reported: chip row, explanation, inline Undo.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06). Chip row display:flex; align-items:center; gap:8px. Body margin-top:12px; font:400 14px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Undo margin-top:12px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917.",
+      "likelyShared": false
+    },
+    {
+      "name": "InlineTextAction (\"Undo\")",
+      "description": "Low-emphasis text-only action inside a card. Ink coloured, no underline, no chrome. In the design it carries no onClick — the handler is unspecified and must be defined by the engineer.",
+      "styling": "font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; margin-top:12px; start-aligned.",
+      "likelyShared": true
+    },
+    {
+      "name": "ScreenTitle",
+      "description": "Top-of-screen display title, identical treatment across screens.",
+      "styling": "padding-top:6px; font:300 30px/1.05 Outfit,sans-serif; letter-spacing:-0.03em; color:#1B1917.",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "9:41",
+      "role": "status bar clock (frame chrome, mock only)"
+    },
+    {
+      "text": "States",
+      "role": "screen title (h1)"
+    },
+    {
+      "text": "Showing data from 2 hours ago",
+      "role": "stale-data banner label"
+    },
+    {
+      "text": "Empty watchlist",
+      "role": "empty-state heading (watchlist)"
+    },
+    {
+      "text": "Follow a company and its price, filings and threads land here.",
+      "role": "empty-state body (watchlist)"
+    },
+    {
+      "text": "Browse companies",
+      "role": "primary CTA button (navigates to Market)"
+    },
+    {
+      "text": "Nothing in your feed",
+      "role": "empty-state heading (feed)"
+    },
+    {
+      "text": "You follow 0 investors. Switch to Latest, or start the thread yourself.",
+      "role": "empty-state body (feed) — \"0\" is a live count, \"Latest\" names a Pit tab"
+    },
+    {
+      "text": "zamalek holding",
+      "role": "echoed search query inside the search pill (lowercase as typed, verbatim)"
+    },
+    {
+      "text": "No listed company matches that. Try a ticker, or the Arabic legal name.",
+      "role": "no-result explanation body"
+    },
+    {
+      "text": "Loading",
+      "role": "section eyebrow — source string is title-case \"Loading\"; CSS text-transform:uppercase renders it as LOADING"
+    },
+    {
+      "text": "Static dimmed placeholders at 40% — no shimmer.",
+      "role": "designer annotation under the skeletons (em dash U+2014). This is spec commentary, NOT product copy — do not ship it in the app"
+    },
+    {
+      "text": "Post reported",
+      "role": "section eyebrow — source string title-case, rendered uppercase via CSS"
+    },
+    {
+      "text": "Under review",
+      "role": "status chip on the reported post"
+    },
+    {
+      "text": "You reported this post. It stays hidden from your feed while a moderator looks at it.",
+      "role": "moderation explanation body"
+    },
+    {
+      "text": "Undo",
+      "role": "inline text action (reverses the report)"
+    },
+    {
+      "text": "States",
+      "role": "canvas caption above the phone (design-tool chrome, p.label — not app UI)"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink — titles, query text, Undo, CTA fill, status bar)",
+      "#F7F4F0 (paper — all cards and the search pill)",
+      "#F5F1EC (paper-on-ink — CTA label)",
+      "#5C554F (text-2 — stale banner label, Under review chip)",
+      "#7A736D (text-3 — body copy, eyebrows, stale dot, search icon)",
+      "#9A938C (text-4 — skeleton annotation)",
+      "rgba(27,25,23,.06) (stale banner fill AND card shadow colour)",
+      "rgba(27,25,23,.08) (Under review chip fill)",
+      "rgba(27,25,23,.10) (ghost watchlist tiles)",
+      "rgba(27,25,23,.12) (skeleton blocks)",
+      "#EDE8E2 -> #E3DCD4 (shell background gradient, 180deg)",
+      "#FF8340 (nav active icon + dot — frame only)",
+      "rgba(245,241,236,.76) (nav inactive icons — frame only)",
+      "rgba(27,25,23,.58) (nav bar glass fill — frame only)",
+      "NOT USED on this screen: #E8621C accent, #3F6B52 up, #A3402F down — the States screen is entirely neutral/monochrome"
+    ],
+    "fontStyles": [
+      "300 30px/1.05 Outfit, letter-spacing -0.03em (screen title)",
+      "300 22px/1.2 Outfit (empty-state headings)",
+      "400 12px/1.3 'IBM Plex Sans Arabic' (stale banner)",
+      "400 13px/1.5 'IBM Plex Sans Arabic' (empty-state + no-result body)",
+      "400 13px/1 'IBM Plex Sans Arabic' (CTA label)",
+      "400 14px/1 'IBM Plex Sans Arabic' (search query)",
+      "400 14px/1.5 'IBM Plex Sans Arabic' (moderation body)",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing .16em, text-transform uppercase (section eyebrows)",
+      "300 10px/1.4 'IBM Plex Sans Arabic' (skeleton annotation)",
+      "500 10px/1 'IBM Plex Sans Arabic' (Under review chip)",
+      "400 12px/1 'IBM Plex Sans Arabic' (Undo)",
+      "500 13px/1 'IBM Plex Sans Arabic', font-variant-numeric tabular-nums (status bar, frame)",
+      "Family stack on the shell: Outfit, system-ui, sans-serif. Google Fonts loaded: Outfit 200;300;400;500 and IBM Plex Sans Arabic 300;400;500."
+    ],
+    "radii": [
+      "999px (stale banner, CTA, search pill, chip, dots, nav bar, nav pill)",
+      "28px (empty-state cards)",
+      "24px (moderation card, tall skeleton)",
+      "20px (short skeletons)",
+      "16px (ghost watchlist tiles)",
+      "46px (phone shell)",
+      "3px / 2px / 1px + .75px rx (status-bar bars, search-icon handle)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.06) — every card and the search pill on this screen",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (frame)",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — nav bar (frame)",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — nav active pill (frame)",
+      "0 0 8px rgba(255,131,64,.9) — nav active dot glow (frame)",
+      "No shadow on: skeleton blocks, ghost tiles, stale banner, chip, CTA"
+    ],
+    "spacing": [
+      "Scroller padding 54px top / 16px sides / 124px bottom",
+      "Root stack gap 22px",
+      "Title padding-top 6px",
+      "Stale banner padding 11px 16px, internal gap 10px",
+      "Empty card padding 28px 20px",
+      "Ghost grid gap 10px, margin-bottom 20px",
+      "Heading -> body 8px; body -> CTA 18px; CTA padding 12px 22px",
+      "Search pill padding 14px 18px, internal gap 10px; pill -> explanation 14px; explanation side padding 0 4px",
+      "Eyebrow margin-bottom 12px",
+      "Skeleton stack gap 10px (column and row); stack -> annotation 10px",
+      "Moderation card padding 18px; chip row gap 8px; chip padding 5px 11px; chip -> body 12px; body -> Undo 12px",
+      "Nav inset left/right 16px, bottom 22px, inner padding 0 6px; nav height 66px; scrim height 118px",
+      "Status bar height 54px, padding 0 26px, cluster gap 5px"
+    ]
+  },
+  "interactions": [
+    "Screen enter: whole States stack runs `bRise` — 240ms ease-out, opacity 0 -> 1 with transform translateY(4px) -> translateY(0). Flutter: FadeTransition + SlideTransition (4 logical px), Curves.easeOut, 240ms.",
+    "\"Browse companies\" CTA: onClick = p.goMarket = go(i,'market','market') — routes the phone to the Market screen AND sets the bottom-nav selection to Market (the active pill slides from slot 0 to slot 1 with `bPill` 320ms cubic-bezier(.32,1.2,.44,1)). It also pushes the current route onto `prev` for back. cursor:pointer is the only affordance declared; there is NO hover, active or scale style on this button in the markup — pick a house press state (the canvas uses `transform:scale(0.94)` with `transition:transform 220ms ease-out` on the Pit FAB if you want a consistent one).",
+    "\"Undo\" text action: NO onClick is present in the design markup. Behaviour is unspecified — engineer must wire un-reporting the post and removing the card. Tap target as drawn is only ~12px tall; enlarge to >=44px without changing the visual.",
+    "Skeletons: explicitly NON-animated. The annotation reads \"Static dimmed placeholders at 40% — no shimmer.\" Do not add a shimmer/pulse. The 40% comes from opacity:.4 on the wrapping column, so it applies to the whole skeleton group at once.",
+    "Cards (empty watchlist, empty feed, no-result, moderation) have no tap handlers and no cursor:pointer — they are not interactive surfaces.",
+    "The stale banner has no refresh affordance in this design — it is informational only.",
+    "Bottom nav (frame): 4 tabs, each flex:1 and 66px tall (good 97x66 target), onClick goHome/goMarket/goPit/goYou. Active pill animates with `bPill` (opacity 0 -> 1, 320ms, cubic-bezier(.32,1.2,.44,1)); its position is driven by translateX(0/100%/200%/300%) on a calc((100% - 12px)/4)-wide element.",
+    "Scroll: the screen scrolls under the translucent nav and the 118px bottom scrim; nothing is pinned except the status bar overlay."
+  ],
+  "flutterNotes": "STRUCTURE. Do not build this as one screen. It is a catalogue. Ship it as: (a) `StaleDataBanner` widget, (b) `EmptyStateCard` widget with optional `ghost` and `action` slots, used by the watchlist and Pit-feed screens, (c) a `NoResultsView` used under the Market search field, (d) `LoadingSkeletons` used as the initial-load body, (e) `ReportedPostCard` used in place of a hidden post in the Pit list. Keep the exact copy.\n\nLAYOUT. Root = SingleChildScrollView(padding: EdgeInsets.fromLTRB(16,54,16,124)) inside a Stack whose top child is the status bar and whose bottom children are the nav scrim + nav bar. Root stack = Column(crossAxisAlignment: CrossAxisAlignment.stretch) with SizedBox(height:22) separators — the 22px gap is uniform, no exceptions.\n\nTYPE. Outfit only for the two display strings (\"States\" 30/1.05 w300 ls -0.03em, and the 22/1.2 w300 empty-state headings). Everything else is IBM Plex Sans Arabic. CSS `font: <weight> <size>/<lineHeight>` maps to TextStyle(fontWeight, fontSize, height: <that ratio>). letter-spacing in em must be converted: .16em at 11px = 1.76 logical px (use `letterSpacing: 1.76`); -0.03em at 30px = -0.9. Set `leadingDistribution: TextLeadingDistribution.even` so the 1.5 line heights match the web box. Two eyebrow strings are stored title-case and uppercased by CSS — store them title-case and call `.toUpperCase()` only in the Latin locale (see RTL).\n\nSHADOWS. Every card here is exactly `BoxShadow(color: Color(0x0F1B1917) /* rgba(27,25,23,.06) */, blurRadius: 24, offset: Offset(0,8))`. CSS blur 24 ≈ Flutter blurRadius 24 with spreadRadius 0; if it reads heavier, halve to 12 — but the design value is 24.\n\nGRADIENTS / BLUR. Only the frame needs them: shell background LinearGradient(begin: topCenter, end: bottomCenter, colors:[#EDE8E2,#E3DCD4]); nav bar needs BackdropFilter(ImageFilter.blur(sigmaX:26,sigmaY:26)) — CSS 26px blur ≈ sigma 13 in Flutter (sigma ≈ radius/2), so use sigma 13 and compare; `saturate(180%)` has no direct Flutter equivalent, approximate with a ColorFilter.matrix saturation boost or drop it. Clip the BackdropFilter to the 999px capsule or the blur leaks. The nav's four box-shadows include two insets — Flutter has no inset shadow; emulate with a 1px inner Border of Color(0x4DFFFFFF) at the top plus the 1px hairline border Color(0x21FFFFFF).\n\nNO GAUGES on this screen — the dial() arc widget is not used here, so no CustomPainter is required. The only custom paint is the 17x17 magnifier: draw it with CustomPainter (circle centre (7.2,7.2) r 5, stroke 1.5, colour #7A736D; plus a 5.4x1.5 rounded-rect handle, rx .75, rotated 45° about the point (10.6,11.3)) or ship it as an inline SVG asset. Its viewBox is 17x17 while the design nudges the circle off-centre — keep the exact coordinates, do not re-centre it.\n\nSKELETONS. Wrap the whole skeleton Column in Opacity(opacity: 0.4) — not per-block — and use plain DecoratedBox with Color(0x1F1B1917). Explicitly no AnimatedBuilder, no shimmer package. The 96px block is radius 24; the two 64px blocks are radius 20 inside a Row with two Expanded and a 10px SizedBox between.\n\nPRODUCT RULES. Nothing on this screen names BUY/SELL/TARGET/STOP/EXPECTED RETURN — keep it that way when you localise or expand the empty-state copy. Every state is communicated by text: the stale banner's dot is #7A736D neutral and carries no meaning, and \"Under review\" is a word not a colour. Do not \"improve\" these by adding red/green. The stale banner's age string (\"2 hours ago\") must be computed from the data timestamp and must never be dropped or replaced with a live-looking indicator.\n\nRTL / ARABIC (this screen is unusually direction-sensitive for how simple it is):\n- The stale banner dot leads the text — use Row with the dot first and let Directionality flip it; do not hard-code left padding.\n- The search pill's magnifier must move to the right edge in Arabic, and the icon glyph itself should be mirrored (the 45° handle points down-right; wrap in Transform(scaleX: -1) under RTL) — a magnifier is conventionally mirrored in RTL.\n- `padding: 0 4px` on the no-result explanation and all card paddings are symmetric, so EdgeInsets.symmetric is safe everywhere on this screen; there are no asymmetric paddings except the frame's nav (0 6px, also symmetric) and the status bar.\n- \"Undo\" is start-aligned (default) — use TextAlign.start, never TextAlign.left.\n- The centred cards (text-align:center) stay centred in both directions; no work needed.\n- text-transform:uppercase + letterSpacing .16em must be DISABLED for Arabic — Arabic has no case, and positive letter spacing breaks cursive joining. Gate both on `Directionality.of(context) == TextDirection.ltr` (or on locale).\n- Numerals: \"9:41\", \"2 hours ago\", \"0 investors\", \"40%\" — decide Western vs Arabic-Indic digits once, app-wide, and use NumberFormat with the locale. The follower count in \"You follow 0 investors.\" is a live number inside a sentence: make it a plural-aware ICU message, not string concatenation, because Arabic has six plural forms (0 investors / 1 / 2 / 3-10 / 11-99 / other).\n- \"Latest\" inside the feed empty-state body is a reference to a Pit tab label — it must be translated identically to that tab, so bind it from the same string key rather than hard-coding it in the sentence.\n- The query echo \"zamalek holding\" is user input: it can be Arabic, mixed, or long. Give the Text `overflow: TextOverflow.ellipsis, maxLines: 1` inside an Expanded — the design declares no overflow handling and a long query will blow the pill out.\n- The em dash in \"Static dimmed placeholders at 40% — no shimmer.\" is U+2014; that string is designer commentary, not shippable copy.\n\nMISSING VALUES (not present in the design — do not invent, decide explicitly): pressed/hover state for \"Browse companies\"; the Undo tap handler and its confirmation; any focus/accessibility labels; dark-mode variants (the canvas header says \"dark-first\" but the States screen is drawn light only); semantics/screen-reader strings; and the exact width of the stale banner (it stretches, no max-width is declared)."
+}

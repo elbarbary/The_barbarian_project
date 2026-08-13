@@ -1,0 +1,325 @@
+{
+  "screen": "Research reader (Cash or Trash long-form article — SWDY)",
+  "summary": "Full-bleed long-form reading view for a single piece of Barbarian research, opened from the Home feed's research list (nav state stays on Home). It is an article masthead + a dark \"verdict\" card carrying the Cash-or-Trash arc gauge, then alternating body prose, a dark pull-quote card, a light bar-chart card, and a closing paragraph with inline source links.",
+  "sections": [
+    {
+      "order": 0,
+      "name": "Phone frame + scroll container (shared chrome, not screen-specific)",
+      "description": "Every screen sits in a 390x844 shell. The article is the only scrolling layer; the status bar, bottom scrim and bottom nav are absolutely positioned siblings above it. Nothing about this frame is unique to the reader, but the paddings determine every derived y-coordinate below.",
+      "layout": "Shell: position:relative; width:390px; height:844px; border-radius:46px; overflow:hidden; background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%); box-shadow:0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07). Status bar: position:absolute; top:0;left:0;right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Right cluster: display:flex;align-items:center;gap:5px with three pills — 16x9 radius 2px #1B1917 opacity .85; 5x9 radius 1px #1B1917 opacity .5; 22x10 radius 3px #1B1917 opacity .85. Scroll area: position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; padding:54px 16px 124px; box-sizing:border-box  →  content column width = 390-32 = 358px, content starts at y=54, 124px bottom clearance for the floating nav."
+    },
+    {
+      "order": 1,
+      "name": "Article root column",
+      "description": "Single flex column holding all eight article blocks. The ONLY inter-block spacing on this screen is its 20px gap — there are no margins between blocks. The whole column plays one entrance animation on mount.",
+      "layout": "display:flex; flex-direction:column; gap:20px; animation:bRise 240ms ease-out. @keyframes bRise{from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)}} (no `both` fill — starts from the `from` frame, ends at natural state)."
+    },
+    {
+      "order": 2,
+      "name": "Header row — back + save",
+      "description": "Two 42px squircle buttons pinned to the outer edges. Left = back (chevron), right = save toggle whose colours invert when saved. Both are the only tappable chrome above the fold.",
+      "layout": "Row: padding-top:6px; display:flex; align-items:center; justify-content:space-between  → buttons occupy y=60..102 measured from the phone top. Back button: width:42px;height:42px;border-radius:16px;background:#F7F4F0;box-shadow:0 8px 24px rgba(27,25,23,.08);display:flex;align-items:center;justify-content:center;font:300 20px/1 Outfit,sans-serif;color:#1B1917;cursor:pointer; glyph = '‹' (U+2039). Save button (p.saveStyle, built in JS): width:42px;height:42px;border-radius:16px;box-shadow:0 8px 24px rgba(27,25,23,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 200ms ease-out; background:#F7F4F0 when unsaved / #1B1917 when saved; color:#1B1917 when unsaved / #F5F1EC when saved. Icon inside: <svg width=16 height=16 viewBox='0 0 15 15'><rect x=3 y=1.5 width=9 height=12 rx=2.4 fill=none stroke=currentColor stroke-width=1.4/></svg> — note the 16/15 upscale means the on-screen stroke is 1.493px and the rect renders at 9.6x12.8px, radius 2.56px, inset 3.2px from the left of the 16px box."
+    },
+    {
+      "order": 3,
+      "name": "Article masthead (kicker, title, dek, byline)",
+      "description": "Plain <div> wrapper with no styles of its own; the four children are spaced by their own margin-top. Starts at y=122 given the 20px column gap.",
+      "layout": "Wrapper: no style. (a) Kicker: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (=1.76px); text-transform:uppercase; color:#7A736D. (b) Title: margin-top:14px; font:200 40px/1.02 Outfit,sans-serif; letter-spacing:-0.03em (=-1.2px); color:#1B1917; contains a hard <br> — renders as exactly two lines, 'Cash or' / 'Trash'; line box = 40.8px each. (c) Dek: margin-top:14px; font:400 15px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#5C554F; max-width:34ch. (d) Byline row: margin-top:16px; display:flex; align-items:center; gap:10px. Avatar: width:34px;height:34px;border-radius:999px;background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px) — 3px/3px diagonal stripes, 6px period, running down-right. Byline text: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif;color:#1B1917 for 'The Barbarian', with an inner <span style='color:#9A938C'> carrying ' · 4 Aug · 14 min read'."
+    },
+    {
+      "order": 4,
+      "name": "Verdict card (dark) — Cash-or-Trash arc gauge",
+      "description": "The signature block. Dark gradient card, centred column: uppercase 'The verdict' label, the 230px arc dial, then a one-sentence plain-language verdict. The dial is produced by the shared dial() builder; full mechanics are in the 'Arc tick gauge' component entry.",
+      "layout": "Card: background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:28px; padding:24px 20px 20px; display:flex; flex-direction:column; align-items:center. Inner width on a 390px phone = 358-40 = 318px. (a) Label: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (=1.6px); text-transform:uppercase; color:#8E8781. (b) Dial wrapper: margin-top:18px; renders {{ dialVerdict }} = dial({size:230, value:72, min:0, max:100, big:'72', caption:'Cash', lo:'Trash', hi:'Cash'}) → a 230x161px box, centred by the card's align-items:center (14px slack either side). (c) Summary line: margin-top:14px; font:400 13px/1.5 'IBM Plex Sans Arabic',sans-serif; color:#8E8781; text-align:center. Total card height = 24+10+18+161+14+(2 lines x 19.5)+20 ≈ 286px."
+    },
+    {
+      "order": 5,
+      "name": "Body paragraph 1",
+      "description": "First prose block, immediately after the verdict card.",
+      "layout": "font:400 16px/1.65 'IBM Plex Sans Arabic',sans-serif; color:#3D3833; max-width:62ch. Line box = 26.4px. No margin (spacing comes from the column's 20px gap)."
+    },
+    {
+      "order": 6,
+      "name": "Pull-quote card (dark)",
+      "description": "Dark card with a single large Outfit statement. Same gradient and radius as the verdict card but symmetric padding and no centring.",
+      "layout": "Card: background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:28px; padding:24px (all sides). Text: font:300 24px/1.28 Outfit,sans-serif; letter-spacing:-0.01em (=-0.24px); color:#F5F1EC. Text is left-aligned (inherits), line box = 30.72px."
+    },
+    {
+      "order": 7,
+      "name": "Body paragraph 2",
+      "description": "Second prose block. Identical typography to paragraph 1.",
+      "layout": "font:400 16px/1.65 'IBM Plex Sans Arabic',sans-serif; color:#3D3833; max-width:62ch."
+    },
+    {
+      "order": 8,
+      "name": "Chart card — gross margin, quarterly",
+      "description": "Light card containing a 7-bar column chart with the final (most recent) bar highlighted in the down colour, plus a source/staleness footnote. Bars are unlabelled — no axis, no gridlines, no value labels of any kind.",
+      "layout": "Card: border-radius:20px; overflow:hidden; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.06). (a) Title strip: padding:18px 18px 0; font:400 13px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#1B1917. (b) Bar row: padding:18px; display:flex; align-items:flex-end; gap:6px; height:120px — box-sizing is CONTENT-BOX (there is no global box-sizing reset in this document), so the row is 120px of bars + 18px top + 18px bottom = 156px total, and every bar percentage is a fraction of 120px. Seven bars, each flex:1; border-radius:8px. On a 390px phone each bar computes to (358-36-6*6)/7 = 40.857px wide. Heights in order: 78% (93.6px), 84% (100.8px), 92% (110.4px), 88% (105.6px), 96% (115.2px), 100% (120px), 82% (98.4px). Fill: rgba(27,25,23,.10) for bars 1-6; the 7th bar is #A3402F (down/red). (c) Footnote: padding:0 18px 18px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#9A938C. Total card height = 18+16.9+18+120+18+14+18 ≈ 223px."
+    },
+    {
+      "order": 9,
+      "name": "Body paragraph 3 with inline source links",
+      "description": "Closing prose block containing two inline anchors to primary sources. Last element in the column; the 124px scroll padding sits below it.",
+      "layout": "Paragraph: font:400 16px/1.65 'IBM Plex Sans Arabic',sans-serif; color:#3D3833; max-width:62ch. Anchors: color:#E8621C; text-decoration:underline; text-underline-offset:3px (global stylesheet also sets a{color:#E8621C} and a:hover{color:#c8500f}). Em dash '—' precedes the first link."
+    },
+    {
+      "order": 10,
+      "name": "Bottom chrome (shared; reader renders NOTHING distinctive here)",
+      "description": "Included only to fix the safe area. The Pit's FAB (isPit) and the Post detail composer (isPost) are conditional siblings that the reader does NOT render. The reader phone's nav state is nav:'home', so the Home tab is the active one even though the route is 'reader' — a detail view keeps its parent tab lit.",
+      "layout": "Scrim: position:absolute;left:0;right:0;bottom:0;height:118px;z-index:5;pointer-events:none;background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%). Nav bar: position:absolute;left:16px;right:16px;bottom:22px;height:66px;z-index:7;border-radius:999px;background:rgba(27,25,23,.58);backdrop-filter:blur(26px) saturate(180%);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset. Active pill (Home, index 0): position:absolute;left:6px;top:6px;bottom:6px;width:calc((100% - 12px)/4);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%);box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18);animation:bPill 320ms cubic-bezier(.32,1.2,.44,1); translateX(100%/200%/300%) for Market/Pit/You. Top hairline: position:absolute;left:14px;right:14px;top:1px;height:1px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%). Active icon colour #FF8340 plus a 4x4 dot (border-radius:999px;background:#FF8340;box-shadow:0 0 8px rgba(255,131,64,.9)) 5px under the icon; inactive icons rgba(245,241,236,.76) with no dot. Icons are 21x21 SVGs on a 0 0 20 20 viewBox."
+    }
+  ],
+  "components": [
+    {
+      "name": "Squircle icon button (42px)",
+      "description": "The back button and the save toggle share one geometry. Back is static; save is a two-state toggle (see next entry).",
+      "styling": "42x42px; border-radius:16px; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.08); centred content; back glyph font:300 20px/1 Outfit,sans-serif; color:#1B1917.",
+      "likelyShared": true
+    },
+    {
+      "name": "Save toggle button",
+      "description": "Stateful bookmark toggle. State lives on the screen (`saved`, initial false). Colour fully inverts: unsaved = light chip with dark icon; saved = dark chip with paper icon. There is NO label, so state is communicated by fill inversion alone — this violates the project's 'never colour alone' rule and needs an added text/icon-shape channel (e.g. filled vs outlined bookmark, or a 'Saved' toast).",
+      "styling": "42x42; border-radius:16px; box-shadow:0 8px 24px rgba(27,25,23,.08); transition:all 200ms ease-out. Unsaved: background #F7F4F0, icon colour #1B1917. Saved: background #1B1917, icon colour #F5F1EC. Icon: 16x16 render of a 15x15 viewBox rounded rect, x=3 y=1.5 w=9 h=12 rx=2.4, stroke=currentColor, stroke-width=1.4 (→1.493 on screen), fill none.",
+      "likelyShared": true
+    },
+    {
+      "name": "Kicker / eyebrow label",
+      "description": "Uppercase tracked micro-label used for the article category and for the 'The verdict' card label.",
+      "styling": "Article kicker: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (1.76px); text-transform:uppercase; color:#7A736D. Dark-card variant: 400 10px/1, letter-spacing .16em (1.6px), color:#8E8781. Dial caption variant: 400 9px/1, letter-spacing .16em (1.44px), color:#8E8781.",
+      "likelyShared": true
+    },
+    {
+      "name": "Display title (Outfit ultralight)",
+      "description": "Two-line article title with a hard line break authored into the copy — the break is editorial, not a wrap.",
+      "styling": "font:200 40px/1.02 Outfit,sans-serif; letter-spacing:-0.03em (-1.2px); color:#1B1917.",
+      "likelyShared": true
+    },
+    {
+      "name": "Author byline row + striped avatar",
+      "description": "Avatar disc, author name, then a muted metadata run (date + read time) inside the same text flow.",
+      "styling": "Row: flex, align-items:center, gap:10px, margin-top:16px. Avatar: 34x34, border-radius:999px, background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px). Text: font:400 12px/1.3 'IBM Plex Sans Arabic',sans-serif; name colour #1B1917; meta span colour #9A938C.",
+      "likelyShared": true
+    },
+    {
+      "name": "Dark gradient card surface",
+      "description": "One surface token used twice on this screen (verdict card, pull quote) with different padding.",
+      "styling": "background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:28px. Verdict padding 24px 20px 20px + centred column; pull-quote padding 24px. No border, no shadow.",
+      "likelyShared": true
+    },
+    {
+      "name": "Arc tick gauge — dial() builder",
+      "description": "56 radial tick marks across a 180-degree semicircle, filled left-to-right in proportion to value, with a big number + verdict caption stacked inside the arc and lo/hi end labels on the baseline. Shared with the Company screen (dialRange, size 214). FULL MECHANICS, exact as read: N=56; r=size/2; tick=round(size*0.145); ratio=clamp(0..1, (value-min)/(max-min)); filled=round(N*ratio); tick i is lit iff i<filled; angle_i = -90 + (i/(N-1))*180 degrees (CSS rotate, clockwise-positive, so i=0 points due WEST, i=55 due EAST, step = 180/55 = 3.2727deg; i=27 = -1.636deg and i=28 = +1.636deg, i.e. the zero/centre axis at 0deg lies exactly BETWEEN two ticks because N is even). For the verdict instance: size=230, r=115, tick=33, value=72, min=0, max=100 → ratio=0.72, filled=40 (ticks 0..39 lit, 40..55 dim).",
+      "styling": "Outer box: position:relative; width:230px; height:(r+46)=161px. Each tick is a stalk div: position:absolute; left:50%; bottom:22px; width:2px; height:115px; transform-origin:50% 100%; transform:translateX(-1px) rotate(angle) → pivot at (115,139) in box coords. Inside each stalk, top-aligned, the visible mark: width:2px; height:33px; border-radius:1px. Lit mark: background:#E8621C with animation:bTick 220ms ease-out both, animation-delay:(i*9)ms. Dim mark: background:rgba(245,241,236,0.16), no animation. @keyframes bTick{from{background:rgba(245,241,236,0.16)} to{background:#E8621C}}. Because the mark sits at the stalk's far end, the tick band spans radius 82px..115px from the pivot; the arc apex is at y=24 and the baseline at y=139. Centre readout: position:absolute; left:0; right:0; bottom:46px; text-align:center; big number font:200 46px/1 Outfit,sans-serif (round(size*0.2)), letter-spacing:-0.03em (-1.38px), color:#F5F1EC, font-variant-numeric:tabular-nums; caption margin-top:7px, font:400 9px/1 'IBM Plex Sans Arabic',sans-serif, letter-spacing:0.16em, text-transform:uppercase, color:#8E8781. Readout block spans y=53..115. End labels: lo at position:absolute;left:2px;bottom:0 and hi at position:absolute;right:2px;bottom:0, both font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#8E8781; font-variant-numeric:tabular-nums.",
+      "likelyShared": true
+    },
+    {
+      "name": "Pull quote",
+      "description": "Large Outfit statement on a dark card, no quotation marks, no attribution.",
+      "styling": "font:300 24px/1.28 Outfit,sans-serif; letter-spacing:-0.01em (-0.24px); color:#F5F1EC.",
+      "likelyShared": false
+    },
+    {
+      "name": "Article body paragraph",
+      "description": "The prose token. Three instances on this screen, identical.",
+      "styling": "font:400 16px/1.65 'IBM Plex Sans Arabic',sans-serif; color:#3D3833; max-width:62ch. Note #3D3833 is a body-copy ink that is NOT in the palette list supplied with the brief — it sits between ink #1B1917 and text-2 #5C554F.",
+      "likelyShared": true
+    },
+    {
+      "name": "Inline source link",
+      "description": "Underlined accent anchor inside body prose, used for primary-source citations (EGX filing, annual report).",
+      "styling": "color:#E8621C; text-decoration:underline; text-underline-offset:3px; hover colour #c8500f (from the global a:hover rule). Inherits the 16px/1.65 IBM Plex Sans Arabic body font.",
+      "likelyShared": true
+    },
+    {
+      "name": "Inline chart card (bar)",
+      "description": "Light card wrapping a titled, unlabelled 7-bar chart with a single highlighted bar and a source/period footnote. The footnote is the staleness/provenance channel.",
+      "styling": "Card: border-radius:20px; overflow:hidden; background:#F7F4F0; box-shadow:0 8px 24px rgba(27,25,23,.06). Title padding:18px 18px 0, font:400 13px/1.3 'IBM Plex Sans Arabic'; color:#1B1917. Bars: padding:18px; flex; align-items:flex-end; gap:6px; content height 120px; each bar flex:1, border-radius:8px; neutral fill rgba(27,25,23,.10); highlighted fill #A3402F. Footnote padding:0 18px 18px; font:300 10px/1.4 'IBM Plex Sans Arabic'; color:#9A938C.",
+      "likelyShared": true
+    },
+    {
+      "name": "Floating glass bottom nav (shared)",
+      "description": "4-tab liquid-glass pill. Reader keeps Home lit. No badge, FAB or composer on this screen.",
+      "styling": "See section 10 for every value. Height 66px, inset left/right 16px, bottom 22px, radius 999px, rgba(27,25,23,.58) + blur(26px) saturate(180%).",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "‹",
+      "role": "back button glyph (U+2039 single left angle quote)"
+    },
+    {
+      "text": "Cash or trash · SWDY",
+      "role": "kicker / eyebrow, uppercased via CSS (source string is sentence case)"
+    },
+    {
+      "text": "Cash or\nTrash",
+      "role": "article title, hard <br> between the two words"
+    },
+    {
+      "text": "The complete study of El Sewedy Electric: backlog, copper, and what the export mix actually earns.",
+      "role": "dek / standfirst"
+    },
+    {
+      "text": "The Barbarian",
+      "role": "byline author name"
+    },
+    {
+      "text": " · 4 Aug · 14 min read",
+      "role": "byline metadata (muted span, includes its own leading space and middots)"
+    },
+    {
+      "text": "The verdict",
+      "role": "dark card section label, uppercased via CSS"
+    },
+    {
+      "text": "72",
+      "role": "gauge big value (dialVerdict.big)"
+    },
+    {
+      "text": "Cash",
+      "role": "gauge caption under the number, uppercased via CSS (dialVerdict.caption) — this is the text channel that carries the verdict without relying on colour"
+    },
+    {
+      "text": "Trash",
+      "role": "gauge low-end label, bottom-left (dialVerdict.lo)"
+    },
+    {
+      "text": "Cash",
+      "role": "gauge high-end label, bottom-right (dialVerdict.hi)"
+    },
+    {
+      "text": "Cheap on FY26 earnings, but only if the backlog converts on schedule.",
+      "role": "verdict summary sentence, centred"
+    },
+    {
+      "text": "El Sewedy has spent four years turning a domestic cable business into an export contractor. FY25 revenue of EGP 131.9bn is 61% above FY22, and roughly a third of it is now earned outside Egypt. That shift is the whole investment case, and it is also the reason the margin line keeps moving.",
+      "role": "body paragraph 1"
+    },
+    {
+      "text": "Export contracts carry the backlog, not the margin. Those are different businesses wearing the same ticker.",
+      "role": "pull quote"
+    },
+    {
+      "text": "Strip out the Saudi transmission award and gross margin is flat year on year. The market is paying 7.4× FY26 for a company whose order book is now longer than its history of delivering one.",
+      "role": "body paragraph 2 (note the × is U+00D7 multiplication sign, not the letter x)"
+    },
+    {
+      "text": "Gross margin, quarterly",
+      "role": "chart card title"
+    },
+    {
+      "text": "Q3 FY25 highlighted · company filings",
+      "role": "chart footnote / provenance + which bar is highlighted"
+    },
+    {
+      "text": "The Q3 disclosure is worth reading in full — see the EGX filing of 22 July and the FY25 annual report.",
+      "role": "body paragraph 3, containing two inline links"
+    },
+    {
+      "text": "EGX filing of 22 July",
+      "role": "inline link 1 (href='#' in the canvas — real destination not specified)"
+    },
+    {
+      "text": "FY25 annual report",
+      "role": "inline link 2 (href='#' in the canvas — real destination not specified)"
+    },
+    {
+      "text": "9:41",
+      "role": "status bar time (shell chrome)"
+    },
+    {
+      "text": "Research reader",
+      "role": "canvas frame label above the phone — design-tool chrome, NOT part of the app"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 ink (title, byline name, back glyph, chart title)",
+      "#242120 ink-raised (top stop of both dark card gradients)",
+      "#3D3833 body prose ink — NOT in the supplied palette list, new token",
+      "#5C554F text-2 (dek)",
+      "#7A736D text-3 (article kicker)",
+      "#8E8781 text-4 (dark-card label, gauge caption, gauge end labels, verdict summary)",
+      "#9A938C text-4-light (byline meta span, chart footnote)",
+      "#F7F4F0 paper (back button, unsaved save button, chart card)",
+      "#F5F1EC bg (gauge big number, pull-quote text, saved-state icon colour)",
+      "#E8621C accent (lit gauge ticks, inline links)",
+      "#c8500f accent-hover (global a:hover only)",
+      "#FF8340 accent-on-dark (active nav icon + dot)",
+      "#A3402F down (highlighted 7th chart bar)",
+      "#D9D2CA / #E8E2DB hairline pair (avatar stripe gradient)",
+      "rgba(27,25,23,.10) neutral bar fill",
+      "rgba(245,241,236,0.16) unlit gauge tick",
+      "rgba(27,25,23,.58) nav glass",
+      "rgba(245,241,236,.76) inactive nav icon",
+      "#EDE8E2 → #E3DCD4 phone body gradient (visible behind the article)"
+    ],
+    "fontStyles": [
+      "200 40px/1.02 Outfit, letter-spacing -0.03em — article title",
+      "200 46px/1 Outfit, letter-spacing -0.03em, tabular-nums — gauge big value (computed as round(size*0.2))",
+      "300 24px/1.28 Outfit, letter-spacing -0.01em — pull quote",
+      "300 20px/1 Outfit — back chevron",
+      "400 16px/1.65 'IBM Plex Sans Arabic' — body prose",
+      "400 15px/1.5 'IBM Plex Sans Arabic' — dek",
+      "400 13px/1.5 'IBM Plex Sans Arabic' — verdict summary",
+      "400 13px/1.3 'IBM Plex Sans Arabic' — chart card title",
+      "400 12px/1.3 'IBM Plex Sans Arabic' — byline",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing .16em, uppercase — article kicker",
+      "400 10px/1 'IBM Plex Sans Arabic', letter-spacing .16em, uppercase — 'The verdict' label",
+      "400 10px/1 'IBM Plex Sans Arabic', tabular-nums — gauge lo/hi labels",
+      "300 10px/1.4 'IBM Plex Sans Arabic' — chart footnote",
+      "400 9px/1 'IBM Plex Sans Arabic', letter-spacing .16em, uppercase — gauge caption",
+      "500 13px/1 'IBM Plex Sans Arabic', tabular-nums — status bar",
+      "Families loaded: Outfit 200;300;400;500 and IBM Plex Sans Arabic 300;400;500"
+    ],
+    "radii": [
+      "46px phone shell",
+      "28px dark cards (verdict, pull quote)",
+      "20px chart card",
+      "16px header icon buttons",
+      "8px chart bars",
+      "999px avatar, nav bar, nav pill",
+      "2.4px (on a 15-unit viewBox → 2.56px rendered) save icon rect",
+      "1px gauge tick mark"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.08) — header icon buttons (both)",
+      "0 8px 24px rgba(27,25,23,.06) — chart card (lighter than the buttons)",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (canvas only)",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — nav bar",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — nav active pill",
+      "0 0 8px rgba(255,131,64,.9) — active nav dot glow",
+      "The dark cards and the gauge carry NO shadow"
+    ],
+    "spacing": [
+      "20px — the single inter-block gap of the article column",
+      "54px top / 16px side / 124px bottom — scroll container padding",
+      "6px — header row padding-top",
+      "14px — title→dek and dek margins inside the masthead",
+      "16px — byline margin-top",
+      "10px — byline avatar→text gap",
+      "24px 20px 20px — verdict card padding",
+      "18px — label→dial inside the verdict card",
+      "14px — dial→summary inside the verdict card",
+      "24px — pull-quote card padding (all sides)",
+      "18px — chart card padding (title, bars, footnote)",
+      "6px — chart bar gap",
+      "7px — gauge number→caption",
+      "22px — gauge tick baseline offset from the box bottom",
+      "46px — gauge readout bottom offset",
+      "2px — gauge lo/hi label edge inset"
+    ]
+  },
+  "interactions": [
+    "Screen entrance: the whole article column plays `bRise` — 240ms ease-out, opacity 0→1 with translateY(4px)→0. No stagger between blocks; the column moves as one.",
+    "Gauge fill animation: each LIT tick plays `bTick` 220ms ease-out with fill-mode `both` and animation-delay = i*9ms, where i is the tick's absolute index from the west end. Ticks animate rgba(245,241,236,0.16) → #E8621C. For the 72/100 verdict instance the last lit tick is i=39 → delay 351ms → the sweep completes at ~571ms. The wipe therefore reads left-to-right at ~3.27deg per 9ms. Unlit ticks never animate.",
+    "Back button tap → p.back = this.go(i, s.prev || fallback). The screen pushes back to whatever route was previously on this phone; if there is no history it falls back by nav group (pit→pit, you→you, market→market, else home). For the reader the fallback is Home.",
+    "Save button tap → toggles `saved`; background and icon colour cross-fade over `transition:all 200ms ease-out`. No haptic, toast, count, or label is specified.",
+    "Inline links: href='#' in the canvas. Hover colour #c8500f comes from the global stylesheet (web-only; irrelevant on touch). No press/ripple treatment specified.",
+    "Vertical scroll only; scrollbars hidden (`scrollbar-width:none` plus a global ::-webkit-scrollbar reset to 0). No sticky header, no collapsing title, no reading-progress indicator, no scroll-linked effects anywhere on this screen.",
+    "Bottom nav taps (goHome/goMarket/goPit/goYou) leave the reader and switch tab; the active pill slides via `bPill` 320ms cubic-bezier(.32,1.2,.44,1) (keyframes animate opacity 0→1 only, so the springy curve is applied to a fade, not a translate — the translateX is a static per-tab value).",
+    "NOT present on this screen: no FAB (that is `isPit`), no reply composer bar (that is `isPost`), no share sheet, no text-size control, no audio player, no comment affordance, no pull-to-refresh."
+  ],
+  "flutterNotes": "STRUCTURE. `Scaffold(extendBody: true)` + `Stack`: (1) a `CustomScrollView`/`SingleChildScrollView` with `padding: EdgeInsets.fromLTRB(16,54,16,124)`, (2) the 118px bottom scrim as an `IgnorePointer` + `DecoratedBox` gradient, (3) the floating nav. The article itself is a `Column(crossAxisAlignment: stretch)` with 20px `SizedBox` separators (or `Column(spacing: 20)` on Flutter 3.27+). Entrance: one `AnimationController` (240ms, `Curves.easeOut`) driving a `FadeTransition` + `SlideTransition(Offset(0, 4/height))` around the whole column.\n\nTHE GAUGE — build it as a `CustomPainter`, not 56 widgets. Canvas size 230x161 (width = size, height = size/2 + 46). Pivot = Offset(size/2, height-22) = (115,139). For i in 0..55: theta = (-90 + i*180/55) degrees, converted to canvas radians as `rad = (theta - 90) * pi/180` if you measure from +x axis (CSS 0deg = pointing up), or simpler: draw each tick with `canvas.save(); canvas.translate(pivot); canvas.rotate(theta*pi/180); drawRect(Rect.fromLTWH(-1, -r, 2, tickLen)); canvas.restore();` where r = 115 and tickLen = 33 — i.e. the mark occupies radius 82..115. Use `RRect` with 1px radius. Lit colour 0xFFE8621C, unlit 0x29F5F1EC (0.16 alpha). Animate by passing a 0..1 controller value into the painter and lighting tick i only when `t*totalMs >= i*9` with a per-tick 220ms ease-out lerp between the two colours. `RepaintBoundary` it.\nThe number/caption stack is NOT part of the painter — `Positioned(left:0,right:0,bottom:46)` with a centred `Column`; lo/hi are `Positioned(left:2,bottom:0)` and `Positioned(right:2,bottom:0)`. Use `fontFeatures: [FontFeature.tabularFigures()]` on the big number and both end labels.\n\nRE-SCALING THE GAUGE TO A SIGNED SCORE. The canvas formula is `ratio = (v-min)/(max-min)` with fill anchored at the WEST end. If you naively set min=-S, max=+S, a score of 0 lights ticks 0..27 — half the arc — which reads as \"half good\" instead of \"neutral\". Do this instead: (a) keep N=56 and the angle formula unchanged; (b) note that because N is even there is NO centre tick — the zero axis (0deg, straight up) falls exactly between i=27 (-1.636deg) and i=28 (+1.636deg); draw a dedicated static zero marker there (a 1px hairline at 0deg, full 33px, colour 0x66F5F1EC) so the origin is legible without colour; (c) centre-anchored fill: `mag = (v.abs()/S).clamp(0,1); k = (28*mag).round();` for v>=0 light i in [28, 27+k], for v<0 light i in [28-k, 27]; v==0 lights nothing but the zero marker; (d) re-index the animation delay to `distanceFromCentre*9ms` so the bar grows outward from zero rather than sweeping from the west; (e) render the big number WITH an explicit sign ('+20', '-50', '-6') — the canvas' `big` is a pre-formatted string, so sign formatting is your job; (f) set lo/hi to the signed bounds or keep the words ('Trash' / 'Cash'). Colour: if you introduce #A3402F for negative and #3F6B52 for positive, the caption text MUST still state the verdict word (the canvas already does this — `caption:'Cash'` is the text channel), otherwise you break the colour-alone rule. Note also that at S=50 with 28 half-ticks the quantum is 1.79 points per tick, so a -6 score lights only 3 ticks — verify that reads as intended, and consider a minimum 1-tick fill for any non-zero score.\nNOT IN THE CANVAS: there is no six-pillar breakdown UI anywhere on this screen — no pillar rows, chips, mini-bars or legend. If the real product shows the six pillars, that component is unspecified and must be designed; I did not read any values for it. Likewise I did not read the real pillar score range (S), so the ±50 implied by KWIN is an assumption, not a value from the file.\n\nTYPOGRAPHY. CSS `font: <weight> <size>/<lh>` uses a unitless line-height multiplier → Flutter `height:` takes the same number directly (16px/1.65 → fontSize 16, height 1.65). `letter-spacing` in em must be multiplied out for Flutter's logical-px letterSpacing: .16em@11px = 1.76, .16em@10px = 1.60, .16em@9px = 1.44, -0.03em@40px = -1.20, -0.03em@46px = -1.38, -0.01em@24px = -0.24. Outfit weights map w200/w300/w400/w500. `text-transform:uppercase` has no Flutter equivalent — uppercase the string in code (and skip it for Arabic, see RTL). The title's `<br>` is authored copy: keep the newline, do not let it wrap naturally.\n\nBOX MODEL TRAPS. There is no global `box-sizing:border-box` in this document, so the chart's `height:120px` with `padding:18px` is CONTENT height — the bar row is 156px tall overall and all bar percentages resolve against 120px, not 156px. Build it as `SizedBox(height:120)` inside `Padding(all:18)`, with each bar a `Flexible(flex:1)` + `FractionallySizedBox(heightFactor: .78/.84/.92/.88/.96/1.0/.82, alignment: Alignment.bottomCenter)`. On a 390pt phone each bar is 40.857pt wide — let flex compute it, do not hardcode.\n\n`max-width` IN ch. `34ch` on the dek and `62ch` on body paragraphs are readability caps; `ch` = advance width of the digit zero in the element's own font, which I did not read a px value for. Measure IBM Plex Sans Arabic's '0' advance with a `TextPainter` at 15px and 16px and apply as a `ConstrainedBox(maxWidth:)`. Rough guide: at 358pt of available width the 62ch body cap almost certainly never binds on phone, while the 34ch dek cap probably does — verify by measurement rather than trusting this.\n\nGRADIENTS. Dark cards: `LinearGradient(begin: topCenter, end: bottomCenter, colors: [Color(0xFF242120), Color(0xFF1B1917)])`. Avatar stripes: CSS `repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px)` has no Flutter equivalent — paint it with a `CustomPainter` drawing 3px bands along a 135deg axis (6px period) clipped to a circle, or bake a 6x6 tiling image. Nav glass: `BackdropFilter(ImageFilter.blur(sigmaX:26,sigmaY:26))` — note CSS also applies `saturate(180%)`, which Flutter needs a `ColorFilter.matrix` saturation matrix to reproduce; blur alone will look flatter.\n\nINTERACTION PLUMBING. `saved` is per-screen local state in the canvas (`{saved:false}`) — in the app it must persist to the user's saved-research list. The back action reads a `prev` route and falls back to the owning nav tab; wire it to `Navigator.maybePop()` with a tab-root fallback. Both header buttons are 42x42 — that is under the 48dp Material / 44pt HIG minimum, so wrap them in a `SizedBox(48)` hit area or set `materialTapTargetSize`, keeping the painted size at 42.\n\nPRODUCT-RULE COMPLIANCE (things to preserve when you build). (1) Nothing on this screen says BUY/SELL/TARGET/STOP/EXPECTED RETURN — the gauge is a qualitative Cash↔Trash axis with word labels, and the summary sentence is conditional ('only if the backlog converts on schedule'). Keep it that way. (2) Colour-alone risks: the save toggle (fill inversion only — add a shape or label change) and the highlighted 7th chart bar (#A3402F carries 'this is Q3 FY25', but the footnote 'Q3 FY25 highlighted' already provides the text channel — keep that footnote, it is load-bearing, not decoration). (3) Staleness: the byline '· 4 Aug ·' and the chart footnote '· company filings' are the only provenance/age labels. There is no 'as of' timestamp on the gauge itself — the verdict score's own vintage is unlabelled, which is a gap against the stale-data rule; add an age label to the verdict card.\n\nRTL / ARABIC (direction-sensitive inventory). MUST flip: the '‹' back glyph → '›' (or use `Icons.arrow_back_ios` with automatic mirroring); the header row's `space-between` mirrors for free; the byline row's avatar-then-text order mirrors for free; the `text-underline-offset` links are neutral. MUST NOT be applied blindly to Arabic: `letter-spacing:.16em` breaks Arabic's joined script — set letterSpacing 0 for the Arabic locale on every kicker/label/caption; `text-transform:uppercase` is a no-op in Arabic — drop it. DECISION REQUIRED (I have no spec for either): (a) the gauge axis — 'Trash' at left / 'Cash' at right is a semantic direction; mirroring it in RTL keeps the reading order but inverts the visual convention, and flipping the LABELS without also flipping the FILL DIRECTION would invert the meaning, so either mirror both or wrap the gauge in `Directionality(TextDirection.ltr)`; (b) the quarterly bar chart's time axis — oldest-left/newest-right is the near-universal convention even in Arabic UIs, so wrap it in `Directionality.ltr` unless product says otherwise. Bidi: the byline ('The Barbarian · 4 Aug · 14 min read'), the kicker ('Cash or trash · SWDY'), the ticker SWDY, '7.4×', 'EGP 131.9bn', 'FY25', and the inline link texts are all Latin runs that will sit inside Arabic paragraphs — wrap each in U+2066/U+2069 (LRI/PDI) isolates or the middot separators and digits will reorder. Arabic numerals: decide Western vs Eastern-Arabic digits before wiring `tabular-nums` (Eastern-Arabic digits have their own tabular behaviour). The two hard-wrapped title lines will need a separate Arabic break point, not a translated 'Cash or / Trash'."
+}

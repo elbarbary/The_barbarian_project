@@ -1,0 +1,180 @@
+import 'dart:async';
+import 'dart:convert';
+
+import '../models/manifest.dart';
+import '../storage/document_cache.dart';
+import 'document_source.dart';
+
+/// A document together with everything the UI needs to be honest about it:
+/// where it came from and how old it is (spec §49).
+class DocumentSnapshot {
+  const DocumentSnapshot({
+    required this.body,
+    required this.origin,
+    required this.storedAt,
+  });
+
+  final String body;
+  final DocumentOrigin origin;
+
+  /// When this copy was obtained. Null for fixtures, which have no age.
+  final DateTime? storedAt;
+
+  bool get isFromCache => origin == DocumentOrigin.cache;
+
+  Map<String, dynamic> decodeObject() {
+    final decoded = jsonDecode(body);
+    if (decoded is! Map<String, dynamic>) {
+      throw const FormatException('expected a JSON object');
+    }
+    return decoded;
+  }
+}
+
+enum DocumentOrigin { cache, network, fixture }
+
+/// Reads the static app API, cache first (spec §17, §36).
+///
+/// The contract for every call site is: **you may be given a cached document
+/// immediately and a fresher one shortly after**. Nothing here ever blocks
+/// startup waiting on the network.
+class StaticApi {
+  StaticApi({required DocumentSource source, required DocumentCache cache})
+    : _source = source,
+      _cache = cache;
+
+  final DocumentSource _source;
+  final DocumentCache _cache;
+
+  static const String manifestPath = 'manifest.json';
+
+  Manifest? _manifest;
+  Future<Manifest?>? _inFlightManifest;
+
+  /// The version a document must match to be served from cache.
+  ///
+  /// This is what carries a website update through to an installed app. It is
+  /// deliberately a **per-document comparison** rather than a global cache
+  /// wipe: several screens subscribe at once, and clearing the directory
+  /// underneath them deleted documents that were mid-write, which surfaced as
+  /// "not downloaded yet" on a device that had the data.
+  ///
+  /// Resources named in the manifest use their own counter. Everything else —
+  /// an individual company, a historical report — is guarded by the whole
+  /// publication's `data_version`, so a republish invalidates those too.
+  Future<int> _expectedVersion(String? resource) async {
+    final m = await manifest();
+    if (m == null) return 0;
+    if (resource != null) return m.versions.versionOf(resource);
+    return m.dataVersion.hashCode;
+  }
+
+  /// The manifest for this app session. Fetched at most once unless forced.
+  ///
+  /// Returns null when it cannot be obtained or is a schema this build does not
+  /// understand — in both cases callers must keep serving cache rather than
+  /// risk misparsing a newer format.
+  Future<Manifest?> manifest({bool forceRefresh = false}) {
+    if (!forceRefresh) {
+      final cached = _manifest;
+      if (cached != null) return Future.value(cached);
+      final pending = _inFlightManifest;
+      if (pending != null) return pending;
+    }
+    return _inFlightManifest = _loadManifest();
+  }
+
+  Future<Manifest?> _loadManifest() async {
+    if (!_source.isRefreshable) {
+      // Fixture builds have a manifest too, and it changes whenever the build
+      // scripts regenerate the bundled data.
+      try {
+        final body = await _source.fetch(manifestPath);
+        final parsed = Manifest.fromJson(
+          jsonDecode(body) as Map<String, dynamic>,
+        );
+        if (!parsed.isSupported) return null;
+        return _manifest = parsed;
+      } on Object {
+        return null;
+      }
+    }
+
+    try {
+      final body = await _source.fetch(manifestPath);
+      final parsed = Manifest.fromJson(jsonDecode(body) as Map<String, dynamic>);
+      if (!parsed.isSupported) return null;
+      await _cache.write(manifestPath, body, version: parsed.schemaVersion);
+      return _manifest = parsed;
+    } on Object {
+      // Offline. Fall back to the last manifest we successfully stored so the
+      // version comparison still works against cached documents.
+      final cached = await _cache.read(manifestPath);
+      if (cached == null) return null;
+      try {
+        final parsed = Manifest.fromJson(
+          jsonDecode(cached.body) as Map<String, dynamic>,
+        );
+        return _manifest = parsed.isSupported ? parsed : null;
+      } on Object {
+        return null;
+      }
+    }
+  }
+
+  /// Yields the cached document first when one exists, then a fresh one if the
+  /// manifest says that resource has moved on.
+  ///
+  /// [resource] names the manifest version counter guarding this document —
+  /// one of [ManifestVersions.resources]. Pass null for documents with no
+  /// counter (an individual company file, a historical scanner report); those
+  /// are fetched once and then served from cache.
+  Stream<DocumentSnapshot> load(String path, {String? resource}) async* {
+    // The manifest decides whether the cache is still valid, so it is read
+    // before the cache rather than after.
+    final wanted = await _expectedVersion(resource);
+    final cached = await _cache.read(path);
+    final isCurrent = cached != null && cached.version == wanted;
+
+    if (cached != null) {
+      yield DocumentSnapshot(
+        body: cached.body,
+        origin: DocumentOrigin.cache,
+        storedAt: cached.storedAt,
+      );
+      if (isCurrent) return;
+    }
+
+    try {
+      final body = await _source.fetch(path);
+      await _cache.write(path, body, version: wanted);
+      yield DocumentSnapshot(
+        body: body,
+        origin: _source.isRefreshable
+            ? DocumentOrigin.network
+            : DocumentOrigin.fixture,
+        storedAt: _source.isRefreshable ? DateTime.now() : null,
+      );
+    } on DocumentUnavailable {
+      // Nothing fresher available. If cache was already yielded the screen is
+      // fine; if not, the caller decides what empty means (spec §49).
+      if (cached == null) rethrow;
+    }
+  }
+
+  /// One-shot fetch that prefers cache and never throws when cache exists.
+  Future<DocumentSnapshot?> loadOnce(String path, {String? resource}) async {
+    DocumentSnapshot? last;
+    await for (final snapshot in load(path, resource: resource)) {
+      last = snapshot;
+    }
+    return last;
+  }
+
+  /// Drops every cached document. Used by the "clear cache" affordance in You.
+  Future<void> clearCache() async {
+    _manifest = null;
+    _inFlightManifest = null;
+    await _cache.clear();
+  }
+}

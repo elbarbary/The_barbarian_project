@@ -1,0 +1,50 @@
+# Build output and tool caches.
+#
+# Without this the Flutter app alone adds ~4.8 GB to a commit: build/ and
+# .dart_tool/ hold compiled artifacts and a package cache that are regenerated
+# by `flutter pub get` and `flutter build` on any machine.
+
+# ---------------------------------------------------------------- Flutter/Dart
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/pubspec.lock.bak
+**/*.g.dart.lock
+.dart_tool/
+build/
+
+# Generated sources are committed on purpose: the repo should build without a
+# code-generation step, and freezed output is deterministic.
+!app/lib/**/*.freezed.dart
+!app/lib/**/*.g.dart
+
+# --------------------------------------------------------------------- iOS
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+app/ios/Flutter/ephemeral/
+app/ios/Runner/GeneratedPluginRegistrant.*
+**/*.xcuserdatad/
+**/xcuserdata/
+
+# ----------------------------------------------------------------- Android
+app/android/.gradle/
+app/android/local.properties
+app/android/app/debug/
+app/android/app/profile/
+app/android/app/release/
+app/android/.kotlin/
+**/GeneratedPluginRegistrant.java
+
+# ------------------------------------------------------------------ macOS etc
+.DS_Store
+**/.DS_Store
+
+# ------------------------------------------------------------------ Cloudflare
+.wrangler/
+**/.wrangler/
+node_modules/
+**/node_modules/

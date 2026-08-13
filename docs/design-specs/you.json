@@ -1,0 +1,414 @@
+{
+  "screen": "You (profile / settings) — `p.isYou`, design file lines 614–695",
+  "summary": "The user's own profile and settings hub: identity header, three activity counters, saved research, an editable watchlist, notification preferences, language, and sign-out. It is the fourth bottom-nav destination and the only screen that combines read-only profile content with live preference controls.",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Phone frame + scroll container (shared, context only)",
+      "description": "Every screen sits inside a 390x844 phone shell. The shell itself is `position:relative;width:390px;height:844px;border-radius:46px;overflow:hidden;background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%);box-shadow:0 30px 70px rgba(27,25,23,.20),0 0 0 1px rgba(27,25,23,.07)` (line 46). The scroll region is `position:absolute;inset:0;overflow-y:auto;padding:54px 16px 124px;box-sizing:border-box` (line 53) — scrollbars hidden. So usable content width = 390 - 32 = 358px (computed, not read). Top inset 54px clears the status bar; bottom inset 124px clears the 66px nav bar sitting 22px off the bottom. Status bar (line 48-51): absolute top:0 left:0 right:0, height 54px, z-index 6, flex space-between, padding 0 26px, pointer-events:none, font `500 13px/1 'IBM Plex Sans Arabic'`, color #1B1917, font-variant-numeric:tabular-nums. Left span \"9:41\". Right span is flex gap 5px with three bars: 16x9 radius 2px bg #1B1917 opacity .85; 5x9 radius 1px opacity .5; 22x10 radius 3px opacity .85.",
+      "layout": "shell 390x844, radius 46px; scroll padding 54px 16px 124px; content width 358px; status bar height 54px, padding 0 26px"
+    },
+    {
+      "order": 2,
+      "name": "You screen root column",
+      "description": "Single vertical column holding all seven blocks. Enters with the shared `bRise` keyframe defined at line 19: `from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)}`.",
+      "layout": "display:flex;flex-direction:column;gap:22px;animation:bRise 240ms ease-out"
+    },
+    {
+      "order": 3,
+      "name": "Identity header",
+      "description": "Avatar + name block, side by side. Avatar wrapper is `position:relative;width:74px;height:74px;flex:none`. The avatar itself is a 74x74 circle filled with a diagonal stripe pattern — NOT a photo: `border-radius:999px;background:repeating-linear-gradient(135deg,#D9D2CA 0 4px,#E8E2DB 4px 8px)` (4px stripe, 8px period, 135deg). The PRO badge is a child of this wrapper — see the components list; it is to be OMITTED. Name block (no explicit width): line 1 \"Youssef Adel\"; line 2 handle + join date with margin-top:6px.",
+      "layout": "wrapper: padding-top:6px;display:flex;align-items:center;gap:16px — name `font:300 28px/1.1 Outfit;letter-spacing:-0.02em;color:#1B1917` — subline `margin-top:6px;font:400 13px/1.4 'IBM Plex Sans Arabic';color:#7A736D`"
+    },
+    {
+      "order": 4,
+      "name": "Stats grid (Saved / Watchlist / Posts)",
+      "description": "Three equal tiles in one row. Each tile stacks a big tabular number over a small caption. Values are static in the canvas — no onClick, no navigation. Computed tile width = (358 - 2*10)/3 = 112.67px.",
+      "layout": "grid: display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px — tile: background:#F7F4F0;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(27,25,23,.06) — number: font:300 26px/1 Outfit;color:#1B1917;font-variant-numeric:tabular-nums — caption: margin-top:6px;font:400 11px/1.3 'IBM Plex Sans Arabic';color:#7A736D"
+    },
+    {
+      "order": 5,
+      "name": "Saved research",
+      "description": "Uppercase section label, then a 10px-gapped column of exactly two hard-coded cards (no sc-for, no data array). Card 1 is the dark/inverted card and is the ONLY tappable element in this section — `onClick=\"{{ p.goReader }}\"` (line 636), routing to the Research Reader. Card 2 is the light card and has NO onClick and no cursor:pointer — it is inert in the canvas. Both use radius 24 / padding 18.",
+      "layout": "label: font:400 11px/1 'IBM Plex Sans Arabic';letter-spacing:.16em;text-transform:uppercase;color:#7A736D;margin-bottom:12px — list: display:flex;flex-direction:column;gap:10px — dark card: background:linear-gradient(180deg,#242120 0%,#1B1917 100%);border-radius:24px;padding:18px;cursor:pointer — light card: background:#F7F4F0;border-radius:24px;padding:18px;box-shadow:0 8px 24px rgba(27,25,23,.06) — kicker: font:400 10px/1 'IBM Plex Sans Arabic';letter-spacing:.14em;text-transform:uppercase;color:#8E8781 (dark) / #7A736D (light) — title: margin-top:10px;font:300 20px/1.2 Outfit;color:#F5F1EC (dark) / #1B1917 (light)"
+    },
+    {
+      "order": 6,
+      "name": "Watchlist",
+      "description": "Header row with a label on the left and an \"Edit\" affordance on the right (plain text, no onClick, no cursor:pointer, no background). Below it one grouped card containing 4 reorderable-looking rows driven by `sc-for list=\"{{ watch }}\" as=\"w\" hint-placeholder-count=\"4\"`. Card padding is asymmetric — `4px 18px` — so the first/last row dividers sit inside 4px of vertical breathing room. Row order in the seed data is SWDY, COMI, ORAS, TMGH. IMPORTANT: the inset bottom divider is applied to EVERY row including the last, so the 4th row also draws a hairline (a bug to fix, or reproduce deliberately). Prices carry NO timestamp or age label anywhere on this screen — this violates the product's stale-data rule and must be resolved before build.",
+      "layout": "header: display:flex;align-items:center;justify-content:space-between;margin-bottom:12px — label: font:400 11px/1 'IBM Plex Sans Arabic';letter-spacing:.16em;text-transform:uppercase;color:#7A736D — Edit: font:400 12px/1 'IBM Plex Sans Arabic';color:#1B1917 — card: background:#F7F4F0;border-radius:24px;padding:4px 18px;box-shadow:0 8px 24px rgba(27,25,23,.06) — row: display:flex;align-items:center;gap:14px;padding:14px 0;box-shadow:inset 0 -1px 0 rgba(27,25,23,.08)"
+    },
+    {
+      "order": 7,
+      "name": "Notifications",
+      "description": "Uppercase label, then one grouped card with 3 rows driven by `sc-for list=\"{{ notif }}\" as=\"n\" hint-placeholder-count=\"3\"`. Same card chrome as Watchlist but row padding is 16px 0 instead of 14px 0. Each row is label + sub-label on the left (flex:1;min-width:0) and a pill toggle on the right. The toggle is the only stateful control on the screen. As with Watchlist, the inset divider is drawn on the 3rd row too.",
+      "layout": "label: font:400 11px/1 'IBM Plex Sans Arabic';letter-spacing:.16em;text-transform:uppercase;color:#7A736D;margin-bottom:12px — card: background:#F7F4F0;border-radius:24px;padding:4px 18px;box-shadow:0 8px 24px rgba(27,25,23,.06) — row: display:flex;align-items:center;gap:14px;padding:16px 0;box-shadow:inset 0 -1px 0 rgba(27,25,23,.08) — primary: font:400 14px/1.3 'IBM Plex Sans Arabic';color:#1B1917 — secondary: margin-top:3px;font:400 11px/1.3 'IBM Plex Sans Arabic';color:#9A938C"
+    },
+    {
+      "order": 8,
+      "name": "Language row",
+      "description": "A flex row wrapper `display:flex;gap:10px` containing exactly ONE child with `flex:1` — the gap is inert and the wrapper is clearly a slot that once held two tiles. Build it as a single full-width row unless you intend to add a sibling. Row is label-left / value-right. No onClick, no chevron, no disclosure icon in the canvas.",
+      "layout": "wrapper: display:flex;gap:10px — row: flex:1;background:#F7F4F0;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(27,25,23,.06);display:flex;align-items:center;justify-content:space-between — label span: font:400 14px/1 'IBM Plex Sans Arabic';color:#1B1917 — value span: font:400 13px/1 'IBM Plex Sans Arabic';color:#7A736D"
+    },
+    {
+      "order": 9,
+      "name": "Sign out",
+      "description": "Bare left-aligned text at the bottom of the column. No card, no background, no border, no confirm affordance, no onClick in the canvas. Its own padding sits on top of the parent's 22px gap.",
+      "layout": "font:400 13px/1 'IBM Plex Sans Arabic';color:#9A938C;padding:4px 0 8px"
+    },
+    {
+      "order": 10,
+      "name": "Bottom navigation — You tab active (shared, lines 761-804)",
+      "description": "Rendered above the scroll content. First a non-interactive scrim, then the glass bar. The You tab is the 4th of 4, so the active pill is translated 300%. The You screen renders NOTHING distinctive in the nav beyond selecting the 4th tab: no FAB (that is `p.isPit`, line 753) and no composer bar (that is `p.isPost`, line 756). You-tab icon SVG (21x21, viewBox 0 0 20 20): `<circle cx=10 cy=7 r=3.6 fill=currentColor/>` plus `<rect x=3.5 y=12.4 width=13 height=6 rx=3 fill=currentColor opacity=.7/>`. Active: wrapped in a flex column, gap 5px, color #FF8340, with a 4px dot below it — `width:4px;height:4px;border-radius:999px;background:#FF8340;box-shadow:0 0 8px rgba(255,131,64,.9)`. Inactive tabs: color rgba(245,241,236,.76), icon only, no dot.",
+      "layout": "scrim: position:absolute;left:0;right:0;bottom:0;height:118px;z-index:5;pointer-events:none;background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%) — bar: position:absolute;left:16px;right:16px;bottom:22px;height:66px;z-index:7;border-radius:999px;background:rgba(27,25,23,.58);backdrop-filter:blur(26px) saturate(180%);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;box-shadow:0 18px 40px rgba(27,25,23,.26),0 1px 0 rgba(255,255,255,.30) inset,0 0 0 1px rgba(255,255,255,.13),0 -8px 20px rgba(255,255,255,.05) inset — active pill (You): position:absolute;left:6px;top:6px;bottom:6px;width:calc((100% - 12px) / 4);transform:translateX(300%);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%);box-shadow:0 1px 0 rgba(255,255,255,.32) inset,0 6px 16px rgba(0,0,0,.18);animation:bPill 320ms cubic-bezier(.32,1.2,.44,1) — top hairline: position:absolute;left:14px;right:14px;top:1px;height:1px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%) — tab item: position:relative;z-index:1;flex:1;height:66px;flex-direction:column;align-items:center;justify-content:center;gap:5px"
+    }
+  ],
+  "components": [
+    {
+      "name": "PRO badge — OMIT (do not build)",
+      "description": "Line 619, inside the avatar wrapper. Product decision is to DROP it. Recorded here only so the engineer recognises it in the canvas render and deliberately leaves it out. Removing it also removes the only reason the avatar needs a Stack — a plain 74px circle suffices. Nothing else on the screen references entitlement/tier.",
+      "styling": "position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);padding:4px 10px;border-radius:999px;background:#E8621C;font:500 9px/1 'IBM Plex Sans Arabic';letter-spacing:.12em;color:#FFF — text \"PRO\"",
+      "likelyShared": false
+    },
+    {
+      "name": "Striped avatar (74px)",
+      "description": "Placeholder identity circle. Diagonal repeating stripe, no image, no initials, no border. 74x74, flex:none.",
+      "styling": "width:74px;height:74px;border-radius:999px;background:repeating-linear-gradient(135deg,#D9D2CA 0 4px,#E8E2DB 4px 8px)",
+      "likelyShared": true
+    },
+    {
+      "name": "Stat tile",
+      "description": "Number-over-caption tile. Three instances side by side. Number uses tabular numerals so digit-count changes do not jitter the layout.",
+      "styling": "background:#F7F4F0;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(27,25,23,.06); number font:300 26px/1 Outfit, color #1B1917, tabular-nums; caption margin-top:6px, font:400 11px/1.3 'IBM Plex Sans Arabic', color #7A736D",
+      "likelyShared": true
+    },
+    {
+      "name": "Section label (uppercase eyebrow)",
+      "description": "The screen's only heading device below the name. Used 3x here (Saved research, Watchlist, Notifications). Always followed by 12px of space, either as margin-bottom on the label itself or on a header row wrapping it.",
+      "styling": "font:400 11px/1 'IBM Plex Sans Arabic';letter-spacing:.16em;text-transform:uppercase;color:#7A736D;margin-bottom:12px",
+      "likelyShared": true
+    },
+    {
+      "name": "Research card — dark variant",
+      "description": "Kicker + title on an inverted gradient panel. This instance is tappable (goReader) but — unlike the identical cards on Home (line 71), Market (198), Company (376, 440) — this one carries NO `transition:transform 220ms ease-out` and NO `style-active=\"transform:scale(0.98)\"`. If you build one shared widget, this screen's instance should get the press-scale for consistency; flag the difference rather than silently diverging.",
+      "styling": "background:linear-gradient(180deg,#242120 0%,#1B1917 100%);border-radius:24px;padding:18px;cursor:pointer — kicker font:400 10px/1 'IBM Plex Sans Arabic', letter-spacing:.14em, uppercase, color #8E8781 — title margin-top:10px, font:300 20px/1.2 Outfit, color #F5F1EC",
+      "likelyShared": true
+    },
+    {
+      "name": "Research card — light variant",
+      "description": "Same geometry as the dark card, paper background, elevated. No onClick on this screen.",
+      "styling": "background:#F7F4F0;border-radius:24px;padding:18px;box-shadow:0 8px 24px rgba(27,25,23,.06) — kicker color #7A736D — title color #1B1917",
+      "likelyShared": true
+    },
+    {
+      "name": "Grouped list card",
+      "description": "Container shared by the Watchlist and Notifications blocks. The 4px vertical padding is what separates the first row's top edge and the last row's inset hairline from the card's rounded edge.",
+      "styling": "background:#F7F4F0;border-radius:24px;padding:4px 18px;box-shadow:0 8px 24px rgba(27,25,23,.06). Inner content width = 358 - 36 = 322px (computed)",
+      "likelyShared": true
+    },
+    {
+      "name": "Row divider (inset bottom hairline)",
+      "description": "Not a border — an inset box-shadow, so it draws inside the row box at its bottom edge and does not affect layout height. Applied to every row in both grouped cards, last row included.",
+      "styling": "box-shadow:inset 0 -1px 0 rgba(27,25,23,.08)",
+      "likelyShared": true
+    },
+    {
+      "name": "Drag handle (3 bars)",
+      "description": "Three stacked bars on the leading edge of each watchlist row, signalling reorder. No onClick / no drag wiring in the canvas — purely visual there. Computed total height = 3*1.5 + 2*3 = 10.5px.",
+      "styling": "wrapper display:flex;flex-direction:column;gap:3px;flex:none;opacity:.35 — each bar width:14px;height:1.5px;border-radius:1px;background:#1B1917",
+      "likelyShared": false
+    },
+    {
+      "name": "Watchlist row",
+      "description": "handle | (ticker over Arabic name) | price | remove. Middle column is flex:1;min-width:0 so long Arabic names ellipsize rather than pushing the price off. The Arabic name carries an explicit dir=\"rtl\".",
+      "styling": "row display:flex;align-items:center;gap:14px;padding:14px 0 — ticker font:400 15px/1.2 Outfit, letter-spacing:.02em, color #1B1917 — arabic name margin-top:3px, font:300 11px/1.3 'IBM Plex Sans Arabic', color #7A736D, dir=rtl — price font:400 14px/1 Outfit, color #5C554F, tabular-nums",
+      "likelyShared": false
+    },
+    {
+      "name": "Remove chip (−)",
+      "description": "Circular 26px chip at the trailing edge of each watchlist row. The glyph is U+2212 MINUS SIGN (−), not a hyphen — set it as a real character, do not substitute an icon-font minus of a different optical weight. No onClick in the canvas.",
+      "styling": "width:26px;height:26px;flex:none;border-radius:999px;background:rgba(27,25,23,.06);display:flex;align-items:center;justify-content:center;font:400 14px/1 Outfit;color:#7A736D",
+      "likelyShared": false
+    },
+    {
+      "name": "Notification row",
+      "description": "Two-line label stack on the leading edge, pill toggle trailing.",
+      "styling": "row display:flex;align-items:center;gap:14px;padding:16px 0 — primary font:400 14px/1.3 'IBM Plex Sans Arabic', color #1B1917 — secondary margin-top:3px, font:400 11px/1.3 'IBM Plex Sans Arabic', color #9A938C",
+      "likelyShared": false
+    },
+    {
+      "name": "Pill toggle (NT_ON / NT_OFF / KNOB, lines 905-907)",
+      "description": "The only interactive stateful control on the screen. Track is a fixed 46x28 pill with box-sizing:border-box and 3px padding; the knob is positioned purely by justify-content, so travel = 46 - (2*3) - 22 = 18px (computed). ON and OFF differ ONLY by background colour and knob position — no check/cross glyph, no on/off text. That is a direct violation of the 'never communicate state by colour alone' rule; add a text or icon state indicator before shipping.",
+      "styling": "track shared: width:46px;height:28px;border-radius:999px;display:flex;align-items:center;padding:3px;box-sizing:border-box;cursor:pointer;transition:all 220ms ease-out — ON adds background:#E8621C;justify-content:flex-end — OFF adds background:rgba(27,25,23,.12);justify-content:flex-start — KNOB width:22px;height:22px;border-radius:999px;background:#FFFFFF;box-shadow:0 2px 6px rgba(27,25,23,.2)",
+      "likelyShared": true
+    },
+    {
+      "name": "Settings value row (Language)",
+      "description": "Label / value row with the same tile chrome as a stat tile (radius 20, padding 16) rather than the grouped-card chrome (radius 24). Keep those distinct — they are genuinely different in the canvas.",
+      "styling": "flex:1;background:#F7F4F0;border-radius:20px;padding:16px;box-shadow:0 8px 24px rgba(27,25,23,.06);display:flex;align-items:center;justify-content:space-between — label font:400 14px/1 'IBM Plex Sans Arabic', color #1B1917 — value font:400 13px/1 'IBM Plex Sans Arabic', color #7A736D",
+      "likelyShared": true
+    },
+    {
+      "name": "Bottom nav — You tab",
+      "description": "4th of 4 tabs. Icon is a head-and-shoulders glyph: circle cx=10 cy=7 r=3.6 at full opacity, plus a rounded shoulder rect x=3.5 y=12.4 w=13 h=6 rx=3 at opacity .7. SVG box 21x21 rendered from a 20x20 viewBox. Active adds the #FF8340 tint and the glowing 4px dot; the glass pill behind it is translated 300%.",
+      "styling": "tab flex:1;height:66px;column;center;gap:5px — active color #FF8340 + dot 4x4 radius 999 bg #FF8340 shadow 0 0 8px rgba(255,131,64,.9) — inactive color rgba(245,241,236,.76), no dot",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "9:41",
+      "role": "status bar (shell chrome, not screen content)"
+    },
+    {
+      "text": "Youssef Adel",
+      "role": "heading — display name"
+    },
+    {
+      "text": "@yadel · joined Mar 2025",
+      "role": "caption — handle and join date, separator is U+00B7 MIDDLE DOT with spaces"
+    },
+    {
+      "text": "24",
+      "role": "stat value"
+    },
+    {
+      "text": "Saved",
+      "role": "stat caption"
+    },
+    {
+      "text": "8",
+      "role": "stat value"
+    },
+    {
+      "text": "Watchlist",
+      "role": "stat caption"
+    },
+    {
+      "text": "31",
+      "role": "stat value"
+    },
+    {
+      "text": "Posts",
+      "role": "stat caption"
+    },
+    {
+      "text": "Saved research",
+      "role": "section label (rendered uppercase by CSS: SAVED RESEARCH)"
+    },
+    {
+      "text": "Cash or trash",
+      "role": "card kicker (rendered uppercase: CASH OR TRASH)"
+    },
+    {
+      "text": "SWDY: the complete study",
+      "role": "card title — dark card, tappable"
+    },
+    {
+      "text": "Sector analysis",
+      "role": "card kicker (rendered uppercase: SECTOR ANALYSIS)"
+    },
+    {
+      "text": "Banking: the carry trade ends",
+      "role": "card title — light card"
+    },
+    {
+      "text": "Watchlist",
+      "role": "section label (rendered uppercase: WATCHLIST)"
+    },
+    {
+      "text": "Edit",
+      "role": "trailing text action in section header"
+    },
+    {
+      "text": "SWDY",
+      "role": "watchlist row 1 ticker"
+    },
+    {
+      "text": "السويدى اليكتريك",
+      "role": "watchlist row 1 Arabic company name (dir=rtl)"
+    },
+    {
+      "text": "65.42",
+      "role": "watchlist row 1 price"
+    },
+    {
+      "text": "COMI",
+      "role": "watchlist row 2 ticker"
+    },
+    {
+      "text": "البنك التجارى الدولى",
+      "role": "watchlist row 2 Arabic company name (dir=rtl)"
+    },
+    {
+      "text": "78.30",
+      "role": "watchlist row 2 price"
+    },
+    {
+      "text": "ORAS",
+      "role": "watchlist row 3 ticker"
+    },
+    {
+      "text": "أوراسكوم كونستراكشون",
+      "role": "watchlist row 3 Arabic company name (dir=rtl)"
+    },
+    {
+      "text": "412.10",
+      "role": "watchlist row 3 price"
+    },
+    {
+      "text": "TMGH",
+      "role": "watchlist row 4 ticker"
+    },
+    {
+      "text": "مجموعة طلعت مصطفى",
+      "role": "watchlist row 4 Arabic company name (dir=rtl)"
+    },
+    {
+      "text": "54.75",
+      "role": "watchlist row 4 price"
+    },
+    {
+      "text": "−",
+      "role": "remove-from-watchlist glyph, U+2212 MINUS SIGN, one per row"
+    },
+    {
+      "text": "Notifications",
+      "role": "section label (rendered uppercase: NOTIFICATIONS)"
+    },
+    {
+      "text": "Disclosures on my watchlist",
+      "role": "notification row 1 label — toggle ON by default"
+    },
+    {
+      "text": "Push, immediately",
+      "role": "notification row 1 sub-label"
+    },
+    {
+      "text": "Replies to my posts",
+      "role": "notification row 2 label — toggle OFF by default"
+    },
+    {
+      "text": "Push, batched hourly",
+      "role": "notification row 2 sub-label"
+    },
+    {
+      "text": "New Barbarian research",
+      "role": "notification row 3 label — toggle OFF by default"
+    },
+    {
+      "text": "Push + email",
+      "role": "notification row 3 sub-label"
+    },
+    {
+      "text": "Language",
+      "role": "settings row label"
+    },
+    {
+      "text": "EN · العربية",
+      "role": "settings row value — mixed-direction string, separator U+00B7"
+    },
+    {
+      "text": "Sign out",
+      "role": "destructive-ish text action, bottom of screen"
+    },
+    {
+      "text": "PRO",
+      "role": "badge on avatar — OMIT, do not implement (line 619)"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink — name, tickers, primary row labels, Edit, Language label, drag bars, status bar)",
+      "#242120 (ink-raised — top stop of the dark card gradient)",
+      "#F7F4F0 (paper — every light card and tile)",
+      "#F5F1EC (paper-on-dark — dark card title text)",
+      "#E8621C (accent — toggle ON track; also the omitted PRO badge)",
+      "#FF8340 (accent-on-dark — active nav icon and dot)",
+      "#7A736D (text-3 — stat captions, section labels, handle line, Arabic names, price chip glyph, Language value)",
+      "#5C554F (text-2 — watchlist price)",
+      "#8E8781 (text-4 — dark card kicker)",
+      "#9A938C (text-4-light — notification sub-label, Sign out)",
+      "#D9D2CA and #E8E2DB (hairline pair — avatar stripe pattern only, on this screen)",
+      "#FFFFFF (toggle knob)",
+      "#EDE8E2 → #E3DCD4 (phone shell background gradient, visible behind the transparent scroll content)",
+      "rgba(27,25,23,.06) (remove-chip fill AND the card shadow alpha — same literal, different roles)",
+      "rgba(27,25,23,.08) (row divider inset)",
+      "rgba(27,25,23,.12) (toggle OFF track)",
+      "rgba(27,25,23,.2) (knob shadow)",
+      "rgba(27,25,23,.58) (nav glass fill)",
+      "rgba(245,241,236,.76) (inactive nav icon)",
+      "NOT USED on this screen: up #3F6B52, down #A3402F — there is no gain/loss colouring anywhere in You"
+    ],
+    "fontStyles": [
+      "300 28px/1.1 Outfit, letter-spacing -0.02em (display name)",
+      "300 26px/1 Outfit, tabular-nums (stat values)",
+      "300 20px/1.2 Outfit (saved-research card titles)",
+      "400 15px/1.2 Outfit, letter-spacing .02em (watchlist ticker)",
+      "400 14px/1 Outfit, tabular-nums (watchlist price)",
+      "400 14px/1 Outfit (remove-chip − glyph)",
+      "400 14px/1.3 'IBM Plex Sans Arabic' (notification primary label)",
+      "400 14px/1 'IBM Plex Sans Arabic' (Language label)",
+      "400 13px/1.4 'IBM Plex Sans Arabic' (handle + join date)",
+      "400 13px/1 'IBM Plex Sans Arabic' (Language value, Sign out)",
+      "400 12px/1 'IBM Plex Sans Arabic' (Edit)",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing .16em, uppercase (section labels)",
+      "400 11px/1.3 'IBM Plex Sans Arabic' (stat captions, notification sub-labels)",
+      "300 11px/1.3 'IBM Plex Sans Arabic' (watchlist Arabic names)",
+      "400 10px/1 'IBM Plex Sans Arabic', letter-spacing .14em, uppercase (card kickers)",
+      "500 13px/1 'IBM Plex Sans Arabic', tabular-nums (status bar)",
+      "500 9px/1 'IBM Plex Sans Arabic', letter-spacing .12em (PRO badge — OMITTED)",
+      "Font families loaded (line 14): Outfit 200;300;400;500 and IBM Plex Sans Arabic 300;400;500. Weight 200 is NOT used on the You screen."
+    ],
+    "radii": [
+      "999px (avatar, PRO badge, toggle track, knob, remove chip, drag bars use 1px, nav bar, nav pill, nav dot)",
+      "24px (grouped list cards, saved-research cards)",
+      "20px (stat tiles, Language row)",
+      "1.5px/1px (drag-handle bars: height 1.5px, border-radius 1px)",
+      "46px (phone shell, shared chrome)",
+      "2px / 1px / 3px (status-bar indicator pills, shared chrome)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.06) — every light card and tile on this screen (stat tiles, light research card, both grouped cards, Language row)",
+      "inset 0 -1px 0 rgba(27,25,23,.08) — row dividers in both grouped cards",
+      "0 2px 6px rgba(27,25,23,.2) — toggle knob",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — nav bar (shared)",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — nav active pill (shared)",
+      "0 0 8px rgba(255,131,64,.9) — active nav dot glow (shared)",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (canvas only, do not ship)",
+      "The dark research card has NO shadow."
+    ],
+    "spacing": [
+      "22px — gap between all seven top-level blocks",
+      "16px — avatar-to-name gap; padding inside stat tiles and Language row",
+      "6px — padding-top on the identity header; margin-top under the display name; margin-top under stat values",
+      "10px — stat grid gap; saved-research card gap; Language wrapper gap (inert, single child)",
+      "12px — margin-bottom under every section label / section header row",
+      "18px — padding inside both research cards; horizontal padding of both grouped cards",
+      "10px — margin-top between card kicker and card title",
+      "4px 18px — grouped-card padding (vertical 4, horizontal 18)",
+      "14px — watchlist row vertical padding; horizontal gap between row children (both lists)",
+      "16px — notification row vertical padding",
+      "3px — gap between drag-handle bars; margin-top under ticker and under notification primary label",
+      "3px — toggle track inner padding",
+      "4px 0 8px — Sign out padding",
+      "54px / 16px / 124px — scroll container top / horizontal / bottom padding (shared)",
+      "Computed, not read: content width 358px; stat tile 112.67px; grouped-card inner width 322px; toggle knob travel 18px; nav tab width 86.5px"
+    ]
+  },
+  "interactions": [
+    "Screen entry: `animation:bRise 240ms ease-out` on the root column — opacity 0→1 and translateY 4px→0 (keyframe at line 19). It runs on the whole column as one unit; there is no per-item stagger.",
+    "Notification toggle tap (line 680, handler at line 916): flips one boolean in `state.notif`. Initial state is `[true, false, false]` (line 819) — row 1 ON, rows 2 and 3 OFF. The CSS transition is `all 220ms ease-out` on the track, which animates the background colour; the knob position changes via `justify-content` and therefore SNAPS in the canvas. In Flutter, animate both: 220ms, ease-out, colour and 18px knob travel together.",
+    "Dark saved-research card tap (line 636): `p.goReader` → navigates to the Research Reader screen. Crucially `goReader` is defined as `g('reader')` with NO nav argument (line 880), so the bottom-nav selection STAYS on You while the reader is open, and `prev` is set to 'you' so Back returns here (line 881). Do not switch the nav pill to Home for this route.",
+    "The dark card has cursor:pointer but — uniquely among the goReader cards in this file — no press-scale. Every other instance (lines 71, 198, 376, 384, 440) has `transition:transform 220ms ease-out` + `style-active=\"transform:scale(0.98)\"`. Recommend adding the same 220ms ease-out scale(0.98) press state here for consistency; call it out as an intentional deviation from the canvas.",
+    "Light saved-research card: NO onClick, no cursor:pointer, no press state. Inert in the canvas — decide whether it should route to a reader too.",
+    "\"Edit\" (line 650): plain text, no onClick, no cursor:pointer, no underline, no chip. Inert in the canvas — the intent is clearly an edit/reorder mode for the watchlist but no target state exists.",
+    "Drag handle (lines 655-659): visual only at opacity .35, no drag wiring in the canvas. If you implement reorder, the handle is the grab target and the row should lift; no lift/shadow/placeholder styling was specified — you will be inventing it.",
+    "Remove chip \"−\" (line 665): no onClick in the canvas. No confirm dialog, no undo affordance, no swipe-to-delete alternative specified.",
+    "Stat tiles, Language row, and Sign out: no onClick, no cursor:pointer, no pressed/hover state anywhere in the canvas.",
+    "Bottom nav pill: `animation:bPill 320ms cubic-bezier(.32,1.2,.44,1)` — the keyframe (line 20) only fades opacity 0→1; the overshoot curve is on the fade, and the pill's position is a static translateX(300%) per tab, so there is no sliding motion in the canvas. In Flutter, an AnimatedPositioned/AnimatedAlign slide with that same 320ms cubic-bezier(.32,1.2,.44,1) is the natural upgrade — flag as a deliberate enhancement.",
+    "No pull-to-refresh, no scroll-to-top-on-tab-retap, no scroll-linked header collapse, no skeleton/loading state for this screen. The STATES screen (lines 696-751) covers empty/loading/error/reported patterns generally, including an \"Empty watchlist\" state at line 710 — I did not read its styling, so specify the You-screen empty watchlist from that block rather than inventing one.",
+    "No hover states are meaningful (touch target)."
+  ],
+  "flutterNotes": "STRUCTURE. Root: Stack over the phone-body gradient → CustomScrollView/SingleChildScrollView with padding EdgeInsets.fromLTRB(16, 54, 16, 124), then the nav scrim and glass bar as Positioned children on top. Body content is a Column with 22px gaps — use `Column(children: [...].withGap(22))` or explicit SizedBox(height:22) between the seven blocks; do NOT reach for ListView.separated, the blocks are heterogeneous and fixed in number. Entry animation: wrap the Column in a single AnimatedOpacity+SlideTransition, 240ms, Curves.easeOut, offset 4px→0 — one controller for the whole column, not per child.\n\nTEXT STYLES. `font:300 28px/1.1 Outfit` maps to TextStyle(fontFamily:'Outfit', fontWeight:FontWeight.w300, fontSize:28, height:1.1, letterSpacing:-0.02*28 = -0.56). CSS `letter-spacing` in `em` must be multiplied by the font size — .16em at 11px = 1.76px, .14em at 10px = 1.4px, .02em at 15px = 0.3px. CSS `line-height:1` = height:1.0 in Flutter but Flutter still applies font ascent/descent differently; for the single-line numeric/label cases (11px/1, 13px/1, 14px/1) consider `height: 1.0` plus `leadingDistribution: TextLeadingDistribution.even` to match the tight CSS boxes. `text-transform:uppercase` has no Flutter equivalent — uppercase the strings in code (`'Saved research'.toUpperCase()`), and make that a localization-aware helper because it must be a no-op in Arabic. `font-variant-numeric:tabular-nums` → `fontFeatures: [FontFeature.tabularFigures()]` on the stat values, the watchlist prices, and the status-bar clock.\n\nCARDS AND SHADOWS. Every light surface is the same recipe: Container(decoration: BoxDecoration(color: Color(0xFFF7F4F0), borderRadius: BorderRadius.circular(20 or 24), boxShadow: [BoxShadow(color: Color(0x0F1B1917) /* rgba(27,25,23,.06) */, blurRadius: 24, offset: Offset(0,8))])). Note CSS blur 24 ≈ Flutter blurRadius 24 is close enough here; if it reads heavier, halve to 12 — CSS blur radius is roughly 2σ while Flutter's is σ-ish. Make ONE `PaperCard` widget with a radius parameter; radius 20 for stat tiles + Language row, radius 24 for grouped cards + research cards. The dark research card is a BoxDecoration with LinearGradient(begin: topCenter, end: bottomCenter, colors:[Color(0xFF242120), Color(0xFF1B1917)]) and NO shadow.\n\nROW DIVIDERS. `box-shadow: inset 0 -1px 0` is not a Flutter shadow — it is a 1px line drawn inside the bottom of the row that does not add height. Implement as the row's own `decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Color(0x141B1917), width: 1)))` and then subtract nothing from the padding (CSS box-shadow does not affect layout, but a Flutter Border DOES add to the container's size unless you use a DecoratedBox behind the padded child — safest is a Stack/CustomPaint, or accept the 1px and reduce bottom padding to 13/15). The canvas draws this divider on the LAST row too, inside the card's 4px bottom padding; decide explicitly whether to reproduce that or drop the trailing divider, and say which you chose.\n\nAVATAR STRIPE. `repeating-linear-gradient(135deg,#D9D2CA 0 4px,#E8E2DB 4px 8px)` has no direct Flutter equivalent. Options: (a) CustomPainter drawing 45° bands of 4px in a ClipOval — most faithful; (b) a tiny 8x8 tileable asset with ImageRepeat; (c) a LinearGradient with hard colour stops repeated — brittle. Recommend (a). This is a placeholder-avatar pattern, so it should also be the fallback when a real user photo is absent.\n\nTOGGLE. Do not use CupertinoSwitch or Switch — neither matches (46x28 track, 22px knob, 3px inset, #E8621C fill). Build it: GestureDetector → AnimatedContainer(duration: 220ms, curve: Curves.easeOut, width:46, height:28, padding: EdgeInsets.all(3), decoration: pill with color ON Color(0xFFE8621C) / OFF Color(0x1F1B1917)) containing AnimatedAlign(duration: 220ms, curve: Curves.easeOut, alignment: AlignmentDirectional.centerStart/centerEnd) → the 22px white knob with BoxShadow(color: Color(0x331B1917), blurRadius: 6, offset: Offset(0,2)). Use AlignmentDirectional so RTL flips the knob automatically, exactly as CSS justify-content does. PRODUCT BLOCKER: ON and OFF are distinguished only by colour and knob position — no glyph, no label. That breaks the never-colour-alone rule. Minimum fix: render the state word (\"On\"/\"Off\", localized) next to the track, or put a check/dash glyph in the knob. Do not ship the canvas version as-is; raise it.\n\nWATCHLIST ROW. Row(children:[handle (flex none), Expanded(Column(crossAxisAlignment: start, ticker + 3px + Arabic name)), price, 26px chip]) with 14px gaps — in Flutter that means explicit SizedBox(width:14) between the four children, since Row has no gap. Expanded + `overflow: TextOverflow.ellipsis, maxLines: 1` reproduces `flex:1;min-width:0`. Price and ticker use Outfit; the Arabic name uses IBM Plex Sans Arabic at weight 300.\n\nREORDER. If the drag handle becomes live, ReorderableListView will not work inside this scroll view without a shrinkWrap/nested-scroll workaround — prefer ReorderableListView with `buildDefaultDragHandles: false` + `ReorderableDragStartListener(index:…)` wrapping the 3-bar handle, placed as a shrinkWrapped, physics: NeverScrollableScrollPhysics child of the outer scroll view. No lift/drop visual was specified in the canvas, so pick something restrained (scale 1.02 + the existing card shadow) and flag it as invented.\n\nNAV BAR GLASS. `backdrop-filter: blur(26px) saturate(180%)` → ClipRRect(borderRadius: 999) + BackdropFilter(filter: ImageFilter.blur(sigmaX:26, sigmaY:26)) with a Container(color: Color(0x941B1917)). Flutter has no saturate() in ImageFilter — either accept the loss or compose ColorFilter.matrix for saturation inside the BackdropFilter's filter chain. The inset highlights (`0 1px 0 rgba(255,255,255,.30) inset`, `0 -8px 20px rgba(255,255,255,.05) inset`) are not expressible as BoxShadow — draw them with a CustomPainter or a stacked gradient overlay, or approximate with a 1px top gradient line (the separate top-hairline div at line 767 already does the visible part of that job). BackdropFilter is expensive; keep it in a RepaintBoundary and do not rebuild it on toggle taps.\n\nNAV ICONS. All four are trivial shapes; do not ship them as SVG assets — CustomPainter or nested Containers is cheaper. You icon at 21x21 rendered from a 20x20 viewBox means scale factor 1.05: circle centre (10.5,7.35) r 3.78, rect (3.675, 13.02) 13.65x6.3 rx 3.15 in the 21px box. The shoulder rect is at opacity .7 of the current colour, the head at full.\n\nRTL / ARABIC — this screen is one of the most direction-sensitive in the app.\n• Every Row/padding on this screen must use EdgeInsetsDirectional and AlignmentDirectional, not left/right. Affected: drag handle (leading) → remove chip (trailing); Edit (trailing in section header); Language value (trailing); the toggle (trailing); the PRO badge if it existed.\n• Letter-spacing MUST be dropped to 0 for Arabic text — .16em/.14em/.12em tracking breaks Arabic glyph joining. Gate it: `letterSpacing: isArabic ? 0 : 1.76`.\n• `text-transform:uppercase` is a no-op in Arabic; ensure the helper skips it rather than calling toUpperCase on Arabic strings.\n• The watchlist rows already mix directions inside an LTR row (`dir=\"rtl\"` on the Arabic name at line 662). In an Arabic build the row itself flips, and the ticker (Latin, \"SWDY\") becomes the embedded LTR run. Wrap ticker and price in `Directionality(textDirection: TextDirection.ltr)` or rely on `textDirection: TextDirection.ltr` on the Text — otherwise \"65.42\" and \"SWDY\" will reorder unpredictably next to Arabic neighbours.\n• \"EN · العربية\" is a mixed-bidi string with a U+00B7 separator — it will need explicit bidi isolates (U+2068/U+2069) or two separate Text spans, or the middle dot will jump sides.\n• Decide now whether prices render in Western (65.42) or Arabic-Indic (٦٥٫٤٢) digits, and whether the decimal separator changes. This affects the tabular-figures assumption.\n• \"Sign out\", \"Edit\", \"Language\" are short strings that grow ~30-50% in Arabic — the Language row is a space-between Row and will handle it, but \"Edit\" sits next to a letterspaced uppercase label and can collide; give the label Expanded and the action a fixed trailing slot.\n• The `bRise` entry animation translates on Y only, so it is direction-safe. The nav pill's `translateX(300%)` for the You tab is NOT — in RTL the You tab is the leftmost, so the pill offset must be computed from the directional index.\n\nPRODUCT RULES CHECK ON THIS SCREEN.\n• No BUY/SELL/TARGET/STOP/EXPECTED-RETURN semantics appear anywhere in You — clean. Do not let the watchlist rows acquire a % change or a green/red tint during implementation; the canvas deliberately renders the price in neutral #5C554F with no delta, and #3F6B52/#A3402F are unused here.\n• STALE DATA VIOLATION: the four watchlist prices (65.42 / 78.30 / 412.10 / 54.75) carry no timestamp, no \"as of\", no age label. Under the stale-data rule this screen cannot ship as drawn. The row has no room for a third line, so the fix is likely a single \"Prices as of HH:MM · delayed Nmin\" caption under the Watchlist card or in the section header opposite \"Edit\" — note that this collides with the existing \"Edit\" affordance and needs a design decision.\n• COLOUR-ALONE VIOLATION: the notification toggle (see above).\n• PRO badge (line 619) is to be OMITTED — flagged, not specified. Removing it means the avatar needs no Stack and no bottom overflow allowance; the identity header's 6px padding-top exists partly to give the badge room to hang -8px below, so re-check the header's vertical rhythm after removal.\n\nWHAT I DID NOT READ / CANNOT SPECIFY.\n• The \"Empty watchlist\" state (line 710) and the rest of the STATES screen — I read only the grep hit, not its styling. The You screen's zero-data cases (0 saved research, 0 watchlist rows, 0 notifications) must come from there.\n• Whether \"Edit\", \"Sign out\", \"−\", the drag handle, or the Language row have any target screen — no handlers exist in the canvas for any of them.\n• Any dark-mode variant. The canvas header calls the product \"dark-first\" (line 28) but every screen including this one is rendered light; no dark tokens for the You screen exist in the file.\n• Press/ripple styling for anything except the goReader cards elsewhere in the file (scale 0.98, 220ms ease-out) and the Pit FAB (scale 0.94, 220ms ease-out) — nothing on You defines one.\n• Scroll behaviour of the nav bar (it is absolutely positioned and never moves) and any safe-area handling for real devices — the canvas hard-codes iPhone-14-ish geometry, so replace the 54px top and 22px bottom offsets with MediaQuery padding on device."
+}

@@ -1,0 +1,528 @@
+{
+  "screen": "Market (route `market`, phone index 1, canvas label \"Market\")",
+  "summary": "A browse-and-scan screen for the whole Egyptian Exchange: search, index-universe filter chips, an A–Z company list with delayed prices, sector weight cards, latest regulatory disclosures, and an earnings calendar. It is purely navigational/informational — the only wired action is tapping a company row to open the Company screen.",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Phone shell + status bar (shared chrome, not part of the screen body)",
+      "description": "The screen renders inside a fixed 390x844 device frame. A non-interactive status bar overlays the top, and the whole screen body lives in one vertically scrolling container whose padding defines the page gutters. Content width available to the screen = 390 - 16 - 16 = 358px.",
+      "layout": "Shell: width:390px; height:844px; border-radius:46px; overflow:hidden; background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%); box-shadow:0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07). Status bar: position:absolute; top:0; left:0; right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Right cluster: display:flex; align-items:center; gap:5px; three bars all background:#1B1917 — 16x9 border-radius:2px opacity:.85, then 5x9 border-radius:1px opacity:.5, then 22x10 border-radius:3px opacity:.85. Scroll container: position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; padding:54px 16px 124px; box-sizing:border-box."
+    },
+    {
+      "order": 2,
+      "name": "Screen root column",
+      "description": "Single vertical stack holding all six content blocks, with one uniform gap. Enters with a rise-and-fade animation.",
+      "layout": "display:flex; flex-direction:column; gap:24px; animation:bRise 240ms ease-out. Keyframe bRise = from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)}."
+    },
+    {
+      "order": 3,
+      "name": "Header — title + search field",
+      "description": "Page title \"Market\" with a pill-shaped search affordance underneath. The search field is display-only in the design: it has NO onClick handler and no input element — it is a tappable-looking placeholder row.",
+      "layout": "Wrapper: padding-top:6px. Title: font:300 36px/1 Outfit,sans-serif; letter-spacing:-0.03em; color:#1B1917. Search pill: margin-top:16px; display:flex; align-items:center; gap:10px; background:#F7F4F0; border-radius:999px; padding:14px 18px; box-shadow:0 8px 24px rgba(27,25,23,.08); color:#7A736D (this is the icon's currentColor). Icon: inline <svg width=17 height=17 viewBox=\"0 0 17 17\" style=\"flex:none\"> containing <circle cx=7.2 cy=7.2 r=5 fill=none stroke=currentColor stroke-width=1.5> and <rect x=10.6 y=11.3 width=5.4 height=1.5 rx=.75 transform=\"rotate(45 10.6 11.3)\" fill=currentColor>. Placeholder text: font:400 14px/1 'IBM Plex Sans Arabic',sans-serif; color:#9A938C."
+    },
+    {
+      "order": 4,
+      "name": "Index universe chip row",
+      "description": "Horizontally scrolling row of four filter chips selecting the listing universe. EGX30 is the selected state. No onClick handlers are wired in the design — selection is static/hard-coded, so tapping does nothing yet. The row bleeds full-width past the 16px page gutter via negative margins.",
+      "layout": "Row: display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; margin:0 -16px; padding:0 16px. Selected chip: flex:none; padding:11px 18px; border-radius:999px; background:#1B1917; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#F5F1EC. Unselected chip: flex:none; padding:11px 18px; border-radius:999px; background:rgba(27,25,23,.06); font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F. No transition or active-press style on chips."
+    },
+    {
+      "order": 5,
+      "name": "Companies · A–Z list",
+      "description": "Eyebrow header with a right-aligned total count, then a vertical list of company rows (ticker monogram, English name, Arabic name, price, change), closed by a staleness disclaimer. Seed data supplies 7 rows even though the template hint is 6.",
+      "layout": "Header row: display:flex; align-items:center; justify-content:space-between; margin-bottom:12px. Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D. Count: font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#9A938C; font-variant-numeric:tabular-nums. List: display:flex; flex-direction:column; gap:8px. ROW (onClick = p.goCompany): display:flex; align-items:center; gap:14px; background:#F7F4F0; border-radius:24px; padding:12px 16px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer; transition:transform 220ms ease-out; active state transform:scale(0.99). Monogram: width:48px; height:48px; flex:none; border-radius:16px; background:#1B1917; display:flex; align-items:center; justify-content:center; font:400 12px/1 Outfit,sans-serif; letter-spacing:.06em; color:#F5F1EC. Middle column: flex:1; min-width:0 — English name font:400 15px/1.2 Outfit,sans-serif; color:#1B1917; Arabic name margin-top:3px; font:300 11px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; dir=\"rtl\". Right column: text-align:right — price font:400 15px/1 Outfit,sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Up delta: margin-top:4px; font:500 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#3F6B52; font-variant-numeric:tabular-nums; content = \"▲\" + change. Down delta: identical but color:#A3402F; content = \"▼\" + change. Disclaimer: margin-top:10px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#9A938C."
+    },
+    {
+      "order": 6,
+      "name": "Sectors 2-column grid",
+      "description": "Four stat cards, each showing a company count (large numeral), a sector name, and the sector's index weight. Cards have a press-scale transition but NO onClick — not navigable in the design.",
+      "layout": "Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px. Grid: display:grid; grid-template-columns:1fr 1fr; gap:12px (each card is therefore (358-12)/2 = 173px wide inside the 390px shell). CARD: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); transition:transform 220ms ease-out; active state transform:scale(0.98). Big numeral: font:300 30px/1 Outfit,sans-serif; letter-spacing:-0.02em; color:#1B1917; font-variant-numeric:tabular-nums. Sector name: margin-top:8px; font:400 13px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#1B1917. Weight line: margin-top:2px; font:400 11px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums; content = \"{weight} of index\"."
+    },
+    {
+      "order": 7,
+      "name": "Latest disclosures card",
+      "description": "One card containing three disclosure rows: fixed-width ticker column, flexible headline, and a right-aligned relative age. Every row (including the last) carries an inset bottom hairline.",
+      "layout": "Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px. Card: background:#F7F4F0; border-radius:24px; padding:4px 18px; box-shadow:0 8px 24px rgba(27,25,23,.06). ROW: display:flex; align-items:flex-start; gap:12px; padding:16px 0; box-shadow:inset 0 -1px 0 rgba(27,25,23,.08). Ticker cell: font:400 11px/1.3 Outfit,sans-serif; letter-spacing:.06em; color:#1B1917; width:46px; flex:none; padding-top:2px. Body cell: flex:1; min-width:0; font:400 13px/1.45 'IBM Plex Sans Arabic',sans-serif; color:#5C554F. Age cell: font:400 11px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#9A938C; flex:none; padding-top:2px; font-variant-numeric:tabular-nums. No onClick on the card or rows."
+    },
+    {
+      "order": 8,
+      "name": "Earnings calendar list",
+      "description": "Three separate cards, each with a date chip (day over month), the ticker, and the reporting detail. Last block in the scroll; the 124px bottom scroll padding clears the floating bottom nav.",
+      "layout": "Eyebrow: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em; text-transform:uppercase; color:#7A736D; margin-bottom:12px. List: display:flex; flex-direction:column; gap:8px. ROW: display:flex; align-items:center; gap:14px; background:#F7F4F0; border-radius:24px; padding:12px 16px; box-shadow:0 8px 24px rgba(27,25,23,.06). No onClick, no transition, no active-press style (this is the visual difference from the company row). Date chip: width:48px; height:48px; flex:none; border-radius:16px; background:rgba(27,25,23,.06); display:flex; flex-direction:column; align-items:center; justify-content:center — day font:400 16px/1 Outfit,sans-serif; color:#1B1917; font-variant-numeric:tabular-nums; month margin-top:2px; font:400 9px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.1em; text-transform:uppercase; color:#7A736D. Middle column: flex:1; min-width:0 — ticker font:400 15px/1.2 Outfit,sans-serif; color:#1B1917; detail margin-top:3px; font:400 11px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#7A736D."
+    },
+    {
+      "order": 9,
+      "name": "Bottom nav + scrim (shared, Market = active slot 2)",
+      "description": "The Market screen renders NOTHING distinctive in the bottom chrome — no FAB (that is The Pit) and no composer bar (that is Post detail). It only sets the active tab to Market. Included here only so the engineer positions the selection pill correctly.",
+      "layout": "Scrim: position:absolute; left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%). Bar: position:absolute; left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); display:flex; align-items:center; padding:0 6px; box-sizing:border-box; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset. Top sheen line: position:absolute; left:14px; right:14px; top:1px; height:1px; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%). Selection pill (Market): position:absolute; left:6px; top:6px; bottom:6px; width:calc((100% - 12px) / 4); transform:translateX(100%); border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%); box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18); animation:bPill 320ms cubic-bezier(.32,1.2,.44,1). Active tab content: color:#FF8340, column, gap:5px, icon 21x21, plus a 4px x 4px border-radius:999px dot background:#FF8340; box-shadow:0 0 8px rgba(255,131,64,.9). Inactive tab: color:rgba(245,241,236,.76), icon only, no dot. Market icon svg viewBox \"0 0 20 20\": rect x=3 y=11 w=3.5 h=6 rx=1.75; rect x=8.25 y=7 w=3.5 h=10 rx=1.75; rect x=13.5 y=3 w=3.5 h=14 rx=1.75, all fill=currentColor. Each tab: position:relative; z-index:1; flex:1; height:66px; column; centered; gap:5px."
+    }
+  ],
+  "components": [
+    {
+      "name": "Section eyebrow label",
+      "description": "All-caps micro label that heads each block: \"Companies · A–Z\", \"Sectors\", \"Latest disclosures\", \"Earnings calendar\". Always followed by 12px of space before its content.",
+      "styling": "font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.76px at 11px); text-transform:uppercase; color:#7A736D; margin-bottom:12px. On the Companies block it sits in a space-between row rather than owning the margin itself.",
+      "likelyShared": true
+    },
+    {
+      "name": "Search pill (display-only)",
+      "description": "Rounded search affordance with a hand-drawn magnifier SVG and grey placeholder text. Carries no handler, no input, no focus state in this design.",
+      "styling": "background:#F7F4F0; border-radius:999px; padding:14px 18px; gap:10px; box-shadow:0 8px 24px rgba(27,25,23,.08); container color:#7A736D; text color:#9A938C at font:400 14px/1 'IBM Plex Sans Arabic'. Icon 17x17, circle r=5 at (7.2,7.2) stroke-width 1.5, handle rect 5.4x1.5 rx .75 rotated 45deg about (10.6,11.3).",
+      "likelyShared": false
+    },
+    {
+      "name": "Universe filter chip",
+      "description": "Pill chip for the index universe. Two states only: selected (ink fill) and unselected (5-6% ink tint).",
+      "styling": "flex:none; padding:11px 18px; border-radius:999px; font:400 13px/1 'IBM Plex Sans Arabic'. Selected: background:#1B1917; color:#F5F1EC. Unselected: background:rgba(27,25,23,.06); color:#5C554F.",
+      "likelyShared": true
+    },
+    {
+      "name": "Ticker monogram tile",
+      "description": "48px dark rounded square holding the 4-letter ticker; used as the leading element of every company row.",
+      "styling": "width:48px; height:48px; flex:none; border-radius:16px; background:#1B1917; centered; font:400 12px/1 Outfit,sans-serif; letter-spacing:.06em (= 0.72px); color:#F5F1EC.",
+      "likelyShared": true
+    },
+    {
+      "name": "Company row",
+      "description": "Tappable list row: monogram, English + Arabic name stack, price + signed change. The only navigating element on this screen.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:12px 16px; gap:14px; box-shadow:0 8px 24px rgba(27,25,23,.06); transition:transform 220ms ease-out; pressed transform:scale(0.99). Name 400 15px/1.2 Outfit #1B1917; Arabic 300 11px/1.3 IBM Plex Sans Arabic #7A736D dir=rtl, margin-top:3px; price 400 15px/1 Outfit #1B1917 tabular.",
+      "likelyShared": true
+    },
+    {
+      "name": "Change delta chip (text-only)",
+      "description": "Direction + percentage, e.g. \"▲2.11%\" / \"▼0.63%\". Direction is carried by the glyph as well as the colour, satisfying the never-colour-alone rule. Rendered from two mutually exclusive booleans (c.up / c.down); there is no zero/flat variant in the design.",
+      "styling": "margin-top:4px; font:500 11px/1 'IBM Plex Sans Arabic',sans-serif; font-variant-numeric:tabular-nums. Up: color:#3F6B52, prefix ▲ (U+25B2). Down: color:#A3402F, prefix ▼ (U+25BC). No background, no padding, no border.",
+      "likelyShared": true
+    },
+    {
+      "name": "Staleness caption",
+      "description": "Mandatory age label under the price list: \"Prices delayed 15 minutes\". The lightest type on the screen.",
+      "styling": "margin-top:10px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#9A938C.",
+      "likelyShared": true
+    },
+    {
+      "name": "Sector stat card",
+      "description": "Half-width card: large count numeral, sector name, index weight. Presses but does not navigate.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); transition:transform 220ms ease-out; pressed transform:scale(0.98). Numeral 300 30px/1 Outfit, letter-spacing -0.02em (= -0.6px), #1B1917, tabular; name margin-top:8px, 400 13px/1.3 IBM Plex Sans Arabic, #1B1917; weight margin-top:2px, 400 11px/1.3 IBM Plex Sans Arabic, #7A736D, tabular.",
+      "likelyShared": false
+    },
+    {
+      "name": "Disclosure row (inside a grouped card)",
+      "description": "Three-column feed row inside a shared container card: fixed 46px ticker, elastic headline, fixed relative age. Rows are separated by an inset bottom hairline that is drawn on every row, including the last.",
+      "styling": "padding:16px 0; gap:12px; align-items:flex-start; box-shadow:inset 0 -1px 0 rgba(27,25,23,.08). Ticker: width:46px; flex:none; padding-top:2px; 400 11px/1.3 Outfit; letter-spacing:.06em (= 0.66px); #1B1917. Headline: flex:1; min-width:0; 400 13px/1.45 IBM Plex Sans Arabic; #5C554F. Age: flex:none; padding-top:2px; 400 11px/1.3 IBM Plex Sans Arabic; #9A938C; tabular.",
+      "likelyShared": true
+    },
+    {
+      "name": "Grouped list card (container)",
+      "description": "The wrapper used only by Latest disclosures: a single card whose vertical padding is deliberately tiny (4px) so the first/last row's own 16px padding provides the visual inset.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:4px 18px; box-shadow:0 8px 24px rgba(27,25,23,.06).",
+      "likelyShared": true
+    },
+    {
+      "name": "Date chip (day/month)",
+      "description": "48px light-tinted rounded square with day numeral over uppercase month abbreviation. Leading element of every earnings row.",
+      "styling": "width:48px; height:48px; flex:none; border-radius:16px; background:rgba(27,25,23,.06); column, centered. Day: 400 16px/1 Outfit; #1B1917; tabular. Month: margin-top:2px; 400 9px/1 IBM Plex Sans Arabic; letter-spacing:.1em (= 0.9px); uppercase; #7A736D.",
+      "likelyShared": true
+    },
+    {
+      "name": "Earnings row",
+      "description": "Static informational row: date chip + ticker + reporting detail. Visually identical shell to the company row but non-interactive.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:12px 16px; gap:14px; box-shadow:0 8px 24px rgba(27,25,23,.06). Ticker 400 15px/1.2 Outfit #1B1917; detail margin-top:3px, 400 11px/1.3 IBM Plex Sans Arabic, #7A736D. No transition/pressed style.",
+      "likelyShared": false
+    },
+    {
+      "name": "Floating glass bottom nav",
+      "description": "Shared 4-tab nav; Market is the second slot. Active tab = amber icon + glowing dot; inactive = translucent paper icon only.",
+      "styling": "See section 9 for full values. Key: height 66px, inset left/right 16px, bottom 22px, radius 999px, fill rgba(27,25,23,.58), blur(26px) saturate(180%), pill width calc((100% - 12px)/4) at translateX(100%), active #FF8340, inactive rgba(245,241,236,.76).",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "9:41",
+      "role": "status bar (frame chrome, not app copy)"
+    },
+    {
+      "text": "Market",
+      "role": "screen title / heading"
+    },
+    {
+      "text": "Search companies, tickers…",
+      "role": "search placeholder (note: real ellipsis character U+2026)"
+    },
+    {
+      "text": "EGX30",
+      "role": "filter chip, selected"
+    },
+    {
+      "text": "EGX70",
+      "role": "filter chip"
+    },
+    {
+      "text": "EGX100",
+      "role": "filter chip"
+    },
+    {
+      "text": "All listed",
+      "role": "filter chip"
+    },
+    {
+      "text": "Companies · A–Z",
+      "role": "section label (middle dot U+00B7, en dash U+2013)"
+    },
+    {
+      "text": "243",
+      "role": "count / result total"
+    },
+    {
+      "text": "COMI",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "Commercial International Bank",
+      "role": "company name"
+    },
+    {
+      "text": "البنك التجارى الدولى",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "78.30",
+      "role": "price"
+    },
+    {
+      "text": "▼0.63%",
+      "role": "change, down"
+    },
+    {
+      "text": "EFIH",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "e-finance Investment",
+      "role": "company name"
+    },
+    {
+      "text": "إى فاينانس للاستثمار",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "19.84",
+      "role": "price"
+    },
+    {
+      "text": "▲2.11%",
+      "role": "change, up"
+    },
+    {
+      "text": "ETEL",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "Telecom Egypt",
+      "role": "company name"
+    },
+    {
+      "text": "المصرية للاتصالات",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "36.15",
+      "role": "price"
+    },
+    {
+      "text": "▲0.28%",
+      "role": "change, up"
+    },
+    {
+      "text": "HRHO",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "EFG Holding",
+      "role": "company name"
+    },
+    {
+      "text": "المجموعة المالية هيرميس",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "24.60",
+      "role": "price"
+    },
+    {
+      "text": "▲1.44%",
+      "role": "change, up"
+    },
+    {
+      "text": "ORAS",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "Orascom Construction",
+      "role": "company name"
+    },
+    {
+      "text": "أوراسكوم كونستراكشون",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "412.10",
+      "role": "price"
+    },
+    {
+      "text": "▲0.44%",
+      "role": "change, up"
+    },
+    {
+      "text": "SWDY",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "El Sewedy Electric",
+      "role": "company name"
+    },
+    {
+      "text": "السويدى اليكتريك",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "65.42",
+      "role": "price"
+    },
+    {
+      "text": "▲1.80%",
+      "role": "change, up"
+    },
+    {
+      "text": "TMGH",
+      "role": "ticker monogram"
+    },
+    {
+      "text": "Talaat Moustafa Group",
+      "role": "company name"
+    },
+    {
+      "text": "مجموعة طلعت مصطفى",
+      "role": "company name, Arabic (dir=rtl)"
+    },
+    {
+      "text": "54.75",
+      "role": "price"
+    },
+    {
+      "text": "▼1.21%",
+      "role": "change, down"
+    },
+    {
+      "text": "Prices delayed 15 minutes",
+      "role": "staleness caption (compliance-critical, must always render)"
+    },
+    {
+      "text": "Sectors",
+      "role": "section label"
+    },
+    {
+      "text": "11",
+      "role": "sector card numeral (company count)"
+    },
+    {
+      "text": "Banks",
+      "role": "sector name"
+    },
+    {
+      "text": "31.4% of index",
+      "role": "sector weight caption (template: \"{{ s.w }} of index\")"
+    },
+    {
+      "text": "18",
+      "role": "sector card numeral"
+    },
+    {
+      "text": "Real estate",
+      "role": "sector name"
+    },
+    {
+      "text": "22.8% of index",
+      "role": "sector weight caption"
+    },
+    {
+      "text": "24",
+      "role": "sector card numeral"
+    },
+    {
+      "text": "Industrials",
+      "role": "sector name"
+    },
+    {
+      "text": "17.2% of index",
+      "role": "sector weight caption"
+    },
+    {
+      "text": "5",
+      "role": "sector card numeral"
+    },
+    {
+      "text": "Telecom & IT",
+      "role": "sector name"
+    },
+    {
+      "text": "9.6% of index",
+      "role": "sector weight caption"
+    },
+    {
+      "text": "Latest disclosures",
+      "role": "section label"
+    },
+    {
+      "text": "Board approves EGP 4.1bn transmission award in Saudi Arabia",
+      "role": "disclosure headline (ticker SWDY, age 2h)"
+    },
+    {
+      "text": "July loan book disclosure: corporate lending up 3.4% m/m",
+      "role": "disclosure headline (ticker COMI, age 5h)"
+    },
+    {
+      "text": "Backlog update — USD 7.2bn at end of June",
+      "role": "disclosure headline (ticker ORAS, age 1d; em dash U+2014)"
+    },
+    {
+      "text": "2h",
+      "role": "relative age"
+    },
+    {
+      "text": "5h",
+      "role": "relative age"
+    },
+    {
+      "text": "1d",
+      "role": "relative age"
+    },
+    {
+      "text": "Earnings calendar",
+      "role": "section label"
+    },
+    {
+      "text": "13",
+      "role": "earnings day numeral"
+    },
+    {
+      "text": "Aug",
+      "role": "earnings month (rendered uppercase by CSS → \"AUG\"; source string is \"Aug\")"
+    },
+    {
+      "text": "HRHO",
+      "role": "earnings ticker"
+    },
+    {
+      "text": "Q2 FY25 results · before open",
+      "role": "earnings detail"
+    },
+    {
+      "text": "18",
+      "role": "earnings day numeral"
+    },
+    {
+      "text": "TMGH",
+      "role": "earnings ticker"
+    },
+    {
+      "text": "Q2 FY25 results · after close",
+      "role": "earnings detail"
+    },
+    {
+      "text": "21",
+      "role": "earnings day numeral"
+    },
+    {
+      "text": "ETEL",
+      "role": "earnings ticker"
+    },
+    {
+      "text": "Q2 FY25 results · after close",
+      "role": "earnings detail"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink — title, names, prices, monogram fill, selected chip fill, status bar)",
+      "#F7F4F0 (paper — every card surface and the search pill)",
+      "#F5F1EC (paper-on-ink — monogram text, selected chip text)",
+      "#5C554F (text-2 — unselected chip label, disclosure body)",
+      "#7A736D (text-3 — eyebrows, Arabic names, sector weight, month label, earnings detail, search-icon currentColor)",
+      "#9A938C (text-4 — search placeholder, count 243, disclosure age, staleness caption)",
+      "#3F6B52 (up)",
+      "#A3402F (down)",
+      "rgba(27,25,23,.06) (unselected chip fill AND earnings date-chip fill — same token, two uses)",
+      "rgba(27,25,23,.08) (disclosure inset hairline)",
+      "#EDE8E2 → #E3DCD4 (shell background gradient)",
+      "#FF8340 (accent-on-dark — active bottom-nav tab only)",
+      "rgba(245,241,236,.76) (inactive bottom-nav tab)",
+      "rgba(27,25,23,.58) (bottom-nav glass fill)"
+    ],
+    "fontStyles": [
+      "300 36px/1 Outfit, letter-spacing:-0.03em (screen title)",
+      "400 14px/1 'IBM Plex Sans Arabic' (search placeholder)",
+      "400 13px/1 'IBM Plex Sans Arabic' (filter chips)",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing:.16em, uppercase (section eyebrows)",
+      "400 12px/1 'IBM Plex Sans Arabic', tabular (count)",
+      "400 12px/1 Outfit, letter-spacing:.06em (ticker monogram)",
+      "400 15px/1.2 Outfit (company name, earnings ticker)",
+      "300 11px/1.3 'IBM Plex Sans Arabic' (Arabic company name)",
+      "400 15px/1 Outfit, tabular (price)",
+      "500 11px/1 'IBM Plex Sans Arabic', tabular (change delta)",
+      "300 10px/1.4 'IBM Plex Sans Arabic' (staleness caption)",
+      "300 30px/1 Outfit, letter-spacing:-0.02em, tabular (sector numeral)",
+      "400 13px/1.3 'IBM Plex Sans Arabic' (sector name)",
+      "400 11px/1.3 'IBM Plex Sans Arabic', tabular (sector weight, disclosure age)",
+      "400 11px/1.3 Outfit, letter-spacing:.06em (disclosure ticker)",
+      "400 13px/1.45 'IBM Plex Sans Arabic' (disclosure headline)",
+      "400 16px/1 Outfit, tabular (earnings day)",
+      "400 9px/1 'IBM Plex Sans Arabic', letter-spacing:.1em, uppercase (earnings month)",
+      "400 11px/1.3 'IBM Plex Sans Arabic' (earnings detail)",
+      "500 13px/1 'IBM Plex Sans Arabic', tabular (status bar clock — frame chrome)"
+    ],
+    "radii": [
+      "999px (search pill, chips, bottom nav, nav pill)",
+      "24px (all list/section cards)",
+      "16px (ticker monogram, earnings date chip)",
+      "46px (phone shell — frame only)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.08) — search pill only",
+      "0 8px 24px rgba(27,25,23,.06) — every card (company row, sector card, disclosure container, earnings row)",
+      "inset 0 -1px 0 rgba(27,25,23,.08) — disclosure row divider",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (frame only)",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — bottom nav (shared)"
+    ],
+    "spacing": [
+      "Page gutters: 16px left/right; scroll padding 54px top / 124px bottom",
+      "Root section gap: 24px",
+      "Header wrapper padding-top: 6px; title→search 16px",
+      "Search pill padding 14px 18px, inner gap 10px",
+      "Chip row gap 8px; chip padding 11px 18px; row margin 0 -16px with padding 0 16px",
+      "Eyebrow→content: 12px",
+      "Company/earnings list gap: 8px; row padding 12px 16px; row gap 14px",
+      "Name→Arabic and ticker→detail: 3px; price→delta: 4px",
+      "List→staleness caption: 10px",
+      "Sector grid gap 12px; card padding 18px; numeral→name 8px; name→weight 2px",
+      "Disclosure card padding 4px 18px; row padding 16px 0; row gap 12px; ticker column width 46px; ticker/age padding-top 2px",
+      "Date chip 48x48, day→month 2px; monogram 48x48"
+    ]
+  },
+  "interactions": [
+    "Screen entry: the whole root column animates `bRise` 240ms ease-out — opacity 0→1 with transform translateY(4px)→translateY(0). In Flutter: FadeTransition + SlideTransition (4px upward), 240ms, Curves.easeOut.",
+    "Company row tap: onClick = p.goCompany → routes to the Company (SWDY) screen. Critically, goCompany is called WITHOUT a nav argument (`g('company')`), so the bottom nav's active tab STAYS on Market. Do not switch the nav selection when pushing Company from here.",
+    "Company row press feedback: transform:scale(0.99) while active, transition:transform 220ms ease-out. In Flutter: AnimatedScale 0.99 / 220ms / Curves.easeOut on pointer-down, back to 1.0 on release.",
+    "Sector card press feedback: transform:scale(0.98), transition:transform 220ms ease-out. There is NO onClick — the card is pressable-looking but inert in the design. Flag this to product before wiring a destination.",
+    "Search pill: no handler, no <input>. It is a static row. If wired later, it should push a search route; the design gives no focused/typing state, so that state is UNSPECIFIED.",
+    "Filter chips (EGX30 / EGX70 / EGX100 / All listed): no onClick, no transition, no active style. Selection is hard-coded to EGX30. The selected/unselected token pair is defined, but the state machine is UNSPECIFIED in this file.",
+    "Chip row: horizontally scrollable, scrollbars hidden (`scrollbar-width:none`, and a global `*::-webkit-scrollbar{width:0;height:0;display:none}`). No snapping specified.",
+    "Page scroll: single vertical scroll view, scrollbar hidden, no pull-to-refresh, no sticky header, no parallax specified.",
+    "Disclosure rows and earnings rows: no handlers, no press states — read-only.",
+    "Bottom nav: tapping Market calls g('market','market'). The selection pill animates with `bPill` 320ms cubic-bezier(.32,1.2,.44,1) (opacity 0→1, transform-origin center) — an overshoot curve; in Flutter approximate with Cubic(0.32, 1.2, 0.44, 1.0).",
+    "No loading, empty, or error variant of the Market screen exists in this file — the STATES screen (lines 696-751) holds those and was not read for this spec.",
+    "No haptics, sounds, or scroll-linked effects are specified anywhere in this screen."
+  ],
+  "flutterNotes": "STRUCTURE\n- Build the frame as a fixed 390x844 container only for design comparison; in production use SafeArea + a Stack: [scrolling body, bottom scrim, floating nav].\n- Body = SingleChildScrollView(padding: EdgeInsets.fromLTRB(16, 54, 16, 124)) wrapping a Column(crossAxisAlignment: stretch) with 24px SizedBox gaps (or Column + spacing: 24 on Flutter 3.27+). Content width is 358px on a 390pt device.\n- The chip row must escape the 16px gutter: wrap it in an OverflowBox / negative-margin Transform, or restructure so the scroll view has 0 horizontal padding and each non-chip section gets its own EdgeInsets.symmetric(horizontal: 16). The second approach is cleaner and matches `margin:0 -16px; padding:0 16px` exactly — the chip ListView gets padding: EdgeInsets.symmetric(horizontal: 16) and scrollDirection: Axis.horizontal.\n- Hide scrollbars: ScrollConfiguration with a behavior returning the child unmodified from buildScrollbar.\n\nTYPOGRAPHY MAPPING (CSS `font: weight size/lh family`)\n- `/1` → height: 1.0; `/1.2` → height: 1.2; `/1.3` → 1.3; `/1.45` → 1.45; `/1.4` → 1.4. Flutter's `height` is exactly the CSS unitless line-height, so these transfer 1:1, but note Flutter centers the leading differently — set `leadingDistribution: TextLeadingDistribution.even` on the TextStyle (or textHeightBehavior) so the 36px/1 title and the 30px/1 sector numerals do not sit lower than the HTML.\n- Weight map: 200→FontWeight.w200, 300→w300, 400→w400, 500→w500. Outfit needs 200/300/400/500; IBM Plex Sans Arabic needs 300/400/500. Bundle both as assets — no network fonts.\n- letter-spacing is in `em` in the CSS but Flutter's letterSpacing is LOGICAL PIXELS. Precomputed: .16em @11px = 1.76; .06em @12px = 0.72; .06em @11px = 0.66; .1em @9px = 0.90; -0.03em @36px = -1.08; -0.03em @13px (status bar has none) n/a; -0.02em @30px = -0.60.\n- `text-transform:uppercase` is CSS-only — the source strings are \"Companies · A–Z\", \"Sectors\", \"Latest disclosures\", \"Earnings calendar\", \"Aug\". Uppercase them in the widget (`.toUpperCase()`), NOT in the data, so Arabic localisation is unaffected (Arabic has no case; `toUpperCase()` is a no-op there, which is correct).\n- `font-variant-numeric:tabular-nums` → fontFeatures: [FontFeature.tabularFigures()]. Apply to: price, count 243, change delta, sector numeral + weight, disclosure age, earnings day, status-bar clock. Confirm the bundled Outfit/IBM Plex Sans Arabic actually ship the `tnum` feature; if not, fall back to a fixed-width numeral or SizedBox-aligned columns, otherwise the right-aligned price column will jitter.\n\nSHADOWS\n- `0 8px 24px rgba(27,25,23,.06)` → BoxShadow(offset: Offset(0,8), blurRadius: 24, color: Color(0x0F1B1917)) — CSS blur radius maps ~1:1 to Flutter blurRadius here (no spread anywhere on this screen), so no /2 conversion is needed. Alphas: .06→0x0F, .08→0x14.\n- The disclosure divider is `box-shadow: inset 0 -1px 0 rgba(27,25,23,.08)` — an inset shadow, which Flutter's BoxShadow cannot do. Implement as a 1px bottom Border (Color(0x141B1917)) on each row's BoxDecoration. Note it is drawn on EVERY row including the LAST one, so do not use a `separatorBuilder` — put the border on the row itself.\n\nCARDS\n- Every card is Container(decoration: BoxDecoration(color: Color(0xFFF7F4F0), borderRadius: BorderRadius.circular(24), boxShadow: [cardShadow])). Radius 24 with 48px children means no clipping concerns; skip ClipRRect (it forces a saveLayer).\n- The sector grid is a 2-column layout with 12px gaps and unequal intrinsic heights. `grid-template-columns:1fr 1fr` with default `align-items:stretch` means BOTH cards in a row are as tall as the taller one. GridView with childAspectRatio will NOT reproduce that faithfully if text wraps (\"Telecom & IT\" may wrap at 173px width). Use Row(crossAxisAlignment: CrossAxisAlignment.stretch) with two Expanded children per row, inside an IntrinsicHeight — or a Wrap with fixed-width children only if you accept ragged heights. Prefer the Row/IntrinsicHeight approach.\n\nPRESS FEEDBACK\n- Company row scale(0.99) and sector card scale(0.98) over 220ms ease-out. Use a small StatefulWidget with GestureDetector(onTapDown/onTapUp/onTapCancel) driving an AnimatedScale(duration: 220ms, curve: Curves.easeOut). Do NOT use InkWell — there is no ripple anywhere in this design system, and the paper surface would show it.\n- The earnings row has NO press feedback and no handler; do not accidentally reuse the company-row widget with a tap target.\n\nTRICKY BITS\n- The bottom nav's `backdrop-filter: blur(26px) saturate(180%)` needs BackdropFilter(filter: ImageFilter.blur(sigmaX: ~13, sigmaY: ~13)) inside a ClipRRect(999). CSS blur radius ≈ 2x Gaussian sigma, so 26px → sigma ≈ 13. `saturate(180%)` has no Flutter equivalent in ImageFilter; approximate with a ColorFilter.matrix saturation matrix composed via ImageFilter.compose, or drop it and accept a slightly flatter glass. Because it is expensive, keep the BackdropFilter inside a RepaintBoundary and do not put one behind the scrolling content.\n- The nav selection pill is `width: calc((100% - 12px)/4)` positioned at left:6 with `translateX(100%)` for Market — i.e. it self-offsets by its own width, not by a percentage of the bar. Compute pillWidth = (barWidth - 12)/4 and set left = 6 + pillWidth * index. Do not use FractionalTranslation on the bar width.\n- The 118px bottom scrim gradient uses three near-identical warm greys with rising alpha — reproduce the exact stops (0%, 52%, 100%) or the fade will band.\n- The search icon is a hand-built SVG, not an icon-font glyph. Draw it with CustomPainter or inline flutter_svg: circle centre (7.2,7.2) r=5 stroke 1.5, plus a 5.4x1.5 rounded bar (rx .75) rotated 45deg about its own (10.6,11.3) origin, in a 17x17 box. Colour comes from the parent (#7A736D), not from the text colour (#9A938C).\n- The bottom-nav Market icon is three rounded bars in a 20x20 viewBox scaled to 21x21 — also CustomPainter/SVG, not Icons.bar_chart.\n\nPRODUCT RULES\n- Nothing on this screen expresses BUY / SELL / TARGET PRICE / STOP LOSS / EXPECTED RETURN, and nothing should be added. The only judgement-adjacent element is the ▲/▼ percent change, which is a factual price move — keep it that way.\n- Direction is never colour-only: ▲/▼ glyphs carry it. If you replace the glyphs with Icons, keep a semantic label (\"up 2.11 percent\") for screen readers, and never render the delta as a bare coloured number.\n- \"Prices delayed 15 minutes\" is a hard requirement under the list — it is the staleness label for every price on the screen. It must render even when the list is empty or loading, and the \"15 minutes\" should be driven by the real feed's delay rather than hard-coded once the data layer exists. The disclosure ages (\"2h\", \"5h\", \"1d\") are also staleness labels and must not be dropped for space.\n- Semantics: give each company row a merged Semantics node (\"Commercial International Bank, COMI, 78.30 Egyptian pounds, down 0.63 percent\") and a button role; the 48px monogram alone would otherwise be announced as a bare ticker string.\n\nRTL / ARABIC (direction-sensitive items)\n- Company rows already mix scripts: the English name is LTR and the Arabic name is explicitly `dir=\"rtl\"`. In Flutter, wrap the Arabic Text in Directionality(textDirection: TextDirection.rtl) — or set textDirection on the Text — regardless of app locale, or Egyptian names will render with mangled punctuation ordering.\n- `text-align:right` on the price column must become TextAlign.end (mirrors to left in Arabic). Do NOT hard-code TextAlign.right.\n- Row order (monogram → names → price) mirrors automatically if you use Row with start/end semantics and EdgeInsetsDirectional. Replace all EdgeInsets.only(left/right) with EdgeInsetsDirectional.\n- The disclosure row's fixed 46px ticker column is on the LEADING side — use a SizedBox inside a Row so it flips to the right in Arabic.\n- The chip row's `margin:0 -16px; padding:0 16px` must mirror; use EdgeInsetsDirectional.symmetric(horizontal: 16) and the ListView will honour Directionality for scroll start.\n- The ▲/▼ glyphs are direction-neutral and need no mirroring. The search magnifier conventionally mirrors in RTL — decide deliberately; the design does not specify.\n- Text growth risk: Arabic sector names and disclosure headlines run longer than the English. The disclosure headline is `flex:1; min-width:0` (i.e. it wraps freely), but the sector card name at 13px/1.3 in a 173px card and the earnings detail at 11px in a flexible column have no maxLines specified — the design gives no truncation rule, so decide one (I'd suggest maxLines: 2 + TextOverflow.ellipsis for card names) and note it as an addition, not something read from the file.\n\nVALUES I DID NOT SEE AND AM NOT GUESSING\n- No maxLines / overflow / ellipsis rules for any text on this screen.\n- No focus, hover, disabled, selected-chip-change, or error states.\n- No loading / empty / error variant of Market (those live on the STATES screen, not read here).\n- No scroll physics, refresh control, or pagination behaviour for the 243-company list — only 7 rows exist in the seed data (the `hint-placeholder-count` is 6, but the array has 7 entries; render all 7).\n- No dark-mode variant: this file is a light canvas, despite the header calling the app \"dark-first\". Ask before inventing dark tokens.\n- No spacing between the last earnings card and the end of scroll other than the container's 124px bottom padding."
+}

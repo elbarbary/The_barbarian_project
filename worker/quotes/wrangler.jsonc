@@ -1,0 +1,20 @@
+{
+  // A separate Worker from the website on purpose.
+  //
+  // thebarbarianproject.com is a static-assets Worker with no `main`; bolting a
+  // script onto it would put the whole site's deploy at risk for the sake of one
+  // JSON endpoint. This is its own script on its own hostname, so the worst a
+  // bad quotes deploy can do is break quotes.
+  "name": "barbarian-quotes",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-27",
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "quotes.thebarbarianproject.com",
+      "custom_domain": true
+    }
+  ]
+}

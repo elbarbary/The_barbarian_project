@@ -1,0 +1,898 @@
+{
+  "screen": "Company — SWDY (route `company`, rendered under `sc-if p.isCompany`, lines 296–475 of `/Users/barbary/Documents/Codex/2026-07-13/fin/thebarbarianproject/design/The Barbarian.dc.html`)",
+  "summary": "A single-company research screen for an EGX listing: a dark quote header carrying a 56-tick arc gauge for the 52-week range, then a five-way segmented tab row that swaps the body between Overview (stat tiles + revenue bar chart + research cards + discussion preview), Financials (a horizontally scrolling annual table with a frozen line-item column), Research, Filings and Discussion. Everything is descriptive — no BUY/SELL/target/stop semantics anywhere, and the quote block is explicitly labelled \"Prices delayed 15 minutes\".",
+  "sections": [
+    {
+      "order": 1,
+      "name": "Phone frame + scroll container (inherited chrome, lines 46, 53)",
+      "description": "The screen sits inside a fixed 390x844 phone shell. All content is inside one vertically scrolling container that fills the shell; the status bar and the bottom nav float above it. Content width available to the screen is 390 - 16 - 16 = 358px (derived, not read).",
+      "layout": "Shell: width:390px; height:844px; border-radius:46px; overflow:hidden; background:linear-gradient(180deg,#EDE8E2 0%,#E3DCD4 100%); box-shadow:0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07). Scroller: position:absolute; inset:0; overflow-y:auto; scrollbar-width:none; padding:54px 16px 124px; box-sizing:border-box."
+    },
+    {
+      "order": 2,
+      "name": "Status bar (inherited chrome, lines 48-51)",
+      "description": "Non-interactive overlay. Left: time. Right: three rounded bars (cell / wifi / battery abstractions).",
+      "layout": "position:absolute; top:0; left:0; right:0; height:54px; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:0 26px; pointer-events:none; font:500 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; font-variant-numeric:tabular-nums. Right group: display:flex; align-items:center; gap:5px — bar1 16x9 radius 2px #1B1917 opacity .85; bar2 5x9 radius 1px #1B1917 opacity .5; bar3 22x10 radius 3px #1B1917 opacity .85."
+    },
+    {
+      "order": 3,
+      "name": "Screen root column (line 297)",
+      "description": "Vertical stack holding: dark header card, segmented tab row, then exactly one body panel depending on the active segment. Animates in on route change.",
+      "layout": "display:flex; flex-direction:column; gap:20px; animation:bRise 240ms ease-out. @keyframes bRise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}"
+    },
+    {
+      "order": 4,
+      "name": "Dark quote header card — nav row (lines 298-302)",
+      "description": "Rounded dark slab. Top row holds a circular back chevron (left) and a circular overflow '···' control (right). Back invokes p.back which pops to the previously visited route, falling back to the tab root implied by the current nav (pit / you / market / home).",
+      "layout": "Card: background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:28px; padding:20px; margin-top:6px. Nav row: display:flex; align-items:center; justify-content:space-between. Back button: width:38px; height:38px; border-radius:999px; background:rgba(245,241,236,.09); color:#F5F1EC; display:flex; align-items:center; justify-content:center; font:300 20px/1 Outfit,sans-serif; cursor:pointer. Overflow button: same box, font:400 14px/1 Outfit,sans-serif; letter-spacing:.08em (= 1.12px)."
+    },
+    {
+      "order": 5,
+      "name": "Dark header — identity + price row (lines 303-312)",
+      "description": "Left column: ticker over Arabic company name. Right column: last price over signed change. Baseline-anchored to the bottom of both columns.",
+      "layout": "Row: margin-top:16px; display:flex; align-items:flex-end; justify-content:space-between; gap:12px. Ticker: font:200 42px/1 Outfit,sans-serif; letter-spacing:-0.02em (= -0.84px); color:#F5F1EC. Arabic name: margin-top:8px; font:300 14px/1.3 'IBM Plex Sans Arabic',sans-serif; color:#8E8781; dir=\"rtl\". Right col: text-align:right. Price: font:300 30px/1 Outfit,sans-serif; color:#F5F1EC; font-variant-numeric:tabular-nums. Change: margin-top:6px; font:500 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#3F6B52; font-variant-numeric:tabular-nums."
+    },
+    {
+      "order": 6,
+      "name": "Dark header — 52-week range arc gauge (line 313, built by dial() lines 835-861, config line 922)",
+      "description": "A 56-blade half-circle tick gauge spanning -90deg to +90deg. Blades below the value ratio are ember, the rest are dim; each lit blade animates in with a 9ms-per-index stagger. The big number and an uppercase caption sit inside the arc; the low and high bounds sit at the bottom corners. Centred in the card.",
+      "layout": "Wrapper row: margin-top:18px; display:flex; align-items:center; justify-content:center. Gauge container: position:relative; width:214px; height:153px (= size/2 + 46). Constants from config: size=214, N=56 blades, r=107, tick=round(214*0.145)=31, value=65.42, min=41.1, max=72.8 → ratio=0.76719, filled=round(56*0.76719)=43 (indices 0..42 lit, 43..55 dim). Blade rod i: position:absolute; left:50%; bottom:22px; width:2px; height:107px; transform-origin:50% 100%; transform:translateX(-1px) rotate(Adeg) where A = -90 + (i/55)*180. Blade head (child, sits at rod top): width:2px; height:31px; border-radius:1px. Lit: background:#E8621C; animation:bTick 220ms ease-out both; animation-delay:(i*9)ms (last lit blade starts at 378ms; total ≈598ms). Dim: background:rgba(245,241,236,0.16), no animation. @keyframes bTick{from{background:rgba(245,241,236,0.16)}to{background:#E8621C}}. Centre text block: position:absolute; left:0; right:0; bottom:46px; text-align:center. Big value: font:200 43px/1 Outfit,sans-serif (43 = round(214*0.2)); letter-spacing:-0.03em (= -1.29px); color:#F5F1EC; font-variant-numeric:tabular-nums. Caption: margin-top:7px; font:400 9px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.44px); text-transform:uppercase; color:#8E8781. Low label: position:absolute; left:2px; bottom:0; font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#8E8781; font-variant-numeric:tabular-nums. High label: identical but right:2px."
+    },
+    {
+      "order": 7,
+      "name": "Dark header — key stats strip (lines 314-318)",
+      "description": "Three evenly-distributed label/value pairs (Prev close, Volume, Mkt cap) separated from the gauge by a 1px inset top hairline.",
+      "layout": "Row: margin-top:14px; display:flex; align-items:center; justify-content:space-between; padding-top:14px; box-shadow:inset 0 1px 0 rgba(245,241,236,.08) (renders as a 1px top divider). Cell label: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.12em (= 1.2px); text-transform:uppercase; color:#8E8781. Cell value: margin-top:6px; font:400 15px/1 Outfit,sans-serif; color:#F5F1EC; font-variant-numeric:tabular-nums."
+    },
+    {
+      "order": 8,
+      "name": "Dark header — staleness disclosure (line 319)",
+      "description": "Mandatory data-age label at the foot of the quote card. Uses a dimmer grey than the rest of the dark card.",
+      "layout": "margin-top:12px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#6E6862. (#6E6862 is NOT in the palette brief — it is a header-only muted tone, read verbatim from line 319.)"
+    },
+    {
+      "order": 9,
+      "name": "Segmented tab row — 5 tabs (lines 322-328, styles at lines 865-866)",
+      "description": "Five fixed-width vertical pills (icon over 9px label), spread across the full content width. Exactly one is active. Tapping sets p.seg to 'ovr' | 'fin' | 'res' | 'dis' | 'disq'. Default is 'ovr'. Icons are inline SVGs at 16x16 painted with currentColor, so they inherit the active/inactive text colour — state is therefore carried by icon tint + surface + shadow, plus the always-visible text label (satisfies the never-colour-alone rule).",
+      "layout": "Container: display:flex; align-items:flex-start; justify-content:space-between; gap:4px. Because 5 x 56px = 280px inside 358px and justify-content is space-between, the rendered gaps are (358-280)/4 = 19.5px, not 4px — gap:4px is only the floor (derived). ACTIVE pill: width:56px; height:62px; border-radius:999px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; background:#FFFFFF; box-shadow:0 8px 20px rgba(27,25,23,.16); color:#1B1917; cursor:pointer; transition:all 220ms ease-out. INACTIVE pill: identical box but background:rgba(27,25,23,.05); color:#7A736D; no box-shadow. Label inside each: font:400 9px/1 'IBM Plex Sans Arabic',sans-serif."
+    },
+    {
+      "order": 10,
+      "name": "OVERVIEW panel container (lines 330-331, gated on p.ovrOn, default true)",
+      "description": "Vertical stack of four blocks: 2-column stat grid, revenue chart card, research list, discussion preview.",
+      "layout": "display:flex; flex-direction:column; gap:20px."
+    },
+    {
+      "order": 11,
+      "name": "OVERVIEW — financial stat tile grid (lines 332-344)",
+      "description": "Six light tiles in a 2-column grid. Each tile: uppercase metric label, then a large value with a small unit suffix on the same baseline, then an optional signed delta line rendered in green with ▲ or red with ▼. The arrow glyph carries the direction independently of colour.",
+      "layout": "Grid: display:grid; grid-template-columns:1fr 1fr; gap:12px (derived tile width = (358-12)/2 = 173px). Tile: background:#F7F4F0; border-radius:20px; padding:16px; box-shadow:0 8px 24px rgba(27,25,23,.06). Label: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.12em (= 1.2px); text-transform:uppercase; color:#7A736D. Value row: margin-top:10px; display:flex; align-items:baseline; gap:4px. Value: font:300 26px/1 Outfit,sans-serif; letter-spacing:-0.02em (= -0.52px); color:#1B1917; font-variant-numeric:tabular-nums. Unit: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Delta (up): margin-top:8px; font:500 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#3F6B52; font-variant-numeric:tabular-nums; text = '▲ ' + d. Delta (down): identical but color:#A3402F; text = '▼ ' + d. If neither s.up nor s.down is set the delta line is omitted entirely."
+    },
+    {
+      "order": 12,
+      "name": "OVERVIEW — revenue bar chart card (lines 346-371)",
+      "description": "Eight-bar column chart of revenue by fiscal year, FY18–FY25. Bars are unlabelled percentage-height blocks; the last (most recent) bar and its axis label are inked solid to mark the current year. There are no gridlines, no y-axis and no value labels.",
+      "layout": "Card: background:#F7F4F0; border-radius:28px; padding:20px; box-shadow:0 8px 24px rgba(27,25,23,.06). Header row: display:flex; align-items:baseline; justify-content:space-between. Title: font:400 15px/1.2 Outfit,sans-serif; color:#1B1917. Range caption: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Plot row: margin-top:22px; display:flex; align-items:flex-end; gap:8px; height:128px. Bars, in order, each flex:1; border-radius:10px — heights 38%,44%,41%,52%,62%,73%,89%,100% (= 48.64, 56.32, 52.48, 66.56, 79.36, 93.44, 113.92, 128.0 px). Bars 1-7 background:rgba(27,25,23,.10); bar 8 background:#1B1917. Derived bar width inside the 318px card interior: (318 - 7*8)/8 = 32.75px. Axis row: margin-top:10px; display:flex; gap:8px; each cell flex:1; text-align:center; font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; font-variant-numeric:tabular-nums; color:#9A938C for 18–24 and color:#1B1917 for 25."
+    },
+    {
+      "order": 13,
+      "name": "OVERVIEW — Barbarian research block (lines 373-390)",
+      "description": "An uppercase section kicker over two hand-authored cards (this block is NOT data-driven — both cards are hardcoded in the markup). Card 1 is a dark hero carrying a verdict pill; card 2 is a light secondary card. Both navigate to the Research reader.",
+      "layout": "Section kicker: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.76px); text-transform:uppercase; color:#7A736D; margin-bottom:12px. List: display:flex; flex-direction:column; gap:10px. DARK CARD: background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:24px; padding:18px; cursor:pointer; transition:transform 220ms ease-out; active state transform:scale(0.98). Its top row: display:flex; align-items:center; justify-content:space-between; gap:12px — kicker font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.14em (= 1.4px); text-transform:uppercase; color:#8E8781; verdict pill padding:5px 10px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C. Dark title: margin-top:12px; font:300 22px/1.15 Outfit,sans-serif; letter-spacing:-0.02em (= -0.44px); color:#F5F1EC. Dark meta: margin-top:10px; font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#8E8781. LIGHT CARD: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer; transition:transform 220ms ease-out; active transform:scale(0.98). Light kicker: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.14em; text-transform:uppercase; color:#7A736D. Light title: margin-top:10px; font:300 20px/1.2 Outfit,sans-serif; letter-spacing:-0.01em (= -0.2px); color:#1B1917. Light meta: margin-top:10px; font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D."
+    },
+    {
+      "order": 14,
+      "name": "OVERVIEW — discussion preview (lines 392-404)",
+      "description": "Section header with a 'See all' affordance that routes to The Pit, plus one hardcoded post card that routes to Post detail. The author avatar is a diagonal-stripe placeholder, not an image.",
+      "layout": "Header row: display:flex; align-items:center; justify-content:space-between; margin-bottom:12px. Label: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.76px); text-transform:uppercase; color:#7A736D. 'See all': font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; cursor:pointer. Card: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer (no scale-active on this one). Title: font:300 18px/1.3 Outfit,sans-serif; color:#1B1917. Byline row: margin-top:12px; display:flex; align-items:center; gap:8px. Avatar: width:24px; height:24px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px). Byline text: font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D."
+    },
+    {
+      "order": 15,
+      "name": "FINANCIALS panel — annual table (lines 408-435, gated on p.finOn)",
+      "description": "A single card containing a horizontally scrolling 5-column table: a frozen left 'Line item' column plus FY22–FY25. The header row is sticky to the top of the scroll area; the label column is sticky to the left. Seven data rows. A provenance footnote closes the card.",
+      "layout": "Card: background:#F7F4F0; border-radius:28px; box-shadow:0 8px 24px rgba(27,25,23,.06); overflow:hidden. Head block: padding:20px 20px 0. Title: font:400 15px/1.2 Outfit,sans-serif; color:#1B1917. Subtitle: margin-top:6px; font:400 11px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#7A736D. Scroll region: margin-top:16px; overflow-x:auto; scrollbar-width:none. Inner track: min-width:420px. HEADER ROW: display:flex; position:sticky; top:0; background:#F7F4F0; z-index:2; box-shadow:inset 0 -1px 0 rgba(27,25,23,.10). Header label cell: width:132px; flex:none; padding:0 20px; height:44px; display:flex; align-items:center; font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.12em (= 1.2px); text-transform:uppercase; color:#7A736D; background:#F7F4F0; position:sticky; left:0. Header year cells FY22/FY23/FY24: flex:1; height:44px; display:flex; align-items:center; justify-content:flex-end; padding-right:16px; font:400 11px/1 Outfit,sans-serif; color:#7A736D; font-variant-numeric:tabular-nums. Header FY25 cell differs: padding-right:20px and color:#1B1917. BODY ROW: display:flex; box-shadow:inset 0 -1px 0 rgba(27,25,23,.08). Body label cell: width:132px; flex:none; padding:0 20px; height:44px; display:flex; align-items:center; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#1B1917; background:#F7F4F0; position:sticky; left:0. Body value cells (all four, including FY25): flex:1; height:44px; display:flex; align-items:center; justify-content:flex-end; padding-right:16px; font:400 13px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F; font-variant-numeric:tabular-nums. Footer: padding:16px 20px; font:300 10px/1.4 'IBM Plex Sans Arabic',sans-serif; color:#9A938C. DISCREPANCY to resolve with design: header FY25 uses padding-right:20px while the body FY25 cells use 16px, so that column's header sits 4px left of its values."
+    },
+    {
+      "order": 16,
+      "name": "RESEARCH panel (lines 437-447, gated on p.resOn)",
+      "description": "A flat list of three identical dark research cards driven by the shared `research` array. Same visual as the Overview dark hero card but with no verdict pill. All three route to the Research reader. Note this list is the GLOBAL research feed, not filtered to SWDY — item 2 is a banking sector piece.",
+      "layout": "List: display:flex; flex-direction:column; gap:10px. Card: background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:24px; padding:18px; cursor:pointer; transition:transform 220ms ease-out; active transform:scale(0.98). Kicker: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.14em (= 1.4px); text-transform:uppercase; color:#8E8781. Title: margin-top:12px; font:300 22px/1.15 Outfit,sans-serif; letter-spacing:-0.02em (= -0.44px); color:#F5F1EC. Meta: margin-top:10px; font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#8E8781."
+    },
+    {
+      "order": 17,
+      "name": "FILINGS panel (lines 449-461, gated on p.disOn — note: the flag named 'dis' drives the tab LABELLED 'Filings')",
+      "description": "One light card acting as a divided list of four disclosure rows. Each row: uppercase filing type on the left, date on the right, then the filing text on its own line. Rows are non-interactive in this design (no onClick).",
+      "layout": "Card: background:#F7F4F0; border-radius:28px; padding:4px 20px; box-shadow:0 8px 24px rgba(27,25,23,.06). Row: padding:18px 0; box-shadow:inset 0 -1px 0 rgba(27,25,23,.08) — this is applied to EVERY row including the last, so there is a trailing hairline 4px above the card's bottom edge. Row head: display:flex; align-items:center; justify-content:space-between; gap:12px. Kind: font:400 10px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.12em (= 1.2px); text-transform:uppercase; color:#7A736D. Date: font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; color:#9A938C; font-variant-numeric:tabular-nums. Body: margin-top:8px; font:400 14px/1.45 'IBM Plex Sans Arabic',sans-serif; color:#1B1917."
+    },
+    {
+      "order": 18,
+      "name": "DISCUSSION panel (lines 463-473, gated on p.disqOn)",
+      "description": "Three light post cards from the shared `posts` array, each with an outlined kind chip, a title, and an author/comment-count meta line. All route to Post detail. Only the `kind`, `title`, `author` and `comments` fields of each post are rendered here — `ticker`, `body`, `ago`, `likes`, `ember`, `plain` are unused on this screen. Like the Research tab, this list is NOT filtered to SWDY.",
+      "layout": "List: display:flex; flex-direction:column; gap:10px. Card: background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer. Kind chip: padding:4px 10px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(27,25,23,.18); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F; display:inline-block. Title: margin-top:12px; font:300 19px/1.28 Outfit,sans-serif; color:#1B1917. Meta: margin-top:12px; font:400 12px/1 'IBM Plex Sans Arabic',sans-serif; color:#7A736D; font-variant-numeric:tabular-nums; composed as '{author} · {comments} comments'."
+    },
+    {
+      "order": 19,
+      "name": "Bottom navigation (shared, lines 761-804) — distinctive behaviour on this screen",
+      "description": "The Company screen renders NO floating action button and NO composer bar (those are gated on p.isPit / p.isPost). What IS distinctive: the Company route is seeded with nav:'market' (line 820, mk('company','market')), so while you are on the Company screen the MARKET tab stays lit — the second nav slot shows the ember icon and dot. Navigating in via p.goCompany deliberately passes no nav argument, so whichever tab you came from stays lit.",
+      "layout": "Scrim above nav: position:absolute; left:0; right:0; bottom:0; height:118px; z-index:5; pointer-events:none; background:linear-gradient(180deg,rgba(232,225,216,0) 0%,rgba(230,222,213,.34) 52%,rgba(227,220,212,.62) 100%). Bar: position:absolute; left:16px; right:16px; bottom:22px; height:66px; z-index:7; border-radius:999px; background:rgba(27,25,23,.58); backdrop-filter:blur(26px) saturate(180%); display:flex; align-items:center; padding:0 6px; box-sizing:border-box; box-shadow:0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset. Active pill (Market = translateX(100%)): position:absolute; left:6px; top:6px; bottom:6px; width:calc((100% - 12px)/4); border-radius:999px; background:linear-gradient(180deg,rgba(255,255,255,.20) 0%,rgba(255,255,255,.07) 100%); box-shadow:0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18); animation:bPill 320ms cubic-bezier(.32,1.2,.44,1). Top sheen: position:absolute; left:14px; right:14px; top:1px; height:1px; border-radius:999px; background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.42) 50%,rgba(255,255,255,0) 100%). Item: flex:1; height:66px; column; centred; gap:5px. Active icon colour #FF8340 plus a 4x4 dot (border-radius:999px; background:#FF8340; box-shadow:0 0 8px rgba(255,131,64,.9)); inactive icon colour rgba(245,241,236,.76) with no dot. Icons are 21x21 SVGs on a 0 0 20 20 viewBox."
+    }
+  ],
+  "components": [
+    {
+      "name": "circular dark icon button (back / overflow)",
+      "description": "38px circle on the dark header. Two instances: back chevron '‹' (tap → p.back, pops to previous route) and a static overflow '···' (no onClick in the design — no menu is specified).",
+      "styling": "width:38px; height:38px; border-radius:999px; background:rgba(245,241,236,.09); color:#F5F1EC; display:flex; align-items:center; justify-content:center; cursor:pointer. Back glyph font:300 20px/1 Outfit,sans-serif. Overflow glyph font:400 14px/1 Outfit,sans-serif; letter-spacing:.08em (= 1.12px). No hover/pressed style is specified.",
+      "likelyShared": true
+    },
+    {
+      "name": "arc tick gauge (dial)",
+      "description": "Reusable 56-blade half-circle gauge. Config: {size, value, min, max, big, caption, lo, hi}. Ratio is clamped to [0,1]; filled = round(56 * ratio). Used here as `dialRange` (52-week range, size 214). A second instance `dialVerdict` exists in the seed data at line 923 (size 230, value 72, min 0, max 100, big '72', caption 'Cash', lo 'Trash', hi 'Cash') but is NOT rendered on the Company screen.",
+      "styling": "Container width = size, height = size/2 + 46. Blade rod: 2px x (size/2), transform-origin 50% 100%, bottom:22px, left:50%, translateX(-1px), rotate(-90 + i/55*180 deg). Blade head: 2px x round(size*0.145), radius 1px; lit #E8621C with bTick 220ms ease-out both, delay i*9ms; unlit rgba(245,241,236,0.16). Big label font:200 round(size*0.2)px/1 Outfit; letter-spacing:-0.03em; color:#F5F1EC; tabular-nums; positioned bottom:46px, full width, centred. Caption margin-top:7px; font:400 9px/1 'IBM Plex Sans Arabic'; letter-spacing:.16em; uppercase; color:#8E8781. lo at left:2px/bottom:0 and hi at right:2px/bottom:0, both font:400 10px/1 'IBM Plex Sans Arabic'; color:#8E8781; tabular-nums.",
+      "likelyShared": true
+    },
+    {
+      "name": "dark header key-stat cell",
+      "description": "Uppercase micro-label over a numeric value, used three times in the header strip.",
+      "styling": "Label font:400 10px/1 'IBM Plex Sans Arabic'; letter-spacing:.12em (=1.2px); uppercase; color:#8E8781. Value margin-top:6px; font:400 15px/1 Outfit; color:#F5F1EC; font-variant-numeric:tabular-nums.",
+      "likelyShared": true
+    },
+    {
+      "name": "segmented tab pill",
+      "description": "56x62 vertical pill with a 16x16 currentColor SVG over a 9px label. Exactly one active. Five icons: Overview = 4 rounded 6x6 squares (rx 2) at (1,1),(9,1),(1,9),(9,9) with the two off-diagonal ones at opacity .45; Financials = 3 rounded bars (rx 1.7, w 3.4) at x1/y9/h6, x6.3/y5/h10, x11.6/y1/h14; Research = 12x14 rounded rect (rx 3, opacity .45) at (2,1) with two 7x1.5 rules (rx .75) at y4.5 and y8; Filings = circle cx8 cy8 r7 stroke currentColor 1.5 no fill, plus a 1.6x5 rounded bar (rx .8) at (7.2,4) and a filled circle cx8 cy11.2 r1; Discussion = 14x10 rounded rect (rx 3.5, opacity .5) at (1,2), a 4x4 tail (rx 1.5, opacity .5) at (4,11), and three r1.1 dots at cx 5.5 / 8 / 10.5, cy 7.",
+      "styling": "Shared: width:56px; height:62px; border-radius:999px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; transition:all 220ms ease-out. ON: background:#FFFFFF; box-shadow:0 8px 20px rgba(27,25,23,.16); color:#1B1917. OFF: background:rgba(27,25,23,.05); color:#7A736D; no shadow. Label font:400 9px/1 'IBM Plex Sans Arabic',sans-serif.",
+      "likelyShared": false
+    },
+    {
+      "name": "light stat tile",
+      "description": "Metric tile: label, value + unit, optional signed delta. Direction is encoded by BOTH the ▲/▼ glyph and the colour.",
+      "styling": "background:#F7F4F0; border-radius:20px; padding:16px; box-shadow:0 8px 24px rgba(27,25,23,.06). Label 400 10px/1 IBM Plex, .12em, uppercase, #7A736D. Value row margin-top:10px, baseline-aligned, gap:4px. Value 300 26px/1 Outfit, -0.02em, #1B1917, tabular. Unit 400 11px/1 IBM Plex, #7A736D. Delta margin-top:8px, 500 11px/1 IBM Plex, tabular; up #3F6B52 prefixed '▲ '; down #A3402F prefixed '▼ '.",
+      "likelyShared": true
+    },
+    {
+      "name": "percentage bar (revenue chart)",
+      "description": "Unlabelled flex:1 column bar whose height is a percentage of a 128px plot. The final bar is inked to mark the latest fiscal year.",
+      "styling": "flex:1; border-radius:10px; background:rgba(27,25,23,.10) — or #1B1917 for the highlighted/last bar. Plot container height:128px; gap:8px; align-items:flex-end.",
+      "likelyShared": false
+    },
+    {
+      "name": "dark research card",
+      "description": "Ember-accented dark card with kicker / title / meta and an optional verdict pill in the header row. Tap opens the Research reader.",
+      "styling": "background:linear-gradient(180deg,#242120 0%,#1B1917 100%); border-radius:24px; padding:18px; cursor:pointer; transition:transform 220ms ease-out; pressed transform:scale(0.98). Kicker 400 10px/1 IBM Plex, .14em, uppercase, #8E8781. Title margin-top:12px; 300 22px/1.15 Outfit; -0.02em; #F5F1EC. Meta margin-top:10px; 400 11px/1 IBM Plex; #8E8781.",
+      "likelyShared": true
+    },
+    {
+      "name": "verdict pill",
+      "description": "Outlined ember pill showing the Cash-or-Trash verdict score and word. Carries a number AND a word, never colour alone.",
+      "styling": "padding:5px 10px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(232,98,28,.55) (i.e. a 1px inset ember-tinted border, no fill); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#E8621C.",
+      "likelyShared": true
+    },
+    {
+      "name": "light research card",
+      "description": "Secondary research entry on paper. Kicker / title / meta, smaller type than the dark card.",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer; transition:transform 220ms ease-out; pressed transform:scale(0.98). Kicker 400 10px/1 IBM Plex, .14em, uppercase, #7A736D. Title margin-top:10px; 300 20px/1.2 Outfit; -0.01em; #1B1917. Meta margin-top:10px; 400 11px/1 IBM Plex; #7A736D.",
+      "likelyShared": true
+    },
+    {
+      "name": "post card (light)",
+      "description": "Discussion entry. Two variants appear on this screen: the Overview preview (title + avatar + byline, NO chip) and the Discussion tab card (kind chip + title + meta, NO avatar).",
+      "styling": "background:#F7F4F0; border-radius:24px; padding:18px; box-shadow:0 8px 24px rgba(27,25,23,.06); cursor:pointer. Overview variant title 300 18px/1.3 Outfit #1B1917; byline row margin-top:12px, gap:8px, 400 12px/1 IBM Plex #7A736D. Discussion-tab variant title 300 19px/1.28 Outfit #1B1917 with margin-top:12px above and below; meta 400 12px/1 IBM Plex #7A736D tabular.",
+      "likelyShared": true
+    },
+    {
+      "name": "kind chip (outlined)",
+      "description": "Neutral outlined pill labelling a post type (Question / Analysis / Source).",
+      "styling": "padding:4px 10px; border-radius:999px; box-shadow:inset 0 0 0 1px rgba(27,25,23,.18); font:500 10px/1 'IBM Plex Sans Arabic',sans-serif; color:#5C554F; display:inline-block.",
+      "likelyShared": true
+    },
+    {
+      "name": "striped avatar placeholder",
+      "description": "24px circular author stand-in — a repeating diagonal stripe, no photo, no initials.",
+      "styling": "width:24px; height:24px; border-radius:999px; background:repeating-linear-gradient(135deg,#D9D2CA 0 3px,#E8E2DB 3px 6px). Stripe period = 6px at 135deg.",
+      "likelyShared": true
+    },
+    {
+      "name": "section kicker",
+      "description": "Uppercase micro-heading above a list block ('Barbarian research', 'Discussion').",
+      "styling": "font:400 11px/1 'IBM Plex Sans Arabic',sans-serif; letter-spacing:.16em (= 1.76px); text-transform:uppercase; color:#7A736D; margin-bottom:12px (or inside a header row that has margin-bottom:12px).",
+      "likelyShared": true
+    },
+    {
+      "name": "frozen-column data table row",
+      "description": "44px-tall flex row with a 132px sticky label cell and N right-aligned numeric cells, separated by 1px inset bottom hairlines.",
+      "styling": "Row box-shadow:inset 0 -1px 0 rgba(27,25,23,.08) (header row uses .10). Label cell width:132px; flex:none; padding:0 20px; sticky left:0; background:#F7F4F0. Numeric cells flex:1; justify-content:flex-end; padding-right:16px; tabular-nums. Header type 400 11px/1 Outfit #7A736D (last column #1B1917, padding-right:20px); body type 400 13px/1 IBM Plex #5C554F; body label 400 13px/1 IBM Plex #1B1917.",
+      "likelyShared": true
+    },
+    {
+      "name": "filing row",
+      "description": "Divided list row: type + date on one line, filing summary below.",
+      "styling": "padding:18px 0; box-shadow:inset 0 -1px 0 rgba(27,25,23,.08). Head flex, space-between, gap:12px. Kind 400 10px/1 IBM Plex, .12em, uppercase, #7A736D. Date 400 11px/1 IBM Plex #9A938C tabular. Text margin-top:8px; 400 14px/1.45 IBM Plex #1B1917.",
+      "likelyShared": true
+    }
+  ],
+  "copy": [
+    {
+      "text": "‹",
+      "role": "back button glyph"
+    },
+    {
+      "text": "···",
+      "role": "overflow button glyph"
+    },
+    {
+      "text": "SWDY",
+      "role": "ticker / screen title"
+    },
+    {
+      "text": "السويدى اليكتريك",
+      "role": "Arabic company name (dir=rtl)"
+    },
+    {
+      "text": "65.42",
+      "role": "last price"
+    },
+    {
+      "text": "▲ 1.16 (1.80%)",
+      "role": "price change (absolute and percent)"
+    },
+    {
+      "text": "65.42",
+      "role": "gauge centre value"
+    },
+    {
+      "text": "52-week range",
+      "role": "gauge caption (uppercase-transformed)"
+    },
+    {
+      "text": "41.10",
+      "role": "gauge low bound"
+    },
+    {
+      "text": "72.80",
+      "role": "gauge high bound"
+    },
+    {
+      "text": "Prev close",
+      "role": "header stat label (uppercase-transformed)"
+    },
+    {
+      "text": "64.26",
+      "role": "header stat value"
+    },
+    {
+      "text": "Volume",
+      "role": "header stat label (uppercase-transformed)"
+    },
+    {
+      "text": "4.2M",
+      "role": "header stat value"
+    },
+    {
+      "text": "Mkt cap",
+      "role": "header stat label (uppercase-transformed)"
+    },
+    {
+      "text": "142.9bn",
+      "role": "header stat value"
+    },
+    {
+      "text": "Prices delayed 15 minutes",
+      "role": "staleness disclosure"
+    },
+    {
+      "text": "Overview",
+      "role": "segmented tab label"
+    },
+    {
+      "text": "Financials",
+      "role": "segmented tab label"
+    },
+    {
+      "text": "Research",
+      "role": "segmented tab label"
+    },
+    {
+      "text": "Filings",
+      "role": "segmented tab label"
+    },
+    {
+      "text": "Discussion",
+      "role": "segmented tab label"
+    },
+    {
+      "text": "Revenue",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "131.9",
+      "role": "stat tile value"
+    },
+    {
+      "text": "bn",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▲ 11.3%",
+      "role": "stat tile delta (up)"
+    },
+    {
+      "text": "Net profit",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "10.2",
+      "role": "stat tile value"
+    },
+    {
+      "text": "bn",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▲ 9.1%",
+      "role": "stat tile delta (up)"
+    },
+    {
+      "text": "Net margin",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "7.7",
+      "role": "stat tile value"
+    },
+    {
+      "text": "%",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▼ 20 bps",
+      "role": "stat tile delta (down)"
+    },
+    {
+      "text": "Net debt",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "12.9",
+      "role": "stat tile value"
+    },
+    {
+      "text": "bn",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▲ 8.8%",
+      "role": "stat tile delta (up) — see flutterNotes, semantics ambiguous"
+    },
+    {
+      "text": "Free cash flow",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "6.0",
+      "role": "stat tile value"
+    },
+    {
+      "text": "bn",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▲ 14.8%",
+      "role": "stat tile delta (up)"
+    },
+    {
+      "text": "ROE",
+      "role": "stat tile label (uppercase-transformed)"
+    },
+    {
+      "text": "24.6",
+      "role": "stat tile value"
+    },
+    {
+      "text": "%",
+      "role": "stat tile unit"
+    },
+    {
+      "text": "▲ 150 bps",
+      "role": "stat tile delta (up)"
+    },
+    {
+      "text": "Revenue, EGP bn",
+      "role": "chart title"
+    },
+    {
+      "text": "FY18 — FY25",
+      "role": "chart range caption (em dash)"
+    },
+    {
+      "text": "18",
+      "role": "chart axis label"
+    },
+    {
+      "text": "19",
+      "role": "chart axis label"
+    },
+    {
+      "text": "20",
+      "role": "chart axis label"
+    },
+    {
+      "text": "21",
+      "role": "chart axis label"
+    },
+    {
+      "text": "22",
+      "role": "chart axis label"
+    },
+    {
+      "text": "23",
+      "role": "chart axis label"
+    },
+    {
+      "text": "24",
+      "role": "chart axis label"
+    },
+    {
+      "text": "25",
+      "role": "chart axis label (highlighted, #1B1917)"
+    },
+    {
+      "text": "Barbarian research",
+      "role": "section kicker (uppercase-transformed)"
+    },
+    {
+      "text": "Cash or trash",
+      "role": "research card kicker (uppercase-transformed)"
+    },
+    {
+      "text": "Verdict 72 · Cash",
+      "role": "verdict pill"
+    },
+    {
+      "text": "SWDY: the complete study",
+      "role": "research card title"
+    },
+    {
+      "text": "14 min read · 4 Aug",
+      "role": "research card meta"
+    },
+    {
+      "text": "Earnings",
+      "role": "research card kicker (uppercase-transformed)"
+    },
+    {
+      "text": "Q3 review: the margin question",
+      "role": "research card title"
+    },
+    {
+      "text": "6 min read · 22 Jul",
+      "role": "research card meta"
+    },
+    {
+      "text": "Discussion",
+      "role": "section kicker (uppercase-transformed)"
+    },
+    {
+      "text": "See all",
+      "role": "section action link → The Pit"
+    },
+    {
+      "text": "Why did SWDY margins fall in Q3?",
+      "role": "post preview title"
+    },
+    {
+      "text": "Mostafa H. · 48 comments",
+      "role": "post preview byline"
+    },
+    {
+      "text": "Annual financials",
+      "role": "financials card title"
+    },
+    {
+      "text": "EGP millions · audited · scroll for more years",
+      "role": "financials card subtitle / units + provenance + affordance hint"
+    },
+    {
+      "text": "Line item",
+      "role": "table header, frozen column (uppercase-transformed)"
+    },
+    {
+      "text": "FY22",
+      "role": "table column header"
+    },
+    {
+      "text": "FY23",
+      "role": "table column header"
+    },
+    {
+      "text": "FY24",
+      "role": "table column header"
+    },
+    {
+      "text": "FY25",
+      "role": "table column header (highlighted, #1B1917)"
+    },
+    {
+      "text": "Revenue",
+      "role": "table row label"
+    },
+    {
+      "text": "82,140",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "96,320",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "118,470",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "131,900",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Gross profit",
+      "role": "table row label"
+    },
+    {
+      "text": "13,970",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "16,410",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "21,090",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "23,140",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Net profit",
+      "role": "table row label"
+    },
+    {
+      "text": "4,820",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "6,140",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "9,370",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "10,220",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Net margin",
+      "role": "table row label"
+    },
+    {
+      "text": "5.9%",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "6.4%",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "7.9%",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "7.7%",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Net debt",
+      "role": "table row label"
+    },
+    {
+      "text": "18,400",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "16,950",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "14,120",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "12,880",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Free cash flow",
+      "role": "table row label"
+    },
+    {
+      "text": "2,110",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "3,480",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "5,260",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "6,040",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "ROE",
+      "role": "table row label"
+    },
+    {
+      "text": "14.2%",
+      "role": "table cell FY22"
+    },
+    {
+      "text": "17.8%",
+      "role": "table cell FY23"
+    },
+    {
+      "text": "23.1%",
+      "role": "table cell FY24"
+    },
+    {
+      "text": "24.6%",
+      "role": "table cell FY25"
+    },
+    {
+      "text": "Source: company filings via EGX disclosures",
+      "role": "table provenance footnote"
+    },
+    {
+      "text": "Cash or trash",
+      "role": "Research tab card kicker (uppercase-transformed)"
+    },
+    {
+      "text": "SWDY: the complete study",
+      "role": "Research tab card title"
+    },
+    {
+      "text": "14 min · 4 Aug",
+      "role": "Research tab card meta (note: no 'read', unlike the Overview card)"
+    },
+    {
+      "text": "Sector analysis",
+      "role": "Research tab card kicker (uppercase-transformed)"
+    },
+    {
+      "text": "Banking: the carry trade ends",
+      "role": "Research tab card title"
+    },
+    {
+      "text": "9 min · 2 Aug",
+      "role": "Research tab card meta"
+    },
+    {
+      "text": "Earnings",
+      "role": "Research tab card kicker (uppercase-transformed)"
+    },
+    {
+      "text": "Q2 season, in five charts",
+      "role": "Research tab card title"
+    },
+    {
+      "text": "7 min · 28 Jul",
+      "role": "Research tab card meta"
+    },
+    {
+      "text": "Board resolution",
+      "role": "filing kind (uppercase-transformed)"
+    },
+    {
+      "text": "22 Jul",
+      "role": "filing date"
+    },
+    {
+      "text": "Approval of EGP 4.1bn Saudi transmission contract",
+      "role": "filing summary"
+    },
+    {
+      "text": "Quarterly report",
+      "role": "filing kind (uppercase-transformed)"
+    },
+    {
+      "text": "22 Jul",
+      "role": "filing date"
+    },
+    {
+      "text": "Consolidated financial statements, Q3 FY25",
+      "role": "filing summary"
+    },
+    {
+      "text": "Shareholding",
+      "role": "filing kind (uppercase-transformed)"
+    },
+    {
+      "text": "09 Jul",
+      "role": "filing date"
+    },
+    {
+      "text": "Disclosure of major shareholder stake change above 5%",
+      "role": "filing summary"
+    },
+    {
+      "text": "Dividend",
+      "role": "filing kind (uppercase-transformed)"
+    },
+    {
+      "text": "30 May",
+      "role": "filing date"
+    },
+    {
+      "text": "Coupon date for FY24 cash dividend of EGP 2.10",
+      "role": "filing summary"
+    },
+    {
+      "text": "Question",
+      "role": "Discussion tab post chip"
+    },
+    {
+      "text": "Why did SWDY margins fall in Q3?",
+      "role": "Discussion tab post title"
+    },
+    {
+      "text": "Mostafa H. · 48 comments",
+      "role": "Discussion tab post meta"
+    },
+    {
+      "text": "Analysis",
+      "role": "Discussion tab post chip"
+    },
+    {
+      "text": "Deposit growth vs T-bill yields: the carry is closing",
+      "role": "Discussion tab post title"
+    },
+    {
+      "text": "Nour S. · 17 comments",
+      "role": "Discussion tab post meta"
+    },
+    {
+      "text": "Source",
+      "role": "Discussion tab post chip"
+    },
+    {
+      "text": "Backlog update filed this morning — USD 7.2bn",
+      "role": "Discussion tab post title"
+    },
+    {
+      "text": "Hazem F. · 9 comments",
+      "role": "Discussion tab post meta"
+    },
+    {
+      "text": "9:41",
+      "role": "status bar time (inherited chrome)"
+    }
+  ],
+  "tokens": {
+    "colors": [
+      "#1B1917 (ink — primary text on paper, inked bar/label, dark card base)",
+      "#242120 (ink-raised — top stop of every dark card gradient)",
+      "#F5F1EC (paper-on-dark — text on dark cards, gauge value)",
+      "#F7F4F0 (paper — every light card surface, sticky table cell background)",
+      "#EDE8E2 → #E3DCD4 (canvas gradient, phone shell background, 180deg)",
+      "#E8621C (accent ember — lit gauge blades, verdict pill text + border tint)",
+      "#FF8340 (accent-on-dark — active bottom-nav icon and dot; not used inside the screen body)",
+      "#3F6B52 (up — price change, up deltas)",
+      "#A3402F (down — down deltas)",
+      "#5C554F (text-2 — table body values, kind chip text)",
+      "#7A736D (text-3 — labels, kickers, units, inactive tab)",
+      "#8E8781 (text-4 on dark — Arabic name, dark-card kickers/metas, gauge caption + bounds, header stat labels)",
+      "#9A938C (text-4 on paper — chart axis labels, filing dates, table footnote)",
+      "#6E6862 (dark-card muted — ONLY the 'Prices delayed 15 minutes' line; not in the palette brief)",
+      "#FFFFFF (active segmented pill fill)",
+      "#D9D2CA / #E8E2DB (avatar stripe pair)",
+      "rgba(245,241,236,.09) (dark circular button fill)",
+      "rgba(245,241,236,0.16) (unlit gauge blade)",
+      "rgba(245,241,236,.08) (dark header inset top hairline)",
+      "rgba(27,25,23,.05) (inactive segmented pill fill)",
+      "rgba(27,25,23,.06) (light card shadow colour)",
+      "rgba(27,25,23,.08) (table body + filing row hairline)",
+      "rgba(27,25,23,.10) (unhighlighted chart bar; table header hairline)",
+      "rgba(27,25,23,.16) (active segmented pill shadow colour)",
+      "rgba(27,25,23,.18) (kind chip inset border)",
+      "rgba(232,98,28,.55) (verdict pill inset border)",
+      "rgba(27,25,23,.58) (bottom nav glass fill)"
+    ],
+    "fontStyles": [
+      "200 42px/1 Outfit, letter-spacing -0.02em (-0.84px) — ticker SWDY",
+      "200 43px/1 Outfit, letter-spacing -0.03em (-1.29px) — gauge centre value (computed round(214*0.2))",
+      "300 30px/1 Outfit — last price",
+      "300 26px/1 Outfit, letter-spacing -0.02em (-0.52px) — stat tile value",
+      "300 22px/1.15 Outfit, letter-spacing -0.02em (-0.44px) — dark research card title",
+      "300 20px/1.2 Outfit, letter-spacing -0.01em (-0.2px) — light research card title",
+      "300 19px/1.28 Outfit — Discussion tab post title",
+      "300 18px/1.3 Outfit — Overview post preview title",
+      "400 15px/1.2 Outfit — card titles ('Revenue, EGP bn', 'Annual financials')",
+      "400 15px/1 Outfit — dark header stat values",
+      "400 11px/1 Outfit — table year column headers",
+      "300 20px/1 Outfit — back chevron",
+      "400 14px/1 Outfit, letter-spacing .08em (1.12px) — overflow '···'",
+      "300 14px/1.3 'IBM Plex Sans Arabic' — Arabic company name",
+      "400 14px/1.45 'IBM Plex Sans Arabic' — filing summary text",
+      "500 12px/1 'IBM Plex Sans Arabic' — price change line",
+      "400 13px/1 'IBM Plex Sans Arabic' — table label + value cells",
+      "400 12px/1 'IBM Plex Sans Arabic' — post bylines, 'See all'",
+      "400 11px/1 'IBM Plex Sans Arabic' — stat tile unit, card metas, chart range caption, filing date",
+      "400 11px/1.4 'IBM Plex Sans Arabic' — financials card subtitle",
+      "400 11px/1 'IBM Plex Sans Arabic', letter-spacing .16em (1.76px), uppercase — section kickers",
+      "500 11px/1 'IBM Plex Sans Arabic' — stat tile deltas",
+      "400 10px/1 'IBM Plex Sans Arabic', letter-spacing .12em (1.2px), uppercase — header stat labels, stat tile labels, table 'Line item', filing kind",
+      "400 10px/1 'IBM Plex Sans Arabic', letter-spacing .14em (1.4px), uppercase — research card kickers",
+      "400 10px/1 'IBM Plex Sans Arabic' — chart axis labels, gauge lo/hi",
+      "500 10px/1 'IBM Plex Sans Arabic' — verdict pill, kind chip",
+      "300 10px/1.4 'IBM Plex Sans Arabic' — 'Prices delayed 15 minutes', table footnote",
+      "400 9px/1 'IBM Plex Sans Arabic' — segmented tab labels",
+      "400 9px/1 'IBM Plex Sans Arabic', letter-spacing .16em (1.44px), uppercase — gauge caption",
+      "500 13px/1 'IBM Plex Sans Arabic' — status bar time (inherited)"
+    ],
+    "radii": [
+      "999px (circular buttons, gauge blade caps are 1px, segmented pills, verdict pill, kind chip, avatar, bottom nav)",
+      "46px (phone shell)",
+      "28px (dark header card, revenue chart card, financials card, filings card)",
+      "24px (research cards, post cards)",
+      "20px (stat tiles)",
+      "10px (chart bars)",
+      "3px / 2px / 1.75px / 1.7px / 1.5px / .8px / .75px (SVG icon corner radii — see component notes)",
+      "1px (gauge blade head)"
+    ],
+    "shadows": [
+      "0 8px 24px rgba(27,25,23,.06) — every light card (stat tiles, chart card, financials card, filings card, post cards, light research card)",
+      "0 8px 20px rgba(27,25,23,.16) — active segmented pill",
+      "inset 0 1px 0 rgba(245,241,236,.08) — dark header stat strip top hairline",
+      "inset 0 -1px 0 rgba(27,25,23,.10) — financials table header bottom hairline",
+      "inset 0 -1px 0 rgba(27,25,23,.08) — financials body row and filing row bottom hairline",
+      "inset 0 0 0 1px rgba(232,98,28,.55) — verdict pill outline",
+      "inset 0 0 0 1px rgba(27,25,23,.18) — kind chip outline",
+      "0 30px 70px rgba(27,25,23,.20), 0 0 0 1px rgba(27,25,23,.07) — phone shell (canvas only)",
+      "0 18px 40px rgba(27,25,23,.26), 0 1px 0 rgba(255,255,255,.30) inset, 0 0 0 1px rgba(255,255,255,.13), 0 -8px 20px rgba(255,255,255,.05) inset — bottom nav bar",
+      "0 1px 0 rgba(255,255,255,.32) inset, 0 6px 16px rgba(0,0,0,.18) — bottom nav active pill",
+      "0 0 8px rgba(255,131,64,.9) — bottom nav active dot glow"
+    ],
+    "spacing": [
+      "Scroller padding 54px 16px 124px → content width 358px",
+      "Root column gap 20px",
+      "Header card padding 20px, margin-top 6px → interior width 318px",
+      "Header internal rhythm: nav row → 16px → identity row → 18px → gauge → 14px pad + 14px margin → stat strip → 12px → delay note",
+      "Segmented row: 5 x 56px tiles, gap floor 4px, space-between → rendered gaps 19.5px",
+      "Stat grid gap 12px → tile width 173px; tile padding 16px; label→value 10px; value→delta 8px; value/unit gap 4px",
+      "Chart: header → 22px → 128px plot (gap 8px) → 10px → axis row (gap 8px); card padding 20px",
+      "Research/post list gap 10px; card padding 18px; kicker→title 12px (dark) or 10px (light); title→meta 10px",
+      "Section kicker margin-bottom 12px",
+      "Table: head padding 20px 20px 0; title→sub 6px; sub→scroll 16px; row height 44px; label column 132px wide with 0 20px padding; numeric cells padding-right 16px (header FY25 = 20px); track min-width 420px; footer padding 16px 20px",
+      "Filings card padding 4px 20px; row padding 18px 0; head→body 8px",
+      "Gauge: container 214x153; blade rod bottom offset 22px; centre text bottom offset 46px; lo/hi bottom 0, inset 2px",
+      "Bottom nav: left/right 16px, bottom 22px, height 66px, inner padding 0 6px, active pill inset 6px"
+    ]
+  },
+  "interactions": [
+    "Screen entry: the whole route column plays `bRise` — 240ms ease-out, opacity 0→1 with translateY(4px)→0.",
+    "52-week gauge reveal: each of the 43 lit blades plays `bTick` (background rgba(245,241,236,0.16) → #E8621C) for 220ms ease-out with fill-mode `both`, staggered by index * 9ms. Blade 0 starts at 0ms, blade 42 starts at 378ms, so the sweep completes at ~598ms. Unlit blades 43–55 are static and do not animate. The sweep runs left→right (angle -90° → +90°).",
+    "Segmented tab row: tap any of the five pills sets state.seg to 'ovr' | 'fin' | 'res' | 'dis' | 'disq'. Transition `all 220ms ease-out` on background, box-shadow and color — the pill cross-fades from rgba(27,25,23,.05)/#7A736D to #FFFFFF/#1B1917 with the shadow fading in. Body panels swap instantly (they are sc-if branches with no transition of their own). Default segment on mount is 'ovr'.",
+    "Back button (‹): calls p.back → `this.go(i, s.prev || fallback)` where fallback is derived from the current nav ('pit'→pit, 'you'→you, 'market'→market, else home). No press animation specified.",
+    "Overflow (···): rendered but has NO onClick handler in the design. Behaviour is unspecified.",
+    "Dark research card + light research card (Overview) and all three Research-tab cards: tap → p.goReader (route 'reader', nav unchanged). Press feedback: `transition:transform 220ms ease-out` with active state `transform:scale(0.98)`.",
+    "'See all' (Discussion section header): tap → p.goPit (route 'pit', nav set to 'pit' — so the bottom nav pill slides to the third slot).",
+    "Overview discussion preview card and every Discussion-tab post card: tap → p.goPost (route 'post', nav unchanged). These have `cursor:pointer` but NO scale-active transform — they do not shrink on press, unlike the research cards.",
+    "Financials table: horizontal scroll only (overflow-x:auto, scrollbar hidden). The header row is sticky to the top of that scroll area and the 132px 'Line item' column is sticky to the left, so the year headers slide under a frozen label column. Track min-width is 420px against a ~318px viewport, so ~102px of horizontal travel exists at minimum.",
+    "Filing rows: no onClick — the Filings list is read-only in this design.",
+    "Bottom nav: the four tabs remain tappable from this screen (goHome / goMarket / goPit / goYou). The active pill slides via `bPill` 320ms cubic-bezier(.32,1.2,.44,1) — a slight overshoot spring. On the Company screen the Market slot is lit by default (nav seeded to 'market').",
+    "No pull-to-refresh, no skeleton/loading state, no error state is specified for this screen (those live on the separate STATES screen at lines 696-751, which I did not read for this task)."
+  ],
+  "flutterNotes": "SCAFFOLD. One `CustomScrollView`/`SingleChildScrollView` with padding EdgeInsets.fromLTRB(16, 54, 16, 124) inside a Stack; status bar and bottom nav are Positioned siblings above it. Body is a Column with 20px gaps (use a spaced Column helper, not Wrap).\n\nFONTS. Register `Outfit` at w200/w300/w400/w500 and `IBM Plex Sans Arabic` at w300/w400/w500. Every numeric run in the design sets `font-variant-numeric:tabular-nums` → add `fontFeatures: [FontFeature.tabularFigures()]` to those TextStyles (price, gauge value, header stats, stat tile values/deltas, chart axis labels, all table cells, filing dates, post comment counts, status bar time). CSS line-heights are unitless multipliers, so map `font:300 22px/1.15` to `fontSize:22, height:1.15`. CSS letter-spacing is in `em`; Flutter wants logical px — the conversions are pre-computed in the tokens/sections above (e.g. .12em @10px = 1.2, -0.03em @43px = -1.29). CSS `text-transform:uppercase` is not a Flutter property: uppercase the strings yourself at render time and keep the original casing in the data layer (matters for Arabic later, where uppercasing is a no-op and the design's `letter-spacing` on Arabic will look wrong — see RTL).\n\nTHE ARC GAUGE — the one genuinely tricky widget. Do NOT reach for a charting package. It is 56 `Transform.rotate` children in a `Stack`, or (better) a single `CustomPainter`. Exact reproduction, size=214:\n  • SizedBox(width: 214, height: 153)  // height = size/2 + 46\n  • pivot is at (width/2, height - 22) = (107, 131)\n  • blade i (0..55): angle = (-90 + i/55 * 180) degrees, converted to radians\n  • the blade head is a 2x31 rounded rect (radius 1) whose FAR end is 107px from the pivot — i.e. it occupies radius 76..107 along the ray\n  • lit if i < 43 (filled = round(56 * clamp((65.42-41.1)/(72.8-41.1))) = round(56*0.76719) = 43)\n  • lit colour #E8621C, unlit rgba(245,241,236,0.16)\nAnimate with one AnimationController of ~598ms driving a value 0..1; for blade i use `Interval(i*9/598, (i*9+220)/598, curve: Curves.easeOut)` and lerp the colour from the unlit tone to #E8621C. CSS `ease-out` ≈ `Curves.easeOut` (cubic-bezier(0,0,.58,1)) — `Curves.easeOutCubic` is noticeably snappier, prefer `Curves.easeOut`. Only lit blades animate. The centre value/caption are a Positioned(bottom: 46, left: 0, right: 0) centred Column; lo/hi are Positioned(bottom: 0, left/right: 2). Keep the gauge generic — parameterise on {size, value, min, max, big, caption, lo, hi} because a second config (`dialVerdict`, size 230, 0–100, big '72', caption 'Cash', lo 'Trash', hi 'Cash') exists in the seed data for another screen.\n\nSHADOWS. `0 8px 24px rgba(27,25,23,.06)` → BoxShadow(color: Color(0x0F1B1917), offset: Offset(0,8), blurRadius: 24). Note CSS blur-radius and Flutter blurRadius are not identical (CSS blur = 2σ, Flutter blurRadius ≈ 2σ as well for BlurStyle.normal, so a 1:1 copy is close but visually slightly tighter in Flutter) — if it reads too crisp, multiply blurRadius by ~1.15 rather than inventing new values.\n\nINSET SHADOWS ARE HAIRLINES. Flutter has no inset box-shadow. `inset 0 -1px 0 rgba(27,25,23,.08)` on a table/filing row → `Border(bottom: BorderSide(color: Color(0x141B1917), width: 1))` (or a 1px Container). `inset 0 1px 0 rgba(245,241,236,.08)` on the header stat strip → a top border. `inset 0 0 0 1px <c>` on the verdict pill and kind chip → `Border.all(color: c, width: 1)` with NO fill. IMPORTANT: the filings list applies the bottom hairline to every row including the last, so the final row keeps its rule 4px above the card edge — reproduce that, do not \"fix\" it.\n\nFROZEN-COLUMN TABLE. The financials table needs a 132px pinned label column + a horizontally scrollable 4-column body, with the header row pinned vertically. Cleanest Flutter shape: an outer Row of [fixed 132px Column of label cells] + [Expanded(SingleChildScrollView(scrollDirection: Axis.horizontal, child: Column of Rows))], with the header rendered as the first item of each side so the two stay in lockstep. Track min-width 420px; row height exactly 44px; numeric cells right-aligned with 16px trailing padding. KNOWN DEFECT to raise with design: the FY25 *header* cell uses padding-right 20px while its *body* cells use 16px, so the last column's header is 4px out of alignment with its values. Pick one (16px) unless design says otherwise.\n\nCHART. Eight bars, `Row(crossAxisAlignment: CrossAxisAlignment.end)` inside a SizedBox(height: 128), each `Expanded` wrapping a Container with `height: 128 * pct` and BorderRadius.circular(10) — heights are 48.64 / 56.32 / 52.48 / 66.56 / 79.36 / 93.44 / 113.92 / 128.0. Gap 8px (SizedBox between, or Row with spacing). Bars 1–7 use Color(0x1A1B1917), bar 8 uses #1B1917; the axis label row mirrors the same flex/gap so labels line up under bars. There are no bar values, no axis line, no gridlines, no tooltip in the design — do not add any.\n\nNO-INVENT LIST (product rules). Nothing on this screen says BUY, SELL, TARGET, STOP or EXPECTED RETURN, and nothing may be added. The only judgement token is the verdict pill \"Verdict 72 · Cash\" — it is a score plus a word, and it must stay ember-outlined text, never a coloured dot alone. Every ▲/▼ delta already pairs a glyph with the colour; keep both (and give each a semantics label like \"up 11.3 percent\" — the bare glyph is not announced usefully by TalkBack/VoiceOver). Segmented tab state is carried by fill + shadow + icon tint AND the persistent text label, which satisfies the never-colour-alone rule; do not drop the labels when localising. The staleness rule is satisfied by \"Prices delayed 15 minutes\" (#6E6862, 300 10px/1.4) directly under the quote block and by \"EGP millions · audited · scroll for more years\" + \"Source: company filings via EGX disclosures\" on the financials card — these strings are load-bearing compliance copy, not decoration; never hide them behind a tap.\n\nDATA-LAYER CAVEATS FOR THE ENGINEER.\n  • The Overview \"Barbarian research\" cards and the Overview discussion preview are HARDCODED in the markup, not bound to the `research`/`posts` arrays. The Research tab and Discussion tab ARE bound. Model them as the same card widget with an explicit model on both paths.\n  • The Research tab and Discussion tab render the GLOBAL feeds unfiltered — a banking sector piece and an ORAS post appear on the SWDY company screen. That is almost certainly a prototype shortcut, not intent; assume they should be filtered by ticker and confirm with design.\n  • Meta strings differ between the two research surfaces: Overview says \"14 min read · 4 Aug\", the Research tab says \"14 min · 4 Aug\". Don't derive one from the other; keep them as separate format strings until design picks one.\n  • Stat tile `Net debt 12.9 bn ▲ 8.8%` is flagged `up:true` (green, up arrow), but the financials table shows net debt FALLING 14,120 → 12,880 (which is -8.8%). So `up`/`down` in the seed data means \"good/bad\", not \"increased/decreased\". Model the flag as a sentiment enum (favourable / unfavourable) plus a separate direction, or you will render the arrow backwards the first time real data arrives.\n  • State keys are misleadingly named: `dis`/`disOn` drives the tab LABELLED **Filings**, and `disq`/`disqOn` drives **Discussion**. Rename to `filings`/`discussion` in Flutter.\n  • The tab set is a five-value enum with 'ovr' as the default; only one panel is mounted at a time (sc-if, not a hidden-but-alive tab view), so an IndexedStack that preserves scroll offsets would be a behaviour change — use a plain switch unless you want that.\n\nRTL / ARABIC — direction-sensitive items on this screen:\n  1. Back chevron '‹' must flip to '›' in RTL. Use `Icons.chevron_left` with `matchTextDirection`/`Directionality`-aware icon, not a literal glyph.\n  2. The gauge is the biggest risk. `lo` is hard-positioned left and `hi` right, and the fill sweeps left→right. A numeric range gauge conventionally stays LTR even in Arabic UI — wrap the gauge in `Directionality(textDirection: TextDirection.ltr)` so low stays at the visual left, and confirm with design rather than mirroring it by default. Mirroring would also reverse the tick stagger, which reads wrong.\n  3. `▲ 1.16 (1.80%)` and `▲ 11.3%` mix a symbol, Latin digits and parentheses — in an RTL paragraph these will reorder without bidi isolation. Emit them inside an LRI/PDI isolate (or a `Directionality(ltr)` inline span) so the arrow stays left of the number and the parens don't swap.\n  4. The financials table's frozen column is pinned LEFT and numerics are `justify-content:flex-end`. In RTL the label column should pin to the RIGHT and the numeric columns keep their numbers aligned toward the label column. Build with logical start/end (Flutter's Row + TextDirection does this for free) rather than hard left/right, but force the digit runs themselves to LTR.\n  5. The revenue chart runs oldest→newest left→right. In RTL, mirroring is the correct default for a time axis in Arabic layouts — but it must mirror the bars AND the axis labels together, and the inked \"current year\" bar must stay on the newest end.\n  6. `letter-spacing` on uppercase Latin kickers (.12em–.16em) must be dropped for Arabic — letter-spacing breaks Arabic joining. Gate it on the active locale/script.\n  7. The Arabic company name already carries `dir=\"rtl\"` inside an otherwise-LTR block — in Flutter wrap it in `Directionality(textDirection: TextDirection.rtl)` and align it to the block's start, not hard-left.\n  8. Text-overflow: the ticker (42px), the price (30px) and the identity row use `justify-content:space-between` with `gap:12px` and no ellipsis. A 6-char ticker or a 5-digit price (ORAS is 412.10 in the same dataset) will collide. Add `Flexible` + `FittedBox(fit: BoxFit.scaleDown)` on the price, and ellipsis on the Arabic name.\n  9. Segmented pills are fixed 56px wide with a 9px label. \"Discussion\" barely fits in English; Arabic and German will overflow. Either allow the label to wrap to two 9px lines inside the 62px pill or let the pill grow — confirm with design which.\n\nVALUES I DID NOT READ, so do not assume: hover/focus/pressed styling beyond the two `style-active:transform:scale(0.98)` cases; any pressed state for the segmented pills, the back/overflow buttons, the post cards or the filing rows; ripple/splash colours; the overflow menu contents; scroll physics or overscroll behaviour; safe-area insets (the design hardcodes 54px top / 124px bottom against a 390x844 shell); the empty/loading/error variants of any of these panels (they live on the separate STATES screen, lines 696-751, which was out of scope here)."
+}

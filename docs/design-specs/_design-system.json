@@ -1,0 +1,1215 @@
+{
+  "sharedWidgets": [
+    {
+      "dartName": "BScreenScaffold",
+      "purpose": "The per-screen frame every route shares: hidden-scrollbar vertical scroll view with the canonical page insets, the one-shot bRise entry animation on the content column, the bottom scrim, the floating glass nav, and an optional pinned overlay slot (Pit FAB / Post composer).",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "List<Widget> children",
+        "double blockGap  // 22 Home, 24 Market, 20 Company, 20 Pit, 18 Post, 20 Reader, 22 You, 22 States — verified per-screen in the canvas, there is NO single value",
+        "required BNavTab activeTab",
+        "required ValueChanged<BNavTab> onNavTap",
+        "Widget? pinnedOverlay  // Pit FAB (z8, end:20 bottom:108) or Post composer (z6, inset16 bottom:104)",
+        "bool animateEntry = true",
+        "ScrollController? controller",
+        "EdgeInsetsGeometry? padding"
+      ],
+      "stylingSummary": "Stack z-order: scroll body (0) -> bottom scrim (z5, h118) -> pinned overlay (z6 composer / z8 FAB) -> glass nav (z7) -> status bar (z6, parity only). Scroll padding EdgeInsets.fromLTRB(16,54,16,124) => 358pt content width on a 390pt device. ScrollConfiguration(...copyWith(scrollbars:false)); the canvas kills scrollbars globally via `*::-webkit-scrollbar{width:0;height:0;display:none}` + `scrollbar-width:none`. Content = Column(crossAxisAlignment: stretch) with `blockGap` SizedBox separators. Entry = FadeTransition + SlideTransition(Offset(0, 4/height) -> Offset.zero), 240ms, Curves.easeOut, ONE controller for the whole column — the canvas never staggers per section. On device replace 54 with MediaQuery.padding.top; 124 = 22 (nav bottom) + 66 (nav height) + 36 clearance."
+    },
+    {
+      "dartName": "BGlassNav",
+      "purpose": "The floating four-tab liquid-glass bottom navigation. Identical on every screen; only the lit slot changes. Detail routes (company/post/reader) deliberately do NOT move the selection.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required BNavTab active  // home|market|pit|you",
+        "required ValueChanged<BNavTab> onTap",
+        "bool showActiveDot = true"
+      ],
+      "stylingSummary": "PositionedDirectional(start:16,end:16,bottom:22), height 66, radius 999, padding EdgeInsets.symmetric(horizontal:6). Fill rgba(27,25,23,.58)=0x941B1917 over ClipRRect(999)+BackdropFilter(ImageFilter.blur(sigmaX:13,sigmaY:13)) — CSS is blur(26px) saturate(180%); saturate has no ImageFilter equivalent. Shadow 0 18 40 rgba(27,25,23,.26)=0x421B1917; 1px border rgba(255,255,255,.13)=0x21FFFFFF; the two inset sheens (0 1px 0 rgba(255,255,255,.30) and 0 -8px 20px rgba(255,255,255,.05) inset) must be hand-painted. Separate top sheen strip: start14/end14/top1/height1, LinearGradient(90deg, transparent -> rgba(255,255,255,.42) @50% -> transparent). Selection pill: width=(barW-12)/4, start=6+index*width, top6 bottom6, radius 999, LinearGradient(180deg, rgba(255,255,255,.20)->rgba(255,255,255,.07)), shadows [inset 0 1px 0 rgba(255,255,255,.32), 0 6px 16px rgba(0,0,0,.18)]; bPill 320ms Cubic(0.32,1.2,0.44,1) — CSS animates OPACITY ONLY and positions statically via translateX(n*100%); a slide is a deliberate upgrade. Tab: Expanded, height 66, Column gap 5, icon 21x21 rendered from a 20x20 viewBox (tab width 86.5pt at 390). Active #FF8340 + 4x4 dot radius999 #FF8340 glow 0 0 8px rgba(255,131,64,.9); inactive rgba(245,241,236,.76)=0xC2F5F1EC, no dot. Icons (CustomPainter, not Material): Home rect(3,8,14,9,r3)+rect(7,3,6,4,r2)@.5; Market rects (3,11,3.5,6,r1.75)(8.25,7,3.5,10,r1.75)(13.5,3,3.5,14,r1.75); Pit circle(8,8.5,5.5)+circle(13,12,5.5)@.5; You circle(10,7,3.6)+rect(3.5,12.4,13,6,r3)@.7."
+    },
+    {
+      "dartName": "BBottomScrim",
+      "purpose": "Non-interactive canvas-tinted fade that dissolves scrolling content behind the nav and composer. Sits below both.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "double height = 118"
+      ],
+      "stylingSummary": "PositionedDirectional(start:0,end:0,bottom:0), height 118, IgnorePointer, DecoratedBox with LinearGradient(begin: topCenter, end: bottomCenter, colors:[rgba(232,225,216,0), rgba(230,222,213,.34), rgba(227,220,212,.62)], stops:[0.0, 0.52, 1.0]). Reproduce all three stops exactly — a two-stop approximation bands visibly across 118px of near-identical warm greys."
+    },
+    {
+      "dartName": "BRiseIn",
+      "purpose": "The single screen-entry motion of the whole app: a 4px rise plus fade, played once on the route's root column.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required Widget child",
+        "Duration duration = const Duration(milliseconds: 240)",
+        "double offsetPx = 4",
+        "Curve curve = Curves.easeOut"
+      ],
+      "stylingSummary": "@keyframes bRise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}} 240ms ease-out. FadeTransition(0->1) + SlideTransition(Offset(0, 4/height) -> Offset.zero). One AnimationController for the entire column; the design has no per-child stagger and no fill-mode `both` (it starts at the `from` frame and settles at natural state). Direction-safe: Y-axis only."
+    },
+    {
+      "dartName": "BNumText",
+      "purpose": "The numeric/symbol text primitive. Forces tabular figures and LTR bidi isolation so prices, percentages, counts, gauge values, table cells and the ▲/▼/×/%/() glyph runs never reorder inside an Arabic paragraph.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You"
+      ],
+      "constructorParams": [
+        "required String value",
+        "required TextStyle style",
+        "TextAlign? align  // use TextAlign.end, never .right",
+        "bool isolate = true  // wraps in U+2066 ... U+2069 / Directionality.ltr",
+        "int? maxLines",
+        "String? semanticsLabel"
+      ],
+      "stylingSummary": "fontFeatures: [FontFeature.tabularFigures()] on every style the canvas marks font-variant-numeric:tabular-nums — index level 31,842/.60, all prices, all deltas, sector counts + weights, disclosure ages, earnings day, table cells, gauge value + lo/hi, read-time metas, comment/like counts, Home hero frosted pills, status-bar clock. Verify `tnum` actually ships in Outfit-Variable.ttf and IBMPlexSansArabic before relying on it — the Market/Company right-aligned price columns jitter without it. Isolation is not optional: `▲ 1.16 (1.80%)` and `7.4×` sit inside RTL paragraphs in the Arabic build and will reorder the arrow, the parentheses and the middots without an LRI/PDI pair."
+    },
+    {
+      "dartName": "BSectionLabel",
+      "purpose": "The uppercase tracked eyebrow that heads every content block, with an optional trailing action or count on the same baseline row.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "Post detail",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required String label",
+        "Widget? trailing",
+        "double bottomGap = 12",
+        "bool uppercase = true"
+      ],
+      "stylingSummary": "IBM Plex Sans Arabic w400, 11px, height 1.0, letterSpacing 1.76 (.16em), colour #7A736D, uppercased AT RENDER (`.toUpperCase()`), never in the model. Standalone: 12px below. With trailing: Row(mainAxisAlignment: spaceBetween, crossAxisAlignment: center) + 12px below. Trailing instances: 'Manage' (Home), 'See all' (Company), 'Edit' (You) = BInlineAction; Market's count '243' = IBM w400 12/1 #9A938C tabular. Reader's article kicker uses the same 11/.16em/#7A736D spec; the on-dark variant ('The verdict') is 10px / ls 1.60 / #8E8781; the gauge caption is 9px / ls 1.44 / #8E8781. LOCALISATION: set letterSpacing to 0 and skip toUpperCase when the label is Arabic — positive tracking breaks Arabic joining and Arabic has no case."
+    },
+    {
+      "dartName": "BPaperCard",
+      "purpose": "The single light 'paper' surface recipe behind every card, tile, row-card and grouped container in the app.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit",
+        "Research reader",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required Widget child",
+        "double radius = 24  // 28 hero/feed/empty/financials, 24 cards & rows, 20 stat tiles & Reader chart",
+        "EdgeInsetsGeometry padding = const EdgeInsets.all(18)",
+        "double shadowAlpha = 0.06  // 0.08 for the heavier set",
+        "VoidCallback? onTap",
+        "double pressScale = 0.98"
+      ],
+      "stylingSummary": "color Color(0xFFF7F4F0), BorderRadius.circular(radius), boxShadow [BoxShadow(color: Color(0x0F1B1917) for .06 or Color(0x141B1917) for .08, offset: Offset(0,8), blurRadius: 24)]. Alpha map is exact: Market/Company/Reader/You/States cards = .06; Home light watchlist tile, Home Pit-preview card, Pit post card, Market search pill and every 42px soft icon button = .08. Do NOT wrap in ClipRRect — it forces a saveLayer and nothing on any screen overflows radius 24."
+    },
+    {
+      "dartName": "BAvatarHatch",
+      "purpose": "The placeholder identity mark used everywhere instead of photos or initials: a circle filled with 135° two-tone stripes.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "Research reader",
+        "You"
+      ],
+      "constructorParams": [
+        "required double size",
+        "Color stripeA = const Color(0xFFD9D2CA)",
+        "Color stripeB = const Color(0xFFE8E2DB)",
+        "double bandWidth = 3  // 3 for size <= 34, 4 for size >= 46",
+        "Color? ringColor",
+        "double ringWidth = 0"
+      ],
+      "stylingSummary": "ClipOval + CustomPainter drawing bands at 135°; period = 2*bandWidth. CRITICAL: the period is ABSOLUTE and does not scale with the avatar — 6px at every small size (24 Company byline, 26 Home stack + Post comments, 28 Pit author, 34 Post author + Reader byline) and 8px at 46 (Home header) and 74 (You header). Flutter has no repeating-linear-gradient; a LinearGradient with TileMode.repeated + GradientRotation must be sized so one period spans exactly 6 or 8 logical px, which differs per avatar — a px-parameterised CustomPainter is the correct model. Home's avatar stack adds two more pairs: #CFC7BE/#E0D9D1 (2nd disc) and #DED7CF/#EFE9E2 (3rd), each with a 2px OUTER ring in #F7F4F0 (box-shadow 0 0 0 2px), so each disc's real footprint is 30px on a 17px pitch (26 - 9)."
+    },
+    {
+      "dartName": "BHairline",
+      "purpose": "Border factories that translate every CSS `inset box-shadow` rule in the design. Flutter has no inset shadow, so all of them become 1px Borders.",
+      "usedOn": [
+        "Market",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "You"
+      ],
+      "constructorParams": [
+        "BHairline.rowBottom()  // BorderSide(Color(0x141B1917), 1) — rgba(27,25,23,.08)",
+        "BHairline.rowBottomStrong()  // Color(0x1A1B1917) — .10, financials header",
+        "BHairline.rowTop()  // Pit card footer .08 / Post detail meta row .10",
+        "BHairline.onDarkTop()  // BorderSide(Color(0x14F5F1EC), 1) — rgba(245,241,236,.08), Company header stat strip",
+        "BHairline.commentRail()  // BorderDirectional(start: BorderSide(Color(0x241B1917), 1)) — .14, nested comment"
+      ],
+      "stylingSummary": "Exact sources: `inset 0 -1px 0 rgba(27,25,23,.08)` on Market disclosure rows, Company filing rows, You watchlist + notification rows — applied to EVERY row INCLUDING THE LAST on all three screens, so a hairline always sits 4px above the grouped card's bottom edge. Never use ListView.separated. `inset 0 -1px 0 rgba(27,25,23,.10)` = Company financials header. `inset 0 1px 0 rgba(27,25,23,.08)` = Pit post-card footer (padding-top 14). `inset 0 1px 0 rgba(27,25,23,.10)` = Post detail engagement row (padding-top 14). `inset 0 1px 0 rgba(245,241,236,.08)` = Company dark header stat strip (padding-top 14). `inset 1px 0 0 rgba(27,25,23,.14)` + padding-start 18 = Post detail nested comment (per-comment only; the 20px gaps between comments are unruled). CAUTION: a Flutter Border expands the child's layout box while a CSS inset shadow does not — subtract 1px from the row padding, or paint with CustomPaint/ShapeDecoration, wherever the height is load-bearing (the 44px financials rows above all)."
+    },
+    {
+      "dartName": "BKindChip",
+      "purpose": "The one pill-chip widget covering post-kind chips, ticker/topic chips, the Cash-or-Trash verdict pill and the moderation status chip. Four variants, one geometry.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "The Pit",
+        "Post detail",
+        "States"
+      ],
+      "constructorParams": [
+        "required String label",
+        "required BChipVariant variant  // ember | neutral | filled | solid",
+        "EdgeInsetsGeometry? padding",
+        "VoidCallback? onTap",
+        "Widget? trailing  // the '›' on Post detail's ticker chip; must mirror in RTL"
+      ],
+      "stylingSummary": "radius 999, IBM Plex w400/500 as noted, height 20px at 5px vertical padding. ember: 1px border rgba(232,98,28,.55)=0x8CE8621C, no fill, text #E8621C, IBM w500 10/1 — Home is the one instance at .50 (0x80E8621C); standardise on .55 and flag Home. neutral: 1px border rgba(27,25,23,.18)=0x2E1B1917, no fill, text #5C554F, IBM w500 10/1. filled: fill rgba(27,25,23,.08)=0x141B1917, no border, text #5C554F (States 'Under review'). solid: fill #1B1917, text #F5F1EC, IBM w500 10/1 letterSpacing 0.60 (.06em) — Home topic chip, Pit + Post ticker chips (gate the tracking on a Latin-only label). PADDING DISCREPANCY to resolve with design: Home 5x10 solid / 4x10 outlined; Company 5x10 verdict / 4x10 kind; Pit and Post 5x11 for all. Recommend 5x11 everywhere. Because Flutter's Border adds to the box, reduce outlined padding by 1px per side if outer dimensions must match the canvas exactly. The verdict pill is simply `ember` with label 'Verdict 72 · Cash' — it carries a number AND a word, never colour alone."
+    },
+    {
+      "dartName": "BDarkCard",
+      "purpose": "The 'raised dark' editorial surface: the Home hero, the Company quote header, the Reader verdict + pull-quote cards, and every dark research card / watchlist tile.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "Research reader",
+        "You"
+      ],
+      "constructorParams": [
+        "required Widget child",
+        "double radius = 24  // 28 hero / quote header / verdict / pull quote; 24 rail cards, research cards, dark watchlist tiles",
+        "EdgeInsetsGeometry padding = const EdgeInsets.all(18)",
+        "bool flat = false",
+        "VoidCallback? onTap",
+        "double pressScale = 0.98"
+      ],
+      "stylingSummary": "LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFF242120), Color(0xFF1B1917)]). NO shadow, ever — the dark cards are the only surfaces in the app with none. `flat:true` renders solid Color(0xFF1B1917): the Home EGX30 index strip is the single deliberate exception and the specs are explicit that it must NOT be unified with the gradient. Padding in use: 20 (Home hero, Company header), 24 (Reader pull quote), 24/20/20 (Reader verdict card, plus Column crossAxisAlignment.center), 18 (research cards), 16 (Home dark watchlist tiles)."
+    },
+    {
+      "dartName": "BStalenessCaption",
+      "purpose": "The compliance-critical data-age / provenance line. Product rule: no price renders without a nearby age statement.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "Research reader"
+      ],
+      "constructorParams": [
+        "required String text",
+        "bool onDark = false",
+        "double topGap = 10"
+      ],
+      "stylingSummary": "IBM Plex w300, 10px, height 1.4. Colour #9A938C on paper; #6E6862 on the Company dark quote header (a header-only tone that appears nowhere else in the design). Exact copy in the canvas: 'Prices delayed 15 minutes · end-of-day EGX data' (Home, 10px below the watchlist grid), 'Prices delayed 15 minutes' (Market, below the A–Z list; Company, 12px below the header stat strip), 'Source: company filings via EGX disclosures' (Company financials footer, padding 16px 20px), 'EGP millions · audited · scroll for more years' (Company financials subtitle, IBM w400 11/1.4 #7A736D), 'Q3 FY25 highlighted · company filings' (Reader chart footnote). Must render in the empty and loading states too, and the interval must come from the feed rather than a literal. NOTE: You's watchlist prices have NO age label anywhere — that screen cannot ship as drawn."
+    },
+    {
+      "dartName": "BInlineAction",
+      "purpose": "The low-emphasis text-only action: no chrome, no underline, no accent colour.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required String label",
+        "VoidCallback? onTap",
+        "Color color = const Color(0xFF1B1917)"
+      ],
+      "stylingSummary": "IBM Plex w400, 12px, height 1.0, colour #1B1917, TextAlign.start, no decoration. Instances: 'Manage' (Home -> You; this one DOES move the nav tab), 'See all' (Company -> Pit; also moves the tab), 'Edit' (You watchlist — no handler in the canvas), 'Undo' (States reported card — no handler in the canvas). The painted box is ~12px tall: wrap in a >=44pt HitTestBehavior.opaque target without changing the visual or the surrounding 12px/14px rhythm."
+    },
+    {
+      "dartName": "BArabicName",
+      "purpose": "An RTL-forced Arabic company-name line that always sits beside a Latin ticker or a Latin price. Isolating it is the difference between correct and mangled rendering.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "You"
+      ],
+      "constructorParams": [
+        "required String text",
+        "required TextStyle style",
+        "int maxLines = 1",
+        "TextOverflow overflow = TextOverflow.ellipsis"
+      ],
+      "stylingSummary": "Directionality(textDirection: TextDirection.rtl) with textAlign start — the canvas sets dir=\"rtl\" explicitly on all four names. Styles: IBM w300 11/1.3 #7A736D on paper (Market rows, You rows, Home light tiles), #8E8781 on dark (Home dark tiles), and IBM w300 14/1.3 #8E8781 margin-top 8 in the Company quote header. letterSpacing MUST be 0. Seed names: السويدى اليكتريك (SWDY), البنك التجارى الدولى (COMI), أوراسكوم كونستراكشون (ORAS), مجموعة طلعت مصطفى (TMGH), المصرية للاتصالات (ETEL), المجموعة المالية هيرميس (HRHO), إى فاينانس للاستثمار (EFIH). Always Expanded + min-width:0 equivalent so the name ellipsises instead of pushing the price off the row; the paired Latin ticker must be LTR-isolated via BNumText/Directionality."
+    },
+    {
+      "dartName": "BPressable",
+      "purpose": "The house press feedback. Every tappable surface in the design scales down; nothing ripples.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company",
+        "The Pit"
+      ],
+      "constructorParams": [
+        "required Widget child",
+        "VoidCallback? onTap",
+        "double scale = 0.98",
+        "Duration duration = const Duration(milliseconds: 220)",
+        "Curve curve = Curves.easeOut",
+        "HitTestBehavior behavior = HitTestBehavior.opaque"
+      ],
+      "stylingSummary": "GestureDetector(onTapDown/onTapUp/onTapCancel) driving AnimatedScale. NEVER InkWell — there is no material ink anywhere in this design and a ripple on a dark gradient card or on #F7F4F0 paper reads wrong. Exact scales: 0.98/220ms (Home hero, Home watchlist tiles, Home Pit-preview cards, Home research rail cards, Company research cards, Market sector cards); 0.99/220ms (Market company row, Pit post card); 0.94/200ms (Home refresh button); 0.94/220ms (Pit FAB). Two traps: (1) the Pit post card animates as a whole but has NO tap handler — only its ticker chip and its title/excerpt block do, so drive the press from a Listener on the card and keep two GestureDetectors inside; (2) Home's ORAS + TMGH tiles, Market's sector cards, Company's post cards, You's dark research card and States' CTA all *look* pressable in the canvas but are inert or missing the transform — treat the omissions as design gaps, wire them, and flag the deviations."
+    },
+    {
+      "dartName": "BSoftIconButton",
+      "purpose": "The 42px rounded-square paper button: back, refresh, overflow, and the save/bookmark toggle.",
+      "usedOn": [
+        "Home",
+        "Post detail",
+        "Research reader"
+      ],
+      "constructorParams": [
+        "required Widget icon  // or String glyph",
+        "VoidCallback? onTap",
+        "bool selected = false",
+        "double pressScale = 0.94",
+        "Duration selectDuration = const Duration(milliseconds: 200)"
+      ],
+      "stylingSummary": "42x42, radius 16, fill #F7F4F0, shadow 0 8 24 rgba(27,25,23,.08)=0x141B1917, foreground #1B1917, centred. selected:true inverts to fill #1B1917 / foreground #F5F1EC over `all 200ms ease-out` (this is `saveStyle`, verified in the source at the renderVals level — wired ONLY on the Research reader; Post detail's visually identical bookmark has no handler and must not be wired by accident). Glyphs: back '‹' U+2039 Outfit w300 20/1; overflow '···' three U+00B7 Outfit w400 13/1 ls 1.04; refresh '↻' Outfit w400 17/1 (active scale 0.94 / 200ms, no onClick in the canvas). Bookmark icon = a 16x16 render of a 15x15 viewBox rect(3,1.5,9,12,rx 2.4) stroke currentColor 1.4 fill none -> on screen 9.6x12.8, r2.56, stroke 1.493. TWO ISSUES: 42pt is under the 44pt HIG / 48dp Material minimum — expand the hit area without changing the painted box; and saved/unsaved is signalled by fill inversion ALONE, a colour-only state that needs a filled-vs-outline bookmark before ship."
+    },
+    {
+      "dartName": "BChangeDelta",
+      "purpose": "The ▲/▼ + value run. Direction is carried by the glyph as well as the colour, which is what satisfies the never-colour-alone rule — the glyph is not decoration.",
+      "usedOn": [
+        "Home",
+        "Market",
+        "Company"
+      ],
+      "constructorParams": [
+        "required String value",
+        "required BDirection direction  // up | down",
+        "bool spaceAfterGlyph = false",
+        "TextStyle? style",
+        "String? semanticsLabel"
+      ],
+      "stylingSummary": "Text = (up ? '▲' : '▼') + (spaceAfterGlyph ? ' ' : '') + value. IBM Plex w500 11/1 tabular; #3F6B52 up, #A3402F down; no fill, no padding, no border. SPACING IS CONTEXTUAL AND MUST BE REPRODUCED EXACTLY: no space on Home watchlist tiles and Market rows ('▲1.80%', '▼0.63%'); a space on Home's solid index pill ('▲ 1.24%'), Company stat tiles ('▲ 11.3%', '▼ 20 bps') and the Company quote header ('▲ 1.16 (1.80%)', IBM w500 12/1 on dark). Home's index pill is a different component: solid #E8621C fill, padding 4x9, radius 999, IBM w500 11/1, #FFF text — accent orange, NOT the up/down semantics. MODEL WARNING: in the seed data `up`/`down` means FAVOURABLE/UNFAVOURABLE, not increased/decreased — Company shows 'Net debt 12.9bn ▲ 8.8%' in green while the financials table shows net debt falling 14,120 -> 12,880. Model sentiment and direction as two separate fields or the arrow renders backwards on first real data. Add a Semantics label ('up 1.8 percent'); the bare glyph is not announced usefully."
+    },
+    {
+      "dartName": "BResearchCard",
+      "purpose": "The research entry card in its dark and light skins: kicker, title, optional meta, optional trailing verdict pill.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "You"
+      ],
+      "constructorParams": [
+        "required String kicker",
+        "required String title",
+        "String? meta",
+        "BCardTone tone = BCardTone.dark  // dark | light",
+        "Widget? trailing  // verdict pill (Company Overview only)",
+        "double? width  // 200 for the Home rail, null = stretch",
+        "VoidCallback? onTap"
+      ],
+      "stylingSummary": "radius 24, padding 18, press 0.98/220ms. dark: BDarkCard gradient, kicker IBM w400 10 ls 1.40 (.14em) uppercase #8E8781, title Outfit w300 #F5F1EC, meta IBM w400 11/1 #8E8781. light: #F7F4F0 + shadow .06, kicker #7A736D, title #1B1917, meta #7A736D. TITLE SIZE AND KICKER GAP ARE PER-SURFACE AND MUST NOT BE UNIFIED BLIND: Home rail = Outfit w300 21/1.2 ls -0.21 with a FIXED 36px gap under the kicker (not a flexible spacer) and no meta gap change; Company dark = 22/1.15 ls -0.44 with 12px; Company light + You = 20/1.2 ls -0.20 with 10px. Home rail cards are flex:none width 200, gap 12, rail margin 0 -16 / padding 0 16 4 so they bleed to the true screen edge, and all three stretch to the tallest (CrossAxisAlignment.stretch in the Row). You's canvas instance uniquely omits the press transform — add it and flag the deviation. Meta format differs between surfaces ('14 min read · 4 Aug' on Company Overview vs '14 min · 4 Aug' on the Company Research tab and the Home rail) — keep them as separate format strings until design picks one."
+    },
+    {
+      "dartName": "BPostCard",
+      "purpose": "The community discussion card in its three configurations: Home preview, Pit feed, and Company Discussion tab.",
+      "usedOn": [
+        "Home",
+        "Company",
+        "The Pit"
+      ],
+      "constructorParams": [
+        "Widget? kindChip",
+        "Widget? topicChip",
+        "required String title",
+        "String? excerpt",
+        "BPostByline? byline  // {avatarSize, author, ago}",
+        "Widget? footer",
+        "double radius = 24",
+        "EdgeInsetsGeometry padding = const EdgeInsets.all(18)",
+        "double shadowAlpha = 0.06",
+        "VoidCallback? onTap",
+        "VoidCallback? onTopicTap",
+        "double? pressScale"
+      ],
+      "stylingSummary": "Surface always #F7F4F0. (a) HOME 'Trending in The Pit': radius 24, padding 18, shadow .08, chip Row gap 8 (solid topic chip + outlined kind chip), title Outfit w300 20/1.25 ls -0.20 margin-top 12, footer margin-top 14 = overlapping 26px hatch avatars (pitch 17, 2px #F7F4F0 outer ring, dark '+N' disc IBM w400 11/1 #F5F1EC) + comment count IBM w400 12/1 #7A736D tabular; press 0.98. The '+9'/'+4' counts have NO backing data and no relation to the 48/17 comment counts. (b) PIT feed: radius 28, padding 20, shadow .08, chip Row gap 8, title Outfit w300 22/1.22 ls -0.22 margin-top 14, excerpt IBM w400 14/1.5 #5C554F margin-top 10 (unclamped — no line-clamp/ellipsis/max-height in the design; clamping is a deviation), author Row margin-top 16 gap 10 with a 28px hatch avatar and IBM w400 12/1.3 #1B1917 byline whose ' · {ago}' span is #9A938C, footer margin-top 16 + padding-top 14 over BHairline.rowTop(), item gap 18, icon-to-count gap 6, IBM w400 12/1 #7A736D tabular, Save pushed to the end with a Spacer (never margin-left:auto); press 0.99 on the card. Footer glyphs are 15x15 CustomPaint stroke 1.4 currentColor #7A736D: like = circle(7.5,7.5,r6.2) + rect(6.7,4,1.6,7,rx.8) filled; comment = rect(1,2,13,9.5,rx3.2) stroke only, no tail; save = rect(3,1.5,9,13.5-1.5,rx2.4) stroke only. All three counts are STATIC on Pit — the like/save toggles live on Post detail. (c) COMPANY Discussion tab: radius 24, padding 18, shadow .06, outlined neutral kind chip, title Outfit w300 19/1.28 margin-top 12, meta IBM w400 12/1 #7A736D tabular '{author} · {n} comments' margin-top 12, cursor:pointer but NO press scale. Company's Overview preview is the same shell with title Outfit w300 18/1.3, no chip, and a 24px hatch avatar byline."
+    },
+    {
+      "dartName": "BStatTile",
+      "purpose": "The metric tile: a large light-weight numeral with a label either above or below it, plus optional unit and delta.",
+      "usedOn": [
+        "Market",
+        "Company",
+        "You"
+      ],
+      "constructorParams": [
+        "required String label",
+        "bool labelAbove = false",
+        "required String value",
+        "String? unit",
+        "String? caption",
+        "Widget? delta",
+        "double radius = 20",
+        "EdgeInsetsGeometry padding = const EdgeInsets.all(16)",
+        "TextStyle? valueStyle"
+      ],
+      "stylingSummary": "#F7F4F0 + shadow 0 8 24 rgba(27,25,23,.06). COMPANY (labelAbove:true, radius 20, padding 16, 2-col grid gap 12 -> 173pt tiles): label IBM w400 10/1 ls 1.20 (.12em) uppercase #7A736D; value Row margin-top 10 CrossAxisAlignment.baseline gap 4 — value Outfit w300 26/1 ls -0.52 #1B1917 tabular, unit IBM w400 11/1 #7A736D; delta margin-top 8 (omitted entirely when neither up nor down is set). YOU (labelAbove:false, radius 20, padding 16, 3-col grid gap 10 -> 112.67pt tiles): value Outfit w300 26/1 #1B1917 tabular, caption margin-top 6 IBM w400 11/1.3 #7A736D. MARKET sectors (labelAbove:false, radius 24, padding 18, 2-col gap 12): value Outfit w300 30/1 ls -0.60 tabular, name margin-top 8 IBM w400 13/1.3 #1B1917, weight margin-top 2 IBM w400 11/1.3 #7A736D tabular, press 0.98 but NO handler. LAYOUT: two-per-row grids must be Row(crossAxisAlignment: stretch) with Expanded children inside IntrinsicHeight — CSS `grid-template-columns:1fr 1fr` with the default align-items:stretch makes both cards as tall as the taller one, and GridView.childAspectRatio will not reproduce that once 'Telecom & IT' wraps at 173pt."
+    },
+    {
+      "dartName": "BGroupedListCard",
+      "purpose": "The container that turns a list of rows into one card with hairline dividers, used by Market disclosures, Company filings and both You lists.",
+      "usedOn": [
+        "Market",
+        "Company",
+        "You"
+      ],
+      "constructorParams": [
+        "required List<Widget> rows",
+        "double radius = 24  // 28 for Company filings",
+        "double horizontalPadding = 18  // 20 for Company filings",
+        "double verticalPadding = 4",
+        "EdgeInsetsGeometry rowPadding",
+        "bool hairlineOnLastRow = true"
+      ],
+      "stylingSummary": "#F7F4F0, boxShadow 0 8 24 rgba(27,25,23,.06), padding EdgeInsets.symmetric(vertical: 4, horizontal: 18|20). The 4px vertical padding is deliberate: each row's own 14–18px padding supplies the visual inset. Every row carries BHairline.rowBottom() INCLUDING THE LAST — reproduce that trailing rule 4px above the card edge on all three screens, or make dropping it an explicit, flagged decision. Row paddings in use: Market disclosures 16px 0 (three columns — 46pt ticker Outfit w400 11/1.3 ls 0.66 #1B1917 padding-top 2, Expanded headline IBM w400 13/1.45 #5C554F, fixed age IBM w400 11/1.3 #9A938C tabular padding-top 2, gap 12, crossAxisAlignment start); Company filings 18px 0 (head Row spaceBetween gap 12 — kind IBM w400 10/1 ls 1.20 uppercase #7A736D, date IBM w400 11/1 #9A938C tabular; body margin-top 8 IBM w400 14/1.45 #1B1917); You watchlist 14px 0; You notifications 16px 0. Never ListView.separated. Inner content width at 390pt = 322."
+    },
+    {
+      "dartName": "BScreenTitle",
+      "purpose": "The Outfit-light screen heading, with a reserved trailing slot and an optional subtitle line.",
+      "usedOn": [
+        "Market",
+        "The Pit",
+        "States"
+      ],
+      "constructorParams": [
+        "required String text",
+        "double size = 36",
+        "String? subtitle",
+        "Widget? trailing",
+        "double topPadding = 6"
+      ],
+      "stylingSummary": "Outfit w300, colour #1B1917, wrapper padding-top 6. Sizes: 36/1.0 ls -1.08 (Market, The Pit) and 30/1.05 ls -0.90 (States). Market puts the search pill 16px below; the Pit wraps the title in a Row(spaceBetween, crossAxisAlignment: end) that contains only one child — a reserved trailing slot, keep the slot but do not invent a control for it. Pit subtitle: 8px below, IBM w400 13/1.4 #7A736D tabular ('2,418 investors · 61 active today') — note this reads as live and carries no age label, so pair it with BStaleDataPill if the counts come from cache. Not used on Home, Company, Post detail or Reader, all of which lead with a card or a masthead instead."
+    },
+    {
+      "dartName": "BArcGauge",
+      "purpose": "The signature 56-blade 180° tick gauge. Two canvas configurations exist — Company's 52-week range (size 214) and the Reader's Cash-or-Trash verdict (size 230) — plus the signed research-score mode the real product needs.",
+      "usedOn": [
+        "Company",
+        "Research reader"
+      ],
+      "constructorParams": [
+        "required double size  // 214 Company, 230 Reader",
+        "required double value",
+        "required double min",
+        "required double max",
+        "required String big  // pre-formatted; sign formatting is the caller's job",
+        "required String caption",
+        "required String lo",
+        "required String hi",
+        "bool signed = false",
+        "Color litColor = const Color(0xFFE8621C)",
+        "bool animate = true"
+      ],
+      "stylingSummary": "Box = size x (size/2 + 46) => 214x153 and 230x161. Pivot at (size/2, height - 22) => (107,131) and (115,139). N = 56 blades; blade i angle = -90° + i*180/55 (3.2727° step; i=0 due WEST, i=55 due EAST; because N is even there is NO centre blade — the 0° axis falls between i=27 (-1.636°) and i=28 (+1.636°)). Each blade is a 2 x round(size*0.145) rounded rect (radius 1) at the FAR end of a size/2 rod, occupying radius 76..107 @214 (tick 31) and 82..115 @230 (tick 33). filled = round(56 * clamp((value-min)/(max-min), 0, 1)) => 43 lit @Company (65.42 in 41.10..72.80, ratio .76719) and 40 lit @Reader (72 in 0..100). Lit #E8621C; unlit rgba(245,241,236,0.16)=0x29F5F1EC and never animated. bTick: per-blade colour lerp from the unlit tone to lit, 220ms Curves.easeOut (NOT easeOutCubic), delay i*9ms — one controller of 598ms (Company, last lit blade starts at 378ms) / 571ms (Reader, 351ms), driving Interval(i*9/total, (i*9+220)/total). Centre readout: Positioned(bottom:46, start:0, end:0) centred Column — value Outfit w200, fontSize round(size*0.2) (46 @230, 43 @214), height 1.0, ls -0.03em (-1.38 / -1.29), #F5F1EC, tabular; caption margin-top 7, IBM w400 9/1 ls 1.44 uppercase #8E8781. lo at (start:2, bottom:0), hi at (end:2, bottom:0), both IBM w400 10/1 #8E8781 tabular. Build as ONE CustomPainter inside a RepaintBoundary — not 56 widgets — and wrap in Directionality(TextDirection.ltr) so the axis and the sweep never mirror. The caption word ('Cash' / '52-week range') is the text channel that keeps the verdict off the colour-alone list; never drop it."
+    },
+    {
+      "dartName": "BBarChart",
+      "purpose": "The unlabelled column chart used twice: Company's 8-bar revenue history and the Reader's 7-bar quarterly gross margin. One bar is always inked to mark the current period.",
+      "usedOn": [
+        "Company",
+        "Research reader"
+      ],
+      "constructorParams": [
+        "required List<double> fractions",
+        "int? highlightIndex",
+        "Color highlightColor",
+        "Color barColor = const Color(0x1A1B1917)",
+        "required double plotHeight",
+        "double gap = 8",
+        "double barRadius = 10",
+        "List<String>? axisLabels",
+        "String? title",
+        "String? caption",
+        "String? footnote"
+      ],
+      "stylingSummary": "Row(crossAxisAlignment: CrossAxisAlignment.end) inside SizedBox(height: plotHeight); each bar Expanded -> FractionallySizedBox(heightFactor, alignment: bottomCenter). COMPANY revenue: 8 bars [.38,.44,.41,.52,.62,.73,.89,1.0] => 48.64/56.32/52.48/66.56/79.36/93.44/113.92/128.0 px, plotHeight 128, gap 8, radius 10, bars 1-7 rgba(27,25,23,.10)=0x1A1B1917 and bar 8 #1B1917; card radius 28 padding 20 shadow .06; header Row(baseline) with title Outfit w400 15/1.2 #1B1917 and range caption IBM w400 11/1 #7A736D; plot margin-top 22; axis row margin-top 10 mirroring the same flex/gap, IBM w400 10/1 tabular #9A938C except the highlighted '25' in #1B1917; derived bar width (318 - 7*8)/8 = 32.75. READER gross margin: 7 bars [.78,.84,.92,.88,.96,1.0,.82], plotHeight 120, gap 6, radius 8, highlight index 6 in #A3402F; NO axis labels, no gridlines, no value labels, no tooltip — do not add any; card radius 20, clipBehavior antiAlias, title strip padding 18/18/0 IBM w400 13/1.3 #1B1917, bar row padding 18, footnote padding 0/18/18 IBM w300 10/1.4 #9A938C. CRITICAL BOX-MODEL TRAP (verified in the source — box-sizing:border-box appears on only 5 elements and none of them is this card): the Reader's `height:120px` is CONTENT height, so the bar row is 156px tall overall and every fraction resolves against 120, not 156."
+    },
+    {
+      "dartName": "BSegmentedRow",
+      "purpose": "The segmented selector in its two forms: the Pit's 3-up text track and the Company's 5-up icon pills. Both carry state with fill + shadow + a permanently visible label.",
+      "usedOn": [
+        "Company",
+        "The Pit"
+      ],
+      "constructorParams": [
+        "required List<BSegment> segments  // {label, icon?}",
+        "required int selectedIndex",
+        "required ValueChanged<int> onChanged",
+        "BSegmentStyle style = BSegmentStyle.textTrack  // textTrack | iconPill"
+      ],
+      "stylingSummary": "textTrack (The Pit, values 'following'|'latest'|'popular', seeded to 'latest'): track = #F7F4F0 pill, radius 999, padding EdgeInsets.all(4), gap 4, shadow 0 8 24 rgba(27,25,23,.06); each segment Expanded, padding 11px 0, radius 999, IBM w400 13/1 — ON fill #FFFFFF + shadow 0 4 12 rgba(27,25,23,.10) + colour #1B1917; OFF transparent, no shadow, colour #7A736D. AnimatedContainer 220ms Curves.easeOut PER SEGMENT — the design cross-fades each segment's own decoration and does NOT slide a shared indicator (unlike the bottom nav). Measured 114x35 segments inside a 43px track at 358pt. iconPill (Company, 'ovr'|'fin'|'res'|'dis'|'disq', default 'ovr'): fixed 56x62 pills, radius 999, Row(mainAxisAlignment: spaceBetween) so rendered gaps are (358-280)/4 = 19.5pt (the declared gap:4 is only a floor), Column gap 6 with a 16x16 currentColor CustomPaint icon over an IBM w400 9/1 label — ON fill #FFFFFF + shadow 0 8 20 rgba(27,25,23,.16) + colour #1B1917; OFF fill rgba(27,25,23,.05)=0x0D1B1917 + colour #7A736D + no shadow; transition all 220ms ease-out. The two variants share the on/off token pair but NOT the shadow (.10/4/12 vs .16/8/20) — keep both. Company panels are sc-if branches, so only one is mounted at a time; an IndexedStack that preserves scroll offsets is a behaviour change. Rename the misleading state keys: `dis` drives the tab LABELLED Filings and `disq` drives Discussion."
+    },
+    {
+      "dartName": "BListRow",
+      "purpose": "The leading-block + two-line-middle + trailing row shared by Market's company and earnings rows and You's watchlist rows.",
+      "usedOn": [
+        "Market",
+        "You"
+      ],
+      "constructorParams": [
+        "required Widget leading",
+        "required String title",
+        "String? subtitle",
+        "bool subtitleIsArabic = false",
+        "Widget? trailing",
+        "double gap = 14",
+        "EdgeInsetsGeometry padding",
+        "VoidCallback? onTap",
+        "double? pressScale"
+      ],
+      "stylingSummary": "Row(crossAxisAlignment: center) with gap 14 (explicit SizedBoxes) and the middle Column wrapped in Expanded + maxLines 1 + ellipsis (that is `flex:1;min-width:0`). MARKET company row (tappable): own card #F7F4F0 radius 24 padding 12/16 shadow .06, list gap 8; leading = 48x48 monogram, radius 16, #1B1917, Outfit w400 12/1 ls 0.72 #F5F1EC; title Outfit w400 15/1.2 #1B1917; subtitle margin-top 3 BArabicName; trailing = Column(end) with price Outfit w400 15/1 tabular #1B1917 then 4px then BChangeDelta; press 0.99/220ms; tap pushes Company WITHOUT changing the nav tab (g('company') carries no nav argument). MARKET earnings row: identical shell but leading = 48x48 date chip (radius 16, fill rgba(27,25,23,.06), day Outfit w400 16/1 tabular #1B1917 over 2px then month IBM w400 9/1 ls 0.90 uppercase #7A736D), detail margin-top 3 IBM w400 11/1.3 #7A736D, and NO press state and NO handler — do not reuse the tappable variant. YOU watchlist row: no card of its own (lives in BGroupedListCard), padding 14px 0; leading = 3-bar drag handle (Column gap 3, bars 14x1.5 radius 1 #1B1917 at opacity .35, total 10.5 tall, no drag wiring in the canvas); title Outfit w400 15/1.2 ls 0.30 #1B1917; trailing = price Outfit w400 14/1 tabular #5C554F + a 26px remove chip (radius 999, fill rgba(27,25,23,.06), glyph U+2212 MINUS — not a hyphen — Outfit w400 14/1 #7A736D). Every padding and alignment must be EdgeInsetsDirectional / TextAlign.end."
+    },
+    {
+      "dartName": "BEmptyState",
+      "purpose": "The centred empty-state card: optional ghost preview, headline, body, optional dark pill CTA.",
+      "usedOn": [
+        "The Pit",
+        "You",
+        "States"
+      ],
+      "constructorParams": [
+        "required String title",
+        "required String body",
+        "String? actionLabel",
+        "VoidCallback? onAction",
+        "Widget? ghost"
+      ],
+      "stylingSummary": "Card #F7F4F0, radius 28, padding 28x20, shadow 0 8 24 rgba(27,25,23,.06), text-align centre. Title Outfit w300 22/1.2 #1B1917; body margin-top 8 IBM w400 13/1.5 #7A736D; action margin-top 18 = an inline dark pill, padding 12x22, radius 999, fill #1B1917, IBM w400 13/1, colour #F5F1EC (no pressed state is declared — adopt the house 0.98/220ms and flag it). Ghost slot = 2-col grid gap 10, opacity .4 on the WRAPPER, margin-bottom 20, tiles height 56 radius 16 fill rgba(27,25,23,.10). Exact instances: States 'Empty watchlist' / 'Follow a company and its price, filings and threads land here.' + ghost + 'Browse companies' (-> Market, and this one DOES move the nav tab); States + Pit 'Nothing in your feed' / 'You follow 0 investors. Switch to Latest, or start the thread yourself.' with no ghost and no button — the recovery is named inside the sentence, so 'Latest' must be bound to the same string key as the Pit tab, and the '0' must be an ICU plural (Arabic has six forms). You's empty watchlist reuses the States card."
+    },
+    {
+      "dartName": "BSearchPill",
+      "purpose": "The capsule search affordance — a display-only row on Market and a query echo on States. No input, no focus state exists in the design.",
+      "usedOn": [
+        "Market",
+        "States"
+      ],
+      "constructorParams": [
+        "required String text",
+        "bool isPlaceholder = true",
+        "VoidCallback? onTap"
+      ],
+      "stylingSummary": "Row, #F7F4F0, radius 999, padding 14x18, gap 10, shadow 0 8 24 rgba(27,25,23,.08) on Market and .06 on States — flag and standardise on .08. Icon 17x17 CustomPaint painted in the PARENT colour #7A736D (not the text colour #9A938C): circle centre (7.2,7.2) r5 stroke 1.5 fill none, plus a 5.4x1.5 rounded bar rx .75 rotated 45° about (10.6,11.3); flex:none. Text IBM w400 14/1 — #9A938C for the placeholder 'Search companies, tickers…' (real U+2026) and #1B1917 for an echoed query ('zamalek holding', lowercase as typed). Put the Text in an Expanded with maxLines 1 + ellipsis: the design declares no overflow rule and user queries can be long or Arabic. The magnifier conventionally mirrors in RTL — Transform.scale(scaleX: -1) under RTL, and decide it deliberately since the design does not specify."
+    },
+    {
+      "dartName": "BStaleDataPill",
+      "purpose": "The 'showing data from N ago' banner. Defined on States and explicitly prescribed for the Pit feed header when the counts come from cache.",
+      "usedOn": [
+        "States",
+        "The Pit"
+      ],
+      "constructorParams": [
+        "required String text",
+        "Color dotColor = const Color(0xFF7A736D)"
+      ],
+      "stylingSummary": "Row, gap 10, fill rgba(27,25,23,.06)=0x0F1B1917, radius 999, padding 11x16; stretches to the full 358pt content width (no max-width is declared anywhere). Dot 7x7 radius 999 #7A736D flex:none — purely decorative, the age is carried entirely by the string, which is what keeps this off the colour-alone list. Label IBM w400 12/1.3 #5C554F. Copy 'Showing data from 2 hours ago', computed from the payload timestamp and re-rendered as time passes — never frozen at fetch. There is no refresh affordance in the design; adding one is an invention."
+    },
+    {
+      "dartName": "BSkeletonBlock",
+      "purpose": "The loading placeholder. The design is emphatic that it is static.",
+      "usedOn": [
+        "States",
+        "The Pit"
+      ],
+      "constructorParams": [
+        "required double height",
+        "double radius"
+      ],
+      "stylingSummary": "Fill rgba(27,25,23,.12)=0x1F1B1917. The 40% dim is applied ONCE to the wrapping Column (Opacity 0.4), never per block. Canonical set: one 96-tall radius-24 block over a Row of two Expanded 64-tall radius-20 blocks, column gap 10, row gap 10, annotation 10px below. EXPLICITLY NON-ANIMATED — the canvas annotates 'Static dimmed placeholders at 40% — no shimmer.' Do not add shimmer, pulse, or an AnimatedBuilder. That annotation string is designer commentary and must not ship as copy."
+    },
+    {
+      "dartName": "BDarkCircleButton",
+      "purpose": "The 38px translucent circular control that sits on dark card surfaces.",
+      "usedOn": [
+        "Home",
+        "Company"
+      ],
+      "constructorParams": [
+        "required Widget icon  // or String glyph",
+        "VoidCallback? onTap",
+        "double size = 38"
+      ],
+      "stylingSummary": "38x38, radius 999, fill rgba(245,241,236,.09)=0x17F5F1EC, foreground #F5F1EC, centred, flex:none. Instances: Home hero open-glyph '↗' Outfit w400 15/1 (decorative — the whole hero card is the tap target); Company header back '‹' Outfit w300 20/1 (-> p.back) and overflow '···' Outfit w400 14/1 ls 1.12 (NO handler; the menu contents are unspecified). No hover/pressed state is defined for any of the three. The back chevron must flip to '›' in RTL — use a mirrored icon or Transform, never a literal glyph swap buried in copy."
+    }
+  ],
+  "tokenTable": [
+    {
+      "name": "canvasTop",
+      "light": "#EDE8E2",
+      "dark": "#14120F",
+      "usage": "Page background gradient start (phone shell / Scaffold). Dark = the stated base dark surface."
+    },
+    {
+      "name": "canvasBottom",
+      "light": "#E3DCD4",
+      "dark": "#0F0D0B",
+      "usage": "Page background gradient end, 180deg. Derived: the light canvas darkens ~4% downward; mirror that step below #14120F so the dark canvas keeps the same top-lit read."
+    },
+    {
+      "name": "surface",
+      "light": "#F7F4F0",
+      "dark": "#1B1917",
+      "usage": "Every paper card, tile, row card, grouped card, search pill, tab track, 42px icon button. Dark = the stated dark card."
+    },
+    {
+      "name": "surfaceRaised",
+      "light": "linear-gradient(180deg,#242120,#1B1917)",
+      "dark": "#242120 (flat)",
+      "usage": "The editorial dark card: Home hero + rail + dark tiles, Company quote header + dark research, Reader verdict + pull quote, You saved-research. In light it is a contrast inversion; in dark it collapses to the stated raised step so it still sits +1 above `surface`. The gradient's ~9-per-channel delta is preserved by the surface->raised step itself."
+    },
+    {
+      "name": "surfaceInverse",
+      "light": "#1B1917",
+      "dark": "#F7F4F0",
+      "usage": "Solid ink fills that must invert with the theme: Home EGX30 index strip (flat, deliberately not the gradient), Market ticker monogram + selected filter chip, solid topic/ticker chips, avatar-stack overflow disc, States CTA, PRO badge."
+    },
+    {
+      "name": "onInverse",
+      "light": "#F5F1EC",
+      "dark": "#1B1917",
+      "usage": "Text/icons drawn on `surfaceInverse` and on every dark card. Unchanged as a literal on dark cards (#F5F1EC) since those surfaces do not invert."
+    },
+    {
+      "name": "surfaceSelected",
+      "light": "#FFFFFF",
+      "dark": "#2E2A26",
+      "usage": "Active segmented pill fill (both variants) and the notification toggle knob. Dark = one step above surfaceRaised so the selected pill keeps its lifted-paper read instead of disappearing."
+    },
+    {
+      "name": "surfaceDeep",
+      "light": "#141312",
+      "dark": "#0B0A09",
+      "usage": "Home hero chart panel inset — the only colour darker than ink in the light theme. Dark value keeps it below `canvasTop` so the inset still reads as a well."
+    },
+    {
+      "name": "textPrimary",
+      "light": "#1B1917",
+      "dark": "#F7F4F0",
+      "usage": "Screen titles, card titles, tickers, prices, row labels, status bar, inline actions. Dark = the stated dark text."
+    },
+    {
+      "name": "textBody",
+      "light": "#3D3833",
+      "dark": "#E5DFD7",
+      "usage": "Long-form prose only: Reader body paragraphs, Post detail body, comment bodies. Sits between ink and text-2 in light; mirrored to sit one step under textPrimary on dark."
+    },
+    {
+      "name": "textSecondary",
+      "light": "#5C554F",
+      "dark": "#C3BCB3",
+      "usage": "Pit excerpts, Market disclosure headlines, financials table values, neutral chip labels, unselected filter chip, stale-pill label."
+    },
+    {
+      "name": "textTertiary",
+      "light": "#7A736D",
+      "dark": "#9C958C",
+      "usage": "Section eyebrows, subtitles, captions, Arabic names on paper, unselected segment labels, footer metrics, search-icon currentColor."
+    },
+    {
+      "name": "textQuaternary",
+      "light": "#9A938C",
+      "dark": "#7E7770",
+      "usage": "Search placeholder, result counts, relative ages, chart axis labels, filing dates, provenance captions, You notification sub-labels."
+    },
+    {
+      "name": "textOnDarkMuted",
+      "light": "#8E8781",
+      "dark": "#8E8781",
+      "usage": "Kickers, metas, gauge caption and lo/hi bounds, Company header stat labels, Arabic names on dark cards, composer placeholder. Already an on-dark token — unchanged in both themes."
+    },
+    {
+      "name": "textOnDarkFaint",
+      "light": "#6E6862",
+      "dark": "#6E6862",
+      "usage": "The Company quote-header staleness line ('Prices delayed 15 minutes'). Exists nowhere else in the design; unchanged."
+    },
+    {
+      "name": "accent",
+      "light": "#E8621C",
+      "dark": "#FF8340",
+      "usage": "Ember: lit gauge blades, Home hero chart stroke + area gradient, index change pill, unread dot, ember chip outline/label, verdict pill, inline links, FAB gradient end, toggle-on track, composer send. Dark value is the design's own on-dark accent — evidence, not invention."
+    },
+    {
+      "name": "accentOnGlass",
+      "light": "#FF8340",
+      "dark": "#FF8340",
+      "usage": "Active bottom-nav icon and the 4x4 glow dot. Always on-dark glass in both themes; unchanged."
+    },
+    {
+      "name": "accentPressed",
+      "light": "#C8500F",
+      "dark": "#FFA06B",
+      "usage": "The design's only accent hover/press state (global a:hover). Dark value lifts rather than deepens so it stays visible on #14120F."
+    },
+    {
+      "name": "accentGradientTop",
+      "light": "#F0752E",
+      "dark": "#FF9455",
+      "usage": "Pit compose FAB gradient start (end = accent). Dark start derived by applying the same +~11% lift used to get #FF8340 from #E8621C."
+    },
+    {
+      "name": "accentOutline",
+      "light": "rgba(232,98,28,.55) = 0x8CE8621C",
+      "dark": "rgba(255,131,64,.55) = 0x8CFF8340",
+      "usage": "1px inset border on the ember kind chip and the verdict pill. NOTE Home uses .50 (0x80E8621C) — a one-off; standardise on .55."
+    },
+    {
+      "name": "up",
+      "light": "#3F6B52",
+      "dark": "#6EA487",
+      "usage": "Favourable delta text and up sparklines. #3F6B52 fails contrast on #1B1917/#14120F; the dark value lifts luminance ~30 L* while keeping the desaturated forest character. Colour is never the sole carrier — the ▲ glyph is."
+    },
+    {
+      "name": "down",
+      "light": "#A3402F",
+      "dark": "#D97D64",
+      "usage": "Unfavourable delta text, down sparklines, and the Reader's highlighted quarterly bar. Same lift as `up`, keeping the warm brick hue."
+    },
+    {
+      "name": "divider",
+      "light": "rgba(27,25,23,.08) = 0x141B1917",
+      "dark": "rgba(245,241,236,.08) = 0x14F5F1EC",
+      "usage": "Row hairlines in every grouped list and the Pit card footer. Dark value is lifted verbatim from the design's own on-dark hairline in the Company header stat strip."
+    },
+    {
+      "name": "dividerStrong",
+      "light": "rgba(27,25,23,.10) = 0x1A1B1917",
+      "dark": "rgba(245,241,236,.12) = 0x1FF5F1EC",
+      "usage": "Company financials header rule and the Post detail engagement-row rule."
+    },
+    {
+      "name": "dividerRail",
+      "light": "rgba(27,25,23,.14) = 0x241B1917",
+      "dark": "rgba(245,241,236,.16) = 0x29F5F1EC",
+      "usage": "The 1px leading rail on nested Post detail comments (paired with an 18px start indent)."
+    },
+    {
+      "name": "fillFaint",
+      "light": "rgba(27,25,23,.05) = 0x0D1B1917",
+      "dark": "rgba(245,241,236,.07) = 0x12F5F1EC",
+      "usage": "Inactive Company segmented pill fill."
+    },
+    {
+      "name": "fillSubtle",
+      "light": "rgba(27,25,23,.06) = 0x0F1B1917",
+      "dark": "rgba(245,241,236,.08) = 0x14F5F1EC",
+      "usage": "Unselected Market filter chip, Market earnings date chip, You remove chip, stale-data pill. Same literal as the .06 card shadow alpha — keep the two roles as separate tokens."
+    },
+    {
+      "name": "fillMuted",
+      "light": "rgba(27,25,23,.10) = 0x1A1B1917",
+      "dark": "rgba(245,241,236,.12) = 0x1FF5F1EC",
+      "usage": "Neutral revenue-chart bars and the States ghost watchlist tiles."
+    },
+    {
+      "name": "fillStrong",
+      "light": "rgba(27,25,23,.12) = 0x1F1B1917",
+      "dark": "rgba(245,241,236,.14) = 0x24F5F1EC",
+      "usage": "Skeleton blocks and the notification toggle's OFF track."
+    },
+    {
+      "name": "outlineNeutral",
+      "light": "rgba(27,25,23,.18) = 0x2E1B1917",
+      "dark": "rgba(245,241,236,.22) = 0x38F5F1EC",
+      "usage": "1px inset border on the neutral kind chip."
+    },
+    {
+      "name": "onDarkCircleFill",
+      "light": "rgba(245,241,236,.09) = 0x17F5F1EC",
+      "dark": "rgba(245,241,236,.09)",
+      "usage": "38px circular buttons on dark cards (Home hero ↗, Company back/overflow). Already on-dark; unchanged."
+    },
+    {
+      "name": "gaugeTrack",
+      "light": "rgba(245,241,236,0.16) = 0x29F5F1EC",
+      "dark": "rgba(245,241,236,0.16)",
+      "usage": "Unlit arc-gauge blades and the `from` frame of the bTick keyframe. Unchanged — the gauge always sits on a dark card."
+    },
+    {
+      "name": "glassFill",
+      "light": "rgba(27,25,23,.58) = 0x941B1917",
+      "dark": "rgba(20,18,15,.72) = 0xB814120F",
+      "usage": "Bottom nav bar and the Post detail composer. Deepened and re-tinted to the dark base in dark mode so the bar still separates from a #14120F canvas at 58% ink."
+    },
+    {
+      "name": "glassHairline",
+      "light": "rgba(255,255,255,.13) = 0x21FFFFFF",
+      "dark": "rgba(255,255,255,.13)",
+      "usage": "The 1px ring on the nav bar and composer. Unchanged."
+    },
+    {
+      "name": "glassSheen",
+      "light": "rgba(255,255,255,.42) = 0x6BFFFFFF",
+      "dark": "rgba(255,255,255,.42)",
+      "usage": "Midpoint of the nav's 90deg top sheen line (transparent -> .42 -> transparent), and the FAB's inner highlight at .42. Unchanged."
+    },
+    {
+      "name": "glassPill",
+      "light": "rgba(255,255,255,.20) -> rgba(255,255,255,.07)",
+      "dark": "rgba(255,255,255,.20) -> rgba(255,255,255,.07)",
+      "usage": "Nav selection-pill 180deg gradient, with shadows inset 0 1px 0 rgba(255,255,255,.32) and 0 6px 16px rgba(0,0,0,.18). Unchanged."
+    },
+    {
+      "name": "navInactive",
+      "light": "rgba(245,241,236,.76) = 0xC2F5F1EC",
+      "dark": "rgba(245,241,236,.76)",
+      "usage": "Inactive bottom-nav icon colour. Unchanged."
+    },
+    {
+      "name": "scrim",
+      "light": "rgba(232,225,216,0) / rgba(230,222,213,.34) @52% / rgba(227,220,212,.62)",
+      "dark": "rgba(20,18,15,0) / rgba(18,16,13,.42) @52% / rgba(16,14,12,.72)",
+      "usage": "The 118px bottom fade. It is canvas-tinted, so it must track `canvasTop`/`canvasBottom`; keep the 0 / 52% / 100% stops exactly or the gradient bands."
+    },
+    {
+      "name": "hatchA",
+      "light": "#D9D2CA",
+      "dark": "#2A2621",
+      "usage": "Darker stripe of the placeholder avatar pattern (and the same hairline family). Dark value keeps the pair one step apart on a #1B1917 surface."
+    },
+    {
+      "name": "hatchB",
+      "light": "#E8E2DB",
+      "dark": "#332F29",
+      "usage": "Lighter stripe of the placeholder avatar. Home's avatar stack adds #CFC7BE/#E0D9D1 and #DED7CF/#EFE9E2 for discs 2 and 3."
+    },
+    {
+      "name": "shadowCard",
+      "light": "0 8 24 rgba(27,25,23,.06) = 0x0F1B1917",
+      "dark": "0 8 24 rgba(0,0,0,.40)",
+      "usage": "Every .06 card: Market rows/sectors/disclosures/earnings, Company tiles + cards, Reader chart, You tiles + grouped cards, States cards. Warm-ink shadows vanish on dark, so dark switches to black at higher alpha and leans on surfaceRaised for elevation."
+    },
+    {
+      "name": "shadowCardStrong",
+      "light": "0 8 24 rgba(27,25,23,.08) = 0x141B1917",
+      "dark": "0 8 24 rgba(0,0,0,.48)",
+      "usage": "Home light watchlist tiles + Pit-preview cards, Pit post cards, Market search pill, every 42px soft icon button."
+    },
+    {
+      "name": "shadowSegmentOn",
+      "light": "0 8 20 rgba(27,25,23,.16) = 0x291B1917",
+      "dark": "0 8 20 rgba(0,0,0,.55)",
+      "usage": "Company active segmented icon pill (SEG_ON)."
+    },
+    {
+      "name": "shadowTabOn",
+      "light": "0 4 12 rgba(27,25,23,.10) = 0x1A1B1917",
+      "dark": "0 4 12 rgba(0,0,0,.45)",
+      "usage": "Pit active text segment (TAB_ON). Deliberately lighter than SEG_ON — keep both."
+    },
+    {
+      "name": "shadowNav",
+      "light": "0 18 40 rgba(27,25,23,.26) = 0x421B1917 + 1px rgba(255,255,255,.13) + inset 0 1px 0 rgba(255,255,255,.30) + inset 0 -8px 20px rgba(255,255,255,.05)",
+      "dark": "0 18 40 rgba(0,0,0,.55) + the same three white layers",
+      "usage": "Bottom nav bar. The two inset layers have no BoxShadow equivalent and must be hand-painted inside the clip."
+    },
+    {
+      "name": "shadowComposer",
+      "light": "0 14 32 rgba(27,25,23,.22) = 0x381B1917 + inset 0 1px 0 rgba(255,255,255,.28) + 1px rgba(255,255,255,.13)",
+      "dark": "0 14 32 rgba(0,0,0,.50) + the same white layers",
+      "usage": "Post detail composer bar only."
+    },
+    {
+      "name": "shadowFab",
+      "light": "0 14 30 rgba(232,98,28,.38) = 0x61E8621C + inset 0 1px 0 rgba(255,255,255,.42) + 1px rgba(255,255,255,.16)",
+      "dark": "0 14 30 rgba(255,131,64,.30) + the same white layers",
+      "usage": "Pit compose FAB. The glow alpha drops slightly on dark because the ambient canvas no longer absorbs it."
+    },
+    {
+      "name": "shadowKnob",
+      "light": "0 2 6 rgba(27,25,23,.20) = 0x331B1917",
+      "dark": "0 2 6 rgba(0,0,0,.45)",
+      "usage": "You notification toggle knob."
+    },
+    {
+      "name": "radiusPill",
+      "light": "999",
+      "dark": "999",
+      "usage": "Chips, pills, avatars, dots, nav bar, nav pill, FAB, composer, toggle, search pill, CTA, stale pill, remove chip. Geometry is theme-invariant."
+    },
+    {
+      "name": "radiusHero",
+      "light": "28",
+      "dark": "28",
+      "usage": "Home hero + index strip, Company quote header + chart + financials + filings cards, Pit post card, Reader verdict + pull quote, empty-state cards."
+    },
+    {
+      "name": "radiusCard",
+      "light": "24",
+      "dark": "24",
+      "usage": "Watchlist tiles, Pit-preview cards, research cards, post cards, Market rows/sectors/disclosures/earnings, You grouped cards + saved cards, moderation card, tall skeleton."
+    },
+    {
+      "name": "radiusTile",
+      "light": "20",
+      "dark": "20",
+      "usage": "Company stat tiles, You stat tiles + Language row, Home hero chart panel, Reader chart card, short skeletons."
+    },
+    {
+      "name": "radiusSquircle",
+      "light": "16",
+      "dark": "16",
+      "usage": "42px icon buttons, 48px ticker monogram, 48px earnings date chip, States ghost tiles."
+    },
+    {
+      "name": "radiusBar",
+      "light": "10 (Company) / 8 (Reader)",
+      "dark": "same",
+      "usage": "Column-chart bar corner radius. The two charts genuinely differ; do not unify."
+    },
+    {
+      "name": "gutter",
+      "light": "16",
+      "dark": "16",
+      "usage": "Horizontal page padding on every screen -> 358pt content width at 390pt. Also the nav/composer/scrim side inset. Full-bleed rails (Home research, Market chips) escape it with margin 0 -16 / padding 0 16."
+    },
+    {
+      "name": "scrollInsetTop",
+      "light": "54",
+      "dark": "54",
+      "usage": "Top scroll padding clearing the status bar on all 8 screens. Replace with MediaQuery.padding.top on device."
+    },
+    {
+      "name": "scrollInsetBottom",
+      "light": "124",
+      "dark": "124",
+      "usage": "Bottom scroll padding = 22 (nav bottom) + 66 (nav height) + 36 clearance, on all 8 screens."
+    },
+    {
+      "name": "blockGap",
+      "light": "20 (canonical)",
+      "dark": "20",
+      "usage": "Root column gap. VERIFIED PER-SCREEN AND NOT UNIFORM: 18 Post detail, 20 Company / Pit / Reader, 22 Home / You / States, 24 Market. Expose as a BScreenScaffold parameter — a single token here would silently retypeset four screens."
+    },
+    {
+      "name": "motionPress",
+      "light": "220ms Curves.easeOut",
+      "dark": "same",
+      "usage": "Every press-scale transition (0.98 / 0.99), the segmented-control cross-fade, and the FAB (0.94). CSS ease-out maps to Curves.easeOut, NOT easeOutCubic."
+    },
+    {
+      "name": "motionEnter",
+      "light": "240ms Curves.easeOut, 4px rise",
+      "dark": "same",
+      "usage": "bRise — the one-shot screen entry on all 8 routes."
+    },
+    {
+      "name": "motionToggle",
+      "light": "200ms Curves.easeOut",
+      "dark": "same",
+      "usage": "Reader save-button inversion, Post detail like-colour tween, Home refresh press (scale 0.94)."
+    },
+    {
+      "name": "motionPill",
+      "light": "320ms Cubic(0.32, 1.2, 0.44, 1)",
+      "dark": "same",
+      "usage": "bPill on the nav selection pill. The curve overshoots (y>1) so use Cubic directly, not Curves.easeOutBack. In CSS it animates opacity only; a slide is a deliberate upgrade."
+    },
+    {
+      "name": "motionTick",
+      "light": "220ms Curves.easeOut, 9ms per-index stagger",
+      "dark": "same",
+      "usage": "bTick on the arc gauge — total 598ms @43 lit blades (Company) and 571ms @40 (Reader). Unlit blades never animate."
+    }
+  ],
+  "typeScale": [
+    {
+      "name": "displayGauge",
+      "spec": "Outfit / w200 / round(gaugeSize x 0.2)px — 46 @size230, 43 @size214 / height 1.0 / letterSpacing -0.03em = -1.38 and -1.29 / tabularFigures",
+      "usage": "Arc-gauge centre value ('72' Reader verdict, '65.42' Company 52-week range). The size is computed from the gauge, not fixed."
+    },
+    {
+      "name": "displayTicker",
+      "spec": "Outfit / w200 / 42 / height 1.0 / letterSpacing -0.84 (-0.02em)",
+      "usage": "Company quote-header ticker 'SWDY'. Needs Flexible + FittedBox(scaleDown) — a 6-char ticker collides with a 5-digit price like ORAS 412.10."
+    },
+    {
+      "name": "displayArticle",
+      "spec": "Outfit / w200 / 40 / height 1.02 / letterSpacing -1.20 (-0.03em)",
+      "usage": "Research reader article title. Contains an authored hard <br> ('Cash or' / 'Trash') that will not survive translation — keep the break for English only."
+    },
+    {
+      "name": "displayXL",
+      "spec": "Outfit / w300 / 36 / height 1.0 / letterSpacing -1.08 (-0.03em)",
+      "usage": "Market and The Pit screen titles."
+    },
+    {
+      "name": "displayScreenSm",
+      "spec": "Outfit / w300 / 30 / height 1.05 / letterSpacing -0.90 (-0.03em)",
+      "usage": "States screen title. Note the height and tracking differ from titlePost at the same size."
+    },
+    {
+      "name": "numeralXL",
+      "spec": "Outfit / w300 / 42 / height 1.0 / letterSpacing -1.26 (-0.03em) / tabularFigures",
+      "usage": "Home EGX30 index integer '31,842'. Its decimal part '.60' is numeralM in #8E8781."
+    },
+    {
+      "name": "titlePost",
+      "spec": "Outfit / w300 / 30 / height 1.12 / letterSpacing -0.60 (-0.02em)",
+      "usage": "Post detail headline."
+    },
+    {
+      "name": "quotePrice",
+      "spec": "Outfit / w300 / 30 / height 1.0 / letterSpacing 0 / tabularFigures",
+      "usage": "Company last price '65.42' on the dark header."
+    },
+    {
+      "name": "heroHeadline",
+      "spec": "Outfit / w300 / 31 / height 1.06 / letterSpacing -0.62 (-0.02em)",
+      "usage": "Home daily-insight hero headline (authored <br> after 'in')."
+    },
+    {
+      "name": "displayName",
+      "spec": "Outfit / w300 / 28 / height 1.10 / letterSpacing -0.56 (-0.02em)",
+      "usage": "You profile display name."
+    },
+    {
+      "name": "numeralL",
+      "spec": "Outfit / w300 / 26–30 / height 1.0 / tabularFigures / letterSpacing -0.52 @26 (Company stat tile), 0 @26 (You stat tile), -0.60 @30 (Market sector count)",
+      "usage": "Large stat numerals. Never bolded — the whole design keeps numerals at w300 or lighter."
+    },
+    {
+      "name": "pullQuote",
+      "spec": "Outfit / w300 / 24 / height 1.28 / letterSpacing -0.24 (-0.01em)",
+      "usage": "Reader pull-quote card, on dark, #F5F1EC. No quotation marks, no attribution."
+    },
+    {
+      "name": "titleL",
+      "spec": "Outfit / w300 / 22 / height 1.15 ls -0.44 (Company dark research) | 1.22 ls -0.22 (Pit post card) | 1.20 ls 0 (empty-state heading)",
+      "usage": "The 22px title band. Three genuinely distinct settings at the same size — keep all three."
+    },
+    {
+      "name": "titleM",
+      "spec": "Outfit / w300 / 18–21 / 21/1.2 ls -0.21 (Home research rail) | 20/1.25 ls -0.20 (Home Pit preview) | 20/1.2 ls -0.20 (Company light research, You saved cards) | 19/1.28 ls 0 (Company Discussion tab) | 18/1.3 ls 0 (Company Overview post preview)",
+      "usage": "Card titles below the 22px band."
+    },
+    {
+      "name": "numeralM",
+      "spec": "Outfit / w300 / 20 / height 1.0 / tabularFigures",
+      "usage": "Home watchlist tile price and the Home index decimal part."
+    },
+    {
+      "name": "rowTitle",
+      "spec": "Outfit / w400 / 15 / height 1.2 / letterSpacing 0 (Market company name, Market earnings ticker, Company card titles) or 0.30 (.02em, You watchlist ticker)",
+      "usage": "The list-row / card-header title weight — the only place Outfit is used at w400 for running text."
+    },
+    {
+      "name": "rowNumber",
+      "spec": "Outfit / w400 / 14–15 / height 1.0 / tabularFigures — 15 (Market price, Company header stat value), 14 (You watchlist price #5C554F)",
+      "usage": "Right-aligned numeric column in list rows."
+    },
+    {
+      "name": "tickerTile",
+      "spec": "Outfit / w400 / 17 / height 1.0 / letterSpacing 0.34 (.02em)",
+      "usage": "Home watchlist tile ticker (#F5F1EC on dark tiles, #1B1917 on light)."
+    },
+    {
+      "name": "monogram",
+      "spec": "Outfit / w400 / 12 / height 1.0 / letterSpacing 0.72 (.06em)",
+      "usage": "Market 48px ticker monogram, #F5F1EC on #1B1917."
+    },
+    {
+      "name": "tableYear",
+      "spec": "Outfit / w400 / 11 / height 1.0 / tabularFigures",
+      "usage": "Company financials column headers FY22–FY25 (#7A736D, with FY25 in #1B1917)."
+    },
+    {
+      "name": "tableTicker",
+      "spec": "Outfit / w400 / 11 / height 1.3 / letterSpacing 0.66 (.06em)",
+      "usage": "Market disclosure-row ticker column (fixed 46pt, #1B1917)."
+    },
+    {
+      "name": "glyphOutfit",
+      "spec": "Outfit / w200–w400 / 13–32 / height 1.0 — '+' w200 32 (Pit FAB); '›' w300 26 (Home index chevron); '‹' w300 20 (back, all three screens); '↻' w400 17 (Home refresh); '↑' w400 16 (composer send); '↗' w400 15 (hero open disc); '−' U+2212 w400 14 (You remove); '···' w400 13 ls 1.04 / w400 14 ls 1.12 (overflow)",
+      "usage": "Every non-icon glyph in the app. GLYPH-COVERAGE RISK: verify ‹ › ▲ ▼ ↑ ↗ ↻ − · … × exist in Outfit-Variable.ttf and IBM Plex Sans Arabic before shipping; draw the missing ones rather than substituting Material icons."
+    },
+    {
+      "name": "eyebrow",
+      "spec": "IBM Plex Sans Arabic / w400 / 11 / height 1.0 / letterSpacing 1.76 (.16em) / uppercase at render",
+      "usage": "Every section label on 7 screens, plus the Reader's article kicker. letterSpacing must drop to 0 and toUpperCase must be skipped for Arabic."
+    },
+    {
+      "name": "eyebrowSm",
+      "spec": "IBM Plex Sans Arabic / w400 / 9–10 / height 1.0 / letterSpacing 1.44 @9, 1.60 @10 / uppercase",
+      "usage": "Arc-gauge caption (9px, #8E8781) and the Reader's 'The verdict' card label (10px, #8E8781)."
+    },
+    {
+      "name": "labelMicro",
+      "spec": "IBM Plex Sans Arabic / w400 / 10 / height 1.0 / letterSpacing 1.20 (.12em) / uppercase",
+      "usage": "Company stat-tile labels, Company dark-header stat labels, financials 'Line item', filing kind."
+    },
+    {
+      "name": "kicker",
+      "spec": "IBM Plex Sans Arabic / w400 / 10 / height 1.0 (1.4 on the Home hero) / letterSpacing 1.40 (.14em) / uppercase",
+      "usage": "Research-card kickers on Home/Company/You, the Home hero kicker, and the Home EGX30 tag (ls 1.40, not uppercased)."
+    },
+    {
+      "name": "monthLabel",
+      "spec": "IBM Plex Sans Arabic / w400 / 9 / height 1.0 / letterSpacing 0.90 (.1em) / uppercase",
+      "usage": "Market earnings date-chip month ('Aug' -> 'AUG'; the source string stays title-case)."
+    },
+    {
+      "name": "tabLabel",
+      "spec": "IBM Plex Sans Arabic / w400 / 9 / height 1.0",
+      "usage": "Company 5-up segmented pill labels. 'Discussion' barely fits the fixed 56pt pill in English — allow two lines or a wider pill before localising."
+    },
+    {
+      "name": "chip",
+      "spec": "IBM Plex Sans Arabic / w500 / 10 / height 1.0 / letterSpacing 0 (kind chips, verdict pill, 'Under review') or 0.60 (.06em, solid ticker/topic chips)",
+      "usage": "All chips. Also PRO badge at w500 8 / ls 0.80 (.1em). Gate the tracking on a Latin-only label."
+    },
+    {
+      "name": "bodyArticle",
+      "spec": "IBM Plex Sans Arabic / w400 / 16 / height 1.65 / max-width 62ch",
+      "usage": "Reader body paragraphs, #3D3833. The ch cap needs a TextPainter measurement of the '0' advance at 16px; at 358pt it probably never binds on phone."
+    },
+    {
+      "name": "bodyL",
+      "spec": "IBM Plex Sans Arabic / w400 / 15 / height 1.55 (Post detail body) or 1.50 (Reader dek, max-width 34ch)",
+      "usage": "Post detail body #3D3833; Reader standfirst #5C554F (the 34ch cap DOES bind at phone width)."
+    },
+    {
+      "name": "bodyM",
+      "spec": "IBM Plex Sans Arabic / w400 / 14 / height 1.55 (comment body) | 1.50 (Pit excerpt, moderation body) | 1.45 (Company filing summary)",
+      "usage": "Card and comment prose."
+    },
+    {
+      "name": "rowLabel",
+      "spec": "IBM Plex Sans Arabic / w400 / 14 / height 1.3 (You notification label) or 1.0 (Language label, search pill text)",
+      "usage": "Settings and search row labels, #1B1917 (placeholder text is #9A938C)."
+    },
+    {
+      "name": "bodyS",
+      "spec": "IBM Plex Sans Arabic / w400 / 13 / height 1.5 (empty-state body, Reader verdict summary) | 1.45 (Market disclosure headline) | 1.4 (Home greeting subtitle, Pit population line) | 1.3 (Market sector name)",
+      "usage": "Secondary prose and subtitles."
+    },
+    {
+      "name": "control",
+      "spec": "IBM Plex Sans Arabic / w400 / 13 / height 1.0",
+      "usage": "Pit segment labels, Market filter chips, the dark CTA label, Post detail engagement row (tabular), You Language value and 'Sign out'."
+    },
+    {
+      "name": "tableCell",
+      "spec": "IBM Plex Sans Arabic / w400 / 13 / height 1.0 / tabularFigures",
+      "usage": "Company financials label cells (#1B1917) and value cells (#5C554F)."
+    },
+    {
+      "name": "meta",
+      "spec": "IBM Plex Sans Arabic / w400 / 12 / height 1.0 (inline actions, comment counts, post meta, stale pill at 1.3) or 1.3 (bylines)",
+      "usage": "'Manage'/'See all'/'Edit'/'Undo', comment counts, '{author} · {n} comments', Pit and Reader bylines (the ' · {ago}' span is #9A938C inside the same run)."
+    },
+    {
+      "name": "metaS",
+      "spec": "IBM Plex Sans Arabic / w400 / 11 / height 1.0 (card metas, staleness caption, research meta, '+N' avatar disc, comment actions) or 1.3 (sector weight, disclosure age, earnings detail, notification sub-label, financials subtitle at 1.4)",
+      "usage": "The smallest running metadata tier. Tabular wherever it carries a number."
+    },
+    {
+      "name": "delta",
+      "spec": "IBM Plex Sans Arabic / w500 / 11 / height 1.0 / tabularFigures — 12/1.0 for the Company header change and the Home hero frosted pills",
+      "usage": "▲/▼ change values, index change pill, hero overlay pills. w500 is the heaviest weight in the entire app; nothing is ever bold."
+    },
+    {
+      "name": "caption",
+      "spec": "IBM Plex Sans Arabic / w300 / 10 / height 1.4",
+      "usage": "Staleness and provenance captions — #9A938C on paper, #6E6862 on the Company dark header. Load-bearing compliance copy, not decoration."
+    },
+    {
+      "name": "arabicName",
+      "spec": "IBM Plex Sans Arabic / w300 / 11 / height 1.3 (rows and tiles) or 14 / 1.3 (Company quote header) / letterSpacing 0 / dir=rtl",
+      "usage": "Arabic company names beside Latin tickers. Must be RTL-forced with ellipsis; tracking must never be applied."
+    },
+    {
+      "name": "statusBar",
+      "spec": "IBM Plex Sans Arabic / w500 / 13 / height 1.0 / tabularFigures",
+      "usage": "Simulated status-bar clock, #1B1917. Canvas parity only — on device this is the OS status bar."
+    }
+  ],
+  "buildOrder": [
+    "1. Token layer, no widgets: BColors (light + dark, as a ThemeExtension so both columns of the token table ship together), BRadii, BSpacing, BShadows, BMotion. Encode the alpha->ARGB conversions once (.05=0x0D .06=0x0F .08=0x14 .09=0x17 .10=0x1A .12=0x1F .13=0x21 .14=0x24 .16=0x29 .18=0x2E .20=0x33 .22=0x38 .26=0x42 .28=0x47 .30=0x4D .32=0x51 .38=0x61 .42=0x6B .50=0x80 .55=0x8C .58=0x94 .76=0xC2 .90=0xE6).",
+    "2. BType — the named TextStyle scale. FIRST verify the `tnum` OpenType feature actually exists in assets/fonts/Outfit-Variable.ttf and the three IBMPlexSansArabic statics, and wire Outfit's weights through FontVariation('wght', n) (it is a variable font in this pubspec, so fontWeight alone will not reliably hit w200/w300). Set leadingDistribution: TextLeadingDistribution.even globally so the /1 line boxes match the HTML.",
+    "3. BNumText and BArabicName — the bidi/tabular text primitives. Everything numeric or Arabic composes through these, so they must exist before any row, tile or chart.",
+    "4. BRiseIn and BPressable — motion primitives.",
+    "5. BHairline (Border factories), BPaperCard, BDarkCard — the three surface primitives. Getting BHairline's layout-size behaviour right here prevents a 1px drift in every list on four screens.",
+    "6. BSectionLabel, BInlineAction, BScreenTitle, BStalenessCaption — text-block primitives.",
+    "7. BKindChip, BChangeDelta, BAvatarHatch, BSoftIconButton, BDarkCircleButton — small controls.",
+    "8. BBottomScrim, BGlassNav, BStatusBarOverlay, then BScreenScaffold composing them. This unblocks all eight routes with placeholder bodies and locks the 54/16/124 insets and the per-screen blockGap before any screen content is written.",
+    "9. Routing: go_router with the nav-preservation rules baked in — goCompany / goPost / goReader push WITHOUT changing the lit tab (they are called with no nav argument), while goHome / goMarket / goPit / goYou set it. `back` pops to `prev` and falls back to the current nav group's root. Company is seeded nav:'market', Post detail nav:'pit', Reader nav:'home'.",
+    "10. BListRow, BGroupedListCard, BStatTile, BSearchPill — the list/tile composites. This completes Market end-to-end and most of You.",
+    "11. BResearchCard, BPostCard, BSegmentedRow — the content composites. This completes The Pit and unblocks Home and the Company tab bodies.",
+    "12. BEmptyState, BStaleDataPill, BSkeletonBlock — build the States catalogue as real reusable widgets, then immediately retro-fit each screen's empty and loading case (Pit Following, You watchlist, Market search) rather than leaving States as a dead specimen page.",
+    "13. BBarChart — Company revenue (8 bars, plot 128, gap 8, r10, axis labels) and Reader gross margin (7 bars, CONTENT-height 120, gap 6, r8, no axis).",
+    "14. BArcGauge in canvas-exact unsigned mode. Verify pixel-for-pixel against the canvas render at both size 214 (43 of 56 lit) and size 230 (40 of 56 lit) before touching the signed mode.",
+    "15. BArcGauge signed mode — centre-anchored fill, an explicit static zero marker between blades 27 and 28, outward-from-centre stagger, and signed `big` formatting. Gate this on product confirming the real score range; do not guess S.",
+    "16. Home-only pieces: the hero area chart (non-uniform CustomPainter, viewBox 318x164 at 1:1, gradient fill #E8621C .26 -> 0), the four sparklines (viewBox 130x34 rendered at 141x34 — x stretched 1.0846, y unscaled), the frosted overlay pills, the avatar stack, the EGX30 index strip, the full-bleed research rail.",
+    "17. Company-only pieces: the frozen-column financials table (132pt pinned label column + horizontally scrolled 4-column body, 44px rows, sticky header), the five 16x16 segmented icons, the dark header stat strip, the filing row.",
+    "18. Pit / Post / Reader pieces: the compose FAB, the composer bar (second BackdropFilter on that screen), the flat comment list with a `depth` int instead of a tree, the Reader's inline accent links and the 34ch / 62ch measured caps.",
+    "19. You-only pieces: the 46x28 pill toggle with a 22px knob and 18px travel, the drag handle plus reorder, the remove chip.",
+    "20. Dark-theme pass: swap in the dark column, then re-check up/down contrast on #14120F, the glass nav and scrim over a dark canvas, and — most importantly — that the light theme's 'raised = dark card' semantics still read once the base is dark.",
+    "21. RTL / Arabic pass: locale-gated letterSpacing and toUpperCase, EdgeInsetsDirectional everywhere, LTR locks on the gauge / financials table / time-axis chart, mirrored chevrons and magnifier, directional nav-pill offset, ICU plurals for '0 investors'.",
+    "22. Accessibility pass: merged Semantics on every row ('Commercial International Bank, COMI, 78.30 Egyptian pounds, down 0.63 percent'), labels for the ▲/▼ runs and the icon-only footer glyphs, and >=44pt hit targets around the 42px buttons and the 11–13px text actions — expanding outward without shifting layout.",
+    "23. Ship blockers to resolve with design/product before release: the three colour-only states (Reader save toggle, You notification toggle, Post detail liked), the missing staleness label on the You watchlist, the PRO badge removal on You, the FY25 header/body 4px misalignment in the financials table, the Home ember-chip .50 vs .55 outline, and the unfiltered global feeds on the Company Research and Discussion tabs."
+  ],
+  "risks": [
+    "ARC GAUGE, SIGNED RE-SCALE — the highest-risk item. The canvas dial() is west-anchored: ratio = (value-min)/(max-min) and filled = round(56*ratio), so naively passing min=-S, max=+S makes a score of 0 light blades 0..27 — half the arc — reading as 'half good'. The correct model is centre-anchored: mag = (v.abs()/S).clamp(0,1); k = (28*mag).round(); light [28, 27+k] for v>=0 and [28-k, 27] for v<0. Because N=56 is EVEN there is no centre blade — the 0deg axis falls exactly between i=27 (-1.636deg) and i=28 (+1.636deg) — so a dedicated static zero marker must be drawn there or the origin is invisible. The stagger must also be re-indexed to distanceFromCentre*9ms so the bar grows outward instead of sweeping from the west, and `big` must be sign-formatted ('+20', '-6') since the canvas passes a pre-formatted string. At S=50 the quantum is 1.79 points per blade, so a -6 score lights only 3 blades; decide whether any non-zero score gets a minimum 1-blade fill. None of this exists in the design file — it is all new behaviour that must be reviewed, not inferred.",
+    "ARC GAUGE, GEOMETRY AND ANIMATION. 56 blades must be one CustomPainter in a RepaintBoundary, not 56 Transform widgets. The blade is NOT a radial line from the centre: it is a 2 x round(size*0.145) capsule at the FAR end of a size/2 rod, occupying radius 76..107 at size 214 and 82..115 at size 230, pivoting at (size/2, height-22) where height = size/2 + 46. Angles step 180/55 = 3.2727deg from -90 to +90. The reveal is 56 independent 220ms Curves.easeOut colour lerps offset 9ms each, driven from one controller via Interval(i*9/total, (i*9+220)/total) with total 598ms (Company) / 571ms (Reader) — a single global tween will not reproduce it. Curves.easeOutCubic is visibly snappier than CSS ease-out; use Curves.easeOut. Unlit blades must never animate.",
+    "BACKDROP BLUR. Three surfaces need it: the nav bar (every screen), the Post detail composer (same screen as the nav, so two full-width saveLayers stacked), and the Home hero's frosted overlay pills. CSS blur radius is ~2 sigma, so blur(26px) -> sigma 13 and blur(14px) -> sigma 7. `saturate(180%)` has NO ImageFilter equivalent — either compose a ColorFilter.matrix saturation matrix through ImageFilter.compose or accept flatter glass, and decide that once rather than per screen. BackdropFilter samples everything painted beneath it and is clipped by its nearest ancestor clip, so it must be inside a ClipRRect(999) or it blurs the whole screen. Worst case, on Post detail, two blurred capsules sit over a scrolling list on mid-range Android — budget for it, keep both in RepaintBoundaries, and never place one behind scrolling content.",
+    "INSET BOX-SHADOWS DO NOT EXIST IN FLUTTER, AND THE REPLACEMENT CHANGES LAYOUT. Eleven distinct inset rules across the design become 1px Borders — but a CSS inset shadow costs zero layout box while a Flutter Border expands the child's constraints. Two places where this actually breaks the design: the outlined kind chips grow 2px in each axis (padding must drop from 5x11 to 4x10, or the stroke must be painted via ShapeDecoration/CustomPaint to keep the exact padding), and the financials table's 44px row height drifts. Also note the hairline is drawn on EVERY row INCLUDING THE LAST in Market disclosures, Company filings and both You lists — reproduce or explicitly decide against it, but never silently 'fix' it with ListView.separated.",
+    "TABULAR NUMERALS ARE NOT GUARANTEED. Outfit ships here as a single variable TTF and IBM Plex Sans Arabic as three statics; if either lacks the `tnum` feature, FontFeature.tabularFigures() is a silent no-op and every right-aligned price column (Market A–Z, Company financials, You watchlist) will jitter as digits change. Verify before building the rows, and have a fallback (fixed-width numeral column via SizedBox, or a monospaced numeral fallback family). Separately, because Outfit is variable, w200 and w300 must be requested via FontVariation('wght', 200/300) — relying on fontWeight alone can snap to the nearest named instance and quietly thicken every display heading in the app.",
+    "RTL WITH LATIN TICKERS BESIDE ARABIC NAMES. Four screens put a Latin ticker, a Latin price and a dir=rtl Arabic company name in the same row (Home tiles, Market rows, Company header, You watchlist). Under an Arabic locale the row itself mirrors and the Latin runs become embedded LTR — without U+2066/U+2069 isolates, 'SWDY' and '65.42' will reorder unpredictably against their Arabic neighbour, and strings like '▲ 1.16 (1.80%)' and '7.4×' will move the arrow and swap the parentheses. Compounding it: letterSpacing (.16em eyebrows, .06em chips, .02em tickers) breaks Arabic joining and must be gated on script, and text-transform:uppercase must be skipped. Also directional: the '‹'/'›' chevrons, the magnifier, the nav pill's translateX(n*100%), the nested-comment leading rail, the Save item's margin-left:auto, the FAB's right:20, the financials frozen column, and the You watchlist's handle/remove pair. The gauge, the financials numerals and the time-axis bar chart should be LTR-locked deliberately, not mirrored by default.",
+    "GRADIENT-ON-DARK CHART FILLS AND NON-UNIFORM SCALING. The Home hero area chart needs a Path closed down to y=164 filled with a vertical Shader from Color(0xFFE8621C).withOpacity(0.26) to fully transparent #E8621C — Flutter's default transparent is 0x00000000, so lerping to Colors.transparent produces a grey-black smear instead of a clean orange fade; the second stop must be Color(0x00E8621C). Both the hero chart and the sparklines use preserveAspectRatio=\"none\": the hero is 318x164 at 1:1, but the sparklines are a 130x34 viewBox rendered at 141x34, i.e. x stretched by 1.0846 with y unscaled. A FittedBox or any uniform fit will be visibly wrong; the painter must map dx = x/vbW*size.width and dy = y/vbH*size.height independently.",
+    "FROZEN-COLUMN TABLE. Company financials wants a 132pt label column pinned to the leading edge AND a header row pinned to the top of a horizontally scrolling 4-column body, with a 420pt track against a ~318pt viewport. Flutter has no `position:sticky`: this needs either an outer Row of [fixed label Column | Expanded horizontal scroll] with the header duplicated so both halves stay in lockstep, or two linked ScrollControllers. Rows are exactly 44px, so the BHairline layout-expansion issue bites here first. There is also a real defect to resolve: the FY25 header cell uses padding-right 20 while its body cells use 16, so that column's header sits 4px out of alignment with its own values.",
+    "DARK MODE IS ENTIRELY UNVERIFIED. The canvas header calls the product 'dark-first' but every one of the eight screens is drawn light; there is not a single dark token in the file. Every dark value in the table above is a derivation, and two of them are genuinely risky. First, `up` #3F6B52 and `down` #A3402F both fail contrast on #1B1917 and must be lifted ~30 L*, which changes their character from muted-editorial to noticeably brighter — get that signed off, because those two colours are the only semantic colours in the app. Second and more structural: in the light theme 'raised' means DARK (#242120->#1B1917 on paper). In a dark theme that inversion has nowhere to go — the editorial hero card can no longer be 'the dark one'. The proposed surface/surfaceRaised split keeps the elevation but loses the light theme's core contrast gesture; that is an information-architecture decision, not a colour swap.",
+    "fl_chart IS ALREADY A DEPENDENCY AND CANNOT BUILD ANY CHART IN THIS DESIGN. The arc gauge (56 discrete staggered blades), the hero area chart (non-uniform viewBox scaling, no axes, no grid, no tooltip), the four sparklines, and both bar charts (no axis line, no gridlines, no value labels, one inked bar) are all hand-painted. Reaching for fl_chart will produce something that looks generically like a chart and nothing like this design. Either remove the dependency or scope it to something outside these eight screens.",
+    "BOX MODEL AND ch UNITS. Verified in the source: box-sizing:border-box appears on only five elements, and the Reader's chart card is not one of them — so its `height:120px` is CONTENT height (the bar row is 156px overall) and every bar fraction resolves against 120. Getting this wrong scales all seven bars by 0.77. Separately, `max-width:34ch` on the Reader dek and `62ch` on its body paragraphs have no px equivalent: ch is the advance of '0' in IBM Plex Sans Arabic at 15px and 16px and must be measured with a TextPainter. The 34ch dek cap almost certainly binds at 358pt; the 62ch body cap almost certainly does not — but that must be measured, not assumed.",
+    "PRESS FEEDBACK AND HIT TARGETS. There is no material ink anywhere, so InkWell is banned across all eight screens — a ripple on a dark gradient card or on #F7F4F0 paper is immediately wrong. The scales are inconsistent by design (0.98 / 0.99 / 0.94) and several elements look pressable but are inert in the canvas (Home ORAS + TMGH tiles, Market sector cards, Company post cards and filing rows, You saved-research light card, the 'Edit'/'Undo'/'Manage' links, the Home refresh button, the Company overflow menu, the Pit FAB, the whole composer bar). Each is a decision, not a bug to fix silently. Also: the 42px icon buttons, the 12px text actions and the 11px comment actions are all below the 44pt minimum and need hit areas expanded outward without shifting the surrounding rhythm.",
+    "THREE COLOUR-ONLY STATES VIOLATE THE PRODUCT'S OWN RULE. The Reader save toggle inverts fill only (#F7F4F0/#1B1917) with no icon or label change; the You notification toggle differs only by track colour and knob position with no glyph or text; the Post detail like state changes only #7A736D -> #E8621C on an unchanged ▲. Everything else in the design pairs colour with a glyph or word (▲/▼ deltas, the 'Cash' gauge caption, 'Under review', the segmented labels), so these three are outliers and should be fixed — filled-vs-outline bookmark, an On/Off label or knob glyph, a filled-vs-outline triangle — before ship, not after.",
+    "SEMANTIC POLARITY OF up/down IS INVERTED IN THE SEED DATA. Company's 'Net debt 12.9bn ▲ 8.8%' is flagged up/green while the financials table shows net debt FALLING 14,120 -> 12,880. The flag means favourable/unfavourable, not increased/decreased. If BChangeDelta takes a single boolean, the arrow renders backwards the first time real data arrives on any balance-sheet metric. Model sentiment and direction as two separate fields from day one — this is the kind of error that is invisible in review and obvious to a user.",
+    "PER-SCREEN CONSTANTS THAT LOOK LIKE TOKENS BUT ARE NOT. Verified in the source: the root column gap is 22 / 24 / 20 / 20 / 18 / 20 / 22 / 22 across Home / Market / Company / Pit / Post / Reader / You / States. Card shadow alpha is .06 on five screens and .08 on three. Chip padding is 5x10 or 4x10 on Home and Company but 5x11 on Pit and Post. The ember chip border is .50 on Home and .55 everywhere else. Research-card title size is 21, 22 or 20 depending on surface, with a 36px / 12px / 10px kicker gap. Every one of these is a place where a well-meaning 'consolidation' silently retypesets a screen. Expose them as parameters with the per-screen values documented, and change them only as an explicit, reviewed decision."
+  ]
+}

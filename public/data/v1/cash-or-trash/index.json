@@ -1,0 +1,327 @@
+{
+  "updated_at": "2026-08-11",
+  "studied": 7,
+  "total": 224,
+  "companies": [
+    {
+      "ticker": "MCQE",
+      "name": "Misr Cement Qena",
+      "score": 20,
+      "verdictId": "cash",
+      "studied_at": "2026-08-11",
+      "summary": "The first stock in the series to clear Cash — by one point, and not as a short-term chase after +20%.",
+      "flags": [
+        "⚠️ THIN FLOAT",
+        "🔒 LIMIT-PRICE / EXIT RISK",
+        "❗ DATA-VENDOR MISMATCH"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": 2,
+          "basis": "8.99× TTM owner earnings and roughly 5.3× EV/EBITDA are reasonable absolutely, but above ARCC/MBSC/SCEM after the +20% move; P/B 6.54×"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": 5,
+          "basis": "Profit is operating; net other income was only EGP 20.7m. FY2025 CFO EGP 3.054bn versus EGP 2.558bn total profit. H1 CFO fell 52.4% as inventory, debtors and EGP 765.6m tax absorbed cash, preventing a higher score"
+        },
+        {
+          "pillar": "Growth",
+          "score": 7,
+          "basis": "H1 revenue +27.3%, owner-attributable profit +94.5%, gross margin 32.6% → 40.8%. Q2 owner profit remained +43.5% YoY but fell about 19.9% sequentially, so acceleration is not unlimited"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": 8,
+          "basis": "Approx. EGP 1.52bn net cash, 1.69× current ratio, EGP 238m bank facilities, unmodified limited review"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -6,
+          "basis": "The signed H1 note leaves only 8.39% / 8,062,054 shares under “other shareholders”. EGP 14m normal and EGP 64m confirmation-session value are workable for small positions, but the 20% limit shows how quickly the exit can disappear"
+        },
+        {
+          "pillar": "Governance",
+          "score": 4,
+          "basis": "Timely H1 filing, unmodified review, named ownership and disclosed related parties; no current enforcement finding located. Deduction for inconsistent IR/vendor ownership data and extreme strategic-holder concentration"
+        }
+      ],
+      "article_url": "/mcqe-investigation.html"
+    },
+    {
+      "ticker": "CIRA",
+      "name": "Cairo for Investment and Real Estate Development",
+      "score": -1,
+      "verdictId": "recyclable",
+      "studied_at": "2026-08-03",
+      "summary": "The best business this series has examined. Still not a buy at EGP 36.80.",
+      "flags": [
+        "⚠️ THIN FLOAT (borderline — 11.30%)",
+        "🔒 CAN'T EXIT (conditional)"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -3,
+          "basis": "21.3× TTM attributable earnings, 20–26× forward (Q4 is a loss quarter, so the 9M EPS must not be annualised), 8.63× book, 0.93% dividend yield, at the 52-week high after +110% in 4.5 months. Revised from −5 on 4 Aug. The original mark leaned on a 4.69% earnings yield against a 19% policy rate — but the whole EGX yields well under the deposit rate, so that comparison scores every Egyptian equity as Trash and says nothing about CIRA. On the evidence that is CIRA-specific, it is cheaper than its direct peer Taaleem (23.5× / 13.8× EV/EBITDA) and cheaper than its sector (25.8×), with far better returns (ROE 36.5% vs 13.9%). Expensive enough to need strong growth to justify — but not at the harsh end of the band"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": 5,
+          "basis": "The best mark in the series. Historical-cost basis so revaluation gains are impossible; no disposal gains; flagged one-offs 4.4% of PBT; management's \"normalised\" profit is lower than statutory. Trade receivables fell 3.1% while revenue rose 35%, against deferred revenue of 9.0× the receivable — tuition is collected before it is taught"
+        },
+        {
+          "pillar": "Growth",
+          "score": 6,
+          "basis": "9M revenue +35.5% decomposes to students +19.3% × revenue-per-student +13.5% against ~12.7% CPI — real pricing ≈ +0.5%, so growth is ~20% real and almost entirely volume. Higher Ed (69% of revenue) took a +1.0% nominal fee rise = −10.5% in real terms while adding 10,100 students. Q3 accelerated (+44.5% revenue). Docked from +9 because it is not repeatable: seat utilisation is 88% higher-ed and 93.6% K-12, faculties grew 0%, and the replacement campus has slipped ~2 years"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": -1,
+          "basis": "Revised from −2 on 4 Aug after reading the filing itself (Arabic 9M consolidated statements to 31 May 2026, note 14). Verified: total borrowings incl. accrued interest EGP 1,994,361,020 — matching to the pound — and QNB loan (2) does carry a covenant to keep total liabilities ÷ equity ≤ 1.2:1, against an actual 2.63× (7,976,263,317 ÷ 3,037,865,681), and 4.45× a year earlier. That tension is real and unwaived. But three aggravating claims did not survive contact with the filing. The borrowings were not all reclassified as current — note 14 splits them EGP 1,339.8m current / EGP 654.5m non-current, and the non-current balance rose year on year. The Kuwait Finance House covenant is a different test — bank loans ÷ equity ≤ 1.5, stated explicitly on a consolidated basis — which CIRA passes at 0.66×. And no breach declaration appears anywhere in four pages of the loans note. Against the covenant tension: net debt 1.24× EBITDA, interest cover 3.2×, no default, no going-concern language, instalments current"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -4,
+          "basis": "Filed float 11.30% (Article 30, 31 May 2026) — the vendor figure held this time. Free-float cap ~EGP 2.43bn is genuinely dealable, ~EGP 52m/day traded, EGP 10m exits in under a session. But Social Impact Capital holds 88.68%, 1.3pp from 90%; CIRA is in no EGX index, having been dropped from the EGX70 EWI after the tender offer gutted the float; and current liquidity is rally-dependent"
+        },
+        {
+          "pillar": "Governance",
+          "score": -4,
+          "basis": "EGP 5,000 EGX penalty (22 Apr 2026, Art. 46) for missing the quarterly financials — the same decision fined listed subsidiary CAED for the identical failure, making it a group control weakness. Filing lags of 57/54/50 days. Two exchange-imposed trading suspensions in 19 months, both from CIRA's own filing failures. Its flagship investor deck of 20 July 2026 misstates its own ownership (an old pre-tender chart copied forward), contradicting note 1 of the statements filed the same day"
+        }
+      ],
+      "article_url": "/cira-investigation.html"
+    },
+    {
+      "ticker": "AMES",
+      "name": "Alexandria New Medical Center",
+      "score": -17,
+      "verdictId": "trash",
+      "studied_at": "2026-07-31",
+      "summary": "One 38-year-old hospital in Smouha, Alexandria, carrying more market value than the whole Cleopatra group.",
+      "flags": [
+        "⚠️ THIN FLOAT",
+        "🔒 CAN'T EXIT",
+        "🚩 GOVERNANCE"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -10,
+          "basis": "520.9× TTM earnings, 61.1× sales fully diluted (265.3× / 31.1× on shares actually listed — reproduces S&P's published ratios), 72.3× post-money book, 342× EV/EBITDA, 0.19% earnings yield"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": -5,
+          "basis": "TTM operating cash flow EGP 9.62m against EGP 56.36m of net income = 17.1% conversion; FY2025 alone converts at 38% (EGP 21.09m cash vs EGP 55.04m profit) on a −EGP 50.05m receivables drag, with trade receivables rising ~EGP 115m → ~EGP 161m. Free cash flow −EGP 6.15m. The profit is clean — standalone, no revaluation gains — but it is booked far faster than it is collected, which triggers this framework's automatic −5"
+        },
+        {
+          "pillar": "Growth",
+          "score": 3,
+          "basis": "FY2025 revenue +32.5% to EGP 467.89m, net profit +84.6% to EGP 55.04m — a genuine turnaround, but decelerating hard into Q1 2026 (+11.9% / +15.4%) and much of the EGP growth is inflation pass-through"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": 5,
+          "basis": "Net cash. EGP 285.90m equity, EGP 40.64m cash, no reported debt at 31 Mar 2026, plus EGP 120m of subscription proceeds. Held back only because the entire post-money book (~EGP 406m) is 1.4% of the market cap"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -8,
+          "basis": "Free float 3.90961% per the company's own 21 July filing = 9,562,178 shares fully diluted, of which only 4,873,952 (EGP 585m) were actually listed. Turnover ran at ~11.9% of the listed float every session"
+        },
+        {
+          "pillar": "Governance",
+          "score": -2,
+          "basis": "Genuinely mixed. Positives: KPMG Hazem Hassan, on-time filings, answered the exchange pre-open at 09:16 on 14 July. Negatives: EGP 10,000 EGX penalty (Art. 52) on this very capital increase; a second \"no information\" denial in under two years; the 2024 Al Ahly \"project of the century\" walk-back after an EGX suspension; 9 of 11 board seats represent the 96.088% holders who were themselves subscribing at par"
+        }
+      ],
+      "article_url": "/ames-investigation.html"
+    },
+    {
+      "ticker": "NCCW",
+      "name": "Nasr Company for Civil Works",
+      "score": -20,
+      "verdictId": "trash",
+      "studied_at": "2026-08-08",
+      "summary": "The chart says −50% over eleven years. The truth is +1,864%. Both are correct.",
+      "flags": [
+        "🪞 CHART ILLUSION",
+        "📉 ONE-OFF EARNINGS",
+        "🤝 RELATED-PARTY REVENUE",
+        "💸 PENDING CASH CALL"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -6,
+          "basis": "Revised from −7. EGP 6.38 × 252,000,000 filed shares = EGP 1,607,760,000. 5.02× book, 4.61× FY2025 sales, 228× gross profit, ~1.9× backlog. But 5× book is mid-pack for the EGX micro-cap contractor cohort (median ~4.5×) — legacy land at historic cost against a devalued pound — so it cannot carry the harsh end of the band on its own, and the rights issue mechanically takes P/B to ~3.5× at TERP"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": -6,
+          "basis": "Revised from −8. FY2025 net profit EGP 60,347,386 was 8.6× gross profit of EGP 7,038,148, on a EGP 116,704,041 land-disposal gain (note 36, Mostorod); held-for-sale is now nil, so the mechanism is used up. Q4 was 90.4% of FY2025 profit and 92.0% of FY2024's; April–December 2025 cumulative gross profit was negative EGP 108k. The +2 is earned: a filed H1-2026 gross profit of EGP 15,480k on revenue of EGP 120,126k — a 12.89% margin against 8.04% — is real and I did not have it. It is capped at +2 because the same document is expressly unaudited, shows the result falling from +3,790k to (6,006k), and shows operating cash flow widening from (5,908k) to (32,747k) — a 454% wider burn in the half the margin supposedly improved. Precedent: 9M-2025 showed +20,612k of gross profit; Q4-2025 booked −13,574k"
+        },
+        {
+          "pillar": "Growth",
+          "score": -7,
+          "basis": "Revenue EGP 476.99m (FY23) → 347.06m (FY24) → 348.76m (FY25) — −50% in real terms in two years after CPI. H1-2026 revenue −35.3%, Q1-2026 −48.5%, and H1 is a loss. Backlog fell 3.9% in Q1-2026 on new awards of EGP 12.1m against EGP 43.3m executed"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": 1,
+          "basis": "Zero bank borrowings — the strongest fact in the case — and a clean unqualified BDO opinion, no going-concern paragraph. Held to +1 because 74.7% of cash is pledged (EGP 93,052,684 of EGP 124,613,683), bonding capacity is exhausted (letters of guarantee EGP 177,825,069 against facilities ~EGP 173.8m), and the tax file is open across four taxes from 2005–2024 with no amount disclosed"
+        },
+        {
+          "pillar": "Tradability",
+          "score": 3,
+          "basis": "Filed free float 28.12589% = 59,064,369 shares pre-bonus (70,877,243 post) ≈ EGP 452m. EGP 5m exits in ~1.25 sessions. The one pillar where the vendor figure proved right — checked anyway"
+        },
+        {
+          "pillar": "Governance",
+          "score": -5,
+          "basis": "Controlled by Madinet Masr (EGX: MASR) at 52.456% plus the state Holding Company for Construction & Development at 19.332% = 71.789% in two hands. Nine directors: zero independent, zero holding a single share. No quantified related-party note exists in the FY2025 statements at all. Board remuneration EGP 8,640,881 — more than the company's entire gross profit. EGP 10,000 EGX obligation, 22 Apr 2026 (Article 46). No cash dividend since Coupon 18, EGP 0.50, paid 29 April 2020"
+        }
+      ],
+      "article_url": "/nccw-investigation.html"
+    },
+    {
+      "ticker": "BIOC",
+      "name": "GlaxoSmithKline S.A.E.",
+      "score": -25,
+      "verdictId": "trash",
+      "studied_at": "2026-07-29",
+      "summary": "The company is not the problem. The price and the float are.",
+      "flags": [
+        "⚠️ THIN FLOAT",
+        "🔒 CAN'T EXIT"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -10,
+          "basis": "EGP 194 = ≈102× trailing earnings; market cap ≈EGP 16.2bn"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": -4,
+          "basis": "Earnings are real operating pharma profits — but Q1 2026 net profit was only EGP 4.7m"
+        },
+        {
+          "pillar": "Growth",
+          "score": -9,
+          "basis": "Q1 2026 profit −92%, sales −18%"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": 4,
+          "basis": "No distress located; global parent behind it"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -10,
+          "basis": "Free float 2.91% = 2,434,272 shares. 45.8% of the entire float traded in one session; float turned over 3.54× in ten sessions"
+        },
+        {
+          "pillar": "Governance",
+          "score": 4,
+          "basis": "Answered the exchange promptly (19 Jul); ownership filings clean and unchanged. Minor: June listing-committee warning over a late filing"
+        }
+      ],
+      "article_url": "/bioc-investigation.html"
+    },
+    {
+      "ticker": "DGTZ",
+      "name": "Digitize for Investment and Technology",
+      "score": -40,
+      "verdictId": "toxic",
+      "studied_at": "2026-08-06",
+      "summary": "Down 70% from its peak — and unlike most falls, every point of it is real.",
+      "flags": [
+        "🚩 GOVERNANCE",
+        "💸 NO CASH BEHIND THE PROFIT",
+        "⚖️ REGULATOR ACTION"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -3,
+          "basis": "108,000,000 shares at EGP 2.66 = market cap EGP 287.28m. Cheap-looking only against earnings that never became cash"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": -9,
+          "basis": "The decisive fact. Operating cash flow −EGP 2.68m against +EGP 16.94m of reported profit. The gap is EGP 123,894,104 of unbilled contract assets — guarded by EGP 1,039,892 of cash. Profit was booked; the money never arrived"
+        },
+        {
+          "pillar": "Growth",
+          "score": -7,
+          "basis": "The +73.28% headline was net profit of EGP 1.28m against EGP 738,700 — a rounding error dressed as growth, and published as Q1 numbers eight months stale"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": -7,
+          "basis": "No FY2025 accounts exist. Auditor Forvis Mazars excused itself. Nothing to test the contract assets against"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -4,
+          "basis": "Free float 61.77% (Article 30, 30/06/2026) — not a thin-float story, which makes the collapse more meaningful, not less. Excluded from margin and T+0/T+1 on 4 Dec 2025"
+        },
+        {
+          "pillar": "Governance",
+          "score": -10,
+          "basis": "Field inspection by the FRA and the exchange on 23 Nov 2025 at the declared address (Milanet Mall, Sheikh Zayed) found no premises matching the one declared; no systems or documents could be examined, the company's representative attributing this to a move that had not been disclosed. FRA statement of 30 Nov 2025 listed 8 violations and refused the capital increase. EGP 40,000 penalty, 6 Aug 2026"
+        }
+      ],
+      "article_url": "/dgtz-investigation.html"
+    },
+    {
+      "ticker": "KWIN",
+      "name": "Cairo National for Investment & Securities",
+      "score": -50,
+      "verdictId": "toxic",
+      "studied_at": "2026-07-29",
+      "flags": [
+        "🚩 GOVERNANCE",
+        "📉 ONE-OFF EARNINGS",
+        "🔄 CIRCULAR OWNERSHIP"
+      ],
+      "pillars": [
+        {
+          "pillar": "Valuation",
+          "score": -10,
+          "basis": "EGP 1.045bn quoted vs ≈EGP 135.8m estimated look-through NAV = 7.7×; ≈46× owner earnings, ≈220× recurring"
+        },
+        {
+          "pillar": "Earnings quality",
+          "score": -10,
+          "basis": "82.49% of FY2025 profit was one property sale (EGP 34.945m of 42.361m); only EGP 12m of the EGP 36m collected"
+        },
+        {
+          "pillar": "Growth",
+          "score": -8,
+          "basis": "Q1 2026 consolidated profit −88.6% year on year"
+        },
+        {
+          "pillar": "Balance sheet",
+          "score": -8,
+          "basis": "AARE subsidiary ≈−EGP 59.9m negative equity; ≈EGP 66.4m Islamic financing with admitted missed instalments"
+        },
+        {
+          "pillar": "Tradability",
+          "score": -4,
+          "basis": "Float 12.11% → 16.72%; ADIB + ENTAD still hold 83.84%"
+        },
+        {
+          "pillar": "Governance",
+          "score": -10,
+          "basis": "FRA objection under Listing Rule 39; FRA profit-distribution noncompliance (2026 AGM); EGP 10,000 EGX fine (Dec 2025); 2023 consolidation restated; company told EGX it had no explanation for its own share price"
+        }
+      ],
+      "article_url": "/kwin-investigation.html"
+    }
+  ]
+}
