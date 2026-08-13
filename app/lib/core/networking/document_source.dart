@@ -82,43 +82,14 @@ class NetworkDocumentSource implements DocumentSource {
   };
 }
 
-/// The network, with the bundled copy underneath it.
-///
-/// A fresh install on a bad connection has no cache and no download, and would
-/// otherwise open on four empty screens. Falling back to the compiled-in
-/// snapshot means the app always has *something* honest to show — it is real
-/// published data, just frozen at the date it was built, and every screen
-/// already labels the date it is showing (spec §49).
-///
-/// The fallback is deliberately one-directional: the network is always tried
-/// first and its answer always wins. Serving the bundle while the site has
-/// something newer is the bug this whole class exists to avoid.
-class SeededNetworkDocumentSource implements DocumentSource {
-  SeededNetworkDocumentSource({required DocumentSource network, DocumentSource seed = const FixtureDocumentSource()})
-    : _network = network,
-      _seed = seed;
-
-  final DocumentSource _network;
-  final DocumentSource _seed;
-
-  @override
-  bool get isRefreshable => true;
-
-  @override
-  Future<String> fetch(String path) async {
-    try {
-      return await _network.fetch(path);
-    } on DocumentUnavailable catch (networkFailure) {
-      try {
-        return await _seed.fetch(path);
-      } on DocumentUnavailable {
-        // Report the network's reason, not the bundle's: "http 404" tells the
-        // reader (and the logs) something, "no fixture bundled" does not.
-        throw networkFailure;
-      }
-    }
-  }
-}
+// A `SeededNetworkDocumentSource` used to live here, substituting the bundled
+// copy whenever a request failed. It was removed rather than fixed: because the
+// substitution was invisible to the caller, `StaticApi` wrote build-time bytes
+// into the cache stamped with the live manifest's version, and a single timed-out
+// fetch on a fresh install pinned the app to its compiled-in data permanently.
+//
+// The seed now belongs to `StaticApi`, which knows not to cache it. Do not
+// reintroduce a source that silently answers for another one.
 
 /// Reads from `assets/fixtures/<path>` (spec §57).
 ///

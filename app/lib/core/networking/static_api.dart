@@ -39,12 +39,30 @@ enum DocumentOrigin { cache, network, fixture }
 /// immediately and a fresher one shortly after**. Nothing here ever blocks
 /// startup waiting on the network.
 class StaticApi {
-  StaticApi({required DocumentSource source, required DocumentCache cache})
-    : _source = source,
-      _cache = cache;
+  StaticApi({
+    required DocumentSource source,
+    required DocumentCache cache,
+    DocumentSource? seed,
+  }) : _source = source,
+       _cache = cache,
+       _seed = seed;
 
   final DocumentSource _source;
   final DocumentCache _cache;
+
+  /// The compiled-in snapshot, shown when there is neither a cached copy nor a
+  /// reachable network — so a first launch on a bad connection has something
+  /// honest on screen instead of four empty states.
+  ///
+  /// It is read **here** rather than hidden behind [_source] on purpose. When a
+  /// seeded source substituted the bundle silently, [load] could not tell the
+  /// two apart and wrote build-time bytes into the cache stamped with the live
+  /// manifest's version. One timed-out fetch on a fresh install then pinned the
+  /// app to its compiled-in data on every later launch, however good the
+  /// connection — the exact failure the seed exists to avoid.
+  ///
+  /// Seed content is never cached and never claims a version.
+  final DocumentSource? _seed;
 
   static const String manifestPath = 'manifest.json';
 
@@ -157,8 +175,34 @@ class StaticApi {
       );
     } on DocumentUnavailable {
       // Nothing fresher available. If cache was already yielded the screen is
-      // fine; if not, the caller decides what empty means (spec §49).
-      if (cached == null) rethrow;
+      // fine; if not, fall back to the compiled-in copy so a first launch on a
+      // bad connection still shows something.
+      if (cached != null) return;
+
+      final body = await _seedBody(path);
+      // Report the network's reason rather than the bundle's: "http 404" tells
+      // the reader something, "no fixture bundled" does not.
+      if (body == null) rethrow;
+
+      yield DocumentSnapshot(
+        body: body,
+        origin: DocumentOrigin.fixture,
+        // Deliberately not cached and given no timestamp: this is build-time
+        // data standing in for a download that failed, and the next launch must
+        // try the network again rather than find a current-looking cache entry
+        // and stop there.
+        storedAt: null,
+      );
+    }
+  }
+
+  Future<String?> _seedBody(String path) async {
+    final seed = _seed;
+    if (seed == null) return null;
+    try {
+      return await seed.fetch(path);
+    } on Object {
+      return null;
     }
   }
 

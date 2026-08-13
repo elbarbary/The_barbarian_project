@@ -18,11 +18,13 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import datetime
 import json
 import pathlib
 import re
 import shutil
 import sys
+import zoneinfo
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 WORK = REPO.parent / "work"
@@ -138,6 +140,68 @@ def clean(value):
     return value
 
 
+def is_after_close(as_of: str | None) -> bool:
+    """Whether a scan timestamp falls after the EGX close for that day.
+
+    EGX trades Sunday to Thursday, 10:00-14:30 Cairo. A scan taken on a weekend
+    or outside those hours is reading closing prices; one taken between them is
+    reading a session in progress.
+
+    Unknown timestamps are treated as **not** a close, because the honest answer
+    when we cannot tell is the weaker claim.
+    """
+    if not as_of:
+        return False
+    try:
+        stamp = datetime.datetime.fromisoformat(as_of.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+
+    cairo = stamp.astimezone(zoneinfo.ZoneInfo("Africa/Cairo"))
+    # Monday=0 … Sunday=6, so Friday(4) and Saturday(5) are the weekend.
+    if cairo.weekday() in (4, 5):
+        return True
+    return cairo.hour * 60 + cairo.minute > 14 * 60 + 30
+
+
+def previous_close(
+    history: list[dict], session: str, close: float, change_pct: float | None
+) -> float | None:
+    """The close this session's move is measured against.
+
+    Preferred source is the exchange's own reported move: the scan states the
+    change as a percentage, so the base it was computed from is
+    `close / (1 + pct/100)`. Deriving it this way means the pounds figure and
+    the percentage figure can never contradict each other, because both come
+    from one number.
+
+    The merged history is only a fallback, for names the scan did not price.
+    It is *not* the better source despite being real closes: the union spans
+    several runs and can hold a bar that was never split-adjusted. SWDY's
+    12 August close appears there as 109.30 while the exchange measured the
+    13 August move against 107.11 — trusting the series would have published a
+    -1.19% move where the exchange reported +0.83%.
+
+    Selecting from history goes by date rather than by offset, because a scan
+    taken before the open ends on the previous session and one taken after the
+    close ends on this one.
+    """
+    if change_pct is not None:
+        factor = 1 + change_pct / 100
+        # A name down 100% has no meaningful base, and nothing else divides by
+        # zero here.
+        if abs(factor) > 1e-9:
+            return round(close / factor, 4)
+
+    for bar in reversed(history):
+        date, bar_close = bar.get("date"), bar.get("close")
+        if date is None or bar_close is None:
+            continue
+        if date < session:
+            return bar_close
+    return None
+
+
 def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     scan = json.loads(scan_path.read_text(encoding="utf-8"))
     records = scan["records"]
@@ -162,10 +226,19 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
 
         history = union.get(ticker, [])
 
-        # Previous close comes from the series when the scan does not state it,
-        # so the change shown is always derived from two real closes.
-        previous = history[-2]["close"] if len(history) > 1 else None
+        # The previous close is the last bar *before* the session being
+        # published — found by date, not by position.
+        #
+        # This used to be `history[-2]`, which silently assumed the series
+        # already contained the session's own bar. That holds for a scan taken
+        # after the close and fails for one taken before the open, where the
+        # last bar is already the previous session. On 13 August it made
+        # `previous_close` a day too old for every company with a series: ADRI
+        # was published as change +0.07 against change_percent -2.93%, so the
+        # Market row showed it falling while the company header showed it
+        # rising. 76 of 282 tickers disagreed in sign.
         change_pct = clean(r.get("change"))
+        previous = previous_close(history, session, close, change_pct)
 
         companies.append(
             {
@@ -266,7 +339,19 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         "source": "EGX daily scan",
         "companies": companies,
     }
-    snapshot = {"date": session, "stocks": stocks}
+    # Whether these prices are closing prices or a mid-session reading.
+    #
+    # The scan runs on whatever schedule the monitor happens to use — today's
+    # was captured at 08:57 Cairo, before the open — and the app was labelling
+    # every published price "Last close · <date>" regardless. A price captured
+    # at 11:20 on a trading day is not that day's close, and saying so is the
+    # kind of small untruth spec §49 exists to stop.
+    snapshot = {
+        "date": session,
+        "captured_at": scan.get("asOf"),
+        "is_close": is_after_close(scan.get("asOf")),
+        "stocks": stocks,
+    }
 
     targets = [API] + ([FIXTURES] if write_fixtures else [])
     for root in targets:
@@ -280,19 +365,36 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
 
     with_history = sum(1 for d in details.values() if len(d["price_history"]) > 1)
     with_profile = sum(1 for d in details.values() if d.get("profile"))
-    values = sum(len(d.get("profile", {})) for d in details.values())
-    with_profile = sum(1 for d in details.values() if d.get("profile"))
     fields = sum(len(d.get("profile", {})) for d in details.values())
     print(f"scan     {scan_path.name}  ({session})")
     print(f"listed   {scan['scannerTotal']}   tradable {scan['thndrDirectoryCount']}")
     print(f"written  {len(companies)} companies, {with_history} with price history")
-    print(f"profile  {with_profile} with extra fields, {values} values total")
     print(f"profile  {with_profile} with extra fields ({fields} values total)")
     if skipped:
         print(f"skipped  {skipped} records with no usable ticker or close")
     print(f"arabic   {sum(1 for c in companies if c['name_ar'])} names")
     sectors = sorted({c['sector'] for c in companies if c['sector']})
     print(f"sectors  {len(sectors)}: {', '.join(sectors[:8])}…")
+
+    # A quote carries the move twice — as pounds and as a percentage — and the
+    # app reads whichever the screen needs. If the two disagree in sign the same
+    # company shows as rising on one screen and falling on another, which is how
+    # the history[-2] bug stayed invisible until a reviewer diffed two screens.
+    # Refuse to publish that.
+    disagree = [
+        t
+        for t, q in stocks.items()
+        if q.get("change") is not None
+        and q.get("change_percent") is not None
+        and q["change"] * q["change_percent"] < 0
+    ]
+    if disagree:
+        print(f"\nerror: {len(disagree)} tickers have change and change_percent")
+        print("       disagreeing in sign — the same move in two directions.")
+        for t in sorted(disagree)[:8]:
+            print(f"       {t}: {stocks[t]}")
+        return 1
+    print("checked  change and change_percent agree in sign for every quote")
     return 0
 
 

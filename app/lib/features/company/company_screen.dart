@@ -255,7 +255,7 @@ class _Header extends StatelessWidget {
               // The headline price on this screen is the live one, so the
               // caption beside it has to describe the live feed, not the daily
               // publish it was merged over.
-              const BPriceCaption(onDark: true),
+              BPriceCaption(ticker: company.ticker, onDark: true),
             ],
           ),
         ],
@@ -686,10 +686,15 @@ class _Price extends ConsumerWidget {
               onChanged: (i) => onRange(PriceRange.values[i]),
             ),
             const SizedBox(height: 14),
+            // Dated by the chart's own last point, not by the session the rest
+            // of the screen is showing. This chart is end-of-day and the header
+            // price above it is live, so they routinely end on different days —
+            // naming the header's date here claimed a bar the chart does not
+            // draw.
             BStalenessCaption(
-              sessionDate == null
-                  ? '${windowed.length} sessions'
-                  : '${windowed.length} sessions · last close $sessionDate',
+              windowed.isEmpty
+                  ? 'No sessions in this range'
+                  : '${windowed.length} sessions · to ${windowed.last.date}',
             ),
           ],
         );

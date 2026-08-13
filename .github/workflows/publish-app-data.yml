@@ -78,6 +78,24 @@ jobs:
           # If the content changed but data_version did not, installed apps
           # would never drop their cache — the failure this whole workflow
           # exists to prevent. Fail loudly rather than publish a silent no-op.
+          # The manifest is byte-stable when the fingerprint has not moved
+          # (build_fixtures.py keeps the previous generated_at), so its presence
+          # in the diff is real evidence that data_version changed rather than
+          # just evidence that the clock did.
+          before=$(git show HEAD:public/data/v1/manifest.json 2>/dev/null \
+                   | python3 -c 'import json,sys; print(json.load(sys.stdin)["data_version"])' 2>/dev/null || echo none)
+          after=$(python3 -c 'import json; print(json.load(open("public/data/v1/manifest.json"))["data_version"])')
+          echo "data_version: $before -> $after"
+          if [ "$before" = "$after" ]; then
+            echo "::error::Published data changed but data_version did not move."
+            echo "::error::Installed apps compare that string to decide whether"
+            echo "::error::their cache is stale, so every device would keep"
+            echo "::error::serving what it already had. Check that the changed"
+            echo "::error::files are covered by RESOURCES or UNVERSIONED in"
+            echo "::error::scripts/build_fixtures.py."
+            exit 1
+          fi
+
           changed=$(git diff --cached --name-only)
           if ! grep -q 'public/data/v1/manifest.json' <<<"$changed"; then
             echo "::error::Published data changed but public/data/v1/manifest.json did not."

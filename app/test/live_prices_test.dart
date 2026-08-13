@@ -2,6 +2,8 @@ import 'package:barbarian/core/models/market_snapshot.dart';
 import 'package:barbarian/core/models/price_freshness.dart';
 import 'package:barbarian/core/models/quote_snapshot.dart';
 import 'package:barbarian/core/networking/document_source.dart';
+import 'package:barbarian/core/networking/static_api.dart';
+import 'package:barbarian/core/storage/document_cache.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/market/market_screen.dart';
@@ -131,6 +133,33 @@ void main() {
       }
     });
 
+    // The app has no licence for a real-time EGX feed, so a zero delay means
+    // the feed stopped stating its tier — not that it was upgraded. Rendering
+    // that as "Real-time" put a false claim beside a quarter-hour-old price.
+    test('a zero delay is treated as unknown, never as real-time', () {
+      final freshness = PriceFreshness(
+        kind: PriceFreshnessKind.live,
+        // ignore: avoid_redundant_argument_values
+        delay: Duration.zero,
+        readAt: DateTime.now(),
+        sessionOpen: true,
+      );
+
+      expect(freshness.caption, '15-min delayed · updated just now');
+      expect(freshness.shortCaption, '15-min delayed');
+      expect(freshness.caption.toLowerCase(), isNot(contains('real-time')));
+    });
+
+    test('a snapshot that parsed without a delay field still says delayed', () {
+      // delay_seconds absent entirely -> the model default.
+      final parsed = QuoteSnapshot.fromJson(const {
+        'as_of': '2026-08-13T10:00:00Z',
+        'quotes': <String, dynamic>{},
+      });
+
+      expect(parsed.delay, const Duration(seconds: 900));
+    });
+
     test('the elapsed part tracks the clock rather than the poll', () {
       final freshness = PriceFreshness(
         kind: PriceFreshnessKind.live,
@@ -159,14 +188,15 @@ void main() {
       expect(find.textContaining('15-min delayed'), findsOneWidget);
     });
 
-    testWidgets('Market falls back to the last close when the feed is down', (
+    testWidgets('Market falls back to the published prices when the feed is down', (
       tester,
     ) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(harness(const MarketScreen()));
-      await pumpUntil(tester, find.textContaining('Last close'));
+      await pumpUntil(tester, find.textContaining(fixtureSessionDate));
 
-      expect(find.textContaining('Last close'), findsOneWidget);
+      // Dated by the publish, and making no claim about a live feed.
+      expect(find.textContaining(fixtureSessionDate), findsWidgets);
       expect(find.textContaining('delayed'), findsNothing);
     });
 
@@ -185,38 +215,87 @@ void main() {
     });
   });
 
-  group('seeded network source', () {
+  group('the bundled seed', () {
+    const manifest =
+        '{"schema_version":1,"data_version":"v1","versions":{"market":42}}';
+
+    StaticApi api({
+      required Map<String, String> network,
+      Map<String, String> seed = const {},
+      required DocumentCache cache,
+    }) => StaticApi(
+      source: _StubSource(network),
+      cache: cache,
+      seed: _StubSource(seed),
+    );
+
     test('the network answer wins when there is one', () async {
-      final source = SeededNetworkDocumentSource(
-        network: const _StubSource({'a.json': 'from network'}),
-        seed: const _StubSource({'a.json': 'from bundle'}),
+      final api1 = api(
+        network: {'manifest.json': manifest, 'market.json': 'from network'},
+        seed: {'market.json': 'from bundle'},
+        cache: MemoryDocumentCache(),
       );
 
-      expect(await source.fetch('a.json'), 'from network');
+      final snapshot = await api1.loadOnce('market.json', resource: 'market');
+      expect(snapshot!.body, 'from network');
+      expect(snapshot.origin, DocumentOrigin.network);
     });
 
     test('the bundle covers a failed request', () async {
-      final source = SeededNetworkDocumentSource(
-        network: const _StubSource({}),
-        seed: const _StubSource({'a.json': 'from bundle'}),
-      );
+      final snapshot = await api(
+        network: {'manifest.json': manifest},
+        seed: {'market.json': 'from bundle'},
+        cache: MemoryDocumentCache(),
+      ).loadOnce('market.json', resource: 'market');
 
-      expect(await source.fetch('a.json'), 'from bundle');
+      expect(snapshot!.body, 'from bundle');
+      expect(snapshot.origin, DocumentOrigin.fixture);
+    });
+
+    // The regression that matters. Caching the bundle under the live manifest's
+    // version made every later launch believe it already held current data, so
+    // one timed-out fetch on a fresh install froze the app on build-time
+    // content permanently.
+    test('is never written to the cache', () async {
+      final cache = MemoryDocumentCache();
+      await api(
+        network: {'manifest.json': manifest},
+        seed: {'market.json': 'from bundle'},
+        cache: cache,
+      ).loadOnce('market.json', resource: 'market');
+
+      expect(await cache.read('market.json'), isNull);
+    });
+
+    test('a later launch with a working network gets the real document', () async {
+      final cache = MemoryDocumentCache();
+      await api(
+        network: {'manifest.json': manifest},
+        seed: {'market.json': 'from bundle'},
+        cache: cache,
+      ).loadOnce('market.json', resource: 'market');
+
+      // Same cache, network now reachable — as after a bad first launch.
+      final snapshot = await api(
+        network: {'manifest.json': manifest, 'market.json': 'from network'},
+        seed: {'market.json': 'from bundle'},
+        cache: cache,
+      ).loadOnce('market.json', resource: 'market');
+
+      expect(snapshot!.body, 'from network');
     });
 
     test('a miss on both reports the network reason, not the bundle', () async {
-      final source = SeededNetworkDocumentSource(
-        network: const _StubSource({}, reason: 'http 503'),
-        seed: const _StubSource({}),
-      );
-
       await expectLater(
-        source.fetch('a.json'),
+        api(
+          network: {'manifest.json': manifest},
+          cache: MemoryDocumentCache(),
+        ).loadOnce('market.json', resource: 'market'),
         throwsA(
           isA<DocumentUnavailable>().having(
             (e) => e.reason,
             'reason',
-            'http 503',
+            'missing',
           ),
         ),
       );
@@ -225,10 +304,10 @@ void main() {
 }
 
 class _StubSource implements DocumentSource {
-  const _StubSource(this.documents, {this.reason = 'missing'});
+  const _StubSource(this.documents);
 
   final Map<String, String> documents;
-  final String reason;
+  static const String reason = 'missing';
 
   @override
   bool get isRefreshable => true;

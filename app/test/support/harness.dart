@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:barbarian/core/data/user_repository.dart';
@@ -36,6 +37,15 @@ class DiskFixtureSource implements DocumentSource {
     return file.readAsString();
   }
 }
+
+/// The session date carried by the bundled fixtures.
+///
+/// Read from disk rather than written into the tests, because the pipeline
+/// regenerates the fixtures every day and a hardcoded date turns every
+/// caption assertion into a failure the next morning.
+final String fixtureSessionDate =
+    (jsonDecode(File('assets/fixtures/market.json').readAsStringSync())
+        as Map<String, dynamic>)['date'] as String;
 
 /// A quote feed under the test's control.
 ///

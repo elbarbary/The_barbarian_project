@@ -102,6 +102,13 @@ RESOURCES = {
     "cash_or_trash": ["cash-or-trash/index.json"],
 }
 
+# Documents with no manifest counter of their own. They are guarded by
+# `data_version`, so their bytes must be part of it — otherwise a company file
+# can change with the fingerprint standing still, and StaticApi keeps serving
+# the cached copy forever. This is the whole per-company dataset, so the
+# fingerprint moves whenever any one of 282 companies does.
+UNVERSIONED = ["companies", "opportunities/history", "prices"]
+
 
 def content_fingerprint() -> tuple[str, dict]:
     """A version string that changes whenever any published document changes.
@@ -123,13 +130,27 @@ def content_fingerprint() -> tuple[str, dict]:
         h = hashlib.sha256()
         for rel in paths:
             f = API / rel
-            if f.exists():
-                h.update(f.read_bytes())
+            # The path is hashed as well as the bytes, so "file missing" and
+            # "file empty" cannot produce the same digest.
+            h.update(rel.encode())
+            h.update(f.read_bytes() if f.exists() else b"\0absent")
         digest = h.hexdigest()
         parts[name] = digest
         # A stable positive integer per resource, so the per-resource version
         # comparison works the same way the network path does.
         versions[name] = int(digest[:8], 16) % 100_000_000
+
+    # Everything with no counter of its own folds into data_version.
+    h = hashlib.sha256()
+    for folder in UNVERSIONED:
+        base = API / folder
+        if not base.is_dir():
+            continue
+        for f in sorted(base.rglob("*.json")):
+            h.update(str(f.relative_to(API)).encode())
+            h.update(f.read_bytes())
+    parts["_unversioned"] = h.hexdigest()
+
     combined = hashlib.sha256("".join(parts[k] for k in sorted(parts)).encode())
     return combined.hexdigest()[:16], versions
 
@@ -178,12 +199,29 @@ def main() -> int:
         return 1
 
     data_version, versions = content_fingerprint()
+
+    # `generated_at` is kept from the previous manifest when the fingerprint has
+    # not moved, so an unchanged publish produces a byte-identical file.
+    #
+    # It used to be stamped with the clock on every run, which quietly defeated
+    # two things at once: the CI guard checked only whether manifest.json
+    # appeared in the diff, and it always did, so it could never fail; and the
+    # workflow saw a change every run and committed and pushed a no-op. A
+    # timestamp that moves on its own is not evidence that anything happened.
+    generated_at = datetime.datetime.now(datetime.UTC).replace(microsecond=0).isoformat()
+    published = API / "manifest.json"
+    if published.exists():
+        try:
+            previous = json.loads(published.read_text(encoding="utf-8"))
+            if previous.get("data_version") == data_version:
+                generated_at = previous.get("generated_at", generated_at)
+        except (json.JSONDecodeError, OSError):
+            pass
+
     manifest = {
         "schema_version": 1,
         "data_version": data_version,
-        "generated_at": datetime.datetime.now(datetime.UTC)
-        .replace(microsecond=0)
-        .isoformat(),
+        "generated_at": generated_at,
         "market_date": market_date,
         "versions": versions,
     }

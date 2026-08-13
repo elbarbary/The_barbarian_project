@@ -29,9 +29,16 @@ final appConfigProvider = Provider<AppConfig>(
 final documentSourceProvider = Provider<DocumentSource>((ref) {
   final config = ref.watch(appConfigProvider);
   if (config.useBundledFixtures) return const FixtureDocumentSource();
-  return SeededNetworkDocumentSource(
-    network: NetworkDocumentSource(config: config),
-  );
+  return NetworkDocumentSource(config: config);
+});
+
+/// The compiled-in snapshot [StaticApi] falls back to, and never caches.
+///
+/// Null in fixture builds, where the primary source is already the bundle.
+final documentSeedProvider = Provider<DocumentSource?>((ref) {
+  return ref.watch(appConfigProvider).useBundledFixtures
+      ? null
+      : const FixtureDocumentSource();
 });
 
 final documentCacheProvider = Provider<DocumentCache>(
@@ -42,6 +49,7 @@ final staticApiProvider = Provider<StaticApi>(
   (ref) => StaticApi(
     source: ref.watch(documentSourceProvider),
     cache: ref.watch(documentCacheProvider),
+    seed: ref.watch(documentSeedProvider),
   ),
 );
 
@@ -193,15 +201,33 @@ final livePricesProvider = Provider<MarketSnapshot?>((ref) {
 
 /// How the prices currently on screen must be described (spec §49).
 final priceFreshnessProvider = Provider<PriceFreshness>((ref) {
+  return ref.watch(priceFreshnessForProvider(null));
+});
+
+/// The same, narrowed to one company.
+///
+/// The live feed is merged per ticker but the caption was written once for the
+/// whole screen, so a company the feed does not carry — a suspended listing, a
+/// name that dropped off the scan — sat under "15-min delayed" while showing a
+/// price from the daily publish. Passing the ticker makes the caption describe
+/// the number actually above it. Pass null on a screen showing many companies.
+final priceFreshnessForProvider = Provider.family<PriceFreshness, String?>((
+  ref,
+  ticker,
+) {
   if (ref.watch(isSampleDataProvider)) return const PriceFreshness.sample();
 
   final date = ref.watch(marketDateProvider);
+  final published = ref
+      .watch(marketSnapshotProvider)
+      .whenOrNull(data: (s) => s.value);
+  final fallback = date == null
+      ? const PriceFreshness.unknown()
+      : PriceFreshness.published(date, isClose: published?.isClose ?? true);
+
   final live = ref.watch(liveQuotesProvider).whenOrNull(data: (q) => q);
-  if (live == null || live.isEmpty) {
-    return date == null
-        ? const PriceFreshness.unknown()
-        : PriceFreshness.published(date);
-  }
+  if (live == null || live.isEmpty) return fallback;
+  if (ticker != null && !live.quotes.containsKey(ticker)) return fallback;
 
   return PriceFreshness(
     kind: PriceFreshnessKind.live,

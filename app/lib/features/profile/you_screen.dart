@@ -149,9 +149,13 @@ class YouScreen extends ConsumerWidget {
                 children: [
                   _Fact(
                     label: 'Market data',
+                    // Says what is on screen right now, not what the daily
+                    // publish holds. While the feed is reachable these prices
+                    // are minutes old, and calling them "End of day" was
+                    // straightforwardly untrue.
                     value: snapshot == null
                         ? 'Not downloaded'
-                        : 'End of day · ${snapshot.date}',
+                        : ref.watch(priceFreshnessProvider).caption,
                   ),
                   _Fact(
                     label: 'Companies',

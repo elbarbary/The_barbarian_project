@@ -17,7 +17,13 @@ mixin _$MarketSnapshot {
 
 /// Session the closes belong to. This is the date the UI must display —
 /// the app shows the last *available* session, never "now" (spec §49).
- String get date; Map<String, StockQuote> get stocks;
+ String get date;/// Whether these prices are that session's *closing* prices.
+///
+/// False when the scan was taken while the exchange was still trading, in
+/// which case calling them a close is untrue. Defaults to true so an older
+/// document without the field keeps its previous wording.
+@JsonKey(name: 'is_close') bool get isClose;/// When the scan behind these prices was taken.
+@JsonKey(name: 'captured_at') String? get capturedAt; Map<String, StockQuote> get stocks;
 /// Create a copy of MarketSnapshot
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +36,16 @@ $MarketSnapshotCopyWith<MarketSnapshot> get copyWith => _$MarketSnapshotCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSnapshot&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other.stocks, stocks));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSnapshot&&(identical(other.date, date) || other.date == date)&&(identical(other.isClose, isClose) || other.isClose == isClose)&&(identical(other.capturedAt, capturedAt) || other.capturedAt == capturedAt)&&const DeepCollectionEquality().equals(other.stocks, stocks));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(stocks));
+int get hashCode => Object.hash(runtimeType,date,isClose,capturedAt,const DeepCollectionEquality().hash(stocks));
 
 @override
 String toString() {
-  return 'MarketSnapshot(date: $date, stocks: $stocks)';
+  return 'MarketSnapshot(date: $date, isClose: $isClose, capturedAt: $capturedAt, stocks: $stocks)';
 }
 
 
@@ -50,7 +56,7 @@ abstract mixin class $MarketSnapshotCopyWith<$Res>  {
   factory $MarketSnapshotCopyWith(MarketSnapshot value, $Res Function(MarketSnapshot) _then) = _$MarketSnapshotCopyWithImpl;
 @useResult
 $Res call({
- String date, Map<String, StockQuote> stocks
+ String date,@JsonKey(name: 'is_close') bool isClose,@JsonKey(name: 'captured_at') String? capturedAt, Map<String, StockQuote> stocks
 });
 
 
@@ -67,10 +73,12 @@ class _$MarketSnapshotCopyWithImpl<$Res>
 
 /// Create a copy of MarketSnapshot
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? stocks = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? isClose = null,Object? capturedAt = freezed,Object? stocks = null,}) {
   return _then(_self.copyWith(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as String,stocks: null == stocks ? _self.stocks : stocks // ignore: cast_nullable_to_non_nullable
+as String,isClose: null == isClose ? _self.isClose : isClose // ignore: cast_nullable_to_non_nullable
+as bool,capturedAt: freezed == capturedAt ? _self.capturedAt : capturedAt // ignore: cast_nullable_to_non_nullable
+as String?,stocks: null == stocks ? _self.stocks : stocks // ignore: cast_nullable_to_non_nullable
 as Map<String, StockQuote>,
   ));
 }
@@ -156,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date,  Map<String, StockQuote> stocks)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date, @JsonKey(name: 'is_close')  bool isClose, @JsonKey(name: 'captured_at')  String? capturedAt,  Map<String, StockQuote> stocks)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketSnapshot() when $default != null:
-return $default(_that.date,_that.stocks);case _:
+return $default(_that.date,_that.isClose,_that.capturedAt,_that.stocks);case _:
   return orElse();
 
 }
@@ -177,10 +185,10 @@ return $default(_that.date,_that.stocks);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date,  Map<String, StockQuote> stocks)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date, @JsonKey(name: 'is_close')  bool isClose, @JsonKey(name: 'captured_at')  String? capturedAt,  Map<String, StockQuote> stocks)  $default,) {final _that = this;
 switch (_that) {
 case _MarketSnapshot():
-return $default(_that.date,_that.stocks);case _:
+return $default(_that.date,_that.isClose,_that.capturedAt,_that.stocks);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +205,10 @@ return $default(_that.date,_that.stocks);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date,  Map<String, StockQuote> stocks)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date, @JsonKey(name: 'is_close')  bool isClose, @JsonKey(name: 'captured_at')  String? capturedAt,  Map<String, StockQuote> stocks)?  $default,) {final _that = this;
 switch (_that) {
 case _MarketSnapshot() when $default != null:
-return $default(_that.date,_that.stocks);case _:
+return $default(_that.date,_that.isClose,_that.capturedAt,_that.stocks);case _:
   return null;
 
 }
@@ -212,12 +220,20 @@ return $default(_that.date,_that.stocks);case _:
 @JsonSerializable()
 
 class _MarketSnapshot extends MarketSnapshot {
-  const _MarketSnapshot({required this.date, final  Map<String, StockQuote> stocks = const <String, StockQuote>{}}): _stocks = stocks,super._();
+  const _MarketSnapshot({required this.date, @JsonKey(name: 'is_close') this.isClose = true, @JsonKey(name: 'captured_at') this.capturedAt, final  Map<String, StockQuote> stocks = const <String, StockQuote>{}}): _stocks = stocks,super._();
   factory _MarketSnapshot.fromJson(Map<String, dynamic> json) => _$MarketSnapshotFromJson(json);
 
 /// Session the closes belong to. This is the date the UI must display —
 /// the app shows the last *available* session, never "now" (spec §49).
 @override final  String date;
+/// Whether these prices are that session's *closing* prices.
+///
+/// False when the scan was taken while the exchange was still trading, in
+/// which case calling them a close is untrue. Defaults to true so an older
+/// document without the field keeps its previous wording.
+@override@JsonKey(name: 'is_close') final  bool isClose;
+/// When the scan behind these prices was taken.
+@override@JsonKey(name: 'captured_at') final  String? capturedAt;
  final  Map<String, StockQuote> _stocks;
 @override@JsonKey() Map<String, StockQuote> get stocks {
   if (_stocks is EqualUnmodifiableMapView) return _stocks;
@@ -239,16 +255,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSnapshot&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other._stocks, _stocks));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSnapshot&&(identical(other.date, date) || other.date == date)&&(identical(other.isClose, isClose) || other.isClose == isClose)&&(identical(other.capturedAt, capturedAt) || other.capturedAt == capturedAt)&&const DeepCollectionEquality().equals(other._stocks, _stocks));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(_stocks));
+int get hashCode => Object.hash(runtimeType,date,isClose,capturedAt,const DeepCollectionEquality().hash(_stocks));
 
 @override
 String toString() {
-  return 'MarketSnapshot(date: $date, stocks: $stocks)';
+  return 'MarketSnapshot(date: $date, isClose: $isClose, capturedAt: $capturedAt, stocks: $stocks)';
 }
 
 
@@ -259,7 +275,7 @@ abstract mixin class _$MarketSnapshotCopyWith<$Res> implements $MarketSnapshotCo
   factory _$MarketSnapshotCopyWith(_MarketSnapshot value, $Res Function(_MarketSnapshot) _then) = __$MarketSnapshotCopyWithImpl;
 @override @useResult
 $Res call({
- String date, Map<String, StockQuote> stocks
+ String date,@JsonKey(name: 'is_close') bool isClose,@JsonKey(name: 'captured_at') String? capturedAt, Map<String, StockQuote> stocks
 });
 
 
@@ -276,10 +292,12 @@ class __$MarketSnapshotCopyWithImpl<$Res>
 
 /// Create a copy of MarketSnapshot
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? stocks = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? isClose = null,Object? capturedAt = freezed,Object? stocks = null,}) {
   return _then(_MarketSnapshot(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
-as String,stocks: null == stocks ? _self._stocks : stocks // ignore: cast_nullable_to_non_nullable
+as String,isClose: null == isClose ? _self.isClose : isClose // ignore: cast_nullable_to_non_nullable
+as bool,capturedAt: freezed == capturedAt ? _self.capturedAt : capturedAt // ignore: cast_nullable_to_non_nullable
+as String?,stocks: null == stocks ? _self._stocks : stocks // ignore: cast_nullable_to_non_nullable
 as Map<String, StockQuote>,
   ));
 }

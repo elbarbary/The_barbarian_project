@@ -31,6 +31,16 @@ const SCANNER = 'https://scanner.tradingview.com/egypt/scan';
 const FRESH_FOR_SECONDS = 300;
 
 /**
+ * The delay assumed when the feed does not state its tier.
+ *
+ * This is the tier the project actually reads today (`delayed_streaming_900`).
+ * Guessing it is a claim, so it is deliberately the pessimistic one: overstating
+ * the delay costs a reader nothing, understating it tells them a fifteen-minute
+ * price is current.
+ */
+const ASSUMED_DELAY_SECONDS = 900;
+
+/**
  * How long a snapshot may still be served after a failed refresh.
  *
  * Generous on purpose: a stale price that says how stale it is beats an error
@@ -50,6 +60,11 @@ const COLUMNS = [
   'change_abs', // in pounds — asked for so the previous close is read, not inferred
   'update_mode',
 ];
+
+/**
+ * Tickers the app will accept. Mirrors TICKER in scripts/build_market_api.py.
+ */
+const TICKER = /^[A-Z]{3,6}$/;
 
 /** Cache key. A synthetic GET, because the upstream call is a POST. */
 const CACHE_KEY = new Request('https://quotes.thebarbarianproject.com/__snapshot');
@@ -95,6 +110,15 @@ export default {
     const response = json(snapshot, 200, 0);
     const stored = response.clone();
     stored.headers.set('x-snapshot-age-basis', String(Date.now()));
+    // The stored copy must outlive its own freshness, or the degradation path
+    // below can never run: cloning the eyeball response carried its
+    // `s-maxage=FRESH_FOR_SECONDS`, so the entry was evicted at the same instant
+    // it stopped being fresh and every upstream outage past five minutes turned
+    // into a 503 with no fallback. Keep it for the whole serve-stale window.
+    stored.headers.set(
+      'cache-control',
+      `public, s-maxage=${SERVE_STALE_FOR_SECONDS}`,
+    );
     ctx.waitUntil(cache.put(CACHE_KEY, stored));
     return response;
   },
@@ -121,10 +145,16 @@ async function readMarket() {
   const modes = new Set();
   for (const row of payload.data) {
     const v = Object.fromEntries(COLUMNS.map((c, i) => [c, row.d[i]]));
-    // A name with no price is not a quote. Ten or so EGX rows come back keyed
-    // by ISIN with nothing attached; they are dropped here as they are in the
-    // daily build, so the app never has to reason about half-rows.
+    // A name with no price is not a quote, and a name that is really an ISIN is
+    // not a ticker. Ten or so EGX rows come back keyed like `EGS385S1C012`.
+    //
+    // This must match TICKER in scripts/build_market_api.py exactly. The comment
+    // here used to claim the rows were dropped while the code only checked for a
+    // price, so the feed reintroduced ten listings the directory excludes —
+    // `mergedOver` put them straight into the app's stock map and Home counted
+    // them in its risers-and-fallers breadth.
     if (!v.name || typeof v.close !== 'number') continue;
+    if (!TICKER.test(v.name)) continue;
     if (v.update_mode) modes.add(v.update_mode);
     quotes[v.name] = {
       c: round(v.close),
@@ -162,19 +192,41 @@ async function readMarket() {
 }
 
 /**
- * `delayed_streaming_900` → 900. `streaming`/`real_time` → 0.
+ * `delayed_streaming_900` → 900. Real-time tiers → 0.
  *
  * If several tiers come back at once the worst one wins: the caption has to be
  * true of every price on the screen, not of the best one.
+ *
+ * **Fails closed.** An empty set means the feed stopped telling us its tier —
+ * because the column was renamed, or removed, or came back null — and the one
+ * answer that must never be produced in that case is zero, which the app renders
+ * as "Real-time" beside prices that are still a quarter of an hour old. An
+ * unknown tier is assumed to be the delayed one we actually license.
+ *
+ * The upstream does not error on an unknown column: requesting a renamed
+ * `update_mode` returns HTTP 200 with `null` in that slot, so neither the status
+ * check nor the shape check catches it. This is the only guard.
  */
 function delayFromModes(modes) {
+  if (modes.size === 0) return ASSUMED_DELAY_SECONDS;
+
   let worst = 0;
+  let recognised = false;
   for (const mode of modes) {
-    const m = /(\d+)/.exec(String(mode));
-    if (m) worst = Math.max(worst, Number(m[1]));
-    else if (!/stream|real/i.test(String(mode))) worst = Math.max(worst, 900);
+    const text = String(mode);
+    const m = /(\d+)/.exec(text);
+    if (m) {
+      worst = Math.max(worst, Number(m[1]));
+      recognised = true;
+    } else if (/^(streaming|real[_-]?time)$/i.test(text.trim())) {
+      // An explicitly real-time tier is the only way to reach zero.
+      recognised = true;
+    } else {
+      worst = Math.max(worst, ASSUMED_DELAY_SECONDS);
+      recognised = true;
+    }
   }
-  return worst;
+  return recognised ? worst : ASSUMED_DELAY_SECONDS;
 }
 
 /**

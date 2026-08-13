@@ -118,8 +118,32 @@ different quantities and showing only one of them misleads. The number comes fro
 the feed's own tag rather than a constant, so if the tier ever changes the caption
 follows without a release.
 
-Outside trading hours the caption says *Market closed · last close …* instead:
-a "delayed" price implies a tape that is running.
+**Reading the tier fails closed, in two places.** If the feed stops stating it —
+the column renamed, removed, or returned null — `delayFromModes` returns
+`ASSUMED_DELAY_SECONDS` (900) rather than zero, and `PriceFreshness._delayLabel`
+treats a zero delay as unknown and prints the assumed delay too. Neither ever
+prints "Real-time". This is deliberate belt-and-braces: the upstream answers
+HTTP 200 with `null` for an unknown column, so no status or shape check catches
+it, and a zero would otherwise put "Real-time" beside a quarter-hour-old price —
+precisely the claim spec §49 exists to prevent. The app holds no real-time
+licence, so zero is far likelier to be a missing field than an upgrade.
+
+Wording changes with what is actually on screen:
+
+| state | caption |
+| --- | --- |
+| trading, feed reached | `15-min delayed · updated 3 min ago` |
+| outside trading hours | `Market closed · last close 2026-08-13` |
+| no feed, scan after the close | `Last close · 2026-08-13` |
+| no feed, scan taken mid-session | `During session · 2026-08-13` |
+
+That last row matters: the scan runs on the monitor's schedule, not the
+exchange's, so `market.json` carries `is_close` and the app stops calling a
+mid-morning reading that day's close.
+
+`BPriceCaption` takes an optional `ticker`. Pass it wherever one company is on
+screen — the feed is merged per ticker, so a name it does not carry must not sit
+under a caption claiming a live price.
 
 ### The quote Worker
 

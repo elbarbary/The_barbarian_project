@@ -18,7 +18,16 @@ import 'text.dart';
 /// *now*, and a widget that only rebuilds when new data arrives would keep
 /// saying "updated just now" for the whole five minutes between polls.
 class BPriceCaption extends ConsumerStatefulWidget {
-  const BPriceCaption({this.onDark = false, this.short = false, super.key});
+  const BPriceCaption({
+    this.ticker,
+    this.onDark = false,
+    this.short = false,
+    super.key,
+  });
+
+  /// Narrows the claim to one company, so a name the feed does not carry is not
+  /// described as live. Leave null on a screen listing many companies.
+  final String? ticker;
 
   final bool onDark;
 
@@ -51,7 +60,7 @@ class _BPriceCaptionState extends ConsumerState<BPriceCaption> {
 
   @override
   Widget build(BuildContext context) {
-    final freshness = ref.watch(priceFreshnessProvider);
+    final freshness = ref.watch(priceFreshnessForProvider(widget.ticker));
     final caption = widget.short ? freshness.shortCaption : freshness.caption;
     if (caption.isEmpty) return const SizedBox.shrink();
 

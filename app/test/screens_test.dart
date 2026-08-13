@@ -66,13 +66,18 @@ void main() {
       expect(find.byType(BEmptyState), findsOneWidget);
     });
 
-    testWidgets('labels the data as end-of-day, never as live', (tester) async {
+    // The wording depends on when the scan was taken — "Last close" after the
+    // session, "During session" while it was still trading — so this asserts
+    // the invariant rather than one phrasing: the prices are dated, and nothing
+    // on screen calls them live.
+    testWidgets('dates its prices and never calls them live', (tester) async {
       await pumpScreen(
         tester,
         const MarketScreen(),
-        until: find.textContaining('Last close'),
+        until: find.textContaining(fixtureSessionDate),
       );
 
+      expect(find.textContaining(fixtureSessionDate), findsWidgets);
       expect(find.textContaining('Live'), findsNothing);
       expect(find.textContaining('Real-time'), findsNothing);
       expect(find.textContaining('delayed 15 min'), findsNothing);
@@ -193,10 +198,11 @@ void main() {
       await pumpScreen(
         tester,
         const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.market),
-        until: find.textContaining('Last close'),
+        until: find.textContaining(fixtureSessionDate),
       );
 
-      expect(find.textContaining('Last close'), findsWidgets);
+      expect(find.textContaining(fixtureSessionDate), findsWidgets);
+      expect(find.textContaining('Real-time'), findsNothing);
     });
 
     testWidgets('a company with no research says so plainly', (tester) async {

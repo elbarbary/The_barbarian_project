@@ -9,6 +9,8 @@ part of 'market_snapshot.dart';
 _MarketSnapshot _$MarketSnapshotFromJson(Map<String, dynamic> json) =>
     _MarketSnapshot(
       date: json['date'] as String,
+      isClose: json['is_close'] as bool? ?? true,
+      capturedAt: json['captured_at'] as String?,
       stocks:
           (json['stocks'] as Map<String, dynamic>?)?.map(
             (k, e) =>
@@ -18,7 +20,12 @@ _MarketSnapshot _$MarketSnapshotFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$MarketSnapshotToJson(_MarketSnapshot instance) =>
-    <String, dynamic>{'date': instance.date, 'stocks': instance.stocks};
+    <String, dynamic>{
+      'date': instance.date,
+      'is_close': instance.isClose,
+      'captured_at': instance.capturedAt,
+      'stocks': instance.stocks,
+    };
 
 _StockQuote _$StockQuoteFromJson(Map<String, dynamic> json) => _StockQuote(
   close: (json['close'] as num).toDouble(),

@@ -13,6 +13,16 @@ abstract class MarketSnapshot with _$MarketSnapshot {
     /// Session the closes belong to. This is the date the UI must display —
     /// the app shows the last *available* session, never "now" (spec §49).
     required String date,
+
+    /// Whether these prices are that session's *closing* prices.
+    ///
+    /// False when the scan was taken while the exchange was still trading, in
+    /// which case calling them a close is untrue. Defaults to true so an older
+    /// document without the field keeps its previous wording.
+    @JsonKey(name: 'is_close') @Default(true) bool isClose,
+
+    /// When the scan behind these prices was taken.
+    @JsonKey(name: 'captured_at') String? capturedAt,
     @Default(<String, StockQuote>{}) Map<String, StockQuote> stocks,
   }) = _MarketSnapshot;
 
