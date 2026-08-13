@@ -47,6 +47,15 @@ final String fixtureSessionDate =
     (jsonDecode(File('assets/fixtures/market.json').readAsStringSync())
         as Map<String, dynamic>)['date'] as String;
 
+/// Reads a bundled fixture straight off disk and decodes it.
+///
+/// Same reasoning as [DiskFixtureSource]: `rootBundle` is unreliable across a
+/// widget-test run, and these assertions are about the published bytes rather
+/// than about asset loading.
+Future<Map<String, dynamic>> readFixtureObject(String path) async =>
+    jsonDecode(await File('assets/fixtures/$path').readAsString())
+        as Map<String, dynamic>;
+
 /// A quote feed under the test's control.
 ///
 /// The real one reaches the network, and a widget test that makes an HTTP call

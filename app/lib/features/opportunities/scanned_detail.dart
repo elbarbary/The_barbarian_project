@@ -11,6 +11,7 @@ import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import 'opportunity_screen.dart';
 
 /// The full record behind one scanned name.
 ///
@@ -151,6 +152,87 @@ class ScannedDetailSheet extends ConsumerWidget {
               Text(
                 h,
                 style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
+              ),
+            ],
+            if (entry.tape case final ScanTape tape) ...[
+              const SizedBox(height: 16),
+              BPaperCard(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tape.label ?? 'Last completed session',
+                            style: BarbarianType.labelNano.copyWith(
+                              color: c.textMuted,
+                            ),
+                          ),
+                          if (tape.detail case final String detail) ...[
+                            const SizedBox(height: 4),
+                            Text(
+                              detail,
+                              style: BarbarianType.bodyS.copyWith(
+                                color: c.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                    if (tape.price case final String price) ...[
+                      const SizedBox(width: 12),
+                      BNumText(
+                        price,
+                        style: BarbarianType.figureS.copyWith(
+                          color: c.textPrimary,
+                        ),
+                        isolate: false,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+            if (entry.gates.isNotEmpty) ...[
+              const SizedBox(height: 22),
+              const BSectionLabel('What was checked'),
+              BScanGates(gates: entry.gates),
+            ],
+            if (entry.research.isNotEmpty) ...[
+              const SizedBox(height: 22),
+              const BSectionLabel('The research in full'),
+              BPaperCard(
+                radius: BarbarianRadius.xl,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for (var i = 0; i < entry.research.length; i++) ...[
+                      if (i > 0) const SizedBox(height: 18),
+                      if (entry.research[i].heading case final String h) ...[
+                        Text(
+                          h,
+                          style: BarbarianType.labelS.copyWith(
+                            color: c.textPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                      ],
+                      for (final para in entry.research[i].body) ...[
+                        Text(
+                          para,
+                          style: BarbarianType.bodyM.copyWith(
+                            color: c.textSecondary,
+                          ),
+                        ),
+                        if (para != entry.research[i].body.last)
+                          const SizedBox(height: 10),
+                      ],
+                    ],
+                  ],
+                ),
               ),
             ],
             if (entry.researchSummary case final String summary) ...[

@@ -118,6 +118,11 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                     ),
                   ),
                 ],
+                if (report.sector case final SectorContext sector)
+                  if (!sector.isEmpty) ...[
+                    const SizedBox(height: 18),
+                    _SectorCard(sector: sector),
+                  ],
                 const SizedBox(height: 18),
                 _CoverageStrip(report: report),
                 const SizedBox(height: 18),
@@ -367,6 +372,13 @@ class _ScannedCard extends StatelessWidget {
                 style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
               ),
             ],
+            // The gates say *why* a name scores what it scores, which is the
+            // question the score itself provokes. Worth the room on the card
+            // rather than only inside the sheet.
+            if (entry.gates.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              BScanGates(gates: entry.gates),
+            ],
             if (entry.scores.breakdown.any((e) => e.value != 0)) ...[
               const SizedBox(height: 14),
               _RubricBreakdown(scores: entry.scores),
@@ -585,6 +597,240 @@ class _RubricBreakdown extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+      ],
+    );
+  }
+}
+
+/// A cohort the report read as one story.
+///
+/// Given its own card rather than folded into a note, because "four names moved
+/// together for one reason" is a different kind of finding from "this company
+/// did something" — and because the report's own framing is that it scores
+/// nothing. That framing leads, so nobody reads the card as a recommendation.
+class _SectorCard extends StatelessWidget {
+  const _SectorCard({required this.sector});
+
+  final SectorContext sector;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (sector.kicker case final String kicker)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                kicker.toUpperCase(),
+                style: BarbarianType.labelNano.copyWith(color: c.violet),
+              ),
+            ),
+          Text(
+            sector.title,
+            style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
+          ),
+          if (sector.thesis case final String thesis) ...[
+            const SizedBox(height: 10),
+            Text(
+              thesis,
+              style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
+            ),
+          ],
+          if (sector.members.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final member in sector.members)
+                  _SectorMemberChip(member: member),
+              ],
+            ),
+          ],
+          if (sector.timeline.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            for (var i = 0; i < sector.timeline.length; i++)
+              Container(
+                padding: EdgeInsets.only(
+                  top: i == 0 ? 0 : 10,
+                  bottom: i == sector.timeline.length - 1 ? 0 : 10,
+                ),
+                foregroundDecoration: i == sector.timeline.length - 1
+                    ? null
+                    : BHairline.rowBottom(context),
+                child: _SectorFactRow(fact: sector.timeline[i]),
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SectorMemberChip extends StatelessWidget {
+  const _SectorMemberChip({required this.member});
+
+  final SectorMember member;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Container(
+      padding: const EdgeInsets.fromLTRB(11, 8, 11, 9),
+      decoration: BoxDecoration(
+        color: c.violet.withValues(alpha: c.isDark ? 0.16 : 0.09),
+        borderRadius: BorderRadius.circular(BarbarianRadius.sm),
+        border: Border.all(color: c.violet.withValues(alpha: 0.28)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                member.ticker,
+                style: BarbarianType.labelS.copyWith(color: c.textPrimary),
+              ),
+              if (member.price case final String price) ...[
+                const SizedBox(width: 8),
+                BNumText(
+                  price,
+                  style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
+                  isolate: false,
+                ),
+              ],
+            ],
+          ),
+          if (member.role case final String role) ...[
+            const SizedBox(height: 3),
+            Text(
+              role,
+              style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SectorFactRow extends StatelessWidget {
+  const _SectorFactRow({required this.fact});
+
+  final SectorFact fact;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 92,
+          child: Text(
+            fact.label,
+            style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                fact.value,
+                style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
+              ),
+              if (fact.detail case final String detail) ...[
+                const SizedBox(height: 2),
+                Text(
+                  detail,
+                  style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// The report's evidence checklist for one name.
+///
+/// Each line states what was checked and how it came out, with a mark as well
+/// as a colour so the result survives without it (spec §42).
+class BScanGates extends StatelessWidget {
+  const BScanGates({required this.gates, this.onDark = false, super.key});
+
+  final List<ScanGate> gates;
+  final bool onDark;
+
+  @override
+  Widget build(BuildContext context) {
+    if (gates.isEmpty) return const SizedBox.shrink();
+    final c = context.colors;
+
+    return Wrap(
+      spacing: 7,
+      runSpacing: 7,
+      children: [
+        for (final gate in gates)
+          Builder(
+            builder: (context) {
+              final tone = switch (gate.outcome) {
+                'pass' => c.up,
+                'fail' => c.down,
+                _ => onDark ? c.accentOnInk : c.violet,
+              };
+              final mark = switch (gate.outcome) {
+                'pass' => '✓',
+                'fail' => '✕',
+                _ => '!',
+              };
+              return Container(
+                padding: const EdgeInsets.fromLTRB(9, 5, 11, 6),
+                // A gate label is a sentence fragment — "Closed too far from
+                // the high" — and on a 320pt screen the longest of them is
+                // wider than the column. Bounding the chip lets the label wrap
+                // inside it instead of overflowing the row.
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width - 76,
+                ),
+                decoration: BoxDecoration(
+                  color: tone.withValues(alpha: c.isDark ? 0.16 : 0.10),
+                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
+                  border: Border.all(color: tone.withValues(alpha: 0.30)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      mark,
+                      style: BarbarianType.labelNano.copyWith(color: tone),
+                    ),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        gate.label,
+                        style: BarbarianType.bodyS.copyWith(
+                          color: onDark ? c.onInk : c.textSecondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
       ],
     );

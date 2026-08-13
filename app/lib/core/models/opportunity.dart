@@ -22,6 +22,8 @@ abstract class OpportunityReport with _$OpportunityReport {
     @Default(<RubricComponent>[]) List<RubricComponent> rubric,
     /// The bands and the reasoning that make the rubric mean something.
     @Default(ScoringGuide()) ScoringGuide scoring,
+    /// A cohort the report read as one story rather than four names.
+    SectorContext? sector,
     @Default(ScannerCoverage()) ScannerCoverage coverage,
     @Default(ScannerSummary()) ScannerSummary summary,
     @Default(<ScannedCompany>[]) List<ScannedCompany> qualified,
@@ -140,6 +142,20 @@ abstract class ScannedCompany with _$ScannedCompany {
     @JsonKey(name: 'published_at') DateTime? publishedAt,
     @Default(ScanScores()) ScanScores scores,
     @JsonKey(name: 'research_summary') String? researchSummary,
+
+    /// What was checked and what it showed — the report's own evidence
+    /// checklist. Facts about the past, not conditions for a trade.
+    @Default(<ScanGate>[]) List<ScanGate> gates,
+
+    /// The reasoning written out in full, keeping the report's own sections.
+    ///
+    /// Sections whose whole subject is what must happen before a trade are
+    /// dropped at ingestion, so what is here is why the name is being looked
+    /// at and what the tape actually did (spec §8).
+    @Default(<ResearchSection>[]) List<ResearchSection> research,
+
+    /// The completed session this name was last read on.
+    ScanTape? tape,
     @Default(<ResearchSource>[]) List<ResearchSource> sources,
   }) = _ScannedCompany;
 
@@ -291,4 +307,130 @@ abstract class ResearchSource with _$ResearchSource {
       _$ResearchSourceFromJson(json);
 
   bool get isLinked => (url ?? '').isNotEmpty;
+}
+
+/// One line of the report's evidence checklist.
+///
+/// A gate records something that was **checked and settled** — earnings
+/// verified, volume below three times normal, closed too far from the high. It
+/// is a statement about a completed session, which is why it belongs in the app
+/// while the entry and stop levels beside it on the website do not (spec §8).
+@freezed
+abstract class ScanGate with _$ScanGate {
+  const factory ScanGate({
+    required String label,
+
+    /// `pass`, `fail`, or `warn` — the report's own three states.
+    @Default('warn') String outcome,
+  }) = _ScanGate;
+
+  const ScanGate._();
+
+  factory ScanGate.fromJson(Map<String, dynamic> json) =>
+      _$ScanGateFromJson(json);
+
+  bool get passed => outcome == 'pass';
+  bool get failed => outcome == 'fail';
+}
+
+/// The completed session a scanned name was last read on.
+@freezed
+abstract class ScanTape with _$ScanTape {
+  const factory ScanTape({
+    /// e.g. "12 Aug close".
+    String? label,
+
+    /// Pre-formatted by the publisher, currency and all.
+    String? price,
+
+    /// e.g. "+1.77% · volume 1.22× normal · closed 41% up its range".
+    String? detail,
+  }) = _ScanTape;
+
+  const ScanTape._();
+
+  factory ScanTape.fromJson(Map<String, dynamic> json) =>
+      _$ScanTapeFromJson(json);
+}
+
+/// Several names read as one story.
+///
+/// A sector cohort is a finding no single-name card can carry: four companies
+/// moving together for one reason is evidence about the reason. The report
+/// publishes it with its own rotation stage and evidence trail, and the app
+/// shows it as its own block rather than folding it into a note.
+///
+/// It carries no entry, stop or holding clock. The website's version of this
+/// block has all three; they are dropped at ingestion (spec §8).
+@freezed
+abstract class SectorContext with _$SectorContext {
+  const factory SectorContext({
+    required String title,
+
+    /// e.g. "Sector context · zero qualification points" — the report's own
+    /// framing, which says plainly that this scores nothing.
+    String? kicker,
+    String? thesis,
+
+    /// Rotation stage, first leader, breadth peer, fresh filing.
+    @Default(<SectorFact>[]) List<SectorFact> timeline,
+    @Default(<SectorMember>[]) List<SectorMember> members,
+  }) = _SectorContext;
+
+  const SectorContext._();
+
+  factory SectorContext.fromJson(Map<String, dynamic> json) =>
+      _$SectorContextFromJson(json);
+
+  bool get isEmpty => timeline.isEmpty && members.isEmpty;
+}
+
+/// A labelled row of the sector's evidence trail.
+@freezed
+abstract class SectorFact with _$SectorFact {
+  const factory SectorFact({
+    required String label,
+    required String value,
+    String? detail,
+  }) = _SectorFact;
+
+  const SectorFact._();
+
+  factory SectorFact.fromJson(Map<String, dynamic> json) =>
+      _$SectorFactFromJson(json);
+}
+
+/// One company inside a sector cohort, and the part it plays in it.
+@freezed
+abstract class SectorMember with _$SectorMember {
+  const factory SectorMember({
+    required String ticker,
+
+    /// "Tape leader", "Direct peer", "Extended peer", "Mixed filing".
+    String? role,
+    String? price,
+
+    /// Whatever qualifies the price — "provisional", most often, because these
+    /// are read mid-session.
+    String? qualifier,
+  }) = _SectorMember;
+
+  const SectorMember._();
+
+  factory SectorMember.fromJson(Map<String, dynamic> json) =>
+      _$SectorMemberFromJson(json);
+}
+
+/// One headed part of a name's written research.
+@freezed
+abstract class ResearchSection with _$ResearchSection {
+  const factory ResearchSection({
+    String? heading,
+    @Default(<String>[]) List<String> body,
+  }) = _ResearchSection;
+
+  const ResearchSection._();
+
+  factory ResearchSection.fromJson(Map<String, dynamic> json) =>
+      _$ResearchSectionFromJson(json);
 }

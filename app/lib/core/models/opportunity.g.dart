@@ -22,6 +22,9 @@ _OpportunityReport _$OpportunityReportFromJson(Map<String, dynamic> json) =>
       scoring: json['scoring'] == null
           ? const ScoringGuide()
           : ScoringGuide.fromJson(json['scoring'] as Map<String, dynamic>),
+      sector: json['sector'] == null
+          ? null
+          : SectorContext.fromJson(json['sector'] as Map<String, dynamic>),
       coverage: json['coverage'] == null
           ? const ScannerCoverage()
           : ScannerCoverage.fromJson(json['coverage'] as Map<String, dynamic>),
@@ -58,6 +61,7 @@ Map<String, dynamic> _$OpportunityReportToJson(_OpportunityReport instance) =>
       'masthead_date': instance.mastheadDate,
       'rubric': instance.rubric,
       'scoring': instance.scoring,
+      'sector': instance.sector,
       'coverage': instance.coverage,
       'summary': instance.summary,
       'qualified': instance.qualified,
@@ -112,6 +116,19 @@ _ScannedCompany _$ScannedCompanyFromJson(Map<String, dynamic> json) =>
           ? const ScanScores()
           : ScanScores.fromJson(json['scores'] as Map<String, dynamic>),
       researchSummary: json['research_summary'] as String?,
+      gates:
+          (json['gates'] as List<dynamic>?)
+              ?.map((e) => ScanGate.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <ScanGate>[],
+      research:
+          (json['research'] as List<dynamic>?)
+              ?.map((e) => ResearchSection.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <ResearchSection>[],
+      tape: json['tape'] == null
+          ? null
+          : ScanTape.fromJson(json['tape'] as Map<String, dynamic>),
       sources:
           (json['sources'] as List<dynamic>?)
               ?.map((e) => ResearchSource.fromJson(e as Map<String, dynamic>))
@@ -133,6 +150,9 @@ Map<String, dynamic> _$ScannedCompanyToJson(_ScannedCompany instance) =>
       'published_at': instance.publishedAt?.toIso8601String(),
       'scores': instance.scores,
       'research_summary': instance.researchSummary,
+      'gates': instance.gates,
+      'research': instance.research,
+      'tape': instance.tape,
       'sources': instance.sources,
     };
 
@@ -222,3 +242,91 @@ _ResearchSource _$ResearchSourceFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ResearchSourceToJson(_ResearchSource instance) =>
     <String, dynamic>{'name': instance.name, 'url': instance.url};
+
+_ScanGate _$ScanGateFromJson(Map<String, dynamic> json) => _ScanGate(
+  label: json['label'] as String,
+  outcome: json['outcome'] as String? ?? 'warn',
+);
+
+Map<String, dynamic> _$ScanGateToJson(_ScanGate instance) => <String, dynamic>{
+  'label': instance.label,
+  'outcome': instance.outcome,
+};
+
+_ScanTape _$ScanTapeFromJson(Map<String, dynamic> json) => _ScanTape(
+  label: json['label'] as String?,
+  price: json['price'] as String?,
+  detail: json['detail'] as String?,
+);
+
+Map<String, dynamic> _$ScanTapeToJson(_ScanTape instance) => <String, dynamic>{
+  'label': instance.label,
+  'price': instance.price,
+  'detail': instance.detail,
+};
+
+_SectorContext _$SectorContextFromJson(Map<String, dynamic> json) =>
+    _SectorContext(
+      title: json['title'] as String,
+      kicker: json['kicker'] as String?,
+      thesis: json['thesis'] as String?,
+      timeline:
+          (json['timeline'] as List<dynamic>?)
+              ?.map((e) => SectorFact.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <SectorFact>[],
+      members:
+          (json['members'] as List<dynamic>?)
+              ?.map((e) => SectorMember.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <SectorMember>[],
+    );
+
+Map<String, dynamic> _$SectorContextToJson(_SectorContext instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'kicker': instance.kicker,
+      'thesis': instance.thesis,
+      'timeline': instance.timeline,
+      'members': instance.members,
+    };
+
+_SectorFact _$SectorFactFromJson(Map<String, dynamic> json) => _SectorFact(
+  label: json['label'] as String,
+  value: json['value'] as String,
+  detail: json['detail'] as String?,
+);
+
+Map<String, dynamic> _$SectorFactToJson(_SectorFact instance) =>
+    <String, dynamic>{
+      'label': instance.label,
+      'value': instance.value,
+      'detail': instance.detail,
+    };
+
+_SectorMember _$SectorMemberFromJson(Map<String, dynamic> json) =>
+    _SectorMember(
+      ticker: json['ticker'] as String,
+      role: json['role'] as String?,
+      price: json['price'] as String?,
+      qualifier: json['qualifier'] as String?,
+    );
+
+Map<String, dynamic> _$SectorMemberToJson(_SectorMember instance) =>
+    <String, dynamic>{
+      'ticker': instance.ticker,
+      'role': instance.role,
+      'price': instance.price,
+      'qualifier': instance.qualifier,
+    };
+
+_ResearchSection _$ResearchSectionFromJson(Map<String, dynamic> json) =>
+    _ResearchSection(
+      heading: json['heading'] as String?,
+      body:
+          (json['body'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const <String>[],
+    );
+
+Map<String, dynamic> _$ResearchSectionToJson(_ResearchSection instance) =>
+    <String, dynamic>{'heading': instance.heading, 'body': instance.body};

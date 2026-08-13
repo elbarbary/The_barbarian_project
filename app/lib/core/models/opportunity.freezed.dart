@@ -20,7 +20,8 @@ mixin _$OpportunityReport {
 /// newest date the report actually carries and is what the app shows.
 @JsonKey(name: 'masthead_date') String? get mastheadDate;/// How a name is scored — the nine published components (spec §50).
  List<RubricComponent> get rubric;/// The bands and the reasoning that make the rubric mean something.
- ScoringGuide get scoring; ScannerCoverage get coverage; ScannerSummary get summary; List<ScannedCompany> get qualified; List<ScannedCompany> get watching; List<ScannedCompany> get rejected;/// The published track record, wins and misses alike (spec §7).
+ ScoringGuide get scoring;/// A cohort the report read as one story rather than four names.
+ SectorContext? get sector; ScannerCoverage get coverage; ScannerSummary get summary; List<ScannedCompany> get qualified; List<ScannedCompany> get watching; List<ScannedCompany> get rejected;/// The published track record, wins and misses alike (spec §7).
  List<ScanOutcome> get outcomes;
 /// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
@@ -34,16 +35,16 @@ $OpportunityReportCopyWith<OpportunityReport> get copyWith => _$OpportunityRepor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpportunityReport&&(identical(other.date, date) || other.date == date)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.mastheadDate, mastheadDate) || other.mastheadDate == mastheadDate)&&const DeepCollectionEquality().equals(other.rubric, rubric)&&(identical(other.scoring, scoring) || other.scoring == scoring)&&(identical(other.coverage, coverage) || other.coverage == coverage)&&(identical(other.summary, summary) || other.summary == summary)&&const DeepCollectionEquality().equals(other.qualified, qualified)&&const DeepCollectionEquality().equals(other.watching, watching)&&const DeepCollectionEquality().equals(other.rejected, rejected)&&const DeepCollectionEquality().equals(other.outcomes, outcomes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpportunityReport&&(identical(other.date, date) || other.date == date)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.mastheadDate, mastheadDate) || other.mastheadDate == mastheadDate)&&const DeepCollectionEquality().equals(other.rubric, rubric)&&(identical(other.scoring, scoring) || other.scoring == scoring)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.coverage, coverage) || other.coverage == coverage)&&(identical(other.summary, summary) || other.summary == summary)&&const DeepCollectionEquality().equals(other.qualified, qualified)&&const DeepCollectionEquality().equals(other.watching, watching)&&const DeepCollectionEquality().equals(other.rejected, rejected)&&const DeepCollectionEquality().equals(other.outcomes, outcomes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,updatedAt,headline,mastheadDate,const DeepCollectionEquality().hash(rubric),scoring,coverage,summary,const DeepCollectionEquality().hash(qualified),const DeepCollectionEquality().hash(watching),const DeepCollectionEquality().hash(rejected),const DeepCollectionEquality().hash(outcomes));
+int get hashCode => Object.hash(runtimeType,date,updatedAt,headline,mastheadDate,const DeepCollectionEquality().hash(rubric),scoring,sector,coverage,summary,const DeepCollectionEquality().hash(qualified),const DeepCollectionEquality().hash(watching),const DeepCollectionEquality().hash(rejected),const DeepCollectionEquality().hash(outcomes));
 
 @override
 String toString() {
-  return 'OpportunityReport(date: $date, updatedAt: $updatedAt, headline: $headline, mastheadDate: $mastheadDate, rubric: $rubric, scoring: $scoring, coverage: $coverage, summary: $summary, qualified: $qualified, watching: $watching, rejected: $rejected, outcomes: $outcomes)';
+  return 'OpportunityReport(date: $date, updatedAt: $updatedAt, headline: $headline, mastheadDate: $mastheadDate, rubric: $rubric, scoring: $scoring, sector: $sector, coverage: $coverage, summary: $summary, qualified: $qualified, watching: $watching, rejected: $rejected, outcomes: $outcomes)';
 }
 
 
@@ -54,11 +55,11 @@ abstract mixin class $OpportunityReportCopyWith<$Res>  {
   factory $OpportunityReportCopyWith(OpportunityReport value, $Res Function(OpportunityReport) _then) = _$OpportunityReportCopyWithImpl;
 @useResult
 $Res call({
- String? date,@JsonKey(name: 'updated_at') DateTime? updatedAt, String? headline,@JsonKey(name: 'masthead_date') String? mastheadDate, List<RubricComponent> rubric, ScoringGuide scoring, ScannerCoverage coverage, ScannerSummary summary, List<ScannedCompany> qualified, List<ScannedCompany> watching, List<ScannedCompany> rejected, List<ScanOutcome> outcomes
+ String? date,@JsonKey(name: 'updated_at') DateTime? updatedAt, String? headline,@JsonKey(name: 'masthead_date') String? mastheadDate, List<RubricComponent> rubric, ScoringGuide scoring, SectorContext? sector, ScannerCoverage coverage, ScannerSummary summary, List<ScannedCompany> qualified, List<ScannedCompany> watching, List<ScannedCompany> rejected, List<ScanOutcome> outcomes
 });
 
 
-$ScoringGuideCopyWith<$Res> get scoring;$ScannerCoverageCopyWith<$Res> get coverage;$ScannerSummaryCopyWith<$Res> get summary;
+$ScoringGuideCopyWith<$Res> get scoring;$SectorContextCopyWith<$Res>? get sector;$ScannerCoverageCopyWith<$Res> get coverage;$ScannerSummaryCopyWith<$Res> get summary;
 
 }
 /// @nodoc
@@ -71,7 +72,7 @@ class _$OpportunityReportCopyWithImpl<$Res>
 
 /// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = freezed,Object? updatedAt = freezed,Object? headline = freezed,Object? mastheadDate = freezed,Object? rubric = null,Object? scoring = null,Object? coverage = null,Object? summary = null,Object? qualified = null,Object? watching = null,Object? rejected = null,Object? outcomes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = freezed,Object? updatedAt = freezed,Object? headline = freezed,Object? mastheadDate = freezed,Object? rubric = null,Object? scoring = null,Object? sector = freezed,Object? coverage = null,Object? summary = null,Object? qualified = null,Object? watching = null,Object? rejected = null,Object? outcomes = null,}) {
   return _then(_self.copyWith(
 date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -79,7 +80,8 @@ as DateTime?,headline: freezed == headline ? _self.headline : headline // ignore
 as String?,mastheadDate: freezed == mastheadDate ? _self.mastheadDate : mastheadDate // ignore: cast_nullable_to_non_nullable
 as String?,rubric: null == rubric ? _self.rubric : rubric // ignore: cast_nullable_to_non_nullable
 as List<RubricComponent>,scoring: null == scoring ? _self.scoring : scoring // ignore: cast_nullable_to_non_nullable
-as ScoringGuide,coverage: null == coverage ? _self.coverage : coverage // ignore: cast_nullable_to_non_nullable
+as ScoringGuide,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as SectorContext?,coverage: null == coverage ? _self.coverage : coverage // ignore: cast_nullable_to_non_nullable
 as ScannerCoverage,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
 as ScannerSummary,qualified: null == qualified ? _self.qualified : qualified // ignore: cast_nullable_to_non_nullable
 as List<ScannedCompany>,watching: null == watching ? _self.watching : watching // ignore: cast_nullable_to_non_nullable
@@ -96,6 +98,18 @@ $ScoringGuideCopyWith<$Res> get scoring {
   
   return $ScoringGuideCopyWith<$Res>(_self.scoring, (value) {
     return _then(_self.copyWith(scoring: value));
+  });
+}/// Create a copy of OpportunityReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SectorContextCopyWith<$Res>? get sector {
+    if (_self.sector == null) {
+    return null;
+  }
+
+  return $SectorContextCopyWith<$Res>(_self.sector!, (value) {
+    return _then(_self.copyWith(sector: value));
   });
 }/// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
@@ -197,10 +211,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  SectorContext? sector,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OpportunityReport() when $default != null:
-return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
+return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.sector,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
   return orElse();
 
 }
@@ -218,10 +232,10 @@ return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  SectorContext? sector,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)  $default,) {final _that = this;
 switch (_that) {
 case _OpportunityReport():
-return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
+return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.sector,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -238,10 +252,10 @@ return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? date, @JsonKey(name: 'updated_at')  DateTime? updatedAt,  String? headline, @JsonKey(name: 'masthead_date')  String? mastheadDate,  List<RubricComponent> rubric,  ScoringGuide scoring,  SectorContext? sector,  ScannerCoverage coverage,  ScannerSummary summary,  List<ScannedCompany> qualified,  List<ScannedCompany> watching,  List<ScannedCompany> rejected,  List<ScanOutcome> outcomes)?  $default,) {final _that = this;
 switch (_that) {
 case _OpportunityReport() when $default != null:
-return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
+return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_that.rubric,_that.scoring,_that.sector,_that.coverage,_that.summary,_that.qualified,_that.watching,_that.rejected,_that.outcomes);case _:
   return null;
 
 }
@@ -253,7 +267,7 @@ return $default(_that.date,_that.updatedAt,_that.headline,_that.mastheadDate,_th
 @JsonSerializable()
 
 class _OpportunityReport extends OpportunityReport {
-  const _OpportunityReport({this.date, @JsonKey(name: 'updated_at') this.updatedAt, this.headline, @JsonKey(name: 'masthead_date') this.mastheadDate, final  List<RubricComponent> rubric = const <RubricComponent>[], this.scoring = const ScoringGuide(), this.coverage = const ScannerCoverage(), this.summary = const ScannerSummary(), final  List<ScannedCompany> qualified = const <ScannedCompany>[], final  List<ScannedCompany> watching = const <ScannedCompany>[], final  List<ScannedCompany> rejected = const <ScannedCompany>[], final  List<ScanOutcome> outcomes = const <ScanOutcome>[]}): _rubric = rubric,_qualified = qualified,_watching = watching,_rejected = rejected,_outcomes = outcomes,super._();
+  const _OpportunityReport({this.date, @JsonKey(name: 'updated_at') this.updatedAt, this.headline, @JsonKey(name: 'masthead_date') this.mastheadDate, final  List<RubricComponent> rubric = const <RubricComponent>[], this.scoring = const ScoringGuide(), this.sector, this.coverage = const ScannerCoverage(), this.summary = const ScannerSummary(), final  List<ScannedCompany> qualified = const <ScannedCompany>[], final  List<ScannedCompany> watching = const <ScannedCompany>[], final  List<ScannedCompany> rejected = const <ScannedCompany>[], final  List<ScanOutcome> outcomes = const <ScanOutcome>[]}): _rubric = rubric,_qualified = qualified,_watching = watching,_rejected = rejected,_outcomes = outcomes,super._();
   factory _OpportunityReport.fromJson(Map<String, dynamic> json) => _$OpportunityReportFromJson(json);
 
 @override final  String? date;
@@ -274,6 +288,8 @@ class _OpportunityReport extends OpportunityReport {
 
 /// The bands and the reasoning that make the rubric mean something.
 @override@JsonKey() final  ScoringGuide scoring;
+/// A cohort the report read as one story rather than four names.
+@override final  SectorContext? sector;
 @override@JsonKey() final  ScannerCoverage coverage;
 @override@JsonKey() final  ScannerSummary summary;
  final  List<ScannedCompany> _qualified;
@@ -320,16 +336,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OpportunityReport&&(identical(other.date, date) || other.date == date)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.mastheadDate, mastheadDate) || other.mastheadDate == mastheadDate)&&const DeepCollectionEquality().equals(other._rubric, _rubric)&&(identical(other.scoring, scoring) || other.scoring == scoring)&&(identical(other.coverage, coverage) || other.coverage == coverage)&&(identical(other.summary, summary) || other.summary == summary)&&const DeepCollectionEquality().equals(other._qualified, _qualified)&&const DeepCollectionEquality().equals(other._watching, _watching)&&const DeepCollectionEquality().equals(other._rejected, _rejected)&&const DeepCollectionEquality().equals(other._outcomes, _outcomes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OpportunityReport&&(identical(other.date, date) || other.date == date)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.mastheadDate, mastheadDate) || other.mastheadDate == mastheadDate)&&const DeepCollectionEquality().equals(other._rubric, _rubric)&&(identical(other.scoring, scoring) || other.scoring == scoring)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.coverage, coverage) || other.coverage == coverage)&&(identical(other.summary, summary) || other.summary == summary)&&const DeepCollectionEquality().equals(other._qualified, _qualified)&&const DeepCollectionEquality().equals(other._watching, _watching)&&const DeepCollectionEquality().equals(other._rejected, _rejected)&&const DeepCollectionEquality().equals(other._outcomes, _outcomes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,updatedAt,headline,mastheadDate,const DeepCollectionEquality().hash(_rubric),scoring,coverage,summary,const DeepCollectionEquality().hash(_qualified),const DeepCollectionEquality().hash(_watching),const DeepCollectionEquality().hash(_rejected),const DeepCollectionEquality().hash(_outcomes));
+int get hashCode => Object.hash(runtimeType,date,updatedAt,headline,mastheadDate,const DeepCollectionEquality().hash(_rubric),scoring,sector,coverage,summary,const DeepCollectionEquality().hash(_qualified),const DeepCollectionEquality().hash(_watching),const DeepCollectionEquality().hash(_rejected),const DeepCollectionEquality().hash(_outcomes));
 
 @override
 String toString() {
-  return 'OpportunityReport(date: $date, updatedAt: $updatedAt, headline: $headline, mastheadDate: $mastheadDate, rubric: $rubric, scoring: $scoring, coverage: $coverage, summary: $summary, qualified: $qualified, watching: $watching, rejected: $rejected, outcomes: $outcomes)';
+  return 'OpportunityReport(date: $date, updatedAt: $updatedAt, headline: $headline, mastheadDate: $mastheadDate, rubric: $rubric, scoring: $scoring, sector: $sector, coverage: $coverage, summary: $summary, qualified: $qualified, watching: $watching, rejected: $rejected, outcomes: $outcomes)';
 }
 
 
@@ -340,11 +356,11 @@ abstract mixin class _$OpportunityReportCopyWith<$Res> implements $OpportunityRe
   factory _$OpportunityReportCopyWith(_OpportunityReport value, $Res Function(_OpportunityReport) _then) = __$OpportunityReportCopyWithImpl;
 @override @useResult
 $Res call({
- String? date,@JsonKey(name: 'updated_at') DateTime? updatedAt, String? headline,@JsonKey(name: 'masthead_date') String? mastheadDate, List<RubricComponent> rubric, ScoringGuide scoring, ScannerCoverage coverage, ScannerSummary summary, List<ScannedCompany> qualified, List<ScannedCompany> watching, List<ScannedCompany> rejected, List<ScanOutcome> outcomes
+ String? date,@JsonKey(name: 'updated_at') DateTime? updatedAt, String? headline,@JsonKey(name: 'masthead_date') String? mastheadDate, List<RubricComponent> rubric, ScoringGuide scoring, SectorContext? sector, ScannerCoverage coverage, ScannerSummary summary, List<ScannedCompany> qualified, List<ScannedCompany> watching, List<ScannedCompany> rejected, List<ScanOutcome> outcomes
 });
 
 
-@override $ScoringGuideCopyWith<$Res> get scoring;@override $ScannerCoverageCopyWith<$Res> get coverage;@override $ScannerSummaryCopyWith<$Res> get summary;
+@override $ScoringGuideCopyWith<$Res> get scoring;@override $SectorContextCopyWith<$Res>? get sector;@override $ScannerCoverageCopyWith<$Res> get coverage;@override $ScannerSummaryCopyWith<$Res> get summary;
 
 }
 /// @nodoc
@@ -357,7 +373,7 @@ class __$OpportunityReportCopyWithImpl<$Res>
 
 /// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = freezed,Object? updatedAt = freezed,Object? headline = freezed,Object? mastheadDate = freezed,Object? rubric = null,Object? scoring = null,Object? coverage = null,Object? summary = null,Object? qualified = null,Object? watching = null,Object? rejected = null,Object? outcomes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = freezed,Object? updatedAt = freezed,Object? headline = freezed,Object? mastheadDate = freezed,Object? rubric = null,Object? scoring = null,Object? sector = freezed,Object? coverage = null,Object? summary = null,Object? qualified = null,Object? watching = null,Object? rejected = null,Object? outcomes = null,}) {
   return _then(_OpportunityReport(
 date: freezed == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -365,7 +381,8 @@ as DateTime?,headline: freezed == headline ? _self.headline : headline // ignore
 as String?,mastheadDate: freezed == mastheadDate ? _self.mastheadDate : mastheadDate // ignore: cast_nullable_to_non_nullable
 as String?,rubric: null == rubric ? _self._rubric : rubric // ignore: cast_nullable_to_non_nullable
 as List<RubricComponent>,scoring: null == scoring ? _self.scoring : scoring // ignore: cast_nullable_to_non_nullable
-as ScoringGuide,coverage: null == coverage ? _self.coverage : coverage // ignore: cast_nullable_to_non_nullable
+as ScoringGuide,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as SectorContext?,coverage: null == coverage ? _self.coverage : coverage // ignore: cast_nullable_to_non_nullable
 as ScannerCoverage,summary: null == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
 as ScannerSummary,qualified: null == qualified ? _self._qualified : qualified // ignore: cast_nullable_to_non_nullable
 as List<ScannedCompany>,watching: null == watching ? _self._watching : watching // ignore: cast_nullable_to_non_nullable
@@ -383,6 +400,18 @@ $ScoringGuideCopyWith<$Res> get scoring {
   
   return $ScoringGuideCopyWith<$Res>(_self.scoring, (value) {
     return _then(_self.copyWith(scoring: value));
+  });
+}/// Create a copy of OpportunityReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SectorContextCopyWith<$Res>? get sector {
+    if (_self.sector == null) {
+    return null;
+  }
+
+  return $SectorContextCopyWith<$Res>(_self.sector!, (value) {
+    return _then(_self.copyWith(sector: value));
   });
 }/// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
@@ -949,7 +978,15 @@ mixin _$ScannedCompany {
 
  String get ticker; int get score;@JsonKey(name: 'max_score') int get maxScore; String get status;/// The report's own wording — "Persistent watch", "Tape watch" — which is
 /// more precise than the bucket and is what readers of the series know.
-@JsonKey(name: 'status_label') String? get statusLabel;@JsonKey(name: 'seen_at') String? get seenAt;@JsonKey(name: 'move_percent') String? get movePercent; String? get headline; String? get catalyst;@JsonKey(name: 'published_at') DateTime? get publishedAt; ScanScores get scores;@JsonKey(name: 'research_summary') String? get researchSummary; List<ResearchSource> get sources;
+@JsonKey(name: 'status_label') String? get statusLabel;@JsonKey(name: 'seen_at') String? get seenAt;@JsonKey(name: 'move_percent') String? get movePercent; String? get headline; String? get catalyst;@JsonKey(name: 'published_at') DateTime? get publishedAt; ScanScores get scores;@JsonKey(name: 'research_summary') String? get researchSummary;/// What was checked and what it showed — the report's own evidence
+/// checklist. Facts about the past, not conditions for a trade.
+ List<ScanGate> get gates;/// The reasoning written out in full, keeping the report's own sections.
+///
+/// Sections whose whole subject is what must happen before a trade are
+/// dropped at ingestion, so what is here is why the name is being looked
+/// at and what the tape actually did (spec §8).
+ List<ResearchSection> get research;/// The completed session this name was last read on.
+ ScanTape? get tape; List<ResearchSource> get sources;
 /// Create a copy of ScannedCompany
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -962,16 +999,16 @@ $ScannedCompanyCopyWith<ScannedCompany> get copyWith => _$ScannedCompanyCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&const DeepCollectionEquality().equals(other.sources, sources));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&const DeepCollectionEquality().equals(other.gates, gates)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other.sources, sources));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,const DeepCollectionEquality().hash(sources));
+int get hashCode => Object.hash(runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,const DeepCollectionEquality().hash(gates),const DeepCollectionEquality().hash(research),tape,const DeepCollectionEquality().hash(sources));
 
 @override
 String toString() {
-  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, sources: $sources)';
+  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, gates: $gates, research: $research, tape: $tape, sources: $sources)';
 }
 
 
@@ -982,11 +1019,11 @@ abstract mixin class $ScannedCompanyCopyWith<$Res>  {
   factory $ScannedCompanyCopyWith(ScannedCompany value, $Res Function(ScannedCompany) _then) = _$ScannedCompanyCopyWithImpl;
 @useResult
 $Res call({
- String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, List<ResearchSource> sources
+ String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
 });
 
 
-$ScanScoresCopyWith<$Res> get scores;
+$ScanScoresCopyWith<$Res> get scores;$ScanTapeCopyWith<$Res>? get tape;
 
 }
 /// @nodoc
@@ -999,7 +1036,7 @@ class _$ScannedCompanyCopyWithImpl<$Res>
 
 /// Create a copy of ScannedCompany
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? sources = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
@@ -1013,7 +1050,10 @@ as String?,catalyst: freezed == catalyst ? _self.catalyst : catalyst // ignore: 
 as String?,publishedAt: freezed == publishedAt ? _self.publishedAt : publishedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,scores: null == scores ? _self.scores : scores // ignore: cast_nullable_to_non_nullable
 as ScanScores,researchSummary: freezed == researchSummary ? _self.researchSummary : researchSummary // ignore: cast_nullable_to_non_nullable
-as String?,sources: null == sources ? _self.sources : sources // ignore: cast_nullable_to_non_nullable
+as String?,gates: null == gates ? _self.gates : gates // ignore: cast_nullable_to_non_nullable
+as List<ScanGate>,research: null == research ? _self.research : research // ignore: cast_nullable_to_non_nullable
+as List<ResearchSection>,tape: freezed == tape ? _self.tape : tape // ignore: cast_nullable_to_non_nullable
+as ScanTape?,sources: null == sources ? _self.sources : sources // ignore: cast_nullable_to_non_nullable
 as List<ResearchSource>,
   ));
 }
@@ -1025,6 +1065,18 @@ $ScanScoresCopyWith<$Res> get scores {
   
   return $ScanScoresCopyWith<$Res>(_self.scores, (value) {
     return _then(_self.copyWith(scores: value));
+  });
+}/// Create a copy of ScannedCompany
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScanTapeCopyWith<$Res>? get tape {
+    if (_self.tape == null) {
+    return null;
+  }
+
+  return $ScanTapeCopyWith<$Res>(_self.tape!, (value) {
+    return _then(_self.copyWith(tape: value));
   });
 }
 }
@@ -1108,10 +1160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ResearchSource> sources)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScannedCompany() when $default != null:
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.gates,_that.research,_that.tape,_that.sources);case _:
   return orElse();
 
 }
@@ -1129,10 +1181,10 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ResearchSource> sources)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)  $default,) {final _that = this;
 switch (_that) {
 case _ScannedCompany():
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.gates,_that.research,_that.tape,_that.sources);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1149,10 +1201,10 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ResearchSource> sources)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,) {final _that = this;
 switch (_that) {
 case _ScannedCompany() when $default != null:
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.gates,_that.research,_that.tape,_that.sources);case _:
   return null;
 
 }
@@ -1164,7 +1216,7 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 @JsonSerializable()
 
 class _ScannedCompany extends ScannedCompany {
-  const _ScannedCompany({required this.ticker, this.score = 0, @JsonKey(name: 'max_score') this.maxScore = 13, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'seen_at') this.seenAt, @JsonKey(name: 'move_percent') this.movePercent, this.headline, this.catalyst, @JsonKey(name: 'published_at') this.publishedAt, this.scores = const ScanScores(), @JsonKey(name: 'research_summary') this.researchSummary, final  List<ResearchSource> sources = const <ResearchSource>[]}): _sources = sources,super._();
+  const _ScannedCompany({required this.ticker, this.score = 0, @JsonKey(name: 'max_score') this.maxScore = 13, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'seen_at') this.seenAt, @JsonKey(name: 'move_percent') this.movePercent, this.headline, this.catalyst, @JsonKey(name: 'published_at') this.publishedAt, this.scores = const ScanScores(), @JsonKey(name: 'research_summary') this.researchSummary, final  List<ScanGate> gates = const <ScanGate>[], final  List<ResearchSection> research = const <ResearchSection>[], this.tape, final  List<ResearchSource> sources = const <ResearchSource>[]}): _gates = gates,_research = research,_sources = sources,super._();
   factory _ScannedCompany.fromJson(Map<String, dynamic> json) => _$ScannedCompanyFromJson(json);
 
 @override final  String ticker;
@@ -1181,6 +1233,36 @@ class _ScannedCompany extends ScannedCompany {
 @override@JsonKey(name: 'published_at') final  DateTime? publishedAt;
 @override@JsonKey() final  ScanScores scores;
 @override@JsonKey(name: 'research_summary') final  String? researchSummary;
+/// What was checked and what it showed — the report's own evidence
+/// checklist. Facts about the past, not conditions for a trade.
+ final  List<ScanGate> _gates;
+/// What was checked and what it showed — the report's own evidence
+/// checklist. Facts about the past, not conditions for a trade.
+@override@JsonKey() List<ScanGate> get gates {
+  if (_gates is EqualUnmodifiableListView) return _gates;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_gates);
+}
+
+/// The reasoning written out in full, keeping the report's own sections.
+///
+/// Sections whose whole subject is what must happen before a trade are
+/// dropped at ingestion, so what is here is why the name is being looked
+/// at and what the tape actually did (spec §8).
+ final  List<ResearchSection> _research;
+/// The reasoning written out in full, keeping the report's own sections.
+///
+/// Sections whose whole subject is what must happen before a trade are
+/// dropped at ingestion, so what is here is why the name is being looked
+/// at and what the tape actually did (spec §8).
+@override@JsonKey() List<ResearchSection> get research {
+  if (_research is EqualUnmodifiableListView) return _research;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_research);
+}
+
+/// The completed session this name was last read on.
+@override final  ScanTape? tape;
  final  List<ResearchSource> _sources;
 @override@JsonKey() List<ResearchSource> get sources {
   if (_sources is EqualUnmodifiableListView) return _sources;
@@ -1202,16 +1284,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&const DeepCollectionEquality().equals(other._sources, _sources));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&const DeepCollectionEquality().equals(other._gates, _gates)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other._sources, _sources));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,const DeepCollectionEquality().hash(_sources));
+int get hashCode => Object.hash(runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,const DeepCollectionEquality().hash(_gates),const DeepCollectionEquality().hash(_research),tape,const DeepCollectionEquality().hash(_sources));
 
 @override
 String toString() {
-  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, sources: $sources)';
+  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, gates: $gates, research: $research, tape: $tape, sources: $sources)';
 }
 
 
@@ -1222,11 +1304,11 @@ abstract mixin class _$ScannedCompanyCopyWith<$Res> implements $ScannedCompanyCo
   factory _$ScannedCompanyCopyWith(_ScannedCompany value, $Res Function(_ScannedCompany) _then) = __$ScannedCompanyCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, List<ResearchSource> sources
+ String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
 });
 
 
-@override $ScanScoresCopyWith<$Res> get scores;
+@override $ScanScoresCopyWith<$Res> get scores;@override $ScanTapeCopyWith<$Res>? get tape;
 
 }
 /// @nodoc
@@ -1239,7 +1321,7 @@ class __$ScannedCompanyCopyWithImpl<$Res>
 
 /// Create a copy of ScannedCompany
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? sources = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
   return _then(_ScannedCompany(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
@@ -1253,7 +1335,10 @@ as String?,catalyst: freezed == catalyst ? _self.catalyst : catalyst // ignore: 
 as String?,publishedAt: freezed == publishedAt ? _self.publishedAt : publishedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,scores: null == scores ? _self.scores : scores // ignore: cast_nullable_to_non_nullable
 as ScanScores,researchSummary: freezed == researchSummary ? _self.researchSummary : researchSummary // ignore: cast_nullable_to_non_nullable
-as String?,sources: null == sources ? _self._sources : sources // ignore: cast_nullable_to_non_nullable
+as String?,gates: null == gates ? _self._gates : gates // ignore: cast_nullable_to_non_nullable
+as List<ScanGate>,research: null == research ? _self._research : research // ignore: cast_nullable_to_non_nullable
+as List<ResearchSection>,tape: freezed == tape ? _self.tape : tape // ignore: cast_nullable_to_non_nullable
+as ScanTape?,sources: null == sources ? _self._sources : sources // ignore: cast_nullable_to_non_nullable
 as List<ResearchSource>,
   ));
 }
@@ -1266,6 +1351,18 @@ $ScanScoresCopyWith<$Res> get scores {
   
   return $ScanScoresCopyWith<$Res>(_self.scores, (value) {
     return _then(_self.copyWith(scores: value));
+  });
+}/// Create a copy of ScannedCompany
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ScanTapeCopyWith<$Res>? get tape {
+    if (_self.tape == null) {
+    return null;
+  }
+
+  return $ScanTapeCopyWith<$Res>(_self.tape!, (value) {
+    return _then(_self.copyWith(tape: value));
   });
 }
 }
@@ -2908,6 +3005,1662 @@ class __$ResearchSourceCopyWithImpl<$Res>
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,url: freezed == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ScanGate {
+
+ String get label;/// `pass`, `fail`, or `warn` — the report's own three states.
+ String get outcome;
+/// Create a copy of ScanGate
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScanGateCopyWith<ScanGate> get copyWith => _$ScanGateCopyWithImpl<ScanGate>(this as ScanGate, _$identity);
+
+  /// Serializes this ScanGate to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanGate&&(identical(other.label, label) || other.label == label)&&(identical(other.outcome, outcome) || other.outcome == outcome));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,outcome);
+
+@override
+String toString() {
+  return 'ScanGate(label: $label, outcome: $outcome)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ScanGateCopyWith<$Res>  {
+  factory $ScanGateCopyWith(ScanGate value, $Res Function(ScanGate) _then) = _$ScanGateCopyWithImpl;
+@useResult
+$Res call({
+ String label, String outcome
+});
+
+
+
+
+}
+/// @nodoc
+class _$ScanGateCopyWithImpl<$Res>
+    implements $ScanGateCopyWith<$Res> {
+  _$ScanGateCopyWithImpl(this._self, this._then);
+
+  final ScanGate _self;
+  final $Res Function(ScanGate) _then;
+
+/// Create a copy of ScanGate
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? label = null,Object? outcome = null,}) {
+  return _then(_self.copyWith(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,outcome: null == outcome ? _self.outcome : outcome // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ScanGate].
+extension ScanGatePatterns on ScanGate {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ScanGate value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ScanGate() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ScanGate value)  $default,){
+final _that = this;
+switch (_that) {
+case _ScanGate():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ScanGate value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ScanGate() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String label,  String outcome)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ScanGate() when $default != null:
+return $default(_that.label,_that.outcome);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String label,  String outcome)  $default,) {final _that = this;
+switch (_that) {
+case _ScanGate():
+return $default(_that.label,_that.outcome);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String label,  String outcome)?  $default,) {final _that = this;
+switch (_that) {
+case _ScanGate() when $default != null:
+return $default(_that.label,_that.outcome);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ScanGate extends ScanGate {
+  const _ScanGate({required this.label, this.outcome = 'warn'}): super._();
+  factory _ScanGate.fromJson(Map<String, dynamic> json) => _$ScanGateFromJson(json);
+
+@override final  String label;
+/// `pass`, `fail`, or `warn` — the report's own three states.
+@override@JsonKey() final  String outcome;
+
+/// Create a copy of ScanGate
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ScanGateCopyWith<_ScanGate> get copyWith => __$ScanGateCopyWithImpl<_ScanGate>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ScanGateToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanGate&&(identical(other.label, label) || other.label == label)&&(identical(other.outcome, outcome) || other.outcome == outcome));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,outcome);
+
+@override
+String toString() {
+  return 'ScanGate(label: $label, outcome: $outcome)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ScanGateCopyWith<$Res> implements $ScanGateCopyWith<$Res> {
+  factory _$ScanGateCopyWith(_ScanGate value, $Res Function(_ScanGate) _then) = __$ScanGateCopyWithImpl;
+@override @useResult
+$Res call({
+ String label, String outcome
+});
+
+
+
+
+}
+/// @nodoc
+class __$ScanGateCopyWithImpl<$Res>
+    implements _$ScanGateCopyWith<$Res> {
+  __$ScanGateCopyWithImpl(this._self, this._then);
+
+  final _ScanGate _self;
+  final $Res Function(_ScanGate) _then;
+
+/// Create a copy of ScanGate
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? label = null,Object? outcome = null,}) {
+  return _then(_ScanGate(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,outcome: null == outcome ? _self.outcome : outcome // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ScanTape {
+
+/// e.g. "12 Aug close".
+ String? get label;/// Pre-formatted by the publisher, currency and all.
+ String? get price;/// e.g. "+1.77% · volume 1.22× normal · closed 41% up its range".
+ String? get detail;
+/// Create a copy of ScanTape
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScanTapeCopyWith<ScanTape> get copyWith => _$ScanTapeCopyWithImpl<ScanTape>(this as ScanTape, _$identity);
+
+  /// Serializes this ScanTape to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanTape&&(identical(other.label, label) || other.label == label)&&(identical(other.price, price) || other.price == price)&&(identical(other.detail, detail) || other.detail == detail));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,price,detail);
+
+@override
+String toString() {
+  return 'ScanTape(label: $label, price: $price, detail: $detail)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ScanTapeCopyWith<$Res>  {
+  factory $ScanTapeCopyWith(ScanTape value, $Res Function(ScanTape) _then) = _$ScanTapeCopyWithImpl;
+@useResult
+$Res call({
+ String? label, String? price, String? detail
+});
+
+
+
+
+}
+/// @nodoc
+class _$ScanTapeCopyWithImpl<$Res>
+    implements $ScanTapeCopyWith<$Res> {
+  _$ScanTapeCopyWithImpl(this._self, this._then);
+
+  final ScanTape _self;
+  final $Res Function(ScanTape) _then;
+
+/// Create a copy of ScanTape
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? label = freezed,Object? price = freezed,Object? detail = freezed,}) {
+  return _then(_self.copyWith(
+label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ScanTape].
+extension ScanTapePatterns on ScanTape {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ScanTape value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ScanTape() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ScanTape value)  $default,){
+final _that = this;
+switch (_that) {
+case _ScanTape():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ScanTape value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ScanTape() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? label,  String? price,  String? detail)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ScanTape() when $default != null:
+return $default(_that.label,_that.price,_that.detail);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? label,  String? price,  String? detail)  $default,) {final _that = this;
+switch (_that) {
+case _ScanTape():
+return $default(_that.label,_that.price,_that.detail);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? label,  String? price,  String? detail)?  $default,) {final _that = this;
+switch (_that) {
+case _ScanTape() when $default != null:
+return $default(_that.label,_that.price,_that.detail);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ScanTape extends ScanTape {
+  const _ScanTape({this.label, this.price, this.detail}): super._();
+  factory _ScanTape.fromJson(Map<String, dynamic> json) => _$ScanTapeFromJson(json);
+
+/// e.g. "12 Aug close".
+@override final  String? label;
+/// Pre-formatted by the publisher, currency and all.
+@override final  String? price;
+/// e.g. "+1.77% · volume 1.22× normal · closed 41% up its range".
+@override final  String? detail;
+
+/// Create a copy of ScanTape
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ScanTapeCopyWith<_ScanTape> get copyWith => __$ScanTapeCopyWithImpl<_ScanTape>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ScanTapeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanTape&&(identical(other.label, label) || other.label == label)&&(identical(other.price, price) || other.price == price)&&(identical(other.detail, detail) || other.detail == detail));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,price,detail);
+
+@override
+String toString() {
+  return 'ScanTape(label: $label, price: $price, detail: $detail)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ScanTapeCopyWith<$Res> implements $ScanTapeCopyWith<$Res> {
+  factory _$ScanTapeCopyWith(_ScanTape value, $Res Function(_ScanTape) _then) = __$ScanTapeCopyWithImpl;
+@override @useResult
+$Res call({
+ String? label, String? price, String? detail
+});
+
+
+
+
+}
+/// @nodoc
+class __$ScanTapeCopyWithImpl<$Res>
+    implements _$ScanTapeCopyWith<$Res> {
+  __$ScanTapeCopyWithImpl(this._self, this._then);
+
+  final _ScanTape _self;
+  final $Res Function(_ScanTape) _then;
+
+/// Create a copy of ScanTape
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? label = freezed,Object? price = freezed,Object? detail = freezed,}) {
+  return _then(_ScanTape(
+label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SectorContext {
+
+ String get title;/// e.g. "Sector context · zero qualification points" — the report's own
+/// framing, which says plainly that this scores nothing.
+ String? get kicker; String? get thesis;/// Rotation stage, first leader, breadth peer, fresh filing.
+ List<SectorFact> get timeline; List<SectorMember> get members;
+/// Create a copy of SectorContext
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SectorContextCopyWith<SectorContext> get copyWith => _$SectorContextCopyWithImpl<SectorContext>(this as SectorContext, _$identity);
+
+  /// Serializes this SectorContext to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectorContext&&(identical(other.title, title) || other.title == title)&&(identical(other.kicker, kicker) || other.kicker == kicker)&&(identical(other.thesis, thesis) || other.thesis == thesis)&&const DeepCollectionEquality().equals(other.timeline, timeline)&&const DeepCollectionEquality().equals(other.members, members));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,title,kicker,thesis,const DeepCollectionEquality().hash(timeline),const DeepCollectionEquality().hash(members));
+
+@override
+String toString() {
+  return 'SectorContext(title: $title, kicker: $kicker, thesis: $thesis, timeline: $timeline, members: $members)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SectorContextCopyWith<$Res>  {
+  factory $SectorContextCopyWith(SectorContext value, $Res Function(SectorContext) _then) = _$SectorContextCopyWithImpl;
+@useResult
+$Res call({
+ String title, String? kicker, String? thesis, List<SectorFact> timeline, List<SectorMember> members
+});
+
+
+
+
+}
+/// @nodoc
+class _$SectorContextCopyWithImpl<$Res>
+    implements $SectorContextCopyWith<$Res> {
+  _$SectorContextCopyWithImpl(this._self, this._then);
+
+  final SectorContext _self;
+  final $Res Function(SectorContext) _then;
+
+/// Create a copy of SectorContext
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? kicker = freezed,Object? thesis = freezed,Object? timeline = null,Object? members = null,}) {
+  return _then(_self.copyWith(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,kicker: freezed == kicker ? _self.kicker : kicker // ignore: cast_nullable_to_non_nullable
+as String?,thesis: freezed == thesis ? _self.thesis : thesis // ignore: cast_nullable_to_non_nullable
+as String?,timeline: null == timeline ? _self.timeline : timeline // ignore: cast_nullable_to_non_nullable
+as List<SectorFact>,members: null == members ? _self.members : members // ignore: cast_nullable_to_non_nullable
+as List<SectorMember>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SectorContext].
+extension SectorContextPatterns on SectorContext {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SectorContext value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SectorContext() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SectorContext value)  $default,){
+final _that = this;
+switch (_that) {
+case _SectorContext():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SectorContext value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SectorContext() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String title,  String? kicker,  String? thesis,  List<SectorFact> timeline,  List<SectorMember> members)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SectorContext() when $default != null:
+return $default(_that.title,_that.kicker,_that.thesis,_that.timeline,_that.members);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String title,  String? kicker,  String? thesis,  List<SectorFact> timeline,  List<SectorMember> members)  $default,) {final _that = this;
+switch (_that) {
+case _SectorContext():
+return $default(_that.title,_that.kicker,_that.thesis,_that.timeline,_that.members);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String title,  String? kicker,  String? thesis,  List<SectorFact> timeline,  List<SectorMember> members)?  $default,) {final _that = this;
+switch (_that) {
+case _SectorContext() when $default != null:
+return $default(_that.title,_that.kicker,_that.thesis,_that.timeline,_that.members);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SectorContext extends SectorContext {
+  const _SectorContext({required this.title, this.kicker, this.thesis, final  List<SectorFact> timeline = const <SectorFact>[], final  List<SectorMember> members = const <SectorMember>[]}): _timeline = timeline,_members = members,super._();
+  factory _SectorContext.fromJson(Map<String, dynamic> json) => _$SectorContextFromJson(json);
+
+@override final  String title;
+/// e.g. "Sector context · zero qualification points" — the report's own
+/// framing, which says plainly that this scores nothing.
+@override final  String? kicker;
+@override final  String? thesis;
+/// Rotation stage, first leader, breadth peer, fresh filing.
+ final  List<SectorFact> _timeline;
+/// Rotation stage, first leader, breadth peer, fresh filing.
+@override@JsonKey() List<SectorFact> get timeline {
+  if (_timeline is EqualUnmodifiableListView) return _timeline;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_timeline);
+}
+
+ final  List<SectorMember> _members;
+@override@JsonKey() List<SectorMember> get members {
+  if (_members is EqualUnmodifiableListView) return _members;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_members);
+}
+
+
+/// Create a copy of SectorContext
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SectorContextCopyWith<_SectorContext> get copyWith => __$SectorContextCopyWithImpl<_SectorContext>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SectorContextToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectorContext&&(identical(other.title, title) || other.title == title)&&(identical(other.kicker, kicker) || other.kicker == kicker)&&(identical(other.thesis, thesis) || other.thesis == thesis)&&const DeepCollectionEquality().equals(other._timeline, _timeline)&&const DeepCollectionEquality().equals(other._members, _members));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,title,kicker,thesis,const DeepCollectionEquality().hash(_timeline),const DeepCollectionEquality().hash(_members));
+
+@override
+String toString() {
+  return 'SectorContext(title: $title, kicker: $kicker, thesis: $thesis, timeline: $timeline, members: $members)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SectorContextCopyWith<$Res> implements $SectorContextCopyWith<$Res> {
+  factory _$SectorContextCopyWith(_SectorContext value, $Res Function(_SectorContext) _then) = __$SectorContextCopyWithImpl;
+@override @useResult
+$Res call({
+ String title, String? kicker, String? thesis, List<SectorFact> timeline, List<SectorMember> members
+});
+
+
+
+
+}
+/// @nodoc
+class __$SectorContextCopyWithImpl<$Res>
+    implements _$SectorContextCopyWith<$Res> {
+  __$SectorContextCopyWithImpl(this._self, this._then);
+
+  final _SectorContext _self;
+  final $Res Function(_SectorContext) _then;
+
+/// Create a copy of SectorContext
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? kicker = freezed,Object? thesis = freezed,Object? timeline = null,Object? members = null,}) {
+  return _then(_SectorContext(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,kicker: freezed == kicker ? _self.kicker : kicker // ignore: cast_nullable_to_non_nullable
+as String?,thesis: freezed == thesis ? _self.thesis : thesis // ignore: cast_nullable_to_non_nullable
+as String?,timeline: null == timeline ? _self._timeline : timeline // ignore: cast_nullable_to_non_nullable
+as List<SectorFact>,members: null == members ? _self._members : members // ignore: cast_nullable_to_non_nullable
+as List<SectorMember>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SectorFact {
+
+ String get label; String get value; String? get detail;
+/// Create a copy of SectorFact
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SectorFactCopyWith<SectorFact> get copyWith => _$SectorFactCopyWithImpl<SectorFact>(this as SectorFact, _$identity);
+
+  /// Serializes this SectorFact to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectorFact&&(identical(other.label, label) || other.label == label)&&(identical(other.value, value) || other.value == value)&&(identical(other.detail, detail) || other.detail == detail));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,value,detail);
+
+@override
+String toString() {
+  return 'SectorFact(label: $label, value: $value, detail: $detail)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SectorFactCopyWith<$Res>  {
+  factory $SectorFactCopyWith(SectorFact value, $Res Function(SectorFact) _then) = _$SectorFactCopyWithImpl;
+@useResult
+$Res call({
+ String label, String value, String? detail
+});
+
+
+
+
+}
+/// @nodoc
+class _$SectorFactCopyWithImpl<$Res>
+    implements $SectorFactCopyWith<$Res> {
+  _$SectorFactCopyWithImpl(this._self, this._then);
+
+  final SectorFact _self;
+  final $Res Function(SectorFact) _then;
+
+/// Create a copy of SectorFact
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? label = null,Object? value = null,Object? detail = freezed,}) {
+  return _then(_self.copyWith(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SectorFact].
+extension SectorFactPatterns on SectorFact {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SectorFact value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SectorFact() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SectorFact value)  $default,){
+final _that = this;
+switch (_that) {
+case _SectorFact():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SectorFact value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SectorFact() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String label,  String value,  String? detail)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SectorFact() when $default != null:
+return $default(_that.label,_that.value,_that.detail);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String label,  String value,  String? detail)  $default,) {final _that = this;
+switch (_that) {
+case _SectorFact():
+return $default(_that.label,_that.value,_that.detail);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String label,  String value,  String? detail)?  $default,) {final _that = this;
+switch (_that) {
+case _SectorFact() when $default != null:
+return $default(_that.label,_that.value,_that.detail);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SectorFact extends SectorFact {
+  const _SectorFact({required this.label, required this.value, this.detail}): super._();
+  factory _SectorFact.fromJson(Map<String, dynamic> json) => _$SectorFactFromJson(json);
+
+@override final  String label;
+@override final  String value;
+@override final  String? detail;
+
+/// Create a copy of SectorFact
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SectorFactCopyWith<_SectorFact> get copyWith => __$SectorFactCopyWithImpl<_SectorFact>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SectorFactToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectorFact&&(identical(other.label, label) || other.label == label)&&(identical(other.value, value) || other.value == value)&&(identical(other.detail, detail) || other.detail == detail));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,label,value,detail);
+
+@override
+String toString() {
+  return 'SectorFact(label: $label, value: $value, detail: $detail)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SectorFactCopyWith<$Res> implements $SectorFactCopyWith<$Res> {
+  factory _$SectorFactCopyWith(_SectorFact value, $Res Function(_SectorFact) _then) = __$SectorFactCopyWithImpl;
+@override @useResult
+$Res call({
+ String label, String value, String? detail
+});
+
+
+
+
+}
+/// @nodoc
+class __$SectorFactCopyWithImpl<$Res>
+    implements _$SectorFactCopyWith<$Res> {
+  __$SectorFactCopyWithImpl(this._self, this._then);
+
+  final _SectorFact _self;
+  final $Res Function(_SectorFact) _then;
+
+/// Create a copy of SectorFact
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? label = null,Object? value = null,Object? detail = freezed,}) {
+  return _then(_SectorFact(
+label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as String,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SectorMember {
+
+ String get ticker;/// "Tape leader", "Direct peer", "Extended peer", "Mixed filing".
+ String? get role; String? get price;/// Whatever qualifies the price — "provisional", most often, because these
+/// are read mid-session.
+ String? get qualifier;
+/// Create a copy of SectorMember
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SectorMemberCopyWith<SectorMember> get copyWith => _$SectorMemberCopyWithImpl<SectorMember>(this as SectorMember, _$identity);
+
+  /// Serializes this SectorMember to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SectorMember&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.role, role) || other.role == role)&&(identical(other.price, price) || other.price == price)&&(identical(other.qualifier, qualifier) || other.qualifier == qualifier));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,ticker,role,price,qualifier);
+
+@override
+String toString() {
+  return 'SectorMember(ticker: $ticker, role: $role, price: $price, qualifier: $qualifier)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SectorMemberCopyWith<$Res>  {
+  factory $SectorMemberCopyWith(SectorMember value, $Res Function(SectorMember) _then) = _$SectorMemberCopyWithImpl;
+@useResult
+$Res call({
+ String ticker, String? role, String? price, String? qualifier
+});
+
+
+
+
+}
+/// @nodoc
+class _$SectorMemberCopyWithImpl<$Res>
+    implements $SectorMemberCopyWith<$Res> {
+  _$SectorMemberCopyWithImpl(this._self, this._then);
+
+  final SectorMember _self;
+  final $Res Function(SectorMember) _then;
+
+/// Create a copy of SectorMember
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? role = freezed,Object? price = freezed,Object? qualifier = freezed,}) {
+  return _then(_self.copyWith(
+ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
+as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,qualifier: freezed == qualifier ? _self.qualifier : qualifier // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SectorMember].
+extension SectorMemberPatterns on SectorMember {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SectorMember value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SectorMember() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SectorMember value)  $default,){
+final _that = this;
+switch (_that) {
+case _SectorMember():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SectorMember value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SectorMember() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String? role,  String? price,  String? qualifier)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SectorMember() when $default != null:
+return $default(_that.ticker,_that.role,_that.price,_that.qualifier);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String? role,  String? price,  String? qualifier)  $default,) {final _that = this;
+switch (_that) {
+case _SectorMember():
+return $default(_that.ticker,_that.role,_that.price,_that.qualifier);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String? role,  String? price,  String? qualifier)?  $default,) {final _that = this;
+switch (_that) {
+case _SectorMember() when $default != null:
+return $default(_that.ticker,_that.role,_that.price,_that.qualifier);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SectorMember extends SectorMember {
+  const _SectorMember({required this.ticker, this.role, this.price, this.qualifier}): super._();
+  factory _SectorMember.fromJson(Map<String, dynamic> json) => _$SectorMemberFromJson(json);
+
+@override final  String ticker;
+/// "Tape leader", "Direct peer", "Extended peer", "Mixed filing".
+@override final  String? role;
+@override final  String? price;
+/// Whatever qualifies the price — "provisional", most often, because these
+/// are read mid-session.
+@override final  String? qualifier;
+
+/// Create a copy of SectorMember
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SectorMemberCopyWith<_SectorMember> get copyWith => __$SectorMemberCopyWithImpl<_SectorMember>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SectorMemberToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SectorMember&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.role, role) || other.role == role)&&(identical(other.price, price) || other.price == price)&&(identical(other.qualifier, qualifier) || other.qualifier == qualifier));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,ticker,role,price,qualifier);
+
+@override
+String toString() {
+  return 'SectorMember(ticker: $ticker, role: $role, price: $price, qualifier: $qualifier)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SectorMemberCopyWith<$Res> implements $SectorMemberCopyWith<$Res> {
+  factory _$SectorMemberCopyWith(_SectorMember value, $Res Function(_SectorMember) _then) = __$SectorMemberCopyWithImpl;
+@override @useResult
+$Res call({
+ String ticker, String? role, String? price, String? qualifier
+});
+
+
+
+
+}
+/// @nodoc
+class __$SectorMemberCopyWithImpl<$Res>
+    implements _$SectorMemberCopyWith<$Res> {
+  __$SectorMemberCopyWithImpl(this._self, this._then);
+
+  final _SectorMember _self;
+  final $Res Function(_SectorMember) _then;
+
+/// Create a copy of SectorMember
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? role = freezed,Object? price = freezed,Object? qualifier = freezed,}) {
+  return _then(_SectorMember(
+ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
+as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,qualifier: freezed == qualifier ? _self.qualifier : qualifier // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ResearchSection {
+
+ String? get heading; List<String> get body;
+/// Create a copy of ResearchSection
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ResearchSectionCopyWith<ResearchSection> get copyWith => _$ResearchSectionCopyWithImpl<ResearchSection>(this as ResearchSection, _$identity);
+
+  /// Serializes this ResearchSection to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResearchSection&&(identical(other.heading, heading) || other.heading == heading)&&const DeepCollectionEquality().equals(other.body, body));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,heading,const DeepCollectionEquality().hash(body));
+
+@override
+String toString() {
+  return 'ResearchSection(heading: $heading, body: $body)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ResearchSectionCopyWith<$Res>  {
+  factory $ResearchSectionCopyWith(ResearchSection value, $Res Function(ResearchSection) _then) = _$ResearchSectionCopyWithImpl;
+@useResult
+$Res call({
+ String? heading, List<String> body
+});
+
+
+
+
+}
+/// @nodoc
+class _$ResearchSectionCopyWithImpl<$Res>
+    implements $ResearchSectionCopyWith<$Res> {
+  _$ResearchSectionCopyWithImpl(this._self, this._then);
+
+  final ResearchSection _self;
+  final $Res Function(ResearchSection) _then;
+
+/// Create a copy of ResearchSection
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? heading = freezed,Object? body = null,}) {
+  return _then(_self.copyWith(
+heading: freezed == heading ? _self.heading : heading // ignore: cast_nullable_to_non_nullable
+as String?,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ResearchSection].
+extension ResearchSectionPatterns on ResearchSection {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ResearchSection value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ResearchSection() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ResearchSection value)  $default,){
+final _that = this;
+switch (_that) {
+case _ResearchSection():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ResearchSection value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ResearchSection() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? heading,  List<String> body)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ResearchSection() when $default != null:
+return $default(_that.heading,_that.body);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? heading,  List<String> body)  $default,) {final _that = this;
+switch (_that) {
+case _ResearchSection():
+return $default(_that.heading,_that.body);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? heading,  List<String> body)?  $default,) {final _that = this;
+switch (_that) {
+case _ResearchSection() when $default != null:
+return $default(_that.heading,_that.body);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ResearchSection extends ResearchSection {
+  const _ResearchSection({this.heading, final  List<String> body = const <String>[]}): _body = body,super._();
+  factory _ResearchSection.fromJson(Map<String, dynamic> json) => _$ResearchSectionFromJson(json);
+
+@override final  String? heading;
+ final  List<String> _body;
+@override@JsonKey() List<String> get body {
+  if (_body is EqualUnmodifiableListView) return _body;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_body);
+}
+
+
+/// Create a copy of ResearchSection
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ResearchSectionCopyWith<_ResearchSection> get copyWith => __$ResearchSectionCopyWithImpl<_ResearchSection>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ResearchSectionToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResearchSection&&(identical(other.heading, heading) || other.heading == heading)&&const DeepCollectionEquality().equals(other._body, _body));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,heading,const DeepCollectionEquality().hash(_body));
+
+@override
+String toString() {
+  return 'ResearchSection(heading: $heading, body: $body)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ResearchSectionCopyWith<$Res> implements $ResearchSectionCopyWith<$Res> {
+  factory _$ResearchSectionCopyWith(_ResearchSection value, $Res Function(_ResearchSection) _then) = __$ResearchSectionCopyWithImpl;
+@override @useResult
+$Res call({
+ String? heading, List<String> body
+});
+
+
+
+
+}
+/// @nodoc
+class __$ResearchSectionCopyWithImpl<$Res>
+    implements _$ResearchSectionCopyWith<$Res> {
+  __$ResearchSectionCopyWithImpl(this._self, this._then);
+
+  final _ResearchSection _self;
+  final $Res Function(_ResearchSection) _then;
+
+/// Create a copy of ResearchSection
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? heading = freezed,Object? body = null,}) {
+  return _then(_ResearchSection(
+heading: freezed == heading ? _self.heading : heading // ignore: cast_nullable_to_non_nullable
+as String?,body: null == body ? _self._body : body // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
