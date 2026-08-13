@@ -127,9 +127,14 @@ class StaticApi {
     } on Object {
       // Offline. Fall back to the last manifest we successfully stored so the
       // version comparison still works against cached documents.
-      final cached = await _cache.read(manifestPath);
-      if (cached == null) return null;
+      //
+      // The whole of this recovery is guarded, including the cache read. It is
+      // an error handler, and an error handler that can throw is worse than no
+      // error handler at all: a cache that threw here escaped `_loadManifest`
+      // entirely and errored every document stream in the app.
       try {
+        final cached = await _cache.read(manifestPath);
+        if (cached == null) return null;
         final parsed = Manifest.fromJson(
           jsonDecode(cached.body) as Map<String, dynamic>,
         );
@@ -151,7 +156,17 @@ class StaticApi {
     // The manifest decides whether the cache is still valid, so it is read
     // before the cache rather than after.
     final wanted = await _expectedVersion(resource);
-    final cached = await _cache.read(path);
+    // The cache is an optimisation and is not allowed to break a screen. If it
+    // throws, the honest state is "nothing cached", and the fetch below still
+    // runs. An unguarded read here errored the whole stream before any request
+    // was made, so every screen said "not downloaded yet" on a working
+    // connection — with no network error anywhere, because none had occurred.
+    CachedDocument? cached;
+    try {
+      cached = await _cache.read(path);
+    } on Object {
+      cached = null;
+    }
     final isCurrent = cached != null && cached.version == wanted;
 
     if (cached != null) {
@@ -165,7 +180,15 @@ class StaticApi {
 
     try {
       final body = await _source.fetch(path);
-      await _cache.write(path, body, version: wanted);
+      // Storing the copy is the last thing that should be able to lose it: the
+      // document is already in hand, and failing to write it is a slower next
+      // launch, not a broken screen. A throw here is not a DocumentUnavailable,
+      // so it sailed past the handler below and errored the stream.
+      try {
+        await _cache.write(path, body, version: wanted);
+      } on Object {
+        // Nothing to do — the document is served either way.
+      }
       yield DocumentSnapshot(
         body: body,
         origin: _source.isRefreshable

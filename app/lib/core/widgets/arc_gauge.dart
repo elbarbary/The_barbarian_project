@@ -53,6 +53,14 @@ class BArcGauge extends StatefulWidget {
     super.key,
   });
 
+  /// How far the arc's pivot sits above the bottom of the box.
+  ///
+  /// Shared by the painter and the label layout so the reading stays put inside
+  /// the bowl at any [size]. The two used to carry the number separately, and
+  /// the labels were anchored 24pt above the pivot — which pushed the reading up
+  /// into the blades and left the bottom of the bowl empty.
+  static const double pivotInset = 22;
+
   final double size;
   final double value;
   final double min;
@@ -155,7 +163,10 @@ class _BArcGaugeState extends State<BArcGauge>
                 ),
               ),
               Positioned(
-                bottom: 46,
+                // Seated just above the arc's own centre line, so the reading
+                // and its caption sit in the middle of the bowl rather than
+                // riding up against the blades.
+                bottom: BArcGauge.pivotInset + 4,
                 left: 0,
                 right: 0,
                 child: Column(
@@ -277,7 +288,7 @@ class _ArcGaugePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size canvasSize) {
-    final pivot = Offset(size / 2, canvasSize.height - 22);
+    final pivot = Offset(size / 2, canvasSize.height - BArcGauge.pivotInset);
     final rod = size / 2;
     final tick = (size * 0.145).roundToDouble();
     final litBlades = _litBlades();

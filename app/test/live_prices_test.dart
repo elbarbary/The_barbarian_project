@@ -299,6 +299,34 @@ void main() {
       expect(snapshot!.body, 'from network');
     });
 
+    // A broken cache is not a broken screen. When FileDocumentCache let a
+    // MissingPluginException escape, StaticApi.load errored before it made any
+    // request, and every screen in the app read "not downloaded yet" on a
+    // device with a working connection.
+    test('a cache that throws does not stop the fetch', () async {
+      final snapshot = await StaticApi(
+        source: const _StubSource({
+          'manifest.json': manifest,
+          'market.json': 'from network',
+        }),
+        cache: _ExplodingCache(),
+        seed: const _StubSource({}),
+      ).loadOnce('market.json', resource: 'market');
+
+      expect(snapshot!.body, 'from network');
+      expect(snapshot.origin, DocumentOrigin.network);
+    });
+
+    test('a cache that throws still falls through to the bundle', () async {
+      final snapshot = await StaticApi(
+        source: const _StubSource({'manifest.json': manifest}),
+        cache: _ExplodingCache(),
+        seed: const _StubSource({'market.json': 'from bundle'}),
+      ).loadOnce('market.json', resource: 'market');
+
+      expect(snapshot!.body, 'from bundle');
+    });
+
     test('a miss on both reports the network reason, not the bundle', () async {
       await expectLater(
         api(
@@ -315,6 +343,24 @@ void main() {
       );
     });
   });
+}
+
+/// Behaves like a cache whose backing store is unavailable — the plugin missing,
+/// the directory unreadable — by throwing rather than returning null.
+class _ExplodingCache implements DocumentCache {
+  @override
+  Future<CachedDocument?> read(String key) async =>
+      throw StateError('no cache available');
+
+  @override
+  Future<void> write(String key, String body, {required int version}) async =>
+      throw StateError('no cache available');
+
+  @override
+  Future<void> delete(String key) async => throw StateError('no cache');
+
+  @override
+  Future<void> clear() async => throw StateError('no cache');
 }
 
 class _StubSource implements DocumentSource {

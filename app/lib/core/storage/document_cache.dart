@@ -49,13 +49,22 @@ class FileDocumentCache implements DocumentCache {
   }
 
   Future<Directory> _resolve() async {
-    final support = await getApplicationSupportDirectory();
-    final dir = Directory('${support.path}/static-cache');
-    if (!dir.existsSync()) {
-      await dir.create(recursive: true);
+    try {
+      final support = await getApplicationSupportDirectory();
+      final dir = Directory('${support.path}/static-cache');
+      if (!dir.existsSync()) {
+        await dir.create(recursive: true);
+      }
+      _root = dir;
+      return dir;
+    } on Object {
+      // Drop the memoised future so a transient failure — the plugin not yet
+      // registered on the very first frame, say — does not disable the cache for
+      // the rest of the process. Without this, one early miss meant every later
+      // read and write failed too.
+      _pending = null;
+      rethrow;
     }
-    _root = dir;
-    return dir;
   }
 
   /// Document keys contain slashes (`companies/SWDY.json`). Flattening them
@@ -91,7 +100,16 @@ class FileDocumentCache implements DocumentCache {
       // it just means there is nothing cached (spec §49).
       await delete(key);
       return null;
-    } on FileSystemException {
+    } on Object {
+      // Anything else — a missing path_provider plugin, a sandbox permission,
+      // an unreadable directory — means the same thing to a caller: there is no
+      // cached copy. It must never mean "this screen is broken".
+      //
+      // This used to catch only FileSystemException, so a MissingPluginException
+      // from getApplicationSupportDirectory() escaped into StaticApi.load and
+      // errored the stream before any fetch was attempted. Every screen in the
+      // app showed "not downloaded yet" at once, on a device with a working
+      // connection, and no network error was ever logged because none happened.
       return null;
     }
   }
@@ -110,8 +128,10 @@ class FileDocumentCache implements DocumentCache {
       final tmp = File('${file.path}.tmp');
       await tmp.writeAsString(payload, flush: true);
       await tmp.rename(file.path);
-    } on FileSystemException {
-      // Caching is an optimisation. Failing to cache must never fail a screen.
+    } on Object {
+      // Caching is an optimisation. Failing to cache must never fail a screen,
+      // and that holds for a missing plugin or a sandbox refusal just as much
+      // as for a disk error.
     }
   }
 
@@ -120,7 +140,7 @@ class FileDocumentCache implements DocumentCache {
     try {
       final file = await _fileFor(key);
       if (file.existsSync()) await file.delete();
-    } on FileSystemException {
+    } on Object {
       // ignored, see write()
     }
   }
@@ -133,7 +153,7 @@ class FileDocumentCache implements DocumentCache {
         await dir.delete(recursive: true);
         await dir.create(recursive: true);
       }
-    } on FileSystemException {
+    } on Object {
       // ignored, see write()
     }
   }
