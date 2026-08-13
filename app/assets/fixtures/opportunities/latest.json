@@ -145,6 +145,38 @@
   "rejected": [],
   "outcomes": [
     {
+      "ticker": "COSG",
+      "status": "rejected",
+      "status_label": "Mixed filing / sector alert",
+      "return_percent": "0.00%",
+      "direction": "up",
+      "note": "First permanent mark at the corrected alert the H1 headline is weakened by a derived Q2 loss. If confirmed: 3–5 sessions review 16 August exit on adverse evidence, failed confirmation or liquidity breach."
+    },
+    {
+      "ticker": "MOSC",
+      "status": "rejected",
+      "status_label": "Tape propagation alert",
+      "return_percent": "0.00%",
+      "direction": "up",
+      "note": "Its 10 August RV20 5.10× signal should have opened the sector investigation, but close strength failed. If confirmed: 1–3 sessions review 16 August exit on anti-chasing, failed high close or liquidity breach."
+    },
+    {
+      "ticker": "ZEOT",
+      "status": "rejected",
+      "status_label": "Tape propagation alert",
+      "return_percent": "0.00%",
+      "direction": "up",
+      "note": "Provisional breadth only no catalyst or confirmation transfers from peers. If confirmed: 1–3 sessions review 16 August exit on failed follow-through, adverse evidence or liquidity breach."
+    },
+    {
+      "ticker": "AJWA",
+      "status": "rejected",
+      "status_label": "Extended-peer pressure",
+      "return_percent": "0.00%",
+      "direction": "up",
+      "note": "The 12 August high-close pressure broadened the cohort but remained below RV20 3×. If confirmed: 1–3 sessions review 16 August exit on failed base/volume or liquidity breach."
+    },
+    {
       "ticker": "MCQE",
       "status": "rejected",
       "status_label": "Timing/execution miss",
