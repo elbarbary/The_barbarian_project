@@ -2471,7 +2471,10 @@ as int,
 /// @nodoc
 mixin _$ScanOutcome {
 
- String get ticker; String get status;@JsonKey(name: 'status_label') String? get statusLabel;@JsonKey(name: 'return_percent') String? get returnPercent; String get direction; String? get note;
+ String get ticker;/// The row's own wording when it names more than one company —
+/// "ARVA / AMII". [ticker] stays the first, so the row can still open a
+/// company screen; this is what gets displayed.
+ String? get label; String get status;@JsonKey(name: 'status_label') String? get statusLabel;@JsonKey(name: 'return_percent') String? get returnPercent; String get direction; String? get note;
 /// Create a copy of ScanOutcome
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2484,16 +2487,16 @@ $ScanOutcomeCopyWith<ScanOutcome> get copyWith => _$ScanOutcomeCopyWithImpl<Scan
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanOutcome&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.returnPercent, returnPercent) || other.returnPercent == returnPercent)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.note, note) || other.note == note));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScanOutcome&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.label, label) || other.label == label)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.returnPercent, returnPercent) || other.returnPercent == returnPercent)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.note, note) || other.note == note));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,status,statusLabel,returnPercent,direction,note);
+int get hashCode => Object.hash(runtimeType,ticker,label,status,statusLabel,returnPercent,direction,note);
 
 @override
 String toString() {
-  return 'ScanOutcome(ticker: $ticker, status: $status, statusLabel: $statusLabel, returnPercent: $returnPercent, direction: $direction, note: $note)';
+  return 'ScanOutcome(ticker: $ticker, label: $label, status: $status, statusLabel: $statusLabel, returnPercent: $returnPercent, direction: $direction, note: $note)';
 }
 
 
@@ -2504,7 +2507,7 @@ abstract mixin class $ScanOutcomeCopyWith<$Res>  {
   factory $ScanOutcomeCopyWith(ScanOutcome value, $Res Function(ScanOutcome) _then) = _$ScanOutcomeCopyWithImpl;
 @useResult
 $Res call({
- String ticker, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'return_percent') String? returnPercent, String direction, String? note
+ String ticker, String? label, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'return_percent') String? returnPercent, String direction, String? note
 });
 
 
@@ -2521,10 +2524,11 @@ class _$ScanOutcomeCopyWithImpl<$Res>
 
 /// Create a copy of ScanOutcome
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? status = null,Object? statusLabel = freezed,Object? returnPercent = freezed,Object? direction = null,Object? note = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? label = freezed,Object? status = null,Object? statusLabel = freezed,Object? returnPercent = freezed,Object? direction = null,Object? note = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,statusLabel: freezed == statusLabel ? _self.statusLabel : statusLabel // ignore: cast_nullable_to_non_nullable
 as String?,returnPercent: freezed == returnPercent ? _self.returnPercent : returnPercent // ignore: cast_nullable_to_non_nullable
 as String?,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
@@ -2614,10 +2618,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String? label,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScanOutcome() when $default != null:
-return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
+return $default(_that.ticker,_that.label,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
   return orElse();
 
 }
@@ -2635,10 +2639,10 @@ return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String? label,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)  $default,) {final _that = this;
 switch (_that) {
 case _ScanOutcome():
-return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
+return $default(_that.ticker,_that.label,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2655,10 +2659,10 @@ return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String? label,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'return_percent')  String? returnPercent,  String direction,  String? note)?  $default,) {final _that = this;
 switch (_that) {
 case _ScanOutcome() when $default != null:
-return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
+return $default(_that.ticker,_that.label,_that.status,_that.statusLabel,_that.returnPercent,_that.direction,_that.note);case _:
   return null;
 
 }
@@ -2670,10 +2674,14 @@ return $default(_that.ticker,_that.status,_that.statusLabel,_that.returnPercent,
 @JsonSerializable()
 
 class _ScanOutcome extends ScanOutcome {
-  const _ScanOutcome({required this.ticker, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'return_percent') this.returnPercent, this.direction = 'up', this.note}): super._();
+  const _ScanOutcome({required this.ticker, this.label, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'return_percent') this.returnPercent, this.direction = 'up', this.note}): super._();
   factory _ScanOutcome.fromJson(Map<String, dynamic> json) => _$ScanOutcomeFromJson(json);
 
 @override final  String ticker;
+/// The row's own wording when it names more than one company —
+/// "ARVA / AMII". [ticker] stays the first, so the row can still open a
+/// company screen; this is what gets displayed.
+@override final  String? label;
 @override@JsonKey() final  String status;
 @override@JsonKey(name: 'status_label') final  String? statusLabel;
 @override@JsonKey(name: 'return_percent') final  String? returnPercent;
@@ -2693,16 +2701,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanOutcome&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.returnPercent, returnPercent) || other.returnPercent == returnPercent)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.note, note) || other.note == note));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScanOutcome&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.label, label) || other.label == label)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.returnPercent, returnPercent) || other.returnPercent == returnPercent)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.note, note) || other.note == note));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,status,statusLabel,returnPercent,direction,note);
+int get hashCode => Object.hash(runtimeType,ticker,label,status,statusLabel,returnPercent,direction,note);
 
 @override
 String toString() {
-  return 'ScanOutcome(ticker: $ticker, status: $status, statusLabel: $statusLabel, returnPercent: $returnPercent, direction: $direction, note: $note)';
+  return 'ScanOutcome(ticker: $ticker, label: $label, status: $status, statusLabel: $statusLabel, returnPercent: $returnPercent, direction: $direction, note: $note)';
 }
 
 
@@ -2713,7 +2721,7 @@ abstract mixin class _$ScanOutcomeCopyWith<$Res> implements $ScanOutcomeCopyWith
   factory _$ScanOutcomeCopyWith(_ScanOutcome value, $Res Function(_ScanOutcome) _then) = __$ScanOutcomeCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'return_percent') String? returnPercent, String direction, String? note
+ String ticker, String? label, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'return_percent') String? returnPercent, String direction, String? note
 });
 
 
@@ -2730,10 +2738,11 @@ class __$ScanOutcomeCopyWithImpl<$Res>
 
 /// Create a copy of ScanOutcome
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? status = null,Object? statusLabel = freezed,Object? returnPercent = freezed,Object? direction = null,Object? note = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? label = freezed,Object? status = null,Object? statusLabel = freezed,Object? returnPercent = freezed,Object? direction = null,Object? note = freezed,}) {
   return _then(_ScanOutcome(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
-as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String,label: freezed == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,statusLabel: freezed == statusLabel ? _self.statusLabel : statusLabel // ignore: cast_nullable_to_non_nullable
 as String?,returnPercent: freezed == returnPercent ? _self.returnPercent : returnPercent // ignore: cast_nullable_to_non_nullable
 as String?,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable

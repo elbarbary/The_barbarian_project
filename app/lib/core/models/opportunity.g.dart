@@ -220,6 +220,7 @@ Map<String, dynamic> _$RubricComponentToJson(_RubricComponent instance) =>
 
 _ScanOutcome _$ScanOutcomeFromJson(Map<String, dynamic> json) => _ScanOutcome(
   ticker: json['ticker'] as String,
+  label: json['label'] as String?,
   status: json['status'] as String? ?? 'rejected',
   statusLabel: json['status_label'] as String?,
   returnPercent: json['return_percent'] as String?,
@@ -230,6 +231,7 @@ _ScanOutcome _$ScanOutcomeFromJson(Map<String, dynamic> json) => _ScanOutcome(
 Map<String, dynamic> _$ScanOutcomeToJson(_ScanOutcome instance) =>
     <String, dynamic>{
       'ticker': instance.ticker,
+      'label': instance.label,
       'status': instance.status,
       'status_label': instance.statusLabel,
       'return_percent': instance.returnPercent,

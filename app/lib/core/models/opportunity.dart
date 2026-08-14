@@ -280,6 +280,11 @@ abstract class RubricComponent with _$RubricComponent {
 abstract class ScanOutcome with _$ScanOutcome {
   const factory ScanOutcome({
     required String ticker,
+
+    /// The row's own wording when it names more than one company —
+    /// "ARVA / AMII". [ticker] stays the first, so the row can still open a
+    /// company screen; this is what gets displayed.
+    String? label,
     @Default('rejected') String status,
     @JsonKey(name: 'status_label') String? statusLabel,
     @JsonKey(name: 'return_percent') String? returnPercent,

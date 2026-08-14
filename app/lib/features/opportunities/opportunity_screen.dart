@@ -138,28 +138,26 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                       setState(() => _section = _Section.values[i]),
                 ),
                 const SizedBox(height: 14),
-                Text(
-                  switch (_section) {
-                    _Section.qualified =>
-                      'Cleared the test. Worth reading the filing.',
-                    _Section.watching =>
-                      'Ranked accumulation watch. Something is there, but the '
-                          'evidence is incomplete.',
-                    _Section.rejected =>
-                      'Failed the test, and kept on the record.',
-                    _Section.record =>
-                      'What actually happened to every name the scanner '
-                          'flagged — the misses included. This is the half most '
-                          'places delete.',
-                  },
-                  style: BarbarianType.bodyM.copyWith(color: c.textMuted),
-                ),
+                Text(switch (_section) {
+                  _Section.qualified =>
+                    'Cleared the test. Worth reading the filing.',
+                  _Section.watching =>
+                    'Ranked accumulation watch. Something is there, but the '
+                        'evidence is incomplete.',
+                  _Section.rejected =>
+                    'Failed the test, and kept on the record.',
+                  _Section.record =>
+                    'What actually happened to every name the scanner '
+                        'flagged — the misses included. This is the half most '
+                        'places delete.',
+                }, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
                 const SizedBox(height: 16),
                 if (_section == _Section.record)
                   if (report.outcomes.isEmpty)
                     const BEmptyState(
                       title: 'No outcomes published yet',
-                      body: 'Results appear here as each flagged name resolves.',
+                      body:
+                          'Results appear here as each flagged name resolves.',
                     )
                   else
                     for (final outcome in report.outcomes) ...[
@@ -200,8 +198,18 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
 
   static String _formatDate(DateTime d) {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${d.day} ${months[d.month - 1]} ${d.year}';
   }
@@ -225,10 +233,7 @@ class _CoverageStrip extends StatelessWidget {
           const BSectionLabel('Coverage', onDark: true),
           Row(
             children: [
-              _CoverageStat(
-                value: '${coverage.thndr}',
-                label: 'Tradable',
-              ),
+              _CoverageStat(value: '${coverage.thndr}', label: 'Tradable'),
               _CoverageStat(value: '${coverage.egx}', label: 'Listed'),
               _CoverageStat(
                 value: '${coverage.adjustedHistories}',
@@ -357,9 +362,7 @@ class _ScannedCard extends StatelessWidget {
                   Expanded(
                     child: Text(
                       cat,
-                      style: BarbarianType.bodyM.copyWith(
-                        color: c.textPrimary,
-                      ),
+                      style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
                     ),
                   ),
                 ],
@@ -443,8 +446,7 @@ class _OutcomeCard extends StatelessWidget {
     final up = outcome.isUp;
 
     return BPressable(
-      onTap: () =>
-          context.push(Routes.companyPath(parentTab, outcome.ticker)),
+      onTap: () => context.push(Routes.companyPath(parentTab, outcome.ticker)),
       scale: 0.99,
       child: BPaperCard(
         child: Column(
@@ -452,19 +454,38 @@ class _OutcomeCard extends StatelessWidget {
           children: [
             Row(
               children: [
-BTickerMonogram(outcome.ticker, size: 38),
+                BTickerMonogram(outcome.ticker, size: 38),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    outcome.statusLabel ?? '',
-                    style: BarbarianType.labelS.copyWith(
-                      color: BarbarianPalette.scanStatus(
-                        c,
-                        outcome.statusLabel,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Only when the row covers more than one company: the
+                      // monogram already carries a single ticker, but it cannot
+                      // show that "ARVA / AMII" was one result.
+                      if (outcome.label case final String pair) ...[
+                        Text(
+                          pair,
+                          style: BarbarianType.labelS.copyWith(
+                            color: c.textPrimary,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 2),
+                      ],
+                      Text(
+                        outcome.statusLabel ?? '',
+                        style: BarbarianType.labelS.copyWith(
+                          color: BarbarianPalette.scanStatus(
+                            c,
+                            outcome.statusLabel,
+                          ),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    ],
                   ),
                 ),
                 if (outcome.returnPercent case final String r)
@@ -796,38 +817,51 @@ class BScanGates extends StatelessWidget {
                 'fail' => '✕',
                 _ => '!',
               };
-              return Container(
-                padding: const EdgeInsets.fromLTRB(9, 5, 11, 6),
-                // A gate label is a sentence fragment — "Closed too far from
-                // the high" — and on a 320pt screen the longest of them is
-                // wider than the column. Bounding the chip lets the label wrap
-                // inside it instead of overflowing the row.
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.sizeOf(context).width - 76,
-                ),
-                decoration: BoxDecoration(
-                  color: tone.withValues(alpha: c.isDark ? 0.16 : 0.10),
-                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
-                  border: Border.all(color: tone.withValues(alpha: 0.30)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      mark,
-                      style: BarbarianType.labelNano.copyWith(color: tone),
-                    ),
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: Text(
-                        gate.label,
-                        style: BarbarianType.bodyS.copyWith(
-                          color: onDark ? c.onInk : c.textSecondary,
+              // The glyph carries the outcome for a sighted reader; a screen
+              // reader hears it as punctuation or skips it entirely, leaving
+              // the chip's tint as the only signal — which is exactly what
+              // spec §42 forbids. Say it in words instead.
+              final spoken = switch (gate.outcome) {
+                'pass' => 'Passed',
+                'fail' => 'Failed',
+                _ => 'Unresolved',
+              };
+              return Semantics(
+                label: '$spoken: ${gate.label}',
+                excludeSemantics: true,
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(9, 5, 11, 6),
+                  // A gate label is a sentence fragment — "Closed too far from
+                  // the high" — and on a 320pt screen the longest of them is
+                  // wider than the column. Bounding the chip lets the label wrap
+                  // inside it instead of overflowing the row.
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.sizeOf(context).width - 76,
+                  ),
+                  decoration: BoxDecoration(
+                    color: tone.withValues(alpha: c.isDark ? 0.16 : 0.10),
+                    borderRadius: BorderRadius.circular(BarbarianRadius.md),
+                    border: Border.all(color: tone.withValues(alpha: 0.30)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        mark,
+                        style: BarbarianType.labelNano.copyWith(color: tone),
+                      ),
+                      const SizedBox(width: 6),
+                      Flexible(
+                        child: Text(
+                          gate.label,
+                          style: BarbarianType.bodyS.copyWith(
+                            color: onDark ? c.onInk : c.textSecondary,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

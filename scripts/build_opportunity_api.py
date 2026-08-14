@@ -98,6 +98,17 @@ BANNED_PATTERNS = (
     re.compile(r"\b(invalidation|profit target|target level)", re.I),
     re.compile(r"\bholding clock\b", re.I),
     re.compile(r"\bthe (model|decision) (actually )?enters\b", re.I),
+    # A date the cohort stops being valid is a deadline, and a deadline is
+    # forward-looking. The sector header restates the members' "hard 18 Aug" as
+    # "Expires after 18 August without fresh breadth" — the same window's end,
+    # in the one part of the block that is read. Skipping the members' <dl>
+    # while publishing the header's paraphrase of it was self-defeating.
+    #
+    # Present tense only: "expires" is a deadline, "its clock expired without
+    # entry" is a record of something that already happened, and the record is
+    # the point of the series (spec §7).
+    re.compile(r"\bexpires?\b", re.I),
+    re.compile(r"\b(deadline|expiry)\b", re.I),
 )
 
 # Whole research sections that exist to say what must happen before a trade.
@@ -356,6 +367,21 @@ def sector_context(html: str) -> dict | None:
     }
 
 
+def directory_tickers() -> set[str]:
+    """Tickers the company directory actually carries.
+
+    Used only to disambiguate a row that names a company more than one way.
+    Read best-effort: on a fresh clone the directory has not been built yet,
+    and a missing file must not stop the scanner report from publishing.
+    """
+    published = REPO / "public" / "data" / "v1" / "companies.json"
+    try:
+        doc = json.loads(published.read_text(encoding="utf-8"))
+        return {c["ticker"] for c in doc.get("companies", []) if c.get("ticker")}
+    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        return set()
+
+
 def parse_date(raw: str, year: int) -> str | None:
     m = re.match(r"(\d{1,2})\s+(\w+)", raw.strip())
     if not m:
@@ -433,6 +459,7 @@ def parse(html: str) -> dict:
         headline = text(h.group(1))
 
     cards = signal_cards(html)
+    known_tickers = directory_tickers()
 
     watch = []
     for block in re.findall(
@@ -482,16 +509,32 @@ def parse(html: str) -> dict:
         r'<article class="outcome-row([^"]*)"[^>]*>(.*?)</article>', html, re.S
     ):
         cls, body = block
-        ticker = re.search(r"<strong>([A-Z]{3,6})</strong>", body)
+        # An outcome can name more than one company — "ARVA / AMII" is one row
+        # covering a pair. Requiring a lone ticker silently dropped it, so the
+        # app's ledger showed 21 of the page's 22 outcomes with no warning.
+        # Dropping a result is the one thing this series must never do (spec §7).
+        ticker = re.search(r"<strong>\s*([A-Z][A-Z0-9 /]*[A-Z0-9])\s*</strong>", body)
         badge = re.search(r'<span class="result-badge[^"]*">([^<]+)</span>', body)
         ret = re.search(r'<strong class="outcome-return">([^<]+)</strong>', body)
         note = re.search(r"<p>(.*?)</p>", body, re.S)
         if not ticker:
             continue
+        raw_name = text(ticker.group(1))
+        names = re.findall(r"[A-Z]{3,6}", raw_name)
+        if not names:
+            continue
+        # A paired row is written in the report's own order, which is not
+        # necessarily the exchange's. "ARVA / AMII" names the same company
+        # twice — the scan lists it as AMII — so linking to the first would
+        # open a company screen for a ticker the directory has never heard of.
+        primary = next((n for n in names if n in known_tickers), names[0])
         label = badge.group(1).strip() if badge else ""
         outcomes.append(
             {
-                "ticker": ticker.group(1),
+                # `ticker` stays a single symbol so it can still open a company;
+                # `label` keeps the row's own wording for display.
+                "ticker": primary,
+                "label": raw_name if len(names) > 1 else None,
                 "status": BUCKETS.get(label, "rejected"),
                 "status_label": label,
                 "return_percent": text(ret.group(1)).replace("−", "-") if ret else None,
@@ -520,8 +563,22 @@ def parse(html: str) -> dict:
     }
 
 
-def validate(doc: dict) -> list[str]:
+def validate(doc: dict, html: str | None = None) -> list[str]:
     problems = []
+
+    # Every outcome row on the page must reach the app.
+    #
+    # An "ARVA / AMII" row — one result covering a pair — matched no single
+    # ticker and was skipped in silence, so the ledger published 21 of 22 and
+    # the build reported success. Deleting a result is the one thing this series
+    # exists not to do (spec §7), so a count mismatch fails the build.
+    if html is not None:
+        rows = len(re.findall(r'<article class="outcome-row', html))
+        if rows != len(doc["outcomes"]):
+            problems.append(
+                f"page has {rows} outcome rows but only "
+                f"{len(doc['outcomes'])} parsed — a result is being dropped"
+            )
     if not doc["date"]:
         problems.append("no report date found")
     if not doc["watch"] and not doc["outcomes"]:
@@ -589,8 +646,9 @@ def main() -> int:
     if not SOURCE.exists():
         sys.exit(f"error: {SOURCE} not found")
 
-    doc = parse(SOURCE.read_text(encoding="utf-8"))
-    problems = validate(doc)
+    source = SOURCE.read_text(encoding="utf-8")
+    doc = parse(source)
+    problems = validate(doc, source)
 
     qualified = [w for w in doc["watch"] if w["status"] == "qualified"]
     watching = [w for w in doc["watch"] if w["status"] == "watching"]

@@ -1,6 +1,7 @@
 import 'package:barbarian/core/models/opportunity.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/opportunities/opportunity_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -67,6 +68,30 @@ void main() {
       for (final note in preserved) {
         expect(note, contains('No holding period — no entry'));
       }
+    });
+
+    // The sector header restated the members' "hard 18 Aug" as "Expires after
+    // 18 August without fresh breadth" — the same deadline, in the one part of
+    // the block that is read. Skipping the members' <dl> while publishing the
+    // header's paraphrase of it was self-defeating.
+    test('publishes no deadline for the cohort', () {
+      for (final fact in report.sector!.timeline) {
+        final blob = '${fact.value} ${fact.detail ?? ''}'.toLowerCase();
+        expect(blob, isNot(contains('expires')));
+        expect(blob, isNot(contains('deadline')));
+      }
+    });
+
+    // A row can cover a pair — "ARVA / AMII". Requiring a lone ticker dropped
+    // it silently, publishing 21 of the page's 22 results. Deleting a result is
+    // the one thing this series exists not to do.
+    test('keeps an outcome row that names more than one company', () {
+      final pair = report.outcomes.where((o) => o.label != null);
+      expect(pair, isNotEmpty);
+      expect(pair.first.label, contains('/'));
+      // The ticker must stay a single symbol so the row can still open a
+      // company screen.
+      expect(pair.first.ticker, matches(RegExp(r'^[A-Z]{3,6}$')));
     });
 
     test('carries the research written out in full', () {
@@ -136,6 +161,26 @@ void main() {
       await pumpUntil(tester, find.byType(BScanGates));
 
       expect(find.byType(BScanGates), findsWidgets);
+    });
+
+    // A screen reader hears a bare ✓/✕/! as punctuation or skips it, leaving
+    // the chip tint as the only signal — which spec §42 forbids.
+    testWidgets('each gate states its outcome in words', (tester) async {
+      usePhoneSurface(tester);
+      await tester.pumpWidget(
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
+      );
+      await pumpUntil(tester, find.byType(BScanGates));
+
+      final spoken = tester
+          .widgetList<Semantics>(find.byType(Semantics))
+          .map((s) => s.properties.label)
+          .whereType<String>()
+          .toList();
+
+      expect(spoken.where((l) => l.startsWith('Passed: ')), isNotEmpty);
+      expect(spoken.where((l) => l.startsWith('Failed: ')), isNotEmpty);
+      expect(spoken.where((l) => l.startsWith('Unresolved: ')), isNotEmpty);
     });
 
     testWidgets('no entry or stop wording reaches the screen', (tester) async {
