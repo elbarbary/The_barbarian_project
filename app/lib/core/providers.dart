@@ -305,15 +305,23 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
 
   @override
   ThemeMode build() {
-    // Follows the system until the user chooses otherwise. The stored value is
-    // read after this build returns and applied once available.
+    // Light by default, not the system's choice.
+    //
+    // The website has no dark mode, so the light theme is the one that was
+    // actually designed — every colour in it is lifted from the site's own
+    // stylesheet. The dark theme is derived from it and has not had a contrast
+    // audit. Defaulting to the system meant a phone set to dark opened the app
+    // in the theme nobody drew.
+    //
+    // "Follow the system" is still offered in You, and a stored choice still
+    // wins; this only changes what a fresh install opens in.
     //
     // The read is deferred rather than started inline: touching another
     // provider synchronously inside build() means a failure there — or a
     // synchronous completion — surfaces as "markNeedsBuild called during
     // build", which turns a missing preference into a crashed screen.
     Future<void>.microtask(_restore);
-    return ThemeMode.system;
+    return ThemeMode.light;
   }
 
   Future<void> _restore() async {
@@ -323,12 +331,15 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
       final mode = switch (stored) {
         'light' => ThemeMode.light,
         'dark' => ThemeMode.dark,
-        _ => ThemeMode.system,
+        'system' => ThemeMode.system,
+        // No stored choice: keep the light default rather than fall back to
+        // the system, which would undo it on every launch.
+        _ => ThemeMode.light,
       };
       if (mode != state) state = mode;
     } on Object {
-      // No stored preference, or no preference store at all. Following the
-      // system is a perfectly good answer.
+      // No stored preference, or no preference store at all. The light default
+      // stands.
     }
   }
 

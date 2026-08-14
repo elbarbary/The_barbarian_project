@@ -35,11 +35,20 @@ class OpportunityScreen extends ConsumerStatefulWidget {
   ConsumerState<OpportunityScreen> createState() => _OpportunityScreenState();
 }
 
-/// The screen's four sections. "Record" is the published outcome list — the
-/// half of the series that most places delete.
+/// The two halves of the report.
+///
+/// A sector read answers a different question from a single-name read — "is
+/// something moving through this whole group" rather than "does this company
+/// deserve a look" — and it scores nothing on the rubric. Sharing a screen made
+/// it look like one more card in the ranking. It gets its own tab.
+enum _Tab { stocks, sector }
+
+/// The stocks tab's four sections. "Record" is the published outcome list —
+/// the half of the series that most places delete.
 enum _Section { qualified, watching, rejected, record }
 
 class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
+  _Tab _tab = _Tab.stocks;
   _Section _section = _Section.watching;
 
   @override
@@ -78,6 +87,9 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
               );
             }
 
+            final sector = report.sector;
+            final hasSector = sector != null && !sector.isEmpty;
+
             final entries = switch (_section) {
               _Section.qualified => report.qualified,
               _Section.watching => report.watching,
@@ -106,88 +118,100 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                     if (isSample) const BSampleDataNotice(),
                   ],
                 ),
-                if (report.headline case final String h) ...[
-                  const SizedBox(height: 18),
-                  BPaperCard(
-                    radius: BarbarianRadius.xl,
-                    child: Text(
-                      h,
-                      style: BarbarianType.headlineL.copyWith(
-                        color: c.textPrimary,
+                const SizedBox(height: 18),
+                _ScannerTabs(
+                  active: _tab,
+                  stocksCount: report.qualifiedCount + report.watchingCount,
+                  sectorCount: hasSector ? sector.members.length : 0,
+                  onChanged: (t) => setState(() => _tab = t),
+                ),
+                const SizedBox(height: 20),
+                if (_tab == _Tab.sector)
+                  if (report.sector case final SectorContext sector)
+                    if (!sector.isEmpty)
+                      _SectorTab(sector: sector)
+                    else
+                      const _NoSector()
+                  else
+                    const _NoSector()
+                else ...[
+                  if (report.headline case final String h) ...[
+                    BPaperCard(
+                      radius: BarbarianRadius.xl,
+                      child: Text(
+                        h,
+                        style: BarbarianType.headlineL.copyWith(
+                          color: c.textPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-                if (report.sector case final SectorContext sector)
-                  if (!sector.isEmpty) ...[
                     const SizedBox(height: 18),
-                    _SectorCard(sector: sector),
                   ],
-                const SizedBox(height: 18),
-                _CoverageStrip(report: report),
-                const SizedBox(height: 18),
-                BSegmentedRow(
-                  segments: [
-                    BSegment(label: 'Qualified ${report.qualifiedCount}'),
-                    BSegment(label: 'Watch ${report.watchingCount}'),
-                    BSegment(label: 'Rejected ${report.rejectedCount}'),
-                    BSegment(label: 'Record ${report.outcomes.length}'),
-                  ],
-                  selectedIndex: _Section.values.indexOf(_section),
-                  onChanged: (i) =>
-                      setState(() => _section = _Section.values[i]),
-                ),
-                const SizedBox(height: 14),
-                Text(switch (_section) {
-                  _Section.qualified =>
-                    'Cleared the test. Worth reading the filing.',
-                  _Section.watching =>
-                    'Ranked accumulation watch. Something is there, but the '
-                        'evidence is incomplete.',
-                  _Section.rejected =>
-                    'Failed the test, and kept on the record.',
-                  _Section.record =>
-                    'What actually happened to every name the scanner '
-                        'flagged — the misses included. This is the half most '
-                        'places delete.',
-                }, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
-                const SizedBox(height: 16),
-                if (_section == _Section.record)
-                  if (report.outcomes.isEmpty)
-                    const BEmptyState(
-                      title: 'No outcomes published yet',
+                  _CoverageStrip(report: report),
+                  const SizedBox(height: 18),
+                  BSegmentedRow(
+                    segments: [
+                      BSegment(label: 'Qualified ${report.qualifiedCount}'),
+                      BSegment(label: 'Watch ${report.watchingCount}'),
+                      BSegment(label: 'Rejected ${report.rejectedCount}'),
+                      BSegment(label: 'Record ${report.outcomes.length}'),
+                    ],
+                    selectedIndex: _Section.values.indexOf(_section),
+                    onChanged: (i) =>
+                        setState(() => _section = _Section.values[i]),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(switch (_section) {
+                    _Section.qualified =>
+                      'Cleared the test. Worth reading the filing.',
+                    _Section.watching =>
+                      'Ranked accumulation watch. Something is there, but the '
+                          'evidence is incomplete.',
+                    _Section.rejected =>
+                      'Failed the test, and kept on the record.',
+                    _Section.record =>
+                      'What actually happened to every name the scanner '
+                          'flagged — the misses included. This is the half most '
+                          'places delete.',
+                  }, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
+                  const SizedBox(height: 16),
+                  if (_section == _Section.record)
+                    if (report.outcomes.isEmpty)
+                      const BEmptyState(
+                        title: 'No outcomes published yet',
+                        body:
+                            'Results appear here as each flagged name resolves.',
+                      )
+                    else
+                      for (final outcome in report.outcomes) ...[
+                        _OutcomeCard(
+                          outcome: outcome,
+                          parentTab: widget.parentTab,
+                        ),
+                        const SizedBox(height: 10),
+                      ]
+                  else if (entries.isEmpty)
+                    BEmptyState(
+                      title: switch (_section) {
+                        _Section.qualified => 'Nothing qualified today',
+                        _Section.watching => 'Nothing on the watch list',
+                        _ => 'Nothing was rejected today',
+                      },
                       body:
-                          'Results appear here as each flagged name resolves.',
+                          'An empty section is a real answer. The test does not '
+                          'lower its bar to fill a page.',
                     )
                   else
-                    for (final outcome in report.outcomes) ...[
-                      _OutcomeCard(
-                        outcome: outcome,
+                    for (final entry in entries) ...[
+                      _ScannedCard(
+                        entry: entry,
                         parentTab: widget.parentTab,
+                        rubric: report.rubric,
+                        scoring: report.scoring,
                       ),
-                      const SizedBox(height: 10),
-                    ]
-                else if (entries.isEmpty)
-                  BEmptyState(
-                    title: switch (_section) {
-                      _Section.qualified => 'Nothing qualified today',
-                      _Section.watching => 'Nothing on the watch list',
-                      _ => 'Nothing was rejected today',
-                    },
-                    body:
-                        'An empty section is a real answer. The test does not '
-                        'lower its bar to fill a page.',
-                  )
-                else
-                  for (final entry in entries) ...[
-                    _ScannedCard(
-                      entry: entry,
-                      parentTab: widget.parentTab,
-                      rubric: report.rubric,
-                      scoring: report.scoring,
-                    ),
-                    const SizedBox(height: 12),
-                  ],
+                      const SizedBox(height: 12),
+                    ],
+                ],
               ],
             );
           },
@@ -624,14 +648,144 @@ class _RubricBreakdown extends StatelessWidget {
   }
 }
 
-/// A cohort the report read as one story.
+/// The report's two halves, as a top-level switch.
 ///
-/// Given its own card rather than folded into a note, because "four names moved
-/// together for one reason" is a different kind of finding from "this company
-/// did something" — and because the report's own framing is that it scores
-/// nothing. That framing leads, so nobody reads the card as a recommendation.
-class _SectorCard extends StatelessWidget {
-  const _SectorCard({required this.sector});
+/// Deliberately heavier than the section row beneath it: they sit at different
+/// levels, and reusing [BSegmentedRow] for both made "Sector" look like a peer
+/// of "Rejected" rather than a peer of every stock on the list. Each half
+/// carries its own count, so the choice says what is behind it.
+class _ScannerTabs extends StatelessWidget {
+  const _ScannerTabs({
+    required this.active,
+    required this.stocksCount,
+    required this.sectorCount,
+    required this.onChanged,
+  });
+
+  final _Tab active;
+  final int stocksCount;
+  final int sectorCount;
+  final ValueChanged<_Tab> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _ScannerTab(
+            icon: Icons.filter_center_focus_rounded,
+            label: 'Stocks',
+            count: stocksCount,
+            caption: 'Ranked names',
+            selected: active == _Tab.stocks,
+            onTap: () => onChanged(_Tab.stocks),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: _ScannerTab(
+            icon: Icons.hub_outlined,
+            label: 'Sector',
+            count: sectorCount,
+            caption: sectorCount == 0 ? 'None today' : 'One cohort',
+            selected: active == _Tab.sector,
+            onTap: () => onChanged(_Tab.sector),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ScannerTab extends StatelessWidget {
+  const _ScannerTab({
+    required this.icon,
+    required this.label,
+    required this.count,
+    required this.caption,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final int count;
+  final String caption;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    // Selection is carried by fill, border and weight together, never by
+    // colour alone (spec §42); the Semantics `selected` flag carries it for a
+    // screen reader.
+    final tone = selected ? c.accent : c.textMuted;
+
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: '$label, $count',
+      excludeSemantics: true,
+      child: BPressable(
+        onTap: onTap,
+        child: AnimatedContainer(
+          duration: BarbarianMotion.standard,
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.fromLTRB(14, 12, 14, 13),
+          decoration: BoxDecoration(
+            color: selected
+                ? c.accent.withValues(alpha: c.isDark ? 0.18 : 0.09)
+                : c.surface,
+            borderRadius: BorderRadius.circular(BarbarianRadius.lg),
+            border: Border.all(
+              color: selected
+                  ? c.accent.withValues(alpha: 0.42)
+                  : c.glassBorder,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(icon, size: 17, color: tone),
+                  const SizedBox(width: 8),
+                  Text(
+                    label,
+                    style: BarbarianType.labelS.copyWith(
+                      color: selected ? c.textPrimary : c.textSecondary,
+                    ),
+                  ),
+                  const Spacer(),
+                  BNumText(
+                    '$count',
+                    style: BarbarianType.figureS.copyWith(color: tone),
+                    isolate: false,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 3),
+              Text(
+                caption,
+                style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The sector tab.
+///
+/// A whole screen rather than a card, because a cohort read has a shape: a
+/// claim, the names it covers, and the trail of evidence that led there. The
+/// report's own framing — "zero qualification points" — leads, so nobody can
+/// mistake a sector read for a ranking.
+class _SectorTab extends StatelessWidget {
+  const _SectorTab({required this.sector});
 
   final SectorContext sector;
 
@@ -639,142 +793,225 @@ class _SectorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
 
-    return BPaperCard(
-      radius: BarbarianRadius.xl,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (sector.kicker case final String kicker)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                kicker.toUpperCase(),
-                style: BarbarianType.labelNano.copyWith(color: c.violet),
-              ),
-            ),
-          Text(
-            sector.title,
-            style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
-          ),
-          if (sector.thesis case final String thesis) ...[
-            const SizedBox(height: 10),
-            Text(
-              thesis,
-              style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
-            ),
-          ],
-          if (sector.members.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final member in sector.members)
-                  _SectorMemberChip(member: member),
-              ],
-            ),
-          ],
-          if (sector.timeline.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            for (var i = 0; i < sector.timeline.length; i++)
-              Container(
-                padding: EdgeInsets.only(
-                  top: i == 0 ? 0 : 10,
-                  bottom: i == sector.timeline.length - 1 ? 0 : 10,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // The claim, on the feature surface — this is the one thing on the tab
+        // that is an assertion rather than a record.
+        BDarkCard(
+          radius: BarbarianRadius.xl,
+          padding: const EdgeInsets.all(22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (sector.kicker case final String kicker)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    kicker.toUpperCase(),
+                    style: BarbarianType.labelNano.copyWith(
+                      color: c.accentOnInk,
+                    ),
+                  ),
                 ),
-                foregroundDecoration: i == sector.timeline.length - 1
-                    ? null
-                    : BHairline.rowBottom(context),
-                child: _SectorFactRow(fact: sector.timeline[i]),
+              Text(
+                sector.title,
+                style: BarbarianType.displayS.copyWith(color: c.onInk),
               ),
+              if (sector.thesis case final String thesis) ...[
+                const SizedBox(height: 12),
+                Text(
+                  thesis,
+                  style: BarbarianType.bodyL.copyWith(color: c.onInkMuted),
+                ),
+              ],
+            ],
+          ),
+        ),
+        if (sector.members.isNotEmpty) ...[
+          const SizedBox(height: 22),
+          BSectionLabel('The cohort · ${sector.members.length} names'),
+          for (var i = 0; i < sector.members.length; i++) ...[
+            _SectorMemberRow(member: sector.members[i]),
+            if (i != sector.members.length - 1) const SizedBox(height: 8),
           ],
         ],
-      ),
+        if (sector.timeline.isNotEmpty) ...[
+          const SizedBox(height: 22),
+          const BSectionLabel('How it was read'),
+          BPaperCard(
+            radius: BarbarianRadius.xl,
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+            child: Column(
+              children: [
+                for (var i = 0; i < sector.timeline.length; i++)
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    foregroundDecoration: i == sector.timeline.length - 1
+                        ? null
+                        : BHairline.rowBottom(context),
+                    child: _SectorFactRow(
+                      fact: sector.timeline[i],
+                      step: i + 1,
+                      isLast: i == sector.timeline.length - 1,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+        const SizedBox(height: 18),
+        // Said plainly rather than left to be inferred from the kicker.
+        BPaperCard(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.info_outline_rounded, size: 17, color: c.textMuted),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'A sector read changes what gets investigated first. It '
+                  'scores nothing on the rubric, and none of these names has '
+                  'qualified on its own evidence.',
+                  style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
 
-class _SectorMemberChip extends StatelessWidget {
-  const _SectorMemberChip({required this.member});
+/// Shown when the report carries no cohort — most days.
+class _NoSector extends StatelessWidget {
+  const _NoSector();
+
+  @override
+  Widget build(BuildContext context) => const BEmptyState(
+    title: 'No sector read today',
+    body:
+        'A cohort appears when several names in one industry move for the '
+        'same reason. Most days none does, and that is a result rather than '
+        'a gap.',
+  );
+}
+
+/// One member of the cohort, given a row rather than a chip.
+class _SectorMemberRow extends StatelessWidget {
+  const _SectorMemberRow({required this.member});
 
   final SectorMember member;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(11, 8, 11, 9),
-      decoration: BoxDecoration(
-        color: c.violet.withValues(alpha: c.isDark ? 0.16 : 0.09),
-        borderRadius: BorderRadius.circular(BarbarianRadius.sm),
-        border: Border.all(color: c.violet.withValues(alpha: 0.28)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+
+    return BPaperCard(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      child: Row(
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                member.ticker,
-                style: BarbarianType.labelS.copyWith(color: c.textPrimary),
-              ),
-              if (member.price case final String price) ...[
-                const SizedBox(width: 8),
+          BTickerMonogram(member.ticker, size: 40),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  member.ticker,
+                  style: BarbarianType.labelS.copyWith(color: c.textPrimary),
+                ),
+                if (member.role case final String role) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    role,
+                    style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          if (member.price case final String price)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
                 BNumText(
                   price,
-                  style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
+                  style: BarbarianType.figureS.copyWith(color: c.textPrimary),
                   isolate: false,
                 ),
+                if (member.qualifier case final String q) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    q.replaceAll(RegExp(r'^[·\s]+'), ''),
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                  ),
+                ],
               ],
-            ],
-          ),
-          if (member.role case final String role) ...[
-            const SizedBox(height: 3),
-            Text(
-              role,
-              style: BarbarianType.labelNano.copyWith(color: c.textMuted),
             ),
-          ],
         ],
       ),
     );
   }
 }
 
+/// One step of the evidence trail, numbered.
+///
+/// The rows are a sequence — a leader moved, a peer confirmed, a filing landed
+/// — and numbering them says so. Read as an unordered list they looked like
+/// four unrelated facts.
 class _SectorFactRow extends StatelessWidget {
-  const _SectorFactRow({required this.fact});
+  const _SectorFactRow({
+    required this.fact,
+    required this.step,
+    required this.isLast,
+  });
 
   final SectorFact fact;
+  final int step;
+  final bool isLast;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          width: 92,
+        Container(
+          width: 24,
+          height: 24,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: c.violet.withValues(alpha: c.isDark ? 0.20 : 0.11),
+            shape: BoxShape.circle,
+            border: Border.all(color: c.violet.withValues(alpha: 0.30)),
+          ),
           child: Text(
-            fact.label,
-            style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+            '$step',
+            style: BarbarianType.labelNano.copyWith(color: c.violet),
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                fact.label.toUpperCase(),
+                style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+              ),
+              const SizedBox(height: 4),
+              Text(
                 fact.value,
-                style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
+                style: BarbarianType.bodyL.copyWith(color: c.textPrimary),
               ),
               if (fact.detail case final String detail) ...[
-                const SizedBox(height: 2),
+                const SizedBox(height: 3),
                 Text(
                   detail,
-                  style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                  style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
                 ),
               ],
             ],

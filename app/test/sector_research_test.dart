@@ -142,15 +142,33 @@ void main() {
   });
 
   group('on screen', () {
-    testWidgets('the scanner shows the sector cohort', (tester) async {
+    testWidgets('the scanner opens on stocks, not on the sector', (
+      tester,
+    ) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
         harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
+      await pumpUntil(tester, find.byType(BScanGates));
+
+      // A sector read scores nothing, so it must not be what the screen opens
+      // on — the ranked names are the point.
+      expect(find.textContaining('Edible oils'), findsNothing);
+    });
+
+    testWidgets('the sector tab shows the cohort', (tester) async {
+      usePhoneSurface(tester);
+      await tester.pumpWidget(
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
+      );
+      await pumpUntil(tester, find.text('Sector'));
+      await tapVisible(tester, find.text('Sector'));
       await pumpUntil(tester, find.textContaining('Edible oils'));
 
       expect(find.textContaining('Edible oils'), findsOneWidget);
       expect(find.text('COSG'), findsWidgets);
+      // Stated plainly on the tab, not left to be inferred.
+      expect(find.textContaining('scores nothing'), findsOneWidget);
     });
 
     testWidgets('a watched name shows what was checked', (tester) async {
@@ -188,6 +206,8 @@ void main() {
       await tester.pumpWidget(
         harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
+      await pumpUntil(tester, find.text('Sector'));
+      await tapVisible(tester, find.text('Sector'));
       await pumpUntil(tester, find.textContaining('Edible oils'));
 
       for (final banned in <String>[
