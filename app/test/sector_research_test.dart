@@ -51,6 +51,24 @@ void main() {
       }
     });
 
+    // sanitize() splits on em-dash, semicolon and middle dot to isolate a
+    // trade clause. Those alternatives are consumed by the split, so rejoining
+    // has to put them back — otherwise "No holding period — no entry." ships as
+    // "No holding period no entry." and every "· volume 1.22× normal" runs on.
+    test('keeps the punctuation between clauses it keeps', () {
+      final tape = report.watching.firstWhere((w) => w.tape != null).tape!;
+      expect(tape.detail, contains('·'));
+      expect(tape.detail, isNot(matches(RegExp(r'%\s+volume'))));
+
+      final preserved = report.outcomes
+          .map((o) => o.note ?? '')
+          .where((n) => n.contains('No holding period'));
+      expect(preserved, isNotEmpty);
+      for (final note in preserved) {
+        expect(note, contains('No holding period — no entry'));
+      }
+    });
+
     test('carries the research written out in full', () {
       final withResearch = report.watching.where((w) => w.research.isNotEmpty);
       expect(withResearch, isNotEmpty);

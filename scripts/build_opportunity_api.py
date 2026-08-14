@@ -126,25 +126,63 @@ def sanitize(note: str | None) -> str | None:
     """
     if not note:
         return None
-    keep = []
+
     # Split on sentence ends *and* on the separators the report uses to append
     # a stop, a horizon or a review date as a clause: em-dash, semicolon and
     # the middle dot it strings mechanics together with.
-    for sentence in re.split(r"(?<=[.!?])\s+|\s+—\s+|;\s+|\s*·\s*", note):
-        low = sentence.lower()
-        if "no holding period" in low or "no entry" in low:
-            keep.append(sentence)
+    #
+    # The group is **capturing**, so the separators come back and can be put
+    # where they were. Only the sentence-end alternative is a lookbehind; the
+    # other three are consumed by the split, and rejoining with a plain space
+    # silently deleted them. "No holding period — no entry." shipped as "No
+    # holding period no entry." — the one phrase this function exists to
+    # preserve — and every "+1.77% · volume 1.22× normal" ran together.
+    tokens = re.split(r"((?<=[.!?])\s+|\s+—\s+|;\s+|\s*·\s*)", note)
+
+    kept: list[tuple[str, str]] = []
+    separator = ""
+    for index, token in enumerate(tokens):
+        if index % 2:
+            # Odd positions are the captured separators. Hold the most recent
+            # one; it belongs to whichever clause comes next.
+            separator = token
             continue
-        if any(word in low for word in BANNED):
+
+        clause = token.strip()
+        if not clause:
             continue
-        if any(p.search(sentence) for p in BANNED_PATTERNS):
-            continue
-        keep.append(sentence)
-    cleaned = " ".join(keep).strip()
+
+        low = clause.lower()
+        allowed = "no holding period" in low or "no entry" in low
+        if not allowed:
+            if any(word in low for word in BANNED):
+                continue
+            if any(p.search(clause) for p in BANNED_PATTERNS):
+                continue
+
+        # The first surviving clause opens the string, so it takes no
+        # separator even if it was not first in the original.
+        kept.append(("" if not kept else _separator(separator), clause))
+
+    cleaned = "".join(sep + clause for sep, clause in kept).strip()
     # A clause dropped mid-sentence can leave a dangling connector.
     cleaned = re.sub(r"\s+([.,;:])", r"\1", cleaned)
     cleaned = re.sub(r"[,;:]\s*$", ".", cleaned).strip()
     return cleaned or None
+
+
+def _separator(raw: str) -> str:
+    """The captured separator, normalised to how it should be re-typeset.
+
+    A sentence end captures only the whitespace after the full stop, which the
+    clause before it already carries — so that becomes a plain space.
+    """
+    mark = raw.strip()
+    if not mark:
+        return " "
+    if mark == ";":
+        return "; "
+    return f" {mark} "
 
 
 def signal_cards(html: str) -> dict[str, dict]:
@@ -508,7 +546,24 @@ def validate(doc: dict) -> list[str]:
             return [s for v in node for s in strings(v)]
         return []
 
-    for item in doc["watch"] + doc["outcomes"] + ([doc["sector"]] if doc["sector"] else []):
+    # Everything that gets published, not just the parts that get sanitised.
+    #
+    # `rubric`, `scoring` and `headline` are read straight off the page and
+    # never pass through sanitize(), because they describe the method rather
+    # than a name. That makes them the *only* published strings with no filter
+    # in front of them — so a stop or a target written into the hand-maintained
+    # scoring panel would have gone out unexamined. They are checked here
+    # instead of sanitised, because silently rewriting a description of the
+    # method would be worse than refusing to publish it.
+    subjects = (
+        doc["watch"]
+        + doc["outcomes"]
+        + ([doc["sector"]] if doc["sector"] else [])
+        + doc["rubric"]
+        + [doc["scoring"], {"title": "headline", "text": doc["headline"] or ""}]
+    )
+
+    for item in subjects:
         label = item.get("ticker") or item.get("title") or "document"
         for value in strings(item):
             blob = value.lower()
