@@ -178,11 +178,7 @@
       "move_percent": "-5.27%",
       "gates": [],
       "research": [],
-      "tape": {
-        "label": "13 Aug close",
-        "price": "EGP 17.26",
-        "detail": "−1.54% · RV20 0.29× · close strength 10.0%"
-      }
+      "tape": null
     },
     {
       "ticker": "SMFR",
@@ -387,11 +383,11 @@
     {
       "ticker": "AMOC",
       "label": null,
-      "status": "watching",
-      "status_label": "Tape watch",
-      "return_percent": "+7.52%",
-      "direction": "down",
-      "note": "Repeated volume lacked a new issuer catalyst. No holding period — no entry."
+      "status": "rejected",
+      "status_label": "Persistent earnings watch",
+      "return_percent": "+13.26%",
+      "direction": "up",
+      "note": "Fresh H1 profit +111.0% upgrades the prior tape alert, but the 10:03 Cairo quote is provisional and the operating bridge remains incomplete."
     },
     {
       "ticker": "ATLC",
