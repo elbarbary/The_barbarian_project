@@ -89,14 +89,14 @@
       "score": 8,
       "max_score": 13,
       "seen_at": "2026-08-16",
-      "research_summary": "The +302.5% H1 profit growth and named-buyer cohort remain live, but the 13 August close fell to EGP 67.10 with RV20 0.43× / 26.4% close strength.",
-      "move_percent": "+12.40%",
+      "research_summary": "The +302.5% H1 profit growth and named-buyer cohort remain live, but the 10:26 quote weakened to EGP 66.00, near the EGP 64.70 risk line.",
+      "move_percent": "+10.55%",
       "gates": [],
       "research": [],
       "tape": {
-        "label": "13 Aug close",
-        "price": "EGP 67.10",
-        "detail": "−2.04% · RV20 0.43× · close strength 26.4%"
+        "label": "10:26:45 Cairo capture",
+        "price": "EGP 66.00",
+        "detail": "−1.64% · provisional intraday · EGP 5.4m traded"
       }
     },
     {
@@ -110,27 +110,23 @@
       "move_percent": "+2.15%",
       "gates": [],
       "research": [],
-      "tape": {
-        "label": "13 Aug close",
-        "price": "EGP 24.21",
-        "detail": "+2.72% · RV20 1.63× · close strength 89.4%"
-      }
+      "tape": null
     },
     {
       "ticker": "MFPC",
       "status": "watching",
-      "status_label": "Persistent watch",
+      "status_label": "Fresh base required",
       "score": 7,
       "max_score": 13,
       "seen_at": "2026-08-16",
-      "research_summary": "The 13 August close completed standard tape confirmation at RV20 3.40× and 95.5% close strength; the issuer operating/one-off bridge remains unverified, so the lane does not upgrade.",
-      "move_percent": "+5.89%",
+      "research_summary": "The 13 August tape passed, but the operating bridge did not. At 10:26 price was EGP 41.10, above the old unarmed cap, so the entire risk map is retired and a new base is mandatory.",
+      "move_percent": "+9.05%",
       "gates": [],
       "research": [],
       "tape": {
-        "label": "13 Aug close",
-        "price": "EGP 39.91",
-        "detail": "+5.03% · RV20 3.40× · close strength 95.5%"
+        "label": "10:26:37 Cairo capture",
+        "price": "EGP 41.10",
+        "detail": "+2.98% · provisional intraday · EGP 52.9m traded"
       }
     },
     {
@@ -140,8 +136,8 @@
       "score": 6,
       "max_score": 13,
       "seen_at": "2026-08-16",
-      "research_summary": "H1 profit rose 65.2%; the EGP 13.94 reference is the last pre-release close, so no reaction is inferred before today’s first completed session.",
-      "move_percent": null,
+      "research_summary": "H1 profit rose 65.2%; the 10:26 quote was EGP 14.03, but only EGP 1.7m had traded and no completed post-release bar exists.",
+      "move_percent": "+0.65%",
       "gates": [
         {
           "outcome": "pass",
@@ -153,18 +149,18 @@
         },
         {
           "outcome": "warn",
-          "label": "Operating bridge missing"
+          "label": "Only EGP 1.7m traded at 10:26"
         },
         {
           "outcome": "warn",
-          "label": "No post-release tape"
+          "label": "No completed post-release bar"
         }
       ],
       "research": [],
       "tape": {
-        "label": "13 Aug pre-release close",
-        "price": "EGP 13.94",
-        "detail": "−0.92% · RV20 0.56× · close strength 21.1%"
+        "label": "10:26:41 Cairo capture",
+        "price": "EGP 14.03",
+        "detail": "+0.65% · provisional intraday · EGP 1.7m traded"
       }
     },
     {
@@ -174,11 +170,15 @@
       "score": 6,
       "max_score": 13,
       "seen_at": "2026-08-16",
-      "research_summary": "H1 consolidated profit rose 55.5%; the 13 August response weakened again to RV20 0.29× and 10.0% close strength.",
-      "move_percent": "-5.27%",
+      "research_summary": "H1 consolidated profit rose 55.5%; the 10:26 quote was EGP 17.40, with only EGP 0.6m traded and fragile displayed offer depth.",
+      "move_percent": "-4.50%",
       "gates": [],
       "research": [],
-      "tape": null
+      "tape": {
+        "label": "10:26:49 Cairo capture",
+        "price": "EGP 17.40",
+        "detail": "+0.81% · provisional intraday · EGP 0.6m traded"
+      }
     },
     {
       "ticker": "SMFR",
@@ -385,9 +385,9 @@
       "label": null,
       "status": "rejected",
       "status_label": "Persistent earnings watch",
-      "return_percent": "+13.26%",
+      "return_percent": "+11.48%",
       "direction": "up",
-      "note": "Fresh H1 profit +111.0% upgrades the prior tape alert, but the 10:03 Cairo quote is provisional and the operating bridge remains incomplete."
+      "note": "Fresh H1 profit +111.0% upgrades the prior tape alert, but the 10:26 Cairo quote is provisional and the operating bridge remains incomplete."
     },
     {
       "ticker": "ATLC",
