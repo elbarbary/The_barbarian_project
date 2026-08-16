@@ -524,12 +524,12 @@ body::before {
 .egx-tape-head small { color: rgba(245,242,255,0.38); font-size: 0.62rem; }
 .egx-tape-list { list-style: none; margin-top: 22px; }
 .egx-tape-list li {
-  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 8px 12px; align-items: baseline;
+  display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 7px 12px; align-items: baseline;
   padding: 17px 0; border-top: 1px solid rgba(255,255,255,0.12);
 }
-.egx-tape-list li > span { grid-row: 1 / span 2; color: rgba(245,242,255,0.3); font-size: 0.62rem; }
+.egx-tape-list li > span { grid-row: 1 / span 3; color: rgba(245,242,255,0.3); font-size: 0.62rem; }
 .egx-tape-list strong { color: #e1f28b; font: 700 1.3rem/1 var(--f-display); letter-spacing: -0.02em; }
-.egx-tape-list em { color: rgba(245,242,255,0.7); font-size: 0.68rem; font-style: normal; font-weight: 700; }
+.egx-tape-list em { grid-column: 2; color: rgba(245,242,255,0.7); font-size: 0.68rem; font-style: normal; font-weight: 700; }
 .egx-tape-list small { grid-column: 2 / -1; color: rgba(245,242,255,0.38); font-size: 0.65rem; }
 .egx-home-tape > p {
   margin-top: auto; padding-top: 26px; color: rgba(245,242,255,0.42);
