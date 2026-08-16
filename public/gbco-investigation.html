@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBCO — the first flip condition to actually fire | The Barbarian Project</title>
+<meta name="description" content="GB Corp scored −6 on Q1 data with two named conditions that would change it. Four days later the H1 filing delivered one of them. The score moved to −2. Nothing here is broken — the problem is the price.">
+<meta property="og:title" content="GBCO — I named what would change my mind. Then it happened.">
+<meta property="og:description" content="Q2 operating profit +48.6% while associate income collapsed to 9.9% of pre-tax profit. The flip condition fired. The score moved −6 to −2.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://thebarbarianproject.com/gbco-investigation.html">
+<meta name="theme-color" content="#17122F">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="investigation-page">
+<a class="skip-link" href="#report">Skip to the report</a>
+
+<div class="canvas" aria-hidden="true">
+  <span class="orb orb-blue"></span>
+  <span class="orb orb-violet"></span>
+  <span class="orb orb-rose"></span>
+  <span class="orb orb-lime"></span>
+  <span class="orb orb-cyan"></span>
+</div>
+<div class="noise" aria-hidden="true"></div>
+<div class="report-progress" id="reportProgress" aria-hidden="true"></div>
+
+<nav class="nav glass investigation-nav" id="nav">
+  <a class="nav-brand" href="index.html"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
+  <div class="nav-links">
+    <a class="resource-nav-back" href="cash-or-trash.html">← Cash or Trash</a>
+    <a class="nav-sec" href="#flip">The flip</a>
+    <a class="nav-sec" href="#paper">The paper equity</a>
+    <a class="nav-cta" href="#score">The score</a>
+  </div>
+</nav>
+
+<main id="report">
+  <header class="dossier-hero">
+    <div class="dossier-grid" aria-hidden="true"></div>
+    <div class="shell">
+      <a class="dossier-back reveal" href="cash-or-trash.html">← Back to Cash or Trash</a>
+      <div class="dossier-hero-layout">
+        <div class="dossier-hero-copy">
+          <div class="dossier-stamp reveal">
+            <span>Case 08</span>
+            <span>Published 9 August · rescored 16 August 2026</span>
+          </div>
+          <p class="dossier-code reveal">EGX / GBCO / GB CORP S.A.E.</p>
+          <h1 class="reveal">I said what would<br><em>change my mind.</em><br>Then it happened.</h1>
+          <p class="dossier-deck reveal">Every entry in this series has to name the fact that would flip its verdict. On 9 August I scored GB Corp <b>−6</b> and named two. Four days later the company filed its half-year numbers and <b>one of them fired</b>. This is what it looks like when the framework is made to keep its own promise.</p>
+          <div class="dossier-hero-actions reveal">
+            <a class="btn btn-lime" href="#plain">Read the simple version <span aria-hidden="true">↓</span></a>
+            <a class="dossier-text-link" href="#flip">What actually changed</a>
+          </div>
+        </div>
+
+        <aside class="dossier-cover reveal" aria-label="Verdict">
+          <div class="dossier-cover-top">
+            <span>CASH OR TRASH</span>
+            <span>EGX : GBCO</span>
+          </div>
+          <p>Score</p>
+          <strong>−2<span style="opacity:.4"> / −60</span></strong>
+          <ul>
+            <li><i class="recycle-dot"></i> ♻️ Recyclable — nothing structurally broken</li>
+            <li><i class="fact-dot"></i> Tradability <b>+8</b> — best in the series</li>
+            <li><i class="event-dot"></i> Was <b>−6</b> on 9 Aug · rescored on H1</li>
+            <li><i class="event-dot"></i> 11.2% below its all-time high</li>
+          </ul>
+          <small>Priced at the 13 August 2026 close of EGP 31.50, the last completed session. I am not telling you to invest.</small>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav class="chapter-rail" aria-label="Report sections">
+    <div class="shell">
+      <a href="#plain">Simple version</a>
+      <a href="#flip">The flip</a>
+      <a href="#minority">The minority trick</a>
+      <a href="#paper">The paper equity</a>
+      <a href="#chart">The 2015 cliff</a>
+      <a href="#score">The score</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <!-- 00 PLAIN ENGLISH -->
+  <section class="dossier-section cira-plain" id="plain" aria-labelledby="plain-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">00 / Start here</p>
+          <h2 id="plain-h">GB Corp in<br><em>normal English.</em></h2>
+        </div>
+        <p>Egypt's biggest car group — one in five cars sold — bolted to a lending business that finances a quarter of the country's car loans. Real, large, well run, and priced against a bank deposit paying 19%.</p>
+      </div>
+
+      <ol class="plain-ledger reveal">
+        <li>
+          <span>01</span>
+          <div><h3>The business got better last quarter, not worse.</h3><p>Q2 revenue rose <b>40.9%</b>, the gross margin <b>widened</b> from 15.2% to 16.9% after shrinking in Q1, and operating profit rose <b>48.6%</b>. That is the opposite of what the first quarter suggested.</p></div>
+          <strong>+48.6% operating</strong>
+        </li>
+        <li>
+          <span>02</span>
+          <div><h3>The profit still fell — and the cause is tax.</h3><p>Q2 pre-tax profit was <b>flat, −0.1%</b>. Then tax rose <b>127.8%</b> and net profit fell 28.8%. The whole decline happened below the pre-tax line.</p></div>
+          <strong>Tax, not trading</strong>
+        </li>
+        <li>
+          <span>03</span>
+          <div><h3>Minority shareholders are propping up the headline.</h3><p>Group profit before minorities was <b>EGP 1,055.6m</b>. Profit attributable to <em>you</em> was <b>EGP 1,262.0m</b> — higher, because subsidiaries' other owners absorbed <b>EGP 206.4m</b> of losses. The headline fall of 24.5% is really <b>35.5%</b>.</p></div>
+          <strong>11 points kinder</strong>
+        </li>
+        <li>
+          <span>04</span>
+          <div><h3>Half the book value is a valuation, not a factory.</h3><p><b>EGP 16,720.1m — exactly 50.0%</b> of shareholders' equity — sits in one line for companies the group does not consolidate. Equity grew <b>EGP 3.53bn</b> in a quarter on <b>EGP 0.83bn</b> of profit; most of the rest was a revaluation reserve.</p></div>
+          <strong>50.0% of equity</strong>
+        </li>
+        <li>
+          <span>05</span>
+          <div><h3>The bank pays 19%. This pays 7.2%.</h3><p>At EGP 31.50 the earnings yield is <b>7.2%</b> and the dividend yield <b>1.11%</b>, against a central-bank deposit rate of <b>19%</b>. Nothing is broken here. The arithmetic of owning it at this price is the problem.</p></div>
+          <strong>The whole case</strong>
+        </li>
+      </ol>
+
+      <aside class="plain-verdict reveal" aria-label="Plain English verdict">
+        <p>Real company. <em>Wrong moment.</em></p>
+        <div>
+          <span><b>Liquidity</b> The best in the series — EGP 12.5bn of float.</span>
+          <span><b>Disclosure</b> Also the best. Nobody else publishes this much.</span>
+          <span><b>At EGP 31.50</b> Recyclable. Not a buy, not a problem.</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 01 THE FLIP -->
+  <section class="dossier-section section-tinted" id="flip" aria-labelledby="flip-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">01 / Rule five, tested</p>
+          <h2 id="flip-h">Two conditions named.<br><em>One of them fired.</em></h2>
+        </div>
+        <p>On 9 August, working from Q1, this entry said the thing that would change its mind was <em>&ldquo;a quarter in which operating profit, not associates and FX, carries pre-tax profit.&rdquo;</em> Here is the Q1 picture, and here is what the 13 August release showed.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table class="data-table">
+          <caption>Where pre-tax profit came from, quarter by quarter</caption>
+          <thead><tr><th>Line</th><th>Q1 2026</th><th>Q2 2026</th><th>What changed</th></tr></thead>
+          <tbody>
+            <tr><td>Operating profit</td><td>EGP 1,184.5m <b>(−14.5%)</b></td><td>EGP 2,476.8m <b>(+48.6%)</b></td><td><b>Reversed</b></td></tr>
+            <tr><td>Gross margin</td><td>16.4% → 13.4% <b>(−3.1 pts)</b></td><td>15.2% → 16.9% <b>(+1.7 pts)</b></td><td><b>Reversed</b></td></tr>
+            <tr class="row-hi"><td>Investment gains from associates</td><td>EGP 284.8m = <b>54.0% of pre-tax</b></td><td>EGP 125.4m = <b>9.9% of pre-tax</b></td><td><b>Collapsed −72.2%</b></td></tr>
+            <tr><td>Foreign exchange</td><td>+EGP 143.1m (a gain)</td><td><b>−EGP 166.5m (a loss)</b></td><td>Turned negative</td></tr>
+            <tr class="row-hi"><td>Non-operating share of pre-tax profit</td><td><b>81.1%</b></td><td><b>Under 10%, and net negative</b></td><td><b>The flip</b></td></tr>
+            <tr class="row-total"><td>Earnings before tax</td><td>EGP 527.5m (−30.6%)</td><td>EGP 1,262.9m <b>(−0.1%)</b></td><td>Flat, on operations</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="chart-note reveal"><b>So earnings quality moved −3 → −2, and growth moved −3 → −1.</b> In Q1 the company earned four-fifths of its pre-tax profit from an equity-accounted stake and a currency move while the actual business shrank. In Q2 it earned it by selling things, at a wider margin, with the currency working against it. That is a materially better quarter and the score has to say so.<br><br>
+      <b>The other condition did not fire.</b> The entry also asked for <b>interest cover back above 2× with net-debt/EBITDA under 1.5×</b>. Cover improved from <b>1.52× to 1.60×</b> and net-debt/EBITDA held flat at <b>2.14×</b> — but auto net debt <em>rose</em> from EGP 13,090.9m to <b>EGP 14,493.6m</b> and net-debt-to-equity went <b>0.94× → 1.07×</b>. The ratio improved because EBITDA grew faster than the debt, not because the debt came down. That is the weaker of the two ways to fix a balance sheet, so the pillar moves only −4 → −3.</p>
+    </div>
+  </section>
+
+  <!-- 02 THE MINORITY TRICK -->
+  <section class="dossier-section" id="minority" aria-labelledby="min-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">02 / Read the line below the headline</p>
+          <h2 id="min-h">Your profit is bigger<br><em>than the group's.</em></h2>
+        </div>
+        <p>This framework has a standing instruction: look at profit <em>attributable to owners</em>, not the consolidated headline, when minorities are large. Usually that makes the number worse. At GB Corp it makes it better — and that is its own kind of warning.</p>
+      </div>
+
+      <ul class="bar-rows reveal" role="list">
+        <li>
+          <span class="bar-label">H1 2025 profit before minorities<small>The whole group's earnings</small></span>
+          <span class="bar-track"><i class="bar-fill bar-fill-mute" style="--w:100%"></i></span>
+          <b class="bar-value">EGP 1,635.9m</b>
+        </li>
+        <li>
+          <span class="bar-label">H1 2026 profit before minorities<small>What the group actually earned</small></span>
+          <span class="bar-track"><i class="bar-fill" style="--w:64.5%"></i></span>
+          <b class="bar-value">EGP 1,055.6m<small><b>−35.5%</b></small></b>
+        </li>
+        <li>
+          <span class="bar-label">H1 2026 attributable to shareholders<small>After minorities absorbed EGP 206.4m of losses</small></span>
+          <span class="bar-track"><i class="bar-fill bar-fill-now" style="--w:77.1%"></i></span>
+          <b class="bar-value">EGP 1,262.0m<small><b>−24.5% — the printed figure</b></small></b>
+        </li>
+      </ul>
+
+      <p class="chart-note reveal"><b>The gap is eleven percentage points, and it is widening.</b> A year ago minorities contributed <b>EGP 36.7m</b>; this half it was <b>EGP 206.4m</b>, a rise of 462%. Every press summary of these results quotes the −24.5%. The group's own earnings fell by more than a third.<br><br>
+      <b>The same thing happened in Q1, and harder.</b> The <em>auto segment</em> lost <b>EGP 26.8m</b> before minority interest and reported <b>+EGP 102.9m</b> after it. In Q2 the segment made <b>EGP 387.9m</b> pre-minority, so the pattern eased — but across the half the auto business earned <b>EGP 361.2m</b> before minorities against <b>EGP 607.9m</b> after.</p>
+    </div>
+  </section>
+
+  <!-- 03 THE PAPER EQUITY -->
+  <section class="dossier-section section-dark" id="paper" aria-labelledby="paper-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">03 / What the 1.02× book multiple is measuring</p>
+          <h2 id="paper-h">Half the book<br><em>is a valuation.</em></h2>
+        </div>
+        <p>At EGP 31.50 the stock trades at about <b>1.02× book value</b>, which sounds like a floor. Then you read what the book is made of.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table class="data-table">
+          <caption>Consolidated shareholders' equity, 31 March versus 30 June 2026</caption>
+          <thead><tr><th>Line</th><th>31 Mar 2026</th><th>30 Jun 2026</th><th>Change</th></tr></thead>
+          <tbody>
+            <tr><td>Shareholders' equity before NCI</td><td>EGP 29,927.7m</td><td>EGP 33,454.3m</td><td><b>+3,526.6m</b></td></tr>
+            <tr><td>Attributable profit for the quarter</td><td>—</td><td>EGP 826.3m</td><td>explains 23%</td></tr>
+            <tr class="row-hi"><td>Fair Value Reserve</td><td>EGP 2,356.0m</td><td>EGP 4,212.4m</td><td><b>+1,856.4m</b></td></tr>
+            <tr class="row-total"><td><b>&ldquo;Investments in Subsidiaries&rdquo;</b> — carried through consolidation</td><td>EGP 14,088.2m <b>(47.1% of equity)</b></td><td><b>EGP 16,720.1m</b></td><td><b>50.0% of equity</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="chart-note reveal"><b>Book value grew EGP 3.53bn in three months on EGP 0.83bn of profit.</b> The largest single component of the rest is a <b>fair-value reserve that rose EGP 1,856.4m</b> — a mark, not a cash flow. And the line holding the group's stakes in the businesses it does not consolidate — MNT-Halan, Bedaya, Kaf — now stands at exactly <b>half of all shareholders' equity</b>.<br><br>
+      <b>The company tells you this itself.</b> GB Capital's reported return on equity carries a footnote excluding <em>&ldquo;the high equity base resulting from the revaluation effect linked to the deconsolidation of MNT-Halan.&rdquo;</em> When a business publishes a return metric and instructs you to leave part of its own equity out of the denominator, the price-to-book ratio you calculate with that equity deserves the same discount.<br><br>
+      <b>And there is precedent for how large these marks can be.</b> In <b>4Q 2022</b> the group booked <b>EGP 8,207.3m of associate income in a single quarter</b> — on quarterly revenue of EGP 6,901.5m, a net profit margin of <b>126.3%</b>. That one line was <b>82.2%</b> of the year's EGP 9,985.0m of attributable profit. <b>The following year profit fell 81.1%.</b></p>
+    </div>
+  </section>
+
+  <!-- 04 THE CHART -->
+  <section class="dossier-section" id="chart" aria-labelledby="chart-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">04 / Rule one of the series</p>
+          <h2 id="chart-h">The 2015 cliff<br><em>is not a crash.</em></h2>
+        </div>
+        <p>Every case gets the corporate-action sanitizer before anything else. GB Corp's long chart has one break in it, and it is mechanical.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table class="data-table">
+          <caption>The 2015 rights issue, reconstructed from the adjusted series</caption>
+          <thead><tr><th>Step</th><th>Working</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Share count before</td><td>Capital increase announced 4 Feb 2015</td><td>135,337,545</td></tr>
+            <tr><td>Share count after</td><td>958,672,188 new shares at EGP 1.01, ex 30 Mar 2015</td><td><b>1,094,009,733</b></td></tr>
+            <tr><td>Ratio</td><td>New shares per share held</td><td><b>7.0836 : 1</b></td></tr>
+            <tr class="row-hi"><td>Implied cum price, 29 Mar 2015</td><td>Back-solved from the theoretical ex-price</td><td><b>EGP 33.35</b></td></tr>
+            <tr><td>Theoretical ex-price</td><td>The number the chart drops to</td><td>EGP 5.011</td></tr>
+            <tr class="row-total"><td><b>A subscriber's actual return</b></td><td>EGP 40.51 in → 8.0836 shares worth EGP 254.63</td><td><b>+529%</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="chart-note reveal"><b>In dollars, roughly −10%.</b> Eleven and a half years of Egyptian equity returns, almost entirely eaten by the currency. <em>The FX rates behind that figure are approximate and are the weakest numbers in this file.</em><br><br>
+      <b>No corporate action since.</b> A 2022 treasury cancellation trimmed the count to today's <b>1,085,500,000</b>, and the ticker changed from AUTO to GBCO on 31 May 2023. A gap scan across 3,000 daily bars finds no clean-ratio break after 2016 — every large move in 2024–2026 is a real one.<br><br>
+      <b>Which means the run is real too.</b> GBCO is <b>+22.5% over a year and +386% over three</b>, and sits <b>11.2% below an all-time high set on 15 July 2026</b>. Recyclable is not a buy signal. It is the shelf you re-read when the market falls.</p>
+    </div>
+  </section>
+
+  <!-- 05 THE SCORE -->
+  <section class="dossier-section section-tinted" id="score" aria-labelledby="score-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">05 / The verdict</p>
+          <h2 id="score-h">−6 became −2.<br><em>Same band, better quarter.</em></h2>
+        </div>
+        <p>The first company in this series where nothing is broken. No regulator file, no missing head office, no 500× earnings, no unaudited accounts. KPMG signs it, the coupon gets paid, and you can sell EGP 25m of it inside a day and a half.</p>
+      </div>
+
+      <article class="score-card reveal">
+        <header class="score-head">
+          <div>
+            <span class="verdict verdict-recycle">♻️ RECYCLABLE</span>
+            <h3>GBCO <small>GB Corp S.A.E.</small></h3>
+          </div>
+          <div class="score-total"><b>−2</b><span>of −60 … +60</span></div>
+        </header>
+        <ul class="flag-row">
+          <li>🤝 Related-party revenue</li><li>🧮 Non-operating profit <em>(easing)</em></li>
+        </ul>
+        <ul class="div-rows" role="list">
+          <li><span class="div-name">Valuation</span><span class="div-track"><i class="div-bar div-neg" style="--w:10%;--l:40%"></i></span><b class="div-val neg">−2</b></li>
+          <li><span class="div-name">Earnings quality</span><span class="div-track"><i class="div-bar div-neg" style="--w:10%;--l:40%"></i></span><b class="div-val neg">−2</b></li>
+          <li><span class="div-name">Growth</span><span class="div-track"><i class="div-bar div-neg" style="--w:5%;--l:45%"></i></span><b class="div-val neg">−1</b></li>
+          <li><span class="div-name">Balance sheet</span><span class="div-track"><i class="div-bar div-neg" style="--w:15%;--l:35%"></i></span><b class="div-val neg">−3</b></li>
+          <li><span class="div-name">Tradability</span><span class="div-track"><i class="div-bar div-pos" style="--w:40%;--l:50%"></i></span><b class="div-val pos">+8</b></li>
+          <li><span class="div-name">Governance</span><span class="div-track"><i class="div-bar div-neg" style="--w:10%;--l:40%"></i></span><b class="div-val neg">−2</b></li>
+        </ul>
+        <div class="div-axis"><span>−10</span><span>0</span><span>+10</span></div>
+        <p class="chart-note"><b>Valuation −2.</b> EGP 31.50 × 1,085,500,000 = <b>EGP 34.19bn</b>. That is <b>11.87×</b> FY2025 earnings, <b>13.85×</b> trailing twelve months, <b>1.02× book</b> and a <b>1.11%</b> dividend yield. None of it is expensive — but the <b>CBE overnight deposit rate is 19%</b>, held at the 9 July meeting, and a <b>7.2% earnings yield</b> against 19% risk-free cash is not a bargain. The book multiple flatters worse than the earnings multiple, for the reason set out above.<br><br>
+        <b>Tradability +8 — the best in the series.</b> Free float <b>36.6%</b> = 397,293,000 shares ≈ <b>EGP 12.51bn</b>, on median daily traded value of <b>EGP 79.8m</b>. At 20% of median volume, EGP 5m exits in <b>0.29 sessions</b>, EGP 25m in 1.45, EGP 100m in 5.81. Held below +10 because 63.4% sits in one family trust and two strategic holders inside the &ldquo;float&rdquo; put the genuinely tradable portion nearer 24%.<br><br>
+        <b>Governance −2.</b> The best disclosure this series has read — full segment P&amp;L, balance sheet by segment, segment cash flow and a twelve-row ratio table every quarter, with H1 out on <b>13 August</b>, three days before the press wrote it up. KPMG Hazem Hassan audits. The company answered EGX <b>the same day</b> on 21 January 2026 to deny an EGP 11bn syndicated-loan report. Against that: <b>63.4% control in one family trust</b>; the company carried <b>&ldquo;financial leasing&rdquo; in its articles for years without ever holding a licence for it</b>, corrected in 2026 as a legal-status regularisation; and on <b>14 July 2026 the EGX listing committee, while approving that change, formally cautioned the company</b> to observe Article 26 of the Listing Rules in future. The listed parent's own standalone accounts show <b>no net profit at all</b> in H1 2026.<br><br>
+        <b>What would flip it now.</b> The interest-cover condition still stands: <b>above 2× with net-debt/EBITDA under 1.5×</b>, achieved by paying debt down rather than by growing into it. A second is added: <b>a half in which attributable profit is lower than pre-minority profit</b> — meaning the subsidiaries have stopped subsidising the headline. Or price: near <b>EGP 20</b> the forward earnings yield reaches roughly 11%, and this becomes a different conversation.</p>
+        <a class="dossier-text-link" href="cash-or-trash.html#board">See the full leaderboard →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 SOURCES -->
+  <section class="dossier-section" id="sources" aria-labelledby="src-h">
+    <div class="shell report-shell">
+      <div class="report-heading report-heading-row reveal">
+        <div>
+          <p class="report-index">06 / Show your working</p>
+          <h2 id="src-h">Every number<br><em>and where it came from.</em></h2>
+        </div>
+        <p>Rule one of this series: every figure cites a source and an as-of date. Where something could not be established, that is written down too.</p>
+      </div>
+
+      <div class="card-sources reveal" style="border-top:0;padding-top:0">
+        <ul>
+          <li>H1 / 2Q 2026 group income statement, segment tables, net-debt development and the GB Auto ratio table — GB Corp, <b>2Q/1H26 Earnings Release, 13 August 2026</b> — <a href="https://ir.gb-corporation.com/media/fundamentals/earnings/GB_Corp_ER_2Q26-_E_-_Final.pdf" rel="noopener">ir.gb-corporation.com</a></li>
+          <li>The H1 filing to EGX as reported, including the standalone nil result — <a href="https://www.mubasher.info/news/4659227/" rel="noopener">Mubasher news/4659227</a>, 16 August 2026</li>
+          <li>FY2025 results, the shareholding structure (Ghabbour Family <b>63.4%</b> / free float <b>36.6%</b>) and the share count of <b>1,085,500,000</b> — GB Corp, <b>4Q/FY25 Press Release</b>, 26 February 2026 — <a href="https://ir.gb-corporation.com/media/earnings/newsletters/GB_Corp_PR_4Q25-_E_-_Final.pdf" rel="noopener">ir.gb-corporation.com</a></li>
+          <li>Q1 2026 income statement, balance sheet by segment and the MNT-Halan revaluation footnote — GB Corp, <b>1Q26 Earnings Release</b>, 14 May 2026 — <a href="https://ir.gb-corporation.com/media/fundamentals/earnings/GB_Corp_ER_1Q26-_E_-_Final.pdf" rel="noopener">ir.gb-corporation.com</a></li>
+          <li>FY2022 and FY2023 group income statement — the <b>EGP 8,207.3m</b> of 4Q22 associate income, the <b>126.3%</b> quarterly net margin and the 81.1% FY23 fall — GB Corp, <b>4Q/FY23 Earnings Release</b> — <a href="https://ir.gb-corporation.com/media/earnings/releases/GB_Corp_ER_4Q23_-_ER_-_FINAL.pdf" rel="noopener">ir.gb-corporation.com</a></li>
+          <li>Corporate actions — the 2015 rights issue (135,337,545 → 1,094,009,733 shares at EGP 1.01, ex 30 March 2015), the 2022 treasury cancellation to 1,085,500,000, and the AUTO → GBCO ticker change of 31 May 2023 — Mubasher corporate-actions table (<b>work/gbco/corporate-action.html</b>)</li>
+          <li>Auditor <b>KPMG Hazem Hassan</b>, the board, the ownership chain (R G Trust 63.3176%, Miri Strategic Emerging Markets Fund 7.3669%, Olayan Saudi Investment 4.96%) and the subsidiary list — Mubasher company profile (<b>work/gbco/profile.html</b>)</li>
+          <li>Dividend coupon 9 — EGP 0.35 a share, EGP 379.92m, in two instalments — Mubasher <a href="https://www.mubasher.info/news/4562665/" rel="noopener">news/4562665</a>, <a href="https://www.mubasher.info/news/4585521/" rel="noopener">news/4585521</a>, <a href="https://www.mubasher.info/news/4590225/" rel="noopener">news/4590225</a></li>
+          <li>Deletion of the financial-leasing object, the FRA approval and the <b>EGX listing-committee caution under Article 26</b> — Mubasher <a href="https://www.mubasher.info/news/4562200/" rel="noopener">news/4562200</a>, <a href="https://www.mubasher.info/news/4640910/" rel="noopener">news/4640910</a>, <a href="https://www.mubasher.info/news/4642987/" rel="noopener">news/4642987</a></li>
+          <li>The EGP 11bn syndicated-loan denial in answer to an EGX query — <a href="https://www.mubasher.info/news/4550341/" rel="noopener">Mubasher news/4550341</a>, 21 January 2026</li>
+          <li>CBE policy rate held at <b>19% deposit / 20% lending</b>, a third consecutive meeting — MPC decision of 9 July 2026</li>
+          <li>FY2022 context — the 7.5% MNT-Halan stake sold at a USD 800m valuation, and the GB Lease disposal — Daily News Egypt, October 2022, and the GB Auto FY22 earnings release</li>
+          <li>Daily OHLC and volume, the 55-day moving-average check and the trade-geometry backtest — exchange feed, 3,000 daily bars (<b>work/gbco_long.json</b>, <b>work/gbco_now.json</b>)</li>
+          <li>The <b>ThndrX Rumble</b> technical recommendation of 9 August 2026 (Ahmed Nashy; entry EGP 31.15, target EGP 40.00, stop EGP 29.00) — read from the live Rumble Hub at <a href="https://x.thndr.app" rel="noopener">x.thndr.app</a>. A paid recommendation product, tagged <span lang="ar" dir="rtl">فني</span>/technical. <b>Cited as an object of analysis, not as evidence of anything.</b></li>
+          <li>Full working file — <b>outputs/gbco_research_dossier_2026-08-09.md</b></li>
+          <li class="src-gap"><b>Rescore, 16 August 2026:</b> this entry was published at <b>−6</b> on 9 August on Q1 data. The H1 release of 13 August met one of the two conditions it named, and earnings quality (−3 → −2), growth (−3 → −1) and the balance sheet (−4 → −3) moved. The band did not change. Recorded because rule 5 requires naming what would flip a verdict and rule 6 requires showing it when it does.</li>
+          <li><b>Not established, and recorded as such:</b> the identities behind the 3,161,333 shares of vendor-reported insider selling in April–June 2025 — 0.29% of the company, and the rows were not verified against primary EGX disclosures; the exact EGP/USD rates behind the dollar comparison; the formal count of independent directors, the governance report not having been read; and the composition of the EGP 16,720.1m &ldquo;Investments in Subsidiaries&rdquo; line beyond the affiliates the company names. No allegation of wrongdoing by GB Corp, by ThndrX or its analysts, or by any person connected to either, is made or implied anywhere in this file.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="dossier-end">
+    <div class="shell">
+      <div class="dossier-end-card reveal">
+        <p class="report-index">Case 08 of 224 · the first rescore · 216 to go.</p>
+        <h2>Naming the flip condition<br><em>is the whole discipline.</em></h2>
+        <div class="dossier-hero-actions">
+          <a class="btn btn-lime" href="cash-or-trash.html#board">Back to the leaderboard <span aria-hidden="true">→</span></a>
+          <a class="dossier-text-link" href="cira-investigation.html">Read the CIRA file ↗</a>
+        </div>
+        <small>I am not telling you to invest in anything. This is a study of the Egyptian Exchange, not financial advice. Every figure comes from the company's own published releases, exchange disclosures and market data, and is cited above. Nothing here alleges wrongdoing by GB Corp or by anyone connected to it. Every verdict is my opinion, with the evidence shown so you can disagree with it.</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

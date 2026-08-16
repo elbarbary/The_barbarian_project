@@ -352,6 +352,75 @@ Full file: `outputs/` (BIOC forensic work, July 2026)
 
 ### ♻️ RECYCLABLE
 
+**GBCO — GB Corp S.A.E. · score −2 · 16 Aug 2026** *(originally −6 on 9 Aug; rescored on the H1-2026 filing)*
+Flags: 🤝 RELATED-PARTY REVENUE · 🧮 NON-OPERATING PROFIT *(easing)*
+
+*The first company in this series where nothing is broken — and the first where a named flip condition
+actually fired.*
+
+Price basis: **close of Thursday 13 August 2026, EGP 31.50** — the last completed session. The 16 August
+session was still in progress when this was written, indicated around **EGP 30.38 on 2.28× median volume**
+with a close in the bottom 21% of its range, the market's first full reaction to the H1 numbers.
+Fundamentals basis: **H1 2026 earnings release, 13 August 2026** (six months to 30 June).
+
+At EGP 31.50 × 1,085,500,000 filed shares, market capitalisation is **EGP 34.19bn**.
+
+| Pillar | Score | Basis |
+|---|---:|---|
+| Valuation | −2 | **11.87×** FY2025 earnings, **13.85×** TTM, **1.02× book** and a **1.11%** dividend yield. None of that is expensive — but the **CBE overnight deposit rate is 19%**, held at the 9 July MPC, and a **7.2% earnings yield** against 19% risk-free cash, of which 1.11% is actually paid out, is not a bargain. The book multiple flatters worse than the earnings multiple: **EGP 16,720.1m — exactly 50.0% of the EGP 33,454.3m of consolidated shareholders' equity — sits in one line, "Investments in Subsidiaries", that survives consolidation** |
+| Earnings quality | −2 | **Revised from −3, and this is the pillar that moved.** In Q1 2026, **81.1%** of pre-tax profit came from associates and FX while operating profit *fell* 14.5%. In **Q2 2026 associate income collapsed to EGP 125.4m — 9.9% of pre-tax profit — FX was a EGP 166.5m loss, and operating profit rose 48.6%.** That is precisely the condition the 9 August entry named as a flip: *a quarter in which operating profit, not associates and FX, carries pre-tax profit.* It fired. Held at −2 because the offsetting problem got worse: **minorities absorbed EGP 206.4m of H1 losses against EGP 36.7m a year ago**, so attributable profit of EGP 1,262.0m *exceeds* pre-minority profit of EGP 1,055.6m, and the headline fall of **−24.5%** is 11 points kinder than the **−35.5%** before minorities. And book equity rose **EGP 3,526.6m in a quarter on EGP 826.3m of profit** — **EGP 1,856.4m of it a fair-value reserve**, the same equity base management's own ROAE footnote excludes as *"the high equity base resulting from the revaluation effect linked to the deconsolidation of MNT-Halan"* |
+| Growth | −1 | **Revised from −3.** Q2 revenue **+40.9% to EGP 26,903.6m**, gross margin **expanded 15.2% → 16.9%** after falling 3.4 points in Q1, operating profit **+48.6%**, auto EBITDA **+40.6%**. H1 revenue **+35.2% to EGP 48,474.4m**. The bottom line is still going the wrong way — attributable profit **−21.0%** in Q2 and **−24.5%** in H1 — but **Q2 pre-tax profit was flat (−0.1%) and the entire decline is tax, up 127.8%** in the quarter and 89.0% in the half |
+| Balance sheet | −3 | **Revised from −4.** The collapse in interest cover stopped: **LTM EBITDA / finance cost 1.52× → 1.60×**, net-debt/EBITDA flat at **2.14×**, and GB Capital's provision coverage back above par at **100.4%** from 94.1%. But leverage still built: auto **net debt EGP 13,090.9m → 14,493.6m**, net-debt/equity **0.94× → 1.07×**, group loans and overdrafts EGP 28,703.7m, and **NPLs 2.13% → 2.52% → 2.84%** across three quarters on a portfolio grown to EGP 24.0bn |
+| Tradability | +8 | **The best in the series by a distance.** Free float **36.6%** = 397,293,000 shares ≈ **EGP 12.51bn**. Median daily traded value over 60 sessions **EGP 79.8m**. At 20% of median volume EGP 5m exits in **0.29 sessions**, EGP 25m in 1.45, EGP 100m in 5.81. Held below +10 because 63.4% sits in one family trust (R G Trust, 63.3176%) and two strategic holders inside the "float" — Miri Strategic Emerging Markets Fund 7.3669% and Olayan Saudi Investment 4.96% — put the genuinely tradable portion nearer 24% |
+| Governance | −2 | Genuinely mixed, and **the best disclosure this series has read**. Quarterly releases carry a full segment P&L, a balance sheet by segment, a segment cash-flow statement and a twelve-row ratio table — no other company scored here publishes that, and the H1 release was out on **13 August**, three days before the press wrote it up. KPMG Hazem Hassan audits. The company answered EGX **the same day** on 21 Jan 2026 to deny an EGP 11bn syndicated-loan report, and issued an unprompted clarification five days after the 14 July listing-committee item. Against that: 63.4% control in one trust; the company carried **"financial leasing" in its articles for years without ever holding a licence for it**, corrected only in 2026 as a legal-status regularisation; on **14 July 2026 the EGX listing committee, while approving the object change, formally cautioned the company** to observe Article 26 of the Listing Rules in future; and the listed parent's own standalone accounts show **no net profit at all in H1 2026**, with costs "charged entirely to subsidiaries" |
+
+**The chart is honest, but only after 2015.** A **7.0836-for-1 rights issue at EGP 1.01**, ex 30 March 2015,
+took the share count from **135,337,545 to 1,094,009,733**; a 2022 treasury cancellation trimmed it to
+today's **1,085,500,000**. Reconstructing from the adjusted series, the cum price on 29 March 2015 was
+**EGP 33.35** and the theoretical ex-price **EGP 5.011**. A holder who subscribed put in EGP 40.51 and owns
+8.0836 shares worth **EGP 254.63** today — **+529%** over 11.4 years. In dollars that is roughly **−10%**
+*(FX rates approximate)*. No corporate action since, and no mechanical gap in 3,000 daily bars after 2016.
+
+**The best year in the company's history had a quarter whose profit exceeded its revenue.** In **4Q 2022**
+GB Corp booked **EGP 8,207.3m of "Income From Associates"** on quarterly revenue of EGP 6,901.5m — a **net
+profit margin of 126.3%**. That single line was **82.2% of the year's attributable profit of EGP 9,985.0m**,
+from the MNT-Halan transaction. **The next year profit fell 81.1%, to EGP 1,890.8m.** Revenue has since
+**2.7×'d while attributable profit fell 71%**, and the net margin has gone **33.5% → 2.6%**.
+
+**They sell the car and lend you the money.** Drive Finance held **25% of the Egyptian auto-loan market** in
+2025 while GB Auto held **21% of car sales** on registrations of ~210,000 units. A legitimate and profitable
+model — and the reason the sales line and the credit risk sit in one house.
+
+**What would flip it.** One of the two conditions named on 9 August has now fired. The other has not:
+**interest cover back above 2× with net-debt/EBITDA under 1.5×**. Cover moved 1.52 → 1.60 while net debt
+rose 10.7% to a new high, so the arithmetic improved for the wrong reason — EBITDA grew faster than the
+debt did, rather than the debt coming down. A second condition is added: **a half in which attributable
+profit is lower than pre-minority profit**, which would mean the group's own subsidiaries stopped
+subsidising the headline. A materially lower price does the same job: near **EGP 20** the forward earnings
+yield reaches roughly 11%.
+
+**Not a beaten-down name.** GBCO is **+22.5% over a year, +386% over three** and **11.2% below an all-time
+high set 15 July 2026**. Recyclable is not a buy signal; it is the shelf you re-read when the market falls.
+
+Full file: `outputs/gbco_research_dossier_2026-08-09.md`
+
+**Sources**
+- H1/2Q 2026 group income statement, segment tables, net-debt development and ratio table — GB Corp, *2Q/1H26 Earnings Release*, **13 August 2026** — [ir.gb-corporation.com](https://ir.gb-corporation.com/media/fundamentals/earnings/GB_Corp_ER_2Q26-_E_-_Final.pdf) (local copy `work/gbco/GB_Corp_ER_2Q26.pdf`)
+- H1 filing to EGX as reported, including the standalone nil result — Mubasher [news/4659227](https://www.mubasher.info/news/4659227/), 16 August 2026
+- FY2025 results, shareholding structure (Ghabbour Family 63.4% / free float 36.6%) and the share count of **1,085,500,000** — GB Corp, *4Q/FY25 Press Release*, 26 February 2026 — [ir.gb-corporation.com](https://ir.gb-corporation.com/media/earnings/newsletters/GB_Corp_PR_4Q25-_E_-_Final.pdf) (local copy `work/gbco/GB_Corp_PR_4Q25.pdf`)
+- Q1 2026 income statement, balance sheet by segment and the MNT-Halan revaluation footnote — GB Corp, *1Q26 Earnings Release*, 14 May 2026 — [ir.gb-corporation.com](https://ir.gb-corporation.com/media/fundamentals/earnings/GB_Corp_ER_1Q26-_E_-_Final.pdf) (local copy `work/gbco/GB_Corp_ER_1Q26.pdf`)
+- FY2022 and FY2023 group income statement — the EGP 8,207.3m of 4Q22 associate income, the 126.3% quarterly net margin and the 81.1% FY23 fall — GB Corp, *4Q/FY23 Earnings Release* — [ir.gb-corporation.com](https://ir.gb-corporation.com/media/earnings/releases/GB_Corp_ER_4Q23_-_ER_-_FINAL.pdf) (local copy `work/gbco/GB_Corp_ER_4Q23.pdf`)
+- Corporate actions — the 2015 rights issue (135,337,545 → 1,094,009,733 shares at EGP 1.01, ex 30 March 2015), the 2022 treasury cancellation to 1,085,500,000, and the AUTO → GBCO ticker change of 31 May 2023 — Mubasher corporate-actions table (`work/gbco/corporate-action.html`)
+- Auditor **KPMG Hazem Hassan**, board, ownership chain (R G Trust 63.3176%, Miri Strategic Emerging Markets Fund 7.3669%, Olayan Saudi Investment 4.96%) and the subsidiary list — Mubasher company profile (`work/gbco/profile.html`)
+- Dividend coupon 9 — EGP 0.35 a share, EGP 379.92m, in two instalments — Mubasher [news/4562665](https://www.mubasher.info/news/4562665/), [news/4585521](https://www.mubasher.info/news/4585521/), [news/4590225](https://www.mubasher.info/news/4590225/)
+- Deletion of the financial-leasing object, the FRA approval and the EGX listing-committee caution under Article 26 — Mubasher [news/4562200](https://www.mubasher.info/news/4562200/), [news/4640910](https://www.mubasher.info/news/4640910/), [news/4642987](https://www.mubasher.info/news/4642987/)
+- EGP 11bn syndicated-loan denial in answer to an EGX query — Mubasher [news/4550341](https://www.mubasher.info/news/4550341/), 21 January 2026
+- CBE policy rate held at 19% deposit / 20% lending, third consecutive meeting — MPC decision of 9 July 2026
+- FY2022 context: the 7.5% MNT-Halan stake sold at a USD 800m valuation, and the GB Lease disposal — Daily News Egypt, October 2022, and the GB Auto FY22 earnings release
+- Daily OHLC and volume, the 55-day moving-average check and the barrier backtest — exchange feed, 3,000 daily bars (`work/gbco_long.json`, `work/gbco_history.json`, `work/gbco_now.json`)
+- The ThndrX Rumble technical recommendation of 9 August 2026 (Ahmed Nashy; entry EGP 31.15, target EGP 40.00, stop EGP 29.00) — read from the live Rumble Hub at [x.thndr.app](https://x.thndr.app). **A paid recommendation product, tagged فني/technical. Cited as an object of analysis, not as evidence of anything.**
+- **Not established, and recorded as such:** the identities behind the 3,161,333 shares of vendor-reported insider selling in April–June 2025 (0.29% of the company; the rows were not verified against primary EGX disclosures); the exact EGP/USD rates used in the dollar comparison; the formal count of independent directors, the governance report not having been read; and the composition of the EGP 16,720.1m "Investments in Subsidiaries" line beyond the affiliates the company names. No allegation of wrongdoing by GB Corp or by any person connected to it is made or implied.
+
 **CIRA — Cairo for Investment and Real Estate Development · score −1 · 3 Aug 2026** *(rev. 4 Aug, primary filings; band revised 8 Aug)*
 Flags: ⚠️ THIN FLOAT *(borderline — 11.30%)* · 🔒 CAN'T EXIT *(conditional)*
 
@@ -492,7 +561,15 @@ Full file: `outputs/mcqe_research_dossier_2026-08-11.md`
 
 ## Progress
 
-**7 of ~224 scored.** 💰 Cash 1 · 🪙 Loose change 0 · ♻️ Recyclable 1 · 🗑️ Trash 3 · ☠️ Toxic 2.
+**8 of ~224 scored.** 💰 Cash 1 · 🪙 Loose change 0 · ♻️ Recyclable 2 · 🗑️ Trash 3 · ☠️ Toxic 2.
+
+**Rescore, 16 August 2026 — the first time a named flip condition actually fired.** GBCO was scored
+**−6 on 9 August** on Q1-2026 data, and the entry named two things that would change it. The H1 release
+of **13 August** delivered one of them: Q2 operating profit rose 48.6% while associate income fell to
+9.9% of pre-tax profit and FX turned negative, so the operating business — not the non-operating lines
+— carried the quarter. Earnings quality moved **−3 → −2**, growth **−3 → −1** and the balance sheet
+**−4 → −3**, for a total of **−2**. The band did not change; it stays ♻️ Recyclable. Recorded because
+rule 5 requires naming the fact that would flip a verdict, and rule 6 requires showing it when it does.
 
 **Band change, 8 August 2026 — recorded because the rules require it.** ♻️ **RECYCLABLE** was added
 between Loose Change and Trash, and Trash was narrowed from −29..+4 to **−29..−10**. **No score changed.**
@@ -500,7 +577,7 @@ The only entry that moved shelf is **CIRA at −1**, from Trash to Recyclable. A
 BIOC (−25) all sit at −10 or below and stay Trash; KWIN and DGTZ are unaffected. If a future rescore
 pushes something across the new line, that reclassification gets its own dated note, same as this one.
 
-### A recurring lesson from the first seven
+### A recurring lesson from the first eight
 
 The first three are thin-float names, and in every case the *vendor* float number was wrong or misleading.
 TradingView reported AMES at **27.22%** free float; the company's own filing says **3.90961%** — off by
