@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-15",
-  "masthead_date": "2026-08-15",
+  "date": "2026-08-16",
+  "masthead_date": "2026-08-16",
   "headline": "No qualified early opportunity today.",
   "rubric": [
     {
@@ -77,7 +77,7 @@
   },
   "summary": {
     "qualified": 0,
-    "watching": 6,
+    "watching": 7,
     "rejected": 0
   },
   "qualified": [],
@@ -88,7 +88,7 @@
       "status_label": "Persistent watch",
       "score": 8,
       "max_score": 13,
-      "seen_at": "2026-08-15",
+      "seen_at": "2026-08-16",
       "research_summary": "The +302.5% H1 profit growth and named-buyer cohort remain live, but the 13 August close fell to EGP 67.10 with RV20 0.43× / 26.4% close strength.",
       "move_percent": "+12.40%",
       "gates": [],
@@ -105,7 +105,7 @@
       "status_label": "Persistent watch",
       "score": 6,
       "max_score": 13,
-      "seen_at": "2026-08-15",
+      "seen_at": "2026-08-16",
       "research_summary": "H1 consolidated profit rose 62.5%; the 13 August close recovered to 89.4% close strength, but RV20 remained only 1.63×.",
       "move_percent": "+2.15%",
       "gates": [],
@@ -122,27 +122,10 @@
       "status_label": "Persistent watch",
       "score": 7,
       "max_score": 13,
-      "seen_at": "2026-08-15",
+      "seen_at": "2026-08-16",
       "research_summary": "The 13 August close completed standard tape confirmation at RV20 3.40× and 95.5% close strength; the issuer operating/one-off bridge remains unverified, so the lane does not upgrade.",
       "move_percent": "+5.89%",
-      "gates": [
-        {
-          "outcome": "pass",
-          "label": "Material H1 headline"
-        },
-        {
-          "outcome": "pass",
-          "label": "Standard tape confirmed"
-        },
-        {
-          "outcome": "pass",
-          "label": "Ordinary value adequate"
-        },
-        {
-          "outcome": "warn",
-          "label": "Operating bridge missing"
-        }
-      ],
+      "gates": [],
       "research": [],
       "tape": {
         "label": "13 Aug close",
@@ -151,12 +134,46 @@
       }
     },
     {
+      "ticker": "ELSH",
+      "status": "watching",
+      "status_label": "Fresh earnings watch",
+      "score": 6,
+      "max_score": 13,
+      "seen_at": "2026-08-16",
+      "research_summary": "H1 profit rose 65.2%; the EGP 13.94 reference is the last pre-release close, so no reaction is inferred before today’s first completed session.",
+      "move_percent": null,
+      "gates": [
+        {
+          "outcome": "pass",
+          "label": "Fresh specific H1 release"
+        },
+        {
+          "outcome": "pass",
+          "label": "Economically material profit change"
+        },
+        {
+          "outcome": "warn",
+          "label": "Operating bridge missing"
+        },
+        {
+          "outcome": "warn",
+          "label": "No post-release tape"
+        }
+      ],
+      "research": [],
+      "tape": {
+        "label": "13 Aug pre-release close",
+        "price": "EGP 13.94",
+        "detail": "−0.92% · RV20 0.56× · close strength 21.1%"
+      }
+    },
+    {
       "ticker": "NARE",
       "status": "watching",
       "status_label": "Persistent watch",
       "score": 6,
       "max_score": 13,
-      "seen_at": "2026-08-15",
+      "seen_at": "2026-08-16",
       "research_summary": "H1 consolidated profit rose 55.5%; the 13 August response weakened again to RV20 0.29× and 10.0% close strength.",
       "move_percent": "-5.27%",
       "gates": [],
@@ -173,16 +190,12 @@
       "status_label": "Persistent watch",
       "score": 6,
       "max_score": 13,
-      "seen_at": "2026-08-15",
-      "research_summary": "H1 swung to profit, but the last clean 12 August bar faded to 1.1% close strength with RV20 0.95×; no 13 August history was available.",
-      "move_percent": "-1.04%",
+      "seen_at": "2026-08-16",
+      "research_summary": "H1 swung to profit, but the resolved 13 August bar remained unconfirmed at EGP 269.47, RV20 1.31× and 53.4% close strength.",
+      "move_percent": "+0.94%",
       "gates": [],
       "research": [],
-      "tape": {
-        "label": "12 Aug close",
-        "price": "EGP 264.18",
-        "detail": "−1.04% · RV20 0.95× · close strength 1.1%"
-      }
+      "tape": null
     },
     {
       "ticker": "EEII",
@@ -192,7 +205,7 @@
       "max_score": 13,
       "seen_at": "2026-08-13",
       "research_summary": "The ownership crossing and clean tape were overridden by fresh H1 accounts showing a 28.3% profit decline.",
-      "move_percent": "+10.80%",
+      "move_percent": "+5.92%",
       "gates": [],
       "research": [],
       "tape": null
@@ -205,7 +218,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Mixed filing / sector alert",
-      "return_percent": "0.00%",
+      "return_percent": "+1.10%",
       "direction": "up",
       "note": "First permanent mark at the corrected alert; the H1 headline is weakened by a derived Q2 loss."
     },
@@ -214,7 +227,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Tape propagation alert",
-      "return_percent": "0.00%",
+      "return_percent": "-3.69%",
       "direction": "up",
       "note": "Its 10 August RV20 5.10× signal should have opened the sector investigation, but close strength failed."
     },
@@ -223,7 +236,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Tape propagation alert",
-      "return_percent": "0.00%",
+      "return_percent": "-0.22%",
       "direction": "up",
       "note": "Provisional breadth only; no catalyst or confirmation transfers from peers."
     },
@@ -232,7 +245,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Extended-peer pressure",
-      "return_percent": "0.00%",
+      "return_percent": "+1.13%",
       "direction": "up",
       "note": "The 12 August high-close pressure broadened the cohort but remained below RV20 3×."
     },
@@ -259,7 +272,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Persistent watch",
-      "return_percent": "-1.75%",
+      "return_percent": "-1.02%",
       "direction": "down",
       "note": null
     },
@@ -268,7 +281,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Invalidated",
-      "return_percent": "-3.89%",
+      "return_percent": "-7.43%",
       "direction": "down",
       "note": "No holding period — no entry."
     },
@@ -277,7 +290,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Expired watch",
-      "return_percent": "+13.29%",
+      "return_percent": "+16.35%",
       "direction": "up",
       "note": "The original close-strength test failed and its clock expired without entry. No holding period — no entry."
     },
@@ -286,7 +299,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Persistent watch",
-      "return_percent": "+15.68%",
+      "return_percent": "+14.99%",
       "direction": "up",
       "note": "The 17 August AGM is live, but economics remain unproven. No entry before approval"
     },
@@ -304,7 +317,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Denied / rejected",
-      "return_percent": "+59.95%",
+      "return_percent": "+48.96%",
       "direction": "up",
       "note": "A 12 August issuer denial and late move preserve the rejection. No holding period — no entry."
     },
@@ -313,7 +326,7 @@
       "label": "ARVA / AMII",
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "+12.37%",
+      "return_percent": "+19.28%",
       "direction": "up",
       "note": "Incomplete order economics and governance risk never cleared the gate. No holding period — no entry."
     },
@@ -322,7 +335,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "-6.48%",
+      "return_percent": "-5.11%",
       "direction": "down",
       "note": "Material bookings lacked qualifying confirmation. No holding period — no entry."
     },
@@ -331,7 +344,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Expired watch",
-      "return_percent": "0.00%",
+      "return_percent": "+0.43%",
       "direction": "up",
       "note": "The bonus was value-neutral and volume never confirmed. No holding period — no entry."
     },
@@ -340,7 +353,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "+21.57%",
+      "return_percent": "+18.65%",
       "direction": "up",
       "note": "The quantified project filing never arrived and the move is now late. No holding period — no entry."
     },
@@ -349,7 +362,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "+10.90%",
+      "return_percent": "+7.92%",
       "direction": "up",
       "note": "The originally late setup never formed a new evidence-backed base. No holding period — no entry."
     },
@@ -358,7 +371,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "+1.69%",
+      "return_percent": "+3.30%",
       "direction": "up",
       "note": "H1 fundamentals never gained complete tape confirmation. No holding period — no entry."
     },
@@ -367,7 +380,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Watch only",
-      "return_percent": "-5.16%",
+      "return_percent": "-6.95%",
       "direction": "down",
       "note": "Project economics and RV20 confirmation stayed missing. No holding period — no entry."
     },
@@ -376,7 +389,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Tape watch",
-      "return_percent": "-1.88%",
+      "return_percent": "+7.52%",
       "direction": "down",
       "note": "Repeated volume lacked a new issuer catalyst. No holding period — no entry."
     },
@@ -385,7 +398,7 @@
       "label": null,
       "status": "watching",
       "status_label": "Tape watch",
-      "return_percent": "+5.91%",
+      "return_percent": "+3.51%",
       "direction": "up",
       "note": "Fresh RV20 returned, but no catalyst and normal value is thin. No holding period — no entry."
     },
@@ -394,7 +407,7 @@
       "label": null,
       "status": "rejected",
       "status_label": "Rejected",
-      "return_percent": "+6.15%",
+      "return_percent": "+11.57%",
       "direction": "up",
       "note": "Mechanical bonus and reporting risk preserve the rejection. No holding period — no entry."
     }
