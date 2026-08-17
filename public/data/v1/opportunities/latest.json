@@ -76,21 +76,22 @@
     "adjusted_histories": 221
   },
   "summary": {
-    "qualified": 1,
-    "watching": 7,
+    "qualified": 0,
+    "watching": 8,
     "rejected": 0
   },
-  "qualified": [
+  "qualified": [],
+  "watching": [
     {
       "ticker": "HDBK",
       "rank": 1,
-      "status": "qualified",
-      "status_label": "Qualified",
+      "status": "watching",
+      "status_label": "Qualified · armed",
       "state": "Qualified",
       "score": 7,
       "max_score": 13,
-      "seen_at": null,
-      "research_summary": null,
+      "seen_at": "2026-08-17",
+      "research_summary": "H1 earnings remained live and the completed close supplied RV20 3.03×, 99.70% close strength and a clean EGP 88.75 base break. The model is not filled until the first ordinary 18 August print is verified at or below EGP 92.42.",
       "move_percent": null,
       "gates": [],
       "research": [],
@@ -106,9 +107,7 @@
         "price": "EGP 91.96",
         "detail": "+3.63% · EGP 69.44m traded"
       }
-    }
-  ],
-  "watching": [
+    },
     {
       "ticker": "GIHD",
       "rank": null,
@@ -224,6 +223,42 @@
   ],
   "rejected": [],
   "outcomes": [
+    {
+      "ticker": "AMIA",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Cohort detection miss",
+      "return_percent": "+18.60%",
+      "direction": "up",
+      "note": "The +30.98% consolidated H1 profit filing should have remained in a ten-session cohort after its quiet first reaction. No completed sub-8% confirmation preceded today’s limit-up. No holding period — no entry."
+    },
+    {
+      "ticker": "AALR",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Prior timing/data miss",
+      "return_percent": "+33.68%",
+      "direction": "up",
+      "note": "The 30 July post-cutoff filing/abnormal handoff was already logged as a miss; today’s +20% close and +25.73% five-session move are a correct late reject. No holding period — no entry."
+    },
+    {
+      "ticker": "TRTO",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Caught alert / control miss",
+      "return_percent": "+42.86%",
+      "direction": "up",
+      "note": "The 13 August RV20 16.32× shock was detected but initially lost its follow-through queue. The rule was repaired before today; severe base liquidity and adverse consolidated earnings still block entry. No holding period — no entry."
+    },
+    {
+      "ticker": "MKIT",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Unlisted data anomaly",
+      "return_percent": "N/A",
+      "direction": "down",
+      "note": "Compulsory delisting was effective 13 August. The outside-market quote is not a comparable listed-session return and is excluded from model eligibility. No holding period — no entry."
+    },
     {
       "ticker": "COSG",
       "label": null,
