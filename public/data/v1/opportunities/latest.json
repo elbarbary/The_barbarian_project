@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-16",
-  "masthead_date": "2026-08-16",
+  "date": "2026-08-17",
+  "masthead_date": "2026-08-17",
   "headline": "No qualified early opportunity today.",
   "rubric": [
     {
@@ -94,9 +94,9 @@
       "gates": [],
       "research": [],
       "tape": {
-        "label": "16 Aug completed close",
-        "price": "EGP 65.32",
-        "detail": "−2.65% · RV20 0.72× · 3.4% close strength"
+        "label": "13:54 Cairo · live",
+        "price": "EGP 66.15",
+        "detail": "+1.27% · 46% provisional RVol"
       }
     },
     {
@@ -111,9 +111,9 @@
       "gates": [],
       "research": [],
       "tape": {
-        "label": "16 Aug completed close",
-        "price": "EGP 24.95",
-        "detail": "+3.06% · RV20 1.67× · 100% close strength"
+        "label": "13:49 Cairo · live",
+        "price": "EGP 24.60–24.71",
+        "detail": "about 3.88m shares · provisional"
       }
     },
     {
@@ -360,9 +360,9 @@
       "label": null,
       "status": "rejected",
       "status_label": "Persistent earnings watch",
-      "return_percent": "+11.48%",
+      "return_percent": "+18.68%",
       "direction": "up",
-      "note": "Fresh H1 profit +111.0% upgrades the prior tape alert, but the 10:26 Cairo quote is provisional and the operating bridge remains incomplete."
+      "note": "The live move is not portfolio P&L: partial RV20, close strength and strict five-session anti-chasing all failed at the checkpoint. No holding period — no entry unless the completed close satisfies every saved gate and a new pre-open risk map is built."
     },
     {
       "ticker": "ATLC",
