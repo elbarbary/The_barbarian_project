@@ -1,7 +1,7 @@
 {
   "date": "2026-08-17",
   "masthead_date": "2026-08-17",
-  "headline": "No qualified early opportunity today.",
+  "headline": null,
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
@@ -76,167 +76,70 @@
     "adjusted_histories": 221
   },
   "summary": {
-    "qualified": 0,
-    "watching": 11,
+    "qualified": 1,
+    "watching": 7,
     "rejected": 0
   },
-  "qualified": [],
-  "watching": [
+  "qualified": [
     {
-      "ticker": "EFIH",
+      "ticker": "HDBK",
       "rank": 1,
-      "status": "watching",
-      "status_label": "Persistent watch",
-      "state": "Persistent accumulation watch",
+      "status": "qualified",
+      "status_label": "Qualified",
+      "state": "Qualified",
       "score": 7,
       "max_score": 13,
-      "seen_at": "2026-08-16",
-      "research_summary": "H1 consolidated profit rose 62.5%; the 13 August close recovered to 89.4% close strength, but RV20 remained only 1.63×.",
-      "move_percent": "+2.15%",
-      "gates": [],
-      "research": [],
-      "action": {
-        "label": "Action now",
-        "decision": "Wait for full-volume confirmation",
-        "reasoning": [
-          "The saved H1 release showed consolidated profit +62.5% to EGP 1.825bn.; value appeared sufficient, but neither the price nor completed-volume package was present. The 20bp displayed spread was acceptable, yet a single book snapshot adds no score point."
-        ]
-      },
-      "tape": {
-        "label": "13:49 Cairo · live",
-        "price": "EGP 24.60–24.71",
-        "detail": "about 3.88m shares · provisional"
-      }
-    },
-    {
-      "ticker": "MIPH",
-      "rank": 2,
-      "status": "watching",
-      "status_label": "Fresh earnings watch",
-      "state": "Fresh earnings watch",
-      "score": 6,
-      "max_score": 13,
       "seen_at": null,
       "research_summary": null,
       "move_percent": null,
       "gates": [],
       "research": [],
       "action": {
-        "label": "Action now",
-        "decision": "Verify the operating bridge; do not chase the headline",
+        "label": "Model action",
+        "decision": "Conditional 50-share first-print buy, maximum EGP 92.42",
         "reasoning": [
-          "The 09:43 printed EGX release reported Q1 consolidated net profit of EGP 69.87m versus a EGP 249.00m loss, about 0.80% of the EGP 8.72bn market cap. Revenue, operating profit and one-offs are not exposed in the accessible attachment. The stock had a ten-session pre-release volume ratio of 2.23×, including RV20 11.06× on 3 August, but that is only possible pre-disclosure accumulation or information leakage—not proof—and earns zero qualification points."
+          "The official consolidated H1 release was published 11 August at 15:14 Cairo. Net interest income rose 16.3% to about EGP 15.48bn; pre-tax profit rose 13.3% to EGP 14.30bn; net profit rose 12.8% to EGP 10.78bn and EPS reached EGP 10.13. H1 profit equals roughly 11.6% of the current EGP 92.92bn market value. Impairment and administration costs rose sharply, so the thesis is growth with cost-quality risk—not a clean all-clear."
         ]
       },
       "tape": {
-        "label": "13:50 Cairo · live",
-        "price": "EGP 777.50",
-        "detail": "about 7.92k shares · 121bp spread"
+        "label": "15:02:54 Cairo · completed",
+        "price": "EGP 91.96",
+        "detail": "+3.63% · EGP 69.44m traded"
       }
-    },
-    {
-      "ticker": "ALCN",
-      "rank": 3,
-      "status": "watching",
-      "status_label": "Fresh earnings watch",
-      "state": "Fresh earnings watch",
-      "score": 6,
-      "max_score": 13,
-      "seen_at": null,
-      "research_summary": null,
-      "move_percent": null,
-      "gates": [],
-      "research": [],
-      "action": {
-        "label": "Action now",
-        "decision": "Verify the operating bridge, then observe the first reaction",
-        "reasoning": [
-          "The EGX release printed 17 August 09:00 on the mirror: H1 net profit EGP 3.798bn versus EGP 3.213bn, +18.22% and about 4.0% of market cap. Revenue, operating profit and one-offs are not exposed in the accessible attachment, so there is no completed post-publication evidence and no qualification."
-        ]
-      },
-      "tape": {
-        "label": "13:49 Cairo · live",
-        "price": "EGP 31.50–31.55",
-        "detail": "about EGP 16m · below both gates"
-      }
-    },
-    {
-      "ticker": "SAUD",
-      "rank": 4,
-      "status": "watching",
-      "status_label": "FRA-approved event watch",
-      "state": "FRA-approved event watch",
-      "score": 0,
-      "max_score": 13,
-      "seen_at": null,
-      "research_summary": null,
-      "move_percent": null,
-      "gates": [],
-      "research": [],
-      "action": {
-        "label": "Action now",
-        "decision": "SAUD only after accretion and confirmation; reject ATLC at this gap",
-        "reasoning": [
-          "The FRA approved publication of SAUD’s mandatory share-swap offer for up to 329,471,871 ATLC shares, reaching up to 90% with a 51% minimum. At the saved 0.1919 SAUD-share ratio, the live SAUD price implied EGP 4.4905 per ATLC share; ATLC’s EGP 5.53 was 23.15% above it. SAUD itself remained below EGP 23.62 and had only about EGP 17.8m versus the EGP 30m gate."
-        ]
-      },
-      "tape": {
-        "label": "13:50 Cairo · live",
-        "price": "EGP 23.40 / 5.53",
-        "detail": "SAUD below trigger · ATLC 23.15% rich"
-      }
-    },
-    {
-      "ticker": "AMOC",
-      "rank": 5,
-      "status": "watching",
-      "status_label": "Session B failing live",
-      "state": "Session B failing live",
-      "score": 5,
-      "max_score": 13,
-      "seen_at": null,
-      "research_summary": null,
-      "move_percent": null,
-      "gates": [],
-      "research": [],
-      "action": {
-        "label": "Action now",
-        "decision": "Do not chase; wait for the completed close",
-        "reasoning": [
-          "The live print was about 23.86% above the strict five-session reference, partial volume was only about 2.65× the saved preceding-20 median and close strength was about 60.5%. All three fail the saved gates despite strong value. Bid/ask was EGP 11.36/11.37, but acceptable spread cannot override anti-chasing or confirmation failure."
-        ]
-      },
-      "tape": {
-        "label": "13:51 Cairo · live",
-        "price": "EGP 11.37",
-        "detail": "+4.03% · about EGP 229m · provisional"
-      }
-    },
+    }
+  ],
+  "watching": [
     {
       "ticker": "GIHD",
-      "rank": 6,
+      "rank": null,
       "status": "watching",
       "status_label": "Persistent watch",
-      "state": "Named-buyer cohort",
-      "score": 6,
+      "state": null,
+      "score": 8,
       "max_score": 13,
       "seen_at": "2026-08-16",
       "research_summary": "The +302.5% H1 profit growth and named-buyer cohort remain live, but the 10:26 quote weakened to EGP 66.00, near the EGP 64.70 risk line.",
       "move_percent": "+10.55%",
       "gates": [],
       "research": [],
-      "action": {
-        "label": "Action now",
-        "decision": "Keep the verified buyer, discard the old base",
-        "reasoning": [
-          "Mustafa Mohamed Ali Abdelmonem’s 4.817%→5.920% crossing added 1.103% of outstanding shares and keeps the 20-session ownership cohort alive. H1 net profit +302.5% is material, but price closed near the low and the operating/one-off bridge remains incomplete."
-        ]
-      },
-      "tape": {
-        "label": "13:54 Cairo · live",
-        "price": "EGP 66.15",
-        "detail": "+1.27% · 46% provisional RVol"
-      }
+      "action": null,
+      "tape": null
+    },
+    {
+      "ticker": "EFIH",
+      "rank": null,
+      "status": "watching",
+      "status_label": "Persistent watch",
+      "state": null,
+      "score": 6,
+      "max_score": 13,
+      "seen_at": "2026-08-16",
+      "research_summary": "H1 consolidated profit rose 62.5%; the 13 August close recovered to 89.4% close strength, but RV20 remained only 1.63×.",
+      "move_percent": "+2.15%",
+      "gates": [],
+      "research": [],
+      "action": null,
+      "tape": null
     },
     {
       "ticker": "MFPC",
