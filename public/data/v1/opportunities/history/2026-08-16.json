@@ -94,9 +94,9 @@
       "gates": [],
       "research": [],
       "tape": {
-        "label": "10:26:45 Cairo capture",
-        "price": "EGP 66.00",
-        "detail": "−1.64% · provisional intraday · EGP 5.4m traded"
+        "label": "16 Aug completed close",
+        "price": "EGP 65.32",
+        "detail": "−2.65% · RV20 0.72× · 3.4% close strength"
       }
     },
     {
@@ -110,7 +110,11 @@
       "move_percent": "+2.15%",
       "gates": [],
       "research": [],
-      "tape": null
+      "tape": {
+        "label": "16 Aug completed close",
+        "price": "EGP 24.95",
+        "detail": "+3.06% · RV20 1.67× · 100% close strength"
+      }
     },
     {
       "ticker": "MFPC",
@@ -123,11 +127,7 @@
       "move_percent": "+9.05%",
       "gates": [],
       "research": [],
-      "tape": {
-        "label": "10:26:37 Cairo capture",
-        "price": "EGP 41.10",
-        "detail": "+2.98% · provisional intraday · EGP 52.9m traded"
-      }
+      "tape": null
     },
     {
       "ticker": "ELSH",
@@ -138,30 +138,9 @@
       "seen_at": "2026-08-16",
       "research_summary": "H1 profit rose 65.2%; the 10:26 quote was EGP 14.03, but only EGP 1.7m had traded and no completed post-release bar exists.",
       "move_percent": "+0.65%",
-      "gates": [
-        {
-          "outcome": "pass",
-          "label": "Fresh specific H1 release"
-        },
-        {
-          "outcome": "pass",
-          "label": "Economically material profit change"
-        },
-        {
-          "outcome": "warn",
-          "label": "Only EGP 1.7m traded at 10:26"
-        },
-        {
-          "outcome": "warn",
-          "label": "No completed post-release bar"
-        }
-      ],
+      "gates": [],
       "research": [],
-      "tape": {
-        "label": "10:26:41 Cairo capture",
-        "price": "EGP 14.03",
-        "detail": "+0.65% · provisional intraday · EGP 1.7m traded"
-      }
+      "tape": null
     },
     {
       "ticker": "NARE",
@@ -174,11 +153,7 @@
       "move_percent": "-4.50%",
       "gates": [],
       "research": [],
-      "tape": {
-        "label": "10:26:49 Cairo capture",
-        "price": "EGP 17.40",
-        "detail": "+0.81% · provisional intraday · EGP 0.6m traded"
-      }
+      "tape": null
     },
     {
       "ticker": "SMFR",
