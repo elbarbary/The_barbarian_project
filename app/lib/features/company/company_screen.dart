@@ -11,6 +11,7 @@ import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/arc_gauge.dart';
 import '../../core/widgets/async_view.dart';
+import '../../core/widgets/charts.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
@@ -409,6 +410,12 @@ class _Overview extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Recent sessions, before anything else.
+        //
+        // The shape of the last few weeks is the first thing a reader wants
+        // after tapping a name, and it used to be two taps away behind the
+        // Price tab. The full chart still lives there; this is the glance.
+        _RecentMoves(history: company.priceHistory),
         if (verdict != null) ...[
           const BSectionLabel('Barbarian verdict'),
           BPressable(
@@ -840,5 +847,158 @@ class _Research extends ConsumerWidget {
         ],
       ],
     );
+  }
+}
+
+/// The last few weeks at a glance, and the last few sessions day by day.
+///
+/// Two different questions, both asked the moment a name is opened: "which way
+/// has this been going" and "what did it do yesterday". The sparkline answers
+/// the first, the day strip the second, and neither needs a tab change.
+///
+/// Silent when the source has no series. 25 of 282 listings publish none, and an
+/// empty chart frame says less than no chart at all (spec §49).
+class _RecentMoves extends StatelessWidget {
+  const _RecentMoves({required this.history});
+
+  final List<PricePoint> history;
+
+  /// Sessions in the sparkline. About six weeks of EGX trading — long enough to
+  /// show a trend, short enough that a single day still reads.
+  static const int _window = 30;
+
+  /// Days in the strip below it.
+  static const int _days = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    if (history.length < 3) return const SizedBox.shrink();
+
+    final window = history.length <= _window
+        ? history
+        : history.sublist(history.length - _window);
+    final change = window.first.close == 0
+        ? null
+        : (window.last.close - window.first.close) / window.first.close;
+
+    // Each day's move needs the close before it, so the strip starts one bar in.
+    final strip = <({PricePoint point, double? change})>[];
+    for (var i = history.length - _days; i < history.length; i++) {
+      if (i < 1) continue;
+      final prev = history[i - 1].close;
+      strip.add((
+        point: history[i],
+        change: prev == 0 ? null : (history[i].close - prev) / prev,
+      ));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            BSectionLabel('Last ${window.length} sessions'),
+            const Spacer(),
+            if (change != null)
+              BChangeDelta(
+                value: '${(change.abs() * 100).toStringAsFixed(1)}%',
+                direction: change >= 0 ? BDirection.up : BDirection.down,
+                style: BarbarianType.labelS,
+                gap: 3,
+              ),
+          ],
+        ),
+        BPaperCard(
+          radius: BarbarianRadius.xl,
+          child: Column(
+            children: [
+              BSparkline(
+                values: [for (final p in window) p.close],
+                height: 56,
+              ),
+              if (strip.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    for (final day in strip)
+                      Expanded(child: _DayCell(day: day)),
+                  ],
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+}
+
+/// One session in the day strip: how far it moved, and which way.
+class _DayCell extends StatelessWidget {
+  const _DayCell({required this.day});
+
+  final ({PricePoint point, double? change}) day;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final change = day.change;
+    final tone = change == null || change == 0
+        ? c.textMuted
+        : (change > 0 ? c.up : c.down);
+    // The bar is scaled against 4%, which covers an ordinary EGX session; a
+    // limit move pins it rather than flattening every other day on the strip.
+    final magnitude = ((change ?? 0).abs() / 0.04).clamp(0.12, 1.0);
+
+    return Semantics(
+      label: '${day.point.date}: '
+          '${change == null ? 'unchanged' : '${change >= 0 ? 'up' : 'down'} '
+              '${(change.abs() * 100).toStringAsFixed(1)} percent'}',
+      excludeSemantics: true,
+      child: Column(
+        children: [
+          // 24pt of headroom so every bar sits on the same baseline.
+          SizedBox(
+            height: 26,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: 6,
+                height: 26 * magnitude,
+                decoration: BoxDecoration(
+                  color: tone.withValues(alpha: 0.85),
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            change == null
+                ? '—'
+                : '${change >= 0 ? '+' : '−'}'
+                    '${(change.abs() * 100).toStringAsFixed(1)}',
+            style: BarbarianType.labelNano.copyWith(color: tone),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            // "17 Aug" is enough; the year is on the header caption.
+            _shortDate(day.point.date),
+            style: BarbarianType.labelTiny.copyWith(color: c.textFaint),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static String _shortDate(String iso) {
+    final d = DateTime.tryParse(iso);
+    if (d == null) return iso;
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+    ];
+    return '${d.day} ${months[d.month - 1]}';
   }
 }

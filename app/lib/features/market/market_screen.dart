@@ -28,10 +28,26 @@ class MarketScreen extends ConsumerStatefulWidget {
   ConsumerState<MarketScreen> createState() => _MarketScreenState();
 }
 
+/// How the list is ordered, and what is left in it.
+///
+/// Every one of these is a fact about the completed or delayed session already
+/// on screen — no forecast, no ranking of what to buy (spec §8).
+enum _Order {
+  az('A–Z'),
+  gainers('Gainers'),
+  losers('Losers'),
+  active('Most active');
+
+  const _Order(this.label);
+
+  final String label;
+}
+
 class _MarketScreenState extends ConsumerState<MarketScreen> {
   final TextEditingController _search = TextEditingController();
   String? _sector;
-
+  _Order _order = _Order.az;
+  bool _researchedOnly = false;
   @override
   void dispose() {
     _search.dispose();
@@ -64,9 +80,39 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
           data: (sourced) {
             final directory = sourced.value;
             final sectors = directory.sectors;
-            final visible = _sector == null
-                ? results
+
+            var visible = _sector == null
+                ? [...results]
                 : results.where((cmp) => cmp.sector == _sector).toList();
+            if (_researchedOnly) {
+              visible = visible
+                  .where((cmp) => cmp.hasResearch || cmp.hasCashOrTrash)
+                  .toList();
+            }
+
+            // Sorting reads the same merged snapshot the rows draw from, so the
+            // order always agrees with the numbers beside it. A company the feed
+            // has no quote for sorts last rather than as a zero — it has no
+            // move, which is not the same as a flat one.
+            double? metric(CompanySummary cmp) {
+              final q = snapshot?.quoteFor(cmp.ticker);
+              return switch (_order) {
+                _Order.gainers || _Order.losers => q?.resolvedChangePercent,
+                _Order.active => q?.volume?.toDouble(),
+                _Order.az => null,
+              };
+            }
+
+            if (_order != _Order.az) {
+              visible.sort((a, b) {
+                final x = metric(a);
+                final y = metric(b);
+                if (x == null && y == null) return a.ticker.compareTo(b.ticker);
+                if (x == null) return 1;
+                if (y == null) return -1;
+                return _order == _Order.losers ? x.compareTo(y) : y.compareTo(x);
+              });
+            }
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,9 +144,37 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                       ],
                     ),
                   ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 14),
+                SizedBox(
+                  height: 34,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.zero,
+                    children: [
+                      for (final order in _Order.values) ...[
+                        BKindChip(
+                          order.label,
+                          variant: _order == order
+                              ? BChipVariant.solid
+                              : BChipVariant.neutral,
+                          onTap: () => setState(() => _order = order),
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                      BKindChip(
+                        'Researched',
+                        variant: _researchedOnly
+                            ? BChipVariant.solid
+                            : BChipVariant.neutral,
+                        onTap: () =>
+                            setState(() => _researchedOnly = !_researchedOnly),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 18),
                 BSectionLabel(
-                  'Companies · A–Z',
+                  'Companies · ${_order.label}',
                   trailing: Text(
                     '${visible.length}',
                     style: BarbarianType.labelS.copyWith(color: c.textMuted),
@@ -116,7 +190,11 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                     onAction: () {
                       _search.clear();
                       ref.read(searchQueryProvider.notifier).clear();
-                      setState(() => _sector = null);
+                      setState(() {
+                        _sector = null;
+                        _order = _Order.az;
+                        _researchedOnly = false;
+                      });
                     },
                   )
                 else

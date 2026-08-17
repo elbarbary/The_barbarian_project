@@ -56,6 +56,22 @@ Future<Map<String, dynamic>> readFixtureObject(String path) async =>
     jsonDecode(await File('assets/fixtures/$path').readAsString())
         as Map<String, dynamic>;
 
+/// A ticker whose published document carries no usable price series.
+///
+/// Read from the fixtures rather than named in a test: which listings are
+/// sparse changes as the pipeline recovers history, so any hardcoded example
+/// eventually asserts the opposite of the truth.
+Future<String?> sparseTicker() async {
+  final dir = Directory('assets/fixtures/companies');
+  if (!dir.existsSync()) return null;
+  for (final file in dir.listSync().whereType<File>()) {
+    final doc = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
+    final history = doc['price_history'] as List? ?? const [];
+    if (history.length < 3) return doc['ticker'] as String?;
+  }
+  return null;
+}
+
 /// A quote feed under the test's control.
 ///
 /// The real one reaches the network, and a widget test that makes an HTTP call
