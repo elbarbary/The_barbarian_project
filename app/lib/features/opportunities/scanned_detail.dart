@@ -154,6 +154,40 @@ class ScannedDetailSheet extends ConsumerWidget {
                 style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
               ),
             ],
+            if (entry.action case final ScanAction action) ...[
+              const SizedBox(height: 20),
+              BPaperCard(
+                radius: BarbarianRadius.xl,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      (action.label ?? 'Action now').toUpperCase(),
+                      style: BarbarianType.labelNano.copyWith(color: c.violet),
+                    ),
+                    if (action.decision case final String decision) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        decision,
+                        style: BarbarianType.headlineM.copyWith(
+                          color: c.textPrimary,
+                        ),
+                      ),
+                    ],
+                    for (final para in action.reasoning) ...[
+                      const SizedBox(height: 12),
+                      Text(
+                        para,
+                        style: BarbarianType.bodyM.copyWith(
+                          color: c.textSecondary,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
             if (entry.tape case final ScanTape tape) ...[
               const SizedBox(height: 16),
               BPaperCard(
@@ -203,7 +237,7 @@ class ScannedDetailSheet extends ConsumerWidget {
             ],
             if (entry.research.isNotEmpty) ...[
               const SizedBox(height: 22),
-              const BSectionLabel('The research in full'),
+              const BSectionLabel('Evidence'),
               BPaperCard(
                 radius: BarbarianRadius.xl,
                 child: Column(

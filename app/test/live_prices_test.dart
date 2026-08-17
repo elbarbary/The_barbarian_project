@@ -327,6 +327,39 @@ void main() {
       expect(snapshot!.body, 'from bundle');
     });
 
+    // The bug this exists to catch: the manifest was fetched once and kept for
+    // the life of the process, so a site updated twice in a morning delivered
+    // its first update and nothing after it.
+    test('a second publish reaches the app', () async {
+      final cache = MemoryDocumentCache();
+      final source = _MutableSource({
+        'manifest.json':
+            '{"schema_version":1,"data_version":"v1","versions":{"market":1}}',
+        'market.json': 'first publish',
+      });
+      final api = StaticApi(source: source, cache: cache);
+
+      expect((await api.loadOnce('market.json', resource: 'market'))!.body,
+          'first publish');
+
+      // The site publishes again: new content, new version counter.
+      source.documents['manifest.json'] =
+          '{"schema_version":1,"data_version":"v2","versions":{"market":2}}';
+      source.documents['market.json'] = 'second publish';
+
+      // What Refresh does.
+      api.invalidateManifest();
+
+      expect((await api.loadOnce('market.json', resource: 'market'))!.body,
+          'second publish');
+    });
+
+    test('without invalidation the manifest is re-read once it is stale', () {
+      // Documented rather than slept through: the TTL is the backstop for a
+      // reader who never taps Refresh and never backgrounds the app.
+      expect(StaticApi.manifestTtl, const Duration(minutes: 1));
+    });
+
     test('a miss on both reports the network reason, not the bundle', () async {
       await expectLater(
         api(
@@ -361,6 +394,23 @@ class _ExplodingCache implements DocumentCache {
 
   @override
   Future<void> clear() async => throw StateError('no cache');
+}
+
+/// A source whose documents can change between reads, like a website.
+class _MutableSource implements DocumentSource {
+  _MutableSource(this.documents);
+
+  final Map<String, String> documents;
+
+  @override
+  bool get isRefreshable => true;
+
+  @override
+  Future<String> fetch(String path) async {
+    final body = documents[path];
+    if (body == null) throw DocumentUnavailable(path, 'missing');
+    return body;
+  }
 }
 
 class _StubSource implements DocumentSource {

@@ -24,7 +24,7 @@ class _BarbarianAppState extends ConsumerState<BarbarianApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'The Barbarian',
+      title: 'ESTHMR',
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
       theme: BarbarianTheme.light(),

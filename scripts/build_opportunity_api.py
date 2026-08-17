@@ -111,6 +111,23 @@ BANNED_PATTERNS = (
     re.compile(r"\b(deadline|expiry)\b", re.I),
 )
 
+# Evidence headings the app republishes, matched loosely.
+#
+# This is an **allow-list**, and deliberately so. The report's headings are
+# rewritten constantly — "Price, depth and technical context" one day, "Depth /
+# technical context" the next, "Depth" the day after — while the forward-looking
+# ones multiply faster still: "Invalidate", "Confirmation", "What would upgrade
+# it", "Plain-English entry test", "Five things must all happen". A deny-list
+# has to predict the next name somebody invents. An allow-list drops what it
+# does not recognise, which is the only safe default when the thing being
+# dropped is a trade instruction (spec §8).
+EVIDENCE_HEADINGS = (
+    re.compile(r"\bdepth\b", re.I),
+    re.compile(r"\bcontext\b", re.I),
+    re.compile(r"pre-news", re.I),
+    re.compile(r"volume trail", re.I),
+)
+
 # Whole research sections that exist to say what must happen before a trade.
 # Dropping them by heading is more honest than filtering their sentences: the
 # section is *about* the entry conditions, so what survives sentence-level
@@ -224,40 +241,45 @@ def signal_cards(html: str) -> dict[str, dict]:
         ):
             gates.append({"outcome": cls, "label": text(label)})
 
-        # The <details> body, minus its summary — the summary is a UI affordance
-        # ("Read the full research in plain English"), not content.
+        # The reasoning now lives in the card's action block: the decision the
+        # report reached, and why. The old <details> walkthrough is gone from
+        # the page entirely, so nothing here looks for it any more.
         #
-        # The walkthrough inside is already sectioned with its own headings, and
-        # those headings are worth keeping: "Why GIHD is still on the radar"
-        # tells a reader what they are about to read. Sections whose whole
-        # subject is the entry conditions are dropped by heading (spec §8).
-        research = None
-        if d := re.search(
-            r'<details class="signal-research">.*?</summary>(.*?)</details>',
+        # The decision itself is worth republishing because every one of them
+        # says *not* to trade — "Wait for today's close — no model entry",
+        # "Wait for a wholly new base". Recording the absence of a trade is
+        # exactly what spec §8 permits, and it is the most useful line on the
+        # card.
+        action = None
+        if a := re.search(
+            r'<div class="signal-action">\s*<span>(.*?)</span>\s*'
+            r"<strong>(.*?)</strong>(.*?)</div>",
             block,
             re.S,
         ):
-            sections = []
-            for chunk in re.findall(r"<section>(.*?)</section>", d.group(1), re.S):
-                head = re.search(r"<h5[^>]*>(.*?)</h5>", chunk, re.S)
-                heading = text(head.group(1)) if head else None
-                if heading and any(
-                    p.search(heading) for p in FORWARD_LOOKING_SECTIONS
-                ):
-                    continue
+            reasoning = [
+                c for c in (sanitize(text(p)) for p in re.findall(r"<p>(.*?)</p>", a.group(3), re.S)) if c
+            ]
+            action = {
+                "label": text(a.group(1)),
+                "decision": sanitize(text(a.group(2))),
+                "reasoning": reasoning,
+            }
 
-                body = [text(p) for p in re.findall(r"<p>(.*?)</p>", chunk, re.S)]
-                # Calculation notes are a <dl> rather than paragraphs.
-                for term, desc in re.findall(
-                    r"<dt>(.*?)</dt>\s*<dd>(.*?)</dd>", chunk, re.S
-                ):
-                    body.append(f"{text(term)}: {text(desc)}")
+        # The <dl> mixes evidence with trade plumbing. Only the recognised
+        # evidence headings are carried across.
+        research = []
+        for term, desc in re.findall(r"<dt>(.*?)</dt>\s*<dd>(.*?)</dd>", block, re.S):
+            heading = text(term)
+            if not any(p.search(heading) for p in EVIDENCE_HEADINGS):
+                continue
+            body = sanitize(text(desc))
+            if body:
+                research.append({"heading": heading, "body": [body]})
+        research = research or None
 
-                kept = [c for c in (sanitize(p) for p in body) if c]
-                if kept:
-                    sections.append({"heading": heading, "body": kept})
-            research = sections or None
-
+        rank = re.search(r'<div class="signal-rank">(\d+)</div>', block)
+        score = re.search(r"<h4[^>]*>\s*[A-Z]{3,6}\s*<small>(\d+)\s*/\s*(\d+)", block)
         state = re.search(r'<span class="signal-state[^"]*">([^<]+)</span>', block)
         # The quote block reads "12 Aug close / EGP 68.50 / +1.77% · volume …".
         quote = re.search(
@@ -268,8 +290,12 @@ def signal_cards(html: str) -> dict[str, dict]:
         )
 
         cards[ticker.group(1)] = {
+            "rank": int(rank.group(1)) if rank else None,
+            "score": int(score.group(1)) if score else None,
+            "max_score": int(score.group(2)) if score else None,
             "gates": gates,
             "research": research,
+            "action": action,
             "state": text(state.group(1)) if state else None,
             "tape": {
                 "label": text(quote.group(1)),
@@ -459,13 +485,18 @@ def parse(html: str) -> dict:
         headline = text(h.group(1))
 
     cards = signal_cards(html)
-    known_tickers = directory_tickers()
 
-    watch = []
+    # The scorecard, keyed by ticker. It carries the move since the name was
+    # flagged and the one-line summary; the board carries the ranking and the
+    # decision. Neither is a superset of the other.
+    scored = {}
+    order = []
     for block in re.findall(
         r'<article class="scorecard-feature"[^>]*>(.*?)</article>', html, re.S
     ):
         ticker = re.search(r"<h4[^>]*>([A-Z]{3,6})</h4>", block)
+        if not ticker:
+            continue
         badge = re.search(r'<span class="result-badge[^"]*">([^<]+)</span>', block)
         meta = re.search(r"<span>([^<]*?·[^<]*?)</span>", block)
         note = re.search(r"<p>(.*?)</p>", block, re.S)
@@ -473,37 +504,75 @@ def parse(html: str) -> dict:
             r'<div class="scorecard-feature-move">\s*<strong>([+\-−][\d.]+%)</strong>',
             block,
         )
-        if not ticker:
-            continue
-
-        score = max_score = None
-        seen = None
+        score = max_score = seen = None
         if meta:
-            if s := re.search(r"(\d+)\s*/\s*(\d+)", meta.group(1)):
-                score, max_score = int(s.group(1)), int(s.group(2))
+            if m2 := re.search(r"(\d+)\s*/\s*(\d+)", meta.group(1)):
+                score, max_score = int(m2.group(1)), int(m2.group(2))
             seen = parse_date(meta.group(1).split("·")[0], year)
+        scored[ticker.group(1)] = {
+            "status_label": badge.group(1).strip() if badge else "Watch only",
+            "score": score,
+            "max_score": max_score,
+            "seen_at": seen,
+            "research_summary": sanitize(text(note.group(1))) if note else None,
+            "move_percent": move.group(1).replace("−", "-") if move else None,
+        }
+        order.append(ticker.group(1))
 
-        label = badge.group(1).strip() if badge else "Watch only"
-        # The signal board carries the evidence for the same name in more
-        # detail than the scorecard does; join it on rather than parse the
-        # scorecard twice.
-        card = cards.get(ticker.group(1), {})
+    # Ranked board first, in its own order, then anything the scorecard covers
+    # that the board does not.
+    #
+    # The board is the report's ranking and the scorecard is its results table,
+    # and they do not hold the same names. Building the watch list from the
+    # scorecard alone dropped AMOC — the report's number one, and the subject of
+    # its own headline — out of the app completely.
+    watch = []
+    for ticker in sorted(cards, key=lambda t: cards[t]["rank"] or 99):
+        card, extra = cards[ticker], scored.get(ticker, {})
+        label = extra.get("status_label") or card.get("state") or "Watch only"
         watch.append(
             {
-                "ticker": ticker.group(1),
+                "ticker": ticker,
+                "rank": card.get("rank"),
                 "status": BUCKETS.get(label, "watching"),
                 "status_label": label,
-                "score": score if score is not None else 0,
-                "max_score": max_score or 13,
-                "seen_at": seen,
-                "research_summary": sanitize(text(note.group(1))) if note else None,
-                "move_percent": move.group(1).replace("−", "-") if move else None,
+                "state": card.get("state"),
+                "score": card.get("score") or extra.get("score") or 0,
+                "max_score": card.get("max_score") or extra.get("max_score") or 13,
+                "seen_at": extra.get("seen_at"),
+                "research_summary": extra.get("research_summary"),
+                "move_percent": extra.get("move_percent"),
                 "gates": card.get("gates") or [],
                 "research": card.get("research") or [],
+                "action": card.get("action"),
                 "tape": card.get("tape"),
             }
         )
+    for ticker in order:
+        if ticker in cards:
+            continue
+        extra = scored[ticker]
+        label = extra["status_label"]
+        watch.append(
+            {
+                "ticker": ticker,
+                "rank": None,
+                "status": BUCKETS.get(label, "watching"),
+                "status_label": label,
+                "state": None,
+                "score": extra["score"] or 0,
+                "max_score": extra["max_score"] or 13,
+                "seen_at": extra["seen_at"],
+                "research_summary": extra["research_summary"],
+                "move_percent": extra["move_percent"],
+                "gates": [],
+                "research": [],
+                "action": None,
+                "tape": None,
+            }
+        )
 
+    known_tickers = directory_tickers()
     outcomes = []
     for block in re.findall(
         r'<article class="outcome-row([^"]*)"[^>]*>(.*?)</article>', html, re.S
@@ -578,6 +647,28 @@ def validate(doc: dict, html: str | None = None) -> list[str]:
             problems.append(
                 f"page has {rows} outcome rows but only "
                 f"{len(doc['outcomes'])} parsed — a result is being dropped"
+            )
+
+        # Every ranked card must reach the app.
+        #
+        # The page is rewritten often, and each rewrite has quietly cost the app
+        # something: the ranked board appeared and the watch list kept coming
+        # from the scorecard, so AMOC — the report's own number one, and the
+        # subject of its headline — was absent from the app entirely while the
+        # build reported success. A parser that finds nothing must fail, not
+        # shrug.
+        cards = len(re.findall(r'<article class="signal-card', html))
+        ranked = sum(1 for w in doc["watch"] if w.get("rank"))
+        if cards and ranked < cards:
+            problems.append(
+                f"page ranks {cards} names but only {ranked} carry a rank — "
+                "the signal board markup has changed"
+            )
+        decided = sum(1 for w in doc["watch"] if w.get("action"))
+        if cards and not decided:
+            problems.append(
+                "no decisions parsed from the signal board — the action markup "
+                "has changed and the app would show scores with no reasoning"
             )
     if not doc["date"]:
         problems.append("no report date found")

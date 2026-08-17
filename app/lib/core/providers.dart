@@ -120,6 +120,28 @@ final marketDateProvider = Provider<String?>((ref) {
 // They are kept apart on purpose: the static API is cache-first and gated on a
 // manifest version, which is right for research and wrong for a price.
 
+/// Re-checks the published research whenever the app comes back to the front.
+///
+/// A phone does not restart an app between readings — the process survives for
+/// days — so without this the only way to see a second publish was to kill the
+/// app. Someone who updated the site twice in a morning saw the first update
+/// and nothing after it.
+///
+/// The manifest is forgotten first; invalidating the content providers alone
+/// re-asks the cached manifest and changes nothing.
+final contentRefreshProvider = Provider<void>((ref) {
+  final lifecycle = AppLifecycleListener(
+    onResume: () {
+      ref.read(staticApiProvider).invalidateManifest();
+      ref.invalidate(marketSnapshotProvider);
+      ref.invalidate(companyDirectoryProvider);
+      ref.invalidate(opportunityReportProvider);
+      ref.invalidate(cashOrTrashProvider);
+    },
+  );
+  ref.onDispose(lifecycle.dispose);
+});
+
 final quoteClientProvider = Provider<QuoteClient>((ref) => HttpQuoteClient());
 
 /// Polls the quote Worker while the app is in front.

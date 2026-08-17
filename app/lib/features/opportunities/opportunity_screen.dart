@@ -392,11 +392,51 @@ class _ScannedCard extends StatelessWidget {
                 ],
               ),
             ],
-            if (entry.researchSummary case final String s) ...[
+            // The decision leads, the way the report itself now leads with it.
+            // A reader scanning eight cards wants "wait, and here is why" before
+            // they want a score out of thirteen.
+            if (entry.action?.decision case final String decision) ...[
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
+                decoration: BoxDecoration(
+                  color: c.violet.withValues(alpha: c.isDark ? 0.15 : 0.08),
+                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
+                  border: Border(
+                    left: BorderSide(
+                      color: c.violet.withValues(alpha: 0.55),
+                      width: 3,
+                    ),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      (entry.action?.label ?? 'Action now').toUpperCase(),
+                      style: BarbarianType.labelNano.copyWith(color: c.violet),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      decision,
+                      style: BarbarianType.bodyL.copyWith(
+                        color: c.textPrimary,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            if (entry.action?.reasoning.firstOrNull ?? entry.researchSummary
+                case final String s) ...[
               const SizedBox(height: 12),
               Text(
                 s,
-                style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
+                style: BarbarianType.bodyM.copyWith(
+                  color: c.textSecondary,
+                  height: 1.5,
+                ),
               ),
             ],
             // The gates say *why* a name scores what it scores, which is the

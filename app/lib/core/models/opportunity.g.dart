@@ -116,6 +116,11 @@ _ScannedCompany _$ScannedCompanyFromJson(Map<String, dynamic> json) =>
           ? const ScanScores()
           : ScanScores.fromJson(json['scores'] as Map<String, dynamic>),
       researchSummary: json['research_summary'] as String?,
+      rank: (json['rank'] as num?)?.toInt(),
+      state: json['state'] as String?,
+      action: json['action'] == null
+          ? null
+          : ScanAction.fromJson(json['action'] as Map<String, dynamic>),
       gates:
           (json['gates'] as List<dynamic>?)
               ?.map((e) => ScanGate.fromJson(e as Map<String, dynamic>))
@@ -150,6 +155,9 @@ Map<String, dynamic> _$ScannedCompanyToJson(_ScannedCompany instance) =>
       'published_at': instance.publishedAt?.toIso8601String(),
       'scores': instance.scores,
       'research_summary': instance.researchSummary,
+      'rank': instance.rank,
+      'state': instance.state,
+      'action': instance.action,
       'gates': instance.gates,
       'research': instance.research,
       'tape': instance.tape,
@@ -332,3 +340,18 @@ _ResearchSection _$ResearchSectionFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ResearchSectionToJson(_ResearchSection instance) =>
     <String, dynamic>{'heading': instance.heading, 'body': instance.body};
+
+_ScanAction _$ScanActionFromJson(Map<String, dynamic> json) => _ScanAction(
+  label: json['label'] as String?,
+  decision: json['decision'] as String?,
+  reasoning:
+      (json['reasoning'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const <String>[],
+);
+
+Map<String, dynamic> _$ScanActionToJson(_ScanAction instance) =>
+    <String, dynamic>{
+      'label': instance.label,
+      'decision': instance.decision,
+      'reasoning': instance.reasoning,
+    };

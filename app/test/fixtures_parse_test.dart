@@ -151,12 +151,19 @@ void main() {
   });
 
   group('cash or trash', () {
-    test('parses the seven published investigations', () {
+    // The count is not pinned: the series publishes a new investigation every
+    // few days, and hardcoding "seven" turned each one into a failing build.
+    // What must hold is that the document agrees with itself.
+    test('parses every published investigation', () {
       final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
 
-      expect(index.companies, hasLength(7));
+      expect(index.companies, isNotEmpty);
       expect(index.total, 224);
       expect(index.studiedCount, index.companies.length);
+      for (final c in index.companies) {
+        expect(c.ticker, matches(RegExp(r'^[A-Z]{3,6}$')));
+        expect(c.pillars, hasLength(6));
+      }
     });
 
     test('scores are signed and inside the six-pillar range', () {

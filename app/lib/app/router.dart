@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/providers.dart';
 import '../core/widgets/nav.dart';
 import '../features/cash_or_trash/cash_or_trash_screen.dart';
 import '../features/company/company_screen.dart';
@@ -140,13 +142,17 @@ GoRouter buildRouter() {
 }
 
 /// The app frame: the branch stack with the one floating navigation over it.
-class _Shell extends StatelessWidget {
+class _Shell extends ConsumerWidget {
   const _Shell({required this.shell});
 
   final StatefulNavigationShell shell;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Kept alive by the shell so it lives as long as the app is on screen:
+    // this is what re-reads the published research on resume.
+    ref.watch(contentRefreshProvider);
+
     return Stack(
       children: [
         shell,

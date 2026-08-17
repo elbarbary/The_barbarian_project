@@ -176,7 +176,7 @@ class YouScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'The Barbarian helps you understand the EGX. It does not '
+                    'ESTHMR helps you understand the EGX. It does not '
                     'decide what you should buy. Nothing here is investment '
                     'advice.',
                     style: BarbarianType.bodyS.copyWith(color: c.textFaint),

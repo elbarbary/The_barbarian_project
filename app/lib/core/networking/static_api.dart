@@ -68,6 +68,20 @@ class StaticApi {
 
   Manifest? _manifest;
   Future<Manifest?>? _inFlightManifest;
+  DateTime? _manifestAt;
+
+  /// How long a fetched manifest is trusted before it is read again.
+  ///
+  /// The manifest used to be fetched once and kept for the life of the process,
+  /// and nothing ever passed `forceRefresh`. On iOS a process survives for days,
+  /// so an app that had been opened once never saw another publish — and the
+  /// Refresh button did not help, because it invalidated the providers, which
+  /// re-asked the *cached* manifest, got the same versions, and served the same
+  /// cached documents. Two updates in a day, and only the first arrived.
+  ///
+  /// The document is a couple of hundred bytes, so re-reading it once a minute
+  /// costs nothing next to being silently wrong for a day.
+  static const Duration manifestTtl = Duration(minutes: 1);
 
   /// The version a document must match to be served from cache.
   ///
@@ -95,11 +109,24 @@ class StaticApi {
   Future<Manifest?> manifest({bool forceRefresh = false}) {
     if (!forceRefresh) {
       final cached = _manifest;
-      if (cached != null) return Future.value(cached);
+      final at = _manifestAt;
+      final fresh = at != null && DateTime.now().difference(at) < manifestTtl;
+      if (cached != null && fresh) return Future.value(cached);
       final pending = _inFlightManifest;
       if (pending != null) return pending;
     }
     return _inFlightManifest = _loadManifest();
+  }
+
+  /// Forget the manifest so the next read goes to the network.
+  ///
+  /// Called when the reader has said, or implied, that they want current data:
+  /// tapping Refresh, or bringing the app back to the front after it has been
+  /// away.
+  void invalidateManifest() {
+    _manifest = null;
+    _manifestAt = null;
+    _inFlightManifest = null;
   }
 
   Future<Manifest?> _loadManifest() async {
@@ -112,6 +139,7 @@ class StaticApi {
           jsonDecode(body) as Map<String, dynamic>,
         );
         if (!parsed.isSupported) return null;
+        _manifestAt = DateTime.now();
         return _manifest = parsed;
       } on Object {
         return null;
@@ -123,6 +151,7 @@ class StaticApi {
       final parsed = Manifest.fromJson(jsonDecode(body) as Map<String, dynamic>);
       if (!parsed.isSupported) return null;
       await _cache.write(manifestPath, body, version: parsed.schemaVersion);
+      _manifestAt = DateTime.now();
       return _manifest = parsed;
     } on Object {
       // Offline. Fall back to the last manifest we successfully stored so the
@@ -138,6 +167,7 @@ class StaticApi {
         final parsed = Manifest.fromJson(
           jsonDecode(cached.body) as Map<String, dynamic>,
         );
+        _manifestAt = DateTime.now();
         return _manifest = parsed.isSupported ? parsed : null;
       } on Object {
         return null;

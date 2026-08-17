@@ -143,6 +143,19 @@ abstract class ScannedCompany with _$ScannedCompany {
     @Default(ScanScores()) ScanScores scores,
     @JsonKey(name: 'research_summary') String? researchSummary,
 
+    /// Where the report ranked this name today. Null for names it lists but
+    /// does not rank.
+    int? rank,
+
+    /// The report's own wording for the state, which is longer and more
+    /// specific than the bucket badge — "Fresh persistent earnings watch".
+    String? state,
+
+    /// The decision the report reached, and why. Every one of these says *not*
+    /// to trade, which is the honest headline and what the website now leads
+    /// with (spec §8 permits recording the absence of a trade).
+    ScanAction? action,
+
     /// What was checked and what it showed — the report's own evidence
     /// checklist. Facts about the past, not conditions for a trade.
     @Default(<ScanGate>[]) List<ScanGate> gates,
@@ -438,4 +451,23 @@ abstract class ResearchSection with _$ResearchSection {
 
   factory ResearchSection.fromJson(Map<String, dynamic> json) =>
       _$ResearchSectionFromJson(json);
+}
+
+
+/// The decision on a name, and the reasoning behind it.
+@freezed
+abstract class ScanAction with _$ScanAction {
+  const factory ScanAction({
+    /// The report's label for the block — "Action now".
+    String? label,
+
+    /// "Wait for today's close — no model entry", "Wait for a wholly new base".
+    String? decision,
+    @Default(<String>[]) List<String> reasoning,
+  }) = _ScanAction;
+
+  const ScanAction._();
+
+  factory ScanAction.fromJson(Map<String, dynamic> json) =>
+      _$ScanActionFromJson(json);
 }

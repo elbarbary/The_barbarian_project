@@ -63,7 +63,7 @@ class _Greeting extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'The Barbarian',
+                'ESTHMR',
                 style: BarbarianType.displayS.copyWith(color: c.textPrimary),
               ),
               const SizedBox(height: 3),
@@ -78,6 +78,11 @@ class _Greeting extends ConsumerWidget {
           icon: Icons.refresh_rounded,
           semanticLabel: 'Refresh',
           onTap: () {
+            // The manifest decides whether anything is stale, so forgetting it
+            // has to come first. Invalidating only the providers re-asked the
+            // cached manifest, got the same versions back and re-served the
+            // same documents — a Refresh button that could not refresh.
+            ref.read(staticApiProvider).invalidateManifest();
             ref.invalidate(marketSnapshotProvider);
             ref.invalidate(companyDirectoryProvider);
             ref.invalidate(opportunityReportProvider);
