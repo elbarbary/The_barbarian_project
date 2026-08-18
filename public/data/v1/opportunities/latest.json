@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-17",
-  "masthead_date": "2026-08-17",
+  "date": "2026-08-18",
+  "masthead_date": "2026-08-18",
   "headline": null,
   "rubric": [
     {
@@ -86,26 +86,26 @@
       "ticker": "HDBK",
       "rank": 1,
       "status": "watching",
-      "status_label": "Qualified · armed",
-      "state": "Qualified",
+      "status_label": "Qualified · booked",
+      "state": "Qualified · booked",
       "score": 7,
       "max_score": 13,
-      "seen_at": "2026-08-17",
-      "research_summary": "H1 earnings remained live and the completed close supplied RV20 3.03×, 99.70% close strength and a clean EGP 88.75 base break. The model is not filled until the first ordinary 18 August print is verified at or below EGP 92.42.",
+      "seen_at": "2026-08-18",
+      "research_summary": "The saved 17 August 15:11:30 Cairo instruction existed before the open. Thndr X showed the first ordinary 18 August print at EGP 92.00 at 10:00:00 Cairo This is a model booking only—no real order was placed.",
       "move_percent": null,
       "gates": [],
       "research": [],
       "action": {
         "label": "Model action",
-        "decision": "Conditional 50-share first-print buy, maximum EGP 92.42",
+        "decision": "Hold 50 model shares from EGP 92.00",
         "reasoning": [
-          "The official consolidated H1 release was published 11 August at 15:14 Cairo. Net interest income rose 16.3% to about EGP 15.48bn; pre-tax profit rose 13.3% to EGP 14.30bn; net profit rose 12.8% to EGP 10.78bn and EPS reached EGP 10.13. H1 profit equals roughly 11.6% of the current EGP 92.92bn market value. Impairment and administration costs rose sharply, so the thesis is growth with cost-quality risk—not a clean all-clear."
+          "The saved 17 August 15:11:30 Cairo instruction existed before the open. Thndr X showed the first ordinary 18 August print at EGP 92.00 at 10:00:00 Cairo This is a model booking only—no real order was placed."
         ]
       },
       "tape": {
-        "label": "15:02:54 Cairo · completed",
-        "price": "EGP 91.96",
-        "detail": "+3.63% · EGP 69.44m traded"
+        "label": "First ordinary print · 10:00:00 Cairo",
+        "price": "EGP 92.00",
+        "detail": "cap EGP 92.42 · last EGP 91.50 at 10:01:26 Cairo"
       }
     },
     {
