@@ -77,19 +77,27 @@ class _Headline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final outlet = feed.sources
-        .where((s) => s.id == item.source)
-        .map((s) => s.name)
-        .firstOrNull;
+    // Every outlet that ran it, named. A story three papers carried is more
+    // established than one a single paper has, and hiding that behind a
+    // "sources: 3" count throws away the useful half.
+    final names = [
+      for (final attribution in item.sources)
+        feed.sources
+            .where((s) => s.id == attribution.id)
+            .map((s) => s.name)
+            .firstOrNull,
+    ].nonNulls.toList();
+    final outlet = names.isEmpty ? null : names.join(' · ');
+    final link = item.sources.firstOrNull?.link ?? '';
 
     return BPressable(
       // Out to the outlet's own page, in the app's reader. ESTHMR carries the
       // headline and the pointer; the article belongs to whoever wrote it, and
       // it is read on their page with their name on it.
-      onTap: item.link.isEmpty
+      onTap: link.isEmpty
           ? null
           : () => context.push(
-              Routes.articlePath(BNavTab.today, item.link, outlet ?? 'Source'),
+              Routes.articlePath(BNavTab.today, link, names.firstOrNull ?? 'Source'),
             ),
       child: BPaperCard(
         padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
@@ -100,6 +108,10 @@ class _Headline extends StatelessWidget {
               children: [
                 if (item.weight == 'check') const _CheckTag(),
                 if (item.weight == 'check') const SizedBox(width: 8),
+                if (item.eventTag case final String tag) ...[
+                  _EventTag(label: tag),
+                  const SizedBox(width: 8),
+                ],
                 Expanded(
                   child: Text(
                     [outlet, _ago(item.publishedAt)].nonNulls.join(' · '),
@@ -156,6 +168,35 @@ class _Headline extends StatelessWidget {
   }
 }
 
+/// What kind of event it is — never whether it was good.
+///
+/// This is the slot where every competitor puts a sentiment badge. "Positive"
+/// beside a company name is a view on that company, published by somebody with
+/// no licence to hold one, and it is a price target with the number taken out.
+/// "Capital change" is a fact about the story, it can be checked against the
+/// article, and it is the more useful half anyway.
+class _EventTag extends StatelessWidget {
+  const _EventTag({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: c.textPrimary.withValues(alpha: c.isDark ? 0.12 : 0.07),
+        borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+      ),
+      child: Text(
+        label.toUpperCase(),
+        style: BarbarianType.labelNano.copyWith(color: c.textSecondary),
+      ),
+    );
+  }
+}
+
 class _CheckTag extends StatelessWidget {
   const _CheckTag();
 
@@ -198,7 +239,8 @@ class _Provenance extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Headlines from $live, linked to the original. '
+          'Headlines from $live, each linked to the outlet that ran it. '
+          '${feed.merged > 0 ? '${feed.merged} duplicates merged. ' : ''}'
           '${feed.droppedForAdvice > 0 ? '${feed.droppedForAdvice} withheld for carrying a recommendation. ' : ''}'
           '${down.isEmpty ? '' : 'Not reachable today: $down.'}',
           style: BarbarianType.bodyS.copyWith(

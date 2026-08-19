@@ -77,6 +77,27 @@ SOURCES = [
         "live": True,
     },
     {
+        "id": "hapi",
+        "name": "Hapi Journal",
+        "name_ar": "حابي",
+        "home": "https://www.hapijournal.com",
+        "endpoint": "https://www.hapijournal.com/wp-json/wp/v2/posts?per_page=30",
+        "kind": "wp",
+        "live": True,
+    },
+    {
+        "id": "arabfinance",
+        "name": "Arab Finance",
+        "name_ar": "عرب فاينانس",
+        "home": "https://www.arabfinance.com",
+        # No feed and no REST API, but robots.txt points at a Google-News
+        # sitemap whose URL slugs *are* the headlines, in both languages, with
+        # a lastmod date. Published for machines to read, which is what this is.
+        "endpoint": "https://www.arabfinance.com/autositemapnews",
+        "kind": "newsmap",
+        "live": True,
+    },
+    {
         "id": "mubasher",
         "name": "Mubasher",
         "name_ar": "مباشر",
@@ -87,16 +108,6 @@ SOURCES = [
         "note": "site serving a maintenance page; no feed reachable 19 Aug 2026",
     },
     {
-        "id": "arabfinance",
-        "name": "Arab Finance",
-        "name_ar": "عرب فاينانس",
-        "home": "https://www.arabfinance.com",
-        "endpoint": None,
-        "kind": "none",
-        "live": False,
-        "note": "rss endpoints return 410 Gone",
-    },
-    {
         "id": "almal",
         "name": "Al Mal News",
         "name_ar": "المال",
@@ -104,7 +115,7 @@ SOURCES = [
         "endpoint": None,
         "kind": "none",
         "live": False,
-        "note": "no feed path resolves",
+        "note": "sitemaps are archives — sitemap75 carries 2007 dates",
     },
     {
         "id": "zawya",
@@ -177,6 +188,50 @@ def fetch_wp(source: dict) -> list[dict]:
                 # Build-time only. Never written to the published document.
                 "_excerpt": text(post.get("excerpt", {}).get("rendered", "")),
                 "_tags": post.get("tags") or [],
+            }
+        )
+    return items
+
+
+def fetch_newsmap(source: dict) -> list[dict]:
+    """Headlines recovered from a news sitemap's URL slugs.
+
+    Arab Finance publishes no feed, but its Google-News sitemap lists every
+    recent article with a `lastmod`, and the slug is the headline with hyphens
+    for spaces — in Arabic as well as English, percent-encoded. That is a
+    weaker source than a REST API and it is honest about it: the headline is
+    reconstructed, so anything that does not decode to real words is dropped.
+    """
+    raw = get(source["endpoint"])
+    if raw is None:
+        return []
+
+    body = raw.decode("utf-8", "replace")
+    items = []
+    for block in re.findall(r"<url>(.*?)</url>", body, re.S):
+        loc = re.search(r"<loc>(.*?)</loc>", block)
+        mod = re.search(r"<lastmod>(.*?)</lastmod>", block)
+        if not loc:
+            continue
+        url = loc.group(1).strip()
+        slug = urllib.parse.unquote(url.rstrip("/").rsplit("/", 1)[-1])
+        headline = slug.replace("-", " ").strip()
+        # A slug that is an id, a date or a stub is not a headline.
+        if len(headline) < 18 or not re.search(r"[A-Za-z\u0600-\u06ff]", headline):
+            continue
+        date = (mod.group(1).strip() if mod else "")[:10]
+        items.append(
+            {
+                "id": f"{source['id']}-{abs(hash(url)) % 10**10}",
+                "source": source["id"],
+                "headline": headline,
+                "link": url,
+                "published": f"{date}T00:00:00Z" if date else "",
+                "_excerpt": "",
+                "_tags": [],
+                # Said out loud in the document: this headline was rebuilt from
+                # a URL, not read from a title field.
+                "reconstructed": True,
             }
         )
     return items
@@ -273,6 +328,130 @@ def match_tickers(item: dict, tag_map: dict[str, int]) -> list[str]:
             hits.add(ticker)
 
     return sorted(hits)
+
+
+# ------------------------------------------------------------------ clustering
+
+
+def shingle(headline: str) -> set[str]:
+    """The words a headline is made of, folded and stripped of furniture."""
+    folded = normalise_ar(headline)
+    folded = re.sub(r"[^\w\u0600-\u06ff ]+", " ", folded)
+    words = [w for w in folded.split() if len(w) > 2]
+    return set(words)
+
+
+def cluster(items: list[dict], threshold: float = 0.55) -> list[dict]:
+    """Fold the same story, told by three outlets, into one row.
+
+    Three papers covering one ministry announcement is one thing that happened,
+    not three. Stockastic's own rows carry a `sources` array for exactly this
+    reason, and a feed that does not do it makes a reader scroll past the same
+    headline until they stop reading.
+
+    Jaccard over word sets, which is crude and right for this: Arabic headlines
+    about the same event share proper nouns and numbers, and the threshold is
+    set high enough that two different stories about the same ministry stay
+    apart. Merged rows keep the earliest timestamp — the first outlet to
+    publish is the one that broke it.
+    """
+    clusters: list[dict] = []
+    signatures: list[set[str]] = []
+
+    for item in items:
+        words = shingle(item["headline"])
+        if not words:
+            continue
+        placed = False
+        for index, existing in enumerate(signatures):
+            overlap = len(words & existing) / max(1, len(words | existing))
+            if overlap >= threshold:
+                head = clusters[index]
+                # Never twice from the same outlet.
+                if item["source"] not in {s["id"] for s in head["sources"]}:
+                    head["sources"].append(
+                        {"id": item["source"], "link": item["link"]}
+                    )
+                if item["published"] and (
+                    not head["published"] or item["published"] < head["published"]
+                ):
+                    head["published"] = item["published"]
+                # A headline read from a title field beats one rebuilt from a
+                # URL slug, whichever arrived first.
+                if head.get("reconstructed") and not item.get("reconstructed"):
+                    head["headline"] = item["headline"]
+                    head["reconstructed"] = False
+                head["tickers"] = sorted(set(head["tickers"]) | set(item["tickers"]))
+                placed = True
+                break
+        if placed:
+            continue
+
+        item["sources"] = [{"id": item["source"], "link": item["link"]}]
+        clusters.append(item)
+        signatures.append(words)
+
+    return clusters
+
+
+# ------------------------------------------------------------ what happened
+#
+# The classification that replaces a sentiment badge.
+#
+# Stockastic tags each headline positive / negative / neutral. That is a view
+# on a named issuer, published by somebody with no licence to hold one, and it
+# is the same exposure as a price target with the number removed — a reader
+# sees "positive" beside a company and reads "good for the stock".
+#
+# What kind of event it is, on the other hand, is a fact about the story, and
+# it is the more useful half anyway: "capital increase" tells a reader more
+# than "negative" ever did, and it can be checked against the article.
+EVENTS = [
+    ("results", "Results", (
+        r"نتائج أعمال|أرباح|خسائر|القوائم المالية|الربع (الأول|الثاني|الثالث|الرابع)"
+        r"|صافي الربح|earnings|net profit|quarterly results"
+    )),
+    ("capital", "Capital change", (
+        r"زيادة رأس ?المال|تخفيض رأس ?المال|رأسمال|أسهم مجانية|طرح|اكتتاب"
+        r"|capital increase|rights issue|share buyback|إعادة شراء"
+    )),
+    ("stake", "Ownership change", (
+        r"حصة|حصتها|استحواذ|يستحوذ|اندماج|بيع (حصة|أسهم)|صفقة"
+        r"|stake|acquisition|merger|acquires"
+    )),
+    ("distribution", "Distribution", (
+        r"توزيعات|كوبون|أرباح نقدية|dividend|coupon"
+    )),
+    ("contract", "Contract or project", (
+        r"عقد|تعاقد|بروتوكول|أمر توريد|مشروع|تستثمر|استثمارات|توقيع"
+        r"|contract|agreement|signs|project|invests"
+    )),
+    ("board", "Board or management", (
+        r"مجلس (الإدارة|إدارة)|تعيين|استقالة|رئيسًا|الرئيس التنفيذي"
+        r"|board|appoint|resign|chief executive"
+    )),
+    ("regulatory", "Regulator or exchange", (
+        r"الرقابة المالية|البورصة تقرر|إيقاف|شطب|تعليق التداول|ضوابط|قرار"
+        r"|regulator|suspend|delist|FRA"
+    )),
+    ("funding", "Funding or debt", (
+        r"قرض|تمويل|سندات|صكوك|ائتمان|تسهيل"
+        r"|loan|financing|bond|sukuk|credit facility"
+    )),
+    ("macro", "Economy and policy", (
+        r"البنك المركزي|سعر الفائدة|التضخم|الدولار|الجنيه|الناتج المحلي|الموازنة"
+        r"|central bank|interest rate|inflation|GDP|budget"
+    )),
+]
+
+
+def classify(headline: str) -> tuple[str, str]:
+    """What kind of thing happened. Never whether it was good."""
+    folded = normalise_ar(headline)
+    for key, label, pattern in EVENTS:
+        if re.search(normalise_ar(pattern), folded):
+            return key, label
+    return "other", "Other"
 
 
 # ------------------------------------------------------------ the triage step
@@ -388,7 +567,10 @@ def build(refresh_tags: bool = False) -> dict:
         if not tag_map:
             tag_map = resolve_tags(source, refresh_tags)
             print(f"   {len(tag_map)} companies mapped to the outlet's own tags")
-        fetched = fetch_wp(source) if source["kind"] == "wp" else []
+        fetched = {
+            "wp": fetch_wp,
+            "newsmap": fetch_newsmap,
+        }.get(source["kind"], lambda _s: [])(source)
         if not fetched:
             continue
         live_sources.append(source)
@@ -404,7 +586,21 @@ def build(refresh_tags: bool = False) -> dict:
             items.append(item)
         print(f"   {len(fetched)} headlines")
 
+    # Newest first before clustering, so the earliest-published rule inside a
+    # cluster has something to compare against.
     items.sort(key=lambda i: i["published"], reverse=True)
+    before = len(items)
+    items = cluster(items)
+    merged = before - len(items)
+    print(f"\n{before} headlines → {len(items)} stories after merging duplicates")
+
+    for item in items:
+        item["event"], item["event_label"] = classify(item["headline"])
+        item.pop("link", None)
+        item.pop("source", None)
+
+    items.sort(key=lambda i: i["published"], reverse=True)
+    items = items[:120]
 
     return {
         "sources": [
@@ -423,6 +619,7 @@ def build(refresh_tags: bool = False) -> dict:
         ],
         "threshold": UNUSUAL_VOLUME,
         "dropped_for_advice": len(dropped),
+        "merged": merged,
         "items": items,
     }
 

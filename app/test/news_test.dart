@@ -17,7 +17,7 @@ void main() {
 
     for (final item in feed.items) {
       expect(item.headline, isNotEmpty);
-      expect(item.link, startsWith('http'));
+      expect(item.sources.first.link, startsWith('http'));
       // A headline is a fact and a pointer. An excerpt long enough to stand in
       // for the article is somebody else's work, and the pipeline strips it.
       expect(
@@ -97,11 +97,46 @@ void main() {
     for (final source in feed.sources) {
       expect(source.name, isNotEmpty);
     }
-    // Every published item belongs to a named outlet — an unattributed
-    // headline is a headline this app is claiming as its own.
+    // Every story credits at least one named outlet, and every outlet it
+    // credits is one we actually fetched — an unattributed headline is a
+    // headline this app is claiming as its own.
     final ids = feed.sources.map((s) => s.id).toSet();
     for (final item in feed.items) {
-      expect(ids, contains(item.source));
+      expect(item.sources, isNotEmpty, reason: '${item.id} credits nobody');
+      for (final attribution in item.sources) {
+        expect(ids, contains(attribution.id));
+        expect(attribution.link, startsWith('http'));
+      }
+    }
+  });
+
+  test('a merged story credits every outlet that ran it', () {
+    final feed = load();
+    final multi = feed.items.where((i) => i.sources.length > 1);
+    for (final item in multi) {
+      // Never the same outlet twice: that would be one paper's two write-ups
+      // presented as independent corroboration.
+      final ids = item.sources.map((s) => s.id).toList();
+      expect(ids.toSet().length, ids.length, reason: '${item.id} double-counts');
+    }
+  });
+
+  test('the event tag says what happened, never whether it was good', () {
+    // The slot where every competitor puts positive/negative. A valence badge
+    // beside a company name is a view on that company.
+    const valence = [
+      'positive', 'negative', 'neutral', 'bullish', 'bearish',
+      'good', 'bad', 'strong', 'weak', 'risk', 'warning',
+    ];
+    for (final item in load().items) {
+      final label = item.eventLabel.toLowerCase();
+      for (final word in valence) {
+        expect(
+          label,
+          isNot(contains(word)),
+          reason: '"${item.eventLabel}" characterises the news',
+        );
+      }
     }
   });
 }

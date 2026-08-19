@@ -19,6 +19,7 @@ _NewsFeed _$NewsFeedFromJson(Map<String, dynamic> json) => _NewsFeed(
       const <NewsItem>[],
   threshold: (json['threshold'] as num?)?.toDouble() ?? 2.0,
   droppedForAdvice: (json['dropped_for_advice'] as num?)?.toInt() ?? 0,
+  merged: (json['merged'] as num?)?.toInt() ?? 0,
   unavailable:
       (json['unavailable'] as List<dynamic>?)
           ?.map((e) => NewsOutage.fromJson(e as Map<String, dynamic>))
@@ -31,6 +32,7 @@ Map<String, dynamic> _$NewsFeedToJson(_NewsFeed instance) => <String, dynamic>{
   'items': instance.items,
   'threshold': instance.threshold,
   'dropped_for_advice': instance.droppedForAdvice,
+  'merged': instance.merged,
   'unavailable': instance.unavailable,
 };
 
@@ -59,10 +61,16 @@ Map<String, dynamic> _$NewsOutageToJson(_NewsOutage instance) =>
 
 _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
   id: json['id'] as String,
-  source: json['source'] as String,
   headline: json['headline'] as String,
-  link: json['link'] as String? ?? '',
   published: json['published'] as String? ?? '',
+  sources:
+      (json['sources'] as List<dynamic>?)
+          ?.map((e) => NewsAttribution.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <NewsAttribution>[],
+  event: json['event'] as String? ?? 'other',
+  eventLabel: json['event_label'] as String? ?? 'Other',
+  reconstructed: json['reconstructed'] as bool? ?? false,
   tickers:
       (json['tickers'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const <String>[],
@@ -75,15 +83,26 @@ _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
 
 Map<String, dynamic> _$NewsItemToJson(_NewsItem instance) => <String, dynamic>{
   'id': instance.id,
-  'source': instance.source,
   'headline': instance.headline,
-  'link': instance.link,
   'published': instance.published,
+  'sources': instance.sources,
+  'event': instance.event,
+  'event_label': instance.eventLabel,
+  'reconstructed': instance.reconstructed,
   'tickers': instance.tickers,
   'weight': instance.weight,
   'because': instance.because,
   'evidence': instance.evidence,
 };
+
+_NewsAttribution _$NewsAttributionFromJson(Map<String, dynamic> json) =>
+    _NewsAttribution(
+      id: json['id'] as String,
+      link: json['link'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$NewsAttributionToJson(_NewsAttribution instance) =>
+    <String, dynamic>{'id': instance.id, 'link': instance.link};
 
 _NewsEvidence _$NewsEvidenceFromJson(Map<String, dynamic> json) =>
     _NewsEvidence(

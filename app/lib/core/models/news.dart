@@ -19,6 +19,10 @@ abstract class NewsFeed with _$NewsFeed {
     /// the screen can say the filter ran, rather than silently shrinking.
     @JsonKey(name: 'dropped_for_advice') @Default(0) int droppedForAdvice,
 
+    /// How many headlines collapsed into an existing story. Published so the
+    /// screen can say the feed was deduplicated rather than thin.
+    @Default(0) int merged,
+
     /// Outlets that were tried and could not be reached. Published because a
     /// missing source is a fact about the feed, not an embarrassment to hide.
     @Default(<NewsOutage>[]) List<NewsOutage> unavailable,
@@ -63,10 +67,21 @@ abstract class NewsOutage with _$NewsOutage {
 abstract class NewsItem with _$NewsItem {
   const factory NewsItem({
     required String id,
-    required String source,
     required String headline,
-    @Default('') String link,
     @Default('') String published,
+
+    /// Every outlet that carried this story, with its own link. One story told
+    /// by three papers is one row, not three — and each of them is credited.
+    @Default(<NewsAttribution>[]) List<NewsAttribution> sources,
+
+    /// What kind of event it is — results, a capital change, a contract, a
+    /// board appointment. Never whether it was good news.
+    @Default('other') String event,
+    @JsonKey(name: 'event_label') @Default('Other') String eventLabel,
+
+    /// True when the headline was rebuilt from a URL slug rather than read
+    /// from a title field. Said out loud because it is a weaker reading.
+    @Default(false) bool reconstructed,
 
     /// Listed companies the outlet itself tagged the story with.
     @Default(<String>[]) List<String> tickers,
@@ -86,6 +101,20 @@ abstract class NewsItem with _$NewsItem {
       _$NewsItemFromJson(json);
 
   DateTime? get publishedAt => DateTime.tryParse(published);
+
+  /// Only shown when the event is something other than the catch-all: a chip
+  /// reading "Other" tells a reader nothing they did not already know.
+  String? get eventTag => event == 'other' ? null : eventLabel;
+}
+
+/// One outlet's copy of a story.
+@freezed
+abstract class NewsAttribution with _$NewsAttribution {
+  const factory NewsAttribution({required String id, @Default('') String link}) =
+      _NewsAttribution;
+
+  factory NewsAttribution.fromJson(Map<String, dynamic> json) =>
+      _$NewsAttributionFromJson(json);
 }
 
 /// The session numbers behind a weight, so the claim can be checked.
