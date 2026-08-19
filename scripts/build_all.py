@@ -34,6 +34,7 @@ STEPS = [
     # After Market: the triage reads each company's published session to decide
     # whether a headline is worth a second look, so it needs today's numbers.
     ("News", "build_news_api.py", True),
+    ("Rates", "build_rates_api.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
 ]
 

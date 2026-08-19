@@ -11,6 +11,7 @@ import 'data/sourced.dart';
 import 'data/user_repository.dart';
 import 'models/cash_or_trash.dart';
 import 'models/news.dart';
+import 'models/rates.dart';
 import 'models/company.dart';
 import 'models/market_snapshot.dart';
 import 'models/opportunity.dart';
@@ -102,6 +103,10 @@ final newsProvider = StreamProvider<Sourced<NewsFeed>>(
   (ref) => ref.watch(researchRepositoryProvider).getNews(),
 );
 
+final ratesProvider = StreamProvider<Sourced<RatesDoc>>(
+  (ref) => ref.watch(researchRepositoryProvider).getRates(),
+);
+
 final companyProvider = StreamProvider.family<Sourced<Company>, String>(
   (ref, ticker) => ref.watch(marketRepositoryProvider).getCompany(ticker),
 );
@@ -143,6 +148,7 @@ final contentRefreshProvider = Provider<void>((ref) {
       ref.invalidate(opportunityReportProvider);
       ref.invalidate(cashOrTrashProvider);
       ref.invalidate(newsProvider);
+      ref.invalidate(ratesProvider);
     },
   );
   ref.onDispose(lifecycle.dispose);

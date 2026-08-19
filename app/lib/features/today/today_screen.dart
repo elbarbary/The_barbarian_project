@@ -12,6 +12,7 @@ import '../../core/widgets/charts.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/legal.dart';
 import 'news_block.dart';
+import 'rates_block.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
@@ -40,6 +41,7 @@ class TodayScreen extends ConsumerWidget {
       children: [
         const _TodayHeader(),
         const _ScannerHero(),
+        const BRatesBlock(),
         const _MarketPulse(),
         const BNewsBlock(),
         if (isSample) const Center(child: BSampleDataNotice()),

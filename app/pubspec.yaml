@@ -41,6 +41,7 @@ flutter:
     - assets/fixtures/cash-or-trash/
     - assets/fixtures/opportunities/
     - assets/fixtures/news/
+    - assets/fixtures/rates/
 
   # The website's own faces — Bricolage Grotesque (display) and Space Grotesk
   # (body) — plus IBM Plex Sans Arabic, which covers the Arabic neither of them

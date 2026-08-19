@@ -2,6 +2,7 @@ import 'dart:async';
 
 import '../models/cash_or_trash.dart';
 import '../models/news.dart';
+import '../models/rates.dart';
 import '../models/opportunity.dart';
 import '../networking/static_api.dart';
 import 'sourced.dart';
@@ -26,6 +27,10 @@ class ResearchRepository {
   /// Headlines from the outlets, with the triage attached at ingestion.
   Stream<Sourced<NewsFeed>> getNews() =>
       _parsed('news/latest.json', 'news', NewsFeed.fromJson);
+
+  /// Index levels, the pound and the metals.
+  Stream<Sourced<RatesDoc>> getRates() =>
+      _parsed('rates/latest.json', 'rates', RatesDoc.fromJson);
 
   Stream<Sourced<T>> _parsed<T>(
     String path,
