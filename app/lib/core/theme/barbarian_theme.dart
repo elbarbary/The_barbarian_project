@@ -51,7 +51,7 @@ abstract final class BarbarianTheme {
       ),
       iconTheme: IconThemeData(color: c.textPrimary, size: 20),
       // The design has no AppBar anywhere: screens own their headers, which is
-      // what lets the big Outfit titles scroll away naturally.
+      // what lets the big display titles scroll away naturally.
       appBarTheme: AppBarTheme(
         backgroundColor: c.background,
         surfaceTintColor: Colors.transparent,

@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 
-/// Radii, elevation, spacing and motion, transcribed from the design canvas.
+/// Radii, elevation, spacing and motion, transcribed from the design boards.
+///
+/// The boards' radii: 999 for every pill, 28 for a wide or hero card, 24 for
+/// the default card, 20 for a small one and 16 for a tile.
 @immutable
 abstract final class BarbarianRadius {
   /// Pills, avatars, the floating nav, segmented controls. By far the most
   /// used shape in the design — 67 occurrences against 22 for the next.
   static const double pill = 999;
 
-  /// The site's `--r-lg`: the hero card and the company header.
-  static const double xl = 30;
+  /// The hero card and the company header.
+  static const double xl = 28;
 
-  /// `--r-md` — the default card.
-  static const double lg = 22;
+  /// The default card.
+  static const double lg = 24;
 
-  static const double md = 18;
+  /// A small card.
+  static const double md = 20;
 
-  /// `--r-sm`.
-  static const double sm = 14;
+  /// A tile: the ticker monogram, a soft icon button.
+  static const double sm = 16;
   static const double xs = 12;
   static const double xxs = 10;
   static const double hair = 8;
@@ -65,23 +69,9 @@ abstract final class BarbarianShadow {
       offset: Offset(0, 4),
     ),
   ];
-
-  /// The glow on an active accent dot. `0 0 8px rgba(255,131,64,.9)`.
-  static const List<BoxShadow> accentGlow = [
-    BoxShadow(color: Color(0xE6FF8340), blurRadius: 8),
-  ];
-
-  /// Dark surfaces carry a deeper, cooler shadow than bone ones do.
-  static const List<BoxShadow> onDark = [
-    BoxShadow(
-      color: Color(0x2E000000),
-      blurRadius: 16,
-      offset: Offset(0, 6),
-    ),
-  ];
 }
 
-/// The canvas works on a 4px rhythm, with 18–20px as the standard card inset.
+/// The boards work on a 4px rhythm, with 16–20px as the standard card inset.
 @immutable
 abstract final class BarbarianSpace {
   static const double xxs = 4;

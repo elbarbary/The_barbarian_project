@@ -152,7 +152,9 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                   '+${CashOrTrashEntry.maxScore} across six pillars: '
                   'valuation, earnings quality, growth, balance sheet, '
                   'tradability and governance.',
-                  style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+                  // On the page ramp rather than on a card, where textFaint
+                  // measures 3.7–4.1:1 at this size.
+                  style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
                 ),
               ],
             );
@@ -243,7 +245,9 @@ class _VerdictChip extends StatelessWidget {
         child: Text(
           '${verdict.mark} ${verdict.label} $count',
           style: BarbarianType.pill.copyWith(
-            color: selected ? c.surface : tone,
+            // Unselected, the chip is a wash of this same band, and four of
+            // the five bands fail 4.5:1 printed undiluted on it at 10pt.
+            color: selected ? c.surface : BarbarianPalette.onWash(c, tone),
           ),
         ),
       ),

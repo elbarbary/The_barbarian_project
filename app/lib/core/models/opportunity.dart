@@ -89,6 +89,13 @@ enum ScanStatus {
     'watching' => ScanStatus.watching,
     _ => ScanStatus.rejected,
   };
+
+  /// What a reader is shown. The enum identifier is a wire value, not a word.
+  String get label => switch (this) {
+    ScanStatus.qualified => 'Qualified',
+    ScanStatus.watching => 'Watching',
+    ScanStatus.rejected => 'Rejected',
+  };
 }
 
 @freezed

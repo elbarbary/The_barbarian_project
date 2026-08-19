@@ -5,134 +5,145 @@ import 'barbarian_colors.dart';
 
 /// Colour that carries meaning.
 ///
-/// Every hue here descends from the website's five — blue `#1E37E6`, violet
-/// `#7C3AED`, rose `#E11D74`, lime `#CDE84A`, cyan `#22D3EE` — so a sector
-/// tile and the site's own gradient belong to the same family.
+/// The rule the ESTHMR boards work by, read off what they draw rather than
+/// what they say: **hue means outcome**. Ink, one orange, and a signed pair.
+/// Chips are semantic or stateful — pass, fail, unresolved, selected — and
+/// never taxonomic. Nothing on either board is coloured because of what
+/// category it belongs to.
 ///
-/// Nothing here is decorative, and nothing is the only carrier of its meaning:
-/// every use sits beside a word, a mark or a number (spec §42). Each entry has
-/// a light and a dark variant, because the same hue at the same saturation
-/// cannot serve a near-white ground and an indigo one.
+/// That is why there is no sector ramp here any more. See [sector].
+///
+/// Nothing below is the only carrier of its meaning (spec §42). The verdict
+/// bands are two hues apart at their extremes and every consumer renders the
+/// band's name; the scan statuses are five tones and every consumer renders
+/// the status word.
 @immutable
 abstract final class BarbarianPalette {
   // ---------------------------------------------------------------- verdicts
 
   /// The five Cash or Trash bands as a diverging ramp.
   ///
-  /// The scale is signed and ordered, so the colour should be too: two greens
-  /// above the line, a neutral at the middle, two reds below. Previously all
-  /// five collapsed into three tones and Trash looked like Toxic.
+  /// Anchored to the boards' own direction pair at the ends and walked through
+  /// olive and stone in between, so the scale belongs to one colour system
+  /// rather than importing a second.
+  ///
+  /// The ramp is *glanceable*, not readable: confined to warm hues and held
+  /// above 4.5:1 on paper, the best achievable separation between adjacent
+  /// bands is about 1.08:1 in luminance, and Cash against Trash is 1.03:1 —
+  /// the two ends are the same brightness. The band **name** is what makes it
+  /// readable, and every consumer draws one.
   static Color verdict(BarbarianColors c, Verdict verdict) {
     final dark = c.isDark;
     return switch (verdict) {
-      // Built from the site's own five hues rather than a generic red-green
-      // ramp: teal and lime read as "good" against indigo without importing a
-      // colour the brand does not own.
-      Verdict.cash => dark ? const Color(0xFF3ED5A8) : const Color(0xFF0F9D76),
+      Verdict.cash => dark ? const Color(0xFF8FC0A3) : const Color(0xFF3F6B52),
       Verdict.looseChange =>
-        dark ? const Color(0xFFAFD84F) : const Color(0xFF7D9B1F),
+        dark ? const Color(0xFF9CA95A) : const Color(0xFF607023),
+      // The middle band is the boards' own answer for "no direction": warm
+      // stone, drawn from the text ramp rather than invented as a sixth hue.
       Verdict.recyclable =>
-        dark ? const Color(0xFFB794F6) : const Color(0xFF7C3AED),
-      Verdict.trash => dark ? const Color(0xFFFF8FB8) : const Color(0xFFDB3A7B),
-      Verdict.toxic => dark ? const Color(0xFFFF6B6B) : const Color(0xFFC81E4A),
+        dark ? const Color(0xFF9C938B) : const Color(0xFF756E68),
+      Verdict.trash => dark ? const Color(0xFFD2725C) : const Color(0xFFA3402F),
+      Verdict.toxic => dark ? const Color(0xFFF0705A) : const Color(0xFF7C2C22),
     };
   }
 
   /// A wash of the same hue, for a pill or a card tint.
+  ///
+  /// Raised from the old 0.12/0.18: these bands are deeper than the hues they
+  /// replace, and on opaque paper — rather than over a moving gradient — a
+  /// 12% wash of a dark forest is nearly the card colour.
   static Color verdictWash(BarbarianColors c, Verdict v) =>
-      verdict(c, v).withValues(alpha: c.isDark ? 0.18 : 0.12);
+      verdict(c, v).withValues(alpha: c.isDark ? 0.24 : 0.16);
+
+  /// The band drawn on the ink slab.
+  ///
+  /// [verdict] deepens both ends toward paper, which puts Toxic within 1.07:1
+  /// of ink — the badge stops being a badge. On ink the whole ramp lifts.
+  static Color verdictOnInk(BarbarianColors c, Verdict verdict) =>
+      switch (verdict) {
+        Verdict.cash => const Color(0xFF8FC0A3),
+        Verdict.looseChange => const Color(0xFFB9C46F),
+        Verdict.recyclable => const Color(0xFFB0A79E),
+        Verdict.trash => const Color(0xFFD97D64),
+        Verdict.toxic => const Color(0xFFF08A72),
+      };
+
+  // ------------------------------------------------------------- on a wash
+
+  /// A tone's own label, when it is printed on a wash of itself.
+  ///
+  /// The pattern is everywhere in this app and on both boards: a chip filled
+  /// with 12–16% of a tone, labelled in that same tone. It is a good-looking
+  /// construction and, at the sizes used here, an illegible one — a chip label
+  /// is 9–11pt, which needs 4.5:1, and a tone against its own wash lands
+  /// between 2.6:1 (the accent) and 4.5:1 (brick). The boards draw their chips
+  /// at the same weights, so following them exactly means shipping the failure.
+  ///
+  /// Pulling the label toward the ground it is printed on — ink on paper, bone
+  /// on a dark card — keeps the chip's hue and buys the contrast: the worst
+  /// case goes from 2.60:1 to 5.10:1 in light and to 4.94:1 in dark. The fill,
+  /// the border and any glyph keep the undiluted tone.
+  static Color onWash(BarbarianColors c, Color tone) => Color.lerp(
+    tone,
+    c.isDark ? c.onInk : c.ink,
+    c.isDark ? 0.28 : 0.40,
+  )!;
 
   // ----------------------------------------------------------------- sectors
 
-  /// A stable colour per sector.
+  /// A sector's tone — now the ink of the page, at every band.
   ///
-  /// The twenty EGX sectors are named explicitly rather than hashed: a hash
-  /// puts Finance and Utilities next to each other as often as not, and these
-  /// are the labels a reader actually scans down a list. Anything unlisted
-  /// falls back to a hash over the same curated set, so a new sector still
-  /// gets a sensible colour instead of grey.
-  static Color sector(BarbarianColors c, String? name) {
-    if (name == null || name.isEmpty) return c.textMuted;
-    final index = _sectorIndex[name] ?? (name.hashCode.abs() % _sectors.length);
-    final ramp = _sectors[index % _sectors.length];
-    return c.isDark ? ramp.$2 : ramp.$1;
-  }
+  /// This used to be twenty hand-picked hues spread evenly round the wheel,
+  /// so that a list of forty tinted monogram tiles showed at a glance which
+  /// sectors a screen was mostly made of. Three things retired it:
+  ///
+  ///  * **Neither board tints anything by category.** Sector strings are drawn
+  ///    as plain quiet text beside the company name, and the ticker monogram
+  ///    is a flat ink tile with bone letters.
+  ///  * **Twelve of the twenty hues were cool** — brand blue, violet, cyan,
+  ///    magenta, grape, cobalt. On warm paper they read as imported. Twenty
+  ///    *warm* hues is not a thing that exists: it is about 18° of spacing
+  ///    across the usable warm wheel, below what a 40pt tile can distinguish.
+  ///  * **Colour was the sole carrier, which §42 forbids.** Only one call site
+  ///    in the app ever passed a sector to the monogram — the Market row —
+  ///    and that row shows ticker, both names, price and delta, and never the
+  ///    sector itself. Every other consumer (the filter chip, the sector tile)
+  ///    renders the sector's *name*, which is what actually distinguishes it.
+  ///
+  /// The tiles keep their shape: a wash and a ring, twenty of them, all ink.
+  static Color sector(BarbarianColors c, String? name) =>
+      name == null || name.isEmpty ? c.textMuted : c.textPrimary;
 
+  /// The monogram tile fill.
+  ///
+  /// A tile of ink needs different weight from a tile of colour: the old
+  /// 0.13 was a hue over a moving gradient, and at that strength plain ink
+  /// over one fixed cream is a grey block — forty of them down a list read as
+  /// a ladder of holes. 0.10 leaves a tile that is a shape, with the ring and
+  /// the ticker itself carrying the edge.
   static Color sectorWash(BarbarianColors c, String? name) =>
-      sector(c, name).withValues(alpha: c.isDark ? 0.20 : 0.13);
-
-  /// (light, dark) pairs. Warm-leaning and evenly spaced round the wheel, but
-  /// pulled toward the brand's earthiness so no single tile shouts.
-  static const List<(Color, Color)> _sectors = [
-    (Color(0xFF1E37E6), Color(0xFF8FA2FF)), // brand blue  — Finance
-    (Color(0xFF7C3AED), Color(0xFFB794F6)), // violet      — Process Industries
-    (Color(0xFF0E7490), Color(0xFF5FE3F7)), // deep cyan   — Non-Energy Minerals
-    (Color(0xFFE11D74), Color(0xFFFF6FA8)), // rose        — Consumer Services
-    (Color(0xFF6D8B12), Color(0xFFC5E05A)), // lime        — Consumer Non-Durables
-    (Color(0xFF0F9D76), Color(0xFF3ED5A8)), // teal        — Industrial Services
-    (Color(0xFF9333EA), Color(0xFFCBA0FA)), // purple      — Health Technology
-    (Color(0xFFC2410C), Color(0xFFFB9A6B)), // ember       — Distribution Services
-    (Color(0xFF2563EB), Color(0xFF8BB3FF)), // azure       — Producer Manufacturing
-    (Color(0xFFBE185D), Color(0xFFF582B4)), // magenta     — Health Services
-    (Color(0xFF22D3EE), Color(0xFF7DE8F8)), // brand cyan  — Technology Services
-    (Color(0xFF7E22CE), Color(0xFFC08CF2)), // grape       — Consumer Durables
-    (Color(0xFF4D7C0F), Color(0xFFA8CE55)), // olive       — Retail Trade
-    (Color(0xFF4338CA), Color(0xFF9A93F0)), // indigo      — Transportation
-    (Color(0xFF0891B2), Color(0xFF62CFE4)), // lagoon      — Commercial Services
-    (Color(0xFF8B5CF6), Color(0xFFBFA3FA)), // lilac       — Utilities
-    (Color(0xFF0D9488), Color(0xFF4FCFC1)), // jade        — Communications
-    (Color(0xFFB91C6B), Color(0xFFEE7CAE)), // fuchsia     — Energy Minerals
-    (Color(0xFF3B4FD8), Color(0xFF8C99F2)), // cobalt      — Electronic Technology
-    (Color(0xFF6B6591), Color(0xFFA9A3C8)), // muted indigo— Miscellaneous
-  ];
-
-  /// Index into [_sectors], in the order the EGX sectors actually appear by
-  /// company count, so the biggest sectors get the most distinct hues.
-  static const Map<String, int> _sectorIndex = {
-    'Finance': 0,
-    'Process Industries': 1,
-    'Non-Energy Minerals': 2,
-    'Consumer Services': 3,
-    'Consumer Non-Durables': 4,
-    'Industrial Services': 5,
-    'Health Technology': 6,
-    'Distribution Services': 7,
-    'Producer Manufacturing': 8,
-    'Health Services': 9,
-    'Technology Services': 10,
-    'Consumer Durables': 11,
-    'Retail Trade': 12,
-    'Transportation': 13,
-    'Commercial Services': 14,
-    'Utilities': 15,
-    'Communications': 16,
-    'Energy Minerals': 17,
-    'Electronic Technology': 18,
-    'Miscellaneous': 19,
-  };
+      sector(c, name).withValues(alpha: c.isDark ? 0.16 : 0.10);
 
   // ------------------------------------------------------------ scan status
 
-  /// The scanner's own status vocabulary, coloured by what it means rather
-  /// than by which bucket it maps to.
+  /// The scanner's own status vocabulary, coloured by what it means.
+  ///
+  /// Drawn entirely from tones that exist elsewhere in the theme, so a status
+  /// never introduces a hue of its own. **Deliberately no orange**: the accent
+  /// means "measured" or "pressable", never an outcome, and at 3.09:1 it
+  /// cannot be the bare 13pt text one consumer renders.
   static Color scanStatus(BarbarianColors c, String? label) {
     final l = (label ?? '').toLowerCase();
     final dark = c.isDark;
-    if (l.contains('persistent')) {
-      return dark ? const Color(0xFF8FA2FF) : const Color(0xFF1E37E6);
-    }
+    if (l.contains('persistent')) return c.iris;
     if (l.contains('tape')) {
-      return dark ? const Color(0xFFB794F6) : const Color(0xFF7C3AED);
+      return dark ? const Color(0xFF9CA95A) : const Color(0xFF607023);
     }
-    if (l.contains('model trade')) {
-      return dark ? const Color(0xFF3ED5A8) : const Color(0xFF0F9D76);
-    }
+    if (l.contains('model trade')) return c.up;
     if (l.contains('expired') || l.contains('miss')) {
-      return dark ? const Color(0xFFA9A3C8) : const Color(0xFF6B6591);
+      return dark ? const Color(0xFF9C938B) : const Color(0xFF756E68);
     }
-    if (l.contains('denied') || l.contains('reject')) {
-      return dark ? const Color(0xFFFF6B6B) : const Color(0xFFC81E4A);
-    }
-    return dark ? const Color(0xFF5FE3F7) : const Color(0xFF0E7490);
+    if (l.contains('denied') || l.contains('reject')) return c.down;
+    return c.textSecondary;
   }
 }

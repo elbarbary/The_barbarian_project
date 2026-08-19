@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
-import 'living_canvas.dart';
 import 'motion.dart';
 import 'nav.dart';
 import 'surfaces.dart';
@@ -16,7 +15,7 @@ import 'surfaces.dart';
 /// which slot is lit; the shell already knows.
 ///
 /// The bottom scroll padding is not arbitrary: 22 (nav inset) + 66 (nav height)
-/// + 36 (clearance) = 124, so the last row of any list clears the glass rather
+/// + 36 (clearance) = 124, so the last row of any list clears the bar rather
 /// than hiding beneath it.
 class BScreenScaffold extends StatelessWidget {
   const BScreenScaffold({
@@ -32,7 +31,7 @@ class BScreenScaffold extends StatelessWidget {
   final List<Widget> children;
 
   /// Vertical rhythm between blocks. Deliberately per-screen rather than a
-  /// token: the canvas uses 22/24/20/20/18/20/22/22 across its eight screens,
+  /// token: the boards use 22/24/20/20/18/20/22/22 across their eight screens,
   /// and flattening that to one number visibly changes several of them.
   final double blockGap;
 
@@ -130,9 +129,14 @@ class _Frame extends StatelessWidget {
       backgroundColor: c.background,
       body: Stack(
         children: [
-          // The site's living gradient. Every glass surface above it is
-          // translucent, so this is what they refract.
-          const Positioned.fill(child: BLivingCanvas()),
+          // The page ramp. This was five blurred orbs drifting on a 48-second
+          // loop, because every surface above it was translucent and needed
+          // something to refract. Nothing above it is translucent now, so the
+          // orbs cost a full-screen 34-sigma blur and an offscreen buffer per
+          // frame to tint a paper ground the boards draw flat.
+          Positioned.fill(
+            child: DecoratedBox(decoration: BoxDecoration(gradient: c.pageGradient)),
+          ),
           // The canvas hides scrollbars globally; on device the content is the
           // chrome, so a track down the edge would be the only hard line in it.
           ScrollConfiguration(

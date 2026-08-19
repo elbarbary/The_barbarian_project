@@ -170,6 +170,7 @@ class _Header extends StatelessWidget {
               BSoftIconButton(
                 icon: Icons.arrow_back_ios_new_rounded,
                 semanticLabel: 'Back',
+                onDark: true,
                 onTap: () => Navigator.of(context).maybePop(),
               ),
               const Spacer(),
@@ -180,6 +181,7 @@ class _Header extends StatelessWidget {
                     ? Icons.bookmark_rounded
                     : Icons.bookmark_border_rounded,
                 selected: watched,
+                onDark: true,
                 semanticLabel: watched
                     ? 'Following ${company.ticker}. Tap to unfollow.'
                     : 'Follow ${company.ticker}',

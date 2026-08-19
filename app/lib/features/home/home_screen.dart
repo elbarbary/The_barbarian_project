@@ -158,7 +158,10 @@ class _ScannerHero extends ConsumerWidget {
                     _ScanCount(
                       value: report.qualifiedCount,
                       label: 'Qualified',
-                      tone: c.up,
+                      // The ink pair: c.up reads 2.87:1 here, beside an
+                      // accentOnInk at 7.16 and an onInkMuted at 4.95, so the
+                      // row went two colours and a smudge.
+                      tone: c.upOnInk,
                     ),
                     const SizedBox(width: 10),
                     _ScanCount(
@@ -453,15 +456,28 @@ class _MarketPulse extends ConsumerWidget {
                 height: 8,
                 // stretch, or a ColoredBox with no intrinsic size collapses to
                 // zero height and the whole bar disappears.
+                // A 2pt paper gap between the shares. Forest and brick are
+                // 1.03:1 apart, so on a session where nothing closed unchanged
+                // the two segments abutted and the bar read as one solid rule
+                // — the counts above it were the only thing saying otherwise.
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (up > 0) Expanded(flex: up, child: ColoredBox(color: c.up)),
+                    if (up > 0 && (flat > 0 || down > 0))
+                      SizedBox(width: 2, child: ColoredBox(color: c.surface)),
                     if (flat > 0)
                       Expanded(
                         flex: flat,
-                        child: ColoredBox(color: c.hairlineStrong),
+                        // Not `hairlineStrong`: an 18% ink is 1.45:1 against
+                        // the card and against the paper gaps either side, so
+                        // the unchanged share was a hole rather than a share.
+                        child: ColoredBox(
+                          color: c.textPrimary.withValues(alpha: 0.30),
+                        ),
                       ),
+                    if (flat > 0 && down > 0)
+                      SizedBox(width: 2, child: ColoredBox(color: c.surface)),
                     if (down > 0)
                       Expanded(flex: down, child: ColoredBox(color: c.down)),
                   ],
@@ -591,19 +607,28 @@ class _VerdictSpectrum extends StatelessWidget {
                   start: box.maxWidth / 2 - 0.5,
                   child: Container(width: 1, height: 14, color: c.hairlineStrong),
                 ),
+                // Each dot is a company at its score. The band's hue is not
+                // the carrier here — Cash and Toxic sit at 1.03:1, and the dot
+                // has no label beside it — so the *position* on the axis is,
+                // and the spoken label states the band and the score outright.
                 for (final entry in index.companies)
                   PositionedDirectional(
                     start: (box.maxWidth * entry.gaugeFraction - 5).clamp(
                       0.0,
                       box.maxWidth - 10,
                     ),
-                    child: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: BarbarianPalette.verdict(c, entry.verdict),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: c.surface, width: 2),
+                    child: Semantics(
+                      label:
+                          '${entry.ticker}, ${entry.verdict.label}, '
+                          'score ${entry.score}',
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: BarbarianPalette.verdict(c, entry.verdict),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: c.surface, width: 2),
+                        ),
                       ),
                     ),
                   ),

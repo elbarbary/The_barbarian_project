@@ -329,11 +329,10 @@ class ThemeModeNotifier extends Notifier<ThemeMode> {
   ThemeMode build() {
     // Light by default, not the system's choice.
     //
-    // The website has no dark mode, so the light theme is the one that was
-    // actually designed — every colour in it is lifted from the site's own
-    // stylesheet. The dark theme is derived from it and has not had a contrast
-    // audit. Defaulting to the system meant a phone set to dark opened the app
-    // in the theme nobody drew.
+    // The design boards are light, so the light theme is the one that was
+    // actually drawn — every colour in it comes off them. The dark ramp is
+    // derived. Defaulting to the system meant a phone set to dark opened the
+    // app in the theme nobody drew.
     //
     // "Follow the system" is still offered in You, and a stored choice still
     // wins; this only changes what a fresh install opens in.

@@ -7,7 +7,7 @@ import 'text.dart';
 
 /// How the blades fill.
 enum BGaugeMode {
-  /// West-anchored, like the canvas: blade 0 lights first and the arc fills
+  /// West-anchored, like the boards: blade 0 lights first and the arc fills
   /// clockwise. Correct for a bounded range with no meaningful midpoint —
   /// a 52-week price range, a rubric score out of 13.
   fromStart,
@@ -28,7 +28,7 @@ enum BGaugeMode {
 /// transformed children this would rebuild the whole subtree on every frame of
 /// the fill animation.
 ///
-/// Geometry, transcribed from the canvas:
+/// Geometry, transcribed from the boards:
 ///  * box is `size × (size / 2 + 46)`, pivot at `(size / 2, height − 22)`
 ///  * blade *i* sits at `−90° + i × 180/55`, so `i = 0` is due west and
 ///    `i = 55` is due east
@@ -121,10 +121,20 @@ class _BArcGaugeState extends State<BArcGauge>
   Widget build(BuildContext context) {
     final c = context.colors;
     final height = widget.size / 2 + 46;
-    final lit = widget.litColor ?? (widget.onDark ? c.accentOnInk : c.accent);
+    // The boards' gauge is ember and always sits on the ink slab, where a lit
+    // blade against a 16%-bone track clears the 3:1 a meter needs — 3.24:1 for
+    // the boards' own #E8621C, 4.49:1 for the lifted #FF8340 used here.
+    //
+    // On paper the same ember cannot get there. The accent is light enough
+    // that NO ink-alpha track clears 3:1 against it: the best available is
+    // 2.63:1, and a darker track makes it worse rather than better. A meter
+    // whose two halves are 2.6:1 apart is decoration, so on paper the default
+    // lit blade is ink.
+    final lit =
+        widget.litColor ?? (widget.onDark ? c.accentOnInk : c.textPrimary);
     final unlit = widget.onDark
-        ? const Color(0x29F5F1EC)
-        : c.textPrimary.withValues(alpha: 0.12);
+        ? c.onInk.withValues(alpha: 0.16)
+        : c.textPrimary.withValues(alpha: 0.10);
     final fg = widget.onDark ? c.onInk : c.textPrimary;
     final muted = widget.onDark ? c.onInkMuted : c.textMuted;
 

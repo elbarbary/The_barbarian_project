@@ -58,10 +58,15 @@ class BChangeDelta extends StatelessWidget {
       BDirection.up => isPositiveGood,
       BDirection.down => !isPositiveGood,
     };
+    // The direction tones follow the surface. On the ink slab the paper pair
+    // measures 2.87:1 and 2.78:1 — a shape, not a figure — so the theme
+    // carries a second pair for exactly this, the way it does for the accent.
+    // Only the flat case used to branch on [onDark], which meant every delta
+    // that mattered ignored it.
     final color = switch (good) {
       null => onDark ? c.onInkMuted : c.textMuted,
-      true => c.up,
-      false => c.down,
+      true => onDark ? c.upOnInk : c.up,
+      false => onDark ? c.downOnInk : c.down,
     };
     final resolved = (style ?? BarbarianType.pill).copyWith(color: color);
 
@@ -128,8 +133,20 @@ class BKindChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final (bg, fg) = switch (variant) {
-      BChipVariant.ember => (c.accent.withValues(alpha: 0.12), c.accent),
-      BChipVariant.neutral => (c.surface, c.textMuted),
+      // The label is the accent pulled toward the ground it sits on. Printed
+      // undiluted on its own 12% wash it measures 2.7:1 at 10pt — the accent
+      // is the lightest tone in the theme and the least able to carry type.
+      BChipVariant.ember => (
+        c.accent.withValues(alpha: c.isDark ? 0.20 : 0.14),
+        BarbarianPalette.onWash(c, c.accent),
+      ),
+      // Not `surface`: that is the card colour, and a neutral chip inside a
+      // card was drawing itself at 1.000:1 — the flags on a verdict card
+      // stopped being chips and became loose words in a Wrap.
+      BChipVariant.neutral => (
+        c.textPrimary.withValues(alpha: c.isDark ? 0.10 : 0.06),
+        c.textSecondary,
+      ),
       BChipVariant.solid => (c.ink, c.onInk),
       BChipVariant.onDark => (
         c.onInk.withValues(alpha: 0.09),
@@ -198,9 +215,12 @@ class BAvatarHatch extends StatelessWidget {
       height: size,
       child: ClipOval(
         child: CustomPaint(
+          // Both branches used to resolve to `c.hairline`, and the light
+          // pair was 18% ink over 8% ink — a flat grey disc rather than a
+          // hatch. Ink over paper reads as the stripes it is meant to be.
           painter: _HatchPainter(
-            a: c.isDark ? c.surfaceRaised : c.hairlineStrong,
-            b: c.isDark ? c.hairline : c.hairline,
+            a: c.textPrimary.withValues(alpha: c.isDark ? 0.30 : 0.22),
+            b: c.textPrimary.withValues(alpha: c.isDark ? 0.10 : 0.06),
             band: w,
           ),
         ),
@@ -247,6 +267,7 @@ class BSoftIconButton extends StatelessWidget {
     this.selected = false,
     this.size = 42,
     this.semanticLabel,
+    this.onDark = false,
     super.key,
   });
 
@@ -260,9 +281,25 @@ class BSoftIconButton extends StatelessWidget {
   final double size;
   final String? semanticLabel;
 
+  /// True when the button sits on the ink slab rather than on paper.
+  ///
+  /// The selected fill is [BarbarianColors.actionSurface], which on this
+  /// palette is the ink itself. On the company header — an ink card — that
+  /// made pressing "follow" turn a 42pt square the exact colour of the card
+  /// behind it: 1.000:1, with a warm-ink shadow that is equally invisible
+  /// there. The state change read as a rendering fault.
+  final bool onDark;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final fill = onDark
+        ? (selected ? c.onInk : c.onInk.withValues(alpha: 0.10))
+        : (selected ? c.actionSurface : c.surface);
+    final glyph = onDark
+        ? (selected ? c.ink : c.onInk)
+        : (selected ? c.onAction : c.textPrimary);
+
     return BPressable.icon(
       onTap: onTap,
       semanticLabel: semanticLabel,
@@ -271,15 +308,11 @@ class BSoftIconButton extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: selected ? c.actionSurface : c.surface,
+          color: fill,
           borderRadius: BorderRadius.circular(BarbarianRadius.sm),
-          boxShadow: c.isDark ? null : BarbarianShadow.raised,
+          boxShadow: (c.isDark || onDark) ? null : BarbarianShadow.raised,
         ),
-        child: Icon(
-          icon,
-          size: 18,
-          color: selected ? c.onAction : c.textPrimary,
-        ),
+        child: Icon(icon, size: 18, color: glyph),
       ),
     );
   }
@@ -387,7 +420,9 @@ class BSkeletonBlock extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: c.hairline.withValues(alpha: 0.4),
+        // Not `hairline * 0.4`: hairline is already an 8% ink, so the block
+        // landed at 3.2% — 1.06:1 against the card, i.e. nothing.
+        color: c.textPrimary.withValues(alpha: c.isDark ? 0.12 : 0.08),
         borderRadius: BorderRadius.circular(radius),
       ),
     );

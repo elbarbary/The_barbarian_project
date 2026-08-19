@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
@@ -78,26 +76,38 @@ class BPaperCard extends StatelessWidget {
     final c = context.colors;
     final shape = BorderRadius.circular(radius);
 
-    // Real frosted glass, as the site has it: a translucent white pane over a
-    // backdrop blur, with a bright rim. A solid card on the living gradient
-    // would block the thing that makes the design work.
-    return BGlassShadow(
-      radius: radius,
+    // A sheet laid on the page. This was a translucent pane over a backdrop
+    // blur, because the ground underneath was a drifting orb field and the
+    // frosting is what made the design work. The ground is now flat paper, so
+    // the blur sampled a colour it could not change, and every card paid for
+    // an offscreen layer that rendered no visible pixel.
+    //
+    // The shadow is on the outer box and the clip is inside it: a shadow drawn
+    // within the ClipRRect is clipped away, which would leave the card at
+    // 1.11:1 against the ground with nothing but a hairline to find it by.
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: color ?? c.surface,
+        borderRadius: shape,
+        border: Border.all(color: c.cardEdge),
+        boxShadow: shadow,
+      ),
+      // The outer ClipRRect is what `clip` asks for. Handing clipBehavior to a
+      // Container that no longer carries a decoration trips one of Container's
+      // own asserts — the decoration moved out to the box above, and the clip
+      // had to follow it rather than stay behind.
       child: ClipRRect(
         borderRadius: shape,
-        child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            padding: padding,
-            clipBehavior: clip ? Clip.antiAlias : Clip.none,
-            foregroundDecoration: foregroundDecoration,
-            decoration: BoxDecoration(
-              color: color ?? c.surface,
-              borderRadius: shape,
-              border: Border.all(color: c.glassBorder),
-            ),
-            child: child,
-          ),
+        clipBehavior: clip ? Clip.antiAlias : Clip.hardEdge,
+        child: Padding(
+          padding: padding,
+          child: foregroundDecoration == null
+              ? child
+              : DecoratedBox(
+                  position: DecorationPosition.foreground,
+                  decoration: foregroundDecoration!,
+                  child: child,
+                ),
         ),
       ),
     );
@@ -140,100 +150,27 @@ class BDarkCard extends StatelessWidget {
       clipBehavior: clip ? Clip.antiAlias : Clip.none,
       decoration: BoxDecoration(
         color: gradient ? null : c.ink,
-        // A trace of the accent in the top corner: the canvas's feature cards
-        // are a gradient, not a flat fill, and a whisper of warmth keeps a
-        // large dark block from reading as a hole in the page.
-        // The feature card keeps the site's indigo ink, warmed toward violet
-        // in one corner so a large dark block reads as part of the gradient
-        // rather than a hole punched in it.
+        // The boards draw this as a plain vertical ramp, lighter at the top.
+        // It used to be a diagonal with a corner lerped 22% toward violet and
+        // another 10% toward the accent — warmth borrowed to keep a dark block
+        // from reading as a hole punched in the orb field. There is no orb
+        // field, and on the dark theme that violet corner became the lightest
+        // and only cool surface in the app.
         gradient: gradient
             ? LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.lerp(c.inkRaised, c.violet, 0.22)!,
-                  c.ink,
-                  Color.lerp(c.ink, c.accent, 0.10)!,
-                ],
-                stops: const [0, 0.55, 1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [c.inkRaised, c.ink],
               )
             : null,
         borderRadius: BorderRadius.circular(radius),
-        boxShadow: c.glassShadow,
+        // No shadow. Against paper the slab is 16:1 and needs no help; on the
+        // dark theme it lifts by being lighter than the page.
         border: Border.all(color: c.onInk.withValues(alpha: 0.08)),
       ),
       child: child,
     );
   }
-}
-
-/// Casts the site's card shadow **outside** the shape only.
-///
-/// A normal `BoxShadow` is painted across the widget's whole rect and then the
-/// child is drawn on top. That is invisible under an opaque card, but these
-/// cards are ~50% white glass — so the shadow showed straight through the
-/// frosting and the pane looked dirty rather than clear. Clipping the shape
-/// out of the shadow layer leaves only the halo around the edge.
-class BGlassShadow extends StatelessWidget {
-  const BGlassShadow({
-    required this.child,
-    required this.radius,
-    super.key,
-  });
-
-  final Widget child;
-  final double radius;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    return CustomPaint(
-      painter: _OutsideShadowPainter(radius: radius, shadows: c.glassShadow),
-      child: child,
-    );
-  }
-}
-
-class _OutsideShadowPainter extends CustomPainter {
-  const _OutsideShadowPainter({required this.radius, required this.shadows});
-
-  final double radius;
-  final List<BoxShadow> shadows;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (shadows.isEmpty) return;
-    final rrect = RRect.fromRectAndRadius(
-      Offset.zero & size,
-      Radius.circular(radius),
-    );
-
-    canvas.save();
-    // Everything except the card itself, so the shadow can only land outside.
-    canvas.clipPath(
-      Path.combine(
-        PathOperation.difference,
-        Path()..addRect(Rect.fromLTRB(
-          -200,
-          -200,
-          size.width + 200,
-          size.height + 200,
-        )),
-        Path()..addRRect(rrect),
-      ),
-    );
-    for (final shadow in shadows) {
-      canvas.drawRRect(
-        rrect.shift(shadow.offset).inflate(shadow.spreadRadius),
-        shadow.toPaint(),
-      );
-    }
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(_OutsideShadowPainter old) =>
-      old.radius != radius || old.shadows != shadows;
 }
 
 /// The non-interactive fade that dissolves scrolling content behind the
@@ -255,10 +192,13 @@ class BBottomScrim extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               c.backgroundBottom.withValues(alpha: 0),
-              c.backgroundBottom.withValues(alpha: 0.34),
-              c.backgroundBottom.withValues(alpha: 0.62),
+              c.backgroundBottom.withValues(alpha: 0.55),
+              c.backgroundBottom,
             ],
-            stops: const [0, 0.52, 1],
+            // Ends opaque. It stopped at 62% because the glass nav refracted
+            // the remaining 38%; the bar is opaque now, so rows would otherwise
+            // ghost through in the strips either side of it.
+            stops: const [0, 0.5, 1],
           ),
         ),
       ),

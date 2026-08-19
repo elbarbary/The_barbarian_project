@@ -24,18 +24,26 @@ class BSparkline extends StatelessWidget {
     if (values.length < 2) return SizedBox(height: height);
 
     final rising = values.last >= values.first;
-    return SizedBox(
-      height: height,
-      width: double.infinity,
-      child: RepaintBoundary(
-        child: CustomPaint(
-          painter: _AreaPainter(
-            values: values,
-            line: color ?? (rising ? c.up : c.down),
-            fillTop: null,
-            fillBottom: null,
-            strokeWidth: 1.6,
-            padding: 3,
+    return Semantics(
+      // The stroke's colour is the only thing on screen saying which way the
+      // series went, and forest against brick is 1.03:1. Nothing here can
+      // carry a glyph, so the description carries it — the direction only,
+      // because every caller already prints the figure beside the chart and a
+      // reader should not hear the same move twice.
+      label: '${values.length}-session trend, ${rising ? 'rising' : 'falling'}',
+      child: SizedBox(
+        height: height,
+        width: double.infinity,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: _AreaPainter(
+              values: values,
+              line: color ?? (rising ? c.up : c.down),
+              fillTop: null,
+              fillBottom: null,
+              strokeWidth: 1.6,
+              padding: 3,
+            ),
           ),
         ),
       ),

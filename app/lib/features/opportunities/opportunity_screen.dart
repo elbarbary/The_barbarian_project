@@ -436,11 +436,11 @@ class _ScannedCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
                 decoration: BoxDecoration(
-                  color: c.violet.withValues(alpha: c.isDark ? 0.15 : 0.08),
+                  color: c.iris.withValues(alpha: c.isDark ? 0.15 : 0.08),
                   borderRadius: BorderRadius.circular(BarbarianRadius.md),
                   border: Border(
                     left: BorderSide(
-                      color: c.violet.withValues(alpha: 0.55),
+                      color: c.iris.withValues(alpha: 0.55),
                       width: 3,
                     ),
                   ),
@@ -450,7 +450,7 @@ class _ScannedCard extends StatelessWidget {
                   children: [
                     Text(
                       (entry.action?.label ?? 'Action now').toUpperCase(),
-                      style: BarbarianType.labelNano.copyWith(color: c.violet),
+                      style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -491,10 +491,19 @@ class _ScannedCard extends StatelessWidget {
               children: [
                 Text(
                   'Full record',
-                  style: BarbarianType.labelS.copyWith(color: c.accent),
+                  style: BarbarianType.labelS.copyWith(
+                    color: c.textPrimary,
+                    decoration: TextDecoration.underline,
+                    decorationColor: c.accent,
+                    decorationThickness: 2,
+                  ),
                 ),
                 const SizedBox(width: 4),
-                Icon(Icons.chevron_right_rounded, size: 16, color: c.accent),
+                Icon(
+                  Icons.chevron_right_rounded,
+                  size: 16,
+                  color: c.textPrimary,
+                ),
               ],
             ),
             if (entry.sources.isNotEmpty) ...[
@@ -645,7 +654,9 @@ class _StatusChip extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: BarbarianType.pill.copyWith(color: tone),
+        style: BarbarianType.pill.copyWith(
+          color: BarbarianPalette.onWash(c, tone),
+        ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -667,21 +678,29 @@ class _RubricScore extends StatelessWidget {
       ScanStatus.rejected => c.down,
     };
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        BNumText(
-          '${entry.score}',
-          style: BarbarianType.figureL.copyWith(color: colour),
-        ),
-        Text(
-          'of ${entry.maxScore}',
-          style: BarbarianType.labelTiny.copyWith(
-            color: c.textFaint,
-            letterSpacing: 0,
+    return Semantics(
+      // Three states in one numeral, and forest against brick is 1.03:1 — to
+      // a photometer, and to a deuteranope, "qualified" and "rejected" are the
+      // same warm grey. The caption underneath now says which.
+      label:
+          '${entry.score} of ${entry.maxScore}, ${entry.scanStatus.label}',
+      excludeSemantics: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          BNumText(
+            '${entry.score}',
+            style: BarbarianType.figureL.copyWith(color: colour),
           ),
-        ),
-      ],
+          Text(
+            '${entry.scanStatus.label} · of ${entry.maxScore}',
+            style: BarbarianType.labelTiny.copyWith(
+              color: c.textFaint,
+              letterSpacing: 0,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -810,7 +829,11 @@ class _ScannerTab extends StatelessWidget {
     // Selection is carried by fill, border and weight together, never by
     // colour alone (spec §42); the Semantics `selected` flag carries it for a
     // screen reader.
-    final tone = selected ? c.accent : c.textMuted;
+    // Not the accent: on paper it is 3.09:1, so an accent glyph on an accent
+    // wash landed at 2.81 — fainter than the three tiles that were NOT
+    // selected, at 5.31. The accent stays as the fill and the border; the
+    // figure and the label are ink, which is what selection should look like.
+    final tone = selected ? c.textPrimary : c.textMuted;
 
     return Semantics(
       button: true,
@@ -825,13 +848,13 @@ class _ScannerTab extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(14, 12, 14, 13),
           decoration: BoxDecoration(
             color: selected
-                ? c.accent.withValues(alpha: c.isDark ? 0.18 : 0.09)
+                ? c.accent.withValues(alpha: c.isDark ? 0.22 : 0.14)
                 : c.surface,
             borderRadius: BorderRadius.circular(BarbarianRadius.lg),
             border: Border.all(
               color: selected
                   ? c.accent.withValues(alpha: 0.42)
-                  : c.glassBorder,
+                  : c.cardEdge,
             ),
           ),
           child: Column(
@@ -1074,13 +1097,13 @@ class _SectorFactRow extends StatelessWidget {
           height: 24,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: c.violet.withValues(alpha: c.isDark ? 0.20 : 0.11),
+            color: c.iris.withValues(alpha: c.isDark ? 0.20 : 0.11),
             shape: BoxShape.circle,
-            border: Border.all(color: c.violet.withValues(alpha: 0.30)),
+            border: Border.all(color: c.iris.withValues(alpha: 0.30)),
           ),
           child: Text(
             '$step',
-            style: BarbarianType.labelNano.copyWith(color: c.violet),
+            style: BarbarianType.labelNano.copyWith(color: c.iris),
           ),
         ),
         const SizedBox(width: 12),
@@ -1135,9 +1158,9 @@ class BScanGates extends StatelessWidget {
           Builder(
             builder: (context) {
               final tone = switch (gate.outcome) {
-                'pass' => c.up,
-                'fail' => c.down,
-                _ => onDark ? c.accentOnInk : c.violet,
+                'pass' => onDark ? c.upOnInk : c.up,
+                'fail' => onDark ? c.downOnInk : c.down,
+                _ => onDark ? c.accentOnInk : c.iris,
               };
               final mark = switch (gate.outcome) {
                 'pass' => '✓',

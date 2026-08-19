@@ -1,11 +1,7 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
-import 'nav_icons.dart';
-import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
-
 import '../theme/barbarian_theme.dart';
+import 'nav_icons.dart';
 
 /// The four primary destinations (spec §5). There are exactly four and no more.
 enum BNavTab {
@@ -19,12 +15,23 @@ enum BNavTab {
   final String label;
 }
 
-/// The floating liquid-glass bottom navigation.
+/// The floating bottom navigation: an ink bar on a pale page.
 ///
-/// Identical on every screen; only the lit slot moves. Transcribed from the
-/// canvas: 66pt tall, inset 16 from each edge, 22 from the bottom, a 58%
-/// ink fill over a 13-sigma backdrop blur, a hairline of 13% white, and a
-/// hand-painted top sheen that Flutter cannot express as a shadow.
+/// Identical on every screen; only the lit slot moves. 66pt tall, inset 16
+/// from each edge and 22 from the bottom, with a rim of 13% white and a
+/// hand-painted top sheen — all as the boards draw it.
+///
+/// **The fill is opaque, and the boards' is not.** They specify 58% ink over a
+/// backdrop blur, which is a real translucency and the one place in this theme
+/// where a blur would still have something to sample. It composites over pale
+/// paper to `#6F6B66` — a mid-grey — and on that the lit tab's `#FF8340`
+/// measures 2.2:1, or 1.6:1 where it actually sits on the selection pill,
+/// while the three tabs that are *not* selected sit at 3.5:1. The selected
+/// destination becomes the faintest mark in the bar. Opaque ink puts the lit
+/// tab at 7.2:1, and 4.8:1 over the pill.
+///
+/// The blur went with the translucency: at the opacity this needs, it would be
+/// an offscreen layer per frame sampling pixels nothing can see.
 class BGlassNav extends StatelessWidget {
   const BGlassNav({required this.active, required this.onTap, super.key});
 
@@ -45,14 +52,14 @@ class BGlassNav extends StatelessWidget {
         container: true,
         explicitChildNodes: true,
         label: 'Main navigation',
-        child: _GlassBar(active: active, onTap: onTap),
+        child: _SmokedBar(active: active, onTap: onTap),
       ),
     );
   }
 }
 
-class _GlassBar extends StatelessWidget {
-  const _GlassBar({required this.active, required this.onTap});
+class _SmokedBar extends StatelessWidget {
+  const _SmokedBar({required this.active, required this.onTap});
 
   final BNavTab active;
   final ValueChanged<BNavTab> onTap;
@@ -64,68 +71,64 @@ class _GlassBar extends StatelessWidget {
         final barWidth = constraints.maxWidth;
         final slot = (barWidth - 12) / BNavTab.values.length;
 
-        return LiquidGlass.withOwnLayer(
-          // Real refraction, not a blur pretending to be one: the shader
-          // samples and bends what is behind the bar, which is what makes iOS
-          // glass read as a physical layer rather than a frosted panel.
-          //
-          // Flutter has no binding to the system glass, so this is
-          // `liquid_glass_renderer` — a shader package, currently a dev
-          // preview. If it ever misbehaves on a device, `FakeGlass` is the
-          // drop-in cheap path.
-          shape: const LiquidRoundedSuperellipse(
-            borderRadius: BarbarianRadius.pill,
+        // The shadow sits on the outside, the blur on the inside: a shadow
+        // drawn within the ClipRRect is clipped away with everything else.
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x421B1917),
+                blurRadius: 34,
+                offset: Offset(0, 16),
+              ),
+            ],
           ),
-          // Tuned down from the package defaults: at high thickness and blur
-          // the bar turned into an opaque grey slab and lost the content
-          // behind it, which is the opposite of glass. Thin, lightly blurred
-          // and strongly refractive reads as a lens.
-          // White liquid glass now, to match the site's frosted panels: a pale
-          // film with a bright rim rather than a dark slab.
-          settings: LiquidGlassSettings(
-            glassColor: context.colors.isDark
-                ? const Color(0x1FFFFFFF)
-                : const Color(0x66FFFFFF),
-            thickness: 10,
-            blur: 4,
-            chromaticAberration: 0.03,
-            lightAngle: 0.4 * math.pi,
-            lightIntensity: 1.25,
-            ambientStrength: 0.18,
-            refractiveIndex: 1.44,
-            saturation: 1.25,
-          ),
-          child: SizedBox(
-            height: BGlassNav.height,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Stack(
-                children: [
-                  // The lit slot. The canvas cross-fades opacity and jumps
-                  // position; sliding it is a deliberate improvement, on the
-                  // canvas's own overshooting curve.
-                  AnimatedPositionedDirectional(
-                    duration: const Duration(milliseconds: 320),
-                    curve: const Cubic(0.32, 1.2, 0.44, 1),
-                    start: slot * active.index,
-                    top: 6,
-                    bottom: 6,
-                    width: slot,
-                    child: const _SelectionPill(),
-                  ),
-                  Row(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                // Ink on light, and the raised ink on dark so the bar still
+                // lifts off a near-black page rather than sinking into it.
+                color: context.colors.isDark
+                    ? context.colors.inkRaised
+                    : context.colors.ink,
+                borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+                border: Border.all(color: const Color(0x21FFFFFF)),
+              ),
+              child: SizedBox(
+                height: BGlassNav.height,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: Stack(
                     children: [
-                      for (final tab in BNavTab.values)
-                        Expanded(
-                          child: _NavTab(
-                            tab: tab,
-                            selected: tab == active,
-                            onTap: () => onTap(tab),
-                          ),
-                        ),
+                      // The lit slot. The canvas cross-fades opacity and
+                      // jumps position; sliding it is a deliberate
+                      // improvement, on the boards' own overshooting curve.
+                      AnimatedPositionedDirectional(
+                        duration: const Duration(milliseconds: 320),
+                        curve: const Cubic(0.32, 1.2, 0.44, 1),
+                        start: slot * active.index,
+                        top: 6,
+                        bottom: 6,
+                        width: slot,
+                        child: const _SelectionPill(),
+                      ),
+                      Row(
+                        children: [
+                          for (final tab in BNavTab.values)
+                            Expanded(
+                              child: _NavTab(
+                                tab: tab,
+                                selected: tab == active,
+                                onTap: () => onTap(tab),
+                              ),
+                            ),
+                        ],
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -140,19 +143,16 @@ class _SelectionPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.colors;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
-        // A wash of the brand blue rather than white-on-white, which would be
-        // invisible on a pale glass bar.
-        gradient: LinearGradient(
+        // A lit panel of the bar rather than a wash of the accent. An
+        // accent wash under an accent icon left the selected tab reading at
+        // 2.5:1 — the faintest mark in the bar.
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            c.accent.withValues(alpha: c.isDark ? 0.28 : 0.18),
-            c.accent.withValues(alpha: c.isDark ? 0.14 : 0.08),
-          ],
+          colors: [Color(0x33FFFFFF), Color(0x12FFFFFF)],
         ),
         boxShadow: const [
           BoxShadow(
@@ -162,10 +162,10 @@ class _SelectionPill extends StatelessWidget {
           ),
         ],
       ),
-      // The site's specular top sheen, painted rather than shadowed.
+      // The specular top rim, painted rather than shadowed.
       foregroundDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
-        border: Border.all(color: c.accent.withValues(alpha: 0.22)),
+        border: const Border(top: BorderSide(color: Color(0x52FFFFFF))),
       ),
     );
   }
@@ -185,8 +185,9 @@ class _NavTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final active = c.accent;
-    final inactive = c.textMuted;
+    // The bar is smoked ink on every theme, so neither tone follows the page.
+    final active = c.accentOnInk;
+    final inactive = c.onInk.withValues(alpha: 0.76);
     final color = selected ? active : inactive;
 
     return Semantics(

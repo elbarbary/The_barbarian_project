@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
 
-/// The Barbarian's colour tokens, taken from the website's own stylesheet.
+/// ESTHMR's colour tokens, taken from the app design boards.
 ///
-/// The app used to follow the Claude Design canvas — warm bone, ink, one
-/// orange. It now follows **thebarbarianproject.com**: a cool near-white
-/// ground, deep indigo ink, white frosted glass, and five brand hues.
-///
-/// Straight from `public/style.css`:
+/// The app has been through two identities. It was drawn on a warm-paper
+/// canvas, then retargeted at **thebarbarianproject.com** — a cool near-white
+/// ground, indigo ink, five brand hues and translucent glass over a drifting
+/// gradient. The ESTHMR boards go back to paper, and this file follows them:
 ///
 /// ```
-/// --bg-0   #F4F3FB   soft cool white
-/// --ink    #221B3D   deep indigo ink
-/// --blue   #1E37E6   --violet #7C3AED   --rose #E11D74
-/// --lime   #CDE84A   --cyan   #22D3EE
-/// --glass  rgba(255,255,255,.52)   --glass-strong .68   --glass-border .85
+/// ground   #EDE8E2 → #E3DCD4   warm paper, a vertical ramp
+/// card     #F7F4F0             opaque, separated by shadow rather than fill
+/// ink      #242120 → #1B1917   the feature slab
+/// accent   #E8621C             one orange, #FF8340 when it sits on ink
+/// up/down  #3F6B52 / #A3402F   forest and brick; #6EA487 / #D97D64 on ink
 /// ```
+///
+/// Nothing here is translucent. The old surfaces were ~52% white panes over a
+/// blurred orb field; glass over flat paper is just a lighter rectangle, so the
+/// orbs, the backdrop blurs and the frosted rims are gone.
+///
+/// ## What the boards do not settle, and how it was settled
+///
+/// Three tiers are **derived**, and each is marked at its field:
+///
+///  * The boards' two quietest text tiers do not reach AA. `#7A736D` measures
+///    4.26:1 and `#9A938C` measures 2.77:1 on the card, and the boards set
+///    them at 9–13px — the same sizes this app does, so there is no reading of
+///    the source on which they pass. Hue and saturation are held; lightness
+///    drops to the first value that clears 4.5:1.
+///  * There is no dark board. The dark ramp is built here, warm, with a real
+///    elevation ladder — see [BarbarianColors.dark].
+///  * The boards do print white on a filled `#E8621C` pill (3.39:1) and the
+///    accent as bare type. Neither clears AA at body size, so in this app the
+///    accent is a mark, a fill or a large numeral, and [onAccent] is ink.
 ///
 /// A verdict, a direction or a state is never signalled by colour alone
-/// (spec §42); these accompany a word or a mark, never replace one.
+/// (spec §42); these accompany a word or a glyph, never replace one. That rule
+/// carries more weight on this palette than it did on the last one: [up] and
+/// [down] are 1.03:1 apart in luminance, which is to say a photometer cannot
+/// tell a rise from a fall. The ▲/▼ is the signal.
 @immutable
 class BarbarianColors extends ThemeExtension<BarbarianColors> {
   const BarbarianColors({
@@ -25,7 +46,7 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     required this.backgroundBottom,
     required this.surface,
     required this.surfaceRaised,
-    required this.glassBorder,
+    required this.cardEdge,
     required this.ink,
     required this.inkRaised,
     required this.onInk,
@@ -41,96 +62,122 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     required this.accent,
     required this.onAccent,
     required this.accentOnInk,
-    required this.violet,
-    required this.rose,
-    required this.lime,
-    required this.cyan,
+    required this.iris,
     required this.up,
     required this.down,
+    required this.upOnInk,
+    required this.downOnInk,
     required this.brightness,
   });
 
-  /// The site's own light theme.
+  /// The boards' own palette.
   factory BarbarianColors.light() => const BarbarianColors(
-    background: Color(0xFFF4F3FB),
-    backgroundBottom: Color(0xFFE9E6F7),
-    // White glass, not a solid card. Everything sits on the living gradient.
-    surface: Color(0x85FFFFFF),
-    surfaceRaised: Color(0xAEFFFFFF),
-    glassBorder: Color(0xD9FFFFFF),
-    ink: Color(0xFF221B3D),
-    inkRaised: Color(0xFF2E2551),
-    onInk: Color(0xFFF4F3FB),
-    onInkMuted: Color(0x99F4F3FB),
-    hairline: Color(0x12221B3D),
-    hairlineStrong: Color(0x24221B3D),
-    textPrimary: Color(0xFF221B3D),
-    textSecondary: Color(0xBD221B3D),
-    textMuted: Color(0x8A221B3D),
-    textFaint: Color(0x57221B3D),
-    actionSurface: Color(0xFF1E37E6),
-    onAction: Color(0xFFFFFFFF),
-    accent: Color(0xFF1E37E6),
-    onAccent: Color(0xFFFFFFFF),
-    accentOnInk: Color(0xFF8FA2FF),
-    violet: Color(0xFF7C3AED),
-    rose: Color(0xFFE11D74),
-    lime: Color(0xFFCDE84A),
-    cyan: Color(0xFF22D3EE),
-    // Green is not in the site's palette, so direction borrows the nearest
-    // brand hues: a cool teal-green for up, the site's rose for down.
-    up: Color(0xFF0F9D76),
-    down: Color(0xFFE11D74),
+    background: Color(0xFFEDE8E2),
+    backgroundBottom: Color(0xFFE3DCD4),
+    surface: Color(0xFFF7F4F0),
+    // The one pure white in the system: a lifted segment, a pressed row.
+    surfaceRaised: Color(0xFFFFFFFF),
+    // Derived. The boards separate a card from the ground with a shadow and
+    // nothing else — but ground to card is 1.111:1, and a shadow alone leaves
+    // the card a rumour on a phone in daylight. Border.all composites over the
+    // card's own fill, so an 8% ink ring reads 1.17:1 against it — a hairline
+    // rather than a border, and enough to close the shape.
+    cardEdge: Color(0x141B1917),
+    ink: Color(0xFF1B1917),
+    inkRaised: Color(0xFF242120),
+    onInk: Color(0xFFF5F1EC),
+    onInkMuted: Color(0xFF8E8781),
+    hairline: Color(0x141B1917),
+    hairlineStrong: Color(0x2E1B1917),
+    textPrimary: Color(0xFF1B1917),
+    textSecondary: Color(0xFF5C554F),
+    // Derived from the boards' #7A736D — same hue, dark enough to read at
+    // 11pt (5.31:1 on card, 4.78:1 on ground).
+    textMuted: Color(0xFF6B645E),
+    // Derived from the boards' #9A938C, which measures 2.77:1 (4.57:1 here).
+    textFaint: Color(0xFF756E68),
+    // The boards' committing action is a solid ink pill with bone type, not an
+    // orange one: bone on #E8621C is 3.01:1.
+    actionSurface: Color(0xFF1B1917),
+    onAction: Color(0xFFF5F1EC),
+    accent: Color(0xFFE8621C),
+    // Derived. White on the accent is 3.39:1 and fails; ink is 5.17:1.
+    onAccent: Color(0xFF1B1917),
+    accentOnInk: Color(0xFFFF8340),
+    // The boards run on ink, orange and a signed pair. This is the fourth
+    // tone, and it exists because the app has a third *state* — "act now",
+    // "gate unresolved" — that the boards' answer for unresolved (warm stone)
+    // cannot also carry. Desaturated iris: at the 8–15% washes those sites
+    // use, it cannot be mistaken for the accent, the brick, or dirt.
+    iris: Color(0xFF5F4B6E),
+    up: Color(0xFF3F6B52),
+    down: Color(0xFFA3402F),
+    // The boards author a second direction pair for the ink slab, exactly as
+    // they do for the accent. Without it a delta on the company header sits at
+    // 2.87:1; these are 6.11 and 5.90.
+    upOnInk: Color(0xFF6EA487),
+    downOnInk: Color(0xFFD97D64),
     brightness: Brightness.light,
   );
 
-  /// The same identity after dark.
+  /// The same identity after dark, derived.
   ///
-  /// The site has no dark mode, so this is derived: the indigo ink becomes the
-  /// ground, the glass becomes a white film rather than a white pane, and the
-  /// blue lifts because `#1E37E6` on a dark field is nearly unreadable.
+  /// There is no dark board, so the rule is: keep the paper family's hue (~30°
+  /// warm) and rebuild the elevation ladder, because the light one inverts.
+  /// On paper the feature slab is the darkest thing on the screen; on a dark
+  /// page it has to be the **lightest**, or [BDarkCard] stops being the
+  /// feature and becomes another card.
+  ///
+  /// The ladder, as luminance ratios: ground → card 1.11, card → raised 1.12,
+  /// card → ink 1.23, ground → ink 1.37. Every text token clears 4.5:1 on
+  /// every one of those surfaces.
+  ///
+  /// The accent lifts past the boards' on-ink `#FF8340`, which was tuned for a
+  /// `#1B1917` card; here every surface is lighter than that.
   factory BarbarianColors.dark() => const BarbarianColors(
-    background: Color(0xFF120F20),
-    backgroundBottom: Color(0xFF0C0A16),
-    surface: Color(0x14FFFFFF),
-    surfaceRaised: Color(0x1FFFFFFF),
-    glassBorder: Color(0x24FFFFFF),
-    ink: Color(0xFF2A2247),
-    inkRaised: Color(0xFF362C59),
-    onInk: Color(0xFFF4F3FB),
-    onInkMuted: Color(0xA6F4F3FB),
-    hairline: Color(0x1FFFFFFF),
-    hairlineStrong: Color(0x33FFFFFF),
-    textPrimary: Color(0xFFF4F3FB),
-    textSecondary: Color(0xC7F4F3FB),
-    textMuted: Color(0x94F4F3FB),
-    textFaint: Color(0x5EF4F3FB),
-    actionSurface: Color(0xFF6E82FF),
-    onAction: Color(0xFF100E1C),
-    accent: Color(0xFF8FA2FF),
-    onAccent: Color(0xFF100E1C),
-    accentOnInk: Color(0xFF8FA2FF),
-    violet: Color(0xFFB794F6),
-    rose: Color(0xFFFF6FA8),
-    lime: Color(0xFFDDF06E),
-    cyan: Color(0xFF5FE3F7),
-    up: Color(0xFF3ED5A8),
-    down: Color(0xFFFF6FA8),
+    background: Color(0xFF141110),
+    backgroundBottom: Color(0xFF0D0B0A),
+    surface: Color(0xFF211C18),
+    surfaceRaised: Color(0xFF2B2521),
+    cardEdge: Color(0x1FF5F1EC),
+    // Lighter than the page, not darker — see the class doc.
+    ink: Color(0xFF332C25),
+    inkRaised: Color(0xFF392F28),
+    onInk: Color(0xFFF5F1EC),
+    onInkMuted: Color(0xFFA39A90),
+    hairline: Color(0x1FF5F1EC),
+    hairlineStrong: Color(0x38F5F1EC),
+    textPrimary: Color(0xFFF5F1EC),
+    textSecondary: Color(0xFFC6BDB3),
+    textMuted: Color(0xFFADA49A),
+    textFaint: Color(0xFF9C938B),
+    // The inversion of "solid ink on paper".
+    actionSurface: Color(0xFFF0E9E1),
+    onAction: Color(0xFF1B1917),
+    accent: Color(0xFFFF9152),
+    onAccent: Color(0xFF1B1917),
+    accentOnInk: Color(0xFFFF9152),
+    iris: Color(0xFFA794C4),
+    up: Color(0xFF7FB396),
+    down: Color(0xFFD8836F),
+    // On a dark page every surface is ink, so these do not diverge.
+    upOnInk: Color(0xFF7FB396),
+    downOnInk: Color(0xFFD8836F),
     brightness: Brightness.dark,
   );
 
-  /// Page ground, beneath the living gradient.
+  /// Page ground. A vertical ramp, top to bottom.
   final Color background;
   final Color backgroundBottom;
 
-  /// Frosted glass. Translucent by design — it needs the gradient behind it.
+  /// Paper. Opaque — the card is a sheet laid on the page, not a window.
   final Color surface;
   final Color surfaceRaised;
 
-  /// The bright rim that makes glass read as an edge rather than a wash.
-  final Color glassBorder;
+  /// The hairline that keeps a card from dissolving into the ground.
+  final Color cardEdge;
 
-  /// The feature surface: hero cards, the company header.
+  /// The feature slab: the Home hero, the company header, the verdict block.
   final Color ink;
   final Color inkRaised;
   final Color onInk;
@@ -148,65 +195,40 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
   final Color actionSurface;
   final Color onAction;
 
+  /// One orange. It marks, fills and underlines; it does not label.
   final Color accent;
   final Color onAccent;
   final Color accentOnInk;
 
-  /// The rest of the site's brand hues, available to the palette.
-  final Color violet;
-  final Color rose;
-  final Color lime;
-  final Color cyan;
+  /// The third state — unresolved, in progress, act now.
+  final Color iris;
 
-  /// Price direction. Always paired with a ▲/▼ mark and a signed number so the
-  /// information survives without colour (spec §42).
+  /// Price direction on paper. Always paired with a ▲/▼ mark and a signed
+  /// number, because these two are 1.03:1 apart and colour carries nothing
+  /// on its own (spec §42).
   final Color up;
   final Color down;
+
+  /// Price direction on the ink slab. [up] and [down] are 2.87:1 and 2.78:1
+  /// there — legible as a shape, not as a figure.
+  final Color upOnInk;
+  final Color downOnInk;
 
   final Brightness brightness;
 
   bool get isDark => brightness == Brightness.dark;
 
-  /// The wash under the living gradient.
+  /// The page ramp.
   LinearGradient get pageGradient => LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [background, backgroundBottom],
   );
 
-  /// The site's own card shadow, cast in indigo rather than black:
-  /// `0 24px 54px -26px rgba(46,34,104,.38), 0 6px 18px -12px rgba(46,34,104,.22)`.
-  List<BoxShadow> get glassShadow => isDark
-      ? const [
-          BoxShadow(
-            color: Color(0x59000000),
-            blurRadius: 40,
-            spreadRadius: -16,
-            offset: Offset(0, 16),
-          ),
-        ]
-      // CSS blur-radius is twice the Gaussian sigma; Flutter's blurRadius is
-      // sigma / 0.57735. So the site's 54px and 18px blurs are ~47 and ~16
-      // here — at 28 the halo read as a hard grey band instead of a lift.
-      : const [
-          BoxShadow(
-            color: Color(0x4F2E2268),
-            blurRadius: 47,
-            spreadRadius: -22,
-            offset: Offset(0, 20),
-          ),
-          BoxShadow(
-            color: Color(0x2E2E2268),
-            blurRadius: 16,
-            spreadRadius: -10,
-            offset: Offset(0, 5),
-          ),
-        ];
-
-  Color forChange(num? change) {
-    if (change == null || change == 0) return textMuted;
-    return change > 0 ? up : down;
-  }
+  /// Direction, picked for the surface it is drawn on.
+  Color direction(bool rising, {bool onInkSurface = false}) => rising
+      ? (onInkSurface ? upOnInk : up)
+      : (onInkSurface ? downOnInk : down);
 
   @override
   BarbarianColors copyWith({
@@ -214,7 +236,7 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     Color? backgroundBottom,
     Color? surface,
     Color? surfaceRaised,
-    Color? glassBorder,
+    Color? cardEdge,
     Color? ink,
     Color? inkRaised,
     Color? onInk,
@@ -230,19 +252,18 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     Color? accent,
     Color? onAccent,
     Color? accentOnInk,
-    Color? violet,
-    Color? rose,
-    Color? lime,
-    Color? cyan,
+    Color? iris,
     Color? up,
     Color? down,
+    Color? upOnInk,
+    Color? downOnInk,
     Brightness? brightness,
   }) => BarbarianColors(
     background: background ?? this.background,
     backgroundBottom: backgroundBottom ?? this.backgroundBottom,
     surface: surface ?? this.surface,
     surfaceRaised: surfaceRaised ?? this.surfaceRaised,
-    glassBorder: glassBorder ?? this.glassBorder,
+    cardEdge: cardEdge ?? this.cardEdge,
     ink: ink ?? this.ink,
     inkRaised: inkRaised ?? this.inkRaised,
     onInk: onInk ?? this.onInk,
@@ -258,12 +279,11 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     accent: accent ?? this.accent,
     onAccent: onAccent ?? this.onAccent,
     accentOnInk: accentOnInk ?? this.accentOnInk,
-    violet: violet ?? this.violet,
-    rose: rose ?? this.rose,
-    lime: lime ?? this.lime,
-    cyan: cyan ?? this.cyan,
+    iris: iris ?? this.iris,
     up: up ?? this.up,
     down: down ?? this.down,
+    upOnInk: upOnInk ?? this.upOnInk,
+    downOnInk: downOnInk ?? this.downOnInk,
     brightness: brightness ?? this.brightness,
   );
 
@@ -276,7 +296,7 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
       backgroundBottom: mix(backgroundBottom, other.backgroundBottom),
       surface: mix(surface, other.surface),
       surfaceRaised: mix(surfaceRaised, other.surfaceRaised),
-      glassBorder: mix(glassBorder, other.glassBorder),
+      cardEdge: mix(cardEdge, other.cardEdge),
       ink: mix(ink, other.ink),
       inkRaised: mix(inkRaised, other.inkRaised),
       onInk: mix(onInk, other.onInk),
@@ -292,12 +312,11 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
       accent: mix(accent, other.accent),
       onAccent: mix(onAccent, other.onAccent),
       accentOnInk: mix(accentOnInk, other.accentOnInk),
-      violet: mix(violet, other.violet),
-      rose: mix(rose, other.rose),
-      lime: mix(lime, other.lime),
-      cyan: mix(cyan, other.cyan),
+      iris: mix(iris, other.iris),
       up: mix(up, other.up),
       down: mix(down, other.down),
+      upOnInk: mix(upOnInk, other.upOnInk),
+      downOnInk: mix(downOnInk, other.downOnInk),
       brightness: t < 0.5 ? brightness : other.brightness,
     );
   }

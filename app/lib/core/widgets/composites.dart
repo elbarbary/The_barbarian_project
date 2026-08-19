@@ -7,8 +7,13 @@ import 'motion.dart';
 import 'surfaces.dart';
 import 'text.dart';
 
-/// The 48×48 ink square carrying a ticker. Used wherever a company appears in
-/// a list, standing in for a logo the app does not have rights to.
+/// The 48×48 tile carrying a ticker. Used wherever a company appears in a
+/// list, standing in for a logo the app does not have rights to.
+///
+/// The boards draw it as solid ink with bone letters. This is a wash of the
+/// same ink with the ticker in full strength on top — the same object at a
+/// weight a list of 282 rows can carry, where a column of solid black squares
+/// reads as a ladder of holes. The boards never show more than four rows.
 class BTickerMonogram extends StatelessWidget {
   const BTickerMonogram(
     this.ticker, {
@@ -21,9 +26,13 @@ class BTickerMonogram extends StatelessWidget {
   final String ticker;
   final double size;
 
-  /// When given, the tile takes the sector's colour. Twenty identical ink
-  /// squares down a list carry no information; twenty coloured ones let you
-  /// see that a screen is mostly Finance before you read a word of it.
+  /// Kept for the callers that pass it; it no longer changes the hue.
+  ///
+  /// This used to tint the tile per sector, on the theory that twenty coloured
+  /// squares let you see a screen was mostly Finance before reading a word.
+  /// The row it appears on never names the sector, so hue was that fact's only
+  /// carrier — which is what spec §42 forbids — and neither design board tints
+  /// anything by category. See [BarbarianPalette.sector].
   final String? sector;
 
   /// Overrides the sector colour where a different dimension matters more —
@@ -33,15 +42,12 @@ class BTickerMonogram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    // A company with no sector still gets a tinted tile rather than a solid
-    // ink block — one black square in a row of coloured ones reads as an
-    // error, not as "sector unknown".
+    // The verdict tile still carries a hue, because on Cash or Trash the band
+    // IS the dimension being scanned for and every row prints its name.
     final resolved = tone ?? BarbarianPalette.sector(c, sector);
     final wash = tone != null
-        ? tone!.withValues(alpha: c.isDark ? 0.20 : 0.13)
-        : (sector == null || sector!.isEmpty
-              ? c.textMuted.withValues(alpha: c.isDark ? 0.16 : 0.10)
-              : BarbarianPalette.sectorWash(c, sector));
+        ? tone!.withValues(alpha: c.isDark ? 0.24 : 0.16)
+        : BarbarianPalette.sectorWash(c, sector);
 
     return Container(
       width: size,
@@ -61,7 +67,10 @@ class BTickerMonogram extends StatelessWidget {
           ticker,
           maxLines: 1,
           style: BarbarianType.titleS.copyWith(
-            color: resolved,
+            // The tile is a wash of this same tone, so the letters have to be
+            // pulled off it — three of the five verdict bands fail at 12pt
+            // printed undiluted on their own wash.
+            color: tone == null ? resolved : BarbarianPalette.onWash(c, resolved),
             fontSize: 12,
             letterSpacing: 0.72,
           ),
@@ -299,7 +308,7 @@ class BSegment {
   final IconData? icon;
 }
 
-/// The segmented selector, in the canvas's two forms.
+/// The segmented selector, in the boards' two forms.
 ///
 /// The design cross-fades each segment's own decoration rather than sliding a
 /// shared indicator — the opposite of the bottom nav, deliberately.
@@ -490,7 +499,22 @@ class BEmptyState extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (ghost case final Widget g) ...[
-            Opacity(opacity: 0.4, child: g),
+            // The ghost is drawn IN the card, so fading it toward transparent
+            // fades it toward the card colour: at 0.4 a paper preview came out
+            // at exactly the card's own cream. Desaturating and dimming leaves
+            // a shape.
+            Opacity(
+              opacity: 0.55,
+              child: ColorFiltered(
+                colorFilter: const ColorFilter.matrix(<double>[
+                  0.33, 0.33, 0.33, 0, 0,
+                  0.33, 0.33, 0.33, 0, 0,
+                  0.33, 0.33, 0.33, 0, 0,
+                  0, 0, 0, 1, 0,
+                ]),
+                child: g,
+              ),
+            ),
             const SizedBox(height: 20),
           ],
           Text(
@@ -638,7 +662,12 @@ class BVerdictBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final colour = tint(c);
+    // On ink the ramp lifts. [BarbarianPalette.verdict] deepens both ends
+    // toward paper, which puts Toxic within 1.07:1 of the slab — a badge that
+    // stops being a badge on precisely the card that shouts loudest.
+    final colour = onDark
+        ? BarbarianPalette.verdictOnInk(c, verdict)
+        : tint(c);
 
     return Semantics(
       label: score == null
@@ -649,7 +678,7 @@ class BVerdictBadge extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
         decoration: BoxDecoration(
-          color: colour.withValues(alpha: onDark ? 0.22 : 0.13),
+          color: colour.withValues(alpha: onDark ? 0.24 : 0.16),
           borderRadius: BorderRadius.circular(BarbarianRadius.pill),
           border: Border.all(color: colour.withValues(alpha: 0.35)),
         ),
@@ -661,7 +690,7 @@ class BVerdictBadge extends StatelessWidget {
             Text(
               verdict.label.toUpperCase(),
               style: BarbarianType.pill.copyWith(
-                color: onDark ? c.onInk : colour,
+                color: onDark ? c.onInk : BarbarianPalette.onWash(c, colour),
                 letterSpacing: 0.8,
               ),
             ),
@@ -670,7 +699,7 @@ class BVerdictBadge extends StatelessWidget {
               BNumText(
                 s > 0 ? '+$s' : '$s',
                 style: BarbarianType.pill.copyWith(
-                  color: onDark ? c.onInkMuted : colour,
+                  color: BarbarianPalette.onWash(c, colour),
                 ),
                 isolate: false,
               ),
@@ -909,7 +938,10 @@ class BBarChart extends StatelessWidget {
                   labels[i],
                   textAlign: TextAlign.center,
                   style: BarbarianType.labelTiny.copyWith(
-                    color: i == highlightIndex ? c.accent : c.textFaint,
+                    // The bar above it is the accent; the label under it is
+                    // ink. At 9pt the accent measures 3.09:1 on paper, and
+                    // the highlighted label is the one that has to be read.
+                    color: i == highlightIndex ? c.textPrimary : c.textFaint,
                     letterSpacing: 0,
                   ),
                   maxLines: 1,

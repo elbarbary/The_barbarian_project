@@ -161,7 +161,7 @@ class BInlineAction extends StatelessWidget {
   }
 }
 
-/// The big Outfit-light screen heading, with a reserved trailing slot.
+/// The big display-light screen heading, with a reserved trailing slot.
 class BScreenTitle extends StatelessWidget {
   const BScreenTitle(
     this.text, {

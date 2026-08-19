@@ -131,7 +131,9 @@ class ScannedDetailSheet extends ConsumerWidget {
                               ),
                               child: Text(
                                 label,
-                                style: BarbarianType.pill.copyWith(color: tone),
+                                style: BarbarianType.pill.copyWith(
+          color: BarbarianPalette.onWash(c, tone),
+        ),
                               ),
                             );
                           },
@@ -163,7 +165,7 @@ class ScannedDetailSheet extends ConsumerWidget {
                   children: [
                     Text(
                       (action.label ?? 'Action now').toUpperCase(),
-                      style: BarbarianType.labelNano.copyWith(color: c.violet),
+                      style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
                     if (action.decision case final String decision) ...[
                       const SizedBox(height: 6),
@@ -431,7 +433,10 @@ class _ScaleCard extends StatelessWidget {
                       child: Container(
                         height: 6,
                         decoration: BoxDecoration(
-                          color: c.up.withValues(alpha: 0.35),
+                          // 35% forest on an 8%-ink track is 1.40:1 — the
+                          // "above the line" segment stopped separating from
+                          // the track it is measured against.
+                          color: c.up.withValues(alpha: 0.60),
                           borderRadius: BorderRadius.circular(3),
                         ),
                       ),

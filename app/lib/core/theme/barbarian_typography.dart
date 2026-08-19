@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 ///
 /// Two families, with a strict division of labour:
 ///
-///   * **Bricolage Grotesque** — display and headings, as on the site. It has
-///     more character than a neutral grotesk and carries the brand's voice.
+///   * **Bricolage Grotesque** — display and headings, as on board v1's
+///     ESTHMR wordmark. It has more character than a neutral grotesk and
+///     carries the brand's voice.
 ///   * **Space Grotesk** — labels, captions, body and numerals.
-///   * **IBM Plex Sans Arabic** — Arabic only. Neither of the site's faces
-///     covers the script (spec §41).
+///   * **IBM Plex Sans Arabic** — Arabic only. Neither Latin face covers the
+///     script (spec §41).
 ///
-/// Outfit ships as a variable font, so weights are set through
-/// [FontVariation] for exact axis values rather than relying on Flutter
-/// picking a nearby static instance.
+/// Bricolage Grotesque and Space Grotesk both ship as variable fonts, so
+/// weights are set through [FontVariation] for exact axis values rather than
+/// relying on Flutter picking a nearby static instance.
 ///
 /// ## Tabular figures — verified, and not what you would guess
 ///
@@ -134,7 +135,7 @@ abstract final class BarbarianType {
   /// 12 — secondary labels.
   static TextStyle get labelS => _body(12);
 
-  /// 11/.16em uppercase — the canvas's signature section label.
+  /// 11/.16em uppercase — the boards' signature section label.
   static TextStyle get labelMicro => _body(11, letterSpacing: 0.16);
 
   /// 10/.16em uppercase — the smallest label, under a gauge or a stat.

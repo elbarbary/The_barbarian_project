@@ -67,10 +67,14 @@ class BNavIconPainter extends CustomPainter {
       ..lineTo(4.9, 20.9)
       ..cubicTo(3.5, 20.9, 2.4, 19.8, 2.4, 18.4)
       ..close();
-    canvas.drawPath(roof, fill(1));
-
-    // The doorway, punched out so the mark reads at small sizes.
-    final door = Path()
+    // The doorway is a subpath of the house under even-odd fill, not a hole
+    // erased afterwards. BlendMode.clear writes transparency into whatever
+    // layer happens to be current, so the doorway only read as a doorway while
+    // the nav bar allocated its own layer to be cleared into. Even-odd is a
+    // property of the path, so the mark is the same shape wherever it is drawn.
+    final house = Path()
+      ..fillType = PathFillType.evenOdd
+      ..addPath(roof, Offset.zero)
       ..moveTo(9.6, 20.9)
       ..lineTo(9.6, 15.4)
       ..cubicTo(9.6, 14.5, 10.3, 13.8, 11.2, 13.8)
@@ -78,7 +82,7 @@ class BNavIconPainter extends CustomPainter {
       ..cubicTo(13.7, 13.8, 14.4, 14.5, 14.4, 15.4)
       ..lineTo(14.4, 20.9)
       ..close();
-    canvas.drawPath(door, Paint()..blendMode = BlendMode.clear);
+    canvas.drawPath(house, fill(1));
   }
 
   /// Three columns on a shared baseline, with the tallest carrying a marker —
@@ -148,8 +152,11 @@ class BNavIconPainter extends CustomPainter {
       old.icon != icon || old.color != color;
 }
 
-/// Renders a nav mark. Wrapped in its own layer so the punched-out doorway in
-/// [BNavIcon.home] clears only the icon, not the glass behind it.
+/// Renders a nav mark.
+///
+/// It needs no layer of its own: the home mark's doorway is a subpath under
+/// even-odd fill rather than a hole erased into whatever layer happens to be
+/// current, so the icon is the same shape wherever it is drawn.
 class BNavIconMark extends StatelessWidget {
   const BNavIconMark({
     required this.icon,

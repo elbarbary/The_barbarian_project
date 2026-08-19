@@ -81,7 +81,7 @@ class _BPriceCaptionState extends ConsumerState<BPriceCaption> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: freshness.sessionOpen
-                ? c.up
+                ? c.direction(true, onInkSurface: widget.onDark)
                 : (widget.onDark ? c.onInkMuted : c.textFaint),
           ),
         ),
