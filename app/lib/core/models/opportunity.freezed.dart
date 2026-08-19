@@ -21,7 +21,15 @@ mixin _$OpportunityReport {
 @JsonKey(name: 'masthead_date') String? get mastheadDate;/// How a name is scored — the nine published components (spec §50).
  List<RubricComponent> get rubric;/// The bands and the reasoning that make the rubric mean something.
  ScoringGuide get scoring;/// A cohort the report read as one story rather than four names.
- SectorContext? get sector; ScannerCoverage get coverage; ScannerSummary get summary; List<ScannedCompany> get qualified; List<ScannedCompany> get watching; List<ScannedCompany> get rejected;/// The published track record, wins and misses alike (spec §7).
+ SectorContext? get sector; ScannerCoverage get coverage; ScannerSummary get summary; List<ScannedCompany> get qualified; List<ScannedCompany> get watching; List<ScannedCompany> get rejected;/// The rule log (spec §7, §8.1).
+///
+/// Deliberately not a track record. "Wins and misses" is an accuracy
+/// frame, and an accuracy frame is a written admission that the outputs
+/// are price predictions — which is what an unlicensed publisher cannot
+/// be seen to make. Each entry records what a published mechanical rule
+/// stated, what the tape did afterwards, and what was changed in the rule.
+/// There is no aggregate over them, and there is no component that could
+/// render one.
  List<ScanOutcome> get outcomes;
 /// Create a copy of OpportunityReport
 /// with the given fields replaced by the non-null parameter values.
@@ -313,9 +321,25 @@ class _OpportunityReport extends OpportunityReport {
   return EqualUnmodifiableListView(_rejected);
 }
 
-/// The published track record, wins and misses alike (spec §7).
+/// The rule log (spec §7, §8.1).
+///
+/// Deliberately not a track record. "Wins and misses" is an accuracy
+/// frame, and an accuracy frame is a written admission that the outputs
+/// are price predictions — which is what an unlicensed publisher cannot
+/// be seen to make. Each entry records what a published mechanical rule
+/// stated, what the tape did afterwards, and what was changed in the rule.
+/// There is no aggregate over them, and there is no component that could
+/// render one.
  final  List<ScanOutcome> _outcomes;
-/// The published track record, wins and misses alike (spec §7).
+/// The rule log (spec §7, §8.1).
+///
+/// Deliberately not a track record. "Wins and misses" is an accuracy
+/// frame, and an accuracy frame is a written admission that the outputs
+/// are price predictions — which is what an unlicensed publisher cannot
+/// be seen to make. Each entry records what a published mechanical rule
+/// stated, what the tape did afterwards, and what was changed in the rule.
+/// There is no aggregate over them, and there is no component that could
+/// render one.
 @override@JsonKey() List<ScanOutcome> get outcomes {
   if (_outcomes is EqualUnmodifiableListView) return _outcomes;
   // ignore: implicit_dynamic_type
@@ -4744,7 +4768,10 @@ as List<String>,
 /// @nodoc
 mixin _$ScanAction {
 
-/// The report's label for the block — "Action now".
+/// The report's own label for the block. When it has none the app supplies
+/// "What the rule produced" rather than the old default of "Action now":
+/// a heading that says *act* frames everything under it as an instruction,
+/// which is the shape spec §8.3 and §8.5 exist to keep out of the app.
  String? get label;/// "Wait for today's close — no model entry", "Wait for a wholly new base".
  String? get decision; List<String> get reasoning;
 /// Create a copy of ScanAction
@@ -4945,7 +4972,10 @@ class _ScanAction extends ScanAction {
   const _ScanAction({this.label, this.decision, final  List<String> reasoning = const <String>[]}): _reasoning = reasoning,super._();
   factory _ScanAction.fromJson(Map<String, dynamic> json) => _$ScanActionFromJson(json);
 
-/// The report's label for the block — "Action now".
+/// The report's own label for the block. When it has none the app supplies
+/// "What the rule produced" rather than the old default of "Action now":
+/// a heading that says *act* frames everything under it as an instruction,
+/// which is the shape spec §8.3 and §8.5 exist to keep out of the app.
 @override final  String? label;
 /// "Wait for today's close — no model entry", "Wait for a wholly new base".
 @override final  String? decision;

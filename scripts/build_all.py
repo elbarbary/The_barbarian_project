@@ -31,6 +31,9 @@ STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     ("Opportunity Scanner", "build_opportunity_api.py", True),
     ("Market", "build_market_api.py", False),
+    # After Market: the triage reads each company's published session to decide
+    # whether a headline is worth a second look, so it needs today's numbers.
+    ("News", "build_news_api.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
 ]
 

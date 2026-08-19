@@ -100,6 +100,7 @@ RESOURCES = {
     "companies": ["companies.json"],
     "opportunities": ["opportunities/latest.json"],
     "cash_or_trash": ["cash-or-trash/index.json"],
+    "news": ["news/latest.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by
