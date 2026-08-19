@@ -10,6 +10,7 @@ import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
@@ -40,6 +41,7 @@ class TodayScreen extends ConsumerWidget {
         const _ScannerHero(),
         const _MarketPulse(),
         if (isSample) const Center(child: BSampleDataNotice()),
+        const BLegalFootnote(),
       ],
     );
   }

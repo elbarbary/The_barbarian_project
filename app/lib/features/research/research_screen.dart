@@ -9,6 +9,7 @@ import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
@@ -37,6 +38,7 @@ class ResearchScreen extends ConsumerWidget {
         const _CashOrTrashStrip(),
         const _LatestResearch(),
         if (isSample) const Center(child: BSampleDataNotice()),
+        const BLegalFootnote(),
       ],
     );
   }
@@ -52,7 +54,7 @@ class _CashOrTrashStrip extends ConsumerWidget {
     return BAsyncView(
       value: async,
       loading: const BSkeletonBlock(height: 96, radius: BarbarianRadius.xl),
-      errorTitle: 'Cash or Trash not downloaded',
+      errorTitle: 'The pillar index is not downloaded',
       errorBody: 'Open once with a connection.',
       data: (sourced) {
         final index = sourced.value;
@@ -70,7 +72,7 @@ class _CashOrTrashStrip extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Cash or Trash',
+                            'Six Pillars',
                             style: BarbarianType.headlineM.copyWith(
                               color: c.textPrimary,
                             ),
@@ -236,7 +238,7 @@ class _LatestResearch extends ConsumerWidget {
               return BResearchCard(
                 width: 250,
                 titleMaxLines: 2,
-                kicker: 'Cash or Trash',
+                kicker: 'Six Pillars',
                 title: entry.summary?.isNotEmpty ?? false
                     ? entry.summary!
                     : '${entry.ticker}: the complete study',

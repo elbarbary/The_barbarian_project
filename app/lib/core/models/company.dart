@@ -230,7 +230,7 @@ abstract class FinancialPeriod with _$FinancialPeriod {
   }
 }
 
-/// A pointer from a company to a piece of Barbarian research (spec §19, §50).
+/// A pointer from a company to a published study (spec §19, §50).
 @freezed
 abstract class ResearchLink with _$ResearchLink {
   const factory ResearchLink({

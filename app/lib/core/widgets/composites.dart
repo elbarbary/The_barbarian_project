@@ -671,9 +671,9 @@ class BVerdictBadge extends StatelessWidget {
 
     return Semantics(
       label: score == null
-          ? 'Verdict ${verdict.label}'
-          : 'Verdict ${verdict.label}, score $score out of '
-                '${CashOrTrashEntry.maxScore}',
+          ? verdict.sentence
+          : '${verdict.sentence} The six sum to $score out of '
+                '${CashOrTrashEntry.maxScore}.',
       excludeSemantics: true,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
@@ -687,11 +687,19 @@ class BVerdictBadge extends StatelessWidget {
           children: [
             Text(verdict.mark, style: const TextStyle(fontSize: 11)),
             const SizedBox(width: 5),
-            Text(
-              verdict.label.toUpperCase(),
-              style: BarbarianType.pill.copyWith(
-                color: onDark ? c.onInk : BarbarianPalette.onWash(c, colour),
-                letterSpacing: 0.8,
+            // The bands describe the scorecard now — "Nearly all negative"
+            // rather than "Toxic" — so the label is a phrase and not a word,
+            // and a fixed-width badge on a research card cannot hold one. It
+            // shrinks rather than overflowing; the sentence is on the file.
+            Flexible(
+              child: Text(
+                verdict.label.toUpperCase(),
+                style: BarbarianType.pill.copyWith(
+                  color: onDark ? c.onInk : BarbarianPalette.onWash(c, colour),
+                  letterSpacing: 0.8,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             if (score case final int s) ...[

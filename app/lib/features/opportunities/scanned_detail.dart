@@ -7,6 +7,7 @@ import '../../core/models/opportunity.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
@@ -164,7 +165,8 @@ class ScannedDetailSheet extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      (action.label ?? 'Action now').toUpperCase(),
+                      (action.label ?? 'What the rule produced')
+                          .toUpperCase(),
                       style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
                     if (action.decision case final String decision) ...[
@@ -383,6 +385,8 @@ class ScannedDetailSheet extends ConsumerWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 18),
+            const BLegalFootnote(),
           ],
         ),
       ),

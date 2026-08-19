@@ -1,9 +1,9 @@
-import 'package:barbarian/core/models/cash_or_trash.dart';
 import 'package:barbarian/core/models/company.dart';
 import 'package:barbarian/core/models/opportunity.dart';
 import 'package:barbarian/core/widgets/motion.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/composites.dart';
+import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/cash_or_trash/cash_or_trash_screen.dart';
 import 'package:barbarian/features/company/company_screen.dart';
@@ -87,7 +87,7 @@ void main() {
     });
   });
 
-  group('Cash or Trash', () {
+  group('Six Pillars', () {
     Finder loaded() => find.textContaining('of 224 investigated');
 
     testWidgets('shows every published investigation', (tester) async {
@@ -119,9 +119,22 @@ void main() {
         until: loaded(),
       );
 
-      // Spec §42.
-      expect(find.textContaining('CASH'), findsWidgets);
-      expect(find.textContaining('TOXIC'), findsWidgets);
+      // Spec §42, and §8.2: the word beside the colour describes the
+      // scorecard rather than naming a verdict.
+      expect(find.textContaining('POSITIVE'), findsWidgets);
+      expect(find.textContaining('NEGATIVE'), findsWidgets);
+      // Exact matches, not substrings: "PENDING CASH CALL" is a published
+      // flag about a rights issue and "NO CASH BEHIND THE PROFIT" is an
+      // earnings-quality observation. Both are facts about the filings. What
+      // may not appear is a BAND called one of these.
+      for (final banned in ['Cash', 'Trash', 'Toxic', 'Recyclable',
+                            'CASH', 'TRASH', 'TOXIC', 'RECYCLABLE']) {
+        expect(
+          find.text(banned),
+          findsNothing,
+          reason: '"$banned" standing alone is a verdict on a named issuer',
+        );
+      }
     });
   });
 
@@ -139,7 +152,7 @@ void main() {
       expect(find.textContaining('Watch'), findsWidgets);
       expect(find.textContaining('Rejected'), findsWidgets);
       expect(
-        find.textContaining('Record'),
+        find.textContaining('Rule log'),
         findsWidgets,
         reason: 'the published outcome record is never hidden',
       );
@@ -230,7 +243,7 @@ void main() {
         const OpportunityScreen(parentTab: BNavTab.ask),
         until: loaded(),
       );
-      await tapVisible(tester, find.textContaining('Record'));
+      await tapVisible(tester, find.textContaining('Rule log'));
       await pumpUntil(tester, find.text(gone.first.ticker));
 
       final row = find.ancestor(
@@ -285,10 +298,15 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
 
-      expect(find.textContaining('No Barbarian research'), findsOneWidget);
+      expect(find.textContaining('No study published'), findsOneWidget);
     });
 
-    testWidgets('a researched company shows a centre-anchored signed gauge', (
+    // The verdict dial used to live here, filled from the centre so a −50 read
+    // as a −50. It is gone: board v2 deleted it because a needle sweeping
+    // toward the right edge is a verdict shape whatever the caption says, and
+    // a screenshot of one is a rating published by somebody unlicensed to
+    // rate. What replaced it is a ledger — six rows, six signs, no needle.
+    testWidgets('a researched company shows a signed ledger, not a dial', (
       tester,
     ) async {
       await pumpScreen(
@@ -299,22 +317,24 @@ void main() {
 
       await tester.tap(find.text('Research'));
       await tester.pump();
-      // The header already has a range gauge, so wait on a label only the
-      // verdict gauge draws.
-      await pumpUntil(tester, find.text('Trash'));
+      await pumpUntil(tester, find.byType(BPillarLedger));
 
-      // Pick the verdict gauge by its scale rather than by position.
-      final gauge = tester
+      // KWIN scored −50, and the sum is stated as a sum.
+      expect(find.text('-50'), findsWidgets);
+      expect(find.text('Sum of the six'), findsOneWidget);
+
+      // No gauge on this screen is anchored to the verdict scale any more.
+      final centred = tester
           .widgetList<BArcGauge>(find.byType(BArcGauge))
-          .firstWhere((g) => g.mode == BGaugeMode.fromCentre);
-      // KWIN scored −50. Filled from the west like the canvas's own gauge it
-      // would read as a small positive score, misstating published research.
-      expect(gauge.mode, BGaugeMode.fromCentre);
-      expect(gauge.value, -50);
-      expect(gauge.min, CashOrTrashEntry.minScore.toDouble());
-      expect(gauge.max, CashOrTrashEntry.maxScore.toDouble());
-      expect(gauge.lowLabel, 'Trash');
-      expect(gauge.highLabel, 'Cash');
+          .where((g) => g.mode == BGaugeMode.fromCentre);
+      expect(
+        centred,
+        isEmpty,
+        reason: 'the verdict dial was removed on purpose (board v2)',
+      );
+
+      // And the mandatory conditional card is under it (spec §8.2).
+      expect(find.byType(BWhatWouldChangeThis), findsOneWidget);
     });
   });
 
@@ -389,7 +409,7 @@ void main() {
       ('Market', const MarketScreen(parentTab: BNavTab.ask)),
       ('You', const YouScreen()),
       ('The Pit', const PitScreen(parentTab: BNavTab.ask)),
-      ('Cash or Trash', const CashOrTrashScreen(parentTab: BNavTab.ask)),
+      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.ask)),
       ('Opportunity Scanner', const OpportunityScreen(parentTab: BNavTab.ask)),
       ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
     ]) {
@@ -405,7 +425,7 @@ void main() {
     for (final (name, screen) in <(String, Widget)>[
       ('Market', const MarketScreen(parentTab: BNavTab.ask)),
       ('You', const YouScreen()),
-      ('Cash or Trash', const CashOrTrashScreen(parentTab: BNavTab.ask)),
+      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.ask)),
       ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
     ]) {
       testWidgets('$name does not overflow at 320pt', (tester) async {

@@ -29,7 +29,15 @@ abstract class OpportunityReport with _$OpportunityReport {
     @Default(<ScannedCompany>[]) List<ScannedCompany> qualified,
     @Default(<ScannedCompany>[]) List<ScannedCompany> watching,
     @Default(<ScannedCompany>[]) List<ScannedCompany> rejected,
-    /// The published track record, wins and misses alike (spec §7).
+    /// The rule log (spec §7, §8.1).
+    ///
+    /// Deliberately not a track record. "Wins and misses" is an accuracy
+    /// frame, and an accuracy frame is a written admission that the outputs
+    /// are price predictions — which is what an unlicensed publisher cannot
+    /// be seen to make. Each entry records what a published mechanical rule
+    /// stated, what the tape did afterwards, and what was changed in the rule.
+    /// There is no aggregate over them, and there is no component that could
+    /// render one.
     @Default(<ScanOutcome>[]) List<ScanOutcome> outcomes,
   }) = _OpportunityReport;
 
@@ -474,7 +482,10 @@ abstract class ResearchSection with _$ResearchSection {
 @freezed
 abstract class ScanAction with _$ScanAction {
   const factory ScanAction({
-    /// The report's label for the block — "Action now".
+    /// The report's own label for the block. When it has none the app supplies
+    /// "What the rule produced" rather than the old default of "Action now":
+    /// a heading that says *act* frames everything under it as an instruction,
+    /// which is the shape spec §8.3 and §8.5 exist to keep out of the app.
     String? label,
 
     /// "Wait for today's close — no model entry", "Wait for a wholly new base".

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
-import '../../core/models/cash_or_trash.dart';
 import '../../core/models/company.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
@@ -14,6 +13,7 @@ import '../../core/widgets/async_view.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/price_caption.dart';
@@ -120,6 +120,8 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                         'it.',
                   ),
                 },
+                const SizedBox(height: 18),
+                const BLegalFootnote(),
               ],
             );
           },
@@ -419,7 +421,7 @@ class _Overview extends ConsumerWidget {
         // Price tab. The full chart still lives there; this is the glance.
         _RecentMoves(history: company.priceHistory),
         if (verdict != null) ...[
-          const BSectionLabel('Barbarian verdict'),
+          const BSectionLabel('Six Pillars'),
           BPressable(
             onTap: () {},
             child: BPaperCard(
@@ -731,7 +733,7 @@ class _Research extends ConsumerWidget {
 
     if (entry == null && (scanned == null || scanned.isEmpty)) {
       return const BEmptyState(
-        title: 'No Barbarian research on this company yet',
+        title: 'No study published on this company yet',
         body:
             'Companies are studied one at a time. When this one is read, the '
             'investigation appears here.',
@@ -742,29 +744,38 @@ class _Research extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (entry != null) ...[
-          const BSectionLabel('Cash or Trash'),
+          const BSectionLabel('Six Pillars'),
           BPaperCard(
             radius: BarbarianRadius.xl,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: BArcGauge(
-                    size: 230,
-                    value: entry.score.toDouble(),
-                    min: CashOrTrashEntry.minScore.toDouble(),
-                    max: CashOrTrashEntry.maxScore.toDouble(),
-                    mode: BGaugeMode.fromCentre,
-                    big: entry.score > 0 ? '+${entry.score}' : '${entry.score}',
-                    caption: entry.verdict.label,
-                    lowLabel: 'Trash',
-                    highLabel: 'Cash',
-                    onDark: false,
-                    litColor: entry.score >= 0 ? c.up : c.down,
+                // The dial that used to sit here is gone. Board v2 deleted it
+                // on purpose and the reason is legal rather than visual: a
+                // needle sweeping toward the right edge is a verdict shape
+                // whatever the caption says, and a screenshot of it, without
+                // the caption, is a rating on a named issuer published by
+                // somebody with no licence to rate anything.
+                Text(
+                  entry.verdict.sentence,
+                  style: BarbarianType.headlineM.copyWith(
+                    color: c.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 8),
-                BVerdictBadge(verdict: entry.verdict, score: entry.score),
+                const SizedBox(height: 14),
+                BPillarLedger(
+                  rows: [
+                    for (final p in entry.pillars)
+                      (p.pillar, p.score, p.basis),
+                  ],
+                  total: entry.score,
+                ),
+                const SizedBox(height: 16),
+                // Mandatory on every file that shows a band (spec §8.2). A
+                // score with no stated way to move it is a rating; a score
+                // with the filing that would change it is a conditional
+                // observation about published arithmetic.
+                const BWhatWouldChangeThis(conditions: []),
                 if (entry.summary case final String s) ...[
                   const SizedBox(height: 12),
                   Text(
@@ -781,7 +792,7 @@ class _Research extends ConsumerWidget {
                       Routes.articlePath(
                         parentTab,
                         config.resolveArticleUrl(entry.articleUrl!),
-                        '$ticker · Cash or Trash',
+                        '\$ticker · Six Pillars',
                       ),
                     ),
                     child: Container(

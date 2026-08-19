@@ -10,6 +10,7 @@ import '../../core/widgets/arc_gauge.dart';
 import '../../core/widgets/async_view.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
@@ -81,7 +82,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
         ),
         BAsyncView(
           value: async,
-          errorTitle: 'Cash or Trash is not available offline yet',
+          errorTitle: 'The pillar index is not on the device yet',
           errorBody:
               'Open it once with a connection and it stays on the device.',
           data: (sourced) {
@@ -101,7 +102,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BScreenTitle(
-                  'Cash or Trash',
+                  'Six Pillars',
                   subtitle:
                       '${index.studiedCount} of ${index.total} investigated',
                 ),
@@ -156,6 +157,8 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                   // measures 3.7–4.1:1 at this size.
                   style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
                 ),
+                const SizedBox(height: 14),
+                const BLegalFootnote(),
               ],
             );
           },
@@ -374,7 +377,7 @@ class _VerdictCard extends ConsumerWidget {
                         Routes.articlePath(
                           parentTab,
                           config.resolveArticleUrl(entry.articleUrl!),
-                          '${entry.ticker} · Cash or Trash',
+                          '${entry.ticker} · Six Pillars',
                         ),
                       ),
                     ),

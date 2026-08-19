@@ -113,23 +113,55 @@ abstract class PillarScore with _$PillarScore {
 ///
 /// Each carries a word and a mark so the verdict is never communicated by
 /// colour alone (spec §42).
+/// The five bands, named for **what the scorecard did** — never for what the
+/// company is worth and never for an action (spec §8.2).
+///
+/// They used to be Cash · Loose change · Recyclable · Trash · Toxic, with a
+/// money bag at one end and a skull at the other. Every one of those is a
+/// verdict on a named issuer delivered in one word, and "Trash" is a sell call
+/// in one word: there is no version of it that survives being read aloud in a
+/// hearing. The publisher is not licensed by Egypt's FRA, so a public band on a
+/// named issuer has to be a statement about the arithmetic or it is a rating.
+///
+/// What replaces them describes the ledger and nothing else. The subject of
+/// every sentence below is *the pillars*, not the security. Price-versus-
+/// filings language survives only inside the valuation pillar, where it is a
+/// described relationship with its arithmetic attached — never as the headline
+/// band (spec §8.2).
+///
+/// The wire values are unchanged: they are the published document's keys, not
+/// words anybody reads.
 enum Verdict {
   @JsonValue('cash')
-  cash('cash', 'Cash', '💰'),
+  cash('cash', 'Nearly all positive', '＋＋',
+      'Nearly all six pillars are positive.'),
   @JsonValue('loose_change')
-  looseChange('loose_change', 'Loose change', '🪙'),
+  looseChange('loose_change', 'Mostly positive', '＋',
+      'Most of the six pillars are positive.'),
   @JsonValue('recyclable')
-  recyclable('recyclable', 'Recyclable', '♻️'),
+  recyclable('recyclable', 'Balanced', '＝',
+      'The six pillars are balanced.'),
   @JsonValue('trash')
-  trash('trash', 'Trash', '🗑️'),
+  trash('trash', 'Mostly negative', '−',
+      'Most of the six pillars are negative.'),
   @JsonValue('toxic')
-  toxic('toxic', 'Toxic', '☠️');
+  toxic('toxic', 'Nearly all negative', '−−',
+      'Nearly all six pillars are negative.');
 
-  const Verdict(this.id, this.label, this.mark);
+  const Verdict(this.id, this.label, this.mark, this.sentence);
 
   final String id;
+
+  /// The short form, for a chip. Still about the pillars.
   final String label;
+
+  /// A sign, not a symbol. The glyph carries the band for a reader who cannot
+  /// use the colour (spec §42) without carrying a judgement: it states which
+  /// way the ledger summed, which is a fact about the arithmetic.
   final String mark;
+
+  /// The band written out, for anywhere with room for a sentence.
+  final String sentence;
 
   static Verdict parse(String? raw) => switch (raw) {
     'cash' => Verdict.cash,

@@ -86,6 +86,23 @@ class YouScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const BSectionLabel('Watchlist'),
+            // Spec §8.4. A list of names, each carrying this app's reading of
+            // it, is a personalised recommendation list — the fact that a user
+            // assembled it themselves does not cure that, because the app is
+            // what put a score next to each one. So the rows carry price and
+            // the delay caption and nothing else, and the screen says so
+            // rather than leaving a reader to notice the absence.
+            Padding(
+              padding: const EdgeInsets.only(top: 4, bottom: 10),
+              child: Text(
+                'Prices only. No score, no band and no reading appears here — '
+                'those live on the company file, which you open yourself.',
+                style: BarbarianType.bodyS.copyWith(
+                  color: context.colors.textMuted,
+                  height: 1.5,
+                ),
+              ),
+            ),
             if (watchlist.isEmpty)
               BEmptyState(
                 title: 'Empty watchlist',

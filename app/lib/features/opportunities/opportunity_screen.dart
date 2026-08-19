@@ -10,6 +10,7 @@ import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
@@ -154,7 +155,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                       BSegment(label: 'Qualified ${report.qualifiedCount}'),
                       BSegment(label: 'Watch ${report.watchingCount}'),
                       BSegment(label: 'Rejected ${report.rejectedCount}'),
-                      BSegment(label: 'Record ${report.outcomes.length}'),
+                      BSegment(label: 'Rule log ${report.outcomes.length}'),
                     ],
                     selectedIndex: _Section.values.indexOf(_section),
                     onChanged: (i) =>
@@ -170,17 +171,19 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                     _Section.rejected =>
                       'Failed the test, and kept on the record.',
                     _Section.record =>
-                      'What actually happened to every name the scanner '
-                          'flagged — the misses included. This is the half most '
-                          'places delete.',
+                      'What the published rule said, what the tape did next, '
+                          'and what was changed in the rule afterwards. It is '
+                          'an audit of the method, not a scoreboard: there is '
+                          'no total here and there never will be.',
                   }, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
                   const SizedBox(height: 16),
                   if (_section == _Section.record)
                     if (report.outcomes.isEmpty)
                       const BEmptyState(
-                        title: 'No outcomes published yet',
+                        title: 'The rule log is empty',
                         body:
-                            'Results appear here as each flagged name resolves.',
+                            'Entries appear here as each published rule '
+                            'reaches its stated end.',
                       )
                     else
                       for (final outcome in report.outcomes) ...[
@@ -212,6 +215,8 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                       const SizedBox(height: 12),
                     ],
                 ],
+                const SizedBox(height: 18),
+                const BLegalFootnote(),
               ],
             );
           },
@@ -449,7 +454,7 @@ class _ScannedCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      (entry.action?.label ?? 'Action now').toUpperCase(),
+                      (entry.action?.label ?? 'What the rule produced').toUpperCase(),
                       style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
                     const SizedBox(height: 4),

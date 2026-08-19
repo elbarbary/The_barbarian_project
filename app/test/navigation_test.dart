@@ -134,13 +134,15 @@ void main() {
       await pumpUntil(tester, find.text('Today'));
     });
 
-    testWidgets('Research opens Cash or Trash', (tester) async {
+    testWidgets('Research opens Six Pillars', (tester) async {
       await boot(tester);
       await tapTab(tester, BNavTab.research);
 
-      await pumpUntil(tester, find.text('Cash or Trash'));
-      // The card sits low enough that a plain tap can land on the floating nav.
-      await tapVisible(tester, find.text('Cash or Trash'));
+      // Research lists it under its own section label, and the destination
+      // screen carries the same title — so wait on the card, tap it, then
+      // wait on something only the destination draws.
+      await pumpUntil(tester, find.text('Six Pillars'));
+      await tapVisible(tester, find.text('Six Pillars').first);
       await pumpUntil(tester, find.textContaining('of 224 investigated'));
 
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
