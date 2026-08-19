@@ -118,6 +118,11 @@ abstract final class BarbarianType {
   /// 15 — an inline figure.
   static TextStyle get figureS => _display(15, weight: 400);
 
+  /// 12.5 — the exact token under a plain sentence, and the arithmetic inside
+  /// an explainer sheet. Small on purpose: the sentence is what is being said
+  /// and the figure is the evidence for it, but it is never hidden (spec §6.2).
+  static TextStyle get figureXs => _display(12.5, weight: 400);
+
   // ------------------------------------------------------------------ text
 
   /// 16/1.65 — long-form research body.

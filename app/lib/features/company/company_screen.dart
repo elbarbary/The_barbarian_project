@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/company.dart';
+import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
 import '../../core/providers.dart';
@@ -13,6 +14,7 @@ import '../../core/widgets/async_view.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/legal.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
@@ -388,20 +390,32 @@ class _Overview extends ConsumerWidget {
       if (m?.volume != null) ('Volume', _compact(m!.volume)),
       if (p['avg_volume_30d'] != null)
         ('Avg volume 30d', _compact(p['avg_volume_30d'])),
-      if (p['relative_volume_10d'] != null)
-        ('Relative volume', '${_num(p['relative_volume_10d'])}×'),
     ];
 
     final size = <(String, String)>[
-      if (p['market_cap'] != null) ('Market cap', _compact(p['market_cap'])),
       if (p['shares_outstanding'] != null)
         ('Shares outstanding', _compact(p['shares_outstanding'])),
-      if (p['free_float'] is num)
-        ('Free float', '${((p['free_float'] as num) * 100).toStringAsFixed(1)}%'),
       if (p['float_shares'] != null)
         ('Float shares', _compact(p['float_shares'])),
       if (company.sector case final String sector) ('Sector', sector),
     ];
+
+    // Built from published operands only: a builder returns null when an
+    // input is missing, so a row never appears without the arithmetic behind
+    // it. That is the whole discipline — the sentence is only as good as the
+    // sum it can show.
+    final explained = <Explainer?>[
+      Explainers.relativeVolume(company),
+      Explainers.freeFloat(company),
+      Explainers.closeStrength(company),
+      Explainers.move(
+        title: 'How it has moved this month',
+        window: 'a month',
+        percent: p['perf_1m'] is num ? (p['perf_1m'] as num).toDouble() : null,
+        asOf: m?.date,
+      ),
+      Explainers.marketCap(company),
+    ].nonNulls.toList();
 
     final momentum = <(String, String)>[
       if (p['perf_1w'] != null) ('1 week', _pct(p['perf_1w'])),
@@ -441,6 +455,30 @@ class _Overview extends ConsumerWidget {
                   ],
                 ],
               ),
+            ),
+          ),
+          const SizedBox(height: 22),
+        ],
+        // The figures that mean something, said in words first.
+        //
+        // These four rows used to be part of the fact tables below — "Relative
+        // volume  0.43×", "Free float  2.9%". Both are true and neither means
+        // anything to somebody who has not been taught to read a tape, which
+        // makes them exactly the product this app exists not to be. Each one
+        // now leads with a sentence, carries its exact figure underneath, and
+        // opens into the arithmetic that produced it (spec §4.18, §6.2).
+        if (explained.isNotEmpty) ...[
+          const BSectionLabel('What the numbers say'),
+          BPaperCard(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                for (var i = 0; i < explained.length; i++)
+                  BPlainNumber(
+                    explainer: explained[i],
+                    last: i == explained.length - 1,
+                  ),
+              ],
             ),
           ),
           const SizedBox(height: 22),
