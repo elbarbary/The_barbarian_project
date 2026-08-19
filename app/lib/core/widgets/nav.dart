@@ -4,10 +4,27 @@ import '../theme/barbarian_theme.dart';
 import 'nav_icons.dart';
 
 /// The four primary destinations (spec §5). There are exactly four and no more.
+/// The four destinations, in the boards' order.
+///
+/// The boards open on **Ask**, not on a dashboard: the app's premise is that
+/// somebody has just been sent a name and wants to know what it is, so the
+/// first screen is the question rather than a summary of everything.
+///
+/// What moved when this replaced Home / Market / The Pit / You:
+///
+///  * **Market** stopped being a destination. A 282-row alphabetical list is a
+///    reference, not a place you go — it is now behind Ask's search and its
+///    own "full directory" route.
+///  * **The Pit** is a phase-gated placeholder for a discussion feature that
+///    does not exist yet. It kept its route and left the bar; a quarter of the
+///    navigation should not be a coming-soon page.
+///  * **Home** was five stacked summaries. Its scanner hero and session
+///    breadth are Today; its studies and verdict strip are Research; its
+///    watchlist block was already duplicated on You.
 enum BNavTab {
-  home('Home'),
-  market('Market'),
-  pit('The Pit'),
+  ask('Ask'),
+  today('Today'),
+  research('Research'),
   you('You');
 
   const BNavTab(this.label);
@@ -205,9 +222,9 @@ class _NavTab extends StatelessWidget {
             children: [
               BNavIconMark(
                 icon: switch (tab) {
-                  BNavTab.home => BNavIcon.home,
-                  BNavTab.market => BNavIcon.market,
-                  BNavTab.pit => BNavIcon.pit,
+                  BNavTab.ask => BNavIcon.ask,
+                  BNavTab.today => BNavIcon.today,
+                  BNavTab.research => BNavIcon.research,
                   BNavTab.you => BNavIcon.you,
                 },
                 color: color,

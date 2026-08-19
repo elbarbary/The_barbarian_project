@@ -6,24 +6,38 @@ import '../core/providers.dart';
 import '../core/widgets/nav.dart';
 import '../features/cash_or_trash/cash_or_trash_screen.dart';
 import '../features/company/company_screen.dart';
-import '../features/home/home_screen.dart';
+import '../features/ask/ask_screen.dart';
 import '../features/market/market_screen.dart';
 import '../features/opportunities/opportunity_screen.dart';
 import '../features/pit/pit_screen.dart';
+import '../features/research/research_screen.dart';
+import '../features/today/today_screen.dart';
 import '../features/profile/you_screen.dart';
 import '../features/research/article_screen.dart';
 
 /// Route paths, in one place so nothing hard-codes a string.
 abstract final class Routes {
-  static const String home = '/';
-  static const String market = '/market';
-  static const String pit = '/pit';
+  static const String ask = '/';
+  static const String today = '/today';
+  static const String research = '/research';
   static const String you = '/you';
+
+  /// Reached from Ask rather than from the bar. A 282-row alphabetical list is
+  /// a reference you look something up in, not a destination you visit.
+  static const String directory = 'directory';
+
+  /// The discussion feature, still pre-launch. It kept its route and left the
+  /// navigation: a quarter of the bar should not be a coming-soon page.
+  static const String pit = 'pit';
 
   static const String scanner = 'scanner';
   static const String cashOrTrash = 'cash-or-trash';
   static const String company = 'company/:ticker';
   static const String article = 'article';
+
+  static String directoryPath(BNavTab from) => '${_root(from)}directory';
+
+  static String pitPath(BNavTab from) => '${_root(from)}pit';
 
   static String companyPath(BNavTab from, String ticker) =>
       '${_root(from)}company/$ticker'.replaceAll('//', '/');
@@ -39,9 +53,9 @@ abstract final class Routes {
       ).toString();
 
   static String _root(BNavTab tab) => switch (tab) {
-    BNavTab.home => '/',
-    BNavTab.market => '/market/',
-    BNavTab.pit => '/pit/',
+    BNavTab.ask => '/',
+    BNavTab.today => '/today/',
+    BNavTab.research => '/research/',
     BNavTab.you => '/you/',
   };
 }
@@ -55,6 +69,14 @@ final _rootKey = GlobalKey<NavigatorState>();
 
 GoRouter buildRouter() {
   List<RouteBase> detailRoutes(BNavTab tab) => [
+    GoRoute(
+      path: Routes.directory,
+      builder: (context, state) => MarketScreen(parentTab: tab),
+    ),
+    GoRoute(
+      path: Routes.pit,
+      builder: (context, state) => PitScreen(parentTab: tab),
+    ),
     GoRoute(
       path: Routes.scanner,
       builder: (context, state) => OpportunityScreen(parentTab: tab),
@@ -85,7 +107,7 @@ GoRouter buildRouter() {
   // Empty in every normal build, so production always opens on Home.
   const initial = String.fromEnvironment(
     'BARBARIAN_INITIAL_ROUTE',
-    defaultValue: Routes.home,
+    defaultValue: Routes.ask,
   );
 
   return GoRouter(
@@ -102,27 +124,27 @@ GoRouter buildRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.home,
-                builder: (context, state) => const HomeScreen(),
-                routes: detailRoutes(BNavTab.home),
+                path: Routes.ask,
+                builder: (context, state) => const AskScreen(),
+                routes: detailRoutes(BNavTab.ask),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.market,
-                builder: (context, state) => const MarketScreen(),
-                routes: detailRoutes(BNavTab.market),
+                path: Routes.today,
+                builder: (context, state) => const TodayScreen(),
+                routes: detailRoutes(BNavTab.today),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.pit,
-                builder: (context, state) => const PitScreen(),
-                routes: detailRoutes(BNavTab.pit),
+                path: Routes.research,
+                builder: (context, state) => const ResearchScreen(),
+                routes: detailRoutes(BNavTab.research),
               ),
             ],
           ),

@@ -193,7 +193,7 @@ void main() {
       usePhoneSurface(tester);
       await tester.pumpWidget(
         harness(
-          const MarketScreen(),
+          const MarketScreen(parentTab: BNavTab.ask),
           quotes: fakeQuotes({'COMI': 139.25}),
         ),
       );
@@ -206,7 +206,7 @@ void main() {
       tester,
     ) async {
       usePhoneSurface(tester);
-      await tester.pumpWidget(harness(const MarketScreen()));
+      await tester.pumpWidget(harness(const MarketScreen(parentTab: BNavTab.ask)));
       await pumpUntil(tester, find.textContaining(fixtureSessionDate));
 
       // Dated by the publish, and making no claim about a live feed.
@@ -218,7 +218,7 @@ void main() {
       usePhoneSurface(tester);
       await tester.pumpWidget(
         harness(
-          const CompanyScreen(ticker: 'SWDY', parentTab: BNavTab.market),
+          const CompanyScreen(ticker: 'SWDY', parentTab: BNavTab.today),
           quotes: fakeQuotes({'SWDY': 1234.5}),
         ),
       );

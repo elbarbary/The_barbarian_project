@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 ///
 /// Everything is authored on a 24x24 grid and scaled, so a size change never
 /// shifts the alignment between them.
-enum BNavIcon { home, market, pit, you }
+enum BNavIcon { ask, today, research, you }
 
 class BNavIconPainter extends CustomPainter {
   const BNavIconPainter({required this.icon, required this.color});
@@ -40,12 +40,12 @@ class BNavIconPainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round;
 
     switch (icon) {
-      case BNavIcon.home:
-        _home(canvas, fill, stroke);
-      case BNavIcon.market:
-        _market(canvas, fill, stroke);
-      case BNavIcon.pit:
-        _pit(canvas, fill, stroke);
+      case BNavIcon.ask:
+        _ask(canvas, fill, stroke);
+      case BNavIcon.today:
+        _today(canvas, fill, stroke);
+      case BNavIcon.research:
+        _research(canvas, fill, stroke);
       case BNavIcon.you:
         _you(canvas, fill, stroke);
     }
@@ -53,86 +53,66 @@ class BNavIconPainter extends CustomPainter {
     canvas.restore();
   }
 
-  /// A roof over a body, with the eaves swept rather than mitred.
-  void _home(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
-    final roof = Path()
-      ..moveTo(2.4, 10.6)
-      ..cubicTo(2.4, 9.8, 2.8, 9.1, 3.4, 8.7)
-      ..lineTo(10.6, 3.4)
-      ..cubicTo(11.4, 2.8, 12.6, 2.8, 13.4, 3.4)
-      ..lineTo(20.6, 8.7)
-      ..cubicTo(21.2, 9.1, 21.6, 9.8, 21.6, 10.6)
-      ..lineTo(21.6, 18.4)
-      ..cubicTo(21.6, 19.8, 20.5, 20.9, 19.1, 20.9)
-      ..lineTo(4.9, 20.9)
-      ..cubicTo(3.5, 20.9, 2.4, 19.8, 2.4, 18.4)
-      ..close();
-    // The doorway is a subpath of the house under even-odd fill, not a hole
-    // erased afterwards. BlendMode.clear writes transparency into whatever
-    // layer happens to be current, so the doorway only read as a doorway while
-    // the nav bar allocated its own layer to be cleared into. Even-odd is a
-    // property of the path, so the mark is the same shape wherever it is drawn.
-    final house = Path()
-      ..fillType = PathFillType.evenOdd
-      ..addPath(roof, Offset.zero)
-      ..moveTo(9.6, 20.9)
-      ..lineTo(9.6, 15.4)
-      ..cubicTo(9.6, 14.5, 10.3, 13.8, 11.2, 13.8)
-      ..lineTo(12.8, 13.8)
-      ..cubicTo(13.7, 13.8, 14.4, 14.5, 14.4, 15.4)
-      ..lineTo(14.4, 20.9)
-      ..close();
-    canvas.drawPath(house, fill(1));
+  /// A magnifier: the question, not a house.
+  ///
+  /// Transcribed from the board at 20×20 and scaled onto this file's 24 grid —
+  /// `circle cx=8.6 cy=8.6 r=5.6 stroke-width=1.7`, handle a rounded bar at
+  /// 45°. The board mirrors the whole mark with `scaleX(-1)` because its nav
+  /// runs right to left; drawn here unmirrored the handle falls bottom-right,
+  /// where a Latin reader expects it. Mirroring is what `Directionality` will
+  /// do to the bar when the Arabic pass lands, so nothing here fixes a side.
+  void _ask(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
+    canvas.drawCircle(const Offset(10.32, 10.32), 6.72, stroke(2.04, 1));
+    // From the lens edge along the diagonal — centre + r/√2 — so the handle
+    // meets the circle instead of crossing it.
+    canvas.drawLine(
+      const Offset(15.07, 15.07),
+      const Offset(20.6, 20.6),
+      stroke(2.16, 1)..strokeCap = StrokeCap.round,
+    );
   }
 
-  /// Three columns on a shared baseline, with the tallest carrying a marker —
-  /// a chart, not three loose bars.
-  void _market(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
-    void column(double x, double top) => canvas.drawRRect(
+  /// A bulletin: a sheet with two lines set on it, the second lighter.
+  ///
+  /// The board's `rect 3,3.5 14×13 r2.6` with bars at 6.6 and 10, the lower at
+  /// 50% — a page with a headline and one line under it, which is what Today
+  /// publishes on the days it has anything to publish.
+  void _today(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
+    canvas.drawRRect(
       RRect.fromRectAndRadius(
-        Rect.fromLTRB(x, top, x + 3.6, 19.2),
-        const Radius.circular(1.8),
+        const Rect.fromLTRB(3.6, 4.2, 20.4, 19.8),
+        const Radius.circular(3.12),
+      ),
+      stroke(1.92, 1),
+    );
+    void bar(double top, double opacity) => canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(6.96, top, 10.08, 1.8),
+        const Radius.circular(0.9),
+      ),
+      fill(opacity),
+    );
+    bar(7.92, 1);
+    bar(12, 0.5);
+  }
+
+  /// Three bars, ascending — the mark the board gives the studies list, and
+  /// the one this file used for Market before Market stopped being a place.
+  ///
+  /// The baseline the old version drew is gone: the board has none, and three
+  /// rounded bars read as a chart without a rule under them.
+  void _research(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
+    void bar(double x, double top) => canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(x, top, x + 4.08, 20.4),
+        const Radius.circular(2.04),
       ),
       fill(1),
     );
 
-    column(3.4, 12.6);
-    column(10.2, 8.4);
-    column(17.0, 4.2);
-
-    // Baseline, lighter, so the columns sit on something.
-    canvas.drawLine(
-      const Offset(2.6, 20.9),
-      const Offset(21.4, 20.9),
-      stroke(1.6, 0.45),
-    );
-  }
-
-  /// Two bubbles in conversation: one solid, one behind it and lighter.
-  void _pit(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
-    final back = Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(
-          const Rect.fromLTRB(9.0, 3.2, 21.4, 13.4),
-          const Radius.circular(4.2),
-        ),
-      );
-    canvas.drawPath(back, fill(0.42));
-
-    final front = Path()
-      ..addRRect(
-        RRect.fromRectAndRadius(
-          const Rect.fromLTRB(2.6, 7.6, 15.6, 18.4),
-          const Radius.circular(4.4),
-        ),
-      );
-    // The tail, so it reads as speech rather than a card.
-    final tail = Path()
-      ..moveTo(6.2, 17.6)
-      ..lineTo(6.2, 21.4)
-      ..lineTo(10.4, 18.2)
-      ..close();
-    canvas.drawPath(Path.combine(PathOperation.union, front, tail), fill(1));
+    bar(3.6, 13.2);
+    bar(9.96, 8.4);
+    bar(16.32, 3.6);
   }
 
   /// Head and shoulders, with the shoulders an arc rather than a slab.

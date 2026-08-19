@@ -22,7 +22,11 @@ import '../../core/widgets/text.dart';
 /// No "top buys", no "best stocks", no "AI picks" — the tab is a browser for
 /// the exchange, not a recommendation surface (spec §11).
 class MarketScreen extends ConsumerStatefulWidget {
-  const MarketScreen({super.key});
+  const MarketScreen({required this.parentTab, super.key});
+
+  /// Which navigation slot stays lit while this is open. Market used to BE a
+  /// slot; it is now a reference reached from Ask, so it inherits the caller's.
+  final BNavTab parentTab;
 
   @override
   ConsumerState<MarketScreen> createState() => _MarketScreenState();
@@ -65,7 +69,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
     return BScreenScaffold(
       blockGap: 24,
       children: [
-        const BScreenTitle('Market'),
+        const BScreenTitle('The full directory'),
         BSearchPill(
           text: 'Search companies, tickers…',
           controller: _search,
@@ -202,6 +206,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                     _CompanyRow(
                       company: company,
                       quote: snapshot?.quoteFor(company.ticker),
+                      parentTab: widget.parentTab,
                     ),
                     const SizedBox(height: 8),
                   ],
@@ -421,10 +426,15 @@ class _SectorTile extends StatelessWidget {
 }
 
 class _CompanyRow extends StatelessWidget {
-  const _CompanyRow({required this.company, required this.quote});
+  const _CompanyRow({
+    required this.company,
+    required this.quote,
+    required this.parentTab,
+  });
 
   final CompanySummary company;
   final StockQuote? quote;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
@@ -437,7 +447,7 @@ class _CompanyRow extends StatelessWidget {
       subtitle: company.nameAr,
       subtitleIsArabic: company.nameAr != null,
       onTap: () =>
-          context.push(Routes.companyPath(BNavTab.market, company.ticker)),
+          context.push(Routes.companyPath(parentTab, company.ticker)),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,

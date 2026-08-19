@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/barbarian_theme.dart';
+import '../../core/widgets/nav.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
@@ -12,7 +13,12 @@ import '../../core/widgets/text.dart';
 /// §30 says the read-only product works without an account. So this tab states
 /// plainly what is coming rather than pretending to be broken or empty.
 class PitScreen extends StatelessWidget {
-  const PitScreen({super.key});
+  const PitScreen({required this.parentTab, super.key});
+
+  /// Which navigation slot stays lit while this is open. The Pit left the bar
+  /// when Ask took its place — a quarter of the navigation should not be a
+  /// page that says "not yet".
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {

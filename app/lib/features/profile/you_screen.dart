@@ -93,7 +93,7 @@ class YouScreen extends ConsumerWidget {
                     'Follow a company and its price, filings and research land '
                     'here.',
                 actionLabel: 'Browse companies',
-                onAction: () => selectTab(context, BNavTab.market),
+                onAction: () => context.push(Routes.directoryPath(BNavTab.you)),
               )
             else
               BGroupedListCard(

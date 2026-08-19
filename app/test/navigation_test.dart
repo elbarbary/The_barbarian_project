@@ -53,12 +53,12 @@ void main() {
   setUp(useInMemoryPreferences);
 
   group('bottom navigation', () {
-    testWidgets('boots on Home with the Home slot lit', (tester) async {
+    testWidgets('boots on Ask with the Ask slot lit', (tester) async {
       await boot(tester);
 
       expect(find.text('Egyptian equities, unfiltered'), findsOneWidget);
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.home);
+      expect(nav.active, BNavTab.ask);
     });
 
     testWidgets('every tab is reachable and lights its own slot', (
@@ -76,36 +76,37 @@ void main() {
       }
     });
 
-    testWidgets('Market, Pit and You each render their own screen', (
+    testWidgets('Today, Research and You each render their own screen', (
       tester,
     ) async {
       await boot(tester);
 
-      await tapTab(tester, BNavTab.market);
-      await pumpUntil(tester, find.byType(TextField));
-      expect(find.text('Market'), findsOneWidget);
+      await tapTab(tester, BNavTab.today);
+      await pumpUntil(tester, find.text('Today'));
 
-      await tapTab(tester, BNavTab.pit);
-      await pumpUntil(tester, find.text('The Pit'));
+      await tapTab(tester, BNavTab.research);
+      await pumpUntil(tester, find.text('Every study, and what happened after it'));
 
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('No account needed to read'));
     });
 
-    testWidgets('each branch keeps its own scroll and state', (tester) async {
+    testWidgets('each branch keeps its own state', (tester) async {
       await boot(tester);
 
-      await tapTab(tester, BNavTab.market);
-      await pumpUntil(tester, find.textContaining('El Sewedy Electric'));
+      // Ask's search is the branch state that has to survive a round trip: it
+      // is what somebody typed, and losing it is losing their question.
+      await pumpUntil(tester, find.byType(TextField));
       await tester.enterText(find.byType(TextField).first, 'swdy');
       await tester.pump();
+      await pumpUntil(tester, find.textContaining('El Sewedy Electric'));
       expect(find.textContaining('Commercial International Bank'), findsNothing);
 
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('No account needed to read'));
 
       // Coming back must not have reset the branch.
-      await tapTab(tester, BNavTab.market);
+      await tapTab(tester, BNavTab.ask);
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.textContaining('El Sewedy Electric'), findsOneWidget);
       expect(find.textContaining('Commercial International Bank'), findsNothing);
@@ -113,10 +114,11 @@ void main() {
   });
 
   group('pushed routes', () {
-    testWidgets('Home opens the Opportunity Scanner and comes back', (
+    testWidgets('Today opens the Opportunity Scanner and comes back', (
       tester,
     ) async {
       await boot(tester);
+      await tapTab(tester, BNavTab.today);
 
       // The hero is only tappable once the scanner report has landed. Tap the
       // kicker, which is stable; the headline is now the report's own line.
@@ -126,14 +128,15 @@ void main() {
 
       // Spec: a detail route never moves the app to another tab.
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.home);
+      expect(nav.active, BNavTab.today);
 
       await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded).first);
-      await pumpUntil(tester, find.text('Egyptian equities, unfiltered'));
+      await pumpUntil(tester, find.text('Today'));
     });
 
-    testWidgets('Home opens Cash or Trash', (tester) async {
+    testWidgets('Research opens Cash or Trash', (tester) async {
       await boot(tester);
+      await tapTab(tester, BNavTab.research);
 
       await pumpUntil(tester, find.text('Cash or Trash'));
       // The card sits low enough that a plain tap can land on the floating nav.
@@ -141,15 +144,14 @@ void main() {
       await pumpUntil(tester, find.textContaining('of 224 investigated'));
 
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.home);
+      expect(nav.active, BNavTab.research);
     });
 
-    testWidgets('Market opens a company, keeping the Market slot lit', (
+    testWidgets('Ask opens a company, keeping the Ask slot lit', (
       tester,
     ) async {
       await boot(tester);
 
-      await tapTab(tester, BNavTab.market);
       await pumpUntil(tester, find.byType(TextField));
       await tester.enterText(find.byType(TextField).first, 'COMI');
       await tester.pump();
@@ -163,7 +165,7 @@ void main() {
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
       expect(
         nav.active,
-        BNavTab.market,
+        BNavTab.ask,
         reason: 'opening a company must not move the app to another tab',
       );
     });
@@ -173,7 +175,6 @@ void main() {
     ) async {
       await boot(tester);
 
-      await tapTab(tester, BNavTab.market);
       await pumpUntil(tester, find.byType(TextField));
       await tester.enterText(find.byType(TextField).first, 'COMI');
       await tester.pump();
@@ -190,7 +191,10 @@ void main() {
       expect(find.text('Empty watchlist'), findsNothing);
     });
 
-    testWidgets('the empty-watchlist action moves the app to Market', (
+    // Market stopped being a destination, so this no longer moves the app to
+    // another tab — it pushes the directory onto You's own stack, and You
+    // stays lit. Same rule as every other detail route.
+    testWidgets('the empty-watchlist action opens the directory', (
       tester,
     ) async {
       await boot(tester);
@@ -199,10 +203,10 @@ void main() {
       await pumpUntil(tester, find.text('Empty watchlist'));
 
       await tester.tap(find.text('Browse companies'));
-      await pumpUntil(tester, find.text('Market'));
+      await pumpUntil(tester, find.text('The full directory'));
 
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.market);
+      expect(nav.active, BNavTab.you);
     });
   });
 }

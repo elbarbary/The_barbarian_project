@@ -18,7 +18,7 @@ void main() {
       usePhoneSurface(tester);
       await tester.pumpWidget(
         harness(
-          const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.market),
+          const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today),
           quotes: fakeQuotes({'COMI': 139.25}),
         ),
       );
@@ -54,7 +54,7 @@ void main() {
       addTearDown(tester.view.reset);
       await tester.pumpWidget(
         harness(
-          const MarketScreen(),
+          const MarketScreen(parentTab: BNavTab.ask),
           quotes: fakeQuotes({'COMI': 139.25, 'SWDY': 90.0}),
         ),
       );
