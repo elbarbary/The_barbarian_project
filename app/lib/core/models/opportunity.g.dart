@@ -121,6 +121,7 @@ _ScannedCompany _$ScannedCompanyFromJson(Map<String, dynamic> json) =>
       action: json['action'] == null
           ? null
           : ScanAction.fromJson(json['action'] as Map<String, dynamic>),
+      positionWithheld: json['position_withheld'] as bool? ?? false,
       gates:
           (json['gates'] as List<dynamic>?)
               ?.map((e) => ScanGate.fromJson(e as Map<String, dynamic>))
@@ -158,6 +159,7 @@ Map<String, dynamic> _$ScannedCompanyToJson(_ScannedCompany instance) =>
       'rank': instance.rank,
       'state': instance.state,
       'action': instance.action,
+      'position_withheld': instance.positionWithheld,
       'gates': instance.gates,
       'research': instance.research,
       'tape': instance.tape,

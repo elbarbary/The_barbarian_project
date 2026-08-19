@@ -56,6 +56,16 @@ Future<Map<String, dynamic>> readFixtureObject(String path) async =>
     jsonDecode(await File('assets/fixtures/$path').readAsString())
         as Map<String, dynamic>;
 
+/// The synchronous twin of [readFixtureObject], for widget tests.
+///
+/// `testWidgets` runs its body in a zone with fake time, and awaiting a real
+/// `dart:io` future in there does not always complete — a test that read a
+/// fixture with `await` inside `testWidgets` hung until the runner was killed.
+/// Reading synchronously removes the event loop from the question entirely.
+Map<String, dynamic> readFixtureObjectSync(String path) =>
+    jsonDecode(File('assets/fixtures/$path').readAsStringSync())
+        as Map<String, dynamic>;
+
 /// A ticker whose published document carries no usable price series.
 ///
 /// Read from the fixtures rather than named in a test: which listings are
@@ -264,6 +274,32 @@ Future<void> pumpUntil(
     await tester.pump();
   }
   fail('timed out waiting for: ${finder.describeMatch(Plurality.one)}');
+}
+
+/// [pumpUntil] for a condition that is not "a widget exists".
+///
+/// Some state only settles after a provider the screen watches has resolved —
+/// a row that stops being a link once the directory says its company is gone,
+/// for instance. There is no finder for "has settled", and a fixed pump count
+/// is the same race as everywhere else, so the timeout carries the assertion:
+/// pass the invariant as [reason] and a failure reads as the invariant broken.
+Future<void> pumpUntilTrue(
+  WidgetTester tester,
+  bool Function() done, {
+  required String reason,
+  int rounds = 60,
+}) async {
+  for (var i = 0; i < rounds; i++) {
+    if (done()) {
+      await tester.pump();
+      return;
+    }
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 15)),
+    );
+    await tester.pump();
+  }
+  fail(reason);
 }
 
 /// Pumps a screen and waits for it to have painted something real.

@@ -59,9 +59,14 @@ void main() {
     // has to put them back — otherwise "No holding period — no entry." ships as
     // "No holding period no entry." and every "· volume 1.22× normal" runs on.
     test('keeps the punctuation between clauses it keeps', () {
-      final tape = report.watching.firstWhere((w) => w.tape != null).tape!;
-      expect(tape.detail, contains('·'));
-      expect(tape.detail, isNot(matches(RegExp(r'%\s+volume'))));
+      // Not asserted on any one tape. A tape's second clause is often an entry
+      // print, which the voice gate removes on purpose, so "the first tape
+      // still has a middle dot" is a claim about today's document rather than
+      // about the rejoin. What must never appear is the run-on the missing
+      // separator produced.
+      for (final entry in report.watching) {
+        expect(entry.tape?.detail ?? '', isNot(matches(RegExp(r'%\s+volume'))));
+      }
 
       final preserved = report.outcomes
           .map((o) => o.note ?? '')
@@ -103,10 +108,23 @@ void main() {
       final ranked = report.watching.where((w) => w.rank != null).toList();
       expect(ranked, isNotEmpty, reason: 'the board produced no ranked names');
       for (final entry in ranked) {
+        // A ranked name has a decision, or says why it has none. What it may
+        // never be is silently blank: on 18 August the report's rank-one
+        // decision was "Hold 50 model shares from EGP 92.00", the voice gate
+        // withheld the whole narrative, and a card with a score and no words
+        // is indistinguishable from a parser that has fallen behind.
+        if (entry.positionWithheld) {
+          expect(entry.action, isNull);
+          continue;
+        }
         expect(entry.action, isNotNull, reason: '${entry.ticker} has no action');
         expect(entry.action!.decision, isNotNull);
         expect(entry.action!.reasoning, isNotEmpty);
       }
+      // No assertion that some name survived. A board of one open position is
+      // a real day, and the withheld/blank split above is what actually tells
+      // a gate apart from a parser: a parser that stopped matching the
+      // decision block leaves the flag false and the action null, which fails.
     });
 
     test('the ranked order is the report order', () {

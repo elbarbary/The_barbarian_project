@@ -985,7 +985,14 @@ mixin _$ScannedCompany {
  String? get state;/// The decision the report reached, and why. Every one of these says *not*
 /// to trade, which is the honest headline and what the website now leads
 /// with (spec §8 permits recording the absence of a trade).
- ScanAction? get action;/// What was checked and what it showed — the report's own evidence
+ ScanAction? get action;/// True when the report's own narrative for this name was a model position
+/// — a size, an entry price, a running P&L, a target — and was therefore
+/// withheld at ingestion.
+///
+/// The app says so rather than rendering a card that quietly lost its
+/// reasoning: a missing explanation with no acknowledgement reads as a bug,
+/// and the reason it is missing is worth stating.
+@JsonKey(name: 'position_withheld') bool get positionWithheld;/// What was checked and what it showed — the report's own evidence
 /// checklist. Facts about the past, not conditions for a trade.
  List<ScanGate> get gates;/// The reasoning written out in full, keeping the report's own sections.
 ///
@@ -1006,16 +1013,16 @@ $ScannedCompanyCopyWith<ScannedCompany> get copyWith => _$ScannedCompanyCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&(identical(other.rank, rank) || other.rank == rank)&&(identical(other.state, state) || other.state == state)&&(identical(other.action, action) || other.action == action)&&const DeepCollectionEquality().equals(other.gates, gates)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other.sources, sources));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&(identical(other.rank, rank) || other.rank == rank)&&(identical(other.state, state) || other.state == state)&&(identical(other.action, action) || other.action == action)&&(identical(other.positionWithheld, positionWithheld) || other.positionWithheld == positionWithheld)&&const DeepCollectionEquality().equals(other.gates, gates)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other.sources, sources));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,rank,state,action,const DeepCollectionEquality().hash(gates),const DeepCollectionEquality().hash(research),tape,const DeepCollectionEquality().hash(sources)]);
+int get hashCode => Object.hashAll([runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,rank,state,action,positionWithheld,const DeepCollectionEquality().hash(gates),const DeepCollectionEquality().hash(research),tape,const DeepCollectionEquality().hash(sources)]);
 
 @override
 String toString() {
-  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, rank: $rank, state: $state, action: $action, gates: $gates, research: $research, tape: $tape, sources: $sources)';
+  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, rank: $rank, state: $state, action: $action, positionWithheld: $positionWithheld, gates: $gates, research: $research, tape: $tape, sources: $sources)';
 }
 
 
@@ -1026,7 +1033,7 @@ abstract mixin class $ScannedCompanyCopyWith<$Res>  {
   factory $ScannedCompanyCopyWith(ScannedCompany value, $Res Function(ScannedCompany) _then) = _$ScannedCompanyCopyWithImpl;
 @useResult
 $Res call({
- String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, int? rank, String? state, ScanAction? action, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
+ String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, int? rank, String? state, ScanAction? action,@JsonKey(name: 'position_withheld') bool positionWithheld, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
 });
 
 
@@ -1043,7 +1050,7 @@ class _$ScannedCompanyCopyWithImpl<$Res>
 
 /// Create a copy of ScannedCompany
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? rank = freezed,Object? state = freezed,Object? action = freezed,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? rank = freezed,Object? state = freezed,Object? action = freezed,Object? positionWithheld = null,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
@@ -1060,7 +1067,8 @@ as ScanScores,researchSummary: freezed == researchSummary ? _self.researchSummar
 as String?,rank: freezed == rank ? _self.rank : rank // ignore: cast_nullable_to_non_nullable
 as int?,state: freezed == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
-as ScanAction?,gates: null == gates ? _self.gates : gates // ignore: cast_nullable_to_non_nullable
+as ScanAction?,positionWithheld: null == positionWithheld ? _self.positionWithheld : positionWithheld // ignore: cast_nullable_to_non_nullable
+as bool,gates: null == gates ? _self.gates : gates // ignore: cast_nullable_to_non_nullable
 as List<ScanGate>,research: null == research ? _self.research : research // ignore: cast_nullable_to_non_nullable
 as List<ResearchSection>,tape: freezed == tape ? _self.tape : tape // ignore: cast_nullable_to_non_nullable
 as ScanTape?,sources: null == sources ? _self.sources : sources // ignore: cast_nullable_to_non_nullable
@@ -1182,10 +1190,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action, @JsonKey(name: 'position_withheld')  bool positionWithheld,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScannedCompany() when $default != null:
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.gates,_that.research,_that.tape,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.positionWithheld,_that.gates,_that.research,_that.tape,_that.sources);case _:
   return orElse();
 
 }
@@ -1203,10 +1211,10 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action, @JsonKey(name: 'position_withheld')  bool positionWithheld,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)  $default,) {final _that = this;
 switch (_that) {
 case _ScannedCompany():
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.gates,_that.research,_that.tape,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.positionWithheld,_that.gates,_that.research,_that.tape,_that.sources);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1223,10 +1231,10 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  int score, @JsonKey(name: 'max_score')  int maxScore,  String status, @JsonKey(name: 'status_label')  String? statusLabel, @JsonKey(name: 'seen_at')  String? seenAt, @JsonKey(name: 'move_percent')  String? movePercent,  String? headline,  String? catalyst, @JsonKey(name: 'published_at')  DateTime? publishedAt,  ScanScores scores, @JsonKey(name: 'research_summary')  String? researchSummary,  int? rank,  String? state,  ScanAction? action, @JsonKey(name: 'position_withheld')  bool positionWithheld,  List<ScanGate> gates,  List<ResearchSection> research,  ScanTape? tape,  List<ResearchSource> sources)?  $default,) {final _that = this;
 switch (_that) {
 case _ScannedCompany() when $default != null:
-return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.gates,_that.research,_that.tape,_that.sources);case _:
+return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statusLabel,_that.seenAt,_that.movePercent,_that.headline,_that.catalyst,_that.publishedAt,_that.scores,_that.researchSummary,_that.rank,_that.state,_that.action,_that.positionWithheld,_that.gates,_that.research,_that.tape,_that.sources);case _:
   return null;
 
 }
@@ -1238,7 +1246,7 @@ return $default(_that.ticker,_that.score,_that.maxScore,_that.status,_that.statu
 @JsonSerializable()
 
 class _ScannedCompany extends ScannedCompany {
-  const _ScannedCompany({required this.ticker, this.score = 0, @JsonKey(name: 'max_score') this.maxScore = 13, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'seen_at') this.seenAt, @JsonKey(name: 'move_percent') this.movePercent, this.headline, this.catalyst, @JsonKey(name: 'published_at') this.publishedAt, this.scores = const ScanScores(), @JsonKey(name: 'research_summary') this.researchSummary, this.rank, this.state, this.action, final  List<ScanGate> gates = const <ScanGate>[], final  List<ResearchSection> research = const <ResearchSection>[], this.tape, final  List<ResearchSource> sources = const <ResearchSource>[]}): _gates = gates,_research = research,_sources = sources,super._();
+  const _ScannedCompany({required this.ticker, this.score = 0, @JsonKey(name: 'max_score') this.maxScore = 13, this.status = 'rejected', @JsonKey(name: 'status_label') this.statusLabel, @JsonKey(name: 'seen_at') this.seenAt, @JsonKey(name: 'move_percent') this.movePercent, this.headline, this.catalyst, @JsonKey(name: 'published_at') this.publishedAt, this.scores = const ScanScores(), @JsonKey(name: 'research_summary') this.researchSummary, this.rank, this.state, this.action, @JsonKey(name: 'position_withheld') this.positionWithheld = false, final  List<ScanGate> gates = const <ScanGate>[], final  List<ResearchSection> research = const <ResearchSection>[], this.tape, final  List<ResearchSource> sources = const <ResearchSource>[]}): _gates = gates,_research = research,_sources = sources,super._();
   factory _ScannedCompany.fromJson(Map<String, dynamic> json) => _$ScannedCompanyFromJson(json);
 
 @override final  String ticker;
@@ -1265,6 +1273,14 @@ class _ScannedCompany extends ScannedCompany {
 /// to trade, which is the honest headline and what the website now leads
 /// with (spec §8 permits recording the absence of a trade).
 @override final  ScanAction? action;
+/// True when the report's own narrative for this name was a model position
+/// — a size, an entry price, a running P&L, a target — and was therefore
+/// withheld at ingestion.
+///
+/// The app says so rather than rendering a card that quietly lost its
+/// reasoning: a missing explanation with no acknowledgement reads as a bug,
+/// and the reason it is missing is worth stating.
+@override@JsonKey(name: 'position_withheld') final  bool positionWithheld;
 /// What was checked and what it showed — the report's own evidence
 /// checklist. Facts about the past, not conditions for a trade.
  final  List<ScanGate> _gates;
@@ -1316,16 +1332,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&(identical(other.rank, rank) || other.rank == rank)&&(identical(other.state, state) || other.state == state)&&(identical(other.action, action) || other.action == action)&&const DeepCollectionEquality().equals(other._gates, _gates)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other._sources, _sources));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScannedCompany&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.score, score) || other.score == score)&&(identical(other.maxScore, maxScore) || other.maxScore == maxScore)&&(identical(other.status, status) || other.status == status)&&(identical(other.statusLabel, statusLabel) || other.statusLabel == statusLabel)&&(identical(other.seenAt, seenAt) || other.seenAt == seenAt)&&(identical(other.movePercent, movePercent) || other.movePercent == movePercent)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.catalyst, catalyst) || other.catalyst == catalyst)&&(identical(other.publishedAt, publishedAt) || other.publishedAt == publishedAt)&&(identical(other.scores, scores) || other.scores == scores)&&(identical(other.researchSummary, researchSummary) || other.researchSummary == researchSummary)&&(identical(other.rank, rank) || other.rank == rank)&&(identical(other.state, state) || other.state == state)&&(identical(other.action, action) || other.action == action)&&(identical(other.positionWithheld, positionWithheld) || other.positionWithheld == positionWithheld)&&const DeepCollectionEquality().equals(other._gates, _gates)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.tape, tape) || other.tape == tape)&&const DeepCollectionEquality().equals(other._sources, _sources));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,rank,state,action,const DeepCollectionEquality().hash(_gates),const DeepCollectionEquality().hash(_research),tape,const DeepCollectionEquality().hash(_sources)]);
+int get hashCode => Object.hashAll([runtimeType,ticker,score,maxScore,status,statusLabel,seenAt,movePercent,headline,catalyst,publishedAt,scores,researchSummary,rank,state,action,positionWithheld,const DeepCollectionEquality().hash(_gates),const DeepCollectionEquality().hash(_research),tape,const DeepCollectionEquality().hash(_sources)]);
 
 @override
 String toString() {
-  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, rank: $rank, state: $state, action: $action, gates: $gates, research: $research, tape: $tape, sources: $sources)';
+  return 'ScannedCompany(ticker: $ticker, score: $score, maxScore: $maxScore, status: $status, statusLabel: $statusLabel, seenAt: $seenAt, movePercent: $movePercent, headline: $headline, catalyst: $catalyst, publishedAt: $publishedAt, scores: $scores, researchSummary: $researchSummary, rank: $rank, state: $state, action: $action, positionWithheld: $positionWithheld, gates: $gates, research: $research, tape: $tape, sources: $sources)';
 }
 
 
@@ -1336,7 +1352,7 @@ abstract mixin class _$ScannedCompanyCopyWith<$Res> implements $ScannedCompanyCo
   factory _$ScannedCompanyCopyWith(_ScannedCompany value, $Res Function(_ScannedCompany) _then) = __$ScannedCompanyCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, int? rank, String? state, ScanAction? action, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
+ String ticker, int score,@JsonKey(name: 'max_score') int maxScore, String status,@JsonKey(name: 'status_label') String? statusLabel,@JsonKey(name: 'seen_at') String? seenAt,@JsonKey(name: 'move_percent') String? movePercent, String? headline, String? catalyst,@JsonKey(name: 'published_at') DateTime? publishedAt, ScanScores scores,@JsonKey(name: 'research_summary') String? researchSummary, int? rank, String? state, ScanAction? action,@JsonKey(name: 'position_withheld') bool positionWithheld, List<ScanGate> gates, List<ResearchSection> research, ScanTape? tape, List<ResearchSource> sources
 });
 
 
@@ -1353,7 +1369,7 @@ class __$ScannedCompanyCopyWithImpl<$Res>
 
 /// Create a copy of ScannedCompany
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? rank = freezed,Object? state = freezed,Object? action = freezed,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? score = null,Object? maxScore = null,Object? status = null,Object? statusLabel = freezed,Object? seenAt = freezed,Object? movePercent = freezed,Object? headline = freezed,Object? catalyst = freezed,Object? publishedAt = freezed,Object? scores = null,Object? researchSummary = freezed,Object? rank = freezed,Object? state = freezed,Object? action = freezed,Object? positionWithheld = null,Object? gates = null,Object? research = null,Object? tape = freezed,Object? sources = null,}) {
   return _then(_ScannedCompany(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
@@ -1370,7 +1386,8 @@ as ScanScores,researchSummary: freezed == researchSummary ? _self.researchSummar
 as String?,rank: freezed == rank ? _self.rank : rank // ignore: cast_nullable_to_non_nullable
 as int?,state: freezed == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String?,action: freezed == action ? _self.action : action // ignore: cast_nullable_to_non_nullable
-as ScanAction?,gates: null == gates ? _self._gates : gates // ignore: cast_nullable_to_non_nullable
+as ScanAction?,positionWithheld: null == positionWithheld ? _self.positionWithheld : positionWithheld // ignore: cast_nullable_to_non_nullable
+as bool,gates: null == gates ? _self._gates : gates // ignore: cast_nullable_to_non_nullable
 as List<ScanGate>,research: null == research ? _self._research : research // ignore: cast_nullable_to_non_nullable
 as List<ResearchSection>,tape: freezed == tape ? _self.tape : tape // ignore: cast_nullable_to_non_nullable
 as ScanTape?,sources: null == sources ? _self._sources : sources // ignore: cast_nullable_to_non_nullable

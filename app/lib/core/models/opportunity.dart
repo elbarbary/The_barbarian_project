@@ -156,6 +156,15 @@ abstract class ScannedCompany with _$ScannedCompany {
     /// with (spec §8 permits recording the absence of a trade).
     ScanAction? action,
 
+    /// True when the report's own narrative for this name was a model position
+    /// — a size, an entry price, a running P&L, a target — and was therefore
+    /// withheld at ingestion.
+    ///
+    /// The app says so rather than rendering a card that quietly lost its
+    /// reasoning: a missing explanation with no acknowledgement reads as a bug,
+    /// and the reason it is missing is worth stating.
+    @JsonKey(name: 'position_withheld') @Default(false) bool positionWithheld,
+
     /// What was checked and what it showed — the report's own evidence
     /// checklist. Facts about the past, not conditions for a trade.
     @Default(<ScanGate>[]) List<ScanGate> gates,

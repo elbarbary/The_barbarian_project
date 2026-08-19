@@ -180,12 +180,27 @@ def sanitize(note: str | None) -> str | None:
         if not clause:
             continue
 
+        # Cut a trigger appended to the statement of absence before deciding
+        # whether the clause is allowed — otherwise the allowance carries the
+        # trigger with it.
+        clause = ABSENCE_CONDITION.sub(r"\1", clause).strip()
+
         low = clause.lower()
         allowed = "no holding period" in low or "no entry" in low
         if not allowed:
             if any(word in low for word in BANNED):
                 continue
             if any(p.search(clause) for p in BANNED_PATTERNS):
+                continue
+            # A clause that describes a position goes the same way. Whole-field
+            # stripping is right for a one-line decision; for prose it would
+            # throw away a paragraph over one comma.
+            if any(
+                p.search(clause)
+                and not ("share" in p.search(clause).group(0).lower()
+                         and DESCRIPTIVE_SHARES.search(clause))
+                for p in POSITION_PATTERNS
+            ):
                 continue
 
         # The first surviving clause opens the string, so it takes no
@@ -196,6 +211,17 @@ def sanitize(note: str | None) -> str | None:
     # A clause dropped mid-sentence can leave a dangling connector.
     cleaned = re.sub(r"\s+([.,;:])", r"\1", cleaned)
     cleaned = re.sub(r"[,;:]\s*$", ".", cleaned).strip()
+    if cleaned:
+        # Dropping the opening clause promotes a mid-sentence one to the front,
+        # where it reads as a typo: "Trade 001 realized …; the H1 thesis clock
+        # ended" became "the H1 thesis clock ended". Only done when the note
+        # itself opened with a capital, so a name that is genuinely lowercase —
+        # e-finance is on this exchange — is left alone.
+        if note[:1].isupper() and cleaned[:1].islower():
+            cleaned = cleaned[0].upper() + cleaned[1:]
+        # Cutting a conditional tail takes the full stop with it.
+        if cleaned[-1] not in ".!?":
+            cleaned += "."
     return cleaned or None
 
 
@@ -213,6 +239,133 @@ def _separator(raw: str) -> str:
     return f" {mark} "
 
 
+# ---------------------------------------------------------------- voice gate
+
+# Patterns that describe a POSITION rather than a measurement.
+#
+# The sanitiser above removes forward-looking mechanics — entry triggers, stops,
+# horizons. It did not catch a position, because until 18 August the report only
+# ever published the *absence* of one ("Wait for a wholly new base"). Then it
+# published "Hold 50 model shares from EGP 92.00" as the day's rank-one decision
+# and the whole pipeline carried it through to the app, because nothing in it
+# said "a share count is not a measurement".
+#
+# A size and an entry price is the single most advice-shaped thing this project
+# can publish, so this gate is a build failure rather than a filter: it stops the
+# deploy and says so, instead of quietly editing the founder's words.
+POSITION_PATTERNS = (
+    # A share count is only a position when something owns it. "2,434,272
+    # shares" describing a free float is the most valuable disclosure this app
+    # publishes, and an earlier draft of this gate blocked it — which would have
+    # removed the one fact that catches a BIOC.
+    re.compile(r"\b(hold|holds|holding|bought|buy|buys|sell|sells|sold|own|owns|"
+               r"accumulate|entered|enter|add|added)\b[^.]{0,30}"
+               r"\b\d[\d,]*\s*(model\s+)?shares?\b", re.I),
+    re.compile(r"\b\d[\d,]*\s*model\s+shares?\b", re.I),
+    re.compile(r"\b\d+\s*-\s*share\b[^.]{0,30}\b(buy|sell|entry|position)\b", re.I),
+    # A verb of action tied to a price.
+    re.compile(r"\b(hold|holding|bought|buy|sell|sold|accumulate|entered|entry)\b"
+               r"[^.]{0,40}\bEGP\s*[\d.,]+", re.I),
+    re.compile(r"\bEGP\s*[\d.,]+[^.]{0,30}\b(maximum|limit price|cap|first[- ]print)\b", re.I),
+    # An OPEN model position. "Model trade closed" is a finished record and is
+    # allowed — the record of what happened is the point of the series (spec §7).
+    re.compile(r"\bmodel (trade|position)\b(?![^.]{0,20}\bclosed\b)", re.I),
+    re.compile(r"\bposition (size|sizing)\b", re.I),
+    # A price target, in either word order. The first version of this gate only
+    # matched a keyword AFTER the number, so "The first target is EGP 95.50"
+    # sailed through and was published — the single most clearly forbidden
+    # sentence this project can emit.
+    re.compile(r"\btargets?\b[^.]{0,25}\bEGP\s*[\d.,]+", re.I),
+    re.compile(r"\bEGP\s*[\d.,]+[^.]{0,25}\btargets?\b", re.I),
+    # The model portfolio's own book-keeping. A running P&L on a simulated
+    # account is a track record of positions, not a measurement of a company.
+    re.compile(r"\bmodel (equity|book|portfolio)\b", re.I),
+    re.compile(r"\bsince inception\b", re.I),
+    re.compile(r"\bcash is EGP\b", re.I),
+    re.compile(r"\bno add\b", re.I),
+    re.compile(r"\bmodel (booking|order)\b", re.I),
+    re.compile(r"\bno real order\b", re.I),
+    re.compile(r"\bvalue is EGP\b", re.I),
+    re.compile(r"\bsaved [^.]{0,30}instruction\b", re.I),
+    # A numbered trade and its realised cash result. The outcome row already
+    # carries the percentage — which IS the record of the call, and belongs in
+    # the app. "Trade 001 realized EGP 143.48" is the same result restated as
+    # money, and money divided by a return is a position size.
+    re.compile(r"\btrade\s+#?\d+\b", re.I),
+    re.compile(r"\b(realis|realiz)ed\b[^.]{0,30}\bEGP\s*[\d.,]+", re.I),
+    re.compile(r"\bEGP\s*[\d.,]+[^.]{0,30}\b(realis|realiz)ed\b", re.I),
+)
+
+# A condition appended to a statement of absence.
+#
+# "No entry." is a record and is deliberately kept. "No entry unless the
+# completed close satisfies every saved gate" is an entry trigger wearing the
+# record's clothes — and it reached the app untouched, because the allowance
+# below short-circuits every filter for any clause containing "no entry".
+# The tail is cut rather than the clause dropped: what happened stays, what
+# should happen next does not.
+ABSENCE_CONDITION = re.compile(
+    r"\b(no entry|no holding period)\b\s+"
+    r"(unless|until|provided|pending|once|if|while|so long as|as long as|"
+    r"before|after|subject to)\b.*$",
+    re.I,
+)
+
+# Contexts where a share count is a measurement, not a holding.
+DESCRIPTIVE_SHARES = re.compile(
+    r"\b(free float|float|outstanding|listed|issued|treasury|authorised|authorized|"
+    r"traded|volume|median|capital)\b", re.I)
+
+
+def strip_position(value: str | None) -> str | None:
+    """Drop a string that describes a position rather than a measurement.
+
+    Filtering happens here, at extraction; [voice_gate] is the backstop that
+    fails the build if anything gets past. Same shape as the §8 sanitiser: the
+    filter keeps the app publishable on a day the report opens a model trade,
+    and the gate makes sure a silent failure of the filter is a loud one.
+    """
+    if not value:
+        return value
+    for pattern in POSITION_PATTERNS:
+        if m := pattern.search(value):
+            if "share" in m.group(0).lower() and DESCRIPTIVE_SHARES.search(value):
+                continue
+            return None
+    return value
+
+
+def voice_gate(doc: dict) -> list[str]:
+    """Refuse to publish anything that reads as a position rather than a reading.
+
+    Returns a list of failures. A non-empty list stops the build.
+    """
+    def walk(node, path="doc"):
+        if isinstance(node, str):
+            yield path, node
+        elif isinstance(node, dict):
+            for k, v in node.items():
+                yield from walk(v, f"{path}.{k}")
+        elif isinstance(node, list):
+            for i, v in enumerate(node):
+                yield from walk(v, f"{path}[{i}]")
+
+    problems = []
+    for path, value in walk(doc):
+        for pattern in POSITION_PATTERNS:
+            if m := pattern.search(value):
+                # A share count inside a float or volume sentence is a fact
+                # about the company, not a position taken in it.
+                if "share" in m.group(0).lower() and DESCRIPTIVE_SHARES.search(value):
+                    continue
+                problems.append(
+                    f"position language at {path}: {m.group(0)!r}\n"
+                    f"      in: {value[:120]!r}"
+                )
+                break
+    return problems
+
+
 def signal_cards(html: str) -> dict[str, dict]:
     """The evidence attached to each name on the signal board, keyed by ticker.
 
@@ -227,6 +380,7 @@ def signal_cards(html: str) -> dict[str, dict]:
     `signal-levels`, which this function never touches (spec §8).
     """
     cards: dict[str, dict] = {}
+    cards_dropped_narrative: set[str] = set()
     for block in re.findall(r'<article class="signal-card.*?</article>', html, re.S):
         # The ticker heads the identity block: `<h4>GIHD <small>8/13 …</small></h4>`.
         # Matching the first <strong> instead finds the quoted price, which is
@@ -260,11 +414,35 @@ def signal_cards(html: str) -> dict[str, dict]:
             reasoning = [
                 c for c in (sanitize(text(p)) for p in re.findall(r"<p>(.*?)</p>", a.group(3), re.S)) if c
             ]
+            # Checked BEFORE sanitising, and treated as atomic. Sanitising
+            # first turned "Hold 50 model shares; no add" into "no add" — an
+            # instruction fragment with its subject removed, which is worse than
+            # either the original or nothing.
+            raw_decision = text(a.group(2))
+            is_position_card = strip_position(raw_decision) is None
+            decision = None if is_position_card else sanitize(raw_decision)
+            # When the decision is a position, the reasoning is the position's
+            # rationale — a running P&L, an entry print, a target. Shredding it
+            # clause by clause leaves orphans like "Value is EGP 4,649.00",
+            # which is still the position, just harder to read. The whole
+            # narrative goes; the score, the gates and the tape stay.
             action = {
                 "label": text(a.group(1)),
-                "decision": sanitize(text(a.group(2))),
-                "reasoning": reasoning,
+                "decision": decision,
+                "reasoning": [] if is_position_card
+                             else [r for r in reasoning if strip_position(r)],
             }
+            # Only a card whose narrative was actually withheld. Marking every
+            # card that had an action block made "position_withheld" mean "the
+            # report wrote something here", which is every card on a normal
+            # day — and the app would have said the reasoning was withheld
+            # while printing it directly underneath.
+            if is_position_card:
+                cards_dropped_narrative.add(ticker.group(1))
+            # A card whose only content was a position leaves no action at all,
+            # rather than an empty shell with a label.
+            if not decision and not action["reasoning"]:
+                action = None
 
         # The <dl> mixes evidence with trade plumbing. Only the recognised
         # evidence headings are carried across.
@@ -300,12 +478,12 @@ def signal_cards(html: str) -> dict[str, dict]:
             "tape": {
                 "label": text(quote.group(1)),
                 "price": text(quote.group(2)),
-                "detail": sanitize(text(quote.group(3))),
+                "detail": strip_position(sanitize(text(quote.group(3)))),
             }
             if quote
             else None,
         }
-    return cards
+    return cards, cards_dropped_narrative
 
 
 def sector_context(html: str) -> dict | None:
@@ -484,7 +662,7 @@ def parse(html: str) -> dict:
     if h := re.search(r"<h2[^>]*>\s*(No qualified[^<]*)</h2>", html):
         headline = text(h.group(1))
 
-    cards = signal_cards(html)
+    cards, position_cards = signal_cards(html)
 
     # The scorecard, keyed by ticker. It carries the move since the name was
     # flagged and the one-line summary; the board carries the ranking and the
@@ -540,11 +718,17 @@ def parse(html: str) -> dict:
                 "score": card.get("score") or extra.get("score") or 0,
                 "max_score": card.get("max_score") or extra.get("max_score") or 13,
                 "seen_at": extra.get("seen_at"),
-                "research_summary": extra.get("research_summary"),
+                "research_summary": (
+                None if ticker in position_cards
+                else strip_position(extra.get("research_summary"))
+            ),
                 "move_percent": extra.get("move_percent"),
                 "gates": card.get("gates") or [],
                 "research": card.get("research") or [],
                 "action": card.get("action"),
+                # The app says "we are not repeating this" rather than showing
+                # a card that silently lost its reasoning.
+                "position_withheld": ticker in position_cards,
                 "tape": card.get("tape"),
             }
         )
@@ -635,6 +819,11 @@ def parse(html: str) -> dict:
 def validate(doc: dict, html: str | None = None) -> list[str]:
     problems = []
 
+    # The voice gate runs first: everything else is about completeness, this is
+    # about whether the document is lawful to publish at all.
+    for failure in voice_gate(doc):
+        problems.append(f"VOICE GATE — {failure}")
+
     # Every outcome row on the page must reach the app.
     #
     # An "ARVA / AMII" row — one result covering a pair — matched no single
@@ -664,8 +853,15 @@ def validate(doc: dict, html: str | None = None) -> list[str]:
                 f"page ranks {cards} names but only {ranked} carry a rank — "
                 "the signal board markup has changed"
             )
+        # Zero decisions has two very different causes and only one is a fault.
+        # If the parser found cards but produced no actions, the markup moved
+        # again. If the voice gate deliberately dropped them because every card
+        # on the page was a model position, that is the gate doing its job — and
+        # failing the build there would mean a day the report opens a trade is a
+        # day the app cannot publish at all.
         decided = sum(1 for w in doc["watch"] if w.get("action"))
-        if cards and not decided:
+        dropped = sum(1 for w in doc["watch"] if w.get("position_withheld"))
+        if cards and not decided and not dropped:
             problems.append(
                 "no decisions parsed from the signal board — the action markup "
                 "has changed and the app would show scores with no reasoning"

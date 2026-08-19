@@ -392,6 +392,42 @@ class _ScannedCard extends StatelessWidget {
                 ],
               ),
             ],
+            // When the report's narrative for a name was a model position, say
+            // so. A card that has a score and no reasoning looks broken; a card
+            // that says why the reasoning is absent is doing its job.
+            if (entry.positionWithheld) ...[
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
+                decoration: BoxDecoration(
+                  color: c.hairline,
+                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
+                  border: Border(
+                    left: BorderSide(color: c.textFaint, width: 3),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'NOT REPUBLISHED',
+                      style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "The report's note on this name describes a model "
+                      'position — a size and a price. ESTHMR is not licensed to '
+                      'republish that, so the score and the evidence are here '
+                      'and the position is not.',
+                      style: BarbarianType.bodyM.copyWith(
+                        color: c.textSecondary,
+                        height: 1.45,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             // The decision leads, the way the report itself now leads with it.
             // A reader scanning eight cards wants "wait, and here is why" before
             // they want a score out of thirteen.
@@ -498,19 +534,33 @@ class _ScannedCard extends StatelessWidget {
 
 /// One published result. The return is a record of what happened, not a
 /// forward-looking claim — and a loss is shown exactly like a gain.
-class _OutcomeCard extends StatelessWidget {
+///
+/// The record outlives the listing. MKIT was compulsorily delisted while its
+/// result was still on the board, so its row survives a ticker the exchange no
+/// longer carries — and tapping it opened a company screen that could only fail
+/// to load. A row whose company is not in the directory is shown, and is not a
+/// link: the note already says what happened to it.
+class _OutcomeCard extends ConsumerWidget {
   const _OutcomeCard({required this.outcome, required this.parentTab});
 
   final ScanOutcome outcome;
   final BNavTab parentTab;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final up = outcome.isUp;
+    // Absent only once the directory has actually arrived. While it is still
+    // loading every row would otherwise go dead for a frame, and a link that
+    // appears late reads as a glitch.
+    final directory = ref.watch(companyDirectoryProvider).value?.value;
+    final listed =
+        directory == null || directory.byTicker(outcome.ticker) != null;
 
     return BPressable(
-      onTap: () => context.push(Routes.companyPath(parentTab, outcome.ticker)),
+      onTap: listed
+          ? () => context.push(Routes.companyPath(parentTab, outcome.ticker))
+          : null,
       scale: 0.99,
       child: BPaperCard(
         child: Column(

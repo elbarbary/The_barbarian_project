@@ -1,4 +1,7 @@
 import 'package:barbarian/core/models/cash_or_trash.dart';
+import 'package:barbarian/core/models/company.dart';
+import 'package:barbarian/core/models/opportunity.dart';
+import 'package:barbarian/core/widgets/motion.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/nav.dart';
@@ -177,6 +180,72 @@ void main() {
           reason: '"$banned" must never appear',
         );
       }
+    });
+
+    // A card whose narrative was a model position keeps its score, its gates
+    // and its tape, and loses its words. Rendering that silently produces a
+    // card that looks half-built; the screen says which half is missing and
+    // why, because "the publisher is not licensed to repeat this" is a fact
+    // about the app rather than a fault in it.
+    testWidgets('names the reason a withheld card has no reasoning', (
+      tester,
+    ) async {
+      final report = OpportunityReport.fromJson(
+        readFixtureObjectSync('opportunities/latest.json'),
+      );
+      final withheld = report.watching.where((w) => w.positionWithheld);
+      if (withheld.isEmpty) return; // no open position in today's report
+
+      await pumpScreen(
+        tester,
+        const OpportunityScreen(parentTab: BNavTab.home),
+        until: loaded(),
+      );
+
+      await pumpUntil(tester, find.text(withheld.first.ticker));
+      expect(find.text('NOT REPUBLISHED'), findsWidgets);
+      expect(find.textContaining('not licensed'), findsWidgets);
+    });
+
+    // MKIT was compulsorily delisted while its result was still on the board.
+    // The row stays — deleting a published result is the one thing this series
+    // exists not to do — but it cannot open a company screen that has no
+    // document behind it.
+    testWidgets('a delisted outcome is shown and is not a link', (
+      tester,
+    ) async {
+      final report = OpportunityReport.fromJson(
+        readFixtureObjectSync('opportunities/latest.json'),
+      );
+      final directory = CompanyDirectory.fromJson(
+        readFixtureObjectSync('companies.json'),
+      );
+      final gone = report.outcomes
+          .where((o) => directory.byTicker(o.ticker) == null)
+          .toList();
+      if (gone.isEmpty) return; // every result's company is still listed
+
+      await pumpScreen(
+        tester,
+        const OpportunityScreen(parentTab: BNavTab.home),
+        until: loaded(),
+      );
+      await tapVisible(tester, find.textContaining('Record'));
+      await pumpUntil(tester, find.text(gone.first.ticker));
+
+      final row = find.ancestor(
+        of: find.text(gone.first.ticker),
+        matching: find.byType(BPressable),
+      );
+      expect(row, findsWidgets);
+      // The row is a link until the directory arrives and says otherwise, so
+      // this waits for that answer rather than reading the first frame.
+      await pumpUntilTrue(
+        tester,
+        () => tester.widget<BPressable>(row.first).onTap == null,
+        reason: '${gone.first.ticker} is not in the directory, so its row must '
+            'not offer a company screen that cannot load',
+      );
     });
   });
 

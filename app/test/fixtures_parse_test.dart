@@ -397,13 +397,21 @@ void main() {
           );
         }
       }
-      for (final o in report.outcomes) {
-        expect(
-          directory.byTicker(o.ticker),
-          isNotNull,
-          reason: '${o.ticker} has an outcome but is not in the directory',
-        );
-      }
+      // Outcomes are deliberately not held to this. The record outlives the
+      // listing: MKIT was compulsorily delisted on 13 August while its result
+      // was still on the board, and deleting a published result because the
+      // exchange stopped carrying the share is the one thing this series
+      // exists not to do (spec §7). What must hold is that the row does not
+      // pretend to be a link — see the screen test.
+      final unlisted = report.outcomes
+          .where((o) => directory.byTicker(o.ticker) == null)
+          .map((o) => o.ticker);
+      expect(
+        unlisted.length,
+        lessThan(report.outcomes.length),
+        reason: 'no outcome matched the directory at all — the directory is '
+            'probably empty or the tickers are formatted differently',
+      );
     });
 
     test('the directory covers the whole exchange, not a sample', () {

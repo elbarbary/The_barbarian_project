@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P/E Ratio &amp; EGX Sector Benchmarks — The Barbarian Project</title>
+<meta name="description" content="Understand market cap and P/E in plain English, calculate your own example, and compare every official Egyptian Exchange sector using the latest EGX P/E and dividend-yield table.">
+<meta property="og:title" content="P/E Ratio, Without the Shortcut — Investing 101">
+<meta property="og:description" content="What are you paying for one pound of profit? Learn the calculation, avoid the low-P/E trap, and compare all 18 official EGX sectors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thebarbarianproject.com/pe-ratio-egx.html">
+<meta name="theme-color" content="#F4F3FB">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Instrument+Serif:ital@0;1&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="resource-page pe-resource-page">
+<a class="skip-link" href="#lesson">Skip to the lesson</a>
+
+<div class="canvas" aria-hidden="true">
+  <span class="orb orb-blue"></span>
+  <span class="orb orb-violet"></span>
+  <span class="orb orb-rose"></span>
+  <span class="orb orb-lime"></span>
+  <span class="orb orb-cyan"></span>
+</div>
+<div class="noise" aria-hidden="true"></div>
+<div class="pe-reading-progress" id="peReadingProgress" aria-hidden="true"></div>
+
+<nav class="nav glass" id="nav" aria-label="Resource navigation">
+  <a class="nav-brand" href="index.html"><span class="nav-mark">B</span><span class="nav-word">the barbarian project</span></a>
+  <div class="nav-links">
+    <a class="resource-nav-back nav-sec" href="index.html#guides">← Resources</a>
+    <a class="nav-sec" href="#sector-table">EGX sectors</a>
+    <a class="nav-cta" href="#calculator">Try the calculator</a>
+  </div>
+</nav>
+
+<main class="pe-main" id="lesson">
+  <header class="pe-hero">
+    <div class="shell">
+      <a class="resource-back reveal" href="index.html#guides">← Back to resources</a>
+      <div class="pe-hero-grid">
+        <div class="pe-hero-copy">
+          <p class="pe-series reveal"><span>Investing 101</span> Episode 01</p>
+          <h1 class="reveal">What are you paying<br>for <em>one pound</em> of profit?</h1>
+          <p class="pe-hero-lede reveal">That is the useful version of the P/E ratio. It is a comparison tool—not a verdict, a target price, or a reason to buy by itself.</p>
+          <div class="pe-hero-actions reveal">
+            <a class="btn btn-primary" href="#start">Understand it <span aria-hidden="true">↓</span></a>
+            <a class="pe-text-link" href="#sector-table">Skip to the 18 EGX sectors</a>
+          </div>
+        </div>
+
+        <aside class="pe-question-card reveal" aria-label="The key P/E question">
+          <span>THE WRONG QUESTION</span>
+          <s>Is a low P/E good?</s>
+          <span>THE BETTER QUESTION</span>
+          <strong>Why is this company cheaper than its sector?</strong>
+          <small>The answer—not the ratio—is where the research starts.</small>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <nav class="pe-chapter-rail" aria-label="Lesson sections">
+    <div class="shell">
+      <a href="#start">Start with market cap</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#compare">Compare correctly</a>
+      <a href="#sector-table">18 EGX sectors</a>
+      <a href="#limits">What P/E misses</a>
+    </div>
+  </nav>
+
+  <section class="pe-section" id="start" aria-labelledby="start-h">
+    <div class="shell pe-copy-shell">
+      <div class="pe-section-heading reveal">
+        <p>01 / Before P/E</p>
+        <h2 id="start-h">Start with the value<br>of the whole company.</h2>
+      </div>
+
+      <div class="pe-formula-story reveal">
+        <article class="pe-formula-step">
+          <span>MARKET CAP</span>
+          <div class="pe-equation">
+            <strong>100 million shares</strong>
+            <b>×</b>
+            <strong>EGP 10 per share</strong>
+          </div>
+          <p class="pe-formula-result">= EGP 1 billion</p>
+          <small>Market cap is what the stock market currently says all the company’s shares are worth.</small>
+        </article>
+
+        <div class="pe-formula-arrow" aria-hidden="true">↓</div>
+
+        <article class="pe-formula-step pe-formula-step-dark">
+          <span>P/E RATIO</span>
+          <div class="pe-equation">
+            <strong>EGP 1bn market cap</strong>
+            <b>÷</b>
+            <strong>EGP 100m annual profit</strong>
+          </div>
+          <p class="pe-formula-result">= 10× earnings</p>
+          <small>At that price, you are paying EGP 10 for every EGP 1 the company currently earns in a year.</small>
+        </article>
+      </div>
+
+      <p class="pe-definition reveal"><strong>P/E = Market capitalization ÷ annual earnings.</strong> You can also calculate it as share price ÷ earnings per share. Both routes should lead to the same place when the inputs use the same earnings period and share count.</p>
+    </div>
+  </section>
+
+  <section class="pe-section pe-section-calculator" id="calculator" aria-labelledby="calculator-h">
+    <div class="shell pe-copy-shell">
+      <div class="pe-section-heading reveal">
+        <p>02 / Change the numbers</p>
+        <h2 id="calculator-h">Calculate what the<br>market is asking you to pay.</h2>
+      </div>
+
+      <div class="pe-calculator reveal">
+        <form class="pe-calculator-inputs" id="peCalculator">
+          <label>
+            <span>Shares outstanding</span>
+            <input id="sharesInput" name="shares" type="number" min="0" step="1000000" value="100000000" inputmode="decimal">
+            <small>Total company shares—not the free float.</small>
+          </label>
+          <label>
+            <span>Share price · EGP</span>
+            <input id="priceInput" name="price" type="number" min="0" step="0.01" value="10" inputmode="decimal">
+            <small>Use the price from the same date as your comparison.</small>
+          </label>
+          <label>
+            <span>Annual profit · EGP</span>
+            <input id="profitInput" name="profit" type="number" step="1000000" value="100000000" inputmode="decimal">
+            <small>Prefer attributable, recurring trailing-year earnings.</small>
+          </label>
+        </form>
+
+        <section class="pe-calculator-output" id="peCalculatorOutput" aria-live="polite" aria-label="Calculated result">
+          <span>YOUR RESULT</span>
+          <div>
+            <small>Market cap</small>
+            <strong id="marketCapOutput">EGP 1bn</strong>
+          </div>
+          <div>
+            <small>P/E ratio</small>
+            <strong id="peOutput">10.00×</strong>
+          </div>
+          <p id="meaningOutput">The market asks EGP 10.00 for every EGP 1 of annual profit.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="pe-section" id="compare" aria-labelledby="compare-h">
+    <div class="shell pe-copy-shell">
+      <div class="pe-section-heading reveal">
+        <p>03 / The comparison that matters</p>
+        <h2 id="compare-h">Compare like<br>with like.</h2>
+      </div>
+
+      <div class="pe-compare-layout">
+        <div class="pe-compare-example reveal" aria-label="Example comparison">
+          <div>
+            <span>COMPANY</span>
+            <strong>6×</strong>
+          </div>
+          <div class="pe-versus">vs.</div>
+          <div>
+            <span>ITS SECTOR</span>
+            <strong>10×</strong>
+          </div>
+          <p><b>Possible interpretation:</b> the company may be underpriced—or its earnings may be weaker, riskier or less repeatable than its peers.</p>
+        </div>
+
+        <ol class="pe-checklist reveal">
+          <li><span>1</span><p><strong>Use the same period.</strong> Trailing P/E should be compared with trailing P/E.</p></li>
+          <li><span>2</span><p><strong>Stay inside the sector.</strong> A bank and a school do not deserve the same normal multiple.</p></li>
+          <li><span>3</span><p><strong>Explain the gap.</strong> Check growth, debt, cash flow and whether profit came from normal operations.</p></li>
+          <li><span>4</span><p><strong>Then check the price.</strong> Cheap compared with peers is only useful if the earnings are real and defendable.</p></li>
+        </ol>
+      </div>
+
+      <blockquote class="pe-pullquote reveal">
+        <p>Do not think: <s>low P/E = buy.</s></p>
+        <strong>Think: why is this company cheaper than the rest of its sector?</strong>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="pe-section pe-section-sectors" id="sector-table" aria-labelledby="sectors-h">
+    <div class="shell">
+      <div class="pe-sector-head reveal">
+        <div class="pe-section-heading">
+          <p>04 / The official benchmark</p>
+          <h2 id="sectors-h">Every EGX sector,<br>lowest P/E first.</h2>
+        </div>
+        <div class="pe-snapshot-note">
+          <span>OFFICIAL EGX SNAPSHOT</span>
+          <strong>18 sectors</strong>
+          <small>Collected 15 August 2026 from EGX Market Watch → Stocks → P/E–DY. Ratios move with prices and new financial statements.</small>
+        </div>
+      </div>
+
+      <div class="pe-sector-summary reveal" aria-label="Sector valuation summary">
+        <div><span>Lowest</span><strong>4.64×</strong><small>Banks</small></div>
+        <div><span>Middle sector</span><strong>18.01×</strong><small>Median of the 18 figures</small></div>
+        <div><span>Highest</span><strong>42.24×</strong><small>Education Services</small></div>
+      </div>
+
+      <div class="pe-sector-table-wrap reveal" role="region" aria-label="Official EGX sector P/E and dividend yield table" tabindex="0">
+        <table class="pe-sector-table">
+          <caption>Official Egyptian Exchange sector P/E ratios and dividend yields, sorted from the lowest P/E to the highest.</caption>
+          <thead>
+            <tr><th scope="col">Rank</th><th scope="col">Official EGX sector</th><th scope="col">P/E</th><th scope="col">Dividend yield</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><th scope="row">Banks</th><td><strong>4.64×</strong></td><td>6.67%</td></tr>
+            <tr><td>02</td><th scope="row">Energy &amp; Support Services</th><td><strong>5.42×</strong></td><td>4.19%</td></tr>
+            <tr><td>03</td><th scope="row">Travel &amp; Leisure</th><td><strong>12.19×</strong></td><td>5.99%</td></tr>
+            <tr><td>04</td><th scope="row">Textile &amp; Durables</th><td><strong>13.36×</strong></td><td>5.66%</td></tr>
+            <tr><td>05</td><th scope="row">IT, Media &amp; Communication Services</th><td><strong>13.87×</strong></td><td>3.12%</td></tr>
+            <tr><td>06</td><th scope="row">Basic Resources</th><td><strong>14.11×</strong></td><td>4.87%</td></tr>
+            <tr><td>07</td><th scope="row">Shipping &amp; Transportation Services</th><td><strong>15.18×</strong></td><td>4.40%</td></tr>
+            <tr><td>08</td><th scope="row">Non-bank Financial Services</th><td><strong>15.42×</strong></td><td>2.82%</td></tr>
+            <tr><td>09</td><th scope="row">Industrial Goods, Services &amp; Automobiles</th><td><strong>17.80×</strong></td><td>1.99%</td></tr>
+            <tr><td>10</td><th scope="row">Building Materials</th><td><strong>18.22×</strong></td><td>5.56%</td></tr>
+            <tr><td>11</td><th scope="row">Real Estate</th><td><strong>19.64×</strong></td><td>2.26%</td></tr>
+            <tr><td>12</td><th scope="row">Trade &amp; Distributors</th><td><strong>21.70×</strong></td><td>3.17%</td></tr>
+            <tr><td>13</td><th scope="row">Utilities</th><td><strong>21.87×</strong></td><td>0.83%</td></tr>
+            <tr><td>14</td><th scope="row">Food, Beverages &amp; Tobacco</th><td><strong>26.36×</strong></td><td>2.66%</td></tr>
+            <tr><td>15</td><th scope="row">Health Care &amp; Pharmaceuticals</th><td><strong>27.19×</strong></td><td>2.07%</td></tr>
+            <tr><td>16</td><th scope="row">Contracting &amp; Construction Engineering</th><td><strong>28.26×</strong></td><td>3.18%</td></tr>
+            <tr><td>17</td><th scope="row">Paper &amp; Packaging</th><td><strong>29.23×</strong></td><td><span class="pe-na">Not reported</span></td></tr>
+            <tr><td>18</td><th scope="row">Education Services</th><td><strong>42.24×</strong></td><td>1.36%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pe-table-foot reveal">
+        <p><strong>Read it as a benchmark, not a ranking.</strong> Banks trading at 4.64× does not automatically make every bank attractive, and Education trading at 42.24× does not automatically make every education stock bad.</p>
+        <a href="https://www.egx.com.eg/" target="_blank" rel="noopener">Source: The Egyptian Exchange <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="pe-section" id="limits" aria-labelledby="limits-h">
+    <div class="shell pe-copy-shell">
+      <div class="pe-section-heading reveal">
+        <p>05 / What the ratio hides</p>
+        <h2 id="limits-h">P/E tells you the price.<br>Not the quality.</h2>
+      </div>
+
+      <div class="pe-limit-grid">
+        <article class="reveal"><span>01</span><h3>Profit quality</h3><p>One land sale can make a company look cheap for a year. Separate recurring operations from exceptional gains.</p></article>
+        <article class="reveal"><span>02</span><h3>Growth direction</h3><p>A 6× company with falling earnings may be more expensive than a 15× company whose earnings keep compounding.</p></article>
+        <article class="reveal"><span>03</span><h3>Debt and cash flow</h3><p>Two companies can report the same profit while one is drowning in debt and the other is generating real cash.</p></article>
+        <article class="reveal"><span>04</span><h3>Negative earnings</h3><p>If profit is zero or negative, P/E stops being meaningful. “N/A” is information—not a number to ignore.</p></article>
+      </div>
+
+      <div class="pe-next reveal">
+        <div>
+          <span>INVESTING 101 · NEXT</span>
+          <h2>Free Float</h2>
+          <p>Why the value of a company can stay the same while the small number of shares available to trade makes its price move violently.</p>
+        </div>
+        <strong aria-hidden="true">02</strong>
+      </div>
+
+      <div class="pe-disclaimer reveal">
+        <strong>Research note</strong>
+        <p>I am not telling you to invest. I am explaining one valuation tool. P/E figures change as prices and reported earnings change; verify the current company and sector data before using them.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <p class="foot-line">© 2026 Ahmed Elbarbary — The Barbarian Project</p>
+    <p class="foot-note">Investing 101 · Numbers first, conclusions later.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+(() => {
+  const shares = document.getElementById('sharesInput');
+  const price = document.getElementById('priceInput');
+  const profit = document.getElementById('profitInput');
+  const marketCap = document.getElementById('marketCapOutput');
+  const pe = document.getElementById('peOutput');
+  const meaning = document.getElementById('meaningOutput');
+  const progress = document.getElementById('peReadingProgress');
+  const calculator = document.getElementById('peCalculator');
+
+  const compact = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 2 });
+  const number = new Intl.NumberFormat('en', { maximumFractionDigits: 2 });
+
+  const calculate = () => {
+    const shareCount = Number(shares.value);
+    const sharePrice = Number(price.value);
+    const annualProfit = Number(profit.value);
+    const cap = shareCount * sharePrice;
+
+    marketCap.textContent = Number.isFinite(cap) && cap >= 0 ? `EGP ${compact.format(cap)}` : '—';
+
+    if (!Number.isFinite(cap) || cap < 0 || !Number.isFinite(annualProfit) || annualProfit <= 0) {
+      pe.textContent = 'Not meaningful';
+      meaning.textContent = annualProfit < 0
+        ? 'The company is loss-making, so a conventional P/E ratio cannot describe its valuation.'
+        : 'Annual profit must be above zero before P/E becomes meaningful.';
+      return;
+    }
+
+    const ratio = cap / annualProfit;
+    pe.textContent = `${number.format(ratio)}×`;
+    meaning.textContent = `The market asks EGP ${number.format(ratio)} for every EGP 1 of annual profit.`;
+  };
+
+  [shares, price, profit].forEach((input) => input.addEventListener('input', calculate));
+  calculator.addEventListener('submit', (event) => event.preventDefault());
+  calculate();
+
+  if (progress) {
+    const updateProgress = () => {
+      const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      progress.style.transform = `scaleX(${Math.min(1, Math.max(0, window.scrollY / scrollable))})`;
+    };
+    updateProgress();
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
