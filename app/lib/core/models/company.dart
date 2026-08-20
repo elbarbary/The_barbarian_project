@@ -195,6 +195,17 @@ abstract class FinancialPeriod with _$FinancialPeriod {
     @JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,
     double? capex,
     @JsonKey(name: 'free_cash_flow') double? freeCashFlow,
+
+    /// `consolidated` or `standalone`. Companies file both for the same
+    /// period and the two differ, so a figure shown without its basis is
+    /// ambiguous rather than merely unlabelled.
+    String? basis,
+
+    /// The filing this figure was read from (spec §50). A reported number the
+    /// reader cannot trace back is not worth much more than one we invented —
+    /// which is exactly what was here before.
+    String? source,
+    @JsonKey(name: 'filed_on') String? filedOn,
   }) = _FinancialPeriod;
 
   const FinancialPeriod._();

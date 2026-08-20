@@ -1,0 +1,8225 @@
+{
+ "companies": {
+  "AALR": {
+   "2021": {
+    "assets": 538.292,
+    "equity": -411.336,
+    "liabilities": 949.628,
+    "net_income": -26.537,
+    "operating_cash_flow": -2.618
+   },
+   "2022": {
+    "assets": 562.031,
+    "equity": -441.091,
+    "liabilities": 1003.122,
+    "net_income": -56.793,
+    "operating_cash_flow": -30.278
+   },
+   "2023": {
+    "assets": 565.478,
+    "equity": -471.74,
+    "liabilities": 1037.218,
+    "net_income": -30.18,
+    "operating_cash_flow": 0.45
+   },
+   "2024": {
+    "assets": 585.945,
+    "equity": -473.852,
+    "liabilities": 1059.797,
+    "net_income": 0.056,
+    "operating_cash_flow": 24.81
+   },
+   "2025": {
+    "assets": 603.027,
+    "equity": -503.375,
+    "liabilities": 1106.402
+   }
+  },
+  "ABUK": {
+   "2021": {
+    "assets": 10847.844,
+    "equity": 8360.606,
+    "liabilities": 2487.238,
+    "net_income": 3516.007,
+    "operating_cash_flow": 2577.508
+   },
+   "2022": {
+    "assets": 22372.474,
+    "equity": 17806.395,
+    "liabilities": 4566.079,
+    "net_income": 9054.139,
+    "operating_cash_flow": 9255.082
+   },
+   "2023": {
+    "assets": 35425.015,
+    "equity": 29375.406,
+    "liabilities": 6049.608,
+    "net_income": 14640.225,
+    "operating_cash_flow": 8833.175
+   },
+   "2024": {
+    "assets": 42309.348,
+    "equity": 33121.609,
+    "liabilities": 9187.739,
+    "net_income": 13598.909,
+    "operating_cash_flow": 1006.938
+   },
+   "2025": {
+    "assets": 42219.048,
+    "equity": 32135.052,
+    "liabilities": 10083.996,
+    "net_income": 9352.763,
+    "operating_cash_flow": 3532.539
+   }
+  },
+  "ACAMD": {
+   "2021": {
+    "assets": 176.858,
+    "equity": 142.635,
+    "liabilities": 34.223,
+    "net_income": 8.956,
+    "operating_cash_flow": 15.949
+   },
+   "2022": {
+    "assets": 175.229,
+    "equity": 138.171,
+    "liabilities": 37.058,
+    "net_income": -4.464,
+    "operating_cash_flow": -6.577
+   },
+   "2023": {
+    "assets": 175.566,
+    "equity": 134.732,
+    "liabilities": 40.833,
+    "net_income": 10.595,
+    "operating_cash_flow": 9.448
+   },
+   "2024": {
+    "assets": 261.28,
+    "equity": 94.846,
+    "liabilities": 166.435,
+    "net_income": -14.092,
+    "operating_cash_flow": -21.014
+   },
+   "2025": {
+    "assets": 499.596,
+    "equity": 114.963,
+    "liabilities": 384.633,
+    "net_income": -1.453,
+    "operating_cash_flow": 33.311
+   }
+  },
+  "ACAP": {
+   "2023": {
+    "assets": 5267.835,
+    "equity": 883.806,
+    "liabilities": 4384.029,
+    "net_income": 53.487,
+    "operating_cash_flow": 102.715
+   },
+   "2024": {
+    "assets": 7893.185,
+    "equity": 1026.693,
+    "liabilities": 6866.492,
+    "net_income": 160.431,
+    "operating_cash_flow": 201.715
+   }
+  },
+  "ACGC": {
+   "2020": {
+    "assets": 2833.711,
+    "equity": 1666.087,
+    "liabilities": 1167.624,
+    "net_income": -188.392,
+    "operating_cash_flow": -59.192
+   },
+   "2021": {
+    "assets": 2791.137,
+    "equity": 1982.148,
+    "liabilities": 808.989,
+    "net_income": -23.047,
+    "operating_cash_flow": 348.545
+   },
+   "2022": {
+    "assets": 2918.456,
+    "equity": 1996.458,
+    "liabilities": 921.998,
+    "net_income": 126.925,
+    "operating_cash_flow": 49.697
+   },
+   "2023": {
+    "assets": 3900.063,
+    "equity": 2315.891,
+    "liabilities": 1584.172,
+    "net_income": 280.204,
+    "operating_cash_flow": -360.565
+   },
+   "2024": {
+    "assets": 4145.901,
+    "equity": 2650.124,
+    "liabilities": 1495.777,
+    "net_income": 482.709,
+    "operating_cash_flow": -519.578
+   }
+  },
+  "ACTF": {
+   "2021": {
+    "assets": 450.895,
+    "equity": 263.496,
+    "liabilities": 187.399,
+    "net_income": 25.403,
+    "operating_cash_flow": -19.904
+   },
+   "2022": {
+    "assets": 487.633,
+    "equity": 257.82,
+    "liabilities": 229.812,
+    "net_income": 2.485,
+    "operating_cash_flow": -23.795
+   },
+   "2023": {
+    "assets": 1203.443,
+    "equity": 717.775,
+    "liabilities": 485.668,
+    "net_income": 498.382,
+    "operating_cash_flow": -33.09
+   },
+   "2024": {
+    "assets": 3089.29,
+    "equity": 2056.884,
+    "liabilities": 1032.406,
+    "net_income": 355.339,
+    "operating_cash_flow": 19.708
+   }
+  },
+  "ADCI": {
+   "2020": {
+    "assets": 371.834,
+    "equity": 248.786,
+    "liabilities": 123.048,
+    "net_income": 92.8,
+    "operating_cash_flow": 73.236
+   },
+   "2021": {
+    "assets": 446.267,
+    "equity": 309.633,
+    "liabilities": 136.635,
+    "net_income": 102.039,
+    "operating_cash_flow": 36.579
+   },
+   "2022": {
+    "assets": 573.984,
+    "equity": 340.209,
+    "liabilities": 233.775,
+    "net_income": 76.3,
+    "operating_cash_flow": 32.87
+   },
+   "2023": {
+    "assets": 682.069,
+    "equity": 383.232,
+    "liabilities": 298.836,
+    "net_income": 82.77,
+    "operating_cash_flow": 87.509
+   },
+   "2024": {
+    "assets": 1133.592,
+    "equity": 458.529,
+    "liabilities": 675.063,
+    "net_income": 102.824,
+    "operating_cash_flow": 135.767
+   }
+  },
+  "ADIB": {
+   "2021": {
+    "assets": 90554.612,
+    "equity": 6879.608,
+    "liabilities": 83675.004,
+    "net_income": 1453.132,
+    "operating_cash_flow": 10530.475
+   },
+   "2022": {
+    "assets": 116827.151,
+    "equity": 8903.799,
+    "liabilities": 107923.352,
+    "net_income": 2196.374,
+    "operating_cash_flow": 8753.306
+   },
+   "2023": {
+    "assets": 162254.679,
+    "equity": 14364.448,
+    "liabilities": 147890.231,
+    "net_income": 4670.654,
+    "operating_cash_flow": 36626.459
+   },
+   "2024": {
+    "assets": 260467.106,
+    "equity": 22986.707,
+    "liabilities": 237480.399,
+    "net_income": 9008.528,
+    "operating_cash_flow": 38371.287
+   },
+   "2025": {
+    "assets": 346711.205,
+    "equity": 34634.856,
+    "liabilities": 312076.349,
+    "net_income": 12588.572,
+    "operating_cash_flow": 20536.069
+   }
+  },
+  "ADPC": {
+   "2020": {
+    "assets": 1101.243,
+    "equity": 147.076,
+    "liabilities": 954.167,
+    "net_income": -15.624,
+    "operating_cash_flow": -77.004
+   },
+   "2021": {
+    "assets": 1170.13,
+    "equity": 185.331,
+    "liabilities": 984.799,
+    "net_income": -53.24,
+    "operating_cash_flow": 19.082
+   },
+   "2022": {
+    "assets": 1178.011,
+    "equity": 212.895,
+    "liabilities": 965.116,
+    "net_income": 31.747,
+    "operating_cash_flow": 14.922
+   },
+   "2023": {
+    "assets": 1618.426,
+    "equity": 540.992,
+    "liabilities": 1077.434,
+    "net_income": 122.496,
+    "operating_cash_flow": -16.189
+   },
+   "2024": {
+    "assets": 2254.977,
+    "equity": 526.466,
+    "liabilities": 1728.511,
+    "net_income": 90.53,
+    "operating_cash_flow": 5.854
+   }
+  },
+  "AFDI": {
+   "2021": {
+    "assets": 1244.764,
+    "equity": 271.103,
+    "liabilities": 973.661,
+    "net_income": 10.444,
+    "operating_cash_flow": 19.017
+   },
+   "2022": {
+    "assets": 1568.606,
+    "equity": 266.165,
+    "liabilities": 1302.441,
+    "net_income": 5.081,
+    "operating_cash_flow": -340.767
+   },
+   "2023": {
+    "assets": 1721.12,
+    "equity": 269.344,
+    "liabilities": 1451.776,
+    "net_income": 22.831,
+    "operating_cash_flow": -61.253
+   },
+   "2024": {
+    "assets": 2008.576,
+    "equity": 307.645,
+    "liabilities": 1700.931,
+    "net_income": 32.311,
+    "operating_cash_flow": -95.537
+   },
+   "2025": {
+    "assets": 1360.229,
+    "equity": 323.493,
+    "liabilities": 1036.736,
+    "net_income": 4.206,
+    "operating_cash_flow": 604.308
+   }
+  },
+  "AFMC": {
+   "2021": {
+    "assets": 572.272,
+    "equity": 233.097,
+    "liabilities": 339.175,
+    "net_income": 18.117,
+    "operating_cash_flow": 1.207
+   },
+   "2022": {
+    "assets": 453.705,
+    "equity": 253.471,
+    "liabilities": 200.234,
+    "net_income": 37.026,
+    "operating_cash_flow": 74.28
+   },
+   "2023": {
+    "assets": 472.748,
+    "equity": 264.599,
+    "liabilities": 208.149,
+    "net_income": 41.545,
+    "operating_cash_flow": 43.032
+   },
+   "2024": {
+    "assets": 525.544,
+    "equity": 282.726,
+    "liabilities": 242.818,
+    "net_income": 55.531,
+    "operating_cash_flow": 32.272
+   },
+   "2025": {
+    "assets": 503.974,
+    "equity": 289.488,
+    "liabilities": 214.486,
+    "net_income": 54.165,
+    "operating_cash_flow": -26.565
+   }
+  },
+  "AIFI": {
+   "2019": {
+    "assets": 101.085,
+    "equity": 86.323,
+    "liabilities": 14.762,
+    "net_income": -0.613,
+    "operating_cash_flow": 17.653
+   },
+   "2020": {
+    "assets": 105.685,
+    "equity": 84.973,
+    "liabilities": 20.711,
+    "net_income": -0.572,
+    "operating_cash_flow": -6.886
+   },
+   "2021": {
+    "assets": 125.873,
+    "equity": 81.073,
+    "liabilities": 44.8,
+    "net_income": -4.411,
+    "operating_cash_flow": 11.951
+   },
+   "2022": {
+    "assets": 120.68,
+    "equity": 80.099,
+    "liabilities": 40.581,
+    "net_income": -1.12,
+    "operating_cash_flow": 9.441
+   },
+   "2023": {
+    "assets": 122.675,
+    "equity": 80.393,
+    "liabilities": 42.282,
+    "net_income": -0.277,
+    "operating_cash_flow": 13.167
+   }
+  },
+  "AJWA": {
+   "2019": {
+    "assets": 1996.303,
+    "equity": 733.24,
+    "liabilities": 1263.062,
+    "net_income": -91.218,
+    "operating_cash_flow": -2.254
+   },
+   "2020": {
+    "assets": 2174.296,
+    "equity": 766.528,
+    "liabilities": 1407.768,
+    "net_income": -5.016,
+    "operating_cash_flow": 86.742
+   },
+   "2021": {
+    "assets": 2405.016,
+    "equity": 730.851,
+    "liabilities": 1674.165,
+    "net_income": -11.73,
+    "operating_cash_flow": 61.491
+   },
+   "2022": {
+    "assets": 3210.365,
+    "equity": 1023.638,
+    "liabilities": 2186.726,
+    "net_income": 26.146,
+    "operating_cash_flow": 85.147
+   },
+   "2023": {
+    "assets": 3937.223,
+    "equity": 1298.47,
+    "liabilities": 2638.753,
+    "net_income": 29.74,
+    "operating_cash_flow": 88.036
+   }
+  },
+  "ALCN": {
+   "2021": {
+    "assets": 4960.124,
+    "equity": 4568.698,
+    "liabilities": 391.426,
+    "net_income": 1410.386,
+    "operating_cash_flow": 1466.405
+   },
+   "2022": {
+    "assets": 5589.195,
+    "equity": 5272.382,
+    "liabilities": 316.813,
+    "net_income": 2028.132,
+    "operating_cash_flow": 1341.591
+   },
+   "2023": {
+    "assets": 8228.192,
+    "equity": 7632.269,
+    "liabilities": 595.923,
+    "net_income": 2028.132,
+    "operating_cash_flow": 3902.68
+   },
+   "2024": {
+    "assets": 11456.087,
+    "equity": 10784.921,
+    "liabilities": 671.166,
+    "net_income": 6283.245,
+    "operating_cash_flow": 4212.845
+   },
+   "2025": {
+    "assets": 12313.404,
+    "equity": 10807.268,
+    "liabilities": 1506.136,
+    "net_income": 6627.568,
+    "operating_cash_flow": 4926.623
+   }
+  },
+  "ALEX": {
+   "2015": {
+    "assets": 3200.912,
+    "equity": 317.506,
+    "liabilities": 2883.406,
+    "net_income": -214.099,
+    "operating_cash_flow": 188.518
+   },
+   "2016": {
+    "assets": 3823.683,
+    "equity": -385.609,
+    "liabilities": 4209.292,
+    "net_income": -50.865,
+    "operating_cash_flow": 345.725
+   },
+   "2017": {
+    "assets": 4031.732,
+    "equity": -912.243,
+    "liabilities": 4943.975,
+    "net_income": -513.849,
+    "operating_cash_flow": -59.663
+   },
+   "2018": {
+    "assets": 4794.599,
+    "equity": -40.291,
+    "liabilities": 4834.889,
+    "net_income": -393.812,
+    "operating_cash_flow": -120.733
+   },
+   "2019": {
+    "assets": 4156.052,
+    "equity": -276.599,
+    "liabilities": 4432.651,
+    "net_income": -235.934,
+    "operating_cash_flow": 68.631
+   }
+  },
+  "ALUM": {
+   "2021": {
+    "assets": 266.556,
+    "equity": 95.397,
+    "liabilities": 171.16,
+    "net_income": 20.915,
+    "operating_cash_flow": -54.134
+   },
+   "2022": {
+    "assets": 281.433,
+    "equity": 106.342,
+    "liabilities": 175.091,
+    "net_income": 22.928,
+    "operating_cash_flow": 10.933
+   },
+   "2023": {
+    "assets": 270.768,
+    "equity": 98.227,
+    "liabilities": 172.541,
+    "net_income": 4.069,
+    "operating_cash_flow": 8.848
+   },
+   "2024": {
+    "assets": 304.388,
+    "equity": 112.549,
+    "liabilities": 191.839,
+    "net_income": 18.187,
+    "operating_cash_flow": 1.495
+   },
+   "2025": {
+    "assets": 279.549,
+    "equity": 112.74,
+    "liabilities": 166.808,
+    "net_income": 2.01,
+    "operating_cash_flow": 14.521
+   }
+  },
+  "AMER": {
+   "2020": {
+    "assets": 8316.204,
+    "equity": 1751.183,
+    "liabilities": 6565.021,
+    "net_income": -8.088,
+    "operating_cash_flow": -55.609
+   },
+   "2021": {
+    "assets": 8865.478,
+    "equity": 1647.939,
+    "liabilities": 7217.539,
+    "net_income": 8.448,
+    "operating_cash_flow": 357.729
+   },
+   "2022": {
+    "assets": 9973.386,
+    "equity": 1593.466,
+    "liabilities": 8379.919,
+    "net_income": -194.329,
+    "operating_cash_flow": -243.376
+   },
+   "2023": {
+    "assets": 6749.93,
+    "equity": 1041.36,
+    "liabilities": 5708.57,
+    "net_income": 44.093,
+    "operating_cash_flow": 314.262
+   },
+   "2024": {
+    "assets": 7986.07,
+    "equity": 1129.721,
+    "liabilities": 6856.349,
+    "net_income": 60.221,
+    "operating_cash_flow": 189.158
+   }
+  },
+  "AMIA": {
+   "2020": {
+    "assets": 4991.086,
+    "equity": 874.351,
+    "liabilities": 4116.735,
+    "net_income": 74.509,
+    "operating_cash_flow": -876.674
+   },
+   "2021": {
+    "assets": 4880.193,
+    "equity": 985.495,
+    "liabilities": 3894.698,
+    "net_income": 102.691,
+    "operating_cash_flow": -542.581
+   },
+   "2022": {
+    "assets": 5202.081,
+    "equity": 1043.463,
+    "liabilities": 4158.618,
+    "net_income": 98.715,
+    "operating_cash_flow": 593.042
+   },
+   "2023": {
+    "assets": 5873.417,
+    "equity": 1220.299,
+    "liabilities": 4653.118,
+    "net_income": 160.749,
+    "operating_cash_flow": -750.142
+   },
+   "2024": {
+    "assets": 6752.657,
+    "equity": 1438.23,
+    "liabilities": 5314.427,
+    "net_income": 187.026,
+    "operating_cash_flow": -607.857
+   }
+  },
+  "AMOC": {
+   "2020": {
+    "assets": 2828.909,
+    "equity": 1882.089,
+    "liabilities": 946.82,
+    "net_income": -488.281,
+    "operating_cash_flow": -2023.547
+   },
+   "2021": {
+    "assets": 3807.071,
+    "equity": 2370.718,
+    "liabilities": 1436.353,
+    "net_income": 485.668,
+    "operating_cash_flow": 583.283
+   },
+   "2022": {
+    "assets": 4921.191,
+    "equity": 3253.41,
+    "liabilities": 1667.782,
+    "net_income": 1194.123,
+    "operating_cash_flow": 540.301
+   },
+   "2023": {
+    "assets": 6686.408,
+    "equity": 3983.264,
+    "liabilities": 2703.145,
+    "net_income": 1330.5,
+    "operating_cash_flow": 2328.563
+   },
+   "2024": {
+    "assets": 8386.962,
+    "equity": 4991.505,
+    "liabilities": 3395.457,
+    "net_income": 1699.154,
+    "operating_cash_flow": 648.078
+   }
+  },
+  "AMPI": {
+   "2021": {
+    "assets": 19.025,
+    "equity": 7.937,
+    "liabilities": 11.089,
+    "net_income": 0.749,
+    "operating_cash_flow": 4.298
+   },
+   "2022": {
+    "assets": 20.534,
+    "equity": 8.767,
+    "liabilities": 11.767,
+    "net_income": 0.83,
+    "operating_cash_flow": 0.651
+   },
+   "2023": {
+    "assets": 36.308,
+    "equity": 27.582,
+    "liabilities": 8.726,
+    "net_income": -1.185,
+    "operating_cash_flow": -0.316
+   },
+   "2024": {
+    "net_income": -7.583,
+    "operating_cash_flow": -4.322
+   },
+   "2025": {
+    "assets": 15.864,
+    "equity": 6.982,
+    "liabilities": 8.883,
+    "net_income": -10.937,
+    "operating_cash_flow": -7.097
+   }
+  },
+  "APPC": {
+   "2015": {
+    "assets": 74.155,
+    "equity": 46.774,
+    "liabilities": 27.381,
+    "net_income": -57.463,
+    "operating_cash_flow": -31.722
+   }
+  },
+  "APSW": {
+   "2020": {
+    "assets": 356.189,
+    "equity": 204.953,
+    "liabilities": 151.235,
+    "net_income": -18.666,
+    "operating_cash_flow": 1.878
+   },
+   "2021": {
+    "assets": 358.38,
+    "equity": 190.697,
+    "liabilities": 167.683,
+    "net_income": -11.482,
+    "operating_cash_flow": 1.903
+   },
+   "2022": {
+    "assets": 359.828,
+    "equity": 171.49,
+    "liabilities": 188.338,
+    "net_income": -19.392,
+    "operating_cash_flow": 2.01
+   },
+   "2023": {
+    "assets": 354.482,
+    "equity": 144.177,
+    "liabilities": 210.305,
+    "net_income": -14.914,
+    "operating_cash_flow": 1.393
+   },
+   "2024": {
+    "assets": 368.609,
+    "equity": 119.772,
+    "liabilities": 248.838,
+    "net_income": -24.888,
+    "operating_cash_flow": 1.78
+   }
+  },
+  "ARAB": {
+   "2021": {
+    "assets": 6389.966,
+    "equity": 968.096,
+    "liabilities": 5421.87,
+    "net_income": 91.628,
+    "operating_cash_flow": -224.16
+   },
+   "2022": {
+    "assets": 6803.402,
+    "equity": 1085.576,
+    "liabilities": 5717.826,
+    "net_income": -17.305,
+    "operating_cash_flow": -305.314
+   },
+   "2023": {
+    "assets": 8096.843,
+    "equity": 1285.844,
+    "liabilities": 6810.999,
+    "net_income": 98.47,
+    "operating_cash_flow": -254.358
+   },
+   "2024": {
+    "assets": 10303.057,
+    "equity": 1825.313,
+    "liabilities": 8477.744,
+    "net_income": 92.474,
+    "operating_cash_flow": -273.493
+   },
+   "2025": {
+    "assets": 12716.465,
+    "equity": 2417.453,
+    "liabilities": 10299.011,
+    "net_income": 96.908,
+    "operating_cash_flow": -639.836
+   }
+  },
+  "ARCC": {
+   "2020": {
+    "assets": 2863.182,
+    "equity": 1033.893,
+    "liabilities": 1829.289,
+    "net_income": -122.788,
+    "operating_cash_flow": -198.185
+   },
+   "2021": {
+    "assets": 2972.916,
+    "equity": 1060.974,
+    "liabilities": 1911.941,
+    "net_income": 34.182,
+    "operating_cash_flow": 293.243
+   },
+   "2022": {
+    "assets": 3807.766,
+    "equity": 1163.065,
+    "liabilities": 2644.701,
+    "net_income": 358.986,
+    "operating_cash_flow": 715.941
+   },
+   "2023": {
+    "assets": 3887.527,
+    "equity": 1754.27,
+    "liabilities": 2133.258,
+    "net_income": 697.489,
+    "operating_cash_flow": 641.484
+   },
+   "2024": {
+    "assets": 5848.616,
+    "equity": 2303.526,
+    "liabilities": 3545.09,
+    "net_income": 1160.129,
+    "operating_cash_flow": 1412.143
+   }
+  },
+  "AREH": {
+   "2021": {
+    "assets": 159.141,
+    "equity": 118.77,
+    "liabilities": 40.372,
+    "net_income": -14.367,
+    "operating_cash_flow": -7.482
+   },
+   "2022": {
+    "assets": 161.128,
+    "equity": 120.923,
+    "liabilities": 40.205,
+    "net_income": 12.137,
+    "operating_cash_flow": 2.232
+   },
+   "2023": {
+    "assets": 284.256,
+    "equity": 148.681,
+    "liabilities": 135.575,
+    "net_income": 12.236,
+    "operating_cash_flow": 17.398
+   },
+   "2024": {
+    "assets": 279.543,
+    "equity": 150.817,
+    "liabilities": 128.726,
+    "net_income": 0.428,
+    "operating_cash_flow": 4.031
+   },
+   "2025": {
+    "assets": 269.718,
+    "equity": 117.652,
+    "liabilities": 152.066,
+    "net_income": -39.421,
+    "operating_cash_flow": 3.791
+   }
+  },
+  "ASCM": {
+   "2020": {
+    "assets": 1301.085,
+    "equity": -80.082,
+    "liabilities": 1381.167,
+    "net_income": -70.73,
+    "operating_cash_flow": 62.459
+   },
+   "2021": {
+    "assets": 1360.263,
+    "equity": -171.572,
+    "liabilities": 1531.835,
+    "net_income": -84.926,
+    "operating_cash_flow": 39.231
+   },
+   "2022": {
+    "assets": 2220.241,
+    "equity": -286.409,
+    "liabilities": 2506.65,
+    "net_income": -80.776,
+    "operating_cash_flow": 19.524
+   },
+   "2023": {
+    "assets": 5198.344,
+    "equity": 1516.569,
+    "liabilities": 3681.776,
+    "net_income": 1959.994,
+    "operating_cash_flow": 266.018
+   },
+   "2024": {
+    "assets": 7251.804,
+    "equity": 2140.46,
+    "liabilities": 5111.345,
+    "net_income": -333.692,
+    "operating_cash_flow": -636.538
+   }
+  },
+  "ASPI": {
+   "2020": {
+    "assets": 18837.954,
+    "equity": 9828.392,
+    "liabilities": 9009.563,
+    "net_income": 946.337,
+    "operating_cash_flow": 253.814
+   },
+   "2021": {
+    "assets": 632.961,
+    "equity": 214.779,
+    "liabilities": 418.182,
+    "net_income": 45.233,
+    "operating_cash_flow": -78.544
+   },
+   "2022": {
+    "assets": 1134.822,
+    "equity": 234.43,
+    "liabilities": 900.392,
+    "net_income": 22.362,
+    "operating_cash_flow": 210.03
+   },
+   "2023": {
+    "assets": 1436.97,
+    "equity": 309.613,
+    "liabilities": 1127.357,
+    "net_income": 40.699,
+    "operating_cash_flow": -167.579
+   },
+   "2024": {
+    "assets": 2562.564,
+    "equity": 565.925,
+    "liabilities": 1996.639,
+    "net_income": 67.932,
+    "operating_cash_flow": -159.031
+   }
+  },
+  "ATLC": {
+   "2021": {
+    "assets": 4348.461,
+    "equity": 488.912,
+    "liabilities": 3859.549,
+    "net_income": 134.063,
+    "operating_cash_flow": -500.901
+   },
+   "2022": {
+    "assets": 4652.499,
+    "equity": 592.984,
+    "liabilities": 4059.515,
+    "net_income": 150.135,
+    "operating_cash_flow": 232.637
+   },
+   "2023": {
+    "assets": 5258.355,
+    "equity": 687.295,
+    "liabilities": 4571.059,
+    "net_income": 170.913,
+    "operating_cash_flow": -675.605
+   },
+   "2024": {
+    "assets": 6283.249,
+    "equity": 862.321,
+    "liabilities": 5420.928,
+    "net_income": 216.148,
+    "operating_cash_flow": -805.337
+   },
+   "2025": {
+    "assets": 8326.29,
+    "equity": 1433.024,
+    "liabilities": 6893.265,
+    "net_income": 270.605,
+    "operating_cash_flow": -1656.047
+   }
+  },
+  "ATQA": {
+   "2021": {
+    "assets": 1369.009,
+    "equity": 830.932,
+    "liabilities": 538.076,
+    "net_income": 100.442,
+    "operating_cash_flow": 132.851
+   },
+   "2022": {
+    "assets": 1797.018,
+    "equity": 1043.258,
+    "liabilities": 753.76,
+    "net_income": 234.724,
+    "operating_cash_flow": 666.678
+   },
+   "2023": {
+    "assets": 2468.598,
+    "equity": 1764.172,
+    "liabilities": 704.426,
+    "net_income": 734.861,
+    "operating_cash_flow": -321.418
+   },
+   "2024": {
+    "assets": 4674.913,
+    "equity": 2341.918,
+    "liabilities": 2332.995,
+    "net_income": 577.746,
+    "operating_cash_flow": -2159.542
+   },
+   "2025": {
+    "assets": 4153.631,
+    "equity": 2372.667,
+    "liabilities": 1780.964,
+    "net_income": 30.748,
+    "operating_cash_flow": 1276.922
+   }
+  },
+  "AXPH": {
+   "2020": {
+    "assets": 798.623,
+    "equity": 571.949,
+    "liabilities": 226.673,
+    "net_income": 170.047,
+    "operating_cash_flow": 139.796
+   },
+   "2021": {
+    "assets": 793.495,
+    "equity": 586.201,
+    "liabilities": 207.294,
+    "net_income": 116.996,
+    "operating_cash_flow": 99.422
+   },
+   "2022": {
+    "assets": 875.206,
+    "equity": 630.005,
+    "liabilities": 245.201,
+    "net_income": 117.421,
+    "operating_cash_flow": 192.747
+   },
+   "2023": {
+    "assets": 922.991,
+    "equity": 660.138,
+    "liabilities": 262.853,
+    "net_income": 126.427,
+    "operating_cash_flow": 91.34
+   },
+   "2024": {
+    "assets": 1241.026,
+    "equity": 794.983,
+    "liabilities": 446.043,
+    "net_income": 216.682,
+    "operating_cash_flow": 189.623
+   }
+  },
+  "BIDI": {
+   "2020": {
+    "assets": 7.224,
+    "equity": -0.408,
+    "liabilities": 7.632,
+    "net_income": -2.079,
+    "operating_cash_flow": 1.223
+   },
+   "2021": {
+    "assets": 21.797,
+    "equity": 5.742,
+    "liabilities": 16.055,
+    "net_income": -1.45,
+    "operating_cash_flow": -0.083
+   },
+   "2022": {
+    "assets": 16.41,
+    "equity": 6.355,
+    "liabilities": 10.055,
+    "net_income": 0.612,
+    "operating_cash_flow": -0.084
+   },
+   "2023": {
+    "assets": 16.774,
+    "equity": 6.202,
+    "liabilities": 10.572,
+    "net_income": -0.152,
+    "operating_cash_flow": -0.019
+   },
+   "2024": {
+    "assets": 16.249,
+    "equity": 5.678,
+    "liabilities": 10.572,
+    "net_income": -0.524
+   }
+  },
+  "BIGP": {
+   "2021": {
+    "assets": 48.622,
+    "equity": 20.097,
+    "liabilities": 28.524,
+    "net_income": -1.96,
+    "operating_cash_flow": -1.072
+   },
+   "2022": {
+    "assets": 64.107,
+    "equity": 46.061,
+    "liabilities": 18.046,
+    "net_income": -3.049,
+    "operating_cash_flow": -7.079
+   },
+   "2023": {
+    "assets": 99.847,
+    "equity": 75.825,
+    "liabilities": 24.022,
+    "net_income": -2.781,
+    "operating_cash_flow": 21.4
+   },
+   "2024": {
+    "assets": 53.52,
+    "equity": 30.312,
+    "liabilities": 23.208,
+    "net_income": -54.198,
+    "operating_cash_flow": -14.646
+   },
+   "2025": {
+    "assets": 57.682,
+    "equity": 34.328,
+    "liabilities": 23.355,
+    "net_income": -4.878,
+    "operating_cash_flow": -1.566
+   }
+  },
+  "BINV": {
+   "2020": {
+    "assets": 2269.972,
+    "equity": 2138.245,
+    "liabilities": 131.727,
+    "net_income": 287.905,
+    "operating_cash_flow": 68.23
+   },
+   "2021": {
+    "assets": 2116.958,
+    "equity": 2017.414,
+    "liabilities": 99.543,
+    "net_income": 105.309,
+    "operating_cash_flow": 37.85
+   },
+   "2022": {
+    "assets": 4307.563,
+    "equity": 3061.349,
+    "liabilities": 1246.214,
+    "net_income": 846.19,
+    "operating_cash_flow": 19.386
+   },
+   "2023": {
+    "assets": 3627.683,
+    "equity": 2913.779,
+    "liabilities": 713.905,
+    "net_income": 517.988,
+    "operating_cash_flow": -696.685
+   },
+   "2024": {
+    "assets": 7052.148,
+    "equity": 6411.734,
+    "liabilities": 640.414,
+    "net_income": 1488.331,
+    "operating_cash_flow": -464.932
+   }
+  },
+  "BIOC": {
+   "2021": {
+    "assets": 2424.748,
+    "equity": 1357.962,
+    "liabilities": 1066.786,
+    "net_income": 154.636,
+    "operating_cash_flow": 192.188
+   },
+   "2022": {
+    "assets": 3185.068,
+    "equity": 1728.433,
+    "liabilities": 1456.635,
+    "net_income": 735.379,
+    "operating_cash_flow": -334.793
+   },
+   "2023": {
+    "assets": 3557.923,
+    "equity": 1965.332,
+    "liabilities": 1592.59,
+    "net_income": 60.456,
+    "operating_cash_flow": 302.273
+   },
+   "2024": {
+    "assets": 3652.635,
+    "equity": 1995.555,
+    "liabilities": 1657.079,
+    "net_income": 173.98,
+    "operating_cash_flow": -404.15
+   },
+   "2025": {
+    "assets": 4501.111,
+    "equity": 2217.295,
+    "liabilities": 2283.816,
+    "net_income": 213.226,
+    "operating_cash_flow": 240.831
+   }
+  },
+  "BONY": {
+   "2025": {
+    "assets": 16742.289,
+    "equity": 12251.54,
+    "liabilities": 4490.749,
+    "net_income": 2001.363,
+    "operating_cash_flow": 578.009
+   }
+  },
+  "BTFH": {
+   "2020": {
+    "assets": 1413.898,
+    "equity": 540.057,
+    "liabilities": 873.841,
+    "net_income": -132.424,
+    "operating_cash_flow": -369.886
+   },
+   "2021": {
+    "assets": 1972.837,
+    "equity": 370.746,
+    "liabilities": 1602.09,
+    "net_income": -169.762,
+    "operating_cash_flow": 44.99
+   },
+   "2022": {
+    "assets": 3375.701,
+    "equity": 125.121,
+    "liabilities": 3250.579,
+    "net_income": -268.977,
+    "operating_cash_flow": 18.187
+   },
+   "2023": {
+    "assets": 18241.575,
+    "equity": 10437.438,
+    "liabilities": 7804.137,
+    "net_income": 369.222,
+    "operating_cash_flow": -11107.52
+   },
+   "2024": {
+    "assets": 33747.246,
+    "equity": 12473.24,
+    "liabilities": 21274.006,
+    "net_income": 1702.239,
+    "operating_cash_flow": -10414.476
+   }
+  },
+  "CAED": {
+   "2020": {
+    "assets": 123.416,
+    "equity": 85.095,
+    "liabilities": 38.321,
+    "net_income": 17.689,
+    "operating_cash_flow": 17.052
+   },
+   "2021": {
+    "assets": 139.465,
+    "equity": 91.933,
+    "liabilities": 47.532,
+    "net_income": 19.558,
+    "operating_cash_flow": 12.932
+   },
+   "2022": {
+    "assets": 162.82,
+    "equity": 103.059,
+    "liabilities": 59.76,
+    "net_income": 25.269,
+    "operating_cash_flow": 16.164
+   },
+   "2023": {
+    "assets": 175.941,
+    "equity": 99.503,
+    "liabilities": 76.438,
+    "net_income": 12.857,
+    "operating_cash_flow": 20.695
+   },
+   "2024": {
+    "assets": 190.466,
+    "equity": 94.761,
+    "liabilities": 95.705,
+    "net_income": 11.082,
+    "operating_cash_flow": 17.981
+   }
+  },
+  "CANA": {
+   "2021": {
+    "assets": 57431.259,
+    "equity": 4400.124,
+    "liabilities": 53031.135,
+    "net_income": 604.675,
+    "operating_cash_flow": -1955.617
+   },
+   "2022": {
+    "assets": 74667.477,
+    "equity": 5500.316,
+    "liabilities": 69167.161,
+    "net_income": 1040.039,
+    "operating_cash_flow": -1781.607
+   },
+   "2023": {
+    "assets": 102938.506,
+    "equity": 7813.143,
+    "liabilities": 95125.363,
+    "net_income": 2293.345,
+    "operating_cash_flow": 25456.782
+   },
+   "2024": {
+    "assets": 180190.231,
+    "equity": 13873.001,
+    "liabilities": 166317.23,
+    "net_income": 5681.25,
+    "operating_cash_flow": 14099.075
+   },
+   "2025": {
+    "assets": 270122.16,
+    "equity": 18924.193,
+    "liabilities": 249855.045,
+    "net_income": 6421.407,
+    "operating_cash_flow": 14188.076
+   }
+  },
+  "CCAP": {
+   "2020": {
+    "assets": 81987.522,
+    "equity": 2341.782,
+    "liabilities": 79645.74,
+    "net_income": -2553.121,
+    "operating_cash_flow": 3020.108
+   },
+   "2021": {
+    "assets": 84268.448,
+    "equity": -2374.282,
+    "liabilities": 86642.73,
+    "net_income": -2278.374,
+    "operating_cash_flow": 2745.544
+   },
+   "2022": {
+    "assets": 144882.667,
+    "equity": 22370.796,
+    "liabilities": 122511.871,
+    "net_income": -2287.541,
+    "operating_cash_flow": 12246.889
+   },
+   "2023": {
+    "assets": 160623.188,
+    "equity": 39944.358,
+    "liabilities": 120678.83,
+    "net_income": 6523.12,
+    "operating_cash_flow": 11235.112
+   },
+   "2024": {
+    "assets": 228452.486,
+    "equity": 66999.382,
+    "liabilities": 161453.104,
+    "net_income": 6391.184,
+    "operating_cash_flow": 19439.726
+   }
+  },
+  "CCRS": {
+   "2020": {
+    "assets": 52.223,
+    "equity": 30.532,
+    "liabilities": 21.691,
+    "net_income": -0.981,
+    "operating_cash_flow": -0.093
+   },
+   "2021": {
+    "assets": 30.305,
+    "equity": 28.143,
+    "liabilities": 2.161,
+    "net_income": -2.389,
+    "operating_cash_flow": -0.067
+   },
+   "2022": {
+    "assets": 29.391,
+    "equity": 27.397,
+    "liabilities": 1.994,
+    "net_income": -0.746,
+    "operating_cash_flow": 0.668
+   },
+   "2023": {
+    "assets": 31.686,
+    "equity": 29.583,
+    "liabilities": 2.102,
+    "net_income": 2.186,
+    "operating_cash_flow": 0.436
+   },
+   "2024": {
+    "assets": 31.245,
+    "equity": 28.842,
+    "liabilities": 2.403,
+    "net_income": -0.741,
+    "operating_cash_flow": 3.411
+   }
+  },
+  "CEFM": {
+   "2021": {
+    "assets": 768.195,
+    "equity": 434.354,
+    "liabilities": 333.841,
+    "net_income": 103.415,
+    "operating_cash_flow": 227.357
+   },
+   "2022": {
+    "assets": 845.286,
+    "equity": 459.653,
+    "liabilities": 385.633,
+    "net_income": 110.095,
+    "operating_cash_flow": 108.192
+   },
+   "2023": {
+    "assets": 776.522,
+    "equity": 476.972,
+    "liabilities": 299.55,
+    "net_income": 123.609,
+    "operating_cash_flow": 1.136
+   },
+   "2024": {
+    "assets": 748.026,
+    "equity": 482.892,
+    "liabilities": 265.135,
+    "net_income": 128.824,
+    "operating_cash_flow": -37.693
+   },
+   "2025": {
+    "assets": 907.755,
+    "equity": 502.867,
+    "liabilities": 404.888,
+    "operating_cash_flow": 22.626
+   }
+  },
+  "CERA": {
+   "2021": {
+    "assets": 804.702,
+    "equity": 318.389,
+    "liabilities": 486.313,
+    "net_income": 49.253,
+    "operating_cash_flow": 43.962
+   },
+   "2022": {
+    "assets": 976.623,
+    "equity": 329.465,
+    "liabilities": 647.158,
+    "net_income": 19.499,
+    "operating_cash_flow": 52.11
+   },
+   "2023": {
+    "assets": 1178.107,
+    "equity": 414.177,
+    "liabilities": 763.931,
+    "net_income": 88.046,
+    "operating_cash_flow": 150.593
+   },
+   "2024": {
+    "assets": 1588.014,
+    "equity": 441.606,
+    "liabilities": 1146.407,
+    "net_income": 58.747,
+    "operating_cash_flow": 183.075
+   },
+   "2025": {
+    "assets": 2108.334,
+    "equity": 468.306,
+    "liabilities": 1640.028
+   }
+  },
+  "CFGH": {
+   "2020": {
+    "assets": 411.987,
+    "equity": 94.699,
+    "liabilities": 317.288,
+    "net_income": 15.083,
+    "operating_cash_flow": 11.014
+   },
+   "2021": {
+    "assets": 385.683,
+    "equity": 74.755,
+    "liabilities": 310.928,
+    "net_income": -6.813,
+    "operating_cash_flow": -7.193
+   },
+   "2022": {
+    "assets": 373.873,
+    "equity": 64.722,
+    "liabilities": 309.151,
+    "net_income": -5.475,
+    "operating_cash_flow": 2.358
+   },
+   "2023": {
+    "assets": 350.796,
+    "equity": 32.059,
+    "liabilities": 318.736,
+    "net_income": 11.317,
+    "operating_cash_flow": 15.356
+   },
+   "2024": {
+    "assets": 203.055,
+    "equity": 28.524,
+    "liabilities": 174.531,
+    "net_income": 8.477,
+    "operating_cash_flow": 20.853
+   }
+  },
+  "CICH": {
+   "2020": {
+    "assets": 13790.369,
+    "equity": 4343.851,
+    "liabilities": 9446.518,
+    "net_income": 474.614,
+    "operating_cash_flow": -1259.24
+   },
+   "2021": {
+    "assets": 18501.595,
+    "equity": 3958.932,
+    "liabilities": 14542.663,
+    "net_income": 681.184,
+    "operating_cash_flow": 3540.263
+   },
+   "2022": {
+    "assets": 23847.925,
+    "equity": 4404.369,
+    "liabilities": 19443.557,
+    "net_income": 796.094,
+    "operating_cash_flow": -8392.721
+   },
+   "2023": {
+    "assets": 25403.1,
+    "equity": 5281.207,
+    "liabilities": 20121.893,
+    "net_income": 1040.415,
+    "operating_cash_flow": 1955.577
+   },
+   "2024": {
+    "assets": 32953.643,
+    "equity": 7700.601,
+    "liabilities": 25253.041,
+    "net_income": 2232.879,
+    "operating_cash_flow": -1271.106
+   }
+  },
+  "CIEB": {
+   "2020": {
+    "assets": 51891.762,
+    "equity": 7234.582,
+    "liabilities": 44657.18,
+    "net_income": 1371.264,
+    "operating_cash_flow": 2355.102
+   },
+   "2021": {
+    "assets": 60445.632,
+    "equity": 8660.779,
+    "liabilities": 51784.853,
+    "net_income": 1609.197,
+    "operating_cash_flow": 4220.696
+   },
+   "2022": {
+    "assets": 75366.055,
+    "equity": 9914.148,
+    "liabilities": 65451.907,
+    "net_income": 2417.754,
+    "operating_cash_flow": 9210.456
+   },
+   "2023": {
+    "assets": 106177.532,
+    "equity": 14504.766,
+    "liabilities": 91672.766,
+    "net_income": 5166.371,
+    "operating_cash_flow": 21501.628
+   },
+   "2024": {
+    "assets": 126897.949,
+    "equity": 21446.117,
+    "liabilities": 105451.832,
+    "net_income": 8030.279,
+    "operating_cash_flow": 3208.653
+   }
+  },
+  "CIRA": {
+   "2020": {
+    "assets": 2429.972,
+    "equity": 1102.906,
+    "liabilities": 1327.066,
+    "net_income": 254.765,
+    "operating_cash_flow": 496.753
+   },
+   "2021": {
+    "assets": 4505.338,
+    "equity": 1342.819,
+    "liabilities": 3162.519,
+    "net_income": 308.574,
+    "operating_cash_flow": 1281.0
+   },
+   "2022": {
+    "assets": 6630.769,
+    "equity": 1564.485,
+    "liabilities": 5066.284,
+    "net_income": 370.769,
+    "operating_cash_flow": 1855.4
+   },
+   "2023": {
+    "assets": 7898.085,
+    "equity": 1627.129,
+    "liabilities": 6270.956,
+    "net_income": 125.363,
+    "operating_cash_flow": 1087.124
+   },
+   "2024": {
+    "assets": 9042.231,
+    "equity": 1682.445,
+    "liabilities": 7359.786,
+    "net_income": 70.148,
+    "operating_cash_flow": 1248.369
+   }
+  },
+  "CLHO": {
+   "2021": {
+    "assets": 3432.622,
+    "equity": 2497.817,
+    "liabilities": 934.804,
+    "net_income": 387.245,
+    "operating_cash_flow": 648.155
+   },
+   "2022": {
+    "assets": 3283.369,
+    "equity": 2027.351,
+    "liabilities": 1256.018,
+    "net_income": 325.763,
+    "operating_cash_flow": 435.981
+   },
+   "2023": {
+    "assets": 4488.027,
+    "equity": 2446.25,
+    "liabilities": 2041.777,
+    "net_income": 418.181,
+    "operating_cash_flow": 557.962
+   },
+   "2024": {
+    "assets": 7589.753,
+    "equity": 3177.797,
+    "liabilities": 4411.955,
+    "net_income": 723.347,
+    "operating_cash_flow": 1500.014
+   },
+   "2025": {
+    "net_income": 823.882
+   }
+  },
+  "CNFN": {
+   "2020": {
+    "assets": 4256.868,
+    "equity": 2299.612,
+    "liabilities": 1957.257,
+    "net_income": 352.675,
+    "operating_cash_flow": 587.283
+   },
+   "2021": {
+    "assets": 6323.174,
+    "equity": 2574.62,
+    "liabilities": 3748.554,
+    "net_income": 464.819,
+    "operating_cash_flow": -281.934
+   },
+   "2022": {
+    "assets": 9310.0,
+    "equity": 2803.046,
+    "liabilities": 6506.953,
+    "net_income": 510.713,
+    "operating_cash_flow": -1746.2
+   },
+   "2023": {
+    "assets": 12505.873,
+    "equity": 3112.614,
+    "liabilities": 9393.259,
+    "net_income": 692.208,
+    "operating_cash_flow": -1396.668
+   },
+   "2024": {
+    "assets": 14741.587,
+    "equity": 3906.302,
+    "liabilities": 10835.285,
+    "net_income": 657.668,
+    "operating_cash_flow": 386.738
+   }
+  },
+  "COMI": {
+   "2020": {
+    "assets": 427842.167,
+    "equity": 59958.811,
+    "liabilities": 367883.356,
+    "net_income": 10238.157,
+    "operating_cash_flow": 29185.956
+   },
+   "2021": {
+    "assets": 498235.838,
+    "equity": 69302.737,
+    "liabilities": 428933.101,
+    "net_income": 13272.209,
+    "operating_cash_flow": 31465.793
+   },
+   "2022": {
+    "assets": 635831.917,
+    "equity": 68338.168,
+    "liabilities": 567493.749,
+    "net_income": 16114.388,
+    "operating_cash_flow": 64902.547
+   },
+   "2023": {
+    "assets": 834866.099,
+    "equity": 90641.466,
+    "liabilities": 744224.633,
+    "net_income": 29634.542,
+    "operating_cash_flow": 174305.009
+   },
+   "2024": {
+    "assets": 1214973.261,
+    "equity": 152819.321,
+    "liabilities": 1062153.94,
+    "net_income": 55196.394,
+    "operating_cash_flow": 89764.29
+   }
+  },
+  "COPR": {
+   "2020": {
+    "assets": 53.325,
+    "equity": 33.0,
+    "liabilities": 20.325,
+    "net_income": -2.696,
+    "operating_cash_flow": -0.152
+   },
+   "2021": {
+    "assets": 26.144,
+    "equity": -21.719,
+    "liabilities": 47.863,
+    "net_income": -43.9,
+    "operating_cash_flow": 2.311
+   },
+   "2022": {
+    "assets": 15.836,
+    "equity": -29.097,
+    "liabilities": 44.933,
+    "net_income": -3.915,
+    "operating_cash_flow": -1.518
+   },
+   "2023": {
+    "assets": 93.896,
+    "equity": 77.213,
+    "liabilities": 16.684,
+    "net_income": 2.223,
+    "operating_cash_flow": -97.844
+   },
+   "2024": {
+    "assets": 95.051,
+    "equity": 81.227,
+    "liabilities": 13.825,
+    "net_income": 4.014,
+    "operating_cash_flow": 27.75
+   }
+  },
+  "COSG": {
+   "2020": {
+    "assets": 158.76,
+    "equity": -10.136,
+    "liabilities": 168.896,
+    "net_income": -78.127,
+    "operating_cash_flow": 0.199
+   },
+   "2021": {
+    "assets": 94.322,
+    "equity": -205.354,
+    "liabilities": 299.675,
+    "net_income": -124.133,
+    "operating_cash_flow": -18.41
+   },
+   "2022": {
+    "assets": 180.152,
+    "equity": -65.939,
+    "liabilities": 246.091,
+    "net_income": -55.094,
+    "operating_cash_flow": -181.918
+   },
+   "2023": {
+    "assets": 682.926,
+    "equity": 322.887,
+    "liabilities": 360.039,
+    "net_income": 33.541,
+    "operating_cash_flow": -24.226
+   },
+   "2024": {
+    "assets": 897.037,
+    "equity": 534.642,
+    "liabilities": 362.395,
+    "net_income": 133.755,
+    "operating_cash_flow": -138.174
+   }
+  },
+  "CPCI": {
+   "2021": {
+    "assets": 1068.474,
+    "equity": 703.733,
+    "liabilities": 364.74,
+    "net_income": 124.305,
+    "operating_cash_flow": 162.252
+   },
+   "2022": {
+    "assets": 1168.894,
+    "equity": 793.94,
+    "liabilities": 374.953,
+    "net_income": 165.744,
+    "operating_cash_flow": 51.826
+   },
+   "2023": {
+    "assets": 1261.268,
+    "equity": 686.461,
+    "liabilities": 574.807,
+    "net_income": 97.092,
+    "operating_cash_flow": 88.527
+   },
+   "2024": {
+    "assets": 1515.094,
+    "equity": 832.494,
+    "liabilities": 682.601,
+    "net_income": 246.11,
+    "operating_cash_flow": 262.893
+   },
+   "2025": {
+    "assets": 2026.491,
+    "equity": 1046.505,
+    "liabilities": 979.985,
+    "net_income": 443.721,
+    "operating_cash_flow": 378.723
+   }
+  },
+  "CRST": {
+   "2021": {
+    "assets": 255.43,
+    "equity": 150.326,
+    "liabilities": 105.105,
+    "net_income": 0.859,
+    "operating_cash_flow": -18.172
+   },
+   "2022": {
+    "assets": 255.391,
+    "equity": 150.667,
+    "liabilities": 104.724,
+    "net_income": 0.341,
+    "operating_cash_flow": -4.504
+   },
+   "2023": {
+    "assets": 212.024,
+    "equity": 129.963,
+    "liabilities": 82.061,
+    "net_income": -6.826,
+    "operating_cash_flow": 1.384
+   },
+   "2024": {
+    "assets": 8102.771,
+    "equity": 78.45,
+    "liabilities": 8024.321,
+    "net_income": -51.513,
+    "operating_cash_flow": -12.373
+   },
+   "2025": {
+    "net_income": 77.7,
+    "operating_cash_flow": -4.686
+   }
+  },
+  "CSAG": {
+   "2021": {
+    "assets": 960.649,
+    "equity": 706.488,
+    "liabilities": 254.161,
+    "net_income": 200.192,
+    "operating_cash_flow": 79.172
+   },
+   "2022": {
+    "assets": 844.577,
+    "equity": 607.313,
+    "liabilities": 237.265,
+    "net_income": 179.818,
+    "operating_cash_flow": 213.673
+   },
+   "2023": {
+    "assets": 1274.344,
+    "equity": 871.129,
+    "liabilities": 403.216,
+    "net_income": 364.899,
+    "operating_cash_flow": 139.14
+   },
+   "2024": {
+    "assets": 1719.952,
+    "equity": 1342.065,
+    "liabilities": 377.888,
+    "net_income": 726.37,
+    "operating_cash_flow": 58.116
+   },
+   "2025": {
+    "assets": 2180.09,
+    "equity": 1676.653,
+    "liabilities": 503.437,
+    "net_income": 1024.88,
+    "operating_cash_flow": 26.237
+   }
+  },
+  "DAPH": {
+   "2021": {
+    "assets": 1206.44,
+    "equity": 718.546,
+    "liabilities": 487.895,
+    "net_income": 9.64,
+    "operating_cash_flow": -20.707
+   },
+   "2022": {
+    "assets": 1655.581,
+    "equity": 829.778,
+    "liabilities": 825.803,
+    "net_income": 73.888,
+    "operating_cash_flow": 189.074
+   },
+   "2023": {
+    "assets": 2336.28,
+    "equity": 869.544,
+    "liabilities": 1466.735,
+    "net_income": 24.703,
+    "operating_cash_flow": 68.628
+   },
+   "2024": {
+    "assets": 3965.484,
+    "equity": 921.752,
+    "liabilities": 3043.732,
+    "net_income": 53.117,
+    "operating_cash_flow": -276.306
+   },
+   "2025": {
+    "assets": 1127.765,
+    "equity": 497.489,
+    "liabilities": 630.277,
+    "net_income": 17.946,
+    "operating_cash_flow": 34.134
+   }
+  },
+  "DCRC": {
+   "2018": {
+    "assets": 813.437,
+    "equity": 306.538,
+    "liabilities": 506.899,
+    "net_income": 8.929,
+    "operating_cash_flow": 7.268
+   },
+   "2019": {
+    "assets": 699.455,
+    "equity": 310.013,
+    "liabilities": 389.442,
+    "net_income": 3.475
+   },
+   "2020": {
+    "assets": 626.901,
+    "equity": 316.623,
+    "liabilities": 310.278,
+    "net_income": 6.61,
+    "operating_cash_flow": -37.858
+   },
+   "2021": {
+    "assets": 605.2,
+    "equity": 322.538,
+    "liabilities": 282.663,
+    "net_income": 5.915,
+    "operating_cash_flow": -2.702
+   },
+   "2022": {
+    "assets": 599.364,
+    "equity": 350.006,
+    "liabilities": 249.358,
+    "net_income": 59.757,
+    "operating_cash_flow": 27.834
+   }
+  },
+  "DEIN": {
+   "2020": {
+    "assets": 2420.451,
+    "equity": 637.782,
+    "liabilities": 1782.67,
+    "net_income": 183.395,
+    "operating_cash_flow": 412.899
+   },
+   "2021": {
+    "assets": 2780.548,
+    "equity": 820.147,
+    "liabilities": 1960.401,
+    "net_income": 232.146,
+    "operating_cash_flow": 350.487
+   },
+   "2022": {
+    "assets": 3220.569,
+    "equity": 1001.702,
+    "liabilities": 2218.867,
+    "net_income": 241.122,
+    "operating_cash_flow": 419.125
+   },
+   "2023": {
+    "assets": 3984.658,
+    "equity": 1227.215,
+    "liabilities": 2757.443,
+    "net_income": 380.092,
+    "operating_cash_flow": 769.698
+   },
+   "2024": {
+    "assets": 5077.334,
+    "equity": 1703.635,
+    "liabilities": 3373.699,
+    "net_income": 624.307,
+    "operating_cash_flow": 1052.861
+   }
+  },
+  "DOMT": {
+   "2020": {
+    "assets": 2263.501,
+    "equity": 887.632,
+    "liabilities": 1375.869,
+    "net_income": 157.969,
+    "operating_cash_flow": 202.682
+   },
+   "2021": {
+    "assets": 2561.129,
+    "equity": 858.706,
+    "liabilities": 1702.423,
+    "net_income": 72.424,
+    "operating_cash_flow": -17.764
+   },
+   "2022": {
+    "assets": 3099.116,
+    "equity": 1124.408,
+    "liabilities": 1974.708,
+    "net_income": 265.702,
+    "operating_cash_flow": 272.551
+   },
+   "2023": {
+    "assets": 3609.811,
+    "equity": 1301.047,
+    "liabilities": 2308.764,
+    "net_income": 454.439,
+    "operating_cash_flow": -145.34
+   },
+   "2024": {
+    "assets": 4719.447,
+    "equity": 1616.322,
+    "liabilities": 3103.124,
+    "net_income": 501.18,
+    "operating_cash_flow": 43.321
+   }
+  },
+  "DSCW": {
+   "2021": {
+    "assets": 1819.18,
+    "equity": 400.777,
+    "liabilities": 1418.403,
+    "net_income": 31.829,
+    "operating_cash_flow": 57.503
+   },
+   "2022": {
+    "assets": 2396.507,
+    "equity": 694.439,
+    "liabilities": 1702.069,
+    "net_income": 162.068,
+    "operating_cash_flow": -356.932
+   },
+   "2023": {
+    "assets": 2959.408,
+    "equity": 1034.936,
+    "liabilities": 1924.472,
+    "net_income": 447.802,
+    "operating_cash_flow": 171.965
+   },
+   "2024": {
+    "assets": 5193.709,
+    "equity": 1258.225,
+    "liabilities": 3935.485,
+    "net_income": 900.619,
+    "operating_cash_flow": -598.729
+   },
+   "2025": {
+    "assets": 6990.27,
+    "equity": 1601.621,
+    "liabilities": 5388.649,
+    "net_income": 366.551,
+    "operating_cash_flow": -718.907
+   }
+  },
+  "DTPP": {
+   "2020": {
+    "assets": 230.823,
+    "equity": 135.404,
+    "liabilities": 95.419,
+    "net_income": 37.081,
+    "operating_cash_flow": 19.595
+   },
+   "2021": {
+    "assets": 252.04,
+    "equity": 132.877,
+    "liabilities": 119.163,
+    "net_income": 19.903,
+    "operating_cash_flow": 18.295
+   },
+   "2022": {
+    "assets": 298.182,
+    "equity": 137.173,
+    "liabilities": 161.009,
+    "net_income": 12.919,
+    "operating_cash_flow": 6.401
+   },
+   "2023": {
+    "assets": 379.566,
+    "equity": 155.264,
+    "liabilities": 224.303,
+    "net_income": 25.653,
+    "operating_cash_flow": -9.45
+   },
+   "2024": {
+    "assets": 540.047,
+    "equity": 210.062,
+    "liabilities": 329.985,
+    "net_income": 69.894,
+    "operating_cash_flow": -5.939
+   }
+  },
+  "EALR": {
+   "2020": {
+    "assets": 265.73,
+    "equity": 76.021,
+    "liabilities": 189.71,
+    "net_income": 0.761,
+    "operating_cash_flow": -3.859
+   },
+   "2021": {
+    "assets": 254.891,
+    "equity": 75.682,
+    "liabilities": 179.209,
+    "net_income": 1.266,
+    "operating_cash_flow": -5.444
+   },
+   "2023": {
+    "assets": 292.107,
+    "equity": 70.184,
+    "liabilities": 221.923,
+    "net_income": 3.031,
+    "operating_cash_flow": -4.639
+   },
+   "2024": {
+    "assets": 283.406,
+    "equity": 70.565,
+    "liabilities": 212.841,
+    "net_income": 2.055,
+    "operating_cash_flow": -6.745
+   }
+  },
+  "EASB": {
+   "2020": {
+    "assets": 115.691,
+    "equity": 69.212,
+    "liabilities": 46.479,
+    "net_income": 6.9,
+    "operating_cash_flow": 4.757
+   },
+   "2021": {
+    "assets": 126.294,
+    "equity": 74.826,
+    "liabilities": 51.469,
+    "net_income": 12.034,
+    "operating_cash_flow": 22.397
+   },
+   "2022": {
+    "assets": 164.064,
+    "equity": 82.166,
+    "liabilities": 81.898,
+    "net_income": 16.263,
+    "operating_cash_flow": 9.489
+   },
+   "2023": {
+    "assets": 199.176,
+    "equity": 88.138,
+    "liabilities": 111.037,
+    "net_income": 21.117,
+    "operating_cash_flow": 12.56
+   },
+   "2024": {
+    "assets": 211.77,
+    "equity": 114.081,
+    "liabilities": 97.689,
+    "net_income": 18.504,
+    "operating_cash_flow": 37.884
+   }
+  },
+  "EAST": {
+   "2021": {
+    "assets": 21834.856,
+    "equity": 12299.017,
+    "liabilities": 9535.839,
+    "net_income": 4280.184,
+    "operating_cash_flow": 6913.449
+   },
+   "2022": {
+    "assets": 26743.664,
+    "equity": 12432.556,
+    "liabilities": 14311.108,
+    "net_income": 4029.941,
+    "operating_cash_flow": 8076.854
+   },
+   "2023": {
+    "assets": 26300.761,
+    "equity": 16116.399,
+    "liabilities": 10184.362,
+    "net_income": 7656.987,
+    "operating_cash_flow": 3807.782
+   },
+   "2024": {
+    "assets": 32864.916,
+    "equity": 16169.116,
+    "liabilities": 16695.8,
+    "net_income": 9181.481,
+    "operating_cash_flow": 10880.978
+   },
+   "2025": {
+    "assets": 43595.915,
+    "equity": 16704.396,
+    "liabilities": 26891.519,
+    "net_income": 9710.655,
+    "operating_cash_flow": -23645.362
+   }
+  },
+  "EBSC": {
+   "2021": {
+    "assets": 118.004,
+    "equity": 52.848,
+    "liabilities": 65.155,
+    "net_income": 2.255,
+    "operating_cash_flow": 29.444
+   },
+   "2022": {
+    "assets": 87.663,
+    "equity": 57.667,
+    "liabilities": 29.996,
+    "net_income": 2.509,
+    "operating_cash_flow": -33.888
+   },
+   "2023": {
+    "assets": 99.998,
+    "equity": 63.286,
+    "liabilities": 36.712,
+    "net_income": 5.619,
+    "operating_cash_flow": 5.34
+   },
+   "2024": {
+    "assets": 111.713,
+    "equity": 77.135,
+    "liabilities": 34.578,
+    "net_income": 13.763,
+    "operating_cash_flow": -8.323
+   },
+   "2025": {
+    "assets": 252.537,
+    "equity": 198.367,
+    "liabilities": 54.17,
+    "net_income": 16.775,
+    "operating_cash_flow": -23.607
+   }
+  },
+  "ECAP": {
+   "2021": {
+    "assets": 1673.369,
+    "equity": 542.065,
+    "liabilities": 1131.304,
+    "net_income": 107.24,
+    "operating_cash_flow": 135.809
+   },
+   "2022": {
+    "assets": 2089.684,
+    "equity": 652.076,
+    "liabilities": 1437.608,
+    "net_income": 171.124,
+    "operating_cash_flow": 197.683
+   },
+   "2023": {
+    "assets": 2384.564,
+    "equity": 770.362,
+    "liabilities": 1614.202,
+    "net_income": 219.514,
+    "operating_cash_flow": -48.65
+   },
+   "2024": {
+    "assets": 3113.524,
+    "equity": 652.222,
+    "liabilities": 2461.302,
+    "net_income": 74.762,
+    "operating_cash_flow": -456.503
+   },
+   "2025": {
+    "assets": 3217.463,
+    "equity": 563.433,
+    "liabilities": 2654.029,
+    "net_income": -88.788,
+    "operating_cash_flow": -491.603
+   }
+  },
+  "EDFM": {
+   "2021": {
+    "assets": 1181.354,
+    "equity": 372.323,
+    "liabilities": 809.031,
+    "net_income": 127.192,
+    "operating_cash_flow": 110.989
+   },
+   "2022": {
+    "assets": 1153.485,
+    "equity": 407.21,
+    "liabilities": 746.275,
+    "net_income": 128.879,
+    "operating_cash_flow": 110.951
+   },
+   "2023": {
+    "assets": 1013.736,
+    "equity": 446.173,
+    "liabilities": 567.563,
+    "net_income": 148.086,
+    "operating_cash_flow": 187.831
+   },
+   "2024": {
+    "assets": 1141.477,
+    "equity": 490.407,
+    "liabilities": 651.07,
+    "net_income": 176.586,
+    "operating_cash_flow": 173.408
+   },
+   "2025": {
+    "assets": 1534.628,
+    "equity": 507.232,
+    "liabilities": 1027.396,
+    "net_income": 183.372,
+    "operating_cash_flow": 194.372
+   }
+  },
+  "EEII": {
+   "2020": {
+    "assets": 115.14,
+    "equity": 82.463,
+    "liabilities": 32.676,
+    "net_income": 7.294,
+    "operating_cash_flow": -10.21
+   },
+   "2021": {
+    "assets": 155.739,
+    "equity": 94.202,
+    "liabilities": 61.537,
+    "net_income": 12.743,
+    "operating_cash_flow": 12.093
+   },
+   "2022": {
+    "assets": 160.658,
+    "equity": 108.122,
+    "liabilities": 52.536,
+    "net_income": 15.597,
+    "operating_cash_flow": 27.556
+   },
+   "2023": {
+    "assets": 254.363,
+    "equity": 154.136,
+    "liabilities": 100.227,
+    "net_income": 48.412,
+    "operating_cash_flow": 37.855
+   },
+   "2024": {
+    "assets": 355.998,
+    "equity": 180.902,
+    "liabilities": 175.096,
+    "net_income": 41.556,
+    "operating_cash_flow": 10.836
+   }
+  },
+  "EFIC": {
+   "2021": {
+    "assets": 2844.602,
+    "equity": 1567.76,
+    "liabilities": 1276.842,
+    "net_income": 303.983,
+    "operating_cash_flow": 585.049
+   },
+   "2022": {
+    "assets": 4613.094,
+    "equity": 2116.84,
+    "liabilities": 2496.254,
+    "net_income": 755.392,
+    "operating_cash_flow": 187.437
+   },
+   "2023": {
+    "assets": 5524.646,
+    "equity": 2353.792,
+    "liabilities": 3170.853,
+    "net_income": 699.898,
+    "operating_cash_flow": 368.426
+   },
+   "2024": {
+    "assets": 8953.174,
+    "equity": 3485.327,
+    "liabilities": 5467.847,
+    "net_income": 1748.871,
+    "operating_cash_flow": 1017.78
+   },
+   "2025": {
+    "assets": 11768.859,
+    "equity": 3035.583,
+    "liabilities": 8733.276,
+    "net_income": 818.962,
+    "operating_cash_flow": -1078.653
+   }
+  },
+  "EFID": {
+   "2020": {
+    "assets": 3779.143,
+    "equity": 1815.992,
+    "liabilities": 1963.151,
+    "net_income": 347.72,
+    "operating_cash_flow": 400.44
+   },
+   "2021": {
+    "assets": 4223.477,
+    "equity": 2111.669,
+    "liabilities": 2111.808,
+    "net_income": 528.74,
+    "operating_cash_flow": 382.818
+   },
+   "2022": {
+    "assets": 5789.886,
+    "equity": 2716.978,
+    "liabilities": 3072.908,
+    "net_income": 1025.697,
+    "operating_cash_flow": 864.056
+   },
+   "2023": {
+    "assets": 7743.343,
+    "equity": 3447.947,
+    "liabilities": 4295.396,
+    "net_income": 1631.795,
+    "operating_cash_flow": 1068.269
+   },
+   "2024": {
+    "assets": 10241.538,
+    "equity": 4157.569,
+    "liabilities": 6083.969,
+    "net_income": 1633.729,
+    "operating_cash_flow": 967.251
+   }
+  },
+  "EFIH": {
+   "2021": {
+    "assets": 5043.926,
+    "equity": 3943.539,
+    "liabilities": 1100.387,
+    "net_income": 519.739,
+    "operating_cash_flow": 248.767
+   },
+   "2022": {
+    "assets": 5934.787,
+    "equity": 4630.816,
+    "liabilities": 1303.972,
+    "net_income": 803.924,
+    "operating_cash_flow": 592.654
+   },
+   "2023": {
+    "assets": 7635.049,
+    "equity": 5600.061,
+    "liabilities": 2034.988,
+    "net_income": 1257.706,
+    "operating_cash_flow": 295.654
+   },
+   "2024": {
+    "assets": 9058.029,
+    "equity": 6836.726,
+    "liabilities": 2221.303,
+    "net_income": 1775.989,
+    "operating_cash_flow": 571.185
+   },
+   "2025": {
+    "assets": 11903.521,
+    "equity": 8782.865,
+    "liabilities": 3120.656,
+    "net_income": 2405.402,
+    "operating_cash_flow": 1685.458
+   }
+  },
+  "EGAL": {
+   "2021": {
+    "assets": 9817.751,
+    "equity": 5252.769,
+    "liabilities": 4564.982,
+    "net_income": 25.403,
+    "operating_cash_flow": 2010.534
+   },
+   "2022": {
+    "assets": 12985.639,
+    "equity": 7751.937,
+    "liabilities": 5233.702,
+    "net_income": 2501.439,
+    "operating_cash_flow": -1195.147
+   },
+   "2023": {
+    "assets": 17816.439,
+    "equity": 9314.549,
+    "liabilities": 8501.891,
+    "net_income": 3691.337,
+    "operating_cash_flow": 1496.935
+   },
+   "2024": {
+    "assets": 20492.509,
+    "equity": 15566.404,
+    "liabilities": 4926.105,
+    "net_income": 9324.234,
+    "operating_cash_flow": 11176.487
+   },
+   "2025": {
+    "assets": 29337.064,
+    "equity": 22373.759,
+    "liabilities": 6963.306,
+    "net_income": 10185.59,
+    "operating_cash_flow": 4661.412
+   }
+  },
+  "EGAS": {
+   "2020": {
+    "assets": 7906.255,
+    "equity": 2260.924,
+    "liabilities": 5645.331,
+    "net_income": 84.666,
+    "operating_cash_flow": 130.745
+   },
+   "2021": {
+    "assets": 8863.978,
+    "equity": 2346.764,
+    "liabilities": 6517.214,
+    "net_income": 165.829,
+    "operating_cash_flow": 190.029
+   },
+   "2022": {
+    "assets": 12924.597,
+    "equity": 3893.47,
+    "liabilities": 9031.127,
+    "net_income": 301.967,
+    "operating_cash_flow": -1057.566
+   },
+   "2023": {
+    "assets": 14344.763,
+    "equity": 4094.826,
+    "liabilities": 10253.548,
+    "net_income": 170.598,
+    "operating_cash_flow": -39.013
+   },
+   "2024": {
+    "assets": 16271.357,
+    "equity": 4488.295,
+    "liabilities": 11783.062,
+    "net_income": 290.961,
+    "operating_cash_flow": -244.001
+   }
+  },
+  "EGBE": {
+   "2020": {
+    "assets": 71925.297,
+    "equity": 5458.899,
+    "liabilities": 66466.397,
+    "net_income": 624.882,
+    "operating_cash_flow": 8466.62
+   },
+   "2021": {
+    "assets": 80181.383,
+    "equity": 5720.905,
+    "liabilities": 74460.479,
+    "net_income": 695.337,
+    "operating_cash_flow": 7821.319
+   },
+   "2022": {
+    "assets": 86737.563,
+    "equity": 5301.982,
+    "liabilities": 81435.581,
+    "net_income": 845.833,
+    "operating_cash_flow": 7783.047
+   },
+   "2023": {
+    "assets": 97490.016,
+    "equity": 7438.052,
+    "liabilities": 90051.965,
+    "net_income": 1476.689,
+    "operating_cash_flow": -3504.316
+   },
+   "2024": {
+    "assets": 137955.734,
+    "equity": 9572.611,
+    "liabilities": 128383.123,
+    "net_income": 2576.01,
+    "operating_cash_flow": 15028.012
+   }
+  },
+  "EGCH": {
+   "2020": {
+    "assets": 13205.983,
+    "equity": 3922.13,
+    "liabilities": 9283.853,
+    "net_income": -1350.1,
+    "operating_cash_flow": 794.361
+   },
+   "2021": {
+    "assets": 12648.296,
+    "equity": 2670.295,
+    "liabilities": 9978.001,
+    "net_income": -1424.415,
+    "operating_cash_flow": 197.2
+   },
+   "2022": {
+    "assets": 13801.769,
+    "equity": 4891.229,
+    "liabilities": 8910.54,
+    "net_income": 651.486,
+    "operating_cash_flow": 1184.728
+   },
+   "2023": {
+    "assets": 18727.84,
+    "equity": 7249.636,
+    "liabilities": 11478.204,
+    "net_income": 1150.767,
+    "operating_cash_flow": 2749.7
+   },
+   "2024": {
+    "assets": 29161.022,
+    "equity": 14560.104,
+    "liabilities": 14600.918,
+    "net_income": 2537.934,
+    "operating_cash_flow": 2292.475
+   }
+  },
+  "EGSA": {
+   "2021": {
+    "assets": 614.96,
+    "equity": 585.453,
+    "liabilities": 29.508,
+    "net_income": 30.754,
+    "operating_cash_flow": 25.412
+   },
+   "2022": {
+    "assets": 649.888,
+    "equity": 604.226,
+    "liabilities": 45.662,
+    "net_income": 38.967,
+    "operating_cash_flow": 57.276
+   },
+   "2023": {
+    "assets": 660.889,
+    "equity": 622.907,
+    "liabilities": 37.981,
+    "net_income": 43.754,
+    "operating_cash_flow": 42.325
+   },
+   "2024": {
+    "assets": 688.312,
+    "equity": 656.147,
+    "liabilities": 32.164,
+    "net_income": 57.682,
+    "operating_cash_flow": 65.302
+   },
+   "2025": {
+    "assets": 727.566,
+    "equity": 693.894,
+    "liabilities": 33.672,
+    "operating_cash_flow": 66.746
+   }
+  },
+  "EGTS": {
+   "2020": {
+    "assets": 2324.324,
+    "equity": 759.79,
+    "liabilities": 1564.533,
+    "net_income": -45.485,
+    "operating_cash_flow": 0.76
+   },
+   "2021": {
+    "assets": 2277.509,
+    "equity": 755.305,
+    "liabilities": 1522.204,
+    "net_income": -6.775,
+    "operating_cash_flow": -13.288
+   },
+   "2022": {
+    "assets": 2398.172,
+    "equity": 441.507,
+    "liabilities": 1956.665,
+    "net_income": 113.89,
+    "operating_cash_flow": 75.992
+   },
+   "2023": {
+    "assets": 2943.99,
+    "equity": 328.929,
+    "liabilities": 2615.061,
+    "net_income": -81.586,
+    "operating_cash_flow": 12.775
+   },
+   "2024": {
+    "assets": 3827.515,
+    "equity": 679.986,
+    "liabilities": 3147.529,
+    "net_income": 204.751,
+    "operating_cash_flow": 182.06
+   }
+  },
+  "EHDR": {
+   "2021": {
+    "assets": 851.606,
+    "equity": 651.515,
+    "liabilities": 200.091,
+    "net_income": 38.71,
+    "operating_cash_flow": 1.694
+   },
+   "2022": {
+    "assets": 822.896,
+    "equity": 472.936,
+    "liabilities": 349.96,
+    "net_income": 16.621,
+    "operating_cash_flow": 35.576
+   },
+   "2023": {
+    "assets": 778.687,
+    "equity": 528.881,
+    "liabilities": 249.806,
+    "net_income": 58.079,
+    "operating_cash_flow": 10.461
+   },
+   "2024": {
+    "assets": 836.546,
+    "equity": 644.344,
+    "liabilities": 192.202,
+    "net_income": 65.295,
+    "operating_cash_flow": 113.531
+   },
+   "2025": {
+    "assets": 953.437,
+    "equity": 708.611,
+    "liabilities": 244.826,
+    "operating_cash_flow": 131.309
+   }
+  },
+  "ELEC": {
+   "2020": {
+    "assets": 2399.055,
+    "equity": 1076.525,
+    "liabilities": 1322.53,
+    "net_income": 133.506,
+    "operating_cash_flow": -203.617
+   },
+   "2021": {
+    "assets": 3505.787,
+    "equity": 1326.073,
+    "liabilities": 2179.714,
+    "net_income": 224.626,
+    "operating_cash_flow": -641.233
+   },
+   "2022": {
+    "assets": 4963.226,
+    "equity": 1630.305,
+    "liabilities": 3332.92,
+    "net_income": 542.247,
+    "operating_cash_flow": 22.099
+   },
+   "2023": {
+    "assets": 8901.334,
+    "equity": 2730.296,
+    "liabilities": 6171.038,
+    "net_income": 1248.002,
+    "operating_cash_flow": -493.21
+   },
+   "2024": {
+    "assets": 14974.828,
+    "equity": 3638.578,
+    "liabilities": 11336.25,
+    "net_income": 1327.777,
+    "operating_cash_flow": -3322.591
+   }
+  },
+  "ELKA": {
+   "2020": {
+    "assets": 5701.303,
+    "equity": 2386.846,
+    "liabilities": 3314.457,
+    "net_income": 210.459,
+    "operating_cash_flow": 316.706
+   },
+   "2021": {
+    "assets": 5924.948,
+    "equity": 3202.717,
+    "liabilities": 2722.231,
+    "net_income": -74.925,
+    "operating_cash_flow": 22.439
+   },
+   "2022": {
+    "assets": 2820.512,
+    "equity": 1241.321,
+    "liabilities": 1579.191,
+    "net_income": 106.975,
+    "operating_cash_flow": -283.806
+   },
+   "2023": {
+    "assets": 3192.322,
+    "equity": 1091.299,
+    "liabilities": 2101.023,
+    "net_income": 184.445,
+    "operating_cash_flow": 206.681
+   },
+   "2024": {
+    "assets": 8248.203,
+    "equity": 5205.041,
+    "liabilities": 3043.161,
+    "net_income": 1176.277,
+    "operating_cash_flow": 269.908
+   }
+  },
+  "ELNA": {
+   "2020": {
+    "assets": 72.474,
+    "equity": 44.302,
+    "liabilities": 28.171,
+    "net_income": -8.56,
+    "operating_cash_flow": -1.768
+   },
+   "2021": {
+    "assets": 67.593,
+    "equity": 40.138,
+    "liabilities": 27.455,
+    "net_income": -4.254,
+    "operating_cash_flow": -0.302
+   },
+   "2022": {
+    "assets": 66.71,
+    "equity": 34.763,
+    "liabilities": 31.947,
+    "net_income": -5.374,
+    "operating_cash_flow": -0.222
+   },
+   "2023": {
+    "assets": 66.067,
+    "equity": 30.637,
+    "liabilities": 35.43,
+    "net_income": -4.126,
+    "operating_cash_flow": 0.068
+   },
+   "2024": {
+    "assets": 65.289,
+    "equity": 28.065,
+    "liabilities": 37.225,
+    "net_income": -2.631,
+    "operating_cash_flow": -0.26
+   }
+  },
+  "ELSH": {
+   "2020": {
+    "assets": 1480.944,
+    "equity": 638.434,
+    "liabilities": 842.511,
+    "net_income": 149.675,
+    "operating_cash_flow": 7.199
+   },
+   "2021": {
+    "assets": 1484.319,
+    "equity": 663.249,
+    "liabilities": 821.07,
+    "net_income": 83.845,
+    "operating_cash_flow": 30.208
+   },
+   "2022": {
+    "assets": 1377.889,
+    "equity": 754.88,
+    "liabilities": 623.01,
+    "net_income": 149.473,
+    "operating_cash_flow": 53.856
+   },
+   "2023": {
+    "assets": 1369.263,
+    "equity": 855.814,
+    "liabilities": 513.449,
+    "net_income": 150.773,
+    "operating_cash_flow": 34.668
+   },
+   "2024": {
+    "assets": 1552.563,
+    "equity": 985.281,
+    "liabilities": 567.282,
+    "net_income": 159.781,
+    "operating_cash_flow": 102.169
+   }
+  },
+  "ELWA": {
+   "2021": {
+    "assets": 415.559,
+    "equity": 284.809,
+    "liabilities": 130.75,
+    "net_income": -11.009,
+    "operating_cash_flow": -16.913
+   },
+   "2022": {
+    "assets": 406.893,
+    "equity": 278.156,
+    "liabilities": 128.737,
+    "net_income": -1.918,
+    "operating_cash_flow": 0.704
+   },
+   "2023": {
+    "assets": 405.42,
+    "equity": 279.772,
+    "liabilities": 125.649,
+    "net_income": 1.712,
+    "operating_cash_flow": 0.442
+   },
+   "2024": {
+    "assets": 289.153,
+    "equity": 247.014,
+    "liabilities": 42.138,
+    "net_income": -13.906,
+    "operating_cash_flow": -14.885
+   },
+   "2025": {
+    "assets": 353.406,
+    "equity": 314.01,
+    "liabilities": 39.396,
+    "net_income": 71.064,
+    "operating_cash_flow": -10.611
+   }
+  },
+  "EMFD": {
+   "2021": {
+    "assets": 62786.352,
+    "equity": 22338.683,
+    "liabilities": 40447.668,
+    "net_income": 4119.52,
+    "operating_cash_flow": 893.413
+   },
+   "2022": {
+    "assets": 74378.393,
+    "equity": 28901.992,
+    "liabilities": 45476.4,
+    "net_income": 6563.317,
+    "operating_cash_flow": 2052.183
+   },
+   "2023": {
+    "assets": 87265.234,
+    "equity": 35713.78,
+    "liabilities": 51551.455,
+    "net_income": 6811.787,
+    "operating_cash_flow": -719.463
+   },
+   "2024": {
+    "assets": 148521.401,
+    "equity": 60733.631,
+    "liabilities": 87787.77,
+    "net_income": 15404.806,
+    "operating_cash_flow": 12277.175
+   },
+   "2025": {
+    "assets": 192020.199,
+    "equity": 66278.524,
+    "liabilities": 125741.674,
+    "net_income": 5544.893,
+    "operating_cash_flow": 9343.447
+   }
+  },
+  "ENGC": {
+   "2020": {
+    "assets": 2621.287,
+    "equity": 1373.632,
+    "liabilities": 1247.654,
+    "net_income": 107.461,
+    "operating_cash_flow": 17.741
+   },
+   "2021": {
+    "assets": 2972.882,
+    "equity": 1291.646,
+    "liabilities": 1681.236,
+    "net_income": 103.383,
+    "operating_cash_flow": -17.456
+   },
+   "2022": {
+    "assets": 3337.909,
+    "equity": 1441.088,
+    "liabilities": 1896.821,
+    "net_income": 123.021,
+    "operating_cash_flow": 195.09
+   },
+   "2023": {
+    "assets": 4303.454,
+    "equity": 1824.067,
+    "liabilities": 2479.387,
+    "net_income": 348.349,
+    "operating_cash_flow": 313.831
+   },
+   "2024": {
+    "assets": 6960.418,
+    "equity": 2947.867,
+    "liabilities": 4012.551,
+    "net_income": 1022.749,
+    "operating_cash_flow": -371.919
+   }
+  },
+  "EOSB": {
+   "2021": {
+    "assets": 24.214,
+    "equity": 12.115,
+    "liabilities": 12.099,
+    "net_income": 0.096,
+    "operating_cash_flow": 2.255
+   },
+   "2022": {
+    "assets": 22.317,
+    "equity": 5.566,
+    "liabilities": 16.751,
+    "net_income": -6.549,
+    "operating_cash_flow": -11.024
+   },
+   "2023": {
+    "assets": 19.894,
+    "equity": 8.251,
+    "liabilities": 11.642,
+    "net_income": -2.314,
+    "operating_cash_flow": -1.442
+   },
+   "2024": {
+    "assets": 19.453,
+    "equity": 5.713,
+    "liabilities": 13.74,
+    "net_income": -2.918,
+    "operating_cash_flow": -1.736
+   },
+   "2025": {
+    "assets": 22.297,
+    "equity": 9.242,
+    "liabilities": 13.055,
+    "net_income": 2.822,
+    "operating_cash_flow": 12.818
+   }
+  },
+  "EPCO": {
+   "2020": {
+    "assets": 136.898,
+    "equity": 73.595,
+    "liabilities": 63.302,
+    "net_income": -4.535,
+    "operating_cash_flow": 1.619
+   },
+   "2021": {
+    "assets": 117.735,
+    "equity": 79.755,
+    "liabilities": 37.98,
+    "net_income": 7.45,
+    "operating_cash_flow": -54.785
+   },
+   "2022": {
+    "assets": 121.525,
+    "equity": 75.734,
+    "liabilities": 45.792,
+    "net_income": -3.755,
+    "operating_cash_flow": -19.131
+   },
+   "2023": {
+    "assets": 124.611,
+    "equity": 72.374,
+    "liabilities": 52.237,
+    "net_income": -6.324,
+    "operating_cash_flow": -0.021
+   },
+   "2024": {
+    "assets": 113.969,
+    "equity": 61.729,
+    "liabilities": 52.24,
+    "net_income": -6.341,
+    "operating_cash_flow": -0.651
+   }
+  },
+  "EPPK": {
+   "2020": {
+    "assets": 129.301,
+    "equity": 73.32,
+    "liabilities": 55.981,
+    "net_income": -2.978,
+    "operating_cash_flow": -13.056
+   },
+   "2021": {
+    "assets": 142.081,
+    "equity": 59.473,
+    "liabilities": 82.608,
+    "net_income": -12.73,
+    "operating_cash_flow": -0.477
+   },
+   "2022": {
+    "assets": 131.854,
+    "equity": 43.566,
+    "liabilities": 88.288,
+    "net_income": -11.483,
+    "operating_cash_flow": -3.891
+   },
+   "2023": {
+    "assets": 120.094,
+    "equity": 11.997,
+    "liabilities": 108.097,
+    "net_income": -31.493,
+    "operating_cash_flow": -10.24
+   },
+   "2024": {
+    "assets": 113.577,
+    "equity": -9.233,
+    "liabilities": 122.81,
+    "net_income": -21.23,
+    "operating_cash_flow": -2.266
+   }
+  },
+  "ETEL": {
+   "2021": {
+    "assets": 90684.342,
+    "equity": 44329.56,
+    "liabilities": 46354.782,
+    "net_income": 8417.067,
+    "operating_cash_flow": 16015.487
+   },
+   "2022": {
+    "assets": 119893.95,
+    "equity": 46267.85,
+    "liabilities": 73626.1,
+    "net_income": 9182.184,
+    "operating_cash_flow": 14588.427
+   },
+   "2023": {
+    "assets": 150640.094,
+    "equity": 50884.932,
+    "liabilities": 99755.162,
+    "net_income": 11465.517,
+    "operating_cash_flow": 16942.942
+   },
+   "2024": {
+    "assets": 197952.788,
+    "equity": 45937.991,
+    "liabilities": 152014.797,
+    "net_income": 10098.14,
+    "operating_cash_flow": 21520.22
+   },
+   "2025": {
+    "assets": 225882.527,
+    "equity": 63687.826,
+    "liabilities": 162194.701,
+    "net_income": 22554.632,
+    "operating_cash_flow": 37623.546
+   }
+  },
+  "ETRS": {
+   "2020": {
+    "assets": 356.261,
+    "equity": 253.556,
+    "liabilities": 102.705,
+    "net_income": 13.061,
+    "operating_cash_flow": 16.425
+   },
+   "2021": {
+    "assets": 348.751,
+    "equity": 241.327,
+    "liabilities": 107.424,
+    "net_income": 18.273,
+    "operating_cash_flow": -27.149
+   },
+   "2022": {
+    "assets": 494.53,
+    "equity": 313.904,
+    "liabilities": 180.626,
+    "net_income": 46.122,
+    "operating_cash_flow": 58.374
+   },
+   "2023": {
+    "assets": 553.364,
+    "equity": 377.193,
+    "liabilities": 176.171,
+    "net_income": 61.96,
+    "operating_cash_flow": 45.558
+   },
+   "2024": {
+    "assets": 955.031,
+    "equity": 647.843,
+    "liabilities": 307.189,
+    "net_income": 204.561,
+    "operating_cash_flow": 225.319
+   }
+  },
+  "EXPA": {
+   "2020": {
+    "assets": 57236.511,
+    "equity": 6052.057,
+    "liabilities": 51184.454,
+    "net_income": 1088.284,
+    "operating_cash_flow": 1297.061
+   },
+   "2021": {
+    "assets": 77240.987,
+    "equity": 6880.011,
+    "liabilities": 70360.976,
+    "net_income": 1015.116,
+    "operating_cash_flow": 10349.519
+   },
+   "2022": {
+    "assets": 98303.954,
+    "equity": 9964.318,
+    "liabilities": 88339.636,
+    "net_income": 1320.883,
+    "operating_cash_flow": 807.939
+   },
+   "2023": {
+    "assets": 118427.84,
+    "equity": 14601.18,
+    "liabilities": 103826.66,
+    "net_income": 3.375,
+    "operating_cash_flow": 14.413
+   },
+   "2024": {
+    "assets": 184260.265,
+    "equity": 19590.523,
+    "liabilities": 164669.742,
+    "net_income": 5203.185,
+    "operating_cash_flow": 23462.271
+   }
+  },
+  "FAIT": {
+   "2020": {
+    "assets": 116748.067,
+    "equity": 15295.435,
+    "liabilities": 101452.632,
+    "net_income": 2247.304,
+    "operating_cash_flow": -5220.187
+   },
+   "2021": {
+    "assets": 133230.879,
+    "equity": 18132.651,
+    "liabilities": 114972.658,
+    "net_income": 2965.463,
+    "operating_cash_flow": 16340.844
+   },
+   "2022": {
+    "assets": 154715.592,
+    "equity": 23316.301,
+    "liabilities": 131399.291,
+    "net_income": 4757.162,
+    "operating_cash_flow": 16743.534
+   },
+   "2023": {
+    "assets": 181017.941,
+    "equity": 26572.423,
+    "liabilities": 154445.518,
+    "net_income": 4429.315,
+    "operating_cash_flow": 24759.81
+   },
+   "2024": {
+    "assets": 246256.455,
+    "equity": 41397.542,
+    "liabilities": 204858.913,
+    "net_income": 12441.04,
+    "operating_cash_flow": 48592.937
+   }
+  },
+  "FAITA": {
+   "2020": {
+    "assets": 116748.067,
+    "equity": 15295.435,
+    "liabilities": 101452.632,
+    "net_income": 2247.304,
+    "operating_cash_flow": -5220.187
+   },
+   "2021": {
+    "assets": 133230.879,
+    "equity": 18132.651,
+    "liabilities": 114972.658,
+    "net_income": 2965.463,
+    "operating_cash_flow": 16340.844
+   },
+   "2022": {
+    "assets": 154715.592,
+    "equity": 23316.301,
+    "liabilities": 131399.291,
+    "net_income": 4757.162,
+    "operating_cash_flow": 16743.534
+   },
+   "2023": {
+    "assets": 181017.941,
+    "equity": 26572.423,
+    "liabilities": 154445.518,
+    "net_income": 4429.315,
+    "operating_cash_flow": 24759.81
+   },
+   "2024": {
+    "assets": 246256.455,
+    "equity": 41397.542,
+    "liabilities": 204858.913,
+    "net_income": 12441.04,
+    "operating_cash_flow": 48592.937
+   }
+  },
+  "FCMD": {
+   "2020": {
+    "assets": 34.995,
+    "equity": 26.375,
+    "liabilities": 8.619,
+    "net_income": 0.034,
+    "operating_cash_flow": -1.351
+   },
+   "2021": {
+    "assets": 67.947,
+    "equity": 60.339,
+    "liabilities": 7.608,
+    "net_income": -0.091,
+    "operating_cash_flow": -1.082
+   },
+   "2022": {
+    "assets": 64.989,
+    "equity": 60.685,
+    "liabilities": 4.304,
+    "net_income": 0.919,
+    "operating_cash_flow": -20.834
+   },
+   "2023": {
+    "assets": 104.001,
+    "equity": 61.065,
+    "liabilities": 42.936,
+    "net_income": 1.46,
+    "operating_cash_flow": 15.659
+   },
+   "2024": {
+    "assets": 112.096,
+    "equity": 45.79,
+    "liabilities": 66.306,
+    "net_income": -19.734,
+    "operating_cash_flow": 21.243
+   }
+  },
+  "FIRE": {
+   "2020": {
+    "assets": 324.675,
+    "equity": 7.416,
+    "liabilities": 317.258,
+    "net_income": 1.782,
+    "operating_cash_flow": -0.286
+   },
+   "2021": {
+    "assets": 354.873,
+    "equity": 12.962,
+    "liabilities": 341.911,
+    "net_income": 5.867,
+    "operating_cash_flow": 1.28
+   },
+   "2022": {
+    "assets": 369.898,
+    "equity": 17.483,
+    "liabilities": 352.415,
+    "net_income": 4.521,
+    "operating_cash_flow": 0.986
+   },
+   "2023": {
+    "assets": 314.609,
+    "equity": 18.06,
+    "liabilities": 296.549,
+    "net_income": 0.464,
+    "operating_cash_flow": -2.72
+   },
+   "2024": {
+    "assets": 290.678,
+    "equity": 15.416,
+    "liabilities": 275.262,
+    "operating_cash_flow": 0.127
+   }
+  },
+  "FNAR": {
+   "2021": {
+    "assets": 38.386,
+    "equity": 19.505,
+    "liabilities": 18.881,
+    "net_income": 5.759,
+    "operating_cash_flow": 1.634
+   },
+   "2022": {
+    "assets": 39.172,
+    "equity": 27.498,
+    "liabilities": 11.675,
+    "net_income": 11.142,
+    "operating_cash_flow": 12.041
+   },
+   "2023": {
+    "assets": 45.488,
+    "equity": 32.424,
+    "liabilities": 13.064,
+    "net_income": 8.5,
+    "operating_cash_flow": 7.628
+   },
+   "2024": {
+    "assets": 44.462,
+    "equity": 36.542,
+    "liabilities": 7.92,
+    "net_income": 5.358,
+    "operating_cash_flow": -1.348
+   },
+   "2025": {
+    "assets": 49.78,
+    "equity": 43.39,
+    "liabilities": 6.391,
+    "net_income": 6.848,
+    "operating_cash_flow": 5.234
+   }
+  },
+  "FWRY": {
+   "2020": {
+    "assets": 2431.52,
+    "equity": 796.904,
+    "liabilities": 1634.616,
+    "net_income": 186.234,
+    "operating_cash_flow": 545.784
+   },
+   "2021": {
+    "assets": 4124.075,
+    "equity": 1458.019,
+    "liabilities": 2666.056,
+    "net_income": 177.178,
+    "operating_cash_flow": 640.576
+   },
+   "2022": {
+    "assets": 6423.758,
+    "equity": 2595.245,
+    "liabilities": 3828.513,
+    "net_income": 240.054,
+    "operating_cash_flow": 1311.372
+   },
+   "2023": {
+    "assets": 8971.584,
+    "equity": 3469.849,
+    "liabilities": 5501.735,
+    "net_income": 715.339,
+    "operating_cash_flow": 1998.097
+   },
+   "2024": {
+    "assets": 13256.776,
+    "equity": 5162.996,
+    "liabilities": 8093.78,
+    "net_income": 1606.652,
+    "operating_cash_flow": 1871.397
+   }
+  },
+  "GBCO": {
+   "2020": {
+    "assets": 24592.33,
+    "equity": 6116.748,
+    "liabilities": 18475.582,
+    "net_income": 916.955,
+    "operating_cash_flow": 2097.366
+   },
+   "2021": {
+    "assets": 32108.061,
+    "equity": 7565.028,
+    "liabilities": 24543.033,
+    "net_income": 1477.953,
+    "operating_cash_flow": 970.363
+   },
+   "2022": {
+    "assets": 34617.566,
+    "equity": 17460.749,
+    "liabilities": 17156.817,
+    "net_income": 9984.958,
+    "operating_cash_flow": 6938.2
+   },
+   "2023": {
+    "assets": 42585.218,
+    "equity": 21201.614,
+    "liabilities": 21383.604,
+    "net_income": 1890.727,
+    "operating_cash_flow": 824.631
+   },
+   "2024": {
+    "assets": 72725.003,
+    "equity": 27416.919,
+    "liabilities": 45308.084,
+    "net_income": 2928.121,
+    "operating_cash_flow": 1566.084
+   }
+  },
+  "GDWA": {
+   "2021": {
+    "net_income": 115.186
+   },
+   "2022": {
+    "assets": 8520.974,
+    "equity": 2400.826,
+    "liabilities": 6120.148,
+    "net_income": 470.176,
+    "operating_cash_flow": 478.99
+   },
+   "2023": {
+    "assets": 13025.862,
+    "equity": 3787.64,
+    "liabilities": 9238.222,
+    "net_income": 1000.297,
+    "operating_cash_flow": -564.393
+   },
+   "2024": {
+    "assets": 20202.925,
+    "equity": 4693.736,
+    "liabilities": 15509.189,
+    "net_income": 1144.808,
+    "operating_cash_flow": -3184.695
+   }
+  },
+  "GGCC": {
+   "2020": {
+    "assets": 1324.593,
+    "equity": 433.871,
+    "liabilities": 890.722,
+    "net_income": 47.907,
+    "operating_cash_flow": -22.554
+   },
+   "2021": {
+    "assets": 1800.799,
+    "equity": 522.734,
+    "liabilities": 1278.066,
+    "net_income": 56.357,
+    "operating_cash_flow": -258.934
+   },
+   "2022": {
+    "assets": 2438.535,
+    "equity": 572.475,
+    "liabilities": 1866.06,
+    "net_income": 61.034,
+    "operating_cash_flow": -78.643
+   },
+   "2023": {
+    "assets": 1842.615,
+    "equity": 614.013,
+    "liabilities": 1228.602,
+    "net_income": 58.616,
+    "operating_cash_flow": 285.172
+   },
+   "2024": {
+    "assets": 2293.47,
+    "equity": 657.892,
+    "liabilities": 1635.578,
+    "net_income": 71.577,
+    "operating_cash_flow": 115.076
+   }
+  },
+  "GIHD": {
+   "2020": {
+    "assets": 38.783,
+    "equity": 36.564,
+    "liabilities": 2.218,
+    "net_income": 1.752,
+    "operating_cash_flow": 0.388
+   },
+   "2021": {
+    "assets": 38.123,
+    "equity": 36.131,
+    "liabilities": 1.992,
+    "net_income": -0.433,
+    "operating_cash_flow": -0.851
+   },
+   "2022": {
+    "assets": 40.01,
+    "equity": 37.469,
+    "liabilities": 2.54,
+    "net_income": 1.338,
+    "operating_cash_flow": -9.969
+   },
+   "2023": {
+    "assets": 44.189,
+    "equity": 40.348,
+    "liabilities": 3.841,
+    "net_income": 2.879,
+    "operating_cash_flow": -4.467
+   },
+   "2024": {
+    "assets": 46.274,
+    "equity": 42.342,
+    "liabilities": 3.932,
+    "net_income": 1.993,
+    "operating_cash_flow": -2.372
+   }
+  },
+  "GMCI": {
+   "2020": {
+    "assets": 86.014,
+    "equity": 85.052,
+    "liabilities": 0.962,
+    "net_income": 0.269,
+    "operating_cash_flow": -0.01
+   },
+   "2021": {
+    "assets": 85.274,
+    "equity": 63.149,
+    "liabilities": 22.125,
+    "net_income": -19.803,
+    "operating_cash_flow": -21.0
+   },
+   "2022": {
+    "assets": 85.157,
+    "equity": 62.938,
+    "liabilities": 22.219,
+    "net_income": -0.211
+   },
+   "2023": {
+    "assets": 85.413,
+    "equity": 62.453,
+    "liabilities": 22.96,
+    "net_income": -0.485,
+    "operating_cash_flow": 0.037
+   },
+   "2024": {
+    "assets": 20.711,
+    "equity": 14.946,
+    "liabilities": 5.765,
+    "net_income": -47.507,
+    "operating_cash_flow": 0.632
+   }
+  },
+  "GPIM": {
+   "2021": {
+    "assets": 63.356,
+    "equity": 53.539,
+    "liabilities": 9.817,
+    "net_income": 0.305,
+    "operating_cash_flow": 2.202
+   },
+   "2022": {
+    "assets": 64.58,
+    "equity": 55.795,
+    "liabilities": 8.784,
+    "net_income": 2.207,
+    "operating_cash_flow": 4.048
+   },
+   "2023": {
+    "assets": 66.107,
+    "equity": 56.327,
+    "liabilities": 9.78,
+    "net_income": 1.04,
+    "operating_cash_flow": 2.984
+   },
+   "2024": {
+    "assets": 230.173,
+    "equity": 171.196,
+    "liabilities": 58.977,
+    "net_income": 14.997,
+    "operating_cash_flow": -76.108
+   }
+  },
+  "GRCA": {
+   "2022": {
+    "assets": 55.759,
+    "equity": 45.91,
+    "liabilities": 9.849,
+    "net_income": -1.783,
+    "operating_cash_flow": -7.426
+   },
+   "2023": {
+    "assets": 56.443,
+    "equity": 39.34,
+    "liabilities": 17.103,
+    "net_income": -4.989,
+    "operating_cash_flow": 1.39
+   },
+   "2025": {
+    "assets": 62.176,
+    "equity": 51.211,
+    "liabilities": 10.965,
+    "net_income": 11.375,
+    "operating_cash_flow": -5.757
+   },
+   "2026": {
+    "net_income": 27.397,
+    "operating_cash_flow": -1.309
+   }
+  },
+  "GSSC": {
+   "2021": {
+    "assets": 2661.703,
+    "equity": 351.928,
+    "liabilities": 2309.775,
+    "net_income": 53.441,
+    "operating_cash_flow": 174.706
+   },
+   "2022": {
+    "assets": 2555.479,
+    "equity": 421.921,
+    "liabilities": 2133.558,
+    "net_income": 57.571,
+    "operating_cash_flow": 126.524
+   },
+   "2023": {
+    "assets": 2904.121,
+    "equity": 519.083,
+    "liabilities": 2385.037,
+    "net_income": 72.187,
+    "operating_cash_flow": 265.444
+   },
+   "2024": {
+    "assets": 3621.995,
+    "equity": 629.274,
+    "liabilities": 2992.721,
+    "net_income": 105.071,
+    "operating_cash_flow": 354.988
+   },
+   "2025": {
+    "assets": 4058.833,
+    "equity": 777.87,
+    "liabilities": 3280.964,
+    "net_income": 135.232,
+    "operating_cash_flow": 400.586
+   }
+  },
+  "GTHE": {
+   "2015": {
+    "assets": 4751.9,
+    "equity": 414.9,
+    "liabilities": 4337.0,
+    "net_income": -140.9,
+    "operating_cash_flow": -330.1
+   },
+   "2016": {
+    "assets": 5598.2,
+    "equity": 532.9,
+    "liabilities": 5065.3,
+    "net_income": 61.0,
+    "operating_cash_flow": 1076.6
+   },
+   "2017": {
+    "assets": 5333.2,
+    "equity": 88.8,
+    "liabilities": 5244.4,
+    "net_income": -144.4,
+    "operating_cash_flow": 876.7
+   },
+   "2018": {
+    "assets": 4507.2,
+    "equity": -438.5,
+    "liabilities": 4945.7,
+    "net_income": -342.4,
+    "operating_cash_flow": 900.3
+   }
+  },
+  "GTWL": {
+   "2021": {
+    "assets": 490.557,
+    "equity": 163.484,
+    "liabilities": 327.073,
+    "net_income": 1.452,
+    "operating_cash_flow": 48.342
+   },
+   "2022": {
+    "assets": 731.907,
+    "equity": 128.921,
+    "liabilities": 602.986,
+    "net_income": 48.025,
+    "operating_cash_flow": -4.209
+   },
+   "2023": {
+    "assets": 1684.386,
+    "equity": 896.2,
+    "liabilities": 788.186,
+    "net_income": 82.593,
+    "operating_cash_flow": -23.972
+   },
+   "2024": {
+    "assets": 2182.227,
+    "equity": 875.574,
+    "liabilities": 1306.653,
+    "net_income": 88.39,
+    "operating_cash_flow": 144.216
+   },
+   "2025": {
+    "net_income": 110.891,
+    "operating_cash_flow": 253.049
+   }
+  },
+  "HDBK": {
+   "2020": {
+    "assets": 61387.681,
+    "equity": 9121.38,
+    "liabilities": 52266.3,
+    "net_income": 2050.359,
+    "operating_cash_flow": 6763.468
+   },
+   "2021": {
+    "assets": 79767.836,
+    "equity": 11070.188,
+    "liabilities": 68697.648,
+    "net_income": 2015.997,
+    "operating_cash_flow": 12934.212
+   },
+   "2022": {
+    "assets": 107874.002,
+    "equity": 12637.821,
+    "liabilities": 95236.181,
+    "net_income": 2709.883,
+    "operating_cash_flow": 12527.923
+   },
+   "2023": {
+    "assets": 130744.024,
+    "equity": 18051.949,
+    "liabilities": 112692.075,
+    "net_income": 6539.555,
+    "operating_cash_flow": 15706.302
+   },
+   "2024": {
+    "assets": 188821.492,
+    "equity": 28171.438,
+    "liabilities": 160650.054,
+    "net_income": 27.992,
+    "operating_cash_flow": 44251.833
+   }
+  },
+  "HELI": {
+   "2020": {
+    "assets": 5124.879,
+    "equity": 1056.263,
+    "liabilities": 4068.616,
+    "net_income": 365.557,
+    "operating_cash_flow": -67.827
+   },
+   "2021": {
+    "assets": 4375.664,
+    "equity": 902.871,
+    "liabilities": 3472.794,
+    "net_income": 180.151,
+    "operating_cash_flow": 491.956
+   },
+   "2022": {
+    "assets": 4941.09,
+    "equity": 1157.805,
+    "liabilities": 3783.286,
+    "net_income": 638.67,
+    "operating_cash_flow": 610.159
+   },
+   "2023": {
+    "assets": 15814.549,
+    "equity": 8762.098,
+    "liabilities": 7052.451,
+    "net_income": 7808.811,
+    "operating_cash_flow": 10501.019
+   },
+   "2024": {
+    "assets": 14379.221,
+    "equity": 9402.789,
+    "liabilities": 4976.431,
+    "net_income": 2559.833,
+    "operating_cash_flow": -5424.76
+   }
+  },
+  "HRHO": {
+   "2020": {
+    "assets": 38741.01,
+    "equity": 13937.943,
+    "liabilities": 24803.066,
+    "net_income": 1305.403,
+    "operating_cash_flow": -2158.465
+   },
+   "2021": {
+    "assets": 96594.729,
+    "equity": 17306.29,
+    "liabilities": 79288.439,
+    "net_income": 1456.478,
+    "operating_cash_flow": -7037.669
+   },
+   "2022": {
+    "assets": 105509.54,
+    "equity": 22376.102,
+    "liabilities": 83133.438,
+    "net_income": 1839.716,
+    "operating_cash_flow": 11741.185
+   },
+   "2023": {
+    "assets": 121907.974,
+    "equity": 27395.929,
+    "liabilities": 94512.045,
+    "net_income": 2498.471,
+    "operating_cash_flow": -8604.418
+   },
+   "2024": {
+    "assets": 186878.411,
+    "equity": 39367.965,
+    "liabilities": 147510.446,
+    "net_income": 4253.97,
+    "operating_cash_flow": -13250.03
+   }
+  },
+  "IBCT": {
+   "2021": {
+    "assets": 51.242,
+    "equity": 40.127,
+    "liabilities": 11.115,
+    "net_income": 2.896,
+    "operating_cash_flow": 3.85
+   },
+   "2022": {
+    "assets": 54.508,
+    "equity": 41.166,
+    "liabilities": 13.342,
+    "net_income": 1.039,
+    "operating_cash_flow": -1.845
+   },
+   "2023": {
+    "assets": 56.903,
+    "equity": 41.84,
+    "liabilities": 15.063,
+    "net_income": 0.656,
+    "operating_cash_flow": -3.41
+   },
+   "2024": {
+    "assets": 140.913,
+    "equity": 43.472,
+    "liabilities": 97.441,
+    "net_income": 1.681,
+    "operating_cash_flow": -10.669
+   },
+   "2025": {
+    "assets": 132.225,
+    "equity": 61.895,
+    "liabilities": 70.33,
+    "net_income": 18.424,
+    "operating_cash_flow": 23.238
+   }
+  },
+  "ICFC": {
+   "2021": {
+    "assets": 140.565,
+    "equity": 73.326,
+    "liabilities": 67.239,
+    "net_income": 13.319,
+    "operating_cash_flow": 58.716
+   },
+   "2022": {
+    "assets": 313.244,
+    "equity": 160.095,
+    "liabilities": 153.149,
+    "net_income": 104.438,
+    "operating_cash_flow": 76.337
+   },
+   "2023": {
+    "assets": 585.831,
+    "equity": 335.259,
+    "liabilities": 250.572,
+    "net_income": 157.84,
+    "operating_cash_flow": -40.305
+   },
+   "2024": {
+    "assets": 964.234,
+    "equity": 607.77,
+    "liabilities": 356.464,
+    "net_income": 228.736,
+    "operating_cash_flow": 208.327
+   },
+   "2025": {
+    "net_income": 214.104,
+    "operating_cash_flow": -93.495
+   }
+  },
+  "ICID": {
+   "2021": {
+    "assets": 79.859,
+    "equity": 71.716,
+    "liabilities": 8.143,
+    "net_income": 7.692,
+    "operating_cash_flow": -2.545
+   },
+   "2022": {
+    "assets": 82.361,
+    "equity": 74.688,
+    "liabilities": 7.673,
+    "net_income": 3.063,
+    "operating_cash_flow": 0.569
+   },
+   "2023": {
+    "assets": 86.253,
+    "equity": 79.083,
+    "liabilities": 7.17,
+    "net_income": 4.36,
+    "operating_cash_flow": 13.117
+   },
+   "2024": {
+    "assets": 143.608,
+    "equity": 134.043,
+    "liabilities": 9.565,
+    "net_income": 10.377,
+    "operating_cash_flow": -4.781
+   },
+   "2025": {
+    "assets": 125.435,
+    "equity": 119.368,
+    "liabilities": 6.067,
+    "net_income": 5.531,
+    "operating_cash_flow": -6.242
+   }
+  },
+  "ICLE": {
+   "2020": {
+    "assets": 3441.631,
+    "equity": 711.185,
+    "liabilities": 2730.446,
+    "net_income": 74.238,
+    "operating_cash_flow": 757.368
+   },
+   "2021": {
+    "assets": 3429.027,
+    "equity": 701.383,
+    "liabilities": 2727.644,
+    "net_income": 82.196,
+    "operating_cash_flow": 295.107
+   },
+   "2022": {
+    "assets": 4060.85,
+    "equity": 725.914,
+    "liabilities": 3334.936,
+    "net_income": 90.213,
+    "operating_cash_flow": -197.451
+   },
+   "2023": {
+    "assets": 5793.628,
+    "equity": 869.728,
+    "liabilities": 4923.9,
+    "net_income": 159.503,
+    "operating_cash_flow": -612.289
+   },
+   "2024": {
+    "assets": 8388.644,
+    "equity": 1105.254,
+    "liabilities": 7283.389,
+    "net_income": 264.035,
+    "operating_cash_flow": -612.449
+   }
+  },
+  "IDRE": {
+   "2020": {
+    "assets": 144.22,
+    "equity": 138.619,
+    "liabilities": 5.602,
+    "net_income": -1.134,
+    "operating_cash_flow": -0.119
+   },
+   "2021": {
+    "assets": 144.508,
+    "equity": 137.522,
+    "liabilities": 6.986,
+    "net_income": -0.941,
+    "operating_cash_flow": 0.005
+   },
+   "2022": {
+    "assets": 147.45,
+    "equity": 142.317,
+    "liabilities": 5.133,
+    "net_income": 3.934,
+    "operating_cash_flow": 4.735
+   },
+   "2023": {
+    "assets": 145.94,
+    "equity": 142.948,
+    "liabilities": 2.992,
+    "net_income": 0.639,
+    "operating_cash_flow": -1.123
+   },
+   "2024": {
+    "assets": 159.478,
+    "equity": 156.591,
+    "liabilities": 2.887,
+    "net_income": 13.644,
+    "operating_cash_flow": 8.681
+   }
+  },
+  "IEEC": {
+   "2020": {
+    "assets": 576.265,
+    "equity": 2.671,
+    "liabilities": 573.594,
+    "net_income": 149.733,
+    "operating_cash_flow": 2.908
+   },
+   "2021": {
+    "assets": 592.669,
+    "equity": 98.138,
+    "liabilities": 494.531,
+    "net_income": 3.002,
+    "operating_cash_flow": -49.447
+   },
+   "2022": {
+    "assets": 681.086,
+    "equity": 99.54,
+    "liabilities": 581.547,
+    "net_income": 1.371,
+    "operating_cash_flow": -12.635
+   },
+   "2023": {
+    "assets": 796.352,
+    "equity": 101.688,
+    "liabilities": 694.664,
+    "net_income": 2.148,
+    "operating_cash_flow": 2.68
+   },
+   "2024": {
+    "assets": 889.175,
+    "equity": 312.659,
+    "liabilities": 576.516,
+    "net_income": 16.571,
+    "operating_cash_flow": 6.763
+   }
+  },
+  "IFAP": {
+   "2021": {
+    "assets": 528.862,
+    "equity": 245.198,
+    "liabilities": 283.663,
+    "net_income": 24.925,
+    "operating_cash_flow": -50.832
+   },
+   "2022": {
+    "assets": 662.582,
+    "equity": 401.562,
+    "liabilities": 261.02,
+    "net_income": 158.224,
+    "operating_cash_flow": 87.588
+   },
+   "2023": {
+    "assets": 1020.225,
+    "equity": 865.808,
+    "liabilities": 154.417,
+    "net_income": 440.538,
+    "operating_cash_flow": 122.434
+   },
+   "2024": {
+    "assets": 2061.203,
+    "equity": 1622.186,
+    "liabilities": 439.016,
+    "net_income": 518.97,
+    "operating_cash_flow": -4.922
+   },
+   "2025": {
+    "assets": 4030.749,
+    "equity": 2888.85,
+    "liabilities": 1141.899,
+    "net_income": 467.383,
+    "operating_cash_flow": 46.863
+   }
+  },
+  "INFI": {
+   "2021": {
+    "assets": 100.293,
+    "equity": 71.254,
+    "liabilities": 29.039,
+    "net_income": 9.56,
+    "operating_cash_flow": 24.986
+   },
+   "2022": {
+    "assets": 124.909,
+    "equity": 80.067,
+    "liabilities": 44.842,
+    "net_income": 9.721,
+    "operating_cash_flow": 2.506
+   },
+   "2023": {
+    "assets": 179.874,
+    "equity": 100.815,
+    "liabilities": 79.059,
+    "net_income": 21.72,
+    "operating_cash_flow": 12.697
+   },
+   "2024": {
+    "assets": 357.112,
+    "equity": 186.619,
+    "liabilities": 170.493,
+    "net_income": 95.387,
+    "operating_cash_flow": 56.01
+   },
+   "2025": {
+    "assets": 374.145,
+    "equity": 240.913,
+    "liabilities": 133.232,
+    "net_income": 71.762,
+    "operating_cash_flow": 45.184
+   }
+  },
+  "IRAX": {
+   "2018": {
+    "assets": 35990.206,
+    "equity": 8061.313,
+    "liabilities": 27928.893,
+    "net_income": 1718.357,
+    "operating_cash_flow": -691.881
+   },
+   "2019": {
+    "assets": 43287.057,
+    "equity": 2959.521,
+    "liabilities": 40327.537
+   },
+   "2020": {
+    "assets": 44127.414,
+    "equity": -1953.496,
+    "liabilities": 46080.911,
+    "net_income": -4681.437,
+    "operating_cash_flow": -3381.873
+   },
+   "2021": {
+    "assets": 50541.079,
+    "equity": 3917.443,
+    "liabilities": 46623.636,
+    "net_income": 5812.599,
+    "operating_cash_flow": 3899.769
+   },
+   "2022": {
+    "assets": 64560.835,
+    "equity": 9085.657,
+    "liabilities": 55475.178,
+    "net_income": 6401.082,
+    "operating_cash_flow": 17729.053
+   }
+  },
+  "IRON": {
+   "2016": {
+    "assets": 3189.474,
+    "equity": -2426.917,
+    "liabilities": 5616.391,
+    "net_income": -615.554,
+    "operating_cash_flow": 74.538
+   },
+   "2017": {
+    "assets": 3405.336,
+    "equity": -2215.219,
+    "liabilities": 5620.556,
+    "net_income": -750.26,
+    "operating_cash_flow": -76.334
+   },
+   "2018": {
+    "assets": 3618.512,
+    "equity": -3114.376,
+    "liabilities": 6732.887,
+    "net_income": -899.606,
+    "operating_cash_flow": -329.914
+   },
+   "2019": {
+    "assets": 3625.081,
+    "equity": -4579.741,
+    "liabilities": 8204.823,
+    "net_income": -1465.366,
+    "operating_cash_flow": -240.693
+   },
+   "2020": {
+    "assets": 2831.453,
+    "equity": -5769.845,
+    "liabilities": 8601.298,
+    "net_income": -982.83,
+    "operating_cash_flow": -264.034
+   }
+  },
+  "ISMA": {
+   "2021": {
+    "assets": 453.652,
+    "equity": 332.587,
+    "liabilities": 121.065,
+    "net_income": 0.327,
+    "operating_cash_flow": 31.281
+   },
+   "2022": {
+    "assets": 421.851,
+    "equity": 195.154,
+    "liabilities": 226.697,
+    "net_income": -129.767,
+    "operating_cash_flow": 30.908
+   },
+   "2023": {
+    "assets": 323.33,
+    "equity": 98.974,
+    "liabilities": 224.356,
+    "net_income": -96.183,
+    "operating_cash_flow": 24.75
+   },
+   "2024": {
+    "assets": 346.961,
+    "equity": 136.538,
+    "liabilities": 210.423,
+    "net_income": 37.565,
+    "operating_cash_flow": 17.018
+   },
+   "2025": {
+    "assets": 348.911,
+    "equity": 182.18,
+    "liabilities": 166.731,
+    "net_income": 45.641,
+    "operating_cash_flow": -8.233
+   }
+  },
+  "ISMQ": {
+   "2021": {
+    "assets": 336.343,
+    "equity": 201.371,
+    "liabilities": 134.973,
+    "net_income": 5.546,
+    "operating_cash_flow": 9.562
+   },
+   "2022": {
+    "assets": 283.198,
+    "equity": 241.373,
+    "liabilities": 41.825,
+    "net_income": 40.634,
+    "operating_cash_flow": 61.546
+   },
+   "2023": {
+    "assets": 413.28,
+    "equity": 334.86,
+    "liabilities": 78.42,
+    "net_income": 127.812,
+    "operating_cash_flow": 131.8
+   },
+   "2024": {
+    "assets": 430.074,
+    "equity": 347.402,
+    "liabilities": 82.672,
+    "net_income": 125.951,
+    "operating_cash_flow": 94.981
+   },
+   "2025": {
+    "assets": 1318.491,
+    "equity": 932.148,
+    "liabilities": 386.343,
+    "net_income": 697.99,
+    "operating_cash_flow": 985.152
+   }
+  },
+  "ISPH": {
+   "2021": {
+    "assets": 11284.462,
+    "equity": 1453.494,
+    "liabilities": 9830.968,
+    "net_income": 314.728,
+    "operating_cash_flow": -340.432
+   },
+   "2022": {
+    "assets": 12863.793,
+    "equity": 1259.877,
+    "liabilities": 11603.917,
+    "net_income": 172.585,
+    "operating_cash_flow": 361.938
+   },
+   "2023": {
+    "assets": 18549.811,
+    "equity": 1449.12,
+    "liabilities": 17100.691,
+    "net_income": 213.661,
+    "operating_cash_flow": 125.813
+   },
+   "2024": {
+    "assets": 28641.558,
+    "equity": 2031.219,
+    "liabilities": 26610.339,
+    "net_income": 614.562,
+    "operating_cash_flow": -926.576
+   },
+   "2025": {
+    "assets": 36213.704,
+    "equity": 2784.02,
+    "liabilities": 33429.684,
+    "net_income": 951.983,
+    "operating_cash_flow": -71.055
+   }
+  },
+  "JUFO": {
+   "2020": {
+    "assets": 5135.733,
+    "equity": 2903.274,
+    "liabilities": 2232.459,
+    "net_income": 428.376,
+    "operating_cash_flow": 982.618
+   },
+   "2021": {
+    "assets": 5459.75,
+    "equity": 3165.316,
+    "liabilities": 2294.434,
+    "net_income": 526.197,
+    "operating_cash_flow": 768.097
+   },
+   "2022": {
+    "assets": 6369.287,
+    "equity": 3410.732,
+    "liabilities": 2958.555,
+    "net_income": 637.721,
+    "operating_cash_flow": 439.908
+   },
+   "2023": {
+    "assets": 8580.367,
+    "equity": 4249.769,
+    "liabilities": 4330.599,
+    "net_income": 1020.91,
+    "operating_cash_flow": 1599.495
+   },
+   "2024": {
+    "assets": 13590.463,
+    "equity": 6339.324,
+    "liabilities": 7251.138,
+    "net_income": 2735.294,
+    "operating_cash_flow": 2274.845
+   }
+  },
+  "KABO": {
+   "2021": {
+    "assets": 1188.545,
+    "equity": 787.049,
+    "liabilities": 401.497,
+    "net_income": -15.911,
+    "operating_cash_flow": 8.997
+   },
+   "2022": {
+    "assets": 1190.644,
+    "equity": 768.144,
+    "liabilities": 422.5,
+    "net_income": -25.139,
+    "operating_cash_flow": -17.775
+   },
+   "2023": {
+    "assets": 1362.437,
+    "equity": 831.166,
+    "liabilities": 531.27,
+    "net_income": 52.533,
+    "operating_cash_flow": 33.171
+   },
+   "2024": {
+    "assets": 1661.497,
+    "equity": 1036.734,
+    "liabilities": 624.763,
+    "net_income": 128.927,
+    "operating_cash_flow": -21.821
+   },
+   "2025": {
+    "assets": 1085.041,
+    "equity": 623.117,
+    "liabilities": 461.925,
+    "net_income": 167.816,
+    "operating_cash_flow": -223.298
+   }
+  },
+  "KRDI": {
+   "2020": {
+    "assets": 502.927,
+    "equity": 169.5,
+    "liabilities": 333.426,
+    "net_income": 8.988,
+    "operating_cash_flow": 59.88
+   },
+   "2021": {
+    "assets": 712.925,
+    "equity": 244.852,
+    "liabilities": 468.073,
+    "net_income": 30.067,
+    "operating_cash_flow": 35.019
+   },
+   "2022": {
+    "assets": 803.24,
+    "equity": 306.394,
+    "liabilities": 496.846,
+    "net_income": 32.882,
+    "operating_cash_flow": 15.64
+   },
+   "2023": {
+    "assets": 1193.806,
+    "equity": 451.143,
+    "liabilities": 742.663,
+    "net_income": 37.642,
+    "operating_cash_flow": 88.219
+   },
+   "2024": {
+    "assets": 1323.02,
+    "equity": 449.557,
+    "liabilities": 873.463,
+    "net_income": 51.092,
+    "operating_cash_flow": 86.064
+   }
+  },
+  "KWIN": {
+   "2020": {
+    "assets": 122.039,
+    "equity": 106.227,
+    "liabilities": 15.812,
+    "net_income": 1.298,
+    "operating_cash_flow": -2.715
+   },
+   "2021": {
+    "assets": 111.044,
+    "equity": 104.656,
+    "liabilities": 6.388,
+    "net_income": 24.408,
+    "operating_cash_flow": -10.428
+   },
+   "2022": {
+    "assets": 104.812,
+    "equity": 104.166,
+    "liabilities": 0.647,
+    "net_income": 1.336,
+    "operating_cash_flow": 0.459
+   },
+   "2023": {
+    "assets": 146.66,
+    "equity": 131.434,
+    "liabilities": 15.226,
+    "net_income": 10.887,
+    "operating_cash_flow": 19.103
+   },
+   "2024": {
+    "assets": 179.015,
+    "equity": 81.377,
+    "liabilities": 97.638,
+    "net_income": 4.129,
+    "operating_cash_flow": 24.039
+   }
+  },
+  "KZPC": {
+   "2020": {
+    "assets": 687.818,
+    "equity": 320.668,
+    "liabilities": 367.15,
+    "net_income": 27.298,
+    "operating_cash_flow": 99.617
+   },
+   "2021": {
+    "assets": 696.882,
+    "equity": 358.891,
+    "liabilities": 337.991,
+    "net_income": 72.746,
+    "operating_cash_flow": 105.06
+   },
+   "2022": {
+    "assets": 1126.301,
+    "equity": 444.586,
+    "liabilities": 681.715,
+    "net_income": 127.225,
+    "operating_cash_flow": -98.526
+   },
+   "2023": {
+    "assets": 1495.095,
+    "equity": 612.413,
+    "liabilities": 882.682,
+    "net_income": 189.816,
+    "operating_cash_flow": 84.883
+   },
+   "2024": {
+    "assets": 2826.631,
+    "equity": 776.918,
+    "liabilities": 2049.713,
+    "net_income": 262.996,
+    "operating_cash_flow": -783.106
+   }
+  },
+  "LCSW": {
+   "2020": {
+    "assets": 3252.906,
+    "equity": 1566.06,
+    "liabilities": 1686.846,
+    "net_income": -220.605,
+    "operating_cash_flow": 352.654
+   },
+   "2021": {
+    "assets": 3424.944,
+    "equity": 1543.08,
+    "liabilities": 1881.864,
+    "net_income": -36.356,
+    "operating_cash_flow": 33.023
+   },
+   "2022": {
+    "assets": 4695.498,
+    "equity": 1900.354,
+    "liabilities": 2795.143,
+    "net_income": -3.19,
+    "operating_cash_flow": 120.38
+   },
+   "2023": {
+    "assets": 5455.417,
+    "equity": 2261.774,
+    "liabilities": 3193.643,
+    "net_income": 446.284,
+    "operating_cash_flow": 137.25
+   },
+   "2024": {
+    "assets": 7747.378,
+    "equity": 3856.611,
+    "liabilities": 3890.767,
+    "net_income": 890.333,
+    "operating_cash_flow": 537.076
+   }
+  },
+  "MAAL": {
+   "2021": {
+    "assets": 2560.404,
+    "equity": 132.994,
+    "liabilities": 2427.41,
+    "net_income": 26.24,
+    "operating_cash_flow": 17.557
+   },
+   "2022": {
+    "assets": 2569.349,
+    "equity": 130.513,
+    "liabilities": 2438.836,
+    "net_income": -0.163,
+    "operating_cash_flow": 51.048
+   },
+   "2023": {
+    "assets": 3016.331,
+    "equity": 170.744,
+    "liabilities": 2845.587,
+    "net_income": 56.267,
+    "operating_cash_flow": 61.836
+   },
+   "2024": {
+    "assets": 3476.001,
+    "equity": 149.488,
+    "liabilities": 3326.513,
+    "net_income": -16.224,
+    "operating_cash_flow": 26.819
+   },
+   "2025": {
+    "assets": 5274.183,
+    "equity": 255.736,
+    "liabilities": 5018.447,
+    "net_income": 106.506,
+    "operating_cash_flow": -125.431
+   }
+  },
+  "MASR": {
+   "2021": {
+    "assets": 12572.13,
+    "equity": 3931.44,
+    "liabilities": 8640.691,
+    "net_income": 282.838,
+    "operating_cash_flow": -255.282
+   },
+   "2022": {
+    "assets": 13982.964,
+    "equity": 4995.059,
+    "liabilities": 8987.905,
+    "net_income": 736.74,
+    "operating_cash_flow": 1040.917
+   },
+   "2023": {
+    "assets": 18472.774,
+    "equity": 7466.171,
+    "liabilities": 11006.603,
+    "net_income": 2128.062,
+    "operating_cash_flow": 1767.412
+   },
+   "2024": {
+    "assets": 27526.359,
+    "equity": 10070.943,
+    "liabilities": 17455.416,
+    "net_income": 2914.125,
+    "operating_cash_flow": 1198.76
+   },
+   "2025": {
+    "assets": 39384.151,
+    "equity": 12035.412,
+    "liabilities": 27348.739,
+    "net_income": 3333.408,
+    "operating_cash_flow": -836.96
+   }
+  },
+  "MBEG": {
+   "2020": {
+    "assets": 180.377,
+    "equity": 48.197,
+    "liabilities": 132.18,
+    "net_income": -4.984,
+    "operating_cash_flow": 42.694
+   },
+   "2021": {
+    "assets": 196.067,
+    "equity": 54.348,
+    "liabilities": 141.719,
+    "net_income": 5.257,
+    "operating_cash_flow": 48.61
+   },
+   "2022": {
+    "assets": 261.162,
+    "equity": 60.799,
+    "liabilities": 200.363,
+    "net_income": 4.762,
+    "operating_cash_flow": 81.149
+   },
+   "2023": {
+    "assets": 364.884,
+    "equity": 128.02,
+    "liabilities": 236.864,
+    "net_income": 42.049,
+    "operating_cash_flow": -36.94
+   },
+   "2024": {
+    "assets": 623.972,
+    "equity": 305.236,
+    "liabilities": 318.736,
+    "net_income": 12.048,
+    "operating_cash_flow": -71.975
+   }
+  },
+  "MBSC": {
+   "2020": {
+    "assets": 2041.339,
+    "equity": 1663.067,
+    "liabilities": 378.272,
+    "net_income": 76.38,
+    "operating_cash_flow": 274.357
+   },
+   "2021": {
+    "assets": 2069.31,
+    "equity": 1692.626,
+    "liabilities": 376.684,
+    "net_income": 169.058,
+    "operating_cash_flow": 5.628
+   },
+   "2022": {
+    "assets": 2332.261,
+    "equity": 989.024,
+    "liabilities": 1343.237,
+    "net_income": -145.945,
+    "operating_cash_flow": 672.568
+   },
+   "2023": {
+    "assets": 1465.534,
+    "equity": 842.003,
+    "liabilities": 623.532,
+    "net_income": 369.102,
+    "operating_cash_flow": -486.512
+   },
+   "2024": {
+    "assets": 2119.115,
+    "equity": 1387.099,
+    "liabilities": 732.015,
+    "net_income": 833.164,
+    "operating_cash_flow": 509.825
+   }
+  },
+  "MCQE": {
+   "2020": {
+    "assets": 3952.326,
+    "equity": 1779.184,
+    "liabilities": 2173.143,
+    "net_income": 33.849,
+    "operating_cash_flow": 144.456
+   },
+   "2021": {
+    "assets": 3736.485,
+    "equity": 1904.477,
+    "liabilities": 1832.008,
+    "net_income": 146.061,
+    "operating_cash_flow": 400.337
+   },
+   "2022": {
+    "assets": 4430.474,
+    "equity": 1948.745,
+    "liabilities": 2481.729,
+    "net_income": 97.044,
+    "operating_cash_flow": 146.045
+   },
+   "2023": {
+    "assets": 4897.54,
+    "equity": 1971.368,
+    "liabilities": 2926.172,
+    "net_income": 94.782,
+    "operating_cash_flow": 298.995
+   },
+   "2024": {
+    "assets": 5268.351,
+    "equity": 2179.137,
+    "liabilities": 3089.214,
+    "net_income": 237.679,
+    "operating_cash_flow": 916.508
+   }
+  },
+  "MCRO": {
+   "2021": {
+    "assets": 577.096,
+    "equity": 357.928,
+    "liabilities": 219.168,
+    "net_income": 147.93,
+    "operating_cash_flow": 50.259
+   },
+   "2022": {
+    "assets": 849.635,
+    "equity": 462.94,
+    "liabilities": 386.695,
+    "net_income": 173.836,
+    "operating_cash_flow": 134.932
+   },
+   "2023": {
+    "assets": 513.692,
+    "equity": 94.331,
+    "liabilities": 419.361,
+    "net_income": -272.651,
+    "operating_cash_flow": -38.006
+   },
+   "2024": {
+    "assets": 615.033,
+    "equity": 78.102,
+    "liabilities": 536.931,
+    "net_income": -38.099,
+    "operating_cash_flow": -74.445
+   },
+   "2025": {
+    "assets": 777.661,
+    "equity": 193.92,
+    "liabilities": 583.74,
+    "net_income": 115.729
+   }
+  },
+  "MEGM": {
+   "2020": {
+    "assets": 3167.871,
+    "equity": 618.6,
+    "liabilities": 2549.271,
+    "net_income": 93.078,
+    "operating_cash_flow": 73.962
+   },
+   "2021": {
+    "assets": 3531.856,
+    "equity": 783.241,
+    "liabilities": 2748.614,
+    "net_income": 174.558,
+    "operating_cash_flow": 380.561
+   },
+   "2022": {
+    "assets": 4464.344,
+    "equity": 879.503,
+    "liabilities": 3584.841,
+    "net_income": 75.934,
+    "operating_cash_flow": 756.161
+   },
+   "2023": {
+    "assets": 5520.149,
+    "equity": 1439.048,
+    "liabilities": 4081.101,
+    "net_income": 598.042,
+    "operating_cash_flow": 1135.027
+   },
+   "2024": {
+    "assets": 7016.413,
+    "equity": 1848.299,
+    "liabilities": 5168.114,
+    "net_income": 1070.431,
+    "operating_cash_flow": 1111.841
+   }
+  },
+  "MENA": {
+   "2020": {
+    "assets": 151.157,
+    "equity": 93.415,
+    "liabilities": 57.742,
+    "net_income": -23.357,
+    "operating_cash_flow": -19.321
+   },
+   "2021": {
+    "assets": 256.196,
+    "equity": 166.436,
+    "liabilities": 89.76,
+    "net_income": -19.884,
+    "operating_cash_flow": -3.481
+   },
+   "2022": {
+    "assets": 211.599,
+    "equity": 150.914,
+    "liabilities": 60.685,
+    "net_income": -15.521,
+    "operating_cash_flow": -48.094
+   },
+   "2023": {
+    "assets": 204.062,
+    "equity": 141.436,
+    "liabilities": 62.625,
+    "net_income": -9.474,
+    "operating_cash_flow": -12.202
+   },
+   "2024": {
+    "assets": 193.741,
+    "equity": 115.748,
+    "liabilities": 77.993,
+    "net_income": -25.685,
+    "operating_cash_flow": 0.212
+   }
+  },
+  "MEPA": {
+   "2020": {
+    "assets": 107.441,
+    "equity": 65.347,
+    "liabilities": 42.095,
+    "net_income": 4.406,
+    "operating_cash_flow": 2.302
+   },
+   "2021": {
+    "assets": 107.224,
+    "equity": 73.025,
+    "liabilities": 34.199,
+    "net_income": 7.678,
+    "operating_cash_flow": 10.482
+   },
+   "2022": {
+    "assets": 121.266,
+    "equity": 78.762,
+    "liabilities": 42.503,
+    "net_income": 5.738,
+    "operating_cash_flow": 24.638
+   },
+   "2023": {
+    "assets": 189.868,
+    "equity": 161.865,
+    "liabilities": 28.003,
+    "net_income": 21.102,
+    "operating_cash_flow": 6.864
+   },
+   "2024": {
+    "assets": 233.473,
+    "equity": 195.423,
+    "liabilities": 38.05,
+    "net_income": 36.578,
+    "operating_cash_flow": 24.149
+   }
+  },
+  "MFPC": {
+   "2020": {
+    "assets": 25137.828,
+    "equity": 16106.796,
+    "liabilities": 9031.032,
+    "net_income": 2487.863,
+    "operating_cash_flow": 3395.56
+   },
+   "2021": {
+    "assets": 26758.127,
+    "equity": 19908.658,
+    "liabilities": 6849.468,
+    "net_income": 4790.435,
+    "operating_cash_flow": 5748.686
+   },
+   "2022": {
+    "assets": 43805.59,
+    "equity": 34706.556,
+    "liabilities": 9099.034,
+    "net_income": 7256.075,
+    "operating_cash_flow": 9123.497
+   },
+   "2023": {
+    "assets": 54189.398,
+    "equity": 43252.727,
+    "liabilities": 10936.67,
+    "net_income": 5974.356,
+    "operating_cash_flow": 2020.445
+   },
+   "2024": {
+    "assets": 58002.65,
+    "equity": 45378.363,
+    "liabilities": 12624.287,
+    "net_income": 15119.739,
+    "operating_cash_flow": 8151.1
+   }
+  },
+  "MFSC": {
+   "2021": {
+    "assets": 443.52,
+    "equity": 304.549,
+    "liabilities": 138.971,
+    "net_income": 131.931,
+    "operating_cash_flow": 176.258
+   },
+   "2022": {
+    "assets": 503.654,
+    "equity": 342.928,
+    "liabilities": 160.726,
+    "net_income": 166.531,
+    "operating_cash_flow": 138.072
+   },
+   "2023": {
+    "assets": 701.515,
+    "equity": 480.638,
+    "liabilities": 220.877,
+    "net_income": 294.422,
+    "operating_cash_flow": 267.971
+   },
+   "2024": {
+    "assets": 837.274,
+    "equity": 552.221,
+    "liabilities": 285.053,
+    "net_income": 350.405,
+    "operating_cash_flow": 248.703
+   },
+   "2025": {
+    "assets": 915.345,
+    "equity": 639.468,
+    "liabilities": 275.878,
+    "net_income": 400.306,
+    "operating_cash_flow": 361.289
+   }
+  },
+  "MHOT": {
+   "2021": {
+    "assets": 1696.613,
+    "equity": 487.918,
+    "liabilities": 1208.696,
+    "net_income": -183.296,
+    "operating_cash_flow": 3.445
+   },
+   "2022": {
+    "assets": 2030.77,
+    "equity": 838.526,
+    "liabilities": 1192.244,
+    "net_income": 350.609,
+    "operating_cash_flow": 395.972
+   },
+   "2023": {
+    "assets": 2818.378,
+    "equity": 1514.345,
+    "liabilities": 1304.033,
+    "net_income": 819.76,
+    "operating_cash_flow": 674.013
+   },
+   "2024": {
+    "assets": 3273.659,
+    "equity": 2512.317,
+    "liabilities": 761.342,
+    "net_income": 1454.24,
+    "operating_cash_flow": 871.847
+   },
+   "2025": {
+    "assets": 6148.538,
+    "equity": 3369.715,
+    "liabilities": 2778.823,
+    "net_income": 1389.393,
+    "operating_cash_flow": 1375.617
+   }
+  },
+  "MICH": {
+   "2021": {
+    "assets": 688.791,
+    "equity": 569.845,
+    "liabilities": 118.946,
+    "net_income": 133.108,
+    "operating_cash_flow": 168.574
+   },
+   "2022": {
+    "assets": 872.183,
+    "equity": 695.776,
+    "liabilities": 176.407,
+    "net_income": 211.045,
+    "operating_cash_flow": 249.679
+   },
+   "2023": {
+    "assets": 1511.192,
+    "equity": 1110.611,
+    "liabilities": 400.581,
+    "net_income": 545.939,
+    "operating_cash_flow": 548.855
+   },
+   "2024": {
+    "assets": 2063.542,
+    "equity": 1500.397,
+    "liabilities": 563.145,
+    "net_income": 667.432,
+    "operating_cash_flow": 366.636
+   },
+   "2025": {
+    "assets": 2168.659,
+    "equity": 1576.893,
+    "liabilities": 591.766,
+    "net_income": 569.747,
+    "operating_cash_flow": 605.277
+   }
+  },
+  "MILS": {
+   "2021": {
+    "assets": 364.461,
+    "equity": 190.767,
+    "liabilities": 173.694,
+    "net_income": 1.466,
+    "operating_cash_flow": -5.285
+   },
+   "2022": {
+    "assets": 384.066,
+    "equity": 193.568,
+    "liabilities": 190.498,
+    "net_income": 18.906,
+    "operating_cash_flow": 65.354
+   },
+   "2023": {
+    "assets": 679.891,
+    "equity": 225.57,
+    "liabilities": 454.321,
+    "net_income": 61.43,
+    "operating_cash_flow": 149.045
+   },
+   "2024": {
+    "assets": 858.023,
+    "equity": 268.579,
+    "liabilities": 589.444,
+    "net_income": 69.171,
+    "operating_cash_flow": 19.266
+   },
+   "2025": {
+    "assets": 632.005,
+    "equity": 272.298,
+    "liabilities": 359.706,
+    "net_income": 64.185,
+    "operating_cash_flow": -18.86
+   }
+  },
+  "MIPH": {
+   "2020": {
+    "assets": 3483.025,
+    "equity": 1593.259,
+    "liabilities": 1889.766,
+    "net_income": 300.781,
+    "operating_cash_flow": 437.127
+   },
+   "2021": {
+    "assets": 4105.619,
+    "equity": 1943.012,
+    "liabilities": 2162.607,
+    "net_income": 466.407,
+    "operating_cash_flow": 205.78
+   },
+   "2022": {
+    "assets": 6805.891,
+    "equity": 3040.587,
+    "liabilities": 3765.304,
+    "net_income": 612.663,
+    "operating_cash_flow": 561.773
+   },
+   "2023": {
+    "assets": 8703.565,
+    "equity": 3517.317,
+    "liabilities": 5186.248,
+    "net_income": -31.988,
+    "operating_cash_flow": 105.686
+   },
+   "2024": {
+    "assets": 12003.296,
+    "equity": 4409.034,
+    "liabilities": 7594.262,
+    "net_income": 157.066,
+    "operating_cash_flow": 221.513
+   }
+  },
+  "MISR": {
+   "2020": {
+    "assets": 6.974,
+    "equity": 6.974,
+    "net_income": -0.775,
+    "operating_cash_flow": -0.413
+   },
+   "2021": {
+    "assets": 6.375,
+    "equity": 6.327,
+    "liabilities": 0.048,
+    "net_income": -0.647,
+    "operating_cash_flow": 0.849
+   },
+   "2022": {
+    "assets": 6.283,
+    "equity": 6.283,
+    "net_income": -0.044,
+    "operating_cash_flow": 0.639
+   },
+   "2023": {
+    "assets": 5.17,
+    "equity": 5.163,
+    "liabilities": 0.007,
+    "net_income": -1.12,
+    "operating_cash_flow": -0.137
+   },
+   "2024": {
+    "assets": 6.012,
+    "equity": 4.212,
+    "liabilities": 1.8,
+    "net_income": -0.951,
+    "operating_cash_flow": 1.083
+   }
+  },
+  "MMAT": {
+   "2021": {
+    "assets": 46.978,
+    "equity": 39.745,
+    "liabilities": 7.233,
+    "net_income": -1.847,
+    "operating_cash_flow": -1.081
+   },
+   "2022": {
+    "assets": 40.44,
+    "equity": 33.742,
+    "liabilities": 6.698,
+    "net_income": -5.451,
+    "operating_cash_flow": -2.731
+   },
+   "2023": {
+    "assets": 37.662,
+    "equity": 31.336,
+    "liabilities": 6.325,
+    "net_income": -2.547,
+    "operating_cash_flow": -1.551
+   },
+   "2024": {
+    "assets": 45.684,
+    "equity": 26.035,
+    "liabilities": 19.649,
+    "net_income": -3.347,
+    "operating_cash_flow": 4.847
+   },
+   "2025": {
+    "assets": 50.692,
+    "equity": 27.723,
+    "liabilities": 22.969,
+    "net_income": 0.303,
+    "operating_cash_flow": 4.236
+   }
+  },
+  "MOED": {
+   "2020": {
+    "assets": 126.026,
+    "equity": 99.408,
+    "liabilities": 26.618,
+    "net_income": 1.414,
+    "operating_cash_flow": 3.847
+   },
+   "2021": {
+    "assets": 118.532,
+    "equity": 101.416,
+    "liabilities": 17.116,
+    "net_income": 5.519,
+    "operating_cash_flow": 3.208
+   },
+   "2022": {
+    "assets": 119.163,
+    "equity": 106.002,
+    "liabilities": 13.162,
+    "net_income": 5.226,
+    "operating_cash_flow": 10.577
+   },
+   "2023": {
+    "assets": 187.706,
+    "equity": 111.487,
+    "liabilities": 76.219,
+    "net_income": 5.486,
+    "operating_cash_flow": 23.368
+   },
+   "2024": {
+    "assets": 194.189,
+    "equity": 116.571,
+    "liabilities": 77.618,
+    "net_income": 5.083,
+    "operating_cash_flow": 5.734
+   }
+  },
+  "MOIL": {
+   "2021": {
+    "assets": 827.832,
+    "equity": 181.963,
+    "liabilities": 645.869,
+    "net_income": -78.421,
+    "operating_cash_flow": 15.499
+   },
+   "2022": {
+    "assets": 653.665,
+    "equity": -73.298,
+    "liabilities": 726.962,
+    "net_income": -105.342,
+    "operating_cash_flow": -18.121
+   },
+   "2023": {
+    "assets": 670.913,
+    "equity": -25.564,
+    "liabilities": 696.477,
+    "net_income": 47.079,
+    "operating_cash_flow": 65.085
+   },
+   "2024": {
+    "assets": 585.219,
+    "equity": -3.65,
+    "liabilities": 588.869,
+    "net_income": 20.503,
+    "operating_cash_flow": 40.877
+   },
+   "2025": {
+    "assets": 610.799,
+    "equity": 259.071,
+    "liabilities": 351.728,
+    "net_income": 56.724,
+    "operating_cash_flow": 115.715
+   }
+  },
+  "MOIN": {
+   "2021": {
+    "assets": 2157.922,
+    "equity": 628.263,
+    "liabilities": 1529.659,
+    "net_income": 124.293,
+    "operating_cash_flow": -127.068
+   },
+   "2022": {
+    "assets": 2430.956,
+    "equity": 723.725,
+    "liabilities": 1707.23,
+    "net_income": 125.798,
+    "operating_cash_flow": 16.875
+   },
+   "2023": {
+    "assets": 2948.322,
+    "equity": 891.647,
+    "liabilities": 2056.675,
+    "net_income": 191.225,
+    "operating_cash_flow": 173.532
+   },
+   "2024": {
+    "assets": 3734.633,
+    "equity": 1170.619,
+    "liabilities": 2564.014,
+    "net_income": 310.428,
+    "operating_cash_flow": 217.378
+   },
+   "2025": {
+    "assets": 4979.76,
+    "equity": 1980.354,
+    "liabilities": 2999.406,
+    "net_income": 377.703,
+    "operating_cash_flow": 42.492
+   }
+  },
+  "MOSC": {
+   "2020": {
+    "assets": 304.806,
+    "equity": 54.382,
+    "liabilities": 250.424,
+    "net_income": 20.944,
+    "operating_cash_flow": 15.325
+   },
+   "2021": {
+    "assets": 169.068,
+    "equity": 53.859,
+    "liabilities": 115.21,
+    "net_income": 3.647,
+    "operating_cash_flow": -7.651
+   },
+   "2022": {
+    "assets": 593.279,
+    "equity": 74.757,
+    "liabilities": 518.523,
+    "net_income": 3.361,
+    "operating_cash_flow": 11.965
+   },
+   "2023": {
+    "assets": 215.814,
+    "equity": 75.903,
+    "liabilities": 139.911,
+    "net_income": 3.285,
+    "operating_cash_flow": -6.887
+   },
+   "2024": {
+    "assets": 656.986,
+    "equity": 74.566,
+    "liabilities": 582.42,
+    "net_income": 0.816,
+    "operating_cash_flow": -9.826
+   }
+  },
+  "MPCI": {
+   "2021": {
+    "assets": 431.582,
+    "equity": -38.184,
+    "liabilities": 469.766,
+    "net_income": 41.806,
+    "operating_cash_flow": 3.472
+   },
+   "2022": {
+    "assets": 560.294,
+    "equity": 36.643,
+    "liabilities": 523.651,
+    "net_income": 74.087,
+    "operating_cash_flow": 36.467
+   },
+   "2023": {
+    "assets": 785.657,
+    "equity": 104.952,
+    "liabilities": 680.705,
+    "net_income": 90.437,
+    "operating_cash_flow": 57.94
+   },
+   "2024": {
+    "assets": 1217.039,
+    "equity": 149.08,
+    "liabilities": 1067.959,
+    "net_income": 191.458,
+    "operating_cash_flow": 183.202
+   },
+   "2025": {
+    "assets": 1492.805,
+    "equity": 770.535,
+    "liabilities": 722.27,
+    "net_income": 505.28,
+    "operating_cash_flow": 86.886
+   }
+  },
+  "MPCO": {
+   "2020": {
+    "assets": 122.154,
+    "equity": 103.779,
+    "liabilities": 18.376,
+    "net_income": 20.245,
+    "operating_cash_flow": 24.206
+   },
+   "2021": {
+    "assets": 119.086,
+    "equity": 101.17,
+    "liabilities": 17.917,
+    "net_income": 0.563,
+    "operating_cash_flow": -9.556
+   },
+   "2022": {
+    "assets": 110.667,
+    "equity": 67.4,
+    "liabilities": 43.267,
+    "net_income": -33.81,
+    "operating_cash_flow": -27.511
+   },
+   "2023": {
+    "assets": 308.428,
+    "equity": 174.629,
+    "liabilities": 133.798,
+    "net_income": 107.229,
+    "operating_cash_flow": 73.276
+   },
+   "2024": {
+    "assets": 488.026,
+    "equity": 311.928,
+    "liabilities": 176.098,
+    "net_income": 152.717,
+    "operating_cash_flow": -19.75
+   }
+  },
+  "MPRC": {
+   "2021": {
+    "assets": 2699.394,
+    "equity": 2441.365,
+    "liabilities": 258.03,
+    "net_income": 137.237,
+    "operating_cash_flow": 80.19
+   },
+   "2022": {
+    "assets": 3014.214,
+    "equity": 2593.555,
+    "liabilities": 420.659,
+    "net_income": 271.188,
+    "operating_cash_flow": 269.682
+   },
+   "2023": {
+    "assets": 3489.924,
+    "equity": 2957.154,
+    "liabilities": 532.77,
+    "net_income": 478.853,
+    "operating_cash_flow": 336.93
+   },
+   "2024": {
+    "assets": 4299.181,
+    "equity": 3630.466,
+    "liabilities": 668.715,
+    "net_income": 793.831,
+    "operating_cash_flow": 463.853
+   },
+   "2025": {
+    "assets": 4997.961,
+    "equity": 4283.787,
+    "liabilities": 714.174,
+    "net_income": 776.0,
+    "operating_cash_flow": 657.816
+   }
+  },
+  "MTIE": {
+   "2021": {
+    "assets": 3673.44,
+    "equity": 2116.847,
+    "liabilities": 1556.593,
+    "net_income": 375.461,
+    "operating_cash_flow": 372.928
+   },
+   "2022": {
+    "assets": 3491.084,
+    "equity": 2335.488,
+    "liabilities": 1155.596,
+    "net_income": 342.681,
+    "operating_cash_flow": 780.788
+   },
+   "2023": {
+    "assets": 4446.823,
+    "equity": 2975.233,
+    "liabilities": 1471.591,
+    "net_income": 699.156,
+    "operating_cash_flow": 233.735
+   },
+   "2024": {
+    "assets": 6130.247,
+    "equity": 3954.676,
+    "liabilities": 2175.571,
+    "net_income": 1063.014,
+    "operating_cash_flow": -8.37
+   },
+   "2025": {
+    "assets": 7876.99,
+    "equity": 5065.071,
+    "liabilities": 2811.919,
+    "net_income": 1244.894,
+    "operating_cash_flow": 516.623
+   }
+  },
+  "NARE": {
+   "2021": {
+    "assets": 1286.354,
+    "equity": 775.399,
+    "liabilities": 510.955,
+    "net_income": 69.025,
+    "operating_cash_flow": -3.36
+   },
+   "2022": {
+    "assets": 1203.293,
+    "equity": 874.977,
+    "liabilities": 328.317,
+    "net_income": 17.039,
+    "operating_cash_flow": 28.756
+   },
+   "2023": {
+    "assets": 1265.198,
+    "equity": 958.76,
+    "liabilities": 306.438,
+    "net_income": 26.281,
+    "operating_cash_flow": 18.501
+   },
+   "2024": {
+    "assets": 1757.297,
+    "equity": 1285.8,
+    "liabilities": 471.496,
+    "net_income": 134.048,
+    "operating_cash_flow": 291.419
+   },
+   "2025": {
+    "assets": 2908.422,
+    "equity": 2440.779,
+    "liabilities": 467.643,
+    "net_income": 92.106,
+    "operating_cash_flow": -7.972
+   }
+  },
+  "NBKE": {
+   "2019": {
+    "assets": 64324.099,
+    "equity": 8010.848,
+    "liabilities": 56313.251,
+    "net_income": 2168.696,
+    "operating_cash_flow": -4240.926
+   },
+   "2020": {
+    "assets": 62193.575,
+    "equity": 9063.625,
+    "liabilities": 53129.95,
+    "net_income": 1443.875,
+    "operating_cash_flow": -5376.406
+   },
+   "2021": {
+    "assets": 77493.738,
+    "equity": 10298.217,
+    "liabilities": 67195.521,
+    "net_income": 1439.002,
+    "operating_cash_flow": 6904.378
+   },
+   "2023": {
+    "assets": 130609.716,
+    "equity": 14895.507,
+    "liabilities": 115714.209,
+    "net_income": 4020.942,
+    "operating_cash_flow": -1584.381
+   }
+  },
+  "NCCW": {
+   "2020": {
+    "assets": 545.061,
+    "equity": 195.395,
+    "liabilities": 349.666,
+    "net_income": -27.018,
+    "operating_cash_flow": -3.923
+   },
+   "2021": {
+    "assets": 555.805,
+    "equity": 225.161,
+    "liabilities": 330.644,
+    "net_income": 0.958,
+    "operating_cash_flow": -3.321
+   },
+   "2022": {
+    "assets": 591.999,
+    "equity": 203.177,
+    "liabilities": 388.822,
+    "net_income": -21.984,
+    "operating_cash_flow": -10.213
+   },
+   "2023": {
+    "assets": 800.239,
+    "equity": 217.094,
+    "liabilities": 583.144,
+    "net_income": 13.917,
+    "operating_cash_flow": 67.005
+   },
+   "2024": {
+    "assets": 830.329,
+    "equity": 283.407,
+    "liabilities": 546.922,
+    "net_income": 68.15,
+    "operating_cash_flow": 28.976
+   }
+  },
+  "NCGC": {
+   "2016": {
+    "assets": 561.337,
+    "equity": 456.402,
+    "liabilities": 104.935,
+    "net_income": -11.832,
+    "operating_cash_flow": 4.482
+   },
+   "2017": {
+    "assets": 558.711,
+    "equity": 384.713,
+    "liabilities": 173.998,
+    "net_income": -72.239,
+    "operating_cash_flow": 1.229
+   },
+   "2018": {
+    "assets": 554.408,
+    "equity": 382.098,
+    "liabilities": 172.311,
+    "net_income": -2.615,
+    "operating_cash_flow": -3.311
+   },
+   "2019": {
+    "net_income": 7.845,
+    "operating_cash_flow": -3.443
+   },
+   "2020": {
+    "assets": 492.632,
+    "equity": 444.43,
+    "liabilities": 48.203,
+    "net_income": 54.487,
+    "operating_cash_flow": 11.942
+   }
+  },
+  "NDRL": {
+   "2021": {
+    "assets": 48.079,
+    "equity": 24.214,
+    "liabilities": 23.865,
+    "net_income": -2.093,
+    "operating_cash_flow": -5.02
+   },
+   "2022": {
+    "assets": 54.595,
+    "equity": 29.056,
+    "liabilities": 25.539,
+    "net_income": 4.842,
+    "operating_cash_flow": 2.487
+   },
+   "2023": {
+    "assets": 61.694,
+    "equity": 40.365,
+    "liabilities": 21.329,
+    "net_income": 11.676,
+    "operating_cash_flow": 5.439
+   },
+   "2024": {
+    "assets": 70.334,
+    "equity": 46.753,
+    "liabilities": 23.581,
+    "net_income": 6.021,
+    "operating_cash_flow": 2.559
+   },
+   "2025": {
+    "assets": 80.309,
+    "equity": 56.705,
+    "liabilities": 23.604,
+    "net_income": 9.952,
+    "operating_cash_flow": 8.218
+   }
+  },
+  "NEDA": {
+   "2020": {
+    "assets": 50.057,
+    "equity": 45.47,
+    "liabilities": 4.587,
+    "net_income": -1.01,
+    "operating_cash_flow": 0.284
+   },
+   "2021": {
+    "assets": 42.911,
+    "equity": 36.237,
+    "liabilities": 6.674,
+    "net_income": -9.101,
+    "operating_cash_flow": -0.726
+   },
+   "2022": {
+    "assets": 42.929,
+    "equity": 37.625,
+    "liabilities": 5.304,
+    "net_income": 1.381,
+    "operating_cash_flow": 4.436
+   },
+   "2023": {
+    "assets": 42.334,
+    "equity": 37.868,
+    "liabilities": 4.466,
+    "net_income": 0.299,
+    "operating_cash_flow": 8.436
+   },
+   "2024": {
+    "assets": 40.842,
+    "equity": 34.99,
+    "liabilities": 5.852,
+    "net_income": -4.447,
+    "operating_cash_flow": -2.584
+   }
+  },
+  "NHPS": {
+   "2020": {
+    "assets": 389.865,
+    "equity": 143.681,
+    "liabilities": 246.184,
+    "net_income": -34.829,
+    "operating_cash_flow": 31.003
+   },
+   "2021": {
+    "assets": 674.812,
+    "equity": 500.309,
+    "liabilities": 174.503,
+    "net_income": 356.32,
+    "operating_cash_flow": 17.387
+   },
+   "2022": {
+    "assets": 495.605,
+    "equity": 445.21,
+    "liabilities": 50.395,
+    "net_income": 44.021,
+    "operating_cash_flow": -15.408
+   },
+   "2023": {
+    "assets": 481.651,
+    "equity": 422.243,
+    "liabilities": 59.408,
+    "net_income": 62.565,
+    "operating_cash_flow": 130.365
+   },
+   "2024": {
+    "assets": 404.673,
+    "equity": 334.002,
+    "liabilities": 70.67,
+    "net_income": 76.139,
+    "operating_cash_flow": 109.255
+   }
+  },
+  "NINH": {
+   "2020": {
+    "assets": 327.39,
+    "equity": 273.069,
+    "liabilities": 54.321,
+    "net_income": 49.604,
+    "operating_cash_flow": 48.051
+   },
+   "2021": {
+    "assets": 384.745,
+    "equity": 327.379,
+    "liabilities": 57.366,
+    "net_income": 65.885,
+    "operating_cash_flow": 79.169
+   },
+   "2022": {
+    "assets": 436.79,
+    "equity": 379.786,
+    "liabilities": 57.004,
+    "net_income": 63.519,
+    "operating_cash_flow": 56.396
+   },
+   "2023": {
+    "assets": 541.518,
+    "equity": 464.41,
+    "liabilities": 77.108,
+    "net_income": 91.514,
+    "operating_cash_flow": 108.229
+   },
+   "2024": {
+    "assets": 659.589,
+    "equity": 574.017,
+    "liabilities": 85.572,
+    "net_income": 117.664,
+    "operating_cash_flow": 122.704
+   }
+  },
+  "NIPH": {
+   "2021": {
+    "assets": 720.142,
+    "equity": 371.321,
+    "liabilities": 348.821,
+    "net_income": 64.421,
+    "operating_cash_flow": 79.471
+   },
+   "2022": {
+    "assets": 769.382,
+    "equity": 430.866,
+    "liabilities": 338.516,
+    "net_income": 89.672,
+    "operating_cash_flow": 4.91
+   },
+   "2023": {
+    "assets": 1038.287,
+    "equity": 478.482,
+    "liabilities": 559.805,
+    "net_income": 119.213,
+    "operating_cash_flow": -256.435
+   },
+   "2024": {
+    "assets": 1473.195,
+    "equity": 468.859,
+    "liabilities": 1004.336,
+    "net_income": 90.226,
+    "operating_cash_flow": 264.113
+   }
+  },
+  "OBRI": {
+   "2021": {
+    "assets": 158.474,
+    "equity": 35.992,
+    "liabilities": 122.483,
+    "net_income": 2.501,
+    "operating_cash_flow": -9.072
+   },
+   "2022": {
+    "assets": 368.107,
+    "equity": 100.211,
+    "liabilities": 267.897,
+    "net_income": 3.871,
+    "operating_cash_flow": 19.858
+   },
+   "2023": {
+    "assets": 536.277,
+    "equity": 110.026,
+    "liabilities": 426.251,
+    "net_income": 9.815,
+    "operating_cash_flow": -56.087
+   },
+   "2025": {
+    "assets": 1456.568,
+    "equity": 292.916,
+    "liabilities": 1163.652,
+    "net_income": 49.317,
+    "operating_cash_flow": 266.377
+   }
+  },
+  "OCDI": {
+   "2021": {
+    "assets": 26794.418,
+    "equity": 6797.845,
+    "liabilities": 19996.573,
+    "net_income": 860.31,
+    "operating_cash_flow": 635.315
+   },
+   "2022": {
+    "assets": 30384.709,
+    "equity": 7311.127,
+    "liabilities": 23073.582,
+    "net_income": 520.058,
+    "operating_cash_flow": 575.108
+   },
+   "2023": {
+    "assets": 38715.259,
+    "equity": 8683.699,
+    "liabilities": 30031.56,
+    "net_income": 1373.013,
+    "operating_cash_flow": -443.574
+   },
+   "2024": {
+    "assets": 54372.156,
+    "equity": 11419.506,
+    "liabilities": 42952.65,
+    "net_income": 2527.212,
+    "operating_cash_flow": 838.601
+   },
+   "2025": {
+    "assets": 89882.331,
+    "equity": 15900.823,
+    "liabilities": 73981.509,
+    "net_income": 4479.519,
+    "operating_cash_flow": -5088.543
+   }
+  },
+  "OCPH": {
+   "2020": {
+    "assets": 606.152,
+    "equity": 253.865,
+    "liabilities": 352.287,
+    "net_income": 88.259,
+    "operating_cash_flow": 21.391
+   },
+   "2021": {
+    "assets": 553.055,
+    "equity": 339.457,
+    "liabilities": 213.599,
+    "net_income": 119.791,
+    "operating_cash_flow": 262.129
+   },
+   "2022": {
+    "assets": 949.939,
+    "equity": 425.525,
+    "liabilities": 524.414,
+    "net_income": 130.747,
+    "operating_cash_flow": -92.327
+   },
+   "2023": {
+    "assets": 1138.089,
+    "equity": 589.535,
+    "liabilities": 548.554,
+    "net_income": 182.132,
+    "operating_cash_flow": 152.868
+   },
+   "2024": {
+    "assets": 1413.844,
+    "equity": 569.35,
+    "liabilities": 844.495,
+    "net_income": 151.839,
+    "operating_cash_flow": 43.237
+   }
+  },
+  "ODIN": {
+   "2020": {
+    "assets": 821.702,
+    "equity": 730.088,
+    "liabilities": 91.614,
+    "net_income": -2.483,
+    "operating_cash_flow": -54.829
+   },
+   "2021": {
+    "assets": 117.36,
+    "equity": 105.437,
+    "liabilities": 11.923,
+    "net_income": -1.032,
+    "operating_cash_flow": -25.43
+   },
+   "2022": {
+    "assets": 109.162,
+    "equity": 94.584,
+    "liabilities": 14.578,
+    "net_income": -5.226,
+    "operating_cash_flow": 4.289
+   },
+   "2023": {
+    "assets": 258.136,
+    "equity": 193.445,
+    "liabilities": 64.691,
+    "net_income": 9.564,
+    "operating_cash_flow": 12.58
+   },
+   "2024": {
+    "assets": 347.849,
+    "equity": 300.924,
+    "liabilities": 46.926,
+    "net_income": 160.119,
+    "operating_cash_flow": -20.645
+   }
+  },
+  "OFH": {
+   "2021": {
+    "assets": 4445.177,
+    "equity": 2783.599,
+    "liabilities": 1661.578,
+    "net_income": -23.734,
+    "operating_cash_flow": 141.955
+   },
+   "2022": {
+    "assets": 2561.295,
+    "equity": 2503.98,
+    "liabilities": 57.315,
+    "net_income": -72.114,
+    "operating_cash_flow": 5.869
+   },
+   "2023": {
+    "assets": 2622.365,
+    "equity": 2490.318,
+    "liabilities": 132.047,
+    "net_income": 56.837,
+    "operating_cash_flow": -30.664
+   },
+   "2024": {
+    "assets": 2569.304,
+    "equity": 2387.726,
+    "liabilities": 181.578,
+    "net_income": -2.977,
+    "operating_cash_flow": -219.365
+   }
+  },
+  "OIH": {
+   "2020": {
+    "assets": 3638.479,
+    "equity": 1557.894,
+    "liabilities": 2080.585,
+    "net_income": -103.22,
+    "operating_cash_flow": -49.488
+   },
+   "2021": {
+    "assets": 4012.133,
+    "equity": 1940.227,
+    "liabilities": 2071.906,
+    "net_income": 563.967,
+    "operating_cash_flow": -241.732
+   },
+   "2022": {
+    "assets": 4025.797,
+    "equity": 2579.992,
+    "liabilities": 1445.805,
+    "net_income": 428.049,
+    "operating_cash_flow": -13.324
+   },
+   "2023": {
+    "assets": 4841.556,
+    "equity": 3068.102,
+    "liabilities": 1773.454,
+    "net_income": -28.22,
+    "operating_cash_flow": -228.057
+   },
+   "2024": {
+    "assets": 9508.425,
+    "equity": 3250.821,
+    "liabilities": 6257.604,
+    "net_income": -908.943,
+    "operating_cash_flow": -649.565
+   }
+  },
+  "OLFI": {
+   "2021": {
+    "assets": 1548.344,
+    "equity": 1005.434,
+    "liabilities": 542.91,
+    "net_income": 350.682,
+    "operating_cash_flow": 586.031
+   },
+   "2022": {
+    "assets": 2566.765,
+    "equity": 1095.048,
+    "liabilities": 1471.717,
+    "net_income": 462.391,
+    "operating_cash_flow": 430.322
+   },
+   "2023": {
+    "assets": 2588.041,
+    "equity": 1125.752,
+    "liabilities": 1462.29,
+    "net_income": 470.697,
+    "operating_cash_flow": 84.118
+   },
+   "2024": {
+    "assets": 4216.183,
+    "equity": 1685.467,
+    "liabilities": 2530.717,
+    "net_income": 1000.17,
+    "operating_cash_flow": -573.065
+   },
+   "2025": {
+    "assets": 5875.774,
+    "equity": 1621.911,
+    "liabilities": 4253.863,
+    "net_income": 853.95,
+    "operating_cash_flow": 714.73
+   }
+  },
+  "ORHD": {
+   "2020": {
+    "assets": 18894.948,
+    "equity": 3670.288,
+    "liabilities": 15224.66,
+    "net_income": 532.181,
+    "operating_cash_flow": 748.35
+   },
+   "2021": {
+    "assets": 22640.933,
+    "equity": 4994.531,
+    "liabilities": 17646.401,
+    "net_income": 1208.809,
+    "operating_cash_flow": 1262.922
+   },
+   "2022": {
+    "assets": 28268.585,
+    "equity": 6812.358,
+    "liabilities": 21456.227,
+    "net_income": 1672.049,
+    "operating_cash_flow": 1045.554
+   },
+   "2023": {
+    "assets": 39235.978,
+    "equity": 9965.753,
+    "liabilities": 29270.225,
+    "net_income": 2828.722,
+    "operating_cash_flow": 1284.078
+   },
+   "2024": {
+    "assets": 50700.396,
+    "equity": 13135.492,
+    "liabilities": 37564.904,
+    "net_income": 3108.488,
+    "operating_cash_flow": 4562.272
+   }
+  },
+  "ORWE": {
+   "2021": {
+    "assets": 14166.536,
+    "equity": 8256.983,
+    "liabilities": 5909.553,
+    "net_income": 1085.407,
+    "operating_cash_flow": 569.706
+   },
+   "2022": {
+    "assets": 19175.134,
+    "equity": 11255.252,
+    "liabilities": 7919.881,
+    "net_income": 842.885,
+    "operating_cash_flow": 1232.317
+   },
+   "2023": {
+    "assets": 23107.992,
+    "equity": 14170.89,
+    "liabilities": 8937.102,
+    "net_income": 1740.204,
+    "operating_cash_flow": 3134.3
+   },
+   "2024": {
+    "assets": 34904.567,
+    "equity": 21041.331,
+    "liabilities": 13863.236,
+    "net_income": 2192.283,
+    "operating_cash_flow": 1910.109
+   },
+   "2025": {
+    "net_income": 2189.344
+   }
+  },
+  "PACH": {
+   "2018": {
+    "assets": 895.955,
+    "equity": 657.985,
+    "liabilities": 237.971,
+    "net_income": 89.354,
+    "operating_cash_flow": 59.211
+   },
+   "2019": {
+    "assets": 827.482,
+    "equity": 581.137,
+    "liabilities": 246.345,
+    "net_income": 27.137,
+    "operating_cash_flow": 135.342
+   },
+   "2020": {
+    "assets": 717.605,
+    "equity": 519.699,
+    "liabilities": 197.907,
+    "net_income": 4.568,
+    "operating_cash_flow": -65.194
+   },
+   "2021": {
+    "assets": 738.113,
+    "equity": 543.544,
+    "liabilities": 194.569,
+    "net_income": 52.728,
+    "operating_cash_flow": 101.184
+   },
+   "2022": {
+    "assets": 729.607,
+    "equity": 498.447,
+    "liabilities": 231.16,
+    "net_income": -0.408,
+    "operating_cash_flow": -61.775
+   }
+  },
+  "PHAR": {
+   "2020": {
+    "assets": 5032.613,
+    "equity": 2846.82,
+    "liabilities": 2185.792,
+    "net_income": 422.832,
+    "operating_cash_flow": 164.862
+   },
+   "2021": {
+    "assets": 5273.088,
+    "equity": 2973.469,
+    "liabilities": 2299.619,
+    "net_income": 483.918,
+    "operating_cash_flow": 383.821
+   },
+   "2022": {
+    "assets": 6773.91,
+    "equity": 3242.387,
+    "liabilities": 3531.523,
+    "net_income": 587.041,
+    "operating_cash_flow": -296.813
+   },
+   "2023": {
+    "assets": 9978.783,
+    "equity": 4260.803,
+    "liabilities": 5717.98,
+    "net_income": 823.306,
+    "operating_cash_flow": 90.354
+   },
+   "2024": {
+    "assets": 15372.957,
+    "equity": 4657.585,
+    "liabilities": 10715.372,
+    "net_income": 1096.924,
+    "operating_cash_flow": -1274.488
+   }
+  },
+  "PHDC": {
+   "2020": {
+    "assets": 38303.348,
+    "equity": 9456.895,
+    "liabilities": 28846.453,
+    "net_income": 717.768,
+    "operating_cash_flow": 1903.218
+   },
+   "2021": {
+    "assets": 40900.058,
+    "equity": 9591.623,
+    "liabilities": 31308.434,
+    "net_income": 824.36,
+    "operating_cash_flow": 528.239
+   },
+   "2022": {
+    "assets": 49505.997,
+    "equity": 10171.587,
+    "liabilities": 39334.41,
+    "net_income": 1255.848,
+    "operating_cash_flow": -906.567
+   },
+   "2023": {
+    "assets": 74298.461,
+    "equity": 11721.848,
+    "liabilities": 62576.613,
+    "net_income": 1581.512,
+    "operating_cash_flow": 753.224
+   },
+   "2024": {
+    "assets": 123437.324,
+    "equity": 14624.682,
+    "liabilities": 108812.642,
+    "net_income": 3254.945,
+    "operating_cash_flow": 3084.378
+   }
+  },
+  "PHTV": {
+   "2020": {
+    "assets": 1467.138,
+    "equity": 927.783,
+    "liabilities": 539.356,
+    "net_income": 21.06,
+    "operating_cash_flow": 46.448
+   },
+   "2021": {
+    "assets": 1710.767,
+    "equity": 992.662,
+    "liabilities": 718.105,
+    "net_income": 60.827,
+    "operating_cash_flow": 98.716
+   },
+   "2022": {
+    "assets": 2164.938,
+    "equity": 1012.452,
+    "liabilities": 1152.486,
+    "net_income": 53.036,
+    "operating_cash_flow": 288.689
+   },
+   "2023": {
+    "assets": 3067.37,
+    "equity": 1251.7,
+    "liabilities": 1815.67,
+    "net_income": 327.777,
+    "operating_cash_flow": 757.433
+   },
+   "2024": {
+    "assets": 4548.305,
+    "equity": 1830.366,
+    "liabilities": 2717.939,
+    "net_income": 599.716,
+    "operating_cash_flow": 1365.519
+   }
+  },
+  "POUL": {
+   "2021": {
+    "assets": 2665.079,
+    "equity": 1364.242,
+    "liabilities": 1300.837,
+    "net_income": 182.231,
+    "operating_cash_flow": 541.143
+   },
+   "2022": {
+    "assets": 3756.248,
+    "equity": 1635.972,
+    "liabilities": 2120.276,
+    "net_income": 295.891,
+    "operating_cash_flow": 189.106
+   },
+   "2023": {
+    "assets": 5239.799,
+    "equity": 2799.313,
+    "liabilities": 2440.486,
+    "net_income": 1147.34,
+    "operating_cash_flow": 1405.32
+   },
+   "2024": {
+    "assets": 7925.667,
+    "equity": 4648.163,
+    "liabilities": 3277.504,
+    "net_income": 2386.593,
+    "operating_cash_flow": 3254.75
+   },
+   "2025": {
+    "assets": 10704.791,
+    "equity": 7340.826,
+    "liabilities": 3363.964,
+    "net_income": 2853.489,
+    "operating_cash_flow": 2669.376
+   }
+  },
+  "PRCL": {
+   "2021": {
+    "assets": 317.65,
+    "equity": 83.797,
+    "liabilities": 233.853,
+    "net_income": -62.328,
+    "operating_cash_flow": -1.209
+   },
+   "2022": {
+    "assets": 311.638,
+    "equity": 14.826,
+    "liabilities": 296.811,
+    "net_income": -68.97,
+    "operating_cash_flow": 1.908
+   },
+   "2023": {
+    "assets": 333.441,
+    "equity": 33.553,
+    "liabilities": 299.888,
+    "net_income": 19.651,
+    "operating_cash_flow": 31.256
+   },
+   "2025": {
+    "assets": 504.503,
+    "equity": -173.636,
+    "liabilities": 678.14,
+    "net_income": -99.222,
+    "operating_cash_flow": -0.028
+   }
+  },
+  "PRDC": {
+   "2021": {
+    "assets": 25742.917,
+    "equity": 9920.465,
+    "liabilities": 15822.452,
+    "net_income": 359.0,
+    "operating_cash_flow": -9.73
+   },
+   "2022": {
+    "assets": 33087.888,
+    "equity": 10267.326,
+    "liabilities": 22820.562,
+    "net_income": 205.895,
+    "operating_cash_flow": -838.92
+   },
+   "2023": {
+    "assets": 43552.753,
+    "equity": 10059.944,
+    "liabilities": 33492.809,
+    "net_income": 414.023,
+    "operating_cash_flow": 399.3
+   },
+   "2024": {
+    "assets": 60761.954,
+    "equity": 13146.556,
+    "liabilities": 47615.398,
+    "net_income": 1101.137,
+    "operating_cash_flow": 2584.777
+   }
+  },
+  "PRMH": {
+   "2021": {
+    "assets": 570.368,
+    "equity": 323.497,
+    "liabilities": 246.87,
+    "net_income": -56.626,
+    "operating_cash_flow": -134.398
+   },
+   "2022": {
+    "assets": 631.809,
+    "equity": 264.64,
+    "liabilities": 367.169,
+    "net_income": -58.563,
+    "operating_cash_flow": 30.828
+   },
+   "2023": {
+    "assets": 931.483,
+    "equity": 289.724,
+    "liabilities": 641.76,
+    "net_income": 25.134,
+    "operating_cash_flow": 307.091
+   },
+   "2024": {
+    "assets": 987.661,
+    "equity": 366.55,
+    "liabilities": 621.111,
+    "net_income": 41.07,
+    "operating_cash_flow": 50.08
+   },
+   "2025": {
+    "assets": 966.616,
+    "equity": 471.114,
+    "liabilities": 495.502,
+    "net_income": 108.676,
+    "operating_cash_flow": -261.879
+   }
+  },
+  "QNBE": {
+   "2020": {
+    "assets": 290162.974,
+    "equity": 39636.739,
+    "liabilities": 250526.235,
+    "net_income": 7491.518,
+    "operating_cash_flow": 9893.834
+   },
+   "2021": {
+    "assets": 359568.668,
+    "equity": 46375.441,
+    "liabilities": 313193.226,
+    "net_income": 7626.556,
+    "operating_cash_flow": 53093.83
+   },
+   "2022": {
+    "assets": 483279.896,
+    "equity": 54097.891,
+    "liabilities": 429182.005,
+    "net_income": 10350.459,
+    "operating_cash_flow": 43781.844
+   },
+   "2023": {
+    "assets": 628757.87,
+    "equity": 66637.713,
+    "liabilities": 562120.157,
+    "net_income": 16228.33,
+    "operating_cash_flow": -4113.012
+   },
+   "2024": {
+    "assets": 819839.511,
+    "equity": 91025.568,
+    "liabilities": 728813.943,
+    "net_income": 26398.164,
+    "operating_cash_flow": 173087.367
+   }
+  },
+  "RACC": {
+   "2020": {
+    "assets": 589.113,
+    "equity": 391.59,
+    "liabilities": 197.523,
+    "net_income": 35.638,
+    "operating_cash_flow": 89.131
+   },
+   "2021": {
+    "assets": 904.945,
+    "equity": 390.667,
+    "liabilities": 514.278,
+    "net_income": 22.907,
+    "operating_cash_flow": 105.77
+   },
+   "2022": {
+    "assets": 1258.639,
+    "equity": 395.022,
+    "liabilities": 863.616,
+    "net_income": 46.395,
+    "operating_cash_flow": 176.346
+   },
+   "2023": {
+    "assets": 1461.719,
+    "equity": 562.021,
+    "liabilities": 899.698,
+    "net_income": 168.17,
+    "operating_cash_flow": 475.382
+   },
+   "2024": {
+    "assets": 2126.84,
+    "equity": 824.292,
+    "liabilities": 1302.548,
+    "net_income": 328.154,
+    "operating_cash_flow": 500.961
+   }
+  },
+  "RAKT": {
+   "2021": {
+    "assets": 156.832,
+    "equity": -582.34,
+    "liabilities": 739.171,
+    "net_income": -98.277,
+    "operating_cash_flow": -101.077
+   },
+   "2022": {
+    "assets": 161.415,
+    "equity": -218.151,
+    "liabilities": 379.566,
+    "net_income": -90.79,
+    "operating_cash_flow": -182.04
+   },
+   "2023": {
+    "assets": 144.213,
+    "equity": -267.576,
+    "liabilities": 411.79,
+    "net_income": -51.765,
+    "operating_cash_flow": -63.317
+   },
+   "2025": {
+    "assets": 127.348,
+    "equity": -972.802,
+    "liabilities": 1100.15,
+    "operating_cash_flow": -10.592
+   }
+  },
+  "RAYA": {
+   "2020": {
+    "assets": 10063.632,
+    "equity": 979.328,
+    "liabilities": 9084.304,
+    "net_income": -61.678,
+    "operating_cash_flow": -254.423
+   },
+   "2021": {
+    "assets": 14411.844,
+    "equity": 1753.636,
+    "liabilities": 12658.208,
+    "net_income": 487.335,
+    "operating_cash_flow": -1023.131
+   },
+   "2022": {
+    "assets": 20770.172,
+    "equity": 2257.323,
+    "liabilities": 18512.849,
+    "net_income": 347.313,
+    "operating_cash_flow": 107.349
+   },
+   "2023": {
+    "assets": 27148.954,
+    "equity": 2923.4,
+    "liabilities": 24225.553,
+    "net_income": 441.357,
+    "operating_cash_flow": 2714.95
+   },
+   "2024": {
+    "assets": 39112.324,
+    "equity": 4751.966,
+    "liabilities": 34360.358,
+    "net_income": 1688.544,
+    "operating_cash_flow": 3119.079
+   }
+  },
+  "RKAZ": {
+   "2021": {
+    "assets": 6.018,
+    "equity": 3.493,
+    "liabilities": 2.525,
+    "net_income": 0.01,
+    "operating_cash_flow": 2.363
+   },
+   "2022": {
+    "assets": 18.241,
+    "equity": 17.588,
+    "liabilities": 0.653,
+    "net_income": -1.904,
+    "operating_cash_flow": -4.473
+   },
+   "2023": {
+    "assets": 19.899,
+    "equity": 19.495,
+    "liabilities": 0.404,
+    "net_income": 1.9,
+    "operating_cash_flow": 1.892
+   },
+   "2024": {
+    "assets": 21.093,
+    "equity": 20.56,
+    "liabilities": 0.533,
+    "net_income": -0.326,
+    "operating_cash_flow": -0.726
+   },
+   "2025": {
+    "assets": 21.485,
+    "equity": 20.777,
+    "liabilities": 0.708,
+    "net_income": 0.969,
+    "operating_cash_flow": 0.211
+   }
+  },
+  "RMDA": {
+   "2020": {
+    "assets": 2249.315,
+    "equity": 1183.57,
+    "liabilities": 1065.745,
+    "net_income": 112.18,
+    "operating_cash_flow": -164.324
+   },
+   "2021": {
+    "assets": 2420.301,
+    "equity": 1345.489,
+    "liabilities": 1074.812,
+    "net_income": 181.089,
+    "operating_cash_flow": 241.35
+   },
+   "2022": {
+    "assets": 2773.031,
+    "equity": 1523.177,
+    "liabilities": 1249.855,
+    "net_income": 245.676,
+    "operating_cash_flow": 29.348
+   },
+   "2023": {
+    "assets": 3218.272,
+    "equity": 1775.499,
+    "liabilities": 1442.773,
+    "net_income": 244.859,
+    "operating_cash_flow": -44.495
+   },
+   "2024": {
+    "assets": 4311.316,
+    "equity": 2071.644,
+    "liabilities": 2239.671,
+    "net_income": 387.367,
+    "operating_cash_flow": -306.92
+   }
+  },
+  "ROTO": {
+   "2020": {
+    "assets": 401.424,
+    "equity": 305.351,
+    "liabilities": 96.073,
+    "net_income": -14.218,
+    "operating_cash_flow": -20.421
+   },
+   "2021": {
+    "assets": 489.043,
+    "equity": 285.423,
+    "liabilities": 203.621,
+    "net_income": 5.537,
+    "operating_cash_flow": -8.852
+   },
+   "2022": {
+    "assets": 415.734,
+    "equity": 229.352,
+    "liabilities": 186.381,
+    "net_income": -42.14,
+    "operating_cash_flow": -6.741
+   },
+   "2023": {
+    "assets": 750.181,
+    "equity": 224.297,
+    "liabilities": 525.884,
+    "net_income": -9.428,
+    "operating_cash_flow": 301.091
+   },
+   "2024": {
+    "assets": 788.186,
+    "equity": 210.491,
+    "liabilities": 577.696,
+    "net_income": -19.743,
+    "operating_cash_flow": 42.543
+   }
+  },
+  "RREI": {
+   "2020": {
+    "assets": 554.764,
+    "equity": 338.298,
+    "liabilities": 216.466,
+    "net_income": 6.846,
+    "operating_cash_flow": 4.313
+   },
+   "2021": {
+    "assets": 601.027,
+    "equity": 344.479,
+    "liabilities": 256.548,
+    "net_income": 6.684,
+    "operating_cash_flow": 1.598
+   },
+   "2022": {
+    "assets": 647.345,
+    "equity": 350.661,
+    "liabilities": 296.684,
+    "net_income": 6.29,
+    "operating_cash_flow": -3.404
+   },
+   "2023": {
+    "assets": 680.292,
+    "equity": 363.664,
+    "liabilities": 316.628,
+    "net_income": 13.092,
+    "operating_cash_flow": 4.238
+   },
+   "2024": {
+    "assets": 645.051,
+    "equity": 368.675,
+    "liabilities": 276.375,
+    "net_income": 5.757,
+    "operating_cash_flow": 5.453
+   }
+  },
+  "RTVC": {
+   "2020": {
+    "assets": 8714.786,
+    "equity": 3451.712,
+    "liabilities": 5263.074,
+    "net_income": -442.696,
+    "operating_cash_flow": 268.596
+   },
+   "2021": {
+    "assets": 9590.625,
+    "equity": 3460.072,
+    "liabilities": 6130.553,
+    "net_income": -454.584,
+    "operating_cash_flow": -1026.968
+   },
+   "2022": {
+    "assets": 8465.002,
+    "equity": 3243.853,
+    "liabilities": 5221.149,
+    "net_income": -231.956,
+    "operating_cash_flow": -135.349
+   },
+   "2023": {
+    "assets": 9731.091,
+    "equity": 1522.679,
+    "liabilities": 8208.412,
+    "net_income": -1833.033,
+    "operating_cash_flow": 812.779
+   },
+   "2024": {
+    "assets": 16142.413,
+    "equity": 3624.513,
+    "liabilities": 12517.9,
+    "net_income": 2811.37,
+    "operating_cash_flow": 848.207
+   }
+  },
+  "RUBX": {
+   "2021": {
+    "assets": 263.146,
+    "equity": 150.455,
+    "liabilities": 112.691,
+    "net_income": 0.689,
+    "operating_cash_flow": 5.477
+   },
+   "2022": {
+    "assets": 269.321,
+    "equity": 150.982,
+    "liabilities": 118.339,
+    "net_income": 0.526,
+    "operating_cash_flow": -0.57
+   },
+   "2023": {
+    "assets": 248.111,
+    "equity": 142.876,
+    "liabilities": 105.235,
+    "net_income": -8.106,
+    "operating_cash_flow": 17.931
+   },
+   "2024": {
+    "assets": 350.23,
+    "equity": 159.053,
+    "liabilities": 191.177,
+    "net_income": 18.724,
+    "operating_cash_flow": -16.778
+   },
+   "2025": {
+    "assets": 372.105,
+    "equity": 162.274,
+    "liabilities": 209.832,
+    "net_income": 4.206,
+    "operating_cash_flow": -2.7
+   }
+  },
+  "SAIB": {
+   "2020": {
+    "assets": 4345.861,
+    "equity": 350.812,
+    "liabilities": 3995.049,
+    "net_income": 20.441,
+    "operating_cash_flow": -341.233
+   },
+   "2021": {
+    "assets": 4534.165,
+    "equity": 350.488,
+    "liabilities": 4183.676,
+    "net_income": 19.933,
+    "operating_cash_flow": -39.357
+   },
+   "2022": {
+    "assets": 3489.132,
+    "equity": 342.403,
+    "liabilities": 3146.729,
+    "net_income": 30.154,
+    "operating_cash_flow": -239.426
+   },
+   "2023": {
+    "assets": 3484.628,
+    "equity": 399.557,
+    "liabilities": 3085.071,
+    "net_income": 31.156,
+    "operating_cash_flow": 123.236
+   },
+   "2024": {
+    "assets": 2950.487,
+    "equity": 387.915,
+    "liabilities": 2562.571,
+    "net_income": 34.323,
+    "operating_cash_flow": 6.275
+   }
+  },
+  "SAUD": {
+   "2020": {
+    "assets": 75360.31,
+    "equity": 5053.861,
+    "liabilities": 70306.448,
+    "net_income": 1256.097,
+    "operating_cash_flow": -6233.393
+   },
+   "2021": {
+    "assets": 279081.57,
+    "equity": 41464.626,
+    "liabilities": 237616.944,
+    "net_income": 4390.996,
+    "operating_cash_flow": 5928.629
+   },
+   "2022": {
+    "assets": 87133.532,
+    "equity": 7594.929,
+    "liabilities": 79538.603,
+    "net_income": 1749.053,
+    "operating_cash_flow": -12652.392
+   },
+   "2023": {
+    "assets": 100367.279,
+    "equity": 9738.347,
+    "liabilities": 90628.932,
+    "net_income": 2217.943,
+    "operating_cash_flow": 1196.278
+   },
+   "2024": {
+    "assets": 127771.912,
+    "equity": 12554.087,
+    "liabilities": 115217.825,
+    "net_income": 3005.584,
+    "operating_cash_flow": 4712.655
+   }
+  },
+  "SCEM": {
+   "2020": {
+    "assets": 2465.932,
+    "equity": 256.189,
+    "liabilities": 2209.743,
+    "net_income": -560.267,
+    "operating_cash_flow": -434.201
+   },
+   "2021": {
+    "assets": 2758.852,
+    "equity": -167.129,
+    "liabilities": 2925.982,
+    "net_income": -354.03,
+    "operating_cash_flow": -236.677
+   },
+   "2022": {
+    "assets": 2879.201,
+    "equity": -527.676,
+    "liabilities": 3406.877,
+    "net_income": -330.408,
+    "operating_cash_flow": -228.252
+   },
+   "2023": {
+    "assets": 3479.394,
+    "equity": -649.098,
+    "liabilities": 4128.492,
+    "net_income": -121.42,
+    "operating_cash_flow": -277.354
+   },
+   "2024": {
+    "assets": 5684.08,
+    "equity": 3705.894,
+    "liabilities": 1978.186,
+    "net_income": 3077.524,
+    "operating_cash_flow": 1478.056
+   }
+  },
+  "SCFM": {
+   "2021": {
+    "assets": 259.413,
+    "equity": -52.512,
+    "liabilities": 311.925,
+    "net_income": -59.44,
+    "operating_cash_flow": 0.979
+   },
+   "2022": {
+    "assets": 331.89,
+    "equity": -62.847,
+    "liabilities": 394.737,
+    "net_income": -10.336,
+    "operating_cash_flow": 73.418
+   },
+   "2023": {
+    "assets": 386.768,
+    "equity": -21.083,
+    "liabilities": 407.851,
+    "net_income": 42.003,
+    "operating_cash_flow": 67.485
+   },
+   "2024": {
+    "assets": 422.869,
+    "equity": -19.178,
+    "liabilities": 442.047,
+    "net_income": 3.643,
+    "operating_cash_flow": 23.425
+   },
+   "2025": {
+    "assets": 390.879,
+    "equity": -7.361,
+    "liabilities": 398.24,
+    "net_income": 6.071,
+    "operating_cash_flow": -20.388
+   }
+  },
+  "SCTS": {
+   "2020": {
+    "assets": 2610.087,
+    "equity": 2067.3,
+    "liabilities": 542.787,
+    "net_income": 533.132,
+    "operating_cash_flow": 566.525
+   },
+   "2021": {
+    "assets": 3134.03,
+    "equity": 2568.097,
+    "liabilities": 565.933,
+    "net_income": 667.645,
+    "operating_cash_flow": 651.372
+   },
+   "2022": {
+    "assets": 3428.433,
+    "equity": 2670.556,
+    "liabilities": 757.877,
+    "net_income": 595.396,
+    "operating_cash_flow": 694.428
+   },
+   "2023": {
+    "assets": 3908.932,
+    "equity": 2997.787,
+    "liabilities": 911.145,
+    "net_income": 858.517,
+    "operating_cash_flow": 786.938
+   },
+   "2024": {
+    "assets": 4862.223,
+    "equity": 3614.034,
+    "liabilities": 1248.189,
+    "net_income": 1324.138,
+    "operating_cash_flow": 1157.805
+   }
+  },
+  "SDTI": {
+   "2020": {
+    "assets": 1204.101,
+    "equity": 513.663,
+    "liabilities": 690.438,
+    "net_income": -29.802,
+    "operating_cash_flow": 4.395
+   },
+   "2021": {
+    "assets": 1184.329,
+    "equity": 477.827,
+    "liabilities": 706.502,
+    "net_income": -29.803,
+    "operating_cash_flow": 7.054
+   },
+   "2022": {
+    "assets": 1498.698,
+    "equity": 426.085,
+    "liabilities": 1072.613,
+    "net_income": -6.341,
+    "operating_cash_flow": 37.31
+   },
+   "2023": {
+    "assets": 1660.823,
+    "equity": 335.368,
+    "liabilities": 1325.455,
+    "net_income": -7.978,
+    "operating_cash_flow": 79.355
+   },
+   "2024": {
+    "assets": 2314.681,
+    "equity": 301.718,
+    "liabilities": 2012.963,
+    "net_income": 46.694,
+    "operating_cash_flow": 114.422
+   }
+  },
+  "SEIG": {
+   "2021": {
+    "assets": 248.335,
+    "equity": 243.467,
+    "liabilities": 4.868,
+    "net_income": 19.217,
+    "operating_cash_flow": -2.901
+   },
+   "2022": {
+    "assets": 267.713,
+    "equity": 263.117,
+    "liabilities": 4.596,
+    "net_income": 20.154,
+    "operating_cash_flow": -2.499
+   },
+   "2023": {
+    "assets": 322.741,
+    "equity": 316.541,
+    "liabilities": 6.2,
+    "net_income": 28.445,
+    "operating_cash_flow": -4.034
+   },
+   "2024": {
+    "assets": 356.412,
+    "equity": 349.155,
+    "liabilities": 7.257,
+    "net_income": 40.964,
+    "operating_cash_flow": -6.153
+   },
+   "2025": {
+    "assets": 429.182,
+    "equity": 419.99,
+    "liabilities": 9.192,
+    "net_income": 45.251,
+    "operating_cash_flow": -4.196
+   }
+  },
+  "SEIGA": {
+   "2021": {
+    "assets": 248.335,
+    "equity": 243.467,
+    "liabilities": 4.868,
+    "net_income": 19.217,
+    "operating_cash_flow": -2.901
+   },
+   "2022": {
+    "assets": 267.713,
+    "equity": 263.117,
+    "liabilities": 4.596,
+    "net_income": 20.154,
+    "operating_cash_flow": -2.499
+   },
+   "2023": {
+    "assets": 322.741,
+    "equity": 316.541,
+    "liabilities": 6.2,
+    "net_income": 28.445,
+    "operating_cash_flow": -4.034
+   },
+   "2024": {
+    "assets": 356.412,
+    "equity": 349.155,
+    "liabilities": 7.257,
+    "net_income": 40.964,
+    "operating_cash_flow": -6.153
+   },
+   "2025": {
+    "assets": 429.182,
+    "equity": 419.99,
+    "liabilities": 9.192,
+    "net_income": 45.251,
+    "operating_cash_flow": -4.196
+   }
+  },
+  "SIPC": {
+   "2021": {
+    "assets": 155.99,
+    "equity": 115.563,
+    "liabilities": 40.427,
+    "net_income": 6.781,
+    "operating_cash_flow": 19.615
+   },
+   "2022": {
+    "assets": 156.049,
+    "equity": 115.074,
+    "liabilities": 40.975,
+    "net_income": 0.018,
+    "operating_cash_flow": 4.718
+   },
+   "2023": {
+    "assets": 168.837,
+    "equity": 115.191,
+    "liabilities": 53.646,
+    "net_income": 0.14,
+    "operating_cash_flow": 1.555
+   },
+   "2024": {
+    "assets": 168.759,
+    "equity": 96.91,
+    "liabilities": 71.849,
+    "net_income": -18.039,
+    "operating_cash_flow": -0.288
+   },
+   "2025": {
+    "assets": 169.021,
+    "equity": 105.615,
+    "liabilities": 63.406,
+    "operating_cash_flow": 10.78
+   }
+  },
+  "SKPC": {
+   "2020": {
+    "assets": 4850.761,
+    "equity": 3245.795,
+    "liabilities": 1604.965,
+    "net_income": 25.953,
+    "operating_cash_flow": -117.178
+   },
+   "2021": {
+    "assets": 5891.963,
+    "equity": 3781.42,
+    "liabilities": 2110.543,
+    "net_income": 535.162,
+    "operating_cash_flow": 68.677
+   },
+   "2022": {
+    "assets": 8818.293,
+    "equity": 4607.863,
+    "liabilities": 4210.43,
+    "net_income": 1238.078,
+    "operating_cash_flow": 1160.9
+   },
+   "2023": {
+    "assets": 10799.952,
+    "equity": 6250.046,
+    "liabilities": 4549.906,
+    "net_income": 2458.697,
+    "operating_cash_flow": 2792.296
+   },
+   "2024": {
+    "assets": 14114.274,
+    "equity": 7112.224,
+    "liabilities": 7002.05,
+    "net_income": 2539.39,
+    "operating_cash_flow": 2126.477
+   }
+  },
+  "SMFR": {
+   "2021": {
+    "assets": 69.667,
+    "equity": 55.71,
+    "liabilities": 13.957,
+    "net_income": 1.256,
+    "operating_cash_flow": -5.716
+   },
+   "2022": {
+    "assets": 140.25,
+    "equity": 62.507,
+    "liabilities": 77.743,
+    "net_income": 7.114,
+    "operating_cash_flow": 22.493
+   },
+   "2023": {
+    "assets": 178.708,
+    "equity": 171.318,
+    "liabilities": 7.39,
+    "net_income": 65.539,
+    "operating_cash_flow": -6.459
+   },
+   "2024": {
+    "assets": 630.521,
+    "equity": 598.578,
+    "liabilities": 31.943,
+    "net_income": 109.947,
+    "operating_cash_flow": 8.468
+   },
+   "2025": {
+    "assets": 2204.303,
+    "equity": 2136.642,
+    "liabilities": 67.661,
+    "net_income": 63.172,
+    "operating_cash_flow": -113.242
+   }
+  },
+  "SMPP": {
+   "2016": {
+    "assets": 1147.917,
+    "equity": 276.422,
+    "liabilities": 871.494,
+    "net_income": 34.116,
+    "operating_cash_flow": 29.133
+   },
+   "2017": {
+    "assets": 1386.64,
+    "equity": 296.824,
+    "liabilities": 1089.816,
+    "net_income": 72.971,
+    "operating_cash_flow": 4.151
+   },
+   "2018": {
+    "assets": 1598.452,
+    "equity": 291.26,
+    "liabilities": 1307.192,
+    "net_income": 41.792,
+    "operating_cash_flow": -3.762
+   },
+   "2019": {
+    "assets": 1575.757,
+    "equity": 296.414,
+    "liabilities": 1279.343,
+    "net_income": 60.362,
+    "operating_cash_flow": 37.46
+   },
+   "2020": {
+    "assets": 1837.523,
+    "equity": 457.668,
+    "liabilities": 1379.855,
+    "net_income": 162.72,
+    "operating_cash_flow": 92.907
+   }
+  },
+  "SNFC": {
+   "2020": {
+    "assets": 97.408,
+    "equity": 92.012,
+    "liabilities": 5.396,
+    "net_income": 10.214,
+    "operating_cash_flow": -0.479
+   },
+   "2021": {
+    "assets": 71.418,
+    "equity": 66.461,
+    "liabilities": 4.957,
+    "net_income": -9.088,
+    "operating_cash_flow": 0.45
+   },
+   "2022": {
+    "assets": 75.917,
+    "equity": 68.758,
+    "liabilities": 7.159,
+    "net_income": -1.395,
+    "operating_cash_flow": -6.12
+   },
+   "2023": {
+    "assets": 68.894,
+    "equity": 60.961,
+    "liabilities": 7.933,
+    "net_income": -5.136,
+    "operating_cash_flow": -4.208
+   },
+   "2024": {
+    "assets": 69.206,
+    "equity": 61.242,
+    "liabilities": 7.963,
+    "net_income": 0.282,
+    "operating_cash_flow": 5.672
+   }
+  },
+  "SPIN": {
+   "2020": {
+    "assets": 721.229,
+    "equity": 606.005,
+    "liabilities": 115.225,
+    "net_income": 97.595,
+    "operating_cash_flow": -129.621
+   },
+   "2021": {
+    "assets": 718.329,
+    "equity": 564.125,
+    "liabilities": 154.203,
+    "net_income": -41.879,
+    "operating_cash_flow": -15.564
+   },
+   "2022": {
+    "assets": 687.829,
+    "equity": 599.13,
+    "liabilities": 88.699,
+    "net_income": 35.004,
+    "operating_cash_flow": -40.683
+   },
+   "2023": {
+    "assets": 893.298,
+    "equity": 688.994,
+    "liabilities": 204.304,
+    "net_income": 89.864,
+    "operating_cash_flow": -11.489
+   },
+   "2024": {
+    "assets": 1078.833,
+    "equity": 782.859,
+    "liabilities": 295.973,
+    "net_income": 115.233,
+    "operating_cash_flow": -97.801
+   }
+  },
+  "SPMD": {
+   "2020": {
+    "assets": 523.942,
+    "equity": 331.111,
+    "liabilities": 192.83,
+    "net_income": 79.21,
+    "operating_cash_flow": -78.539
+   },
+   "2021": {
+    "assets": 782.871,
+    "equity": 457.916,
+    "liabilities": 324.954,
+    "net_income": 136.101,
+    "operating_cash_flow": 147.65
+   },
+   "2022": {
+    "assets": 605.858,
+    "equity": 282.184,
+    "liabilities": 323.675,
+    "net_income": -146.175,
+    "operating_cash_flow": 9.865
+   },
+   "2023": {
+    "assets": 565.613,
+    "equity": 232.14,
+    "liabilities": 333.473,
+    "net_income": -49.008,
+    "operating_cash_flow": 26.441
+   },
+   "2024": {
+    "assets": 458.497,
+    "equity": 226.608,
+    "liabilities": 231.889,
+    "net_income": -80.007,
+    "operating_cash_flow": -34.647
+   }
+  },
+  "SUCE": {
+   "2015": {
+    "assets": 10022.914,
+    "equity": 7221.693,
+    "liabilities": 2801.221,
+    "operating_cash_flow": 45.086
+   },
+   "2016": {
+    "assets": 11247.575,
+    "equity": 6922.744,
+    "liabilities": 4324.831,
+    "net_income": -527.595,
+    "operating_cash_flow": 351.877
+   },
+   "2017": {
+    "assets": 10079.765,
+    "equity": 5777.366,
+    "liabilities": 4302.399,
+    "net_income": -937.615,
+    "operating_cash_flow": 147.805
+   },
+   "2018": {
+    "assets": 10621.686,
+    "equity": 5707.526,
+    "liabilities": 4914.16,
+    "net_income": 40.332,
+    "operating_cash_flow": 228.044
+   },
+   "2019": {
+    "assets": 8036.923,
+    "equity": 2663.553,
+    "liabilities": 5373.37,
+    "net_income": -977.683,
+    "operating_cash_flow": -1586.027
+   }
+  },
+  "SUGR": {
+   "2021": {
+    "assets": 1519.71,
+    "equity": 1193.779,
+    "liabilities": 325.93,
+    "net_income": 385.012,
+    "operating_cash_flow": 419.159
+   },
+   "2022": {
+    "assets": 2887.478,
+    "equity": 1950.308,
+    "liabilities": 937.171,
+    "net_income": 850.409,
+    "operating_cash_flow": 859.198
+   },
+   "2023": {
+    "assets": 4530.725,
+    "equity": 3037.483,
+    "liabilities": 1493.241,
+    "net_income": 1591.649,
+    "operating_cash_flow": 360.279
+   },
+   "2024": {
+    "assets": 7023.668,
+    "equity": 3370.858,
+    "liabilities": 3652.81,
+    "net_income": 1261.899,
+    "operating_cash_flow": -611.989
+   },
+   "2025": {
+    "assets": 9595.586,
+    "equity": 2048.85,
+    "liabilities": 7546.736,
+    "net_income": -526.127,
+    "operating_cash_flow": -5055.008
+   }
+  },
+  "SVCE": {
+   "2020": {
+    "assets": 4335.989,
+    "equity": 2412.107,
+    "liabilities": 1923.882,
+    "net_income": -250.594,
+    "operating_cash_flow": 20.327
+   },
+   "2021": {
+    "assets": 4154.361,
+    "equity": 1971.202,
+    "liabilities": 2183.159,
+    "net_income": -225.451,
+    "operating_cash_flow": 73.515
+   },
+   "2022": {
+    "assets": 4005.522,
+    "equity": 1484.066,
+    "liabilities": 2521.456,
+    "net_income": -208.741,
+    "operating_cash_flow": -100.112
+   },
+   "2023": {
+    "assets": 7124.695,
+    "equity": 3763.859,
+    "liabilities": 3360.835,
+    "net_income": -194.652,
+    "operating_cash_flow": -92.974
+   },
+   "2024": {
+    "assets": 7200.808,
+    "equity": 3099.839,
+    "liabilities": 4100.969,
+    "net_income": -382.406,
+    "operating_cash_flow": 25.556
+   }
+  },
+  "SWDY": {
+   "2020": {
+    "assets": 54934.126,
+    "equity": 17890.964,
+    "liabilities": 37043.162,
+    "net_income": 3027.533,
+    "operating_cash_flow": 2846.464
+   },
+   "2021": {
+    "assets": 67693.572,
+    "equity": 20205.894,
+    "liabilities": 47487.678,
+    "net_income": 3533.862,
+    "operating_cash_flow": -3077.145
+   },
+   "2022": {
+    "assets": 113954.544,
+    "equity": 27645.304,
+    "liabilities": 86309.24,
+    "net_income": 5417.668,
+    "operating_cash_flow": -3531.421
+   },
+   "2023": {
+    "assets": 151448.655,
+    "equity": 38108.48,
+    "liabilities": 113340.175,
+    "net_income": 10115.702,
+    "operating_cash_flow": 5131.323
+   },
+   "2024": {
+    "assets": 249527.139,
+    "equity": 59526.685,
+    "liabilities": 190000.453,
+    "net_income": 17461.359,
+    "operating_cash_flow": 3979.449
+   }
+  },
+  "TALM": {
+   "2020": {
+    "assets": 1550.152,
+    "equity": 1091.013,
+    "liabilities": 459.138,
+    "net_income": 142.388,
+    "operating_cash_flow": 245.188
+   },
+   "2021": {
+    "assets": 1484.661,
+    "equity": 1139.165,
+    "liabilities": 345.497,
+    "net_income": 183.598,
+    "operating_cash_flow": 52.055
+   },
+   "2022": {
+    "assets": 1781.143,
+    "equity": 1336.849,
+    "liabilities": 444.294,
+    "net_income": 228.464,
+    "operating_cash_flow": 334.906
+   },
+   "2023": {
+    "assets": 3216.647,
+    "equity": 1203.149,
+    "liabilities": 2013.498,
+    "net_income": 297.109,
+    "operating_cash_flow": 858.698
+   },
+   "2024": {
+    "assets": 5881.064,
+    "equity": 2341.246,
+    "liabilities": 3539.818,
+    "net_income": 547.548,
+    "operating_cash_flow": 339.483
+   }
+  },
+  "TANM": {
+   "2021": {
+    "assets": 161.179,
+    "equity": 147.684,
+    "liabilities": 13.495,
+    "net_income": 6.441,
+    "operating_cash_flow": 68.583
+   },
+   "2022": {
+    "assets": 190.214,
+    "equity": 168.654,
+    "liabilities": 21.56,
+    "net_income": 26.303,
+    "operating_cash_flow": 77.833
+   },
+   "2023": {
+    "assets": 208.241,
+    "equity": 187.324,
+    "liabilities": 20.917,
+    "net_income": 17.034,
+    "operating_cash_flow": 0.603
+   },
+   "2024": {
+    "assets": 267.008,
+    "equity": 224.437,
+    "liabilities": 42.571,
+    "net_income": 37.19,
+    "operating_cash_flow": 22.774
+   },
+   "2025": {
+    "assets": 297.069,
+    "equity": 257.214,
+    "liabilities": 39.854,
+    "net_income": 34.818,
+    "operating_cash_flow": 40.388
+   }
+  },
+  "TAQA": {
+   "2020": {
+    "assets": 8088.972,
+    "equity": 1638.33,
+    "liabilities": 6450.643,
+    "net_income": 409.992,
+    "operating_cash_flow": 1224.083
+   },
+   "2021": {
+    "assets": 11922.276,
+    "equity": 1791.71,
+    "liabilities": 10130.566,
+    "net_income": 479.879,
+    "operating_cash_flow": 344.879
+   },
+   "2022": {
+    "assets": 14697.791,
+    "equity": 2397.473,
+    "liabilities": 12300.318,
+    "net_income": 538.606,
+    "operating_cash_flow": 675.39
+   },
+   "2023": {
+    "assets": 17348.474,
+    "equity": 2996.157,
+    "liabilities": 14352.317,
+    "net_income": 557.208,
+    "operating_cash_flow": 1296.07
+   },
+   "2024": {
+    "assets": 18459.578,
+    "equity": 4140.558,
+    "liabilities": 14319.02,
+    "net_income": 702.033,
+    "operating_cash_flow": 1427.415
+   }
+  },
+  "TMGH": {
+   "2020": {
+    "assets": 117895.486,
+    "equity": 33616.284,
+    "liabilities": 84279.202,
+    "net_income": 1671.973,
+    "operating_cash_flow": 979.113
+   },
+   "2021": {
+    "assets": 138717.841,
+    "equity": 35043.495,
+    "liabilities": 103674.346,
+    "net_income": 1761.651,
+    "operating_cash_flow": 2116.329
+   },
+   "2022": {
+    "assets": 162718.07,
+    "equity": 36928.332,
+    "liabilities": 125789.739,
+    "net_income": 2304.507,
+    "operating_cash_flow": 5491.338
+   },
+   "2023": {
+    "assets": 202034.498,
+    "equity": 39015.775,
+    "liabilities": 163018.723,
+    "net_income": 3313.341,
+    "operating_cash_flow": 7636.074
+   },
+   "2024": {
+    "assets": 356781.349,
+    "equity": 131482.227,
+    "liabilities": 225299.122,
+    "net_income": 10723.074,
+    "operating_cash_flow": 5358.382
+   }
+  },
+  "TORA": {
+   "2015": {
+    "assets": 1000.665,
+    "equity": 472.351,
+    "liabilities": 528.314,
+    "net_income": -218.972,
+    "operating_cash_flow": -153.798
+   },
+   "2016": {
+    "assets": 945.185,
+    "equity": 321.627,
+    "liabilities": 623.558,
+    "net_income": -151.05,
+    "operating_cash_flow": 61.355
+   },
+   "2017": {
+    "assets": 775.655,
+    "equity": -222.097,
+    "liabilities": 997.752,
+    "net_income": -545.826,
+    "operating_cash_flow": -43.392
+   },
+   "2018": {
+    "assets": 854.119,
+    "equity": -195.701,
+    "liabilities": 1049.819,
+    "net_income": 36.093,
+    "operating_cash_flow": -333.009
+   },
+   "2019": {
+    "assets": 654.329,
+    "equity": -816.687,
+    "liabilities": 1471.016,
+    "net_income": -617.253,
+    "operating_cash_flow": -594.512
+   }
+  },
+  "TRTO": {
+   "2021": {
+    "assets": 75.676,
+    "equity": 65.947,
+    "liabilities": 9.729,
+    "net_income": 1.492,
+    "operating_cash_flow": 3.825
+   },
+   "2022": {
+    "assets": 75.409,
+    "equity": 67.691,
+    "liabilities": 7.718,
+    "net_income": 1.81,
+    "operating_cash_flow": -3.339
+   },
+   "2023": {
+    "assets": 79.503,
+    "equity": 71.287,
+    "liabilities": 8.216,
+    "net_income": 3.097,
+    "operating_cash_flow": 17.569
+   },
+   "2024": {
+    "net_income": 16.579
+   },
+   "2025": {
+    "assets": 116.338,
+    "equity": 101.674,
+    "liabilities": 14.664,
+    "net_income": 13.547,
+    "operating_cash_flow": 16.517
+   }
+  },
+  "UBEE": {
+   "2023": {
+    "assets": 101962.242,
+    "equity": 12355.476,
+    "liabilities": 89606.766,
+    "net_income": 1732.181,
+    "operating_cash_flow": 20158.531
+   },
+   "2024": {
+    "assets": 84408.685,
+    "equity": 14484.561,
+    "liabilities": 69924.124,
+    "net_income": 2820.031,
+    "operating_cash_flow": -29205.824
+   }
+  },
+  "UEFM": {
+   "2020": {
+    "assets": 1220.943,
+    "equity": 603.243,
+    "liabilities": 617.7,
+    "net_income": 143.671,
+    "operating_cash_flow": 40.959
+   },
+   "2021": {
+    "assets": 1289.021,
+    "equity": 601.017,
+    "liabilities": 688.005,
+    "net_income": 147.114,
+    "operating_cash_flow": 116.661
+   },
+   "2022": {
+    "assets": 1306.49,
+    "equity": 627.188,
+    "liabilities": 679.302,
+    "net_income": 150.142,
+    "operating_cash_flow": 129.347
+   },
+   "2023": {
+    "assets": 1541.364,
+    "equity": 686.511,
+    "liabilities": 854.853,
+    "net_income": 196.779,
+    "operating_cash_flow": 387.869
+   },
+   "2024": {
+    "assets": 1738.55,
+    "equity": 765.118,
+    "liabilities": 973.432,
+    "net_income": 251.305,
+    "operating_cash_flow": 133.683
+   }
+  },
+  "UEGC": {
+   "2020": {
+    "assets": 1449.656,
+    "equity": 907.38,
+    "liabilities": 542.276,
+    "net_income": 75.987,
+    "operating_cash_flow": -126.972
+   },
+   "2021": {
+    "assets": 2017.898,
+    "equity": 1035.771,
+    "liabilities": 982.126,
+    "net_income": 80.986,
+    "operating_cash_flow": -296.221
+   },
+   "2022": {
+    "assets": 2964.958,
+    "equity": 1123.692,
+    "liabilities": 1841.266,
+    "net_income": 104.011,
+    "operating_cash_flow": -291.285
+   },
+   "2023": {
+    "assets": 3631.512,
+    "equity": 1215.523,
+    "liabilities": 2415.99,
+    "net_income": 119.081,
+    "operating_cash_flow": -116.445
+   },
+   "2024": {
+    "assets": 3791.624,
+    "equity": 1280.011,
+    "liabilities": 2511.613,
+    "net_income": 92.127,
+    "operating_cash_flow": 290.756
+   }
+  },
+  "UNIP": {
+   "2020": {
+    "assets": 315.544,
+    "equity": 145.23,
+    "liabilities": 170.314,
+    "net_income": 10.859,
+    "operating_cash_flow": 3.257
+   },
+   "2021": {
+    "assets": 512.904,
+    "equity": 184.851,
+    "liabilities": 328.053,
+    "net_income": 24.135,
+    "operating_cash_flow": -63.607
+   },
+   "2022": {
+    "assets": 575.508,
+    "equity": 194.805,
+    "liabilities": 380.704,
+    "net_income": 24.92,
+    "operating_cash_flow": 51.781
+   },
+   "2023": {
+    "assets": 727.112,
+    "equity": 217.189,
+    "liabilities": 509.923,
+    "net_income": 33.108,
+    "operating_cash_flow": 18.568
+   },
+   "2024": {
+    "assets": 1078.356,
+    "equity": 305.901,
+    "liabilities": 772.454,
+    "net_income": 93.953,
+    "operating_cash_flow": -38.323
+   }
+  },
+  "UNIT": {
+   "2020": {
+    "assets": 774.29,
+    "equity": 641.08,
+    "liabilities": 133.21,
+    "net_income": 105.815,
+    "operating_cash_flow": -53.853
+   },
+   "2021": {
+    "assets": 842.688,
+    "equity": 684.675,
+    "liabilities": 158.014,
+    "net_income": 80.928,
+    "operating_cash_flow": 30.254
+   },
+   "2022": {
+    "assets": 1266.529,
+    "equity": 746.301,
+    "liabilities": 520.228,
+    "net_income": 98.202,
+    "operating_cash_flow": -461.158
+   },
+   "2023": {
+    "assets": 1609.264,
+    "equity": 740.552,
+    "liabilities": 868.712,
+    "net_income": 111.037,
+    "operating_cash_flow": 149.716
+   },
+   "2024": {
+    "assets": 1919.838,
+    "equity": 794.848,
+    "liabilities": 1124.99,
+    "net_income": 130.277,
+    "operating_cash_flow": 577.745
+   }
+  },
+  "UTOP": {
+   "2021": {
+    "assets": 49.576,
+    "equity": 26.896,
+    "liabilities": 22.68,
+    "net_income": 2.642,
+    "operating_cash_flow": 11.352
+   },
+   "2022": {
+    "assets": 44.73,
+    "equity": 25.344,
+    "liabilities": 19.386,
+    "net_income": 3.352,
+    "operating_cash_flow": 0.716
+   },
+   "2023": {
+    "assets": 59.072,
+    "equity": 39.542,
+    "liabilities": 19.53,
+    "net_income": 13.467,
+    "operating_cash_flow": 14.236
+   },
+   "2024": {
+    "assets": 60.74,
+    "equity": 44.594,
+    "liabilities": 16.145,
+    "net_income": 12.86,
+    "operating_cash_flow": 16.904
+   },
+   "2025": {
+    "assets": 54.479,
+    "equity": 48.649,
+    "liabilities": 5.831,
+    "net_income": 11.596,
+    "operating_cash_flow": 2.831
+   }
+  },
+  "VALU": {
+   "2024": {
+    "assets": 10853.428,
+    "equity": 1636.69,
+    "liabilities": 9216.738,
+    "net_income": 422.735,
+    "operating_cash_flow": -8204.859
+   },
+   "2025": {
+    "assets": 14244.198,
+    "equity": 2256.238,
+    "liabilities": 11987.96,
+    "net_income": 764.39,
+    "operating_cash_flow": -8041.73
+   }
+  },
+  "VERT": {
+   "2021": {
+    "assets": 17.992,
+    "equity": 4.458,
+    "liabilities": 13.534,
+    "net_income": 0.878,
+    "operating_cash_flow": 2.658
+   },
+   "2022": {
+    "assets": 13.238,
+    "equity": 4.906,
+    "liabilities": 8.332,
+    "net_income": 0.688,
+    "operating_cash_flow": 5.859
+   },
+   "2023": {
+    "assets": 10.983,
+    "equity": 5.663,
+    "liabilities": 5.321,
+    "net_income": 1.034,
+    "operating_cash_flow": 2.322
+   },
+   "2024": {
+    "assets": 12.964,
+    "equity": 6.096,
+    "liabilities": 6.869,
+    "net_income": 0.601,
+    "operating_cash_flow": -1.568
+   },
+   "2025": {
+    "assets": 11.656,
+    "equity": 7.455,
+    "liabilities": 4.201,
+    "net_income": 1.47,
+    "operating_cash_flow": 1.65
+   }
+  },
+  "VLMR": {
+   "2021": {
+    "assets": 2165.677,
+    "equity": 913.443,
+    "liabilities": 1252.234,
+    "net_income": 170.86,
+    "operating_cash_flow": 196.634
+   },
+   "2022": {
+    "assets": 1960.281,
+    "equity": 843.064,
+    "liabilities": 1117.217,
+    "net_income": 241.063,
+    "operating_cash_flow": 304.218
+   },
+   "2023": {
+    "assets": 1745.728,
+    "equity": 640.048,
+    "liabilities": 1105.68,
+    "net_income": 179.177,
+    "operating_cash_flow": 327.74
+   },
+   "2024": {
+    "assets": 1449.225,
+    "equity": 493.164,
+    "liabilities": 956.061,
+    "net_income": 163.029,
+    "operating_cash_flow": 62.21
+   },
+   "2025": {
+    "net_income": 161.182
+   }
+  },
+  "VLMRA": {
+   "2021": {
+    "assets": 2165.677,
+    "equity": 913.443,
+    "liabilities": 1252.234,
+    "net_income": 170.86,
+    "operating_cash_flow": 196.634
+   },
+   "2022": {
+    "assets": 1960.281,
+    "equity": 843.064,
+    "liabilities": 1117.217,
+    "net_income": 241.063,
+    "operating_cash_flow": 304.218
+   },
+   "2023": {
+    "assets": 1745.728,
+    "equity": 640.048,
+    "liabilities": 1105.68,
+    "net_income": 179.177,
+    "operating_cash_flow": 327.74
+   },
+   "2024": {
+    "assets": 1449.225,
+    "equity": 493.164,
+    "liabilities": 956.061,
+    "net_income": 163.029,
+    "operating_cash_flow": 62.21
+   },
+   "2025": {
+    "net_income": 161.182
+   }
+  },
+  "WCDF": {
+   "2021": {
+    "assets": 1456.312,
+    "equity": 619.851,
+    "liabilities": 836.461,
+    "net_income": 191.018,
+    "operating_cash_flow": 215.464
+   },
+   "2022": {
+    "assets": 1609.512,
+    "equity": 674.423,
+    "liabilities": 935.089,
+    "net_income": 214.623,
+    "operating_cash_flow": 253.936
+   },
+   "2023": {
+    "assets": 1727.985,
+    "equity": 804.561,
+    "liabilities": 923.424,
+    "net_income": 271.81,
+    "operating_cash_flow": 196.034
+   },
+   "2024": {
+    "assets": 2164.908,
+    "equity": 1000.39,
+    "liabilities": 1164.518,
+    "net_income": 415.29,
+    "operating_cash_flow": 160.478
+   },
+   "2025": {
+    "assets": 2274.935,
+    "equity": 1079.905,
+    "liabilities": 1195.03,
+    "net_income": 424.847,
+    "operating_cash_flow": 41.219
+   }
+  },
+  "WKOL": {
+   "2021": {
+    "assets": 312.706,
+    "equity": 41.108,
+    "liabilities": 271.598,
+    "net_income": 22.013,
+    "operating_cash_flow": -13.799
+   },
+   "2022": {
+    "assets": 331.65,
+    "equity": 64.534,
+    "liabilities": 267.116,
+    "net_income": 16.58,
+    "operating_cash_flow": 27.238
+   },
+   "2023": {
+    "assets": 756.864,
+    "equity": 96.469,
+    "liabilities": 660.395,
+    "net_income": 25.53,
+    "operating_cash_flow": 27.74
+   },
+   "2024": {
+    "assets": 856.983,
+    "equity": 135.366,
+    "liabilities": 721.617,
+    "net_income": 43.114,
+    "operating_cash_flow": 65.737
+   },
+   "2025": {
+    "assets": 776.721,
+    "equity": 269.392,
+    "liabilities": 507.328,
+    "net_income": 114.507,
+    "operating_cash_flow": 261.709
+   }
+  },
+  "ZEOT": {
+   "2021": {
+    "assets": 339.052,
+    "equity": 218.161,
+    "liabilities": 120.891,
+    "net_income": -20.552,
+    "operating_cash_flow": 2.728
+   },
+   "2022": {
+    "assets": 995.853,
+    "equity": 235.786,
+    "liabilities": 760.067,
+    "net_income": 17.37,
+    "operating_cash_flow": 31.562
+   },
+   "2023": {
+    "assets": 439.427,
+    "equity": 250.873,
+    "liabilities": 188.554,
+    "net_income": 26.294,
+    "operating_cash_flow": -6.193
+   },
+   "2024": {
+    "assets": 1087.917,
+    "equity": 229.995,
+    "liabilities": 857.922,
+    "net_income": 1.202,
+    "operating_cash_flow": 22.306
+   },
+   "2025": {
+    "assets": 562.444,
+    "equity": 255.374,
+    "liabilities": 307.07,
+    "net_income": 2.564,
+    "operating_cash_flow": 8.504
+   }
+  },
+  "ZMID": {
+   "2021": {
+    "assets": 2465.205,
+    "equity": 1434.24,
+    "liabilities": 1030.965,
+    "net_income": 259.365,
+    "operating_cash_flow": 229.318
+   },
+   "2022": {
+    "assets": 2530.803,
+    "equity": 1575.698,
+    "liabilities": 955.105,
+    "net_income": 261.103,
+    "operating_cash_flow": 29.228
+   },
+   "2023": {
+    "assets": 2549.668,
+    "equity": 1661.271,
+    "liabilities": 888.397,
+    "net_income": 324.234,
+    "operating_cash_flow": 287.081
+   },
+   "2024": {
+    "assets": 2727.563,
+    "equity": 2050.969,
+    "liabilities": 676.594,
+    "net_income": 529.017,
+    "operating_cash_flow": 619.771
+   },
+   "2025": {
+    "assets": 3064.646,
+    "equity": 2488.241,
+    "liabilities": 576.406,
+    "net_income": 712.168,
+    "operating_cash_flow": -391.106
+   }
+  }
+ },
+ "skipped": {
+  "ACFR": "scale could not be established",
+  "ADRI": "scale could not be established",
+  "AIDC": "no annual column",
+  "AIH": "page could not be fetched",
+  "AMES": "scale could not be established",
+  "AMII": "page could not be fetched",
+  "ANCC": "page could not be fetched",
+  "CID": "page could not be fetched",
+  "CPME": "no annual column",
+  "DCCC": "scale could not be established",
+  "DGTZ": "scale could not be established",
+  "EEP": "page could not be fetched",
+  "EFAC": "scale could not be established",
+  "EGOTH": "page could not be fetched",
+  "EGREF": "no annual column",
+  "EGWA": "no annual column",
+  "EITP": "scale could not be established",
+  "ELAB": "no annual column",
+  "ENPI": "no annual column",
+  "FTNS": "scale could not be established",
+  "GEOS": "no annual column",
+  "GGRN": "scale could not be established",
+  "GOUR": "page could not be fetched",
+  "GPPL": "reports in US Dollar(USD)",
+  "GTEX": "reports in US Dollar(USD)",
+  "HAVC": "no annual column",
+  "HBCO": "scale could not be established",
+  "HDST": "no annual column",
+  "INEG": "scale could not be established",
+  "KNGC": "page could not be fetched",
+  "KORA": "no annual column",
+  "LKGP": "page could not be fetched",
+  "LUTS": "scale could not be established",
+  "MITR": "page could not be fetched",
+  "MLIC": "no annual column",
+  "MMHC": "page could not be fetched",
+  "NAHO": "reports in US Dollar(USD)",
+  "NFCI": "page could not be fetched",
+  "NMIN": "page could not be fetched",
+  "OCAP": "page could not be fetched",
+  "ORAS": "reports in US Dollar(USD)",
+  "PHGC": "scale could not be established",
+  "PMSC": "no annual column",
+  "POCO": "scale could not be established",
+  "RMTV": "scale could not be established",
+  "SIEG": "no annual column",
+  "SINA": "scale could not be established",
+  "SNFI": "no annual column",
+  "SPHT": "reports in US Dollar(USD)",
+  "TWSA": "scale could not be established",
+  "TYCN": "scale could not be established",
+  "UPMS": "scale could not be established",
+  "WATP": "scale could not be established",
+  "YAYT": "page could not be fetched"
+ }
+}

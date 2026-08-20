@@ -160,6 +160,9 @@ _FinancialPeriod _$FinancialPeriodFromJson(Map<String, dynamic> json) =>
       operatingCashFlow: (json['operating_cash_flow'] as num?)?.toDouble(),
       capex: (json['capex'] as num?)?.toDouble(),
       freeCashFlow: (json['free_cash_flow'] as num?)?.toDouble(),
+      basis: json['basis'] as String?,
+      source: json['source'] as String?,
+      filedOn: json['filed_on'] as String?,
     );
 
 Map<String, dynamic> _$FinancialPeriodToJson(_FinancialPeriod instance) =>
@@ -177,6 +180,9 @@ Map<String, dynamic> _$FinancialPeriodToJson(_FinancialPeriod instance) =>
       'operating_cash_flow': instance.operatingCashFlow,
       'capex': instance.capex,
       'free_cash_flow': instance.freeCashFlow,
+      'basis': instance.basis,
+      'source': instance.source,
+      'filed_on': instance.filedOn,
     };
 
 _ResearchLink _$ResearchLinkFromJson(Map<String, dynamic> json) =>

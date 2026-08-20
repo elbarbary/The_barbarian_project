@@ -8,6 +8,7 @@ import '../../core/models/exit_liquidity.dart';
 import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
+import '../../core/models/profit_movement.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/arc_gauge.dart';
@@ -104,7 +105,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     quote: quote,
                     ticker: widget.ticker,
                   ),
-                  _Tab.financials => _Financials(company: company),
+                  _Tab.financials => _Financials(company: company, parentTab: widget.parentTab),
                   _Tab.price => _Price(
                     ticker: widget.ticker,
                     range: _range,
@@ -575,30 +576,42 @@ class _FactCard extends StatelessWidget {
   }
 }
 
+/// What the company reported, and what it means.
+///
+/// Two sources, both filed. Annual statements — assets, liabilities, equity,
+/// net income, operating cash flow — come from the company's filed accounts and
+/// were checked line by line against El Sewedy's own published FY2024 and
+/// FY2021 releases, where they match to the pound. Interim net profit comes
+/// from the exchange's own results announcements.
+///
+/// There is no revenue line in either source, so there are no margins here.
+/// The previous version of this screen drew a revenue bar chart from numbers
+/// nobody had ever filed; an absent line is now absent rather than invented.
 class _Financials extends StatelessWidget {
-  const _Financials({required this.company});
+  const _Financials({required this.company, required this.parentTab});
 
   final Company company;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final periods = company.financials.annual;
+    final annual = company.financials.annual;
+    final interim = company.financials.quarterly;
 
-    if (periods.isEmpty) {
+    if (annual.isEmpty && interim.isEmpty) {
       return const BEmptyState(
-        title: 'No financial statements yet',
+        title: 'No reported figures yet',
         body:
-            'Reported figures are added company by company as each set of '
-            'statements is read.',
+            'Figures are read from each company\'s filed accounts and from the '
+            'results it announces to the exchange. Nothing has been read for '
+            'this company yet.',
       );
     }
 
-    final revenues = periods.map((p) => p.revenue ?? 0).toList();
-    final peak = revenues.isEmpty
-        ? 1.0
-        : revenues.reduce((a, b) => a > b ? a : b);
-    final latest = periods.last;
+    final latest = annual.isNotEmpty ? annual.last : interim.last;
+    final prior = comparablePrior(annual.isNotEmpty ? annual : interim, latest);
+    final move = profitMovement(latest, prior);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -608,101 +621,224 @@ class _Financials extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BSectionLabel('Revenue, EGP m'),
-              BBarChart(
-                fractions: [
-                  for (final r in revenues) peak == 0 ? 0.0 : r / peak,
-                ],
-                labels: [for (final p in periods) p.period],
-                highlightIndex: periods.length - 1,
+              const BSectionLabel('Net profit, as reported'),
+              const SizedBox(height: 10),
+              BNumText(
+                formatMillions(latest.netIncome),
+                style: BarbarianType.displayS.copyWith(color: c.textPrimary),
               ),
+              const SizedBox(height: 2),
+              Text(
+                'EGP m · ${latest.period}',
+                style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+              ),
+              if (move != null) ...[
+                const SizedBox(height: 12),
+                BChangeDelta(
+                  value: move.delta,
+                  direction: switch (move.direction) {
+                    ProfitDirection.up => BDirection.up,
+                    ProfitDirection.down => BDirection.down,
+                    ProfitDirection.flat => BDirection.flat,
+                  },
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  move.sentence,
+                  style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
+                ),
+              ],
             ],
           ),
         ),
-        const SizedBox(height: 14),
-        Row(
-          children: [
-            Expanded(
-              child: BStatTile(
-                label: 'Revenue',
-                value: _m(latest.revenue),
-                unit: 'm',
+
+        // The exchange's own announcement of a part-year result. It lands
+        // months before the audited annual accounts do, so it is usually the
+        // freshest thing on this screen and deserves its own place rather than
+        // being sorted in among the years.
+        // Only when the headline is showing an annual figure. With no annual
+        // data the headline is already the latest filing, and this would
+        // print the same number twice.
+        if (interim.isNotEmpty && annual.isNotEmpty) ...[
+          const SizedBox(height: 14),
+          _InterimCard(
+            period: interim.last,
+            prior: comparablePrior(interim, interim.last),
+            company: company,
+            parentTab: parentTab,
+          ),
+        ],
+
+        if (latest.assets != null || latest.equity != null) ...[
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: BStatTile(
+                  label: 'Total assets',
+                  value: formatMillions(latest.assets),
+                  unit: 'm',
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: BStatTile(
-                label: 'Net income',
-                value: _m(latest.netIncome),
-                unit: 'm',
+              const SizedBox(width: 12),
+              Expanded(
+                child: BStatTile(
+                  label: 'Owners\' equity',
+                  value: formatMillions(latest.equity),
+                  unit: 'm',
+                ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: BStatTile(
-                label: 'Net margin',
-                value: latest.netMargin == null
-                    ? '—'
-                    : (latest.netMargin! * 100).toStringAsFixed(1),
-                unit: '%',
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: BStatTile(
+                  label: 'Total liabilities',
+                  value: formatMillions(latest.liabilities),
+                  unit: 'm',
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: BStatTile(
-                label: 'Net debt',
-                value: _m(latest.netDebt),
-                unit: 'm',
-                // Rising net debt is not a gain, whatever its direction.
-                delta: latest.netDebt == null
-                    ? null
-                    : const BChangeDelta(
-                        value: 'see trend',
-                        direction: BDirection.flat,
-                      ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: BStatTile(
+                  label: 'Cash from operations',
+                  value: formatMillions(latest.operatingCashFlow),
+                  unit: 'm',
+                ),
               ),
+            ],
+          ),
+        ],
+
+        if (annual.length > 1) ...[
+          const SizedBox(height: 14),
+          BPaperCard(
+            radius: BarbarianRadius.xl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const BSectionLabel('Net profit by year'),
+                const SizedBox(height: 8),
+                for (final p in annual.reversed)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            p.period,
+                            style: BarbarianType.bodyM
+                                .copyWith(color: c.textSecondary),
+                          ),
+                        ),
+                        BNumText(
+                          formatMillions(p.netIncome),
+                          style: BarbarianType.bodyM
+                              .copyWith(color: c.textPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            Expanded(
-              child: BStatTile(
-                label: 'Operating cash flow',
-                value: _m(latest.operatingCashFlow),
-                unit: 'm',
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: BStatTile(
-                label: 'Free cash flow',
-                value: _m(latest.resolvedFreeCashFlow),
-                unit: 'm',
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
+
         const SizedBox(height: 16),
         Text(
-          'Figures as reported for ${latest.period}. Free cash flow is derived '
-          'from operating cash flow less capital expenditure where it is not '
-          'reported directly.',
+          'Figures in EGP millions, as filed. Neither source states revenue, '
+          'so margins are not shown rather than estimated. Read from '
+          '${_sourceName(latest.source)}.',
           style: BarbarianType.bodyS.copyWith(color: c.textFaint),
         ),
       ],
     );
   }
 
-  static String _m(double? v) =>
-      v == null ? '—' : v.abs() >= 1000
-          ? '${(v / 1000).toStringAsFixed(1)}k'
-          : v.toStringAsFixed(0);
+  /// Named from the URL so the attribution cannot drift from the link.
+  static String _sourceName(String? url) {
+    if (url == null) return 'filed accounts';
+    if (url.contains('egx.com.eg')) return 'the Egyptian Exchange';
+    if (url.contains('mubasher')) return 'Mubasher';
+    return 'filed accounts';
+  }
+}
+
+/// The most recent part-year result the exchange announced.
+class _InterimCard extends StatelessWidget {
+  const _InterimCard({
+    required this.period,
+    required this.prior,
+    required this.company,
+    required this.parentTab,
+  });
+
+  final FinancialPeriod period;
+  final FinancialPeriod? prior;
+  final Company company;
+  final BNavTab parentTab;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final move = profitMovement(period, prior);
+
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Wrap rather than Row: the label and the basis chip are both
+          // variable length and collided on a narrow phone.
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              const BSectionLabel('Latest filing'),
+              if (period.basis != null)
+                BKindChip(
+                  period.basis == 'consolidated' ? 'Group' : 'Company only',
+                ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          BNumText(
+            formatMillions(period.netIncome),
+            style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            'EGP m · ${period.period}',
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+          ),
+          if (move != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              move.sentence,
+              style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
+            ),
+          ],
+          if (period.source != null) ...[
+            const SizedBox(height: 10),
+            // Spec §50: the reader can go and read the filing itself.
+            BInlineAction(
+              'Read the filing',
+              onTap: () => context.push(
+                Routes.articlePath(
+                  parentTab,
+                  period.source!,
+                  '${company.ticker} · ${period.period}',
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
 }
 
 class _Price extends ConsumerWidget {

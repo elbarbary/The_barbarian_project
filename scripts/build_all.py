@@ -30,6 +30,11 @@ HERE = Path(__file__).resolve().parent
 STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     ("Opportunity Scanner", "build_opportunity_api.py", True),
+    # Before Market, which reads both stores when it starts. Each reads the
+    # disclosures document the previous run published, so a filing found today
+    # reaches the app on tomorrow's build — cumulative stores make that a lag
+    # rather than a loss.
+    ("Filed net profit", "build_financials_api.py", False),
     ("Market", "build_market_api.py", False),
     # News and rates run here too, so a full local build produces a complete
     # set — but their real cadence is publish-live-data.yml every 15 minutes.

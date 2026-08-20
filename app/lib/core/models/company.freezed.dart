@@ -2045,7 +2045,13 @@ as List<FinancialPeriod>,
 mixin _$FinancialPeriod {
 
 /// Display label, e.g. "FY25" or "Q2 FY25".
- String get period; double? get revenue;@JsonKey(name: 'gross_profit') double? get grossProfit;@JsonKey(name: 'operating_income') double? get operatingIncome;@JsonKey(name: 'net_income') double? get netIncome; double? get assets; double? get liabilities; double? get equity; double? get cash; double? get debt;@JsonKey(name: 'operating_cash_flow') double? get operatingCashFlow; double? get capex;@JsonKey(name: 'free_cash_flow') double? get freeCashFlow;
+ String get period; double? get revenue;@JsonKey(name: 'gross_profit') double? get grossProfit;@JsonKey(name: 'operating_income') double? get operatingIncome;@JsonKey(name: 'net_income') double? get netIncome; double? get assets; double? get liabilities; double? get equity; double? get cash; double? get debt;@JsonKey(name: 'operating_cash_flow') double? get operatingCashFlow; double? get capex;@JsonKey(name: 'free_cash_flow') double? get freeCashFlow;/// `consolidated` or `standalone`. Companies file both for the same
+/// period and the two differ, so a figure shown without its basis is
+/// ambiguous rather than merely unlabelled.
+ String? get basis;/// The filing this figure was read from (spec §50). A reported number the
+/// reader cannot trace back is not worth much more than one we invented —
+/// which is exactly what was here before.
+ String? get source;@JsonKey(name: 'filed_on') String? get filedOn;
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2058,16 +2064,16 @@ $FinancialPeriodCopyWith<FinancialPeriod> get copyWith => _$FinancialPeriodCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,capex,freeCashFlow);
+int get hashCode => Object.hash(runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,capex,freeCashFlow,basis,source,filedOn);
 
 @override
 String toString() {
-  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, capex: $capex, freeCashFlow: $freeCashFlow)';
+  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
 }
 
 
@@ -2078,7 +2084,7 @@ abstract mixin class $FinancialPeriodCopyWith<$Res>  {
   factory $FinancialPeriodCopyWith(FinancialPeriod value, $Res Function(FinancialPeriod) _then) = _$FinancialPeriodCopyWithImpl;
 @useResult
 $Res call({
- String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow
+ String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
 });
 
 
@@ -2095,7 +2101,7 @@ class _$FinancialPeriodCopyWithImpl<$Res>
 
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
   return _then(_self.copyWith(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
 as String,revenue: freezed == revenue ? _self.revenue : revenue // ignore: cast_nullable_to_non_nullable
@@ -2110,7 +2116,10 @@ as double?,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to
 as double?,operatingCashFlow: freezed == operatingCashFlow ? _self.operatingCashFlow : operatingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,capex: freezed == capex ? _self.capex : capex // ignore: cast_nullable_to_non_nullable
 as double?,freeCashFlow: freezed == freeCashFlow ? _self.freeCashFlow : freeCashFlow // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,basis: freezed == basis ? _self.basis : basis // ignore: cast_nullable_to_non_nullable
+as String?,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,filedOn: freezed == filedOn ? _self.filedOn : filedOn // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2195,10 +2204,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FinancialPeriod() when $default != null:
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   return orElse();
 
 }
@@ -2216,10 +2225,10 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)  $default,) {final _that = this;
 switch (_that) {
 case _FinancialPeriod():
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2236,10 +2245,10 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,) {final _that = this;
 switch (_that) {
 case _FinancialPeriod() when $default != null:
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   return null;
 
 }
@@ -2251,7 +2260,7 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 @JsonSerializable()
 
 class _FinancialPeriod extends FinancialPeriod {
-  const _FinancialPeriod({required this.period, this.revenue, @JsonKey(name: 'gross_profit') this.grossProfit, @JsonKey(name: 'operating_income') this.operatingIncome, @JsonKey(name: 'net_income') this.netIncome, this.assets, this.liabilities, this.equity, this.cash, this.debt, @JsonKey(name: 'operating_cash_flow') this.operatingCashFlow, this.capex, @JsonKey(name: 'free_cash_flow') this.freeCashFlow}): super._();
+  const _FinancialPeriod({required this.period, this.revenue, @JsonKey(name: 'gross_profit') this.grossProfit, @JsonKey(name: 'operating_income') this.operatingIncome, @JsonKey(name: 'net_income') this.netIncome, this.assets, this.liabilities, this.equity, this.cash, this.debt, @JsonKey(name: 'operating_cash_flow') this.operatingCashFlow, this.capex, @JsonKey(name: 'free_cash_flow') this.freeCashFlow, this.basis, this.source, @JsonKey(name: 'filed_on') this.filedOn}): super._();
   factory _FinancialPeriod.fromJson(Map<String, dynamic> json) => _$FinancialPeriodFromJson(json);
 
 /// Display label, e.g. "FY25" or "Q2 FY25".
@@ -2268,6 +2277,15 @@ class _FinancialPeriod extends FinancialPeriod {
 @override@JsonKey(name: 'operating_cash_flow') final  double? operatingCashFlow;
 @override final  double? capex;
 @override@JsonKey(name: 'free_cash_flow') final  double? freeCashFlow;
+/// `consolidated` or `standalone`. Companies file both for the same
+/// period and the two differ, so a figure shown without its basis is
+/// ambiguous rather than merely unlabelled.
+@override final  String? basis;
+/// The filing this figure was read from (spec §50). A reported number the
+/// reader cannot trace back is not worth much more than one we invented —
+/// which is exactly what was here before.
+@override final  String? source;
+@override@JsonKey(name: 'filed_on') final  String? filedOn;
 
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
@@ -2282,16 +2300,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,capex,freeCashFlow);
+int get hashCode => Object.hash(runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,capex,freeCashFlow,basis,source,filedOn);
 
 @override
 String toString() {
-  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, capex: $capex, freeCashFlow: $freeCashFlow)';
+  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
 }
 
 
@@ -2302,7 +2320,7 @@ abstract mixin class _$FinancialPeriodCopyWith<$Res> implements $FinancialPeriod
   factory _$FinancialPeriodCopyWith(_FinancialPeriod value, $Res Function(_FinancialPeriod) _then) = __$FinancialPeriodCopyWithImpl;
 @override @useResult
 $Res call({
- String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow
+ String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
 });
 
 
@@ -2319,7 +2337,7 @@ class __$FinancialPeriodCopyWithImpl<$Res>
 
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
   return _then(_FinancialPeriod(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
 as String,revenue: freezed == revenue ? _self.revenue : revenue // ignore: cast_nullable_to_non_nullable
@@ -2334,7 +2352,10 @@ as double?,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to
 as double?,operatingCashFlow: freezed == operatingCashFlow ? _self.operatingCashFlow : operatingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,capex: freezed == capex ? _self.capex : capex // ignore: cast_nullable_to_non_nullable
 as double?,freeCashFlow: freezed == freeCashFlow ? _self.freeCashFlow : freeCashFlow // ignore: cast_nullable_to_non_nullable
-as double?,
+as double?,basis: freezed == basis ? _self.basis : basis // ignore: cast_nullable_to_non_nullable
+as String?,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,filedOn: freezed == filedOn ? _self.filedOn : filedOn // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

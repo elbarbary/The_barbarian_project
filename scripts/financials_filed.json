@@ -1,0 +1,27 @@
+{
+ "filings": {
+  "293661": {
+   "basis": "standalone",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-08-20",
+   "isin": "EGS65071C010",
+   "months": 6,
+   "name_ar": "القاهرة للاسكان والتعمير",
+   "net_profit_egp": 447077873.0,
+   "news_id": "293661",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 17432345.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293661",
+   "ticker": "ELKA"
+  }
+ },
+ "read": {
+  "293661": "2026-08-20",
+  "293676": "2026-08-20"
+ }
+}

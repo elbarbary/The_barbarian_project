@@ -54,6 +54,12 @@ jobs:
         with:
           python-version: '3.12'
 
+      # The parsers these tests cover read filed financial figures. A silent
+      # regression there publishes a wrong number about a real company rather
+      # than crashing, so they run before anything is written.
+      - name: Test the parsers
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+
       - name: Validate before writing anything
         run: python3 scripts/build_all.py --check
 

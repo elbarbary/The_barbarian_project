@@ -68,6 +68,153 @@ TICKER = re.compile(r"^[A-Z]{3,6}$")
 
 
 
+def _filed_financials(
+    filings_store: pathlib.Path | None = None,
+    statements_store: pathlib.Path | None = None,
+) -> dict[str, dict]:
+    """Reported figures per ticker, from the two sources we have.
+
+    **The exchange first.** `financials_filed.json` holds net profit read
+    straight from EGX's own results announcements — the issuer's figure,
+    published by the exchange, ticker-stamped. It covers only net profit and
+    only the filings we have managed to read, but where it exists it is the
+    most authoritative thing we have and it wins.
+
+    **Mubasher for the balance sheet.** `statements_filed.json` holds filed
+    annual statements — assets, liabilities, equity, net income, operating cash
+    flow — going back roughly five years. Verified against El Sewedy's own
+    FY2024 and FY2021 earnings releases, where the figures match to the pound.
+    There is no revenue line anywhere in that source, so margins remain
+    underivable and are left null rather than approximated.
+
+    Two filings for one period is normal and consolidated wins; see `rank`.
+    Each EGX filing also states the year-earlier comparative, which becomes its
+    own period when nothing better supplies it.
+    """
+    here = pathlib.Path(__file__).resolve().parent
+    filings_store = filings_store or (here / "financials_filed.json")
+    statements_store = statements_store or (here / "statements_filed.json")
+
+    def load(path: pathlib.Path) -> dict:
+        if not path.exists():
+            return {}
+        try:
+            return json.loads(path.read_text())
+        except (json.JSONDecodeError, OSError):
+            return {}
+
+    # (ticker, period) -> the best figures seen for it so far.
+    picked: dict[tuple[str, str], dict] = {}
+
+    def rank(basis: str | None, comparative: bool, exchange: bool) -> tuple:
+        """How much a figure is preferred when two describe the same period.
+
+        The exchange's own publication outranks an aggregator's — not because
+        the aggregator is wrong (it matches the filings where both exist) but
+        because when they ever disagree the exchange is the one we can point a
+        reader at. Then consolidated over standalone, since companies file both
+        and the group figure is the one the company is discussed as. Then a
+        company's own filing over the same period quoted as a comparative
+        inside a later one.
+
+        A score rather than branch order, so adding a fourth consideration
+        cannot silently reorder the first three.
+        """
+        return (
+            1 if exchange else 0,
+            1 if basis == "consolidated" else 0,
+            0 if comparative else 1,
+        )
+
+    def offer(ticker: str, period: str, fields: dict, *, basis: str | None,
+              source: str | None, filed_on: str | None, end: str | None,
+              months: int | None, comparative: bool = False,
+              exchange: bool = False) -> None:
+        key = (ticker, period)
+        score = rank(basis, comparative, exchange)
+        existing = picked.get(key)
+        if existing is not None:
+            if score < existing["_rank"]:
+                return
+            if score == existing["_rank"]:
+                # Same standing: keep what is there but let the newcomer fill
+                # lines it does not have. This is how the exchange's net profit
+                # and Mubasher's balance sheet end up on one period.
+                for name, value in fields.items():
+                    existing.setdefault(name, value)
+                return
+            # Outranked: the better source leads, but a line only it lacks is
+            # still worth keeping rather than throwing away.
+            merged = dict(fields)
+            for name, value in existing.items():
+                if not name.startswith("_") and name not in merged:
+                    merged.setdefault(name, value)
+            fields = merged
+        picked[key] = {
+            "period": period,
+            **fields,
+            "_rank": score,
+            "_end": end,
+            "_months": months,
+            "basis": basis,
+            "source": source,
+            "filed_on": filed_on,
+        }
+
+    # Mubasher's annual statements, labelled to match the exchange's own "FY"
+    # naming so the two sources land on the same period rather than beside it.
+    for ticker, years in load(statements_store).get("companies", {}).items():
+        for year, fields in years.items():
+            offer(
+                ticker,
+                f"FY {year}",
+                {k: v for k, v in fields.items() if v is not None},
+                basis=None,
+                source=(
+                    "https://english.mubasher.info/markets/EGX/stocks/"
+                    f"{ticker}/financial-statements"
+                ),
+                filed_on=None,
+                end=f"{year}-12-31",
+                months=12,
+            )
+
+    for record in load(filings_store).get("filings", {}).values():
+        ticker = record.get("ticker")
+        net = record.get("net_profit_egp")
+        if not ticker or net is None:
+            continue
+        offer(ticker, record["period"],
+              {"net_income": round(net / 1_000_000, 3)},
+              basis=record.get("basis"), source=record.get("source"),
+              filed_on=record.get("filed_on"), end=record.get("period_end"),
+              months=record.get("months"), exchange=True)
+        prior = record.get("prior_net_profit_egp")
+        if prior is not None and record.get("prior_period"):
+            offer(ticker, record["prior_period"],
+                  {"net_income": round(prior / 1_000_000, 3)},
+                  basis=record.get("basis"), source=record.get("source"),
+                  filed_on=record.get("filed_on"),
+                  end=record.get("prior_period_end"),
+                  months=record.get("months"),
+                  comparative=True, exchange=True)
+
+    out: dict[str, dict] = {}
+    for (ticker, _period), period in sorted(
+        picked.items(), key=lambda kv: (kv[0][0], kv[1]["_end"] or "")
+    ):
+        months = period.pop("_months")
+        period.pop("_rank"), period.pop("_end")
+        bucket = "annual" if months == 12 else "quarterly"
+        out.setdefault(ticker, {"annual": [], "quarterly": []})[bucket].append(
+            {k: v for k, v in period.items() if v is not None}
+        )
+    return out
+
+
+FILED_FINANCIALS = _filed_financials()
+
+
 def newest_scan() -> pathlib.Path | None:
     """The freshest daily scan, or None when this machine has no scan archive.
 
@@ -316,6 +463,9 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 profile[key] = value
         if profile:
             detail["profile"] = profile
+        filed = FILED_FINANCIALS.get(ticker)
+        if filed:
+            detail["financials"] = filed
         details[ticker] = detail
 
     companies.sort(key=lambda c: c["ticker"])
