@@ -86,5 +86,8 @@
   "couldNotLoad": "تعذّر التحميل",
   "couldNotLoadBody": "قد تكون غير متصل. كل ما نُزِّل من قبل ما زال هنا.",
   "tryAgain": "أعد المحاولة",
-  "sampleData": "بيانات تجريبية · ليست أسعارًا حية"
+  "sampleData": "بيانات تجريبية · ليست أسعارًا حية",
+  "homeAlsoFiled": "أُفصح عنه اليوم أيضًا",
+  "homeAllFilings": "كل الإفصاحات",
+  "homeFilingsCount": "{count} إفصاحًا اليوم"
 }

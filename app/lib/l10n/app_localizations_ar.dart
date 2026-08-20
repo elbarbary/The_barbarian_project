@@ -284,4 +284,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sampleData => 'بيانات تجريبية · ليست أسعارًا حية';
+
+  @override
+  String get homeAlsoFiled => 'أُفصح عنه اليوم أيضًا';
+
+  @override
+  String get homeAllFilings => 'كل الإفصاحات';
+
+  @override
+  String homeFilingsCount(int count) {
+    return '$count إفصاحًا اليوم';
+  }
 }

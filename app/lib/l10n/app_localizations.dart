@@ -619,6 +619,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sample data · not live prices'**
   String get sampleData;
+
+  /// No description provided for @homeAlsoFiled.
+  ///
+  /// In en, this message translates to:
+  /// **'Also filed today'**
+  String get homeAlsoFiled;
+
+  /// No description provided for @homeAllFilings.
+  ///
+  /// In en, this message translates to:
+  /// **'All filings'**
+  String get homeAllFilings;
+
+  /// No description provided for @homeFilingsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} filings today'**
+  String homeFilingsCount(int count);
 }
 
 class _AppLocalizationsDelegate

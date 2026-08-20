@@ -286,4 +286,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sampleData => 'Sample data · not live prices';
+
+  @override
+  String get homeAlsoFiled => 'Also filed today';
+
+  @override
+  String get homeAllFilings => 'All filings';
+
+  @override
+  String homeFilingsCount(int count) {
+    return '$count filings today';
+  }
 }

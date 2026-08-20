@@ -10,7 +10,9 @@ import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/charts.dart';
+import '../../core/models/explainer.dart';
 import '../../core/widgets/composites.dart';
+import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
@@ -59,6 +61,7 @@ class HomeScreen extends ConsumerWidget {
         ),
         const _DailyInsight(),
         const _IndexStrip(),
+        const _AlsoFiled(),
         const _WatchlistBlock(),
       ],
     );
@@ -277,7 +280,28 @@ class _IndexStrip extends ConsumerWidget {
     final decimals = ((level - whole) * 100).round().toString().padLeft(2, '0');
     final change = index.changePercent;
 
-    return BDarkCard(
+    return BPressable(
+      // §50, and the founder's "where is the why and how": the rates document
+      // has carried `workings` and `yardstick` for every index all along and
+      // nothing read them. A five-figure number with a percent beside it is
+      // the least self-explaining thing on the screen, so it is the one that
+      // most needs to open into its own arithmetic.
+      onTap: () => showExplainer(
+        context,
+        Explainer(
+          termId: 'index.${index.id}',
+          title: index.label.isEmpty ? index.id : index.label,
+          plain: index.plain,
+          token: index.token,
+          workings: index.workings,
+          yardstick: index.yardstick,
+          // An index level has no published band to be unusual against. Said
+          // out loud rather than defaulted to ordinary, which would be a claim.
+          notability: Notability.unjudged,
+          source: index.source,
+        ),
+      ),
+      child: BDarkCard(
       radius: BarbarianRadius.xl,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       child: Row(
@@ -318,6 +342,7 @@ class _IndexStrip extends ConsumerWidget {
             ),
           ],
         ],
+      ),
       ),
     );
   }
@@ -497,6 +522,104 @@ class _WatchTile extends ConsumerWidget {
       child: dark
           ? BDarkCard(padding: const EdgeInsets.all(16), child: content)
           : BPaperCard(padding: const EdgeInsets.all(16), child: content),
+    );
+  }
+}
+
+/// The rest of the day's filings, under the one that leads.
+///
+/// The hero answers "what happened today" with a single event, which left the
+/// screen thinner than the boards drew it and thinner than the day actually
+/// was — thirty-six companies filed. This carries the next few, each with the
+/// plain sentence saying what that kind of filing does to somebody holding the
+/// share, because a list of event names is a table of contents and the meaning
+/// is the product.
+class _AlsoFiled extends ConsumerWidget {
+  const _AlsoFiled();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final feed = ref.watch(disclosuresProvider).whenOrNull(
+      data: (s) => s.value,
+    );
+    final lead = _DailyInsight._lead(feed);
+    final items = (feed?.items ?? const <Disclosure>[])
+        .where((i) => i.id != lead?.id && i.tickers.length == 1)
+        .take(4)
+        .toList();
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(child: BSectionLabel(l.homeAlsoFiled)),
+            BInlineAction(
+              l.homeAllFilings,
+              onTap: () => context.go(Routes.today),
+            ),
+          ],
+        ),
+        BPaperCard(
+          radius: BarbarianRadius.xl,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final (i, item) in items.indexed) ...[
+                if (i > 0) ...[
+                  const SizedBox(height: 12),
+                  Divider(height: 1, color: c.hairline),
+                  const SizedBox(height: 12),
+                ],
+                BPressable(
+                  onTap: () => context.push(
+                    Routes.companyPath(BNavTab.home, item.tickers.first),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Wrap, not Row: a ticker beside a long Arabic event
+                      // name is two variable-length things on one line.
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            item.tickers.first,
+                            style: BarbarianType.titleL.copyWith(
+                              color: c.textPrimary,
+                            ),
+                          ),
+                          BKindChip(
+                            arabic && item.eventLabelAr.isNotEmpty
+                                ? item.eventLabelAr
+                                : item.eventLabel,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        item.meaningFor(arabic),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: BarbarianType.bodyS.copyWith(
+                          color: c.textSecondary,
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

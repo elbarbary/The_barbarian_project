@@ -120,5 +120,15 @@
   "couldNotLoad": "Could not load this",
   "couldNotLoadBody": "You may be offline. Anything already downloaded is still here.",
   "tryAgain": "Try again",
-  "sampleData": "Sample data · not live prices"
+  "sampleData": "Sample data · not live prices",
+  "homeAlsoFiled": "Also filed today",
+  "homeAllFilings": "All filings",
+  "homeFilingsCount": "{count} filings today",
+  "@homeFilingsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }
