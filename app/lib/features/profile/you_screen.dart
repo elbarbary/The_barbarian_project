@@ -123,12 +123,10 @@ class YouScreen extends ConsumerWidget {
                       ticker: ticker,
                       nameEn: directory?.byTicker(ticker)?.nameEn,
                       quote: snapshot?.quoteFor(ticker),
-                      onRemove: () => ref
-                          .read(watchlistProvider.notifier)
-                          .remove(ticker),
-                      onOpen: () => context.push(
-                        Routes.companyPath(BNavTab.you, ticker),
-                      ),
+                      onRemove: () =>
+                          ref.read(watchlistProvider.notifier).remove(ticker),
+                      onOpen: () =>
+                          context.push(Routes.companyPath(BNavTab.you, ticker)),
                     ),
                 ],
               ),

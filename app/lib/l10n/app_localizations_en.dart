@@ -538,4 +538,290 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gateUnresolved => 'Unresolved';
+
+  @override
+  String get scannerTitleFull => 'Opportunity Scanner';
+
+  @override
+  String scanUpdated(String date) {
+    return 'Updated · $date';
+  }
+
+  @override
+  String scanQualifiedCount(int count) {
+    return 'Qualified $count';
+  }
+
+  @override
+  String scanWatchCount(int count) {
+    return 'Watch $count';
+  }
+
+  @override
+  String scanRejectedCount(int count) {
+    return 'Rejected $count';
+  }
+
+  @override
+  String scanLogCount(int count) {
+    return 'Rule log $count';
+  }
+
+  @override
+  String get scanLogBlurb =>
+      'What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.';
+
+  @override
+  String get scanLogEmptyBody =>
+      'Entries appear here as each published rule is measured against what happened next.';
+
+  @override
+  String get scanNotRepublished => 'Not republished';
+
+  @override
+  String get scanNoComponent => 'No rubric component scored.';
+
+  @override
+  String get scanStocks => 'Stocks';
+
+  @override
+  String get scanScoredNames => 'Scored names';
+
+  @override
+  String get scanSectorNone => 'None today';
+
+  @override
+  String get scanOneCohort => 'One cohort';
+
+  @override
+  String get scanHowItWasRead => 'How it was read';
+
+  @override
+  String get scanNoSectorToday => 'No sector read today';
+
+  @override
+  String get statusQualified => 'Qualified';
+
+  @override
+  String get statusWatching => 'Watching';
+
+  @override
+  String get statusRejected => 'Rejected';
+
+  @override
+  String get figPrevClose => 'Prev close';
+
+  @override
+  String get figDayHigh => 'Day high';
+
+  @override
+  String get figPreviousClose => 'Previous close';
+
+  @override
+  String get figAvgVolume30d => 'Avg volume 30d';
+
+  @override
+  String get figSharesOutstanding => 'Shares outstanding';
+
+  @override
+  String get figFloatShares => 'Float shares';
+
+  @override
+  String get finNoFigures => 'No reported figures yet';
+
+  @override
+  String get finNetProfitReported => 'Net profit, as reported';
+
+  @override
+  String get finTotalAssets => 'Total assets';
+
+  @override
+  String get finTotalLiabilities => 'Total liabilities';
+
+  @override
+  String get finCashFromOps => 'Cash from operations';
+
+  @override
+  String get finNetProfitByYear => 'Net profit by year';
+
+  @override
+  String get finLatestFiling => 'Latest filing';
+
+  @override
+  String get finCompanyOnly => 'Company only';
+
+  @override
+  String get finReadFiling => 'Read the filing';
+
+  @override
+  String finEgpMillionsPeriod(String period) {
+    return 'EGP m · $period';
+  }
+
+  @override
+  String get priceNoHistoryDownloaded => 'No price history downloaded';
+
+  @override
+  String priceLastSessions(int count) {
+    return 'Last $count sessions';
+  }
+
+  @override
+  String get discussionBody =>
+      'Company threads land here once the community backend exists. Everything else on this screen works without it.';
+
+  @override
+  String get movedThisMonthLabel => 'How it has moved this month';
+
+  @override
+  String get noDetailBody =>
+      'The exchange scan carried only a closing price for this company. Everything else appears once a fuller record is published.';
+
+  @override
+  String get finNoFiguresBody =>
+      'Figures are read from each company\'s filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.';
+
+  @override
+  String finFootnote(String source) {
+    return 'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from $source.';
+  }
+
+  @override
+  String get sourceMubasher => 'Mubasher';
+
+  @override
+  String get priceNoHistoryBody => 'Open this company once with a connection.';
+
+  @override
+  String get priceNoSeriesBody =>
+      'Neither the exchange scan nor the price source publishes a usable series for it yet.';
+
+  @override
+  String get noStudyBody =>
+      'Companies are studied one at a time. When this one is read, the investigation appears here.';
+
+  @override
+  String get exitStopsTrading => 'It stops trading';
+
+  @override
+  String get exitCanIGetOut => 'Can I get out?';
+
+  @override
+  String get scanNotRunBody =>
+      'Nothing has cleared the test since the last session. That is a result, not an error.';
+
+  @override
+  String get scanRecordBlurb =>
+      'What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.';
+
+  @override
+  String get scanLogEmptyBlurb =>
+      'Entries appear here as each published rule is measured against what happened next.';
+
+  @override
+  String get scanEmptySectionBlurb =>
+      'An empty section is a real answer. The test does not lower itself to fill a screen.';
+
+  @override
+  String get scanCoverageBlurb =>
+      'Every listed company is read. Most of them fail, and the ones that fail are published too.';
+
+  @override
+  String scanCohortNames(int count) {
+    return 'The cohort · $count names';
+  }
+
+  @override
+  String get scanSectorBlurb =>
+      'A sector read changes what gets investigated first. It is a reading order, not a view on any company in it.';
+
+  @override
+  String get scanNoSectorBody =>
+      'A cohort appears when several names in one industry move for the same reason. Most days none does, and that is a result rather than a gap.';
+
+  @override
+  String get gateUnresolvedLabel => 'Unresolved';
+
+  @override
+  String get noDetailBodyFull =>
+      'The exchange scan carried only a closing price for this listing. More lands as a fuller record is published.';
+
+  @override
+  String get finNoFiguresBodyFull =>
+      'Figures are read from each company\'s filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.';
+
+  @override
+  String finFootnoteFull(String source) {
+    return 'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from $source.';
+  }
+
+  @override
+  String get priceNoHistoryTitle => 'No price history downloaded';
+
+  @override
+  String get priceNoSeriesBodyFull =>
+      'Neither the exchange scan nor the price source publishes a series for this listing yet.';
+
+  @override
+  String exitZeroDays(int days, int sessions) {
+    return 'Nothing traded at all on $days of the last $sessions sessions.';
+  }
+
+  @override
+  String exitFiftyK(String share) {
+    return 'EGP 50,000 here is $share';
+  }
+
+  @override
+  String get exitNoPrice =>
+      'On those days there was no price at which a holder could sell.';
+
+  @override
+  String meansSameDay(String amount) {
+    return 'About EGP $amount can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.';
+  }
+
+  @override
+  String meansZeroDays(int days, int sessions) {
+    return 'It did not trade at all on $days of the last $sessions sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.';
+  }
+
+  @override
+  String meansNetProfit(String amount, String period) {
+    return 'It reported $amount EGP m of net profit in $period.';
+  }
+
+  @override
+  String get scanLogEmptyBodyFull =>
+      'Entries appear here as each published rule reaches its stated end.';
+
+  @override
+  String get scanEmptySectionFull =>
+      'An empty section is a real answer. The test does not lower its bar to fill a page.';
+
+  @override
+  String get scanSectorBlurbFull =>
+      'A sector read changes what gets investigated first. It scores nothing on the record and names nothing to act on.';
+
+  @override
+  String detailFirstSeen(String date) {
+    return 'First seen · $date';
+  }
+
+  @override
+  String get detailWhyScored => 'Why it scored what it scored';
+
+  @override
+  String get detailLastSession => 'Last completed session';
+
+  @override
+  String get detailMoveSince => 'Move since it was flagged';
+
+  @override
+  String get detailHowScored => 'How a name is scored';
+
+  @override
+  String detailOpenTicker(String ticker) {
+    return 'Open $ticker';
+  }
 }

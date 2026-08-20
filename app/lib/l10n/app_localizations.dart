@@ -1075,6 +1075,468 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unresolved'**
   String get gateUnresolved;
+
+  /// No description provided for @scannerTitleFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Opportunity Scanner'**
+  String get scannerTitleFull;
+
+  /// No description provided for @scanUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated · {date}'**
+  String scanUpdated(String date);
+
+  /// No description provided for @scanQualifiedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Qualified {count}'**
+  String scanQualifiedCount(int count);
+
+  /// No description provided for @scanWatchCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch {count}'**
+  String scanWatchCount(int count);
+
+  /// No description provided for @scanRejectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected {count}'**
+  String scanRejectedCount(int count);
+
+  /// No description provided for @scanLogCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Rule log {count}'**
+  String scanLogCount(int count);
+
+  /// No description provided for @scanLogBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.'**
+  String get scanLogBlurb;
+
+  /// No description provided for @scanLogEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Entries appear here as each published rule is measured against what happened next.'**
+  String get scanLogEmptyBody;
+
+  /// No description provided for @scanNotRepublished.
+  ///
+  /// In en, this message translates to:
+  /// **'Not republished'**
+  String get scanNotRepublished;
+
+  /// No description provided for @scanNoComponent.
+  ///
+  /// In en, this message translates to:
+  /// **'No rubric component scored.'**
+  String get scanNoComponent;
+
+  /// No description provided for @scanStocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Stocks'**
+  String get scanStocks;
+
+  /// No description provided for @scanScoredNames.
+  ///
+  /// In en, this message translates to:
+  /// **'Scored names'**
+  String get scanScoredNames;
+
+  /// No description provided for @scanSectorNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None today'**
+  String get scanSectorNone;
+
+  /// No description provided for @scanOneCohort.
+  ///
+  /// In en, this message translates to:
+  /// **'One cohort'**
+  String get scanOneCohort;
+
+  /// No description provided for @scanHowItWasRead.
+  ///
+  /// In en, this message translates to:
+  /// **'How it was read'**
+  String get scanHowItWasRead;
+
+  /// No description provided for @scanNoSectorToday.
+  ///
+  /// In en, this message translates to:
+  /// **'No sector read today'**
+  String get scanNoSectorToday;
+
+  /// No description provided for @statusQualified.
+  ///
+  /// In en, this message translates to:
+  /// **'Qualified'**
+  String get statusQualified;
+
+  /// No description provided for @statusWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching'**
+  String get statusWatching;
+
+  /// No description provided for @statusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get statusRejected;
+
+  /// No description provided for @figPrevClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Prev close'**
+  String get figPrevClose;
+
+  /// No description provided for @figDayHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Day high'**
+  String get figDayHigh;
+
+  /// No description provided for @figPreviousClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous close'**
+  String get figPreviousClose;
+
+  /// No description provided for @figAvgVolume30d.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg volume 30d'**
+  String get figAvgVolume30d;
+
+  /// No description provided for @figSharesOutstanding.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares outstanding'**
+  String get figSharesOutstanding;
+
+  /// No description provided for @figFloatShares.
+  ///
+  /// In en, this message translates to:
+  /// **'Float shares'**
+  String get figFloatShares;
+
+  /// No description provided for @finNoFigures.
+  ///
+  /// In en, this message translates to:
+  /// **'No reported figures yet'**
+  String get finNoFigures;
+
+  /// No description provided for @finNetProfitReported.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit, as reported'**
+  String get finNetProfitReported;
+
+  /// No description provided for @finTotalAssets.
+  ///
+  /// In en, this message translates to:
+  /// **'Total assets'**
+  String get finTotalAssets;
+
+  /// No description provided for @finTotalLiabilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Total liabilities'**
+  String get finTotalLiabilities;
+
+  /// No description provided for @finCashFromOps.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash from operations'**
+  String get finCashFromOps;
+
+  /// No description provided for @finNetProfitByYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit by year'**
+  String get finNetProfitByYear;
+
+  /// No description provided for @finLatestFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest filing'**
+  String get finLatestFiling;
+
+  /// No description provided for @finCompanyOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Company only'**
+  String get finCompanyOnly;
+
+  /// No description provided for @finReadFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the filing'**
+  String get finReadFiling;
+
+  /// No description provided for @finEgpMillionsPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP m · {period}'**
+  String finEgpMillionsPeriod(String period);
+
+  /// No description provided for @priceNoHistoryDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'No price history downloaded'**
+  String get priceNoHistoryDownloaded;
+
+  /// No description provided for @priceLastSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Last {count} sessions'**
+  String priceLastSessions(int count);
+
+  /// No description provided for @discussionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Company threads land here once the community backend exists. Everything else on this screen works without it.'**
+  String get discussionBody;
+
+  /// No description provided for @movedThisMonthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'How it has moved this month'**
+  String get movedThisMonthLabel;
+
+  /// No description provided for @noDetailBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The exchange scan carried only a closing price for this company. Everything else appears once a fuller record is published.'**
+  String get noDetailBody;
+
+  /// No description provided for @finNoFiguresBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Figures are read from each company\'s filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.'**
+  String get finNoFiguresBody;
+
+  /// No description provided for @finFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.'**
+  String finFootnote(String source);
+
+  /// No description provided for @sourceMubasher.
+  ///
+  /// In en, this message translates to:
+  /// **'Mubasher'**
+  String get sourceMubasher;
+
+  /// No description provided for @priceNoHistoryBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open this company once with a connection.'**
+  String get priceNoHistoryBody;
+
+  /// No description provided for @priceNoSeriesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Neither the exchange scan nor the price source publishes a usable series for it yet.'**
+  String get priceNoSeriesBody;
+
+  /// No description provided for @noStudyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies are studied one at a time. When this one is read, the investigation appears here.'**
+  String get noStudyBody;
+
+  /// No description provided for @exitStopsTrading.
+  ///
+  /// In en, this message translates to:
+  /// **'It stops trading'**
+  String get exitStopsTrading;
+
+  /// No description provided for @exitCanIGetOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I get out?'**
+  String get exitCanIGetOut;
+
+  /// No description provided for @scanNotRunBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing has cleared the test since the last session. That is a result, not an error.'**
+  String get scanNotRunBody;
+
+  /// No description provided for @scanRecordBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.'**
+  String get scanRecordBlurb;
+
+  /// No description provided for @scanLogEmptyBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Entries appear here as each published rule is measured against what happened next.'**
+  String get scanLogEmptyBlurb;
+
+  /// No description provided for @scanEmptySectionBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'An empty section is a real answer. The test does not lower itself to fill a screen.'**
+  String get scanEmptySectionBlurb;
+
+  /// No description provided for @scanCoverageBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Every listed company is read. Most of them fail, and the ones that fail are published too.'**
+  String get scanCoverageBlurb;
+
+  /// No description provided for @scanCohortNames.
+  ///
+  /// In en, this message translates to:
+  /// **'The cohort · {count} names'**
+  String scanCohortNames(int count);
+
+  /// No description provided for @scanSectorBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'A sector read changes what gets investigated first. It is a reading order, not a view on any company in it.'**
+  String get scanSectorBlurb;
+
+  /// No description provided for @scanNoSectorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A cohort appears when several names in one industry move for the same reason. Most days none does, and that is a result rather than a gap.'**
+  String get scanNoSectorBody;
+
+  /// No description provided for @gateUnresolvedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unresolved'**
+  String get gateUnresolvedLabel;
+
+  /// No description provided for @noDetailBodyFull.
+  ///
+  /// In en, this message translates to:
+  /// **'The exchange scan carried only a closing price for this listing. More lands as a fuller record is published.'**
+  String get noDetailBodyFull;
+
+  /// No description provided for @finNoFiguresBodyFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Figures are read from each company\'s filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.'**
+  String get finNoFiguresBodyFull;
+
+  /// No description provided for @finFootnoteFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.'**
+  String finFootnoteFull(String source);
+
+  /// No description provided for @priceNoHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No price history downloaded'**
+  String get priceNoHistoryTitle;
+
+  /// No description provided for @priceNoSeriesBodyFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Neither the exchange scan nor the price source publishes a series for this listing yet.'**
+  String get priceNoSeriesBodyFull;
+
+  /// No description provided for @exitZeroDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing traded at all on {days} of the last {sessions} sessions.'**
+  String exitZeroDays(int days, int sessions);
+
+  /// No description provided for @exitFiftyK.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP 50,000 here is {share}'**
+  String exitFiftyK(String share);
+
+  /// No description provided for @exitNoPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'On those days there was no price at which a holder could sell.'**
+  String get exitNoPrice;
+
+  /// No description provided for @meansSameDay.
+  ///
+  /// In en, this message translates to:
+  /// **'About EGP {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.'**
+  String meansSameDay(String amount);
+
+  /// No description provided for @meansZeroDays.
+  ///
+  /// In en, this message translates to:
+  /// **'It did not trade at all on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.'**
+  String meansZeroDays(int days, int sessions);
+
+  /// No description provided for @meansNetProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'It reported {amount} EGP m of net profit in {period}.'**
+  String meansNetProfit(String amount, String period);
+
+  /// No description provided for @scanLogEmptyBodyFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Entries appear here as each published rule reaches its stated end.'**
+  String get scanLogEmptyBodyFull;
+
+  /// No description provided for @scanEmptySectionFull.
+  ///
+  /// In en, this message translates to:
+  /// **'An empty section is a real answer. The test does not lower its bar to fill a page.'**
+  String get scanEmptySectionFull;
+
+  /// No description provided for @scanSectorBlurbFull.
+  ///
+  /// In en, this message translates to:
+  /// **'A sector read changes what gets investigated first. It scores nothing on the record and names nothing to act on.'**
+  String get scanSectorBlurbFull;
+
+  /// No description provided for @detailFirstSeen.
+  ///
+  /// In en, this message translates to:
+  /// **'First seen · {date}'**
+  String detailFirstSeen(String date);
+
+  /// No description provided for @detailWhyScored.
+  ///
+  /// In en, this message translates to:
+  /// **'Why it scored what it scored'**
+  String get detailWhyScored;
+
+  /// No description provided for @detailLastSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Last completed session'**
+  String get detailLastSession;
+
+  /// No description provided for @detailMoveSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Move since it was flagged'**
+  String get detailMoveSince;
+
+  /// No description provided for @detailHowScored.
+  ///
+  /// In en, this message translates to:
+  /// **'How a name is scored'**
+  String get detailHowScored;
+
+  /// No description provided for @detailOpenTicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Open {ticker}'**
+  String detailOpenTicker(String ticker);
 }
 
 class _AppLocalizationsDelegate

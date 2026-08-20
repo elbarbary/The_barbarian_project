@@ -56,8 +56,9 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
 
     entries.sort(switch (_sort) {
       _Sort.score => (a, b) => b.score.compareTo(a.score),
-      _Sort.recent => (a, b) =>
-          (b.studiedAt ?? '').compareTo(a.studiedAt ?? ''),
+      _Sort.recent => (a, b) => (b.studiedAt ?? '').compareTo(
+        a.studiedAt ?? '',
+      ),
       _Sort.ticker => (a, b) => a.ticker.compareTo(b.ticker),
     });
     return entries;
@@ -298,8 +299,10 @@ class _VerdictCard extends ConsumerWidget {
         foregroundDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(BarbarianRadius.xl),
           border: Border.all(
-            color: BarbarianPalette.verdict(c, entry.verdict)
-                .withValues(alpha: 0.28),
+            color: BarbarianPalette.verdict(
+              c,
+              entry.verdict,
+            ).withValues(alpha: 0.28),
           ),
         ),
         child: Column(
@@ -355,10 +358,7 @@ class _VerdictCard extends ConsumerWidget {
               Wrap(
                 spacing: 6,
                 runSpacing: 6,
-                children: [
-                  for (final flag in entry.flags)
-                    BKindChip(flag),
-                ],
+                children: [for (final flag in entry.flags) BKindChip(flag)],
               ),
             ],
             if (entry.pillars.isNotEmpty) ...[
@@ -392,9 +392,8 @@ class _VerdictCard extends ConsumerWidget {
                 const SizedBox(width: 10),
                 _CardAction(
                   label: 'Company',
-                  onTap: () => context.push(
-                    Routes.companyPath(parentTab, entry.ticker),
-                  ),
+                  onTap: () =>
+                      context.push(Routes.companyPath(parentTab, entry.ticker)),
                 ),
               ],
             ),
@@ -580,7 +579,9 @@ class _CardAction extends StatelessWidget {
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
         decoration: BoxDecoration(
-          color: filled ? c.actionSurface : c.textPrimary.withValues(alpha: 0.05),
+          color: filled
+              ? c.actionSurface
+              : c.textPrimary.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(BarbarianRadius.pill),
         ),
         child: Text(

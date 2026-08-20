@@ -116,7 +116,9 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 if (x == null && y == null) return a.ticker.compareTo(b.ticker);
                 if (x == null) return 1;
                 if (y == null) return -1;
-                return _order == _Order.losers ? x.compareTo(y) : y.compareTo(x);
+                return _order == _Order.losers
+                    ? x.compareTo(y)
+                    : y.compareTo(x);
               });
             }
 
@@ -260,9 +262,7 @@ class _SectorChip extends StatelessWidget {
         duration: BarbarianMotion.fast,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: selected
-              ? tone
-              : BarbarianPalette.sectorWash(c, sector),
+          color: selected ? tone : BarbarianPalette.sectorWash(c, sector),
           borderRadius: BorderRadius.circular(BarbarianRadius.pill),
           border: Border.all(
             color: tone.withValues(alpha: selected ? 1 : 0.30),
@@ -402,9 +402,7 @@ class _SectorTile extends StatelessWidget {
               height: 3,
               child: Stack(
                 children: [
-                  Positioned.fill(
-                    child: ColoredBox(color: c.hairline),
-                  ),
+                  Positioned.fill(child: ColoredBox(color: c.hairline)),
                   FractionallySizedBox(
                     widthFactor: share.clamp(0.02, 1.0),
                     child: ColoredBox(color: tone),
@@ -448,8 +446,7 @@ class _CompanyRow extends StatelessWidget {
       title: company.nameEn,
       subtitle: company.nameAr,
       subtitleIsArabic: company.nameAr != null,
-      onTap: () =>
-          context.push(Routes.companyPath(parentTab, company.ticker)),
+      onTap: () => context.push(Routes.companyPath(parentTab, company.ticker)),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,

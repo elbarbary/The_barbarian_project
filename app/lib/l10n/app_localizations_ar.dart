@@ -536,4 +536,290 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get gateUnresolved => 'غير محسوم';
+
+  @override
+  String get scannerTitleFull => 'ماسح الفرص';
+
+  @override
+  String scanUpdated(String date) {
+    return 'حُدِّث · $date';
+  }
+
+  @override
+  String scanQualifiedCount(int count) {
+    return 'مستوفية $count';
+  }
+
+  @override
+  String scanWatchCount(int count) {
+    return 'متابعة $count';
+  }
+
+  @override
+  String scanRejectedCount(int count) {
+    return 'مستبعدة $count';
+  }
+
+  @override
+  String scanLogCount(int count) {
+    return 'سجل القواعد $count';
+  }
+
+  @override
+  String get scanLogBlurb =>
+      'ما قالته القاعدة المنشورة، وما فعله السوق بعدها، وما غُيّر في القاعدة لاحقًا. هذه مراجعة للمنهج، وليست لوحة نتائج: لا يوجد مجموع هنا ولن يوجد.';
+
+  @override
+  String get scanLogEmptyBody =>
+      'تظهر السجلات هنا مع قياس كل قاعدة منشورة على ما حدث بعدها.';
+
+  @override
+  String get scanNotRepublished => 'غير مُعاد نشره';
+
+  @override
+  String get scanNoComponent => 'لم يُسجَّل أي بند من بنود المعايير.';
+
+  @override
+  String get scanStocks => 'أسهم';
+
+  @override
+  String get scanScoredNames => 'أسماء مُقيَّمة';
+
+  @override
+  String get scanSectorNone => 'لا شيء اليوم';
+
+  @override
+  String get scanOneCohort => 'مجموعة واحدة';
+
+  @override
+  String get scanHowItWasRead => 'كيف قُرئت';
+
+  @override
+  String get scanNoSectorToday => 'لا قراءة قطاعية اليوم';
+
+  @override
+  String get statusQualified => 'مستوفية';
+
+  @override
+  String get statusWatching => 'تحت المتابعة';
+
+  @override
+  String get statusRejected => 'مستبعدة';
+
+  @override
+  String get figPrevClose => 'الإغلاق السابق';
+
+  @override
+  String get figDayHigh => 'أعلى سعر';
+
+  @override
+  String get figPreviousClose => 'الإغلاق السابق';
+
+  @override
+  String get figAvgVolume30d => 'متوسط الحجم ٣٠ يومًا';
+
+  @override
+  String get figSharesOutstanding => 'الأسهم المصدرة';
+
+  @override
+  String get figFloatShares => 'الأسهم الحرة';
+
+  @override
+  String get finNoFigures => 'لا توجد أرقام معلنة بعد';
+
+  @override
+  String get finNetProfitReported => 'صافي الربح، كما أُعلن';
+
+  @override
+  String get finTotalAssets => 'إجمالي الأصول';
+
+  @override
+  String get finTotalLiabilities => 'إجمالي الالتزامات';
+
+  @override
+  String get finCashFromOps => 'التدفق النقدي التشغيلي';
+
+  @override
+  String get finNetProfitByYear => 'صافي الربح سنويًا';
+
+  @override
+  String get finLatestFiling => 'آخر إفصاح';
+
+  @override
+  String get finCompanyOnly => 'مستقلة';
+
+  @override
+  String get finReadFiling => 'اقرأ الإفصاح';
+
+  @override
+  String finEgpMillionsPeriod(String period) {
+    return 'مليون جنيه · $period';
+  }
+
+  @override
+  String get priceNoHistoryDownloaded => 'لم يُنزَّل تاريخ الأسعار';
+
+  @override
+  String priceLastSessions(int count) {
+    return 'آخر $count جلسة';
+  }
+
+  @override
+  String get discussionBody =>
+      'تظهر هنا نقاشات الشركة عند تفعيل خدمة المجتمع. كل شيء آخر في هذه الشاشة يعمل بدونها.';
+
+  @override
+  String get movedThisMonthLabel => 'كيف تحرّك هذا الشهر';
+
+  @override
+  String get noDetailBody =>
+      'لم يحمل مسح البورصة لهذه الشركة سوى سعر الإغلاق. يظهر ما عدا ذلك عند نشر سجل أوفى.';
+
+  @override
+  String get finNoFiguresBody =>
+      'تُقرأ الأرقام من القوائم المالية التي تودعها كل شركة ومن النتائج التي تعلنها للبورصة. لم يُقرأ شيء لهذه الشركة بعد.';
+
+  @override
+  String finFootnote(String source) {
+    return 'الأرقام بملايين الجنيهات كما أُودعت. لا يذكر أي من المصدرين الإيرادات، لذلك لا تُعرض الهوامش بدلًا من تقديرها. المصدر: $source.';
+  }
+
+  @override
+  String get sourceMubasher => 'مباشر';
+
+  @override
+  String get priceNoHistoryBody => 'افتح هذه الشركة مرة ومعك اتصال.';
+
+  @override
+  String get priceNoSeriesBody =>
+      'لا مسح البورصة ولا مصدر الأسعار ينشر سلسلة صالحة لها بعد.';
+
+  @override
+  String get noStudyBody =>
+      'تُدرس الشركات واحدة تلو الأخرى. عندما تُقرأ هذه، تظهر الدراسة هنا.';
+
+  @override
+  String get exitStopsTrading => 'يتوقف عن التداول';
+
+  @override
+  String get exitCanIGetOut => 'أقدر أخرج؟';
+
+  @override
+  String get scanNotRunBody =>
+      'لم يستوفِ شيء الاختبار منذ الجلسة الماضية. هذه نتيجة، وليست خطأ.';
+
+  @override
+  String get scanRecordBlurb =>
+      'ما قالته القاعدة المنشورة، وما فعله السوق بعدها، وما غُيّر في القاعدة لاحقًا. هذه مراجعة للمنهج، وليست لوحة نتائج: لا يوجد مجموع هنا ولن يوجد.';
+
+  @override
+  String get scanLogEmptyBlurb =>
+      'تظهر السجلات هنا مع قياس كل قاعدة منشورة على ما حدث بعدها.';
+
+  @override
+  String get scanEmptySectionBlurb =>
+      'القسم الفارغ إجابة حقيقية. الاختبار لا يخفّض معاييره ليملأ شاشة.';
+
+  @override
+  String get scanCoverageBlurb =>
+      'تُقرأ كل شركة مقيدة. معظمها لا يستوفي، وما لا يستوفي يُنشر أيضًا.';
+
+  @override
+  String scanCohortNames(int count) {
+    return 'المجموعة · $count اسمًا';
+  }
+
+  @override
+  String get scanSectorBlurb =>
+      'القراءة القطاعية تغيّر ما يُدرس أولًا. هي ترتيب قراءة، وليست رأيًا في أي شركة داخلها.';
+
+  @override
+  String get scanNoSectorBody =>
+      'تظهر المجموعة عندما تتحرك عدة أسماء في صناعة واحدة للسبب نفسه. في معظم الأيام لا تظهر، وهذه نتيجة لا نقص.';
+
+  @override
+  String get gateUnresolvedLabel => 'غير محسوم';
+
+  @override
+  String get noDetailBodyFull =>
+      'لم يحمل مسح البورصة لهذا القيد سوى سعر الإغلاق. يظهر المزيد عند نشر سجل أوفى.';
+
+  @override
+  String get finNoFiguresBodyFull =>
+      'تُقرأ الأرقام من القوائم المالية التي تودعها كل شركة ومن النتائج التي تعلنها للبورصة. لم يُقرأ شيء لهذه الشركة بعد.';
+
+  @override
+  String finFootnoteFull(String source) {
+    return 'الأرقام بملايين الجنيهات كما أُودعت. لا يذكر أي من المصدرين الإيرادات، لذلك لا تُعرض الهوامش بدلًا من تقديرها. المصدر: $source.';
+  }
+
+  @override
+  String get priceNoHistoryTitle => 'لم يُنزَّل تاريخ الأسعار';
+
+  @override
+  String get priceNoSeriesBodyFull =>
+      'لا مسح البورصة ولا مصدر الأسعار ينشر سلسلة لهذا القيد بعد.';
+
+  @override
+  String exitZeroDays(int days, int sessions) {
+    return 'لم يتداول السهم إطلاقًا في $days من آخر $sessions جلسة.';
+  }
+
+  @override
+  String exitFiftyK(String share) {
+    return '٥٠٬٠٠٠ جنيه هنا تمثل $share';
+  }
+
+  @override
+  String get exitNoPrice =>
+      'في تلك الأيام لم يكن هناك سعر يستطيع المالك البيع عنده.';
+
+  @override
+  String meansSameDay(String amount) {
+    return 'نحو $amount جنيه يمكن أن تخرج في جلسة واحدة هنا. فوق ذلك يصبح البيع أكثر من خُمس يوم عادي ويبدأ في تحريك السعر ضد البائع.';
+  }
+
+  @override
+  String meansZeroDays(int days, int sessions) {
+    return 'لم يتداول إطلاقًا في $days من آخر $sessions جلسة. في تلك الأيام لم يكن هناك سعر يستطيع المالك البيع عنده، لأنه لم يكن هناك مشترٍ.';
+  }
+
+  @override
+  String meansNetProfit(String amount, String period) {
+    return 'أعلن $amount مليون جنيه صافي ربح في $period.';
+  }
+
+  @override
+  String get scanLogEmptyBodyFull =>
+      'تظهر السجلات هنا مع بلوغ كل قاعدة منشورة نهايتها المعلنة.';
+
+  @override
+  String get scanEmptySectionFull =>
+      'القسم الفارغ إجابة حقيقية. الاختبار لا يخفّض معاييره ليملأ صفحة.';
+
+  @override
+  String get scanSectorBlurbFull =>
+      'القراءة القطاعية تغيّر ما يُدرس أولًا. لا تسجّل شيئًا في السجل ولا تسمّي شيئًا للتصرف بناءً عليه.';
+
+  @override
+  String detailFirstSeen(String date) {
+    return 'أول ظهور · $date';
+  }
+
+  @override
+  String get detailWhyScored => 'لماذا حصل على هذه الدرجة';
+
+  @override
+  String get detailLastSession => 'آخر جلسة مكتملة';
+
+  @override
+  String get detailMoveSince => 'التغيّر منذ رصده';
+
+  @override
+  String get detailHowScored => 'كيف يُقيَّم الاسم';
+
+  @override
+  String detailOpenTicker(String ticker) {
+    return 'افتح $ticker';
+  }
 }

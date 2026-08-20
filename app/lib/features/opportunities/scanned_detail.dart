@@ -135,8 +135,8 @@ class ScannedDetailSheet extends ConsumerWidget {
                               child: Text(
                                 label,
                                 style: BarbarianType.pill.copyWith(
-          color: BarbarianPalette.onWash(c, tone),
-        ),
+                                  color: BarbarianPalette.onWash(c, tone),
+                                ),
                               ),
                             );
                           },
@@ -150,7 +150,7 @@ class ScannedDetailSheet extends ConsumerWidget {
             ),
             if (entry.seenAt case final String seen) ...[
               const SizedBox(height: 14),
-              BStalenessCaption('First seen · $seen'),
+              BStalenessCaption(l.detailFirstSeen(seen)),
             ],
             if (entry.headline case final String h) ...[
               const SizedBox(height: 20),
@@ -175,7 +175,7 @@ class ScannedDetailSheet extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'WHY IT SCORED WHAT IT SCORED',
+                      l.detailWhyScored.toUpperCase(),
                       style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
                     for (final para in entry.action!.reasoning) ...[
@@ -203,7 +203,7 @@ class ScannedDetailSheet extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            tape.label ?? 'Last completed session',
+                            tape.label ?? l.detailLastSession,
                             style: BarbarianType.labelNano.copyWith(
                               color: c.textMuted,
                             ),
@@ -290,10 +290,8 @@ class ScannedDetailSheet extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Move since it was flagged',
-                        style: BarbarianType.bodyM.copyWith(
-                          color: c.textMuted,
-                        ),
+                        l.detailMoveSince,
+                        style: BarbarianType.bodyM.copyWith(color: c.textMuted),
                       ),
                     ),
                     BChangeDelta(
@@ -349,10 +347,8 @@ class ScannedDetailSheet extends ConsumerWidget {
             ],
             if (rubric.isNotEmpty) ...[
               const SizedBox(height: 22),
-              const BSectionLabel('How a name is scored'),
-              if (scoring.bands.isNotEmpty) ...[
-                const SizedBox(height: 12),
-              ],
+              BSectionLabel(l.detailHowScored),
+              if (scoring.bands.isNotEmpty) ...[const SizedBox(height: 12)],
               _Rubric(rubric: rubric),
               for (final note in scoring.notes) ...[
                 const SizedBox(height: 12),
@@ -379,7 +375,7 @@ class ScannedDetailSheet extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(BarbarianRadius.pill),
                 ),
                 child: Text(
-                  'Open ${entry.ticker}',
+                  l.detailOpenTicker(entry.ticker),
                   style: BarbarianType.label.copyWith(color: c.onAction),
                 ),
               ),

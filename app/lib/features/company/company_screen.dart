@@ -88,10 +88,19 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                 BSegmentedRow(
                   style: BSegmentStyle.iconPill,
                   segments: [
-                    BSegment(label: l.tabOverview, icon: Icons.grid_view_rounded),
-                    BSegment(label: l.tabFinancials, icon: Icons.bar_chart_rounded),
+                    BSegment(
+                      label: l.tabOverview,
+                      icon: Icons.grid_view_rounded,
+                    ),
+                    BSegment(
+                      label: l.tabFinancials,
+                      icon: Icons.bar_chart_rounded,
+                    ),
                     BSegment(label: l.tabPrice, icon: Icons.show_chart_rounded),
-                    BSegment(label: l.tabResearch, icon: Icons.article_outlined),
+                    BSegment(
+                      label: l.tabResearch,
+                      icon: Icons.article_outlined,
+                    ),
                     BSegment(label: l.tabTalk, icon: Icons.forum_outlined),
                   ],
                   selectedIndex: _Tab.values.indexOf(_tab),
@@ -105,7 +114,10 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     quote: quote,
                     ticker: widget.ticker,
                   ),
-                  _Tab.financials => _Financials(company: company, parentTab: widget.parentTab),
+                  _Tab.financials => _Financials(
+                    company: company,
+                    parentTab: widget.parentTab,
+                  ),
                   _Tab.price => _Price(
                     ticker: widget.ticker,
                     range: _range,
@@ -119,10 +131,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                   ),
                   _Tab.discussion => BEmptyState(
                     title: l.discussionArrives,
-                    body:
-                        'Company threads land here once the community backend '
-                        'exists. Everything else on this screen works without '
-                        'it.',
+                    body: l.discussionBody,
                   ),
                 },
                 const SizedBox(height: 18),
@@ -212,9 +221,7 @@ class _Header extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       company.name.en,
-                      style: BarbarianType.bodyM.copyWith(
-                        color: c.onInkMuted,
-                      ),
+                      style: BarbarianType.bodyM.copyWith(color: c.onInkMuted),
                     ),
                     if (company.name.ar case final String ar) ...[
                       const SizedBox(height: 2),
@@ -237,8 +244,7 @@ class _Header extends StatelessWidget {
                     const SizedBox(height: 6),
                     BChangeDelta(
                       value:
-                          '${change.abs().toStringAsFixed(2)} '
-                          '(${(changePct.abs() * 100).toStringAsFixed(2)}%)',
+                          '${change.abs().toStringAsFixed(2)} (${(changePct.abs() * 100).toStringAsFixed(2)}%)',
                       direction: BDirection.of(change),
                       onDark: true,
                       gap: 4,
@@ -252,7 +258,9 @@ class _Header extends StatelessWidget {
           // price and where it sits in its own year belong together.
           if (company.priceHistory.length > 2) ...[
             const SizedBox(height: 6),
-            Center(child: _RangeGauge(company: company, quote: quote)),
+            Center(
+              child: _RangeGauge(company: company, quote: quote),
+            ),
           ] else
             const SizedBox(height: 16),
           const SizedBox(height: 6),
@@ -311,6 +319,7 @@ class _HeaderStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final cap = company.profile?['market_cap'];
 
@@ -335,10 +344,7 @@ class _HeaderStats extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        cell(
-          'Prev close',
-          quote?.previousClose?.toStringAsFixed(2) ?? '—',
-        ),
+        cell(l.figPrevClose, quote?.previousClose?.toStringAsFixed(2) ?? '—'),
         cell('Volume', _Header._compact(quote?.volume)),
         cell('Mkt cap', _Header._compact(cap is num ? cap : null)),
       ],
@@ -392,20 +398,20 @@ class _Overview extends ConsumerWidget {
     // simply absent rather than rendered as a zero (spec §49).
     final session = <(String, String)>[
       if (m?.open != null) ('Open', _num(m!.open)),
-      if (m?.high != null) ('Day high', _num(m!.high)),
+      if (m?.high != null) (l.figDayHigh, _num(m!.high)),
       if (m?.low != null) ('Day low', _num(m!.low)),
       if (quote?.previousClose != null)
-        ('Previous close', _num(quote!.previousClose)),
+        (l.figPreviousClose, _num(quote!.previousClose)),
       if (m?.volume != null) ('Volume', _compact(m!.volume)),
       if (p['avg_volume_30d'] != null)
-        ('Avg volume 30d', _compact(p['avg_volume_30d'])),
+        (l.figAvgVolume30d, _compact(p['avg_volume_30d'])),
     ];
 
     final size = <(String, String)>[
       if (p['shares_outstanding'] != null)
-        ('Shares outstanding', _compact(p['shares_outstanding'])),
+        (l.figSharesOutstanding, _compact(p['shares_outstanding'])),
       if (p['float_shares'] != null)
-        ('Float shares', _compact(p['float_shares'])),
+        (l.figFloatShares, _compact(p['float_shares'])),
       if (company.sector case final String sector) ('Sector', sector),
     ];
 
@@ -418,7 +424,7 @@ class _Overview extends ConsumerWidget {
       Explainers.freeFloat(company),
       Explainers.closeStrength(company),
       Explainers.move(
-        title: 'How it has moved this month',
+        title: l.movedThisMonthLabel,
         window: 'a month',
         percent: p['perf_1m'] is num ? (p['perf_1m'] as num).toDouble() : null,
         asOf: m?.date,
@@ -528,8 +534,7 @@ class _Overview extends ConsumerWidget {
           BEmptyState(
             title: l.noDetailYet,
             body:
-                'The exchange scan carried only a closing price for this '
-                'listing. More lands as the pipeline fills in.',
+                'The exchange scan carried only a closing price for this listing. More lands as the pipeline fills in.',
           ),
       ],
     );
@@ -554,8 +559,9 @@ class _FactCard extends StatelessWidget {
           for (var i = 0; i < rows.length; i++)
             Container(
               padding: const EdgeInsets.symmetric(vertical: 13),
-              foregroundDecoration:
-                  i == rows.length - 1 ? null : BHairline.rowBottom(context),
+              foregroundDecoration: i == rows.length - 1
+                  ? null
+                  : BHairline.rowBottom(context),
               child: Row(
                 children: [
                   Expanded(
@@ -566,9 +572,7 @@ class _FactCard extends StatelessWidget {
                   ),
                   BNumText(
                     rows[i].$2,
-                    style: BarbarianType.figureS.copyWith(
-                      color: c.textPrimary,
-                    ),
+                    style: BarbarianType.figureS.copyWith(color: c.textPrimary),
                     align: TextAlign.end,
                   ),
                 ],
@@ -599,18 +603,13 @@ class _Financials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final annual = company.financials.annual;
     final interim = company.financials.quarterly;
 
     if (annual.isEmpty && interim.isEmpty) {
-      return const BEmptyState(
-        title: 'No reported figures yet',
-        body:
-            'Figures are read from each company\'s filed accounts and from the '
-            'results it announces to the exchange. Nothing has been read for '
-            'this company yet.',
-      );
+      return BEmptyState(title: l.finNoFigures, body: l.finNoFiguresBodyFull);
     }
 
     final latest = annual.isNotEmpty ? annual.last : interim.last;
@@ -625,7 +624,7 @@ class _Financials extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BSectionLabel('Net profit, as reported'),
+              BSectionLabel(l.finNetProfitReported),
               const SizedBox(height: 10),
               BNumText(
                 formatMillions(latest.netIncome),
@@ -633,7 +632,7 @@ class _Financials extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                'EGP m · ${latest.period}',
+                l.finEgpMillionsPeriod(latest.period),
                 style: BarbarianType.bodyS.copyWith(color: c.textFaint),
               ),
               if (move != null) ...[
@@ -679,7 +678,7 @@ class _Financials extends StatelessWidget {
             children: [
               Expanded(
                 child: BStatTile(
-                  label: 'Total assets',
+                  label: l.finTotalAssets,
                   value: formatMillions(latest.assets),
                   unit: 'm',
                 ),
@@ -699,7 +698,7 @@ class _Financials extends StatelessWidget {
             children: [
               Expanded(
                 child: BStatTile(
-                  label: 'Total liabilities',
+                  label: l.finTotalLiabilities,
                   value: formatMillions(latest.liabilities),
                   unit: 'm',
                 ),
@@ -707,7 +706,7 @@ class _Financials extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: BStatTile(
-                  label: 'Cash from operations',
+                  label: l.finCashFromOps,
                   value: formatMillions(latest.operatingCashFlow),
                   unit: 'm',
                 ),
@@ -723,7 +722,7 @@ class _Financials extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const BSectionLabel('Net profit by year'),
+                BSectionLabel(l.finNetProfitByYear),
                 const SizedBox(height: 8),
                 for (final p in annual.reversed)
                   Padding(
@@ -733,14 +732,16 @@ class _Financials extends StatelessWidget {
                         Expanded(
                           child: Text(
                             p.period,
-                            style: BarbarianType.bodyM
-                                .copyWith(color: c.textSecondary),
+                            style: BarbarianType.bodyM.copyWith(
+                              color: c.textSecondary,
+                            ),
                           ),
                         ),
                         BNumText(
                           formatMillions(p.netIncome),
-                          style: BarbarianType.bodyM
-                              .copyWith(color: c.textPrimary),
+                          style: BarbarianType.bodyM.copyWith(
+                            color: c.textPrimary,
+                          ),
                         ),
                       ],
                     ),
@@ -752,9 +753,7 @@ class _Financials extends StatelessWidget {
 
         const SizedBox(height: 16),
         Text(
-          'Figures in EGP millions, as filed. Neither source states revenue, '
-          'so margins are not shown rather than estimated. Read from '
-          '${_sourceName(latest.source)}.',
+          'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from ${_sourceName(context, latest.source)}.',
           style: BarbarianType.bodyS.copyWith(color: c.textFaint),
         ),
       ],
@@ -762,11 +761,15 @@ class _Financials extends StatelessWidget {
   }
 
   /// Named from the URL so the attribution cannot drift from the link.
-  static String _sourceName(String? url) {
-    if (url == null) return 'filed accounts';
-    if (url.contains('egx.com.eg')) return 'the Egyptian Exchange';
-    if (url.contains('mubasher')) return 'Mubasher';
-    return 'filed accounts';
+  ///
+  /// Takes a context rather than being static: the source name is shown to a
+  /// reader, so it is translated like everything else they read.
+  static String _sourceName(BuildContext context, String? url) {
+    final l = AppLocalizations.of(context);
+    if (url == null) return l.sourceFiledAccounts;
+    if (url.contains('egx.com.eg')) return l.sourceExchange;
+    if (url.contains('mubasher')) return l.sourceMubasher;
+    return l.sourceFiledAccounts;
   }
 }
 
@@ -786,6 +789,7 @@ class _InterimCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final move = profitMovement(period, prior);
 
@@ -801,10 +805,10 @@ class _InterimCard extends StatelessWidget {
             runSpacing: 6,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              const BSectionLabel('Latest filing'),
+              BSectionLabel(l.finLatestFiling),
               if (period.basis != null)
                 BKindChip(
-                  period.basis == 'consolidated' ? 'Group' : 'Company only',
+                  period.basis == 'consolidated' ? 'Group' : l.finCompanyOnly,
                 ),
             ],
           ),
@@ -815,7 +819,7 @@ class _InterimCard extends StatelessWidget {
           ),
           const SizedBox(height: 2),
           Text(
-            'EGP m · ${period.period}',
+            l.finEgpMillionsPeriod(period.period),
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
           if (move != null) ...[
@@ -829,7 +833,7 @@ class _InterimCard extends StatelessWidget {
             const SizedBox(height: 10),
             // Spec §50: the reader can go and read the filing itself.
             BInlineAction(
-              'Read the filing',
+              l.finReadFiling,
               onTap: () => context.push(
                 Routes.articlePath(
                   parentTab,
@@ -867,17 +871,15 @@ class _Price extends ConsumerWidget {
 
     return BAsyncView(
       value: async,
-      errorTitle: 'No price history downloaded',
-      errorBody: 'Open this company once with a connection.',
+      errorTitle: l.priceNoHistoryTitle,
+      errorBody: l.priceNoHistoryBody,
       data: (sourced) {
         final all = sourced.value;
         if (all.isEmpty && session?.high == null) {
           return BEmptyState(
             title: l.noPriceHistory,
             body:
-                'Neither the exchange scan nor the price source publishes a '
-                'series for this listing. Its latest close is still shown on '
-                'Overview.',
+                'Neither the exchange scan nor the price source publishes a series for this listing. Its latest close is still shown on Overview.',
           );
         }
         final windowed = range.apply(all);
@@ -934,12 +936,7 @@ class _Research extends ConsumerWidget {
         .whenOrNull(data: (s) => s.value.allFor(ticker));
 
     if (entry == null && (scanned == null || scanned.isEmpty)) {
-      return BEmptyState(
-        title: l.noStudyYet,
-        body:
-            'Companies are studied one at a time. When this one is read, the '
-            'investigation appears here.',
-      );
+      return BEmptyState(title: l.noStudyYet, body: l.noStudyBody);
     }
 
     return Column(
@@ -960,15 +957,12 @@ class _Research extends ConsumerWidget {
                 // somebody with no licence to rate anything.
                 Text(
                   entry.verdict.sentence,
-                  style: BarbarianType.headlineM.copyWith(
-                    color: c.textPrimary,
-                  ),
+                  style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
                 ),
                 const SizedBox(height: 14),
                 BPillarLedger(
                   rows: [
-                    for (final p in entry.pillars)
-                      (p.pillar, p.score, p.basis),
+                    for (final p in entry.pillars) (p.pillar, p.score, p.basis),
                   ],
                   total: entry.score,
                 ),
@@ -990,17 +984,14 @@ class _Research extends ConsumerWidget {
                   conditions: [
                     for (final p in entry.pillars)
                       if ((p.basis ?? '').trim().isNotEmpty)
-                        '${p.pillar} (${p.score > 0 ? '+' : ''}${p.score}) '
-                            'rests on: ${p.basis}',
+                        '${p.pillar} (${p.score > 0 ? '+' : ''}${p.score}) rests on: ${p.basis}',
                   ],
                 ),
                 if (entry.summary case final String s) ...[
                   const SizedBox(height: 12),
                   Text(
                     s,
-                    style: BarbarianType.bodyM.copyWith(
-                      color: c.textSecondary,
-                    ),
+                    style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
                   ),
                 ],
                 if (entry.hasArticle) ...[
@@ -1045,14 +1036,11 @@ class _Research extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        BKindChip(
-                          switch (s.scanStatus) {
-                            ScanStatus.qualified => 'Qualified',
-                            ScanStatus.watching => 'Watching',
-                            ScanStatus.rejected => 'Rejected',
-                          },
-                          variant: BChipVariant.ember,
-                        ),
+                        BKindChip(switch (s.scanStatus) {
+                          ScanStatus.qualified => 'Qualified',
+                          ScanStatus.watching => 'Watching',
+                          ScanStatus.rejected => 'Rejected',
+                        }, variant: BChipVariant.ember),
                         const Spacer(),
                         BNumText(
                           '${s.score} / ${s.maxScore}',
@@ -1103,6 +1091,7 @@ class _RecentMoves extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     if (history.length < 3) return const SizedBox.shrink();
 
     final window = history.length <= _window
@@ -1128,7 +1117,7 @@ class _RecentMoves extends StatelessWidget {
       children: [
         Row(
           children: [
-            BSectionLabel('Last ${window.length} sessions'),
+            BSectionLabel(l.priceLastSessions(window.length)),
             const Spacer(),
             if (change != null)
               BChangeDelta(
@@ -1143,10 +1132,7 @@ class _RecentMoves extends StatelessWidget {
           radius: BarbarianRadius.xl,
           child: Column(
             children: [
-              BSparkline(
-                values: [for (final p in window) p.close],
-                height: 56,
-              ),
+              BSparkline(values: [for (final p in window) p.close], height: 56),
               if (strip.isNotEmpty) ...[
                 const SizedBox(height: 16),
                 Row(
@@ -1183,9 +1169,8 @@ class _DayCell extends StatelessWidget {
     final magnitude = ((change ?? 0).abs() / 0.04).clamp(0.12, 1.0);
 
     return Semantics(
-      label: '${day.point.date}: '
-          '${change == null ? 'unchanged' : '${change >= 0 ? 'up' : 'down'} '
-              '${(change.abs() * 100).toStringAsFixed(1)} percent'}',
+      label:
+          '${day.point.date}: ${change == null ? 'unchanged' : '${change >= 0 ? 'up' : 'down'} ${(change.abs() * 100).toStringAsFixed(1)} percent'}',
       excludeSemantics: true,
       child: Column(
         children: [
@@ -1208,8 +1193,7 @@ class _DayCell extends StatelessWidget {
           Text(
             change == null
                 ? '—'
-                : '${change >= 0 ? '+' : '−'}'
-                    '${(change.abs() * 100).toStringAsFixed(1)}',
+                : '${change >= 0 ? '+' : '−'}${(change.abs() * 100).toStringAsFixed(1)}',
             style: BarbarianType.labelNano.copyWith(color: tone),
           ),
           const SizedBox(height: 2),
@@ -1227,13 +1211,22 @@ class _DayCell extends StatelessWidget {
     final d = DateTime.tryParse(iso);
     if (d == null) return iso;
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${d.day} ${months[d.month - 1]}';
   }
 }
-
 
 /// "Can I get out?" in one row, opening the full answer.
 ///
@@ -1250,6 +1243,7 @@ class _ExitSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final alarming = exit.stops;
 
@@ -1276,7 +1270,9 @@ class _ExitSummary extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      alarming ? 'IT STOPS TRADING' : 'CAN I GET OUT?',
+                      alarming
+                          ? l.exitStopsTrading.toUpperCase()
+                          : l.exitCanIGetOut.toUpperCase(),
                       style: BarbarianType.labelNano.copyWith(
                         color: alarming
                             ? BarbarianPalette.onWash(c, c.down)
@@ -1286,10 +1282,8 @@ class _ExitSummary extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       alarming
-                          ? 'Nothing traded at all on ${exit.zeroVolumeDays} '
-                                'of the last ${exit.sessions} sessions.'
-                          : 'EGP 50,000 here is '
-                                '${exit.plainFor(50000).toLowerCase()}',
+                          ? l.exitZeroDays(exit.zeroVolumeDays, exit.sessions)
+                          : l.exitFiftyK(exit.plainFor(50000).toLowerCase()),
                       style: BarbarianType.bodyL.copyWith(
                         color: alarming ? c.textPrimary : c.textPrimary,
                         height: 1.4,
@@ -1297,10 +1291,7 @@ class _ExitSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      alarming
-                          ? 'On those days there was no price at which a '
-                                'holder could sell.'
-                          : exit.waitFor(50000),
+                      alarming ? l.exitNoPrice : exit.waitFor(50000),
                       style: BarbarianType.bodyS.copyWith(
                         color: c.textMuted,
                         height: 1.45,
@@ -1349,17 +1340,12 @@ class _WhatThatMeans extends ConsumerWidget {
     if (ExitLiquidity.of(company) case final ExitLiquidity exit) {
       if (exit.sameDayLimit > 0) {
         lines.add(
-          'About EGP ${_money(exit.sameDayLimit)} can leave in one session '
-          'here. Above that, selling is more than a fifth of a normal day and '
-          'starts to move the price against whoever is selling.',
+          'About EGP ${_money(exit.sameDayLimit)} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.',
         );
       }
       if (exit.zeroVolumeDays > 0) {
         lines.add(
-          'It did not trade at all on ${exit.zeroVolumeDays} of the last '
-          '${exit.sessions} sessions. On those days there was no price at '
-          'which a holder could sell, because there was nobody on the other '
-          'side.',
+          'It did not trade at all on ${exit.zeroVolumeDays} of the last ${exit.sessions} sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.',
         );
       }
     }
@@ -1375,8 +1361,7 @@ class _WhatThatMeans extends ConsumerWidget {
       final move = profitMovement(latest, prior);
       if (latest.netIncome case final double net) {
         lines.add(
-          'It reported ${formatMillions(net)} EGP m of net profit in '
-          '${latest.period}.${move == null ? '' : ' ${move.sentence}'}',
+          'It reported ${formatMillions(net)} EGP m of net profit in ${latest.period}.${move == null ? '' : ' ${move.sentence}'}',
         );
       }
     }

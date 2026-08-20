@@ -17,6 +17,7 @@ import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
+
 /// Today: the session, and — far more often — the absence of one.
 ///
 /// Board v2 makes the claim this screen is built around: the app's most common
@@ -83,12 +84,23 @@ class _TodayHeader extends ConsumerWidget {
 
   static String _dayMonth(DateTime d) {
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return '${d.day} ${months[d.month - 1]}';
   }
 }
+
 /// The lead card: today's scanner status.
 class _ScannerHero extends ConsumerWidget {
   const _ScannerHero();
@@ -312,7 +324,11 @@ class _MarketPulse extends ConsumerWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (up > 0) Expanded(flex: up, child: ColoredBox(color: c.up)),
+                    if (up > 0)
+                      Expanded(
+                        flex: up,
+                        child: ColoredBox(color: c.up),
+                      ),
                     if (up > 0 && (flat > 0 || down > 0))
                       SizedBox(width: 2, child: ColoredBox(color: c.surface)),
                     if (flat > 0)
@@ -328,7 +344,10 @@ class _MarketPulse extends ConsumerWidget {
                     if (flat > 0 && down > 0)
                       SizedBox(width: 2, child: ColoredBox(color: c.surface)),
                     if (down > 0)
-                      Expanded(flex: down, child: ColoredBox(color: c.down)),
+                      Expanded(
+                        flex: down,
+                        child: ColoredBox(color: c.down),
+                      ),
                   ],
                 ),
               ),

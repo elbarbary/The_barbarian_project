@@ -50,9 +50,7 @@ class BRatesBlock extends ConsumerWidget {
           const BSectionLabel('Gold and silver'),
           const SizedBox(height: 10),
           _Card(rows: [for (final m in rates.metals) _fromMetal(m)]),
-          if (rates.metals
-              .where((m) => m.karats.isNotEmpty)
-              .isNotEmpty) ...[
+          if (rates.metals.where((m) => m.karats.isNotEmpty).isNotEmpty) ...[
             const SizedBox(height: 10),
             _Karats(metal: rates.metals.firstWhere((m) => m.karats.isNotEmpty)),
           ],

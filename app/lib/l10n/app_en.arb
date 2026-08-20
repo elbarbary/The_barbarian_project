@@ -238,5 +238,210 @@
   "whatWasChecked": "What was checked",
   "gatePassed": "Passed",
   "gateFailed": "Failed",
-  "gateUnresolved": "Unresolved"
+  "gateUnresolved": "Unresolved",
+  "scannerTitleFull": "Opportunity Scanner",
+  "scanUpdated": "Updated · {date}",
+  "@scanUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "scanQualifiedCount": "Qualified {count}",
+  "@scanQualifiedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanWatchCount": "Watch {count}",
+  "@scanWatchCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanRejectedCount": "Rejected {count}",
+  "@scanRejectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanLogCount": "Rule log {count}",
+  "@scanLogCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanLogBlurb": "What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.",
+  "scanLogEmptyBody": "Entries appear here as each published rule is measured against what happened next.",
+  "scanNotRepublished": "Not republished",
+  "scanNoComponent": "No rubric component scored.",
+  "scanStocks": "Stocks",
+  "scanScoredNames": "Scored names",
+  "scanSectorNone": "None today",
+  "scanOneCohort": "One cohort",
+  "scanHowItWasRead": "How it was read",
+  "scanNoSectorToday": "No sector read today",
+  "statusQualified": "Qualified",
+  "statusWatching": "Watching",
+  "statusRejected": "Rejected",
+  "figPrevClose": "Prev close",
+  "figDayHigh": "Day high",
+  "figPreviousClose": "Previous close",
+  "figAvgVolume30d": "Avg volume 30d",
+  "figSharesOutstanding": "Shares outstanding",
+  "figFloatShares": "Float shares",
+  "finNoFigures": "No reported figures yet",
+  "finNetProfitReported": "Net profit, as reported",
+  "finTotalAssets": "Total assets",
+  "finTotalLiabilities": "Total liabilities",
+  "finCashFromOps": "Cash from operations",
+  "finNetProfitByYear": "Net profit by year",
+  "finLatestFiling": "Latest filing",
+  "finCompanyOnly": "Company only",
+  "finReadFiling": "Read the filing",
+  "finEgpMillionsPeriod": "EGP m · {period}",
+  "@finEgpMillionsPeriod": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "priceNoHistoryDownloaded": "No price history downloaded",
+  "priceLastSessions": "Last {count} sessions",
+  "@priceLastSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "discussionBody": "Company threads land here once the community backend exists. Everything else on this screen works without it.",
+  "movedThisMonthLabel": "How it has moved this month",
+  "noDetailBody": "The exchange scan carried only a closing price for this company. Everything else appears once a fuller record is published.",
+  "finNoFiguresBody": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "finFootnote": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "@finFootnote": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceMubasher": "Mubasher",
+  "priceNoHistoryBody": "Open this company once with a connection.",
+  "priceNoSeriesBody": "Neither the exchange scan nor the price source publishes a usable series for it yet.",
+  "noStudyBody": "Companies are studied one at a time. When this one is read, the investigation appears here.",
+  "exitStopsTrading": "It stops trading",
+  "exitCanIGetOut": "Can I get out?",
+  "scanNotRunBody": "Nothing has cleared the test since the last session. That is a result, not an error.",
+  "scanRecordBlurb": "What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.",
+  "scanLogEmptyBlurb": "Entries appear here as each published rule is measured against what happened next.",
+  "scanEmptySectionBlurb": "An empty section is a real answer. The test does not lower itself to fill a screen.",
+  "scanCoverageBlurb": "Every listed company is read. Most of them fail, and the ones that fail are published too.",
+  "scanCohortNames": "The cohort · {count} names",
+  "@scanCohortNames": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanSectorBlurb": "A sector read changes what gets investigated first. It is a reading order, not a view on any company in it.",
+  "scanNoSectorBody": "A cohort appears when several names in one industry move for the same reason. Most days none does, and that is a result rather than a gap.",
+  "gateUnresolvedLabel": "Unresolved",
+  "noDetailBodyFull": "The exchange scan carried only a closing price for this listing. More lands as a fuller record is published.",
+  "finNoFiguresBodyFull": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "finFootnoteFull": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "@finFootnoteFull": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "priceNoHistoryTitle": "No price history downloaded",
+  "priceNoSeriesBodyFull": "Neither the exchange scan nor the price source publishes a series for this listing yet.",
+  "exitZeroDays": "Nothing traded at all on {days} of the last {sessions} sessions.",
+  "@exitZeroDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "exitFiftyK": "EGP 50,000 here is {share}",
+  "@exitFiftyK": {
+    "placeholders": {
+      "share": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNoPrice": "On those days there was no price at which a holder could sell.",
+  "meansSameDay": "About EGP {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.",
+  "@meansSameDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "meansZeroDays": "It did not trade at all on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.",
+  "@meansZeroDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "meansNetProfit": "It reported {amount} EGP m of net profit in {period}.",
+  "@meansNetProfit": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "scanLogEmptyBodyFull": "Entries appear here as each published rule reaches its stated end.",
+  "scanEmptySectionFull": "An empty section is a real answer. The test does not lower its bar to fill a page.",
+  "scanSectorBlurbFull": "A sector read changes what gets investigated first. It scores nothing on the record and names nothing to act on.",
+  "detailFirstSeen": "First seen · {date}",
+  "@detailFirstSeen": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "detailWhyScored": "Why it scored what it scored",
+  "detailLastSession": "Last completed session",
+  "detailMoveSince": "Move since it was flagged",
+  "detailHowScored": "How a name is scored",
+  "detailOpenTicker": "Open {ticker}",
+  "@detailOpenTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -198,10 +198,7 @@ class _ForCompany extends ConsumerWidget {
               style: BarbarianType.titleM.copyWith(color: c.textPrimary),
             ),
             const SizedBox(height: 14),
-            if (exit.stops) ...[
-              _Stops(exit: exit),
-              const SizedBox(height: 14),
-            ],
+            if (exit.stops) ...[_Stops(exit: exit), const SizedBox(height: 14)],
             // The one figure that is different for every company.
             //
             // The ladder below is the same four rungs for everyone by design,
@@ -464,7 +461,6 @@ class _Facts extends StatelessWidget {
       ],
     );
   }
-
 }
 
 /// Pounds, shortened. One formatter, so two cards cannot disagree about

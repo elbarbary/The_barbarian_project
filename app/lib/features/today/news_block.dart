@@ -97,7 +97,11 @@ class _Headline extends StatelessWidget {
       onTap: link.isEmpty
           ? null
           : () => context.push(
-              Routes.articlePath(BNavTab.today, link, names.firstOrNull ?? 'Source'),
+              Routes.articlePath(
+                BNavTab.today,
+                link,
+                names.firstOrNull ?? 'Source',
+              ),
             ),
       child: BPaperCard(
         padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
@@ -232,6 +236,7 @@ class _CheckTag extends StatelessWidget {
     );
   }
 }
+
 class _Provenance extends StatelessWidget {
   const _Provenance({required this.feed});
 
@@ -251,10 +256,7 @@ class _Provenance extends StatelessWidget {
           '${feed.merged > 0 ? '${feed.merged} duplicates merged. ' : ''}'
           '${feed.droppedForAdvice > 0 ? '${feed.droppedForAdvice} withheld for carrying a recommendation. ' : ''}'
           '${down.isEmpty ? '' : 'Not reachable today: $down.'}',
-          style: BarbarianType.bodyS.copyWith(
-            color: c.textMuted,
-            height: 1.5,
-          ),
+          style: BarbarianType.bodyS.copyWith(color: c.textMuted, height: 1.5),
         ),
       ],
     );

@@ -75,18 +75,14 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
         BAsyncView(
           value: async,
           errorTitle: l.scanNoReport,
-          errorBody:
-              'The scanner publishes after each session. Open this once with '
-              'a connection and the latest report stays on the device.',
+          errorBody: l.scanNoReportBody,
           data: (sourced) {
             final report = sourced.value;
 
             if (report.isEmpty) {
               return BEmptyState(
                 title: l.scanNotRunToday,
-                body:
-                    'Nothing has cleared the test since the last session. '
-                    'That is a result, not an error.',
+                body: l.scanNotRunBody,
               );
             }
 
@@ -103,14 +99,14 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const BScreenTitle(
-                  'Opportunity Scanner',
+                BScreenTitle(
+                  l.scannerTitleFull,
                   // Not "what deserves investigation now". A screen that tells
                   // a reader where to spend their attention today is one short
                   // step from telling them where to put their money. What this
                   // publishes is the output of a published rule, and the rule
                   // is the product.
-                  subtitle: 'What the published rule found, and what it missed',
+                  subtitle: l.scannerSubtitle,
                 ),
                 const SizedBox(height: 14),
                 Wrap(
@@ -121,7 +117,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                     BStalenessCaption(
                       report.reportDate == null
                           ? l.scanReportDateUnknown
-                          : 'Updated · ${_formatDate(report.reportDate!)}',
+                          : l.scanUpdated(_formatDate(report.reportDate!)),
                     ),
                     if (isSample) const BSampleDataNotice(),
                   ],
@@ -159,10 +155,14 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   const SizedBox(height: 18),
                   BSegmentedRow(
                     segments: [
-                      BSegment(label: 'Qualified ${report.qualifiedCount}'),
-                      BSegment(label: 'Watch ${report.watchingCount}'),
-                      BSegment(label: 'Rejected ${report.rejectedCount}'),
-                      BSegment(label: 'Rule log ${report.outcomes.length}'),
+                      BSegment(
+                        label: l.scanQualifiedCount(report.qualifiedCount),
+                      ),
+                      BSegment(label: l.scanWatchCount(report.watchingCount)),
+                      BSegment(
+                        label: l.scanRejectedCount(report.rejectedCount),
+                      ),
+                      BSegment(label: l.scanLogCount(report.outcomes.length)),
                     ],
                     selectedIndex: _Section.values.indexOf(_section),
                     onChanged: (i) =>
@@ -170,27 +170,18 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   ),
                   const SizedBox(height: 14),
                   Text(switch (_section) {
-                    _Section.qualified =>
-                      l.scanQualifiedBlurb,
+                    _Section.qualified => l.scanQualifiedBlurb,
                     // "Accumulation" is a trading instruction wearing a noun.
-                    _Section.watching =>
-                      l.scanWatchingBlurb,
-                    _Section.rejected =>
-                      l.scanRejectedBlurb,
-                    _Section.record =>
-                      'What the published rule said, what the tape did next, '
-                          'and what was changed in the rule afterwards. It is '
-                          'an audit of the method, not a scoreboard: there is '
-                          'no total here and there never will be.',
+                    _Section.watching => l.scanWatchingBlurb,
+                    _Section.rejected => l.scanRejectedBlurb,
+                    _Section.record => l.scanRecordBlurb,
                   }, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
                   const SizedBox(height: 16),
                   if (_section == _Section.record)
                     if (report.outcomes.isEmpty)
                       BEmptyState(
                         title: l.scanLogEmpty,
-                        body:
-                            'Entries appear here as each published rule '
-                            'reaches its stated end.',
+                        body: l.scanLogEmptyBodyFull,
                       )
                     else
                       for (final outcome in report.outcomes) ...[
@@ -207,9 +198,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                         _Section.watching => l.scanNothingWatch,
                         _ => l.scanNothingRejected,
                       },
-                      body:
-                          'An empty section is a real answer. The test does not '
-                          'lower its bar to fill a page.',
+                      body: l.scanEmptySectionFull,
                     )
                   else
                     for (final entry in entries) ...[
@@ -270,7 +259,10 @@ class _CoverageStrip extends StatelessWidget {
           BSectionLabel(l.coverage, onDark: true),
           Row(
             children: [
-              _CoverageStat(value: '${coverage.thndr}', label: l.coverageTradable),
+              _CoverageStat(
+                value: '${coverage.thndr}',
+                label: l.coverageTradable,
+              ),
               _CoverageStat(value: '${coverage.egx}', label: l.coverageListed),
               _CoverageStat(
                 value: '${coverage.adjustedHistories}',
@@ -280,8 +272,7 @@ class _CoverageStrip extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'Every listed company is read. Most of them fail, and the ones '
-            'that fail are published too.',
+            l.scanCoverageBlurb,
             style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
           ),
         ],
@@ -424,15 +415,15 @@ class _ScannedCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'NOT REPUBLISHED',
-                      style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                      l.scanNotRepublished.toUpperCase(),
+                      style: BarbarianType.labelNano.copyWith(
+                        color: c.textMuted,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       "The report's note on this name describes a model "
-                      'position — a size and a price. ESTHMR is not licensed to '
-                      'republish that, so the score and the evidence are here '
-                      'and the position is not.',
+                      'position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.',
                       style: BarbarianType.bodyM.copyWith(
                         color: c.textSecondary,
                         height: 1.45,
@@ -667,8 +658,7 @@ class _RubricScore extends StatelessWidget {
       // Three states in one numeral, and forest against brick is 1.03:1 — to
       // a photometer, and to a deuteranope, "qualified" and "rejected" are the
       // same warm grey. The caption underneath now says which.
-      label:
-          '${entry.score} of ${entry.maxScore}, ${entry.scanStatus.label}',
+      label: '${entry.score} of ${entry.maxScore}, ${entry.scanStatus.label}',
       excludeSemantics: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -698,12 +688,13 @@ class _RubricBreakdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final items = scores.breakdown.where((e) => e.value != 0).toList();
 
     if (items.isEmpty) {
       return Text(
-        'No rubric component scored.',
+        l.scanNoComponent,
         style: BarbarianType.bodyS.copyWith(color: c.textFaint),
       );
     }
@@ -763,14 +754,15 @@ class _ScannerTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Row(
       children: [
         Expanded(
           child: _ScannerTab(
             icon: Icons.filter_center_focus_rounded,
-            label: 'Stocks',
+            label: l.scanStocks,
             count: stocksCount,
-            caption: 'Ranked names',
+            caption: l.scanScoredNames,
             selected: active == _Tab.stocks,
             onTap: () => onChanged(_Tab.stocks),
           ),
@@ -781,7 +773,7 @@ class _ScannerTabs extends StatelessWidget {
             icon: Icons.hub_outlined,
             label: 'Sector',
             count: sectorCount,
-            caption: sectorCount == 0 ? 'None today' : 'One cohort',
+            caption: sectorCount == 0 ? l.scanSectorNone : l.scanOneCohort,
             selected: active == _Tab.sector,
             onTap: () => onChanged(_Tab.sector),
           ),
@@ -837,9 +829,7 @@ class _ScannerTab extends StatelessWidget {
                 : c.surface,
             borderRadius: BorderRadius.circular(BarbarianRadius.lg),
             border: Border.all(
-              color: selected
-                  ? c.accent.withValues(alpha: 0.42)
-                  : c.cardEdge,
+              color: selected ? c.accent.withValues(alpha: 0.42) : c.cardEdge,
             ),
           ),
           child: Column(
@@ -889,6 +879,7 @@ class _SectorTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return Column(
@@ -928,7 +919,7 @@ class _SectorTab extends StatelessWidget {
         ),
         if (sector.members.isNotEmpty) ...[
           const SizedBox(height: 22),
-          BSectionLabel('The cohort · ${sector.members.length} names'),
+          BSectionLabel(l.scanCohortNames(sector.members.length)),
           for (var i = 0; i < sector.members.length; i++) ...[
             _SectorMemberRow(member: sector.members[i]),
             if (i != sector.members.length - 1) const SizedBox(height: 8),
@@ -936,7 +927,7 @@ class _SectorTab extends StatelessWidget {
         ],
         if (sector.timeline.isNotEmpty) ...[
           const SizedBox(height: 22),
-          const BSectionLabel('How it was read'),
+          BSectionLabel(l.scanHowItWasRead),
           BPaperCard(
             radius: BarbarianRadius.xl,
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
@@ -968,9 +959,7 @@ class _SectorTab extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'A sector read changes what gets investigated first. It '
-                  'scores nothing on the rubric, and none of these names has '
-                  'qualified on its own evidence.',
+                  'A sector read changes what gets investigated first. It scores nothing on the rubric, and none of these names has qualified on its own evidence.',
                   style: BarbarianType.bodyS.copyWith(color: c.textMuted),
                 ),
               ),
@@ -987,13 +976,10 @@ class _NoSector extends StatelessWidget {
   const _NoSector();
 
   @override
-  Widget build(BuildContext context) => const BEmptyState(
-    title: 'No sector read today',
-    body:
-        'A cohort appears when several names in one industry move for the '
-        'same reason. Most days none does, and that is a result rather than '
-        'a gap.',
-  );
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return BEmptyState(title: l.scanNoSectorToday, body: l.scanNoSectorBody);
+  }
 }
 
 /// One member of the cohort, given a row rather than a chip.
@@ -1132,6 +1118,7 @@ class BScanGates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     if (gates.isEmpty) return const SizedBox.shrink();
     final c = context.colors;
 
@@ -1159,7 +1146,7 @@ class BScanGates extends StatelessWidget {
               final spoken = switch (gate.outcome) {
                 'pass' => 'Passed',
                 'fail' => 'Failed',
-                _ => 'Unresolved',
+                _ => l.gateUnresolvedLabel,
               };
               return Semantics(
                 label: '$spoken: ${gate.label}',

@@ -154,9 +154,9 @@ class _DailyInsight extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final l = AppLocalizations.of(context);
-    final feed = ref.watch(disclosuresProvider).whenOrNull(
-      data: (s) => s.value,
-    );
+    final feed = ref
+        .watch(disclosuresProvider)
+        .whenOrNull(data: (s) => s.value);
     final item = _lead(feed);
 
     if (item == null) {
@@ -203,11 +203,7 @@ class _DailyInsight extends ConsumerWidget {
                   ),
                 ),
                 if (ticker != null)
-                  Icon(
-                    Icons.north_east_rounded,
-                    size: 18,
-                    color: c.onInkMuted,
-                  ),
+                  Icon(Icons.north_east_rounded, size: 18, color: c.onInkMuted),
               ],
             ),
             const SizedBox(height: 16),
@@ -215,9 +211,7 @@ class _DailyInsight extends ConsumerWidget {
               // The exchange's own headline is long. What a reader needs
               // first is the name of the event and who filed it, in their own
               // language; the filing itself is one tap away.
-              ticker == null
-                  ? label
-                  : '$ticker · $label',
+              ticker == null ? label : '$ticker · $label',
               style: BarbarianType.headlineM.copyWith(color: c.onInk),
             ),
             const SizedBox(height: 10),
@@ -318,47 +312,49 @@ class _IndexStrip extends ConsumerWidget {
         ),
       ),
       child: BDarkCard(
-      radius: BarbarianRadius.xl,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    // Split so a five-figure index stays readable without
-                    // rounding away the part that moved.
-                    BNumText(
-                      _grouped(whole),
-                      style: BarbarianType.displayS.copyWith(color: c.onInk),
-                    ),
-                    BNumText(
-                      '.$decimals',
-                      style: BarbarianType.bodyM.copyWith(color: c.onInkMuted),
-                    ),
-                    const SizedBox(width: 10),
-                    Flexible(child: BKindChip(index.id)),
-                  ],
-                ),
-                // No label line: the chip beside the level already says
-                // EGX30, and printing "EGX 30" under it says it twice.
-              ],
+        radius: BarbarianRadius.xl,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      // Split so a five-figure index stays readable without
+                      // rounding away the part that moved.
+                      BNumText(
+                        _grouped(whole),
+                        style: BarbarianType.displayS.copyWith(color: c.onInk),
+                      ),
+                      BNumText(
+                        '.$decimals',
+                        style: BarbarianType.bodyM.copyWith(
+                          color: c.onInkMuted,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(child: BKindChip(index.id)),
+                    ],
+                  ),
+                  // No label line: the chip beside the level already says
+                  // EGX30, and printing "EGX 30" under it says it twice.
+                ],
+              ),
             ),
-          ),
-          if (change != null) ...[
-            const SizedBox(width: 12),
-            BChangeDelta(
-              value: '${change.abs().toStringAsFixed(2)}%',
-              direction: BDirection.of(change),
-              onDark: true,
-            ),
+            if (change != null) ...[
+              const SizedBox(width: 12),
+              BChangeDelta(
+                value: '${change.abs().toStringAsFixed(2)}%',
+                direction: BDirection.of(change),
+                onDark: true,
+              ),
+            ],
           ],
-        ],
-      ),
+        ),
       ),
     );
   }
@@ -478,9 +474,9 @@ class _WatchTile extends ConsumerWidget {
     // Real end-of-day history, not a decorative squiggle: the last thirty
     // sessions the app actually holds for this company.
     final history =
-        ref.watch(priceHistoryProvider(ticker)).whenOrNull(
-          data: (s) => s.value,
-        ) ??
+        ref
+            .watch(priceHistoryProvider(ticker))
+            .whenOrNull(data: (s) => s.value) ??
         const [];
     final spark = history.length > 2
         ? history
@@ -558,9 +554,9 @@ class _AlsoFiled extends ConsumerWidget {
     final c = context.colors;
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
-    final feed = ref.watch(disclosuresProvider).whenOrNull(
-      data: (s) => s.value,
-    );
+    final feed = ref
+        .watch(disclosuresProvider)
+        .whenOrNull(data: (s) => s.value);
     final lead = _DailyInsight._lead(feed);
     final items = (feed?.items ?? const <Disclosure>[])
         .where((i) => i.id != lead?.id && i.tickers.length == 1)
@@ -677,10 +673,7 @@ class _LatestNews extends ConsumerWidget {
         Row(
           children: [
             Expanded(child: BSectionLabel(l.homeLatestNews)),
-            BInlineAction(
-              l.homeAllNews,
-              onTap: () => context.go(Routes.today),
-            ),
+            BInlineAction(l.homeAllNews, onTap: () => context.go(Routes.today)),
           ],
         ),
         BPaperCard(
@@ -732,9 +725,7 @@ class _LatestNews extends ConsumerWidget {
                   const SizedBox(height: 4),
                   Text(
                     outlets,
-                    style: BarbarianType.labelNano.copyWith(
-                      color: c.textFaint,
-                    ),
+                    style: BarbarianType.labelNano.copyWith(color: c.textFaint),
                   ),
                 ],
               ],

@@ -161,11 +161,10 @@ class _SessionRange extends StatelessWidget {
                   // Open-to-close body, so direction is visible.
                   PositionedDirectional(
                     start: box.maxWidth * at(rising ? open : close),
-                    width:
-                        (box.maxWidth * (at(close) - at(open)).abs()).clamp(
-                          3.0,
-                          box.maxWidth,
-                        ),
+                    width: (box.maxWidth * (at(close) - at(open)).abs()).clamp(
+                      3.0,
+                      box.maxWidth,
+                    ),
                     child: Container(
                       height: 6,
                       decoration: BoxDecoration(
@@ -224,8 +223,9 @@ class _Bound extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     return Column(
-      crossAxisAlignment:
-          alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: alignEnd
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
         Text(
           label.toUpperCase(),
