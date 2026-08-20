@@ -1,6 +1,6 @@
 {
-  "date": "2026-08-18",
-  "masthead_date": "2026-08-18",
+  "date": "2026-08-20",
+  "masthead_date": "2026-08-20",
   "headline": null,
   "rubric": [
     {
@@ -90,17 +90,17 @@
       "state": "Qualified · booked",
       "score": 7,
       "max_score": 13,
-      "seen_at": "2026-08-18",
+      "seen_at": "2026-08-20",
       "research_summary": null,
-      "move_percent": null,
+      "move_percent": "-2.72%",
       "gates": [],
       "research": [],
       "action": null,
       "position_withheld": true,
       "tape": {
-        "label": "TradingView · 11:08 Cairo",
-        "price": "EGP 92.98",
-        "detail": "+0.36% live."
+        "label": "19 Aug close · scan 09:36 Cairo",
+        "price": "EGP 89.50",
+        "detail": "−3.40% session."
       }
     },
     {
