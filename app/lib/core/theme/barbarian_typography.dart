@@ -35,7 +35,17 @@ abstract final class BarbarianType {
   static const String text = 'SpaceGrotesk';
 
   /// Arabic keeps IBM Plex, which Bricolage and Space Grotesk do not cover.
+  ///
+  /// Declared as a *fallback* on every style rather than swapped in by the
+  /// caller. Neither Latin face carries an Arabic glyph, so without this an
+  /// Arabic string falls through to whatever the platform picks — a different
+  /// face on iOS and Android, at a different optical size, inside a type scale
+  /// that was measured. With it, any Arabic run in any style resolves to Plex
+  /// automatically and the Latin text is untouched, which is what an
+  /// Arabic-first app needs from a scale drawn in Latin.
   static const String arabic = 'IBMPlexSansArabic';
+
+  static const List<String> _fallback = [arabic];
 
   static List<FontVariation> _wght(double value) => [
     FontVariation('wght', value),
@@ -50,6 +60,7 @@ abstract final class BarbarianType {
     double letterSpacing = 0,
   }) => TextStyle(
     fontFamily: display,
+    fontFamilyFallback: _fallback,
     fontSize: size,
     height: height,
     fontWeight: FontWeight.values[(weight ~/ 100) - 1],
@@ -66,6 +77,7 @@ abstract final class BarbarianType {
     double letterSpacing = 0,
   }) => TextStyle(
     fontFamily: text,
+    fontFamilyFallback: _fallback,
     fontSize: size,
     height: height,
     fontWeight: weight,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The non-licence statement, at the foot of every screen that shows a score.
 ///
@@ -56,7 +57,7 @@ class BLegalFootnote extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                statement,
+                AppLocalizations.of(context).legalNotLicensed,
                 style: BarbarianType.bodyS.copyWith(
                   color: onDark ? c.onInkMuted : c.textMuted,
                   height: 1.5,

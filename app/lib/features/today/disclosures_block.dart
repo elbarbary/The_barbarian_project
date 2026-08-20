@@ -125,7 +125,13 @@ class _Filing extends StatelessWidget {
             // translated and not trimmed — it is a legal document, and the row
             // links to it.
             Directionality(
-              textDirection: TextDirection.rtl,
+              // EGX files in Arabic without exception, but decided from the
+              // string rather than assumed: the day the exchange publishes an
+              // English title, this lays it out correctly instead of
+              // backwards.
+              textDirection: isArabic(item.title)
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
               child: Text(
                 item.title,
                 style: BarbarianType.bodyL.copyWith(

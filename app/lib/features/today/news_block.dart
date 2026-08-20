@@ -124,10 +124,15 @@ class _Headline extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            // The headline runs right to left. It is somebody else's sentence
-            // in their own language and it is not translated or trimmed.
+            // Per headline, not per app. The feeds are mixed — Al Borsa files
+            // in Arabic, Arab Finance files in English — and forcing RTL on
+            // all of them laid every English headline out backwards. It is
+            // somebody else's sentence in their own language either way, and
+            // it is not translated or trimmed.
             Directionality(
-              textDirection: TextDirection.rtl,
+              textDirection: isArabic(item.headline)
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
               child: Text(
                 item.headline,
                 style: BarbarianType.bodyL.copyWith(

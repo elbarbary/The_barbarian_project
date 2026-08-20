@@ -33,6 +33,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # Generates AppLocalizations from lib/l10n/*.arb (spec §41).
+  generate: true
 
   # Asset globs do not recurse, so every fixture subdirectory is listed.
   assets:

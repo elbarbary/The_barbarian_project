@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
 import 'nav_icons.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The four primary destinations (spec §5). There are exactly four and no more.
 /// The four destinations, in the boards' order.
@@ -29,6 +30,8 @@ enum BNavTab {
 
   const BNavTab(this.label);
 
+  /// The English name. Used by tests to address a tab, and as the fallback
+  /// when no localisations are in scope.
   final String label;
 }
 
@@ -210,7 +213,7 @@ class _NavTab extends StatelessWidget {
     return Semantics(
       button: true,
       selected: selected,
-      label: tab.label,
+      label: tab.labelFor(context),
       excludeSemantics: true,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -256,5 +259,23 @@ class _NavTab extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// The tab's name in the reader's language.
+///
+/// A separate extension rather than a field on the enum: an enum constant is
+/// built at compile time and a translation needs a BuildContext. This is the
+/// screen-reader label, so in an Arabic-first app it is exactly the string
+/// that must not stay English.
+extension BNavTabLabel on BNavTab {
+  String labelFor(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return switch (this) {
+      BNavTab.home => l.navHome,
+      BNavTab.today => l.navToday,
+      BNavTab.pit => l.navPit,
+      BNavTab.you => l.navYou,
+    };
   }
 }

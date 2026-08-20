@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:barbarian/core/models/cash_or_trash.dart';
@@ -231,6 +232,104 @@ void main() {
       }
     }
     expect(offenders, isEmpty, reason: offenders.join('\n'));
+  });
+
+  /// §8.8 — the legal voice gate speaks Arabic too.
+  ///
+  /// Every other §8 test in this file matches Latin script. The moment copy
+  /// moved into `app_ar.arb` the whole safety net became a no-op for what is
+  /// now the primary language — an Arabic-first app whose advice guard only
+  /// reads English is not guarded at all.
+  ///
+  /// The ARB files are scanned directly rather than through AppLocalizations
+  /// because a getter has to be named to be read, and the point is to catch a
+  /// string nobody remembered to check.
+  test('§8.8 no translated string gives an instruction', () {
+    final blocked = <String, RegExp>{
+      // English, in case a translation is left untranslated.
+      'buy now': RegExp(r'\bbuy now\b', caseSensitive: false),
+      'sell now': RegExp(r'\bsell now\b', caseSensitive: false),
+      'price target': RegExp(r'\bprice target\b', caseSensitive: false),
+      'stop loss': RegExp(r'\bstop loss\b', caseSensitive: false),
+      // Arabic. No `\b` anywhere: Dart's word boundary is defined on ASCII
+      // word characters, so it never matches beside an Arabic letter — a
+      // pattern written with one looks right, compiles, and silently matches
+      // nothing forever. The self-check below is what caught that.
+      //
+      // Explicit imperative forms rather than a stem, because the stem اشتر
+      // also opens اشتراك (subscription) and اشترط (to stipulate), neither of
+      // which is an instruction to anybody.
+      'اشتر (buy, imperative)': RegExp('اشترِ|اشتري|اشتروا|اشتر الآن'),
+      'توصية (recommendation)': RegExp('توصي[ةا]'),
+      'هدف السعر (price target)': RegExp('هدف السعر'),
+      'وقف الخسارة (stop loss)': RegExp('وقف الخسارة'),
+      'عائد متوقع (expected return)': RegExp('عائد متوقع'),
+      'ننصح (we advise)': RegExp('ننصح|نوصي'),
+    };
+
+    // "نقدم نصيحة" appears inside the non-licence line, which DENIES advising.
+    // A sentence carrying its own negation is the disclaimer, not the thing
+    // disclaimed — the same carve-out §8.5 makes for English.
+    final negated = RegExp('\\b(لا|ليس|غير)\\b|\\b(not|never|no)\\b');
+
+    // The patterns prove they can fire before they are trusted to pass. An
+    // Arabic regex that silently matches nothing would make this test a
+    // decoration, and the whole point is that nobody here reads every string.
+    for (final (sample, expected) in <(String, String)>[
+      ('اشترِ السهم الآن', 'اشتر (buy, imperative)'),
+      ('توصية بالشراء', 'توصية (recommendation)'),
+      ('هدف السعر ٧٥ جنيهًا', 'هدف السعر (price target)'),
+      ('وقف الخسارة عند ٦٤', 'وقف الخسارة (stop loss)'),
+      ('Buy now before it moves', 'buy now'),
+    ]) {
+      expect(
+        blocked[expected]!.hasMatch(sample),
+        isTrue,
+        reason: 'the "$expected" pattern no longer matches "$sample"',
+      );
+    }
+
+    final offenders = <String>[];
+    for (final file in Directory('lib/l10n').listSync()) {
+      if (file is! File || !file.path.endsWith('.arb')) continue;
+      final arb = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      arb.forEach((key, value) {
+        if (key.startsWith('@') || value is! String) return;
+        if (negated.hasMatch(value)) return;
+        blocked.forEach((name, pattern) {
+          if (pattern.hasMatch(value)) {
+            offenders.add('${file.path} [$key] matched $name: $value');
+          }
+        });
+      });
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason: 'A translated instruction is still an instruction:\n'
+          '${offenders.join('\n')}',
+    );
+  });
+
+  /// §8.9 — the non-licence line reaches every reader, in their language.
+  test('§8.9 the disclosure is translated for every supported locale', () {
+    final template =
+        jsonDecode(File('lib/l10n/app_en.arb').readAsStringSync())
+            as Map<String, dynamic>;
+    expect(template['legalNotLicensed'], isNotNull);
+
+    for (final file in Directory('lib/l10n').listSync()) {
+      if (file is! File || !file.path.endsWith('.arb')) continue;
+      final arb = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      final line = arb['legalNotLicensed'];
+      expect(
+        line,
+        isA<String>().having((s) => s.trim().isNotEmpty, 'not blank', isTrue),
+        reason:
+            'A disclosure the audience cannot read is not a disclosure. '
+            '${file.path} has no legalNotLicensed.',
+      );
+    }
   });
 
   /// §8.7 — the data that ships inside the binary is held to the same rules

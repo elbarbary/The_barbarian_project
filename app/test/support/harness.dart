@@ -13,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
 import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
 
 /// Reads the bundled fixtures straight off disk.
 ///
@@ -193,6 +194,7 @@ Widget harness(
   List<String>? watchlist,
   ThemeMode themeMode = ThemeMode.light,
   QuoteSnapshot? quotes,
+  Locale? locale = const Locale('en'),
 }) {
   return ProviderScope(
     overrides: [
@@ -206,6 +208,12 @@ Widget harness(
       ),
     ],
     child: MaterialApp(
+      // The app is Arabic-first, so every screen resolves its copy through
+      // AppLocalizations. A harness without the delegates throws the moment a
+      // widget asks for a string.
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: locale,
       theme: BarbarianTheme.light(),
       darkTheme: BarbarianTheme.dark(),
       themeMode: themeMode,

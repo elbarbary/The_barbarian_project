@@ -1,0 +1,76 @@
+{
+  "@@locale": "en",
+  "appName": "ESTHMR",
+  "appTagline": "Egyptian equities, unfiltered",
+  "@appTagline": {
+    "description": "Masthead subtitle under the wordmark"
+  },
+  "navHome": "Home",
+  "navToday": "Today",
+  "navPit": "The Pit",
+  "navYou": "You",
+  "searchPlaceholder": "Search by company name or symbol…",
+  "oldestThingHere": "The oldest thing here: {age}",
+  "@oldestThingHere": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  },
+  "refresh": "Refresh",
+  "homeTodayKicker": "Today · {event}",
+  "@homeTodayKicker": {
+    "placeholders": {
+      "event": {
+        "type": "String"
+      }
+    }
+  },
+  "homeNothingFiled": "Nothing filed yet today",
+  "homeNothingFiledBody": "When a company tells the exchange something, it lands here with what it means for anyone holding the share.",
+  "homeWatchlistLabel": "From your watchlist",
+  "homeWatchlistManage": "Manage",
+  "homeWatchlistEmpty": "Follow companies to build your watchlist",
+  "homeWatchlistEmptyBody": "Open any company and tap the bookmark. What you follow shows its last price here, and nothing else.",
+  "homePricesCaption": "Last close · end-of-day EGX data",
+  "noQuote": "No quote",
+  "financialsTitle": "Net profit, as reported",
+  "financialsUnitPeriod": "EGP m · {period}",
+  "@financialsUnitPeriod": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "financialsNone": "No reported figures yet",
+  "financialsNoneBody": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "financialsLatestFiling": "Latest filing",
+  "financialsReadFiling": "Read the filing",
+  "financialsByYear": "Net profit by year",
+  "financialsTotalAssets": "Total assets",
+  "financialsEquity": "Owners' equity",
+  "financialsLiabilities": "Total liabilities",
+  "financialsOperatingCash": "Cash from operations",
+  "financialsBasisGroup": "Group",
+  "financialsBasisCompany": "Company only",
+  "financialsFootnote": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "@financialsFootnote": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceExchange": "the Egyptian Exchange",
+  "sourceFiledAccounts": "filed accounts",
+  "language": "Language",
+  "languageEnglish": "English",
+  "languageArabic": "العربية",
+  "languageSystem": "System",
+  "legalNotLicensed": "ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise.",
+  "@legalNotLicensed": {
+    "description": "LEGAL. Spec §8.12. Must be reviewed by an Egyptian lawyer before release — see lib/core/widgets/legal.dart."
+  }
+}

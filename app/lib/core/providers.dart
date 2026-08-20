@@ -392,6 +392,53 @@ final themeModeProvider = NotifierProvider<ThemeModeNotifier, ThemeMode>(
   ThemeModeNotifier.new,
 );
 
+/// Which language the app is read in (spec §41).
+///
+/// Arabic is the primary audience — the design boards are Arabic and so is the
+/// exchange — but the default is the phone's own setting rather than a forced
+/// Arabic. A reader whose phone is in English almost certainly wants English,
+/// and overriding that on first launch would be a worse first impression than
+/// the one it fixes. Both languages are one tap apart on You.
+///
+/// `null` means follow the system, which is what `MaterialApp.locale` expects.
+class LocaleNotifier extends Notifier<Locale?> {
+  static const String _key = 'settings.locale';
+
+  @override
+  Locale? build() {
+    // Deferred for the same reason as the theme: touching the preference store
+    // synchronously inside build() turns a missing key into a crashed screen.
+    Future<void>.microtask(_restore);
+    return null;
+  }
+
+  Future<void> _restore() async {
+    try {
+      final prefs = ref.read(sharedPreferencesProvider);
+      final stored = await prefs.getString(_key);
+      final locale = switch (stored) {
+        'en' => const Locale('en'),
+        'ar' => const Locale('ar'),
+        _ => null,
+      };
+      if (locale != state) state = locale;
+    } on Object {
+      // No stored preference. Follow the system.
+    }
+  }
+
+  Future<void> set(Locale? locale) async {
+    state = locale;
+    await ref
+        .read(sharedPreferencesProvider)
+        .setString(_key, locale?.languageCode ?? 'system');
+  }
+}
+
+final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(
+  LocaleNotifier.new,
+);
+
 // ------------------------------------------------------------------- search
 
 /// Search runs against the cached directory — no network per keystroke

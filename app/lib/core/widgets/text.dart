@@ -127,9 +127,19 @@ class BSectionLabel extends StatelessWidget {
     );
   }
 
-  static bool _shouldUppercase(String value) =>
-      !RegExp(r'[؀-ۿ]').hasMatch(value);
+  static bool _shouldUppercase(String value) => !isArabic(value);
 }
+
+/// Whether a string is Arabic, by the only test that matters here: does it
+/// contain a character from the Arabic block.
+///
+/// The feeds are mixed. Al Borsa files in Arabic and Arab Finance files the
+/// same story in English, and both arrive in the same list, so direction has
+/// to be decided per headline. It used to be hardcoded to RTL for every one,
+/// which laid every English headline out backwards — punctuation at the wrong
+/// end, the sentence right-aligned — on a screen whose whole promise is that
+/// the reader can follow it.
+bool isArabic(String value) => RegExp(r'[؀-ۿ]').hasMatch(value);
 
 /// The low-emphasis text action: "Manage", "Edit", "See all". No chrome.
 class BInlineAction extends StatelessWidget {

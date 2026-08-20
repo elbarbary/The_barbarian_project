@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
 
 /// The whole app, router and all.
 ///
@@ -28,6 +29,12 @@ Widget app({List<String>? watchlist, QuoteSnapshot? quotes}) {
     ],
     child: MaterialApp.router(
       routerConfig: buildRouter(),
+      // Mirrors main.dart: every screen resolves its copy through
+      // AppLocalizations, so a router harness without the delegates throws on
+      // the first string.
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('en'),
       theme: BarbarianTheme.light(),
       darkTheme: BarbarianTheme.dark(),
     ),

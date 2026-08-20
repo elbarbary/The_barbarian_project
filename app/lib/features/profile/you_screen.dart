@@ -16,6 +16,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// You (spec §30, §33, §56).
 ///
@@ -35,6 +36,8 @@ class YouScreen extends ConsumerWidget {
         .watch(companyDirectoryProvider)
         .whenOrNull(data: (d) => d.value);
     final themeMode = ref.watch(themeModeProvider);
+    final locale = ref.watch(localeProvider);
+    final l = AppLocalizations.of(context);
 
     return BScreenScaffold(
       blockGap: 22,
@@ -150,6 +153,37 @@ class YouScreen extends ConsumerWidget {
                       isLast: mode == ThemeMode.values.last,
                       onTap: () =>
                           ref.read(themeModeProvider.notifier).set(mode),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        // Language sits above appearance, not below it: this is an
+        // Arabic-first product and the language a reader is given is a bigger
+        // decision than whether the page is light or dark.
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            BSectionLabel(l.language),
+            BPaperCard(
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+              child: Column(
+                children: [
+                  for (final (choice, label) in <(Locale?, String)>[
+                    (const Locale('ar'), l.languageArabic),
+                    (const Locale('en'), l.languageEnglish),
+                    (null, l.languageSystem),
+                  ])
+                    _ChoiceRow(
+                      // Each language names itself in its own script, so a
+                      // reader who cannot read the current one can still find
+                      // the row that gets them out.
+                      label: label,
+                      selected: locale?.languageCode == choice?.languageCode,
+                      isLast: choice == null,
+                      onTap: () =>
+                          ref.read(localeProvider.notifier).set(choice),
                     ),
                 ],
               ),
