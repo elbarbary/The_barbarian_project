@@ -6,6 +6,7 @@ import '../../core/widgets/composites.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The Pit, phase 4.
 ///
@@ -22,14 +23,15 @@ class PitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return BScreenScaffold(
       blockGap: 20,
       children: [
-        const BScreenTitle('The Pit', subtitle: 'Discussion, with the evidence'),
-        const BEmptyState(
-          title: 'Coming in the next development phase',
+        BScreenTitle('The Pit', subtitle: l.pitTitle),
+        BEmptyState(
+          title: l.pitComingSoon,
           body:
               'The Pit is where the evidence gets argued over. Companies, '
               'filings and the research behind them — discussed by people '
@@ -41,11 +43,11 @@ class PitScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BSectionLabel('What it will carry'),
-              for (final kind in const [
-                ('Discussion', 'Open conversation about a company'),
-                ('Question', 'Ask the people reading the same filing'),
-                ('Research note', 'Your own work, with sources'),
+              BSectionLabel(l.pitWhatItCarries),
+              for (final kind in [
+                (l.pitDiscussion, l.pitDiscussionBody),
+                (l.pitQuestion, l.pitQuestionBody),
+                (l.pitResearchNote, l.pitResearchNoteBody),
                 ('Source', 'A disclosure, posted straight from the record'),
               ]) ...[
                 Padding(

@@ -16,6 +16,7 @@ import '../../core/widgets/price_caption.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Market (spec §11, §12).
 ///
@@ -60,6 +61,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final directoryAsync = ref.watch(companyDirectoryProvider);
     final snapshot = ref.watch(livePricesProvider);
@@ -69,9 +71,9 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
     return BScreenScaffold(
       blockGap: 24,
       children: [
-        const BScreenTitle('The full directory'),
+        BScreenTitle(l.fullDirectory),
         BSearchPill(
-          text: 'Search companies, tickers…',
+          text: l.searchCompanies,
           controller: _search,
           onChanged: (v) => ref.read(searchQueryProvider.notifier).set(v),
         ),
@@ -166,7 +168,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                         const SizedBox(width: 8),
                       ],
                       BKindChip(
-                        'Researched',
+                        l.researched,
                         variant: _researchedOnly
                             ? BChipVariant.solid
                             : BChipVariant.neutral,
@@ -186,11 +188,11 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 ),
                 if (visible.isEmpty)
                   BEmptyState(
-                    title: 'No listed company matches that',
+                    title: l.noCompanyMatches,
                     body:
                         'Try a ticker, or the Arabic legal name. The directory '
                         'covers ${directory.count} companies.',
-                    actionLabel: 'Clear search',
+                    actionLabel: l.clearSearch,
                     onAction: () {
                       _search.clear();
                       ref.read(searchQueryProvider.notifier).clear();
@@ -217,7 +219,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 if (snapshot != null)
                   const BPriceCaption()
                 else
-                  const BStalenessCaption('No market data downloaded yet'),
+                  BStalenessCaption(l.noMarketData),
                 if (isSample) ...[
                   const SizedBox(height: 10),
                   const BSampleDataNotice(),

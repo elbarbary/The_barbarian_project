@@ -331,6 +331,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise.'**
   String get legalNotLicensed;
+
+  /// No description provided for @scannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Opportunity Scanner'**
+  String get scannerTitle;
+
+  /// No description provided for @scannerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What the published rule found, and what it missed'**
+  String get scannerSubtitle;
+
+  /// No description provided for @scannerOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the scanner'**
+  String get scannerOpen;
+
+  /// No description provided for @scannerNotDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanner not downloaded yet'**
+  String get scannerNotDownloaded;
+
+  /// No description provided for @scannerNotDownloadedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the app with a connection to fetch the latest report.'**
+  String get scannerNotDownloadedBody;
+
+  /// No description provided for @scannerNotPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'The board has not published yet'**
+  String get scannerNotPublished;
+
+  /// No description provided for @scannerFoundToday.
+  ///
+  /// In en, this message translates to:
+  /// **'What the published rule found today'**
+  String get scannerFoundToday;
+
+  /// No description provided for @countQualified.
+  ///
+  /// In en, this message translates to:
+  /// **'Qualified'**
+  String get countQualified;
+
+  /// No description provided for @countWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching'**
+  String get countWatching;
+
+  /// No description provided for @countOutcomes.
+  ///
+  /// In en, this message translates to:
+  /// **'Outcomes'**
+  String get countOutcomes;
+
+  /// No description provided for @theSession.
+  ///
+  /// In en, this message translates to:
+  /// **'The session'**
+  String get theSession;
+
+  /// No description provided for @youSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No account needed to read'**
+  String get youSubtitle;
+
+  /// No description provided for @watchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Watchlist'**
+  String get watchlist;
+
+  /// No description provided for @watchlistPricesOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices only. No score, no band and no reading appears here — those live on the company file, which you open yourself.'**
+  String get watchlistPricesOnly;
+
+  /// No description provided for @watchlistEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty watchlist'**
+  String get watchlistEmpty;
+
+  /// No description provided for @watchlistEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow a company and its price, filings and research land here.'**
+  String get watchlistEmptyBody;
+
+  /// No description provided for @browseCompanies.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse companies'**
+  String get browseCompanies;
+
+  /// No description provided for @appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// No description provided for @followTheSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the system'**
+  String get followTheSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @aboutTheData.
+  ///
+  /// In en, this message translates to:
+  /// **'About the data'**
+  String get aboutTheData;
+
+  /// No description provided for @marketData.
+  ///
+  /// In en, this message translates to:
+  /// **'Market data'**
+  String get marketData;
+
+  /// No description provided for @notDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not downloaded'**
+  String get notDownloaded;
+
+  /// No description provided for @companies.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies'**
+  String get companies;
+
+  /// No description provided for @prices.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices'**
+  String get prices;
+
+  /// No description provided for @noRealTimeFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Last close only. No real-time feed.'**
+  String get noRealTimeFeed;
+
+  /// No description provided for @mostActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Most active'**
+  String get mostActive;
+
+  /// No description provided for @fullDirectory.
+  ///
+  /// In en, this message translates to:
+  /// **'The full directory'**
+  String get fullDirectory;
+
+  /// No description provided for @searchCompanies.
+  ///
+  /// In en, this message translates to:
+  /// **'Search companies, tickers…'**
+  String get searchCompanies;
+
+  /// No description provided for @directoryMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'The company directory is not on the device yet'**
+  String get directoryMissing;
+
+  /// No description provided for @researched.
+  ///
+  /// In en, this message translates to:
+  /// **'Researched'**
+  String get researched;
+
+  /// No description provided for @noCompanyMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No listed company matches that'**
+  String get noCompanyMatches;
+
+  /// No description provided for @clearSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
+
+  /// No description provided for @noMarketData.
+  ///
+  /// In en, this message translates to:
+  /// **'No market data downloaded yet'**
+  String get noMarketData;
+
+  /// No description provided for @pitTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussion, with the evidence'**
+  String get pitTitle;
+
+  /// No description provided for @pitComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming in the next development phase'**
+  String get pitComingSoon;
+
+  /// No description provided for @pitWhatItCarries.
+  ///
+  /// In en, this message translates to:
+  /// **'What it will carry'**
+  String get pitWhatItCarries;
+
+  /// No description provided for @pitDiscussion.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussion'**
+  String get pitDiscussion;
+
+  /// No description provided for @pitDiscussionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open conversation about a company'**
+  String get pitDiscussionBody;
+
+  /// No description provided for @pitQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get pitQuestion;
+
+  /// No description provided for @pitQuestionBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask the people reading the same filing'**
+  String get pitQuestionBody;
+
+  /// No description provided for @pitResearchNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Research note'**
+  String get pitResearchNote;
+
+  /// No description provided for @pitResearchNoteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your own work, with sources'**
+  String get pitResearchNoteBody;
+
+  /// No description provided for @couldNotLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this'**
+  String get couldNotLoad;
+
+  /// No description provided for @couldNotLoadBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You may be offline. Anything already downloaded is still here.'**
+  String get couldNotLoadBody;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
+
+  /// No description provided for @sampleData.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample data · not live prices'**
+  String get sampleData;
 }
 
 class _AppLocalizationsDelegate

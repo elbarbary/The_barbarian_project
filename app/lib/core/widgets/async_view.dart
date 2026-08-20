@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/barbarian_theme.dart';
 import 'composites.dart';
 import 'controls.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Renders an [AsyncValue] without ever showing a blank screen (spec §49).
 ///
@@ -15,9 +16,8 @@ class BAsyncView<T> extends StatelessWidget {
     required this.value,
     required this.data,
     this.loading,
-    this.errorTitle = 'Could not load this',
-    this.errorBody =
-        'You may be offline. Anything already downloaded is still here.',
+    this.errorTitle,
+    this.errorBody,
     this.onRetry,
     super.key,
   });
@@ -25,12 +25,13 @@ class BAsyncView<T> extends StatelessWidget {
   final AsyncValue<T> value;
   final Widget Function(T value) data;
   final Widget? loading;
-  final String errorTitle;
-  final String errorBody;
+  final String? errorTitle;
+  final String? errorBody;
   final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return value.when(
       skipLoadingOnRefresh: true,
       // A cached value that is being refreshed keeps rendering; only a genuine
@@ -38,9 +39,9 @@ class BAsyncView<T> extends StatelessWidget {
       data: data,
       loading: () => loading ?? const BLoadingBlocks(),
       error: (error, _) => BEmptyState(
-        title: errorTitle,
-        body: errorBody,
-        actionLabel: onRetry == null ? null : 'Try again',
+        title: errorTitle ?? l.couldNotLoad,
+        body: errorBody ?? l.couldNotLoadBody,
+        actionLabel: onRetry == null ? null : l.tryAgain,
         onAction: onRetry,
       ),
     );
@@ -80,7 +81,8 @@ class BSampleDataNotice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
-    return BStaleDataPill('Sample data · not live prices', tone: c.accent);
+    return BStaleDataPill(l.sampleData, tone: c.accent);
   }
 }

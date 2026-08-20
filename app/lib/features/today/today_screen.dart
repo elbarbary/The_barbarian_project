@@ -16,6 +16,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 /// Today: the session, and — far more often — the absence of one.
 ///
 /// Board v2 makes the claim this screen is built around: the app's most common
@@ -61,6 +62,7 @@ class _TodayHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final report = ref.watch(opportunityReportProvider).value?.value;
 
@@ -71,7 +73,7 @@ class _TodayHeader extends ConsumerWidget {
         const SizedBox(height: 6),
         Text(
           report?.reportDate == null
-              ? 'The board has not published yet'
+              ? l.scannerNotPublished
               : 'Published after the ${_dayMonth(report!.reportDate!)} session',
           style: BarbarianType.bodyM.copyWith(color: c.textMuted),
         ),
@@ -93,14 +95,15 @@ class _ScannerHero extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final async = ref.watch(opportunityReportProvider);
 
     return BAsyncView(
       value: async,
       loading: const BSkeletonBlock(height: 220, radius: BarbarianRadius.xl),
-      errorTitle: 'Scanner not downloaded yet',
-      errorBody: 'Open the app with a connection to fetch the latest report.',
+      errorTitle: l.scannerNotDownloaded,
+      errorBody: l.scannerNotDownloadedBody,
       data: (sourced) {
         final report = sourced.value;
         return BPressable(
@@ -125,15 +128,15 @@ class _ScannerHero extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const BDarkCircleButton(
+                    BDarkCircleButton(
                       icon: Icons.arrow_outward_rounded,
-                      semanticLabel: 'Open the scanner',
+                      semanticLabel: l.scannerOpen,
                     ),
                   ],
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  report.headline ?? 'What the published rule found today',
+                  report.headline ?? l.scannerFoundToday,
                   style: BarbarianType.headlineL.copyWith(
                     color: c.onInk,
                     height: 1.18,
@@ -152,7 +155,7 @@ class _ScannerHero extends ConsumerWidget {
                   children: [
                     _ScanCount(
                       value: report.qualifiedCount,
-                      label: 'Qualified',
+                      label: l.countQualified,
                       // The ink pair: c.up reads 2.87:1 here, beside an
                       // accentOnInk at 7.16 and an onInkMuted at 4.95, so the
                       // row went two colours and a smudge.
@@ -161,13 +164,13 @@ class _ScannerHero extends ConsumerWidget {
                     const SizedBox(width: 10),
                     _ScanCount(
                       value: report.watchingCount,
-                      label: 'Watching',
+                      label: l.countWatching,
                       tone: c.accentOnInk,
                     ),
                     const SizedBox(width: 10),
                     _ScanCount(
                       value: report.outcomes.length,
-                      label: 'Outcomes',
+                      label: l.countOutcomes,
                       tone: c.onInkMuted,
                     ),
                   ],

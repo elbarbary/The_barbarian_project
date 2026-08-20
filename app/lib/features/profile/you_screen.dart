@@ -28,6 +28,7 @@ class YouScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final watchlist = ref.watch(watchlistProvider).value ?? const <String>[];
     final bookmarks = ref.watch(bookmarksProvider).value ?? const [];
@@ -37,7 +38,6 @@ class YouScreen extends ConsumerWidget {
         .whenOrNull(data: (d) => d.value);
     final themeMode = ref.watch(themeModeProvider);
     final locale = ref.watch(localeProvider);
-    final l = AppLocalizations.of(context);
 
     return BScreenScaffold(
       blockGap: 22,
@@ -58,7 +58,7 @@ class YouScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    'No account needed to read',
+                    l.youSubtitle,
                     style: BarbarianType.bodyM.copyWith(color: c.textMuted),
                   ),
                 ],
@@ -88,7 +88,7 @@ class YouScreen extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const BSectionLabel('Watchlist'),
+            BSectionLabel(l.watchlist),
             // Spec §8.4. A list of names, each carrying this app's reading of
             // it, is a personalised recommendation list — the fact that a user
             // assembled it themselves does not cure that, because the app is
@@ -108,11 +108,11 @@ class YouScreen extends ConsumerWidget {
             ),
             if (watchlist.isEmpty)
               BEmptyState(
-                title: 'Empty watchlist',
+                title: l.watchlistEmpty,
                 body:
                     'Follow a company and its price, filings and research land '
                     'here.',
-                actionLabel: 'Browse companies',
+                actionLabel: l.browseCompanies,
                 onAction: () => context.push(Routes.directoryPath(BNavTab.you)),
               )
             else
@@ -137,7 +137,7 @@ class YouScreen extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const BSectionLabel('Appearance'),
+            BSectionLabel(l.appearance),
             BPaperCard(
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
               child: Column(
@@ -145,9 +145,9 @@ class YouScreen extends ConsumerWidget {
                   for (final mode in ThemeMode.values)
                     _ChoiceRow(
                       label: switch (mode) {
-                        ThemeMode.system => 'Follow the system',
-                        ThemeMode.light => 'Light',
-                        ThemeMode.dark => 'Dark',
+                        ThemeMode.system => l.followTheSystem,
+                        ThemeMode.light => l.themeLight,
+                        ThemeMode.dark => l.themeDark,
                       },
                       selected: themeMode == mode,
                       isLast: mode == ThemeMode.values.last,
@@ -193,23 +193,23 @@ class YouScreen extends ConsumerWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const BSectionLabel('About the data'),
+            BSectionLabel(l.aboutTheData),
             BPaperCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _Fact(
-                    label: 'Market data',
+                    label: l.marketData,
                     // Says what is on screen right now, not what the daily
                     // publish holds. While the feed is reachable these prices
                     // are minutes old, and calling them "End of day" was
                     // straightforwardly untrue.
                     value: snapshot == null
-                        ? 'Not downloaded'
+                        ? l.notDownloaded
                         : ref.watch(priceFreshnessProvider).caption,
                   ),
                   _Fact(
-                    label: 'Companies',
+                    label: l.companies,
                     value: '${directory?.count ?? 0} in the directory',
                   ),
                   _Fact(
