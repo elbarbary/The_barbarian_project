@@ -40,6 +40,12 @@ class BRatesBlock extends ConsumerWidget {
           _Card(rows: [for (final i in rates.indices) _fromRate(i)]),
           const SizedBox(height: 20),
         ],
+        if (rates.world.isNotEmpty) ...[
+          const BSectionLabel('Was it Egypt, or everywhere?'),
+          const SizedBox(height: 10),
+          _Card(rows: [for (final w in rates.world) _fromRate(w)]),
+          const SizedBox(height: 20),
+        ],
         if (rates.metals.isNotEmpty) ...[
           const BSectionLabel('Gold and silver'),
           const SizedBox(height: 10),

@@ -12,6 +12,11 @@ _RatesDoc _$RatesDocFromJson(Map<String, dynamic> json) => _RatesDoc(
           ?.map((e) => RateRow.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <RateRow>[],
+  world:
+      (json['world'] as List<dynamic>?)
+          ?.map((e) => RateRow.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <RateRow>[],
   currencies:
       (json['currencies'] as List<dynamic>?)
           ?.map((e) => RateRow.fromJson(e as Map<String, dynamic>))
@@ -26,6 +31,7 @@ _RatesDoc _$RatesDocFromJson(Map<String, dynamic> json) => _RatesDoc(
 
 Map<String, dynamic> _$RatesDocToJson(_RatesDoc instance) => <String, dynamic>{
   'indices': instance.indices,
+  'world': instance.world,
   'currencies': instance.currencies,
   'metals': instance.metals,
 };

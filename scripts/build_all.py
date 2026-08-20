@@ -31,8 +31,10 @@ STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     ("Opportunity Scanner", "build_opportunity_api.py", True),
     ("Market", "build_market_api.py", False),
-    # After Market: the triage reads each company's published session to decide
-    # whether a headline is worth a second look, so it needs today's numbers.
+    # News and rates run here too, so a full local build produces a complete
+    # set — but their real cadence is publish-live-data.yml every 15 minutes.
+    # A daily news feed is a bulletin, and an intraday metals price pinned for
+    # twenty-four hours is stale data wearing today's date.
     ("News", "build_news_api.py", True),
     ("Rates", "build_rates_api.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),

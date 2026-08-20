@@ -1,0 +1,94 @@
+name: Publish live data
+
+# News and rates, every 15 minutes. The heavy build stays daily.
+#
+# `publish-app-data.yml` runs once, an hour after the close, because everything
+# it touches changes once a day: the market scan, the scored studies, the
+# scanner's field note. Putting news on that cron made the app a daily
+# bulletin — Al Borsa publishes through the afternoon, and a headline filed at
+# 11:00 would not have appeared until 16:30. Gold was worse in a different way:
+# the metals feed updates intraday and we were pinning a morning price for
+# twenty-four hours while calling it today's.
+#
+# These two scripts have no dependency on the daily scan and cost six HTTP
+# calls between them, so they get their own schedule.
+#
+# One coupling to know about: the news triage reads each company's published
+# session to decide whether a headline is worth a second look. Between the
+# close and the next daily build that session is yesterday's, which is correct
+# — yesterday's close IS the last completed session — and the document says so
+# through the per-item evidence date rather than implying otherwise.
+
+on:
+  schedule:
+    # Every 15 minutes. GitHub's scheduler is best-effort and drifts under
+    # load, so this is a floor rather than a guarantee; the app never assumes
+    # an age it has not been told.
+    - cron: '*/15 * * * *'
+
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_news_api.py'
+      - 'scripts/build_rates_api.py'
+      - '.github/workflows/publish-live-data.yml'
+
+  workflow_dispatch:
+
+concurrency:
+  # Never two of these at once: they both commit to main, and a 15-minute cron
+  # that overlaps itself produces a push race rather than fresher data.
+  group: publish-live-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch headlines and rates
+        # Neither script writes anything when its sources are unreachable, so a
+        # bad upstream leaves the last good document in place rather than
+        # publishing an empty one. `|| true` keeps one dead source from
+        # blocking the other's update.
+        run: |
+          python3 scripts/build_news_api.py || true
+          python3 scripts/build_rates_api.py || true
+
+      - name: Refresh the manifest
+        # The manifest's per-resource version is what tells an installed app
+        # its cache is stale. Without this the new JSON sits on the CDN and
+        # every phone keeps serving what it already had.
+        run: python3 scripts/build_fixtures.py
+
+      - name: Commit if anything moved
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add public/data/v1/news public/data/v1/rates \
+                  public/data/v1/manifest.json \
+                  app/assets/fixtures/news app/assets/fixtures/rates \
+                  app/assets/fixtures/manifest.json
+          if git diff --cached --quiet; then
+            echo 'nothing moved'
+            exit 0
+          fi
+          git commit -m 'data: live news and rates'
+          # A 15-minute job racing the daily build will lose a push now and
+          # then. Rebasing and retrying is cheaper than failing the run, and
+          # these files are generated — whatever landed first is regenerated
+          # from the same sources on the next tick anyway.
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push origin main && exit 0
+            echo "push attempt $attempt lost the race; retrying"
+            sleep 5
+          done
+          exit 1

@@ -12,6 +12,11 @@ part 'rates.g.dart';
 abstract class RatesDoc with _$RatesDoc {
   const factory RatesDoc({
     @Default(<RateRow>[]) List<RateRow> indices,
+
+    /// The markets and commodities an Egyptian holding is priced against —
+    /// the S&P, the Tadawul, oil, copper. Here so a reader can tell whether a
+    /// bad day was Egypt or was everywhere, which are different facts.
+    @Default(<RateRow>[]) List<RateRow> world,
     @Default(<RateRow>[]) List<RateRow> currencies,
     @Default(<MetalRow>[]) List<MetalRow> metals,
   }) = _RatesDoc;
@@ -21,7 +26,8 @@ abstract class RatesDoc with _$RatesDoc {
   factory RatesDoc.fromJson(Map<String, dynamic> json) =>
       _$RatesDocFromJson(json);
 
-  bool get isEmpty => indices.isEmpty && currencies.isEmpty && metals.isEmpty;
+  bool get isEmpty =>
+      indices.isEmpty && world.isEmpty && currencies.isEmpty && metals.isEmpty;
 }
 
 @freezed

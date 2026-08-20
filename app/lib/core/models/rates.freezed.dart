@@ -15,7 +15,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RatesDoc {
 
- List<RateRow> get indices; List<RateRow> get currencies; List<MetalRow> get metals;
+ List<RateRow> get indices;/// The markets and commodities an Egyptian holding is priced against —
+/// the S&P, the Tadawul, oil, copper. Here so a reader can tell whether a
+/// bad day was Egypt or was everywhere, which are different facts.
+ List<RateRow> get world; List<RateRow> get currencies; List<MetalRow> get metals;
 /// Create a copy of RatesDoc
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +31,16 @@ $RatesDocCopyWith<RatesDoc> get copyWith => _$RatesDocCopyWithImpl<RatesDoc>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RatesDoc&&const DeepCollectionEquality().equals(other.indices, indices)&&const DeepCollectionEquality().equals(other.currencies, currencies)&&const DeepCollectionEquality().equals(other.metals, metals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RatesDoc&&const DeepCollectionEquality().equals(other.indices, indices)&&const DeepCollectionEquality().equals(other.world, world)&&const DeepCollectionEquality().equals(other.currencies, currencies)&&const DeepCollectionEquality().equals(other.metals, metals));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(indices),const DeepCollectionEquality().hash(currencies),const DeepCollectionEquality().hash(metals));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(indices),const DeepCollectionEquality().hash(world),const DeepCollectionEquality().hash(currencies),const DeepCollectionEquality().hash(metals));
 
 @override
 String toString() {
-  return 'RatesDoc(indices: $indices, currencies: $currencies, metals: $metals)';
+  return 'RatesDoc(indices: $indices, world: $world, currencies: $currencies, metals: $metals)';
 }
 
 
@@ -48,7 +51,7 @@ abstract mixin class $RatesDocCopyWith<$Res>  {
   factory $RatesDocCopyWith(RatesDoc value, $Res Function(RatesDoc) _then) = _$RatesDocCopyWithImpl;
 @useResult
 $Res call({
- List<RateRow> indices, List<RateRow> currencies, List<MetalRow> metals
+ List<RateRow> indices, List<RateRow> world, List<RateRow> currencies, List<MetalRow> metals
 });
 
 
@@ -65,9 +68,10 @@ class _$RatesDocCopyWithImpl<$Res>
 
 /// Create a copy of RatesDoc
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? indices = null,Object? currencies = null,Object? metals = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? indices = null,Object? world = null,Object? currencies = null,Object? metals = null,}) {
   return _then(_self.copyWith(
 indices: null == indices ? _self.indices : indices // ignore: cast_nullable_to_non_nullable
+as List<RateRow>,world: null == world ? _self.world : world // ignore: cast_nullable_to_non_nullable
 as List<RateRow>,currencies: null == currencies ? _self.currencies : currencies // ignore: cast_nullable_to_non_nullable
 as List<RateRow>,metals: null == metals ? _self.metals : metals // ignore: cast_nullable_to_non_nullable
 as List<MetalRow>,
@@ -155,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<RateRow> indices,  List<RateRow> currencies,  List<MetalRow> metals)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<RateRow> indices,  List<RateRow> world,  List<RateRow> currencies,  List<MetalRow> metals)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RatesDoc() when $default != null:
-return $default(_that.indices,_that.currencies,_that.metals);case _:
+return $default(_that.indices,_that.world,_that.currencies,_that.metals);case _:
   return orElse();
 
 }
@@ -176,10 +180,10 @@ return $default(_that.indices,_that.currencies,_that.metals);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<RateRow> indices,  List<RateRow> currencies,  List<MetalRow> metals)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<RateRow> indices,  List<RateRow> world,  List<RateRow> currencies,  List<MetalRow> metals)  $default,) {final _that = this;
 switch (_that) {
 case _RatesDoc():
-return $default(_that.indices,_that.currencies,_that.metals);case _:
+return $default(_that.indices,_that.world,_that.currencies,_that.metals);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +200,10 @@ return $default(_that.indices,_that.currencies,_that.metals);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<RateRow> indices,  List<RateRow> currencies,  List<MetalRow> metals)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<RateRow> indices,  List<RateRow> world,  List<RateRow> currencies,  List<MetalRow> metals)?  $default,) {final _that = this;
 switch (_that) {
 case _RatesDoc() when $default != null:
-return $default(_that.indices,_that.currencies,_that.metals);case _:
+return $default(_that.indices,_that.world,_that.currencies,_that.metals);case _:
   return null;
 
 }
@@ -211,7 +215,7 @@ return $default(_that.indices,_that.currencies,_that.metals);case _:
 @JsonSerializable()
 
 class _RatesDoc extends RatesDoc {
-  const _RatesDoc({final  List<RateRow> indices = const <RateRow>[], final  List<RateRow> currencies = const <RateRow>[], final  List<MetalRow> metals = const <MetalRow>[]}): _indices = indices,_currencies = currencies,_metals = metals,super._();
+  const _RatesDoc({final  List<RateRow> indices = const <RateRow>[], final  List<RateRow> world = const <RateRow>[], final  List<RateRow> currencies = const <RateRow>[], final  List<MetalRow> metals = const <MetalRow>[]}): _indices = indices,_world = world,_currencies = currencies,_metals = metals,super._();
   factory _RatesDoc.fromJson(Map<String, dynamic> json) => _$RatesDocFromJson(json);
 
  final  List<RateRow> _indices;
@@ -219,6 +223,19 @@ class _RatesDoc extends RatesDoc {
   if (_indices is EqualUnmodifiableListView) return _indices;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_indices);
+}
+
+/// The markets and commodities an Egyptian holding is priced against —
+/// the S&P, the Tadawul, oil, copper. Here so a reader can tell whether a
+/// bad day was Egypt or was everywhere, which are different facts.
+ final  List<RateRow> _world;
+/// The markets and commodities an Egyptian holding is priced against —
+/// the S&P, the Tadawul, oil, copper. Here so a reader can tell whether a
+/// bad day was Egypt or was everywhere, which are different facts.
+@override@JsonKey() List<RateRow> get world {
+  if (_world is EqualUnmodifiableListView) return _world;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_world);
 }
 
  final  List<RateRow> _currencies;
@@ -249,16 +266,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RatesDoc&&const DeepCollectionEquality().equals(other._indices, _indices)&&const DeepCollectionEquality().equals(other._currencies, _currencies)&&const DeepCollectionEquality().equals(other._metals, _metals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RatesDoc&&const DeepCollectionEquality().equals(other._indices, _indices)&&const DeepCollectionEquality().equals(other._world, _world)&&const DeepCollectionEquality().equals(other._currencies, _currencies)&&const DeepCollectionEquality().equals(other._metals, _metals));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_indices),const DeepCollectionEquality().hash(_currencies),const DeepCollectionEquality().hash(_metals));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_indices),const DeepCollectionEquality().hash(_world),const DeepCollectionEquality().hash(_currencies),const DeepCollectionEquality().hash(_metals));
 
 @override
 String toString() {
-  return 'RatesDoc(indices: $indices, currencies: $currencies, metals: $metals)';
+  return 'RatesDoc(indices: $indices, world: $world, currencies: $currencies, metals: $metals)';
 }
 
 
@@ -269,7 +286,7 @@ abstract mixin class _$RatesDocCopyWith<$Res> implements $RatesDocCopyWith<$Res>
   factory _$RatesDocCopyWith(_RatesDoc value, $Res Function(_RatesDoc) _then) = __$RatesDocCopyWithImpl;
 @override @useResult
 $Res call({
- List<RateRow> indices, List<RateRow> currencies, List<MetalRow> metals
+ List<RateRow> indices, List<RateRow> world, List<RateRow> currencies, List<MetalRow> metals
 });
 
 
@@ -286,9 +303,10 @@ class __$RatesDocCopyWithImpl<$Res>
 
 /// Create a copy of RatesDoc
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? indices = null,Object? currencies = null,Object? metals = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? indices = null,Object? world = null,Object? currencies = null,Object? metals = null,}) {
   return _then(_RatesDoc(
 indices: null == indices ? _self._indices : indices // ignore: cast_nullable_to_non_nullable
+as List<RateRow>,world: null == world ? _self._world : world // ignore: cast_nullable_to_non_nullable
 as List<RateRow>,currencies: null == currencies ? _self._currencies : currencies // ignore: cast_nullable_to_non_nullable
 as List<RateRow>,metals: null == metals ? _self._metals : metals // ignore: cast_nullable_to_non_nullable
 as List<MetalRow>,

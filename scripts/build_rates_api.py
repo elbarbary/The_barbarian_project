@@ -56,6 +56,42 @@ INDICES = [
     ("EGX100EWI", "EGX 100", "The thirty and the seventy together."),
 ]
 
+# The wider world, and why each one is here.
+#
+# Taken from foudalens.com's `/api/market-context`, which is the cleverest
+# thing on any Egyptian markets site: it puts the EGX beside the things that
+# actually move it rather than beside more Egyptian equities. Their numbers
+# come off the same TradingView feed ours do — S&P, Nasdaq, FTSE, Tadawul and
+# copper all reconcile to the decimal.
+#
+# The framing is ours, and it is the whole point. Nobody in Cairo cares about
+# the S&P for its own sake; they care whether today's fall was Egypt or was
+# everywhere, because those are different facts about their own holding. And
+# oil and copper are here because this index is heavy with building materials,
+# fertiliser and energy — a cement company's costs are on this list.
+#
+# Steel is in Fouda's context object and not in ours: their 1,188 is a local
+# rebar quote, and there is no free feed of it that could be checked.
+WORLD = [
+    ("SP:SPX", "S&P 500", "index",
+     "The biggest American companies. When Cairo and New York fall on the "
+     "same day, the reason is usually not Egyptian."),
+    ("NASDAQ:IXIC", "Nasdaq", "index",
+     "American technology. The most volatile of the big indices, and the one "
+     "that moves first when risk appetite turns."),
+    ("TVC:UKX", "FTSE 100", "index",
+     "The biggest London-listed companies."),
+    ("TADAWUL:TASI", "Tadawul", "index",
+     "Saudi Arabia's exchange — the nearest large market, and the one that "
+     "shares this region's news."),
+    ("NYMEX:CL1!", "Oil", "commodity",
+     "Crude, per barrel in dollars. Egypt both produces and imports it, and "
+     "it sets the cost of everything that moves."),
+    ("COMEX:HG1!", "Copper", "commodity",
+     "Per pound in dollars. It is in every cable and every building, which "
+     "makes it a reading on construction demand worldwide."),
+]
+
 # What the pound is quoted against, in the order an Egyptian reader expects.
 PAIRS = [
     ("USD", "US dollar"),
@@ -133,6 +169,46 @@ def indices() -> list[dict]:
                     "it says nothing about any one company in it."
                 ),
                 "source": "TradingView, EGX index feed",
+            }
+        )
+    return out
+
+
+def world() -> list[dict]:
+    """The prices an Egyptian holding is priced *against*."""
+    payload = get(
+        "https://scanner.tradingview.com/global/scan",
+        json.dumps(
+            {
+                "symbols": {"tickers": [w[0] for w in WORLD]},
+                "columns": ["close", "change"],
+            }
+        ).encode(),
+    )
+    if not payload or not payload.get("data"):
+        return []
+
+    rows = {r["s"]: r["d"] for r in payload["data"]}
+    out = []
+    for symbol, label, kind, what in WORLD:
+        row = rows.get(symbol)
+        if not row or row[0] is None:
+            continue
+        level, pct = row[0], row[1] or 0.0
+        direction = "rose" if pct >= 0 else "fell"
+        unit = {"commodity": "$", "index": ""}[kind]
+        out.append(
+            {
+                "id": symbol.replace(":", "_"),
+                "label": label,
+                "kind": kind,
+                "level": round(level, 2),
+                "change_percent": round(pct, 2),
+                "plain": f"{label} {direction} {abs(pct):.2f}% today.",
+                "token": f"{unit}{money(level)} · {'+' if pct >= 0 else '−'}{abs(pct):.2f}%",
+                "workings": f"{unit}{money(level)} now, {'+' if pct >= 0 else '−'}{abs(pct):.2f}% on the day.",
+                "yardstick": what,
+                "source": "TradingView",
             }
         )
     return out
@@ -266,6 +342,10 @@ def main() -> int:
     index_rows = indices()
     print(f"   {len(index_rows)}")
 
+    print("── The wider world")
+    world_rows = world()
+    print(f"   {len(world_rows)}")
+
     print("── The pound")
     currency_rows, usd_egp, _ = currencies()
     print(f"   {len(currency_rows)} pairs")
@@ -274,17 +354,18 @@ def main() -> int:
     metal_rows = metals(usd_egp)
     print(f"   {len(metal_rows)}")
 
-    if not (index_rows or currency_rows or metal_rows):
+    if not (index_rows or currency_rows or metal_rows or world_rows):
         print("nothing fetched — leaving the published document alone")
         return 1
 
     doc = {
         "indices": index_rows,
+        "world": world_rows,
         "currencies": currency_rows,
         "metals": metal_rows,
     }
 
-    for row in index_rows + currency_rows + metal_rows:
+    for row in index_rows + world_rows + currency_rows + metal_rows:
         print(f"   {row.get('label'):14} {row['plain']}")
 
     if args.check:
