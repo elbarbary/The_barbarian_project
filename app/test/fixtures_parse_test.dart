@@ -234,6 +234,37 @@ void main() {
   });
 
   group('opportunity scanner', () {
+    test('§50 every scanned name says where its reading came from', () {
+      // Entries assert things about named issuers — "H1 consolidated profit
+      // rose 62.5%", "RV20 remained only 1.63x". Every one of them shipped
+      // with an empty `sources` list, so a reader had nothing to check the
+      // claim against and no way to tell a filing from an inference. The
+      // report already linked its filings; the builder was dropping them.
+      final report = OpportunityReport.fromJson(
+        _read('opportunities/latest.json'),
+      );
+      final scanned = [
+        ...report.qualified,
+        ...report.watching,
+        ...report.rejected,
+      ];
+      expect(scanned, isNotEmpty);
+
+      for (final entry in scanned) {
+        expect(
+          entry.sources,
+          isNotEmpty,
+          reason: '${entry.ticker} makes claims with nothing to check them against',
+        );
+        // A citation with no destination is decoration.
+        expect(
+          entry.sources.every((s) => s.name.trim().isNotEmpty),
+          isTrue,
+          reason: '${entry.ticker} carries an unnamed source',
+        );
+      }
+    });
+
     test('parses the real published report', () {
       final report = OpportunityReport.fromJson(
         _read('opportunities/latest.json'),
