@@ -856,4 +856,19 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get indexNoSeries =>
       'تُسجَّل المستويات جلسة بجلسة. لا توجد سلسلة منشورة للمؤشر نستعيدها.';
+
+  @override
+  String get ratesWorld => 'هل كانت مصر، أم العالم كله؟';
+
+  @override
+  String get ratesMetals => 'الذهب والفضة';
+
+  @override
+  String get ratesPound => 'الجنيه';
+
+  @override
+  String get ratesPerGram => 'للجرام';
+
+  @override
+  String get ratesIndicesMovedHome => 'مستويات المؤشرات في الصفحة الرئيسية';
 }

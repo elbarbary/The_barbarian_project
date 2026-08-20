@@ -858,4 +858,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get indexNoSeries =>
       'Levels are recorded one session at a time. No index series is published to backfill from.';
+
+  @override
+  String get ratesWorld => 'Was it Egypt, or everywhere?';
+
+  @override
+  String get ratesMetals => 'Gold and silver';
+
+  @override
+  String get ratesPound => 'The pound';
+
+  @override
+  String get ratesPerGram => 'per gram';
+
+  @override
+  String get ratesIndicesMovedHome => 'Index levels are on Home';
 }

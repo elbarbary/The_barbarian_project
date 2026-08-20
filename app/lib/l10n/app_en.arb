@@ -460,5 +460,10 @@
   },
   "breadthChartTitle": "How the market split, session by session",
   "breadthOneSession": "One session recorded so far. The lines grow as each session is written down — there is no published breadth history to backfill from.",
-  "indexNoSeries": "Levels are recorded one session at a time. No index series is published to backfill from."
+  "indexNoSeries": "Levels are recorded one session at a time. No index series is published to backfill from.",
+  "ratesWorld": "Was it Egypt, or everywhere?",
+  "ratesMetals": "Gold and silver",
+  "ratesPound": "The pound",
+  "ratesPerGram": "per gram",
+  "ratesIndicesMovedHome": "Index levels are on Home"
 }

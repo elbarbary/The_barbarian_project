@@ -5,9 +5,12 @@ import '../../core/models/explainer.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
+import '../../core/widgets/controls.dart';
+import '../../core/widgets/motion.dart';
 import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The index, the pound and the gram — in the app's own voice.
 ///
@@ -28,28 +31,49 @@ class BRatesBlock extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final rates = ref.watch(ratesProvider).value?.value;
     if (rates == null || rates.isEmpty) return const SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (rates.indices.isNotEmpty) ...[
-          const BSectionLabel('The market as a whole'),
-          const SizedBox(height: 10),
-          _Card(rows: [for (final i in rates.indices) _fromRate(i)]),
-          const SizedBox(height: 20),
-        ],
+        // The indices are not repeated here.
+        //
+        // They were a full-width card of three rows saying what Home already
+        // says in three tappable cards with a shape behind each one. Two
+        // renderings of the same three numbers on two tabs is not more
+        // information, it is more scrolling.
         if (rates.world.isNotEmpty) ...[
-          const BSectionLabel('Was it Egypt, or everywhere?'),
+          BSectionLabel(l.ratesWorld),
           const SizedBox(height: 10),
-          _Card(rows: [for (final w in rates.world) _fromRate(w)]),
+          // A rail rather than a stacked card: these are six or seven
+          // reference points a reader skims to answer one question — was it us
+          // or was it everywhere — and stacking them turned a glance into a
+          // scroll past everything else on the tab.
+          SizedBox(
+            height: 104,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
+              itemCount: rates.world.length,
+              separatorBuilder: (_, _) => const SizedBox(width: 10),
+              itemBuilder: (context, i) => _WorldCard(row: rates.world[i]),
+            ),
+          ),
           const SizedBox(height: 20),
         ],
         if (rates.metals.isNotEmpty) ...[
-          const BSectionLabel('Gold and silver'),
+          BSectionLabel(l.ratesMetals),
           const SizedBox(height: 10),
-          _Card(rows: [for (final m in rates.metals) _fromMetal(m)]),
+          Row(
+            children: [
+              for (final (i, metal) in rates.metals.indexed) ...[
+                if (i > 0) const SizedBox(width: 10),
+                Expanded(child: _MetalCard(metal: metal)),
+              ],
+            ],
+          ),
           if (rates.metals.where((m) => m.karats.isNotEmpty).isNotEmpty) ...[
             const SizedBox(height: 10),
             _Karats(metal: rates.metals.firstWhere((m) => m.karats.isNotEmpty)),
@@ -57,7 +81,7 @@ class BRatesBlock extends ConsumerWidget {
           const SizedBox(height: 20),
         ],
         if (rates.currencies.isNotEmpty) ...[
-          const BSectionLabel('The pound'),
+          BSectionLabel(l.ratesPound),
           const SizedBox(height: 10),
           _Card(rows: [for (final c in rates.currencies) _fromRate(c)]),
         ],
@@ -185,6 +209,116 @@ class _Karats extends StatelessWidget {
           if (karat != metal.karats.last) const SizedBox(width: 8),
         ],
       ],
+    );
+  }
+}
+
+/// One reference market, as a card small enough to skim six of.
+class _WorldCard extends StatelessWidget {
+  const _WorldCard({required this.row});
+
+  final RateRow row;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final change = row.changePercent;
+
+    return BPressable(
+      onTap: () => showExplainer(context, BRatesBlock._fromRate(row)),
+      child: BPaperCard(
+        padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+        child: SizedBox(
+          width: 126,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                row.label.isEmpty ? row.id : row.label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: BarbarianType.labelTiny.copyWith(
+                  color: c.textMuted,
+                  letterSpacing: 1.1,
+                ),
+              ),
+              const Spacer(),
+              if (row.level case final double level)
+                BNumText(
+                  level >= 1000
+                      ? level.toStringAsFixed(0)
+                      : level.toStringAsFixed(2),
+                  style: BarbarianType.figureM.copyWith(color: c.textPrimary),
+                ),
+              const SizedBox(height: 4),
+              if (change != null)
+                BChangeDelta(
+                  value: '${change.abs().toStringAsFixed(2)}%',
+                  direction: BDirection.of(change),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Gold or silver, on its own card.
+///
+/// These were two rows in a list of numbers, which is the wrong shape for the
+/// figure most readers of this app check most often and the one they are most
+/// likely to compare against a shop window. The gram price leads, because that
+/// is the unit Egyptian jewellery is priced and sold in — the ounce is a
+/// commodity-desk unit and belongs underneath.
+class _MetalCard extends StatelessWidget {
+  const _MetalCard({required this.metal});
+
+  final MetalRow metal;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final gram = metal.egpGram;
+
+    return BPressable(
+      onTap: () => showExplainer(context, BRatesBlock._fromMetal(metal)),
+      child: BDarkCard(
+        radius: BarbarianRadius.xl,
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              metal.label,
+              style: BarbarianType.labelTiny.copyWith(
+                color: c.onInkMuted,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const SizedBox(height: 10),
+            BNumText(
+              gram == null ? '—' : gram.toStringAsFixed(0),
+              style: BarbarianType.displayS.copyWith(color: c.onInk),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              'EGP · ${l.ratesPerGram}',
+              style: BarbarianType.labelNano.copyWith(color: c.onInkMuted),
+            ),
+            if (metal.egpOunce case final double ounce) ...[
+              const SizedBox(height: 8),
+              Text(
+                'EGP ${ounce.toStringAsFixed(0)} / oz',
+                style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }

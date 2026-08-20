@@ -598,12 +598,22 @@ def build(refresh_tags: bool = False) -> dict:
 
     for item in items:
         item["event"], item["event_label"] = classify(item["headline"])
-        # The same glossary the filings feed uses. A headline that says a
-        # company signed a contract tells a reader nothing about why it should
-        # matter to them; the meaning does, and it is written once per type by
-        # a person rather than generated per story.
-        item["meaning"] = ft.meaning(item["event"])
-        item["meaning_ar"] = ft.meaning_ar(item["event"])
+        # The same glossary the filings feed uses — but only where the story
+        # names a listed company.
+        #
+        # The filings classifier reads EGX's own formulaic titles and is
+        # reliable. This one guesses from a free-text headline and is not: it
+        # read a gold-price story as "results" and printed "the company
+        # published what it earned or lost over a period" under it, and read a
+        # central bank story as a filing. A wrong explanation is worse than
+        # none, because a reader has no way to know which they are looking at.
+        #
+        # A ticker match is the corroboration that makes the classification
+        # worth publishing. Today that is 1 story in 120, which is the honest
+        # number rather than a disappointing one.
+        if len(item.get("tickers") or []) == 1 and item["event"] != "other":
+            item["meaning"] = ft.meaning(item["event"])
+            item["meaning_ar"] = ft.meaning_ar(item["event"])
         item.pop("link", None)
         item.pop("source", None)
 

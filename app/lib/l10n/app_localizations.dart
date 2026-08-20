@@ -1597,6 +1597,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Levels are recorded one session at a time. No index series is published to backfill from.'**
   String get indexNoSeries;
+
+  /// No description provided for @ratesWorld.
+  ///
+  /// In en, this message translates to:
+  /// **'Was it Egypt, or everywhere?'**
+  String get ratesWorld;
+
+  /// No description provided for @ratesMetals.
+  ///
+  /// In en, this message translates to:
+  /// **'Gold and silver'**
+  String get ratesMetals;
+
+  /// No description provided for @ratesPound.
+  ///
+  /// In en, this message translates to:
+  /// **'The pound'**
+  String get ratesPound;
+
+  /// No description provided for @ratesPerGram.
+  ///
+  /// In en, this message translates to:
+  /// **'per gram'**
+  String get ratesPerGram;
+
+  /// No description provided for @ratesIndicesMovedHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Index levels are on Home'**
+  String get ratesIndicesMovedHome;
 }
 
 class _AppLocalizationsDelegate
