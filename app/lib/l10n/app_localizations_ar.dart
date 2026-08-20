@@ -323,4 +323,217 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeFiledToday => 'أُفصح عنه اليوم';
+
+  @override
+  String get tabOverview => 'نظرة عامة';
+
+  @override
+  String get tabFinancials => 'القوائم المالية';
+
+  @override
+  String get tabPrice => 'السعر';
+
+  @override
+  String get tabResearch => 'الدراسة';
+
+  @override
+  String get tabTalk => 'نقاش';
+
+  @override
+  String companyNotOnDevice(String ticker) {
+    return '$ticker غير موجودة على الجهاز';
+  }
+
+  @override
+  String get companyNotOnDeviceBody =>
+      'افتح هذه الشركة مرة ومعك اتصال لتبقى متاحة دون إنترنت.';
+
+  @override
+  String get discussionArrives => 'النقاش يأتي مع قسم النقاش';
+
+  @override
+  String get discussionArrivesBody =>
+      'تظهر هنا نقاشات الشركة عند تفعيل خدمة المجتمع. كل شيء آخر في هذه الشاشة يعمل بدونها.';
+
+  @override
+  String get back => 'رجوع';
+
+  @override
+  String followTicker(String ticker) {
+    return 'تابع $ticker';
+  }
+
+  @override
+  String followingTicker(String ticker) {
+    return 'تتابع $ticker. اضغط لإلغاء المتابعة.';
+  }
+
+  @override
+  String get prevClose => 'الإغلاق السابق';
+
+  @override
+  String get volume => 'حجم التداول';
+
+  @override
+  String get marketCap => 'القيمة السوقية';
+
+  @override
+  String get dayHigh => 'أعلى سعر';
+
+  @override
+  String get dayLow => 'أدنى سعر';
+
+  @override
+  String get previousClose => 'الإغلاق السابق';
+
+  @override
+  String get avgVolume30d => 'متوسط الحجم ٣٠ يومًا';
+
+  @override
+  String get sharesOutstanding => 'الأسهم المصدرة';
+
+  @override
+  String get floatShares => 'الأسهم الحرة';
+
+  @override
+  String get sector => 'القطاع';
+
+  @override
+  String get movedThisMonth => 'كيف تحرّك هذا الشهر';
+
+  @override
+  String get whatNumbersSay => 'ما تقوله الأرقام';
+
+  @override
+  String get whatThatMeans => 'ماذا يعني ذلك';
+
+  @override
+  String get thisSession => 'هذه الجلسة';
+
+  @override
+  String get performance => 'الأداء';
+
+  @override
+  String get sizeAndOwnership => 'الشركة';
+
+  @override
+  String get noDetailYet => 'لا توجد تفاصيل لهذه الشركة بعد';
+
+  @override
+  String get noPriceHistory => 'لا يوجد تاريخ أسعار لهذه الشركة';
+
+  @override
+  String get noSessionsInRange => 'لا توجد جلسات في هذه الفترة';
+
+  @override
+  String get noStudyYet => 'لم تُنشر دراسة عن هذه الشركة بعد';
+
+  @override
+  String get noStudyYetBody =>
+      'تُدرس الشركات واحدة تلو الأخرى. عندما تُقرأ هذه، تظهر الدراسة هنا.';
+
+  @override
+  String get readFullInvestigation => 'اقرأ الدراسة كاملة';
+
+  @override
+  String get scannerHistory => 'سجل ماسح الفرص';
+
+  @override
+  String get studyLabel => 'الركائز الست';
+
+  @override
+  String lastSessions(int count) {
+    return 'آخر $count جلسة';
+  }
+
+  @override
+  String get canIGetOut => 'أقدر أخرج؟';
+
+  @override
+  String get itStopsTrading => 'يتوقف عن التداول';
+
+  @override
+  String get scanNoReport => 'لم يُنزَّل تقرير الماسح بعد';
+
+  @override
+  String get scanNoReportBody =>
+      'يُنشر الماسح بعد كل جلسة. افتح هذا مرة ومعك اتصال ليبقى على الجهاز.';
+
+  @override
+  String get scanNotRunToday => 'لم يعمل الماسح اليوم';
+
+  @override
+  String get scanNotRunTodayBody =>
+      'لم يستوفِ شيء الاختبار منذ الجلسة الماضية. هذه نتيجة، وليست خطأ.';
+
+  @override
+  String get scanReportDateUnknown => 'تاريخ التقرير غير معروف';
+
+  @override
+  String get scanQualifiedBlurb =>
+      'استوفت كل القواعد. استيفاء قاعدة حقيقة عن القاعدة، وليس رأيًا في الشركة.';
+
+  @override
+  String get scanWatchingBlurb =>
+      'استوفت بعض القواعد دون غيرها. نقص الأدلة وصف لاختبارنا، لا وصف للسهم.';
+
+  @override
+  String get scanRejectedBlurb =>
+      'لم تستوفِ القواعد، وسُجّلت لتبقى نتيجة الاختبار قابلة للمراجعة.';
+
+  @override
+  String get scanLogEmpty => 'سجل القواعد فارغ';
+
+  @override
+  String get scanNothingQualified => 'لا شيء استوفى اليوم';
+
+  @override
+  String get scanNothingWatch => 'لا شيء تحت المتابعة';
+
+  @override
+  String get scanNothingRejected => 'لم يُستبعد شيء اليوم';
+
+  @override
+  String get scanEmptyBlurb =>
+      'القسم الفارغ إجابة حقيقية. الاختبار لا يخفّض معاييره ليملأ شاشة.';
+
+  @override
+  String get coverage => 'التغطية';
+
+  @override
+  String get coverageTradable => 'قابلة للتداول';
+
+  @override
+  String get coverageListed => 'مقيدة';
+
+  @override
+  String get coverageAdjusted => 'معدّلة';
+
+  @override
+  String get coverageBlurb =>
+      'تُقرأ كل شركة مقيدة. معظمها لا يستوفي، وما لا يستوفي يُنشر أيضًا.';
+
+  @override
+  String get catalyst => 'المحفّز';
+
+  @override
+  String get fullRecord => 'السجل الكامل';
+
+  @override
+  String get sourcesLabel => 'المصادر';
+
+  @override
+  String get evidenceLabel => 'الأدلة';
+
+  @override
+  String get whatWasChecked => 'ما جرى فحصه';
+
+  @override
+  String get gatePassed => 'استوفى';
+
+  @override
+  String get gateFailed => 'لم يستوفِ';
+
+  @override
+  String get gateUnresolved => 'غير محسوم';
 }

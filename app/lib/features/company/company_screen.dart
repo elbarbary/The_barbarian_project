@@ -25,6 +25,7 @@ import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import 'price_chart.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The company screen (spec §13).
 ///
@@ -54,6 +55,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final async = ref.watch(companyProvider(widget.ticker));
     final snapshot = ref.watch(livePricesProvider);
     final watchlist = ref.watch(watchlistProvider).value ?? const <String>[];
@@ -64,10 +66,8 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
       children: [
         BAsyncView(
           value: async,
-          errorTitle: '${widget.ticker} is not on the device',
-          errorBody:
-              'Open this company once with a connection and it stays '
-              'available offline.',
+          errorTitle: l.companyNotOnDevice(widget.ticker),
+          errorBody: l.companyNotOnDeviceBody,
           data: (sourced) {
             final company = sourced.value;
             final quote = snapshot?.quoteFor(widget.ticker);
@@ -87,12 +87,12 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                 const SizedBox(height: 18),
                 BSegmentedRow(
                   style: BSegmentStyle.iconPill,
-                  segments: const [
-                    BSegment(label: 'Overview', icon: Icons.grid_view_rounded),
-                    BSegment(label: 'Financials', icon: Icons.bar_chart_rounded),
-                    BSegment(label: 'Price', icon: Icons.show_chart_rounded),
-                    BSegment(label: 'Research', icon: Icons.article_outlined),
-                    BSegment(label: 'Talk', icon: Icons.forum_outlined),
+                  segments: [
+                    BSegment(label: l.tabOverview, icon: Icons.grid_view_rounded),
+                    BSegment(label: l.tabFinancials, icon: Icons.bar_chart_rounded),
+                    BSegment(label: l.tabPrice, icon: Icons.show_chart_rounded),
+                    BSegment(label: l.tabResearch, icon: Icons.article_outlined),
+                    BSegment(label: l.tabTalk, icon: Icons.forum_outlined),
                   ],
                   selectedIndex: _Tab.values.indexOf(_tab),
                   onChanged: (i) => setState(() => _tab = _Tab.values[i]),
@@ -117,8 +117,8 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     ticker: widget.ticker,
                     parentTab: widget.parentTab,
                   ),
-                  _Tab.discussion => const BEmptyState(
-                    title: 'Discussion arrives with The Pit',
+                  _Tab.discussion => BEmptyState(
+                    title: l.discussionArrives,
                     body:
                         'Company threads land here once the community backend '
                         'exists. Everything else on this screen works without '
@@ -162,6 +162,7 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final change = quote?.resolvedChange;
     final changePct = quote?.resolvedChangePercent;
@@ -176,7 +177,7 @@ class _Header extends StatelessWidget {
             children: [
               BSoftIconButton(
                 icon: Icons.arrow_back_ios_new_rounded,
-                semanticLabel: 'Back',
+                semanticLabel: l.back,
                 onDark: true,
                 onTap: () => Navigator.of(context).maybePop(),
               ),
@@ -190,8 +191,8 @@ class _Header extends StatelessWidget {
                 selected: watched,
                 onDark: true,
                 semanticLabel: watched
-                    ? 'Following ${company.ticker}. Tap to unfollow.'
-                    : 'Follow ${company.ticker}',
+                    ? l.followingTicker(company.ticker)
+                    : l.followTicker(company.ticker),
                 onTap: onToggleWatch,
               ),
             ],
@@ -379,6 +380,7 @@ class _Overview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final p = company.profile ?? const <String, dynamic>{};
     final m = company.market;
@@ -453,7 +455,7 @@ class _Overview extends ConsumerWidget {
         if (ExitLiquidity.of(company) case final ExitLiquidity exit)
           if (exit.stops) _ExitSummary(exit: exit, parentTab: parentTab),
         if (verdict != null) ...[
-          const BSectionLabel('Six Pillars'),
+          BSectionLabel(l.studyLabel),
           BPressable(
             onTap: () {},
             child: BPaperCard(
@@ -491,7 +493,7 @@ class _Overview extends ConsumerWidget {
             const SizedBox(height: 22),
           ],
         if (explained.isNotEmpty) ...[
-          const BSectionLabel('What the numbers say'),
+          BSectionLabel(l.whatNumbersSay),
           BPaperCard(
             padding: EdgeInsets.zero,
             child: Column(
@@ -509,12 +511,12 @@ class _Overview extends ConsumerWidget {
           const SizedBox(height: 22),
         ],
         if (session.isNotEmpty) ...[
-          const BSectionLabel('This session'),
+          BSectionLabel(l.thisSession),
           _FactCard(rows: session),
           const SizedBox(height: 22),
         ],
         if (momentum.isNotEmpty) ...[
-          const BSectionLabel('Performance'),
+          BSectionLabel(l.performance),
           _FactCard(rows: momentum),
           const SizedBox(height: 22),
         ],
@@ -523,8 +525,8 @@ class _Overview extends ConsumerWidget {
           _FactCard(rows: size),
         ],
         if (session.isEmpty && momentum.isEmpty && size.isEmpty)
-          const BEmptyState(
-            title: 'No detail for this company yet',
+          BEmptyState(
+            title: l.noDetailYet,
             body:
                 'The exchange scan carried only a closing price for this '
                 'listing. More lands as the pipeline fills in.',
@@ -860,6 +862,7 @@ class _Price extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final async = ref.watch(priceHistoryProvider(ticker));
 
     return BAsyncView(
@@ -869,8 +872,8 @@ class _Price extends ConsumerWidget {
       data: (sourced) {
         final all = sourced.value;
         if (all.isEmpty && session?.high == null) {
-          return const BEmptyState(
-            title: 'No price history for this company',
+          return BEmptyState(
+            title: l.noPriceHistory,
             body:
                 'Neither the exchange scan nor the price source publishes a '
                 'series for this listing. Its latest close is still shown on '
@@ -902,7 +905,7 @@ class _Price extends ConsumerWidget {
             // draw.
             BStalenessCaption(
               windowed.isEmpty
-                  ? 'No sessions in this range'
+                  ? l.noSessionsInRange
                   : '${windowed.length} sessions · to ${windowed.last.date}',
             ),
           ],
@@ -920,6 +923,7 @@ class _Research extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final config = ref.watch(appConfigProvider);
     final entry = ref
@@ -930,8 +934,8 @@ class _Research extends ConsumerWidget {
         .whenOrNull(data: (s) => s.value.allFor(ticker));
 
     if (entry == null && (scanned == null || scanned.isEmpty)) {
-      return const BEmptyState(
-        title: 'No study published on this company yet',
+      return BEmptyState(
+        title: l.noStudyYet,
         body:
             'Companies are studied one at a time. When this one is read, the '
             'investigation appears here.',
@@ -942,7 +946,7 @@ class _Research extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (entry != null) ...[
-          const BSectionLabel('Six Pillars'),
+          BSectionLabel(l.studyLabel),
           BPaperCard(
             radius: BarbarianRadius.xl,
             child: Column(
@@ -1019,7 +1023,7 @@ class _Research extends ConsumerWidget {
                         ),
                       ),
                       child: Text(
-                        'Read the full investigation',
+                        l.readFullInvestigation,
                         style: BarbarianType.label.copyWith(color: c.onAction),
                       ),
                     ),
@@ -1031,7 +1035,7 @@ class _Research extends ConsumerWidget {
         ],
         if (scanned != null && scanned.isNotEmpty) ...[
           const SizedBox(height: 20),
-          const BSectionLabel('Opportunity Scanner history'),
+          BSectionLabel(l.scannerHistory),
           for (final s in scanned)
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
@@ -1337,6 +1341,7 @@ class _WhatThatMeans extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final lines = <String>[];
 
@@ -1381,7 +1386,7 @@ class _WhatThatMeans extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BSectionLabel('What that means'),
+        BSectionLabel(l.whatThatMeans),
         BPaperCard(
           radius: BarbarianRadius.xl,
           child: Column(

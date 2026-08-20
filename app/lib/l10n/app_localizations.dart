@@ -685,6 +685,396 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Filed today'**
   String get homeFiledToday;
+
+  /// No description provided for @tabOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get tabOverview;
+
+  /// No description provided for @tabFinancials.
+  ///
+  /// In en, this message translates to:
+  /// **'Financials'**
+  String get tabFinancials;
+
+  /// No description provided for @tabPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get tabPrice;
+
+  /// No description provided for @tabResearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Research'**
+  String get tabResearch;
+
+  /// No description provided for @tabTalk.
+  ///
+  /// In en, this message translates to:
+  /// **'Talk'**
+  String get tabTalk;
+
+  /// No description provided for @companyNotOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'{ticker} is not on the device'**
+  String companyNotOnDevice(String ticker);
+
+  /// No description provided for @companyNotOnDeviceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open this company once with a connection and it stays available offline.'**
+  String get companyNotOnDeviceBody;
+
+  /// No description provided for @discussionArrives.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussion arrives with The Pit'**
+  String get discussionArrives;
+
+  /// No description provided for @discussionArrivesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Company threads land here once the community backend exists. Everything else on this screen works without it.'**
+  String get discussionArrivesBody;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get back;
+
+  /// No description provided for @followTicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow {ticker}'**
+  String followTicker(String ticker);
+
+  /// No description provided for @followingTicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Following {ticker}. Tap to unfollow.'**
+  String followingTicker(String ticker);
+
+  /// No description provided for @prevClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Prev close'**
+  String get prevClose;
+
+  /// No description provided for @volume.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get volume;
+
+  /// No description provided for @marketCap.
+  ///
+  /// In en, this message translates to:
+  /// **'Mkt cap'**
+  String get marketCap;
+
+  /// No description provided for @dayHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Day high'**
+  String get dayHigh;
+
+  /// No description provided for @dayLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Day low'**
+  String get dayLow;
+
+  /// No description provided for @previousClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous close'**
+  String get previousClose;
+
+  /// No description provided for @avgVolume30d.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg volume 30d'**
+  String get avgVolume30d;
+
+  /// No description provided for @sharesOutstanding.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares outstanding'**
+  String get sharesOutstanding;
+
+  /// No description provided for @floatShares.
+  ///
+  /// In en, this message translates to:
+  /// **'Float shares'**
+  String get floatShares;
+
+  /// No description provided for @sector.
+  ///
+  /// In en, this message translates to:
+  /// **'Sector'**
+  String get sector;
+
+  /// No description provided for @movedThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'How it has moved this month'**
+  String get movedThisMonth;
+
+  /// No description provided for @whatNumbersSay.
+  ///
+  /// In en, this message translates to:
+  /// **'What the numbers say'**
+  String get whatNumbersSay;
+
+  /// No description provided for @whatThatMeans.
+  ///
+  /// In en, this message translates to:
+  /// **'What that means'**
+  String get whatThatMeans;
+
+  /// No description provided for @thisSession.
+  ///
+  /// In en, this message translates to:
+  /// **'This session'**
+  String get thisSession;
+
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
+
+  /// No description provided for @sizeAndOwnership.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get sizeAndOwnership;
+
+  /// No description provided for @noDetailYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No detail for this company yet'**
+  String get noDetailYet;
+
+  /// No description provided for @noPriceHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No price history for this company'**
+  String get noPriceHistory;
+
+  /// No description provided for @noSessionsInRange.
+  ///
+  /// In en, this message translates to:
+  /// **'No sessions in this range'**
+  String get noSessionsInRange;
+
+  /// No description provided for @noStudyYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No study published on this company yet'**
+  String get noStudyYet;
+
+  /// No description provided for @noStudyYetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies are studied one at a time. When this one is read, the investigation appears here.'**
+  String get noStudyYetBody;
+
+  /// No description provided for @readFullInvestigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the full investigation'**
+  String get readFullInvestigation;
+
+  /// No description provided for @scannerHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Opportunity Scanner history'**
+  String get scannerHistory;
+
+  /// No description provided for @studyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Six Pillars'**
+  String get studyLabel;
+
+  /// No description provided for @lastSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Last {count} sessions'**
+  String lastSessions(int count);
+
+  /// No description provided for @canIGetOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I get out?'**
+  String get canIGetOut;
+
+  /// No description provided for @itStopsTrading.
+  ///
+  /// In en, this message translates to:
+  /// **'It stops trading'**
+  String get itStopsTrading;
+
+  /// No description provided for @scanNoReport.
+  ///
+  /// In en, this message translates to:
+  /// **'No scanner report downloaded yet'**
+  String get scanNoReport;
+
+  /// No description provided for @scanNoReportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The scanner publishes after each session. Open this once with a connection and it stays on the device.'**
+  String get scanNoReportBody;
+
+  /// No description provided for @scanNotRunToday.
+  ///
+  /// In en, this message translates to:
+  /// **'The scanner has not run today'**
+  String get scanNotRunToday;
+
+  /// No description provided for @scanNotRunTodayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing has cleared the test since the last session. That is a result, not an error.'**
+  String get scanNotRunTodayBody;
+
+  /// No description provided for @scanReportDateUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Report date unknown'**
+  String get scanReportDateUnknown;
+
+  /// No description provided for @scanQualifiedBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Cleared every rule. Clearing a rule is a fact about the rule, not a view on the company.'**
+  String get scanQualifiedBlurb;
+
+  /// No description provided for @scanWatchingBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Cleared some rules and not others. Incomplete evidence is a statement about our test, not about the share.'**
+  String get scanWatchingBlurb;
+
+  /// No description provided for @scanRejectedBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Did not clear the rules, and kept on the record so the test can be audited.'**
+  String get scanRejectedBlurb;
+
+  /// No description provided for @scanLogEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'The rule log is empty'**
+  String get scanLogEmpty;
+
+  /// No description provided for @scanNothingQualified.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing qualified today'**
+  String get scanNothingQualified;
+
+  /// No description provided for @scanNothingWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing on the watch list'**
+  String get scanNothingWatch;
+
+  /// No description provided for @scanNothingRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was rejected today'**
+  String get scanNothingRejected;
+
+  /// No description provided for @scanEmptyBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'An empty section is a real answer. The test does not lower itself to fill a screen.'**
+  String get scanEmptyBlurb;
+
+  /// No description provided for @coverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage'**
+  String get coverage;
+
+  /// No description provided for @coverageTradable.
+  ///
+  /// In en, this message translates to:
+  /// **'Tradable'**
+  String get coverageTradable;
+
+  /// No description provided for @coverageListed.
+  ///
+  /// In en, this message translates to:
+  /// **'Listed'**
+  String get coverageListed;
+
+  /// No description provided for @coverageAdjusted.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjusted'**
+  String get coverageAdjusted;
+
+  /// No description provided for @coverageBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Every listed company is read. Most of them fail, and the ones that fail are published too.'**
+  String get coverageBlurb;
+
+  /// No description provided for @catalyst.
+  ///
+  /// In en, this message translates to:
+  /// **'Catalyst'**
+  String get catalyst;
+
+  /// No description provided for @fullRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'Full record'**
+  String get fullRecord;
+
+  /// No description provided for @sourcesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources'**
+  String get sourcesLabel;
+
+  /// No description provided for @evidenceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Evidence'**
+  String get evidenceLabel;
+
+  /// No description provided for @whatWasChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'What was checked'**
+  String get whatWasChecked;
+
+  /// No description provided for @gatePassed.
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get gatePassed;
+
+  /// No description provided for @gateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get gateFailed;
+
+  /// No description provided for @gateUnresolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Unresolved'**
+  String get gateUnresolved;
 }
 
 class _AppLocalizationsDelegate

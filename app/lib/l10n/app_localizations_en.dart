@@ -325,4 +325,217 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeFiledToday => 'Filed today';
+
+  @override
+  String get tabOverview => 'Overview';
+
+  @override
+  String get tabFinancials => 'Financials';
+
+  @override
+  String get tabPrice => 'Price';
+
+  @override
+  String get tabResearch => 'Research';
+
+  @override
+  String get tabTalk => 'Talk';
+
+  @override
+  String companyNotOnDevice(String ticker) {
+    return '$ticker is not on the device';
+  }
+
+  @override
+  String get companyNotOnDeviceBody =>
+      'Open this company once with a connection and it stays available offline.';
+
+  @override
+  String get discussionArrives => 'Discussion arrives with The Pit';
+
+  @override
+  String get discussionArrivesBody =>
+      'Company threads land here once the community backend exists. Everything else on this screen works without it.';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String followTicker(String ticker) {
+    return 'Follow $ticker';
+  }
+
+  @override
+  String followingTicker(String ticker) {
+    return 'Following $ticker. Tap to unfollow.';
+  }
+
+  @override
+  String get prevClose => 'Prev close';
+
+  @override
+  String get volume => 'Volume';
+
+  @override
+  String get marketCap => 'Mkt cap';
+
+  @override
+  String get dayHigh => 'Day high';
+
+  @override
+  String get dayLow => 'Day low';
+
+  @override
+  String get previousClose => 'Previous close';
+
+  @override
+  String get avgVolume30d => 'Avg volume 30d';
+
+  @override
+  String get sharesOutstanding => 'Shares outstanding';
+
+  @override
+  String get floatShares => 'Float shares';
+
+  @override
+  String get sector => 'Sector';
+
+  @override
+  String get movedThisMonth => 'How it has moved this month';
+
+  @override
+  String get whatNumbersSay => 'What the numbers say';
+
+  @override
+  String get whatThatMeans => 'What that means';
+
+  @override
+  String get thisSession => 'This session';
+
+  @override
+  String get performance => 'Performance';
+
+  @override
+  String get sizeAndOwnership => 'Company';
+
+  @override
+  String get noDetailYet => 'No detail for this company yet';
+
+  @override
+  String get noPriceHistory => 'No price history for this company';
+
+  @override
+  String get noSessionsInRange => 'No sessions in this range';
+
+  @override
+  String get noStudyYet => 'No study published on this company yet';
+
+  @override
+  String get noStudyYetBody =>
+      'Companies are studied one at a time. When this one is read, the investigation appears here.';
+
+  @override
+  String get readFullInvestigation => 'Read the full investigation';
+
+  @override
+  String get scannerHistory => 'Opportunity Scanner history';
+
+  @override
+  String get studyLabel => 'Six Pillars';
+
+  @override
+  String lastSessions(int count) {
+    return 'Last $count sessions';
+  }
+
+  @override
+  String get canIGetOut => 'Can I get out?';
+
+  @override
+  String get itStopsTrading => 'It stops trading';
+
+  @override
+  String get scanNoReport => 'No scanner report downloaded yet';
+
+  @override
+  String get scanNoReportBody =>
+      'The scanner publishes after each session. Open this once with a connection and it stays on the device.';
+
+  @override
+  String get scanNotRunToday => 'The scanner has not run today';
+
+  @override
+  String get scanNotRunTodayBody =>
+      'Nothing has cleared the test since the last session. That is a result, not an error.';
+
+  @override
+  String get scanReportDateUnknown => 'Report date unknown';
+
+  @override
+  String get scanQualifiedBlurb =>
+      'Cleared every rule. Clearing a rule is a fact about the rule, not a view on the company.';
+
+  @override
+  String get scanWatchingBlurb =>
+      'Cleared some rules and not others. Incomplete evidence is a statement about our test, not about the share.';
+
+  @override
+  String get scanRejectedBlurb =>
+      'Did not clear the rules, and kept on the record so the test can be audited.';
+
+  @override
+  String get scanLogEmpty => 'The rule log is empty';
+
+  @override
+  String get scanNothingQualified => 'Nothing qualified today';
+
+  @override
+  String get scanNothingWatch => 'Nothing on the watch list';
+
+  @override
+  String get scanNothingRejected => 'Nothing was rejected today';
+
+  @override
+  String get scanEmptyBlurb =>
+      'An empty section is a real answer. The test does not lower itself to fill a screen.';
+
+  @override
+  String get coverage => 'Coverage';
+
+  @override
+  String get coverageTradable => 'Tradable';
+
+  @override
+  String get coverageListed => 'Listed';
+
+  @override
+  String get coverageAdjusted => 'Adjusted';
+
+  @override
+  String get coverageBlurb =>
+      'Every listed company is read. Most of them fail, and the ones that fail are published too.';
+
+  @override
+  String get catalyst => 'Catalyst';
+
+  @override
+  String get fullRecord => 'Full record';
+
+  @override
+  String get sourcesLabel => 'Sources';
+
+  @override
+  String get evidenceLabel => 'Evidence';
+
+  @override
+  String get whatWasChecked => 'What was checked';
+
+  @override
+  String get gatePassed => 'Passed';
+
+  @override
+  String get gateFailed => 'Failed';
+
+  @override
+  String get gateUnresolved => 'Unresolved';
 }

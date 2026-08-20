@@ -145,5 +145,98 @@
       }
     }
   },
-  "homeFiledToday": "Filed today"
+  "homeFiledToday": "Filed today",
+  "tabOverview": "Overview",
+  "tabFinancials": "Financials",
+  "tabPrice": "Price",
+  "tabResearch": "Research",
+  "tabTalk": "Talk",
+  "companyNotOnDevice": "{ticker} is not on the device",
+  "@companyNotOnDevice": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "companyNotOnDeviceBody": "Open this company once with a connection and it stays available offline.",
+  "discussionArrives": "Discussion arrives with The Pit",
+  "discussionArrivesBody": "Company threads land here once the community backend exists. Everything else on this screen works without it.",
+  "back": "Back",
+  "followTicker": "Follow {ticker}",
+  "@followTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "followingTicker": "Following {ticker}. Tap to unfollow.",
+  "@followingTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "prevClose": "Prev close",
+  "volume": "Volume",
+  "marketCap": "Mkt cap",
+  "dayHigh": "Day high",
+  "dayLow": "Day low",
+  "previousClose": "Previous close",
+  "avgVolume30d": "Avg volume 30d",
+  "sharesOutstanding": "Shares outstanding",
+  "floatShares": "Float shares",
+  "sector": "Sector",
+  "movedThisMonth": "How it has moved this month",
+  "whatNumbersSay": "What the numbers say",
+  "whatThatMeans": "What that means",
+  "thisSession": "This session",
+  "performance": "Performance",
+  "sizeAndOwnership": "Company",
+  "noDetailYet": "No detail for this company yet",
+  "noPriceHistory": "No price history for this company",
+  "noSessionsInRange": "No sessions in this range",
+  "noStudyYet": "No study published on this company yet",
+  "noStudyYetBody": "Companies are studied one at a time. When this one is read, the investigation appears here.",
+  "readFullInvestigation": "Read the full investigation",
+  "scannerHistory": "Opportunity Scanner history",
+  "studyLabel": "Six Pillars",
+  "lastSessions": "Last {count} sessions",
+  "@lastSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "canIGetOut": "Can I get out?",
+  "itStopsTrading": "It stops trading",
+  "scanNoReport": "No scanner report downloaded yet",
+  "scanNoReportBody": "The scanner publishes after each session. Open this once with a connection and it stays on the device.",
+  "scanNotRunToday": "The scanner has not run today",
+  "scanNotRunTodayBody": "Nothing has cleared the test since the last session. That is a result, not an error.",
+  "scanReportDateUnknown": "Report date unknown",
+  "scanQualifiedBlurb": "Cleared every rule. Clearing a rule is a fact about the rule, not a view on the company.",
+  "scanWatchingBlurb": "Cleared some rules and not others. Incomplete evidence is a statement about our test, not about the share.",
+  "scanRejectedBlurb": "Did not clear the rules, and kept on the record so the test can be audited.",
+  "scanLogEmpty": "The rule log is empty",
+  "scanNothingQualified": "Nothing qualified today",
+  "scanNothingWatch": "Nothing on the watch list",
+  "scanNothingRejected": "Nothing was rejected today",
+  "scanEmptyBlurb": "An empty section is a real answer. The test does not lower itself to fill a screen.",
+  "coverage": "Coverage",
+  "coverageTradable": "Tradable",
+  "coverageListed": "Listed",
+  "coverageAdjusted": "Adjusted",
+  "coverageBlurb": "Every listed company is read. Most of them fail, and the ones that fail are published too.",
+  "catalyst": "Catalyst",
+  "fullRecord": "Full record",
+  "sourcesLabel": "Sources",
+  "evidenceLabel": "Evidence",
+  "whatWasChecked": "What was checked",
+  "gatePassed": "Passed",
+  "gateFailed": "Failed",
+  "gateUnresolved": "Unresolved"
 }

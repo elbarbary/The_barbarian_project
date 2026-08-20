@@ -16,6 +16,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The Opportunity Scanner (spec §7, §8).
 ///
@@ -54,6 +55,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final async = ref.watch(opportunityReportProvider);
     final isSample = ref.watch(isSampleDataProvider);
@@ -72,7 +74,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
         ),
         BAsyncView(
           value: async,
-          errorTitle: 'No scanner report downloaded yet',
+          errorTitle: l.scanNoReport,
           errorBody:
               'The scanner publishes after each session. Open this once with '
               'a connection and the latest report stays on the device.',
@@ -80,8 +82,8 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
             final report = sourced.value;
 
             if (report.isEmpty) {
-              return const BEmptyState(
-                title: 'The scanner has not run today',
+              return BEmptyState(
+                title: l.scanNotRunToday,
                 body:
                     'Nothing has cleared the test since the last session. '
                     'That is a result, not an error.',
@@ -118,7 +120,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   children: [
                     BStalenessCaption(
                       report.reportDate == null
-                          ? 'Report date unknown'
+                          ? l.scanReportDateUnknown
                           : 'Updated · ${_formatDate(report.reportDate!)}',
                     ),
                     if (isSample) const BSampleDataNotice(),
@@ -169,15 +171,12 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   const SizedBox(height: 14),
                   Text(switch (_section) {
                     _Section.qualified =>
-                      'Cleared every rule. Clearing a rule is a fact about the '
-                          'rule, not a view on the company.',
+                      l.scanQualifiedBlurb,
                     // "Accumulation" is a trading instruction wearing a noun.
                     _Section.watching =>
-                      'Cleared some rules and not others. Incomplete evidence '
-                          'is a statement about our test, not about the share.',
+                      l.scanWatchingBlurb,
                     _Section.rejected =>
-                      'Did not clear the rules, and kept on the record so the '
-                          'test can be audited.',
+                      l.scanRejectedBlurb,
                     _Section.record =>
                       'What the published rule said, what the tape did next, '
                           'and what was changed in the rule afterwards. It is '
@@ -187,8 +186,8 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   const SizedBox(height: 16),
                   if (_section == _Section.record)
                     if (report.outcomes.isEmpty)
-                      const BEmptyState(
-                        title: 'The rule log is empty',
+                      BEmptyState(
+                        title: l.scanLogEmpty,
                         body:
                             'Entries appear here as each published rule '
                             'reaches its stated end.',
@@ -204,9 +203,9 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   else if (entries.isEmpty)
                     BEmptyState(
                       title: switch (_section) {
-                        _Section.qualified => 'Nothing qualified today',
-                        _Section.watching => 'Nothing on the watch list',
-                        _ => 'Nothing was rejected today',
+                        _Section.qualified => l.scanNothingQualified,
+                        _Section.watching => l.scanNothingWatch,
+                        _ => l.scanNothingRejected,
                       },
                       body:
                           'An empty section is a real answer. The test does not '
@@ -259,6 +258,7 @@ class _CoverageStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final coverage = report.coverage;
 
@@ -267,14 +267,14 @@ class _CoverageStrip extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const BSectionLabel('Coverage', onDark: true),
+          BSectionLabel(l.coverage, onDark: true),
           Row(
             children: [
-              _CoverageStat(value: '${coverage.thndr}', label: 'Tradable'),
-              _CoverageStat(value: '${coverage.egx}', label: 'Listed'),
+              _CoverageStat(value: '${coverage.thndr}', label: l.coverageTradable),
+              _CoverageStat(value: '${coverage.egx}', label: l.coverageListed),
               _CoverageStat(
                 value: '${coverage.adjustedHistories}',
-                label: 'Adjusted',
+                label: l.coverageAdjusted,
               ),
             ],
           ),
@@ -333,6 +333,7 @@ class _ScannedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return BPressable(
@@ -394,7 +395,7 @@ class _ScannedCard extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const BKindChip('Catalyst', variant: BChipVariant.ember),
+                  BKindChip(l.catalyst, variant: BChipVariant.ember),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
@@ -469,7 +470,7 @@ class _ScannedCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Full record',
+                  l.fullRecord,
                   style: BarbarianType.labelS.copyWith(
                     color: c.textPrimary,
                     decoration: TextDecoration.underline,

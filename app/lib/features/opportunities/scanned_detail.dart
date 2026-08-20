@@ -13,6 +13,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import 'opportunity_screen.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The full record behind one scanned name.
 ///
@@ -65,6 +66,7 @@ class ScannedDetailSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return DraggableScrollableSheet(
@@ -234,12 +236,12 @@ class ScannedDetailSheet extends ConsumerWidget {
             ],
             if (entry.gates.isNotEmpty) ...[
               const SizedBox(height: 22),
-              const BSectionLabel('What was checked'),
+              BSectionLabel(l.whatWasChecked),
               BScanGates(gates: entry.gates),
             ],
             if (entry.research.isNotEmpty) ...[
               const SizedBox(height: 22),
-              const BSectionLabel('Evidence'),
+              BSectionLabel(l.evidenceLabel),
               BPaperCard(
                 radius: BarbarianRadius.xl,
                 child: Column(
@@ -308,7 +310,7 @@ class ScannedDetailSheet extends ConsumerWidget {
             ],
             if (entry.sources.isNotEmpty) ...[
               const SizedBox(height: 22),
-              const BSectionLabel('Sources'),
+              BSectionLabel(l.sourcesLabel),
               BPaperCard(
                 radius: BarbarianRadius.xl,
                 padding: const EdgeInsets.symmetric(horizontal: 18),
