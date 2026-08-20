@@ -2,6 +2,7 @@ import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
+import 'package:barbarian/core/models/rates.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -43,14 +44,52 @@ void main() {
     );
   });
 
-  testWidgets('it shows the index level', (tester) async {
+  testWidgets('it shows all three index levels, not just the thirty', (
+    tester,
+  ) async {
+    // The EGX 30 alone says whether the thirty largest listings moved, which
+    // is a different question from whether the market did. The 70 and the 100
+    // are equal-weighted, so the three disagreeing is the interesting case.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining('EGX30'));
+    await pumpUntil(tester, find.textContaining('EGX 30'));
 
-    expect(find.textContaining('EGX30'), findsWidgets);
-    // Split into an integer and a decimal part, so a five-figure index reads
-    // at a glance without rounding away what moved.
-    expect(find.textContaining(RegExp(r'^\.\d\d$')), findsWidgets);
+    // Two is the assertion that matters: the screen used to carry the EGX 30
+    // and nothing else. The third card sits further along a horizontal rail
+    // that is itself below the fold, so it is not built in a test viewport —
+    // the model test below covers that all three are offered.
+    for (final name in ['EGX 30', 'EGX 70']) {
+      expect(
+        find.textContaining(name),
+        findsWidgets,
+        reason: '$name should have a card',
+      );
+    }
+  });
+
+  test('every published index is offered a card', () {
+    // The rail renders whatever the rates document carries, so this is the
+    // check that nothing is being dropped on the way to the screen.
+    final rates = RatesDoc.fromJson(readFixtureObjectSync('rates/latest.json'));
+    expect(rates.indices.map((i) => i.id), containsAll(<String>[
+      'EGX30',
+      'EGX70EWI',
+      'EGX100EWI',
+    ]));
+  });
+
+  testWidgets('it counts what rose and what fell', (tester) async {
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('rose', caseSensitive: false)));
+
+    // Counted from the shares themselves — no breadth figure is published for
+    // this exchange.
+    for (final label in ['rose', 'fell', 'unchanged']) {
+      expect(
+        find.textContaining(RegExp(label, caseSensitive: false)),
+        findsWidgets,
+      );
+    }
+    expect(find.textContaining(RegExp(r'of \d+ shares')), findsWidgets);
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {

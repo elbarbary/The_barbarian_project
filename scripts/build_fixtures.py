@@ -88,6 +88,7 @@ def write(path: Path, payload: dict) -> None:
 
 RESOURCES = {
     "market": ["market.json"],
+    "market_history": ["market-history.json"],
     "companies": ["companies.json"],
     "opportunities": ["opportunities/latest.json"],
     "cash_or_trash": ["cash-or-trash/index.json"],

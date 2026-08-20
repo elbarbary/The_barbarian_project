@@ -824,4 +824,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String detailOpenTicker(String ticker) {
     return 'Open $ticker';
   }
+
+  @override
+  String get homeFiledHero => 'Filed with the exchange';
+
+  @override
+  String get homeRoseAndFell => 'What rose and what fell';
+
+  @override
+  String get homeIndices => 'The indices';
+
+  @override
+  String get breadthUp => 'rose';
+
+  @override
+  String get breadthDown => 'fell';
+
+  @override
+  String get breadthFlat => 'unchanged';
+
+  @override
+  String breadthOf(int count) {
+    return 'of $count shares';
+  }
+
+  @override
+  String get breadthChartTitle => 'How the market split, session by session';
+
+  @override
+  String get breadthOneSession =>
+      'One session recorded so far. The lines grow as each session is written down — there is no published breadth history to backfill from.';
+
+  @override
+  String get indexNoSeries =>
+      'Levels are recorded one session at a time. No index series is published to backfill from.';
 }

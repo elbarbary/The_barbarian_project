@@ -5,11 +5,13 @@ import 'package:go_router/go_router.dart';
 import '../../app/router.dart';
 import '../../core/models/company.dart';
 import '../../core/models/disclosure.dart';
+import '../../core/models/market_history.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/news.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
+import '../../core/widgets/breadth_chart.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/models/explainer.dart';
 import '../../core/widgets/composites.dart';
@@ -64,11 +66,15 @@ class HomeScreen extends ConsumerWidget {
         // in that order: what matters today, and what has just happened. It
         // used to open on one filing under a label that repeated itself, which
         // told a reader neither.
-        BSectionLabel(l.homeImportantToday),
+        // Filings lead. They are the only thing on this screen the exchange
+        // itself published about a named company on the day it happened —
+        // everything else is either a price or somebody's reporting of one.
+        BSectionLabel(l.homeFiledHero),
         const _DailyInsight(),
-        const _LatestNews(),
-        const _IndexStrip(),
         const _AlsoFiled(),
+        const _Breadth(),
+        const _Indices(),
+        const _LatestNews(),
         const _WatchlistBlock(),
       ],
     );
@@ -270,32 +276,65 @@ class _DailyInsight extends ConsumerWidget {
   }
 }
 
-/// The EGX 30, on a flat black card.
+/// EGX 30, 70 and 100 side by side, each with the shape we have so far.
 ///
-/// The board splits the level into a large integer part and a smaller decimal
-/// part, which is worth keeping: it makes a five-figure index readable at a
-/// glance without rounding away what moved.
-class _IndexStrip extends ConsumerWidget {
-  const _IndexStrip();
+/// One index told a reader whether the thirty largest listings moved, which is
+/// not the same question as whether the market did — the 70 and the 100 are
+/// equal-weighted, so a day where they fall while the 30 rises is a day carried
+/// by a handful of heavyweights. Three cards make that visible at a glance.
+///
+/// The sparkline is drawn from `market-history.json`, which is written one
+/// session at a time because no index series is published anywhere we can
+/// reach. Until there are two sessions there is nothing to draw and the card
+/// simply carries the level, which is what it did before.
+class _Indices extends ConsumerWidget {
+  const _Indices();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.colors;
+    final l = AppLocalizations.of(context);
     final rates = ref.watch(ratesProvider).whenOrNull(data: (s) => s.value);
-    final index = _egx30(rates);
-    if (index == null || index.level == null) return const SizedBox.shrink();
+    final history = ref
+        .watch(marketHistoryProvider)
+        .whenOrNull(data: (s) => s.value);
+    final indices = rates?.indices ?? const <RateRow>[];
+    if (indices.isEmpty) return const SizedBox.shrink();
 
-    final level = index.level!;
-    final whole = level.floor();
-    final decimals = ((level - whole) * 100).round().toString().padLeft(2, '0');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BSectionLabel(l.homeIndices),
+        SizedBox(
+          height: 132,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            itemCount: indices.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
+            itemBuilder: (context, i) => _IndexCard(
+              index: indices[i],
+              series: history?.levelsOf(indices[i].id) ?? const [],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _IndexCard extends StatelessWidget {
+  const _IndexCard({required this.index, required this.series});
+
+  final RateRow index;
+  final List<double> series;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final level = index.level;
     final change = index.changePercent;
 
     return BPressable(
-      // §50, and the founder's "where is the why and how": the rates document
-      // has carried `workings` and `yardstick` for every index all along and
-      // nothing read them. A five-figure number with a percent beside it is
-      // the least self-explaining thing on the screen, so it is the one that
-      // most needs to open into its own arithmetic.
       onTap: () => showExplainer(
         context,
         Explainer(
@@ -305,69 +344,59 @@ class _IndexStrip extends ConsumerWidget {
           token: index.token,
           workings: index.workings,
           yardstick: index.yardstick,
-          // An index level has no published band to be unusual against. Said
-          // out loud rather than defaulted to ordinary, which would be a claim.
+          // An index level has no published band to be unusual against, and
+          // defaulting to "ordinary" would be a claim.
           notability: Notability.unjudged,
           source: index.source,
         ),
       ),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      // Split so a five-figure index stays readable without
-                      // rounding away the part that moved.
-                      BNumText(
-                        _grouped(whole),
-                        style: BarbarianType.displayS.copyWith(color: c.onInk),
-                      ),
-                      BNumText(
-                        '.$decimals',
-                        style: BarbarianType.bodyM.copyWith(
-                          color: c.onInkMuted,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Flexible(child: BKindChip(index.id)),
-                    ],
-                  ),
-                  // No label line: the chip beside the level already says
-                  // EGX30, and printing "EGX 30" under it says it twice.
-                ],
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
+        child: SizedBox(
+          width: 148,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                index.label.isEmpty ? index.id : index.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: BarbarianType.labelTiny.copyWith(
+                  color: c.onInkMuted,
+                  letterSpacing: 1.2,
+                ),
               ),
-            ),
-            if (change != null) ...[
-              const SizedBox(width: 12),
-              BChangeDelta(
-                value: '${change.abs().toStringAsFixed(2)}%',
-                direction: BDirection.of(change),
-                onDark: true,
+              const SizedBox(height: 8),
+              BNumText(
+                level == null ? '—' : _grouped(level),
+                style: BarbarianType.headlineM.copyWith(color: c.onInk),
               ),
+              const SizedBox(height: 4),
+              if (change != null)
+                BChangeDelta(
+                  value: '${change.abs().toStringAsFixed(2)}%',
+                  direction: BDirection.of(change),
+                  onDark: true,
+                ),
+              const Spacer(),
+              // Two points is the minimum that says anything. One is a level
+              // we have already printed above in a larger font.
+              if (series.length > 1)
+                BSparkline(values: series, height: 26)
+              else
+                const SizedBox(height: 26),
             ],
-          ],
+          ),
         ),
       ),
     );
   }
 
-  static RateRow? _egx30(RatesDoc? rates) {
-    for (final row in rates?.indices ?? const <RateRow>[]) {
-      if (row.id == 'EGX30') return row;
-    }
-    return (rates?.indices ?? const <RateRow>[]).firstOrNull;
-  }
-
-  static String _grouped(int value) {
-    final digits = value.toString();
+  static String _grouped(double value) {
+    final whole = value.floor();
+    final digits = whole.toString();
     final buffer = StringBuffer();
     for (var i = 0; i < digits.length; i++) {
       if (i > 0 && (digits.length - i) % 3 == 0) buffer.write(',');
@@ -377,12 +406,6 @@ class _IndexStrip extends ConsumerWidget {
   }
 }
 
-/// The watchlist, as the board's 2×2 checkerboard of tiles.
-///
-/// §8.4 governs what may appear here: a watchlist row is a price, not a
-/// reading. A list the reader assembled, each row carrying this app's
-/// assessment, is a personalised recommendation list however it was built. So
-/// these tiles carry ticker, name, trend, price and change, and nothing else.
 class _WatchlistBlock extends ConsumerWidget {
   const _WatchlistBlock();
 
@@ -687,50 +710,240 @@ class _LatestNews extends ConsumerWidget {
                   Divider(height: 1, color: c.hairline),
                   const SizedBox(height: 12),
                 ],
-                // Direction per headline: the feeds are mixed, and forcing one
-                // lays the other language out backwards.
-                Directionality(
-                  textDirection: isArabic(item.headline)
-                      ? TextDirection.rtl
-                      : TextDirection.ltr,
-                  child: Text(
-                    item.headline,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: BarbarianType.bodyM.copyWith(
-                      color: c.textPrimary,
-                      height: 1.45,
-                    ),
+                // Tappable, out to the outlet that ran it. A headline a
+                // reader cannot open is a claim they cannot check, and this
+                // app does not retell somebody else's reporting.
+                BPressable(
+                  onTap: () {
+                    final link = item.sources
+                        .map((s) => s.link)
+                        .firstWhere((s) => s.isNotEmpty, orElse: () => '');
+                    if (link.isEmpty) return;
+                    context.push(
+                      Routes.articlePath(
+                        BNavTab.home,
+                        link,
+                        outletsFor(item) ?? l.homeLatestNews,
+                      ),
+                    );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Directionality(
+                        textDirection: isArabic(item.headline)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        child: Text(
+                          item.headline,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: BarbarianType.bodyM.copyWith(
+                            color: c.textPrimary,
+                            height: 1.45,
+                          ),
+                        ),
+                      ),
+                      // Why a reader should care, not just what happened. "A
+                      // company signed a contract" is an event; "a contract is
+                      // revenue that has not been earned yet" is the reason it is
+                      // worth a glance. Written once per type by a person, shared
+                      // with the filings feed.
+                      if (item.meaningFor(arabic) case final String why
+                          when why.isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          why,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: BarbarianType.bodyS.copyWith(
+                            color: c.textSecondary,
+                            height: 1.45,
+                          ),
+                        ),
+                      ],
+                      if (outletsFor(item) case final String outlets) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          outlets,
+                          style: BarbarianType.labelNano.copyWith(
+                            color: c.textFaint,
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
-                // Why a reader should care, not just what happened. "A
-                // company signed a contract" is an event; "a contract is
-                // revenue that has not been earned yet" is the reason it is
-                // worth a glance. Written once per type by a person, shared
-                // with the filings feed.
-                if (item.meaningFor(arabic) case final String why
-                    when why.isNotEmpty) ...[
-                  const SizedBox(height: 6),
-                  Text(
-                    why,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: BarbarianType.bodyS.copyWith(
-                      color: c.textSecondary,
-                      height: 1.45,
-                    ),
-                  ),
-                ],
-                if (outletsFor(item) case final String outlets) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    outlets,
-                    style: BarbarianType.labelNano.copyWith(color: c.textFaint),
-                  ),
-                ],
               ],
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
+
+/// What rose and what fell — the sentence that says whether a green index was
+/// the whole market or three heavyweights carrying it.
+///
+/// Counted from the shares themselves, not from any published breadth figure,
+/// because none exists for this exchange. Tapping opens the same three counts
+/// as lines over every session recorded so far.
+class _Breadth extends ConsumerWidget {
+  const _Breadth();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final history = ref
+        .watch(marketHistoryProvider)
+        .whenOrNull(data: (s) => s.value);
+    final latest = history?.latest?.breadth;
+    if (latest == null || latest.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BSectionLabel(l.homeRoseAndFell),
+        BPressable(
+          onTap: () => _openChart(context, history!, l),
+          child: BPaperCard(
+            radius: BarbarianRadius.xl,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _Count(value: latest.up, label: l.breadthUp, tone: c.up),
+                    const SizedBox(width: 14),
+                    _Count(
+                      value: latest.down,
+                      label: l.breadthDown,
+                      tone: c.down,
+                    ),
+                    const SizedBox(width: 14),
+                    _Count(
+                      value: latest.flat,
+                      label: l.breadthFlat,
+                      tone: c.textFaint,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  l.breadthOf(latest.counted),
+                  style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  static void _openChart(
+    BuildContext context,
+    MarketHistory history,
+    AppLocalizations l,
+  ) {
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        final c = context.colors;
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(18),
+            child: BPaperCard(
+              radius: BarbarianRadius.xl,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l.breadthChartTitle,
+                    style: BarbarianType.headlineM.copyWith(
+                      color: c.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  BBreadthChart(sessions: history.sessions),
+                  const SizedBox(height: 14),
+                  Row(
+                    children: [
+                      _Key(label: l.breadthUp, tone: c.up),
+                      const SizedBox(width: 14),
+                      _Key(label: l.breadthDown, tone: c.down),
+                      const SizedBox(width: 14),
+                      _Key(label: l.breadthFlat, tone: c.textFaint),
+                    ],
+                  ),
+                  if (history.sessions.length < 2) ...[
+                    const SizedBox(height: 14),
+                    Text(
+                      l.breadthOneSession,
+                      style: BarbarianType.bodyS.copyWith(
+                        color: c.textFaint,
+                        height: 1.45,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _Count extends StatelessWidget {
+  const _Count({required this.value, required this.label, required this.tone});
+
+  final int value;
+  final String label;
+  final Color tone;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        BNumText('$value', style: BarbarianType.displayS.copyWith(color: tone)),
+        Text(
+          label,
+          style: BarbarianType.labelTiny.copyWith(
+            color: c.textMuted,
+            letterSpacing: 1.2,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Key extends StatelessWidget {
+  const _Key({required this.label, required this.tone});
+
+  final String label;
+  final Color tone;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(width: 14, height: 2, color: tone),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: BarbarianType.labelNano.copyWith(color: c.textMuted),
         ),
       ],
     );

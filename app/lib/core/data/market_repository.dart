@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import '../models/company.dart';
 import '../models/manifest.dart';
+import '../models/market_history.dart';
 import '../models/market_snapshot.dart';
 import '../networking/static_api.dart';
 import 'sourced.dart';
@@ -23,6 +24,11 @@ class MarketRepository {
   /// The whole market in one document (spec §18). Never called per-ticker.
   Stream<Sourced<MarketSnapshot>> getMarketSnapshot() =>
       _parsed('market.json', 'market', MarketSnapshot.fromJson);
+
+  /// Index closes and breadth, one row per session (see the model for why
+  /// this is accumulated rather than fetched).
+  Stream<Sourced<MarketHistory>> getMarketHistory() =>
+      _parsed('market-history.json', 'market_history', MarketHistory.fromJson);
 
   Stream<Sourced<CompanyDirectory>> getCompanies() =>
       _parsed('companies.json', 'companies', CompanyDirectory.fromJson);

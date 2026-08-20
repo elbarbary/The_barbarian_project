@@ -14,6 +14,7 @@ import 'models/disclosure.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
 import 'models/company.dart';
+import 'models/market_history.dart';
 import 'models/market_snapshot.dart';
 import 'models/opportunity.dart';
 import 'models/price_freshness.dart';
@@ -108,6 +109,10 @@ final disclosuresProvider = StreamProvider<Sourced<DisclosureFeed>>(
   (ref) => ref.watch(researchRepositoryProvider).getDisclosures(),
 );
 
+final marketHistoryProvider = StreamProvider<Sourced<MarketHistory>>(
+  (ref) => ref.watch(marketRepositoryProvider).getMarketHistory(),
+);
+
 final ratesProvider = StreamProvider<Sourced<RatesDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getRates(),
 );
@@ -153,6 +158,7 @@ final contentRefreshProvider = Provider<void>((ref) {
       ref.invalidate(opportunityReportProvider);
       ref.invalidate(cashOrTrashProvider);
       ref.invalidate(newsProvider);
+      ref.invalidate(marketHistoryProvider);
       ref.invalidate(ratesProvider);
       ref.invalidate(disclosuresProvider);
     },

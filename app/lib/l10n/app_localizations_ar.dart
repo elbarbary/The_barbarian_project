@@ -822,4 +822,38 @@ class AppLocalizationsAr extends AppLocalizations {
   String detailOpenTicker(String ticker) {
     return 'افتح $ticker';
   }
+
+  @override
+  String get homeFiledHero => 'مُودَع لدى البورصة';
+
+  @override
+  String get homeRoseAndFell => 'ما ارتفع وما انخفض';
+
+  @override
+  String get homeIndices => 'المؤشرات';
+
+  @override
+  String get breadthUp => 'ارتفع';
+
+  @override
+  String get breadthDown => 'انخفض';
+
+  @override
+  String get breadthFlat => 'دون تغيير';
+
+  @override
+  String breadthOf(int count) {
+    return 'من $count سهمًا';
+  }
+
+  @override
+  String get breadthChartTitle => 'كيف انقسم السوق، جلسة بعد جلسة';
+
+  @override
+  String get breadthOneSession =>
+      'جلسة واحدة مسجّلة حتى الآن. تنمو الخطوط مع تسجيل كل جلسة — لا يوجد تاريخ منشور لاتساع السوق نستعيده.';
+
+  @override
+  String get indexNoSeries =>
+      'تُسجَّل المستويات جلسة بجلسة. لا توجد سلسلة منشورة للمؤشر نستعيدها.';
 }

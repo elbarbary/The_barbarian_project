@@ -43,6 +43,10 @@ STEPS = [
     ("Disclosures", "build_disclosures_api.py", True),
     ("News", "build_news_api.py", True),
     ("Rates", "build_rates_api.py", True),
+    # After Market and Rates: it reads what they published and writes one row
+    # per session, which is the only way this app will ever have an index
+    # series or a breadth history.
+    ("Index levels + breadth", "build_market_history.py", False),
     ("Manifest + fixtures", "build_fixtures.py", False),
 ]
 

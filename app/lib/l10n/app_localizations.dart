@@ -1537,6 +1537,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open {ticker}'**
   String detailOpenTicker(String ticker);
+
+  /// No description provided for @homeFiledHero.
+  ///
+  /// In en, this message translates to:
+  /// **'Filed with the exchange'**
+  String get homeFiledHero;
+
+  /// No description provided for @homeRoseAndFell.
+  ///
+  /// In en, this message translates to:
+  /// **'What rose and what fell'**
+  String get homeRoseAndFell;
+
+  /// No description provided for @homeIndices.
+  ///
+  /// In en, this message translates to:
+  /// **'The indices'**
+  String get homeIndices;
+
+  /// No description provided for @breadthUp.
+  ///
+  /// In en, this message translates to:
+  /// **'rose'**
+  String get breadthUp;
+
+  /// No description provided for @breadthDown.
+  ///
+  /// In en, this message translates to:
+  /// **'fell'**
+  String get breadthDown;
+
+  /// No description provided for @breadthFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'unchanged'**
+  String get breadthFlat;
+
+  /// No description provided for @breadthOf.
+  ///
+  /// In en, this message translates to:
+  /// **'of {count} shares'**
+  String breadthOf(int count);
+
+  /// No description provided for @breadthChartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How the market split, session by session'**
+  String get breadthChartTitle;
+
+  /// No description provided for @breadthOneSession.
+  ///
+  /// In en, this message translates to:
+  /// **'One session recorded so far. The lines grow as each session is written down — there is no published breadth history to backfill from.'**
+  String get breadthOneSession;
+
+  /// No description provided for @indexNoSeries.
+  ///
+  /// In en, this message translates to:
+  /// **'Levels are recorded one session at a time. No index series is published to backfill from.'**
+  String get indexNoSeries;
 }
 
 class _AppLocalizationsDelegate

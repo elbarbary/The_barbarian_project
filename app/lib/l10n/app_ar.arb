@@ -239,5 +239,15 @@
   "detailLastSession": "آخر جلسة مكتملة",
   "detailMoveSince": "التغيّر منذ رصده",
   "detailHowScored": "كيف يُقيَّم الاسم",
-  "detailOpenTicker": "افتح {ticker}"
+  "detailOpenTicker": "افتح {ticker}",
+  "homeFiledHero": "مُودَع لدى البورصة",
+  "homeRoseAndFell": "ما ارتفع وما انخفض",
+  "homeIndices": "المؤشرات",
+  "breadthUp": "ارتفع",
+  "breadthDown": "انخفض",
+  "breadthFlat": "دون تغيير",
+  "breadthOf": "من {count} سهمًا",
+  "breadthChartTitle": "كيف انقسم السوق، جلسة بعد جلسة",
+  "breadthOneSession": "جلسة واحدة مسجّلة حتى الآن. تنمو الخطوط مع تسجيل كل جلسة — لا يوجد تاريخ منشور لاتساع السوق نستعيده.",
+  "indexNoSeries": "تُسجَّل المستويات جلسة بجلسة. لا توجد سلسلة منشورة للمؤشر نستعيدها."
 }

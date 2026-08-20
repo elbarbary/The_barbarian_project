@@ -1,0 +1,19 @@
+{
+ "updated_at": "2026-08-20T06:36:40.943Z",
+ "sessions": [
+  {
+   "date": "2026-08-20",
+   "indices": {
+    "EGX30": 54737.1,
+    "EGX70EWI": 20816,
+    "EGX100EWI": 27052.4
+   },
+   "breadth": {
+    "up": 57,
+    "down": 177,
+    "flat": 48,
+    "counted": 282
+   }
+  }
+ ]
+}
