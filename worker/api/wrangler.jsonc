@@ -1,0 +1,45 @@
+{
+  // The community and sync API. Separate from `thebarbarianproject` (the
+  // static site, which has no `main` and serves everything a reader browses)
+  // and from `barbarian-quotes`, so that a bad deploy here breaks sync and
+  // nothing a signed-out reader can see.
+  "name": "barbarian-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-01",
+  "observability": {
+    "enabled": true
+  },
+
+  // Client IDs, not secrets. Every one of these values already ships inside
+  // the app binary, so treating them as confidential would be theatre — but
+  // they must be *present*, because they are the allow-list that stops a token
+  // minted for somebody else's app being accepted here (see src/auth.js).
+  "vars": {
+    "GOOGLE_CLIENT_IDS": "",
+    "APPLE_CLIENT_IDS": ""
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "barbarian",
+      "database_id": "PLACEHOLDER_CREATE_WITH_WRANGLER_D1_CREATE",
+      "migrations_dir": "./migrations"
+    }
+  ],
+
+  // Coarse abuse protection (§53). Per-location and eventually consistent,
+  // which is the right shape for a brake on abuse: 60 writes a minute is far
+  // above anything a person tapping a bookmark can produce and far below
+  // anything that could threaten the daily D1 write budget.
+  "ratelimits": [
+    {
+      "name": "WRITE_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 60,
+        "period": 60
+      }
+    }
+  ]
+}
