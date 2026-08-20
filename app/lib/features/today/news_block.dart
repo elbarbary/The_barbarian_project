@@ -76,6 +76,7 @@ class _Headline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final c = context.colors;
     // Every outlet that ran it, named. A story three papers carried is more
     // established than one a single paper has, and hiding that behind a
@@ -134,11 +135,11 @@ class _Headline extends StatelessWidget {
             // somebody else's sentence in their own language either way, and
             // it is not translated or trimmed.
             Directionality(
-              textDirection: isArabic(item.headline)
+              textDirection: isArabic(item.headlineFor(arabic))
                   ? TextDirection.rtl
                   : TextDirection.ltr,
               child: Text(
-                item.headline,
+                item.headlineFor(arabic),
                 style: BarbarianType.bodyL.copyWith(
                   color: c.textPrimary,
                   height: 1.5,

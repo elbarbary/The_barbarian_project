@@ -102,6 +102,7 @@ def _fetch_under_scrapling(url: str) -> str:
     script = r'''
 import sys, json
 from scrapling.fetchers import StealthyFetcher
+import translations
 
 url = sys.argv[1]
 pages = []
@@ -407,6 +408,15 @@ def main() -> int:
 
     learn_names(items)
     classify_all(items)
+    # EGX files in Arabic without exception, so an English reader saw an
+    # English interface wrapped around a title they could not read. The Arabic
+    # title stays; this sits beside it.
+    english = translations.english_for(
+        [i["title"] for i in items], label="filing titles"
+    )
+    for item in items:
+        if (rendered := english.get(item["title"])) is not None:
+            item["title_en"] = rendered
     for item in items:
         item.update(triage(item))
 

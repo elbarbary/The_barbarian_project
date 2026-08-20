@@ -43,6 +43,7 @@ Map<String, dynamic> _$DisclosureSourceToJson(_DisclosureSource instance) =>
 _Disclosure _$DisclosureFromJson(Map<String, dynamic> json) => _Disclosure(
   id: json['id'] as String,
   title: json['title'] as String,
+  titleEn: json['title_en'] as String?,
   date: json['date'] as String? ?? '',
   link: json['link'] as String? ?? '',
   tickers:
@@ -65,6 +66,7 @@ Map<String, dynamic> _$DisclosureToJson(_Disclosure instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
+      'title_en': instance.titleEn,
       'date': instance.date,
       'link': instance.link,
       'tickers': instance.tickers,

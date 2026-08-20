@@ -75,6 +75,7 @@ class _Filing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final c = context.colors;
 
     return BPressable(
@@ -129,11 +130,11 @@ class _Filing extends StatelessWidget {
               // string rather than assumed: the day the exchange publishes an
               // English title, this lays it out correctly instead of
               // backwards.
-              textDirection: isArabic(item.title)
+              textDirection: isArabic(item.titleFor(arabic))
                   ? TextDirection.rtl
                   : TextDirection.ltr,
               child: Text(
-                item.title,
+                item.titleFor(arabic),
                 style: BarbarianType.bodyL.copyWith(
                   color: c.textPrimary,
                   height: 1.5,

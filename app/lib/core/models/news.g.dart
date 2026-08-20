@@ -62,6 +62,7 @@ Map<String, dynamic> _$NewsOutageToJson(_NewsOutage instance) =>
 _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
   id: json['id'] as String,
   headline: json['headline'] as String,
+  headlineEn: json['headline_en'] as String?,
   published: json['published'] as String? ?? '',
   sources:
       (json['sources'] as List<dynamic>?)
@@ -87,6 +88,7 @@ _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
 Map<String, dynamic> _$NewsItemToJson(_NewsItem instance) => <String, dynamic>{
   'id': instance.id,
   'headline': instance.headline,
+  'headline_en': instance.headlineEn,
   'published': instance.published,
   'sources': instance.sources,
   'event': instance.event,

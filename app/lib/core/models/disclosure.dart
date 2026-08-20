@@ -48,6 +48,10 @@ abstract class Disclosure with _$Disclosure {
   const factory Disclosure({
     required String id,
     required String title,
+
+    /// The exchange files in Arabic without exception. This is the cached
+    /// English, beside it rather than over it.
+    @JsonKey(name: 'title_en') String? titleEn,
     @Default('') String date,
     @Default('') String link,
 
@@ -75,6 +79,10 @@ abstract class Disclosure with _$Disclosure {
   }) = _Disclosure;
 
   const Disclosure._();
+
+  /// The filing title in the language being read, falling back to the Arabic
+  /// the exchange published.
+  String titleFor(bool arabic) => arabic ? title : (titleEn ?? title);
 
   /// The explanation, in the language being read.
   ///

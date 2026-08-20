@@ -48,6 +48,7 @@ import urllib.parse
 import urllib.request
 
 import filing_types as ft
+import translations
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "news"
@@ -653,6 +654,15 @@ def main() -> int:
     if not doc["items"]:
         print("no headlines fetched — leaving the published document alone")
         return 1
+
+    # English for an English reader. The Arabic stays on every item — the
+    # translation sits beside it, never over it.
+    english = translations.english_for(
+        [i["headline"] for i in doc["items"]], label="headlines"
+    )
+    for item in doc["items"]:
+        if (rendered := english.get(item["headline"])) is not None:
+            item["headline_en"] = rendered
 
     checks = sum(1 for i in doc["items"] if i["weight"] == "check")
     named = sum(1 for i in doc["items"] if i["weight"] == "named")

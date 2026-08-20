@@ -731,11 +731,14 @@ class _LatestNews extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Directionality(
-                        textDirection: isArabic(item.headline)
+                        // Direction follows the string actually rendered, not
+                        // the original: an English translation laid out
+                        // right-to-left is the bug this replaced.
+                        textDirection: isArabic(item.headlineFor(arabic))
                             ? TextDirection.rtl
                             : TextDirection.ltr,
                         child: Text(
-                          item.headline,
+                          item.headlineFor(arabic),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: BarbarianType.bodyM.copyWith(

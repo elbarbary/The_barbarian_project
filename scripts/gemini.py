@@ -1,10 +1,22 @@
 #!/usr/bin/env python3
 """A small, deliberately narrow client for Gemini.
 
-Narrow on purpose. This exposes one function — pick a label from a closed list
-— because that is the only thing the design lets a model do to a named issuer
-(see the AI plan, and spec §8). There is no `summarise`, no `explain`, no
-`generate`. Adding one should require an argument, not an import.
+Narrow on purpose. There is no `summarise`, no `explain`, no `generate` —
+composing a sentence about a named issuer is the app speaking, and this
+publisher is not licensed to speak. Adding a capability here should require an
+argument, not an import.
+
+Two are allowed, and the argument for each is the same shape: neither invents a
+claim.
+
+  * `choose` picks a label from a closed list, which is taxonomy.
+  * `translate` renders somebody else's sentence in another language. It is
+    applied only to headlines and filing titles — words the exchange or an
+    outlet wrote — and never to this app's own analysis. The original is always
+    kept beside the translation, and every result is cached into a file that
+    ships in a commit, so a person can read what a model produced before it
+    reaches a phone. The failure mode is a mistranslation of a third party's
+    words, which is why the source text stays.
 
 Configuration lives in `.env` at the repo root as `GEMINI_API_KEY`, which is
 gitignored. Nothing here reads a key from anywhere else, and nothing here runs
@@ -21,6 +33,7 @@ from __future__ import annotations
 import json
 import os
 import pathlib
+import re
 import urllib.error
 import urllib.request
 
@@ -99,6 +112,77 @@ def choose(prompt: str, allowed: list[str], *, model: str = MODEL) -> str | None
         if token in allowed:
             return token
     return None
+
+
+def translate(texts: list[str], *, model: str = MODEL) -> dict[str, str]:
+    """Arabic in, English out, keyed by the original string.
+
+    Batched, because the meter charges per call as well as per token and these
+    are one-line headlines. Numbered in and numbered out so a dropped or
+    reordered line is detectable rather than silently attached to the wrong
+    story — anything that does not come back cleanly numbered is simply absent
+    from the result, and the caller keeps the Arabic.
+    """
+    texts = [t for t in dict.fromkeys(texts) if t.strip()]
+    if not texts:
+        return {}
+
+    numbered = "\n".join(f"{i + 1}. {t}" for i, t in enumerate(texts))
+    prompt = (
+        "Translate each numbered Arabic line into natural English.\n"
+        "Rules: keep the meaning exactly; do not summarise, explain or add "
+        "anything; keep company names, tickers and numbers as they are; "
+        "translate a headline as a headline.\n"
+        "Reply with the same numbering, one line each, and nothing else.\n\n"
+        + numbered
+    )
+
+    body = json.dumps(
+        {
+            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0,
+                "maxOutputTokens": 8000,
+                **THINKING_OFF,
+            },
+        }
+    ).encode()
+    request = urllib.request.Request(
+        ENDPOINT.format(model),
+        data=body,
+        headers={"x-goog-api-key": _key(), "content-type": "application/json"},
+    )
+    try:
+        payload = json.loads(urllib.request.urlopen(request, timeout=120).read())
+    except urllib.error.HTTPError as error:
+        # The quota response carries "Please retry in 51.9s". Passing that back
+        # is the difference between a backoff that guesses and one that knows.
+        detail = ""
+        try:
+            detail = error.read().decode()
+        except Exception:
+            pass
+        raise GeminiUnavailable(f"HTTP {error.code}: {detail[:400]}") from error
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+        raise GeminiUnavailable(str(error)[:120]) from error
+
+    candidates = payload.get("candidates") or []
+    if not candidates:
+        return {}
+    parts = candidates[0].get("content", {}).get("parts", [])
+    answer = "".join(p.get("text", "") for p in parts)
+
+    out: dict[str, str] = {}
+    for line in answer.splitlines():
+        line = line.strip()
+        match = re.match(r"^(\d+)[.)]\s*(.+)$", line)
+        if not match:
+            continue
+        index = int(match.group(1)) - 1
+        english = match.group(2).strip()
+        if 0 <= index < len(texts) and english:
+            out[texts[index]] = english
+    return out
 
 
 def available() -> bool:

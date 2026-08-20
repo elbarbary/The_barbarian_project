@@ -68,6 +68,11 @@ abstract class NewsItem with _$NewsItem {
   const factory NewsItem({
     required String id,
     required String headline,
+
+    /// The headline in English, when a translation has been cached for it.
+    /// The Arabic is never replaced — this sits beside it, and an English
+    /// reader gets this one.
+    @JsonKey(name: 'headline_en') String? headlineEn,
     @Default('') String published,
 
     /// Every outlet that carried this story, with its own link. One story told
@@ -107,6 +112,11 @@ abstract class NewsItem with _$NewsItem {
       _$NewsItemFromJson(json);
 
   DateTime? get publishedAt => DateTime.tryParse(published);
+
+  /// The headline in the language being read, falling back to what the outlet
+  /// actually wrote. A missing translation shows the Arabic rather than a gap.
+  String headlineFor(bool arabic) =>
+      arabic ? headline : (headlineEn ?? headline);
 
   /// The explanation, in the language being read.
   String meaningFor(bool arabic) =>

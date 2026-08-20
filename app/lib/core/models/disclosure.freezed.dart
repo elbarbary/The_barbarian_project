@@ -585,7 +585,9 @@ as String,
 /// @nodoc
 mixin _$Disclosure {
 
- String get id; String get title; String get date; String get link;/// Stamped into the title by the exchange as `(TICKER.CA)`.
+ String get id; String get title;/// The exchange files in Arabic without exception. This is the cached
+/// English, beside it rather than over it.
+@JsonKey(name: 'title_en') String? get titleEn; String get date; String get link;/// Stamped into the title by the exchange as `(TICKER.CA)`.
  List<String> get tickers;/// Which kind of filing this is, from a closed list.
  String get event;@JsonKey(name: 'event_label') String get eventLabel;@JsonKey(name: 'event_label_ar') String get eventLabelAr;/// What this kind of filing does to somebody holding the share. Written by
 /// a person once per type and reviewed — never generated per filing.
@@ -605,16 +607,16 @@ $DisclosureCopyWith<Disclosure> get copyWith => _$DisclosureCopyWithImpl<Disclos
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Disclosure&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other.tickers, tickers)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence)&&(identical(other.by, by) || other.by == by));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Disclosure&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other.tickers, tickers)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence)&&(identical(other.by, by) || other.by == by));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,date,link,const DeepCollectionEquality().hash(tickers),event,eventLabel,eventLabelAr,meaning,meaningAr,weight,because,evidence,by);
+int get hashCode => Object.hash(runtimeType,id,title,titleEn,date,link,const DeepCollectionEquality().hash(tickers),event,eventLabel,eventLabelAr,meaning,meaningAr,weight,because,evidence,by);
 
 @override
 String toString() {
-  return 'Disclosure(id: $id, title: $title, date: $date, link: $link, tickers: $tickers, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, weight: $weight, because: $because, evidence: $evidence, by: $by)';
+  return 'Disclosure(id: $id, title: $title, titleEn: $titleEn, date: $date, link: $link, tickers: $tickers, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, weight: $weight, because: $because, evidence: $evidence, by: $by)';
 }
 
 
@@ -625,7 +627,7 @@ abstract mixin class $DisclosureCopyWith<$Res>  {
   factory $DisclosureCopyWith(Disclosure value, $Res Function(Disclosure) _then) = _$DisclosureCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String date, String link, List<String> tickers, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String weight, String because, DisclosureEvidence? evidence, String by
+ String id, String title,@JsonKey(name: 'title_en') String? titleEn, String date, String link, List<String> tickers, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String weight, String because, DisclosureEvidence? evidence, String by
 });
 
 
@@ -642,11 +644,12 @@ class _$DisclosureCopyWithImpl<$Res>
 
 /// Create a copy of Disclosure
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? date = null,Object? link = null,Object? tickers = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? weight = null,Object? because = null,Object? evidence = freezed,Object? by = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? titleEn = freezed,Object? date = null,Object? link = null,Object? tickers = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? weight = null,Object? because = null,Object? evidence = freezed,Object? by = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,titleEn: freezed == titleEn ? _self.titleEn : titleEn // ignore: cast_nullable_to_non_nullable
+as String?,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,tickers: null == tickers ? _self.tickers : tickers // ignore: cast_nullable_to_non_nullable
 as List<String>,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
@@ -755,10 +758,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Disclosure() when $default != null:
-return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
+return $default(_that.id,_that.title,_that.titleEn,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
   return orElse();
 
 }
@@ -776,10 +779,10 @@ return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.e
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)  $default,) {final _that = this;
 switch (_that) {
 case _Disclosure():
-return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
+return $default(_that.id,_that.title,_that.titleEn,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -796,10 +799,10 @@ return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.e
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String date,  String link,  List<String> tickers,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String weight,  String because,  DisclosureEvidence? evidence,  String by)?  $default,) {final _that = this;
 switch (_that) {
 case _Disclosure() when $default != null:
-return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
+return $default(_that.id,_that.title,_that.titleEn,_that.date,_that.link,_that.tickers,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.weight,_that.because,_that.evidence,_that.by);case _:
   return null;
 
 }
@@ -811,11 +814,14 @@ return $default(_that.id,_that.title,_that.date,_that.link,_that.tickers,_that.e
 @JsonSerializable()
 
 class _Disclosure extends Disclosure {
-  const _Disclosure({required this.id, required this.title, this.date = '', this.link = '', final  List<String> tickers = const <String>[], this.event = 'statement', @JsonKey(name: 'event_label') this.eventLabel = 'Statement', @JsonKey(name: 'event_label_ar') this.eventLabelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.weight = 'filed', this.because = '', this.evidence, this.by = ''}): _tickers = tickers,super._();
+  const _Disclosure({required this.id, required this.title, @JsonKey(name: 'title_en') this.titleEn, this.date = '', this.link = '', final  List<String> tickers = const <String>[], this.event = 'statement', @JsonKey(name: 'event_label') this.eventLabel = 'Statement', @JsonKey(name: 'event_label_ar') this.eventLabelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.weight = 'filed', this.because = '', this.evidence, this.by = ''}): _tickers = tickers,super._();
   factory _Disclosure.fromJson(Map<String, dynamic> json) => _$DisclosureFromJson(json);
 
 @override final  String id;
 @override final  String title;
+/// The exchange files in Arabic without exception. This is the cached
+/// English, beside it rather than over it.
+@override@JsonKey(name: 'title_en') final  String? titleEn;
 @override@JsonKey() final  String date;
 @override@JsonKey() final  String link;
 /// Stamped into the title by the exchange as `(TICKER.CA)`.
@@ -856,16 +862,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Disclosure&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other._tickers, _tickers)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence)&&(identical(other.by, by) || other.by == by));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Disclosure&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other._tickers, _tickers)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence)&&(identical(other.by, by) || other.by == by));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,date,link,const DeepCollectionEquality().hash(_tickers),event,eventLabel,eventLabelAr,meaning,meaningAr,weight,because,evidence,by);
+int get hashCode => Object.hash(runtimeType,id,title,titleEn,date,link,const DeepCollectionEquality().hash(_tickers),event,eventLabel,eventLabelAr,meaning,meaningAr,weight,because,evidence,by);
 
 @override
 String toString() {
-  return 'Disclosure(id: $id, title: $title, date: $date, link: $link, tickers: $tickers, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, weight: $weight, because: $because, evidence: $evidence, by: $by)';
+  return 'Disclosure(id: $id, title: $title, titleEn: $titleEn, date: $date, link: $link, tickers: $tickers, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, weight: $weight, because: $because, evidence: $evidence, by: $by)';
 }
 
 
@@ -876,7 +882,7 @@ abstract mixin class _$DisclosureCopyWith<$Res> implements $DisclosureCopyWith<$
   factory _$DisclosureCopyWith(_Disclosure value, $Res Function(_Disclosure) _then) = __$DisclosureCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String date, String link, List<String> tickers, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String weight, String because, DisclosureEvidence? evidence, String by
+ String id, String title,@JsonKey(name: 'title_en') String? titleEn, String date, String link, List<String> tickers, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String weight, String because, DisclosureEvidence? evidence, String by
 });
 
 
@@ -893,11 +899,12 @@ class __$DisclosureCopyWithImpl<$Res>
 
 /// Create a copy of Disclosure
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? date = null,Object? link = null,Object? tickers = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? weight = null,Object? because = null,Object? evidence = freezed,Object? by = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? titleEn = freezed,Object? date = null,Object? link = null,Object? tickers = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? weight = null,Object? because = null,Object? evidence = freezed,Object? by = null,}) {
   return _then(_Disclosure(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,titleEn: freezed == titleEn ? _self.titleEn : titleEn // ignore: cast_nullable_to_non_nullable
+as String?,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,tickers: null == tickers ? _self._tickers : tickers // ignore: cast_nullable_to_non_nullable
 as List<String>,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
