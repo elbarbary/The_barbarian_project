@@ -387,6 +387,38 @@ void main() {
     );
   });
 
+  /// §8.2 — the anti-rating card must actually say something.
+  ///
+  /// `BWhatWouldChangeThis` is the one mechanism the codebase names as the
+  /// thing that stops a score being a rating: a score with no stated way to
+  /// move it is a grade on a company. It was rendering `conditions: []` on
+  /// every studied company since the day it was written — a heading with
+  /// nothing under it, which is worse than absent because it looks handled.
+  testWidgets('§8.2 a studied company states what its score rests on', (
+    tester,
+  ) async {
+    await pumpScreen(
+      tester,
+      const CompanyScreen(ticker: 'MCQE', parentTab: BNavTab.home),
+    );
+    // The card lives on Research, beside the pillar ledger it qualifies.
+    await pumpUntil(tester, find.text('Research'));
+    await tapVisible(tester, find.text('Research'));
+    await pumpUntil(tester, find.textContaining('WHAT WOULD CHANGE THIS'));
+
+    final card = tester.widget<BWhatWouldChangeThis>(
+      find.byType(BWhatWouldChangeThis),
+    );
+    expect(
+      card.conditions,
+      isNotEmpty,
+      reason: 'the score is a rating unless something states what moves it',
+    );
+    // Each line names its pillar and the published basis behind it, so a
+    // reader can check the claim rather than take the number on trust.
+    expect(card.conditions.first, contains('rests on'));
+  });
+
   /// §8.6 — the scanner may explain a score. It may not reach a decision.
   ///
   /// The scan report carries an `action` for each name: a decision ("wait"),

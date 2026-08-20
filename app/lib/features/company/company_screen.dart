@@ -971,7 +971,23 @@ class _Research extends ConsumerWidget {
                 // score with no stated way to move it is a rating; a score
                 // with the filing that would change it is a conditional
                 // observation about published arithmetic.
-                const BWhatWouldChangeThis(conditions: []),
+                BWhatWouldChangeThis(
+                  // Built from the study's own published basis for each
+                  // pillar, not from a trigger nobody wrote. Every line here
+                  // is the stated reason a pillar scores what it scores, so
+                  // "what would change this" is answered by what the reason
+                  // rests on — which is the only honest answer available from
+                  // published data. It was rendering an empty list on every
+                  // studied company since the card was written, which made
+                  // §8.2's one anti-rating mechanism a heading with nothing
+                  // under it.
+                  conditions: [
+                    for (final p in entry.pillars)
+                      if ((p.basis ?? '').trim().isNotEmpty)
+                        '${p.pillar} (${p.score > 0 ? '+' : ''}${p.score}) '
+                            'rests on: ${p.basis}',
+                  ],
+                ),
                 if (entry.summary case final String s) ...[
                   const SizedBox(height: 12),
                   Text(
