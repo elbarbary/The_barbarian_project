@@ -531,11 +531,7 @@ class _Overview extends ConsumerWidget {
           _FactCard(rows: size),
         ],
         if (session.isEmpty && momentum.isEmpty && size.isEmpty)
-          BEmptyState(
-            title: l.noDetailYet,
-            body:
-                'The exchange scan carried only a closing price for this listing. More lands as the pipeline fills in.',
-          ),
+          BEmptyState(title: l.noDetailYet, body: l.noDetailBodyFull),
       ],
     );
   }
@@ -753,7 +749,7 @@ class _Financials extends StatelessWidget {
 
         const SizedBox(height: 16),
         Text(
-          'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from ${_sourceName(context, latest.source)}.',
+          l.finFootnoteFull(_sourceName(context, latest.source)),
           style: BarbarianType.bodyS.copyWith(color: c.textFaint),
         ),
       ],
@@ -878,8 +874,7 @@ class _Price extends ConsumerWidget {
         if (all.isEmpty && session?.high == null) {
           return BEmptyState(
             title: l.noPriceHistory,
-            body:
-                'Neither the exchange scan nor the price source publishes a series for this listing. Its latest close is still shown on Overview.',
+            body: l.priceNoSeriesBodyFull,
           );
         }
         final windowed = range.apply(all);
@@ -1037,9 +1032,9 @@ class _Research extends ConsumerWidget {
                     Row(
                       children: [
                         BKindChip(switch (s.scanStatus) {
-                          ScanStatus.qualified => 'Qualified',
-                          ScanStatus.watching => 'Watching',
-                          ScanStatus.rejected => 'Rejected',
+                          ScanStatus.qualified => l.statusQualified,
+                          ScanStatus.watching => l.statusWatching,
+                          ScanStatus.rejected => l.statusRejected,
                         }, variant: BChipVariant.ember),
                         const Spacer(),
                         BNumText(
@@ -1339,14 +1334,10 @@ class _WhatThatMeans extends ConsumerWidget {
     // Can the money get back out, and does the share ever simply stop.
     if (ExitLiquidity.of(company) case final ExitLiquidity exit) {
       if (exit.sameDayLimit > 0) {
-        lines.add(
-          'About EGP ${_money(exit.sameDayLimit)} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.',
-        );
+        lines.add(l.meansSameDay(_money(exit.sameDayLimit)));
       }
       if (exit.zeroVolumeDays > 0) {
-        lines.add(
-          'It did not trade at all on ${exit.zeroVolumeDays} of the last ${exit.sessions} sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.',
-        );
+        lines.add(l.meansZeroDays(exit.zeroVolumeDays, exit.sessions));
       }
     }
 
@@ -1361,7 +1352,8 @@ class _WhatThatMeans extends ConsumerWidget {
       final move = profitMovement(latest, prior);
       if (latest.netIncome case final double net) {
         lines.add(
-          'It reported ${formatMillions(net)} EGP m of net profit in ${latest.period}.${move == null ? '' : ' ${move.sentence}'}',
+          l.meansNetProfit(formatMillions(net), latest.period) +
+              (move == null ? '' : ' ${move.sentence}'),
         );
       }
     }

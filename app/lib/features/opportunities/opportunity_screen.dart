@@ -959,7 +959,7 @@ class _SectorTab extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'A sector read changes what gets investigated first. It scores nothing on the rubric, and none of these names has qualified on its own evidence.',
+                  l.scanSectorBlurbFull,
                   style: BarbarianType.bodyS.copyWith(color: c.textMuted),
                 ),
               ),
