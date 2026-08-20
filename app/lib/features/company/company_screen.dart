@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/company.dart';
+import '../../core/models/exit_liquidity.dart';
 import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
@@ -98,6 +99,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                 const SizedBox(height: 20),
                 switch (_tab) {
                   _Tab.overview => _Overview(
+                    parentTab: widget.parentTab,
                     company: company,
                     quote: quote,
                     ticker: widget.ticker,
@@ -347,11 +349,15 @@ class _Overview extends ConsumerWidget {
     required this.company,
     required this.quote,
     required this.ticker,
+    required this.parentTab,
   });
 
   final Company company;
   final StockQuote? quote;
   final String ticker;
+
+  /// Which slot stays lit when the exit answer is opened from here.
+  final BNavTab parentTab;
 
   static String _num(Object? v, {int decimals = 2}) {
     if (v is! num) return '—';
@@ -434,6 +440,17 @@ class _Overview extends ConsumerWidget {
         // after tapping a name, and it used to be two taps away behind the
         // Price tab. The full chart still lives there; this is the glance.
         _RecentMoves(history: company.priceHistory),
+        // The exit question, placed by severity rather than by habit.
+        //
+        // A share that stops trading gets this above everything, because
+        // somebody reading about a company they cannot sell needs that before
+        // they read anything else about it. A share that trades every day gets
+        // a quiet row further down, next to the other measurements. Same rule
+        // the rest of the app follows: emphasis is set by a measured fact and
+        // a published threshold, never by what we would like to draw attention
+        // to.
+        if (ExitLiquidity.of(company) case final ExitLiquidity exit)
+          if (exit.stops) _ExitSummary(exit: exit, parentTab: parentTab),
         if (verdict != null) ...[
           const BSectionLabel('Six Pillars'),
           BPressable(
@@ -467,6 +484,11 @@ class _Overview extends ConsumerWidget {
         // makes them exactly the product this app exists not to be. Each one
         // now leads with a sentence, carries its exact figure underneath, and
         // opens into the arithmetic that produced it (spec §4.18, §6.2).
+        if (ExitLiquidity.of(company) case final ExitLiquidity exit)
+          if (!exit.stops) ...[
+            _ExitSummary(exit: exit, parentTab: parentTab),
+            const SizedBox(height: 22),
+          ],
         if (explained.isNotEmpty) ...[
           const BSectionLabel('What the numbers say'),
           BPaperCard(
@@ -1051,5 +1073,94 @@ class _DayCell extends StatelessWidget {
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
     ];
     return '${d.day} ${months[d.month - 1]}';
+  }
+}
+
+
+/// "Can I get out?" in one row, opening the full answer.
+///
+/// Deliberately not the whole ladder. A company screen is already dense, and
+/// the job here is to put the question in front of somebody at the moment it
+/// would occur to them — standing on the page of a share they are considering
+/// — rather than to answer it in full where there is no room for the
+/// assumptions the answer rests on.
+class _ExitSummary extends StatelessWidget {
+  const _ExitSummary({required this.exit, required this.parentTab});
+
+  final ExitLiquidity exit;
+  final BNavTab parentTab;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final alarming = exit.stops;
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: alarming ? 22 : 0),
+      child: BPressable(
+        onTap: () => context.push(Routes.exitPath(parentTab, exit.ticker)),
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(16, 15, 14, 16),
+          decoration: BoxDecoration(
+            color: alarming
+                ? c.down.withValues(alpha: c.isDark ? 0.18 : 0.12)
+                : c.surface,
+            borderRadius: BorderRadius.circular(BarbarianRadius.lg),
+            border: alarming
+                ? Border(left: BorderSide(color: c.down, width: 3))
+                : Border.all(color: c.cardEdge),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      alarming ? 'IT STOPS TRADING' : 'CAN I GET OUT?',
+                      style: BarbarianType.labelNano.copyWith(
+                        color: alarming
+                            ? BarbarianPalette.onWash(c, c.down)
+                            : c.textMuted,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      alarming
+                          ? 'Nothing traded at all on ${exit.zeroVolumeDays} '
+                                'of the last ${exit.sessions} sessions.'
+                          : 'EGP 50,000 here is '
+                                '${exit.plainFor(50000).toLowerCase()}',
+                      style: BarbarianType.bodyL.copyWith(
+                        color: alarming ? c.textPrimary : c.textPrimary,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      alarming
+                          ? 'On those days there was no price at which a '
+                                'holder could sell.'
+                          : exit.waitFor(50000),
+                      style: BarbarianType.bodyS.copyWith(
+                        color: c.textMuted,
+                        height: 1.45,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 20,
+                color: alarming ? c.down : c.textFaint,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

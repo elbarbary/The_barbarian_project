@@ -42,6 +42,19 @@ void main() {
       );
     });
 
+    test('a session with no trading says that, not "100% less"', () {
+      // The volume field arriving in price_history exposed this: zero volume
+      // fell through the "quieter than normal" branch and rendered as "traded
+      // 100% less than its normal amount", which reads as a rounding artefact
+      // rather than the fact that nobody could sell that day.
+      final quiet = load('SPHT');
+      final e = Explainers.relativeVolume(quiet);
+      if (e != null && (quiet.market?.volume ?? 1) == 0) {
+        expect(e.plain, 'It did not trade at all.');
+        expect(e.yardstick, contains('no price at which a holder could sell'));
+      }
+    });
+
     test('a missing operand produces no row at all', () {
       // Spec §49 and the standing rule: if the data is not there, do not build
       // it. A plain sentence whose inputs cannot be shown is the exact thing

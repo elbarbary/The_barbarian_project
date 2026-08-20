@@ -116,11 +116,16 @@ abstract final class Explainers {
 
     final ratio = volume / median;
     final pct = ((ratio - 1) * 100).round();
-    final plain = switch (pct) {
-      0 => 'Traded exactly its normal amount.',
-      > 0 => 'Traded $pct% more than its normal amount.',
-      _ => 'Traded ${pct.abs()}% less than its normal amount.',
-    };
+    // Zero volume is not "100% less than normal" — it is a different kind of
+    // fact, and the phrasing that works for a quiet day reads as a rounding
+    // artefact here. Eight listings on this exchange stop entirely.
+    final plain = volume == 0
+        ? 'It did not trade at all.'
+        : switch (pct) {
+            0 => 'Traded exactly its normal amount.',
+            > 0 => 'Traded $pct% more than its normal amount.',
+            _ => 'Traded ${pct.abs()}% less than its normal amount.',
+          };
 
     return Explainer(
       termId: 'rv20',
@@ -131,9 +136,11 @@ abstract final class Explainers {
           '${_n(volume)} shares traded\n'
           '÷ ${_n(median)} — the middle session of the last 20\n'
           '= ${ratio.toStringAsFixed(2)}',
-      yardstick:
-          'Below 1 is quieter than usual. Above 2 is unusual and worth '
-          'reading the filings for.',
+      yardstick: volume == 0
+          ? 'Nothing changed hands. There was no price at which a holder '
+                'could sell, because selling needs somebody on the other side.'
+          : 'Below 1 is quieter than usual. Above 2 is unusual and worth '
+                'reading the filings for.',
       notability: ratio >= 2 ? Notability.notable : Notability.ordinary,
       source: 'EGX session data'
           '${company.market?.date == null ? '' : ', ${company.market!.date}'}',

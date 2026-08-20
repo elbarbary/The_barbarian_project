@@ -1,6 +1,7 @@
 import 'package:barbarian/core/models/company.dart';
 import 'package:barbarian/core/models/exit_liquidity.dart';
 import 'package:barbarian/core/widgets/nav.dart';
+import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/exit/exit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -91,6 +92,34 @@ void main() {
         expect(plain, isNot(contains(phrase)), reason: 'says "$phrase"');
       }
     }
+  });
+
+  testWidgets('a company that stops trading says so on its own page', (
+    tester,
+  ) async {
+    // The question has to reach somebody standing on the company's page, not
+    // only somebody who thought to go looking for it. And it is placed by
+    // severity: a share that stops trading gets this above the study, because
+    // whether you can sell comes before what it scored.
+    await pumpScreen(
+      tester,
+      const CompanyScreen(ticker: 'SPHT', parentTab: BNavTab.ask),
+      until: find.byType(CompanyScreen),
+    );
+    await pumpUntil(tester, find.text('IT STOPS TRADING'));
+    expect(find.textContaining('no price at which a holder could sell'),
+        findsWidgets);
+  });
+
+  testWidgets('a liquid company gets the quiet version', (tester) async {
+    await pumpScreen(
+      tester,
+      const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.ask),
+      until: find.byType(CompanyScreen),
+    );
+    await pumpUntil(tester, find.text('CAN I GET OUT?'));
+    // Never the alarm on a name that trades every session.
+    expect(find.text('IT STOPS TRADING'), findsNothing);
   });
 
   testWidgets('the screen states the limit and the assumption', (tester) async {
