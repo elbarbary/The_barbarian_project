@@ -11,6 +11,7 @@ import '../../core/widgets/async_view.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/legal.dart';
+import 'disclosures_block.dart';
 import 'news_block.dart';
 import 'rates_block.dart';
 import '../../core/widgets/motion.dart';
@@ -43,6 +44,7 @@ class TodayScreen extends ConsumerWidget {
         const _ScannerHero(),
         const BRatesBlock(),
         const _MarketPulse(),
+        const BDisclosuresBlock(),
         const BNewsBlock(),
         if (isSample) const Center(child: BSampleDataNotice()),
         const BLegalFootnote(),

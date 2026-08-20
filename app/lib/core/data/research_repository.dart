@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../models/cash_or_trash.dart';
+import '../models/disclosure.dart';
 import '../models/news.dart';
 import '../models/rates.dart';
 import '../models/opportunity.dart';
@@ -31,6 +32,10 @@ class ResearchRepository {
   /// Index levels, the pound and the metals.
   Stream<Sourced<RatesDoc>> getRates() =>
       _parsed('rates/latest.json', 'rates', RatesDoc.fromJson);
+
+  /// Filings made to the exchange, typed and explained at ingestion.
+  Stream<Sourced<DisclosureFeed>> getDisclosures() =>
+      _parsed('disclosures/latest.json', 'disclosures', DisclosureFeed.fromJson);
 
   Stream<Sourced<T>> _parsed<T>(
     String path,

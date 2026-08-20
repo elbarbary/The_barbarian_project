@@ -35,6 +35,7 @@ STEPS = [
     # set — but their real cadence is publish-live-data.yml every 15 minutes.
     # A daily news feed is a bulletin, and an intraday metals price pinned for
     # twenty-four hours is stale data wearing today's date.
+    ("Disclosures", "build_disclosures_api.py", True),
     ("News", "build_news_api.py", True),
     ("Rates", "build_rates_api.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),

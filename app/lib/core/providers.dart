@@ -10,6 +10,7 @@ import 'data/research_repository.dart';
 import 'data/sourced.dart';
 import 'data/user_repository.dart';
 import 'models/cash_or_trash.dart';
+import 'models/disclosure.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
 import 'models/company.dart';
@@ -103,6 +104,10 @@ final newsProvider = StreamProvider<Sourced<NewsFeed>>(
   (ref) => ref.watch(researchRepositoryProvider).getNews(),
 );
 
+final disclosuresProvider = StreamProvider<Sourced<DisclosureFeed>>(
+  (ref) => ref.watch(researchRepositoryProvider).getDisclosures(),
+);
+
 final ratesProvider = StreamProvider<Sourced<RatesDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getRates(),
 );
@@ -149,6 +154,7 @@ final contentRefreshProvider = Provider<void>((ref) {
       ref.invalidate(cashOrTrashProvider);
       ref.invalidate(newsProvider);
       ref.invalidate(ratesProvider);
+      ref.invalidate(disclosuresProvider);
     },
   );
   ref.onDispose(lifecycle.dispose);

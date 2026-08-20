@@ -55,10 +55,12 @@ jobs:
           python-version: '3.12'
 
       - name: Fetch headlines and rates
-        # Neither script writes anything when its sources are unreachable, so a
-        # bad upstream leaves the last good document in place rather than
+        # No script writes anything when its sources are unreachable, so a bad
+        # upstream leaves the last good document in place rather than
         # publishing an empty one. `|| true` keeps one dead source from
-        # blocking the other's update.
+        # blocking another's update.
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/build_news_api.py || true
           python3 scripts/build_rates_api.py || true
@@ -74,8 +76,10 @@ jobs:
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add public/data/v1/news public/data/v1/rates \
+                  public/data/v1/disclosures \
                   public/data/v1/manifest.json \
                   app/assets/fixtures/news app/assets/fixtures/rates \
+                  app/assets/fixtures/disclosures \
                   app/assets/fixtures/manifest.json
           if git diff --cached --quiet; then
             echo 'nothing moved'
@@ -92,3 +96,12 @@ jobs:
             sleep 5
           done
           exit 1
+
+# NOTE — disclosures are deliberately NOT in this workflow.
+#
+# `build_disclosures_api.py` needs Scrapling driving a real Chromium, because
+# EGX serves a 7 KB stub to anything that is not a browser. That is a heavier
+# dependency than this fifteen-minute job should carry, and it wants its own
+# cadence anyway: five runs across the session rather than ninety-six. It runs
+# from the machine that holds the EGX monitor, alongside the daily build, until
+# a browser image is worth adding to CI.

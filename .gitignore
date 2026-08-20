@@ -52,3 +52,7 @@ node_modules/
 # Python bytecode; it was committed by accident and every rebuild rewrites it.
 __pycache__/
 *.pyc
+
+# Local secrets. Never committed — a key in git history is burned even after deletion.
+.env
+.env.*
