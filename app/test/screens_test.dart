@@ -422,6 +422,26 @@ void main() {
     }
   });
 
+  testWidgets('the company file says what its figures mean', (tester) async {
+    // Eight rows of arithmetic leave the joining-up undone. The founder's
+    // point: we say a company did X and never why anybody should care.
+    await pumpScreen(
+      tester,
+      const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.home),
+    );
+    // Case-insensitive: BSectionLabel uppercases Latin script.
+    final heading =
+        find.textContaining(RegExp('what that means', caseSensitive: false));
+    await pumpUntil(tester, heading);
+
+    expect(heading, findsOneWidget);
+    // Each line is a fact with its mechanism attached, not a view on the share.
+    expect(
+      find.textContaining(RegExp('one session|did not trade|net profit')),
+      findsWidgets,
+    );
+  });
+
   group('narrow layout', () {
     // 320pt is the narrowest phone the app will meet.
     for (final (name, screen) in <(String, Widget)>[

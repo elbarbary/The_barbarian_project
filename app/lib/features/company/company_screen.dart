@@ -504,6 +504,8 @@ class _Overview extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(height: 14),
+          _WhatThatMeans(company: company),
           const SizedBox(height: 22),
         ],
         if (session.isNotEmpty) ...[
@@ -1314,5 +1316,98 @@ class _ExitSummary extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// What the figures above add up to, in sentences.
+///
+/// "What the numbers say" gives a reader eight rows and their arithmetic, which
+/// is honest and still leaves the work of joining them up undone — the founder's
+/// point exactly: we say a company did X, and never why anybody should care.
+///
+/// Every sentence here is assembled from figures already on the screen, and
+/// each one is a fact with its own mechanism attached. None of them is a view
+/// on the share: what a company earned and whether its stock trades are things
+/// that happened, and saying what they mean for somebody holding it is the
+/// whole reason this app exists.
+class _WhatThatMeans extends ConsumerWidget {
+  const _WhatThatMeans({required this.company});
+
+  final Company company;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final lines = <String>[];
+
+    // Can the money get back out, and does the share ever simply stop.
+    if (ExitLiquidity.of(company) case final ExitLiquidity exit) {
+      if (exit.sameDayLimit > 0) {
+        lines.add(
+          'About EGP ${_money(exit.sameDayLimit)} can leave in one session '
+          'here. Above that, selling is more than a fifth of a normal day and '
+          'starts to move the price against whoever is selling.',
+        );
+      }
+      if (exit.zeroVolumeDays > 0) {
+        lines.add(
+          'It did not trade at all on ${exit.zeroVolumeDays} of the last '
+          '${exit.sessions} sessions. On those days there was no price at '
+          'which a holder could sell, because there was nobody on the other '
+          'side.',
+        );
+      }
+    }
+
+    // What it last earned, and which way that moved.
+    final periods = [
+      ...company.financials.annual,
+      ...company.financials.quarterly,
+    ];
+    if (periods.isNotEmpty) {
+      final latest = periods.last;
+      final prior = comparablePrior(periods, latest);
+      final move = profitMovement(latest, prior);
+      if (latest.netIncome case final double net) {
+        lines.add(
+          'It reported ${formatMillions(net)} EGP m of net profit in '
+          '${latest.period}.${move == null ? '' : ' ${move.sentence}'}',
+        );
+      }
+    }
+
+    if (lines.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const BSectionLabel('What that means'),
+        BPaperCard(
+          radius: BarbarianRadius.xl,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final (i, line) in lines.indexed) ...[
+                if (i > 0) const SizedBox(height: 12),
+                Text(
+                  line,
+                  style: BarbarianType.bodyM.copyWith(
+                    color: c.textSecondary,
+                    height: 1.5,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  static String _money(double value) {
+    if (value >= 1e9) return '${(value / 1e9).toStringAsFixed(2)}bn';
+    if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
+    if (value >= 1e3) return '${(value / 1e3).round()}k';
+    return value.toStringAsFixed(0);
   }
 }
