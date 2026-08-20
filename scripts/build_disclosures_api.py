@@ -283,6 +283,7 @@ def classify_all(items: list[dict]) -> None:
         item["event_label"] = ft.label(item["event"])
         item["event_label_ar"] = ft.label_ar(item["event"])
         item["meaning"] = ft.meaning(item["event"])
+        item["meaning_ar"] = ft.meaning_ar(item["event"])
 
     by_rule = sum(1 for i in items if i.get("by") == "rule")
     by_model = sum(1 for i in items if i.get("by") == "model")
@@ -441,6 +442,7 @@ def main() -> int:
         item["event_label"] = ft.label(item.get("event", "statement"))
         item["event_label_ar"] = ft.label_ar(item.get("event", "statement"))
         item["meaning"] = ft.meaning(item.get("event", "statement"))
+        item["meaning_ar"] = ft.meaning_ar(item.get("event", "statement"))
 
     cutoff = (date.today() - timedelta(days=KEEP_DAYS)).isoformat()
     merged = sorted(

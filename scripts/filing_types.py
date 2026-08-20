@@ -20,108 +20,144 @@ than guessing.
 
 from __future__ import annotations
 
-# key -> (English label, Arabic label, what it means for a holder)
-FILING_TYPES: dict[str, tuple[str, str, str]] = {
+# key -> (English label, Arabic label, what it means, the same in Arabic)
+#
+# The Arabic is not a courtesy translation. This is read in Arabic by people
+# on the Egyptian exchange, and the explanation *is* the product — an
+# English-only meaning beside an Arabic filing is the one part of the screen
+# that fails the reader it was written for.
+FILING_TYPES: dict[str, tuple[str, str, str, str]] = {
     "results": (
         "Results",
         "نتائج أعمال",
         "The company published what it earned or lost over a period. The "
         "figures are the company's own, filed with the exchange.",
+        "نشرت الشركة ما حققته من ربح أو خسارة خلال فترة. الأرقام أرقام "
+        "الشركة نفسها، مودعة لدى البورصة.",
     ),
     "dividend": (
         "Cash dividend",
         "توزيعات نقدية",
         "The company is paying cash to shareholders. On the day the "
-        "entitlement ends, the share price drops by roughly the amount paid — "
-        "the money moves from the company to the holder, it is not created.",
+        "entitlement ends, the share price drops by roughly the amount paid "
+        "— the money moves from the company to the holder, it is not "
+        "created.",
+        "توزّع الشركة نقدًا على المساهمين. يوم انتهاء الاستحقاق ينخفض سعر "
+        "السهم بما يقارب المبلغ الموزّع — فالمال ينتقل من الشركة إلى "
+        "المساهم ولا يُخلق من العدم.",
     ),
     "bonus_shares": (
         "Bonus shares",
         "أسهم مجانية",
         "New shares handed to existing holders at no cost. Everyone's slice "
-        "stays the same size and the price per share falls to match, so this "
-        "adds no value on its own — it makes each share cheaper to buy.",
+        "stays the same size and the price per share falls to match, so "
+        "this adds no value on its own — it makes each share cheaper to "
+        "buy.",
+        "أسهم جديدة تُمنح للمساهمين الحاليين بلا مقابل. تبقى حصة كل مساهم "
+        "كما هي وينخفض سعر السهم بما يوازيها، فهذا لا يضيف قيمة بذاته لكنه "
+        "يجعل السهم أرخص سعرًا.",
     ),
     "capital_increase": (
         "Capital increase",
         "زيادة رأس المال",
-        "The company is issuing new shares to raise money. If you hold shares "
-        "and do not buy more, your slice of the company gets smaller.",
+        "The company is issuing new shares to raise money. If you hold "
+        "shares and do not buy more, your slice of the company gets "
+        "smaller.",
+        "تصدر الشركة أسهمًا جديدة لجمع أموال. إن كنت تملك أسهمًا ولم تشترِ "
+        "المزيد، تصغر حصتك من الشركة.",
     ),
     "capital_decrease": (
         "Capital reduction",
         "تخفيض رأس المال",
         "The company is cancelling shares, usually to absorb accumulated "
         "losses or return capital.",
+        "تلغي الشركة أسهمًا، عادةً لاستيعاب خسائر متراكمة أو لرد رأس المال.",
     ),
     "halt": (
         "Trading halted",
         "إيقاف التعامل",
-        "Trading in the share is suspended. While it lasts, nobody can buy or "
-        "sell it at any price.",
+        "Trading in the share is suspended. While it lasts, nobody can buy "
+        "or sell it at any price.",
+        "تم إيقاف التداول على السهم. ما دام الإيقاف قائمًا لا يستطيع أحد "
+        "شراءه أو بيعه بأي سعر.",
     ),
     "resume": (
         "Trading resumed",
         "إعادة التعامل",
         "The share is trading again after a suspension.",
+        "عاد السهم للتداول بعد إيقاف.",
     ),
     "insider": (
         "Insider dealing form",
         "نموذج إفصاح",
-        "Somebody connected to the company — a board member, a major holder — "
-        "bought or sold its shares and is required to declare it.",
+        "Somebody connected to the company — a board member, a major holder "
+        "— bought or sold its shares and is required to declare it.",
+        "شخص متصل بالشركة — عضو مجلس إدارة أو مساهم رئيسي — تعامل على "
+        "أسهمها وملزم بالإفصاح عن ذلك.",
     ),
     "stake": (
         "Ownership change",
         "تغيير في الملكية",
         "A large holder's stake in the company changed hands.",
+        "تغيّرت حصة أحد كبار الملّاك في الشركة.",
     ),
     "acquisition": (
         "Acquisition or merger",
         "استحواذ أو اندماج",
         "The company is buying, selling or merging a business.",
+        "تشتري الشركة نشاطًا أو تبيعه أو تندمج معه.",
     ),
     "assembly": (
         "Shareholders' meeting",
         "الجمعية العامة",
-        "Minutes of a shareholders' meeting, recording what was put to a vote "
-        "and what was decided.",
+        "Minutes of a shareholders' meeting, recording what was put to a "
+        "vote and what was decided.",
+        "محضر اجتماع للمساهمين، يسجل ما طُرح للتصويت وما تقرر.",
     ),
     "board": (
         "Board decisions",
         "قرارات مجلس الإدارة",
         "The board met and recorded decisions. What was decided is in the "
         "filing itself.",
+        "اجتمع مجلس الإدارة وسجّل قرارات. تفاصيل ما تقرر في الإفصاح نفسه.",
     ),
     "contract": (
         "Contract or project",
         "عقد أو مشروع",
-        "The company signed an agreement or started a project. A contract is "
-        "revenue that has not been earned yet.",
+        "The company signed an agreement or started a project. A contract "
+        "is revenue that has not been earned yet.",
+        "وقّعت الشركة اتفاقًا أو بدأت مشروعًا. العقد إيراد لم يُحقَّق بعد.",
     ),
     "funding": (
         "Borrowing",
         "تمويل أو قرض",
         "The company is raising debt — a loan, a bond, a sukuk. It is money "
         "the company must pay back, unlike shares.",
+        "تقترض الشركة — قرضًا أو سندات أو صكوكًا. مال يجب على الشركة رده، "
+        "بخلاف الأسهم.",
     ),
     "auditor": (
         "Auditor or accounts",
         "مراجع الحسابات",
         "Something about who checks the company's books, or a correction to "
         "figures already filed.",
+        "أمر يخص من يراجع دفاتر الشركة، أو تصحيح لأرقام سبق إيداعها.",
     ),
     "delisting": (
         "Listing change",
         "شطب أو قيد",
         "The share's listing status is changing. A delisting means it stops "
         "trading on the exchange entirely.",
+        "يتغيّر وضع قيد السهم. الشطب يعني توقفه عن التداول في البورصة "
+        "نهائيًا.",
     ),
     "statement": (
         "Statement",
         "بيان",
         "A statement to the exchange that does not fall into one of the "
         "standard categories. What it says is in the filing.",
+        "بيان إلى البورصة لا يندرج تحت التصنيفات المعتادة. مضمونه في "
+        "الإفصاح نفسه.",
     ),
 }
 
@@ -138,6 +174,10 @@ def label_ar(key: str) -> str:
 
 def meaning(key: str) -> str:
     return FILING_TYPES.get(key, FILING_TYPES["statement"])[2]
+
+
+def meaning_ar(key: str) -> str:
+    return FILING_TYPES.get(key, FILING_TYPES["statement"])[3]
 
 
 # Deterministic patterns, tried before the model.

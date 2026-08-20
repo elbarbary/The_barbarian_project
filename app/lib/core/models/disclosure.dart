@@ -62,6 +62,7 @@ abstract class Disclosure with _$Disclosure {
     /// What this kind of filing does to somebody holding the share. Written by
     /// a person once per type and reviewed — never generated per filing.
     @Default('') String meaning,
+    @JsonKey(name: 'meaning_ar') @Default('') String meaningAr,
 
     /// check · filed · other. Never a view on the filing itself.
     @Default('filed') String weight,
@@ -74,6 +75,15 @@ abstract class Disclosure with _$Disclosure {
   }) = _Disclosure;
 
   const Disclosure._();
+
+  /// The explanation, in the language being read.
+  ///
+  /// The Arabic is the point rather than a courtesy: an Arabic filing beside an
+  /// English explanation is the one part of this screen that fails the reader
+  /// it was written for. Falls back to English when a type has no Arabic yet,
+  /// which is better than a blank where the meaning should be.
+  String meaningFor(bool arabic) =>
+      arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 
   factory Disclosure.fromJson(Map<String, dynamic> json) =>
       _$DisclosureFromJson(json);

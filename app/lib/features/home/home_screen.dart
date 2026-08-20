@@ -157,6 +157,10 @@ class _DailyInsight extends ConsumerWidget {
     }
 
     final ticker = item.tickers.length == 1 ? item.tickers.first : null;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final label = arabic && item.eventLabelAr.isNotEmpty
+        ? item.eventLabelAr
+        : item.eventLabel;
 
     return BPressable(
       onTap: ticker == null
@@ -172,7 +176,7 @@ class _DailyInsight extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    l.homeTodayKicker(item.eventLabel).toUpperCase(),
+                    l.homeTodayKicker(label).toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
                       letterSpacing: 1.6,
@@ -189,17 +193,17 @@ class _DailyInsight extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              // The exchange's own headline is Arabic and long. What a reader
-              // needs first is the plain-English name of the event and who
-              // filed it; the filing itself is one tap away.
+              // The exchange's own headline is long. What a reader needs
+              // first is the name of the event and who filed it, in their own
+              // language; the filing itself is one tap away.
               ticker == null
-                  ? item.eventLabel
-                  : '$ticker · ${item.eventLabel}',
+                  ? label
+                  : '$ticker · $label',
               style: BarbarianType.headlineM.copyWith(color: c.onInk),
             ),
             const SizedBox(height: 10),
             Text(
-              item.meaning,
+              item.meaningFor(arabic),
               style: BarbarianType.bodyM.copyWith(color: c.onInkMuted),
             ),
             if (item.because.isNotEmpty) ...[

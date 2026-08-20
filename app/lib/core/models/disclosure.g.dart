@@ -52,6 +52,7 @@ _Disclosure _$DisclosureFromJson(Map<String, dynamic> json) => _Disclosure(
   eventLabel: json['event_label'] as String? ?? 'Statement',
   eventLabelAr: json['event_label_ar'] as String? ?? '',
   meaning: json['meaning'] as String? ?? '',
+  meaningAr: json['meaning_ar'] as String? ?? '',
   weight: json['weight'] as String? ?? 'filed',
   because: json['because'] as String? ?? '',
   evidence: json['evidence'] == null
@@ -71,6 +72,7 @@ Map<String, dynamic> _$DisclosureToJson(_Disclosure instance) =>
       'event_label': instance.eventLabel,
       'event_label_ar': instance.eventLabelAr,
       'meaning': instance.meaning,
+      'meaning_ar': instance.meaningAr,
       'weight': instance.weight,
       'because': instance.because,
       'evidence': instance.evidence,
