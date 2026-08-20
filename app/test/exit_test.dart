@@ -122,6 +122,40 @@ void main() {
     expect(find.text('IT STOPS TRADING'), findsNothing);
   });
 
+  testWidgets('two companies do not get the same answer', (tester) async {
+    // The founder's complaint: every share showed "EGP 50,000 · about 1% of a
+    // day", so two very different companies looked identical. The ladder is
+    // fixed by design; the same-day figure is what differs, and it has to
+    // actually differ.
+    Future<String> sameDayFor(String ticker) async {
+      await pumpScreen(
+        tester,
+        ExitScreen(parentTab: BNavTab.home, ticker: ticker),
+        until: find.text('Can I get out?'),
+      );
+      await pumpUntil(
+        tester,
+        find.textContaining('About this much can leave'),
+      );
+      final figure = tester
+          .widgetList<Text>(find.textContaining('EGP '))
+          .map((w) => w.data ?? '')
+          .firstWhere((s) => s.startsWith('EGP '), orElse: () => '');
+      return figure;
+    }
+
+    final comi = await sameDayFor('COMI');
+    final other = await sameDayFor('SWDY');
+
+    expect(comi, isNotEmpty);
+    expect(other, isNotEmpty);
+    expect(
+      comi,
+      isNot(equals(other)),
+      reason: 'two companies with different turnover must not read the same',
+    );
+  });
+
   testWidgets('the screen states the limit and the assumption', (tester) async {
     await pumpScreen(
       tester,
@@ -138,8 +172,11 @@ void main() {
 
     // And the assumption behind the sessions figure. The scaffold builds
     // lazily, so this has to be scrolled to rather than merely looked for.
+    // Specific to the assumption line: "a fifth" now also appears in the
+    // per-company same-day figure above the ladder, and scrollUntilVisible
+    // needs exactly one match.
     await tester.scrollUntilVisible(
-      find.textContaining('a fifth'),
+      find.textContaining('assumes you never'),
       120,
       scrollable: find.byType(Scrollable).first,
       maxScrolls: 30,

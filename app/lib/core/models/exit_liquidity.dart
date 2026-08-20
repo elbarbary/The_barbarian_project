@@ -71,6 +71,20 @@ class ExitLiquidity {
       ? double.infinity
       : amount / (normalDailyValue * participation);
 
+  /// The most money that can leave in a single session here.
+  ///
+  /// The published ladder is the same four rungs for every company, which is
+  /// deliberate — the moment it takes the reader's own number it becomes
+  /// advice about their position. But it also made every liquid share look
+  /// identical: EGP 50,000 is "about a day" on almost all of them, so a reader
+  /// comparing two companies saw the same four lines twice.
+  ///
+  /// This is the figure that actually differs. It is the same arithmetic the
+  /// ladder uses, solved the other way round — a fifth of a normal day's
+  /// trading — and on this exchange it ranges from a few thousand pounds to
+  /// tens of millions.
+  double get sameDayLimit => normalDailyValue * participation;
+
   /// True when the share simply stops trading on some days.
   bool get stops => zeroVolumeDays > 0;
 

@@ -202,6 +202,49 @@ class _ForCompany extends ConsumerWidget {
               _Stops(exit: exit),
               const SizedBox(height: 14),
             ],
+            // The one figure that is different for every company.
+            //
+            // The ladder below is the same four rungs for everyone by design,
+            // and that made two very different shares look identical: EGP
+            // 50,000 is "about a day" on almost anything liquid. This is the
+            // same arithmetic solved the other way round — a fifth of a normal
+            // day's trading — and on this exchange it runs from a few thousand
+            // pounds to tens of millions.
+            if (exit.sameDayLimit > 0)
+              BPaperCard(
+                radius: BarbarianRadius.xl,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'About this much can leave in one session',
+                      style: BarbarianType.labelTiny.copyWith(
+                        color: c.textMuted,
+                        letterSpacing: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    BNumText(
+                      'EGP ${_short(exit.sameDayLimit)}',
+                      style: BarbarianType.displayS.copyWith(
+                        color: c.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Past that, selling is more than a fifth of a normal '
+                      'day here and starts to take more than one session. '
+                      'That figure is different for every company on this '
+                      'exchange.',
+                      style: BarbarianType.bodyS.copyWith(
+                        color: c.textSecondary,
+                        height: 1.45,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            const SizedBox(height: 18),
             const BSectionLabel('If you put in'),
             const SizedBox(height: 10),
             BPaperCard(
@@ -422,10 +465,13 @@ class _Facts extends StatelessWidget {
     );
   }
 
-  static String _short(double value) {
-    if (value >= 1e9) return '${(value / 1e9).toStringAsFixed(2)}bn';
-    if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
-    if (value >= 1e3) return '${(value / 1e3).round()}k';
-    return value.toStringAsFixed(0);
-  }
+}
+
+/// Pounds, shortened. One formatter, so two cards cannot disagree about
+/// what 1,250,000 looks like.
+String _short(double value) {
+  if (value >= 1e9) return '${(value / 1e9).toStringAsFixed(2)}bn';
+  if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
+  if (value >= 1e3) return '${(value / 1e3).round()}k';
+  return value.toStringAsFixed(0);
 }
