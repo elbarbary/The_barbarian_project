@@ -80,7 +80,7 @@
       "status_label": "Model trade closed",
       "return_percent": "+5.45%",
       "direction": "up",
-      "note": "Trade 001 realized EGP 143.48 after friction the H1 thesis clock ended. Closed no sessions remain."
+      "note": "Closed no sessions remain."
     },
     {
       "ticker": "JUFO",
@@ -88,7 +88,7 @@
       "status_label": "Persistent watch",
       "return_percent": "-3.20%",
       "direction": "down",
-      "note": "The H1 cohort remains below its EGP 28 trigger. If confirmed: 3–5 sessions review 2"
+      "note": ""
     },
     {
       "ticker": "HELI",
@@ -96,7 +96,7 @@
       "status_label": "Persistent watch",
       "return_percent": "-1.65%",
       "direction": "down",
-      "note": "The land/earnings cohort remains below EGP 8.66 with RV20 0.70×. If confirmed: 5–10 sessions review 3"
+      "note": "The land/earnings cohort remains below EGP 8.66 with RV20 0.70×."
     },
     {
       "ticker": "TALM",
@@ -112,7 +112,7 @@
       "status_label": "Persistent watch",
       "return_percent": "+15.68%",
       "direction": "up",
-      "note": "The 17 August AGM is live, but economics remain unproven. No entry before approval"
+      "note": "The 17 August AGM is live, but economics remain unproven. No entry."
     },
     {
       "ticker": "ORWE",

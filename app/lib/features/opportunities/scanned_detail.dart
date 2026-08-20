@@ -157,7 +157,15 @@ class ScannedDetailSheet extends ConsumerWidget {
                 style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
               ),
             ],
-            if (entry.action case final ScanAction action) ...[
+            // §8.6 — the reasoning, never the decision.
+            //
+            // `action` carries three things: a decision ("wait"), a label for
+            // it, and the reasoning behind it. The first two are an
+            // instruction about a named company however gently they are
+            // worded, and this screen is the one place a reader arrives
+            // wanting to be told what to do. Only the reasoning survives,
+            // under a heading that says what it is: an explanation of a score.
+            if (entry.action?.reasoning.isNotEmpty ?? false) ...[
               const SizedBox(height: 20),
               BPaperCard(
                 radius: BarbarianRadius.xl,
@@ -165,20 +173,10 @@ class ScannedDetailSheet extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      (action.label ?? 'What the rule produced')
-                          .toUpperCase(),
+                      'WHY IT SCORED WHAT IT SCORED',
                       style: BarbarianType.labelNano.copyWith(color: c.iris),
                     ),
-                    if (action.decision case final String decision) ...[
-                      const SizedBox(height: 6),
-                      Text(
-                        decision,
-                        style: BarbarianType.headlineM.copyWith(
-                          color: c.textPrimary,
-                        ),
-                      ),
-                    ],
-                    for (final para in action.reasoning) ...[
+                    for (final para in entry.action!.reasoning) ...[
                       const SizedBox(height: 12),
                       Text(
                         para,
@@ -351,7 +349,6 @@ class ScannedDetailSheet extends ConsumerWidget {
               const SizedBox(height: 22),
               const BSectionLabel('How a name is scored'),
               if (scoring.bands.isNotEmpty) ...[
-                _ScaleCard(scoring: scoring, score: entry.score),
                 const SizedBox(height: 12),
               ],
               _Rubric(rubric: rubric),
@@ -395,113 +392,6 @@ class ScannedDetailSheet extends ConsumerWidget {
 }
 
 /// The scale the score sits on: worst, the research line, best — and where
-/// this name falls. Without it "8/13" is a number with no frame.
-class _ScaleCard extends StatelessWidget {
-  const _ScaleCard({required this.scoring, required this.score});
-
-  final ScoringGuide scoring;
-  final int score;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    final worst = scoring.worst;
-    final best = scoring.best;
-    final span = (best - worst).abs();
-    double at(int v) => span == 0 ? 0.5 : ((v - worst) / span).clamp(0.0, 1.0);
-    final line = scoring.researchLine;
-
-    return BPaperCard(
-      radius: BarbarianRadius.xl,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LayoutBuilder(
-            builder: (context, box) => SizedBox(
-              height: 40,
-              child: Stack(
-                alignment: Alignment.centerLeft,
-                children: [
-                  Container(
-                    height: 6,
-                    decoration: BoxDecoration(
-                      color: c.hairline,
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                  ),
-                  // Everything above the research line.
-                  if (line != null)
-                    PositionedDirectional(
-                      start: box.maxWidth * at(line.score),
-                      width: box.maxWidth * (1 - at(line.score)),
-                      child: Container(
-                        height: 6,
-                        decoration: BoxDecoration(
-                          // 35% forest on an 8%-ink track is 1.40:1 — the
-                          // "above the line" segment stopped separating from
-                          // the track it is measured against.
-                          color: c.up.withValues(alpha: 0.60),
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                      ),
-                    ),
-                  if (line != null)
-                    PositionedDirectional(
-                      start: box.maxWidth * at(line.score) - 1,
-                      child: Container(width: 2, height: 18, color: c.up),
-                    ),
-                  PositionedDirectional(
-                    start: (box.maxWidth * at(score) - 8).clamp(
-                      0.0,
-                      box.maxWidth - 16,
-                    ),
-                    child: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        color: c.accent,
-                        shape: BoxShape.circle,
-                        border: Border.all(color: c.surface, width: 3),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          for (final band in scoring.bands)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 38,
-                    child: BNumText(
-                      band.score > 0 ? '+${band.score}' : '${band.score}',
-                      style: BarbarianType.figureS.copyWith(
-                        color: band.score >= 0 ? c.up : c.down,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      band.label,
-                      style: BarbarianType.bodyM.copyWith(
-                        color: c.textSecondary,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
 class _ScoreBlock extends StatelessWidget {
   const _ScoreBlock({required this.entry});
 

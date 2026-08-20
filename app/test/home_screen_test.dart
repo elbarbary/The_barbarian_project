@@ -110,19 +110,26 @@ void main() {
     }
   });
 
-  testWidgets('the research rail names the method, not a verdict', (
-    tester,
-  ) async {
+  testWidgets('it carries no research surface at all', (tester) async {
+    // Research is no longer a pillar of this app: the founder pulled it from
+    // the navigation and from here, on the view that publishing scored studies
+    // on named issuers is exposure we have not cleared. Home must not be the
+    // back door that puts it in front of everyone anyway.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining('LATEST RESEARCH'));
+    await pumpUntil(tester, find.textContaining('TODAY ·'));
 
-    // §8.13 — the product is named for its method. "Cash or Trash" is a sell
-    // call in one word, and the deleted version of this screen used it as the
-    // rail's kicker.
-    expect(
-      find.textContaining(RegExp('cash or trash', caseSensitive: false)),
-      findsNothing,
-    );
-    expect(find.textContaining('SIX PILLARS'), findsWidgets);
+    for (final absent in [
+      'latest research',
+      'six pillars',
+      'cash or trash',
+      'all studies',
+      'investigated',
+    ]) {
+      expect(
+        find.textContaining(RegExp(absent, caseSensitive: false)),
+        findsNothing,
+        reason: 'Home must not surface research: found "$absent"',
+      );
+    }
   });
 }

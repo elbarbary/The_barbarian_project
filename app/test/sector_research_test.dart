@@ -104,27 +104,32 @@ void main() {
     // The ranked board is the report's own front page. If the app carries no
     // decisions, the parser has fallen behind another rewrite — which has
     // happened three times, each time silently.
-    test('every ranked name carries a decision and reasoning', () {
-      final ranked = report.watching.where((w) => w.rank != null).toList();
+    test('every ranked name carries reasoning, or says why it has none', () {
+      // Across both buckets. A ranked name moves into `qualified` the moment
+      // its badge reads Qualified, and looking only at `watching` made this
+      // test go blind exactly when the top-ranked name cleared the rules.
+      final ranked = [...report.qualified, ...report.watching]
+          .where((w) => w.rank != null)
+          .toList();
       expect(ranked, isNotEmpty, reason: 'the board produced no ranked names');
       for (final entry in ranked) {
-        // A ranked name has a decision, or says why it has none. What it may
-        // never be is silently blank: on 18 August the report's rank-one
-        // decision was "Hold 50 model shares from EGP 92.00", the voice gate
-        // withheld the whole narrative, and a card with a score and no words
-        // is indistinguishable from a parser that has fallen behind.
-        if (entry.positionWithheld) {
-          expect(entry.action, isNull);
-          continue;
-        }
-        expect(entry.action, isNotNull, reason: '${entry.ticker} has no action');
-        expect(entry.action!.decision, isNotNull);
-        expect(entry.action!.reasoning, isNotEmpty);
+        // A ranked name explains its score, or states that the explanation was
+        // withheld. What it may never be is silently blank: a card with a
+        // score and no words is indistinguishable from a parser that has
+        // fallen behind.
+        //
+        // This used to require a `decision` too. §8.6 removed decisions from
+        // every screen — an instruction about a named company is the one thing
+        // an unlicensed publisher cannot print — so the reasoning is now the
+        // whole of what a card may carry, and the whole of what is checked.
+        if (entry.positionWithheld) continue;
+        final reasoning = entry.action?.reasoning ?? const <String>[];
+        expect(
+          reasoning.isNotEmpty || (entry.researchSummary?.isNotEmpty ?? false),
+          isTrue,
+          reason: '${entry.ticker} has a score and nothing explaining it',
+        );
       }
-      // No assertion that some name survived. A board of one open position is
-      // a real day, and the withheld/blank split above is what actually tells
-      // a gate apart from a parser: a parser that stopped matching the
-      // decision block leaves the flag false and the action null, which fails.
     });
 
     test('the ranked order is the report order', () {

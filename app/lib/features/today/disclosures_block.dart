@@ -98,7 +98,7 @@ class _Filing extends StatelessWidget {
                   child: Row(
                     children: [
                       if (item.weight == 'check') ...[
-                        const _CheckTag(),
+                        _CheckTag(ratio: item.evidence?.ratio),
                         const SizedBox(width: 8),
                       ],
                       Flexible(child: _TypeTag(label: item.eventLabel)),
@@ -203,22 +203,32 @@ class _TypeTag extends StatelessWidget {
 }
 
 class _CheckTag extends StatelessWidget {
-  const _CheckTag();
+  /// §8.6 — state the measurement, never an invitation.
+  ///
+  /// This chip used to read "WORTH A LOOK": the app's own judgement that a
+  /// named company deserved a reader's attention today, in accent colour, on
+  /// the most screenshot-friendly element of the row — and the feed then
+  /// sorted those names to the top. A measurement is a fact about the session
+  /// and says the same thing without recommending anything.
+  const _CheckTag({this.ratio});
+
+  final double? ratio;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final r = ratio;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: c.accent.withValues(alpha: c.isDark ? 0.20 : 0.14),
+        color: c.hairline,
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
       child: Text(
-        'WORTH A LOOK',
-        style: BarbarianType.labelNano.copyWith(
-          color: BarbarianPalette.onWash(c, c.accent),
-        ),
+        r == null || r <= 0
+            ? 'UNUSUAL VOLUME'
+            : 'VOLUME ${r.toStringAsFixed(1)}x NORMAL',
+        style: BarbarianType.labelNano.copyWith(color: c.textMuted),
       ),
     );
   }

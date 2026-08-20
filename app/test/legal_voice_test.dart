@@ -35,7 +35,7 @@ void main() {
   /// forgotten, and one buried on a provenance page reaches nobody.
   group('§8.12 the non-licence line is on every scored screen', () {
     final scored = <String, Widget>{
-      'Six Pillars': const CashOrTrashScreen(parentTab: BNavTab.research),
+      'Six Pillars': const CashOrTrashScreen(parentTab: BNavTab.home),
       'Opportunity Scanner': const OpportunityScreen(parentTab: BNavTab.today),
       'Company': const CompanyScreen(
         ticker: 'COMI',
@@ -231,6 +231,102 @@ void main() {
       }
     }
     expect(offenders, isEmpty, reason: offenders.join('\n'));
+  });
+
+  /// §8.7 — the data that ships inside the binary is held to the same rules
+  /// as the code that renders it.
+  ///
+  /// Every §8 test in this file scans Dart string literals. None of them could
+  /// see `app/assets/fixtures/**.json`, which is what an offline first-run
+  /// reader is shown — and that is exactly where the worst copy in the project
+  /// was found: a scoring note reading "the scanner is built to find things
+  /// before they move" (a written claim that the product predicts price) and a
+  /// research summary reading "near the EGP 64.70 risk line" (a stop-loss level
+  /// against a named issuer). Both had been shipping for weeks behind a gate
+  /// that only ever looked at the widgets.
+  test('§8.7 no shipped fixture carries a prediction or a trade level', () {
+    final blocked = <RegExp>[
+      RegExp(r'before (they|it) move', caseSensitive: false),
+      RegExp(r'marked[\s-]?to[\s-]?market', caseSensitive: false),
+      RegExp(r'\brisk line\b', caseSensitive: false),
+      RegExp(r'\bstop loss\b', caseSensitive: false),
+      RegExp(r'\bprice target\b', caseSensitive: false),
+      RegExp(r'\bexpected return\b', caseSensitive: false),
+      RegExp(r'\bbuy now\b', caseSensitive: false),
+      RegExp(r'\bsell now\b', caseSensitive: false),
+      RegExp(r'\bhard stop\b', caseSensitive: false),
+      RegExp(r'\bholding period\b', caseSensitive: false),
+      // A price with a threshold noun beside it is a level to act at,
+      // whichever order the two arrive in.
+      RegExp(r'EGP\s*[\d.,]+[^.]{0,28}\b(line|floor|ceiling|trigger|stop)\b',
+          caseSensitive: false),
+    ];
+
+    final offenders = <String>[];
+    final dir = Directory('assets/fixtures');
+    for (final file in dir.listSync(recursive: true)) {
+      if (file is! File || !file.path.endsWith('.json')) continue;
+      // "No holding period — no entry." records the absence of a trade
+      // rather than instructing one, and the pipeline keeps it deliberately.
+      final body = file
+          .readAsStringSync()
+          .replaceAll(RegExp('no holding period', caseSensitive: false), '')
+          .replaceAll(RegExp('no entry', caseSensitive: false), '');
+      for (final pattern in blocked) {
+        final match = pattern.firstMatch(body);
+        if (match != null) {
+          offenders.add('${file.path}: ${match.group(0)}');
+        }
+      }
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason:
+          'Shipped data may not carry a prediction or a trade level:\n'
+          '${offenders.join('\n')}',
+    );
+  });
+
+  /// §8.6 — the scanner may explain a score. It may not reach a decision.
+  ///
+  /// The scan report carries an `action` for each name: a decision ("wait"),
+  /// a label for it, and the reasoning behind it. The reasoning is the product
+  /// — it says why a rule scored what it scored. The decision is an
+  /// instruction about a named company however gently it is worded, and it
+  /// used to lead the card on both the scanner and its detail screen.
+  ///
+  /// This is a source scan rather than a widget test on purpose: the decision
+  /// is absent from today's data, so a rendering test would pass while the
+  /// code path sat there waiting for the pipeline to emit one.
+  test('§8.6 no screen renders a scan decision', () {
+    final offenders = <String>[];
+    for (final file in Directory('lib').listSync(recursive: true)) {
+      if (file is! File || !file.path.endsWith('.dart')) continue;
+      if (file.path.contains('models/')) continue; // the model may carry it
+      for (final (i, line) in file.readAsLinesSync().indexed) {
+        final code = line.trim();
+        if (code.startsWith('//') || code.startsWith('///')) continue;
+        if (RegExp(r'\.decision\b').hasMatch(code) ||
+            RegExp(r'action\??\.label').hasMatch(code)) {
+          offenders.add('${file.path}:${i + 1}: $code');
+        }
+        // A single company chosen by score and rendered as the day's headline
+        // is a best-stock-today element however it is assembled. The Today
+        // hero did exactly this via `OpportunityReport.lead`.
+        if (RegExp(r'\.score\s*[><]\s*\w+\.score').hasMatch(code) ||
+            RegExp(r'\bget lead\b').hasMatch(code)) {
+          offenders.add('${file.path}:${i + 1}: picks one name by score: $code');
+        }
+      }
+    }
+    expect(
+      offenders,
+      isEmpty,
+      reason:
+          'A scan decision is an instruction about a named company:\n'
+          '${offenders.join('\n')}',
+    );
   });
 
   /// §8.5 — no instruction, no size, no target, anywhere in the UI.

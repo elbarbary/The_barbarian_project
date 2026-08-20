@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 ///
 /// Everything is authored on a 24x24 grid and scaled, so a size change never
 /// shifts the alignment between them.
-enum BNavIcon { home, today, research, you }
+enum BNavIcon { home, today, pit, you }
 
 class BNavIconPainter extends CustomPainter {
   const BNavIconPainter({required this.icon, required this.color});
@@ -44,8 +44,8 @@ class BNavIconPainter extends CustomPainter {
         _home(canvas, fill, stroke);
       case BNavIcon.today:
         _today(canvas, fill, stroke);
-      case BNavIcon.research:
-        _research(canvas, fill, stroke);
+      case BNavIcon.pit:
+        _pit(canvas, fill, stroke);
       case BNavIcon.you:
         _you(canvas, fill, stroke);
     }
@@ -97,26 +97,18 @@ class BNavIconPainter extends CustomPainter {
     bar(12, 0.5);
   }
 
-  /// Three bars, ascending — the mark the board gives the studies list, and
-  /// the one this file used for Market before Market stopped being a place.
+  /// The Pit: two overlapping filled discs — a conversation, not a document.
   ///
-  /// The baseline the old version drew is gone: the board has none, and three
-  /// rounded bars read as a chart without a rule under them.
-  void _research(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
-    void bar(double x, double top) => canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTRB(x, top, x + 4.08, 20.4),
-        const Radius.circular(2.04),
-      ),
-      fill(1),
-    );
-
-    bar(3.6, 13.2);
-    bar(9.96, 8.4);
-    bar(16.32, 3.6);
+  /// The board's own SVG on a 20x20 viewBox — `circle cx=8 cy=8.5 r=5.5` and
+  /// `circle cx=13 cy=12 r=5.5` at half opacity — scaled onto this file's 24
+  /// grid by 1.2. The second disc is faded rather than outlined, which is what
+  /// lets the two read as overlapping without a cut between them.
+  void _pit(Canvas canvas, Paint Function(double) fill,
+      Paint Function(double, double) stroke) {
+    canvas.drawCircle(const Offset(9.6, 10.2), 6.6, fill(1));
+    canvas.drawCircle(const Offset(15.6, 14.4), 6.6, fill(0.5));
   }
 
-  /// Head and shoulders, with the shoulders an arc rather than a slab.
   void _you(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
     canvas.drawCircle(const Offset(12, 8.2), 4.3, fill(1));
 

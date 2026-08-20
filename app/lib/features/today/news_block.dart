@@ -200,6 +200,13 @@ class _EventTag extends StatelessWidget {
 }
 
 class _CheckTag extends StatelessWidget {
+  /// §8.6 — state the measurement, never an invitation.
+  ///
+  /// This chip used to read "WORTH A LOOK": the app's own judgement that a
+  /// named company deserved a reader's attention today, in accent colour, on
+  /// the most screenshot-friendly element of the row — and the feed then
+  /// sorted those names to the top. A measurement is a fact about the session
+  /// and says the same thing without recommending anything.
   const _CheckTag();
 
   @override
@@ -208,24 +215,18 @@ class _CheckTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: c.accent.withValues(alpha: c.isDark ? 0.20 : 0.14),
+        color: c.hairline,
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
       child: Text(
-        'WORTH A LOOK',
-        style: BarbarianType.labelNano.copyWith(
-          color: BarbarianPalette.onWash(c, c.accent),
-        ),
+        // The news feed carries no volume figure of its own, so this states
+        // only that the session was unusual, not how unusual.
+        'UNUSUAL VOLUME',
+        style: BarbarianType.labelNano.copyWith(color: c.textMuted),
       ),
     );
   }
 }
-
-/// Who the headlines came from, and who could not be reached.
-///
-/// The outages are published rather than hidden. A feed that quietly lost two
-/// of its five sources looks identical to one that never had them, and a
-/// reader deciding how much of the market this covers deserves to know which.
 class _Provenance extends StatelessWidget {
   const _Provenance({required this.feed});
 

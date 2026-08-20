@@ -56,12 +56,10 @@ abstract class OpportunityReport with _$OpportunityReport {
 
   DateTime? get reportDate => DateTime.tryParse(date ?? '');
 
-  /// The strongest name on today's watch, if any — what Home previews.
-  ScannedCompany? get lead {
-    final all = [...qualified, ...watching];
-    if (all.isEmpty) return null;
-    return all.reduce((a, b) => b.score > a.score ? b : a);
-  }
+  // `lead` — the highest-scoring name on the watch — was deleted deliberately
+  // (§8.6). Selecting one company by score and rendering it as the day's
+  // headline is a best-stock-today element however it is assembled, and spec
+  // §8 forbids that outright. Nothing should reintroduce a max-by-score pick.
 
   /// Counts come from the lists themselves, not from the summary block, so a
   /// stale or wrong summary can never make the UI disagree with what it draws.

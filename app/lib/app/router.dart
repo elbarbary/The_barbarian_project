@@ -11,7 +11,6 @@ import '../features/home/home_screen.dart';
 import '../features/market/market_screen.dart';
 import '../features/opportunities/opportunity_screen.dart';
 import '../features/pit/pit_screen.dart';
-import '../features/research/research_screen.dart';
 import '../features/today/today_screen.dart';
 import '../features/profile/you_screen.dart';
 import '../features/research/article_screen.dart';
@@ -20,16 +19,12 @@ import '../features/research/article_screen.dart';
 abstract final class Routes {
   static const String home = '/';
   static const String today = '/today';
-  static const String research = '/research';
+  static const String pit = '/pit';
   static const String you = '/you';
 
   /// The full directory and its search. The boards give this its own tab;
   /// until that is settled it is reached from Home.
   static const String directory = 'directory';
-
-  /// The discussion feature, still pre-launch. It kept its route and left the
-  /// navigation: a quarter of the bar should not be a coming-soon page.
-  static const String pit = 'pit';
 
   /// «أقدر أخرج؟» — the exit question, for one company or as the primer.
   static const String exit = 'exit';
@@ -44,8 +39,6 @@ abstract final class Routes {
 
   static String exitPath(BNavTab from, [String? ticker]) =>
       '${_root(from)}exit${ticker == null ? '' : '/$ticker'}';
-
-  static String pitPath(BNavTab from) => '${_root(from)}pit';
 
   static String companyPath(BNavTab from, String ticker) =>
       '${_root(from)}company/$ticker'.replaceAll('//', '/');
@@ -63,7 +56,7 @@ abstract final class Routes {
   static String _root(BNavTab tab) => switch (tab) {
     BNavTab.home => '/',
     BNavTab.today => '/today/',
-    BNavTab.research => '/research/',
+    BNavTab.pit => '/pit/',
     BNavTab.you => '/you/',
   };
 }
@@ -91,10 +84,6 @@ GoRouter buildRouter() {
     GoRoute(
       path: Routes.directory,
       builder: (context, state) => MarketScreen(parentTab: tab),
-    ),
-    GoRoute(
-      path: Routes.pit,
-      builder: (context, state) => PitScreen(parentTab: tab),
     ),
     GoRoute(
       path: Routes.scanner,
@@ -161,9 +150,10 @@ GoRouter buildRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.research,
-                builder: (context, state) => const ResearchScreen(),
-                routes: detailRoutes(BNavTab.research),
+                path: Routes.pit,
+                builder: (context, state) =>
+                    const PitScreen(parentTab: BNavTab.pit),
+                routes: detailRoutes(BNavTab.pit),
               ),
             ],
           ),

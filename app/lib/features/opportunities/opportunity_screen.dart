@@ -103,7 +103,12 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
               children: [
                 const BScreenTitle(
                   'Opportunity Scanner',
-                  subtitle: 'What deserves investigation now',
+                  // Not "what deserves investigation now". A screen that tells
+                  // a reader where to spend their attention today is one short
+                  // step from telling them where to put their money. What this
+                  // publishes is the output of a published rule, and the rule
+                  // is the product.
+                  subtitle: 'What the published rule found, and what it missed',
                 ),
                 const SizedBox(height: 14),
                 Wrap(
@@ -164,12 +169,15 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                   const SizedBox(height: 14),
                   Text(switch (_section) {
                     _Section.qualified =>
-                      'Cleared the test. Worth reading the filing.',
+                      'Cleared every rule. Clearing a rule is a fact about the '
+                          'rule, not a view on the company.',
+                    // "Accumulation" is a trading instruction wearing a noun.
                     _Section.watching =>
-                      'Ranked accumulation watch. Something is there, but the '
-                          'evidence is incomplete.',
+                      'Cleared some rules and not others. Incomplete evidence '
+                          'is a statement about our test, not about the share.',
                     _Section.rejected =>
-                      'Failed the test, and kept on the record.',
+                      'Did not clear the rules, and kept on the record so the '
+                          'test can be audited.',
                     _Section.record =>
                       'What the published rule said, what the tape did next, '
                           'and what was changed in the rule afterwards. It is '
@@ -433,44 +441,10 @@ class _ScannedCard extends StatelessWidget {
                 ),
               ),
             ],
-            // The decision leads, the way the report itself now leads with it.
-            // A reader scanning eight cards wants "wait, and here is why" before
-            // they want a score out of thirteen.
-            if (entry.action?.decision case final String decision) ...[
-              const SizedBox(height: 12),
-              Container(
-                padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
-                decoration: BoxDecoration(
-                  color: c.iris.withValues(alpha: c.isDark ? 0.15 : 0.08),
-                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
-                  border: Border(
-                    left: BorderSide(
-                      color: c.iris.withValues(alpha: 0.55),
-                      width: 3,
-                    ),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      (entry.action?.label ?? 'What the rule produced').toUpperCase(),
-                      style: BarbarianType.labelNano.copyWith(color: c.iris),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      decision,
-                      style: BarbarianType.bodyL.copyWith(
-                        color: c.textPrimary,
-                        height: 1.35,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-            if (entry.action?.reasoning.firstOrNull ?? entry.researchSummary
-                case final String s) ...[
+            // §8.6 — the reasoning, never an action. `action` carries a
+            // decision, a label and a rationale for it; the scanner publishes
+            // why a name scored what it scored and nothing about what to do.
+            if (entry.researchSummary case final String s) ...[
               const SizedBox(height: 12),
               Text(
                 s,
@@ -563,7 +537,6 @@ class _OutcomeCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
-    final up = outcome.isUp;
     // Absent only once the directory has actually arrived. While it is still
     // loading every row would otherwise go dead for a frame, and a link that
     // appears late reads as a glitch.
@@ -616,13 +589,15 @@ class _OutcomeCard extends ConsumerWidget {
                     ],
                   ),
                 ),
-                if (outcome.returnPercent case final String r)
-                  BChangeDelta(
-                    value: r.replaceAll(RegExp(r'^[+-]'), ''),
-                    direction: up ? BDirection.up : BDirection.down,
-                    style: BarbarianType.figureS,
-                    gap: 4,
-                  ),
+                // §8.6 — the rule log carries no return figure.
+                //
+                // A realised percentage beside each ticker, coloured green or
+                // red, is a per-name performance table however the section is
+                // captioned, and a performance table is a track record. §8.1
+                // already bans a total; a reader can add eight coloured
+                // numbers themselves. What the log is for is what the rule
+                // said and what was changed in it afterwards — the note below
+                // carries that, and it is the part worth reading.
               ],
             ),
             if (outcome.note case final String n) ...[

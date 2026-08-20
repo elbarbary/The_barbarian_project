@@ -24,7 +24,7 @@ import 'nav_icons.dart';
 enum BNavTab {
   home('Home'),
   today('Today'),
-  research('Research'),
+  pit('The Pit'),
   you('You');
 
   const BNavTab(this.label);
@@ -224,7 +224,7 @@ class _NavTab extends StatelessWidget {
                 icon: switch (tab) {
                   BNavTab.home => BNavIcon.home,
                   BNavTab.today => BNavIcon.today,
-                  BNavTab.research => BNavIcon.research,
+                  BNavTab.pit => BNavIcon.pit,
                   BNavTab.you => BNavIcon.you,
                 },
                 color: color,

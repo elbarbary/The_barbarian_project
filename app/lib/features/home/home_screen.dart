@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
-import '../../core/models/cash_or_trash.dart';
 import '../../core/models/company.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/models/market_snapshot.dart';
@@ -59,7 +58,6 @@ class HomeScreen extends ConsumerWidget {
         const _DailyInsight(),
         const _IndexStrip(),
         const _WatchlistBlock(),
-        const _ResearchRail(),
       ],
     );
   }
@@ -493,68 +491,6 @@ class _WatchTile extends ConsumerWidget {
       child: dark
           ? BDarkCard(padding: const EdgeInsets.all(16), child: content)
           : BPaperCard(padding: const EdgeInsets.all(16), child: content),
-    );
-  }
-}
-
-/// The latest studies, as a horizontally scrolling rail.
-///
-/// The board's card is a kicker, a title and a meta line — no score and no
-/// badge. That is also what §8 wants on a browse surface: the study is the
-/// product, and its reading belongs inside it rather than on a tile someone
-/// scrolls past.
-class _ResearchRail extends ConsumerWidget {
-  const _ResearchRail();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref
-        .watch(cashOrTrashProvider)
-        .whenOrNull(data: (s) => s.value);
-    final entries = index?.companies ?? const <CashOrTrashEntry>[];
-    if (entries.isEmpty) return const SizedBox.shrink();
-
-    final recent = [...entries]
-      ..sort((a, b) => (b.studiedAt ?? '').compareTo(a.studiedAt ?? ''));
-    final shown = recent.take(5).toList();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            const Expanded(child: BSectionLabel('Latest research')),
-            BInlineAction(
-              'All studies',
-              onTap: () => context.go(Routes.research),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 190,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemCount: shown.length,
-            separatorBuilder: (_, _) => const SizedBox(width: 12),
-            itemBuilder: (context, i) {
-              final entry = shown[i];
-              return BResearchCard(
-                width: 250,
-
-                kicker: 'Six Pillars',
-                title: (entry.summary?.isNotEmpty ?? false)
-                    ? entry.summary!
-                    : '${entry.ticker}: the complete study',
-                meta: entry.studiedAt,
-                onTap: () => context.push(
-                  Routes.companyPath(BNavTab.home, entry.ticker),
-                ),
-              );
-            },
-          ),
-        ),
-      ],
     );
   }
 }

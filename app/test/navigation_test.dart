@@ -85,7 +85,7 @@ void main() {
       }
     });
 
-    testWidgets('Today, Research and You each render their own screen', (
+    testWidgets('Today, The Pit and You each render their own screen', (
       tester,
     ) async {
       await boot(tester);
@@ -93,8 +93,8 @@ void main() {
       await tapTab(tester, BNavTab.today);
       await pumpUntil(tester, find.text('Today'));
 
-      await tapTab(tester, BNavTab.research);
-      await pumpUntil(tester, find.text('Every study, and what happened after it'));
+      await tapTab(tester, BNavTab.pit);
+      await pumpUntil(tester, find.textContaining('The Pit'));
 
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('No account needed to read'));
@@ -142,21 +142,6 @@ void main() {
 
       await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded).first);
       await pumpUntil(tester, find.text('Today'));
-    });
-
-    testWidgets('Research opens Six Pillars', (tester) async {
-      await boot(tester);
-      await tapTab(tester, BNavTab.research);
-
-      // Research lists it under its own section label, and the destination
-      // screen carries the same title — so wait on the card, tap it, then
-      // wait on something only the destination draws.
-      await pumpUntil(tester, find.text('Six Pillars'));
-      await tapVisible(tester, find.text('Six Pillars').first);
-      await pumpUntil(tester, find.textContaining('of 224 investigated'));
-
-      final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.research);
     });
 
     testWidgets('search opens a company, keeping the Home slot lit', (

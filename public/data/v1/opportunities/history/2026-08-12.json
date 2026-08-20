@@ -5,7 +5,7 @@
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
-      "detail": "a real filing, not a rumour or a press mention",
+      "detail": "a real filing, not a rumour or a press mention.",
       "weight": 4
     },
     {
@@ -15,37 +15,37 @@
     },
     {
       "label": "Volume and early price confirmation",
-      "detail": "RV20 — volume against its own 20-session median",
+      "detail": "RV20 — volume against its own 20-session median.",
       "weight": 2
     },
     {
       "label": "Repeat-buyer or ownership cluster",
-      "detail": "the same holder building, disclosure after disclosure",
+      "detail": "the same holder building, disclosure after disclosure.",
       "weight": 2
     },
     {
       "label": "A clear dated catalyst ahead",
-      "detail": "something on the calendar, not a vague hope",
+      "detail": "something on the calendar, not a vague hope.",
       "weight": 2
     },
     {
       "label": "Already up more than 20% in five sessions",
-      "detail": "the anti-chasing penalty",
+      "detail": "the anti-chasing penalty.",
       "weight": -4
     },
     {
       "label": "Company denies knowing why it moved",
-      "detail": "told the exchange it has no explanation",
+      "detail": "told the exchange it has no explanation.",
       "weight": -4
     },
     {
       "label": "Two or more completed limit-ups",
-      "detail": "EGP's ±20% band already used up",
+      "detail": "EGP's ±20% band already used up.",
       "weight": -3
     },
     {
       "label": "Severe valuation, dilution or exit risk",
-      "detail": "including a float too thin to sell into",
+      "detail": "including a float too thin to sell into.",
       "weight": -3
     }
   ],
@@ -65,8 +65,8 @@
       }
     ],
     "notes": [
-      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). That is deliberate: the scanner is built to find things before they move, so a name that has already run is penalised harder than good news can reward it. Most days nothing qualifies — and that is the scanner working, not failing.",
-      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction — every signal is tracked afterwards in the marked-to-market ledger below, including the ones that went wrong."
+      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). Most days nothing qualifies — and that is the scanner working, not failing.",
+      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction."
     ]
   },
   "coverage": {
@@ -148,7 +148,7 @@
       "status_label": "Model trade closed",
       "return_percent": "+5.45%",
       "direction": "up",
-      "note": "Trade 001 realized EGP 143.48 after friction the H1 thesis clock ended. Closed no sessions remain."
+      "note": "Closed no sessions remain."
     },
     {
       "ticker": "JUFO",
@@ -156,7 +156,7 @@
       "status_label": "Persistent watch",
       "return_percent": "-3.20%",
       "direction": "down",
-      "note": "The H1 cohort remains below its EGP 28 trigger. If confirmed: 3–5 sessions review 2"
+      "note": ""
     },
     {
       "ticker": "HELI",
@@ -164,7 +164,7 @@
       "status_label": "Persistent watch",
       "return_percent": "-1.65%",
       "direction": "down",
-      "note": "The land/earnings cohort remains below EGP 8.66 with RV20 0.70×. If confirmed: 5–10 sessions review 3"
+      "note": "The land/earnings cohort remains below EGP 8.66 with RV20 0.70×."
     },
     {
       "ticker": "TALM",
@@ -180,7 +180,7 @@
       "status_label": "Persistent watch",
       "return_percent": "+15.68%",
       "direction": "up",
-      "note": "The 17 August AGM is live, but economics remain unproven. No entry before approval"
+      "note": "The 17 August AGM is live, but economics remain unproven. No entry."
     },
     {
       "ticker": "ORWE",

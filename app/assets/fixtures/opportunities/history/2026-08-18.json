@@ -5,7 +5,7 @@
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
-      "detail": "a real filing, not a rumour or a press mention",
+      "detail": "a real filing, not a rumour or a press mention.",
       "weight": 4
     },
     {
@@ -15,37 +15,37 @@
     },
     {
       "label": "Volume and early price confirmation",
-      "detail": "RV20 — volume against its own 20-session median",
+      "detail": "RV20 — volume against its own 20-session median.",
       "weight": 2
     },
     {
       "label": "Repeat-buyer or ownership cluster",
-      "detail": "the same holder building, disclosure after disclosure",
+      "detail": "the same holder building, disclosure after disclosure.",
       "weight": 2
     },
     {
       "label": "A clear dated catalyst ahead",
-      "detail": "something on the calendar, not a vague hope",
+      "detail": "something on the calendar, not a vague hope.",
       "weight": 2
     },
     {
       "label": "Already up more than 20% in five sessions",
-      "detail": "the anti-chasing penalty",
+      "detail": "the anti-chasing penalty.",
       "weight": -4
     },
     {
       "label": "Company denies knowing why it moved",
-      "detail": "told the exchange it has no explanation",
+      "detail": "told the exchange it has no explanation.",
       "weight": -4
     },
     {
       "label": "Two or more completed limit-ups",
-      "detail": "EGP's ±20% band already used up",
+      "detail": "EGP's ±20% band already used up.",
       "weight": -3
     },
     {
       "label": "Severe valuation, dilution or exit risk",
-      "detail": "including a float too thin to sell into",
+      "detail": "including a float too thin to sell into.",
       "weight": -3
     }
   ],
@@ -65,8 +65,8 @@
       }
     ],
     "notes": [
-      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). That is deliberate: the scanner is built to find things before they move, so a name that has already run is penalised harder than good news can reward it. Most days nothing qualifies — and that is the scanner working, not failing.",
-      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction — every signal is tracked afterwards in the marked-to-market ledger below, including the ones that went wrong."
+      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). Most days nothing qualifies — and that is the scanner working, not failing.",
+      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction."
     ]
   },
   "sector": null,
@@ -86,7 +86,7 @@
       "ticker": "HDBK",
       "rank": 1,
       "status": "watching",
-      "status_label": "Qualified · booked",
+      "status_label": "Qualified",
       "state": "Qualified · booked",
       "score": 7,
       "max_score": 13,
@@ -112,7 +112,7 @@
       "score": 8,
       "max_score": 13,
       "seen_at": "2026-08-16",
-      "research_summary": "The +302.5% H1 profit growth and named-buyer cohort remain live, but the 10:26 quote weakened to EGP 66.00, near the EGP 64.70 risk line.",
+      "research_summary": "",
       "move_percent": "+10.55%",
       "gates": [],
       "research": [],
@@ -139,7 +139,7 @@
       "ticker": "MFPC",
       "rank": null,
       "status": "watching",
-      "status_label": "Fresh base required",
+      "status_label": "Watch only",
       "state": null,
       "score": 7,
       "max_score": 13,

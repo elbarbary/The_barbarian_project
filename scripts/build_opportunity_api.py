@@ -95,6 +95,24 @@ BANNED_PATTERNS = (
         re.I,
     ),
     re.compile(r"\bEGP\s*[\d.,]+\s*(trigger|cap|invalidation|stop|target)", re.I),
+    # A stop under another noun. The report writes "near the EGP 64.70 risk
+    # line", which is a stop-loss level against a named issuer and reached
+    # three screens because none of the patterns above name "line". Matched in
+    # both directions, because the level and the noun swap places freely.
+    re.compile(r"\brisk line\b", re.I),
+    re.compile(r"\bEGP\s*[\d.,]+[^.]{0,28}\b(line|floor|ceiling)\b", re.I),
+    re.compile(r"\b(line|floor|ceiling)\b[^.]{0,28}\bEGP\s*[\d.,]+", re.I),
+    # NOT a bare "invalidat": the outcome record legitimately says
+    # "Invalidated" in the past tense, which is a record of something that
+    # already happened rather than a level to act at. The existing
+    # "invalidation" noun below already catches the level. The build's own
+    # backstop caught this within a minute of the pattern being added, which
+    # is the whole reason that gate exists.
+    # Claims the product predicts price. An unlicensed publisher writing down
+    # that its method finds things "before they move" is the one sentence that
+    # cannot be defended, and it shipped inside the binary.
+    re.compile(r"\bbefore (they|it) move", re.I),
+    re.compile(r"\bmarked[\s-]?to[\s-]?market\b", re.I),
     re.compile(r"\b(invalidation|profit target|target level)", re.I),
     re.compile(r"\bholding clock\b", re.I),
     re.compile(r"\bthe (model|decision) (actually )?enters\b", re.I),
@@ -315,6 +333,47 @@ ABSENCE_CONDITION = re.compile(
 DESCRIPTIVE_SHARES = re.compile(
     r"\b(free float|float|outstanding|listed|issued|treasury|authorised|authorized|"
     r"traded|volume|median|capital)\b", re.I)
+
+
+# The badge is the shortest, largest and most screenshot-friendly string on a
+# scanned card, and it was the one narrative field that reached the app
+# unfiltered. Today's values include "Fresh base required" — an entry condition,
+# stating what must happen before a name is actionable — and "Qualified ·
+# booked", which is model-position vocabulary. Every other note on the entry
+# goes through the §8 filters; this one now does too, and falls back to the
+# bucket word rather than to whatever the report wrote.
+BADGE_BANNED = (
+    re.compile(r"\bbase required\b", re.I),
+    re.compile(r"\bbooked\b", re.I),
+    re.compile(r"\brequired\b", re.I),
+    re.compile(r"\bentry\b", re.I),
+    re.compile(r"\btrim\b", re.I),
+    re.compile(r"\badd(ing)?\b", re.I),
+)
+
+
+def clean_badge(value: str | None, fallback: str = "Watch only") -> str:
+    """A status badge that states a bucket, never a trade condition.
+
+    The report joins a bucket to a position note with a middle dot — "Qualified
+    · booked" — so the clauses are filtered separately and the bucket survives
+    on its own. Dropping the whole badge for one bad clause would understate a
+    name that genuinely cleared the rules.
+
+    No trailing full stop: `sanitize` punctuates prose, and a two-word chip
+    that ends in a period looks like a typo.
+    """
+    if not value:
+        return fallback
+    kept = []
+    for clause in re.split(r"[·|]", value):
+        clause = (strip_position(clause.strip()) or "").strip(" .")
+        if not clause:
+            continue
+        if any(pattern.search(clause) for pattern in BADGE_BANNED):
+            continue
+        kept.append(clause)
+    return " · ".join(kept) if kept else fallback
 
 
 def strip_position(value: str | None) -> str | None:
@@ -646,9 +705,16 @@ def scoring(html: str) -> dict:
                 "label": text(m.group(2)),
             }
         )
+    # Through the §8 filter like every other narrative field. These notes ship
+    # inside the binary and one of them read "the scanner is built to find
+    # things before they move" — a written claim that the product predicts
+    # price, from a publisher that is not licensed to make one. It reached the
+    # app because `scoring()` was the one extractor that never called
+    # `sanitize`.
     notes = [
-        text(m.group(1))
+        cleaned
         for m in re.finditer(r'<p class="scoring-note[^"]*">(.*?)</p>', html, re.S)
+        if (cleaned := sanitize(text(m.group(1))))
     ]
     return {"bands": bands, "notes": notes}
 
@@ -688,7 +754,9 @@ def parse(html: str) -> dict:
                 score, max_score = int(m2.group(1)), int(m2.group(2))
             seen = parse_date(meta.group(1).split("·")[0], year)
         scored[ticker.group(1)] = {
-            "status_label": badge.group(1).strip() if badge else "Watch only",
+            "status_label": clean_badge(
+                badge.group(1).strip() if badge else None
+            ),
             "score": score,
             "max_score": max_score,
             "seen_at": seen,
@@ -707,7 +775,9 @@ def parse(html: str) -> dict:
     watch = []
     for ticker in sorted(cards, key=lambda t: cards[t]["rank"] or 99):
         card, extra = cards[ticker], scored.get(ticker, {})
-        label = extra.get("status_label") or card.get("state") or "Watch only"
+        label = clean_badge(
+            extra.get("status_label") or card.get("state")
+        )
         watch.append(
             {
                 "ticker": ticker,

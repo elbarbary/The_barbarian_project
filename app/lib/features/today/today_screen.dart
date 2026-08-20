@@ -3,12 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
-import '../../core/models/company.dart';
-import '../../core/models/opportunity.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
-import '../../core/widgets/charts.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/legal.dart';
 import 'disclosures_block.dart';
@@ -136,16 +133,20 @@ class _ScannerHero extends ConsumerWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  report.headline ?? 'What deserves investigation now',
+                  report.headline ?? 'What the published rule found today',
                   style: BarbarianType.headlineL.copyWith(
                     color: c.onInk,
                     height: 1.18,
                   ),
                 ),
-                if (report.lead case final ScannedCompany lead) ...[
-                  const SizedBox(height: 18),
-                  _LeadName(lead: lead),
-                ],
+                // §8.6 — no single name leads this card.
+                //
+                // It used to show the highest-scoring company on the watch,
+                // with its price chart, as the hero of the day. Whatever the
+                // caption said, a max-by-score pick rendered as the day's
+                // headline is a best-stock-today element assembled from parts,
+                // and spec §8 forbids that however it is built. The counts say
+                // what the rule did; they name nobody.
                 const SizedBox(height: 14),
                 Row(
                   children: [
@@ -180,155 +181,6 @@ class _ScannerHero extends ConsumerWidget {
           ),
         );
       },
-    );
-  }
-}
-
-/// The top-scored name on today's watch.
-///
-/// Carries its own price history as a sparkline — the canvas puts a chart
-/// inside the hero, and this is the one series here that is real. Evidence and
-/// rank, never an instruction (spec §8).
-class _LeadName extends ConsumerWidget {
-  const _LeadName({required this.lead});
-
-  final ScannedCompany lead;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = context.colors;
-    final history =
-        ref.watch(priceHistoryProvider(lead.ticker)).whenOrNull(
-          data: (s) => s.value,
-        ) ??
-        const <PricePoint>[];
-    final spark = history.length > 2
-        ? history
-              .sublist(history.length > 40 ? history.length - 40 : 0)
-              .map((p) => p.close)
-              .toList()
-        : const <double>[];
-
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
-      decoration: BoxDecoration(
-        color: c.onInk.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(BarbarianRadius.md),
-        border: Border.all(color: c.onInk.withValues(alpha: 0.10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                lead.ticker,
-                style: BarbarianType.titleL.copyWith(color: c.onInk),
-              ),
-              const SizedBox(width: 9),
-              // The chip takes the slack rather than competing with a Spacer,
-              // which was clipping "Persistent watch" to "Persistent w…".
-              if (lead.statusLabel case final String label)
-                Expanded(
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: c.accentOnInk.withValues(alpha: 0.16),
-                      borderRadius: BorderRadius.circular(
-                        BarbarianRadius.pill,
-                      ),
-                    ),
-                      child: Text(
-                        label,
-                        style: BarbarianType.pill.copyWith(
-                          color: c.accentOnInk,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ),
-                )
-              else
-                const Spacer(),
-              const SizedBox(width: 8),
-              _ScoreDial(score: lead.score, max: lead.maxScore),
-            ],
-          ),
-          if (spark.length > 1) ...[
-            const SizedBox(height: 12),
-            BSparkline(values: spark, height: 30, color: c.accentOnInk),
-          ],
-          if (lead.researchSummary case final String summary) ...[
-            const SizedBox(height: 12),
-            Text(
-              summary,
-              style: BarbarianType.bodyS.copyWith(
-                color: c.onInkMuted,
-                height: 1.5,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
-
-/// The score as a filled track plus the figure — the rank is the point, so it
-/// gets a shape rather than sitting as another number in a row of numbers.
-class _ScoreDial extends StatelessWidget {
-  const _ScoreDial({required this.score, required this.max});
-
-  final int score;
-  final int max;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    final fraction = max <= 0 ? 0.0 : (score / max).clamp(0.0, 1.0);
-
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SizedBox(
-          width: 34,
-          height: 4,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: c.onInk.withValues(alpha: 0.16),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              FractionallySizedBox(
-                widthFactor: fraction,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: c.accentOnInk,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 9),
-        BNumText(
-          '$score/$max',
-          style: BarbarianType.figureS.copyWith(color: c.onInk),
-        ),
-      ],
     );
   }
 }

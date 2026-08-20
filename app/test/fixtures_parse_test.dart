@@ -263,17 +263,6 @@ void main() {
       );
     });
 
-    test('the lead name is the highest-scored on the watch', () {
-      final report = OpportunityReport.fromJson(
-        _read('opportunities/latest.json'),
-      );
-      final lead = report.lead!;
-
-      for (final c in [...report.qualified, ...report.watching]) {
-        expect(lead.score, greaterThanOrEqualTo(c.score));
-      }
-    });
-
     test('the outcome record keeps losses, not only wins', () {
       final report = OpportunityReport.fromJson(
         _read('opportunities/latest.json'),

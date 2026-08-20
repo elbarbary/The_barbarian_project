@@ -5,7 +5,7 @@
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
-      "detail": "a real filing, not a rumour or a press mention",
+      "detail": "a real filing, not a rumour or a press mention.",
       "weight": 4
     },
     {
@@ -15,37 +15,37 @@
     },
     {
       "label": "Volume and early price confirmation",
-      "detail": "RV20 — volume against its own 20-session median",
+      "detail": "RV20 — volume against its own 20-session median.",
       "weight": 2
     },
     {
       "label": "Repeat-buyer or ownership cluster",
-      "detail": "the same holder building, disclosure after disclosure",
+      "detail": "the same holder building, disclosure after disclosure.",
       "weight": 2
     },
     {
       "label": "A clear dated catalyst ahead",
-      "detail": "something on the calendar, not a vague hope",
+      "detail": "something on the calendar, not a vague hope.",
       "weight": 2
     },
     {
       "label": "Already up more than 20% in five sessions",
-      "detail": "the anti-chasing penalty",
+      "detail": "the anti-chasing penalty.",
       "weight": -4
     },
     {
       "label": "Company denies knowing why it moved",
-      "detail": "told the exchange it has no explanation",
+      "detail": "told the exchange it has no explanation.",
       "weight": -4
     },
     {
       "label": "Two or more completed limit-ups",
-      "detail": "EGP's ±20% band already used up",
+      "detail": "EGP's ±20% band already used up.",
       "weight": -3
     },
     {
       "label": "Severe valuation, dilution or exit risk",
-      "detail": "including a float too thin to sell into",
+      "detail": "including a float too thin to sell into.",
       "weight": -3
     }
   ],
@@ -65,8 +65,8 @@
       }
     ],
     "notes": [
-      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). That is deliberate: the scanner is built to find things before they move, so a name that has already run is penalised harder than good news can reward it. Most days nothing qualifies — and that is the scanner working, not failing.",
-      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction — every signal is tracked afterwards in the marked-to-market ledger below, including the ones that went wrong."
+      "The penalties can outweigh everything. A stock can score full marks on all five positives and still fail, because the four penalties are worth more (−14) than the five positives are (+13). Most days nothing qualifies — and that is the scanner working, not failing.",
+      "Scoring rules are fixed in the research playbook and are not changed to fit a result. Nothing here is investment advice or a prediction."
     ]
   },
   "sector": {
@@ -82,17 +82,17 @@
       {
         "label": "First leader",
         "value": "MOSC · 10 Aug",
-        "detail": "Volume 5.10× normal · +3.03% · weak finish"
+        "detail": "Volume 5.10× normal · +3.03% · weak finish."
       },
       {
         "label": "Breadth peer",
         "value": "AJWA · 12 Aug",
-        "detail": "Volume 2.08× normal · +3.18% · closed near the high"
+        "detail": "Volume 2.08× normal · +3.18% · closed near the high."
       },
       {
         "label": "Fresh filing",
         "value": "COSG · 13 Aug",
-        "detail": "Material but mixed H1 / derived Q2 loss"
+        "detail": "Material but mixed H1 / derived Q2 loss."
       }
     ],
     "members": [
@@ -169,7 +169,7 @@
         {
           "heading": "Why GIHD is still on the radar",
           "body": [
-            "Two independent facts support continued investigation. First, first-half consolidated profit rose to EGP 8.710m from EGP 2.164m. Second, named investor Mustafa Mohamed Ali Abdelmonem bought about 29,000 shares at EGP 59.70 and moved from 4.817% to 5.920% ownership through Arabia Online. Crossing 5% creates a live ownership cohort; it does not create an automatic buy."
+            "Two independent facts support continued investigation. First, first-half consolidated profit rose to EGP 8.710m from EGP 2.164m. Crossing 5% creates a live ownership cohort; it does not create an automatic buy."
           ]
         },
         {
@@ -190,7 +190,7 @@
       "tape": {
         "label": "12 Aug close",
         "price": "EGP 68.50",
-        "detail": "+1.77% · volume 1.22× normal · closed 41% up its range"
+        "detail": "+1.77% · volume 1.22× normal · closed 41% up its range."
       }
     },
     {
@@ -246,7 +246,7 @@
       "tape": {
         "label": "12 Aug close",
         "price": "EGP 23.57",
-        "detail": "−0.55% · volume 2.00× normal · closed 14% up its range"
+        "detail": "−0.55% · volume 2.00× normal · closed 14% up its range."
       }
     },
     {
@@ -312,7 +312,7 @@
       "tape": {
         "label": "12 Aug close",
         "price": "EGP 38.00",
-        "detail": "+0.82% · volume 2.31× normal · closed 28% up its range"
+        "detail": "+0.82% · volume 2.31× normal · closed 28% up its range."
       }
     },
     {
@@ -369,7 +369,7 @@
       "tape": {
         "label": "12 Aug close",
         "price": "EGP 17.53",
-        "detail": "−3.79% · volume 0.52× normal · closed near the day’s low"
+        "detail": "−3.79% · volume 0.52× normal · closed near the day’s low."
       }
     },
     {
@@ -425,7 +425,7 @@
       "tape": {
         "label": "12 Aug close",
         "price": "EGP 264.18",
-        "detail": "−1.04% · volume 0.95× normal · closed near the day’s low"
+        "detail": "−1.04% · volume 0.95× normal · closed near the day’s low."
       }
     },
     {
@@ -496,7 +496,7 @@
       "status_label": "Model trade closed",
       "return_percent": "+5.45%",
       "direction": "up",
-      "note": "Trade 001 realized EGP 143.48 after friction; the H1 thesis clock ended. Closed — no sessions remain."
+      "note": "The H1 thesis clock ended. Closed — no sessions remain."
     },
     {
       "ticker": "JUFO",
@@ -532,7 +532,7 @@
       "status_label": "Persistent watch",
       "return_percent": "+15.68%",
       "direction": "up",
-      "note": "The 17 August AGM is live, but economics remain unproven. No entry before approval"
+      "note": "The 17 August AGM is live, but economics remain unproven. No entry."
     },
     {
       "ticker": "ORWE",
