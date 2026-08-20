@@ -10,6 +10,8 @@ import 'package:barbarian/features/opportunities/opportunity_screen.dart';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/features/profile/you_screen.dart';
 import 'package:barbarian/features/today/today_screen.dart';
+import 'package:barbarian/core/models/explainer.dart';
+import 'package:barbarian/core/widgets/explainer_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -422,6 +424,46 @@ void main() {
     // Each line names its pillar and the published basis behind it, so a
     // reader can check the claim rather than take the number on trust.
     expect(card.conditions.first, contains('rests on'));
+  });
+
+  /// §50 — a reader can tell a published figure from our arithmetic.
+  ///
+  /// "Visually distinguish Fact, Calculation, Interpretation where the
+  /// underlying data supports this distinction." An exchange-published close
+  /// and this app's own ratio over it render in the same typeface, and without
+  /// a marker a reader has no way to know which they are being asked to trust.
+  testWidgets('§50 an explained figure states where it came from', (
+    tester,
+  ) async {
+    await pumpScreen(tester, const TodayScreen());
+    // Any explained row will do; the rates block is the one built entirely
+    // from figures somebody else published.
+    await pumpUntil(tester, find.byType(BPlainNumber));
+    await tapVisible(tester, find.byType(BPlainNumber).first);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.textContaining(RegExp('FACT|CALCULATION|INTERPRETATION')),
+      findsWidgets,
+      reason: 'the sheet must say whether the figure is published or derived',
+    );
+  });
+
+  test('§50 the default is calculation, never fact', () {
+    // Defaulting to `fact` would quietly dress this app's own arithmetic as
+    // somebody else's published figure, which is the exact confusion the
+    // marker exists to prevent.
+    const derived = Explainer(
+      termId: 't',
+      title: 'T',
+      plain: 'p',
+      token: 'x',
+      workings: 'w',
+      yardstick: 'y',
+      notability: Notability.unjudged,
+      source: 's',
+    );
+    expect(derived.provenance, Provenance.calculation);
   });
 
   /// §8.6 — the scanner may explain a score. It may not reach a decision.

@@ -220,9 +220,21 @@ class BExplainerSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 22),
-            Text(
-              explainer.title.toUpperCase(),
-              style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+            // Spec §50 — Fact, Calculation or Interpretation, beside the name
+            // of the thing. An exchange-published close and this app's own
+            // arithmetic over it look identical in the same typeface, and a
+            // reader has no way to tell which they are being asked to trust.
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  explainer.title.toUpperCase(),
+                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                ),
+                BProvenanceMark(provenance: explainer.provenance),
+              ],
             ),
             const SizedBox(height: 10),
 
@@ -338,6 +350,34 @@ class BExplainerSheet extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Fact, calculation or interpretation, as a small marker (spec §50).
+///
+/// Deliberately quiet: it is a note about where a number came from, not a
+/// warning about the number. The three are told apart by their words, not by
+/// colour alone — the app has readers who cannot rely on hue (spec §42), and a
+/// green "fact" beside an amber "interpretation" would be exactly that.
+class BProvenanceMark extends StatelessWidget {
+  const BProvenanceMark({required this.provenance, super.key});
+
+  final Provenance provenance;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        border: Border.all(color: c.hairlineStrong),
+        borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+      ),
+      child: Text(
+        provenance.label.toUpperCase(),
+        style: BarbarianType.labelNano.copyWith(color: c.textMuted),
       ),
     );
   }

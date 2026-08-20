@@ -347,6 +347,8 @@ class _IndexCard extends StatelessWidget {
           // An index level has no published band to be unusual against, and
           // defaulting to "ordinary" would be a claim.
           notability: Notability.unjudged,
+          // The exchange publishes the level; we only reshape the sentence.
+          provenance: Provenance.fact,
           source: index.source,
         ),
       ),

@@ -23,6 +23,35 @@ enum Notability {
   final String label;
 }
 
+/// Where a figure came from, so a reader can weigh it (spec §50).
+///
+/// The spec asks for Fact, Calculation and Interpretation to be visually
+/// distinguished "where the underlying data supports this distinction", and it
+/// is the cheapest honesty in the app: an exchange-published close and this
+/// app's own arithmetic over it look identical in the same typeface, and a
+/// reader has no way to tell which they are being asked to trust.
+///
+/// The three are ordered by how far they sit from the source. Nothing in this
+/// app should ever be marked `interpretation` without a licence question being
+/// asked first — it is here because §50 names it, and because a marker that
+/// cannot express the risky case is not a marker.
+enum Provenance {
+  /// Published by somebody else — the exchange, the company, an outlet. We
+  /// copied it.
+  fact('Fact'),
+
+  /// Our arithmetic over published figures. Reproducible, and the workings are
+  /// on the same card.
+  calculation('Calculation'),
+
+  /// Our reading of what those figures mean. The only one that is an opinion.
+  interpretation('Interpretation');
+
+  const Provenance(this.label);
+
+  final String label;
+}
+
 /// One number, explained.
 ///
 /// Spec §4.18 and §6. The rule the whole app hangs on is that a technical
@@ -46,6 +75,7 @@ class Explainer {
     required this.notability,
     required this.source,
     this.caveat,
+    this.provenance = Provenance.calculation,
   });
 
   /// Glossary key. One term, one explanation, everywhere in the app.
@@ -68,6 +98,12 @@ class Explainer {
   final String yardstick;
 
   final Notability notability;
+
+  /// Fact, calculation or interpretation (spec §50). Defaults to calculation
+  /// because that is what almost every row here is — a ratio this app worked
+  /// out — and because defaulting to `fact` would quietly dress our own
+  /// arithmetic as somebody else's published figure.
+  final Provenance provenance;
 
   /// What produced it and when. A figure with no date is a rumour.
   final String source;

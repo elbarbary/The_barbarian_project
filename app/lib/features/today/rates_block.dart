@@ -102,6 +102,10 @@ class BRatesBlock extends ConsumerWidget {
     // holds across every day, and inventing one would be the tea-leaf reading
     // this app exists to replace.
     notability: Notability.unjudged,
+    // Published by the exchange or the market it names, not worked out here
+    // (spec §50). The pipeline reshapes the sentence around it; the number
+    // itself is somebody else's.
+    provenance: Provenance.fact,
     source: row.source,
   );
 
@@ -113,6 +117,10 @@ class BRatesBlock extends ConsumerWidget {
     workings: row.workings,
     yardstick: row.yardstick,
     notability: Notability.unjudged,
+    // Published by the exchange or the market it names, not worked out here
+    // (spec §50). The pipeline reshapes the sentence around it; the number
+    // itself is somebody else's.
+    provenance: Provenance.fact,
     source: row.source,
   );
 }
