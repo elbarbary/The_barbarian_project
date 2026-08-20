@@ -87,8 +87,15 @@
   "couldNotLoadBody": "قد تكون غير متصل. كل ما نُزِّل من قبل ما زال هنا.",
   "tryAgain": "أعد المحاولة",
   "sampleData": "بيانات تجريبية · ليست أسعارًا حية",
-  "homeAlsoFiled": "أُفصح عنه اليوم أيضًا",
+  "homeAlsoFiled": "مُودَع لدى البورصة",
   "homeAllFilings": "كل الإفصاحات",
   "homeFilingsCount": "{count} إفصاحًا اليوم",
-  "legalNotLicensedShort": "غير مرخّصة من الرقابة المالية. ليست توصية."
+  "legalNotLicensedShort": "غير مرخّصة من الرقابة المالية. ليست توصية.",
+  "homeImportantToday": "الأهم اليوم",
+  "homeNothingUnusual": "لا شيء غير معتاد اليوم",
+  "homeNothingUnusualBody": "لم تتداول أي شركة بشكل غير معتاد مقارنة بمتوسطها يوم إفصاحها. الجلسة الهادئة إجابة حقيقية.",
+  "homeLatestNews": "آخر الأخبار",
+  "homeAllNews": "كل الأخبار",
+  "homeVolumeKicker": "حجم التداول {ratio}× المعتاد",
+  "homeFiledToday": "أُفصح عنه اليوم"
 }

@@ -871,7 +871,9 @@ mixin _$NewsItem {
 /// by three papers is one row, not three — and each of them is credited.
  List<NewsAttribution> get sources;/// What kind of event it is — results, a capital change, a contract, a
 /// board appointment. Never whether it was good news.
- String get event;@JsonKey(name: 'event_label') String get eventLabel;/// True when the headline was rebuilt from a URL slug rather than read
+ String get event;@JsonKey(name: 'event_label') String get eventLabel;@JsonKey(name: 'event_label_ar') String get eventLabelAr;/// What this kind of story does to somebody holding the share. Shared with
+/// the filings feed: one glossary, written once per type by a person.
+ String get meaning;@JsonKey(name: 'meaning_ar') String get meaningAr;/// True when the headline was rebuilt from a URL slug rather than read
 /// from a title field. Said out loud because it is a weaker reading.
  bool get reconstructed;/// Listed companies the outlet itself tagged the story with.
  List<String> get tickers;/// check · named · market. Never a judgement about the news itself.
@@ -889,16 +891,16 @@ $NewsItemCopyWith<NewsItem> get copyWith => _$NewsItemCopyWithImpl<NewsItem>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewsItem&&(identical(other.id, id) || other.id == id)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.published, published) || other.published == published)&&const DeepCollectionEquality().equals(other.sources, sources)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.reconstructed, reconstructed) || other.reconstructed == reconstructed)&&const DeepCollectionEquality().equals(other.tickers, tickers)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewsItem&&(identical(other.id, id) || other.id == id)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.published, published) || other.published == published)&&const DeepCollectionEquality().equals(other.sources, sources)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.reconstructed, reconstructed) || other.reconstructed == reconstructed)&&const DeepCollectionEquality().equals(other.tickers, tickers)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,headline,published,const DeepCollectionEquality().hash(sources),event,eventLabel,reconstructed,const DeepCollectionEquality().hash(tickers),weight,because,evidence);
+int get hashCode => Object.hash(runtimeType,id,headline,published,const DeepCollectionEquality().hash(sources),event,eventLabel,eventLabelAr,meaning,meaningAr,reconstructed,const DeepCollectionEquality().hash(tickers),weight,because,evidence);
 
 @override
 String toString() {
-  return 'NewsItem(id: $id, headline: $headline, published: $published, sources: $sources, event: $event, eventLabel: $eventLabel, reconstructed: $reconstructed, tickers: $tickers, weight: $weight, because: $because, evidence: $evidence)';
+  return 'NewsItem(id: $id, headline: $headline, published: $published, sources: $sources, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, reconstructed: $reconstructed, tickers: $tickers, weight: $weight, because: $because, evidence: $evidence)';
 }
 
 
@@ -909,7 +911,7 @@ abstract mixin class $NewsItemCopyWith<$Res>  {
   factory $NewsItemCopyWith(NewsItem value, $Res Function(NewsItem) _then) = _$NewsItemCopyWithImpl;
 @useResult
 $Res call({
- String id, String headline, String published, List<NewsAttribution> sources, String event,@JsonKey(name: 'event_label') String eventLabel, bool reconstructed, List<String> tickers, String weight, String because, NewsEvidence? evidence
+ String id, String headline, String published, List<NewsAttribution> sources, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, bool reconstructed, List<String> tickers, String weight, String because, NewsEvidence? evidence
 });
 
 
@@ -926,7 +928,7 @@ class _$NewsItemCopyWithImpl<$Res>
 
 /// Create a copy of NewsItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? headline = null,Object? published = null,Object? sources = null,Object? event = null,Object? eventLabel = null,Object? reconstructed = null,Object? tickers = null,Object? weight = null,Object? because = null,Object? evidence = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? headline = null,Object? published = null,Object? sources = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? reconstructed = null,Object? tickers = null,Object? weight = null,Object? because = null,Object? evidence = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,headline: null == headline ? _self.headline : headline // ignore: cast_nullable_to_non_nullable
@@ -934,6 +936,9 @@ as String,published: null == published ? _self.published : published // ignore: 
 as String,sources: null == sources ? _self.sources : sources // ignore: cast_nullable_to_non_nullable
 as List<NewsAttribution>,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
 as String,eventLabel: null == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
+as String,eventLabelAr: null == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
+as String,meaning: null == meaning ? _self.meaning : meaning // ignore: cast_nullable_to_non_nullable
+as String,meaningAr: null == meaningAr ? _self.meaningAr : meaningAr // ignore: cast_nullable_to_non_nullable
 as String,reconstructed: null == reconstructed ? _self.reconstructed : reconstructed // ignore: cast_nullable_to_non_nullable
 as bool,tickers: null == tickers ? _self.tickers : tickers // ignore: cast_nullable_to_non_nullable
 as List<String>,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
@@ -1036,10 +1041,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NewsItem() when $default != null:
-return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
+return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
   return orElse();
 
 }
@@ -1057,10 +1062,10 @@ return $default(_that.id,_that.headline,_that.published,_that.sources,_that.even
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)  $default,) {final _that = this;
 switch (_that) {
 case _NewsItem():
-return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
+return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1077,10 +1082,10 @@ return $default(_that.id,_that.headline,_that.published,_that.sources,_that.even
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String headline,  String published,  List<NewsAttribution> sources,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  bool reconstructed,  List<String> tickers,  String weight,  String because,  NewsEvidence? evidence)?  $default,) {final _that = this;
 switch (_that) {
 case _NewsItem() when $default != null:
-return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
+return $default(_that.id,_that.headline,_that.published,_that.sources,_that.event,_that.eventLabel,_that.eventLabelAr,_that.meaning,_that.meaningAr,_that.reconstructed,_that.tickers,_that.weight,_that.because,_that.evidence);case _:
   return null;
 
 }
@@ -1092,7 +1097,7 @@ return $default(_that.id,_that.headline,_that.published,_that.sources,_that.even
 @JsonSerializable()
 
 class _NewsItem extends NewsItem {
-  const _NewsItem({required this.id, required this.headline, this.published = '', final  List<NewsAttribution> sources = const <NewsAttribution>[], this.event = 'other', @JsonKey(name: 'event_label') this.eventLabel = 'Other', this.reconstructed = false, final  List<String> tickers = const <String>[], this.weight = 'market', this.because = '', this.evidence}): _sources = sources,_tickers = tickers,super._();
+  const _NewsItem({required this.id, required this.headline, this.published = '', final  List<NewsAttribution> sources = const <NewsAttribution>[], this.event = 'other', @JsonKey(name: 'event_label') this.eventLabel = 'Other', @JsonKey(name: 'event_label_ar') this.eventLabelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.reconstructed = false, final  List<String> tickers = const <String>[], this.weight = 'market', this.because = '', this.evidence}): _sources = sources,_tickers = tickers,super._();
   factory _NewsItem.fromJson(Map<String, dynamic> json) => _$NewsItemFromJson(json);
 
 @override final  String id;
@@ -1113,6 +1118,11 @@ class _NewsItem extends NewsItem {
 /// board appointment. Never whether it was good news.
 @override@JsonKey() final  String event;
 @override@JsonKey(name: 'event_label') final  String eventLabel;
+@override@JsonKey(name: 'event_label_ar') final  String eventLabelAr;
+/// What this kind of story does to somebody holding the share. Shared with
+/// the filings feed: one glossary, written once per type by a person.
+@override@JsonKey() final  String meaning;
+@override@JsonKey(name: 'meaning_ar') final  String meaningAr;
 /// True when the headline was rebuilt from a URL slug rather than read
 /// from a title field. Said out loud because it is a weaker reading.
 @override@JsonKey() final  bool reconstructed;
@@ -1144,16 +1154,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewsItem&&(identical(other.id, id) || other.id == id)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.published, published) || other.published == published)&&const DeepCollectionEquality().equals(other._sources, _sources)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.reconstructed, reconstructed) || other.reconstructed == reconstructed)&&const DeepCollectionEquality().equals(other._tickers, _tickers)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewsItem&&(identical(other.id, id) || other.id == id)&&(identical(other.headline, headline) || other.headline == headline)&&(identical(other.published, published) || other.published == published)&&const DeepCollectionEquality().equals(other._sources, _sources)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.reconstructed, reconstructed) || other.reconstructed == reconstructed)&&const DeepCollectionEquality().equals(other._tickers, _tickers)&&(identical(other.weight, weight) || other.weight == weight)&&(identical(other.because, because) || other.because == because)&&(identical(other.evidence, evidence) || other.evidence == evidence));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,headline,published,const DeepCollectionEquality().hash(_sources),event,eventLabel,reconstructed,const DeepCollectionEquality().hash(_tickers),weight,because,evidence);
+int get hashCode => Object.hash(runtimeType,id,headline,published,const DeepCollectionEquality().hash(_sources),event,eventLabel,eventLabelAr,meaning,meaningAr,reconstructed,const DeepCollectionEquality().hash(_tickers),weight,because,evidence);
 
 @override
 String toString() {
-  return 'NewsItem(id: $id, headline: $headline, published: $published, sources: $sources, event: $event, eventLabel: $eventLabel, reconstructed: $reconstructed, tickers: $tickers, weight: $weight, because: $because, evidence: $evidence)';
+  return 'NewsItem(id: $id, headline: $headline, published: $published, sources: $sources, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, meaning: $meaning, meaningAr: $meaningAr, reconstructed: $reconstructed, tickers: $tickers, weight: $weight, because: $because, evidence: $evidence)';
 }
 
 
@@ -1164,7 +1174,7 @@ abstract mixin class _$NewsItemCopyWith<$Res> implements $NewsItemCopyWith<$Res>
   factory _$NewsItemCopyWith(_NewsItem value, $Res Function(_NewsItem) _then) = __$NewsItemCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String headline, String published, List<NewsAttribution> sources, String event,@JsonKey(name: 'event_label') String eventLabel, bool reconstructed, List<String> tickers, String weight, String because, NewsEvidence? evidence
+ String id, String headline, String published, List<NewsAttribution> sources, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, bool reconstructed, List<String> tickers, String weight, String because, NewsEvidence? evidence
 });
 
 
@@ -1181,7 +1191,7 @@ class __$NewsItemCopyWithImpl<$Res>
 
 /// Create a copy of NewsItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? headline = null,Object? published = null,Object? sources = null,Object? event = null,Object? eventLabel = null,Object? reconstructed = null,Object? tickers = null,Object? weight = null,Object? because = null,Object? evidence = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? headline = null,Object? published = null,Object? sources = null,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? meaning = null,Object? meaningAr = null,Object? reconstructed = null,Object? tickers = null,Object? weight = null,Object? because = null,Object? evidence = freezed,}) {
   return _then(_NewsItem(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,headline: null == headline ? _self.headline : headline // ignore: cast_nullable_to_non_nullable
@@ -1189,6 +1199,9 @@ as String,published: null == published ? _self.published : published // ignore: 
 as String,sources: null == sources ? _self._sources : sources // ignore: cast_nullable_to_non_nullable
 as List<NewsAttribution>,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
 as String,eventLabel: null == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
+as String,eventLabelAr: null == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
+as String,meaning: null == meaning ? _self.meaning : meaning // ignore: cast_nullable_to_non_nullable
+as String,meaningAr: null == meaningAr ? _self.meaningAr : meaningAr // ignore: cast_nullable_to_non_nullable
 as String,reconstructed: null == reconstructed ? _self.reconstructed : reconstructed // ignore: cast_nullable_to_non_nullable
 as bool,tickers: null == tickers ? _self._tickers : tickers // ignore: cast_nullable_to_non_nullable
 as List<String>,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable

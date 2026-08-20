@@ -121,7 +121,7 @@
   "couldNotLoadBody": "You may be offline. Anything already downloaded is still here.",
   "tryAgain": "Try again",
   "sampleData": "Sample data · not live prices",
-  "homeAlsoFiled": "Also filed today",
+  "homeAlsoFiled": "Filed with the exchange",
   "homeAllFilings": "All filings",
   "homeFilingsCount": "{count} filings today",
   "@homeFilingsCount": {
@@ -131,5 +131,19 @@
       }
     }
   },
-  "legalNotLicensedShort": "Not licensed by the FRA. Not a recommendation."
+  "legalNotLicensedShort": "Not licensed by the FRA. Not a recommendation.",
+  "homeImportantToday": "Important today",
+  "homeNothingUnusual": "Nothing unusual today",
+  "homeNothingUnusualBody": "No company traded unusually against its own normal volume on the day it filed. A quiet session is a real answer.",
+  "homeLatestNews": "Latest news",
+  "homeAllNews": "All news",
+  "homeVolumeKicker": "Volume {ratio}x normal",
+  "@homeVolumeKicker": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "homeFiledToday": "Filed today"
 }

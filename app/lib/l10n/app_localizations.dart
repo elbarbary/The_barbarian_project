@@ -623,7 +623,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeAlsoFiled.
   ///
   /// In en, this message translates to:
-  /// **'Also filed today'**
+  /// **'Filed with the exchange'**
   String get homeAlsoFiled;
 
   /// No description provided for @homeAllFilings.
@@ -643,6 +643,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not licensed by the FRA. Not a recommendation.'**
   String get legalNotLicensedShort;
+
+  /// No description provided for @homeImportantToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Important today'**
+  String get homeImportantToday;
+
+  /// No description provided for @homeNothingUnusual.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing unusual today'**
+  String get homeNothingUnusual;
+
+  /// No description provided for @homeNothingUnusualBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No company traded unusually against its own normal volume on the day it filed. A quiet session is a real answer.'**
+  String get homeNothingUnusualBody;
+
+  /// No description provided for @homeLatestNews.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest news'**
+  String get homeLatestNews;
+
+  /// No description provided for @homeAllNews.
+  ///
+  /// In en, this message translates to:
+  /// **'All news'**
+  String get homeAllNews;
+
+  /// No description provided for @homeVolumeKicker.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume {ratio}x normal'**
+  String homeVolumeKicker(String ratio);
+
+  /// No description provided for @homeFiledToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Filed today'**
+  String get homeFiledToday;
 }
 
 class _AppLocalizationsDelegate

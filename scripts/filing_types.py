@@ -151,6 +151,32 @@ FILING_TYPES: dict[str, tuple[str, str, str, str]] = {
         "يتغيّر وضع قيد السهم. الشطب يعني توقفه عن التداول في البورصة "
         "نهائيًا.",
     ),
+    "capital": (
+        "Capital change",
+        "تغيير رأس المال",
+        "The size of the company's share capital is changing. More shares "
+        "means each existing share is a smaller slice; fewer means the "
+        "opposite.",
+        "حجم رأس مال الشركة يتغيّر. زيادة الأسهم تعني أن حصة كل سهم قائم تصغر، "
+        "وتخفيضها يعني العكس.",
+    ),
+    "macro": (
+        "The economy",
+        "الاقتصاد",
+        "This is about the economy or the market as a whole, not about one "
+        "company. It can move every share at once, including ones with no "
+        "news of their own.",
+        "هذا عن الاقتصاد أو السوق ككل، وليس عن شركة بعينها. قد يحرّك كل الأسهم "
+        "في وقت واحد، بما فيها التي لا خبر لها.",
+    ),
+    "other": (
+        "Other",
+        "أخرى",
+        "A story the classifier could not place in one of the standard "
+        "categories. What it says is in the article.",
+        "خبر لم يستطع التصنيف وضعه في واحدة من الفئات المعتادة. مضمونه في "
+        "المقال نفسه.",
+    ),
     "statement": (
         "Statement",
         "بيان",

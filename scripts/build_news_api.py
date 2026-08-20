@@ -47,6 +47,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import filing_types as ft
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "news"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "news"
@@ -596,6 +598,12 @@ def build(refresh_tags: bool = False) -> dict:
 
     for item in items:
         item["event"], item["event_label"] = classify(item["headline"])
+        # The same glossary the filings feed uses. A headline that says a
+        # company signed a contract tells a reader nothing about why it should
+        # matter to them; the meaning does, and it is written once per type by
+        # a person rather than generated per story.
+        item["meaning"] = ft.meaning(item["event"])
+        item["meaning_ar"] = ft.meaning_ar(item["event"])
         item.pop("link", None)
         item.pop("source", None)
 

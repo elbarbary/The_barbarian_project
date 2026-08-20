@@ -6,6 +6,7 @@ import '../../app/router.dart';
 import '../../core/models/company.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/models/market_snapshot.dart';
+import '../../core/models/news.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
@@ -59,7 +60,13 @@ class HomeScreen extends ConsumerWidget {
           text: l.searchPlaceholder,
           onTap: () => context.push(Routes.directoryPath(BNavTab.home)),
         ),
+        // The order answers the two questions somebody opens this app with,
+        // in that order: what matters today, and what has just happened. It
+        // used to open on one filing under a label that repeated itself, which
+        // told a reader neither.
+        BSectionLabel(l.homeImportantToday),
         const _DailyInsight(),
+        const _LatestNews(),
         const _IndexStrip(),
         const _AlsoFiled(),
         const _WatchlistBlock(),
@@ -179,7 +186,16 @@ class _DailyInsight extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    l.homeTodayKicker(label).toUpperCase(),
+                    // The kicker carries the measured reason this filing
+                    // leads — the session's own volume against its normal —
+                    // rather than repeating the event name that the headline
+                    // underneath already states.
+                    (item.evidence?.ratio != null && item.evidence!.ratio > 0
+                            ? l.homeVolumeKicker(
+                                item.evidence!.ratio.toStringAsFixed(1),
+                              )
+                            : l.homeFiledToday)
+                        .toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
                       letterSpacing: 1.6,
@@ -615,6 +631,112 @@ class _AlsoFiled extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// The headlines, which Home carried none of.
+///
+/// The app ingests a hundred and twenty stories a day and showed a reader
+/// exactly zero of them on the screen they open first — which is most of why
+/// opening it felt like arriving nowhere. Each row is somebody else's sentence
+/// in their own language, with every outlet that ran it named, and it opens
+/// out to the outlet rather than being retold here.
+class _LatestNews extends ConsumerWidget {
+  const _LatestNews();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final feed = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
+    final items = (feed?.items ?? const <NewsItem>[]).take(4).toList();
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    // Every outlet that ran it, named. A story three papers carried is more
+    // established than one a single paper ran, and a "3 sources" count throws
+    // away the half that says which.
+    String? outletsFor(NewsItem item) {
+      final byId = {for (final s in feed!.sources) s.id: s.name};
+      final names = <String>{
+        for (final a in item.sources)
+          if (byId[a.id]?.trim() case final String n when n.isNotEmpty) n,
+      };
+      return names.isEmpty ? null : names.join(' · ');
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(child: BSectionLabel(l.homeLatestNews)),
+            BInlineAction(
+              l.homeAllNews,
+              onTap: () => context.go(Routes.today),
+            ),
+          ],
+        ),
+        BPaperCard(
+          radius: BarbarianRadius.xl,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final (i, item) in items.indexed) ...[
+                if (i > 0) ...[
+                  const SizedBox(height: 12),
+                  Divider(height: 1, color: c.hairline),
+                  const SizedBox(height: 12),
+                ],
+                // Direction per headline: the feeds are mixed, and forcing one
+                // lays the other language out backwards.
+                Directionality(
+                  textDirection: isArabic(item.headline)
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+                  child: Text(
+                    item.headline,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: BarbarianType.bodyM.copyWith(
+                      color: c.textPrimary,
+                      height: 1.45,
+                    ),
+                  ),
+                ),
+                // Why a reader should care, not just what happened. "A
+                // company signed a contract" is an event; "a contract is
+                // revenue that has not been earned yet" is the reason it is
+                // worth a glance. Written once per type by a person, shared
+                // with the filings feed.
+                if (item.meaningFor(arabic) case final String why
+                    when why.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    why,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: BarbarianType.bodyS.copyWith(
+                      color: c.textSecondary,
+                      height: 1.45,
+                    ),
+                  ),
+                ],
+                if (outletsFor(item) case final String outlets) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    outlets,
+                    style: BarbarianType.labelNano.copyWith(
+                      color: c.textFaint,
+                    ),
+                  ),
+                ],
               ],
             ],
           ),

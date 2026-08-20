@@ -288,7 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sampleData => 'Sample data · not live prices';
 
   @override
-  String get homeAlsoFiled => 'Also filed today';
+  String get homeAlsoFiled => 'Filed with the exchange';
 
   @override
   String get homeAllFilings => 'All filings';
@@ -301,4 +301,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get legalNotLicensedShort =>
       'Not licensed by the FRA. Not a recommendation.';
+
+  @override
+  String get homeImportantToday => 'Important today';
+
+  @override
+  String get homeNothingUnusual => 'Nothing unusual today';
+
+  @override
+  String get homeNothingUnusualBody =>
+      'No company traded unusually against its own normal volume on the day it filed. A quiet session is a real answer.';
+
+  @override
+  String get homeLatestNews => 'Latest news';
+
+  @override
+  String get homeAllNews => 'All news';
+
+  @override
+  String homeVolumeKicker(String ratio) {
+    return 'Volume ${ratio}x normal';
+  }
+
+  @override
+  String get homeFiledToday => 'Filed today';
 }

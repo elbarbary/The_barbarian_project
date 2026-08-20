@@ -21,22 +21,24 @@ void main() {
     tester,
   ) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining('TODAY ·'));
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
 
     // A bare "Statement" says nothing about what happened, and it is the most
     // common filing type there is. Leading with one wastes the largest card on
     // the screen, so anything the classifier placed outranks it.
-    expect(find.textContaining(RegExp(r'TODAY · (?!STATEMENT)')), findsWidgets);
+    expect(find.textContaining(RegExp('Statement\$')), findsNothing);
   });
 
   testWidgets('the lead filing says why it is the lead', (tester) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining('TODAY ·'));
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
 
-    // The volume line is the only measured claim on the card. Without it the
-    // hero is just the newest filing wearing a big font.
+    // The kicker carries the measured reason this filing leads, and the body
+    // carries it in words. Without either the hero is just the newest filing
+    // wearing a big font.
     expect(
-      find.textContaining(RegExp('normal volume|filed this')),
+      find.textContaining(RegExp('normal volume|filed this|NORMAL',
+          caseSensitive: false)),
       findsWidgets,
     );
   });
@@ -116,7 +118,7 @@ void main() {
     // on named issuers is exposure we have not cleared. Home must not be the
     // back door that puts it in front of everyone anyway.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining('TODAY ·'));
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
 
     for (final absent in [
       'latest research',

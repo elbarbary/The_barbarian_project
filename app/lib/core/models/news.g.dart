@@ -70,6 +70,9 @@ _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
       const <NewsAttribution>[],
   event: json['event'] as String? ?? 'other',
   eventLabel: json['event_label'] as String? ?? 'Other',
+  eventLabelAr: json['event_label_ar'] as String? ?? '',
+  meaning: json['meaning'] as String? ?? '',
+  meaningAr: json['meaning_ar'] as String? ?? '',
   reconstructed: json['reconstructed'] as bool? ?? false,
   tickers:
       (json['tickers'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -88,6 +91,9 @@ Map<String, dynamic> _$NewsItemToJson(_NewsItem instance) => <String, dynamic>{
   'sources': instance.sources,
   'event': instance.event,
   'event_label': instance.eventLabel,
+  'event_label_ar': instance.eventLabelAr,
+  'meaning': instance.meaning,
+  'meaning_ar': instance.meaningAr,
   'reconstructed': instance.reconstructed,
   'tickers': instance.tickers,
   'weight': instance.weight,

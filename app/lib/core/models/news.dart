@@ -78,6 +78,12 @@ abstract class NewsItem with _$NewsItem {
     /// board appointment. Never whether it was good news.
     @Default('other') String event,
     @JsonKey(name: 'event_label') @Default('Other') String eventLabel,
+    @JsonKey(name: 'event_label_ar') @Default('') String eventLabelAr,
+
+    /// What this kind of story does to somebody holding the share. Shared with
+    /// the filings feed: one glossary, written once per type by a person.
+    @Default('') String meaning,
+    @JsonKey(name: 'meaning_ar') @Default('') String meaningAr,
 
     /// True when the headline was rebuilt from a URL slug rather than read
     /// from a title field. Said out loud because it is a weaker reading.
@@ -101,6 +107,10 @@ abstract class NewsItem with _$NewsItem {
       _$NewsItemFromJson(json);
 
   DateTime? get publishedAt => DateTime.tryParse(published);
+
+  /// The explanation, in the language being read.
+  String meaningFor(bool arabic) =>
+      arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 
   /// Only shown when the event is something other than the catch-all: a chip
   /// reading "Other" tells a reader nothing they did not already know.

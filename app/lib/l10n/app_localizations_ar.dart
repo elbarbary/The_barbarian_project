@@ -286,7 +286,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sampleData => 'بيانات تجريبية · ليست أسعارًا حية';
 
   @override
-  String get homeAlsoFiled => 'أُفصح عنه اليوم أيضًا';
+  String get homeAlsoFiled => 'مُودَع لدى البورصة';
 
   @override
   String get homeAllFilings => 'كل الإفصاحات';
@@ -299,4 +299,28 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get legalNotLicensedShort =>
       'غير مرخّصة من الرقابة المالية. ليست توصية.';
+
+  @override
+  String get homeImportantToday => 'الأهم اليوم';
+
+  @override
+  String get homeNothingUnusual => 'لا شيء غير معتاد اليوم';
+
+  @override
+  String get homeNothingUnusualBody =>
+      'لم تتداول أي شركة بشكل غير معتاد مقارنة بمتوسطها يوم إفصاحها. الجلسة الهادئة إجابة حقيقية.';
+
+  @override
+  String get homeLatestNews => 'آخر الأخبار';
+
+  @override
+  String get homeAllNews => 'كل الأخبار';
+
+  @override
+  String homeVolumeKicker(String ratio) {
+    return 'حجم التداول $ratio× المعتاد';
+  }
+
+  @override
+  String get homeFiledToday => 'أُفصح عنه اليوم';
 }
