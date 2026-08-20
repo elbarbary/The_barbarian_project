@@ -191,7 +191,7 @@ void main() {
     ) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
-        harness(const OpportunityScreen(parentTab: BNavTab.ask)),
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
       await pumpUntil(tester, loaded);
 
@@ -205,7 +205,7 @@ void main() {
     ) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
-        harness(const OpportunityScreen(parentTab: BNavTab.ask)),
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
       await pumpUntil(tester, find.text('Sector'));
       await tapVisible(tester, find.text('Sector'));
@@ -228,7 +228,7 @@ void main() {
     testWidgets('a watched name shows what was checked', (tester) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
-        harness(const OpportunityScreen(parentTab: BNavTab.ask)),
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
       await pumpUntil(tester, loaded);
 
@@ -245,7 +245,7 @@ void main() {
     testWidgets('each gate states its outcome in words', (tester) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
-        harness(const OpportunityScreen(parentTab: BNavTab.ask)),
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
       await pumpUntil(tester, loaded);
 
@@ -278,7 +278,7 @@ void main() {
     testWidgets('no entry or stop wording reaches the screen', (tester) async {
       usePhoneSurface(tester);
       await tester.pumpWidget(
-        harness(const OpportunityScreen(parentTab: BNavTab.ask)),
+        harness(const OpportunityScreen(parentTab: BNavTab.home)),
       );
       await pumpUntil(tester, loaded);
 

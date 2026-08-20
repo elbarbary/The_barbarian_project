@@ -7,7 +7,7 @@ import '../core/widgets/nav.dart';
 import '../features/cash_or_trash/cash_or_trash_screen.dart';
 import '../features/company/company_screen.dart';
 import '../features/exit/exit_screen.dart';
-import '../features/ask/ask_screen.dart';
+import '../features/home/home_screen.dart';
 import '../features/market/market_screen.dart';
 import '../features/opportunities/opportunity_screen.dart';
 import '../features/pit/pit_screen.dart';
@@ -18,13 +18,13 @@ import '../features/research/article_screen.dart';
 
 /// Route paths, in one place so nothing hard-codes a string.
 abstract final class Routes {
-  static const String ask = '/';
+  static const String home = '/';
   static const String today = '/today';
   static const String research = '/research';
   static const String you = '/you';
 
-  /// Reached from Ask rather than from the bar. A 282-row alphabetical list is
-  /// a reference you look something up in, not a destination you visit.
+  /// The full directory and its search. The boards give this its own tab;
+  /// until that is settled it is reached from Home.
   static const String directory = 'directory';
 
   /// The discussion feature, still pre-launch. It kept its route and left the
@@ -61,7 +61,7 @@ abstract final class Routes {
       ).toString();
 
   static String _root(BNavTab tab) => switch (tab) {
-    BNavTab.ask => '/',
+    BNavTab.home => '/',
     BNavTab.today => '/today/',
     BNavTab.research => '/research/',
     BNavTab.you => '/you/',
@@ -126,7 +126,7 @@ GoRouter buildRouter() {
   // Empty in every normal build, so production always opens on Home.
   const initial = String.fromEnvironment(
     'BARBARIAN_INITIAL_ROUTE',
-    defaultValue: Routes.ask,
+    defaultValue: Routes.home,
   );
 
   return GoRouter(
@@ -143,9 +143,9 @@ GoRouter buildRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.ask,
-                builder: (context, state) => const AskScreen(),
-                routes: detailRoutes(BNavTab.ask),
+                path: Routes.home,
+                builder: (context, state) => const HomeScreen(),
+                routes: detailRoutes(BNavTab.home),
               ),
             ],
           ),

@@ -22,7 +22,7 @@ import 'nav_icons.dart';
 ///    breadth are Today; its studies and verdict strip are Research; its
 ///    watchlist block was already duplicated on You.
 enum BNavTab {
-  ask('Ask'),
+  home('Home'),
   today('Today'),
   research('Research'),
   you('You');
@@ -222,7 +222,7 @@ class _NavTab extends StatelessWidget {
             children: [
               BNavIconMark(
                 icon: switch (tab) {
-                  BNavTab.ask => BNavIcon.ask,
+                  BNavTab.home => BNavIcon.home,
                   BNavTab.today => BNavIcon.today,
                   BNavTab.research => BNavIcon.research,
                   BNavTab.you => BNavIcon.you,

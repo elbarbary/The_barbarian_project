@@ -39,7 +39,7 @@ void main() {
       'Opportunity Scanner': const OpportunityScreen(parentTab: BNavTab.today),
       'Company': const CompanyScreen(
         ticker: 'COMI',
-        parentTab: BNavTab.ask,
+        parentTab: BNavTab.home,
       ),
       'Today': const TodayScreen(),
     };

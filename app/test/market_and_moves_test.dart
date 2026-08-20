@@ -54,7 +54,7 @@ void main() {
       addTearDown(tester.view.reset);
       await tester.pumpWidget(
         harness(
-          const MarketScreen(parentTab: BNavTab.ask),
+          const MarketScreen(parentTab: BNavTab.home),
           quotes: fakeQuotes({'COMI': 139.25, 'SWDY': 90.0}),
         ),
       );

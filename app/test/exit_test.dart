@@ -103,7 +103,7 @@ void main() {
     // whether you can sell comes before what it scored.
     await pumpScreen(
       tester,
-      const CompanyScreen(ticker: 'SPHT', parentTab: BNavTab.ask),
+      const CompanyScreen(ticker: 'SPHT', parentTab: BNavTab.home),
       until: find.byType(CompanyScreen),
     );
     await pumpUntil(tester, find.text('IT STOPS TRADING'));
@@ -114,7 +114,7 @@ void main() {
   testWidgets('a liquid company gets the quiet version', (tester) async {
     await pumpScreen(
       tester,
-      const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.ask),
+      const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.home),
       until: find.byType(CompanyScreen),
     );
     await pumpUntil(tester, find.text('CAN I GET OUT?'));
@@ -125,7 +125,7 @@ void main() {
   testWidgets('the screen states the limit and the assumption', (tester) async {
     await pumpScreen(
       tester,
-      const ExitScreen(parentTab: BNavTab.ask, ticker: 'COMI'),
+      const ExitScreen(parentTab: BNavTab.home, ticker: 'COMI'),
       until: find.text('Can I get out?'),
     );
     // Wait on a ladder rung, not on prose: "a normal day" also appears in the

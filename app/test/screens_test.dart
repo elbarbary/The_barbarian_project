@@ -7,6 +7,7 @@ import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/cash_or_trash/cash_or_trash_screen.dart';
 import 'package:barbarian/features/company/company_screen.dart';
+import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/features/market/market_screen.dart';
 import 'package:barbarian/features/opportunities/opportunity_screen.dart';
 import 'package:barbarian/features/pit/pit_screen.dart';
@@ -29,7 +30,7 @@ void main() {
     testWidgets('lists companies from the directory', (tester) async {
       await pumpScreen(
         tester,
-        const MarketScreen(parentTab: BNavTab.ask),
+        const MarketScreen(parentTab: BNavTab.home),
         until: find.textContaining('El Sewedy Electric'),
       );
 
@@ -42,7 +43,7 @@ void main() {
     ) async {
       await pumpScreen(
         tester,
-        const MarketScreen(parentTab: BNavTab.ask),
+        const MarketScreen(parentTab: BNavTab.home),
         until: find.textContaining('El Sewedy Electric'),
       );
 
@@ -58,7 +59,7 @@ void main() {
     ) async {
       await pumpScreen(
         tester,
-        const MarketScreen(parentTab: BNavTab.ask),
+        const MarketScreen(parentTab: BNavTab.home),
         until: find.textContaining('El Sewedy Electric'),
       );
 
@@ -76,7 +77,7 @@ void main() {
     testWidgets('dates its prices and never calls them live', (tester) async {
       await pumpScreen(
         tester,
-        const MarketScreen(parentTab: BNavTab.ask),
+        const MarketScreen(parentTab: BNavTab.home),
         until: find.textContaining(fixtureSessionDate),
       );
 
@@ -93,7 +94,7 @@ void main() {
     testWidgets('shows every published investigation', (tester) async {
       await pumpScreen(
         tester,
-        const CashOrTrashScreen(parentTab: BNavTab.ask),
+        const CashOrTrashScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -103,7 +104,7 @@ void main() {
     testWidgets('renders signed scores with their sign', (tester) async {
       await pumpScreen(
         tester,
-        const CashOrTrashScreen(parentTab: BNavTab.ask),
+        const CashOrTrashScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -115,7 +116,7 @@ void main() {
     testWidgets('verdicts carry a word, not only a colour', (tester) async {
       await pumpScreen(
         tester,
-        const CashOrTrashScreen(parentTab: BNavTab.ask),
+        const CashOrTrashScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -144,7 +145,7 @@ void main() {
     testWidgets('offers all three buckets including rejected', (tester) async {
       await pumpScreen(
         tester,
-        const OpportunityScreen(parentTab: BNavTab.ask),
+        const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -161,7 +162,7 @@ void main() {
     testWidgets('is never renamed "Daily Insights"', (tester) async {
       await pumpScreen(
         tester,
-        const OpportunityScreen(parentTab: BNavTab.ask),
+        const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -173,7 +174,7 @@ void main() {
     testWidgets('shows no trading semantics anywhere', (tester) async {
       await pumpScreen(
         tester,
-        const OpportunityScreen(parentTab: BNavTab.ask),
+        const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -211,7 +212,7 @@ void main() {
 
       await pumpScreen(
         tester,
-        const OpportunityScreen(parentTab: BNavTab.ask),
+        const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
@@ -240,7 +241,7 @@ void main() {
 
       await pumpScreen(
         tester,
-        const OpportunityScreen(parentTab: BNavTab.ask),
+        const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
       await tapVisible(tester, find.textContaining('Rule log'));
@@ -387,7 +388,7 @@ void main() {
 
   group('The Pit', () {
     testWidgets('states its phase without looking broken', (tester) async {
-      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.ask), until: find.text('The Pit'));
+      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.home), until: find.text('The Pit'));
 
       expect(
         find.textContaining('Coming in the next development phase'),
@@ -396,7 +397,7 @@ void main() {
     });
 
     testWidgets('promises no calls, targets or leaderboards', (tester) async {
-      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.ask), until: find.text('The Pit'));
+      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.home), until: find.text('The Pit'));
 
       expect(find.textContaining('No buy or sell calls'), findsOneWidget);
     });
@@ -406,11 +407,12 @@ void main() {
     // The canvas ships no dark tokens at all, so the dark ramp is derived.
     // These prove every screen at least builds and paints under it.
     for (final (name, screen) in <(String, Widget)>[
-      ('Market', const MarketScreen(parentTab: BNavTab.ask)),
+      ('Home', const HomeScreen()),
+      ('Market', const MarketScreen(parentTab: BNavTab.home)),
       ('You', const YouScreen()),
-      ('The Pit', const PitScreen(parentTab: BNavTab.ask)),
-      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.ask)),
-      ('Opportunity Scanner', const OpportunityScreen(parentTab: BNavTab.ask)),
+      ('The Pit', const PitScreen(parentTab: BNavTab.home)),
+      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
+      ('Opportunity Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
       ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
     ]) {
       testWidgets('$name builds in dark mode', (tester) async {
@@ -423,9 +425,10 @@ void main() {
   group('narrow layout', () {
     // 320pt is the narrowest phone the app will meet.
     for (final (name, screen) in <(String, Widget)>[
-      ('Market', const MarketScreen(parentTab: BNavTab.ask)),
+      ('Home', const HomeScreen()),
+      ('Market', const MarketScreen(parentTab: BNavTab.home)),
       ('You', const YouScreen()),
-      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.ask)),
+      ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
       ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
     ]) {
       testWidgets('$name does not overflow at 320pt', (tester) async {

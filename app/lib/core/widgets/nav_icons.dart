@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 ///
 /// Everything is authored on a 24x24 grid and scaled, so a size change never
 /// shifts the alignment between them.
-enum BNavIcon { ask, today, research, you }
+enum BNavIcon { home, today, research, you }
 
 class BNavIconPainter extends CustomPainter {
   const BNavIconPainter({required this.icon, required this.color});
@@ -40,8 +40,8 @@ class BNavIconPainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round;
 
     switch (icon) {
-      case BNavIcon.ask:
-        _ask(canvas, fill, stroke);
+      case BNavIcon.home:
+        _home(canvas, fill, stroke);
       case BNavIcon.today:
         _today(canvas, fill, stroke);
       case BNavIcon.research:
@@ -53,30 +53,31 @@ class BNavIconPainter extends CustomPainter {
     canvas.restore();
   }
 
-  /// A magnifier: the question, not a house.
+  /// The board's home mark: a rounded body with a smaller cap above it.
   ///
-  /// Transcribed from the board at 20×20 and scaled onto this file's 24 grid —
-  /// `circle cx=8.6 cy=8.6 r=5.6 stroke-width=1.7`, handle a rounded bar at
-  /// 45°. The board mirrors the whole mark with `scaleX(-1)` because its nav
-  /// runs right to left; drawn here unmirrored the handle falls bottom-right,
-  /// where a Latin reader expects it. Mirroring is what `Directionality` will
-  /// do to the bar when the Arabic pass lands, so nothing here fixes a side.
-  void _ask(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
-    canvas.drawCircle(const Offset(10.32, 10.32), 6.72, stroke(2.04, 1));
-    // From the lens edge along the diagonal — centre + r/√2 — so the handle
-    // meets the circle instead of crossing it.
-    canvas.drawLine(
-      const Offset(15.07, 15.07),
-      const Offset(20.6, 20.6),
-      stroke(2.16, 1)..strokeCap = StrokeCap.round,
+  /// Transcribed from the board's own SVG — `rect x=3 y=8 w=14 h=9 rx=3` and
+  /// `rect x=7 y=3 w=6 h=4 rx=2` on a 20x20 viewBox — and scaled onto this
+  /// file's 24 grid by 1.2. The cap is drawn at reduced opacity exactly as the
+  /// board draws it, which is what separates the two shapes without a stroke
+  /// between them.
+  void _home(Canvas canvas, Paint Function(double) fill,
+      Paint Function(double, double) stroke) {
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        const Rect.fromLTWH(3.6, 9.6, 16.8, 10.8),
+        const Radius.circular(3.6),
+      ),
+      fill(1),
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        const Rect.fromLTWH(8.4, 3.6, 7.2, 4.8),
+        const Radius.circular(2.4),
+      ),
+      fill(0.55),
     );
   }
 
-  /// A bulletin: a sheet with two lines set on it, the second lighter.
-  ///
-  /// The board's `rect 3,3.5 14×13 r2.6` with bars at 6.6 and 10, the lower at
-  /// 50% — a page with a headline and one line under it, which is what Today
-  /// publishes on the days it has anything to publish.
   void _today(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
     canvas.drawRRect(
       RRect.fromRectAndRadius(

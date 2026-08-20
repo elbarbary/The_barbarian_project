@@ -52,13 +52,22 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
 
+  /// Home's search pill is a link, not a field: the boards give the directory
+  /// and its search their own surface. Everything that used to type on the
+  /// front door now goes through here.
+  Future<void> openSearch(WidgetTester tester) async {
+    await pumpUntil(tester, find.text('Search by company name or symbol…'));
+    await tapVisible(tester, find.text('Search by company name or symbol…'));
+    await pumpUntil(tester, find.byType(TextField));
+  }
+
   group('bottom navigation', () {
-    testWidgets('boots on Ask with the Ask slot lit', (tester) async {
+    testWidgets('boots on Home with the Home slot lit', (tester) async {
       await boot(tester);
 
       expect(find.text('Egyptian equities, unfiltered'), findsOneWidget);
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.ask);
+      expect(nav.active, BNavTab.home);
     });
 
     testWidgets('every tab is reachable and lights its own slot', (
@@ -94,9 +103,10 @@ void main() {
     testWidgets('each branch keeps its own state', (tester) async {
       await boot(tester);
 
-      // Ask's search is the branch state that has to survive a round trip: it
-      // is what somebody typed, and losing it is losing their question.
-      await pumpUntil(tester, find.byType(TextField));
+      // The search query is the branch state that has to survive a round
+      // trip: it is what somebody typed, and losing it is losing their
+      // question. It now lives on the directory, pushed onto Home's stack.
+      await openSearch(tester);
       await tester.enterText(find.byType(TextField).first, 'swdy');
       await tester.pump();
       await pumpUntil(tester, find.textContaining('El Sewedy Electric'));
@@ -106,7 +116,7 @@ void main() {
       await pumpUntil(tester, find.text('No account needed to read'));
 
       // Coming back must not have reset the branch.
-      await tapTab(tester, BNavTab.ask);
+      await tapTab(tester, BNavTab.home);
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.textContaining('El Sewedy Electric'), findsOneWidget);
       expect(find.textContaining('Commercial International Bank'), findsNothing);
@@ -149,12 +159,12 @@ void main() {
       expect(nav.active, BNavTab.research);
     });
 
-    testWidgets('Ask opens a company, keeping the Ask slot lit', (
+    testWidgets('search opens a company, keeping the Home slot lit', (
       tester,
     ) async {
       await boot(tester);
 
-      await pumpUntil(tester, find.byType(TextField));
+      await openSearch(tester);
       await tester.enterText(find.byType(TextField).first, 'COMI');
       await tester.pump();
       await pumpUntil(tester, find.textContaining('Commercial International'));
@@ -167,7 +177,7 @@ void main() {
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
       expect(
         nav.active,
-        BNavTab.ask,
+        BNavTab.home,
         reason: 'opening a company must not move the app to another tab',
       );
     });
@@ -177,7 +187,7 @@ void main() {
     ) async {
       await boot(tester);
 
-      await pumpUntil(tester, find.byType(TextField));
+      await openSearch(tester);
       await tester.enterText(find.byType(TextField).first, 'COMI');
       await tester.pump();
       await pumpUntil(tester, find.textContaining('Commercial International'));

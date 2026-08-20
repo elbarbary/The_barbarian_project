@@ -169,7 +169,7 @@ void main() {
   ) async {
     await pumpScreen(
       tester,
-      const CompanyScreen(ticker: 'ABUK', parentTab: BNavTab.ask),
+      const CompanyScreen(ticker: 'ABUK', parentTab: BNavTab.home),
       until: find.textContaining('Abou Kir'),
     );
     await pumpUntil(tester, find.byType(BPlainNumber));
@@ -189,7 +189,7 @@ void main() {
   testWidgets('pressing a figure opens its arithmetic', (tester) async {
     await pumpScreen(
       tester,
-      const CompanyScreen(ticker: 'ABUK', parentTab: BNavTab.ask),
+      const CompanyScreen(ticker: 'ABUK', parentTab: BNavTab.home),
       until: find.textContaining('Abou Kir'),
     );
     await pumpUntil(tester, find.byType(BPlainNumber));

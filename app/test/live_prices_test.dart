@@ -193,7 +193,7 @@ void main() {
       usePhoneSurface(tester);
       await tester.pumpWidget(
         harness(
-          const MarketScreen(parentTab: BNavTab.ask),
+          const MarketScreen(parentTab: BNavTab.home),
           quotes: fakeQuotes({'COMI': 139.25}),
         ),
       );
@@ -206,7 +206,7 @@ void main() {
       tester,
     ) async {
       usePhoneSurface(tester);
-      await tester.pumpWidget(harness(const MarketScreen(parentTab: BNavTab.ask)));
+      await tester.pumpWidget(harness(const MarketScreen(parentTab: BNavTab.home)));
       await pumpUntil(tester, find.textContaining(fixtureSessionDate));
 
       // Dated by the publish, and making no claim about a live feed.
