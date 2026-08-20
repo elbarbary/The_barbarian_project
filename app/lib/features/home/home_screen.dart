@@ -17,6 +17,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Home — the landing tab, per `docs/design-specs/home.json`.
 ///
@@ -43,6 +44,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     return BScreenScaffold(
       blockGap: 22,
       children: [
@@ -52,7 +54,7 @@ class HomeScreen extends ConsumerWidget {
         // way to reach 282 companies, and "somebody just sent me a name" is
         // the single most common reason this app gets opened.
         BSearchPill(
-          text: 'Search by company name or symbol…',
+          text: l.searchPlaceholder,
           onTap: () => context.push(Routes.directoryPath(BNavTab.home)),
         ),
         const _DailyInsight(),
@@ -70,6 +72,7 @@ class _Greeting extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final freshness = ref.watch(priceFreshnessProvider);
 
     return Column(
@@ -87,14 +90,14 @@ class _Greeting extends ConsumerWidget {
                   // accounts yet, so it greets without one rather than
                   // inventing a name to put in the slot.
                   Text(
-                    'ESTHMR',
+                    l.appName,
                     style: BarbarianType.displayS.copyWith(
                       color: c.textPrimary,
                       letterSpacing: 0.5,
                     ),
                   ),
                   Text(
-                    'Egyptian equities, unfiltered',
+                    l.appTagline,
                     style: BarbarianType.bodyM.copyWith(color: c.textMuted),
                   ),
                 ],
@@ -102,7 +105,7 @@ class _Greeting extends ConsumerWidget {
             ),
             BSoftIconButton(
               icon: Icons.refresh_rounded,
-              semanticLabel: 'Refresh',
+              semanticLabel: l.refresh,
               onTap: () {
                 ref.read(staticApiProvider).invalidateManifest();
                 ref.invalidate(marketSnapshotProvider);
@@ -120,7 +123,7 @@ class _Greeting extends ConsumerWidget {
         // A screen is only as current as its stalest figure, so it quotes the
         // oldest rather than the freshest.
         Text(
-          'The oldest thing here: ${freshness.caption}',
+          l.oldestThingHere(freshness.caption),
           style: BarbarianType.bodyS.copyWith(color: c.textMuted),
         ),
       ],
@@ -140,17 +143,16 @@ class _DailyInsight extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final feed = ref.watch(disclosuresProvider).whenOrNull(
       data: (s) => s.value,
     );
     final item = _lead(feed);
 
     if (item == null) {
-      return const BEmptyState(
-        title: 'Nothing filed yet today',
-        body:
-            'When a company tells the exchange something, it lands here with '
-            'what it means for anyone holding the share.',
+      return BEmptyState(
+        title: l.homeNothingFiled,
+        body: l.homeNothingFiledBody,
       );
     }
 
@@ -170,7 +172,7 @@ class _DailyInsight extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'Today · ${item.eventLabel}'.toUpperCase(),
+                    l.homeTodayKicker(item.eventLabel).toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
                       letterSpacing: 1.6,
@@ -346,6 +348,7 @@ class _WatchlistBlock extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final watchlist = ref.watch(watchlistProvider).value ?? const <String>[];
     final directory = ref
         .watch(companyDirectoryProvider)
@@ -353,11 +356,9 @@ class _WatchlistBlock extends ConsumerWidget {
     final snapshot = ref.watch(livePricesProvider);
 
     if (watchlist.isEmpty) {
-      return const BEmptyState(
-        title: 'Follow companies to build your watchlist',
-        body:
-            'Open any company and tap the bookmark. What you follow shows its '
-            'last price here, and nothing else.',
+      return BEmptyState(
+        title: l.homeWatchlistEmpty,
+        body: l.homeWatchlistEmptyBody,
       );
     }
 
@@ -370,9 +371,9 @@ class _WatchlistBlock extends ConsumerWidget {
       children: [
         Row(
           children: [
-            const Expanded(child: BSectionLabel('From your watchlist')),
+            Expanded(child: BSectionLabel(l.homeWatchlistLabel)),
             BInlineAction(
-              'Manage',
+              l.homeWatchlistManage,
               onTap: () => context.go(Routes.you),
             ),
           ],
@@ -403,7 +404,7 @@ class _WatchlistBlock extends ConsumerWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          'Last close · end-of-day EGX data',
+          l.homePricesCaption,
           style: BarbarianType.bodyS.copyWith(color: c.textFaint),
         ),
       ],
@@ -427,6 +428,7 @@ class _WatchTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final change = quote?.resolvedChangePercent;
     // Real end-of-day history, not a decorative squiggle: the last thirty
     // sessions the app actually holds for this company.
@@ -478,7 +480,7 @@ class _WatchTile extends ConsumerWidget {
           )
         else
           Text(
-            'No quote',
+            l.noQuote,
             style: BarbarianType.bodyS.copyWith(
               color: dark ? c.onInkMuted : c.textFaint,
             ),
