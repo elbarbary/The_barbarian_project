@@ -34,22 +34,30 @@ FIXTURES = REPO / "app" / "assets" / "fixtures"
 # Arabic legal names the app already knows. The scan carries English names only,
 # so the rest stay null rather than being machine-translated — a wrong Arabic
 # legal name is worse than none (spec §41).
-ARABIC = {
-    "COMI": "البنك التجارى الدولى",
-    "EFIH": "إى فاينانس للاستثمار",
-    "ETEL": "المصرية للاتصالات",
-    "HRHO": "المجموعة المالية هيرميس",
-    "ORAS": "أوراسكوم كونستراكشون",
-    "SWDY": "السويدى اليكتريك",
-    "TMGH": "مجموعة طلعت مصطفى",
-    "MCQE": "مصر قنا للأسمنت",
-    "CIRA": "القاهرة للاستثمار والتنمية العقارية",
-    "KWIN": "القاهرة الوطنية للاستثمار والأوراق المالية",
-    "AMES": "الإسكندرية للخدمات الطبية",
-    "NCCW": "النصر للأعمال المدنية",
-    "DGTZ": "ديچيتايز للاستثمار والتكنولوجيا",
-    "BIOC": "جلاكسو سميثكلاين",
-}
+# Arabic names, harvested from the exchange's own filing titles rather than
+# typed by hand.
+#
+# This was a hardcoded table of fourteen. Every EGX disclosure is titled
+# `ARABIC NAME (TICKER.CA) — what happened`, so the exchange publishes the
+# pairing itself and `harvest_company_names.py` reads it back out. The names
+# that come out are the *street* names — "أبو قير", "بالم هيلز للتعمير" — which
+# is the form newspapers and readers actually use, and the form a model does
+# not produce when asked (it answers with the formal registered title).
+#
+# Coverage grows on its own: a company that files gets a name. One that never
+# files never appears, which is honest, and it is also the kind nobody writes
+# about.
+def _arabic_names() -> dict[str, str]:
+    path = pathlib.Path(__file__).resolve().parent / "company_names_ar.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+ARABIC = _arabic_names()
 
 
 # A handful of scan records fall back to the ISIN when the feed has no ticker

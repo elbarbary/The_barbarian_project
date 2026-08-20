@@ -104,21 +104,21 @@ class _Headline extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            // A Wrap, not a Row. Two variable-length tags beside a
+            // variable-length attribution is three things competing for one
+            // line, and every flex arrangement I tried moved the overflow
+            // rather than removing it. Wrap cannot overflow: it takes a second
+            // line when it needs one, which on a phone it sometimes does.
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 if (item.weight == 'check') const _CheckTag(),
-                if (item.weight == 'check') const SizedBox(width: 8),
-                if (item.eventTag case final String tag) ...[
-                  _EventTag(label: tag),
-                  const SizedBox(width: 8),
-                ],
-                Expanded(
-                  child: Text(
-                    [outlet, _ago(item.publishedAt)].nonNulls.join(' · '),
-                    style: BarbarianType.labelNano.copyWith(
-                      color: c.textMuted,
-                    ),
-                  ),
+                if (item.eventTag case final String tag) _EventTag(label: tag),
+                Text(
+                  [outlet, _ago(item.publishedAt)].nonNulls.join(' · '),
+                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                 ),
                 Icon(Icons.north_east_rounded, size: 13, color: c.textFaint),
               ],
@@ -192,6 +192,8 @@ class _EventTag extends StatelessWidget {
       child: Text(
         label.toUpperCase(),
         style: BarbarianType.labelNano.copyWith(color: c.textSecondary),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

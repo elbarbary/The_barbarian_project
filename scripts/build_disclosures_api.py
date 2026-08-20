@@ -202,6 +202,32 @@ def parse(html: str) -> list[dict]:
     return list(seen.values())
 
 
+def learn_names(items: list[dict]) -> None:
+    """Add any Arabic company names these titles reveal, for free.
+
+    Every filing is titled `ARABIC NAME (TICKER.CA) — what happened`, so the
+    pairing arrives with work already being done. There is no extra request
+    and no model: the exchange prints both halves side by side, and the name
+    it prints is the street name a reader would recognise rather than the
+    formal registered title.
+    """
+    import harvest_company_names as harvest
+
+    path = harvest.MAP
+    stored = json.loads(path.read_text()) if path.exists() else {}
+    before = len(stored)
+    for item in items:
+        for ticker, names in harvest.names_from_title(item["title"]).items():
+            stored.setdefault(ticker, harvest.best(names))
+    if len(stored) > before:
+        path.write_text(
+            json.dumps(stored, ensure_ascii=False, indent=1, sort_keys=True),
+            encoding="utf-8",
+        )
+        print(f"   learned {len(stored) - before} Arabic names "
+              f"({len(stored)} known)")
+
+
 # ------------------------------------------------------------ classification
 
 
@@ -378,6 +404,7 @@ def main() -> int:
         print(f"   newest {len(items)} of {expected} in the window "
               f"(page one only — see walk() for why)")
 
+    learn_names(items)
     classify_all(items)
     for item in items:
         item.update(triage(item))
