@@ -488,27 +488,48 @@ void main() {
   });
 
   group('financials', () {
-    test('SWDY annual periods parse with derived margins', () {
-      final company = Company.fromJson(_read('companies/SWDY.json'));
-      final annual = company.financials.annual;
+    // These once ran against a hand-entered SWDY table that turned out to be
+    // invented — El Sewedy's real FY24 revenue is EGP 232bn, the table said
+    // 118.5bn. Testing derivation against a fixture also meant the fixture had
+    // to carry numbers for a real, named issuer just to exercise arithmetic.
+    // The arithmetic is what these cover, so they construct their own period
+    // and name nobody.
+    test('margins derive from the reported lines', () {
+      const period = FinancialPeriod(
+        period: 'FY24',
+        revenue: 1000,
+        grossProfit: 250,
+        operatingIncome: 180,
+        netIncome: 120,
+      );
 
-      expect(annual, isNotEmpty);
-      final latest = annual.last;
-      expect(latest.period, 'FY25');
-      expect(latest.grossMargin, isNotNull);
-      expect(latest.netMargin, isNotNull);
-      expect(latest.netMargin!, inExclusiveRange(0.0, 1.0));
+      expect(period.grossMargin, 0.25);
+      expect(period.operatingMargin, 0.18);
+      expect(period.netMargin, 0.12);
     });
 
     test('free cash flow is derived when not reported', () {
-      final company = Company.fromJson(_read('companies/SWDY.json'));
-      final latest = company.financials.annual.last;
-
-      expect(latest.freeCashFlow, isNull);
-      expect(
-        latest.resolvedFreeCashFlow,
-        latest.operatingCashFlow! - latest.capex!.abs(),
+      const period = FinancialPeriod(
+        period: 'FY24',
+        operatingCashFlow: 900,
+        capex: -350,
       );
+
+      expect(period.freeCashFlow, isNull);
+      // Capex is subtracted by magnitude, so the sign it was filed with does
+      // not flip the result.
+      expect(period.resolvedFreeCashFlow, 550);
+    });
+
+    test('a reported free cash flow wins over the derived one', () {
+      const period = FinancialPeriod(
+        period: 'FY24',
+        operatingCashFlow: 900,
+        capex: -350,
+        freeCashFlow: 500,
+      );
+
+      expect(period.resolvedFreeCashFlow, 500);
     });
 
     test('a period with no revenue yields null margins rather than zero', () {

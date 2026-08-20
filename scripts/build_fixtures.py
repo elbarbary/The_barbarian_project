@@ -47,15 +47,6 @@ COMPANIES = [
     ("BIOC", "GlaxoSmithKline S.A.E.", "جلاكسو سميثكلاين", "Healthcare", 74.20, 74.05),
 ]
 
-# SWDY gets a full detail document so the company screen can be built end to end.
-SWDY_ANNUAL = [
-    # period, revenue, gross profit, operating income, net income, equity, cash, debt, CFO, capex
-    ("FY21", 55_100, 9_400, 6_100, 3_050, 21_400, 9_800, 18_200, 4_100, 1_900),
-    ("FY22", 71_300, 12_100, 8_050, 4_180, 25_900, 11_200, 21_400, 5_050, 2_400),
-    ("FY23", 92_600, 15_800, 10_400, 5_600, 31_800, 13_900, 24_100, 6_300, 3_100),
-    ("FY24", 118_500, 19_900, 13_100, 9_350, 38_600, 16_400, 27_800, 7_900, 3_800),
-    ("FY25", 131_900, 21_600, 14_200, 10_200, 44_500, 18_100, 31_000, 9_400, 3_400),
-]
 
 
 def price_series(last: float, sessions: int, seed: int) -> list[dict]:

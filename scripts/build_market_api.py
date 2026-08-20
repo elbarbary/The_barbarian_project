@@ -66,16 +66,6 @@ ARABIC = _arabic_names()
 # silently.
 TICKER = re.compile(r"^[A-Z]{3,6}$")
 
-# The one company with hand-entered statements so the Financials tab can be
-# built end to end. Everything else shows the empty state until a filings
-# source exists.
-SWDY_ANNUAL = [
-    ("FY21", 55_100, 9_400, 6_100, 3_050, 21_400, 9_800, 18_200, 4_100, 1_900),
-    ("FY22", 71_300, 12_100, 8_050, 4_180, 25_900, 11_200, 21_400, 5_050, 2_400),
-    ("FY23", 92_600, 15_800, 10_400, 5_600, 31_800, 13_900, 24_100, 6_300, 3_100),
-    ("FY24", 118_500, 19_900, 13_100, 9_350, 38_600, 16_400, 27_800, 7_900, 3_800),
-    ("FY25", 131_900, 21_600, 14_200, 10_200, 44_500, 18_100, 31_000, 9_400, 3_400),
-]
 
 
 def newest_scan() -> pathlib.Path | None:
@@ -326,20 +316,6 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 profile[key] = value
         if profile:
             detail["profile"] = profile
-        if ticker == "SWDY":
-            detail["financials"] = {
-                "annual": [
-                    {
-                        "period": p, "revenue": rev, "gross_profit": gp,
-                        "operating_income": oi, "net_income": ni, "equity": eq,
-                        "cash": cash, "debt": debt,
-                        "operating_cash_flow": cfo, "capex": capex,
-                    }
-                    for p, rev, gp, oi, ni, eq, cash, debt, cfo, capex
-                    in SWDY_ANNUAL
-                ],
-                "quarterly": [],
-            }
         details[ticker] = detail
 
     companies.sort(key=lambda c: c["ticker"])
