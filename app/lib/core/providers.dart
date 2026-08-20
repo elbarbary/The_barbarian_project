@@ -445,6 +445,33 @@ final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(
   LocaleNotifier.new,
 );
 
+// -------------------------------------------------------------- today anchors
+
+/// A section of Today that another screen has asked to be scrolled to.
+///
+/// Home's "All news" and "All filings" used to call `go(Routes.today)`, which
+/// dropped the reader at the top of a long screen and left them to find the
+/// thing they had just tapped. The request is held here rather than passed
+/// through the route because it is a one-shot piece of intent, not part of the
+/// address: a reader who reaches Today any other way, or who comes back to it
+/// later, must land where they left off and not be yanked down the page.
+enum TodaySection { filings, news }
+
+class TodaySectionRequest extends Notifier<TodaySection?> {
+  @override
+  TodaySection? build() => null;
+
+  void ask(TodaySection section) => state = section;
+
+  /// Cleared by Today the moment it has acted on it, so it fires exactly once.
+  void clear() => state = null;
+}
+
+final todaySectionRequestProvider =
+    NotifierProvider<TodaySectionRequest, TodaySection?>(
+      TodaySectionRequest.new,
+    );
+
 // ------------------------------------------------------------------- search
 
 /// Search runs against the cached directory — no network per keystroke

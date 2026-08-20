@@ -4,7 +4,9 @@ import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/core/models/rates.dart';
+import 'package:barbarian/core/models/news.dart';
 import 'package:barbarian/core/models/market_history.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -29,7 +31,17 @@ void main() {
     // A bare "Statement" says nothing about what happened, and it is the most
     // common filing type there is. Leading with one wastes the largest card on
     // the screen, so anything the classifier placed outranks it.
-    expect(find.textContaining(RegExp('Statement\$')), findsNothing);
+    //
+    // Asserted about the lead alone. This used to search the whole screen,
+    // which only held while Home showed four filings and no statement happened
+    // to be among them — a statement further down the list is an ordinary
+    // filing and says nothing about what the hero chose.
+    final lead = tester.widget<Text>(find.byKey(const Key('home-lead-filing')));
+    expect(
+      lead.data,
+      isNot(matches(RegExp(r'Statement$'))),
+      reason: 'the largest card must not be spent on a bare "Statement"',
+    );
   });
 
   testWidgets('§49 the hero dates itself and never backdates a claim', (
@@ -161,6 +173,32 @@ void main() {
       isFalse,
       reason: 'breadth belongs to one screen, counted once',
     );
+  });
+
+  testWidgets('Home offers a real amount of the feed, not a token four', (
+    tester,
+  ) async {
+    // Four rows under a screen you can keep scrolling reads as "there is
+    // nothing here". The exchange files a couple of dozen a session and the
+    // news feed is already deduplicated to 120 stories, so four was hiding a
+    // full feed rather than summarising it.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    final news = NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
+    expect(news.items.length, greaterThan(12));
+
+    // Rendered rows are bounded by the viewport, so this asserts the limit the
+    // screen applies rather than counting widgets: the section takes 12.
+    final source = File('lib/features/home/home_screen.dart').readAsStringSync();
+    expect(
+      source.contains('.take(12)'),
+      isTrue,
+      reason: 'the news section should offer more than a token few',
+    );
+    // Deliberately not asserting that no `.take(4)` survives anywhere: the
+    // watchlist grid takes four tiles and always did, which is a different
+    // question from how much of the feed Home offers.
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {

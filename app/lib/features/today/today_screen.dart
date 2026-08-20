@@ -29,12 +29,56 @@ import '../../l10n/app_localizations.dart';
 /// leads with the sentence and puts the counters underneath as evidence that
 /// the work was done. The other leads with what cleared and keeps the same
 /// counters, in the same place, for the same reason.
-class TodayScreen extends ConsumerWidget {
+class TodayScreen extends ConsumerStatefulWidget {
   const TodayScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TodayScreen> createState() => _TodayScreenState();
+}
+
+class _TodayScreenState extends ConsumerState<TodayScreen> {
+  final _filings = GlobalKey();
+  final _news = GlobalKey();
+
+  /// Bring the section the reader asked for into view.
+  ///
+  /// Both blocks are fed by documents that arrive after the first frame, so
+  /// the anchor usually has no context yet when the request lands. Rather than
+  /// guess at a delay this retries for a short while and then gives up — the
+  /// cost of failing is that the reader is at the top of Today, which is
+  /// exactly where they used to be.
+  void _reveal(TodaySection section, {int attempt = 0}) {
+    final key = section == TodaySection.filings ? _filings : _news;
+    final target = key.currentContext;
+    if (target == null) {
+      if (attempt < 20 && mounted) {
+        Future<void>.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) _reveal(section, attempt: attempt + 1);
+        });
+      }
+      return;
+    }
+    Scrollable.ensureVisible(
+      target,
+      duration: const Duration(milliseconds: 420),
+      curve: Curves.easeOutCubic,
+      // A little air above it, so the section label is not flush against the
+      // top edge and the reader can see what they landed on.
+      alignment: 0.04,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final isSample = ref.watch(isSampleDataProvider);
+
+    // One-shot. Cleared immediately so returning to this tab later leaves the
+    // reader where they were rather than yanking them down the page again.
+    final requested = ref.watch(todaySectionRequestProvider);
+    if (requested != null) {
+      ref.read(todaySectionRequestProvider.notifier).clear();
+      WidgetsBinding.instance.addPostFrameCallback((_) => _reveal(requested));
+    }
 
     return BScreenScaffold(
       blockGap: 22,
@@ -42,8 +86,8 @@ class TodayScreen extends ConsumerWidget {
         const _TodayHeader(),
         const _ScannerHero(),
         const BRatesBlock(),
-        const BDisclosuresBlock(),
-        const BNewsBlock(),
+        BDisclosuresBlock(key: _filings),
+        BNewsBlock(key: _news),
         if (isSample) const Center(child: BSampleDataNotice()),
         const BLegalFootnote(),
       ],

@@ -239,6 +239,11 @@ class _DailyInsight extends ConsumerWidget {
               // first is the name of the event and who filed it, in their own
               // language; the filing itself is one tap away.
               ticker == null ? label : '$ticker · $label',
+              // Keyed so a test can say something about *the lead* rather than
+              // about every filing on the screen. The rule is that the biggest
+              // card must not be spent on a bare "Statement"; a statement
+              // further down the list is an ordinary filing and fine.
+              key: const Key('home-lead-filing'),
               style: BarbarianType.headlineM.copyWith(color: c.onInk),
             ),
             const SizedBox(height: 10),
@@ -609,7 +614,11 @@ class _AlsoFiled extends ConsumerWidget {
     final lead = _DailyInsight._lead(feed);
     final items = (feed?.items ?? const <Disclosure>[])
         .where((i) => i.id != lead?.id && i.tickers.length == 1)
-        .take(4)
+        // Four rows read as "there is nothing here" on a screen you can keep
+        // scrolling. The exchange usually files a couple of dozen a session
+        // and the feed is already deduplicated, so showing more is showing
+        // what is there rather than padding.
+        .take(10)
         .toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
@@ -621,7 +630,15 @@ class _AlsoFiled extends ConsumerWidget {
             Expanded(child: BSectionLabel(l.homeAlsoFiled)),
             BInlineAction(
               l.homeAllFilings,
-              onTap: () => context.go(Routes.today),
+              // Ask for the section first, then move. `go` alone dropped the
+              // reader at the top of a long screen and left them to hunt for
+              // the thing they had just tapped.
+              onTap: () {
+                ref
+                    .read(todaySectionRequestProvider.notifier)
+                    .ask(TodaySection.filings);
+                context.go(Routes.today);
+              },
             ),
           ],
         ),
@@ -711,7 +728,9 @@ class _LatestNews extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final feed = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
-    final items = (feed?.items ?? const <NewsItem>[]).take(4).toList();
+    // Same reason as the filings above: four headlines under a scrollable
+    // screen makes a full feed look empty.
+    final items = (feed?.items ?? const <NewsItem>[]).take(12).toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
     // Every outlet that ran it, named. A story three papers carried is more
@@ -732,7 +751,15 @@ class _LatestNews extends ConsumerWidget {
         Row(
           children: [
             Expanded(child: BSectionLabel(l.homeLatestNews)),
-            BInlineAction(l.homeAllNews, onTap: () => context.go(Routes.today)),
+            BInlineAction(
+              l.homeAllNews,
+              onTap: () {
+                ref
+                    .read(todaySectionRequestProvider.notifier)
+                    .ask(TodaySection.news);
+                context.go(Routes.today);
+              },
+            ),
           ],
         ),
         BPaperCard(
