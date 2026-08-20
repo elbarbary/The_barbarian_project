@@ -75,6 +75,16 @@ abstract class NewsItem with _$NewsItem {
     @JsonKey(name: 'headline_en') String? headlineEn,
     @Default('') String published,
 
+    /// The outlet's own lead picture, where it publishes one.
+    ///
+    /// A column of text rows is hard to scan and hard to tell apart. This is
+    /// the picture the outlet chose, on a card that links straight back to
+    /// their article. Roughly half the feed has one — Arab Finance is read
+    /// from a sitemap and has none — so the card must read correctly with it
+    /// and without it, and a row that fails to load must look like a row with
+    /// no picture rather than a broken one.
+    String? image,
+
     /// Every outlet that carried this story, with its own link. One story told
     /// by three papers is one row, not three — and each of them is credited.
     @Default(<NewsAttribution>[]) List<NewsAttribution> sources,

@@ -20,6 +20,7 @@ import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
+import '../../core/widgets/news_thumb.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -179,7 +180,8 @@ class _DailyInsight extends ConsumerWidget {
         ? item.eventLabelAr
         : item.eventLabel;
     final age = context.filingAge(item.date);
-    final volumeKicker = (item.evidence?.ratio != null && item.evidence!.ratio > 0)
+    final volumeKicker =
+        (item.evidence?.ratio != null && item.evidence!.ratio > 0)
         ? l.homeVolumeKicker(item.evidence!.ratio.toStringAsFixed(1))
         : null;
 
@@ -761,61 +763,75 @@ class _LatestNews extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Directionality(
-                        // Direction follows the string actually rendered, not
-                        // the original: an English translation laid out
-                        // right-to-left is the bug this replaced.
-                        textDirection: isArabic(item.headlineFor(arabic))
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                        child: Text(
-                          item.headlineFor(arabic),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: BarbarianType.bodyM.copyWith(
-                            color: c.textPrimary,
-                            height: 1.45,
-                          ),
+                      // The outlet's own picture, where it published one. It
+                      // collapses itself — gap included — when there is none
+                      // or the download fails, so a row without a picture is
+                      // a normal row rather than one with a hole in it.
+                      BNewsThumb(url: item.image),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Directionality(
+                              // Direction follows the string actually rendered, not
+                              // the original: an English translation laid out
+                              // right-to-left is the bug this replaced.
+                              textDirection: isArabic(item.headlineFor(arabic))
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
+                              child: Text(
+                                item.headlineFor(arabic),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.bodyM.copyWith(
+                                  color: c.textPrimary,
+                                  height: 1.45,
+                                ),
+                              ),
+                            ),
+                            // Why a reader should care, not just what happened. "A
+                            // company signed a contract" is an event; "a contract is
+                            // revenue that has not been earned yet" is the reason it is
+                            // worth a glance. Written once per type by a person, shared
+                            // with the filings feed.
+                            if (item.meaningFor(arabic) case final String why
+                                when why.isNotEmpty) ...[
+                              const SizedBox(height: 6),
+                              Text(
+                                why,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.bodyS.copyWith(
+                                  color: c.textSecondary,
+                                  height: 1.45,
+                                ),
+                              ),
+                            ],
+                            // Outlet and age on one line, and the line survives if
+                            // either half is missing — a story with no named outlet
+                            // still has to say how old it is (§49). Home showed the
+                            // outlet and no time at all, so a headline from Tuesday
+                            // and one from an hour ago read exactly alike.
+                            if ([
+                                  outletsFor(item),
+                                  context.newsAge(item.publishedAt),
+                                ].nonNulls.join(' · ')
+                                case final String byline
+                                when byline.isNotEmpty) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                byline,
+                                style: BarbarianType.labelNano.copyWith(
+                                  color: c.textFaint,
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                       ),
-                      // Why a reader should care, not just what happened. "A
-                      // company signed a contract" is an event; "a contract is
-                      // revenue that has not been earned yet" is the reason it is
-                      // worth a glance. Written once per type by a person, shared
-                      // with the filings feed.
-                      if (item.meaningFor(arabic) case final String why
-                          when why.isNotEmpty) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          why,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: BarbarianType.bodyS.copyWith(
-                            color: c.textSecondary,
-                            height: 1.45,
-                          ),
-                        ),
-                      ],
-                      // Outlet and age on one line, and the line survives if
-                      // either half is missing — a story with no named outlet
-                      // still has to say how old it is (§49). Home showed the
-                      // outlet and no time at all, so a headline from Tuesday
-                      // and one from an hour ago read exactly alike.
-                      if ([outletsFor(item), context.newsAge(item.publishedAt)]
-                          .nonNulls
-                          .join(' · ') case final String byline
-                          when byline.isNotEmpty) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          byline,
-                          style: BarbarianType.labelNano.copyWith(
-                            color: c.textFaint,
-                          ),
-                        ),
-                      ],
                     ],
                   ),
                 ),
@@ -885,7 +901,10 @@ class _Breadth extends ConsumerWidget {
                     height: 6,
                     child: Row(
                       children: [
-                        Expanded(flex: latest.up, child: ColoredBox(color: c.up)),
+                        Expanded(
+                          flex: latest.up,
+                          child: ColoredBox(color: c.up),
+                        ),
                         Expanded(
                           flex: latest.flat,
                           child: ColoredBox(color: c.hairlineStrong),

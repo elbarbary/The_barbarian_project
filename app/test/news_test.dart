@@ -1,4 +1,7 @@
 import 'package:barbarian/core/models/news.dart';
+import 'package:barbarian/core/theme/barbarian_theme.dart';
+import 'package:barbarian/core/widgets/news_thumb.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -138,5 +141,49 @@ void main() {
         );
       }
     }
+  });
+
+  group('the outlet\'s own picture', () {
+    test('the feed carries pictures for a real share of stories', () {
+      // Arab Finance is read from a sitemap and publishes none, so this will
+      // never be all of them — but it should be a substantial part, and zero
+      // means the `_embed` parameter fell off the endpoint again.
+      final feed = NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
+      final withPicture = feed.items.where((i) => (i.image ?? '').isNotEmpty);
+
+      expect(feed.items, isNotEmpty);
+      expect(
+        withPicture.length,
+        greaterThan(feed.items.length ~/ 4),
+        reason: 'almost nothing carries a picture; check the news endpoint',
+      );
+      for (final item in withPicture) {
+        expect(item.image, startsWith('http'));
+      }
+    });
+
+    testWidgets('no picture means no gap, not an empty box', (tester) async {
+      // The row has to look deliberate when there is nothing to show. A
+      // reserved 56-point hole reads as a bug.
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: BarbarianTheme.light(),
+          home: const Scaffold(body: BNewsThumb(url: null)),
+        ),
+      );
+      final size = tester.getSize(find.byType(BNewsThumb));
+      expect(size.width, 0);
+      expect(size.height, 0);
+    });
+
+    testWidgets('an empty address is treated as no picture', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: BarbarianTheme.light(),
+          home: const Scaffold(body: BNewsThumb(url: '   ')),
+        ),
+      );
+      expect(tester.getSize(find.byType(BNewsThumb)).width, 0);
+    });
   });
 }
