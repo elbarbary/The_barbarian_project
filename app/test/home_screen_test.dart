@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
@@ -90,6 +91,19 @@ void main() {
       );
     }
     expect(find.textContaining(RegExp(r'of \d+ shares')), findsWidgets);
+  });
+
+  test('§49 one breadth count, from one source', () {
+    // Today carried its own breadth card counted from the live 15-minute quote
+    // feed while this one counts the published close, and the two disagreed on
+    // screen — 107 rose against 57 for the same session. Two cards claiming
+    // "the session" with different numbers is worse than either alone.
+    final today = File('lib/features/today/today_screen.dart').readAsStringSync();
+    expect(
+      today.contains('_MarketPulse'),
+      isFalse,
+      reason: 'breadth belongs to one screen, counted once',
+    );
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {

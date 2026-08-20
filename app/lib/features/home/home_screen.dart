@@ -835,6 +835,29 @@ class _Breadth extends ConsumerWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 12),
+                // The proportions, as one bar. Three numbers tell a reader who
+                // is counting; the bar tells one who is glancing, and it is
+                // the shape of the session rather than its arithmetic.
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(3),
+                  child: SizedBox(
+                    height: 6,
+                    child: Row(
+                      children: [
+                        Expanded(flex: latest.up, child: ColoredBox(color: c.up)),
+                        Expanded(
+                          flex: latest.flat,
+                          child: ColoredBox(color: c.hairlineStrong),
+                        ),
+                        Expanded(
+                          flex: latest.down,
+                          child: ColoredBox(color: c.down),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 10),
                 Text(
                   l.breadthOf(latest.counted),
