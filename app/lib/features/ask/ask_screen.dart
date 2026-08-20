@@ -280,7 +280,7 @@ class _StandingQuestions extends StatelessWidget {
           body:
               'Before you buy anything: how the money comes back to your hand, '
               'and what decides whether it can.',
-          onTap: () => _soon(context),
+          onTap: () => context.push(Routes.exitPath(BNavTab.ask)),
         ),
         const SizedBox(height: 10),
         _Question(
@@ -304,10 +304,6 @@ class _StandingQuestions extends StatelessWidget {
     );
   }
 
-  static void _soon(BuildContext context) =>
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('This answer is not written yet')),
-      );
 }
 
 class _Question extends StatelessWidget {

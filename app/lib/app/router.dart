@@ -6,6 +6,7 @@ import '../core/providers.dart';
 import '../core/widgets/nav.dart';
 import '../features/cash_or_trash/cash_or_trash_screen.dart';
 import '../features/company/company_screen.dart';
+import '../features/exit/exit_screen.dart';
 import '../features/ask/ask_screen.dart';
 import '../features/market/market_screen.dart';
 import '../features/opportunities/opportunity_screen.dart';
@@ -30,12 +31,19 @@ abstract final class Routes {
   /// navigation: a quarter of the bar should not be a coming-soon page.
   static const String pit = 'pit';
 
+  /// «أقدر أخرج؟» — the exit question, for one company or as the primer.
+  static const String exit = 'exit';
+  static const String exitFor = 'exit/:ticker';
+
   static const String scanner = 'scanner';
   static const String cashOrTrash = 'cash-or-trash';
   static const String company = 'company/:ticker';
   static const String article = 'article';
 
   static String directoryPath(BNavTab from) => '${_root(from)}directory';
+
+  static String exitPath(BNavTab from, [String? ticker]) =>
+      '${_root(from)}exit${ticker == null ? '' : '/$ticker'}';
 
   static String pitPath(BNavTab from) => '${_root(from)}pit';
 
@@ -69,6 +77,17 @@ final _rootKey = GlobalKey<NavigatorState>();
 
 GoRouter buildRouter() {
   List<RouteBase> detailRoutes(BNavTab tab) => [
+    GoRoute(
+      path: Routes.exit,
+      builder: (context, state) => ExitScreen(parentTab: tab),
+    ),
+    GoRoute(
+      path: Routes.exitFor,
+      builder: (context, state) => ExitScreen(
+        parentTab: tab,
+        ticker: state.pathParameters['ticker'],
+      ),
+    ),
     GoRoute(
       path: Routes.directory,
       builder: (context, state) => MarketScreen(parentTab: tab),

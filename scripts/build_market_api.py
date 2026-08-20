@@ -105,10 +105,17 @@ def history_union() -> dict[str, list[dict]]:
             for bar in r.get("recentSplitAdjustedBars") or []:
                 date, close = bar.get("date"), clean(bar.get("close"))
                 if date and close is not None:
-                    merged.setdefault(ticker, {})[date] = {
-                        "date": date,
-                        "close": round(float(close), 4),
-                    }
+                    # Volume travels with the close. The scan has carried it
+                    # all along and this dropped it, which is why the app could
+                    # say what a share cost on a given day but never whether
+                    # anybody actually traded it — and "it did not trade at all
+                    # on 14 of the last 60 days" is the single most useful
+                    # thing we can tell somebody about getting their money out.
+                    volume = clean(bar.get("volume"))
+                    point = {"date": date, "close": round(float(close), 4)}
+                    if volume is not None:
+                        point["volume"] = int(volume)
+                    merged.setdefault(ticker, {})[date] = point
     # Series fetched separately for the tail the scan could not reach — see
     # scripts/history_sink.py. Merged by date, so a scan bar and a fetched bar
     # for the same session collapse rather than duplicate.
@@ -121,9 +128,11 @@ def history_union() -> dict[str, list[dict]]:
         for bar in doc.get("bars", []):
             date, close = bar.get("date"), clean(bar.get("close"))
             if date and close is not None:
-                merged.setdefault(ticker, {}).setdefault(
-                    date, {"date": date, "close": round(float(close), 4)}
-                )
+                volume = clean(bar.get("volume"))
+                point = {"date": date, "close": round(float(close), 4)}
+                if volume is not None:
+                    point["volume"] = int(volume)
+                merged.setdefault(ticker, {}).setdefault(date, point)
 
     return {
         ticker: [bars[d] for d in sorted(bars)]
