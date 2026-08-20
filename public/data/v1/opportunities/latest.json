@@ -5,7 +5,7 @@
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
-      "detail": "a real filing, not a rumour or a press mention.",
+      "detail": "a real filing, not a rumour or a press mention",
       "weight": 4
     },
     {
@@ -15,37 +15,37 @@
     },
     {
       "label": "Volume and early price confirmation",
-      "detail": "RV20 — volume against its own 20-session median.",
+      "detail": "RV20 — volume against its own 20-session median",
       "weight": 2
     },
     {
       "label": "Repeat-buyer or ownership cluster",
-      "detail": "the same holder building, disclosure after disclosure.",
+      "detail": "the same holder building, disclosure after disclosure",
       "weight": 2
     },
     {
       "label": "A clear dated catalyst ahead",
-      "detail": "something on the calendar, not a vague hope.",
+      "detail": "something on the calendar, not a vague hope",
       "weight": 2
     },
     {
       "label": "Already up more than 20% in five sessions",
-      "detail": "the anti-chasing penalty.",
+      "detail": "the anti-chasing penalty",
       "weight": -4
     },
     {
       "label": "Company denies knowing why it moved",
-      "detail": "told the exchange it has no explanation.",
+      "detail": "told the exchange it has no explanation",
       "weight": -4
     },
     {
       "label": "Two or more completed limit-ups",
-      "detail": "EGP's ±20% band already used up.",
+      "detail": "EGP's ±20% band already used up",
       "weight": -3
     },
     {
       "label": "Severe valuation, dilution or exit risk",
-      "detail": "including a float too thin to sell into.",
+      "detail": "including a float too thin to sell into",
       "weight": -3
     }
   ],
@@ -100,7 +100,21 @@
         "label": "Thndr X · 10:00:04 Cairo",
         "price": "EGP 89.55",
         "detail": "first print EGP 89.52."
-      }
+      },
+      "sources": [
+        {
+          "name": "HDBK H1 filing",
+          "url": "https://www.mubasher.info/news/4656580/"
+        },
+        {
+          "name": "Split-adjusted quote context",
+          "url": "https://www.tradingview.com/symbols/EGX-HDBK/"
+        },
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     }
   ],
   "watching": [
@@ -118,7 +132,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "EFIH",
@@ -134,7 +154,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "MFPC",
@@ -150,7 +176,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "ELSH",
@@ -166,7 +198,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "NARE",
@@ -182,7 +220,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "SMFR",
@@ -198,7 +242,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     },
     {
       "ticker": "EEII",
@@ -214,7 +264,13 @@
       "gates": [],
       "research": [],
       "action": null,
-      "tape": null
+      "tape": null,
+      "sources": [
+        {
+          "name": "EGX field note, 2026-08-20",
+          "url": "https://thebarbarianproject.com/egx-insights.html"
+        }
+      ]
     }
   ],
   "rejected": [],
