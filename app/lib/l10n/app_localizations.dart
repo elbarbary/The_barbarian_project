@@ -335,7 +335,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner'**
+  /// **'Scanner'**
   String get scannerTitle;
 
   /// No description provided for @scannerSubtitle.
@@ -377,13 +377,13 @@ abstract class AppLocalizations {
   /// No description provided for @countQualified.
   ///
   /// In en, this message translates to:
-  /// **'Qualified'**
+  /// **'Cleared every rule'**
   String get countQualified;
 
   /// No description provided for @countWatching.
   ///
   /// In en, this message translates to:
-  /// **'Watching'**
+  /// **'Cleared some rules'**
   String get countWatching;
 
   /// No description provided for @countOutcomes.
@@ -893,7 +893,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerHistory.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner history'**
+  /// **'Scanner history'**
   String get scannerHistory;
 
   /// No description provided for @studyLabel.
@@ -977,7 +977,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanNothingQualified.
   ///
   /// In en, this message translates to:
-  /// **'Nothing qualified today'**
+  /// **'Nothing cleared every rule today'**
   String get scanNothingQualified;
 
   /// No description provided for @scanNothingWatch.
@@ -989,7 +989,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanNothingRejected.
   ///
   /// In en, this message translates to:
-  /// **'Nothing was rejected today'**
+  /// **'Nothing failed the rules today'**
   String get scanNothingRejected;
 
   /// No description provided for @scanEmptyBlurb.
@@ -1079,7 +1079,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerTitleFull.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner'**
+  /// **'Scanner'**
   String get scannerTitleFull;
 
   /// No description provided for @scanUpdated.
@@ -1091,19 +1091,19 @@ abstract class AppLocalizations {
   /// No description provided for @scanQualifiedCount.
   ///
   /// In en, this message translates to:
-  /// **'Qualified {count}'**
+  /// **'Cleared all {count}'**
   String scanQualifiedCount(int count);
 
   /// No description provided for @scanWatchCount.
   ///
   /// In en, this message translates to:
-  /// **'Watch {count}'**
+  /// **'Partly {count}'**
   String scanWatchCount(int count);
 
   /// No description provided for @scanRejectedCount.
   ///
   /// In en, this message translates to:
-  /// **'Rejected {count}'**
+  /// **'Not cleared {count}'**
   String scanRejectedCount(int count);
 
   /// No description provided for @scanLogCount.
@@ -1175,19 +1175,19 @@ abstract class AppLocalizations {
   /// No description provided for @statusQualified.
   ///
   /// In en, this message translates to:
-  /// **'Qualified'**
+  /// **'Cleared every rule'**
   String get statusQualified;
 
   /// No description provided for @statusWatching.
   ///
   /// In en, this message translates to:
-  /// **'Watching'**
+  /// **'Cleared some rules'**
   String get statusWatching;
 
   /// No description provided for @statusRejected.
   ///
   /// In en, this message translates to:
-  /// **'Rejected'**
+  /// **'Did not clear the rules'**
   String get statusRejected;
 
   /// No description provided for @figPrevClose.

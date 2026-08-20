@@ -18,7 +18,7 @@ import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
 
-/// The Opportunity Scanner (spec §7, §8).
+/// The Scanner (spec §7, §8; renamed from "Opportunity Scanner" 21 Aug 2026).
 ///
 /// Two rules shape this screen:
 ///

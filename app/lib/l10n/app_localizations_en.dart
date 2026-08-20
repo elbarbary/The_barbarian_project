@@ -138,7 +138,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.';
 
   @override
-  String get scannerTitle => 'Opportunity Scanner';
+  String get scannerTitle => 'Scanner';
 
   @override
   String get scannerSubtitle =>
@@ -161,10 +161,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scannerFoundToday => 'What the published rule found today';
 
   @override
-  String get countQualified => 'Qualified';
+  String get countQualified => 'Cleared every rule';
 
   @override
-  String get countWatching => 'Watching';
+  String get countWatching => 'Cleared some rules';
 
   @override
   String get countOutcomes => 'Outcomes';
@@ -438,7 +438,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readFullInvestigation => 'Read the full investigation';
 
   @override
-  String get scannerHistory => 'Opportunity Scanner history';
+  String get scannerHistory => 'Scanner history';
 
   @override
   String get studyLabel => 'Six Pillars';
@@ -487,13 +487,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanLogEmpty => 'The rule log is empty';
 
   @override
-  String get scanNothingQualified => 'Nothing qualified today';
+  String get scanNothingQualified => 'Nothing cleared every rule today';
 
   @override
   String get scanNothingWatch => 'Nothing on the watch list';
 
   @override
-  String get scanNothingRejected => 'Nothing was rejected today';
+  String get scanNothingRejected => 'Nothing failed the rules today';
 
   @override
   String get scanEmptyBlurb =>
@@ -540,7 +540,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gateUnresolved => 'Unresolved';
 
   @override
-  String get scannerTitleFull => 'Opportunity Scanner';
+  String get scannerTitleFull => 'Scanner';
 
   @override
   String scanUpdated(String date) {
@@ -549,17 +549,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String scanQualifiedCount(int count) {
-    return 'Qualified $count';
+    return 'Cleared all $count';
   }
 
   @override
   String scanWatchCount(int count) {
-    return 'Watch $count';
+    return 'Partly $count';
   }
 
   @override
   String scanRejectedCount(int count) {
-    return 'Rejected $count';
+    return 'Not cleared $count';
   }
 
   @override
@@ -600,13 +600,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanNoSectorToday => 'No sector read today';
 
   @override
-  String get statusQualified => 'Qualified';
+  String get statusQualified => 'Cleared every rule';
 
   @override
-  String get statusWatching => 'Watching';
+  String get statusWatching => 'Cleared some rules';
 
   @override
-  String get statusRejected => 'Rejected';
+  String get statusRejected => 'Did not clear the rules';
 
   @override
   String get figPrevClose => 'Prev close';

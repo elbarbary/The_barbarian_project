@@ -138,7 +138,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة. لا شيء هنا توصية بالتعامل على أي ورقة مالية.';
 
   @override
-  String get scannerTitle => 'ماسح الفرص';
+  String get scannerTitle => 'الماسح';
 
   @override
   String get scannerSubtitle => 'ما وجدته القاعدة المنشورة، وما فاتها';
@@ -160,10 +160,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scannerFoundToday => 'ما وجدته القاعدة المنشورة اليوم';
 
   @override
-  String get countQualified => 'مستوفية';
+  String get countQualified => 'استوفت كل القواعد';
 
   @override
-  String get countWatching => 'تحت المتابعة';
+  String get countWatching => 'استوفت بعض القواعد';
 
   @override
   String get countOutcomes => 'النتائج';
@@ -436,7 +436,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get readFullInvestigation => 'اقرأ الدراسة كاملة';
 
   @override
-  String get scannerHistory => 'سجل ماسح الفرص';
+  String get scannerHistory => 'سجل الماسح';
 
   @override
   String get studyLabel => 'الركائز الست';
@@ -485,13 +485,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scanLogEmpty => 'سجل القواعد فارغ';
 
   @override
-  String get scanNothingQualified => 'لا شيء استوفى اليوم';
+  String get scanNothingQualified => 'لم تستوفِ أي شركة كل القواعد اليوم';
 
   @override
   String get scanNothingWatch => 'لا شيء تحت المتابعة';
 
   @override
-  String get scanNothingRejected => 'لم يُستبعد شيء اليوم';
+  String get scanNothingRejected => 'لم تسقط أي شركة في القواعد اليوم';
 
   @override
   String get scanEmptyBlurb =>
@@ -538,7 +538,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get gateUnresolved => 'غير محسوم';
 
   @override
-  String get scannerTitleFull => 'ماسح الفرص';
+  String get scannerTitleFull => 'الماسح';
 
   @override
   String scanUpdated(String date) {
@@ -547,17 +547,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String scanQualifiedCount(int count) {
-    return 'مستوفية $count';
+    return 'استوفت الكل $count';
   }
 
   @override
   String scanWatchCount(int count) {
-    return 'متابعة $count';
+    return 'جزئيًا $count';
   }
 
   @override
   String scanRejectedCount(int count) {
-    return 'مستبعدة $count';
+    return 'لم تستوفِ $count';
   }
 
   @override
@@ -598,13 +598,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scanNoSectorToday => 'لا قراءة قطاعية اليوم';
 
   @override
-  String get statusQualified => 'مستوفية';
+  String get statusQualified => 'استوفت كل القواعد';
 
   @override
-  String get statusWatching => 'تحت المتابعة';
+  String get statusWatching => 'استوفت بعض القواعد';
 
   @override
-  String get statusRejected => 'مستبعدة';
+  String get statusRejected => 'لم تستوفِ القواعد';
 
   @override
   String get figPrevClose => 'الإغلاق السابق';

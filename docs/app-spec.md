@@ -83,6 +83,13 @@ Use the following names consistently:
 
 - **The Barbarian** — main application/product.
 - **Opportunity Scanner** — corresponds to the existing Daily EGX Insights / early opportunity monitoring system. Do NOT rename it "Daily Insights."
+  - **Superseded 21 Aug 2026 (founder's call): the app calls it "Scanner".**
+    "Opportunity" promises a trade worth taking, which is a recommendation, and
+    the publisher holds no FRA licence. The prohibition on "Daily Insights"
+    still stands, so the loaded word was dropped rather than the name replaced.
+    Status wording moved with it: "Qualified" → "Cleared every rule", matching
+    the blurbs already in the app. Bucketing is unchanged — this is what a
+    reader sees, not how a name is sorted.
 - **Cash or Trash** — keep the existing branding.
 - **The Pit** — community/discussion area.
 - **Market** — company database, financial data, historical prices, sectors, disclosures, etc.
