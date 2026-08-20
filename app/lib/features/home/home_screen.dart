@@ -302,10 +302,13 @@ class _DailyInsight extends ConsumerWidget {
 /// equal-weighted, so a day where they fall while the 30 rises is a day carried
 /// by a handful of heavyweights. Three cards make that visible at a glance.
 ///
-/// The sparkline is drawn from `market-history.json`, which is written one
-/// session at a time because no index series is published anywhere we can
-/// reach. Until there are two sessions there is nothing to draw and the card
-/// simply carries the level, which is what it did before.
+/// The sparkline is drawn from `market-history.json`. That file used to hold a
+/// single row and grow one session a day, on the belief that no index series
+/// was reachable — so the cards carried a number and never a shape. A year of
+/// daily closes is now backfilled from a second source, and kept honest by
+/// refusing the fetch outright unless its newest close matches the level we
+/// already publish. With one session there is still nothing to draw and the
+/// card falls back to the level alone.
 class _Indices extends ConsumerWidget {
   const _Indices();
 

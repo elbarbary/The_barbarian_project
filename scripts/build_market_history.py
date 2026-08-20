@@ -5,9 +5,13 @@ Two things the app wants to draw and nothing was storing.
 
 **Index levels.** The rates document publishes EGX 30, EGX 70 and EGX 100 as a
 level and a change, with no series behind them — so an index card could show a
-number but never a shape. There is no historical index feed we can reach, and
-inventing one is out of the question, so the series is built the only honest
-way available: by writing down today's close every day and keeping it.
+number but never a shape. This file used to say no historical feed was reachable
+and grow the series one session at a time. That was true of the sources it knew
+about: Investing.com publishes all three daily, back a year, and every newest
+close agrees with the level we already publish from TradingView to the decimal.
+`index_history.py` fetches it and **refuses the whole run** if that agreement
+fails, because an instrument id is just a number in a URL and getting it wrong
+produces a plausible chart of the wrong index rather than an error.
 
 **Breadth.** How many shares rose, fell and did not move is the single most
 useful sentence about a session — "it was 40 up against 180 down" says whether
@@ -22,8 +26,12 @@ backfilled from something we do not have.
 
 from __future__ import annotations
 
+import argparse
 import json
 import pathlib
+from datetime import date as date_cls, timedelta
+
+import index_history
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = pathlib.Path(__file__).resolve().parent / "market_history.json"
@@ -38,6 +46,10 @@ RATES = REPO / "public" / "data" / "v1" / "rates" / "latest.json"
 # A session is worth keeping for about a year of trading. Past that the file
 # grows without the charts getting more useful, and it ships in the binary.
 KEEP = 260
+
+# How far back to ask the historical feed for. A year of sessions is what
+# `KEEP` retains anyway.
+BACKFILL_DAYS = 400
 
 
 def load(path: pathlib.Path) -> dict:
@@ -73,6 +85,14 @@ def breadth(market: dict) -> dict | None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--no-backfill",
+        action="store_true",
+        help="skip the historical index fetch and record only today",
+    )
+    args = parser.parse_args()
+
     print("── Index levels and market breadth")
 
     market, rates = load(MARKET), load(RATES)
@@ -98,6 +118,31 @@ def main() -> int:
 
     store = load(STORE)
     rows = {r["date"]: r for r in store.get("sessions") or []}
+
+    # Backfill the index levels from the historical feed. This only ever adds
+    # `indices` to a row; a breadth count is never invented for a past session,
+    # because breadth is counted a different way from a different document and
+    # a series that silently changed method halfway along would be worse than a
+    # short one.
+    if not args.no_backfill:
+        try:
+            since = (date_cls.today() - timedelta(days=BACKFILL_DAYS)).isoformat()
+            history = index_history.fetch(since, date)
+        except index_history.IndexHistoryUnavailable as error:
+            print(f"   no index history: {error}")
+        else:
+            added = 0
+            for index_id, points in history.items():
+                for day, close in points.items():
+                    # Today's row comes from our own snapshot and outranks it.
+                    if day == date:
+                        continue
+                    entry = rows.setdefault(day, {"date": day})
+                    levels_for = entry.setdefault("indices", {})
+                    if index_id not in levels_for:
+                        levels_for[index_id] = close
+                        added += 1
+            print(f"   backfilled {added} index closes from the historical feed")
     # Append-only per date. A rerun on the same day refreshes that day and
     # leaves every other row exactly as it was written.
     rows[date] = row

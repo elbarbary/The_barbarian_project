@@ -4,6 +4,7 @@ import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/core/models/rates.dart';
+import 'package:barbarian/core/models/market_history.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -106,6 +107,32 @@ void main() {
       'EGX70EWI',
       'EGX100EWI',
     ]));
+  });
+
+  test('§14 the indices carry a real series, not a single point', () {
+    // These cards showed a number and never a shape: `market-history.json`
+    // held one row and grew a session a day, because the builder believed no
+    // index series was reachable anywhere. A year of daily closes is now
+    // backfilled from a second source and checked against the level we
+    // already publish before any of it is written.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+
+    expect(history.sessions.length, greaterThan(100));
+    for (final id in ['EGX30', 'EGX70EWI', 'EGX100EWI']) {
+      final series = history.levelsOf(id);
+      expect(
+        series.length,
+        greaterThan(100),
+        reason: '$id has nothing to draw a sparkline from',
+      );
+      expect(
+        series.every((v) => v > 0),
+        isTrue,
+        reason: '$id carries a non-positive level',
+      );
+    }
   });
 
   testWidgets('it counts what rose and what fell', (tester) async {
