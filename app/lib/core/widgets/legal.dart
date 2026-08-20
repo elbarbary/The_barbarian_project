@@ -81,6 +81,33 @@ class BLegalFootnote extends StatelessWidget {
 /// Every file that shows a band carries one. When the data has nothing to put
 /// in it, the card says that rather than disappearing: an empty card is honest
 /// about a gap, a missing card silently turns the score back into a rating.
+/// The one-line version, for a card that can leave the app on its own.
+///
+/// The full statement sits once per screen, at the foot of the scroll. But the
+/// unit a reader actually screenshots and forwards is the card — a ticker, a
+/// score and a coloured band — and it leaves without the sentence that says
+/// what it is not. This rides on the card itself so the two cannot be
+/// separated.
+class BLegalMark extends StatelessWidget {
+  const BLegalMark({this.onDark = false, super.key});
+
+  final bool onDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Text(
+        AppLocalizations.of(context).legalNotLicensedShort,
+        style: BarbarianType.labelNano.copyWith(
+          color: onDark ? c.onInkMuted : c.textFaint,
+        ),
+      ),
+    );
+  }
+}
+
 class BWhatWouldChangeThis extends StatelessWidget {
   const BWhatWouldChangeThis({required this.conditions, super.key});
 

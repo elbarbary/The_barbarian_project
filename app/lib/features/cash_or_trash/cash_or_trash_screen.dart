@@ -398,6 +398,10 @@ class _VerdictCard extends ConsumerWidget {
                 ),
               ],
             ),
+            // Travels with the card. A ticker, a signed score and a coloured
+            // band is what gets screenshotted and forwarded, and the full
+            // statement at the foot of the scroll does not go with it.
+            const BLegalMark(),
           ],
         ),
       ),

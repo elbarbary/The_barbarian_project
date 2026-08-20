@@ -329,7 +329,7 @@ abstract class AppLocalizations {
   /// LEGAL. Spec §8.12. Must be reviewed by an Egyptian lawyer before release — see lib/core/widgets/legal.dart.
   ///
   /// In en, this message translates to:
-  /// **'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise.'**
+  /// **'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.'**
   String get legalNotLicensed;
 
   /// No description provided for @scannerTitle.
@@ -637,6 +637,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} filings today'**
   String homeFilingsCount(int count);
+
+  /// No description provided for @legalNotLicensedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Not licensed by the FRA. Not a recommendation.'**
+  String get legalNotLicensedShort;
 }
 
 class _AppLocalizationsDelegate

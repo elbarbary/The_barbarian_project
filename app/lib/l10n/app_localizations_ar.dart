@@ -135,7 +135,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get legalNotLicensed =>
-      'استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة.';
+      'استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة. لا شيء هنا توصية بالتعامل على أي ورقة مالية.';
 
   @override
   String get scannerTitle => 'ماسح الفرص';
@@ -295,4 +295,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String homeFilingsCount(int count) {
     return '$count إفصاحًا اليوم';
   }
+
+  @override
+  String get legalNotLicensedShort =>
+      'غير مرخّصة من الرقابة المالية. ليست توصية.';
 }

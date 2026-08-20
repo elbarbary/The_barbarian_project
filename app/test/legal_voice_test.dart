@@ -270,7 +270,12 @@ void main() {
     // "نقدم نصيحة" appears inside the non-licence line, which DENIES advising.
     // A sentence carrying its own negation is the disclaimer, not the thing
     // disclaimed — the same carve-out §8.5 makes for English.
-    final negated = RegExp('\\b(لا|ليس|غير)\\b|\\b(not|never|no)\\b');
+    // No `\b` on the Arabic alternatives, for the same reason the blocked
+    // patterns carry none: Dart's word boundary is ASCII-only and never
+    // matches beside an Arabic letter, so this carve-out silently covered
+    // nothing. It caught its own author — "ليست توصية" ("is not a
+    // recommendation") tripped the recommendation pattern.
+    final negated = RegExp('لا |ليست? |غير |\\b(not|never|no)\\b');
 
     // The patterns prove they can fire before they are trusted to pass. An
     // Arabic regex that silently matches nothing would make this test a

@@ -38,7 +38,7 @@
   "languageEnglish": "English",
   "languageArabic": "العربية",
   "languageSystem": "لغة الجهاز",
-  "legalNotLicensed": "استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة.",
+  "legalNotLicensed": "استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة. لا شيء هنا توصية بالتعامل على أي ورقة مالية.",
   "scannerTitle": "ماسح الفرص",
   "scannerSubtitle": "ما وجدته القاعدة المنشورة، وما فاتها",
   "scannerOpen": "افتح الماسح",
@@ -89,5 +89,6 @@
   "sampleData": "بيانات تجريبية · ليست أسعارًا حية",
   "homeAlsoFiled": "أُفصح عنه اليوم أيضًا",
   "homeAllFilings": "كل الإفصاحات",
-  "homeFilingsCount": "{count} إفصاحًا اليوم"
+  "homeFilingsCount": "{count} إفصاحًا اليوم",
+  "legalNotLicensedShort": "غير مرخّصة من الرقابة المالية. ليست توصية."
 }

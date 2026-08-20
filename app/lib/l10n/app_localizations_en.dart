@@ -135,7 +135,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legalNotLicensed =>
-      'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise.';
+      'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.';
 
   @override
   String get scannerTitle => 'Opportunity Scanner';
@@ -297,4 +297,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String homeFilingsCount(int count) {
     return '$count filings today';
   }
+
+  @override
+  String get legalNotLicensedShort =>
+      'Not licensed by the FRA. Not a recommendation.';
 }

@@ -513,6 +513,10 @@ class _ScannedCard extends StatelessWidget {
                   ),
                 ),
             ],
+            // The card can leave the app on its own — a ticker, a score and a
+            // band is the unit a reader screenshots and forwards. The full
+            // statement at the foot of the scroll does not travel with it.
+            const BLegalMark(),
           ],
         ),
       ),
