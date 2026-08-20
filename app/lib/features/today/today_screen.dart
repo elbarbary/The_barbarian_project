@@ -132,7 +132,12 @@ class _ScannerHero extends ConsumerWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
-                          'OPPORTUNITY SCANNER',
+                          // Was the literal string 'OPPORTUNITY SCANNER',
+                          // which meant an Arabic reader met an English label
+                          // here whatever the locale said — and it survived
+                          // the rename because a hardcoded string is invisible
+                          // to the ARB.
+                          l.scannerTitle.toUpperCase(),
                           style: BarbarianType.labelNano.copyWith(
                             color: c.onInkMuted,
                           ),

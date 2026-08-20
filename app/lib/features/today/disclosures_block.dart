@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../l10n/app_localizations.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/disclosure.dart';
+import '../../core/models/recency.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
@@ -98,8 +100,11 @@ class _Filing extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: [
+                      // Both tags shrink. Only the type tag used to, so the
+                      // volume tag held its full natural width and shoved the
+                      // row over its edge.
                       if (item.weight == 'check') ...[
-                        _CheckTag(ratio: item.evidence?.ratio),
+                        Flexible(child: _CheckTag(ratio: item.evidence?.ratio)),
                         const SizedBox(width: 8),
                       ],
                       Flexible(child: _TypeTag(label: item.eventLabel)),
@@ -107,11 +112,26 @@ class _Filing extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                if (item.tickers.isNotEmpty) ...[
-                  Text(
+                // Ticker and age share one slot — "MOSC · Today". They were
+                // two, and the second one took enough width off the Expanded
+                // beside it to ellipsise a type label that had just got longer
+                // ("Listing committee decision"), overflowing the row by 89px.
+                //
+                // The age itself is §49: without it a filing from four days
+                // ago and one from this morning looked identical, which on an
+                // exchange feed is the difference between news and history.
+                // EGX publishes the day and not the hour, so this says
+                // "Today" and never "0h ago".
+                if ([
+                  if (item.tickers.isNotEmpty)
                     item.tickers.length > 1
                         ? '${item.tickers.first} +${item.tickers.length - 1}'
                         : item.tickers.first,
+                  context.filingAge(item.date),
+                ].nonNulls.join(' · ') case final String meta
+                    when meta.isNotEmpty) ...[
+                  Text(
+                    meta,
                     style: BarbarianType.labelNano.copyWith(
                       color: c.textSecondary,
                     ),
@@ -224,6 +244,7 @@ class _CheckTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final r = ratio;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
@@ -231,11 +252,18 @@ class _CheckTag extends StatelessWidget {
         color: c.hairline,
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
+      // Was two hardcoded English strings in an Arabic-first app, and the
+      // Text had no ellipsis — so at its natural width ("VOLUME 3.4x NORMAL")
+      // it pushed the tag row 117px past its edge once filing type labels got
+      // longer.
       child: Text(
-        r == null || r <= 0
-            ? 'UNUSUAL VOLUME'
-            : 'VOLUME ${r.toStringAsFixed(1)}x NORMAL',
+        (r == null || r <= 0
+                ? l.unusualVolume
+                : l.homeVolumeKicker(r.toStringAsFixed(1)))
+            .toUpperCase(),
         style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

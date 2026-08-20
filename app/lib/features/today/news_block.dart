@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/models/recency.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
@@ -122,7 +123,7 @@ class _Headline extends StatelessWidget {
                 if (item.weight == 'check') const _CheckTag(),
                 if (item.eventTag case final String tag) _EventTag(label: tag),
                 Text(
-                  [outlet, _ago(item.publishedAt)].nonNulls.join(' · '),
+                  [outlet, context.newsAge(item.publishedAt)].nonNulls.join(' · '),
                   style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                 ),
                 Icon(Icons.north_east_rounded, size: 13, color: c.textFaint),
@@ -169,13 +170,6 @@ class _Headline extends StatelessWidget {
     );
   }
 
-  static String? _ago(DateTime? at) {
-    if (at == null) return null;
-    final delta = DateTime.now().toUtc().difference(at.toUtc());
-    if (delta.inMinutes < 60) return '${delta.inMinutes}m ago';
-    if (delta.inHours < 24) return '${delta.inHours}h ago';
-    return '${delta.inDays}d ago';
-  }
 }
 
 /// What kind of event it is — never whether it was good.

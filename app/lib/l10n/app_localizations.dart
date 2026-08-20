@@ -1627,6 +1627,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Index levels are on Home'**
   String get ratesIndicesMovedHome;
+
+  /// No description provided for @ageJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get ageJustNow;
+
+  /// No description provided for @ageToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get ageToday;
+
+  /// No description provided for @ageYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get ageYesterday;
+
+  /// No description provided for @ageMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m ago'**
+  String ageMinutes(int count);
+
+  /// No description provided for @ageHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}h ago'**
+  String ageHours(int count);
+
+  /// No description provided for @ageDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}d ago'**
+  String ageDays(int count);
+
+  /// No description provided for @unusualVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual volume'**
+  String get unusualVolume;
 }
 
 class _AppLocalizationsDelegate

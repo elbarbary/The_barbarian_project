@@ -465,5 +465,33 @@
   "ratesMetals": "Gold and silver",
   "ratesPound": "The pound",
   "ratesPerGram": "per gram",
-  "ratesIndicesMovedHome": "Index levels are on Home"
+  "ratesIndicesMovedHome": "Index levels are on Home",
+  "ageJustNow": "just now",
+  "ageToday": "Today",
+  "ageYesterday": "Yesterday",
+  "ageMinutes": "{count}m ago",
+  "@ageMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "{count}h ago",
+  "@ageHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "{count}d ago",
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualVolume": "Unusual volume"
 }

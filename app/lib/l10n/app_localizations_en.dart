@@ -873,4 +873,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ratesIndicesMovedHome => 'Index levels are on Home';
+
+  @override
+  String get ageJustNow => 'just now';
+
+  @override
+  String get ageToday => 'Today';
+
+  @override
+  String get ageYesterday => 'Yesterday';
+
+  @override
+  String ageMinutes(int count) {
+    return '${count}m ago';
+  }
+
+  @override
+  String ageHours(int count) {
+    return '${count}h ago';
+  }
+
+  @override
+  String ageDays(int count) {
+    return '${count}d ago';
+  }
+
+  @override
+  String get unusualVolume => 'Unusual volume';
 }

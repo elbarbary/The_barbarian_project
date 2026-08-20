@@ -8,6 +8,7 @@ import '../../core/models/disclosure.dart';
 import '../../core/models/market_history.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/news.dart';
+import '../../core/models/recency.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
@@ -177,6 +178,10 @@ class _DailyInsight extends ConsumerWidget {
     final label = arabic && item.eventLabelAr.isNotEmpty
         ? item.eventLabelAr
         : item.eventLabel;
+    final age = context.filingAge(item.date);
+    final volumeKicker = (item.evidence?.ratio != null && item.evidence!.ratio > 0)
+        ? l.homeVolumeKicker(item.evidence!.ratio.toStringAsFixed(1))
+        : null;
 
     return BPressable(
       onTap: ticker == null
@@ -196,18 +201,32 @@ class _DailyInsight extends ConsumerWidget {
                     // leads — the session's own volume against its normal —
                     // rather than repeating the event name that the headline
                     // underneath already states.
-                    (item.evidence?.ratio != null && item.evidence!.ratio > 0
-                            ? l.homeVolumeKicker(
-                                item.evidence!.ratio.toStringAsFixed(1),
-                              )
-                            : l.homeFiledToday)
-                        .toUpperCase(),
+                    //
+                    // When there is no volume reason it carries the age
+                    // instead. It used to say "Filed today" flatly, and the
+                    // lead is chosen by rank before date, so a filing that
+                    // outranked everything from an earlier session announced
+                    // itself as today's on the largest card on the screen.
+                    // The whole feed was one day old when this was found.
+                    (volumeKicker ?? age ?? l.homeFiledHero).toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
                       letterSpacing: 1.6,
                     ),
                   ),
                 ),
+                // Shown here only when the kicker spent its slot on the volume
+                // reason, so the age appears exactly once either way.
+                if (volumeKicker != null && age != null) ...[
+                  Text(
+                    age.toUpperCase(),
+                    style: BarbarianType.labelTiny.copyWith(
+                      color: c.onInkMuted,
+                      letterSpacing: 1.6,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 if (ticker != null)
                   Icon(Icons.north_east_rounded, size: 18, color: c.onInkMuted),
               ],
@@ -637,6 +656,16 @@ class _AlsoFiled extends ConsumerWidget {
                                 ? item.eventLabelAr
                                 : item.eventLabel,
                           ),
+                          // §49 again. These rows sit under a hero that now
+                          // dates itself, and an undated row beside a dated
+                          // one reads as "this one is current".
+                          if (context.filingAge(item.date) case final age?)
+                            Text(
+                              age,
+                              style: BarbarianType.labelNano.copyWith(
+                                color: c.textMuted,
+                              ),
+                            ),
                         ],
                       ),
                       const SizedBox(height: 6),
@@ -767,10 +796,18 @@ class _LatestNews extends ConsumerWidget {
                           ),
                         ),
                       ],
-                      if (outletsFor(item) case final String outlets) ...[
+                      // Outlet and age on one line, and the line survives if
+                      // either half is missing — a story with no named outlet
+                      // still has to say how old it is (§49). Home showed the
+                      // outlet and no time at all, so a headline from Tuesday
+                      // and one from an hour ago read exactly alike.
+                      if ([outletsFor(item), context.newsAge(item.publishedAt)]
+                          .nonNulls
+                          .join(' · ') case final String byline
+                          when byline.isNotEmpty) ...[
                         const SizedBox(height: 4),
                         Text(
-                          outlets,
+                          byline,
                           style: BarbarianType.labelNano.copyWith(
                             color: c.textFaint,
                           ),

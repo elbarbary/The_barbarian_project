@@ -31,6 +31,36 @@ void main() {
     expect(find.textContaining(RegExp('Statement\$')), findsNothing);
   });
 
+  testWidgets('§49 the hero dates itself and never backdates a claim', (
+    tester,
+  ) async {
+    // The lead is chosen by rank before date, so the biggest card on the
+    // screen can hold a filing from an earlier session. Its kicker said
+    // "Filed today" regardless — and when this was found the entire feed was
+    // one day old, so Home was stating something false in its largest type.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    final fixture = readFixtureObjectSync('disclosures/latest.json');
+    final items = (fixture['items'] as List).cast<Map<String, dynamic>>();
+    final today = DateTime.now();
+    final isToday = items.any((i) {
+      final d = DateTime.tryParse((i['date'] ?? '') as String);
+      return d != null &&
+          d.year == today.year &&
+          d.month == today.month &&
+          d.day == today.day;
+    });
+
+    if (!isToday) {
+      expect(
+        find.textContaining(RegExp('FILED TODAY', caseSensitive: false)),
+        findsNothing,
+        reason: 'no filing in the feed is from today, so nothing may say so',
+      );
+    }
+  });
+
   testWidgets('the lead filing says why it is the lead', (tester) async {
     await pumpScreen(tester, const HomeScreen());
     await pumpUntil(tester, find.textContaining(RegExp('filed this')));

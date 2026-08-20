@@ -139,8 +139,8 @@ void main() {
 
       // The hero is only tappable once the scanner report has landed. Tap the
       // kicker, which is stable; the headline is now the report's own line.
-      await pumpUntil(tester, find.text('OPPORTUNITY SCANNER'));
-      await tester.tap(find.text('OPPORTUNITY SCANNER'));
+      await pumpUntil(tester, find.text('SCANNER'));
+      await tester.tap(find.text('SCANNER'));
       await pumpUntil(tester, find.text('Scanner'));
 
       // Spec: a detail route never moves the app to another tab.

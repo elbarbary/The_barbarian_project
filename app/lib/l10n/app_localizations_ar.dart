@@ -871,4 +871,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ratesIndicesMovedHome => 'مستويات المؤشرات في الصفحة الرئيسية';
+
+  @override
+  String get ageJustNow => 'الآن';
+
+  @override
+  String get ageToday => 'اليوم';
+
+  @override
+  String get ageYesterday => 'أمس';
+
+  @override
+  String ageMinutes(int count) {
+    return 'قبل $count د';
+  }
+
+  @override
+  String ageHours(int count) {
+    return 'قبل $count س';
+  }
+
+  @override
+  String ageDays(int count) {
+    return 'قبل $count ي';
+  }
+
+  @override
+  String get unusualVolume => 'حجم تداول غير معتاد';
 }

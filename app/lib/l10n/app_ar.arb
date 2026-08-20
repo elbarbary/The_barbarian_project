@@ -254,5 +254,33 @@
   "ratesMetals": "الذهب والفضة",
   "ratesPound": "الجنيه",
   "ratesPerGram": "للجرام",
-  "ratesIndicesMovedHome": "مستويات المؤشرات في الصفحة الرئيسية"
+  "ratesIndicesMovedHome": "مستويات المؤشرات في الصفحة الرئيسية",
+  "ageJustNow": "الآن",
+  "ageToday": "اليوم",
+  "ageYesterday": "أمس",
+  "ageMinutes": "قبل {count} د",
+  "@ageMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "قبل {count} س",
+  "@ageHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "قبل {count} ي",
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualVolume": "حجم تداول غير معتاد"
 }
