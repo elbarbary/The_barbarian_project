@@ -148,6 +148,33 @@ void main() {
     }
   });
 
+  test('gold and silver carry a series, not just a headline price', () {
+    // The rates document quotes gold as a number with nothing behind it, so
+    // the card could say what an ounce costs and never what it had been doing.
+    // Spot, not futures: the COMEX front month was trading 2.9% above spot,
+    // and a chart of that under a spot headline contradicts the number
+    // printed directly above it.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+
+    for (final metal in ['XAU', 'XAG']) {
+      final series = history.metalOf(metal);
+      expect(
+        series.length,
+        greaterThan(100),
+        reason: '$metal has nothing to draw',
+      );
+      expect(series.every((v) => v > 0), isTrue);
+    }
+
+    // Gold is worth vastly more an ounce than silver. If these two were ever
+    // swapped or pointed at the same instrument, this is what would catch it.
+    final gold = history.metalOf('XAU').last;
+    final silver = history.metalOf('XAG').last;
+    expect(gold / silver, greaterThan(10));
+  });
+
   testWidgets('it counts what rose and what fell', (tester) async {
     await pumpScreen(tester, const HomeScreen());
     await pumpUntil(tester, find.textContaining(RegExp('rose', caseSensitive: false)));

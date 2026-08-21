@@ -30,6 +30,11 @@ _MarketSession _$MarketSessionFromJson(Map<String, dynamic> json) =>
             (k, e) => MapEntry(k, (e as num).toDouble()),
           ) ??
           const <String, double>{},
+      metals:
+          (json['metals'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toDouble()),
+          ) ??
+          const <String, double>{},
       breadth: json['breadth'] == null
           ? null
           : MarketBreadth.fromJson(json['breadth'] as Map<String, dynamic>),
@@ -39,6 +44,7 @@ Map<String, dynamic> _$MarketSessionToJson(_MarketSession instance) =>
     <String, dynamic>{
       'date': instance.date,
       'indices': instance.indices,
+      'metals': instance.metals,
       'breadth': instance.breadth,
     };
 

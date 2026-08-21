@@ -192,6 +192,13 @@ def main() -> int:
         row["indices"] = levels
     if (split := breadth(market)) is not None:
         row["breadth"] = {**split, "basis": "session"}
+    spot = {
+        m["id"]: m["usd_ounce"]
+        for m in (rates.get("metals") or [])
+        if m.get("id") and m.get("usd_ounce") is not None
+    }
+    if spot:
+        row["metals"] = spot
 
     if len(row) == 1:
         print("   neither an index level nor a countable session — skipping")
@@ -224,6 +231,21 @@ def main() -> int:
                         levels_for[index_id] = close
                         added += 1
             print(f"   backfilled {added} index closes from the historical feed")
+
+        # Gold and silver, spot, in dollars an ounce. The rates document quotes
+        # them as a headline number with no series behind it, so the cards
+        # could say what gold costs and never what it had been doing.
+        try:
+            since = (date_cls.today() - timedelta(days=BACKFILL_DAYS)).isoformat()
+            for metal_id, points in index_history.metals(since, date).items():
+                for day, close in points.items():
+                    entry = rows.setdefault(day, {"date": day})
+                    entry.setdefault("metals", {}).setdefault(metal_id, close)
+        except index_history.IndexHistoryUnavailable as error:
+            print(f"   no metal history: {error}")
+        else:
+            counted = sum(1 for r in rows.values() if r.get("metals"))
+            print(f"   {counted} sessions carry a gold and silver close")
 
     # Breadth for past sessions, so the chart has lines rather than one dot.
     # Never overwrites a row that already has a count: a session counted from

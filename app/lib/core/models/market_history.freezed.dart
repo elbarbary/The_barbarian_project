@@ -287,7 +287,11 @@ as List<MarketSession>,
 /// @nodoc
 mixin _$MarketSession {
 
- String get date; Map<String, double> get indices; MarketBreadth? get breadth;
+ String get date; Map<String, double> get indices;/// Spot gold and silver in dollars an ounce, keyed `XAU` and `XAG`. Quoted
+/// in dollars because that is the market they trade in; the rates document
+/// does the conversion to pounds a gram, and doing it here would need a
+/// matching history of the pound that we do not hold.
+ Map<String, double> get metals; MarketBreadth? get breadth;
 /// Create a copy of MarketSession
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -300,16 +304,16 @@ $MarketSessionCopyWith<MarketSession> get copyWith => _$MarketSessionCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSession&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other.indices, indices)&&(identical(other.breadth, breadth) || other.breadth == breadth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSession&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other.indices, indices)&&const DeepCollectionEquality().equals(other.metals, metals)&&(identical(other.breadth, breadth) || other.breadth == breadth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(indices),breadth);
+int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(indices),const DeepCollectionEquality().hash(metals),breadth);
 
 @override
 String toString() {
-  return 'MarketSession(date: $date, indices: $indices, breadth: $breadth)';
+  return 'MarketSession(date: $date, indices: $indices, metals: $metals, breadth: $breadth)';
 }
 
 
@@ -320,7 +324,7 @@ abstract mixin class $MarketSessionCopyWith<$Res>  {
   factory $MarketSessionCopyWith(MarketSession value, $Res Function(MarketSession) _then) = _$MarketSessionCopyWithImpl;
 @useResult
 $Res call({
- String date, Map<String, double> indices, MarketBreadth? breadth
+ String date, Map<String, double> indices, Map<String, double> metals, MarketBreadth? breadth
 });
 
 
@@ -337,10 +341,11 @@ class _$MarketSessionCopyWithImpl<$Res>
 
 /// Create a copy of MarketSession
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? indices = null,Object? breadth = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? indices = null,Object? metals = null,Object? breadth = freezed,}) {
   return _then(_self.copyWith(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,indices: null == indices ? _self.indices : indices // ignore: cast_nullable_to_non_nullable
+as Map<String, double>,metals: null == metals ? _self.metals : metals // ignore: cast_nullable_to_non_nullable
 as Map<String, double>,breadth: freezed == breadth ? _self.breadth : breadth // ignore: cast_nullable_to_non_nullable
 as MarketBreadth?,
   ));
@@ -439,10 +444,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date,  Map<String, double> indices,  MarketBreadth? breadth)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date,  Map<String, double> indices,  Map<String, double> metals,  MarketBreadth? breadth)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketSession() when $default != null:
-return $default(_that.date,_that.indices,_that.breadth);case _:
+return $default(_that.date,_that.indices,_that.metals,_that.breadth);case _:
   return orElse();
 
 }
@@ -460,10 +465,10 @@ return $default(_that.date,_that.indices,_that.breadth);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date,  Map<String, double> indices,  MarketBreadth? breadth)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date,  Map<String, double> indices,  Map<String, double> metals,  MarketBreadth? breadth)  $default,) {final _that = this;
 switch (_that) {
 case _MarketSession():
-return $default(_that.date,_that.indices,_that.breadth);case _:
+return $default(_that.date,_that.indices,_that.metals,_that.breadth);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -480,10 +485,10 @@ return $default(_that.date,_that.indices,_that.breadth);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date,  Map<String, double> indices,  MarketBreadth? breadth)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date,  Map<String, double> indices,  Map<String, double> metals,  MarketBreadth? breadth)?  $default,) {final _that = this;
 switch (_that) {
 case _MarketSession() when $default != null:
-return $default(_that.date,_that.indices,_that.breadth);case _:
+return $default(_that.date,_that.indices,_that.metals,_that.breadth);case _:
   return null;
 
 }
@@ -495,7 +500,7 @@ return $default(_that.date,_that.indices,_that.breadth);case _:
 @JsonSerializable()
 
 class _MarketSession extends MarketSession {
-  const _MarketSession({required this.date, final  Map<String, double> indices = const <String, double>{}, this.breadth}): _indices = indices,super._();
+  const _MarketSession({required this.date, final  Map<String, double> indices = const <String, double>{}, final  Map<String, double> metals = const <String, double>{}, this.breadth}): _indices = indices,_metals = metals,super._();
   factory _MarketSession.fromJson(Map<String, dynamic> json) => _$MarketSessionFromJson(json);
 
 @override final  String date;
@@ -504,6 +509,21 @@ class _MarketSession extends MarketSession {
   if (_indices is EqualUnmodifiableMapView) return _indices;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_indices);
+}
+
+/// Spot gold and silver in dollars an ounce, keyed `XAU` and `XAG`. Quoted
+/// in dollars because that is the market they trade in; the rates document
+/// does the conversion to pounds a gram, and doing it here would need a
+/// matching history of the pound that we do not hold.
+ final  Map<String, double> _metals;
+/// Spot gold and silver in dollars an ounce, keyed `XAU` and `XAG`. Quoted
+/// in dollars because that is the market they trade in; the rates document
+/// does the conversion to pounds a gram, and doing it here would need a
+/// matching history of the pound that we do not hold.
+@override@JsonKey() Map<String, double> get metals {
+  if (_metals is EqualUnmodifiableMapView) return _metals;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_metals);
 }
 
 @override final  MarketBreadth? breadth;
@@ -521,16 +541,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSession&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other._indices, _indices)&&(identical(other.breadth, breadth) || other.breadth == breadth));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSession&&(identical(other.date, date) || other.date == date)&&const DeepCollectionEquality().equals(other._indices, _indices)&&const DeepCollectionEquality().equals(other._metals, _metals)&&(identical(other.breadth, breadth) || other.breadth == breadth));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(_indices),breadth);
+int get hashCode => Object.hash(runtimeType,date,const DeepCollectionEquality().hash(_indices),const DeepCollectionEquality().hash(_metals),breadth);
 
 @override
 String toString() {
-  return 'MarketSession(date: $date, indices: $indices, breadth: $breadth)';
+  return 'MarketSession(date: $date, indices: $indices, metals: $metals, breadth: $breadth)';
 }
 
 
@@ -541,7 +561,7 @@ abstract mixin class _$MarketSessionCopyWith<$Res> implements $MarketSessionCopy
   factory _$MarketSessionCopyWith(_MarketSession value, $Res Function(_MarketSession) _then) = __$MarketSessionCopyWithImpl;
 @override @useResult
 $Res call({
- String date, Map<String, double> indices, MarketBreadth? breadth
+ String date, Map<String, double> indices, Map<String, double> metals, MarketBreadth? breadth
 });
 
 
@@ -558,10 +578,11 @@ class __$MarketSessionCopyWithImpl<$Res>
 
 /// Create a copy of MarketSession
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? indices = null,Object? breadth = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? indices = null,Object? metals = null,Object? breadth = freezed,}) {
   return _then(_MarketSession(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,indices: null == indices ? _self._indices : indices // ignore: cast_nullable_to_non_nullable
+as Map<String, double>,metals: null == metals ? _self._metals : metals // ignore: cast_nullable_to_non_nullable
 as Map<String, double>,breadth: freezed == breadth ? _self.breadth : breadth // ignore: cast_nullable_to_non_nullable
 as MarketBreadth?,
   ));

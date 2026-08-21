@@ -49,6 +49,20 @@ INSTRUMENTS = {
     "EGX100EWI": 1165929,
 }
 
+# Spot gold and silver in dollars an ounce, which is what the rates document
+# quotes before converting to pounds a gram.
+#
+# **Spot, deliberately, not futures.** `/commodities/gold` is the COMEX front
+# month and was trading 2.9% above spot when this was written — a chart of it
+# under a spot headline would disagree with the number printed above it. These
+# two are the pages whose own `long_name` reads "Gold Spot US Dollar" and
+# "Silver Spot US Dollar", and whose 20 Aug closes match what we publish for
+# that session to within 0.14% and 0.006%.
+METALS = {
+    "XAU": 68,
+    "XAG": 69,
+}
+
 # The endpoint answers only with a browser-shaped request, and `domain-id`
 # is the one non-obvious header — without it the API replies 403.
 HEADERS = {
@@ -102,6 +116,67 @@ def series(index_id: str, since: str, until: str) -> dict[str, float]:
         # A holiday can come back as a zero row rather than no row at all.
         if close > 0:
             out[stamp] = round(close, 2)
+    return out
+
+
+def published_metals() -> dict[str, float]:
+    """The dollar-an-ounce prices we already publish, to check a fetch against."""
+    try:
+        rates = json.loads(RATES.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return {
+        m["id"]: float(m["usd_ounce"])
+        for m in rates.get("metals", [])
+        if m.get("id") and m.get("usd_ounce") is not None
+    }
+
+
+def metals(since: str, until: str) -> dict[str, dict[str, float]]:
+    """Daily spot closes for gold and silver, checked before they are believed.
+
+    The check is against **the same dated session**, not the newest row. Metals
+    trade around the clock, so the newest row is today still moving and sits a
+    percent or two from a close we published yesterday — comparing those would
+    reject a correct series for being current.
+    """
+    out: dict[str, dict[str, float]] = {}
+    for metal_id, instrument in METALS.items():
+        payload = _get(
+            f"{API.format(instrument)}"
+            f"?start-date={since}&end-date={until}&time-frame=Daily"
+            f"&add-missing-rows=false"
+        )
+        points: dict[str, float] = {}
+        for row in payload.get("data") or []:
+            stamp = (row.get("rowDateTimestamp") or "")[:10]
+            raw = row.get("last_closeRaw")
+            if not stamp or raw is None:
+                continue
+            try:
+                close = float(str(raw))
+            except (TypeError, ValueError):
+                continue
+            if close > 0:
+                points[stamp] = round(close, 4)
+        out[metal_id] = points
+
+    ours = published_metals()
+    for metal_id, points in out.items():
+        if not points:
+            raise IndexHistoryUnavailable(f"{metal_id}: empty series")
+        mine = ours.get(metal_id)
+        if mine is None:
+            continue
+        # Find the newest session we both hold and compare that one.
+        shared = [d for d in sorted(points, reverse=True) if d in points]
+        anchor_day = shared[1] if len(shared) > 1 else shared[0]
+        theirs = points[anchor_day]
+        if abs(theirs - mine) / mine > 0.02:
+            raise IndexHistoryUnavailable(
+                f"{metal_id}: {anchor_day} close {theirs:,.2f} disagrees with the "
+                f"{mine:,.2f} we publish — wrong instrument, or futures not spot"
+            )
     return out
 
 

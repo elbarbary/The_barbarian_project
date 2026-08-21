@@ -35,6 +35,17 @@ abstract class MarketHistory with _$MarketHistory {
       if (session.indices[indexId] case final double level) level,
   ];
 
+  /// Spot closes for a metal — `XAU` or `XAG` — in dollars an ounce.
+  ///
+  /// The rates document quotes gold as a headline with nothing behind it, so
+  /// the card could say what an ounce costs and never what it had been doing.
+  /// Sessions before this was collected simply have no entry, which is why the
+  /// series is shorter than the index one rather than padded to match it.
+  List<double> metalOf(String metalId) => [
+    for (final session in sessions)
+      if (session.metals[metalId] case final double price) price,
+  ];
+
   MarketSession? get latest => sessions.isEmpty ? null : sessions.last;
 }
 
@@ -43,6 +54,12 @@ abstract class MarketSession with _$MarketSession {
   const factory MarketSession({
     required String date,
     @Default(<String, double>{}) Map<String, double> indices,
+
+    /// Spot gold and silver in dollars an ounce, keyed `XAU` and `XAG`. Quoted
+    /// in dollars because that is the market they trade in; the rates document
+    /// does the conversion to pounds a gram, and doing it here would need a
+    /// matching history of the pound that we do not hold.
+    @Default(<String, double>{}) Map<String, double> metals,
     MarketBreadth? breadth,
   }) = _MarketSession;
 
