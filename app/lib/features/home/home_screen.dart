@@ -992,49 +992,46 @@ class _Breadth extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Read in the bar's order — rose, unchanged, fell — so the
+                // green, grey and red under them are the same three things in
+                // the same three places. They used to run rose, fell,
+                // unchanged above a bar running rose, unchanged, fell, which
+                // put "17%" under "fell" and meant the unchanged column.
                 Row(
                   children: [
-                    _Count(value: latest.up, label: l.breadthUp, tone: c.up),
-                    const SizedBox(width: 14),
                     _Count(
-                      value: latest.down,
-                      label: l.breadthDown,
-                      tone: c.down,
+                      value: latest.up,
+                      share: latest.counted,
+                      label: l.breadthUp,
+                      tone: c.up,
                     ),
                     const SizedBox(width: 14),
                     _Count(
                       value: latest.flat,
+                      share: latest.counted,
                       label: l.breadthFlat,
                       tone: c.textFaint,
                     ),
+                    const SizedBox(width: 14),
+                    _Count(
+                      value: latest.down,
+                      share: latest.counted,
+                      label: l.breadthDown,
+                      tone: c.down,
+                    ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 14),
                 // The proportions, as one bar. Three numbers tell a reader who
                 // is counting; the bar tells one who is glancing, and it is
                 // the shape of the session rather than its arithmetic.
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(3),
-                  child: SizedBox(
-                    height: 6,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: latest.up,
-                          child: ColoredBox(color: c.up),
-                        ),
-                        Expanded(
-                          flex: latest.flat,
-                          child: ColoredBox(color: c.hairlineStrong),
-                        ),
-                        Expanded(
-                          flex: latest.down,
-                          child: ColoredBox(color: c.down),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                //
+                // It was six points tall and butted straight together, which
+                // on a phone is a hairline in three colours — present in the
+                // widget tree, invisible on the glass, and reported missing.
+                // Twelve points with a gap between the segments is a bar you
+                // can read across the room, which is the only job it has.
+                _BreadthBar(breadth: latest),
                 const SizedBox(height: 10),
                 Text(
                   l.breadthOf(latest.counted),
@@ -1107,9 +1104,19 @@ class _Breadth extends ConsumerWidget {
 }
 
 class _Count extends StatelessWidget {
-  const _Count({required this.value, required this.label, required this.tone});
+  const _Count({
+    required this.value,
+    required this.share,
+    required this.label,
+    required this.tone,
+  });
 
   final int value;
+
+  /// The denominator the percentage is taken against — the shares counted,
+  /// carried here rather than left to the reader to divide in their head.
+  final int share;
+
   final String label;
   final Color tone;
 
@@ -1127,6 +1134,11 @@ class _Count extends StatelessWidget {
             letterSpacing: 1.2,
           ),
         ),
+        if (share > 0)
+          BNumText(
+            '${(value / share * 100).round()}%',
+            style: BarbarianType.labelTiny.copyWith(color: c.textFaint),
+          ),
       ],
     );
   }
@@ -1154,3 +1166,65 @@ class _Key extends StatelessWidget {
     );
   }
 }
+
+
+/// The session's shape: what share of the market rose, held and fell.
+///
+/// Green, grey, red, left to right, each segment as wide as its share of the
+/// count — and its percentage under it where the segment is wide enough to
+/// carry one. A segment narrower than that gets no label rather than a
+/// squeezed one, because a number cut in half is worse than no number.
+class _BreadthBar extends StatelessWidget {
+  const _BreadthBar({required this.breadth});
+
+  final MarketBreadth breadth;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final total = breadth.counted > 0
+        ? breadth.counted
+        : breadth.up + breadth.down + breadth.flat;
+    if (total <= 0) return const SizedBox.shrink();
+
+    // Green, grey, red — rose, held, fell — in the order the counts above are
+    // read in.
+    final parts = <(int, Color)>[
+      (breadth.up, c.up),
+      (breadth.flat, c.hairlineStrong),
+      (breadth.down, c.down),
+    ];
+
+    return SizedBox(
+      key: const Key('breadth-bar'),
+      height: 12,
+      child: Row(
+        // The reason this bar was invisible for as long as it existed.
+        //
+        // `Expanded` gives a child a tight WIDTH and a loose HEIGHT, and a
+        // `ColoredBox` or `DecoratedBox` with no child takes the smallest
+        // height it is allowed — which is zero. Three segments were being laid
+        // out at the correct widths, 64pt, 54pt and 198pt, and painted 0pt
+        // tall. The widget was in the tree and a test that only asked whether
+        // it existed passed happily; nothing was ever on the glass.
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (final (index, part) in parts.indexed) ...[
+            if (index > 0) const SizedBox(width: 3),
+            if (part.$1 > 0)
+              Expanded(
+                flex: part.$1,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: part.$2,
+                    borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+                  ),
+                ),
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
