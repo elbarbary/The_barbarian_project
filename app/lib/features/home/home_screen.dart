@@ -717,6 +717,35 @@ class HomeAlsoFiled extends ConsumerWidget {
                             ),
                         ],
                       ),
+                      // What was actually filed.
+                      //
+                      // This row used to carry the ticker, the event type, the
+                      // age and the explanation — everything except the one
+                      // line that says which filing it is. Mixed Oils filed
+                      // two things on 20 August, its reply to the auditor and
+                      // the Central Auditing Organization's report, and both
+                      // rows rendered as an identical "MOSC · Auditor or
+                      // accounts" one above the other. Today's feed showed the
+                      // title all along; Home did not.
+                      //
+                      // In the title's own direction, because the exchange
+                      // files in Arabic and the translation may or may not
+                      // have reached this one.
+                      const SizedBox(height: 7),
+                      Directionality(
+                        textDirection: isArabic(item.titleFor(arabic))
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        child: Text(
+                          item.titleFor(arabic),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: BarbarianType.bodyM.copyWith(
+                            color: c.textPrimary,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
                       // The same mark the news rows carry, so a reader
                       // switching between the two tabs is reading one thing in
                       // one voice rather than two that happen to sit together.
