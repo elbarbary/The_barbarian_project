@@ -38,7 +38,10 @@ class BDisclosuresBlock extends ConsumerWidget {
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
 
     final checks = feed.worthALook;
-    final rest = feed.items.where((i) => i.weight != 'check').take(10).toList();
+    // Every filing the exchange published, not a tenth of them. There are 36
+    // on a normal day and the whole point of the tab is that a reader can see
+    // the lot rather than a sample somebody chose for them.
+    final rest = feed.items.where((i) => i.weight != 'check').toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

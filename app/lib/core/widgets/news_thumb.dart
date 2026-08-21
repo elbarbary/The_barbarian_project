@@ -25,15 +25,16 @@ class BNewsThumb extends StatefulWidget {
   const BNewsThumb({
     super.key,
     required this.url,
-    this.size = 56,
-    this.gap = 12,
+    this.size = 68,
+    this.gap = 13,
   });
 
   /// The picture's address, or null when the outlet published none.
   final String? url;
 
   /// Side of the square. Small on purpose: it identifies a story, it does not
-  /// illustrate it, and the headline stays the thing being read.
+  /// illustrate it, and the headline stays the thing being read — but 56 read
+  /// as a stamp beside three lines of headline rather than as a photograph.
   final double size;
 
   /// Space between the picture and the text, collapsed along with it.
@@ -68,7 +69,7 @@ class _BNewsThumbState extends State<BNewsThumb> {
     return Padding(
       padding: EdgeInsetsDirectional.only(end: widget.gap),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(BarbarianRadius.sm),
+        borderRadius: BorderRadius.circular(BarbarianRadius.md),
         child: SizedBox(
           width: size,
           height: size,

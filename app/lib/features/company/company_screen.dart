@@ -711,40 +711,16 @@ class _Financials extends StatelessWidget {
           ),
         ],
 
-        if (annual.length > 1) ...[
+        // The filed statements themselves, every period and every line we
+        // hold — not the one year the card above happens to lead with.
+        //
+        // This replaced a list of net profit by year. The figures for the
+        // other four lines were already collected for all 228 companies that
+        // file them, and were being thrown away at the point of drawing: a
+        // reader could see what a company earned in 2023 but not what it owed.
+        if (annual.length > 1 || interim.length > 1) ...[
           const SizedBox(height: 14),
-          BPaperCard(
-            radius: BarbarianRadius.xl,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BSectionLabel(l.finNetProfitByYear),
-                const SizedBox(height: 8),
-                for (final p in annual.reversed)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            p.period,
-                            style: BarbarianType.bodyM.copyWith(
-                              color: c.textSecondary,
-                            ),
-                          ),
-                        ),
-                        BNumText(
-                          formatMillions(p.netIncome),
-                          style: BarbarianType.bodyM.copyWith(
-                            color: c.textPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ),
+          _StatementTable(annual: annual, quarterly: interim),
         ],
 
         const SizedBox(height: 16),
@@ -1400,5 +1376,152 @@ class _WhatThatMeans extends ConsumerWidget {
     if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
     if (value >= 1e3) return '${(value / 1e3).round()}k';
     return value.toStringAsFixed(0);
+  }
+}
+
+
+/// Every filed period, side by side.
+///
+/// Laid out as a table with the periods running sideways because that is the
+/// shape of the thing being shown — a reader compares one line across years,
+/// not one year across lines. The label column stays put while the figures
+/// scroll, so the row being read never loses its name.
+///
+/// A line with nothing in it for any period is dropped rather than printed as
+/// a row of dashes. Mubasher publishes five lines for most companies and
+/// fewer for some, and an empty row says only that we went looking.
+class _StatementTable extends StatefulWidget {
+  const _StatementTable({required this.annual, required this.quarterly});
+
+  final List<FinancialPeriod> annual;
+  final List<FinancialPeriod> quarterly;
+
+  @override
+  State<_StatementTable> createState() => _StatementTableState();
+}
+
+class _StatementTableState extends State<_StatementTable> {
+  int _tab = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final hasBoth = widget.annual.isNotEmpty && widget.quarterly.isNotEmpty;
+    final periods =
+        (_tab == 0 && widget.annual.isNotEmpty
+                ? widget.annual
+                : widget.quarterly)
+            .reversed
+            .toList();
+
+    final lines = <(String, double? Function(FinancialPeriod))>[
+      (l.finNetProfitLine, (p) => p.netIncome),
+      (l.finTotalAssets, (p) => p.assets),
+      (l.finTotalLiabilities, (p) => p.liabilities),
+      (l.ownersEquity, (p) => p.equity),
+      (l.finCashFromOps, (p) => p.operatingCashFlow),
+    ].where((line) => periods.any((p) => line.$2(p) != null)).toList();
+
+    if (periods.isEmpty || lines.isEmpty) return const SizedBox.shrink();
+
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BSectionLabel(l.finStatements),
+          if (hasBoth) ...[
+            const SizedBox(height: 10),
+            BSegmentedRow(
+              segments: [
+                BSegment(label: l.finAnnual),
+                BSegment(label: l.finQuarterly),
+              ],
+              selectedIndex: _tab,
+              onChanged: (i) => setState(() => _tab = i),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 116,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 22),
+                    for (final line in lines)
+                      SizedBox(
+                        height: 30,
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: Text(
+                            line.$1,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: BarbarianType.bodyS.copyWith(
+                              color: c.textSecondary,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (final p in periods)
+                        Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 18),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 22,
+                                child: Text(
+                                  p.period,
+                                  style: BarbarianType.labelS.copyWith(
+                                    color: c.textFaint,
+                                  ),
+                                ),
+                              ),
+                              for (final line in lines)
+                                SizedBox(
+                                  height: 30,
+                                  child: Align(
+                                    alignment: AlignmentDirectional.centerEnd,
+                                    child: BNumText(
+                                      formatMillions(line.$2(p)),
+                                      style: BarbarianType.bodyM.copyWith(
+                                        color: line.$2(p) == null
+                                            ? c.textFaint
+                                            : c.textPrimary,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            l.finStatementsNote,
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+          ),
+        ],
+      ),
+    );
   }
 }

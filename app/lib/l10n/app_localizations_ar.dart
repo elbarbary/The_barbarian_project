@@ -631,6 +631,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get finNetProfitReported => 'صافي الربح، كما أُعلن';
 
   @override
+  String get finStatements => 'القوائم المالية كما أُودعت';
+
+  @override
+  String get finAnnual => 'سنوي';
+
+  @override
+  String get finQuarterly => 'ربع سنوي';
+
+  @override
+  String get finNetProfitLine => 'صافي الربح';
+
+  @override
+  String get finStatementsNote =>
+      'كل فترة تنشرها مباشر عن هذه الشركة، بملايين الجنيهات، كما أُودعت. اسحب جانبًا للفترات الأقدم.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override
@@ -919,6 +935,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get priceClose => 'الإغلاق';
+
+  @override
+  String get showMore => 'عرض المزيد';
+
+  @override
+  String showingCount(int shown, int total) {
+    return 'عرض $shown من $total';
+  }
 
   @override
   String get theWires => 'الأخبار';

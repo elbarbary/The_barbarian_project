@@ -49,6 +49,7 @@ import urllib.parse
 import urllib.request
 
 import filing_types as ft
+import news_context
 import translations
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -287,18 +288,10 @@ def fetch_newsmap(source: dict) -> list[dict]:
 TAG_MAP = REPO / "scripts" / "news_tag_map.json"
 
 
-def normalise_ar(value: str) -> str:
-    """Fold the letter forms Egyptian writers use interchangeably.
-
-    Without this, "الاسكندرية" in a tag never matches "الإسكندرية" in the
-    directory, and they are the same word — alef with and without hamza, teh
-    marbuta against heh, and the yeh/alef-maqsura pair.
-    """
-    value = re.sub(r"[\u064b-\u0652\u0640]", "", value)
-    value = re.sub(r"[أإآٱ]", "ا", value)
-    value = value.replace("ة", "ه").replace("ى", "ي").replace("ؤ", "و")
-    value = value.replace("ئ", "ي")
-    return " ".join(value.split())
+# The fold lives in `news_context`, which is the file with the most Arabic in
+# it, so there is exactly one implementation for tags, clustering and subjects
+# to agree on.
+normalise_ar = news_context.normalise_ar
 
 
 def resolve_tags(source: dict, refresh: bool) -> dict[str, int]:
@@ -578,6 +571,90 @@ def triage(item: dict) -> dict:
     }
 
 
+# How many stories the document carries. The feed collects around 570 headlines
+# a run and merges them to under 300; the cap is here so the file cannot grow
+# without anybody noticing, not to ration what a reader may see.
+MAX_ITEMS = 400
+
+# What a story has to do with somebody holding Egyptian shares, in points.
+#
+# Every term is a published fact about the story rather than a judgement of it:
+# whether it names a listed company, whether we hold a mechanism for its
+# subject, whether it concerns Egypt at all. Nothing here says a story is good
+# or bad news, and nothing here is about a share price (§8).
+RELEVANCE = {
+    "ticker": 4,   # names a listed company, corroborated by the outlet's own tag
+    "unusual": 2,  # and that company had an unusual session
+    "subject": 2,  # we hold a written mechanism for what it is about
+    "egypt": 1,    # concerns Egypt
+    "event": 1,    # a company event rather than general copy
+    # A headline rebuilt from a URL slug is a weaker reading of what the outlet
+    # actually wrote, and it arrives without the outlet's picture. Arab Finance
+    # publishes no feed, so its 335 stories are all reconstructed — five sixths
+    # of the document — and on a pure clock sort they buried the 65 headlines
+    # that came with a title field and a photograph. This is a statement about
+    # how well we read the story, not about the outlet.
+    "reconstructed": -2,
+}
+
+# Relevance outranks recency for about a day, then recency takes over.
+#
+# Both matter and neither wins outright. A pure time sort is what put American
+# beef tariffs at the top of an Egyptian investing app; a pure relevance sort
+# would hold a three-day-old canal story above this morning's rate decision.
+# One point of relevance is worth 24 hours, so today's Egyptian news leads,
+# yesterday's stays above foreign wire copy, and last week's does not.
+HOURS_PER_POINT = 24.0
+
+
+def relevance(item: dict) -> int:
+    """The points this story scores, with the reasons kept on the record."""
+    score = 0
+    if item.get("tickers"):
+        score += RELEVANCE["ticker"]
+    if item.get("weight") == "check":
+        score += RELEVANCE["unusual"]
+    if item.get("subject"):
+        score += RELEVANCE["subject"]
+    if news_context.about_egypt(normalise_ar(item["headline"])):
+        score += RELEVANCE["egypt"]
+    if item.get("event") not in (None, "other"):
+        score += RELEVANCE["event"]
+    if item.get("reconstructed"):
+        score += RELEVANCE["reconstructed"]
+    return score
+
+
+def rank(items: list[dict]) -> None:
+    """Order the feed by relevance and recency together, in place.
+
+    The score is published on every item so a reader — or a reviewer — can see
+    why one story sits above another, rather than being asked to trust an
+    order they cannot inspect.
+    """
+    if not items:
+        return
+
+    def when(item: dict) -> datetime.datetime:
+        return datetime.datetime.fromisoformat(
+            item["published"].replace("Z", "+00:00")
+        )
+
+    latest = max(when(i) for i in items)
+
+    # Newest first, then a stable sort on score: two stories scoring the same
+    # keep the order the clock gave them.
+    items.sort(key=lambda i: i["published"], reverse=True)
+    for item in items:
+        item["relevance"] = relevance(item)
+    items.sort(
+        key=lambda i: -(
+            i["relevance"]
+            - (latest - when(i)).total_seconds() / 3600.0 / HOURS_PER_POINT
+        )
+    )
+
+
 def advice_leak(headline: str) -> str | None:
     for pattern in ADVICE_PATTERNS:
         if match := pattern.search(headline):
@@ -641,14 +718,41 @@ def build(refresh_tags: bool = False) -> dict:
         # A ticker match is the corroboration that makes the classification
         # worth publishing. Today that is 1 story in 120, which is the honest
         # number rather than a disappointing one.
-        if len(item.get("tickers") or []) == 1 and item["event"] != "other":
-            item["meaning"] = ft.meaning(item["event"])
-            item["meaning_ar"] = ft.meaning_ar(item["event"])
+        item["event_label_ar"] = news_context.EVENT_LABEL_AR.get(
+            item["event"], ""
+        )
+
+        # What this story does to somebody holding EGX shares.
+        #
+        # Read from the story's SUBJECT first — the canal, the pound, the rate,
+        # the wheat bill — which sidesteps the failure described above entirely.
+        # A subject is what the headline is about, not a guess at what kind of
+        # corporate event it was, so "gold rose" earns the gold mechanism no
+        # matter how the event classifier read it. It also makes no claim about
+        # any company, which is *safer* than the ticker path rather than
+        # riskier.
+        #
+        # Failing a subject we fall back to the event glossary, and there the
+        # old rule still stands untouched: only with a single ticker to
+        # corroborate the classification. That restriction was written after a
+        # gold story was published as "results", and nothing here makes the
+        # free-text classifier any more trustworthy than it was.
+        folded = normalise_ar(item["headline"])
+        meaning, meaning_ar, subject = news_context.meaning_for(
+            folded, item["event"]
+        )
+        corroborated = (
+            len(item.get("tickers") or []) == 1 and item["event"] != "other"
+        )
+        if subject is not None or corroborated:
+            item["meaning"] = meaning
+            item["meaning_ar"] = meaning_ar
+            if subject:
+                item["subject"] = subject
         item.pop("link", None)
         item.pop("source", None)
 
     items.sort(key=lambda i: i["published"], reverse=True)
-    items = items[:120]
 
     return {
         "sources": [
@@ -703,11 +807,21 @@ def merge_with_published(fresh: list[dict]) -> list[dict]:
         item for item in by_id.values()
         if (item.get("published") or "")[:19] >= cutoff[:19] or not item.get("published")
     ]
-    kept.sort(key=lambda i: i.get("published") or "", reverse=True)
     dropped = len(by_id) - len(kept)
     if dropped > 0:
         print(f"   {dropped} headlines aged past {KEEP_DAYS} days")
-    return kept[:KEEP_ITEMS]
+
+    # Ranked here rather than in `build`, because this is the first point at
+    # which the whole feed exists. Stored items come back through this function
+    # and would otherwise keep whatever order — and whatever missing score —
+    # they were written with, which is how half a ranked feed ends up unranked.
+    #
+    # A stored item is re-scored from scratch, so a change to the rules reaches
+    # the archive on the next run instead of only the fresh headlines.
+    for item in kept:
+        item.setdefault("event", "other")
+    rank(kept)
+    return kept[:MAX_ITEMS]
 
 
 def main() -> int:

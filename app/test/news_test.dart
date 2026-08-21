@@ -153,9 +153,24 @@ void main() {
 
       expect(feed.items, isNotEmpty);
       expect(
-        withPicture.length,
-        greaterThan(feed.items.length ~/ 4),
-        reason: 'almost nothing carries a picture; check the news endpoint',
+        withPicture,
+        isNotEmpty,
+        reason: 'nothing carries a picture; check the news endpoint',
+      );
+
+      // Measured over the top of the feed rather than all of it, because that
+      // is the part anybody sees and because the proportion across the whole
+      // document says more about Arab Finance's sitemap than about us: it
+      // files five of every six stories we hold and publishes no pictures at
+      // all. The ranking puts a reconstructed headline below a published one,
+      // so if this slips it means that ordering broke — which is the thing
+      // worth catching.
+      final lead = feed.items.take(30);
+      expect(
+        lead.where((i) => (i.image ?? '').isNotEmpty).length,
+        greaterThan(20),
+        reason: 'the feed no longer leads with the outlets that publish '
+            'a headline and a photograph',
       );
       for (final item in withPicture) {
         expect(item.image, startsWith('http'));

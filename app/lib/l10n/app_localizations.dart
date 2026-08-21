@@ -1238,6 +1238,36 @@ abstract class AppLocalizations {
   /// **'Net profit, as reported'**
   String get finNetProfitReported;
 
+  /// No description provided for @finStatements.
+  ///
+  /// In en, this message translates to:
+  /// **'The statements as filed'**
+  String get finStatements;
+
+  /// No description provided for @finAnnual.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual'**
+  String get finAnnual;
+
+  /// No description provided for @finQuarterly.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarterly'**
+  String get finQuarterly;
+
+  /// No description provided for @finNetProfitLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit'**
+  String get finNetProfitLine;
+
+  /// No description provided for @finStatementsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.'**
+  String get finStatementsNote;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:
@@ -1711,6 +1741,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close'**
   String get priceClose;
+
+  /// No description provided for @showMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more'**
+  String get showMore;
+
+  /// No description provided for @showingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {shown} of {total}'**
+  String showingCount(int shown, int total);
 
   /// No description provided for @theWires.
   ///

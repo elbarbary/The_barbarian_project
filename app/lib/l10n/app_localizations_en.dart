@@ -633,6 +633,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finNetProfitReported => 'Net profit, as reported';
 
   @override
+  String get finStatements => 'The statements as filed';
+
+  @override
+  String get finAnnual => 'Annual';
+
+  @override
+  String get finQuarterly => 'Quarterly';
+
+  @override
+  String get finNetProfitLine => 'Net profit';
+
+  @override
+  String get finStatementsNote =>
+      'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override
@@ -921,6 +937,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get priceClose => 'Close';
+
+  @override
+  String get showMore => 'Show more';
+
+  @override
+  String showingCount(int shown, int total) {
+    return 'Showing $shown of $total';
+  }
 
   @override
   String get theWires => 'The wires';

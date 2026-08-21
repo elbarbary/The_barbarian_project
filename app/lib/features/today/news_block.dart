@@ -31,18 +31,35 @@ import '../../core/widgets/text.dart';
 /// It cannot say more than that. The publisher has no FRA licence, so "this is
 /// big news for the stock" is the sentence it is not allowed to write, and a
 /// sentiment badge is that sentence with the words removed.
-class BNewsBlock extends ConsumerWidget {
+class BNewsBlock extends ConsumerStatefulWidget {
   const BNewsBlock({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BNewsBlock> createState() => _BNewsBlockState();
+}
+
+class _BNewsBlockState extends ConsumerState<BNewsBlock> {
+  /// Rows built at once.
+  ///
+  /// The feed carries 400 stories and this block lives inside a Column, so
+  /// every row it lists is built whether or not anybody scrolls to it. Listing
+  /// all of them costs a visible stall on the tab; listing twelve — which is
+  /// what it used to do — hid nine-tenths of the feed behind nothing at all.
+  /// A page at a time is both.
+  static const _page = 30;
+
+  int _shown = _page;
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
     final feed = ref.watch(newsProvider).value?.value;
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
 
     final checks = feed.worthAChecking;
-    final rest = feed.items.where((i) => i.weight != 'check').take(12).toList();
+    final all = feed.items.where((i) => i.weight != 'check').toList();
+    final rest = all.take(_shown).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,6 +83,18 @@ class BNewsBlock extends ConsumerWidget {
             padding: const EdgeInsets.only(bottom: 8),
             child: _Headline(item: item, feed: feed),
           ),
+        if (rest.length < all.length) ...[
+          const SizedBox(height: 4),
+          Center(
+            child: TextButton(
+              onPressed: () => setState(() => _shown += _page),
+              child: Text(
+                '${l.showMore}  ·  ${l.showingCount(rest.length + checks.length, all.length + checks.length)}',
+                style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 4),
         _Provenance(feed: feed),
       ],
@@ -137,23 +166,25 @@ class _Headline extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Collapses itself, gap included, when the outlet published no
-                // picture or the download fails — so this reads as an ordinary
-                // headline row rather than one with a hole beside it.
-                BNewsThumb(url: item.image, size: 62),
-                Expanded(
-                  // Per headline, not per app. The feeds are mixed — Al Borsa
-                  // files in Arabic, Arab Finance files in English — and
-                  // forcing RTL on all of them laid every English headline out
-                  // backwards. It is somebody else's sentence in their own
-                  // language either way, and it is not translated or trimmed.
-                  child: Directionality(
-                    textDirection: isArabic(item.headlineFor(arabic))
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
+            // The row runs in the headline's own direction, so the picture
+            // sits where that headline begins. Pinned to the left with an
+            // Arabic headline right-aligning away from it, every row had a
+            // channel of blank paper down the middle.
+            //
+            // Per headline, not per app: the feeds are mixed — Al Borsa files
+            // in Arabic, Arab Finance in English — and forcing one direction on
+            // all of them laid every English headline out backwards.
+            Directionality(
+              textDirection: isArabic(item.headlineFor(arabic))
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Collapses itself, gap included, when the outlet published
+                  // no picture or the download fails.
+                  BNewsThumb(url: item.image, size: 72),
+                  Expanded(
                     child: Text(
                       item.headlineFor(arabic),
                       style: BarbarianType.bodyL.copyWith(
@@ -162,8 +193,8 @@ class _Headline extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             if (item.because.isNotEmpty) ...[
               const SizedBox(height: 10),

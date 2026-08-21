@@ -17,6 +17,7 @@ import '../../core/widgets/charts.dart';
 import '../../core/models/explainer.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/explainer_sheet.dart';
+import '../../core/widgets/insight.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
@@ -651,23 +652,23 @@ class HomeAlsoFiled extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (showHeader)
-        Row(
-          children: [
-            Expanded(child: BSectionLabel(l.homeAlsoFiled)),
-            BInlineAction(
-              l.homeAllFilings,
-              // Ask for the section first, then move. `go` alone dropped the
-              // reader at the top of a long screen and left them to hunt for
-              // the thing they had just tapped.
-              onTap: () {
-                ref
-                    .read(todaySectionRequestProvider.notifier)
-                    .ask(TodaySection.filings);
-                context.go(Routes.today);
-              },
-            ),
-          ],
-        ),
+          Row(
+            children: [
+              Expanded(child: BSectionLabel(l.homeAlsoFiled)),
+              BInlineAction(
+                l.homeAllFilings,
+                // Ask for the section first, then move. `go` alone dropped the
+                // reader at the top of a long screen and left them to hunt for
+                // the thing they had just tapped.
+                onTap: () {
+                  ref
+                      .read(todaySectionRequestProvider.notifier)
+                      .ask(TodaySection.filings);
+                  context.go(Routes.today);
+                },
+              ),
+            ],
+          ),
         BPaperCard(
           radius: BarbarianRadius.xl,
           child: Column(
@@ -716,16 +717,34 @@ class HomeAlsoFiled extends ConsumerWidget {
                             ),
                         ],
                       ),
+                      // The same mark the news rows carry, so a reader
+                      // switching between the two tabs is reading one thing in
+                      // one voice rather than two that happen to sit together.
                       const SizedBox(height: 6),
-                      Text(
-                        item.meaningFor(arabic),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: BarbarianType.bodyS.copyWith(
-                          color: c.textSecondary,
-                          height: 1.4,
+                      BInsightLine(item.meaningFor(arabic)),
+                      // The measured reason this filing is worth a look, on the
+                      // same footing as the news rows beside it. A reader
+                      // switching tabs should not find the explanation on one
+                      // and not the other.
+                      if (item.because.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
+                          decoration: BoxDecoration(
+                            color: c.hairline,
+                            borderRadius: BorderRadius.circular(
+                              BarbarianRadius.sm,
+                            ),
+                          ),
+                          child: Text(
+                            item.because,
+                            style: BarbarianType.bodyS.copyWith(
+                              color: c.textPrimary,
+                              height: 1.4,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
@@ -776,20 +795,20 @@ class HomeLatestNews extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (showHeader)
-        Row(
-          children: [
-            Expanded(child: BSectionLabel(l.homeLatestNews)),
-            BInlineAction(
-              l.homeAllNews,
-              onTap: () {
-                ref
-                    .read(todaySectionRequestProvider.notifier)
-                    .ask(TodaySection.news);
-                context.go(Routes.today);
-              },
-            ),
-          ],
-        ),
+          Row(
+            children: [
+              Expanded(child: BSectionLabel(l.homeLatestNews)),
+              BInlineAction(
+                l.homeAllNews,
+                onTap: () {
+                  ref
+                      .read(todaySectionRequestProvider.notifier)
+                      .ask(TodaySection.news);
+                  context.go(Routes.today);
+                },
+              ),
+            ],
+          ),
         BPaperCard(
           radius: BarbarianRadius.xl,
           child: Column(
@@ -818,100 +837,120 @@ class HomeLatestNews extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // The outlet's own picture, where it published one. It
-                      // collapses itself — gap included — when there is none
-                      // or the download fails, so a row without a picture is
-                      // a normal row rather than one with a hole in it.
-                      BNewsThumb(url: item.image),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Directionality(
-                              // Direction follows the string actually rendered, not
-                              // the original: an English translation laid out
-                              // right-to-left is the bug this replaced.
-                              textDirection: isArabic(item.headlineFor(arabic))
-                                  ? TextDirection.rtl
-                                  : TextDirection.ltr,
-                              child: Text(
-                                item.headlineFor(arabic),
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: BarbarianType.bodyM.copyWith(
-                                  color: c.textPrimary,
-                                  height: 1.45,
-                                ),
-                              ),
-                            ),
-                            // Why a reader should care, not just what happened. "A
-                            // company signed a contract" is an event; "a contract is
-                            // revenue that has not been earned yet" is the reason it is
-                            // worth a glance. Written once per type by a person, shared
-                            // with the filings feed.
-                            if (item.meaningFor(arabic) case final String why
-                                when why.isNotEmpty) ...[
-                              const SizedBox(height: 6),
-                              Text(
-                                why,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: BarbarianType.bodyS.copyWith(
-                                  color: c.textSecondary,
-                                  height: 1.45,
-                                ),
-                              ),
-                            ],
-                            // The measured reason this one is worth a look —
-                            // two published facts joined, like "traded 3.4x
-                            // its own normal volume that session". It was on
-                            // Today and not here, so a reader had to leave
-                            // Home to find out why anything mattered.
-                            if (item.because.isNotEmpty) ...[
-                              const SizedBox(height: 8),
-                              Container(
-                                padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
-                                decoration: BoxDecoration(
-                                  color: c.hairline,
-                                  borderRadius: BorderRadius.circular(
-                                    BarbarianRadius.sm,
-                                  ),
-                                ),
-                                child: Text(
-                                  item.because,
-                                  style: BarbarianType.bodyS.copyWith(
+                  // The row runs in the headline's own direction, so the
+                  // picture sits where that headline begins.
+                  //
+                  // It used to be pinned to the left while an Arabic headline
+                  // right-aligned away from it, leaving a channel of blank
+                  // paper between the two and making every row look broken.
+                  // Most of this feed is Arabic, so most rows looked broken.
+                  child: Directionality(
+                    textDirection: isArabic(item.headlineFor(arabic))
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // The outlet's own picture, where it published one. It
+                        // collapses itself — gap included — when there is none
+                        // or the download fails, so a row without a picture is
+                        // a normal row rather than one with a hole in it.
+                        BNewsThumb(url: item.image),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Why this story is worth a reader's time, above
+                              // the headline rather than under it.
+                              //
+                              // The chip that used to sit here read "Contract
+                              // or project" — the drawer the story was filed
+                              // in, which a reader can see for themselves from
+                              // the headline. It falls back to that chip only
+                              // where there is no line, so the slot is never
+                              // empty for the sake of it.
+                              if (item.meaningFor(arabic) case final String why
+                                  when why.isNotEmpty) ...[
+                                BInsightLine(why),
+                                const SizedBox(height: 7),
+                              ] else if (item.eventTag case final String tag) ...[
+                                BKindChip(tag),
+                                const SizedBox(height: 7),
+                              ],
+                              Builder(
+                                // The row above already runs in the headline's
+                                // direction, so the text only has to follow it.
+                                builder: (context) => Text(
+                                  item.headlineFor(arabic),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: BarbarianType.bodyM.copyWith(
                                     color: c.textPrimary,
-                                    height: 1.4,
+                                    height: 1.45,
                                   ),
                                 ),
                               ),
-                            ],
-                            // Outlet and age on one line, and the line survives if
-                            // either half is missing — a story with no named outlet
-                            // still has to say how old it is (§49). Home showed the
-                            // outlet and no time at all, so a headline from Tuesday
-                            // and one from an hour ago read exactly alike.
-                            if ([
-                                  outletsFor(item),
-                                  context.newsAge(item.publishedAt),
-                                ].nonNulls.join(' · ')
-                                case final String byline
-                                when byline.isNotEmpty) ...[
-                              const SizedBox(height: 4),
-                              Text(
-                                byline,
-                                style: BarbarianType.labelNano.copyWith(
-                                  color: c.textFaint,
+                              // Only when it says something about *this*
+                              // story.
+                              //
+                              // `because` is the measured reason a headline is
+                              // worth a look, and it earns its space when a
+                              // story names a listed company: "traded 3.4x its
+                              // own normal volume that session". When none
+                              // does, it falls back to one generic sentence —
+                              // and every one of the 174 headlines carried the
+                              // identical line, three rows running, which is
+                              // noise wearing the costume of insight. The tag
+                              // above is the part that varies.
+                              if (item.weight != 'market' &&
+                                  item.because.isNotEmpty) ...[
+                                const SizedBox(height: 8),
+                                Container(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    10,
+                                    8,
+                                    10,
+                                    9,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: c.hairline,
+                                    borderRadius: BorderRadius.circular(
+                                      BarbarianRadius.sm,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    item.because,
+                                    style: BarbarianType.bodyS.copyWith(
+                                      color: c.textPrimary,
+                                      height: 1.4,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
+                              // Outlet and age on one line, and the line survives if
+                              // either half is missing — a story with no named outlet
+                              // still has to say how old it is (§49). Home showed the
+                              // outlet and no time at all, so a headline from Tuesday
+                              // and one from an hour ago read exactly alike.
+                              if ([
+                                    outletsFor(item),
+                                    context.newsAge(item.publishedAt),
+                                  ].nonNulls.join(' · ')
+                                  case final String byline
+                                  when byline.isNotEmpty) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  byline,
+                                  style: BarbarianType.labelNano.copyWith(
+                                    color: c.textFaint,
+                                  ),
+                                ),
+                              ],
                             ],
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
