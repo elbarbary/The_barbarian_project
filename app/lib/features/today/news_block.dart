@@ -13,6 +13,7 @@ import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
 import '../../core/widgets/surfaces.dart';
+import '../../core/widgets/insight.dart';
 import '../../core/widgets/text.dart';
 
 /// The headlines, sorted by whether anybody needs to read them.
@@ -196,7 +197,22 @@ class _Headline extends StatelessWidget {
                 ],
               ),
             ),
-            if (item.because.isNotEmpty) ...[
+            // What this story does to somebody holding EGX shares, in the
+            // same voice and the same mark as the Home rows.
+            if (item.meaningFor(arabic) case final String why
+                when why.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              BInsightLine(why, maxLines: 3),
+            ],
+
+            // And the measured reason, but only where it is measured.
+            //
+            // `because` falls back to one generic sentence when no listed
+            // company can be matched, which is most of the feed — so this box
+            // printed "Names no listed company we can match…" on row after
+            // row after row. Three of those stacked is not an explanation, it
+            // is the app clearing its throat.
+            if (item.weight != 'market' && item.because.isNotEmpty) ...[
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.fromLTRB(11, 9, 11, 10),
