@@ -1020,4 +1020,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get macroCoverage => 'ما يُنشر عن ذلك';
+
+  @override
+  String get homeLeadStory => 'قصة اليوم';
 }

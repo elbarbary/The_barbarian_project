@@ -1909,6 +1909,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What is being reported'**
   String get macroCoverage;
+
+  /// No description provided for @homeLeadStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s story'**
+  String get homeLeadStory;
 }
 
 class _AppLocalizationsDelegate

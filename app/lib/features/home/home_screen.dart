@@ -22,6 +22,7 @@ import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
 import 'macro_block.dart';
+import 'lead_story.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -72,26 +73,24 @@ class HomeScreen extends ConsumerWidget {
         // Filings lead. They are the only thing on this screen the exchange
         // itself published about a named company on the day it happened —
         // everything else is either a price or somebody's reporting of one.
-        // Ordered by what a reader opening the app wants first, not by what
-        // the data pipeline produces first.
+        // This is a news app, and it opened with a regulatory filing — a form
+        // somebody was obliged to submit. Excellent for a reader already deep
+        // in a company, and the worst possible greeting for everyone else.
         //
-        //   1. the day's most notable filing — a company speaking on the record
-        //   2. where the market closed, which is the number everyone checks
-        //   3. how wide that move was, which is the texture behind the number
-        //   4. what is being said, with the pictures the outlets ran
-        //   5. what moves Egypt, which is the context the rest is read against
-        //   6. the other filings, for a reader who keeps going
-        //   7. the watchlist, which is reached on purpose rather than stumbled on
-        //
-        // News sits above macro because a headline with a photograph is what
-        // actually stops a thumb; macro explains what the reader has just seen.
-        BSectionLabel(l.homeFiledHero),
-        const _DailyInsight(),
+        //   1. today's story, at the size a story deserves, with its picture
+        //   2. the rest of the feed, each row carrying its own
+        //   3. where the market closed and how wide the move was
+        //   4. what companies told the exchange — depth, not a greeting
+        //   5. what moves Egypt, which the rest is read against
+        //   6. the watchlist, reached on purpose rather than stumbled on
+        const BLeadStory(),
+        const _LatestNews(),
         const _Indices(),
         const _Breadth(),
-        const _LatestNews(),
-        const BMacroBlock(),
+        BSectionLabel(l.homeFiledHero),
+        const _DailyInsight(),
         const _AlsoFiled(),
+        const BMacroBlock(),
         const _WatchlistBlock(),
       ],
     );

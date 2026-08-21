@@ -1023,4 +1023,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get macroCoverage => 'What is being reported';
+
+  @override
+  String get homeLeadStory => 'Today\'s story';
 }
