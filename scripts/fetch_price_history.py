@@ -59,10 +59,19 @@ STOCK_PAGE = "https://www.mubasher.info/markets/EGX/stocks/{}"
 CSV_URL = re.compile(r'historical-data-url="([^"]+\.csv)"')
 
 # How much of an overlap has to agree before a series is believed, and by how
-# much a close may differ. The prices are the same prices from the same
-# exchange, so this is tight on purpose: it is checking identity, not accuracy.
+# much a close may differ.
+#
+# The tolerance is **one percent**, which sounds loose for two feeds of the same
+# exchange and is not. Measured across the market, two honest sources of the
+# same closes disagree by three or four tenths of a percent on a handful of
+# sessions — Al Arafa's 1 June is 7.32 on ours and 7.35 on theirs — because
+# they round differently and occasionally take a different last print. A tenth
+# of a percent rejected 121 companies for that, nearly all of them at 81-89%
+# agreement, while the errors this exists to catch sit at 12% and 53%. The
+# check is for identity, not accuracy, and a wrong company is wrong by whole
+# multiples rather than by a rounding place.
 MIN_OVERLAP = 5
-TOLERANCE = 0.02
+TOLERANCE = 0.01
 MIN_AGREEMENT = 0.9
 
 
@@ -157,7 +166,8 @@ def verify(ticker: str, bars: list[dict]) -> None:
             f"only {len(shared)} overlapping sessions; cannot confirm identity"
         )
     agreed = sum(
-        1 for d in shared if abs(theirs[d] - ours[d]) <= max(TOLERANCE, ours[d] * 0.001)
+        1 for d in shared
+        if abs(theirs[d] - ours[d]) <= max(0.01, abs(ours[d]) * TOLERANCE)
     )
     ratio = agreed / len(shared)
     if ratio < MIN_AGREEMENT:

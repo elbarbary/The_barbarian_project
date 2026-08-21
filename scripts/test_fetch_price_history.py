@@ -96,6 +96,41 @@ class VerifyTest(unittest.TestCase):
         with self.assertRaises(fp.PriceHistoryUnavailable):
             fp.verify("SWDY", [])
 
+    def test_two_honest_feeds_rounding_apart_still_match(self):
+        """The real near-miss, and why the tolerance is a whole percent.
+
+        Al Arafa's 1 June is 7.32 on our feed and 7.35 on Mubasher's — three
+        tenths of a percent, because the two round differently and sometimes
+        take a different last print. At a tenth of a percent this rejected 121
+        companies, nearly all at 81-89% agreement, while the failures it exists
+        to catch sit at 12% and 53%.
+        """
+        body = "\n".join(
+            f"2026-06-{d:02d}/00:00:00,1,1,1,{p},100" for d, p in [
+                (1, 7.35), (2, 7.34), (3, 7.30), (4, 7.41), (5, 8.11),
+            ]
+        )
+        self._ours({
+            "2026-06-01": 7.32, "2026-06-02": 7.36, "2026-06-03": 7.30,
+            "2026-06-04": 7.39, "2026-06-05": 8.14,
+        })
+        fp.verify("ADRI", fp.parse_csv(body))
+
+    def test_a_whole_multiple_out_is_still_refused(self):
+        # What the check is actually for: identity, not accuracy. A wrong
+        # company is wrong by multiples, not by a rounding place.
+        body = "\n".join(
+            f"2026-06-{d:02d}/00:00:00,1,1,1,{p},100" for d, p in [
+                (1, 73.2), (2, 73.6), (3, 73.0), (4, 73.9), (5, 81.4),
+            ]
+        )
+        self._ours({
+            "2026-06-01": 7.32, "2026-06-02": 7.36, "2026-06-03": 7.30,
+            "2026-06-04": 7.39, "2026-06-05": 8.14,
+        })
+        with self.assertRaises(fp.PriceHistoryUnavailable):
+            fp.verify("ADRI", fp.parse_csv(body))
+
     def test_rounding_is_not_a_disagreement(self):
         self._ours({
             "2026-08-11": 109.3, "2026-08-12": 107.11, "2026-08-16": 120.9,

@@ -3,6 +3,7 @@ import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
+import 'dart:convert';
 import 'package:barbarian/core/models/rates.dart';
 import 'package:barbarian/core/models/news.dart';
 import 'package:barbarian/core/models/market_history.dart';
@@ -232,6 +233,33 @@ void main() {
     // snapshot is the better reading and must not be overwritten by backfill.
     expect(counted.last.breadth!.basis, 'session');
     expect(counted.any((s) => s.breadth!.isReconstructed), isTrue);
+  });
+
+  test('§13 a year of price history reaches most of the market', () {
+    // The Price tab offers 1M/3M/1Y and could fill 1Y for sixteen companies:
+    // sixteen had been fetched from Yahoo before it began refusing, and
+    // everything else held the fifty to a hundred sessions the daily snapshot
+    // had accumulated. Mubasher publishes the whole series and 210 companies
+    // are now verified against closes we already held.
+    final dir = Directory('assets/fixtures/companies');
+    if (!dir.existsSync()) return;
+
+    var deep = 0;
+    var total = 0;
+    for (final file in dir.listSync()) {
+      if (file is! File || !file.path.endsWith('.json')) continue;
+      total++;
+      final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      final history = (doc['price_history'] as List?) ?? const [];
+      if (history.length >= 250) deep++;
+    }
+
+    expect(total, greaterThan(0));
+    expect(
+      deep,
+      greaterThan(total ~/ 2),
+      reason: 'only $deep of $total companies can fill a 1Y window',
+    );
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {
