@@ -17,6 +17,7 @@ import '../../core/widgets/charts.dart';
 import '../../core/models/explainer.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/explainer_sheet.dart';
+import '../../core/widgets/filed_document.dart';
 import '../../core/widgets/insight.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
@@ -773,6 +774,19 @@ class HomeAlsoFiled extends ConsumerWidget {
                             ),
                           ),
                         ),
+                      ],
+                      // The thing the company actually lodged. Everything
+                      // above is our reading of the filing; this is it.
+                      if (item.hasDocument) ...[
+                        const SizedBox(height: 9),
+                        for (final (n, url) in item.attachments.indexed) ...[
+                          if (n > 0) const SizedBox(height: 8),
+                          BFiledDocument(
+                            url: url,
+                            index: n,
+                            count: item.attachments.length,
+                          ),
+                        ],
                       ],
                     ],
                   ),

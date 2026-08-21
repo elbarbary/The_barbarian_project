@@ -9,6 +9,8 @@ import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
+import '../../core/models/disclosure.dart';
+import '../../core/widgets/filed_document.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/arc_gauge.dart';
@@ -723,6 +725,15 @@ class _Financials extends StatelessWidget {
           _StatementTable(annual: annual, quarterly: interim),
         ],
 
+        // The filings themselves, as the company lodged them.
+        //
+        // Everything above this is somebody's reading of the accounts —
+        // Mubasher's transcription, our scaling, our arithmetic. This is the
+        // signed document, and a reader who wants to check a number against
+        // the source can now do it without leaving for a search engine.
+        const SizedBox(height: 14),
+        _FiledDocuments(ticker: company.ticker),
+
         const SizedBox(height: 16),
         Text(
           l.finFootnoteFull(_sourceName(context, latest.source)),
@@ -1415,12 +1426,20 @@ class _StatementTableState extends State<_StatementTable> {
             .reversed
             .toList();
 
+    // The balance sheet, then the cash flow statement in the order it is
+    // filed: operating, investing, financing, and the change the three of them
+    // come to. A line nobody filed for any period on show is dropped rather
+    // than printed as a row of dashes.
     final lines = <(String, double? Function(FinancialPeriod))>[
       (l.finNetProfitLine, (p) => p.netIncome),
       (l.finTotalAssets, (p) => p.assets),
       (l.finTotalLiabilities, (p) => p.liabilities),
       (l.ownersEquity, (p) => p.equity),
       (l.finCashFromOps, (p) => p.operatingCashFlow),
+      (l.finCashInvesting, (p) => p.investingCashFlow),
+      (l.finCashFinancing, (p) => p.financingCashFlow),
+      (l.finNetChangeCash, (p) => p.netChangeInCash),
+      (l.finDividendsPaid, (p) => p.dividendsPaid),
     ].where((line) => periods.any((p) => line.$2(p) != null)).toList();
 
     if (periods.isEmpty || lines.isEmpty) return const SizedBox.shrink();
@@ -1520,6 +1539,82 @@ class _StatementTableState extends State<_StatementTable> {
             l.finStatementsNote,
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+
+/// Everything this company has filed that carries a document.
+///
+/// Read from a per-company index built with the archive, so it covers the
+/// whole kept record rather than the thirty-day window the feed shows. Absent
+/// entirely when the company has filed nothing with a document attached —
+/// which for most companies, most of the time, is the honest answer.
+class _FiledDocuments extends ConsumerWidget {
+  const _FiledDocuments({required this.ticker});
+
+  final String ticker;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final docs = ref.watch(companyDocumentsProvider(ticker)).value?.value;
+    final items = docs?.items ?? const <FiledDocument>[];
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BSectionLabel(l.finFiledDocuments),
+          const SizedBox(height: 10),
+          for (final (i, item) in items.indexed) ...[
+            if (i > 0) ...[
+              const SizedBox(height: 12),
+              Divider(height: 1, color: c.hairline),
+              const SizedBox(height: 12),
+            ],
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                if (item.labelFor(arabic).isNotEmpty)
+                  BKindChip(item.labelFor(arabic)),
+                Text(
+                  item.date,
+                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                ),
+              ],
+            ),
+            const SizedBox(height: 7),
+            Directionality(
+              textDirection: isArabic(item.titleFor(arabic))
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              child: Text(
+                item.titleFor(arabic),
+                style: BarbarianType.bodyM.copyWith(
+                  color: c.textPrimary,
+                  height: 1.4,
+                ),
+              ),
+            ),
+            const SizedBox(height: 9),
+            for (final (n, url) in item.attachments.indexed) ...[
+              if (n > 0) const SizedBox(height: 8),
+              BFiledDocument(
+                url: url,
+                index: n,
+                count: item.attachments.length,
+              ),
+            ],
+          ],
         ],
       ),
     );

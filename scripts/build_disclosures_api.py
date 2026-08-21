@@ -33,19 +33,46 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import os
 import pathlib
 import re
 import subprocess
 import sys
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 
 import translations
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "disclosures"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "disclosures"
+
+# The permanent record, one document per calendar month.
+#
+# **The exchange is not an archive.** EGX serves page one of a search and the
+# older pages are unreachable to us, so a filing we do not keep is a filing
+# nobody can get back — not from them and not from anywhere else, because no
+# Egyptian outlet republishes the disclosure feed in full. `latest.json` is a
+# rolling thirty-day window and it used to be the only thing written, which
+# meant every run quietly deleted whatever had aged past the cutoff. Two months
+# of collection would have left one month of history.
+#
+# So: nothing here is ever dropped. The window is a view for the app to open
+# with; this is the record. Sharded by month rather than kept as one file
+# because it only grows — roughly 36 filings a session — and a reader who wants
+# March should not download February to get it.
+ARCHIVE = OUT / "archive"
+ARCHIVE_FIXTURES = FIXTURES / "archive"
+
+# One index per company of the documents it has filed, so the company screen
+# can answer "show me the statements" without downloading the archive.
+DOCUMENTS = OUT / "documents"
+DOCUMENT_FIXTURES = FIXTURES / "documents"
+
+# Months bundled into the app so the archive is browsable before it is
+# downloaded, and so fixtures mode can exercise the screen at all.
+BUNDLED_MONTHS = 2
 DETAILS = REPO / "public" / "data" / "v1" / "companies"
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 
@@ -65,6 +92,8 @@ DISCLOSURES_SECTION = 20
 # opening the app on Sunday still sees Thursday's filings; short enough that
 # the payload stays small.
 KEEP_DAYS = 30
+
+MONTH_FILE = re.compile(r"^\d{4}-\d{2}\.json$")
 
 TICKER = re.compile(r"\(([A-Z]{3,6})\.CA\)")
 # The page states its own result count. Parsed so the job can tell the
@@ -377,6 +406,129 @@ def triage(item: dict) -> dict:
     }
 
 
+def archive_read() -> dict[str, dict]:
+    """Every filing ever collected, by id.
+
+    Read from the shards themselves rather than from any index, so a hand-edited
+    or partially-written index cannot lose a month.
+    """
+    items: dict[str, dict] = {}
+    if not ARCHIVE.exists():
+        return items
+    for path in sorted(ARCHIVE.iterdir()):
+        if not MONTH_FILE.match(path.name):
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            # Loud, and then carry on. A month we cannot parse is a month we
+            # must not silently overwrite with a fresh empty one, so the run
+            # keeps going and the next write leaves that shard alone.
+            print(f"   archive: {path.name} unreadable ({error}) — left alone")
+            continue
+        for item in doc.get("items") or []:
+            if item.get("id"):
+                items[item["id"]] = item
+    return items
+
+
+def archive_write(items: list[dict]) -> list[dict]:
+    """Write the monthly shards and their index. Returns the index months.
+
+    Every shard is rewritten from the full union each run, so a correction to a
+    label or a translation reaches history rather than only the last thirty
+    days. Nothing is removed.
+    """
+    months: dict[str, list[dict]] = collections.defaultdict(list)
+    for item in items:
+        stamp = (item.get("date") or "")[:7]
+        if len(stamp) == 7:
+            months[stamp].append(item)
+
+    ARCHIVE.mkdir(parents=True, exist_ok=True)
+    ARCHIVE_FIXTURES.mkdir(parents=True, exist_ok=True)
+
+    index: list[dict] = []
+    recent = sorted(months, reverse=True)[:BUNDLED_MONTHS]
+    for stamp in sorted(months, reverse=True):
+        rows = sorted(
+            months[stamp], key=lambda i: (i["date"], i["id"]), reverse=True
+        )
+        doc = {
+            "month": stamp,
+            "items": rows,
+        }
+        body = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+        (ARCHIVE / f"{stamp}.json").write_text(body, encoding="utf-8")
+        # Only the newest months travel inside the app. The rest are a
+        # download, which is the point of sharding them.
+        if stamp in recent:
+            (ARCHIVE_FIXTURES / f"{stamp}.json").write_text(body, encoding="utf-8")
+        index.append(
+            {
+                "month": stamp,
+                "count": len(rows),
+                "first": min(i["date"] for i in rows),
+                "last": max(i["date"] for i in rows),
+                "named": sum(1 for i in rows if i.get("tickers")),
+            }
+        )
+
+    # One small document per company, listing what that company has filed that
+    # carries a document.
+    #
+    # The company screen needs "every statement this issuer lodged", and the
+    # only other way to answer it is to download every month and filter — which
+    # is the whole archive, to show one card. These are written from the same
+    # union, so they cover history rather than the window.
+    by_ticker: dict[str, list[dict]] = collections.defaultdict(list)
+    for item in items:
+        if not item.get("attachments"):
+            continue
+        for ticker in item.get("tickers") or []:
+            by_ticker[ticker].append(
+                {
+                    "id": item["id"],
+                    "date": item["date"],
+                    "title": item["title"],
+                    "title_en": item.get("title_en"),
+                    "event": item.get("event"),
+                    "event_label": item.get("event_label"),
+                    "event_label_ar": item.get("event_label_ar"),
+                    "link": item["link"],
+                    "attachments": item["attachments"],
+                }
+            )
+
+    DOCUMENTS.mkdir(parents=True, exist_ok=True)
+    DOCUMENT_FIXTURES.mkdir(parents=True, exist_ok=True)
+    for ticker, rows in by_ticker.items():
+        rows.sort(key=lambda r: (r["date"], r["id"]), reverse=True)
+        body = json.dumps(
+            {"ticker": ticker, "items": rows},
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        (DOCUMENTS / f"{ticker}.json").write_text(body, encoding="utf-8")
+        (DOCUMENT_FIXTURES / f"{ticker}.json").write_text(body, encoding="utf-8")
+    if by_ticker:
+        print(
+            f"   documents: {sum(len(v) for v in by_ticker.values())} filings "
+            f"with a PDF across {len(by_ticker)} companies"
+        )
+
+    manifest = {
+        "months": index,
+        "count": sum(m["count"] for m in index),
+        "bundled": recent,
+        "updated_at": datetime.now(UTC).isoformat(timespec="seconds"),
+    }
+    body = json.dumps(manifest, ensure_ascii=False, separators=(",", ":"))
+    (ARCHIVE / "index.json").write_text(body, encoding="utf-8")
+    (ARCHIVE_FIXTURES / "index.json").write_text(body, encoding="utf-8")
+    return index
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--days", type=int, default=3)
@@ -412,17 +564,20 @@ def main() -> int:
     for item in items:
         item.update(triage(item))
 
-    # Merge with what is already published so a filing does not vanish the day
-    # after it lands, then trim to the window.
+    # Merge with everything already held so a filing does not vanish the day
+    # after it lands. Three sources, oldest first so a fresh copy wins:
+    # the permanent archive, the rolling window, then what this run fetched.
+    existing = archive_read()
+    if existing:
+        print(f"   archive holds {len(existing)} filings")
     published = OUT / "latest.json"
-    existing = {}
     if published.exists():
         try:
-            existing = {
-                i["id"]: i for i in json.loads(published.read_text())["items"]
-            }
+            existing.update(
+                {i["id"]: i for i in json.loads(published.read_text())["items"]}
+            )
         except (json.JSONDecodeError, KeyError):
-            existing = {}
+            pass
     existing.update({i["id"]: i for i in items})
 
     # Re-label anything carrying a type the current taxonomy no longer knows.
@@ -482,12 +637,13 @@ def main() -> int:
         if (rendered := english.get(item["title"])) is not None:
             item["title_en"] = rendered
 
-    cutoff = (date.today() - timedelta(days=KEEP_DAYS)).isoformat()
-    merged = sorted(
-        (i for i in existing.values() if i["date"] >= cutoff),
-        key=lambda i: (i["date"], i["id"]),
-        reverse=True,
+    everything = sorted(
+        existing.values(), key=lambda i: (i["date"], i["id"]), reverse=True
     )
+
+    # The window the app opens with. The archive below keeps the rest.
+    cutoff = (date.today() - timedelta(days=KEEP_DAYS)).isoformat()
+    merged = [i for i in everything if i["date"] >= cutoff]
 
     checks = sum(1 for i in merged if i["weight"] == "check")
     withTicker = sum(1 for i in merged if i["tickers"])
@@ -506,11 +662,22 @@ def main() -> int:
             "home": "https://www.egx.com.eg",
         },
         "threshold": UNUSUAL_VOLUME,
+        # What the reader can reach beyond this window, so the app knows there
+        # is more without having to ask for a document to find out.
+        "archived": len(everything),
         "items": merged,
     }
 
     if args.check:
         return 0
+
+    months = archive_write(everything)
+    if months:
+        span = f"{months[-1]['first']} → {months[0]['last']}"
+        print(
+            f"   archive: {len(everything)} filings across {len(months)} "
+            f"month(s), {span}"
+        )
 
     for directory in (OUT, FIXTURES):
         directory.mkdir(parents=True, exist_ok=True)

@@ -34,6 +34,7 @@ import json
 import pathlib
 import time
 
+import mubasher_statements
 from mubasher_statements import CRAWL_DELAY, fetch_page, filed_for
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -124,6 +125,25 @@ def main() -> int:
             store["skipped"][ticker] = why
             skipped += 1
             continue
+        # Does the filing agree with itself?
+        #
+        # Three identities, each read from separate published rows, so a
+        # failure is the source disagreeing with itself rather than a slip in
+        # our arithmetic. Named and stored rather than dropped: the figures are
+        # still the ones the company filed, and a reader is better served by a
+        # number carrying a note than by a gap.
+        disagreed = {
+            period: why
+            for period, values in figures.items()
+            if (why := mubasher_statements.balance_check(values))
+        }
+        if disagreed:
+            store.setdefault("disagreements", {})[ticker] = disagreed
+            for period, why in sorted(disagreed.items())[:2]:
+                print(f"   ? {ticker} {period}: {why}")
+        else:
+            store.get("disagreements", {}).pop(ticker, None)
+
         store["companies"][ticker] = figures
         # Quarters are kept apart from the years rather than merged into them.
         # §13 asks for both period types and they answer different questions —

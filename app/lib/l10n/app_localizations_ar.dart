@@ -647,6 +647,39 @@ class AppLocalizationsAr extends AppLocalizations {
       'كل فترة تنشرها مباشر عن هذه الشركة، بملايين الجنيهات، كما أُودعت. اسحب جانبًا للفترات الأقدم.';
 
   @override
+  String get finCashInvesting => 'التدفق النقدي من الاستثمار';
+
+  @override
+  String get finCashFinancing => 'التدفق النقدي من التمويل';
+
+  @override
+  String get finNetChangeCash => 'صافي التغير في النقدية';
+
+  @override
+  String get finDividendsPaid => 'التوزيعات المدفوعة';
+
+  @override
+  String get finFiledDocuments => 'المستندات المودعة';
+
+  @override
+  String get finOpenPdf => 'فتح الملف';
+
+  @override
+  String get finNoDocuments => 'لا يوجد مستند مرفق بهذا الإفصاح.';
+
+  @override
+  String get exchangeSeeMore => 'إفصاحات أقدم';
+
+  @override
+  String exchangeShowingMonth(String month, int count) {
+    return '$month · $count إفصاح';
+  }
+
+  @override
+  String get exchangeArchiveNote =>
+      'إفصاحات جمعناها واحتفظنا بها. البورصة لا تتيح سوى أحدث صفحة، وما هو أقدم موجود هنا لأننا حفظناه.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override

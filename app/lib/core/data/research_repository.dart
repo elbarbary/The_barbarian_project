@@ -37,6 +37,29 @@ class ResearchRepository {
   Stream<Sourced<DisclosureFeed>> getDisclosures() =>
       _parsed('disclosures/latest.json', 'disclosures', DisclosureFeed.fromJson);
 
+  /// Which months of kept filings exist to be asked for.
+  Stream<Sourced<DisclosureArchive>> getDisclosureArchive() => _parsed(
+    'disclosures/archive/index.json',
+    'disclosures',
+    DisclosureArchive.fromJson,
+  );
+
+  /// One month of them, fetched only when a reader asks for it. The archive is
+  /// sharded precisely so that reading March does not cost February.
+  Stream<Sourced<DisclosureMonth>> getDisclosureMonth(String month) => _parsed(
+    'disclosures/archive/$month.json',
+    'disclosures',
+    DisclosureMonth.fromJson,
+  );
+
+  /// Every document one company has filed, across the whole kept record.
+  Stream<Sourced<CompanyDocuments>> getCompanyDocuments(String ticker) =>
+      _parsed(
+        'disclosures/documents/$ticker.json',
+        'disclosures',
+        CompanyDocuments.fromJson,
+      );
+
   Stream<Sourced<T>> _parsed<T>(
     String path,
     String? resource,

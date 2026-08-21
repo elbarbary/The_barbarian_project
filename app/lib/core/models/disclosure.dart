@@ -58,6 +58,17 @@ abstract class Disclosure with _$Disclosure {
     /// Stamped into the title by the exchange as `(TICKER.CA)`.
     @Default(<String>[]) List<String> tickers,
 
+    /// The documents the company actually lodged, as links to the exchange's
+    /// own PDFs — the signed statement, the auditor's report, the board
+    /// minute. Read from the anchors on the filing's detail page, never from
+    /// its prose: a filing can say the report is "مرفق" and attach nothing.
+    ///
+    /// Not every filing carries one, and an empty list is a fact about that
+    /// filing rather than a gap in our reading — `detail_read` is what tells
+    /// the two apart, and it is not published because the app has no use for
+    /// the difference.
+    @Default(<String>[]) List<String> attachments,
+
     /// Which kind of filing this is, from a closed list.
     @Default('statement') String event,
     @JsonKey(name: 'event_label') @Default('Statement') String eventLabel,
@@ -90,6 +101,9 @@ abstract class Disclosure with _$Disclosure {
   /// English explanation is the one part of this screen that fails the reader
   /// it was written for. Falls back to English when a type has no Arabic yet,
   /// which is better than a blank where the meaning should be.
+  /// Whether the exchange published a document with this filing.
+  bool get hasDocument => attachments.isNotEmpty;
+
   String meaningFor(bool arabic) =>
       arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 
@@ -112,4 +126,98 @@ abstract class DisclosureEvidence with _$DisclosureEvidence {
 
   factory DisclosureEvidence.fromJson(Map<String, dynamic> json) =>
       _$DisclosureEvidenceFromJson(json);
+}
+
+/// One month of the kept record.
+///
+/// The exchange serves the newest page of a search and nothing behind it, so
+/// a filing that ages out of the window is gone from the source. These
+/// documents are the only place it still exists, which is why they are written
+/// per month and never trimmed.
+@freezed
+abstract class DisclosureMonth with _$DisclosureMonth {
+  const factory DisclosureMonth({
+    @Default('') String month,
+    @Default(<Disclosure>[]) List<Disclosure> items,
+  }) = _DisclosureMonth;
+
+  factory DisclosureMonth.fromJson(Map<String, dynamic> json) =>
+      _$DisclosureMonthFromJson(json);
+}
+
+/// What months of filings exist to be asked for.
+@freezed
+abstract class DisclosureArchive with _$DisclosureArchive {
+  const factory DisclosureArchive({
+    @Default(<ArchivedMonth>[]) List<ArchivedMonth> months,
+
+    /// Every filing held, across every month.
+    @Default(0) int count,
+  }) = _DisclosureArchive;
+
+  const DisclosureArchive._();
+
+  factory DisclosureArchive.fromJson(Map<String, dynamic> json) =>
+      _$DisclosureArchiveFromJson(json);
+
+  /// Newest first, which is the order they are offered in.
+  List<ArchivedMonth> get newestFirst =>
+      [...months]..sort((a, b) => b.month.compareTo(a.month));
+}
+
+@freezed
+abstract class ArchivedMonth with _$ArchivedMonth {
+  const factory ArchivedMonth({
+    @Default('') String month,
+    @Default(0) int count,
+    @Default('') String first,
+    @Default('') String last,
+
+    /// How many of them name a listed company.
+    @Default(0) int named,
+  }) = _ArchivedMonth;
+
+  factory ArchivedMonth.fromJson(Map<String, dynamic> json) =>
+      _$ArchivedMonthFromJson(json);
+}
+
+/// The documents one company has filed, across everything we have kept.
+///
+/// Written per company at build time rather than filtered in the app, because
+/// the alternative is downloading every month of the archive to render one
+/// card. Only filings that actually carry a document appear here.
+@freezed
+abstract class CompanyDocuments with _$CompanyDocuments {
+  const factory CompanyDocuments({
+    @Default('') String ticker,
+    @Default(<FiledDocument>[]) List<FiledDocument> items,
+  }) = _CompanyDocuments;
+
+  factory CompanyDocuments.fromJson(Map<String, dynamic> json) =>
+      _$CompanyDocumentsFromJson(json);
+}
+
+@freezed
+abstract class FiledDocument with _$FiledDocument {
+  const factory FiledDocument({
+    @Default('') String id,
+    @Default('') String date,
+    @Default('') String title,
+    @JsonKey(name: 'title_en') String? titleEn,
+    @Default('') String event,
+    @JsonKey(name: 'event_label') @Default('') String eventLabel,
+    @JsonKey(name: 'event_label_ar') @Default('') String eventLabelAr,
+    @Default('') String link,
+    @Default(<String>[]) List<String> attachments,
+  }) = _FiledDocument;
+
+  const FiledDocument._();
+
+  factory FiledDocument.fromJson(Map<String, dynamic> json) =>
+      _$FiledDocumentFromJson(json);
+
+  String titleFor(bool arabic) => arabic ? title : (titleEn ?? title);
+
+  String labelFor(bool arabic) =>
+      arabic && eventLabelAr.isNotEmpty ? eventLabelAr : eventLabel;
 }

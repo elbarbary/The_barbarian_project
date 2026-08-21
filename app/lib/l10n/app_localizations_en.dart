@@ -649,6 +649,39 @@ class AppLocalizationsEn extends AppLocalizations {
       'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.';
 
   @override
+  String get finCashInvesting => 'Cash from investing';
+
+  @override
+  String get finCashFinancing => 'Cash from financing';
+
+  @override
+  String get finNetChangeCash => 'Net change in cash';
+
+  @override
+  String get finDividendsPaid => 'Dividends paid';
+
+  @override
+  String get finFiledDocuments => 'The filed documents';
+
+  @override
+  String get finOpenPdf => 'Open PDF';
+
+  @override
+  String get finNoDocuments => 'No document is attached to this filing.';
+
+  @override
+  String get exchangeSeeMore => 'See earlier filings';
+
+  @override
+  String exchangeShowingMonth(String month, int count) {
+    return '$month · $count filings';
+  }
+
+  @override
+  String get exchangeArchiveNote =>
+      'Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

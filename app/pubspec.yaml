@@ -20,6 +20,7 @@ dependencies:
   json_annotation: ^4.12.0
   path_provider: ^2.1.6
   shared_preferences: ^2.5.5
+  url_launcher: ^6.3.2
   webview_flutter: ^4.14.1
 
 dev_dependencies:
@@ -45,6 +46,11 @@ flutter:
     - assets/fixtures/news/
     - assets/fixtures/rates/
     - assets/fixtures/disclosures/
+    # Flutter's asset globs are not recursive, so each of these has to be
+    # named or the archive ships empty and the app looks like it lost the
+    # filings it was built to keep.
+    - assets/fixtures/disclosures/archive/
+    - assets/fixtures/disclosures/documents/
 
   # The website's own faces — Bricolage Grotesque (display) and Space Grotesk
   # (body) — plus IBM Plex Sans Arabic, which covers the Arabic neither of them

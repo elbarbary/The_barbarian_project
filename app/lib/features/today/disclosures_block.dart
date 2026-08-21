@@ -11,6 +11,8 @@ import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
+import '../../core/widgets/filed_document.dart';
+import '../../core/widgets/load_more.dart';
 import '../../core/widgets/text.dart';
 
 /// What companies told the exchange today.
@@ -27,11 +29,24 @@ import '../../core/widgets/text.dart';
 /// holding the share**, and **whether the company's session was unusual**. The
 /// first two come from a reviewed glossary, never from a model. The third is
 /// two published facts joined, never an opinion.
-class BDisclosuresBlock extends ConsumerWidget {
+class BDisclosuresBlock extends ConsumerStatefulWidget {
   const BDisclosuresBlock({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BDisclosuresBlock> createState() => _BDisclosuresBlockState();
+}
+
+class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
+  /// Months of the kept record the reader has asked for, oldest request last.
+  ///
+  /// The window document carries thirty days. Everything before that lives in
+  /// per-month documents that are downloaded only when somebody presses for
+  /// them, because the archive only grows and a reader who wants this week
+  /// should not pay for last spring.
+  final List<String> _opened = [];
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
     final feed = ref.watch(disclosuresProvider).value?.value;
@@ -42,6 +57,31 @@ class BDisclosuresBlock extends ConsumerWidget {
     // on a normal day and the whole point of the tab is that a reader can see
     // the lot rather than a sample somebody chose for them.
     final rest = feed.items.where((i) => i.weight != 'check').toList();
+
+    // What is behind the window, and what of it has been opened.
+    final archive = ref.watch(disclosureArchiveProvider).value?.value;
+    final shown = {for (final i in [...checks, ...rest]) i.id};
+    final older = <Disclosure>[];
+    for (final month in _opened) {
+      final loaded = ref.watch(disclosureMonthProvider(month)).value?.value;
+      for (final item in loaded?.items ?? const <Disclosure>[]) {
+        if (shown.add(item.id)) older.add(item);
+      }
+    }
+    older.sort((a, b) => b.date.compareTo(a.date));
+
+    // The next month worth offering: the newest one not already opened that
+    // holds something the window does not.
+    final months = archive?.newestFirst ?? const <ArchivedMonth>[];
+    ArchivedMonth? next;
+    for (final month in months) {
+      if (_opened.contains(month.month)) continue;
+      next = month;
+      break;
+    }
+    final waiting =
+        _opened.isNotEmpty &&
+        ref.watch(disclosureMonthProvider(_opened.last)).isLoading;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -60,11 +100,26 @@ class BDisclosuresBlock extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 12),
-        for (final item in [...checks, ...rest])
+        for (final item in [...checks, ...rest, ...older])
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: _Filing(item: item),
           ),
+        if (next case final ArchivedMonth month) ...[
+          const SizedBox(height: 2),
+          BLoadMoreButton(
+            label: l.exchangeSeeMore,
+            note: l.exchangeShowingMonth(month.month, month.count),
+            busy: waiting,
+            onTap: () => setState(() => _opened.add(month.month)),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            l.exchangeArchiveNote,
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint, height: 1.5),
+          ),
+          const SizedBox(height: 10),
+        ],
         Text(
           'Source: the Egyptian Exchange. Each row links to the filing itself.',
           style: BarbarianType.bodyS.copyWith(color: c.textMuted, height: 1.5),
@@ -197,6 +252,19 @@ class _Filing extends StatelessWidget {
                           height: 1.5,
                         ),
                       ),
+                    ],
+                    // The thing the company actually lodged. Everything above
+                    // is our reading of the filing; this is the filing.
+                    if (item.hasDocument) ...[
+                      const SizedBox(height: 10),
+                      for (final (i, url) in item.attachments.indexed) ...[
+                        if (i > 0) const SizedBox(height: 8),
+                        BFiledDocument(
+                          url: url,
+                          index: i,
+                          count: item.attachments.length,
+                        ),
+                      ],
                     ],
                   ],
                 ),

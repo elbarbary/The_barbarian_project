@@ -49,6 +49,11 @@ _Disclosure _$DisclosureFromJson(Map<String, dynamic> json) => _Disclosure(
   tickers:
       (json['tickers'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const <String>[],
+  attachments:
+      (json['attachments'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const <String>[],
   event: json['event'] as String? ?? 'statement',
   eventLabel: json['event_label'] as String? ?? 'Statement',
   eventLabelAr: json['event_label_ar'] as String? ?? '',
@@ -70,6 +75,7 @@ Map<String, dynamic> _$DisclosureToJson(_Disclosure instance) =>
       'date': instance.date,
       'link': instance.link,
       'tickers': instance.tickers,
+      'attachments': instance.attachments,
       'event': instance.event,
       'event_label': instance.eventLabel,
       'event_label_ar': instance.eventLabelAr,
@@ -99,4 +105,91 @@ Map<String, dynamic> _$DisclosureEvidenceToJson(_DisclosureEvidence instance) =>
       'ratio': instance.ratio,
       'threshold': instance.threshold,
       'date': instance.date,
+    };
+
+_DisclosureMonth _$DisclosureMonthFromJson(Map<String, dynamic> json) =>
+    _DisclosureMonth(
+      month: json['month'] as String? ?? '',
+      items:
+          (json['items'] as List<dynamic>?)
+              ?.map((e) => Disclosure.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Disclosure>[],
+    );
+
+Map<String, dynamic> _$DisclosureMonthToJson(_DisclosureMonth instance) =>
+    <String, dynamic>{'month': instance.month, 'items': instance.items};
+
+_DisclosureArchive _$DisclosureArchiveFromJson(Map<String, dynamic> json) =>
+    _DisclosureArchive(
+      months:
+          (json['months'] as List<dynamic>?)
+              ?.map((e) => ArchivedMonth.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <ArchivedMonth>[],
+      count: (json['count'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$DisclosureArchiveToJson(_DisclosureArchive instance) =>
+    <String, dynamic>{'months': instance.months, 'count': instance.count};
+
+_ArchivedMonth _$ArchivedMonthFromJson(Map<String, dynamic> json) =>
+    _ArchivedMonth(
+      month: json['month'] as String? ?? '',
+      count: (json['count'] as num?)?.toInt() ?? 0,
+      first: json['first'] as String? ?? '',
+      last: json['last'] as String? ?? '',
+      named: (json['named'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$ArchivedMonthToJson(_ArchivedMonth instance) =>
+    <String, dynamic>{
+      'month': instance.month,
+      'count': instance.count,
+      'first': instance.first,
+      'last': instance.last,
+      'named': instance.named,
+    };
+
+_CompanyDocuments _$CompanyDocumentsFromJson(Map<String, dynamic> json) =>
+    _CompanyDocuments(
+      ticker: json['ticker'] as String? ?? '',
+      items:
+          (json['items'] as List<dynamic>?)
+              ?.map((e) => FiledDocument.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <FiledDocument>[],
+    );
+
+Map<String, dynamic> _$CompanyDocumentsToJson(_CompanyDocuments instance) =>
+    <String, dynamic>{'ticker': instance.ticker, 'items': instance.items};
+
+_FiledDocument _$FiledDocumentFromJson(Map<String, dynamic> json) =>
+    _FiledDocument(
+      id: json['id'] as String? ?? '',
+      date: json['date'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      titleEn: json['title_en'] as String?,
+      event: json['event'] as String? ?? '',
+      eventLabel: json['event_label'] as String? ?? '',
+      eventLabelAr: json['event_label_ar'] as String? ?? '',
+      link: json['link'] as String? ?? '',
+      attachments:
+          (json['attachments'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
+    );
+
+Map<String, dynamic> _$FiledDocumentToJson(_FiledDocument instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'date': instance.date,
+      'title': instance.title,
+      'title_en': instance.titleEn,
+      'event': instance.event,
+      'event_label': instance.eventLabel,
+      'event_label_ar': instance.eventLabelAr,
+      'link': instance.link,
+      'attachments': instance.attachments,
     };

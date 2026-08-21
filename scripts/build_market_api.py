@@ -26,6 +26,10 @@ import shutil
 import sys
 import zoneinfo
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import mubasher_statements  # noqa: E402
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 WORK = REPO.parent / "work"
 API = REPO / "public" / "data" / "v1"
@@ -71,6 +75,21 @@ TICKER = re.compile(r"^[A-Z]{3,6}$")
 # How many months each of Mubasher's interim columns covers, which is what
 # decides whether a period is filed as annual or quarterly downstream.
 QUARTER_MONTHS = {"Q1": 3, "Q2": 3, "Q3": 3, "Q4": 3, "H1": 6, "9M": 9}
+
+# Where each part-year period ends. Mubasher labels the column and states no
+# date, so without this every quarter was offered with `end=None`, the emit
+# sort key below collapsed to the empty string, and the array shipped ordered
+# by quarter number across years — Q1 2021, Q1 2022, … Q4 2024. The company
+# screen labels the last element "Latest filing", so a company whose newest
+# filing was Q1 2025 was shown Q4 2023 under that heading.
+QUARTER_END = {
+    "Q1": "03-31",
+    "Q2": "06-30",
+    "H1": "06-30",
+    "Q3": "09-30",
+    "9M": "09-30",
+    "Q4": "12-31",
+}
 
 def _filed_financials(
     filings_store: pathlib.Path | None = None,
@@ -172,7 +191,11 @@ def _filed_financials(
             offer(
                 ticker,
                 f"FY {year}",
-                {k: v for k, v in fields.items() if v is not None},
+                {
+                    k: v
+                    for k, v in fields.items()
+                    if v is not None and k not in mubasher_statements.INTERNAL
+                },
                 basis=None,
                 source=(
                     "https://english.mubasher.info/markets/EGX/stocks/"
@@ -197,14 +220,23 @@ def _filed_financials(
             offer(
                 ticker,
                 label,
-                {k: v for k, v in fields.items() if v is not None},
+                {
+                    k: v
+                    for k, v in fields.items()
+                    if v is not None and k not in mubasher_statements.INTERNAL
+                },
                 basis=None,
                 source=(
                     "https://english.mubasher.info/markets/EGX/stocks/"
                     f"{ticker}/financial-statements"
                 ),
                 filed_on=None,
-                end=None,
+                # A real date, so the sort below orders these by time rather
+                # than alphabetically by label. Q2 and H1 share an end, which
+                # `months` breaks the tie on.
+                end=(
+                    f"{year}-{QUARTER_END[part]}" if part in QUARTER_END else None
+                ),
                 months=months,
             )
 
@@ -230,7 +262,8 @@ def _filed_financials(
 
     out: dict[str, dict] = {}
     for (ticker, _period), period in sorted(
-        picked.items(), key=lambda kv: (kv[0][0], kv[1]["_end"] or "")
+        picked.items(),
+        key=lambda kv: (kv[0][0], kv[1]["_end"] or "", kv[1]["_months"] or 0),
     ):
         months = period.pop("_months")
         period.pop("_rank"), period.pop("_end")

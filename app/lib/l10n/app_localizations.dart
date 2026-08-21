@@ -1268,6 +1268,66 @@ abstract class AppLocalizations {
   /// **'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.'**
   String get finStatementsNote;
 
+  /// No description provided for @finCashInvesting.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash from investing'**
+  String get finCashInvesting;
+
+  /// No description provided for @finCashFinancing.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash from financing'**
+  String get finCashFinancing;
+
+  /// No description provided for @finNetChangeCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Net change in cash'**
+  String get finNetChangeCash;
+
+  /// No description provided for @finDividendsPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Dividends paid'**
+  String get finDividendsPaid;
+
+  /// No description provided for @finFiledDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'The filed documents'**
+  String get finFiledDocuments;
+
+  /// No description provided for @finOpenPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Open PDF'**
+  String get finOpenPdf;
+
+  /// No description provided for @finNoDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'No document is attached to this filing.'**
+  String get finNoDocuments;
+
+  /// No description provided for @exchangeSeeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See earlier filings'**
+  String get exchangeSeeMore;
+
+  /// No description provided for @exchangeShowingMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'{month} · {count} filings'**
+  String exchangeShowingMonth(String month, int count);
+
+  /// No description provided for @exchangeArchiveNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.'**
+  String get exchangeArchiveNote;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

@@ -14,6 +14,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/insight.dart';
+import '../../core/widgets/load_more.dart';
 import '../../core/widgets/text.dart';
 
 /// The headlines, sorted by whether anybody needs to read them.
@@ -85,15 +86,14 @@ class _BNewsBlockState extends ConsumerState<BNewsBlock> {
             child: _Headline(item: item, feed: feed),
           ),
         if (rest.length < all.length) ...[
-          const SizedBox(height: 4),
-          Center(
-            child: TextButton(
-              onPressed: () => setState(() => _shown += _page),
-              child: Text(
-                '${l.showMore}  ·  ${l.showingCount(rest.length + checks.length, all.length + checks.length)}',
-                style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
-              ),
+          const SizedBox(height: 6),
+          BLoadMoreButton(
+            label: l.showMore,
+            note: l.showingCount(
+              rest.length + checks.length,
+              all.length + checks.length,
             ),
+            onTap: () => setState(() => _shown += _page),
           ),
         ],
         const SizedBox(height: 4),

@@ -110,6 +110,26 @@ final disclosuresProvider = StreamProvider<Sourced<DisclosureFeed>>(
   (ref) => ref.watch(researchRepositoryProvider).getDisclosures(),
 );
 
+/// The months of kept filings, and one month of them at a time.
+///
+/// Separate providers rather than one, because the index is small and always
+/// wanted while a month is a download nobody should pay for until they ask.
+final disclosureArchiveProvider = StreamProvider<Sourced<DisclosureArchive>>(
+  (ref) => ref.watch(researchRepositoryProvider).getDisclosureArchive(),
+);
+
+final disclosureMonthProvider =
+    StreamProvider.family<Sourced<DisclosureMonth>, String>(
+      (ref, month) =>
+          ref.watch(researchRepositoryProvider).getDisclosureMonth(month),
+    );
+
+final companyDocumentsProvider =
+    StreamProvider.family<Sourced<CompanyDocuments>, String>(
+      (ref, ticker) =>
+          ref.watch(researchRepositoryProvider).getCompanyDocuments(ticker),
+    );
+
 final marketHistoryProvider = StreamProvider<Sourced<MarketHistory>>(
   (ref) => ref.watch(marketRepositoryProvider).getMarketHistory(),
 );

@@ -193,6 +193,18 @@ abstract class FinancialPeriod with _$FinancialPeriod {
     double? cash,
     double? debt,
     @JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,
+
+    /// The rest of the cash flow statement, and what was paid out of it.
+    ///
+    /// Published by the same source as the line above and read from the same
+    /// filing; five of Mubasher's ten financial rows were being collected and
+    /// these are four of the five that were not. Together with operating cash
+    /// flow they are the whole statement, which is why the collector can check
+    /// that the three add to the change in cash instead of taking it on trust.
+    @JsonKey(name: 'investing_cash_flow') double? investingCashFlow,
+    @JsonKey(name: 'financing_cash_flow') double? financingCashFlow,
+    @JsonKey(name: 'net_change_in_cash') double? netChangeInCash,
+    @JsonKey(name: 'dividends_paid') double? dividendsPaid,
     double? capex,
     @JsonKey(name: 'free_cash_flow') double? freeCashFlow,
 

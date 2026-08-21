@@ -60,13 +60,83 @@ ANNUAL = "annual budget"
 # Sewedy's FY2024 where the company's own release says 43,898,521 — a 4.6%
 # divergence with no stated reason. It also has no revenue line anywhere on the
 # page, so a gross profit could not produce a margin even if it were trusted.
+#
+# The four cash and dividend lines were added after counting what the page
+# actually carries: ten financial lines, of which five were being read. The
+# other four are not derived or inferred — they are published rows sitting
+# beside the ones already trusted, and together with operating cash flow they
+# are the whole cash flow statement, which means the arithmetic can be checked
+# rather than believed (see `balance_check`).
 LINES = {
     "Total Assets": "assets",
     "Total Liabilities": "liabilities",
     "Total Owners' Equity & Minority Interest Equity": "equity",
     "Net Income or Loss": "net_income",
     "Net Cash Flow from (Used In) Operating Activities": "operating_cash_flow",
+    "Net Cash Flow from (Used In) Investing Activities": "investing_cash_flow",
+    "Net Cash Flow from (Used In) Financing Activities": "financing_cash_flow",
+    "Net Change In Cash & Cash Equivalents": "net_change_in_cash",
+    "Total Cash Dividends Paid": "dividends_paid",
+    # Not for display: it is Total Assets by another name. Kept because the
+    # two arriving from different rows of the same filing is the cheapest
+    # integrity check available on somebody else's numbers.
+    "Total Liabilities & Shareholders' Equity": "balance_total",
 }
+
+# Lines that are checks rather than facts to publish.
+INTERNAL = {"balance_total"}
+
+# How far two published figures may disagree before the pair is worth naming.
+#
+# Not zero: these are rounded to thousands upstream, and a period where the
+# balance sheet is off by a rounding step is not evidence of anything.
+TOLERANCE = 0.005
+
+
+def balance_check(period: dict) -> str | None:
+    """What does not add up in this period, or None when it does.
+
+    Three published identities, each read from separate rows:
+
+      * assets = liabilities + equity
+      * assets = the total-liabilities-and-equity row
+      * net change in cash = operating + investing + financing
+
+    None of these is derived by us, so a failure means the source disagrees
+    with itself and the period should be looked at rather than shipped as if
+    it were checked.
+    """
+    def near(left: float, right: float) -> bool:
+        scale = max(abs(left), abs(right), 1.0)
+        return abs(left - right) / scale <= TOLERANCE
+
+    assets = period.get("assets")
+    liabilities = period.get("liabilities")
+    equity = period.get("equity")
+    if assets is not None and liabilities is not None and equity is not None:
+        if not near(assets, liabilities + equity):
+            return (
+                f"assets {assets:,.3f} against liabilities plus equity "
+                f"{liabilities + equity:,.3f}"
+            )
+
+    total = period.get("balance_total")
+    if assets is not None and total is not None and not near(assets, total):
+        return f"assets {assets:,.3f} against the balance total {total:,.3f}"
+
+    flows = [
+        period.get("operating_cash_flow"),
+        period.get("investing_cash_flow"),
+        period.get("financing_cash_flow"),
+    ]
+    change = period.get("net_change_in_cash")
+    if change is not None and all(f is not None for f in flows):
+        if not near(change, sum(flows)):
+            return (
+                f"net change in cash {change:,.3f} against the three flows "
+                f"{sum(flows):,.3f}"
+            )
+    return None
 
 
 def fetch_page(ticker: str, timeout: int = 30) -> str | None:
