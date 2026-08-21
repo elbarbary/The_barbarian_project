@@ -865,6 +865,30 @@ class HomeLatestNews extends ConsumerWidget {
                                 ),
                               ),
                             ],
+                            // The measured reason this one is worth a look —
+                            // two published facts joined, like "traded 3.4x
+                            // its own normal volume that session". It was on
+                            // Today and not here, so a reader had to leave
+                            // Home to find out why anything mattered.
+                            if (item.because.isNotEmpty) ...[
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
+                                decoration: BoxDecoration(
+                                  color: c.hairline,
+                                  borderRadius: BorderRadius.circular(
+                                    BarbarianRadius.sm,
+                                  ),
+                                ),
+                                child: Text(
+                                  item.because,
+                                  style: BarbarianType.bodyS.copyWith(
+                                    color: c.textPrimary,
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ),
+                            ],
                             // Outlet and age on one line, and the line survives if
                             // either half is missing — a story with no named outlet
                             // still has to say how old it is (§49). Home showed the

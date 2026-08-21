@@ -84,7 +84,26 @@ class BRatesBlock extends ConsumerWidget {
         if (rates.currencies.isNotEmpty) ...[
           BSectionLabel(l.ratesPound),
           const SizedBox(height: 10),
-          _Card(rows: [for (final c in rates.currencies) _fromRate(c)]),
+          // A rail rather than a stack. Five currencies down the screen pushed
+          // everything below them out of reach, and a reader checking the
+          // pound wants the one they care about — not all five in a column.
+          SizedBox(
+            // The height one explainer row occupies, and the width it needs.
+            // `BPlainNumber` lays out a label, a figure and a §50 mark across
+            // a full-width row; squeezed into a 168pt tile it overflowed by 25
+            // points and lost the provenance mark it exists to carry.
+            height: 146,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
+              itemCount: rates.currencies.length,
+              separatorBuilder: (_, _) => const SizedBox(width: 10),
+              itemBuilder: (context, i) => SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.72,
+                child: _RateTile(row: rates.currencies[i]),
+              ),
+            ),
+          ),
         ],
       ],
     );
@@ -126,22 +145,6 @@ class BRatesBlock extends ConsumerWidget {
   );
 }
 
-class _Card extends StatelessWidget {
-  const _Card({required this.rows});
-
-  final List<Explainer> rows;
-
-  @override
-  Widget build(BuildContext context) => BPaperCard(
-    padding: EdgeInsets.zero,
-    child: Column(
-      children: [
-        for (var i = 0; i < rows.length; i++)
-          BPlainNumber(explainer: rows[i], last: i == rows.length - 1),
-      ],
-    ),
-  );
-}
 
 /// 24, 21 and 18 karat side by side.
 ///
@@ -346,6 +349,28 @@ class _MetalCard extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// One currency against the pound, in a rail.
+///
+/// A rail rather than a stack, but still a **`BPlainNumber`**: the figure keeps
+/// its dotted underline, its §50 provenance mark and the arithmetic behind it.
+/// Replacing it with a plain number was the first attempt, and it quietly took
+/// the whole explainer affordance off five rates — a test caught it, which is
+/// what that test is for.
+class _RateTile extends StatelessWidget {
+  const _RateTile({required this.row});
+
+  final RateRow row;
+
+  @override
+  Widget build(BuildContext context) {
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      padding: EdgeInsets.zero,
+      child: BPlainNumber(explainer: BRatesBlock._fromRate(row), last: true),
     );
   }
 }

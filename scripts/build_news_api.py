@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import argparse
 import html as html_lib
+import datetime
 import json
 import pathlib
 import re
@@ -671,6 +672,44 @@ def build(refresh_tags: bool = False) -> dict:
     }
 
 
+# How much past to keep. Long enough that a weekend does not empty the feed,
+# short enough that the document stays a document: 120 headlines a day against
+# a 500-item ceiling is about a fortnight of reading.
+KEEP_DAYS = 14
+KEEP_ITEMS = 500
+
+
+def merge_with_published(fresh: list[dict]) -> list[dict]:
+    """Today's headlines on top of the ones already out there."""
+    published = OUT / "latest.json"
+    existing: list[dict] = []
+    if published.exists():
+        try:
+            existing = json.loads(published.read_text(encoding="utf-8"))["items"]
+        except (json.JSONDecodeError, OSError, KeyError):
+            existing = []
+
+    by_id: dict[str, dict] = {}
+    # Oldest first, so a fresh copy of the same story overwrites the stored one
+    # rather than being discarded by it.
+    for item in existing + fresh:
+        if item.get("id"):
+            by_id[item["id"]] = item
+
+    cutoff = (
+        datetime.datetime.now(datetime.UTC) - datetime.timedelta(days=KEEP_DAYS)
+    ).isoformat()
+    kept = [
+        item for item in by_id.values()
+        if (item.get("published") or "")[:19] >= cutoff[:19] or not item.get("published")
+    ]
+    kept.sort(key=lambda i: i.get("published") or "", reverse=True)
+    dropped = len(by_id) - len(kept)
+    if dropped > 0:
+        print(f"   {dropped} headlines aged past {KEEP_DAYS} days")
+    return kept[:KEEP_ITEMS]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -682,6 +721,18 @@ def main() -> int:
     if not doc["items"]:
         print("no headlines fetched — leaving the published document alone")
         return 1
+
+    # Merged with what is already published, so the feed has a past.
+    #
+    # Every build used to replace the file, which meant the app could only ever
+    # show what the outlets had on their front page — three days, and a story
+    # that scrolled off was gone for good. The exchange has a memory and so
+    # should this: a reader who opens the app on Sunday should be able to read
+    # back through Thursday.
+    #
+    # Deduplicated on the id the outlet gave it, and the *new* copy wins so a
+    # headline that was later corrected shows the correction.
+    doc["items"] = merge_with_published(doc["items"])
 
     # English for an English reader. The Arabic stays on every item — the
     # translation sits beside it, never over it.
