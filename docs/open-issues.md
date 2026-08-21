@@ -220,62 +220,61 @@ issue 2 above and is blocked on the same sign-off.
 
 ---
 
-## 7. World Monitor — assessed 21 August 2026
+---
 
-<https://github.com/koala73/worldmonitor> — a real-time global intelligence
-dashboard: news aggregation, geopolitical monitoring, infrastructure tracking,
-with finance and commodity variants.
+## 7. What World Monitor teaches us, 21 August 2026
 
-### The licence decides the shape of any answer
+<https://github.com/koala73/worldmonitor> — a global intelligence dashboard with
+finance and commodity variants. Studied, not copied: it is **AGPL v3**, so its
+code cannot enter a closed App Store product without taking the whole product
+with it. What is worth having is its **source catalogue** and a couple of its
+habits.
 
-**AGPL v3.** Copying any of its code into ESTHMR would oblige ESTHMR to be AGPL
-as well, and the network clause extends that to merely serving it. For an app
-shipping on the App Store that is not a trade worth making, so **the code is not
-vendorable** — no matter how useful a component looks.
+### Sources tested against Egypt, today
 
-Two routes remain, and neither touches the licence:
+| Source | Verified | What it gives ESTHMR |
+|---|---|---|
+| **IMF PortWatch** (ArcGIS feature service) | **yes** — daily Suez transits to 16 Aug, no key | The single most Egypt-specific macro series there is |
+| **World Bank Open Data** | **yes** — Egypt GDP growth 4.39%, CPI 14.07%, FDI $15.5bn (2025), no key | The long-run backdrop, annual |
+| GDELT | **no** — 429 all afternoon after heavy collection elsewhere | Global event detection; recheck on a quiet line |
+| U.S. EIA | not tested | Crude inventories and fuel prices |
+| FRED | not tested (needs a free key) | US rates, which drive emerging-market flows |
 
-1. **Call its REST API** (`api.worldmonitor.app`, OpenAPI published, key from
-   `/pro`). Consuming an API is not a derivative work. Costs money and adds a
-   vendor between us and the facts.
-2. **Go to the same upstreams directly.** It publishes its source catalogue, and
-   the useful half is free and open: **GDELT, ACLED, UCDP, World Bank, IMF, EIA,
-   USGS, NASA, OpenSky**, plus Reuters/AP feeds. No licence entanglement, no
-   vendor, and the attribution stays ours to make.
+**Suez is the find.** PortWatch publishes a daily count of vessels through the
+canal, split by container, tanker, dry bulk, general cargo and roro, plus cargo
+capacity — 41 vessels on 16 August against 57 on the 11th. Canal dues are among
+Egypt's largest foreign-currency earners, and the 2024 Red Sea diversion took a
+visible bite out of them. That chain — *transits fall → dollar earnings fall →
+pressure on the pound → import costs rise → margins compress* — is the clearest
+"why this matters to somebody holding EGX shares" story available anywhere, and
+every link in it is a published number rather than an opinion.
 
-Route 2 is the recommendation. Route 1 is worth a month's subscription only to
-find out whether the framing is better than what we would write ourselves.
+### Habits worth stealing
 
-### Why this matters here, which is the actual point
+* **A published source catalogue with licence posture per provider.** They list
+  every upstream with its provider, feed tier, licence and collection method.
+  ESTHMR marks provenance per figure (§50) but has no such page. It should:
+  the same discipline, one level up.
+* **Freshness tracked per source group**, which is §49 by another name and
+  confirms the instinct.
+* **A Gulf panel** — Tadawul, DFM, ADX, Qatar, alongside Brent and WTI. Gulf
+  money is a real participant in the EGX and we publish none of it.
 
-ESTHMR's news feed is 120 Egyptian headlines and its **"why you should care"
-line attaches only to ticker-matched stories — one of the 120**. The other 119
-arrive as bare headlines. Meanwhile the things that actually move the EGX are
-mostly not company news at all:
+### And one habit to avoid
 
-* **oil** — Egypt imports energy, and Suez revenue rides on traffic
-* **gold** — the savings instrument Egyptian households hold *instead* of
-  equities, which is why it belongs on the same screen
-* **the pound and remittances** — the largest single foreign-currency inflow
-* **US rates** — emerging-market flows
-* **wheat** — the import bill and the subsidy line
+Their finance radar carries a **"composite BUY/CASH verdict"**. That is exactly
+what §8 forbids us, and it is worth writing down that the most attractive-looking
+feature in a comparable product is the one we must not copy. Publishing the
+inputs is the product; publishing the conclusion is advice.
 
-The rates block already publishes gold, silver, the dollar and world indices. It
-says what they are. It never says what they do to somebody holding EGX shares.
+### What this would look like here
 
-### The shape that would fit this app
+A `macro_types.py` beside `filing_types.py` — a hand-written, reviewed glossary
+in English and Arabic mapping each macro event to the mechanism it sets off,
+never a model's sentence. Detection and numbers from the free sources above; the
+explanation written once, by a person, exactly as the filing glossary is. That
+keeps §43 (no AI), §50 (provenance) and §8 (mechanism, not advice) intact.
 
-A `macro_types.py` beside `filing_types.py`: a **hand-written, reviewed glossary
-in English and Arabic** mapping each macro event to the mechanism it sets off —
-*oil rises → import bill rises → pressure on the pound → …* — never a model's
-opinion, exactly as the filing glossary is written once by a person and only
-selected by code. That satisfies §43 (no AI in V1), carries the §50
-Interpretation mark, and stays mechanism rather than advice under §8.
-
-Detection can come from the free sources; the sentence must not.
-
-**Untested:** GDELT returned 429 to this machine all afternoon after a day of
-heavy collection from three hosts. Its Egypt coverage and article quality are
-assumed, not verified, and should be checked on a quiet connection before any
-of this is built on it.
+Start with Suez, because it is daily, free, verifiable, and nobody else puts it
+in front of an Egyptian retail investor.
 
