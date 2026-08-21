@@ -24,6 +24,31 @@ enum PriceRange {
     if (n == null || points.length <= n) return points;
     return points.sublist(points.length - n);
   }
+
+  /// Whether this series can actually fill this window.
+  ///
+  /// `apply` returns everything it holds when a window is longer than the
+  /// series, which meant every company offered 1M, 3M, 1Y, 5Y and MAX and drew
+  /// **the same line** for the last three. Most EGX listings here hold between
+  /// fifty and a hundred sessions; sixteen hold a year, and none hold five.
+  ///
+  /// The test is filling the window, not merely beating the one below it. A
+  /// series of 254 sessions technically shows four more under "5Y" than under
+  /// "1Y", and labelling that button 5Y would be a lie told by four days.
+  bool worthOffering(int held) {
+    final n = sessions;
+    if (n != null) return held >= n;
+    // MAX only when it is meaningfully more than the longest window that was
+    // offered — otherwise it is the longest fixed window wearing another name.
+    final fixed = PriceRange.values
+        .where((r) => r.sessions != null && held >= r.sessions!)
+        .map((r) => r.sessions!);
+    if (fixed.isEmpty) return held >= 2;
+    return held >= fixed.reduce((a, b) => a > b ? a : b) * 1.1;
+  }
+
+  static List<PriceRange> offeredFor(int held) =>
+      PriceRange.values.where((r) => r.worthOffering(held)).toList();
 }
 
 /// The end-of-day price line.
