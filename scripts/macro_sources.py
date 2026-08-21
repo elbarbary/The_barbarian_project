@@ -32,6 +32,7 @@ from __future__ import annotations
 import datetime
 import json
 import re
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -266,4 +267,96 @@ def egypt_indicators() -> dict[str, dict]:
         out[name] = {"year": year, "value": series[year], "series": series}
     if not out:
         raise MacroUnavailable("world bank: nothing returned")
+    return out
+
+# ----------------------------------------------------------------- coverage
+
+GDELT = "https://api.gdeltproject.org/api/v2/doc/doc"
+
+# One query per series, and they are narrow on purpose.
+#
+# A broad Egypt query returns twelve articles of currency-rate filler — "the
+# Jordanian dinar against the pound today" — from two SEO domains. The same
+# service asked precisely returns *MSC Tests Transits as Container Volumes Rise
+# at Suez Canal*. The difference is entirely in the asking, so these strings are
+# the feature; GDELT is only the transport.
+#
+# `sourcelang:english` because the Arabic side is where the filler lives, and
+# the Egyptian outlets this app already reads cover Arabic company news better
+# than a global aggregator does.
+QUERIES = {
+    "suez": '"Suez Canal" (revenue OR traffic OR transits OR shipping OR tolls) '
+            "sourcelang:english",
+    "brent": '(oil OR crude) (Egypt OR OPEC OR supply OR demand) sourcelang:english',
+    "gold": 'gold price (demand OR "central bank" OR reserves) sourcelang:english',
+    "silver": 'silver price (demand OR industrial OR supply) sourcelang:english',
+    "egypt": 'Egypt (inflation OR "interest rate" OR IMF OR pound OR remittances) '
+             "sourcelang:english",
+}
+
+# Domains that answered the broad query with rate-table filler. Kept as a named
+# list rather than a silent filter so the judgement is visible and arguable.
+FILLER_DOMAINS = {"vetogate.com", "dostor.org"}
+
+# GDELT rate-limits hard and clears quickly; one retry is usually enough.
+GDELT_ATTEMPTS = 3
+GDELT_PAUSE = 20
+
+
+def coverage(key: str, *, days: int = 7, limit: int = 4) -> list[dict]:
+    """Headlines that explain what this series has been doing.
+
+    Somebody else's reporting, linked back to them, never rewritten. It sits
+    beside a mechanism this app wrote and a correlation it measured, and it is
+    the only one of the three that is not ours — which is why each item carries
+    the domain that published it.
+    """
+    query = QUERIES.get(key)
+    if not query:
+        return []
+    url = (
+        f"{GDELT}?query={urllib.parse.quote(query)}"
+        f"&mode=artlist&maxrecords={limit * 4}&format=json"
+        f"&timespan={days}d&sort=hybridrel"
+    )
+    payload = None
+    for attempt in range(GDELT_ATTEMPTS):
+        try:
+            payload = _json(url, timeout=60)
+            break
+        except MacroUnavailable:
+            if attempt == GDELT_ATTEMPTS - 1:
+                return []
+            time.sleep(GDELT_PAUSE)
+    if not payload:
+        return []
+
+    out: list[dict] = []
+    seen_titles: set[str] = set()
+    for article in payload.get("articles") or []:
+        title = (article.get("title") or "").strip()
+        domain = (article.get("domain") or "").strip().lower()
+        link = (article.get("url") or "").strip()
+        if not title or not link or domain in FILLER_DOMAINS:
+            continue
+        # The same wire story reaches a dozen sites verbatim; one is enough.
+        fingerprint = title.lower()[:70]
+        if fingerprint in seen_titles:
+            continue
+        seen_titles.add(fingerprint)
+        stamp = (article.get("seendate") or "")[:8]
+        out.append(
+            {
+                "title": title,
+                "domain": domain,
+                "url": link,
+                "date": (
+                    f"{stamp[:4]}-{stamp[4:6]}-{stamp[6:8]}"
+                    if len(stamp) == 8
+                    else ""
+                ),
+            }
+        )
+        if len(out) >= limit:
+            break
     return out

@@ -328,5 +328,6 @@
       }
     }
   },
-  "macroUnavailable": "تعذّر الوصول إلى بعض المصادر"
+  "macroUnavailable": "تعذّر الوصول إلى بعض المصادر",
+  "macroCoverage": "ما يُنشر عن ذلك"
 }

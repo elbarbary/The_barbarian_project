@@ -74,6 +74,14 @@ abstract class MacroSeries with _$MacroSeries {
     @Default(0) double latest,
     double? previous,
     @Default(<MacroPoint>[]) List<MacroPoint> history,
+
+    /// Reporting that explains what this series has been doing.
+    ///
+    /// The only part of a macro card that is not ours: the reading is a
+    /// published figure, the correlation is our arithmetic, the chain is our
+    /// reasoning — and this is somebody else's journalism, carried with the
+    /// domain that published it and linking back to them.
+    @Default(<MacroCoverage>[]) List<MacroCoverage> coverage,
     @Default('') String source,
   }) = _MacroSeries;
 
@@ -166,4 +174,22 @@ abstract class MacroCorrelation with _$MacroCorrelation {
   /// whether two things move together, and printing them invites a precision
   /// the number does not have.
   bool get isMeaningful => r.abs() >= 0.2;
+}
+
+/// One headline from an outlet, about a macro series.
+///
+/// Never rewritten and never summarised. A wire story reaches a dozen sites
+/// verbatim, so these are deduplicated on the headline before they are stored —
+/// four different domains saying the same sentence is not four sources.
+@freezed
+abstract class MacroCoverage with _$MacroCoverage {
+  const factory MacroCoverage({
+    required String title,
+    @Default('') String domain,
+    @Default('') String url,
+    @Default('') String date,
+  }) = _MacroCoverage;
+
+  factory MacroCoverage.fromJson(Map<String, dynamic> json) =>
+      _$MacroCoverageFromJson(json);
 }

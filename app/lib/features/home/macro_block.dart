@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../core/widgets/nav.dart';
+import '../../app/router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/models/macro.dart';
@@ -228,6 +231,23 @@ class _MacroCard extends StatelessWidget {
                 ),
               ),
             ],
+            // Somebody else's reporting on what this series has been doing.
+            // Only on the lead card: four headlines under every macro row is a
+            // news feed with a chart on top, and the news feed is upstairs.
+            if (lead && series.coverage.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Text(
+                l.macroCoverage.toUpperCase(),
+                style: BarbarianType.labelNano.copyWith(
+                  color: c.textMuted,
+                  letterSpacing: 1.1,
+                ),
+              ),
+              for (final item in series.coverage.take(3)) ...[
+                const SizedBox(height: 8),
+                _CoverageRow(item: item),
+              ],
+            ],
             if (correlation case final MacroCorrelation r) ...[
               const SizedBox(height: 10),
               Text(
@@ -256,4 +276,68 @@ class _MacroCard extends StatelessWidget {
   }
 
   String _yardstick(AppLocalizations l) => l.macroWhyItMatters;
+}
+
+/// One outlet's headline, credited and linked.
+///
+/// Their sentence, in their words, with their name on it. The app does not
+/// summarise it, translate it, or tell a reader what to make of it — the
+/// mechanism above already says what the number does, and this is the
+/// reporting a reader can go and check for themselves.
+class _CoverageRow extends StatelessWidget {
+  const _CoverageRow({required this.item});
+
+  final MacroCoverage item;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return BPressable(
+      onTap: item.url.isEmpty
+          ? null
+          : () => context.push(
+              Routes.articlePath(BNavTab.home, item.url, item.domain),
+            ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Container(
+              width: 4,
+              height: 4,
+              decoration: BoxDecoration(
+                color: c.textFaint,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          const SizedBox(width: 9),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: BarbarianType.bodyS.copyWith(
+                    color: c.textPrimary,
+                    height: 1.4,
+                  ),
+                ),
+                if (item.domain.isNotEmpty) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    item.domain,
+                    style: BarbarianType.labelNano.copyWith(color: c.textFaint),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

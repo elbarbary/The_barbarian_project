@@ -1903,6 +1903,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Some sources could not be reached'**
   String get macroUnavailable;
+
+  /// No description provided for @macroCoverage.
+  ///
+  /// In en, this message translates to:
+  /// **'What is being reported'**
+  String get macroCoverage;
 }
 
 class _AppLocalizationsDelegate

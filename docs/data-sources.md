@@ -43,7 +43,7 @@ Last reviewed: 21 August 2026.
 | **Hapi Journal** — `hapijournal.com` | The same | The same | The same |
 | **Arab Finance** — `arabfinance.com` | Headlines recovered from the Google-News sitemap | The slug is the headline with hyphens for spaces. Marked `reconstructed` on the record, because it is a weaker reading than a title field | No feed is published; the sitemap is |
 | **Al Mal**, **Zawya** — `almalnews.com`, `zawya.com` | Nothing today | Tried and unreachable: Al Mal's sitemaps are archives dated 2007, Zawya's RSS answers 200 with zero items | Listed because a source that was tried and failed is a fact about the feed |
-| **GDELT** — `api.gdeltproject.org` | **Not yet used.** Tested 21 Aug | Free, no key. Rate-limits hard and needs a retry | Usable *only with a tight query*: a broad Egypt query returns currency-rate SEO listicles from two domains. `"Suez Canal" (revenue OR traffic) sourcelang:english` returns genuinely relevant shipping coverage. Worth adding for Suez and macro context, not as a general feed — the Egyptian outlets above are better for company news |
+| **GDELT** — `api.gdeltproject.org` | Reporting that explains what each macro series has been doing — shipping coverage for Suez, oil-market coverage for Brent, demand coverage for the metals | Free, no key, one narrow query per series. Rate-limits hard, so it retries; a card without coverage is still a card | Used **only with a tight query**, which is the feature — the queries live in `macro_sources.QUERIES` and are the reason it works. A broad Egypt query returns currency-rate SEO listicles, and the two domains that served them are named in `FILLER_DOMAINS` and dropped. Headlines are carried verbatim with the publishing domain and a link back, never rewritten or summarised. Not used as a general news feed: Al Borsa and Hapi are better for Egyptian company news |
 
 ## Machine assistance
 
@@ -67,8 +67,12 @@ Two things, and the second is the one that matters.
 The first is honesty about provenance: a reader who wants to know where a number
 came from can find out, and a number with no entry here should not be on screen.
 
-The second is that **it makes the gaps visible**. Al Mal and Zawya are listed
-with nothing beside them. GDELT is listed as tested and not adopted, with the
-reason. Oil is collected from a source with no independent second reading, and
-that is written down rather than left for somebody to discover. A catalogue that
-only lists what works is marketing; this one is meant to be useful.
+The second is that **it makes the limits visible**. Al Mal and Zawya are listed
+with nothing beside them — tried, unreachable, and named for it. GDELT is listed
+with the condition attached to it: it works with a narrow query and returns
+filler with a broad one, so what was adopted is the queries rather than the
+source. Oil is collected from somewhere with no independent second reading, and
+that is written down rather than left for somebody to discover later.
+
+A catalogue that lists only what works is marketing. This one is meant to be
+the first place somebody looks when they doubt a number.

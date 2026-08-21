@@ -1017,4 +1017,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get macroUnavailable => 'تعذّر الوصول إلى بعض المصادر';
+
+  @override
+  String get macroCoverage => 'ما يُنشر عن ذلك';
 }

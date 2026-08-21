@@ -334,6 +334,49 @@ void main() {
     }
   });
 
+  test('macro coverage is somebody else\'s reporting, credited and linked', () {
+    // The only part of a macro card that is not ours. The reading is a
+    // published figure, the correlation is our arithmetic, the chain is our
+    // reasoning — this is journalism, and it carries the name of whoever wrote
+    // it and a link back to them.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+    final withCoverage =
+        doc.series.where((s) => s.coverage.isNotEmpty).toList();
+
+    expect(
+      withCoverage,
+      isNotEmpty,
+      reason: 'no series carries reporting; check the GDELT queries',
+    );
+
+    for (final series in withCoverage) {
+      for (final item in series.coverage) {
+        expect(item.title.trim(), isNotEmpty);
+        expect(item.url, startsWith('http'), reason: 'unlinked coverage');
+        expect(item.domain.trim(), isNotEmpty, reason: 'uncredited coverage');
+      }
+      // A wire story reaches a dozen sites verbatim; four domains repeating one
+      // sentence is not four sources.
+      final titles = series.coverage.map((c) => c.title.toLowerCase()).toSet();
+      expect(titles.length, series.coverage.length, reason: 'duplicated wire');
+    }
+  });
+
+  test('the filler domains the broad query returned are kept out', () {
+    // A broad Egypt query came back as currency-rate listicles from two
+    // domains. The tight queries avoid them; this proves they stayed avoided.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+    for (final series in doc.series) {
+      for (final item in series.coverage) {
+        expect(
+          ['vetogate.com', 'dostor.org'],
+          isNot(contains(item.domain)),
+          reason: 'rate-table filler reached the macro card',
+        );
+      }
+    }
+  });
+
   testWidgets('an empty watchlist explains itself', (tester) async {
     await pumpScreen(tester, const HomeScreen(), watchlist: const []);
     await pumpUntil(

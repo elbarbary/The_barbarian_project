@@ -328,7 +328,13 @@ mixin _$MacroSeries {
  String get chain;@JsonKey(name: 'chain_ar') String get chainAr;/// A model's line about *this* reading, when one was drafted and passed
 /// review. Absent far more often than not — the glossary above is the
 /// floor and this only ever sits on top of it.
- String? get insight; String get unit;@JsonKey(name: 'as_of') String get asOf; double get latest; double? get previous; List<MacroPoint> get history; String get source;
+ String? get insight; String get unit;@JsonKey(name: 'as_of') String get asOf; double get latest; double? get previous; List<MacroPoint> get history;/// Reporting that explains what this series has been doing.
+///
+/// The only part of a macro card that is not ours: the reading is a
+/// published figure, the correlation is our arithmetic, the chain is our
+/// reasoning — and this is somebody else's journalism, carried with the
+/// domain that published it and linking back to them.
+ List<MacroCoverage> get coverage; String get source;
 /// Create a copy of MacroSeries
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -341,16 +347,16 @@ $MacroSeriesCopyWith<MacroSeries> get copyWith => _$MacroSeriesCopyWithImpl<Macr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other.history, history)&&(identical(other.source, source) || other.source == source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other.history, history)&&const DeepCollectionEquality().equals(other.coverage, coverage)&&(identical(other.source, source) || other.source == source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(history),source);
+int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(history),const DeepCollectionEquality().hash(coverage),source);
 
 @override
 String toString() {
-  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, source: $source)';
+  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
 }
 
 
@@ -361,7 +367,7 @@ abstract mixin class $MacroSeriesCopyWith<$Res>  {
   factory $MacroSeriesCopyWith(MacroSeries value, $Res Function(MacroSeries) _then) = _$MacroSeriesCopyWithImpl;
 @useResult
 $Res call({
- String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, String source
+ String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
 });
 
 
@@ -378,7 +384,7 @@ class _$MacroSeriesCopyWithImpl<$Res>
 
 /// Create a copy of MacroSeries
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? source = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -393,7 +399,8 @@ as String,asOf: null == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non
 as String,latest: null == latest ? _self.latest : latest // ignore: cast_nullable_to_non_nullable
 as double,previous: freezed == previous ? _self.previous : previous // ignore: cast_nullable_to_non_nullable
 as double?,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
-as List<MacroPoint>,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as List<MacroPoint>,coverage: null == coverage ? _self.coverage : coverage // ignore: cast_nullable_to_non_nullable
+as List<MacroCoverage>,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -479,10 +486,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  String source)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MacroSeries() when $default != null:
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   return orElse();
 
 }
@@ -500,10 +507,10 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  String source)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)  $default,) {final _that = this;
 switch (_that) {
 case _MacroSeries():
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -520,10 +527,10 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  String source)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,) {final _that = this;
 switch (_that) {
 case _MacroSeries() when $default != null:
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   return null;
 
 }
@@ -535,7 +542,7 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 @JsonSerializable()
 
 class _MacroSeries extends MacroSeries {
-  const _MacroSeries({required this.id, this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.chain = '', @JsonKey(name: 'chain_ar') this.chainAr = '', this.insight, this.unit = '', @JsonKey(name: 'as_of') this.asOf = '', this.latest = 0, this.previous, final  List<MacroPoint> history = const <MacroPoint>[], this.source = ''}): _history = history,super._();
+  const _MacroSeries({required this.id, this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.chain = '', @JsonKey(name: 'chain_ar') this.chainAr = '', this.insight, this.unit = '', @JsonKey(name: 'as_of') this.asOf = '', this.latest = 0, this.previous, final  List<MacroPoint> history = const <MacroPoint>[], final  List<MacroCoverage> coverage = const <MacroCoverage>[], this.source = ''}): _history = history,_coverage = coverage,super._();
   factory _MacroSeries.fromJson(Map<String, dynamic> json) => _$MacroSeriesFromJson(json);
 
 @override final  String id;
@@ -562,6 +569,25 @@ class _MacroSeries extends MacroSeries {
   return EqualUnmodifiableListView(_history);
 }
 
+/// Reporting that explains what this series has been doing.
+///
+/// The only part of a macro card that is not ours: the reading is a
+/// published figure, the correlation is our arithmetic, the chain is our
+/// reasoning — and this is somebody else's journalism, carried with the
+/// domain that published it and linking back to them.
+ final  List<MacroCoverage> _coverage;
+/// Reporting that explains what this series has been doing.
+///
+/// The only part of a macro card that is not ours: the reading is a
+/// published figure, the correlation is our arithmetic, the chain is our
+/// reasoning — and this is somebody else's journalism, carried with the
+/// domain that published it and linking back to them.
+@override@JsonKey() List<MacroCoverage> get coverage {
+  if (_coverage is EqualUnmodifiableListView) return _coverage;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_coverage);
+}
+
 @override@JsonKey() final  String source;
 
 /// Create a copy of MacroSeries
@@ -577,16 +603,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other._history, _history)&&(identical(other.source, source) || other.source == source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other._history, _history)&&const DeepCollectionEquality().equals(other._coverage, _coverage)&&(identical(other.source, source) || other.source == source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(_history),source);
+int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(_history),const DeepCollectionEquality().hash(_coverage),source);
 
 @override
 String toString() {
-  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, source: $source)';
+  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
 }
 
 
@@ -597,7 +623,7 @@ abstract mixin class _$MacroSeriesCopyWith<$Res> implements $MacroSeriesCopyWith
   factory _$MacroSeriesCopyWith(_MacroSeries value, $Res Function(_MacroSeries) _then) = __$MacroSeriesCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, String source
+ String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
 });
 
 
@@ -614,7 +640,7 @@ class __$MacroSeriesCopyWithImpl<$Res>
 
 /// Create a copy of MacroSeries
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? source = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
   return _then(_MacroSeries(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -629,7 +655,8 @@ as String,asOf: null == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non
 as String,latest: null == latest ? _self.latest : latest // ignore: cast_nullable_to_non_nullable
 as double,previous: freezed == previous ? _self.previous : previous // ignore: cast_nullable_to_non_nullable
 as double?,history: null == history ? _self._history : history // ignore: cast_nullable_to_non_nullable
-as List<MacroPoint>,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as List<MacroPoint>,coverage: null == coverage ? _self._coverage : coverage // ignore: cast_nullable_to_non_nullable
+as List<MacroCoverage>,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -1459,6 +1486,278 @@ as String,against: null == against ? _self.against : against // ignore: cast_nul
 as String,r: null == r ? _self.r : r // ignore: cast_nullable_to_non_nullable
 as double,sessions: null == sessions ? _self.sessions : sessions // ignore: cast_nullable_to_non_nullable
 as int,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$MacroCoverage {
+
+ String get title; String get domain; String get url; String get date;
+/// Create a copy of MacroCoverage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MacroCoverageCopyWith<MacroCoverage> get copyWith => _$MacroCoverageCopyWithImpl<MacroCoverage>(this as MacroCoverage, _$identity);
+
+  /// Serializes this MacroCoverage to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacroCoverage&&(identical(other.title, title) || other.title == title)&&(identical(other.domain, domain) || other.domain == domain)&&(identical(other.url, url) || other.url == url)&&(identical(other.date, date) || other.date == date));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,title,domain,url,date);
+
+@override
+String toString() {
+  return 'MacroCoverage(title: $title, domain: $domain, url: $url, date: $date)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $MacroCoverageCopyWith<$Res>  {
+  factory $MacroCoverageCopyWith(MacroCoverage value, $Res Function(MacroCoverage) _then) = _$MacroCoverageCopyWithImpl;
+@useResult
+$Res call({
+ String title, String domain, String url, String date
+});
+
+
+
+
+}
+/// @nodoc
+class _$MacroCoverageCopyWithImpl<$Res>
+    implements $MacroCoverageCopyWith<$Res> {
+  _$MacroCoverageCopyWithImpl(this._self, this._then);
+
+  final MacroCoverage _self;
+  final $Res Function(MacroCoverage) _then;
+
+/// Create a copy of MacroCoverage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? domain = null,Object? url = null,Object? date = null,}) {
+  return _then(_self.copyWith(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,domain: null == domain ? _self.domain : domain // ignore: cast_nullable_to_non_nullable
+as String,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [MacroCoverage].
+extension MacroCoveragePatterns on MacroCoverage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MacroCoverage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MacroCoverage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MacroCoverage value)  $default,){
+final _that = this;
+switch (_that) {
+case _MacroCoverage():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MacroCoverage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MacroCoverage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String title,  String domain,  String url,  String date)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MacroCoverage() when $default != null:
+return $default(_that.title,_that.domain,_that.url,_that.date);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String title,  String domain,  String url,  String date)  $default,) {final _that = this;
+switch (_that) {
+case _MacroCoverage():
+return $default(_that.title,_that.domain,_that.url,_that.date);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String title,  String domain,  String url,  String date)?  $default,) {final _that = this;
+switch (_that) {
+case _MacroCoverage() when $default != null:
+return $default(_that.title,_that.domain,_that.url,_that.date);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _MacroCoverage implements MacroCoverage {
+  const _MacroCoverage({required this.title, this.domain = '', this.url = '', this.date = ''});
+  factory _MacroCoverage.fromJson(Map<String, dynamic> json) => _$MacroCoverageFromJson(json);
+
+@override final  String title;
+@override@JsonKey() final  String domain;
+@override@JsonKey() final  String url;
+@override@JsonKey() final  String date;
+
+/// Create a copy of MacroCoverage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MacroCoverageCopyWith<_MacroCoverage> get copyWith => __$MacroCoverageCopyWithImpl<_MacroCoverage>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$MacroCoverageToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacroCoverage&&(identical(other.title, title) || other.title == title)&&(identical(other.domain, domain) || other.domain == domain)&&(identical(other.url, url) || other.url == url)&&(identical(other.date, date) || other.date == date));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,title,domain,url,date);
+
+@override
+String toString() {
+  return 'MacroCoverage(title: $title, domain: $domain, url: $url, date: $date)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MacroCoverageCopyWith<$Res> implements $MacroCoverageCopyWith<$Res> {
+  factory _$MacroCoverageCopyWith(_MacroCoverage value, $Res Function(_MacroCoverage) _then) = __$MacroCoverageCopyWithImpl;
+@override @useResult
+$Res call({
+ String title, String domain, String url, String date
+});
+
+
+
+
+}
+/// @nodoc
+class __$MacroCoverageCopyWithImpl<$Res>
+    implements _$MacroCoverageCopyWith<$Res> {
+  __$MacroCoverageCopyWithImpl(this._self, this._then);
+
+  final _MacroCoverage _self;
+  final $Res Function(_MacroCoverage) _then;
+
+/// Create a copy of MacroCoverage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? domain = null,Object? url = null,Object? date = null,}) {
+  return _then(_MacroCoverage(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,domain: null == domain ? _self.domain : domain // ignore: cast_nullable_to_non_nullable
+as String,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

@@ -56,6 +56,11 @@ _MacroSeries _$MacroSeriesFromJson(Map<String, dynamic> json) => _MacroSeries(
           ?.map((e) => MacroPoint.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <MacroPoint>[],
+  coverage:
+      (json['coverage'] as List<dynamic>?)
+          ?.map((e) => MacroCoverage.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <MacroCoverage>[],
   source: json['source'] as String? ?? '',
 );
 
@@ -74,6 +79,7 @@ Map<String, dynamic> _$MacroSeriesToJson(_MacroSeries instance) =>
       'latest': instance.latest,
       'previous': instance.previous,
       'history': instance.history,
+      'coverage': instance.coverage,
       'source': instance.source,
     };
 
@@ -127,4 +133,20 @@ Map<String, dynamic> _$MacroCorrelationToJson(_MacroCorrelation instance) =>
       'against': instance.against,
       'r': instance.r,
       'sessions': instance.sessions,
+    };
+
+_MacroCoverage _$MacroCoverageFromJson(Map<String, dynamic> json) =>
+    _MacroCoverage(
+      title: json['title'] as String,
+      domain: json['domain'] as String? ?? '',
+      url: json['url'] as String? ?? '',
+      date: json['date'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$MacroCoverageToJson(_MacroCoverage instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'domain': instance.domain,
+      'url': instance.url,
+      'date': instance.date,
     };

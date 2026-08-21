@@ -539,5 +539,6 @@
       }
     }
   },
-  "macroUnavailable": "Some sources could not be reached"
+  "macroUnavailable": "Some sources could not be reached",
+  "macroCoverage": "What is being reported"
 }

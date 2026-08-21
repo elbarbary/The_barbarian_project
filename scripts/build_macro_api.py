@@ -91,7 +91,15 @@ def series_entry(
     key: str, points: dict[str, float], *, unit: str, source: str
 ) -> dict:
     days = sorted(points)[-KEEP:]
+    # Reporting that explains what this series has been doing. Somebody else's
+    # words, linked back to them — the only part of a macro card that is not
+    # ours, which is why each item keeps the domain that published it.
+    try:
+        reporting = sources.coverage(key)
+    except Exception:  # noqa: BLE001 - a card without coverage is still a card
+        reporting = []
     return {
+        "coverage": reporting,
         "id": key,
         "label": glossary.label(key),
         "label_ar": glossary.label_ar(key),

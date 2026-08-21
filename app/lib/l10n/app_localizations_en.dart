@@ -1020,4 +1020,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get macroUnavailable => 'Some sources could not be reached';
+
+  @override
+  String get macroCoverage => 'What is being reported';
 }
