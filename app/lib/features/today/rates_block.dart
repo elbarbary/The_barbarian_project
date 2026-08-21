@@ -302,7 +302,11 @@ class _MetalCard extends ConsumerWidget {
         const <double>[];
 
     return BPressable(
-      onTap: () => showExplainer(context, BRatesBlock._fromMetal(metal)),
+      onTap: () => showExplainer(
+        context,
+        BRatesBlock._fromMetal(metal),
+        series: series,
+      ),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),

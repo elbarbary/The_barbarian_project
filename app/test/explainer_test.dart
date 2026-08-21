@@ -3,6 +3,9 @@ import 'package:barbarian/core/models/explainer.dart';
 import 'package:barbarian/core/widgets/explainer_sheet.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/company/company_screen.dart';
+import 'package:barbarian/core/widgets/charts.dart';
+import 'package:barbarian/core/theme/barbarian_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -200,5 +203,47 @@ void main() {
     // The four fixed parts, in order (spec §4.18).
     expect(find.text('HOW IT IS WORKED OUT'), findsOneWidget);
     expect(find.text('WHAT COUNTS AS UNUSUAL'), findsOneWidget);
+  });
+
+  testWidgets('a sheet with a series draws it, and one without does not', (
+    tester,
+  ) async {
+    // The cards carry a sparkline the height of a line of text — enough to say
+    // "rising", not enough to read. Opening one gave four paragraphs about a
+    // number and no picture of it.
+    const explainer = Explainer(
+      termId: 'index.EGX30',
+      title: 'EGX 30',
+      plain: 'The EGX 30 rose 0.41% in the session.',
+      token: '54,737.10',
+      workings: '54,737.10 today against 54,512.68 yesterday',
+      yardstick: 'A move under 1% is an ordinary session.',
+      notability: Notability.unjudged,
+      source: 'EGX',
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: BarbarianTheme.light(),
+        home: const Scaffold(
+          body: BExplainerSheet(
+            explainer: explainer,
+            series: [1, 2, 3, 4, 5, 6],
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.byType(BSparkline), findsOneWidget);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: BarbarianTheme.light(),
+        home: const Scaffold(body: BExplainerSheet(explainer: explainer)),
+      ),
+    );
+    await tester.pump();
+    // One point is a level already printed above in a larger font.
+    expect(find.byType(BSparkline), findsNothing);
   });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/explainer.dart';
+import 'charts.dart';
 import '../theme/barbarian_theme.dart';
 import 'motion.dart';
 import 'surfaces.dart';
@@ -170,12 +171,17 @@ class _DottedPainter extends CustomPainter {
 /// A sheet and never a route: spec §4.18 is explicit that it must never lose
 /// the reader's place. Drag to dismiss, no close button, nothing to navigate
 /// back from.
-Future<void> showExplainer(BuildContext context, Explainer explainer) {
+Future<void> showExplainer(
+  BuildContext context,
+  Explainer explainer, {
+  List<double> series = const [],
+}) {
   return showModalBottomSheet<void>(
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
-    builder: (context) => BExplainerSheet(explainer: explainer),
+    builder: (context) =>
+        BExplainerSheet(explainer: explainer, series: series),
   );
 }
 
@@ -185,9 +191,21 @@ Future<void> showExplainer(BuildContext context, Explainer explainer) {
 /// learns where the arithmetic is, and stops having to hunt for it. Meaning,
 /// then the sum with real inputs, then the yardstick, then the receipt.
 class BExplainerSheet extends StatelessWidget {
-  const BExplainerSheet({required this.explainer, super.key});
+  const BExplainerSheet({
+    required this.explainer,
+    this.series = const [],
+    super.key,
+  });
 
   final Explainer explainer;
+
+  /// The thing's own history, when there is one to draw.
+  ///
+  /// The index and metal cards carry a sparkline the height of a line of text,
+  /// which is enough to say "rising" and not enough to read. Opening one gave
+  /// four paragraphs about a number and no picture of it at all. This is the
+  /// same series at a size a person can actually look at.
+  final List<double> series;
 
   @override
   Widget build(BuildContext context) {
@@ -247,6 +265,16 @@ class BExplainerSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+
+            // The shape, where one exists. Sits above the arithmetic because a
+            // reader who opened this from a card was usually looking at the
+            // line, not at the sum.
+            if (series.length > 1) ...[
+              BPaperCard(
+                child: BSparkline(values: series, height: 132),
+              ),
+              const SizedBox(height: 14),
+            ],
 
             // 2 — the arithmetic, with THIS company's real inputs. Not a
             // formula: the actual numbers, so the sentence can be checked.

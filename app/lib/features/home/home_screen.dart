@@ -380,6 +380,7 @@ class _IndexCard extends StatelessWidget {
           provenance: Provenance.fact,
           source: index.source,
         ),
+        series: series,
       ),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
