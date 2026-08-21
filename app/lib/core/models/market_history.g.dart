@@ -48,6 +48,7 @@ _MarketBreadth _$MarketBreadthFromJson(Map<String, dynamic> json) =>
       down: (json['down'] as num?)?.toInt() ?? 0,
       flat: (json['flat'] as num?)?.toInt() ?? 0,
       counted: (json['counted'] as num?)?.toInt() ?? 0,
+      basis: json['basis'] as String? ?? 'session',
     );
 
 Map<String, dynamic> _$MarketBreadthToJson(_MarketBreadth instance) =>
@@ -56,4 +57,5 @@ Map<String, dynamic> _$MarketBreadthToJson(_MarketBreadth instance) =>
       'down': instance.down,
       'flat': instance.flat,
       'counted': instance.counted,
+      'basis': instance.basis,
     };

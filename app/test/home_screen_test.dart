@@ -201,6 +201,39 @@ void main() {
     // question from how much of the feed Home offers.
   });
 
+  test('the breadth chart has lines to draw, and says how each was counted', () {
+    // It drew a single dot: the store held one session, because breadth is not
+    // published for this exchange and was only ever accumulated. Four weeks are
+    // now reconstructed from stored per-company closes so there is a shape on
+    // day one, and live sessions append from here.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+    final counted = history.sessions
+        .where((s) => !(s.breadth?.isEmpty ?? true))
+        .toList();
+
+    expect(
+      counted.length,
+      greaterThan(10),
+      reason: 'three lines need more than a couple of points',
+    );
+
+    // The reconstruction sees ~230 shares and the live snapshot 282, so every
+    // row has to carry its own denominator or the lines lie about each other.
+    for (final session in counted) {
+      final b = session.breadth!;
+      expect(b.counted, greaterThan(0));
+      expect(b.up + b.down + b.flat, b.counted);
+      expect(['session', 'closes'], contains(b.basis));
+    }
+
+    // The newest session is the live count, never a reconstruction: the
+    // snapshot is the better reading and must not be overwritten by backfill.
+    expect(counted.last.breadth!.basis, 'session');
+    expect(counted.any((s) => s.breadth!.isReconstructed), isTrue);
+  });
+
   testWidgets('an empty watchlist explains itself', (tester) async {
     await pumpScreen(tester, const HomeScreen(), watchlist: const []);
     await pumpUntil(

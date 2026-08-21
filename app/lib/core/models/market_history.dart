@@ -65,6 +65,19 @@ abstract class MarketBreadth with _$MarketBreadth {
     @Default(0) int down,
     @Default(0) int flat,
     @Default(0) int counted,
+
+    /// How this session was counted. `session` means the live market snapshot,
+    /// which reads every listed share's published change — 282 of them, where
+    /// a change of exactly zero is a real "did not move". `closes` means it was
+    /// reconstructed by comparing stored per-company closes, which can only see
+    /// shares whose history covers both days and so counts around 230.
+    ///
+    /// Carried rather than hidden. Two counts of the *same* session by
+    /// different methods is the bug that put 107 rose beside 57 rose on two
+    /// screens; two adjacent sessions counted over slightly different
+    /// populations, each carrying its own [counted] and saying which method
+    /// produced it, is simply the data that exists.
+    @Default('session') String basis,
   }) = _MarketBreadth;
 
   const MarketBreadth._();
@@ -76,4 +89,7 @@ abstract class MarketBreadth with _$MarketBreadth {
 
   /// Which way the session leaned, without saying whether that is good.
   bool get roseMore => up > down;
+
+  /// True when this row was reconstructed rather than counted live.
+  bool get isReconstructed => basis == 'closes';
 }

@@ -2,14 +2,6 @@
  "updated_at": "2026-08-20T06:36:40.943Z",
  "sessions": [
   {
-   "date": "2025-07-31",
-   "indices": {
-    "EGX30": 34198.0,
-    "EGX70EWI": 10225.07,
-    "EGX100EWI": 13807.5
-   }
-  },
-  {
    "date": "2025-08-03",
    "indices": {
     "EGX30": 34272.16,
@@ -1921,11 +1913,28 @@
    }
   },
   {
+   "date": "2026-07-23",
+   "breadth": {
+    "up": 0,
+    "down": 0,
+    "flat": 243,
+    "counted": 243,
+    "basis": "closes"
+   }
+  },
+  {
    "date": "2026-07-26",
    "indices": {
     "EGX30": 53417.59,
     "EGX70EWI": 17855.72,
     "EGX100EWI": 23709.04
+   },
+   "breadth": {
+    "up": 0,
+    "down": 0,
+    "flat": 1,
+    "counted": 1,
+    "basis": "closes"
    }
   },
   {
@@ -1934,6 +1943,13 @@
     "EGX30": 53633.92,
     "EGX70EWI": 18124.84,
     "EGX100EWI": 23984.11
+   },
+   "breadth": {
+    "up": 122,
+    "down": 93,
+    "flat": 17,
+    "counted": 232,
+    "basis": "closes"
    }
   },
   {
@@ -1942,6 +1958,13 @@
     "EGX30": 53729.97,
     "EGX70EWI": 18300.85,
     "EGX100EWI": 24133.04
+   },
+   "breadth": {
+    "up": 93,
+    "down": 128,
+    "flat": 23,
+    "counted": 244,
+    "basis": "closes"
    }
   },
   {
@@ -1950,6 +1973,13 @@
     "EGX30": 53627.32,
     "EGX70EWI": 18422.68,
     "EGX100EWI": 24255.77
+   },
+   "breadth": {
+    "up": 78,
+    "down": 137,
+    "flat": 17,
+    "counted": 232,
+    "basis": "closes"
    }
   },
   {
@@ -1958,6 +1988,13 @@
     "EGX30": 53442.2,
     "EGX70EWI": 18233.32,
     "EGX100EWI": 24035.88
+   },
+   "breadth": {
+    "up": 43,
+    "down": 178,
+    "flat": 23,
+    "counted": 244,
+    "basis": "closes"
    }
   },
   {
@@ -1966,6 +2003,13 @@
     "EGX30": 54285.86,
     "EGX70EWI": 19034.28,
     "EGX100EWI": 24956.02
+   },
+   "breadth": {
+    "up": 199,
+    "down": 26,
+    "flat": 7,
+    "counted": 232,
+    "basis": "closes"
    }
   },
   {
@@ -1974,6 +2018,13 @@
     "EGX30": 54094.33,
     "EGX70EWI": 19293.24,
     "EGX100EWI": 25275.46
+   },
+   "breadth": {
+    "up": 107,
+    "down": 114,
+    "flat": 10,
+    "counted": 231,
+    "basis": "closes"
    }
   },
   {
@@ -1982,6 +2033,13 @@
     "EGX30": 54501.7,
     "EGX70EWI": 19796.97,
     "EGX100EWI": 25825.06
+   },
+   "breadth": {
+    "up": 116,
+    "down": 102,
+    "flat": 27,
+    "counted": 245,
+    "basis": "closes"
    }
   },
   {
@@ -1990,6 +2048,13 @@
     "EGX30": 54659.57,
     "EGX70EWI": 19765.34,
     "EGX100EWI": 25862.74
+   },
+   "breadth": {
+    "up": 137,
+    "down": 76,
+    "flat": 18,
+    "counted": 231,
+    "basis": "closes"
    }
   },
   {
@@ -1998,6 +2063,13 @@
     "EGX30": 54676.86,
     "EGX70EWI": 19990.69,
     "EGX100EWI": 26106.42
+   },
+   "breadth": {
+    "up": 107,
+    "down": 108,
+    "flat": 29,
+    "counted": 244,
+    "basis": "closes"
    }
   },
   {
@@ -2006,6 +2078,13 @@
     "EGX30": 55125.43,
     "EGX70EWI": 20798.21,
     "EGX100EWI": 26983.04
+   },
+   "breadth": {
+    "up": 145,
+    "down": 69,
+    "flat": 17,
+    "counted": 231,
+    "basis": "closes"
    }
   },
   {
@@ -2014,6 +2093,13 @@
     "EGX30": 54876.0,
     "EGX70EWI": 21339.79,
     "EGX100EWI": 27521.83
+   },
+   "breadth": {
+    "up": 102,
+    "down": 113,
+    "flat": 17,
+    "counted": 232,
+    "basis": "closes"
    }
   },
   {
@@ -2022,6 +2108,13 @@
     "EGX30": 54829.32,
     "EGX70EWI": 21918.45,
     "EGX100EWI": 28171.92
+   },
+   "breadth": {
+    "up": 112,
+    "down": 103,
+    "flat": 27,
+    "counted": 242,
+    "basis": "closes"
    }
   },
   {
@@ -2030,6 +2123,13 @@
     "EGX30": 55039.76,
     "EGX70EWI": 21630.6,
     "EGX100EWI": 27915.05
+   },
+   "breadth": {
+    "up": 109,
+    "down": 112,
+    "flat": 10,
+    "counted": 231,
+    "basis": "closes"
    }
   },
   {
@@ -2038,6 +2138,13 @@
     "EGX30": 55251.59,
     "EGX70EWI": 21588.92,
     "EGX100EWI": 27897.72
+   },
+   "breadth": {
+    "up": 92,
+    "down": 127,
+    "flat": 25,
+    "counted": 244,
+    "basis": "closes"
    }
   },
   {
@@ -2046,6 +2153,13 @@
     "EGX30": 55854.74,
     "EGX70EWI": 21634.69,
     "EGX100EWI": 28013.52
+   },
+   "breadth": {
+    "up": 131,
+    "down": 90,
+    "flat": 9,
+    "counted": 230,
+    "basis": "closes"
    }
   },
   {
@@ -2054,6 +2168,13 @@
     "EGX30": 55415.07,
     "EGX70EWI": 21771.03,
     "EGX100EWI": 28106.43
+   },
+   "breadth": {
+    "up": 107,
+    "down": 117,
+    "flat": 6,
+    "counted": 230,
+    "basis": "closes"
    }
   },
   {
@@ -2062,6 +2183,13 @@
     "EGX30": 55276.78,
     "EGX70EWI": 21667.02,
     "EGX100EWI": 27953.58
+   },
+   "breadth": {
+    "up": 84,
+    "down": 119,
+    "flat": 16,
+    "counted": 219,
+    "basis": "closes"
    }
   },
   {
@@ -2070,6 +2198,13 @@
     "EGX30": 54512.65,
     "EGX70EWI": 20962.17,
     "EGX100EWI": 27185.62
+   },
+   "breadth": {
+    "up": 50,
+    "down": 155,
+    "flat": 4,
+    "counted": 209,
+    "basis": "closes"
    }
   },
   {
@@ -2083,7 +2218,8 @@
     "up": 57,
     "down": 177,
     "flat": 48,
-    "counted": 282
+    "counted": 282,
+    "basis": "session"
    }
   }
  ]
