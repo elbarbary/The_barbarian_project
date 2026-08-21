@@ -34,7 +34,7 @@ import json
 import pathlib
 import time
 
-from mubasher_statements import CRAWL_DELAY, fetch_page, statements_for
+from mubasher_statements import CRAWL_DELAY, fetch_page, filed_for
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = pathlib.Path(__file__).resolve().parent / "statements_filed.json"
@@ -116,7 +116,7 @@ def main() -> int:
             store["skipped"][ticker] = "page could not be fetched"
             skipped += 1
             continue
-        figures, why = statements_for(page, row["market_cap"])
+        figures, quarters, why = filed_for(page, row["market_cap"])
         if figures is None:
             # Named, not silent. A company missing from the app because its
             # numbers could not be trusted is a decision worth being able to
@@ -125,6 +125,14 @@ def main() -> int:
             skipped += 1
             continue
         store["companies"][ticker] = figures
+        # Quarters are kept apart from the years rather than merged into them.
+        # §13 asks for both period types and they answer different questions —
+        # and a quarter that could not be scaled is simply absent, so the two
+        # sets do not cover the same companies.
+        if quarters:
+            store.setdefault("quarterly", {})[ticker] = quarters
+        else:
+            store.get("quarterly", {}).pop(ticker, None)
         store["skipped"].pop(ticker, None)
         added += 1
         if added % 25 == 0:

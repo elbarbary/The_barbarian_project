@@ -73,15 +73,15 @@
   "@legalNotLicensed": {
     "description": "LEGAL. Spec §8.12. Must be reviewed by an Egyptian lawyer before release — see lib/core/widgets/legal.dart."
   },
-  "scannerTitle": "Opportunity Scanner",
+  "scannerTitle": "Scanner",
   "scannerSubtitle": "What the published rule found, and what it missed",
   "scannerOpen": "Open the scanner",
   "scannerNotDownloaded": "Scanner not downloaded yet",
   "scannerNotDownloadedBody": "Open the app with a connection to fetch the latest report.",
   "scannerNotPublished": "The board has not published yet",
   "scannerFoundToday": "What the published rule found today",
-  "countQualified": "Qualified",
-  "countWatching": "Watching",
+  "countQualified": "Cleared every rule",
+  "countWatching": "Cleared some rules",
   "countOutcomes": "Outcomes",
   "theSession": "The session",
   "youSubtitle": "No account needed to read",
@@ -201,7 +201,7 @@
   "noStudyYet": "No study published on this company yet",
   "noStudyYetBody": "Companies are studied one at a time. When this one is read, the investigation appears here.",
   "readFullInvestigation": "Read the full investigation",
-  "scannerHistory": "Opportunity Scanner history",
+  "scannerHistory": "Scanner history",
   "studyLabel": "Six Pillars",
   "lastSessions": "Last {count} sessions",
   "@lastSessions": {
@@ -222,9 +222,9 @@
   "scanWatchingBlurb": "Cleared some rules and not others. Incomplete evidence is a statement about our test, not about the share.",
   "scanRejectedBlurb": "Did not clear the rules, and kept on the record so the test can be audited.",
   "scanLogEmpty": "The rule log is empty",
-  "scanNothingQualified": "Nothing qualified today",
+  "scanNothingQualified": "Nothing cleared every rule today",
   "scanNothingWatch": "Nothing on the watch list",
-  "scanNothingRejected": "Nothing was rejected today",
+  "scanNothingRejected": "Nothing failed the rules today",
   "scanEmptyBlurb": "An empty section is a real answer. The test does not lower itself to fill a screen.",
   "coverage": "Coverage",
   "coverageTradable": "Tradable",
@@ -239,7 +239,7 @@
   "gatePassed": "Passed",
   "gateFailed": "Failed",
   "gateUnresolved": "Unresolved",
-  "scannerTitleFull": "Opportunity Scanner",
+  "scannerTitleFull": "Scanner",
   "scanUpdated": "Updated · {date}",
   "@scanUpdated": {
     "placeholders": {
@@ -248,7 +248,7 @@
       }
     }
   },
-  "scanQualifiedCount": "Qualified {count}",
+  "scanQualifiedCount": "Cleared all {count}",
   "@scanQualifiedCount": {
     "placeholders": {
       "count": {
@@ -256,7 +256,7 @@
       }
     }
   },
-  "scanWatchCount": "Watch {count}",
+  "scanWatchCount": "Partly {count}",
   "@scanWatchCount": {
     "placeholders": {
       "count": {
@@ -264,7 +264,7 @@
       }
     }
   },
-  "scanRejectedCount": "Rejected {count}",
+  "scanRejectedCount": "Not cleared {count}",
   "@scanRejectedCount": {
     "placeholders": {
       "count": {
@@ -290,9 +290,9 @@
   "scanOneCohort": "One cohort",
   "scanHowItWasRead": "How it was read",
   "scanNoSectorToday": "No sector read today",
-  "statusQualified": "Qualified",
-  "statusWatching": "Watching",
-  "statusRejected": "Rejected",
+  "statusQualified": "Cleared every rule",
+  "statusWatching": "Cleared some rules",
+  "statusRejected": "Did not clear the rules",
   "figPrevClose": "Prev close",
   "figDayHigh": "Day high",
   "figPreviousClose": "Previous close",
@@ -465,5 +465,81 @@
   "ratesMetals": "Gold and silver",
   "ratesPound": "The pound",
   "ratesPerGram": "per gram",
-  "ratesIndicesMovedHome": "Index levels are on Home"
+  "ratesIndicesMovedHome": "Index levels are on Home",
+  "ageJustNow": "just now",
+  "ageToday": "Today",
+  "ageYesterday": "Yesterday",
+  "ageMinutes": "{count}m ago",
+  "@ageMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "{count}h ago",
+  "@ageHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "{count}d ago",
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualVolume": "Unusual volume",
+  "saved": "Saved",
+  "loading": "Loading",
+  "mainNavigation": "Main navigation",
+  "priceLow": "Low",
+  "priceHigh": "High",
+  "priceOpen": "Open",
+  "priceClose": "Close",
+  "theWires": "The wires",
+  "sortByScore": "By score",
+  "sortMostRecent": "Most recent",
+  "cotNoneYet": "No investigations yet",
+  "cotNoMatch": "Nothing matches that",
+  "readInvestigation": "Read investigation",
+  "articleFailed": "Could not open the investigation",
+  "exitHeadline": "Before you buy anything: how the money comes back",
+  "exitIfYouPutIn": "If you put in",
+  "exitNumbersBehind": "The numbers behind it",
+  "companyLabel": "Company",
+  "explTraded": "How much it traded",
+  "explFinished": "Where it finished",
+  "explBuyable": "How much of it can actually be bought",
+  "explValued": "What the whole company is priced at",
+  "rubricFreshDisclosure": "Fresh disclosure",
+  "rubricEconomicImportance": "Economic importance",
+  "rubricVolumeConfirmation": "Volume confirmation",
+  "rubricOwnershipCluster": "Ownership cluster",
+  "rubricDatedCatalyst": "Dated catalyst",
+  "rubricAntiChasing": "Anti-chasing",
+  "rubricLimitUpPenalty": "Limit-up penalty",
+  "rubricIssuerDenial": "Issuer denial",
+  "rubricRiskPenalty": "Risk penalty",
+  "ownersEquity": "Owners' equity",
+  "homeMacro": "What moves Egypt",
+  "macroWhyItMatters": "Why this reaches your shares",
+  "macroMovesWith": "Moved with the EGX 30",
+  "macroWeakLink": "Barely moves with the EGX 30 day to day",
+  "macroEgyptLine": "Egypt's own line",
+  "macroSessions": "over {count} sessions",
+  "@macroSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "macroUnavailable": "Some sources could not be reached",
+  "macroCoverage": "What is being reported",
+  "homeLeadStory": "Today's story"
 }

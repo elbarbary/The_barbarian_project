@@ -75,7 +75,8 @@ SOURCES = [
         "home": "https://www.alborsaanews.com",
         # WordPress REST rather than the RSS feed: same content, but it carries
         # ids, category ids and an ISO timestamp instead of an RFC-822 string.
-        "endpoint": "https://www.alborsaanews.com/wp-json/wp/v2/posts?per_page=40",
+        "endpoint": "https://www.alborsaanews.com/wp-json/wp/v2/posts?per_page=40"
+        "&_embed=wp:featuredmedia",
         "kind": "wp",
         "live": True,
     },
@@ -84,7 +85,8 @@ SOURCES = [
         "name": "Hapi Journal",
         "name_ar": "حابي",
         "home": "https://www.hapijournal.com",
-        "endpoint": "https://www.hapijournal.com/wp-json/wp/v2/posts?per_page=30",
+        "endpoint": "https://www.hapijournal.com/wp-json/wp/v2/posts?per_page=30"
+        "&_embed=wp:featuredmedia",
         "kind": "wp",
         "live": True,
     },
@@ -166,6 +168,31 @@ def get(url: str, timeout: int = 25) -> bytes | None:
         return None
 
 
+def featured_image(post: dict) -> str | None:
+    """The article's own lead picture, if the outlet publishes one.
+
+    A wall of text rows is hard to read at a glance and hard to tell apart;
+    the picture the outlet chose is the cheapest way to make a story
+    recognisable. This is the outlet's own image, shown on a card that links
+    straight back to their article — the same bargain every reader app makes.
+
+    Two places to look, because WordPress exposes it twice and neither is
+    guaranteed. `_embed=wp:featuredmedia` is the documented route; the Yoast
+    block is the fallback and is what survives when a post has no attachment
+    record but does set an og:image. Arab Finance is read from a sitemap and
+    has neither, so those stories simply have no picture.
+    """
+    embedded = (post.get("_embedded") or {}).get("wp:featuredmedia") or []
+    for media in embedded:
+        if url := (media.get("source_url") or "").strip():
+            return url
+    og = (post.get("yoast_head_json") or {}).get("og_image") or []
+    for image in og:
+        if url := (image.get("url") or "").strip():
+            return url
+    return None
+
+
 def fetch_wp(source: dict) -> list[dict]:
     raw = get(source["endpoint"])
     if raw is None:
@@ -188,6 +215,7 @@ def fetch_wp(source: dict) -> list[dict]:
                 "headline": headline,
                 "link": post.get("link", ""),
                 "published": post.get("date_gmt", "") + "Z",
+                "image": featured_image(post),
                 # Build-time only. Never written to the published document.
                 "_excerpt": text(post.get("excerpt", {}).get("rendered", "")),
                 "_tags": post.get("tags") or [],

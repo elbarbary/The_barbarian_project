@@ -11,9 +11,17 @@ import '../theme/barbarian_theme.dart';
 /// says is that a sixth of the market did not trade meaningfully. A shared
 /// denominator is the whole point of a breadth chart.
 ///
-/// The series is accumulated one session at a time because nobody publishes a
-/// breadth history for this exchange. One session draws one dot, which is
-/// honest about what we hold.
+/// Nobody publishes a breadth history for this exchange, so the series is part
+/// reconstructed and part accumulated. Four weeks of past sessions are counted
+/// from the stored per-company closes; every session from here is counted live
+/// from the market snapshot and appended.
+///
+/// The two methods see slightly different populations — the snapshot reads all
+/// 282 listed shares, the reconstruction only the ~230 whose stored history
+/// covers both days — which is why the scale below is the largest `counted`
+/// seen rather than each session's own. A session where fewer companies
+/// reported sits lower on the same axis instead of being stretched to fill it,
+/// which is the honest way to draw it and was already how this worked.
 class BBreadthChart extends StatelessWidget {
   const BBreadthChart({required this.sessions, this.height = 150, super.key});
 

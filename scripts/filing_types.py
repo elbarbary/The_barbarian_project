@@ -151,6 +151,26 @@ FILING_TYPES: dict[str, tuple[str, str, str, str]] = {
         "يتغيّر وضع قيد السهم. الشطب يعني توقفه عن التداول في البورصة "
         "نهائيًا.",
     ),
+    "listing": (
+        "Listing committee decision",
+        "قرار لجنة القيد",
+        "The exchange's listing committee ruled on this company's registration "
+        "— the terms on which its shares stay listed and tradable. A decision "
+        "can attach conditions, lift them, or move a share between markets.",
+        "أصدرت لجنة القيد بالبورصة قرارًا بشأن قيد هذه الشركة، أي الشروط التي "
+        "تظل أسهمها بموجبها مقيدة وقابلة للتداول. وقد يضيف القرار شروطًا أو "
+        "يرفعها أو ينقل السهم بين الأسواق.",
+    ),
+    "regulator": (
+        "Regulator statement",
+        "بيان من الرقابة المالية",
+        "The Financial Regulatory Authority — not the company — published "
+        "something about this issuer. The regulator usually writes when it is "
+        "acting on a share rather than reporting on it.",
+        "نشرت الهيئة العامة للرقابة المالية — وليست الشركة — بيانًا بشأن هذه "
+        "الشركة. وتكتب الهيئة عادةً حين تتخذ إجراءً بشأن السهم لا حين تنقل "
+        "خبرًا عنه.",
+    ),
     "capital": (
         "Capital change",
         "تغيير رأس المال",
@@ -220,14 +240,24 @@ RULES: list[tuple[str, re.Pattern[str]]] = [
     ("capital_increase", re.compile(r"زيادة رأس ?المال|زيادة رأسمال")),
     ("capital_decrease", re.compile(r"تخفيض رأس ?المال|تخفيض رأسمال")),
     ("dividend", re.compile(r"توزيع(ات)? نقدية|كوبون|توزيع أرباح|نقدية للسهم")),
-    ("insider", re.compile(r"نموذج إفصاح|إفصاح بعد التنفيذ|تعاملات المطلعين")),
+    ("insider", re.compile(
+        r"نموذج إفصاح|إفصاح بعد التنفيذ|تعاملات المطلعين|تعاملات الداخليين")),
     ("assembly", re.compile(r"الجمعية العامة|جمعية عامة|محضر اجتماع الجمعية")),
     ("results", re.compile(r"نتائج أعمال|القوائم المالية|نتائج الأعمال|الأرباح عن الفترة")),
     ("acquisition", re.compile(r"استحواذ|اندماج|الاستحواذ")),
     ("stake", re.compile(r"حصة|حصتها|نسبة الملكية")),
     ("funding", re.compile(r"قرض|تمويل|سندات|صكوك|توريق")),
+    # Before `delisting`: both speak about القيد, and a listing-committee
+    # decision is the routine one — thirteen of thirty-six filings in a single
+    # window — while a شطب is the rare, serious one. Matching the specific
+    # phrase first keeps the rare label meaning what it says.
+    ("listing", re.compile(r"قرار لجنة القيد|لجنة القيد")),
     ("delisting", re.compile(r"شطب|قيد الشركة|إلغاء القيد")),
-    ("auditor", re.compile(r"مراجع الحسابات|مراقب الحسابات|تصحيح")),
+    ("regulator", re.compile(r"الهيئة العامة للرقابة المالية|الرقابة المالية")),
+    # The Central Auditing Organization audits state-owned issuers; its report
+    # is an auditor's report whatever the body is called.
+    ("auditor", re.compile(
+        r"مراجع الحسابات|مراقب الحسابات|تصحيح|الجهاز المركزي للمحاسبات")),
     ("board", re.compile(r"مجلس (الإدارة|إدارة)|قرارات مجلس")),
     ("contract", re.compile(r"عقد|تعاقد|مشروع|بروتوكول|أمر توريد")),
 ]

@@ -3,7 +3,12 @@ import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
+import 'dart:convert';
 import 'package:barbarian/core/models/rates.dart';
+import 'package:barbarian/core/models/news.dart';
+import 'package:barbarian/core/models/market_history.dart';
+import 'package:barbarian/core/models/macro.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -28,7 +33,47 @@ void main() {
     // A bare "Statement" says nothing about what happened, and it is the most
     // common filing type there is. Leading with one wastes the largest card on
     // the screen, so anything the classifier placed outranks it.
-    expect(find.textContaining(RegExp('Statement\$')), findsNothing);
+    //
+    // Asserted about the lead alone. This used to search the whole screen,
+    // which only held while Home showed four filings and no statement happened
+    // to be among them — a statement further down the list is an ordinary
+    // filing and says nothing about what the hero chose.
+    final lead = tester.widget<Text>(find.byKey(const Key('home-lead-filing')));
+    expect(
+      lead.data,
+      isNot(matches(RegExp(r'Statement$'))),
+      reason: 'the largest card must not be spent on a bare "Statement"',
+    );
+  });
+
+  testWidgets('§49 the hero dates itself and never backdates a claim', (
+    tester,
+  ) async {
+    // The lead is chosen by rank before date, so the biggest card on the
+    // screen can hold a filing from an earlier session. Its kicker said
+    // "Filed today" regardless — and when this was found the entire feed was
+    // one day old, so Home was stating something false in its largest type.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    final fixture = readFixtureObjectSync('disclosures/latest.json');
+    final items = (fixture['items'] as List).cast<Map<String, dynamic>>();
+    final today = DateTime.now();
+    final isToday = items.any((i) {
+      final d = DateTime.tryParse((i['date'] ?? '') as String);
+      return d != null &&
+          d.year == today.year &&
+          d.month == today.month &&
+          d.day == today.day;
+    });
+
+    if (!isToday) {
+      expect(
+        find.textContaining(RegExp('FILED TODAY', caseSensitive: false)),
+        findsNothing,
+        reason: 'no filing in the feed is from today, so nothing may say so',
+      );
+    }
   });
 
   testWidgets('the lead filing says why it is the lead', (tester) async {
@@ -78,6 +123,59 @@ void main() {
     ]));
   });
 
+  test('§14 the indices carry a real series, not a single point', () {
+    // These cards showed a number and never a shape: `market-history.json`
+    // held one row and grew a session a day, because the builder believed no
+    // index series was reachable anywhere. A year of daily closes is now
+    // backfilled from a second source and checked against the level we
+    // already publish before any of it is written.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+
+    expect(history.sessions.length, greaterThan(100));
+    for (final id in ['EGX30', 'EGX70EWI', 'EGX100EWI']) {
+      final series = history.levelsOf(id);
+      expect(
+        series.length,
+        greaterThan(100),
+        reason: '$id has nothing to draw a sparkline from',
+      );
+      expect(
+        series.every((v) => v > 0),
+        isTrue,
+        reason: '$id carries a non-positive level',
+      );
+    }
+  });
+
+  test('gold and silver carry a series, not just a headline price', () {
+    // The rates document quotes gold as a number with nothing behind it, so
+    // the card could say what an ounce costs and never what it had been doing.
+    // Spot, not futures: the COMEX front month was trading 2.9% above spot,
+    // and a chart of that under a spot headline contradicts the number
+    // printed directly above it.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+
+    for (final metal in ['XAU', 'XAG']) {
+      final series = history.metalOf(metal);
+      expect(
+        series.length,
+        greaterThan(100),
+        reason: '$metal has nothing to draw',
+      );
+      expect(series.every((v) => v > 0), isTrue);
+    }
+
+    // Gold is worth vastly more an ounce than silver. If these two were ever
+    // swapped or pointed at the same instrument, this is what would catch it.
+    final gold = history.metalOf('XAU').last;
+    final silver = history.metalOf('XAG').last;
+    expect(gold / silver, greaterThan(10));
+  });
+
   testWidgets('it counts what rose and what fell', (tester) async {
     await pumpScreen(tester, const HomeScreen());
     await pumpUntil(tester, find.textContaining(RegExp('rose', caseSensitive: false)));
@@ -104,6 +202,179 @@ void main() {
       isFalse,
       reason: 'breadth belongs to one screen, counted once',
     );
+  });
+
+  testWidgets('Home offers a real amount of the feed, not a token four', (
+    tester,
+  ) async {
+    // Four rows under a screen you can keep scrolling reads as "there is
+    // nothing here". The exchange files a couple of dozen a session and the
+    // news feed is already deduplicated to 120 stories, so four was hiding a
+    // full feed rather than summarising it.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    final news = NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
+    expect(news.items.length, greaterThan(12));
+
+    // Rendered rows are bounded by the viewport, so this asserts the limit the
+    // screen applies rather than counting widgets: the section takes 12.
+    final source = File('lib/features/home/home_screen.dart').readAsStringSync();
+    expect(
+      source.contains('.take(12)'),
+      isTrue,
+      reason: 'the news section should offer more than a token few',
+    );
+    // Deliberately not asserting that no `.take(4)` survives anywhere: the
+    // watchlist grid takes four tiles and always did, which is a different
+    // question from how much of the feed Home offers.
+  });
+
+  test('the breadth chart has lines to draw, and says how each was counted', () {
+    // It drew a single dot: the store held one session, because breadth is not
+    // published for this exchange and was only ever accumulated. Four weeks are
+    // now reconstructed from stored per-company closes so there is a shape on
+    // day one, and live sessions append from here.
+    final history = MarketHistory.fromJson(
+      readFixtureObjectSync('market-history.json'),
+    );
+    final counted = history.sessions
+        .where((s) => !(s.breadth?.isEmpty ?? true))
+        .toList();
+
+    expect(
+      counted.length,
+      greaterThan(10),
+      reason: 'three lines need more than a couple of points',
+    );
+
+    // The reconstruction sees ~230 shares and the live snapshot 282, so every
+    // row has to carry its own denominator or the lines lie about each other.
+    for (final session in counted) {
+      final b = session.breadth!;
+      expect(b.counted, greaterThan(0));
+      expect(b.up + b.down + b.flat, b.counted);
+      expect(['session', 'closes'], contains(b.basis));
+    }
+
+    // The newest session is the live count, never a reconstruction: the
+    // snapshot is the better reading and must not be overwritten by backfill.
+    expect(counted.last.breadth!.basis, 'session');
+    expect(counted.any((s) => s.breadth!.isReconstructed), isTrue);
+  });
+
+  test('§13 a year of price history reaches most of the market', () {
+    // The Price tab offers 1M/3M/1Y and could fill 1Y for sixteen companies:
+    // sixteen had been fetched from Yahoo before it began refusing, and
+    // everything else held the fifty to a hundred sessions the daily snapshot
+    // had accumulated. Mubasher publishes the whole series and 210 companies
+    // are now verified against closes we already held.
+    final dir = Directory('assets/fixtures/companies');
+    if (!dir.existsSync()) return;
+
+    var deep = 0;
+    var total = 0;
+    for (final file in dir.listSync()) {
+      if (file is! File || !file.path.endsWith('.json')) continue;
+      total++;
+      final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+      final history = (doc['price_history'] as List?) ?? const [];
+      if (history.length >= 250) deep++;
+    }
+
+    expect(total, greaterThan(0));
+    expect(
+      deep,
+      greaterThan(total ~/ 2),
+      reason: 'only $deep of $total companies can fill a 1Y window',
+    );
+  });
+
+  testWidgets('§8 the macro block explains and never instructs', (tester) async {
+    // This is the strongest claim the app makes anywhere: a chain of cause
+    // from a number outside the exchange to a share inside it. It has to stop
+    // at the mechanism.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    for (final word in [
+      'you should',
+      'investors should',
+      'undervalued',
+      'cheap',
+      'opportunity to',
+      'we recommend',
+    ]) {
+      expect(
+        find.textContaining(RegExp(word, caseSensitive: false)),
+        findsNothing,
+        reason: 'the macro block must not say "\$word"',
+      );
+    }
+  });
+
+  test('macro carries a mechanism and a measured correlation for each series', () {
+    // The two are published side by side so they can disagree in front of the
+    // reader. Suez has a compelling chain and a correlation near zero, which
+    // says the canal reaches the exchange over months rather than sessions —
+    // and hiding that would turn an explanation into a claim.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+
+    expect(doc.series, isNotEmpty);
+    for (final series in doc.series) {
+      expect(series.chain, isNotEmpty, reason: '\${series.id} has no mechanism');
+      expect(series.chainAr, isNotEmpty, reason: '\${series.id} has no Arabic');
+      expect(series.asOf, isNotEmpty, reason: '\${series.id} is undated');
+      expect(series.history.length, greaterThan(1));
+    }
+    expect(doc.correlations, isNotEmpty);
+    for (final r in doc.correlations) {
+      expect(r.r.abs(), lessThanOrEqualTo(1.0));
+      expect(r.sessions, greaterThan(0));
+    }
+  });
+
+  test('macro coverage is somebody else\'s reporting, credited and linked', () {
+    // The only part of a macro card that is not ours. The reading is a
+    // published figure, the correlation is our arithmetic, the chain is our
+    // reasoning — this is journalism, and it carries the name of whoever wrote
+    // it and a link back to them.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+    final withCoverage =
+        doc.series.where((s) => s.coverage.isNotEmpty).toList();
+
+    expect(
+      withCoverage,
+      isNotEmpty,
+      reason: 'no series carries reporting; check the GDELT queries',
+    );
+
+    for (final series in withCoverage) {
+      for (final item in series.coverage) {
+        expect(item.title.trim(), isNotEmpty);
+        expect(item.url, startsWith('http'), reason: 'unlinked coverage');
+        expect(item.domain.trim(), isNotEmpty, reason: 'uncredited coverage');
+      }
+      // A wire story reaches a dozen sites verbatim; four domains repeating one
+      // sentence is not four sources.
+      final titles = series.coverage.map((c) => c.title.toLowerCase()).toSet();
+      expect(titles.length, series.coverage.length, reason: 'duplicated wire');
+    }
+  });
+
+  test('the filler domains the broad query returned are kept out', () {
+    // A broad Egypt query came back as currency-rate listicles from two
+    // domains. The tight queries avoid them; this proves they stayed avoided.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+    for (final series in doc.series) {
+      for (final item in series.coverage) {
+        expect(
+          ['vetogate.com', 'dostor.org'],
+          isNot(contains(item.domain)),
+          reason: 'rate-table filler reached the macro card',
+        );
+      }
+    }
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {

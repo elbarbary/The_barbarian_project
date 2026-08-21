@@ -308,7 +308,9 @@ $ManifestVersionsCopyWith<$Res> get versions {
 /// @nodoc
 mixin _$ManifestVersions {
 
- int get market; int get companies; int get opportunities;@JsonKey(name: 'cash_or_trash') int get cashOrTrash;
+ int get market; int get companies; int get opportunities;@JsonKey(name: 'cash_or_trash') int get cashOrTrash;/// The world outside the exchange — Suez transits, oil, gold, and Egypt's
+/// own annual line — with the mechanism by which each reaches a share.
+ int get macro;
 /// Create a copy of ManifestVersions
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -321,16 +323,16 @@ $ManifestVersionsCopyWith<ManifestVersions> get copyWith => _$ManifestVersionsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ManifestVersions&&(identical(other.market, market) || other.market == market)&&(identical(other.companies, companies) || other.companies == companies)&&(identical(other.opportunities, opportunities) || other.opportunities == opportunities)&&(identical(other.cashOrTrash, cashOrTrash) || other.cashOrTrash == cashOrTrash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ManifestVersions&&(identical(other.market, market) || other.market == market)&&(identical(other.companies, companies) || other.companies == companies)&&(identical(other.opportunities, opportunities) || other.opportunities == opportunities)&&(identical(other.cashOrTrash, cashOrTrash) || other.cashOrTrash == cashOrTrash)&&(identical(other.macro, macro) || other.macro == macro));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,market,companies,opportunities,cashOrTrash);
+int get hashCode => Object.hash(runtimeType,market,companies,opportunities,cashOrTrash,macro);
 
 @override
 String toString() {
-  return 'ManifestVersions(market: $market, companies: $companies, opportunities: $opportunities, cashOrTrash: $cashOrTrash)';
+  return 'ManifestVersions(market: $market, companies: $companies, opportunities: $opportunities, cashOrTrash: $cashOrTrash, macro: $macro)';
 }
 
 
@@ -341,7 +343,7 @@ abstract mixin class $ManifestVersionsCopyWith<$Res>  {
   factory $ManifestVersionsCopyWith(ManifestVersions value, $Res Function(ManifestVersions) _then) = _$ManifestVersionsCopyWithImpl;
 @useResult
 $Res call({
- int market, int companies, int opportunities,@JsonKey(name: 'cash_or_trash') int cashOrTrash
+ int market, int companies, int opportunities,@JsonKey(name: 'cash_or_trash') int cashOrTrash, int macro
 });
 
 
@@ -358,12 +360,13 @@ class _$ManifestVersionsCopyWithImpl<$Res>
 
 /// Create a copy of ManifestVersions
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? market = null,Object? companies = null,Object? opportunities = null,Object? cashOrTrash = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? market = null,Object? companies = null,Object? opportunities = null,Object? cashOrTrash = null,Object? macro = null,}) {
   return _then(_self.copyWith(
 market: null == market ? _self.market : market // ignore: cast_nullable_to_non_nullable
 as int,companies: null == companies ? _self.companies : companies // ignore: cast_nullable_to_non_nullable
 as int,opportunities: null == opportunities ? _self.opportunities : opportunities // ignore: cast_nullable_to_non_nullable
 as int,cashOrTrash: null == cashOrTrash ? _self.cashOrTrash : cashOrTrash // ignore: cast_nullable_to_non_nullable
+as int,macro: null == macro ? _self.macro : macro // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -449,10 +452,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash,  int macro)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ManifestVersions() when $default != null:
-return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash);case _:
+return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash,_that.macro);case _:
   return orElse();
 
 }
@@ -470,10 +473,10 @@ return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTra
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash,  int macro)  $default,) {final _that = this;
 switch (_that) {
 case _ManifestVersions():
-return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash);case _:
+return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash,_that.macro);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -490,10 +493,10 @@ return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTra
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int market,  int companies,  int opportunities, @JsonKey(name: 'cash_or_trash')  int cashOrTrash,  int macro)?  $default,) {final _that = this;
 switch (_that) {
 case _ManifestVersions() when $default != null:
-return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash);case _:
+return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTrash,_that.macro);case _:
   return null;
 
 }
@@ -505,13 +508,16 @@ return $default(_that.market,_that.companies,_that.opportunities,_that.cashOrTra
 @JsonSerializable()
 
 class _ManifestVersions extends ManifestVersions {
-  const _ManifestVersions({this.market = 0, this.companies = 0, this.opportunities = 0, @JsonKey(name: 'cash_or_trash') this.cashOrTrash = 0}): super._();
+  const _ManifestVersions({this.market = 0, this.companies = 0, this.opportunities = 0, @JsonKey(name: 'cash_or_trash') this.cashOrTrash = 0, this.macro = 0}): super._();
   factory _ManifestVersions.fromJson(Map<String, dynamic> json) => _$ManifestVersionsFromJson(json);
 
 @override@JsonKey() final  int market;
 @override@JsonKey() final  int companies;
 @override@JsonKey() final  int opportunities;
 @override@JsonKey(name: 'cash_or_trash') final  int cashOrTrash;
+/// The world outside the exchange — Suez transits, oil, gold, and Egypt's
+/// own annual line — with the mechanism by which each reaches a share.
+@override@JsonKey() final  int macro;
 
 /// Create a copy of ManifestVersions
 /// with the given fields replaced by the non-null parameter values.
@@ -526,16 +532,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ManifestVersions&&(identical(other.market, market) || other.market == market)&&(identical(other.companies, companies) || other.companies == companies)&&(identical(other.opportunities, opportunities) || other.opportunities == opportunities)&&(identical(other.cashOrTrash, cashOrTrash) || other.cashOrTrash == cashOrTrash));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ManifestVersions&&(identical(other.market, market) || other.market == market)&&(identical(other.companies, companies) || other.companies == companies)&&(identical(other.opportunities, opportunities) || other.opportunities == opportunities)&&(identical(other.cashOrTrash, cashOrTrash) || other.cashOrTrash == cashOrTrash)&&(identical(other.macro, macro) || other.macro == macro));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,market,companies,opportunities,cashOrTrash);
+int get hashCode => Object.hash(runtimeType,market,companies,opportunities,cashOrTrash,macro);
 
 @override
 String toString() {
-  return 'ManifestVersions(market: $market, companies: $companies, opportunities: $opportunities, cashOrTrash: $cashOrTrash)';
+  return 'ManifestVersions(market: $market, companies: $companies, opportunities: $opportunities, cashOrTrash: $cashOrTrash, macro: $macro)';
 }
 
 
@@ -546,7 +552,7 @@ abstract mixin class _$ManifestVersionsCopyWith<$Res> implements $ManifestVersio
   factory _$ManifestVersionsCopyWith(_ManifestVersions value, $Res Function(_ManifestVersions) _then) = __$ManifestVersionsCopyWithImpl;
 @override @useResult
 $Res call({
- int market, int companies, int opportunities,@JsonKey(name: 'cash_or_trash') int cashOrTrash
+ int market, int companies, int opportunities,@JsonKey(name: 'cash_or_trash') int cashOrTrash, int macro
 });
 
 
@@ -563,12 +569,13 @@ class __$ManifestVersionsCopyWithImpl<$Res>
 
 /// Create a copy of ManifestVersions
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? market = null,Object? companies = null,Object? opportunities = null,Object? cashOrTrash = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? market = null,Object? companies = null,Object? opportunities = null,Object? cashOrTrash = null,Object? macro = null,}) {
   return _then(_ManifestVersions(
 market: null == market ? _self.market : market // ignore: cast_nullable_to_non_nullable
 as int,companies: null == companies ? _self.companies : companies // ignore: cast_nullable_to_non_nullable
 as int,opportunities: null == opportunities ? _self.opportunities : opportunities // ignore: cast_nullable_to_non_nullable
 as int,cashOrTrash: null == cashOrTrash ? _self.cashOrTrash : cashOrTrash // ignore: cast_nullable_to_non_nullable
+as int,macro: null == macro ? _self.macro : macro // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

@@ -41,6 +41,8 @@ import subprocess
 import sys
 from datetime import date, datetime, timedelta
 
+import translations
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "disclosures"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "disclosures"
@@ -102,7 +104,6 @@ def _fetch_under_scrapling(url: str) -> str:
     script = r'''
 import sys, json
 from scrapling.fetchers import StealthyFetcher
-import translations
 
 url = sys.argv[1]
 pages = []
@@ -408,15 +409,6 @@ def main() -> int:
 
     learn_names(items)
     classify_all(items)
-    # EGX files in Arabic without exception, so an English reader saw an
-    # English interface wrapped around a title they could not read. The Arabic
-    # title stays; this sits beside it.
-    english = translations.english_for(
-        [i["title"] for i in items], label="filing titles"
-    )
-    for item in items:
-        if (rendered := english.get(item["title"])) is not None:
-            item["title_en"] = rendered
     for item in items:
         item.update(triage(item))
 
@@ -440,9 +432,29 @@ def main() -> int:
     # exactly what happened when this moved off the newspaper labels.
     import filing_types as ft
 
-    stale = [i for i in existing.values() if i.get("event") not in ft.FILING_TYPES]
+    # Two things get re-typed. A filing carrying a type the taxonomy no longer
+    # knows, and a filing that only ever *fell back* to `statement` because the
+    # model was unreachable when it landed. The second is not a stored answer,
+    # it is a stored absence of one — and since the rules cost nothing, every
+    # run is a free chance to place it properly. Adding a rule then reaches the
+    # filings already published, which is the point of adding one.
+    stale = [
+        i for i in existing.values()
+        if i.get("event") not in ft.FILING_TYPES
+        or i.get("by") == "fallback"
+        # A rule that fires outranks a stored model guess, exactly as it does
+        # for a filing arriving now — `classify_all` never asks the model about
+        # a title the rules can place. Without this the ordering holds only for
+        # filings fetched after a rule lands, and the document carries a model
+        # answer the current rules openly disagree with: one filing here sat as
+        # `statement` while `لجنة القيد` had become an auditable pattern.
+        or (
+            (placed := ft.classify_rules(i.get("title", "")))
+            and placed != i.get("event")
+        )
+    ]
     if stale:
-        print(f"   re-typing {len(stale)} filings from an older taxonomy")
+        print(f"   re-typing {len(stale)} filings (new taxonomy or unplaced)")
         classify_all(stale)
 
     # Labels and meanings come from the glossary every run, never from what
@@ -453,6 +465,22 @@ def main() -> int:
         item["event_label_ar"] = ft.label_ar(item.get("event", "statement"))
         item["meaning"] = ft.meaning(item.get("event", "statement"))
         item["meaning_ar"] = ft.meaning_ar(item.get("event", "statement"))
+
+    # English for the whole merged document, not only what this run fetched —
+    # the same rule as the labels above, and for the same reason. Only page one
+    # is fetchable, so a filing is carried by the merge for days after it lands;
+    # translating just the new ten left the older twenty-six Arabic-only for
+    # good, with their English already sitting in the cache, unattached.
+    # A cache hit costs nothing, so re-asking every run is free.
+    # EGX files in Arabic without exception, so an English reader saw an
+    # English interface wrapped around a title they could not read. The Arabic
+    # title stays; this sits beside it.
+    english = translations.english_for(
+        [i["title"] for i in existing.values()], label="filing titles"
+    )
+    for item in existing.values():
+        if (rendered := english.get(item["title"])) is not None:
+            item["title_en"] = rendered
 
     cutoff = (date.today() - timedelta(days=KEEP_DAYS)).isoformat()
     merged = sorted(

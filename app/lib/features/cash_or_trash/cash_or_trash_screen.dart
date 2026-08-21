@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,6 +68,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final async = ref.watch(cashOrTrashProvider);
 
@@ -76,7 +79,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
           children: [
             BSoftIconButton(
               icon: Icons.arrow_back_ios_new_rounded,
-              semanticLabel: 'Back',
+              semanticLabel: l.back,
               onTap: () => Navigator.of(context).maybePop(),
             ),
           ],
@@ -89,8 +92,8 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
           data: (sourced) {
             final index = sourced.value;
             if (index.isEmpty) {
-              return const BEmptyState(
-                title: 'No investigations yet',
+              return BEmptyState(
+                title: l.cotNoneYet,
                 body:
                     'Companies appear here one at a time, after each has been '
                     'read in full.',
@@ -131,7 +134,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                 const SizedBox(height: 18),
                 if (entries.isEmpty)
                   BEmptyState(
-                    title: 'Nothing matches that',
+                    title: l.cotNoMatch,
                     body: _query.isEmpty
                         ? 'No company has landed in that band yet.'
                         : 'No investigated company matches "$_query". Try a '
@@ -267,11 +270,12 @@ class _SortRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return BSegmentedRow(
-      segments: const [
-        BSegment(label: 'By score'),
-        BSegment(label: 'Most recent'),
-        BSegment(label: 'A–Z'),
+      segments: [
+        BSegment(label: l.sortByScore),
+        BSegment(label: l.sortMostRecent),
+        const BSegment(label: 'A–Z'),
       ],
       selectedIndex: _Sort.values.indexOf(sort),
       onChanged: (i) => onChanged(_Sort.values[i]),
@@ -287,6 +291,7 @@ class _VerdictCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final config = ref.watch(appConfigProvider);
 
@@ -371,7 +376,7 @@ class _VerdictCard extends ConsumerWidget {
                 if (entry.hasArticle)
                   Expanded(
                     child: _CardAction(
-                      label: 'Read investigation',
+                      label: l.readInvestigation,
                       filled: true,
                       onTap: () => context.push(
                         Routes.articlePath(
@@ -391,7 +396,7 @@ class _VerdictCard extends ConsumerWidget {
                   ),
                 const SizedBox(width: 10),
                 _CardAction(
-                  label: 'Company',
+                  label: l.companyLabel,
                   onTap: () =>
                       context.push(Routes.companyPath(parentTab, entry.ticker)),
                 ),

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/news.dart';
+import '../../core/models/recency.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
+import '../../core/widgets/news_thumb.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 
@@ -32,6 +36,7 @@ class BNewsBlock extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final feed = ref.watch(newsProvider).value?.value;
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
@@ -42,7 +47,7 @@ class BNewsBlock extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BSectionLabel('The wires'),
+        BSectionLabel(l.theWires),
         const SizedBox(height: 6),
         Text(
           checks.isEmpty
@@ -122,29 +127,43 @@ class _Headline extends StatelessWidget {
                 if (item.weight == 'check') const _CheckTag(),
                 if (item.eventTag case final String tag) _EventTag(label: tag),
                 Text(
-                  [outlet, _ago(item.publishedAt)].nonNulls.join(' · '),
+                  [
+                    outlet,
+                    context.newsAge(item.publishedAt),
+                  ].nonNulls.join(' · '),
                   style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                 ),
                 Icon(Icons.north_east_rounded, size: 13, color: c.textFaint),
               ],
             ),
             const SizedBox(height: 8),
-            // Per headline, not per app. The feeds are mixed — Al Borsa files
-            // in Arabic, Arab Finance files in English — and forcing RTL on
-            // all of them laid every English headline out backwards. It is
-            // somebody else's sentence in their own language either way, and
-            // it is not translated or trimmed.
-            Directionality(
-              textDirection: isArabic(item.headlineFor(arabic))
-                  ? TextDirection.rtl
-                  : TextDirection.ltr,
-              child: Text(
-                item.headlineFor(arabic),
-                style: BarbarianType.bodyL.copyWith(
-                  color: c.textPrimary,
-                  height: 1.5,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Collapses itself, gap included, when the outlet published no
+                // picture or the download fails — so this reads as an ordinary
+                // headline row rather than one with a hole beside it.
+                BNewsThumb(url: item.image, size: 62),
+                Expanded(
+                  // Per headline, not per app. The feeds are mixed — Al Borsa
+                  // files in Arabic, Arab Finance files in English — and
+                  // forcing RTL on all of them laid every English headline out
+                  // backwards. It is somebody else's sentence in their own
+                  // language either way, and it is not translated or trimmed.
+                  child: Directionality(
+                    textDirection: isArabic(item.headlineFor(arabic))
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: Text(
+                      item.headlineFor(arabic),
+                      style: BarbarianType.bodyL.copyWith(
+                        color: c.textPrimary,
+                        height: 1.5,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             if (item.because.isNotEmpty) ...[
               const SizedBox(height: 10),
@@ -167,14 +186,6 @@ class _Headline extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  static String? _ago(DateTime? at) {
-    if (at == null) return null;
-    final delta = DateTime.now().toUtc().difference(at.toUtc());
-    if (delta.inMinutes < 60) return '${delta.inMinutes}m ago';
-    if (delta.inHours < 24) return '${delta.inHours}h ago';
-    return '${delta.inDays}d ago';
   }
 }
 

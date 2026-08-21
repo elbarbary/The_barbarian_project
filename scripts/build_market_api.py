@@ -68,6 +68,10 @@ TICKER = re.compile(r"^[A-Z]{3,6}$")
 
 
 
+# How many months each of Mubasher's interim columns covers, which is what
+# decides whether a period is filed as annual or quarterly downstream.
+QUARTER_MONTHS = {"Q1": 3, "Q2": 3, "Q3": 3, "Q4": 3, "H1": 6, "9M": 9}
+
 def _filed_financials(
     filings_store: pathlib.Path | None = None,
     statements_store: pathlib.Path | None = None,
@@ -179,6 +183,31 @@ def _filed_financials(
                 months=12,
             )
 
+    # Mubasher's quarterly columns, which `bucket` sorts by their length.
+    # Kept separate from the years above because the two are scaled by
+    # different rules: within one page a quarter can be stated in whole pounds
+    # while its own annual column is in thousands, so each quarter is scaled
+    # against the year it belongs to and dropped if that cannot be settled.
+    for ticker, periods in load(statements_store).get("quarterly", {}).items():
+        for label, fields in periods.items():
+            part, _, year = label.partition(" ")
+            months = QUARTER_MONTHS.get(part)
+            if not months or not year:
+                continue
+            offer(
+                ticker,
+                label,
+                {k: v for k, v in fields.items() if v is not None},
+                basis=None,
+                source=(
+                    "https://english.mubasher.info/markets/EGX/stocks/"
+                    f"{ticker}/financial-statements"
+                ),
+                filed_on=None,
+                end=None,
+                months=months,
+            )
+
     for record in load(filings_store).get("filings", {}).values():
         ticker = record.get("ticker")
         net = record.get("net_profit_egp")
@@ -285,6 +314,11 @@ def history_union() -> dict[str, list[dict]]:
     }
 
 
+# One year of sessions. The company screen offers 1M/3M/1Y and this fills the
+# longest of them; 5Y and MAX come from the split document, not from here.
+KEEP_SESSIONS = 260
+
+
 def clean(value):
     """Scanner nulls and NaNs both mean 'not reported'."""
     if value is None:
@@ -378,7 +412,16 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
             skipped += 1
             continue
 
-        history = union.get(ticker, [])
+        # Capped, because these files ship inside the app binary. Mubasher
+        # publishes twenty years a share — El Sewedy runs to 4,859 sessions
+        # from 2006 — and 282 companies of that is fourteen megabytes of JSON
+        # in the bundle. §19: "Do not make these files unnecessarily huge. If
+        # price history becomes large, split it."
+        #
+        # A year is what the company screen needs to fill its longest offered
+        # window, and the full series stays in `data-source/prices` for the
+        # deeper document to be built from.
+        history = union.get(ticker, [])[-KEEP_SESSIONS:]
 
         # The previous close is the last bar *before* the session being
         # published — found by date, not by position.

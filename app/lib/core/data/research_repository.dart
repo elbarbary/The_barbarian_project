@@ -14,7 +14,7 @@ class ResearchRepository {
 
   final StaticApi _api;
 
-  /// Today's Opportunity Scanner report (spec §7).
+  /// Today's Scanner report (spec §7).
   Stream<Sourced<OpportunityReport>> getOpportunityScanner() =>
       _parsed('opportunities/latest.json', 'opportunities', OpportunityReport.fromJson);
 

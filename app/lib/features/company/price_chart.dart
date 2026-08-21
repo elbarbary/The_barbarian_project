@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
+
 import '../../core/models/company.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/text.dart';
@@ -24,6 +26,31 @@ enum PriceRange {
     if (n == null || points.length <= n) return points;
     return points.sublist(points.length - n);
   }
+
+  /// Whether this series can actually fill this window.
+  ///
+  /// `apply` returns everything it holds when a window is longer than the
+  /// series, which meant every company offered 1M, 3M, 1Y, 5Y and MAX and drew
+  /// **the same line** for the last three. Most EGX listings here hold between
+  /// fifty and a hundred sessions; sixteen hold a year, and none hold five.
+  ///
+  /// The test is filling the window, not merely beating the one below it. A
+  /// series of 254 sessions technically shows four more under "5Y" than under
+  /// "1Y", and labelling that button 5Y would be a lie told by four days.
+  bool worthOffering(int held) {
+    final n = sessions;
+    if (n != null) return held >= n;
+    // MAX only when it is meaningfully more than the longest window that was
+    // offered — otherwise it is the longest fixed window wearing another name.
+    final fixed = PriceRange.values
+        .where((r) => r.sessions != null && held >= r.sessions!)
+        .map((r) => r.sessions!);
+    if (fixed.isEmpty) return held >= 2;
+    return held >= fixed.reduce((a, b) => a > b ? a : b) * 1.1;
+  }
+
+  static List<PriceRange> offeredFor(int held) =>
+      PriceRange.values.where((r) => r.worthOffering(held)).toList();
 }
 
 /// The end-of-day price line.
@@ -52,6 +79,7 @@ class BPriceChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     if (points.length < 2) {
@@ -104,9 +132,9 @@ class BPriceChart extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           children: [
-            _Bound(label: 'Low', value: low),
+            _Bound(label: l.priceLow, value: low),
             const Spacer(),
-            _Bound(label: 'High', value: high, alignEnd: true),
+            _Bound(label: l.priceHigh, value: high, alignEnd: true),
           ],
         ),
       ],
@@ -124,6 +152,7 @@ class _SessionRange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final low = session.low!;
     final high = session.high!;
@@ -196,10 +225,10 @@ class _SessionRange extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _Bound(label: 'Low', value: low),
-              _Bound(label: 'Open', value: open),
-              _Bound(label: 'Close', value: close),
-              _Bound(label: 'High', value: high, alignEnd: true),
+              _Bound(label: l.priceLow, value: low),
+              _Bound(label: l.priceOpen, value: open),
+              _Bound(label: l.priceClose, value: close),
+              _Bound(label: l.priceHigh, value: high, alignEnd: true),
             ],
           ),
         ],

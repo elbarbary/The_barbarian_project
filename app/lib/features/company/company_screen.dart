@@ -527,7 +527,7 @@ class _Overview extends ConsumerWidget {
           const SizedBox(height: 22),
         ],
         if (size.isNotEmpty) ...[
-          const BSectionLabel('Company'),
+          BSectionLabel(l.companyLabel),
           _FactCard(rows: size),
         ],
         if (session.isEmpty && momentum.isEmpty && size.isEmpty)
@@ -682,7 +682,7 @@ class _Financials extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: BStatTile(
-                  label: 'Owners\' equity',
+                  label: l.ownersEquity,
                   value: formatMillions(latest.equity),
                   unit: 'm',
                 ),
@@ -887,13 +887,22 @@ class _Price extends ConsumerWidget {
               child: BPriceChart(points: windowed, session: session),
             ),
             const SizedBox(height: 14),
-            BSegmentedRow(
-              segments: [
-                for (final r in PriceRange.values) BSegment(label: r.label),
-              ],
-              selectedIndex: PriceRange.values.indexOf(range),
-              onChanged: (i) => onRange(PriceRange.values[i]),
-            ),
+            // Only the windows this company's series can actually fill. Every
+            // company used to offer all five and draw the same line for the
+            // last three, because most EGX listings here hold a few months
+            // rather than five years.
+            if (PriceRange.offeredFor(all.length) case final offered
+                when offered.length > 1)
+              BSegmentedRow(
+                segments: [for (final r in offered) BSegment(label: r.label)],
+                // The selection can outlive the company it was made on, so a
+                // range this series cannot fill falls back to the longest it
+                // can rather than throwing on an index of -1.
+                selectedIndex: offered.contains(range)
+                    ? offered.indexOf(range)
+                    : offered.length - 1,
+                onChanged: (i) => onRange(offered[i]),
+              ),
             const SizedBox(height: 14),
             // Dated by the chart's own last point, not by the session the rest
             // of the screen is showing. This chart is end-of-day and the header

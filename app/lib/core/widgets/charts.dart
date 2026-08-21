@@ -6,6 +6,16 @@ import '../theme/barbarian_theme.dart';
 ///
 /// Stroke only — no fill — at 1.6pt, coloured by direction, exactly as the
 /// canvas draws it.
+///
+/// **Long series are averaged down to the width available.** Suez traffic is
+/// 400 daily readings and a card gives it 76 points of width, so every pixel
+/// was carrying five sessions and the result read as a band of noise rather
+/// than a trend — a chart that is technically the data and tells you nothing.
+/// A price series capped at six years has the same problem.
+///
+/// Averaging rather than sampling every nth point, because sampling would let
+/// a single unusual session stand in for a fortnight while averaging lets it
+/// register at its real weight.
 class BSparkline extends StatelessWidget {
   const BSparkline({
     required this.values,
@@ -17,6 +27,35 @@ class BSparkline extends StatelessWidget {
   final List<double> values;
   final double height;
   final Color? color;
+
+  /// Two points of width per drawn point, so a stroke has room to be a line
+  /// rather than a smear. Below this the chart is denser than the screen.
+  static const double _pointsPerSample = 2.0;
+
+  /// The series reduced to what the given width can actually show.
+  ///
+  /// The first and last readings always survive: they are the ones the card
+  /// prints beside the chart, and a shape whose ends disagree with the numbers
+  /// next to it is worse than no shape.
+  static List<double> downsample(List<double> values, double width) {
+    final room = (width / _pointsPerSample).floor();
+    if (room < 2 || values.length <= room) return values;
+
+    final bucket = values.length / room;
+    final out = <double>[];
+    for (var i = 0; i < room; i++) {
+      final from = (i * bucket).floor();
+      final to = ((i + 1) * bucket).ceil().clamp(from + 1, values.length);
+      var sum = 0.0;
+      for (var j = from; j < to; j++) {
+        sum += values[j];
+      }
+      out.add(sum / (to - from));
+    }
+    out[0] = values.first;
+    out[out.length - 1] = values.last;
+    return out;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +74,19 @@ class BSparkline extends StatelessWidget {
         height: height,
         width: double.infinity,
         child: RepaintBoundary(
-          child: CustomPaint(
-            painter: _AreaPainter(
-              values: values,
-              line: color ?? (rising ? c.up : c.down),
-              fillTop: null,
-              fillBottom: null,
-              strokeWidth: 1.6,
-              padding: 3,
+          child: LayoutBuilder(
+            builder: (context, constraints) => CustomPaint(
+              painter: _AreaPainter(
+                values: downsample(
+                  values,
+                  constraints.maxWidth.isFinite ? constraints.maxWidth : 120,
+                ),
+                line: color ?? (rising ? c.up : c.down),
+                fillTop: null,
+                fillBottom: null,
+                strokeWidth: 1.6,
+                padding: 3,
+              ),
             ),
           ),
         ),

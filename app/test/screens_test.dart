@@ -139,24 +139,46 @@ void main() {
     });
   });
 
-  group('Opportunity Scanner', () {
-    Finder loaded() => find.text('Opportunity Scanner');
+  group('Scanner', () {
+    Finder loaded() => find.text('Scanner');
 
-    testWidgets('offers all three buckets including rejected', (tester) async {
+    testWidgets('offers all three buckets including the ones that failed', (
+      tester,
+    ) async {
       await pumpScreen(
         tester,
         const OpportunityScreen(parentTab: BNavTab.home),
         until: loaded(),
       );
 
-      expect(find.textContaining('Qualified'), findsWidgets);
-      expect(find.textContaining('Watch'), findsWidgets);
-      expect(find.textContaining('Rejected'), findsWidgets);
+      expect(find.textContaining('Cleared all'), findsWidgets);
+      expect(find.textContaining('Partly'), findsWidgets);
+      expect(find.textContaining('Not cleared'), findsWidgets);
       expect(
         find.textContaining('Rule log'),
         findsWidgets,
         reason: 'the published outcome record is never hidden',
       );
+    });
+
+    testWidgets('never calls a share "qualified"', (tester) async {
+      // The founder pulled the word on 21 Aug 2026. "Qualified" reads as *this
+      // share qualifies* — a recommendation from a publisher with no FRA
+      // licence. What was measured is that the name cleared the published
+      // rules, which is a fact about the rules and not a view on the company.
+      await pumpScreen(
+        tester,
+        const OpportunityScreen(parentTab: BNavTab.home),
+        until: loaded(),
+      );
+
+      for (final word in ['Qualified', 'qualified', 'Opportunity']) {
+        expect(
+          find.textContaining(word),
+          findsNothing,
+          reason: 'the scanner must not say "$word"',
+        );
+      }
     });
 
     testWidgets('is never renamed "Daily Insights"', (tester) async {
@@ -412,7 +434,7 @@ void main() {
       ('You', const YouScreen()),
       ('The Pit', const PitScreen(parentTab: BNavTab.home)),
       ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
-      ('Opportunity Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
+      ('Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
       ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
     ]) {
       testWidgets('$name builds in dark mode', (tester) async {

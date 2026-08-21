@@ -30,6 +30,7 @@ _ManifestVersions _$ManifestVersionsFromJson(Map<String, dynamic> json) =>
       companies: (json['companies'] as num?)?.toInt() ?? 0,
       opportunities: (json['opportunities'] as num?)?.toInt() ?? 0,
       cashOrTrash: (json['cash_or_trash'] as num?)?.toInt() ?? 0,
+      macro: (json['macro'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$ManifestVersionsToJson(_ManifestVersions instance) =>
@@ -38,4 +39,5 @@ Map<String, dynamic> _$ManifestVersionsToJson(_ManifestVersions instance) =>
       'companies': instance.companies,
       'opportunities': instance.opportunities,
       'cash_or_trash': instance.cashOrTrash,
+      'macro': instance.macro,
     };

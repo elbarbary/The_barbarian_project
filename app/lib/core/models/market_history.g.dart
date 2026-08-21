@@ -30,6 +30,11 @@ _MarketSession _$MarketSessionFromJson(Map<String, dynamic> json) =>
             (k, e) => MapEntry(k, (e as num).toDouble()),
           ) ??
           const <String, double>{},
+      metals:
+          (json['metals'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, (e as num).toDouble()),
+          ) ??
+          const <String, double>{},
       breadth: json['breadth'] == null
           ? null
           : MarketBreadth.fromJson(json['breadth'] as Map<String, dynamic>),
@@ -39,6 +44,7 @@ Map<String, dynamic> _$MarketSessionToJson(_MarketSession instance) =>
     <String, dynamic>{
       'date': instance.date,
       'indices': instance.indices,
+      'metals': instance.metals,
       'breadth': instance.breadth,
     };
 
@@ -48,6 +54,7 @@ _MarketBreadth _$MarketBreadthFromJson(Map<String, dynamic> json) =>
       down: (json['down'] as num?)?.toInt() ?? 0,
       flat: (json['flat'] as num?)?.toInt() ?? 0,
       counted: (json['counted'] as num?)?.toInt() ?? 0,
+      basis: json['basis'] as String? ?? 'session',
     );
 
 Map<String, dynamic> _$MarketBreadthToJson(_MarketBreadth instance) =>
@@ -56,4 +63,5 @@ Map<String, dynamic> _$MarketBreadthToJson(_MarketBreadth instance) =>
       'down': instance.down,
       'flat': instance.flat,
       'counted': instance.counted,
+      'basis': instance.basis,
     };

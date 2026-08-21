@@ -29,6 +29,12 @@ import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SOURCE = REPO / "public" / "egx-insights.html"
+REPORT_URL = "https://thebarbarianproject.com/egx-insights.html"
+
+# `<a class="insight-source" href="…">Label <span aria-hidden>↗</span></a>`
+INSIGHT_SOURCE = re.compile(
+    r'<a class="insight-source"[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.S
+)
 OUT = REPO / "public" / "data" / "v1" / "opportunities"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "opportunities"
 
@@ -64,6 +70,31 @@ def text(raw: str) -> str:
     the app as literal "Edible oils &amp; soap" and "five-session &gt;20%".
     """
     return " ".join(html_lib.unescape(re.sub(r"<[^>]+>", " ", raw)).split())
+
+
+def sources_in(block: str) -> list[dict]:
+    """The report's own citations for one card, as `{name, url}`.
+
+    The field note links the filings and quote pages it read — "HDBK H1 filing",
+    "Split-adjusted quote context" — and the app dropped every one of them, so
+    a card asserted "H1 consolidated profit rose 62.5%" with nothing a reader
+    could check it against. That is the weakest possible footing for a
+    statement about a named issuer, and the fix needed no new data: the links
+    were already in the page.
+
+    Only what the report actually cites. Nothing is inferred, and a name is
+    never attached to a filing that was not linked beside it — a wrong citation
+    is worse than none, because it looks verified.
+    """
+    out = []
+    for url, raw in INSIGHT_SOURCE.findall(block):
+        # The trailing "↗" is an `aria-hidden` decoration for sighted readers of
+        # the web page. It is not part of the source's name and would be read
+        # aloud as "north east arrow" by a screen reader in the app.
+        name = text(re.sub(r'<span aria-hidden="true">.*?</span>', "", raw, flags=re.S))
+        if name:
+            out.append({"name": name, "url": url})
+    return out
 
 
 BANNED = ("hard stop", "exit below", "buyer price", "review session",
@@ -345,11 +376,40 @@ DESCRIPTIVE_SHARES = re.compile(
 BADGE_BANNED = (
     re.compile(r"\bbase required\b", re.I),
     re.compile(r"\bbooked\b", re.I),
+    # "armed" is a position state — a trade set up and waiting to trigger.
+    # It rode in on "Qualified · armed" because only "booked" was listed,
+    # and the two words do the same job.
+    re.compile(r"\barmed\b", re.I),
     re.compile(r"\brequired\b", re.I),
     re.compile(r"\bentry\b", re.I),
     re.compile(r"\btrim\b", re.I),
     re.compile(r"\badd(ing)?\b", re.I),
 )
+
+
+# The report's verdict vocabulary, restated as the measurement behind it.
+#
+# "Qualified" is the report's word and it is the wrong word here. On the website
+# it is shorthand between people reading a trading note. In a consumer app from
+# a publisher holding no FRA licence it reads as *this share qualifies* — a
+# recommendation, the one thing this product must never make. What the screen
+# actually did is countable and dull: the name met every check in a published
+# rubric. Saying that gives up no information and claims nothing.
+#
+# Bucketing still keys off the report's own wording, so this changes only what a
+# reader sees, never how a name is sorted.
+DISPLAY_BADGE = {
+    "Qualified": "Cleared every rule",
+    "Model trade closed": "Cleared every rule",
+    # Written once by an earlier pass of this rename; kept so a re-migration of
+    # already-published history is idempotent rather than leaving two spellings.
+    "Met every check": "Cleared every rule",
+}
+
+
+def display_badge(label: str | None) -> str | None:
+    """The reader-facing badge for a bucket label."""
+    return DISPLAY_BADGE.get(label, label) if label else label
 
 
 def clean_badge(value: str | None, fallback: str = "Watch only") -> str:
@@ -527,6 +587,7 @@ def signal_cards(html: str) -> dict[str, dict]:
         )
 
         cards[ticker.group(1)] = {
+            "sources": sources_in(block),
             "rank": int(rank.group(1)) if rank else None,
             "score": int(score.group(1)) if score else None,
             "max_score": int(score.group(2)) if score else None,
@@ -772,6 +833,18 @@ def parse(html: str) -> dict:
     # and they do not hold the same names. Building the watch list from the
     # scorecard alone dropped AMOC — the report's number one, and the subject of
     # its own headline — out of the app completely.
+    # Every entry cites the note it was read out of, on top of whatever
+    # specific filings that note linked. Without this an entry that the report
+    # happened not to link carried no provenance at all, which reads as an
+    # assertion of our own rather than a reading of a dated, published
+    # document. The report is the honest minimum: it is where the claim
+    # actually came from, and it is checkable.
+    def with_report(specific: list[dict] | None) -> list[dict]:
+        cited = list(specific or [])
+        stamp = f"EGX field note, {report_date}" if report_date else "EGX field note"
+        cited.append({"name": stamp, "url": REPORT_URL})
+        return cited
+
     watch = []
     for ticker in sorted(cards, key=lambda t: cards[t]["rank"] or 99):
         card, extra = cards[ticker], scored.get(ticker, {})
@@ -783,8 +856,10 @@ def parse(html: str) -> dict:
                 "ticker": ticker,
                 "rank": card.get("rank"),
                 "status": BUCKETS.get(label, "watching"),
-                "status_label": label,
-                "state": card.get("state"),
+                "status_label": display_badge(label),
+                # Same filter as the badge. This was passed through raw and
+                # carried "Qualified · booked" into the app untouched.
+                "state": display_badge(clean_badge(card.get("state"), fallback="")) or None,
                 "score": card.get("score") or extra.get("score") or 0,
                 "max_score": card.get("max_score") or extra.get("max_score") or 13,
                 "seen_at": extra.get("seen_at"),
@@ -800,6 +875,7 @@ def parse(html: str) -> dict:
                 # a card that silently lost its reasoning.
                 "position_withheld": ticker in position_cards,
                 "tape": card.get("tape"),
+                "sources": with_report(card.get("sources")),
             }
         )
     for ticker in order:
@@ -812,7 +888,7 @@ def parse(html: str) -> dict:
                 "ticker": ticker,
                 "rank": None,
                 "status": BUCKETS.get(label, "watching"),
-                "status_label": label,
+                "status_label": display_badge(label),
                 "state": None,
                 "score": extra["score"] or 0,
                 "max_score": extra["max_score"] or 13,
@@ -823,6 +899,7 @@ def parse(html: str) -> dict:
                 "research": [],
                 "action": None,
                 "tape": None,
+                "sources": with_report(None),
             }
         )
 
@@ -859,7 +936,7 @@ def parse(html: str) -> dict:
                 "ticker": primary,
                 "label": raw_name if len(names) > 1 else None,
                 "status": BUCKETS.get(label, "rejected"),
-                "status_label": label,
+                "status_label": display_badge(label),
                 "return_percent": text(ret.group(1)).replace("−", "-") if ret else None,
                 "direction": "up" if "outcome-up" in cls else "down",
                 "note": sanitize(text(note.group(1))) if note else None,

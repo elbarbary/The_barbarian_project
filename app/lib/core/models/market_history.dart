@@ -35,6 +35,17 @@ abstract class MarketHistory with _$MarketHistory {
       if (session.indices[indexId] case final double level) level,
   ];
 
+  /// Spot closes for a metal — `XAU` or `XAG` — in dollars an ounce.
+  ///
+  /// The rates document quotes gold as a headline with nothing behind it, so
+  /// the card could say what an ounce costs and never what it had been doing.
+  /// Sessions before this was collected simply have no entry, which is why the
+  /// series is shorter than the index one rather than padded to match it.
+  List<double> metalOf(String metalId) => [
+    for (final session in sessions)
+      if (session.metals[metalId] case final double price) price,
+  ];
+
   MarketSession? get latest => sessions.isEmpty ? null : sessions.last;
 }
 
@@ -43,6 +54,12 @@ abstract class MarketSession with _$MarketSession {
   const factory MarketSession({
     required String date,
     @Default(<String, double>{}) Map<String, double> indices,
+
+    /// Spot gold and silver in dollars an ounce, keyed `XAU` and `XAG`. Quoted
+    /// in dollars because that is the market they trade in; the rates document
+    /// does the conversion to pounds a gram, and doing it here would need a
+    /// matching history of the pound that we do not hold.
+    @Default(<String, double>{}) Map<String, double> metals,
     MarketBreadth? breadth,
   }) = _MarketSession;
 
@@ -65,6 +82,19 @@ abstract class MarketBreadth with _$MarketBreadth {
     @Default(0) int down,
     @Default(0) int flat,
     @Default(0) int counted,
+
+    /// How this session was counted. `session` means the live market snapshot,
+    /// which reads every listed share's published change — 282 of them, where
+    /// a change of exactly zero is a real "did not move". `closes` means it was
+    /// reconstructed by comparing stored per-company closes, which can only see
+    /// shares whose history covers both days and so counts around 230.
+    ///
+    /// Carried rather than hidden. Two counts of the *same* session by
+    /// different methods is the bug that put 107 rose beside 57 rose on two
+    /// screens; two adjacent sessions counted over slightly different
+    /// populations, each carrying its own [counted] and saying which method
+    /// produced it, is simply the data that exists.
+    @Default('session') String basis,
   }) = _MarketBreadth;
 
   const MarketBreadth._();
@@ -76,4 +106,7 @@ abstract class MarketBreadth with _$MarketBreadth {
 
   /// Which way the session leaned, without saying whether that is good.
   bool get roseMore => up > down;
+
+  /// True when this row was reconstructed rather than counted live.
+  bool get isReconstructed => basis == 'closes';
 }

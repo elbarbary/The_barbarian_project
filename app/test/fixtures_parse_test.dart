@@ -6,6 +6,8 @@ import 'package:barbarian/core/models/company.dart';
 import 'package:barbarian/core/models/manifest.dart';
 import 'package:barbarian/core/models/market_snapshot.dart';
 import 'package:barbarian/core/models/opportunity.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Spec §52: the shipped fixtures must parse into the shipped models.
@@ -233,7 +235,101 @@ void main() {
     });
   });
 
+  group('§13 quarterly financials', () {
+    test('most of the market now files quarters, not one company', () {
+      // §13 asks the Financials tab to "support annual periods and quarterly
+      // periods". Annual covered 228 of 282 and quarterly covered exactly one,
+      // because the parser deliberately took only years: within a single page
+      // El Sewedy's Q1 2024 states its assets in whole pounds while its annual
+      // 2024 states the same balance sheet in thousands.
+      final dir = Directory('assets/fixtures/companies');
+      if (!dir.existsSync()) return;
+
+      var withQuarters = 0;
+      var total = 0;
+      for (final file in dir.listSync()) {
+        if (file is! File || !file.path.endsWith('.json')) continue;
+        total++;
+        final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
+        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty) withQuarters++;
+      }
+
+      expect(total, greaterThan(0));
+      expect(withQuarters, greaterThan(total ~/ 2));
+    });
+
+    test('a quarter sits in the same units as its own year', () {
+      // The 1000x trap. A quarter scaled by the wrong factor is not obviously
+      // broken — it is a plausible number that is wrong by a thousand — and a
+      // year-end quarter should land on its own annual balance sheet.
+      final dir = Directory('assets/fixtures/companies');
+      if (!dir.existsSync()) return;
+
+      for (final file in dir.listSync()) {
+        if (file is! File || !file.path.endsWith('.json')) continue;
+        final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
+        final annual = ((fin['annual'] as List?) ?? const []).cast<Map<String, dynamic>>();
+        final quarterly = ((fin['quarterly'] as List?) ?? const []).cast<Map<String, dynamic>>();
+        if (annual.isEmpty || quarterly.isEmpty) continue;
+
+        final years = {
+          for (final row in annual)
+            '${row['period']}'.replaceAll(RegExp(r'[^0-9]'), ''):
+                (row['assets'] as num?)?.toDouble(),
+        };
+
+        for (final quarter in quarterly) {
+          final assets = (quarter['assets'] as num?)?.toDouble();
+          final year = '${quarter['period']}'.replaceAll(RegExp(r'[^0-9]'), '');
+          final annualAssets = years[year];
+          if (assets == null || annualAssets == null || annualAssets <= 0) continue;
+          final ratio = assets / annualAssets;
+          expect(
+            ratio,
+            inInclusiveRange(0.1, 10.0),
+            reason:
+                '${doc['ticker']} ${quarter['period']}: assets $assets against '
+                'a year end of $annualAssets — that is a unit error, not a company',
+          );
+        }
+      }
+    });
+  });
+
   group('opportunity scanner', () {
+    test('§50 every scanned name says where its reading came from', () {
+      // Entries assert things about named issuers — "H1 consolidated profit
+      // rose 62.5%", "RV20 remained only 1.63x". Every one of them shipped
+      // with an empty `sources` list, so a reader had nothing to check the
+      // claim against and no way to tell a filing from an inference. The
+      // report already linked its filings; the builder was dropping them.
+      final report = OpportunityReport.fromJson(
+        _read('opportunities/latest.json'),
+      );
+      final scanned = [
+        ...report.qualified,
+        ...report.watching,
+        ...report.rejected,
+      ];
+      expect(scanned, isNotEmpty);
+
+      for (final entry in scanned) {
+        expect(
+          entry.sources,
+          isNotEmpty,
+          reason: '${entry.ticker} makes claims with nothing to check them against',
+        );
+        // A citation with no destination is decoration.
+        expect(
+          entry.sources.every((s) => s.name.trim().isNotEmpty),
+          isTrue,
+          reason: '${entry.ticker} carries an unnamed source',
+        );
+      }
+    });
+
     test('parses the real published report', () {
       final report = OpportunityReport.fromJson(
         _read('opportunities/latest.json'),
@@ -327,13 +423,29 @@ void main() {
       expect(negative.scoreFraction, 0.0);
     });
 
-    test('the rubric breakdown is complete and ordered', () {
+    test('the rubric breakdown is complete and ordered', () async {
+      // Takes the localisations now: these nine lines are the rubric itself,
+      // and they were the largest block of text in the app that stayed English
+      // whatever language the reader had chosen.
+      final en = await AppLocalizations.delegate.load(const Locale('en'));
       const breakdownSource = ScanScores();
-      final breakdown = breakdownSource.breakdown;
+      final breakdown = breakdownSource.breakdown(en);
 
       expect(breakdown, hasLength(9));
       expect(breakdown.first.label, 'Fresh disclosure');
       expect(breakdown.last.label, 'Risk penalty');
+    });
+
+    test('the rubric reads in Arabic too', () async {
+      final ar = await AppLocalizations.delegate.load(const Locale('ar'));
+      const breakdown = ScanScores();
+      for (final line in breakdown.breakdown(ar)) {
+        expect(
+          RegExp(r'[\u0600-\u06FF]').hasMatch(line.label),
+          isTrue,
+          reason: '"${line.label}" is still English for an Arabic reader',
+        );
+      }
     });
 
     test('carries no entry, target, stop or expected-return field', () {

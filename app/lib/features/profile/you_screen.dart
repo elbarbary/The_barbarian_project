@@ -70,7 +70,7 @@ class YouScreen extends ConsumerWidget {
           children: [
             Expanded(
               child: BStatTile(
-                label: 'Watchlist',
+                label: l.watchlist,
                 labelAbove: false,
                 value: '${watchlist.length}',
               ),
@@ -78,7 +78,7 @@ class YouScreen extends ConsumerWidget {
             const SizedBox(width: 12),
             Expanded(
               child: BStatTile(
-                label: 'Saved',
+                label: l.saved,
                 labelAbove: false,
                 value: '${bookmarks.length}',
               ),
@@ -211,7 +211,7 @@ class YouScreen extends ConsumerWidget {
                     value: '${directory?.count ?? 0} in the directory',
                   ),
                   _Fact(
-                    label: 'Prices',
+                    label: l.prices,
                     // Reads the feed's own delay rather than restating a number
                     // that could drift from what the app is actually serving.
                     value: switch (ref.watch(priceFreshnessProvider)) {

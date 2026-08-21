@@ -138,7 +138,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.';
 
   @override
-  String get scannerTitle => 'Opportunity Scanner';
+  String get scannerTitle => 'Scanner';
 
   @override
   String get scannerSubtitle =>
@@ -161,10 +161,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scannerFoundToday => 'What the published rule found today';
 
   @override
-  String get countQualified => 'Qualified';
+  String get countQualified => 'Cleared every rule';
 
   @override
-  String get countWatching => 'Watching';
+  String get countWatching => 'Cleared some rules';
 
   @override
   String get countOutcomes => 'Outcomes';
@@ -438,7 +438,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readFullInvestigation => 'Read the full investigation';
 
   @override
-  String get scannerHistory => 'Opportunity Scanner history';
+  String get scannerHistory => 'Scanner history';
 
   @override
   String get studyLabel => 'Six Pillars';
@@ -487,13 +487,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanLogEmpty => 'The rule log is empty';
 
   @override
-  String get scanNothingQualified => 'Nothing qualified today';
+  String get scanNothingQualified => 'Nothing cleared every rule today';
 
   @override
   String get scanNothingWatch => 'Nothing on the watch list';
 
   @override
-  String get scanNothingRejected => 'Nothing was rejected today';
+  String get scanNothingRejected => 'Nothing failed the rules today';
 
   @override
   String get scanEmptyBlurb =>
@@ -540,7 +540,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gateUnresolved => 'Unresolved';
 
   @override
-  String get scannerTitleFull => 'Opportunity Scanner';
+  String get scannerTitleFull => 'Scanner';
 
   @override
   String scanUpdated(String date) {
@@ -549,17 +549,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String scanQualifiedCount(int count) {
-    return 'Qualified $count';
+    return 'Cleared all $count';
   }
 
   @override
   String scanWatchCount(int count) {
-    return 'Watch $count';
+    return 'Partly $count';
   }
 
   @override
   String scanRejectedCount(int count) {
-    return 'Rejected $count';
+    return 'Not cleared $count';
   }
 
   @override
@@ -600,13 +600,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanNoSectorToday => 'No sector read today';
 
   @override
-  String get statusQualified => 'Qualified';
+  String get statusQualified => 'Cleared every rule';
 
   @override
-  String get statusWatching => 'Watching';
+  String get statusWatching => 'Cleared some rules';
 
   @override
-  String get statusRejected => 'Rejected';
+  String get statusRejected => 'Did not clear the rules';
 
   @override
   String get figPrevClose => 'Prev close';
@@ -873,4 +873,157 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ratesIndicesMovedHome => 'Index levels are on Home';
+
+  @override
+  String get ageJustNow => 'just now';
+
+  @override
+  String get ageToday => 'Today';
+
+  @override
+  String get ageYesterday => 'Yesterday';
+
+  @override
+  String ageMinutes(int count) {
+    return '${count}m ago';
+  }
+
+  @override
+  String ageHours(int count) {
+    return '${count}h ago';
+  }
+
+  @override
+  String ageDays(int count) {
+    return '${count}d ago';
+  }
+
+  @override
+  String get unusualVolume => 'Unusual volume';
+
+  @override
+  String get saved => 'Saved';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get mainNavigation => 'Main navigation';
+
+  @override
+  String get priceLow => 'Low';
+
+  @override
+  String get priceHigh => 'High';
+
+  @override
+  String get priceOpen => 'Open';
+
+  @override
+  String get priceClose => 'Close';
+
+  @override
+  String get theWires => 'The wires';
+
+  @override
+  String get sortByScore => 'By score';
+
+  @override
+  String get sortMostRecent => 'Most recent';
+
+  @override
+  String get cotNoneYet => 'No investigations yet';
+
+  @override
+  String get cotNoMatch => 'Nothing matches that';
+
+  @override
+  String get readInvestigation => 'Read investigation';
+
+  @override
+  String get articleFailed => 'Could not open the investigation';
+
+  @override
+  String get exitHeadline =>
+      'Before you buy anything: how the money comes back';
+
+  @override
+  String get exitIfYouPutIn => 'If you put in';
+
+  @override
+  String get exitNumbersBehind => 'The numbers behind it';
+
+  @override
+  String get companyLabel => 'Company';
+
+  @override
+  String get explTraded => 'How much it traded';
+
+  @override
+  String get explFinished => 'Where it finished';
+
+  @override
+  String get explBuyable => 'How much of it can actually be bought';
+
+  @override
+  String get explValued => 'What the whole company is priced at';
+
+  @override
+  String get rubricFreshDisclosure => 'Fresh disclosure';
+
+  @override
+  String get rubricEconomicImportance => 'Economic importance';
+
+  @override
+  String get rubricVolumeConfirmation => 'Volume confirmation';
+
+  @override
+  String get rubricOwnershipCluster => 'Ownership cluster';
+
+  @override
+  String get rubricDatedCatalyst => 'Dated catalyst';
+
+  @override
+  String get rubricAntiChasing => 'Anti-chasing';
+
+  @override
+  String get rubricLimitUpPenalty => 'Limit-up penalty';
+
+  @override
+  String get rubricIssuerDenial => 'Issuer denial';
+
+  @override
+  String get rubricRiskPenalty => 'Risk penalty';
+
+  @override
+  String get ownersEquity => 'Owners\' equity';
+
+  @override
+  String get homeMacro => 'What moves Egypt';
+
+  @override
+  String get macroWhyItMatters => 'Why this reaches your shares';
+
+  @override
+  String get macroMovesWith => 'Moved with the EGX 30';
+
+  @override
+  String get macroWeakLink => 'Barely moves with the EGX 30 day to day';
+
+  @override
+  String get macroEgyptLine => 'Egypt\'s own line';
+
+  @override
+  String macroSessions(int count) {
+    return 'over $count sessions';
+  }
+
+  @override
+  String get macroUnavailable => 'Some sources could not be reached';
+
+  @override
+  String get macroCoverage => 'What is being reported';
+
+  @override
+  String get homeLeadStory => 'Today\'s story';
 }

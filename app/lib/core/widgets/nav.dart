@@ -71,7 +71,7 @@ class BGlassNav extends StatelessWidget {
       child: Semantics(
         container: true,
         explicitChildNodes: true,
-        label: 'Main navigation',
+        label: AppLocalizations.of(context).mainNavigation,
         child: _SmokedBar(active: active, onTap: onTap),
       ),
     );

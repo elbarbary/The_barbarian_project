@@ -131,7 +131,7 @@ void main() {
   });
 
   group('pushed routes', () {
-    testWidgets('Today opens the Opportunity Scanner and comes back', (
+    testWidgets('Today opens the Scanner and comes back', (
       tester,
     ) async {
       await boot(tester);
@@ -139,9 +139,9 @@ void main() {
 
       // The hero is only tappable once the scanner report has landed. Tap the
       // kicker, which is stable; the headline is now the report's own line.
-      await pumpUntil(tester, find.text('OPPORTUNITY SCANNER'));
-      await tester.tap(find.text('OPPORTUNITY SCANNER'));
-      await pumpUntil(tester, find.text('Opportunity Scanner'));
+      await pumpUntil(tester, find.text('SCANNER'));
+      await tester.tap(find.text('SCANNER'));
+      await pumpUntil(tester, find.text('Scanner'));
 
       // Spec: a detail route never moves the app to another tab.
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));

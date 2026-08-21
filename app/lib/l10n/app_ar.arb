@@ -39,15 +39,15 @@
   "languageArabic": "العربية",
   "languageSystem": "لغة الجهاز",
   "legalNotLicensed": "استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة. لا شيء هنا توصية بالتعامل على أي ورقة مالية.",
-  "scannerTitle": "ماسح الفرص",
+  "scannerTitle": "الماسح",
   "scannerSubtitle": "ما وجدته القاعدة المنشورة، وما فاتها",
   "scannerOpen": "افتح الماسح",
   "scannerNotDownloaded": "لم يُنزَّل تقرير الماسح بعد",
   "scannerNotDownloadedBody": "افتح التطبيق ومعك اتصال لتنزيل أحدث تقرير.",
   "scannerNotPublished": "لم يصدر التقرير بعد",
   "scannerFoundToday": "ما وجدته القاعدة المنشورة اليوم",
-  "countQualified": "مستوفية",
-  "countWatching": "تحت المتابعة",
+  "countQualified": "استوفت كل القواعد",
+  "countWatching": "استوفت بعض القواعد",
   "countOutcomes": "النتائج",
   "theSession": "الجلسة",
   "youSubtitle": "لا حاجة لحساب للقراءة",
@@ -132,7 +132,7 @@
   "noStudyYet": "لم تُنشر دراسة عن هذه الشركة بعد",
   "noStudyYetBody": "تُدرس الشركات واحدة تلو الأخرى. عندما تُقرأ هذه، تظهر الدراسة هنا.",
   "readFullInvestigation": "اقرأ الدراسة كاملة",
-  "scannerHistory": "سجل ماسح الفرص",
+  "scannerHistory": "سجل الماسح",
   "studyLabel": "الركائز الست",
   "lastSessions": "آخر {count} جلسة",
   "canIGetOut": "أقدر أخرج؟",
@@ -146,9 +146,9 @@
   "scanWatchingBlurb": "استوفت بعض القواعد دون غيرها. نقص الأدلة وصف لاختبارنا، لا وصف للسهم.",
   "scanRejectedBlurb": "لم تستوفِ القواعد، وسُجّلت لتبقى نتيجة الاختبار قابلة للمراجعة.",
   "scanLogEmpty": "سجل القواعد فارغ",
-  "scanNothingQualified": "لا شيء استوفى اليوم",
+  "scanNothingQualified": "لم تستوفِ أي شركة كل القواعد اليوم",
   "scanNothingWatch": "لا شيء تحت المتابعة",
-  "scanNothingRejected": "لم يُستبعد شيء اليوم",
+  "scanNothingRejected": "لم تسقط أي شركة في القواعد اليوم",
   "scanEmptyBlurb": "القسم الفارغ إجابة حقيقية. الاختبار لا يخفّض معاييره ليملأ شاشة.",
   "coverage": "التغطية",
   "coverageTradable": "قابلة للتداول",
@@ -163,11 +163,11 @@
   "gatePassed": "استوفى",
   "gateFailed": "لم يستوفِ",
   "gateUnresolved": "غير محسوم",
-  "scannerTitleFull": "ماسح الفرص",
+  "scannerTitleFull": "الماسح",
   "scanUpdated": "حُدِّث · {date}",
-  "scanQualifiedCount": "مستوفية {count}",
-  "scanWatchCount": "متابعة {count}",
-  "scanRejectedCount": "مستبعدة {count}",
+  "scanQualifiedCount": "استوفت الكل {count}",
+  "scanWatchCount": "جزئيًا {count}",
+  "scanRejectedCount": "لم تستوفِ {count}",
   "scanLogCount": "سجل القواعد {count}",
   "scanLogBlurb": "ما قالته القاعدة المنشورة، وما فعله السوق بعدها، وما غُيّر في القاعدة لاحقًا. هذه مراجعة للمنهج، وليست لوحة نتائج: لا يوجد مجموع هنا ولن يوجد.",
   "scanLogEmptyBody": "تظهر السجلات هنا مع قياس كل قاعدة منشورة على ما حدث بعدها.",
@@ -179,9 +179,9 @@
   "scanOneCohort": "مجموعة واحدة",
   "scanHowItWasRead": "كيف قُرئت",
   "scanNoSectorToday": "لا قراءة قطاعية اليوم",
-  "statusQualified": "مستوفية",
-  "statusWatching": "تحت المتابعة",
-  "statusRejected": "مستبعدة",
+  "statusQualified": "استوفت كل القواعد",
+  "statusWatching": "استوفت بعض القواعد",
+  "statusRejected": "لم تستوفِ القواعد",
   "figPrevClose": "الإغلاق السابق",
   "figDayHigh": "أعلى سعر",
   "figPreviousClose": "الإغلاق السابق",
@@ -254,5 +254,81 @@
   "ratesMetals": "الذهب والفضة",
   "ratesPound": "الجنيه",
   "ratesPerGram": "للجرام",
-  "ratesIndicesMovedHome": "مستويات المؤشرات في الصفحة الرئيسية"
+  "ratesIndicesMovedHome": "مستويات المؤشرات في الصفحة الرئيسية",
+  "ageJustNow": "الآن",
+  "ageToday": "اليوم",
+  "ageYesterday": "أمس",
+  "ageMinutes": "قبل {count} د",
+  "@ageMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "قبل {count} س",
+  "@ageHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "قبل {count} ي",
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualVolume": "حجم تداول غير معتاد",
+  "saved": "المحفوظات",
+  "loading": "جارٍ التحميل",
+  "mainNavigation": "التنقل الرئيسي",
+  "priceLow": "أدنى",
+  "priceHigh": "أعلى",
+  "priceOpen": "الافتتاح",
+  "priceClose": "الإغلاق",
+  "theWires": "الأخبار",
+  "sortByScore": "حسب الدرجة",
+  "sortMostRecent": "الأحدث",
+  "cotNoneYet": "لا توجد دراسات بعد",
+  "cotNoMatch": "لا شيء يطابق ذلك",
+  "readInvestigation": "اقرأ الدراسة",
+  "articleFailed": "تعذّر فتح الدراسة",
+  "exitHeadline": "قبل أن تشتري أي شيء: كيف تعود النقود",
+  "exitIfYouPutIn": "لو استثمرت",
+  "exitNumbersBehind": "الأرقام وراء ذلك",
+  "companyLabel": "الشركة",
+  "explTraded": "حجم ما جرى تداوله",
+  "explFinished": "أين أغلق",
+  "explBuyable": "كم يمكن شراؤه فعليًا",
+  "explValued": "بكم تُسعَّر الشركة بالكامل",
+  "rubricFreshDisclosure": "إفصاح حديث",
+  "rubricEconomicImportance": "أهمية اقتصادية",
+  "rubricVolumeConfirmation": "تأكيد بحجم التداول",
+  "rubricOwnershipCluster": "تجمّع في الملكية",
+  "rubricDatedCatalyst": "محفّز مؤرَّخ",
+  "rubricAntiChasing": "مانع المطاردة",
+  "rubricLimitUpPenalty": "خصم بلوغ الحد الأقصى",
+  "rubricIssuerDenial": "نفي من الشركة",
+  "rubricRiskPenalty": "خصم المخاطر",
+  "ownersEquity": "حقوق الملكية",
+  "homeMacro": "ما يحرّك مصر",
+  "macroWhyItMatters": "لماذا يصل هذا إلى أسهمك",
+  "macroMovesWith": "تحرّك مع مؤشر EGX 30",
+  "macroWeakLink": "بالكاد يتحرك مع مؤشر EGX 30 يومًا بيوم",
+  "macroEgyptLine": "خط مصر نفسه",
+  "macroSessions": "خلال {count} جلسة",
+  "@macroSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "macroUnavailable": "تعذّر الوصول إلى بعض المصادر",
+  "macroCoverage": "ما يُنشر عن ذلك",
+  "homeLeadStory": "قصة اليوم"
 }

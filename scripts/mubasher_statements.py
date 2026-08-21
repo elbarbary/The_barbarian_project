@@ -16,9 +16,15 @@ number that is wrong by a thousand. So nothing is published on trust: every
 company's figures must survive a scale check against a value we already hold
 and did not get from Mubasher, and anything that fails is dropped and named.
 
-Only annual figures are taken. The quarterly columns carry the same numbers
-with worse unit hygiene, and "what did this company earn last year" is the
-question a reader actually has.
+Quarterly figures are taken too, but they are the reason this file is careful.
+Within one page El Sewedy's `First Quarter` 2024 states 201,164,193,251 of
+assets in whole pounds while its `annual budget` 2024 states 249,527,138.687 of
+the same balance sheet in thousands — the same company, the same year, a
+thousand apart, and nothing on the page saying so. So a quarter is never scaled
+by the company's annual scale. Each quarterly column is scaled against the
+**annual figure for its own year**, which has already survived the market-cap
+test, and any quarter that cannot be brought within a sane distance of its own
+year's balance sheet is dropped rather than published.
 
 This module is pure apart from `fetch_page`, so the parsing and the scale check
 can be tested without the network.
@@ -234,28 +240,126 @@ def balances(fields: dict[str, float]) -> bool:
     return abs((liabilities + equity) - assets) / abs(assets) <= BALANCE_TOLERANCE
 
 
+# Mubasher's quarterly column labels, lower-cased. A period carries one label
+# and values keyed by year, so "First Quarter" holds Q1 for every year on the
+# page rather than a single quarter.
+QUARTERS = {
+    "first quarter": "Q1",
+    "second quarter": "Q2",
+    "third quarter": "Q3",
+    "fourth quarter": "Q4",
+    "half year": "H1",
+    "nine months": "9M",
+}
+
+# How far a quarter's balance sheet may sit from its own year's annual one and
+# still be believed to be in the same unit. Wide, because a balance sheet does
+# move over a year — but nowhere near the factor of 1000 this is separating.
+QUARTER_TO_ANNUAL = (0.15, 8.0)
+
+
+def quarterly_rows(statement: dict) -> dict[str, dict[str, float]]:
+    """`"Q1 2024" -> {field: filed value}`, in whatever unit the page used."""
+    rows: dict[str, dict[str, float]] = {}
+    for period in statement.get("periods") or []:
+        short = QUARTERS.get((period.get("label") or "").strip().lower())
+        if not short:
+            continue
+        for section in period.get("sections") or []:
+            for record in section.get("records") or []:
+                field = LINES.get((record.get("label") or "").strip())
+                if not field:
+                    continue
+                for year, value in (record.get("values") or {}).items():
+                    if value is None:
+                        continue
+                    rows.setdefault(f"{short} {year}", {})[field] = float(value)
+    return rows
+
+
+def scale_quarter(
+    fields: dict[str, float], annual_millions: dict[str, float] | None
+) -> int | None:
+    """The multiplier for one quarter, judged against its own year's annual.
+
+    The annual figures have already been scaled and checked against market
+    capitalisation, so they are the firmest thing on the page to measure a
+    quarter against — much firmer than market cap, which has to tolerate banks
+    and loss-making years and so cannot resolve a factor of 1000 on its own.
+    """
+    if not annual_millions:
+        return None
+    reference = annual_millions.get("assets")
+    quarter = fields.get("assets")
+    if not reference or reference <= 0 or not quarter or quarter <= 0:
+        return None
+    survivors = [
+        candidate for candidate in (1, 1000)
+        if _within((quarter * candidate / 1_000_000) / reference, QUARTER_TO_ANNUAL)
+    ]
+    return survivors[0] if len(survivors) == 1 else None
+
+
+def quarterly_for(
+    statement: dict, annual: dict[str, dict[str, float]]
+) -> dict[str, dict[str, float]]:
+    """Quarterly figures in EGP millions, dropping anything unverifiable."""
+    out: dict[str, dict[str, float]] = {}
+    for label, fields in quarterly_rows(statement).items():
+        if not balances(fields):
+            continue
+        year = label.split()[-1]
+        scale = scale_quarter(fields, annual.get(year))
+        if scale is None:
+            continue
+        out[label] = {
+            field: round(value * scale / 1_000_000, 3)
+            for field, value in fields.items()
+        }
+    return out
+
+
 def statements_for(
     page: str, market_cap: float | None
 ) -> tuple[dict[str, dict[str, float]] | None, str]:
     """Annual figures in EGP millions, plus a word on why if there are none."""
+    annual, _quarters, note = filed_for(page, market_cap)
+    return annual, note
+
+
+def filed_for(
+    page: str, market_cap: float | None
+) -> tuple[dict[str, dict[str, float]] | None, dict[str, dict[str, float]], str]:
+    """Annual and quarterly figures in EGP millions, and why if there are none.
+
+    Quarters ride on the annual result rather than being derived independently:
+    without a year whose scale has already survived the market-cap test there
+    is nothing firm enough to resolve a quarter's units against, so a company
+    with no usable annual column publishes no quarters either.
+    """
     statement = extract_literal(page)
     if statement is None:
-        return None, "no statement block on the page"
+        return None, {}, "no statement block on the page"
     if not reports_in_egp(statement):
-        return None, f"reports in {statement.get('currency') or 'another currency'}"
+        return None, {}, (
+            f"reports in {statement.get('currency') or 'another currency'}"
+        )
     rows = annual_rows(statement)
     if not rows:
-        return None, "no annual column"
+        return None, {}, "no annual column"
     unbalanced = [year for year, fields in rows.items() if not balances(fields)]
     if unbalanced:
-        return None, f"balance sheet does not add up ({', '.join(sorted(unbalanced))})"
+        return None, {}, (
+            f"balance sheet does not add up ({', '.join(sorted(unbalanced))})"
+        )
     scale = scale_for(rows, market_cap)
     if scale is None:
-        return None, "scale could not be established"
-    return {
+        return None, {}, "scale could not be established"
+    annual = {
         year: {
             field: round(value * scale / 1_000_000, 3)
             for field, value in fields.items()
         }
         for year, fields in rows.items()
-    }, "ok"
+    }
+    return annual, quarterly_for(statement, annual), "ok"

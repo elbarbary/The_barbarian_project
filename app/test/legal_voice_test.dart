@@ -39,7 +39,7 @@ void main() {
   group('§8.12 the non-licence line is on every scored screen', () {
     final scored = <String, Widget>{
       'Six Pillars': const CashOrTrashScreen(parentTab: BNavTab.home),
-      'Opportunity Scanner': const OpportunityScreen(parentTab: BNavTab.today),
+      'Scanner': const OpportunityScreen(parentTab: BNavTab.today),
       'Company': const CompanyScreen(
         ticker: 'COMI',
         parentTab: BNavTab.home,

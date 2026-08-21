@@ -45,6 +45,17 @@ ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateC
 # identical answer. Output is the expensive side of the meter, so this single
 # setting is the difference between pennies and tens of dollars.
 MODEL = "gemini-3.5-flash"
+
+# Translation gets the cheapest model in the generation, deliberately. Turning
+# a headline into English is mechanical work — no reasoning, no judgement, a
+# closed task with a right answer — and it is the highest-volume thing this
+# pipeline does: every headline and filing title, every day. Paying the
+# reasoning-model rate for it is the one place the meter would actually notice.
+#
+# It buys availability nowhere. Every model on this account, lite included,
+# refuses with "prepayment credits are depleted" until credits are bought; the
+# cheap model only makes the bill smaller once they are.
+TRANSLATE_MODEL = "gemini-3.5-flash-lite"
 THINKING_OFF = {"thinkingConfig": {"thinkingBudget": 0}}
 
 
@@ -114,7 +125,7 @@ def choose(prompt: str, allowed: list[str], *, model: str = MODEL) -> str | None
     return None
 
 
-def translate(texts: list[str], *, model: str = MODEL) -> dict[str, str]:
+def translate(texts: list[str], *, model: str = TRANSLATE_MODEL) -> dict[str, str]:
     """Arabic in, English out, keyed by the original string.
 
     Batched, because the meter charges per call as well as per token and these

@@ -8,6 +8,7 @@ import '../../core/models/disclosure.dart';
 import '../../core/models/market_history.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/news.dart';
+import '../../core/models/recency.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
@@ -19,6 +20,9 @@ import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
+import '../../core/widgets/news_thumb.dart';
+import 'macro_block.dart';
+import 'lead_story.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -69,12 +73,24 @@ class HomeScreen extends ConsumerWidget {
         // Filings lead. They are the only thing on this screen the exchange
         // itself published about a named company on the day it happened —
         // everything else is either a price or somebody's reporting of one.
+        // This is a news app, and it opened with a regulatory filing — a form
+        // somebody was obliged to submit. Excellent for a reader already deep
+        // in a company, and the worst possible greeting for everyone else.
+        //
+        //   1. today's story, at the size a story deserves, with its picture
+        //   2. the rest of the feed, each row carrying its own
+        //   3. where the market closed and how wide the move was
+        //   4. what companies told the exchange — depth, not a greeting
+        //   5. what moves Egypt, which the rest is read against
+        //   6. the watchlist, reached on purpose rather than stumbled on
+        const BLeadStory(),
+        const _LatestNews(),
+        const _Indices(),
+        const _Breadth(),
         BSectionLabel(l.homeFiledHero),
         const _DailyInsight(),
         const _AlsoFiled(),
-        const _Breadth(),
-        const _Indices(),
-        const _LatestNews(),
+        const BMacroBlock(),
         const _WatchlistBlock(),
       ],
     );
@@ -177,6 +193,11 @@ class _DailyInsight extends ConsumerWidget {
     final label = arabic && item.eventLabelAr.isNotEmpty
         ? item.eventLabelAr
         : item.eventLabel;
+    final age = context.filingAge(item.date);
+    final volumeKicker =
+        (item.evidence?.ratio != null && item.evidence!.ratio > 0)
+        ? l.homeVolumeKicker(item.evidence!.ratio.toStringAsFixed(1))
+        : null;
 
     return BPressable(
       onTap: ticker == null
@@ -196,18 +217,32 @@ class _DailyInsight extends ConsumerWidget {
                     // leads — the session's own volume against its normal —
                     // rather than repeating the event name that the headline
                     // underneath already states.
-                    (item.evidence?.ratio != null && item.evidence!.ratio > 0
-                            ? l.homeVolumeKicker(
-                                item.evidence!.ratio.toStringAsFixed(1),
-                              )
-                            : l.homeFiledToday)
-                        .toUpperCase(),
+                    //
+                    // When there is no volume reason it carries the age
+                    // instead. It used to say "Filed today" flatly, and the
+                    // lead is chosen by rank before date, so a filing that
+                    // outranked everything from an earlier session announced
+                    // itself as today's on the largest card on the screen.
+                    // The whole feed was one day old when this was found.
+                    (volumeKicker ?? age ?? l.homeFiledHero).toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
                       letterSpacing: 1.6,
                     ),
                   ),
                 ),
+                // Shown here only when the kicker spent its slot on the volume
+                // reason, so the age appears exactly once either way.
+                if (volumeKicker != null && age != null) ...[
+                  Text(
+                    age.toUpperCase(),
+                    style: BarbarianType.labelTiny.copyWith(
+                      color: c.onInkMuted,
+                      letterSpacing: 1.6,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 if (ticker != null)
                   Icon(Icons.north_east_rounded, size: 18, color: c.onInkMuted),
               ],
@@ -218,6 +253,11 @@ class _DailyInsight extends ConsumerWidget {
               // first is the name of the event and who filed it, in their own
               // language; the filing itself is one tap away.
               ticker == null ? label : '$ticker · $label',
+              // Keyed so a test can say something about *the lead* rather than
+              // about every filing on the screen. The rule is that the biggest
+              // card must not be spent on a bare "Statement"; a statement
+              // further down the list is an ordinary filing and fine.
+              key: const Key('home-lead-filing'),
               style: BarbarianType.headlineM.copyWith(color: c.onInk),
             ),
             const SizedBox(height: 10),
@@ -283,10 +323,13 @@ class _DailyInsight extends ConsumerWidget {
 /// equal-weighted, so a day where they fall while the 30 rises is a day carried
 /// by a handful of heavyweights. Three cards make that visible at a glance.
 ///
-/// The sparkline is drawn from `market-history.json`, which is written one
-/// session at a time because no index series is published anywhere we can
-/// reach. Until there are two sessions there is nothing to draw and the card
-/// simply carries the level, which is what it did before.
+/// The sparkline is drawn from `market-history.json`. That file used to hold a
+/// single row and grow one session a day, on the belief that no index series
+/// was reachable — so the cards carried a number and never a shape. A year of
+/// daily closes is now backfilled from a second source, and kept honest by
+/// refusing the fetch outright unless its newest close matches the level we
+/// already publish. With one session there is still nothing to draw and the
+/// card falls back to the level alone.
 class _Indices extends ConsumerWidget {
   const _Indices();
 
@@ -351,6 +394,7 @@ class _IndexCard extends StatelessWidget {
           provenance: Provenance.fact,
           source: index.source,
         ),
+        series: series,
       ),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
@@ -585,7 +629,11 @@ class _AlsoFiled extends ConsumerWidget {
     final lead = _DailyInsight._lead(feed);
     final items = (feed?.items ?? const <Disclosure>[])
         .where((i) => i.id != lead?.id && i.tickers.length == 1)
-        .take(4)
+        // Four rows read as "there is nothing here" on a screen you can keep
+        // scrolling. The exchange usually files a couple of dozen a session
+        // and the feed is already deduplicated, so showing more is showing
+        // what is there rather than padding.
+        .take(10)
         .toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
@@ -597,7 +645,15 @@ class _AlsoFiled extends ConsumerWidget {
             Expanded(child: BSectionLabel(l.homeAlsoFiled)),
             BInlineAction(
               l.homeAllFilings,
-              onTap: () => context.go(Routes.today),
+              // Ask for the section first, then move. `go` alone dropped the
+              // reader at the top of a long screen and left them to hunt for
+              // the thing they had just tapped.
+              onTap: () {
+                ref
+                    .read(todaySectionRequestProvider.notifier)
+                    .ask(TodaySection.filings);
+                context.go(Routes.today);
+              },
             ),
           ],
         ),
@@ -637,6 +693,16 @@ class _AlsoFiled extends ConsumerWidget {
                                 ? item.eventLabelAr
                                 : item.eventLabel,
                           ),
+                          // §49 again. These rows sit under a hero that now
+                          // dates itself, and an undated row beside a dated
+                          // one reads as "this one is current".
+                          if (context.filingAge(item.date) case final age?)
+                            Text(
+                              age,
+                              style: BarbarianType.labelNano.copyWith(
+                                color: c.textMuted,
+                              ),
+                            ),
                         ],
                       ),
                       const SizedBox(height: 6),
@@ -677,7 +743,9 @@ class _LatestNews extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final feed = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
-    final items = (feed?.items ?? const <NewsItem>[]).take(4).toList();
+    // Same reason as the filings above: four headlines under a scrollable
+    // screen makes a full feed look empty.
+    final items = (feed?.items ?? const <NewsItem>[]).take(12).toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
     // Every outlet that ran it, named. A story three papers carried is more
@@ -698,7 +766,15 @@ class _LatestNews extends ConsumerWidget {
         Row(
           children: [
             Expanded(child: BSectionLabel(l.homeLatestNews)),
-            BInlineAction(l.homeAllNews, onTap: () => context.go(Routes.today)),
+            BInlineAction(
+              l.homeAllNews,
+              onTap: () {
+                ref
+                    .read(todaySectionRequestProvider.notifier)
+                    .ask(TodaySection.news);
+                context.go(Routes.today);
+              },
+            ),
           ],
         ),
         BPaperCard(
@@ -729,53 +805,75 @@ class _LatestNews extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Directionality(
-                        // Direction follows the string actually rendered, not
-                        // the original: an English translation laid out
-                        // right-to-left is the bug this replaced.
-                        textDirection: isArabic(item.headlineFor(arabic))
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                        child: Text(
-                          item.headlineFor(arabic),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: BarbarianType.bodyM.copyWith(
-                            color: c.textPrimary,
-                            height: 1.45,
-                          ),
+                      // The outlet's own picture, where it published one. It
+                      // collapses itself — gap included — when there is none
+                      // or the download fails, so a row without a picture is
+                      // a normal row rather than one with a hole in it.
+                      BNewsThumb(url: item.image),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Directionality(
+                              // Direction follows the string actually rendered, not
+                              // the original: an English translation laid out
+                              // right-to-left is the bug this replaced.
+                              textDirection: isArabic(item.headlineFor(arabic))
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
+                              child: Text(
+                                item.headlineFor(arabic),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.bodyM.copyWith(
+                                  color: c.textPrimary,
+                                  height: 1.45,
+                                ),
+                              ),
+                            ),
+                            // Why a reader should care, not just what happened. "A
+                            // company signed a contract" is an event; "a contract is
+                            // revenue that has not been earned yet" is the reason it is
+                            // worth a glance. Written once per type by a person, shared
+                            // with the filings feed.
+                            if (item.meaningFor(arabic) case final String why
+                                when why.isNotEmpty) ...[
+                              const SizedBox(height: 6),
+                              Text(
+                                why,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.bodyS.copyWith(
+                                  color: c.textSecondary,
+                                  height: 1.45,
+                                ),
+                              ),
+                            ],
+                            // Outlet and age on one line, and the line survives if
+                            // either half is missing — a story with no named outlet
+                            // still has to say how old it is (§49). Home showed the
+                            // outlet and no time at all, so a headline from Tuesday
+                            // and one from an hour ago read exactly alike.
+                            if ([
+                                  outletsFor(item),
+                                  context.newsAge(item.publishedAt),
+                                ].nonNulls.join(' · ')
+                                case final String byline
+                                when byline.isNotEmpty) ...[
+                              const SizedBox(height: 4),
+                              Text(
+                                byline,
+                                style: BarbarianType.labelNano.copyWith(
+                                  color: c.textFaint,
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                       ),
-                      // Why a reader should care, not just what happened. "A
-                      // company signed a contract" is an event; "a contract is
-                      // revenue that has not been earned yet" is the reason it is
-                      // worth a glance. Written once per type by a person, shared
-                      // with the filings feed.
-                      if (item.meaningFor(arabic) case final String why
-                          when why.isNotEmpty) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          why,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: BarbarianType.bodyS.copyWith(
-                            color: c.textSecondary,
-                            height: 1.45,
-                          ),
-                        ),
-                      ],
-                      if (outletsFor(item) case final String outlets) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          outlets,
-                          style: BarbarianType.labelNano.copyWith(
-                            color: c.textFaint,
-                          ),
-                        ),
-                      ],
                     ],
                   ),
                 ),
@@ -845,7 +943,10 @@ class _Breadth extends ConsumerWidget {
                     height: 6,
                     child: Row(
                       children: [
-                        Expanded(flex: latest.up, child: ColoredBox(color: c.up)),
+                        Expanded(
+                          flex: latest.up,
+                          child: ColoredBox(color: c.up),
+                        ),
                         Expanded(
                           flex: latest.flat,
                           child: ColoredBox(color: c.hairlineStrong),

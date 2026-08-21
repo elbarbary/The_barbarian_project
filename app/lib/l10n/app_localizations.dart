@@ -335,7 +335,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner'**
+  /// **'Scanner'**
   String get scannerTitle;
 
   /// No description provided for @scannerSubtitle.
@@ -377,13 +377,13 @@ abstract class AppLocalizations {
   /// No description provided for @countQualified.
   ///
   /// In en, this message translates to:
-  /// **'Qualified'**
+  /// **'Cleared every rule'**
   String get countQualified;
 
   /// No description provided for @countWatching.
   ///
   /// In en, this message translates to:
-  /// **'Watching'**
+  /// **'Cleared some rules'**
   String get countWatching;
 
   /// No description provided for @countOutcomes.
@@ -893,7 +893,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerHistory.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner history'**
+  /// **'Scanner history'**
   String get scannerHistory;
 
   /// No description provided for @studyLabel.
@@ -977,7 +977,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanNothingQualified.
   ///
   /// In en, this message translates to:
-  /// **'Nothing qualified today'**
+  /// **'Nothing cleared every rule today'**
   String get scanNothingQualified;
 
   /// No description provided for @scanNothingWatch.
@@ -989,7 +989,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanNothingRejected.
   ///
   /// In en, this message translates to:
-  /// **'Nothing was rejected today'**
+  /// **'Nothing failed the rules today'**
   String get scanNothingRejected;
 
   /// No description provided for @scanEmptyBlurb.
@@ -1079,7 +1079,7 @@ abstract class AppLocalizations {
   /// No description provided for @scannerTitleFull.
   ///
   /// In en, this message translates to:
-  /// **'Opportunity Scanner'**
+  /// **'Scanner'**
   String get scannerTitleFull;
 
   /// No description provided for @scanUpdated.
@@ -1091,19 +1091,19 @@ abstract class AppLocalizations {
   /// No description provided for @scanQualifiedCount.
   ///
   /// In en, this message translates to:
-  /// **'Qualified {count}'**
+  /// **'Cleared all {count}'**
   String scanQualifiedCount(int count);
 
   /// No description provided for @scanWatchCount.
   ///
   /// In en, this message translates to:
-  /// **'Watch {count}'**
+  /// **'Partly {count}'**
   String scanWatchCount(int count);
 
   /// No description provided for @scanRejectedCount.
   ///
   /// In en, this message translates to:
-  /// **'Rejected {count}'**
+  /// **'Not cleared {count}'**
   String scanRejectedCount(int count);
 
   /// No description provided for @scanLogCount.
@@ -1175,19 +1175,19 @@ abstract class AppLocalizations {
   /// No description provided for @statusQualified.
   ///
   /// In en, this message translates to:
-  /// **'Qualified'**
+  /// **'Cleared every rule'**
   String get statusQualified;
 
   /// No description provided for @statusWatching.
   ///
   /// In en, this message translates to:
-  /// **'Watching'**
+  /// **'Cleared some rules'**
   String get statusWatching;
 
   /// No description provided for @statusRejected.
   ///
   /// In en, this message translates to:
-  /// **'Rejected'**
+  /// **'Did not clear the rules'**
   String get statusRejected;
 
   /// No description provided for @figPrevClose.
@@ -1627,6 +1627,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Index levels are on Home'**
   String get ratesIndicesMovedHome;
+
+  /// No description provided for @ageJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get ageJustNow;
+
+  /// No description provided for @ageToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get ageToday;
+
+  /// No description provided for @ageYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get ageYesterday;
+
+  /// No description provided for @ageMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m ago'**
+  String ageMinutes(int count);
+
+  /// No description provided for @ageHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}h ago'**
+  String ageHours(int count);
+
+  /// No description provided for @ageDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}d ago'**
+  String ageDays(int count);
+
+  /// No description provided for @unusualVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual volume'**
+  String get unusualVolume;
+
+  /// No description provided for @saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get saved;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @mainNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Main navigation'**
+  String get mainNavigation;
+
+  /// No description provided for @priceLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get priceLow;
+
+  /// No description provided for @priceHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priceHigh;
+
+  /// No description provided for @priceOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get priceOpen;
+
+  /// No description provided for @priceClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get priceClose;
+
+  /// No description provided for @theWires.
+  ///
+  /// In en, this message translates to:
+  /// **'The wires'**
+  String get theWires;
+
+  /// No description provided for @sortByScore.
+  ///
+  /// In en, this message translates to:
+  /// **'By score'**
+  String get sortByScore;
+
+  /// No description provided for @sortMostRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Most recent'**
+  String get sortMostRecent;
+
+  /// No description provided for @cotNoneYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No investigations yet'**
+  String get cotNoneYet;
+
+  /// No description provided for @cotNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches that'**
+  String get cotNoMatch;
+
+  /// No description provided for @readInvestigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Read investigation'**
+  String get readInvestigation;
+
+  /// No description provided for @articleFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the investigation'**
+  String get articleFailed;
+
+  /// No description provided for @exitHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you buy anything: how the money comes back'**
+  String get exitHeadline;
+
+  /// No description provided for @exitIfYouPutIn.
+  ///
+  /// In en, this message translates to:
+  /// **'If you put in'**
+  String get exitIfYouPutIn;
+
+  /// No description provided for @exitNumbersBehind.
+  ///
+  /// In en, this message translates to:
+  /// **'The numbers behind it'**
+  String get exitNumbersBehind;
+
+  /// No description provided for @companyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get companyLabel;
+
+  /// No description provided for @explTraded.
+  ///
+  /// In en, this message translates to:
+  /// **'How much it traded'**
+  String get explTraded;
+
+  /// No description provided for @explFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it finished'**
+  String get explFinished;
+
+  /// No description provided for @explBuyable.
+  ///
+  /// In en, this message translates to:
+  /// **'How much of it can actually be bought'**
+  String get explBuyable;
+
+  /// No description provided for @explValued.
+  ///
+  /// In en, this message translates to:
+  /// **'What the whole company is priced at'**
+  String get explValued;
+
+  /// No description provided for @rubricFreshDisclosure.
+  ///
+  /// In en, this message translates to:
+  /// **'Fresh disclosure'**
+  String get rubricFreshDisclosure;
+
+  /// No description provided for @rubricEconomicImportance.
+  ///
+  /// In en, this message translates to:
+  /// **'Economic importance'**
+  String get rubricEconomicImportance;
+
+  /// No description provided for @rubricVolumeConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume confirmation'**
+  String get rubricVolumeConfirmation;
+
+  /// No description provided for @rubricOwnershipCluster.
+  ///
+  /// In en, this message translates to:
+  /// **'Ownership cluster'**
+  String get rubricOwnershipCluster;
+
+  /// No description provided for @rubricDatedCatalyst.
+  ///
+  /// In en, this message translates to:
+  /// **'Dated catalyst'**
+  String get rubricDatedCatalyst;
+
+  /// No description provided for @rubricAntiChasing.
+  ///
+  /// In en, this message translates to:
+  /// **'Anti-chasing'**
+  String get rubricAntiChasing;
+
+  /// No description provided for @rubricLimitUpPenalty.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit-up penalty'**
+  String get rubricLimitUpPenalty;
+
+  /// No description provided for @rubricIssuerDenial.
+  ///
+  /// In en, this message translates to:
+  /// **'Issuer denial'**
+  String get rubricIssuerDenial;
+
+  /// No description provided for @rubricRiskPenalty.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk penalty'**
+  String get rubricRiskPenalty;
+
+  /// No description provided for @ownersEquity.
+  ///
+  /// In en, this message translates to:
+  /// **'Owners\' equity'**
+  String get ownersEquity;
+
+  /// No description provided for @homeMacro.
+  ///
+  /// In en, this message translates to:
+  /// **'What moves Egypt'**
+  String get homeMacro;
+
+  /// No description provided for @macroWhyItMatters.
+  ///
+  /// In en, this message translates to:
+  /// **'Why this reaches your shares'**
+  String get macroWhyItMatters;
+
+  /// No description provided for @macroMovesWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Moved with the EGX 30'**
+  String get macroMovesWith;
+
+  /// No description provided for @macroWeakLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Barely moves with the EGX 30 day to day'**
+  String get macroWeakLink;
+
+  /// No description provided for @macroEgyptLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Egypt\'s own line'**
+  String get macroEgyptLine;
+
+  /// No description provided for @macroSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'over {count} sessions'**
+  String macroSessions(int count);
+
+  /// No description provided for @macroUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sources could not be reached'**
+  String get macroUnavailable;
+
+  /// No description provided for @macroCoverage.
+  ///
+  /// In en, this message translates to:
+  /// **'What is being reported'**
+  String get macroCoverage;
+
+  /// No description provided for @homeLeadStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s story'**
+  String get homeLeadStory;
 }
 
 class _AppLocalizationsDelegate

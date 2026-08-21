@@ -1,13 +1,26 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../l10n/app_localizations.dart';
+
 part 'opportunity.freezed.dart';
 part 'opportunity.g.dart';
 
-/// One day's Opportunity Scanner report (spec §7).
+/// One day's Scanner report (spec §7).
 ///
-/// Note the product name: this is the **Opportunity Scanner**, never "Daily
-/// Insights" (spec §4), and the rejected list is part of the report, not an
-/// implementation detail to be hidden (spec §7).
+/// **Named just "Scanner" on the founder's call, 21 Aug 2026.** The spec calls
+/// it the *Opportunity Scanner* (§4), and "opportunity" is the half that had to
+/// go: it promises a trade worth taking, which is a recommendation, and this
+/// publisher holds no FRA licence. "Daily …" was not available as a
+/// replacement — §4 forbids that name outright — so the loaded word was dropped
+/// and the neutral one kept.
+///
+/// The status wording moved with it. A name that used to read "Qualified" now
+/// reads "Cleared every rule", which is what was actually measured and is the
+/// framing the section blurbs already used: *clearing a rule is a fact about
+/// the rule, not a view on the company*.
+///
+/// The rejected list is part of the report, not an implementation detail to be
+/// hidden (spec §7).
 @freezed
 abstract class OpportunityReport with _$OpportunityReport {
   const factory OpportunityReport({
@@ -233,16 +246,20 @@ abstract class ScanScores with _$ScanScores {
 
   /// Ordered for display, with human labels. Keeps the rubric in one place so
   /// a screen never hard-codes the list.
-  List<({String label, int value})> get breakdown => [
-    (label: 'Fresh disclosure', value: freshDisclosure),
-    (label: 'Economic importance', value: economicImportance),
-    (label: 'Volume confirmation', value: volumeConfirmation),
-    (label: 'Ownership cluster', value: ownershipCluster),
-    (label: 'Dated catalyst', value: datedCatalyst),
-    (label: 'Anti-chasing', value: antiChasing),
-    (label: 'Limit-up penalty', value: limitUpPenalty),
-    (label: 'Issuer denial', value: issuerDenial),
-    (label: 'Risk penalty', value: riskPenalty),
+  ///
+  /// Takes the localisations rather than holding English: these nine lines are
+  /// the rubric itself, not chrome around it, and they were the largest block
+  /// of text in the app that stayed English whatever the reader's language.
+  List<({String label, int value})> breakdown(AppLocalizations l) => [
+    (label: l.rubricFreshDisclosure, value: freshDisclosure),
+    (label: l.rubricEconomicImportance, value: economicImportance),
+    (label: l.rubricVolumeConfirmation, value: volumeConfirmation),
+    (label: l.rubricOwnershipCluster, value: ownershipCluster),
+    (label: l.rubricDatedCatalyst, value: datedCatalyst),
+    (label: l.rubricAntiChasing, value: antiChasing),
+    (label: l.rubricLimitUpPenalty, value: limitUpPenalty),
+    (label: l.rubricIssuerDenial, value: issuerDenial),
+    (label: l.rubricRiskPenalty, value: riskPenalty),
   ];
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../core/theme/barbarian_theme.dart';
@@ -65,6 +67,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final topPadding = MediaQuery.paddingOf(context).top;
 
@@ -78,7 +81,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
               children: [
                 BSoftIconButton(
                   icon: Icons.arrow_back_ios_new_rounded,
-                  semanticLabel: 'Back',
+                  semanticLabel: l.back,
                   onTap: () => Navigator.of(context).maybePop(),
                 ),
                 const SizedBox(width: BarbarianSpace.md),
@@ -98,7 +101,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 ? Padding(
                     padding: const EdgeInsets.all(16),
                     child: BEmptyState(
-                      title: 'Could not open the investigation',
+                      title: l.articleFailed,
                       body:
                           'The full write-up lives on thebarbarianproject.com '
                           'and needs a connection. Everything already '

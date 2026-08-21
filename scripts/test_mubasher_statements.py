@@ -15,7 +15,10 @@ and no amount of internal consistency would tell us so.
 
 from __future__ import annotations
 
+import ast
 import unittest
+
+import mubasher_statements
 
 from mubasher_statements import (
     annual_rows,
@@ -176,6 +179,61 @@ class CrossCheckTest(unittest.TestCase):
         figures, _ = statements_for(PAGE, SWDY_MARKET_CAP)
         for absent in ("revenue", "gross_profit"):
             self.assertNotIn(absent, figures["2024"])
+
+
+class QuarterlyTest(unittest.TestCase):
+    """The 1000x trap, which is the whole reason quarters were skipped.
+
+    Within El Sewedy's page, `First Quarter` 2024 states 201,164,193,251 of
+    assets in whole pounds while `annual budget` 2024 states 249,527,138.687 of
+    the same balance sheet in thousands. Nothing on the page says which is
+    which, and getting it wrong yields a plausible number that is wrong by a
+    factor of a thousand.
+    """
+
+    def setUp(self):
+        self.statement = ast.literal_eval(STATEMENT)
+        self.annual_raw = mubasher_statements.annual_rows(self.statement)
+        scale = mubasher_statements.scale_for(
+            self.annual_raw, market_cap=120_000_000_000
+        )
+        self.assertEqual(scale, 1000, "annual column is stated in thousands")
+        self.annual = {
+            year: {k: round(v * scale / 1_000_000, 3) for k, v in fields.items()}
+            for year, fields in self.annual_raw.items()
+        }
+
+    def test_a_quarter_in_whole_pounds_is_not_scaled_like_its_annual(self):
+        quarters = mubasher_statements.quarterly_for(self.statement, self.annual)
+        self.assertIn("Q1 2024", quarters)
+        # 201.164bn, not 201.164 trillion.
+        self.assertAlmostEqual(quarters["Q1 2024"]["assets"], 201164.193, places=2)
+
+    def test_a_quarter_lands_near_its_own_year_end(self):
+        quarters = mubasher_statements.quarterly_for(self.statement, self.annual)
+        q = quarters["Q1 2024"]["assets"]
+        annual = self.annual["2024"]["assets"]
+        self.assertGreater(q / annual, 0.15)
+        self.assertLess(q / annual, 8.0)
+
+    def test_quarters_are_labelled_by_quarter_and_year(self):
+        quarters = mubasher_statements.quarterly_for(self.statement, self.annual)
+        self.assertEqual(sorted(quarters), ["Q1 2023", "Q1 2024"])
+
+    def test_a_year_with_no_annual_figure_drops_its_quarters(self):
+        # Without a verified annual balance sheet there is nothing firm to
+        # judge the unit against, and a guess is a coin toss on a factor of
+        # 1000.
+        self.assertEqual(
+            mubasher_statements.quarterly_for(self.statement, {}), {}
+        )
+
+    def test_an_unresolvable_scale_drops_the_quarter(self):
+        # Both candidates outside the band: neither 1 nor 1000 brings this
+        # anywhere near the year it belongs to.
+        self.assertIsNone(
+            mubasher_statements.scale_quarter({"assets": 1.0}, {"assets": 1e9})
+        )
 
 
 if __name__ == "__main__":

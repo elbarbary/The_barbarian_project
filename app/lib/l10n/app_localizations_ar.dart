@@ -138,7 +138,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'استثمر جهة نشر وغير مرخّصة من الهيئة العامة للرقابة المالية. نحن لا نشتري، ولا نبيع، ولا نقدم نصيحة. لا شيء هنا توصية بالتعامل على أي ورقة مالية.';
 
   @override
-  String get scannerTitle => 'ماسح الفرص';
+  String get scannerTitle => 'الماسح';
 
   @override
   String get scannerSubtitle => 'ما وجدته القاعدة المنشورة، وما فاتها';
@@ -160,10 +160,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scannerFoundToday => 'ما وجدته القاعدة المنشورة اليوم';
 
   @override
-  String get countQualified => 'مستوفية';
+  String get countQualified => 'استوفت كل القواعد';
 
   @override
-  String get countWatching => 'تحت المتابعة';
+  String get countWatching => 'استوفت بعض القواعد';
 
   @override
   String get countOutcomes => 'النتائج';
@@ -436,7 +436,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get readFullInvestigation => 'اقرأ الدراسة كاملة';
 
   @override
-  String get scannerHistory => 'سجل ماسح الفرص';
+  String get scannerHistory => 'سجل الماسح';
 
   @override
   String get studyLabel => 'الركائز الست';
@@ -485,13 +485,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scanLogEmpty => 'سجل القواعد فارغ';
 
   @override
-  String get scanNothingQualified => 'لا شيء استوفى اليوم';
+  String get scanNothingQualified => 'لم تستوفِ أي شركة كل القواعد اليوم';
 
   @override
   String get scanNothingWatch => 'لا شيء تحت المتابعة';
 
   @override
-  String get scanNothingRejected => 'لم يُستبعد شيء اليوم';
+  String get scanNothingRejected => 'لم تسقط أي شركة في القواعد اليوم';
 
   @override
   String get scanEmptyBlurb =>
@@ -538,7 +538,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get gateUnresolved => 'غير محسوم';
 
   @override
-  String get scannerTitleFull => 'ماسح الفرص';
+  String get scannerTitleFull => 'الماسح';
 
   @override
   String scanUpdated(String date) {
@@ -547,17 +547,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String scanQualifiedCount(int count) {
-    return 'مستوفية $count';
+    return 'استوفت الكل $count';
   }
 
   @override
   String scanWatchCount(int count) {
-    return 'متابعة $count';
+    return 'جزئيًا $count';
   }
 
   @override
   String scanRejectedCount(int count) {
-    return 'مستبعدة $count';
+    return 'لم تستوفِ $count';
   }
 
   @override
@@ -598,13 +598,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get scanNoSectorToday => 'لا قراءة قطاعية اليوم';
 
   @override
-  String get statusQualified => 'مستوفية';
+  String get statusQualified => 'استوفت كل القواعد';
 
   @override
-  String get statusWatching => 'تحت المتابعة';
+  String get statusWatching => 'استوفت بعض القواعد';
 
   @override
-  String get statusRejected => 'مستبعدة';
+  String get statusRejected => 'لم تستوفِ القواعد';
 
   @override
   String get figPrevClose => 'الإغلاق السابق';
@@ -871,4 +871,156 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ratesIndicesMovedHome => 'مستويات المؤشرات في الصفحة الرئيسية';
+
+  @override
+  String get ageJustNow => 'الآن';
+
+  @override
+  String get ageToday => 'اليوم';
+
+  @override
+  String get ageYesterday => 'أمس';
+
+  @override
+  String ageMinutes(int count) {
+    return 'قبل $count د';
+  }
+
+  @override
+  String ageHours(int count) {
+    return 'قبل $count س';
+  }
+
+  @override
+  String ageDays(int count) {
+    return 'قبل $count ي';
+  }
+
+  @override
+  String get unusualVolume => 'حجم تداول غير معتاد';
+
+  @override
+  String get saved => 'المحفوظات';
+
+  @override
+  String get loading => 'جارٍ التحميل';
+
+  @override
+  String get mainNavigation => 'التنقل الرئيسي';
+
+  @override
+  String get priceLow => 'أدنى';
+
+  @override
+  String get priceHigh => 'أعلى';
+
+  @override
+  String get priceOpen => 'الافتتاح';
+
+  @override
+  String get priceClose => 'الإغلاق';
+
+  @override
+  String get theWires => 'الأخبار';
+
+  @override
+  String get sortByScore => 'حسب الدرجة';
+
+  @override
+  String get sortMostRecent => 'الأحدث';
+
+  @override
+  String get cotNoneYet => 'لا توجد دراسات بعد';
+
+  @override
+  String get cotNoMatch => 'لا شيء يطابق ذلك';
+
+  @override
+  String get readInvestigation => 'اقرأ الدراسة';
+
+  @override
+  String get articleFailed => 'تعذّر فتح الدراسة';
+
+  @override
+  String get exitHeadline => 'قبل أن تشتري أي شيء: كيف تعود النقود';
+
+  @override
+  String get exitIfYouPutIn => 'لو استثمرت';
+
+  @override
+  String get exitNumbersBehind => 'الأرقام وراء ذلك';
+
+  @override
+  String get companyLabel => 'الشركة';
+
+  @override
+  String get explTraded => 'حجم ما جرى تداوله';
+
+  @override
+  String get explFinished => 'أين أغلق';
+
+  @override
+  String get explBuyable => 'كم يمكن شراؤه فعليًا';
+
+  @override
+  String get explValued => 'بكم تُسعَّر الشركة بالكامل';
+
+  @override
+  String get rubricFreshDisclosure => 'إفصاح حديث';
+
+  @override
+  String get rubricEconomicImportance => 'أهمية اقتصادية';
+
+  @override
+  String get rubricVolumeConfirmation => 'تأكيد بحجم التداول';
+
+  @override
+  String get rubricOwnershipCluster => 'تجمّع في الملكية';
+
+  @override
+  String get rubricDatedCatalyst => 'محفّز مؤرَّخ';
+
+  @override
+  String get rubricAntiChasing => 'مانع المطاردة';
+
+  @override
+  String get rubricLimitUpPenalty => 'خصم بلوغ الحد الأقصى';
+
+  @override
+  String get rubricIssuerDenial => 'نفي من الشركة';
+
+  @override
+  String get rubricRiskPenalty => 'خصم المخاطر';
+
+  @override
+  String get ownersEquity => 'حقوق الملكية';
+
+  @override
+  String get homeMacro => 'ما يحرّك مصر';
+
+  @override
+  String get macroWhyItMatters => 'لماذا يصل هذا إلى أسهمك';
+
+  @override
+  String get macroMovesWith => 'تحرّك مع مؤشر EGX 30';
+
+  @override
+  String get macroWeakLink => 'بالكاد يتحرك مع مؤشر EGX 30 يومًا بيوم';
+
+  @override
+  String get macroEgyptLine => 'خط مصر نفسه';
+
+  @override
+  String macroSessions(int count) {
+    return 'خلال $count جلسة';
+  }
+
+  @override
+  String get macroUnavailable => 'تعذّر الوصول إلى بعض المصادر';
+
+  @override
+  String get macroCoverage => 'ما يُنشر عن ذلك';
+
+  @override
+  String get homeLeadStory => 'قصة اليوم';
 }

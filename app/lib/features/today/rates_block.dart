@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/explainer.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
+import '../../core/widgets/charts.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
@@ -280,19 +281,32 @@ class _WorldCard extends StatelessWidget {
 /// likely to compare against a shop window. The gram price leads, because that
 /// is the unit Egyptian jewellery is priced and sold in — the ounce is a
 /// commodity-desk unit and belongs underneath.
-class _MetalCard extends StatelessWidget {
+class _MetalCard extends ConsumerWidget {
   const _MetalCard({required this.metal});
 
   final MetalRow metal;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final l = AppLocalizations.of(context);
     final gram = metal.egpGram;
+    // The dollar-an-ounce series, which is the market these actually trade in.
+    // The card's headline is pounds a gram, and charting that would need a
+    // matching history of the pound we do not hold — so the shape is the
+    // metal's own and the number above it stays the one a reader buys at.
+    final series = ref
+        .watch(marketHistoryProvider)
+        .whenOrNull(data: (s) => s.value)
+        ?.metalOf(metal.id) ??
+        const <double>[];
 
     return BPressable(
-      onTap: () => showExplainer(context, BRatesBlock._fromMetal(metal)),
+      onTap: () => showExplainer(
+        context,
+        BRatesBlock._fromMetal(metal),
+        series: series,
+      ),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
         padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
@@ -323,6 +337,11 @@ class _MetalCard extends StatelessWidget {
                 'EGP ${ounce.toStringAsFixed(0)} / oz',
                 style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
               ),
+            ],
+            // Two points is the least that draws a line rather than a dot.
+            if (series.length > 1) ...[
+              const SizedBox(height: 10),
+              BSparkline(values: series, height: 28, color: c.onInkMuted),
             ],
           ],
         ),
