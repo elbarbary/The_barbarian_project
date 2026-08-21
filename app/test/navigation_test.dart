@@ -131,6 +131,28 @@ void main() {
   });
 
   group('pushed routes', () {
+    testWidgets('asking Today for a section does not take the tab down', (
+      tester,
+    ) async {
+      // Clearing the request inside `build` modified a provider while the
+      // widget tree was building. Riverpod refuses that outright, and the
+      // whole Today tab rendered as a red error screen instead.
+      await boot(tester);
+      await tapTab(tester, BNavTab.home);
+      await pumpUntil(tester, find.textContaining(RegExp('All filings')));
+
+      await tapVisible(tester, find.textContaining('All filings').first);
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump(const Duration(milliseconds: 400));
+
+      expect(
+        find.textContaining('Tried to modify a provider'),
+        findsNothing,
+        reason: 'Today fell over when asked to scroll to a section',
+      );
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('Today opens the Scanner and comes back', (
       tester,
     ) async {

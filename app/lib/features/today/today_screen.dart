@@ -69,16 +69,32 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // Listened to rather than read during `build`.
+    //
+    // Clearing the request inside `build` modified a provider while the widget
+    // tree was building, which Riverpod refuses outright — and it took the
+    // whole Today tab down with a red screen. The rule exists because two
+    // widgets watching the same provider could otherwise disagree about its
+    // value within one frame.
+    ref.listenManual(todaySectionRequestProvider, (_, next) {
+      if (next == null) return;
+      // Clear on the next microtask, outside the notification, then scroll
+      // once the frame that follows has laid the anchors out.
+      Future.microtask(
+        () => ref.read(todaySectionRequestProvider.notifier).clear(),
+      );
+      WidgetsBinding.instance.addPostFrameCallback((_) => _reveal(next));
+    }, fireImmediately: true);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isSample = ref.watch(isSampleDataProvider);
 
     // One-shot. Cleared immediately so returning to this tab later leaves the
     // reader where they were rather than yanking them down the page again.
-    final requested = ref.watch(todaySectionRequestProvider);
-    if (requested != null) {
-      ref.read(todaySectionRequestProvider.notifier).clear();
-      WidgetsBinding.instance.addPostFrameCallback((_) => _reveal(requested));
-    }
 
     return BScreenScaffold(
       blockGap: 22,
