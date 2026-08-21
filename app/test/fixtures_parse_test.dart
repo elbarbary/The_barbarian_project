@@ -235,6 +235,69 @@ void main() {
     });
   });
 
+  group('§13 quarterly financials', () {
+    test('most of the market now files quarters, not one company', () {
+      // §13 asks the Financials tab to "support annual periods and quarterly
+      // periods". Annual covered 228 of 282 and quarterly covered exactly one,
+      // because the parser deliberately took only years: within a single page
+      // El Sewedy's Q1 2024 states its assets in whole pounds while its annual
+      // 2024 states the same balance sheet in thousands.
+      final dir = Directory('assets/fixtures/companies');
+      if (!dir.existsSync()) return;
+
+      var withQuarters = 0;
+      var total = 0;
+      for (final file in dir.listSync()) {
+        if (file is! File || !file.path.endsWith('.json')) continue;
+        total++;
+        final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
+        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty) withQuarters++;
+      }
+
+      expect(total, greaterThan(0));
+      expect(withQuarters, greaterThan(total ~/ 2));
+    });
+
+    test('a quarter sits in the same units as its own year', () {
+      // The 1000x trap. A quarter scaled by the wrong factor is not obviously
+      // broken — it is a plausible number that is wrong by a thousand — and a
+      // year-end quarter should land on its own annual balance sheet.
+      final dir = Directory('assets/fixtures/companies');
+      if (!dir.existsSync()) return;
+
+      for (final file in dir.listSync()) {
+        if (file is! File || !file.path.endsWith('.json')) continue;
+        final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
+        final annual = ((fin['annual'] as List?) ?? const []).cast<Map<String, dynamic>>();
+        final quarterly = ((fin['quarterly'] as List?) ?? const []).cast<Map<String, dynamic>>();
+        if (annual.isEmpty || quarterly.isEmpty) continue;
+
+        final years = {
+          for (final row in annual)
+            '${row['period']}'.replaceAll(RegExp(r'[^0-9]'), ''):
+                (row['assets'] as num?)?.toDouble(),
+        };
+
+        for (final quarter in quarterly) {
+          final assets = (quarter['assets'] as num?)?.toDouble();
+          final year = '${quarter['period']}'.replaceAll(RegExp(r'[^0-9]'), '');
+          final annualAssets = years[year];
+          if (assets == null || annualAssets == null || annualAssets <= 0) continue;
+          final ratio = assets / annualAssets;
+          expect(
+            ratio,
+            inInclusiveRange(0.1, 10.0),
+            reason:
+                '${doc['ticker']} ${quarter['period']}: assets $assets against '
+                'a year end of $annualAssets — that is a unit error, not a company',
+          );
+        }
+      }
+    });
+  });
+
   group('opportunity scanner', () {
     test('§50 every scanned name says where its reading came from', () {
       // Entries assert things about named issuers — "H1 consolidated profit

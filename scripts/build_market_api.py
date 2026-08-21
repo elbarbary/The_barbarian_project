@@ -68,6 +68,10 @@ TICKER = re.compile(r"^[A-Z]{3,6}$")
 
 
 
+# How many months each of Mubasher's interim columns covers, which is what
+# decides whether a period is filed as annual or quarterly downstream.
+QUARTER_MONTHS = {"Q1": 3, "Q2": 3, "Q3": 3, "Q4": 3, "H1": 6, "9M": 9}
+
 def _filed_financials(
     filings_store: pathlib.Path | None = None,
     statements_store: pathlib.Path | None = None,
@@ -312,10 +316,6 @@ def history_union() -> dict[str, list[dict]]:
 
 # One year of sessions. The company screen offers 1M/3M/1Y and this fills the
 # longest of them; 5Y and MAX come from the split document, not from here.
-# How many months each of Mubasher's interim columns covers, which is what
-# decides whether a period is filed as annual or quarterly downstream.
-QUARTER_MONTHS = {"Q1": 3, "Q2": 3, "Q3": 3, "Q4": 3, "H1": 6, "9M": 9}
-
 KEEP_SESSIONS = 260
 
 
