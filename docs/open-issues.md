@@ -168,3 +168,53 @@ Profile and market snapshot 282/282. Search, watchlist, bookmarks all work.
 Cash or Trash is 8 studies, which is by design — they are deep investigations,
 not a per-company field.
 
+---
+
+## 6. Progress on the review, 21 August 2026
+
+### Closed
+
+**Price history.** 810,044 sessions collected from Mubasher across 210
+companies and merged. 1Y was fillable for sixteen listings and is now fillable
+for **208**. The window selector already refuses to offer what it cannot fill,
+so the two changes meet in the middle.
+
+The verification tolerance was wrong on the first pass and is worth recording:
+at a tenth of a percent it rejected 121 companies sitting at 81-89% agreement,
+because two honest feeds of the same closes round differently — Al Arafa's
+1 June is 7.32 on ours and 7.35 on theirs. At one percent those pass and the
+real failures still do not, at 12% to 60%.
+
+**Localisation.** Forty-six user-facing strings were written into widgets and
+never reached an Arabic reader — Today's section headings, the You screen, the
+empty states, and the whole nine-line scanner rubric. All are in the ARB now,
+in both languages, and a test walks `lib/` and fails on any new one. That guard
+matters: `'OPPORTUNITY SCANNER'` survived a product rename earlier the same day
+purely because a hardcoded string is invisible to the ARB and to a reviewer
+grepping for the old name.
+
+### Still open
+
+**5Y and MAX have no data behind them.** The published company file is capped
+at a year, because 282 companies of twenty years is fourteen megabytes of JSON
+in the app binary. §19 already anticipates this: *"If price history becomes
+large, split it: `prices/SWDY.json`."* The full series is staged in
+`data-source/prices`; building that document and wiring a repository, provider
+and manifest entry for it is the remaining work.
+
+**72 companies still have shallow or no price history.** 27 have no Mubasher
+page, 40 failed identity verification against closes we already held, and 5 had
+too little overlap to confirm. None were taken on faith. A second source would
+be needed for these rather than a looser check.
+
+**Explainer prose is English-only.** Roughly two dozen sentences live in
+`core/models/explainer.dart` — the bodies as well as the titles — so an Arabic
+reader gets English explanations. Localising the titles alone would put an
+Arabic heading over an English paragraph, which reads worse than either, so it
+is deliberately left whole. It is the largest remaining block of untranslated
+product text.
+
+**The full legal statement is English-only**, deliberately: it is a constant so
+counsel edits one place and a test can assert on it. The Arabic version is
+issue 2 above and is blocked on the same sign-off.
+
