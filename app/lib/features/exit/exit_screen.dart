@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -56,6 +58,7 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final query = ref.watch(searchQueryProvider);
     final results = ref.watch(searchResultsProvider);
@@ -67,14 +70,14 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
           children: [
             BSoftIconButton(
               icon: Icons.arrow_back_ios_new_rounded,
-              semanticLabel: 'Back',
+              semanticLabel: l.back,
               onTap: () => Navigator.of(context).maybePop(),
             ),
           ],
         ),
-        const BScreenTitle(
+        BScreenTitle(
           'Can I get out?',
-          subtitle: 'Before you buy anything: how the money comes back',
+          subtitle: l.exitHeadline,
         ),
         const _HowItWorks(),
         if (widget.ticker == null) ...[
@@ -169,6 +172,7 @@ class _ForCompany extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return BAsyncView(
@@ -242,7 +246,7 @@ class _ForCompany extends ConsumerWidget {
                 ),
               ),
             const SizedBox(height: 18),
-            const BSectionLabel('If you put in'),
+            BSectionLabel(l.exitIfYouPutIn),
             const SizedBox(height: 10),
             BPaperCard(
               padding: EdgeInsets.zero,
@@ -401,6 +405,7 @@ class _Facts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final rows = <(String, String)>[
       (
@@ -421,7 +426,7 @@ class _Facts extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BSectionLabel('The numbers behind it'),
+        BSectionLabel(l.exitNumbersBehind),
         const SizedBox(height: 10),
         BPaperCard(
           padding: EdgeInsets.zero,

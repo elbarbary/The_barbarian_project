@@ -527,7 +527,7 @@ class _Overview extends ConsumerWidget {
           const SizedBox(height: 22),
         ],
         if (size.isNotEmpty) ...[
-          const BSectionLabel('Company'),
+          BSectionLabel(l.companyLabel),
           _FactCard(rows: size),
         ],
         if (session.isEmpty && momentum.isEmpty && size.isEmpty)
@@ -682,7 +682,7 @@ class _Financials extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: BStatTile(
-                  label: 'Owners\' equity',
+                  label: l.ownersEquity,
                   value: formatMillions(latest.equity),
                   unit: 'm',
                 ),

@@ -898,4 +898,100 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unusualVolume => 'حجم تداول غير معتاد';
+
+  @override
+  String get saved => 'المحفوظات';
+
+  @override
+  String get loading => 'جارٍ التحميل';
+
+  @override
+  String get mainNavigation => 'التنقل الرئيسي';
+
+  @override
+  String get priceLow => 'أدنى';
+
+  @override
+  String get priceHigh => 'أعلى';
+
+  @override
+  String get priceOpen => 'الافتتاح';
+
+  @override
+  String get priceClose => 'الإغلاق';
+
+  @override
+  String get theWires => 'الأخبار';
+
+  @override
+  String get sortByScore => 'حسب الدرجة';
+
+  @override
+  String get sortMostRecent => 'الأحدث';
+
+  @override
+  String get cotNoneYet => 'لا توجد دراسات بعد';
+
+  @override
+  String get cotNoMatch => 'لا شيء يطابق ذلك';
+
+  @override
+  String get readInvestigation => 'اقرأ الدراسة';
+
+  @override
+  String get articleFailed => 'تعذّر فتح الدراسة';
+
+  @override
+  String get exitHeadline => 'قبل أن تشتري أي شيء: كيف تعود النقود';
+
+  @override
+  String get exitIfYouPutIn => 'لو استثمرت';
+
+  @override
+  String get exitNumbersBehind => 'الأرقام وراء ذلك';
+
+  @override
+  String get companyLabel => 'الشركة';
+
+  @override
+  String get explTraded => 'حجم ما جرى تداوله';
+
+  @override
+  String get explFinished => 'أين أغلق';
+
+  @override
+  String get explBuyable => 'كم يمكن شراؤه فعليًا';
+
+  @override
+  String get explValued => 'بكم تُسعَّر الشركة بالكامل';
+
+  @override
+  String get rubricFreshDisclosure => 'إفصاح حديث';
+
+  @override
+  String get rubricEconomicImportance => 'أهمية اقتصادية';
+
+  @override
+  String get rubricVolumeConfirmation => 'تأكيد بحجم التداول';
+
+  @override
+  String get rubricOwnershipCluster => 'تجمّع في الملكية';
+
+  @override
+  String get rubricDatedCatalyst => 'محفّز مؤرَّخ';
+
+  @override
+  String get rubricAntiChasing => 'مانع المطاردة';
+
+  @override
+  String get rubricLimitUpPenalty => 'خصم بلوغ الحد الأقصى';
+
+  @override
+  String get rubricIssuerDenial => 'نفي من الشركة';
+
+  @override
+  String get rubricRiskPenalty => 'خصم المخاطر';
+
+  @override
+  String get ownersEquity => 'حقوق الملكية';
 }

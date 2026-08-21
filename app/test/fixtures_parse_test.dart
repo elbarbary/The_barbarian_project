@@ -6,6 +6,8 @@ import 'package:barbarian/core/models/company.dart';
 import 'package:barbarian/core/models/manifest.dart';
 import 'package:barbarian/core/models/market_snapshot.dart';
 import 'package:barbarian/core/models/opportunity.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Spec §52: the shipped fixtures must parse into the shipped models.
@@ -358,13 +360,29 @@ void main() {
       expect(negative.scoreFraction, 0.0);
     });
 
-    test('the rubric breakdown is complete and ordered', () {
+    test('the rubric breakdown is complete and ordered', () async {
+      // Takes the localisations now: these nine lines are the rubric itself,
+      // and they were the largest block of text in the app that stayed English
+      // whatever language the reader had chosen.
+      final en = await AppLocalizations.delegate.load(const Locale('en'));
       const breakdownSource = ScanScores();
-      final breakdown = breakdownSource.breakdown;
+      final breakdown = breakdownSource.breakdown(en);
 
       expect(breakdown, hasLength(9));
       expect(breakdown.first.label, 'Fresh disclosure');
       expect(breakdown.last.label, 'Risk penalty');
+    });
+
+    test('the rubric reads in Arabic too', () async {
+      final ar = await AppLocalizations.delegate.load(const Locale('ar'));
+      const breakdown = ScanScores();
+      for (final line in breakdown.breakdown(ar)) {
+        expect(
+          RegExp(r'[\u0600-\u06FF]').hasMatch(line.label),
+          isTrue,
+          reason: '"${line.label}" is still English for an Arabic reader',
+        );
+      }
     });
 
     test('carries no entry, target, stop or expected-return field', () {

@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../l10n/app_localizations.dart';
+
 part 'opportunity.freezed.dart';
 part 'opportunity.g.dart';
 
@@ -244,16 +246,20 @@ abstract class ScanScores with _$ScanScores {
 
   /// Ordered for display, with human labels. Keeps the rubric in one place so
   /// a screen never hard-codes the list.
-  List<({String label, int value})> get breakdown => [
-    (label: 'Fresh disclosure', value: freshDisclosure),
-    (label: 'Economic importance', value: economicImportance),
-    (label: 'Volume confirmation', value: volumeConfirmation),
-    (label: 'Ownership cluster', value: ownershipCluster),
-    (label: 'Dated catalyst', value: datedCatalyst),
-    (label: 'Anti-chasing', value: antiChasing),
-    (label: 'Limit-up penalty', value: limitUpPenalty),
-    (label: 'Issuer denial', value: issuerDenial),
-    (label: 'Risk penalty', value: riskPenalty),
+  ///
+  /// Takes the localisations rather than holding English: these nine lines are
+  /// the rubric itself, not chrome around it, and they were the largest block
+  /// of text in the app that stayed English whatever the reader's language.
+  List<({String label, int value})> breakdown(AppLocalizations l) => [
+    (label: l.rubricFreshDisclosure, value: freshDisclosure),
+    (label: l.rubricEconomicImportance, value: economicImportance),
+    (label: l.rubricVolumeConfirmation, value: volumeConfirmation),
+    (label: l.rubricOwnershipCluster, value: ownershipCluster),
+    (label: l.rubricDatedCatalyst, value: datedCatalyst),
+    (label: l.rubricAntiChasing, value: antiChasing),
+    (label: l.rubricLimitUpPenalty, value: limitUpPenalty),
+    (label: l.rubricIssuerDenial, value: issuerDenial),
+    (label: l.rubricRiskPenalty, value: riskPenalty),
   ];
 }
 

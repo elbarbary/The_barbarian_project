@@ -32,6 +32,7 @@ class BDisclosuresBlock extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final feed = ref.watch(disclosuresProvider).value?.value;
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
@@ -42,7 +43,7 @@ class BDisclosuresBlock extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BSectionLabel('Filed with the exchange'),
+        BSectionLabel(l.homeFiledHero),
         const SizedBox(height: 6),
         Text(
           checks.isEmpty

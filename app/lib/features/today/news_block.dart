@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,6 +36,7 @@ class BNewsBlock extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final feed = ref.watch(newsProvider).value?.value;
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
@@ -44,7 +47,7 @@ class BNewsBlock extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const BSectionLabel('The wires'),
+        BSectionLabel(l.theWires),
         const SizedBox(height: 6),
         Text(
           checks.isEmpty

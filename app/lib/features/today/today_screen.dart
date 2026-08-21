@@ -113,7 +113,7 @@ class _TodayHeader extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const BScreenTitle('Today'),
+        BScreenTitle(l.navToday),
         const SizedBox(height: 6),
         Text(
           report?.reportDate == null

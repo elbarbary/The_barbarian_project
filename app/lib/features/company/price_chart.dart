@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
+
 import '../../core/models/company.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/text.dart';
@@ -77,6 +79,7 @@ class BPriceChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     if (points.length < 2) {
@@ -129,9 +132,9 @@ class BPriceChart extends StatelessWidget {
         const SizedBox(height: 10),
         Row(
           children: [
-            _Bound(label: 'Low', value: low),
+            _Bound(label: l.priceLow, value: low),
             const Spacer(),
-            _Bound(label: 'High', value: high, alignEnd: true),
+            _Bound(label: l.priceHigh, value: high, alignEnd: true),
           ],
         ),
       ],
@@ -149,6 +152,7 @@ class _SessionRange extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final low = session.low!;
     final high = session.high!;
@@ -221,10 +225,10 @@ class _SessionRange extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _Bound(label: 'Low', value: low),
-              _Bound(label: 'Open', value: open),
-              _Bound(label: 'Close', value: close),
-              _Bound(label: 'High', value: high, alignEnd: true),
+              _Bound(label: l.priceLow, value: low),
+              _Bound(label: l.priceOpen, value: open),
+              _Bound(label: l.priceClose, value: close),
+              _Bound(label: l.priceHigh, value: high, alignEnd: true),
             ],
           ),
         ],

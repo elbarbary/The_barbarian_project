@@ -58,7 +58,7 @@ class BLoadingBlocks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Loading',
+      label: AppLocalizations.of(context).loading,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

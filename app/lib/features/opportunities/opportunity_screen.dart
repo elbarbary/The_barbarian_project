@@ -67,7 +67,7 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
           children: [
             BSoftIconButton(
               icon: Icons.arrow_back_ios_new_rounded,
-              semanticLabel: 'Back',
+              semanticLabel: l.back,
               onTap: () => Navigator.of(context).maybePop(),
             ),
           ],
@@ -453,7 +453,7 @@ class _ScannedCard extends StatelessWidget {
               const SizedBox(height: 12),
               BScanGates(gates: entry.gates),
             ],
-            if (entry.scores.breakdown.any((e) => e.value != 0)) ...[
+            if (entry.scores.breakdown(l).any((e) => e.value != 0)) ...[
               const SizedBox(height: 14),
               _RubricBreakdown(scores: entry.scores),
             ],
@@ -479,7 +479,7 @@ class _ScannedCard extends StatelessWidget {
             ),
             if (entry.sources.isNotEmpty) ...[
               const SizedBox(height: 14),
-              const BSectionLabel('Sources', bottomGap: 8),
+              BSectionLabel(l.sourcesLabel, bottomGap: 8),
               for (final source in entry.sources)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4),
@@ -690,7 +690,7 @@ class _RubricBreakdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final items = scores.breakdown.where((e) => e.value != 0).toList();
+    final items = scores.breakdown(l).where((e) => e.value != 0).toList();
 
     if (items.isEmpty) {
       return Text(
@@ -771,7 +771,7 @@ class _ScannerTabs extends StatelessWidget {
         Expanded(
           child: _ScannerTab(
             icon: Icons.hub_outlined,
-            label: 'Sector',
+            label: l.sector,
             count: sectorCount,
             caption: sectorCount == 0 ? l.scanSectorNone : l.scanOneCohort,
             selected: active == _Tab.sector,

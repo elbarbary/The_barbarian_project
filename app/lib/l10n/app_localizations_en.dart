@@ -900,4 +900,101 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unusualVolume => 'Unusual volume';
+
+  @override
+  String get saved => 'Saved';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get mainNavigation => 'Main navigation';
+
+  @override
+  String get priceLow => 'Low';
+
+  @override
+  String get priceHigh => 'High';
+
+  @override
+  String get priceOpen => 'Open';
+
+  @override
+  String get priceClose => 'Close';
+
+  @override
+  String get theWires => 'The wires';
+
+  @override
+  String get sortByScore => 'By score';
+
+  @override
+  String get sortMostRecent => 'Most recent';
+
+  @override
+  String get cotNoneYet => 'No investigations yet';
+
+  @override
+  String get cotNoMatch => 'Nothing matches that';
+
+  @override
+  String get readInvestigation => 'Read investigation';
+
+  @override
+  String get articleFailed => 'Could not open the investigation';
+
+  @override
+  String get exitHeadline =>
+      'Before you buy anything: how the money comes back';
+
+  @override
+  String get exitIfYouPutIn => 'If you put in';
+
+  @override
+  String get exitNumbersBehind => 'The numbers behind it';
+
+  @override
+  String get companyLabel => 'Company';
+
+  @override
+  String get explTraded => 'How much it traded';
+
+  @override
+  String get explFinished => 'Where it finished';
+
+  @override
+  String get explBuyable => 'How much of it can actually be bought';
+
+  @override
+  String get explValued => 'What the whole company is priced at';
+
+  @override
+  String get rubricFreshDisclosure => 'Fresh disclosure';
+
+  @override
+  String get rubricEconomicImportance => 'Economic importance';
+
+  @override
+  String get rubricVolumeConfirmation => 'Volume confirmation';
+
+  @override
+  String get rubricOwnershipCluster => 'Ownership cluster';
+
+  @override
+  String get rubricDatedCatalyst => 'Dated catalyst';
+
+  @override
+  String get rubricAntiChasing => 'Anti-chasing';
+
+  @override
+  String get rubricLimitUpPenalty => 'Limit-up penalty';
+
+  @override
+  String get rubricIssuerDenial => 'Issuer denial';
+
+  @override
+  String get rubricRiskPenalty => 'Risk penalty';
+
+  @override
+  String get ownersEquity => 'Owners\' equity';
 }

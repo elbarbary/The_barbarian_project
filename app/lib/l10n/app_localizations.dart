@@ -1669,6 +1669,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unusual volume'**
   String get unusualVolume;
+
+  /// No description provided for @saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get saved;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @mainNavigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Main navigation'**
+  String get mainNavigation;
+
+  /// No description provided for @priceLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get priceLow;
+
+  /// No description provided for @priceHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priceHigh;
+
+  /// No description provided for @priceOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get priceOpen;
+
+  /// No description provided for @priceClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get priceClose;
+
+  /// No description provided for @theWires.
+  ///
+  /// In en, this message translates to:
+  /// **'The wires'**
+  String get theWires;
+
+  /// No description provided for @sortByScore.
+  ///
+  /// In en, this message translates to:
+  /// **'By score'**
+  String get sortByScore;
+
+  /// No description provided for @sortMostRecent.
+  ///
+  /// In en, this message translates to:
+  /// **'Most recent'**
+  String get sortMostRecent;
+
+  /// No description provided for @cotNoneYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No investigations yet'**
+  String get cotNoneYet;
+
+  /// No description provided for @cotNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches that'**
+  String get cotNoMatch;
+
+  /// No description provided for @readInvestigation.
+  ///
+  /// In en, this message translates to:
+  /// **'Read investigation'**
+  String get readInvestigation;
+
+  /// No description provided for @articleFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the investigation'**
+  String get articleFailed;
+
+  /// No description provided for @exitHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you buy anything: how the money comes back'**
+  String get exitHeadline;
+
+  /// No description provided for @exitIfYouPutIn.
+  ///
+  /// In en, this message translates to:
+  /// **'If you put in'**
+  String get exitIfYouPutIn;
+
+  /// No description provided for @exitNumbersBehind.
+  ///
+  /// In en, this message translates to:
+  /// **'The numbers behind it'**
+  String get exitNumbersBehind;
+
+  /// No description provided for @companyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Company'**
+  String get companyLabel;
+
+  /// No description provided for @explTraded.
+  ///
+  /// In en, this message translates to:
+  /// **'How much it traded'**
+  String get explTraded;
+
+  /// No description provided for @explFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it finished'**
+  String get explFinished;
+
+  /// No description provided for @explBuyable.
+  ///
+  /// In en, this message translates to:
+  /// **'How much of it can actually be bought'**
+  String get explBuyable;
+
+  /// No description provided for @explValued.
+  ///
+  /// In en, this message translates to:
+  /// **'What the whole company is priced at'**
+  String get explValued;
+
+  /// No description provided for @rubricFreshDisclosure.
+  ///
+  /// In en, this message translates to:
+  /// **'Fresh disclosure'**
+  String get rubricFreshDisclosure;
+
+  /// No description provided for @rubricEconomicImportance.
+  ///
+  /// In en, this message translates to:
+  /// **'Economic importance'**
+  String get rubricEconomicImportance;
+
+  /// No description provided for @rubricVolumeConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume confirmation'**
+  String get rubricVolumeConfirmation;
+
+  /// No description provided for @rubricOwnershipCluster.
+  ///
+  /// In en, this message translates to:
+  /// **'Ownership cluster'**
+  String get rubricOwnershipCluster;
+
+  /// No description provided for @rubricDatedCatalyst.
+  ///
+  /// In en, this message translates to:
+  /// **'Dated catalyst'**
+  String get rubricDatedCatalyst;
+
+  /// No description provided for @rubricAntiChasing.
+  ///
+  /// In en, this message translates to:
+  /// **'Anti-chasing'**
+  String get rubricAntiChasing;
+
+  /// No description provided for @rubricLimitUpPenalty.
+  ///
+  /// In en, this message translates to:
+  /// **'Limit-up penalty'**
+  String get rubricLimitUpPenalty;
+
+  /// No description provided for @rubricIssuerDenial.
+  ///
+  /// In en, this message translates to:
+  /// **'Issuer denial'**
+  String get rubricIssuerDenial;
+
+  /// No description provided for @rubricRiskPenalty.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk penalty'**
+  String get rubricRiskPenalty;
+
+  /// No description provided for @ownersEquity.
+  ///
+  /// In en, this message translates to:
+  /// **'Owners\' equity'**
+  String get ownersEquity;
 }
 
 class _AppLocalizationsDelegate
