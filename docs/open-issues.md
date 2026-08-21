@@ -112,3 +112,59 @@ Three ways out, none of which should be picked without the founder:
    denominator and a day of freshness.
 3. **Fetch real historical closes for every listed share** and rebuild breadth
    properly. Correct, and by far the most work and the most scraping.
+
+---
+
+## 5. Review against the spec, 21 August 2026
+
+Asked whether the app actually does what it is meant to. Read §1–§56 against
+what is built. Two things that *look* like holes are not, and two real ones.
+
+### Not holes — the spec defers them on purpose
+
+* **The Pit is a placeholder** (104 lines against 1,000–1,700 for real
+  features), and a quarter of the navigation says "coming soon". §55 opens with
+  *"Do NOT begin by implementing The Pit"* and names the flow that must feel
+  excellent first. §30 adds that the read-only product must work with no
+  account at all. So this is sequencing, not neglect.
+* **Notifications do not exist.** §34: *"Do not build complicated notifications
+  in the first milestone."*
+
+### Real: quarterly financials exist for 1 company in 282
+
+§13 requires the Financials tab to *"support annual periods and quarterly
+periods"*. Annual covers 228 of 282 (81%). Quarterly covers **one**. So half of
+what §13 asks for is a tab that cannot be drawn, and "study historical
+financial data" (§1) is served at yearly resolution only — on an exchange where
+the interesting filings are half-year results.
+
+Mubasher carries interim statements and `mubasher_statements.py` already parses
+that shape; this is a collection job, not a research one.
+
+### Real: the price series is a few months deep, not five years
+
+§13 asks for `1M 3M 1Y 5Y MAX`. What is held:
+
+| sessions stored | companies |
+|---|---|
+| none | 23 |
+| under 50 | 3 |
+| 50–99 | 240 |
+| 200+ | 16 |
+
+So 1Y is fillable for 16 companies and 5Y for none. The window selector no
+longer offers what it cannot fill, which stops the screen overstating itself —
+but that is honesty about a gap, not the gap closed. The company page is
+supposed to be *"one of the most important screens in the entire product"* and
+its Price tab is a few months deep for almost everything.
+
+Investing.com served a verified year of index closes and very likely serves
+per-share history too, but it began rate-limiting during this work. Needs a
+paced, resumable job — the same discipline the EGX fetcher uses.
+
+### Coverage that is fine
+
+Profile and market snapshot 282/282. Search, watchlist, bookmarks all work.
+Cash or Trash is 8 studies, which is by design — they are deep investigations,
+not a per-company field.
+
