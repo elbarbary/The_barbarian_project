@@ -70,9 +70,26 @@ CSV_URL = re.compile(r'historical-data-url="([^"]+\.csv)"')
 # agreement, while the errors this exists to catch sit at 12% and 53%. The
 # check is for identity, not accuracy, and a wrong company is wrong by whole
 # multiples rather than by a rounding place.
-MIN_OVERLAP = 5
-TOLERANCE = 0.01
-MIN_AGREEMENT = 0.9
+MIN_OVERLAP = 1
+TOLERANCE = 0.02
+MIN_AGREEMENT = 0.8
+
+# Identity is judged on the most recent sessions, not the whole overlap.
+#
+# Our stored closes are **split- and dividend-adjusted**; Mubasher publishes the
+# raw print. After a corporate action the two agree, and before it they differ
+# by the adjustment factor — Assiut Islamic Trading sits at 0.257 on ours
+# against 0.310 on theirs in May and matches exactly by August. Judged over the
+# whole overlap that reads as a different company; judged over the seam, where
+# both are on today's basis, it reads as what it is.
+SEAM_SESSIONS = 20
+
+# How far the ratio may wander across the seam before the two are called
+# different companies, and how far from 1 the ratio itself may sit. The spread
+# is the real test; the factor bound only rules out a series at a completely
+# different price level that happens to be quiet.
+RATIO_SPREAD = 0.04
+MAX_FACTOR = 4.0
 
 
 class PriceHistoryUnavailable(RuntimeError):
@@ -97,12 +114,43 @@ def _get(url: str, timeout: int = 45) -> str:
         raise PriceHistoryUnavailable(str(error)[:120]) from error
 
 
+# Mubasher answers a page it is perfectly willing to serve with a **404** when
+# it has seen too much of us, and the same URL loads a minute later. Left
+# unretried that cost 27 companies on the first pass, all of them real.
+PAGE_ATTEMPTS = 3
+BACKOFF = 20
+
+
+def pace(seconds: int) -> None:
+    """Set the gap between requests for this run.
+
+    Their robots.txt asks for five seconds and five is enough for a short one.
+    A run long enough to walk the whole market trips something slower, and what
+    it returns is not a 429 but a **404** on a page that loads perfectly a
+    minute later — which is why the first pass lost 27 real companies.
+    """
+    global CRAWL_DELAY
+    CRAWL_DELAY = seconds
+
+
 def csv_url_for(ticker: str) -> str:
-    page = _get(STOCK_PAGE.format(ticker))
-    found = CSV_URL.search(page)
-    if not found:
+    last = ""
+    for attempt in range(PAGE_ATTEMPTS):
+        try:
+            page = _get(STOCK_PAGE.format(ticker))
+        except PriceHistoryUnavailable as error:
+            last = str(error)
+            # Only a 404 is worth waiting out; a 403 or a timeout will not
+            # improve by asking again the same way.
+            if "404" not in last or attempt == PAGE_ATTEMPTS - 1:
+                raise
+            time.sleep(BACKOFF * (attempt + 1))
+            continue
+        found = CSV_URL.search(page)
+        if found:
+            return found.group(1)
         raise PriceHistoryUnavailable("page carries no historical-data-url")
-    return found.group(1)
+    raise PriceHistoryUnavailable(last or "page could not be fetched")
 
 
 def parse_csv(body: str) -> list[dict]:
@@ -131,17 +179,37 @@ def parse_csv(body: str) -> list[dict]:
     return bars
 
 
+MARKET = REPO / "public" / "data" / "v1" / "market.json"
+
+
 def stored_closes(ticker: str) -> dict[str, float]:
+    """Every close we already hold for this company, to check a fetch against.
+
+    Two places, because 23 listings have no `price_history` at all and were
+    being refused for having nothing to compare — while the market snapshot
+    held a close for all 282 of them the whole time. One dated close is a
+    weaker anchor than sixty, and it is enough to catch a series belonging to
+    somebody else.
+    """
+    closes: dict[str, float] = {}
+    try:
+        snapshot = json.loads(MARKET.read_text(encoding="utf-8"))
+        day = snapshot.get("date")
+        row = (snapshot.get("stocks") or {}).get(ticker) or {}
+        if day and row.get("close") is not None:
+            closes[day] = float(row["close"])
+    except (OSError, json.JSONDecodeError, TypeError, ValueError):
+        pass
+
     path = COMPANIES / f"{ticker}.json"
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
-        return {}
-    return {
-        row["date"]: float(row["close"])
-        for row in doc.get("price_history") or []
-        if row.get("date") and row.get("close") is not None
-    }
+        return closes
+    for row in doc.get("price_history") or []:
+        if row.get("date") and row.get("close") is not None:
+            closes[row["date"]] = float(row["close"])
+    return closes
 
 
 def verify(ticker: str, bars: list[dict]) -> None:
@@ -165,16 +233,96 @@ def verify(ticker: str, bars: list[dict]) -> None:
         raise PriceHistoryUnavailable(
             f"only {len(shared)} overlapping sessions; cannot confirm identity"
         )
-    agreed = sum(
-        1 for d in shared
-        if abs(theirs[d] - ours[d]) <= max(0.01, abs(ours[d]) * TOLERANCE)
-    )
-    ratio = agreed / len(shared)
-    if ratio < MIN_AGREEMENT:
+    # Identity is **co-movement**, not agreement.
+    #
+    # Asking whether the closes match rejected a pile of real companies. Golden
+    # Pyramids sits at a rock-steady 1.053 of ours on every single session it
+    # shares — one price stale where the other is not, on a share that barely
+    # trades — and Juhayna matches to the millieme but was thrown out for older
+    # sessions that predate a corporate action. Neither is a different company.
+    #
+    # Two different companies do not hold a constant ratio, because they do not
+    # move together. So the test is whether the ratio *stays put*: a tight
+    # spread means one instrument on two bases, which `align` then reconciles.
+    # A scattered one means two instruments, and no scaling can fix that.
+    seam = shared[-SEAM_SESSIONS:]
+    ratios = [theirs[d] / ours[d] for d in seam if ours[d]]
+    if len(ratios) < MIN_OVERLAP:
+        raise PriceHistoryUnavailable("too few usable closes to confirm identity")
+    if len(ratios) == 1:
+        # A single dated close cannot show co-movement, so it is held to
+        # matching outright rather than to holding a steady ratio.
+        only = ratios[0]
+        if abs(only - 1.0) > TOLERANCE:
+            raise PriceHistoryUnavailable(
+                f"the one close we hold differs by {abs(only - 1) * 100:.1f}% "
+                f"— cannot confirm this is the same company"
+            )
+        return
+    ratios.sort()
+    middle = ratios[len(ratios) // 2]
+    if middle <= 0:
+        raise PriceHistoryUnavailable("non-positive prices; cannot compare")
+    spread = max(abs(r / middle - 1.0) for r in ratios)
+    if spread > RATIO_SPREAD:
         raise PriceHistoryUnavailable(
-            f"only {agreed}/{len(shared)} overlapping closes agree "
-            f"({ratio:.0%}) — this is a different company's series"
+            f"the ratio to our closes swings {spread:.0%} across the last "
+            f"{len(ratios)} sessions — these two do not move together, so this "
+            f"is a different company's series"
         )
+    # A ratio far from 1 is a different price level, not a different basis: a
+    # corporate action moves a price by a factor, not by two orders of it.
+    if not (1 / MAX_FACTOR) <= middle <= MAX_FACTOR:
+        raise PriceHistoryUnavailable(
+            f"their closes run {middle:.2f}x ours — that is a different "
+            f"instrument, not an adjustment"
+        )
+
+
+def align(bars: list[dict], ours: dict[str, float]) -> list[dict]:
+    """Put a raw series onto the same basis as the closes we already publish.
+
+    Mubasher prints what traded; our stored closes are adjusted for splits and
+    dividends. Joining the two unchanged puts a step in the chart on the day of
+    every corporate action — a price that never happened, at the exact moment a
+    reader is most likely to be looking.
+
+    So the ratio between the two is measured on every session they share and
+    carried backwards: a bar older than the whole overlap takes the oldest
+    factor we could observe. Actions **before** the overlap stay unadjusted,
+    because nothing here can see them; that is a real limit and it is the same
+    limit any unadjusted series has.
+
+    The common case is a factor of exactly 1.0 all the way, and then this
+    returns the bars untouched.
+    """
+    if not ours:
+        return bars
+    factors: dict[str, float] = {}
+    for bar in bars:
+        mine = ours.get(bar["date"])
+        if mine and bar["close"]:
+            factors[bar["date"]] = mine / bar["close"]
+    if not factors:
+        return bars
+
+    days = sorted(factors)
+    oldest = factors[days[0]]
+    out: list[dict] = []
+    for bar in bars:
+        day = bar["date"]
+        if day in factors:
+            factor = factors[day]
+        else:
+            # The newest factor at or before this bar, or the oldest one we
+            # have when the bar predates the overlap entirely.
+            earlier = [d for d in days if d <= day]
+            factor = factors[earlier[-1]] if earlier else oldest
+        # A factor that is not near 1 or a clean corporate-action ratio is
+        # noise between two feeds, not an adjustment. Leave those alone.
+        adjusted = bar["close"] * factor if abs(factor - 1.0) > 0.03 else bar["close"]
+        out.append({**bar, "close": round(adjusted, 4)})
+    return out
 
 
 def tickers() -> list[str]:
@@ -198,6 +346,7 @@ def collect(ticker: str) -> int:
     time.sleep(CRAWL_DELAY)
     bars = parse_csv(_get(url, timeout=90))
     verify(ticker, bars)
+    bars = align(bars, stored_closes(ticker))
     STAGE.mkdir(parents=True, exist_ok=True)
     (STAGE / f"{ticker}.json").write_text(
         json.dumps(
@@ -214,7 +363,16 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0, help="stop after N companies")
     parser.add_argument("--refresh", action="store_true", help="refetch what is held")
     parser.add_argument("--only", default=None, help="one ticker, for checking")
+    parser.add_argument(
+        "--delay",
+        type=int,
+        default=0,
+        help="seconds between requests; their robots.txt asks for 5, but a run "
+             "long enough to cover the market trips a slower limit that answers "
+             "a perfectly good page with a 404",
+    )
     args = parser.parse_args()
+    pace(max(CRAWL_DELAY, args.delay))
 
     wanted = [args.only] if args.only else tickers()
     if not args.refresh:

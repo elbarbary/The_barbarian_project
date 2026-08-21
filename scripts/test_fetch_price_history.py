@@ -13,6 +13,7 @@ import unittest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import fetch_price_history as fp  # noqa: E402
+from fetch_price_history import align as align_series  # noqa: E402
 
 # Real El Sewedy rows, in the order the file publishes them. There is no header
 # line, so this order is the thing under test.
@@ -78,11 +79,21 @@ class VerifyTest(unittest.TestCase):
             fp.verify("SWDY", fp.parse_csv(SAMPLE))
         self.assertIn("different company", str(caught.exception))
 
-    def test_too_little_overlap_is_refused(self):
+    def test_a_single_matching_close_is_enough(self):
+        # 23 listings have no stored history at all and were refused for having
+        # nothing to compare, while the market snapshot held a close for all
+        # 282 the whole time. One dated close is a weaker anchor than sixty and
+        # it still catches a series belonging to somebody else.
         self._ours({"2026-08-20": 116.0})
+        fp.verify("SWDY", fp.parse_csv(SAMPLE))
+
+    def test_a_single_close_that_differs_is_refused(self):
+        # With one point there is no co-movement to measure, so it has to match
+        # outright rather than merely hold a steady ratio.
+        self._ours({"2026-08-20": 58.0})
         with self.assertRaises(fp.PriceHistoryUnavailable) as caught:
             fp.verify("SWDY", fp.parse_csv(SAMPLE))
-        self.assertIn("overlapping", str(caught.exception))
+        self.assertIn("same company", str(caught.exception))
 
     def test_nothing_stored_means_nothing_to_trust(self):
         # 23 listings hold no history at all, and an unverifiable series for
@@ -137,6 +148,73 @@ class VerifyTest(unittest.TestCase):
             "2026-08-18": 127.2501, "2026-08-20": 115.999,
         })
         fp.verify("SWDY", fp.parse_csv(SAMPLE))
+
+
+class AlignTest(unittest.TestCase):
+    """Putting a raw series onto our adjusted basis.
+
+    Our stored closes are split- and dividend-adjusted; Mubasher prints what
+    traded. Joined unchanged, the chart steps on the day of every corporate
+    action — a price that never happened, exactly where a reader is looking.
+    """
+
+    def test_a_corporate_action_is_adjusted_away(self):
+        # The real case: Assiut Islamic Trading is 0.257 on ours against 0.310
+        # on theirs in May, and matches exactly by August.
+        bars = [
+            {"date": "2026-05-13", "close": 0.310, "volume": 1},
+            {"date": "2026-05-14", "close": 0.310, "volume": 1},
+            {"date": "2026-08-16", "close": 0.540, "volume": 1},
+        ]
+        ours = {"2026-05-13": 0.257, "2026-05-14": 0.256, "2026-08-16": 0.540}
+        out = {b["date"]: b["close"] for b in align_series(bars, ours)}
+        self.assertAlmostEqual(out["2026-05-13"], 0.257, places=3)
+        # Already on the same basis, so untouched.
+        self.assertAlmostEqual(out["2026-08-16"], 0.540, places=3)
+
+    def test_history_older_than_the_overlap_takes_the_oldest_factor(self):
+        bars = [
+            {"date": "2020-01-02", "close": 10.0, "volume": 1},
+            {"date": "2026-05-13", "close": 0.310, "volume": 1},
+            {"date": "2026-08-16", "close": 0.540, "volume": 1},
+        ]
+        ours = {"2026-05-13": 0.257, "2026-08-16": 0.540}
+        out = {b["date"]: b["close"] for b in align_series(bars, ours)}
+        # 10.0 * (0.257 / 0.310)
+        self.assertAlmostEqual(out["2020-01-02"], 8.29, places=1)
+
+    def test_ordinary_noise_is_left_alone(self):
+        # Two feeds rounding differently is not a corporate action, and
+        # rewriting every close to chase a third of a percent would be worse
+        # than leaving them as filed.
+        bars = [{"date": "2026-08-16", "close": 7.35, "volume": 1}]
+        ours = {"2026-08-16": 7.32}
+        out = align_series(bars, ours)
+        self.assertAlmostEqual(out[0]["close"], 7.35, places=2)
+
+    def test_nothing_to_align_against_returns_the_bars_unchanged(self):
+        bars = [{"date": "2026-08-16", "close": 7.35, "volume": 1}]
+        self.assertEqual(align_series(bars, {}), bars)
+
+
+class SeamTest(unittest.TestCase):
+    def setUp(self):
+        self._stored = fp.stored_closes
+
+    def tearDown(self):
+        fp.stored_closes = self._stored
+
+    def test_an_old_divergence_no_longer_rejects_a_real_match(self):
+        """Judged over the whole overlap this reads as a different company."""
+        rows, ours = [], {}
+        for day in range(1, 25):
+            rows.append(f"2026-06-{day:02d}/00:00:00,1,1,1,0.310,100")
+            ours[f"2026-06-{day:02d}"] = 0.257          # pre-action, 20% apart
+        for day in range(1, 25):
+            rows.append(f"2026-08-{day:02d}/00:00:00,1,1,1,0.540,100")
+            ours[f"2026-08-{day:02d}"] = 0.540          # post-action, identical
+        fp.stored_closes = lambda _t: ours
+        fp.verify("ASPI", fp.parse_csv("\n".join(rows)))
 
 
 if __name__ == "__main__":
