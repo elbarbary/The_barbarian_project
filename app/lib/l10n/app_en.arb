@@ -541,5 +541,7 @@
   },
   "macroUnavailable": "Some sources could not be reached",
   "macroCoverage": "What is being reported",
-  "homeLeadStory": "Today's story"
+  "homeLeadStory": "Today's story",
+  "feedNews": "News",
+  "feedExchange": "From the exchange"
 }

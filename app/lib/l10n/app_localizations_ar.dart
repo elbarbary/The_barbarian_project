@@ -1023,4 +1023,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeLeadStory => 'قصة اليوم';
+
+  @override
+  String get feedNews => 'الأخبار';
+
+  @override
+  String get feedExchange => 'من البورصة';
 }

@@ -330,5 +330,7 @@
   },
   "macroUnavailable": "تعذّر الوصول إلى بعض المصادر",
   "macroCoverage": "ما يُنشر عن ذلك",
-  "homeLeadStory": "قصة اليوم"
+  "homeLeadStory": "قصة اليوم",
+  "feedNews": "الأخبار",
+  "feedExchange": "من البورصة"
 }

@@ -22,6 +22,7 @@ import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
 import 'macro_block.dart';
+import 'feed_tabs.dart';
 import 'lead_story.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
@@ -84,12 +85,18 @@ class HomeScreen extends ConsumerWidget {
         //   5. what moves Egypt, which the rest is read against
         //   6. the watchlist, reached on purpose rather than stumbled on
         const BLeadStory(),
-        const _LatestNews(),
+        // Both feeds behind one selector. They were stacked — a dozen
+        // headlines, a market block, then ten filings further down — and both
+        // answer "what happened today", so a reader after one had to scroll
+        // past the other to reach it.
+        const BFeedTabs(),
         const _Indices(),
         const _Breadth(),
+        // The lead filing keeps its own card. It is not the same thing as the
+        // filings list behind the tab: this one is the single disclosure worth
+        // the largest card on the screen, with the measured reason it leads.
         BSectionLabel(l.homeFiledHero),
         const _DailyInsight(),
-        const _AlsoFiled(),
         const BMacroBlock(),
         const _WatchlistBlock(),
       ],
@@ -615,8 +622,15 @@ class _WatchTile extends ConsumerWidget {
 /// plain sentence saying what that kind of filing does to somebody holding the
 /// share, because a list of event names is a table of contents and the meaning
 /// is the product.
-class _AlsoFiled extends ConsumerWidget {
-  const _AlsoFiled();
+class HomeAlsoFiled extends ConsumerWidget {
+  const HomeAlsoFiled({this.limit = 10, this.showHeader = true, super.key});
+
+  /// How many rows to show. Five under a tab, because the tab is the promise
+  /// that there are more and "All filings" is where they are.
+  final int limit;
+
+  /// Suppressed when a tab selector above is already naming this feed.
+  final bool showHeader;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -629,17 +643,14 @@ class _AlsoFiled extends ConsumerWidget {
     final lead = _DailyInsight._lead(feed);
     final items = (feed?.items ?? const <Disclosure>[])
         .where((i) => i.id != lead?.id && i.tickers.length == 1)
-        // Four rows read as "there is nothing here" on a screen you can keep
-        // scrolling. The exchange usually files a couple of dozen a session
-        // and the feed is already deduplicated, so showing more is showing
-        // what is there rather than padding.
-        .take(10)
+        .take(limit)
         .toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (showHeader)
         Row(
           children: [
             Expanded(child: BSectionLabel(l.homeAlsoFiled)),
@@ -734,8 +745,11 @@ class _AlsoFiled extends ConsumerWidget {
 /// opening it felt like arriving nowhere. Each row is somebody else's sentence
 /// in their own language, with every outlet that ran it named, and it opens
 /// out to the outlet rather than being retold here.
-class _LatestNews extends ConsumerWidget {
-  const _LatestNews();
+class HomeLatestNews extends ConsumerWidget {
+  const HomeLatestNews({this.limit = 12, this.showHeader = true, super.key});
+
+  final int limit;
+  final bool showHeader;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -743,9 +757,7 @@ class _LatestNews extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final feed = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
-    // Same reason as the filings above: four headlines under a scrollable
-    // screen makes a full feed look empty.
-    final items = (feed?.items ?? const <NewsItem>[]).take(12).toList();
+    final items = (feed?.items ?? const <NewsItem>[]).take(limit).toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
     // Every outlet that ran it, named. A story three papers carried is more
@@ -763,6 +775,7 @@ class _LatestNews extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (showHeader)
         Row(
           children: [
             Expanded(child: BSectionLabel(l.homeLatestNews)),

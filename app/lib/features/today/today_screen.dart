@@ -13,6 +13,7 @@ import 'news_block.dart';
 import 'rates_block.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
+import '../../core/widgets/composites.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -102,8 +103,11 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
         const _TodayHeader(),
         const _ScannerHero(),
         const BRatesBlock(),
-        BDisclosuresBlock(key: _filings),
-        BNewsBlock(key: _news),
+        // The same two feeds, the same selector. Today is the full version —
+        // Home shows five of each and sends the reader here for the rest — so
+        // both anchors stay live for the scroll-to-section request even while
+        // only one feed is on screen.
+        BTodayFeeds(filingsKey: _filings, newsKey: _news),
         if (isSample) const Center(child: BSampleDataNotice()),
         const BLegalFootnote(),
       ],
@@ -310,3 +314,57 @@ class _ScanCount extends StatelessWidget {
 /// The canvas puts an index level here. There is no licensed EGX index feed,
 /// but breadth — how many rose against how many fell — is a real aggregate of
 /// real closes, and arguably tells you more about a session than a single
+
+/// Today's two feeds, behind the selector Home uses.
+///
+/// Stacked, they made the screen a scroll: every filing of the session, then
+/// every headline. The reader picks now, and "All filings" from Home still
+/// lands on the right one because the request selects the tab as well as
+/// scrolling to it.
+class BTodayFeeds extends ConsumerStatefulWidget {
+  const BTodayFeeds({required this.filingsKey, required this.newsKey, super.key});
+
+  final Key filingsKey;
+  final Key newsKey;
+
+  @override
+  ConsumerState<BTodayFeeds> createState() => _BTodayFeedsState();
+}
+
+class _BTodayFeedsState extends ConsumerState<BTodayFeeds> {
+  int _tab = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // A reader who tapped "All filings" on Home asked for the filings, so the
+    // selector answers that rather than making them ask twice.
+    ref.listenManual(todaySectionRequestProvider, (_, next) {
+      if (next == null || !mounted) return;
+      setState(() => _tab = next == TodaySection.filings ? 1 : 0);
+    }, fireImmediately: true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BSegmentedRow(
+          segments: [
+            BSegment(label: l.feedNews),
+            BSegment(label: l.feedExchange),
+          ],
+          selectedIndex: _tab,
+          onChanged: (i) => setState(() => _tab = i),
+        ),
+        const SizedBox(height: 14),
+        if (_tab == 0)
+          BNewsBlock(key: widget.newsKey)
+        else
+          BDisclosuresBlock(key: widget.filingsKey),
+      ],
+    );
+  }
+}

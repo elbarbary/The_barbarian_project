@@ -1026,4 +1026,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeLeadStory => 'Today\'s story';
+
+  @override
+  String get feedNews => 'News';
+
+  @override
+  String get feedExchange => 'From the exchange';
 }

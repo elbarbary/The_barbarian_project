@@ -139,9 +139,10 @@ void main() {
       // whole Today tab rendered as a red error screen instead.
       await boot(tester);
       await tapTab(tester, BNavTab.home);
-      await pumpUntil(tester, find.textContaining(RegExp('All filings')));
+      // News is the default tab, so its action is the one on screen.
+      await pumpUntil(tester, find.textContaining(RegExp('All news')));
 
-      await tapVisible(tester, find.textContaining('All filings').first);
+      await tapVisible(tester, find.textContaining('All news').first);
       await tester.pump(const Duration(milliseconds: 400));
       await tester.pump(const Duration(milliseconds: 400));
 

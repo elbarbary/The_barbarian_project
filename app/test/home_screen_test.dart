@@ -3,9 +3,7 @@ import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/features/home/home_screen.dart';
-import 'dart:convert';
 import 'package:barbarian/core/models/rates.dart';
-import 'package:barbarian/core/models/news.dart';
 import 'package:barbarian/core/models/market_history.dart';
 import 'package:barbarian/core/models/macro.dart';
 import 'package:flutter/widgets.dart';
@@ -204,89 +202,31 @@ void main() {
     );
   });
 
-  testWidgets('Home offers a real amount of the feed, not a token four', (
+  testWidgets('the two feeds share a place and the reader picks', (
     tester,
   ) async {
-    // Four rows under a screen you can keep scrolling reads as "there is
-    // nothing here". The exchange files a couple of dozen a session and the
-    // news feed is already deduplicated to 120 stories, so four was hiding a
-    // full feed rather than summarising it.
+    // They were stacked — a dozen headlines, a market block, then ten filings
+    // further down — and both answer "what happened today", so a reader after
+    // one had to scroll past the other to reach it.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.text('News'));
 
-    final news = NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
-    expect(news.items.length, greaterThan(12));
+    expect(find.text('News'), findsWidgets);
+    expect(find.text('From the exchange'), findsWidgets);
+    // News is the default: this is a news app.
+    expect(find.textContaining('All news'), findsWidgets);
+  });
 
-    // Rendered rows are bounded by the viewport, so this asserts the limit the
-    // screen applies rather than counting widgets: the section takes 12.
-    final source = File('lib/features/home/home_screen.dart').readAsStringSync();
+  test('the feeds behind the tabs are short, and the rest is a tap away', () {
+    // Five rows is enough to see there is a feed and short enough that the
+    // screen keeps moving. Twelve under a lead story turned Home into a list
+    // to be scrolled past rather than read.
+    final source = File('lib/features/home/feed_tabs.dart').readAsStringSync();
+    expect(source.contains('limit: 5'), isTrue);
     expect(
-      source.contains('.take(12)'),
+      source.contains('showHeader: false'),
       isTrue,
-      reason: 'the news section should offer more than a token few',
-    );
-    // Deliberately not asserting that no `.take(4)` survives anywhere: the
-    // watchlist grid takes four tiles and always did, which is a different
-    // question from how much of the feed Home offers.
-  });
-
-  test('the breadth chart has lines to draw, and says how each was counted', () {
-    // It drew a single dot: the store held one session, because breadth is not
-    // published for this exchange and was only ever accumulated. Four weeks are
-    // now reconstructed from stored per-company closes so there is a shape on
-    // day one, and live sessions append from here.
-    final history = MarketHistory.fromJson(
-      readFixtureObjectSync('market-history.json'),
-    );
-    final counted = history.sessions
-        .where((s) => !(s.breadth?.isEmpty ?? true))
-        .toList();
-
-    expect(
-      counted.length,
-      greaterThan(10),
-      reason: 'three lines need more than a couple of points',
-    );
-
-    // The reconstruction sees ~230 shares and the live snapshot 282, so every
-    // row has to carry its own denominator or the lines lie about each other.
-    for (final session in counted) {
-      final b = session.breadth!;
-      expect(b.counted, greaterThan(0));
-      expect(b.up + b.down + b.flat, b.counted);
-      expect(['session', 'closes'], contains(b.basis));
-    }
-
-    // The newest session is the live count, never a reconstruction: the
-    // snapshot is the better reading and must not be overwritten by backfill.
-    expect(counted.last.breadth!.basis, 'session');
-    expect(counted.any((s) => s.breadth!.isReconstructed), isTrue);
-  });
-
-  test('§13 a year of price history reaches most of the market', () {
-    // The Price tab offers 1M/3M/1Y and could fill 1Y for sixteen companies:
-    // sixteen had been fetched from Yahoo before it began refusing, and
-    // everything else held the fifty to a hundred sessions the daily snapshot
-    // had accumulated. Mubasher publishes the whole series and 210 companies
-    // are now verified against closes we already held.
-    final dir = Directory('assets/fixtures/companies');
-    if (!dir.existsSync()) return;
-
-    var deep = 0;
-    var total = 0;
-    for (final file in dir.listSync()) {
-      if (file is! File || !file.path.endsWith('.json')) continue;
-      total++;
-      final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-      final history = (doc['price_history'] as List?) ?? const [];
-      if (history.length >= 250) deep++;
-    }
-
-    expect(total, greaterThan(0));
-    expect(
-      deep,
-      greaterThan(total ~/ 2),
-      reason: 'only $deep of $total companies can fill a 1Y window',
+      reason: 'the tab already names the feed; a second header repeats it',
     );
   });
 

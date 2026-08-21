@@ -1915,6 +1915,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today\'s story'**
   String get homeLeadStory;
+
+  /// No description provided for @feedNews.
+  ///
+  /// In en, this message translates to:
+  /// **'News'**
+  String get feedNews;
+
+  /// No description provided for @feedExchange.
+  ///
+  /// In en, this message translates to:
+  /// **'From the exchange'**
+  String get feedExchange;
 }
 
 class _AppLocalizationsDelegate
