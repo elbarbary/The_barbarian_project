@@ -14,6 +14,7 @@ import 'models/disclosure.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
 import 'models/company.dart';
+import 'models/macro.dart';
 import 'models/market_history.dart';
 import 'models/market_snapshot.dart';
 import 'models/opportunity.dart';
@@ -443,6 +444,14 @@ class LocaleNotifier extends Notifier<Locale?> {
 
 final localeProvider = NotifierProvider<LocaleNotifier, Locale?>(
   LocaleNotifier.new,
+);
+
+// --------------------------------------------------------------------- macro
+
+/// Suez transits, oil, gold and Egypt's own line, with the mechanism by which
+/// each reaches an EGX share.
+final macroProvider = StreamProvider<Sourced<MacroDoc>>(
+  (ref) => ref.watch(marketRepositoryProvider).getMacro(),
 );
 
 // -------------------------------------------------------------- today anchors

@@ -1,0 +1,10 @@
+{
+ "accepted": {},
+ "refused": {
+  "brent@2026-08-21": "unavailable: HTTP Error 429: Too Many Requests",
+  "gold@2026-08-20": "unavailable: HTTP Error 429: Too Many Requests",
+  "silver@2026-08-20": "unavailable: HTTP Error 429: Too Many Requests",
+  "suez@2026-08-16": "unavailable: HTTP Error 429: Too Many Requests",
+  "wti@2026-08-21": "unavailable: HTTP Error 429: Too Many Requests"
+ }
+}

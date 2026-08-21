@@ -525,5 +525,19 @@
   "rubricLimitUpPenalty": "Limit-up penalty",
   "rubricIssuerDenial": "Issuer denial",
   "rubricRiskPenalty": "Risk penalty",
-  "ownersEquity": "Owners' equity"
+  "ownersEquity": "Owners' equity",
+  "homeMacro": "What moves Egypt",
+  "macroWhyItMatters": "Why this reaches your shares",
+  "macroMovesWith": "Moved with the EGX 30",
+  "macroWeakLink": "Barely moves with the EGX 30 day to day",
+  "macroEgyptLine": "Egypt's own line",
+  "macroSessions": "over {count} sessions",
+  "@macroSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "macroUnavailable": "Some sources could not be reached"
 }

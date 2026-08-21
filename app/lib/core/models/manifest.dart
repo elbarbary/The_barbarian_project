@@ -39,6 +39,10 @@ abstract class ManifestVersions with _$ManifestVersions {
     @Default(0) int companies,
     @Default(0) int opportunities,
     @JsonKey(name: 'cash_or_trash') @Default(0) int cashOrTrash,
+
+    /// The world outside the exchange — Suez transits, oil, gold, and Egypt's
+    /// own annual line — with the mechanism by which each reaches a share.
+    @Default(0) int macro,
   }) = _ManifestVersions;
 
   const ManifestVersions._();
@@ -53,6 +57,7 @@ abstract class ManifestVersions with _$ManifestVersions {
     'companies' => companies,
     'opportunities' => opportunities,
     'cash_or_trash' => cashOrTrash,
+    'macro' => macro,
     _ => 0,
   };
 
@@ -61,5 +66,6 @@ abstract class ManifestVersions with _$ManifestVersions {
     'companies',
     'opportunities',
     'cash_or_trash',
+    'macro',
   ];
 }

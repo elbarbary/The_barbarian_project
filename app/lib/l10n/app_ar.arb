@@ -314,5 +314,19 @@
   "rubricLimitUpPenalty": "خصم بلوغ الحد الأقصى",
   "rubricIssuerDenial": "نفي من الشركة",
   "rubricRiskPenalty": "خصم المخاطر",
-  "ownersEquity": "حقوق الملكية"
+  "ownersEquity": "حقوق الملكية",
+  "homeMacro": "ما يحرّك مصر",
+  "macroWhyItMatters": "لماذا يصل هذا إلى أسهمك",
+  "macroMovesWith": "تحرّك مع مؤشر EGX 30",
+  "macroWeakLink": "بالكاد يتحرك مع مؤشر EGX 30 يومًا بيوم",
+  "macroEgyptLine": "خط مصر نفسه",
+  "macroSessions": "خلال {count} جلسة",
+  "@macroSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "macroUnavailable": "تعذّر الوصول إلى بعض المصادر"
 }

@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:barbarian/core/models/rates.dart';
 import 'package:barbarian/core/models/news.dart';
 import 'package:barbarian/core/models/market_history.dart';
+import 'package:barbarian/core/models/macro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -287,6 +288,50 @@ void main() {
       greaterThan(total ~/ 2),
       reason: 'only $deep of $total companies can fill a 1Y window',
     );
+  });
+
+  testWidgets('§8 the macro block explains and never instructs', (tester) async {
+    // This is the strongest claim the app makes anywhere: a chain of cause
+    // from a number outside the exchange to a share inside it. It has to stop
+    // at the mechanism.
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+
+    for (final word in [
+      'you should',
+      'investors should',
+      'undervalued',
+      'cheap',
+      'opportunity to',
+      'we recommend',
+    ]) {
+      expect(
+        find.textContaining(RegExp(word, caseSensitive: false)),
+        findsNothing,
+        reason: 'the macro block must not say "\$word"',
+      );
+    }
+  });
+
+  test('macro carries a mechanism and a measured correlation for each series', () {
+    // The two are published side by side so they can disagree in front of the
+    // reader. Suez has a compelling chain and a correlation near zero, which
+    // says the canal reaches the exchange over months rather than sessions —
+    // and hiding that would turn an explanation into a claim.
+    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+
+    expect(doc.series, isNotEmpty);
+    for (final series in doc.series) {
+      expect(series.chain, isNotEmpty, reason: '\${series.id} has no mechanism');
+      expect(series.chainAr, isNotEmpty, reason: '\${series.id} has no Arabic');
+      expect(series.asOf, isNotEmpty, reason: '\${series.id} is undated');
+      expect(series.history.length, greaterThan(1));
+    }
+    expect(doc.correlations, isNotEmpty);
+    for (final r in doc.correlations) {
+      expect(r.r.abs(), lessThanOrEqualTo(1.0));
+      expect(r.sessions, greaterThan(0));
+    }
   });
 
   testWidgets('an empty watchlist explains itself', (tester) async {

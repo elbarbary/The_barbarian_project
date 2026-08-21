@@ -95,6 +95,7 @@ RESOURCES = {
     "news": ["news/latest.json"],
     "rates": ["rates/latest.json"],
     "disclosures": ["disclosures/latest.json"],
+    "macro": ["macro.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by

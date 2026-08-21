@@ -1861,6 +1861,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Owners\' equity'**
   String get ownersEquity;
+
+  /// No description provided for @homeMacro.
+  ///
+  /// In en, this message translates to:
+  /// **'What moves Egypt'**
+  String get homeMacro;
+
+  /// No description provided for @macroWhyItMatters.
+  ///
+  /// In en, this message translates to:
+  /// **'Why this reaches your shares'**
+  String get macroWhyItMatters;
+
+  /// No description provided for @macroMovesWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Moved with the EGX 30'**
+  String get macroMovesWith;
+
+  /// No description provided for @macroWeakLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Barely moves with the EGX 30 day to day'**
+  String get macroWeakLink;
+
+  /// No description provided for @macroEgyptLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Egypt\'s own line'**
+  String get macroEgyptLine;
+
+  /// No description provided for @macroSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'over {count} sessions'**
+  String macroSessions(int count);
+
+  /// No description provided for @macroUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Some sources could not be reached'**
+  String get macroUnavailable;
 }
 
 class _AppLocalizationsDelegate

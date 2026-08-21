@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+"""What a number outside the exchange does to somebody holding EGX shares.
+
+**This file is the product, and none of it is model-written.** It is the same
+split as `filing_types.py`: code chooses which entry applies, a person writes
+the words, and the words are reviewed before they ship. That is not a stylistic
+preference. A sentence about what a rise in oil does to Egyptian industry is the
+strongest claim this app makes anywhere, and it has to be one somebody is
+prepared to defend.
+
+**Every entry stops at the mechanism.** "Canal earnings fall, which is dollars
+Egypt does not receive" is a mechanism. "So sell industrials" is advice, and the
+publisher holds no FRA licence (§8). The test is simple and it is applied to
+every line here: could a reader take this sentence as an instruction to trade?
+If yes, it is rewritten until the answer is no.
+
+The chain is written out in full rather than asserted, because a reader who can
+follow it can also disagree with it — and a reader who cannot follow it should
+not be trusting it.
+
+Each entry is `(label, label_ar, meaning, meaning_ar, chain, chain_ar)`:
+
+  * `label` names the series
+  * `meaning` is one sentence: what this is, for somebody who is not a trader
+  * `chain` is how it reaches an Egyptian share, step by published step
+"""
+
+from __future__ import annotations
+
+MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
+    "suez": (
+        "Suez Canal traffic",
+        "حركة قناة السويس",
+        "How many ships passed through the canal. Egypt charges every one of "
+        "them, in dollars.",
+        "عدد السفن التي عبرت القناة. تتقاضى مصر رسومًا عن كل واحدة منها، "
+        "بالدولار.",
+        "Canal dues are one of the largest sources of foreign currency Egypt "
+        "earns. Fewer ships means fewer dollars arriving. When dollars are "
+        "scarcer, importers pay more for them — and most listed Egyptian "
+        "manufacturers pay for raw materials abroad while their revenue "
+        "arrives in pounds.",
+        "رسوم القناة من أكبر مصادر النقد الأجنبي لمصر. عدد أقل من السفن يعني "
+        "دولارات أقل تدخل البلاد. وحين يقل الدولار يدفع المستوردون أكثر للحصول "
+        "عليه — ومعظم المصنّعين المقيدين بالبورصة يشترون موادهم الخام من الخارج "
+        "ويبيعون في الداخل.",
+    ),
+    "brent": (
+        "Brent crude",
+        "خام برنت",
+        "The price of a barrel of oil, which Egypt buys more of than it sells.",
+        "سعر برميل النفط، وهو ما تشتريه مصر أكثر مما تبيعه.",
+        "A higher barrel raises the import bill and the subsidy bill at the "
+        "same time. It also raises what every factory pays for energy and "
+        "every distributor pays for transport — costs that reach a company's "
+        "results before its share price.",
+        "ارتفاع سعر البرميل يرفع فاتورة الاستيراد وفاتورة الدعم معًا. كما يرفع "
+        "ما يدفعه كل مصنع مقابل الطاقة وكل موزّع مقابل النقل — وهي تكاليف تصل "
+        "إلى نتائج الشركة قبل أن تصل إلى سعر سهمها.",
+    ),
+    "wti": (
+        "WTI crude",
+        "خام غرب تكساس",
+        "The American oil benchmark, quoted beside Brent so the two can be "
+        "compared.",
+        "المؤشر الأمريكي للنفط، ويُذكر بجانب برنت للمقارنة بينهما.",
+        "Egypt prices against Brent rather than WTI, so this is here as a "
+        "cross-check: when the two move apart it is usually something local to "
+        "one market rather than a change in the world price of oil.",
+        "تسعّر مصر مقابل برنت لا مقابل غرب تكساس، ولذلك يظهر هنا للمقارنة: حين "
+        "يفترق المؤشران يكون السبب غالبًا محليًا في أحد السوقين لا تغيّرًا في "
+        "سعر النفط عالميًا.",
+    ),
+    "gold": (
+        "Gold",
+        "الذهب",
+        "What an ounce costs. In Egypt gold is not a curiosity — it is where a "
+        "great many households keep their savings.",
+        "سعر الأونصة. الذهب في مصر ليس فضولًا — بل هو المكان الذي تحفظ فيه "
+        "أسر كثيرة مدخراتها.",
+        "Gold competes with the exchange for the same savings. When it rises "
+        "hard, money that might have reached shares goes into metal instead; "
+        "when it is flat, some of that money looks elsewhere. It is also the "
+        "way many "
+        "Egyptians hedge the pound, so it tends to move when confidence in the "
+        "currency moves.",
+        "ينافس الذهب البورصة على المدخرات نفسها. فحين يرتفع بقوة تتجه أموال "
+        "كانت ستشتري أسهمًا إلى شراء المعدن، وحين يستقر يبحث بعضها عن وجهة "
+        "أخرى. وهو أيضًا وسيلة كثير من المصريين للتحوّط من تقلب الجنيه، ولذلك "
+        "يتحرك عادةً حين تتحرك الثقة في العملة.",
+    ),
+    "silver": (
+        "Silver",
+        "الفضة",
+        "The other metal Egyptians hold, kept for the same reason as gold and "
+        "used in industry as well.",
+        "المعدن الأرخص، يُقتنى للسبب نفسه الذي يُقتنى من أجله الذهب، ويُستخدم "
+        "في الصناعة أيضًا.",
+        "It follows gold most of the time, so the interesting case is when it "
+        "does not: silver is consumed by manufacturing in a way gold is not, "
+        "and the two parting company usually says something about industrial "
+        "demand rather than about savings.",
+        "يتبع الذهب في معظم الأوقات، ولذلك فالحالة اللافتة هي حين لا يتبعه: "
+        "تستهلك الصناعة الفضة على نحو لا ينطبق على الذهب، وافتراق المعدنين "
+        "يقول عادةً شيئًا عن الطلب الصناعي لا عن المدخرات.",
+    ),
+    "gdp_growth": (
+        "Economic growth",
+        "نمو الاقتصاد",
+        "How much bigger the Egyptian economy got over a year.",
+        "مقدار ما كبر به الاقتصاد المصري خلال عام.",
+        "Listed companies sell into this economy. Growth does not lift every "
+        "company and it does not lift them equally, but a year of it is the "
+        "backdrop every set of results is read against.",
+        "تبيع الشركات المقيدة داخل هذا الاقتصاد. والنمو لا يرفع كل شركة ولا "
+        "يرفعها بالقدر نفسه، لكنه الخلفية التي تُقرأ أمامها كل نتائج الأعمال.",
+    ),
+    "inflation": (
+        "Inflation",
+        "التضخم",
+        "How much faster prices rose over a year.",
+        "مقدار تسارع ارتفاع الأسعار خلال عام.",
+        "Inflation reaches a company twice and in opposite directions: it "
+        "raises what it charges and it raises what it pays. Which of the two "
+        "moves faster is the whole question, and it is answered in the "
+        "company's own filed results rather than here.",
+        "يصل التضخم إلى الشركة مرتين وفي اتجاهين متعاكسين: يرفع ما تتقاضاه "
+        "ويرفع ما تدفعه. وأي الاثنين أسرع هو السؤال كله، والإجابة عنه في "
+        "نتائج الشركة المودعة نفسها لا هنا.",
+    ),
+    "fdi": (
+        "Foreign direct investment",
+        "الاستثمار الأجنبي المباشر",
+        "Money brought into Egypt from abroad to build or buy something real.",
+        "أموال تدخل مصر من الخارج لبناء شيء حقيقي أو شرائه.",
+        "This is foreign currency arriving that does not have to be repaid on a "
+        "schedule, unlike borrowing. It is the same dollar pool the canal feeds "
+        "and importers draw on.",
+        "هذه عملة أجنبية تدخل البلاد دون التزام بسدادها في موعد، بخلاف "
+        "الاقتراض. وهي تصب في بركة الدولار نفسها التي تغذيها القناة ويسحب "
+        "منها المستوردون.",
+    ),
+    "remittances": (
+        "Remittances",
+        "تحويلات المصريين بالخارج",
+        "What Egyptians working abroad sent home.",
+        "ما يرسله المصريون العاملون في الخارج إلى بلادهم.",
+        "The largest single flow of foreign currency into Egypt in most years, "
+        "and the steadiest. It reaches the exchange the same way the canal "
+        "does — through what a dollar costs an importer.",
+        "أكبر تدفق منفرد للنقد الأجنبي إلى مصر في معظم السنوات، وأكثرها ثباتًا. "
+        "ويصل إلى البورصة بالطريقة نفسها التي تصل بها القناة — عبر ما يكلفه "
+        "الدولار للمستورد.",
+    ),
+}
+
+LABELS = list(MACRO_TYPES)
+
+
+def label(key: str) -> str:
+    return MACRO_TYPES[key][0] if key in MACRO_TYPES else key
+
+
+def label_ar(key: str) -> str:
+    return MACRO_TYPES[key][1] if key in MACRO_TYPES else ""
+
+
+def meaning(key: str) -> str:
+    return MACRO_TYPES[key][2] if key in MACRO_TYPES else ""
+
+
+def meaning_ar(key: str) -> str:
+    return MACRO_TYPES[key][3] if key in MACRO_TYPES else ""
+
+
+def chain(key: str) -> str:
+    return MACRO_TYPES[key][4] if key in MACRO_TYPES else ""
+
+
+def chain_ar(key: str) -> str:
+    return MACRO_TYPES[key][5] if key in MACRO_TYPES else ""
+
+
+# Two different checks, because there are two different authors.
+#
+# `FORBIDDEN` is a blunt word list and it is applied to **model drafts**, where
+# over-refusing costs nothing: a rejected draft falls back to the sentence a
+# person already wrote. It is deliberately crude — a model that reaches for
+# "cheap" is a model to stop reading.
+FORBIDDEN = (
+    "buy", "sell", "should", "recommend", "advice", "target price",
+    "undervalued", "overvalued", "cheap", "expensive", "opportunity",
+    "invest in", "avoid", "stop loss", "take profit",
+)
+
+import re  # noqa: E402  (kept beside the patterns it serves)
+
+# `DIRECTIVE` is applied to **the prose in this file**, and it looks for the
+# shape of an instruction rather than for a verb.
+#
+# The distinction is not pedantry. "Egypt buys more oil than it sells" is a fact
+# about a country's trade balance; "buy oil companies" is advice. A word list
+# cannot tell them apart, and running the blunt one over hand-written prose just
+# forces the prose to get worse — the first pass here rewrote three clear
+# sentences into worse ones before that became obvious.
+#
+# So this matches an instruction aimed at a reader: a trade verb pointed at
+# somebody, an imperative opening, or a valuation judgement.
+DIRECTIVE = (
+    re.compile(r"\b(you|investors|traders|holders|readers)\s+(should|must|ought|can)\b", re.I),
+    re.compile(r"\bshould\s+(buy|sell|hold|own|exit|enter|add|trim)\b", re.I),
+    re.compile(r"(^|[.!?]\s+)(buy|sell|hold|avoid|exit)\b", re.I),
+    re.compile(r"\b(cheap|expensive|undervalued|overvalued|bargain|overpriced)\b", re.I),
+    re.compile(r"\b(an?\s+)?(opportunity|opportunities)\s+to\b", re.I),
+    re.compile(r"\b(target price|price target|stop loss|take profit)\b", re.I),
+    re.compile(r"\b(we|i)\s+(recommend|suggest|advise)\b", re.I),
+)
+
+
+def directive(text: str) -> str | None:
+    """The instruction this sentence contains, or None when it only describes."""
+    for pattern in DIRECTIVE:
+        found = pattern.search(text)
+        if found:
+            return found.group(0).strip()
+    return None

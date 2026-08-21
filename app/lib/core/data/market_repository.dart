@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import '../models/company.dart';
 import '../models/manifest.dart';
+import '../models/macro.dart';
 import '../models/market_history.dart';
 import '../models/market_snapshot.dart';
 import '../networking/static_api.dart';
@@ -29,6 +30,10 @@ class MarketRepository {
   /// this is accumulated rather than fetched).
   Stream<Sourced<MarketHistory>> getMarketHistory() =>
       _parsed('market-history.json', 'market_history', MarketHistory.fromJson);
+
+  /// The world outside the exchange, and how it reaches a share.
+  Stream<Sourced<MacroDoc>> getMacro() =>
+      _parsed('macro.json', 'macro', MacroDoc.fromJson);
 
   Stream<Sourced<CompanyDirectory>> getCompanies() =>
       _parsed('companies.json', 'companies', CompanyDirectory.fromJson);

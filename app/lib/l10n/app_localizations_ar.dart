@@ -994,4 +994,27 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ownersEquity => 'حقوق الملكية';
+
+  @override
+  String get homeMacro => 'ما يحرّك مصر';
+
+  @override
+  String get macroWhyItMatters => 'لماذا يصل هذا إلى أسهمك';
+
+  @override
+  String get macroMovesWith => 'تحرّك مع مؤشر EGX 30';
+
+  @override
+  String get macroWeakLink => 'بالكاد يتحرك مع مؤشر EGX 30 يومًا بيوم';
+
+  @override
+  String get macroEgyptLine => 'خط مصر نفسه';
+
+  @override
+  String macroSessions(int count) {
+    return 'خلال $count جلسة';
+  }
+
+  @override
+  String get macroUnavailable => 'تعذّر الوصول إلى بعض المصادر';
 }

@@ -997,4 +997,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ownersEquity => 'Owners\' equity';
+
+  @override
+  String get homeMacro => 'What moves Egypt';
+
+  @override
+  String get macroWhyItMatters => 'Why this reaches your shares';
+
+  @override
+  String get macroMovesWith => 'Moved with the EGX 30';
+
+  @override
+  String get macroWeakLink => 'Barely moves with the EGX 30 day to day';
+
+  @override
+  String get macroEgyptLine => 'Egypt\'s own line';
+
+  @override
+  String macroSessions(int count) {
+    return 'over $count sessions';
+  }
+
+  @override
+  String get macroUnavailable => 'Some sources could not be reached';
 }
