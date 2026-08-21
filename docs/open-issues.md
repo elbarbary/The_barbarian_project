@@ -236,7 +236,7 @@ habits.
 |---|---|---|
 | **IMF PortWatch** (ArcGIS feature service) | **yes** — daily Suez transits to 16 Aug, no key | The single most Egypt-specific macro series there is |
 | **World Bank Open Data** | **yes** — Egypt GDP growth 4.39%, CPI 14.07%, FDI $15.5bn (2025), no key | The long-run backdrop, annual |
-| GDELT | **no** — 429 all afternoon after heavy collection elsewhere | Global event detection; recheck on a quiet line |
+| GDELT | **yes, on retry** — see the verdict below | Suez and macro context, not a general feed |
 | U.S. EIA | not tested | Crude inventories and fuel prices |
 | FRED | not tested (needs a free key) | US rates, which drive emerging-market flows |
 
