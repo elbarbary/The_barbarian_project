@@ -52,6 +52,7 @@ import urllib.request
 import company_match
 import filing_types as ft
 import news_context
+import news_images
 import translations
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
@@ -900,6 +901,10 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--refresh-tags", action="store_true")
+    # How many article pages to read for a picture in one run. The cache is
+    # permanent, so this only ever costs anything for stories nobody has read
+    # yet — a normal day brings a few dozen.
+    parser.add_argument("--images", type=int, default=60)
     args = parser.parse_args()
 
     doc = build(refresh_tags=args.refresh_tags)
@@ -930,6 +935,10 @@ def main() -> int:
     # resolves an item's outlet id against this list and shows nothing when it
     # is missing. On the run that caught it, Al Borsa and Hapi both timed out
     # and 114 stories lost their byline while staying on screen.
+    # The picture the outlet put on the story, for the outlet that has no feed
+    # to hand us one. Cached per article and read once, ever.
+    news_images.fill(doc["items"], limit=args.images)
+
     cited = {a["id"] for item in doc["items"] for a in item.get("sources", [])}
     named = {s["id"] for s in doc["sources"]} | cited
     doc["sources"] = [

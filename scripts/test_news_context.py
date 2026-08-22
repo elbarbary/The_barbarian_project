@@ -181,3 +181,50 @@ class PublishedFeedTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ImageTest(unittest.TestCase):
+    """Most of the feed had no picture, and it looked like a broken app."""
+
+    def test_a_url_with_spaces_is_encoded(self):
+        # Arab Finance's own image paths contain spaces — "chemicals 4
+        # reupload_Thumb.png" — and an unencoded space is a URL the phone
+        # silently fails to load.
+        import news_images
+
+        encoded = news_images.encode(
+            "https://arabfinance.com/Gallery/Thumbnail/chemicals 4 reupload.png"
+        )
+        self.assertNotIn(" ", encoded)
+        self.assertTrue(encoded.startswith("https://"))
+
+    def test_it_reads_either_attribute_order(self):
+        import news_images
+
+        for markup in (
+            '<meta property="og:image" content="https://x/a.jpg">',
+            '<meta content="https://x/a.jpg" property="og:image">',
+        ):
+            with self.subTest(markup):
+                self.assertEqual(news_images.from_page(markup), "https://x/a.jpg")
+
+    def test_a_relative_or_missing_image_is_no_image(self):
+        import news_images
+
+        self.assertIsNone(news_images.from_page("<html><head></head></html>"))
+        self.assertIsNone(
+            news_images.from_page('<meta property="og:image" content="/a.jpg">')
+        )
+
+    def test_the_published_feed_is_mostly_illustrated(self):
+        """The defect was 287 of 400 rows with no picture beside three that had
+        one, so the text column jumped width every third row."""
+        if not PUBLISHED.exists():
+            self.skipTest("no published feed")
+        items = json.loads(PUBLISHED.read_text(encoding="utf-8"))["items"]
+        with_image = sum(1 for i in items if i.get("image"))
+        self.assertGreater(
+            with_image,
+            len(items) // 2,
+            f"only {with_image} of {len(items)} rows carry a picture",
+        )
