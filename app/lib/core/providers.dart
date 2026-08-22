@@ -10,6 +10,7 @@ import 'data/research_repository.dart';
 import 'data/sourced.dart';
 import 'data/user_repository.dart';
 import 'models/cash_or_trash.dart';
+import 'models/connection.dart';
 import 'models/disclosure.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
@@ -123,6 +124,10 @@ final disclosureMonthProvider =
       (ref, month) =>
           ref.watch(researchRepositoryProvider).getDisclosureMonth(month),
     );
+
+final connectionsProvider = StreamProvider<Sourced<ConnectionDoc>>(
+  (ref) => ref.watch(researchRepositoryProvider).getConnections(),
+);
 
 final companyDocumentsProvider =
     StreamProvider.family<Sourced<CompanyDocuments>, String>(

@@ -317,7 +317,7 @@ void main() {
         until: find.textContaining('Telecom Egypt'),
       );
 
-      await tester.tap(find.text('Research'));
+      await tester.tap(find.text('The file'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
 
@@ -338,7 +338,7 @@ void main() {
         until: find.textContaining('El Kahera El Watania'),
       );
 
-      await tester.tap(find.text('Research'));
+      await tester.tap(find.text('The file'));
       await tester.pump();
       await pumpUntil(tester, find.byType(BPillarLedger));
 

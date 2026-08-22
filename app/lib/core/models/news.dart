@@ -112,6 +112,7 @@ abstract class NewsItem with _$NewsItem {
 
     /// Why it carries that weight, in a sentence, with the arithmetic in it.
     @Default('') String because,
+    @JsonKey(name: 'because_ar') @Default('') String becauseAr,
 
     NewsEvidence? evidence,
   }) = _NewsItem;
@@ -131,6 +132,12 @@ abstract class NewsItem with _$NewsItem {
   /// The explanation, in the language being read.
   String meaningFor(bool arabic) =>
       arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
+
+  /// The measured sentence, in the language being read. The Arabic wraps the
+  /// Latin ticker and the `3.45×` in a directional isolate, or the bidi
+  /// algorithm reorders them and the number lands where the ticker should be.
+  String becauseFor(bool arabic) =>
+      arabic && becauseAr.isNotEmpty ? becauseAr : because;
 
   /// Only shown when the event is something other than the catch-all: a chip
   /// reading "Other" tells a reader nothing they did not already know.

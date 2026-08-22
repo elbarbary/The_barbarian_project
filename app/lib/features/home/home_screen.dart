@@ -28,6 +28,7 @@ import '../../core/widgets/news_thumb.dart';
 import 'macro_block.dart';
 import 'feed_tabs.dart';
 import 'lead_story.dart';
+import 'connect_dots.dart';
 import 'unusual_rail.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
@@ -100,6 +101,9 @@ class HomeScreen extends ConsumerWidget {
         // Which companies, not how many. The count sat on Today without ever
         // naming one of them.
         const BUnusualRail(),
+        // Where the feeds cross. Placed under the session numbers because it
+        // is the thing that reads them together with everything else.
+        const BConnectDots(),
         // The lead filing keeps its own card. It is not the same thing as the
         // filings list behind the tab: this one is the single disclosure worth
         // the largest card on the screen, with the measured reason it leads.
@@ -1011,7 +1015,7 @@ class HomeLatestNews extends ConsumerWidget {
                               // noise wearing the costume of insight. The tag
                               // above is the part that varies.
                               if (item.weight != 'market' &&
-                                  item.because.isNotEmpty) ...[
+                                  item.becauseFor(arabic).isNotEmpty) ...[
                                 const SizedBox(height: 8),
                                 Container(
                                   padding: const EdgeInsets.fromLTRB(
@@ -1027,11 +1031,7 @@ class HomeLatestNews extends ConsumerWidget {
                                     ),
                                   ),
                                   child: Text(
-                                    // A news item, not a filing: this model
-                                    // has no Arabic sibling for the sentence
-                                    // yet, and the branch is unreachable until
-                                    // ticker matching works again.
-                                    item.because,
+                                    item.becauseFor(arabic),
                                     style: BarbarianType.bodyS.copyWith(
                                       color: c.textPrimary,
                                       height: 1.4,

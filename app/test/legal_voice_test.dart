@@ -511,8 +511,8 @@ void main() {
       const CompanyScreen(ticker: 'MCQE', parentTab: BNavTab.home),
     );
     // The card lives on Research, beside the pillar ledger it qualifies.
-    await pumpUntil(tester, find.text('Research'));
-    await tapVisible(tester, find.text('Research'));
+    await pumpUntil(tester, find.text('The file'));
+    await tapVisible(tester, find.text('The file'));
     await pumpUntil(tester, find.textContaining('WHAT WOULD CHANGE THIS'));
 
     final card = tester.widget<BWhatWouldChangeThis>(

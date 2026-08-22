@@ -217,7 +217,8 @@ class _Headline extends StatelessWidget {
             // printed "Names no listed company we can match…" on row after
             // row after row. Three of those stacked is not an explanation, it
             // is the app clearing its throat.
-            if (item.weight != 'market' && item.because.isNotEmpty) ...[
+            if (item.weight != 'market' &&
+                item.becauseFor(arabic).isNotEmpty) ...[
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.fromLTRB(11, 9, 11, 10),
@@ -226,7 +227,7 @@ class _Headline extends StatelessWidget {
                   borderRadius: BorderRadius.circular(BarbarianRadius.sm),
                 ),
                 child: Text(
-                  item.because,
+                  item.becauseFor(arabic),
                   style: BarbarianType.bodyS.copyWith(
                     color: c.textSecondary,
                     height: 1.5,

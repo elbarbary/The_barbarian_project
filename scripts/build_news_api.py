@@ -38,6 +38,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html as html_lib
 import datetime
 import json
@@ -48,6 +49,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import company_match
 import filing_types as ft
 import news_context
 import translations
@@ -255,7 +257,19 @@ def fetch_newsmap(source: dict) -> list[dict]:
         date = (mod.group(1).strip() if mod else "")[:10]
         items.append(
             {
-                "id": f"{source['id']}-{abs(hash(url)) % 10**10}",
+                # A stable id, because the merge dedupes on it.
+                #
+                # This was `abs(hash(url)) % 10**10`, and Python randomises
+                # string hashing per process — so every build minted a fresh
+                # id for the same article and `merge_with_published` kept it
+                # as a new story. The feed reached 400 items carrying 134
+                # distinct headlines: eight copies of "CBE holds key interest
+                # rates steady", eight of the Palm Hills financing note. It
+                # looked like a feed that repeated itself because it was one.
+                "id": (
+                    f"{source['id']}-"
+                    f"{hashlib.sha1(url.encode()).hexdigest()[:12]}"
+                ),
                 "source": source["id"],
                 "headline": headline,
                 "link": url,
@@ -341,8 +355,23 @@ def resolve_tags(source: dict, refresh: bool) -> dict[str, int]:
     return resolved
 
 
-def match_tickers(item: dict, tag_map: dict[str, int]) -> list[str]:
-    """Which listed companies the outlet itself says the story is about."""
+def match_tickers(
+    item: dict, tag_map: dict[str, int], name_keys: dict[str, str]
+) -> list[str]:
+    """Which listed companies this story is about.
+
+    Three readings, strongest first, and all of them exact:
+
+      * the outlet's own company tag, which is their taxonomy not our guess;
+      * a ticker printed verbatim, since "SCCD" is not an Arabic word;
+      * the company's name in the headline, matched on a two-word
+        discriminative key — see `company_match` for why one word is not
+        enough and free text is worse than either.
+
+    The third is what makes this layer exist at all. Tags resolve nine
+    companies out of 282, so before it every one of four hundred stories came
+    back empty and `triage` stamped them all "market".
+    """
     by_tag = {tag_id: ticker for ticker, tag_id in tag_map.items()}
     hits = {by_tag[t] for t in item.get("_tags", []) if t in by_tag}
 
@@ -352,6 +381,7 @@ def match_tickers(item: dict, tag_map: dict[str, int]) -> list[str]:
         if re.search(rf"\b{re.escape(ticker)}\b", blob):
             hits.add(ticker)
 
+    hits.update(company_match.match(item["headline"], name_keys))
     return sorted(hits)
 
 
@@ -507,6 +537,11 @@ def session_facts(ticker: str) -> dict | None:
 UNUSUAL_VOLUME = 2.0
 
 
+def isolate(value: str) -> str:
+    """Wrap a Latin run so Arabic does not reorder around it (U+2068/U+2069)."""
+    return f"\u2068{value}\u2069"
+
+
 def triage(item: dict) -> dict:
     """Attach the reason an item is, or is not, worth a second look."""
     facts = [f for f in (session_facts(t) for t in item["tickers"]) if f]
@@ -520,6 +555,10 @@ def triage(item: dict) -> dict:
             "because": (
                 f"Names {top['ticker']}, which traded "
                 f"{top['rv']:.2f}× its own normal volume that session."
+            ),
+            "because_ar": (
+                f"يذكر {isolate(top['ticker'])}، التي تداولت "
+                f"{isolate(f'{top['rv']:.2f}×')} حجمها المعتاد في تلك الجلسة."
             ),
             "evidence": {
                 "ticker": top["ticker"],
@@ -540,6 +579,11 @@ def triage(item: dict) -> dict:
                 f"{top['rv']:.2f}× its normal volume, against a "
                 f"{UNUSUAL_VOLUME:g}× threshold."
             ),
+            "because_ar": (
+                f"يذكر {isolate(top['ticker'])}. وكانت جلستها عادية — "
+                f"{isolate(f'{top['rv']:.2f}×')} من حجمها المعتاد، مقابل حد "
+                f"{isolate(f'{UNUSUAL_VOLUME:g}×')}."
+            ),
             "evidence": {
                 "ticker": top["ticker"],
                 "volume": top["volume"],
@@ -558,6 +602,10 @@ def triage(item: dict) -> dict:
                 "published for it, so there is nothing to measure the story "
                 "against."
             ),
+            "because_ar": (
+                f"يذكر {isolate(', '.join(item['tickers']))}. لا توجد بيانات "
+                "جلسة منشورة لها، فليس هناك ما يُقاس الخبر عليه."
+            ),
             "evidence": None,
         }
 
@@ -566,6 +614,10 @@ def triage(item: dict) -> dict:
         "because": (
             "Names no listed company we can match, so this is about the "
             "market or the economy rather than about a share."
+        ),
+        "because_ar": (
+            "لا يذكر شركة مقيدة نستطيع مطابقتها، فهذا خبر عن السوق أو "
+            "الاقتصاد لا عن سهم بعينه."
         ),
         "evidence": None,
     }
@@ -664,6 +716,10 @@ def advice_leak(headline: str) -> str | None:
 
 def build(refresh_tags: bool = False) -> dict:
     tag_map: dict[str, int] = {}
+    # The company names the exchange has printed for us, keyed for matching.
+    # Grows every run that reads a filing title, at no cost.
+    name_keys = company_match.load()
+    print(f"── {len(name_keys)} company names to match against")
     items: list[dict] = []
     dropped: list[dict] = []
     live_sources = []
@@ -687,7 +743,7 @@ def build(refresh_tags: bool = False) -> dict:
             if leak := advice_leak(item["headline"]):
                 dropped.append({"headline": item["headline"], "matched": leak})
                 continue
-            item["tickers"] = match_tickers(item, tag_map)
+            item["tickers"] = match_tickers(item, tag_map, name_keys)
             item.update(triage(item))
             # The excerpt was for matching. It does not get published.
             item.pop("_excerpt", None)

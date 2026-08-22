@@ -55,6 +55,8 @@ STEPS = [
     # per session, which is the only way this app will ever have an index
     # series or a breadth history.
     ("Index levels + breadth", "build_market_history.py", False),
+    # After the feeds it reads, and before the fixtures that bundle it.
+    ("Connecting the dots", "build_connections_api.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and
     # both are resumable: whatever the host refuses today is simply first in

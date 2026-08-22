@@ -336,7 +336,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabPrice => 'Price';
 
   @override
-  String get tabResearch => 'Research';
+  String get tabResearch => 'The file';
 
   @override
   String get tabTalk => 'Talk';
@@ -836,6 +836,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String goldPerOunce(String amount) {
     return 'EGP $amount / oz';
+  }
+
+  @override
+  String get dotsLabel => 'Connecting the dots';
+
+  @override
+  String dotsBody(int days) {
+    return 'Companies that turned up in more than one place in the last $days days. Every line links to the thing it came from.';
+  }
+
+  @override
+  String get dotsFiling => 'Filing';
+
+  @override
+  String get dotsNews => 'In the press';
+
+  @override
+  String get dotsSession => 'That session';
+
+  @override
+  String dotsVolume(String ratio) {
+    return '$ratio× normal volume';
   }
 
   @override

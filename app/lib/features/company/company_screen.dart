@@ -960,7 +960,7 @@ class _Research extends ConsumerWidget {
           ),
           const SizedBox(height: 12),
           for (final item in filed) ...[
-            _CompanyFiling(item: item),
+            _CompanyFiling(item: item, parentTab: parentTab),
             const SizedBox(height: 8),
           ],
           const SizedBox(height: 8),
@@ -1660,59 +1660,74 @@ class _FiledDocuments extends ConsumerWidget {
 /// is, when it landed, and what that kind of filing does to somebody holding
 /// the share — plus the document itself where the company lodged one.
 class _CompanyFiling extends StatelessWidget {
-  const _CompanyFiling({required this.item});
+  const _CompanyFiling({required this.item, required this.parentTab});
 
   final FiledDocument item;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final arabic = Directionality.of(context) == TextDirection.rtl;
 
-    return BPaperCard(
-      padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            spacing: 8,
-            runSpacing: 4,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              if (item.labelFor(arabic).isNotEmpty)
-                BKindChip(item.labelFor(arabic)),
-              Text(
-                item.date,
-                style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+    // Tapping opens the filing itself.
+    //
+    // These rows carried no `onTap` at all, so pressing one did nothing — the
+    // worst kind of dead control, because every other row in the app that
+    // looks like this opens something. There is no "open the company" choice
+    // to offer here: the reader is already on it.
+    return BPressable(
+      onTap: item.link.isEmpty
+          ? null
+          : () => context.push(
+              Routes.articlePath(parentTab, item.link, 'EGX filing'),
+            ),
+      child: BPaperCard(
+        padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                if (item.labelFor(arabic).isNotEmpty)
+                  BKindChip(item.labelFor(arabic)),
+                Text(
+                  item.date,
+                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                ),
+                Icon(Icons.north_east, size: 13, color: c.textFaint),
+              ],
+            ),
+            const SizedBox(height: 7),
+            Directionality(
+              textDirection: isArabic(item.titleFor(arabic))
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              child: Text(
+                item.titleFor(arabic),
+                style: BarbarianType.bodyM.copyWith(
+                  color: c.textPrimary,
+                  height: 1.4,
+                ),
+              ),
+            ),
+            if (item.meaningFor(arabic).isNotEmpty) ...[
+              const SizedBox(height: 7),
+              BInsightLine(item.meaningFor(arabic), maxLines: 3),
+            ],
+            for (final (n, url) in item.attachments.indexed) ...[
+              SizedBox(height: n == 0 ? 10 : 8),
+              BFiledDocument(
+                url: url,
+                index: n,
+                count: item.attachments.length,
               ),
             ],
-          ),
-          const SizedBox(height: 7),
-          Directionality(
-            textDirection: isArabic(item.titleFor(arabic))
-                ? TextDirection.rtl
-                : TextDirection.ltr,
-            child: Text(
-              item.titleFor(arabic),
-              style: BarbarianType.bodyM.copyWith(
-                color: c.textPrimary,
-                height: 1.4,
-              ),
-            ),
-          ),
-          if (item.meaningFor(arabic).isNotEmpty) ...[
-            const SizedBox(height: 7),
-            BInsightLine(item.meaningFor(arabic), maxLines: 3),
           ],
-          for (final (n, url) in item.attachments.indexed) ...[
-            SizedBox(height: n == 0 ? 10 : 8),
-            BFiledDocument(
-              url: url,
-              index: n,
-              count: item.attachments.length,
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }

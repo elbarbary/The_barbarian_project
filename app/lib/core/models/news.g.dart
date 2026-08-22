@@ -81,6 +81,7 @@ _NewsItem _$NewsItemFromJson(Map<String, dynamic> json) => _NewsItem(
       const <String>[],
   weight: json['weight'] as String? ?? 'market',
   because: json['because'] as String? ?? '',
+  becauseAr: json['because_ar'] as String? ?? '',
   evidence: json['evidence'] == null
       ? null
       : NewsEvidence.fromJson(json['evidence'] as Map<String, dynamic>),
@@ -102,6 +103,7 @@ Map<String, dynamic> _$NewsItemToJson(_NewsItem instance) => <String, dynamic>{
   'tickers': instance.tickers,
   'weight': instance.weight,
   'because': instance.because,
+  'because_ar': instance.becauseAr,
   'evidence': instance.evidence,
 };
 

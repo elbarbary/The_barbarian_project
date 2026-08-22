@@ -334,7 +334,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tabPrice => 'السعر';
 
   @override
-  String get tabResearch => 'الدراسة';
+  String get tabResearch => 'الملف';
 
   @override
   String get tabTalk => 'نقاش';
@@ -831,6 +831,28 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String goldPerOunce(String amount) {
     return '$amount جنيه للأونصة';
+  }
+
+  @override
+  String get dotsLabel => 'ربط الخيوط';
+
+  @override
+  String dotsBody(int days) {
+    return 'شركات ظهرت في أكثر من مكان خلال $days أيام. كل سطر يرتبط بمصدره.';
+  }
+
+  @override
+  String get dotsFiling => 'إفصاح';
+
+  @override
+  String get dotsNews => 'في الصحافة';
+
+  @override
+  String get dotsSession => 'تلك الجلسة';
+
+  @override
+  String dotsVolume(String ratio) {
+    return '$ratio× الحجم المعتاد';
   }
 
   @override

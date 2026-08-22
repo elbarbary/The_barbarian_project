@@ -707,7 +707,7 @@ abstract class AppLocalizations {
   /// No description provided for @tabResearch.
   ///
   /// In en, this message translates to:
-  /// **'Research'**
+  /// **'The file'**
   String get tabResearch;
 
   /// No description provided for @tabTalk.
@@ -1549,6 +1549,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EGP {amount} / oz'**
   String goldPerOunce(String amount);
+
+  /// No description provided for @dotsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting the dots'**
+  String get dotsLabel;
+
+  /// No description provided for @dotsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies that turned up in more than one place in the last {days} days. Every line links to the thing it came from.'**
+  String dotsBody(int days);
+
+  /// No description provided for @dotsFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Filing'**
+  String get dotsFiling;
+
+  /// No description provided for @dotsNews.
+  ///
+  /// In en, this message translates to:
+  /// **'In the press'**
+  String get dotsNews;
+
+  /// No description provided for @dotsSession.
+  ///
+  /// In en, this message translates to:
+  /// **'That session'**
+  String get dotsSession;
+
+  /// No description provided for @dotsVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'{ratio}× normal volume'**
+  String dotsVolume(String ratio);
 
   /// No description provided for @finTotalAssets.
   ///
