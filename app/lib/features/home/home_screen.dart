@@ -12,6 +12,7 @@ import '../../core/models/recency.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
+import '../../core/widgets/async_view.dart';
 import '../../core/widgets/breadth_chart.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/models/explainer.dart';
@@ -190,9 +191,22 @@ class _DailyInsight extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final l = AppLocalizations.of(context);
-    final feed = ref
-        .watch(disclosuresProvider)
-        .whenOrNull(data: (s) => s.value);
+    final async = ref.watch(disclosuresProvider);
+
+    // "Nothing filed yet today" is a claim about the exchange, and it was
+    // being made while the document was still downloading.
+    //
+    // `whenOrNull(data:)` collapses loading and error into the same null as a
+    // genuinely empty feed, so the landing screen asserted something false
+    // about the market on every cold start — and because the manifest is
+    // awaited before the cache is read, with a ten-second connect timeout,
+    // that window is not brief on a bad connection. An absence we have not
+    // finished checking is not an absence.
+    if (async.isLoading && !async.hasValue) {
+      return const BLoadingBlocks(rows: 1, height: 128);
+    }
+
+    final feed = async.whenOrNull(data: (s) => s.value);
     final item = _lead(feed);
 
     if (item == null) {
@@ -279,7 +293,7 @@ class _DailyInsight extends ConsumerWidget {
               item.meaningFor(arabic),
               style: BarbarianType.bodyM.copyWith(color: c.onInkMuted),
             ),
-            if (item.because.isNotEmpty) ...[
+            if (item.becauseFor(arabic).isNotEmpty) ...[
               const SizedBox(height: 14),
               // Why this one and not the other thirty-five. It is a measured
               // statement about the session, never a view about the share.
@@ -293,7 +307,7 @@ class _DailyInsight extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(BarbarianRadius.md),
                 ),
                 child: Text(
-                  item.because,
+                  item.becauseFor(arabic),
                   style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
                 ),
               ),
@@ -768,7 +782,7 @@ class HomeAlsoFiled extends ConsumerWidget {
                       // same footing as the news rows beside it. A reader
                       // switching tabs should not find the explanation on one
                       // and not the other.
-                      if (item.because.isNotEmpty) ...[
+                      if (item.becauseFor(arabic).isNotEmpty) ...[
                         const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
@@ -779,7 +793,7 @@ class HomeAlsoFiled extends ConsumerWidget {
                             ),
                           ),
                           child: Text(
-                            item.because,
+                            item.becauseFor(arabic),
                             style: BarbarianType.bodyS.copyWith(
                               color: c.textPrimary,
                               height: 1.4,
@@ -995,6 +1009,10 @@ class HomeLatestNews extends ConsumerWidget {
                                     ),
                                   ),
                                   child: Text(
+                                    // A news item, not a filing: this model
+                                    // has no Arabic sibling for the sentence
+                                    // yet, and the branch is unreachable until
+                                    // ticker matching works again.
                                     item.because,
                                     style: BarbarianType.bodyS.copyWith(
                                       color: c.textPrimary,

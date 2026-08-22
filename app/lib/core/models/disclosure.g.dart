@@ -61,6 +61,7 @@ _Disclosure _$DisclosureFromJson(Map<String, dynamic> json) => _Disclosure(
   meaningAr: json['meaning_ar'] as String? ?? '',
   weight: json['weight'] as String? ?? 'filed',
   because: json['because'] as String? ?? '',
+  becauseAr: json['because_ar'] as String? ?? '',
   evidence: json['evidence'] == null
       ? null
       : DisclosureEvidence.fromJson(json['evidence'] as Map<String, dynamic>),
@@ -83,6 +84,7 @@ Map<String, dynamic> _$DisclosureToJson(_Disclosure instance) =>
       'meaning_ar': instance.meaningAr,
       'weight': instance.weight,
       'because': instance.because,
+      'because_ar': instance.becauseAr,
       'evidence': instance.evidence,
       'by': instance.by,
     };

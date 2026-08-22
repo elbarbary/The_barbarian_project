@@ -345,6 +345,17 @@ def session_facts(ticker: str) -> dict | None:
     }
 
 
+# A Latin ticker inside an Arabic sentence.
+#
+# Bidirectional text reorders around a run of Latin letters, so "MOSC أودعت
+# هذا، وتداول 2.57× حجمه المعتاد" can render with the ticker and the number
+# swapped. U+2068 opens a first-strong isolate and U+2069 closes it, which
+# tells the renderer to lay the run out on its own and put it back where the
+# Arabic expects it.
+def isolate(value: str) -> str:
+    return f"\u2068{value}\u2069"
+
+
 def triage(item: dict) -> dict:
     """Why this filing is, or is not, worth a second look.
 
@@ -364,6 +375,10 @@ def triage(item: dict) -> dict:
                 f"{top['ticker']} filed this, and traded "
                 f"{top['rv']:.2f}× its own normal volume that session."
             ),
+            "because_ar": (
+                f"أودعت {isolate(top['ticker'])} هذا الإفصاح، وتداولت "
+                f"{isolate(f'{top['rv']:.2f}×')} حجمها المعتاد في تلك الجلسة."
+            ),
             "evidence": {
                 "ticker": top["ticker"],
                 "volume": top["volume"],
@@ -382,6 +397,11 @@ def triage(item: dict) -> dict:
                 f"{top['rv']:.2f}× normal volume against a "
                 f"{UNUSUAL_VOLUME:g}× threshold."
             ),
+            "because_ar": (
+                f"أودعت {isolate(top['ticker'])} هذا الإفصاح. وكانت جلستها "
+                f"عادية — {isolate(f'{top['rv']:.2f}×')} من الحجم المعتاد "
+                f"مقابل حد {isolate(f'{UNUSUAL_VOLUME:g}×')}."
+            ),
             "evidence": {
                 "ticker": top["ticker"],
                 "volume": top["volume"],
@@ -398,12 +418,17 @@ def triage(item: dict) -> dict:
                 f"Filed by {', '.join(item['tickers'])}. No session data is "
                 "published for it, so there is nothing to measure it against."
             ),
+            "because_ar": (
+                f"أودعته {isolate(', '.join(item['tickers']))}. لا توجد بيانات "
+                "جلسة منشورة له، فليس هناك ما يُقاس عليه."
+            ),
             "evidence": None,
         }
     # Bond and securitisation notices carry no equity ticker at all.
     return {
         "weight": "other",
         "because": "This filing names no listed share.",
+        "because_ar": "لا يسمّي هذا الإفصاح سهمًا مقيدًا.",
         "evidence": None,
     }
 

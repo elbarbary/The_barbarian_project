@@ -247,10 +247,10 @@ class _Filing extends ConsumerWidget {
                         height: 1.5,
                       ),
                     ),
-                    if (item.because.isNotEmpty) ...[
+                    if (item.becauseFor(arabic).isNotEmpty) ...[
                       const SizedBox(height: 7),
                       Text(
-                        item.because,
+                        item.becauseFor(arabic),
                         style: BarbarianType.bodyS.copyWith(
                           color: c.textMuted,
                           height: 1.5,

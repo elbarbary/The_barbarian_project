@@ -82,6 +82,7 @@ abstract class Disclosure with _$Disclosure {
     /// check · filed · other. Never a view on the filing itself.
     @Default('filed') String weight,
     @Default('') String because,
+    @JsonKey(name: 'because_ar') @Default('') String becauseAr,
     DisclosureEvidence? evidence,
 
     /// Whether the type came from a published pattern or from the model.
@@ -115,6 +116,16 @@ abstract class Disclosure with _$Disclosure {
   /// and the Arabic on the other, from the same document.
   String eventLabelFor(bool arabic) =>
       arabic && eventLabelAr.isNotEmpty ? eventLabelAr : eventLabel;
+
+  /// The measured sentence, in the language being read.
+  ///
+  /// It shipped in English on three Arabic surfaces — Today's filings, Home's
+  /// exchange rows and the filed hero — while every other line on those rows
+  /// was translated. The Arabic wraps the Latin ticker and the `2.57×` in a
+  /// directional isolate, because a run of Latin inside Arabic otherwise
+  /// reorders and can put the number where the ticker should be.
+  String becauseFor(bool arabic) =>
+      arabic && becauseAr.isNotEmpty ? becauseAr : because;
 
   factory Disclosure.fromJson(Map<String, dynamic> json) =>
       _$DisclosureFromJson(json);
