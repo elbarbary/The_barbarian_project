@@ -919,6 +919,29 @@ def main() -> int:
     # headline that was later corrected shows the correction.
     doc["items"] = merge_with_published(doc["items"])
 
+    # Name every outlet the merged items cite, not only the ones that answered
+    # this run.
+    #
+    # The document is cumulative: a story Al Borsa published yesterday stays in
+    # it whether or not Al Borsa answers today. `sources` was built from the
+    # outlets reached on this run alone, so a single timeout stripped the
+    # attribution from every story that outlet had ever contributed — the app
+    # resolves an item's outlet id against this list and shows nothing when it
+    # is missing. On the run that caught it, Al Borsa and Hapi both timed out
+    # and 114 stories lost their byline while staying on screen.
+    cited = {a["id"] for item in doc["items"] for a in item.get("sources", [])}
+    named = {s["id"] for s in doc["sources"]} | cited
+    doc["sources"] = [
+        {
+            "id": s["id"],
+            "name": s["name"],
+            "name_ar": s["name_ar"],
+            "home": s["home"],
+        }
+        for s in SOURCES
+        if s["id"] in named
+    ]
+
     # English for an English reader. The Arabic stays on every item — the
     # translation sits beside it, never over it.
     english = translations.english_for(
