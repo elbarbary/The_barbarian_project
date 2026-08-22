@@ -305,9 +305,16 @@ abstract final class Explainers {
   }) {
     if (percent == null) return null;
     final rounded = percent.abs().toStringAsFixed(1);
+    // "Priced", not "worth".
+    //
+    // This file states the rule two builders below: market cap is given "as a
+    // price, never as worth". A price is what the last trade happened at; what
+    // a share is worth is a valuation, and publishing one is the thing §8
+    // forbids to somebody with no licence. The two words are a syllable apart
+    // and only one of them is a fact.
     final plain = percent >= 0
-        ? 'Worth $rounded% more than it was $window ago.'
-        : 'Worth $rounded% less than it was $window ago.';
+        ? 'Priced $rounded% higher than it was $window ago.'
+        : 'Priced $rounded% lower than it was $window ago.';
 
     return Explainer(
       termId: 'price_move',

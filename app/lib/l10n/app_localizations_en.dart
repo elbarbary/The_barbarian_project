@@ -791,6 +791,44 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get exitNeedsBuyer =>
+      'A share only sells when somebody else wants to buy it.';
+
+  @override
+  String get exitOneSession => 'About this much can leave in one session';
+
+  @override
+  String exitLastTraded(String date) {
+    return 'Last session that traded: $date';
+  }
+
+  @override
+  String exitNotEnough(String ticker) {
+    return 'Not enough published trading for $ticker';
+  }
+
+  @override
+  String exitNothingChanged(int days, int sessions) {
+    return 'Nothing at all changed hands on $days of the last $sessions sessions. On those days there was no price at which a holder could sell.';
+  }
+
+  @override
+  String get exitHowItWorks =>
+      'On this exchange a share can move at most 20% up or down in a session. When a name falls to that lower limit the buyers stop appearing, and there is no price at which a holder can sell — because selling needs somebody on the other side.\n\nSome shares here do not trade on some days at all. Not “traded a little” — nothing changed hands. This shows how much of a normal day a given sum would be, and how many sessions it would take to leave without being most of the trading.';
+
+  @override
+  String get exitPastThat =>
+      'Past that, selling is more than a fifth of a normal day here and starts to take more than one session. That figure is different for every company on this exchange.';
+
+  @override
+  String get exitAssumption =>
+      'The sessions figure assumes no more than a fifth of a day’s trading. That is a stated assumption rather than a market rule — selling faster moves the price against the seller, which is the cost being measured.';
+
+  @override
+  String get exitNoHistoryBody =>
+      'This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override
@@ -1168,7 +1206,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeMacro => 'What moves Egypt';
 
   @override
-  String get macroWhyItMatters => 'Why this reaches your shares';
+  String get macroWhyItMatters => 'Why this reaches Egyptian shares';
 
   @override
   String get macroMovesWith => 'Moved with the EGX 30';

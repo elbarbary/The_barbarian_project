@@ -76,7 +76,7 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
           ],
         ),
         BScreenTitle(
-          'Can I get out?',
+          l.exitCanIGetOut,
           subtitle: l.exitHeadline,
         ),
         const _HowItWorks(),
@@ -135,25 +135,19 @@ class _HowItWorks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     return BPaperCard(
       radius: BarbarianRadius.xl,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'A share only sells when somebody else wants to buy it.',
+            l.exitNeedsBuyer,
             style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
           ),
           const SizedBox(height: 12),
           Text(
-            'On this exchange a share can move at most 20% up or down in a '
-            'session. When a name falls to that lower limit the buyers stop '
-            'appearing, and there is no price at which a holder can sell — '
-            'because selling needs somebody on the other side.\n\n'
-            'Some shares here do not trade on some days at all. Not "traded a '
-            'little" — nothing changed hands. This shows how much of a normal '
-            'day your money would be, and how many sessions it would take to '
-            'leave without being most of the trading yourself.',
+            l.exitHowItWorks,
             style: BarbarianType.bodyM.copyWith(
               color: c.textSecondary,
               height: 1.55,
@@ -185,12 +179,9 @@ class _ForCompany extends ConsumerWidget {
 
         if (exit == null) {
           return BEmptyState(
-            title: 'Not enough published trading for $ticker',
+            title: l.exitNotEnough(ticker),
             body:
-                'This needs a run of sessions with volume behind them and this '
-                'listing does not have one yet. The absence is worth knowing '
-                'on its own: a share with no published trading history is not '
-                'one anybody can show you an exit for.',
+                l.exitNoHistoryBody,
           );
         }
 
@@ -218,7 +209,7 @@ class _ForCompany extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'About this much can leave in one session',
+                      l.exitOneSession,
                       style: BarbarianType.labelTiny.copyWith(
                         color: c.textMuted,
                         letterSpacing: 1.4,
@@ -233,10 +224,7 @@ class _ForCompany extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Past that, selling is more than a fifth of a normal '
-                      'day here and starts to take more than one session. '
-                      'That figure is different for every company on this '
-                      'exchange.',
+                      l.exitPastThat,
                       style: BarbarianType.bodyS.copyWith(
                         color: c.textSecondary,
                         height: 1.45,
@@ -263,10 +251,7 @@ class _ForCompany extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'The sessions figure assumes you never make up more than a fifth '
-              'of a day’s trading. That is a stated assumption rather than a '
-              'market rule — sell faster and the price moves against you, '
-              'which is the cost being measured.',
+              l.exitAssumption,
               style: BarbarianType.bodyS.copyWith(
                 color: c.textMuted,
                 height: 1.5,
@@ -291,6 +276,7 @@ class _Stops extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(16, 15, 16, 16),
       decoration: BoxDecoration(
@@ -302,16 +288,14 @@ class _Stops extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'IT STOPS TRADING',
+            l.exitStopsTrading.toUpperCase(),
             style: BarbarianType.labelNano.copyWith(
               color: BarbarianPalette.onWash(c, c.down),
             ),
           ),
           const SizedBox(height: 7),
           Text(
-            'Nothing at all changed hands on ${exit.zeroVolumeDays} of the '
-            'last ${exit.sessions} sessions. On those days there was no price '
-            'at which a holder could sell.',
+            l.exitNothingChanged(exit.zeroVolumeDays, exit.sessions),
             style: BarbarianType.bodyL.copyWith(
               color: c.textPrimary,
               height: 1.45,
@@ -320,7 +304,7 @@ class _Stops extends StatelessWidget {
           if (exit.lastTraded case final String lastDay) ...[
             const SizedBox(height: 6),
             Text(
-              'Last session that traded: $lastDay',
+              l.exitLastTraded(lastDay),
               style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
             ),
           ],

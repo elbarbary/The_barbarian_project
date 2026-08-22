@@ -115,7 +115,23 @@ class StaticApi {
       final pending = _inFlightManifest;
       if (pending != null) return pending;
     }
-    return _inFlightManifest = _loadManifest();
+    // Cleared when it settles, or the TTL above is dead code.
+    //
+    // The future was assigned and never nulled, so the `pending != null` check
+    // was permanently true after the first call and every later read got the
+    // launch-time manifest back — including reads made *after* the TTL had
+    // lapsed, which is the exact case the TTL exists for. The sharper version
+    // of the same bug: a cold start with no network leaves a completed future
+    // holding null pinned there for the life of the process, so the app cannot
+    // recover in-session even once the network returns.
+    //
+    // Guarded on identity so a refresh that starts while this one is settling
+    // does not have its own future cleared out from under it.
+    final loading = _loadManifest();
+    _inFlightManifest = loading;
+    return loading.whenComplete(() {
+      if (identical(_inFlightManifest, loading)) _inFlightManifest = null;
+    });
   }
 
   /// Forget the manifest so the next read goes to the network.

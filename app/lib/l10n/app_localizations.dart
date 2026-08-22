@@ -1484,6 +1484,60 @@ abstract class AppLocalizations {
   /// **'{percent}% of a normal day’s trading.'**
   String exitSharePercent(int percent);
 
+  /// No description provided for @exitNeedsBuyer.
+  ///
+  /// In en, this message translates to:
+  /// **'A share only sells when somebody else wants to buy it.'**
+  String get exitNeedsBuyer;
+
+  /// No description provided for @exitOneSession.
+  ///
+  /// In en, this message translates to:
+  /// **'About this much can leave in one session'**
+  String get exitOneSession;
+
+  /// No description provided for @exitLastTraded.
+  ///
+  /// In en, this message translates to:
+  /// **'Last session that traded: {date}'**
+  String exitLastTraded(String date);
+
+  /// No description provided for @exitNotEnough.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough published trading for {ticker}'**
+  String exitNotEnough(String ticker);
+
+  /// No description provided for @exitNothingChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing at all changed hands on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell.'**
+  String exitNothingChanged(int days, int sessions);
+
+  /// No description provided for @exitHowItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'On this exchange a share can move at most 20% up or down in a session. When a name falls to that lower limit the buyers stop appearing, and there is no price at which a holder can sell — because selling needs somebody on the other side.\n\nSome shares here do not trade on some days at all. Not “traded a little” — nothing changed hands. This shows how much of a normal day a given sum would be, and how many sessions it would take to leave without being most of the trading.'**
+  String get exitHowItWorks;
+
+  /// No description provided for @exitPastThat.
+  ///
+  /// In en, this message translates to:
+  /// **'Past that, selling is more than a fifth of a normal day here and starts to take more than one session. That figure is different for every company on this exchange.'**
+  String get exitPastThat;
+
+  /// No description provided for @exitAssumption.
+  ///
+  /// In en, this message translates to:
+  /// **'The sessions figure assumes no more than a fifth of a day’s trading. That is a stated assumption rather than a market rule — selling faster moves the price against the seller, which is the cost being measured.'**
+  String get exitAssumption;
+
+  /// No description provided for @exitNoHistoryBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.'**
+  String get exitNoHistoryBody;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:
@@ -2129,7 +2183,7 @@ abstract class AppLocalizations {
   /// No description provided for @macroWhyItMatters.
   ///
   /// In en, this message translates to:
-  /// **'Why this reaches your shares'**
+  /// **'Why this reaches Egyptian shares'**
   String get macroWhyItMatters;
 
   /// No description provided for @macroMovesWith.

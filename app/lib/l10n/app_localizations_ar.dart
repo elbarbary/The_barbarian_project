@@ -787,6 +787,43 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get exitNeedsBuyer => 'لا يُباع السهم إلا حين يريد شخص آخر شراءه.';
+
+  @override
+  String get exitOneSession => 'هذا القدر تقريبًا يمكن أن يخرج في جلسة واحدة';
+
+  @override
+  String exitLastTraded(String date) {
+    return 'آخر جلسة جرى فيها تداول: $date';
+  }
+
+  @override
+  String exitNotEnough(String ticker) {
+    return 'لا يوجد تداول منشور كافٍ لـ $ticker';
+  }
+
+  @override
+  String exitNothingChanged(int days, int sessions) {
+    return 'لم يجرِ أي تداول على الإطلاق في $days من آخر $sessions جلسة. وفي تلك الأيام لم يكن هناك سعر يستطيع المالك البيع عنده.';
+  }
+
+  @override
+  String get exitHowItWorks =>
+      'في هذه البورصة لا يتحرك السهم أكثر من 20% صعودًا أو هبوطًا في الجلسة. وحين يهبط سهم إلى هذا الحد الأدنى يختفي المشترون، فلا يبقى سعر يستطيع المالك البيع عنده — لأن البيع يحتاج طرفًا آخر.\n\nوبعض الأسهم هنا لا تتداول في بعض الأيام أصلًا. ليس «تداولًا قليلًا» — بل لا شيء يتغير. هذا يوضح كم يمثل مبلغ معين من يوم تداول معتاد، وكم جلسة يستغرق خروجه دون أن يكون معظم التداول.';
+
+  @override
+  String get exitPastThat =>
+      'بعد ذلك يتجاوز البيع خُمس يوم معتاد هنا ويبدأ في استغراق أكثر من جلسة. وهذا الرقم يختلف من شركة إلى أخرى في هذه البورصة.';
+
+  @override
+  String get exitAssumption =>
+      'يفترض رقم الجلسات ألا يتجاوز البيع خُمس تداول اليوم. وهذا افتراض معلن لا قاعدة سوقية — فالبيع الأسرع يحرّك السعر ضد البائع، وهي التكلفة التي يجري قياسها.';
+
+  @override
+  String get exitNoHistoryBody =>
+      'يحتاج هذا إلى سلسلة جلسات وراءها أحجام تداول، وهذا القيد ليس لديه واحدة بعد. والغياب نفسه جدير بالمعرفة: سهم بلا تاريخ تداول منشور ليس سهمًا يستطيع أحد أن يريك مخرجًا منه.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override
@@ -1163,7 +1200,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeMacro => 'ما يحرّك مصر';
 
   @override
-  String get macroWhyItMatters => 'لماذا يصل هذا إلى أسهمك';
+  String get macroWhyItMatters => 'لماذا يصل هذا إلى الأسهم المصرية';
 
   @override
   String get macroMovesWith => 'تحرّك مع مؤشر EGX 30';

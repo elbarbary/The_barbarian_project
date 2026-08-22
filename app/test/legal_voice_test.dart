@@ -280,6 +280,28 @@ void main() {
       'before you buy': RegExp(r'\bbefore you (buy|invest)\b',
           caseSensitive: false),
       'if you put in': RegExp(r'\bif you put in\b', caseSensitive: false),
+      // A claim about value rather than about price.
+      //
+      // Narrow on purpose: a bare `\bworth\b` would flag two live strings
+      // about a reader's attention ("worth a look"). This is the valuation
+      // sense — worth followed by a figure or a comparison.
+      'worth (valuation)': RegExp(
+        r'\bworth\s+(\d|EGP|more\b|less\b)',
+        caseSensitive: false,
+      ),
+      'undervalued/overvalued': RegExp(
+        r'\b(under|over)valued\b',
+        caseSensitive: false,
+      ),
+      // Addressing the reader as a holder. Not an FRA exposure on its own —
+      // the string is identical for every reader and personalises nothing —
+      // but it is the voice the rest of the copy keeps: "anyone holding the
+      // share", never "your shares".
+      'your shares': RegExp(
+        r'\byour (shares|holdings|portfolio)\b',
+        caseSensitive: false,
+      ),
+      'أسهمك (your shares)': RegExp('أسهمك|محفظتك'),
     };
 
     // The disclaimer is allowed to name what it denies. Nothing else is.
@@ -323,6 +345,10 @@ void main() {
       ('Before you buy anything: how the money comes back', 'before you buy'),
       ('If you put in EGP 50,000', 'if you put in'),
       ('لو استثمرت ٥٠٬٠٠٠ جنيه', 'لو استثمرت (if you invest)'),
+      ('Worth 18.5% more than it was a month ago.', 'worth (valuation)'),
+      ('The share looks undervalued on these numbers.', 'undervalued/overvalued'),
+      ('Why this reaches your shares', 'your shares'),
+      ('لماذا يصل هذا إلى أسهمك', 'أسهمك (your shares)'),
     ]) {
       expect(
         blocked[expected]!.hasMatch(sample),

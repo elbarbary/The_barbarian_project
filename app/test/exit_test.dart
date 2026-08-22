@@ -179,7 +179,7 @@ void main() {
     // per-company same-day figure above the ladder, and scrollUntilVisible
     // needs exactly one match.
     await tester.scrollUntilVisible(
-      find.textContaining('assumes you never'),
+      find.textContaining('assumes no more than'),
       120,
       scrollable: find.byType(Scrollable).first,
       maxScrolls: 30,
