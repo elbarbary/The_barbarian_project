@@ -420,25 +420,40 @@ def cluster(items: list[dict], threshold: float = 0.55) -> list[dict]:
         placed = False
         for index, existing in enumerate(signatures):
             overlap = len(words & existing) / max(1, len(words | existing))
-            if overlap >= threshold:
-                head = clusters[index]
-                # Never twice from the same outlet.
-                if item["source"] not in {s["id"] for s in head["sources"]}:
-                    head["sources"].append(
-                        {"id": item["source"], "link": item["link"]}
-                    )
-                if item["published"] and (
-                    not head["published"] or item["published"] < head["published"]
-                ):
-                    head["published"] = item["published"]
-                # A headline read from a title field beats one rebuilt from a
-                # URL slug, whichever arrived first.
-                if head.get("reconstructed") and not item.get("reconstructed"):
-                    head["headline"] = item["headline"]
-                    head["reconstructed"] = False
-                head["tickers"] = sorted(set(head["tickers"]) | set(item["tickers"]))
-                placed = True
-                break
+            if overlap < threshold:
+                continue
+            head = clusters[index]
+
+            # Two companies are never one story.
+            #
+            # Results announcements are near-identical by construction — "X
+            # ترتفع بأرباحها إلى N مليون جنيه بنهاية يونيو" — so a Jaccard over
+            # word sets happily merged Fawry's revenues with Talaat Moustafa's
+            # profit, and then took the union of their tickers. One row came
+            # out carrying four companies and naming one of them. Word overlap
+            # cannot tell those apart; the tickers can, and they are the whole
+            # point of the row.
+            if head["tickers"] and item["tickers"]:
+                if set(head["tickers"]) != set(item["tickers"]):
+                    continue
+
+            # Never twice from the same outlet.
+            if item["source"] not in {s["id"] for s in head["sources"]}:
+                head["sources"].append(
+                    {"id": item["source"], "link": item["link"]}
+                )
+            if item["published"] and (
+                not head["published"] or item["published"] < head["published"]
+            ):
+                head["published"] = item["published"]
+            # A headline read from a title field beats one rebuilt from a
+            # URL slug, whichever arrived first.
+            if head.get("reconstructed") and not item.get("reconstructed"):
+                head["headline"] = item["headline"]
+                head["reconstructed"] = False
+            head["tickers"] = sorted(set(head["tickers"]) | set(item["tickers"]))
+            placed = True
+            break
         if placed:
             continue
 

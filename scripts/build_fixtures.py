@@ -96,6 +96,7 @@ RESOURCES = {
     "rates": ["rates/latest.json"],
     "disclosures": ["disclosures/latest.json"],
     "macro": ["macro.json"],
+    "connections": ["connections.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by
@@ -103,7 +104,18 @@ RESOURCES = {
 # can change with the fingerprint standing still, and StaticApi keeps serving
 # the cached copy forever. This is the whole per-company dataset, so the
 # fingerprint moves whenever any one of 282 companies does.
-UNVERSIONED = ["companies", "opportunities/history", "prices"]
+# The disclosure archive and the per-company indexes ride the `disclosures`
+# counter but are separate files, so their bytes have to reach the fingerprint
+# the same way the company documents do — otherwise a month of newly kept
+# filings lands on the CDN with the fingerprint standing still and no phone
+# ever asks for it.
+UNVERSIONED = [
+    "companies",
+    "opportunities/history",
+    "prices",
+    "disclosures/archive",
+    "disclosures/documents",
+]
 
 
 def content_fingerprint() -> tuple[str, dict]:

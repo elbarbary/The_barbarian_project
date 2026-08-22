@@ -55,6 +55,17 @@ GENERIC = {
     "للتجارة", "للتجاره", "والتجارة", "والتجاره",
     "للخدمات", "والخدمات", "للتعمير", "والتعمير", "للمقاولات",
     "مجموعة", "مجموعه", "شركة", "شركه", "مصر", "و", "في", "من", "على",
+    # Legal-form suffixes Mubasher prints: "ش م م" is SAE.
+    "ش", "م", "بنك", "البنك", "مصرف", "ذ",
+    # Regions, which are where a company is rather than who it is.
+    #
+    # MEGM is "الشرق الأوسط لصناعة الزجاج", and its key came out as
+    # "الشرق الاوسط" — so a headline about the industry minister opening a
+    # plant "in the Middle East" was tagged with a glass maker. The industry
+    # words are deliberately NOT here: dropping "لصناعة" as well would have
+    # cost MICH and RAKT their keys and gained nothing.
+    "الشرق", "الاوسط", "الغرب", "الشمال", "الجنوب",
+    "افريقيا", "اسيا", "اوروبا", "العالم",
 }
 
 # Below this a key is a fragment rather than a name.
@@ -96,15 +107,55 @@ def key_for(name: str) -> str | None:
     return key
 
 
+# A short name in brackets, which is how Mubasher prints the one a paper uses:
+# "أبو قير للاسمدة و الصناعات الكيماوية (ابوقير للاسمدة)".
+BRACKETED = re.compile(r"[（(]([^)）]{4,60})[)）]")
+
+
+def keys_for(name: str) -> list[str]:
+    """Every distinct key this name offers — the head, and any short form.
+
+    A company gets more than one shot because the papers do not agree on which
+    name to use. "طلعت مصطفى" and "مجموعة طلعت مصطفى القابضة" are the same
+    company to a reader and different strings to a matcher.
+    """
+    found: list[str] = []
+    for part in [BRACKETED.sub(" ", name), *BRACKETED.findall(name)]:
+        key = key_for(part)
+        if key and key not in found:
+            found.append(key)
+    return found
+
+
 def build(names: dict[str, str]) -> dict[str, str]:
     """key → ticker, for the keys that name exactly one company."""
     claimed: dict[str, list[str]] = {}
     for ticker, name in names.items():
-        key = key_for(name)
-        if key:
+        for key in keys_for(name):
             claimed.setdefault(key, []).append(ticker)
     # A key two companies answer to is a key that identifies neither.
-    return {k: v[0] for k, v in claimed.items() if len(v) == 1}
+    unique = {k: v[0] for k, v in claimed.items() if len(set(v)) == 1}
+
+    # And a key that sits inside somebody else's name identifies neither.
+    #
+    # Two companies can produce different keys and still be confusable: Mixed
+    # Oils reduces to "للزيوت والصابون", which is most of Cairo Oils & Soap's
+    # name, so a headline about Cairo Oils came back carrying both. The keys
+    # were distinct; the discrimination was not.
+    #
+    # Eight keys go this way and every one is an industry descriptor —
+    # "لحليج الاقطان", "للتاجير التمويلي", "اسمنت بورتلاند". Those companies
+    # are simply not matched from a headline, which is the cheaper mistake:
+    # this whole file exists because a wrong company against a story is worse
+    # than no company at all.
+    folded = {ticker: _fold(name) for ticker, name in names.items()}
+    return {
+        key: ticker
+        for key, ticker in unique.items()
+        if not any(
+            other != ticker and key in name for other, name in folded.items()
+        )
+    }
 
 
 def load() -> dict[str, str]:

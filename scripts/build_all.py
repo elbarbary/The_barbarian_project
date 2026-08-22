@@ -62,6 +62,11 @@ STEPS = [
     # both are resumable: whatever the host refuses today is simply first in
     # the queue tomorrow. A failure here must never fail the build, because
     # the published documents above are already written and correct.
+    # Mubasher, not the exchange, and a different rate limit — so it can ask
+    # for more. Only companies whose name is still unknown are asked, so this
+    # is a no-op the moment the map is full and a small catch-up whenever the
+    # exchange lists something new.
+    ("Arabic names", "harvest_names_mubasher.py", False, ["--limit", "40"]),
     ("Company filings", "harvest_company_filings.py", False,
      ["--limit", "15", "--spacing", "6"]),
     ("Filed documents", "enrich_disclosures.py", False,
@@ -69,7 +74,7 @@ STEPS = [
 ]
 
 # Steps whose failure is a shrug rather than a problem.
-BEST_EFFORT = {"Company filings", "Filed documents"}
+BEST_EFFORT = {"Arabic names", "Company filings", "Filed documents"}
 
 
 def main() -> int:

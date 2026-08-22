@@ -64,6 +64,11 @@ jobs:
         run: |
           python3 scripts/build_news_api.py || true
           python3 scripts/build_rates_api.py || true
+          # Pure local arithmetic over the feeds above and the filings the
+          # daily job left behind — no network, so it costs nothing to keep
+          # current. Without it a headline that lands at ten in the morning
+          # cannot cross with a filing until the next daily run.
+          python3 scripts/build_connections_api.py || true
 
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app
