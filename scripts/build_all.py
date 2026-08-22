@@ -32,9 +32,13 @@ HERE = Path(__file__).resolve().parent
 # The two EGX-touching steps at the end carry deliberately small limits. The
 # exchange rate-limits hard — it stopped answering after roughly forty requests
 # in a day and has blocked us outright once before — so the archive is built by
-# asking for a little every run rather than a lot once. Fifteen companies and
-# twenty-five filings a day reaches all 282 companies inside three weeks and
-# never looks like a crawl.
+# asking for a little every run rather than a lot once.
+#
+# **The limits are per run, and this now runs six times a trading day** (three
+# Cairo times, each scheduled at both UTC offsets for DST). Five companies and
+# eight filings a run is the same daily footprint the old fifteen-and-twenty-
+# five had across two runs, spread thinner — which is the shape this host
+# tolerates. Raise the cadence again and these come down again.
 STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     ("Opportunity Scanner", "build_opportunity_api.py", True),
@@ -66,11 +70,11 @@ STEPS = [
     # for more. Only companies whose name is still unknown are asked, so this
     # is a no-op the moment the map is full and a small catch-up whenever the
     # exchange lists something new.
-    ("Arabic names", "harvest_names_mubasher.py", False, ["--limit", "40"]),
+    ("Arabic names", "harvest_names_mubasher.py", False, ["--limit", "12"]),
     ("Company filings", "harvest_company_filings.py", False,
-     ["--limit", "15", "--spacing", "6"]),
+     ["--limit", "5", "--spacing", "6"]),
     ("Filed documents", "enrich_disclosures.py", False,
-     ["--limit", "25", "--spacing", "6"]),
+     ["--limit", "8", "--spacing", "6"]),
 ]
 
 # Steps whose failure is a shrug rather than a problem.

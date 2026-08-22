@@ -1,17 +1,20 @@
 name: Publish live data
 
-# News and rates, every 15 minutes. The heavy build stays daily.
+# News, rates and the crossings, every 15 minutes.
 #
-# `publish-app-data.yml` runs once, an hour after the close, because everything
-# it touches changes once a day: the market scan, the scored studies, the
-# scanner's field note. Putting news on that cron made the app a daily
-# bulletin — Al Borsa publishes through the afternoon, and a headline filed at
-# 11:00 would not have appeared until 16:30. Gold was worse in a different way:
-# the metals feed updates intraday and we were pinning a morning price for
+# `publish-app-data.yml` runs three times a trading day — before the open, mid
+# session, and just after the close — because the market scan, the filings and
+# the scored studies move on that cadence. News does not: Al Borsa publishes
+# through the afternoon, and on the old once-a-day cron a headline filed at
+# 11:00 did not appear until 16:30. Gold was worse in a different way — the
+# metals feed updates intraday and we were pinning a morning price for
 # twenty-four hours while calling it today's.
 #
-# These two scripts have no dependency on the daily scan and cost six HTTP
-# calls between them, so they get their own schedule.
+# These scripts have no dependency on the daily scan and cost a handful of HTTP
+# calls between them, so they get their own schedule. `build_connections_api`
+# rides along making no calls at all: it is arithmetic over documents already
+# on disk, and without it a headline landing at ten could not cross with a
+# filing until the afternoon.
 #
 # One coupling to know about: the news triage reads each company's published
 # session to decide whether a headline is worth a second look. Between the
@@ -82,9 +85,11 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add public/data/v1/news public/data/v1/rates \
                   public/data/v1/disclosures \
+                  public/data/v1/connections.json \
                   public/data/v1/manifest.json \
                   app/assets/fixtures/news app/assets/fixtures/rates \
                   app/assets/fixtures/disclosures \
+                  app/assets/fixtures/connections.json \
                   app/assets/fixtures/manifest.json
           if git diff --cached --quiet; then
             echo 'nothing moved'
