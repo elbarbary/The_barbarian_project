@@ -722,6 +722,75 @@ class AppLocalizationsEn extends AppLocalizations {
       'ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.';
 
   @override
+  String wiresBody(int count) {
+    return '$count headlines from the Egyptian financial press, newest and most relevant first.';
+  }
+
+  @override
+  String wiresBodyChecks(int count) {
+    return '$count of them name a company that also traded outside its own normal band.';
+  }
+
+  @override
+  String get exchangeSourceNote =>
+      'Source: the Egyptian Exchange. Each row links to the filing itself.';
+
+  @override
+  String watchlistRemove(String ticker) {
+    return 'Remove $ticker from watchlist';
+  }
+
+  @override
+  String directorySearchBody(int count) {
+    return 'Try a ticker, or the Arabic legal name. The directory covers $count companies.';
+  }
+
+  @override
+  String get directoryNoQuote => 'no quote';
+
+  @override
+  String directoryShareOfListings(String percent) {
+    return '$percent% of listings';
+  }
+
+  @override
+  String get exitWaitNone => 'no published trading to measure';
+
+  @override
+  String get exitWaitDay => 'about a day to sell';
+
+  @override
+  String exitWaitSessions(int count) {
+    return '$count sessions to sell';
+  }
+
+  @override
+  String exitWaitYears(String years) {
+    return '$years years of trading';
+  }
+
+  @override
+  String exitWaitDecades(int years) {
+    return 'over $years years of trading';
+  }
+
+  @override
+  String get exitShareUnknown =>
+      'There is not enough published trading to work this out.';
+
+  @override
+  String get exitShareWholeDay =>
+      'More than a whole normal day of trading in this share.';
+
+  @override
+  String get exitShareUnderOne => 'Under 1% of a normal day’s trading.';
+
+  @override
+  String exitSharePercent(int percent) {
+    return '$percent% of a normal day’s trading.';
+  }
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

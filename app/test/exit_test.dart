@@ -4,12 +4,15 @@ import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/exit/exit_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:barbarian/l10n/app_localizations_en.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
 
 /// "Can I get out?" — the screen that comes closest to being about a reader's
 /// own money, so the rules that keep it publishable are the ones tested.
+final l = AppLocalizationsEn();
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
@@ -71,13 +74,13 @@ void main() {
     // sessions. That figure is correct and unreadable; above a year it becomes
     // years, which is a unit change rather than a claim.
     final exit = ExitLiquidity.of(load('SPHT'))!;
-    final wait = exit.waitFor(1000000);
+    final wait = exit.waitFor(1000000, l);
     expect(wait, contains('years'));
     expect(wait, isNot(contains('sessions to sell')));
 
     // And a liquid name still reports in sessions.
     final comi = ExitLiquidity.of(load('COMI'))!;
-    expect(comi.waitFor(10000), anyOf(contains('day'), contains('sessions')));
+    expect(comi.waitFor(10000, l), anyOf(contains('day'), contains('sessions')));
   });
 
   test('the words are mechanism, never instruction', () {
@@ -87,7 +90,7 @@ void main() {
       'worth buying', 'do not buy', 'good investment',
     ];
     for (final amount in ExitLiquidity.ladder) {
-      final plain = exit.plainFor(amount).toLowerCase();
+      final plain = exit.plainFor(amount, l).toLowerCase();
       for (final phrase in banned) {
         expect(plain, isNot(contains(phrase)), reason: 'says "$phrase"');
       }

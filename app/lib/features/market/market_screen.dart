@@ -191,9 +191,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 if (visible.isEmpty)
                   BEmptyState(
                     title: l.noCompanyMatches,
-                    body:
-                        'Try a ticker, or the Arabic legal name. The directory '
-                        'covers ${directory.count} companies.',
+                    body: l.directorySearchBody(directory.count),
                     actionLabel: l.clearSearch,
                     onAction: () {
                       _search.clear();
@@ -360,6 +358,7 @@ class _SectorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final share = total == 0 ? 0.0 : count / total;
 
     final tone = BarbarianPalette.sector(c, name);
@@ -413,7 +412,7 @@ class _SectorTile extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '${(share * 100).toStringAsFixed(1)}% of listings',
+            l.directoryShareOfListings((share * 100).toStringAsFixed(1)),
             style: BarbarianType.labelTiny.copyWith(
               color: c.textFaint,
               letterSpacing: 0,
@@ -439,6 +438,7 @@ class _CompanyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final change = quote?.resolvedChangePercent;
 
     return BListRow(
@@ -463,7 +463,7 @@ class _CompanyRow extends StatelessWidget {
             )
           else
             Text(
-              'no quote',
+              l.directoryNoQuote,
               style: BarbarianType.labelTiny.copyWith(
                 color: c.textFaint,
                 letterSpacing: 0,

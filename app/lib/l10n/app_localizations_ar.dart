@@ -720,6 +720,73 @@ class AppLocalizationsAr extends AppLocalizations {
       'استثمر يساعدك على فهم البورصة المصرية. وهو لا يقرر عنك ما تشتريه. ولا شيء هنا نصيحة استثمارية.';
 
   @override
+  String wiresBody(int count) {
+    return '$count خبرًا من الصحافة الاقتصادية المصرية، الأحدث والأوثق صلة أولًا.';
+  }
+
+  @override
+  String wiresBodyChecks(int count) {
+    return '$count منها تسمّي شركة تداولت أيضًا خارج نطاقها المعتاد.';
+  }
+
+  @override
+  String get exchangeSourceNote =>
+      'المصدر: البورصة المصرية. كل صف يرتبط بالإفصاح نفسه.';
+
+  @override
+  String watchlistRemove(String ticker) {
+    return 'إزالة $ticker من المتابعة';
+  }
+
+  @override
+  String directorySearchBody(int count) {
+    return 'جرّب الرمز، أو الاسم القانوني بالعربية. يغطي الدليل $count شركة.';
+  }
+
+  @override
+  String get directoryNoQuote => 'لا يوجد سعر';
+
+  @override
+  String directoryShareOfListings(String percent) {
+    return '$percent% من الشركات المقيدة';
+  }
+
+  @override
+  String get exitWaitNone => 'لا يوجد تداول منشور يكفي للقياس';
+
+  @override
+  String get exitWaitDay => 'نحو يوم واحد للبيع';
+
+  @override
+  String exitWaitSessions(int count) {
+    return '$count جلسة للبيع';
+  }
+
+  @override
+  String exitWaitYears(String years) {
+    return '$years سنة من التداول';
+  }
+
+  @override
+  String exitWaitDecades(int years) {
+    return 'أكثر من $years سنة من التداول';
+  }
+
+  @override
+  String get exitShareUnknown => 'لا يوجد تداول منشور يكفي لحساب ذلك.';
+
+  @override
+  String get exitShareWholeDay => 'أكثر من يوم تداول كامل معتاد في هذا السهم.';
+
+  @override
+  String get exitShareUnderOne => 'أقل من 1% من تداول يوم معتاد.';
+
+  @override
+  String exitSharePercent(int percent) {
+    return '$percent% من تداول يوم معتاد.';
+  }
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override

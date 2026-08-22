@@ -120,7 +120,7 @@ class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
           const SizedBox(height: 10),
         ],
         Text(
-          'Source: the Egyptian Exchange. Each row links to the filing itself.',
+          l.exchangeSourceNote,
           style: BarbarianType.bodyS.copyWith(color: c.textMuted, height: 1.5),
         ),
       ],

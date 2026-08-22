@@ -1,3 +1,4 @@
+import '../../l10n/app_localizations.dart';
 import 'company.dart';
 
 /// Whether you could get your money back out, and how long it would take.
@@ -97,28 +98,34 @@ class ExitLiquidity {
   /// figure it replaces.
   static const int sessionsPerYear = 250;
 
-  String waitFor(int amount) {
+  /// How long it takes, in the reader's language.
+  ///
+  /// Takes `AppLocalizations` rather than returning English, the same shape
+  /// `Recency` uses. These sentences were built in the model and rendered
+  /// straight onto an otherwise fully translated screen, which produced a
+  /// genuinely mixed-script line on the company file:
+  ///
+  ///     ٥٠٬٠٠٠ جنيه هنا تمثل 12% of a normal day's trading.
+  ///
+  /// A model has no business holding prose in one language.
+  String waitFor(int amount, AppLocalizations l) {
     final sessions = sessionsToSell(amount);
-    if (!sessions.isFinite) return 'no published trading to measure';
-    if (sessions <= 1) return 'about a day to sell';
-    if (sessions < sessionsPerYear) return '${sessions.ceil()} sessions to sell';
+    if (!sessions.isFinite) return l.exitWaitNone;
+    if (sessions <= 1) return l.exitWaitDay;
+    if (sessions < sessionsPerYear) return l.exitWaitSessions(sessions.ceil());
     final years = sessions / sessionsPerYear;
-    if (years < 10) return '${years.toStringAsFixed(1)} years of trading';
-    return 'over ${(years / 10).floor() * 10} years of trading';
+    if (years < 10) return l.exitWaitYears(years.toStringAsFixed(1));
+    return l.exitWaitDecades((years / 10).floor() * 10);
   }
 
   /// The plain sentence for a rung.
-  String plainFor(int amount) {
-    if (normalDailyValue <= 0) {
-      return 'There is not enough published trading to work this out.';
-    }
+  String plainFor(int amount, AppLocalizations l) {
+    if (normalDailyValue <= 0) return l.exitShareUnknown;
     final share = shareOfDay(amount);
-    if (share >= 1) {
-      return 'More than a whole normal day of trading in this share.';
-    }
+    if (share >= 1) return l.exitShareWholeDay;
     final pct = (share * 100).round();
-    if (pct < 1) return 'Under 1% of a normal day’s trading.';
-    return '$pct% of a normal day’s trading.';
+    if (pct < 1) return l.exitShareUnderOne;
+    return l.exitSharePercent(pct);
   }
 
   /// Built from published fields only; null when the series cannot support it.

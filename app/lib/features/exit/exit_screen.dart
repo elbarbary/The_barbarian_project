@@ -340,6 +340,7 @@ class _Rung extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final days = exit.sessionsToSell(amount);
     final share = exit.shareOfDay(amount);
     // Above a fifth of a day the wait stops being "about a session" and
@@ -363,7 +364,7 @@ class _Rung extends StatelessWidget {
               if (days.isFinite)
                 Flexible(
                   child: Text(
-                    exit.waitFor(amount),
+                    exit.waitFor(amount, l),
                     textAlign: TextAlign.end,
                     style: BarbarianType.labelNano.copyWith(
                       color: heavy
@@ -376,7 +377,7 @@ class _Rung extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(
-            exit.plainFor(amount),
+            exit.plainFor(amount, l),
             style: BarbarianType.bodyM.copyWith(
               color: c.textSecondary,
               height: 1.4,

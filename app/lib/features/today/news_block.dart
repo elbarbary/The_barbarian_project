@@ -68,12 +68,17 @@ class _BNewsBlockState extends ConsumerState<BNewsBlock> {
       children: [
         BSectionLabel(l.theWires),
         const SizedBox(height: 6),
+        // What the feed IS, not what it is missing.
+        //
+        // This read "Nothing on the wires today names a company whose session
+        // was outside its own normal band" — permanently, because no
+        // published item carries a ticker, so `worthAChecking` is always
+        // empty. The second line of the news product was a negative sentence
+        // about an absence, in English, every single day.
         Text(
           checks.isEmpty
-              ? 'Nothing on the wires today names a company whose session was '
-                    'outside its own normal band.'
-              : '${checks.length} of today’s headlines name a company that '
-                    'also traded unusually.',
+              ? l.wiresBody(feed.items.length)
+              : l.wiresBodyChecks(checks.length),
           style: BarbarianType.bodyM.copyWith(
             color: c.textSecondary,
             height: 1.45,
@@ -280,6 +285,7 @@ class _CheckTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
@@ -288,8 +294,10 @@ class _CheckTag extends StatelessWidget {
       ),
       child: Text(
         // The news feed carries no volume figure of its own, so this states
-        // only that the session was unusual, not how unusual.
-        'UNUSUAL VOLUME',
+        // only that the session was unusual, not how unusual. The twin of
+        // this chip on the filings block has used the key since it was
+        // written; this one was the literal.
+        l.unusualVolume.toUpperCase(),
         style: BarbarianType.labelNano.copyWith(color: c.textMuted),
       ),
     );

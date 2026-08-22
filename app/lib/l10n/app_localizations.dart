@@ -1388,6 +1388,102 @@ abstract class AppLocalizations {
   /// **'ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.'**
   String get youNotAdvice;
 
+  /// No description provided for @wiresBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} headlines from the Egyptian financial press, newest and most relevant first.'**
+  String wiresBody(int count);
+
+  /// No description provided for @wiresBodyChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of them name a company that also traded outside its own normal band.'**
+  String wiresBodyChecks(int count);
+
+  /// No description provided for @exchangeSourceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Source: the Egyptian Exchange. Each row links to the filing itself.'**
+  String get exchangeSourceNote;
+
+  /// No description provided for @watchlistRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {ticker} from watchlist'**
+  String watchlistRemove(String ticker);
+
+  /// No description provided for @directorySearchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a ticker, or the Arabic legal name. The directory covers {count} companies.'**
+  String directorySearchBody(int count);
+
+  /// No description provided for @directoryNoQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'no quote'**
+  String get directoryNoQuote;
+
+  /// No description provided for @directoryShareOfListings.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% of listings'**
+  String directoryShareOfListings(String percent);
+
+  /// No description provided for @exitWaitNone.
+  ///
+  /// In en, this message translates to:
+  /// **'no published trading to measure'**
+  String get exitWaitNone;
+
+  /// No description provided for @exitWaitDay.
+  ///
+  /// In en, this message translates to:
+  /// **'about a day to sell'**
+  String get exitWaitDay;
+
+  /// No description provided for @exitWaitSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions to sell'**
+  String exitWaitSessions(int count);
+
+  /// No description provided for @exitWaitYears.
+  ///
+  /// In en, this message translates to:
+  /// **'{years} years of trading'**
+  String exitWaitYears(String years);
+
+  /// No description provided for @exitWaitDecades.
+  ///
+  /// In en, this message translates to:
+  /// **'over {years} years of trading'**
+  String exitWaitDecades(int years);
+
+  /// No description provided for @exitShareUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'There is not enough published trading to work this out.'**
+  String get exitShareUnknown;
+
+  /// No description provided for @exitShareWholeDay.
+  ///
+  /// In en, this message translates to:
+  /// **'More than a whole normal day of trading in this share.'**
+  String get exitShareWholeDay;
+
+  /// No description provided for @exitShareUnderOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Under 1% of a normal day’s trading.'**
+  String get exitShareUnderOne;
+
+  /// No description provided for @exitSharePercent.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% of a normal day’s trading.'**
+  String exitSharePercent(int percent);
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

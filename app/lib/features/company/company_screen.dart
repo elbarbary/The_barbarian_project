@@ -1306,7 +1306,7 @@ class _ExitSummary extends StatelessWidget {
                     Text(
                       alarming
                           ? l.exitZeroDays(exit.zeroVolumeDays, exit.sessions)
-                          : l.exitFiftyK(exit.plainFor(50000).toLowerCase()),
+                          : l.exitFiftyK(exit.plainFor(50000, l).toLowerCase()),
                       style: BarbarianType.bodyL.copyWith(
                         color: alarming ? c.textPrimary : c.textPrimary,
                         height: 1.4,
@@ -1314,7 +1314,7 @@ class _ExitSummary extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      alarming ? l.exitNoPrice : exit.waitFor(50000),
+                      alarming ? l.exitNoPrice : exit.waitFor(50000, l),
                       style: BarbarianType.bodyS.copyWith(
                         color: c.textMuted,
                         height: 1.45,

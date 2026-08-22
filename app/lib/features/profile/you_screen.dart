@@ -98,8 +98,9 @@ class YouScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 10),
               child: Text(
-                'Prices only. No score, no band and no reading appears here — '
-                'those live on the company file, which you open yourself.',
+                // The key has existed, translated, since this screen was
+                // written — with the English literal sitting beside it.
+                l.watchlistPricesOnly,
                 style: BarbarianType.bodyS.copyWith(
                   color: context.colors.textMuted,
                   height: 1.5,
@@ -109,9 +110,7 @@ class YouScreen extends ConsumerWidget {
             if (watchlist.isEmpty)
               BEmptyState(
                 title: l.watchlistEmpty,
-                body:
-                    'Follow a company and its price, filings and research land '
-                    'here.',
+                body: l.watchlistEmptyBody,
                 actionLabel: l.browseCompanies,
                 onAction: () => context.push(Routes.directoryPath(BNavTab.you)),
               )
@@ -267,6 +266,7 @@ class _WatchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     return BListRow(
       asCard: false,
       padding: const EdgeInsets.symmetric(vertical: 14),
@@ -285,7 +285,7 @@ class _WatchRow extends StatelessWidget {
           BPressable(
             onTap: onRemove,
             scale: 0.9,
-            semanticLabel: 'Remove $ticker from watchlist',
+            semanticLabel: l.watchlistRemove(ticker),
             child: Container(
               width: 28,
               height: 28,
