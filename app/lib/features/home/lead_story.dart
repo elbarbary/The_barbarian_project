@@ -29,6 +29,22 @@ import '../../l10n/app_localizations.dart';
 /// **It degrades to a headline.** Roughly half the feed carries no picture, and
 /// a lead card that collapses when the top story happens to be from an outlet
 /// without one would be worse than no lead card at all.
+/// The stories the rail leads with.
+///
+/// Shared, because the rail and the list underneath it were each choosing
+/// their own and arriving at the same answer: the rail took the first six
+/// illustrated stories of the top 24, the list took the first five outright,
+/// and since almost every ranked story now carries a picture the app opened
+/// with the same five headlines printed twice, in the same order, filling the
+/// first screen and a half.
+///
+/// Illustrated only. This is the carousel — a card with a hole where the
+/// photograph should be reads as broken beside five that have one.
+List<NewsItem> leadStories(List<NewsItem> items) => [
+  for (final item in items.take(24))
+    if ((item.image ?? '').isNotEmpty) item,
+].take(6).toList();
+
 class BLeadStory extends ConsumerWidget {
   const BLeadStory({super.key});
 
@@ -47,10 +63,7 @@ class BLeadStory extends ConsumerWidget {
     // Illustrated ones only. This is the carousel — a card with a hole where
     // the photograph should be reads as broken next to four that have one —
     // and every story, illustrated or not, is in the list directly below.
-    final leads = [
-      for (final item in items.take(24))
-        if ((item.image ?? '').isNotEmpty) item,
-    ].take(6).toList();
+    final leads = leadStories(items);
     if (leads.isEmpty) return const SizedBox.shrink();
     // The attribution carries an outlet id; the feed carries the names. One
     // story told by three papers is credited to all of them.

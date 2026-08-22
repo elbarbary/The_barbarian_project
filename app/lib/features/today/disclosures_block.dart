@@ -170,7 +170,7 @@ class _Filing extends ConsumerWidget {
                         Flexible(child: _CheckTag(ratio: item.evidence?.ratio)),
                         const SizedBox(width: 8),
                       ],
-                      Flexible(child: _TypeTag(label: item.eventLabel)),
+                      Flexible(child: _TypeTag(label: item.eventLabelFor(arabic))),
                     ],
                   ),
                 ),
@@ -226,7 +226,7 @@ class _Filing extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            if (item.meaning.isNotEmpty) ...[
+            if (item.meaningFor(arabic).isNotEmpty) ...[
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.fromLTRB(11, 9, 11, 10),
@@ -241,7 +241,7 @@ class _Filing extends ConsumerWidget {
                     // reason the screen exists: the document says what
                     // happened, this says what it does to you.
                     Text(
-                      item.meaning,
+                      item.meaningFor(arabic),
                       style: BarbarianType.bodyS.copyWith(
                         color: c.textSecondary,
                         height: 1.5,

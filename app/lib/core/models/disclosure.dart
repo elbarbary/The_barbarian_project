@@ -107,6 +107,15 @@ abstract class Disclosure with _$Disclosure {
   String meaningFor(bool arabic) =>
       arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 
+  /// The filing type in the language being read.
+  ///
+  /// On the model rather than at each call site, because it was written out by
+  /// hand on Home and forgotten on Today — so the identical row rendered an
+  /// English chip and an English explanation to an Arabic reader on one tab
+  /// and the Arabic on the other, from the same document.
+  String eventLabelFor(bool arabic) =>
+      arabic && eventLabelAr.isNotEmpty ? eventLabelAr : eventLabel;
+
   factory Disclosure.fromJson(Map<String, dynamic> json) =>
       _$DisclosureFromJson(json);
 

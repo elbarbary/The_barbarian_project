@@ -712,11 +712,7 @@ class HomeAlsoFiled extends ConsumerWidget {
                               color: c.textPrimary,
                             ),
                           ),
-                          BKindChip(
-                            arabic && item.eventLabelAr.isNotEmpty
-                                ? item.eventLabelAr
-                                : item.eventLabel,
-                          ),
+                          BKindChip(item.eventLabelFor(arabic)),
                           // §49 again. These rows sit under a hero that now
                           // dates itself, and an undated row beside a dated
                           // one reads as "this one is current".
@@ -819,10 +815,19 @@ class HomeAlsoFiled extends ConsumerWidget {
 /// in their own language, with every outlet that ran it named, and it opens
 /// out to the outlet rather than being retold here.
 class HomeLatestNews extends ConsumerWidget {
-  const HomeLatestNews({this.limit = 12, this.showHeader = true, super.key});
+  const HomeLatestNews({
+    this.limit = 12,
+    this.showHeader = true,
+    this.excludeLeads = false,
+    super.key,
+  });
 
   final int limit;
   final bool showHeader;
+
+  /// Whether to skip the stories the lead rail is already carrying. True only
+  /// where the rail is on the same screen.
+  final bool excludeLeads;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -830,7 +835,19 @@ class HomeLatestNews extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final feed = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
-    final items = (feed?.items ?? const <NewsItem>[]).take(limit).toList();
+    final all = feed?.items ?? const <NewsItem>[];
+    // Not the stories the rail above is already carrying.
+    //
+    // Both were picking from the top of the same ranked feed and landing on
+    // the same headlines, so Home opened with five stories printed twice and
+    // the first screen and a half said one thing.
+    final skip = excludeLeads
+        ? {for (final lead in leadStories(all)) lead.id}
+        : const <String>{};
+    final items = [
+      for (final item in all)
+        if (!skip.contains(item.id)) item,
+    ].take(limit).toList();
     if (items.isEmpty) return const SizedBox.shrink();
 
     // Every outlet that ran it, named. A story three papers carried is more

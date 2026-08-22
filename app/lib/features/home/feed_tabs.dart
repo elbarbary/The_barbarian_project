@@ -70,7 +70,11 @@ class _BFeedTabsState extends ConsumerState<BFeedTabs> {
         ),
         const SizedBox(height: 12),
         if (news)
-          const HomeLatestNews(limit: 5, showHeader: false)
+          const HomeLatestNews(
+            limit: 5,
+            showHeader: false,
+            excludeLeads: true,
+          )
         else
           const HomeAlsoFiled(limit: 5, showHeader: false),
       ],
