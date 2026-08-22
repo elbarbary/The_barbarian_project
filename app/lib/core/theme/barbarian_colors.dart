@@ -94,8 +94,11 @@ class BarbarianColors extends ThemeExtension<BarbarianColors> {
     // Derived from the boards' #7A736D — same hue, dark enough to read at
     // 11pt (5.31:1 on card, 4.78:1 on ground).
     textMuted: Color(0xFF6B645E),
-    // Derived from the boards' #9A938C, which measures 2.77:1 (4.57:1 here).
-    textFaint: Color(0xFF756E68),
+    // Derived from the boards' #9A938C, which measures 2.77:1. This was
+    // 0xFF756E68 and cleared 4.5:1 on a card but not on the ground it also
+    // gets used against (4.12:1). Darkened until it clears on both, because
+    // the section captions and the data-age lines are set in it.
+    textFaint: Color(0xFF6E6761),
     // The boards' committing action is a solid ink pill with bone type, not an
     // orange one: bone on #E8621C is 3.01:1.
     actionSurface: Color(0xFF1B1917),

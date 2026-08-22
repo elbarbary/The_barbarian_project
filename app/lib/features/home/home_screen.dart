@@ -259,7 +259,7 @@ class _DailyInsight extends ConsumerWidget {
                     (volumeKicker ?? age ?? l.homeFiledHero).toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
-                      letterSpacing: 1.6,
+                      letterSpacing: 0.7,
                     ),
                   ),
                 ),
@@ -270,7 +270,7 @@ class _DailyInsight extends ConsumerWidget {
                     age.toUpperCase(),
                     style: BarbarianType.labelTiny.copyWith(
                       color: c.onInkMuted,
-                      letterSpacing: 1.6,
+                      letterSpacing: 0.7,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -448,7 +448,7 @@ class _IndexCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: BarbarianType.labelTiny.copyWith(
                   color: c.onInkMuted,
-                  letterSpacing: 1.2,
+                  letterSpacing: 0.6,
                 ),
               ),
               const SizedBox(height: 8),
@@ -1030,11 +1030,26 @@ class HomeLatestNews extends ConsumerWidget {
                                       BarbarianRadius.sm,
                                     ),
                                   ),
-                                  child: Text(
-                                    item.becauseFor(arabic),
-                                    style: BarbarianType.bodyS.copyWith(
-                                      color: c.textPrimary,
-                                      height: 1.4,
+                                  // In its own direction.
+                                  //
+                                  // The row runs in the headline's direction
+                                  // and most headlines are Arabic, so an
+                                  // English sentence in this box rendered
+                                  // right-to-left with its full stop on the
+                                  // left — visible the moment ticker matching
+                                  // started working and the box appeared for
+                                  // the first time.
+                                  child: Directionality(
+                                    textDirection:
+                                        isArabic(item.becauseFor(arabic))
+                                        ? TextDirection.rtl
+                                        : TextDirection.ltr,
+                                    child: Text(
+                                      item.becauseFor(arabic),
+                                      style: BarbarianType.bodyS.copyWith(
+                                        color: c.textPrimary,
+                                        height: 1.4,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1243,7 +1258,7 @@ class _Count extends StatelessWidget {
           label,
           style: BarbarianType.labelTiny.copyWith(
             color: c.textMuted,
-            letterSpacing: 1.2,
+            letterSpacing: 0.6,
           ),
         ),
         if (share > 0)

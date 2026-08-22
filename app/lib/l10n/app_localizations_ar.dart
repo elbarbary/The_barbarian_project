@@ -12,7 +12,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appName => 'استثمر';
 
   @override
-  String get appTagline => 'الأسهم المصرية، بلا تجميل';
+  String get appTagline => 'الأسهم المصرية، بكلام واضح';
 
   @override
   String get navHome => 'الرئيسية';
@@ -169,7 +169,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get countOutcomes => 'النتائج';
 
   @override
-  String get theSession => 'الجلسة';
+  String get theSession => 'تداول اليوم';
 
   @override
   String get youSubtitle => 'لا حاجة لحساب للقراءة';
@@ -179,7 +179,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get watchlistPricesOnly =>
-      'أسعار فقط. لا درجة ولا تصنيف ولا قراءة تظهر هنا — تلك في ملف الشركة، الذي تفتحه بنفسك.';
+      'أسعار فقط. لا درجة ولا رأي يظهر هنا — تلك في صفحة الشركة، التي تفتحها بنفسك.';
 
   @override
   String get watchlistEmpty => 'قائمة المتابعة فارغة';
@@ -289,11 +289,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeAlsoFiled => 'مُودَع لدى البورصة';
 
   @override
-  String get homeAllFilings => 'كل الإفصاحات';
+  String get homeAllFilings => 'كل الإعلانات';
 
   @override
   String homeFilingsCount(int count) {
-    return '$count إفصاحًا اليوم';
+    return '$count إعلان اليوم';
   }
 
   @override
@@ -308,7 +308,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeNothingUnusualBody =>
-      'لم تتداول أي شركة بشكل غير معتاد مقارنة بمتوسطها يوم إفصاحها. الجلسة الهادئة إجابة حقيقية.';
+      'لم تتداول أي شركة أكثر من المعتاد بكثير يوم إعلانها. واليوم الهادئ إجابة حقيقية.';
 
   @override
   String get homeLatestNews => 'آخر الأخبار';
@@ -318,7 +318,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String homeVolumeKicker(String ratio) {
-    return 'حجم التداول $ratio× المعتاد';
+    return 'تداول $ratio× أكثر من المعتاد';
   }
 
   @override
@@ -408,7 +408,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get whatThatMeans => 'ماذا يعني ذلك';
 
   @override
-  String get thisSession => 'هذه الجلسة';
+  String get thisSession => 'تداول هذا اليوم';
 
   @override
   String get performance => 'الأداء';
@@ -703,11 +703,11 @@ class AppLocalizationsAr extends AppLocalizations {
       'لم نحتفظ بعد بإفصاحات من هذه الشركة. البورصة لا تتيح سوى أحدث صفحة، ولذلك يبدأ السجل هنا من وقت بدء جمعنا له.';
 
   @override
-  String get unusualLabel => 'تداول غير معتاد';
+  String get unusualLabel => 'تداول أكثر من المعتاد';
 
   @override
   String unusualBody(int count, int total) {
-    return '$count من $total إفصاح نحتفظ به جاء من شركة تداولت أيضًا خارج نطاقها المعتاد.';
+    return '$count من $total إعلان نحتفظ به جاء من شركة تداول سهمها أكثر بكثير من المعتاد.';
   }
 
   @override
@@ -1049,7 +1049,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get homeFiledHero => 'مُودَع لدى البورصة';
+  String get homeFiledHero => 'إعلانات الشركات';
 
   @override
   String get homeRoseAndFell => 'ما ارتفع وما انخفض';

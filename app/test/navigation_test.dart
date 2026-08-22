@@ -72,7 +72,7 @@ void main() {
     testWidgets('boots on Home with the Home slot lit', (tester) async {
       await boot(tester);
 
-      expect(find.text('Egyptian equities, unfiltered'), findsOneWidget);
+      expect(find.text('Egyptian shares, in plain words'), findsOneWidget);
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
       expect(nav.active, BNavTab.home);
     });

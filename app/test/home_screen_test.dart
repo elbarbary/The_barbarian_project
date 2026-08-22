@@ -26,7 +26,7 @@ void main() {
     tester,
   ) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     // A bare "Statement" says nothing about what happened, and it is the most
     // common filing type there is. Leading with one wastes the largest card on
@@ -52,7 +52,7 @@ void main() {
     // "Filed today" regardless — and when this was found the entire feed was
     // one day old, so Home was stating something false in its largest type.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     final fixture = readFixtureObjectSync('disclosures/latest.json');
     final items = (fixture['items'] as List).cast<Map<String, dynamic>>();
@@ -76,13 +76,13 @@ void main() {
 
   testWidgets('the lead filing says why it is the lead', (tester) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     // The kicker carries the measured reason this filing leads, and the body
     // carries it in words. Without either the hero is just the newest filing
     // wearing a big font.
     expect(
-      find.textContaining(RegExp('normal volume|filed this|NORMAL',
+      find.textContaining(RegExp('normal volume|announced this|filed this|NORMAL',
           caseSensitive: false)),
       findsWidgets,
     );
@@ -235,7 +235,7 @@ void main() {
     // from a number outside the exchange to a share inside it. It has to stop
     // at the mechanism.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     for (final word in [
       'you should',
@@ -382,7 +382,7 @@ void main() {
     // on named issuers is exposure we have not cleared. Home must not be the
     // back door that puts it in front of everyone anyway.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     for (final absent in [
       'latest research',

@@ -568,12 +568,12 @@ def triage(item: dict) -> dict:
             "weight": "check",
             # Stated as the join of two facts, with both of them shown.
             "because": (
-                f"Names {top['ticker']}, which traded "
-                f"{top['rv']:.2f}× its own normal volume that session."
+                f"This is about {top['ticker']}, whose shares changed hands "
+                f"{top['rv']:.2f}× more than they normally do that day."
             ),
             "because_ar": (
-                f"يذكر {isolate(top['ticker'])}، التي تداولت "
-                f"{isolate(f'{top['rv']:.2f}×')} حجمها المعتاد في تلك الجلسة."
+                f"هذا الخبر عن {isolate(top['ticker'])}، وتداول سهمها "
+                f"{isolate(f'{top['rv']:.2f}×')} أكثر من المعتاد في ذلك اليوم."
             ),
             "evidence": {
                 "ticker": top["ticker"],
@@ -590,13 +590,14 @@ def triage(item: dict) -> dict:
         return {
             "weight": "named",
             "because": (
-                f"Names {top['ticker']}. Its session was ordinary — "
-                f"{top['rv']:.2f}× its normal volume, against a "
-                f"{UNUSUAL_VOLUME:g}× threshold."
+                f"This is about {top['ticker']}. Its shares traded about as "
+                f"much as usual that day — {top['rv']:.2f}× their normal, and "
+                f"we only point out anything above {UNUSUAL_VOLUME:g}×."
             ),
             "because_ar": (
-                f"يذكر {isolate(top['ticker'])}. وكانت جلستها عادية — "
-                f"{isolate(f'{top['rv']:.2f}×')} من حجمها المعتاد، مقابل حد "
+                f"هذا الخبر عن {isolate(top['ticker'])}. وتداول سهمها في ذلك "
+                f"اليوم كالمعتاد تقريبًا — {isolate(f'{top['rv']:.2f}×')} من "
+                f"المعتاد، ولا ننبّه إلا لما يتجاوز "
                 f"{isolate(f'{UNUSUAL_VOLUME:g}×')}."
             ),
             "evidence": {
@@ -613,13 +614,13 @@ def triage(item: dict) -> dict:
         return {
             "weight": "named",
             "because": (
-                f"Names {', '.join(item['tickers'])}. No session data is "
-                "published for it, so there is nothing to measure the story "
-                "against."
+                f"This is about {', '.join(item['tickers'])}. No trading "
+                "figures are published for it, so there is nothing to compare "
+                "the story against."
             ),
             "because_ar": (
-                f"يذكر {isolate(', '.join(item['tickers']))}. لا توجد بيانات "
-                "جلسة منشورة لها، فليس هناك ما يُقاس الخبر عليه."
+                f"هذا الخبر عن {isolate(', '.join(item['tickers']))}. لا "
+                "توجد أرقام تداول منشورة لها، فليس هناك ما يُقارن به الخبر."
             ),
             "evidence": None,
         }

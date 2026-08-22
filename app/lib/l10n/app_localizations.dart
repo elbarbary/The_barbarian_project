@@ -107,7 +107,7 @@ abstract class AppLocalizations {
   /// Masthead subtitle under the wordmark
   ///
   /// In en, this message translates to:
-  /// **'Egyptian equities, unfiltered'**
+  /// **'Egyptian shares, in plain words'**
   String get appTagline;
 
   /// No description provided for @navHome.
@@ -167,7 +167,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeNothingFiledBody.
   ///
   /// In en, this message translates to:
-  /// **'When a company tells the exchange something, it lands here with what it means for anyone holding the share.'**
+  /// **'When a company tells the exchange something, it appears here with what it means for anyone who owns the shares.'**
   String get homeNothingFiledBody;
 
   /// No description provided for @homeWatchlistLabel.
@@ -395,7 +395,7 @@ abstract class AppLocalizations {
   /// No description provided for @theSession.
   ///
   /// In en, this message translates to:
-  /// **'The session'**
+  /// **'The day\'s trading'**
   String get theSession;
 
   /// No description provided for @youSubtitle.
@@ -413,7 +413,7 @@ abstract class AppLocalizations {
   /// No description provided for @watchlistPricesOnly.
   ///
   /// In en, this message translates to:
-  /// **'Prices only. No score, no band and no reading appears here — those live on the company file, which you open yourself.'**
+  /// **'Prices only. No score and no opinion appears here — those live on the company page, which you open yourself.'**
   String get watchlistPricesOnly;
 
   /// No description provided for @watchlistEmpty.
@@ -629,13 +629,13 @@ abstract class AppLocalizations {
   /// No description provided for @homeAllFilings.
   ///
   /// In en, this message translates to:
-  /// **'All filings'**
+  /// **'All announcements'**
   String get homeAllFilings;
 
   /// No description provided for @homeFilingsCount.
   ///
   /// In en, this message translates to:
-  /// **'{count} filings today'**
+  /// **'{count} announcements today'**
   String homeFilingsCount(int count);
 
   /// No description provided for @legalNotLicensedShort.
@@ -659,7 +659,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeNothingUnusualBody.
   ///
   /// In en, this message translates to:
-  /// **'No company traded unusually against its own normal volume on the day it filed. A quiet session is a real answer.'**
+  /// **'No company traded much more than usual on the day it announced something. A quiet day is a real answer.'**
   String get homeNothingUnusualBody;
 
   /// No description provided for @homeLatestNews.
@@ -677,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeVolumeKicker.
   ///
   /// In en, this message translates to:
-  /// **'Volume {ratio}x normal'**
+  /// **'Traded {ratio}x more than usual'**
   String homeVolumeKicker(String ratio);
 
   /// No description provided for @homeFiledToday.
@@ -839,7 +839,7 @@ abstract class AppLocalizations {
   /// No description provided for @thisSession.
   ///
   /// In en, this message translates to:
-  /// **'This session'**
+  /// **'This day\'s trading'**
   String get thisSession;
 
   /// No description provided for @performance.
@@ -1367,13 +1367,13 @@ abstract class AppLocalizations {
   /// No description provided for @unusualLabel.
   ///
   /// In en, this message translates to:
-  /// **'Traded unusually'**
+  /// **'Busier than usual'**
   String get unusualLabel;
 
   /// No description provided for @unusualBody.
   ///
   /// In en, this message translates to:
-  /// **'{count} of the {total} filings we hold came from a company that also traded outside its own normal band.'**
+  /// **'{count} of the {total} announcements we hold came from a company whose shares changed hands far more than they normally do.'**
   String unusualBody(int count, int total);
 
   /// No description provided for @unusualTimes.
@@ -1889,7 +1889,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeFiledHero.
   ///
   /// In en, this message translates to:
-  /// **'Filed with the exchange'**
+  /// **'Company announcements'**
   String get homeFiledHero;
 
   /// No description provided for @homeRoseAndFell.

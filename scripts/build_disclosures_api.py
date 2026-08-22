@@ -372,12 +372,12 @@ def triage(item: dict) -> dict:
         return {
             "weight": "check",
             "because": (
-                f"{top['ticker']} filed this, and traded "
-                f"{top['rv']:.2f}× its own normal volume that session."
+                f"{top['ticker']} announced this, and its shares changed "
+                f"hands {top['rv']:.2f}× more than they normally do that day."
             ),
             "because_ar": (
-                f"أودعت {isolate(top['ticker'])} هذا الإفصاح، وتداولت "
-                f"{isolate(f'{top['rv']:.2f}×')} حجمها المعتاد في تلك الجلسة."
+                f"أعلنت {isolate(top['ticker'])} هذا، وتداول سهمها "
+                f"{isolate(f'{top['rv']:.2f}×')} أكثر من المعتاد في ذلك اليوم."
             ),
             "evidence": {
                 "ticker": top["ticker"],
@@ -393,14 +393,15 @@ def triage(item: dict) -> dict:
         return {
             "weight": "filed",
             "because": (
-                f"{top['ticker']} filed this. Its session was ordinary — "
-                f"{top['rv']:.2f}× normal volume against a "
-                f"{UNUSUAL_VOLUME:g}× threshold."
+                f"{top['ticker']} announced this. Its trading that day was "
+                f"ordinary — {top['rv']:.2f}× its usual, and we only point out "
+                f"anything above {UNUSUAL_VOLUME:g}×."
             ),
             "because_ar": (
-                f"أودعت {isolate(top['ticker'])} هذا الإفصاح. وكانت جلستها "
-                f"عادية — {isolate(f'{top['rv']:.2f}×')} من الحجم المعتاد "
-                f"مقابل حد {isolate(f'{UNUSUAL_VOLUME:g}×')}."
+                f"أعلنت {isolate(top['ticker'])} هذا. وكان تداول سهمها في "
+                f"ذلك اليوم عاديًا — {isolate(f'{top['rv']:.2f}×')} من "
+                f"المعتاد، ولا ننبّه إلا لما يتجاوز "
+                f"{isolate(f'{UNUSUAL_VOLUME:g}×')}."
             ),
             "evidence": {
                 "ticker": top["ticker"],
@@ -415,20 +416,21 @@ def triage(item: dict) -> dict:
         return {
             "weight": "filed",
             "because": (
-                f"Filed by {', '.join(item['tickers'])}. No session data is "
-                "published for it, so there is nothing to measure it against."
+                f"Announced by {', '.join(item['tickers'])}. No trading "
+                "figures are published for it, so there is nothing to compare "
+                "it against."
             ),
             "because_ar": (
-                f"أودعته {isolate(', '.join(item['tickers']))}. لا توجد بيانات "
-                "جلسة منشورة له، فليس هناك ما يُقاس عليه."
+                f"أعلنته {isolate(', '.join(item['tickers']))}. لا توجد "
+                "أرقام تداول منشورة له، فليس هناك ما يُقارن به."
             ),
             "evidence": None,
         }
     # Bond and securitisation notices carry no equity ticker at all.
     return {
         "weight": "other",
-        "because": "This filing names no listed share.",
-        "because_ar": "لا يسمّي هذا الإفصاح سهمًا مقيدًا.",
+        "because": "This announcement does not name a listed company.",
+        "because_ar": "لا يذكر هذا الإعلان شركة مقيدة بالبورصة.",
         "evidence": None,
     }
 

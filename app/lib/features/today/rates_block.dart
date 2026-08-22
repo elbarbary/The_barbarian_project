@@ -256,7 +256,7 @@ class _WorldCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: BarbarianType.labelTiny.copyWith(
                   color: c.textMuted,
-                  letterSpacing: 1.1,
+                  letterSpacing: 0.6,
                 ),
               ),
               const Spacer(),
@@ -326,7 +326,7 @@ class _MetalCard extends ConsumerWidget {
               metal.labelFor(arabic),
               style: BarbarianType.labelTiny.copyWith(
                 color: c.onInkMuted,
-                letterSpacing: 1.2,
+                letterSpacing: 0.6,
               ),
             ),
             const SizedBox(height: 10),

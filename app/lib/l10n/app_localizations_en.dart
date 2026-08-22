@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'ESTHMR';
 
   @override
-  String get appTagline => 'Egyptian equities, unfiltered';
+  String get appTagline => 'Egyptian shares, in plain words';
 
   @override
   String get navHome => 'Home';
@@ -47,7 +47,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeNothingFiledBody =>
-      'When a company tells the exchange something, it lands here with what it means for anyone holding the share.';
+      'When a company tells the exchange something, it appears here with what it means for anyone who owns the shares.';
 
   @override
   String get homeWatchlistLabel => 'From your watchlist';
@@ -170,7 +170,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get countOutcomes => 'Outcomes';
 
   @override
-  String get theSession => 'The session';
+  String get theSession => 'The day\'s trading';
 
   @override
   String get youSubtitle => 'No account needed to read';
@@ -180,7 +180,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get watchlistPricesOnly =>
-      'Prices only. No score, no band and no reading appears here — those live on the company file, which you open yourself.';
+      'Prices only. No score and no opinion appears here — those live on the company page, which you open yourself.';
 
   @override
   String get watchlistEmpty => 'Empty watchlist';
@@ -291,11 +291,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeAlsoFiled => 'Filed with the exchange';
 
   @override
-  String get homeAllFilings => 'All filings';
+  String get homeAllFilings => 'All announcements';
 
   @override
   String homeFilingsCount(int count) {
-    return '$count filings today';
+    return '$count announcements today';
   }
 
   @override
@@ -310,7 +310,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeNothingUnusualBody =>
-      'No company traded unusually against its own normal volume on the day it filed. A quiet session is a real answer.';
+      'No company traded much more than usual on the day it announced something. A quiet day is a real answer.';
 
   @override
   String get homeLatestNews => 'Latest news';
@@ -320,7 +320,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String homeVolumeKicker(String ratio) {
-    return 'Volume ${ratio}x normal';
+    return 'Traded ${ratio}x more than usual';
   }
 
   @override
@@ -410,7 +410,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get whatThatMeans => 'What that means';
 
   @override
-  String get thisSession => 'This session';
+  String get thisSession => 'This day\'s trading';
 
   @override
   String get performance => 'Performance';
@@ -705,11 +705,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'We have kept no filings from this company yet. The exchange serves only its newest page, so the record here starts when we started collecting.';
 
   @override
-  String get unusualLabel => 'Traded unusually';
+  String get unusualLabel => 'Busier than usual';
 
   @override
   String unusualBody(int count, int total) {
-    return '$count of the $total filings we hold came from a company that also traded outside its own normal band.';
+    return '$count of the $total announcements we hold came from a company whose shares changed hands far more than they normally do.';
   }
 
   @override
@@ -1054,7 +1054,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get homeFiledHero => 'Filed with the exchange';
+  String get homeFiledHero => 'Company announcements';
 
   @override
   String get homeRoseAndFell => 'What rose and what fell';

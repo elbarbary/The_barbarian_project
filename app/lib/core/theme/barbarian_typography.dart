@@ -136,36 +136,59 @@ abstract final class BarbarianType {
   static TextStyle get figureXs => _display(12.5, weight: 400);
 
   // ------------------------------------------------------------------ text
+  //
+  // ## Raised once, after watching people read it
+  //
+  // The scale was transcribed from a design canvas, where type is judged at
+  // whatever size the artboard is being viewed at. On a phone in a hand it was
+  // too small to read comfortably: card prose at 13, supporting copy at 11 in
+  // a **300 weight**, and captions at 9. Readers given the app said the fonts
+  // were hard to read, and they were right — iOS sets its own body at 17.
+  //
+  // Every size below moved up, and the one light weight became regular. A
+  // 300-weight face at 11 points is thin strokes at the size where the eye has
+  // least to work with, which is the worst place in a type scale to save
+  // space.
+  //
+  // Nothing above `bodyL` moved: the display sizes were never the problem, and
+  // enlarging headings as well would have shifted the proportions rather than
+  // the legibility.
 
-  /// 16/1.65 — long-form research body.
-  static TextStyle get bodyL => _body(16, height: 1.65);
+  /// 17/1.6 — long-form research body. iOS sets its own body text at 17.
+  static TextStyle get bodyL => _body(17, height: 1.6);
 
-  /// 13/1.5 — card body copy.
-  static TextStyle get bodyM => _body(13, height: 1.5);
+  /// 15/1.5 — card body copy. The size most of the app's sentences are read at.
+  static TextStyle get bodyM => _body(15, height: 1.5);
 
-  /// 11/1.3 — dense supporting copy.
-  static TextStyle get bodyS => _body(11, height: 1.3, weight: FontWeight.w300);
+  /// 13/1.45 — dense supporting copy. Regular, not light: the 300 weight this
+  /// carried at 11 points was the single hardest thing in the app to read.
+  static TextStyle get bodyS => _body(13, height: 1.45);
 
-  /// 13 — tab labels, buttons.
-  static TextStyle get label => _body(13);
+  /// 14 — tab labels, buttons.
+  static TextStyle get label => _body(14);
 
-  /// 12 — secondary labels.
-  static TextStyle get labelS => _body(12);
+  /// 13 — secondary labels.
+  static TextStyle get labelS => _body(13);
 
-  /// 11/.16em uppercase — the boards' signature section label.
-  static TextStyle get labelMicro => _body(11, letterSpacing: 0.16);
+  /// 12/.12em uppercase — the boards' signature section label.
+  ///
+  /// Tracking came down with the size increase. Wide letter-spacing on capitals
+  /// is a display effect: it separates the letters of a word a reader is
+  /// scanning, and it costs most on the labels that name a section to somebody
+  /// who does not already know what is in it.
+  static TextStyle get labelMicro => _body(12, letterSpacing: 0.12);
 
-  /// 10/.16em uppercase — the smallest label, under a gauge or a stat.
-  static TextStyle get labelNano => _body(10, letterSpacing: 0.16);
+  /// 11/.12em uppercase — the smallest label, under a gauge or a stat.
+  static TextStyle get labelNano => _body(11, letterSpacing: 0.12);
 
-  /// 9/.16em uppercase — caption under a dial.
-  static TextStyle get labelTiny => _body(9, letterSpacing: 0.16);
+  /// 10.5/.12em uppercase — caption under a dial.
+  static TextStyle get labelTiny => _body(10.5, letterSpacing: 0.12);
 
-  /// 10/500 — a value inside a pill.
-  static TextStyle get pill => _body(10, weight: FontWeight.w500);
+  /// 11/500 — a value inside a pill.
+  static TextStyle get pill => _body(11, weight: FontWeight.w500);
 
-  /// 11/500 — a ticker inside an avatar.
-  static TextStyle get tickerMark => _body(11, weight: FontWeight.w500);
+  /// 12/500 — a ticker inside an avatar.
+  static TextStyle get tickerMark => _body(12, weight: FontWeight.w500);
 
   /// Applied to Material's own text theme so stray widgets inherit the brand
   /// rather than Roboto.

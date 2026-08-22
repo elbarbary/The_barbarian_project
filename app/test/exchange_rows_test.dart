@@ -25,7 +25,7 @@ void main() {
     expect(feed.items, isNotEmpty);
 
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('filed this')));
+    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
 
     // Switch the feed selector to the exchange.
     await tester.tap(find.text('From the exchange'));

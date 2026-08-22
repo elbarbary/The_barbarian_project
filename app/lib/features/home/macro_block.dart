@@ -216,7 +216,7 @@ class _MacroCard extends StatelessWidget {
                       l.macroWhyItMatters.toUpperCase(),
                       style: BarbarianType.labelNano.copyWith(
                         color: c.textMuted,
-                        letterSpacing: 1.1,
+                        letterSpacing: 0.6,
                       ),
                     ),
                     const SizedBox(height: 7),
@@ -240,7 +240,7 @@ class _MacroCard extends StatelessWidget {
                 l.macroCoverage.toUpperCase(),
                 style: BarbarianType.labelNano.copyWith(
                   color: c.textMuted,
-                  letterSpacing: 1.1,
+                  letterSpacing: 0.6,
                 ),
               ),
               for (final item in series.coverage.take(3)) ...[

@@ -219,7 +219,7 @@ class _ForCompany extends ConsumerWidget {
                       l.exitOneSession,
                       style: BarbarianType.labelTiny.copyWith(
                         color: c.textMuted,
-                        letterSpacing: 1.4,
+                        letterSpacing: 0.7,
                       ),
                     ),
                     const SizedBox(height: 8),

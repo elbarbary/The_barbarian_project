@@ -226,11 +226,18 @@ class _Headline extends StatelessWidget {
                   color: c.hairline,
                   borderRadius: BorderRadius.circular(BarbarianRadius.sm),
                 ),
-                child: Text(
-                  item.becauseFor(arabic),
-                  style: BarbarianType.bodyS.copyWith(
-                    color: c.textSecondary,
-                    height: 1.5,
+                // In its own direction — the row runs in the headline's, and
+                // most headlines are Arabic.
+                child: Directionality(
+                  textDirection: isArabic(item.becauseFor(arabic))
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+                  child: Text(
+                    item.becauseFor(arabic),
+                    style: BarbarianType.bodyS.copyWith(
+                      color: c.textSecondary,
+                      height: 1.5,
+                    ),
                   ),
                 ),
               ),
