@@ -27,6 +27,14 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
+# (name, script, supports --check, extra arguments)
+#
+# The two EGX-touching steps at the end carry deliberately small limits. The
+# exchange rate-limits hard — it stopped answering after roughly forty requests
+# in a day and has blocked us outright once before — so the archive is built by
+# asking for a little every run rather than a lot once. Fifteen companies and
+# twenty-five filings a day reaches all 282 companies inside three weeks and
+# never looks like a crawl.
 STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     ("Opportunity Scanner", "build_opportunity_api.py", True),
@@ -48,7 +56,18 @@ STEPS = [
     # series or a breadth history.
     ("Index levels + breadth", "build_market_history.py", False),
     ("Manifest + fixtures", "build_fixtures.py", False),
+    # Last, and best-effort. Both read and extend the permanent archive, and
+    # both are resumable: whatever the host refuses today is simply first in
+    # the queue tomorrow. A failure here must never fail the build, because
+    # the published documents above are already written and correct.
+    ("Company filings", "harvest_company_filings.py", False,
+     ["--limit", "15", "--spacing", "6"]),
+    ("Filed documents", "enrich_disclosures.py", False,
+     ["--limit", "25", "--spacing", "6"]),
 ]
+
+# Steps whose failure is a shrug rather than a problem.
+BEST_EFFORT = {"Company filings", "Filed documents"}
 
 
 def main() -> int:
@@ -57,8 +76,10 @@ def main() -> int:
     args = ap.parse_args()
 
     failed = []
-    for name, script, supports_check in STEPS:
-        cmd = [sys.executable, str(HERE / script)]
+    for step in STEPS:
+        name, script, supports_check = step[0], step[1], step[2]
+        extra = step[3] if len(step) > 3 else []
+        cmd = [sys.executable, str(HERE / script), *extra]
         if args.check and supports_check:
             cmd.append("--check")
         elif args.check:
@@ -69,6 +90,9 @@ def main() -> int:
         print(f"\n── {name}")
         result = subprocess.run(cmd, cwd=HERE.parent)
         if result.returncode != 0:
+            if name in BEST_EFFORT:
+                print("   the host would not answer — trying again next run")
+                continue
             failed.append(name)
             print(f"   FAILED — previously published data left in place")
 
