@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
+import 'motion.dart';
 import 'nav_icons.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -215,9 +216,16 @@ class _NavTab extends StatelessWidget {
       selected: selected,
       label: tab.labelFor(context),
       excludeSemantics: true,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+      // Press feedback, because the theme turns Material's off globally.
+      //
+      // `barbarian_theme.dart` disables splash and highlight app-wide on the
+      // grounds that "press feedback comes from BPressable" — and these were
+      // bare `GestureDetector`s, so tapping the already-selected segment or
+      // nav slot produced literally nothing. On the two controls a reader
+      // touches every session, no response reads as a dropped touch.
+      child: BPressable(
         onTap: onTap,
+        button: false,
         child: SizedBox(
           height: BGlassNav.height,
           child: Column(

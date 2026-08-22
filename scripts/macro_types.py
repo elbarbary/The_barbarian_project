@@ -94,8 +94,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "الفضة",
         "The other metal Egyptians hold, kept for the same reason as gold and "
         "used in industry as well.",
-        "المعدن الأرخص، يُقتنى للسبب نفسه الذي يُقتنى من أجله الذهب، ويُستخدم "
-        "في الصناعة أيضًا.",
+        "المعدن الآخر الذي يقتنيه المصريون، يُقتنى للسبب نفسه الذي يُقتنى "
+        "من أجله الذهب، ويُستخدم في الصناعة أيضًا.",
         "It follows gold most of the time, so the interesting case is when it "
         "does not: silver is consumed by manufacturing in a way gold is not, "
         "and the two parting company usually says something about industrial "
@@ -214,6 +214,28 @@ DIRECTIVE = (
     re.compile(r"\b(an?\s+)?(opportunity|opportunities)\s+to\b", re.I),
     re.compile(r"\b(target price|price target|stop loss|take profit)\b", re.I),
     re.compile(r"\b(we|i)\s+(recommend|suggest|advise)\b", re.I),
+
+    # Arabic, and the shape rather than the stem.
+    #
+    # Every Arabic check in `test_macro` passed vacuously: the patterns above
+    # are Latin word regexes and half the prose they are run over is Arabic,
+    # so `meaning_ar` and `chain_ar` were never examined by anything. The
+    # sentences this file exists to stop would all have shipped.
+    #
+    # No `\b` anywhere. Dart's word boundary is ASCII-only and Python's is
+    # barely better here — Arabic attaches proclitics directly to the word, so
+    # `\bتوصية\b` misses "وتوصية بالشراء" and `\bاشترِ\b` matches nothing at
+    # all, because the trailing kasra is not a word character.
+    #
+    # And no bare valuation adjective: "الأرخص" is a legitimate factual
+    # comparison between two metals' prices. What is matched is an instruction
+    # aimed at somebody — an imperative to trade, an obligation, or a target.
+    re.compile("اشترِ|اشتري|اشتروا|بِع |بيعوا|احتفظ ب"),
+    re.compile(r"(يجب|ينبغي|عليك|عليكم)\s*(أن\s*)?(تشتري|تبيع|تحتفظ|الشراء|البيع)"),
+    re.compile(r"توصي[ةا]\s*(ب|بال)?(شراء|بيع)|نوصي|ننصح"),
+    re.compile("هدف السعر|السعر المستهدف|وقف الخسارة|جني الأرباح"),
+    re.compile("عائد متوقع|أرباح متوقعة"),
+    re.compile("فرصة (شراء|للشراء|استثمارية)"),
 )
 
 

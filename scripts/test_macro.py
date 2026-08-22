@@ -57,6 +57,40 @@ class GlossaryTest(unittest.TestCase):
                     found, f"{key}.{field} instructs the reader: {found!r}"
                 )
 
+    def test_the_arabic_arm_fires_and_does_not_over_fire(self):
+        """The Arabic checks used to pass on everything, including advice.
+
+        `DIRECTIVE` was seven Latin word regexes and half the prose it guards
+        is Arabic, so `meaning_ar` and `chain_ar` were never examined by
+        anything at all. Pinned in both directions, because a pattern that
+        matches nothing and a pattern that matches everything both make the
+        test above a decoration.
+        """
+        for text in (
+            "اشترِ السهم الآن",
+            "يجب أن تشتري هذا السهم",
+            "توصية بالشراء",
+            # A proclitic attached to the word. `\b` would miss this.
+            "وتوصية بالشراء",
+            "هدف السعر ١٢٠ جنيهًا",
+            "نوصي بعدم الانتظار",
+            "فرصة شراء نادرة",
+        ):
+            with self.subTest(text):
+                self.assertIsNotNone(
+                    glossary.directive(text), f"missed: {text}"
+                )
+
+        for text in (
+            # A fact about a country's trade, not an instruction to trade.
+            "تشتري مصر من النفط أكثر مما تبيع",
+            "المعدن الآخر الذي يقتنيه المصريون",
+            "ينافس الذهب البورصة على المدخرات نفسها",
+        ):
+            with self.subTest(text):
+                found = glossary.directive(text)
+                self.assertIsNone(found, f"over-fired on {text}: {found!r}")
+
     def test_the_directive_check_catches_real_advice(self):
         for advice in (
             "Investors should buy exporters.",

@@ -51,6 +51,8 @@ enum _Order {
 class _MarketScreenState extends ConsumerState<MarketScreen> {
   final TextEditingController _search = TextEditingController();
   String? _sector;
+  /// This screen's own search text — see `searchResultsProvider`.
+  String _query = '';
   _Order _order = _Order.az;
   bool _researchedOnly = false;
   @override
@@ -66,7 +68,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
     final directoryAsync = ref.watch(companyDirectoryProvider);
     final snapshot = ref.watch(livePricesProvider);
     final isSample = ref.watch(isSampleDataProvider);
-    final results = ref.watch(searchResultsProvider);
+    final results = ref.watch(searchResultsProvider(_query));
 
     return BScreenScaffold(
       blockGap: 24,
@@ -75,7 +77,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
         BSearchPill(
           text: l.searchCompanies,
           controller: _search,
-          onChanged: (v) => ref.read(searchQueryProvider.notifier).set(v),
+          onChanged: (v) => setState(() => _query = v),
         ),
         BAsyncView(
           value: directoryAsync,
@@ -195,8 +197,8 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                     actionLabel: l.clearSearch,
                     onAction: () {
                       _search.clear();
-                      ref.read(searchQueryProvider.notifier).clear();
                       setState(() {
+                        _query = '';
                         _sector = null;
                         _order = _Order.az;
                         _researchedOnly = false;
@@ -213,7 +215,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                     const SizedBox(height: 8),
                   ],
                 const SizedBox(height: 24),
-                if (_sector == null && ref.watch(searchQueryProvider).isEmpty)
+                if (_sector == null && _query.isEmpty)
                   _Sectors(directory: directory),
                 const SizedBox(height: 8),
                 if (snapshot != null)

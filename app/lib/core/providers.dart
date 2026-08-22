@@ -505,21 +505,23 @@ final todaySectionRequestProvider =
 
 /// Search runs against the cached directory — no network per keystroke
 /// (spec §35).
-class SearchQueryNotifier extends Notifier<String> {
-  @override
-  String build() => '';
-
-  void set(String query) => state = query;
-
-  void clear() => state = '';
-}
-
-final searchQueryProvider = NotifierProvider<SearchQueryNotifier, String>(
-  SearchQueryNotifier.new,
-);
-
-final searchResultsProvider = Provider<List<CompanySummary>>((ref) {
-  final query = ref.watch(searchQueryProvider).trim().toLowerCase();
+///
+/// **Keyed by the query rather than reading a shared one.** There used to be a
+/// single app-wide `searchQueryProvider` written by both the company directory
+/// and the Exit screen, and cleared by neither on the way out. Typing in one,
+/// leaving, and opening the other showed somebody else's filter: the directory
+/// reopened reading "Companies · A–Z", a count of 1, a blank search field, the
+/// sector grid hidden and no Clear button to escape with. Each screen owns its
+/// own query in its own `State` now, and this is a pure function of it.
+///
+/// Not cleared from `dispose()` either, which was the other obvious fix and is
+/// the wrong one: mutating provider state during teardown is a different bug
+/// wearing this one's clothes.
+final searchResultsProvider = Provider.family<List<CompanySummary>, String>((
+  ref,
+  rawQuery,
+) {
+  final query = rawQuery.trim().toLowerCase();
   final directory = ref
       .watch(companyDirectoryProvider)
       .whenOrNull(data: (d) => d.value);

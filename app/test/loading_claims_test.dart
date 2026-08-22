@@ -1,6 +1,5 @@
 import 'package:barbarian/core/widgets/async_view.dart';
 import 'package:barbarian/features/home/home_screen.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';

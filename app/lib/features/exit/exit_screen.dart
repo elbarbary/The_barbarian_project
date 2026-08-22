@@ -50,6 +50,13 @@ class ExitScreen extends ConsumerStatefulWidget {
 class _ExitScreenState extends ConsumerState<ExitScreen> {
   final _search = TextEditingController();
 
+  /// This screen's own search text.
+  ///
+  /// It used to write an app-wide provider that the company directory also
+  /// wrote and neither cleared, so a query typed here reappeared as a filter
+  /// over there. Local state and a query-keyed provider is the whole fix.
+  String _query = '';
+
   @override
   void dispose() {
     _search.dispose();
@@ -60,8 +67,8 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final query = ref.watch(searchQueryProvider);
-    final results = ref.watch(searchResultsProvider);
+    final query = _query;
+    final results = ref.watch(searchResultsProvider(_query));
 
     return BDetailScaffold(
       blockGap: 18,
@@ -84,7 +91,7 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
           BSearchPill(
             text: 'Check a company by name or symbol…',
             controller: _search,
-            onChanged: (v) => ref.read(searchQueryProvider.notifier).set(v),
+            onChanged: (v) => setState(() => _query = v),
           ),
           if (query.isNotEmpty)
             for (final company in results.take(12))

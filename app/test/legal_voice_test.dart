@@ -427,7 +427,48 @@ void main() {
       // whichever order the two arrive in.
       RegExp(r'EGP\s*[\d.,]+[^.]{0,28}\b(line|floor|ceiling|trigger|stop)\b',
           caseSensitive: false),
+
+      // Arabic, because most of what ships is.
+      //
+      // All eleven patterns above are English word regexes, and 221 of the
+      // 400 fixture headlines are Arabic — along with every `meaning_ar`,
+      // `chain_ar` and `because_ar` this project writes. The gate that was
+      // added precisely because the other §8 tests could not see the shipped
+      // data could not see most of the shipped data either.
+      //
+      // Shapes, not stems, and no `\b`: Dart's word boundary is ASCII-only
+      // and never matches beside an Arabic letter, so a pattern written with
+      // one compiles, looks careful and matches nothing at all.
+      RegExp('اشترِ|اشتري|اشتروا'),
+      RegExp('توصي[ةا]\\s*(ب|بال)?(شراء|بيع)'),
+      RegExp('هدف السعر|السعر المستهدف'),
+      // A trade level, not the market phenomenon.
+      //
+      // "جني الأرباح" describes what sellers did — Al Borsa's own headline
+      // "أسعار الذهب تتراجع مع جني الأرباح" is a market report, and blocking
+      // somebody else's description of the market is not what §8 is for. What
+      // is forbidden is the level: the phrase followed by a price.
+      RegExp(r'(وقف الخسارة|جني الأرباح)\s*(عند|على|:)?\s*[\d٠-٩]'),
+      RegExp('عائد متوقع'),
+      RegExp('فرصة (شراء|للشراء|استثمارية)'),
     ];
+
+    // The Arabic arm proves it fires before it is trusted to pass, on the
+    // same corpus shape it scans.
+    for (final sample in <String>[
+      'اشترِ السهم الآن',
+      'توصية بالشراء',
+      'هدف السعر ١٢٠ جنيهًا',
+      'وقف الخسارة عند ٦٤',
+      'جني الأرباح عند 120 جنيهًا',
+      'فرصة شراء نادرة',
+    ]) {
+      expect(
+        blocked.any((p) => p.hasMatch(sample)),
+        isTrue,
+        reason: 'the §8.7 Arabic arm does not catch "$sample"',
+      );
+    }
 
     final offenders = <String>[];
     final dir = Directory('assets/fixtures');

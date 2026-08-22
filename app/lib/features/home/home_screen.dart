@@ -499,9 +499,27 @@ class _WatchlistBlock extends ConsumerWidget {
     final snapshot = ref.watch(livePricesProvider);
 
     if (watchlist.isEmpty) {
-      return BEmptyState(
-        title: l.homeWatchlistEmpty,
-        body: l.homeWatchlistEmptyBody,
+      // Keep the heading, and give the reader a way out.
+      //
+      // The early return skipped the row below that draws the section label,
+      // so a fresh install's last block was an unlabelled card reading "Follow
+      // companies to build your watchlist" with no heading above it and no
+      // control on it — an instruction with nothing to act on. `BEmptyState`
+      // has taken an action since it was written, and the You screen already
+      // passes one.
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          BSectionLabel(l.homeWatchlistLabel),
+          const SizedBox(height: 8),
+          BEmptyState(
+            title: l.homeWatchlistEmpty,
+            body: l.homeWatchlistEmptyBody,
+            actionLabel: l.browseCompanies,
+            onAction: () =>
+                context.push(Routes.directoryPath(BNavTab.home)),
+          ),
+        ],
       );
     }
 
