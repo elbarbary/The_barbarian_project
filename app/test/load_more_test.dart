@@ -1,6 +1,5 @@
 import 'package:barbarian/core/widgets/load_more.dart';
 import 'package:barbarian/features/today/today_screen.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';

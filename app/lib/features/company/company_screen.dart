@@ -11,6 +11,7 @@ import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/widgets/filed_document.dart';
+import '../../core/widgets/insight.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/arc_gauge.dart';
@@ -926,13 +927,44 @@ class _Research extends ConsumerWidget {
         .watch(opportunityReportProvider)
         .whenOrNull(data: (s) => s.value.allFor(ticker));
 
-    if (entry == null && (scanned == null || scanned.isEmpty)) {
+    // What the company itself has told the exchange.
+    //
+    // This tab used to be empty for 266 of 282 companies, because only eight
+    // have a study and eight are in the scanner — while the filings this
+    // issuer lodged were already on the device and simply never joined to it.
+    // A filing is not our opinion of a company, which is exactly why it can
+    // sit here without a licence.
+    final filings = ref
+        .watch(companyDocumentsProvider(ticker))
+        .value
+        ?.value
+        .items;
+    final filed = filings ?? const <FiledDocument>[];
+
+    if (entry == null && (scanned == null || scanned.isEmpty) && filed.isEmpty) {
       return BEmptyState(title: l.noStudyYet, body: l.noStudyBody);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (filed.isNotEmpty) ...[
+          BSectionLabel(l.companyFilings),
+          const SizedBox(height: 6),
+          Text(
+            l.companyFilingsBody(ticker),
+            style: BarbarianType.bodyM.copyWith(
+              color: c.textSecondary,
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 12),
+          for (final item in filed) ...[
+            _CompanyFiling(item: item),
+            const SizedBox(height: 8),
+          ],
+          const SizedBox(height: 8),
+        ],
         if (entry != null) ...[
           BSectionLabel(l.studyLabel),
           BPaperCard(
@@ -1614,6 +1646,71 @@ class _FiledDocuments extends ConsumerWidget {
                 count: item.attachments.length,
               ),
             ],
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+
+/// One filing on the company's own screen.
+///
+/// The same three things every filing row in the app carries — what kind it
+/// is, when it landed, and what that kind of filing does to somebody holding
+/// the share — plus the document itself where the company lodged one.
+class _CompanyFiling extends StatelessWidget {
+  const _CompanyFiling({required this.item});
+
+  final FiledDocument item;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+
+    return BPaperCard(
+      padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 4,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              if (item.labelFor(arabic).isNotEmpty)
+                BKindChip(item.labelFor(arabic)),
+              Text(
+                item.date,
+                style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+              ),
+            ],
+          ),
+          const SizedBox(height: 7),
+          Directionality(
+            textDirection: isArabic(item.titleFor(arabic))
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+            child: Text(
+              item.titleFor(arabic),
+              style: BarbarianType.bodyM.copyWith(
+                color: c.textPrimary,
+                height: 1.4,
+              ),
+            ),
+          ),
+          if (item.meaningFor(arabic).isNotEmpty) ...[
+            const SizedBox(height: 7),
+            BInsightLine(item.meaningFor(arabic), maxLines: 3),
+          ],
+          for (final (n, url) in item.attachments.indexed) ...[
+            SizedBox(height: n == 0 ? 10 : 8),
+            BFiledDocument(
+              url: url,
+              index: n,
+              count: item.attachments.length,
+            ),
           ],
         ],
       ),

@@ -2270,8 +2270,8 @@ return $default(_that.ticker,_that.items);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _CompanyDocuments implements CompanyDocuments {
-  const _CompanyDocuments({this.ticker = '', final  List<FiledDocument> items = const <FiledDocument>[]}): _items = items;
+class _CompanyDocuments extends CompanyDocuments {
+  const _CompanyDocuments({this.ticker = '', final  List<FiledDocument> items = const <FiledDocument>[]}): _items = items,super._();
   factory _CompanyDocuments.fromJson(Map<String, dynamic> json) => _$CompanyDocumentsFromJson(json);
 
 @override@JsonKey() final  String ticker;
@@ -2348,7 +2348,7 @@ as List<FiledDocument>,
 /// @nodoc
 mixin _$FiledDocument {
 
- String get id; String get date; String get title;@JsonKey(name: 'title_en') String? get titleEn; String get event;@JsonKey(name: 'event_label') String get eventLabel;@JsonKey(name: 'event_label_ar') String get eventLabelAr; String get link; List<String> get attachments;
+ String get id; String get date; String get title;@JsonKey(name: 'title_en') String? get titleEn; String get event;@JsonKey(name: 'event_label') String get eventLabel;@JsonKey(name: 'event_label_ar') String get eventLabelAr; String get link; String get meaning;@JsonKey(name: 'meaning_ar') String get meaningAr; List<String> get attachments;
 /// Create a copy of FiledDocument
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2361,16 +2361,16 @@ $FiledDocumentCopyWith<FiledDocument> get copyWith => _$FiledDocumentCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FiledDocument&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other.attachments, attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FiledDocument&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.link, link) || other.link == link)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&const DeepCollectionEquality().equals(other.attachments, attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,date,title,titleEn,event,eventLabel,eventLabelAr,link,const DeepCollectionEquality().hash(attachments));
+int get hashCode => Object.hash(runtimeType,id,date,title,titleEn,event,eventLabel,eventLabelAr,link,meaning,meaningAr,const DeepCollectionEquality().hash(attachments));
 
 @override
 String toString() {
-  return 'FiledDocument(id: $id, date: $date, title: $title, titleEn: $titleEn, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, link: $link, attachments: $attachments)';
+  return 'FiledDocument(id: $id, date: $date, title: $title, titleEn: $titleEn, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, link: $link, meaning: $meaning, meaningAr: $meaningAr, attachments: $attachments)';
 }
 
 
@@ -2381,7 +2381,7 @@ abstract mixin class $FiledDocumentCopyWith<$Res>  {
   factory $FiledDocumentCopyWith(FiledDocument value, $Res Function(FiledDocument) _then) = _$FiledDocumentCopyWithImpl;
 @useResult
 $Res call({
- String id, String date, String title,@JsonKey(name: 'title_en') String? titleEn, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String link, List<String> attachments
+ String id, String date, String title,@JsonKey(name: 'title_en') String? titleEn, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String link, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, List<String> attachments
 });
 
 
@@ -2398,7 +2398,7 @@ class _$FiledDocumentCopyWithImpl<$Res>
 
 /// Create a copy of FiledDocument
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? date = null,Object? title = null,Object? titleEn = freezed,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? link = null,Object? attachments = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? date = null,Object? title = null,Object? titleEn = freezed,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? link = null,Object? meaning = null,Object? meaningAr = null,Object? attachments = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
@@ -2408,6 +2408,8 @@ as String?,event: null == event ? _self.event : event // ignore: cast_nullable_t
 as String,eventLabel: null == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
 as String,eventLabelAr: null == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String,meaning: null == meaning ? _self.meaning : meaning // ignore: cast_nullable_to_non_nullable
+as String,meaningAr: null == meaningAr ? _self.meaningAr : meaningAr // ignore: cast_nullable_to_non_nullable
 as String,attachments: null == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));
@@ -2494,10 +2496,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  List<String> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  List<String> attachments)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FiledDocument() when $default != null:
-return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.attachments);case _:
+return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.meaning,_that.meaningAr,_that.attachments);case _:
   return orElse();
 
 }
@@ -2515,10 +2517,10 @@ return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  List<String> attachments)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  List<String> attachments)  $default,) {final _that = this;
 switch (_that) {
 case _FiledDocument():
-return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.attachments);case _:
+return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.meaning,_that.meaningAr,_that.attachments);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2535,10 +2537,10 @@ return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  List<String> attachments)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String date,  String title, @JsonKey(name: 'title_en')  String? titleEn,  String event, @JsonKey(name: 'event_label')  String eventLabel, @JsonKey(name: 'event_label_ar')  String eventLabelAr,  String link,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  List<String> attachments)?  $default,) {final _that = this;
 switch (_that) {
 case _FiledDocument() when $default != null:
-return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.attachments);case _:
+return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.eventLabel,_that.eventLabelAr,_that.link,_that.meaning,_that.meaningAr,_that.attachments);case _:
   return null;
 
 }
@@ -2550,7 +2552,7 @@ return $default(_that.id,_that.date,_that.title,_that.titleEn,_that.event,_that.
 @JsonSerializable()
 
 class _FiledDocument extends FiledDocument {
-  const _FiledDocument({this.id = '', this.date = '', this.title = '', @JsonKey(name: 'title_en') this.titleEn, this.event = '', @JsonKey(name: 'event_label') this.eventLabel = '', @JsonKey(name: 'event_label_ar') this.eventLabelAr = '', this.link = '', final  List<String> attachments = const <String>[]}): _attachments = attachments,super._();
+  const _FiledDocument({this.id = '', this.date = '', this.title = '', @JsonKey(name: 'title_en') this.titleEn, this.event = '', @JsonKey(name: 'event_label') this.eventLabel = '', @JsonKey(name: 'event_label_ar') this.eventLabelAr = '', this.link = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', final  List<String> attachments = const <String>[]}): _attachments = attachments,super._();
   factory _FiledDocument.fromJson(Map<String, dynamic> json) => _$FiledDocumentFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -2561,6 +2563,8 @@ class _FiledDocument extends FiledDocument {
 @override@JsonKey(name: 'event_label') final  String eventLabel;
 @override@JsonKey(name: 'event_label_ar') final  String eventLabelAr;
 @override@JsonKey() final  String link;
+@override@JsonKey() final  String meaning;
+@override@JsonKey(name: 'meaning_ar') final  String meaningAr;
  final  List<String> _attachments;
 @override@JsonKey() List<String> get attachments {
   if (_attachments is EqualUnmodifiableListView) return _attachments;
@@ -2582,16 +2586,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FiledDocument&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.link, link) || other.link == link)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FiledDocument&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleEn, titleEn) || other.titleEn == titleEn)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&(identical(other.link, link) || other.link == link)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&const DeepCollectionEquality().equals(other._attachments, _attachments));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,date,title,titleEn,event,eventLabel,eventLabelAr,link,const DeepCollectionEquality().hash(_attachments));
+int get hashCode => Object.hash(runtimeType,id,date,title,titleEn,event,eventLabel,eventLabelAr,link,meaning,meaningAr,const DeepCollectionEquality().hash(_attachments));
 
 @override
 String toString() {
-  return 'FiledDocument(id: $id, date: $date, title: $title, titleEn: $titleEn, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, link: $link, attachments: $attachments)';
+  return 'FiledDocument(id: $id, date: $date, title: $title, titleEn: $titleEn, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, link: $link, meaning: $meaning, meaningAr: $meaningAr, attachments: $attachments)';
 }
 
 
@@ -2602,7 +2606,7 @@ abstract mixin class _$FiledDocumentCopyWith<$Res> implements $FiledDocumentCopy
   factory _$FiledDocumentCopyWith(_FiledDocument value, $Res Function(_FiledDocument) _then) = __$FiledDocumentCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String date, String title,@JsonKey(name: 'title_en') String? titleEn, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String link, List<String> attachments
+ String id, String date, String title,@JsonKey(name: 'title_en') String? titleEn, String event,@JsonKey(name: 'event_label') String eventLabel,@JsonKey(name: 'event_label_ar') String eventLabelAr, String link, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, List<String> attachments
 });
 
 
@@ -2619,7 +2623,7 @@ class __$FiledDocumentCopyWithImpl<$Res>
 
 /// Create a copy of FiledDocument
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? date = null,Object? title = null,Object? titleEn = freezed,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? link = null,Object? attachments = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? date = null,Object? title = null,Object? titleEn = freezed,Object? event = null,Object? eventLabel = null,Object? eventLabelAr = null,Object? link = null,Object? meaning = null,Object? meaningAr = null,Object? attachments = null,}) {
   return _then(_FiledDocument(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
@@ -2629,6 +2633,8 @@ as String?,event: null == event ? _self.event : event // ignore: cast_nullable_t
 as String,eventLabel: null == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
 as String,eventLabelAr: null == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String,meaning: null == meaning ? _self.meaning : meaning // ignore: cast_nullable_to_non_nullable
+as String,meaningAr: null == meaningAr ? _self.meaningAr : meaningAr // ignore: cast_nullable_to_non_nullable
 as String,attachments: null == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<String>,
   ));

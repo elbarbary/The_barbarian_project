@@ -18,6 +18,7 @@ import '../../core/models/explainer.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/filed_document.dart';
+import '../../core/widgets/filing_actions.dart';
 import '../../core/widgets/insight.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
@@ -26,6 +27,7 @@ import '../../core/widgets/news_thumb.dart';
 import 'macro_block.dart';
 import 'feed_tabs.dart';
 import 'lead_story.dart';
+import 'unusual_rail.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -94,6 +96,9 @@ class HomeScreen extends ConsumerWidget {
         const BFeedTabs(),
         const _Indices(),
         const _Breadth(),
+        // Which companies, not how many. The count sat on Today without ever
+        // naming one of them.
+        const BUnusualRail(),
         // The lead filing keeps its own card. It is not the same thing as the
         // filings list behind the tab: this one is the single disclosure worth
         // the largest card on the screen, with the measured reason it leads.
@@ -682,8 +687,14 @@ class HomeAlsoFiled extends ConsumerWidget {
                   const SizedBox(height: 12),
                 ],
                 BPressable(
-                  onTap: () => context.push(
-                    Routes.companyPath(BNavTab.home, item.tickers.first),
+                  // Ask, rather than guess. Home used to go straight to the
+                  // company and Today straight to the filing, so the same row
+                  // did different things depending on which tab you were on.
+                  onTap: () => showFilingActions(
+                    context,
+                    ref,
+                    filing: item,
+                    from: BNavTab.home,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -174,6 +174,8 @@ _FiledDocument _$FiledDocumentFromJson(Map<String, dynamic> json) =>
       eventLabel: json['event_label'] as String? ?? '',
       eventLabelAr: json['event_label_ar'] as String? ?? '',
       link: json['link'] as String? ?? '',
+      meaning: json['meaning'] as String? ?? '',
+      meaningAr: json['meaning_ar'] as String? ?? '',
       attachments:
           (json['attachments'] as List<dynamic>?)
               ?.map((e) => e as String)
@@ -191,5 +193,7 @@ Map<String, dynamic> _$FiledDocumentToJson(_FiledDocument instance) =>
       'event_label': instance.eventLabel,
       'event_label_ar': instance.eventLabelAr,
       'link': instance.link,
+      'meaning': instance.meaning,
+      'meaning_ar': instance.meaningAr,
       'attachments': instance.attachments,
     };

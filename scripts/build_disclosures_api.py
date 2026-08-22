@@ -65,8 +65,10 @@ FIXTURES = REPO / "app" / "assets" / "fixtures" / "disclosures"
 ARCHIVE = OUT / "archive"
 ARCHIVE_FIXTURES = FIXTURES / "archive"
 
-# One index per company of the documents it has filed, so the company screen
-# can answer "show me the statements" without downloading the archive.
+# One index per company of everything it has filed, so the company screen can
+# answer "what has this issuer told the exchange" without downloading the
+# archive to find out. Attachments ride along on each row, which is how the
+# same document answers "show me the statements" as well.
 DOCUMENTS = OUT / "documents"
 DOCUMENT_FIXTURES = FIXTURES / "documents"
 
@@ -483,8 +485,6 @@ def archive_write(items: list[dict]) -> list[dict]:
     # union, so they cover history rather than the window.
     by_ticker: dict[str, list[dict]] = collections.defaultdict(list)
     for item in items:
-        if not item.get("attachments"):
-            continue
         for ticker in item.get("tickers") or []:
             by_ticker[ticker].append(
                 {
@@ -495,8 +495,10 @@ def archive_write(items: list[dict]) -> list[dict]:
                     "event": item.get("event"),
                     "event_label": item.get("event_label"),
                     "event_label_ar": item.get("event_label_ar"),
+                    "meaning": item.get("meaning"),
+                    "meaning_ar": item.get("meaning_ar"),
                     "link": item["link"],
-                    "attachments": item["attachments"],
+                    "attachments": item.get("attachments") or [],
                 }
             )
 
@@ -512,9 +514,12 @@ def archive_write(items: list[dict]) -> list[dict]:
         (DOCUMENTS / f"{ticker}.json").write_text(body, encoding="utf-8")
         (DOCUMENT_FIXTURES / f"{ticker}.json").write_text(body, encoding="utf-8")
     if by_ticker:
+        withdoc = sum(
+            1 for rows in by_ticker.values() for r in rows if r["attachments"]
+        )
         print(
-            f"   documents: {sum(len(v) for v in by_ticker.values())} filings "
-            f"with a PDF across {len(by_ticker)} companies"
+            f"   per company: {sum(len(v) for v in by_ticker.values())} filings "
+            f"across {len(by_ticker)} companies, {withdoc} with a PDF"
         )
 
     manifest = {

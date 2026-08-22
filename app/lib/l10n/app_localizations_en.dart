@@ -682,6 +682,42 @@ class AppLocalizationsEn extends AppLocalizations {
       'Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.';
 
   @override
+  String filingOpenCompany(String ticker) {
+    return 'Open $ticker';
+  }
+
+  @override
+  String get filingReadFiling => 'Read the filing';
+
+  @override
+  String get companyFilings => 'Filed with the exchange';
+
+  @override
+  String companyFilingsBody(String ticker) {
+    return 'Everything $ticker has told the exchange that we have kept, newest first.';
+  }
+
+  @override
+  String get companyNoFilings => 'Nothing filed';
+
+  @override
+  String get companyNoFilingsBody =>
+      'We have kept no filings from this company yet. The exchange serves only its newest page, so the record here starts when we started collecting.';
+
+  @override
+  String get unusualLabel => 'Traded unusually';
+
+  @override
+  String unusualBody(int count, int total) {
+    return '$count of the $total filings we hold came from a company that also traded outside its own normal band.';
+  }
+
+  @override
+  String unusualTimes(String ratio) {
+    return '$ratio× normal';
+  }
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

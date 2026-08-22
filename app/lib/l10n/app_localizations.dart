@@ -1328,6 +1328,60 @@ abstract class AppLocalizations {
   /// **'Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.'**
   String get exchangeArchiveNote;
 
+  /// No description provided for @filingOpenCompany.
+  ///
+  /// In en, this message translates to:
+  /// **'Open {ticker}'**
+  String filingOpenCompany(String ticker);
+
+  /// No description provided for @filingReadFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the filing'**
+  String get filingReadFiling;
+
+  /// No description provided for @companyFilings.
+  ///
+  /// In en, this message translates to:
+  /// **'Filed with the exchange'**
+  String get companyFilings;
+
+  /// No description provided for @companyFilingsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything {ticker} has told the exchange that we have kept, newest first.'**
+  String companyFilingsBody(String ticker);
+
+  /// No description provided for @companyNoFilings.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing filed'**
+  String get companyNoFilings;
+
+  /// No description provided for @companyNoFilingsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We have kept no filings from this company yet. The exchange serves only its newest page, so the record here starts when we started collecting.'**
+  String get companyNoFilingsBody;
+
+  /// No description provided for @unusualLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Traded unusually'**
+  String get unusualLabel;
+
+  /// No description provided for @unusualBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of the {total} filings we hold came from a company that also traded outside its own normal band.'**
+  String unusualBody(int count, int total);
+
+  /// No description provided for @unusualTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'{ratio}× normal'**
+  String unusualTimes(String ratio);
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

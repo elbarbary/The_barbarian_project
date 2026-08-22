@@ -181,11 +181,12 @@ abstract class ArchivedMonth with _$ArchivedMonth {
       _$ArchivedMonthFromJson(json);
 }
 
-/// The documents one company has filed, across everything we have kept.
+/// Everything one company has told the exchange, across the whole kept record.
 ///
 /// Written per company at build time rather than filtered in the app, because
 /// the alternative is downloading every month of the archive to render one
-/// card. Only filings that actually carry a document appear here.
+/// card. Each row carries its own attachments, so the same document answers
+/// both "what has this company filed" and "show me the statements".
 @freezed
 abstract class CompanyDocuments with _$CompanyDocuments {
   const factory CompanyDocuments({
@@ -193,8 +194,14 @@ abstract class CompanyDocuments with _$CompanyDocuments {
     @Default(<FiledDocument>[]) List<FiledDocument> items,
   }) = _CompanyDocuments;
 
+  const CompanyDocuments._();
+
   factory CompanyDocuments.fromJson(Map<String, dynamic> json) =>
       _$CompanyDocumentsFromJson(json);
+
+  /// The filings that carry a document a reader can open.
+  List<FiledDocument> get withDocuments =>
+      items.where((i) => i.attachments.isNotEmpty).toList();
 }
 
 @freezed
@@ -208,6 +215,8 @@ abstract class FiledDocument with _$FiledDocument {
     @JsonKey(name: 'event_label') @Default('') String eventLabel,
     @JsonKey(name: 'event_label_ar') @Default('') String eventLabelAr,
     @Default('') String link,
+    @Default('') String meaning,
+    @JsonKey(name: 'meaning_ar') @Default('') String meaningAr,
     @Default(<String>[]) List<String> attachments,
   }) = _FiledDocument;
 
@@ -220,4 +229,7 @@ abstract class FiledDocument with _$FiledDocument {
 
   String labelFor(bool arabic) =>
       arabic && eventLabelAr.isNotEmpty ? eventLabelAr : eventLabel;
+
+  String meaningFor(bool arabic) =>
+      arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 }

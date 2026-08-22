@@ -680,6 +680,42 @@ class AppLocalizationsAr extends AppLocalizations {
       'إفصاحات جمعناها واحتفظنا بها. البورصة لا تتيح سوى أحدث صفحة، وما هو أقدم موجود هنا لأننا حفظناه.';
 
   @override
+  String filingOpenCompany(String ticker) {
+    return 'افتح $ticker';
+  }
+
+  @override
+  String get filingReadFiling => 'اقرأ الإفصاح';
+
+  @override
+  String get companyFilings => 'ما أُودع لدى البورصة';
+
+  @override
+  String companyFilingsBody(String ticker) {
+    return 'كل ما أبلغت به $ticker البورصة مما احتفظنا به، الأحدث أولًا.';
+  }
+
+  @override
+  String get companyNoFilings => 'لا توجد إفصاحات';
+
+  @override
+  String get companyNoFilingsBody =>
+      'لم نحتفظ بعد بإفصاحات من هذه الشركة. البورصة لا تتيح سوى أحدث صفحة، ولذلك يبدأ السجل هنا من وقت بدء جمعنا له.';
+
+  @override
+  String get unusualLabel => 'تداول غير معتاد';
+
+  @override
+  String unusualBody(int count, int total) {
+    return '$count من $total إفصاح نحتفظ به جاء من شركة تداولت أيضًا خارج نطاقها المعتاد.';
+  }
+
+  @override
+  String unusualTimes(String ratio) {
+    return '$ratio× المعتاد';
+  }
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override

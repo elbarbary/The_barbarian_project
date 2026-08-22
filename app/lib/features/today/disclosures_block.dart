@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../app/router.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/models/recency.dart';
 import '../../core/providers.dart';
@@ -12,6 +10,7 @@ import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/filed_document.dart';
+import '../../core/widgets/filing_actions.dart';
 import '../../core/widgets/load_more.dart';
 import '../../core/widgets/text.dart';
 
@@ -129,21 +128,26 @@ class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
   }
 }
 
-class _Filing extends StatelessWidget {
+class _Filing extends ConsumerWidget {
   const _Filing({required this.item});
 
   final Disclosure item;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final c = context.colors;
 
     return BPressable(
+      // The same question Home asks, so a row behaves the same wherever it is
+      // read: the company, or the filing.
       onTap: item.link.isEmpty
           ? null
-          : () => context.push(
-              Routes.articlePath(BNavTab.today, item.link, 'EGX filing'),
+          : () => showFilingActions(
+              context,
+              ref,
+              filing: item,
+              from: BNavTab.today,
             ),
       child: BPaperCard(
         padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),
