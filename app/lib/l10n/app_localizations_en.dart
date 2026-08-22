@@ -829,6 +829,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.';
 
   @override
+  String goldKaratGram(int karat) {
+    return '$karat karat gold, a gram';
+  }
+
+  @override
+  String goldPerOunce(String amount) {
+    return 'EGP $amount / oz';
+  }
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

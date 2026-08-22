@@ -41,10 +41,35 @@ abstract class RateRow with _$RateRow {
     @Default('') String workings,
     @Default('') String yardstick,
     @Default('') String source,
+    @JsonKey(name: 'label_ar') @Default('') String labelAr,
+    @JsonKey(name: 'plain_ar') @Default('') String plainAr,
+    @JsonKey(name: 'workings_ar') @Default('') String workingsAr,
+    @JsonKey(name: 'yardstick_ar') @Default('') String yardstickAr,
     double? level,
     @JsonKey(name: 'change_percent') double? changePercent,
     double? egp,
   }) = _RateRow;
+
+  const RateRow._();
+
+  /// The sentence in the language being read.
+  ///
+  /// `rates/latest.json` carried sixteen rows and not one Arabic string — the
+  /// substring `_ar` did not appear in the file at all — so every rate on
+  /// Today and all three index rows on Home rendered in English on an
+  /// otherwise translated screen. The Arabic is written by hand in
+  /// `scripts/rates_ar.py`, beside the numbers rather than over them.
+  String labelFor(bool arabic) =>
+      arabic && labelAr.isNotEmpty ? labelAr : label;
+
+  String plainFor(bool arabic) =>
+      arabic && plainAr.isNotEmpty ? plainAr : plain;
+
+  String workingsFor(bool arabic) =>
+      arabic && workingsAr.isNotEmpty ? workingsAr : workings;
+
+  String yardstickFor(bool arabic) =>
+      arabic && yardstickAr.isNotEmpty ? yardstickAr : yardstick;
 
   factory RateRow.fromJson(Map<String, dynamic> json) =>
       _$RateRowFromJson(json);
@@ -60,6 +85,10 @@ abstract class MetalRow with _$MetalRow {
     @Default('') String workings,
     @Default('') String yardstick,
     @Default('') String source,
+    @JsonKey(name: 'label_ar') @Default('') String labelAr,
+    @JsonKey(name: 'plain_ar') @Default('') String plainAr,
+    @JsonKey(name: 'workings_ar') @Default('') String workingsAr,
+    @JsonKey(name: 'yardstick_ar') @Default('') String yardstickAr,
     @JsonKey(name: 'egp_gram') double? egpGram,
     @JsonKey(name: 'egp_ounce') double? egpOunce,
     @JsonKey(name: 'usd_ounce') double? usdOunce,
@@ -68,6 +97,27 @@ abstract class MetalRow with _$MetalRow {
     /// gold carries these; silver is sold by weight, not by karat.
     @Default(<KaratRow>[]) List<KaratRow> karats,
   }) = _MetalRow;
+
+  const MetalRow._();
+
+  /// The sentence in the language being read.
+  ///
+  /// `rates/latest.json` carried sixteen rows and not one Arabic string — the
+  /// substring `_ar` did not appear in the file at all — so every rate on
+  /// Today and all three index rows on Home rendered in English on an
+  /// otherwise translated screen. The Arabic is written by hand in
+  /// `scripts/rates_ar.py`, beside the numbers rather than over them.
+  String labelFor(bool arabic) =>
+      arabic && labelAr.isNotEmpty ? labelAr : label;
+
+  String plainFor(bool arabic) =>
+      arabic && plainAr.isNotEmpty ? plainAr : plain;
+
+  String workingsFor(bool arabic) =>
+      arabic && workingsAr.isNotEmpty ? workingsAr : workings;
+
+  String yardstickFor(bool arabic) =>
+      arabic && yardstickAr.isNotEmpty ? yardstickAr : yardstick;
 
   factory MetalRow.fromJson(Map<String, dynamic> json) =>
       _$MetalRowFromJson(json);

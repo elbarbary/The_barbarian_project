@@ -111,13 +111,13 @@ class BRatesBlock extends ConsumerWidget {
 
   /// The pipeline already wrote the sentence, the sum and the yardstick, so the
   /// app only reshapes them — it never composes a claim of its own.
-  static Explainer _fromRate(RateRow row) => Explainer(
+  static Explainer _fromRate(RateRow row, bool arabic) => Explainer(
     termId: row.id.isEmpty ? row.code : row.id,
-    title: row.label,
-    plain: row.plain,
+    title: row.labelFor(arabic),
+    plain: row.plainFor(arabic),
     token: row.token,
-    workings: row.workings,
-    yardstick: row.yardstick,
+    workings: row.workingsFor(arabic),
+    yardstick: row.yardstickFor(arabic),
     // An index move and an exchange rate have no "unusual" threshold that
     // holds across every day, and inventing one would be the tea-leaf reading
     // this app exists to replace.
@@ -129,13 +129,13 @@ class BRatesBlock extends ConsumerWidget {
     source: row.source,
   );
 
-  static Explainer _fromMetal(MetalRow row) => Explainer(
+  static Explainer _fromMetal(MetalRow row, bool arabic) => Explainer(
     termId: row.id,
-    title: row.label,
-    plain: row.plain,
+    title: row.labelFor(arabic),
+    plain: row.plainFor(arabic),
     token: row.token,
-    workings: row.workings,
-    yardstick: row.yardstick,
+    workings: row.workingsFor(arabic),
+    yardstick: row.yardstickFor(arabic),
     notability: Notability.unjudged,
     // Published by the exchange or the market it names, not worked out here
     // (spec §50). The pipeline reshapes the sentence around it; the number
@@ -159,6 +159,7 @@ class _Karats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
 
     return Row(
       children: [
@@ -169,7 +170,7 @@ class _Karats extends StatelessWidget {
                 context,
                 Explainer(
                   termId: 'gold_${karat.karat}',
-                  title: '${karat.karat} karat gold, a gram',
+                  title: l.goldKaratGram(karat.karat),
                   plain:
                       'A gram of ${karat.karat}-karat gold costs '
                       '${karat.egpGram.toStringAsFixed(2)} pounds.',
@@ -234,10 +235,11 @@ class _WorldCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final change = row.changePercent;
 
     return BPressable(
-      onTap: () => showExplainer(context, BRatesBlock._fromRate(row)),
+      onTap: () => showExplainer(context, BRatesBlock._fromRate(row, arabic)),
       child: BPaperCard(
         padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
         child: SizedBox(
@@ -247,7 +249,9 @@ class _WorldCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                row.label.isEmpty ? row.id : row.label,
+                row.labelFor(arabic).isEmpty
+                    ? row.id
+                    : row.labelFor(arabic),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: BarbarianType.labelTiny.copyWith(
@@ -292,6 +296,7 @@ class _MetalCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final l = AppLocalizations.of(context);
     final gram = metal.egpGram;
     // The dollar-an-ounce series, which is the market these actually trade in.
@@ -307,7 +312,7 @@ class _MetalCard extends ConsumerWidget {
     return BPressable(
       onTap: () => showExplainer(
         context,
-        BRatesBlock._fromMetal(metal),
+        BRatesBlock._fromMetal(metal, arabic),
         series: series,
       ),
       child: BDarkCard(
@@ -318,7 +323,7 @@ class _MetalCard extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              metal.label,
+              metal.labelFor(arabic),
               style: BarbarianType.labelTiny.copyWith(
                 color: c.onInkMuted,
                 letterSpacing: 1.2,
@@ -337,7 +342,7 @@ class _MetalCard extends ConsumerWidget {
             if (metal.egpOunce case final double ounce) ...[
               const SizedBox(height: 8),
               Text(
-                'EGP ${ounce.toStringAsFixed(0)} / oz',
+                l.goldPerOunce(ounce.toStringAsFixed(0)),
                 style: BarbarianType.bodyS.copyWith(color: c.onInkMuted),
               ),
             ],
@@ -367,10 +372,11 @@ class _RateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      final arabic = Directionality.of(context) == TextDirection.rtl;
     return BPaperCard(
       radius: BarbarianRadius.xl,
       padding: EdgeInsets.zero,
-      child: BPlainNumber(explainer: BRatesBlock._fromRate(row), last: true),
+      child: BPlainNumber(explainer: BRatesBlock._fromRate(row, arabic), last: true),
     );
   }
 }

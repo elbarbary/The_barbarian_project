@@ -388,6 +388,7 @@ class _IndexCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final level = index.level;
     final change = index.changePercent;
 
@@ -396,11 +397,13 @@ class _IndexCard extends StatelessWidget {
         context,
         Explainer(
           termId: 'index.${index.id}',
-          title: index.label.isEmpty ? index.id : index.label,
-          plain: index.plain,
+          title: index.labelFor(arabic).isEmpty
+              ? index.id
+              : index.labelFor(arabic),
+          plain: index.plainFor(arabic),
           token: index.token,
-          workings: index.workings,
-          yardstick: index.yardstick,
+          workings: index.workingsFor(arabic),
+          yardstick: index.yardstickFor(arabic),
           // An index level has no published band to be unusual against, and
           // defaulting to "ordinary" would be a claim.
           notability: Notability.unjudged,
@@ -420,7 +423,9 @@ class _IndexCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                index.label.isEmpty ? index.id : index.label,
+                index.labelFor(arabic).isEmpty
+                    ? index.id
+                    : index.labelFor(arabic),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: BarbarianType.labelTiny.copyWith(

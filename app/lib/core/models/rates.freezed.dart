@@ -320,7 +320,7 @@ as List<MetalRow>,
 /// @nodoc
 mixin _$RateRow {
 
- String get id; String get code; String get label; String get plain; String get token; String get workings; String get yardstick; String get source; double? get level;@JsonKey(name: 'change_percent') double? get changePercent; double? get egp;
+ String get id; String get code; String get label; String get plain; String get token; String get workings; String get yardstick; String get source;@JsonKey(name: 'label_ar') String get labelAr;@JsonKey(name: 'plain_ar') String get plainAr;@JsonKey(name: 'workings_ar') String get workingsAr;@JsonKey(name: 'yardstick_ar') String get yardstickAr; double? get level;@JsonKey(name: 'change_percent') double? get changePercent; double? get egp;
 /// Create a copy of RateRow
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -333,16 +333,16 @@ $RateRowCopyWith<RateRow> get copyWith => _$RateRowCopyWithImpl<RateRow>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RateRow&&(identical(other.id, id) || other.id == id)&&(identical(other.code, code) || other.code == code)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.level, level) || other.level == level)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&(identical(other.egp, egp) || other.egp == egp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RateRow&&(identical(other.id, id) || other.id == id)&&(identical(other.code, code) || other.code == code)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.plainAr, plainAr) || other.plainAr == plainAr)&&(identical(other.workingsAr, workingsAr) || other.workingsAr == workingsAr)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.level, level) || other.level == level)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&(identical(other.egp, egp) || other.egp == egp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,code,label,plain,token,workings,yardstick,source,level,changePercent,egp);
+int get hashCode => Object.hash(runtimeType,id,code,label,plain,token,workings,yardstick,source,labelAr,plainAr,workingsAr,yardstickAr,level,changePercent,egp);
 
 @override
 String toString() {
-  return 'RateRow(id: $id, code: $code, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, level: $level, changePercent: $changePercent, egp: $egp)';
+  return 'RateRow(id: $id, code: $code, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, labelAr: $labelAr, plainAr: $plainAr, workingsAr: $workingsAr, yardstickAr: $yardstickAr, level: $level, changePercent: $changePercent, egp: $egp)';
 }
 
 
@@ -353,7 +353,7 @@ abstract mixin class $RateRowCopyWith<$Res>  {
   factory $RateRowCopyWith(RateRow value, $Res Function(RateRow) _then) = _$RateRowCopyWithImpl;
 @useResult
 $Res call({
- String id, String code, String label, String plain, String token, String workings, String yardstick, String source, double? level,@JsonKey(name: 'change_percent') double? changePercent, double? egp
+ String id, String code, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'label_ar') String labelAr,@JsonKey(name: 'plain_ar') String plainAr,@JsonKey(name: 'workings_ar') String workingsAr,@JsonKey(name: 'yardstick_ar') String yardstickAr, double? level,@JsonKey(name: 'change_percent') double? changePercent, double? egp
 });
 
 
@@ -370,7 +370,7 @@ class _$RateRowCopyWithImpl<$Res>
 
 /// Create a copy of RateRow
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? code = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? level = freezed,Object? changePercent = freezed,Object? egp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? code = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? labelAr = null,Object? plainAr = null,Object? workingsAr = null,Object? yardstickAr = null,Object? level = freezed,Object? changePercent = freezed,Object? egp = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
@@ -380,6 +380,10 @@ as String,token: null == token ? _self.token : token // ignore: cast_nullable_to
 as String,workings: null == workings ? _self.workings : workings // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String,plainAr: null == plainAr ? _self.plainAr : plainAr // ignore: cast_nullable_to_non_nullable
+as String,workingsAr: null == workingsAr ? _self.workingsAr : workingsAr // ignore: cast_nullable_to_non_nullable
+as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
 as String,level: freezed == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as double?,changePercent: freezed == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double?,egp: freezed == egp ? _self.egp : egp // ignore: cast_nullable_to_non_nullable
@@ -468,10 +472,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RateRow() when $default != null:
-return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.level,_that.changePercent,_that.egp);case _:
+return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.level,_that.changePercent,_that.egp);case _:
   return orElse();
 
 }
@@ -489,10 +493,10 @@ return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.wo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)  $default,) {final _that = this;
 switch (_that) {
 case _RateRow():
-return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.level,_that.changePercent,_that.egp);case _:
+return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.level,_that.changePercent,_that.egp);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -509,10 +513,10 @@ return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.wo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String code,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  double? level, @JsonKey(name: 'change_percent')  double? changePercent,  double? egp)?  $default,) {final _that = this;
 switch (_that) {
 case _RateRow() when $default != null:
-return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.level,_that.changePercent,_that.egp);case _:
+return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.level,_that.changePercent,_that.egp);case _:
   return null;
 
 }
@@ -523,8 +527,8 @@ return $default(_that.id,_that.code,_that.label,_that.plain,_that.token,_that.wo
 /// @nodoc
 @JsonSerializable()
 
-class _RateRow implements RateRow {
-  const _RateRow({this.id = '', this.code = '', this.label = '', this.plain = '', this.token = '', this.workings = '', this.yardstick = '', this.source = '', this.level, @JsonKey(name: 'change_percent') this.changePercent, this.egp});
+class _RateRow extends RateRow {
+  const _RateRow({this.id = '', this.code = '', this.label = '', this.plain = '', this.token = '', this.workings = '', this.yardstick = '', this.source = '', @JsonKey(name: 'label_ar') this.labelAr = '', @JsonKey(name: 'plain_ar') this.plainAr = '', @JsonKey(name: 'workings_ar') this.workingsAr = '', @JsonKey(name: 'yardstick_ar') this.yardstickAr = '', this.level, @JsonKey(name: 'change_percent') this.changePercent, this.egp}): super._();
   factory _RateRow.fromJson(Map<String, dynamic> json) => _$RateRowFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -535,6 +539,10 @@ class _RateRow implements RateRow {
 @override@JsonKey() final  String workings;
 @override@JsonKey() final  String yardstick;
 @override@JsonKey() final  String source;
+@override@JsonKey(name: 'label_ar') final  String labelAr;
+@override@JsonKey(name: 'plain_ar') final  String plainAr;
+@override@JsonKey(name: 'workings_ar') final  String workingsAr;
+@override@JsonKey(name: 'yardstick_ar') final  String yardstickAr;
 @override final  double? level;
 @override@JsonKey(name: 'change_percent') final  double? changePercent;
 @override final  double? egp;
@@ -552,16 +560,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RateRow&&(identical(other.id, id) || other.id == id)&&(identical(other.code, code) || other.code == code)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.level, level) || other.level == level)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&(identical(other.egp, egp) || other.egp == egp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RateRow&&(identical(other.id, id) || other.id == id)&&(identical(other.code, code) || other.code == code)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.plainAr, plainAr) || other.plainAr == plainAr)&&(identical(other.workingsAr, workingsAr) || other.workingsAr == workingsAr)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.level, level) || other.level == level)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&(identical(other.egp, egp) || other.egp == egp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,code,label,plain,token,workings,yardstick,source,level,changePercent,egp);
+int get hashCode => Object.hash(runtimeType,id,code,label,plain,token,workings,yardstick,source,labelAr,plainAr,workingsAr,yardstickAr,level,changePercent,egp);
 
 @override
 String toString() {
-  return 'RateRow(id: $id, code: $code, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, level: $level, changePercent: $changePercent, egp: $egp)';
+  return 'RateRow(id: $id, code: $code, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, labelAr: $labelAr, plainAr: $plainAr, workingsAr: $workingsAr, yardstickAr: $yardstickAr, level: $level, changePercent: $changePercent, egp: $egp)';
 }
 
 
@@ -572,7 +580,7 @@ abstract mixin class _$RateRowCopyWith<$Res> implements $RateRowCopyWith<$Res> {
   factory _$RateRowCopyWith(_RateRow value, $Res Function(_RateRow) _then) = __$RateRowCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String code, String label, String plain, String token, String workings, String yardstick, String source, double? level,@JsonKey(name: 'change_percent') double? changePercent, double? egp
+ String id, String code, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'label_ar') String labelAr,@JsonKey(name: 'plain_ar') String plainAr,@JsonKey(name: 'workings_ar') String workingsAr,@JsonKey(name: 'yardstick_ar') String yardstickAr, double? level,@JsonKey(name: 'change_percent') double? changePercent, double? egp
 });
 
 
@@ -589,7 +597,7 @@ class __$RateRowCopyWithImpl<$Res>
 
 /// Create a copy of RateRow
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? code = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? level = freezed,Object? changePercent = freezed,Object? egp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? code = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? labelAr = null,Object? plainAr = null,Object? workingsAr = null,Object? yardstickAr = null,Object? level = freezed,Object? changePercent = freezed,Object? egp = freezed,}) {
   return _then(_RateRow(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
@@ -599,6 +607,10 @@ as String,token: null == token ? _self.token : token // ignore: cast_nullable_to
 as String,workings: null == workings ? _self.workings : workings // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String,plainAr: null == plainAr ? _self.plainAr : plainAr // ignore: cast_nullable_to_non_nullable
+as String,workingsAr: null == workingsAr ? _self.workingsAr : workingsAr // ignore: cast_nullable_to_non_nullable
+as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
 as String,level: freezed == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as double?,changePercent: freezed == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double?,egp: freezed == egp ? _self.egp : egp // ignore: cast_nullable_to_non_nullable
@@ -613,7 +625,7 @@ as double?,
 /// @nodoc
 mixin _$MetalRow {
 
- String get id; String get label; String get plain; String get token; String get workings; String get yardstick; String get source;@JsonKey(name: 'egp_gram') double? get egpGram;@JsonKey(name: 'egp_ounce') double? get egpOunce;@JsonKey(name: 'usd_ounce') double? get usdOunce;/// 24, 21 and 18 karat, each with the purity sum that produced it. Only
+ String get id; String get label; String get plain; String get token; String get workings; String get yardstick; String get source;@JsonKey(name: 'label_ar') String get labelAr;@JsonKey(name: 'plain_ar') String get plainAr;@JsonKey(name: 'workings_ar') String get workingsAr;@JsonKey(name: 'yardstick_ar') String get yardstickAr;@JsonKey(name: 'egp_gram') double? get egpGram;@JsonKey(name: 'egp_ounce') double? get egpOunce;@JsonKey(name: 'usd_ounce') double? get usdOunce;/// 24, 21 and 18 karat, each with the purity sum that produced it. Only
 /// gold carries these; silver is sold by weight, not by karat.
  List<KaratRow> get karats;
 /// Create a copy of MetalRow
@@ -628,16 +640,16 @@ $MetalRowCopyWith<MetalRow> get copyWith => _$MetalRowCopyWithImpl<MetalRow>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MetalRow&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.egpGram, egpGram) || other.egpGram == egpGram)&&(identical(other.egpOunce, egpOunce) || other.egpOunce == egpOunce)&&(identical(other.usdOunce, usdOunce) || other.usdOunce == usdOunce)&&const DeepCollectionEquality().equals(other.karats, karats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MetalRow&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.plainAr, plainAr) || other.plainAr == plainAr)&&(identical(other.workingsAr, workingsAr) || other.workingsAr == workingsAr)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.egpGram, egpGram) || other.egpGram == egpGram)&&(identical(other.egpOunce, egpOunce) || other.egpOunce == egpOunce)&&(identical(other.usdOunce, usdOunce) || other.usdOunce == usdOunce)&&const DeepCollectionEquality().equals(other.karats, karats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,plain,token,workings,yardstick,source,egpGram,egpOunce,usdOunce,const DeepCollectionEquality().hash(karats));
+int get hashCode => Object.hash(runtimeType,id,label,plain,token,workings,yardstick,source,labelAr,plainAr,workingsAr,yardstickAr,egpGram,egpOunce,usdOunce,const DeepCollectionEquality().hash(karats));
 
 @override
 String toString() {
-  return 'MetalRow(id: $id, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, egpGram: $egpGram, egpOunce: $egpOunce, usdOunce: $usdOunce, karats: $karats)';
+  return 'MetalRow(id: $id, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, labelAr: $labelAr, plainAr: $plainAr, workingsAr: $workingsAr, yardstickAr: $yardstickAr, egpGram: $egpGram, egpOunce: $egpOunce, usdOunce: $usdOunce, karats: $karats)';
 }
 
 
@@ -648,7 +660,7 @@ abstract mixin class $MetalRowCopyWith<$Res>  {
   factory $MetalRowCopyWith(MetalRow value, $Res Function(MetalRow) _then) = _$MetalRowCopyWithImpl;
 @useResult
 $Res call({
- String id, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'egp_gram') double? egpGram,@JsonKey(name: 'egp_ounce') double? egpOunce,@JsonKey(name: 'usd_ounce') double? usdOunce, List<KaratRow> karats
+ String id, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'label_ar') String labelAr,@JsonKey(name: 'plain_ar') String plainAr,@JsonKey(name: 'workings_ar') String workingsAr,@JsonKey(name: 'yardstick_ar') String yardstickAr,@JsonKey(name: 'egp_gram') double? egpGram,@JsonKey(name: 'egp_ounce') double? egpOunce,@JsonKey(name: 'usd_ounce') double? usdOunce, List<KaratRow> karats
 });
 
 
@@ -665,7 +677,7 @@ class _$MetalRowCopyWithImpl<$Res>
 
 /// Create a copy of MetalRow
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? egpGram = freezed,Object? egpOunce = freezed,Object? usdOunce = freezed,Object? karats = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? labelAr = null,Object? plainAr = null,Object? workingsAr = null,Object? yardstickAr = null,Object? egpGram = freezed,Object? egpOunce = freezed,Object? usdOunce = freezed,Object? karats = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -674,6 +686,10 @@ as String,token: null == token ? _self.token : token // ignore: cast_nullable_to
 as String,workings: null == workings ? _self.workings : workings // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String,plainAr: null == plainAr ? _self.plainAr : plainAr // ignore: cast_nullable_to_non_nullable
+as String,workingsAr: null == workingsAr ? _self.workingsAr : workingsAr // ignore: cast_nullable_to_non_nullable
+as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
 as String,egpGram: freezed == egpGram ? _self.egpGram : egpGram // ignore: cast_nullable_to_non_nullable
 as double?,egpOunce: freezed == egpOunce ? _self.egpOunce : egpOunce // ignore: cast_nullable_to_non_nullable
 as double?,usdOunce: freezed == usdOunce ? _self.usdOunce : usdOunce // ignore: cast_nullable_to_non_nullable
@@ -763,10 +779,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MetalRow() when $default != null:
-return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
+return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
   return orElse();
 
 }
@@ -784,10 +800,10 @@ return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)  $default,) {final _that = this;
 switch (_that) {
 case _MetalRow():
-return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
+return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -804,10 +820,10 @@ return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label,  String plain,  String token,  String workings,  String yardstick,  String source, @JsonKey(name: 'label_ar')  String labelAr, @JsonKey(name: 'plain_ar')  String plainAr, @JsonKey(name: 'workings_ar')  String workingsAr, @JsonKey(name: 'yardstick_ar')  String yardstickAr, @JsonKey(name: 'egp_gram')  double? egpGram, @JsonKey(name: 'egp_ounce')  double? egpOunce, @JsonKey(name: 'usd_ounce')  double? usdOunce,  List<KaratRow> karats)?  $default,) {final _that = this;
 switch (_that) {
 case _MetalRow() when $default != null:
-return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
+return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_that.yardstick,_that.source,_that.labelAr,_that.plainAr,_that.workingsAr,_that.yardstickAr,_that.egpGram,_that.egpOunce,_that.usdOunce,_that.karats);case _:
   return null;
 
 }
@@ -818,8 +834,8 @@ return $default(_that.id,_that.label,_that.plain,_that.token,_that.workings,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _MetalRow implements MetalRow {
-  const _MetalRow({this.id = '', this.label = '', this.plain = '', this.token = '', this.workings = '', this.yardstick = '', this.source = '', @JsonKey(name: 'egp_gram') this.egpGram, @JsonKey(name: 'egp_ounce') this.egpOunce, @JsonKey(name: 'usd_ounce') this.usdOunce, final  List<KaratRow> karats = const <KaratRow>[]}): _karats = karats;
+class _MetalRow extends MetalRow {
+  const _MetalRow({this.id = '', this.label = '', this.plain = '', this.token = '', this.workings = '', this.yardstick = '', this.source = '', @JsonKey(name: 'label_ar') this.labelAr = '', @JsonKey(name: 'plain_ar') this.plainAr = '', @JsonKey(name: 'workings_ar') this.workingsAr = '', @JsonKey(name: 'yardstick_ar') this.yardstickAr = '', @JsonKey(name: 'egp_gram') this.egpGram, @JsonKey(name: 'egp_ounce') this.egpOunce, @JsonKey(name: 'usd_ounce') this.usdOunce, final  List<KaratRow> karats = const <KaratRow>[]}): _karats = karats,super._();
   factory _MetalRow.fromJson(Map<String, dynamic> json) => _$MetalRowFromJson(json);
 
 @override@JsonKey() final  String id;
@@ -829,6 +845,10 @@ class _MetalRow implements MetalRow {
 @override@JsonKey() final  String workings;
 @override@JsonKey() final  String yardstick;
 @override@JsonKey() final  String source;
+@override@JsonKey(name: 'label_ar') final  String labelAr;
+@override@JsonKey(name: 'plain_ar') final  String plainAr;
+@override@JsonKey(name: 'workings_ar') final  String workingsAr;
+@override@JsonKey(name: 'yardstick_ar') final  String yardstickAr;
 @override@JsonKey(name: 'egp_gram') final  double? egpGram;
 @override@JsonKey(name: 'egp_ounce') final  double? egpOunce;
 @override@JsonKey(name: 'usd_ounce') final  double? usdOunce;
@@ -857,16 +877,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MetalRow&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.egpGram, egpGram) || other.egpGram == egpGram)&&(identical(other.egpOunce, egpOunce) || other.egpOunce == egpOunce)&&(identical(other.usdOunce, usdOunce) || other.usdOunce == usdOunce)&&const DeepCollectionEquality().equals(other._karats, _karats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MetalRow&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.plain, plain) || other.plain == plain)&&(identical(other.token, token) || other.token == token)&&(identical(other.workings, workings) || other.workings == workings)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.source, source) || other.source == source)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.plainAr, plainAr) || other.plainAr == plainAr)&&(identical(other.workingsAr, workingsAr) || other.workingsAr == workingsAr)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.egpGram, egpGram) || other.egpGram == egpGram)&&(identical(other.egpOunce, egpOunce) || other.egpOunce == egpOunce)&&(identical(other.usdOunce, usdOunce) || other.usdOunce == usdOunce)&&const DeepCollectionEquality().equals(other._karats, _karats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,plain,token,workings,yardstick,source,egpGram,egpOunce,usdOunce,const DeepCollectionEquality().hash(_karats));
+int get hashCode => Object.hash(runtimeType,id,label,plain,token,workings,yardstick,source,labelAr,plainAr,workingsAr,yardstickAr,egpGram,egpOunce,usdOunce,const DeepCollectionEquality().hash(_karats));
 
 @override
 String toString() {
-  return 'MetalRow(id: $id, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, egpGram: $egpGram, egpOunce: $egpOunce, usdOunce: $usdOunce, karats: $karats)';
+  return 'MetalRow(id: $id, label: $label, plain: $plain, token: $token, workings: $workings, yardstick: $yardstick, source: $source, labelAr: $labelAr, plainAr: $plainAr, workingsAr: $workingsAr, yardstickAr: $yardstickAr, egpGram: $egpGram, egpOunce: $egpOunce, usdOunce: $usdOunce, karats: $karats)';
 }
 
 
@@ -877,7 +897,7 @@ abstract mixin class _$MetalRowCopyWith<$Res> implements $MetalRowCopyWith<$Res>
   factory _$MetalRowCopyWith(_MetalRow value, $Res Function(_MetalRow) _then) = __$MetalRowCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'egp_gram') double? egpGram,@JsonKey(name: 'egp_ounce') double? egpOunce,@JsonKey(name: 'usd_ounce') double? usdOunce, List<KaratRow> karats
+ String id, String label, String plain, String token, String workings, String yardstick, String source,@JsonKey(name: 'label_ar') String labelAr,@JsonKey(name: 'plain_ar') String plainAr,@JsonKey(name: 'workings_ar') String workingsAr,@JsonKey(name: 'yardstick_ar') String yardstickAr,@JsonKey(name: 'egp_gram') double? egpGram,@JsonKey(name: 'egp_ounce') double? egpOunce,@JsonKey(name: 'usd_ounce') double? usdOunce, List<KaratRow> karats
 });
 
 
@@ -894,7 +914,7 @@ class __$MetalRowCopyWithImpl<$Res>
 
 /// Create a copy of MetalRow
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? egpGram = freezed,Object? egpOunce = freezed,Object? usdOunce = freezed,Object? karats = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? plain = null,Object? token = null,Object? workings = null,Object? yardstick = null,Object? source = null,Object? labelAr = null,Object? plainAr = null,Object? workingsAr = null,Object? yardstickAr = null,Object? egpGram = freezed,Object? egpOunce = freezed,Object? usdOunce = freezed,Object? karats = null,}) {
   return _then(_MetalRow(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -903,6 +923,10 @@ as String,token: null == token ? _self.token : token // ignore: cast_nullable_to
 as String,workings: null == workings ? _self.workings : workings // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,source: null == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String,plainAr: null == plainAr ? _self.plainAr : plainAr // ignore: cast_nullable_to_non_nullable
+as String,workingsAr: null == workingsAr ? _self.workingsAr : workingsAr // ignore: cast_nullable_to_non_nullable
+as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
 as String,egpGram: freezed == egpGram ? _self.egpGram : egpGram // ignore: cast_nullable_to_non_nullable
 as double?,egpOunce: freezed == egpOunce ? _self.egpOunce : egpOunce // ignore: cast_nullable_to_non_nullable
 as double?,usdOunce: freezed == usdOunce ? _self.usdOunce : usdOunce // ignore: cast_nullable_to_non_nullable

@@ -30,8 +30,13 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import sys
 import urllib.error
 import urllib.request
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import rates_ar  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "rates"
@@ -157,17 +162,23 @@ def indices() -> list[dict]:
                 "change_percent": round(pct, 2),
                 "change_points": round(points, 1),
                 # The sentence first, as everywhere else in the app.
+                "label_ar": rates_ar.label(symbol, label),
                 "plain": f"{label} {direction} {abs(pct):.2f}% in the session.",
+                "plain_ar": rates_ar.index_plain(symbol, pct, label),
                 "token": f"{money(level)} · {'+' if pct >= 0 else '−'}{abs(pct):.2f}%",
                 "workings": (
                     f"{money(level)} now\n"
                     f"{'+' if points >= 0 else '−'} {money(abs(points), 1)} points on the session\n"
                     f"= {'+' if pct >= 0 else '−'}{abs(pct):.2f}%"
                 ),
+                "workings_ar": rates_ar.index_workings(
+                    money(level), money(abs(points), 1), pct, points >= 0
+                ),
                 "yardstick": (
                     f"{what} An index move says what the market did as a whole; "
                     "it says nothing about any one company in it."
                 ),
+                "yardstick_ar": rates_ar.yardstick(symbol),
                 "source": "TradingView, EGX index feed",
             }
         )
@@ -204,10 +215,16 @@ def world() -> list[dict]:
                 "kind": kind,
                 "level": round(level, 2),
                 "change_percent": round(pct, 2),
+                "label_ar": rates_ar.label(symbol, label),
                 "plain": f"{label} {direction} {abs(pct):.2f}% today.",
+                "plain_ar": rates_ar.world_plain(symbol, pct, label),
                 "token": f"{unit}{money(level)} · {'+' if pct >= 0 else '−'}{abs(pct):.2f}%",
                 "workings": f"{unit}{money(level)} now, {'+' if pct >= 0 else '−'}{abs(pct):.2f}% on the day.",
+                "workings_ar": rates_ar.world_workings(
+                    f"{unit}{money(level)}", pct
+                ),
                 "yardstick": what,
+                "yardstick_ar": rates_ar.yardstick(symbol),
                 "source": "TradingView",
             }
         )
@@ -244,7 +261,9 @@ def currencies() -> tuple[list[dict], float | None, str]:
                 "egp": round(egp, 4),
                 # Not `name.lower()`: it turned "US dollar" into "us dollar"
                 # and "UAE dirham" into "uae dirham".
+                "label_ar": rates_ar.label(code, name),
                 "plain": f"One {name} costs {money(egp)} pounds.",
+                "plain_ar": rates_ar.currency_plain(code, money(egp), name),
                 "token": f"EGP {money(egp, 4)}",
                 "workings": (
                     f"{money(usd_egp, 4)} pounds to the dollar\n"
@@ -253,10 +272,14 @@ def currencies() -> tuple[list[dict], float | None, str]:
                 )
                 if code != "USD"
                 else f"{money(usd_egp, 4)} pounds to the dollar",
+                "workings_ar": rates_ar.currency_workings(
+                    money(egp, 4), name, code
+                ),
                 "yardstick": (
                     "This is the reference rate published by the central-bank "
                     "feed, not the rate a bureau will give you at the counter."
                 ),
+                "yardstick_ar": rates_ar.CURRENCY_YARDSTICK,
                 "source": f"open.er-api.com{f', {as_of}' if as_of else ''}",
             }
         )
@@ -310,7 +333,9 @@ def metals(usd_egp: float | None) -> list[dict]:
                 "egp_ounce": round(egp_ounce, 2),
                 "egp_gram": round(egp_gram, 2),
                 "karats": karats,
+                "label_ar": rates_ar.label(symbol, name),
                 "plain": f"A gram of {name.lower()} costs {money(egp_gram)} pounds.",
+                "plain_ar": rates_ar.metal_plain(symbol, money(egp_gram), name),
                 "token": f"EGP {money(egp_gram)} a gram",
                 # Derived, not quoted — and the derivation is published so the
                 # number can be checked against a jeweller's board.
@@ -325,6 +350,11 @@ def metals(usd_egp: float | None) -> list[dict]:
                     "This is the metal itself. A shop adds making charges and "
                     "its own margin, so the counter price is always higher — "
                     "the gap is the workmanship, not a different gold price."
+                ),
+                "yardstick_ar": (
+                    "هذا هو المعدن نفسه. يضيف المحل أجور المصنعية وهامشه، "
+                    "فيكون سعر الشباك أعلى دائمًا — والفارق هو المصنعية لا "
+                    "سعر ذهب مختلف."
                 ),
                 "source": f"api.gold-api.com{f', {as_of}Z' if as_of else ''}"
                 f" · pound rate from open.er-api.com",

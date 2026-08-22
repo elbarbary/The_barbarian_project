@@ -1538,6 +1538,18 @@ abstract class AppLocalizations {
   /// **'This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.'**
   String get exitNoHistoryBody;
 
+  /// No description provided for @goldKaratGram.
+  ///
+  /// In en, this message translates to:
+  /// **'{karat} karat gold, a gram'**
+  String goldKaratGram(int karat);
+
+  /// No description provided for @goldPerOunce.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP {amount} / oz'**
+  String goldPerOunce(String amount);
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

@@ -22,5 +22,3 @@ lib/features/pit/pit_screen.dart  "No buy or sell calls, no price targets, no pe
 lib/features/pit/pit_screen.dart  "The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\n Everything else in the app works without it, and will keep working if it ever goes down."
 lib/features/research/article_screen.dart  "The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline."
 lib/features/today/news_block.dart  "Headlines from $live, each linked to the outlet that ran it. ${feed.merged > 0 ?"
-lib/features/today/rates_block.dart  "${karat.karat} karat gold, a gram"
-lib/features/today/rates_block.dart  "EGP ${ounce.toStringAsFixed(0)} / oz"

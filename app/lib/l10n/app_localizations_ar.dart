@@ -824,6 +824,16 @@ class AppLocalizationsAr extends AppLocalizations {
       'يحتاج هذا إلى سلسلة جلسات وراءها أحجام تداول، وهذا القيد ليس لديه واحدة بعد. والغياب نفسه جدير بالمعرفة: سهم بلا تاريخ تداول منشور ليس سهمًا يستطيع أحد أن يريك مخرجًا منه.';
 
   @override
+  String goldKaratGram(int karat) {
+    return 'ذهب عيار $karat، للجرام';
+  }
+
+  @override
+  String goldPerOunce(String amount) {
+    return '$amount جنيه للأونصة';
+  }
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override
