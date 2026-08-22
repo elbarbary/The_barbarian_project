@@ -267,17 +267,41 @@ void main() {
       'وقف الخسارة (stop loss)': RegExp('وقف الخسارة'),
       'عائد متوقع (expected return)': RegExp('عائد متوقع'),
       'ننصح (we advise)': RegExp('ننصح|نوصي'),
+      // Addressing the reader as somebody about to trade.
+      //
+      // `exitHeadline` read "Before you buy anything: how the money comes
+      // back", sitting above a per-company ladder of pound amounts captioned
+      // "About this much can leave in one session". Each half is defensible
+      // alone; together they are pre-trade sizing for a named issuer, put in
+      // front of somebody the heading has just addressed as a buyer. The
+      // subject is the share now, not the reader.
+      'قبل أن تشتري (before you buy)': RegExp('قبل أن تشتري|قبل ان تشتري'),
+      'لو استثمرت (if you invest)': RegExp('لو استثمرت|إذا استثمرت'),
+      'before you buy': RegExp(r'\bbefore you (buy|invest)\b',
+          caseSensitive: false),
+      'if you put in': RegExp(r'\bif you put in\b', caseSensitive: false),
     };
 
-    // "نقدم نصيحة" appears inside the non-licence line, which DENIES advising.
-    // A sentence carrying its own negation is the disclaimer, not the thing
-    // disclaimed — the same carve-out §8.5 makes for English.
-    // No `\b` on the Arabic alternatives, for the same reason the blocked
-    // patterns carry none: Dart's word boundary is ASCII-only and never
-    // matches beside an Arabic letter, so this carve-out silently covered
-    // nothing. It caught its own author — "ليست توصية" ("is not a
-    // recommendation") tripped the recommendation pattern.
-    final negated = RegExp('لا |ليست? |غير |\\b(not|never|no)\\b');
+    // The disclaimer is allowed to name what it denies. Nothing else is.
+    //
+    // This used to be a negation test: any string containing "no", "not",
+    // "لا" or "ليست" anywhere in it was skipped unexamined. That is not a
+    // carve-out for disclaimers, it is a carve-out for **any sentence with a
+    // negation in it**, and the sentences this file exists to stop are mostly
+    // written that way:
+    //
+    //   "Buy now — there is no better time to own it."
+    //   "Our price target is EGP 120, not a recommendation."
+    //   "اشترِ السهم الآن، لا تتردد."
+    //
+    // All three passed. The two keys below are the only strings in either ARB
+    // that legitimately trip a pattern — measured, not assumed — so they are
+    // named instead, and a new one has to be added here deliberately.
+    const disclaimers = {
+      'legalNotLicensed',
+      'legalNotLicensedShort',
+      'youNotAdvice',
+    };
 
     // The patterns prove they can fire before they are trusted to pass. An
     // Arabic regex that silently matches nothing would make this test a
@@ -288,6 +312,17 @@ void main() {
       ('هدف السعر ٧٥ جنيهًا', 'هدف السعر (price target)'),
       ('وقف الخسارة عند ٦٤', 'وقف الخسارة (stop loss)'),
       ('Buy now before it moves', 'buy now'),
+      // The six that used to slip through, one per shape of negation.
+      ('Buy now — there is no better time to own it.', 'buy now'),
+      ('Our price target is EGP 120, not a recommendation.', 'price target'),
+      ('Set a stop loss; do not hold past it.', 'stop loss'),
+      ('اشترِ السهم الآن، لا تتردد.', 'اشتر (buy, imperative)'),
+      ('هدف السعر ١٢٠ جنيهًا، وليست توصية.', 'هدف السعر (price target)'),
+      ('نوصي بعدم الانتظار.', 'ننصح (we advise)'),
+      ('قبل أن تشتري أي شيء: كيف تعود النقود', 'قبل أن تشتري (before you buy)'),
+      ('Before you buy anything: how the money comes back', 'before you buy'),
+      ('If you put in EGP 50,000', 'if you put in'),
+      ('لو استثمرت ٥٠٬٠٠٠ جنيه', 'لو استثمرت (if you invest)'),
     ]) {
       expect(
         blocked[expected]!.hasMatch(sample),
@@ -302,7 +337,7 @@ void main() {
       final arb = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
       arb.forEach((key, value) {
         if (key.startsWith('@') || value is! String) return;
-        if (negated.hasMatch(value)) return;
+        if (disclaimers.contains(key)) return;
         blocked.forEach((name, pattern) {
           if (pattern.hasMatch(value)) {
             offenders.add('${file.path} [$key] matched $name: $value');
@@ -525,20 +560,42 @@ void main() {
       RegExp(r'\btake profit\b', caseSensitive: false),
     ];
 
+    // **Nothing in `lib/` is exempt.**
+    //
+    // This used to skip any UI string containing "no", "not", "nothing" or
+    // "cannot" — a carve-out for every sentence with a negation in it rather
+    // than for the disclaimer it was written for. "Buy now — there is no
+    // better time to own it" passed that gate untouched.
+    //
+    // There is no allowlist here because there is nothing left to allow: the
+    // one string that legitimately named what it denied was a hardcoded
+    // English disclaimer on the You screen, and it now lives in the ARB where
+    // §8.8 handles it by key. A disclaimer belongs in the translated strings
+    // anyway — it is the last sentence that should reach an Arabic reader in
+    // English.
     final offenders = <String>[];
     for (final line in _uiStrings()) {
-      // The app may DENY advising; it may not advise. A sentence carrying its
-      // own negation is the disclaimer, not the thing being disclaimed.
-      final negated = RegExp(
-        r"\b(not|never|no|nothing|cannot|does not|do not)\b",
-        caseSensitive: false,
-      ).hasMatch(line.text);
       for (final pattern in blocked) {
-        if (pattern.hasMatch(line.text) && !negated) {
+        if (pattern.hasMatch(line.text)) {
           offenders.add('${line.where}: ${line.text}');
         }
       }
     }
+
+    // The gate proves it fires before it is trusted to pass, on the shapes it
+    // used to wave through.
+    for (final sample in <String>[
+      'Buy now — there is no better time to own it.',
+      'Our price target is EGP 120, not a recommendation.',
+      'Nothing here says you should sell, but you should sell.',
+    ]) {
+      expect(
+        blocked.any((p) => p.hasMatch(sample)),
+        isTrue,
+        reason: 'the §8.5 gate no longer catches "$sample"',
+      );
+    }
+
     expect(offenders, isEmpty, reason: offenders.join('\n'));
   });
 }
@@ -595,6 +652,12 @@ List<_UiString> _uiStrings() {
     if (file.path.endsWith('.g.dart') || file.path.endsWith('.freezed.dart')) {
       continue;
     }
+    // The generated localisations are the ARB in Dart clothing. §8.8 reads the
+    // ARB itself, by key, with a named allowlist for the two disclaimers —
+    // scanning the generated mirror here as well means every disclaimer has to
+    // be exempted twice, in two different shapes, and the weaker of the two
+    // exemptions is the one that ends up governing.
+    if (file.path.contains('/l10n/app_localizations')) continue;
     final lines = file.readAsLinesSync();
     for (var i = 0; i < lines.length; i++) {
       final code = lines[i].trim();

@@ -716,6 +716,10 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get youNotAdvice =>
+      'استثمر يساعدك على فهم البورصة المصرية. وهو لا يقرر عنك ما تشتريه. ولا شيء هنا نصيحة استثمارية.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override
@@ -1035,10 +1039,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get articleFailed => 'تعذّر فتح الدراسة';
 
   @override
-  String get exitHeadline => 'قبل أن تشتري أي شيء: كيف تعود النقود';
+  String get exitHeadline => 'كم يستوعب هذا السهم، وكم يستغرق الخروج منه';
 
   @override
-  String get exitIfYouPutIn => 'لو استثمرت';
+  String get exitIfYouPutIn => 'عند هذا الحجم';
 
   @override
   String get exitNumbersBehind => 'الأرقام وراء ذلك';

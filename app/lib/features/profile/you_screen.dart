@@ -224,10 +224,13 @@ class YouScreen extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 10),
+                  // Translated, like every other sentence a reader is shown.
+                  // It was hardcoded English on an Arabic-first screen, and it
+                  // was also the one string forcing the §8.5 gate to wave
+                  // through anything containing a negation — a disclaimer in
+                  // the ARB is named in the allowlist there instead.
                   Text(
-                    'ESTHMR helps you understand the EGX. It does not '
-                    'decide what you should buy. Nothing here is investment '
-                    'advice.',
+                    l.youNotAdvice,
                     style: BarbarianType.bodyS.copyWith(color: c.textFaint),
                   ),
                 ],

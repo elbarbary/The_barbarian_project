@@ -718,6 +718,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get youNotAdvice =>
+      'ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override
@@ -1038,10 +1042,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitHeadline =>
-      'Before you buy anything: how the money comes back';
+      'How much this share absorbs, and how long it takes to leave';
 
   @override
-  String get exitIfYouPutIn => 'If you put in';
+  String get exitIfYouPutIn => 'At this size';
 
   @override
   String get exitNumbersBehind => 'The numbers behind it';

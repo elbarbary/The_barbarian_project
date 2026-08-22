@@ -1382,6 +1382,12 @@ abstract class AppLocalizations {
   /// **'{ratio}× normal'**
   String unusualTimes(String ratio);
 
+  /// No description provided for @youNotAdvice.
+  ///
+  /// In en, this message translates to:
+  /// **'ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.'**
+  String get youNotAdvice;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:
@@ -1913,13 +1919,13 @@ abstract class AppLocalizations {
   /// No description provided for @exitHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Before you buy anything: how the money comes back'**
+  /// **'How much this share absorbs, and how long it takes to leave'**
   String get exitHeadline;
 
   /// No description provided for @exitIfYouPutIn.
   ///
   /// In en, this message translates to:
-  /// **'If you put in'**
+  /// **'At this size'**
   String get exitIfYouPutIn;
 
   /// No description provided for @exitNumbersBehind.
