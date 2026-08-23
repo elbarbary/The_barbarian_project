@@ -976,6 +976,21 @@ def parse(html: str) -> dict:
     }
 
 
+def headline_agrees(payload: dict) -> str | None:
+    """The empty-day headline against the count beside it.
+
+    Checked on the published payload rather than on the parse, because these
+    are two readings of one page and the point is that they can drift apart.
+    """
+    headline = payload.get("headline")
+    qualified = (payload.get("summary") or {}).get("qualified") or 0
+    if headline and qualified:
+        return (
+            f"headline says {headline!r} while {qualified} name(s) qualified"
+        )
+    return None
+
+
 def validate(doc: dict, html: str | None = None) -> list[str]:
     problems = []
 
@@ -1101,6 +1116,20 @@ def main() -> int:
     watching = [w for w in doc["watch"] if w["status"] == "watching"]
     rejected = [w for w in doc["watch"] if w["status"] == "rejected"]
 
+    # The empty-day headline is only true on an empty day.
+    #
+    # `parse()` sets it from the field note's own <h2>, and the buckets are
+    # counted here from the scorecard — two readings of the same page that can
+    # disagree, and today they did: the document went out saying "Nothing met
+    # the test today" with HDBK sitting in `qualified` and the counter beside
+    # it reading 1. Two screens render that headline as their largest line, so
+    # the app contradicted itself in the biggest type on Today.
+    #
+    # The count wins. It comes from the rows, and the rows are what the reader
+    # can go and look at.
+    if qualified and doc.get("headline"):
+        doc["headline"] = None
+
     payload = {
         "date": doc["date"],
         "masthead_date": doc["masthead_date"],
@@ -1144,6 +1173,10 @@ def main() -> int:
         print(f"   {o['ticker']:5} {str(o['return_percent']):>8}  {o['status_label']}")
     if len(doc["outcomes"]) > 6:
         print(f"   … {len(doc['outcomes']) - 6} more")
+
+    if (clash := headline_agrees(payload)):
+
+        problems.append(clash)
 
     if problems:
         print("\nvalidation problems:", file=sys.stderr)
