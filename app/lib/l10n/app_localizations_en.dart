@@ -876,22 +876,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get filterApply => 'Show results';
 
   @override
-  String get filterMarketCap => 'What the company is worth';
+  String get filterMarketCap => 'Market cap';
 
   @override
-  String get filterPrice => 'Share price';
+  String get filterPrice => 'Price';
 
   @override
   String get filterChange => 'Change today';
 
   @override
-  String get filterVolume => 'Shares traded today';
+  String get filterVolume => 'Volume today';
 
   @override
-  String get filterAvgVolume => 'Shares traded on a normal day';
+  String get filterAvgVolume => 'Average volume';
 
   @override
-  String get filterPe => 'Price against earnings';
+  String get filterPe => 'P/E';
 
   @override
   String get filterAbove => 'more than';
@@ -923,32 +923,52 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get filterPeNote =>
-      'Price divided by the company’s own filed annual profit. Absent where the company filed a loss, filed nothing, or the figure did not check out — 159 of 280 companies carry one.';
+  String get filterEps => 'EPS';
 
   @override
-  String get filterLiveNote =>
-      'Price, change and shares traded are from the live feed. What the company is worth and its normal day are from this morning’s rebuild.';
+  String get filterProfit => 'Net profit';
 
   @override
-  String get filterEps => 'Earned per share';
-
-  @override
-  String get filterProfit => 'Profit last year';
-
-  @override
-  String get filterBusy => 'Busier than a normal day';
+  String get filterBusy => 'Relative volume';
 
   @override
   String get filterUnitMillions => 'million EGP';
 
   @override
-  String get filterBusyNote =>
-      'Shares traded today against what this company trades on a normal day. 1 is an ordinary day; the filings feed points out anything above 2.';
+  String get noteMarketCap =>
+      'What the whole company is worth at today’s price — the share price times every share in existence. From this morning’s rebuild.';
 
   @override
-  String get filterEpsNote =>
-      'The company’s own filed annual profit divided by its shares. A loss shows as a minus.';
+  String get notePrice =>
+      'The last price a share changed hands at. From the live feed, fifteen minutes behind at worst.';
+
+  @override
+  String get noteChange =>
+      'How far the price has moved since yesterday’s close. From the live feed.';
+
+  @override
+  String get noteVolume =>
+      'How many shares have changed hands today. From the live feed.';
+
+  @override
+  String get noteAvgVolume =>
+      'How many shares change hands on an ordinary day, averaged over the last thirty. From this morning’s rebuild.';
+
+  @override
+  String get notePe =>
+      'The price divided by what the company earned per share last year. A lower number means you are paying less for each pound of profit — it says nothing about whether the company is a good one. Absent for 121 of 280: a loss, nothing filed, or the figure did not check out.';
+
+  @override
+  String get noteEps =>
+      'The company’s own filed annual profit divided by the number of its shares. A loss shows as a minus.';
+
+  @override
+  String get noteProfit =>
+      'What the company filed as its profit for the year, in millions of pounds. Not per share — a big company can earn far more and still earn less per share.';
+
+  @override
+  String get noteBusy =>
+      'Today’s trading against what this company trades on an ordinary day. 1 is a normal day; the filings feed points out anything above 2. Below 1 means quieter than usual.';
 
   @override
   String get finTotalAssets => 'Total assets';

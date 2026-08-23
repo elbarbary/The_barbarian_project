@@ -43,6 +43,28 @@ enum FilterField {
     FilterField.relativeVolume => l.filterBusy,
   };
 
+  /// What this figure is, in a sentence, for whoever does not already know.
+  ///
+  /// The chips carry the names the market actually uses — P/E, EPS, market cap
+  /// — because somebody who knows what they came for scans for those words and
+  /// a paraphrase makes them hunt. The paraphrase goes here instead, under the
+  /// one they picked, where it teaches without getting in the way.
+  ///
+  /// Each also says where the figure comes from, because they are not equally
+  /// fresh: price, change and today's volume are the live feed, and the rest
+  /// is this morning's rebuild.
+  String noteFor(AppLocalizations l) => switch (this) {
+    FilterField.marketCap => l.noteMarketCap,
+    FilterField.price => l.notePrice,
+    FilterField.changePercent => l.noteChange,
+    FilterField.volume => l.noteVolume,
+    FilterField.avgVolume => l.noteAvgVolume,
+    FilterField.pe => l.notePe,
+    FilterField.eps => l.noteEps,
+    FilterField.netIncome => l.noteProfit,
+    FilterField.relativeVolume => l.noteBusy,
+  };
+
   /// A word for the unit, so an empty input box is not a guess.
   String unitFor(AppLocalizations l) => switch (this) {
     FilterField.marketCap => l.filterUnitEgp,

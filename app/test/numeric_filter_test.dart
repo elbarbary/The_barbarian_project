@@ -1,6 +1,8 @@
 import 'package:barbarian/core/models/company.dart';
 import 'package:barbarian/core/models/market_snapshot.dart';
 import 'package:barbarian/features/market/numeric_filter.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -226,6 +228,43 @@ void main() {
           company.pePeriod,
           isNotNull,
           reason: '${company.ticker} has a P/E with no period behind it',
+        );
+      }
+    });
+  });
+
+  group('every field explains itself', () {
+    test('no field is missing its name, unit or explanation', () async {
+      // The chips carry the names the market uses — P/E, EPS, market cap —
+      // because somebody who knows what they came for scans for those words.
+      // The paraphrase moved under the selection, where it teaches without
+      // getting in the way. A field with a name and no explanation would be
+      // the worst of both.
+      final l = await AppLocalizations.delegate.load(const Locale('en'));
+      for (final field in FilterField.values) {
+        expect(field.labelFor(l), isNotEmpty, reason: '$field has no name');
+        expect(field.unitFor(l), isNotEmpty, reason: '$field has no unit');
+        expect(
+          field.noteFor(l).length,
+          greaterThan(30),
+          reason: '$field has no real explanation',
+        );
+      }
+    });
+
+    test('the Arabic uses the terms Egyptian investors actually use', () async {
+      final ar = await AppLocalizations.delegate.load(const Locale('ar'));
+      // Not a literal translation of the English label: "مكرر الربحية" is what
+      // a P/E is called in Arabic financial writing, and a reader looking for
+      // it will not recognise a paraphrase.
+      expect(FilterField.pe.labelFor(ar), 'مكرر الربحية');
+      expect(FilterField.eps.labelFor(ar), 'ربحية السهم');
+      expect(FilterField.marketCap.labelFor(ar), 'القيمة السوقية');
+      for (final field in FilterField.values) {
+        expect(
+          RegExp('[؀-ۿ]').hasMatch(field.noteFor(ar)),
+          isTrue,
+          reason: '$field explains itself in English to an Arabic reader',
         );
       }
     });

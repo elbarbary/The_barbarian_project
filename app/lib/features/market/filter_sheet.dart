@@ -166,16 +166,22 @@ class _FilterBuilderState extends State<_FilterBuilder> {
               // and half these fields come from a different document than the
               // other half.
               const SizedBox(height: 14),
-              Text(
-                switch (_field) {
-                  FilterField.pe => l.filterPeNote,
-                  FilterField.eps => l.filterEpsNote,
-                  FilterField.relativeVolume => l.filterBusyNote,
-                  _ => l.filterLiveNote,
-                },
-                style: BarbarianType.bodyS.copyWith(
-                  color: c.textFaint,
-                  height: 1.5,
+              // Set apart, because it is the part that teaches. Sitting as
+              // loose grey text under a form it read as small print; a reader
+              // who does not know what a P/E is will not go looking in the
+              // small print for it.
+              Container(
+                padding: const EdgeInsets.fromLTRB(13, 11, 13, 12),
+                decoration: BoxDecoration(
+                  color: c.surface,
+                  borderRadius: BorderRadius.circular(BarbarianRadius.md),
+                ),
+                child: Text(
+                  _field.noteFor(l),
+                  style: BarbarianType.bodyS.copyWith(
+                    color: c.textSecondary,
+                    height: 1.5,
+                  ),
                 ),
               ),
 

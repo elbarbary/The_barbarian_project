@@ -871,22 +871,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get filterApply => 'اعرض النتائج';
 
   @override
-  String get filterMarketCap => 'قيمة الشركة';
+  String get filterMarketCap => 'القيمة السوقية';
 
   @override
-  String get filterPrice => 'سعر السهم';
+  String get filterPrice => 'السعر';
 
   @override
   String get filterChange => 'التغير اليوم';
 
   @override
-  String get filterVolume => 'الأسهم المتداولة اليوم';
+  String get filterVolume => 'حجم التداول اليوم';
 
   @override
-  String get filterAvgVolume => 'الأسهم المتداولة في يوم معتاد';
+  String get filterAvgVolume => 'متوسط حجم التداول';
 
   @override
-  String get filterPe => 'السعر مقابل الأرباح';
+  String get filterPe => 'مكرر الربحية';
 
   @override
   String get filterAbove => 'أكثر من';
@@ -918,32 +918,50 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get filterPeNote =>
-      'السعر مقسومًا على الأرباح السنوية التي أودعتها الشركة نفسها. غائب حين تُعلن الشركة خسارة، أو لا تودع رقمًا، أو لا يجتاز الرقم التحقق — 159 من 280 شركة لديها واحد.';
+  String get filterEps => 'ربحية السهم';
 
   @override
-  String get filterLiveNote =>
-      'السعر والتغير والأسهم المتداولة من التغذية المباشرة. أما قيمة الشركة ويومها المعتاد فمن إعادة البناء هذا الصباح.';
+  String get filterProfit => 'صافي الربح';
 
   @override
-  String get filterEps => 'ربح السهم الواحد';
-
-  @override
-  String get filterProfit => 'أرباح العام الماضي';
-
-  @override
-  String get filterBusy => 'أكثر انشغالًا من يوم معتاد';
+  String get filterBusy => 'الحجم النسبي';
 
   @override
   String get filterUnitMillions => 'مليون جنيه';
 
   @override
-  String get filterBusyNote =>
-      'الأسهم المتداولة اليوم مقابل ما تتداوله الشركة في يوم معتاد. 1 يعني يومًا عاديًا، والإفصاحات تنبّه لما يتجاوز 2.';
+  String get noteMarketCap =>
+      'قيمة الشركة كلها بسعر اليوم — سعر السهم مضروبًا في كل الأسهم القائمة. من إعادة البناء هذا الصباح.';
 
   @override
-  String get filterEpsNote =>
+  String get notePrice =>
+      'آخر سعر جرى عنده تداول السهم. من التغذية المباشرة، متأخرة ربع ساعة على الأكثر.';
+
+  @override
+  String get noteChange => 'كم تحرك السعر منذ إغلاق أمس. من التغذية المباشرة.';
+
+  @override
+  String get noteVolume => 'كم سهمًا جرى تداوله اليوم. من التغذية المباشرة.';
+
+  @override
+  String get noteAvgVolume =>
+      'كم سهمًا يجري تداوله في يوم عادي، بمتوسط آخر ثلاثين يومًا. من إعادة البناء هذا الصباح.';
+
+  @override
+  String get notePe =>
+      'السعر مقسومًا على ما ربحته الشركة عن السهم الواحد العام الماضي. الرقم الأقل يعني أنك تدفع أقل مقابل كل جنيه ربح — وهو لا يقول شيئًا عن جودة الشركة. غائب في 121 من 280: خسارة، أو لا إيداع، أو رقم لم يجتز التحقق.';
+
+  @override
+  String get noteEps =>
       'الأرباح السنوية التي أودعتها الشركة مقسومة على عدد أسهمها. والخسارة تظهر بإشارة سالبة.';
+
+  @override
+  String get noteProfit =>
+      'ما أودعته الشركة كأرباح عن العام، بملايين الجنيهات. وليس للسهم الواحد — فقد تربح شركة كبيرة أكثر بكثير وتربح أقل للسهم.';
+
+  @override
+  String get noteBusy =>
+      'تداول اليوم مقابل ما تتداوله الشركة في يوم عادي. 1 يعني يومًا عاديًا، والإفصاحات تنبّه لما يتجاوز 2. وأقل من 1 يعني أهدأ من المعتاد.';
 
   @override
   String get finTotalAssets => 'إجمالي الأصول';
