@@ -265,8 +265,9 @@ void main() {
         total++;
         final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
-        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty)
+        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty) {
           withQuarters++;
+        }
       }
 
       expect(total, greaterThan(0));
@@ -300,8 +301,9 @@ void main() {
           final assets = (quarter['assets'] as num?)?.toDouble();
           final year = '${quarter['period']}'.replaceAll(RegExp(r'[^0-9]'), '');
           final annualAssets = years[year];
-          if (assets == null || annualAssets == null || annualAssets <= 0)
+          if (assets == null || annualAssets == null || annualAssets <= 0) {
             continue;
+          }
           final ratio = assets / annualAssets;
           expect(
             ratio,
