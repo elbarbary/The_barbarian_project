@@ -188,6 +188,70 @@ def harvest_indices(*, force: bool = False) -> int:
     return written
 
 
+# ----------------------------------------------------------------- snapshots
+
+# The endpoints that answer with one small document rather than a series. Kept
+# as reference: this is what the exchange itself says a company row, a board
+# total and a metal price look like, which is what any migration has to be
+# diffed against. `gold` alone (without `-market-watch`) is refused by the WAF
+# and is not a real endpoint.
+SNAPSHOTS = [
+    ("market-watch", "/api/bff/egx/market-watch?Page=1&PageSize=500"),
+    ("market-summaries", "/api/bff/egx/market-summaries"),
+    ("market-status", "/api/bff/egx/market-status"),
+    ("gold-market-watch", "/api/bff/egx/gold-market-watch"),
+    ("silver-market-watch", "/api/bff/egx/silver-market-watch"),
+    ("index-intraday-CASE30", "/api/bff/egx/index-data?interval=1&indexName=CASE30"),
+]
+
+
+def harvest_snapshots() -> int:
+    out = OUT / "snapshots"
+    out.mkdir(parents=True, exist_ok=True)
+    for name, path in SNAPSHOTS:
+        payload = request(path)
+        (out / f"{name}.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8"
+        )
+        data = payload.get("data")
+        if isinstance(data, dict) and isinstance(data.get("data"), list):
+            size = len(data["data"])
+        elif isinstance(data, list):
+            size = len(data)
+        else:
+            size = 1
+        print(f"   {name}: {size} row(s)")
+        pause()
+    return len(SNAPSHOTS)
+
+
+# `financial-statements-filter` is a POST and pages, so it is its own call. The
+# same results announcements appear in the filings harvest under secId 6; this
+# is here because the endpoint separates net profit and the comparative
+# period's net profit into fields, and the filings feed leaves them in the body.
+def harvest_statements(pages: int = 3) -> int:
+    out = OUT / "snapshots"
+    out.mkdir(parents=True, exist_ok=True)
+    rows: list[dict] = []
+    for page in range(1, pages + 1):
+        payload = request(
+            "/api/bff/egx/financial-statements-filter",
+            {"interval": 50, "pageNumber": page, "pageSize": PAGE_SIZE},
+        )
+        rows.extend(payload.get("data") or [])
+        if page >= (payload.get("totalPages") or 1):
+            break
+        pause()
+    (out / "financial-statements-filter.json").write_text(
+        json.dumps({"source": "beta.egx.com.eg /api/bff/egx/financial-statements-filter",
+                    "harvested": datetime.date.today().isoformat(),
+                    "items": rows}, ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+    print(f"   financial-statements-filter: {len(rows)} announcements")
+    return len(rows)
+
+
 # ------------------------------------------------------------------- filings
 
 
@@ -281,6 +345,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--indices", action="store_true", help="pull every index history")
     parser.add_argument("--filings", action="store_true", help="pull disclosures month by month")
+    parser.add_argument("--snapshots", action="store_true",
+                        help="pull the one-document endpoints and the statements feed")
     parser.add_argument("--from", dest="start", default=f"{today.year}-01",
                         help="first month, YYYY-MM (default: January this year)")
     parser.add_argument("--to", dest="end", default=today.strftime("%Y-%m"),
@@ -290,13 +356,17 @@ def main() -> int:
                         help="stop after roughly this many months (0 = no limit)")
     args = parser.parse_args()
 
-    if not args.indices and not args.filings:
-        parser.error("nothing to do: pass --indices, --filings, or both")
+    if not (args.indices or args.filings or args.snapshots):
+        parser.error("nothing to do: pass --indices, --filings or --snapshots")
 
     try:
         if args.indices:
             print("── Index history")
             harvest_indices(force=args.force)
+        if args.snapshots:
+            print("── Snapshots")
+            harvest_snapshots()
+            harvest_statements()
         if args.filings:
             print(f"── Disclosures {args.start} → {args.end}")
             done = 0

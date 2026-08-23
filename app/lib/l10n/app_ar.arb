@@ -660,5 +660,7 @@
   "exchangeOneSession": "جلسة واحدة مسجلة حتى الآن. من هنا تبدأ الخطوط.",
   "legendRose": "ارتفع",
   "legendFell": "انخفض",
-  "legendUnchanged": "دون تغيير"
+  "legendUnchanged": "دون تغيير",
+  "priceLatestSessionOnly": "آخر جلسة فقط — لا توجد سلسلة منشورة لهذا السهم",
+  "directoryAllCount": "الكل {count}"
 }

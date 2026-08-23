@@ -172,7 +172,7 @@ class _SessionRange extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Latest session only — no series published for this listing",
+            l.priceLatestSessionOnly,
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
             textAlign: TextAlign.center,
           ),

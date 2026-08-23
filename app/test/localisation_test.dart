@@ -102,7 +102,13 @@ String _firstArgument(String code, int open) {
 /// switch — are different sentences and stay apart.
 List<String> _literalRuns(String expression) {
   final runs = <String>[];
-  final literal = RegExp(r"'((?:[^'\\]|\\.)*)'");
+  // Both quote styles. Dart treats them as identical and this codebase uses
+  // both; the extractor read only single quotes, so
+  // `Text("Latest session only — no series published for this listing")` was
+  // invisible to a guard whose whole claim is that the count is zero. A
+  // detector that cannot see half the language's string syntax reports zero
+  // because it is not looking.
+  final literal = RegExp("'((?:[^'\\\\]|\\\\.)*)'" r'|"((?:[^"\\]|\\.)*)"');
   var current = <String>[];
   var previousEnd = -1;
 
@@ -111,10 +117,10 @@ List<String> _literalRuns(String expression) {
         ? null
         : expression.substring(previousEnd, m.start);
     if (between != null && between.trim().isEmpty) {
-      current.add(m.group(1)!);
+      current.add(m.group(1) ?? m.group(2)!);
     } else {
       if (current.isNotEmpty) runs.add(current.join(' '));
-      current = [m.group(1)!];
+      current = [m.group(1) ?? m.group(2)!];
     }
     previousEnd = m.end;
   }
@@ -193,7 +199,9 @@ void main() {
       r"|caveat|text|sentence)\s*:\s*",
     );
     // The label slot of a `(String, …)` record — the fact rows.
-    final recordLabel = RegExp(r"\(\s*'((?:[^'\\]|\\.)*)'\s*,");
+    final recordLabel = RegExp(
+      "\\(\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*," r'|\(\s*"((?:[^"\\]|\\.)*)"\s*,',
+    );
     // A model getter returning a sentence: `=> 'Prices loading',`.
     final arrowLiteral = RegExp(r"=>\s*((?:'(?:[^'\\]|\\.)*'\s*)+)");
 
@@ -235,7 +243,7 @@ void main() {
 
       // Row labels, which are one capitalised word and so slip past _isCopy.
       for (final m in recordLabel.allMatches(code)) {
-        final text = m.group(1)!;
+        final text = m.group(1) ?? m.group(2)!;
         if (!_isLabel(text)) continue;
         if (allowed.containsKey(text)) continue;
         offenders.add('${file.path}  "$text"');

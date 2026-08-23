@@ -1892,5 +1892,15 @@
   "legendFell": "Fell",
   "@legendFell": {},
   "legendUnchanged": "Unchanged",
-  "@legendUnchanged": {}
+  "@legendUnchanged": {},
+  "priceLatestSessionOnly": "Latest session only — no series published for this listing",
+  "@priceLatestSessionOnly": {},
+  "directoryAllCount": "All {count}",
+  "@directoryAllCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -1,0 +1,13 @@
+{
+ "data": {
+  "status": "Closed",
+  "status_Ar": "مغلق",
+  "statusDate": "2026-08-24T00:25:00"
+ },
+ "success": true,
+ "message": "Market status retrieved successfully",
+ "totalCount": 1,
+ "pageNumber": null,
+ "pageSize": null,
+ "totalPages": null
+}

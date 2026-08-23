@@ -2317,4 +2317,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendUnchanged => 'Unchanged';
+
+  @override
+  String get priceLatestSessionOnly =>
+      'Latest session only — no series published for this listing';
+
+  @override
+  String directoryAllCount(int count) {
+    return 'All $count';
+  }
 }

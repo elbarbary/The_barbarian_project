@@ -1,0 +1,46 @@
+{
+ "data": [
+  {
+   "tradeDate": "2026-08-23T00:00:00",
+   "symbolId": 101,
+   "brandNameEn": "Empire of Gold",
+   "brandNameAr": "امبراطورية الذهب",
+   "bidPrice": 110,
+   "askPrice": 115,
+   "lastUpdatedDate": "2026-08-23T16:58:07",
+   "denseRank": 1,
+   "logo": "EOG_logo.png",
+   "url": "https://empireofgold.co/"
+  },
+  {
+   "tradeDate": "2026-08-23T00:00:00",
+   "symbolId": 102,
+   "brandNameEn": "Dahab Zaman",
+   "brandNameAr": "دهب زمان لتجارة الذهب",
+   "bidPrice": 109.5,
+   "askPrice": 114.5,
+   "lastUpdatedDate": "2026-08-23T17:00:27",
+   "denseRank": 1,
+   "logo": "zaman_logo.png",
+   "url": "https://dahabzaman.eg/"
+  },
+  {
+   "tradeDate": "2026-08-23T00:00:00",
+   "symbolId": 100,
+   "brandNameEn": "Gold Net Trading",
+   "brandNameAr": "جولد نت للتجارة",
+   "bidPrice": 110,
+   "askPrice": 115,
+   "lastUpdatedDate": "2026-08-23T16:58:12",
+   "denseRank": 1,
+   "logo": "GNT_logo.png",
+   "url": "https://goldnettrading.com/pricing/"
+  }
+ ],
+ "success": true,
+ "message": "Silver market watch retrieved successfully",
+ "totalCount": 3,
+ "pageNumber": null,
+ "pageSize": null,
+ "totalPages": null
+}

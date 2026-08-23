@@ -3901,6 +3901,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unchanged'**
   String get legendUnchanged;
+
+  /// No description provided for @priceLatestSessionOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest session only — no series published for this listing'**
+  String get priceLatestSessionOnly;
+
+  /// No description provided for @directoryAllCount.
+  ///
+  /// In en, this message translates to:
+  /// **'All {count}'**
+  String directoryAllCount(int count);
 }
 
 class _AppLocalizationsDelegate

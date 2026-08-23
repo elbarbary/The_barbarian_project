@@ -2306,4 +2306,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get legendUnchanged => 'دون تغيير';
+
+  @override
+  String get priceLatestSessionOnly =>
+      'آخر جلسة فقط — لا توجد سلسلة منشورة لهذا السهم';
+
+  @override
+  String directoryAllCount(int count) {
+    return 'الكل $count';
+  }
 }

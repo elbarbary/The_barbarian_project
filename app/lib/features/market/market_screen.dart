@@ -164,7 +164,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                       padding: EdgeInsets.zero,
                       children: [
                         BKindChip(
-                          'All ${directory.count}',
+                          l.directoryAllCount(directory.count),
                           variant: _sector == null
                               ? BChipVariant.solid
                               : BChipVariant.neutral,
