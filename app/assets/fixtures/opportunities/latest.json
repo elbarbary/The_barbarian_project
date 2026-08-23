@@ -97,9 +97,9 @@
       "action": null,
       "position_withheld": true,
       "tape": {
-        "label": "20 August completed close",
-        "price": "EGP 92.42",
-        "detail": "+3.26% · quote timestamp: 20 Aug close."
+        "label": "23 August completed close",
+        "price": "EGP 92.50",
+        "detail": "+0.09% · captured after the 23 Aug close."
       },
       "sources": [
         {
