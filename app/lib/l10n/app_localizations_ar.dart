@@ -2162,4 +2162,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String expSourceClosesOn(String date) {
     return 'أسعار إغلاق البورصة، $date';
   }
+
+  @override
+  String get notabilityOrdinary => 'معتاد';
+
+  @override
+  String get notabilityUnusual => 'غير معتاد';
+
+  @override
+  String get notabilityUnjudged => 'لا يوجد حد منشور';
+
+  @override
+  String get provenanceFact => 'واقعة';
+
+  @override
+  String get provenanceCalculation => 'حساب';
+
+  @override
+  String get provenanceInterpretation => 'تفسير';
 }

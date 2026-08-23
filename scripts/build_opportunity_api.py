@@ -761,6 +761,55 @@ def parse_date(raw: str, year: int) -> str | None:
     return f"{year:04d}-{month:02d}-{day:02d}" if month else None
 
 
+# The scanner's own rules, in Arabic.
+#
+# The rubric, the bands and the notes are read off the field note, which is
+# written in English. They are the app's explanation of how a score is
+# arrived at — the answer to "what are the 13?" — and they sat untranslated on
+# the Today screen under an Arabic heading.
+#
+# Keyed by the English the page publishes, so a reworded line falls back to
+# English rather than being paired with an Arabic sentence that no longer
+# matches it. Add a line when the note changes one.
+RUBRIC_AR = {
+    "Fresh, specific, material disclosure": "إفصاح حديث ومحدد وجوهري",
+    "a real filing, not a rumour or a press mention":
+        "إفصاح فعلي، لا شائعة ولا إشارة صحفية",
+    "Economic importance to the company": "الأهمية الاقتصادية للشركة",
+    "is the news big relative to this company's size?":
+        "هل الخبر كبير بالنسبة لحجم هذه الشركة؟",
+    "Volume and early price confirmation": "تأكيد من حجم التداول والسعر مبكرًا",
+    "RV20 \u2014 volume against its own 20-session median":
+        "حجم التداول مقابل وسيط آخر 20 جلسة له",
+    "Repeat-buyer or ownership cluster": "مشترٍ متكرر أو تجمّع في الملكية",
+    "the same holder building, disclosure after disclosure":
+        "المالك نفسه يزيد حصته، إفصاحًا بعد إفصاح",
+    "A clear dated catalyst ahead": "حدث محدد بتاريخ في الأفق",
+    "something on the calendar, not a vague hope":
+        "شيء مثبت في التقويم، لا أمل غامض",
+    "Already up more than 20% in five sessions":
+        "ارتفع بالفعل أكثر من 20٪ في خمس جلسات",
+    "the anti-chasing penalty": "خصم مطاردة الارتفاع",
+    "Company denies knowing why it moved": "الشركة تنفي معرفة سبب الحركة",
+    "told the exchange it has no explanation": "أبلغت البورصة بأن لا تفسير لديها",
+    "Two or more completed limit-ups": "بلوغ الحد الأقصى للتغير مرتين أو أكثر",
+    "EGP's \u00b120% band already used up": "نطاق الـ±20٪ استُهلك بالفعل",
+    "Severe valuation, dilution or exit risk":
+        "خطر شديد في التقييم أو التخفيف أو الخروج",
+    "including a float too thin to sell into":
+        "بما في ذلك أسهم حرة أقل من أن يُباع فيها",
+    "best possible score": "أعلى درجة ممكنة",
+    "the research line \u2014 confirmation still required":
+        "خط البحث — ولا يزال التأكيد مطلوبًا",
+    "worst possible score": "أدنى درجة ممكنة",
+}
+
+
+def rubric_ar(value: str | None) -> str | None:
+    """The Arabic for a rubric line, or None when nobody has written one."""
+    return RUBRIC_AR.get(value) if value else None
+
+
 def rubric(html: str) -> list[dict]:
     """The nine scoring components and their weights, from the page itself.
 
@@ -787,7 +836,9 @@ def rubric(html: str) -> list[dict]:
         items.append(
             {
                 "label": label,
+                "label_ar": rubric_ar(label),
                 "detail": text(m.group(2)) if m.group(2) else None,
+                "detail_ar": rubric_ar(text(m.group(2)) if m.group(2) else None),
                 "weight": int(m.group(3).replace("−", "-")),
             }
         )
@@ -811,6 +862,7 @@ def scoring(html: str) -> dict:
             {
                 "score": int(m.group(1).replace("−", "-")),
                 "label": text(m.group(2)),
+                "label_ar": rubric_ar(text(m.group(2))),
             }
         )
     # Through the §8 filter like every other narrative field. These notes ship

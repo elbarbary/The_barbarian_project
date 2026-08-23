@@ -624,5 +624,11 @@
   "expSourceSession": "بيانات جلسة البورصة",
   "expSourceSessionOn": "بيانات جلسة البورصة، {date}",
   "expSourceCloses": "أسعار إغلاق البورصة",
-  "expSourceClosesOn": "أسعار إغلاق البورصة، {date}"
+  "expSourceClosesOn": "أسعار إغلاق البورصة، {date}",
+  "notabilityOrdinary": "معتاد",
+  "notabilityUnusual": "غير معتاد",
+  "notabilityUnjudged": "لا يوجد حد منشور",
+  "provenanceFact": "واقعة",
+  "provenanceCalculation": "حساب",
+  "provenanceInterpretation": "تفسير"
 }

@@ -2037,7 +2037,7 @@ as List<String>,
 /// @nodoc
 mixin _$ScoringBand {
 
- int get score; String get label;
+ int get score; String get label;@JsonKey(name: 'label_ar') String? get labelAr;
 /// Create a copy of ScoringBand
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2050,16 +2050,16 @@ $ScoringBandCopyWith<ScoringBand> get copyWith => _$ScoringBandCopyWithImpl<Scor
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScoringBand&&(identical(other.score, score) || other.score == score)&&(identical(other.label, label) || other.label == label));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScoringBand&&(identical(other.score, score) || other.score == score)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,score,label);
+int get hashCode => Object.hash(runtimeType,score,label,labelAr);
 
 @override
 String toString() {
-  return 'ScoringBand(score: $score, label: $label)';
+  return 'ScoringBand(score: $score, label: $label, labelAr: $labelAr)';
 }
 
 
@@ -2070,7 +2070,7 @@ abstract mixin class $ScoringBandCopyWith<$Res>  {
   factory $ScoringBandCopyWith(ScoringBand value, $Res Function(ScoringBand) _then) = _$ScoringBandCopyWithImpl;
 @useResult
 $Res call({
- int score, String label
+ int score, String label,@JsonKey(name: 'label_ar') String? labelAr
 });
 
 
@@ -2087,11 +2087,12 @@ class _$ScoringBandCopyWithImpl<$Res>
 
 /// Create a copy of ScoringBand
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? score = null,Object? label = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? score = null,Object? label = null,Object? labelAr = freezed,}) {
   return _then(_self.copyWith(
 score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as int,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
-as String,
+as String,labelAr: freezed == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2176,10 +2177,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int score,  String label)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int score,  String label, @JsonKey(name: 'label_ar')  String? labelAr)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ScoringBand() when $default != null:
-return $default(_that.score,_that.label);case _:
+return $default(_that.score,_that.label,_that.labelAr);case _:
   return orElse();
 
 }
@@ -2197,10 +2198,10 @@ return $default(_that.score,_that.label);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int score,  String label)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int score,  String label, @JsonKey(name: 'label_ar')  String? labelAr)  $default,) {final _that = this;
 switch (_that) {
 case _ScoringBand():
-return $default(_that.score,_that.label);case _:
+return $default(_that.score,_that.label,_that.labelAr);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2217,10 +2218,10 @@ return $default(_that.score,_that.label);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int score,  String label)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int score,  String label, @JsonKey(name: 'label_ar')  String? labelAr)?  $default,) {final _that = this;
 switch (_that) {
 case _ScoringBand() when $default != null:
-return $default(_that.score,_that.label);case _:
+return $default(_that.score,_that.label,_that.labelAr);case _:
   return null;
 
 }
@@ -2232,11 +2233,12 @@ return $default(_that.score,_that.label);case _:
 @JsonSerializable()
 
 class _ScoringBand extends ScoringBand {
-  const _ScoringBand({this.score = 0, this.label = ''}): super._();
+  const _ScoringBand({this.score = 0, this.label = '', @JsonKey(name: 'label_ar') this.labelAr}): super._();
   factory _ScoringBand.fromJson(Map<String, dynamic> json) => _$ScoringBandFromJson(json);
 
 @override@JsonKey() final  int score;
 @override@JsonKey() final  String label;
+@override@JsonKey(name: 'label_ar') final  String? labelAr;
 
 /// Create a copy of ScoringBand
 /// with the given fields replaced by the non-null parameter values.
@@ -2251,16 +2253,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScoringBand&&(identical(other.score, score) || other.score == score)&&(identical(other.label, label) || other.label == label));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScoringBand&&(identical(other.score, score) || other.score == score)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,score,label);
+int get hashCode => Object.hash(runtimeType,score,label,labelAr);
 
 @override
 String toString() {
-  return 'ScoringBand(score: $score, label: $label)';
+  return 'ScoringBand(score: $score, label: $label, labelAr: $labelAr)';
 }
 
 
@@ -2271,7 +2273,7 @@ abstract mixin class _$ScoringBandCopyWith<$Res> implements $ScoringBandCopyWith
   factory _$ScoringBandCopyWith(_ScoringBand value, $Res Function(_ScoringBand) _then) = __$ScoringBandCopyWithImpl;
 @override @useResult
 $Res call({
- int score, String label
+ int score, String label,@JsonKey(name: 'label_ar') String? labelAr
 });
 
 
@@ -2288,11 +2290,12 @@ class __$ScoringBandCopyWithImpl<$Res>
 
 /// Create a copy of ScoringBand
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? score = null,Object? label = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? score = null,Object? label = null,Object? labelAr = freezed,}) {
   return _then(_ScoringBand(
 score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as int,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
-as String,
+as String,labelAr: freezed == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2303,7 +2306,11 @@ as String,
 /// @nodoc
 mixin _$RubricComponent {
 
- String get label; String? get detail; int get weight;
+ String get label;/// Written beside the English by the builder, from a table somebody wrote:
+/// the rubric is read off an English field note, so the app can only show
+/// a translation that exists. A reworded line falls back to English rather
+/// than being paired with an Arabic sentence that no longer matches it.
+@JsonKey(name: 'label_ar') String? get labelAr; String? get detail;@JsonKey(name: 'detail_ar') String? get detailAr; int get weight;
 /// Create a copy of RubricComponent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2316,16 +2323,16 @@ $RubricComponentCopyWith<RubricComponent> get copyWith => _$RubricComponentCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RubricComponent&&(identical(other.label, label) || other.label == label)&&(identical(other.detail, detail) || other.detail == detail)&&(identical(other.weight, weight) || other.weight == weight));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RubricComponent&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.detail, detail) || other.detail == detail)&&(identical(other.detailAr, detailAr) || other.detailAr == detailAr)&&(identical(other.weight, weight) || other.weight == weight));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,label,detail,weight);
+int get hashCode => Object.hash(runtimeType,label,labelAr,detail,detailAr,weight);
 
 @override
 String toString() {
-  return 'RubricComponent(label: $label, detail: $detail, weight: $weight)';
+  return 'RubricComponent(label: $label, labelAr: $labelAr, detail: $detail, detailAr: $detailAr, weight: $weight)';
 }
 
 
@@ -2336,7 +2343,7 @@ abstract mixin class $RubricComponentCopyWith<$Res>  {
   factory $RubricComponentCopyWith(RubricComponent value, $Res Function(RubricComponent) _then) = _$RubricComponentCopyWithImpl;
 @useResult
 $Res call({
- String label, String? detail, int weight
+ String label,@JsonKey(name: 'label_ar') String? labelAr, String? detail,@JsonKey(name: 'detail_ar') String? detailAr, int weight
 });
 
 
@@ -2353,10 +2360,12 @@ class _$RubricComponentCopyWithImpl<$Res>
 
 /// Create a copy of RubricComponent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? label = null,Object? detail = freezed,Object? weight = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? label = null,Object? labelAr = freezed,Object? detail = freezed,Object? detailAr = freezed,Object? weight = null,}) {
   return _then(_self.copyWith(
 label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
-as String,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String,labelAr: freezed == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String?,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,detailAr: freezed == detailAr ? _self.detailAr : detailAr // ignore: cast_nullable_to_non_nullable
 as String?,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -2443,10 +2452,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String label,  String? detail,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String label, @JsonKey(name: 'label_ar')  String? labelAr,  String? detail, @JsonKey(name: 'detail_ar')  String? detailAr,  int weight)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RubricComponent() when $default != null:
-return $default(_that.label,_that.detail,_that.weight);case _:
+return $default(_that.label,_that.labelAr,_that.detail,_that.detailAr,_that.weight);case _:
   return orElse();
 
 }
@@ -2464,10 +2473,10 @@ return $default(_that.label,_that.detail,_that.weight);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String label,  String? detail,  int weight)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String label, @JsonKey(name: 'label_ar')  String? labelAr,  String? detail, @JsonKey(name: 'detail_ar')  String? detailAr,  int weight)  $default,) {final _that = this;
 switch (_that) {
 case _RubricComponent():
-return $default(_that.label,_that.detail,_that.weight);case _:
+return $default(_that.label,_that.labelAr,_that.detail,_that.detailAr,_that.weight);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2484,10 +2493,10 @@ return $default(_that.label,_that.detail,_that.weight);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String label,  String? detail,  int weight)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String label, @JsonKey(name: 'label_ar')  String? labelAr,  String? detail, @JsonKey(name: 'detail_ar')  String? detailAr,  int weight)?  $default,) {final _that = this;
 switch (_that) {
 case _RubricComponent() when $default != null:
-return $default(_that.label,_that.detail,_that.weight);case _:
+return $default(_that.label,_that.labelAr,_that.detail,_that.detailAr,_that.weight);case _:
   return null;
 
 }
@@ -2499,11 +2508,17 @@ return $default(_that.label,_that.detail,_that.weight);case _:
 @JsonSerializable()
 
 class _RubricComponent extends RubricComponent {
-  const _RubricComponent({required this.label, this.detail, this.weight = 0}): super._();
+  const _RubricComponent({required this.label, @JsonKey(name: 'label_ar') this.labelAr, this.detail, @JsonKey(name: 'detail_ar') this.detailAr, this.weight = 0}): super._();
   factory _RubricComponent.fromJson(Map<String, dynamic> json) => _$RubricComponentFromJson(json);
 
 @override final  String label;
+/// Written beside the English by the builder, from a table somebody wrote:
+/// the rubric is read off an English field note, so the app can only show
+/// a translation that exists. A reworded line falls back to English rather
+/// than being paired with an Arabic sentence that no longer matches it.
+@override@JsonKey(name: 'label_ar') final  String? labelAr;
 @override final  String? detail;
+@override@JsonKey(name: 'detail_ar') final  String? detailAr;
 @override@JsonKey() final  int weight;
 
 /// Create a copy of RubricComponent
@@ -2519,16 +2534,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RubricComponent&&(identical(other.label, label) || other.label == label)&&(identical(other.detail, detail) || other.detail == detail)&&(identical(other.weight, weight) || other.weight == weight));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RubricComponent&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.detail, detail) || other.detail == detail)&&(identical(other.detailAr, detailAr) || other.detailAr == detailAr)&&(identical(other.weight, weight) || other.weight == weight));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,label,detail,weight);
+int get hashCode => Object.hash(runtimeType,label,labelAr,detail,detailAr,weight);
 
 @override
 String toString() {
-  return 'RubricComponent(label: $label, detail: $detail, weight: $weight)';
+  return 'RubricComponent(label: $label, labelAr: $labelAr, detail: $detail, detailAr: $detailAr, weight: $weight)';
 }
 
 
@@ -2539,7 +2554,7 @@ abstract mixin class _$RubricComponentCopyWith<$Res> implements $RubricComponent
   factory _$RubricComponentCopyWith(_RubricComponent value, $Res Function(_RubricComponent) _then) = __$RubricComponentCopyWithImpl;
 @override @useResult
 $Res call({
- String label, String? detail, int weight
+ String label,@JsonKey(name: 'label_ar') String? labelAr, String? detail,@JsonKey(name: 'detail_ar') String? detailAr, int weight
 });
 
 
@@ -2556,10 +2571,12 @@ class __$RubricComponentCopyWithImpl<$Res>
 
 /// Create a copy of RubricComponent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? label = null,Object? detail = freezed,Object? weight = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? label = null,Object? labelAr = freezed,Object? detail = freezed,Object? detailAr = freezed,Object? weight = null,}) {
   return _then(_RubricComponent(
 label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
-as String,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String,labelAr: freezed == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
+as String?,detail: freezed == detail ? _self.detail : detail // ignore: cast_nullable_to_non_nullable
+as String?,detailAr: freezed == detailAr ? _self.detailAr : detailAr // ignore: cast_nullable_to_non_nullable
 as String?,weight: null == weight ? _self.weight : weight // ignore: cast_nullable_to_non_nullable
 as int,
   ));

@@ -211,22 +211,31 @@ Map<String, dynamic> _$ScoringGuideToJson(_ScoringGuide instance) =>
 _ScoringBand _$ScoringBandFromJson(Map<String, dynamic> json) => _ScoringBand(
   score: (json['score'] as num?)?.toInt() ?? 0,
   label: json['label'] as String? ?? '',
+  labelAr: json['label_ar'] as String?,
 );
 
 Map<String, dynamic> _$ScoringBandToJson(_ScoringBand instance) =>
-    <String, dynamic>{'score': instance.score, 'label': instance.label};
+    <String, dynamic>{
+      'score': instance.score,
+      'label': instance.label,
+      'label_ar': instance.labelAr,
+    };
 
 _RubricComponent _$RubricComponentFromJson(Map<String, dynamic> json) =>
     _RubricComponent(
       label: json['label'] as String,
+      labelAr: json['label_ar'] as String?,
       detail: json['detail'] as String?,
+      detailAr: json['detail_ar'] as String?,
       weight: (json['weight'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$RubricComponentToJson(_RubricComponent instance) =>
     <String, dynamic>{
       'label': instance.label,
+      'label_ar': instance.labelAr,
       'detail': instance.detail,
+      'detail_ar': instance.detailAr,
       'weight': instance.weight,
     };
 

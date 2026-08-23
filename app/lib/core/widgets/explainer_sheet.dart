@@ -103,6 +103,7 @@ class _NotableTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return Container(
@@ -112,7 +113,7 @@ class _NotableTag extends StatelessWidget {
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
       child: Text(
-        Notability.notable.label.toUpperCase(),
+        Notability.notable.labelFor(l).toUpperCase(),
         style: BarbarianType.labelNano.copyWith(
           color: BarbarianPalette.onWash(c, c.accent),
         ),
@@ -317,7 +318,7 @@ class BExplainerSheet extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        explainer.notability.label,
+                        explainer.notability.labelFor(l),
                         style: BarbarianType.labelNano.copyWith(
                           color: explainer.notability == Notability.notable
                               ? BarbarianPalette.onWash(c, c.accent)
@@ -392,6 +393,7 @@ class BProvenanceMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
@@ -400,7 +402,7 @@ class BProvenanceMark extends StatelessWidget {
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
       child: Text(
-        provenance.label.toUpperCase(),
+        provenance.labelFor(l).toUpperCase(),
         style: BarbarianType.labelNano.copyWith(color: c.textMuted),
       ),
     );

@@ -3685,6 +3685,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EGX closing prices, {date}'**
   String expSourceClosesOn(String date);
+
+  /// No description provided for @notabilityOrdinary.
+  ///
+  /// In en, this message translates to:
+  /// **'Ordinary'**
+  String get notabilityOrdinary;
+
+  /// No description provided for @notabilityUnusual.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual'**
+  String get notabilityUnusual;
+
+  /// No description provided for @notabilityUnjudged.
+  ///
+  /// In en, this message translates to:
+  /// **'No published threshold'**
+  String get notabilityUnjudged;
+
+  /// No description provided for @provenanceFact.
+  ///
+  /// In en, this message translates to:
+  /// **'Fact'**
+  String get provenanceFact;
+
+  /// No description provided for @provenanceCalculation.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation'**
+  String get provenanceCalculation;
+
+  /// No description provided for @provenanceInterpretation.
+  ///
+  /// In en, this message translates to:
+  /// **'Interpretation'**
+  String get provenanceInterpretation;
 }
 
 class _AppLocalizationsDelegate

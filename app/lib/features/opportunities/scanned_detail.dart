@@ -428,6 +428,7 @@ class _Rubric extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final credits = rubric.where((r) => r.isCredit).toList();
     final penalties = rubric.where((r) => !r.isCredit).toList();
 
@@ -451,10 +452,10 @@ class _Rubric extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  r.label,
+                  r.labelFor(arabic),
                   style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
                 ),
-                if (r.detail case final String d) ...[
+                if (r.detailFor(arabic) case final String d) ...[
                   const SizedBox(height: 3),
                   Text(
                     d,

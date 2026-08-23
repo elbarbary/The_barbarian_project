@@ -325,12 +325,16 @@ abstract class ScoringBand with _$ScoringBand {
   const factory ScoringBand({
     @Default(0) int score,
     @Default('') String label,
+    @JsonKey(name: 'label_ar') String? labelAr,
   }) = _ScoringBand;
 
   const ScoringBand._();
 
   factory ScoringBand.fromJson(Map<String, dynamic> json) =>
       _$ScoringBandFromJson(json);
+
+  String labelFor(bool arabic) =>
+      arabic && (labelAr?.isNotEmpty ?? false) ? labelAr! : label;
 }
 
 /// One line of the published scoring rubric.
@@ -338,7 +342,14 @@ abstract class ScoringBand with _$ScoringBand {
 abstract class RubricComponent with _$RubricComponent {
   const factory RubricComponent({
     required String label,
+
+    /// Written beside the English by the builder, from a table somebody wrote:
+    /// the rubric is read off an English field note, so the app can only show
+    /// a translation that exists. A reworded line falls back to English rather
+    /// than being paired with an Arabic sentence that no longer matches it.
+    @JsonKey(name: 'label_ar') String? labelAr,
     String? detail,
+    @JsonKey(name: 'detail_ar') String? detailAr,
     @Default(0) int weight,
   }) = _RubricComponent;
 
@@ -348,6 +359,12 @@ abstract class RubricComponent with _$RubricComponent {
       _$RubricComponentFromJson(json);
 
   bool get isCredit => weight > 0;
+
+  String labelFor(bool arabic) =>
+      arabic && (labelAr?.isNotEmpty ?? false) ? labelAr! : label;
+
+  String? detailFor(bool arabic) =>
+      arabic && (detailAr?.isNotEmpty ?? false) ? detailAr : detail;
 }
 
 /// One published outcome: what happened to a name the scanner flagged.

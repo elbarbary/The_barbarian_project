@@ -10,18 +10,23 @@ import 'company.dart';
 /// judgement is arithmetic rather than opinion.
 enum Notability {
   /// Inside the normal band. Most figures, most days.
-  ordinary('Ordinary'),
+  ordinary,
 
   /// Outside it, by a stated threshold.
-  notable('Unusual'),
+  notable,
 
   /// The figure exists but has no published band to judge it against. Said
   /// out loud rather than defaulted to "ordinary", which would be a claim.
-  unjudged('No published threshold');
+  unjudged;
 
-  const Notability(this.label);
-
-  final String label;
+  /// The badge a reader sees, in their own language. It was an English
+  /// literal on the enum, so the chip on every explainer sheet said "FACT" or
+  /// "No published threshold" whatever the app was set to.
+  String labelFor(AppLocalizations l) => switch (this) {
+    Notability.ordinary => l.notabilityOrdinary,
+    Notability.notable => l.notabilityUnusual,
+    Notability.unjudged => l.notabilityUnjudged,
+  };
 }
 
 /// Where a figure came from, so a reader can weigh it (spec §50).
@@ -39,18 +44,20 @@ enum Notability {
 enum Provenance {
   /// Published by somebody else — the exchange, the company, an outlet. We
   /// copied it.
-  fact('Fact'),
+  fact,
 
   /// Our arithmetic over published figures. Reproducible, and the workings are
   /// on the same card.
-  calculation('Calculation'),
+  calculation,
 
   /// Our reading of what those figures mean. The only one that is an opinion.
-  interpretation('Interpretation');
+  interpretation;
 
-  const Provenance(this.label);
-
-  final String label;
+  String labelFor(AppLocalizations l) => switch (this) {
+    Provenance.fact => l.provenanceFact,
+    Provenance.calculation => l.provenanceCalculation,
+    Provenance.interpretation => l.provenanceInterpretation,
+  };
 }
 
 /// One number, explained.

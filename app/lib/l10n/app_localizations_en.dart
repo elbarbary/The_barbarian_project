@@ -2174,4 +2174,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String expSourceClosesOn(String date) {
     return 'EGX closing prices, $date';
   }
+
+  @override
+  String get notabilityOrdinary => 'Ordinary';
+
+  @override
+  String get notabilityUnusual => 'Unusual';
+
+  @override
+  String get notabilityUnjudged => 'No published threshold';
+
+  @override
+  String get provenanceFact => 'Fact';
+
+  @override
+  String get provenanceCalculation => 'Calculation';
+
+  @override
+  String get provenanceInterpretation => 'Interpretation';
 }

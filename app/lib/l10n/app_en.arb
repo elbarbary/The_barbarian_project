@@ -1602,5 +1602,11 @@
         "type": "String"
       }
     }
-  }
+  },
+  "notabilityOrdinary": "Ordinary",
+  "notabilityUnusual": "Unusual",
+  "notabilityUnjudged": "No published threshold",
+  "provenanceFact": "Fact",
+  "provenanceCalculation": "Calculation",
+  "provenanceInterpretation": "Interpretation"
 }
