@@ -24,6 +24,11 @@ yardstick, yardstick_ar)`:
   * `label` names the series
   * `meaning` is one sentence: what this is, for somebody who is not a trader
   * `chain` is how it reaches an Egyptian share, step by published step
+  * `cadence` is how often the source publishes and how far behind it runs,
+    which is the difference between a reading that is a week old because the
+    feed is weekly and one that is a week old because something broke. The
+    Suez card sat at seven days looking like a fault; the IMF simply
+    publishes it about a week behind.
   * `yardstick` is what would count as unusual — which for every series here
     is *nobody publishes a band*, said plainly rather than left blank. The app
     was rendering a section heading in this slot: four macro cards each opened
@@ -33,7 +38,9 @@ yardstick, yardstick_ar)`:
 
 from __future__ import annotations
 
-MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
+MACRO_TYPES: dict[
+    str, tuple[str, str, str, str, str, str, str, str, str, str]
+] = {
     "suez": (
         "Suez Canal traffic",
         "حركة قناة السويس",
@@ -56,6 +63,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "لا يوجد نطاق منشور يحدد ما هو الأسبوع العادي لحركة القناة، ولذلك لا "
         "يصف هذا التطبيق أي قراءة بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء "
         "ما سبقه.",
+        "The IMF publishes this from satellite tracking about a week behind, "
+        "so it is normally the oldest reading on the screen. A gap of several "
+        "days is the feed working, not a fault.",
+        "ينشر صندوق النقد الدولي هذا الرقم من التتبع بالأقمار الصناعية بتأخير "
+        "نحو أسبوع، ولذلك يكون عادةً أقدم قراءة على الشاشة. والفارق بضعة أيام "
+        "هو المصدر يعمل، لا خلل.",
     ),
     "brent": (
         "Brent crude",
@@ -75,6 +88,10 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للنفط، ولذلك لا يصف هذا "
         "التطبيق حركة يوم واحد بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء ما "
         "سبقه.",
+        "Quoted every trading day. It does not move at the weekend, because "
+        "the market that sets it is shut.",
+        "يُسعَّر كل يوم تداول. ولا يتحرك في عطلة نهاية الأسبوع لأن السوق الذي "
+        "يحدده مغلق.",
     ),
     "wti": (
         "WTI crude",
@@ -94,6 +111,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للنفط، ولذلك لا يصف هذا "
         "التطبيق حركة يوم واحد بأنها غير معتادة. والجدير بالمتابعة هنا هو "
         "الفارق عن برنت لا المستوى نفسه.",
+        "Quoted every trading day, and shown here only against Brent.",
+        "يُسعَّر كل يوم تداول، ويظهر هنا للمقارنة مع برنت فقط.",
     ),
     "gold": (
         "Gold",
@@ -118,6 +137,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للذهب، ولذلك لا يصف هذا "
         "التطبيق حركة يوم واحد بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء ما "
         "سبقه.",
+        "Quoted through the day, every day the metal market is open.",
+        "يُسعَّر على مدار اليوم، كل يوم يفتح فيه سوق المعادن.",
     ),
     "silver": (
         "Silver",
@@ -139,6 +160,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للفضة، ولذلك لا يصف هذا "
         "التطبيق حركة يوم واحد بأنها غير معتادة. والحالة الجديرة بالانتباه هي "
         "حين تفترق عن الذهب.",
+        "Quoted through the day, every day the metal market is open.",
+        "يُسعَّر على مدار اليوم، كل يوم يفتح فيه سوق المعادن.",
     ),
     "gdp_growth": (
         "Economic growth",
@@ -155,6 +178,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "not a signal.",
         "يُنشر النمو مرة كل ربع سنة من جهة واحدة، ولا يوجد نطاق يجعل قراءة "
         "منفردة معتادة أو غير معتادة. إنه خلفية لا إشارة.",
+        "Published once a quarter, and revised afterwards.",
+        "يُنشر مرة كل ربع سنة، ويُراجَع بعد ذلك.",
     ),
     "inflation": (
         "Inflation",
@@ -173,6 +198,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "is in that company's own filed results.",
         "يُنشر المعدل شهريًا وكل قراءة منه حقيقية؛ ولا يوجد نطاق يجعل إحداها "
         "غير معتادة. وأثره على شركة بعينها موجود في نتائجها المودعة نفسها.",
+        "Published once a month, a few days after the month it measures ends.",
+        "يُنشر مرة كل شهر، بعد أيام قليلة من انتهاء الشهر الذي يقيسه.",
     ),
     "fdi": (
         "Foreign direct investment",
@@ -189,6 +216,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "not a turning point and this app does not present it as one.",
         "يُنشر ربع سنوي ويُراجَع لاحقًا، ولذلك فالقراءة المنفردة ليست نقطة "
         "تحول ولا يقدّمها هذا التطبيق على أنها كذلك.",
+        "Published once a quarter, well after the quarter it covers.",
+        "يُنشر مرة كل ربع سنة، بعد وقت طويل من الربع الذي يغطيه.",
     ),
     "remittances": (
         "Remittances",
@@ -206,6 +235,8 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
         "single month is called unusual here.",
         "تُنشر شهريًا بعد فترة، وهي موسمية — فشهور رمضان والصيف لا تُقارن "
         "ببقية الشهور — ولذلك لا يوصف أي شهر منفرد هنا بأنه غير معتاد.",
+        "Published once a month, with a lag of several weeks.",
+        "تُنشر مرة كل شهر، بتأخير عدة أسابيع.",
     ),
 }
 
@@ -242,6 +273,14 @@ def yardstick(key: str) -> str:
 
 def yardstick_ar(key: str) -> str:
     return MACRO_TYPES[key][7] if key in MACRO_TYPES else ""
+
+
+def cadence(key: str) -> str:
+    return MACRO_TYPES[key][8] if key in MACRO_TYPES else ""
+
+
+def cadence_ar(key: str) -> str:
+    return MACRO_TYPES[key][9] if key in MACRO_TYPES else ""
 
 
 # Two different checks, because there are two different authors.

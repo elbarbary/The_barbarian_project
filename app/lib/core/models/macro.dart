@@ -70,6 +70,15 @@ abstract class MacroSeries with _$MacroSeries {
     @Default('') String yardstick,
     @JsonKey(name: 'yardstick_ar') @Default('') String yardstickAr,
 
+    /// How often the source publishes, and how far behind it runs.
+    ///
+    /// The difference between a reading that is a week old because the feed is
+    /// weekly and one that is a week old because something broke. The Suez
+    /// card sat at seven days looking like a fault; the IMF simply publishes
+    /// it about a week behind, from satellite tracking.
+    @Default('') String cadence,
+    @JsonKey(name: 'cadence_ar') @Default('') String cadenceAr,
+
     /// A model's line about *this* reading, when one was drafted and passed
     /// review. Absent far more often than not — the glossary above is the
     /// floor and this only ever sits on top of it.
@@ -106,6 +115,9 @@ abstract class MacroSeries with _$MacroSeries {
 
   String yardstickFor(bool arabic) =>
       arabic && yardstickAr.isNotEmpty ? yardstickAr : yardstick;
+
+  String cadenceFor(bool arabic) =>
+      arabic && cadenceAr.isNotEmpty ? cadenceAr : cadence;
 
   List<double> get values => [for (final p in history) p.value];
 

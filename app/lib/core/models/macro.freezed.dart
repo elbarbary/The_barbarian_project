@@ -327,7 +327,13 @@ mixin _$MacroSeries {
  String get meaning;@JsonKey(name: 'meaning_ar') String get meaningAr;/// How it reaches an Egyptian share, step by published step.
  String get chain;@JsonKey(name: 'chain_ar') String get chainAr;/// What would count as an unusual reading — which for every series here is
 /// *nobody publishes a band*, said plainly rather than left blank.
- String get yardstick;@JsonKey(name: 'yardstick_ar') String get yardstickAr;/// A model's line about *this* reading, when one was drafted and passed
+ String get yardstick;@JsonKey(name: 'yardstick_ar') String get yardstickAr;/// How often the source publishes, and how far behind it runs.
+///
+/// The difference between a reading that is a week old because the feed is
+/// weekly and one that is a week old because something broke. The Suez
+/// card sat at seven days looking like a fault; the IMF simply publishes
+/// it about a week behind, from satellite tracking.
+ String get cadence;@JsonKey(name: 'cadence_ar') String get cadenceAr;/// A model's line about *this* reading, when one was drafted and passed
 /// review. Absent far more often than not — the glossary above is the
 /// floor and this only ever sits on top of it.
  String? get insight; String get unit;@JsonKey(name: 'as_of') String get asOf; double get latest; double? get previous; List<MacroPoint> get history;/// Reporting that explains what this series has been doing.
@@ -349,16 +355,16 @@ $MacroSeriesCopyWith<MacroSeries> get copyWith => _$MacroSeriesCopyWithImpl<Macr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other.history, history)&&const DeepCollectionEquality().equals(other.coverage, coverage)&&(identical(other.source, source) || other.source == source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&(identical(other.cadenceAr, cadenceAr) || other.cadenceAr == cadenceAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other.history, history)&&const DeepCollectionEquality().equals(other.coverage, coverage)&&(identical(other.source, source) || other.source == source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,yardstick,yardstickAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(history),const DeepCollectionEquality().hash(coverage),source);
+int get hashCode => Object.hashAll([runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,yardstick,yardstickAr,cadence,cadenceAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(history),const DeepCollectionEquality().hash(coverage),source]);
 
 @override
 String toString() {
-  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, yardstick: $yardstick, yardstickAr: $yardstickAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
+  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, yardstick: $yardstick, yardstickAr: $yardstickAr, cadence: $cadence, cadenceAr: $cadenceAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
 }
 
 
@@ -369,7 +375,7 @@ abstract mixin class $MacroSeriesCopyWith<$Res>  {
   factory $MacroSeriesCopyWith(MacroSeries value, $Res Function(MacroSeries) _then) = _$MacroSeriesCopyWithImpl;
 @useResult
 $Res call({
- String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String yardstick,@JsonKey(name: 'yardstick_ar') String yardstickAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
+ String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String yardstick,@JsonKey(name: 'yardstick_ar') String yardstickAr, String cadence,@JsonKey(name: 'cadence_ar') String cadenceAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
 });
 
 
@@ -386,7 +392,7 @@ class _$MacroSeriesCopyWithImpl<$Res>
 
 /// Create a copy of MacroSeries
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? yardstick = null,Object? yardstickAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? yardstick = null,Object? yardstickAr = null,Object? cadence = null,Object? cadenceAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -397,6 +403,8 @@ as String,chain: null == chain ? _self.chain : chain // ignore: cast_nullable_to
 as String,chainAr: null == chainAr ? _self.chainAr : chainAr // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
+as String,cadence: null == cadence ? _self.cadence : cadence // ignore: cast_nullable_to_non_nullable
+as String,cadenceAr: null == cadenceAr ? _self.cadenceAr : cadenceAr // ignore: cast_nullable_to_non_nullable
 as String,insight: freezed == insight ? _self.insight : insight // ignore: cast_nullable_to_non_nullable
 as String?,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as String,asOf: null == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non_nullable
@@ -490,10 +498,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String cadence, @JsonKey(name: 'cadence_ar')  String cadenceAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MacroSeries() when $default != null:
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.cadence,_that.cadenceAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   return orElse();
 
 }
@@ -511,10 +519,10 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String cadence, @JsonKey(name: 'cadence_ar')  String cadenceAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)  $default,) {final _that = this;
 switch (_that) {
 case _MacroSeries():
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.cadence,_that.cadenceAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -531,10 +539,10 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String meaning, @JsonKey(name: 'meaning_ar')  String meaningAr,  String chain, @JsonKey(name: 'chain_ar')  String chainAr,  String yardstick, @JsonKey(name: 'yardstick_ar')  String yardstickAr,  String cadence, @JsonKey(name: 'cadence_ar')  String cadenceAr,  String? insight,  String unit, @JsonKey(name: 'as_of')  String asOf,  double latest,  double? previous,  List<MacroPoint> history,  List<MacroCoverage> coverage,  String source)?  $default,) {final _that = this;
 switch (_that) {
 case _MacroSeries() when $default != null:
-return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
+return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr,_that.chain,_that.chainAr,_that.yardstick,_that.yardstickAr,_that.cadence,_that.cadenceAr,_that.insight,_that.unit,_that.asOf,_that.latest,_that.previous,_that.history,_that.coverage,_that.source);case _:
   return null;
 
 }
@@ -546,7 +554,7 @@ return $default(_that.id,_that.label,_that.labelAr,_that.meaning,_that.meaningAr
 @JsonSerializable()
 
 class _MacroSeries extends MacroSeries {
-  const _MacroSeries({required this.id, this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.chain = '', @JsonKey(name: 'chain_ar') this.chainAr = '', this.yardstick = '', @JsonKey(name: 'yardstick_ar') this.yardstickAr = '', this.insight, this.unit = '', @JsonKey(name: 'as_of') this.asOf = '', this.latest = 0, this.previous, final  List<MacroPoint> history = const <MacroPoint>[], final  List<MacroCoverage> coverage = const <MacroCoverage>[], this.source = ''}): _history = history,_coverage = coverage,super._();
+  const _MacroSeries({required this.id, this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.meaning = '', @JsonKey(name: 'meaning_ar') this.meaningAr = '', this.chain = '', @JsonKey(name: 'chain_ar') this.chainAr = '', this.yardstick = '', @JsonKey(name: 'yardstick_ar') this.yardstickAr = '', this.cadence = '', @JsonKey(name: 'cadence_ar') this.cadenceAr = '', this.insight, this.unit = '', @JsonKey(name: 'as_of') this.asOf = '', this.latest = 0, this.previous, final  List<MacroPoint> history = const <MacroPoint>[], final  List<MacroCoverage> coverage = const <MacroCoverage>[], this.source = ''}): _history = history,_coverage = coverage,super._();
   factory _MacroSeries.fromJson(Map<String, dynamic> json) => _$MacroSeriesFromJson(json);
 
 @override final  String id;
@@ -562,6 +570,14 @@ class _MacroSeries extends MacroSeries {
 /// *nobody publishes a band*, said plainly rather than left blank.
 @override@JsonKey() final  String yardstick;
 @override@JsonKey(name: 'yardstick_ar') final  String yardstickAr;
+/// How often the source publishes, and how far behind it runs.
+///
+/// The difference between a reading that is a week old because the feed is
+/// weekly and one that is a week old because something broke. The Suez
+/// card sat at seven days looking like a fault; the IMF simply publishes
+/// it about a week behind, from satellite tracking.
+@override@JsonKey() final  String cadence;
+@override@JsonKey(name: 'cadence_ar') final  String cadenceAr;
 /// A model's line about *this* reading, when one was drafted and passed
 /// review. Absent far more often than not — the glossary above is the
 /// floor and this only ever sits on top of it.
@@ -611,16 +627,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other._history, _history)&&const DeepCollectionEquality().equals(other._coverage, _coverage)&&(identical(other.source, source) || other.source == source));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MacroSeries&&(identical(other.id, id) || other.id == id)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.meaning, meaning) || other.meaning == meaning)&&(identical(other.meaningAr, meaningAr) || other.meaningAr == meaningAr)&&(identical(other.chain, chain) || other.chain == chain)&&(identical(other.chainAr, chainAr) || other.chainAr == chainAr)&&(identical(other.yardstick, yardstick) || other.yardstick == yardstick)&&(identical(other.yardstickAr, yardstickAr) || other.yardstickAr == yardstickAr)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&(identical(other.cadenceAr, cadenceAr) || other.cadenceAr == cadenceAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.latest, latest) || other.latest == latest)&&(identical(other.previous, previous) || other.previous == previous)&&const DeepCollectionEquality().equals(other._history, _history)&&const DeepCollectionEquality().equals(other._coverage, _coverage)&&(identical(other.source, source) || other.source == source));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,yardstick,yardstickAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(_history),const DeepCollectionEquality().hash(_coverage),source);
+int get hashCode => Object.hashAll([runtimeType,id,label,labelAr,meaning,meaningAr,chain,chainAr,yardstick,yardstickAr,cadence,cadenceAr,insight,unit,asOf,latest,previous,const DeepCollectionEquality().hash(_history),const DeepCollectionEquality().hash(_coverage),source]);
 
 @override
 String toString() {
-  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, yardstick: $yardstick, yardstickAr: $yardstickAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
+  return 'MacroSeries(id: $id, label: $label, labelAr: $labelAr, meaning: $meaning, meaningAr: $meaningAr, chain: $chain, chainAr: $chainAr, yardstick: $yardstick, yardstickAr: $yardstickAr, cadence: $cadence, cadenceAr: $cadenceAr, insight: $insight, unit: $unit, asOf: $asOf, latest: $latest, previous: $previous, history: $history, coverage: $coverage, source: $source)';
 }
 
 
@@ -631,7 +647,7 @@ abstract mixin class _$MacroSeriesCopyWith<$Res> implements $MacroSeriesCopyWith
   factory _$MacroSeriesCopyWith(_MacroSeries value, $Res Function(_MacroSeries) _then) = __$MacroSeriesCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String yardstick,@JsonKey(name: 'yardstick_ar') String yardstickAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
+ String id, String label,@JsonKey(name: 'label_ar') String labelAr, String meaning,@JsonKey(name: 'meaning_ar') String meaningAr, String chain,@JsonKey(name: 'chain_ar') String chainAr, String yardstick,@JsonKey(name: 'yardstick_ar') String yardstickAr, String cadence,@JsonKey(name: 'cadence_ar') String cadenceAr, String? insight, String unit,@JsonKey(name: 'as_of') String asOf, double latest, double? previous, List<MacroPoint> history, List<MacroCoverage> coverage, String source
 });
 
 
@@ -648,7 +664,7 @@ class __$MacroSeriesCopyWithImpl<$Res>
 
 /// Create a copy of MacroSeries
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? yardstick = null,Object? yardstickAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? label = null,Object? labelAr = null,Object? meaning = null,Object? meaningAr = null,Object? chain = null,Object? chainAr = null,Object? yardstick = null,Object? yardstickAr = null,Object? cadence = null,Object? cadenceAr = null,Object? insight = freezed,Object? unit = null,Object? asOf = null,Object? latest = null,Object? previous = freezed,Object? history = null,Object? coverage = null,Object? source = null,}) {
   return _then(_MacroSeries(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
@@ -659,6 +675,8 @@ as String,chain: null == chain ? _self.chain : chain // ignore: cast_nullable_to
 as String,chainAr: null == chainAr ? _self.chainAr : chainAr // ignore: cast_nullable_to_non_nullable
 as String,yardstick: null == yardstick ? _self.yardstick : yardstick // ignore: cast_nullable_to_non_nullable
 as String,yardstickAr: null == yardstickAr ? _self.yardstickAr : yardstickAr // ignore: cast_nullable_to_non_nullable
+as String,cadence: null == cadence ? _self.cadence : cadence // ignore: cast_nullable_to_non_nullable
+as String,cadenceAr: null == cadenceAr ? _self.cadenceAr : cadenceAr // ignore: cast_nullable_to_non_nullable
 as String,insight: freezed == insight ? _self.insight : insight // ignore: cast_nullable_to_non_nullable
 as String?,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as String,asOf: null == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non_nullable

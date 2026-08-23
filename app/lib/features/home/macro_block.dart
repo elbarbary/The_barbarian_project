@@ -115,7 +115,10 @@ class _MacroCard extends StatelessWidget {
           plain: series.meaningFor(arabic),
           token: _reading(series),
           workings: series.chainFor(arabic),
-          yardstick: series.yardstickFor(arabic),
+          yardstick: [
+            series.yardstickFor(arabic),
+            series.cadenceFor(arabic),
+          ].where((line) => line.isNotEmpty).join('\n\n'),
           // No published band says what an ordinary day for the canal is, and
           // inventing one would be a claim rather than a reading.
           notability: Notability.unjudged,
@@ -211,6 +214,24 @@ class _MacroCard extends StatelessWidget {
                 height: 1.45,
               ),
             ),
+            // Why this one is older than the rest.
+            //
+            // Suez comes from IMF satellite tracking published about a week
+            // behind, so it is normally the oldest reading on the screen. Left
+            // unexplained, a card dated seven days ago reads as a broken feed
+            // — which is what it was reported as. Shown only once the gap is
+            // wide enough for a reader to wonder about it; on a same-day
+            // reading it would be furniture.
+            if (_stale(series) && series.cadenceFor(arabic).isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                series.cadenceFor(arabic),
+                style: BarbarianType.bodyS.copyWith(
+                  color: c.textFaint,
+                  height: 1.45,
+                ),
+              ),
+            ],
             if (lead) ...[
               const SizedBox(height: 12),
               Container(
@@ -283,6 +304,17 @@ class _MacroCard extends StatelessWidget {
         ? v.toStringAsFixed(1)
         : v.toStringAsFixed(2);
     return shown;
+  }
+
+  /// Whether the reading is old enough that a reader would ask why.
+  ///
+  /// Two days: a weekend gap on a daily series is ordinary and does not need
+  /// explaining, and anything past that is either a slow feed or a fault —
+  /// and the card can only tell the reader which if it says so.
+  static bool _stale(MacroSeries s) {
+    final at = DateTime.tryParse(s.asOf);
+    if (at == null) return false;
+    return DateTime.now().difference(at).inDays > 2;
   }
 
   /// The unit, as a word rather than as `USD/ounce`.

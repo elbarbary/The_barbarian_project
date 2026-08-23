@@ -23,7 +23,7 @@ class GlossaryTest(unittest.TestCase):
         # An Arabic reader meeting an English explanation is the failure this
         # app was built to avoid, and a half-filled entry is how it happens.
         for key, parts in glossary.MACRO_TYPES.items():
-            self.assertEqual(len(parts), 8, key)
+            self.assertEqual(len(parts), 10, key)
             for i, part in enumerate(parts):
                 self.assertTrue(part.strip(), f"{key} part {i} is empty")
 
