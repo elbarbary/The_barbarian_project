@@ -9,6 +9,9 @@ import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/market/market_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:barbarian/core/models/price_freshness_text.dart';
+import 'package:flutter/widgets.dart';
+
 import 'support/harness.dart';
 
 void main() {
@@ -98,59 +101,168 @@ void main() {
   });
 
   group('how the age is worded', () {
-    test('a trading session names the delay and the collection time', () {
-      final freshness = PriceFreshness(
-        kind: PriceFreshnessKind.live,
-        delay: const Duration(minutes: 15),
-        readAt: DateTime.now().subtract(const Duration(minutes: 3)),
-        sessionOpen: true,
-        sessionDate: '2026-08-13',
+    // The wording moved out of Dart and into the ARB so an Arabic reader stops
+    // meeting "During session · 2026-08-23" as their first full-width line on
+    // Home. That makes it editable by anyone with a text editor and no Dart
+    // review, so the rule this group exists to enforce — the app never calls a
+    // delayed price live — is now checked against what actually renders, in
+    // both languages, rather than against a string literal in this file.
+    testWidgets('a trading session names the delay and the collection time', (
+      tester,
+    ) async {
+      final said = await captionFor(
+        tester,
+        PriceFreshness(
+          kind: PriceFreshnessKind.live,
+          delay: const Duration(minutes: 15),
+          readAt: DateTime.now().subtract(const Duration(minutes: 3)),
+          sessionOpen: true,
+          sessionDate: '2026-08-13',
+        ),
       );
 
-      expect(freshness.caption, '15-min delayed · updated 3 min ago');
+      expect(said, '15 min behind the exchange · updated 3 min ago');
     });
 
-    test('outside the session it is a close, not a delayed price', () {
-      final freshness = PriceFreshness(
-        kind: PriceFreshnessKind.live,
-        delay: const Duration(minutes: 15),
-        readAt: DateTime.now(),
-        // Stated rather than left to the default: a closed session is the whole
-        // subject of this test.
-        // ignore: avoid_redundant_argument_values
-        sessionOpen: false,
-        sessionDate: '2026-08-13',
-      );
-
-      expect(freshness.caption, 'Market closed · last close 2026-08-13');
-      expect(freshness.caption, isNot(contains('delayed')));
-    });
-
-    test('with no feed it falls back to the published close', () {
-      expect(
-        const PriceFreshness.published('2026-08-13').caption,
-        'Last close · 2026-08-13',
-      );
-    });
-
-    test('never claims real-time while a delay exists', () {
-      for (final open in [true, false]) {
-        final caption = PriceFreshness(
+    testWidgets('outside the session it is a close, not a delayed price', (
+      tester,
+    ) async {
+      final said = await captionFor(
+        tester,
+        PriceFreshness(
           kind: PriceFreshnessKind.live,
           delay: const Duration(minutes: 15),
           readAt: DateTime.now(),
-          sessionOpen: open,
-        ).caption;
+          // Stated rather than left to the default: a closed session is the
+          // whole subject of this test.
+          // ignore: avoid_redundant_argument_values
+          sessionOpen: false,
+          sessionDate: '2026-08-13',
+        ),
+      );
 
-        expect(caption.toLowerCase(), isNot(contains('real-time')));
-        expect(caption.toLowerCase(), isNot(contains('live')));
+      expect(said, contains('Market closed'));
+      expect(said, isNot(contains('behind the exchange')));
+    });
+
+    testWidgets('with no feed it falls back to the published close', (
+      tester,
+    ) async {
+      final said = await captionFor(
+        tester,
+        const PriceFreshness.published('2026-08-13'),
+      );
+
+      expect(said, startsWith('Closing prices'));
+    });
+
+    // The session date used to render as an ISO string — "During session ·
+    // 2026-08-23" — which is a machine's way of saying today.
+    testWidgets('the session is dated the way a person says it', (
+      tester,
+    ) async {
+      final now = DateTime.now();
+      final iso =
+          '${now.year}-${now.month.toString().padLeft(2, '0')}'
+          '-${now.day.toString().padLeft(2, '0')}';
+
+      expect(
+        await captionFor(tester, PriceFreshness.published(iso)),
+        contains('Today'),
+      );
+      expect(
+        await captionFor(tester, PriceFreshness.published(iso), locale: 'ar'),
+        contains('اليوم'),
+      );
+    });
+
+    testWidgets('the Arabic build says all of it in Arabic', (tester) async {
+      final said = await captionFor(
+        tester,
+        PriceFreshness(
+          kind: PriceFreshnessKind.live,
+          delay: const Duration(minutes: 15),
+          readAt: DateTime.now().subtract(const Duration(minutes: 3)),
+          sessionOpen: true,
+        ),
+        locale: 'ar',
+      );
+
+      // Not one Latin letter, and it still carries both quantities. Digits
+      // stay Western: that is what Egyptian price screens use, and the rest of
+      // the Arabic build already counts that way.
+      expect(said, isNot(matches(RegExp(r'[A-Za-z]'))));
+      expect(said, contains('15 دقيقة'));
+      expect(said, contains('قبل 3 دقيقة'));
+    });
+
+    testWidgets('never claims real-time, in either language', (tester) async {
+      for (final locale in ['en', 'ar']) {
+        for (final open in [true, false]) {
+          for (final short in [true, false]) {
+            final said = await captionFor(
+              tester,
+              PriceFreshness(
+                kind: PriceFreshnessKind.live,
+                delay: const Duration(minutes: 15),
+                readAt: DateTime.now(),
+                sessionOpen: open,
+              ),
+              locale: locale,
+              short: short,
+            );
+
+            for (final banned in liveClaims) {
+              expect(
+                said.toLowerCase(),
+                isNot(contains(banned)),
+                reason:
+                    '"$said" ($locale) claims a feed this app does not have',
+              );
+            }
+          }
+        }
+      }
+    });
+
+    // Every sentence this extension can produce, in both languages, against the
+    // same list — so a new state cannot be added with a claim in it.
+    testWidgets('no reachable wording claims a live feed', (tester) async {
+      final states = <PriceFreshness>[
+        const PriceFreshness.unknown(),
+        const PriceFreshness.sample(),
+        const PriceFreshness.published('2026-08-13'),
+        const PriceFreshness.published('2026-08-13', isClose: false),
+        PriceFreshness(
+          kind: PriceFreshnessKind.live,
+          delay: const Duration(seconds: 30),
+          readAt: DateTime.now(),
+          sessionOpen: true,
+        ),
+        PriceFreshness(
+          kind: PriceFreshnessKind.live,
+          delay: const Duration(hours: 2),
+          readAt: DateTime.now().subtract(const Duration(days: 2)),
+          sessionOpen: true,
+        ),
+      ];
+
+      for (final locale in ['en', 'ar']) {
+        for (final state in states) {
+          final said = await captionFor(tester, state, locale: locale);
+          for (final banned in liveClaims) {
+            expect(said.toLowerCase(), isNot(contains(banned)), reason: said);
+          }
+        }
       }
     });
 
     // The app has no licence for a real-time EGX feed, so a zero delay means
     // the feed stopped stating its tier — not that it was upgraded. Rendering
     // that as "Real-time" put a false claim beside a quarter-hour-old price.
-    test('a zero delay is treated as unknown, never as real-time', () {
+    testWidgets('a zero delay is treated as unknown, never as real-time', (
+      tester,
+    ) async {
       final freshness = PriceFreshness(
         kind: PriceFreshnessKind.live,
         // ignore: avoid_redundant_argument_values
@@ -159,9 +271,14 @@ void main() {
         sessionOpen: true,
       );
 
-      expect(freshness.caption, '15-min delayed · updated just now');
-      expect(freshness.shortCaption, '15-min delayed');
-      expect(freshness.caption.toLowerCase(), isNot(contains('real-time')));
+      expect(
+        await captionFor(tester, freshness),
+        '15 min behind the exchange · updated just now',
+      );
+      expect(
+        await captionFor(tester, freshness, short: true),
+        '15 min behind the exchange',
+      );
     });
 
     test('a snapshot that parsed without a delay field still says delayed', () {
@@ -174,15 +291,20 @@ void main() {
       expect(parsed.delay, const Duration(seconds: 900));
     });
 
-    test('the elapsed part tracks the clock rather than the poll', () {
-      final freshness = PriceFreshness(
-        kind: PriceFreshnessKind.live,
-        delay: const Duration(minutes: 15),
-        readAt: DateTime.now().subtract(const Duration(minutes: 47)),
-        sessionOpen: true,
+    testWidgets('the elapsed part tracks the clock rather than the poll', (
+      tester,
+    ) async {
+      final said = await captionFor(
+        tester,
+        PriceFreshness(
+          kind: PriceFreshnessKind.live,
+          delay: const Duration(minutes: 15),
+          readAt: DateTime.now().subtract(const Duration(minutes: 47)),
+          sessionOpen: true,
+        ),
       );
 
-      expect(freshness.caption, contains('47 min ago'));
+      expect(said, contains('47 min ago'));
     });
   });
 
@@ -197,22 +319,33 @@ void main() {
           quotes: fakeQuotes({'COMI': 139.25}),
         ),
       );
-      await pumpUntil(tester, find.textContaining('delayed'));
+      await pumpUntil(tester, find.textContaining('behind the exchange'));
 
-      expect(find.textContaining('15-min delayed'), findsOneWidget);
+      expect(find.textContaining('15 min behind the exchange'), findsOneWidget);
     });
 
-    testWidgets('Market falls back to the published prices when the feed is down', (
-      tester,
-    ) async {
-      usePhoneSurface(tester);
-      await tester.pumpWidget(harness(const MarketScreen(parentTab: BNavTab.home)));
-      await pumpUntil(tester, find.textContaining(fixtureSessionDate));
+    testWidgets(
+      'Market falls back to the published prices when the feed is down',
+      (tester) async {
+        usePhoneSurface(tester);
+        await tester.pumpWidget(
+          harness(const MarketScreen(parentTab: BNavTab.home)),
+        );
 
-      // Dated by the publish, and making no claim about a live feed.
-      expect(find.textContaining(fixtureSessionDate), findsWidgets);
-      expect(find.textContaining('delayed'), findsNothing);
-    });
+        // Read from the fixture, not written here: the pipeline regenerates it
+        // every day, and whether the scan caught the close or ran mid-session is
+        // the difference between two different true sentences.
+        final published = readFixtureObjectSync('market.json');
+        final state = (published['is_close'] as bool? ?? true)
+            ? 'Closing prices'
+            : 'while trading was open';
+        await pumpUntil(tester, find.textContaining(state));
+
+        // Described by the publish, and making no claim about a live feed.
+        expect(find.textContaining(state), findsWidgets);
+        expect(find.textContaining('behind the exchange'), findsNothing);
+      },
+    );
 
     testWidgets('a live price reaches the company screen', (tester) async {
       usePhoneSurface(tester);
@@ -225,7 +358,7 @@ void main() {
       await pumpUntil(tester, find.textContaining('1234.50'));
 
       expect(find.textContaining('1234.50'), findsWidgets);
-      expect(find.textContaining('15-min delayed'), findsOneWidget);
+      expect(find.textContaining('15 min behind the exchange'), findsOneWidget);
     });
   });
 
@@ -281,23 +414,26 @@ void main() {
       expect(await cache.read('market.json'), isNull);
     });
 
-    test('a later launch with a working network gets the real document', () async {
-      final cache = MemoryDocumentCache();
-      await api(
-        network: {'manifest.json': manifest},
-        seed: {'market.json': 'from bundle'},
-        cache: cache,
-      ).loadOnce('market.json', resource: 'market');
+    test(
+      'a later launch with a working network gets the real document',
+      () async {
+        final cache = MemoryDocumentCache();
+        await api(
+          network: {'manifest.json': manifest},
+          seed: {'market.json': 'from bundle'},
+          cache: cache,
+        ).loadOnce('market.json', resource: 'market');
 
-      // Same cache, network now reachable — as after a bad first launch.
-      final snapshot = await api(
-        network: {'manifest.json': manifest, 'market.json': 'from network'},
-        seed: {'market.json': 'from bundle'},
-        cache: cache,
-      ).loadOnce('market.json', resource: 'market');
+        // Same cache, network now reachable — as after a bad first launch.
+        final snapshot = await api(
+          network: {'manifest.json': manifest, 'market.json': 'from network'},
+          seed: {'market.json': 'from bundle'},
+          cache: cache,
+        ).loadOnce('market.json', resource: 'market');
 
-      expect(snapshot!.body, 'from network');
-    });
+        expect(snapshot!.body, 'from network');
+      },
+    );
 
     // A broken cache is not a broken screen. When FileDocumentCache let a
     // MissingPluginException escape, StaticApi.load errored before it made any
@@ -339,8 +475,10 @@ void main() {
       });
       final api = StaticApi(source: source, cache: cache);
 
-      expect((await api.loadOnce('market.json', resource: 'market'))!.body,
-          'first publish');
+      expect(
+        (await api.loadOnce('market.json', resource: 'market'))!.body,
+        'first publish',
+      );
 
       // The site publishes again: new content, new version counter.
       source.documents['manifest.json'] =
@@ -350,8 +488,10 @@ void main() {
       // What Refresh does.
       api.invalidateManifest();
 
-      expect((await api.loadOnce('market.json', resource: 'market'))!.body,
-          'second publish');
+      expect(
+        (await api.loadOnce('market.json', resource: 'market'))!.body,
+        'second publish',
+      );
     });
 
     test('without invalidation the manifest is re-read once it is stale', () {
@@ -428,4 +568,40 @@ class _StubSource implements DocumentSource {
     if (body == null) throw DocumentUnavailable(path, reason);
     return body;
   }
+}
+
+/// Words that would claim a feed this app does not have, in both languages.
+///
+/// Arabic named explicitly: the wording lives in the ARB now, where a
+/// well-meaning translator could reach for مباشر without ever opening Dart.
+const liveClaims = <String>[
+  'real-time',
+  'realtime',
+  'live',
+  'مباشر',
+  'لحظي',
+  'فوري',
+];
+
+/// Renders one [PriceFreshness] through the real extension and reads it back.
+Future<String> captionFor(
+  WidgetTester tester,
+  PriceFreshness freshness, {
+  String locale = 'en',
+  bool short = false,
+}) async {
+  late String said;
+  await tester.pumpWidget(
+    harness(
+      Builder(
+        builder: (context) {
+          said = context.freshnessCaption(freshness, short: short);
+          return const SizedBox.shrink();
+        },
+      ),
+      locale: Locale(locale),
+    ),
+  );
+  await tester.pump();
+  return said;
 }

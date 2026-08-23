@@ -93,11 +93,15 @@ class Recency {
 
 /// Convenience for widgets that already have a [BuildContext].
 extension RecencyContext on BuildContext {
-  String? newsAge(DateTime? at) =>
-      Recency.newsAge(at, AppLocalizations.of(this),
-          locale: Localizations.localeOf(this).toLanguageTag());
+  String? newsAge(DateTime? at) => Recency.newsAge(
+    at,
+    AppLocalizations.of(this),
+    locale: Localizations.localeOf(this).toLanguageTag(),
+  );
 
-  String? filingAge(String? isoDate) =>
-      Recency.filingAge(isoDate, AppLocalizations.of(this),
-          locale: Localizations.localeOf(this).toLanguageTag());
+  String? filingAge(String? isoDate) => Recency.filingAge(
+    isoDate,
+    AppLocalizations.of(this),
+    locale: Localizations.localeOf(this).toLanguageTag(),
+  );
 }

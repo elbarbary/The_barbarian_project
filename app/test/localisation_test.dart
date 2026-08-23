@@ -45,7 +45,8 @@ void main() {
   const allowed = {
     'The Pit': 'a product name, like Thndr or EGX',
     'A–Z': 'a sort order written the same way in both alphabets',
-    'Today': 'only as a product/screen name where the ARB key is used elsewhere',
+    'Today':
+        'only as a product/screen name where the ARB key is used elsewhere',
   };
 
   test('no user-facing string is hardcoded into a widget', () {
@@ -173,7 +174,8 @@ void main() {
     // `placeholders` objects, and a regex over the raw text counts those as
     // keys and then reports a difference that is not there.
     Set<String> keysOf(String path) {
-      final doc = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
+      final doc =
+          jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
       return doc.keys.where((k) => !k.startsWith('@')).toSet();
     }
 

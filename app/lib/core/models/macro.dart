@@ -96,7 +96,8 @@ abstract class MacroSeries with _$MacroSeries {
   String meaningFor(bool arabic) =>
       arabic && meaningAr.isNotEmpty ? meaningAr : meaning;
 
-  String chainFor(bool arabic) => arabic && chainAr.isNotEmpty ? chainAr : chain;
+  String chainFor(bool arabic) =>
+      arabic && chainAr.isNotEmpty ? chainAr : chain;
 
   List<double> get values => [for (final p in history) p.value];
 

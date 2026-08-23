@@ -1370,4 +1370,230 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedExchange => 'من البورصة';
+
+  @override
+  String get freshLoading => 'جارٍ تحميل الأسعار';
+
+  @override
+  String get freshSample => 'بيانات تجريبية · ليست أسعارًا حقيقية';
+
+  @override
+  String get freshLastClose => 'أسعار الإغلاق';
+
+  @override
+  String get freshDuringSession => 'أسعار أثناء التداول';
+
+  @override
+  String freshOnDay(String state, String day) {
+    return '$state · $day';
+  }
+
+  @override
+  String get freshMarketClosed => 'السوق مغلق · أسعار الإغلاق';
+
+  @override
+  String freshMarketClosedOn(String day) {
+    return 'السوق مغلق · إغلاق $day';
+  }
+
+  @override
+  String freshDelayed(String delay, String since) {
+    return 'متأخرة $delay عن البورصة · حُدِّثت $since';
+  }
+
+  @override
+  String freshDelayedShort(String delay) {
+    return 'متأخرة $delay عن البورصة';
+  }
+
+  @override
+  String freshDelaySeconds(int count) {
+    return '$count ثانية';
+  }
+
+  @override
+  String freshDelayMinutes(int count) {
+    return '$count دقيقة';
+  }
+
+  @override
+  String freshDelayHours(int count) {
+    return '$count ساعة';
+  }
+
+  @override
+  String get freshSinceJustNow => 'للتو';
+
+  @override
+  String freshSinceMinutes(int count) {
+    return 'قبل $count دقيقة';
+  }
+
+  @override
+  String freshSinceHours(int count) {
+    return 'قبل $count ساعة';
+  }
+
+  @override
+  String freshSinceDays(int count) {
+    return 'قبل $count يوم';
+  }
+
+  @override
+  String youCompaniesCount(int count) {
+    return '$count في الدليل';
+  }
+
+  @override
+  String youPricesLive(int delay, int refresh) {
+    return 'متأخرة $delay دقيقة عن البورصة، وتُحدَّث كل $refresh دقائق. لا يوجد بث لحظي.';
+  }
+
+  @override
+  String get youPricesClose => 'أسعار الإغلاق فقط. لا يوجد بث لحظي.';
+
+  @override
+  String get unitBillionsEgp => 'مليار جنيه';
+
+  @override
+  String get unitMillionsEgp => 'مليون جنيه';
+
+  @override
+  String get unitThousandsEgp => 'ألف جنيه';
+
+  @override
+  String get unitEgp => 'جنيه';
+
+  @override
+  String moneyWithUnit(String value, String unit) {
+    return '$value $unit';
+  }
+
+  @override
+  String finUnitPeriod(String unit, String period) {
+    return '$unit · $period';
+  }
+
+  @override
+  String finFiguresUnit(String unit) {
+    return 'الوحدة: $unit';
+  }
+
+  @override
+  String get pmToProfit => 'إلى ربح';
+
+  @override
+  String get pmToLoss => 'إلى خسارة';
+
+  @override
+  String get pmUnchanged => 'بلا تغيير';
+
+  @override
+  String get pmWiderLoss => 'خسارة أكبر';
+
+  @override
+  String get pmSmallerLoss => 'خسارة أقل';
+
+  @override
+  String pmMadeMoneyAfterBreakEven(String now, String prior) {
+    return 'حقّق ربحًا في $now، بعد أن تعادل في $prior.';
+  }
+
+  @override
+  String pmMadeMoneyAfterLoss(String now, String amount, String prior) {
+    return 'حقّق ربحًا في $now، بعد خسارة $amount في $prior.';
+  }
+
+  @override
+  String pmLostAfterProfit(String now, String amount, String prior) {
+    return 'خسر في $now، بعد ربح $amount في $prior.';
+  }
+
+  @override
+  String pmLossSame(String prior, String amount) {
+    return 'الخسارة كما كانت في $prior، عند $amount.';
+  }
+
+  @override
+  String pmLossGrew(String from, String to, String prior) {
+    return 'اتّسعت الخسارة من $from إلى $to مقارنة بـ$prior.';
+  }
+
+  @override
+  String pmLossShrank(String from, String to, String prior) {
+    return 'تراجعت الخسارة من $from إلى $to مقارنة بـ$prior.';
+  }
+
+  @override
+  String pmProfitUnchanged(String prior, String amount) {
+    return 'لم يتغيّر الربح مقارنة بـ$prior، عند $amount.';
+  }
+
+  @override
+  String pmTimesSentence(String times, String amount, String prior) {
+    return 'أي $times أضعاف الـ$amount التي أعلنها في $prior.';
+  }
+
+  @override
+  String pmRose(String prior, String amount) {
+    return 'ارتفع الربح مقارنة بـ$prior، حين أعلن $amount.';
+  }
+
+  @override
+  String pmFell(String prior, String amount) {
+    return 'تراجع الربح مقارنة بـ$prior، حين أعلن $amount.';
+  }
+
+  @override
+  String get figSharesTradedToday => 'الأسهم المتداولة اليوم';
+
+  @override
+  String get perf1Week => 'أسبوع';
+
+  @override
+  String get perf1Month => 'شهر';
+
+  @override
+  String get perf3Months => '3 أشهر';
+
+  @override
+  String get perf5Sessions => '5 جلسات';
+
+  @override
+  String get finGroupBasis => 'مجمّعة';
+
+  @override
+  String periodQuarter1(String year) {
+    return 'الربع الأول $year';
+  }
+
+  @override
+  String periodQuarter2(String year) {
+    return 'الربع الثاني $year';
+  }
+
+  @override
+  String periodQuarter3(String year) {
+    return 'الربع الثالث $year';
+  }
+
+  @override
+  String periodQuarter4(String year) {
+    return 'الربع الرابع $year';
+  }
+
+  @override
+  String periodHalf1(String year) {
+    return 'النصف الأول $year';
+  }
+
+  @override
+  String periodHalf2(String year) {
+    return 'النصف الثاني $year';
+  }
+
+  @override
+  String periodFullYear(String year) {
+    return 'السنة المالية $year';
+  }
 }

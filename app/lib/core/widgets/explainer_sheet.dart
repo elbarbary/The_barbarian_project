@@ -48,9 +48,7 @@ class BPlainNumber extends StatelessWidget {
                 Expanded(
                   child: Text(
                     explainer.title,
-                    style: BarbarianType.labelNano.copyWith(
-                      color: c.textMuted,
-                    ),
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                   ),
                 ),
                 if (explainer.notability == Notability.notable)
@@ -75,17 +73,11 @@ class BPlainNumber extends StatelessWidget {
                 _DottedUnderline(
                   child: Text(
                     explainer.token,
-                    style: BarbarianType.figureXs.copyWith(
-                      color: c.textMuted,
-                    ),
+                    style: BarbarianType.figureXs.copyWith(color: c.textMuted),
                   ),
                 ),
                 const SizedBox(width: 8),
-                Icon(
-                  Icons.unfold_more_rounded,
-                  size: 13,
-                  color: c.textFaint,
-                ),
+                Icon(Icons.unfold_more_rounded, size: 13, color: c.textFaint),
               ],
             ),
           ],
@@ -134,10 +126,7 @@ class _DottedUnderline extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       foregroundPainter: _DottedPainter(context.colors.textFaint),
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 3),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.only(bottom: 3), child: child),
     );
   }
 }
@@ -180,8 +169,7 @@ Future<void> showExplainer(
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
-    builder: (context) =>
-        BExplainerSheet(explainer: explainer, series: series),
+    builder: (context) => BExplainerSheet(explainer: explainer, series: series),
   );
 }
 
@@ -270,9 +258,7 @@ class BExplainerSheet extends StatelessWidget {
             // reader who opened this from a card was usually looking at the
             // line, not at the sum.
             if (series.length > 1) ...[
-              BPaperCard(
-                child: BSparkline(values: series, height: 132),
-              ),
+              BPaperCard(child: BSparkline(values: series, height: 132)),
               const SizedBox(height: 14),
             ],
 
@@ -284,9 +270,7 @@ class BExplainerSheet extends StatelessWidget {
                 children: [
                   Text(
                     'HOW IT IS WORKED OUT',
-                    style: BarbarianType.labelNano.copyWith(
-                      color: c.textMuted,
-                    ),
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -362,11 +346,7 @@ class BExplainerSheet extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.description_outlined,
-                  size: 15,
-                  color: c.textFaint,
-                ),
+                Icon(Icons.description_outlined, size: 15, color: c.textFaint),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(

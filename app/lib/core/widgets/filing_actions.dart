@@ -42,10 +42,7 @@ Future<void> showFilingActions(
         in directory?.companies ?? const <CompanySummary>[])
       company.ticker,
   };
-  final ticker = filing.tickers.firstWhere(
-    known.contains,
-    orElse: () => '',
-  );
+  final ticker = filing.tickers.firstWhere(known.contains, orElse: () => '');
 
   await showModalBottomSheet<void>(
     context: context,
@@ -94,9 +91,7 @@ Future<void> showFilingActions(
             label: l.filingReadFiling,
             onTap: () {
               Navigator.of(sheet).pop();
-              context.push(
-                Routes.articlePath(from, filing.link, 'EGX filing'),
-              );
+              context.push(Routes.articlePath(from, filing.link, 'EGX filing'));
             },
           ),
         ],
@@ -106,11 +101,7 @@ Future<void> showFilingActions(
 }
 
 class _Choice extends StatelessWidget {
-  const _Choice({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
+  const _Choice({required this.icon, required this.label, required this.onTap});
 
   final IconData icon;
   final String label;

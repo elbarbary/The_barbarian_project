@@ -70,7 +70,9 @@ class BTickerMonogram extends StatelessWidget {
             // The tile is a wash of this same tone, so the letters have to be
             // pulled off it — three of the five verdict bands fail at 12pt
             // printed undiluted on their own wash.
-            color: tone == null ? resolved : BarbarianPalette.onWash(c, resolved),
+            color: tone == null
+                ? resolved
+                : BarbarianPalette.onWash(c, resolved),
             fontSize: 12,
             letterSpacing: 0.72,
           ),
@@ -109,21 +111,26 @@ class BStatTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
 
-    final valueRow = Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
+    // The unit sits under the figure rather than beside it.
+    //
+    // Beside it, a unit was a one- or two-character abbreviation — "m", "×" —
+    // because anything a reader could actually understand overflowed a
+    // half-width tile. Under it, "million EGP" and "مليون جنيه" both fit, and
+    // the figure keeps its full size.
+    final valueRow = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Flexible(
-          child: BNumText(
-            value,
-            style: BarbarianType.figureL.copyWith(color: c.textPrimary),
-          ),
+        BNumText(
+          value,
+          style: BarbarianType.figureL.copyWith(color: c.textPrimary),
         ),
         if (unit case final String u) ...[
-          const SizedBox(width: 4),
+          const SizedBox(height: 2),
           Text(
             u,
             style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+            maxLines: 2,
           ),
         ],
       ],
@@ -162,10 +169,7 @@ class BStatTile extends StatelessWidget {
             const SizedBox(height: 6),
             labelText,
           ],
-          if (delta case final Widget d) ...[
-            const SizedBox(height: 8),
-            d,
-          ],
+          if (delta case final Widget d) ...[const SizedBox(height: 8), d],
         ],
       ),
     );
@@ -521,10 +525,26 @@ class BEmptyState extends StatelessWidget {
               opacity: 0.55,
               child: ColorFiltered(
                 colorFilter: const ColorFilter.matrix(<double>[
-                  0.33, 0.33, 0.33, 0, 0,
-                  0.33, 0.33, 0.33, 0, 0,
-                  0.33, 0.33, 0.33, 0, 0,
-                  0, 0, 0, 1, 0,
+                  0.33,
+                  0.33,
+                  0.33,
+                  0,
+                  0,
+                  0.33,
+                  0.33,
+                  0.33,
+                  0,
+                  0,
+                  0.33,
+                  0.33,
+                  0.33,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
                 ]),
                 child: g,
               ),
@@ -679,9 +699,7 @@ class BVerdictBadge extends StatelessWidget {
     // On ink the ramp lifts. [BarbarianPalette.verdict] deepens both ends
     // toward paper, which puts Toxic within 1.07:1 of the slab — a badge that
     // stops being a badge on precisely the card that shouts loudest.
-    final colour = onDark
-        ? BarbarianPalette.verdictOnInk(c, verdict)
-        : tint(c);
+    final colour = onDark ? BarbarianPalette.verdictOnInk(c, verdict) : tint(c);
 
     return Semantics(
       label: score == null
@@ -793,18 +811,13 @@ class BResearchCard extends StatelessWidget {
             ),
           ),
         ],
-        if (trailing case final Widget t) ...[
-          const SizedBox(height: 12),
-          t,
-        ],
+        if (trailing case final Widget t) ...[const SizedBox(height: 12), t],
       ],
     );
 
     final card = SizedBox(
       width: width,
-      child: dark
-          ? BDarkCard(child: content)
-          : BPaperCard(child: content),
+      child: dark ? BDarkCard(child: content) : BPaperCard(child: content),
     );
 
     return onTap == null ? card : BPressable(onTap: onTap, child: card);

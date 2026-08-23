@@ -26,9 +26,6 @@ class Sourced<T> {
     return DateTime.now().difference(at);
   }
 
-  Sourced<R> map<R>(R Function(T value) transform) => Sourced<R>(
-    value: transform(value),
-    origin: origin,
-    storedAt: storedAt,
-  );
+  Sourced<R> map<R>(R Function(T value) transform) =>
+      Sourced<R>(value: transform(value), origin: origin, storedAt: storedAt);
 }

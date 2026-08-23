@@ -2485,6 +2485,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'From the exchange'**
   String get feedExchange;
+
+  /// No description provided for @freshLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices loading'**
+  String get freshLoading;
+
+  /// No description provided for @freshSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample data · not real prices'**
+  String get freshSample;
+
+  /// No description provided for @freshLastClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Closing prices'**
+  String get freshLastClose;
+
+  /// No description provided for @freshDuringSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Prices from while trading was open'**
+  String get freshDuringSession;
+
+  /// No description provided for @freshOnDay.
+  ///
+  /// In en, this message translates to:
+  /// **'{state} · {day}'**
+  String freshOnDay(String state, String day);
+
+  /// No description provided for @freshMarketClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Market closed · closing prices'**
+  String get freshMarketClosed;
+
+  /// No description provided for @freshMarketClosedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Market closed · close of {day}'**
+  String freshMarketClosedOn(String day);
+
+  /// No description provided for @freshDelayed.
+  ///
+  /// In en, this message translates to:
+  /// **'{delay} behind the exchange · updated {since}'**
+  String freshDelayed(String delay, String since);
+
+  /// No description provided for @freshDelayedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{delay} behind the exchange'**
+  String freshDelayedShort(String delay);
+
+  /// No description provided for @freshDelaySeconds.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sec'**
+  String freshDelaySeconds(int count);
+
+  /// No description provided for @freshDelayMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min'**
+  String freshDelayMinutes(int count);
+
+  /// No description provided for @freshDelayHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hr'**
+  String freshDelayHours(int count);
+
+  /// No description provided for @freshSinceJustNow.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get freshSinceJustNow;
+
+  /// No description provided for @freshSinceMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min ago'**
+  String freshSinceMinutes(int count);
+
+  /// No description provided for @freshSinceHours.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hr ago'**
+  String freshSinceHours(int count);
+
+  /// No description provided for @freshSinceDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String freshSinceDays(int count);
+
+  /// No description provided for @youCompaniesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} in the directory'**
+  String youCompaniesCount(int count);
+
+  /// No description provided for @youPricesLive.
+  ///
+  /// In en, this message translates to:
+  /// **'{delay} minutes behind the exchange, refreshed every {refresh} minutes. There is no live feed.'**
+  String youPricesLive(int delay, int refresh);
+
+  /// No description provided for @youPricesClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Closing prices only. There is no live feed.'**
+  String get youPricesClose;
+
+  /// No description provided for @unitBillionsEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'billion EGP'**
+  String get unitBillionsEgp;
+
+  /// No description provided for @unitMillionsEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'million EGP'**
+  String get unitMillionsEgp;
+
+  /// No description provided for @unitThousandsEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'thousand EGP'**
+  String get unitThousandsEgp;
+
+  /// No description provided for @unitEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get unitEgp;
+
+  /// No description provided for @moneyWithUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'{value} {unit}'**
+  String moneyWithUnit(String value, String unit);
+
+  /// No description provided for @finUnitPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'{unit} · {period}'**
+  String finUnitPeriod(String unit, String period);
+
+  /// No description provided for @finFiguresUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit: {unit}'**
+  String finFiguresUnit(String unit);
+
+  /// No description provided for @pmToProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'to a profit'**
+  String get pmToProfit;
+
+  /// No description provided for @pmToLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'to a loss'**
+  String get pmToLoss;
+
+  /// No description provided for @pmUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'unchanged'**
+  String get pmUnchanged;
+
+  /// No description provided for @pmWiderLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'wider loss'**
+  String get pmWiderLoss;
+
+  /// No description provided for @pmSmallerLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'smaller loss'**
+  String get pmSmallerLoss;
+
+  /// No description provided for @pmMadeMoneyAfterBreakEven.
+  ///
+  /// In en, this message translates to:
+  /// **'It made money in {now}, after breaking even in {prior}.'**
+  String pmMadeMoneyAfterBreakEven(String now, String prior);
+
+  /// No description provided for @pmMadeMoneyAfterLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'It made money in {now}, after losing {amount} in {prior}.'**
+  String pmMadeMoneyAfterLoss(String now, String amount, String prior);
+
+  /// No description provided for @pmLostAfterProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'It lost money in {now}, after making {amount} in {prior}.'**
+  String pmLostAfterProfit(String now, String amount, String prior);
+
+  /// No description provided for @pmLossSame.
+  ///
+  /// In en, this message translates to:
+  /// **'The loss was the same as in {prior}, at {amount}.'**
+  String pmLossSame(String prior, String amount);
+
+  /// No description provided for @pmLossGrew.
+  ///
+  /// In en, this message translates to:
+  /// **'The loss grew, from {from} to {to} against {prior}.'**
+  String pmLossGrew(String from, String to, String prior);
+
+  /// No description provided for @pmLossShrank.
+  ///
+  /// In en, this message translates to:
+  /// **'The loss shrank, from {from} to {to} against {prior}.'**
+  String pmLossShrank(String from, String to, String prior);
+
+  /// No description provided for @pmProfitUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit was unchanged against {prior}, at {amount}.'**
+  String pmProfitUnchanged(String prior, String amount);
+
+  /// No description provided for @pmTimesSentence.
+  ///
+  /// In en, this message translates to:
+  /// **'That is {times} times the {amount} it reported in {prior}.'**
+  String pmTimesSentence(String times, String amount, String prior);
+
+  /// No description provided for @pmRose.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit rose against {prior}, when it reported {amount}.'**
+  String pmRose(String prior, String amount);
+
+  /// No description provided for @pmFell.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit fell against {prior}, when it reported {amount}.'**
+  String pmFell(String prior, String amount);
+
+  /// No description provided for @figSharesTradedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares traded today'**
+  String get figSharesTradedToday;
+
+  /// No description provided for @perf1Week.
+  ///
+  /// In en, this message translates to:
+  /// **'1 week'**
+  String get perf1Week;
+
+  /// No description provided for @perf1Month.
+  ///
+  /// In en, this message translates to:
+  /// **'1 month'**
+  String get perf1Month;
+
+  /// No description provided for @perf3Months.
+  ///
+  /// In en, this message translates to:
+  /// **'3 months'**
+  String get perf3Months;
+
+  /// No description provided for @perf5Sessions.
+  ///
+  /// In en, this message translates to:
+  /// **'5 sessions'**
+  String get perf5Sessions;
+
+  /// No description provided for @finGroupBasis.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get finGroupBasis;
+
+  /// No description provided for @periodQuarter1.
+  ///
+  /// In en, this message translates to:
+  /// **'Q1 {year}'**
+  String periodQuarter1(String year);
+
+  /// No description provided for @periodQuarter2.
+  ///
+  /// In en, this message translates to:
+  /// **'Q2 {year}'**
+  String periodQuarter2(String year);
+
+  /// No description provided for @periodQuarter3.
+  ///
+  /// In en, this message translates to:
+  /// **'Q3 {year}'**
+  String periodQuarter3(String year);
+
+  /// No description provided for @periodQuarter4.
+  ///
+  /// In en, this message translates to:
+  /// **'Q4 {year}'**
+  String periodQuarter4(String year);
+
+  /// No description provided for @periodHalf1.
+  ///
+  /// In en, this message translates to:
+  /// **'H1 {year}'**
+  String periodHalf1(String year);
+
+  /// No description provided for @periodHalf2.
+  ///
+  /// In en, this message translates to:
+  /// **'H2 {year}'**
+  String periodHalf2(String year);
+
+  /// No description provided for @periodFullYear.
+  ///
+  /// In en, this message translates to:
+  /// **'FY {year}'**
+  String periodFullYear(String year);
 }
 
 class _AppLocalizationsDelegate

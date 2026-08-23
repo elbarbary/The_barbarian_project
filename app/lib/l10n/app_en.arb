@@ -659,5 +659,343 @@
   "macroCoverage": "What is being reported",
   "homeLeadStory": "Today's story",
   "feedNews": "News",
-  "feedExchange": "From the exchange"
+  "feedExchange": "From the exchange",
+  "freshLoading": "Prices loading",
+  "freshSample": "Sample data · not real prices",
+  "freshLastClose": "Closing prices",
+  "freshDuringSession": "Prices from while trading was open",
+  "freshOnDay": "{state} · {day}",
+  "@freshOnDay": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "freshMarketClosed": "Market closed · closing prices",
+  "freshMarketClosedOn": "Market closed · close of {day}",
+  "@freshMarketClosedOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelayed": "{delay} behind the exchange · updated {since}",
+  "@freshDelayed": {
+    "placeholders": {
+      "delay": {
+        "type": "String"
+      },
+      "since": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelayedShort": "{delay} behind the exchange",
+  "@freshDelayedShort": {
+    "placeholders": {
+      "delay": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelaySeconds": "{count} sec",
+  "@freshDelaySeconds": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshDelayMinutes": "{count} min",
+  "@freshDelayMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshDelayHours": "{count} hr",
+  "@freshDelayHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceJustNow": "just now",
+  "freshSinceMinutes": "{count} min ago",
+  "@freshSinceMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceHours": "{count} hr ago",
+  "@freshSinceHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceDays": "{count} days ago",
+  "@freshSinceDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "youCompaniesCount": "{count} in the directory",
+  "@youCompaniesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "youPricesLive": "{delay} minutes behind the exchange, refreshed every {refresh} minutes. There is no live feed.",
+  "@youPricesLive": {
+    "placeholders": {
+      "delay": {
+        "type": "int"
+      },
+      "refresh": {
+        "type": "int"
+      }
+    }
+  },
+  "youPricesClose": "Closing prices only. There is no live feed.",
+  "unitBillionsEgp": "billion EGP",
+  "unitMillionsEgp": "million EGP",
+  "unitThousandsEgp": "thousand EGP",
+  "unitEgp": "EGP",
+  "moneyWithUnit": "{value} {unit}",
+  "@moneyWithUnit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "finUnitPeriod": "{unit} · {period}",
+  "@finUnitPeriod": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      },
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "finFiguresUnit": "Unit: {unit}",
+  "@finFiguresUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "pmToProfit": "to a profit",
+  "pmToLoss": "to a loss",
+  "pmUnchanged": "unchanged",
+  "pmWiderLoss": "wider loss",
+  "pmSmallerLoss": "smaller loss",
+  "pmMadeMoneyAfterBreakEven": "It made money in {now}, after breaking even in {prior}.",
+  "@pmMadeMoneyAfterBreakEven": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmMadeMoneyAfterLoss": "It made money in {now}, after losing {amount} in {prior}.",
+  "@pmMadeMoneyAfterLoss": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLostAfterProfit": "It lost money in {now}, after making {amount} in {prior}.",
+  "@pmLostAfterProfit": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossSame": "The loss was the same as in {prior}, at {amount}.",
+  "@pmLossSame": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossGrew": "The loss grew, from {from} to {to} against {prior}.",
+  "@pmLossGrew": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossShrank": "The loss shrank, from {from} to {to} against {prior}.",
+  "@pmLossShrank": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmProfitUnchanged": "Profit was unchanged against {prior}, at {amount}.",
+  "@pmProfitUnchanged": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmTimesSentence": "That is {times} times the {amount} it reported in {prior}.",
+  "@pmTimesSentence": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmRose": "Profit rose against {prior}, when it reported {amount}.",
+  "@pmRose": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmFell": "Profit fell against {prior}, when it reported {amount}.",
+  "@pmFell": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "figSharesTradedToday": "Shares traded today",
+  "perf1Week": "1 week",
+  "perf1Month": "1 month",
+  "perf3Months": "3 months",
+  "perf5Sessions": "5 sessions",
+  "finGroupBasis": "Group",
+  "periodQuarter1": "Q1 {year}",
+  "@periodQuarter1": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter2": "Q2 {year}",
+  "@periodQuarter2": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter3": "Q3 {year}",
+  "@periodQuarter3": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter4": "Q4 {year}",
+  "@periodQuarter4": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodHalf1": "H1 {year}",
+  "@periodHalf1": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodHalf2": "H2 {year}",
+  "@periodHalf2": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodFullYear": "FY {year}",
+  "@periodFullYear": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  }
 }

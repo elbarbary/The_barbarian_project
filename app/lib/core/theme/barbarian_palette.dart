@@ -83,11 +83,8 @@ abstract final class BarbarianPalette {
   /// on a dark card — keeps the chip's hue and buys the contrast: the worst
   /// case goes from 2.60:1 to 5.10:1 in light and to 4.94:1 in dark. The fill,
   /// the border and any glyph keep the undiluted tone.
-  static Color onWash(BarbarianColors c, Color tone) => Color.lerp(
-    tone,
-    c.isDark ? c.onInk : c.ink,
-    c.isDark ? 0.28 : 0.40,
-  )!;
+  static Color onWash(BarbarianColors c, Color tone) =>
+      Color.lerp(tone, c.isDark ? c.onInk : c.ink, c.isDark ? 0.28 : 0.40)!;
 
   // ----------------------------------------------------------------- sectors
 

@@ -40,9 +40,7 @@ abstract final class BHairline {
     double radius = BarbarianRadius.pill,
   }) => BoxDecoration(
     borderRadius: BorderRadius.circular(radius),
-    border: Border.all(
-      color: context.colors.accent.withValues(alpha: 0.55),
-    ),
+    border: Border.all(color: context.colors.accent.withValues(alpha: 0.55)),
   );
 }
 

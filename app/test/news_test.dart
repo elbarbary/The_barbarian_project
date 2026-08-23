@@ -12,7 +12,8 @@ import 'support/harness.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  NewsFeed load() => NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
+  NewsFeed load() =>
+      NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
 
   test('the feed publishes headlines and links, never article bodies', () {
     final feed = load();
@@ -120,7 +121,11 @@ void main() {
       // Never the same outlet twice: that would be one paper's two write-ups
       // presented as independent corroboration.
       final ids = item.sources.map((s) => s.id).toList();
-      expect(ids.toSet().length, ids.length, reason: '${item.id} double-counts');
+      expect(
+        ids.toSet().length,
+        ids.length,
+        reason: '${item.id} double-counts',
+      );
     }
   });
 
@@ -128,8 +133,17 @@ void main() {
     // The slot where every competitor puts positive/negative. A valence badge
     // beside a company name is a view on that company.
     const valence = [
-      'positive', 'negative', 'neutral', 'bullish', 'bearish',
-      'good', 'bad', 'strong', 'weak', 'risk', 'warning',
+      'positive',
+      'negative',
+      'neutral',
+      'bullish',
+      'bearish',
+      'good',
+      'bad',
+      'strong',
+      'weak',
+      'risk',
+      'warning',
     ];
     for (final item in load().items) {
       final label = item.eventLabel.toLowerCase();
@@ -169,7 +183,8 @@ void main() {
       expect(
         lead.where((i) => (i.image ?? '').isNotEmpty).length,
         greaterThan(20),
-        reason: 'the feed no longer leads with the outlets that publish '
+        reason:
+            'the feed no longer leads with the outlets that publish '
             'a headline and a photograph',
       );
       for (final item in withPicture) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/price_freshness.dart';
+import '../models/price_freshness_text.dart';
 import '../providers.dart';
 import '../theme/barbarian_theme.dart';
 import 'text.dart';
@@ -61,7 +62,7 @@ class _BPriceCaptionState extends ConsumerState<BPriceCaption> {
   @override
   Widget build(BuildContext context) {
     final freshness = ref.watch(priceFreshnessForProvider(widget.ticker));
-    final caption = widget.short ? freshness.shortCaption : freshness.caption;
+    final caption = context.freshnessCaption(freshness, short: widget.short);
     if (caption.isEmpty) return const SizedBox.shrink();
 
     if (!freshness.isLive) {
@@ -85,9 +86,7 @@ class _BPriceCaptionState extends ConsumerState<BPriceCaption> {
                 : (widget.onDark ? c.onInkMuted : c.textFaint),
           ),
         ),
-        Flexible(
-          child: BStalenessCaption(caption, onDark: widget.onDark),
-        ),
+        Flexible(child: BStalenessCaption(caption, onDark: widget.onDark)),
       ],
     );
   }

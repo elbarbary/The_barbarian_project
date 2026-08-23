@@ -87,7 +87,11 @@ void main() {
         await pumpUntil(tester, find.byType(BGlassNav));
 
         final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-        expect(nav.active, tab, reason: 'tapping ${tab.label} did not light it');
+        expect(
+          nav.active,
+          tab,
+          reason: 'tapping ${tab.label} did not light it',
+        );
         expect(tester.takeException(), isNull);
       }
     });
@@ -117,7 +121,10 @@ void main() {
       await tester.enterText(find.byType(TextField).first, 'swdy');
       await tester.pump();
       await pumpUntil(tester, find.textContaining('El Sewedy Electric'));
-      expect(find.textContaining('Commercial International Bank'), findsNothing);
+      expect(
+        find.textContaining('Commercial International Bank'),
+        findsNothing,
+      );
 
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('No account needed to read'));
@@ -126,7 +133,10 @@ void main() {
       await tapTab(tester, BNavTab.home);
       await tester.pump(const Duration(milliseconds: 400));
       expect(find.textContaining('El Sewedy Electric'), findsOneWidget);
-      expect(find.textContaining('Commercial International Bank'), findsNothing);
+      expect(
+        find.textContaining('Commercial International Bank'),
+        findsNothing,
+      );
     });
   });
 
@@ -154,9 +164,7 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('Today opens the Scanner and comes back', (
-      tester,
-    ) async {
+    testWidgets('Today opens the Scanner and comes back', (tester) async {
       await boot(tester);
       await tapTab(tester, BNavTab.today);
 

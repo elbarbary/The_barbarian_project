@@ -76,9 +76,8 @@ class _Crossing extends StatelessWidget {
         children: [
           // The company, and a way to it.
           BPressable(
-            onTap: () => context.push(
-              Routes.companyPath(BNavTab.home, item.ticker),
-            ),
+            onTap: () =>
+                context.push(Routes.companyPath(BNavTab.home, item.ticker)),
             child: Row(
               children: [
                 Text(

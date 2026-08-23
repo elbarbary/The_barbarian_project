@@ -201,14 +201,14 @@ class BScreenTitle extends StatelessWidget {
           title
         else
           Row(
-            children: [Expanded(child: title), trailing!],
+            children: [
+              Expanded(child: title),
+              trailing!,
+            ],
           ),
         if (subtitle case final String s) ...[
           const SizedBox(height: BarbarianSpace.xs),
-          Text(
-            s,
-            style: BarbarianType.bodyM.copyWith(color: c.textMuted),
-          ),
+          Text(s, style: BarbarianType.bodyM.copyWith(color: c.textMuted)),
         ],
       ],
     );

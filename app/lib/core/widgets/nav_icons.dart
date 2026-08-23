@@ -60,8 +60,11 @@ class BNavIconPainter extends CustomPainter {
   /// file's 24 grid by 1.2. The cap is drawn at reduced opacity exactly as the
   /// board draws it, which is what separates the two shapes without a stroke
   /// between them.
-  void _home(Canvas canvas, Paint Function(double) fill,
-      Paint Function(double, double) stroke) {
+  void _home(
+    Canvas canvas,
+    Paint Function(double) fill,
+    Paint Function(double, double) stroke,
+  ) {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         const Rect.fromLTWH(3.6, 9.6, 16.8, 10.8),
@@ -78,7 +81,11 @@ class BNavIconPainter extends CustomPainter {
     );
   }
 
-  void _today(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
+  void _today(
+    Canvas canvas,
+    Paint Function(double) fill,
+    Paint Function(double, double) stroke,
+  ) {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         const Rect.fromLTRB(3.6, 4.2, 20.4, 19.8),
@@ -103,13 +110,20 @@ class BNavIconPainter extends CustomPainter {
   /// `circle cx=13 cy=12 r=5.5` at half opacity — scaled onto this file's 24
   /// grid by 1.2. The second disc is faded rather than outlined, which is what
   /// lets the two read as overlapping without a cut between them.
-  void _pit(Canvas canvas, Paint Function(double) fill,
-      Paint Function(double, double) stroke) {
+  void _pit(
+    Canvas canvas,
+    Paint Function(double) fill,
+    Paint Function(double, double) stroke,
+  ) {
     canvas.drawCircle(const Offset(9.6, 10.2), 6.6, fill(1));
     canvas.drawCircle(const Offset(15.6, 14.4), 6.6, fill(0.5));
   }
 
-  void _you(Canvas canvas, Paint Function(double) fill, Paint Function(double, double) stroke) {
+  void _you(
+    Canvas canvas,
+    Paint Function(double) fill,
+    Paint Function(double, double) stroke,
+  ) {
     canvas.drawCircle(const Offset(12, 8.2), 4.3, fill(1));
 
     final shoulders = Path()

@@ -147,10 +147,7 @@ class BWhatWouldChangeThis extends StatelessWidget {
                     Container(
                       width: 4,
                       height: 4,
-                      margin: const EdgeInsetsDirectional.only(
-                        end: 9,
-                        top: 8,
-                      ),
+                      margin: const EdgeInsetsDirectional.only(end: 9, top: 8),
                       decoration: BoxDecoration(
                         color: c.textFaint,
                         shape: BoxShape.circle,
@@ -240,7 +237,12 @@ class BPillarLedger extends StatelessWidget {
         for (final (name, score, basis) in rows)
           Padding(
             padding: const EdgeInsets.only(bottom: 14),
-            child: _PillarRow(name: name, score: score, basis: basis, range: range),
+            child: _PillarRow(
+              name: name,
+              score: score,
+              basis: basis,
+              range: range,
+            ),
           ),
         Container(
           padding: const EdgeInsets.only(top: 12),

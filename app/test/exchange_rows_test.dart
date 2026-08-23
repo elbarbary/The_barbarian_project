@@ -25,7 +25,10 @@ void main() {
     expect(feed.items, isNotEmpty);
 
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     // Switch the feed selector to the exchange.
     await tester.tap(find.text('From the exchange'));
@@ -40,7 +43,8 @@ void main() {
     expect(
       found,
       greaterThan(0),
-      reason: 'no filing title reached the screen; the rows can only be told '
+      reason:
+          'no filing title reached the screen; the rows can only be told '
           'apart by their titles when one company files twice in a day',
     );
   });
@@ -72,13 +76,15 @@ void main() {
     expect(
       sighted.length,
       named.length,
-      reason: 'two filings from one company are still indistinguishable even '
+      reason:
+          'two filings from one company are still indistinguishable even '
           'with the title on the row',
     );
     expect(
       blind.length,
       lessThan(named.length),
-      reason: 'this fixture no longer contains the collision this guards '
+      reason:
+          'this fixture no longer contains the collision this guards '
           'against — if the feed really has no repeats, relax the test rather '
           'than the row',
     );

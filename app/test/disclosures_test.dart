@@ -63,7 +63,8 @@ void main() {
       expect(
         entry.value.length,
         1,
-        reason: '"${entry.key}" renders as ${entry.value} — more than one '
+        reason:
+            '"${entry.key}" renders as ${entry.value} — more than one '
             'taxonomy is live in the same document',
       );
     }
@@ -73,7 +74,11 @@ void main() {
     final feed = load();
     for (final item in feed.worthALook) {
       final evidence = item.evidence;
-      expect(evidence, isNotNull, reason: '${item.id} claims weight with no evidence');
+      expect(
+        evidence,
+        isNotNull,
+        reason: '${item.id} claims weight with no evidence',
+      );
       expect(evidence!.ratio, greaterThanOrEqualTo(evidence.threshold));
       expect(evidence.threshold, feed.threshold);
       expect(item.because, contains(evidence.ticker));
@@ -97,9 +102,17 @@ void main() {
     // the app is telling anybody to do something. Same correction the
     // explainer tests needed.
     const banned = [
-      'you should', 'you can profit', 'we recommend', 'worth buying',
-      'worth selling', 'buy now', 'sell now', 'a good time to',
-      'a bad time to', 'take advantage', 'opportunity to',
+      'you should',
+      'you can profit',
+      'we recommend',
+      'worth buying',
+      'worth selling',
+      'buy now',
+      'sell now',
+      'a good time to',
+      'a bad time to',
+      'take advantage',
+      'opportunity to',
     ];
     final seen = <String>{};
     for (final item in load().items) {

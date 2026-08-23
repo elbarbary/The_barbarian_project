@@ -108,9 +108,10 @@ void main() {
       // Across both buckets. A ranked name moves into `qualified` the moment
       // its badge reads Qualified, and looking only at `watching` made this
       // test go blind exactly when the top-ranked name cleared the rules.
-      final ranked = [...report.qualified, ...report.watching]
-          .where((w) => w.rank != null)
-          .toList();
+      final ranked = [
+        ...report.qualified,
+        ...report.watching,
+      ].where((w) => w.rank != null).toList();
       expect(ranked, isNotEmpty, reason: 'the board produced no ranked names');
       for (final entry in ranked) {
         // A ranked name explains its score, or states that the explanation was
@@ -217,7 +218,8 @@ void main() {
       await pumpUntil(
         tester,
         find.byWidgetPredicate(
-          (w) => w is Text &&
+          (w) =>
+              w is Text &&
               (w.data?.contains('scores nothing') == true ||
                   w.data?.contains('No sector read') == true),
         ),
@@ -225,8 +227,14 @@ void main() {
 
       // Either the cohort with its disclaimer, or an honest empty state —
       // never a blank tab.
-      final hasCohort = find.textContaining('scores nothing').evaluate().isNotEmpty;
-      final saysNone = find.textContaining('No sector read').evaluate().isNotEmpty;
+      final hasCohort = find
+          .textContaining('scores nothing')
+          .evaluate()
+          .isNotEmpty;
+      final saysNone = find
+          .textContaining('No sector read')
+          .evaluate()
+          .isNotEmpty;
       expect(hasCohort || saysNone, isTrue);
     });
 
@@ -262,10 +270,8 @@ void main() {
 
       // Assert against whatever states today's report actually contains —
       // "warn" gates are not published every day.
-      final gates = [
-        for (final w in report.watching) ...w.gates,
-      ];
-      if (gates.isEmpty) return;   // none published today
+      final gates = [for (final w in report.watching) ...w.gates];
+      if (gates.isEmpty) return; // none published today
       for (final g in gates) {
         final word = switch (g.outcome) {
           'pass' => 'Passed',

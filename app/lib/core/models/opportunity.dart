@@ -26,15 +26,20 @@ abstract class OpportunityReport with _$OpportunityReport {
   const factory OpportunityReport({
     String? date,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
+
     /// The report's own lead line, e.g. "No qualified early opportunity today."
     String? headline,
+
     /// The masthead's stated date, which can lag the cards. [date] is the
     /// newest date the report actually carries and is what the app shows.
     @JsonKey(name: 'masthead_date') String? mastheadDate,
+
     /// How a name is scored — the nine published components (spec §50).
     @Default(<RubricComponent>[]) List<RubricComponent> rubric,
+
     /// The bands and the reasoning that make the rubric mean something.
     @Default(ScoringGuide()) ScoringGuide scoring,
+
     /// A cohort the report read as one story rather than four names.
     SectorContext? sector,
     @Default(ScannerCoverage()) ScannerCoverage coverage,
@@ -42,6 +47,7 @@ abstract class OpportunityReport with _$OpportunityReport {
     @Default(<ScannedCompany>[]) List<ScannedCompany> qualified,
     @Default(<ScannedCompany>[]) List<ScannedCompany> watching,
     @Default(<ScannedCompany>[]) List<ScannedCompany> rejected,
+
     /// The rule log (spec §7, §8.1).
     ///
     /// Deliberately not a track record. "Wins and misses" is an accuracy
@@ -158,6 +164,7 @@ abstract class ScannedCompany with _$ScannedCompany {
     @Default(0) int score,
     @JsonKey(name: 'max_score') @Default(13) int maxScore,
     @Default('rejected') String status,
+
     /// The report's own wording — "Persistent watch", "Tape watch" — which is
     /// more precise than the bucket and is what readers of the series know.
     @JsonKey(name: 'status_label') String? statusLabel,
@@ -491,7 +498,6 @@ abstract class ResearchSection with _$ResearchSection {
   factory ResearchSection.fromJson(Map<String, dynamic> json) =>
       _$ResearchSectionFromJson(json);
 }
-
 
 /// The decision on a name, and the reasoning behind it.
 @freezed

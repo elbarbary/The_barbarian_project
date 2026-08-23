@@ -40,10 +40,7 @@ void main() {
     final scored = <String, Widget>{
       'Six Pillars': const CashOrTrashScreen(parentTab: BNavTab.home),
       'Scanner': const OpportunityScreen(parentTab: BNavTab.today),
-      'Company': const CompanyScreen(
-        ticker: 'COMI',
-        parentTab: BNavTab.home,
-      ),
+      'Company': const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.home),
       'Today': const TodayScreen(),
     };
 
@@ -277,8 +274,10 @@ void main() {
       // subject is the share now, not the reader.
       'قبل أن تشتري (before you buy)': RegExp('قبل أن تشتري|قبل ان تشتري'),
       'لو استثمرت (if you invest)': RegExp('لو استثمرت|إذا استثمرت'),
-      'before you buy': RegExp(r'\bbefore you (buy|invest)\b',
-          caseSensitive: false),
+      'before you buy': RegExp(
+        r'\bbefore you (buy|invest)\b',
+        caseSensitive: false,
+      ),
       'if you put in': RegExp(r'\bif you put in\b', caseSensitive: false),
       // A claim about value rather than about price.
       //
@@ -346,7 +345,10 @@ void main() {
       ('If you put in EGP 50,000', 'if you put in'),
       ('لو استثمرت ٥٠٬٠٠٠ جنيه', 'لو استثمرت (if you invest)'),
       ('Worth 18.5% more than it was a month ago.', 'worth (valuation)'),
-      ('The share looks undervalued on these numbers.', 'undervalued/overvalued'),
+      (
+        'The share looks undervalued on these numbers.',
+        'undervalued/overvalued',
+      ),
       ('Why this reaches your shares', 'your shares'),
       ('لماذا يصل هذا إلى أسهمك', 'أسهمك (your shares)'),
     ]) {
@@ -374,7 +376,8 @@ void main() {
     expect(
       offenders,
       isEmpty,
-      reason: 'A translated instruction is still an instruction:\n'
+      reason:
+          'A translated instruction is still an instruction:\n'
           '${offenders.join('\n')}',
     );
   });
@@ -425,8 +428,10 @@ void main() {
       RegExp(r'\bholding period\b', caseSensitive: false),
       // A price with a threshold noun beside it is a level to act at,
       // whichever order the two arrive in.
-      RegExp(r'EGP\s*[\d.,]+[^.]{0,28}\b(line|floor|ceiling|trigger|stop)\b',
-          caseSensitive: false),
+      RegExp(
+        r'EGP\s*[\d.,]+[^.]{0,28}\b(line|floor|ceiling|trigger|stop)\b',
+        caseSensitive: false,
+      ),
 
       // Arabic, because most of what ships is.
       //
@@ -596,7 +601,9 @@ void main() {
         // hero did exactly this via `OpportunityReport.lead`.
         if (RegExp(r'\.score\s*[><]\s*\w+\.score').hasMatch(code) ||
             RegExp(r'\bget lead\b').hasMatch(code)) {
-          offenders.add('${file.path}:${i + 1}: picks one name by score: $code');
+          offenders.add(
+            '${file.path}:${i + 1}: picks one name by score: $code',
+          );
         }
       }
     }

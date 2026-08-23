@@ -335,32 +335,60 @@ class _HeaderStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final cap = company.profile?['market_cap'];
 
-    Widget cell(String label, String value) => Expanded(
+    Widget cell(String label, String value, String unit) => Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label.toUpperCase(),
             style: BarbarianType.labelTiny.copyWith(color: c.onInkMuted),
-            maxLines: 1,
+            maxLines: 2,
           ),
           const SizedBox(height: 5),
-          BNumText(
-            value,
-            style: BarbarianType.figureS.copyWith(color: c.onInk),
+          // The figure and its unit on one baseline, so the number is never
+          // read as a bare quantity of nothing in particular.
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
+              Flexible(
+                child: BNumText(
+                  value,
+                  style: BarbarianType.figureS.copyWith(color: c.onInk),
+                ),
+              ),
+              const SizedBox(width: 4),
+              Flexible(
+                child: Text(
+                  unit,
+                  style: BarbarianType.labelTiny.copyWith(color: c.onInkMuted),
+                  maxLines: 1,
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
 
+    // Two cells, not three. The market cap said nothing a reader could use at
+    // 10.5pt with no unit, and it is stated in a full sentence further down
+    // this same screen. Both survivors also appeared again in the session
+    // card below, which now carries only the figures these two do not.
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        cell(l.figPrevClose, quote?.previousClose?.toStringAsFixed(2) ?? '—'),
-        cell('Volume', _Header._compact(quote?.volume)),
-        cell('Mkt cap', _Header._compact(cap is num ? cap : null)),
+        cell(
+          l.figPrevClose,
+          quote?.previousClose?.toStringAsFixed(2) ?? '—',
+          l.filterUnitEgp,
+        ),
+        cell(
+          l.figSharesTradedToday,
+          _Header._compact(quote?.volume),
+          l.filterUnitShares,
+        ),
       ],
     );
   }
@@ -410,13 +438,12 @@ class _Overview extends ConsumerWidget {
 
     // Every row the source actually carried. A field the scan did not have is
     // simply absent rather than rendered as a zero (spec §49).
+    // Previous close and the day's volume are both in the header, three
+    // inches up the same screen, so they are not repeated here.
     final session = <(String, String)>[
-      if (m?.open != null) ('Open', _num(m!.open)),
+      if (m?.open != null) (l.priceOpen, _num(m!.open)),
       if (m?.high != null) (l.figDayHigh, _num(m!.high)),
-      if (m?.low != null) ('Day low', _num(m!.low)),
-      if (quote?.previousClose != null)
-        (l.figPreviousClose, _num(quote!.previousClose)),
-      if (m?.volume != null) ('Volume', _compact(m!.volume)),
+      if (m?.low != null) (l.dayLow, _num(m!.low)),
       if (p['avg_volume_30d'] != null)
         (l.figAvgVolume30d, _compact(p['avg_volume_30d'])),
     ];
@@ -426,7 +453,7 @@ class _Overview extends ConsumerWidget {
         (l.figSharesOutstanding, _compact(p['shares_outstanding'])),
       if (p['float_shares'] != null)
         (l.figFloatShares, _compact(p['float_shares'])),
-      if (company.sector case final String sector) ('Sector', sector),
+      if (company.sector case final String sector) (l.sector, sector),
     ];
 
     // Built from published operands only: a builder returns null when an
@@ -439,7 +466,7 @@ class _Overview extends ConsumerWidget {
       Explainers.closeStrength(company),
       Explainers.move(
         title: l.movedThisMonthLabel,
-        window: 'a month',
+        window: l.perf1Month,
         percent: p['perf_1m'] is num ? (p['perf_1m'] as num).toDouble() : null,
         asOf: m?.date,
       ),
@@ -447,11 +474,11 @@ class _Overview extends ConsumerWidget {
     ].nonNulls.toList();
 
     final momentum = <(String, String)>[
-      if (p['perf_1w'] != null) ('1 week', _pct(p['perf_1w'])),
-      if (p['perf_1m'] != null) ('1 month', _pct(p['perf_1m'])),
-      if (p['perf_3m'] != null) ('3 months', _pct(p['perf_3m'])),
+      if (p['perf_1w'] != null) (l.perf1Week, _pct(p['perf_1w'])),
+      if (p['perf_1m'] != null) (l.perf1Month, _pct(p['perf_1m'])),
+      if (p['perf_3m'] != null) (l.perf3Months, _pct(p['perf_3m'])),
       if (p['five_session_change'] != null)
-        ('5 sessions', _pct(p['five_session_change'])),
+        (l.perf5Sessions, _pct(p['five_session_change'])),
     ];
 
     return Column(
@@ -514,6 +541,11 @@ class _Overview extends ConsumerWidget {
           ],
         if (explained.isNotEmpty) ...[
           BSectionLabel(l.whatNumbersSay),
+          // The prose comes before the rows it explains. It used to sit under
+          // them, which meant a reader met five measurements and only then the
+          // paragraph telling them what any of it was.
+          _WhatThatMeans(company: company),
+          const SizedBox(height: 14),
           BPaperCard(
             padding: EdgeInsets.zero,
             child: Column(
@@ -526,8 +558,6 @@ class _Overview extends ConsumerWidget {
               ],
             ),
           ),
-          const SizedBox(height: 14),
-          _WhatThatMeans(company: company),
           const SizedBox(height: 22),
         ],
         if (session.isNotEmpty) ...[
@@ -624,7 +654,8 @@ class _Financials extends StatelessWidget {
 
     final latest = annual.isNotEmpty ? annual.last : interim.last;
     final prior = comparablePrior(annual.isNotEmpty ? annual : interim, latest);
-    final move = profitMovement(latest, prior);
+    final move = profitMovement(latest, prior, l);
+    final headline = egpMillions(latest.netIncome);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -637,12 +668,20 @@ class _Financials extends StatelessWidget {
               BSectionLabel(l.finNetProfitReported),
               const SizedBox(height: 10),
               BNumText(
-                formatMillions(latest.netIncome),
+                headline.figure,
                 style: BarbarianType.displayS.copyWith(color: c.textPrimary),
               ),
               const SizedBox(height: 2),
               Text(
-                l.finEgpMillionsPeriod(latest.period),
+                // The unit is whatever this figure's own size makes it —
+                // billions for a bank, thousands for a small holding company —
+                // rather than a fixed "millions" the number then contradicts.
+                headline.scale == null
+                    ? periodLabel(latest.period, l)
+                    : l.finUnitPeriod(
+                        egpUnit(headline.scale!, l),
+                        periodLabel(latest.period, l),
+                      ),
                 style: BarbarianType.bodyS.copyWith(color: c.textFaint),
               ),
               if (move != null) ...[
@@ -684,44 +723,58 @@ class _Financials extends StatelessWidget {
 
         if (latest.assets != null || latest.equity != null) ...[
           const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: BStatTile(
-                  label: l.finTotalAssets,
-                  value: formatMillions(latest.assets),
-                  unit: 'm',
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: BStatTile(
-                  label: l.ownersEquity,
-                  value: formatMillions(latest.equity),
-                  unit: 'm',
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: BStatTile(
-                  label: l.finTotalLiabilities,
-                  value: formatMillions(latest.liabilities),
-                  unit: 'm',
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: BStatTile(
-                  label: l.finCashFromOps,
-                  value: formatMillions(latest.operatingCashFlow),
-                  unit: 'm',
-                ),
-              ),
-            ],
+          Builder(
+            builder: (context) {
+              final scale = egpScaleFor([
+                latest.assets,
+                latest.equity,
+                latest.liabilities,
+                latest.operatingCashFlow,
+              ]);
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BStatTile(
+                          label: l.finTotalAssets,
+                          value: egpIn(latest.assets, scale),
+                          unit: egpUnit(scale, l),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: BStatTile(
+                          label: l.ownersEquity,
+                          value: egpIn(latest.equity, scale),
+                          unit: egpUnit(scale, l),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BStatTile(
+                          label: l.finTotalLiabilities,
+                          value: egpIn(latest.liabilities, scale),
+                          unit: egpUnit(scale, l),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: BStatTile(
+                          label: l.finCashFromOps,
+                          value: egpIn(latest.operatingCashFlow, scale),
+                          unit: egpUnit(scale, l),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         ],
 
@@ -786,7 +839,8 @@ class _InterimCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final move = profitMovement(period, prior);
+    final move = profitMovement(period, prior, l);
+    final headline = egpMillions(period.netIncome);
 
     return BPaperCard(
       radius: BarbarianRadius.xl,
@@ -803,18 +857,25 @@ class _InterimCard extends StatelessWidget {
               BSectionLabel(l.finLatestFiling),
               if (period.basis != null)
                 BKindChip(
-                  period.basis == 'consolidated' ? 'Group' : l.finCompanyOnly,
+                  period.basis == 'consolidated'
+                      ? l.finGroupBasis
+                      : l.finCompanyOnly,
                 ),
             ],
           ),
           const SizedBox(height: 10),
           BNumText(
-            formatMillions(period.netIncome),
+            headline.figure,
             style: BarbarianType.headlineM.copyWith(color: c.textPrimary),
           ),
           const SizedBox(height: 2),
           Text(
-            l.finEgpMillionsPeriod(period.period),
+            headline.scale == null
+                ? periodLabel(period.period, l)
+                : l.finUnitPeriod(
+                    egpUnit(headline.scale!, l),
+                    periodLabel(period.period, l),
+                  ),
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
           if (move != null) ...[
@@ -833,7 +894,7 @@ class _InterimCard extends StatelessWidget {
                 Routes.articlePath(
                   parentTab,
                   period.source!,
-                  '${company.ticker} · ${period.period}',
+                  '${company.ticker} · ${periodLabel(period.period, l)}',
                 ),
               ),
             ),
@@ -952,7 +1013,9 @@ class _Research extends ConsumerWidget {
         .items;
     final filed = filings ?? const <FiledDocument>[];
 
-    if (entry == null && (scanned == null || scanned.isEmpty) && filed.isEmpty) {
+    if (entry == null &&
+        (scanned == null || scanned.isEmpty) &&
+        filed.isEmpty) {
       return BEmptyState(title: l.noStudyYet, body: l.noStudyBody);
     }
 
@@ -1388,10 +1451,10 @@ class _WhatThatMeans extends ConsumerWidget {
     if (periods.isNotEmpty) {
       final latest = periods.last;
       final prior = comparablePrior(periods, latest);
-      final move = profitMovement(latest, prior);
+      final move = profitMovement(latest, prior, l);
       if (latest.netIncome case final double net) {
         lines.add(
-          l.meansNetProfit(formatMillions(net), latest.period) +
+          l.meansNetProfit(egpText(net, l), periodLabel(latest.period, l)) +
               (move == null ? '' : ' ${move.sentence}'),
         );
       }
@@ -1432,7 +1495,6 @@ class _WhatThatMeans extends ConsumerWidget {
     return value.toStringAsFixed(0);
   }
 }
-
 
 /// Every filed period, side by side.
 ///
@@ -1487,6 +1549,14 @@ class _StatementTableState extends State<_StatementTable> {
 
     if (periods.isEmpty || lines.isEmpty) return const SizedBox.shrink();
 
+    // Real published accounts state the unit once at the top and hold it. A
+    // grid where each cell picked its own scale was unreadable: the eye cannot
+    // compare 4.20 against 812 when one is billions and the other millions.
+    final scale = egpScaleFor([
+      for (final p in periods)
+        for (final line in lines) line.$2(p),
+    ]);
+
     return BPaperCard(
       radius: BarbarianRadius.xl,
       child: Column(
@@ -1504,7 +1574,12 @@ class _StatementTableState extends State<_StatementTable> {
               onChanged: (i) => setState(() => _tab = i),
             ),
           ],
-          const SizedBox(height: 12),
+          const SizedBox(height: 10),
+          Text(
+            l.finFiguresUnit(egpUnit(scale, l)),
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+          ),
+          const SizedBox(height: 8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -1547,7 +1622,7 @@ class _StatementTableState extends State<_StatementTable> {
                               SizedBox(
                                 height: 22,
                                 child: Text(
-                                  p.period,
+                                  periodLabel(p.period, l),
                                   style: BarbarianType.labelS.copyWith(
                                     color: c.textFaint,
                                   ),
@@ -1559,7 +1634,7 @@ class _StatementTableState extends State<_StatementTable> {
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: BNumText(
-                                      formatMillions(line.$2(p)),
+                                      egpIn(line.$2(p), scale),
                                       style: BarbarianType.bodyM.copyWith(
                                         color: line.$2(p) == null
                                             ? c.textFaint
@@ -1587,7 +1662,6 @@ class _StatementTableState extends State<_StatementTable> {
     );
   }
 }
-
 
 /// Everything this company has filed that carries a document.
 ///
@@ -1663,7 +1737,6 @@ class _FiledDocuments extends ConsumerWidget {
     );
   }
 }
-
 
 /// One filing on the company's own screen.
 ///

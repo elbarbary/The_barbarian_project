@@ -322,7 +322,11 @@ class _ScanCount extends StatelessWidget {
 /// lands on the right one because the request selects the tab as well as
 /// scrolling to it.
 class BTodayFeeds extends ConsumerStatefulWidget {
-  const BTodayFeeds({required this.filingsKey, required this.newsKey, super.key});
+  const BTodayFeeds({
+    required this.filingsKey,
+    required this.newsKey,
+    super.key,
+  });
 
   final Key filingsKey;
   final Key newsKey;

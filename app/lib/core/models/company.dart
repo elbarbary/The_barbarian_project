@@ -133,6 +133,7 @@ abstract class Company with _$Company {
     required LocalizedName name,
     String? sector,
     CompanyMarket? market,
+
     /// Whatever the ingestion source knew about the company beyond price —
     /// market cap, shares outstanding, free float. Deliberately loose: the
     /// fields available differ by provider and a missing one must simply not

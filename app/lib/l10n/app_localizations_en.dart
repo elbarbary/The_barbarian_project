@@ -1378,4 +1378,230 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feedExchange => 'From the exchange';
+
+  @override
+  String get freshLoading => 'Prices loading';
+
+  @override
+  String get freshSample => 'Sample data · not real prices';
+
+  @override
+  String get freshLastClose => 'Closing prices';
+
+  @override
+  String get freshDuringSession => 'Prices from while trading was open';
+
+  @override
+  String freshOnDay(String state, String day) {
+    return '$state · $day';
+  }
+
+  @override
+  String get freshMarketClosed => 'Market closed · closing prices';
+
+  @override
+  String freshMarketClosedOn(String day) {
+    return 'Market closed · close of $day';
+  }
+
+  @override
+  String freshDelayed(String delay, String since) {
+    return '$delay behind the exchange · updated $since';
+  }
+
+  @override
+  String freshDelayedShort(String delay) {
+    return '$delay behind the exchange';
+  }
+
+  @override
+  String freshDelaySeconds(int count) {
+    return '$count sec';
+  }
+
+  @override
+  String freshDelayMinutes(int count) {
+    return '$count min';
+  }
+
+  @override
+  String freshDelayHours(int count) {
+    return '$count hr';
+  }
+
+  @override
+  String get freshSinceJustNow => 'just now';
+
+  @override
+  String freshSinceMinutes(int count) {
+    return '$count min ago';
+  }
+
+  @override
+  String freshSinceHours(int count) {
+    return '$count hr ago';
+  }
+
+  @override
+  String freshSinceDays(int count) {
+    return '$count days ago';
+  }
+
+  @override
+  String youCompaniesCount(int count) {
+    return '$count in the directory';
+  }
+
+  @override
+  String youPricesLive(int delay, int refresh) {
+    return '$delay minutes behind the exchange, refreshed every $refresh minutes. There is no live feed.';
+  }
+
+  @override
+  String get youPricesClose => 'Closing prices only. There is no live feed.';
+
+  @override
+  String get unitBillionsEgp => 'billion EGP';
+
+  @override
+  String get unitMillionsEgp => 'million EGP';
+
+  @override
+  String get unitThousandsEgp => 'thousand EGP';
+
+  @override
+  String get unitEgp => 'EGP';
+
+  @override
+  String moneyWithUnit(String value, String unit) {
+    return '$value $unit';
+  }
+
+  @override
+  String finUnitPeriod(String unit, String period) {
+    return '$unit · $period';
+  }
+
+  @override
+  String finFiguresUnit(String unit) {
+    return 'Unit: $unit';
+  }
+
+  @override
+  String get pmToProfit => 'to a profit';
+
+  @override
+  String get pmToLoss => 'to a loss';
+
+  @override
+  String get pmUnchanged => 'unchanged';
+
+  @override
+  String get pmWiderLoss => 'wider loss';
+
+  @override
+  String get pmSmallerLoss => 'smaller loss';
+
+  @override
+  String pmMadeMoneyAfterBreakEven(String now, String prior) {
+    return 'It made money in $now, after breaking even in $prior.';
+  }
+
+  @override
+  String pmMadeMoneyAfterLoss(String now, String amount, String prior) {
+    return 'It made money in $now, after losing $amount in $prior.';
+  }
+
+  @override
+  String pmLostAfterProfit(String now, String amount, String prior) {
+    return 'It lost money in $now, after making $amount in $prior.';
+  }
+
+  @override
+  String pmLossSame(String prior, String amount) {
+    return 'The loss was the same as in $prior, at $amount.';
+  }
+
+  @override
+  String pmLossGrew(String from, String to, String prior) {
+    return 'The loss grew, from $from to $to against $prior.';
+  }
+
+  @override
+  String pmLossShrank(String from, String to, String prior) {
+    return 'The loss shrank, from $from to $to against $prior.';
+  }
+
+  @override
+  String pmProfitUnchanged(String prior, String amount) {
+    return 'Profit was unchanged against $prior, at $amount.';
+  }
+
+  @override
+  String pmTimesSentence(String times, String amount, String prior) {
+    return 'That is $times times the $amount it reported in $prior.';
+  }
+
+  @override
+  String pmRose(String prior, String amount) {
+    return 'Profit rose against $prior, when it reported $amount.';
+  }
+
+  @override
+  String pmFell(String prior, String amount) {
+    return 'Profit fell against $prior, when it reported $amount.';
+  }
+
+  @override
+  String get figSharesTradedToday => 'Shares traded today';
+
+  @override
+  String get perf1Week => '1 week';
+
+  @override
+  String get perf1Month => '1 month';
+
+  @override
+  String get perf3Months => '3 months';
+
+  @override
+  String get perf5Sessions => '5 sessions';
+
+  @override
+  String get finGroupBasis => 'Group';
+
+  @override
+  String periodQuarter1(String year) {
+    return 'Q1 $year';
+  }
+
+  @override
+  String periodQuarter2(String year) {
+    return 'Q2 $year';
+  }
+
+  @override
+  String periodQuarter3(String year) {
+    return 'Q3 $year';
+  }
+
+  @override
+  String periodQuarter4(String year) {
+    return 'Q4 $year';
+  }
+
+  @override
+  String periodHalf1(String year) {
+    return 'H1 $year';
+  }
+
+  @override
+  String periodHalf2(String year) {
+    return 'H2 $year';
+  }
+
+  @override
+  String periodFullYear(String year) {
+    return 'FY $year';
+  }
 }

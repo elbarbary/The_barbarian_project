@@ -71,11 +71,12 @@ class BChangeDelta extends StatelessWidget {
     final resolved = (style ?? BarbarianType.pill).copyWith(color: color);
 
     return Semantics(
-      label: '${switch (direction) {
-        BDirection.up => 'up',
-        BDirection.down => 'down',
-        BDirection.flat => 'unchanged',
-      }} $value',
+      label:
+          '${switch (direction) {
+            BDirection.up => 'up',
+            BDirection.down => 'down',
+            BDirection.flat => 'unchanged',
+          }} $value',
       excludeSemantics: true,
       child: Directionality(
         textDirection: TextDirection.ltr,
@@ -148,10 +149,7 @@ class BKindChip extends StatelessWidget {
         c.textSecondary,
       ),
       BChipVariant.solid => (c.ink, c.onInk),
-      BChipVariant.onDark => (
-        c.onInk.withValues(alpha: 0.09),
-        c.onInk,
-      ),
+      BChipVariant.onDark => (c.onInk.withValues(alpha: 0.09), c.onInk),
     };
 
     final chip = Container(
@@ -176,8 +174,9 @@ class BKindChip extends StatelessWidget {
           );
           return Row(
             mainAxisSize: center ? MainAxisSize.max : MainAxisSize.min,
-            mainAxisAlignment:
-                center ? MainAxisAlignment.center : MainAxisAlignment.start,
+            mainAxisAlignment: center
+                ? MainAxisAlignment.center
+                : MainAxisAlignment.start,
             children: [
               if (leading case final Widget l) ...[
                 l,
@@ -192,7 +191,12 @@ class BKindChip extends StatelessWidget {
 
     return onTap == null
         ? chip
-        : BPressable(onTap: onTap, scale: 0.96, semanticLabel: label, child: chip);
+        : BPressable(
+            onTap: onTap,
+            scale: 0.96,
+            semanticLabel: label,
+            child: chip,
+          );
   }
 }
 

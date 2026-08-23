@@ -164,7 +164,9 @@ class StaticApi {
 
     try {
       final body = await _source.fetch(manifestPath);
-      final parsed = Manifest.fromJson(jsonDecode(body) as Map<String, dynamic>);
+      final parsed = Manifest.fromJson(
+        jsonDecode(body) as Map<String, dynamic>,
+      );
       if (!parsed.isSupported) return null;
       await _cache.write(manifestPath, body, version: parsed.schemaVersion);
       _manifestAt = DateTime.now();

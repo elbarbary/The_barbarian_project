@@ -55,10 +55,7 @@ void main() {
       // Bigger money is never easier to move.
       expect(share, greaterThan(0));
     }
-    expect(
-      exit.shareOfDay(1000000),
-      greaterThan(exit.shareOfDay(10000)),
-    );
+    expect(exit.shareOfDay(1000000), greaterThan(exit.shareOfDay(10000)));
   });
 
   test('no published trading produces no answer, never a guess', () {
@@ -80,14 +77,23 @@ void main() {
 
     // And a liquid name still reports in sessions.
     final comi = ExitLiquidity.of(load('COMI'))!;
-    expect(comi.waitFor(10000, l), anyOf(contains('day'), contains('sessions')));
+    expect(
+      comi.waitFor(10000, l),
+      anyOf(contains('day'), contains('sessions')),
+    );
   });
 
   test('the words are mechanism, never instruction', () {
     final exit = ExitLiquidity.of(load('COMI'))!;
     const banned = [
-      'you should', 'we recommend', 'avoid', 'too risky', 'safe to',
-      'worth buying', 'do not buy', 'good investment',
+      'you should',
+      'we recommend',
+      'avoid',
+      'too risky',
+      'safe to',
+      'worth buying',
+      'do not buy',
+      'good investment',
     ];
     for (final amount in ExitLiquidity.ladder) {
       final plain = exit.plainFor(amount, l).toLowerCase();
@@ -110,8 +116,10 @@ void main() {
       until: find.byType(CompanyScreen),
     );
     await pumpUntil(tester, find.text('IT STOPS TRADING'));
-    expect(find.textContaining('no price at which a holder could sell'),
-        findsWidgets);
+    expect(
+      find.textContaining('no price at which a holder could sell'),
+      findsWidgets,
+    );
   });
 
   testWidgets('a liquid company gets the quiet version', (tester) async {
@@ -136,10 +144,7 @@ void main() {
         ExitScreen(parentTab: BNavTab.home, ticker: ticker),
         until: find.text('Can I get out?'),
       );
-      await pumpUntil(
-        tester,
-        find.textContaining('About this much can leave'),
-      );
+      await pumpUntil(tester, find.textContaining('About this much can leave'));
       final figure = tester
           .widgetList<Text>(find.textContaining('EGP '))
           .map((w) => w.data ?? '')
@@ -187,7 +192,8 @@ void main() {
     expect(
       find.textContaining('a fifth'),
       findsWidgets,
-      reason: 'the participation assumption must be stated where it is used, '
+      reason:
+          'the participation assumption must be stated where it is used, '
           'so a reader can disagree with it',
     );
   });

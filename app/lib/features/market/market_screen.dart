@@ -53,6 +53,7 @@ enum _Order {
 class _MarketScreenState extends ConsumerState<MarketScreen> {
   final TextEditingController _search = TextEditingController();
   String? _sector;
+
   /// This screen's own search text — see `searchResultsProvider`.
   String _query = '';
 

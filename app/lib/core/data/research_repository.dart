@@ -16,15 +16,25 @@ class ResearchRepository {
   final StaticApi _api;
 
   /// Today's Scanner report (spec §7).
-  Stream<Sourced<OpportunityReport>> getOpportunityScanner() =>
-      _parsed('opportunities/latest.json', 'opportunities', OpportunityReport.fromJson);
+  Stream<Sourced<OpportunityReport>> getOpportunityScanner() => _parsed(
+    'opportunities/latest.json',
+    'opportunities',
+    OpportunityReport.fromJson,
+  );
 
   /// A specific past report, by `YYYY-MM-DD` (spec §7).
   Stream<Sourced<OpportunityReport>> getOpportunityHistory(String date) =>
-      _parsed('opportunities/history/$date.json', null, OpportunityReport.fromJson);
+      _parsed(
+        'opportunities/history/$date.json',
+        null,
+        OpportunityReport.fromJson,
+      );
 
-  Stream<Sourced<CashOrTrashIndex>> getCashOrTrashIndex() =>
-      _parsed('cash-or-trash/index.json', 'cash_or_trash', CashOrTrashIndex.fromJson);
+  Stream<Sourced<CashOrTrashIndex>> getCashOrTrashIndex() => _parsed(
+    'cash-or-trash/index.json',
+    'cash_or_trash',
+    CashOrTrashIndex.fromJson,
+  );
 
   /// Headlines from the outlets, with the triage attached at ingestion.
   Stream<Sourced<NewsFeed>> getNews() =>
@@ -35,8 +45,11 @@ class ResearchRepository {
       _parsed('rates/latest.json', 'rates', RatesDoc.fromJson);
 
   /// Filings made to the exchange, typed and explained at ingestion.
-  Stream<Sourced<DisclosureFeed>> getDisclosures() =>
-      _parsed('disclosures/latest.json', 'disclosures', DisclosureFeed.fromJson);
+  Stream<Sourced<DisclosureFeed>> getDisclosures() => _parsed(
+    'disclosures/latest.json',
+    'disclosures',
+    DisclosureFeed.fromJson,
+  );
 
   /// Which months of kept filings exist to be asked for.
   Stream<Sourced<DisclosureArchive>> getDisclosureArchive() => _parsed(

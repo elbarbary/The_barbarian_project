@@ -157,7 +157,9 @@ void main() {
     // few days, and hardcoding "seven" turned each one into a failing build.
     // What must hold is that the document agrees with itself.
     test('parses every published investigation', () {
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
 
       expect(index.companies, isNotEmpty);
       expect(index.total, 224);
@@ -169,7 +171,9 @@ void main() {
     });
 
     test('scores are signed and inside the six-pillar range', () {
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
 
       expect(
         index.companies.any((c) => c.score < 0),
@@ -177,15 +181,20 @@ void main() {
         reason: 'the scale must be signed, not 0-100',
       );
       for (final c in index.companies) {
-        expect(c.score, inInclusiveRange(
-          CashOrTrashEntry.minScore,
-          CashOrTrashEntry.maxScore,
-        ));
+        expect(
+          c.score,
+          inInclusiveRange(
+            CashOrTrashEntry.minScore,
+            CashOrTrashEntry.maxScore,
+          ),
+        );
       }
     });
 
     test('pillars sum to the headline score', () {
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
 
       for (final c in index.companies) {
         if (c.pillars.isEmpty) continue;
@@ -202,7 +211,9 @@ void main() {
     });
 
     test('gauge fraction is clamped and ordered', () {
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
       final kwin = index.byTicker('KWIN')!;
       final mcqe = index.byTicker('MCQE')!;
 
@@ -224,7 +235,9 @@ void main() {
     });
 
     test('present verdicts come back in Cash-to-Toxic order', () {
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
       final present = index.presentVerdicts;
 
       final indices = present.map(Verdict.values.indexOf).toList();
@@ -252,7 +265,8 @@ void main() {
         total++;
         final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
-        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty) withQuarters++;
+        if (((fin['quarterly'] as List?) ?? const []).isNotEmpty)
+          withQuarters++;
       }
 
       expect(total, greaterThan(0));
@@ -270,8 +284,10 @@ void main() {
         if (file is! File || !file.path.endsWith('.json')) continue;
         final doc = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
         final fin = (doc['financials'] as Map<String, dynamic>?) ?? const {};
-        final annual = ((fin['annual'] as List?) ?? const []).cast<Map<String, dynamic>>();
-        final quarterly = ((fin['quarterly'] as List?) ?? const []).cast<Map<String, dynamic>>();
+        final annual = ((fin['annual'] as List?) ?? const [])
+            .cast<Map<String, dynamic>>();
+        final quarterly = ((fin['quarterly'] as List?) ?? const [])
+            .cast<Map<String, dynamic>>();
         if (annual.isEmpty || quarterly.isEmpty) continue;
 
         final years = {
@@ -284,7 +300,8 @@ void main() {
           final assets = (quarter['assets'] as num?)?.toDouble();
           final year = '${quarter['period']}'.replaceAll(RegExp(r'[^0-9]'), '');
           final annualAssets = years[year];
-          if (assets == null || annualAssets == null || annualAssets <= 0) continue;
+          if (assets == null || annualAssets == null || annualAssets <= 0)
+            continue;
           final ratio = assets / annualAssets;
           expect(
             ratio,
@@ -319,7 +336,8 @@ void main() {
         expect(
           entry.sources,
           isNotEmpty,
-          reason: '${entry.ticker} makes claims with nothing to check them against',
+          reason:
+              '${entry.ticker} makes claims with nothing to check them against',
         );
         // A citation with no destination is decoration.
         expect(
@@ -470,11 +488,17 @@ void main() {
   group('cross-document consistency', () {
     test('every researched company is in the directory and flagged', () {
       final directory = CompanyDirectory.fromJson(_read('companies.json'));
-      final index = CashOrTrashIndex.fromJson(_read('cash-or-trash/index.json'));
+      final index = CashOrTrashIndex.fromJson(
+        _read('cash-or-trash/index.json'),
+      );
 
       for (final entry in index.companies) {
         final company = directory.byTicker(entry.ticker);
-        expect(company, isNotNull, reason: '${entry.ticker} missing from directory');
+        expect(
+          company,
+          isNotNull,
+          reason: '${entry.ticker} missing from directory',
+        );
         expect(
           company!.hasCashOrTrash,
           isTrue,
@@ -510,7 +534,8 @@ void main() {
       expect(
         unlisted.length,
         lessThan(report.outcomes.length),
-        reason: 'no outcome matched the directory at all — the directory is '
+        reason:
+            'no outcome matched the directory at all — the directory is '
             'probably empty or the tickers are formatted differently',
       );
     });
@@ -522,25 +547,28 @@ void main() {
       expect(directory.sectors.length, greaterThan(10));
     });
 
-    test('every company detail document parses and matches its directory row', () {
-      final directory = CompanyDirectory.fromJson(_read('companies.json'));
-      var withHistory = 0;
+    test(
+      'every company detail document parses and matches its directory row',
+      () {
+        final directory = CompanyDirectory.fromJson(_read('companies.json'));
+        var withHistory = 0;
 
-      for (final summary in directory.companies) {
-        final company = Company.fromJson(
-          _read('companies/${summary.ticker}.json'),
-        );
+        for (final summary in directory.companies) {
+          final company = Company.fromJson(
+            _read('companies/${summary.ticker}.json'),
+          );
 
-        expect(company.ticker, summary.ticker);
-        expect(company.name.en, summary.nameEn);
-        expect(company.sector, summary.sector);
-        if (company.hasPriceHistory) withHistory++;
-      }
+          expect(company.ticker, summary.ticker);
+          expect(company.name.en, summary.nameEn);
+          expect(company.sector, summary.sector);
+          if (company.hasPriceHistory) withHistory++;
+        }
 
-      // The scan does not fetch history for every listing. Most have it; the
-      // rest render "Not enough history to draw" rather than an empty chart.
-      expect(withHistory, greaterThan(directory.count ~/ 2));
-    });
+        // The scan does not fetch history for every listing. Most have it; the
+        // rest render "Not enough history to draw" rather than an empty chart.
+        expect(withHistory, greaterThan(directory.count ~/ 2));
+      },
+    );
 
     test('price history is chronological with no duplicate sessions', () {
       final company = Company.fromJson(_read('companies/COMI.json'));
@@ -560,8 +588,12 @@ void main() {
       // every row: a holiday-shifted session is the feed's truth, not a bug.
       final company = Company.fromJson(_read('companies/COMI.json'));
       final weekend = company.priceHistory
-          .where((p) => const [DateTime.friday, DateTime.saturday]
-              .contains(p.parsedDate!.weekday))
+          .where(
+            (p) => const [
+              DateTime.friday,
+              DateTime.saturday,
+            ].contains(p.parsedDate!.weekday),
+          )
           .length;
 
       expect(company.priceHistory.length, greaterThan(20));

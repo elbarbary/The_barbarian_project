@@ -141,7 +141,8 @@ class _BArcGaugeState extends State<BArcGauge>
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     return Semantics(
-      label: '${widget.caption}: ${widget.big}, '
+      label:
+          '${widget.caption}: ${widget.big}, '
           'range ${widget.lowLabel} to ${widget.highLabel}',
       excludeSemantics: true,
       // The gauge is a chart of Latin numerals; it never mirrors.

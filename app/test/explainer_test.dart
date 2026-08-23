@@ -142,7 +142,8 @@ void main() {
     test('unusual is claimed only against a published band', () {
       final company = load('ABUK');
       final volume = Explainers.relativeVolume(company)!;
-      final ratio = company.market!.volume! /
+      final ratio =
+          company.market!.volume! /
           (company.profile!['median_volume_20d'] as num).toDouble();
 
       expect(

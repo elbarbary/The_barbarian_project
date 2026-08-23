@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../l10n/app_localizations.dart';import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/models/disclosure.dart';
 import '../../core/models/recency.dart';
@@ -59,7 +60,9 @@ class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
 
     // What is behind the window, and what of it has been opened.
     final archive = ref.watch(disclosureArchiveProvider).value?.value;
-    final shown = {for (final i in [...checks, ...rest]) i.id};
+    final shown = {
+      for (final i in [...checks, ...rest]) i.id,
+    };
     final older = <Disclosure>[];
     for (final month in _opened) {
       final loaded = ref.watch(disclosureMonthProvider(month)).value?.value;
@@ -115,7 +118,10 @@ class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
           const SizedBox(height: 10),
           Text(
             l.exchangeArchiveNote,
-            style: BarbarianType.bodyS.copyWith(color: c.textFaint, height: 1.5),
+            style: BarbarianType.bodyS.copyWith(
+              color: c.textFaint,
+              height: 1.5,
+            ),
           ),
           const SizedBox(height: 10),
         ],
@@ -170,7 +176,9 @@ class _Filing extends ConsumerWidget {
                         Flexible(child: _CheckTag(ratio: item.evidence?.ratio)),
                         const SizedBox(width: 8),
                       ],
-                      Flexible(child: _TypeTag(label: item.eventLabelFor(arabic))),
+                      Flexible(
+                        child: _TypeTag(label: item.eventLabelFor(arabic)),
+                      ),
                     ],
                   ),
                 ),
@@ -186,13 +194,13 @@ class _Filing extends ConsumerWidget {
                 // EGX publishes the day and not the hour, so this says
                 // "Today" and never "0h ago".
                 if ([
-                  if (item.tickers.isNotEmpty)
-                    item.tickers.length > 1
-                        ? '${item.tickers.first} +${item.tickers.length - 1}'
-                        : item.tickers.first,
-                  context.filingAge(item.date),
-                ].nonNulls.join(' · ') case final String meta
-                    when meta.isNotEmpty) ...[
+                      if (item.tickers.isNotEmpty)
+                        item.tickers.length > 1
+                            ? '${item.tickers.first} +${item.tickers.length - 1}'
+                            : item.tickers.first,
+                      context.filingAge(item.date),
+                    ].nonNulls.join(' · ')
+                    case final String meta when meta.isNotEmpty) ...[
                   Text(
                     meta,
                     style: BarbarianType.labelNano.copyWith(

@@ -178,7 +178,8 @@ abstract final class Explainers {
           : 'Below 1 is quieter than usual. Above 2 is unusual and worth '
                 'reading the filings for.',
       notability: ratio >= 2 ? Notability.notable : Notability.ordinary,
-      source: 'EGX session data'
+      source:
+          'EGX session data'
           '${company.market?.date == null ? '' : ', ${company.market!.date}'}',
       caveat:
           'The comparison is against the middle session of the last twenty, '
@@ -219,7 +220,8 @@ abstract final class Explainers {
       // A single session's close position is not a threshold event, and
       // dressing it as one would be reading tea leaves.
       notability: Notability.unjudged,
-      source: 'EGX session data'
+      source:
+          'EGX session data'
           '${m.date == null ? '' : ', ${m.date}'}',
     );
   }
@@ -233,20 +235,20 @@ abstract final class Explainers {
 
     final pct = float * 100;
     final inHundred = (pct / 1).round().clamp(0, 100);
-    final floatShares = _num(company, 'float_shares') ??
+    final floatShares =
+        _num(company, 'float_shares') ??
         (shares == null ? null : shares * float);
 
     return Explainer(
       termId: 'free_float',
       title: 'How much of it can actually be bought',
-      plain:
-          'Only $inHundred shares in every 100 actually trade.',
+      plain: 'Only $inHundred shares in every 100 actually trade.',
       token: '${pct.toStringAsFixed(1)}% free float',
       workings: floatShares == null
           ? '${pct.toStringAsFixed(2)}% of the shares are free to trade.'
           : '${_n(floatShares)} shares are free to trade\n'
-              '${shares == null ? '' : '÷ ${_n(shares)} shares in issue\n'}'
-              '= ${pct.toStringAsFixed(2)}%',
+                '${shares == null ? '' : '÷ ${_n(shares)} shares in issue\n'}'
+                '= ${pct.toStringAsFixed(2)}%',
       yardstick:
           'The rest sit with owners who do not sell. A small float means the '
           'price moves further on the same order — in both directions — and '
@@ -282,8 +284,8 @@ abstract final class Explainers {
       workings: shares == null || close == null
           ? 'EGP ${_n(cap)}'
           : '${_n(shares)} shares in issue\n'
-              '× EGP ${close.toStringAsFixed(2)} a share\n'
-              '= EGP ${_n(cap)}',
+                '× EGP ${close.toStringAsFixed(2)} a share\n'
+                '= EGP ${_n(cap)}',
       yardstick:
           'This is what the market is charging for the company today, not a '
           'measure of what it owns or earns.',

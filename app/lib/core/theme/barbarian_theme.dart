@@ -44,11 +44,7 @@ abstract final class BarbarianTheme {
       hoverColor: Colors.transparent,
       textTheme: BarbarianType.textTheme(c.textPrimary, c.textSecondary),
       fontFamily: BarbarianType.text,
-      dividerTheme: DividerThemeData(
-        color: c.hairline,
-        thickness: 1,
-        space: 1,
-      ),
+      dividerTheme: DividerThemeData(color: c.hairline, thickness: 1, space: 1),
       iconTheme: IconThemeData(color: c.textPrimary, size: 20),
       // The design has no AppBar anywhere: screens own their headers, which is
       // what lets the big display titles scroll away naturally.

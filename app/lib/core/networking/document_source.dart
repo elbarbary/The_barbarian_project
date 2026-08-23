@@ -75,8 +75,7 @@ class NetworkDocumentSource implements DocumentSource {
     DioExceptionType.receiveTimeout => 'receive timed out',
     DioExceptionType.sendTimeout => 'send timed out',
     DioExceptionType.connectionError => 'no connection',
-    DioExceptionType.badResponse =>
-      'http ${e.response?.statusCode ?? "error"}',
+    DioExceptionType.badResponse => 'http ${e.response?.statusCode ?? "error"}',
     DioExceptionType.cancel => 'cancelled',
     _ => e.message ?? 'request failed',
   };

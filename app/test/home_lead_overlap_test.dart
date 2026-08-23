@@ -77,7 +77,8 @@ void main() {
     expect(
       shown,
       1,
-      reason: '"${lead.headline}" is on screen $shown times — the rail and '
+      reason:
+          '"${lead.headline}" is on screen $shown times — the rail and '
           'the list are both carrying it',
     );
   });

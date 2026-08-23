@@ -22,7 +22,9 @@ abstract class QuoteSnapshot with _$QuoteSnapshot {
     /// this instant minus [delay].
     @JsonKey(name: 'as_of') required String asOf,
     @JsonKey(name: 'delay_seconds') @Default(900) int delaySeconds,
-    @JsonKey(name: 'update_modes') @Default(<String>[]) List<String> updateModes,
+    @JsonKey(name: 'update_modes')
+    @Default(<String>[])
+    List<String> updateModes,
     ExchangeSession? session,
     @Default(false) bool stale,
     @Default(<String, LiveQuote>{}) Map<String, LiveQuote> quotes,
@@ -83,10 +85,8 @@ abstract class QuoteSnapshot with _$QuoteSnapshot {
 /// Whether the Egyptian Exchange was trading when the snapshot was taken.
 @freezed
 abstract class ExchangeSession with _$ExchangeSession {
-  const factory ExchangeSession({
-    @Default(false) bool open,
-    String? weekday,
-  }) = _ExchangeSession;
+  const factory ExchangeSession({@Default(false) bool open, String? weekday}) =
+      _ExchangeSession;
 
   factory ExchangeSession.fromJson(Map<String, dynamic> json) =>
       _$ExchangeSessionFromJson(json);

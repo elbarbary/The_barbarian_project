@@ -145,7 +145,6 @@ class BRatesBlock extends ConsumerWidget {
   );
 }
 
-
 /// 24, 21 and 18 karat side by side.
 ///
 /// 21 is what most Egyptian jewellery actually is, and a reader comparing our
@@ -249,9 +248,7 @@ class _WorldCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                row.labelFor(arabic).isEmpty
-                    ? row.id
-                    : row.labelFor(arabic),
+                row.labelFor(arabic).isEmpty ? row.id : row.labelFor(arabic),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: BarbarianType.labelTiny.copyWith(
@@ -303,10 +300,11 @@ class _MetalCard extends ConsumerWidget {
     // The card's headline is pounds a gram, and charting that would need a
     // matching history of the pound we do not hold — so the shape is the
     // metal's own and the number above it stays the one a reader buys at.
-    final series = ref
-        .watch(marketHistoryProvider)
-        .whenOrNull(data: (s) => s.value)
-        ?.metalOf(metal.id) ??
+    final series =
+        ref
+            .watch(marketHistoryProvider)
+            .whenOrNull(data: (s) => s.value)
+            ?.metalOf(metal.id) ??
         const <double>[];
 
     return BPressable(
@@ -372,11 +370,14 @@ class _RateTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final arabic = Directionality.of(context) == TextDirection.rtl;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     return BPaperCard(
       radius: BarbarianRadius.xl,
       padding: EdgeInsets.zero,
-      child: BPlainNumber(explainer: BRatesBlock._fromRate(row, arabic), last: true),
+      child: BPlainNumber(
+        explainer: BRatesBlock._fromRate(row, arabic),
+        last: true,
+      ),
     );
   }
 }

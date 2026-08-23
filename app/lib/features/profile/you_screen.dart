@@ -7,6 +7,7 @@ import '../../core/config/app_config.dart';
 import '../../core/config/feature_flags.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/price_freshness.dart';
+import '../../core/models/price_freshness_text.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/composites.dart';
@@ -203,11 +204,13 @@ class YouScreen extends ConsumerWidget {
                     // straightforwardly untrue.
                     value: snapshot == null
                         ? l.notDownloaded
-                        : ref.watch(priceFreshnessProvider).caption,
+                        : context.freshnessCaption(
+                            ref.watch(priceFreshnessProvider),
+                          ),
                   ),
                   _Fact(
                     label: l.companies,
-                    value: '${directory?.count ?? 0} in the directory',
+                    value: l.youCompaniesCount(directory?.count ?? 0),
                   ),
                   _Fact(
                     label: l.prices,
@@ -215,11 +218,11 @@ class YouScreen extends ConsumerWidget {
                     // that could drift from what the app is actually serving.
                     value: switch (ref.watch(priceFreshnessProvider)) {
                       PriceFreshness(isLive: true, :final delay) =>
-                        '${delay.inMinutes} minutes behind the exchange, '
-                            'refreshed every '
-                            '${AppConfig.quoteRefresh.inMinutes} minutes. '
-                            'No real-time feed.',
-                      _ => 'Last close only. No real-time feed.',
+                        l.youPricesLive(
+                          delay.inMinutes,
+                          AppConfig.quoteRefresh.inMinutes,
+                        ),
+                      _ => l.youPricesClose,
                     },
                   ),
                   const SizedBox(height: 10),

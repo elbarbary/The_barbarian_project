@@ -72,41 +72,51 @@ void main() {
       }, isRefreshable: true);
       final cache = MemoryDocumentCache();
 
-      await StaticApi(source: source, cache: cache)
-          .loadOnce('market.json', resource: 'market');
+      await StaticApi(
+        source: source,
+        cache: cache,
+      ).loadOnce('market.json', resource: 'market');
       final afterFirst = source.fetches;
 
-      await StaticApi(source: source, cache: cache)
-          .loadOnce('market.json', resource: 'market');
+      await StaticApi(
+        source: source,
+        cache: cache,
+      ).loadOnce('market.json', resource: 'market');
 
       // The manifest is re-read each session, but a resource whose counter has
       // not moved is served from cache rather than downloaded again.
       expect(source.fetches, afterFirst + 1);
     });
 
-    test('bundled fixtures invalidate too, so a new build is never stale',
-        () async {
-      // The bug this covers: fixtures were treated as immutable, so the very
-      // first launch's copy survived every later app build.
-      final source = _MutableSource({
-        'manifest.json': _manifest('build-1'),
-        'opportunities/latest.json': '{"date":"2026-08-01"}',
-      }, isRefreshable: false);
-      final cache = MemoryDocumentCache();
+    test(
+      'bundled fixtures invalidate too, so a new build is never stale',
+      () async {
+        // The bug this covers: fixtures were treated as immutable, so the very
+        // first launch's copy survived every later app build.
+        final source = _MutableSource({
+          'manifest.json': _manifest('build-1'),
+          'opportunities/latest.json': '{"date":"2026-08-01"}',
+        }, isRefreshable: false);
+        final cache = MemoryDocumentCache();
 
-      final before = await StaticApi(source: source, cache: cache)
-          .loadOnce('opportunities/latest.json');
-      expect(before!.body, contains('2026-08-01'));
+        final before = await StaticApi(
+          source: source,
+          cache: cache,
+        ).loadOnce('opportunities/latest.json');
+        expect(before!.body, contains('2026-08-01'));
 
-      source.docs = {
-        'manifest.json': _manifest('build-2'),
-        'opportunities/latest.json': '{"date":"2026-08-06"}',
-      };
+        source.docs = {
+          'manifest.json': _manifest('build-2'),
+          'opportunities/latest.json': '{"date":"2026-08-06"}',
+        };
 
-      final after = await StaticApi(source: source, cache: cache)
-          .loadOnce('opportunities/latest.json');
-      expect(after!.body, contains('2026-08-06'));
-    });
+        final after = await StaticApi(
+          source: source,
+          cache: cache,
+        ).loadOnce('opportunities/latest.json');
+        expect(after!.body, contains('2026-08-06'));
+      },
+    );
 
     test('an unreadable manifest leaves the cache intact', () async {
       final source = _MutableSource({

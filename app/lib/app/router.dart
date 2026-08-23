@@ -47,11 +47,10 @@ abstract final class Routes {
 
   static String cashOrTrashPath(BNavTab from) => '${_root(from)}cash-or-trash';
 
-  static String articlePath(BNavTab from, String url, String title) =>
-      Uri(
-        path: '${_root(from)}article',
-        queryParameters: {'url': url, 'title': title},
-      ).toString();
+  static String articlePath(BNavTab from, String url, String title) => Uri(
+    path: '${_root(from)}article',
+    queryParameters: {'url': url, 'title': title},
+  ).toString();
 
   static String _root(BNavTab tab) => switch (tab) {
     BNavTab.home => '/',
@@ -76,10 +75,8 @@ GoRouter buildRouter() {
     ),
     GoRoute(
       path: Routes.exitFor,
-      builder: (context, state) => ExitScreen(
-        parentTab: tab,
-        ticker: state.pathParameters['ticker'],
-      ),
+      builder: (context, state) =>
+          ExitScreen(parentTab: tab, ticker: state.pathParameters['ticker']),
     ),
     GoRoute(
       path: Routes.directory,
@@ -206,8 +203,5 @@ class _Shell extends ConsumerWidget {
 /// Used by in-content actions such as the empty watchlist's "Browse companies".
 void selectTab(BuildContext context, BNavTab tab) {
   final shell = StatefulNavigationShell.of(context);
-  shell.goBranch(
-    tab.index,
-    initialLocation: tab.index == shell.currentIndex,
-  );
+  shell.goBranch(tab.index, initialLocation: tab.index == shell.currentIndex);
 }

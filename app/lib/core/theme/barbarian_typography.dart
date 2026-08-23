@@ -122,7 +122,8 @@ abstract final class BarbarianType {
   // ------------------------------------------------------------------ data
 
   /// 26 — a stat tile's value.
-  static TextStyle get figureL => _display(26, weight: 300, letterSpacing: -0.02);
+  static TextStyle get figureL =>
+      _display(26, weight: 300, letterSpacing: -0.02);
 
   /// 20 — a price in a row.
   static TextStyle get figureM => _display(20, weight: 300);

@@ -133,20 +133,35 @@ abstract class PillarScore with _$PillarScore {
 /// words anybody reads.
 enum Verdict {
   @JsonValue('cash')
-  cash('cash', 'Nearly all positive', '＋＋',
-      'Nearly all six pillars are positive.'),
+  cash(
+    'cash',
+    'Nearly all positive',
+    '＋＋',
+    'Nearly all six pillars are positive.',
+  ),
   @JsonValue('loose_change')
-  looseChange('loose_change', 'Mostly positive', '＋',
-      'Most of the six pillars are positive.'),
+  looseChange(
+    'loose_change',
+    'Mostly positive',
+    '＋',
+    'Most of the six pillars are positive.',
+  ),
   @JsonValue('recyclable')
-  recyclable('recyclable', 'Balanced', '＝',
-      'The six pillars are balanced.'),
+  recyclable('recyclable', 'Balanced', '＝', 'The six pillars are balanced.'),
   @JsonValue('trash')
-  trash('trash', 'Mostly negative', '−',
-      'Most of the six pillars are negative.'),
+  trash(
+    'trash',
+    'Mostly negative',
+    '−',
+    'Most of the six pillars are negative.',
+  ),
   @JsonValue('toxic')
-  toxic('toxic', 'Nearly all negative', '−−',
-      'Nearly all six pillars are negative.');
+  toxic(
+    'toxic',
+    'Nearly all negative',
+    '−−',
+    'Nearly all six pillars are negative.',
+  );
 
   const Verdict(this.id, this.label, this.mark, this.sentence);
 

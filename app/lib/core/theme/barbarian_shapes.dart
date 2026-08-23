@@ -36,38 +36,22 @@ abstract final class BarbarianRadius {
 abstract final class BarbarianShadow {
   /// The default card lift. `0 8px 24px rgba(27,25,23,.06)`.
   static const List<BoxShadow> card = [
-    BoxShadow(
-      color: Color(0x0F1B1917),
-      blurRadius: 24,
-      offset: Offset(0, 8),
-    ),
+    BoxShadow(color: Color(0x0F1B1917), blurRadius: 24, offset: Offset(0, 8)),
   ];
 
   /// A card that sits above another. `0 8px 24px rgba(27,25,23,.08)`.
   static const List<BoxShadow> raised = [
-    BoxShadow(
-      color: Color(0x141B1917),
-      blurRadius: 24,
-      offset: Offset(0, 8),
-    ),
+    BoxShadow(color: Color(0x141B1917), blurRadius: 24, offset: Offset(0, 8)),
   ];
 
   /// The selected segment in the floating nav. `0 8px 20px rgba(27,25,23,.16)`.
   static const List<BoxShadow> lifted = [
-    BoxShadow(
-      color: Color(0x291B1917),
-      blurRadius: 20,
-      offset: Offset(0, 8),
-    ),
+    BoxShadow(color: Color(0x291B1917), blurRadius: 20, offset: Offset(0, 8)),
   ];
 
   /// The selected tab in a segmented row. `0 4px 12px rgba(27,25,23,.10)`.
   static const List<BoxShadow> tab = [
-    BoxShadow(
-      color: Color(0x1A1B1917),
-      blurRadius: 12,
-      offset: Offset(0, 4),
-    ),
+    BoxShadow(color: Color(0x1A1B1917), blurRadius: 12, offset: Offset(0, 4)),
   ];
 }
 
@@ -94,7 +78,9 @@ abstract final class BarbarianSpace {
   static const double navClearance = 108;
 
   static const EdgeInsets card = EdgeInsets.all(xl);
-  static const EdgeInsets screen = EdgeInsets.symmetric(horizontal: screenInset);
+  static const EdgeInsets screen = EdgeInsets.symmetric(
+    horizontal: screenInset,
+  );
 }
 
 /// The canvas animates everything at `220ms ease-out`, with a `200ms` variant

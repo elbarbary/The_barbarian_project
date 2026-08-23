@@ -70,6 +70,7 @@ abstract class Strand with _$Strand {
 
   factory Strand.fromJson(Map<String, dynamic> json) => _$StrandFromJson(json);
 
-  String titleFor(bool arabic) =>
-      arabic && titleAr.isNotEmpty ? titleAr : (title.isEmpty ? titleAr : title);
+  String titleFor(bool arabic) => arabic && titleAr.isNotEmpty
+      ? titleAr
+      : (title.isEmpty ? titleAr : title);
 }

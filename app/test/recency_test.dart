@@ -25,11 +25,18 @@ void main() {
   group('news, which publishes a real timestamp', () {
     test('reads in minutes, then hours', () {
       final now = DateTime.now().toUtc();
-      expect(Recency.newsAge(now.subtract(const Duration(seconds: 20)), en),
-          'just now');
       expect(
-          Recency.newsAge(now.subtract(const Duration(minutes: 12)), en), '12m ago');
-      expect(Recency.newsAge(now.subtract(const Duration(hours: 5)), en), '5h ago');
+        Recency.newsAge(now.subtract(const Duration(seconds: 20)), en),
+        'just now',
+      );
+      expect(
+        Recency.newsAge(now.subtract(const Duration(minutes: 12)), en),
+        '12m ago',
+      );
+      expect(
+        Recency.newsAge(now.subtract(const Duration(hours: 5)), en),
+        '5h ago',
+      );
     });
 
     test('a clock ahead of ours never prints a negative age', () {
@@ -77,12 +84,16 @@ void main() {
 
   test('Arabic is translated, not passed through in English', () {
     final now = DateTime.now().toUtc();
-    expect(Recency.newsAge(now.subtract(const Duration(hours: 3)), ar),
-        isNot(contains('ago')));
+    expect(
+      Recency.newsAge(now.subtract(const Duration(hours: 3)), ar),
+      isNot(contains('ago')),
+    );
     expect(Recency.filingAge(isoDay(DateTime.now()), ar), 'اليوم');
     expect(
       Recency.filingAge(
-          isoDay(DateTime.now().subtract(const Duration(days: 1))), ar),
+        isoDay(DateTime.now().subtract(const Duration(days: 1))),
+        ar,
+      ),
       'أمس',
     );
   });

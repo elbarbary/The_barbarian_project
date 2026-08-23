@@ -39,10 +39,8 @@ class BFiledDocument extends StatelessWidget {
     final name = url.split('/').last;
 
     return BPressable(
-      onTap: () => launchUrl(
-        Uri.parse(url),
-        mode: LaunchMode.externalApplication,
-      ),
+      onTap: () =>
+          launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication),
       child: Container(
         padding: const EdgeInsets.fromLTRB(12, 11, 12, 11),
         decoration: BoxDecoration(
@@ -59,7 +57,9 @@ class BFiledDocument extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    count > 1 ? '${l.finOpenPdf} ${index + 1}/$count' : l.finOpenPdf,
+                    count > 1
+                        ? '${l.finOpenPdf} ${index + 1}/$count'
+                        : l.finOpenPdf,
                     style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
                   ),
                   const SizedBox(height: 2),

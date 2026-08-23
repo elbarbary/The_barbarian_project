@@ -135,7 +135,9 @@ class _Frame extends StatelessWidget {
           // orbs cost a full-screen 34-sigma blur and an offscreen buffer per
           // frame to tint a paper ground the boards draw flat.
           Positioned.fill(
-            child: DecoratedBox(decoration: BoxDecoration(gradient: c.pageGradient)),
+            child: DecoratedBox(
+              decoration: BoxDecoration(gradient: c.pageGradient),
+            ),
           ),
           // The canvas hides scrollbars globally; on device the content is the
           // chrome, so a track down the edge would be the only hard line in it.

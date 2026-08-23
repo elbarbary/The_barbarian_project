@@ -82,10 +82,7 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
             ),
           ],
         ),
-        BScreenTitle(
-          l.exitCanIGetOut,
-          subtitle: l.exitHeadline,
-        ),
+        BScreenTitle(l.exitCanIGetOut, subtitle: l.exitHeadline),
         const _HowItWorks(),
         if (widget.ticker == null) ...[
           BSearchPill(
@@ -187,8 +184,7 @@ class _ForCompany extends ConsumerWidget {
         if (exit == null) {
           return BEmptyState(
             title: l.exitNotEnough(ticker),
-            body:
-                l.exitNoHistoryBody,
+            body: l.exitNoHistoryBody,
           );
         }
 

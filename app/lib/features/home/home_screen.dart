@@ -8,6 +8,7 @@ import '../../core/models/disclosure.dart';
 import '../../core/models/market_history.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/news.dart';
+import '../../core/models/price_freshness_text.dart';
 import '../../core/models/recency.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
@@ -174,7 +175,7 @@ class _Greeting extends ConsumerWidget {
         // A screen is only as current as its stalest figure, so it quotes the
         // oldest rather than the freshest.
         Text(
-          l.oldestThingHere(freshness.caption),
+          l.oldestThingHere(context.freshnessCaption(freshness)),
           style: BarbarianType.bodyS.copyWith(color: c.textMuted),
         ),
       ],
@@ -520,8 +521,7 @@ class _WatchlistBlock extends ConsumerWidget {
             title: l.homeWatchlistEmpty,
             body: l.homeWatchlistEmptyBody,
             actionLabel: l.browseCompanies,
-            onAction: () =>
-                context.push(Routes.directoryPath(BNavTab.home)),
+            onAction: () => context.push(Routes.directoryPath(BNavTab.home)),
           ),
         ],
       );
@@ -985,7 +985,8 @@ class HomeLatestNews extends ConsumerWidget {
                                   when why.isNotEmpty) ...[
                                 BInsightLine(why),
                                 const SizedBox(height: 7),
-                              ] else if (item.eventTag case final String tag) ...[
+                              ] else if (item.eventTag
+                                  case final String tag) ...[
                                 BKindChip(tag),
                                 const SizedBox(height: 7),
                               ],
@@ -1294,7 +1295,6 @@ class _Key extends StatelessWidget {
   }
 }
 
-
 /// The session's shape: what share of the market rose, held and fell.
 ///
 /// Green, grey, red, left to right, each segment as wide as its share of the
@@ -1354,4 +1354,3 @@ class _BreadthBar extends StatelessWidget {
     );
   }
 }
-

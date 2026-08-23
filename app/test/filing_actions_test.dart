@@ -75,7 +75,8 @@ void main() {
 
     // The choices sat under the floating nav bar the first time this was
     // built, so the last one was unreachable.
-    final surface = tester.view.physicalSize.height / tester.view.devicePixelRatio;
+    final surface =
+        tester.view.physicalSize.height / tester.view.devicePixelRatio;
     expect(
       tester.getRect(find.text('Read the filing')).bottom,
       lessThan(surface),

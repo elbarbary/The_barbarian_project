@@ -46,7 +46,8 @@ class DiskFixtureSource implements DocumentSource {
 /// caption assertion into a failure the next morning.
 final String fixtureSessionDate =
     (jsonDecode(File('assets/fixtures/market.json').readAsStringSync())
-        as Map<String, dynamic>)['date'] as String;
+            as Map<String, dynamic>)['date']
+        as String;
 
 /// Reads a bundled fixture straight off disk and decodes it.
 ///
@@ -131,14 +132,14 @@ QuoteSnapshot fakeQuotes(
 /// Gives `SharedPreferencesAsync` somewhere to write in tests, so the real
 /// provider graph is exercised rather than stubbed out.
 void useInMemoryPreferences() {
-  SharedPreferencesAsyncPlatform.instance = InMemorySharedPreferencesAsync.empty();
+  SharedPreferencesAsyncPlatform.instance =
+      InMemorySharedPreferencesAsync.empty();
 }
 
 /// An in-memory watchlist/bookmark store, so tests never touch platform
 /// channels or real preferences.
 class FakeUserRepository implements UserRepository {
-  FakeUserRepository({List<String>? watchlist})
-    : _watchlist = [...?watchlist];
+  FakeUserRepository({List<String>? watchlist}) : _watchlist = [...?watchlist];
 
   final List<String> _watchlist;
   final List<Bookmark> _bookmarks = [];

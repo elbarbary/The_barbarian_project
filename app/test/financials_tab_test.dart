@@ -23,21 +23,32 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('it shows net profit with the year it belongs to', (tester) async {
+  testWidgets('it shows net profit with the year it belongs to', (
+    tester,
+  ) async {
     await openFinancials(tester, 'SWDY');
 
     // Matched case-insensitively: BSectionLabel uppercases Latin script, and
     // the test should not break if that presentation choice changes.
     expect(
-      find.textContaining(RegExp('net profit, as reported', caseSensitive: false)),
+      find.textContaining(
+        RegExp('net profit, as reported', caseSensitive: false),
+      ),
       findsOneWidget,
     );
     // The fixture carries real filed figures, so the period label is a real
-    // financial year rather than a placeholder.
-    expect(find.textContaining(RegExp(r'EGP m · FY \d{4}')), findsWidgets);
+    // financial year rather than a placeholder — and the unit beside it is
+    // whatever this company's own figure makes it, not a fixed "m" the number
+    // then contradicts.
+    expect(
+      find.textContaining(RegExp(r'(billion|million|thousand) EGP · FY \d{4}')),
+      findsWidgets,
+    );
   });
 
-  testWidgets('it explains the year-on-year move in a sentence', (tester) async {
+  testWidgets('it explains the year-on-year move in a sentence', (
+    tester,
+  ) async {
     await openFinancials(tester, 'SWDY');
 
     // The whole point of the screen: not two numbers, but what they did.
@@ -50,7 +61,11 @@ void main() {
   testWidgets('it shows the balance sheet it actually has', (tester) async {
     await openFinancials(tester, 'SWDY');
 
-    for (final label in ['total assets', "owners' equity", 'total liabilities']) {
+    for (final label in [
+      'total assets',
+      "owners' equity",
+      'total liabilities',
+    ]) {
       expect(
         find.textContaining(RegExp(label, caseSensitive: false)),
         findsWidgets,
@@ -64,8 +79,10 @@ void main() {
     // not much better than an invented one.
     await openFinancials(tester, 'SWDY');
 
-    expect(find.textContaining(RegExp('Mubasher|Egyptian Exchange')),
-        findsWidgets);
+    expect(
+      find.textContaining(RegExp('Mubasher|Egyptian Exchange')),
+      findsWidgets,
+    );
   });
 
   testWidgets('it presents no revenue and no margin', (tester) async {
@@ -75,14 +92,17 @@ void main() {
     // bar chart drawn from absent figures is exactly what was here before.
     expect(find.byType(BBarChart), findsNothing);
     for (final label in ['net margin', 'gross margin', 'operating margin']) {
-      expect(find.textContaining(RegExp(label, caseSensitive: false)),
-          findsNothing);
+      expect(
+        find.textContaining(RegExp(label, caseSensitive: false)),
+        findsNothing,
+      );
     }
 
     // And it says so, rather than leaving the reader to notice the absence.
     expect(
-      find.textContaining(RegExp('neither source states revenue',
-          caseSensitive: false)),
+      find.textContaining(
+        RegExp('neither source states revenue', caseSensitive: false),
+      ),
       findsOneWidget,
     );
   });
@@ -93,7 +113,9 @@ void main() {
     await openFinancials(tester, 'ORAS');
 
     expect(
-      find.textContaining(RegExp('no reported figures yet', caseSensitive: false)),
+      find.textContaining(
+        RegExp('no reported figures yet', caseSensitive: false),
+      ),
       findsOneWidget,
     );
   });
@@ -108,12 +130,17 @@ void main() {
   test('the shipped fixture carries no invented statements', () {
     // A regression guard on the specific numbers that shipped for five years.
     // They were roughly half of El Sewedy's real figures in every column.
-    final company = Company.fromJson(readFixtureObjectSync('companies/SWDY.json'));
+    final company = Company.fromJson(
+      readFixtureObjectSync('companies/SWDY.json'),
+    );
     final invented = {118500.0, 131900.0, 92600.0, 71300.0, 55100.0};
     for (final period in company.financials.annual) {
       expect(invented.contains(period.revenue), isFalse);
-      expect(period.revenue, isNull,
-          reason: 'no source we have states revenue, so none may appear');
+      expect(
+        period.revenue,
+        isNull,
+        reason: 'no source we have states revenue, so none may appear',
+      );
     }
   });
 }

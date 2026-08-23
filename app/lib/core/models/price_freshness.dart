@@ -73,33 +73,10 @@ class PriceFreshness {
 
   bool get isLive => kind == PriceFreshnessKind.live;
 
-  /// The line shown under a price.
-  String get caption => switch (kind) {
-    PriceFreshnessKind.unknown => 'Prices loading',
-    PriceFreshnessKind.sample => 'Sample data · not live prices',
-    PriceFreshnessKind.published => _publishedLabel,
-    // Outside trading hours a "delayed" quote is just the closing price, and
-    // calling it delayed would imply a tape that is not running. Say what it is.
-    PriceFreshnessKind.live when !sessionOpen =>
-      sessionDate == null ? 'Market closed · last close' : 'Market closed · last close $sessionDate',
-    PriceFreshnessKind.live => '$_delayLabel delayed · updated $_sinceLabel',
-  };
-
-  /// A published price is only a "close" if the session it came from had ended.
-  String get _publishedLabel {
-    final word = publishedIsClose ? 'Last close' : 'During session';
-    return sessionDate == null ? word : '$word · $sessionDate';
-  }
-
-  /// A short form for tight rows, where the delay still has to appear but the
-  /// collection time does not fit.
-  String get shortCaption => switch (kind) {
-    PriceFreshnessKind.unknown => '',
-    PriceFreshnessKind.sample => 'Sample',
-    PriceFreshnessKind.published => _publishedLabel,
-    PriceFreshnessKind.live when !sessionOpen => 'Market closed',
-    PriceFreshnessKind.live => '$_delayLabel delayed',
-  };
+  /// The wording lives in `price_freshness_text.dart`, as an extension on
+  /// [BuildContext], because every one of these sentences has to reach the
+  /// reader in their own language and dated in their own calendar. This class
+  /// carries the facts; that one says them.
 
   /// The delay assumed when the feed does not state one.
   ///
@@ -108,30 +85,6 @@ class PriceFreshness {
   /// else — an old Worker version, a hand-edited response, a future feed —
   /// unable to produce a false claim on screen.
   static const Duration assumedDelay = Duration(minutes: 15);
-
-  String get _delayLabel {
-    // Never "Real-time". Zero here means the feed did not tell us its tier, and
-    // the app has no licence for a real-time EGX feed, so zero is far more
-    // likely to be a missing field than a genuine upgrade. Claiming real-time
-    // on a delayed price is the one error spec §49 exists to prevent, so the
-    // unknown case reads as the delay we actually have.
-    final effective = delay.inSeconds <= 0 ? assumedDelay : delay;
-    final minutes = effective.inMinutes;
-    if (minutes < 1) return '${effective.inSeconds}-sec';
-    if (minutes < 60) return '$minutes-min';
-    return '${effective.inHours}-hr';
-  }
-
-  String get _sinceLabel {
-    final elapsed = since;
-    if (elapsed == null) return 'just now';
-    if (elapsed.inSeconds < 90) return 'just now';
-    if (elapsed.inMinutes < 60) return '${elapsed.inMinutes} min ago';
-    if (elapsed.inHours < 24) {
-      return '${elapsed.inHours} hr${elapsed.inHours == 1 ? '' : 's'} ago';
-    }
-    return '${elapsed.inDays} day${elapsed.inDays == 1 ? '' : 's'} ago';
-  }
 }
 
 enum PriceFreshnessKind { unknown, sample, published, live }

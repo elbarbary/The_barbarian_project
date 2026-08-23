@@ -26,7 +26,10 @@ void main() {
     tester,
   ) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     // A bare "Statement" says nothing about what happened, and it is the most
     // common filing type there is. Leading with one wastes the largest card on
@@ -52,7 +55,10 @@ void main() {
     // "Filed today" regardless — and when this was found the entire feed was
     // one day old, so Home was stating something false in its largest type.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     final fixture = readFixtureObjectSync('disclosures/latest.json');
     final items = (fixture['items'] as List).cast<Map<String, dynamic>>();
@@ -76,14 +82,21 @@ void main() {
 
   testWidgets('the lead filing says why it is the lead', (tester) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     // The kicker carries the measured reason this filing leads, and the body
     // carries it in words. Without either the hero is just the newest filing
     // wearing a big font.
     expect(
-      find.textContaining(RegExp('normal volume|announced this|filed this|NORMAL',
-          caseSensitive: false)),
+      find.textContaining(
+        RegExp(
+          'normal volume|announced this|filed this|NORMAL',
+          caseSensitive: false,
+        ),
+      ),
       findsWidgets,
     );
   });
@@ -114,11 +127,10 @@ void main() {
     // The rail renders whatever the rates document carries, so this is the
     // check that nothing is being dropped on the way to the screen.
     final rates = RatesDoc.fromJson(readFixtureObjectSync('rates/latest.json'));
-    expect(rates.indices.map((i) => i.id), containsAll(<String>[
-      'EGX30',
-      'EGX70EWI',
-      'EGX100EWI',
-    ]));
+    expect(
+      rates.indices.map((i) => i.id),
+      containsAll(<String>['EGX30', 'EGX70EWI', 'EGX100EWI']),
+    );
   });
 
   test('§14 the indices carry a real series, not a single point', () {
@@ -176,7 +188,10 @@ void main() {
 
   testWidgets('it counts what rose and what fell', (tester) async {
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('rose', caseSensitive: false)));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('rose', caseSensitive: false)),
+    );
 
     // Counted from the shares themselves — no breadth figure is published for
     // this exchange.
@@ -194,7 +209,9 @@ void main() {
     // feed while this one counts the published close, and the two disagreed on
     // screen — 107 rose against 57 for the same session. Two cards claiming
     // "the session" with different numbers is worse than either alone.
-    final today = File('lib/features/today/today_screen.dart').readAsStringSync();
+    final today = File(
+      'lib/features/today/today_screen.dart',
+    ).readAsStringSync();
     expect(
       today.contains('_MarketPulse'),
       isFalse,
@@ -230,12 +247,17 @@ void main() {
     );
   });
 
-  testWidgets('§8 the macro block explains and never instructs', (tester) async {
+  testWidgets('§8 the macro block explains and never instructs', (
+    tester,
+  ) async {
     // This is the strongest claim the app makes anywhere: a chain of cause
     // from a number outside the exchange to a share inside it. It has to stop
     // at the mechanism.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     for (final word in [
       'you should',
@@ -253,26 +275,37 @@ void main() {
     }
   });
 
-  test('macro carries a mechanism and a measured correlation for each series', () {
-    // The two are published side by side so they can disagree in front of the
-    // reader. Suez has a compelling chain and a correlation near zero, which
-    // says the canal reaches the exchange over months rather than sessions —
-    // and hiding that would turn an explanation into a claim.
-    final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
+  test(
+    'macro carries a mechanism and a measured correlation for each series',
+    () {
+      // The two are published side by side so they can disagree in front of the
+      // reader. Suez has a compelling chain and a correlation near zero, which
+      // says the canal reaches the exchange over months rather than sessions —
+      // and hiding that would turn an explanation into a claim.
+      final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
 
-    expect(doc.series, isNotEmpty);
-    for (final series in doc.series) {
-      expect(series.chain, isNotEmpty, reason: '\${series.id} has no mechanism');
-      expect(series.chainAr, isNotEmpty, reason: '\${series.id} has no Arabic');
-      expect(series.asOf, isNotEmpty, reason: '\${series.id} is undated');
-      expect(series.history.length, greaterThan(1));
-    }
-    expect(doc.correlations, isNotEmpty);
-    for (final r in doc.correlations) {
-      expect(r.r.abs(), lessThanOrEqualTo(1.0));
-      expect(r.sessions, greaterThan(0));
-    }
-  });
+      expect(doc.series, isNotEmpty);
+      for (final series in doc.series) {
+        expect(
+          series.chain,
+          isNotEmpty,
+          reason: '\${series.id} has no mechanism',
+        );
+        expect(
+          series.chainAr,
+          isNotEmpty,
+          reason: '\${series.id} has no Arabic',
+        );
+        expect(series.asOf, isNotEmpty, reason: '\${series.id} is undated');
+        expect(series.history.length, greaterThan(1));
+      }
+      expect(doc.correlations, isNotEmpty);
+      for (final r in doc.correlations) {
+        expect(r.r.abs(), lessThanOrEqualTo(1.0));
+        expect(r.sessions, greaterThan(0));
+      }
+    },
+  );
 
   test('macro coverage is somebody else\'s reporting, credited and linked', () {
     // The only part of a macro card that is not ours. The reading is a
@@ -280,8 +313,9 @@ void main() {
     // reasoning — this is journalism, and it carries the name of whoever wrote
     // it and a link back to them.
     final doc = MacroDoc.fromJson(readFixtureObjectSync('macro.json'));
-    final withCoverage =
-        doc.series.where((s) => s.coverage.isNotEmpty).toList();
+    final withCoverage = doc.series
+        .where((s) => s.coverage.isNotEmpty)
+        .toList();
 
     expect(
       withCoverage,
@@ -382,7 +416,10 @@ void main() {
     // on named issuers is exposure we have not cleared. Home must not be the
     // back door that puts it in front of everyone anyway.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp('announced this|filed this')));
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp('announced this|filed this')),
+    );
 
     for (final absent in [
       'latest research',

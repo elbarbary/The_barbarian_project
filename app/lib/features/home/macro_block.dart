@@ -59,8 +59,9 @@ class BMacroBlock extends ConsumerWidget {
     // A fixed order puts the canal at the top on a day it did not budge and
     // gold third on a day it jumped three percent.
     shown.sort((a, b) {
-      final byMove = (b.changePercent?.abs() ?? -1)
-          .compareTo(a.changePercent?.abs() ?? -1);
+      final byMove = (b.changePercent?.abs() ?? -1).compareTo(
+        a.changePercent?.abs() ?? -1,
+      );
       // Ties fall back to the listed order, so a quiet day is still stable
       // rather than reshuffling itself between builds.
       return byMove != 0

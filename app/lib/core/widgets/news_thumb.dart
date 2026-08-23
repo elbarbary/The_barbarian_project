@@ -96,7 +96,10 @@ class _BNewsThumbState extends State<BNewsThumb> {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 if (mounted && !_failed) setState(() => _failed = true);
               });
-              return ColoredBox(color: c.hairline, child: const SizedBox.expand());
+              return ColoredBox(
+                color: c.hairline,
+                child: const SizedBox.expand(),
+              );
             },
           ),
         ),

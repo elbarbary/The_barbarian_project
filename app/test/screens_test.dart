@@ -22,6 +22,13 @@ import 'support/harness.dart';
 ///
 /// Every test waits on a *condition* rather than a fixed number of frames; see
 /// `pumpUntil` for why a pump count is always a race here.
+/// Any of the sentences the price-age caption can produce (spec §49).
+///
+/// Not an ISO date: the age is worded now — "Closing prices · Today" — so the
+/// assertion is on the claim rather than on a stamp the pipeline rewrites
+/// every morning.
+final priceAgeWording = RegExp('prices|market closed', caseSensitive: false);
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
@@ -35,7 +42,10 @@ void main() {
       );
 
       expect(find.text('The full directory'), findsOneWidget);
-      expect(find.textContaining('Commercial International Bank'), findsWidgets);
+      expect(
+        find.textContaining('Commercial International Bank'),
+        findsWidgets,
+      );
     });
 
     testWidgets('search narrows the list without a network call', (
@@ -51,7 +61,10 @@ void main() {
       await tester.pump();
 
       expect(find.textContaining('El Sewedy Electric'), findsOneWidget);
-      expect(find.textContaining('Commercial International Bank'), findsNothing);
+      expect(
+        find.textContaining('Commercial International Bank'),
+        findsNothing,
+      );
     });
 
     testWidgets('a query with no match shows the empty state, not a blank', (
@@ -75,13 +88,15 @@ void main() {
     // the invariant rather than one phrasing: the prices are dated, and nothing
     // on screen calls them live.
     testWidgets('dates its prices and never calls them live', (tester) async {
+      // The age is said in words now — "Closing prices · Today" — so the
+      // assertion is on the claim rather than on an ISO stamp.
       await pumpScreen(
         tester,
         const MarketScreen(parentTab: BNavTab.home),
-        until: find.textContaining(fixtureSessionDate),
+        until: find.textContaining(priceAgeWording),
       );
 
-      expect(find.textContaining(fixtureSessionDate), findsWidgets);
+      expect(find.textContaining(priceAgeWording), findsWidgets);
       expect(find.textContaining('Live'), findsNothing);
       expect(find.textContaining('Real-time'), findsNothing);
       expect(find.textContaining('delayed 15 min'), findsNothing);
@@ -128,8 +143,16 @@ void main() {
       // flag about a rights issue and "NO CASH BEHIND THE PROFIT" is an
       // earnings-quality observation. Both are facts about the filings. What
       // may not appear is a BAND called one of these.
-      for (final banned in ['Cash', 'Trash', 'Toxic', 'Recyclable',
-                            'CASH', 'TRASH', 'TOXIC', 'RECYCLABLE']) {
+      for (final banned in [
+        'Cash',
+        'Trash',
+        'Toxic',
+        'Recyclable',
+        'CASH',
+        'TRASH',
+        'TOXIC',
+        'RECYCLABLE',
+      ]) {
         expect(
           find.text(banned),
           findsNothing,
@@ -279,7 +302,8 @@ void main() {
       await pumpUntilTrue(
         tester,
         () => tester.widget<BPressable>(row.first).onTap == null,
-        reason: '${gone.first.ticker} is not in the directory, so its row must '
+        reason:
+            '${gone.first.ticker} is not in the directory, so its row must '
             'not offer a company screen that cannot load',
       );
     });
@@ -303,10 +327,10 @@ void main() {
       await pumpScreen(
         tester,
         const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today),
-        until: find.textContaining(fixtureSessionDate),
+        until: find.textContaining(priceAgeWording),
       );
 
-      expect(find.textContaining(fixtureSessionDate), findsWidgets);
+      expect(find.textContaining(priceAgeWording), findsWidgets);
       expect(find.textContaining('Real-time'), findsNothing);
     });
 
@@ -401,16 +425,20 @@ void main() {
       await pumpScreen(
         tester,
         const YouScreen(),
-        until: find.textContaining('No real-time feed'),
+        until: find.textContaining('no live feed'),
       );
 
-      expect(find.textContaining('No real-time feed'), findsOneWidget);
+      expect(find.textContaining('There is no live feed'), findsOneWidget);
     });
   });
 
   group('The Pit', () {
     testWidgets('states its phase without looking broken', (tester) async {
-      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.home), until: find.text('The Pit'));
+      await pumpScreen(
+        tester,
+        const PitScreen(parentTab: BNavTab.home),
+        until: find.text('The Pit'),
+      );
 
       expect(
         find.textContaining('Coming in the next development phase'),
@@ -419,7 +447,11 @@ void main() {
     });
 
     testWidgets('promises no calls, targets or leaderboards', (tester) async {
-      await pumpScreen(tester, const PitScreen(parentTab: BNavTab.home), until: find.text('The Pit'));
+      await pumpScreen(
+        tester,
+        const PitScreen(parentTab: BNavTab.home),
+        until: find.text('The Pit'),
+      );
 
       expect(find.textContaining('No buy or sell calls'), findsOneWidget);
     });
@@ -435,7 +467,10 @@ void main() {
       ('The Pit', const PitScreen(parentTab: BNavTab.home)),
       ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
       ('Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
-      ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
+      (
+        'Company',
+        const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today),
+      ),
     ]) {
       testWidgets('$name builds in dark mode', (tester) async {
         await pumpScreen(tester, screen, themeMode: ThemeMode.dark);
@@ -452,8 +487,9 @@ void main() {
       const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.home),
     );
     // Case-insensitive: BSectionLabel uppercases Latin script.
-    final heading =
-        find.textContaining(RegExp('what that means', caseSensitive: false));
+    final heading = find.textContaining(
+      RegExp('what that means', caseSensitive: false),
+    );
     await pumpUntil(tester, heading);
 
     expect(heading, findsOneWidget);
@@ -471,7 +507,10 @@ void main() {
       ('Market', const MarketScreen(parentTab: BNavTab.home)),
       ('You', const YouScreen()),
       ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
-      ('Company', const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today)),
+      (
+        'Company',
+        const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today),
+      ),
     ]) {
       testWidgets('$name does not overflow at 320pt', (tester) async {
         tester.view.physicalSize = const Size(320 * 3, 700 * 3);

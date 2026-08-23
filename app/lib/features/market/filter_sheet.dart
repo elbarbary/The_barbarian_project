@@ -59,7 +59,8 @@ class _FilterBuilderState extends State<_FilterBuilder> {
     super.dispose();
   }
 
-  double? get _lowValue => double.tryParse(_low.text.trim().replaceAll(',', ''));
+  double? get _lowValue =>
+      double.tryParse(_low.text.trim().replaceAll(',', ''));
   double? get _highValue =>
       double.tryParse(_high.text.trim().replaceAll(',', ''));
 
@@ -74,9 +75,7 @@ class _FilterBuilderState extends State<_FilterBuilder> {
 
     return Padding(
       // Above the keyboard, which otherwise covers the only button here.
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: Container(
         // Clear of the floating nav, which otherwise sits over the only
         // button on this sheet — the same mistake the filing sheet made.
@@ -145,9 +144,7 @@ class _FilterBuilderState extends State<_FilterBuilder> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
                         l.filterAnd,
-                        style: BarbarianType.bodyM.copyWith(
-                          color: c.textMuted,
-                        ),
+                        style: BarbarianType.bodyM.copyWith(color: c.textMuted),
                       ),
                     ),
                     Expanded(

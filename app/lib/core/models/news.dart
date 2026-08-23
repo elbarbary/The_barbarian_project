@@ -147,8 +147,10 @@ abstract class NewsItem with _$NewsItem {
 /// One outlet's copy of a story.
 @freezed
 abstract class NewsAttribution with _$NewsAttribution {
-  const factory NewsAttribution({required String id, @Default('') String link}) =
-      _NewsAttribution;
+  const factory NewsAttribution({
+    required String id,
+    @Default('') String link,
+  }) = _NewsAttribution;
 
   factory NewsAttribution.fromJson(Map<String, dynamic> json) =>
       _$NewsAttributionFromJson(json);

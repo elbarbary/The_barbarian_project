@@ -102,8 +102,9 @@ class _BreadthPainter extends CustomPainter {
     );
 
     double y(int value) => size.height - (value / scale) * size.height;
-    double x(int i) =>
-        rows.length == 1 ? size.width / 2 : (i / (rows.length - 1)) * size.width;
+    double x(int i) => rows.length == 1
+        ? size.width / 2
+        : (i / (rows.length - 1)) * size.width;
 
     void series(int Function(MarketBreadth) pick, Color colour) {
       final paint = Paint()
@@ -126,7 +127,9 @@ class _BreadthPainter extends CustomPainter {
       final path = Path();
       for (var i = 0; i < rows.length; i++) {
         final point = Offset(x(i), y(pick(rows[i])));
-        i == 0 ? path.moveTo(point.dx, point.dy) : path.lineTo(point.dx, point.dy);
+        i == 0
+            ? path.moveTo(point.dx, point.dy)
+            : path.lineTo(point.dx, point.dy);
       }
       canvas.drawPath(path, paint);
     }

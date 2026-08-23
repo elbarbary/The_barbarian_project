@@ -153,7 +153,9 @@ class _LeadCard extends StatelessWidget {
                                 MediaQuery.devicePixelRatioOf(context))
                             .round(),
                     loadingBuilder: (context, child, progress) =>
-                        progress == null ? child : ColoredBox(color: c.hairline),
+                        progress == null
+                        ? child
+                        : ColoredBox(color: c.hairline),
                     errorBuilder: (_, _, _) => const SizedBox.shrink(),
                   ),
                 ),
