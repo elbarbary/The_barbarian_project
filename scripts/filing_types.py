@@ -207,6 +207,57 @@ FILING_TYPES: dict[str, tuple[str, str, str, str]] = {
     ),
 }
 
+# The same filing named inside a sentence, where a bare label will not do.
+#
+# The label is a chip: "Results", "Board decisions", "Trading halted". Dropped
+# into prose those give "filed a results" and "filed a trading halted", so each
+# type carries the noun phrase a sentence wants, article and plurality already
+# decided. It has to work in both of the shapes that use it —
+#
+#   "ELKA filed {phrase}"                          (one company)
+#   "Three companies filed {phrase} that day"      (a count of them)
+#
+# — so no possessive, and nothing that assumes a single subject.
+FILED_AS: dict[str, tuple[str, str]] = {
+    "results": ("results", "نتائج أعمال"),
+    "dividend": ("a cash dividend notice", "إعلان توزيعات نقدية"),
+    "bonus_shares": ("a bonus-share notice", "إعلان أسهم مجانية"),
+    "capital_increase": ("a capital increase", "زيادة رأس مال"),
+    "capital_decrease": ("a capital reduction", "تخفيض رأس مال"),
+    "halt": ("a trading-halt notice", "إخطارًا بإيقاف التداول"),
+    "resume": ("a trading-resumed notice", "إخطارًا باستئناف التداول"),
+    "insider": ("an insider dealing form", "نموذج إفصاح عن تعامل"),
+    "stake": ("a change in a major holding", "تغيّرًا في حصة رئيسية"),
+    "acquisition": ("an acquisition notice", "إفصاحًا عن استحواذ"),
+    "assembly": ("a shareholders' meeting notice", "دعوة لجمعية عامة"),
+    "board": ("board decisions", "قرارات مجلس إدارة"),
+    "contract": ("a contract award", "إفصاحًا عن تعاقد"),
+    "funding": ("a borrowing disclosure", "إفصاحًا عن اقتراض"),
+    "auditor": ("an auditor or accounts notice", "إفصاحًا بشأن المراجع أو الحسابات"),
+    "delisting": ("a delisting notice", "إخطارًا بالشطب"),
+    "listing": ("a listing committee decision", "قرار لجنة قيد"),
+    "regulator": ("a regulator statement", "بيانًا من الجهة الرقابية"),
+    "capital": ("a capital notice", "إفصاحًا عن رأس المال"),
+    "macro": ("a market notice", "إخطارًا عامًا"),
+    "statement": ("a statement", "بيانًا"),
+}
+
+
+def filed_as(key: str) -> str | None:
+    """The English noun phrase, or None where naming the type says nothing.
+
+    `other` is the catch-all: "filed an other" is worse than "filed with the
+    exchange", so it declines rather than guessing.
+    """
+    entry = FILED_AS.get(key)
+    return entry[0] if entry else None
+
+
+def filed_as_ar(key: str) -> str | None:
+    entry = FILED_AS.get(key)
+    return entry[1] if entry else None
+
+
 LABELS = list(FILING_TYPES)
 
 
