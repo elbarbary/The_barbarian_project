@@ -1300,5 +1300,17 @@
         "type": "String"
       }
     }
+  },
+  "newsReadStory": "Read the story",
+  "newsSourceHeader": "Source",
+  "filingReaderHeader": "EGX filing",
+  "companyInThePress": "In the press",
+  "companyInThePressBody": "Stories that named {ticker}, from the outlets we read. Their reporting, on their pages.",
+  "@companyInThePressBody": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
   }
 }

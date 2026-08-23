@@ -139,6 +139,18 @@ abstract class NewsItem with _$NewsItem {
   String becauseFor(bool arabic) =>
       arabic && becauseAr.isNotEmpty ? becauseAr : because;
 
+  /// The first tagged company this app actually holds, or null.
+  ///
+  /// Resolved against the directory rather than trusted from the tag: an
+  /// outlet can name an issuer we have no document for, and offering to open
+  /// a company that is not there is the dead tap the filing rows already had.
+  String? heldCompany(bool Function(String ticker) held) {
+    for (final ticker in tickers) {
+      if (held(ticker)) return ticker;
+    }
+    return null;
+  }
+
   /// Only shown when the event is something other than the catch-all: a chip
   /// reading "Other" tells a reader nothing they did not already know.
   String? get eventTag => event == 'other' ? null : eventLabel;

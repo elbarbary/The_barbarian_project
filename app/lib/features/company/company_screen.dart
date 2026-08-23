@@ -7,6 +7,7 @@ import '../../core/models/company.dart';
 import '../../core/models/exit_liquidity.dart';
 import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
+import '../../core/models/news.dart';
 import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
 import '../../core/models/disclosure.dart';
@@ -1023,15 +1024,45 @@ class _Research extends ConsumerWidget {
         .items;
     final filed = filings ?? const <FiledDocument>[];
 
+    // What the press wrote about this company.
+    //
+    // The whole feed is already in memory and was never joined to a company
+    // page. Computed above the empty-state guard, not below it: 20 of the 27
+    // companies the feed tags have no study and no scanner row, so under the
+    // guard it would never have rendered for the ones it exists for.
+    final news = ref.watch(newsProvider).whenOrNull(data: (s) => s.value);
+    final press = [
+      for (final item in news?.items ?? const <NewsItem>[])
+        if (item.tickers.contains(ticker)) item,
+    ];
+
     if (entry == null &&
         (scanned == null || scanned.isEmpty) &&
-        filed.isEmpty) {
+        filed.isEmpty &&
+        press.isEmpty) {
       return BEmptyState(title: l.noStudyYet, body: l.noStudyBody);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        if (press.isNotEmpty) ...[
+          BSectionLabel(l.companyInThePress),
+          const SizedBox(height: 6),
+          Text(
+            l.companyInThePressBody(ticker),
+            style: BarbarianType.bodyM.copyWith(
+              color: c.textSecondary,
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 12),
+          for (final item in press.take(6)) ...[
+            _PressRow(item: item, feed: news!, parentTab: parentTab),
+            const SizedBox(height: 8),
+          ],
+          const SizedBox(height: 14),
+        ],
         if (filed.isNotEmpty) ...[
           BSectionLabel(l.companyFilings),
           const SizedBox(height: 6),
@@ -1808,6 +1839,83 @@ class _CompanyFiling extends StatelessWidget {
                 url: url,
                 index: n,
                 count: item.attachments.length,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// One story about this company, credited to whoever wrote it.
+///
+/// Carries `meaningFor` — what the story is about — rather than `becauseFor`,
+/// which prints the relative-volume arithmetic that put the story in the feed
+/// and says nothing about the reporting.
+class _PressRow extends StatelessWidget {
+  const _PressRow({
+    required this.item,
+    required this.feed,
+    required this.parentTab,
+  });
+
+  final NewsItem item;
+  final NewsFeed feed;
+  final BNavTab parentTab;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final outlet = [
+      for (final attribution in item.sources)
+        feed.sources
+            .where((NewsSource s) => s.id == attribution.id)
+            .map((NewsSource s) => s.name)
+            .firstOrNull,
+    ].nonNulls.firstOrNull;
+    final link = item.sources.firstOrNull?.link ?? '';
+    final headline = item.headlineFor(arabic);
+
+    return BPressable(
+      onTap: link.isEmpty
+          ? null
+          : () => context.push(
+              Routes.articlePath(parentTab, link, outlet ?? l.newsSourceHeader),
+            ),
+      child: BPaperCard(
+        padding: const EdgeInsets.fromLTRB(15, 13, 15, 13),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              [outlet, context.newsAge(item.publishedAt)].nonNulls.join(' · '),
+              style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+            ),
+            const SizedBox(height: 7),
+            // The headline runs in its own direction, whatever the app is set
+            // to: an Arabic headline in an English build still reads
+            // right-to-left.
+            Directionality(
+              textDirection: isArabic(headline)
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              child: Text(
+                headline,
+                style: BarbarianType.titleS.copyWith(color: c.textPrimary),
+              ),
+            ),
+            if (item.meaningFor(arabic) case final String meaning
+                when meaning.isNotEmpty) ...[
+              const SizedBox(height: 7),
+              Text(
+                meaning,
+                style: BarbarianType.bodyS.copyWith(
+                  color: c.textSecondary,
+                  height: 1.45,
+                ),
               ),
             ],
           ],

@@ -9,6 +9,7 @@ import '../../core/models/news.dart';
 import '../../core/models/recency.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
+import '../../core/widgets/filing_actions.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
@@ -108,14 +109,14 @@ class _BNewsBlockState extends ConsumerState<BNewsBlock> {
   }
 }
 
-class _Headline extends StatelessWidget {
+class _Headline extends ConsumerWidget {
   const _Headline({required this.item, required this.feed});
 
   final NewsItem item;
   final NewsFeed feed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final c = context.colors;
     // Every outlet that ran it, named. A story three papers carried is more
@@ -128,8 +129,24 @@ class _Headline extends StatelessWidget {
             .map((s) => s.name)
             .firstOrNull,
     ].nonNulls.toList();
+    final l = AppLocalizations.of(context);
     final outlet = names.isEmpty ? null : names.join(' · ');
     final link = item.sources.firstOrNull?.link ?? '';
+    final header = names.firstOrNull ?? l.newsSourceHeader;
+
+    // A story that names a company we hold gets the same two choices a filing
+    // row gets. The card already says "this story is about PRDC" and its only
+    // tap used to leave the app.
+    //
+    // Resolved against the directory, not taken from the tag: 367 of the 400
+    // items name nothing we hold, and those keep the single tap rather than
+    // paying a modal for the thirty-three that do.
+    final known = ref
+        .watch(companyDirectoryProvider)
+        .whenOrNull(data: (d) => d.value);
+    final ticker = known == null
+        ? null
+        : item.heldCompany((t) => known.byTicker(t) != null);
 
     return BPressable(
       // Out to the outlet's own page, in the app's reader. ESTHMR carries the
@@ -137,12 +154,15 @@ class _Headline extends StatelessWidget {
       // it is read on their page with their name on it.
       onTap: link.isEmpty
           ? null
-          : () => context.push(
-              Routes.articlePath(
-                BNavTab.today,
-                link,
-                names.firstOrNull ?? 'Source',
-              ),
+          : ticker == null
+          ? () => context.push(Routes.articlePath(BNavTab.today, link, header))
+          : () => showNewsActions(
+              context,
+              item: item,
+              ticker: ticker,
+              link: link,
+              from: BNavTab.today,
+              outlet: header,
             ),
       child: BPaperCard(
         padding: const EdgeInsets.fromLTRB(15, 14, 15, 14),

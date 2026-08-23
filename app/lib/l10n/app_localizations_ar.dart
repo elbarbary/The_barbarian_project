@@ -1855,4 +1855,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String directoryCompaniesSorted(String order) {
     return 'الشركات · $order';
   }
+
+  @override
+  String get newsReadStory => 'اقرأ الخبر';
+
+  @override
+  String get newsSourceHeader => 'المصدر';
+
+  @override
+  String get filingReaderHeader => 'إفصاح البورصة';
+
+  @override
+  String get companyInThePress => 'في الصحافة';
+
+  @override
+  String companyInThePressBody(String ticker) {
+    return 'أخبار ذكرت $ticker، من الجهات التي نتابعها. تقاريرهم، على صفحاتهم.';
+  }
 }

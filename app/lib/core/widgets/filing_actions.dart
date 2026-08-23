@@ -6,6 +6,7 @@ import '../../app/router.dart';
 import '../../l10n/app_localizations.dart';
 import '../models/company.dart';
 import '../models/disclosure.dart';
+import '../models/news.dart';
 import '../providers.dart';
 import '../theme/barbarian_theme.dart';
 import 'motion.dart';
@@ -91,7 +92,9 @@ Future<void> showFilingActions(
             label: l.filingReadFiling,
             onTap: () {
               Navigator.of(sheet).pop();
-              context.push(Routes.articlePath(from, filing.link, 'EGX filing'));
+              context.push(
+                Routes.articlePath(from, filing.link, l.filingReaderHeader),
+              );
             },
           ),
         ],
@@ -135,4 +138,78 @@ class _Choice extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The same question, asked of a news row.
+///
+/// A story card said "هذا الخبر عن PRDC" and its only tap left the app for the
+/// outlet's page, while one segment across a filing row that looks identical
+/// offered "افتح PRDC". Same two meanings, same two choices.
+///
+/// [ticker] must already be resolved against the directory: 367 of the 400
+/// items carry no company we hold, and a modal in front of those would be a
+/// tax on every reader for the sake of the thirty-three that do.
+Future<void> showNewsActions(
+  BuildContext context, {
+  required NewsItem item,
+  required String ticker,
+  required String link,
+  required BNavTab from,
+  required String outlet,
+}) async {
+  final l = AppLocalizations.of(context);
+  final c = context.colors;
+  final arabic = Directionality.of(context) == TextDirection.rtl;
+  final headline = item.headlineFor(arabic);
+
+  await showModalBottomSheet<void>(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (sheet) => Container(
+      margin: const EdgeInsets.fromLTRB(12, 12, 12, 72),
+      padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
+      decoration: BoxDecoration(
+        color: c.surfaceRaised,
+        borderRadius: BorderRadius.circular(BarbarianRadius.xl),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Directionality(
+            textDirection: isArabic(headline)
+                ? TextDirection.rtl
+                : TextDirection.ltr,
+            child: Text(
+              headline,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: BarbarianType.bodyM.copyWith(
+                color: c.textPrimary,
+                height: 1.4,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          _Choice(
+            icon: Icons.business_outlined,
+            label: l.filingOpenCompany(ticker),
+            onTap: () {
+              Navigator.of(sheet).pop();
+              context.push(Routes.companyPath(from, ticker));
+            },
+          ),
+          const SizedBox(height: 9),
+          _Choice(
+            icon: Icons.article_outlined,
+            label: l.newsReadStory,
+            onTap: () {
+              Navigator.of(sheet).pop();
+              context.push(Routes.articlePath(from, link, outlet));
+            },
+          ),
+        ],
+      ),
+    ),
+  );
 }

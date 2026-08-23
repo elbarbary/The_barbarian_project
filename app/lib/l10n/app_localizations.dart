@@ -3199,6 +3199,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Companies · {order}'**
   String directoryCompaniesSorted(String order);
+
+  /// No description provided for @newsReadStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the story'**
+  String get newsReadStory;
+
+  /// No description provided for @newsSourceHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get newsSourceHeader;
+
+  /// No description provided for @filingReaderHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX filing'**
+  String get filingReaderHeader;
+
+  /// No description provided for @companyInThePress.
+  ///
+  /// In en, this message translates to:
+  /// **'In the press'**
+  String get companyInThePress;
+
+  /// No description provided for @companyInThePressBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Stories that named {ticker}, from the outlets we read. Their reporting, on their pages.'**
+  String companyInThePressBody(String ticker);
 }
 
 class _AppLocalizationsDelegate

@@ -4,6 +4,9 @@ import 'package:barbarian/core/widgets/news_thumb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:barbarian/core/widgets/filing_actions.dart';
+import 'package:barbarian/core/widgets/nav.dart';
+
 import 'support/harness.dart';
 
 /// The news feed's job is triage, and triage is where an unlicensed publisher
@@ -214,6 +217,109 @@ void main() {
         ),
       );
       expect(tester.getSize(find.byType(BNewsThumb)).width, 0);
+    });
+  });
+
+  group('a story that names a company', () {
+    // The card carried the ticker and its only tap left the app for the
+    // outlet's page, while one segment across a filing row that looks
+    // identical offered "Open PRDC". Same two meanings, same two choices.
+
+    // Resolved against the directory rather than trusted from the tag: the
+    // dead tap the filing rows already had came from offering a company the
+    // app has no document for.
+    test('the company is offered only when the app holds it', () {
+      const item = NewsItem(id: 'x', headline: 'x', tickers: ['ANFI', 'PRDC']);
+
+      expect(item.heldCompany((t) => t == 'PRDC'), 'PRDC');
+      expect(item.heldCompany((t) => t == 'ANFI'), 'ANFI');
+      expect(item.heldCompany((_) => false), isNull);
+      expect(
+        const NewsItem(id: 'y', headline: 'y').heldCompany((_) => true),
+        isNull,
+      );
+    });
+
+    // 367 of the 400 items name nothing this app holds, and those keep their
+    // single tap rather than paying a modal for the rest.
+    test('most of the published feed names nothing we hold', () {
+      final feed = readFixtureObjectSync('news/latest.json');
+      final directory = readFixtureObjectSync('companies.json');
+      final known = {
+        for (final c
+            in (directory['companies'] as List).cast<Map<String, dynamic>>())
+          c['ticker'] as String,
+      };
+
+      var tagged = 0;
+      for (final raw in (feed['items'] as List).cast<Map<String, dynamic>>()) {
+        final item = NewsItem.fromJson(raw);
+        if (item.heldCompany(known.contains) != null) tagged++;
+      }
+
+      expect(tagged, greaterThan(0), reason: 'nothing to offer a company for');
+      expect(
+        tagged,
+        lessThan((feed['items'] as List).length ~/ 2),
+        reason: 'if most rows resolve, the modal is a tax on the whole feed',
+      );
+    });
+
+    testWidgets('the sheet offers the company and the story', (tester) async {
+      final feed = readFixtureObjectSync('news/latest.json');
+      final directory = readFixtureObjectSync('companies.json');
+      final known = {
+        for (final c
+            in (directory['companies'] as List).cast<Map<String, dynamic>>())
+          c['ticker'] as String,
+      };
+
+      // Read from the fixture rather than named here: the pipeline rewrites
+      // this file every day and a hardcoded headline fails the next morning.
+      NewsItem? story;
+      for (final raw in (feed['items'] as List).cast<Map<String, dynamic>>()) {
+        final item = NewsItem.fromJson(raw);
+        if (item.heldCompany(known.contains) != null) {
+          story = item;
+          break;
+        }
+      }
+      expect(story, isNotNull);
+      final ticker = story!.heldCompany(known.contains)!;
+
+      usePhoneSurface(tester);
+      await pumpScreen(
+        tester,
+        Scaffold(
+          body: Builder(
+            builder: (context) => Center(
+              child: TextButton(
+                onPressed: () => showNewsActions(
+                  context,
+                  item: story!,
+                  ticker: ticker,
+                  link: 'https://example.test/story',
+                  from: BNavTab.today,
+                  outlet: 'Al Borsa',
+                ),
+                child: const Text('tap'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('tap'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Open $ticker'), findsOneWidget);
+      expect(find.text('Read the story'), findsOneWidget);
+
+      // Both choices fully on screen, clear of the floating nav — the mistake
+      // the filing sheet made twice.
+      for (final label in ['Open $ticker', 'Read the story']) {
+        final box = tester.getRect(find.text(label));
+        expect(box.bottom, lessThan(tester.view.physicalSize.height));
+      }
     });
   });
 }

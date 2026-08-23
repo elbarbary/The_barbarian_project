@@ -1864,4 +1864,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String directoryCompaniesSorted(String order) {
     return 'Companies · $order';
   }
+
+  @override
+  String get newsReadStory => 'Read the story';
+
+  @override
+  String get newsSourceHeader => 'Source';
+
+  @override
+  String get filingReaderHeader => 'EGX filing';
+
+  @override
+  String get companyInThePress => 'In the press';
+
+  @override
+  String companyInThePressBody(String ticker) {
+    return 'Stories that named $ticker, from the outlets we read. Their reporting, on their pages.';
+  }
 }

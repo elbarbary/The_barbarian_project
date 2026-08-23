@@ -543,5 +543,10 @@
   "sortGainers": "الصاعدة",
   "sortLosers": "الهابطة",
   "sortMostActive": "الأكثر تداولًا",
-  "directoryCompaniesSorted": "الشركات · {order}"
+  "directoryCompaniesSorted": "الشركات · {order}",
+  "newsReadStory": "اقرأ الخبر",
+  "newsSourceHeader": "المصدر",
+  "filingReaderHeader": "إفصاح البورصة",
+  "companyInThePress": "في الصحافة",
+  "companyInThePressBody": "أخبار ذكرت {ticker}، من الجهات التي نتابعها. تقاريرهم، على صفحاتهم."
 }
