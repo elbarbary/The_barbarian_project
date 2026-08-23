@@ -407,6 +407,87 @@ def tradable_flag(record: dict, scan_has_scope: bool) -> bool | None:
     return bool(record.get("thndrScope"))
 
 
+# Above this, the ratio is arithmetic on a rounding artefact rather than a
+# valuation. AALR's latest filed net income rounds to zero in EGP millions, so
+# its "P/E" comes out at 39,873 — a number with the shape of a fact and none of
+# the content.
+PE_CEILING = 200
+
+# How far the two routes to the same ratio may differ before neither is trusted.
+PE_TOLERANCE = 0.05
+
+# Below this the company earned more in a year than the market says the whole
+# of it is worth.
+#
+# The two-route check cannot catch this one, because both routes divide by the
+# same net income — if that figure is filed in the wrong unit they agree with
+# each other and are both wrong. RTVC survives every other guard at 0.37: a
+# 1.0bn company reporting 2.8bn of profit. That is a units error in a filing
+# far more often than it is a bargain, and on a "lowest P/E" sort it would be
+# the first thing a reader saw.
+PE_FLOOR = 1.0
+
+
+def price_earnings(close, profile: dict, filed: dict | None):
+    """`(ratio, the period it is earned over)`, or `(None, None)`.
+
+    Two published figures divided: the last traded price, and the company's own
+    filed net income spread over the shares it says are outstanding. Not a view
+    about whether a share is worth having — this app has no licence to hold one.
+
+    **Worked out twice, from different inputs, and published only when the two
+    agree.** Price ÷ earnings-per-share uses the share count; market cap ÷ total
+    earnings does not. Where the filed units or the share count are wrong the
+    two diverge wildly, and they diverge for sixteen companies today:
+
+        EGBE   price/EPS 0.11   cap/earnings 5.76
+        EGSA   price/EPS 5.62   cap/earnings 292.11
+
+    A single route would have published the first number in each pair without
+    hesitating. FAITA came out at 0.03 — a company earning thirty pounds a share
+    on a ninety-nine piastre listing — which is not a cheap share, it is a
+    broken figure, and on a filter screen it would have sorted straight to the
+    top of "lowest P/E".
+
+    Omitted, deliberately, in five cases: a loss (a negative P/E is not a small
+    one, and to a reader who has not met one it reads as the cheapest share on
+    the exchange), no filed net income or share count, a ratio outside
+    `PE_FLOOR`–`PE_CEILING`, and the two routes disagreeing.
+
+    The period is returned with it because the newest annual filing can be
+    eighteen months old, and "P/E 8" against 2023 earnings is a different claim
+    from the same number against 2025.
+    """
+    if not close or not filed:
+        return None, None
+    shares = profile.get("shares_outstanding")
+    cap = profile.get("market_cap")
+    if not shares or not cap:
+        return None, None
+    annual = filed.get("annual") or []
+    latest = next(
+        (a for a in reversed(annual) if a.get("net_income") is not None), None
+    )
+    if latest is None:
+        return None, None
+    net_income = latest["net_income"]
+    if net_income <= 0:
+        return None, None
+
+    # Filed figures are in EGP millions; neither the share count nor the market
+    # cap is.
+    earnings = net_income * 1_000_000
+    by_share = close / (earnings / shares)
+    by_cap = cap / earnings
+    if by_share <= 0 or by_cap <= 0:
+        return None, None
+    if abs(by_share - by_cap) / max(by_share, by_cap) > PE_TOLERANCE:
+        return None, None
+    if not (PE_FLOOR <= by_share <= PE_CEILING):
+        return None, None
+    return round(by_share, 2), latest.get("period")
+
+
 def clean(value):
     """Scanner nulls and NaNs both mean 'not reported'."""
     if value is None:
@@ -527,6 +608,17 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         change_pct = clean(r.get("change"))
         previous = previous_close(history, session, close, change_pct)
 
+        cap = clean(r.get("marketCap"))
+        avg_volume = clean(r.get("scannerAverageVolume30d"))
+        pe, pe_period = price_earnings(
+            close,
+            {
+                "shares_outstanding": clean(r.get("sharesOutstanding")),
+                "market_cap": cap,
+            },
+            FILED_FINANCIALS.get(ticker),
+        )
+
         companies.append(
             {
                 "ticker": ticker,
@@ -534,6 +626,21 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 "name_ar": ARABIC.get(ticker),
                 "sector": r.get("sector"),
                 "exchange": "EGX",
+                # Numbers the directory itself can filter on.
+                #
+                # The list screen had none: every figure lived in one of 282
+                # per-company documents it does not load, so "companies worth
+                # more than a billion" meant opening 282 files to answer. These
+                # three are small, slow-moving and enough to narrow a list of
+                # 280 names down to something a reader can read.
+                #
+                # Volume is deliberately NOT here — it changes through the
+                # session and the screen already watches the live snapshot for
+                # it, which is fresher than this document will ever be.
+                **({"market_cap": cap} if cap else {}),
+                **({"avg_volume_30d": avg_volume} if avg_volume else {}),
+                **({"pe": pe} if pe is not None else {}),
+                **({"pe_period": pe_period} if pe is not None else {}),
                 **(
                     {"tradable": flag}
                     if (flag := tradable_flag(r, scan_has_scope)) is not None

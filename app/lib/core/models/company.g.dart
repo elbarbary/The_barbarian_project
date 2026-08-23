@@ -33,6 +33,10 @@ _CompanySummary _$CompanySummaryFromJson(Map<String, dynamic> json) =>
       exchange: json['exchange'] as String? ?? 'EGX',
       hasCashOrTrash: json['has_cash_or_trash'] as bool? ?? false,
       hasResearch: json['has_research'] as bool? ?? false,
+      marketCap: (json['market_cap'] as num?)?.toDouble(),
+      avgVolume30d: (json['avg_volume_30d'] as num?)?.toDouble(),
+      pe: (json['pe'] as num?)?.toDouble(),
+      pePeriod: json['pe_period'] as String?,
     );
 
 Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
@@ -44,6 +48,10 @@ Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
       'exchange': instance.exchange,
       'has_cash_or_trash': instance.hasCashOrTrash,
       'has_research': instance.hasResearch,
+      'market_cap': instance.marketCap,
+      'avg_volume_30d': instance.avgVolume30d,
+      'pe': instance.pe,
+      'pe_period': instance.pePeriod,
     };
 
 _Company _$CompanyFromJson(Map<String, dynamic> json) => _Company(

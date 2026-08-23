@@ -856,6 +856,76 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get filterTitle => 'ضيّق القائمة';
+
+  @override
+  String get filterAdd => 'أضف شرطًا';
+
+  @override
+  String get filterNone => 'لا شروط';
+
+  @override
+  String get filterClearAll => 'امسح الكل';
+
+  @override
+  String get filterApply => 'اعرض النتائج';
+
+  @override
+  String get filterMarketCap => 'قيمة الشركة';
+
+  @override
+  String get filterPrice => 'سعر السهم';
+
+  @override
+  String get filterChange => 'التغير اليوم';
+
+  @override
+  String get filterVolume => 'الأسهم المتداولة اليوم';
+
+  @override
+  String get filterAvgVolume => 'الأسهم المتداولة في يوم معتاد';
+
+  @override
+  String get filterPe => 'السعر مقابل الأرباح';
+
+  @override
+  String get filterAbove => 'أكثر من';
+
+  @override
+  String get filterBelow => 'أقل من';
+
+  @override
+  String get filterBetween => 'بين';
+
+  @override
+  String get filterUnitEgp => 'جنيه';
+
+  @override
+  String get filterUnitPercent => '%';
+
+  @override
+  String get filterUnitShares => 'سهم';
+
+  @override
+  String get filterUnitTimes => '×';
+
+  @override
+  String get filterAnd => 'و';
+
+  @override
+  String filterMatchCount(int count, int total) {
+    return '$count من $total شركة';
+  }
+
+  @override
+  String get filterPeNote =>
+      'السعر مقسومًا على الأرباح السنوية التي أودعتها الشركة نفسها. غائب حين تُعلن الشركة خسارة، أو لا تودع رقمًا، أو لا يجتاز الرقم التحقق — 159 من 280 شركة لديها واحد.';
+
+  @override
+  String get filterLiveNote =>
+      'السعر والتغير والأسهم المتداولة من التغذية المباشرة. أما قيمة الشركة ويومها المعتاد فمن إعادة البناء هذا الصباح.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override

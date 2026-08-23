@@ -1586,6 +1586,138 @@ abstract class AppLocalizations {
   /// **'{ratio}× normal volume'**
   String dotsVolume(String ratio);
 
+  /// No description provided for @filterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Narrow the list'**
+  String get filterTitle;
+
+  /// No description provided for @filterAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a filter'**
+  String get filterAdd;
+
+  /// No description provided for @filterNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No filters'**
+  String get filterNone;
+
+  /// No description provided for @filterClearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get filterClearAll;
+
+  /// No description provided for @filterApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Show results'**
+  String get filterApply;
+
+  /// No description provided for @filterMarketCap.
+  ///
+  /// In en, this message translates to:
+  /// **'What the company is worth'**
+  String get filterMarketCap;
+
+  /// No description provided for @filterPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Share price'**
+  String get filterPrice;
+
+  /// No description provided for @filterChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change today'**
+  String get filterChange;
+
+  /// No description provided for @filterVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares traded today'**
+  String get filterVolume;
+
+  /// No description provided for @filterAvgVolume.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares traded on a normal day'**
+  String get filterAvgVolume;
+
+  /// No description provided for @filterPe.
+  ///
+  /// In en, this message translates to:
+  /// **'Price against earnings'**
+  String get filterPe;
+
+  /// No description provided for @filterAbove.
+  ///
+  /// In en, this message translates to:
+  /// **'more than'**
+  String get filterAbove;
+
+  /// No description provided for @filterBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'less than'**
+  String get filterBelow;
+
+  /// No description provided for @filterBetween.
+  ///
+  /// In en, this message translates to:
+  /// **'between'**
+  String get filterBetween;
+
+  /// No description provided for @filterUnitEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP'**
+  String get filterUnitEgp;
+
+  /// No description provided for @filterUnitPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'%'**
+  String get filterUnitPercent;
+
+  /// No description provided for @filterUnitShares.
+  ///
+  /// In en, this message translates to:
+  /// **'shares'**
+  String get filterUnitShares;
+
+  /// No description provided for @filterUnitTimes.
+  ///
+  /// In en, this message translates to:
+  /// **'×'**
+  String get filterUnitTimes;
+
+  /// No description provided for @filterAnd.
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get filterAnd;
+
+  /// No description provided for @filterMatchCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of {total} companies'**
+  String filterMatchCount(int count, int total);
+
+  /// No description provided for @filterPeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Price divided by the company’s own filed annual profit. Absent where the company filed a loss, filed nothing, or the figure did not check out — 159 of 280 companies carry one.'**
+  String get filterPeNote;
+
+  /// No description provided for @filterLiveNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Price, change and shares traded are from the live feed. What the company is worth and its normal day are from this morning’s rebuild.'**
+  String get filterLiveNote;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

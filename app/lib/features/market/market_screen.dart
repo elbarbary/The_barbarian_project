@@ -17,6 +17,8 @@ import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
+import 'filter_sheet.dart';
+import 'numeric_filter.dart';
 
 /// Market (spec §11, §12).
 ///
@@ -53,6 +55,9 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
   String? _sector;
   /// This screen's own search text — see `searchResultsProvider`.
   String _query = '';
+
+  /// Conditions on the numbers, all of which have to pass.
+  final List<NumericFilter> _filters = [];
   _Order _order = _Order.az;
   bool _researchedOnly = false;
   @override
@@ -97,6 +102,14 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                   .where((cmp) => cmp.hasResearch || cmp.hasCashOrTrash)
                   .toList();
             }
+            // The numbers, last, so the count beside the heading is the count
+            // of what is actually on screen.
+            final beforeFilters = visible.length;
+            visible = applyFilters(
+              visible,
+              _filters,
+              (ticker) => snapshot?.quoteFor(ticker),
+            );
 
             // Sorting reads the same merged snapshot the rows draw from, so the
             // order always agrees with the numbers beside it. A company the feed
@@ -181,6 +194,42 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 10),
+                // The numbers a reader can narrow by, and what they have set.
+                //
+                // Under the sorts rather than beside them: a sort reorders 280
+                // rows and a filter removes most of them, which is a bigger
+                // thing to do by accident.
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    BKindChip(
+                      l.filterAdd,
+                      variant: BChipVariant.ember,
+                      leading: const Icon(Icons.tune, size: 15),
+                      onTap: () async {
+                        final added = await showFilterBuilder(context);
+                        if (added != null) setState(() => _filters.add(added));
+                      },
+                    ),
+                    for (final (index, filter) in _filters.indexed)
+                      BKindChip(
+                        _describe(filter, l),
+                        variant: BChipVariant.solid,
+                        leading: const Icon(Icons.close, size: 14),
+                        onTap: () => setState(() => _filters.removeAt(index)),
+                      ),
+                    if (_filters.isNotEmpty)
+                      Text(
+                        l.filterMatchCount(visible.length, beforeFilters),
+                        style: BarbarianType.labelNano.copyWith(
+                          color: c.textFaint,
+                        ),
+                      ),
+                  ],
                 ),
                 const SizedBox(height: 18),
                 BSectionLabel(
@@ -479,4 +528,29 @@ class _CompanyRow extends StatelessWidget {
       ),
     );
   }
+}
+
+/// A set filter, in the words it was set with.
+///
+/// "What the company is worth more than 1000000000" is unreadable, so the
+/// figure is abbreviated the way the rows themselves abbreviate it — a reader
+/// who typed a billion should see a billion back.
+String _describe(NumericFilter filter, AppLocalizations l) {
+  String number(double value) {
+    final magnitude = value.abs();
+    if (magnitude >= 1e9) return '${(value / 1e9).toStringAsFixed(1)}bn';
+    if (magnitude >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
+    if (magnitude >= 1e3) return '${(value / 1e3).toStringAsFixed(0)}k';
+    return value == value.roundToDouble()
+        ? value.toStringAsFixed(0)
+        : value.toStringAsFixed(2);
+  }
+
+  final field = filter.field.labelFor(l);
+  final how = filter.operator.labelFor(l);
+  if (filter.operator == FilterOperator.between) {
+    final (low, high) = filter.bounds;
+    return '$field $how ${number(low)} ${l.filterAnd} ${number(high)}';
+  }
+  return '$field $how ${number(filter.low)}';
 }

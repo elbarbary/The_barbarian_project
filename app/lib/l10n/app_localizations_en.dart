@@ -861,6 +861,76 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get filterTitle => 'Narrow the list';
+
+  @override
+  String get filterAdd => 'Add a filter';
+
+  @override
+  String get filterNone => 'No filters';
+
+  @override
+  String get filterClearAll => 'Clear all';
+
+  @override
+  String get filterApply => 'Show results';
+
+  @override
+  String get filterMarketCap => 'What the company is worth';
+
+  @override
+  String get filterPrice => 'Share price';
+
+  @override
+  String get filterChange => 'Change today';
+
+  @override
+  String get filterVolume => 'Shares traded today';
+
+  @override
+  String get filterAvgVolume => 'Shares traded on a normal day';
+
+  @override
+  String get filterPe => 'Price against earnings';
+
+  @override
+  String get filterAbove => 'more than';
+
+  @override
+  String get filterBelow => 'less than';
+
+  @override
+  String get filterBetween => 'between';
+
+  @override
+  String get filterUnitEgp => 'EGP';
+
+  @override
+  String get filterUnitPercent => '%';
+
+  @override
+  String get filterUnitShares => 'shares';
+
+  @override
+  String get filterUnitTimes => '×';
+
+  @override
+  String get filterAnd => 'and';
+
+  @override
+  String filterMatchCount(int count, int total) {
+    return '$count of $total companies';
+  }
+
+  @override
+  String get filterPeNote =>
+      'Price divided by the company’s own filed annual profit. Absent where the company filed a loss, filed nothing, or the figure did not check out — 159 of 280 companies carry one.';
+
+  @override
+  String get filterLiveNote =>
+      'Price, change and shares traded are from the live feed. What the company is worth and its normal day are from this morning’s rebuild.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

@@ -287,7 +287,20 @@ as List<CompanySummary>,
 /// @nodoc
 mixin _$CompanySummary {
 
- String get ticker;@JsonKey(name: 'name_en') String get nameEn;@JsonKey(name: 'name_ar') String? get nameAr; String? get sector; String get exchange;@JsonKey(name: 'has_cash_or_trash') bool get hasCashOrTrash;@JsonKey(name: 'has_research') bool get hasResearch;
+ String get ticker;@JsonKey(name: 'name_en') String get nameEn;@JsonKey(name: 'name_ar') String? get nameAr; String? get sector; String get exchange;@JsonKey(name: 'has_cash_or_trash') bool get hasCashOrTrash;@JsonKey(name: 'has_research') bool get hasResearch;/// Numbers the directory can narrow itself by without opening 282 files.
+///
+/// Slow-moving ones only. Price, change and volume are not here because
+/// they move through the session and the screen already watches the live
+/// snapshot, which is fresher than this document will ever be.
+@JsonKey(name: 'market_cap') double? get marketCap;@JsonKey(name: 'avg_volume_30d') double? get avgVolume30d;/// The last traded price over the company's own filed annual earnings.
+///
+/// Absent for more than a third of the exchange, and every absence is
+/// deliberate — a loss, no filed figure, or two independent routes to the
+/// ratio disagreeing. See `price_earnings` in build_market_api.py.
+ double? get pe;/// The financial year the earnings in [pe] were filed for. A newest annual
+/// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
+/// a different claim from the same number against 2025.
+@JsonKey(name: 'pe_period') String? get pePeriod;
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -300,16 +313,16 @@ $CompanySummaryCopyWith<CompanySummary> get copyWith => _$CompanySummaryCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod)';
 }
 
 
@@ -320,7 +333,7 @@ abstract mixin class $CompanySummaryCopyWith<$Res>  {
   factory $CompanySummaryCopyWith(CompanySummary value, $Res Function(CompanySummary) _then) = _$CompanySummaryCopyWithImpl;
 @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod
 });
 
 
@@ -337,7 +350,7 @@ class _$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -346,7 +359,11 @@ as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nul
 as String?,exchange: null == exchange ? _self.exchange : exchange // ignore: cast_nullable_to_non_nullable
 as String,hasCashOrTrash: null == hasCashOrTrash ? _self.hasCashOrTrash : hasCashOrTrash // ignore: cast_nullable_to_non_nullable
 as bool,hasResearch: null == hasResearch ? _self.hasResearch : hasResearch // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,marketCap: freezed == marketCap ? _self.marketCap : marketCap // ignore: cast_nullable_to_non_nullable
+as double?,avgVolume30d: freezed == avgVolume30d ? _self.avgVolume30d : avgVolume30d // ignore: cast_nullable_to_non_nullable
+as double?,pe: freezed == pe ? _self.pe : pe // ignore: cast_nullable_to_non_nullable
+as double?,pePeriod: freezed == pePeriod ? _self.pePeriod : pePeriod // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -431,10 +448,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
   return orElse();
 
 }
@@ -452,10 +469,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary():
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -472,10 +489,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
   return null;
 
 }
@@ -487,7 +504,7 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 @JsonSerializable()
 
 class _CompanySummary extends CompanySummary {
-  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false}): super._();
+  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false, @JsonKey(name: 'market_cap') this.marketCap, @JsonKey(name: 'avg_volume_30d') this.avgVolume30d, this.pe, @JsonKey(name: 'pe_period') this.pePeriod}): super._();
   factory _CompanySummary.fromJson(Map<String, dynamic> json) => _$CompanySummaryFromJson(json);
 
 @override final  String ticker;
@@ -497,6 +514,23 @@ class _CompanySummary extends CompanySummary {
 @override@JsonKey() final  String exchange;
 @override@JsonKey(name: 'has_cash_or_trash') final  bool hasCashOrTrash;
 @override@JsonKey(name: 'has_research') final  bool hasResearch;
+/// Numbers the directory can narrow itself by without opening 282 files.
+///
+/// Slow-moving ones only. Price, change and volume are not here because
+/// they move through the session and the screen already watches the live
+/// snapshot, which is fresher than this document will ever be.
+@override@JsonKey(name: 'market_cap') final  double? marketCap;
+@override@JsonKey(name: 'avg_volume_30d') final  double? avgVolume30d;
+/// The last traded price over the company's own filed annual earnings.
+///
+/// Absent for more than a third of the exchange, and every absence is
+/// deliberate — a loss, no filed figure, or two independent routes to the
+/// ratio disagreeing. See `price_earnings` in build_market_api.py.
+@override final  double? pe;
+/// The financial year the earnings in [pe] were filed for. A newest annual
+/// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
+/// a different claim from the same number against 2025.
+@override@JsonKey(name: 'pe_period') final  String? pePeriod;
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
@@ -511,16 +545,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod)';
 }
 
 
@@ -531,7 +565,7 @@ abstract mixin class _$CompanySummaryCopyWith<$Res> implements $CompanySummaryCo
   factory _$CompanySummaryCopyWith(_CompanySummary value, $Res Function(_CompanySummary) _then) = __$CompanySummaryCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod
 });
 
 
@@ -548,7 +582,7 @@ class __$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,}) {
   return _then(_CompanySummary(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -557,7 +591,11 @@ as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nul
 as String?,exchange: null == exchange ? _self.exchange : exchange // ignore: cast_nullable_to_non_nullable
 as String,hasCashOrTrash: null == hasCashOrTrash ? _self.hasCashOrTrash : hasCashOrTrash // ignore: cast_nullable_to_non_nullable
 as bool,hasResearch: null == hasResearch ? _self.hasResearch : hasResearch // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,marketCap: freezed == marketCap ? _self.marketCap : marketCap // ignore: cast_nullable_to_non_nullable
+as double?,avgVolume30d: freezed == avgVolume30d ? _self.avgVolume30d : avgVolume30d // ignore: cast_nullable_to_non_nullable
+as double?,pe: freezed == pe ? _self.pe : pe // ignore: cast_nullable_to_non_nullable
+as double?,pePeriod: freezed == pePeriod ? _self.pePeriod : pePeriod // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

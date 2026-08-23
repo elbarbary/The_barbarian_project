@@ -53,6 +53,26 @@ abstract class CompanySummary with _$CompanySummary {
     @Default('EGX') String exchange,
     @JsonKey(name: 'has_cash_or_trash') @Default(false) bool hasCashOrTrash,
     @JsonKey(name: 'has_research') @Default(false) bool hasResearch,
+
+    /// Numbers the directory can narrow itself by without opening 282 files.
+    ///
+    /// Slow-moving ones only. Price, change and volume are not here because
+    /// they move through the session and the screen already watches the live
+    /// snapshot, which is fresher than this document will ever be.
+    @JsonKey(name: 'market_cap') double? marketCap,
+    @JsonKey(name: 'avg_volume_30d') double? avgVolume30d,
+
+    /// The last traded price over the company's own filed annual earnings.
+    ///
+    /// Absent for more than a third of the exchange, and every absence is
+    /// deliberate — a loss, no filed figure, or two independent routes to the
+    /// ratio disagreeing. See `price_earnings` in build_market_api.py.
+    double? pe,
+
+    /// The financial year the earnings in [pe] were filed for. A newest annual
+    /// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
+    /// a different claim from the same number against 2025.
+    @JsonKey(name: 'pe_period') String? pePeriod,
   }) = _CompanySummary;
 
   const CompanySummary._();
