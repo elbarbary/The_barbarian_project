@@ -489,16 +489,17 @@ class _Overview extends ConsumerWidget {
     // it. That is the whole discipline — the sentence is only as good as the
     // sum it can show.
     final explained = <Explainer?>[
-      Explainers.relativeVolume(company),
-      Explainers.freeFloat(company),
-      Explainers.closeStrength(company),
+      Explainers.relativeVolume(company, l),
+      Explainers.freeFloat(company, l),
+      Explainers.closeStrength(company, l),
       Explainers.move(
         title: l.movedThisMonthLabel,
         window: l.perf1Month,
         percent: p['perf_1m'] is num ? (p['perf_1m'] as num).toDouble() : null,
         asOf: m?.date,
+        l: l,
       ),
-      Explainers.marketCap(company),
+      Explainers.marketCap(company, l),
     ].nonNulls.toList();
 
     final momentum = <(String, String)>[

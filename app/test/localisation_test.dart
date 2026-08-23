@@ -204,11 +204,6 @@ void main() {
           file.path.contains('/l10n/')) {
         continue;
       }
-      // Explainer prose is a known, tracked gap: its bodies are English too,
-      // and an Arabic heading over an English paragraph would be worse than
-      // either. See docs/open-issues.md.
-      if (file.path.endsWith('core/models/explainer.dart')) continue;
-
       final source = file.readAsStringSync();
       // Comments are not copy, and this codebase has a great deal of comment.
       final code = source

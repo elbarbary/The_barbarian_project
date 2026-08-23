@@ -1394,5 +1394,213 @@
         "type": "String"
       }
     }
+  },
+  "expRvTitle": "How much it traded",
+  "expRvNoTrade": "It did not trade at all.",
+  "expRvExact": "Traded exactly its normal amount.",
+  "expRvMore": "Traded {pct}% more than its normal amount.",
+  "@expRvMore": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expRvLess": "Traded {pct}% less than its normal amount.",
+  "@expRvLess": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expRvToken": "{ratio}× normal",
+  "@expRvToken": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "expRvWorkings": "{volume} shares traded\n÷ {median} — the middle session of the last 20\n= {ratio}",
+  "@expRvWorkings": {
+    "placeholders": {
+      "volume": {
+        "type": "String"
+      },
+      "median": {
+        "type": "String"
+      },
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "expRvYardstickNoTrade": "Nothing changed hands. There was no price at which a holder could sell, because selling needs somebody on the other side.",
+  "expRvYardstick": "Below 1 is quieter than usual. Above 2 is unusual and worth reading the filings for.",
+  "expRvCaveat": "The comparison is against the middle session of the last twenty, not the average. A holiday week or a trading halt moves it.",
+  "expCloseTitle": "Where it finished",
+  "expCloseUpper": "Finished in the upper half of the day it traded in.",
+  "expCloseLower": "Finished in the lower half of the day it traded in.",
+  "expCloseToken": "{pct}% of the day’s range",
+  "@expCloseToken": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expCloseWorkings": "Closed at {close}\n− the day’s low {low}\n÷ (high {high} − low {low})\n= {pct}%",
+  "@expCloseWorkings": {
+    "placeholders": {
+      "close": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expCloseYardstick": "100% means it closed at the very top of its range, 0% at the very bottom. One session on its own says little.",
+  "expFloatTitle": "How much of it can actually be bought",
+  "expFloatPlain": "Only {count} shares in every 100 actually trade.",
+  "@expFloatPlain": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "expFloatToken": "{pct}% free float",
+  "@expFloatToken": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsShort": "{pct}% of the shares are free to trade.",
+  "@expFloatWorkingsShort": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsHead": "{shares} shares are free to trade",
+  "@expFloatWorkingsHead": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsDiv": "÷ {shares} shares in issue",
+  "@expFloatWorkingsDiv": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsSum": "= {pct}%",
+  "@expFloatWorkingsSum": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatYardstick": "The rest sit with owners who do not sell. A small float means the price moves further on the same order — in both directions — and that selling in size can take days.",
+  "expFloatSource": "Ownership table, most recent filing",
+  "expFloatCaveat": "A market value calculated on all the shares is not what the company would fetch when only a fraction of them trade.",
+  "expCapTitle": "What the whole company is priced at",
+  "expCapPlainBillions": "The whole company is priced at {value} billion pounds.",
+  "@expCapPlainBillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapPlainMillions": "The whole company is priced at {value} million pounds.",
+  "@expCapPlainMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapWorkings": "{shares} shares in issue\n× EGP {price} a share\n= EGP {cap}",
+  "@expCapWorkings": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      },
+      "cap": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapYardstick": "This is what the market is charging for the company today, not a measure of what it owns or earns.",
+  "expCapSource": "Shares in issue from the latest filing, price from the close",
+  "expCapCaveat": "It multiplies every share by the last traded price, including the shares that never trade.",
+  "expMoveHigher": "Priced {pct}% higher than it was {window} ago.",
+  "@expMoveHigher": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveLower": "Priced {pct}% lower than it was {window} ago.",
+  "@expMoveLower": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveWorkings": "The closing price now, against the closing price {window} ago, as a percentage of the older one.",
+  "@expMoveWorkings": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveYardstick": "A move on its own says what happened, not why. The reason — if one was published — is in the filings and the study.",
+  "expSourceSession": "EGX session data",
+  "expSourceSessionOn": "EGX session data, {date}",
+  "@expSourceSessionOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "expSourceCloses": "EGX closing prices",
+  "expSourceClosesOn": "EGX closing prices, {date}",
+  "@expSourceClosesOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   }
 }

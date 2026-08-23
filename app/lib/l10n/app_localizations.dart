@@ -3439,6 +3439,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{score} of {max}, {status}'**
   String scanScoreSpoken(int score, int max, String status);
+
+  /// No description provided for @expRvTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How much it traded'**
+  String get expRvTitle;
+
+  /// No description provided for @expRvNoTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'It did not trade at all.'**
+  String get expRvNoTrade;
+
+  /// No description provided for @expRvExact.
+  ///
+  /// In en, this message translates to:
+  /// **'Traded exactly its normal amount.'**
+  String get expRvExact;
+
+  /// No description provided for @expRvMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Traded {pct}% more than its normal amount.'**
+  String expRvMore(int pct);
+
+  /// No description provided for @expRvLess.
+  ///
+  /// In en, this message translates to:
+  /// **'Traded {pct}% less than its normal amount.'**
+  String expRvLess(int pct);
+
+  /// No description provided for @expRvToken.
+  ///
+  /// In en, this message translates to:
+  /// **'{ratio}× normal'**
+  String expRvToken(String ratio);
+
+  /// No description provided for @expRvWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'{volume} shares traded\n÷ {median} — the middle session of the last 20\n= {ratio}'**
+  String expRvWorkings(String volume, String median, String ratio);
+
+  /// No description provided for @expRvYardstickNoTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing changed hands. There was no price at which a holder could sell, because selling needs somebody on the other side.'**
+  String get expRvYardstickNoTrade;
+
+  /// No description provided for @expRvYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'Below 1 is quieter than usual. Above 2 is unusual and worth reading the filings for.'**
+  String get expRvYardstick;
+
+  /// No description provided for @expRvCaveat.
+  ///
+  /// In en, this message translates to:
+  /// **'The comparison is against the middle session of the last twenty, not the average. A holiday week or a trading halt moves it.'**
+  String get expRvCaveat;
+
+  /// No description provided for @expCloseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where it finished'**
+  String get expCloseTitle;
+
+  /// No description provided for @expCloseUpper.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished in the upper half of the day it traded in.'**
+  String get expCloseUpper;
+
+  /// No description provided for @expCloseLower.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished in the lower half of the day it traded in.'**
+  String get expCloseLower;
+
+  /// No description provided for @expCloseToken.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% of the day’s range'**
+  String expCloseToken(int pct);
+
+  /// No description provided for @expCloseWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed at {close}\n− the day’s low {low}\n÷ (high {high} − low {low})\n= {pct}%'**
+  String expCloseWorkings(String close, String low, String high, int pct);
+
+  /// No description provided for @expCloseYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'100% means it closed at the very top of its range, 0% at the very bottom. One session on its own says little.'**
+  String get expCloseYardstick;
+
+  /// No description provided for @expFloatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How much of it can actually be bought'**
+  String get expFloatTitle;
+
+  /// No description provided for @expFloatPlain.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {count} shares in every 100 actually trade.'**
+  String expFloatPlain(int count);
+
+  /// No description provided for @expFloatToken.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% free float'**
+  String expFloatToken(String pct);
+
+  /// No description provided for @expFloatWorkingsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{pct}% of the shares are free to trade.'**
+  String expFloatWorkingsShort(String pct);
+
+  /// No description provided for @expFloatWorkingsHead.
+  ///
+  /// In en, this message translates to:
+  /// **'{shares} shares are free to trade'**
+  String expFloatWorkingsHead(String shares);
+
+  /// No description provided for @expFloatWorkingsDiv.
+  ///
+  /// In en, this message translates to:
+  /// **'÷ {shares} shares in issue'**
+  String expFloatWorkingsDiv(String shares);
+
+  /// No description provided for @expFloatWorkingsSum.
+  ///
+  /// In en, this message translates to:
+  /// **'= {pct}%'**
+  String expFloatWorkingsSum(String pct);
+
+  /// No description provided for @expFloatYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'The rest sit with owners who do not sell. A small float means the price moves further on the same order — in both directions — and that selling in size can take days.'**
+  String get expFloatYardstick;
+
+  /// No description provided for @expFloatSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Ownership table, most recent filing'**
+  String get expFloatSource;
+
+  /// No description provided for @expFloatCaveat.
+  ///
+  /// In en, this message translates to:
+  /// **'A market value calculated on all the shares is not what the company would fetch when only a fraction of them trade.'**
+  String get expFloatCaveat;
+
+  /// No description provided for @expCapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What the whole company is priced at'**
+  String get expCapTitle;
+
+  /// No description provided for @expCapPlainBillions.
+  ///
+  /// In en, this message translates to:
+  /// **'The whole company is priced at {value} billion pounds.'**
+  String expCapPlainBillions(String value);
+
+  /// No description provided for @expCapPlainMillions.
+  ///
+  /// In en, this message translates to:
+  /// **'The whole company is priced at {value} million pounds.'**
+  String expCapPlainMillions(String value);
+
+  /// No description provided for @expCapWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'{shares} shares in issue\n× EGP {price} a share\n= EGP {cap}'**
+  String expCapWorkings(String shares, String price, String cap);
+
+  /// No description provided for @expCapYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'This is what the market is charging for the company today, not a measure of what it owns or earns.'**
+  String get expCapYardstick;
+
+  /// No description provided for @expCapSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares in issue from the latest filing, price from the close'**
+  String get expCapSource;
+
+  /// No description provided for @expCapCaveat.
+  ///
+  /// In en, this message translates to:
+  /// **'It multiplies every share by the last traded price, including the shares that never trade.'**
+  String get expCapCaveat;
+
+  /// No description provided for @expMoveHigher.
+  ///
+  /// In en, this message translates to:
+  /// **'Priced {pct}% higher than it was {window} ago.'**
+  String expMoveHigher(String pct, String window);
+
+  /// No description provided for @expMoveLower.
+  ///
+  /// In en, this message translates to:
+  /// **'Priced {pct}% lower than it was {window} ago.'**
+  String expMoveLower(String pct, String window);
+
+  /// No description provided for @expMoveWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'The closing price now, against the closing price {window} ago, as a percentage of the older one.'**
+  String expMoveWorkings(String window);
+
+  /// No description provided for @expMoveYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'A move on its own says what happened, not why. The reason — if one was published — is in the filings and the study.'**
+  String get expMoveYardstick;
+
+  /// No description provided for @expSourceSession.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX session data'**
+  String get expSourceSession;
+
+  /// No description provided for @expSourceSessionOn.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX session data, {date}'**
+  String expSourceSessionOn(String date);
+
+  /// No description provided for @expSourceCloses.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX closing prices'**
+  String get expSourceCloses;
+
+  /// No description provided for @expSourceClosesOn.
+  ///
+  /// In en, this message translates to:
+  /// **'EGX closing prices, {date}'**
+  String expSourceClosesOn(String date);
 }
 
 class _AppLocalizationsDelegate

@@ -193,6 +193,40 @@ matters: `'OPPORTUNITY SCANNER'` survived a product rename earlier the same day
 purely because a hardcoded string is invisible to the ARB and to a reviewer
 grepping for the old name.
 
+That guard was then found to be seeing about half of what it claimed. It
+matched literals passed straight into `Text(` or a `label:`-shaped parameter,
+so a string returned from a model getter, sitting in a `(String, String)`
+record, or behind a ternary was invisible to it — which is how the most-rendered
+sentence in the product, the price-age line, stayed hardcoded English through
+several passes that each reported the file clean. It now walks the whole first
+argument of a copy-carrying widget with a balanced-paren scan, reads `value:`,
+`text:`, `sentence:` and the explainer fields, catches one-word row labels, and
+scans `=>` arms under `core/models` for sentences a widget cannot know were
+never translated. Under the wider guard the baseline went to 46 and is now
+empty, screen-reader labels included.
+
+**Explainer prose is in both languages.** Roughly two dozen sentences lived in
+`core/models/explainer.dart` — the bodies as well as the titles — and were
+deliberately left whole in English, because an Arabic heading over an English
+paragraph reads worse than either. They are the app's teaching surface: every
+number that opens a sheet opens one of these. All five builders now take the
+reader's language, the file is no longer exempt from the localisation guard,
+and a test renders every sentence each one can produce in Arabic and fails on
+a Latin letter.
+
+**The scanner's own vocabulary is in Arabic.** `ScanStatus.label` was three
+English literals on a model, so "Watching · of 13" sat under a score. The
+report's finer wording — "Persistent watch", "Tape propagation alert" — comes
+out of an English field note, so the builder publishes an Arabic sibling from
+a table of the phrases the note has actually used, clause by clause, and a
+phrase nobody has written an Arabic for stays in English rather than being
+guessed at.
+
+**The sector a company is filed under is in Arabic.** Twenty English category
+codes from the scan were printed raw on the directory's chips and twice on
+every company page. A test over the published directory fails when a new one
+arrives.
+
 ### Still open
 
 **5Y and MAX have no data behind them.** The published company file is capped
@@ -206,13 +240,6 @@ and manifest entry for it is the remaining work.
 page, 40 failed identity verification against closes we already held, and 5 had
 too little overlap to confirm. None were taken on faith. A second source would
 be needed for these rather than a looser check.
-
-**Explainer prose is English-only.** Roughly two dozen sentences live in
-`core/models/explainer.dart` — the bodies as well as the titles — so an Arabic
-reader gets English explanations. Localising the titles alone would put an
-Arabic heading over an English paragraph, which reads worse than either, so it
-is deliberately left whole. It is the largest remaining block of untranslated
-product text.
 
 **The full legal statement is English-only**, deliberately: it is a constant so
 counsel edits one place and a test can assert on it. The Arabic version is

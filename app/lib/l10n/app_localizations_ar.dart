@@ -1990,4 +1990,176 @@ class AppLocalizationsAr extends AppLocalizations {
   String scanScoreSpoken(int score, int max, String status) {
     return '$score من $max، $status';
   }
+
+  @override
+  String get expRvTitle => 'كم تداول السهم';
+
+  @override
+  String get expRvNoTrade => 'لم يُتداول السهم إطلاقًا.';
+
+  @override
+  String get expRvExact => 'تداول تمامًا بقدره المعتاد.';
+
+  @override
+  String expRvMore(int pct) {
+    return 'تداول بنسبة $pct٪ فوق قدره المعتاد.';
+  }
+
+  @override
+  String expRvLess(int pct) {
+    return 'تداول بنسبة $pct٪ دون قدره المعتاد.';
+  }
+
+  @override
+  String expRvToken(String ratio) {
+    return '$ratio× المعتاد';
+  }
+
+  @override
+  String expRvWorkings(String volume, String median, String ratio) {
+    return '$volume سهم تداولت\n÷ $median — الجلسة الوسطى في آخر 20 جلسة\n= $ratio';
+  }
+
+  @override
+  String get expRvYardstickNoTrade =>
+      'لم يتغير أي سهم يدًا. لم يكن هناك سعر يستطيع المالك البيع عنده، لأن البيع يحتاج طرفًا آخر.';
+
+  @override
+  String get expRvYardstick =>
+      'أقل من 1 يعني هدوءًا أكثر من المعتاد. وفوق 2 غير معتاد ويستحق قراءة الإفصاحات.';
+
+  @override
+  String get expRvCaveat =>
+      'المقارنة مع الجلسة الوسطى في آخر عشرين جلسة، لا مع المتوسط. وأسبوع إجازة أو إيقاف للتداول يحرّكها.';
+
+  @override
+  String get expCloseTitle => 'أين أغلق';
+
+  @override
+  String get expCloseUpper => 'أغلق في النصف الأعلى من نطاق تداوله ذلك اليوم.';
+
+  @override
+  String get expCloseLower => 'أغلق في النصف الأدنى من نطاق تداوله ذلك اليوم.';
+
+  @override
+  String expCloseToken(int pct) {
+    return '$pct٪ من نطاق اليوم';
+  }
+
+  @override
+  String expCloseWorkings(String close, String low, String high, int pct) {
+    return 'أغلق عند $close\n− أدنى سعر لليوم $low\n÷ (أعلى $high − أدنى $low)\n= $pct٪';
+  }
+
+  @override
+  String get expCloseYardstick =>
+      '١٠٠٪ تعني أنه أغلق عند قمة نطاقه تمامًا، و٠٪ عند قاعه. وجلسة واحدة بمفردها لا تقول الكثير.';
+
+  @override
+  String get expFloatTitle => 'كم منه متاح للشراء فعلًا';
+
+  @override
+  String expFloatPlain(int count) {
+    return '$count سهم فقط من كل 100 يُتداول فعلًا.';
+  }
+
+  @override
+  String expFloatToken(String pct) {
+    return '$pct٪ أسهم حرة التداول';
+  }
+
+  @override
+  String expFloatWorkingsShort(String pct) {
+    return '$pct٪ من الأسهم حرة التداول.';
+  }
+
+  @override
+  String expFloatWorkingsHead(String shares) {
+    return '$shares سهم حر التداول';
+  }
+
+  @override
+  String expFloatWorkingsDiv(String shares) {
+    return '÷ $shares سهم مُصدَر';
+  }
+
+  @override
+  String expFloatWorkingsSum(String pct) {
+    return '= $pct٪';
+  }
+
+  @override
+  String get expFloatYardstick =>
+      'الباقي في يد ملّاك لا يبيعون. وقلة الأسهم الحرة تعني أن السعر يتحرك أكثر أمام الأمر نفسه — في الاتجاهين — وأن البيع بكميات كبيرة قد يستغرق أيامًا.';
+
+  @override
+  String get expFloatSource => 'جدول الملكية، أحدث إفصاح';
+
+  @override
+  String get expFloatCaveat =>
+      'القيمة السوقية المحسوبة على كل الأسهم ليست ما ستُباع به الشركة بينما جزء صغير منها فقط هو المتداول.';
+
+  @override
+  String get expCapTitle => 'بكم تُسعَّر الشركة كلها';
+
+  @override
+  String expCapPlainBillions(String value) {
+    return 'تُسعَّر الشركة كلها بـ$value مليار جنيه.';
+  }
+
+  @override
+  String expCapPlainMillions(String value) {
+    return 'تُسعَّر الشركة كلها بـ$value مليون جنيه.';
+  }
+
+  @override
+  String expCapWorkings(String shares, String price, String cap) {
+    return '$shares سهم مُصدَر\n× $price جنيه للسهم\n= $cap جنيه';
+  }
+
+  @override
+  String get expCapYardstick =>
+      'هذا ما يطلبه السوق ثمنًا للشركة اليوم، وليس قياسًا لما تملكه أو لما تكسبه.';
+
+  @override
+  String get expCapSource => 'عدد الأسهم من أحدث إفصاح، والسعر من الإغلاق';
+
+  @override
+  String get expCapCaveat =>
+      'يضرب كل سهم في آخر سعر تداول، بما في ذلك الأسهم التي لا تُتداول أبدًا.';
+
+  @override
+  String expMoveHigher(String pct, String window) {
+    return 'سعره أعلى بنسبة $pct٪ مما كان قبل $window.';
+  }
+
+  @override
+  String expMoveLower(String pct, String window) {
+    return 'سعره أقل بنسبة $pct٪ مما كان قبل $window.';
+  }
+
+  @override
+  String expMoveWorkings(String window) {
+    return 'سعر الإغلاق الآن، مقابل سعر الإغلاق قبل $window، كنسبة من الأقدم.';
+  }
+
+  @override
+  String get expMoveYardstick =>
+      'الحركة وحدها تقول ماذا حدث لا لماذا. والسبب — إن كان قد نُشر — في الإفصاحات والدراسة.';
+
+  @override
+  String get expSourceSession => 'بيانات جلسة البورصة';
+
+  @override
+  String expSourceSessionOn(String date) {
+    return 'بيانات جلسة البورصة، $date';
+  }
+
+  @override
+  String get expSourceCloses => 'أسعار إغلاق البورصة';
+
+  @override
+  String expSourceClosesOn(String date) {
+    return 'أسعار إغلاق البورصة، $date';
+  }
 }

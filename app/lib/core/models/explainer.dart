@@ -1,3 +1,4 @@
+import '../../l10n/app_localizations.dart';
 import 'company.dart';
 
 /// Whether a figure is sitting where it usually sits.
@@ -140,12 +141,16 @@ abstract final class Explainers {
     return buf.toString();
   }
 
+  /// The session's own date, appended to the source when there is one.
+  static String _session(AppLocalizations l, String? date) =>
+      date == null ? l.expSourceSession : l.expSourceSessionOn(date);
+
   /// How much of the company actually changes hands, against its own normal.
   ///
   /// The denominator is a **median** of the last twenty sessions, not a mean,
   /// which is why a holiday week or a suspension distorts it — said in the
   /// caveat rather than left for the reader to discover.
-  static Explainer? relativeVolume(Company company) {
+  static Explainer? relativeVolume(Company company, AppLocalizations l) {
     final volume = company.market?.volume;
     final median = _num(company, 'median_volume_20d');
     if (volume == null || median == null || median <= 0) return null;
@@ -156,40 +161,33 @@ abstract final class Explainers {
     // fact, and the phrasing that works for a quiet day reads as a rounding
     // artefact here. Eight listings on this exchange stop entirely.
     final plain = volume == 0
-        ? 'It did not trade at all.'
+        ? l.expRvNoTrade
         : switch (pct) {
-            0 => 'Traded exactly its normal amount.',
-            > 0 => 'Traded $pct% more than its normal amount.',
-            _ => 'Traded ${pct.abs()}% less than its normal amount.',
+            0 => l.expRvExact,
+            > 0 => l.expRvMore(pct),
+            _ => l.expRvLess(pct.abs()),
           };
 
     return Explainer(
       termId: 'rv20',
-      title: 'How much it traded',
+      title: l.expRvTitle,
       plain: plain,
-      token: '${ratio.toStringAsFixed(2)}× normal',
-      workings:
-          '${_n(volume)} shares traded\n'
-          '÷ ${_n(median)} — the middle session of the last 20\n'
-          '= ${ratio.toStringAsFixed(2)}',
-      yardstick: volume == 0
-          ? 'Nothing changed hands. There was no price at which a holder '
-                'could sell, because selling needs somebody on the other side.'
-          : 'Below 1 is quieter than usual. Above 2 is unusual and worth '
-                'reading the filings for.',
+      token: l.expRvToken(ratio.toStringAsFixed(2)),
+      workings: l.expRvWorkings(
+        _n(volume),
+        _n(median),
+        ratio.toStringAsFixed(2),
+      ),
+      yardstick: volume == 0 ? l.expRvYardstickNoTrade : l.expRvYardstick,
       notability: ratio >= 2 ? Notability.notable : Notability.ordinary,
-      source:
-          'EGX session data'
-          '${company.market?.date == null ? '' : ', ${company.market!.date}'}',
-      caveat:
-          'The comparison is against the middle session of the last twenty, '
-          'not the average. A holiday week or a trading halt moves it.',
+      source: _session(l, company.market?.date),
+      caveat: l.expRvCaveat,
     );
   }
 
   /// Where in the day's range it finished — the tape's own tell, and one that
   /// means nothing to anybody who has not been taught to read it.
-  static Explainer? closeStrength(Company company) {
+  static Explainer? closeStrength(Company company, AppLocalizations l) {
     final m = company.market;
     if (m == null) return null;
     final high = m.high;
@@ -200,35 +198,29 @@ abstract final class Explainers {
 
     final fraction = (close - low) / (high - low);
     final pct = (fraction * 100).round();
-    final plain = fraction >= 0.5
-        ? 'Finished in the upper half of the day it traded in.'
-        : 'Finished in the lower half of the day it traded in.';
 
     return Explainer(
       termId: 'close_strength',
-      title: 'Where it finished',
-      plain: plain,
-      token: '$pct% of the day’s range',
-      workings:
-          'Closed at ${close.toStringAsFixed(2)}\n'
-          '− the day’s low ${low.toStringAsFixed(2)}\n'
-          '÷ (high ${high.toStringAsFixed(2)} − low ${low.toStringAsFixed(2)})\n'
-          '= $pct%',
-      yardstick:
-          '100% means it closed at the very top of its range, 0% at the very '
-          'bottom. One session on its own says little.',
+      title: l.expCloseTitle,
+      plain: fraction >= 0.5 ? l.expCloseUpper : l.expCloseLower,
+      token: l.expCloseToken(pct),
+      workings: l.expCloseWorkings(
+        close.toStringAsFixed(2),
+        low.toStringAsFixed(2),
+        high.toStringAsFixed(2),
+        pct,
+      ),
+      yardstick: l.expCloseYardstick,
       // A single session's close position is not a threshold event, and
       // dressing it as one would be reading tea leaves.
       notability: Notability.unjudged,
-      source:
-          'EGX session data'
-          '${m.date == null ? '' : ', ${m.date}'}',
+      source: _session(l, m.date),
     );
   }
 
   /// The exit question, answered from public arithmetic — the one thing the
   /// spec says nobody else in Egypt has built.
-  static Explainer? freeFloat(Company company) {
+  static Explainer? freeFloat(Company company, AppLocalizations l) {
     final float = _num(company, 'free_float');
     final shares = _num(company, 'shares_outstanding');
     if (float == null || float <= 0) return null;
@@ -241,59 +233,47 @@ abstract final class Explainers {
 
     return Explainer(
       termId: 'free_float',
-      title: 'How much of it can actually be bought',
-      plain: 'Only $inHundred shares in every 100 actually trade.',
-      token: '${pct.toStringAsFixed(1)}% free float',
+      title: l.expFloatTitle,
+      plain: l.expFloatPlain(inHundred),
+      token: l.expFloatToken(pct.toStringAsFixed(1)),
       workings: floatShares == null
-          ? '${pct.toStringAsFixed(2)}% of the shares are free to trade.'
-          : '${_n(floatShares)} shares are free to trade\n'
-                '${shares == null ? '' : '÷ ${_n(shares)} shares in issue\n'}'
-                '= ${pct.toStringAsFixed(2)}%',
-      yardstick:
-          'The rest sit with owners who do not sell. A small float means the '
-          'price moves further on the same order — in both directions — and '
-          'that selling in size can take days.',
+          ? l.expFloatWorkingsShort(pct.toStringAsFixed(2))
+          : [
+              l.expFloatWorkingsHead(_n(floatShares)),
+              if (shares != null) l.expFloatWorkingsDiv(_n(shares)),
+              l.expFloatWorkingsSum(pct.toStringAsFixed(2)),
+            ].join('\n'),
+      yardstick: l.expFloatYardstick,
       // The threshold where a float starts to govern whether you can get out.
       notability: pct < 15 ? Notability.notable : Notability.ordinary,
-      source: 'Ownership table, most recent filing',
-      caveat:
-          'A market value calculated on all the shares is not what the '
-          'company would fetch when only a fraction of them trade.',
+      source: l.expFloatSource,
+      caveat: l.expFloatCaveat,
     );
   }
 
   /// What the whole company is priced at — stated as a price, never as worth.
-  static Explainer? marketCap(Company company) {
+  static Explainer? marketCap(Company company, AppLocalizations l) {
     final cap = _num(company, 'market_cap');
     final shares = _num(company, 'shares_outstanding');
     final close = company.market?.lastClose;
     if (cap == null || cap <= 0) return null;
 
     final billions = cap / 1e9;
-    final plain = billions >= 1
-        ? 'The whole company is priced at ${billions.toStringAsFixed(2)} '
-              'billion pounds.'
-        : 'The whole company is priced at ${(cap / 1e6).round()} million '
-              'pounds.';
 
     return Explainer(
       termId: 'market_cap',
-      title: 'What the whole company is priced at',
-      plain: plain,
-      token: 'EGP ${_n(cap)}',
+      title: l.expCapTitle,
+      plain: billions >= 1
+          ? l.expCapPlainBillions(billions.toStringAsFixed(2))
+          : l.expCapPlainMillions('${(cap / 1e6).round()}'),
+      token: l.moneyWithUnit(_n(cap), l.unitEgp),
       workings: shares == null || close == null
-          ? 'EGP ${_n(cap)}'
-          : '${_n(shares)} shares in issue\n'
-                '× EGP ${close.toStringAsFixed(2)} a share\n'
-                '= EGP ${_n(cap)}',
-      yardstick:
-          'This is what the market is charging for the company today, not a '
-          'measure of what it owns or earns.',
+          ? l.moneyWithUnit(_n(cap), l.unitEgp)
+          : l.expCapWorkings(_n(shares), close.toStringAsFixed(2), _n(cap)),
+      yardstick: l.expCapYardstick,
       notability: Notability.unjudged,
-      source: 'Shares in issue from the latest filing, price from the close',
-      caveat:
-          'It multiplies every share by the last traded price, including the '
-          'shares that never trade.',
+      source: l.expCapSource,
+      caveat: l.expCapCaveat,
     );
   }
 
@@ -303,6 +283,7 @@ abstract final class Explainers {
     required String title,
     required String window,
     required double? percent,
+    required AppLocalizations l,
     String? asOf,
   }) {
     if (percent == null) return null;
@@ -314,26 +295,20 @@ abstract final class Explainers {
     // a share is worth is a valuation, and publishing one is the thing §8
     // forbids to somebody with no licence. The two words are a syllable apart
     // and only one of them is a fact.
-    final plain = percent >= 0
-        ? 'Priced $rounded% higher than it was $window ago.'
-        : 'Priced $rounded% lower than it was $window ago.';
-
     return Explainer(
       termId: 'price_move',
       title: title,
-      plain: plain,
+      plain: percent >= 0
+          ? l.expMoveHigher(rounded, window)
+          : l.expMoveLower(rounded, window),
       token: '${percent >= 0 ? '+' : '−'}$rounded%',
-      workings:
-          'The closing price now, against the closing price $window ago, as a '
-          'percentage of the older one.',
-      yardstick:
-          'A move on its own says what happened, not why. The reason — if one '
-          'was published — is in the filings and the study.',
+      workings: l.expMoveWorkings(window),
+      yardstick: l.expMoveYardstick,
       // A price move is not evidence of anything by itself, and a badge
       // calling a big one "unusual" would be exactly the tea-leaf reading
       // this app exists to replace.
       notability: Notability.unjudged,
-      source: asOf == null ? 'EGX closing prices' : 'EGX closing prices, $asOf',
+      source: asOf == null ? l.expSourceCloses : l.expSourceClosesOn(asOf),
     );
   }
 }

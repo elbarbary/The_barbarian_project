@@ -1999,4 +1999,179 @@ class AppLocalizationsEn extends AppLocalizations {
   String scanScoreSpoken(int score, int max, String status) {
     return '$score of $max, $status';
   }
+
+  @override
+  String get expRvTitle => 'How much it traded';
+
+  @override
+  String get expRvNoTrade => 'It did not trade at all.';
+
+  @override
+  String get expRvExact => 'Traded exactly its normal amount.';
+
+  @override
+  String expRvMore(int pct) {
+    return 'Traded $pct% more than its normal amount.';
+  }
+
+  @override
+  String expRvLess(int pct) {
+    return 'Traded $pct% less than its normal amount.';
+  }
+
+  @override
+  String expRvToken(String ratio) {
+    return '$ratio× normal';
+  }
+
+  @override
+  String expRvWorkings(String volume, String median, String ratio) {
+    return '$volume shares traded\n÷ $median — the middle session of the last 20\n= $ratio';
+  }
+
+  @override
+  String get expRvYardstickNoTrade =>
+      'Nothing changed hands. There was no price at which a holder could sell, because selling needs somebody on the other side.';
+
+  @override
+  String get expRvYardstick =>
+      'Below 1 is quieter than usual. Above 2 is unusual and worth reading the filings for.';
+
+  @override
+  String get expRvCaveat =>
+      'The comparison is against the middle session of the last twenty, not the average. A holiday week or a trading halt moves it.';
+
+  @override
+  String get expCloseTitle => 'Where it finished';
+
+  @override
+  String get expCloseUpper =>
+      'Finished in the upper half of the day it traded in.';
+
+  @override
+  String get expCloseLower =>
+      'Finished in the lower half of the day it traded in.';
+
+  @override
+  String expCloseToken(int pct) {
+    return '$pct% of the day’s range';
+  }
+
+  @override
+  String expCloseWorkings(String close, String low, String high, int pct) {
+    return 'Closed at $close\n− the day’s low $low\n÷ (high $high − low $low)\n= $pct%';
+  }
+
+  @override
+  String get expCloseYardstick =>
+      '100% means it closed at the very top of its range, 0% at the very bottom. One session on its own says little.';
+
+  @override
+  String get expFloatTitle => 'How much of it can actually be bought';
+
+  @override
+  String expFloatPlain(int count) {
+    return 'Only $count shares in every 100 actually trade.';
+  }
+
+  @override
+  String expFloatToken(String pct) {
+    return '$pct% free float';
+  }
+
+  @override
+  String expFloatWorkingsShort(String pct) {
+    return '$pct% of the shares are free to trade.';
+  }
+
+  @override
+  String expFloatWorkingsHead(String shares) {
+    return '$shares shares are free to trade';
+  }
+
+  @override
+  String expFloatWorkingsDiv(String shares) {
+    return '÷ $shares shares in issue';
+  }
+
+  @override
+  String expFloatWorkingsSum(String pct) {
+    return '= $pct%';
+  }
+
+  @override
+  String get expFloatYardstick =>
+      'The rest sit with owners who do not sell. A small float means the price moves further on the same order — in both directions — and that selling in size can take days.';
+
+  @override
+  String get expFloatSource => 'Ownership table, most recent filing';
+
+  @override
+  String get expFloatCaveat =>
+      'A market value calculated on all the shares is not what the company would fetch when only a fraction of them trade.';
+
+  @override
+  String get expCapTitle => 'What the whole company is priced at';
+
+  @override
+  String expCapPlainBillions(String value) {
+    return 'The whole company is priced at $value billion pounds.';
+  }
+
+  @override
+  String expCapPlainMillions(String value) {
+    return 'The whole company is priced at $value million pounds.';
+  }
+
+  @override
+  String expCapWorkings(String shares, String price, String cap) {
+    return '$shares shares in issue\n× EGP $price a share\n= EGP $cap';
+  }
+
+  @override
+  String get expCapYardstick =>
+      'This is what the market is charging for the company today, not a measure of what it owns or earns.';
+
+  @override
+  String get expCapSource =>
+      'Shares in issue from the latest filing, price from the close';
+
+  @override
+  String get expCapCaveat =>
+      'It multiplies every share by the last traded price, including the shares that never trade.';
+
+  @override
+  String expMoveHigher(String pct, String window) {
+    return 'Priced $pct% higher than it was $window ago.';
+  }
+
+  @override
+  String expMoveLower(String pct, String window) {
+    return 'Priced $pct% lower than it was $window ago.';
+  }
+
+  @override
+  String expMoveWorkings(String window) {
+    return 'The closing price now, against the closing price $window ago, as a percentage of the older one.';
+  }
+
+  @override
+  String get expMoveYardstick =>
+      'A move on its own says what happened, not why. The reason — if one was published — is in the filings and the study.';
+
+  @override
+  String get expSourceSession => 'EGX session data';
+
+  @override
+  String expSourceSessionOn(String date) {
+    return 'EGX session data, $date';
+  }
+
+  @override
+  String get expSourceCloses => 'EGX closing prices';
+
+  @override
+  String expSourceClosesOn(String date) {
+    return 'EGX closing prices, $date';
+  }
 }

@@ -7,6 +7,8 @@ import 'package:barbarian/core/widgets/charts.dart';
 import 'package:barbarian/core/theme/barbarian_theme.dart';
 import 'package:barbarian/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:barbarian/l10n/app_localizations_ar.dart';
+import 'package:barbarian/l10n/app_localizations_en.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -16,6 +18,10 @@ import 'support/harness.dart';
 /// The app exists to say what a number means, whether it matters, and why —
 /// rather than printing the number and leaving the reader to know already.
 /// "Relative volume 0.43×" is a true row and a failure of the product.
+/// The real generated English, not a stub: these sentences are the
+/// product, and a stub would test the test.
+final en = AppLocalizationsEn();
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
@@ -26,7 +32,7 @@ void main() {
   group('every explained figure carries its own arithmetic', () {
     test('relative volume divides the real operands', () {
       final company = load('ABUK');
-      final e = Explainers.relativeVolume(company)!;
+      final e = Explainers.relativeVolume(company, en)!;
 
       // The sentence, the token and the sum have to agree, because the whole
       // mechanism rests on a reader being able to check the claim.
@@ -52,7 +58,7 @@ void main() {
       // 100% less than its normal amount", which reads as a rounding artefact
       // rather than the fact that nobody could sell that day.
       final quiet = load('SPHT');
-      final e = Explainers.relativeVolume(quiet);
+      final e = Explainers.relativeVolume(quiet, en);
       if (e != null && (quiet.market?.volume ?? 1) == 0) {
         expect(e.plain, 'It did not trade at all.');
         expect(e.yardstick, contains('no price at which a holder could sell'));
@@ -68,12 +74,12 @@ void main() {
         name: LocalizedName(en: 'A company with no profile'),
       );
 
-      expect(Explainers.relativeVolume(bare), isNull);
-      expect(Explainers.freeFloat(bare), isNull);
-      expect(Explainers.closeStrength(bare), isNull);
-      expect(Explainers.marketCap(bare), isNull);
+      expect(Explainers.relativeVolume(bare, en), isNull);
+      expect(Explainers.freeFloat(bare, en), isNull);
+      expect(Explainers.closeStrength(bare, en), isNull);
+      expect(Explainers.marketCap(bare, en), isNull);
       expect(
-        Explainers.move(title: 'x', window: 'a month', percent: null),
+        Explainers.move(title: 'x', window: 'a month', percent: null, l: en),
         isNull,
       );
     });
@@ -81,10 +87,10 @@ void main() {
     test('every explainer states a source', () {
       final company = load('ABUK');
       for (final e in [
-        Explainers.relativeVolume(company),
-        Explainers.freeFloat(company),
-        Explainers.closeStrength(company),
-        Explainers.marketCap(company),
+        Explainers.relativeVolume(company, en),
+        Explainers.freeFloat(company, en),
+        Explainers.closeStrength(company, en),
+        Explainers.marketCap(company, en),
       ].nonNulls) {
         expect(
           e.source,
@@ -120,11 +126,11 @@ void main() {
       ];
 
       for (final e in [
-        Explainers.relativeVolume(company),
-        Explainers.freeFloat(company),
-        Explainers.closeStrength(company),
-        Explainers.marketCap(company),
-        Explainers.move(title: 'x', window: 'a month', percent: 18.5),
+        Explainers.relativeVolume(company, en),
+        Explainers.freeFloat(company, en),
+        Explainers.closeStrength(company, en),
+        Explainers.marketCap(company, en),
+        Explainers.move(title: 'x', window: 'a month', percent: 18.5, l: en),
       ].nonNulls) {
         final blob = '${e.plain} ${e.yardstick} ${e.caveat ?? ''}'
             .toLowerCase();
@@ -142,7 +148,7 @@ void main() {
   group('importance is a threshold, not an opinion', () {
     test('unusual is claimed only against a published band', () {
       final company = load('ABUK');
-      final volume = Explainers.relativeVolume(company)!;
+      final volume = Explainers.relativeVolume(company, en)!;
       final ratio =
           company.market!.volume! /
           (company.profile!['median_volume_20d'] as num).toDouble();
@@ -162,10 +168,13 @@ void main() {
       // market value has no "unusual" level; claiming either would be reading
       // tea leaves in the app's own voice.
       expect(
-        Explainers.closeStrength(company)!.notability,
+        Explainers.closeStrength(company, en)!.notability,
         Notability.unjudged,
       );
-      expect(Explainers.marketCap(company)!.notability, Notability.unjudged);
+      expect(
+        Explainers.marketCap(company, en)!.notability,
+        Notability.unjudged,
+      );
     });
   });
 
@@ -253,5 +262,59 @@ void main() {
     await tester.pump();
     // One point is a level already printed above in a larger font.
     expect(find.byType(BSparkline), findsNothing);
+  });
+
+  // The bodies were English-only for months, and deliberately so: an Arabic
+  // heading over an English paragraph reads worse than either, so the block
+  // was left whole rather than half-translated. It is whole now.
+  group('in the reader’s language', () {
+    final ar = AppLocalizationsAr();
+
+    test('every sentence a company explainer produces is Arabic', () {
+      final company = load('ABUK');
+      final built = <Explainer?>[
+        Explainers.relativeVolume(company, ar),
+        Explainers.freeFloat(company, ar),
+        Explainers.closeStrength(company, ar),
+        Explainers.marketCap(company, ar),
+        // The title comes from the ARB at the call site, so it is passed as
+        // the real key rather than a placeholder that would fail the check
+        // for the wrong reason.
+        Explainers.move(
+          title: ar.movedThisMonthLabel,
+          window: ar.perf1Month,
+          percent: 18.5,
+          l: ar,
+        ),
+      ].nonNulls.toList();
+
+      expect(built, hasLength(greaterThan(3)));
+      for (final e in built) {
+        for (final (name, text) in <(String, String?)>[
+          ('title', e.title),
+          ('plain', e.plain),
+          ('yardstick', e.yardstick),
+          ('caveat', e.caveat),
+          ('source', e.source),
+        ]) {
+          if (text == null || text.isEmpty) continue;
+          expect(
+            text,
+            isNot(matches(RegExp('[A-Za-z]'))),
+            reason: '${e.termId}.$name still reads in Latin: $text',
+          );
+        }
+      }
+    });
+
+    // The arithmetic block is exempt from the Latin check on purpose — it is
+    // numerals and operators — but its words have to be Arabic too.
+    test('the arithmetic is labelled in Arabic', () {
+      final company = load('ABUK');
+      final rv = Explainers.relativeVolume(company, ar)!;
+
+      expect(rv.workings, contains('سهم'));
+      expect(rv.workings, contains('الجلسة الوسطى'));
+    });
   });
 }
