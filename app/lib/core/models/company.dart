@@ -73,6 +73,26 @@ abstract class CompanySummary with _$CompanySummary {
     /// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
     /// a different claim from the same number against 2025.
     @JsonKey(name: 'pe_period') String? pePeriod,
+
+    /// What the company earned per share, in pounds, over [epsPeriod].
+    ///
+    /// **Losses are here.** Minus two pounds a share is a fact about a year and
+    /// reads as one; it is only a ratio like [pe] that a negative breaks, where
+    /// the minus sign silently becomes "cheapest on the exchange".
+    double? eps,
+    @JsonKey(name: 'eps_period') String? epsPeriod,
+
+    /// The company's own filed annual profit, in the millions of pounds it was
+    /// filed in, over [netIncomePeriod].
+    @JsonKey(name: 'net_income') double? netIncome,
+    @JsonKey(name: 'net_income_period') String? netIncomePeriod,
+
+    /// Shares traded on a normal day — the twenty-day median.
+    ///
+    /// Carried so the list can answer "busier than usual" for itself: today's
+    /// volume comes from the live snapshot, and this is what it is unusual
+    /// against.
+    @JsonKey(name: 'median_volume_20d') double? medianVolume20d,
   }) = _CompanySummary;
 
   const CompanySummary._();

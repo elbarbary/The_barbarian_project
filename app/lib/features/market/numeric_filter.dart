@@ -26,7 +26,10 @@ enum FilterField {
   changePercent,
   volume,
   avgVolume,
-  pe;
+  pe,
+  eps,
+  netIncome,
+  relativeVolume;
 
   String labelFor(AppLocalizations l) => switch (this) {
     FilterField.marketCap => l.filterMarketCap,
@@ -35,6 +38,9 @@ enum FilterField {
     FilterField.volume => l.filterVolume,
     FilterField.avgVolume => l.filterAvgVolume,
     FilterField.pe => l.filterPe,
+    FilterField.eps => l.filterEps,
+    FilterField.netIncome => l.filterProfit,
+    FilterField.relativeVolume => l.filterBusy,
   };
 
   /// A word for the unit, so an empty input box is not a guess.
@@ -45,6 +51,9 @@ enum FilterField {
     FilterField.volume => l.filterUnitShares,
     FilterField.avgVolume => l.filterUnitShares,
     FilterField.pe => l.filterUnitTimes,
+    FilterField.eps => l.filterUnitEgp,
+    FilterField.netIncome => l.filterUnitMillions,
+    FilterField.relativeVolume => l.filterUnitTimes,
   };
 
   /// The figure for one company, or null when this company has none.
@@ -60,6 +69,22 @@ enum FilterField {
     FilterField.price => quote?.close,
     FilterField.changePercent => quote?.changePercent,
     FilterField.volume => quote?.volume?.toDouble(),
+    FilterField.eps => company.eps,
+    FilterField.netIncome => company.netIncome,
+    // Today against a normal day, which is what "busy" means for a share.
+    //
+    // Worked out here rather than published, because one half of it is the
+    // live volume and the other is this morning's twenty-day median — a
+    // precomputed ratio would be stale the moment the session moved. 1 is a
+    // normal day; the app's filings feed calls 2 unusual.
+    FilterField.relativeVolume => switch ((
+      quote?.volume,
+      company.medianVolume20d,
+    )) {
+      (final int traded, final double normal) when normal > 0 =>
+        traded / normal,
+      _ => null,
+    },
   };
 }
 

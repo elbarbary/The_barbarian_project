@@ -16,12 +16,16 @@ void main() {
     double? cap,
     double? pe,
     double? avgVolume,
+    double? eps,
+    double? medianVolume,
   }) => CompanySummary(
     ticker: ticker,
     nameEn: ticker,
     marketCap: cap,
     pe: pe,
     avgVolume30d: avgVolume,
+    eps: eps,
+    medianVolume20d: medianVolume,
   );
 
   StockQuote quote({double close = 10, double? change, int? volume}) =>
@@ -146,6 +150,58 @@ void main() {
     test('no filters is every company, not none', () {
       final rows = [company('A'), company('B')];
       expect(applyFilters(rows, const [], (_) => null), hasLength(2));
+    });
+  });
+
+  group('the figures added after P/E', () {
+    test('a loss is a real earnings-per-share, not a missing one', () {
+      // A negative EPS is a fact about a year and reads as one. It is only a
+      // ratio like P/E that a minus sign breaks, where it silently becomes
+      // "cheapest on the exchange" — so 27 companies carry a negative EPS and
+      // none carries a negative P/E.
+      const losing = NumericFilter(
+        field: FilterField.eps,
+        operator: FilterOperator.below,
+        low: 0,
+      );
+      expect(losing.matches(company('L', eps: -2.3), null), isTrue);
+      expect(losing.matches(company('P', eps: 4.1), null), isFalse);
+    });
+
+    test('busy is today against this company\'s own normal day', () {
+      const busy = NumericFilter(
+        field: FilterField.relativeVolume,
+        operator: FilterOperator.above,
+        low: 2,
+      );
+      final row = company('X', medianVolume: 1000);
+
+      expect(busy.matches(row, quote(volume: 3000)), isTrue);
+      expect(busy.matches(row, quote(volume: 1500)), isFalse);
+      // Quiet is the same question asked the other way.
+      const quiet = NumericFilter(
+        field: FilterField.relativeVolume,
+        operator: FilterOperator.below,
+        low: 0.5,
+      );
+      expect(quiet.matches(row, quote(volume: 200)), isTrue);
+    });
+
+    test('busy needs both halves, and says nothing without them', () {
+      const busy = NumericFilter(
+        field: FilterField.relativeVolume,
+        operator: FilterOperator.above,
+        low: 2,
+      );
+      // No normal day published for this company.
+      expect(busy.matches(company('N'), quote(volume: 9999)), isFalse);
+      // No trading yet today.
+      expect(busy.matches(company('M', medianVolume: 1000), null), isFalse);
+      // A normal day of zero would divide by nothing.
+      expect(
+        busy.matches(company('Z', medianVolume: 0), quote(volume: 10)),
+        isFalse,
+      );
     });
   });
 

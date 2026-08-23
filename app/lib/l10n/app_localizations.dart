@@ -1718,6 +1718,42 @@ abstract class AppLocalizations {
   /// **'Price, change and shares traded are from the live feed. What the company is worth and its normal day are from this morning’s rebuild.'**
   String get filterLiveNote;
 
+  /// No description provided for @filterEps.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned per share'**
+  String get filterEps;
+
+  /// No description provided for @filterProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit last year'**
+  String get filterProfit;
+
+  /// No description provided for @filterBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Busier than a normal day'**
+  String get filterBusy;
+
+  /// No description provided for @filterUnitMillions.
+  ///
+  /// In en, this message translates to:
+  /// **'million EGP'**
+  String get filterUnitMillions;
+
+  /// No description provided for @filterBusyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares traded today against what this company trades on a normal day. 1 is an ordinary day; the filings feed points out anything above 2.'**
+  String get filterBusyNote;
+
+  /// No description provided for @filterEpsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The company’s own filed annual profit divided by its shares. A loss shows as a minus.'**
+  String get filterEpsNote;
+
   /// No description provided for @finTotalAssets.
   ///
   /// In en, this message translates to:

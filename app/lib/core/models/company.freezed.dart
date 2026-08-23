@@ -300,7 +300,19 @@ mixin _$CompanySummary {
  double? get pe;/// The financial year the earnings in [pe] were filed for. A newest annual
 /// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
 /// a different claim from the same number against 2025.
-@JsonKey(name: 'pe_period') String? get pePeriod;
+@JsonKey(name: 'pe_period') String? get pePeriod;/// What the company earned per share, in pounds, over [epsPeriod].
+///
+/// **Losses are here.** Minus two pounds a share is a fact about a year and
+/// reads as one; it is only a ratio like [pe] that a negative breaks, where
+/// the minus sign silently becomes "cheapest on the exchange".
+ double? get eps;@JsonKey(name: 'eps_period') String? get epsPeriod;/// The company's own filed annual profit, in the millions of pounds it was
+/// filed in, over [netIncomePeriod].
+@JsonKey(name: 'net_income') double? get netIncome;@JsonKey(name: 'net_income_period') String? get netIncomePeriod;/// Shares traded on a normal day — the twenty-day median.
+///
+/// Carried so the list can answer "busier than usual" for itself: today's
+/// volume comes from the live snapshot, and this is what it is unusual
+/// against.
+@JsonKey(name: 'median_volume_20d') double? get medianVolume20d;
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -313,16 +325,16 @@ $CompanySummaryCopyWith<CompanySummary> get copyWith => _$CompanySummaryCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d)';
 }
 
 
@@ -333,7 +345,7 @@ abstract mixin class $CompanySummaryCopyWith<$Res>  {
   factory $CompanySummaryCopyWith(CompanySummary value, $Res Function(CompanySummary) _then) = _$CompanySummaryCopyWithImpl;
 @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d
 });
 
 
@@ -350,7 +362,7 @@ class _$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -363,7 +375,12 @@ as bool,marketCap: freezed == marketCap ? _self.marketCap : marketCap // ignore:
 as double?,avgVolume30d: freezed == avgVolume30d ? _self.avgVolume30d : avgVolume30d // ignore: cast_nullable_to_non_nullable
 as double?,pe: freezed == pe ? _self.pe : pe // ignore: cast_nullable_to_non_nullable
 as double?,pePeriod: freezed == pePeriod ? _self.pePeriod : pePeriod // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,eps: freezed == eps ? _self.eps : eps // ignore: cast_nullable_to_non_nullable
+as double?,epsPeriod: freezed == epsPeriod ? _self.epsPeriod : epsPeriod // ignore: cast_nullable_to_non_nullable
+as String?,netIncome: freezed == netIncome ? _self.netIncome : netIncome // ignore: cast_nullable_to_non_nullable
+as double?,netIncomePeriod: freezed == netIncomePeriod ? _self.netIncomePeriod : netIncomePeriod // ignore: cast_nullable_to_non_nullable
+as String?,medianVolume20d: freezed == medianVolume20d ? _self.medianVolume20d : medianVolume20d // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -448,10 +465,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
   return orElse();
 
 }
@@ -469,10 +486,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary():
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -489,10 +506,10 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker, @JsonKey(name: 'name_en')  String nameEn, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String exchange, @JsonKey(name: 'has_cash_or_trash')  bool hasCashOrTrash, @JsonKey(name: 'has_research')  bool hasResearch, @JsonKey(name: 'market_cap')  double? marketCap, @JsonKey(name: 'avg_volume_30d')  double? avgVolume30d,  double? pe, @JsonKey(name: 'pe_period')  String? pePeriod,  double? eps, @JsonKey(name: 'eps_period')  String? epsPeriod, @JsonKey(name: 'net_income')  double? netIncome, @JsonKey(name: 'net_income_period')  String? netIncomePeriod, @JsonKey(name: 'median_volume_20d')  double? medianVolume20d)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanySummary() when $default != null:
-return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod);case _:
+return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchange,_that.hasCashOrTrash,_that.hasResearch,_that.marketCap,_that.avgVolume30d,_that.pe,_that.pePeriod,_that.eps,_that.epsPeriod,_that.netIncome,_that.netIncomePeriod,_that.medianVolume20d);case _:
   return null;
 
 }
@@ -504,7 +521,7 @@ return $default(_that.ticker,_that.nameEn,_that.nameAr,_that.sector,_that.exchan
 @JsonSerializable()
 
 class _CompanySummary extends CompanySummary {
-  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false, @JsonKey(name: 'market_cap') this.marketCap, @JsonKey(name: 'avg_volume_30d') this.avgVolume30d, this.pe, @JsonKey(name: 'pe_period') this.pePeriod}): super._();
+  const _CompanySummary({required this.ticker, @JsonKey(name: 'name_en') required this.nameEn, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.exchange = 'EGX', @JsonKey(name: 'has_cash_or_trash') this.hasCashOrTrash = false, @JsonKey(name: 'has_research') this.hasResearch = false, @JsonKey(name: 'market_cap') this.marketCap, @JsonKey(name: 'avg_volume_30d') this.avgVolume30d, this.pe, @JsonKey(name: 'pe_period') this.pePeriod, this.eps, @JsonKey(name: 'eps_period') this.epsPeriod, @JsonKey(name: 'net_income') this.netIncome, @JsonKey(name: 'net_income_period') this.netIncomePeriod, @JsonKey(name: 'median_volume_20d') this.medianVolume20d}): super._();
   factory _CompanySummary.fromJson(Map<String, dynamic> json) => _$CompanySummaryFromJson(json);
 
 @override final  String ticker;
@@ -531,6 +548,23 @@ class _CompanySummary extends CompanySummary {
 /// filing can be eighteen months old, and "P/E 8" against 2023 earnings is
 /// a different claim from the same number against 2025.
 @override@JsonKey(name: 'pe_period') final  String? pePeriod;
+/// What the company earned per share, in pounds, over [epsPeriod].
+///
+/// **Losses are here.** Minus two pounds a share is a fact about a year and
+/// reads as one; it is only a ratio like [pe] that a negative breaks, where
+/// the minus sign silently becomes "cheapest on the exchange".
+@override final  double? eps;
+@override@JsonKey(name: 'eps_period') final  String? epsPeriod;
+/// The company's own filed annual profit, in the millions of pounds it was
+/// filed in, over [netIncomePeriod].
+@override@JsonKey(name: 'net_income') final  double? netIncome;
+@override@JsonKey(name: 'net_income_period') final  String? netIncomePeriod;
+/// Shares traded on a normal day — the twenty-day median.
+///
+/// Carried so the list can answer "busier than usual" for itself: today's
+/// volume comes from the live snapshot, and this is what it is unusual
+/// against.
+@override@JsonKey(name: 'median_volume_20d') final  double? medianVolume20d;
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
@@ -545,16 +579,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanySummary&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.exchange, exchange) || other.exchange == exchange)&&(identical(other.hasCashOrTrash, hasCashOrTrash) || other.hasCashOrTrash == hasCashOrTrash)&&(identical(other.hasResearch, hasResearch) || other.hasResearch == hasResearch)&&(identical(other.marketCap, marketCap) || other.marketCap == marketCap)&&(identical(other.avgVolume30d, avgVolume30d) || other.avgVolume30d == avgVolume30d)&&(identical(other.pe, pe) || other.pe == pe)&&(identical(other.pePeriod, pePeriod) || other.pePeriod == pePeriod)&&(identical(other.eps, eps) || other.eps == eps)&&(identical(other.epsPeriod, epsPeriod) || other.epsPeriod == epsPeriod)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.netIncomePeriod, netIncomePeriod) || other.netIncomePeriod == netIncomePeriod)&&(identical(other.medianVolume20d, medianVolume20d) || other.medianVolume20d == medianVolume20d));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod);
+int get hashCode => Object.hash(runtimeType,ticker,nameEn,nameAr,sector,exchange,hasCashOrTrash,hasResearch,marketCap,avgVolume30d,pe,pePeriod,eps,epsPeriod,netIncome,netIncomePeriod,medianVolume20d);
 
 @override
 String toString() {
-  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod)';
+  return 'CompanySummary(ticker: $ticker, nameEn: $nameEn, nameAr: $nameAr, sector: $sector, exchange: $exchange, hasCashOrTrash: $hasCashOrTrash, hasResearch: $hasResearch, marketCap: $marketCap, avgVolume30d: $avgVolume30d, pe: $pe, pePeriod: $pePeriod, eps: $eps, epsPeriod: $epsPeriod, netIncome: $netIncome, netIncomePeriod: $netIncomePeriod, medianVolume20d: $medianVolume20d)';
 }
 
 
@@ -565,7 +599,7 @@ abstract mixin class _$CompanySummaryCopyWith<$Res> implements $CompanySummaryCo
   factory _$CompanySummaryCopyWith(_CompanySummary value, $Res Function(_CompanySummary) _then) = __$CompanySummaryCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod
+ String ticker,@JsonKey(name: 'name_en') String nameEn,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String exchange,@JsonKey(name: 'has_cash_or_trash') bool hasCashOrTrash,@JsonKey(name: 'has_research') bool hasResearch,@JsonKey(name: 'market_cap') double? marketCap,@JsonKey(name: 'avg_volume_30d') double? avgVolume30d, double? pe,@JsonKey(name: 'pe_period') String? pePeriod, double? eps,@JsonKey(name: 'eps_period') String? epsPeriod,@JsonKey(name: 'net_income') double? netIncome,@JsonKey(name: 'net_income_period') String? netIncomePeriod,@JsonKey(name: 'median_volume_20d') double? medianVolume20d
 });
 
 
@@ -582,7 +616,7 @@ class __$CompanySummaryCopyWithImpl<$Res>
 
 /// Create a copy of CompanySummary
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? nameEn = null,Object? nameAr = freezed,Object? sector = freezed,Object? exchange = null,Object? hasCashOrTrash = null,Object? hasResearch = null,Object? marketCap = freezed,Object? avgVolume30d = freezed,Object? pe = freezed,Object? pePeriod = freezed,Object? eps = freezed,Object? epsPeriod = freezed,Object? netIncome = freezed,Object? netIncomePeriod = freezed,Object? medianVolume20d = freezed,}) {
   return _then(_CompanySummary(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,nameEn: null == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
@@ -595,7 +629,12 @@ as bool,marketCap: freezed == marketCap ? _self.marketCap : marketCap // ignore:
 as double?,avgVolume30d: freezed == avgVolume30d ? _self.avgVolume30d : avgVolume30d // ignore: cast_nullable_to_non_nullable
 as double?,pe: freezed == pe ? _self.pe : pe // ignore: cast_nullable_to_non_nullable
 as double?,pePeriod: freezed == pePeriod ? _self.pePeriod : pePeriod // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,eps: freezed == eps ? _self.eps : eps // ignore: cast_nullable_to_non_nullable
+as double?,epsPeriod: freezed == epsPeriod ? _self.epsPeriod : epsPeriod // ignore: cast_nullable_to_non_nullable
+as String?,netIncome: freezed == netIncome ? _self.netIncome : netIncome // ignore: cast_nullable_to_non_nullable
+as double?,netIncomePeriod: freezed == netIncomePeriod ? _self.netIncomePeriod : netIncomePeriod // ignore: cast_nullable_to_non_nullable
+as String?,medianVolume20d: freezed == medianVolume20d ? _self.medianVolume20d : medianVolume20d // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

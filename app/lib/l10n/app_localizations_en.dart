@@ -931,6 +931,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'Price, change and shares traded are from the live feed. What the company is worth and its normal day are from this morning’s rebuild.';
 
   @override
+  String get filterEps => 'Earned per share';
+
+  @override
+  String get filterProfit => 'Profit last year';
+
+  @override
+  String get filterBusy => 'Busier than a normal day';
+
+  @override
+  String get filterUnitMillions => 'million EGP';
+
+  @override
+  String get filterBusyNote =>
+      'Shares traded today against what this company trades on a normal day. 1 is an ordinary day; the filings feed points out anything above 2.';
+
+  @override
+  String get filterEpsNote =>
+      'The company’s own filed annual profit divided by its shares. A loss shows as a minus.';
+
+  @override
   String get finTotalAssets => 'Total assets';
 
   @override

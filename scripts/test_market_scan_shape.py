@@ -61,3 +61,44 @@ class ScanScriptTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PerShareTest(unittest.TestCase):
+    """Per-share arithmetic is only as good as the share count.
+
+    Market cap is price times shares by definition, so if the three published
+    figures do not multiply out then one is in the wrong unit and everything
+    divided by the share count is wrong with it. EGBE's came out 51.95x off:
+    its earnings per share fifty-two times too large, its P/E fifty-two times
+    too small at 0.11 — which on a "lowest P/E" sort is the first row a reader
+    sees.
+    """
+
+    def test_a_coherent_company_passes(self):
+        # 100 shares at 10 pounds is a 1,000 pound company.
+        self.assertTrue(market.share_count_agrees(10.0, 1000.0, 100))
+
+    def test_a_share_count_in_the_wrong_unit_is_caught(self):
+        self.assertFalse(market.share_count_agrees(10.0, 1000.0, 5200))
+        self.assertFalse(market.share_count_agrees(10.0, 1000.0, 2))
+
+    def test_missing_inputs_are_not_agreement(self):
+        for args in (
+            (None, 1000.0, 100),
+            (10.0, None, 100),
+            (10.0, 1000.0, None),
+            (0.0, 1000.0, 100),
+        ):
+            with self.subTest(args):
+                self.assertFalse(market.share_count_agrees(*args))
+
+    def test_a_loss_keeps_its_earnings_per_share_but_loses_its_ratio(self):
+        profile = {"shares_outstanding": 100, "market_cap": 1000.0}
+        filed = {"annual": [{"period": "FY 2024", "net_income": -0.05}]}
+
+        eps, period = market.per_share(profile, filed, 10.0)
+        self.assertLess(eps, 0, "a loss must survive as a negative EPS")
+        self.assertEqual(period, "FY 2024")
+
+        ratio, _ = market.price_earnings(10.0, profile, filed)
+        self.assertIsNone(ratio, "a negative P/E reads as the cheapest share")

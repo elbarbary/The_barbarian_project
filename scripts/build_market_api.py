@@ -413,19 +413,68 @@ def tradable_flag(record: dict, scan_has_scope: bool) -> bool | None:
 # the content.
 PE_CEILING = 200
 
-# How far the two routes to the same ratio may differ before neither is trusted.
+# How far two published figures may disagree before neither is trusted.
 PE_TOLERANCE = 0.05
 
 # Below this the company earned more in a year than the market says the whole
 # of it is worth.
 #
-# The two-route check cannot catch this one, because both routes divide by the
-# same net income — if that figure is filed in the wrong unit they agree with
-# each other and are both wrong. RTVC survives every other guard at 0.37: a
-# 1.0bn company reporting 2.8bn of profit. That is a units error in a filing
-# far more often than it is a bargain, and on a "lowest P/E" sort it would be
-# the first thing a reader saw.
+# The consistency check below cannot catch this one, because it never looks at
+# net income. RTVC passes everything else at 0.37: a 1.0bn company reporting
+# 2.8bn of profit. That is a units error in a filing far more often than it is
+# a bargain, and on a "lowest P/E" sort it would be the first thing a reader
+# saw.
 PE_FLOOR = 1.0
+
+
+def share_count_agrees(close, cap, shares) -> bool:
+    """Whether the share count, the market cap and the price cohere.
+
+    Market capitalisation is price times shares, by definition — so if the
+    three published figures do not multiply out, one of them is in the wrong
+    unit and **anything divided by the share count is wrong too**.
+
+    This is the check that keeps per-share arithmetic honest. Sixteen companies
+    fail it, and they fail it spectacularly rather than marginally:
+
+        EGBE   cap ÷ (price × shares) = 51.95
+        DCRC   cap ÷ (price × shares) =  0.37
+
+    Without it, EGBE's earnings per share came out fifty-two times too large
+    and its P/E fifty-two times too small — 0.11, which on a filter screen
+    sorts straight to the top of "lowest".
+    """
+    if not close or not cap or not shares:
+        return False
+    implied = close * shares
+    if implied <= 0:
+        return False
+    return abs(cap - implied) / max(cap, implied) <= PE_TOLERANCE
+
+
+def per_share(profile: dict, filed: dict | None, close):
+    """`(earnings per share, the period it was earned in)`, or `(None, None)`.
+
+    The company's own filed annual profit divided by the shares it says are
+    outstanding. **Losses are kept**: minus two pounds a share is a fact about
+    a year and reads as one. It is only a ratio like P/E that a negative breaks,
+    because there the minus sign silently becomes "cheapest on the exchange".
+    """
+    if not filed:
+        return None, None
+    shares = profile.get("shares_outstanding")
+    if not share_count_agrees(close, profile.get("market_cap"), shares):
+        return None, None
+    annual = filed.get("annual") or []
+    latest = next(
+        (a for a in reversed(annual) if a.get("net_income") is not None), None
+    )
+    if latest is None:
+        return None, None
+    # Filed figures are in EGP millions; the share count is not.
+    return round((latest["net_income"] * 1_000_000) / shares, 3), latest.get(
+        "period"
+    )
 
 
 def price_earnings(close, profile: dict, filed: dict | None):
@@ -435,57 +484,25 @@ def price_earnings(close, profile: dict, filed: dict | None):
     filed net income spread over the shares it says are outstanding. Not a view
     about whether a share is worth having — this app has no licence to hold one.
 
-    **Worked out twice, from different inputs, and published only when the two
-    agree.** Price ÷ earnings-per-share uses the share count; market cap ÷ total
-    earnings does not. Where the filed units or the share count are wrong the
-    two diverge wildly, and they diverge for sixteen companies today:
+    Omitted, deliberately, in four cases: the share count not cohering with the
+    price and the market cap (see `share_count_agrees`), a loss, no filed net
+    income, and a ratio outside `PE_FLOOR`–`PE_CEILING`.
 
-        EGBE   price/EPS 0.11   cap/earnings 5.76
-        EGSA   price/EPS 5.62   cap/earnings 292.11
-
-    A single route would have published the first number in each pair without
-    hesitating. FAITA came out at 0.03 — a company earning thirty pounds a share
-    on a ninety-nine piastre listing — which is not a cheap share, it is a
-    broken figure, and on a filter screen it would have sorted straight to the
-    top of "lowest P/E".
-
-    Omitted, deliberately, in five cases: a loss (a negative P/E is not a small
-    one, and to a reader who has not met one it reads as the cheapest share on
-    the exchange), no filed net income or share count, a ratio outside
-    `PE_FLOOR`–`PE_CEILING`, and the two routes disagreeing.
+    A negative P/E is not a small P/E. It is a different kind of statement, and
+    to a reader who has not met one before it reads as the cheapest share on
+    the exchange — so the thirty-one loss-making companies get no ratio at all.
 
     The period is returned with it because the newest annual filing can be
     eighteen months old, and "P/E 8" against 2023 earnings is a different claim
     from the same number against 2025.
     """
-    if not close or not filed:
+    eps, period = per_share(profile, filed, close)
+    if eps is None or eps <= 0 or not close:
         return None, None
-    shares = profile.get("shares_outstanding")
-    cap = profile.get("market_cap")
-    if not shares or not cap:
+    ratio = close / eps
+    if not (PE_FLOOR <= ratio <= PE_CEILING):
         return None, None
-    annual = filed.get("annual") or []
-    latest = next(
-        (a for a in reversed(annual) if a.get("net_income") is not None), None
-    )
-    if latest is None:
-        return None, None
-    net_income = latest["net_income"]
-    if net_income <= 0:
-        return None, None
-
-    # Filed figures are in EGP millions; neither the share count nor the market
-    # cap is.
-    earnings = net_income * 1_000_000
-    by_share = close / (earnings / shares)
-    by_cap = cap / earnings
-    if by_share <= 0 or by_cap <= 0:
-        return None, None
-    if abs(by_share - by_cap) / max(by_share, by_cap) > PE_TOLERANCE:
-        return None, None
-    if not (PE_FLOOR <= by_share <= PE_CEILING):
-        return None, None
-    return round(by_share, 2), latest.get("period")
+    return round(ratio, 2), period
 
 
 def clean(value):
@@ -610,13 +627,23 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
 
         cap = clean(r.get("marketCap"))
         avg_volume = clean(r.get("scannerAverageVolume30d"))
-        pe, pe_period = price_earnings(
-            close,
-            {
-                "shares_outstanding": clean(r.get("sharesOutstanding")),
-                "market_cap": cap,
-            },
-            FILED_FINANCIALS.get(ticker),
+        normal_volume = clean(r.get("median20Volume"))
+        share_profile = {
+            "shares_outstanding": clean(r.get("sharesOutstanding")),
+            "market_cap": cap,
+        }
+        filed = FILED_FINANCIALS.get(ticker)
+        pe, pe_period = price_earnings(close, share_profile, filed)
+        eps, eps_period = per_share(share_profile, filed, close)
+
+        # The company's own filed profit, in the millions of pounds it was
+        # filed in. Carried on the directory so the list can be narrowed by it
+        # without opening 282 files — and with its period, because the newest
+        # annual filing can be a year and a half old.
+        annual = (filed or {}).get("annual") or []
+        latest_filed = next(
+            (a for a in reversed(annual) if a.get("net_income") is not None),
+            None,
         )
 
         companies.append(
@@ -639,8 +666,19 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 # it, which is fresher than this document will ever be.
                 **({"market_cap": cap} if cap else {}),
                 **({"avg_volume_30d": avg_volume} if avg_volume else {}),
+                **({"median_volume_20d": normal_volume} if normal_volume else {}),
                 **({"pe": pe} if pe is not None else {}),
                 **({"pe_period": pe_period} if pe is not None else {}),
+                **({"eps": eps} if eps is not None else {}),
+                **({"eps_period": eps_period} if eps is not None else {}),
+                **(
+                    {
+                        "net_income": latest_filed["net_income"],
+                        "net_income_period": latest_filed.get("period"),
+                    }
+                    if latest_filed
+                    else {}
+                ),
                 **(
                     {"tradable": flag}
                     if (flag := tradable_flag(r, scan_has_scope)) is not None

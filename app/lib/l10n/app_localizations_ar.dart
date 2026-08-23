@@ -926,6 +926,26 @@ class AppLocalizationsAr extends AppLocalizations {
       'السعر والتغير والأسهم المتداولة من التغذية المباشرة. أما قيمة الشركة ويومها المعتاد فمن إعادة البناء هذا الصباح.';
 
   @override
+  String get filterEps => 'ربح السهم الواحد';
+
+  @override
+  String get filterProfit => 'أرباح العام الماضي';
+
+  @override
+  String get filterBusy => 'أكثر انشغالًا من يوم معتاد';
+
+  @override
+  String get filterUnitMillions => 'مليون جنيه';
+
+  @override
+  String get filterBusyNote =>
+      'الأسهم المتداولة اليوم مقابل ما تتداوله الشركة في يوم معتاد. 1 يعني يومًا عاديًا، والإفصاحات تنبّه لما يتجاوز 2.';
+
+  @override
+  String get filterEpsNote =>
+      'الأرباح السنوية التي أودعتها الشركة مقسومة على عدد أسهمها. والخسارة تظهر بإشارة سالبة.';
+
+  @override
   String get finTotalAssets => 'إجمالي الأصول';
 
   @override

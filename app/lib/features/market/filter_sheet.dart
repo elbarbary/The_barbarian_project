@@ -167,7 +167,12 @@ class _FilterBuilderState extends State<_FilterBuilder> {
               // other half.
               const SizedBox(height: 14),
               Text(
-                _field == FilterField.pe ? l.filterPeNote : l.filterLiveNote,
+                switch (_field) {
+                  FilterField.pe => l.filterPeNote,
+                  FilterField.eps => l.filterEpsNote,
+                  FilterField.relativeVolume => l.filterBusyNote,
+                  _ => l.filterLiveNote,
+                },
                 style: BarbarianType.bodyS.copyWith(
                   color: c.textFaint,
                   height: 1.5,

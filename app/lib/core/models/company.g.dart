@@ -37,6 +37,11 @@ _CompanySummary _$CompanySummaryFromJson(Map<String, dynamic> json) =>
       avgVolume30d: (json['avg_volume_30d'] as num?)?.toDouble(),
       pe: (json['pe'] as num?)?.toDouble(),
       pePeriod: json['pe_period'] as String?,
+      eps: (json['eps'] as num?)?.toDouble(),
+      epsPeriod: json['eps_period'] as String?,
+      netIncome: (json['net_income'] as num?)?.toDouble(),
+      netIncomePeriod: json['net_income_period'] as String?,
+      medianVolume20d: (json['median_volume_20d'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
@@ -52,6 +57,11 @@ Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
       'avg_volume_30d': instance.avgVolume30d,
       'pe': instance.pe,
       'pe_period': instance.pePeriod,
+      'eps': instance.eps,
+      'eps_period': instance.epsPeriod,
+      'net_income': instance.netIncome,
+      'net_income_period': instance.netIncomePeriod,
+      'median_volume_20d': instance.medianVolume20d,
     };
 
 _Company _$CompanyFromJson(Map<String, dynamic> json) => _Company(
