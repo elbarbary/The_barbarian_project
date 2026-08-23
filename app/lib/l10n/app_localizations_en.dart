@@ -1111,7 +1111,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String meansSameDay(String amount) {
-    return 'About EGP $amount can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.';
+    return 'About $amount can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.';
   }
 
   @override

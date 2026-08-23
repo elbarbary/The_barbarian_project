@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/exit_liquidity.dart';
+import '../../core/models/profit_movement.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
@@ -220,7 +221,7 @@ class _ForCompany extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     BNumText(
-                      'EGP ${_short(exit.sameDayLimit)}',
+                      egpFromPounds(exit.sameDayLimit, l),
                       style: BarbarianType.displayS.copyWith(
                         color: c.textPrimary,
                       ),
@@ -400,7 +401,7 @@ class _Facts extends StatelessWidget {
         l.exitNormalDay,
         exit.normalDailyValue <= 0
             ? l.exitNotPublished
-            : '${l.filterUnitEgp} ${_short(exit.normalDailyValue)}',
+            : egpFromPounds(exit.normalDailyValue, l),
       ),
       (l.exitThinSessions, '${exit.thinDays} / ${exit.sessions}'),
       if (exit.freeFloatPercent case final double float)
@@ -451,13 +452,4 @@ class _Facts extends StatelessWidget {
       ],
     );
   }
-}
-
-/// Pounds, shortened. One formatter, so two cards cannot disagree about
-/// what 1,250,000 looks like.
-String _short(double value) {
-  if (value >= 1e9) return '${(value / 1e9).toStringAsFixed(2)}bn';
-  if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
-  if (value >= 1e3) return '${(value / 1e3).round()}k';
-  return value.toStringAsFixed(0);
 }

@@ -145,10 +145,22 @@ void main() {
         until: find.text('Can I get out?'),
       );
       await pumpUntil(tester, find.textContaining('About this much can leave'));
+      // Read off the card's own label rather than by matching "EGP": the
+      // figure names its scale in a word now — "1.25 billion EGP" — and the
+      // ladder rungs above it are pounds too.
+      final card = find.ancestor(
+        of: find.textContaining('About this much can leave'),
+        matching: find.byType(Column),
+      );
       final figure = tester
-          .widgetList<Text>(find.textContaining('EGP '))
+          .widgetList<Text>(
+            find.descendant(of: card.first, matching: find.byType(Text)),
+          )
           .map((w) => w.data ?? '')
-          .firstWhere((s) => s.startsWith('EGP '), orElse: () => '');
+          .firstWhere(
+            (s) => RegExp(r'^[\d.,]+ ').hasMatch(s),
+            orElse: () => '',
+          );
       return figure;
     }
 

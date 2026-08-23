@@ -88,6 +88,15 @@ String egpText(double? v, AppLocalizations l) {
   return l.moneyWithUnit(amount.figure, egpUnit(scale, l));
 }
 
+/// A figure in **pounds**, said the same way — "23.0 مليون جنيه".
+///
+/// The exit answer and the company summary held their own compact formatter
+/// each, producing "23.0m" and "1.25bn" inside Arabic prose: a Latin
+/// abbreviation for a quantity of Egyptian pounds, in a sentence about
+/// Egyptian pounds.
+String egpFromPounds(double? v, AppLocalizations l) =>
+    egpText(v == null ? null : v / 1e6, l);
+
 /// One scale for a whole column of figures, chosen by the largest of them.
 ///
 /// A statement table where each cell picks its own scale is unreadable: the

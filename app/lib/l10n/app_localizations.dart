@@ -2009,7 +2009,7 @@ abstract class AppLocalizations {
   /// No description provided for @meansSameDay.
   ///
   /// In en, this message translates to:
-  /// **'About EGP {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.'**
+  /// **'About {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.'**
   String meansSameDay(String amount);
 
   /// No description provided for @meansZeroDays.

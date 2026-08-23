@@ -496,7 +496,7 @@
     }
   },
   "exitNoPrice": "On those days there was no price at which a holder could sell.",
-  "meansSameDay": "About EGP {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.",
+  "meansSameDay": "About {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.",
   "@meansSameDay": {
     "placeholders": {
       "amount": {

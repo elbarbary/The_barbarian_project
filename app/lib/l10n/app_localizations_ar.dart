@@ -1104,7 +1104,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String meansSameDay(String amount) {
-    return 'نحو $amount جنيه يمكن أن تخرج في جلسة واحدة هنا. فوق ذلك يصبح البيع أكثر من خُمس يوم عادي ويبدأ في تحريك السعر ضد البائع.';
+    return 'نحو $amount يمكن أن تخرج في جلسة واحدة هنا. فوق ذلك يصبح البيع أكثر من خُمس يوم عادي ويبدأ في تحريك السعر ضد البائع.';
   }
 
   @override

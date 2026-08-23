@@ -1491,7 +1491,7 @@ class _WhatThatMeans extends ConsumerWidget {
     // Can the money get back out, and does the share ever simply stop.
     if (ExitLiquidity.of(company) case final ExitLiquidity exit) {
       if (exit.sameDayLimit > 0) {
-        lines.add(l.meansSameDay(_money(exit.sameDayLimit)));
+        lines.add(l.meansSameDay(egpFromPounds(exit.sameDayLimit, l)));
       }
       if (exit.zeroVolumeDays > 0) {
         lines.add(l.meansZeroDays(exit.zeroVolumeDays, exit.sessions));
@@ -1541,13 +1541,6 @@ class _WhatThatMeans extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  static String _money(double value) {
-    if (value >= 1e9) return '${(value / 1e9).toStringAsFixed(2)}bn';
-    if (value >= 1e6) return '${(value / 1e6).toStringAsFixed(1)}m';
-    if (value >= 1e3) return '${(value / 1e3).round()}k';
-    return value.toStringAsFixed(0);
   }
 }
 
