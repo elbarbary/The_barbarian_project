@@ -1,6 +1,6 @@
 import 'package:barbarian/core/models/news.dart';
 import 'package:barbarian/features/home/home_screen.dart';
-import 'package:flutter/widgets.dart';
+import 'package:barbarian/features/home/connect_dots.dart';
 import 'package:barbarian/features/home/lead_story.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -67,19 +67,35 @@ void main() {
     // its first card for this to prove anything — so assert that first. The
     // version of this test that skipped the check passed while the app was
     // visibly printing the headline twice.
-    final all = tester
-        .widgetList<Text>(find.byType(Text))
-        .map((t) => t.data)
-        .whereType<String>()
-        .toList();
+    final headline = lead.headlineFor(false);
+    final everywhere = find.text(headline);
+    expect(
+      everywhere,
+      findsWidgets,
+      reason: 'the rail never built its first card, so this proves nothing',
+    );
 
-    final shown = all.where((s) => s == lead.headlineFor(false)).length;
+    // Not counted inside "Connecting the dots".
+    //
+    // That block's whole job is to list the places one company turned up —
+    // the filing, the story, the session — so a story it names is evidence in
+    // a different card rather than the feed repeating itself. Today MOED's
+    // card quotes the story that also leads, which is the block working. The
+    // duplication this test exists to catch is the rail and the list under
+    // the selector printing the same five headlines in the same order.
+    final inDots = find
+        .descendant(of: find.byType(BConnectDots), matching: everywhere)
+        .evaluate()
+        .length;
+    final shown = everywhere.evaluate().length - inDots;
+
     expect(
       shown,
       1,
       reason:
-          '"${lead.headline}" is on screen $shown times — the rail and '
-          'the list are both carrying it',
+          '"${lead.headline}" is on screen $shown times outside the '
+          'connect-the-dots block — the rail and the list are both '
+          'carrying it',
     );
   });
 }

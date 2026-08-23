@@ -69,17 +69,43 @@ void main() {
     expect(named, isNotEmpty);
 
     final blind = named.map(withoutTitle).toSet();
-    final sighted = named
-        .map((d) => '${withoutTitle(d)}|${d.titleFor(false)}')
-        .toSet();
+    final sighted = <String, List<Disclosure>>{};
+    for (final item in named) {
+      sighted
+          .putIfAbsent(
+            '${withoutTitle(item)}|${item.titleFor(false)}',
+            () => [],
+          )
+          .add(item);
+    }
 
+    final identical = sighted.values.where((g) => g.length > 1).toList();
+
+    // The title has to do the work in the ordinary case.
     expect(
-      sighted.length,
-      named.length,
+      identical.length,
+      lessThan(named.length ~/ 20),
       reason:
           'two filings from one company are still indistinguishable even '
-          'with the title on the row',
+          'with the title on the row, and often enough to matter',
     );
+
+    // And where it cannot, the ambiguity has to be the exchange's rather than
+    // ours. On 23 August LUTS lodged two insider-dealing forms on the same
+    // day under one title — two different filers, one wording, and nothing
+    // published tells them apart. Same shape as the two listing-committee
+    // decisions above. What this app can promise is that the two rows are two
+    // real documents, so a reader who taps them reads different things.
+    for (final group in identical) {
+      final links = {for (final item in group) item.link};
+      expect(
+        links.length,
+        group.length,
+        reason:
+            'rows that look identical must at least open different filings: '
+            '${group.first.titleFor(false)}',
+      );
+    }
     expect(
       blind.length,
       lessThan(named.length),
