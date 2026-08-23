@@ -115,7 +115,7 @@ class _MacroCard extends StatelessWidget {
           plain: series.meaningFor(arabic),
           token: _reading(series),
           workings: series.chainFor(arabic),
-          yardstick: _yardstick(l),
+          yardstick: series.yardstickFor(arabic),
           // No published band says what an ordinary day for the canal is, and
           // inventing one would be a claim rather than a reading.
           notability: Notability.unjudged,
@@ -194,6 +194,13 @@ class _MacroCard extends StatelessWidget {
                 ],
               ],
             ),
+            if (_unitWord(series, l) case final String unit) ...[
+              const SizedBox(height: 3),
+              Text(
+                unit,
+                style: BarbarianType.labelNano.copyWith(color: c.textFaint),
+              ),
+            ],
             const SizedBox(height: 10),
             Text(
               series.meaningFor(arabic),
@@ -273,10 +280,27 @@ class _MacroCard extends StatelessWidget {
         : v >= 100
         ? v.toStringAsFixed(1)
         : v.toStringAsFixed(2);
-    return s.unit == 'vessels' ? '${v.toStringAsFixed(0)} ${s.unit}' : shown;
+    return shown;
   }
 
-  String _yardstick(AppLocalizations l) => l.macroWhyItMatters;
+  /// The unit, as a word rather than as `USD/ounce`.
+  ///
+  /// Gold showed on Home as a bare **4610.9** while Today showed the same
+  /// metal at EGP 7,532.13 a gram and EGP 234,275 an ounce — and an unlabelled
+  /// 4,610.9 lands squarely inside the pounds-per-gram range an Egyptian
+  /// reader already knows. The unit was in `macro.json` all along.
+  static String? _unitWord(MacroSeries s, AppLocalizations l) =>
+      switch (s.unit) {
+        'USD/ounce' => l.macroUnitUsdOunce,
+        'USD/barrel' => l.macroUnitUsdBarrel,
+        'vessels' => l.macroUnitVessels,
+        '%' => l.macroUnitPercent,
+        'USD bn' || 'USD billion' => l.macroUnitUsdBillion,
+        // A unit this app has no word for is shown as the source states it,
+        // which is still better than showing none.
+        '' => null,
+        _ => s.unit,
+      };
 }
 
 /// One outlet's headline, credited and linked.

@@ -82,7 +82,7 @@
   "scannerFoundToday": "What the published rule found today",
   "countQualified": "Cleared every rule",
   "countWatching": "Cleared some rules",
-  "countOutcomes": "Outcomes",
+  "countOutcomes": "Rule log",
   "theSession": "The day's trading",
   "youSubtitle": "No account needed to read",
   "watchlist": "Watchlist",
@@ -137,7 +137,7 @@
   "homeNothingUnusualBody": "No company traded much more than usual on the day it announced something. A quiet day is a real answer.",
   "homeLatestNews": "Latest news",
   "homeAllNews": "All news",
-  "homeVolumeKicker": "Traded {ratio}x more than usual",
+  "homeVolumeKicker": "Traded {ratio}× its usual volume",
   "@homeVolumeKicker": {
     "placeholders": {
       "ratio": {
@@ -333,7 +333,7 @@
   "youNotAdvice": "ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.",
   "wiresBody": "{count} headlines from the Egyptian financial press, newest and most relevant first.",
   "@wiresBody": { "placeholders": { "count": {"type":"int"} } },
-  "wiresBodyChecks": "{count} of them name a company that also traded outside its own normal band.",
+  "wiresBodyChecks": "{count} of them name a company whose shares changed hands far more than usual that day.",
   "@wiresBodyChecks": { "placeholders": { "count": {"type":"int"} } },
   "exchangeSourceNote": "Source: the Egyptian Exchange. Each row links to the filing itself.",
   "watchlistRemove": "Remove {ticker} from watchlist",
@@ -559,7 +559,7 @@
   },
   "homeFiledHero": "Company announcements",
   "homeRoseAndFell": "What rose and what fell",
-  "homeIndices": "The indices",
+  "homeIndices": "How the whole market moved",
   "breadthUp": "rose",
   "breadthDown": "fell",
   "breadthFlat": "unchanged",
@@ -617,7 +617,7 @@
   "showMore": "Show more",
   "showingCount": "Showing {shown} of {total}",
   "@showingCount": { "placeholders": { "shown": {"type":"int"}, "total": {"type":"int"} } },
-  "theWires": "The wires",
+  "theWires": "News",
   "sortByScore": "By score",
   "sortMostRecent": "Most recent",
   "cotNoneYet": "No investigations yet",
@@ -997,5 +997,296 @@
         "type": "String"
       }
     }
-  }
+  },
+  "filedCountWithChecks": "Company announcements: {total}. Of the ones we could check, {count} came from a company whose shares changed hands far more than usual.",
+  "@filedCountWithChecks": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filedCountNoChecks": "Company announcements: {total}. None of the ones we could check came from a company whose shares changed hands far more than usual.",
+  "@filedCountNoChecks": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "todayPutTogether": "Put together after trading closed on {date}",
+  "@todayPutTogether": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedOn": "Updated · {date}",
+  "@updatedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "macroUnitUsdOunce": "USD · an ounce",
+  "macroUnitUsdBarrel": "USD · a barrel",
+  "macroUnitVessels": "ships",
+  "macroUnitPercent": "per cent",
+  "macroUnitUsdBillion": "USD · billions",
+  "explainerHowWorkedOut": "How it is worked out",
+  "explainerWhatCountsUnusual": "What counts as unusual",
+  "studySumOfSix": "Sum of the six",
+  "studyWhatWouldChange": "What would change this",
+  "studyNoConditions": "The published study does not yet name a filing that would move these pillars. Until it does, the reading below is a record of what the rule produced on its date and nothing more.",
+  "studyIndexNotOnDevice": "The studies are not on the device yet",
+  "studyIndexNotOnDeviceBody": "Open it once with a connection and it stays on the device.",
+  "studyAllBand": "All",
+  "studyClearFilters": "Clear filters",
+  "studyNoneInBand": "No company has landed in that band yet.",
+  "studyNoMatch": "No investigated company matches “{query}”. Try a ticker, or clear the filter.",
+  "@studyNoMatch": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "studyOneAtATime": "Companies appear here one at a time, after each has been read in full.",
+  "studyFullWriteUp": "Full write-up in the criteria file",
+  "studyScoreRange": "Scores run from {min} to +{max} across six pillars: valuation, earnings quality, growth, balance sheet, tradability and governance.",
+  "@studyScoreRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "exitNotDownloaded": "Nothing downloaded for {ticker} yet",
+  "@exitNotDownloaded": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNotDownloadedBody": "Open this once with a connection and it stays on the device.",
+  "exitThinSessions": "Sessions under 1,000 shares",
+  "exitFreeToTrade": "Shares free to trade",
+  "exitDailyLimit": "Daily price limit",
+  "exitDailyLimitValue": "±20%, set by the exchange",
+  "directoryNotOnDevice": "The company directory is not on the device yet",
+  "directoryNotOnDeviceBody": "Open the app once with a connection and the whole directory stays available offline.",
+  "directorySectors": "Sectors",
+  "pitSource": "Source",
+  "pitSourceBody": "A disclosure, posted straight from the record",
+  "pitNoCalls": "No buy or sell calls, no price targets, no performance leaderboards.",
+  "articleNeedsConnection": "The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline.",
+  "articleGoBack": "Go back",
+  "priceNoHistory": "No price history for this company yet",
+  "priceSessionRange": "Range over {count} sessions",
+  "@priceSessionRange": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "priceSessionsTo": "{count} sessions · to {date}",
+  "@priceSessionsTo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPositionWithheld": "The report's note on this name describes a model position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.",
+  "newsSourcedFrom": "Headlines from {outlets}, each linked to the outlet that ran it.",
+  "@newsSourcedFrom": {
+    "placeholders": {
+      "outlets": {
+        "type": "String"
+      }
+    }
+  },
+  "newsMergedCount": "{count} duplicates merged.",
+  "@newsMergedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "newsWithheldCount": "{count} withheld for carrying a recommendation.",
+  "@newsWithheldCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "newsUnreachable": "Not reachable today: {outlets}.",
+  "@newsUnreachable": {
+    "placeholders": {
+      "outlets": {
+        "type": "String"
+      }
+    }
+  },
+  "cotInvestigatedCount": "{studied} of {total} investigated",
+  "@cotInvestigatedCount": {
+    "placeholders": {
+      "studied": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pitWhatItIs": "The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\nEverything else in the app works without it, and will keep working if it ever goes down.",
+  "a11yBreadthOneSession": "One session: {up} rose, {down} fell, {flat} unchanged",
+  "@a11yBreadthOneSession": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      },
+      "flat": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yBreadthSessions": "{count} sessions of market breadth",
+  "@a11yBreadthSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yTrendRising": "{count}-session trend, rising",
+  "@a11yTrendRising": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yTrendFalling": "{count}-session trend, falling",
+  "@a11yTrendFalling": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yVerdictWithScore": "{sentence} The six sum to {score} out of {max}.",
+  "@a11yVerdictWithScore": {
+    "placeholders": {
+      "sentence": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yExplainerHint": "{title}. {plain} {token}. Press for the arithmetic.",
+  "@a11yExplainerHint": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "plain": {
+        "type": "String"
+      },
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionUnchanged": "{date}: unchanged",
+  "@a11ySessionUnchanged": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionUp": "{date}: up {percent} per cent",
+  "@a11ySessionUp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionDown": "{date}: down {percent} per cent",
+  "@a11ySessionDown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPriceHistory": "Price history, {count} sessions, from {first} to {last}, low {low}, high {high}",
+  "@a11yPriceHistory": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yRangeGauge": "{caption}: {value}, range {low} to {high}",
+  "@a11yRangeGauge": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      }
+    }
+  },
+  "youTitle": "You"
 }

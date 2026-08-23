@@ -102,11 +102,8 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     padding: const EdgeInsets.all(16),
                     child: BEmptyState(
                       title: l.articleFailed,
-                      body:
-                          'The full write-up lives on thebarbarianproject.com '
-                          'and needs a connection. Everything already '
-                          'downloaded is still available offline.',
-                      actionLabel: 'Go back',
+                      body: l.articleNeedsConnection,
+                      actionLabel: l.articleGoBack,
                       onAction: () => Navigator.of(context).maybePop(),
                     ),
                   )

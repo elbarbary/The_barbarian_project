@@ -6,6 +6,7 @@ import 'controls.dart';
 import 'motion.dart';
 import 'surfaces.dart';
 import 'text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The 48×48 tile carrying a ticker. Used wherever a company appears in a
 /// list, standing in for a logo the app does not have rights to.
@@ -695,6 +696,7 @@ class BVerdictBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     // On ink the ramp lifts. [BarbarianPalette.verdict] deepens both ends
     // toward paper, which puts Toxic within 1.07:1 of the slab — a badge that
@@ -702,10 +704,14 @@ class BVerdictBadge extends StatelessWidget {
     final colour = onDark ? BarbarianPalette.verdictOnInk(c, verdict) : tint(c);
 
     return Semantics(
-      label: score == null
-          ? verdict.sentence
-          : '${verdict.sentence} The six sum to $score out of '
-                '${CashOrTrashEntry.maxScore}.',
+      label: switch (score) {
+        null => verdict.sentence,
+        final total => l.a11yVerdictWithScore(
+          verdict.sentence,
+          total,
+          CashOrTrashEntry.maxScore,
+        ),
+      },
       excludeSemantics: true,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),

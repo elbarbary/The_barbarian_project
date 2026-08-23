@@ -175,8 +175,8 @@ class _ForCompany extends ConsumerWidget {
 
     return BAsyncView(
       value: ref.watch(companyProvider(ticker)),
-      errorTitle: 'No data downloaded for $ticker yet',
-      errorBody: 'Open this once with a connection and it stays on the device.',
+      errorTitle: l.exitNotDownloaded(ticker),
+      errorBody: l.exitNotDownloadedBody,
       data: (sourced) {
         final company = sourced.value;
         final exit = ExitLiquidity.of(company);
@@ -402,13 +402,13 @@ class _Facts extends StatelessWidget {
             ? 'not published'
             : 'EGP ${_short(exit.normalDailyValue)}',
       ),
-      ('Sessions under 1,000 shares', '${exit.thinDays} of ${exit.sessions}'),
+      (l.exitThinSessions, '${exit.thinDays} / ${exit.sessions}'),
       if (exit.freeFloatPercent case final double float)
         (
-          'Shares free to trade',
+          l.exitFreeToTrade,
           '${float.toStringAsFixed(1)}% — the rest do not move',
         ),
-      ('Daily price limit', '±20%, set by the exchange'),
+      (l.exitDailyLimit, l.exitDailyLimitValue),
     ];
 
     return Column(

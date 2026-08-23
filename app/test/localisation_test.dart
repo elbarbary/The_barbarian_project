@@ -24,6 +24,7 @@ bool _isCopy(String text) {
   if (RegExp(r'^[\w./-]+$').hasMatch(value)) return false;
   if (value.startsWith('assets/') || value.startsWith('http')) return false;
   if (value.contains('://')) return false;
+  if (value.endsWith('.json')) return false;
   // A Dart expression that happens to sit inside an interpolation is code.
   // `'\${switch (direction) { BDirection.up => …'` is not a sentence, and the
   // brace-matching a proper strip would need is not worth writing here.
@@ -38,6 +39,114 @@ bool _isCopy(String text) {
   // Arabic is already the translation, not the thing needing one.
   if (RegExp('[؀-ۿ]').hasMatch(value)) return false;
   return true;
+}
+
+/// Whether a literal is a *label* — one or two words a reader still reads.
+///
+/// [_isCopy] wants two words and rejects anything that looks like an
+/// identifier, which is right for prose and exactly wrong for the row labels
+/// this app is full of. `('Open', _num(m.open))`, `('Volume', …)`,
+/// `('Sector', sector)` sat in `(String, String)` records under Arabic
+/// headings for months, invisible to every guard, because each one is a single
+/// capitalised word.
+///
+/// Scoped hard: only literals sitting in the label slot of a record, and only
+/// Latin words in title case. `'market_cap'` and `'consolidated'` are not
+/// labels and do not match.
+bool _isLabel(String text) {
+  final value = text.trim();
+  if (value.length < 3 || value.length > 40) return false;
+  return RegExp(r'^[A-Z][a-z]+(?: [A-Za-z0-9%/-]+){0,3}$').hasMatch(value);
+}
+
+/// The text of the first argument to a call whose opening paren is at [open].
+///
+/// Balanced-paren scan rather than a regex, because the shape that mattered
+/// most —
+///
+///     Text(
+///       condition ? 'one thing' : 'another',
+///
+/// — has the literal *behind* an expression, and a regex anchored on the
+/// paren never saw either branch. Nested calls, strings and comments are
+/// stepped over rather than counted.
+String _firstArgument(String code, int open) {
+  var depth = 0;
+  var i = open;
+  final start = open + 1;
+  while (i < code.length) {
+    final ch = code[i];
+    if (ch == "'" || ch == '"') {
+      // Skip the string, honouring backslash escapes.
+      final quote = ch;
+      i++;
+      while (i < code.length && code[i] != quote) {
+        if (code[i] == r'\') i++;
+        i++;
+      }
+    } else if (ch == '(' || ch == '[' || ch == '{') {
+      depth++;
+    } else if (ch == ')' || ch == ']' || ch == '}') {
+      depth--;
+      if (depth == 0) return code.substring(start, i);
+    }
+    i++;
+  }
+  return '';
+}
+
+/// Every run of adjacent string literals in [expression], as separate strings.
+///
+/// Adjacent literals are one sentence the formatter split and are joined.
+/// Literals separated by anything else — the arms of a ternary, the cases of a
+/// switch — are different sentences and stay apart.
+List<String> _literalRuns(String expression) {
+  final runs = <String>[];
+  final literal = RegExp(r"'((?:[^'\\]|\\.)*)'");
+  var current = <String>[];
+  var previousEnd = -1;
+
+  for (final m in literal.allMatches(expression)) {
+    final between = previousEnd < 0
+        ? null
+        : expression.substring(previousEnd, m.start);
+    if (between != null && between.trim().isEmpty) {
+      current.add(m.group(1)!);
+    } else {
+      if (current.isNotEmpty) runs.add(current.join(' '));
+      current = [m.group(1)!];
+    }
+    previousEnd = m.end;
+  }
+  if (current.isNotEmpty) runs.add(current.join(' '));
+
+  return [for (final run in runs) run.replaceAll(RegExp(r'\s+'), ' ').trim()];
+}
+
+/// Where a named argument ends: the comma at this nesting level, or the close.
+int _argumentEnd(String code) {
+  var depth = 0;
+  var i = 0;
+  while (i < code.length) {
+    final ch = code[i];
+    if (ch == "'" || ch == '"') {
+      final quote = ch;
+      i++;
+      while (i < code.length && code[i] != quote) {
+        if (code[i] == r'\') i++;
+        i++;
+      }
+    } else if (ch == '(' || ch == '[' || ch == '{') {
+      depth++;
+    } else if (ch == ')' || ch == ']' || ch == '}') {
+      if (depth == 0) return i;
+      depth--;
+    } else if (ch == ',' && depth == 0) {
+      return i;
+    }
+    i++;
+  }
+  return code.length;
 }
 
 void main() {
@@ -67,17 +176,25 @@ void main() {
 
     // Widgets and parameters that carry copy. A literal reaching one of these
     // is a sentence a reader sees.
-    final pattern = RegExp(
-      r"(?:Text|BScreenTitle|BSectionLabel|BEmptyState|BKindChip|BInsightLine"
-      r"|BNumText|BLoadMoreButton|Tooltip|BFiledDocument)\(\s*(?:const\s+)?"
-      r"((?:'(?:[^'\\]|\\.)*'\s*)+)"
-      r"|(?:label|title|subtitle|body|hint|hintText|semanticLabel|message"
-      r"|note|caption|blurb)\s*:\s*((?:'(?:[^'\\]|\\.)*'\s*)+)",
-      dotAll: true,
+    //
+    // `value:` and `sentence:` are here because they were not, and that is
+    // most of why this guard reported 24 offenders while the real surface was
+    // an order of magnitude larger: a string returned from a model getter, or
+    // passed as `value:` to a settings row, was invisible.
+    final widgets = RegExp(
+      r"\b(?:Text|BScreenTitle|BSectionLabel|BEmptyState|BKindChip"
+      r"|BInsightLine|BNumText|BLoadMoreButton|Tooltip|BFiledDocument"
+      r"|BStalenessCaption|BVerdictBadge|BChangeDelta)\(",
     );
-
-    // Adjacent literals are one sentence the formatter split.
-    final literal = RegExp(r"'((?:[^'\\]|\\.)*)'");
+    final params = RegExp(
+      r"\b(?:label|title|subtitle|body|hint|hintText|semanticLabel|message"
+      r"|note|caption|blurb|value|sentence|actionLabel|errorTitle|errorBody"
+      r"|labelText|placeholder|delta|token)\s*:\s*",
+    );
+    // The label slot of a `(String, …)` record — the fact rows.
+    final recordLabel = RegExp(r"\(\s*'((?:[^'\\]|\\.)*)'\s*,");
+    // A model getter returning a sentence: `=> 'Prices loading',`.
+    final arrowLiteral = RegExp(r"=>\s*((?:'(?:[^'\\]|\\.)*'\s*)+)");
 
     for (final file in Directory('lib').listSync(recursive: true)) {
       if (file is! File || !file.path.endsWith('.dart')) continue;
@@ -97,29 +214,57 @@ void main() {
           .replaceAll(RegExp(r'^\s*///.*$', multiLine: true), '')
           .replaceAll(RegExp(r'^\s*//.*$', multiLine: true), '');
 
-      for (final m in pattern.allMatches(code)) {
-        final raw = m.group(1) ?? m.group(2) ?? '';
-        // Collapsed to one line: an offender is a key in a line-based
-        // baseline file, and a string with a newline in it cannot round-trip
-        // through one.
-        final joined = literal
-            .allMatches(raw)
-            .map((l) => l.group(1)!)
-            .join(' ')
-            .replaceAll(RegExp(r'\s+'), ' ')
-            .trim();
-        if (!_isCopy(joined)) continue;
-        if (allowed.containsKey(joined)) continue;
-        offenders.add('${file.path}  "$joined"');
+      void report(String text) {
+        if (!_isCopy(text)) return;
+        if (allowed.containsKey(text)) return;
+        offenders.add('${file.path}  "$text"');
+      }
+
+      // A widget that renders copy: everything in its first argument.
+      for (final m in widgets.allMatches(code)) {
+        for (final run in _literalRuns(_firstArgument(code, m.end - 1))) {
+          report(run);
+        }
+      }
+
+      // A named parameter that carries copy: the expression up to the comma
+      // that closes it, ternaries and all.
+      for (final m in params.allMatches(code)) {
+        final tail = code.substring(m.end);
+        final stop = _argumentEnd(tail);
+        for (final run in _literalRuns(tail.substring(0, stop))) {
+          report(run);
+        }
+      }
+
+      // Row labels, which are one capitalised word and so slip past _isCopy.
+      for (final m in recordLabel.allMatches(code)) {
+        final text = m.group(1)!;
+        if (!_isLabel(text)) continue;
+        if (allowed.containsKey(text)) continue;
+        offenders.add('${file.path}  "$text"');
+      }
+
+      // Sentences built inside a model and returned to a widget that has no
+      // way of knowing they were never translated.
+      if (file.path.contains('core/models/')) {
+        for (final m in arrowLiteral.allMatches(code)) {
+          for (final run in _literalRuns(m.group(1)!)) {
+            report(run);
+          }
+        }
       }
     }
 
-    // Ratchet, not a gate.
+    // Ratchet, not a gate — and the baseline is now empty.
     //
-    // There are too many to fix in one change and a red suite that everybody
-    // learns to ignore is worse than the silent one this replaces. The
-    // baseline is checked in: nothing new may appear, and anything fixed must
-    // be struck from the file, so the number can only go down.
+    // It started at 46 under this guard (24 under the narrower one it
+    // replaced, which could not see a string returned from a model getter,
+    // sitting in a `(String, String)` record, or behind a ternary). Every one
+    // of them is in the ARB now, screen-reader labels included. The mechanism
+    // stays because it is what keeps that true: nothing new may appear, and
+    // anything fixed must be struck from the file, so the number can only go
+    // down — and from here, down means staying at zero.
     final baselineFile = File('test/localisation_baseline.txt');
 
     // Regenerate with:

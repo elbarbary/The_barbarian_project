@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/explainer.dart';
 import 'charts.dart';
+import '../../l10n/app_localizations.dart';
 import '../theme/barbarian_theme.dart';
 import 'motion.dart';
 import 'surfaces.dart';
@@ -28,14 +29,17 @@ class BPlainNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
 
     return BPressable(
       onTap: () => showExplainer(context, explainer),
       scale: 0.995,
-      semanticLabel:
-          '${explainer.title}. ${explainer.plain} ${explainer.token}. '
-          'Press for the arithmetic.',
+      semanticLabel: l.a11yExplainerHint(
+        explainer.title,
+        explainer.plain,
+        explainer.token,
+      ),
       child: Container(
         padding: const EdgeInsets.fromLTRB(18, 15, 16, 15),
         foregroundDecoration: last ? null : BHairline.rowBottom(context),
@@ -198,6 +202,7 @@ class BExplainerSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.62,
@@ -269,7 +274,7 @@ class BExplainerSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'HOW IT IS WORKED OUT',
+                    l.explainerHowWorkedOut.toUpperCase(),
                     style: BarbarianType.labelNano.copyWith(color: c.textMuted),
                   ),
                   const SizedBox(height: 10),
@@ -294,7 +299,7 @@ class BExplainerSheet extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'WHAT COUNTS AS UNUSUAL',
+                          l.explainerWhatCountsUnusual.toUpperCase(),
                           style: BarbarianType.labelNano.copyWith(
                             color: c.textMuted,
                           ),

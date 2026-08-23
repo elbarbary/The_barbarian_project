@@ -227,9 +227,17 @@ class _DailyInsight extends ConsumerWidget {
         ? item.eventLabelAr
         : item.eventLabel;
     final age = context.filingAge(item.date);
+    // Only when the session actually cleared the published line.
+    //
+    // The guard was `ratio > 0`, so on a day with no `check` filing the
+    // largest card on the screen announced "TRADED 0.4X MORE THAN USUAL"
+    // while its own body chip said the session had been ordinary. And two
+    // decimals, because the unusual rail and the connect-dots card three
+    // inches below both show 3.45 while this rounded it to 3.5.
+    final evidence = item.evidence;
     final volumeKicker =
-        (item.evidence?.ratio != null && item.evidence!.ratio > 0)
-        ? l.homeVolumeKicker(item.evidence!.ratio.toStringAsFixed(1))
+        (evidence != null && evidence.ratio >= evidence.threshold)
+        ? l.homeVolumeKicker(evidence.ratio.toStringAsFixed(2))
         : null;
 
     return BPressable(

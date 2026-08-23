@@ -87,10 +87,8 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
         ),
         BAsyncView(
           value: directoryAsync,
-          errorTitle: 'The company directory is not on the device yet',
-          errorBody:
-              'Open the app once with a connection and the whole directory '
-              'stays available offline.',
+          errorTitle: l.directoryNotOnDevice,
+          errorBody: l.directoryNotOnDeviceBody,
           data: (sourced) {
             final directory = sourced.value;
             final sectors = directory.sectors;
@@ -342,6 +340,7 @@ class _Sectors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final counts = <String, int>{};
     for (final company in directory.companies) {
       final sector = company.sector;
@@ -358,7 +357,7 @@ class _Sectors extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         BSectionLabel(
-          'Sectors',
+          l.directorySectors,
           trailing: Text(
             '${ranked.length}',
             style: BarbarianType.labelS.copyWith(color: c.textMuted),

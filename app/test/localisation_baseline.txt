@@ -1,24 +1,4 @@
 # Hardcoded English still in the widgets, one per line.
 # Nothing may be added. Anything localised must be struck out, so
 # this file can only get shorter. See localisation_test.dart.
-lib/core/widgets/arc_gauge.dart  "${widget.caption}: ${widget.big}, range ${widget.lowLabel} to ${widget.highLabel}"
-lib/core/widgets/charts.dart  "${values.length}-session trend, ${rising ?"
-lib/core/widgets/explainer_sheet.dart  "${explainer.title}. ${explainer.plain} ${explainer.token}. Press for the arithmetic."
-lib/core/widgets/explainer_sheet.dart  "HOW IT IS WORKED OUT"
-lib/core/widgets/explainer_sheet.dart  "WHAT COUNTS AS UNUSUAL"
-lib/core/widgets/legal.dart  "Sum of the six"
-lib/core/widgets/legal.dart  "The published study does not yet name a filing that would move these pillars. Until it does, the reading below is a record of what the rule produced on its date and nothing more."
-lib/core/widgets/legal.dart  "WHAT WOULD CHANGE THIS"
-lib/features/cash_or_trash/cash_or_trash_screen.dart  "${index.studiedCount} of ${index.total} investigated"
-lib/features/cash_or_trash/cash_or_trash_screen.dart  "Companies appear here one at a time, after each has been read in full."
-lib/features/cash_or_trash/cash_or_trash_screen.dart  "Full write-up in the criteria file"
-lib/features/cash_or_trash/cash_or_trash_screen.dart  "Scores run from ${CashOrTrashEntry.minScore} to +${CashOrTrashEntry.maxScore} across six pillars: valuation, earnings quality, growth, balance sheet, tradability and governance."
-lib/features/cash_or_trash/cash_or_trash_screen.dart  "Six Pillars"
-lib/features/company/company_screen.dart  "${company.priceHistory.length}-session range"
-lib/features/company/company_screen.dart  "${day.point.date}: ${change == null ?"
-lib/features/company/price_chart.dart  "No price history available for this company"
-lib/features/company/price_chart.dart  "Price history, ${points.length} sessions, from ${first.toStringAsFixed(2)} to ${last.toStringAsFixed(2)}, low ${low.toStringAsFixed(2)}, high ${high.toStringAsFixed(2)}"
-lib/features/pit/pit_screen.dart  "No buy or sell calls, no price targets, no performance leaderboards."
-lib/features/pit/pit_screen.dart  "The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\n Everything else in the app works without it, and will keep working if it ever goes down."
-lib/features/research/article_screen.dart  "The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline."
-lib/features/today/news_block.dart  "Headlines from $live, each linked to the outlet that ran it. ${feed.merged > 0 ?"
+

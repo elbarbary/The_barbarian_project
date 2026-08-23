@@ -91,7 +91,7 @@ class BPriceChart extends StatelessWidget {
         height: height,
         child: Center(
           child: Text(
-            'No price history available for this company',
+            l.priceNoHistory,
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
         ),
@@ -110,10 +110,13 @@ class BPriceChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Semantics(
-          label:
-              'Price history, ${points.length} sessions, '
-              'from ${first.toStringAsFixed(2)} to ${last.toStringAsFixed(2)}, '
-              'low ${low.toStringAsFixed(2)}, high ${high.toStringAsFixed(2)}',
+          label: l.a11yPriceHistory(
+            points.length,
+            first.toStringAsFixed(2),
+            last.toStringAsFixed(2),
+            low.toStringAsFixed(2),
+            high.toStringAsFixed(2),
+          ),
           excludeSemantics: true,
           child: SizedBox(
             height: height,

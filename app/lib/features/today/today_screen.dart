@@ -18,6 +18,7 @@ import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
+import '../../core/models/recency.dart';
 
 /// Today: the session, and — far more often — the absence of one.
 ///
@@ -138,29 +139,11 @@ class _TodayHeader extends ConsumerWidget {
         Text(
           report?.reportDate == null
               ? l.scannerNotPublished
-              : 'Published after the ${_dayMonth(report!.reportDate!)} session',
+              : l.todayPutTogether(context.dayMonth(report!.reportDate!)),
           style: BarbarianType.bodyM.copyWith(color: c.textMuted),
         ),
       ],
     );
-  }
-
-  static String _dayMonth(DateTime d) {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    return '${d.day} ${months[d.month - 1]}';
   }
 }
 
@@ -257,7 +240,10 @@ class _ScannerHero extends ConsumerWidget {
                 ),
                 if (report.date case final String d) ...[
                   const SizedBox(height: 14),
-                  BStalenessCaption('Updated · $d', onDark: true),
+                  BStalenessCaption(
+                    l.updatedOn(context.dayMonthIso(d)),
+                    onDark: true,
+                  ),
                 ],
               ],
             ),

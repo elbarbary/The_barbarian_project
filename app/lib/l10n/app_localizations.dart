@@ -389,7 +389,7 @@ abstract class AppLocalizations {
   /// No description provided for @countOutcomes.
   ///
   /// In en, this message translates to:
-  /// **'Outcomes'**
+  /// **'Rule log'**
   String get countOutcomes;
 
   /// No description provided for @theSession.
@@ -677,7 +677,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeVolumeKicker.
   ///
   /// In en, this message translates to:
-  /// **'Traded {ratio}x more than usual'**
+  /// **'Traded {ratio}× its usual volume'**
   String homeVolumeKicker(String ratio);
 
   /// No description provided for @homeFiledToday.
@@ -1397,7 +1397,7 @@ abstract class AppLocalizations {
   /// No description provided for @wiresBodyChecks.
   ///
   /// In en, this message translates to:
-  /// **'{count} of them name a company that also traded outside its own normal band.'**
+  /// **'{count} of them name a company whose shares changed hands far more than usual that day.'**
   String wiresBodyChecks(int count);
 
   /// No description provided for @exchangeSourceNote.
@@ -2099,7 +2099,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeIndices.
   ///
   /// In en, this message translates to:
-  /// **'The indices'**
+  /// **'How the whole market moved'**
   String get homeIndices;
 
   /// No description provided for @breadthUp.
@@ -2273,7 +2273,7 @@ abstract class AppLocalizations {
   /// No description provided for @theWires.
   ///
   /// In en, this message translates to:
-  /// **'The wires'**
+  /// **'News'**
   String get theWires;
 
   /// No description provided for @sortByScore.
@@ -2809,6 +2809,366 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'FY {year}'**
   String periodFullYear(String year);
+
+  /// No description provided for @filedCountWithChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'Company announcements: {total}. Of the ones we could check, {count} came from a company whose shares changed hands far more than usual.'**
+  String filedCountWithChecks(int total, int count);
+
+  /// No description provided for @filedCountNoChecks.
+  ///
+  /// In en, this message translates to:
+  /// **'Company announcements: {total}. None of the ones we could check came from a company whose shares changed hands far more than usual.'**
+  String filedCountNoChecks(int total);
+
+  /// No description provided for @todayPutTogether.
+  ///
+  /// In en, this message translates to:
+  /// **'Put together after trading closed on {date}'**
+  String todayPutTogether(String date);
+
+  /// No description provided for @updatedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated · {date}'**
+  String updatedOn(String date);
+
+  /// No description provided for @macroUnitUsdOunce.
+  ///
+  /// In en, this message translates to:
+  /// **'USD · an ounce'**
+  String get macroUnitUsdOunce;
+
+  /// No description provided for @macroUnitUsdBarrel.
+  ///
+  /// In en, this message translates to:
+  /// **'USD · a barrel'**
+  String get macroUnitUsdBarrel;
+
+  /// No description provided for @macroUnitVessels.
+  ///
+  /// In en, this message translates to:
+  /// **'ships'**
+  String get macroUnitVessels;
+
+  /// No description provided for @macroUnitPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'per cent'**
+  String get macroUnitPercent;
+
+  /// No description provided for @macroUnitUsdBillion.
+  ///
+  /// In en, this message translates to:
+  /// **'USD · billions'**
+  String get macroUnitUsdBillion;
+
+  /// No description provided for @explainerHowWorkedOut.
+  ///
+  /// In en, this message translates to:
+  /// **'How it is worked out'**
+  String get explainerHowWorkedOut;
+
+  /// No description provided for @explainerWhatCountsUnusual.
+  ///
+  /// In en, this message translates to:
+  /// **'What counts as unusual'**
+  String get explainerWhatCountsUnusual;
+
+  /// No description provided for @studySumOfSix.
+  ///
+  /// In en, this message translates to:
+  /// **'Sum of the six'**
+  String get studySumOfSix;
+
+  /// No description provided for @studyWhatWouldChange.
+  ///
+  /// In en, this message translates to:
+  /// **'What would change this'**
+  String get studyWhatWouldChange;
+
+  /// No description provided for @studyNoConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'The published study does not yet name a filing that would move these pillars. Until it does, the reading below is a record of what the rule produced on its date and nothing more.'**
+  String get studyNoConditions;
+
+  /// No description provided for @studyIndexNotOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'The studies are not on the device yet'**
+  String get studyIndexNotOnDevice;
+
+  /// No description provided for @studyIndexNotOnDeviceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open it once with a connection and it stays on the device.'**
+  String get studyIndexNotOnDeviceBody;
+
+  /// No description provided for @studyAllBand.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get studyAllBand;
+
+  /// No description provided for @studyClearFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear filters'**
+  String get studyClearFilters;
+
+  /// No description provided for @studyNoneInBand.
+  ///
+  /// In en, this message translates to:
+  /// **'No company has landed in that band yet.'**
+  String get studyNoneInBand;
+
+  /// No description provided for @studyNoMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No investigated company matches “{query}”. Try a ticker, or clear the filter.'**
+  String studyNoMatch(String query);
+
+  /// No description provided for @studyOneAtATime.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies appear here one at a time, after each has been read in full.'**
+  String get studyOneAtATime;
+
+  /// No description provided for @studyFullWriteUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Full write-up in the criteria file'**
+  String get studyFullWriteUp;
+
+  /// No description provided for @studyScoreRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Scores run from {min} to +{max} across six pillars: valuation, earnings quality, growth, balance sheet, tradability and governance.'**
+  String studyScoreRange(int min, int max);
+
+  /// No description provided for @exitNotDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing downloaded for {ticker} yet'**
+  String exitNotDownloaded(String ticker);
+
+  /// No description provided for @exitNotDownloadedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open this once with a connection and it stays on the device.'**
+  String get exitNotDownloadedBody;
+
+  /// No description provided for @exitThinSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Sessions under 1,000 shares'**
+  String get exitThinSessions;
+
+  /// No description provided for @exitFreeToTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares free to trade'**
+  String get exitFreeToTrade;
+
+  /// No description provided for @exitDailyLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily price limit'**
+  String get exitDailyLimit;
+
+  /// No description provided for @exitDailyLimitValue.
+  ///
+  /// In en, this message translates to:
+  /// **'±20%, set by the exchange'**
+  String get exitDailyLimitValue;
+
+  /// No description provided for @directoryNotOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'The company directory is not on the device yet'**
+  String get directoryNotOnDevice;
+
+  /// No description provided for @directoryNotOnDeviceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the app once with a connection and the whole directory stays available offline.'**
+  String get directoryNotOnDeviceBody;
+
+  /// No description provided for @directorySectors.
+  ///
+  /// In en, this message translates to:
+  /// **'Sectors'**
+  String get directorySectors;
+
+  /// No description provided for @pitSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Source'**
+  String get pitSource;
+
+  /// No description provided for @pitSourceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A disclosure, posted straight from the record'**
+  String get pitSourceBody;
+
+  /// No description provided for @pitNoCalls.
+  ///
+  /// In en, this message translates to:
+  /// **'No buy or sell calls, no price targets, no performance leaderboards.'**
+  String get pitNoCalls;
+
+  /// No description provided for @articleNeedsConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline.'**
+  String get articleNeedsConnection;
+
+  /// No description provided for @articleGoBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get articleGoBack;
+
+  /// No description provided for @priceNoHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No price history for this company yet'**
+  String get priceNoHistory;
+
+  /// No description provided for @priceSessionRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Range over {count} sessions'**
+  String priceSessionRange(int count);
+
+  /// No description provided for @priceSessionsTo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions · to {date}'**
+  String priceSessionsTo(int count, String date);
+
+  /// No description provided for @scanPositionWithheld.
+  ///
+  /// In en, this message translates to:
+  /// **'The report\'s note on this name describes a model position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.'**
+  String get scanPositionWithheld;
+
+  /// No description provided for @newsSourcedFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Headlines from {outlets}, each linked to the outlet that ran it.'**
+  String newsSourcedFrom(String outlets);
+
+  /// No description provided for @newsMergedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} duplicates merged.'**
+  String newsMergedCount(int count);
+
+  /// No description provided for @newsWithheldCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} withheld for carrying a recommendation.'**
+  String newsWithheldCount(int count);
+
+  /// No description provided for @newsUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not reachable today: {outlets}.'**
+  String newsUnreachable(String outlets);
+
+  /// No description provided for @cotInvestigatedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{studied} of {total} investigated'**
+  String cotInvestigatedCount(int studied, int total);
+
+  /// No description provided for @pitWhatItIs.
+  ///
+  /// In en, this message translates to:
+  /// **'The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\nEverything else in the app works without it, and will keep working if it ever goes down.'**
+  String get pitWhatItIs;
+
+  /// No description provided for @a11yBreadthOneSession.
+  ///
+  /// In en, this message translates to:
+  /// **'One session: {up} rose, {down} fell, {flat} unchanged'**
+  String a11yBreadthOneSession(int up, int down, int flat);
+
+  /// No description provided for @a11yBreadthSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions of market breadth'**
+  String a11yBreadthSessions(int count);
+
+  /// No description provided for @a11yTrendRising.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}-session trend, rising'**
+  String a11yTrendRising(int count);
+
+  /// No description provided for @a11yTrendFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}-session trend, falling'**
+  String a11yTrendFalling(int count);
+
+  /// No description provided for @a11yVerdictWithScore.
+  ///
+  /// In en, this message translates to:
+  /// **'{sentence} The six sum to {score} out of {max}.'**
+  String a11yVerdictWithScore(String sentence, int score, int max);
+
+  /// No description provided for @a11yExplainerHint.
+  ///
+  /// In en, this message translates to:
+  /// **'{title}. {plain} {token}. Press for the arithmetic.'**
+  String a11yExplainerHint(String title, String plain, String token);
+
+  /// No description provided for @a11ySessionUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}: unchanged'**
+  String a11ySessionUnchanged(String date);
+
+  /// No description provided for @a11ySessionUp.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}: up {percent} per cent'**
+  String a11ySessionUp(String date, String percent);
+
+  /// No description provided for @a11ySessionDown.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}: down {percent} per cent'**
+  String a11ySessionDown(String date, String percent);
+
+  /// No description provided for @a11yPriceHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Price history, {count} sessions, from {first} to {last}, low {low}, high {high}'**
+  String a11yPriceHistory(
+    int count,
+    String first,
+    String last,
+    String low,
+    String high,
+  );
+
+  /// No description provided for @a11yRangeGauge.
+  ///
+  /// In en, this message translates to:
+  /// **'{caption}: {value}, range {low} to {high}'**
+  String a11yRangeGauge(String caption, String value, String low, String high);
+
+  /// No description provided for @youTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get youTitle;
 }
 
 class _AppLocalizationsDelegate

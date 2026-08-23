@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 /// The 34pt sparkline inside a watchlist tile.
 ///
@@ -59,6 +60,7 @@ class BSparkline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     if (values.length < 2) return SizedBox(height: height);
 
@@ -69,7 +71,9 @@ class BSparkline extends StatelessWidget {
       // carry a glyph, so the description carries it — the direction only,
       // because every caller already prints the figure beside the chart and a
       // reader should not hear the same move twice.
-      label: '${values.length}-session trend, ${rising ? 'rising' : 'falling'}',
+      label: rising
+          ? l.a11yTrendRising(values.length)
+          : l.a11yTrendFalling(values.length),
       child: SizedBox(
         height: height,
         width: double.infinity,

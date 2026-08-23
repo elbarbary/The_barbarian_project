@@ -166,7 +166,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get countWatching => 'استوفت بعض القواعد';
 
   @override
-  String get countOutcomes => 'النتائج';
+  String get countOutcomes => 'سجل القواعد';
 
   @override
   String get theSession => 'تداول اليوم';
@@ -318,7 +318,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String homeVolumeKicker(String ratio) {
-    return 'تداول $ratio× أكثر من المعتاد';
+    return 'تداول $ratio× حجمه المعتاد';
   }
 
   @override
@@ -726,7 +726,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String wiresBodyChecks(int count) {
-    return '$count منها تسمّي شركة تداولت أيضًا خارج نطاقها المعتاد.';
+    return '$count منها يذكر شركة تداول سهمها أكثر بكثير من المعتاد في ذلك اليوم.';
   }
 
   @override
@@ -1163,7 +1163,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeRoseAndFell => 'ما ارتفع وما انخفض';
 
   @override
-  String get homeIndices => 'المؤشرات';
+  String get homeIndices => 'كيف تحرّك السوق كله';
 
   @override
   String get breadthUp => 'ارتفع';
@@ -1596,4 +1596,246 @@ class AppLocalizationsAr extends AppLocalizations {
   String periodFullYear(String year) {
     return 'السنة المالية $year';
   }
+
+  @override
+  String filedCountWithChecks(int total, int count) {
+    return 'إعلانات الشركات: $total. ومما أمكن فحصه، جاء $count من شركة تداول سهمها أكثر بكثير من المعتاد.';
+  }
+
+  @override
+  String filedCountNoChecks(int total) {
+    return 'إعلانات الشركات: $total. ولم يأتِ أي مما أمكن فحصه من شركة تداول سهمها أكثر بكثير من المعتاد.';
+  }
+
+  @override
+  String todayPutTogether(String date) {
+    return 'أُعدّ بعد إغلاق تداول يوم $date';
+  }
+
+  @override
+  String updatedOn(String date) {
+    return 'حُدِّث · $date';
+  }
+
+  @override
+  String get macroUnitUsdOunce => 'دولار · للأوقية';
+
+  @override
+  String get macroUnitUsdBarrel => 'دولار · للبرميل';
+
+  @override
+  String get macroUnitVessels => 'سفينة';
+
+  @override
+  String get macroUnitPercent => 'بالمئة';
+
+  @override
+  String get macroUnitUsdBillion => 'دولار · بالمليار';
+
+  @override
+  String get explainerHowWorkedOut => 'كيف حُسب هذا';
+
+  @override
+  String get explainerWhatCountsUnusual => 'ما الذي يُعد غير معتاد';
+
+  @override
+  String get studySumOfSix => 'مجموع الركائز الست';
+
+  @override
+  String get studyWhatWouldChange => 'ما الذي قد يغيّر هذا';
+
+  @override
+  String get studyNoConditions =>
+      'لم تسمِّ الدراسة المنشورة بعد إفصاحًا قد يحرّك هذه الركائز. وإلى أن تفعل، فما تحته سجل لما أنتجته القاعدة في تاريخها ولا شيء أكثر من ذلك.';
+
+  @override
+  String get studyIndexNotOnDevice => 'الدراسات ليست على الجهاز بعد';
+
+  @override
+  String get studyIndexNotOnDeviceBody =>
+      'افتحها مرة واحدة وأنت متصل بالإنترنت وتبقى على الجهاز.';
+
+  @override
+  String get studyAllBand => 'الكل';
+
+  @override
+  String get studyClearFilters => 'امسح عوامل التصفية';
+
+  @override
+  String get studyNoneInBand => 'لم تقع أي شركة في هذه الفئة بعد.';
+
+  @override
+  String studyNoMatch(String query) {
+    return 'لا توجد شركة مدروسة تطابق «$query». جرّب رمزًا، أو امسح عامل التصفية.';
+  }
+
+  @override
+  String get studyOneAtATime =>
+      'تظهر الشركات هنا واحدة تلو الأخرى، بعد قراءة كل واحدة منها كاملة.';
+
+  @override
+  String get studyFullWriteUp => 'الشرح الكامل في ملف المعايير';
+
+  @override
+  String studyScoreRange(int min, int max) {
+    return 'تتراوح الدرجات من $min إلى +$max عبر ست ركائز: التقييم، وجودة الأرباح، والنمو، والمركز المالي، وقابلية التداول، والحوكمة.';
+  }
+
+  @override
+  String exitNotDownloaded(String ticker) {
+    return 'لا توجد بيانات مُنزَّلة لـ$ticker بعد';
+  }
+
+  @override
+  String get exitNotDownloadedBody =>
+      'افتحها مرة واحدة وأنت متصل بالإنترنت وتبقى على الجهاز.';
+
+  @override
+  String get exitThinSessions => 'جلسات أقل من ١٠٠٠ سهم';
+
+  @override
+  String get exitFreeToTrade => 'الأسهم المتاحة للتداول';
+
+  @override
+  String get exitDailyLimit => 'حد التغير اليومي';
+
+  @override
+  String get exitDailyLimitValue => '±٢٠٪، تحدده البورصة';
+
+  @override
+  String get directoryNotOnDevice => 'دليل الشركات ليس على الجهاز بعد';
+
+  @override
+  String get directoryNotOnDeviceBody =>
+      'افتح التطبيق مرة واحدة وأنت متصل بالإنترنت ويبقى الدليل كله متاحًا دون اتصال.';
+
+  @override
+  String get directorySectors => 'القطاعات';
+
+  @override
+  String get pitSource => 'مصدر';
+
+  @override
+  String get pitSourceBody => 'إفصاح، منشور مباشرة من السجل';
+
+  @override
+  String get pitNoCalls =>
+      'لا توصيات بالشراء أو البيع، ولا أسعار مستهدفة، ولا جداول لترتيب الأداء.';
+
+  @override
+  String get articleNeedsConnection =>
+      'الشرح الكامل موجود على thebarbarianproject.com ويحتاج اتصالًا بالإنترنت. وكل ما نُزِّل بالفعل ما زال متاحًا دون اتصال.';
+
+  @override
+  String get articleGoBack => 'رجوع';
+
+  @override
+  String get priceNoHistory => 'لا يوجد تاريخ أسعار لهذه الشركة بعد';
+
+  @override
+  String priceSessionRange(int count) {
+    return 'المدى خلال $count جلسة';
+  }
+
+  @override
+  String priceSessionsTo(int count, String date) {
+    return '$count جلسة · حتى $date';
+  }
+
+  @override
+  String get scanPositionWithheld =>
+      'ملاحظة التقرير عن هذا السهم تصف مركزًا نموذجيًا — حجمًا وسعرًا. ولا يملك «استثمر» ترخيصًا لإعادة نشر ذلك، فالدرجة والأدلة هنا والمركز ليس هنا.';
+
+  @override
+  String newsSourcedFrom(String outlets) {
+    return 'عناوين من $outlets، كل واحد منها موصول بالجهة التي نشرته.';
+  }
+
+  @override
+  String newsMergedCount(int count) {
+    return 'دُمج $count خبرًا مكررًا.';
+  }
+
+  @override
+  String newsWithheldCount(int count) {
+    return 'حُجب $count خبرًا لاحتوائه على توصية.';
+  }
+
+  @override
+  String newsUnreachable(String outlets) {
+    return 'تعذّر الوصول اليوم إلى: $outlets.';
+  }
+
+  @override
+  String cotInvestigatedCount(int studied, int total) {
+    return 'دُرست $studied من $total';
+  }
+
+  @override
+  String get pitWhatItIs =>
+      '«النقاش» هو المكان الذي تُناقَش فيه الأدلة. شركات وإفصاحات والبحث الذي وراءها — يتحدث عنها من يقرأون الأرقام نفسها.\n\nوكل ما عدا ذلك في التطبيق يعمل بدونه، وسيظل يعمل إن تعطّل يومًا.';
+
+  @override
+  String a11yBreadthOneSession(int up, int down, int flat) {
+    return 'جلسة واحدة: ارتفع $up، وتراجع $down، وثبت $flat';
+  }
+
+  @override
+  String a11yBreadthSessions(int count) {
+    return '$count جلسة من اتساع السوق';
+  }
+
+  @override
+  String a11yTrendRising(int count) {
+    return 'اتجاه $count جلسة، صاعد';
+  }
+
+  @override
+  String a11yTrendFalling(int count) {
+    return 'اتجاه $count جلسة، هابط';
+  }
+
+  @override
+  String a11yVerdictWithScore(String sentence, int score, int max) {
+    return '$sentence مجموع الركائز الست $score من $max.';
+  }
+
+  @override
+  String a11yExplainerHint(String title, String plain, String token) {
+    return '$title. $plain $token. اضغط لرؤية الحساب.';
+  }
+
+  @override
+  String a11ySessionUnchanged(String date) {
+    return '$date: بلا تغيير';
+  }
+
+  @override
+  String a11ySessionUp(String date, String percent) {
+    return '$date: ارتفاع $percent بالمئة';
+  }
+
+  @override
+  String a11ySessionDown(String date, String percent) {
+    return '$date: تراجع $percent بالمئة';
+  }
+
+  @override
+  String a11yPriceHistory(
+    int count,
+    String first,
+    String last,
+    String low,
+    String high,
+  ) {
+    return 'تاريخ السعر، $count جلسة، من $first إلى $last، أدنى $low، أعلى $high';
+  }
+
+  @override
+  String a11yRangeGauge(String caption, String value, String low, String high) {
+    return '$caption: $value، المدى من $low إلى $high';
+  }
+
+  @override
+  String get youTitle => 'حسابك';
 }

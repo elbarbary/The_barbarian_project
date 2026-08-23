@@ -18,16 +18,22 @@ The chain is written out in full rather than asserted, because a reader who can
 follow it can also disagree with it — and a reader who cannot follow it should
 not be trusting it.
 
-Each entry is `(label, label_ar, meaning, meaning_ar, chain, chain_ar)`:
+Each entry is `(label, label_ar, meaning, meaning_ar, chain, chain_ar,
+yardstick, yardstick_ar)`:
 
   * `label` names the series
   * `meaning` is one sentence: what this is, for somebody who is not a trader
   * `chain` is how it reaches an Egyptian share, step by published step
+  * `yardstick` is what would count as unusual — which for every series here
+    is *nobody publishes a band*, said plainly rather than left blank. The app
+    was rendering a section heading in this slot: four macro cards each opened
+    a sheet whose body under "WHAT COUNTS AS UNUSUAL" read, in full, "Why this
+    reaches Egyptian shares".
 """
 
 from __future__ import annotations
 
-MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
+MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str, str, str]] = {
     "suez": (
         "Suez Canal traffic",
         "حركة قناة السويس",
@@ -44,6 +50,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "دولارات أقل تدخل البلاد. وحين يقل الدولار يدفع المستوردون أكثر للحصول "
         "عليه — ومعظم المصنّعين المقيدين بالبورصة يشترون موادهم الخام من الخارج "
         "ويبيعون في الداخل.",
+        "No published band says what an ordinary week for the canal is, so "
+        "this app does not call any one reading unusual. The number is here "
+        "to be read against the ones before it.",
+        "لا يوجد نطاق منشور يحدد ما هو الأسبوع العادي لحركة القناة، ولذلك لا "
+        "يصف هذا التطبيق أي قراءة بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء "
+        "ما سبقه.",
     ),
     "brent": (
         "Brent crude",
@@ -57,6 +69,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "ارتفاع سعر البرميل يرفع فاتورة الاستيراد وفاتورة الدعم معًا. كما يرفع "
         "ما يدفعه كل مصنع مقابل الطاقة وكل موزّع مقابل النقل — وهي تكاليف تصل "
         "إلى نتائج الشركة قبل أن تصل إلى سعر سهمها.",
+        "No published band says what an ordinary day for oil is, so this app "
+        "does not call any one day's move unusual. The number is here to be "
+        "read against the ones before it.",
+        "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للنفط، ولذلك لا يصف هذا "
+        "التطبيق حركة يوم واحد بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء ما "
+        "سبقه.",
     ),
     "wti": (
         "WTI crude",
@@ -70,6 +88,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "تسعّر مصر مقابل برنت لا مقابل غرب تكساس، ولذلك يظهر هنا للمقارنة: حين "
         "يفترق المؤشران يكون السبب غالبًا محليًا في أحد السوقين لا تغيّرًا في "
         "سعر النفط عالميًا.",
+        "No published band says what an ordinary day for oil is, so this app "
+        "does not call any one day's move unusual. What is worth watching "
+        "here is the gap to Brent rather than the level.",
+        "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للنفط، ولذلك لا يصف هذا "
+        "التطبيق حركة يوم واحد بأنها غير معتادة. والجدير بالمتابعة هنا هو "
+        "الفارق عن برنت لا المستوى نفسه.",
     ),
     "gold": (
         "Gold",
@@ -88,6 +112,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "كانت ستشتري أسهمًا إلى شراء المعدن، وحين يستقر يبحث بعضها عن وجهة "
         "أخرى. وهو أيضًا وسيلة كثير من المصريين للتحوّط من تقلب الجنيه، ولذلك "
         "يتحرك عادةً حين تتحرك الثقة في العملة.",
+        "No published band says what an ordinary day for gold is, so this app "
+        "does not call any one day's move unusual. The number is here to be "
+        "read against the ones before it.",
+        "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للذهب، ولذلك لا يصف هذا "
+        "التطبيق حركة يوم واحد بأنها غير معتادة. الرقم هنا ليُقرأ في ضوء ما "
+        "سبقه.",
     ),
     "silver": (
         "Silver",
@@ -103,6 +133,12 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "يتبع الذهب في معظم الأوقات، ولذلك فالحالة اللافتة هي حين لا يتبعه: "
         "تستهلك الصناعة الفضة على نحو لا ينطبق على الذهب، وافتراق المعدنين "
         "يقول عادةً شيئًا عن الطلب الصناعي لا عن المدخرات.",
+        "No published band says what an ordinary day for silver is, so this "
+        "app does not call any one day's move unusual. The case worth "
+        "noticing is when it parts company with gold.",
+        "لا يوجد نطاق منشور يحدد ما هو اليوم العادي للفضة، ولذلك لا يصف هذا "
+        "التطبيق حركة يوم واحد بأنها غير معتادة. والحالة الجديرة بالانتباه هي "
+        "حين تفترق عن الذهب.",
     ),
     "gdp_growth": (
         "Economic growth",
@@ -114,6 +150,11 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "backdrop every set of results is read against.",
         "تبيع الشركات المقيدة داخل هذا الاقتصاد. والنمو لا يرفع كل شركة ولا "
         "يرفعها بالقدر نفسه، لكنه الخلفية التي تُقرأ أمامها كل نتائج الأعمال.",
+        "Growth is published once a quarter by one body, and there is no band "
+        "that makes a single reading ordinary or unusual. It is a backdrop, "
+        "not a signal.",
+        "يُنشر النمو مرة كل ربع سنة من جهة واحدة، ولا يوجد نطاق يجعل قراءة "
+        "منفردة معتادة أو غير معتادة. إنه خلفية لا إشارة.",
     ),
     "inflation": (
         "Inflation",
@@ -127,6 +168,11 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "يصل التضخم إلى الشركة مرتين وفي اتجاهين متعاكسين: يرفع ما تتقاضاه "
         "ويرفع ما تدفعه. وأي الاثنين أسرع هو السؤال كله، والإجابة عنه في "
         "نتائج الشركة المودعة نفسها لا هنا.",
+        "The rate is published monthly and every reading is real; there is no "
+        "band that makes one of them unusual. What it does to a given company "
+        "is in that company's own filed results.",
+        "يُنشر المعدل شهريًا وكل قراءة منه حقيقية؛ ولا يوجد نطاق يجعل إحداها "
+        "غير معتادة. وأثره على شركة بعينها موجود في نتائجها المودعة نفسها.",
     ),
     "fdi": (
         "Foreign direct investment",
@@ -139,6 +185,10 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "هذه عملة أجنبية تدخل البلاد دون التزام بسدادها في موعد، بخلاف "
         "الاقتراض. وهي تصب في بركة الدولار نفسها التي تغذيها القناة ويسحب "
         "منها المستوردون.",
+        "Published quarterly and revised afterwards, so a single reading is "
+        "not a turning point and this app does not present it as one.",
+        "يُنشر ربع سنوي ويُراجَع لاحقًا، ولذلك فالقراءة المنفردة ليست نقطة "
+        "تحول ولا يقدّمها هذا التطبيق على أنها كذلك.",
     ),
     "remittances": (
         "Remittances",
@@ -151,6 +201,11 @@ MACRO_TYPES: dict[str, tuple[str, str, str, str, str, str]] = {
         "أكبر تدفق منفرد للنقد الأجنبي إلى مصر في معظم السنوات، وأكثرها ثباتًا. "
         "ويصل إلى البورصة بالطريقة نفسها التي تصل بها القناة — عبر ما يكلفه "
         "الدولار للمستورد.",
+        "Published monthly with a lag, and seasonal — the months around "
+        "Ramadan and the summer are not comparable with the rest — so no "
+        "single month is called unusual here.",
+        "تُنشر شهريًا بعد فترة، وهي موسمية — فشهور رمضان والصيف لا تُقارن "
+        "ببقية الشهور — ولذلك لا يوصف أي شهر منفرد هنا بأنه غير معتاد.",
     ),
 }
 
@@ -179,6 +234,14 @@ def chain(key: str) -> str:
 
 def chain_ar(key: str) -> str:
     return MACRO_TYPES[key][5] if key in MACRO_TYPES else ""
+
+
+def yardstick(key: str) -> str:
+    return MACRO_TYPES[key][6] if key in MACRO_TYPES else ""
+
+
+def yardstick_ar(key: str) -> str:
+    return MACRO_TYPES[key][7] if key in MACRO_TYPES else ""
 
 
 # Two different checks, because there are two different authors.

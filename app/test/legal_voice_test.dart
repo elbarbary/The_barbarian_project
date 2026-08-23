@@ -322,6 +322,11 @@ void main() {
       'legalNotLicensed',
       'legalNotLicensedShort',
       'youNotAdvice',
+      // The Pit's own statement of what it will never carry.
+      'pitNoCalls',
+      // The news feed reporting that it dropped a story *for* carrying a
+      // recommendation. Naming the thing it refused to republish.
+      'newsWithheldCount',
     };
 
     // The patterns prove they can fire before they are trusted to pass. An

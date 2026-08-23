@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/barbarian_theme.dart';
 import 'text.dart';
+import '../../l10n/app_localizations.dart';
 
 /// How the blades fill.
 enum BGaugeMode {
@@ -119,6 +120,7 @@ class _BArcGaugeState extends State<BArcGauge>
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final height = widget.size / 2 + 46;
     // The boards' gauge is ember and always sits on the ink slab, where a lit
@@ -141,9 +143,12 @@ class _BArcGaugeState extends State<BArcGauge>
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     return Semantics(
-      label:
-          '${widget.caption}: ${widget.big}, '
-          'range ${widget.lowLabel} to ${widget.highLabel}',
+      label: l.a11yRangeGauge(
+        widget.caption,
+        widget.big,
+        widget.lowLabel,
+        widget.highLabel,
+      ),
       excludeSemantics: true,
       // The gauge is a chart of Latin numerals; it never mirrors.
       child: Directionality(

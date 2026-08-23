@@ -30,15 +30,7 @@ class PitScreen extends StatelessWidget {
       blockGap: 20,
       children: [
         BScreenTitle('The Pit', subtitle: l.pitTitle),
-        BEmptyState(
-          title: l.pitComingSoon,
-          body:
-              'The Pit is where the evidence gets argued over. Companies, '
-              'filings and the research behind them — discussed by people '
-              'reading the same numbers.\n\n'
-              'Everything else in the app works without it, and will keep '
-              'working if it ever goes down.',
-        ),
+        BEmptyState(title: l.pitComingSoon, body: l.pitWhatItIs),
         BPaperCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +40,7 @@ class PitScreen extends StatelessWidget {
                 (l.pitDiscussion, l.pitDiscussionBody),
                 (l.pitQuestion, l.pitQuestionBody),
                 (l.pitResearchNote, l.pitResearchNoteBody),
-                ('Source', 'A disclosure, posted straight from the record'),
+                (l.pitSource, l.pitSourceBody),
               ]) ...[
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 7),
@@ -91,8 +83,7 @@ class PitScreen extends StatelessWidget {
               ],
               const SizedBox(height: BarbarianSpace.md),
               Text(
-                'No buy or sell calls, no price targets, no performance '
-                'leaderboards.',
+                l.pitNoCalls,
                 style: BarbarianType.bodyS.copyWith(color: c.textFaint),
               ),
             ],

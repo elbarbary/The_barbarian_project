@@ -223,15 +223,6 @@ class BScreenTitle extends StatelessWidget {
 class BStalenessCaption extends StatelessWidget {
   const BStalenessCaption(this.text, {this.onDark = false, super.key});
 
-  /// "Last close · 11 Aug 2026" — the honest phrasing for an end-of-day feed.
-  factory BStalenessCaption.lastClose(String date, {bool onDark = false}) =>
-      BStalenessCaption('Last close · $date', onDark: onDark);
-
-  /// Used whenever the app is reading bundled fixtures, so sample prices are
-  /// never mistaken for real ones.
-  factory BStalenessCaption.sample({bool onDark = false}) =>
-      BStalenessCaption('Sample data · not live prices', onDark: onDark);
-
   final String text;
   final bool onDark;
 

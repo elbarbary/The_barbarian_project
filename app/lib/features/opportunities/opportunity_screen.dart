@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/opportunity.dart';
+import '../../core/models/recency.dart';
 import 'scanned_detail.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
@@ -117,7 +118,9 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
                     BStalenessCaption(
                       report.reportDate == null
                           ? l.scanReportDateUnknown
-                          : l.scanUpdated(_formatDate(report.reportDate!)),
+                          : l.scanUpdated(
+                              context.dayMonthYear(report.reportDate!),
+                            ),
                     ),
                     if (isSample) const BSampleDataNotice(),
                   ],
@@ -219,24 +222,6 @@ class _OpportunityScreenState extends ConsumerState<OpportunityScreen> {
         ),
       ],
     );
-  }
-
-  static String _formatDate(DateTime d) {
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return '${d.day} ${months[d.month - 1]} ${d.year}';
   }
 }
 
@@ -422,8 +407,7 @@ class _ScannedCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "The report's note on this name describes a model "
-                      'position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.',
+                      l.scanPositionWithheld,
                       style: BarbarianType.bodyM.copyWith(
                         color: c.textSecondary,
                         height: 1.45,

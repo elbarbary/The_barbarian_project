@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/market_history.dart';
 import '../theme/barbarian_theme.dart';
+import '../../l10n/app_localizations.dart';
 
 /// How many shares rose, fell and did not move, session by session.
 ///
@@ -30,6 +31,7 @@ class BBreadthChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final rows = [
       for (final s in sessions)
@@ -46,9 +48,12 @@ class BBreadthChart extends StatelessWidget {
 
     return Semantics(
       label: rows.length == 1
-          ? 'One session: ${rows.last.$2.up} rose, ${rows.last.$2.down} fell, '
-                '${rows.last.$2.flat} unchanged'
-          : '${rows.length} sessions of market breadth',
+          ? l.a11yBreadthOneSession(
+              rows.last.$2.up,
+              rows.last.$2.down,
+              rows.last.$2.flat,
+            )
+          : l.a11yBreadthSessions(rows.length),
       child: SizedBox(
         height: height,
         width: double.infinity,

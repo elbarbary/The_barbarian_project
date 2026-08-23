@@ -104,4 +104,24 @@ extension RecencyContext on BuildContext {
     AppLocalizations.of(this),
     locale: Localizations.localeOf(this).toLanguageTag(),
   );
+
+  /// "17 Aug" / "١٧ أغسطس" — a day and a month in the reader's calendar.
+  ///
+  /// Three screens each carried their own `const months = ['January', …]`
+  /// array, so an Arabic reader got English month names on the second line of
+  /// Today, on the scanner's date stamp, and under every bar of the company
+  /// price chart.
+  String dayMonth(DateTime at) =>
+      DateFormat.MMMd(Localizations.localeOf(this).toLanguageTag()).format(at);
+
+  /// The same with the year, for something dated once at the top of a screen.
+  String dayMonthYear(DateTime at) =>
+      DateFormat.yMMMd(Localizations.localeOf(this).toLanguageTag()).format(at);
+
+  /// [dayMonth] from an ISO string, returned untouched when it will not parse
+  /// — a date this app cannot read is better shown as filed than guessed at.
+  String dayMonthIso(String iso) {
+    final at = DateTime.tryParse(iso);
+    return at == null ? iso : dayMonth(at);
+  }
 }

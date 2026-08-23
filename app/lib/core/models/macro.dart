@@ -65,6 +65,11 @@ abstract class MacroSeries with _$MacroSeries {
     @Default('') String chain,
     @JsonKey(name: 'chain_ar') @Default('') String chainAr,
 
+    /// What would count as an unusual reading — which for every series here is
+    /// *nobody publishes a band*, said plainly rather than left blank.
+    @Default('') String yardstick,
+    @JsonKey(name: 'yardstick_ar') @Default('') String yardstickAr,
+
     /// A model's line about *this* reading, when one was drafted and passed
     /// review. Absent far more often than not — the glossary above is the
     /// floor and this only ever sits on top of it.
@@ -98,6 +103,9 @@ abstract class MacroSeries with _$MacroSeries {
 
   String chainFor(bool arabic) =>
       arabic && chainAr.isNotEmpty ? chainAr : chain;
+
+  String yardstickFor(bool arabic) =>
+      arabic && yardstickAr.isNotEmpty ? yardstickAr : yardstick;
 
   List<double> get values => [for (final p in history) p.value];
 

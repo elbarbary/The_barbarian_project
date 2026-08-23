@@ -10,6 +10,7 @@ import '../../core/models/market_snapshot.dart';
 import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
 import '../../core/models/disclosure.dart';
+import '../../core/models/recency.dart';
 import '../../core/widgets/filed_document.dart';
 import '../../core/widgets/insight.dart';
 import '../../core/providers.dart';
@@ -116,6 +117,7 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     company: company,
                     quote: quote,
                     ticker: widget.ticker,
+                    onOpenStudy: () => setState(() => _tab = _Tab.research),
                   ),
                   _Tab.financials => _Financials(
                     company: company,
@@ -306,6 +308,7 @@ class _RangeGauge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final closes = company.priceHistory.map((p) => p.close).toList();
     final low = closes.reduce((a, b) => a < b ? a : b);
     final high = closes.reduce((a, b) => a > b ? a : b);
@@ -317,7 +320,7 @@ class _RangeGauge extends StatelessWidget {
       min: low,
       max: high,
       big: last.toStringAsFixed(2),
-      caption: '${company.priceHistory.length}-session range',
+      caption: l.priceSessionRange(company.priceHistory.length),
       lowLabel: low.toStringAsFixed(2),
       highLabel: high.toStringAsFixed(2),
     );
@@ -400,7 +403,11 @@ class _Overview extends ConsumerWidget {
     required this.quote,
     required this.ticker,
     required this.parentTab,
+    required this.onOpenStudy,
   });
+
+  /// Opens the Research tab, where the study this card summarises lives.
+  final VoidCallback onOpenStudy;
 
   final Company company;
   final StockQuote? quote;
@@ -504,7 +511,7 @@ class _Overview extends ConsumerWidget {
         if (verdict != null) ...[
           BSectionLabel(l.studyLabel),
           BPressable(
-            onTap: () {},
+            onTap: onOpenStudy,
             child: BPaperCard(
               radius: BarbarianRadius.xl,
               child: Column(
@@ -972,7 +979,10 @@ class _Price extends ConsumerWidget {
             BStalenessCaption(
               windowed.isEmpty
                   ? l.noSessionsInRange
-                  : '${windowed.length} sessions · to ${windowed.last.date}',
+                  : l.priceSessionsTo(
+                      windowed.length,
+                      context.dayMonthIso(windowed.last.date),
+                    ),
             ),
           ],
         );
@@ -1098,7 +1108,7 @@ class _Research extends ConsumerWidget {
                       Routes.articlePath(
                         parentTab,
                         config.resolveArticleUrl(entry.articleUrl!),
-                        '\$ticker · Six Pillars',
+                        '$ticker · ${l.studyLabel}',
                       ),
                     ),
                     child: Container(
@@ -1256,6 +1266,7 @@ class _DayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final change = day.change;
     final tone = change == null || change == 0
@@ -1266,8 +1277,17 @@ class _DayCell extends StatelessWidget {
     final magnitude = ((change ?? 0).abs() / 0.04).clamp(0.12, 1.0);
 
     return Semantics(
-      label:
-          '${day.point.date}: ${change == null ? 'unchanged' : '${change >= 0 ? 'up' : 'down'} ${(change.abs() * 100).toStringAsFixed(1)} percent'}',
+      label: switch (change) {
+        null => l.a11ySessionUnchanged(day.point.date),
+        final pct when pct >= 0 => l.a11ySessionUp(
+          day.point.date,
+          (pct * 100).toStringAsFixed(1),
+        ),
+        final pct => l.a11ySessionDown(
+          day.point.date,
+          (pct.abs() * 100).toStringAsFixed(1),
+        ),
+      },
       excludeSemantics: true,
       child: Column(
         children: [
@@ -1296,32 +1316,12 @@ class _DayCell extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             // "17 Aug" is enough; the year is on the header caption.
-            _shortDate(day.point.date),
+            context.dayMonthIso(day.point.date),
             style: BarbarianType.labelTiny.copyWith(color: c.textFaint),
           ),
         ],
       ),
     );
-  }
-
-  static String _shortDate(String iso) {
-    final d = DateTime.tryParse(iso);
-    if (d == null) return iso;
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return '${d.day} ${months[d.month - 1]}';
   }
 }
 

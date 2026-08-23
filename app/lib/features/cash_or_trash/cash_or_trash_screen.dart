@@ -86,18 +86,12 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
         ),
         BAsyncView(
           value: async,
-          errorTitle: 'The pillar index is not on the device yet',
-          errorBody:
-              'Open it once with a connection and it stays on the device.',
+          errorTitle: l.studyIndexNotOnDevice,
+          errorBody: l.studyIndexNotOnDeviceBody,
           data: (sourced) {
             final index = sourced.value;
             if (index.isEmpty) {
-              return BEmptyState(
-                title: l.cotNoneYet,
-                body:
-                    'Companies appear here one at a time, after each has been '
-                    'read in full.',
-              );
+              return BEmptyState(title: l.cotNoneYet, body: l.studyOneAtATime);
             }
 
             final entries = _visible(index);
@@ -106,9 +100,11 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BScreenTitle(
-                  'Six Pillars',
-                  subtitle:
-                      '${index.studiedCount} of ${index.total} investigated',
+                  l.studyLabel,
+                  subtitle: l.cotInvestigatedCount(
+                    index.studiedCount,
+                    index.total,
+                  ),
                 ),
                 const SizedBox(height: 18),
                 BSearchPill(
@@ -136,10 +132,9 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                   BEmptyState(
                     title: l.cotNoMatch,
                     body: _query.isEmpty
-                        ? 'No company has landed in that band yet.'
-                        : 'No investigated company matches "$_query". Try a '
-                              'ticker, or clear the filter.',
-                    actionLabel: 'Clear filters',
+                        ? l.studyNoneInBand
+                        : l.studyNoMatch(_query),
+                    actionLabel: l.studyClearFilters,
                     onAction: () => setState(() {
                       _query = '';
                       _search.clear();
@@ -153,10 +148,10 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                   ],
                 const SizedBox(height: 6),
                 Text(
-                  'Scores run from ${CashOrTrashEntry.minScore} to '
-                  '+${CashOrTrashEntry.maxScore} across six pillars: '
-                  'valuation, earnings quality, growth, balance sheet, '
-                  'tradability and governance.',
+                  l.studyScoreRange(
+                    CashOrTrashEntry.minScore,
+                    CashOrTrashEntry.maxScore,
+                  ),
                   // On the page ramp rather than on a card, where textFaint
                   // measures 3.7–4.1:1 at this size.
                   style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
@@ -187,6 +182,8 @@ class _VerdictFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+
     return SizedBox(
       height: 34,
       child: ListView(
@@ -194,7 +191,7 @@ class _VerdictFilter extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           BKindChip(
-            'All',
+            l.studyAllBand,
             variant: selected == null
                 ? BChipVariant.solid
                 : BChipVariant.neutral,
@@ -382,7 +379,7 @@ class _VerdictCard extends ConsumerWidget {
                         Routes.articlePath(
                           parentTab,
                           config.resolveArticleUrl(entry.articleUrl!),
-                          '${entry.ticker} · Six Pillars',
+                          '${entry.ticker} · ${l.studyLabel}',
                         ),
                       ),
                     ),
@@ -390,7 +387,7 @@ class _VerdictCard extends ConsumerWidget {
                 else
                   Expanded(
                     child: Text(
-                      'Full write-up in the criteria file',
+                      l.studyFullWriteUp,
                       style: BarbarianType.bodyS.copyWith(color: c.textFaint),
                     ),
                   ),

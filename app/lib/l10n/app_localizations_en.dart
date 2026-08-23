@@ -167,7 +167,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get countWatching => 'Cleared some rules';
 
   @override
-  String get countOutcomes => 'Outcomes';
+  String get countOutcomes => 'Rule log';
 
   @override
   String get theSession => 'The day\'s trading';
@@ -320,7 +320,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String homeVolumeKicker(String ratio) {
-    return 'Traded ${ratio}x more than usual';
+    return 'Traded $ratio× its usual volume';
   }
 
   @override
@@ -728,7 +728,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String wiresBodyChecks(int count) {
-    return '$count of them name a company that also traded outside its own normal band.';
+    return '$count of them name a company whose shares changed hands far more than usual that day.';
   }
 
   @override
@@ -1170,7 +1170,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeRoseAndFell => 'What rose and what fell';
 
   @override
-  String get homeIndices => 'The indices';
+  String get homeIndices => 'How the whole market moved';
 
   @override
   String get breadthUp => 'rose';
@@ -1269,7 +1269,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get theWires => 'The wires';
+  String get theWires => 'News';
 
   @override
   String get sortByScore => 'By score';
@@ -1604,4 +1604,247 @@ class AppLocalizationsEn extends AppLocalizations {
   String periodFullYear(String year) {
     return 'FY $year';
   }
+
+  @override
+  String filedCountWithChecks(int total, int count) {
+    return 'Company announcements: $total. Of the ones we could check, $count came from a company whose shares changed hands far more than usual.';
+  }
+
+  @override
+  String filedCountNoChecks(int total) {
+    return 'Company announcements: $total. None of the ones we could check came from a company whose shares changed hands far more than usual.';
+  }
+
+  @override
+  String todayPutTogether(String date) {
+    return 'Put together after trading closed on $date';
+  }
+
+  @override
+  String updatedOn(String date) {
+    return 'Updated · $date';
+  }
+
+  @override
+  String get macroUnitUsdOunce => 'USD · an ounce';
+
+  @override
+  String get macroUnitUsdBarrel => 'USD · a barrel';
+
+  @override
+  String get macroUnitVessels => 'ships';
+
+  @override
+  String get macroUnitPercent => 'per cent';
+
+  @override
+  String get macroUnitUsdBillion => 'USD · billions';
+
+  @override
+  String get explainerHowWorkedOut => 'How it is worked out';
+
+  @override
+  String get explainerWhatCountsUnusual => 'What counts as unusual';
+
+  @override
+  String get studySumOfSix => 'Sum of the six';
+
+  @override
+  String get studyWhatWouldChange => 'What would change this';
+
+  @override
+  String get studyNoConditions =>
+      'The published study does not yet name a filing that would move these pillars. Until it does, the reading below is a record of what the rule produced on its date and nothing more.';
+
+  @override
+  String get studyIndexNotOnDevice => 'The studies are not on the device yet';
+
+  @override
+  String get studyIndexNotOnDeviceBody =>
+      'Open it once with a connection and it stays on the device.';
+
+  @override
+  String get studyAllBand => 'All';
+
+  @override
+  String get studyClearFilters => 'Clear filters';
+
+  @override
+  String get studyNoneInBand => 'No company has landed in that band yet.';
+
+  @override
+  String studyNoMatch(String query) {
+    return 'No investigated company matches “$query”. Try a ticker, or clear the filter.';
+  }
+
+  @override
+  String get studyOneAtATime =>
+      'Companies appear here one at a time, after each has been read in full.';
+
+  @override
+  String get studyFullWriteUp => 'Full write-up in the criteria file';
+
+  @override
+  String studyScoreRange(int min, int max) {
+    return 'Scores run from $min to +$max across six pillars: valuation, earnings quality, growth, balance sheet, tradability and governance.';
+  }
+
+  @override
+  String exitNotDownloaded(String ticker) {
+    return 'Nothing downloaded for $ticker yet';
+  }
+
+  @override
+  String get exitNotDownloadedBody =>
+      'Open this once with a connection and it stays on the device.';
+
+  @override
+  String get exitThinSessions => 'Sessions under 1,000 shares';
+
+  @override
+  String get exitFreeToTrade => 'Shares free to trade';
+
+  @override
+  String get exitDailyLimit => 'Daily price limit';
+
+  @override
+  String get exitDailyLimitValue => '±20%, set by the exchange';
+
+  @override
+  String get directoryNotOnDevice =>
+      'The company directory is not on the device yet';
+
+  @override
+  String get directoryNotOnDeviceBody =>
+      'Open the app once with a connection and the whole directory stays available offline.';
+
+  @override
+  String get directorySectors => 'Sectors';
+
+  @override
+  String get pitSource => 'Source';
+
+  @override
+  String get pitSourceBody => 'A disclosure, posted straight from the record';
+
+  @override
+  String get pitNoCalls =>
+      'No buy or sell calls, no price targets, no performance leaderboards.';
+
+  @override
+  String get articleNeedsConnection =>
+      'The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline.';
+
+  @override
+  String get articleGoBack => 'Go back';
+
+  @override
+  String get priceNoHistory => 'No price history for this company yet';
+
+  @override
+  String priceSessionRange(int count) {
+    return 'Range over $count sessions';
+  }
+
+  @override
+  String priceSessionsTo(int count, String date) {
+    return '$count sessions · to $date';
+  }
+
+  @override
+  String get scanPositionWithheld =>
+      'The report\'s note on this name describes a model position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.';
+
+  @override
+  String newsSourcedFrom(String outlets) {
+    return 'Headlines from $outlets, each linked to the outlet that ran it.';
+  }
+
+  @override
+  String newsMergedCount(int count) {
+    return '$count duplicates merged.';
+  }
+
+  @override
+  String newsWithheldCount(int count) {
+    return '$count withheld for carrying a recommendation.';
+  }
+
+  @override
+  String newsUnreachable(String outlets) {
+    return 'Not reachable today: $outlets.';
+  }
+
+  @override
+  String cotInvestigatedCount(int studied, int total) {
+    return '$studied of $total investigated';
+  }
+
+  @override
+  String get pitWhatItIs =>
+      'The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\nEverything else in the app works without it, and will keep working if it ever goes down.';
+
+  @override
+  String a11yBreadthOneSession(int up, int down, int flat) {
+    return 'One session: $up rose, $down fell, $flat unchanged';
+  }
+
+  @override
+  String a11yBreadthSessions(int count) {
+    return '$count sessions of market breadth';
+  }
+
+  @override
+  String a11yTrendRising(int count) {
+    return '$count-session trend, rising';
+  }
+
+  @override
+  String a11yTrendFalling(int count) {
+    return '$count-session trend, falling';
+  }
+
+  @override
+  String a11yVerdictWithScore(String sentence, int score, int max) {
+    return '$sentence The six sum to $score out of $max.';
+  }
+
+  @override
+  String a11yExplainerHint(String title, String plain, String token) {
+    return '$title. $plain $token. Press for the arithmetic.';
+  }
+
+  @override
+  String a11ySessionUnchanged(String date) {
+    return '$date: unchanged';
+  }
+
+  @override
+  String a11ySessionUp(String date, String percent) {
+    return '$date: up $percent per cent';
+  }
+
+  @override
+  String a11ySessionDown(String date, String percent) {
+    return '$date: down $percent per cent';
+  }
+
+  @override
+  String a11yPriceHistory(
+    int count,
+    String first,
+    String last,
+    String low,
+    String high,
+  ) {
+    return 'Price history, $count sessions, from $first to $last, low $low, high $high';
+  }
+
+  @override
+  String a11yRangeGauge(String caption, String value, String low, String high) {
+    return '$caption: $value, range $low to $high';
+  }
+
+  @override
+  String get youTitle => 'You';
 }

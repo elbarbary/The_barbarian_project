@@ -91,11 +91,14 @@ class _BDisclosuresBlockState extends ConsumerState<BDisclosuresBlock> {
         BSectionLabel(l.homeFiledHero),
         const SizedBox(height: 6),
         Text(
+          // "Of the ones we could check": the claim used to cover the whole
+          // list, including the items that carry no ticker and so were never
+          // checked against anything. And "filings" and "normal band" are
+          // both terms this reader was never given — the section above is
+          // already called "company announcements".
           checks.isEmpty
-              ? '${feed.items.length} filings. None came from a company whose '
-                    'session was outside its own normal band.'
-              : '${checks.length} of ${feed.items.length} filings came from a '
-                    'company that also traded unusually.',
+              ? l.filedCountNoChecks(feed.items.length)
+              : l.filedCountWithChecks(feed.items.length, checks.length),
           style: BarbarianType.bodyM.copyWith(
             color: c.textSecondary,
             height: 1.45,

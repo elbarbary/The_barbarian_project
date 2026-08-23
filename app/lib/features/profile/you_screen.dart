@@ -52,7 +52,7 @@ class YouScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'You',
+                    l.youTitle,
                     style: BarbarianType.displayM.copyWith(
                       color: c.textPrimary,
                     ),

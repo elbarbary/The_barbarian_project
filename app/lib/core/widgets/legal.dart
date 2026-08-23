@@ -117,21 +117,20 @@ class BWhatWouldChangeThis extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
 
     return BPaperCardShim(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'WHAT WOULD CHANGE THIS',
+            l.studyWhatWouldChange.toUpperCase(),
             style: BarbarianType.labelNano.copyWith(color: c.textMuted),
           ),
           const SizedBox(height: 8),
           if (conditions.isEmpty)
             Text(
-              'The published study does not yet name a filing that would move '
-              'these pillars. Until it does, the reading below is a record of '
-              'what the rule produced on its date and nothing more.',
+              l.studyNoConditions,
               style: BarbarianType.bodyM.copyWith(
                 color: c.textSecondary,
                 height: 1.5,
@@ -230,6 +229,7 @@ class BPillarLedger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -255,7 +255,7 @@ class BPillarLedger extends StatelessWidget {
                 child: Text(
                   // Not "score", not "rating", not "grade". The word for what
                   // this number is.
-                  'Sum of the six',
+                  l.studySumOfSix,
                   style: BarbarianType.labelS.copyWith(color: c.textSecondary),
                 ),
               ),

@@ -5,6 +5,7 @@ import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/core/widgets/charts.dart';
 import 'package:barbarian/core/theme/barbarian_theme.dart';
+import 'package:barbarian/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -226,6 +227,10 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: BarbarianTheme.light(),
+        // The sheet's two section headings come from the ARB now, so it needs
+        // the delegates to build at all.
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: const Scaffold(
           body: BExplainerSheet(
             explainer: explainer,
@@ -240,6 +245,8 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: BarbarianTheme.light(),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: const Scaffold(body: BExplainerSheet(explainer: explainer)),
       ),
     );

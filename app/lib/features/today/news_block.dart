@@ -320,6 +320,7 @@ class _Provenance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final live = feed.sources.map((s) => s.name).join(', ');
     final down = feed.unavailable.map((s) => s.name).join(', ');
 
@@ -327,10 +328,13 @@ class _Provenance extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Headlines from $live, each linked to the outlet that ran it. '
-          '${feed.merged > 0 ? '${feed.merged} duplicates merged. ' : ''}'
-          '${feed.droppedForAdvice > 0 ? '${feed.droppedForAdvice} withheld for carrying a recommendation. ' : ''}'
-          '${down.isEmpty ? '' : 'Not reachable today: $down.'}',
+          [
+            l.newsSourcedFrom(live),
+            if (feed.merged > 0) l.newsMergedCount(feed.merged),
+            if (feed.droppedForAdvice > 0)
+              l.newsWithheldCount(feed.droppedForAdvice),
+            if (down.isNotEmpty) l.newsUnreachable(down),
+          ].join(' '),
           style: BarbarianType.bodyS.copyWith(color: c.textMuted, height: 1.5),
         ),
       ],
