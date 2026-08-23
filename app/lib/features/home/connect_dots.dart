@@ -28,7 +28,13 @@ import '../../l10n/app_localizations.dart';
 /// time from fixed templates and refused if it ever reads as an instruction —
 /// see `build_connections_api.py`.
 class BConnectDots extends ConsumerWidget {
-  const BConnectDots({super.key});
+  const BConnectDots({this.parentTab = BNavTab.home, super.key});
+
+  /// Which navigation slot stays lit when a company or a document opens from
+  /// here. Hard-coded to Home while this block lived only on Home; it is on
+  /// Today now, and a push that lights the wrong tab is the one navigation
+  /// rule `router.dart` is explicit about.
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +59,7 @@ class BConnectDots extends ConsumerWidget {
         const SizedBox(height: 12),
         for (final (i, item) in items.indexed) ...[
           if (i > 0) const SizedBox(height: 10),
-          _Crossing(item: item),
+          _Crossing(item: item, parentTab: parentTab),
         ],
       ],
     );
@@ -61,13 +67,15 @@ class BConnectDots extends ConsumerWidget {
 }
 
 class _Crossing extends StatelessWidget {
-  const _Crossing({required this.item});
+  const _Crossing({required this.item, required this.parentTab});
 
   final Connection item;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
 
     return BPaperCard(
@@ -75,23 +83,73 @@ class _Crossing extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // The company, and a way to it.
+          // The company, and a way to it. The card used to show four letters
+          // and nothing else; 266 of 280 companies carry an Arabic name.
           BPressable(
             onTap: () =>
-                context.push(Routes.companyPath(BNavTab.home, item.ticker)),
-            child: Row(
+                context.push(Routes.companyPath(parentTab, item.ticker)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  item.ticker,
-                  style: BarbarianType.titleL.copyWith(color: c.textPrimary),
+                Row(
+                  children: [
+                    Text(
+                      item.ticker,
+                      style: BarbarianType.titleL.copyWith(
+                        color: c.textPrimary,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Icon(Icons.north_east, size: 14, color: c.textFaint),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                Icon(Icons.north_east, size: 14, color: c.textFaint),
+                if (item.nameFor(arabic) case final String name) ...[
+                  const SizedBox(height: 2),
+                  if (arabic)
+                    BArabicName(name, color: c.textMuted, maxLines: 2)
+                  else
+                    BLatinName(name, color: c.textMuted),
+                ],
               ],
             ),
           ),
           const SizedBox(height: 7),
           BInsightLine(item.whyFor(arabic), maxLines: 3),
+          // What the documents have in common, which is the reason they are
+          // on one card. Absent where there is nothing countable to say — a
+          // card that always has a second sentence teaches a reader to skip
+          // it.
+          if (item.insightFor(arabic) case final String note) ...[
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(12, 10, 12, 11),
+              decoration: BoxDecoration(
+                color: c.hairline,
+                borderRadius: BorderRadius.circular(BarbarianRadius.md),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l.dotsWhatTheyShare.toUpperCase(),
+                    style: BarbarianType.labelNano.copyWith(
+                      color: c.textMuted,
+                      letterSpacing: 0.6,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    note,
+                    style: BarbarianType.bodyM.copyWith(
+                      color: c.textPrimary,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 12),
           for (final (n, strand) in item.strands.indexed) ...[
             if (n > 0) ...[
@@ -99,7 +157,7 @@ class _Crossing extends StatelessWidget {
               Divider(height: 1, color: c.hairline),
               const SizedBox(height: 10),
             ],
-            _StrandRow(strand: strand),
+            _StrandRow(strand: strand, parentTab: parentTab),
           ],
         ],
       ),
@@ -109,9 +167,10 @@ class _Crossing extends StatelessWidget {
 
 /// One thread, and the document behind it.
 class _StrandRow extends StatelessWidget {
-  const _StrandRow({required this.strand});
+  const _StrandRow({required this.strand, required this.parentTab});
 
   final Strand strand;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +245,7 @@ class _StrandRow extends StatelessWidget {
     return BPressable(
       onTap: () => context.push(
         Routes.articlePath(
-          BNavTab.home,
+          parentTab,
           strand.link,
           strand.kind == 'filing' ? 'EGX filing' : '',
         ),

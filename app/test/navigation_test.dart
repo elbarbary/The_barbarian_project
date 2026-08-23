@@ -63,8 +63,8 @@ void main() {
   /// and its search their own surface. Everything that used to type on the
   /// front door now goes through here.
   Future<void> openSearch(WidgetTester tester) async {
-    await pumpUntil(tester, find.text('Search by company name or symbol…'));
-    await tapVisible(tester, find.text('Search by company name or symbol…'));
+    await pumpUntil(tester, find.text('Search a company, or a symbol'));
+    await tapVisible(tester, find.text('Search a company, or a symbol'));
     await pumpUntil(tester, find.byType(TextField));
   }
 
@@ -149,10 +149,11 @@ void main() {
       // whole Today tab rendered as a red error screen instead.
       await boot(tester);
       await tapTab(tester, BNavTab.home);
-      // News is the default tab, so its action is the one on screen.
-      await pumpUntil(tester, find.textContaining(RegExp('All news')));
+      // Home no longer carries the feeds, so the route to the full filings
+      // list is the action beside the lead announcement.
+      await pumpUntil(tester, find.textContaining(RegExp('All announcements')));
 
-      await tapVisible(tester, find.textContaining('All news').first);
+      await tapVisible(tester, find.textContaining('All announcements').first);
       await tester.pump(const Duration(milliseconds: 400));
       await tester.pump(const Duration(milliseconds: 400));
 

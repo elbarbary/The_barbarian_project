@@ -156,11 +156,19 @@ class BSectionLabel extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(bottom: bottomGap),
+      // Both halves are variable-length — an uppercased Arabic-or-English
+      // heading beside an action label — and at 320pt with a long pair the
+      // row overflowed by 153pt. The heading gives way first: it is the
+      // duller of the two and it can wrap.
       child: trailing == null
           ? labelWidget
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [labelWidget, trailing!],
+              children: [
+                Flexible(child: labelWidget),
+                const SizedBox(width: 10),
+                Flexible(child: trailing!),
+              ],
             ),
     );
   }

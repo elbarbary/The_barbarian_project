@@ -372,8 +372,8 @@
   "@goldKaratGram": { "placeholders": { "karat": {"type":"int"} } },
   "goldPerOunce": "EGP {amount} / oz",
   "@goldPerOunce": { "placeholders": { "amount": {"type":"String"} } },
-  "dotsLabel": "Connecting the dots",
-  "dotsBody": "Companies that turned up in more than one place in the last {days} days. Every line links to the thing it came from.",
+  "dotsLabel": "What ties these together",
+  "dotsBody": "Companies that turned up in more than one place in the last {days} days — with what those places have in common.",
   "@dotsBody": { "placeholders": { "days": {"type":"int"} } },
   "dotsFiling": "Filing",
   "dotsNews": "In the press",
@@ -1305,7 +1305,7 @@
       }
     }
   },
-  "homeWhichCompanies": "Which companies moved unusually",
+  "homeWhichCompanies": "Busiest against their own normal",
   "volumeTeaching": "“Traded unusually” means one thing here: the company's shares changed hands at least twice as often as they normally do. That is a question worth asking, not a verdict — busy days happen for good reasons and bad ones alike.",
   "volumeTeachingTitle": "What “traded unusually” means",
   "volumeTeachingWorkings": "Shares traded in the session ÷ the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.",
@@ -1608,5 +1608,41 @@
   "notabilityUnjudged": "No published threshold",
   "provenanceFact": "Fact",
   "provenanceCalculation": "Calculation",
-  "provenanceInterpretation": "Interpretation"
+  "provenanceInterpretation": "Interpretation",
+  "dotsWhatTheyShare": "What they share",
+  "busyBody": "{count} companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.",
+  "@busyBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "busyNone": "No company traded far outside its own normal today. A quiet day is a real answer.",
+  "busyFiledToo": "Announced something",
+  "busyFloorNote": "Companies trading less than {amount} in the session are left out: a multiple of a very small number is arithmetic, not news.",
+  "@busyFloorNote": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSearchHint": "Search a company, or a symbol",
+  "homeSearchNone": "Nothing matches “{query}”",
+  "@homeSearchNone": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSearchMore": "See all {count} results",
+  "@homeSearchMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

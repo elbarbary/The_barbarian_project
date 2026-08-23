@@ -22,15 +22,14 @@ import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/filed_document.dart';
 import '../../core/widgets/filing_actions.dart';
 import '../../core/widgets/insight.dart';
+import '../../core/widgets/load_more.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/news_thumb.dart';
+import 'busiest.dart';
 import 'macro_block.dart';
-import 'feed_tabs.dart';
 import 'lead_story.dart';
-import 'connect_dots.dart';
-import 'unusual_rail.dart';
 import '../../core/widgets/teaching.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
@@ -57,79 +56,210 @@ import '../../l10n/app_localizations.dart';
 /// No such board is in this repository: all nine checked-in boards specify a
 /// Home tab, `_design-system.json` types the nav as `home|market|pit|you`, and
 /// spec §6 describes this screen. It is back.
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final TextEditingController _search = TextEditingController();
+
+  /// This screen's own search text. Not a shared provider: two screens
+  /// searching must not share one query — see `searchResultsProvider`.
+  String _query = '';
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    final query = _query.trim();
+
     return BScreenScaffold(
       blockGap: 22,
       children: [
         const _Greeting(),
-        // Not on the board, and here on purpose. The boards give the directory
-        // and its search their own tab; until that is settled this is the only
-        // way to reach 282 companies, and "somebody just sent me a name" is
-        // the single most common reason this app gets opened.
+        // A live field, not a row that navigates away.
+        //
+        // "Somebody just sent me a name" is the single most common reason this
+        // app gets opened, and the pill here used to be a display row that
+        // pushed the directory — two taps and a screen change before a reader
+        // could type. On a command screen the search is the first thing that
+        // works, so it answers here.
         BSearchPill(
-          text: l.searchPlaceholder,
-          onTap: () => context.push(Routes.directoryPath(BNavTab.home)),
+          text: l.homeSearchHint,
+          controller: _search,
+          onChanged: (value) => setState(() => _query = value),
         ),
-        // The order answers the two questions somebody opens this app with,
-        // in that order: what matters today, and what has just happened. It
-        // used to open on one filing under a label that repeated itself, which
-        // told a reader neither.
-        // Filings lead. They are the only thing on this screen the exchange
-        // itself published about a named company on the day it happened —
-        // everything else is either a price or somebody's reporting of one.
-        // This is a news app, and it opened with a regulatory filing — a form
-        // somebody was obliged to submit. Excellent for a reader already deep
-        // in a company, and the worst possible greeting for everyone else.
-        //
-        //   1. today's story, at the size a story deserves, with its picture
-        //   2. the rest of the feed, each row carrying its own
-        //   3. what companies told the exchange — the day's largest card
-        //   4. where the market closed and how wide the move was
-        //   5. which companies moved unusually, and what it means
-        //   6. what moves Egypt, which the rest is read against
-        //   7. the watchlist, reached on purpose rather than stumbled on
-        //
-        // Four consecutive rails of figures used to sit between the two feed
-        // blocks and the filing hero — indices, breadth, the unusual rail and
-        // connect-dots, one section label each and not a sentence between
-        // them. That is the stretch where a ninety-second reader gives up, and
-        // it pushed the largest card on the screen, the only one carrying a
-        // written reason, into eighth place.
-        const BLeadStory(),
-        // Both feeds behind one selector. They were stacked — a dozen
-        // headlines, a market block, then ten filings further down — and both
-        // answer "what happened today", so a reader after one had to scroll
-        // past the other to reach it.
-        const BFeedTabs(),
-        // The lead filing keeps its own card. It is not the same thing as the
-        // filings list behind the tab: this one is the single disclosure worth
-        // the largest card on the screen, with the measured reason it leads.
-        BSectionLabel(l.homeFiledHero),
-        const _DailyInsight(),
-        // One heading over the two blocks that answer "how did the market
-        // do", rather than two headings that read as unrelated products.
-        BSectionLabel(l.homeIndices),
-        const _Indices(),
-        const _Breadth(),
-        // And one over the two that answer "which companies" — with, at last,
-        // the sentence saying what "unusually" means. The rail below it has
-        // been speaking that vocabulary on the first screen of the app since
-        // it was written, while the explanation sat two taps deep inside an
-        // individual company page.
-        BSectionLabel(l.homeWhichCompanies),
-        const BTeachingLine(),
-        const BUnusualRail(),
-        // Where the feeds cross. Placed under the session numbers because it
-        // is the thing that reads them together with everything else.
-        const BConnectDots(),
-        const BMacroBlock(),
-        const _WatchlistBlock(),
+
+        // While something is typed, the screen is the search. Showing eleven
+        // blocks of market furniture under a list of results is asking a
+        // reader to scroll past the answer.
+        if (query.isNotEmpty)
+          _SearchResults(
+            query: query,
+            onClear: () => setState(() {
+              _query = '';
+              _search.clear();
+            }),
+          )
+        else ...[
+          // What a reader cannot get anywhere else, in the order they would
+          // ask for it.
+          //
+          // Home used to open with two feeds — a photo carousel of six stories
+          // and a selector over five more stories or five more filings — and
+          // every document in both was also on Today. Not "similar": the same
+          // ids, six filings of six and eleven stories of eleven, verified
+          // against the bundled fixtures. That is roughly 2,000pt of Home
+          // spent on a shorter, worse copy of the next tab, which also
+          // silently dropped any filing naming more than one company.
+          //
+          // So the feeds moved to Today, where they are complete and paged,
+          // and Home keeps only what is Home's:
+          //
+          //   1. the busiest sessions against each company's own normal
+          //   2. how the whole market moved
+          //   3. the one announcement worth the largest card on the screen
+          //   4. what moves Egypt, which the rest is read against
+          //   5. the watchlist, reached on purpose rather than stumbled on
+          BSectionLabel(l.homeWhichCompanies),
+          const BTeachingLine(),
+          const BBusiest(),
+          BSectionLabel(l.homeIndices),
+          const _Indices(),
+          const _Breadth(),
+          // The lead filing keeps its own card. It is not the same thing as
+          // the filings list on Today: this one is the single disclosure worth
+          // the largest card on the screen, with the measured reason it leads.
+          // The one announcement worth the largest card on the screen, and a
+          // way to the other seventy-nine.
+          //
+          // Home no longer carries a filings list — Today's is complete, paged
+          // and does not drop the multi-issuer filings Home's copy silently
+          // filtered out — so this is the route to it, and it lands on the
+          // section rather than at the top of a very long screen.
+          BSectionLabel(
+            l.homeFiledHero,
+            trailing: BInlineAction(
+              l.homeAllFilings,
+              onTap: () {
+                ref
+                    .read(todaySectionRequestProvider.notifier)
+                    .ask(TodaySection.filings);
+                context.go(Routes.today);
+              },
+            ),
+          ),
+          const _DailyInsight(),
+          const BMacroBlock(),
+          const _WatchlistBlock(),
+        ],
       ],
+    );
+  }
+}
+
+/// The directory, answered where it was asked.
+class _SearchResults extends ConsumerWidget {
+  const _SearchResults({required this.query, required this.onClear});
+
+  final String query;
+  final VoidCallback onClear;
+
+  /// Enough to recognise the one they meant, and a way to the rest.
+  static const int shown = 6;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final results = ref.watch(searchResultsProvider(query));
+    final snapshot = ref.watch(livePricesProvider);
+
+    if (results.isEmpty) {
+      return BEmptyState(
+        title: l.homeSearchNone(query),
+        body: l.directoryNotOnDeviceBody,
+        actionLabel: l.studyClearFilters,
+        onAction: onClear,
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BGroupedListCard(
+          rows: [
+            for (final company in results.take(shown))
+              _ResultRow(
+                company: company,
+                quote: snapshot?.quoteFor(company.ticker),
+                arabic: arabic,
+              ),
+          ],
+        ),
+        if (results.length > shown) ...[
+          const SizedBox(height: 10),
+          BLoadMoreButton(
+            label: l.homeSearchMore(results.length),
+            onTap: () => context.push(Routes.directoryPath(BNavTab.home)),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _ResultRow extends StatelessWidget {
+  const _ResultRow({
+    required this.company,
+    required this.quote,
+    required this.arabic,
+  });
+
+  final CompanySummary company;
+  final StockQuote? quote;
+  final bool arabic;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    final change = quote?.resolvedChangePercent;
+    // The reader's own language leads, as it does in the directory.
+    final lead = arabic && company.nameAr != null;
+
+    return BListRow(
+      leading: BTickerMonogram(company.ticker, sector: company.sector),
+      title: lead ? company.nameAr! : company.nameEn,
+      titleIsArabic: lead,
+      subtitle: lead ? company.nameEn : company.nameAr,
+      subtitleIsArabic: !lead && company.nameAr != null,
+      onTap: () =>
+          context.push(Routes.companyPath(BNavTab.home, company.ticker)),
+      trailing: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          BNumText(
+            quote == null ? '—' : quote!.close.toStringAsFixed(2),
+            style: BarbarianType.figureS.copyWith(color: c.textPrimary),
+          ),
+          if (change != null) ...[
+            const SizedBox(height: 4),
+            BChangeDelta(
+              value: '${(change.abs() * 100).toStringAsFixed(2)}%',
+              direction: BDirection.of(change),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

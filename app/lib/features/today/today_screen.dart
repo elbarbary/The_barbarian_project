@@ -17,6 +17,8 @@ import '../../core/widgets/composites.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import '../home/lead_story.dart';
+import '../home/connect_dots.dart';
 import '../../l10n/app_localizations.dart';
 import '../../core/models/recency.dart';
 
@@ -103,11 +105,21 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
       children: [
         const _TodayHeader(),
         const _ScannerHero(),
+        // The day's stories, at the size a story deserves.
+        //
+        // This carousel was on Home, and every one of its six stories was also
+        // in Today's feed below — the same ids, not merely similar ones. It
+        // belongs on the screen that carries the news, at the top of it, where
+        // the photograph is the way in rather than a second printing.
+        const BLeadStory(parentTab: BNavTab.today),
+        // And then what those documents have in common, before the feeds they
+        // were drawn from. Reading the crossings after scrolling eighty
+        // filings is reading them too late.
+        const BConnectDots(parentTab: BNavTab.today),
         const BRatesBlock(),
-        // The same two feeds, the same selector. Today is the full version —
-        // Home shows five of each and sends the reader here for the rest — so
-        // both anchors stay live for the scroll-to-section request even while
-        // only one feed is on screen.
+        // Both feeds, complete and paged. Today is the only place they are
+        // complete — Home's copies were five rows each and dropped every
+        // filing naming more than one company.
         BTodayFeeds(filingsKey: _filings, newsKey: _news),
         if (isSample) const Center(child: BSampleDataNotice()),
         const BLegalFootnote(),

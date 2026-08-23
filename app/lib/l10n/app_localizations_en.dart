@@ -839,11 +839,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get dotsLabel => 'Connecting the dots';
+  String get dotsLabel => 'What ties these together';
 
   @override
   String dotsBody(int days) {
-    return 'Companies that turned up in more than one place in the last $days days. Every line links to the thing it came from.';
+    return 'Companies that turned up in more than one place in the last $days days — with what those places have in common.';
   }
 
   @override
@@ -1878,7 +1878,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get homeWhichCompanies => 'Which companies moved unusually';
+  String get homeWhichCompanies => 'Busiest against their own normal';
 
   @override
   String get volumeTeaching =>
@@ -2192,4 +2192,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get provenanceInterpretation => 'Interpretation';
+
+  @override
+  String get dotsWhatTheyShare => 'What they share';
+
+  @override
+  String busyBody(int count) {
+    return '$count companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.';
+  }
+
+  @override
+  String get busyNone =>
+      'No company traded far outside its own normal today. A quiet day is a real answer.';
+
+  @override
+  String get busyFiledToo => 'Announced something';
+
+  @override
+  String busyFloorNote(String amount) {
+    return 'Companies trading less than $amount in the session are left out: a multiple of a very small number is arithmetic, not news.';
+  }
+
+  @override
+  String get homeSearchHint => 'Search a company, or a symbol';
+
+  @override
+  String homeSearchNone(String query) {
+    return 'Nothing matches “$query”';
+  }
+
+  @override
+  String homeSearchMore(int count) {
+    return 'See all $count results';
+  }
 }

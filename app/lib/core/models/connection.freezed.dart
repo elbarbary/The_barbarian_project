@@ -295,7 +295,21 @@ mixin _$Connection {
  List<String> get kinds;/// The published facts, joined by "and" and stopping there. Written at
 /// build time from fixed templates and refused if they ever read as an
 /// instruction (§8).
- String get why;@JsonKey(name: 'why_ar') String get whyAr; double? get ratio; List<Strand> get strands;
+ String get why;@JsonKey(name: 'why_ar') String get whyAr;/// What the documents have in common, as counts over the filings feed —
+/// "Eight companies filed an insider dealing form that day."
+///
+/// This is the part that makes a card about one company a fact about the
+/// day. Absent where there is nothing countable to say, which is honest:
+/// a card that always has a second sentence teaches a reader to skip it.
+ String? get insight;@JsonKey(name: 'insight_ar') String? get insightAr;/// The company's own name, which the card never showed — it showed four
+/// letters. 266 of 280 companies carry an Arabic one.
+ String? get name;@JsonKey(name: 'name_ar') String? get nameAr; String? get sector;/// The filing type every filing in the window shared, where they shared
+/// one. Null when a company filed two different kinds of thing.
+ String? get event;@JsonKey(name: 'event_label') String? get eventLabel;@JsonKey(name: 'event_label_ar') String? get eventLabelAr;/// The other companies that filed the same kind of thing on the same day.
+ List<String> get peers;/// How many of those share this company's sector, when it is more than
+/// one. Zero rather than one, because "one of them is in the same sector"
+/// is a sentence about this company and says nothing.
+@JsonKey(name: 'same_sector') int get sameSector; double? get ratio;@JsonKey(name: 'change_percent') double? get changePercent; List<Strand> get strands;
 /// Create a copy of Connection
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -308,16 +322,16 @@ $ConnectionCopyWith<Connection> get copyWith => _$ConnectionCopyWithImpl<Connect
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Connection&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other.kinds, kinds)&&(identical(other.why, why) || other.why == why)&&(identical(other.whyAr, whyAr) || other.whyAr == whyAr)&&(identical(other.ratio, ratio) || other.ratio == ratio)&&const DeepCollectionEquality().equals(other.strands, strands));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Connection&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other.kinds, kinds)&&(identical(other.why, why) || other.why == why)&&(identical(other.whyAr, whyAr) || other.whyAr == whyAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.insightAr, insightAr) || other.insightAr == insightAr)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&const DeepCollectionEquality().equals(other.peers, peers)&&(identical(other.sameSector, sameSector) || other.sameSector == sameSector)&&(identical(other.ratio, ratio) || other.ratio == ratio)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&const DeepCollectionEquality().equals(other.strands, strands));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(kinds),why,whyAr,ratio,const DeepCollectionEquality().hash(strands));
+int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(kinds),why,whyAr,insight,insightAr,name,nameAr,sector,event,eventLabel,eventLabelAr,const DeepCollectionEquality().hash(peers),sameSector,ratio,changePercent,const DeepCollectionEquality().hash(strands));
 
 @override
 String toString() {
-  return 'Connection(ticker: $ticker, kinds: $kinds, why: $why, whyAr: $whyAr, ratio: $ratio, strands: $strands)';
+  return 'Connection(ticker: $ticker, kinds: $kinds, why: $why, whyAr: $whyAr, insight: $insight, insightAr: $insightAr, name: $name, nameAr: $nameAr, sector: $sector, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, peers: $peers, sameSector: $sameSector, ratio: $ratio, changePercent: $changePercent, strands: $strands)';
 }
 
 
@@ -328,7 +342,7 @@ abstract mixin class $ConnectionCopyWith<$Res>  {
   factory $ConnectionCopyWith(Connection value, $Res Function(Connection) _then) = _$ConnectionCopyWithImpl;
 @useResult
 $Res call({
- String ticker, List<String> kinds, String why,@JsonKey(name: 'why_ar') String whyAr, double? ratio, List<Strand> strands
+ String ticker, List<String> kinds, String why,@JsonKey(name: 'why_ar') String whyAr, String? insight,@JsonKey(name: 'insight_ar') String? insightAr, String? name,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String? event,@JsonKey(name: 'event_label') String? eventLabel,@JsonKey(name: 'event_label_ar') String? eventLabelAr, List<String> peers,@JsonKey(name: 'same_sector') int sameSector, double? ratio,@JsonKey(name: 'change_percent') double? changePercent, List<Strand> strands
 });
 
 
@@ -345,13 +359,24 @@ class _$ConnectionCopyWithImpl<$Res>
 
 /// Create a copy of Connection
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? kinds = null,Object? why = null,Object? whyAr = null,Object? ratio = freezed,Object? strands = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? kinds = null,Object? why = null,Object? whyAr = null,Object? insight = freezed,Object? insightAr = freezed,Object? name = freezed,Object? nameAr = freezed,Object? sector = freezed,Object? event = freezed,Object? eventLabel = freezed,Object? eventLabelAr = freezed,Object? peers = null,Object? sameSector = null,Object? ratio = freezed,Object? changePercent = freezed,Object? strands = null,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,kinds: null == kinds ? _self.kinds : kinds // ignore: cast_nullable_to_non_nullable
 as List<String>,why: null == why ? _self.why : why // ignore: cast_nullable_to_non_nullable
 as String,whyAr: null == whyAr ? _self.whyAr : whyAr // ignore: cast_nullable_to_non_nullable
-as String,ratio: freezed == ratio ? _self.ratio : ratio // ignore: cast_nullable_to_non_nullable
+as String,insight: freezed == insight ? _self.insight : insight // ignore: cast_nullable_to_non_nullable
+as String?,insightAr: freezed == insightAr ? _self.insightAr : insightAr // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,nameAr: freezed == nameAr ? _self.nameAr : nameAr // ignore: cast_nullable_to_non_nullable
+as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as String?,event: freezed == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
+as String?,eventLabel: freezed == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
+as String?,eventLabelAr: freezed == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
+as String?,peers: null == peers ? _self.peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,sameSector: null == sameSector ? _self.sameSector : sameSector // ignore: cast_nullable_to_non_nullable
+as int,ratio: freezed == ratio ? _self.ratio : ratio // ignore: cast_nullable_to_non_nullable
+as double?,changePercent: freezed == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double?,strands: null == strands ? _self.strands : strands // ignore: cast_nullable_to_non_nullable
 as List<Strand>,
   ));
@@ -438,10 +463,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  double? ratio,  List<Strand> strands)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  String? insight, @JsonKey(name: 'insight_ar')  String? insightAr,  String? name, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String? event, @JsonKey(name: 'event_label')  String? eventLabel, @JsonKey(name: 'event_label_ar')  String? eventLabelAr,  List<String> peers, @JsonKey(name: 'same_sector')  int sameSector,  double? ratio, @JsonKey(name: 'change_percent')  double? changePercent,  List<Strand> strands)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Connection() when $default != null:
-return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that.strands);case _:
+return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.insight,_that.insightAr,_that.name,_that.nameAr,_that.sector,_that.event,_that.eventLabel,_that.eventLabelAr,_that.peers,_that.sameSector,_that.ratio,_that.changePercent,_that.strands);case _:
   return orElse();
 
 }
@@ -459,10 +484,10 @@ return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  double? ratio,  List<Strand> strands)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  String? insight, @JsonKey(name: 'insight_ar')  String? insightAr,  String? name, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String? event, @JsonKey(name: 'event_label')  String? eventLabel, @JsonKey(name: 'event_label_ar')  String? eventLabelAr,  List<String> peers, @JsonKey(name: 'same_sector')  int sameSector,  double? ratio, @JsonKey(name: 'change_percent')  double? changePercent,  List<Strand> strands)  $default,) {final _that = this;
 switch (_that) {
 case _Connection():
-return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that.strands);case _:
+return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.insight,_that.insightAr,_that.name,_that.nameAr,_that.sector,_that.event,_that.eventLabel,_that.eventLabelAr,_that.peers,_that.sameSector,_that.ratio,_that.changePercent,_that.strands);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -479,10 +504,10 @@ return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  double? ratio,  List<Strand> strands)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  List<String> kinds,  String why, @JsonKey(name: 'why_ar')  String whyAr,  String? insight, @JsonKey(name: 'insight_ar')  String? insightAr,  String? name, @JsonKey(name: 'name_ar')  String? nameAr,  String? sector,  String? event, @JsonKey(name: 'event_label')  String? eventLabel, @JsonKey(name: 'event_label_ar')  String? eventLabelAr,  List<String> peers, @JsonKey(name: 'same_sector')  int sameSector,  double? ratio, @JsonKey(name: 'change_percent')  double? changePercent,  List<Strand> strands)?  $default,) {final _that = this;
 switch (_that) {
 case _Connection() when $default != null:
-return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that.strands);case _:
+return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.insight,_that.insightAr,_that.name,_that.nameAr,_that.sector,_that.event,_that.eventLabel,_that.eventLabelAr,_that.peers,_that.sameSector,_that.ratio,_that.changePercent,_that.strands);case _:
   return null;
 
 }
@@ -494,7 +519,7 @@ return $default(_that.ticker,_that.kinds,_that.why,_that.whyAr,_that.ratio,_that
 @JsonSerializable()
 
 class _Connection extends Connection {
-  const _Connection({this.ticker = '', final  List<String> kinds = const <String>[], this.why = '', @JsonKey(name: 'why_ar') this.whyAr = '', this.ratio, final  List<Strand> strands = const <Strand>[]}): _kinds = kinds,_strands = strands,super._();
+  const _Connection({this.ticker = '', final  List<String> kinds = const <String>[], this.why = '', @JsonKey(name: 'why_ar') this.whyAr = '', this.insight, @JsonKey(name: 'insight_ar') this.insightAr, this.name, @JsonKey(name: 'name_ar') this.nameAr, this.sector, this.event, @JsonKey(name: 'event_label') this.eventLabel, @JsonKey(name: 'event_label_ar') this.eventLabelAr, final  List<String> peers = const <String>[], @JsonKey(name: 'same_sector') this.sameSector = 0, this.ratio, @JsonKey(name: 'change_percent') this.changePercent, final  List<Strand> strands = const <Strand>[]}): _kinds = kinds,_peers = peers,_strands = strands,super._();
   factory _Connection.fromJson(Map<String, dynamic> json) => _$ConnectionFromJson(json);
 
 @override@JsonKey() final  String ticker;
@@ -514,7 +539,39 @@ class _Connection extends Connection {
 /// instruction (§8).
 @override@JsonKey() final  String why;
 @override@JsonKey(name: 'why_ar') final  String whyAr;
+/// What the documents have in common, as counts over the filings feed —
+/// "Eight companies filed an insider dealing form that day."
+///
+/// This is the part that makes a card about one company a fact about the
+/// day. Absent where there is nothing countable to say, which is honest:
+/// a card that always has a second sentence teaches a reader to skip it.
+@override final  String? insight;
+@override@JsonKey(name: 'insight_ar') final  String? insightAr;
+/// The company's own name, which the card never showed — it showed four
+/// letters. 266 of 280 companies carry an Arabic one.
+@override final  String? name;
+@override@JsonKey(name: 'name_ar') final  String? nameAr;
+@override final  String? sector;
+/// The filing type every filing in the window shared, where they shared
+/// one. Null when a company filed two different kinds of thing.
+@override final  String? event;
+@override@JsonKey(name: 'event_label') final  String? eventLabel;
+@override@JsonKey(name: 'event_label_ar') final  String? eventLabelAr;
+/// The other companies that filed the same kind of thing on the same day.
+ final  List<String> _peers;
+/// The other companies that filed the same kind of thing on the same day.
+@override@JsonKey() List<String> get peers {
+  if (_peers is EqualUnmodifiableListView) return _peers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_peers);
+}
+
+/// How many of those share this company's sector, when it is more than
+/// one. Zero rather than one, because "one of them is in the same sector"
+/// is a sentence about this company and says nothing.
+@override@JsonKey(name: 'same_sector') final  int sameSector;
 @override final  double? ratio;
+@override@JsonKey(name: 'change_percent') final  double? changePercent;
  final  List<Strand> _strands;
 @override@JsonKey() List<Strand> get strands {
   if (_strands is EqualUnmodifiableListView) return _strands;
@@ -536,16 +593,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Connection&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other._kinds, _kinds)&&(identical(other.why, why) || other.why == why)&&(identical(other.whyAr, whyAr) || other.whyAr == whyAr)&&(identical(other.ratio, ratio) || other.ratio == ratio)&&const DeepCollectionEquality().equals(other._strands, _strands));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Connection&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other._kinds, _kinds)&&(identical(other.why, why) || other.why == why)&&(identical(other.whyAr, whyAr) || other.whyAr == whyAr)&&(identical(other.insight, insight) || other.insight == insight)&&(identical(other.insightAr, insightAr) || other.insightAr == insightAr)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.event, event) || other.event == event)&&(identical(other.eventLabel, eventLabel) || other.eventLabel == eventLabel)&&(identical(other.eventLabelAr, eventLabelAr) || other.eventLabelAr == eventLabelAr)&&const DeepCollectionEquality().equals(other._peers, _peers)&&(identical(other.sameSector, sameSector) || other.sameSector == sameSector)&&(identical(other.ratio, ratio) || other.ratio == ratio)&&(identical(other.changePercent, changePercent) || other.changePercent == changePercent)&&const DeepCollectionEquality().equals(other._strands, _strands));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(_kinds),why,whyAr,ratio,const DeepCollectionEquality().hash(_strands));
+int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(_kinds),why,whyAr,insight,insightAr,name,nameAr,sector,event,eventLabel,eventLabelAr,const DeepCollectionEquality().hash(_peers),sameSector,ratio,changePercent,const DeepCollectionEquality().hash(_strands));
 
 @override
 String toString() {
-  return 'Connection(ticker: $ticker, kinds: $kinds, why: $why, whyAr: $whyAr, ratio: $ratio, strands: $strands)';
+  return 'Connection(ticker: $ticker, kinds: $kinds, why: $why, whyAr: $whyAr, insight: $insight, insightAr: $insightAr, name: $name, nameAr: $nameAr, sector: $sector, event: $event, eventLabel: $eventLabel, eventLabelAr: $eventLabelAr, peers: $peers, sameSector: $sameSector, ratio: $ratio, changePercent: $changePercent, strands: $strands)';
 }
 
 
@@ -556,7 +613,7 @@ abstract mixin class _$ConnectionCopyWith<$Res> implements $ConnectionCopyWith<$
   factory _$ConnectionCopyWith(_Connection value, $Res Function(_Connection) _then) = __$ConnectionCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, List<String> kinds, String why,@JsonKey(name: 'why_ar') String whyAr, double? ratio, List<Strand> strands
+ String ticker, List<String> kinds, String why,@JsonKey(name: 'why_ar') String whyAr, String? insight,@JsonKey(name: 'insight_ar') String? insightAr, String? name,@JsonKey(name: 'name_ar') String? nameAr, String? sector, String? event,@JsonKey(name: 'event_label') String? eventLabel,@JsonKey(name: 'event_label_ar') String? eventLabelAr, List<String> peers,@JsonKey(name: 'same_sector') int sameSector, double? ratio,@JsonKey(name: 'change_percent') double? changePercent, List<Strand> strands
 });
 
 
@@ -573,13 +630,24 @@ class __$ConnectionCopyWithImpl<$Res>
 
 /// Create a copy of Connection
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? kinds = null,Object? why = null,Object? whyAr = null,Object? ratio = freezed,Object? strands = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? kinds = null,Object? why = null,Object? whyAr = null,Object? insight = freezed,Object? insightAr = freezed,Object? name = freezed,Object? nameAr = freezed,Object? sector = freezed,Object? event = freezed,Object? eventLabel = freezed,Object? eventLabelAr = freezed,Object? peers = null,Object? sameSector = null,Object? ratio = freezed,Object? changePercent = freezed,Object? strands = null,}) {
   return _then(_Connection(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,kinds: null == kinds ? _self._kinds : kinds // ignore: cast_nullable_to_non_nullable
 as List<String>,why: null == why ? _self.why : why // ignore: cast_nullable_to_non_nullable
 as String,whyAr: null == whyAr ? _self.whyAr : whyAr // ignore: cast_nullable_to_non_nullable
-as String,ratio: freezed == ratio ? _self.ratio : ratio // ignore: cast_nullable_to_non_nullable
+as String,insight: freezed == insight ? _self.insight : insight // ignore: cast_nullable_to_non_nullable
+as String?,insightAr: freezed == insightAr ? _self.insightAr : insightAr // ignore: cast_nullable_to_non_nullable
+as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,nameAr: freezed == nameAr ? _self.nameAr : nameAr // ignore: cast_nullable_to_non_nullable
+as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as String?,event: freezed == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
+as String?,eventLabel: freezed == eventLabel ? _self.eventLabel : eventLabel // ignore: cast_nullable_to_non_nullable
+as String?,eventLabelAr: freezed == eventLabelAr ? _self.eventLabelAr : eventLabelAr // ignore: cast_nullable_to_non_nullable
+as String?,peers: null == peers ? _self._peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,sameSector: null == sameSector ? _self.sameSector : sameSector // ignore: cast_nullable_to_non_nullable
+as int,ratio: freezed == ratio ? _self.ratio : ratio // ignore: cast_nullable_to_non_nullable
+as double?,changePercent: freezed == changePercent ? _self.changePercent : changePercent // ignore: cast_nullable_to_non_nullable
 as double?,strands: null == strands ? _self._strands : strands // ignore: cast_nullable_to_non_nullable
 as List<Strand>,
   ));

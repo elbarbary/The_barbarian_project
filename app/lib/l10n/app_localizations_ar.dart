@@ -834,11 +834,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get dotsLabel => 'ربط الخيوط';
+  String get dotsLabel => 'ما الذي يربط بينها';
 
   @override
   String dotsBody(int days) {
-    return 'شركات ظهرت في أكثر من مكان خلال $days أيام. كل سطر يرتبط بمصدره.';
+    return 'شركات ظهرت في أكثر من مكان خلال $days أيام — ومعها ما يجمع بين تلك المواضع.';
   }
 
   @override
@@ -1869,7 +1869,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get homeWhichCompanies => 'أي الشركات تحرّكت بشكل غير معتاد';
+  String get homeWhichCompanies => 'الأنشط مقارنة بمعتادها';
 
   @override
   String get volumeTeaching =>
@@ -2180,4 +2180,37 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get provenanceInterpretation => 'تفسير';
+
+  @override
+  String get dotsWhatTheyShare => 'ما يجمع بينها';
+
+  @override
+  String busyBody(int count) {
+    return '$count شركة تداولت اليوم بما لا يقل عن ضعف معدلها المعتاد. هذه أنشطها، والقائمة لا تتوقف على وجود إعلان من عدمه.';
+  }
+
+  @override
+  String get busyNone =>
+      'لم تتداول أي شركة بعيدًا عن معتادها اليوم. واليوم الهادئ إجابة حقيقية.';
+
+  @override
+  String get busyFiledToo => 'أعلنت شيئًا';
+
+  @override
+  String busyFloorNote(String amount) {
+    return 'تُستبعد الشركات التي تداولت بأقل من $amount في الجلسة: فمضاعفة رقم صغير جدًا حساب لا خبر.';
+  }
+
+  @override
+  String get homeSearchHint => 'ابحث عن شركة أو رمز';
+
+  @override
+  String homeSearchNone(String query) {
+    return 'لا شيء يطابق «$query»';
+  }
+
+  @override
+  String homeSearchMore(int count) {
+    return 'اعرض كل النتائج ($count)';
+  }
 }

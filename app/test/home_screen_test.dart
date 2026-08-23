@@ -7,6 +7,10 @@ import 'package:barbarian/core/models/rates.dart';
 import 'package:barbarian/core/models/market_history.dart';
 import 'package:barbarian/core/models/macro.dart';
 import 'package:flutter/widgets.dart';
+import 'package:barbarian/features/home/busiest.dart';
+import 'package:barbarian/features/home/connect_dots.dart';
+import 'package:barbarian/features/home/lead_story.dart';
+import 'package:barbarian/features/today/today_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -219,32 +223,36 @@ void main() {
     );
   });
 
-  testWidgets('the two feeds share a place and the reader picks', (
+  testWidgets('the two feeds are on Today, and Home does not copy them', (
     tester,
   ) async {
-    // They were stacked — a dozen headlines, a market block, then ten filings
-    // further down — and both answer "what happened today", so a reader after
-    // one had to scroll past the other to reach it.
+    // Home used to carry a photo carousel of six stories and a selector over
+    // five more stories or five more filings — and every document in all
+    // three was also on Today. Not "similar": the same ids, six filings of
+    // six and eleven stories of eleven. That is roughly 2,000pt of the
+    // landing screen spent on a shorter, worse copy of the next tab, which
+    // also silently dropped every filing naming more than one company.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.text('News'));
+    await pumpUntil(tester, find.byType(BBusiest));
 
-    expect(find.text('News'), findsWidgets);
-    expect(find.text('From the exchange'), findsWidgets);
-    // News is the default: this is a news app.
-    expect(find.textContaining('All news'), findsWidgets);
+    expect(find.text('From the exchange'), findsNothing);
+    expect(find.textContaining('All news'), findsNothing);
+    expect(find.byType(BLeadStory), findsNothing);
+    expect(find.byType(BConnectDots), findsNothing);
   });
 
-  test('the feeds behind the tabs are short, and the rest is a tap away', () {
-    // Five rows is enough to see there is a feed and short enough that the
-    // screen keeps moving. Twelve under a lead story turned Home into a list
-    // to be scrolled past rather than read.
-    final source = File('lib/features/home/feed_tabs.dart').readAsStringSync();
-    expect(source.contains('limit: 5'), isTrue);
-    expect(
-      source.contains('showHeader: false'),
-      isTrue,
-      reason: 'the tab already names the feed; a second header repeats it',
-    );
+  testWidgets('Today carries them instead, in reading order', (tester) async {
+    await pumpScreen(tester, const TodayScreen());
+    await pumpUntil(tester, find.byType(BLeadStory));
+
+    // The stories, then what those documents have in common, then the feeds
+    // they were drawn from. Reading the crossings after scrolling eighty
+    // filings is reading them too late.
+    final lead = tester.getTopLeft(find.byType(BLeadStory)).dy;
+    final dots = tester.getTopLeft(find.byType(BConnectDots)).dy;
+    final feeds = tester.getTopLeft(find.byType(BTodayFeeds)).dy;
+    expect(lead, lessThan(dots));
+    expect(dots, lessThan(feeds));
   });
 
   testWidgets('§8 the macro block explains and never instructs', (

@@ -46,7 +46,13 @@ List<NewsItem> leadStories(List<NewsItem> items) => [
 ].take(6).toList();
 
 class BLeadStory extends ConsumerWidget {
-  const BLeadStory({super.key});
+  const BLeadStory({this.parentTab = BNavTab.home, super.key});
+
+  /// Which navigation slot stays lit when a company or a document opens from
+  /// here. Hard-coded to Home while this block lived only on Home; it is on
+  /// Today now, and a push that lights the wrong tab is the one navigation
+  /// rule `router.dart` is explicit about.
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -88,7 +94,11 @@ class BLeadStory extends ConsumerWidget {
               // A shade under the screen so the next card's edge shows, which
               // is the only thing that says the rail scrolls at all.
               width: MediaQuery.sizeOf(context).width * 0.82,
-              child: _LeadCard(item: leads[i], byId: byId),
+              child: _LeadCard(
+                item: leads[i],
+                byId: byId,
+                parentTab: parentTab,
+              ),
             ),
           ),
         ),
@@ -99,10 +109,15 @@ class BLeadStory extends ConsumerWidget {
 
 /// One story in the rail.
 class _LeadCard extends StatelessWidget {
-  const _LeadCard({required this.item, required this.byId});
+  const _LeadCard({
+    required this.item,
+    required this.byId,
+    required this.parentTab,
+  });
 
   final NewsItem item;
   final Map<String, String> byId;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +141,7 @@ class _LeadCard extends StatelessWidget {
         if (link.isEmpty) return;
         context.push(
           Routes.articlePath(
-            BNavTab.home,
+            parentTab,
             link,
             outlet.isEmpty ? l.homeLeadStory : outlet,
           ),

@@ -1,5 +1,5 @@
 import 'package:barbarian/core/models/news.dart';
-import 'package:barbarian/features/home/home_screen.dart';
+import 'package:barbarian/features/today/today_screen.dart';
 import 'package:barbarian/features/home/connect_dots.dart';
 import 'package:barbarian/features/home/lead_story.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -52,11 +52,14 @@ void main() {
     );
   });
 
-  testWidgets('Home does not render one headline twice', (tester) async {
+  testWidgets('Today does not render one headline twice', (tester) async {
     final feed = NewsFeed.fromJson(readFixtureObjectSync('news/latest.json'));
     final lead = leadStories(feed.items).first;
 
-    await pumpScreen(tester, const HomeScreen());
+    // The rail and the feed are both on Today now. Home carried a copy of
+    // each and every document in both was also here, so the copies went and
+    // the originals stayed — which puts this test's subject on this screen.
+    await pumpScreen(tester, const TodayScreen());
     // Wait for the feed itself, not for the widget that will hold it: the
     // rail returns an empty box until the document arrives, so a test that
     // waits on `BLeadStory` counts an empty screen and passes.
@@ -94,7 +97,7 @@ void main() {
       1,
       reason:
           '"${lead.headline}" is on screen $shown times outside the '
-          'connect-the-dots block — the rail and the list are both '
+          'connect-the-dots block — the rail and the feed are both '
           'carrying it',
     );
   });

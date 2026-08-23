@@ -1,5 +1,6 @@
 import 'package:barbarian/core/models/disclosure.dart';
-import 'package:barbarian/features/home/home_screen.dart';
+import 'package:barbarian/features/today/disclosures_block.dart';
+import 'package:barbarian/features/today/today_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -24,21 +25,35 @@ void main() {
     );
     expect(feed.items, isNotEmpty);
 
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
+    // The feed selector lives on Today now; Home's five-row copy of it is
+    // gone, along with the rest of the duplication.
+    await pumpScreen(tester, const TodayScreen());
+    await pumpUntil(tester, find.text('From the exchange'));
 
     // Switch the feed selector to the exchange.
-    await tester.tap(find.text('From the exchange'));
-    await tester.pumpAndSettle();
+    await tapVisible(tester, find.text('From the exchange'));
+    // Wait for the document, not for the widget: the block renders its empty
+    // state — "the board has not published yet" — until the feed arrives, and
+    // a test that waits on the widget counts that as a loaded screen.
+    await pumpUntil(
+      tester,
+      find.textContaining(RegExp(r'\d+ of \d+|announcements')),
+    );
 
     // Every row on screen names its own filing rather than only its issuer.
-    final shown = feed.items.take(5);
+    //
+    // In whichever language it was filed in: 36 of 80 items carry an English
+    // title and the rest are Arabic only, so asking for `titleFor(false)`
+    // asks half of them for a string they do not have.
+    final shown = feed.items.take(12);
     var found = 0;
     for (final item in shown) {
-      if (find.text(item.titleFor(false)).evaluate().isNotEmpty) found++;
+      for (final title in {item.titleFor(false), item.titleFor(true)}) {
+        if (title.isNotEmpty && find.text(title).evaluate().isNotEmpty) {
+          found++;
+          break;
+        }
+      }
     }
     expect(
       found,

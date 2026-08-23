@@ -17,6 +17,7 @@ import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/insight.dart';
 import '../../core/widgets/load_more.dart';
 import '../../core/widgets/text.dart';
+import '../home/lead_story.dart';
 
 /// The headlines, sorted by whether anybody needs to read them.
 ///
@@ -60,8 +61,22 @@ class _BNewsBlockState extends ConsumerState<BNewsBlock> {
     final feed = ref.watch(newsProvider).value?.value;
     if (feed == null || feed.isEmpty) return const SizedBox.shrink();
 
-    final checks = feed.worthAChecking;
-    final all = feed.items.where((i) => i.weight != 'check').toList();
+    // Not the stories the rail above is already carrying.
+    //
+    // `BLeadStory` sits at the top of this screen and takes the first six
+    // illustrated stories of the top 24; this feed took the top of the same
+    // ranked list, so the two printed the same headlines in the same order.
+    // Home had this exclusion and Today did not, because until now the rail
+    // was on Home.
+    final leads = {for (final story in leadStories(feed.items)) story.id};
+    final checks = [
+      for (final item in feed.worthAChecking)
+        if (!leads.contains(item.id)) item,
+    ];
+    final all = [
+      for (final item in feed.items)
+        if (item.weight != 'check' && !leads.contains(item.id)) item,
+    ];
     final rest = all.take(_shown).toList();
 
     return Column(

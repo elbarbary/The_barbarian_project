@@ -1553,13 +1553,13 @@ abstract class AppLocalizations {
   /// No description provided for @dotsLabel.
   ///
   /// In en, this message translates to:
-  /// **'Connecting the dots'**
+  /// **'What ties these together'**
   String get dotsLabel;
 
   /// No description provided for @dotsBody.
   ///
   /// In en, this message translates to:
-  /// **'Companies that turned up in more than one place in the last {days} days. Every line links to the thing it came from.'**
+  /// **'Companies that turned up in more than one place in the last {days} days — with what those places have in common.'**
   String dotsBody(int days);
 
   /// No description provided for @dotsFiling.
@@ -3227,7 +3227,7 @@ abstract class AppLocalizations {
   /// No description provided for @homeWhichCompanies.
   ///
   /// In en, this message translates to:
-  /// **'Which companies moved unusually'**
+  /// **'Busiest against their own normal'**
   String get homeWhichCompanies;
 
   /// No description provided for @volumeTeaching.
@@ -3721,6 +3721,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Interpretation'**
   String get provenanceInterpretation;
+
+  /// No description provided for @dotsWhatTheyShare.
+  ///
+  /// In en, this message translates to:
+  /// **'What they share'**
+  String get dotsWhatTheyShare;
+
+  /// No description provided for @busyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.'**
+  String busyBody(int count);
+
+  /// No description provided for @busyNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No company traded far outside its own normal today. A quiet day is a real answer.'**
+  String get busyNone;
+
+  /// No description provided for @busyFiledToo.
+  ///
+  /// In en, this message translates to:
+  /// **'Announced something'**
+  String get busyFiledToo;
+
+  /// No description provided for @busyFloorNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies trading less than {amount} in the session are left out: a multiple of a very small number is arithmetic, not news.'**
+  String busyFloorNote(String amount);
+
+  /// No description provided for @homeSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search a company, or a symbol'**
+  String get homeSearchHint;
+
+  /// No description provided for @homeSearchNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches “{query}”'**
+  String homeSearchNone(String query);
+
+  /// No description provided for @homeSearchMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See all {count} results'**
+  String homeSearchMore(int count);
 }
 
 class _AppLocalizationsDelegate

@@ -40,7 +40,37 @@ abstract class Connection with _$Connection {
     @Default('') String why,
     @JsonKey(name: 'why_ar') @Default('') String whyAr,
 
+    /// What the documents have in common, as counts over the filings feed —
+    /// "Eight companies filed an insider dealing form that day."
+    ///
+    /// This is the part that makes a card about one company a fact about the
+    /// day. Absent where there is nothing countable to say, which is honest:
+    /// a card that always has a second sentence teaches a reader to skip it.
+    String? insight,
+    @JsonKey(name: 'insight_ar') String? insightAr,
+
+    /// The company's own name, which the card never showed — it showed four
+    /// letters. 266 of 280 companies carry an Arabic one.
+    String? name,
+    @JsonKey(name: 'name_ar') String? nameAr,
+    String? sector,
+
+    /// The filing type every filing in the window shared, where they shared
+    /// one. Null when a company filed two different kinds of thing.
+    String? event,
+    @JsonKey(name: 'event_label') String? eventLabel,
+    @JsonKey(name: 'event_label_ar') String? eventLabelAr,
+
+    /// The other companies that filed the same kind of thing on the same day.
+    @Default(<String>[]) List<String> peers,
+
+    /// How many of those share this company's sector, when it is more than
+    /// one. Zero rather than one, because "one of them is in the same sector"
+    /// is a sentence about this company and says nothing.
+    @JsonKey(name: 'same_sector') @Default(0) int sameSector,
+
     double? ratio,
+    @JsonKey(name: 'change_percent') double? changePercent,
     @Default(<Strand>[]) List<Strand> strands,
   }) = _Connection;
 
@@ -50,6 +80,18 @@ abstract class Connection with _$Connection {
       _$ConnectionFromJson(json);
 
   String whyFor(bool arabic) => arabic && whyAr.isNotEmpty ? whyAr : why;
+
+  String? insightFor(bool arabic) {
+    final chosen = arabic ? (insightAr ?? insight) : insight;
+    return (chosen == null || chosen.isEmpty) ? null : chosen;
+  }
+
+  /// The company's name in the language being read, falling back to the other
+  /// one and then to nothing — the ticker is always there beside it.
+  String? nameFor(bool arabic) {
+    final chosen = arabic ? (nameAr ?? name) : (name ?? nameAr);
+    return (chosen == null || chosen.isEmpty) ? null : chosen;
+  }
 }
 
 /// One thread of the crossing, and where to read it.
