@@ -1,5 +1,62 @@
 {
  "filings": {
+  "293025": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-08-13",
+   "isin": "EGS38191C010",
+   "months": 6,
+   "name_ar": "ابوقير للاسمدة والصناعات الكيماوية",
+   "net_profit_egp": 10011519905.0,
+   "news_id": "293025",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 4568415986.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293025",
+   "ticker": "ABUK"
+  },
+  "293657": {
+   "basis": "consolidated",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-08-20",
+   "isin": "EGS02291C010",
+   "months": 6,
+   "name_ar": "نهر الخير للتنمية والأستثمار الزراعى والخدمات البيئية",
+   "net_profit_egp": 42494964.0,
+   "news_id": "293657",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 49064327.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293657",
+   "ticker": "KRDI"
+  },
+  "293659": {
+   "basis": "consolidated",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-08-20",
+   "isin": "EGS65071C010",
+   "months": 6,
+   "name_ar": "القاهرة للاسكان والتعمير",
+   "net_profit_egp": 463796755.0,
+   "news_id": "293659",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 34369934.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293659",
+   "ticker": "ELKA"
+  },
   "293661": {
    "basis": "standalone",
    "currency": "جنيه مصري",
@@ -21,7 +78,13 @@
   }
  },
  "read": {
+  "293025": "2026-08-13",
+  "293657": "2026-08-20",
+  "293659": "2026-08-20",
   "293661": "2026-08-20",
-  "293676": "2026-08-20"
+  "293676": "2026-08-20",
+  "293726": "2026-08-23",
+  "293728": "2026-08-23",
+  "293743": "2026-08-23"
  }
 }
