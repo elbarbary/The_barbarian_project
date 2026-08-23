@@ -87,8 +87,30 @@ class Recency {
     // Within the week a count still reads naturally; past that a date is
     // easier to place than an ever-growing number of days.
     if (days < 7) return l.ageDays(days);
-    return DateFormat.MMMd(locale).format(when);
+    return westernDigits(DateFormat.MMMd(locale).format(when));
   }
+}
+
+/// Arabic-Indic digits rewritten as the ones this app counts in.
+///
+/// `intl` formats Arabic dates with ٠١٢٣٤٥٦٧٨٩, which is correct for prose and
+/// wrong here: every other number in this app — prices, percentages, volumes,
+/// index levels — is Western, because that is what Egyptian price screens use.
+/// A price chart whose bars read "+2.3" over labels reading "١٦ أغسطس" is two
+/// numeral systems in one card.
+String westernDigits(String text) {
+  if (!text.contains(RegExp('[٠-٩۰-۹]'))) return text;
+  final out = StringBuffer();
+  for (final rune in text.runes) {
+    if (rune >= 0x0660 && rune <= 0x0669) {
+      out.writeCharCode(0x30 + rune - 0x0660); // Arabic-Indic
+    } else if (rune >= 0x06F0 && rune <= 0x06F9) {
+      out.writeCharCode(0x30 + rune - 0x06F0); // Eastern Arabic-Indic
+    } else {
+      out.writeCharCode(rune);
+    }
+  }
+  return out.toString();
 }
 
 /// Convenience for widgets that already have a [BuildContext].
@@ -111,12 +133,14 @@ extension RecencyContext on BuildContext {
   /// array, so an Arabic reader got English month names on the second line of
   /// Today, on the scanner's date stamp, and under every bar of the company
   /// price chart.
-  String dayMonth(DateTime at) =>
-      DateFormat.MMMd(Localizations.localeOf(this).toLanguageTag()).format(at);
+  String dayMonth(DateTime at) => westernDigits(
+    DateFormat.MMMd(Localizations.localeOf(this).toLanguageTag()).format(at),
+  );
 
   /// The same with the year, for something dated once at the top of a screen.
-  String dayMonthYear(DateTime at) =>
-      DateFormat.yMMMd(Localizations.localeOf(this).toLanguageTag()).format(at);
+  String dayMonthYear(DateTime at) => westernDigits(
+    DateFormat.yMMMd(Localizations.localeOf(this).toLanguageTag()).format(at),
+  );
 
   /// [dayMonth] from an ISO string, returned untouched when it will not parse
   /// — a date this app cannot read is better shown as filed than guessed at.

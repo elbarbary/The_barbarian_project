@@ -182,6 +182,7 @@ class _Header extends StatelessWidget {
     final c = context.colors;
     final change = quote?.resolvedChange;
     final changePct = quote?.resolvedChangePercent;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
 
     return BDarkCard(
       radius: BarbarianRadius.xl,
@@ -221,18 +222,35 @@ class _Header extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    BLatinName(
                       company.ticker,
-                      style: BarbarianType.displayM.copyWith(color: c.onInk),
+                      style: BarbarianType.displayM,
+                      color: c.onInk,
+                      maxLines: 1,
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      company.name.en,
-                      style: BarbarianType.bodyM.copyWith(color: c.onInkMuted),
-                    ),
-                    if (company.name.ar case final String ar) ...[
+                    // The reader's own language leads, as in the directory.
+                    // 266 of the 280 companies carry an Arabic name; the rest
+                    // show the English one in both slots rather than a gap.
+                    if (arabic && company.name.ar != null) ...[
+                      BArabicName(
+                        company.name.ar!,
+                        style: BarbarianType.bodyM,
+                        color: c.onInkMuted,
+                        maxLines: 2,
+                      ),
                       const SizedBox(height: 2),
-                      BArabicName(ar, color: c.onInkMuted),
+                      BLatinName(company.name.en, color: c.onInkMuted),
+                    ] else ...[
+                      BLatinName(
+                        company.name.en,
+                        style: BarbarianType.bodyM,
+                        color: c.onInkMuted,
+                      ),
+                      if (company.name.ar case final String ar) ...[
+                        const SizedBox(height: 2),
+                        BArabicName(ar, color: c.onInkMuted),
+                      ],
                     ],
                   ],
                 ),
@@ -1340,7 +1358,10 @@ class _DayCell extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Text(
+          // A signed figure has to be laid out left-to-right whatever the
+          // page does: in the Arabic build "−0.6" rendered as "0.6 −", with
+          // the sign trailing the number it belongs to.
+          BNumText(
             change == null
                 ? '—'
                 : '${change >= 0 ? '+' : '−'}${(change.abs() * 100).toStringAsFixed(1)}',

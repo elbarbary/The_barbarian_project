@@ -644,7 +644,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get finStatementsNote =>
-      'كل فترة تنشرها مباشر عن هذه الشركة، بملايين الجنيهات، كما أُودعت. اسحب جانبًا للفترات الأقدم.';
+      'كل فترة تنشرها «مباشر» عن هذه الشركة، كما أُودعت. اسحب جانبًا للفترات الأقدم.';
 
   @override
   String get finCashInvesting => 'التدفق النقدي من الاستثمار';
@@ -985,11 +985,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get finReadFiling => 'اقرأ الإفصاح';
 
   @override
-  String finEgpMillionsPeriod(String period) {
-    return 'مليون جنيه · $period';
-  }
-
-  @override
   String get priceNoHistoryDownloaded => 'لم يُنزَّل تاريخ الأسعار';
 
   @override
@@ -1119,7 +1114,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String meansNetProfit(String amount, String period) {
-    return 'أعلن $amount مليون جنيه صافي ربح في $period.';
+    return 'أعلن $amount صافي ربح في $period.';
   }
 
   @override

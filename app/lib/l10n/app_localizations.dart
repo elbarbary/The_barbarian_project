@@ -1265,7 +1265,7 @@ abstract class AppLocalizations {
   /// No description provided for @finStatementsNote.
   ///
   /// In en, this message translates to:
-  /// **'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.'**
+  /// **'Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.'**
   String get finStatementsNote;
 
   /// No description provided for @finCashInvesting.
@@ -1826,12 +1826,6 @@ abstract class AppLocalizations {
   /// **'Read the filing'**
   String get finReadFiling;
 
-  /// No description provided for @finEgpMillionsPeriod.
-  ///
-  /// In en, this message translates to:
-  /// **'EGP m · {period}'**
-  String finEgpMillionsPeriod(String period);
-
   /// No description provided for @priceNoHistoryDownloaded.
   ///
   /// In en, this message translates to:
@@ -2027,7 +2021,7 @@ abstract class AppLocalizations {
   /// No description provided for @meansNetProfit.
   ///
   /// In en, this message translates to:
-  /// **'It reported {amount} EGP m of net profit in {period}.'**
+  /// **'It reported {amount} of net profit in {period}.'**
   String meansNetProfit(String amount, String period);
 
   /// No description provided for @scanLogEmptyBodyFull.

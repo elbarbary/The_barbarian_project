@@ -53,6 +53,44 @@ class BNumText extends StatelessWidget {
   }
 }
 
+/// A Latin name inside Arabic layout.
+///
+/// The mirror of [BArabicName]. An English company name in a right-to-left
+/// paragraph has its trailing punctuation reordered — "Abou Kir Fertilizers &
+/// Chemical Industries Co." rendered as "…Industries Co" with the full stop
+/// moved to the left of the line — and a ticker beside a bracket does the
+/// same. Directionality is a stronger guarantee than a U+2066 isolate,
+/// because it also governs how the paragraph itself is laid out.
+class BLatinName extends StatelessWidget {
+  const BLatinName(
+    this.text, {
+    this.style,
+    this.color,
+    this.maxLines = 2,
+    super.key,
+  });
+
+  final String text;
+  final TextStyle? style;
+  final Color? color;
+  final int maxLines;
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Text(
+        text,
+        style: (style ?? BarbarianType.bodyS).copyWith(
+          color: color ?? context.colors.textMuted,
+        ),
+        maxLines: maxLines,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
 /// An Arabic company name that sits beside Latin text.
 ///
 /// Forces RTL for the name itself so it renders correctly even while the app is

@@ -646,7 +646,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finStatementsNote =>
-      'Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.';
+      'Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.';
 
   @override
   String get finCashInvesting => 'Cash from investing';
@@ -992,11 +992,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finReadFiling => 'Read the filing';
 
   @override
-  String finEgpMillionsPeriod(String period) {
-    return 'EGP m · $period';
-  }
-
-  @override
   String get priceNoHistoryDownloaded => 'No price history downloaded';
 
   @override
@@ -1126,7 +1121,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String meansNetProfit(String amount, String period) {
-    return 'It reported $amount EGP m of net profit in $period.';
+    return 'It reported $amount of net profit in $period.';
   }
 
   @override

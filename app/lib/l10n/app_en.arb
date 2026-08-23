@@ -305,7 +305,7 @@
   "finAnnual": "Annual",
   "finQuarterly": "Quarterly",
   "finNetProfitLine": "Net profit",
-  "finStatementsNote": "Every period Mubasher publishes for this company, in EGP millions, as filed. Scroll sideways for older periods.",
+  "finStatementsNote": "Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.",
   "finCashInvesting": "Cash from investing",
   "finCashFinancing": "Cash from financing",
   "finNetChangeCash": "Net change in cash",
@@ -421,14 +421,6 @@
   "finLatestFiling": "Latest filing",
   "finCompanyOnly": "Company only",
   "finReadFiling": "Read the filing",
-  "finEgpMillionsPeriod": "EGP m · {period}",
-  "@finEgpMillionsPeriod": {
-    "placeholders": {
-      "period": {
-        "type": "String"
-      }
-    }
-  },
   "priceNoHistoryDownloaded": "No price history downloaded",
   "priceLastSessions": "Last {count} sessions",
   "@priceLastSessions": {
@@ -523,7 +515,7 @@
       }
     }
   },
-  "meansNetProfit": "It reported {amount} EGP m of net profit in {period}.",
+  "meansNetProfit": "It reported {amount} of net profit in {period}.",
   "@meansNetProfit": {
     "placeholders": {
       "amount": {
