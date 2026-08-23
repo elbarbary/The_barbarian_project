@@ -40,14 +40,19 @@ class MarketScreen extends ConsumerStatefulWidget {
 /// Every one of these is a fact about the completed or delayed session already
 /// on screen — no forecast, no ranking of what to buy (spec §8).
 enum _Order {
-  az('A–Z'),
-  gainers('Gainers'),
-  losers('Losers'),
-  active('Most active');
+  az,
+  gainers,
+  losers,
+  active;
 
-  const _Order(this.label);
-
-  final String label;
+  /// The chips were enum literals, so the sort a reader picks was named in
+  /// English whatever the locale said.
+  String labelFor(AppLocalizations l) => switch (this) {
+    _Order.az => l.sortAlphabetical,
+    _Order.gainers => l.sortGainers,
+    _Order.losers => l.sortLosers,
+    _Order.active => l.sortMostActive,
+  };
 }
 
 class _MarketScreenState extends ConsumerState<MarketScreen> {
@@ -175,7 +180,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                     children: [
                       for (final order in _Order.values) ...[
                         BKindChip(
-                          order.label,
+                          order.labelFor(l),
                           variant: _order == order
                               ? BChipVariant.solid
                               : BChipVariant.neutral,
@@ -232,7 +237,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
                 ),
                 const SizedBox(height: 18),
                 BSectionLabel(
-                  'Companies · ${_order.label}',
+                  l.directoryCompaniesSorted(_order.labelFor(l)),
                   trailing: Text(
                     '${visible.length}',
                     style: BarbarianType.labelS.copyWith(color: c.textMuted),
@@ -492,11 +497,19 @@ class _CompanyRow extends StatelessWidget {
     final l = AppLocalizations.of(context);
     final change = quote?.resolvedChangePercent;
 
+    // In the Arabic build the Arabic name leads and the English sits under
+    // it. 266 of the 280 entries carry one; the rest fall back to English in
+    // both positions rather than showing a blank line.
+    final arabic =
+        Directionality.of(context) == TextDirection.rtl &&
+        company.nameAr != null;
+
     return BListRow(
       leading: BTickerMonogram(company.ticker, sector: company.sector),
-      title: company.nameEn,
-      subtitle: company.nameAr,
-      subtitleIsArabic: company.nameAr != null,
+      title: arabic ? company.nameAr! : company.nameEn,
+      titleIsArabic: arabic,
+      subtitle: arabic ? company.nameEn : company.nameAr,
+      subtitleIsArabic: !arabic && company.nameAr != null,
       onTap: () => context.push(Routes.companyPath(parentTab, company.ticker)),
       trailing: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

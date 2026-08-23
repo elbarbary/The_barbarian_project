@@ -184,6 +184,7 @@ class BListRow extends StatelessWidget {
   const BListRow({
     required this.leading,
     required this.title,
+    this.titleIsArabic = false,
     this.subtitle,
     this.subtitleIsArabic = false,
     this.trailing,
@@ -195,6 +196,14 @@ class BListRow extends StatelessWidget {
 
   final Widget leading;
   final String title;
+
+  /// Renders the title right-to-left, in the Arabic face.
+  ///
+  /// The directory showed the English name large and dark and the Arabic name
+  /// small and grey on all 280 rows, in both builds — so the Arabic reader
+  /// this app is written for first was reading a list of English company
+  /// names with a translation underneath.
+  final bool titleIsArabic;
   final String? subtitle;
   final bool subtitleIsArabic;
   final Widget? trailing;
@@ -215,12 +224,19 @@ class BListRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                title,
-                style: BarbarianType.titleM.copyWith(color: c.textPrimary),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
+              if (titleIsArabic)
+                BArabicName(
+                  title,
+                  style: BarbarianType.titleM,
+                  color: c.textPrimary,
+                )
+              else
+                Text(
+                  title,
+                  style: BarbarianType.titleM.copyWith(color: c.textPrimary),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               if (subtitle case final String s) ...[
                 const SizedBox(height: 3),
                 if (subtitleIsArabic)

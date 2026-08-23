@@ -43,6 +43,53 @@ abstract class CompanyDirectory with _$CompanyDirectory {
   }
 }
 
+/// Every Arabic name in a directory folded to one spelling, keyed by ticker.
+///
+/// Built once per directory rather than per keystroke. It lives out here
+/// rather than on [CompanyDirectory] or [CompanySummary] because both are
+/// freezed classes with const constructors, which cannot hold a computed
+/// field; `foldedArabicNamesProvider` holds the result.
+Map<String, String> foldArabicNames(Iterable<CompanySummary> companies) => {
+  for (final c in companies)
+    if (c.nameAr case final String name) c.ticker: arabicFold(name),
+};
+
+/// Arabic folded to one spelling, so a search can find a name however it was
+/// typed.
+///
+/// The directory's Arabic names come from two sources that do not agree with
+/// each other, and Egyptian readers do not type hamza or ta marbuta
+/// consistently in the first place. An exact substring test made most of the
+/// directory unreachable in Arabic: "المصريه" returned one company where this
+/// returns twenty-two, "القاهره" returned none where this returns nine, and
+/// "الاسكندرية" silently missed ALEX, AFMC and AMES because the source spells
+/// them "الإسكندرية". 217 of the 266 Arabic names carry at least one of the
+/// characters below.
+///
+/// This cannot be cleaned upstream — the two sources will keep disagreeing —
+/// so both sides of the comparison are folded instead.
+String arabicFold(String text) {
+  final out = StringBuffer();
+  for (final rune in text.runes) {
+    final folded = switch (rune) {
+      // أ إ آ ٱ -> ا
+      0x0623 || 0x0625 || 0x0622 || 0x0671 => 0x0627,
+      // ة -> ه
+      0x0629 => 0x0647,
+      // ى -> ي, ئ -> ي
+      0x0649 || 0x0626 => 0x064A,
+      // ؤ -> و
+      0x0624 => 0x0648,
+      // Harakat and tatweel carry no lexical weight in a name.
+      >= 0x064B && <= 0x0652 => null,
+      0x0640 || 0x0670 => null,
+      _ => rune,
+    };
+    if (folded != null) out.writeCharCode(folded);
+  }
+  return out.toString();
+}
+
 @freezed
 abstract class CompanySummary with _$CompanySummary {
   const factory CompanySummary({
@@ -100,16 +147,21 @@ abstract class CompanySummary with _$CompanySummary {
   factory CompanySummary.fromJson(Map<String, dynamic> json) =>
       _$CompanySummaryFromJson(json);
 
+  /// Whether this company answers to [query].
+  ///
   /// Search runs against the cached directory on every keystroke, so this must
   /// stay allocation-cheap — no regexes, no intermediate lists (spec §35).
-  bool matches(String lowercaseQuery) {
-    if (lowercaseQuery.isEmpty) return true;
-    if (ticker.toLowerCase().contains(lowercaseQuery)) return true;
-    if (nameEn.toLowerCase().contains(lowercaseQuery)) return true;
-    final ar = nameAr;
-    if (ar != null && ar.contains(lowercaseQuery)) return true;
+  ///
+  /// [query] must be lowercased and folded, and [foldedNameAr] must be this
+  /// company's Arabic name folded the same way; both come from the caller,
+  /// which does each of them once rather than 280 times. See [arabicFold].
+  bool matches(String query, {String? foldedNameAr}) {
+    if (query.isEmpty) return true;
+    if (ticker.toLowerCase().contains(query)) return true;
+    if (nameEn.toLowerCase().contains(query)) return true;
+    if (foldedNameAr != null && foldedNameAr.contains(query)) return true;
     final s = sector;
-    if (s != null && s.toLowerCase().contains(lowercaseQuery)) return true;
+    if (s != null && s.toLowerCase().contains(query)) return true;
     return false;
   }
 

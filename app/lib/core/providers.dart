@@ -522,11 +522,26 @@ final todaySectionRequestProvider =
 /// Not cleared from `dispose()` either, which was the other obvious fix and is
 /// the wrong one: mutating provider state during teardown is a different bug
 /// wearing this one's clothes.
+/// Every Arabic name in the directory, folded once.
+///
+/// Riverpod holds it until the directory itself changes, so the fold is paid
+/// for on the first search after a publish and never again.
+final foldedArabicNamesProvider = Provider<Map<String, String>>((ref) {
+  final directory = ref
+      .watch(companyDirectoryProvider)
+      .whenOrNull(data: (d) => d.value);
+  return directory == null ? const {} : foldArabicNames(directory.companies);
+});
+
 final searchResultsProvider = Provider.family<List<CompanySummary>, String>((
   ref,
   rawQuery,
 ) {
-  final query = rawQuery.trim().toLowerCase();
+  // Folded here rather than inside `matches`: the query is folded once, the
+  // 280 names were folded when the directory was parsed. See [arabicFold] —
+  // without it "المصريه" found one company out of the twenty-two that answer
+  // to it, and "الاسكندرية" found none at all.
+  final query = arabicFold(rawQuery.trim().toLowerCase());
   final directory = ref
       .watch(companyDirectoryProvider)
       .whenOrNull(data: (d) => d.value);
@@ -537,10 +552,14 @@ final searchResultsProvider = Provider.family<List<CompanySummary>, String>((
     return [...all]..sort((a, b) => a.ticker.compareTo(b.ticker));
   }
 
-  final matches = all.where((c) => c.matches(query)).toList()
-    ..sort((a, b) {
-      final byRelevance = a.relevance(query).compareTo(b.relevance(query));
-      return byRelevance != 0 ? byRelevance : a.ticker.compareTo(b.ticker);
-    });
+  final folded = ref.watch(foldedArabicNamesProvider);
+  final matches =
+      all
+          .where((c) => c.matches(query, foldedNameAr: folded[c.ticker]))
+          .toList()
+        ..sort((a, b) {
+          final byRelevance = a.relevance(query).compareTo(b.relevance(query));
+          return byRelevance != 0 ? byRelevance : a.ticker.compareTo(b.ticker);
+        });
   return matches;
 });

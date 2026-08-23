@@ -1838,4 +1838,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get youTitle => 'حسابك';
+
+  @override
+  String get sortAlphabetical => 'أ–ي';
+
+  @override
+  String get sortGainers => 'الصاعدة';
+
+  @override
+  String get sortLosers => 'الهابطة';
+
+  @override
+  String get sortMostActive => 'الأكثر تداولًا';
+
+  @override
+  String directoryCompaniesSorted(String order) {
+    return 'الشركات · $order';
+  }
 }

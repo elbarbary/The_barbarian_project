@@ -1288,5 +1288,17 @@
       }
     }
   },
-  "youTitle": "You"
+  "youTitle": "You",
+  "sortAlphabetical": "A–Z",
+  "sortGainers": "Risers",
+  "sortLosers": "Fallers",
+  "sortMostActive": "Most traded",
+  "directoryCompaniesSorted": "Companies · {order}",
+  "@directoryCompaniesSorted": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -538,5 +538,10 @@
   "a11ySessionDown": "{date}: تراجع {percent} بالمئة",
   "a11yPriceHistory": "تاريخ السعر، {count} جلسة، من {first} إلى {last}، أدنى {low}، أعلى {high}",
   "a11yRangeGauge": "{caption}: {value}، المدى من {low} إلى {high}",
-  "youTitle": "حسابك"
+  "youTitle": "حسابك",
+  "sortAlphabetical": "أ–ي",
+  "sortGainers": "الصاعدة",
+  "sortLosers": "الهابطة",
+  "sortMostActive": "الأكثر تداولًا",
+  "directoryCompaniesSorted": "الشركات · {order}"
 }

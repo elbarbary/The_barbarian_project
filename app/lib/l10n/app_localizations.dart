@@ -3169,6 +3169,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You'**
   String get youTitle;
+
+  /// No description provided for @sortAlphabetical.
+  ///
+  /// In en, this message translates to:
+  /// **'A–Z'**
+  String get sortAlphabetical;
+
+  /// No description provided for @sortGainers.
+  ///
+  /// In en, this message translates to:
+  /// **'Risers'**
+  String get sortGainers;
+
+  /// No description provided for @sortLosers.
+  ///
+  /// In en, this message translates to:
+  /// **'Fallers'**
+  String get sortLosers;
+
+  /// No description provided for @sortMostActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Most traded'**
+  String get sortMostActive;
+
+  /// No description provided for @directoryCompaniesSorted.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies · {order}'**
+  String directoryCompaniesSorted(String order);
 }
 
 class _AppLocalizationsDelegate

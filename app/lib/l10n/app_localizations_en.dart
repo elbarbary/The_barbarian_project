@@ -1847,4 +1847,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get youTitle => 'You';
+
+  @override
+  String get sortAlphabetical => 'A–Z';
+
+  @override
+  String get sortGainers => 'Risers';
+
+  @override
+  String get sortLosers => 'Fallers';
+
+  @override
+  String get sortMostActive => 'Most traded';
+
+  @override
+  String directoryCompaniesSorted(String order) {
+    return 'Companies · $order';
+  }
 }

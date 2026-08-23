@@ -71,7 +71,7 @@ void main() {
 
     testWidgets('each order relabels the list', (tester) async {
       await open(tester);
-      for (final label in <String>['Gainers', 'Losers', 'Most active']) {
+      for (final label in <String>['Risers', 'Fallers', 'Most traded']) {
         await tapChip(tester, label);
         final heading = 'COMPANIES · ${label.toUpperCase()}';
         await pumpUntil(tester, find.text(heading));
@@ -81,8 +81,8 @@ void main() {
 
     testWidgets('gainers leads with a riser', (tester) async {
       await open(tester);
-      await tapChip(tester, 'Gainers');
-      await pumpUntil(tester, find.text('COMPANIES · GAINERS'));
+      await tapChip(tester, 'Risers');
+      await pumpUntil(tester, find.text('COMPANIES · RISERS'));
 
       final deltas = tester
           .widgetList<BChangeDelta>(find.byType(BChangeDelta))
@@ -94,8 +94,8 @@ void main() {
 
     testWidgets('losers leads with a faller', (tester) async {
       await open(tester);
-      await tapChip(tester, 'Losers');
-      await pumpUntil(tester, find.text('COMPANIES · LOSERS'));
+      await tapChip(tester, 'Fallers');
+      await pumpUntil(tester, find.text('COMPANIES · FALLERS'));
 
       final deltas = tester
           .widgetList<BChangeDelta>(find.byType(BChangeDelta))
