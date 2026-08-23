@@ -86,7 +86,7 @@ class _ExitScreenState extends ConsumerState<ExitScreen> {
         const _HowItWorks(),
         if (widget.ticker == null) ...[
           BSearchPill(
-            text: 'Check a company by name or symbol…',
+            text: l.exitSearchHint,
             controller: _search,
             onChanged: (v) => setState(() => _query = v),
           ),
@@ -397,17 +397,14 @@ class _Facts extends StatelessWidget {
     final c = context.colors;
     final rows = <(String, String)>[
       (
-        'A normal day’s trading',
+        l.exitNormalDay,
         exit.normalDailyValue <= 0
-            ? 'not published'
-            : 'EGP ${_short(exit.normalDailyValue)}',
+            ? l.exitNotPublished
+            : '${l.filterUnitEgp} ${_short(exit.normalDailyValue)}',
       ),
       (l.exitThinSessions, '${exit.thinDays} / ${exit.sessions}'),
       if (exit.freeFloatPercent case final double float)
-        (
-          l.exitFreeToTrade,
-          '${float.toStringAsFixed(1)}% — the rest do not move',
-        ),
+        (l.exitFreeToTrade, l.exitFloatRest(float.toStringAsFixed(1))),
       (l.exitDailyLimit, l.exitDailyLimitValue),
     ];
 

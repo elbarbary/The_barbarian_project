@@ -1743,7 +1743,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String priceSessionRange(int count) {
-    return 'Range over $count sessions';
+    return '$count-session range';
   }
 
   @override
@@ -1917,4 +1917,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String ratesPerGramEgp(String per) {
     return 'EGP · $per';
   }
+
+  @override
+  String get exitNormalDay => 'A normal day’s trading';
+
+  @override
+  String get exitNotPublished => 'not published';
+
+  @override
+  String exitFloatRest(String percent) {
+    return '$percent% — the rest do not move';
+  }
+
+  @override
+  String get exitSearchHint => 'Check a company by name or symbol…';
+
+  @override
+  String get studySearchHint => 'Search ticker or company';
 }

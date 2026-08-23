@@ -518,7 +518,7 @@
   "articleNeedsConnection": "الشرح الكامل موجود على thebarbarianproject.com ويحتاج اتصالًا بالإنترنت. وكل ما نُزِّل بالفعل ما زال متاحًا دون اتصال.",
   "articleGoBack": "رجوع",
   "priceNoHistory": "لا يوجد تاريخ أسعار لهذه الشركة بعد",
-  "priceSessionRange": "المدى خلال {count} جلسة",
+  "priceSessionRange": "مدى {count} جلسة",
   "priceSessionsTo": "{count} جلسة · حتى {date}",
   "scanPositionWithheld": "ملاحظة التقرير عن هذا السهم تصف مركزًا نموذجيًا — حجمًا وسعرًا. ولا يملك «استثمر» ترخيصًا لإعادة نشر ذلك، فالدرجة والأدلة هنا والمركز ليس هنا.",
   "newsSourcedFrom": "عناوين من {outlets}، كل واحد منها موصول بالجهة التي نشرته.",
@@ -557,5 +557,10 @@
   "learnMore": "ما معنى هذا؟",
   "goldKaratPlain": "جرام الذهب عيار {karat} يساوي {price} جنيهًا.",
   "goldKaratYardstick": "{karat} جزءًا من الذهب في كل 24. ومعظم المشغولات الذهبية في مصر عيار 21. سعر المعدن واحد في الحالتين؛ والعيار هو مقدار الذهب في القطعة.",
-  "ratesPerGramEgp": "جنيه · {per}"
+  "ratesPerGramEgp": "جنيه · {per}",
+  "exitNormalDay": "تداول يوم عادي",
+  "exitNotPublished": "غير منشور",
+  "exitFloatRest": "{percent}٪ — والباقي لا يتحرك",
+  "exitSearchHint": "افحص شركة بالاسم أو الرمز…",
+  "studySearchHint": "ابحث برمز السهم أو اسم الشركة"
 }

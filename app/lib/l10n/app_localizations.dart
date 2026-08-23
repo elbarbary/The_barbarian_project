@@ -3041,7 +3041,7 @@ abstract class AppLocalizations {
   /// No description provided for @priceSessionRange.
   ///
   /// In en, this message translates to:
-  /// **'Range over {count} sessions'**
+  /// **'{count}-session range'**
   String priceSessionRange(int count);
 
   /// No description provided for @priceSessionsTo.
@@ -3283,6 +3283,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'EGP · {per}'**
   String ratesPerGramEgp(String per);
+
+  /// No description provided for @exitNormalDay.
+  ///
+  /// In en, this message translates to:
+  /// **'A normal day’s trading'**
+  String get exitNormalDay;
+
+  /// No description provided for @exitNotPublished.
+  ///
+  /// In en, this message translates to:
+  /// **'not published'**
+  String get exitNotPublished;
+
+  /// No description provided for @exitFloatRest.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% — the rest do not move'**
+  String exitFloatRest(String percent);
+
+  /// No description provided for @exitSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Check a company by name or symbol…'**
+  String get exitSearchHint;
+
+  /// No description provided for @studySearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search ticker or company'**
+  String get studySearchHint;
 }
 
 class _AppLocalizationsDelegate

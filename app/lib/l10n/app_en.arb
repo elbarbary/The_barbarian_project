@@ -1091,7 +1091,7 @@
   "articleNeedsConnection": "The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline.",
   "articleGoBack": "Go back",
   "priceNoHistory": "No price history for this company yet",
-  "priceSessionRange": "Range over {count} sessions",
+  "priceSessionRange": "{count}-session range",
   "@priceSessionRange": {
     "placeholders": {
       "count": {
@@ -1345,5 +1345,17 @@
         "type": "String"
       }
     }
-  }
+  },
+  "exitNormalDay": "A normal day’s trading",
+  "exitNotPublished": "not published",
+  "exitFloatRest": "{percent}% — the rest do not move",
+  "@exitFloatRest": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "exitSearchHint": "Check a company by name or symbol…",
+  "studySearchHint": "Search ticker or company"
 }

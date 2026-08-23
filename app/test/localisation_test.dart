@@ -190,7 +190,7 @@ void main() {
       r"\b(?:label|title|subtitle|body|hint|hintText|semanticLabel|message"
       r"|note|caption|blurb|value|sentence|actionLabel|errorTitle|errorBody"
       r"|labelText|placeholder|delta|token|plain|workings|yardstick"
-      r"|caveat)\s*:\s*",
+      r"|caveat|text|sentence)\s*:\s*",
     );
     // The label slot of a `(String, …)` record — the fact rows.
     final recordLabel = RegExp(r"\(\s*'((?:[^'\\]|\\.)*)'\s*,");

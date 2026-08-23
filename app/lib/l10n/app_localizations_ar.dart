@@ -1734,7 +1734,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String priceSessionRange(int count) {
-    return 'المدى خلال $count جلسة';
+    return 'مدى $count جلسة';
   }
 
   @override
@@ -1908,4 +1908,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String ratesPerGramEgp(String per) {
     return 'جنيه · $per';
   }
+
+  @override
+  String get exitNormalDay => 'تداول يوم عادي';
+
+  @override
+  String get exitNotPublished => 'غير منشور';
+
+  @override
+  String exitFloatRest(String percent) {
+    return '$percent٪ — والباقي لا يتحرك';
+  }
+
+  @override
+  String get exitSearchHint => 'افحص شركة بالاسم أو الرمز…';
+
+  @override
+  String get studySearchHint => 'ابحث برمز السهم أو اسم الشركة';
 }

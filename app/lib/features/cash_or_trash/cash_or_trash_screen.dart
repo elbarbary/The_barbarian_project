@@ -108,7 +108,7 @@ class _CashOrTrashScreenState extends ConsumerState<CashOrTrashScreen> {
                 ),
                 const SizedBox(height: 18),
                 BSearchPill(
-                  text: 'Search ticker or company',
+                  text: l.studySearchHint,
                   controller: _search,
                   onChanged: (v) => setState(() => _query = v),
                 ),

@@ -1734,10 +1734,13 @@ class _FiledDocuments extends ConsumerWidget {
               children: [
                 if (item.labelFor(arabic).isNotEmpty)
                   BKindChip(item.labelFor(arabic)),
-                Text(
-                  item.date,
-                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
-                ),
+                // "17 Aug", not "2026-08-17". A filing dated in ISO on a card
+                // whose siblings say "Today" is a machine's way of speaking.
+                if (context.filingAge(item.date) case final age?)
+                  Text(
+                    age,
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                  ),
               ],
             ),
             const SizedBox(height: 7),
@@ -1809,10 +1812,13 @@ class _CompanyFiling extends StatelessWidget {
               children: [
                 if (item.labelFor(arabic).isNotEmpty)
                   BKindChip(item.labelFor(arabic)),
-                Text(
-                  item.date,
-                  style: BarbarianType.labelNano.copyWith(color: c.textMuted),
-                ),
+                // "17 Aug", not "2026-08-17". A filing dated in ISO on a card
+                // whose siblings say "Today" is a machine's way of speaking.
+                if (context.filingAge(item.date) case final age?)
+                  Text(
+                    age,
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                  ),
                 Icon(Icons.north_east, size: 13, color: c.textFaint),
               ],
             ),
