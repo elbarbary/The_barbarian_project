@@ -1,7 +1,7 @@
 {
-  "date": "2026-08-20",
+  "date": "2026-08-22",
   "masthead_date": "2026-08-20",
-  "headline": null,
+  "headline": "No qualified early opportunity today.",
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
@@ -89,17 +89,17 @@
       "state": "Cleared every rule",
       "score": 7,
       "max_score": 13,
-      "seen_at": "2026-08-20",
+      "seen_at": "2026-08-22",
       "research_summary": null,
-      "move_percent": "-2.66%",
+      "move_percent": "+0.46%",
       "gates": [],
       "research": [],
       "action": null,
       "position_withheld": true,
       "tape": {
-        "label": "Thndr X · 10:00:04 Cairo",
-        "price": "EGP 89.55",
-        "detail": "first print EGP 89.52."
+        "label": "20 August completed close",
+        "price": "EGP 92.42",
+        "detail": "+3.26% · quote timestamp: 20 Aug close."
       },
       "sources": [
         {
@@ -107,8 +107,8 @@
           "url": "https://www.mubasher.info/news/4656580/"
         },
         {
-          "name": "Split-adjusted quote context",
-          "url": "https://www.tradingview.com/symbols/EGX-HDBK/"
+          "name": "Official EGX disclosure board",
+          "url": "https://beta.egx.com.eg/en"
         },
         {
           "name": "EGX field note, 2026-08-20",
