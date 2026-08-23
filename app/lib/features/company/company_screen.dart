@@ -269,11 +269,22 @@ class _Header extends StatelessWidget {
           const SizedBox(height: 6),
           _HeaderStats(company: company, quote: quote),
           const SizedBox(height: 14),
-          Row(
+          // Wrap, not Row.
+          //
+          // A sector name and a data-age caption are both variable-length, and
+          // `Spacer` between two of those guarantees a horizontal overflow the
+          // moment either grows — "Distribution Services" beside a
+          // "15-min delayed · updated 4 hr ago" ran 35pt past the edge as soon
+          // as the type scale went up. Wrapping puts the caption on its own
+          // line instead of off the screen.
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 10,
+            runSpacing: 8,
             children: [
               if (company.sector case final String s)
-                Flexible(child: BKindChip(s, variant: BChipVariant.onDark)),
-              const Spacer(),
+                BKindChip(s, variant: BChipVariant.onDark),
               // The headline price on this screen is the live one, so the
               // caption beside it has to describe the live feed, not the daily
               // publish it was merged over.

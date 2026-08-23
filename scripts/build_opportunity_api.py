@@ -785,9 +785,22 @@ def parse(html: str) -> dict:
     year = int(updated.group(1).split()[-1]) if updated else 2026
     report_date = parse_date(updated.group(1), year) if updated else None
 
+    # The empty day, in our own words rather than the website's.
+    #
+    # The field note's own heading reads "No qualified early opportunity
+    # today", and lifting it verbatim put the word **qualified** on the
+    # scanner screen — a judgement about shares, from a publisher with no
+    # licence to make one, which `screens_test` forbids outright. It only ever
+    # surfaced on a day the scanner found nothing, so it sat unnoticed until
+    # one came.
+    #
+    # The page is ours, so this is not rewriting somebody else's sentence; it
+    # is choosing which of our own to publish. What the reader needs is that
+    # the scanner ran and nothing met the test, which is a fact about the test
+    # rather than a verdict on any company.
     headline = None
-    if h := re.search(r"<h2[^>]*>\s*(No qualified[^<]*)</h2>", html):
-        headline = text(h.group(1))
+    if re.search(r"<h2[^>]*>\s*No qualified[^<]*</h2>", html):
+        headline = "Nothing met the test today."
 
     cards, position_cards = signal_cards(html)
 
