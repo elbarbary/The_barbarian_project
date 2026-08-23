@@ -390,6 +390,23 @@ def carry_forward(ticker: str, profile: dict) -> list[str]:
     return sorted(filled)
 
 
+def tradable_flag(record: dict, scan_has_scope: bool) -> bool | None:
+    """Whether this name is on the broker's list, or None when we cannot know.
+
+    `thndrScope` comes from a scraped broker page that only exists on the
+    machine running the research monitor. A scan produced anywhere else — CI,
+    for instance — carries the field for nobody, and `bool(None)` would then
+    publish `tradable: false` against all 291 companies: a confident false
+    statement about every listing on the exchange, produced by an absence.
+
+    Nothing in the app reads this field today, which makes it exactly the kind
+    of thing that would stay wrong for months. Absent stays absent.
+    """
+    if not scan_has_scope:
+        return None
+    return bool(record.get("thndrScope"))
+
+
 def clean(value):
     """Scanner nulls and NaNs both mean 'not reported'."""
     if value is None:
@@ -464,6 +481,8 @@ def previous_close(
 def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     scan = json.loads(scan_path.read_text(encoding="utf-8"))
     records = scan["records"]
+    # Whether this scan knows about broker scope at all — see `tradable_flag`.
+    scan_has_scope = any("thndrScope" in r for r in records)
     session = scan["asOf"][:10]
 
     studied_path = API / "cash-or-trash" / "index.json"
@@ -515,7 +534,11 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 "name_ar": ARABIC.get(ticker),
                 "sector": r.get("sector"),
                 "exchange": "EGX",
-                "tradable": bool(r.get("thndrScope")),
+                **(
+                    {"tradable": flag}
+                    if (flag := tradable_flag(r, scan_has_scope)) is not None
+                    else {}
+                ),
                 "has_cash_or_trash": ticker in researched,
                 "has_research": ticker in researched,
             }
@@ -546,7 +569,11 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
             "ticker": ticker,
             "name": {"en": r.get("company") or ticker},
             "sector": r.get("sector"),
-            "tradable": bool(r.get("thndrScope")),
+            **(
+                {"tradable": flag}
+                if (flag := tradable_flag(r, scan_has_scope)) is not None
+                else {}
+            ),
             "market": market,
             "price_history": history,
         }
@@ -640,7 +667,9 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     with_profile = sum(1 for d in details.values() if d.get("profile"))
     fields = sum(len(d.get("profile", {})) for d in details.values())
     print(f"scan     {scan_path.name}  ({session})")
-    print(f"listed   {scan['scannerTotal']}   tradable {scan['thndrDirectoryCount']}")
+    listed = scan.get("scannerTotal", len(records))
+    scope = scan.get("thndrDirectoryCount")
+    print(f"listed   {listed}   tradable {scope if scope is not None else 'not known here'}")
     print(f"written  {len(companies)} companies, {with_history} with price history")
     print(f"profile  {with_profile} with extra fields ({fields} values total)")
     if skipped:

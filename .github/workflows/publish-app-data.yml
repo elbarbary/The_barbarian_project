@@ -109,6 +109,37 @@ jobs:
             echo 'scrapling fetchers unavailable — the exchange steps will skip'
           fi
 
+      # The market scan, which is the spine of everything below it.
+      #
+      # `market.json` and all 282 company documents are built from a
+      # TradingView snapshot that has, until now, only ever been produced on
+      # one laptop and committed by hand — git history has no CI commit
+      # touching `market.json`, ever. So prices, volumes and company profiles
+      # moved when somebody remembered, and the "three times a trading day"
+      # schedule above was rebuilding everything except the part a reader
+      # actually looks at.
+      #
+      # `egx_scan.mjs` is the research monitor's scanner, cut down to what
+      # `build_market_api.py` reads and stripped of its five local file
+      # dependencies. Its only dependency is `ws`.
+      #
+      # Best-effort, and deliberately so: the user's own EGX notes record that
+      # TradingView blocks direct POSTs from some addresses, and a GitHub
+      # egress IP is a different proposition from a laptop in Cairo. If it is
+      # refused, no scan is written, `build_market_api.py` finds no newer file
+      # and leaves yesterday's prices exactly where they are — labelled with
+      # yesterday's date, which is the honest failure.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Fetch the market scan
+        continue-on-error: true
+        run: |
+          mkdir -p ../work
+          npm install ws --no-save --silent
+          node scripts/egx_scan.mjs ../work
+
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
