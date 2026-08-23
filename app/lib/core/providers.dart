@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// `ProviderOrFamily` — the type `Ref.invalidate` takes — is not in the
+// main export.
+import 'package:flutter_riverpod/misc.dart' show ProviderOrFamily;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'config/app_config.dart';
@@ -175,19 +178,62 @@ final marketDateProvider = Provider<String?>((ref) {
 ///
 /// The manifest is forgotten first; invalidating the content providers alone
 /// re-asks the cached manifest and changes nothing.
+/// Every provider backed by a published document, in one place.
+///
+/// There were two of these lists — one in `contentRefreshProvider` below, one
+/// behind Home's refresh button — and they had drifted apart. Neither
+/// contained `connectionsProvider` or `macroProvider`, which are each read at
+/// exactly one call site, so on iOS, where the process survives for days,
+/// Connect-the-dots and the macro block showed whatever loaded at cold start
+/// and never asked again. `connections.json` is rewritten roughly fifty times
+/// a day and no running app would ever have fetched a second copy.
+///
+/// Home's list also omitted `newsProvider` — the fastest-moving document in
+/// the product, republished every fifteen minutes — so the one button a reader
+/// presses when they want fresh news was the one that did not fetch it.
+///
+/// One list, used by both, and a test that fails when a new document provider
+/// is added without being named here.
+/// [ref] is a `Ref` on the resume path and a `WidgetRef` behind the button.
+/// Riverpod gives those two no common supertype, so the caller passes the two
+/// operations rather than the object.
+void refreshPublishedContent({
+  required StaticApi api,
+  required void Function(ProviderOrFamily) invalidate,
+}) {
+  // The manifest first. Invalidating the content providers alone re-asks the
+  // cached manifest and changes nothing.
+  api.invalidateManifest();
+  for (final provider in publishedDocumentProviders) {
+    invalidate(provider);
+  }
+}
+
+/// The document-backed providers, as a list a test can walk.
+final publishedDocumentProviders = <ProviderOrFamily>[
+  marketSnapshotProvider,
+  companyDirectoryProvider,
+  opportunityReportProvider,
+  cashOrTrashProvider,
+  newsProvider,
+  disclosuresProvider,
+  disclosureArchiveProvider,
+  connectionsProvider,
+  marketHistoryProvider,
+  ratesProvider,
+  macroProvider,
+  // The live feed is not a published document, but a reader pressing refresh
+  // means "get me the current numbers", and this is where the current numbers
+  // come from.
+  liveQuotesProvider,
+];
+
 final contentRefreshProvider = Provider<void>((ref) {
   final lifecycle = AppLifecycleListener(
-    onResume: () {
-      ref.read(staticApiProvider).invalidateManifest();
-      ref.invalidate(marketSnapshotProvider);
-      ref.invalidate(companyDirectoryProvider);
-      ref.invalidate(opportunityReportProvider);
-      ref.invalidate(cashOrTrashProvider);
-      ref.invalidate(newsProvider);
-      ref.invalidate(marketHistoryProvider);
-      ref.invalidate(ratesProvider);
-      ref.invalidate(disclosuresProvider);
-    },
+    onResume: () => refreshPublishedContent(
+      api: ref.read(staticApiProvider),
+      invalidate: ref.invalidate,
+    ),
   );
   ref.onDispose(lifecycle.dispose);
 });

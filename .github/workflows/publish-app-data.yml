@@ -61,6 +61,33 @@ concurrency:
   group: publish-app-data
   cancel-in-progress: false
 
+# The cumulative side-stores, which have to be committed or the harvests that
+# write them restart from scratch on every runner.
+#
+# `build_all.py` describes these harvests as "resumable: whatever the host
+# refuses today is simply first in the queue tomorrow". On a runner tomorrow's
+# queue was identical to today's, because the store was thrown away with the
+# machine — so `harvest_names_mubasher --limit 12`, `harvest_company_filings
+# --limit 5`, `enrich_disclosures --limit 8` and `build_financials_api` spent
+# their whole request budget six times a trading day and advanced nothing.
+# `translations.py` says its cache "is committed … the file is the review
+# surface"; CI had never written a line into it.
+#
+# market_history.json matters differently and more: build_market_history.py
+# loads its append-only store from here, not from the published document, and
+# never invents a breadth count for a past session. Every breadth row CI added
+# was destroyed by the next run.
+env:
+  STORES: >-
+    scripts/company_filings_seen.json
+    scripts/company_names_ar.json
+    scripts/financials_filed.json
+    scripts/macro_insight.json
+    scripts/market_history.json
+    scripts/news_images.json
+    scripts/statements_filed.json
+    scripts/translations_en.json
+
 permissions:
   contents: write
 
@@ -155,7 +182,7 @@ jobs:
       - name: Show what changed
         id: diff
         run: |
-          git add -A public/data app/assets/fixtures
+          git add -A public/data app/assets/fixtures ${STORES}
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No change to published data."
@@ -223,7 +250,7 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
-            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/'; then
+            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
               return 1
@@ -238,7 +265,7 @@ jobs:
             # The fingerprint has to describe the bytes that actually ended up
             # here, so it is recomputed after any merge and folded in.
             python3 scripts/build_fixtures.py >/dev/null 2>&1 || true
-            git add -A public/data app/assets/fixtures
+            git add -A public/data app/assets/fixtures ${STORES}
             git diff --cached --quiet || git commit --amend --no-edit >/dev/null
             return 0
           }

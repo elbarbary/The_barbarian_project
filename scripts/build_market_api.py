@@ -538,6 +538,34 @@ def is_after_close(as_of: str | None) -> bool:
     return cairo.hour * 60 + cairo.minute > 14 * 60 + 30
 
 
+def session_date(as_of: str | None) -> str | None:
+    """The trading session a scan belongs to, not the day it happened to run.
+
+    `asOf[:10]` was used verbatim, so a scan taken at the weekend stamped a day
+    the exchange does not trade. On 22 August that published
+    `market.json {"date": "2026-08-21", "is_close": true}` — a Friday — and the
+    date propagated into the disclosure triage, which copies `market["date"]`
+    into each filing's `evidence.date`. Three of those blocks are still live in
+    today's feed, so Home's unusual rail currently prints "08-21" under a field
+    whose own docstring says it names "the session the multiple was measured
+    on (§49)".
+
+    EGX trades Sunday to Thursday. A Friday or Saturday scan is reading
+    Thursday's closes, so it is dated Thursday. `is_after_close` already knows
+    the exchange's week for its own purpose; this applies the same fact to the
+    date itself.
+    """
+    if not as_of:
+        return None
+    try:
+        stamp = datetime.date.fromisoformat(as_of[:10])
+    except ValueError:
+        return as_of[:10]
+    # Monday=0 … Sunday=6. Friday(4) rolls back one day, Saturday(5) two.
+    back = {4: 1, 5: 2}.get(stamp.weekday(), 0)
+    return (stamp - datetime.timedelta(days=back)).isoformat()
+
+
 def previous_close(
     history: list[dict], session: str, close: float, change_pct: float | None
 ) -> float | None:
@@ -581,7 +609,7 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     records = scan["records"]
     # Whether this scan knows about broker scope at all — see `tradable_flag`.
     scan_has_scope = any("thndrScope" in r for r in records)
-    session = scan["asOf"][:10]
+    session = session_date(scan.get("asOf")) or scan["asOf"][:10]
 
     studied_path = API / "cash-or-trash" / "index.json"
     researched = set()

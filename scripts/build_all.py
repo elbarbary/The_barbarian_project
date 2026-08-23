@@ -55,6 +55,19 @@ STEPS = [
     ("Disclosures", "build_disclosures_api.py", True),
     ("News", "build_news_api.py", True),
     ("Rates", "build_rates_api.py", True),
+    # The world outside the exchange.
+    #
+    # This was in no STEPS list and in no workflow: `macro.json` had four
+    # commits in its life, none of them from CI, so Suez transits and the oil
+    # price moved only when somebody remembered to run the script. The app was
+    # meanwhile told to expect a maintained document — build_fixtures.py gives
+    # it a manifest counter like every other resource.
+    ("Macro", "build_macro_api.py", True),
+    # The deep price series, a pure projection of the committed stage — no
+    # network, and the same orphan story as Macro: 231 published files, two
+    # commits, neither from CI. It is a no-op on every run where the stage has
+    # not moved, which is most of them.
+    ("Deep prices", "build_prices_api.py", True),
     # After Market and Rates: it reads what they published and writes one row
     # per session, which is the only way this app will ever have an index
     # series or a breadth history.
@@ -91,6 +104,10 @@ STEPS = [
 BEST_EFFORT = {
     "Disclosures",
     "Filed net profit",
+    # Three third parties — IMF PortWatch, investing.com, the World Bank — none
+    # of which owes this project an answer. A refusal leaves the last good
+    # macro.json in place, which is dated and labelled like everything else.
+    "Macro",
     "Arabic names",
     "Company filings",
     "Filed documents",

@@ -175,16 +175,13 @@ class _Greeting extends ConsumerWidget {
             BSoftIconButton(
               icon: Icons.refresh_rounded,
               semanticLabel: l.refresh,
-              onTap: () {
-                ref.read(staticApiProvider).invalidateManifest();
-                ref.invalidate(marketSnapshotProvider);
-                ref.invalidate(companyDirectoryProvider);
-                ref.invalidate(opportunityReportProvider);
-                ref.invalidate(cashOrTrashProvider);
-                ref.invalidate(disclosuresProvider);
-                ref.invalidate(ratesProvider);
-                ref.invalidate(liveQuotesProvider);
-              },
+              // The same list the resume path uses. This one used to be
+              // written out by hand here and had drifted: it fetched the
+              // scanner and the studies, and not the news.
+              onTap: () => refreshPublishedContent(
+                api: ref.read(staticApiProvider),
+                invalidate: ref.invalidate,
+              ),
             ),
           ],
         ),

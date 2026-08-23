@@ -207,6 +207,31 @@ def main() -> int:
     store = load(STORE)
     rows = {r["date"]: r for r in store.get("sessions") or []}
 
+    # Seed from the published document as well as from the store.
+    #
+    # The store is the append-only source of truth and the published file is
+    # its projection — but only the published file was ever committed by CI,
+    # so every breadth row a runner appended was destroyed by the next run.
+    # (The store is committed now; this is what recovers the rows already
+    # lost, and what keeps the two from drifting again if either is restored
+    # from a different point in history.)
+    #
+    # Breadth only. Index levels are backfilled from a feed below and do not
+    # need rescuing, and a breadth count is never invented for a past session
+    # — this copies counts that were really made, it does not compute new ones.
+    published = load(OUT)
+    recovered = 0
+    for row_out in published.get("sessions") or []:
+        day = row_out.get("date")
+        if not day or "breadth" not in row_out:
+            continue
+        entry = rows.setdefault(day, {"date": day})
+        if "breadth" not in entry:
+            entry["breadth"] = row_out["breadth"]
+            recovered += 1
+    if recovered:
+        print(f"   recovered {recovered} breadth row(s) from the published file")
+
     # Backfill the index levels from the historical feed. This only ever adds
     # `indices` to a row; a breadth count is never invented for a past session,
     # because breadth is counted a different way from a different document and
