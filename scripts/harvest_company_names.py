@@ -40,13 +40,13 @@ import subprocess
 import sys
 from datetime import date, timedelta
 
+import scrapling_python
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 MAP = pathlib.Path(__file__).resolve().parent / "company_names_ar.json"
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 
-SCRAPLING_PY = pathlib.Path(
-    "/Users/barbary/Library/Application Support/pipx/venvs/scrapling/bin/python"
-)
+SCRAPLING_PY = scrapling_python.find()
 BASE = "https://www.egx.com.eg/ar/NewsSearch.aspx"
 
 TITLE = re.compile(
@@ -76,6 +76,7 @@ def fetch_days(days: int) -> list[str]:
     script = r'''
 import sys, json
 from scrapling.fetchers import StealthyFetcher
+
 
 urls = json.loads(sys.argv[1])
 pages = []
@@ -175,9 +176,18 @@ def main() -> int:
     parser.add_argument("--days", type=int, default=20)
     args = parser.parse_args()
 
-    if not SCRAPLING_PY.exists():
-        print(f"error: no scrapling interpreter at {SCRAPLING_PY}")
-        return 1
+    # No browser here is a fact about the machine, not an error.
+    #
+    # This used to `return 1`, and `build_all` treated that as a failed step,
+    # and `--check` treats a failed step as a validation failure — so on a
+    # runner with no Scrapling the entire daily build aborted before writing
+    # anything. The market snapshot, the company documents, the macro series
+    # and the crossings all stopped updating on 20 August because of this line,
+    # and it went unnoticed for three days: the fifteen-minute news job uses
+    # plain HTTP and kept succeeding, so the app looked alive.
+    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+        print(f"   {scrapling_python.missing_note()}")
+        return 0
 
     print("── Harvesting Arabic names from EGX filings")
     pages = fetch_days(args.days)

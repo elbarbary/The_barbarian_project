@@ -44,6 +44,8 @@ from datetime import UTC, date, datetime, timedelta
 
 import translations
 
+import scrapling_python
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "disclosures"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "disclosures"
@@ -81,9 +83,7 @@ COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 # The interpreter Scrapling lives in. Quoted everywhere because the path has a
 # space in it, which is exactly the kind of thing that fails once in CI and
 # never on the machine you tested on.
-SCRAPLING_PY = pathlib.Path(
-    "/Users/barbary/Library/Application Support/pipx/venvs/scrapling/bin/python"
-)
+SCRAPLING_PY = scrapling_python.find()
 
 BASE = "https://www.egx.com.eg/ar/NewsSearch.aspx"
 # sec_id=20 is the disclosures section. The other sections are listing notices
@@ -135,6 +135,7 @@ def _fetch_under_scrapling(url: str) -> str:
     script = r'''
 import sys, json
 from scrapling.fetchers import StealthyFetcher
+
 
 url = sys.argv[1]
 pages = []
@@ -567,9 +568,18 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
-    if not SCRAPLING_PY.exists():
-        print(f"error: no scrapling interpreter at {SCRAPLING_PY}")
-        return 1
+    # No browser here is a fact about the machine, not an error.
+    #
+    # This used to `return 1`, and `build_all` treated that as a failed step,
+    # and `--check` treats a failed step as a validation failure — so on a
+    # runner with no Scrapling the entire daily build aborted before writing
+    # anything. The market snapshot, the company documents, the macro series
+    # and the crossings all stopped updating on 20 August because of this line,
+    # and it went unnoticed for three days: the fifteen-minute news job uses
+    # plain HTTP and kept succeeding, so the app looked alive.
+    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+        print(f"   {scrapling_python.missing_note()}")
+        return 0
 
     print("── EGX disclosures")
     html = fetch(args.days)

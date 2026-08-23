@@ -38,15 +38,16 @@ import urllib.parse
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
+
 import build_disclosures_api as disclosures  # noqa: E402
+
+import scrapling_python
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 STATE = pathlib.Path(__file__).resolve().parent / "company_filings_seen.json"
 
-SCRAPLING_PY = pathlib.Path(
-    "/Users/barbary/Library/Application Support/pipx/venvs/scrapling/bin/python"
-)
+SCRAPLING_PY = scrapling_python.find()
 
 # How far back to ask.
 #
@@ -176,6 +177,9 @@ def main() -> int:
     args = parser.parse_args()
 
     print("── Company filings")
+    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+        print(f"   {scrapling_python.missing_note()}")
+        return 0
     state = load_state()
     held = disclosures.archive_read()
     print(f"   archive holds {len(held)} filings")

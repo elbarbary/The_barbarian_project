@@ -43,13 +43,13 @@ import sys
 
 from egx_filing_detail import financials_from_detail, parse_detail
 
+import scrapling_python
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = pathlib.Path(__file__).resolve().parent / "financials_filed.json"
 DISCLOSURES = REPO / "public" / "data" / "v1" / "disclosures" / "latest.json"
 
-SCRAPLING_PY = pathlib.Path(
-    "/Users/barbary/Library/Application Support/pipx/venvs/scrapling/bin/python"
-)
+SCRAPLING_PY = scrapling_python.find()
 DETAIL = "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={}"
 
 
@@ -63,6 +63,7 @@ def _fetch_details(news_ids: list[str], spacing: int) -> dict[str, str]:
     script = r'''
 import sys, json
 from scrapling.fetchers import StealthyFetcher
+
 
 ids, spacing = json.loads(sys.argv[1]), int(sys.argv[2])
 URL = "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={}"
@@ -187,9 +188,18 @@ def main() -> int:
         return 0
     print(f"   {len(todo)} unread results filings, {args.spacing}s apart")
 
-    if not SCRAPLING_PY.exists():
-        print(f"error: no scrapling interpreter at {SCRAPLING_PY}")
-        return 1
+    # No browser here is a fact about the machine, not an error.
+    #
+    # This used to `return 1`, and `build_all` treated that as a failed step,
+    # and `--check` treats a failed step as a validation failure — so on a
+    # runner with no Scrapling the entire daily build aborted before writing
+    # anything. The market snapshot, the company documents, the macro series
+    # and the crossings all stopped updating on 20 August because of this line,
+    # and it went unnoticed for three days: the fifteen-minute news job uses
+    # plain HTTP and kept succeeding, so the app looked alive.
+    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+        print(f"   {scrapling_python.missing_note()}")
+        return 0
 
     pages = _fetch_details([t["news_id"] for t in todo], args.spacing)
     if not pages:

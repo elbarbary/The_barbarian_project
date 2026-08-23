@@ -78,7 +78,23 @@ STEPS = [
 ]
 
 # Steps whose failure is a shrug rather than a problem.
-BEST_EFFORT = {"Arabic names", "Company filings", "Filed documents"}
+# Steps whose failure is a shrug rather than a problem.
+#
+# Everything that reaches the exchange is here. EGX needs a real browser, that
+# browser is not on every machine this runs on, and the exchange refuses us
+# outright often enough that treating a refusal as a broken build means the
+# build is broken most days. Each of these leaves the last good document in
+# place, so the cost of skipping one is that its data is a run older — against
+# a cost, when they were fatal, of the market snapshot and every company
+# document going three days without an update because a path did not exist on
+# a runner.
+BEST_EFFORT = {
+    "Disclosures",
+    "Filed net profit",
+    "Arabic names",
+    "Company filings",
+    "Filed documents",
+}
 
 
 def main() -> int:
