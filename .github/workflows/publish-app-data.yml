@@ -90,9 +90,24 @@ jobs:
         id: scrapling
         continue-on-error: true
         run: |
-          python3 -m pip install --quiet scrapling
-          python3 -m scrapling install || scrapling install || true
-          echo "SCRAPLING_PYTHON=$(which python3)" >> "$GITHUB_ENV"
+          # The bare package has no fetchers — `scrapling.fetchers` fails to
+          # import and every EGX step falls back to skipping. The working local
+          # install is scrapling 0.4.11 with patchright and playwright beside
+          # it, which is what the `fetchers` extra pulls in.
+          python3 -m pip install --quiet "scrapling[fetchers]" \
+            || python3 -m pip install --quiet "scrapling[all]" \
+            || python3 -m pip install --quiet scrapling patchright playwright
+          # Then the browser binaries themselves.
+          python3 -m scrapling install || scrapling install \
+            || python3 -m patchright install --with-deps chromium || true
+          # Only claim a browser once one has actually opened. Exporting the
+          # path on faith puts a traceback in the middle of the build log where
+          # an honest "skipping" line belongs.
+          if python3 -c 'from scrapling.fetchers import StealthyFetcher'; then
+            echo "SCRAPLING_PYTHON=$(which python3)" >> "$GITHUB_ENV"
+          else
+            echo 'scrapling fetchers unavailable — the exchange steps will skip'
+          fi
 
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
