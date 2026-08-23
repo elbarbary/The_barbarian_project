@@ -153,7 +153,20 @@ abstract class NewsItem with _$NewsItem {
 
   /// Only shown when the event is something other than the catch-all: a chip
   /// reading "Other" tells a reader nothing they did not already know.
-  String? get eventTag => event == 'other' ? null : eventLabel;
+  /// Only shown when the event is something other than the catch-all, and in
+  /// the reader's language.
+  ///
+  /// This returned `eventLabel` — English — so an Arabic reader met a chip
+  /// reading "RESULTS" on top of an Arabic headline, while `event_label_ar`
+  /// sat unread in the same object for every one of the 148 stories that
+  /// carries one.
+  String? eventTagFor(bool arabic) {
+    if (event == 'other') return null;
+    final chosen = arabic && eventLabelAr.isNotEmpty
+        ? eventLabelAr
+        : eventLabel;
+    return chosen.isEmpty ? null : chosen;
+  }
 }
 
 /// One outlet's copy of a story.

@@ -1142,7 +1142,7 @@ class HomeLatestNews extends ConsumerWidget {
                                   when why.isNotEmpty) ...[
                                 BInsightLine(why),
                                 const SizedBox(height: 7),
-                              ] else if (item.eventTag
+                              ] else if (item.eventTagFor(arabic)
                                   case final String tag) ...[
                                 BKindChip(tag),
                                 const SizedBox(height: 7),

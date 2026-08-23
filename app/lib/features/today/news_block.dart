@@ -195,7 +195,8 @@ class _Headline extends ConsumerWidget {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 if (item.weight == 'check') const _CheckTag(),
-                if (item.eventTag case final String tag) _EventTag(label: tag),
+                if (item.eventTagFor(arabic) case final String tag)
+                  _EventTag(label: tag),
                 Text(
                   [
                     outlet,
@@ -306,7 +307,9 @@ class _EventTag extends StatelessWidget {
         borderRadius: BorderRadius.circular(BarbarianRadius.pill),
       ),
       child: Text(
-        label.toUpperCase(),
+        // Arabic has no case, so uppercasing is gated on the script rather
+        // than applied blindly (spec §41) — the same rule BSectionLabel uses.
+        isArabic(label) ? label : label.toUpperCase(),
         style: BarbarianType.labelNano.copyWith(color: c.textSecondary),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
