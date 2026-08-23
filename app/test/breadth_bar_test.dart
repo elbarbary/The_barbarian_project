@@ -1,3 +1,4 @@
+import 'package:barbarian/core/models/market_history.dart';
 import 'package:barbarian/features/home/home_screen.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -92,5 +93,30 @@ void main() {
 
     // And the total the shares are out of.
     expect(find.textContaining(RegExp(r'of \d+ shares')), findsOneWidget);
+  });
+
+  group('a row that cannot be a session stays off the chart', () {
+    // Both of these are in the published history, and both came out of the
+    // reconstruction rather than out of the market.
+    test('nothing rose and nothing fell', () {
+      const impossible = MarketBreadth(
+        flat: 243,
+        counted: 243,
+        basis: 'closes',
+      );
+
+      expect(impossible.isEmpty, isFalse, reason: 'it does carry counts');
+      expect(impossible.isCredible, isFalse);
+    });
+
+    test('one company is not a market', () {
+      const one = MarketBreadth(flat: 1, counted: 1, basis: 'closes');
+      expect(one.isCredible, isFalse);
+    });
+
+    test('a real session is kept', () {
+      const real = MarketBreadth(up: 172, down: 59, flat: 49, counted: 280);
+      expect(real.isCredible, isTrue);
+    });
   });
 }

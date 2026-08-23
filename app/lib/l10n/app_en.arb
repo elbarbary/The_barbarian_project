@@ -315,71 +315,206 @@
   "finNoDocuments": "No document is attached to this filing.",
   "exchangeSeeMore": "See earlier filings",
   "exchangeShowingMonth": "{month} · {count} filings",
-  "@exchangeShowingMonth": { "placeholders": { "month": {"type":"String"}, "count": {"type":"int"} } },
+  "@exchangeShowingMonth": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "exchangeArchiveNote": "Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.",
   "filingOpenCompany": "Open {ticker}",
-  "@filingOpenCompany": { "placeholders": { "ticker": {"type":"String"} } },
+  "@filingOpenCompany": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
   "filingReadFiling": "Read the filing",
   "companyFilings": "Filed with the exchange",
   "companyFilingsBody": "Everything {ticker} has told the exchange that we have kept, newest first.",
-  "@companyFilingsBody": { "placeholders": { "ticker": {"type":"String"} } },
+  "@companyFilingsBody": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
   "companyNoFilings": "Nothing filed",
   "companyNoFilingsBody": "We have kept no filings from this company yet. The exchange serves only its newest page, so the record here starts when we started collecting.",
   "unusualLabel": "Busier than usual",
   "unusualBody": "{count} of the {total} announcements we hold came from a company whose shares changed hands far more than they normally do.",
-  "@unusualBody": { "placeholders": { "count": {"type":"int"}, "total": {"type":"int"} } },
+  "@unusualBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "unusualTimes": "{ratio}× normal",
-  "@unusualTimes": { "placeholders": { "ratio": {"type":"String"} } },
+  "@unusualTimes": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
   "youNotAdvice": "ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.",
   "wiresBody": "{count} headlines from the Egyptian financial press, newest and most relevant first.",
-  "@wiresBody": { "placeholders": { "count": {"type":"int"} } },
+  "@wiresBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "wiresBodyChecks": "{count} of them name a company whose shares changed hands far more than usual that day.",
-  "@wiresBodyChecks": { "placeholders": { "count": {"type":"int"} } },
+  "@wiresBodyChecks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "exchangeSourceNote": "Source: the Egyptian Exchange. Each row links to the filing itself.",
   "watchlistRemove": "Remove {ticker} from watchlist",
-  "@watchlistRemove": { "placeholders": { "ticker": {"type":"String"} } },
+  "@watchlistRemove": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
   "directorySearchBody": "Try a ticker, or the Arabic legal name. The directory covers {count} companies.",
-  "@directorySearchBody": { "placeholders": { "count": {"type":"int"} } },
+  "@directorySearchBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "directoryNoQuote": "no quote",
   "directoryShareOfListings": "{percent}% of listings",
-  "@directoryShareOfListings": { "placeholders": { "percent": {"type":"String"} } },
+  "@directoryShareOfListings": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
   "exitWaitNone": "no published trading to measure",
   "exitWaitDay": "about a day to sell",
   "exitWaitSessions": "{count} sessions to sell",
-  "@exitWaitSessions": { "placeholders": { "count": {"type":"int"} } },
+  "@exitWaitSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "exitWaitYears": "{years} years of trading",
-  "@exitWaitYears": { "placeholders": { "years": {"type":"String"} } },
+  "@exitWaitYears": {
+    "placeholders": {
+      "years": {
+        "type": "String"
+      }
+    }
+  },
   "exitWaitDecades": "over {years} years of trading",
-  "@exitWaitDecades": { "placeholders": { "years": {"type":"int"} } },
+  "@exitWaitDecades": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
   "exitShareUnknown": "There is not enough published trading to work this out.",
   "exitShareWholeDay": "More than a whole normal day of trading in this share.",
   "exitShareUnderOne": "Under 1% of a normal day’s trading.",
   "exitSharePercent": "{percent}% of a normal day’s trading.",
-  "@exitSharePercent": { "placeholders": { "percent": {"type":"int"} } },
+  "@exitSharePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "exitNeedsBuyer": "A share only sells when somebody else wants to buy it.",
   "exitOneSession": "About this much can leave in one session",
   "exitLastTraded": "Last session that traded: {date}",
-  "@exitLastTraded": { "placeholders": { "date": {"type":"String"} } },
+  "@exitLastTraded": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "exitNotEnough": "Not enough published trading for {ticker}",
-  "@exitNotEnough": { "placeholders": { "ticker": {"type":"String"} } },
+  "@exitNotEnough": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
   "exitNothingChanged": "Nothing at all changed hands on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell.",
-  "@exitNothingChanged": { "placeholders": { "days": {"type":"int"}, "sessions": {"type":"int"} } },
+  "@exitNothingChanged": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
   "exitHowItWorks": "On this exchange a share can move at most 20% up or down in a session. When a name falls to that lower limit the buyers stop appearing, and there is no price at which a holder can sell — because selling needs somebody on the other side.\n\nSome shares here do not trade on some days at all. Not “traded a little” — nothing changed hands. This shows how much of a normal day a given sum would be, and how many sessions it would take to leave without being most of the trading.",
   "exitPastThat": "Past that, selling is more than a fifth of a normal day here and starts to take more than one session. That figure is different for every company on this exchange.",
   "exitAssumption": "The sessions figure assumes no more than a fifth of a day’s trading. That is a stated assumption rather than a market rule — selling faster moves the price against the seller, which is the cost being measured.",
   "exitNoHistoryBody": "This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.",
   "goldKaratGram": "{karat} karat gold, a gram",
-  "@goldKaratGram": { "placeholders": { "karat": {"type":"int"} } },
+  "@goldKaratGram": {
+    "placeholders": {
+      "karat": {
+        "type": "int"
+      }
+    }
+  },
   "goldPerOunce": "EGP {amount} / oz",
-  "@goldPerOunce": { "placeholders": { "amount": {"type":"String"} } },
+  "@goldPerOunce": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "dotsLabel": "What ties these together",
   "dotsBody": "Companies that turned up in more than one place in {days} days.",
-  "@dotsBody": { "placeholders": { "days": {"type":"int"} } },
+  "@dotsBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
   "dotsFiling": "Filing",
   "dotsNews": "In the press",
   "dotsSession": "That session",
   "dotsVolume": "{ratio}× normal volume",
-  "@dotsVolume": { "placeholders": { "ratio": {"type":"String"} } },
+  "@dotsVolume": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
   "filterTitle": "Narrow the list",
   "filterAdd": "Add a filter",
   "filterNone": "No filters",
@@ -400,7 +535,16 @@
   "filterUnitTimes": "×",
   "filterAnd": "and",
   "filterMatchCount": "{count} of {total} companies",
-  "@filterMatchCount": { "placeholders": { "count": {"type":"int"}, "total": {"type":"int"} } },
+  "@filterMatchCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "filterEps": "EPS",
   "filterProfit": "Net profit",
   "filterBusy": "Relative volume",
@@ -608,7 +752,16 @@
   "priceClose": "Close",
   "showMore": "Show more",
   "showingCount": "Showing {shown} of {total}",
-  "@showingCount": { "placeholders": { "shown": {"type":"int"}, "total": {"type":"int"} } },
+  "@showingCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "theWires": "News",
   "sortByScore": "By score",
   "sortMostRecent": "Most recent",
@@ -1669,5 +1822,75 @@
       }
     }
   },
-  "volumeTeachingFloor": "A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news."
+  "volumeTeachingFloor": "A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.",
+  "dotsExplainerTitle": "Crossings",
+  "@dotsExplainerTitle": {},
+  "dotsExplainerPlain": "One company turning up in more than one place at once.",
+  "@dotsExplainerPlain": {},
+  "dotsExplainerWorkings": "Three feeds are read for the same {days} days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new — every thread links back to the document it came from.",
+  "@dotsExplainerWorkings": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dotsExplainerYardstick": "Two threads is common. Three — a filing, a story and a session outside its own normal — happens to a handful of companies a week. A crossing is a question, not a verdict: it says a company was busy in more than one way, and nothing about whether that was good.",
+  "@dotsExplainerYardstick": {},
+  "dotsThreads": "{count, plural, =1{1 thread} other{{count} threads}}",
+  "@dotsThreads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeIndicesLabel": "The three indices",
+  "@exchangeIndicesLabel": {},
+  "exchangeRecorded": "{count} sessions recorded, since {date}",
+  "@exchangeRecorded": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "exchangeWindowMove": "over that stretch",
+  "@exchangeWindowMove": {},
+  "exchangeMoversLabel": "What rose and what fell",
+  "@exchangeMoversLabel": {},
+  "exchangeMoversBody": "The session's biggest moves, from the {count} shares that traded enough to count.",
+  "@exchangeMoversBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeBreadthLabel": "How wide each session was",
+  "@exchangeBreadthLabel": {},
+  "exchangeBreadthBody": "Rose, fell and unchanged, across every session this app has recorded.",
+  "@exchangeBreadthBody": {},
+  "exchangeRoseMore": "More shares rose than fell in {rose} of those {total} sessions.",
+  "@exchangeRoseMore": {
+    "placeholders": {
+      "rose": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeOneSession": "One session recorded so far. The lines start here.",
+  "@exchangeOneSession": {},
+  "legendRose": "Rose",
+  "@legendRose": {},
+  "legendFell": "Fell",
+  "@legendFell": {},
+  "legendUnchanged": "Unchanged",
+  "@legendUnchanged": {}
 }

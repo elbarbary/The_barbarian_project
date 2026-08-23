@@ -165,14 +165,16 @@ void main() {
     await pumpScreen(tester, const TodayScreen());
     await pumpUntil(tester, find.byType(BLeadStory));
 
-    // What several documents have in common, then the stories, then the feeds
-    // they were drawn from. Reading the crossings after scrolling eighty
-    // filings is reading them too late.
-    final dots = tester.getTopLeft(find.byType(BConnectDots)).dy;
+    // The day's story, then what several documents had in common, then the
+    // feeds they were all drawn from. The crossings sat above the story for
+    // one build, which put the footnote before the sentence it annotates —
+    // and either way they have to come before the eighty filings, because
+    // reading them after scrolling that far is reading them too late.
     final lead = tester.getTopLeft(find.byType(BLeadStory)).dy;
+    final dots = tester.getTopLeft(find.byType(BConnectDots)).dy;
     final feeds = tester.getTopLeft(find.byType(BTodayFeeds)).dy;
-    expect(dots, lessThan(lead));
-    expect(lead, lessThan(feeds));
+    expect(lead, lessThan(dots));
+    expect(dots, lessThan(feeds));
   });
 
   testWidgets('§8 the macro block explains and never instructs', (

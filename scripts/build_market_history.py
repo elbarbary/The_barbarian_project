@@ -129,7 +129,13 @@ def derived_breadth(limit: int) -> dict[str, dict]:
                 down += 1
             else:
                 flat += 1
-        if up + down + flat:
+        # A row where nothing rose and nothing fell is not a session: it is a
+        # day differenced against itself, which is what this produces when the
+        # two dates it compared resolve to the same stored closes. 2026-07-23
+        # went out as `0 up · 0 down · 243 unchanged` and drew the unchanged
+        # line from the top of the breadth chart to the floor. One company is
+        # not a market either — 2026-07-26 was counted over exactly one.
+        if (up or down) and up + down + flat >= 30:
             out[current] = {
                 "up": up,
                 "down": down,

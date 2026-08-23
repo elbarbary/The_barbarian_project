@@ -4,6 +4,8 @@ import 'package:barbarian/core/providers.dart';
 import 'package:barbarian/core/storage/document_cache.dart';
 import 'package:barbarian/core/theme/barbarian_theme.dart';
 import 'package:barbarian/core/widgets/nav.dart';
+import 'package:barbarian/features/exchange/index_levels.dart';
+import 'package:barbarian/features/home/market_hero.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -203,6 +205,51 @@ void main() {
       await pumpUntil(tester, find.text('No account needed to read'));
       expect(find.text('COMI'), findsWidgets);
       expect(find.text('Empty watchlist'), findsNothing);
+    });
+
+    testWidgets('the search pill opens the directory, filters and all', (
+      tester,
+    ) async {
+      // Home grew its own live search for one build, which answered with six
+      // rows and no way to narrow them. The pill is a link again: what it
+      // opens is the screen carrying the sector chips, the four sorts, the
+      // researched toggle and the numeric filters.
+      await boot(tester);
+      await openSearch(tester);
+
+      await pumpUntil(tester, find.text('The full directory'));
+      // The chips are inside the directory's async view, so waiting on the
+      // title alone would assert against a loading state.
+      await pumpUntil(tester, find.text('Add a filter'));
+      expect(find.text('Risers'), findsOneWidget);
+      expect(find.text('Fallers'), findsOneWidget);
+      expect(find.text('A–Z'), findsOneWidget);
+
+      // Tapping a search box means the reader has already decided to type.
+      final field = tester.widget<TextField>(find.byType(TextField).first);
+      expect(field.autofocus, isTrue);
+
+      final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
+      expect(nav.active, BNavTab.home);
+    });
+
+    testWidgets('the hero opens the session at length', (tester) async {
+      // The hero used to open the EGX 30's explainer sheet — one of the three
+      // numbers on it, and none of the questions it provokes.
+      await boot(tester);
+      await tapTab(tester, BNavTab.home);
+      // Waiting on the hero itself would tap its skeleton: the widget is in
+      // the tree from the first frame and only becomes pressable once the
+      // rates document lands.
+      await pumpUntil(tester, find.byIcon(Icons.arrow_outward_rounded));
+
+      await tapVisible(tester, find.byType(BMarketHero));
+      await pumpUntil(tester, find.byType(BIndexPanel));
+
+      expect(find.text('THE THREE INDICES'), findsOneWidget);
+
+      final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
+      expect(nav.active, BNavTab.home);
     });
 
     // Market stopped being a destination, so this no longer moves the app to

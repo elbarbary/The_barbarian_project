@@ -35,7 +35,7 @@ class BBreadthChart extends StatelessWidget {
     final c = context.colors;
     final rows = [
       for (final s in sessions)
-        if (s.breadth case final MarketBreadth b when !b.isEmpty) (s.date, b),
+        if (s.breadth case final MarketBreadth b when b.isCredible) (s.date, b),
     ];
     if (rows.isEmpty) return SizedBox(height: height);
 

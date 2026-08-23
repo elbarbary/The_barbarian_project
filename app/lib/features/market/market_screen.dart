@@ -26,11 +26,21 @@ import 'numeric_filter.dart';
 /// No "top buys", no "best stocks", no "AI picks" — the tab is a browser for
 /// the exchange, not a recommendation surface (spec §11).
 class MarketScreen extends ConsumerStatefulWidget {
-  const MarketScreen({required this.parentTab, super.key});
+  const MarketScreen({
+    required this.parentTab,
+    this.focusSearch = false,
+    super.key,
+  });
 
   /// Which navigation slot stays lit while this is open. Market used to BE a
   /// slot; it is now a reference reached from Ask, so it inherits the caller's.
   final BNavTab parentTab;
+
+  /// True when the reader got here by tapping a search pill, in which case the
+  /// keyboard should already be up. False when they got here by any other
+  /// route — "browse companies", "see all 22", the sector grid — where the
+  /// first thing they want to see is the list, not a keyboard over it.
+  final bool focusSearch;
 
   @override
   ConsumerState<MarketScreen> createState() => _MarketScreenState();
@@ -89,6 +99,7 @@ class _MarketScreenState extends ConsumerState<MarketScreen> {
         BSearchPill(
           text: l.searchCompanies,
           controller: _search,
+          autofocus: widget.focusSearch,
           onChanged: (v) => setState(() => _query = v),
         ),
         BAsyncView(

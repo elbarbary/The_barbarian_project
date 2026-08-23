@@ -104,6 +104,23 @@ abstract class MarketBreadth with _$MarketBreadth {
 
   bool get isEmpty => counted == 0;
 
+  /// Whether this row can be a real count of a real session.
+  ///
+  /// Two shapes of row cannot be, and both are in the published history:
+  ///
+  ///   * `up 0 · down 0 · flat 243` — every share in the market closing at
+  ///     exactly the price it closed at before. That is a day compared with
+  ///     itself, not a session, and it is what the reconstruction produces
+  ///     when the two closes it differenced came from the same file.
+  ///   * `counted 1` — one company is not a market.
+  ///
+  /// They are left in the document rather than deleted, because the document
+  /// is a record of what was collected. They are kept off the chart, because a
+  /// chart is a claim about what happened: one of these drew the "unchanged"
+  /// line from the top of the axis to the floor and made a month of real
+  /// breadth look like an aftershock.
+  bool get isCredible => counted >= 30 && (up > 0 || down > 0);
+
   /// Which way the session leaned, without saying whether that is good.
   bool get roseMore => up > down;
 

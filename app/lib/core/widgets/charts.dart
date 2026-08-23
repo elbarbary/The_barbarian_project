@@ -22,12 +22,21 @@ class BSparkline extends StatelessWidget {
     required this.values,
     this.height = 34,
     this.color,
+    this.fill = false,
+    this.strokeWidth = 1.6,
     super.key,
   });
 
   final List<double> values;
   final double height;
   final Color? color;
+
+  /// Closes the path and washes the area under it. Off at 34pt, where a fill
+  /// under a 34-point line is a smudge; on where the chart is the block rather
+  /// than an ornament beside a figure.
+  final bool fill;
+
+  final double strokeWidth;
 
   /// Two points of width per drawn point, so a stroke has room to be a line
   /// rather than a smear. Below this the chart is denser than the screen.
@@ -86,10 +95,16 @@ class BSparkline extends StatelessWidget {
                   constraints.maxWidth.isFinite ? constraints.maxWidth : 120,
                 ),
                 line: color ?? (rising ? c.up : c.down),
-                fillTop: null,
-                fillBottom: null,
-                strokeWidth: 1.6,
-                padding: 3,
+                fillTop: fill
+                    ? (color ?? (rising ? c.up : c.down)).withValues(
+                        alpha: 0.22,
+                      )
+                    : null,
+                fillBottom: fill
+                    ? (color ?? (rising ? c.up : c.down)).withValues(alpha: 0)
+                    : null,
+                strokeWidth: strokeWidth,
+                padding: fill ? 6 : 3,
               ),
             ),
           ),

@@ -43,14 +43,20 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
       blockGap: 22,
       children: [
         const _TodayHeader(),
-        // The reading screen, and only that: what several documents have in
-        // common, then the stories, then everything the exchange published.
+        // The reading screen, and only that. In the order a reader meets a
+        // day: the story first, then what several documents had in common,
+        // then everything that was published.
+        //
+        // The story leads because it is the one thing on this screen that is
+        // about a company rather than about the feed. Crossings are a second
+        // reading — they only mean anything once you know what happened —
+        // and they were above the story for one build, which put the
+        // footnote before the sentence it annotates.
         //
         // The scanner and the rates rails moved to Home, where the rest of the
         // market furniture lives. This screen is now one thing.
-        const BConnectDots(parentTab: BNavTab.today),
-        // The day's stories, at the size a story deserves.
         const BLeadStory(parentTab: BNavTab.today),
+        const BConnectDots(parentTab: BNavTab.today),
         // Both feeds, complete and paged, behind one selector.
         const BTodayFeeds(),
         if (isSample) const Center(child: BSampleDataNotice()),
@@ -102,12 +108,6 @@ class _TodayHeader extends ConsumerWidget {
     );
   }
 }
-
-/// What the whole exchange did today, from the closes the app already holds.
-///
-/// The canvas puts an index level here. There is no licensed EGX index feed,
-/// but breadth — how many rose against how many fell — is a real aggregate of
-/// real closes, and arguably tells you more about a session than a single
 
 /// Today's two feeds, behind the selector Home uses.
 ///

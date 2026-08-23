@@ -10,7 +10,6 @@ import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/composites.dart';
-import '../../core/widgets/load_more.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
@@ -44,177 +43,50 @@ import '../../l10n/app_localizations.dart';
 /// No such board is in this repository: all nine checked-in boards specify a
 /// Home tab, `_design-system.json` types the nav as `home|market|pit|you`, and
 /// spec §6 describes this screen. It is back.
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final TextEditingController _search = TextEditingController();
-
-  /// This screen's own search text. Not a shared provider: two screens
-  /// searching must not share one query — see `searchResultsProvider`.
-  String _query = '';
-
-  @override
-  void dispose() {
-    _search.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final query = _query.trim();
 
     return BScreenScaffold(
       blockGap: 22,
       children: [
         const _Greeting(),
-        // A live field, not a row that navigates away.
+        // A link, not a field.
         //
-        // "Somebody just sent me a name" is the single most common reason this
-        // app gets opened, and the pill here used to be a display row that
-        // pushed the directory — two taps and a screen change before a reader
-        // could type. On a command screen the search is the first thing that
-        // works, so it answers here.
+        // Home grew its own live search for one build, and the six rows it
+        // could show were a worse answer than the screen that already exists:
+        // the directory carries the sector chips, the four sorts, the
+        // researched-only toggle and the numeric filters, and none of that
+        // fits under a pill on the front door. Tapping here opens that screen
+        // with the keyboard already up, so the cost is one frame rather than
+        // a second tap.
         BSearchPill(
           text: l.homeSearchHint,
-          controller: _search,
-          onChanged: (value) => setState(() => _query = value),
+          onTap: () =>
+              context.push(Routes.directoryPath(BNavTab.home, focus: true)),
         ),
 
-        // While something is typed, the screen is the search. Showing eleven
-        // blocks of market furniture under a list of results is asking a
-        // reader to scroll past the answer.
-        if (query.isNotEmpty)
-          _SearchResults(
-            query: query,
-            onClear: () => setState(() {
-              _query = '';
-              _search.clear();
-            }),
-          )
-        else ...[
-          // Home is the market screen. Today is the reading screen — the
-          // crossings, the news and the filings, and nothing else.
-          //
-          // The order is what a reader would ask for, loudest first:
-          //
-          //   1. what the whole exchange did, on one card
-          //   2. which companies moved far outside their own normal
-          //   3. what the published rule found
-          //   4. the pound, the world, and the metals Egyptians hold
-          //   5. what moves Egypt underneath all of it
-          //   6. the watchlist, reached on purpose
-          const BMarketHero(),
-          const BBusiest(),
-          const BScannerHero(parentTab: BNavTab.home),
-          const BRatesBlock(),
-          const BMacroBlock(),
-          const _WatchlistBlock(),
-        ],
+        // Home is the market screen. Today is the reading screen — the
+        // crossings, the news and the filings, and nothing else.
+        //
+        // The order is what a reader would ask for, loudest first:
+        //
+        //   1. what the whole exchange did, on one card
+        //   2. which companies moved far outside their own normal
+        //   3. what the published rule found
+        //   4. the pound, the world, and the metals Egyptians hold
+        //   5. what moves Egypt underneath all of it
+        //   6. the watchlist, reached on purpose
+        const BMarketHero(),
+        const BBusiest(),
+        const BScannerHero(parentTab: BNavTab.home),
+        const BRatesBlock(),
+        const BMacroBlock(),
+        const _WatchlistBlock(),
       ],
-    );
-  }
-}
-
-/// The directory, answered where it was asked.
-class _SearchResults extends ConsumerWidget {
-  const _SearchResults({required this.query, required this.onClear});
-
-  final String query;
-  final VoidCallback onClear;
-
-  /// Enough to recognise the one they meant, and a way to the rest.
-  static const int shown = 6;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = AppLocalizations.of(context);
-    final arabic = Directionality.of(context) == TextDirection.rtl;
-    final results = ref.watch(searchResultsProvider(query));
-    final snapshot = ref.watch(livePricesProvider);
-
-    if (results.isEmpty) {
-      return BEmptyState(
-        title: l.homeSearchNone(query),
-        body: l.directoryNotOnDeviceBody,
-        actionLabel: l.studyClearFilters,
-        onAction: onClear,
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        BGroupedListCard(
-          rows: [
-            for (final company in results.take(shown))
-              _ResultRow(
-                company: company,
-                quote: snapshot?.quoteFor(company.ticker),
-                arabic: arabic,
-              ),
-          ],
-        ),
-        if (results.length > shown) ...[
-          const SizedBox(height: 10),
-          BLoadMoreButton(
-            label: l.homeSearchMore(results.length),
-            onTap: () => context.push(Routes.directoryPath(BNavTab.home)),
-          ),
-        ],
-      ],
-    );
-  }
-}
-
-class _ResultRow extends StatelessWidget {
-  const _ResultRow({
-    required this.company,
-    required this.quote,
-    required this.arabic,
-  });
-
-  final CompanySummary company;
-  final StockQuote? quote;
-  final bool arabic;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    final change = quote?.resolvedChangePercent;
-    // The reader's own language leads, as it does in the directory.
-    final lead = arabic && company.nameAr != null;
-
-    return BListRow(
-      leading: BTickerMonogram(company.ticker, sector: company.sector),
-      title: lead ? company.nameAr! : company.nameEn,
-      titleIsArabic: lead,
-      subtitle: lead ? company.nameEn : company.nameAr,
-      subtitleIsArabic: !lead && company.nameAr != null,
-      onTap: () =>
-          context.push(Routes.companyPath(BNavTab.home, company.ticker)),
-      trailing: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          BNumText(
-            quote == null ? '—' : quote!.close.toStringAsFixed(2),
-            style: BarbarianType.figureS.copyWith(color: c.textPrimary),
-          ),
-          if (change != null) ...[
-            const SizedBox(height: 4),
-            BChangeDelta(
-              value: '${(change.abs() * 100).toStringAsFixed(2)}%',
-              direction: BDirection.of(change),
-            ),
-          ],
-        ],
-      ),
     );
   }
 }

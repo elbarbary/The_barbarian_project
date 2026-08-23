@@ -6,6 +6,7 @@ import '../core/providers.dart';
 import '../core/widgets/nav.dart';
 import '../features/cash_or_trash/cash_or_trash_screen.dart';
 import '../features/company/company_screen.dart';
+import '../features/exchange/exchange_screen.dart';
 import '../features/exit/exit_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/market/market_screen.dart';
@@ -30,12 +31,19 @@ abstract final class Routes {
   static const String exit = 'exit';
   static const String exitFor = 'exit/:ticker';
 
+  /// The session at length — the three indices, the movers, the breadth
+  /// history. What the Home hero opens.
+  static const String exchange = 'exchange';
+
   static const String scanner = 'scanner';
   static const String cashOrTrash = 'cash-or-trash';
   static const String company = 'company/:ticker';
   static const String article = 'article';
 
-  static String directoryPath(BNavTab from) => '${_root(from)}directory';
+  /// The directory. `focus` opens it with the keyboard already up, which is
+  /// what tapping a search pill means — the reader has already decided to type.
+  static String directoryPath(BNavTab from, {bool focus = false}) =>
+      '${_root(from)}directory${focus ? '?focus=1' : ''}';
 
   static String exitPath(BNavTab from, [String? ticker]) =>
       '${_root(from)}exit${ticker == null ? '' : '/$ticker'}';
@@ -44,6 +52,8 @@ abstract final class Routes {
       '${_root(from)}company/$ticker'.replaceAll('//', '/');
 
   static String scannerPath(BNavTab from) => '${_root(from)}scanner';
+
+  static String exchangePath(BNavTab from) => '${_root(from)}exchange';
 
   static String cashOrTrashPath(BNavTab from) => '${_root(from)}cash-or-trash';
 
@@ -80,7 +90,14 @@ GoRouter buildRouter() {
     ),
     GoRoute(
       path: Routes.directory,
-      builder: (context, state) => MarketScreen(parentTab: tab),
+      builder: (context, state) => MarketScreen(
+        parentTab: tab,
+        focusSearch: state.uri.queryParameters['focus'] == '1',
+      ),
+    ),
+    GoRoute(
+      path: Routes.exchange,
+      builder: (context, state) => ExchangeScreen(parentTab: tab),
     ),
     GoRoute(
       path: Routes.scanner,

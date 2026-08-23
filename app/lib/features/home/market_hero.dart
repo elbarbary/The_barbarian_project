@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../core/models/explainer.dart';
+import '../../app/router.dart';
 import '../../core/models/market_history.dart';
 import '../../core/models/rates.dart';
 import '../../core/providers.dart';
@@ -10,6 +11,7 @@ import '../../core/widgets/charts.dart';
 import '../../core/widgets/controls.dart';
 import '../../core/widgets/explainer_sheet.dart';
 import '../../core/widgets/motion.dart';
+import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
@@ -28,7 +30,10 @@ import '../../l10n/app_localizations.dart';
 /// figures, and the day's breadth runs underneath as a bar a reader can take
 /// in without counting. Colour does the work that sentences were doing.
 class BMarketHero extends ConsumerWidget {
-  const BMarketHero({super.key});
+  const BMarketHero({this.parentTab = BNavTab.home, super.key});
+
+  /// Which navigation slot stays lit when the full screen opens from here.
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,37 +56,39 @@ class BMarketHero extends ConsumerWidget {
     final rest = indices.length > 1 ? indices.sublist(1) : const <RateRow>[];
 
     return BPressable(
-      onTap: lead == null
-          ? null
-          : () => showExplainer(
-              context,
-              Explainer(
-                termId: 'index.${lead.id}',
-                title: lead.labelFor(arabic).isEmpty
-                    ? lead.id
-                    : lead.labelFor(arabic),
-                plain: lead.plainFor(arabic),
-                token: lead.token,
-                workings: lead.workingsFor(arabic),
-                yardstick: lead.yardstickFor(arabic),
-                notability: Notability.unjudged,
-                provenance: Provenance.fact,
-                source: lead.source,
-              ),
-              series: history?.levelsOf(lead.id) ?? const [],
-            ),
+      // The card used to open the EGX 30's explainer sheet, which explained
+      // one of the three numbers on it and answered none of the questions the
+      // card provokes: what the other two indices have been doing, which
+      // shares actually moved, whether today was wide or narrow against the
+      // sessions before it. It opens the screen that answers those. The
+      // explainer is still one tap away — on the number itself, there.
+      onTap: () => context.push(Routes.exchangePath(parentTab)),
       child: BDarkCard(
         radius: BarbarianRadius.xl,
         padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              l.heroLabel.toUpperCase(),
-              style: BarbarianType.labelNano.copyWith(
-                color: c.onInkMuted,
-                letterSpacing: 0.8,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l.heroLabel.toUpperCase(),
+                    style: BarbarianType.labelNano.copyWith(
+                      color: c.onInkMuted,
+                      letterSpacing: 0.8,
+                    ),
+                  ),
+                ),
+                // A card that opens a screen has to look like one. Without a
+                // mark this reads as a panel of figures, and the whole of the
+                // session's detail sits behind a tap nobody makes.
+                Icon(
+                  Icons.arrow_outward_rounded,
+                  size: 15,
+                  color: c.onInkMuted,
+                ),
+              ],
             ),
             if (lead != null) ...[
               const SizedBox(height: 14),
@@ -151,7 +158,7 @@ class _Lead extends StatelessWidget {
               BDottedUnderline(
                 onDark: true,
                 child: BNumText(
-                  level == null ? '—' : _grouped(level),
+                  level == null ? '—' : grouped(level),
                   style: BarbarianType.displayS.copyWith(color: c.onInk),
                 ),
               ),
@@ -206,7 +213,7 @@ class _Second extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           BNumText(
-            level == null ? '—' : _grouped(level),
+            level == null ? '—' : grouped(level),
             style: BarbarianType.figureS.copyWith(color: c.onInk),
           ),
           if (change != null) ...[
@@ -290,16 +297,4 @@ class _Breadth extends StatelessWidget {
       ],
     );
   }
-}
-
-/// Thousands separated, because a five-digit index level is unreadable without.
-String _grouped(double value) {
-  final whole = value.round().toString();
-  final buf = StringBuffer();
-  for (var i = 0; i < whole.length; i++) {
-    if (i > 0 && (whole.length - i) % 3 == 0) buf.write(',');
-    buf.write(whole[i]);
-  }
-  final fraction = ((value - value.floor()) * 10).round();
-  return fraction == 0 ? buf.toString() : '$buf.$fraction';
 }

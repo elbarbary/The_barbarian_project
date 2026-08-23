@@ -187,6 +187,23 @@ class BSectionLabel extends StatelessWidget {
 /// the reader can follow it.
 bool isArabic(String value) => RegExp(r'[؀-ۿ]').hasMatch(value);
 
+/// Thousands separated, because a five-digit index level is unreadable
+/// without — 55350.4 and 55,350.4 are the same number and only one of them can
+/// be read at a glance.
+///
+/// One decimal, never two: these are index levels and a hundredth of a point
+/// is noise printed at the same size as the thousands.
+String grouped(double value) {
+  final whole = value.round().toString();
+  final buf = StringBuffer();
+  for (var i = 0; i < whole.length; i++) {
+    if (i > 0 && (whole.length - i) % 3 == 0) buf.write(',');
+    buf.write(whole[i]);
+  }
+  final fraction = ((value - value.floor()) * 10).round();
+  return fraction == 0 ? buf.toString() : '$buf.$fraction';
+}
+
 /// The low-emphasis text action: "Manage", "Edit", "See all". No chrome.
 class BInlineAction extends StatelessWidget {
   const BInlineAction(this.label, {this.onTap, this.onDark = false, super.key});

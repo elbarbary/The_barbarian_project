@@ -614,12 +614,18 @@ class BSearchPill extends StatelessWidget {
     this.onTap,
     this.controller,
     this.onChanged,
+    this.autofocus = false,
     super.key,
   });
 
   final String text;
   final bool isPlaceholder;
   final VoidCallback? onTap;
+
+  /// Raises the keyboard on arrival. Set only where the reader asked for the
+  /// field by tapping a search pill on the screen before — never on a screen
+  /// they merely landed on, which would cover half of it with a keyboard.
+  final bool autofocus;
 
   /// When supplied the pill becomes a live field; otherwise it is a display row
   /// that opens search elsewhere.
@@ -644,6 +650,7 @@ class BSearchPill extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 onChanged: onChanged,
+                autofocus: autofocus,
                 style: BarbarianType.label.copyWith(color: c.textPrimary),
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(

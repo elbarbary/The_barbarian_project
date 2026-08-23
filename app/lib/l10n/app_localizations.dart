@@ -3799,6 +3799,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.'**
   String get volumeTeachingFloor;
+
+  /// No description provided for @dotsExplainerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Crossings'**
+  String get dotsExplainerTitle;
+
+  /// No description provided for @dotsExplainerPlain.
+  ///
+  /// In en, this message translates to:
+  /// **'One company turning up in more than one place at once.'**
+  String get dotsExplainerPlain;
+
+  /// No description provided for @dotsExplainerWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'Three feeds are read for the same {days} days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new — every thread links back to the document it came from.'**
+  String dotsExplainerWorkings(int days);
+
+  /// No description provided for @dotsExplainerYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'Two threads is common. Three — a filing, a story and a session outside its own normal — happens to a handful of companies a week. A crossing is a question, not a verdict: it says a company was busy in more than one way, and nothing about whether that was good.'**
+  String get dotsExplainerYardstick;
+
+  /// No description provided for @dotsThreads.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 thread} other{{count} threads}}'**
+  String dotsThreads(int count);
+
+  /// No description provided for @exchangeIndicesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The three indices'**
+  String get exchangeIndicesLabel;
+
+  /// No description provided for @exchangeRecorded.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sessions recorded, since {date}'**
+  String exchangeRecorded(int count, String date);
+
+  /// No description provided for @exchangeWindowMove.
+  ///
+  /// In en, this message translates to:
+  /// **'over that stretch'**
+  String get exchangeWindowMove;
+
+  /// No description provided for @exchangeMoversLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What rose and what fell'**
+  String get exchangeMoversLabel;
+
+  /// No description provided for @exchangeMoversBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The session\'s biggest moves, from the {count} shares that traded enough to count.'**
+  String exchangeMoversBody(int count);
+
+  /// No description provided for @exchangeBreadthLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'How wide each session was'**
+  String get exchangeBreadthLabel;
+
+  /// No description provided for @exchangeBreadthBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Rose, fell and unchanged, across every session this app has recorded.'**
+  String get exchangeBreadthBody;
+
+  /// No description provided for @exchangeRoseMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More shares rose than fell in {rose} of those {total} sessions.'**
+  String exchangeRoseMore(int rose, int total);
+
+  /// No description provided for @exchangeOneSession.
+  ///
+  /// In en, this message translates to:
+  /// **'One session recorded so far. The lines start here.'**
+  String get exchangeOneSession;
+
+  /// No description provided for @legendRose.
+  ///
+  /// In en, this message translates to:
+  /// **'Rose'**
+  String get legendRose;
+
+  /// No description provided for @legendFell.
+  ///
+  /// In en, this message translates to:
+  /// **'Fell'**
+  String get legendFell;
+
+  /// No description provided for @legendUnchanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Unchanged'**
+  String get legendUnchanged;
 }
 
 class _AppLocalizationsDelegate

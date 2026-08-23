@@ -2233,4 +2233,77 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get volumeTeachingFloor =>
       'تُستبعد من القائمة الجلسة الضئيلة القيمة مهما بلغ مضاعفها. فالترتيب الخام اليوم يبدأ بشركة تداولت 567 سهمًا مقابل معتاد قدره أربعة — أي 141 ضعف معتادها، و708,750 جنيهًا. ومضاعفة رقم صغير جدًا حساب لا خبر.';
+
+  @override
+  String get dotsExplainerTitle => 'التقاطعات';
+
+  @override
+  String get dotsExplainerPlain =>
+      'شركة واحدة تظهر في أكثر من مكان في الوقت نفسه.';
+
+  @override
+  String dotsExplainerWorkings(int days) {
+    return 'نقرأ ثلاثة مصادر عن $days من الأيام نفسها: ما أفصحت عنه البورصة، وما كتبته الصحافة، وما فعله السهم. وتُدرج الشركة هنا إذا ظهرت في اثنين منها على الأقل. لا شيء في البطاقة جديد — كل خيط يعود إلى المستند الذي جاء منه.';
+  }
+
+  @override
+  String get dotsExplainerYardstick =>
+      'خيطان أمر معتاد. أما ثلاثة — إفصاح وخبر وتداول خارج المعتاد — فيحدث لعدد قليل من الشركات في الأسبوع. التقاطع سؤال وليس حكمًا: يقول إن الشركة كانت نشطة بأكثر من طريقة، ولا يقول إن ذلك جيد.';
+
+  @override
+  String dotsThreads(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count خيطًا',
+      few: '$count خيوط',
+      two: 'خيطان',
+      one: 'خيط واحد',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exchangeIndicesLabel => 'المؤشرات الثلاثة';
+
+  @override
+  String exchangeRecorded(int count, String date) {
+    return '$count جلسة مسجلة، منذ $date';
+  }
+
+  @override
+  String get exchangeWindowMove => 'خلال تلك الفترة';
+
+  @override
+  String get exchangeMoversLabel => 'ما ارتفع وما انخفض';
+
+  @override
+  String exchangeMoversBody(int count) {
+    return 'أكبر تحركات الجلسة، من بين $count سهم تداولت بما يكفي للحساب.';
+  }
+
+  @override
+  String get exchangeBreadthLabel => 'اتساع كل جلسة';
+
+  @override
+  String get exchangeBreadthBody =>
+      'المرتفع والمنخفض ودون تغيير، عبر كل جلسة سجّلها التطبيق.';
+
+  @override
+  String exchangeRoseMore(int rose, int total) {
+    return 'ارتفعت أسهم أكثر مما انخفض في $rose من تلك الجلسات الـ$total.';
+  }
+
+  @override
+  String get exchangeOneSession =>
+      'جلسة واحدة مسجلة حتى الآن. من هنا تبدأ الخطوط.';
+
+  @override
+  String get legendRose => 'ارتفع';
+
+  @override
+  String get legendFell => 'انخفض';
+
+  @override
+  String get legendUnchanged => 'دون تغيير';
 }

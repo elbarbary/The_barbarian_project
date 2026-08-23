@@ -2246,4 +2246,75 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get volumeTeachingFloor =>
       'A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.';
+
+  @override
+  String get dotsExplainerTitle => 'Crossings';
+
+  @override
+  String get dotsExplainerPlain =>
+      'One company turning up in more than one place at once.';
+
+  @override
+  String dotsExplainerWorkings(int days) {
+    return 'Three feeds are read for the same $days days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new — every thread links back to the document it came from.';
+  }
+
+  @override
+  String get dotsExplainerYardstick =>
+      'Two threads is common. Three — a filing, a story and a session outside its own normal — happens to a handful of companies a week. A crossing is a question, not a verdict: it says a company was busy in more than one way, and nothing about whether that was good.';
+
+  @override
+  String dotsThreads(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count threads',
+      one: '1 thread',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get exchangeIndicesLabel => 'The three indices';
+
+  @override
+  String exchangeRecorded(int count, String date) {
+    return '$count sessions recorded, since $date';
+  }
+
+  @override
+  String get exchangeWindowMove => 'over that stretch';
+
+  @override
+  String get exchangeMoversLabel => 'What rose and what fell';
+
+  @override
+  String exchangeMoversBody(int count) {
+    return 'The session\'s biggest moves, from the $count shares that traded enough to count.';
+  }
+
+  @override
+  String get exchangeBreadthLabel => 'How wide each session was';
+
+  @override
+  String get exchangeBreadthBody =>
+      'Rose, fell and unchanged, across every session this app has recorded.';
+
+  @override
+  String exchangeRoseMore(int rose, int total) {
+    return 'More shares rose than fell in $rose of those $total sessions.';
+  }
+
+  @override
+  String get exchangeOneSession =>
+      'One session recorded so far. The lines start here.';
+
+  @override
+  String get legendRose => 'Rose';
+
+  @override
+  String get legendFell => 'Fell';
+
+  @override
+  String get legendUnchanged => 'Unchanged';
 }
