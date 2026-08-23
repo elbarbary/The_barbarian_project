@@ -40,3 +40,19 @@ silent.
 The service will answer for any window back to 2005 — 191,484 filings in all.
 Only these two years are held; `harvest_egx_beta.py --from 2024-01 --to 2024-12`
 takes the next one, and skips anything already complete.
+
+## The forward calendar
+
+`scripts/build_calendar.py` reads these filing bodies and writes
+`public/data/v1/calendar.json` — every scheduled event the issuers have already
+put on the record, soonest first. Dividend payment and ex-dividend dates,
+rights-issue windows, called general assemblies, trading suspensions and
+resumptions. Each row is quoted from a filing and links back to it; nothing is
+inferred or forecast — the exchange published the dates, and this only collects
+them.
+
+`scripts/refresh_calendar.sh` is the periodic loop: re-harvest this month and
+last, then rebuild. `ops/com.barbarian.calendar.plist` runs it daily. It is
+deliberately **not** in `build_all.py` / CI, because the calendar depends on
+the beta harvest and that harvest is not yet trusted from a CI runner — same
+reason nothing else here is wired in yet.

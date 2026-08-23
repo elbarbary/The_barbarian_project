@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Daily forward-calendar refresh.
+
+  Install:
+    cp ops/com.barbarian.calendar.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.barbarian.calendar.plist
+
+  Remove:
+    launchctl unload ~/Library/LaunchAgents/com.barbarian.calendar.plist
+
+  Runs scripts/refresh_calendar.sh at 08:00 every day. Logs to ops/calendar.log.
+  Edit the two absolute paths below if the repo moves.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.barbarian.calendar</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>/Users/barbary/Documents/Codex/2026-07-13/fin/thebarbarianproject/scripts/refresh_calendar.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>0</integer></dict>
+  <key>StandardOutPath</key>
+  <string>/Users/barbary/Documents/Codex/2026-07-13/fin/thebarbarianproject/ops/calendar.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/barbary/Documents/Codex/2026-07-13/fin/thebarbarianproject/ops/calendar.log</string>
+  <key>RunAtLoad</key><false/>
+</dict>
+</plist>

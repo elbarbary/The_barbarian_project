@@ -1,0 +1,67 @@
+{
+ "generated": "2026-08-24",
+ "source": "EGX disclosures — scheduled dates the issuer has filed",
+ "count": 5,
+ "events": [
+  {
+   "date": "2026-09-01",
+   "kind": "rights_open",
+   "note": "Rights issue subscription opens",
+   "ticker": "LUTS",
+   "title": "Lotus For Agricultural Investments And Development (LUTS.CA) - Rights Issue",
+   "title_ar": "لوتس للتنمية والاستثمار الزراعى (LUTS.CA) - حق اكتتاب",
+   "filed": "2026-08-17",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293399",
+   "id": "egx-293399"
+  },
+  {
+   "date": "2026-09-03",
+   "kind": "dividend_payment",
+   "note": "Cash dividend payment",
+   "ticker": "EEII",
+   "title": "El Arabia Engineering Industries (EEII.CA) Declares a Stock Dividends",
+   "title_ar": "العربية للصناعات الهندسية  (EEII.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-08-19",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293607",
+   "id": "egx-293607"
+  },
+  {
+   "date": "2026-09-03",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "EEII",
+   "title": "El Arabia Engineering Industries (EEII.CA) Declares a Stock Dividends",
+   "title_ar": "العربية للصناعات الهندسية  (EEII.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-08-19",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293607",
+   "id": "egx-293607"
+  },
+  {
+   "date": "2026-09-15",
+   "kind": "rights_close",
+   "note": "Rights issue subscription closes",
+   "ticker": "LUTS",
+   "title": "Lotus For Agricultural Investments And Development (LUTS.CA) - Rights Issue",
+   "title_ar": "لوتس للتنمية والاستثمار الزراعى (LUTS.CA) - حق اكتتاب",
+   "filed": "2026-08-17",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293399",
+   "id": "egx-293399"
+  },
+  {
+   "date": "2027-06-01",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "RMDA",
+   "title": "Tenth Of Ramadan Pharmaceutical Industries&Diagnostic-Rameda (RMDA.CA) Declares Cash Dividends",
+   "title_ar": "العاشر من رمضان للصناعات الدوائية والمستحضرات تشخيصية-راميدا (RMDA.CA) تعلن عن توزيع نقدي",
+   "filed": "2026-05-19",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288449",
+   "id": "egx-288449"
+  }
+ ]
+}

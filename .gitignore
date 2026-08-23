@@ -56,3 +56,7 @@ __pycache__/
 # Local secrets. Never committed — a key in git history is burned even after deletion.
 .env
 .env.*
+
+# Derived calendar exports — regenerable from the filings harvest with
+# scripts/export_calendar.py, and bulky. The source of truth is filings/.
+data-source/egx-beta/calendar-export/
