@@ -283,10 +283,16 @@ class _ScanCount extends StatelessWidget {
               style: BarbarianType.figureM.copyWith(color: tone),
             ),
             const SizedBox(height: 4),
+            // Two lines, not one. At one line "Cleared every rule" and
+            // "Cleared some rules" both truncated to "CLEARED", so the hero
+            // showed two different counts under the same word.
             Text(
               label.toUpperCase(),
-              style: BarbarianType.labelTiny.copyWith(color: c.onInkMuted),
-              maxLines: 1,
+              style: BarbarianType.labelTiny.copyWith(
+                color: c.onInkMuted,
+                height: 1.3,
+              ),
+              maxLines: 2,
             ),
           ],
         ),

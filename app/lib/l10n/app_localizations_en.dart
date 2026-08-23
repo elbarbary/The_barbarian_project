@@ -1401,7 +1401,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String freshMarketClosedOn(String day) {
-    return 'Market closed · close of $day';
+    return 'Market closed · prices from $day';
   }
 
   @override
@@ -1880,5 +1880,41 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String companyInThePressBody(String ticker) {
     return 'Stories that named $ticker, from the outlets we read. Their reporting, on their pages.';
+  }
+
+  @override
+  String get homeWhichCompanies => 'Which companies moved unusually';
+
+  @override
+  String get volumeTeaching =>
+      '“Traded unusually” means one thing here: the company\'s shares changed hands at least twice as often as they normally do. That is a question worth asking, not a verdict — busy days happen for good reasons and bad ones alike.';
+
+  @override
+  String get volumeTeachingTitle => 'What “traded unusually” means';
+
+  @override
+  String get volumeTeachingWorkings =>
+      'Shares traded in the session ÷ the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.';
+
+  @override
+  String get volumeTeachingYardstick =>
+      'Twice the usual is the line, and it is this app\'s line rather than the exchange\'s — nobody publishes an official one. It is set where it is because a day at twice a company\'s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.';
+
+  @override
+  String get learnMore => 'What does this mean?';
+
+  @override
+  String goldKaratPlain(int karat, String price) {
+    return 'A gram of $karat-karat gold costs $price pounds.';
+  }
+
+  @override
+  String goldKaratYardstick(int karat) {
+    return '$karat parts gold in every 24. Most Egyptian jewellery is 21. The metal is the same price either way; the karat is how much of it is in the piece.';
+  }
+
+  @override
+  String ratesPerGramEgp(String per) {
+    return 'EGP · $per';
   }
 }

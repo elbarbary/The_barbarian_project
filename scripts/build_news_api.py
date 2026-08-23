@@ -568,13 +568,14 @@ def triage(item: dict) -> dict:
         return {
             "weight": "check",
             # Stated as the join of two facts, with both of them shown.
+            # A multiple of the normal, not an addition to it.
             "because": (
                 f"This is about {top['ticker']}, whose shares changed hands "
-                f"{top['rv']:.2f}× more than they normally do that day."
+                f"{top['rv']:.2f}× their usual volume that day."
             ),
             "because_ar": (
                 f"هذا الخبر عن {isolate(top['ticker'])}، وتداول سهمها "
-                f"{isolate(f'{top['rv']:.2f}×')} أكثر من المعتاد في ذلك اليوم."
+                f"{isolate(f'{top['rv']:.2f}×')} حجمه المعتاد في ذلك اليوم."
             ),
             "evidence": {
                 "ticker": top["ticker"],

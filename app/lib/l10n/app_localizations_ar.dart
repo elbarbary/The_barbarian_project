@@ -1393,7 +1393,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String freshMarketClosedOn(String day) {
-    return 'السوق مغلق · إغلاق $day';
+    return 'السوق مغلق · أسعار $day';
   }
 
   @override
@@ -1871,5 +1871,41 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String companyInThePressBody(String ticker) {
     return 'أخبار ذكرت $ticker، من الجهات التي نتابعها. تقاريرهم، على صفحاتهم.';
+  }
+
+  @override
+  String get homeWhichCompanies => 'أي الشركات تحرّكت بشكل غير معتاد';
+
+  @override
+  String get volumeTeaching =>
+      '«تداول غير معتاد» له معنى واحد هنا: تداول سهم الشركة بما لا يقل عن ضعف معدله المعتاد. وهذا سؤال يستحق أن يُطرح، لا حكمًا — فالأيام النشطة تحدث لأسباب جيدة وأخرى سيئة على السواء.';
+
+  @override
+  String get volumeTeachingTitle => 'ما معنى «تداول غير معتاد»';
+
+  @override
+  String get volumeTeachingWorkings =>
+      'الأسهم المتداولة في الجلسة ÷ وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.';
+
+  @override
+  String get volumeTeachingYardstick =>
+      'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة — فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.';
+
+  @override
+  String get learnMore => 'ما معنى هذا؟';
+
+  @override
+  String goldKaratPlain(int karat, String price) {
+    return 'جرام الذهب عيار $karat يساوي $price جنيهًا.';
+  }
+
+  @override
+  String goldKaratYardstick(int karat) {
+    return '$karat جزءًا من الذهب في كل 24. ومعظم المشغولات الذهبية في مصر عيار 21. سعر المعدن واحد في الحالتين؛ والعيار هو مقدار الذهب في القطعة.';
+  }
+
+  @override
+  String ratesPerGramEgp(String per) {
+    return 'جنيه · $per';
   }
 }

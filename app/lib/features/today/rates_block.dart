@@ -170,15 +170,15 @@ class _Karats extends StatelessWidget {
                 Explainer(
                   termId: 'gold_${karat.karat}',
                   title: l.goldKaratGram(karat.karat),
-                  plain:
-                      'A gram of ${karat.karat}-karat gold costs '
-                      '${karat.egpGram.toStringAsFixed(2)} pounds.',
-                  token: 'EGP ${karat.egpGram.toStringAsFixed(2)}',
+                  plain: l.goldKaratPlain(
+                    karat.karat,
+                    karat.egpGram.toStringAsFixed(2),
+                  ),
+                  token:
+                      '${l.filterUnitEgp} '
+                      '${karat.egpGram.toStringAsFixed(2)}',
                   workings: karat.workings,
-                  yardstick:
-                      '${karat.karat} parts gold in every 24. Most Egyptian '
-                      'jewellery is 21. The metal is the same price either '
-                      'way; the karat is how much of it is in the piece.',
+                  yardstick: l.goldKaratYardstick(karat.karat),
                   notability: Notability.unjudged,
                   source: metal.source,
                 ),
@@ -258,11 +258,13 @@ class _WorldCard extends StatelessWidget {
               ),
               const Spacer(),
               if (row.level case final double level)
-                BNumText(
-                  level >= 1000
-                      ? level.toStringAsFixed(0)
-                      : level.toStringAsFixed(2),
-                  style: BarbarianType.figureM.copyWith(color: c.textPrimary),
+                BDottedUnderline(
+                  child: BNumText(
+                    level >= 1000
+                        ? level.toStringAsFixed(0)
+                        : level.toStringAsFixed(2),
+                    style: BarbarianType.figureM.copyWith(color: c.textPrimary),
+                  ),
                 ),
               const SizedBox(height: 4),
               if (change != null)
@@ -328,13 +330,16 @@ class _MetalCard extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 10),
-            BNumText(
-              gram == null ? '—' : gram.toStringAsFixed(0),
-              style: BarbarianType.displayS.copyWith(color: c.onInk),
+            BDottedUnderline(
+              onDark: true,
+              child: BNumText(
+                gram == null ? '—' : gram.toStringAsFixed(0),
+                style: BarbarianType.displayS.copyWith(color: c.onInk),
+              ),
             ),
             const SizedBox(height: 2),
             Text(
-              'EGP · ${l.ratesPerGram}',
+              l.ratesPerGramEgp(l.ratesPerGram),
               style: BarbarianType.labelNano.copyWith(color: c.onInkMuted),
             ),
             if (metal.egpOunce case final double ounce) ...[

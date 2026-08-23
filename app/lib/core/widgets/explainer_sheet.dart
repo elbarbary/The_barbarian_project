@@ -74,7 +74,7 @@ class BPlainNumber extends StatelessWidget {
               children: [
                 // Dotted, because that is the app's one promise: anything
                 // under a dotted rule opens into its own arithmetic.
-                _DottedUnderline(
+                BDottedUnderline(
                   child: Text(
                     explainer.token,
                     style: BarbarianType.figureXs.copyWith(color: c.textMuted),
@@ -121,15 +121,26 @@ class _NotableTag extends StatelessWidget {
   }
 }
 
-class _DottedUnderline extends StatelessWidget {
-  const _DottedUnderline({required this.child});
+/// The mark that says "there is an explanation behind this".
+///
+/// One convention, applied everywhere rather than an info icon on one rail.
+/// Every compact card on Home and Today opened an explainer with no icon, no
+/// chevron and no hint of any kind, so the explanations the app had already
+/// written — and which are the reason it exists — were reachable only by a
+/// reader who happened to press a card that looked inert.
+///
+/// [onDark] because the same mark has to read on the ink cards.
+class BDottedUnderline extends StatelessWidget {
+  const BDottedUnderline({required this.child, this.onDark = false, super.key});
 
   final Widget child;
+  final bool onDark;
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     return CustomPaint(
-      foregroundPainter: _DottedPainter(context.colors.textFaint),
+      foregroundPainter: _DottedPainter(onDark ? c.onInkMuted : c.textFaint),
       child: Padding(padding: const EdgeInsets.only(bottom: 3), child: child),
     );
   }

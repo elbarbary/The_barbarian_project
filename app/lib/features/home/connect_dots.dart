@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/connection.dart';
+import '../../core/models/recency.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/controls.dart';
@@ -146,9 +147,9 @@ class _StrandRow extends StatelessWidget {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   BKindChip(label),
-                  if (strand.date.isNotEmpty)
+                  if (context.filingAge(strand.date) case final age?)
                     Text(
-                      strand.date,
+                      age,
                       style: BarbarianType.labelNano.copyWith(
                         color: c.textMuted,
                       ),

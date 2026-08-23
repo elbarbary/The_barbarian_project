@@ -2525,7 +2525,7 @@ abstract class AppLocalizations {
   /// No description provided for @freshMarketClosedOn.
   ///
   /// In en, this message translates to:
-  /// **'Market closed · close of {day}'**
+  /// **'Market closed · prices from {day}'**
   String freshMarketClosedOn(String day);
 
   /// No description provided for @freshDelayed.
@@ -3229,6 +3229,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stories that named {ticker}, from the outlets we read. Their reporting, on their pages.'**
   String companyInThePressBody(String ticker);
+
+  /// No description provided for @homeWhichCompanies.
+  ///
+  /// In en, this message translates to:
+  /// **'Which companies moved unusually'**
+  String get homeWhichCompanies;
+
+  /// No description provided for @volumeTeaching.
+  ///
+  /// In en, this message translates to:
+  /// **'“Traded unusually” means one thing here: the company\'s shares changed hands at least twice as often as they normally do. That is a question worth asking, not a verdict — busy days happen for good reasons and bad ones alike.'**
+  String get volumeTeaching;
+
+  /// No description provided for @volumeTeachingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What “traded unusually” means'**
+  String get volumeTeachingTitle;
+
+  /// No description provided for @volumeTeachingWorkings.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares traded in the session ÷ the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.'**
+  String get volumeTeachingWorkings;
+
+  /// No description provided for @volumeTeachingYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'Twice the usual is the line, and it is this app\'s line rather than the exchange\'s — nobody publishes an official one. It is set where it is because a day at twice a company\'s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.'**
+  String get volumeTeachingYardstick;
+
+  /// No description provided for @learnMore.
+  ///
+  /// In en, this message translates to:
+  /// **'What does this mean?'**
+  String get learnMore;
+
+  /// No description provided for @goldKaratPlain.
+  ///
+  /// In en, this message translates to:
+  /// **'A gram of {karat}-karat gold costs {price} pounds.'**
+  String goldKaratPlain(int karat, String price);
+
+  /// No description provided for @goldKaratYardstick.
+  ///
+  /// In en, this message translates to:
+  /// **'{karat} parts gold in every 24. Most Egyptian jewellery is 21. The metal is the same price either way; the karat is how much of it is in the piece.'**
+  String goldKaratYardstick(int karat);
+
+  /// No description provided for @ratesPerGramEgp.
+  ///
+  /// In en, this message translates to:
+  /// **'EGP · {per}'**
+  String ratesPerGramEgp(String per);
 }
 
 class _AppLocalizationsDelegate

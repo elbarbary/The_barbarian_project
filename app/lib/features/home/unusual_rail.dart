@@ -63,8 +63,6 @@ class BUnusualRail extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        BSectionLabel(l.unusualLabel),
-        const SizedBox(height: 6),
         Text(
           l.unusualBody(rows.length, feed.items.length),
           style: BarbarianType.bodyM.copyWith(

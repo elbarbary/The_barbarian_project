@@ -372,13 +372,16 @@ def triage(item: dict) -> dict:
         top = max(unusual, key=lambda f: f["rv"])
         return {
             "weight": "check",
+            # A multiple of the normal, not an addition to it: "2.21× more
+            # than they normally do" says 3.21× the usual volume, which is not
+            # the number in the same sentence.
             "because": (
                 f"{top['ticker']} announced this, and its shares changed "
-                f"hands {top['rv']:.2f}× more than they normally do that day."
+                f"hands {top['rv']:.2f}× their usual volume that day."
             ),
             "because_ar": (
                 f"أعلنت {isolate(top['ticker'])} هذا، وتداول سهمها "
-                f"{isolate(f'{top['rv']:.2f}×')} أكثر من المعتاد في ذلك اليوم."
+                f"{isolate(f'{top['rv']:.2f}×')} حجمه المعتاد في ذلك اليوم."
             ),
             "evidence": {
                 "ticker": top["ticker"],

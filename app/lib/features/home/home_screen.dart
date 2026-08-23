@@ -31,6 +31,7 @@ import 'feed_tabs.dart';
 import 'lead_story.dart';
 import 'connect_dots.dart';
 import 'unusual_rail.dart';
+import '../../core/widgets/teaching.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -87,29 +88,45 @@ class HomeScreen extends ConsumerWidget {
         //
         //   1. today's story, at the size a story deserves, with its picture
         //   2. the rest of the feed, each row carrying its own
-        //   3. where the market closed and how wide the move was
-        //   4. what companies told the exchange — depth, not a greeting
-        //   5. what moves Egypt, which the rest is read against
-        //   6. the watchlist, reached on purpose rather than stumbled on
+        //   3. what companies told the exchange — the day's largest card
+        //   4. where the market closed and how wide the move was
+        //   5. which companies moved unusually, and what it means
+        //   6. what moves Egypt, which the rest is read against
+        //   7. the watchlist, reached on purpose rather than stumbled on
+        //
+        // Four consecutive rails of figures used to sit between the two feed
+        // blocks and the filing hero — indices, breadth, the unusual rail and
+        // connect-dots, one section label each and not a sentence between
+        // them. That is the stretch where a ninety-second reader gives up, and
+        // it pushed the largest card on the screen, the only one carrying a
+        // written reason, into eighth place.
         const BLeadStory(),
         // Both feeds behind one selector. They were stacked — a dozen
         // headlines, a market block, then ten filings further down — and both
         // answer "what happened today", so a reader after one had to scroll
         // past the other to reach it.
         const BFeedTabs(),
-        const _Indices(),
-        const _Breadth(),
-        // Which companies, not how many. The count sat on Today without ever
-        // naming one of them.
-        const BUnusualRail(),
-        // Where the feeds cross. Placed under the session numbers because it
-        // is the thing that reads them together with everything else.
-        const BConnectDots(),
         // The lead filing keeps its own card. It is not the same thing as the
         // filings list behind the tab: this one is the single disclosure worth
         // the largest card on the screen, with the measured reason it leads.
         BSectionLabel(l.homeFiledHero),
         const _DailyInsight(),
+        // One heading over the two blocks that answer "how did the market
+        // do", rather than two headings that read as unrelated products.
+        BSectionLabel(l.homeIndices),
+        const _Indices(),
+        const _Breadth(),
+        // And one over the two that answer "which companies" — with, at last,
+        // the sentence saying what "unusually" means. The rail below it has
+        // been speaking that vocabulary on the first screen of the app since
+        // it was written, while the explanation sat two taps deep inside an
+        // individual company page.
+        BSectionLabel(l.homeWhichCompanies),
+        const BTeachingLine(),
+        const BUnusualRail(),
+        // Where the feeds cross. Placed under the session numbers because it
+        // is the thing that reads them together with everything else.
+        const BConnectDots(),
         const BMacroBlock(),
         const _WatchlistBlock(),
       ],
@@ -376,7 +393,6 @@ class _Indices extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l = AppLocalizations.of(context);
     final rates = ref.watch(ratesProvider).whenOrNull(data: (s) => s.value);
     final history = ref
         .watch(marketHistoryProvider)
@@ -387,7 +403,6 @@ class _Indices extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        BSectionLabel(l.homeIndices),
         SizedBox(
           height: 132,
           child: ListView.separated(
@@ -461,9 +476,16 @@ class _IndexCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              BNumText(
-                level == null ? '—' : _grouped(level),
-                style: BarbarianType.headlineM.copyWith(color: c.onInk),
+              // Every compact card on Home opened an explainer with no icon,
+              // no chevron and no hint at all, so the explanations this app
+              // exists for were reachable only by a reader who happened to
+              // press something that looked inert. One convention, everywhere.
+              BDottedUnderline(
+                onDark: true,
+                child: BNumText(
+                  level == null ? '—' : _grouped(level),
+                  style: BarbarianType.headlineM.copyWith(color: c.onInk),
+                ),
               ),
               const SizedBox(height: 4),
               if (change != null)
@@ -1120,7 +1142,6 @@ class _Breadth extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        BSectionLabel(l.homeRoseAndFell),
         BPressable(
           onTap: () => _openChart(context, history!, l),
           child: BPaperCard(
@@ -1128,6 +1149,14 @@ class _Breadth extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  l.homeRoseAndFell.toUpperCase(),
+                  style: BarbarianType.labelNano.copyWith(
+                    color: c.textMuted,
+                    letterSpacing: 0.6,
+                  ),
+                ),
+                const SizedBox(height: 12),
                 // Read in the bar's order — rose, unchanged, fell — so the
                 // green, grey and red under them are the same three things in
                 // the same three places. They used to run rose, fell,
@@ -1169,9 +1198,11 @@ class _Breadth extends ConsumerWidget {
                 // can read across the room, which is the only job it has.
                 _BreadthBar(breadth: latest),
                 const SizedBox(height: 10),
-                Text(
-                  l.breadthOf(latest.counted),
-                  style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+                BDottedUnderline(
+                  child: Text(
+                    l.breadthOf(latest.counted),
+                    style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+                  ),
                 ),
               ],
             ),

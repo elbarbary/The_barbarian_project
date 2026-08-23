@@ -162,10 +162,12 @@ class _MacroCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Flexible(
-                        child: BNumText(
-                          _reading(series),
-                          style: BarbarianType.headlineM.copyWith(
-                            color: c.textPrimary,
+                        child: BDottedUnderline(
+                          child: BNumText(
+                            _reading(series),
+                            style: BarbarianType.headlineM.copyWith(
+                              color: c.textPrimary,
+                            ),
                           ),
                         ),
                       ),
