@@ -66,6 +66,7 @@ class ScannedDetailSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final l = AppLocalizations.of(context);
     final c = context.colors;
 
@@ -111,7 +112,8 @@ class ScannedDetailSheet extends ConsumerWidget {
                           color: c.textPrimary,
                         ),
                       ),
-                      if (entry.statusLabel case final String label) ...[
+                      if (entry.statusLabelFor(arabic)
+                          case final String label) ...[
                         const SizedBox(height: 6),
                         Builder(
                           builder: (context) {

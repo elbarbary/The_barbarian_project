@@ -581,5 +581,7 @@
   "sectorCommunications": "الاتصالات",
   "sectorEnergyMinerals": "موارد الطاقة",
   "sectorElectronicTechnology": "تكنولوجيا إلكترونية",
-  "sectorMiscellaneous": "متنوعة"
+  "sectorMiscellaneous": "متنوعة",
+  "scanScoreOf": "{status} · من {max}",
+  "scanScoreSpoken": "{score} من {max}، {status}"
 }

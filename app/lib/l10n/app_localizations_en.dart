@@ -1989,4 +1989,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sectorMiscellaneous => 'Miscellaneous';
+
+  @override
+  String scanScoreOf(String status, int max) {
+    return '$status · of $max';
+  }
+
+  @override
+  String scanScoreSpoken(int score, int max, String status) {
+    return '$score of $max, $status';
+  }
 }

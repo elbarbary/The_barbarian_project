@@ -116,10 +116,15 @@ enum ScanStatus {
   };
 
   /// What a reader is shown. The enum identifier is a wire value, not a word.
-  String get label => switch (this) {
-    ScanStatus.qualified => 'Qualified',
-    ScanStatus.watching => 'Watching',
-    ScanStatus.rejected => 'Rejected',
+  ///
+  /// The three names were English literals returned from a model getter, which
+  /// is the shape no guard could see: "Watching · of 13" sat under a score on
+  /// an otherwise Arabic screen. They say what the rule did, in the reader's
+  /// language, and match the counters on the Today hero.
+  String labelFor(AppLocalizations l) => switch (this) {
+    ScanStatus.qualified => l.statusQualified,
+    ScanStatus.watching => l.statusWatching,
+    ScanStatus.rejected => l.statusRejected,
   };
 }
 
@@ -167,7 +172,13 @@ abstract class ScannedCompany with _$ScannedCompany {
 
     /// The report's own wording — "Persistent watch", "Tape watch" — which is
     /// more precise than the bucket and is what readers of the series know.
+    ///
+    /// The Arabic is published beside it by the builder, from a table somebody
+    /// wrote, because the phrases come out of an English field note and the
+    /// app can only show a translation that exists. A badge with no entry
+    /// stays in English rather than being guessed at.
     @JsonKey(name: 'status_label') String? statusLabel,
+    @JsonKey(name: 'status_label_ar') String? statusLabelAr,
     @JsonKey(name: 'seen_at') String? seenAt,
     @JsonKey(name: 'move_percent') String? movePercent,
     String? headline,
@@ -220,6 +231,13 @@ abstract class ScannedCompany with _$ScannedCompany {
       _$ScannedCompanyFromJson(json);
 
   ScanStatus get scanStatus => ScanStatus.parse(status);
+
+  /// The badge in the language being read, falling back to the report's own
+  /// English wording when nobody has written an Arabic for it.
+  String? statusLabelFor(bool arabic) =>
+      arabic && (statusLabelAr?.isNotEmpty ?? false)
+      ? statusLabelAr
+      : statusLabel;
 
   /// 0..1, clamped. Scores can be negative once penalties bite, and a negative
   /// fraction would draw a gauge backwards.
@@ -346,6 +364,7 @@ abstract class ScanOutcome with _$ScanOutcome {
     String? label,
     @Default('rejected') String status,
     @JsonKey(name: 'status_label') String? statusLabel,
+    @JsonKey(name: 'status_label_ar') String? statusLabelAr,
     @JsonKey(name: 'return_percent') String? returnPercent,
     @Default('up') String direction,
     String? note,
@@ -357,6 +376,13 @@ abstract class ScanOutcome with _$ScanOutcome {
       _$ScanOutcomeFromJson(json);
 
   bool get isUp => direction == 'up';
+
+  /// The badge in the language being read, falling back to what the report
+  /// wrote. A missing translation shows the English rather than a gap.
+  String? statusLabelFor(bool arabic) =>
+      arabic && (statusLabelAr?.isNotEmpty ?? false)
+      ? statusLabelAr
+      : statusLabel;
 }
 
 /// A citation. Source transparency is a core product value (spec §50).

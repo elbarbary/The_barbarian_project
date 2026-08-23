@@ -309,6 +309,7 @@ class _ScannedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final l = AppLocalizations.of(context);
     final c = context.colors;
 
@@ -343,7 +344,8 @@ class _ScannedCard extends StatelessWidget {
                               color: c.textPrimary,
                             ),
                           ),
-                          if (entry.statusLabel case final String label) ...[
+                          if (entry.statusLabelFor(arabic)
+                              case final String label) ...[
                             const SizedBox(width: 8),
                             Flexible(child: _StatusChip(label: label)),
                           ],
@@ -516,6 +518,7 @@ class _OutcomeCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final c = context.colors;
     // Absent only once the directory has actually arrived. While it is still
     // loading every row would otherwise go dead for a frame, and a link that
@@ -556,8 +559,10 @@ class _OutcomeCard extends ConsumerWidget {
                         const SizedBox(height: 2),
                       ],
                       Text(
-                        outcome.statusLabel ?? '',
+                        outcome.statusLabelFor(arabic) ?? '',
                         style: BarbarianType.labelS.copyWith(
+                          // Coloured off the English wording the report wrote,
+                          // which is the one that never changes.
                           color: BarbarianPalette.scanStatus(
                             c,
                             outcome.statusLabel,
@@ -632,6 +637,8 @@ class _RubricScore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
+    final status = entry.scanStatus.labelFor(l);
     final colour = switch (entry.scanStatus) {
       ScanStatus.qualified => c.up,
       ScanStatus.watching => c.accent,
@@ -642,23 +649,30 @@ class _RubricScore extends StatelessWidget {
       // Three states in one numeral, and forest against brick is 1.03:1 — to
       // a photometer, and to a deuteranope, "qualified" and "rejected" are the
       // same warm grey. The caption underneath now says which.
-      label: '${entry.score} of ${entry.maxScore}, ${entry.scanStatus.label}',
+      label: l.scanScoreSpoken(entry.score, entry.maxScore, status),
       excludeSemantics: true,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          BNumText(
-            '${entry.score}',
-            style: BarbarianType.figureL.copyWith(color: colour),
-          ),
-          Text(
-            '${entry.scanStatus.label} · of ${entry.maxScore}',
-            style: BarbarianType.labelTiny.copyWith(
-              color: c.textFaint,
-              letterSpacing: 0,
+      child: SizedBox(
+        width: 92,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            BNumText(
+              '${entry.score}',
+              style: BarbarianType.figureL.copyWith(color: colour),
             ),
-          ),
-        ],
+            Text(
+              l.scanScoreOf(status, entry.maxScore),
+              textAlign: TextAlign.end,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: BarbarianType.labelTiny.copyWith(
+                color: c.textFaint,
+                letterSpacing: 0,
+                height: 1.25,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

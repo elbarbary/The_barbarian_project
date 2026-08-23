@@ -1369,5 +1369,30 @@
   "sectorCommunications": "Communications",
   "sectorEnergyMinerals": "Energy Minerals",
   "sectorElectronicTechnology": "Electronic Technology",
-  "sectorMiscellaneous": "Miscellaneous"
+  "sectorMiscellaneous": "Miscellaneous",
+  "scanScoreOf": "{status} · of {max}",
+  "@scanScoreOf": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "scanScoreSpoken": "{score} of {max}, {status}",
+  "@scanScoreSpoken": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  }
 }

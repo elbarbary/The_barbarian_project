@@ -3427,6 +3427,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Miscellaneous'**
   String get sectorMiscellaneous;
+
+  /// No description provided for @scanScoreOf.
+  ///
+  /// In en, this message translates to:
+  /// **'{status} · of {max}'**
+  String scanScoreOf(String status, int max);
+
+  /// No description provided for @scanScoreSpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'{score} of {max}, {status}'**
+  String scanScoreSpoken(int score, int max, String status);
 }
 
 class _AppLocalizationsDelegate

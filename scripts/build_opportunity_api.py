@@ -406,6 +406,53 @@ DISPLAY_BADGE = {
     "Met every check": "Cleared every rule",
 }
 
+# The same badge in Arabic.
+#
+# Written here rather than in the app because the phrases come out of the field
+# note, which is English, and the app can only translate what somebody has
+# written an Arabic for. The Arabic build was showing "Persistent watch" and
+# "Watch only" as Latin chips in the middle of an otherwise Arabic screen.
+#
+# Not exhaustive and not meant to be: a badge with no entry is published in
+# English and the app falls back to it, which is honest. Add a line when a new
+# one appears rather than leaving a machine to guess at it.
+BADGE_AR = {
+    "Cleared every rule": "استوفت كل القواعد",
+    "Watch only": "متابعة فقط",
+    "Persistent watch": "متابعة مستمرة",
+    "Tape watch": "متابعة حركة التداول",
+    "Tape propagation alert": "تنبيه امتداد حركة التداول",
+    "Expired watch": "متابعة منتهية",
+    "Fresh earnings watch": "متابعة نتائج جديدة",
+    "Persistent earnings watch": "متابعة نتائج مستمرة",
+    "Correct reject": "استبعاد صحيح",
+    "Cohort detection miss": "إغفال رصد المجموعة",
+    "Prior timing/data miss": "إغفال سابق في التوقيت أو البيانات",
+    "Caught alert / control miss": "تنبيه مرصود / إغفال في الضبط",
+    "Unlisted data anomaly": "شذوذ في بيانات سهم غير مقيد",
+    "Mixed filing / sector alert": "إفصاح مختلط / تنبيه قطاعي",
+    "Extended-peer pressure": "ضغط من الشركات المماثلة",
+    "Timing/execution miss": "إغفال في التوقيت أو التنفيذ",
+    "Invalidated": "سقط",
+    "Denied / rejected": "مرفوض",
+    "Rejected": "لم تستوفِ القواعد",
+}
+
+
+def badge_ar(label: str | None) -> str | None:
+    """The Arabic badge, or None when nobody has written one."""
+    if not label:
+        return None
+    # The builder joins clauses with a middle dot; translate each on its own so
+    # one untranslated half does not drop the other.
+    parts = [p.strip() for p in label.split("\u00b7")]
+    translated = [BADGE_AR.get(p) for p in parts]
+    if not any(translated):
+        return None
+    return " \u00b7 ".join(
+        arabic or english for arabic, english in zip(translated, parts)
+    )
+
 
 def display_badge(label: str | None) -> str | None:
     """The reader-facing badge for a bucket label."""
@@ -870,6 +917,7 @@ def parse(html: str) -> dict:
                 "rank": card.get("rank"),
                 "status": BUCKETS.get(label, "watching"),
                 "status_label": display_badge(label),
+                "status_label_ar": badge_ar(display_badge(label)),
                 # Same filter as the badge. This was passed through raw and
                 # carried "Qualified · booked" into the app untouched.
                 "state": display_badge(clean_badge(card.get("state"), fallback="")) or None,
@@ -902,6 +950,7 @@ def parse(html: str) -> dict:
                 "rank": None,
                 "status": BUCKETS.get(label, "watching"),
                 "status_label": display_badge(label),
+                "status_label_ar": badge_ar(display_badge(label)),
                 "state": None,
                 "score": extra["score"] or 0,
                 "max_score": extra["max_score"] or 13,
@@ -950,6 +999,7 @@ def parse(html: str) -> dict:
                 "label": raw_name if len(names) > 1 else None,
                 "status": BUCKETS.get(label, "rejected"),
                 "status_label": display_badge(label),
+                "status_label_ar": badge_ar(display_badge(label)),
                 "return_percent": text(ret.group(1)).replace("−", "-") if ret else None,
                 "direction": "up" if "outcome-up" in cls else "down",
                 "note": sanitize(text(note.group(1))) if note else None,

@@ -1980,4 +1980,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sectorMiscellaneous => 'متنوعة';
+
+  @override
+  String scanScoreOf(String status, int max) {
+    return '$status · من $max';
+  }
+
+  @override
+  String scanScoreSpoken(int score, int max, String status) {
+    return '$score من $max، $status';
+  }
 }
