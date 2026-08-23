@@ -5,47 +5,65 @@
   "rubric": [
     {
       "label": "Fresh, specific, material disclosure",
+      "label_ar": "إفصاح حديث ومحدد وجوهري",
       "detail": "a real filing, not a rumour or a press mention",
+      "detail_ar": "إفصاح فعلي، لا شائعة ولا إشارة صحفية",
       "weight": 4
     },
     {
       "label": "Economic importance to the company",
+      "label_ar": "الأهمية الاقتصادية للشركة",
       "detail": "is the news big relative to this company's size?",
+      "detail_ar": "هل الخبر كبير بالنسبة لحجم هذه الشركة؟",
       "weight": 3
     },
     {
       "label": "Volume and early price confirmation",
+      "label_ar": "تأكيد من حجم التداول والسعر مبكرًا",
       "detail": "RV20 — volume against its own 20-session median",
+      "detail_ar": "حجم التداول مقابل وسيط آخر 20 جلسة له",
       "weight": 2
     },
     {
       "label": "Repeat-buyer or ownership cluster",
+      "label_ar": "مشترٍ متكرر أو تجمّع في الملكية",
       "detail": "the same holder building, disclosure after disclosure",
+      "detail_ar": "المالك نفسه يزيد حصته، إفصاحًا بعد إفصاح",
       "weight": 2
     },
     {
       "label": "A clear dated catalyst ahead",
+      "label_ar": "حدث محدد بتاريخ في الأفق",
       "detail": "something on the calendar, not a vague hope",
+      "detail_ar": "شيء مثبت في التقويم، لا أمل غامض",
       "weight": 2
     },
     {
       "label": "Already up more than 20% in five sessions",
+      "label_ar": "ارتفع بالفعل أكثر من 20٪ في خمس جلسات",
       "detail": "the anti-chasing penalty",
+      "detail_ar": "خصم مطاردة الارتفاع",
       "weight": -4
     },
     {
       "label": "Company denies knowing why it moved",
+      "label_ar": "الشركة تنفي معرفة سبب الحركة",
       "detail": "told the exchange it has no explanation",
+      "detail_ar": "أبلغت البورصة بأن لا تفسير لديها",
       "weight": -4
     },
     {
       "label": "Two or more completed limit-ups",
+      "label_ar": "بلوغ الحد الأقصى للتغير مرتين أو أكثر",
       "detail": "EGP's ±20% band already used up",
+      "detail_ar": "نطاق الـ±20٪ استُهلك بالفعل",
       "weight": -3
     },
     {
       "label": "Severe valuation, dilution or exit risk",
+      "label_ar": "خطر شديد في التقييم أو التخفيف أو الخروج",
       "detail": "including a float too thin to sell into",
+      "detail_ar": "بما في ذلك أسهم حرة أقل من أن يُباع فيها",
       "weight": -3
     }
   ],
@@ -53,15 +71,18 @@
     "bands": [
       {
         "score": 13,
-        "label": "best possible score"
+        "label": "best possible score",
+        "label_ar": "أعلى درجة ممكنة"
       },
       {
         "score": 6,
-        "label": "the research line — confirmation still required"
+        "label": "the research line — confirmation still required",
+        "label_ar": "خط البحث — ولا يزال التأكيد مطلوبًا"
       },
       {
         "score": -14,
-        "label": "worst possible score"
+        "label": "worst possible score",
+        "label_ar": "أدنى درجة ممكنة"
       }
     ],
     "notes": [
