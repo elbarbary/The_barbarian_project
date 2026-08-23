@@ -1,0 +1,9934 @@
+{
+ "index": "EGX35LV",
+ "source": "beta.egx.com.eg /api/bff/egx/index-data",
+ "harvested": "2026-08-23",
+ "sessions": [
+  {
+   "change": null,
+   "changePer": null,
+   "high": 0,
+   "indexClose": 1000,
+   "indexDay": "2022-01-31T00:00:00",
+   "indexOpen": null,
+   "low": 0
+  },
+  {
+   "change": 11.25,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 1011.25,
+   "indexDay": "2022-02-01T00:00:00",
+   "indexOpen": 1000,
+   "low": 0
+  },
+  {
+   "change": 11.36,
+   "changePer": 1.12,
+   "high": 0,
+   "indexClose": 1022.61,
+   "indexDay": "2022-02-02T00:00:00",
+   "indexOpen": 1011.25,
+   "low": 0
+  },
+  {
+   "change": -1.24,
+   "changePer": -0.12,
+   "high": 0,
+   "indexClose": 1021.37,
+   "indexDay": "2022-02-03T00:00:00",
+   "indexOpen": 1022.61,
+   "low": 0
+  },
+  {
+   "change": 4.72,
+   "changePer": 0.46,
+   "high": 0,
+   "indexClose": 1026.09,
+   "indexDay": "2022-02-06T00:00:00",
+   "indexOpen": 1021.37,
+   "low": 0
+  },
+  {
+   "change": -4.57,
+   "changePer": -0.45,
+   "high": 0,
+   "indexClose": 1021.52,
+   "indexDay": "2022-02-07T00:00:00",
+   "indexOpen": 1026.09,
+   "low": 0
+  },
+  {
+   "change": 0.13,
+   "changePer": 0.01,
+   "high": 0,
+   "indexClose": 1021.65,
+   "indexDay": "2022-02-08T00:00:00",
+   "indexOpen": 1021.52,
+   "low": 0
+  },
+  {
+   "change": 7.06,
+   "changePer": 0.69,
+   "high": 0,
+   "indexClose": 1028.71,
+   "indexDay": "2022-02-09T00:00:00",
+   "indexOpen": 1021.65,
+   "low": 0
+  },
+  {
+   "change": -8.26,
+   "changePer": -0.8,
+   "high": 0,
+   "indexClose": 1020.45,
+   "indexDay": "2022-02-10T00:00:00",
+   "indexOpen": 1028.71,
+   "low": 0
+  },
+  {
+   "change": -20.53,
+   "changePer": -2.01,
+   "high": 0,
+   "indexClose": 999.92,
+   "indexDay": "2022-02-13T00:00:00",
+   "indexOpen": 1020.45,
+   "low": 0
+  },
+  {
+   "change": -4.63,
+   "changePer": -0.46,
+   "high": 0,
+   "indexClose": 995.29,
+   "indexDay": "2022-02-14T00:00:00",
+   "indexOpen": 999.92,
+   "low": 0
+  },
+  {
+   "change": 6.75,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 1002.04,
+   "indexDay": "2022-02-15T00:00:00",
+   "indexOpen": 995.29,
+   "low": 0
+  },
+  {
+   "change": 1.81,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 1003.85,
+   "indexDay": "2022-02-16T00:00:00",
+   "indexOpen": 1002.04,
+   "low": 0
+  },
+  {
+   "change": 1.24,
+   "changePer": 0.12,
+   "high": 0,
+   "indexClose": 1005.09,
+   "indexDay": "2022-02-17T00:00:00",
+   "indexOpen": 1003.85,
+   "low": 0
+  },
+  {
+   "change": -17.47,
+   "changePer": -1.74,
+   "high": 0,
+   "indexClose": 987.62,
+   "indexDay": "2022-02-20T00:00:00",
+   "indexOpen": 1005.09,
+   "low": 0
+  },
+  {
+   "change": 5.98,
+   "changePer": 0.61,
+   "high": 0,
+   "indexClose": 993.6,
+   "indexDay": "2022-02-21T00:00:00",
+   "indexOpen": 987.62,
+   "low": 0
+  },
+  {
+   "change": -13.05,
+   "changePer": -1.31,
+   "high": 0,
+   "indexClose": 980.55,
+   "indexDay": "2022-02-22T00:00:00",
+   "indexOpen": 993.6,
+   "low": 0
+  },
+  {
+   "change": 1.75,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 982.3,
+   "indexDay": "2022-02-23T00:00:00",
+   "indexOpen": 980.55,
+   "low": 0
+  },
+  {
+   "change": -35.45,
+   "changePer": -3.61,
+   "high": 0,
+   "indexClose": 946.85,
+   "indexDay": "2022-02-24T00:00:00",
+   "indexOpen": 982.3,
+   "low": 0
+  },
+  {
+   "change": 24.39,
+   "changePer": 2.58,
+   "high": 0,
+   "indexClose": 971.24,
+   "indexDay": "2022-02-27T00:00:00",
+   "indexOpen": 946.85,
+   "low": 0
+  },
+  {
+   "change": -8.93,
+   "changePer": -0.92,
+   "high": 0,
+   "indexClose": 962.31,
+   "indexDay": "2022-02-28T00:00:00",
+   "indexOpen": 971.24,
+   "low": 0
+  },
+  {
+   "change": 14.72,
+   "changePer": 1.53,
+   "high": 0,
+   "indexClose": 977.03,
+   "indexDay": "2022-03-01T00:00:00",
+   "indexOpen": 962.31,
+   "low": 0
+  },
+  {
+   "change": -4.29,
+   "changePer": -0.44,
+   "high": 0,
+   "indexClose": 972.74,
+   "indexDay": "2022-03-02T00:00:00",
+   "indexOpen": 977.03,
+   "low": 0
+  },
+  {
+   "change": 10.86,
+   "changePer": 1.12,
+   "high": 0,
+   "indexClose": 983.6,
+   "indexDay": "2022-03-03T00:00:00",
+   "indexOpen": 972.74,
+   "low": 0
+  },
+  {
+   "change": -10.07,
+   "changePer": -1.02,
+   "high": 0,
+   "indexClose": 973.53,
+   "indexDay": "2022-03-06T00:00:00",
+   "indexOpen": 983.6,
+   "low": 0
+  },
+  {
+   "change": -18.86,
+   "changePer": -1.94,
+   "high": 0,
+   "indexClose": 954.67,
+   "indexDay": "2022-03-07T00:00:00",
+   "indexOpen": 973.53,
+   "low": 0
+  },
+  {
+   "change": -18.22,
+   "changePer": -1.91,
+   "high": 0,
+   "indexClose": 936.45,
+   "indexDay": "2022-03-08T00:00:00",
+   "indexOpen": 954.67,
+   "low": 0
+  },
+  {
+   "change": 0.87,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 937.32,
+   "indexDay": "2022-03-09T00:00:00",
+   "indexOpen": 936.45,
+   "low": 0
+  },
+  {
+   "change": 1.19,
+   "changePer": 0.13,
+   "high": 0,
+   "indexClose": 938.51,
+   "indexDay": "2022-03-10T00:00:00",
+   "indexOpen": 937.32,
+   "low": 0
+  },
+  {
+   "change": -2.13,
+   "changePer": -0.23,
+   "high": 0,
+   "indexClose": 936.38,
+   "indexDay": "2022-03-13T00:00:00",
+   "indexOpen": 938.51,
+   "low": 0
+  },
+  {
+   "change": -6.25,
+   "changePer": -0.67,
+   "high": 0,
+   "indexClose": 930.13,
+   "indexDay": "2022-03-14T00:00:00",
+   "indexOpen": 936.38,
+   "low": 0
+  },
+  {
+   "change": -4.19,
+   "changePer": -0.45,
+   "high": 0,
+   "indexClose": 925.94,
+   "indexDay": "2022-03-15T00:00:00",
+   "indexOpen": 930.13,
+   "low": 0
+  },
+  {
+   "change": 23.36,
+   "changePer": 2.52,
+   "high": 0,
+   "indexClose": 949.3,
+   "indexDay": "2022-03-16T00:00:00",
+   "indexOpen": 925.94,
+   "low": 0
+  },
+  {
+   "change": 3.23,
+   "changePer": 0.34,
+   "high": 0,
+   "indexClose": 952.53,
+   "indexDay": "2022-03-17T00:00:00",
+   "indexOpen": 949.3,
+   "low": 0
+  },
+  {
+   "change": 18.75,
+   "changePer": 1.97,
+   "high": 0,
+   "indexClose": 971.28,
+   "indexDay": "2022-03-20T00:00:00",
+   "indexOpen": 952.53,
+   "low": 0
+  },
+  {
+   "change": 47.43,
+   "changePer": 4.88,
+   "high": 0,
+   "indexClose": 1018.71,
+   "indexDay": "2022-03-21T00:00:00",
+   "indexOpen": 971.28,
+   "low": 0
+  },
+  {
+   "change": -2.79,
+   "changePer": -0.27,
+   "high": 0,
+   "indexClose": 1015.92,
+   "indexDay": "2022-03-22T00:00:00",
+   "indexOpen": 1018.71,
+   "low": 0
+  },
+  {
+   "change": 8.88,
+   "changePer": 0.87,
+   "high": 0,
+   "indexClose": 1024.8,
+   "indexDay": "2022-03-23T00:00:00",
+   "indexOpen": 1015.92,
+   "low": 0
+  },
+  {
+   "change": 3.44,
+   "changePer": 0.34,
+   "high": 0,
+   "indexClose": 1028.24,
+   "indexDay": "2022-03-24T00:00:00",
+   "indexOpen": 1024.8,
+   "low": 0
+  },
+  {
+   "change": -11.9,
+   "changePer": -1.16,
+   "high": 0,
+   "indexClose": 1016.34,
+   "indexDay": "2022-03-27T00:00:00",
+   "indexOpen": 1028.24,
+   "low": 0
+  },
+  {
+   "change": -24.26,
+   "changePer": -2.39,
+   "high": 0,
+   "indexClose": 992.08,
+   "indexDay": "2022-03-28T00:00:00",
+   "indexOpen": 1016.34,
+   "low": 0
+  },
+  {
+   "change": 5.9,
+   "changePer": 0.59,
+   "high": 0,
+   "indexClose": 997.98,
+   "indexDay": "2022-03-29T00:00:00",
+   "indexOpen": 992.08,
+   "low": 0
+  },
+  {
+   "change": -2.88,
+   "changePer": -0.29,
+   "high": 0,
+   "indexClose": 995.1,
+   "indexDay": "2022-03-30T00:00:00",
+   "indexOpen": 997.98,
+   "low": 0
+  },
+  {
+   "change": 0.26,
+   "changePer": 0.03,
+   "high": 0,
+   "indexClose": 995.36,
+   "indexDay": "2022-03-31T00:00:00",
+   "indexOpen": 995.1,
+   "low": 0
+  },
+  {
+   "change": 20.88,
+   "changePer": 2.1,
+   "high": 0,
+   "indexClose": 1016.24,
+   "indexDay": "2022-04-03T00:00:00",
+   "indexOpen": 995.36,
+   "low": 0
+  },
+  {
+   "change": 0.21,
+   "changePer": 0.02,
+   "high": 0,
+   "indexClose": 1016.45,
+   "indexDay": "2022-04-04T00:00:00",
+   "indexOpen": 1016.24,
+   "low": 0
+  },
+  {
+   "change": -7.12,
+   "changePer": -0.7,
+   "high": 0,
+   "indexClose": 1009.33,
+   "indexDay": "2022-04-05T00:00:00",
+   "indexOpen": 1016.45,
+   "low": 0
+  },
+  {
+   "change": 2.13,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 1011.46,
+   "indexDay": "2022-04-06T00:00:00",
+   "indexOpen": 1009.33,
+   "low": 0
+  },
+  {
+   "change": -13.05,
+   "changePer": -1.29,
+   "high": 0,
+   "indexClose": 998.41,
+   "indexDay": "2022-04-07T00:00:00",
+   "indexOpen": 1011.46,
+   "low": 0
+  },
+  {
+   "change": -12.9,
+   "changePer": -1.29,
+   "high": 0,
+   "indexClose": 985.51,
+   "indexDay": "2022-04-10T00:00:00",
+   "indexOpen": 998.41,
+   "low": 0
+  },
+  {
+   "change": -23.14,
+   "changePer": -2.35,
+   "high": 0,
+   "indexClose": 962.37,
+   "indexDay": "2022-04-11T00:00:00",
+   "indexOpen": 985.51,
+   "low": 0
+  },
+  {
+   "change": 7.53,
+   "changePer": 0.78,
+   "high": 0,
+   "indexClose": 969.9,
+   "indexDay": "2022-04-12T00:00:00",
+   "indexOpen": 962.37,
+   "low": 0
+  },
+  {
+   "change": -1.99,
+   "changePer": -0.21,
+   "high": 0,
+   "indexClose": 967.91,
+   "indexDay": "2022-04-13T00:00:00",
+   "indexOpen": 969.9,
+   "low": 0
+  },
+  {
+   "change": -26.72,
+   "changePer": -2.76,
+   "high": 0,
+   "indexClose": 941.19,
+   "indexDay": "2022-04-14T00:00:00",
+   "indexOpen": 967.91,
+   "low": 0
+  },
+  {
+   "change": -10.43,
+   "changePer": -1.11,
+   "high": 0,
+   "indexClose": 930.76,
+   "indexDay": "2022-04-17T00:00:00",
+   "indexOpen": 941.19,
+   "low": 0
+  },
+  {
+   "change": 0.63,
+   "changePer": 0.07,
+   "high": 0,
+   "indexClose": 931.39,
+   "indexDay": "2022-04-18T00:00:00",
+   "indexOpen": 930.76,
+   "low": 0
+  },
+  {
+   "change": 10.08,
+   "changePer": 1.08,
+   "high": 0,
+   "indexClose": 941.47,
+   "indexDay": "2022-04-19T00:00:00",
+   "indexOpen": 931.39,
+   "low": 0
+  },
+  {
+   "change": -10.85,
+   "changePer": -1.15,
+   "high": 0,
+   "indexClose": 930.62,
+   "indexDay": "2022-04-20T00:00:00",
+   "indexOpen": 941.47,
+   "low": 0
+  },
+  {
+   "change": 16.62,
+   "changePer": 1.79,
+   "high": 0,
+   "indexClose": 947.24,
+   "indexDay": "2022-04-21T00:00:00",
+   "indexOpen": 930.62,
+   "low": 0
+  },
+  {
+   "change": 7.43,
+   "changePer": 0.78,
+   "high": 0,
+   "indexClose": 954.67,
+   "indexDay": "2022-04-26T00:00:00",
+   "indexOpen": 947.24,
+   "low": 0
+  },
+  {
+   "change": 9.09,
+   "changePer": 0.95,
+   "high": 0,
+   "indexClose": 963.76,
+   "indexDay": "2022-04-27T00:00:00",
+   "indexOpen": 954.67,
+   "low": 0
+  },
+  {
+   "change": 29.18,
+   "changePer": 3.03,
+   "high": 0,
+   "indexClose": 992.94,
+   "indexDay": "2022-04-28T00:00:00",
+   "indexOpen": 963.76,
+   "low": 0
+  },
+  {
+   "change": 7.61,
+   "changePer": 0.77,
+   "high": 0,
+   "indexClose": 1000.55,
+   "indexDay": "2022-05-08T00:00:00",
+   "indexOpen": 992.94,
+   "low": 0
+  },
+  {
+   "change": -11.8,
+   "changePer": -1.18,
+   "high": 0,
+   "indexClose": 988.75,
+   "indexDay": "2022-05-09T00:00:00",
+   "indexOpen": 1000.55,
+   "low": 0
+  },
+  {
+   "change": -11.3,
+   "changePer": -1.14,
+   "high": 0,
+   "indexClose": 977.45,
+   "indexDay": "2022-05-10T00:00:00",
+   "indexOpen": 988.75,
+   "low": 0
+  },
+  {
+   "change": 10.93,
+   "changePer": 1.12,
+   "high": 0,
+   "indexClose": 988.38,
+   "indexDay": "2022-05-11T00:00:00",
+   "indexOpen": 977.45,
+   "low": 0
+  },
+  {
+   "change": -14.88,
+   "changePer": -1.51,
+   "high": 0,
+   "indexClose": 973.5,
+   "indexDay": "2022-05-12T00:00:00",
+   "indexOpen": 988.38,
+   "low": 0
+  },
+  {
+   "change": -10.18,
+   "changePer": -1.05,
+   "high": 0,
+   "indexClose": 963.32,
+   "indexDay": "2022-05-15T00:00:00",
+   "indexOpen": 973.5,
+   "low": 0
+  },
+  {
+   "change": -6.77,
+   "changePer": -0.7,
+   "high": 0,
+   "indexClose": 956.55,
+   "indexDay": "2022-05-16T00:00:00",
+   "indexOpen": 963.32,
+   "low": 0
+  },
+  {
+   "change": 2.71,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 959.26,
+   "indexDay": "2022-05-17T00:00:00",
+   "indexOpen": 956.55,
+   "low": 0
+  },
+  {
+   "change": 0.88,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 960.14,
+   "indexDay": "2022-05-18T00:00:00",
+   "indexOpen": 959.26,
+   "low": 0
+  },
+  {
+   "change": -1.97,
+   "changePer": -0.21,
+   "high": 0,
+   "indexClose": 958.17,
+   "indexDay": "2022-05-19T00:00:00",
+   "indexOpen": 960.14,
+   "low": 0
+  },
+  {
+   "change": -5.75,
+   "changePer": -0.6,
+   "high": 0,
+   "indexClose": 952.42,
+   "indexDay": "2022-05-22T00:00:00",
+   "indexOpen": 958.17,
+   "low": 0
+  },
+  {
+   "change": 2.13,
+   "changePer": 0.22,
+   "high": 0,
+   "indexClose": 954.55,
+   "indexDay": "2022-05-23T00:00:00",
+   "indexOpen": 952.42,
+   "low": 0
+  },
+  {
+   "change": -14.22,
+   "changePer": -1.49,
+   "high": 0,
+   "indexClose": 940.33,
+   "indexDay": "2022-05-24T00:00:00",
+   "indexOpen": 954.55,
+   "low": 0
+  },
+  {
+   "change": -15.73,
+   "changePer": -1.67,
+   "high": 0,
+   "indexClose": 924.6,
+   "indexDay": "2022-05-25T00:00:00",
+   "indexOpen": 940.33,
+   "low": 0
+  },
+  {
+   "change": -9.47,
+   "changePer": -1.02,
+   "high": 0,
+   "indexClose": 915.13,
+   "indexDay": "2022-05-26T00:00:00",
+   "indexOpen": 924.6,
+   "low": 0
+  },
+  {
+   "change": -10.74,
+   "changePer": -1.17,
+   "high": 0,
+   "indexClose": 904.39,
+   "indexDay": "2022-05-29T00:00:00",
+   "indexOpen": 915.13,
+   "low": 0
+  },
+  {
+   "change": 6.21,
+   "changePer": 0.69,
+   "high": 0,
+   "indexClose": 910.6,
+   "indexDay": "2022-05-30T00:00:00",
+   "indexOpen": 904.39,
+   "low": 0
+  },
+  {
+   "change": -0.72,
+   "changePer": -0.08,
+   "high": 0,
+   "indexClose": 909.88,
+   "indexDay": "2022-05-31T00:00:00",
+   "indexOpen": 910.6,
+   "low": 0
+  },
+  {
+   "change": -5.34,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 904.54,
+   "indexDay": "2022-06-01T00:00:00",
+   "indexOpen": 909.88,
+   "low": 0
+  },
+  {
+   "change": 1.6,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 906.14,
+   "indexDay": "2022-06-02T00:00:00",
+   "indexOpen": 904.54,
+   "low": 0
+  },
+  {
+   "change": -0.87,
+   "changePer": -0.1,
+   "high": 0,
+   "indexClose": 905.27,
+   "indexDay": "2022-06-05T00:00:00",
+   "indexOpen": 906.14,
+   "low": 0
+  },
+  {
+   "change": 1.99,
+   "changePer": 0.22,
+   "high": 0,
+   "indexClose": 907.26,
+   "indexDay": "2022-06-06T00:00:00",
+   "indexOpen": 905.27,
+   "low": 0
+  },
+  {
+   "change": 6.55,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 913.81,
+   "indexDay": "2022-06-07T00:00:00",
+   "indexOpen": 907.26,
+   "low": 0
+  },
+  {
+   "change": 18.18,
+   "changePer": 1.99,
+   "high": 0,
+   "indexClose": 931.99,
+   "indexDay": "2022-06-08T00:00:00",
+   "indexOpen": 913.81,
+   "low": 0
+  },
+  {
+   "change": 2.26,
+   "changePer": 0.24,
+   "high": 0,
+   "indexClose": 934.25,
+   "indexDay": "2022-06-09T00:00:00",
+   "indexOpen": 931.99,
+   "low": 0
+  },
+  {
+   "change": -6.79,
+   "changePer": -0.73,
+   "high": 0,
+   "indexClose": 927.46,
+   "indexDay": "2022-06-12T00:00:00",
+   "indexOpen": 934.25,
+   "low": 0
+  },
+  {
+   "change": -8.97,
+   "changePer": -0.97,
+   "high": 0,
+   "indexClose": 918.49,
+   "indexDay": "2022-06-13T00:00:00",
+   "indexOpen": 927.46,
+   "low": 0
+  },
+  {
+   "change": -5.56,
+   "changePer": -0.61,
+   "high": 0,
+   "indexClose": 912.93,
+   "indexDay": "2022-06-14T00:00:00",
+   "indexOpen": 918.49,
+   "low": 0
+  },
+  {
+   "change": 3.23,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 916.16,
+   "indexDay": "2022-06-15T00:00:00",
+   "indexOpen": 912.93,
+   "low": 0
+  },
+  {
+   "change": -4.92,
+   "changePer": -0.54,
+   "high": 0,
+   "indexClose": 911.24,
+   "indexDay": "2022-06-16T00:00:00",
+   "indexOpen": 916.16,
+   "low": 0
+  },
+  {
+   "change": -12.46,
+   "changePer": -1.37,
+   "high": 0,
+   "indexClose": 898.78,
+   "indexDay": "2022-06-19T00:00:00",
+   "indexOpen": 911.24,
+   "low": 0
+  },
+  {
+   "change": -6.06,
+   "changePer": -0.67,
+   "high": 0,
+   "indexClose": 892.72,
+   "indexDay": "2022-06-20T00:00:00",
+   "indexOpen": 898.78,
+   "low": 0
+  },
+  {
+   "change": -0.22,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 892.5,
+   "indexDay": "2022-06-21T00:00:00",
+   "indexOpen": 892.72,
+   "low": 0
+  },
+  {
+   "change": -4.85,
+   "changePer": -0.54,
+   "high": 0,
+   "indexClose": 887.65,
+   "indexDay": "2022-06-22T00:00:00",
+   "indexOpen": 892.5,
+   "low": 0
+  },
+  {
+   "change": -9.69,
+   "changePer": -1.09,
+   "high": 0,
+   "indexClose": 877.96,
+   "indexDay": "2022-06-23T00:00:00",
+   "indexOpen": 887.65,
+   "low": 0
+  },
+  {
+   "change": -0.93,
+   "changePer": -0.11,
+   "high": 0,
+   "indexClose": 877.03,
+   "indexDay": "2022-06-26T00:00:00",
+   "indexOpen": 877.96,
+   "low": 0
+  },
+  {
+   "change": -18.65,
+   "changePer": -2.13,
+   "high": 0,
+   "indexClose": 858.38,
+   "indexDay": "2022-06-27T00:00:00",
+   "indexOpen": 877.03,
+   "low": 0
+  },
+  {
+   "change": -7.98,
+   "changePer": -0.93,
+   "high": 0,
+   "indexClose": 850.4,
+   "indexDay": "2022-06-28T00:00:00",
+   "indexOpen": 858.38,
+   "low": 0
+  },
+  {
+   "change": 4.32,
+   "changePer": 0.51,
+   "high": 0,
+   "indexClose": 854.72,
+   "indexDay": "2022-06-29T00:00:00",
+   "indexOpen": 850.4,
+   "low": 0
+  },
+  {
+   "change": -16.64,
+   "changePer": -1.95,
+   "high": 0,
+   "indexClose": 838.08,
+   "indexDay": "2022-07-03T00:00:00",
+   "indexOpen": 854.72,
+   "low": 0
+  },
+  {
+   "change": -24.98,
+   "changePer": -2.98,
+   "high": 0,
+   "indexClose": 813.1,
+   "indexDay": "2022-07-04T00:00:00",
+   "indexOpen": 838.08,
+   "low": 0
+  },
+  {
+   "change": 3.63,
+   "changePer": 0.45,
+   "high": 0,
+   "indexClose": 816.73,
+   "indexDay": "2022-07-05T00:00:00",
+   "indexOpen": 813.1,
+   "low": 0
+  },
+  {
+   "change": -0.16,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 816.57,
+   "indexDay": "2022-07-06T00:00:00",
+   "indexOpen": 816.73,
+   "low": 0
+  },
+  {
+   "change": 5.58,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 822.15,
+   "indexDay": "2022-07-07T00:00:00",
+   "indexOpen": 816.57,
+   "low": 0
+  },
+  {
+   "change": -2.49,
+   "changePer": -0.3,
+   "high": 0,
+   "indexClose": 819.66,
+   "indexDay": "2022-07-17T00:00:00",
+   "indexOpen": 822.15,
+   "low": 0
+  },
+  {
+   "change": 16.32,
+   "changePer": 1.99,
+   "high": 0,
+   "indexClose": 835.98,
+   "indexDay": "2022-07-18T00:00:00",
+   "indexOpen": 819.66,
+   "low": 0
+  },
+  {
+   "change": 10.64,
+   "changePer": 1.27,
+   "high": 0,
+   "indexClose": 846.62,
+   "indexDay": "2022-07-19T00:00:00",
+   "indexOpen": 835.98,
+   "low": 0
+  },
+  {
+   "change": 4.89,
+   "changePer": 0.58,
+   "high": 0,
+   "indexClose": 851.51,
+   "indexDay": "2022-07-20T00:00:00",
+   "indexOpen": 846.62,
+   "low": 0
+  },
+  {
+   "change": 21.18,
+   "changePer": 2.49,
+   "high": 0,
+   "indexClose": 872.69,
+   "indexDay": "2022-07-21T00:00:00",
+   "indexOpen": 851.51,
+   "low": 0
+  },
+  {
+   "change": 5.89,
+   "changePer": 0.67,
+   "high": 0,
+   "indexClose": 878.58,
+   "indexDay": "2022-07-24T00:00:00",
+   "indexOpen": 872.69,
+   "low": 0
+  },
+  {
+   "change": -3.24,
+   "changePer": -0.37,
+   "high": 0,
+   "indexClose": 875.34,
+   "indexDay": "2022-07-25T00:00:00",
+   "indexOpen": 878.58,
+   "low": 0
+  },
+  {
+   "change": 8.05,
+   "changePer": 0.92,
+   "high": 0,
+   "indexClose": 883.39,
+   "indexDay": "2022-07-26T00:00:00",
+   "indexOpen": 875.34,
+   "low": 0
+  },
+  {
+   "change": -6.3,
+   "changePer": -0.71,
+   "high": 0,
+   "indexClose": 877.09,
+   "indexDay": "2022-07-27T00:00:00",
+   "indexOpen": 883.39,
+   "low": 0
+  },
+  {
+   "change": 3.44,
+   "changePer": 0.39,
+   "high": 0,
+   "indexClose": 880.53,
+   "indexDay": "2022-07-28T00:00:00",
+   "indexOpen": 877.09,
+   "low": 0
+  },
+  {
+   "change": 7.9,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 888.43,
+   "indexDay": "2022-07-31T00:00:00",
+   "indexOpen": 880.53,
+   "low": 0
+  },
+  {
+   "change": -5.94,
+   "changePer": -0.67,
+   "high": 0,
+   "indexClose": 882.49,
+   "indexDay": "2022-08-01T00:00:00",
+   "indexOpen": 888.43,
+   "low": 0
+  },
+  {
+   "change": 11.33,
+   "changePer": 1.28,
+   "high": 0,
+   "indexClose": 893.82,
+   "indexDay": "2022-08-02T00:00:00",
+   "indexOpen": 882.49,
+   "low": 0
+  },
+  {
+   "change": 6.73,
+   "changePer": 0.75,
+   "high": 0,
+   "indexClose": 900.55,
+   "indexDay": "2022-08-03T00:00:00",
+   "indexOpen": 893.82,
+   "low": 0
+  },
+  {
+   "change": 28,
+   "changePer": 3.11,
+   "high": 0,
+   "indexClose": 928.55,
+   "indexDay": "2022-08-04T00:00:00",
+   "indexOpen": 900.55,
+   "low": 0
+  },
+  {
+   "change": 9.11,
+   "changePer": 0.98,
+   "high": 0,
+   "indexClose": 937.66,
+   "indexDay": "2022-08-07T00:00:00",
+   "indexOpen": 928.55,
+   "low": 0
+  },
+  {
+   "change": -5.64,
+   "changePer": -0.6,
+   "high": 0,
+   "indexClose": 932.02,
+   "indexDay": "2022-08-08T00:00:00",
+   "indexOpen": 937.66,
+   "low": 0
+  },
+  {
+   "change": -4.98,
+   "changePer": -0.53,
+   "high": 0,
+   "indexClose": 927.04,
+   "indexDay": "2022-08-09T00:00:00",
+   "indexOpen": 932.02,
+   "low": 0
+  },
+  {
+   "change": 0.04,
+   "changePer": 0,
+   "high": 0,
+   "indexClose": 927.08,
+   "indexDay": "2022-08-10T00:00:00",
+   "indexOpen": 927.04,
+   "low": 0
+  },
+  {
+   "change": 2.56,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 929.64,
+   "indexDay": "2022-08-11T00:00:00",
+   "indexOpen": 927.08,
+   "low": 0
+  },
+  {
+   "change": 4.6,
+   "changePer": 0.49,
+   "high": 0,
+   "indexClose": 934.24,
+   "indexDay": "2022-08-14T00:00:00",
+   "indexOpen": 929.64,
+   "low": 0
+  },
+  {
+   "change": -5.94,
+   "changePer": -0.64,
+   "high": 0,
+   "indexClose": 928.3,
+   "indexDay": "2022-08-15T00:00:00",
+   "indexOpen": 934.24,
+   "low": 0
+  },
+  {
+   "change": 1.83,
+   "changePer": 0.2,
+   "high": 0,
+   "indexClose": 930.13,
+   "indexDay": "2022-08-16T00:00:00",
+   "indexOpen": 928.3,
+   "low": 0
+  },
+  {
+   "change": 15.48,
+   "changePer": 1.66,
+   "high": 0,
+   "indexClose": 945.61,
+   "indexDay": "2022-08-17T00:00:00",
+   "indexOpen": 930.13,
+   "low": 0
+  },
+  {
+   "change": 3.47,
+   "changePer": 0.37,
+   "high": 0,
+   "indexClose": 949.08,
+   "indexDay": "2022-08-18T00:00:00",
+   "indexOpen": 945.61,
+   "low": 0
+  },
+  {
+   "change": 22.45,
+   "changePer": 2.37,
+   "high": 0,
+   "indexClose": 971.53,
+   "indexDay": "2022-08-21T00:00:00",
+   "indexOpen": 949.08,
+   "low": 0
+  },
+  {
+   "change": -5.84,
+   "changePer": -0.6,
+   "high": 0,
+   "indexClose": 965.69,
+   "indexDay": "2022-08-22T00:00:00",
+   "indexOpen": 971.53,
+   "low": 0
+  },
+  {
+   "change": -5.88,
+   "changePer": -0.61,
+   "high": 0,
+   "indexClose": 959.81,
+   "indexDay": "2022-08-23T00:00:00",
+   "indexOpen": 965.69,
+   "low": 0
+  },
+  {
+   "change": -6.41,
+   "changePer": -0.67,
+   "high": 0,
+   "indexClose": 953.4,
+   "indexDay": "2022-08-24T00:00:00",
+   "indexOpen": 959.81,
+   "low": 0
+  },
+  {
+   "change": 14.31,
+   "changePer": 1.5,
+   "high": 0,
+   "indexClose": 967.71,
+   "indexDay": "2022-08-25T00:00:00",
+   "indexOpen": 953.4,
+   "low": 0
+  },
+  {
+   "change": -2.1,
+   "changePer": -0.22,
+   "high": 0,
+   "indexClose": 965.61,
+   "indexDay": "2022-08-28T00:00:00",
+   "indexOpen": 967.71,
+   "low": 0
+  },
+  {
+   "change": -4.12,
+   "changePer": -0.43,
+   "high": 0,
+   "indexClose": 961.49,
+   "indexDay": "2022-08-29T00:00:00",
+   "indexOpen": 965.61,
+   "low": 0
+  },
+  {
+   "change": 5.45,
+   "changePer": 0.57,
+   "high": 0,
+   "indexClose": 966.94,
+   "indexDay": "2022-08-30T00:00:00",
+   "indexOpen": 961.49,
+   "low": 0
+  },
+  {
+   "change": -3.51,
+   "changePer": -0.36,
+   "high": 0,
+   "indexClose": 963.43,
+   "indexDay": "2022-08-31T00:00:00",
+   "indexOpen": 966.94,
+   "low": 0
+  },
+  {
+   "change": -9.17,
+   "changePer": -0.95,
+   "high": 0,
+   "indexClose": 954.26,
+   "indexDay": "2022-09-01T00:00:00",
+   "indexOpen": 963.43,
+   "low": 0
+  },
+  {
+   "change": 5.64,
+   "changePer": 0.59,
+   "high": 0,
+   "indexClose": 959.9,
+   "indexDay": "2022-09-04T00:00:00",
+   "indexOpen": 954.26,
+   "low": 0
+  },
+  {
+   "change": 15.05,
+   "changePer": 1.57,
+   "high": 0,
+   "indexClose": 974.95,
+   "indexDay": "2022-09-05T00:00:00",
+   "indexOpen": 959.9,
+   "low": 0
+  },
+  {
+   "change": 9.34,
+   "changePer": 0.96,
+   "high": 0,
+   "indexClose": 984.29,
+   "indexDay": "2022-09-06T00:00:00",
+   "indexOpen": 974.95,
+   "low": 0
+  },
+  {
+   "change": -5.81,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 978.48,
+   "indexDay": "2022-09-07T00:00:00",
+   "indexOpen": 984.29,
+   "low": 0
+  },
+  {
+   "change": 7.33,
+   "changePer": 0.75,
+   "high": 0,
+   "indexClose": 985.81,
+   "indexDay": "2022-09-08T00:00:00",
+   "indexOpen": 978.48,
+   "low": 0
+  },
+  {
+   "change": 13.54,
+   "changePer": 1.37,
+   "high": 0,
+   "indexClose": 999.35,
+   "indexDay": "2022-09-11T00:00:00",
+   "indexOpen": 985.81,
+   "low": 0
+  },
+  {
+   "change": 4.35,
+   "changePer": 0.44,
+   "high": 0,
+   "indexClose": 1003.7,
+   "indexDay": "2022-09-12T00:00:00",
+   "indexOpen": 999.35,
+   "low": 0
+  },
+  {
+   "change": -0.89,
+   "changePer": -0.09,
+   "high": 0,
+   "indexClose": 1002.81,
+   "indexDay": "2022-09-13T00:00:00",
+   "indexOpen": 1003.7,
+   "low": 0
+  },
+  {
+   "change": -17.54,
+   "changePer": -1.75,
+   "high": 0,
+   "indexClose": 985.27,
+   "indexDay": "2022-09-14T00:00:00",
+   "indexOpen": 1002.81,
+   "low": 0
+  },
+  {
+   "change": -13,
+   "changePer": -1.32,
+   "high": 0,
+   "indexClose": 972.27,
+   "indexDay": "2022-09-15T00:00:00",
+   "indexOpen": 985.27,
+   "low": 0
+  },
+  {
+   "change": -23.23,
+   "changePer": -2.39,
+   "high": 0,
+   "indexClose": 949.04,
+   "indexDay": "2022-09-18T00:00:00",
+   "indexOpen": 972.27,
+   "low": 0
+  },
+  {
+   "change": 10.68,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 959.72,
+   "indexDay": "2022-09-19T00:00:00",
+   "indexOpen": 949.04,
+   "low": 0
+  },
+  {
+   "change": 12.05,
+   "changePer": 1.26,
+   "high": 0,
+   "indexClose": 971.77,
+   "indexDay": "2022-09-20T00:00:00",
+   "indexOpen": 959.72,
+   "low": 0
+  },
+  {
+   "change": 0.51,
+   "changePer": 0.05,
+   "high": 0,
+   "indexClose": 972.28,
+   "indexDay": "2022-09-21T00:00:00",
+   "indexOpen": 971.77,
+   "low": 0
+  },
+  {
+   "change": 0.79,
+   "changePer": 0.08,
+   "high": 0,
+   "indexClose": 973.07,
+   "indexDay": "2022-09-22T00:00:00",
+   "indexOpen": 972.28,
+   "low": 0
+  },
+  {
+   "change": 0.4,
+   "changePer": 0.04,
+   "high": 0,
+   "indexClose": 973.47,
+   "indexDay": "2022-09-25T00:00:00",
+   "indexOpen": 973.07,
+   "low": 0
+  },
+  {
+   "change": 2.71,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 976.18,
+   "indexDay": "2022-09-26T00:00:00",
+   "indexOpen": 973.47,
+   "low": 0
+  },
+  {
+   "change": 2.01,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 978.19,
+   "indexDay": "2022-09-27T00:00:00",
+   "indexOpen": 976.18,
+   "low": 0
+  },
+  {
+   "change": -9.56,
+   "changePer": -0.98,
+   "high": 0,
+   "indexClose": 968.63,
+   "indexDay": "2022-09-28T00:00:00",
+   "indexOpen": 978.19,
+   "low": 0
+  },
+  {
+   "change": 9.7,
+   "changePer": 1,
+   "high": 0,
+   "indexClose": 978.33,
+   "indexDay": "2022-09-29T00:00:00",
+   "indexOpen": 968.63,
+   "low": 0
+  },
+  {
+   "change": -10.29,
+   "changePer": -1.05,
+   "high": 0,
+   "indexClose": 968.04,
+   "indexDay": "2022-10-02T00:00:00",
+   "indexOpen": 978.33,
+   "low": 0
+  },
+  {
+   "change": -0.17,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 967.87,
+   "indexDay": "2022-10-03T00:00:00",
+   "indexOpen": 968.04,
+   "low": 0
+  },
+  {
+   "change": 12.23,
+   "changePer": 1.26,
+   "high": 0,
+   "indexClose": 980.1,
+   "indexDay": "2022-10-04T00:00:00",
+   "indexOpen": 967.87,
+   "low": 0
+  },
+  {
+   "change": 1.98,
+   "changePer": 0.2,
+   "high": 0,
+   "indexClose": 982.08,
+   "indexDay": "2022-10-05T00:00:00",
+   "indexOpen": 980.1,
+   "low": 0
+  },
+  {
+   "change": -3.14,
+   "changePer": -0.32,
+   "high": 0,
+   "indexClose": 978.94,
+   "indexDay": "2022-10-09T00:00:00",
+   "indexOpen": 982.08,
+   "low": 0
+  },
+  {
+   "change": 1.84,
+   "changePer": 0.19,
+   "high": 0,
+   "indexClose": 980.78,
+   "indexDay": "2022-10-10T00:00:00",
+   "indexOpen": 978.94,
+   "low": 0
+  },
+  {
+   "change": -1.67,
+   "changePer": -0.17,
+   "high": 0,
+   "indexClose": 979.11,
+   "indexDay": "2022-10-11T00:00:00",
+   "indexOpen": 980.78,
+   "low": 0
+  },
+  {
+   "change": -12.2,
+   "changePer": -1.25,
+   "high": 0,
+   "indexClose": 966.91,
+   "indexDay": "2022-10-12T00:00:00",
+   "indexOpen": 979.11,
+   "low": 0
+  },
+  {
+   "change": 6.97,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 973.88,
+   "indexDay": "2022-10-13T00:00:00",
+   "indexOpen": 966.91,
+   "low": 0
+  },
+  {
+   "change": 13.54,
+   "changePer": 1.39,
+   "high": 0,
+   "indexClose": 987.42,
+   "indexDay": "2022-10-16T00:00:00",
+   "indexOpen": 973.88,
+   "low": 0
+  },
+  {
+   "change": 8.72,
+   "changePer": 0.88,
+   "high": 0,
+   "indexClose": 996.14,
+   "indexDay": "2022-10-17T00:00:00",
+   "indexOpen": 987.42,
+   "low": 0
+  },
+  {
+   "change": 8.45,
+   "changePer": 0.85,
+   "high": 0,
+   "indexClose": 1004.59,
+   "indexDay": "2022-10-18T00:00:00",
+   "indexOpen": 996.14,
+   "low": 0
+  },
+  {
+   "change": 2.48,
+   "changePer": 0.25,
+   "high": 0,
+   "indexClose": 1007.07,
+   "indexDay": "2022-10-19T00:00:00",
+   "indexOpen": 1004.59,
+   "low": 0
+  },
+  {
+   "change": 3.21,
+   "changePer": 0.32,
+   "high": 0,
+   "indexClose": 1010.28,
+   "indexDay": "2022-10-20T00:00:00",
+   "indexOpen": 1007.07,
+   "low": 0
+  },
+  {
+   "change": -1.06,
+   "changePer": -0.1,
+   "high": 0,
+   "indexClose": 1009.22,
+   "indexDay": "2022-10-23T00:00:00",
+   "indexOpen": 1010.28,
+   "low": 0
+  },
+  {
+   "change": -3.96,
+   "changePer": -0.39,
+   "high": 0,
+   "indexClose": 1005.26,
+   "indexDay": "2022-10-24T00:00:00",
+   "indexOpen": 1009.22,
+   "low": 0
+  },
+  {
+   "change": 10.05,
+   "changePer": 1,
+   "high": 0,
+   "indexClose": 1015.31,
+   "indexDay": "2022-10-25T00:00:00",
+   "indexOpen": 1005.26,
+   "low": 0
+  },
+  {
+   "change": 9,
+   "changePer": 0.89,
+   "high": 0,
+   "indexClose": 1024.31,
+   "indexDay": "2022-10-26T00:00:00",
+   "indexOpen": 1015.31,
+   "low": 0
+  },
+  {
+   "change": 27.16,
+   "changePer": 2.65,
+   "high": 0,
+   "indexClose": 1051.47,
+   "indexDay": "2022-10-27T00:00:00",
+   "indexOpen": 1024.31,
+   "low": 0
+  },
+  {
+   "change": -4.2,
+   "changePer": -0.4,
+   "high": 0,
+   "indexClose": 1047.27,
+   "indexDay": "2022-10-30T00:00:00",
+   "indexOpen": 1051.47,
+   "low": 0
+  },
+  {
+   "change": 9.93,
+   "changePer": 0.95,
+   "high": 0,
+   "indexClose": 1057.2,
+   "indexDay": "2022-10-31T00:00:00",
+   "indexOpen": 1047.27,
+   "low": 0
+  },
+  {
+   "change": 2.12,
+   "changePer": 0.2,
+   "high": 0,
+   "indexClose": 1059.32,
+   "indexDay": "2022-11-01T00:00:00",
+   "indexOpen": 1057.2,
+   "low": 0
+  },
+  {
+   "change": -11.64,
+   "changePer": -1.1,
+   "high": 0,
+   "indexClose": 1047.68,
+   "indexDay": "2022-11-02T00:00:00",
+   "indexOpen": 1059.32,
+   "low": 0
+  },
+  {
+   "change": -2.9,
+   "changePer": -0.28,
+   "high": 0,
+   "indexClose": 1044.78,
+   "indexDay": "2022-11-03T00:00:00",
+   "indexOpen": 1047.68,
+   "low": 0
+  },
+  {
+   "change": -3.51,
+   "changePer": -0.34,
+   "high": 0,
+   "indexClose": 1041.27,
+   "indexDay": "2022-11-06T00:00:00",
+   "indexOpen": 1044.78,
+   "low": 0
+  },
+  {
+   "change": 11.76,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 1053.03,
+   "indexDay": "2022-11-07T00:00:00",
+   "indexOpen": 1041.27,
+   "low": 0
+  },
+  {
+   "change": -9.66,
+   "changePer": -0.92,
+   "high": 0,
+   "indexClose": 1043.37,
+   "indexDay": "2022-11-08T00:00:00",
+   "indexOpen": 1053.03,
+   "low": 0
+  },
+  {
+   "change": 12.67,
+   "changePer": 1.21,
+   "high": 0,
+   "indexClose": 1056.04,
+   "indexDay": "2022-11-09T00:00:00",
+   "indexOpen": 1043.37,
+   "low": 0
+  },
+  {
+   "change": 21.26,
+   "changePer": 2.01,
+   "high": 0,
+   "indexClose": 1077.3,
+   "indexDay": "2022-11-10T00:00:00",
+   "indexOpen": 1056.04,
+   "low": 0
+  },
+  {
+   "change": 13.95,
+   "changePer": 1.29,
+   "high": 0,
+   "indexClose": 1091.25,
+   "indexDay": "2022-11-13T00:00:00",
+   "indexOpen": 1077.3,
+   "low": 0
+  },
+  {
+   "change": 7.09,
+   "changePer": 0.65,
+   "high": 0,
+   "indexClose": 1098.34,
+   "indexDay": "2022-11-14T00:00:00",
+   "indexOpen": 1091.25,
+   "low": 0
+  },
+  {
+   "change": 4.88,
+   "changePer": 0.44,
+   "high": 0,
+   "indexClose": 1103.22,
+   "indexDay": "2022-11-15T00:00:00",
+   "indexOpen": 1098.34,
+   "low": 0
+  },
+  {
+   "change": 22.33,
+   "changePer": 2.02,
+   "high": 0,
+   "indexClose": 1125.55,
+   "indexDay": "2022-11-16T00:00:00",
+   "indexOpen": 1103.22,
+   "low": 0
+  },
+  {
+   "change": 12.76,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 1138.31,
+   "indexDay": "2022-11-17T00:00:00",
+   "indexOpen": 1125.55,
+   "low": 0
+  },
+  {
+   "change": 1.89,
+   "changePer": 0.17,
+   "high": 0,
+   "indexClose": 1140.2,
+   "indexDay": "2022-11-20T00:00:00",
+   "indexOpen": 1138.31,
+   "low": 0
+  },
+  {
+   "change": -6.7,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 1133.5,
+   "indexDay": "2022-11-21T00:00:00",
+   "indexOpen": 1140.2,
+   "low": 0
+  },
+  {
+   "change": 3.57,
+   "changePer": 0.31,
+   "high": 0,
+   "indexClose": 1137.07,
+   "indexDay": "2022-11-22T00:00:00",
+   "indexOpen": 1133.5,
+   "low": 0
+  },
+  {
+   "change": 9.91,
+   "changePer": 0.87,
+   "high": 0,
+   "indexClose": 1146.98,
+   "indexDay": "2022-11-23T00:00:00",
+   "indexOpen": 1137.07,
+   "low": 0
+  },
+  {
+   "change": 10.91,
+   "changePer": 0.95,
+   "high": 0,
+   "indexClose": 1157.89,
+   "indexDay": "2022-11-24T00:00:00",
+   "indexOpen": 1146.98,
+   "low": 0
+  },
+  {
+   "change": 20.19,
+   "changePer": 1.74,
+   "high": 0,
+   "indexClose": 1178.08,
+   "indexDay": "2022-11-27T00:00:00",
+   "indexOpen": 1157.89,
+   "low": 0
+  },
+  {
+   "change": -4.62,
+   "changePer": -0.39,
+   "high": 0,
+   "indexClose": 1173.46,
+   "indexDay": "2022-11-28T00:00:00",
+   "indexOpen": 1178.08,
+   "low": 0
+  },
+  {
+   "change": 19.91,
+   "changePer": 1.7,
+   "high": 0,
+   "indexClose": 1193.37,
+   "indexDay": "2022-11-29T00:00:00",
+   "indexOpen": 1173.46,
+   "low": 0
+  },
+  {
+   "change": -1.59,
+   "changePer": -0.13,
+   "high": 0,
+   "indexClose": 1191.78,
+   "indexDay": "2022-11-30T00:00:00",
+   "indexOpen": 1193.37,
+   "low": 0
+  },
+  {
+   "change": 20.53,
+   "changePer": 1.72,
+   "high": 0,
+   "indexClose": 1212.31,
+   "indexDay": "2022-12-01T00:00:00",
+   "indexOpen": 1191.78,
+   "low": 0
+  },
+  {
+   "change": 40.75,
+   "changePer": 3.36,
+   "high": 0,
+   "indexClose": 1253.06,
+   "indexDay": "2022-12-04T00:00:00",
+   "indexOpen": 1212.31,
+   "low": 0
+  },
+  {
+   "change": 16.67,
+   "changePer": 1.33,
+   "high": 0,
+   "indexClose": 1269.73,
+   "indexDay": "2022-12-05T00:00:00",
+   "indexOpen": 1253.06,
+   "low": 0
+  },
+  {
+   "change": 17.62,
+   "changePer": 1.39,
+   "high": 0,
+   "indexClose": 1287.35,
+   "indexDay": "2022-12-06T00:00:00",
+   "indexOpen": 1269.73,
+   "low": 0
+  },
+  {
+   "change": 19,
+   "changePer": 1.48,
+   "high": 0,
+   "indexClose": 1306.35,
+   "indexDay": "2022-12-07T00:00:00",
+   "indexOpen": 1287.35,
+   "low": 0
+  },
+  {
+   "change": 10.28,
+   "changePer": 0.79,
+   "high": 0,
+   "indexClose": 1316.63,
+   "indexDay": "2022-12-08T00:00:00",
+   "indexOpen": 1306.35,
+   "low": 0
+  },
+  {
+   "change": -10.88,
+   "changePer": -0.83,
+   "high": 0,
+   "indexClose": 1305.75,
+   "indexDay": "2022-12-11T00:00:00",
+   "indexOpen": 1316.63,
+   "low": 0
+  },
+  {
+   "change": 8.9,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 1314.65,
+   "indexDay": "2022-12-12T00:00:00",
+   "indexOpen": 1305.75,
+   "low": 0
+  },
+  {
+   "change": 61.5,
+   "changePer": 4.68,
+   "high": 0,
+   "indexClose": 1376.15,
+   "indexDay": "2022-12-13T00:00:00",
+   "indexOpen": 1314.65,
+   "low": 0
+  },
+  {
+   "change": 13.19,
+   "changePer": 0.96,
+   "high": 0,
+   "indexClose": 1389.34,
+   "indexDay": "2022-12-14T00:00:00",
+   "indexOpen": 1376.15,
+   "low": 0
+  },
+  {
+   "change": -2.81,
+   "changePer": -0.2,
+   "high": 0,
+   "indexClose": 1386.53,
+   "indexDay": "2022-12-15T00:00:00",
+   "indexOpen": 1389.34,
+   "low": 0
+  },
+  {
+   "change": -22.21,
+   "changePer": -1.6,
+   "high": 0,
+   "indexClose": 1364.32,
+   "indexDay": "2022-12-18T00:00:00",
+   "indexOpen": 1386.53,
+   "low": 0
+  },
+  {
+   "change": 0.83,
+   "changePer": 0.06,
+   "high": 0,
+   "indexClose": 1365.15,
+   "indexDay": "2022-12-19T00:00:00",
+   "indexOpen": 1364.32,
+   "low": 0
+  },
+  {
+   "change": -6.64,
+   "changePer": -0.49,
+   "high": 0,
+   "indexClose": 1358.51,
+   "indexDay": "2022-12-20T00:00:00",
+   "indexOpen": 1365.15,
+   "low": 0
+  },
+  {
+   "change": -6.77,
+   "changePer": -0.5,
+   "high": 0,
+   "indexClose": 1351.74,
+   "indexDay": "2022-12-21T00:00:00",
+   "indexOpen": 1358.51,
+   "low": 0
+  },
+  {
+   "change": -5.33,
+   "changePer": -0.39,
+   "high": 0,
+   "indexClose": 1346.41,
+   "indexDay": "2022-12-22T00:00:00",
+   "indexOpen": 1351.74,
+   "low": 0
+  },
+  {
+   "change": -25.23,
+   "changePer": -1.87,
+   "high": 0,
+   "indexClose": 1321.18,
+   "indexDay": "2022-12-25T00:00:00",
+   "indexOpen": 1346.41,
+   "low": 0
+  },
+  {
+   "change": 23.97,
+   "changePer": 1.81,
+   "high": 0,
+   "indexClose": 1345.15,
+   "indexDay": "2022-12-26T00:00:00",
+   "indexOpen": 1321.18,
+   "low": 0
+  },
+  {
+   "change": 2.25,
+   "changePer": 0.17,
+   "high": 0,
+   "indexClose": 1347.4,
+   "indexDay": "2022-12-27T00:00:00",
+   "indexOpen": 1345.15,
+   "low": 0
+  },
+  {
+   "change": 18.25,
+   "changePer": 1.35,
+   "high": 0,
+   "indexClose": 1365.65,
+   "indexDay": "2022-12-28T00:00:00",
+   "indexOpen": 1347.4,
+   "low": 0
+  },
+  {
+   "change": 9.03,
+   "changePer": 0.66,
+   "high": 0,
+   "indexClose": 1374.68,
+   "indexDay": "2022-12-29T00:00:00",
+   "indexOpen": 1365.65,
+   "low": 0
+  },
+  {
+   "change": 24.64,
+   "changePer": 1.79,
+   "high": 0,
+   "indexClose": 1399.32,
+   "indexDay": "2023-01-02T00:00:00",
+   "indexOpen": 1374.68,
+   "low": 0
+  },
+  {
+   "change": 8.39,
+   "changePer": 0.6,
+   "high": 0,
+   "indexClose": 1407.71,
+   "indexDay": "2023-01-03T00:00:00",
+   "indexOpen": 1399.32,
+   "low": 0
+  },
+  {
+   "change": 21.66,
+   "changePer": 1.54,
+   "high": 0,
+   "indexClose": 1429.37,
+   "indexDay": "2023-01-04T00:00:00",
+   "indexOpen": 1407.71,
+   "low": 0
+  },
+  {
+   "change": 17.44,
+   "changePer": 1.22,
+   "high": 0,
+   "indexClose": 1446.81,
+   "indexDay": "2023-01-05T00:00:00",
+   "indexOpen": 1429.37,
+   "low": 0
+  },
+  {
+   "change": -3.77,
+   "changePer": -0.26,
+   "high": 0,
+   "indexClose": 1443.04,
+   "indexDay": "2023-01-09T00:00:00",
+   "indexOpen": 1446.81,
+   "low": 0
+  },
+  {
+   "change": -45.04,
+   "changePer": -3.12,
+   "high": 0,
+   "indexClose": 1398,
+   "indexDay": "2023-01-10T00:00:00",
+   "indexOpen": 1443.04,
+   "low": 0
+  },
+  {
+   "change": 21.62,
+   "changePer": 1.55,
+   "high": 0,
+   "indexClose": 1419.62,
+   "indexDay": "2023-01-11T00:00:00",
+   "indexOpen": 1398,
+   "low": 0
+  },
+  {
+   "change": 0.46,
+   "changePer": 0.03,
+   "high": 0,
+   "indexClose": 1420.08,
+   "indexDay": "2023-01-12T00:00:00",
+   "indexOpen": 1419.62,
+   "low": 0
+  },
+  {
+   "change": 5.97,
+   "changePer": 0.42,
+   "high": 0,
+   "indexClose": 1426.05,
+   "indexDay": "2023-01-15T00:00:00",
+   "indexOpen": 1420.08,
+   "low": 0
+  },
+  {
+   "change": 20.18,
+   "changePer": 1.42,
+   "high": 0,
+   "indexClose": 1446.23,
+   "indexDay": "2023-01-16T00:00:00",
+   "indexOpen": 1426.05,
+   "low": 0
+  },
+  {
+   "change": 10.12,
+   "changePer": 0.7,
+   "high": 0,
+   "indexClose": 1456.35,
+   "indexDay": "2023-01-17T00:00:00",
+   "indexOpen": 1446.23,
+   "low": 0
+  },
+  {
+   "change": -8.61,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 1447.74,
+   "indexDay": "2023-01-18T00:00:00",
+   "indexOpen": 1456.35,
+   "low": 0
+  },
+  {
+   "change": 9.04,
+   "changePer": 0.62,
+   "high": 0,
+   "indexClose": 1456.78,
+   "indexDay": "2023-01-19T00:00:00",
+   "indexOpen": 1447.74,
+   "low": 0
+  },
+  {
+   "change": 19.63,
+   "changePer": 1.35,
+   "high": 0,
+   "indexClose": 1476.41,
+   "indexDay": "2023-01-22T00:00:00",
+   "indexOpen": 1456.78,
+   "low": 0
+  },
+  {
+   "change": 3.35,
+   "changePer": 0.23,
+   "high": 0,
+   "indexClose": 1479.76,
+   "indexDay": "2023-01-23T00:00:00",
+   "indexOpen": 1476.41,
+   "low": 0
+  },
+  {
+   "change": 10.92,
+   "changePer": 0.74,
+   "high": 0,
+   "indexClose": 1490.68,
+   "indexDay": "2023-01-24T00:00:00",
+   "indexOpen": 1479.76,
+   "low": 0
+  },
+  {
+   "change": 32.07,
+   "changePer": 2.15,
+   "high": 0,
+   "indexClose": 1522.75,
+   "indexDay": "2023-01-25T00:00:00",
+   "indexOpen": 1490.68,
+   "low": 0
+  },
+  {
+   "change": 44.49,
+   "changePer": 2.92,
+   "high": 0,
+   "indexClose": 1567.24,
+   "indexDay": "2023-01-29T00:00:00",
+   "indexOpen": 1522.75,
+   "low": 0
+  },
+  {
+   "change": -35.16,
+   "changePer": -2.24,
+   "high": 0,
+   "indexClose": 1532.08,
+   "indexDay": "2023-01-30T00:00:00",
+   "indexOpen": 1567.24,
+   "low": 0
+  },
+  {
+   "change": -45.16,
+   "changePer": -2.95,
+   "high": 0,
+   "indexClose": 1486.92,
+   "indexDay": "2023-01-31T00:00:00",
+   "indexOpen": 1532.08,
+   "low": 0
+  },
+  {
+   "change": -3.43,
+   "changePer": -0.23,
+   "high": 0,
+   "indexClose": 1483.49,
+   "indexDay": "2023-02-01T00:00:00",
+   "indexOpen": 1486.92,
+   "low": 0
+  },
+  {
+   "change": -14.13,
+   "changePer": -0.95,
+   "high": 0,
+   "indexClose": 1469.36,
+   "indexDay": "2023-02-02T00:00:00",
+   "indexOpen": 1483.49,
+   "low": 0
+  },
+  {
+   "change": -18.81,
+   "changePer": -1.28,
+   "high": 0,
+   "indexClose": 1450.55,
+   "indexDay": "2023-02-05T00:00:00",
+   "indexOpen": 1469.36,
+   "low": 0
+  },
+  {
+   "change": 14.59,
+   "changePer": 1.01,
+   "high": 0,
+   "indexClose": 1465.14,
+   "indexDay": "2023-02-06T00:00:00",
+   "indexOpen": 1450.55,
+   "low": 0
+  },
+  {
+   "change": 30.55,
+   "changePer": 2.09,
+   "high": 0,
+   "indexClose": 1495.69,
+   "indexDay": "2023-02-07T00:00:00",
+   "indexOpen": 1465.14,
+   "low": 0
+  },
+  {
+   "change": -6.17,
+   "changePer": -0.41,
+   "high": 0,
+   "indexClose": 1489.52,
+   "indexDay": "2023-02-08T00:00:00",
+   "indexOpen": 1495.69,
+   "low": 0
+  },
+  {
+   "change": 30.95,
+   "changePer": 2.08,
+   "high": 0,
+   "indexClose": 1520.47,
+   "indexDay": "2023-02-09T00:00:00",
+   "indexOpen": 1489.52,
+   "low": 0
+  },
+  {
+   "change": -9.36,
+   "changePer": -0.62,
+   "high": 0,
+   "indexClose": 1511.11,
+   "indexDay": "2023-02-12T00:00:00",
+   "indexOpen": 1520.47,
+   "low": 0
+  },
+  {
+   "change": -4.57,
+   "changePer": -0.3,
+   "high": 0,
+   "indexClose": 1506.54,
+   "indexDay": "2023-02-13T00:00:00",
+   "indexOpen": 1511.11,
+   "low": 0
+  },
+  {
+   "change": 26.32,
+   "changePer": 1.75,
+   "high": 0,
+   "indexClose": 1532.86,
+   "indexDay": "2023-02-14T00:00:00",
+   "indexOpen": 1506.54,
+   "low": 0
+  },
+  {
+   "change": 15.83,
+   "changePer": 1.03,
+   "high": 0,
+   "indexClose": 1548.69,
+   "indexDay": "2023-02-15T00:00:00",
+   "indexOpen": 1532.86,
+   "low": 0
+  },
+  {
+   "change": 0.5,
+   "changePer": 0.03,
+   "high": 0,
+   "indexClose": 1549.19,
+   "indexDay": "2023-02-16T00:00:00",
+   "indexOpen": 1548.69,
+   "low": 0
+  },
+  {
+   "change": -6.48,
+   "changePer": -0.42,
+   "high": 0,
+   "indexClose": 1542.71,
+   "indexDay": "2023-02-19T00:00:00",
+   "indexOpen": 1549.19,
+   "low": 0
+  },
+  {
+   "change": -30.43,
+   "changePer": -1.97,
+   "high": 0,
+   "indexClose": 1512.28,
+   "indexDay": "2023-02-20T00:00:00",
+   "indexOpen": 1542.71,
+   "low": 0
+  },
+  {
+   "change": 10.31,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 1522.59,
+   "indexDay": "2023-02-21T00:00:00",
+   "indexOpen": 1512.28,
+   "low": 0
+  },
+  {
+   "change": -26.93,
+   "changePer": -1.77,
+   "high": 0,
+   "indexClose": 1495.66,
+   "indexDay": "2023-02-22T00:00:00",
+   "indexOpen": 1522.59,
+   "low": 0
+  },
+  {
+   "change": 20.4,
+   "changePer": 1.36,
+   "high": 0,
+   "indexClose": 1516.06,
+   "indexDay": "2023-02-23T00:00:00",
+   "indexOpen": 1495.66,
+   "low": 0
+  },
+  {
+   "change": 23.52,
+   "changePer": 1.55,
+   "high": 0,
+   "indexClose": 1539.58,
+   "indexDay": "2023-02-26T00:00:00",
+   "indexOpen": 1516.06,
+   "low": 0
+  },
+  {
+   "change": -7.34,
+   "changePer": -0.48,
+   "high": 0,
+   "indexClose": 1532.24,
+   "indexDay": "2023-02-27T00:00:00",
+   "indexOpen": 1539.58,
+   "low": 0
+  },
+  {
+   "change": -5.26,
+   "changePer": -0.34,
+   "high": 0,
+   "indexClose": 1526.98,
+   "indexDay": "2023-02-28T00:00:00",
+   "indexOpen": 1532.24,
+   "low": 0
+  },
+  {
+   "change": 3.96,
+   "changePer": 0.26,
+   "high": 0,
+   "indexClose": 1530.94,
+   "indexDay": "2023-03-01T00:00:00",
+   "indexOpen": 1526.98,
+   "low": 0
+  },
+  {
+   "change": -1.07,
+   "changePer": -0.07,
+   "high": 0,
+   "indexClose": 1529.87,
+   "indexDay": "2023-03-02T00:00:00",
+   "indexOpen": 1530.94,
+   "low": 0
+  },
+  {
+   "change": -3.21,
+   "changePer": -0.21,
+   "high": 0,
+   "indexClose": 1526.66,
+   "indexDay": "2023-03-05T00:00:00",
+   "indexOpen": 1529.87,
+   "low": 0
+  },
+  {
+   "change": -6.45,
+   "changePer": -0.42,
+   "high": 0,
+   "indexClose": 1520.21,
+   "indexDay": "2023-03-06T00:00:00",
+   "indexOpen": 1526.66,
+   "low": 0
+  },
+  {
+   "change": -29.5,
+   "changePer": -1.94,
+   "high": 0,
+   "indexClose": 1490.71,
+   "indexDay": "2023-03-07T00:00:00",
+   "indexOpen": 1520.21,
+   "low": 0
+  },
+  {
+   "change": -8.24,
+   "changePer": -0.55,
+   "high": 0,
+   "indexClose": 1482.47,
+   "indexDay": "2023-03-08T00:00:00",
+   "indexOpen": 1490.71,
+   "low": 0
+  },
+  {
+   "change": 15.76,
+   "changePer": 1.06,
+   "high": 0,
+   "indexClose": 1498.23,
+   "indexDay": "2023-03-09T00:00:00",
+   "indexOpen": 1482.47,
+   "low": 0
+  },
+  {
+   "change": -36.38,
+   "changePer": -2.43,
+   "high": 0,
+   "indexClose": 1461.85,
+   "indexDay": "2023-03-12T00:00:00",
+   "indexOpen": 1498.23,
+   "low": 0
+  },
+  {
+   "change": -62.35,
+   "changePer": -4.27,
+   "high": 0,
+   "indexClose": 1399.5,
+   "indexDay": "2023-03-13T00:00:00",
+   "indexOpen": 1461.85,
+   "low": 0
+  },
+  {
+   "change": 7.24,
+   "changePer": 0.52,
+   "high": 0,
+   "indexClose": 1406.74,
+   "indexDay": "2023-03-14T00:00:00",
+   "indexOpen": 1399.5,
+   "low": 0
+  },
+  {
+   "change": -70.92,
+   "changePer": -5.04,
+   "high": 0,
+   "indexClose": 1335.82,
+   "indexDay": "2023-03-15T00:00:00",
+   "indexOpen": 1406.74,
+   "low": 0
+  },
+  {
+   "change": -0.26,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 1335.56,
+   "indexDay": "2023-03-16T00:00:00",
+   "indexOpen": 1335.82,
+   "low": 0
+  },
+  {
+   "change": 1.9,
+   "changePer": 0.14,
+   "high": 0,
+   "indexClose": 1337.46,
+   "indexDay": "2023-03-19T00:00:00",
+   "indexOpen": 1335.56,
+   "low": 0
+  },
+  {
+   "change": 29.34,
+   "changePer": 2.19,
+   "high": 0,
+   "indexClose": 1366.8,
+   "indexDay": "2023-03-20T00:00:00",
+   "indexOpen": 1337.46,
+   "low": 0
+  },
+  {
+   "change": 25.31,
+   "changePer": 1.85,
+   "high": 0,
+   "indexClose": 1392.11,
+   "indexDay": "2023-03-21T00:00:00",
+   "indexOpen": 1366.8,
+   "low": 0
+  },
+  {
+   "change": -20.26,
+   "changePer": -1.46,
+   "high": 0,
+   "indexClose": 1371.85,
+   "indexDay": "2023-03-22T00:00:00",
+   "indexOpen": 1392.11,
+   "low": 0
+  },
+  {
+   "change": 33.06,
+   "changePer": 2.41,
+   "high": 0,
+   "indexClose": 1404.91,
+   "indexDay": "2023-03-23T00:00:00",
+   "indexOpen": 1371.85,
+   "low": 0
+  },
+  {
+   "change": 32.55,
+   "changePer": 2.32,
+   "high": 0,
+   "indexClose": 1437.46,
+   "indexDay": "2023-03-26T00:00:00",
+   "indexOpen": 1404.91,
+   "low": 0
+  },
+  {
+   "change": -5.25,
+   "changePer": -0.37,
+   "high": 0,
+   "indexClose": 1432.21,
+   "indexDay": "2023-03-27T00:00:00",
+   "indexOpen": 1437.46,
+   "low": 0
+  },
+  {
+   "change": 8.84,
+   "changePer": 0.62,
+   "high": 0,
+   "indexClose": 1441.05,
+   "indexDay": "2023-03-28T00:00:00",
+   "indexOpen": 1432.21,
+   "low": 0
+  },
+  {
+   "change": 32.55,
+   "changePer": 2.26,
+   "high": 0,
+   "indexClose": 1473.6,
+   "indexDay": "2023-03-29T00:00:00",
+   "indexOpen": 1441.05,
+   "low": 0
+  },
+  {
+   "change": -13.01,
+   "changePer": -0.88,
+   "high": 0,
+   "indexClose": 1460.59,
+   "indexDay": "2023-03-30T00:00:00",
+   "indexOpen": 1473.6,
+   "low": 0
+  },
+  {
+   "change": 13.8,
+   "changePer": 0.94,
+   "high": 0,
+   "indexClose": 1474.39,
+   "indexDay": "2023-04-02T00:00:00",
+   "indexOpen": 1460.59,
+   "low": 0
+  },
+  {
+   "change": 22.97,
+   "changePer": 1.56,
+   "high": 0,
+   "indexClose": 1497.36,
+   "indexDay": "2023-04-03T00:00:00",
+   "indexOpen": 1474.39,
+   "low": 0
+  },
+  {
+   "change": 3.28,
+   "changePer": 0.22,
+   "high": 0,
+   "indexClose": 1500.64,
+   "indexDay": "2023-04-04T00:00:00",
+   "indexOpen": 1497.36,
+   "low": 0
+  },
+  {
+   "change": 1.4,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 1502.04,
+   "indexDay": "2023-04-05T00:00:00",
+   "indexOpen": 1500.64,
+   "low": 0
+  },
+  {
+   "change": -14.44,
+   "changePer": -0.96,
+   "high": 0,
+   "indexClose": 1487.6,
+   "indexDay": "2023-04-06T00:00:00",
+   "indexOpen": 1502.04,
+   "low": 0
+  },
+  {
+   "change": 1.68,
+   "changePer": 0.11,
+   "high": 0,
+   "indexClose": 1489.28,
+   "indexDay": "2023-04-09T00:00:00",
+   "indexOpen": 1487.6,
+   "low": 0
+  },
+  {
+   "change": 9.5,
+   "changePer": 0.64,
+   "high": 0,
+   "indexClose": 1498.78,
+   "indexDay": "2023-04-10T00:00:00",
+   "indexOpen": 1489.28,
+   "low": 0
+  },
+  {
+   "change": 16.03,
+   "changePer": 1.07,
+   "high": 0,
+   "indexClose": 1514.81,
+   "indexDay": "2023-04-11T00:00:00",
+   "indexOpen": 1498.78,
+   "low": 0
+  },
+  {
+   "change": -8.91,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 1505.9,
+   "indexDay": "2023-04-12T00:00:00",
+   "indexOpen": 1514.81,
+   "low": 0
+  },
+  {
+   "change": 19.86,
+   "changePer": 1.32,
+   "high": 0,
+   "indexClose": 1525.76,
+   "indexDay": "2023-04-13T00:00:00",
+   "indexOpen": 1505.9,
+   "low": 0
+  },
+  {
+   "change": 21.2,
+   "changePer": 1.39,
+   "high": 0,
+   "indexClose": 1546.96,
+   "indexDay": "2023-04-18T00:00:00",
+   "indexOpen": 1525.76,
+   "low": 0
+  },
+  {
+   "change": 4.99,
+   "changePer": 0.32,
+   "high": 0,
+   "indexClose": 1551.95,
+   "indexDay": "2023-04-19T00:00:00",
+   "indexOpen": 1546.96,
+   "low": 0
+  },
+  {
+   "change": 5.2,
+   "changePer": 0.34,
+   "high": 0,
+   "indexClose": 1557.15,
+   "indexDay": "2023-04-26T00:00:00",
+   "indexOpen": 1551.95,
+   "low": 0
+  },
+  {
+   "change": 32.47,
+   "changePer": 2.09,
+   "high": 0,
+   "indexClose": 1589.62,
+   "indexDay": "2023-04-27T00:00:00",
+   "indexOpen": 1557.15,
+   "low": 0
+  },
+  {
+   "change": -15.37,
+   "changePer": -0.97,
+   "high": 0,
+   "indexClose": 1574.25,
+   "indexDay": "2023-04-30T00:00:00",
+   "indexOpen": 1589.62,
+   "low": 0
+  },
+  {
+   "change": -28.52,
+   "changePer": -1.81,
+   "high": 0,
+   "indexClose": 1545.73,
+   "indexDay": "2023-05-01T00:00:00",
+   "indexOpen": 1574.25,
+   "low": 0
+  },
+  {
+   "change": -6.54,
+   "changePer": -0.42,
+   "high": 0,
+   "indexClose": 1539.19,
+   "indexDay": "2023-05-02T00:00:00",
+   "indexOpen": 1545.73,
+   "low": 0
+  },
+  {
+   "change": 0.69,
+   "changePer": 0.04,
+   "high": 0,
+   "indexClose": 1539.88,
+   "indexDay": "2023-05-03T00:00:00",
+   "indexOpen": 1539.19,
+   "low": 0
+  },
+  {
+   "change": -1.04,
+   "changePer": -0.07,
+   "high": 0,
+   "indexClose": 1538.84,
+   "indexDay": "2023-05-07T00:00:00",
+   "indexOpen": 1539.88,
+   "low": 0
+  },
+  {
+   "change": 30.45,
+   "changePer": 1.98,
+   "high": 0,
+   "indexClose": 1569.29,
+   "indexDay": "2023-05-08T00:00:00",
+   "indexOpen": 1538.84,
+   "low": 0
+  },
+  {
+   "change": -10.75,
+   "changePer": -0.69,
+   "high": 0,
+   "indexClose": 1558.54,
+   "indexDay": "2023-05-09T00:00:00",
+   "indexOpen": 1569.29,
+   "low": 0
+  },
+  {
+   "change": 8.97,
+   "changePer": 0.58,
+   "high": 0,
+   "indexClose": 1567.51,
+   "indexDay": "2023-05-10T00:00:00",
+   "indexOpen": 1558.54,
+   "low": 0
+  },
+  {
+   "change": 6.21,
+   "changePer": 0.4,
+   "high": 0,
+   "indexClose": 1573.72,
+   "indexDay": "2023-05-11T00:00:00",
+   "indexOpen": 1567.51,
+   "low": 0
+  },
+  {
+   "change": 23.75,
+   "changePer": 1.51,
+   "high": 0,
+   "indexClose": 1597.47,
+   "indexDay": "2023-05-14T00:00:00",
+   "indexOpen": 1573.72,
+   "low": 0
+  },
+  {
+   "change": -30.42,
+   "changePer": -1.9,
+   "high": 0,
+   "indexClose": 1567.05,
+   "indexDay": "2023-05-15T00:00:00",
+   "indexOpen": 1597.47,
+   "low": 0
+  },
+  {
+   "change": -19.57,
+   "changePer": -1.25,
+   "high": 0,
+   "indexClose": 1547.48,
+   "indexDay": "2023-05-16T00:00:00",
+   "indexOpen": 1567.05,
+   "low": 0
+  },
+  {
+   "change": -17.04,
+   "changePer": -1.1,
+   "high": 0,
+   "indexClose": 1530.44,
+   "indexDay": "2023-05-17T00:00:00",
+   "indexOpen": 1547.48,
+   "low": 0
+  },
+  {
+   "change": -1.4,
+   "changePer": -0.09,
+   "high": 0,
+   "indexClose": 1529.04,
+   "indexDay": "2023-05-18T00:00:00",
+   "indexOpen": 1530.44,
+   "low": 0
+  },
+  {
+   "change": 15.05,
+   "changePer": 0.98,
+   "high": 0,
+   "indexClose": 1544.09,
+   "indexDay": "2023-05-21T00:00:00",
+   "indexOpen": 1529.04,
+   "low": 0
+  },
+  {
+   "change": -8.67,
+   "changePer": -0.56,
+   "high": 0,
+   "indexClose": 1535.42,
+   "indexDay": "2023-05-22T00:00:00",
+   "indexOpen": 1544.09,
+   "low": 0
+  },
+  {
+   "change": 3.84,
+   "changePer": 0.25,
+   "high": 0,
+   "indexClose": 1539.26,
+   "indexDay": "2023-05-23T00:00:00",
+   "indexOpen": 1535.42,
+   "low": 0
+  },
+  {
+   "change": 17.63,
+   "changePer": 1.15,
+   "high": 0,
+   "indexClose": 1556.89,
+   "indexDay": "2023-05-24T00:00:00",
+   "indexOpen": 1539.26,
+   "low": 0
+  },
+  {
+   "change": 6.75,
+   "changePer": 0.43,
+   "high": 0,
+   "indexClose": 1563.64,
+   "indexDay": "2023-05-25T00:00:00",
+   "indexOpen": 1556.89,
+   "low": 0
+  },
+  {
+   "change": 21.29,
+   "changePer": 1.36,
+   "high": 0,
+   "indexClose": 1584.93,
+   "indexDay": "2023-05-28T00:00:00",
+   "indexOpen": 1563.64,
+   "low": 0
+  },
+  {
+   "change": 15.58,
+   "changePer": 0.98,
+   "high": 0,
+   "indexClose": 1600.51,
+   "indexDay": "2023-05-29T00:00:00",
+   "indexOpen": 1584.93,
+   "low": 0
+  },
+  {
+   "change": 23.75,
+   "changePer": 1.48,
+   "high": 0,
+   "indexClose": 1624.26,
+   "indexDay": "2023-05-30T00:00:00",
+   "indexOpen": 1600.51,
+   "low": 0
+  },
+  {
+   "change": 1.41,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 1625.67,
+   "indexDay": "2023-05-31T00:00:00",
+   "indexOpen": 1624.26,
+   "low": 0
+  },
+  {
+   "change": 0.83,
+   "changePer": 0.05,
+   "high": 0,
+   "indexClose": 1626.5,
+   "indexDay": "2023-06-01T00:00:00",
+   "indexOpen": 1625.67,
+   "low": 0
+  },
+  {
+   "change": 4.22,
+   "changePer": 0.26,
+   "high": 0,
+   "indexClose": 1630.72,
+   "indexDay": "2023-06-04T00:00:00",
+   "indexOpen": 1626.5,
+   "low": 0
+  },
+  {
+   "change": 2.88,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 1633.6,
+   "indexDay": "2023-06-05T00:00:00",
+   "indexOpen": 1630.72,
+   "low": 0
+  },
+  {
+   "change": -3.61,
+   "changePer": -0.22,
+   "high": 0,
+   "indexClose": 1629.99,
+   "indexDay": "2023-06-06T00:00:00",
+   "indexOpen": 1633.6,
+   "low": 0
+  },
+  {
+   "change": -16.48,
+   "changePer": -1.01,
+   "high": 0,
+   "indexClose": 1613.51,
+   "indexDay": "2023-06-07T00:00:00",
+   "indexOpen": 1629.99,
+   "low": 0
+  },
+  {
+   "change": 2.93,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 1616.44,
+   "indexDay": "2023-06-08T00:00:00",
+   "indexOpen": 1613.51,
+   "low": 0
+  },
+  {
+   "change": 14.55,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 1630.99,
+   "indexDay": "2023-06-11T00:00:00",
+   "indexOpen": 1616.44,
+   "low": 0
+  },
+  {
+   "change": 11.99,
+   "changePer": 0.74,
+   "high": 0,
+   "indexClose": 1642.98,
+   "indexDay": "2023-06-12T00:00:00",
+   "indexOpen": 1630.99,
+   "low": 0
+  },
+  {
+   "change": 12.53,
+   "changePer": 0.76,
+   "high": 0,
+   "indexClose": 1655.51,
+   "indexDay": "2023-06-13T00:00:00",
+   "indexOpen": 1642.98,
+   "low": 0
+  },
+  {
+   "change": -7.98,
+   "changePer": -0.48,
+   "high": 0,
+   "indexClose": 1647.53,
+   "indexDay": "2023-06-14T00:00:00",
+   "indexOpen": 1655.51,
+   "low": 0
+  },
+  {
+   "change": -1.49,
+   "changePer": -0.09,
+   "high": 0,
+   "indexClose": 1646.04,
+   "indexDay": "2023-06-15T00:00:00",
+   "indexOpen": 1647.53,
+   "low": 0
+  },
+  {
+   "change": 16.49,
+   "changePer": 1,
+   "high": 0,
+   "indexClose": 1662.53,
+   "indexDay": "2023-06-18T00:00:00",
+   "indexOpen": 1646.04,
+   "low": 0
+  },
+  {
+   "change": 1.04,
+   "changePer": 0.06,
+   "high": 0,
+   "indexClose": 1663.57,
+   "indexDay": "2023-06-19T00:00:00",
+   "indexOpen": 1662.53,
+   "low": 0
+  },
+  {
+   "change": 1.49,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 1665.06,
+   "indexDay": "2023-06-20T00:00:00",
+   "indexOpen": 1663.57,
+   "low": 0
+  },
+  {
+   "change": -26.47,
+   "changePer": -1.59,
+   "high": 0,
+   "indexClose": 1638.59,
+   "indexDay": "2023-06-21T00:00:00",
+   "indexOpen": 1665.06,
+   "low": 0
+  },
+  {
+   "change": -0.52,
+   "changePer": -0.03,
+   "high": 0,
+   "indexClose": 1638.07,
+   "indexDay": "2023-06-22T00:00:00",
+   "indexOpen": 1638.59,
+   "low": 0
+  },
+  {
+   "change": -7.17,
+   "changePer": -0.44,
+   "high": 0,
+   "indexClose": 1630.9,
+   "indexDay": "2023-06-25T00:00:00",
+   "indexOpen": 1638.07,
+   "low": 0
+  },
+  {
+   "change": 13.21,
+   "changePer": 0.81,
+   "high": 0,
+   "indexClose": 1644.11,
+   "indexDay": "2023-06-26T00:00:00",
+   "indexOpen": 1630.9,
+   "low": 0
+  },
+  {
+   "change": -1.76,
+   "changePer": -0.11,
+   "high": 0,
+   "indexClose": 1642.35,
+   "indexDay": "2023-07-04T00:00:00",
+   "indexOpen": 1644.11,
+   "low": 0
+  },
+  {
+   "change": -0.72,
+   "changePer": -0.04,
+   "high": 0,
+   "indexClose": 1641.63,
+   "indexDay": "2023-07-05T00:00:00",
+   "indexOpen": 1642.35,
+   "low": 0
+  },
+  {
+   "change": -24.64,
+   "changePer": -1.5,
+   "high": 0,
+   "indexClose": 1616.99,
+   "indexDay": "2023-07-06T00:00:00",
+   "indexOpen": 1641.63,
+   "low": 0
+  },
+  {
+   "change": -63.77,
+   "changePer": -3.94,
+   "high": 0,
+   "indexClose": 1553.22,
+   "indexDay": "2023-07-09T00:00:00",
+   "indexOpen": 1616.99,
+   "low": 0
+  },
+  {
+   "change": 34.23,
+   "changePer": 2.2,
+   "high": 0,
+   "indexClose": 1587.45,
+   "indexDay": "2023-07-10T00:00:00",
+   "indexOpen": 1553.22,
+   "low": 0
+  },
+  {
+   "change": 13.28,
+   "changePer": 0.84,
+   "high": 0,
+   "indexClose": 1600.73,
+   "indexDay": "2023-07-11T00:00:00",
+   "indexOpen": 1587.45,
+   "low": 0
+  },
+  {
+   "change": -2.56,
+   "changePer": -0.16,
+   "high": 0,
+   "indexClose": 1598.17,
+   "indexDay": "2023-07-12T00:00:00",
+   "indexOpen": 1600.73,
+   "low": 0
+  },
+  {
+   "change": 9.85,
+   "changePer": 0.62,
+   "high": 0,
+   "indexClose": 1608.02,
+   "indexDay": "2023-07-13T00:00:00",
+   "indexOpen": 1598.17,
+   "low": 0
+  },
+  {
+   "change": 1.85,
+   "changePer": 0.12,
+   "high": 0,
+   "indexClose": 1609.87,
+   "indexDay": "2023-07-16T00:00:00",
+   "indexOpen": 1608.02,
+   "low": 0
+  },
+  {
+   "change": 6.01,
+   "changePer": 0.37,
+   "high": 0,
+   "indexClose": 1615.88,
+   "indexDay": "2023-07-17T00:00:00",
+   "indexOpen": 1609.87,
+   "low": 0
+  },
+  {
+   "change": 5.68,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 1621.56,
+   "indexDay": "2023-07-18T00:00:00",
+   "indexOpen": 1615.88,
+   "low": 0
+  },
+  {
+   "change": 3.35,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 1624.91,
+   "indexDay": "2023-07-19T00:00:00",
+   "indexOpen": 1621.56,
+   "low": 0
+  },
+  {
+   "change": -5.22,
+   "changePer": -0.32,
+   "high": 0,
+   "indexClose": 1619.69,
+   "indexDay": "2023-07-24T00:00:00",
+   "indexOpen": 1624.91,
+   "low": 0
+  },
+  {
+   "change": -9.99,
+   "changePer": -0.62,
+   "high": 0,
+   "indexClose": 1609.7,
+   "indexDay": "2023-07-25T00:00:00",
+   "indexOpen": 1619.69,
+   "low": 0
+  },
+  {
+   "change": -5.26,
+   "changePer": -0.33,
+   "high": 0,
+   "indexClose": 1604.44,
+   "indexDay": "2023-07-26T00:00:00",
+   "indexOpen": 1609.7,
+   "low": 0
+  },
+  {
+   "change": -3.11,
+   "changePer": -0.19,
+   "high": 0,
+   "indexClose": 1601.33,
+   "indexDay": "2023-07-27T00:00:00",
+   "indexOpen": 1604.44,
+   "low": 0
+  },
+  {
+   "change": 13.42,
+   "changePer": 0.84,
+   "high": 0,
+   "indexClose": 1614.75,
+   "indexDay": "2023-07-30T00:00:00",
+   "indexOpen": 1601.33,
+   "low": 0
+  },
+  {
+   "change": 1.96,
+   "changePer": 0.12,
+   "high": 0,
+   "indexClose": 1616.71,
+   "indexDay": "2023-07-31T00:00:00",
+   "indexOpen": 1614.75,
+   "low": 0
+  },
+  {
+   "change": -2.96,
+   "changePer": -0.18,
+   "high": 0,
+   "indexClose": 1613.75,
+   "indexDay": "2023-08-01T00:00:00",
+   "indexOpen": 1616.71,
+   "low": 0
+  },
+  {
+   "change": -10.24,
+   "changePer": -0.63,
+   "high": 0,
+   "indexClose": 1603.51,
+   "indexDay": "2023-08-02T00:00:00",
+   "indexOpen": 1613.75,
+   "low": 0
+  },
+  {
+   "change": 3.69,
+   "changePer": 0.23,
+   "high": 0,
+   "indexClose": 1607.2,
+   "indexDay": "2023-08-03T00:00:00",
+   "indexOpen": 1603.51,
+   "low": 0
+  },
+  {
+   "change": 15.56,
+   "changePer": 0.97,
+   "high": 0,
+   "indexClose": 1622.76,
+   "indexDay": "2023-08-06T00:00:00",
+   "indexOpen": 1607.2,
+   "low": 0
+  },
+  {
+   "change": 10.82,
+   "changePer": 0.67,
+   "high": 0,
+   "indexClose": 1633.58,
+   "indexDay": "2023-08-07T00:00:00",
+   "indexOpen": 1622.76,
+   "low": 0
+  },
+  {
+   "change": 0.86,
+   "changePer": 0.05,
+   "high": 0,
+   "indexClose": 1634.44,
+   "indexDay": "2023-08-08T00:00:00",
+   "indexOpen": 1633.58,
+   "low": 0
+  },
+  {
+   "change": 4.38,
+   "changePer": 0.27,
+   "high": 0,
+   "indexClose": 1638.82,
+   "indexDay": "2023-08-09T00:00:00",
+   "indexOpen": 1634.44,
+   "low": 0
+  },
+  {
+   "change": -2.25,
+   "changePer": -0.14,
+   "high": 0,
+   "indexClose": 1636.57,
+   "indexDay": "2023-08-10T00:00:00",
+   "indexOpen": 1638.82,
+   "low": 0
+  },
+  {
+   "change": 3.4,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 1639.97,
+   "indexDay": "2023-08-13T00:00:00",
+   "indexOpen": 1636.57,
+   "low": 0
+  },
+  {
+   "change": 1.95,
+   "changePer": 0.12,
+   "high": 0,
+   "indexClose": 1641.92,
+   "indexDay": "2023-08-14T00:00:00",
+   "indexOpen": 1639.97,
+   "low": 0
+  },
+  {
+   "change": -3.72,
+   "changePer": -0.23,
+   "high": 0,
+   "indexClose": 1638.2,
+   "indexDay": "2023-08-15T00:00:00",
+   "indexOpen": 1641.92,
+   "low": 0
+  },
+  {
+   "change": 3.35,
+   "changePer": 0.2,
+   "high": 0,
+   "indexClose": 1641.55,
+   "indexDay": "2023-08-16T00:00:00",
+   "indexOpen": 1638.2,
+   "low": 0
+  },
+  {
+   "change": -15.58,
+   "changePer": -0.95,
+   "high": 0,
+   "indexClose": 1625.97,
+   "indexDay": "2023-08-17T00:00:00",
+   "indexOpen": 1641.55,
+   "low": 0
+  },
+  {
+   "change": 5.44,
+   "changePer": 0.33,
+   "high": 0,
+   "indexClose": 1631.41,
+   "indexDay": "2023-08-20T00:00:00",
+   "indexOpen": 1625.97,
+   "low": 0
+  },
+  {
+   "change": 2.12,
+   "changePer": 0.13,
+   "high": 0,
+   "indexClose": 1633.53,
+   "indexDay": "2023-08-21T00:00:00",
+   "indexOpen": 1631.41,
+   "low": 0
+  },
+  {
+   "change": 22.28,
+   "changePer": 1.36,
+   "high": 0,
+   "indexClose": 1655.81,
+   "indexDay": "2023-08-22T00:00:00",
+   "indexOpen": 1633.53,
+   "low": 0
+  },
+  {
+   "change": -3.06,
+   "changePer": -0.18,
+   "high": 0,
+   "indexClose": 1652.75,
+   "indexDay": "2023-08-23T00:00:00",
+   "indexOpen": 1655.81,
+   "low": 0
+  },
+  {
+   "change": 7.78,
+   "changePer": 0.47,
+   "high": 0,
+   "indexClose": 1660.53,
+   "indexDay": "2023-08-24T00:00:00",
+   "indexOpen": 1652.75,
+   "low": 0
+  },
+  {
+   "change": 11.72,
+   "changePer": 0.71,
+   "high": 0,
+   "indexClose": 1672.25,
+   "indexDay": "2023-08-27T00:00:00",
+   "indexOpen": 1660.53,
+   "low": 0
+  },
+  {
+   "change": 16.72,
+   "changePer": 1,
+   "high": 0,
+   "indexClose": 1688.97,
+   "indexDay": "2023-08-28T00:00:00",
+   "indexOpen": 1672.25,
+   "low": 0
+  },
+  {
+   "change": 11.46,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 1700.43,
+   "indexDay": "2023-08-29T00:00:00",
+   "indexOpen": 1688.97,
+   "low": 0
+  },
+  {
+   "change": 14.32,
+   "changePer": 0.84,
+   "high": 0,
+   "indexClose": 1714.75,
+   "indexDay": "2023-08-30T00:00:00",
+   "indexOpen": 1700.43,
+   "low": 0
+  },
+  {
+   "change": 0.27,
+   "changePer": 0.02,
+   "high": 0,
+   "indexClose": 1715.02,
+   "indexDay": "2023-08-31T00:00:00",
+   "indexOpen": 1714.75,
+   "low": 0
+  },
+  {
+   "change": -4.77,
+   "changePer": -0.28,
+   "high": 0,
+   "indexClose": 1710.25,
+   "indexDay": "2023-09-03T00:00:00",
+   "indexOpen": 1715.02,
+   "low": 0
+  },
+  {
+   "change": 16.36,
+   "changePer": 0.96,
+   "high": 0,
+   "indexClose": 1726.61,
+   "indexDay": "2023-09-04T00:00:00",
+   "indexOpen": 1710.25,
+   "low": 0
+  },
+  {
+   "change": 6.06,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 1732.67,
+   "indexDay": "2023-09-05T00:00:00",
+   "indexOpen": 1726.61,
+   "low": 0
+  },
+  {
+   "change": -5.58,
+   "changePer": -0.32,
+   "high": 0,
+   "indexClose": 1727.09,
+   "indexDay": "2023-09-06T00:00:00",
+   "indexOpen": 1732.67,
+   "low": 0
+  },
+  {
+   "change": 10.26,
+   "changePer": 0.59,
+   "high": 0,
+   "indexClose": 1737.35,
+   "indexDay": "2023-09-07T00:00:00",
+   "indexOpen": 1727.09,
+   "low": 0
+  },
+  {
+   "change": 6.59,
+   "changePer": 0.38,
+   "high": 0,
+   "indexClose": 1743.94,
+   "indexDay": "2023-09-10T00:00:00",
+   "indexOpen": 1737.35,
+   "low": 0
+  },
+  {
+   "change": -5.3,
+   "changePer": -0.3,
+   "high": 0,
+   "indexClose": 1738.64,
+   "indexDay": "2023-09-11T00:00:00",
+   "indexOpen": 1743.94,
+   "low": 0
+  },
+  {
+   "change": -12.8,
+   "changePer": -0.74,
+   "high": 0,
+   "indexClose": 1725.84,
+   "indexDay": "2023-09-12T00:00:00",
+   "indexOpen": 1738.64,
+   "low": 0
+  },
+  {
+   "change": 7,
+   "changePer": 0.41,
+   "high": 0,
+   "indexClose": 1732.84,
+   "indexDay": "2023-09-13T00:00:00",
+   "indexOpen": 1725.84,
+   "low": 0
+  },
+  {
+   "change": 21.47,
+   "changePer": 1.24,
+   "high": 0,
+   "indexClose": 1754.31,
+   "indexDay": "2023-09-14T00:00:00",
+   "indexOpen": 1732.84,
+   "low": 0
+  },
+  {
+   "change": 15.57,
+   "changePer": 0.89,
+   "high": 0,
+   "indexClose": 1769.88,
+   "indexDay": "2023-09-17T00:00:00",
+   "indexOpen": 1754.31,
+   "low": 0
+  },
+  {
+   "change": 1.29,
+   "changePer": 0.07,
+   "high": 0,
+   "indexClose": 1771.17,
+   "indexDay": "2023-09-18T00:00:00",
+   "indexOpen": 1769.88,
+   "low": 0
+  },
+  {
+   "change": -1,
+   "changePer": -0.06,
+   "high": 0,
+   "indexClose": 1770.17,
+   "indexDay": "2023-09-19T00:00:00",
+   "indexOpen": 1771.17,
+   "low": 0
+  },
+  {
+   "change": -31.27,
+   "changePer": -1.77,
+   "high": 0,
+   "indexClose": 1738.9,
+   "indexDay": "2023-09-20T00:00:00",
+   "indexOpen": 1770.17,
+   "low": 0
+  },
+  {
+   "change": 25.14,
+   "changePer": 1.45,
+   "high": 0,
+   "indexClose": 1764.04,
+   "indexDay": "2023-09-21T00:00:00",
+   "indexOpen": 1738.9,
+   "low": 0
+  },
+  {
+   "change": 2.68,
+   "changePer": 0.15,
+   "high": 0,
+   "indexClose": 1766.72,
+   "indexDay": "2023-09-24T00:00:00",
+   "indexOpen": 1764.04,
+   "low": 0
+  },
+  {
+   "change": 4.98,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 1771.7,
+   "indexDay": "2023-09-25T00:00:00",
+   "indexOpen": 1766.72,
+   "low": 0
+  },
+  {
+   "change": -5.49,
+   "changePer": -0.31,
+   "high": 0,
+   "indexClose": 1766.21,
+   "indexDay": "2023-09-26T00:00:00",
+   "indexOpen": 1771.7,
+   "low": 0
+  },
+  {
+   "change": -7.37,
+   "changePer": -0.42,
+   "high": 0,
+   "indexClose": 1758.84,
+   "indexDay": "2023-09-27T00:00:00",
+   "indexOpen": 1766.21,
+   "low": 0
+  },
+  {
+   "change": 8.89,
+   "changePer": 0.51,
+   "high": 0,
+   "indexClose": 1767.73,
+   "indexDay": "2023-10-01T00:00:00",
+   "indexOpen": 1758.84,
+   "low": 0
+  },
+  {
+   "change": -21.8,
+   "changePer": -1.23,
+   "high": 0,
+   "indexClose": 1745.93,
+   "indexDay": "2023-10-02T00:00:00",
+   "indexOpen": 1767.73,
+   "low": 0
+  },
+  {
+   "change": -20.89,
+   "changePer": -1.2,
+   "high": 0,
+   "indexClose": 1725.04,
+   "indexDay": "2023-10-03T00:00:00",
+   "indexOpen": 1745.93,
+   "low": 0
+  },
+  {
+   "change": 10.39,
+   "changePer": 0.6,
+   "high": 0,
+   "indexClose": 1735.43,
+   "indexDay": "2023-10-04T00:00:00",
+   "indexOpen": 1725.04,
+   "low": 0
+  },
+  {
+   "change": -63.42,
+   "changePer": -3.65,
+   "high": 0,
+   "indexClose": 1672.01,
+   "indexDay": "2023-10-08T00:00:00",
+   "indexOpen": 1735.43,
+   "low": 0
+  },
+  {
+   "change": 11.4,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 1683.41,
+   "indexDay": "2023-10-09T00:00:00",
+   "indexOpen": 1672.01,
+   "low": 0
+  },
+  {
+   "change": 23.33,
+   "changePer": 1.39,
+   "high": 0,
+   "indexClose": 1706.74,
+   "indexDay": "2023-10-10T00:00:00",
+   "indexOpen": 1683.41,
+   "low": 0
+  },
+  {
+   "change": 2.22,
+   "changePer": 0.13,
+   "high": 0,
+   "indexClose": 1708.96,
+   "indexDay": "2023-10-11T00:00:00",
+   "indexOpen": 1706.74,
+   "low": 0
+  },
+  {
+   "change": 21.44,
+   "changePer": 1.25,
+   "high": 0,
+   "indexClose": 1730.4,
+   "indexDay": "2023-10-12T00:00:00",
+   "indexOpen": 1708.96,
+   "low": 0
+  },
+  {
+   "change": 33.42,
+   "changePer": 1.93,
+   "high": 0,
+   "indexClose": 1763.82,
+   "indexDay": "2023-10-15T00:00:00",
+   "indexOpen": 1730.4,
+   "low": 0
+  },
+  {
+   "change": 42.71,
+   "changePer": 2.42,
+   "high": 0,
+   "indexClose": 1806.53,
+   "indexDay": "2023-10-16T00:00:00",
+   "indexOpen": 1763.82,
+   "low": 0
+  },
+  {
+   "change": 44.32,
+   "changePer": 2.45,
+   "high": 0,
+   "indexClose": 1850.85,
+   "indexDay": "2023-10-17T00:00:00",
+   "indexOpen": 1806.53,
+   "low": 0
+  },
+  {
+   "change": -5.36,
+   "changePer": -0.29,
+   "high": 0,
+   "indexClose": 1845.49,
+   "indexDay": "2023-10-18T00:00:00",
+   "indexOpen": 1850.85,
+   "low": 0
+  },
+  {
+   "change": 0.67,
+   "changePer": 0.04,
+   "high": 0,
+   "indexClose": 1846.16,
+   "indexDay": "2023-10-19T00:00:00",
+   "indexOpen": 1845.49,
+   "low": 0
+  },
+  {
+   "change": 41.13,
+   "changePer": 2.23,
+   "high": 0,
+   "indexClose": 1887.29,
+   "indexDay": "2023-10-22T00:00:00",
+   "indexOpen": 1846.16,
+   "low": 0
+  },
+  {
+   "change": 24.38,
+   "changePer": 1.29,
+   "high": 0,
+   "indexClose": 1911.67,
+   "indexDay": "2023-10-23T00:00:00",
+   "indexOpen": 1887.29,
+   "low": 0
+  },
+  {
+   "change": 14.42,
+   "changePer": 0.75,
+   "high": 0,
+   "indexClose": 1926.09,
+   "indexDay": "2023-10-24T00:00:00",
+   "indexOpen": 1911.67,
+   "low": 0
+  },
+  {
+   "change": 96.61,
+   "changePer": 5.02,
+   "high": 0,
+   "indexClose": 2022.7,
+   "indexDay": "2023-10-25T00:00:00",
+   "indexOpen": 1926.09,
+   "low": 0
+  },
+  {
+   "change": 22.72,
+   "changePer": 1.12,
+   "high": 0,
+   "indexClose": 2045.42,
+   "indexDay": "2023-10-26T00:00:00",
+   "indexOpen": 2022.7,
+   "low": 0
+  },
+  {
+   "change": -9.08,
+   "changePer": -0.44,
+   "high": 0,
+   "indexClose": 2036.34,
+   "indexDay": "2023-10-29T00:00:00",
+   "indexOpen": 2045.42,
+   "low": 0
+  },
+  {
+   "change": 3.2,
+   "changePer": 0.16,
+   "high": 0,
+   "indexClose": 2039.54,
+   "indexDay": "2023-10-30T00:00:00",
+   "indexOpen": 2036.34,
+   "low": 0
+  },
+  {
+   "change": -51.13,
+   "changePer": -2.51,
+   "high": 0,
+   "indexClose": 1988.41,
+   "indexDay": "2023-10-31T00:00:00",
+   "indexOpen": 2039.54,
+   "low": 0
+  },
+  {
+   "change": -10.51,
+   "changePer": -0.53,
+   "high": 0,
+   "indexClose": 1977.9,
+   "indexDay": "2023-11-01T00:00:00",
+   "indexOpen": 1988.41,
+   "low": 0
+  },
+  {
+   "change": 29.06,
+   "changePer": 1.47,
+   "high": 0,
+   "indexClose": 2006.96,
+   "indexDay": "2023-11-02T00:00:00",
+   "indexOpen": 1977.9,
+   "low": 0
+  },
+  {
+   "change": 29.91,
+   "changePer": 1.49,
+   "high": 0,
+   "indexClose": 2036.87,
+   "indexDay": "2023-11-05T00:00:00",
+   "indexOpen": 2006.96,
+   "low": 0
+  },
+  {
+   "change": 7.17,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 2044.04,
+   "indexDay": "2023-11-06T00:00:00",
+   "indexOpen": 2036.87,
+   "low": 0
+  },
+  {
+   "change": 31.34,
+   "changePer": 1.53,
+   "high": 0,
+   "indexClose": 2075.38,
+   "indexDay": "2023-11-07T00:00:00",
+   "indexOpen": 2044.04,
+   "low": 0
+  },
+  {
+   "change": -0.28,
+   "changePer": -0.01,
+   "high": 0,
+   "indexClose": 2075.1,
+   "indexDay": "2023-11-08T00:00:00",
+   "indexOpen": 2075.38,
+   "low": 0
+  },
+  {
+   "change": 11.2,
+   "changePer": 0.54,
+   "high": 0,
+   "indexClose": 2086.3,
+   "indexDay": "2023-11-09T00:00:00",
+   "indexOpen": 2075.1,
+   "low": 0
+  },
+  {
+   "change": -1.43,
+   "changePer": -0.07,
+   "high": 0,
+   "indexClose": 2084.87,
+   "indexDay": "2023-11-12T00:00:00",
+   "indexOpen": 2086.3,
+   "low": 0
+  },
+  {
+   "change": 19.67,
+   "changePer": 0.94,
+   "high": 0,
+   "indexClose": 2104.54,
+   "indexDay": "2023-11-13T00:00:00",
+   "indexOpen": 2084.87,
+   "low": 0
+  },
+  {
+   "change": 15.08,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 2119.62,
+   "indexDay": "2023-11-14T00:00:00",
+   "indexOpen": 2104.54,
+   "low": 0
+  },
+  {
+   "change": 17.43,
+   "changePer": 0.82,
+   "high": 0,
+   "indexClose": 2137.05,
+   "indexDay": "2023-11-15T00:00:00",
+   "indexOpen": 2119.62,
+   "low": 0
+  },
+  {
+   "change": 19.19,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 2156.24,
+   "indexDay": "2023-11-16T00:00:00",
+   "indexOpen": 2137.05,
+   "low": 0
+  },
+  {
+   "change": 32.24,
+   "changePer": 1.5,
+   "high": 0,
+   "indexClose": 2188.48,
+   "indexDay": "2023-11-19T00:00:00",
+   "indexOpen": 2156.24,
+   "low": 0
+  },
+  {
+   "change": -15.27,
+   "changePer": -0.7,
+   "high": 0,
+   "indexClose": 2173.21,
+   "indexDay": "2023-11-20T00:00:00",
+   "indexOpen": 2188.48,
+   "low": 0
+  },
+  {
+   "change": 32.09,
+   "changePer": 1.48,
+   "high": 0,
+   "indexClose": 2205.3,
+   "indexDay": "2023-11-21T00:00:00",
+   "indexOpen": 2173.21,
+   "low": 0
+  },
+  {
+   "change": 45.53,
+   "changePer": 2.06,
+   "high": 0,
+   "indexClose": 2250.83,
+   "indexDay": "2023-11-22T00:00:00",
+   "indexOpen": 2205.3,
+   "low": 0
+  },
+  {
+   "change": 28.83,
+   "changePer": 1.28,
+   "high": 0,
+   "indexClose": 2279.66,
+   "indexDay": "2023-11-23T00:00:00",
+   "indexOpen": 2250.83,
+   "low": 0
+  },
+  {
+   "change": 22.68,
+   "changePer": 0.99,
+   "high": 0,
+   "indexClose": 2302.34,
+   "indexDay": "2023-11-26T00:00:00",
+   "indexOpen": 2279.66,
+   "low": 0
+  },
+  {
+   "change": 37.97,
+   "changePer": 1.65,
+   "high": 0,
+   "indexClose": 2340.31,
+   "indexDay": "2023-11-27T00:00:00",
+   "indexOpen": 2302.34,
+   "low": 0
+  },
+  {
+   "change": 12.31,
+   "changePer": 0.53,
+   "high": 0,
+   "indexClose": 2352.62,
+   "indexDay": "2023-11-28T00:00:00",
+   "indexOpen": 2340.31,
+   "low": 0
+  },
+  {
+   "change": -26.58,
+   "changePer": -1.13,
+   "high": 0,
+   "indexClose": 2326.04,
+   "indexDay": "2023-11-29T00:00:00",
+   "indexOpen": 2352.62,
+   "low": 0
+  },
+  {
+   "change": -1.14,
+   "changePer": -0.05,
+   "high": 0,
+   "indexClose": 2324.9,
+   "indexDay": "2023-11-30T00:00:00",
+   "indexOpen": 2326.04,
+   "low": 0
+  },
+  {
+   "change": 18.01,
+   "changePer": 0.77,
+   "high": 0,
+   "indexClose": 2342.91,
+   "indexDay": "2023-12-03T00:00:00",
+   "indexOpen": 2324.9,
+   "low": 0
+  },
+  {
+   "change": 52.38,
+   "changePer": 2.24,
+   "high": 0,
+   "indexClose": 2395.29,
+   "indexDay": "2023-12-04T00:00:00",
+   "indexOpen": 2342.91,
+   "low": 0
+  },
+  {
+   "change": -12.21,
+   "changePer": -0.51,
+   "high": 0,
+   "indexClose": 2383.08,
+   "indexDay": "2023-12-05T00:00:00",
+   "indexOpen": 2395.29,
+   "low": 0
+  },
+  {
+   "change": -47.13,
+   "changePer": -1.98,
+   "high": 0,
+   "indexClose": 2335.95,
+   "indexDay": "2023-12-06T00:00:00",
+   "indexOpen": 2383.08,
+   "low": 0
+  },
+  {
+   "change": -27.85,
+   "changePer": -1.19,
+   "high": 0,
+   "indexClose": 2308.1,
+   "indexDay": "2023-12-07T00:00:00",
+   "indexOpen": 2335.95,
+   "low": 0
+  },
+  {
+   "change": -20.69,
+   "changePer": -0.9,
+   "high": 0,
+   "indexClose": 2287.41,
+   "indexDay": "2023-12-10T00:00:00",
+   "indexOpen": 2308.1,
+   "low": 0
+  },
+  {
+   "change": -22.88,
+   "changePer": -1,
+   "high": 0,
+   "indexClose": 2264.53,
+   "indexDay": "2023-12-11T00:00:00",
+   "indexOpen": 2287.41,
+   "low": 0
+  },
+  {
+   "change": -15.25,
+   "changePer": -0.67,
+   "high": 0,
+   "indexClose": 2249.28,
+   "indexDay": "2023-12-12T00:00:00",
+   "indexOpen": 2264.53,
+   "low": 0
+  },
+  {
+   "change": 54.34,
+   "changePer": 2.42,
+   "high": 0,
+   "indexClose": 2303.62,
+   "indexDay": "2023-12-13T00:00:00",
+   "indexOpen": 2249.28,
+   "low": 0
+  },
+  {
+   "change": 29.42,
+   "changePer": 1.28,
+   "high": 0,
+   "indexClose": 2333.04,
+   "indexDay": "2023-12-14T00:00:00",
+   "indexOpen": 2303.62,
+   "low": 0
+  },
+  {
+   "change": 37.19,
+   "changePer": 1.59,
+   "high": 0,
+   "indexClose": 2370.23,
+   "indexDay": "2023-12-17T00:00:00",
+   "indexOpen": 2333.04,
+   "low": 0
+  },
+  {
+   "change": 48.27,
+   "changePer": 2.04,
+   "high": 0,
+   "indexClose": 2418.5,
+   "indexDay": "2023-12-18T00:00:00",
+   "indexOpen": 2370.23,
+   "low": 0
+  },
+  {
+   "change": -34.9,
+   "changePer": -1.44,
+   "high": 0,
+   "indexClose": 2383.6,
+   "indexDay": "2023-12-19T00:00:00",
+   "indexOpen": 2418.5,
+   "low": 0
+  },
+  {
+   "change": -13.96,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 2369.64,
+   "indexDay": "2023-12-20T00:00:00",
+   "indexOpen": 2383.6,
+   "low": 0
+  },
+  {
+   "change": -35.07,
+   "changePer": -1.48,
+   "high": 0,
+   "indexClose": 2334.57,
+   "indexDay": "2023-12-21T00:00:00",
+   "indexOpen": 2369.64,
+   "low": 0
+  },
+  {
+   "change": -48.76,
+   "changePer": -2.09,
+   "high": 0,
+   "indexClose": 2285.81,
+   "indexDay": "2023-12-24T00:00:00",
+   "indexOpen": 2334.57,
+   "low": 0
+  },
+  {
+   "change": 0.52,
+   "changePer": 0.02,
+   "high": 0,
+   "indexClose": 2286.33,
+   "indexDay": "2023-12-25T00:00:00",
+   "indexOpen": 2285.81,
+   "low": 0
+  },
+  {
+   "change": -14.2,
+   "changePer": -0.62,
+   "high": 0,
+   "indexClose": 2272.13,
+   "indexDay": "2023-12-26T00:00:00",
+   "indexOpen": 2286.33,
+   "low": 0
+  },
+  {
+   "change": 26.81,
+   "changePer": 1.18,
+   "high": 0,
+   "indexClose": 2298.94,
+   "indexDay": "2023-12-27T00:00:00",
+   "indexOpen": 2272.13,
+   "low": 0
+  },
+  {
+   "change": 2.88,
+   "changePer": 0.13,
+   "high": 0,
+   "indexClose": 2301.82,
+   "indexDay": "2023-12-28T00:00:00",
+   "indexOpen": 2298.94,
+   "low": 0
+  },
+  {
+   "change": 0.98,
+   "changePer": 0.04,
+   "high": 0,
+   "indexClose": 2302.8,
+   "indexDay": "2023-12-31T00:00:00",
+   "indexOpen": 2301.82,
+   "low": 0
+  },
+  {
+   "change": 70.58,
+   "changePer": 3.06,
+   "high": 0,
+   "indexClose": 2373.38,
+   "indexDay": "2024-01-02T00:00:00",
+   "indexOpen": 2302.8,
+   "low": 0
+  },
+  {
+   "change": 5.07,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 2378.45,
+   "indexDay": "2024-01-03T00:00:00",
+   "indexOpen": 2373.38,
+   "low": 0
+  },
+  {
+   "change": 4.91,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 2383.36,
+   "indexDay": "2024-01-04T00:00:00",
+   "indexOpen": 2378.45,
+   "low": 0
+  },
+  {
+   "change": 26.84,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 2410.2,
+   "indexDay": "2024-01-08T00:00:00",
+   "indexOpen": 2383.36,
+   "low": 0
+  },
+  {
+   "change": 16.68,
+   "changePer": 0.69,
+   "high": 0,
+   "indexClose": 2426.88,
+   "indexDay": "2024-01-09T00:00:00",
+   "indexOpen": 2410.2,
+   "low": 0
+  },
+  {
+   "change": 18.22,
+   "changePer": 0.75,
+   "high": 0,
+   "indexClose": 2445.1,
+   "indexDay": "2024-01-10T00:00:00",
+   "indexOpen": 2426.88,
+   "low": 0
+  },
+  {
+   "change": -3.1,
+   "changePer": -0.13,
+   "high": 0,
+   "indexClose": 2442,
+   "indexDay": "2024-01-11T00:00:00",
+   "indexOpen": 2445.1,
+   "low": 0
+  },
+  {
+   "change": 44.22,
+   "changePer": 1.81,
+   "high": 0,
+   "indexClose": 2486.22,
+   "indexDay": "2024-01-14T00:00:00",
+   "indexOpen": 2442,
+   "low": 0
+  },
+  {
+   "change": 17.78,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 2504,
+   "indexDay": "2024-01-15T00:00:00",
+   "indexOpen": 2486.22,
+   "low": 0
+  },
+  {
+   "change": 50.84,
+   "changePer": 2.03,
+   "high": 0,
+   "indexClose": 2554.84,
+   "indexDay": "2024-01-16T00:00:00",
+   "indexOpen": 2504,
+   "low": 0
+  },
+  {
+   "change": -10.55,
+   "changePer": -0.41,
+   "high": 0,
+   "indexClose": 2544.29,
+   "indexDay": "2024-01-17T00:00:00",
+   "indexOpen": 2554.84,
+   "low": 0
+  },
+  {
+   "change": 24.49,
+   "changePer": 0.96,
+   "high": 0,
+   "indexClose": 2568.78,
+   "indexDay": "2024-01-18T00:00:00",
+   "indexOpen": 2544.29,
+   "low": 0
+  },
+  {
+   "change": 82.71,
+   "changePer": 3.22,
+   "high": 0,
+   "indexClose": 2651.49,
+   "indexDay": "2024-01-21T00:00:00",
+   "indexOpen": 2568.78,
+   "low": 0
+  },
+  {
+   "change": -7.17,
+   "changePer": -0.27,
+   "high": 0,
+   "indexClose": 2644.32,
+   "indexDay": "2024-01-22T00:00:00",
+   "indexOpen": 2651.49,
+   "low": 0
+  },
+  {
+   "change": -13.99,
+   "changePer": -0.53,
+   "high": 0,
+   "indexClose": 2630.33,
+   "indexDay": "2024-01-23T00:00:00",
+   "indexOpen": 2644.32,
+   "low": 0
+  },
+  {
+   "change": 26.28,
+   "changePer": 1,
+   "high": 0,
+   "indexClose": 2656.61,
+   "indexDay": "2024-01-24T00:00:00",
+   "indexOpen": 2630.33,
+   "low": 0
+  },
+  {
+   "change": 41.28,
+   "changePer": 1.55,
+   "high": 0,
+   "indexClose": 2697.89,
+   "indexDay": "2024-01-28T00:00:00",
+   "indexOpen": 2656.61,
+   "low": 0
+  },
+  {
+   "change": 37.39,
+   "changePer": 1.39,
+   "high": 0,
+   "indexClose": 2735.28,
+   "indexDay": "2024-01-29T00:00:00",
+   "indexOpen": 2697.89,
+   "low": 0
+  },
+  {
+   "change": 62.51,
+   "changePer": 2.29,
+   "high": 0,
+   "indexClose": 2797.79,
+   "indexDay": "2024-01-30T00:00:00",
+   "indexOpen": 2735.28,
+   "low": 0
+  },
+  {
+   "change": -201.67,
+   "changePer": -7.21,
+   "high": 0,
+   "indexClose": 2596.12,
+   "indexDay": "2024-01-31T00:00:00",
+   "indexOpen": 2797.79,
+   "low": 0
+  },
+  {
+   "change": 68.72,
+   "changePer": 2.65,
+   "high": 0,
+   "indexClose": 2664.84,
+   "indexDay": "2024-02-01T00:00:00",
+   "indexOpen": 2596.12,
+   "low": 0
+  },
+  {
+   "change": 18.26,
+   "changePer": 0.69,
+   "high": 0,
+   "indexClose": 2683.1,
+   "indexDay": "2024-02-04T00:00:00",
+   "indexOpen": 2664.84,
+   "low": 0
+  },
+  {
+   "change": 60.27,
+   "changePer": 2.25,
+   "high": 0,
+   "indexClose": 2743.37,
+   "indexDay": "2024-02-05T00:00:00",
+   "indexOpen": 2683.1,
+   "low": 0
+  },
+  {
+   "change": 1.61,
+   "changePer": 0.06,
+   "high": 0,
+   "indexClose": 2744.98,
+   "indexDay": "2024-02-06T00:00:00",
+   "indexOpen": 2743.37,
+   "low": 0
+  },
+  {
+   "change": 15.17,
+   "changePer": 0.55,
+   "high": 0,
+   "indexClose": 2760.15,
+   "indexDay": "2024-02-07T00:00:00",
+   "indexOpen": 2744.98,
+   "low": 0
+  },
+  {
+   "change": 56.02,
+   "changePer": 2.03,
+   "high": 0,
+   "indexClose": 2816.17,
+   "indexDay": "2024-02-08T00:00:00",
+   "indexOpen": 2760.15,
+   "low": 0
+  },
+  {
+   "change": -13.75,
+   "changePer": -0.49,
+   "high": 0,
+   "indexClose": 2802.42,
+   "indexDay": "2024-02-11T00:00:00",
+   "indexOpen": 2816.17,
+   "low": 0
+  },
+  {
+   "change": -0.99,
+   "changePer": -0.04,
+   "high": 0,
+   "indexClose": 2801.43,
+   "indexDay": "2024-02-12T00:00:00",
+   "indexOpen": 2802.42,
+   "low": 0
+  },
+  {
+   "change": 61.34,
+   "changePer": 2.19,
+   "high": 0,
+   "indexClose": 2862.77,
+   "indexDay": "2024-02-13T00:00:00",
+   "indexOpen": 2801.43,
+   "low": 0
+  },
+  {
+   "change": 53.13,
+   "changePer": 1.86,
+   "high": 0,
+   "indexClose": 2915.9,
+   "indexDay": "2024-02-14T00:00:00",
+   "indexOpen": 2862.77,
+   "low": 0
+  },
+  {
+   "change": 55.32,
+   "changePer": 1.9,
+   "high": 0,
+   "indexClose": 2971.22,
+   "indexDay": "2024-02-15T00:00:00",
+   "indexOpen": 2915.9,
+   "low": 0
+  },
+  {
+   "change": 45.67,
+   "changePer": 1.54,
+   "high": 0,
+   "indexClose": 3016.89,
+   "indexDay": "2024-02-18T00:00:00",
+   "indexOpen": 2971.22,
+   "low": 0
+  },
+  {
+   "change": 43.2,
+   "changePer": 1.43,
+   "high": 0,
+   "indexClose": 3060.09,
+   "indexDay": "2024-02-19T00:00:00",
+   "indexOpen": 3016.89,
+   "low": 0
+  },
+  {
+   "change": 60.55,
+   "changePer": 1.98,
+   "high": 0,
+   "indexClose": 3120.64,
+   "indexDay": "2024-02-20T00:00:00",
+   "indexOpen": 3060.09,
+   "low": 0
+  },
+  {
+   "change": 6.23,
+   "changePer": 0.2,
+   "high": 0,
+   "indexClose": 3126.87,
+   "indexDay": "2024-02-21T00:00:00",
+   "indexOpen": 3120.64,
+   "low": 0
+  },
+  {
+   "change": 5.71,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 3132.58,
+   "indexDay": "2024-02-22T00:00:00",
+   "indexOpen": 3126.87,
+   "low": 0
+  },
+  {
+   "change": 19.25,
+   "changePer": 0.61,
+   "high": 0,
+   "indexClose": 3151.83,
+   "indexDay": "2024-02-25T00:00:00",
+   "indexOpen": 3132.58,
+   "low": 0
+  },
+  {
+   "change": 26.82,
+   "changePer": 0.85,
+   "high": 0,
+   "indexClose": 3178.65,
+   "indexDay": "2024-02-26T00:00:00",
+   "indexOpen": 3151.83,
+   "low": 0
+  },
+  {
+   "change": 9.68,
+   "changePer": 0.3,
+   "high": 0,
+   "indexClose": 3188.33,
+   "indexDay": "2024-02-27T00:00:00",
+   "indexOpen": 3178.65,
+   "low": 0
+  },
+  {
+   "change": -108.62,
+   "changePer": -3.41,
+   "high": 0,
+   "indexClose": 3079.71,
+   "indexDay": "2024-02-28T00:00:00",
+   "indexOpen": 3188.33,
+   "low": 0
+  },
+  {
+   "change": -10.54,
+   "changePer": -0.34,
+   "high": 0,
+   "indexClose": 3069.17,
+   "indexDay": "2024-02-29T00:00:00",
+   "indexOpen": 3079.71,
+   "low": 0
+  },
+  {
+   "change": 47.7,
+   "changePer": 1.55,
+   "high": 0,
+   "indexClose": 3116.87,
+   "indexDay": "2024-03-03T00:00:00",
+   "indexOpen": 3069.17,
+   "low": 0
+  },
+  {
+   "change": 48.33,
+   "changePer": 1.55,
+   "high": 0,
+   "indexClose": 3165.2,
+   "indexDay": "2024-03-04T00:00:00",
+   "indexOpen": 3116.87,
+   "low": 0
+  },
+  {
+   "change": -5.17,
+   "changePer": -0.16,
+   "high": 0,
+   "indexClose": 3160.03,
+   "indexDay": "2024-03-05T00:00:00",
+   "indexOpen": 3165.2,
+   "low": 0
+  },
+  {
+   "change": -133.74,
+   "changePer": -4.23,
+   "high": 0,
+   "indexClose": 3026.29,
+   "indexDay": "2024-03-06T00:00:00",
+   "indexOpen": 3160.03,
+   "low": 0
+  },
+  {
+   "change": 14.52,
+   "changePer": 0.48,
+   "high": 0,
+   "indexClose": 3040.81,
+   "indexDay": "2024-03-07T00:00:00",
+   "indexOpen": 3026.29,
+   "low": 0
+  },
+  {
+   "change": 98.6,
+   "changePer": 3.24,
+   "high": 0,
+   "indexClose": 3139.41,
+   "indexDay": "2024-03-10T00:00:00",
+   "indexOpen": 3040.81,
+   "low": 0
+  },
+  {
+   "change": -20.45,
+   "changePer": -0.65,
+   "high": 0,
+   "indexClose": 3118.96,
+   "indexDay": "2024-03-11T00:00:00",
+   "indexOpen": 3139.41,
+   "low": 0
+  },
+  {
+   "change": -110.09,
+   "changePer": -3.53,
+   "high": 0,
+   "indexClose": 3008.87,
+   "indexDay": "2024-03-12T00:00:00",
+   "indexOpen": 3118.96,
+   "low": 0
+  },
+  {
+   "change": -112.81,
+   "changePer": -3.75,
+   "high": 0,
+   "indexClose": 2896.06,
+   "indexDay": "2024-03-13T00:00:00",
+   "indexOpen": 3008.87,
+   "low": 0
+  },
+  {
+   "change": 38.56,
+   "changePer": 1.33,
+   "high": 0,
+   "indexClose": 2934.62,
+   "indexDay": "2024-03-14T00:00:00",
+   "indexOpen": 2896.06,
+   "low": 0
+  },
+  {
+   "change": -15.12,
+   "changePer": -0.52,
+   "high": 0,
+   "indexClose": 2919.5,
+   "indexDay": "2024-03-17T00:00:00",
+   "indexOpen": 2934.62,
+   "low": 0
+  },
+  {
+   "change": -224.55,
+   "changePer": -7.69,
+   "high": 0,
+   "indexClose": 2694.95,
+   "indexDay": "2024-03-18T00:00:00",
+   "indexOpen": 2919.5,
+   "low": 0
+  },
+  {
+   "change": 9.33,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 2704.28,
+   "indexDay": "2024-03-19T00:00:00",
+   "indexOpen": 2694.95,
+   "low": 0
+  },
+  {
+   "change": 45.53,
+   "changePer": 1.68,
+   "high": 0,
+   "indexClose": 2749.81,
+   "indexDay": "2024-03-20T00:00:00",
+   "indexOpen": 2704.28,
+   "low": 0
+  },
+  {
+   "change": 59.42,
+   "changePer": 2.16,
+   "high": 0,
+   "indexClose": 2809.23,
+   "indexDay": "2024-03-21T00:00:00",
+   "indexOpen": 2749.81,
+   "low": 0
+  },
+  {
+   "change": 34.21,
+   "changePer": 1.22,
+   "high": 0,
+   "indexClose": 2843.44,
+   "indexDay": "2024-03-24T00:00:00",
+   "indexOpen": 2809.23,
+   "low": 0
+  },
+  {
+   "change": 35.53,
+   "changePer": 1.25,
+   "high": 0,
+   "indexClose": 2878.97,
+   "indexDay": "2024-03-25T00:00:00",
+   "indexOpen": 2843.44,
+   "low": 0
+  },
+  {
+   "change": -15.64,
+   "changePer": -0.54,
+   "high": 0,
+   "indexClose": 2863.33,
+   "indexDay": "2024-03-26T00:00:00",
+   "indexOpen": 2878.97,
+   "low": 0
+  },
+  {
+   "change": -72.89,
+   "changePer": -2.55,
+   "high": 0,
+   "indexClose": 2790.44,
+   "indexDay": "2024-03-27T00:00:00",
+   "indexOpen": 2863.33,
+   "low": 0
+  },
+  {
+   "change": -63.85,
+   "changePer": -2.29,
+   "high": 0,
+   "indexClose": 2726.59,
+   "indexDay": "2024-03-28T00:00:00",
+   "indexOpen": 2790.44,
+   "low": 0
+  },
+  {
+   "change": -109.5,
+   "changePer": -4.02,
+   "high": 0,
+   "indexClose": 2617.09,
+   "indexDay": "2024-03-31T00:00:00",
+   "indexOpen": 2726.59,
+   "low": 0
+  },
+  {
+   "change": 96.07,
+   "changePer": 3.67,
+   "high": 0,
+   "indexClose": 2713.16,
+   "indexDay": "2024-04-01T00:00:00",
+   "indexOpen": 2617.09,
+   "low": 0
+  },
+  {
+   "change": -11.57,
+   "changePer": -0.43,
+   "high": 0,
+   "indexClose": 2701.59,
+   "indexDay": "2024-04-02T00:00:00",
+   "indexOpen": 2713.16,
+   "low": 0
+  },
+  {
+   "change": -0.51,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 2701.08,
+   "indexDay": "2024-04-03T00:00:00",
+   "indexOpen": 2701.59,
+   "low": 0
+  },
+  {
+   "change": 35.89,
+   "changePer": 1.33,
+   "high": 0,
+   "indexClose": 2736.97,
+   "indexDay": "2024-04-04T00:00:00",
+   "indexOpen": 2701.08,
+   "low": 0
+  },
+  {
+   "change": -24.08,
+   "changePer": -0.88,
+   "high": 0,
+   "indexClose": 2712.89,
+   "indexDay": "2024-04-07T00:00:00",
+   "indexOpen": 2736.97,
+   "low": 0
+  },
+  {
+   "change": 23.46,
+   "changePer": 0.86,
+   "high": 0,
+   "indexClose": 2736.35,
+   "indexDay": "2024-04-08T00:00:00",
+   "indexOpen": 2712.89,
+   "low": 0
+  },
+  {
+   "change": 73.22,
+   "changePer": 2.68,
+   "high": 0,
+   "indexClose": 2809.57,
+   "indexDay": "2024-04-15T00:00:00",
+   "indexOpen": 2736.35,
+   "low": 0
+  },
+  {
+   "change": 19.97,
+   "changePer": 0.71,
+   "high": 0,
+   "indexClose": 2829.54,
+   "indexDay": "2024-04-16T00:00:00",
+   "indexOpen": 2809.57,
+   "low": 0
+  },
+  {
+   "change": 43.52,
+   "changePer": 1.54,
+   "high": 0,
+   "indexClose": 2873.06,
+   "indexDay": "2024-04-17T00:00:00",
+   "indexOpen": 2829.54,
+   "low": 0
+  },
+  {
+   "change": -137.48,
+   "changePer": -4.79,
+   "high": 0,
+   "indexClose": 2735.58,
+   "indexDay": "2024-04-18T00:00:00",
+   "indexOpen": 2873.06,
+   "low": 0
+  },
+  {
+   "change": 51.39,
+   "changePer": 1.88,
+   "high": 0,
+   "indexClose": 2786.97,
+   "indexDay": "2024-04-21T00:00:00",
+   "indexOpen": 2735.58,
+   "low": 0
+  },
+  {
+   "change": -43,
+   "changePer": -1.54,
+   "high": 0,
+   "indexClose": 2743.97,
+   "indexDay": "2024-04-22T00:00:00",
+   "indexOpen": 2786.97,
+   "low": 0
+  },
+  {
+   "change": -128.03,
+   "changePer": -4.67,
+   "high": 0,
+   "indexClose": 2615.94,
+   "indexDay": "2024-04-23T00:00:00",
+   "indexOpen": 2743.97,
+   "low": 0
+  },
+  {
+   "change": -95.6,
+   "changePer": -3.65,
+   "high": 0,
+   "indexClose": 2520.34,
+   "indexDay": "2024-04-24T00:00:00",
+   "indexOpen": 2615.94,
+   "low": 0
+  },
+  {
+   "change": -101.11,
+   "changePer": -4.01,
+   "high": 0,
+   "indexClose": 2419.23,
+   "indexDay": "2024-04-28T00:00:00",
+   "indexOpen": 2520.34,
+   "low": 0
+  },
+  {
+   "change": 83.94,
+   "changePer": 3.47,
+   "high": 0,
+   "indexClose": 2503.17,
+   "indexDay": "2024-04-29T00:00:00",
+   "indexOpen": 2419.23,
+   "low": 0
+  },
+  {
+   "change": -113.04,
+   "changePer": -4.52,
+   "high": 0,
+   "indexClose": 2390.13,
+   "indexDay": "2024-04-30T00:00:00",
+   "indexOpen": 2503.17,
+   "low": 0
+  },
+  {
+   "change": 43.68,
+   "changePer": 1.83,
+   "high": 0,
+   "indexClose": 2433.81,
+   "indexDay": "2024-05-01T00:00:00",
+   "indexOpen": 2390.13,
+   "low": 0
+  },
+  {
+   "change": 64.61,
+   "changePer": 2.65,
+   "high": 0,
+   "indexClose": 2498.42,
+   "indexDay": "2024-05-02T00:00:00",
+   "indexOpen": 2433.81,
+   "low": 0
+  },
+  {
+   "change": 24.71,
+   "changePer": 0.99,
+   "high": 0,
+   "indexClose": 2523.13,
+   "indexDay": "2024-05-07T00:00:00",
+   "indexOpen": 2498.42,
+   "low": 0
+  },
+  {
+   "change": -56.5,
+   "changePer": -2.24,
+   "high": 0,
+   "indexClose": 2466.63,
+   "indexDay": "2024-05-08T00:00:00",
+   "indexOpen": 2523.13,
+   "low": 0
+  },
+  {
+   "change": -3.29,
+   "changePer": -0.13,
+   "high": 0,
+   "indexClose": 2463.34,
+   "indexDay": "2024-05-09T00:00:00",
+   "indexOpen": 2466.63,
+   "low": 0
+  },
+  {
+   "change": -75.44,
+   "changePer": -3.06,
+   "high": 0,
+   "indexClose": 2387.9,
+   "indexDay": "2024-05-12T00:00:00",
+   "indexOpen": 2463.34,
+   "low": 0
+  },
+  {
+   "change": -17.83,
+   "changePer": -0.75,
+   "high": 0,
+   "indexClose": 2370.07,
+   "indexDay": "2024-05-13T00:00:00",
+   "indexOpen": 2387.9,
+   "low": 0
+  },
+  {
+   "change": 6.32,
+   "changePer": 0.27,
+   "high": 0,
+   "indexClose": 2376.39,
+   "indexDay": "2024-05-14T00:00:00",
+   "indexOpen": 2370.07,
+   "low": 0
+  },
+  {
+   "change": 6.35,
+   "changePer": 0.27,
+   "high": 0,
+   "indexClose": 2382.74,
+   "indexDay": "2024-05-15T00:00:00",
+   "indexOpen": 2376.39,
+   "low": 0
+  },
+  {
+   "change": 69.81,
+   "changePer": 2.93,
+   "high": 0,
+   "indexClose": 2452.55,
+   "indexDay": "2024-05-16T00:00:00",
+   "indexOpen": 2382.74,
+   "low": 0
+  },
+  {
+   "change": 64.98,
+   "changePer": 2.65,
+   "high": 0,
+   "indexClose": 2517.53,
+   "indexDay": "2024-05-19T00:00:00",
+   "indexOpen": 2452.55,
+   "low": 0
+  },
+  {
+   "change": 5.68,
+   "changePer": 0.23,
+   "high": 0,
+   "indexClose": 2523.21,
+   "indexDay": "2024-05-20T00:00:00",
+   "indexOpen": 2517.53,
+   "low": 0
+  },
+  {
+   "change": -14.27,
+   "changePer": -0.57,
+   "high": 0,
+   "indexClose": 2508.94,
+   "indexDay": "2024-05-21T00:00:00",
+   "indexOpen": 2523.21,
+   "low": 0
+  },
+  {
+   "change": 4.33,
+   "changePer": 0.17,
+   "high": 0,
+   "indexClose": 2513.27,
+   "indexDay": "2024-05-22T00:00:00",
+   "indexOpen": 2508.94,
+   "low": 0
+  },
+  {
+   "change": 28.45,
+   "changePer": 1.13,
+   "high": 0,
+   "indexClose": 2541.72,
+   "indexDay": "2024-05-23T00:00:00",
+   "indexOpen": 2513.27,
+   "low": 0
+  },
+  {
+   "change": 30.57,
+   "changePer": 1.2,
+   "high": 0,
+   "indexClose": 2572.29,
+   "indexDay": "2024-05-26T00:00:00",
+   "indexOpen": 2541.72,
+   "low": 0
+  },
+  {
+   "change": -10.7,
+   "changePer": -0.42,
+   "high": 0,
+   "indexClose": 2561.59,
+   "indexDay": "2024-05-27T00:00:00",
+   "indexOpen": 2572.29,
+   "low": 0
+  },
+  {
+   "change": -7.56,
+   "changePer": -0.3,
+   "high": 0,
+   "indexClose": 2554.03,
+   "indexDay": "2024-05-28T00:00:00",
+   "indexOpen": 2561.59,
+   "low": 0
+  },
+  {
+   "change": -24.56,
+   "changePer": -0.96,
+   "high": 0,
+   "indexClose": 2529.47,
+   "indexDay": "2024-05-29T00:00:00",
+   "indexOpen": 2554.03,
+   "low": 0
+  },
+  {
+   "change": -20.51,
+   "changePer": -0.81,
+   "high": 0,
+   "indexClose": 2508.96,
+   "indexDay": "2024-05-30T00:00:00",
+   "indexOpen": 2529.47,
+   "low": 0
+  },
+  {
+   "change": -4.01,
+   "changePer": -0.16,
+   "high": 0,
+   "indexClose": 2504.95,
+   "indexDay": "2024-06-02T00:00:00",
+   "indexOpen": 2508.96,
+   "low": 0
+  },
+  {
+   "change": -1.26,
+   "changePer": -0.05,
+   "high": 0,
+   "indexClose": 2503.69,
+   "indexDay": "2024-06-03T00:00:00",
+   "indexOpen": 2504.95,
+   "low": 0
+  },
+  {
+   "change": 19.53,
+   "changePer": 0.78,
+   "high": 0,
+   "indexClose": 2523.22,
+   "indexDay": "2024-06-04T00:00:00",
+   "indexOpen": 2503.69,
+   "low": 0
+  },
+  {
+   "change": -46.53,
+   "changePer": -1.84,
+   "high": 0,
+   "indexClose": 2476.69,
+   "indexDay": "2024-06-05T00:00:00",
+   "indexOpen": 2523.22,
+   "low": 0
+  },
+  {
+   "change": -27.52,
+   "changePer": -1.11,
+   "high": 0,
+   "indexClose": 2449.17,
+   "indexDay": "2024-06-06T00:00:00",
+   "indexOpen": 2476.69,
+   "low": 0
+  },
+  {
+   "change": -48.4,
+   "changePer": -1.98,
+   "high": 0,
+   "indexClose": 2400.77,
+   "indexDay": "2024-06-09T00:00:00",
+   "indexOpen": 2449.17,
+   "low": 0
+  },
+  {
+   "change": 20.08,
+   "changePer": 0.84,
+   "high": 0,
+   "indexClose": 2420.85,
+   "indexDay": "2024-06-10T00:00:00",
+   "indexOpen": 2400.77,
+   "low": 0
+  },
+  {
+   "change": 38.18,
+   "changePer": 1.58,
+   "high": 0,
+   "indexClose": 2459.03,
+   "indexDay": "2024-06-11T00:00:00",
+   "indexOpen": 2420.85,
+   "low": 0
+  },
+  {
+   "change": 38.47,
+   "changePer": 1.56,
+   "high": 0,
+   "indexClose": 2497.5,
+   "indexDay": "2024-06-12T00:00:00",
+   "indexOpen": 2459.03,
+   "low": 0
+  },
+  {
+   "change": 25.18,
+   "changePer": 1.01,
+   "high": 0,
+   "indexClose": 2522.68,
+   "indexDay": "2024-06-13T00:00:00",
+   "indexOpen": 2497.5,
+   "low": 0
+  },
+  {
+   "change": 62.35,
+   "changePer": 2.47,
+   "high": 0,
+   "indexClose": 2585.03,
+   "indexDay": "2024-06-23T00:00:00",
+   "indexOpen": 2522.68,
+   "low": 0
+  },
+  {
+   "change": -18.35,
+   "changePer": -0.71,
+   "high": 0,
+   "indexClose": 2566.68,
+   "indexDay": "2024-06-24T00:00:00",
+   "indexOpen": 2585.03,
+   "low": 0
+  },
+  {
+   "change": 21.66,
+   "changePer": 0.84,
+   "high": 0,
+   "indexClose": 2588.34,
+   "indexDay": "2024-06-25T00:00:00",
+   "indexOpen": 2566.68,
+   "low": 0
+  },
+  {
+   "change": 19.94,
+   "changePer": 0.77,
+   "high": 0,
+   "indexClose": 2608.28,
+   "indexDay": "2024-06-26T00:00:00",
+   "indexOpen": 2588.34,
+   "low": 0
+  },
+  {
+   "change": 30.21,
+   "changePer": 1.16,
+   "high": 0,
+   "indexClose": 2638.49,
+   "indexDay": "2024-06-27T00:00:00",
+   "indexOpen": 2608.28,
+   "low": 0
+  },
+  {
+   "change": 18.46,
+   "changePer": 0.7,
+   "high": 0,
+   "indexClose": 2656.95,
+   "indexDay": "2024-07-01T00:00:00",
+   "indexOpen": 2638.49,
+   "low": 0
+  },
+  {
+   "change": -14.59,
+   "changePer": -0.55,
+   "high": 0,
+   "indexClose": 2642.36,
+   "indexDay": "2024-07-02T00:00:00",
+   "indexOpen": 2656.95,
+   "low": 0
+  },
+  {
+   "change": 7.07,
+   "changePer": 0.27,
+   "high": 0,
+   "indexClose": 2649.43,
+   "indexDay": "2024-07-03T00:00:00",
+   "indexOpen": 2642.36,
+   "low": 0
+  },
+  {
+   "change": -6.25,
+   "changePer": -0.24,
+   "high": 0,
+   "indexClose": 2643.18,
+   "indexDay": "2024-07-04T00:00:00",
+   "indexOpen": 2649.43,
+   "low": 0
+  },
+  {
+   "change": 26.91,
+   "changePer": 1.02,
+   "high": 0,
+   "indexClose": 2670.09,
+   "indexDay": "2024-07-07T00:00:00",
+   "indexOpen": 2643.18,
+   "low": 0
+  },
+  {
+   "change": -10.32,
+   "changePer": -0.39,
+   "high": 0,
+   "indexClose": 2659.77,
+   "indexDay": "2024-07-08T00:00:00",
+   "indexOpen": 2670.09,
+   "low": 0
+  },
+  {
+   "change": 3.02,
+   "changePer": 0.11,
+   "high": 0,
+   "indexClose": 2662.79,
+   "indexDay": "2024-07-09T00:00:00",
+   "indexOpen": 2659.77,
+   "low": 0
+  },
+  {
+   "change": -9.02,
+   "changePer": -0.34,
+   "high": 0,
+   "indexClose": 2653.77,
+   "indexDay": "2024-07-10T00:00:00",
+   "indexOpen": 2662.79,
+   "low": 0
+  },
+  {
+   "change": -16.89,
+   "changePer": -0.64,
+   "high": 0,
+   "indexClose": 2636.88,
+   "indexDay": "2024-07-14T00:00:00",
+   "indexOpen": 2653.77,
+   "low": 0
+  },
+  {
+   "change": -16.72,
+   "changePer": -0.63,
+   "high": 0,
+   "indexClose": 2620.16,
+   "indexDay": "2024-07-15T00:00:00",
+   "indexOpen": 2636.88,
+   "low": 0
+  },
+  {
+   "change": 17,
+   "changePer": 0.65,
+   "high": 0,
+   "indexClose": 2637.16,
+   "indexDay": "2024-07-16T00:00:00",
+   "indexOpen": 2620.16,
+   "low": 0
+  },
+  {
+   "change": 40.72,
+   "changePer": 1.54,
+   "high": 0,
+   "indexClose": 2677.88,
+   "indexDay": "2024-07-17T00:00:00",
+   "indexOpen": 2637.16,
+   "low": 0
+  },
+  {
+   "change": 22.36,
+   "changePer": 0.83,
+   "high": 0,
+   "indexClose": 2700.24,
+   "indexDay": "2024-07-18T00:00:00",
+   "indexOpen": 2677.88,
+   "low": 0
+  },
+  {
+   "change": 24.38,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 2724.62,
+   "indexDay": "2024-07-21T00:00:00",
+   "indexOpen": 2700.24,
+   "low": 0
+  },
+  {
+   "change": 14.82,
+   "changePer": 0.54,
+   "high": 0,
+   "indexClose": 2739.44,
+   "indexDay": "2024-07-22T00:00:00",
+   "indexOpen": 2724.62,
+   "low": 0
+  },
+  {
+   "change": 17.69,
+   "changePer": 0.65,
+   "high": 0,
+   "indexClose": 2757.13,
+   "indexDay": "2024-07-23T00:00:00",
+   "indexOpen": 2739.44,
+   "low": 0
+  },
+  {
+   "change": -10.08,
+   "changePer": -0.37,
+   "high": 0,
+   "indexClose": 2747.05,
+   "indexDay": "2024-07-24T00:00:00",
+   "indexOpen": 2757.13,
+   "low": 0
+  },
+  {
+   "change": 0.26,
+   "changePer": 0.01,
+   "high": 0,
+   "indexClose": 2747.31,
+   "indexDay": "2024-07-28T00:00:00",
+   "indexOpen": 2747.05,
+   "low": 0
+  },
+  {
+   "change": 2.85,
+   "changePer": 0.1,
+   "high": 0,
+   "indexClose": 2750.16,
+   "indexDay": "2024-07-29T00:00:00",
+   "indexOpen": 2747.31,
+   "low": 0
+  },
+  {
+   "change": 15.67,
+   "changePer": 0.57,
+   "high": 0,
+   "indexClose": 2765.83,
+   "indexDay": "2024-07-30T00:00:00",
+   "indexOpen": 2750.16,
+   "low": 0
+  },
+  {
+   "change": 20.16,
+   "changePer": 0.73,
+   "high": 0,
+   "indexClose": 2785.99,
+   "indexDay": "2024-07-31T00:00:00",
+   "indexOpen": 2765.83,
+   "low": 0
+  },
+  {
+   "change": -29.4,
+   "changePer": -1.06,
+   "high": 0,
+   "indexClose": 2756.59,
+   "indexDay": "2024-08-01T00:00:00",
+   "indexOpen": 2785.99,
+   "low": 0
+  },
+  {
+   "change": -98.09,
+   "changePer": -3.56,
+   "high": 0,
+   "indexClose": 2658.5,
+   "indexDay": "2024-08-04T00:00:00",
+   "indexOpen": 2756.59,
+   "low": 0
+  },
+  {
+   "change": -84.61,
+   "changePer": -3.18,
+   "high": 0,
+   "indexClose": 2573.89,
+   "indexDay": "2024-08-05T00:00:00",
+   "indexOpen": 2658.5,
+   "low": 0
+  },
+  {
+   "change": 43.57,
+   "changePer": 1.69,
+   "high": 0,
+   "indexClose": 2617.46,
+   "indexDay": "2024-08-06T00:00:00",
+   "indexOpen": 2573.89,
+   "low": 0
+  },
+  {
+   "change": 40.32,
+   "changePer": 1.54,
+   "high": 0,
+   "indexClose": 2657.78,
+   "indexDay": "2024-08-07T00:00:00",
+   "indexOpen": 2617.46,
+   "low": 0
+  },
+  {
+   "change": -18.72,
+   "changePer": -0.7,
+   "high": 0,
+   "indexClose": 2639.06,
+   "indexDay": "2024-08-08T00:00:00",
+   "indexOpen": 2657.78,
+   "low": 0
+  },
+  {
+   "change": 43.07,
+   "changePer": 1.63,
+   "high": 0,
+   "indexClose": 2682.13,
+   "indexDay": "2024-08-11T00:00:00",
+   "indexOpen": 2639.06,
+   "low": 0
+  },
+  {
+   "change": -17.17,
+   "changePer": -0.64,
+   "high": 0,
+   "indexClose": 2664.96,
+   "indexDay": "2024-08-12T00:00:00",
+   "indexOpen": 2682.13,
+   "low": 0
+  },
+  {
+   "change": -13.41,
+   "changePer": -0.5,
+   "high": 0,
+   "indexClose": 2651.55,
+   "indexDay": "2024-08-13T00:00:00",
+   "indexOpen": 2664.96,
+   "low": 0
+  },
+  {
+   "change": 17.96,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 2669.51,
+   "indexDay": "2024-08-14T00:00:00",
+   "indexOpen": 2651.55,
+   "low": 0
+  },
+  {
+   "change": 31.34,
+   "changePer": 1.17,
+   "high": 0,
+   "indexClose": 2700.85,
+   "indexDay": "2024-08-15T00:00:00",
+   "indexOpen": 2669.51,
+   "low": 0
+  },
+  {
+   "change": 0.47,
+   "changePer": 0.02,
+   "high": 0,
+   "indexClose": 2701.32,
+   "indexDay": "2024-08-18T00:00:00",
+   "indexOpen": 2700.85,
+   "low": 0
+  },
+  {
+   "change": -10.35,
+   "changePer": -0.38,
+   "high": 0,
+   "indexClose": 2690.97,
+   "indexDay": "2024-08-19T00:00:00",
+   "indexOpen": 2701.32,
+   "low": 0
+  },
+  {
+   "change": 28.29,
+   "changePer": 1.05,
+   "high": 0,
+   "indexClose": 2719.26,
+   "indexDay": "2024-08-20T00:00:00",
+   "indexOpen": 2690.97,
+   "low": 0
+  },
+  {
+   "change": 28.58,
+   "changePer": 1.05,
+   "high": 0,
+   "indexClose": 2747.84,
+   "indexDay": "2024-08-21T00:00:00",
+   "indexOpen": 2719.26,
+   "low": 0
+  },
+  {
+   "change": 32.31,
+   "changePer": 1.18,
+   "high": 0,
+   "indexClose": 2780.15,
+   "indexDay": "2024-08-22T00:00:00",
+   "indexOpen": 2747.84,
+   "low": 0
+  },
+  {
+   "change": 36.7,
+   "changePer": 1.32,
+   "high": 0,
+   "indexClose": 2816.85,
+   "indexDay": "2024-08-25T00:00:00",
+   "indexOpen": 2780.15,
+   "low": 0
+  },
+  {
+   "change": 0.72,
+   "changePer": 0.03,
+   "high": 0,
+   "indexClose": 2817.57,
+   "indexDay": "2024-08-26T00:00:00",
+   "indexOpen": 2816.85,
+   "low": 0
+  },
+  {
+   "change": 38.34,
+   "changePer": 1.36,
+   "high": 0,
+   "indexClose": 2855.91,
+   "indexDay": "2024-08-27T00:00:00",
+   "indexOpen": 2817.57,
+   "low": 0
+  },
+  {
+   "change": 10.47,
+   "changePer": 0.37,
+   "high": 0,
+   "indexClose": 2866.38,
+   "indexDay": "2024-08-28T00:00:00",
+   "indexOpen": 2855.91,
+   "low": 0
+  },
+  {
+   "change": -16.92,
+   "changePer": -0.59,
+   "high": 0,
+   "indexClose": 2849.46,
+   "indexDay": "2024-08-29T00:00:00",
+   "indexOpen": 2866.38,
+   "low": 0
+  },
+  {
+   "change": 18.81,
+   "changePer": 0.66,
+   "high": 0,
+   "indexClose": 2868.27,
+   "indexDay": "2024-09-01T00:00:00",
+   "indexOpen": 2849.46,
+   "low": 0
+  },
+  {
+   "change": -18.15,
+   "changePer": -0.63,
+   "high": 0,
+   "indexClose": 2850.12,
+   "indexDay": "2024-09-02T00:00:00",
+   "indexOpen": 2868.27,
+   "low": 0
+  },
+  {
+   "change": 30.05,
+   "changePer": 1.05,
+   "high": 0,
+   "indexClose": 2880.17,
+   "indexDay": "2024-09-03T00:00:00",
+   "indexOpen": 2850.12,
+   "low": 0
+  },
+  {
+   "change": 30.94,
+   "changePer": 1.07,
+   "high": 0,
+   "indexClose": 2911.11,
+   "indexDay": "2024-09-04T00:00:00",
+   "indexOpen": 2880.17,
+   "low": 0
+  },
+  {
+   "change": 8.75,
+   "changePer": 0.3,
+   "high": 0,
+   "indexClose": 2919.86,
+   "indexDay": "2024-09-05T00:00:00",
+   "indexOpen": 2911.11,
+   "low": 0
+  },
+  {
+   "change": -33.6,
+   "changePer": -1.15,
+   "high": 0,
+   "indexClose": 2886.26,
+   "indexDay": "2024-09-08T00:00:00",
+   "indexOpen": 2919.86,
+   "low": 0
+  },
+  {
+   "change": 1.39,
+   "changePer": 0.05,
+   "high": 0,
+   "indexClose": 2887.65,
+   "indexDay": "2024-09-09T00:00:00",
+   "indexOpen": 2886.26,
+   "low": 0
+  },
+  {
+   "change": -20.41,
+   "changePer": -0.71,
+   "high": 0,
+   "indexClose": 2867.24,
+   "indexDay": "2024-09-10T00:00:00",
+   "indexOpen": 2887.65,
+   "low": 0
+  },
+  {
+   "change": 27.28,
+   "changePer": 0.95,
+   "high": 0,
+   "indexClose": 2894.52,
+   "indexDay": "2024-09-11T00:00:00",
+   "indexOpen": 2867.24,
+   "low": 0
+  },
+  {
+   "change": -5.38,
+   "changePer": -0.19,
+   "high": 0,
+   "indexClose": 2889.14,
+   "indexDay": "2024-09-12T00:00:00",
+   "indexOpen": 2894.52,
+   "low": 0
+  },
+  {
+   "change": -7.01,
+   "changePer": -0.24,
+   "high": 0,
+   "indexClose": 2882.13,
+   "indexDay": "2024-09-16T00:00:00",
+   "indexOpen": 2889.14,
+   "low": 0
+  },
+  {
+   "change": -23.61,
+   "changePer": -0.82,
+   "high": 0,
+   "indexClose": 2858.52,
+   "indexDay": "2024-09-17T00:00:00",
+   "indexOpen": 2882.13,
+   "low": 0
+  },
+  {
+   "change": 36.82,
+   "changePer": 1.29,
+   "high": 0,
+   "indexClose": 2895.34,
+   "indexDay": "2024-09-18T00:00:00",
+   "indexOpen": 2858.52,
+   "low": 0
+  },
+  {
+   "change": 13.1,
+   "changePer": 0.45,
+   "high": 0,
+   "indexClose": 2908.44,
+   "indexDay": "2024-09-19T00:00:00",
+   "indexOpen": 2895.34,
+   "low": 0
+  },
+  {
+   "change": 47.07,
+   "changePer": 1.62,
+   "high": 0,
+   "indexClose": 2955.51,
+   "indexDay": "2024-09-22T00:00:00",
+   "indexOpen": 2908.44,
+   "low": 0
+  },
+  {
+   "change": 42.72,
+   "changePer": 1.45,
+   "high": 0,
+   "indexClose": 2998.23,
+   "indexDay": "2024-09-23T00:00:00",
+   "indexOpen": 2955.51,
+   "low": 0
+  },
+  {
+   "change": 1.11,
+   "changePer": 0.04,
+   "high": 0,
+   "indexClose": 2999.34,
+   "indexDay": "2024-09-24T00:00:00",
+   "indexOpen": 2998.23,
+   "low": 0
+  },
+  {
+   "change": 34.37,
+   "changePer": 1.15,
+   "high": 0,
+   "indexClose": 3033.71,
+   "indexDay": "2024-09-25T00:00:00",
+   "indexOpen": 2999.34,
+   "low": 0
+  },
+  {
+   "change": 23.07,
+   "changePer": 0.76,
+   "high": 0,
+   "indexClose": 3056.78,
+   "indexDay": "2024-09-26T00:00:00",
+   "indexOpen": 3033.71,
+   "low": 0
+  },
+  {
+   "change": 39.59,
+   "changePer": 1.3,
+   "high": 0,
+   "indexClose": 3096.37,
+   "indexDay": "2024-09-29T00:00:00",
+   "indexOpen": 3056.78,
+   "low": 0
+  },
+  {
+   "change": 10.83,
+   "changePer": 0.35,
+   "high": 0,
+   "indexClose": 3107.2,
+   "indexDay": "2024-09-30T00:00:00",
+   "indexOpen": 3096.37,
+   "low": 0
+  },
+  {
+   "change": 17.08,
+   "changePer": 0.55,
+   "high": 0,
+   "indexClose": 3124.28,
+   "indexDay": "2024-10-01T00:00:00",
+   "indexOpen": 3107.2,
+   "low": 0
+  },
+  {
+   "change": -52.61,
+   "changePer": -1.68,
+   "high": 0,
+   "indexClose": 3071.67,
+   "indexDay": "2024-10-02T00:00:00",
+   "indexOpen": 3124.28,
+   "low": 0
+  },
+  {
+   "change": 38.89,
+   "changePer": 1.27,
+   "high": 0,
+   "indexClose": 3110.56,
+   "indexDay": "2024-10-03T00:00:00",
+   "indexOpen": 3071.67,
+   "low": 0
+  },
+  {
+   "change": 7.04,
+   "changePer": 0.23,
+   "high": 0,
+   "indexClose": 3117.6,
+   "indexDay": "2024-10-07T00:00:00",
+   "indexOpen": 3110.56,
+   "low": 0
+  },
+  {
+   "change": -61.46,
+   "changePer": -1.97,
+   "high": 0,
+   "indexClose": 3056.14,
+   "indexDay": "2024-10-08T00:00:00",
+   "indexOpen": 3117.6,
+   "low": 0
+  },
+  {
+   "change": 35.03,
+   "changePer": 1.15,
+   "high": 0,
+   "indexClose": 3091.17,
+   "indexDay": "2024-10-09T00:00:00",
+   "indexOpen": 3056.14,
+   "low": 0
+  },
+  {
+   "change": -23.84,
+   "changePer": -0.77,
+   "high": 0,
+   "indexClose": 3067.33,
+   "indexDay": "2024-10-10T00:00:00",
+   "indexOpen": 3091.17,
+   "low": 0
+  },
+  {
+   "change": -86.16,
+   "changePer": -2.81,
+   "high": 0,
+   "indexClose": 2981.17,
+   "indexDay": "2024-10-13T00:00:00",
+   "indexOpen": 3067.33,
+   "low": 0
+  },
+  {
+   "change": 4.54,
+   "changePer": 0.15,
+   "high": 0,
+   "indexClose": 2985.71,
+   "indexDay": "2024-10-14T00:00:00",
+   "indexOpen": 2981.17,
+   "low": 0
+  },
+  {
+   "change": 87.36,
+   "changePer": 2.93,
+   "high": 0,
+   "indexClose": 3073.07,
+   "indexDay": "2024-10-15T00:00:00",
+   "indexOpen": 2985.71,
+   "low": 0
+  },
+  {
+   "change": 49.43,
+   "changePer": 1.61,
+   "high": 0,
+   "indexClose": 3122.5,
+   "indexDay": "2024-10-16T00:00:00",
+   "indexOpen": 3073.07,
+   "low": 0
+  },
+  {
+   "change": -13.44,
+   "changePer": -0.43,
+   "high": 0,
+   "indexClose": 3109.06,
+   "indexDay": "2024-10-17T00:00:00",
+   "indexOpen": 3122.5,
+   "low": 0
+  },
+  {
+   "change": -50.65,
+   "changePer": -1.63,
+   "high": 0,
+   "indexClose": 3058.41,
+   "indexDay": "2024-10-20T00:00:00",
+   "indexOpen": 3109.06,
+   "low": 0
+  },
+  {
+   "change": 48.55,
+   "changePer": 1.59,
+   "high": 0,
+   "indexClose": 3106.96,
+   "indexDay": "2024-10-21T00:00:00",
+   "indexOpen": 3058.41,
+   "low": 0
+  },
+  {
+   "change": 77.02,
+   "changePer": 2.48,
+   "high": 0,
+   "indexClose": 3183.98,
+   "indexDay": "2024-10-22T00:00:00",
+   "indexOpen": 3106.96,
+   "low": 0
+  },
+  {
+   "change": -19.56,
+   "changePer": -0.61,
+   "high": 0,
+   "indexClose": 3164.42,
+   "indexDay": "2024-10-23T00:00:00",
+   "indexOpen": 3183.98,
+   "low": 0
+  },
+  {
+   "change": 13.55,
+   "changePer": 0.43,
+   "high": 0,
+   "indexClose": 3177.97,
+   "indexDay": "2024-10-24T00:00:00",
+   "indexOpen": 3164.42,
+   "low": 0
+  },
+  {
+   "change": 21.26,
+   "changePer": 0.67,
+   "high": 0,
+   "indexClose": 3199.23,
+   "indexDay": "2024-10-27T00:00:00",
+   "indexOpen": 3177.97,
+   "low": 0
+  },
+  {
+   "change": -24.23,
+   "changePer": -0.76,
+   "high": 0,
+   "indexClose": 3175,
+   "indexDay": "2024-10-28T00:00:00",
+   "indexOpen": 3199.23,
+   "low": 0
+  },
+  {
+   "change": 2.65,
+   "changePer": 0.08,
+   "high": 0,
+   "indexClose": 3177.65,
+   "indexDay": "2024-10-29T00:00:00",
+   "indexOpen": 3175,
+   "low": 0
+  },
+  {
+   "change": -3.62,
+   "changePer": -0.11,
+   "high": 0,
+   "indexClose": 3174.03,
+   "indexDay": "2024-10-30T00:00:00",
+   "indexOpen": 3177.65,
+   "low": 0
+  },
+  {
+   "change": 50.59,
+   "changePer": 1.59,
+   "high": 0,
+   "indexClose": 3224.62,
+   "indexDay": "2024-10-31T00:00:00",
+   "indexOpen": 3174.03,
+   "low": 0
+  },
+  {
+   "change": 46.08,
+   "changePer": 1.43,
+   "high": 0,
+   "indexClose": 3270.7,
+   "indexDay": "2024-11-03T00:00:00",
+   "indexOpen": 3224.62,
+   "low": 0
+  },
+  {
+   "change": 9.87,
+   "changePer": 0.3,
+   "high": 0,
+   "indexClose": 3280.57,
+   "indexDay": "2024-11-04T00:00:00",
+   "indexOpen": 3270.7,
+   "low": 0
+  },
+  {
+   "change": 0.42,
+   "changePer": 0.01,
+   "high": 0,
+   "indexClose": 3280.99,
+   "indexDay": "2024-11-05T00:00:00",
+   "indexOpen": 3280.57,
+   "low": 0
+  },
+  {
+   "change": 38.56,
+   "changePer": 1.18,
+   "high": 0,
+   "indexClose": 3319.55,
+   "indexDay": "2024-11-06T00:00:00",
+   "indexOpen": 3280.99,
+   "low": 0
+  },
+  {
+   "change": 18.79,
+   "changePer": 0.57,
+   "high": 0,
+   "indexClose": 3338.34,
+   "indexDay": "2024-11-07T00:00:00",
+   "indexOpen": 3319.55,
+   "low": 0
+  },
+  {
+   "change": 68.8,
+   "changePer": 2.06,
+   "high": 0,
+   "indexClose": 3407.14,
+   "indexDay": "2024-11-10T00:00:00",
+   "indexOpen": 3338.34,
+   "low": 0
+  },
+  {
+   "change": 17.35,
+   "changePer": 0.51,
+   "high": 0,
+   "indexClose": 3424.49,
+   "indexDay": "2024-11-11T00:00:00",
+   "indexOpen": 3407.14,
+   "low": 0
+  },
+  {
+   "change": -0.46,
+   "changePer": -0.01,
+   "high": 0,
+   "indexClose": 3424.03,
+   "indexDay": "2024-11-12T00:00:00",
+   "indexOpen": 3424.49,
+   "low": 0
+  },
+  {
+   "change": -32.35,
+   "changePer": -0.94,
+   "high": 0,
+   "indexClose": 3391.68,
+   "indexDay": "2024-11-13T00:00:00",
+   "indexOpen": 3424.03,
+   "low": 0
+  },
+  {
+   "change": -1.18,
+   "changePer": -0.03,
+   "high": 0,
+   "indexClose": 3390.5,
+   "indexDay": "2024-11-14T00:00:00",
+   "indexOpen": 3391.68,
+   "low": 0
+  },
+  {
+   "change": -10.71,
+   "changePer": -0.32,
+   "high": 0,
+   "indexClose": 3379.79,
+   "indexDay": "2024-11-17T00:00:00",
+   "indexOpen": 3390.5,
+   "low": 0
+  },
+  {
+   "change": -36.18,
+   "changePer": -1.07,
+   "high": 0,
+   "indexClose": 3343.61,
+   "indexDay": "2024-11-18T00:00:00",
+   "indexOpen": 3379.79,
+   "low": 0
+  },
+  {
+   "change": -2.32,
+   "changePer": -0.07,
+   "high": 0,
+   "indexClose": 3341.29,
+   "indexDay": "2024-11-19T00:00:00",
+   "indexOpen": 3343.61,
+   "low": 0
+  },
+  {
+   "change": -1.93,
+   "changePer": -0.06,
+   "high": 0,
+   "indexClose": 3339.36,
+   "indexDay": "2024-11-20T00:00:00",
+   "indexOpen": 3341.29,
+   "low": 0
+  },
+  {
+   "change": 0.28,
+   "changePer": 0.01,
+   "high": 0,
+   "indexClose": 3339.64,
+   "indexDay": "2024-11-21T00:00:00",
+   "indexOpen": 3339.36,
+   "low": 0
+  },
+  {
+   "change": -11.87,
+   "changePer": -0.36,
+   "high": 0,
+   "indexClose": 3327.77,
+   "indexDay": "2024-11-24T00:00:00",
+   "indexOpen": 3339.64,
+   "low": 0
+  },
+  {
+   "change": -16.94,
+   "changePer": -0.51,
+   "high": 0,
+   "indexClose": 3310.83,
+   "indexDay": "2024-11-25T00:00:00",
+   "indexOpen": 3327.77,
+   "low": 0
+  },
+  {
+   "change": 11.78,
+   "changePer": 0.36,
+   "high": 0,
+   "indexClose": 3322.61,
+   "indexDay": "2024-11-26T00:00:00",
+   "indexOpen": 3310.83,
+   "low": 0
+  },
+  {
+   "change": -35.86,
+   "changePer": -1.08,
+   "high": 0,
+   "indexClose": 3286.75,
+   "indexDay": "2024-11-27T00:00:00",
+   "indexOpen": 3322.61,
+   "low": 0
+  },
+  {
+   "change": 2.8,
+   "changePer": 0.09,
+   "high": 0,
+   "indexClose": 3289.55,
+   "indexDay": "2024-11-28T00:00:00",
+   "indexOpen": 3286.75,
+   "low": 0
+  },
+  {
+   "change": 37.74,
+   "changePer": 1.15,
+   "high": 0,
+   "indexClose": 3327.29,
+   "indexDay": "2024-12-01T00:00:00",
+   "indexOpen": 3289.55,
+   "low": 0
+  },
+  {
+   "change": 7.23,
+   "changePer": 0.22,
+   "high": 0,
+   "indexClose": 3334.52,
+   "indexDay": "2024-12-02T00:00:00",
+   "indexOpen": 3327.29,
+   "low": 0
+  },
+  {
+   "change": 12.46,
+   "changePer": 0.37,
+   "high": 0,
+   "indexClose": 3346.98,
+   "indexDay": "2024-12-03T00:00:00",
+   "indexOpen": 3334.52,
+   "low": 0
+  },
+  {
+   "change": 23.51,
+   "changePer": 0.7,
+   "high": 0,
+   "indexClose": 3370.49,
+   "indexDay": "2024-12-04T00:00:00",
+   "indexOpen": 3346.98,
+   "low": 0
+  },
+  {
+   "change": 12.28,
+   "changePer": 0.36,
+   "high": 0,
+   "indexClose": 3382.77,
+   "indexDay": "2024-12-05T00:00:00",
+   "indexOpen": 3370.49,
+   "low": 0
+  },
+  {
+   "change": 30.31,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 3413.08,
+   "indexDay": "2024-12-08T00:00:00",
+   "indexOpen": 3382.77,
+   "low": 0
+  },
+  {
+   "change": -17.15,
+   "changePer": -0.5,
+   "high": 0,
+   "indexClose": 3395.93,
+   "indexDay": "2024-12-09T00:00:00",
+   "indexOpen": 3413.08,
+   "low": 0
+  },
+  {
+   "change": -67.76,
+   "changePer": -2,
+   "high": 0,
+   "indexClose": 3328.17,
+   "indexDay": "2024-12-10T00:00:00",
+   "indexOpen": 3395.93,
+   "low": 0
+  },
+  {
+   "change": 24.06,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 3352.23,
+   "indexDay": "2024-12-11T00:00:00",
+   "indexOpen": 3328.17,
+   "low": 0
+  },
+  {
+   "change": 21.74,
+   "changePer": 0.65,
+   "high": 0,
+   "indexClose": 3373.97,
+   "indexDay": "2024-12-12T00:00:00",
+   "indexOpen": 3352.23,
+   "low": 0
+  },
+  {
+   "change": 2.02,
+   "changePer": 0.06,
+   "high": 0,
+   "indexClose": 3375.99,
+   "indexDay": "2024-12-15T00:00:00",
+   "indexOpen": 3373.97,
+   "low": 0
+  },
+  {
+   "change": -14,
+   "changePer": -0.41,
+   "high": 0,
+   "indexClose": 3361.99,
+   "indexDay": "2024-12-16T00:00:00",
+   "indexOpen": 3375.99,
+   "low": 0
+  },
+  {
+   "change": -23.78,
+   "changePer": -0.71,
+   "high": 0,
+   "indexClose": 3338.21,
+   "indexDay": "2024-12-17T00:00:00",
+   "indexOpen": 3361.99,
+   "low": 0
+  },
+  {
+   "change": -49.05,
+   "changePer": -1.47,
+   "high": 0,
+   "indexClose": 3289.16,
+   "indexDay": "2024-12-18T00:00:00",
+   "indexOpen": 3338.21,
+   "low": 0
+  },
+  {
+   "change": -14.31,
+   "changePer": -0.44,
+   "high": 0,
+   "indexClose": 3274.85,
+   "indexDay": "2024-12-19T00:00:00",
+   "indexOpen": 3289.16,
+   "low": 0
+  },
+  {
+   "change": 12.29,
+   "changePer": 0.38,
+   "high": 0,
+   "indexClose": 3287.14,
+   "indexDay": "2024-12-22T00:00:00",
+   "indexOpen": 3274.85,
+   "low": 0
+  },
+  {
+   "change": -70.89,
+   "changePer": -2.16,
+   "high": 0,
+   "indexClose": 3216.25,
+   "indexDay": "2024-12-23T00:00:00",
+   "indexOpen": 3287.14,
+   "low": 0
+  },
+  {
+   "change": -23.04,
+   "changePer": -0.72,
+   "high": 0,
+   "indexClose": 3193.21,
+   "indexDay": "2024-12-24T00:00:00",
+   "indexOpen": 3216.25,
+   "low": 0
+  },
+  {
+   "change": 8.95,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 3202.16,
+   "indexDay": "2024-12-25T00:00:00",
+   "indexOpen": 3193.21,
+   "low": 0
+  },
+  {
+   "change": 4.95,
+   "changePer": 0.15,
+   "high": 0,
+   "indexClose": 3207.11,
+   "indexDay": "2024-12-26T00:00:00",
+   "indexOpen": 3202.16,
+   "low": 0
+  },
+  {
+   "change": -19.98,
+   "changePer": -0.62,
+   "high": 0,
+   "indexClose": 3187.13,
+   "indexDay": "2024-12-29T00:00:00",
+   "indexOpen": 3207.11,
+   "low": 0
+  },
+  {
+   "change": -43.02,
+   "changePer": -1.35,
+   "high": 0,
+   "indexClose": 3144.11,
+   "indexDay": "2024-12-30T00:00:00",
+   "indexOpen": 3187.13,
+   "low": 0
+  },
+  {
+   "change": 40.82,
+   "changePer": 1.3,
+   "high": 0,
+   "indexClose": 3184.93,
+   "indexDay": "2024-12-31T00:00:00",
+   "indexOpen": 3144.11,
+   "low": 0
+  },
+  {
+   "change": 55.55,
+   "changePer": 1.74,
+   "high": 0,
+   "indexClose": 3240.48,
+   "indexDay": "2025-01-02T00:00:00",
+   "indexOpen": 3184.93,
+   "low": 0
+  },
+  {
+   "change": 34.4,
+   "changePer": 1.06,
+   "high": 0,
+   "indexClose": 3274.88,
+   "indexDay": "2025-01-05T00:00:00",
+   "indexOpen": 3240.48,
+   "low": 0
+  },
+  {
+   "change": -18.85,
+   "changePer": -0.58,
+   "high": 0,
+   "indexClose": 3256.03,
+   "indexDay": "2025-01-06T00:00:00",
+   "indexOpen": 3274.88,
+   "low": 0
+  },
+  {
+   "change": -6.79,
+   "changePer": -0.21,
+   "high": 0,
+   "indexClose": 3249.24,
+   "indexDay": "2025-01-08T00:00:00",
+   "indexOpen": 3256.03,
+   "low": 0
+  },
+  {
+   "change": -19.44,
+   "changePer": -0.6,
+   "high": 0,
+   "indexClose": 3229.8,
+   "indexDay": "2025-01-09T00:00:00",
+   "indexOpen": 3249.24,
+   "low": 0
+  },
+  {
+   "change": -37.24,
+   "changePer": -1.15,
+   "high": 0,
+   "indexClose": 3192.56,
+   "indexDay": "2025-01-12T00:00:00",
+   "indexOpen": 3229.8,
+   "low": 0
+  },
+  {
+   "change": -47.24,
+   "changePer": -1.48,
+   "high": 0,
+   "indexClose": 3145.32,
+   "indexDay": "2025-01-13T00:00:00",
+   "indexOpen": 3192.56,
+   "low": 0
+  },
+  {
+   "change": -1.4,
+   "changePer": -0.04,
+   "high": 0,
+   "indexClose": 3143.92,
+   "indexDay": "2025-01-14T00:00:00",
+   "indexOpen": 3145.32,
+   "low": 0
+  },
+  {
+   "change": 30.83,
+   "changePer": 0.98,
+   "high": 0,
+   "indexClose": 3174.75,
+   "indexDay": "2025-01-15T00:00:00",
+   "indexOpen": 3143.92,
+   "low": 0
+  },
+  {
+   "change": 18.52,
+   "changePer": 0.58,
+   "high": 0,
+   "indexClose": 3193.27,
+   "indexDay": "2025-01-16T00:00:00",
+   "indexOpen": 3174.75,
+   "low": 0
+  },
+  {
+   "change": 45.06,
+   "changePer": 1.41,
+   "high": 0,
+   "indexClose": 3238.33,
+   "indexDay": "2025-01-19T00:00:00",
+   "indexOpen": 3193.27,
+   "low": 0
+  },
+  {
+   "change": -8.28,
+   "changePer": -0.26,
+   "high": 0,
+   "indexClose": 3230.05,
+   "indexDay": "2025-01-20T00:00:00",
+   "indexOpen": 3238.33,
+   "low": 0
+  },
+  {
+   "change": 20.81,
+   "changePer": 0.64,
+   "high": 0,
+   "indexClose": 3250.86,
+   "indexDay": "2025-01-21T00:00:00",
+   "indexOpen": 3230.05,
+   "low": 0
+  },
+  {
+   "change": 21.96,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 3272.82,
+   "indexDay": "2025-01-22T00:00:00",
+   "indexOpen": 3250.86,
+   "low": 0
+  },
+  {
+   "change": -4.17,
+   "changePer": -0.13,
+   "high": 0,
+   "indexClose": 3268.65,
+   "indexDay": "2025-01-23T00:00:00",
+   "indexOpen": 3272.82,
+   "low": 0
+  },
+  {
+   "change": -16.47,
+   "changePer": -0.5,
+   "high": 0,
+   "indexClose": 3252.18,
+   "indexDay": "2025-01-26T00:00:00",
+   "indexOpen": 3268.65,
+   "low": 0
+  },
+  {
+   "change": -15.73,
+   "changePer": -0.48,
+   "high": 0,
+   "indexClose": 3236.45,
+   "indexDay": "2025-01-27T00:00:00",
+   "indexOpen": 3252.18,
+   "low": 0
+  },
+  {
+   "change": 30.31,
+   "changePer": 0.94,
+   "high": 0,
+   "indexClose": 3266.76,
+   "indexDay": "2025-01-28T00:00:00",
+   "indexOpen": 3236.45,
+   "low": 0
+  },
+  {
+   "change": 25.56,
+   "changePer": 0.78,
+   "high": 0,
+   "indexClose": 3292.32,
+   "indexDay": "2025-01-29T00:00:00",
+   "indexOpen": 3266.76,
+   "low": 0
+  },
+  {
+   "change": -10.7,
+   "changePer": -0.32,
+   "high": 0,
+   "indexClose": 3281.62,
+   "indexDay": "2025-01-30T00:00:00",
+   "indexOpen": 3292.32,
+   "low": 0
+  },
+  {
+   "change": 3.93,
+   "changePer": 0.12,
+   "high": 0,
+   "indexClose": 3285.55,
+   "indexDay": "2025-02-02T00:00:00",
+   "indexOpen": 3281.62,
+   "low": 0
+  },
+  {
+   "change": -27.68,
+   "changePer": -0.84,
+   "high": 0,
+   "indexClose": 3257.87,
+   "indexDay": "2025-02-03T00:00:00",
+   "indexOpen": 3285.55,
+   "low": 0
+  },
+  {
+   "change": 26.08,
+   "changePer": 0.8,
+   "high": 0,
+   "indexClose": 3283.95,
+   "indexDay": "2025-02-04T00:00:00",
+   "indexOpen": 3257.87,
+   "low": 0
+  },
+  {
+   "change": 8.32,
+   "changePer": 0.25,
+   "high": 0,
+   "indexClose": 3292.27,
+   "indexDay": "2025-02-05T00:00:00",
+   "indexOpen": 3283.95,
+   "low": 0
+  },
+  {
+   "change": 29.5,
+   "changePer": 0.9,
+   "high": 0,
+   "indexClose": 3321.77,
+   "indexDay": "2025-02-06T00:00:00",
+   "indexOpen": 3292.27,
+   "low": 0
+  },
+  {
+   "change": 19.56,
+   "changePer": 0.59,
+   "high": 0,
+   "indexClose": 3341.33,
+   "indexDay": "2025-02-09T00:00:00",
+   "indexOpen": 3321.77,
+   "low": 0
+  },
+  {
+   "change": 13,
+   "changePer": 0.39,
+   "high": 0,
+   "indexClose": 3354.33,
+   "indexDay": "2025-02-10T00:00:00",
+   "indexOpen": 3341.33,
+   "low": 0
+  },
+  {
+   "change": -84.01,
+   "changePer": -2.5,
+   "high": 0,
+   "indexClose": 3270.32,
+   "indexDay": "2025-02-11T00:00:00",
+   "indexOpen": 3354.33,
+   "low": 0
+  },
+  {
+   "change": 20.77,
+   "changePer": 0.64,
+   "high": 0,
+   "indexClose": 3291.09,
+   "indexDay": "2025-02-12T00:00:00",
+   "indexOpen": 3270.32,
+   "low": 0
+  },
+  {
+   "change": 31.95,
+   "changePer": 0.97,
+   "high": 0,
+   "indexClose": 3323.04,
+   "indexDay": "2025-02-13T00:00:00",
+   "indexOpen": 3291.09,
+   "low": 0
+  },
+  {
+   "change": 52.86,
+   "changePer": 1.59,
+   "high": 0,
+   "indexClose": 3375.9,
+   "indexDay": "2025-02-16T00:00:00",
+   "indexOpen": 3323.04,
+   "low": 0
+  },
+  {
+   "change": 3.86,
+   "changePer": 0.11,
+   "high": 0,
+   "indexClose": 3379.76,
+   "indexDay": "2025-02-17T00:00:00",
+   "indexOpen": 3375.9,
+   "low": 0
+  },
+  {
+   "change": 31.75,
+   "changePer": 0.94,
+   "high": 0,
+   "indexClose": 3411.51,
+   "indexDay": "2025-02-18T00:00:00",
+   "indexOpen": 3379.76,
+   "low": 0
+  },
+  {
+   "change": 7.07,
+   "changePer": 0.21,
+   "high": 0,
+   "indexClose": 3418.58,
+   "indexDay": "2025-02-19T00:00:00",
+   "indexOpen": 3411.51,
+   "low": 0
+  },
+  {
+   "change": -6.56,
+   "changePer": -0.19,
+   "high": 0,
+   "indexClose": 3412.02,
+   "indexDay": "2025-02-20T00:00:00",
+   "indexOpen": 3418.58,
+   "low": 0
+  },
+  {
+   "change": 44.62,
+   "changePer": 1.31,
+   "high": 0,
+   "indexClose": 3456.64,
+   "indexDay": "2025-02-23T00:00:00",
+   "indexOpen": 3412.02,
+   "low": 0
+  },
+  {
+   "change": -5.06,
+   "changePer": -0.15,
+   "high": 0,
+   "indexClose": 3451.58,
+   "indexDay": "2025-02-24T00:00:00",
+   "indexOpen": 3456.64,
+   "low": 0
+  },
+  {
+   "change": -24.77,
+   "changePer": -0.72,
+   "high": 0,
+   "indexClose": 3426.81,
+   "indexDay": "2025-02-25T00:00:00",
+   "indexOpen": 3451.58,
+   "low": 0
+  },
+  {
+   "change": -1.73,
+   "changePer": -0.05,
+   "high": 0,
+   "indexClose": 3425.08,
+   "indexDay": "2025-02-26T00:00:00",
+   "indexOpen": 3426.81,
+   "low": 0
+  },
+  {
+   "change": -1.04,
+   "changePer": -0.03,
+   "high": 0,
+   "indexClose": 3424.04,
+   "indexDay": "2025-02-27T00:00:00",
+   "indexOpen": 3425.08,
+   "low": 0
+  },
+  {
+   "change": -2.84,
+   "changePer": -0.08,
+   "high": 0,
+   "indexClose": 3421.2,
+   "indexDay": "2025-03-02T00:00:00",
+   "indexOpen": 3424.04,
+   "low": 0
+  },
+  {
+   "change": 8.79,
+   "changePer": 0.26,
+   "high": 0,
+   "indexClose": 3429.99,
+   "indexDay": "2025-03-03T00:00:00",
+   "indexOpen": 3421.2,
+   "low": 0
+  },
+  {
+   "change": -27.68,
+   "changePer": -0.81,
+   "high": 0,
+   "indexClose": 3402.31,
+   "indexDay": "2025-03-04T00:00:00",
+   "indexOpen": 3429.99,
+   "low": 0
+  },
+  {
+   "change": -12.99,
+   "changePer": -0.38,
+   "high": 0,
+   "indexClose": 3389.32,
+   "indexDay": "2025-03-05T00:00:00",
+   "indexOpen": 3402.31,
+   "low": 0
+  },
+  {
+   "change": 14.14,
+   "changePer": 0.42,
+   "high": 0,
+   "indexClose": 3403.46,
+   "indexDay": "2025-03-06T00:00:00",
+   "indexOpen": 3389.32,
+   "low": 0
+  },
+  {
+   "change": 13.34,
+   "changePer": 0.39,
+   "high": 0,
+   "indexClose": 3416.8,
+   "indexDay": "2025-03-09T00:00:00",
+   "indexOpen": 3403.46,
+   "low": 0
+  },
+  {
+   "change": -8.52,
+   "changePer": -0.25,
+   "high": 0,
+   "indexClose": 3408.28,
+   "indexDay": "2025-03-10T00:00:00",
+   "indexOpen": 3416.8,
+   "low": 0
+  },
+  {
+   "change": -0.59,
+   "changePer": -0.02,
+   "high": 0,
+   "indexClose": 3407.69,
+   "indexDay": "2025-03-11T00:00:00",
+   "indexOpen": 3408.28,
+   "low": 0
+  },
+  {
+   "change": 39.11,
+   "changePer": 1.15,
+   "high": 0,
+   "indexClose": 3446.8,
+   "indexDay": "2025-03-12T00:00:00",
+   "indexOpen": 3407.69,
+   "low": 0
+  },
+  {
+   "change": -2.65,
+   "changePer": -0.08,
+   "high": 0,
+   "indexClose": 3444.15,
+   "indexDay": "2025-03-13T00:00:00",
+   "indexOpen": 3446.8,
+   "low": 0
+  },
+  {
+   "change": 8.88,
+   "changePer": 0.26,
+   "high": 0,
+   "indexClose": 3453.03,
+   "indexDay": "2025-03-16T00:00:00",
+   "indexOpen": 3444.15,
+   "low": 0
+  },
+  {
+   "change": -4.62,
+   "changePer": -0.13,
+   "high": 0,
+   "indexClose": 3448.41,
+   "indexDay": "2025-03-17T00:00:00",
+   "indexOpen": 3453.03,
+   "low": 0
+  },
+  {
+   "change": 16.38,
+   "changePer": 0.48,
+   "high": 0,
+   "indexClose": 3464.79,
+   "indexDay": "2025-03-18T00:00:00",
+   "indexOpen": 3448.41,
+   "low": 0
+  },
+  {
+   "change": -19.79,
+   "changePer": -0.57,
+   "high": 0,
+   "indexClose": 3445,
+   "indexDay": "2025-03-19T00:00:00",
+   "indexOpen": 3464.79,
+   "low": 0
+  },
+  {
+   "change": 25.16,
+   "changePer": 0.73,
+   "high": 0,
+   "indexClose": 3470.16,
+   "indexDay": "2025-03-20T00:00:00",
+   "indexOpen": 3445,
+   "low": 0
+  },
+  {
+   "change": 2.35,
+   "changePer": 0.07,
+   "high": 0,
+   "indexClose": 3472.51,
+   "indexDay": "2025-03-23T00:00:00",
+   "indexOpen": 3470.16,
+   "low": 0
+  },
+  {
+   "change": -26.05,
+   "changePer": -0.75,
+   "high": 0,
+   "indexClose": 3446.46,
+   "indexDay": "2025-03-24T00:00:00",
+   "indexOpen": 3472.51,
+   "low": 0
+  },
+  {
+   "change": -4.04,
+   "changePer": -0.12,
+   "high": 0,
+   "indexClose": 3442.42,
+   "indexDay": "2025-03-25T00:00:00",
+   "indexOpen": 3446.46,
+   "low": 0
+  },
+  {
+   "change": 5.67,
+   "changePer": 0.16,
+   "high": 0,
+   "indexClose": 3448.09,
+   "indexDay": "2025-03-26T00:00:00",
+   "indexOpen": 3442.42,
+   "low": 0
+  },
+  {
+   "change": 12.85,
+   "changePer": 0.37,
+   "high": 0,
+   "indexClose": 3460.94,
+   "indexDay": "2025-03-27T00:00:00",
+   "indexOpen": 3448.09,
+   "low": 0
+  },
+  {
+   "change": -6.19,
+   "changePer": -0.18,
+   "high": 0,
+   "indexClose": 3454.75,
+   "indexDay": "2025-04-03T00:00:00",
+   "indexOpen": 3460.94,
+   "low": 0
+  },
+  {
+   "change": -136.71,
+   "changePer": -3.96,
+   "high": 0,
+   "indexClose": 3318.04,
+   "indexDay": "2025-04-06T00:00:00",
+   "indexOpen": 3454.75,
+   "low": 0
+  },
+  {
+   "change": 7.83,
+   "changePer": 0.24,
+   "high": 0,
+   "indexClose": 3325.87,
+   "indexDay": "2025-04-07T00:00:00",
+   "indexOpen": 3318.04,
+   "low": 0
+  },
+  {
+   "change": 59.31,
+   "changePer": 1.78,
+   "high": 0,
+   "indexClose": 3385.18,
+   "indexDay": "2025-04-08T00:00:00",
+   "indexOpen": 3325.87,
+   "low": 0
+  },
+  {
+   "change": -91.38,
+   "changePer": -2.7,
+   "high": 0,
+   "indexClose": 3293.8,
+   "indexDay": "2025-04-09T00:00:00",
+   "indexOpen": 3385.18,
+   "low": 0
+  },
+  {
+   "change": 66.1,
+   "changePer": 2.01,
+   "high": 0,
+   "indexClose": 3359.9,
+   "indexDay": "2025-04-10T00:00:00",
+   "indexOpen": 3293.8,
+   "low": 0
+  },
+  {
+   "change": 41.93,
+   "changePer": 1.25,
+   "high": 0,
+   "indexClose": 3401.83,
+   "indexDay": "2025-04-13T00:00:00",
+   "indexOpen": 3359.9,
+   "low": 0
+  },
+  {
+   "change": 2.8,
+   "changePer": 0.08,
+   "high": 0,
+   "indexClose": 3404.63,
+   "indexDay": "2025-04-14T00:00:00",
+   "indexOpen": 3401.83,
+   "low": 0
+  },
+  {
+   "change": -7.26,
+   "changePer": -0.21,
+   "high": 0,
+   "indexClose": 3397.37,
+   "indexDay": "2025-04-15T00:00:00",
+   "indexOpen": 3404.63,
+   "low": 0
+  },
+  {
+   "change": -19.06,
+   "changePer": -0.56,
+   "high": 0,
+   "indexClose": 3378.31,
+   "indexDay": "2025-04-16T00:00:00",
+   "indexOpen": 3397.37,
+   "low": 0
+  },
+  {
+   "change": 24.18,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 3402.49,
+   "indexDay": "2025-04-17T00:00:00",
+   "indexOpen": 3378.31,
+   "low": 0
+  },
+  {
+   "change": 4.55,
+   "changePer": 0.13,
+   "high": 0,
+   "indexClose": 3407.04,
+   "indexDay": "2025-04-22T00:00:00",
+   "indexOpen": 3402.49,
+   "low": 0
+  },
+  {
+   "change": 52.07,
+   "changePer": 1.53,
+   "high": 0,
+   "indexClose": 3459.11,
+   "indexDay": "2025-04-23T00:00:00",
+   "indexOpen": 3407.04,
+   "low": 0
+  },
+  {
+   "change": 37.27,
+   "changePer": 1.08,
+   "high": 0,
+   "indexClose": 3496.38,
+   "indexDay": "2025-04-27T00:00:00",
+   "indexOpen": 3459.11,
+   "low": 0
+  },
+  {
+   "change": 5.65,
+   "changePer": 0.16,
+   "high": 0,
+   "indexClose": 3502.03,
+   "indexDay": "2025-04-28T00:00:00",
+   "indexOpen": 3496.38,
+   "low": 0
+  },
+  {
+   "change": -18.51,
+   "changePer": -0.53,
+   "high": 0,
+   "indexClose": 3483.52,
+   "indexDay": "2025-04-29T00:00:00",
+   "indexOpen": 3502.03,
+   "low": 0
+  },
+  {
+   "change": 37.67,
+   "changePer": 1.08,
+   "high": 0,
+   "indexClose": 3521.19,
+   "indexDay": "2025-04-30T00:00:00",
+   "indexOpen": 3483.52,
+   "low": 0
+  },
+  {
+   "change": 43.09,
+   "changePer": 1.22,
+   "high": 0,
+   "indexClose": 3564.28,
+   "indexDay": "2025-05-04T00:00:00",
+   "indexOpen": 3521.19,
+   "low": 0
+  },
+  {
+   "change": -15.55,
+   "changePer": -0.44,
+   "high": 0,
+   "indexClose": 3548.73,
+   "indexDay": "2025-05-05T00:00:00",
+   "indexOpen": 3564.28,
+   "low": 0
+  },
+  {
+   "change": 5.49,
+   "changePer": 0.15,
+   "high": 0,
+   "indexClose": 3554.22,
+   "indexDay": "2025-05-06T00:00:00",
+   "indexOpen": 3548.73,
+   "low": 0
+  },
+  {
+   "change": -45.38,
+   "changePer": -1.28,
+   "high": 0,
+   "indexClose": 3508.84,
+   "indexDay": "2025-05-07T00:00:00",
+   "indexOpen": 3554.22,
+   "low": 0
+  },
+  {
+   "change": -3.17,
+   "changePer": -0.09,
+   "high": 0,
+   "indexClose": 3505.67,
+   "indexDay": "2025-05-08T00:00:00",
+   "indexOpen": 3508.84,
+   "low": 0
+  },
+  {
+   "change": -9.95,
+   "changePer": -0.28,
+   "high": 0,
+   "indexClose": 3495.72,
+   "indexDay": "2025-05-11T00:00:00",
+   "indexOpen": 3505.67,
+   "low": 0
+  },
+  {
+   "change": 9.96,
+   "changePer": 0.28,
+   "high": 0,
+   "indexClose": 3505.68,
+   "indexDay": "2025-05-12T00:00:00",
+   "indexOpen": 3495.72,
+   "low": 0
+  },
+  {
+   "change": 6.14,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 3511.82,
+   "indexDay": "2025-05-13T00:00:00",
+   "indexOpen": 3505.68,
+   "low": 0
+  },
+  {
+   "change": -9.28,
+   "changePer": -0.26,
+   "high": 0,
+   "indexClose": 3502.54,
+   "indexDay": "2025-05-14T00:00:00",
+   "indexOpen": 3511.82,
+   "low": 0
+  },
+  {
+   "change": 5.44,
+   "changePer": 0.16,
+   "high": 0,
+   "indexClose": 3507.98,
+   "indexDay": "2025-05-15T00:00:00",
+   "indexOpen": 3502.54,
+   "low": 0
+  },
+  {
+   "change": -32.39,
+   "changePer": -0.92,
+   "high": 0,
+   "indexClose": 3475.59,
+   "indexDay": "2025-05-18T00:00:00",
+   "indexOpen": 3507.98,
+   "low": 0
+  },
+  {
+   "change": -28.6,
+   "changePer": -0.82,
+   "high": 0,
+   "indexClose": 3446.99,
+   "indexDay": "2025-05-19T00:00:00",
+   "indexOpen": 3475.59,
+   "low": 0
+  },
+  {
+   "change": 12.37,
+   "changePer": 0.36,
+   "high": 0,
+   "indexClose": 3459.36,
+   "indexDay": "2025-05-20T00:00:00",
+   "indexOpen": 3446.99,
+   "low": 0
+  },
+  {
+   "change": 4.78,
+   "changePer": 0.14,
+   "high": 0,
+   "indexClose": 3464.14,
+   "indexDay": "2025-05-21T00:00:00",
+   "indexOpen": 3459.36,
+   "low": 0
+  },
+  {
+   "change": 27.31,
+   "changePer": 0.79,
+   "high": 0,
+   "indexClose": 3491.45,
+   "indexDay": "2025-05-22T00:00:00",
+   "indexOpen": 3464.14,
+   "low": 0
+  },
+  {
+   "change": 11.34,
+   "changePer": 0.32,
+   "high": 0,
+   "indexClose": 3502.79,
+   "indexDay": "2025-05-25T00:00:00",
+   "indexOpen": 3491.45,
+   "low": 0
+  },
+  {
+   "change": -9.88,
+   "changePer": -0.28,
+   "high": 0,
+   "indexClose": 3492.91,
+   "indexDay": "2025-05-26T00:00:00",
+   "indexOpen": 3502.79,
+   "low": 0
+  },
+  {
+   "change": 18.72,
+   "changePer": 0.54,
+   "high": 0,
+   "indexClose": 3511.63,
+   "indexDay": "2025-05-27T00:00:00",
+   "indexOpen": 3492.91,
+   "low": 0
+  },
+  {
+   "change": -14.15,
+   "changePer": -0.4,
+   "high": 0,
+   "indexClose": 3497.48,
+   "indexDay": "2025-05-28T00:00:00",
+   "indexOpen": 3511.63,
+   "low": 0
+  },
+  {
+   "change": 1.81,
+   "changePer": 0.05,
+   "high": 0,
+   "indexClose": 3499.29,
+   "indexDay": "2025-05-29T00:00:00",
+   "indexOpen": 3497.48,
+   "low": 0
+  },
+  {
+   "change": -4.81,
+   "changePer": -0.14,
+   "high": 0,
+   "indexClose": 3494.48,
+   "indexDay": "2025-06-01T00:00:00",
+   "indexOpen": 3499.29,
+   "low": 0
+  },
+  {
+   "change": -3.93,
+   "changePer": -0.11,
+   "high": 0,
+   "indexClose": 3490.55,
+   "indexDay": "2025-06-02T00:00:00",
+   "indexOpen": 3494.48,
+   "low": 0
+  },
+  {
+   "change": 26.91,
+   "changePer": 0.77,
+   "high": 0,
+   "indexClose": 3517.46,
+   "indexDay": "2025-06-03T00:00:00",
+   "indexOpen": 3490.55,
+   "low": 0
+  },
+  {
+   "change": 28.47,
+   "changePer": 0.81,
+   "high": 0,
+   "indexClose": 3545.93,
+   "indexDay": "2025-06-04T00:00:00",
+   "indexOpen": 3517.46,
+   "low": 0
+  },
+  {
+   "change": 44.22,
+   "changePer": 1.25,
+   "high": 0,
+   "indexClose": 3590.15,
+   "indexDay": "2025-06-10T00:00:00",
+   "indexOpen": 3545.93,
+   "low": 0
+  },
+  {
+   "change": 3.65,
+   "changePer": 0.1,
+   "high": 0,
+   "indexClose": 3593.8,
+   "indexDay": "2025-06-11T00:00:00",
+   "indexOpen": 3590.15,
+   "low": 0
+  },
+  {
+   "change": -72.96,
+   "changePer": -2.03,
+   "high": 0,
+   "indexClose": 3520.84,
+   "indexDay": "2025-06-12T00:00:00",
+   "indexOpen": 3593.8,
+   "low": 0
+  },
+  {
+   "change": -179.16,
+   "changePer": -5.09,
+   "high": 0,
+   "indexClose": 3341.68,
+   "indexDay": "2025-06-15T00:00:00",
+   "indexOpen": 3520.84,
+   "low": 0
+  },
+  {
+   "change": 22,
+   "changePer": 0.66,
+   "high": 0,
+   "indexClose": 3363.68,
+   "indexDay": "2025-06-16T00:00:00",
+   "indexOpen": 3341.68,
+   "low": 0
+  },
+  {
+   "change": -80.94,
+   "changePer": -2.41,
+   "high": 0,
+   "indexClose": 3282.74,
+   "indexDay": "2025-06-17T00:00:00",
+   "indexOpen": 3363.68,
+   "low": 0
+  },
+  {
+   "change": 18.38,
+   "changePer": 0.56,
+   "high": 0,
+   "indexClose": 3301.12,
+   "indexDay": "2025-06-18T00:00:00",
+   "indexOpen": 3282.74,
+   "low": 0
+  },
+  {
+   "change": -47.84,
+   "changePer": -1.45,
+   "high": 0,
+   "indexClose": 3253.28,
+   "indexDay": "2025-06-19T00:00:00",
+   "indexOpen": 3301.12,
+   "low": 0
+  },
+  {
+   "change": 67.22,
+   "changePer": 2.07,
+   "high": 0,
+   "indexClose": 3320.5,
+   "indexDay": "2025-06-22T00:00:00",
+   "indexOpen": 3253.28,
+   "low": 0
+  },
+  {
+   "change": 72.78,
+   "changePer": 2.19,
+   "high": 0,
+   "indexClose": 3393.28,
+   "indexDay": "2025-06-23T00:00:00",
+   "indexOpen": 3320.5,
+   "low": 0
+  },
+  {
+   "change": 100.56,
+   "changePer": 2.96,
+   "high": 0,
+   "indexClose": 3493.84,
+   "indexDay": "2025-06-24T00:00:00",
+   "indexOpen": 3393.28,
+   "low": 0
+  },
+  {
+   "change": 45.74,
+   "changePer": 1.31,
+   "high": 0,
+   "indexClose": 3539.58,
+   "indexDay": "2025-06-25T00:00:00",
+   "indexOpen": 3493.84,
+   "low": 0
+  },
+  {
+   "change": 41.74,
+   "changePer": 1.18,
+   "high": 0,
+   "indexClose": 3581.32,
+   "indexDay": "2025-06-29T00:00:00",
+   "indexOpen": 3539.58,
+   "low": 0
+  },
+  {
+   "change": -1.69,
+   "changePer": -0.05,
+   "high": 0,
+   "indexClose": 3579.63,
+   "indexDay": "2025-06-30T00:00:00",
+   "indexOpen": 3581.32,
+   "low": 0
+  },
+  {
+   "change": -29.05,
+   "changePer": -0.81,
+   "high": 0,
+   "indexClose": 3550.58,
+   "indexDay": "2025-07-01T00:00:00",
+   "indexOpen": 3579.63,
+   "low": 0
+  },
+  {
+   "change": 31.11,
+   "changePer": 0.88,
+   "high": 0,
+   "indexClose": 3581.69,
+   "indexDay": "2025-07-02T00:00:00",
+   "indexOpen": 3550.58,
+   "low": 0
+  },
+  {
+   "change": 25.61,
+   "changePer": 0.72,
+   "high": 0,
+   "indexClose": 3607.3,
+   "indexDay": "2025-07-06T00:00:00",
+   "indexOpen": 3581.69,
+   "low": 0
+  },
+  {
+   "change": 8.24,
+   "changePer": 0.23,
+   "high": 0,
+   "indexClose": 3615.54,
+   "indexDay": "2025-07-07T00:00:00",
+   "indexOpen": 3607.3,
+   "low": 0
+  },
+  {
+   "change": 0,
+   "changePer": 0,
+   "high": 0,
+   "indexClose": 3615.54,
+   "indexDay": "2025-07-08T00:00:00",
+   "indexOpen": 3615.54,
+   "low": 0
+  },
+  {
+   "change": -11.87,
+   "changePer": -0.33,
+   "high": 0,
+   "indexClose": 3603.67,
+   "indexDay": "2025-07-09T00:00:00",
+   "indexOpen": 3615.54,
+   "low": 0
+  },
+  {
+   "change": 24.35,
+   "changePer": 0.68,
+   "high": 0,
+   "indexClose": 3628.02,
+   "indexDay": "2025-07-10T00:00:00",
+   "indexOpen": 3603.67,
+   "low": 0
+  },
+  {
+   "change": -15,
+   "changePer": -0.41,
+   "high": 0,
+   "indexClose": 3613.02,
+   "indexDay": "2025-07-13T00:00:00",
+   "indexOpen": 3628.02,
+   "low": 0
+  },
+  {
+   "change": 58.54,
+   "changePer": 1.62,
+   "high": 0,
+   "indexClose": 3671.56,
+   "indexDay": "2025-07-14T00:00:00",
+   "indexOpen": 3613.02,
+   "low": 0
+  },
+  {
+   "change": 27.55,
+   "changePer": 0.75,
+   "high": 0,
+   "indexClose": 3699.11,
+   "indexDay": "2025-07-15T00:00:00",
+   "indexOpen": 3671.56,
+   "low": 0
+  },
+  {
+   "change": -25.9,
+   "changePer": -0.7,
+   "high": 0,
+   "indexClose": 3673.21,
+   "indexDay": "2025-07-16T00:00:00",
+   "indexOpen": 3699.11,
+   "low": 0
+  },
+  {
+   "change": 31.81,
+   "changePer": 0.87,
+   "high": 0,
+   "indexClose": 3705.02,
+   "indexDay": "2025-07-17T00:00:00",
+   "indexOpen": 3673.21,
+   "low": 0
+  },
+  {
+   "change": 50.99,
+   "changePer": 1.38,
+   "high": 0,
+   "indexClose": 3756.01,
+   "indexDay": "2025-07-20T00:00:00",
+   "indexOpen": 3705.02,
+   "low": 0
+  },
+  {
+   "change": -11.69,
+   "changePer": -0.31,
+   "high": 0,
+   "indexClose": 3744.32,
+   "indexDay": "2025-07-21T00:00:00",
+   "indexOpen": 3756.01,
+   "low": 0
+  },
+  {
+   "change": -14.07,
+   "changePer": -0.38,
+   "high": 0,
+   "indexClose": 3730.25,
+   "indexDay": "2025-07-22T00:00:00",
+   "indexOpen": 3744.32,
+   "low": 0
+  },
+  {
+   "change": 6.62,
+   "changePer": 0.18,
+   "high": 0,
+   "indexClose": 3736.87,
+   "indexDay": "2025-07-23T00:00:00",
+   "indexOpen": 3730.25,
+   "low": 0
+  },
+  {
+   "change": 37.95,
+   "changePer": 1.02,
+   "high": 0,
+   "indexClose": 3774.82,
+   "indexDay": "2025-07-27T00:00:00",
+   "indexOpen": 3736.87,
+   "low": 0
+  },
+  {
+   "change": -64.59,
+   "changePer": -1.71,
+   "high": 0,
+   "indexClose": 3710.23,
+   "indexDay": "2025-07-28T00:00:00",
+   "indexOpen": 3774.82,
+   "low": 0
+  },
+  {
+   "change": 24.31,
+   "changePer": 0.66,
+   "high": 0,
+   "indexClose": 3734.54,
+   "indexDay": "2025-07-29T00:00:00",
+   "indexOpen": 3710.23,
+   "low": 0
+  },
+  {
+   "change": -46.41,
+   "changePer": -1.24,
+   "high": 0,
+   "indexClose": 3688.13,
+   "indexDay": "2025-07-30T00:00:00",
+   "indexOpen": 3734.54,
+   "low": 0
+  },
+  {
+   "change": 33.84,
+   "changePer": 0.92,
+   "high": 0,
+   "indexClose": 3721.97,
+   "indexDay": "2025-07-31T00:00:00",
+   "indexOpen": 3688.13,
+   "low": 0
+  },
+  {
+   "change": 8.31,
+   "changePer": 0.22,
+   "high": 3730.28,
+   "indexClose": 3730.28,
+   "indexDay": "2025-08-03T00:00:00",
+   "indexOpen": 3721.97,
+   "low": 3709.98
+  },
+  {
+   "change": 23.98,
+   "changePer": 0.64,
+   "high": 3756.87,
+   "indexClose": 3754.26,
+   "indexDay": "2025-08-04T00:00:00",
+   "indexOpen": 3730.28,
+   "low": 3730.28
+  },
+  {
+   "change": 51.44,
+   "changePer": 1.37,
+   "high": 3805.7,
+   "indexClose": 3805.7,
+   "indexDay": "2025-08-05T00:00:00",
+   "indexOpen": 3754.26,
+   "low": 3754.26
+  },
+  {
+   "change": -5.26,
+   "changePer": -0.14,
+   "high": 3815.69,
+   "indexClose": 3800.44,
+   "indexDay": "2025-08-06T00:00:00",
+   "indexOpen": 3805.7,
+   "low": 3796.43
+  },
+  {
+   "change": 19.53,
+   "changePer": 0.51,
+   "high": 3824.13,
+   "indexClose": 3819.97,
+   "indexDay": "2025-08-07T00:00:00",
+   "indexOpen": 3800.44,
+   "low": 3794.33
+  },
+  {
+   "change": 28.39,
+   "changePer": 0.74,
+   "high": 3851.45,
+   "indexClose": 3848.36,
+   "indexDay": "2025-08-10T00:00:00",
+   "indexOpen": 3819.97,
+   "low": 3819.97
+  },
+  {
+   "change": -15.21,
+   "changePer": -0.4,
+   "high": 3858.08,
+   "indexClose": 3833.15,
+   "indexDay": "2025-08-11T00:00:00",
+   "indexOpen": 3848.36,
+   "low": 3821.21
+  },
+  {
+   "change": 11.49,
+   "changePer": 0.3,
+   "high": 3851.48,
+   "indexClose": 3844.64,
+   "indexDay": "2025-08-12T00:00:00",
+   "indexOpen": 3833.15,
+   "low": 3833.15
+  },
+  {
+   "change": -15.8,
+   "changePer": -0.41,
+   "high": 3860.95,
+   "indexClose": 3828.84,
+   "indexDay": "2025-08-13T00:00:00",
+   "indexOpen": 3844.64,
+   "low": 3816.03
+  },
+  {
+   "change": -21.24,
+   "changePer": -0.55,
+   "high": 3834.5,
+   "indexClose": 3807.6,
+   "indexDay": "2025-08-14T00:00:00",
+   "indexOpen": 3828.84,
+   "low": 3796.71
+  },
+  {
+   "change": 31.04,
+   "changePer": 0.82,
+   "high": 3839.99,
+   "indexClose": 3838.64,
+   "indexDay": "2025-08-17T00:00:00",
+   "indexOpen": 3807.6,
+   "low": 3807.6
+  },
+  {
+   "change": 11.52,
+   "changePer": 0.3,
+   "high": 3862.16,
+   "indexClose": 3850.16,
+   "indexDay": "2025-08-18T00:00:00",
+   "indexOpen": 3838.64,
+   "low": 3838.64
+  },
+  {
+   "change": 2.93,
+   "changePer": 0.08,
+   "high": 3862.49,
+   "indexClose": 3853.09,
+   "indexDay": "2025-08-19T00:00:00",
+   "indexOpen": 3850.16,
+   "low": 3850.16
+  },
+  {
+   "change": -51.58,
+   "changePer": -1.34,
+   "high": 3865.55,
+   "indexClose": 3801.51,
+   "indexDay": "2025-08-20T00:00:00",
+   "indexOpen": 3853.09,
+   "low": 3801.51
+  },
+  {
+   "change": -0.03,
+   "changePer": 0,
+   "high": 3808.63,
+   "indexClose": 3801.48,
+   "indexDay": "2025-08-21T00:00:00",
+   "indexOpen": 3801.51,
+   "low": 3790.06
+  },
+  {
+   "change": 16.74,
+   "changePer": 0.44,
+   "high": 3819.14,
+   "indexClose": 3818.22,
+   "indexDay": "2025-08-24T00:00:00",
+   "indexOpen": 3801.48,
+   "low": 3801.48
+  },
+  {
+   "change": 17.87,
+   "changePer": 0.47,
+   "high": 3846.11,
+   "indexClose": 3836.09,
+   "indexDay": "2025-08-25T00:00:00",
+   "indexOpen": 3818.22,
+   "low": 3818.22
+  },
+  {
+   "change": 5.19,
+   "changePer": 0.14,
+   "high": 3874.63,
+   "indexClose": 3841.28,
+   "indexDay": "2025-08-26T00:00:00",
+   "indexOpen": 3836.09,
+   "low": 3836.09
+  },
+  {
+   "change": 14.77,
+   "changePer": 0.38,
+   "high": 3868.43,
+   "indexClose": 3856.05,
+   "indexDay": "2025-08-27T00:00:00",
+   "indexOpen": 3841.28,
+   "low": 3836.5
+  },
+  {
+   "change": 15.38,
+   "changePer": 0.4,
+   "high": 3874.84,
+   "indexClose": 3871.43,
+   "indexDay": "2025-08-28T00:00:00",
+   "indexOpen": 3856.05,
+   "low": 3856.05
+  },
+  {
+   "change": -36.83,
+   "changePer": -0.95,
+   "high": 3896.69,
+   "indexClose": 3834.6,
+   "indexDay": "2025-08-31T00:00:00",
+   "indexOpen": 3871.43,
+   "low": 3818.42
+  },
+  {
+   "change": 14.53,
+   "changePer": 0.38,
+   "high": 3857.53,
+   "indexClose": 3849.13,
+   "indexDay": "2025-09-01T00:00:00",
+   "indexOpen": 3834.6,
+   "low": 3826.92
+  },
+  {
+   "change": 12.22,
+   "changePer": 0.32,
+   "high": 3878.2,
+   "indexClose": 3861.35,
+   "indexDay": "2025-09-02T00:00:00",
+   "indexOpen": 3849.13,
+   "low": 3849.13
+  },
+  {
+   "change": -14.02,
+   "changePer": -0.36,
+   "high": 3872.47,
+   "indexClose": 3847.33,
+   "indexDay": "2025-09-03T00:00:00",
+   "indexOpen": 3861.35,
+   "low": 3836.69
+  },
+  {
+   "change": 25.24,
+   "changePer": 0.66,
+   "high": 3885.57,
+   "indexClose": 3872.57,
+   "indexDay": "2025-09-07T00:00:00",
+   "indexOpen": 3847.33,
+   "low": 3843.01
+  },
+  {
+   "change": -9.34,
+   "changePer": -0.24,
+   "high": 3893.38,
+   "indexClose": 3863.23,
+   "indexDay": "2025-09-08T00:00:00",
+   "indexOpen": 3872.57,
+   "low": 3863.23
+  },
+  {
+   "change": -32.59,
+   "changePer": -0.84,
+   "high": 3877.48,
+   "indexClose": 3830.64,
+   "indexDay": "2025-09-09T00:00:00",
+   "indexOpen": 3863.23,
+   "low": 3829.41
+  },
+  {
+   "change": 29.49,
+   "changePer": 0.77,
+   "high": 3860.13,
+   "indexClose": 3860.13,
+   "indexDay": "2025-09-10T00:00:00",
+   "indexOpen": 3830.64,
+   "low": 3829.36
+  },
+  {
+   "change": 15.79,
+   "changePer": 0.41,
+   "high": 3875.92,
+   "indexClose": 3875.92,
+   "indexDay": "2025-09-11T00:00:00",
+   "indexOpen": 3860.13,
+   "low": 3860.13
+  },
+  {
+   "change": 17.85,
+   "changePer": 0.46,
+   "high": 3898.6,
+   "indexClose": 3893.77,
+   "indexDay": "2025-09-14T00:00:00",
+   "indexOpen": 3875.92,
+   "low": 3874.55
+  },
+  {
+   "change": 10.16,
+   "changePer": 0.26,
+   "high": 3916.79,
+   "indexClose": 3903.93,
+   "indexDay": "2025-09-15T00:00:00",
+   "indexOpen": 3893.77,
+   "low": 3879.43
+  },
+  {
+   "change": -67.12,
+   "changePer": -1.72,
+   "high": 3906.29,
+   "indexClose": 3836.81,
+   "indexDay": "2025-09-16T00:00:00",
+   "indexOpen": 3903.93,
+   "low": 3825.51
+  },
+  {
+   "change": 4.11,
+   "changePer": 0.11,
+   "high": 3853.62,
+   "indexClose": 3840.92,
+   "indexDay": "2025-09-17T00:00:00",
+   "indexOpen": 3836.81,
+   "low": 3825.25
+  },
+  {
+   "change": 16.81,
+   "changePer": 0.44,
+   "high": 3875.94,
+   "indexClose": 3857.73,
+   "indexDay": "2025-09-18T00:00:00",
+   "indexOpen": 3840.92,
+   "low": 3840.92
+  },
+  {
+   "change": -10.02,
+   "changePer": -0.26,
+   "high": 3875.75,
+   "indexClose": 3847.71,
+   "indexDay": "2025-09-21T00:00:00",
+   "indexOpen": 3857.73,
+   "low": 3846.6
+  },
+  {
+   "change": -2.93,
+   "changePer": -0.08,
+   "high": 3862.27,
+   "indexClose": 3844.78,
+   "indexDay": "2025-09-22T00:00:00",
+   "indexOpen": 3847.71,
+   "low": 3829.78
+  },
+  {
+   "change": -8.38,
+   "changePer": -0.22,
+   "high": 3863.27,
+   "indexClose": 3836.4,
+   "indexDay": "2025-09-23T00:00:00",
+   "indexOpen": 3844.78,
+   "low": 3835.65
+  },
+  {
+   "change": 66.31,
+   "changePer": 1.73,
+   "high": 3902.71,
+   "indexClose": 3902.71,
+   "indexDay": "2025-09-24T00:00:00",
+   "indexOpen": 3836.4,
+   "low": 3836.4
+  },
+  {
+   "change": 4.99,
+   "changePer": 0.13,
+   "high": 3921.65,
+   "indexClose": 3907.7,
+   "indexDay": "2025-09-25T00:00:00",
+   "indexOpen": 3902.71,
+   "low": 3902.71
+  },
+  {
+   "change": 36.97,
+   "changePer": 0.95,
+   "high": 3944.67,
+   "indexClose": 3944.67,
+   "indexDay": "2025-09-28T00:00:00",
+   "indexOpen": 3907.7,
+   "low": 3907.7
+  },
+  {
+   "change": 28.57,
+   "changePer": 0.72,
+   "high": 3974.19,
+   "indexClose": 3973.24,
+   "indexDay": "2025-09-29T00:00:00",
+   "indexOpen": 3944.67,
+   "low": 3944.67
+  },
+  {
+   "change": 26.63,
+   "changePer": 0.67,
+   "high": 4008.87,
+   "indexClose": 3999.87,
+   "indexDay": "2025-09-30T00:00:00",
+   "indexOpen": 3973.24,
+   "low": 3973.24
+  },
+  {
+   "change": -0.22,
+   "changePer": -0.01,
+   "high": 4025.82,
+   "indexClose": 3999.65,
+   "indexDay": "2025-10-01T00:00:00",
+   "indexOpen": 3999.87,
+   "low": 3991.87
+  },
+  {
+   "change": 25.61,
+   "changePer": 0.64,
+   "high": 4026.69,
+   "indexClose": 4025.26,
+   "indexDay": "2025-10-02T00:00:00",
+   "indexOpen": 3999.65,
+   "low": 3992.57
+  },
+  {
+   "change": 40.39,
+   "changePer": 1,
+   "high": 4073.43,
+   "indexClose": 4065.65,
+   "indexDay": "2025-10-05T00:00:00",
+   "indexOpen": 4025.26,
+   "low": 4025.26
+  },
+  {
+   "change": 10.67,
+   "changePer": 0.26,
+   "high": 4091.53,
+   "indexClose": 4076.32,
+   "indexDay": "2025-10-06T00:00:00",
+   "indexOpen": 4065.65,
+   "low": 4064.6
+  },
+  {
+   "change": -3.65,
+   "changePer": -0.09,
+   "high": 4092.11,
+   "indexClose": 4072.67,
+   "indexDay": "2025-10-07T00:00:00",
+   "indexOpen": 4076.32,
+   "low": 4070.09
+  },
+  {
+   "change": 23.33,
+   "changePer": 0.57,
+   "high": 4098.7,
+   "indexClose": 4096,
+   "indexDay": "2025-10-08T00:00:00",
+   "indexOpen": 4072.67,
+   "low": 4067.69
+  },
+  {
+   "change": 6.81,
+   "changePer": 0.17,
+   "high": 4110.61,
+   "indexClose": 4102.81,
+   "indexDay": "2025-10-12T00:00:00",
+   "indexOpen": 4096,
+   "low": 4080.62
+  },
+  {
+   "change": 26.16,
+   "changePer": 0.64,
+   "high": 4143.77,
+   "indexClose": 4128.97,
+   "indexDay": "2025-10-13T00:00:00",
+   "indexOpen": 4102.81,
+   "low": 4091.68
+  },
+  {
+   "change": 3.07,
+   "changePer": 0.07,
+   "high": 4161.81,
+   "indexClose": 4132.04,
+   "indexDay": "2025-10-14T00:00:00",
+   "indexOpen": 4128.97,
+   "low": 4128.97
+  },
+  {
+   "change": 23.92,
+   "changePer": 0.58,
+   "high": 4160.55,
+   "indexClose": 4155.96,
+   "indexDay": "2025-10-15T00:00:00",
+   "indexOpen": 4132.04,
+   "low": 4123.66
+  },
+  {
+   "change": 45.63,
+   "changePer": 1.1,
+   "high": 4210.98,
+   "indexClose": 4201.59,
+   "indexDay": "2025-10-16T00:00:00",
+   "indexOpen": 4155.96,
+   "low": 4155.96
+  },
+  {
+   "change": 66.12,
+   "changePer": 1.57,
+   "high": 4273.92,
+   "indexClose": 4267.71,
+   "indexDay": "2025-10-19T00:00:00",
+   "indexOpen": 4201.59,
+   "low": 4201.59
+  },
+  {
+   "change": 1.99,
+   "changePer": 0.05,
+   "high": 4284.87,
+   "indexClose": 4269.7,
+   "indexDay": "2025-10-20T00:00:00",
+   "indexOpen": 4267.71,
+   "low": 4267.71
+  },
+  {
+   "change": -2.74,
+   "changePer": -0.06,
+   "high": 4276.59,
+   "indexClose": 4266.96,
+   "indexDay": "2025-10-21T00:00:00",
+   "indexOpen": 4269.7,
+   "low": 4255.55
+  },
+  {
+   "change": 17.3,
+   "changePer": 0.41,
+   "high": 4290.5,
+   "indexClose": 4284.26,
+   "indexDay": "2025-10-22T00:00:00",
+   "indexOpen": 4266.96,
+   "low": 4256.96
+  },
+  {
+   "change": 13.23,
+   "changePer": 0.31,
+   "high": 4317.86,
+   "indexClose": 4297.49,
+   "indexDay": "2025-10-23T00:00:00",
+   "indexOpen": 4284.26,
+   "low": 4284.26
+  },
+  {
+   "change": 49.79,
+   "changePer": 1.16,
+   "high": 4355.17,
+   "indexClose": 4347.28,
+   "indexDay": "2025-10-26T00:00:00",
+   "indexOpen": 4297.49,
+   "low": 4297.49
+  },
+  {
+   "change": -4.62,
+   "changePer": -0.11,
+   "high": 4365.68,
+   "indexClose": 4342.66,
+   "indexDay": "2025-10-27T00:00:00",
+   "indexOpen": 4347.28,
+   "low": 4339.64
+  },
+  {
+   "change": -17.28,
+   "changePer": -0.4,
+   "high": 4362.6,
+   "indexClose": 4325.38,
+   "indexDay": "2025-10-28T00:00:00",
+   "indexOpen": 4342.66,
+   "low": 4306.15
+  },
+  {
+   "change": -7.13,
+   "changePer": -0.16,
+   "high": 4329.45,
+   "indexClose": 4318.25,
+   "indexDay": "2025-10-29T00:00:00",
+   "indexOpen": 4325.38,
+   "low": 4312.54
+  },
+  {
+   "change": 16.73,
+   "changePer": 0.39,
+   "high": 4364.5,
+   "indexClose": 4334.98,
+   "indexDay": "2025-10-30T00:00:00",
+   "indexOpen": 4318.25,
+   "low": 4318.25
+  },
+  {
+   "change": -15.48,
+   "changePer": -0.36,
+   "high": 4355.76,
+   "indexClose": 4319.5,
+   "indexDay": "2025-11-02T00:00:00",
+   "indexOpen": 4334.98,
+   "low": 4304.6
+  },
+  {
+   "change": 17.1,
+   "changePer": 0.4,
+   "high": 4339.1,
+   "indexClose": 4336.6,
+   "indexDay": "2025-11-03T00:00:00",
+   "indexOpen": 4319.5,
+   "low": 4311.21
+  },
+  {
+   "change": 13.07,
+   "changePer": 0.3,
+   "high": 4367.53,
+   "indexClose": 4349.67,
+   "indexDay": "2025-11-04T00:00:00",
+   "indexOpen": 4336.6,
+   "low": 4336.6
+  },
+  {
+   "change": -12.6,
+   "changePer": -0.29,
+   "high": 4376.52,
+   "indexClose": 4337.07,
+   "indexDay": "2025-11-05T00:00:00",
+   "indexOpen": 4349.67,
+   "low": 4310.9
+  },
+  {
+   "change": 32.05,
+   "changePer": 0.74,
+   "high": 4377.76,
+   "indexClose": 4369.12,
+   "indexDay": "2025-11-06T00:00:00",
+   "indexOpen": 4337.07,
+   "low": 4336.74
+  },
+  {
+   "change": 46.28,
+   "changePer": 1.06,
+   "high": 4417.79,
+   "indexClose": 4415.4,
+   "indexDay": "2025-11-09T00:00:00",
+   "indexOpen": 4369.12,
+   "low": 4369.12
+  },
+  {
+   "change": -0.49,
+   "changePer": -0.01,
+   "high": 4437.1,
+   "indexClose": 4414.91,
+   "indexDay": "2025-11-10T00:00:00",
+   "indexOpen": 4415.4,
+   "low": 4397.71
+  },
+  {
+   "change": 0.46,
+   "changePer": 0.01,
+   "high": 4437.15,
+   "indexClose": 4415.37,
+   "indexDay": "2025-11-11T00:00:00",
+   "indexOpen": 4414.91,
+   "low": 4404.72
+  },
+  {
+   "change": 5.77,
+   "changePer": 0.13,
+   "high": 4449.04,
+   "indexClose": 4421.14,
+   "indexDay": "2025-11-12T00:00:00",
+   "indexOpen": 4415.37,
+   "low": 4415.37
+  },
+  {
+   "change": -1.1,
+   "changePer": -0.02,
+   "high": 4443.29,
+   "indexClose": 4420.04,
+   "indexDay": "2025-11-13T00:00:00",
+   "indexOpen": 4421.14,
+   "low": 4410.58
+  },
+  {
+   "change": 72.79,
+   "changePer": 1.65,
+   "high": 4503.58,
+   "indexClose": 4492.83,
+   "indexDay": "2025-11-16T00:00:00",
+   "indexOpen": 4420.04,
+   "low": 4420.04
+  },
+  {
+   "change": 10.35,
+   "changePer": 0.23,
+   "high": 4538.17,
+   "indexClose": 4503.18,
+   "indexDay": "2025-11-17T00:00:00",
+   "indexOpen": 4492.83,
+   "low": 4489.58
+  },
+  {
+   "change": -45.97,
+   "changePer": -1.02,
+   "high": 4520.19,
+   "indexClose": 4457.21,
+   "indexDay": "2025-11-18T00:00:00",
+   "indexOpen": 4503.18,
+   "low": 4457.21
+  },
+  {
+   "change": 27.53,
+   "changePer": 0.62,
+   "high": 4485.16,
+   "indexClose": 4484.74,
+   "indexDay": "2025-11-19T00:00:00",
+   "indexOpen": 4457.21,
+   "low": 4452.73
+  },
+  {
+   "change": 9.8,
+   "changePer": 0.22,
+   "high": 4520.74,
+   "indexClose": 4494.54,
+   "indexDay": "2025-11-20T00:00:00",
+   "indexOpen": 4484.74,
+   "low": 4484.74
+  },
+  {
+   "change": 39.48,
+   "changePer": 0.88,
+   "high": 4559.04,
+   "indexClose": 4534.02,
+   "indexDay": "2025-11-23T00:00:00",
+   "indexOpen": 4494.54,
+   "low": 4494.54
+  },
+  {
+   "change": -41.44,
+   "changePer": -0.91,
+   "high": 4552.82,
+   "indexClose": 4492.58,
+   "indexDay": "2025-11-24T00:00:00",
+   "indexOpen": 4534.02,
+   "low": 4492.58
+  },
+  {
+   "change": -57.34,
+   "changePer": -1.28,
+   "high": 4506.32,
+   "indexClose": 4435.24,
+   "indexDay": "2025-11-25T00:00:00",
+   "indexOpen": 4492.58,
+   "low": 4432.62
+  },
+  {
+   "change": -24.1,
+   "changePer": -0.54,
+   "high": 4468.19,
+   "indexClose": 4411.14,
+   "indexDay": "2025-11-26T00:00:00",
+   "indexOpen": 4435.24,
+   "low": 4407.43
+  },
+  {
+   "change": 37.17,
+   "changePer": 0.84,
+   "high": 4452.85,
+   "indexClose": 4448.31,
+   "indexDay": "2025-11-27T00:00:00",
+   "indexOpen": 4411.14,
+   "low": 4411.14
+  },
+  {
+   "change": 46.07,
+   "changePer": 1.04,
+   "high": 4496.61,
+   "indexClose": 4494.38,
+   "indexDay": "2025-11-30T00:00:00",
+   "indexOpen": 4448.31,
+   "low": 4448.31
+  },
+  {
+   "change": -0.11,
+   "changePer": 0,
+   "high": 4528.8,
+   "indexClose": 4494.27,
+   "indexDay": "2025-12-01T00:00:00",
+   "indexOpen": 4494.38,
+   "low": 4485.13
+  },
+  {
+   "change": 11.44,
+   "changePer": 0.25,
+   "high": 4529.81,
+   "indexClose": 4505.71,
+   "indexDay": "2025-12-02T00:00:00",
+   "indexOpen": 4494.27,
+   "low": 4494.27
+  },
+  {
+   "change": 14.58,
+   "changePer": 0.32,
+   "high": 4533.33,
+   "indexClose": 4520.29,
+   "indexDay": "2025-12-03T00:00:00",
+   "indexOpen": 4505.71,
+   "low": 4505.71
+  },
+  {
+   "change": -3.55,
+   "changePer": -0.08,
+   "high": 4544.74,
+   "indexClose": 4516.74,
+   "indexDay": "2025-12-04T00:00:00",
+   "indexOpen": 4520.29,
+   "low": 4513.01
+  },
+  {
+   "change": 72.43,
+   "changePer": 1.6,
+   "high": 4590.16,
+   "indexClose": 4589.17,
+   "indexDay": "2025-12-07T00:00:00",
+   "indexOpen": 4516.74,
+   "low": 4516.74
+  },
+  {
+   "change": 5.33,
+   "changePer": 0.12,
+   "high": 4616.41,
+   "indexClose": 4594.5,
+   "indexDay": "2025-12-08T00:00:00",
+   "indexOpen": 4589.17,
+   "low": 4589.17
+  },
+  {
+   "change": 15.07,
+   "changePer": 0.33,
+   "high": 4619.08,
+   "indexClose": 4609.57,
+   "indexDay": "2025-12-09T00:00:00",
+   "indexOpen": 4594.5,
+   "low": 4593.57
+  },
+  {
+   "change": 15.17,
+   "changePer": 0.33,
+   "high": 4635.36,
+   "indexClose": 4624.74,
+   "indexDay": "2025-12-10T00:00:00",
+   "indexOpen": 4609.57,
+   "low": 4609.57
+  },
+  {
+   "change": -0.8,
+   "changePer": -0.02,
+   "high": 4650.01,
+   "indexClose": 4623.94,
+   "indexDay": "2025-12-11T00:00:00",
+   "indexOpen": 4624.74,
+   "low": 4622.35
+  },
+  {
+   "change": 26.15,
+   "changePer": 0.57,
+   "high": 4662.06,
+   "indexClose": 4650.09,
+   "indexDay": "2025-12-14T00:00:00",
+   "indexOpen": 4623.94,
+   "low": 4623.94
+  },
+  {
+   "change": -5.89,
+   "changePer": -0.13,
+   "high": 4673.17,
+   "indexClose": 4644.2,
+   "indexDay": "2025-12-15T00:00:00",
+   "indexOpen": 4650.09,
+   "low": 4642.68
+  },
+  {
+   "change": -47.79,
+   "changePer": -1.03,
+   "high": 4654.91,
+   "indexClose": 4596.41,
+   "indexDay": "2025-12-16T00:00:00",
+   "indexOpen": 4644.2,
+   "low": 4592.65
+  },
+  {
+   "change": -22,
+   "changePer": -0.48,
+   "high": 4604.41,
+   "indexClose": 4574.41,
+   "indexDay": "2025-12-17T00:00:00",
+   "indexOpen": 4596.41,
+   "low": 4574.41
+  },
+  {
+   "change": -23.18,
+   "changePer": -0.51,
+   "high": 4596.75,
+   "indexClose": 4551.23,
+   "indexDay": "2025-12-18T00:00:00",
+   "indexOpen": 4574.41,
+   "low": 4551.23
+  },
+  {
+   "change": 13.43,
+   "changePer": 0.3,
+   "high": 4574.06,
+   "indexClose": 4564.66,
+   "indexDay": "2025-12-21T00:00:00",
+   "indexOpen": 4551.23,
+   "low": 4551.23
+  },
+  {
+   "change": 11.65,
+   "changePer": 0.26,
+   "high": 4599.97,
+   "indexClose": 4576.31,
+   "indexDay": "2025-12-22T00:00:00",
+   "indexOpen": 4564.66,
+   "low": 4564.66
+  },
+  {
+   "change": 37.98,
+   "changePer": 0.83,
+   "high": 4619.23,
+   "indexClose": 4614.29,
+   "indexDay": "2025-12-23T00:00:00",
+   "indexOpen": 4576.31,
+   "low": 4559.94
+  },
+  {
+   "change": -8.78,
+   "changePer": -0.19,
+   "high": 4632.26,
+   "indexClose": 4605.51,
+   "indexDay": "2025-12-24T00:00:00",
+   "indexOpen": 4614.29,
+   "low": 4605.32
+  },
+  {
+   "change": -13.39,
+   "changePer": -0.29,
+   "high": 4611.32,
+   "indexClose": 4592.12,
+   "indexDay": "2025-12-25T00:00:00",
+   "indexOpen": 4605.51,
+   "low": 4591.35
+  },
+  {
+   "change": 30.31,
+   "changePer": 0.66,
+   "high": 4627.8,
+   "indexClose": 4622.43,
+   "indexDay": "2025-12-28T00:00:00",
+   "indexOpen": 4592.12,
+   "low": 4592.12
+  },
+  {
+   "change": 7.89,
+   "changePer": 0.17,
+   "high": 4634.13,
+   "indexClose": 4630.32,
+   "indexDay": "2025-12-29T00:00:00",
+   "indexOpen": 4622.43,
+   "low": 4618.22
+  },
+  {
+   "change": -0.25,
+   "changePer": -0.01,
+   "high": 4641.93,
+   "indexClose": 4630.07,
+   "indexDay": "2025-12-30T00:00:00",
+   "indexOpen": 4630.32,
+   "low": 4625.45
+  },
+  {
+   "change": 28.06,
+   "changePer": 0.61,
+   "high": 4671.14,
+   "indexClose": 4658.13,
+   "indexDay": "2025-12-31T00:00:00",
+   "indexOpen": 4630.07,
+   "low": 4630.07
+  },
+  {
+   "change": -72.87,
+   "changePer": -1.56,
+   "high": 4670,
+   "indexClose": 4585.26,
+   "indexDay": "2026-01-04T00:00:00",
+   "indexOpen": 4658.13,
+   "low": 4585.26
+  },
+  {
+   "change": -52.4,
+   "changePer": -1.14,
+   "high": 4603.02,
+   "indexClose": 4532.86,
+   "indexDay": "2026-01-05T00:00:00",
+   "indexOpen": 4585.26,
+   "low": 4522.83
+  },
+  {
+   "change": 65.95,
+   "changePer": 1.45,
+   "high": 4603.5,
+   "indexClose": 4598.81,
+   "indexDay": "2026-01-06T00:00:00",
+   "indexOpen": 4532.86,
+   "low": 4532.86
+  },
+  {
+   "change": 4.13,
+   "changePer": 0.09,
+   "high": 4624.56,
+   "indexClose": 4602.94,
+   "indexDay": "2026-01-08T00:00:00",
+   "indexOpen": 4598.81,
+   "low": 4598.81
+  },
+  {
+   "change": 70.02,
+   "changePer": 1.52,
+   "high": 4679.54,
+   "indexClose": 4672.96,
+   "indexDay": "2026-01-11T00:00:00",
+   "indexOpen": 4602.94,
+   "low": 4602.94
+  },
+  {
+   "change": -25.52,
+   "changePer": -0.55,
+   "high": 4700.5,
+   "indexClose": 4647.44,
+   "indexDay": "2026-01-12T00:00:00",
+   "indexOpen": 4672.96,
+   "low": 4634.68
+  },
+  {
+   "change": -55.34,
+   "changePer": -1.19,
+   "high": 4676.45,
+   "indexClose": 4592.1,
+   "indexDay": "2026-01-13T00:00:00",
+   "indexOpen": 4647.44,
+   "low": 4592.1
+  },
+  {
+   "change": -66.31,
+   "changePer": -1.44,
+   "high": 4593.61,
+   "indexClose": 4525.79,
+   "indexDay": "2026-01-14T00:00:00",
+   "indexOpen": 4592.1,
+   "low": 4478.91
+  },
+  {
+   "change": -28.47,
+   "changePer": -0.63,
+   "high": 4570.06,
+   "indexClose": 4497.32,
+   "indexDay": "2026-01-15T00:00:00",
+   "indexOpen": 4525.79,
+   "low": 4484.5
+  },
+  {
+   "change": 60.5,
+   "changePer": 1.35,
+   "high": 4566.08,
+   "indexClose": 4557.82,
+   "indexDay": "2026-01-18T00:00:00",
+   "indexOpen": 4497.32,
+   "low": 4497.32
+  },
+  {
+   "change": 97.52,
+   "changePer": 2.14,
+   "high": 4656.19,
+   "indexClose": 4655.34,
+   "indexDay": "2026-01-19T00:00:00",
+   "indexOpen": 4557.82,
+   "low": 4557.82
+  },
+  {
+   "change": 65.14,
+   "changePer": 1.4,
+   "high": 4751.83,
+   "indexClose": 4720.48,
+   "indexDay": "2026-01-20T00:00:00",
+   "indexOpen": 4655.34,
+   "low": 4655.34
+  },
+  {
+   "change": 54.37,
+   "changePer": 1.15,
+   "high": 4777.66,
+   "indexClose": 4774.85,
+   "indexDay": "2026-01-21T00:00:00",
+   "indexOpen": 4720.48,
+   "low": 4703.98
+  },
+  {
+   "change": 68.15,
+   "changePer": 1.43,
+   "high": 4858.02,
+   "indexClose": 4843,
+   "indexDay": "2026-01-22T00:00:00",
+   "indexOpen": 4774.85,
+   "low": 4774.85
+  },
+  {
+   "change": 17.51,
+   "changePer": 0.36,
+   "high": 4897.34,
+   "indexClose": 4860.51,
+   "indexDay": "2026-01-25T00:00:00",
+   "indexOpen": 4843,
+   "low": 4843
+  },
+  {
+   "change": 37.02,
+   "changePer": 0.76,
+   "high": 4901.16,
+   "indexClose": 4897.53,
+   "indexDay": "2026-01-26T00:00:00",
+   "indexOpen": 4860.51,
+   "low": 4860.51
+  },
+  {
+   "change": 6.57,
+   "changePer": 0.13,
+   "high": 4929.62,
+   "indexClose": 4904.1,
+   "indexDay": "2026-01-27T00:00:00",
+   "indexOpen": 4897.53,
+   "low": 4897.53
+  },
+  {
+   "change": -69.8,
+   "changePer": -1.42,
+   "high": 4951.17,
+   "indexClose": 4834.3,
+   "indexDay": "2026-01-28T00:00:00",
+   "indexOpen": 4904.1,
+   "low": 4812.35
+  },
+  {
+   "change": 33.48,
+   "changePer": 0.69,
+   "high": 4867.78,
+   "indexClose": 4867.78,
+   "indexDay": "2026-02-01T00:00:00",
+   "indexOpen": 4834.3,
+   "low": 4806.06
+  },
+  {
+   "change": 32.68,
+   "changePer": 0.67,
+   "high": 4900.46,
+   "indexClose": 4900.46,
+   "indexDay": "2026-02-02T00:00:00",
+   "indexOpen": 4867.78,
+   "low": 4837.29
+  },
+  {
+   "change": 103.49,
+   "changePer": 2.11,
+   "high": 5005.76,
+   "indexClose": 5003.95,
+   "indexDay": "2026-02-03T00:00:00",
+   "indexOpen": 4900.46,
+   "low": 4900.46
+  },
+  {
+   "change": 7.94,
+   "changePer": 0.16,
+   "high": 5029.56,
+   "indexClose": 5011.89,
+   "indexDay": "2026-02-04T00:00:00",
+   "indexOpen": 5003.95,
+   "low": 5003.95
+  },
+  {
+   "change": 2,
+   "changePer": 0.04,
+   "high": 5026.97,
+   "indexClose": 5013.89,
+   "indexDay": "2026-02-05T00:00:00",
+   "indexOpen": 5011.89,
+   "low": 4960.88
+  },
+  {
+   "change": 107.78,
+   "changePer": 2.15,
+   "high": 5129.86,
+   "indexClose": 5121.67,
+   "indexDay": "2026-02-08T00:00:00",
+   "indexOpen": 5013.89,
+   "low": 5013.89
+  },
+  {
+   "change": 12.72,
+   "changePer": 0.25,
+   "high": 5153.75,
+   "indexClose": 5134.39,
+   "indexDay": "2026-02-09T00:00:00",
+   "indexOpen": 5121.67,
+   "low": 5111.9
+  },
+  {
+   "change": 25.26,
+   "changePer": 0.49,
+   "high": 5161.98,
+   "indexClose": 5159.65,
+   "indexDay": "2026-02-10T00:00:00",
+   "indexOpen": 5134.39,
+   "low": 5132.59
+  },
+  {
+   "change": -51.29,
+   "changePer": -0.99,
+   "high": 5169.46,
+   "indexClose": 5108.36,
+   "indexDay": "2026-02-11T00:00:00",
+   "indexOpen": 5159.65,
+   "low": 5099.92
+  },
+  {
+   "change": 39.68,
+   "changePer": 0.78,
+   "high": 5150.36,
+   "indexClose": 5148.04,
+   "indexDay": "2026-02-12T00:00:00",
+   "indexOpen": 5108.36,
+   "low": 5088.48
+  },
+  {
+   "change": 144.14,
+   "changePer": 2.8,
+   "high": 5292.18,
+   "indexClose": 5292.18,
+   "indexDay": "2026-02-15T00:00:00",
+   "indexOpen": 5148.04,
+   "low": 5148.04
+  },
+  {
+   "change": -47.12,
+   "changePer": -0.89,
+   "high": 5337.13,
+   "indexClose": 5245.06,
+   "indexDay": "2026-02-16T00:00:00",
+   "indexOpen": 5292.18,
+   "low": 5239.48
+  },
+  {
+   "change": 67.6,
+   "changePer": 1.29,
+   "high": 5323.38,
+   "indexClose": 5312.66,
+   "indexDay": "2026-02-17T00:00:00",
+   "indexOpen": 5245.06,
+   "low": 5230.3
+  },
+  {
+   "change": 41.92,
+   "changePer": 0.79,
+   "high": 5376.57,
+   "indexClose": 5354.58,
+   "indexDay": "2026-02-18T00:00:00",
+   "indexOpen": 5312.66,
+   "low": 5312.66
+  },
+  {
+   "change": -146.19,
+   "changePer": -2.73,
+   "high": 5372.37,
+   "indexClose": 5208.39,
+   "indexDay": "2026-02-19T00:00:00",
+   "indexOpen": 5354.58,
+   "low": 5204.77
+  },
+  {
+   "change": -101.32,
+   "changePer": -1.95,
+   "high": 5234.83,
+   "indexClose": 5107.07,
+   "indexDay": "2026-02-22T00:00:00",
+   "indexOpen": 5208.39,
+   "low": 5072.33
+  },
+  {
+   "change": 140.64,
+   "changePer": 2.75,
+   "high": 5247.71,
+   "indexClose": 5247.71,
+   "indexDay": "2026-02-23T00:00:00",
+   "indexOpen": 5107.07,
+   "low": 5106.63
+  },
+  {
+   "change": -29.82,
+   "changePer": -0.57,
+   "high": 5274.73,
+   "indexClose": 5217.89,
+   "indexDay": "2026-02-24T00:00:00",
+   "indexOpen": 5247.71,
+   "low": 5205.87
+  },
+  {
+   "change": -108.98,
+   "changePer": -2.09,
+   "high": 5228.86,
+   "indexClose": 5108.91,
+   "indexDay": "2026-02-25T00:00:00",
+   "indexOpen": 5217.89,
+   "low": 5052.62
+  },
+  {
+   "change": 46.54,
+   "changePer": 0.91,
+   "high": 5158.02,
+   "indexClose": 5155.45,
+   "indexDay": "2026-02-26T00:00:00",
+   "indexOpen": 5108.91,
+   "low": 5084.5
+  },
+  {
+   "change": -108.94,
+   "changePer": -2.11,
+   "high": 5155.45,
+   "indexClose": 5046.51,
+   "indexDay": "2026-03-01T00:00:00",
+   "indexOpen": 5155.45,
+   "low": 4817.28
+  },
+  {
+   "change": 10.46,
+   "changePer": 0.21,
+   "high": 5099.53,
+   "indexClose": 5056.97,
+   "indexDay": "2026-03-02T00:00:00",
+   "indexOpen": 5046.51,
+   "low": 5031.36
+  },
+  {
+   "change": 37.9,
+   "changePer": 0.75,
+   "high": 5108.19,
+   "indexClose": 5094.87,
+   "indexDay": "2026-03-03T00:00:00",
+   "indexOpen": 5056.97,
+   "low": 5009.46
+  },
+  {
+   "change": 19.98,
+   "changePer": 0.39,
+   "high": 5159.44,
+   "indexClose": 5114.85,
+   "indexDay": "2026-03-04T00:00:00",
+   "indexOpen": 5094.87,
+   "low": 5056.42
+  },
+  {
+   "change": 41.58,
+   "changePer": 0.81,
+   "high": 5172.53,
+   "indexClose": 5156.43,
+   "indexDay": "2026-03-05T00:00:00",
+   "indexOpen": 5114.85,
+   "low": 5114.85
+  },
+  {
+   "change": 104.59,
+   "changePer": 2.03,
+   "high": 5288.35,
+   "indexClose": 5261.02,
+   "indexDay": "2026-03-08T00:00:00",
+   "indexOpen": 5156.43,
+   "low": 5156.43
+  },
+  {
+   "change": -1.5,
+   "changePer": -0.03,
+   "high": 5331.35,
+   "indexClose": 5259.52,
+   "indexDay": "2026-03-09T00:00:00",
+   "indexOpen": 5261.02,
+   "low": 5222.55
+  },
+  {
+   "change": 27.39,
+   "changePer": 0.52,
+   "high": 5286.91,
+   "indexClose": 5286.91,
+   "indexDay": "2026-03-10T00:00:00",
+   "indexOpen": 5259.52,
+   "low": 5244
+  },
+  {
+   "change": 56.21,
+   "changePer": 1.06,
+   "high": 5349.89,
+   "indexClose": 5343.12,
+   "indexDay": "2026-03-11T00:00:00",
+   "indexOpen": 5286.91,
+   "low": 5286.91
+  },
+  {
+   "change": 1.39,
+   "changePer": 0.03,
+   "high": 5405.83,
+   "indexClose": 5344.51,
+   "indexDay": "2026-03-12T00:00:00",
+   "indexOpen": 5343.12,
+   "low": 5336.98
+  },
+  {
+   "change": -40.87,
+   "changePer": -0.76,
+   "high": 5369.45,
+   "indexClose": 5303.64,
+   "indexDay": "2026-03-15T00:00:00",
+   "indexOpen": 5344.51,
+   "low": 5296.66
+  },
+  {
+   "change": -94.88,
+   "changePer": -1.79,
+   "high": 5325.39,
+   "indexClose": 5208.76,
+   "indexDay": "2026-03-16T00:00:00",
+   "indexOpen": 5303.64,
+   "low": 5194.49
+  },
+  {
+   "change": 42.34,
+   "changePer": 0.81,
+   "high": 5274.46,
+   "indexClose": 5251.1,
+   "indexDay": "2026-03-17T00:00:00",
+   "indexOpen": 5208.76,
+   "low": 5208.76
+  },
+  {
+   "change": 49.82,
+   "changePer": 0.95,
+   "high": 5300.92,
+   "indexClose": 5300.92,
+   "indexDay": "2026-03-18T00:00:00",
+   "indexOpen": 5251.1,
+   "low": 5251.1
+  },
+  {
+   "change": 49.62,
+   "changePer": 0.94,
+   "high": 5369.44,
+   "indexClose": 5350.54,
+   "indexDay": "2026-03-24T00:00:00",
+   "indexOpen": 5300.92,
+   "low": 5300.92
+  },
+  {
+   "change": -3.05,
+   "changePer": -0.06,
+   "high": 5377.14,
+   "indexClose": 5347.49,
+   "indexDay": "2026-03-25T00:00:00",
+   "indexOpen": 5350.54,
+   "low": 5337.19
+  },
+  {
+   "change": -52.1,
+   "changePer": -0.97,
+   "high": 5363.7,
+   "indexClose": 5295.39,
+   "indexDay": "2026-03-26T00:00:00",
+   "indexOpen": 5347.49,
+   "low": 5295.39
+  },
+  {
+   "change": -40.32,
+   "changePer": -0.76,
+   "high": 5311.45,
+   "indexClose": 5255.07,
+   "indexDay": "2026-03-29T00:00:00",
+   "indexOpen": 5295.39,
+   "low": 5221.54
+  },
+  {
+   "change": -72.18,
+   "changePer": -1.37,
+   "high": 5268.61,
+   "indexClose": 5182.89,
+   "indexDay": "2026-03-30T00:00:00",
+   "indexOpen": 5255.07,
+   "low": 5164.18
+  },
+  {
+   "change": 57.86,
+   "changePer": 1.12,
+   "high": 5240.75,
+   "indexClose": 5240.75,
+   "indexDay": "2026-03-31T00:00:00",
+   "indexOpen": 5182.89,
+   "low": 5174.3
+  },
+  {
+   "change": 60.92,
+   "changePer": 1.16,
+   "high": 5307.49,
+   "indexClose": 5301.67,
+   "indexDay": "2026-04-01T00:00:00",
+   "indexOpen": 5240.75,
+   "low": 5240.75
+  },
+  {
+   "change": 11.45,
+   "changePer": 0.22,
+   "high": 5340.26,
+   "indexClose": 5313.12,
+   "indexDay": "2026-04-02T00:00:00",
+   "indexOpen": 5301.67,
+   "low": 5286.57
+  },
+  {
+   "change": 54.41,
+   "changePer": 1.02,
+   "high": 5375.11,
+   "indexClose": 5367.53,
+   "indexDay": "2026-04-05T00:00:00",
+   "indexOpen": 5313.12,
+   "low": 5313.12
+  },
+  {
+   "change": 36.45,
+   "changePer": 0.68,
+   "high": 5422.96,
+   "indexClose": 5403.98,
+   "indexDay": "2026-04-06T00:00:00",
+   "indexOpen": 5367.53,
+   "low": 5367.53
+  },
+  {
+   "change": -35.77,
+   "changePer": -0.66,
+   "high": 5416.04,
+   "indexClose": 5368.21,
+   "indexDay": "2026-04-07T00:00:00",
+   "indexOpen": 5403.98,
+   "low": 5362.73
+  },
+  {
+   "change": 89.14,
+   "changePer": 1.66,
+   "high": 5460.69,
+   "indexClose": 5457.35,
+   "indexDay": "2026-04-08T00:00:00",
+   "indexOpen": 5368.21,
+   "low": 5368.21
+  },
+  {
+   "change": -1.36,
+   "changePer": -0.02,
+   "high": 5480.14,
+   "indexClose": 5455.99,
+   "indexDay": "2026-04-09T00:00:00",
+   "indexOpen": 5457.35,
+   "low": 5445.1
+  },
+  {
+   "change": 45.69,
+   "changePer": 0.84,
+   "high": 5510.59,
+   "indexClose": 5501.68,
+   "indexDay": "2026-04-14T00:00:00",
+   "indexOpen": 5455.99,
+   "low": 5455.99
+  },
+  {
+   "change": 69.87,
+   "changePer": 1.27,
+   "high": 5575.17,
+   "indexClose": 5571.55,
+   "indexDay": "2026-04-15T00:00:00",
+   "indexOpen": 5501.68,
+   "low": 5501.68
+  },
+  {
+   "change": 16.83,
+   "changePer": 0.3,
+   "high": 5634.26,
+   "indexClose": 5588.38,
+   "indexDay": "2026-04-16T00:00:00",
+   "indexOpen": 5571.55,
+   "low": 5570.41
+  },
+  {
+   "change": 35.81,
+   "changePer": 0.64,
+   "high": 5634.67,
+   "indexClose": 5624.19,
+   "indexDay": "2026-04-19T00:00:00",
+   "indexOpen": 5588.38,
+   "low": 5588.38
+  },
+  {
+   "change": -58.06,
+   "changePer": -1.03,
+   "high": 5624.19,
+   "indexClose": 5566.13,
+   "indexDay": "2026-04-20T00:00:00",
+   "indexOpen": 5624.19,
+   "low": 5553.14
+  },
+  {
+   "change": 43.13,
+   "changePer": 0.77,
+   "high": 5617.8,
+   "indexClose": 5609.26,
+   "indexDay": "2026-04-21T00:00:00",
+   "indexOpen": 5566.13,
+   "low": 5566.13
+  },
+  {
+   "change": 71.8,
+   "changePer": 1.28,
+   "high": 5694.37,
+   "indexClose": 5681.06,
+   "indexDay": "2026-04-22T00:00:00",
+   "indexOpen": 5609.26,
+   "low": 5609.26
+  },
+  {
+   "change": 15.94,
+   "changePer": 0.28,
+   "high": 5713.08,
+   "indexClose": 5697,
+   "indexDay": "2026-04-23T00:00:00",
+   "indexOpen": 5681.06,
+   "low": 5681.06
+  },
+  {
+   "change": 11.1,
+   "changePer": 0.19,
+   "high": 5742.63,
+   "indexClose": 5708.1,
+   "indexDay": "2026-04-26T00:00:00",
+   "indexOpen": 5697,
+   "low": 5694.66
+  },
+  {
+   "change": 35.59,
+   "changePer": 0.62,
+   "high": 5749.05,
+   "indexClose": 5743.69,
+   "indexDay": "2026-04-27T00:00:00",
+   "indexOpen": 5708.1,
+   "low": 5691.62
+  },
+  {
+   "change": -5.41,
+   "changePer": -0.09,
+   "high": 5763.41,
+   "indexClose": 5738.28,
+   "indexDay": "2026-04-28T00:00:00",
+   "indexOpen": 5743.69,
+   "low": 5735.79
+  },
+  {
+   "change": 22.99,
+   "changePer": 0.4,
+   "high": 5778.91,
+   "indexClose": 5761.27,
+   "indexDay": "2026-04-29T00:00:00",
+   "indexOpen": 5738.28,
+   "low": 5736.28
+  },
+  {
+   "change": -2.35,
+   "changePer": -0.04,
+   "high": 5812.69,
+   "indexClose": 5758.92,
+   "indexDay": "2026-04-30T00:00:00",
+   "indexOpen": 5761.27,
+   "low": 5748.26
+  },
+  {
+   "change": 94.29,
+   "changePer": 1.64,
+   "high": 5853.21,
+   "indexClose": 5853.21,
+   "indexDay": "2026-05-03T00:00:00",
+   "indexOpen": 5758.92,
+   "low": 5758.92
+  },
+  {
+   "change": -32.55,
+   "changePer": -0.56,
+   "high": 5873.31,
+   "indexClose": 5820.66,
+   "indexDay": "2026-05-04T00:00:00",
+   "indexOpen": 5853.21,
+   "low": 5795.12
+  },
+  {
+   "change": -1.69,
+   "changePer": -0.03,
+   "high": 5838.95,
+   "indexClose": 5818.97,
+   "indexDay": "2026-05-05T00:00:00",
+   "indexOpen": 5820.66,
+   "low": 5755.81
+  },
+  {
+   "change": 57.96,
+   "changePer": 1,
+   "high": 5904.31,
+   "indexClose": 5876.93,
+   "indexDay": "2026-05-06T00:00:00",
+   "indexOpen": 5818.97,
+   "low": 5818.97
+  },
+  {
+   "change": 101.62,
+   "changePer": 1.73,
+   "high": 5978.55,
+   "indexClose": 5978.55,
+   "indexDay": "2026-05-10T00:00:00",
+   "indexOpen": 5876.93,
+   "low": 5876.93
+  },
+  {
+   "change": 58.12,
+   "changePer": 0.97,
+   "high": 6036.67,
+   "indexClose": 6036.67,
+   "indexDay": "2026-05-11T00:00:00",
+   "indexOpen": 5978.55,
+   "low": 5978.55
+  },
+  {
+   "change": -4.95,
+   "changePer": -0.08,
+   "high": 6056.32,
+   "indexClose": 6031.72,
+   "indexDay": "2026-05-12T00:00:00",
+   "indexOpen": 6036.67,
+   "low": 6007.38
+  },
+  {
+   "change": -10.27,
+   "changePer": -0.17,
+   "high": 6053.17,
+   "indexClose": 6021.45,
+   "indexDay": "2026-05-13T00:00:00",
+   "indexOpen": 6031.72,
+   "low": 5995.87
+  },
+  {
+   "change": 0.37,
+   "changePer": 0.01,
+   "high": 6048.37,
+   "indexClose": 6021.82,
+   "indexDay": "2026-05-14T00:00:00",
+   "indexOpen": 6021.45,
+   "low": 5997.82
+  },
+  {
+   "change": -84.14,
+   "changePer": -1.4,
+   "high": 6031.42,
+   "indexClose": 5937.68,
+   "indexDay": "2026-05-17T00:00:00",
+   "indexOpen": 6021.82,
+   "low": 5933.36
+  },
+  {
+   "change": -78.13,
+   "changePer": -1.32,
+   "high": 5937.87,
+   "indexClose": 5859.55,
+   "indexDay": "2026-05-18T00:00:00",
+   "indexOpen": 5937.68,
+   "low": 5859.55
+  },
+  {
+   "change": 44.76,
+   "changePer": 0.76,
+   "high": 5910.87,
+   "indexClose": 5904.31,
+   "indexDay": "2026-05-19T00:00:00",
+   "indexOpen": 5859.55,
+   "low": 5859.55
+  },
+  {
+   "change": -119.68,
+   "changePer": -2.03,
+   "high": 5929.16,
+   "indexClose": 5784.63,
+   "indexDay": "2026-05-20T00:00:00",
+   "indexOpen": 5904.31,
+   "low": 5784.63
+  },
+  {
+   "change": 15.39,
+   "changePer": 0.27,
+   "high": 5809.24,
+   "indexClose": 5800.02,
+   "indexDay": "2026-05-21T00:00:00",
+   "indexOpen": 5784.63,
+   "low": 5761.06
+  },
+  {
+   "change": 71.99,
+   "changePer": 1.24,
+   "high": 5885.46,
+   "indexClose": 5872.01,
+   "indexDay": "2026-05-24T00:00:00",
+   "indexOpen": 5800.02,
+   "low": 5800.02
+  },
+  {
+   "change": 11.12,
+   "changePer": 0.19,
+   "high": 5889.81,
+   "indexClose": 5883.13,
+   "indexDay": "2026-05-25T00:00:00",
+   "indexOpen": 5872.01,
+   "low": 5849.13
+  },
+  {
+   "change": 109.56,
+   "changePer": 1.86,
+   "high": 5992.69,
+   "indexClose": 5992.69,
+   "indexDay": "2026-06-01T00:00:00",
+   "indexOpen": 5883.13,
+   "low": 5883.13
+  },
+  {
+   "change": 61.65,
+   "changePer": 1.03,
+   "high": 6057.36,
+   "indexClose": 6054.34,
+   "indexDay": "2026-06-02T00:00:00",
+   "indexOpen": 5992.69,
+   "low": 5992.69
+  },
+  {
+   "change": 2.91,
+   "changePer": 0.05,
+   "high": 6118.6,
+   "indexClose": 6057.25,
+   "indexDay": "2026-06-03T00:00:00",
+   "indexOpen": 6054.34,
+   "low": 6019.48
+  },
+  {
+   "change": 29.93,
+   "changePer": 0.49,
+   "high": 6101.14,
+   "indexClose": 6087.18,
+   "indexDay": "2026-06-04T00:00:00",
+   "indexOpen": 6057.25,
+   "low": 6057.25
+  },
+  {
+   "change": -57.8,
+   "changePer": -0.95,
+   "high": 6087.18,
+   "indexClose": 6029.38,
+   "indexDay": "2026-06-07T00:00:00",
+   "indexOpen": 6087.18,
+   "low": 6014.23
+  },
+  {
+   "change": 36.26,
+   "changePer": 0.6,
+   "high": 6090.11,
+   "indexClose": 6065.64,
+   "indexDay": "2026-06-08T00:00:00",
+   "indexOpen": 6029.38,
+   "low": 5993.74
+  },
+  {
+   "change": 29.88,
+   "changePer": 0.49,
+   "high": 6129.02,
+   "indexClose": 6095.52,
+   "indexDay": "2026-06-09T00:00:00",
+   "indexOpen": 6065.64,
+   "low": 6065.64
+  },
+  {
+   "change": -98.82,
+   "changePer": -1.62,
+   "high": 6150.67,
+   "indexClose": 5996.7,
+   "indexDay": "2026-06-10T00:00:00",
+   "indexOpen": 6095.52,
+   "low": 5996.7
+  },
+  {
+   "change": -91.04,
+   "changePer": -1.52,
+   "high": 6015.89,
+   "indexClose": 5905.66,
+   "indexDay": "2026-06-11T00:00:00",
+   "indexOpen": 5996.7,
+   "low": 5888.39
+  },
+  {
+   "change": 145.18,
+   "changePer": 2.46,
+   "high": 6067.63,
+   "indexClose": 6050.84,
+   "indexDay": "2026-06-14T00:00:00",
+   "indexOpen": 5905.66,
+   "low": 5905.66
+  },
+  {
+   "change": 14.75,
+   "changePer": 0.24,
+   "high": 6104.31,
+   "indexClose": 6065.59,
+   "indexDay": "2026-06-15T00:00:00",
+   "indexOpen": 6050.84,
+   "low": 6050.84
+  },
+  {
+   "change": 15.68,
+   "changePer": 0.26,
+   "high": 6098.7,
+   "indexClose": 6081.27,
+   "indexDay": "2026-06-16T00:00:00",
+   "indexOpen": 6065.59,
+   "low": 6053.7
+  },
+  {
+   "change": 9.52,
+   "changePer": 0.16,
+   "high": 6114.67,
+   "indexClose": 6090.79,
+   "indexDay": "2026-06-17T00:00:00",
+   "indexOpen": 6081.27,
+   "low": 6080.96
+  },
+  {
+   "change": 46.11,
+   "changePer": 0.76,
+   "high": 6154.98,
+   "indexClose": 6136.9,
+   "indexDay": "2026-06-21T00:00:00",
+   "indexOpen": 6090.79,
+   "low": 6090.79
+  },
+  {
+   "change": -33.66,
+   "changePer": -0.55,
+   "high": 6157.79,
+   "indexClose": 6103.24,
+   "indexDay": "2026-06-22T00:00:00",
+   "indexOpen": 6136.9,
+   "low": 6100.65
+  },
+  {
+   "change": -92.5,
+   "changePer": -1.52,
+   "high": 6129.73,
+   "indexClose": 6010.74,
+   "indexDay": "2026-06-23T00:00:00",
+   "indexOpen": 6103.24,
+   "low": 6006.66
+  },
+  {
+   "change": -2.36,
+   "changePer": -0.04,
+   "high": 6034.1,
+   "indexClose": 6008.38,
+   "indexDay": "2026-06-24T00:00:00",
+   "indexOpen": 6010.74,
+   "low": 5973.45
+  },
+  {
+   "change": -45.84,
+   "changePer": -0.76,
+   "high": 6030.19,
+   "indexClose": 5962.54,
+   "indexDay": "2026-06-25T00:00:00",
+   "indexOpen": 6008.38,
+   "low": 5951.02
+  },
+  {
+   "change": -175.16,
+   "changePer": -2.94,
+   "high": 5962.58,
+   "indexClose": 5787.38,
+   "indexDay": "2026-06-28T00:00:00",
+   "indexOpen": 5962.54,
+   "low": 5773.61
+  },
+  {
+   "change": 40.2,
+   "changePer": 0.69,
+   "high": 5853.43,
+   "indexClose": 5827.58,
+   "indexDay": "2026-06-29T00:00:00",
+   "indexOpen": 5787.38,
+   "low": 5767.32
+  },
+  {
+   "change": 89.29,
+   "changePer": 1.53,
+   "high": 5923.92,
+   "indexClose": 5916.87,
+   "indexDay": "2026-06-30T00:00:00",
+   "indexOpen": 5827.58,
+   "low": 5827.58
+  },
+  {
+   "change": 22.53,
+   "changePer": 0.38,
+   "high": 5943.11,
+   "indexClose": 5939.4,
+   "indexDay": "2026-07-01T00:00:00",
+   "indexOpen": 5916.87,
+   "low": 5908.95
+  },
+  {
+   "change": 103.66,
+   "changePer": 1.75,
+   "high": 6043.06,
+   "indexClose": 6043.06,
+   "indexDay": "2026-07-05T00:00:00",
+   "indexOpen": 5939.4,
+   "low": 5939.4
+  },
+  {
+   "change": 79.22,
+   "changePer": 1.31,
+   "high": 6136.35,
+   "indexClose": 6122.28,
+   "indexDay": "2026-07-06T00:00:00",
+   "indexOpen": 6043.06,
+   "low": 6043.06
+  },
+  {
+   "change": 34.53,
+   "changePer": 0.56,
+   "high": 6173.28,
+   "indexClose": 6156.81,
+   "indexDay": "2026-07-07T00:00:00",
+   "indexOpen": 6122.28,
+   "low": 6122.28
+  },
+  {
+   "change": -62.9,
+   "changePer": -1.02,
+   "high": 6163.28,
+   "indexClose": 6093.91,
+   "indexDay": "2026-07-08T00:00:00",
+   "indexOpen": 6156.81,
+   "low": 6072.4
+  },
+  {
+   "change": 61.45,
+   "changePer": 1.01,
+   "high": 6155.36,
+   "indexClose": 6155.36,
+   "indexDay": "2026-07-09T00:00:00",
+   "indexOpen": 6093.91,
+   "low": 6086.57
+  },
+  {
+   "change": 41.51,
+   "changePer": 0.67,
+   "high": 6224.22,
+   "indexClose": 6196.87,
+   "indexDay": "2026-07-12T00:00:00",
+   "indexOpen": 6155.36,
+   "low": 6155.36
+  },
+  {
+   "change": -6.1,
+   "changePer": -0.1,
+   "high": 6214.96,
+   "indexClose": 6190.77,
+   "indexDay": "2026-07-13T00:00:00",
+   "indexOpen": 6196.87,
+   "low": 6183.49
+  },
+  {
+   "change": 4.79,
+   "changePer": 0.08,
+   "high": 6213.38,
+   "indexClose": 6195.56,
+   "indexDay": "2026-07-14T00:00:00",
+   "indexOpen": 6190.77,
+   "low": 6172.99
+  },
+  {
+   "change": 30.55,
+   "changePer": 0.49,
+   "high": 6252.43,
+   "indexClose": 6226.11,
+   "indexDay": "2026-07-15T00:00:00",
+   "indexOpen": 6195.56,
+   "low": 6195.56
+  },
+  {
+   "change": 32.89,
+   "changePer": 0.53,
+   "high": 6274.35,
+   "indexClose": 6259,
+   "indexDay": "2026-07-16T00:00:00",
+   "indexOpen": 6226.11,
+   "low": 6226.11
+  },
+  {
+   "change": 9.34,
+   "changePer": 0.15,
+   "high": 6273.33,
+   "indexClose": 6268.34,
+   "indexDay": "2026-07-19T00:00:00",
+   "indexOpen": 6259,
+   "low": 6240.64
+  },
+  {
+   "change": 47.2,
+   "changePer": 0.75,
+   "high": 6321.84,
+   "indexClose": 6315.54,
+   "indexDay": "2026-07-20T00:00:00",
+   "indexOpen": 6268.34,
+   "low": 6268.34
+  },
+  {
+   "change": 38.36,
+   "changePer": 0.61,
+   "high": 6356.22,
+   "indexClose": 6353.9,
+   "indexDay": "2026-07-21T00:00:00",
+   "indexOpen": 6315.54,
+   "low": 6315.54
+  },
+  {
+   "change": 14.63,
+   "changePer": 0.23,
+   "high": 6385.5,
+   "indexClose": 6368.53,
+   "indexDay": "2026-07-22T00:00:00",
+   "indexOpen": 6353.9,
+   "low": 6353.53
+  },
+  {
+   "change": -3.97,
+   "changePer": -0.06,
+   "high": 6406.09,
+   "indexClose": 6364.56,
+   "indexDay": "2026-07-26T00:00:00",
+   "indexOpen": 6368.53,
+   "low": 6352.01
+  },
+  {
+   "change": 21.89,
+   "changePer": 0.34,
+   "high": 6405.29,
+   "indexClose": 6386.45,
+   "indexDay": "2026-07-27T00:00:00",
+   "indexOpen": 6364.56,
+   "low": 6364.56
+  },
+  {
+   "change": -24.65,
+   "changePer": -0.39,
+   "high": 6414.13,
+   "indexClose": 6361.8,
+   "indexDay": "2026-07-28T00:00:00",
+   "indexOpen": 6386.45,
+   "low": 6361.62
+  },
+  {
+   "change": 7.61,
+   "changePer": 0.12,
+   "high": 6378.47,
+   "indexClose": 6369.41,
+   "indexDay": "2026-07-29T00:00:00",
+   "indexOpen": 6361.8,
+   "low": 6315.21
+  },
+  {
+   "change": -54.27,
+   "changePer": -0.85,
+   "high": 6371.96,
+   "indexClose": 6315.14,
+   "indexDay": "2026-07-30T00:00:00",
+   "indexOpen": 6369.41,
+   "low": 6242.4
+  },
+  {
+   "change": 188.44,
+   "changePer": 2.98,
+   "high": 6503.58,
+   "indexClose": 6503.58,
+   "indexDay": "2026-08-02T00:00:00",
+   "indexOpen": 6315.14,
+   "low": 6315.14
+  },
+  {
+   "change": 65.3,
+   "changePer": 1,
+   "high": 6600.04,
+   "indexClose": 6568.88,
+   "indexDay": "2026-08-03T00:00:00",
+   "indexOpen": 6503.58,
+   "low": 6503.58
+  },
+  {
+   "change": 54.87,
+   "changePer": 0.84,
+   "high": 6661.81,
+   "indexClose": 6623.75,
+   "indexDay": "2026-08-04T00:00:00",
+   "indexOpen": 6568.88,
+   "low": 6568.88
+  },
+  {
+   "change": 66.68,
+   "changePer": 1.01,
+   "high": 6699.2,
+   "indexClose": 6690.43,
+   "indexDay": "2026-08-05T00:00:00",
+   "indexOpen": 6623.75,
+   "low": 6623.75
+  },
+  {
+   "change": -12.02,
+   "changePer": -0.18,
+   "high": 6720.29,
+   "indexClose": 6678.41,
+   "indexDay": "2026-08-06T00:00:00",
+   "indexOpen": 6690.43,
+   "low": 6646.09
+  },
+  {
+   "change": 91.69,
+   "changePer": 1.37,
+   "high": 6770.1,
+   "indexClose": 6770.1,
+   "indexDay": "2026-08-09T00:00:00",
+   "indexOpen": 6678.41,
+   "low": 6678.41
+  },
+  {
+   "change": 35.04,
+   "changePer": 0.52,
+   "high": 6807.04,
+   "indexClose": 6805.14,
+   "indexDay": "2026-08-10T00:00:00",
+   "indexOpen": 6770.1,
+   "low": 6743.04
+  },
+  {
+   "change": 27.15,
+   "changePer": 0.4,
+   "high": 6859.6,
+   "indexClose": 6832.29,
+   "indexDay": "2026-08-11T00:00:00",
+   "indexOpen": 6805.14,
+   "low": 6775.88
+  },
+  {
+   "change": -7.93,
+   "changePer": -0.12,
+   "high": 6878.18,
+   "indexClose": 6824.36,
+   "indexDay": "2026-08-12T00:00:00",
+   "indexOpen": 6832.29,
+   "low": 6802.06
+  },
+  {
+   "change": 32.57,
+   "changePer": 0.48,
+   "high": 6898.08,
+   "indexClose": 6856.93,
+   "indexDay": "2026-08-13T00:00:00",
+   "indexOpen": 6824.36,
+   "low": 6824.36
+  },
+  {
+   "change": 41.61,
+   "changePer": 0.61,
+   "high": 6930.99,
+   "indexClose": 6898.54,
+   "indexDay": "2026-08-16T00:00:00",
+   "indexOpen": 6856.93,
+   "low": 6856.93
+  },
+  {
+   "change": -16.51,
+   "changePer": -0.24,
+   "high": 6946.52,
+   "indexClose": 6882.03,
+   "indexDay": "2026-08-17T00:00:00",
+   "indexOpen": 6898.54,
+   "low": 6864.13
+  },
+  {
+   "change": -12.22,
+   "changePer": -0.18,
+   "high": 6919.03,
+   "indexClose": 6869.81,
+   "indexDay": "2026-08-18T00:00:00",
+   "indexOpen": 6882.03,
+   "low": 6845.14
+  },
+  {
+   "change": -129.49,
+   "changePer": -1.88,
+   "high": 6884.22,
+   "indexClose": 6740.32,
+   "indexDay": "2026-08-19T00:00:00",
+   "indexOpen": 6869.81,
+   "low": 6716.57
+  },
+  {
+   "change": 10.27,
+   "changePer": 0.15,
+   "high": 6778.95,
+   "indexClose": 6750.59,
+   "indexDay": "2026-08-20T00:00:00",
+   "indexOpen": 6740.32,
+   "low": 6684.68
+  },
+  {
+   "change": 98.39,
+   "changePer": 1.46,
+   "high": 6856.49,
+   "indexClose": 6848.98,
+   "indexDay": "2026-08-23T00:00:00",
+   "indexOpen": 6750.59,
+   "low": 6750.59
+  }
+ ]
+}

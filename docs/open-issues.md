@@ -4,7 +4,7 @@ Things known to be unfinished or unresolved. An issue leaves this file when it
 is fixed or when someone decides it does not need fixing — not when it stops
 being mentioned.
 
-Last reviewed: 21 August 2026.
+Last reviewed: 24 August 2026.
 
 ---
 
@@ -42,75 +42,148 @@ is a plain reviewed file and nothing marks entries by origin.
 
 ---
 
-## 1b. The exchange has shipped a JSON API, and we are not using it
+## 1b. The exchange has shipped a JSON API, and we are now holding its archive
 
-**Status:** verified 23 Aug 2026, unadopted, and probably the largest single
-change available to this project.
+**Status:** mapped and harvested 24 Aug 2026. Not yet wired into anything the
+app ships. This is still the largest single change available to this project.
 
 `beta.egx.com.eg` is a Next.js rebuild of the exchange's site with a clean BFF
-behind it. It answers **plain `curl`** — no browser, no Scrapling, no
-Chromium — once one header is set:
+behind it. It answers **plain HTTP** — no browser, no Scrapling, no Chromium —
+once one header is set:
 
     Accept: application/json
     x-egx-bff-request: 1
 
-Without that header the WAF answers 404 or an F5 "Request Rejected" page, which
-is presumably why nobody found it. Navigating a browser directly at an endpoint
-also fails; it has to look like an XHR, which curl does by default.
+Without that header the F5 in front answers 404 or a "Request Rejected" page,
+which is presumably why nobody found it. Navigating a browser directly at an
+endpoint also fails; it has to look like an XHR, which curl does by default.
 
-What it gives, all verified against the live service:
+### The whole surface
 
-  * `GET /api/bff/egx/market-watch?Page=1&PageSize=500` — **all 223 listed
-    companies in one request**, 48 fields each: `isin`, `reuters` ("COMI.CA"),
-    `name` **and `nameA`**, `sector` **and `sectorA`**, OHLC, `prevClose`,
-    `chgPer`, `volume`, `value`, `trades`, `mc`, `netProfit`, a `volatility`
-    flag, and membership of EGX30/70/100/CAP/50/Shariah/Tamayuz. `SortBy` and
-    `SortDescending` give gainers, losers and most-active for free.
-  * `POST /api/bff/egx/news-search` — disclosures **with `dateFrom`/`dateTo`**.
-    Each carries the same `code` we already use as an id, a **full timestamp**
-    (we only ever had a date), heading and body **in both languages**, the
-    ISIN, the exchange's own `section`/`secId` category, and inline PDF links.
-    Results filings carry the figures in the body. A three-day window in
-    February returned 117 filings — **the whole archive is queryable**, which
-    is the constraint the permanent monthly archive exists to work around.
-  * `GET /api/bff/egx/market-summaries` — totals per board plus the exchange's
-    own breadth: gainers 157, decliners 52, unchanged 14, and market cap.
-  * `GET /api/bff/egx/market-status` — open or closed, with Arabic.
-  * `GET /api/bff/egx/index-data?interval=1&indexName=CASE30` — intraday index
-    values at five-minute resolution, plus YTD.
-  * `financial-statements-paged`, `financial-statement-detail`, `gold-history`,
-    `silver-history`, `trading-session-news`, `news-detail`.
+Read out of the site's own JavaScript rather than guessed at — every endpoint
+below is one the site itself calls, which is also why none of them needed
+probing to find:
 
-What it could replace: the TradingView scan behind `market.json` and all 280
-company documents; `build_disclosures_api.py`'s Scrapling dependency, which is
-the reason disclosures are not in the fifteen-minute job;
-`enrich_disclosures.py`'s per-filing PDF harvest, capped at eight a run;
-`harvest_names_mubasher.py`; the Arabic-name matching in `company_match.py`,
-since ISIN and Reuters code are given; the hand-written Arabic sector table;
-breadth computed from the scan; and the session-open inference in
-`PriceFreshness`.
+| Endpoint | Verb | What it is |
+| --- | --- | --- |
+| `market-watch` | GET | all 223 listed companies, 48 fields each |
+| `market-summaries` | GET | totals per board, and the exchange's own breadth |
+| `market-status` | GET | open or closed, with Arabic |
+| `index-data` | GET | index history and intraday — see below |
+| `gold-market-watch` | GET | EGP-per-gram bid/ask from named Egyptian dealers |
+| `silver-market-watch` | GET | the same for silver |
+| `news-search` | POST | disclosures, by date window |
+| `news-detail` | POST | one filing |
+| `financial-statements-filter` | POST | results announcements, net profit parsed |
+| `financial-statements-paged` | POST | the same, older path |
+| `financial-statement-detail` | POST | one statement |
+| `global-search` | POST | search across the site (news only, so far) |
+| `global-autocomplete` | POST | as you type |
 
-**Why it is not adopted yet, written down so the decision is deliberate:**
+The site also has **Press** and **Events** tabs whose handler returns an empty
+list unconditionally. There is no events endpoint yet.
+
+### What was learned that the first pass got wrong
+
+  * **`index-data?interval=N` returns the last N *sessions*, not a resolution.**
+    `interval=1` gives today's five-minute intraday series, which is what the
+    site uses and what made this look like a live-only endpoint. `interval=6000`
+    returns **3,961 sessions of daily open/high/low/close back to 21 March
+    2010**. Every index: EGX 30, 70 EWI, 100 EWI, 30 CAP, 30 TR, and — from
+    their launch dates — Tamayuz, EGX 35-LV and Shariah.
+
+    All eight are now in `data-source/egx-beta/indices/`. **609 of our own
+    published closes were compared against them and not one differs by more
+    than half a point**, which is the check `index_history.py` already applies
+    to a new source before trusting it. The app accumulates one close a session
+    by hand and holds 260; the exchange has 3,758 sessions we never had.
+
+  * **`lastTradeDate` is per share, not per session.** It reads 2026-08-20 on a
+    share that has not traded since 20 August; `writeTime` is when the snapshot
+    was taken and `index-data` carries the session's own date. This was written
+    down as an unresolved objection and is simply not one.
+
+  * **The disclosure archive is 191,484 filings, 2005 to today.** Measured, not
+    estimated: 44,587 in 2005–2014, 53,843 in 2015–2019, 65,304 in 2020–2024,
+    16,385 in 2025, 11,365 so far in 2026. Nothing before 2005. The app's whole
+    permanent archive is **125**, because the old site's news list only ever
+    showed the current page.
+
+  * **`pageSize` is capped at 200.** Asking for 500 returns 200 with an honest
+    `totalPages`.
+
+  * **There are twelve categories, not the three groups the site's tabs offer.**
+    The tabs ask for secIds 3–8, 10–13 and 16. Asking for the full range also
+    returns 2 (Media Releases) and 9 (EGX News), and costs nothing.
+
+  * **`financial-statements-filter` parses the results for us.** Each row is a
+    results announcement with net profit **and the comparative period's net
+    profit** already separated out, the period, the ISIN, both languages, and a
+    link to the audited statements PDF. This is the thing
+    `harvest_financials_mubasher` and the Mubasher JS-literal scraping exist to
+    approximate.
+
+  * **`gold-market-watch` publishes Egyptian dealer prices in EGP a gram.** The
+    rates card currently takes a dollar spot price and does the conversion
+    itself. The exchange publishes what Gold Net, SAM and Empire of Gold are
+    actually quoting, with a timestamp.
+
+### Is there anything about the future in it?
+
+**No filing is dated in the future** — a window from tomorrow to a year out
+returns zero, which is what a disclosure feed should do.
+
+**But 8,013 of the 27,750 filings harvested — 29% — announce something
+scheduled for a date after they were published.** Median twelve days ahead, up
+to 378. Almost every Corporate Action does (237 of 247): rights issues,
+dividend distribution dates, coupon dates. AGM invitations name the meeting.
+Trading Notices name the day a suspended share resumes. Listing announcements
+name the session a change takes effect.
+
+So the exchange does publish a forward calendar. It is inside the bodies rather
+than behind an endpoint, and it is now sitting in `data-source/egx-beta/` —
+enough to build a "what is coming" surface out of published fact and a date
+parser, with no model anywhere near it.
+
+### What is held now
+
+`scripts/harvest_egx_beta.py`, run 24 Aug 2026:
+
+  * `data-source/egx-beta/indices/*.json` — eight indices, daily OHLC, 4 MB.
+  * `data-source/egx-beta/filings/YYYY-MM.json.gz` — **27,750 filings** across
+    2025 and 2026, both languages, full bodies, 6 MB. Twelve categories,
+    including four the pipeline has never seen: Corporate Actions,
+    Shareholding Structure, Trading Notices, Listing/Delisting Requests.
+
+The harvester is serialised, paced two seconds apart, retries a transport
+timeout and **stops dead** on a WAF refusal rather than retrying into a block.
+Resuming is a matter of running it again; a month whose held count matches the
+service's `totalCount` is skipped.
+
+### Why it is still not adopted
 
 1. It is beta and says so on entry. Endpoints may move or vanish.
 2. Untested from a GitHub Actions egress IP. The old host blocked this project
-   once at roughly forty requests in a day; same host, so assume the same
-   until measured.
+   once at roughly forty requests in a day; same host, so assume the same until
+   measured.
 3. No published rate limit and no terms of use checked.
-4. `lastTradeDate` reads 2026-08-20 while `writeTime` is 2026-08-23 15:36 —
-   the relationship between the two needs understanding before either is
-   trusted as "the session".
-5. `companyName` and `companyNameArabic` are swapped in `news-search` payloads.
+4. `companyName` and `companyNameArabic` are swapped in `news-search` payloads.
 
-The sensible order is: prove it from a runner with one cheap endpoint, run it
-in parallel with the existing pipeline and diff the two for a week, then
-migrate the pieces that are currently the most expensive — disclosures and the
-Arabic names — before touching the market scan, which is the spine.
+Nothing under `public/` depends on any of it, which is the point: collect,
+compare against what the pipeline already produces, then migrate.
 
-Full notes, with the exact request shapes: see the session scratch file
-`egx-beta-api.md`, reproduced in the commit that added this section.
+The order that now looks right, cheapest and most valuable first:
 
----
+1. **The index history.** It is already verified against 609 of our own closes,
+   it is one request per index, and it turns three 260-point charts into
+   sixteen years. Nothing else in the app changes.
+2. **The disclosure archive.** It replaces `build_disclosures_api.py`'s
+   Scrapling dependency — which is the reason filings are not in the
+   fifteen-minute job — and the permanent monthly archive stops being a
+   workaround for a source that could only see today.
+3. **The results announcements**, for the financials the app currently gets
+   from Mubasher.
+4. **The market scan** last, because it is the spine.
 
 ## 2. The Arabic non-licence wording has no legal sign-off
 
