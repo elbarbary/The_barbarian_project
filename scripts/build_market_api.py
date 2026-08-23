@@ -352,6 +352,44 @@ def history_union() -> dict[str, list[dict]]:
 KEEP_SESSIONS = 260
 
 
+def published_profile(ticker: str) -> dict:
+    """The profile last published for this company, or an empty one."""
+    path = API / "companies" / f"{ticker}.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("profile") or {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+# Fields worth keeping when a scan arrives without them.
+#
+# Only the ones derived from price history, which is the part of a scan that
+# can fail on its own — the socket times out, or a runner cannot reach it. The
+# scanner's own columns are all-or-nothing: if those are missing there is no
+# record at all, and carrying a stale market cap forward would be inventing a
+# company rather than filling a gap.
+CARRIED = (
+    "median_volume_20d",
+    "rv20",
+    "normal_value_30d",
+    "five_session_change",
+    "history_bars",
+    "free_float",
+)
+
+
+def carry_forward(ticker: str, profile: dict) -> list[str]:
+    """Fill gaps from the last published profile. Returns what was filled."""
+    previous = published_profile(ticker)
+    filled = []
+    for key in CARRIED:
+        if key in profile or key not in previous:
+            continue
+        profile[key] = previous[key]
+        filled.append(key)
+    return sorted(filled)
+
+
 def clean(value):
     """Scanner nulls and NaNs both mean 'not reported'."""
     if value is None:
@@ -537,8 +575,24 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
             value = clean(r.get(field))
             if value is not None:
                 profile[key] = value
+        # What this scan did not carry, kept from the last one that did.
+        #
+        # The company documents are deleted and rewritten every run, and an
+        # absent field stays absent — so a scan that reaches the exchange but
+        # not TradingView's history socket would silently delete
+        # `median_volume_20d` from all 282 companies. That is the figure behind
+        # "traded 3.45x its own normal volume", so the app would not degrade,
+        # it would lose the feature and say nothing.
+        #
+        # A twenty-day median volume from yesterday is a fair stand-in for the
+        # same figure today; a missing one is not. What is carried is named on
+        # the document rather than blended in, so nothing here can quietly
+        # present last week's number as this morning's.
+        carried = carry_forward(ticker, profile)
         if profile:
             detail["profile"] = profile
+        if carried:
+            detail["profile_carried"] = carried
         filed = FILED_FINANCIALS.get(ticker)
         if filed:
             detail["financials"] = filed
