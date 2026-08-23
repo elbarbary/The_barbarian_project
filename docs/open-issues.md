@@ -42,6 +42,76 @@ is a plain reviewed file and nothing marks entries by origin.
 
 ---
 
+## 1b. The exchange has shipped a JSON API, and we are not using it
+
+**Status:** verified 23 Aug 2026, unadopted, and probably the largest single
+change available to this project.
+
+`beta.egx.com.eg` is a Next.js rebuild of the exchange's site with a clean BFF
+behind it. It answers **plain `curl`** — no browser, no Scrapling, no
+Chromium — once one header is set:
+
+    Accept: application/json
+    x-egx-bff-request: 1
+
+Without that header the WAF answers 404 or an F5 "Request Rejected" page, which
+is presumably why nobody found it. Navigating a browser directly at an endpoint
+also fails; it has to look like an XHR, which curl does by default.
+
+What it gives, all verified against the live service:
+
+  * `GET /api/bff/egx/market-watch?Page=1&PageSize=500` — **all 223 listed
+    companies in one request**, 48 fields each: `isin`, `reuters` ("COMI.CA"),
+    `name` **and `nameA`**, `sector` **and `sectorA`**, OHLC, `prevClose`,
+    `chgPer`, `volume`, `value`, `trades`, `mc`, `netProfit`, a `volatility`
+    flag, and membership of EGX30/70/100/CAP/50/Shariah/Tamayuz. `SortBy` and
+    `SortDescending` give gainers, losers and most-active for free.
+  * `POST /api/bff/egx/news-search` — disclosures **with `dateFrom`/`dateTo`**.
+    Each carries the same `code` we already use as an id, a **full timestamp**
+    (we only ever had a date), heading and body **in both languages**, the
+    ISIN, the exchange's own `section`/`secId` category, and inline PDF links.
+    Results filings carry the figures in the body. A three-day window in
+    February returned 117 filings — **the whole archive is queryable**, which
+    is the constraint the permanent monthly archive exists to work around.
+  * `GET /api/bff/egx/market-summaries` — totals per board plus the exchange's
+    own breadth: gainers 157, decliners 52, unchanged 14, and market cap.
+  * `GET /api/bff/egx/market-status` — open or closed, with Arabic.
+  * `GET /api/bff/egx/index-data?interval=1&indexName=CASE30` — intraday index
+    values at five-minute resolution, plus YTD.
+  * `financial-statements-paged`, `financial-statement-detail`, `gold-history`,
+    `silver-history`, `trading-session-news`, `news-detail`.
+
+What it could replace: the TradingView scan behind `market.json` and all 280
+company documents; `build_disclosures_api.py`'s Scrapling dependency, which is
+the reason disclosures are not in the fifteen-minute job;
+`enrich_disclosures.py`'s per-filing PDF harvest, capped at eight a run;
+`harvest_names_mubasher.py`; the Arabic-name matching in `company_match.py`,
+since ISIN and Reuters code are given; the hand-written Arabic sector table;
+breadth computed from the scan; and the session-open inference in
+`PriceFreshness`.
+
+**Why it is not adopted yet, written down so the decision is deliberate:**
+
+1. It is beta and says so on entry. Endpoints may move or vanish.
+2. Untested from a GitHub Actions egress IP. The old host blocked this project
+   once at roughly forty requests in a day; same host, so assume the same
+   until measured.
+3. No published rate limit and no terms of use checked.
+4. `lastTradeDate` reads 2026-08-20 while `writeTime` is 2026-08-23 15:36 —
+   the relationship between the two needs understanding before either is
+   trusted as "the session".
+5. `companyName` and `companyNameArabic` are swapped in `news-search` payloads.
+
+The sensible order is: prove it from a runner with one cheap endpoint, run it
+in parallel with the existing pipeline and diff the two for a week, then
+migrate the pieces that are currently the most expensive — disclosures and the
+Arabic names — before touching the market scan, which is the spine.
+
+Full notes, with the exact request shapes: see the session scratch file
+`egx-beta-api.md`, reproduced in the commit that added this section.
+
+---
+
 ## 2. The Arabic non-licence wording has no legal sign-off
 
 **Status:** needs an Egyptian lawyer.
