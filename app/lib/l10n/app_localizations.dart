@@ -3313,6 +3313,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search ticker or company'**
   String get studySearchHint;
+
+  /// No description provided for @sectorFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get sectorFinance;
+
+  /// No description provided for @sectorProcessIndustries.
+  ///
+  /// In en, this message translates to:
+  /// **'Process Industries'**
+  String get sectorProcessIndustries;
+
+  /// No description provided for @sectorNonEnergyMinerals.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-Energy Minerals'**
+  String get sectorNonEnergyMinerals;
+
+  /// No description provided for @sectorConsumerNonDurables.
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer Non-Durables'**
+  String get sectorConsumerNonDurables;
+
+  /// No description provided for @sectorConsumerServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer Services'**
+  String get sectorConsumerServices;
+
+  /// No description provided for @sectorIndustrialServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Industrial Services'**
+  String get sectorIndustrialServices;
+
+  /// No description provided for @sectorHealthTechnology.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Technology'**
+  String get sectorHealthTechnology;
+
+  /// No description provided for @sectorProducerManufacturing.
+  ///
+  /// In en, this message translates to:
+  /// **'Producer Manufacturing'**
+  String get sectorProducerManufacturing;
+
+  /// No description provided for @sectorDistributionServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Distribution Services'**
+  String get sectorDistributionServices;
+
+  /// No description provided for @sectorHealthServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Services'**
+  String get sectorHealthServices;
+
+  /// No description provided for @sectorTechnologyServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Technology Services'**
+  String get sectorTechnologyServices;
+
+  /// No description provided for @sectorConsumerDurables.
+  ///
+  /// In en, this message translates to:
+  /// **'Consumer Durables'**
+  String get sectorConsumerDurables;
+
+  /// No description provided for @sectorRetailTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Retail Trade'**
+  String get sectorRetailTrade;
+
+  /// No description provided for @sectorTransportation.
+  ///
+  /// In en, this message translates to:
+  /// **'Transportation'**
+  String get sectorTransportation;
+
+  /// No description provided for @sectorCommercialServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial Services'**
+  String get sectorCommercialServices;
+
+  /// No description provided for @sectorUtilities.
+  ///
+  /// In en, this message translates to:
+  /// **'Utilities'**
+  String get sectorUtilities;
+
+  /// No description provided for @sectorCommunications.
+  ///
+  /// In en, this message translates to:
+  /// **'Communications'**
+  String get sectorCommunications;
+
+  /// No description provided for @sectorEnergyMinerals.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy Minerals'**
+  String get sectorEnergyMinerals;
+
+  /// No description provided for @sectorElectronicTechnology.
+  ///
+  /// In en, this message translates to:
+  /// **'Electronic Technology'**
+  String get sectorElectronicTechnology;
+
+  /// No description provided for @sectorMiscellaneous.
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get sectorMiscellaneous;
 }
 
 class _AppLocalizationsDelegate

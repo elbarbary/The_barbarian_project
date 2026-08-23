@@ -1934,4 +1934,64 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get studySearchHint => 'Search ticker or company';
+
+  @override
+  String get sectorFinance => 'Finance';
+
+  @override
+  String get sectorProcessIndustries => 'Process Industries';
+
+  @override
+  String get sectorNonEnergyMinerals => 'Non-Energy Minerals';
+
+  @override
+  String get sectorConsumerNonDurables => 'Consumer Non-Durables';
+
+  @override
+  String get sectorConsumerServices => 'Consumer Services';
+
+  @override
+  String get sectorIndustrialServices => 'Industrial Services';
+
+  @override
+  String get sectorHealthTechnology => 'Health Technology';
+
+  @override
+  String get sectorProducerManufacturing => 'Producer Manufacturing';
+
+  @override
+  String get sectorDistributionServices => 'Distribution Services';
+
+  @override
+  String get sectorHealthServices => 'Health Services';
+
+  @override
+  String get sectorTechnologyServices => 'Technology Services';
+
+  @override
+  String get sectorConsumerDurables => 'Consumer Durables';
+
+  @override
+  String get sectorRetailTrade => 'Retail Trade';
+
+  @override
+  String get sectorTransportation => 'Transportation';
+
+  @override
+  String get sectorCommercialServices => 'Commercial Services';
+
+  @override
+  String get sectorUtilities => 'Utilities';
+
+  @override
+  String get sectorCommunications => 'Communications';
+
+  @override
+  String get sectorEnergyMinerals => 'Energy Minerals';
+
+  @override
+  String get sectorElectronicTechnology => 'Electronic Technology';
+
+  @override
+  String get sectorMiscellaneous => 'Miscellaneous';
 }

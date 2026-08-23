@@ -1357,5 +1357,25 @@
     }
   },
   "exitSearchHint": "Check a company by name or symbol…",
-  "studySearchHint": "Search ticker or company"
+  "studySearchHint": "Search ticker or company",
+  "sectorFinance": "Finance",
+  "sectorProcessIndustries": "Process Industries",
+  "sectorNonEnergyMinerals": "Non-Energy Minerals",
+  "sectorConsumerNonDurables": "Consumer Non-Durables",
+  "sectorConsumerServices": "Consumer Services",
+  "sectorIndustrialServices": "Industrial Services",
+  "sectorHealthTechnology": "Health Technology",
+  "sectorProducerManufacturing": "Producer Manufacturing",
+  "sectorDistributionServices": "Distribution Services",
+  "sectorHealthServices": "Health Services",
+  "sectorTechnologyServices": "Technology Services",
+  "sectorConsumerDurables": "Consumer Durables",
+  "sectorRetailTrade": "Retail Trade",
+  "sectorTransportation": "Transportation",
+  "sectorCommercialServices": "Commercial Services",
+  "sectorUtilities": "Utilities",
+  "sectorCommunications": "Communications",
+  "sectorEnergyMinerals": "Energy Minerals",
+  "sectorElectronicTechnology": "Electronic Technology",
+  "sectorMiscellaneous": "Miscellaneous"
 }

@@ -12,6 +12,7 @@ import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/models/recency.dart';
+import '../../core/models/sector.dart';
 import '../../core/widgets/filed_document.dart';
 import '../../core/widgets/insight.dart';
 import '../../core/providers.dart';
@@ -287,7 +288,7 @@ class _Header extends StatelessWidget {
             runSpacing: 8,
             children: [
               if (company.sector case final String s)
-                BKindChip(s, variant: BChipVariant.onDark),
+                BKindChip(sectorLabel(s, l), variant: BChipVariant.onDark),
               // The headline price on this screen is the live one, so the
               // caption beside it has to describe the live feed, not the daily
               // publish it was merged over.
@@ -461,7 +462,8 @@ class _Overview extends ConsumerWidget {
         (l.figSharesOutstanding, _compact(p['shares_outstanding'])),
       if (p['float_shares'] != null)
         (l.figFloatShares, _compact(p['float_shares'])),
-      if (company.sector case final String sector) (l.sector, sector),
+      if (company.sector case final String sector)
+        (l.sector, sectorLabel(sector, l)),
     ];
 
     // Built from published operands only: a builder returns null when an

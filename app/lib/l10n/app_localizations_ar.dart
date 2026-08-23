@@ -1925,4 +1925,64 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get studySearchHint => 'ابحث برمز السهم أو اسم الشركة';
+
+  @override
+  String get sectorFinance => 'التمويل والخدمات المالية';
+
+  @override
+  String get sectorProcessIndustries => 'الصناعات التحويلية';
+
+  @override
+  String get sectorNonEnergyMinerals => 'معادن ومواد بناء';
+
+  @override
+  String get sectorConsumerNonDurables => 'سلع استهلاكية غير معمّرة';
+
+  @override
+  String get sectorConsumerServices => 'خدمات استهلاكية';
+
+  @override
+  String get sectorIndustrialServices => 'خدمات صناعية';
+
+  @override
+  String get sectorHealthTechnology => 'أدوية وتكنولوجيا طبية';
+
+  @override
+  String get sectorProducerManufacturing => 'صناعات إنتاجية';
+
+  @override
+  String get sectorDistributionServices => 'خدمات التوزيع';
+
+  @override
+  String get sectorHealthServices => 'خدمات صحية';
+
+  @override
+  String get sectorTechnologyServices => 'خدمات تكنولوجية';
+
+  @override
+  String get sectorConsumerDurables => 'سلع استهلاكية معمّرة';
+
+  @override
+  String get sectorRetailTrade => 'تجارة التجزئة';
+
+  @override
+  String get sectorTransportation => 'النقل';
+
+  @override
+  String get sectorCommercialServices => 'خدمات تجارية';
+
+  @override
+  String get sectorUtilities => 'المرافق';
+
+  @override
+  String get sectorCommunications => 'الاتصالات';
+
+  @override
+  String get sectorEnergyMinerals => 'موارد الطاقة';
+
+  @override
+  String get sectorElectronicTechnology => 'تكنولوجيا إلكترونية';
+
+  @override
+  String get sectorMiscellaneous => 'متنوعة';
 }

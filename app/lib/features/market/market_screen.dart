@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
 import '../../core/models/company.dart';
+import '../../core/models/sector.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
@@ -306,11 +307,15 @@ class _SectorChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = AppLocalizations.of(context);
     final tone = BarbarianPalette.sector(c, sector);
+    // The colour keys off the English name the scan filed; the label is what
+    // the reader is shown.
+    final label = sectorLabel(sector, l);
     return BPressable(
       onTap: onTap,
       scale: 0.96,
-      semanticLabel: sector,
+      semanticLabel: label,
       child: AnimatedContainer(
         duration: BarbarianMotion.fast,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -325,7 +330,7 @@ class _SectorChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              sector,
+              label,
               style: BarbarianType.pill.copyWith(
                 color: selected ? c.surface : tone,
               ),
@@ -441,7 +446,7 @@ class _SectorTile extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            name,
+            sectorLabel(name, l),
             style: BarbarianType.bodyM.copyWith(
               color: c.textPrimary,
               height: 1.3,
