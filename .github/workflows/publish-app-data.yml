@@ -75,6 +75,25 @@ jobs:
         with:
           python-version: '3.12'
 
+      # A browser, so the exchange steps can actually run here.
+      #
+      # EGX is JS-rendered behind a WAF and refuses plain HTTP, so the filings,
+      # the filed net-profit figures and the archive harvest all need a real
+      # browser. Without one they skip — cleanly, but forever — and the filings
+      # in the app only ever move when somebody runs the build by hand.
+      #
+      # Best-effort on purpose. If the install fails, or the exchange refuses
+      # this runner's address, every step that needs it skips and leaves the
+      # last good document in place. That is worth an attempt each run; it is
+      # not worth failing a build over.
+      - name: Install Scrapling
+        id: scrapling
+        continue-on-error: true
+        run: |
+          python3 -m pip install --quiet scrapling
+          python3 -m scrapling install || scrapling install || true
+          echo "SCRAPLING_PYTHON=$(which python3)" >> "$GITHUB_ENV"
+
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
