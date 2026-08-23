@@ -9,6 +9,7 @@ import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/opportunities/opportunity_screen.dart';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/features/profile/you_screen.dart';
+import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/features/today/today_screen.dart';
 import 'package:barbarian/core/models/explainer.dart';
 import 'package:barbarian/core/widgets/explainer_sheet.dart';
@@ -547,9 +548,10 @@ void main() {
   testWidgets('§50 an explained figure states where it came from', (
     tester,
   ) async {
-    await pumpScreen(tester, const TodayScreen());
     // Any explained row will do; the rates block is the one built entirely
-    // from figures somebody else published.
+    // from figures somebody else published, and it is on Home now with the
+    // rest of the market furniture.
+    await pumpScreen(tester, const HomeScreen());
     await pumpUntil(tester, find.byType(BPlainNumber));
     await tapVisible(tester, find.byType(BPlainNumber).first);
     await tester.pumpAndSettle();

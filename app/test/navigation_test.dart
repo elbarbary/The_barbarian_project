@@ -141,46 +141,24 @@ void main() {
   });
 
   group('pushed routes', () {
-    testWidgets('asking Today for a section does not take the tab down', (
-      tester,
-    ) async {
-      // Clearing the request inside `build` modified a provider while the
-      // widget tree was building. Riverpod refuses that outright, and the
-      // whole Today tab rendered as a red error screen instead.
+    testWidgets('Home opens the Scanner and comes back', (tester) async {
       await boot(tester);
       await tapTab(tester, BNavTab.home);
-      // Home no longer carries the feeds, so the route to the full filings
-      // list is the action beside the lead announcement.
-      await pumpUntil(tester, find.textContaining(RegExp('All announcements')));
-
-      await tapVisible(tester, find.textContaining('All announcements').first);
-      await tester.pump(const Duration(milliseconds: 400));
-      await tester.pump(const Duration(milliseconds: 400));
-
-      expect(
-        find.textContaining('Tried to modify a provider'),
-        findsNothing,
-        reason: 'Today fell over when asked to scroll to a section',
-      );
-      expect(tester.takeException(), isNull);
-    });
-
-    testWidgets('Today opens the Scanner and comes back', (tester) async {
-      await boot(tester);
-      await tapTab(tester, BNavTab.today);
 
       // The hero is only tappable once the scanner report has landed. Tap the
       // kicker, which is stable; the headline is now the report's own line.
+      // It sits below the busiest list on Home rather than at the top of
+      // Today, so it has to be scrolled to before it can be tapped.
       await pumpUntil(tester, find.text('SCANNER'));
-      await tester.tap(find.text('SCANNER'));
+      await tapVisible(tester, find.text('SCANNER'));
       await pumpUntil(tester, find.text('Scanner'));
 
       // Spec: a detail route never moves the app to another tab.
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.today);
+      expect(nav.active, BNavTab.home);
 
       await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded).first);
-      await pumpUntil(tester, find.text('Today'));
+      await pumpUntil(tester, find.text('ESTHMR'));
     });
 
     testWidgets('search opens a company, keeping the Home slot lit', (

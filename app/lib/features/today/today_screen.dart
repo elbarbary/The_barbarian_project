@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../app/router.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
-import '../../core/widgets/controls.dart';
 import '../../core/widgets/legal.dart';
 import 'disclosures_block.dart';
 import 'news_block.dart';
-import 'rates_block.dart';
-import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/composites.dart';
 import '../../core/widgets/screen_scaffold.dart';
-import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../home/lead_story.dart';
 import '../home/connect_dots.dart';
@@ -41,86 +35,24 @@ class TodayScreen extends ConsumerStatefulWidget {
 }
 
 class _TodayScreenState extends ConsumerState<TodayScreen> {
-  final _filings = GlobalKey();
-  final _news = GlobalKey();
-
-  /// Bring the section the reader asked for into view.
-  ///
-  /// Both blocks are fed by documents that arrive after the first frame, so
-  /// the anchor usually has no context yet when the request lands. Rather than
-  /// guess at a delay this retries for a short while and then gives up — the
-  /// cost of failing is that the reader is at the top of Today, which is
-  /// exactly where they used to be.
-  void _reveal(TodaySection section, {int attempt = 0}) {
-    final key = section == TodaySection.filings ? _filings : _news;
-    final target = key.currentContext;
-    if (target == null) {
-      if (attempt < 20 && mounted) {
-        Future<void>.delayed(const Duration(milliseconds: 100), () {
-          if (mounted) _reveal(section, attempt: attempt + 1);
-        });
-      }
-      return;
-    }
-    Scrollable.ensureVisible(
-      target,
-      duration: const Duration(milliseconds: 420),
-      curve: Curves.easeOutCubic,
-      // A little air above it, so the section label is not flush against the
-      // top edge and the reader can see what they landed on.
-      alignment: 0.04,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // Listened to rather than read during `build`.
-    //
-    // Clearing the request inside `build` modified a provider while the widget
-    // tree was building, which Riverpod refuses outright — and it took the
-    // whole Today tab down with a red screen. The rule exists because two
-    // widgets watching the same provider could otherwise disagree about its
-    // value within one frame.
-    ref.listenManual(todaySectionRequestProvider, (_, next) {
-      if (next == null) return;
-      // Clear on the next microtask, outside the notification, then scroll
-      // once the frame that follows has laid the anchors out.
-      Future.microtask(
-        () => ref.read(todaySectionRequestProvider.notifier).clear(),
-      );
-      WidgetsBinding.instance.addPostFrameCallback((_) => _reveal(next));
-    }, fireImmediately: true);
-  }
-
   @override
   Widget build(BuildContext context) {
     final isSample = ref.watch(isSampleDataProvider);
-
-    // One-shot. Cleared immediately so returning to this tab later leaves the
-    // reader where they were rather than yanking them down the page again.
 
     return BScreenScaffold(
       blockGap: 22,
       children: [
         const _TodayHeader(),
-        const _ScannerHero(),
-        // The day's stories, at the size a story deserves.
+        // The reading screen, and only that: what several documents have in
+        // common, then the stories, then everything the exchange published.
         //
-        // This carousel was on Home, and every one of its six stories was also
-        // in Today's feed below — the same ids, not merely similar ones. It
-        // belongs on the screen that carries the news, at the top of it, where
-        // the photograph is the way in rather than a second printing.
-        const BLeadStory(parentTab: BNavTab.today),
-        // And then what those documents have in common, before the feeds they
-        // were drawn from. Reading the crossings after scrolling eighty
-        // filings is reading them too late.
+        // The scanner and the rates rails moved to Home, where the rest of the
+        // market furniture lives. This screen is now one thing.
         const BConnectDots(parentTab: BNavTab.today),
-        const BRatesBlock(),
-        // Both feeds, complete and paged. Today is the only place they are
-        // complete — Home's copies were five rows each and dropped every
-        // filing naming more than one company.
-        BTodayFeeds(filingsKey: _filings, newsKey: _news),
+        // The day's stories, at the size a story deserves.
+        const BLeadStory(parentTab: BNavTab.today),
+        // Both feeds, complete and paged, behind one selector.
+        const BTodayFeeds(),
         if (isSample) const Center(child: BSampleDataNotice()),
         const BLegalFootnote(),
       ],
@@ -141,174 +73,32 @@ class _TodayHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final report = ref.watch(opportunityReportProvider).value?.value;
+    // `.value?.value` collapses loading, error and a genuinely absent report
+    // into the same null, so the second line of the screen said "the board has
+    // not published yet" on the first frame — an affirmative claim about the
+    // publisher, made before the document had been asked for. The same mistake
+    // `_DailyInsight` made, in a second place.
+    final async = ref.watch(opportunityReportProvider);
+    final report = async.value?.value;
+    final subtitle = switch (report?.reportDate) {
+      final DateTime at => l.todayPutTogether(context.dayMonth(at)),
+      // Nothing to say yet is said by saying nothing.
+      null when async.isLoading => null,
+      null => l.scannerNotPublished,
+    };
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BScreenTitle(l.navToday),
-        const SizedBox(height: 6),
-        Text(
-          report?.reportDate == null
-              ? l.scannerNotPublished
-              : l.todayPutTogether(context.dayMonth(report!.reportDate!)),
-          style: BarbarianType.bodyM.copyWith(color: c.textMuted),
-        ),
-      ],
-    );
-  }
-}
-
-/// The lead card: today's scanner status.
-class _ScannerHero extends ConsumerWidget {
-  const _ScannerHero();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l = AppLocalizations.of(context);
-    final c = context.colors;
-    final async = ref.watch(opportunityReportProvider);
-
-    return BAsyncView(
-      value: async,
-      loading: const BSkeletonBlock(height: 220, radius: BarbarianRadius.xl),
-      errorTitle: l.scannerNotDownloaded,
-      errorBody: l.scannerNotDownloadedBody,
-      data: (sourced) {
-        final report = sourced.value;
-        return BPressable(
-          onTap: () => context.push(Routes.scannerPath(BNavTab.today)),
-          child: BDarkCard(
-            radius: BarbarianRadius.xl,
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Text(
-                          // Was the literal string 'OPPORTUNITY SCANNER',
-                          // which meant an Arabic reader met an English label
-                          // here whatever the locale said — and it survived
-                          // the rename because a hardcoded string is invisible
-                          // to the ARB.
-                          l.scannerTitle.toUpperCase(),
-                          style: BarbarianType.labelNano.copyWith(
-                            color: c.onInkMuted,
-                          ),
-                        ),
-                      ),
-                    ),
-                    BDarkCircleButton(
-                      icon: Icons.arrow_outward_rounded,
-                      semanticLabel: l.scannerOpen,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 18),
-                Text(
-                  report.headline ?? l.scannerFoundToday,
-                  style: BarbarianType.headlineL.copyWith(
-                    color: c.onInk,
-                    height: 1.18,
-                  ),
-                ),
-                // §8.6 — no single name leads this card.
-                //
-                // It used to show the highest-scoring company on the watch,
-                // with its price chart, as the hero of the day. Whatever the
-                // caption said, a max-by-score pick rendered as the day's
-                // headline is a best-stock-today element assembled from parts,
-                // and spec §8 forbids that however it is built. The counts say
-                // what the rule did; they name nobody.
-                const SizedBox(height: 14),
-                Row(
-                  children: [
-                    _ScanCount(
-                      value: report.qualifiedCount,
-                      label: l.countQualified,
-                      // The ink pair: c.up reads 2.87:1 here, beside an
-                      // accentOnInk at 7.16 and an onInkMuted at 4.95, so the
-                      // row went two colours and a smudge.
-                      tone: c.upOnInk,
-                    ),
-                    const SizedBox(width: 10),
-                    _ScanCount(
-                      value: report.watchingCount,
-                      label: l.countWatching,
-                      tone: c.accentOnInk,
-                    ),
-                    const SizedBox(width: 10),
-                    _ScanCount(
-                      value: report.outcomes.length,
-                      label: l.countOutcomes,
-                      tone: c.onInkMuted,
-                    ),
-                  ],
-                ),
-                if (report.date case final String d) ...[
-                  const SizedBox(height: 14),
-                  BStalenessCaption(
-                    l.updatedOn(context.dayMonthIso(d)),
-                    onDark: true,
-                  ),
-                ],
-              ],
-            ),
+        if (subtitle != null) ...[
+          const SizedBox(height: 6),
+          Text(
+            subtitle,
+            style: BarbarianType.bodyM.copyWith(color: c.textMuted),
           ),
-        );
-      },
-    );
-  }
-}
-
-class _ScanCount extends StatelessWidget {
-  const _ScanCount({
-    required this.value,
-    required this.label,
-    required this.tone,
-  });
-
-  final int value;
-  final String label;
-  final Color tone;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = context.colors;
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        decoration: BoxDecoration(
-          color: c.onInk.withValues(alpha: 0.07),
-          borderRadius: BorderRadius.circular(BarbarianRadius.sm),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BNumText(
-              '$value',
-              style: BarbarianType.figureM.copyWith(color: tone),
-            ),
-            const SizedBox(height: 4),
-            // Two lines, not one. At one line "Cleared every rule" and
-            // "Cleared some rules" both truncated to "CLEARED", so the hero
-            // showed two different counts under the same word.
-            Text(
-              label.toUpperCase(),
-              style: BarbarianType.labelTiny.copyWith(
-                color: c.onInkMuted,
-                height: 1.3,
-              ),
-              maxLines: 2,
-            ),
-          ],
-        ),
-      ),
+        ],
+      ],
     );
   }
 }
@@ -326,14 +116,7 @@ class _ScanCount extends StatelessWidget {
 /// lands on the right one because the request selects the tab as well as
 /// scrolling to it.
 class BTodayFeeds extends ConsumerStatefulWidget {
-  const BTodayFeeds({
-    required this.filingsKey,
-    required this.newsKey,
-    super.key,
-  });
-
-  final Key filingsKey;
-  final Key newsKey;
+  const BTodayFeeds({super.key});
 
   @override
   ConsumerState<BTodayFeeds> createState() => _BTodayFeedsState();
@@ -341,17 +124,6 @@ class BTodayFeeds extends ConsumerStatefulWidget {
 
 class _BTodayFeedsState extends ConsumerState<BTodayFeeds> {
   int _tab = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    // A reader who tapped "All filings" on Home asked for the filings, so the
-    // selector answers that rather than making them ask twice.
-    ref.listenManual(todaySectionRequestProvider, (_, next) {
-      if (next == null || !mounted) return;
-      setState(() => _tab = next == TodaySection.filings ? 1 : 0);
-    }, fireImmediately: true);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -368,10 +140,7 @@ class _BTodayFeedsState extends ConsumerState<BTodayFeeds> {
           onChanged: (i) => setState(() => _tab = i),
         ),
         const SizedBox(height: 14),
-        if (_tab == 0)
-          BNewsBlock(key: widget.newsKey)
-        else
-          BDisclosuresBlock(key: widget.filingsKey),
+        if (_tab == 0) const BNewsBlock() else const BDisclosuresBlock(),
       ],
     );
   }

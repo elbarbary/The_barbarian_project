@@ -843,7 +843,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String dotsBody(int days) {
-    return 'Companies that turned up in more than one place in the last $days days — with what those places have in common.';
+    return 'Companies that turned up in more than one place in $days days.';
   }
 
   @override
@@ -2198,7 +2198,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String busyBody(int count) {
-    return '$count companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.';
+    return '$count traded at least twice their usual volume today.';
   }
 
   @override
@@ -2210,7 +2210,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String busyFloorNote(String amount) {
-    return 'Companies trading less than $amount in the session are left out: a multiple of a very small number is arithmetic, not news.';
+    return 'Sessions worth under $amount are left out.';
   }
 
   @override
@@ -2225,4 +2225,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String homeSearchMore(int count) {
     return 'See all $count results';
   }
+
+  @override
+  String get volumeTeachingShort =>
+      'Unusual volume is a question, not a verdict.';
+
+  @override
+  String get heroLabel => 'The exchange today';
+
+  @override
+  String heroBreadth(int up, int flat, int down) {
+    return '$up rose · $flat unchanged · $down fell';
+  }
+
+  @override
+  String heroOf(int count) {
+    return 'of $count shares';
+  }
+
+  @override
+  String get volumeTeachingFloor =>
+      'A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.';
 }

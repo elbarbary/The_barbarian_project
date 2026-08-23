@@ -838,7 +838,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String dotsBody(int days) {
-    return 'شركات ظهرت في أكثر من مكان خلال $days أيام — ومعها ما يجمع بين تلك المواضع.';
+    return 'شركات ظهرت في أكثر من مكان خلال $days أيام.';
   }
 
   @override
@@ -2186,7 +2186,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String busyBody(int count) {
-    return '$count شركة تداولت اليوم بما لا يقل عن ضعف معدلها المعتاد. هذه أنشطها، والقائمة لا تتوقف على وجود إعلان من عدمه.';
+    return '$count شركة تداولت اليوم بضعف حجمها المعتاد على الأقل.';
   }
 
   @override
@@ -2198,7 +2198,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String busyFloorNote(String amount) {
-    return 'تُستبعد الشركات التي تداولت بأقل من $amount في الجلسة: فمضاعفة رقم صغير جدًا حساب لا خبر.';
+    return 'تُستبعد الجلسات التي تقل قيمتها عن $amount.';
   }
 
   @override
@@ -2213,4 +2213,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String homeSearchMore(int count) {
     return 'اعرض كل النتائج ($count)';
   }
+
+  @override
+  String get volumeTeachingShort => 'التداول غير المعتاد سؤال، لا حكم.';
+
+  @override
+  String get heroLabel => 'البورصة اليوم';
+
+  @override
+  String heroBreadth(int up, int flat, int down) {
+    return '$up ارتفع · $flat دون تغيير · $down انخفض';
+  }
+
+  @override
+  String heroOf(int count) {
+    return 'من $count سهم';
+  }
+
+  @override
+  String get volumeTeachingFloor =>
+      'تُستبعد من القائمة الجلسة الضئيلة القيمة مهما بلغ مضاعفها. فالترتيب الخام اليوم يبدأ بشركة تداولت 567 سهمًا مقابل معتاد قدره أربعة — أي 141 ضعف معتادها، و708,750 جنيهًا. ومضاعفة رقم صغير جدًا حساب لا خبر.';
 }

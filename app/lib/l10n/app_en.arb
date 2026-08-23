@@ -373,7 +373,7 @@
   "goldPerOunce": "EGP {amount} / oz",
   "@goldPerOunce": { "placeholders": { "amount": {"type":"String"} } },
   "dotsLabel": "What ties these together",
-  "dotsBody": "Companies that turned up in more than one place in the last {days} days — with what those places have in common.",
+  "dotsBody": "Companies that turned up in more than one place in {days} days.",
   "@dotsBody": { "placeholders": { "days": {"type":"int"} } },
   "dotsFiling": "Filing",
   "dotsNews": "In the press",
@@ -1610,7 +1610,7 @@
   "provenanceCalculation": "Calculation",
   "provenanceInterpretation": "Interpretation",
   "dotsWhatTheyShare": "What they share",
-  "busyBody": "{count} companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.",
+  "busyBody": "{count} traded at least twice their usual volume today.",
   "@busyBody": {
     "placeholders": {
       "count": {
@@ -1620,7 +1620,7 @@
   },
   "busyNone": "No company traded far outside its own normal today. A quiet day is a real answer.",
   "busyFiledToo": "Announced something",
-  "busyFloorNote": "Companies trading less than {amount} in the session are left out: a multiple of a very small number is arithmetic, not news.",
+  "busyFloorNote": "Sessions worth under {amount} are left out.",
   "@busyFloorNote": {
     "placeholders": {
       "amount": {
@@ -1644,5 +1644,30 @@
         "type": "int"
       }
     }
-  }
+  },
+  "volumeTeachingShort": "Unusual volume is a question, not a verdict.",
+  "heroLabel": "The exchange today",
+  "heroBreadth": "{up} rose · {flat} unchanged · {down} fell",
+  "@heroBreadth": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "flat": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      }
+    }
+  },
+  "heroOf": "of {count} shares",
+  "@heroOf": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volumeTeachingFloor": "A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news."
 }

@@ -1559,7 +1559,7 @@ abstract class AppLocalizations {
   /// No description provided for @dotsBody.
   ///
   /// In en, this message translates to:
-  /// **'Companies that turned up in more than one place in the last {days} days — with what those places have in common.'**
+  /// **'Companies that turned up in more than one place in {days} days.'**
   String dotsBody(int days);
 
   /// No description provided for @dotsFiling.
@@ -3731,7 +3731,7 @@ abstract class AppLocalizations {
   /// No description provided for @busyBody.
   ///
   /// In en, this message translates to:
-  /// **'{count} companies changed hands at least twice as often as they normally do today. These are the busiest, and the list does not depend on whether anything was announced.'**
+  /// **'{count} traded at least twice their usual volume today.'**
   String busyBody(int count);
 
   /// No description provided for @busyNone.
@@ -3749,7 +3749,7 @@ abstract class AppLocalizations {
   /// No description provided for @busyFloorNote.
   ///
   /// In en, this message translates to:
-  /// **'Companies trading less than {amount} in the session are left out: a multiple of a very small number is arithmetic, not news.'**
+  /// **'Sessions worth under {amount} are left out.'**
   String busyFloorNote(String amount);
 
   /// No description provided for @homeSearchHint.
@@ -3769,6 +3769,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See all {count} results'**
   String homeSearchMore(int count);
+
+  /// No description provided for @volumeTeachingShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual volume is a question, not a verdict.'**
+  String get volumeTeachingShort;
+
+  /// No description provided for @heroLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The exchange today'**
+  String get heroLabel;
+
+  /// No description provided for @heroBreadth.
+  ///
+  /// In en, this message translates to:
+  /// **'{up} rose · {flat} unchanged · {down} fell'**
+  String heroBreadth(int up, int flat, int down);
+
+  /// No description provided for @heroOf.
+  ///
+  /// In en, this message translates to:
+  /// **'of {count} shares'**
+  String heroOf(int count);
+
+  /// No description provided for @volumeTeachingFloor.
+  ///
+  /// In en, this message translates to:
+  /// **'A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.'**
+  String get volumeTeachingFloor;
 }
 
 class _AppLocalizationsDelegate

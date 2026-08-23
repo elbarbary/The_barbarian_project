@@ -6,7 +6,6 @@ import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/core/models/rates.dart';
 import 'package:barbarian/core/models/market_history.dart';
 import 'package:barbarian/core/models/macro.dart';
-import 'package:flutter/widgets.dart';
 import 'package:barbarian/features/home/busiest.dart';
 import 'package:barbarian/features/home/connect_dots.dart';
 import 'package:barbarian/features/home/lead_story.dart';
@@ -25,85 +24,6 @@ import 'support/harness.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
-
-  testWidgets('it leads with a filing the classifier could place', (
-    tester,
-  ) async {
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
-
-    // A bare "Statement" says nothing about what happened, and it is the most
-    // common filing type there is. Leading with one wastes the largest card on
-    // the screen, so anything the classifier placed outranks it.
-    //
-    // Asserted about the lead alone. This used to search the whole screen,
-    // which only held while Home showed four filings and no statement happened
-    // to be among them — a statement further down the list is an ordinary
-    // filing and says nothing about what the hero chose.
-    final lead = tester.widget<Text>(find.byKey(const Key('home-lead-filing')));
-    expect(
-      lead.data,
-      isNot(matches(RegExp(r'Statement$'))),
-      reason: 'the largest card must not be spent on a bare "Statement"',
-    );
-  });
-
-  testWidgets('§49 the hero dates itself and never backdates a claim', (
-    tester,
-  ) async {
-    // The lead is chosen by rank before date, so the biggest card on the
-    // screen can hold a filing from an earlier session. Its kicker said
-    // "Filed today" regardless — and when this was found the entire feed was
-    // one day old, so Home was stating something false in its largest type.
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
-
-    final fixture = readFixtureObjectSync('disclosures/latest.json');
-    final items = (fixture['items'] as List).cast<Map<String, dynamic>>();
-    final today = DateTime.now();
-    final isToday = items.any((i) {
-      final d = DateTime.tryParse((i['date'] ?? '') as String);
-      return d != null &&
-          d.year == today.year &&
-          d.month == today.month &&
-          d.day == today.day;
-    });
-
-    if (!isToday) {
-      expect(
-        find.textContaining(RegExp('FILED TODAY', caseSensitive: false)),
-        findsNothing,
-        reason: 'no filing in the feed is from today, so nothing may say so',
-      );
-    }
-  });
-
-  testWidgets('the lead filing says why it is the lead', (tester) async {
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
-
-    // The kicker carries the measured reason this filing leads, and the body
-    // carries it in words. Without either the hero is just the newest filing
-    // wearing a big font.
-    expect(
-      find.textContaining(
-        RegExp(
-          'normal volume|announced this|filed this|NORMAL',
-          caseSensitive: false,
-        ),
-      ),
-      findsWidgets,
-    );
-  });
 
   testWidgets('it shows all three index levels, not just the thirty', (
     tester,
@@ -245,14 +165,14 @@ void main() {
     await pumpScreen(tester, const TodayScreen());
     await pumpUntil(tester, find.byType(BLeadStory));
 
-    // The stories, then what those documents have in common, then the feeds
+    // What several documents have in common, then the stories, then the feeds
     // they were drawn from. Reading the crossings after scrolling eighty
     // filings is reading them too late.
-    final lead = tester.getTopLeft(find.byType(BLeadStory)).dy;
     final dots = tester.getTopLeft(find.byType(BConnectDots)).dy;
+    final lead = tester.getTopLeft(find.byType(BLeadStory)).dy;
     final feeds = tester.getTopLeft(find.byType(BTodayFeeds)).dy;
-    expect(lead, lessThan(dots));
-    expect(dots, lessThan(feeds));
+    expect(dots, lessThan(lead));
+    expect(lead, lessThan(feeds));
   });
 
   testWidgets('§8 the macro block explains and never instructs', (
@@ -262,10 +182,7 @@ void main() {
     // from a number outside the exchange to a share inside it. It has to stop
     // at the mechanism.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
+    await pumpUntil(tester, find.byType(BBusiest));
 
     for (final word in [
       'you should',
@@ -424,10 +341,7 @@ void main() {
     // on named issuers is exposure we have not cleared. Home must not be the
     // back door that puts it in front of everyone anyway.
     await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(
-      tester,
-      find.textContaining(RegExp('announced this|filed this')),
-    );
+    await pumpUntil(tester, find.byType(BBusiest));
 
     for (final absent in [
       'latest research',

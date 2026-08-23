@@ -37,7 +37,7 @@ class BTeachingLine extends StatelessWidget {
     plain: l.volumeTeaching,
     token: '2.0×',
     workings: l.volumeTeachingWorkings,
-    yardstick: l.volumeTeachingYardstick,
+    yardstick: [l.volumeTeachingYardstick, l.volumeTeachingFloor].join('\n\n'),
     // The threshold is this app's own, not a published band, and the sheet
     // says which. Marking it notable would be dressing our line as the
     // exchange's.

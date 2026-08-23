@@ -10,6 +10,8 @@ import '../../core/models/profit_movement.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/controls.dart';
+import '../../core/widgets/explainer_sheet.dart';
+import '../../core/widgets/teaching.dart';
 import '../../core/widgets/motion.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
@@ -85,6 +87,7 @@ class BBusiest extends ConsumerWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          BSectionLabel(l.homeWhichCompanies, bottomGap: 6),
           Text(
             l.busyNone,
             style: BarbarianType.bodyM.copyWith(
@@ -101,12 +104,29 @@ class BBusiest extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // The heading carries the way in to the explanation.
+        //
+        // This block used to open with a section label, three sentences and a
+        // four-line paragraph defining what a multiple is — a wall of text on
+        // the landing screen, before a single number. The teaching is
+        // unchanged and one tap away; it is just no longer the first thing a
+        // reader has to get through every time they open the app.
+        BSectionLabel(
+          l.homeWhichCompanies,
+          bottomGap: 6,
+          trailing: BPressable(
+            onTap: () => showExplainer(context, BTeachingLine.explainer(l)),
+            child: BDottedUnderline(
+              child: Text(
+                l.learnMore,
+                style: BarbarianType.labelS.copyWith(color: c.accent),
+              ),
+            ),
+          ),
+        ),
         Text(
           l.busyBody(cleared),
-          style: BarbarianType.bodyM.copyWith(
-            color: c.textSecondary,
-            height: 1.45,
-          ),
+          style: BarbarianType.bodyM.copyWith(color: c.textSecondary),
         ),
         const SizedBox(height: 12),
         BPaperCard(

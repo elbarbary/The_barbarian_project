@@ -1,5 +1,6 @@
-import 'package:barbarian/core/widgets/async_view.dart';
+import 'package:barbarian/core/widgets/controls.dart';
 import 'package:barbarian/features/home/home_screen.dart';
+import 'package:barbarian/features/today/today_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
@@ -16,9 +17,14 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
 
-  testWidgets('the first frame does not claim nothing was filed', (
+  testWidgets('the first frame does not claim the day was quiet', (
     tester,
   ) async {
+    // The lead-filing hero this used to guard is gone — the filings live on
+    // Today, in full. Home's own version of the same mistake would be to say
+    // "no company traded far outside its own normal today" before the
+    // directory and the snapshot have arrived, which is a claim about the
+    // exchange made from an empty cache.
     usePhoneSurface(tester);
     await tester.pumpWidget(harness(const HomeScreen()));
 
@@ -26,14 +32,26 @@ void main() {
     await tester.pump();
 
     expect(
-      find.text('Nothing filed yet today'),
+      find.textContaining('No company traded'),
       findsNothing,
-      reason: 'said so before the document had arrived',
+      reason: 'said so before the documents had arrived',
     );
     expect(
-      find.byType(BLoadingBlocks),
+      find.byType(BSkeletonBlock),
       findsWidgets,
-      reason: 'the slot should say it is still loading',
+      reason: 'the hero should say it is still loading',
+    );
+  });
+
+  testWidgets('and Today does not claim nothing was filed', (tester) async {
+    usePhoneSurface(tester);
+    await tester.pumpWidget(harness(const TodayScreen()));
+    await tester.pump();
+
+    expect(
+      find.textContaining('has not published yet'),
+      findsNothing,
+      reason: 'said so before the document had arrived',
     );
   });
 }

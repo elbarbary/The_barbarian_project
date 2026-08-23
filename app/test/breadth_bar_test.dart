@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'support/harness.dart';
 
-/// The proportion bar under "What rose and what fell".
+/// The proportion bar inside Home's market hero.
 ///
 /// Three counts tell a reader who is counting; the bar tells one who is
 /// glancing. It was reported missing from the screen while sitting correctly
@@ -15,16 +15,22 @@ import 'support/harness.dart';
 ///
 /// So this measures the **painted segments**, not the presence of a widget. A
 /// test that only asked whether the bar existed passed the entire time it was
-/// invisible, which is the more useful lesson of the two.
+/// invisible, which is the more useful lesson of the two — and the reason the
+/// key travelled with the bar when it moved into the hero rather than being
+/// left behind with the block it came from.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(useInMemoryPreferences);
 
+  Future<void> openHome(WidgetTester tester) async {
+    await pumpScreen(tester, const HomeScreen());
+    await pumpUntil(tester, find.byKey(const Key('breadth-bar')));
+  }
+
   testWidgets('the breadth bar paints three segments with height', (
     tester,
   ) async {
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp(r'of \d+ shares')));
+    await openHome(tester);
 
     final bar = find.byKey(const Key('breadth-bar'));
     expect(bar, findsOneWidget, reason: 'the proportion bar is not on screen');
@@ -35,7 +41,7 @@ void main() {
 
     final segments = find.descendant(
       of: bar,
-      matching: find.byType(DecoratedBox),
+      matching: find.byType(ColoredBox),
     );
     expect(
       segments,
@@ -59,13 +65,32 @@ void main() {
     expect(widest, lessThan(size.width));
   });
 
-  testWidgets('each count carries its own share of the market', (tester) async {
-    await pumpScreen(tester, const HomeScreen());
-    await pumpUntil(tester, find.textContaining(RegExp(r'of \d+ shares')));
+  testWidgets('the three counts are named, in the bar\'s own order', (
+    tester,
+  ) async {
+    await openHome(tester);
 
-    // Three percentages, one under each count, in the bar's own order. They
-    // used to sit in a row of their own spaced by the bar's proportions, which
-    // put the unchanged share directly beneath the word "fell".
-    expect(find.textContaining(RegExp(r'^\d+%$')), findsNWidgets(3));
+    // The percentages went with the block this replaced. What matters is that
+    // the three numbers are labelled in the same order the colours run, which
+    // is the mistake the old block made: it printed rose / fell / unchanged
+    // above a bar running rose / unchanged / fell, so the middle share sat
+    // under the word "fell".
+    final line = tester
+        .widgetList<Text>(find.byType(Text))
+        .map((t) => t.data ?? '')
+        .firstWhere(
+          (s) => s.contains('rose') && s.contains('fell'),
+          orElse: () => '',
+        );
+    expect(line, isNotEmpty, reason: 'the counts are not on screen');
+    expect(
+      line.indexOf('rose'),
+      lessThan(line.indexOf('unchanged')),
+      reason: 'the words must run in the order the colours do',
+    );
+    expect(line.indexOf('unchanged'), lessThan(line.indexOf('fell')));
+
+    // And the total the shares are out of.
+    expect(find.textContaining(RegExp(r'of \d+ shares')), findsOneWidget);
   });
 }
