@@ -404,6 +404,17 @@ def publish(held: dict) -> None:
         if folder is FIXTURES and not folder.parent.exists():
             continue
         folder.mkdir(parents=True, exist_ok=True)
+        # A company no longer held has its document deleted, not left behind.
+        #
+        # This wrote the held set and stopped, so a brief that a later run
+        # *refused* kept serving the copy an earlier run had written — which
+        # is the exact opposite of what a refusal is for. Six of the first
+        # hundred and ten survived that way: ACFR, ANCC and ENPI were all
+        # refused as generic and all three were still on the CDN saying the
+        # generic thing.
+        for stale in folder.glob("*.json"):
+            if stale.stem not in held:
+                stale.unlink()
         for ticker, brief in held.items():
             (folder / f"{ticker}.json").write_text(
                 json.dumps({"ticker": ticker, **brief}, ensure_ascii=False,

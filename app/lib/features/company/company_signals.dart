@@ -46,6 +46,7 @@ class BCompanySignals extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final signals = ref.watch(companySignalsProvider(ticker)).value?.value;
     if (signals == null) return const SizedBox.shrink();
 
@@ -67,7 +68,7 @@ class BCompanySignals extends ConsumerWidget {
       for (final first in signals.firsts)
         _Row(
           icon: Icons.new_releases_outlined,
-          headline: l.sigFirstOfType(first.label, first.gapYears),
+          headline: l.sigFirstOfType(first.labelFor(arabic), first.gapYears),
           detail: first.previousYear.isEmpty
               ? ''
               : l.sigLastSeen(first.previousYear),

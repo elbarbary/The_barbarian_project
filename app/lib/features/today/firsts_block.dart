@@ -109,7 +109,7 @@ class _SignalRow extends StatelessWidget {
     final headline = switch (signal.kind) {
       'first_loss' => l.sigFirstLoss(signal.period, signal.run),
       'back_to_profit' => l.sigBackToProfit(signal.period, signal.run),
-      _ => l.sigFirstOfType(signal.label, signal.gapYears),
+      _ => l.sigFirstOfType(signal.labelFor(arabic), signal.gapYears),
     };
 
     return BPressable(

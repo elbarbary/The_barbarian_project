@@ -653,8 +653,11 @@ as String,
 /// @nodoc
 mixin _$FirstOfType {
 
- String get type;/// The plain-English name of the type, from the builder's own table.
- String get label; String get date; String get previous;@JsonKey(name: 'gap_days') int get gapDays; String get title;@JsonKey(name: 'title_ar') String get titleAr; String get id; String get link;
+ String get type;/// The type's name, in both languages, from the builder's own table.
+/// Both, because "its first trading halt in three years" is a sentence the
+/// app writes in Arabic too, and an English noun dropped into the middle
+/// of an Arabic clause is what the first build shipped.
+ String get label;@JsonKey(name: 'label_ar') String get labelAr; String get date; String get previous;@JsonKey(name: 'gap_days') int get gapDays; String get title;@JsonKey(name: 'title_ar') String get titleAr; String get id; String get link;
 /// Create a copy of FirstOfType
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -667,16 +670,16 @@ $FirstOfTypeCopyWith<FirstOfType> get copyWith => _$FirstOfTypeCopyWithImpl<Firs
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirstOfType&&(identical(other.type, type) || other.type == type)&&(identical(other.label, label) || other.label == label)&&(identical(other.date, date) || other.date == date)&&(identical(other.previous, previous) || other.previous == previous)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.link, link) || other.link == link));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirstOfType&&(identical(other.type, type) || other.type == type)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.date, date) || other.date == date)&&(identical(other.previous, previous) || other.previous == previous)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.link, link) || other.link == link));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,label,date,previous,gapDays,title,titleAr,id,link);
+int get hashCode => Object.hash(runtimeType,type,label,labelAr,date,previous,gapDays,title,titleAr,id,link);
 
 @override
 String toString() {
-  return 'FirstOfType(type: $type, label: $label, date: $date, previous: $previous, gapDays: $gapDays, title: $title, titleAr: $titleAr, id: $id, link: $link)';
+  return 'FirstOfType(type: $type, label: $label, labelAr: $labelAr, date: $date, previous: $previous, gapDays: $gapDays, title: $title, titleAr: $titleAr, id: $id, link: $link)';
 }
 
 
@@ -687,7 +690,7 @@ abstract mixin class $FirstOfTypeCopyWith<$Res>  {
   factory $FirstOfTypeCopyWith(FirstOfType value, $Res Function(FirstOfType) _then) = _$FirstOfTypeCopyWithImpl;
 @useResult
 $Res call({
- String type, String label, String date, String previous,@JsonKey(name: 'gap_days') int gapDays, String title,@JsonKey(name: 'title_ar') String titleAr, String id, String link
+ String type, String label,@JsonKey(name: 'label_ar') String labelAr, String date, String previous,@JsonKey(name: 'gap_days') int gapDays, String title,@JsonKey(name: 'title_ar') String titleAr, String id, String link
 });
 
 
@@ -704,10 +707,11 @@ class _$FirstOfTypeCopyWithImpl<$Res>
 
 /// Create a copy of FirstOfType
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? label = null,Object? date = null,Object? previous = null,Object? gapDays = null,Object? title = null,Object? titleAr = null,Object? id = null,Object? link = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? label = null,Object? labelAr = null,Object? date = null,Object? previous = null,Object? gapDays = null,Object? title = null,Object? titleAr = null,Object? id = null,Object? link = null,}) {
   return _then(_self.copyWith(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,previous: null == previous ? _self.previous : previous // ignore: cast_nullable_to_non_nullable
 as String,gapDays: null == gapDays ? _self.gapDays : gapDays // ignore: cast_nullable_to_non_nullable
@@ -800,10 +804,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String type,  String label,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String type,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FirstOfType() when $default != null:
-return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
+return $default(_that.type,_that.label,_that.labelAr,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
   return orElse();
 
 }
@@ -821,10 +825,10 @@ return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String type,  String label,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String type,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)  $default,) {final _that = this;
 switch (_that) {
 case _FirstOfType():
-return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
+return $default(_that.type,_that.label,_that.labelAr,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -841,10 +845,10 @@ return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String type,  String label,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String type,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date,  String previous, @JsonKey(name: 'gap_days')  int gapDays,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String id,  String link)?  $default,) {final _that = this;
 switch (_that) {
 case _FirstOfType() when $default != null:
-return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
+return $default(_that.type,_that.label,_that.labelAr,_that.date,_that.previous,_that.gapDays,_that.title,_that.titleAr,_that.id,_that.link);case _:
   return null;
 
 }
@@ -856,12 +860,16 @@ return $default(_that.type,_that.label,_that.date,_that.previous,_that.gapDays,_
 @JsonSerializable()
 
 class _FirstOfType extends FirstOfType {
-  const _FirstOfType({this.type = '', this.label = '', this.date = '', this.previous = '', @JsonKey(name: 'gap_days') this.gapDays = 0, this.title = '', @JsonKey(name: 'title_ar') this.titleAr = '', this.id = '', this.link = ''}): super._();
+  const _FirstOfType({this.type = '', this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.date = '', this.previous = '', @JsonKey(name: 'gap_days') this.gapDays = 0, this.title = '', @JsonKey(name: 'title_ar') this.titleAr = '', this.id = '', this.link = ''}): super._();
   factory _FirstOfType.fromJson(Map<String, dynamic> json) => _$FirstOfTypeFromJson(json);
 
 @override@JsonKey() final  String type;
-/// The plain-English name of the type, from the builder's own table.
+/// The type's name, in both languages, from the builder's own table.
+/// Both, because "its first trading halt in three years" is a sentence the
+/// app writes in Arabic too, and an English noun dropped into the middle
+/// of an Arabic clause is what the first build shipped.
 @override@JsonKey() final  String label;
+@override@JsonKey(name: 'label_ar') final  String labelAr;
 @override@JsonKey() final  String date;
 @override@JsonKey() final  String previous;
 @override@JsonKey(name: 'gap_days') final  int gapDays;
@@ -883,16 +891,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirstOfType&&(identical(other.type, type) || other.type == type)&&(identical(other.label, label) || other.label == label)&&(identical(other.date, date) || other.date == date)&&(identical(other.previous, previous) || other.previous == previous)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.link, link) || other.link == link));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirstOfType&&(identical(other.type, type) || other.type == type)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.date, date) || other.date == date)&&(identical(other.previous, previous) || other.previous == previous)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.link, link) || other.link == link));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,type,label,date,previous,gapDays,title,titleAr,id,link);
+int get hashCode => Object.hash(runtimeType,type,label,labelAr,date,previous,gapDays,title,titleAr,id,link);
 
 @override
 String toString() {
-  return 'FirstOfType(type: $type, label: $label, date: $date, previous: $previous, gapDays: $gapDays, title: $title, titleAr: $titleAr, id: $id, link: $link)';
+  return 'FirstOfType(type: $type, label: $label, labelAr: $labelAr, date: $date, previous: $previous, gapDays: $gapDays, title: $title, titleAr: $titleAr, id: $id, link: $link)';
 }
 
 
@@ -903,7 +911,7 @@ abstract mixin class _$FirstOfTypeCopyWith<$Res> implements $FirstOfTypeCopyWith
   factory _$FirstOfTypeCopyWith(_FirstOfType value, $Res Function(_FirstOfType) _then) = __$FirstOfTypeCopyWithImpl;
 @override @useResult
 $Res call({
- String type, String label, String date, String previous,@JsonKey(name: 'gap_days') int gapDays, String title,@JsonKey(name: 'title_ar') String titleAr, String id, String link
+ String type, String label,@JsonKey(name: 'label_ar') String labelAr, String date, String previous,@JsonKey(name: 'gap_days') int gapDays, String title,@JsonKey(name: 'title_ar') String titleAr, String id, String link
 });
 
 
@@ -920,10 +928,11 @@ class __$FirstOfTypeCopyWithImpl<$Res>
 
 /// Create a copy of FirstOfType
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? label = null,Object? date = null,Object? previous = null,Object? gapDays = null,Object? title = null,Object? titleAr = null,Object? id = null,Object? link = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? label = null,Object? labelAr = null,Object? date = null,Object? previous = null,Object? gapDays = null,Object? title = null,Object? titleAr = null,Object? id = null,Object? link = null,}) {
   return _then(_FirstOfType(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,previous: null == previous ? _self.previous : previous // ignore: cast_nullable_to_non_nullable
 as String,gapDays: null == gapDays ? _self.gapDays : gapDays // ignore: cast_nullable_to_non_nullable
@@ -2064,7 +2073,7 @@ mixin _$MarketSignal {
 
  String get ticker; String get name;@JsonKey(name: 'name_ar') String get nameAr; String get kind;// Present on a streak break.
  String get period;@JsonKey(name: 'period_end') String get periodEnd; double get value; int get run; String get since;// Present on a first-in-years.
- String get label; String get date;@JsonKey(name: 'gap_days') int get gapDays; String get link;
+ String get label;@JsonKey(name: 'label_ar') String get labelAr; String get date;@JsonKey(name: 'gap_days') int get gapDays; String get link;
 /// Create a copy of MarketSignal
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2077,16 +2086,16 @@ $MarketSignalCopyWith<MarketSignal> get copyWith => _$MarketSignalCopyWithImpl<M
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSignal&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.period, period) || other.period == period)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.value, value) || other.value == value)&&(identical(other.run, run) || other.run == run)&&(identical(other.since, since) || other.since == since)&&(identical(other.label, label) || other.label == label)&&(identical(other.date, date) || other.date == date)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.link, link) || other.link == link));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MarketSignal&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.period, period) || other.period == period)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.value, value) || other.value == value)&&(identical(other.run, run) || other.run == run)&&(identical(other.since, since) || other.since == since)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.date, date) || other.date == date)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.link, link) || other.link == link));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,nameAr,kind,period,periodEnd,value,run,since,label,date,gapDays,link);
+int get hashCode => Object.hash(runtimeType,ticker,name,nameAr,kind,period,periodEnd,value,run,since,label,labelAr,date,gapDays,link);
 
 @override
 String toString() {
-  return 'MarketSignal(ticker: $ticker, name: $name, nameAr: $nameAr, kind: $kind, period: $period, periodEnd: $periodEnd, value: $value, run: $run, since: $since, label: $label, date: $date, gapDays: $gapDays, link: $link)';
+  return 'MarketSignal(ticker: $ticker, name: $name, nameAr: $nameAr, kind: $kind, period: $period, periodEnd: $periodEnd, value: $value, run: $run, since: $since, label: $label, labelAr: $labelAr, date: $date, gapDays: $gapDays, link: $link)';
 }
 
 
@@ -2097,7 +2106,7 @@ abstract mixin class $MarketSignalCopyWith<$Res>  {
   factory $MarketSignalCopyWith(MarketSignal value, $Res Function(MarketSignal) _then) = _$MarketSignalCopyWithImpl;
 @useResult
 $Res call({
- String ticker, String name,@JsonKey(name: 'name_ar') String nameAr, String kind, String period,@JsonKey(name: 'period_end') String periodEnd, double value, int run, String since, String label, String date,@JsonKey(name: 'gap_days') int gapDays, String link
+ String ticker, String name,@JsonKey(name: 'name_ar') String nameAr, String kind, String period,@JsonKey(name: 'period_end') String periodEnd, double value, int run, String since, String label,@JsonKey(name: 'label_ar') String labelAr, String date,@JsonKey(name: 'gap_days') int gapDays, String link
 });
 
 
@@ -2114,7 +2123,7 @@ class _$MarketSignalCopyWithImpl<$Res>
 
 /// Create a copy of MarketSignal
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? nameAr = null,Object? kind = null,Object? period = null,Object? periodEnd = null,Object? value = null,Object? run = null,Object? since = null,Object? label = null,Object? date = null,Object? gapDays = null,Object? link = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? nameAr = null,Object? kind = null,Object? period = null,Object? periodEnd = null,Object? value = null,Object? run = null,Object? since = null,Object? label = null,Object? labelAr = null,Object? date = null,Object? gapDays = null,Object? link = null,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -2126,6 +2135,7 @@ as String,value: null == value ? _self.value : value // ignore: cast_nullable_to
 as double,run: null == run ? _self.run : run // ignore: cast_nullable_to_non_nullable
 as int,since: null == since ? _self.since : since // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,gapDays: null == gapDays ? _self.gapDays : gapDays // ignore: cast_nullable_to_non_nullable
 as int,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
@@ -2214,10 +2224,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketSignal() when $default != null:
-return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.date,_that.gapDays,_that.link);case _:
+return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.labelAr,_that.date,_that.gapDays,_that.link);case _:
   return orElse();
 
 }
@@ -2235,10 +2245,10 @@ return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)  $default,) {final _that = this;
 switch (_that) {
 case _MarketSignal():
-return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.date,_that.gapDays,_that.link);case _:
+return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.labelAr,_that.date,_that.gapDays,_that.link);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2255,10 +2265,10 @@ return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String name, @JsonKey(name: 'name_ar')  String nameAr,  String kind,  String period, @JsonKey(name: 'period_end')  String periodEnd,  double value,  int run,  String since,  String label, @JsonKey(name: 'label_ar')  String labelAr,  String date, @JsonKey(name: 'gap_days')  int gapDays,  String link)?  $default,) {final _that = this;
 switch (_that) {
 case _MarketSignal() when $default != null:
-return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.date,_that.gapDays,_that.link);case _:
+return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_that.periodEnd,_that.value,_that.run,_that.since,_that.label,_that.labelAr,_that.date,_that.gapDays,_that.link);case _:
   return null;
 
 }
@@ -2270,7 +2280,7 @@ return $default(_that.ticker,_that.name,_that.nameAr,_that.kind,_that.period,_th
 @JsonSerializable()
 
 class _MarketSignal extends MarketSignal {
-  const _MarketSignal({this.ticker = '', this.name = '', @JsonKey(name: 'name_ar') this.nameAr = '', this.kind = '', this.period = '', @JsonKey(name: 'period_end') this.periodEnd = '', this.value = 0, this.run = 0, this.since = '', this.label = '', this.date = '', @JsonKey(name: 'gap_days') this.gapDays = 0, this.link = ''}): super._();
+  const _MarketSignal({this.ticker = '', this.name = '', @JsonKey(name: 'name_ar') this.nameAr = '', this.kind = '', this.period = '', @JsonKey(name: 'period_end') this.periodEnd = '', this.value = 0, this.run = 0, this.since = '', this.label = '', @JsonKey(name: 'label_ar') this.labelAr = '', this.date = '', @JsonKey(name: 'gap_days') this.gapDays = 0, this.link = ''}): super._();
   factory _MarketSignal.fromJson(Map<String, dynamic> json) => _$MarketSignalFromJson(json);
 
 @override@JsonKey() final  String ticker;
@@ -2285,6 +2295,7 @@ class _MarketSignal extends MarketSignal {
 @override@JsonKey() final  String since;
 // Present on a first-in-years.
 @override@JsonKey() final  String label;
+@override@JsonKey(name: 'label_ar') final  String labelAr;
 @override@JsonKey() final  String date;
 @override@JsonKey(name: 'gap_days') final  int gapDays;
 @override@JsonKey() final  String link;
@@ -2302,16 +2313,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSignal&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.period, period) || other.period == period)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.value, value) || other.value == value)&&(identical(other.run, run) || other.run == run)&&(identical(other.since, since) || other.since == since)&&(identical(other.label, label) || other.label == label)&&(identical(other.date, date) || other.date == date)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.link, link) || other.link == link));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSignal&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.nameAr, nameAr) || other.nameAr == nameAr)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.period, period) || other.period == period)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.value, value) || other.value == value)&&(identical(other.run, run) || other.run == run)&&(identical(other.since, since) || other.since == since)&&(identical(other.label, label) || other.label == label)&&(identical(other.labelAr, labelAr) || other.labelAr == labelAr)&&(identical(other.date, date) || other.date == date)&&(identical(other.gapDays, gapDays) || other.gapDays == gapDays)&&(identical(other.link, link) || other.link == link));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,nameAr,kind,period,periodEnd,value,run,since,label,date,gapDays,link);
+int get hashCode => Object.hash(runtimeType,ticker,name,nameAr,kind,period,periodEnd,value,run,since,label,labelAr,date,gapDays,link);
 
 @override
 String toString() {
-  return 'MarketSignal(ticker: $ticker, name: $name, nameAr: $nameAr, kind: $kind, period: $period, periodEnd: $periodEnd, value: $value, run: $run, since: $since, label: $label, date: $date, gapDays: $gapDays, link: $link)';
+  return 'MarketSignal(ticker: $ticker, name: $name, nameAr: $nameAr, kind: $kind, period: $period, periodEnd: $periodEnd, value: $value, run: $run, since: $since, label: $label, labelAr: $labelAr, date: $date, gapDays: $gapDays, link: $link)';
 }
 
 
@@ -2322,7 +2333,7 @@ abstract mixin class _$MarketSignalCopyWith<$Res> implements $MarketSignalCopyWi
   factory _$MarketSignalCopyWith(_MarketSignal value, $Res Function(_MarketSignal) _then) = __$MarketSignalCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, String name,@JsonKey(name: 'name_ar') String nameAr, String kind, String period,@JsonKey(name: 'period_end') String periodEnd, double value, int run, String since, String label, String date,@JsonKey(name: 'gap_days') int gapDays, String link
+ String ticker, String name,@JsonKey(name: 'name_ar') String nameAr, String kind, String period,@JsonKey(name: 'period_end') String periodEnd, double value, int run, String since, String label,@JsonKey(name: 'label_ar') String labelAr, String date,@JsonKey(name: 'gap_days') int gapDays, String link
 });
 
 
@@ -2339,7 +2350,7 @@ class __$MarketSignalCopyWithImpl<$Res>
 
 /// Create a copy of MarketSignal
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? nameAr = null,Object? kind = null,Object? period = null,Object? periodEnd = null,Object? value = null,Object? run = null,Object? since = null,Object? label = null,Object? date = null,Object? gapDays = null,Object? link = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? nameAr = null,Object? kind = null,Object? period = null,Object? periodEnd = null,Object? value = null,Object? run = null,Object? since = null,Object? label = null,Object? labelAr = null,Object? date = null,Object? gapDays = null,Object? link = null,}) {
   return _then(_MarketSignal(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -2351,6 +2362,7 @@ as String,value: null == value ? _self.value : value // ignore: cast_nullable_to
 as double,run: null == run ? _self.run : run // ignore: cast_nullable_to_non_nullable
 as int,since: null == since ? _self.since : since // ignore: cast_nullable_to_non_nullable
 as String,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
+as String,labelAr: null == labelAr ? _self.labelAr : labelAr // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,gapDays: null == gapDays ? _self.gapDays : gapDays // ignore: cast_nullable_to_non_nullable
 as int,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable

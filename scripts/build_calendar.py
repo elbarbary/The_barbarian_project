@@ -68,6 +68,11 @@ FIXTURE = REPO / "app" / "assets" / "fixtures" / "calendar.json"
 FIXTURE_FILED = REPO / "app" / "assets" / "fixtures" / "calendar" / "filed"
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
+# The heading of a filing that names two listings writes them inside one pair
+# of brackets — "(FAITA.CA-FAIT.CA)" — which the pattern above will not match
+# at all, so 64 filings on a single day came through with no company against
+# them. This one takes the first ticker in the group.
+ANY_TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\b")
 
 
 def strip(html: str) -> str:
@@ -266,7 +271,7 @@ def filed_rows() -> dict[str, list[dict]]:
             continue
         heading = (item.get("heading") or "").strip()
         arabic = (item.get("headingArabic") or "").strip()
-        tick = TICKER.search(heading) or TICKER.search(arabic)
+        tick = ANY_TICKER.search(heading) or ANY_TICKER.search(arabic)
         months.setdefault(stamp[:7], []).append({
             "date": stamp,
             "ticker": tick.group(1) if tick else None,

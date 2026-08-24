@@ -84,8 +84,12 @@ abstract class FirstOfType with _$FirstOfType {
   const factory FirstOfType({
     @Default('') String type,
 
-    /// The plain-English name of the type, from the builder's own table.
+    /// The type's name, in both languages, from the builder's own table.
+    /// Both, because "its first trading halt in three years" is a sentence the
+    /// app writes in Arabic too, and an English noun dropped into the middle
+    /// of an Arabic clause is what the first build shipped.
     @Default('') String label,
+    @JsonKey(name: 'label_ar') @Default('') String labelAr,
     @Default('') String date,
     @Default('') String previous,
     @JsonKey(name: 'gap_days') @Default(0) int gapDays,
@@ -101,6 +105,9 @@ abstract class FirstOfType with _$FirstOfType {
       _$FirstOfTypeFromJson(json);
 
   int get gapYears => gapDays ~/ 365;
+
+  String labelFor(bool arabic) =>
+      arabic && labelAr.isNotEmpty ? labelAr : label;
 
   String get previousYear =>
       previous.length >= 4 ? previous.substring(0, 4) : '';
@@ -208,6 +215,7 @@ abstract class MarketSignal with _$MarketSignal {
 
     // Present on a first-in-years.
     @Default('') String label,
+    @JsonKey(name: 'label_ar') @Default('') String labelAr,
     @Default('') String date,
     @JsonKey(name: 'gap_days') @Default(0) int gapDays,
     @Default('') String link,
@@ -222,6 +230,9 @@ abstract class MarketSignal with _$MarketSignal {
   String get when => date.isNotEmpty ? date : periodEnd;
 
   int get gapYears => gapDays ~/ 365;
+
+  String labelFor(bool arabic) =>
+      arabic && labelAr.isNotEmpty ? labelAr : label;
 
   String nameFor(bool arabic) =>
       arabic && nameAr.isNotEmpty ? nameAr : (name.isEmpty ? ticker : name);

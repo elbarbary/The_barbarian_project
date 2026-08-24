@@ -263,7 +263,7 @@ class _Chevron extends StatelessWidget {
 /// A month as a 7×6 grid. Days that carry events show a dot; the day in focus
 /// and today are marked. Colour never carries meaning on its own — the grid
 /// says "something is scheduled here", and the agenda below names it.
-class _MonthGrid extends StatelessWidget {
+class _MonthGrid extends ConsumerWidget {
   const _MonthGrid({
     required this.doc,
     required this.cursor,
@@ -275,11 +275,20 @@ class _MonthGrid extends StatelessWidget {
   final ValueChanged<DateTime> onPick;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final locale = Localizations.localeOf(context).toLanguageTag();
     final today = _CalendarScreenState._today();
     final counts = _countsByDay(doc);
+    // A day with nothing scheduled can still have had sixty filings land on
+    // it, and a grid that showed nothing there hid the whole lower half of
+    // this screen behind a day nobody would think to tap.
+    final lodged = ref
+            .watch(filedMonthProvider(BFiledOnDay.monthKey(cursor)))
+            .value
+            ?.value
+            .countsByDay ??
+        const <String, int>{};
 
     final first = DateTime(cursor.year, cursor.month);
     // Egyptian week starts Saturday. Dart weekday: Mon=1..Sun=7, Sat=6.
@@ -321,6 +330,7 @@ class _MonthGrid extends StatelessWidget {
                           day: day,
                           inMonth: inMonth,
                           count: counts[_key(day)] ?? 0,
+                          filed: lodged[_iso(day)] ?? 0,
                           isToday: _sameDay(day, today),
                           isSelected: _sameDay(day, cursor),
                           onTap: () => onPick(day),
@@ -346,6 +356,8 @@ class _MonthGrid extends StatelessWidget {
   }
 
   static int _key(DateTime d) => d.year * 10000 + d.month * 100 + d.day;
+
+  static String _iso(DateTime d) => d.toIso8601String().split('T').first;
 }
 
 class _DayCell extends StatelessWidget {
@@ -353,6 +365,7 @@ class _DayCell extends StatelessWidget {
     required this.day,
     required this.inMonth,
     required this.count,
+    required this.filed,
     required this.isToday,
     required this.isSelected,
     required this.onTap,
@@ -360,7 +373,14 @@ class _DayCell extends StatelessWidget {
 
   final DateTime day;
   final bool inMonth;
+
+  /// Dates an issuer scheduled — the filled mark.
   final int count;
+
+  /// Filings that landed that day — the hollow one. Two shapes rather than two
+  /// colours, because colour is never a fact's only carrier here (§42), and
+  /// the same outline convention marks an estimate further down the screen.
+  final int filed;
   final bool isToday;
   final bool isSelected;
   final VoidCallback onTap;
@@ -369,6 +389,7 @@ class _DayCell extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = context.colors;
     final has = count > 0;
+    final onlyFiled = !has && filed > 0;
     final numberColor = isSelected
         ? c.onAccent
         : (inMonth ? c.textPrimary : c.textFaint);
@@ -404,19 +425,33 @@ class _DayCell extends StatelessWidget {
               // reader and shown on tap, so the mark is never the sole carrier.
               SizedBox(
                 height: 5,
-                child: has
-                    ? Semantics(
-                        label: '$count',
-                        child: Container(
-                          width: count > 1 ? 14 : 5,
-                          height: 5,
-                          decoration: BoxDecoration(
-                            color: isSelected ? c.onAccent : c.accent,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
+                child: switch ((has, onlyFiled)) {
+                  (true, _) => Semantics(
+                    label: '$count',
+                    child: Container(
+                      width: count > 1 ? 14 : 5,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: isSelected ? c.onAccent : c.accent,
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                    ),
+                  ),
+                  (false, true) => Semantics(
+                    label: '$filed',
+                    child: Container(
+                      width: 5,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isSelected ? c.onAccent : c.textFaint,
                         ),
-                      )
-                    : null,
+                      ),
+                    ),
+                  ),
+                  _ => null,
+                },
               ),
             ],
           ),

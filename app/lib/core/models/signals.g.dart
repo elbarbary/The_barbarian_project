@@ -72,6 +72,7 @@ Map<String, dynamic> _$StreakBreakToJson(_StreakBreak instance) =>
 _FirstOfType _$FirstOfTypeFromJson(Map<String, dynamic> json) => _FirstOfType(
   type: json['type'] as String? ?? '',
   label: json['label'] as String? ?? '',
+  labelAr: json['label_ar'] as String? ?? '',
   date: json['date'] as String? ?? '',
   previous: json['previous'] as String? ?? '',
   gapDays: (json['gap_days'] as num?)?.toInt() ?? 0,
@@ -85,6 +86,7 @@ Map<String, dynamic> _$FirstOfTypeToJson(_FirstOfType instance) =>
     <String, dynamic>{
       'type': instance.type,
       'label': instance.label,
+      'label_ar': instance.labelAr,
       'date': instance.date,
       'previous': instance.previous,
       'gap_days': instance.gapDays,
@@ -188,6 +190,7 @@ _MarketSignal _$MarketSignalFromJson(Map<String, dynamic> json) =>
       run: (json['run'] as num?)?.toInt() ?? 0,
       since: json['since'] as String? ?? '',
       label: json['label'] as String? ?? '',
+      labelAr: json['label_ar'] as String? ?? '',
       date: json['date'] as String? ?? '',
       gapDays: (json['gap_days'] as num?)?.toInt() ?? 0,
       link: json['link'] as String? ?? '',
@@ -205,6 +208,7 @@ Map<String, dynamic> _$MarketSignalToJson(_MarketSignal instance) =>
       'run': instance.run,
       'since': instance.since,
       'label': instance.label,
+      'label_ar': instance.labelAr,
       'date': instance.date,
       'gap_days': instance.gapDays,
       'link': instance.link,

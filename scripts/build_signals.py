@@ -100,14 +100,19 @@ GAP_YEARS = 3
 
 # Types where "the first one in years" is a fact a reader would want. Insider
 # forms and board minutes arrive constantly; their gaps mean nothing.
+#
+# Both languages, because the sentence these drop into is written in both and
+# an English noun inside an Arabic clause is what shipped first: "أول trading
+# halt منذ 3 سنوات". `filing_types.FILED_AS` carries phrases for the same
+# types, but shaped for "filed {phrase}" — this slot wants a bare noun.
 NOTABLE_TYPES = {
-    "capital_increase": "capital increase",
-    "capital_decrease": "capital decrease",
-    "dividend": "cash dividend",
-    "bonus_shares": "bonus shares",
-    "acquisition": "acquisition or merger",
-    "halt": "trading halt",
-    "funding": "borrowing or bond issue",
+    "capital_increase": ("capital increase", "زيادة رأس مال"),
+    "capital_decrease": ("capital decrease", "تخفيض رأس مال"),
+    "dividend": ("cash dividend", "توزيع نقدي"),
+    "bonus_shares": ("bonus share issue", "إصدار أسهم مجانية"),
+    "acquisition": ("acquisition or merger", "استحواذ أو اندماج"),
+    "halt": ("trading halt", "إيقاف تداول"),
+    "funding": ("borrowing or bond issue", "اقتراض أو إصدار سندات"),
 }
 
 # The four cumulative periods the exchange's filings report, and the calendar
@@ -305,7 +310,8 @@ def firsts_of_kind(filings: list[dict], today: datetime.date) -> list[dict]:
         out.append({
             "kind": "first_of_type",
             "type": kind,
-            "label": NOTABLE_TYPES[kind],
+            "label": NOTABLE_TYPES[kind][0],
+            "label_ar": NOTABLE_TYPES[kind][1],
             "date": when.isoformat(),
             "previous": before.isoformat(),
             "gap_days": gap,
