@@ -310,7 +310,17 @@ def write_filed(months: dict[str, list[dict]], today: datetime.date) -> list[dic
             if stale.stem not in keep and stale.stem != "index":
                 stale.unlink()
         for month in keep:
-            rows = sorted(months[month], key=lambda r: (r["date"], r["ticker"] or ""))
+            # Listed companies first, then everything without a ticker.
+            #
+            # Sorting on `r["ticker"] or ""` put the untickered rows at the top
+            # of every day, and on this exchange those are securitisation bond
+            # coupon notices — eight of them opened 23 August, ahead of all 56
+            # company filings behind them. The app is about listed companies;
+            # the bonds are still there, underneath.
+            rows = sorted(
+                months[month],
+                key=lambda r: (r["date"], r["ticker"] is None, r["ticker"] or ""),
+            )
             (root / f"{month}.json").write_text(
                 json.dumps({"month": month, "count": len(rows), "items": rows},
                            ensure_ascii=False, separators=(",", ":")),

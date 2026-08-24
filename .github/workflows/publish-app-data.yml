@@ -79,6 +79,7 @@ concurrency:
 # was destroyed by the next run.
 env:
   STORES: >-
+    data-source/egx-beta
     data-source/prices
     scripts/company_filings_seen.json
     scripts/company_briefs.json

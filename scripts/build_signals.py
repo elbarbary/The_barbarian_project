@@ -215,6 +215,26 @@ def day(stamp: str | None) -> datetime.date | None:
 # -------------------------------------------------------------- 1. streaks
 
 
+def all_reported_periods(ticker: str) -> list[dict]:
+    """Every period this company reported a profit or loss for.
+
+    No `period_end` required — this is the count a reader sees, and it has to
+    match the one `build_company_briefs.factual_record` puts on the same page.
+    """
+    path = COMPANIES / f"{ticker}.json"
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    financials = doc.get("financials") or {}
+    return [
+        row
+        for bucket in ("annual", "quarterly")
+        for row in (financials.get(bucket) or [])
+        if row.get("net_income") is not None
+    ]
+
+
 def reported_periods(ticker: str) -> list[dict]:
     """Every period this company reported a profit or loss for, oldest first.
 
@@ -484,9 +504,22 @@ def profile(ticker: str, filings: list[dict]) -> dict:
         if stamp:
             years[stamp] += 1
 
+    # Two sets, deliberately.
+    #
+    # `rows` carries a `period_end`, so it can be put in time order — that is
+    # what a streak, a "best period" and a "first reported" all need. But a
+    # period without one is still a period the company reported: the 18 of
+    # ELEC's 63 that came from Mubasher have a figure and no end date. Counting
+    # only the orderable ones made the brief say "45 reported periods" three
+    # centimetres above a record card counting all 63, which is one screen
+    # disagreeing with itself.
+    #
+    # So the counts come from everything, and only the ordering-dependent
+    # facts come from the subset.
     rows = reported_periods(ticker)
-    profits = [r for r in rows if r["net_income"] > 0]
-    losses = [r for r in rows if r["net_income"] < 0]
+    counted = all_reported_periods(ticker)
+    profits = [r for r in counted if r["net_income"] > 0]
+    losses = [r for r in counted if r["net_income"] < 0]
     best = max(rows, key=lambda r: r["net_income"], default=None)
     worst = min(rows, key=lambda r: r["net_income"], default=None)
     busiest = years.most_common(1)[0] if years else None
@@ -498,7 +531,7 @@ def profile(ticker: str, filings: list[dict]) -> dict:
         "busiest_year": busiest[0] if busiest else None,
         "busiest_year_filings": busiest[1] if busiest else 0,
         "by_type": dict(types.most_common(12)),
-        "periods_reported": len(rows),
+        "periods_reported": len(counted),
         "loss_making_periods": len(losses),
         "profitable_periods": len(profits),
         "best_period": {"period": best.get("period"), "net_income": best["net_income"]}

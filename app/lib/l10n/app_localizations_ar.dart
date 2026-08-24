@@ -2520,7 +2520,9 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count شركات تعلن نتائجها عادة في هذا التوقيت',
+      other: '$count شركة تعلن نتائجها عادة في هذا التوقيت',
+      many: '$count شركة تعلن نتائجها عادة في هذا التوقيت',
+      few: '$count شركات تعلن نتائجها عادة في هذا التوقيت',
       two: 'شركتان تعلنان نتائجهما عادة في هذا التوقيت',
       one: 'شركة واحدة تعلن نتائجها عادة في هذا التوقيت',
     );
@@ -2537,7 +2539,9 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       years,
       locale: localeName,
-      other: 'استناداً إلى $years إفصاحات سابقة عن الفترة نفسها',
+      other: 'استناداً إلى $years إفصاح سابق عن الفترة نفسها',
+      many: 'استناداً إلى $years إفصاحاً سابقاً عن الفترة نفسها',
+      few: 'استناداً إلى $years إفصاحات سابقة عن الفترة نفسها',
       two: 'استناداً إلى إفصاحين سابقين عن الفترة نفسها',
       one: 'استناداً إلى إفصاح سابق واحد عن الفترة نفسها',
     );
@@ -2549,16 +2553,28 @@ class AppLocalizationsAr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count إفصاحات صدرت',
+      other: '$count إفصاح صدر',
+      many: '$count إفصاحاً صدر',
+      few: '$count إفصاحات صدرت',
       two: 'إفصاحان صدرا',
       one: 'إفصاح واحد صدر',
+      zero: 'لا إفصاحات',
     );
     return '$_temp0';
   }
 
   @override
   String calFiledMore(int count) {
-    return '+$count أخرى في اليوم نفسه';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count إفصاح آخر في اليوم نفسه',
+      many: 'و$count إفصاحاً آخر في اليوم نفسه',
+      few: 'و$count إفصاحات أخرى في اليوم نفسه',
+      two: 'وإفصاحان آخران في اليوم نفسه',
+      one: 'وإفصاح آخر في اليوم نفسه',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -2649,6 +2665,8 @@ class AppLocalizationsAr extends AppLocalizations {
       count,
       locale: localeName,
       other: 'و$count أخرى على صفحات الشركات',
+      many: 'و$count أخرى على صفحات الشركات',
+      few: 'و$count أخرى على صفحات الشركات',
       two: 'واثنتان أخريان على صفحات الشركات',
       one: 'وواحدة أخرى على صفحات الشركات',
     );

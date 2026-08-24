@@ -21,11 +21,18 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import datetime
 import subprocess
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+
+# The month before this one, as YYYY-MM. Corrections and late filings land in
+# the previous month often enough that harvesting only the current one leaves
+# holes that nothing ever fills.
+_TODAY = datetime.date.today()
+LAST_MONTH = (_TODAY.replace(day=1) - datetime.timedelta(days=1)).strftime("%Y-%m")
 
 # (name, script, supports --check, extra arguments)
 #
@@ -48,6 +55,26 @@ STEPS = [
     # rather than a loss.
     ("Filed net profit", "build_financials_api.py", False),
     ("Market", "build_market_api.py", False),
+    # New filings, before anything that reads them.
+    #
+    # The archive under `data-source/egx-beta/filings` is what the calendar's
+    # lodged months, the signals engine and the briefs all read — and nothing
+    # in CI had ever grown it. It was last extended by hand, so every one of
+    # those features was serving an archive frozen on the day somebody
+    # remembered to run the harvester. The calendar cannot "show new filings"
+    # if no new filings ever arrive.
+    #
+    # Two months rather than the year the script defaults to: the current one,
+    # and the one before it because corrections land late. When a month is
+    # already complete the script asks once for its count and skips, so a quiet
+    # run costs two requests; a month that grew costs seven more. Best-effort,
+    # like everything else that touches this host — a refusal means the archive
+    # is a build older, not that the build failed.
+    #
+    # It is here, above the readers, rather than at the end with the other
+    # EGX steps, because a filing harvested after the calendar is built does
+    # not reach a reader until the next run four hours later.
+    ("New filings", "harvest_egx_beta.py", False, ["--filings", "--from", LAST_MONTH]),
     # Immediately after Market, because Market rebuilds `companies/` from
     # scratch on every run — `shutil.rmtree` then rewrite — and this is an
     # enrichment applied on top of it. It was run once by hand in August and
@@ -150,6 +177,10 @@ BEST_EFFORT = {
     "Arabic names",
     "Company filings",
     "Filed documents",
+    # The exchange's own BFF, paced and serialized. It blocked this project
+    # once; a refusal here means the archive is one build older, which is the
+    # cost the pacing exists to keep small.
+    "New filings",
 }
 
 
