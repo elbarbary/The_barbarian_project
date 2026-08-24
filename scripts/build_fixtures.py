@@ -98,6 +98,7 @@ RESOURCES = {
     "macro": ["macro.json"],
     "connections": ["connections.json"],
     "calendar": ["calendar.json"],
+    "signals": ["signals.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by
@@ -116,6 +117,16 @@ UNVERSIONED = [
     "prices",
     "disclosures/archive",
     "disclosures/documents",
+    # The per-company signals ride the `signals` counter and the month shards
+    # of lodged filings ride `calendar`, but both are separate files from the
+    # document that carries the counter — so, like the company documents
+    # above, their bytes have to reach the fingerprint directly or a phone
+    # will never ask for the new ones.
+    "signals",
+    "calendar/filed",
+    # Same story, and it was already true before signals existed: a brief is
+    # fetched with `disclosures` as its counter but lives in its own file.
+    "briefs",
 ]
 
 

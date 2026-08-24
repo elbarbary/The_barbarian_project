@@ -51,6 +51,12 @@ flutter:
     # filings it was built to keep.
     - assets/fixtures/disclosures/archive/
     - assets/fixtures/disclosures/documents/
+    - assets/fixtures/briefs/
+    - assets/fixtures/signals/
+    # One month deep on purpose — `build_calendar.write_filed` mirrors only
+    # the current month, because twelve of them is seven megabytes of binary
+    # for filings a reader would have to scroll back a year to reach.
+    - assets/fixtures/calendar/filed/
 
   # The website's own faces — Bricolage Grotesque (display) and Space Grotesk
   # (body) — plus IBM Plex Sans Arabic, which covers the Arabic neither of them

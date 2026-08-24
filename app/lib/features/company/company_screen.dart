@@ -31,6 +31,8 @@ import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import 'company_brief.dart';
+import 'company_calendar.dart';
+import 'company_signals.dart';
 import 'price_chart.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -54,7 +56,7 @@ class CompanyScreen extends ConsumerStatefulWidget {
   ConsumerState<CompanyScreen> createState() => _CompanyScreenState();
 }
 
-enum _Tab { overview, financials, price, research, discussion }
+enum _Tab { overview, financials, price, calendar, research, discussion }
 
 class _CompanyScreenState extends ConsumerState<CompanyScreen> {
   _Tab _tab = _Tab.overview;
@@ -105,6 +107,10 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     ),
                     BSegment(label: l.tabPrice, icon: Icons.show_chart_rounded),
                     BSegment(
+                      label: l.tabCalendar,
+                      icon: Icons.event_note_outlined,
+                    ),
+                    BSegment(
                       label: l.tabResearch,
                       icon: Icons.article_outlined,
                     ),
@@ -132,6 +138,10 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     onRange: (r) => setState(() => _range = r),
                     sessionDate: snapshot?.date,
                     session: company.market,
+                  ),
+                  _Tab.calendar => BCompanyCalendar(
+                    ticker: widget.ticker,
+                    parentTab: widget.parentTab,
                   ),
                   _Tab.research => _Research(
                     ticker: widget.ticker,
@@ -527,6 +537,10 @@ class _Overview extends ConsumerWidget {
         // renders nothing at all for a company the briefs have not reached, so
         // a page is never padded with an empty heading.
         const SizedBox(height: 20),
+        // Before the brief, because "first loss after 27 profitable periods"
+        // is the strongest thing this page knows and it is arithmetic, while
+        // the brief below it is a model reading the same record.
+        BCompanySignals(ticker: ticker, parentTab: parentTab),
         BCompanyBrief(ticker: ticker, parentTab: parentTab),
         // The exit question, placed by severity rather than by habit.
         //

@@ -6,6 +6,7 @@ import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/async_view.dart';
 import '../../core/widgets/legal.dart';
 import 'disclosures_block.dart';
+import 'firsts_block.dart';
 import 'news_block.dart';
 import '../../core/widgets/nav.dart';
 import '../../core/widgets/composites.dart';
@@ -57,6 +58,11 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
         // market furniture lives. This screen is now one thing.
         const BLeadStory(parentTab: BNavTab.today),
         const BConnectDots(parentTab: BNavTab.today),
+        // The archive earning its keep, above the feeds rather than in them:
+        // "first loss after 27 profitable periods" is not a headline anybody
+        // filed, it is what a decade of this company's figures says about the
+        // one it filed today, and no feed can carry it.
+        const BFirstsBlock(parentTab: BNavTab.today),
         // Both feeds, complete and paged, behind one selector.
         const BTodayFeeds(),
         if (isSample) const Center(child: BSampleDataNotice()),

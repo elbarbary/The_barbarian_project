@@ -4001,7 +4001,7 @@ abstract class AppLocalizations {
   /// No description provided for @calExplainerBody.
   ///
   /// In en, this message translates to:
-  /// **'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.'**
+  /// **'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar, with every entry linking back to the filing it came from. One kind of row is different and says so: a company\'s expected results date is not filed by anybody — it is worked out from the dates that company filed the same period in previous years, shown as a range, and marked Estimated wherever it appears. Under both sits what actually landed on the day.'**
   String get calExplainerBody;
 
   /// No description provided for @calKindDividendPayment.
@@ -4171,6 +4171,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Showing {shown} of {total}'**
   String filingsAllOf(int shown, int total);
+
+  /// No description provided for @tabCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get tabCalendar;
+
+  /// No description provided for @calEstimated.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated'**
+  String get calEstimated;
+
+  /// No description provided for @calKindResultsExpected.
+  ///
+  /// In en, this message translates to:
+  /// **'Results expected'**
+  String get calKindResultsExpected;
+
+  /// No description provided for @calExpectedHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 company usually reports around now} other{{count} companies usually report around now}}'**
+  String calExpectedHeading(int count);
+
+  /// No description provided for @calExpectedWindow.
+  ///
+  /// In en, this message translates to:
+  /// **'Filed between {start} and {end} in past years.'**
+  String calExpectedWindow(String start, String end);
+
+  /// No description provided for @calExpectedBasis.
+  ///
+  /// In en, this message translates to:
+  /// **'{years, plural, =1{From 1 past filing of the same period} other{From {years} past filings of the same period}}'**
+  String calExpectedBasis(int years);
+
+  /// No description provided for @calFiledHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 filing landed} other{{count} filings landed}}'**
+  String calFiledHeading(int count);
+
+  /// No description provided for @calFiledMore.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more that day'**
+  String calFiledMore(int count);
+
+  /// No description provided for @ccalScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates it filed'**
+  String get ccalScheduled;
+
+  /// No description provided for @ccalExpected.
+  ///
+  /// In en, this message translates to:
+  /// **'When results are next due'**
+  String get ccalExpected;
+
+  /// No description provided for @ccalFiled.
+  ///
+  /// In en, this message translates to:
+  /// **'What it has filed'**
+  String get ccalFiled;
+
+  /// No description provided for @ccalNothingScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing scheduled ahead. Every date this company put on the record has passed.'**
+  String get ccalNothingScheduled;
+
+  /// No description provided for @ccalNoRhythm.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough past results filings to read a rhythm from.'**
+  String get ccalNoRhythm;
+
+  /// No description provided for @ccalNoFilings.
+  ///
+  /// In en, this message translates to:
+  /// **'No filings held for this company yet.'**
+  String get ccalNoFilings;
+
+  /// No description provided for @ccalResultsDue.
+  ///
+  /// In en, this message translates to:
+  /// **'{label} results'**
+  String ccalResultsDue(String label);
+
+  /// No description provided for @ccalFiledCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {shown} of {total} filings.'**
+  String ccalFiledCount(int shown, int total);
+
+  /// No description provided for @ccalFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled dates are the company\'s own, quoted from its filings. The expected window is worked out from the dates it filed the same period in previous years — it is when a document is likely to arrive, not what will be in it.'**
+  String get ccalFootnote;
+
+  /// No description provided for @sigLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unusual against its own record'**
+  String get sigLabel;
+
+  /// No description provided for @sigFirstLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'{period} was its first loss after {run} profitable reported periods.'**
+  String sigFirstLoss(String period, int run);
+
+  /// No description provided for @sigBackToProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'{period} returned to profit after {run} loss-making reported periods.'**
+  String sigBackToProfit(String period, int run);
+
+  /// No description provided for @sigStreakSince.
+  ///
+  /// In en, this message translates to:
+  /// **'The run had held since {year}.'**
+  String sigStreakSince(String year);
+
+  /// No description provided for @sigFirstOfType.
+  ///
+  /// In en, this message translates to:
+  /// **'Its first {label} in {years} years.'**
+  String sigFirstOfType(String label, int years);
+
+  /// No description provided for @sigLastSeen.
+  ///
+  /// In en, this message translates to:
+  /// **'The one before was in {year}.'**
+  String sigLastSeen(String year);
+
+  /// No description provided for @sigQuiet.
+  ///
+  /// In en, this message translates to:
+  /// **'It has filed nothing for {days} days, and normally files every {gap}.'**
+  String sigQuiet(int days, int gap);
+
+  /// No description provided for @sigQuietSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Last filing {date}.'**
+  String sigQuietSince(String date);
+
+  /// No description provided for @sigFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts off the exchange\'s own record. A first loss is not a signal to sell and a return to profit is not a signal to buy — this is what happened, and what you make of it is yours.'**
+  String get sigFootnote;
+
+  /// No description provided for @firstsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'First time since'**
+  String get firstsLabel;
+
+  /// No description provided for @firstsBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Runs that just ended, measured against each company\'s own record — not the market\'s.'**
+  String get firstsBlurb;
+
+  /// No description provided for @firstsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 more on the companies\' own pages} other{{count} more on the companies\' own pages}}'**
+  String firstsMore(int count);
 }
 
 class _AppLocalizationsDelegate

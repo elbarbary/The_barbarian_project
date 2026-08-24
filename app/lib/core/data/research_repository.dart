@@ -1,13 +1,15 @@
 import 'dart:async';
 
-import '../models/cash_or_trash.dart';
 import '../models/brief.dart';
 import '../models/calendar.dart';
+import '../models/cash_or_trash.dart';
 import '../models/connection.dart';
 import '../models/disclosure.dart';
+import '../models/filed.dart';
 import '../models/news.dart';
-import '../models/rates.dart';
 import '../models/opportunity.dart';
+import '../models/rates.dart';
+import '../models/signals.dart';
 import '../networking/static_api.dart';
 import 'sourced.dart';
 
@@ -77,9 +79,28 @@ class ResearchRepository {
   Stream<Sourced<CompanyBrief>> getCompanyBrief(String ticker) =>
       _parsed('briefs/$ticker.json', 'disclosures', CompanyBrief.fromJson);
 
-  /// The forward calendar — scheduled dates read out of the filings.
+  /// The forward calendar — scheduled dates read out of the filings, plus the
+  /// expected results dates computed from each company's own filing history.
   Stream<Sourced<CalendarDoc>> getCalendar() =>
       _parsed('calendar.json', 'calendar', CalendarDoc.fromJson);
+
+  /// Which months of already-lodged filings exist to be asked for.
+  Stream<Sourced<FiledIndex>> getFiledIndex() =>
+      _parsed('calendar/filed/index.json', 'calendar', FiledIndex.fromJson);
+
+  /// One month of them. Sharded for the same reason the disclosure archive is:
+  /// opening September should not cost the reader August.
+  Stream<Sourced<FiledMonth>> getFiledMonth(String month) =>
+      _parsed('calendar/filed/$month.json', 'calendar', FiledMonth.fromJson);
+
+  /// What is unusual about one company against its own record — streak breaks,
+  /// silence, first-in-years filings, and when results are next due.
+  Stream<Sourced<CompanySignals>> getCompanySignals(String ticker) =>
+      _parsed('signals/$ticker.json', 'signals', CompanySignals.fromJson);
+
+  /// The same, across the whole market, in one small document.
+  Stream<Sourced<SignalsIndex>> getSignals() =>
+      _parsed('signals.json', 'signals', SignalsIndex.fromJson);
 
   /// Every document one company has filed, across the whole kept record.
   Stream<Sourced<CompanyDocuments>> getCompanyDocuments(String ticker) =>

@@ -300,7 +300,15 @@ mixin _$CalendarEvent {
 
  String get date; String get kind;/// The one line the exchange wrote, in English — "Cash dividend payment".
  String get note; String? get ticker; String get title;@JsonKey(name: 'title_ar') String get titleAr;/// When the announcing filing was lodged — always before [date].
- String get filed; String get section; String get link; String get id;
+ String get filed; String get section; String get link; String get id;/// True only for a date nobody filed — see [CalendarKind.resultsExpected].
+/// Every other row on this screen is a date an issuer published, and the
+/// two must never be shown as if they were the same kind of thing.
+ bool get estimated;/// The period the expected filing would report, and the range of dates
+/// this company has historically filed it in. Empty on a filed event.
+@JsonKey(name: 'period_end') String get periodEnd;@JsonKey(name: 'window_start') String get windowStart;@JsonKey(name: 'window_end') String get windowEnd;/// How many past filings of the same period the window is drawn from.
+/// Shown on screen: a window from three years is a weaker claim than one
+/// from twelve, and the reader is told which they are looking at.
+ int get observations;
 /// Create a copy of CalendarEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -313,16 +321,16 @@ $CalendarEventCopyWith<CalendarEvent> get copyWith => _$CalendarEventCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CalendarEvent&&(identical(other.date, date) || other.date == date)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.filed, filed) || other.filed == filed)&&(identical(other.section, section) || other.section == section)&&(identical(other.link, link) || other.link == link)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CalendarEvent&&(identical(other.date, date) || other.date == date)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.filed, filed) || other.filed == filed)&&(identical(other.section, section) || other.section == section)&&(identical(other.link, link) || other.link == link)&&(identical(other.id, id) || other.id == id)&&(identical(other.estimated, estimated) || other.estimated == estimated)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.windowStart, windowStart) || other.windowStart == windowStart)&&(identical(other.windowEnd, windowEnd) || other.windowEnd == windowEnd)&&(identical(other.observations, observations) || other.observations == observations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,kind,note,ticker,title,titleAr,filed,section,link,id);
+int get hashCode => Object.hash(runtimeType,date,kind,note,ticker,title,titleAr,filed,section,link,id,estimated,periodEnd,windowStart,windowEnd,observations);
 
 @override
 String toString() {
-  return 'CalendarEvent(date: $date, kind: $kind, note: $note, ticker: $ticker, title: $title, titleAr: $titleAr, filed: $filed, section: $section, link: $link, id: $id)';
+  return 'CalendarEvent(date: $date, kind: $kind, note: $note, ticker: $ticker, title: $title, titleAr: $titleAr, filed: $filed, section: $section, link: $link, id: $id, estimated: $estimated, periodEnd: $periodEnd, windowStart: $windowStart, windowEnd: $windowEnd, observations: $observations)';
 }
 
 
@@ -333,7 +341,7 @@ abstract mixin class $CalendarEventCopyWith<$Res>  {
   factory $CalendarEventCopyWith(CalendarEvent value, $Res Function(CalendarEvent) _then) = _$CalendarEventCopyWithImpl;
 @useResult
 $Res call({
- String date, String kind, String note, String? ticker, String title,@JsonKey(name: 'title_ar') String titleAr, String filed, String section, String link, String id
+ String date, String kind, String note, String? ticker, String title,@JsonKey(name: 'title_ar') String titleAr, String filed, String section, String link, String id, bool estimated,@JsonKey(name: 'period_end') String periodEnd,@JsonKey(name: 'window_start') String windowStart,@JsonKey(name: 'window_end') String windowEnd, int observations
 });
 
 
@@ -350,7 +358,7 @@ class _$CalendarEventCopyWithImpl<$Res>
 
 /// Create a copy of CalendarEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? kind = null,Object? note = null,Object? ticker = freezed,Object? title = null,Object? titleAr = null,Object? filed = null,Object? section = null,Object? link = null,Object? id = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? kind = null,Object? note = null,Object? ticker = freezed,Object? title = null,Object? titleAr = null,Object? filed = null,Object? section = null,Object? link = null,Object? id = null,Object? estimated = null,Object? periodEnd = null,Object? windowStart = null,Object? windowEnd = null,Object? observations = null,}) {
   return _then(_self.copyWith(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
@@ -362,7 +370,12 @@ as String,filed: null == filed ? _self.filed : filed // ignore: cast_nullable_to
 as String,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+as String,estimated: null == estimated ? _self.estimated : estimated // ignore: cast_nullable_to_non_nullable
+as bool,periodEnd: null == periodEnd ? _self.periodEnd : periodEnd // ignore: cast_nullable_to_non_nullable
+as String,windowStart: null == windowStart ? _self.windowStart : windowStart // ignore: cast_nullable_to_non_nullable
+as String,windowEnd: null == windowEnd ? _self.windowEnd : windowEnd // ignore: cast_nullable_to_non_nullable
+as String,observations: null == observations ? _self.observations : observations // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -447,10 +460,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id,  bool estimated, @JsonKey(name: 'period_end')  String periodEnd, @JsonKey(name: 'window_start')  String windowStart, @JsonKey(name: 'window_end')  String windowEnd,  int observations)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CalendarEvent() when $default != null:
-return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id);case _:
+return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id,_that.estimated,_that.periodEnd,_that.windowStart,_that.windowEnd,_that.observations);case _:
   return orElse();
 
 }
@@ -468,10 +481,10 @@ return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id,  bool estimated, @JsonKey(name: 'period_end')  String periodEnd, @JsonKey(name: 'window_start')  String windowStart, @JsonKey(name: 'window_end')  String windowEnd,  int observations)  $default,) {final _that = this;
 switch (_that) {
 case _CalendarEvent():
-return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id);case _:
+return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id,_that.estimated,_that.periodEnd,_that.windowStart,_that.windowEnd,_that.observations);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -488,10 +501,10 @@ return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String date,  String kind,  String note,  String? ticker,  String title, @JsonKey(name: 'title_ar')  String titleAr,  String filed,  String section,  String link,  String id,  bool estimated, @JsonKey(name: 'period_end')  String periodEnd, @JsonKey(name: 'window_start')  String windowStart, @JsonKey(name: 'window_end')  String windowEnd,  int observations)?  $default,) {final _that = this;
 switch (_that) {
 case _CalendarEvent() when $default != null:
-return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id);case _:
+return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.titleAr,_that.filed,_that.section,_that.link,_that.id,_that.estimated,_that.periodEnd,_that.windowStart,_that.windowEnd,_that.observations);case _:
   return null;
 
 }
@@ -503,7 +516,7 @@ return $default(_that.date,_that.kind,_that.note,_that.ticker,_that.title,_that.
 @JsonSerializable()
 
 class _CalendarEvent extends CalendarEvent {
-  const _CalendarEvent({this.date = '', this.kind = '', this.note = '', this.ticker, this.title = '', @JsonKey(name: 'title_ar') this.titleAr = '', this.filed = '', this.section = '', this.link = '', this.id = ''}): super._();
+  const _CalendarEvent({this.date = '', this.kind = '', this.note = '', this.ticker, this.title = '', @JsonKey(name: 'title_ar') this.titleAr = '', this.filed = '', this.section = '', this.link = '', this.id = '', this.estimated = false, @JsonKey(name: 'period_end') this.periodEnd = '', @JsonKey(name: 'window_start') this.windowStart = '', @JsonKey(name: 'window_end') this.windowEnd = '', this.observations = 0}): super._();
   factory _CalendarEvent.fromJson(Map<String, dynamic> json) => _$CalendarEventFromJson(json);
 
 @override@JsonKey() final  String date;
@@ -518,6 +531,19 @@ class _CalendarEvent extends CalendarEvent {
 @override@JsonKey() final  String section;
 @override@JsonKey() final  String link;
 @override@JsonKey() final  String id;
+/// True only for a date nobody filed — see [CalendarKind.resultsExpected].
+/// Every other row on this screen is a date an issuer published, and the
+/// two must never be shown as if they were the same kind of thing.
+@override@JsonKey() final  bool estimated;
+/// The period the expected filing would report, and the range of dates
+/// this company has historically filed it in. Empty on a filed event.
+@override@JsonKey(name: 'period_end') final  String periodEnd;
+@override@JsonKey(name: 'window_start') final  String windowStart;
+@override@JsonKey(name: 'window_end') final  String windowEnd;
+/// How many past filings of the same period the window is drawn from.
+/// Shown on screen: a window from three years is a weaker claim than one
+/// from twelve, and the reader is told which they are looking at.
+@override@JsonKey() final  int observations;
 
 /// Create a copy of CalendarEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -532,16 +558,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CalendarEvent&&(identical(other.date, date) || other.date == date)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.filed, filed) || other.filed == filed)&&(identical(other.section, section) || other.section == section)&&(identical(other.link, link) || other.link == link)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CalendarEvent&&(identical(other.date, date) || other.date == date)&&(identical(other.kind, kind) || other.kind == kind)&&(identical(other.note, note) || other.note == note)&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr)&&(identical(other.filed, filed) || other.filed == filed)&&(identical(other.section, section) || other.section == section)&&(identical(other.link, link) || other.link == link)&&(identical(other.id, id) || other.id == id)&&(identical(other.estimated, estimated) || other.estimated == estimated)&&(identical(other.periodEnd, periodEnd) || other.periodEnd == periodEnd)&&(identical(other.windowStart, windowStart) || other.windowStart == windowStart)&&(identical(other.windowEnd, windowEnd) || other.windowEnd == windowEnd)&&(identical(other.observations, observations) || other.observations == observations));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,date,kind,note,ticker,title,titleAr,filed,section,link,id);
+int get hashCode => Object.hash(runtimeType,date,kind,note,ticker,title,titleAr,filed,section,link,id,estimated,periodEnd,windowStart,windowEnd,observations);
 
 @override
 String toString() {
-  return 'CalendarEvent(date: $date, kind: $kind, note: $note, ticker: $ticker, title: $title, titleAr: $titleAr, filed: $filed, section: $section, link: $link, id: $id)';
+  return 'CalendarEvent(date: $date, kind: $kind, note: $note, ticker: $ticker, title: $title, titleAr: $titleAr, filed: $filed, section: $section, link: $link, id: $id, estimated: $estimated, periodEnd: $periodEnd, windowStart: $windowStart, windowEnd: $windowEnd, observations: $observations)';
 }
 
 
@@ -552,7 +578,7 @@ abstract mixin class _$CalendarEventCopyWith<$Res> implements $CalendarEventCopy
   factory _$CalendarEventCopyWith(_CalendarEvent value, $Res Function(_CalendarEvent) _then) = __$CalendarEventCopyWithImpl;
 @override @useResult
 $Res call({
- String date, String kind, String note, String? ticker, String title,@JsonKey(name: 'title_ar') String titleAr, String filed, String section, String link, String id
+ String date, String kind, String note, String? ticker, String title,@JsonKey(name: 'title_ar') String titleAr, String filed, String section, String link, String id, bool estimated,@JsonKey(name: 'period_end') String periodEnd,@JsonKey(name: 'window_start') String windowStart,@JsonKey(name: 'window_end') String windowEnd, int observations
 });
 
 
@@ -569,7 +595,7 @@ class __$CalendarEventCopyWithImpl<$Res>
 
 /// Create a copy of CalendarEvent
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? kind = null,Object? note = null,Object? ticker = freezed,Object? title = null,Object? titleAr = null,Object? filed = null,Object? section = null,Object? link = null,Object? id = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? kind = null,Object? note = null,Object? ticker = freezed,Object? title = null,Object? titleAr = null,Object? filed = null,Object? section = null,Object? link = null,Object? id = null,Object? estimated = null,Object? periodEnd = null,Object? windowStart = null,Object? windowEnd = null,Object? observations = null,}) {
   return _then(_CalendarEvent(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as String,kind: null == kind ? _self.kind : kind // ignore: cast_nullable_to_non_nullable
@@ -581,7 +607,12 @@ as String,filed: null == filed ? _self.filed : filed // ignore: cast_nullable_to
 as String,section: null == section ? _self.section : section // ignore: cast_nullable_to_non_nullable
 as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,
+as String,estimated: null == estimated ? _self.estimated : estimated // ignore: cast_nullable_to_non_nullable
+as bool,periodEnd: null == periodEnd ? _self.periodEnd : periodEnd // ignore: cast_nullable_to_non_nullable
+as String,windowStart: null == windowStart ? _self.windowStart : windowStart // ignore: cast_nullable_to_non_nullable
+as String,windowEnd: null == windowEnd ? _self.windowEnd : windowEnd // ignore: cast_nullable_to_non_nullable
+as String,observations: null == observations ? _self.observations : observations // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

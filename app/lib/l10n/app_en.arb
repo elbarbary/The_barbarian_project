@@ -1949,7 +1949,7 @@
   "@calExplainerTitle": {},
   "calExplainerPlain": "Dates a company already filed — not a forecast.",
   "@calExplainerPlain": {},
-  "calExplainerBody": "Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.",
+  "calExplainerBody": "Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar, with every entry linking back to the filing it came from. One kind of row is different and says so: a company's expected results date is not filed by anybody — it is worked out from the dates that company filed the same period in previous years, shown as a range, and marked Estimated wherever it appears. Under both sits what actually landed on the day.",
   "@calExplainerBody": {},
   "calKindDividendPayment": "Dividend paid",
   "@calKindDividendPayment": {},
@@ -2045,6 +2045,172 @@
         "type": "int"
       },
       "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tabCalendar": "Calendar",
+  "@tabCalendar": {},
+  "calEstimated": "Estimated",
+  "@calEstimated": {},
+  "calKindResultsExpected": "Results expected",
+  "@calKindResultsExpected": {},
+  "calExpectedHeading": "{count, plural, =1{1 company usually reports around now} other{{count} companies usually report around now}}",
+  "@calExpectedHeading": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calExpectedWindow": "Filed between {start} and {end} in past years.",
+  "@calExpectedWindow": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "calExpectedBasis": "{years, plural, =1{From 1 past filing of the same period} other{From {years} past filings of the same period}}",
+  "@calExpectedBasis": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "calFiledHeading": "{count, plural, =1{1 filing landed} other{{count} filings landed}}",
+  "@calFiledHeading": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calFiledMore": "+{count} more that day",
+  "@calFiledMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ccalScheduled": "Dates it filed",
+  "@ccalScheduled": {},
+  "ccalExpected": "When results are next due",
+  "@ccalExpected": {},
+  "ccalFiled": "What it has filed",
+  "@ccalFiled": {},
+  "ccalNothingScheduled": "Nothing scheduled ahead. Every date this company put on the record has passed.",
+  "@ccalNothingScheduled": {},
+  "ccalNoRhythm": "Not enough past results filings to read a rhythm from.",
+  "@ccalNoRhythm": {},
+  "ccalNoFilings": "No filings held for this company yet.",
+  "@ccalNoFilings": {},
+  "ccalResultsDue": "{label} results",
+  "@ccalResultsDue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "ccalFiledCount": "Showing {shown} of {total} filings.",
+  "@ccalFiledCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ccalFootnote": "Scheduled dates are the company's own, quoted from its filings. The expected window is worked out from the dates it filed the same period in previous years — it is when a document is likely to arrive, not what will be in it.",
+  "@ccalFootnote": {},
+  "sigLabel": "Unusual against its own record",
+  "@sigLabel": {},
+  "sigFirstLoss": "{period} was its first loss after {run} profitable reported periods.",
+  "@sigFirstLoss": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "run": {
+        "type": "int"
+      }
+    }
+  },
+  "sigBackToProfit": "{period} returned to profit after {run} loss-making reported periods.",
+  "@sigBackToProfit": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "run": {
+        "type": "int"
+      }
+    }
+  },
+  "sigStreakSince": "The run had held since {year}.",
+  "@sigStreakSince": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "sigFirstOfType": "Its first {label} in {years} years.",
+  "@sigFirstOfType": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "sigLastSeen": "The one before was in {year}.",
+  "@sigLastSeen": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "sigQuiet": "It has filed nothing for {days} days, and normally files every {gap}.",
+  "@sigQuiet": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "gap": {
+        "type": "int"
+      }
+    }
+  },
+  "sigQuietSince": "Last filing {date}.",
+  "@sigQuietSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sigFootnote": "Counts off the exchange's own record. A first loss is not a signal to sell and a return to profit is not a signal to buy — this is what happened, and what you make of it is yours.",
+  "@sigFootnote": {},
+  "firstsLabel": "First time since",
+  "@firstsLabel": {},
+  "firstsBlurb": "Runs that just ended, measured against each company's own record — not the market's.",
+  "@firstsBlurb": {},
+  "firstsMore": "{count, plural, =1{1 more on the companies' own pages} other{{count} more on the companies' own pages}}",
+  "@firstsMore": {
+    "placeholders": {
+      "count": {
         "type": "int"
       }
     }

@@ -56,5 +56,54 @@ class Build(unittest.TestCase):
         self.assertTrue(datetime.date(2026, 6, 21) > datetime.date(2026, 6, 8))
 
 
+class Expected(unittest.TestCase):
+    """The one kind of row on this calendar nobody filed.
+
+    It is allowed on the screen because it is a claim about a *disclosure
+    date* rather than about a security, and because it is labelled as an
+    estimate everywhere it appears. These tests hold that labelling in place.
+    """
+
+    def setUp(self):
+        self._real = cal.build_signals.published_results_due
+        cal.build_signals.published_results_due = lambda: {
+            "ELEC": [{
+                "label": "9M", "period_end": "2026-09-30",
+                "expected": "2026-11-16", "window_start": "2026-11-05",
+                "window_end": "2026-11-27", "observations": 12,
+            }],
+            "GHOST": [{
+                "label": "FY", "period_end": "2026-12-31",
+                "expected": "2027-03-10", "window_start": "2027-02-28",
+                "window_end": "2027-03-31", "observations": 13,
+            }],
+        }
+
+    def tearDown(self):
+        cal.build_signals.published_results_due = self._real
+
+    def rows(self):
+        return cal.expected_rows(datetime.date(2026, 8, 24), {"ELEC": "Electro Cable"})
+
+    def test_every_estimated_row_says_so(self):
+        for row in self.rows():
+            self.assertTrue(row["estimated"])
+            self.assertEqual(row["kind"], "results_expected")
+
+    def test_it_carries_the_window_and_the_evidence_behind_it(self):
+        row = self.rows()[0]
+        self.assertEqual(row["window_start"], "2026-11-05")
+        self.assertEqual(row["window_end"], "2026-11-27")
+        self.assertEqual(row["observations"], 12)
+
+    def test_an_estimate_never_links_to_a_filing(self):
+        # There is no filing. A link would imply one, and the reader would
+        # follow it expecting the source of a date nobody published.
+        self.assertEqual(self.rows()[0]["link"], "")
+
+    def test_a_company_the_app_does_not_list_gets_no_row(self):
+        self.assertEqual([r["ticker"] for r in self.rows()], ["ELEC"])
+
+
 if __name__ == "__main__":
     unittest.main()

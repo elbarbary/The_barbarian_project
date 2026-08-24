@@ -35,6 +35,11 @@ _CalendarEvent _$CalendarEventFromJson(Map<String, dynamic> json) =>
       section: json['section'] as String? ?? '',
       link: json['link'] as String? ?? '',
       id: json['id'] as String? ?? '',
+      estimated: json['estimated'] as bool? ?? false,
+      periodEnd: json['period_end'] as String? ?? '',
+      windowStart: json['window_start'] as String? ?? '',
+      windowEnd: json['window_end'] as String? ?? '',
+      observations: (json['observations'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$CalendarEventToJson(_CalendarEvent instance) =>
@@ -49,4 +54,9 @@ Map<String, dynamic> _$CalendarEventToJson(_CalendarEvent instance) =>
       'section': instance.section,
       'link': instance.link,
       'id': instance.id,
+      'estimated': instance.estimated,
+      'period_end': instance.periodEnd,
+      'window_start': instance.windowStart,
+      'window_end': instance.windowEnd,
+      'observations': instance.observations,
     };

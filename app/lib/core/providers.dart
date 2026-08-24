@@ -17,6 +17,8 @@ import 'models/brief.dart';
 import 'models/calendar.dart';
 import 'models/connection.dart';
 import 'models/disclosure.dart';
+import 'models/filed.dart';
+import 'models/signals.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
 import 'models/company.dart';
@@ -146,6 +148,29 @@ final calendarProvider = StreamProvider<Sourced<CalendarDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getCalendar(),
 );
 
+/// Which months of lodged filings the calendar can offer, and one month of
+/// them. Separate providers for the same reason the disclosure archive uses
+/// two: the index is tiny and always wanted, a month is a download.
+final filedIndexProvider = StreamProvider<Sourced<FiledIndex>>(
+  (ref) => ref.watch(researchRepositoryProvider).getFiledIndex(),
+);
+
+final filedMonthProvider = StreamProvider.family<Sourced<FiledMonth>, String>(
+  (ref, month) => ref.watch(researchRepositoryProvider).getFiledMonth(month),
+);
+
+/// What is unusual about one company against its own record.
+final companySignalsProvider =
+    StreamProvider.family<Sourced<CompanySignals>, String>(
+      (ref, ticker) =>
+          ref.watch(researchRepositoryProvider).getCompanySignals(ticker),
+    );
+
+/// The same across the market, for the feed.
+final signalsProvider = StreamProvider<Sourced<SignalsIndex>>(
+  (ref) => ref.watch(researchRepositoryProvider).getSignals(),
+);
+
 final companyDocumentsProvider =
     StreamProvider.family<Sourced<CompanyDocuments>, String>(
       (ref, ticker) =>
@@ -234,6 +259,8 @@ final publishedDocumentProviders = <ProviderOrFamily>[
   disclosureArchiveProvider,
   connectionsProvider,
   calendarProvider,
+  filedIndexProvider,
+  signalsProvider,
   marketHistoryProvider,
   ratesProvider,
   macroProvider,

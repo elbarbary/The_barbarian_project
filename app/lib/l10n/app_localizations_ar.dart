@@ -2382,7 +2382,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get calExplainerBody =>
-      'تُعلن الشركات مواعيد التوزيعات وفترات زيادة رأس المال ومواعيد الجمعيات وإخطارات التداول قبل الحدث بأيام إلى أسابيع. يقرأ هذا التطبيق تلك المواعيد من الإفصاحات ويضعها على تقويم. كل بند يعود إلى الإفصاح الذي جاء منه؛ لا شيء هنا متوقَّع.';
+      'تُفصح الشركات عن مواعيد التوزيعات ونوافذ حقوق الاكتتاب ومواعيد الجمعيات وإخطارات التداول قبل وقوعها بأيام أو أسابيع. هذه الشاشة تقرأ تلك التواريخ من الإفصاحات وتضعها على تقويم، وكل بند يعود برابطه إلى الإفصاح الذي جاء منه. نوع واحد من البنود مختلف ويقول ذلك صراحة: موعد النتائج المتوقع لم يُفصح عنه أحد — بل هو محسوب من تواريخ إفصاح الشركة عن الفترة نفسها في السنوات السابقة، ويُعرض كنطاق، ويُوسم «تقديري» أينما ظهر. وتحته يظهر ما صدر فعلاً في ذلك اليوم.';
 
   @override
   String get calKindDividendPayment => 'صرف التوزيعات';
@@ -2504,5 +2504,154 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String filingsAllOf(int shown, int total) {
     return 'عرض $shown من $total';
+  }
+
+  @override
+  String get tabCalendar => 'التقويم';
+
+  @override
+  String get calEstimated => 'تقديري';
+
+  @override
+  String get calKindResultsExpected => 'نتائج متوقعة';
+
+  @override
+  String calExpectedHeading(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شركات تعلن نتائجها عادة في هذا التوقيت',
+      two: 'شركتان تعلنان نتائجهما عادة في هذا التوقيت',
+      one: 'شركة واحدة تعلن نتائجها عادة في هذا التوقيت',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calExpectedWindow(String start, String end) {
+    return 'أُفصح عنها بين $start و$end في السنوات السابقة.';
+  }
+
+  @override
+  String calExpectedBasis(int years) {
+    String _temp0 = intl.Intl.pluralLogic(
+      years,
+      locale: localeName,
+      other: 'استناداً إلى $years إفصاحات سابقة عن الفترة نفسها',
+      two: 'استناداً إلى إفصاحين سابقين عن الفترة نفسها',
+      one: 'استناداً إلى إفصاح سابق واحد عن الفترة نفسها',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calFiledHeading(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count إفصاحات صدرت',
+      two: 'إفصاحان صدرا',
+      one: 'إفصاح واحد صدر',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calFiledMore(int count) {
+    return '+$count أخرى في اليوم نفسه';
+  }
+
+  @override
+  String get ccalScheduled => 'مواعيد أفصحت عنها';
+
+  @override
+  String get ccalExpected => 'موعد النتائج القادمة';
+
+  @override
+  String get ccalFiled => 'ما أفصحت عنه';
+
+  @override
+  String get ccalNothingScheduled =>
+      'لا مواعيد قادمة. كل تاريخ سجلته هذه الشركة قد مضى.';
+
+  @override
+  String get ccalNoRhythm => 'لا توجد إفصاحات سابقة كافية لقراءة نمط زمني.';
+
+  @override
+  String get ccalNoFilings => 'لا توجد إفصاحات محفوظة لهذه الشركة بعد.';
+
+  @override
+  String ccalResultsDue(String label) {
+    return 'نتائج $label';
+  }
+
+  @override
+  String ccalFiledCount(int shown, int total) {
+    return 'عرض $shown من $total إفصاحاً.';
+  }
+
+  @override
+  String get ccalFootnote =>
+      'المواعيد المجدولة من إفصاحات الشركة نفسها. أما النافذة المتوقعة فمحسوبة من تواريخ إفصاحها عن الفترة نفسها في السنوات السابقة — هي توقع لموعد وصول مستند، لا لما سيرد فيه.';
+
+  @override
+  String get sigLabel => 'غير معتاد مقارنة بسجلّها';
+
+  @override
+  String sigFirstLoss(String period, int run) {
+    return '$period أول خسارة بعد $run فترة مُعلنة رابحة متتالية.';
+  }
+
+  @override
+  String sigBackToProfit(String period, int run) {
+    return '$period عودة إلى الربح بعد $run فترة مُعلنة خاسرة متتالية.';
+  }
+
+  @override
+  String sigStreakSince(String year) {
+    return 'استمرت السلسلة منذ $year.';
+  }
+
+  @override
+  String sigFirstOfType(String label, int years) {
+    return 'أول $label منذ $years سنوات.';
+  }
+
+  @override
+  String sigLastSeen(String year) {
+    return 'السابقة كانت في $year.';
+  }
+
+  @override
+  String sigQuiet(int days, int gap) {
+    return 'لم تُفصح عن شيء منذ $days يوماً، وهي تُفصح عادة كل $gap.';
+  }
+
+  @override
+  String sigQuietSince(String date) {
+    return 'آخر إفصاح في $date.';
+  }
+
+  @override
+  String get sigFootnote =>
+      'أرقام محسوبة من سجل البورصة نفسه. أول خسارة ليست إشارة بيع، والعودة إلى الربح ليست إشارة شراء — هذا ما حدث، وتقديره يخصّك وحدك.';
+
+  @override
+  String get firstsLabel => 'لأول مرة منذ';
+
+  @override
+  String get firstsBlurb =>
+      'سلاسل انتهت للتو، مقيسة على سجل كل شركة نفسها لا على السوق.';
+
+  @override
+  String firstsMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'و$count أخرى على صفحات الشركات',
+      two: 'واثنتان أخريان على صفحات الشركات',
+      one: 'وواحدة أخرى على صفحات الشركات',
+    );
+    return '$_temp0';
   }
 }

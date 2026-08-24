@@ -35,6 +35,24 @@ abstract class CalendarDoc with _$CalendarDoc {
 
   static const CalendarDoc empty = CalendarDoc();
 
+  /// Only the dates an issuer actually filed.
+  List<CalendarEvent> get filed => [
+    for (final event in events)
+      if (!event.estimated) event,
+  ];
+
+  /// Only the computed ones.
+  List<CalendarEvent> get expected => [
+    for (final event in events)
+      if (event.estimated) event,
+  ];
+
+  /// One company's rows, both kinds, soonest first.
+  List<CalendarEvent> forTicker(String ticker) => [
+    for (final event in events)
+      if (event.ticker == ticker) event,
+  ]..sort((a, b) => a.date.compareTo(b.date));
+
   /// Events on one calendar day, in filing order.
   List<CalendarEvent> on(DateTime day) => [
     for (final event in events)
@@ -68,6 +86,11 @@ enum CalendarKind {
   tradingResume,
   tradingSuspend,
   listingEffective,
+
+  /// The one kind on this screen the exchange did not publish: when this
+  /// company's results are next due, computed from the dates it filed the
+  /// same period in previous years. Always carries [CalendarEvent.estimated].
+  resultsExpected,
   other;
 
   static CalendarKind of(String raw) => switch (raw) {
@@ -81,6 +104,7 @@ enum CalendarKind {
     'trading_resume' => CalendarKind.tradingResume,
     'trading_suspend' => CalendarKind.tradingSuspend,
     'listing_effective' => CalendarKind.listingEffective,
+    'results_expected' => CalendarKind.resultsExpected,
     _ => CalendarKind.other,
   };
 
@@ -97,11 +121,12 @@ enum CalendarKind {
     CalendarKind.assemblyEgm => CalendarFamily.assembly,
     CalendarKind.tradingResume ||
     CalendarKind.tradingSuspend => CalendarFamily.trading,
+    CalendarKind.resultsExpected => CalendarFamily.expected,
     CalendarKind.listingEffective || CalendarKind.other => CalendarFamily.other,
   };
 }
 
-enum CalendarFamily { cash, rights, assembly, trading, other }
+enum CalendarFamily { cash, rights, assembly, trading, expected, other }
 
 @freezed
 abstract class CalendarEvent with _$CalendarEvent {
@@ -120,6 +145,22 @@ abstract class CalendarEvent with _$CalendarEvent {
     @Default('') String section,
     @Default('') String link,
     @Default('') String id,
+
+    /// True only for a date nobody filed — see [CalendarKind.resultsExpected].
+    /// Every other row on this screen is a date an issuer published, and the
+    /// two must never be shown as if they were the same kind of thing.
+    @Default(false) bool estimated,
+
+    /// The period the expected filing would report, and the range of dates
+    /// this company has historically filed it in. Empty on a filed event.
+    @JsonKey(name: 'period_end') @Default('') String periodEnd,
+    @JsonKey(name: 'window_start') @Default('') String windowStart,
+    @JsonKey(name: 'window_end') @Default('') String windowEnd,
+
+    /// How many past filings of the same period the window is drawn from.
+    /// Shown on screen: a window from three years is a weaker claim than one
+    /// from twelve, and the reader is told which they are looking at.
+    @Default(0) int observations,
   }) = _CalendarEvent;
 
   const CalendarEvent._();

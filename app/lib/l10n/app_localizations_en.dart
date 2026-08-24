@@ -2391,7 +2391,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calExplainerBody =>
-      'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.';
+      'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar, with every entry linking back to the filing it came from. One kind of row is different and says so: a company\'s expected results date is not filed by anybody — it is worked out from the dates that company filed the same period in previous years, shown as a range, and marked Estimated wherever it appears. Under both sits what actually landed on the day.';
 
   @override
   String get calKindDividendPayment => 'Dividend paid';
@@ -2510,5 +2510,151 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String filingsAllOf(int shown, int total) {
     return 'Showing $shown of $total';
+  }
+
+  @override
+  String get tabCalendar => 'Calendar';
+
+  @override
+  String get calEstimated => 'Estimated';
+
+  @override
+  String get calKindResultsExpected => 'Results expected';
+
+  @override
+  String calExpectedHeading(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count companies usually report around now',
+      one: '1 company usually reports around now',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calExpectedWindow(String start, String end) {
+    return 'Filed between $start and $end in past years.';
+  }
+
+  @override
+  String calExpectedBasis(int years) {
+    String _temp0 = intl.Intl.pluralLogic(
+      years,
+      locale: localeName,
+      other: 'From $years past filings of the same period',
+      one: 'From 1 past filing of the same period',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calFiledHeading(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count filings landed',
+      one: '1 filing landed',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calFiledMore(int count) {
+    return '+$count more that day';
+  }
+
+  @override
+  String get ccalScheduled => 'Dates it filed';
+
+  @override
+  String get ccalExpected => 'When results are next due';
+
+  @override
+  String get ccalFiled => 'What it has filed';
+
+  @override
+  String get ccalNothingScheduled =>
+      'Nothing scheduled ahead. Every date this company put on the record has passed.';
+
+  @override
+  String get ccalNoRhythm =>
+      'Not enough past results filings to read a rhythm from.';
+
+  @override
+  String get ccalNoFilings => 'No filings held for this company yet.';
+
+  @override
+  String ccalResultsDue(String label) {
+    return '$label results';
+  }
+
+  @override
+  String ccalFiledCount(int shown, int total) {
+    return 'Showing $shown of $total filings.';
+  }
+
+  @override
+  String get ccalFootnote =>
+      'Scheduled dates are the company\'s own, quoted from its filings. The expected window is worked out from the dates it filed the same period in previous years — it is when a document is likely to arrive, not what will be in it.';
+
+  @override
+  String get sigLabel => 'Unusual against its own record';
+
+  @override
+  String sigFirstLoss(String period, int run) {
+    return '$period was its first loss after $run profitable reported periods.';
+  }
+
+  @override
+  String sigBackToProfit(String period, int run) {
+    return '$period returned to profit after $run loss-making reported periods.';
+  }
+
+  @override
+  String sigStreakSince(String year) {
+    return 'The run had held since $year.';
+  }
+
+  @override
+  String sigFirstOfType(String label, int years) {
+    return 'Its first $label in $years years.';
+  }
+
+  @override
+  String sigLastSeen(String year) {
+    return 'The one before was in $year.';
+  }
+
+  @override
+  String sigQuiet(int days, int gap) {
+    return 'It has filed nothing for $days days, and normally files every $gap.';
+  }
+
+  @override
+  String sigQuietSince(String date) {
+    return 'Last filing $date.';
+  }
+
+  @override
+  String get sigFootnote =>
+      'Counts off the exchange\'s own record. A first loss is not a signal to sell and a return to profit is not a signal to buy — this is what happened, and what you make of it is yours.';
+
+  @override
+  String get firstsLabel => 'First time since';
+
+  @override
+  String get firstsBlurb =>
+      'Runs that just ended, measured against each company\'s own record — not the market\'s.';
+
+  @override
+  String firstsMore(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more on the companies\' own pages',
+      one: '1 more on the companies\' own pages',
+    );
+    return '$_temp0';
   }
 }

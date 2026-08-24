@@ -370,17 +370,43 @@ class BSegmentedRow extends StatelessWidget {
       );
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        for (var i = 0; i < segments.length; i++)
-          _IconPillSegment(
-            segment: segments[i],
-            selected: i == selectedIndex,
-            onTap: () => onChanged(i),
-            colors: c,
+    // Five pills at 56pt fit a 375pt screen with room to spare; six do not.
+    // Rather than shrink the touch target — these are the controls a reader
+    // uses every session — the row scrolls when it would otherwise overflow,
+    // and keeps its even spacing when it would not.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final pills = [
+          for (var i = 0; i < segments.length; i++)
+            _IconPillSegment(
+              segment: segments[i],
+              selected: i == selectedIndex,
+              onTap: () => onChanged(i),
+              colors: c,
+            ),
+        ];
+        const width = _IconPillSegment.width;
+        const gap = 8.0;
+        final needed = segments.length * width + (segments.length - 1) * gap;
+        if (needed <= constraints.maxWidth) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: pills,
+          );
+        }
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.zero,
+          child: Row(
+            children: [
+              for (var i = 0; i < pills.length; i++) ...[
+                if (i > 0) const SizedBox(width: gap),
+                pills[i],
+              ],
+            ],
           ),
-      ],
+        );
+      },
     );
   }
 }
@@ -449,6 +475,9 @@ class _IconPillSegment extends StatelessWidget {
   final VoidCallback onTap;
   final BarbarianColors colors;
 
+  /// Named so `BSegmentedRow` can work out whether the row fits.
+  static const double width = 56;
+
   @override
   Widget build(BuildContext context) {
     return Semantics(
@@ -469,7 +498,7 @@ class _IconPillSegment extends StatelessWidget {
         child: AnimatedContainer(
           duration: BarbarianMotion.standard,
           curve: BarbarianMotion.easeOut,
-          width: 56,
+          width: width,
           height: 62,
           decoration: BoxDecoration(
             color: selected

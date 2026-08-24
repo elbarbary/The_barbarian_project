@@ -19,6 +19,7 @@ import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
+import 'filed_list.dart';
 
 /// Calendar — the dates the filings put on the record.
 ///
@@ -427,7 +428,7 @@ class _DayCell extends StatelessWidget {
 
 /// The list under the grid: the events on the focused day (month/day view) or
 /// across the focused week (week view), grouped by day.
-class _Agenda extends StatelessWidget {
+class _Agenda extends ConsumerWidget {
   const _Agenda({
     required this.doc,
     required this.cursor,
@@ -441,7 +442,7 @@ class _Agenda extends StatelessWidget {
   final BNavTab parentTab;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
 
@@ -455,20 +456,44 @@ class _Agenda extends StatelessWidget {
     final blocks = <Widget>[];
     for (final day in days) {
       final events = doc.on(day)..sort((a, b) => a.kind.compareTo(b.kind));
-      if (view == _View.week && events.isEmpty) continue;
+      // Two lists, never one. A date an issuer filed is a promise on the
+      // record; a date this app worked out from that issuer's filing habits is
+      // an expectation. Mixing them into one column would leave a reader to
+      // tell them apart by reading the small print on each card.
+      final scheduled = [
+        for (final e in events)
+          if (!e.estimated) e,
+      ];
+      final expected = [
+        for (final e in events)
+          if (e.estimated) e,
+      ];
+      // A day with nothing scheduled can still have had twenty filings land
+      // on it, and in week view that is exactly the day a reader is looking
+      // for. Ask the month document before deciding the day is empty.
+      final lodged = ref
+              .watch(filedMonthProvider(BFiledOnDay.monthKey(day)))
+              .value
+              ?.value
+              .on(day)
+              .length ??
+          0;
+      if (view == _View.week && events.isEmpty && lodged == 0) continue;
       blocks.add(_DayHeading(day: day));
       if (events.isEmpty) {
-        blocks.add(
-          Padding(
-            padding: const EdgeInsets.only(top: 6, bottom: 4),
-            child: Text(
-              l.calNothingDay,
-              style: BarbarianType.bodyM.copyWith(color: c.textFaint),
+        if (lodged == 0) {
+          blocks.add(
+            Padding(
+              padding: const EdgeInsets.only(top: 6, bottom: 4),
+              child: Text(
+                l.calNothingDay,
+                style: BarbarianType.bodyM.copyWith(color: c.textFaint),
+              ),
             ),
-          ),
-        );
+          );
+        }
       } else {
-        for (final e in events) {
+        for (final e in scheduled) {
           blocks.add(
             Padding(
               padding: const EdgeInsets.only(top: 10),
@@ -476,7 +501,31 @@ class _Agenda extends StatelessWidget {
             ),
           );
         }
+        if (expected.isNotEmpty) {
+          blocks.add(
+            Padding(
+              padding: const EdgeInsets.only(top: 14, bottom: 2),
+              child: Text(
+                l.calExpectedHeading(expected.length).toUpperCase(),
+                style: BarbarianType.labelNano.copyWith(
+                  color: c.textMuted,
+                  letterSpacing: 0.6,
+                ),
+              ),
+            ),
+          );
+          for (final e in expected) {
+            blocks.add(
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: _EventCard(event: e, parentTab: parentTab),
+              ),
+            );
+          }
+        }
       }
+      // And under both: what actually landed that day.
+      blocks.add(BFiledOnDay(day: day, parentTab: parentTab));
       blocks.add(const SizedBox(height: 18));
     }
 
@@ -560,19 +609,60 @@ class _EventCard extends StatelessWidget {
               height: 38,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: c.accent.withValues(alpha: c.isDark ? 0.16 : 0.10),
+                // An estimate is drawn as an outline, a filed date as a solid
+                // tile — so the two are told apart by shape and not only by
+                // colour (§42), and before any label is read.
+                color: event.estimated
+                    ? Colors.transparent
+                    : c.accent.withValues(alpha: c.isDark ? 0.16 : 0.10),
+                border: event.estimated
+                    ? Border.all(color: c.cardEdge, width: 1.2)
+                    : null,
                 borderRadius: BorderRadius.circular(BarbarianRadius.md),
               ),
-              child: Icon(icon, size: 19, color: c.accent),
+              child: Icon(
+                icon,
+                size: 19,
+                color: event.estimated ? c.textMuted : c.accent,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    label,
-                    style: BarbarianType.titleS.copyWith(color: c.textPrimary),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          label,
+                          style: BarbarianType.titleS.copyWith(
+                            color: c.textPrimary,
+                          ),
+                        ),
+                      ),
+                      if (event.estimated) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: c.cardEdge),
+                            borderRadius: BorderRadius.circular(
+                              BarbarianRadius.pill,
+                            ),
+                          ),
+                          child: Text(
+                            l.calEstimated,
+                            style: BarbarianType.labelNano.copyWith(
+                              color: c.textMuted,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                   if (event.ticker case final String t when t.isNotEmpty) ...[
                     const SizedBox(height: 3),
@@ -603,6 +693,28 @@ class _EventCard extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(
                       l.calAnnounced(context.dayMonthIso(event.filed)),
+                      style: BarbarianType.labelNano.copyWith(
+                        color: c.textFaint,
+                      ),
+                    ),
+                  ],
+                  // The estimated row says three things a filed row never
+                  // needs to: that nobody filed this, the range it has
+                  // actually landed in before, and how many years that range
+                  // is drawn from. A window from three years is a weaker claim
+                  // than one from twelve and the reader is told which it is.
+                  if (event.estimated) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      l.calExpectedWindow(
+                        context.dayMonthIso(event.windowStart),
+                        context.dayMonthIso(event.windowEnd),
+                      ),
+                      style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l.calExpectedBasis(event.observations),
                       style: BarbarianType.labelNano.copyWith(
                         color: c.textFaint,
                       ),
@@ -666,6 +778,10 @@ class _EventCard extends StatelessWidget {
         CalendarKind.listingEffective => (
           Icons.playlist_add_check_rounded,
           l.calKindListingEffective,
+        ),
+        CalendarKind.resultsExpected => (
+          Icons.assessment_outlined,
+          l.calKindResultsExpected,
         ),
         CalendarKind.other => (Icons.event_outlined, l.calKindOther),
       };
