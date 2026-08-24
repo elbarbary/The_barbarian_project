@@ -48,6 +48,8 @@ import json
 import pathlib
 import re
 
+import egx_dates
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FILINGS = REPO / "data-source" / "egx-beta" / "filings"
 OUT = REPO / "public" / "data" / "v1" / "calendar.json"
@@ -55,7 +57,6 @@ OUT = REPO / "public" / "data" / "v1" / "calendar.json"
 # bundled copy matches the published one and fails the build if it drifts.
 FIXTURE = REPO / "app" / "assets" / "fixtures" / "calendar.json"
 
-DATE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 
 
@@ -64,36 +65,20 @@ def strip(html: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def parse_date(day: str, month: str, year: str) -> datetime.date | None:
-    try:
-        return datetime.date(int(year), int(month), int(day))
-    except ValueError:
-        return None
-
-
 def labelled(body: str, *labels: str) -> datetime.date | None:
     """The date after one of these field labels, first match wins.
 
-    The labels are matched loosely on internal spacing because the exchange's
-    template varies ("Ex-Dividend Date", "Ex Dividend Date"), and the date has
-    to sit within a short reach of the label so a later unrelated date is not
-    captured.
+    Order-aware: the exchange writes some filings month-first, and reading one
+    of those day-first either raises — losing the event silently — or, worse,
+    lands eleven months out. `egx_dates` settles the format per filing from the
+    filing's own evidence.
     """
-    for label in labels:
-        pattern = re.compile(
-            re.escape(label).replace(r"\ ", r"\s*") + r"\s*:?\s*(\d{2}/\d{2}/\d{4})",
-            re.IGNORECASE,
-        )
-        m = pattern.search(body)
-        if m:
-            return parse_date(*m.group(1).split("/"))
-    return None
+    return egx_dates.after_label(body, *labels)
 
 
 def effective(body: str) -> datetime.date | None:
     """`effective DD/MM/YYYY trading session` — the trading-notice phrasing."""
-    m = re.search(r"effective\s+(\d{2}/\d{2}/\d{4})", body, re.IGNORECASE)
-    return parse_date(*m.group(1).split("/")) if m else None
+    return egx_dates.after_label(body, "effective")
 
 
 # One extractor per event type. Each returns a list of (kind, date, note),
