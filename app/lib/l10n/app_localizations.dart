@@ -4363,6 +4363,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'From {source}'**
   String briefStorySource(String source);
+
+  /// No description provided for @languageSwitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch language'**
+  String get languageSwitch;
+
+  /// No description provided for @volBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'It has traded {ratio} its usual volume today.'**
+  String volBusy(String ratio);
+
+  /// No description provided for @volAlsoThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Also on this company in the last few days:'**
+  String get volAlsoThisWeek;
+
+  /// No description provided for @volNothingFiled.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing was filed and no headline named it in the last few days.'**
+  String get volNothingFiled;
+
+  /// No description provided for @volFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume measured against this company\'s own 20-session median. What is listed here happened in the same few days — the app is not saying it caused anything.'**
+  String get volFootnote;
+
+  /// No description provided for @volKindFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Filing'**
+  String get volKindFiling;
+
+  /// No description provided for @volKindNews.
+  ///
+  /// In en, this message translates to:
+  /// **'Headline'**
+  String get volKindNews;
+
+  /// No description provided for @volKindResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Reported result'**
+  String get volKindResult;
 }
 
 class _AppLocalizationsDelegate

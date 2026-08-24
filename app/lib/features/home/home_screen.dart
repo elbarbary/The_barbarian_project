@@ -106,7 +106,15 @@ class _Greeting extends ConsumerWidget {
       children: [
         Row(
           children: [
-            const BAvatarHatch(size: 46),
+            // The language switch, where an empty avatar used to sit.
+            //
+            // That avatar was a hatched placeholder for an account system that
+            // does not exist and greeted nobody — the slot cost 46 points at
+            // the top of the first screen and gave a reader nothing. The one
+            // control that genuinely belongs there is the language: this app
+            // is read in two, its Arabic is the primary one, and the switch
+            // was three taps deep in You.
+            const _LanguageToggle(),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -150,6 +158,87 @@ class _Greeting extends ConsumerWidget {
           style: BarbarianType.bodyS.copyWith(color: c.textMuted),
         ),
       ],
+    );
+  }
+}
+
+/// Arabic or English, in one tap, from the top of the first screen.
+///
+/// Each side is written in its own script, so a reader who has landed in the
+/// language they cannot read can still find the way out — the same reason the
+/// full setting in You names them that way. The current one is filled and the
+/// other is not, which is a shape difference and not only a colour one (§42).
+class _LanguageToggle extends ConsumerWidget {
+  const _LanguageToggle();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = context.colors;
+    final l = AppLocalizations.of(context);
+    // The locale actually in force, which is the system's until somebody
+    // chooses. Reading the stored preference alone would leave both halves
+    // looking unselected on a fresh install.
+    final arabic = Localizations.localeOf(context).languageCode == 'ar';
+
+    return Semantics(
+      button: true,
+      label: l.languageSwitch,
+      excludeSemantics: true,
+      child: BPressable(
+        onTap: () => ref
+            .read(localeProvider.notifier)
+            .set(Locale(arabic ? 'en' : 'ar')),
+        child: Container(
+          height: 46,
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: c.textPrimary.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+          ),
+          // Physical order, not directional: the pair reads the same way round
+          // in both languages, so the half a reader is looking for does not
+          // move when the app flips.
+          child: Row(
+            textDirection: TextDirection.ltr,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _Half(label: 'EN', on: !arabic),
+              _Half(label: 'ع', on: arabic),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Half extends StatelessWidget {
+  const _Half({required this.label, required this.on});
+
+  final String label;
+  final bool on;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return AnimatedContainer(
+      duration: BarbarianMotion.standard,
+      curve: BarbarianMotion.easeOut,
+      width: 34,
+      height: 36,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: on ? c.surface : Colors.transparent,
+        borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+        boxShadow: on && !c.isDark ? BarbarianShadow.lifted : null,
+      ),
+      child: Text(
+        label,
+        style: BarbarianType.labelS.copyWith(
+          color: on ? c.textPrimary : c.textMuted,
+          fontWeight: on ? FontWeight.w600 : FontWeight.w400,
+        ),
+      ),
     );
   }
 }

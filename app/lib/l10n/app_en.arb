@@ -2226,5 +2226,27 @@
         "type": "String"
       }
     }
-  }
+  },
+  "languageSwitch": "Switch language",
+  "@languageSwitch": {},
+  "volBusy": "It has traded {ratio} its usual volume today.",
+  "@volBusy": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "volAlsoThisWeek": "Also on this company in the last few days:",
+  "@volAlsoThisWeek": {},
+  "volNothingFiled": "Nothing was filed and no headline named it in the last few days.",
+  "@volNothingFiled": {},
+  "volFootnote": "Volume measured against this company's own 20-session median. What is listed here happened in the same few days — the app is not saying it caused anything.",
+  "@volFootnote": {},
+  "volKindFiling": "Filing",
+  "@volKindFiling": {},
+  "volKindNews": "Headline",
+  "@volKindNews": {},
+  "volKindResult": "Reported result",
+  "@volKindResult": {}
 }

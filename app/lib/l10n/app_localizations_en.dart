@@ -2669,4 +2669,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String briefStorySource(String source) {
     return 'From $source';
   }
+
+  @override
+  String get languageSwitch => 'Switch language';
+
+  @override
+  String volBusy(String ratio) {
+    return 'It has traded $ratio its usual volume today.';
+  }
+
+  @override
+  String get volAlsoThisWeek => 'Also on this company in the last few days:';
+
+  @override
+  String get volNothingFiled =>
+      'Nothing was filed and no headline named it in the last few days.';
+
+  @override
+  String get volFootnote =>
+      'Volume measured against this company\'s own 20-session median. What is listed here happened in the same few days — the app is not saying it caused anything.';
+
+  @override
+  String get volKindFiling => 'Filing';
+
+  @override
+  String get volKindNews => 'Headline';
+
+  @override
+  String get volKindResult => 'Reported result';
 }

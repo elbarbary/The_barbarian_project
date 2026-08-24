@@ -737,5 +737,13 @@
   "firstsMore": "{count, plural, one{وواحدة أخرى على صفحات الشركات} two{واثنتان أخريان على صفحات الشركات} few{و{count} أخرى على صفحات الشركات} many{و{count} أخرى على صفحات الشركات} other{و{count} أخرى على صفحات الشركات}}",
   "finFiguresPerRow": "كل بند بالوحدة المكتوبة بجواره، كما أُودعت.",
   "briefStoryLabel": "من هي الشركة",
-  "briefStorySource": "من {source}"
+  "briefStorySource": "من {source}",
+  "languageSwitch": "تغيير اللغة",
+  "volBusy": "تداولت اليوم بـ{ratio} حجمها المعتاد.",
+  "volAlsoThisWeek": "وفي الأيام القليلة الماضية، عن الشركة نفسها:",
+  "volNothingFiled": "لم تُفصح عن شيء ولم يذكرها عنوان خبري في الأيام القليلة الماضية.",
+  "volFootnote": "الحجم مقيس على وسيط الشركة نفسها في آخر 20 جلسة. وما يظهر هنا حدث في الأيام نفسها — والتطبيق لا يقول إنه سبب أي شيء.",
+  "volKindFiling": "إفصاح",
+  "volKindNews": "عنوان خبري",
+  "volKindResult": "نتيجة معلنة"
 }

@@ -2683,4 +2683,32 @@ class AppLocalizationsAr extends AppLocalizations {
   String briefStorySource(String source) {
     return 'من $source';
   }
+
+  @override
+  String get languageSwitch => 'تغيير اللغة';
+
+  @override
+  String volBusy(String ratio) {
+    return 'تداولت اليوم بـ$ratio حجمها المعتاد.';
+  }
+
+  @override
+  String get volAlsoThisWeek => 'وفي الأيام القليلة الماضية، عن الشركة نفسها:';
+
+  @override
+  String get volNothingFiled =>
+      'لم تُفصح عن شيء ولم يذكرها عنوان خبري في الأيام القليلة الماضية.';
+
+  @override
+  String get volFootnote =>
+      'الحجم مقيس على وسيط الشركة نفسها في آخر 20 جلسة. وما يظهر هنا حدث في الأيام نفسها — والتطبيق لا يقول إنه سبب أي شيء.';
+
+  @override
+  String get volKindFiling => 'إفصاح';
+
+  @override
+  String get volKindNews => 'عنوان خبري';
+
+  @override
+  String get volKindResult => 'نتيجة معلنة';
 }

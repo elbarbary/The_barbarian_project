@@ -33,6 +33,7 @@ import '../../core/widgets/text.dart';
 import 'company_brief.dart';
 import 'company_calendar.dart';
 import 'company_signals.dart';
+import 'volume_explainer.dart';
 import 'price_chart.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -537,6 +538,14 @@ class _Overview extends ConsumerWidget {
         // renders nothing at all for a company the briefs have not reached, so
         // a page is never padded with an empty heading.
         const SizedBox(height: 20),
+        // First on the page when it applies, and absent when it does not.
+        // Somebody opening a company from the busiest list arrived asking one
+        // question; this is where it gets answered.
+        BVolumeExplainer(
+          company: company,
+          quote: quote,
+          parentTab: parentTab,
+        ),
         // Before the brief, because "first loss after 27 profitable periods"
         // is the strongest thing this page knows and it is arithmetic, while
         // the brief below it is a model reading the same record.
