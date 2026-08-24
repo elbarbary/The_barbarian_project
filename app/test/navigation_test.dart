@@ -106,8 +106,8 @@ void main() {
       await tapTab(tester, BNavTab.today);
       await pumpUntil(tester, find.text('Today'));
 
-      await tapTab(tester, BNavTab.pit);
-      await pumpUntil(tester, find.textContaining('The Pit'));
+      await tapTab(tester, BNavTab.calendar);
+      await pumpUntil(tester, find.text('Calendar'));
 
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('No account needed to read'));

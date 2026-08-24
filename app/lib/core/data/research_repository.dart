@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../models/cash_or_trash.dart';
+import '../models/calendar.dart';
 import '../models/connection.dart';
 import '../models/disclosure.dart';
 import '../models/news.dart';
@@ -69,6 +70,10 @@ class ResearchRepository {
   /// Where a company shows up in more than one feed in the same few days.
   Stream<Sourced<ConnectionDoc>> getConnections() =>
       _parsed('connections.json', 'connections', ConnectionDoc.fromJson);
+
+  /// The forward calendar — scheduled dates read out of the filings.
+  Stream<Sourced<CalendarDoc>> getCalendar() =>
+      _parsed('calendar.json', 'calendar', CalendarDoc.fromJson);
 
   /// Every document one company has filed, across the whole kept record.
   Stream<Sourced<CompanyDocuments>> getCompanyDocuments(String ticker) =>

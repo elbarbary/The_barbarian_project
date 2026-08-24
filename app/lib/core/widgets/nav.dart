@@ -17,7 +17,7 @@ import '../../l10n/app_localizations.dart';
 ///  * **Market** stopped being a destination. A 282-row alphabetical list is a
 ///    reference, not a place you go — it is now behind Ask's search and its
 ///    own "full directory" route.
-///  * **The Pit** is a phase-gated placeholder for a discussion feature that
+///  * **Calendar** replaced The Pit — the placeholder became the forward
 ///    does not exist yet. It kept its route and left the bar; a quarter of the
 ///    navigation should not be a coming-soon page.
 ///  * **Home** was five stacked summaries. Its scanner hero and session
@@ -26,7 +26,7 @@ import '../../l10n/app_localizations.dart';
 enum BNavTab {
   home('Home'),
   today('Today'),
-  pit('The Pit'),
+  calendar('Calendar'),
   you('You');
 
   const BNavTab(this.label);
@@ -235,7 +235,7 @@ class _NavTab extends StatelessWidget {
                 icon: switch (tab) {
                   BNavTab.home => BNavIcon.home,
                   BNavTab.today => BNavIcon.today,
-                  BNavTab.pit => BNavIcon.pit,
+                  BNavTab.calendar => BNavIcon.calendar,
                   BNavTab.you => BNavIcon.you,
                 },
                 color: color,
@@ -282,7 +282,7 @@ extension BNavTabLabel on BNavTab {
     return switch (this) {
       BNavTab.home => l.navHome,
       BNavTab.today => l.navToday,
-      BNavTab.pit => l.navPit,
+      BNavTab.calendar => l.navCalendar,
       BNavTab.you => l.navYou,
     };
   }

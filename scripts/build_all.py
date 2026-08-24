@@ -74,6 +74,11 @@ STEPS = [
     ("Index levels + breadth", "build_market_history.py", False),
     # After the feeds it reads, and before the fixtures that bundle it.
     ("Connecting the dots", "build_connections_api.py", True),
+    # The forward calendar, read out of the committed EGX filings harvest — no
+    # network, so it is safe in CI. Best-effort: a checkout without the harvest
+    # (data-source/egx-beta/) simply produces an empty calendar rather than
+    # failing the build.
+    ("Calendar", "build_calendar.py", False),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and
     # both are resumable: whatever the host refuses today is simply first in
@@ -102,6 +107,7 @@ STEPS = [
 # document going three days without an update because a path did not exist on
 # a runner.
 BEST_EFFORT = {
+    "Calendar",
     "Disclosures",
     "Filed net profit",
     # Three third parties — IMF PortWatch, investing.com, the World Bank — none

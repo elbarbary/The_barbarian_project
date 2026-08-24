@@ -2315,4 +2315,120 @@ class AppLocalizationsAr extends AppLocalizations {
   String directoryAllCount(int count) {
     return 'الكل $count';
   }
+
+  @override
+  String get navCalendar => 'التقويم';
+
+  @override
+  String get calendarTitle => 'مواعيد سجّلتها الإفصاحات';
+
+  @override
+  String get calViewDay => 'يوم';
+
+  @override
+  String get calViewWeek => 'أسبوع';
+
+  @override
+  String get calViewMonth => 'شهر';
+
+  @override
+  String get calNothingDay => 'لا مواعيد في هذا اليوم.';
+
+  @override
+  String get calNothingRange => 'لا مواعيد في هذه الفترة.';
+
+  @override
+  String get calUpcoming => 'التالي';
+
+  @override
+  String get calToday => 'اليوم';
+
+  @override
+  String calAnnounced(String date) {
+    return 'أُعلن في $date';
+  }
+
+  @override
+  String calInDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'خلال $days يومًا',
+      few: 'خلال $days أيام',
+      one: 'غدًا',
+      zero: 'اليوم',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calAgoDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'منذ $days يومًا',
+      few: 'منذ $days أيام',
+      one: 'أمس',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get calExplainerTitle => 'من أين تأتي هذه المواعيد';
+
+  @override
+  String get calExplainerPlain =>
+      'مواعيد أعلنتها الشركة بالفعل — وليست توقعًا.';
+
+  @override
+  String get calExplainerBody =>
+      'تُعلن الشركات مواعيد التوزيعات وفترات زيادة رأس المال ومواعيد الجمعيات وإخطارات التداول قبل الحدث بأيام إلى أسابيع. يقرأ هذا التطبيق تلك المواعيد من الإفصاحات ويضعها على تقويم. كل بند يعود إلى الإفصاح الذي جاء منه؛ لا شيء هنا متوقَّع.';
+
+  @override
+  String get calKindDividendPayment => 'صرف التوزيعات';
+
+  @override
+  String get calKindExDividend => 'يوم قطع الكوبون';
+
+  @override
+  String get calKindRightsOpen => 'بدء الاكتتاب في زيادة رأس المال';
+
+  @override
+  String get calKindRightsClose => 'انتهاء الاكتتاب في زيادة رأس المال';
+
+  @override
+  String get calKindRightsEntitlement => 'آخر يوم لأحقية زيادة رأس المال';
+
+  @override
+  String get calKindAssemblyAgm => 'الجمعية العامة العادية';
+
+  @override
+  String get calKindAssemblyEgm => 'الجمعية العامة غير العادية';
+
+  @override
+  String get calKindTradingResume => 'استئناف التداول';
+
+  @override
+  String get calKindTradingSuspend => 'إيقاف التداول';
+
+  @override
+  String get calKindListingEffective => 'تغيير في القيد';
+
+  @override
+  String get calKindOther => 'موعد مجدول';
+
+  @override
+  String get calFamilyCash => 'نقدي';
+
+  @override
+  String get calFamilyRights => 'حقوق';
+
+  @override
+  String get calFamilyAssembly => 'جمعية';
+
+  @override
+  String get calFamilyTrading => 'تداول';
+
+  @override
+  String get calFamilyOther => 'أخرى';
 }

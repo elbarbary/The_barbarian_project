@@ -10,7 +10,7 @@ import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/features/market/market_screen.dart';
 import 'package:barbarian/features/opportunities/opportunity_screen.dart';
-import 'package:barbarian/features/pit/pit_screen.dart';
+import 'package:barbarian/features/calendar/calendar_screen.dart';
 import 'package:barbarian/features/profile/you_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -432,28 +432,50 @@ void main() {
     });
   });
 
-  group('The Pit', () {
-    testWidgets('states its phase without looking broken', (tester) async {
+  group('Calendar', () {
+    testWidgets('lays scheduled dates on a month grid', (tester) async {
       await pumpScreen(
         tester,
-        const PitScreen(parentTab: BNavTab.home),
-        until: find.text('The Pit'),
+        const CalendarScreen(parentTab: BNavTab.home),
+        until: find.text('Calendar'),
       );
 
-      expect(
-        find.textContaining('Coming in the next development phase'),
-        findsOneWidget,
-      );
+      // The three views and the month grid are the frame of the screen.
+      expect(find.text('Month'), findsOneWidget);
+      expect(find.text('Week'), findsOneWidget);
+      expect(find.text('Day'), findsOneWidget);
     });
 
-    testWidgets('promises no calls, targets or leaderboards', (tester) async {
+    testWidgets('names events, never forecasts or advises', (tester) async {
       await pumpScreen(
         tester,
-        const PitScreen(parentTab: BNavTab.home),
-        until: find.text('The Pit'),
+        const CalendarScreen(parentTab: BNavTab.home),
+        until: find.text('Calendar'),
       );
 
-      expect(find.textContaining('No buy or sell calls'), findsOneWidget);
+      // A calendar of scheduled events must not read as a tip sheet — save
+      // for the legal footnote, whose whole job is to say "we do not buy, we
+      // do not sell". Everything else has to manage without those words.
+      bool inFootnote(Element el) {
+        var found = false;
+        el.visitAncestorElements((a) {
+          if (a.widget is BLegalFootnote) {
+            found = true;
+            return false;
+          }
+          return true;
+        });
+        return found;
+      }
+
+      for (final forbidden in ['buy', 'sell', 'forecast', 'predict', 'target']) {
+        final offenders = find
+            .textContaining(RegExp(forbidden, caseSensitive: false))
+            .evaluate()
+            .where((el) => !inFootnote(el))
+            .toList();
+        expect(offenders, isEmpty, reason: 'the calendar said "$forbidden"');
+      }
     });
   });
 
@@ -464,7 +486,7 @@ void main() {
       ('Home', const HomeScreen()),
       ('Market', const MarketScreen(parentTab: BNavTab.home)),
       ('You', const YouScreen()),
-      ('The Pit', const PitScreen(parentTab: BNavTab.home)),
+      ('Calendar', const CalendarScreen(parentTab: BNavTab.home)),
       ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
       ('Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
       (

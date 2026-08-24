@@ -2326,4 +2326,118 @@ class AppLocalizationsEn extends AppLocalizations {
   String directoryAllCount(int count) {
     return 'All $count';
   }
+
+  @override
+  String get navCalendar => 'Calendar';
+
+  @override
+  String get calendarTitle => 'Dates the filings put on the record';
+
+  @override
+  String get calViewDay => 'Day';
+
+  @override
+  String get calViewWeek => 'Week';
+
+  @override
+  String get calViewMonth => 'Month';
+
+  @override
+  String get calNothingDay => 'Nothing scheduled for this day.';
+
+  @override
+  String get calNothingRange => 'Nothing scheduled in this stretch.';
+
+  @override
+  String get calUpcoming => 'Next up';
+
+  @override
+  String get calToday => 'Today';
+
+  @override
+  String calAnnounced(String date) {
+    return 'announced $date';
+  }
+
+  @override
+  String calInDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'in $days days',
+      one: 'tomorrow',
+      zero: 'today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String calAgoDays(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days ago',
+      one: 'yesterday',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get calExplainerTitle => 'Where these dates come from';
+
+  @override
+  String get calExplainerPlain =>
+      'Dates a company already filed — not a forecast.';
+
+  @override
+  String get calExplainerBody =>
+      'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.';
+
+  @override
+  String get calKindDividendPayment => 'Dividend paid';
+
+  @override
+  String get calKindExDividend => 'Ex-dividend';
+
+  @override
+  String get calKindRightsOpen => 'Rights issue opens';
+
+  @override
+  String get calKindRightsClose => 'Rights issue closes';
+
+  @override
+  String get calKindRightsEntitlement => 'Rights entitlement cutoff';
+
+  @override
+  String get calKindAssemblyAgm => 'Annual general assembly';
+
+  @override
+  String get calKindAssemblyEgm => 'Extraordinary assembly';
+
+  @override
+  String get calKindTradingResume => 'Trading resumes';
+
+  @override
+  String get calKindTradingSuspend => 'Trading suspended';
+
+  @override
+  String get calKindListingEffective => 'Listing change';
+
+  @override
+  String get calKindOther => 'Scheduled event';
+
+  @override
+  String get calFamilyCash => 'Cash';
+
+  @override
+  String get calFamilyRights => 'Rights';
+
+  @override
+  String get calFamilyAssembly => 'Meeting';
+
+  @override
+  String get calFamilyTrading => 'Trading';
+
+  @override
+  String get calFamilyOther => 'Other';
 }

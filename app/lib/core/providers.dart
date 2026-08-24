@@ -13,6 +13,7 @@ import 'data/research_repository.dart';
 import 'data/sourced.dart';
 import 'data/user_repository.dart';
 import 'models/cash_or_trash.dart';
+import 'models/calendar.dart';
 import 'models/connection.dart';
 import 'models/disclosure.dart';
 import 'models/news.dart';
@@ -132,6 +133,10 @@ final connectionsProvider = StreamProvider<Sourced<ConnectionDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getConnections(),
 );
 
+final calendarProvider = StreamProvider<Sourced<CalendarDoc>>(
+  (ref) => ref.watch(researchRepositoryProvider).getCalendar(),
+);
+
 final companyDocumentsProvider =
     StreamProvider.family<Sourced<CompanyDocuments>, String>(
       (ref, ticker) =>
@@ -219,6 +224,7 @@ final publishedDocumentProviders = <ProviderOrFamily>[
   disclosuresProvider,
   disclosureArchiveProvider,
   connectionsProvider,
+  calendarProvider,
   marketHistoryProvider,
   ratesProvider,
   macroProvider,

@@ -97,6 +97,7 @@ RESOURCES = {
     "disclosures": ["disclosures/latest.json"],
     "macro": ["macro.json"],
     "connections": ["connections.json"],
+    "calendar": ["calendar.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by

@@ -11,7 +11,7 @@ import '../features/exit/exit_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/market/market_screen.dart';
 import '../features/opportunities/opportunity_screen.dart';
-import '../features/pit/pit_screen.dart';
+import '../features/calendar/calendar_screen.dart';
 import '../features/today/today_screen.dart';
 import '../features/profile/you_screen.dart';
 import '../features/research/article_screen.dart';
@@ -20,7 +20,7 @@ import '../features/research/article_screen.dart';
 abstract final class Routes {
   static const String home = '/';
   static const String today = '/today';
-  static const String pit = '/pit';
+  static const String calendar = '/calendar';
   static const String you = '/you';
 
   /// The full directory and its search. The boards give this its own tab;
@@ -65,7 +65,7 @@ abstract final class Routes {
   static String _root(BNavTab tab) => switch (tab) {
     BNavTab.home => '/',
     BNavTab.today => '/today/',
-    BNavTab.pit => '/pit/',
+    BNavTab.calendar => '/calendar/',
     BNavTab.you => '/you/',
   };
 }
@@ -164,10 +164,10 @@ GoRouter buildRouter() {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Routes.pit,
+                path: Routes.calendar,
                 builder: (context, state) =>
-                    const PitScreen(parentTab: BNavTab.pit),
-                routes: detailRoutes(BNavTab.pit),
+                    const CalendarScreen(parentTab: BNavTab.calendar),
+                routes: detailRoutes(BNavTab.calendar),
               ),
             ],
           ),

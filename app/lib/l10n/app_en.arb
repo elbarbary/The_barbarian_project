@@ -1902,5 +1902,85 @@
         "type": "int"
       }
     }
-  }
+  },
+  "navCalendar": "Calendar",
+  "@navCalendar": {},
+  "calendarTitle": "Dates the filings put on the record",
+  "@calendarTitle": {},
+  "calViewDay": "Day",
+  "@calViewDay": {},
+  "calViewWeek": "Week",
+  "@calViewWeek": {},
+  "calViewMonth": "Month",
+  "@calViewMonth": {},
+  "calNothingDay": "Nothing scheduled for this day.",
+  "@calNothingDay": {},
+  "calNothingRange": "Nothing scheduled in this stretch.",
+  "@calNothingRange": {},
+  "calUpcoming": "Next up",
+  "@calUpcoming": {},
+  "calToday": "Today",
+  "@calToday": {},
+  "calAnnounced": "announced {date}",
+  "@calAnnounced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "calInDays": "{days, plural, =0{today} =1{tomorrow} other{in {days} days}}",
+  "@calInDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "calAgoDays": "{days, plural, =1{yesterday} other{{days} days ago}}",
+  "@calAgoDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "calExplainerTitle": "Where these dates come from",
+  "@calExplainerTitle": {},
+  "calExplainerPlain": "Dates a company already filed — not a forecast.",
+  "@calExplainerPlain": {},
+  "calExplainerBody": "Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.",
+  "@calExplainerBody": {},
+  "calKindDividendPayment": "Dividend paid",
+  "@calKindDividendPayment": {},
+  "calKindExDividend": "Ex-dividend",
+  "@calKindExDividend": {},
+  "calKindRightsOpen": "Rights issue opens",
+  "@calKindRightsOpen": {},
+  "calKindRightsClose": "Rights issue closes",
+  "@calKindRightsClose": {},
+  "calKindRightsEntitlement": "Rights entitlement cutoff",
+  "@calKindRightsEntitlement": {},
+  "calKindAssemblyAgm": "Annual general assembly",
+  "@calKindAssemblyAgm": {},
+  "calKindAssemblyEgm": "Extraordinary assembly",
+  "@calKindAssemblyEgm": {},
+  "calKindTradingResume": "Trading resumes",
+  "@calKindTradingResume": {},
+  "calKindTradingSuspend": "Trading suspended",
+  "@calKindTradingSuspend": {},
+  "calKindListingEffective": "Listing change",
+  "@calKindListingEffective": {},
+  "calKindOther": "Scheduled event",
+  "@calKindOther": {},
+  "calFamilyCash": "Cash",
+  "@calFamilyCash": {},
+  "calFamilyRights": "Rights",
+  "@calFamilyRights": {},
+  "calFamilyAssembly": "Meeting",
+  "@calFamilyAssembly": {},
+  "calFamilyTrading": "Trading",
+  "@calFamilyTrading": {},
+  "calFamilyOther": "Other",
+  "@calFamilyOther": {}
 }

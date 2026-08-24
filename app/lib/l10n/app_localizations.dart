@@ -3913,6 +3913,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All {count}'**
   String directoryAllCount(int count);
+
+  /// No description provided for @navCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get navCalendar;
+
+  /// No description provided for @calendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates the filings put on the record'**
+  String get calendarTitle;
+
+  /// No description provided for @calViewDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get calViewDay;
+
+  /// No description provided for @calViewWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get calViewWeek;
+
+  /// No description provided for @calViewMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get calViewMonth;
+
+  /// No description provided for @calNothingDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing scheduled for this day.'**
+  String get calNothingDay;
+
+  /// No description provided for @calNothingRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing scheduled in this stretch.'**
+  String get calNothingRange;
+
+  /// No description provided for @calUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Next up'**
+  String get calUpcoming;
+
+  /// No description provided for @calToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get calToday;
+
+  /// No description provided for @calAnnounced.
+  ///
+  /// In en, this message translates to:
+  /// **'announced {date}'**
+  String calAnnounced(String date);
+
+  /// No description provided for @calInDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =0{today} =1{tomorrow} other{in {days} days}}'**
+  String calInDays(int days);
+
+  /// No description provided for @calAgoDays.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{yesterday} other{{days} days ago}}'**
+  String calAgoDays(int days);
+
+  /// No description provided for @calExplainerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Where these dates come from'**
+  String get calExplainerTitle;
+
+  /// No description provided for @calExplainerPlain.
+  ///
+  /// In en, this message translates to:
+  /// **'Dates a company already filed — not a forecast.'**
+  String get calExplainerPlain;
+
+  /// No description provided for @calExplainerBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar. Every entry links back to the filing it came from; nothing here is predicted.'**
+  String get calExplainerBody;
+
+  /// No description provided for @calKindDividendPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Dividend paid'**
+  String get calKindDividendPayment;
+
+  /// No description provided for @calKindExDividend.
+  ///
+  /// In en, this message translates to:
+  /// **'Ex-dividend'**
+  String get calKindExDividend;
+
+  /// No description provided for @calKindRightsOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights issue opens'**
+  String get calKindRightsOpen;
+
+  /// No description provided for @calKindRightsClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights issue closes'**
+  String get calKindRightsClose;
+
+  /// No description provided for @calKindRightsEntitlement.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights entitlement cutoff'**
+  String get calKindRightsEntitlement;
+
+  /// No description provided for @calKindAssemblyAgm.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual general assembly'**
+  String get calKindAssemblyAgm;
+
+  /// No description provided for @calKindAssemblyEgm.
+  ///
+  /// In en, this message translates to:
+  /// **'Extraordinary assembly'**
+  String get calKindAssemblyEgm;
+
+  /// No description provided for @calKindTradingResume.
+  ///
+  /// In en, this message translates to:
+  /// **'Trading resumes'**
+  String get calKindTradingResume;
+
+  /// No description provided for @calKindTradingSuspend.
+  ///
+  /// In en, this message translates to:
+  /// **'Trading suspended'**
+  String get calKindTradingSuspend;
+
+  /// No description provided for @calKindListingEffective.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing change'**
+  String get calKindListingEffective;
+
+  /// No description provided for @calKindOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Scheduled event'**
+  String get calKindOther;
+
+  /// No description provided for @calFamilyCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get calFamilyCash;
+
+  /// No description provided for @calFamilyRights.
+  ///
+  /// In en, this message translates to:
+  /// **'Rights'**
+  String get calFamilyRights;
+
+  /// No description provided for @calFamilyAssembly.
+  ///
+  /// In en, this message translates to:
+  /// **'Meeting'**
+  String get calFamilyAssembly;
+
+  /// No description provided for @calFamilyTrading.
+  ///
+  /// In en, this message translates to:
+  /// **'Trading'**
+  String get calFamilyTrading;
+
+  /// No description provided for @calFamilyOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get calFamilyOther;
 }
 
 class _AppLocalizationsDelegate

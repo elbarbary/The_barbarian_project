@@ -51,6 +51,9 @@ import re
 REPO = pathlib.Path(__file__).resolve().parent.parent
 FILINGS = REPO / "data-source" / "egx-beta" / "filings"
 OUT = REPO / "public" / "data" / "v1" / "calendar.json"
+# Written in both places, like every other builder: build_fixtures verifies the
+# bundled copy matches the published one and fails the build if it drifts.
+FIXTURE = REPO / "app" / "assets" / "fixtures" / "calendar.json"
 
 DATE = re.compile(r"\b(\d{2})/(\d{2})/(\d{4})\b")
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
@@ -196,12 +199,18 @@ def main() -> int:
     today = datetime.date.today()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--all", action="store_true",
-                        help="include past scheduled events too (default: upcoming only)")
+                        help="every scheduled event ever, past included")
+    parser.add_argument("--past-days", type=int, default=90,
+                        help="how many days of recent events to keep for context "
+                             "(default 90; ignored with --all)")
     parser.add_argument("--horizon", type=int, default=0,
                         help="only events within this many days (0 = no limit)")
     args = parser.parse_args()
 
-    floor = None if args.all else today
+    # The published calendar is a window around now: recent events give the
+    # day and month views something to show today, and everything scheduled
+    # ahead is kept unbounded. --all dumps the whole history instead.
+    floor = None if args.all else today - datetime.timedelta(days=args.past_days)
     rows = build(on_or_after=floor)
     if args.horizon:
         cutoff = today + datetime.timedelta(days=args.horizon)
@@ -210,16 +219,21 @@ def main() -> int:
     doc = {
         "generated": today.isoformat(),
         "source": "EGX disclosures — scheduled dates the issuer has filed",
+        "past_days": None if args.all else args.past_days,
         "count": len(rows),
         "events": rows,
     }
+    payload = json.dumps(doc, ensure_ascii=False, indent=1)
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
+    OUT.write_text(payload, encoding="utf-8")
+    if FIXTURE.parent.exists():
+        FIXTURE.write_text(payload, encoding="utf-8")
 
     import collections
     by_kind = collections.Counter(r["kind"] for r in rows)
-    scope = "scheduled" if args.all else "upcoming"
-    print(f"── Calendar: {len(rows)} {scope} events")
+    upcoming = sum(1 for r in rows if r["date"] >= today.isoformat())
+    scope = "scheduled (all time)" if args.all else f"in window ({upcoming} upcoming)"
+    print(f"── Calendar: {len(rows)} events {scope}")
     for kind, n in by_kind.most_common():
         print(f"   {kind:<20} {n}")
     return 0
