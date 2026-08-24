@@ -84,6 +84,7 @@ env:
     scripts/company_filings_seen.json
     scripts/company_briefs.json
     scripts/company_names_ar.json
+    scripts/company_profiles.json
     scripts/financials_filed.json
     scripts/macro_insight.json
     scripts/market_history.json

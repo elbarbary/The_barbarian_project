@@ -338,6 +338,15 @@ DIRECTIVE = (
     re.compile("هدف السعر|السعر المستهدف|وقف الخسارة|جني الأرباح"),
     re.compile("عائد متوقع|أرباح متوقعة"),
     re.compile("فرصة (شراء|للشراء|استثمارية)"),
+    # "worth buying" in both languages. `build_news_api.ADVICE_PATTERNS` has
+    # dropped wire headlines on `يستحق الشراء` since the feed was written, and
+    # this detector — which guards everything a model composes — did not know
+    # the phrase in either language. A recommendation phrased as a merit
+    # ("worth buying") is the same claim as one phrased as an instruction, and
+    # is the form a model reaches for when told not to give instructions.
+    re.compile(r"\bworth (buying|selling|holding|a buy)\b", re.I),
+    re.compile(r"\b(a|an)\s+(compelling|attractive)\s+(buy|entry)\b", re.I),
+    re.compile("يستحق (الشراء|البيع|الاقتناء)|جدير بالشراء"),
 )
 
 

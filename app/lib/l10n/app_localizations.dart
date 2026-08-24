@@ -4355,7 +4355,7 @@ abstract class AppLocalizations {
   /// No description provided for @briefStoryLabel.
   ///
   /// In en, this message translates to:
-  /// **'What the company does'**
+  /// **'Who the company is'**
   String get briefStoryLabel;
 
   /// No description provided for @briefStorySource.

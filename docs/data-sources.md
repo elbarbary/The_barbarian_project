@@ -47,6 +47,29 @@ Last reviewed: 21 August 2026.
 | **Zawya** — `zawya.com` | Nothing today | Tried and unreachable: RSS answers 200 with zero items | Listed because a source that was tried and failed is a fact about the feed |
 | **GDELT** — `api.gdeltproject.org` | Reporting that explains what each macro series has been doing — shipping coverage for Suez, oil-market coverage for Brent, demand coverage for the metals | Free, no key, one narrow query per series. Rate-limits hard, so it retries; a card without coverage is still a card | Used **only with a tight query**, which is the feature — the queries live in `macro_sources.QUERIES` and are the reason it works. A broad Egypt query returns currency-rate SEO listicles, and the two domains that served them are named in `FILLER_DOMAINS` and dropped. Headlines are carried verbatim with the publishing domain and a link back, never rewritten or summarised. Not used as a general news feed: Al Borsa and Hapi are better for Egyptian company news |
 
+## Who a company is
+
+| Source | What we take | How | Terms |
+|---|---|---|---|
+| **Mubasher** — `english.mubasher.info` | The one description of a listed company anywhere: its industry, where it is based, when it was incorporated and listed, its auditor, its shareholders with stakes, and its subsidiaries with stakes | `GET /markets/EGX/stocks/{TICKER}/profile`, server-rendered HTML, keyed on the app's own ticker. Same fetch this repo already makes for financial statements, at a different path | `robots.txt` publishes `Crawl-delay: 5` for `*` and does not disallow `/markets/`. Harvested at six seconds, one company at a time, and named on screen wherever its text appears |
+
+**Why this source and not the exchange.** The exchange publishes no business
+description on any surface reachable to us. Its BFF `stock-info` endpoint
+returns 260 companies of identity and market metrics; its old site's
+`CompanyDetails.aspx?ISIN=` is nineteen fields of the same kind; its SME portal
+matches. And the 191,484 filings already held cannot substitute: their bodies
+are one sentence each (median 135 characters after boilerplate), `attachments`
+is empty on every row so the real releases are unfetched pointers, and across
+the whole archive "is engaged in" appears zero times, "business description"
+zero, "principal activities" once. The eighteen filings that mention a
+company's *purpose* are all notices of intent to **amend** it.
+
+**What it is not.** An identity card, not a segment breakdown. It says Ataqa
+makes steel in Cairo and who owns it; it does not say how Ataqa earns, where
+its plants are, or what its margins do. The app labels it "Who the company is"
+for that reason. The profile also carries each company's own website, which is
+the obvious next step if a fuller description is ever wanted.
+
 ## Machine assistance
 
 | Source | What we take | How | Terms |

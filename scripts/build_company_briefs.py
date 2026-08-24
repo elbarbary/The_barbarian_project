@@ -63,6 +63,7 @@ OUT = REPO / "public" / "data" / "v1" / "briefs"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "briefs"
 STORE = pathlib.Path(__file__).resolve().parent / "company_briefs.json"
 SIGNALS = REPO / "public" / "data" / "v1" / "signals"
+PROFILES = pathlib.Path(__file__).resolve().parent / "company_profiles.json"
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 
@@ -250,6 +251,72 @@ def facts_block(record: dict, signals: dict) -> tuple[str, set[str]]:
 PLAN_YEARS = 3
 
 
+def profile_block(profile: dict) -> tuple[str, set[str]] | None:
+    """What Mubasher publishes about the company, as prose and as a vocabulary.
+
+    Returns None when there is no profile — the story section then does not
+    render at all, which is the correct behaviour for a company nobody carries
+    a description of. An empty section is honest; an invented one is not.
+    """
+    if not profile or profile.get("missing"):
+        return None
+    purpose = (profile.get("purpose") or "").strip()
+    if not purpose:
+        return None
+
+    lines = [f"- {purpose}"]
+    numbers: set[str] = set()
+
+    if established := profile.get("established"):
+        lines.append(f"- Incorporated {established}.")
+    if auditor := profile.get("auditor"):
+        lines.append(f"- Auditor: {auditor}.")
+
+    owners = [o for o in (profile.get("owners") or []) if o.get("stake")][:5]
+    if owners:
+        named = ", ".join(f"{o['name']} {o['stake']}%" for o in owners)
+        lines.append(f"- Shareholders on the register: {named}.")
+        numbers.update(str(o["stake"]) for o in owners)
+
+    subs = [s for s in (profile.get("subsidiaries") or []) if s.get("stake")][:8]
+    if subs:
+        named = ", ".join(f"{s['name']} {s['stake']}%" for s in subs)
+        lines.append(f"- Subsidiaries and stakes held: {named}.")
+        numbers.update(str(s["stake"]) for s in subs)
+
+    return "\n".join(lines), numbers
+
+
+# Every percentage a story prints has to be one Mubasher published.
+PERCENT_IN_TEXT = re.compile(r"(\d+(?:\.\d+)?)\s*%")
+
+
+def vet_story(story: str, story_ar: str, allowed: set[str]) -> tuple[bool, str]:
+    """A story may only quote stakes that are on the register.
+
+    The facts handed over are a short, closed list, which makes this checkable:
+    a percentage in the prose that is not in the list was invented, and one
+    invented number is enough to distrust the paragraph it sits in. This
+    repository has published fabricated figures against a real ticker before.
+    """
+    for field in (story, story_ar):
+        if not field:
+            continue
+        if hit := macro_types.directive(field):
+            return False, f"directive: {hit!r}"
+        for value in PERCENT_IN_TEXT.findall(field):
+            # Mubasher writes 61.619; a model may reasonably round to 61.6 or
+            # 62. Accept anything that matches a published stake to within a
+            # whole point, and refuse anything that matches none.
+            try:
+                said = float(value)
+            except ValueError:
+                return False, f"unreadable percentage {value!r}"
+            if not any(abs(said - float(a)) <= 1.0 for a in allowed):
+                return False, f"invented stake {value}%"
+    return True, ""
+
+
 def prompt_window(filings: list[dict]) -> list[dict]:
     """The filings the model sees: the last [PROMPT_YEARS], capped at [WINDOW].
 
@@ -266,7 +333,7 @@ def prompt_window(filings: list[dict]) -> list[dict]:
 
 
 def prompt_for(ticker: str, name: str, filings: list[dict], record: dict,
-               signals: dict) -> tuple[str, set[str]]:
+               signals: dict, profile: str | None = None) -> tuple[str, set[str]]:
     plan_floor = (
         datetime.date.today() - datetime.timedelta(days=PLAN_YEARS * 365)
     ).isoformat()
@@ -276,10 +343,20 @@ def prompt_for(ticker: str, name: str, filings: list[dict], record: dict,
         lines.append(f"[egx-{item['code']}] {(item.get('dateStamp') or '')[:10]} {title}")
     listing = "\n".join(lines)
     facts, tokens = facts_block(record, signals)
+    profile_section = (
+        f"""WHO THIS COMPANY IS, as published by Mubasher. These are the only
+facts you have about the business itself; the app holds no other description
+of it, so do not add anything from your own knowledge:
+
+{profile}
+
+"""
+        if profile else ""
+    )
 
     prompt = f"""You are reading the filing record of {name} ({ticker}), a company listed on the Egyptian Exchange.
 
-FACTS ALREADY COMPUTED FROM THAT RECORD. These are counted, not estimated, and you may rely on them. A "reported period" is one year-to-date filing — Egyptian issuers file Q1, H1, 9M and FY cumulatively — so never call them quarters:
+{profile_section}FACTS ALREADY COMPUTED FROM THAT RECORD. These are counted, not estimated, and you may rely on them. A "reported period" is one year-to-date filing — Egyptian issuers file Q1, H1, 9M and FY cumulatively — so never call them quarters:
 
 {facts}
 
@@ -288,6 +365,10 @@ ITS FILINGS, newest first, each with an id in square brackets:
 {listing}
 
 Return ONLY a JSON object with exactly these keys:
+
+"story": 40-70 words of English saying what kind of company this is and how it is put together — its industry, where it is based, how long it has been listed, who controls it, and what it owns. Use ONLY the "WHO THIS COMPANY IS" facts above. Do not describe its products, plants, customers, margins or strategy: you have not been told those and must not guess at them. If no such facts were given above, return an empty string.
+
+"story_ar": the same paragraph in Arabic.
 
 "history": 45-80 words of English describing what is DISTINCTIVE about this company's record — what somebody who had read every filing would know that somebody who had read none would not. Anchor it in the computed facts above: quote specific years, counts and period names. Do NOT describe activities every listed company performs (filing results, holding assemblies, publishing disclosure forms) unless this company does them at a rate the facts show is unusual. Do not evaluate the company, do not use adjectives of quality, do not mention share price.
 
@@ -384,6 +465,36 @@ def vet(brief: dict, allowed: set[str], specifics: set[str],
     }, ""
 
 
+def attach_story(clean: dict, brief: dict, stakes: set[str], profile: dict) -> None:
+    """Add the story to a vetted brief, or leave it off.
+
+    Separate from `vet` because the two fail differently: a bad history means
+    the whole brief is refused, while a bad story means the company simply has
+    no story section. The record is the app's own arithmetic and has to be
+    right; the story is somebody else's description and can be absent.
+    """
+    story = (brief.get("story") or "").strip()
+    story_ar = (brief.get("story_ar") or "").strip()
+    if len(story) < 30:
+        return
+    ok, why = vet_story(story, story_ar, stakes)
+    if not ok:
+        print(f"   story dropped — {why}", flush=True)
+        return
+    clean["story"] = story
+    clean["story_ar"] = story_ar
+    clean["story_source"] = profile.get("source") or "Mubasher"
+    clean["story_url"] = profile.get("source_url") or ""
+
+
+def load_profiles() -> dict:
+    """Everything `harvest_company_profiles.py` has collected, or nothing."""
+    try:
+        return json.loads(PROFILES.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
 def load_signals(ticker: str) -> dict:
     """What `build_signals.py` computed for this company, or nothing."""
     try:
@@ -445,6 +556,7 @@ def main() -> int:
             held = {}
 
     by_ticker = load_filings()
+    profiles = load_profiles()
     directory = {}
     try:
         # `name_en`, which is the field companies.json actually carries. This
@@ -498,9 +610,11 @@ def main() -> int:
             f"egx-{i['code']}" for i in window
             if (i.get("dateStamp") or "")[:10] >= floor
         }
+        profile = profiles.get(ticker) or {}
+        block = profile_block(profile)
         text, specifics = prompt_for(
             ticker, directory.get(ticker, ticker), filings, record,
-            load_signals(ticker),
+            load_signals(ticker), block[0] if block else None,
         )
         try:
             raw, usage = gemini.generate(text)
@@ -519,6 +633,8 @@ def main() -> int:
             print(f"   {ticker}: refused — {why}", flush=True)
             refused += 1
             continue
+        if block:
+            attach_story(clean, brief, block[1], profile)
         clean["record"] = record
         clean["generated"] = datetime.date.today().isoformat()
         held[ticker] = clean

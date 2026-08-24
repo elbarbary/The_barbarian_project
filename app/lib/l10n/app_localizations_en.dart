@@ -2663,7 +2663,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Each line is in the unit shown beside it, as filed.';
 
   @override
-  String get briefStoryLabel => 'What the company does';
+  String get briefStoryLabel => 'Who the company is';
 
   @override
   String briefStorySource(String source) {

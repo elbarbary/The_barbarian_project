@@ -736,6 +736,6 @@
   "firstsBlurb": "سلاسل انتهت للتو، مقيسة على سجل كل شركة نفسها لا على السوق.",
   "firstsMore": "{count, plural, one{وواحدة أخرى على صفحات الشركات} two{واثنتان أخريان على صفحات الشركات} few{و{count} أخرى على صفحات الشركات} many{و{count} أخرى على صفحات الشركات} other{و{count} أخرى على صفحات الشركات}}",
   "finFiguresPerRow": "كل بند بالوحدة المكتوبة بجواره، كما أُودعت.",
-  "briefStoryLabel": "ما تعمل به الشركة",
+  "briefStoryLabel": "من هي الشركة",
   "briefStorySource": "من {source}"
 }

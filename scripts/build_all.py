@@ -134,6 +134,28 @@ STEPS = [
     # is a no-op the moment the map is full and a small catch-up whenever the
     # exchange lists something new.
     ("Arabic names", "harvest_names_mubasher.py", False, ["--limit", "12"]),
+    # Who each company is — industry, incorporation, owners, subsidiaries.
+    # The only whole-market source of it anyone found, and the app held
+    # nothing of the kind before: the exchange publishes no business
+    # description on any surface, and the filings archive answers "is engaged
+    # in" zero times across 191,484 rows.
+    #
+    # Only companies with no profile yet are asked for, so this is a no-op the
+    # moment the set is full and a small catch-up whenever the exchange lists
+    # something new. Six seconds apart, one at a time, against a host whose
+    # robots.txt asks for five.
+    ("Company profiles", "harvest_company_profiles.py", False, ["--limit", "8"]),
+    # And the brief written from them, which had never run here either — the
+    # 255 published ones exist because somebody ran the script by hand. A
+    # company the exchange listed tomorrow would have had no brief, ever, and
+    # a brief the guards refused would never have been retried.
+    #
+    # After the profiles it reads and after Signals, whose counts it quotes.
+    # Six a run and fifty cents a run: only companies with no brief yet are
+    # asked for, so it is a no-op once the set is full. With no Gemini
+    # transport it prints so and leaves the published briefs alone.
+    ("Company briefs", "build_company_briefs.py", False,
+     ["--limit", "6", "--budget", "0.50"]),
     ("Company filings", "harvest_company_filings.py", False,
      ["--limit", "5", "--spacing", "6"]),
     ("Filed documents", "enrich_disclosures.py", False,
@@ -175,6 +197,8 @@ BEST_EFFORT = {
     # macro.json in place, which is dated and labelled like everything else.
     "Macro",
     "Arabic names",
+    "Company profiles",
+    "Company briefs",
     "Company filings",
     "Filed documents",
     # The exchange's own BFF, paced and serialized. It blocked this project

@@ -2217,7 +2217,7 @@
   },
   "finFiguresPerRow": "Each line is in the unit shown beside it, as filed.",
   "@finFiguresPerRow": {},
-  "briefStoryLabel": "What the company does",
+  "briefStoryLabel": "Who the company is",
   "@briefStoryLabel": {},
   "briefStorySource": "From {source}",
   "@briefStorySource": {

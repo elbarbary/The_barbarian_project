@@ -198,5 +198,65 @@ class Parsing(unittest.TestCase):
         self.assertIsNone(b.parse("no json here"))
 
 
+class Story(unittest.TestCase):
+    """The one paragraph on the page that is not the exchange's own record.
+
+    It is written from a short, closed list of facts Mubasher publishes, which
+    is what makes it checkable: a percentage in the prose that is not on the
+    register was invented, and this repository has published fabricated
+    figures against a real ticker before.
+    """
+
+    STAKES = {"61.619", "8.3351", "80.0", "74.92"}
+
+    def test_a_stake_from_the_register_survives(self):
+        ok, why = b.vet_story(
+            "Controlled by its majority shareholder with 61.619%.", "", self.STAKES)
+        self.assertTrue(ok, why)
+
+    def test_a_sensible_rounding_survives(self):
+        # Mubasher writes 61.619; a model may reasonably say 61.6 or 62.
+        for said in ("61.6%", "62%", "74.9%"):
+            ok, why = b.vet_story(f"It holds {said}.", "", self.STAKES)
+            self.assertTrue(ok, f"{said}: {why}")
+
+    def test_an_invented_stake_drops_the_story(self):
+        ok, why = b.vet_story("It owns 45% of a logistics arm.", "", self.STAKES)
+        self.assertFalse(ok)
+        self.assertIn("invented", why)
+
+    def test_the_arabic_half_is_checked_too(self):
+        ok, _ = b.vet_story("Fine.", "يمتلك 45% من شركة تابعة.", self.STAKES)
+        self.assertFalse(ok)
+
+    def test_advice_in_a_story_drops_it(self):
+        ok, why = b.vet_story("A company worth buying at this price.", "", self.STAKES)
+        self.assertFalse(ok)
+        self.assertIn("directive", why)
+
+    def test_no_profile_means_no_story_section(self):
+        self.assertIsNone(b.profile_block({}))
+        self.assertIsNone(b.profile_block({"missing": True}))
+        self.assertIsNone(b.profile_block({"purpose": "   "}))
+
+    def test_the_block_offers_only_published_stakes_as_vocabulary(self):
+        block, stakes = b.profile_block({
+            "purpose": "A steel maker based in Cairo.",
+            "established": "May 1998",
+            "owners": [{"name": "Holder", "stake": 51.0}],
+            "subsidiaries": [{"name": "Arm Co", "stake": 99.9}],
+        })
+        self.assertIn("A steel maker", block)
+        self.assertIn("Holder 51.0%", block)
+        self.assertIn("Arm Co 99.9%", block)
+        self.assertEqual(stakes, {"51.0", "99.9"})
+
+    def test_a_story_never_reaches_a_brief_it_failed(self):
+        clean = {}
+        b.attach_story(clean, {"story": "It owns 45% of something.", "story_ar": ""},
+                       self.STAKES, {"source": "Mubasher"})
+        self.assertNotIn("story", clean)
+
+
 if __name__ == "__main__":
     unittest.main()

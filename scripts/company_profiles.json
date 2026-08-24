@@ -1,0 +1,2409 @@
+{
+ "AJWA": {
+  "name": "Ajwa Group for Food Industries - Egypt (AJWA)",
+  "purpose": "Ajwa Group for Food Industries - Egypt (known as: Ajwa) is a public company, listed on Egyptian Exchange (EGX) since September 1995. Ajwa operates within the Food, Beverage sector focusing on Packaged Foods and Meats. Ajwa is based in Cairo, Egypt and was established in December 1985.",
+  "established": "03 December 1985",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohammed Ahmed Abu Al Qasim Abdel Wahab Mohamed Abdel Fattah --> Ownership Mohamed Essa Al Jaber",
+  "owners": [
+   {
+    "name": "Mohamed Essa Al Jaber",
+    "stake": 61.619
+   },
+   {
+    "name": "Ahmed Tarek Khalil Ali",
+    "stake": 8.3351
+   },
+   {
+    "name": "Egypt's Future for Sustainable Development Agency",
+    "stake": 5.427
+   },
+   {
+    "name": "Ola Hanfy Hanfy Mahmoud",
+    "stake": 0.0117
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "AJWA Group for Food Industries GCC Holding FZCO",
+    "stake": 80.0
+   },
+   {
+    "name": "Orouba Agrifoods Processing Co",
+    "stake": 74.92
+   }
+  ],
+  "website": "www.ajwa-egypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AJWA/profile",
+  "fetched": "2026-08-24"
+ },
+ "AALR": {
+  "name": "General Company for Land Reclamation, Development and Reconstruction (AALR)",
+  "purpose": "General Company for Land Reclamation, Development and Reconstruction (known as: General Co for Land Reclamation) is a public company, listed on Egyptian Exchange (EGX) since August 1996. General Co for Land Reclamation operates within the food, beverage sector focusing on agricultural products. General Co for Land Reclamation is based in Cairo, Egypt and was established in January 1959.",
+  "established": "01 January 1959",
+  "financial_year_start": "First Quarter",
+  "auditor": "Anany and Co --> Ownership Holding Company for Land Reclamation and Ground Water Research",
+  "owners": [
+   {
+    "name": "Holding Company for Land Reclamation and Ground Water Research",
+    "stake": 89.311
+   },
+   {
+    "name": "Abeer Adel Abdo Suleiman",
+    "stake": 0.0078
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Egyptian Company for Land Reclamation and Development in South Valley",
+    "stake": 15.0
+   }
+  ],
+  "website": "www.gclr.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AALR/profile",
+  "fetched": "2026-08-24"
+ },
+ "ABUK": {
+  "name": "Abou Kir Fertilizers (ABUK)",
+  "purpose": "Abou Kir Fertilizers is a public company, listed on Egyptian Exchange (EGX) since September 1994. It operates within the materials sector focusing on diversified chemicals materials. Abu Qir Fertilizers is based in Alexandria, Egypt and was established in July 1976.",
+  "established": "20 July 1976",
+  "financial_year_start": "First Quarter",
+  "auditor": "KPMG - Hazem Hassan Central Auditing Organization --> Ownership Alpha Oryx Ltd",
+  "owners": [
+   {
+    "name": "Alpha Oryx Ltd",
+    "stake": 21.521
+   },
+   {
+    "name": "Saudi Egyptian Investment Co",
+    "stake": 20.399
+   },
+   {
+    "name": "Egyptian General Petroleum Corp",
+    "stake": 19.111
+   },
+   {
+    "name": "Nasser Social Bank",
+    "stake": 5.902
+   },
+   {
+    "name": "Chemical Industries Holding Co",
+    "stake": 5.472
+   },
+   {
+    "name": "Abou Qir Fertilizers Labor Union",
+    "stake": 5.15
+   },
+   {
+    "name": "Egyptian Chemical Industries",
+    "stake": 2.695
+   },
+   {
+    "name": "The Saudi Seventh Investment Co",
+    "stake": 0.24
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "North Abu Qir Company for Agricultural Nutrients",
+    "stake": 45.0
+   },
+   {
+    "name": "Global Methanol and Its Derivatives",
+    "stake": 35.0
+   },
+   {
+    "name": "Helwan Fertilizers Co SAE",
+    "stake": 17.0
+   },
+   {
+    "name": "Alexandria Fertilizers Co",
+    "stake": 15.0
+   },
+   {
+    "name": "El Wady for Phosphate Industries and Fertilizers",
+    "stake": 10.0
+   },
+   {
+    "name": "Abu Tartour for Phosphoric Acid PFZC",
+    "stake": 9.5
+   }
+  ],
+  "website": "www.abuqir.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile",
+  "fetched": "2026-08-24"
+ },
+ "ACAMD": {
+  "name": "Arab Co. for Asset Management And Development (ACAMD)",
+  "purpose": "Arab Co. for Asset Management And Development is a public company listed on the Egyptian Stock Exchange (EGX) since June 2018. Arab Co. for Asset Management And Development operates within the real estate sector focusing on real estate development. Arab Co. for Asset Management And Development is based in Cairo, Egypt and was established in April 2018.",
+  "established": "04 April 2018",
+  "financial_year_start": "",
+  "auditor": "Mohamed Anwar & Partners --> Ownership Ali Abu Zaid Mohamed Ibrahim",
+  "owners": [
+   {
+    "name": "Ali Abu Zaid Mohamed Ibrahim",
+    "stake": 17.196
+   },
+   {
+    "name": "Islam Mohamed El Sayed Ali Hassanien",
+    "stake": 7.825
+   },
+   {
+    "name": "Cooperative Association for Agrarian Reform",
+    "stake": 6.553
+   },
+   {
+    "name": "Sandy Naeem Nasser Ramses Gaid",
+    "stake": 1.624
+   },
+   {
+    "name": "Slain Naeem Nasser Ramses Gaid",
+    "stake": 1.593
+   },
+   {
+    "name": "Clara Naeem Nasser Ramses Gaid",
+    "stake": 1.583
+   },
+   {
+    "name": "Karen Naeem Nasser Ramses Gaid",
+    "stake": 1.57
+   },
+   {
+    "name": "Hany Abdel Latif Olama",
+    "stake": 1.51
+   },
+   {
+    "name": "Ahmed Ali Abu Zeid Mohammed Ibrahim",
+    "stake": 1.19
+   },
+   {
+    "name": "Arafa Ali Abu Zaid Mohamed Ibrahim",
+    "stake": 0.654
+   },
+   {
+    "name": "Amira Muhammad Abu Zaid Muhammad Ibrahim",
+    "stake": 0.57
+   },
+   {
+    "name": "Yasmin Muhammad Abu Zaid Muhammad Ibrahim",
+    "stake": 0.476
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.arabco-amd.com/default.aspx",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ACAMD/profile",
+  "fetched": "2026-08-24"
+ },
+ "ACAP": {
+  "name": "A Capital Holding (ACAP)",
+  "purpose": "A Capital Holding, listed on the Egyptian Stock Exchange Since May 2023 , works operates in establishing companies that issue securities, or participation in increasing their capital. A Capital Holding is based in Cairo, Egypt and was established in January 2023.",
+  "established": "18 January 2023",
+  "financial_year_start": "",
+  "auditor": "Mohammed Ahmed Abu Al Qasim --> Ownership Porto Consultancy Dmcc",
+  "owners": [
+   {
+    "name": "Porto Consultancy Dmcc",
+    "stake": 54.177
+   },
+   {
+    "name": "Amer Wakf Ltd",
+    "stake": 6.857
+   },
+   {
+    "name": "Lantess International Ltd",
+    "stake": 6.164
+   },
+   {
+    "name": "Sol Global Holding Ltd",
+    "stake": 2.4528
+   },
+   {
+    "name": "Egyptian Wakf Ltd",
+    "stake": 2.2788
+   },
+   {
+    "name": "Fineby Estates Limited",
+    "stake": 0.001
+   },
+   {
+    "name": "Aly Mohamed Rashad",
+    "stake": 0.0001
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Porto International Investment",
+    "stake": 100.0
+   },
+   {
+    "name": "Delmar for Touristic Development",
+    "stake": 99.96
+   },
+   {
+    "name": "New Tropicana for Tourist Facilities SAE",
+    "stake": 99.87
+   },
+   {
+    "name": "Porto Holidays",
+    "stake": 44.0
+   }
+  ],
+  "website": "www.acapitalholding.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ACAP/profile",
+  "fetched": "2026-08-24"
+ },
+ "ACFR": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-08-24"
+ },
+ "ACGC": {
+  "name": "Arab Cotton Ginning (ACGC)",
+  "purpose": "Arab Cotton Ginning is a public company, listed on Egyptian Exchange (EGX) since July 1995. It operates within the Consumer Durables and Apparel sector focusing on Textiles. Arab Cotton Ginning is based in Cairo, Egypt and was established in January 1963.",
+  "established": "01 January 1963",
+  "financial_year_start": "First Quarter",
+  "auditor": "Al Maazawy & Co --> Ownership Sherif Adly Kyrollus Paulus",
+  "owners": [
+   {
+    "name": "Sherif Adly Kyrollus Paulus",
+    "stake": 16.82
+   },
+   {
+    "name": "New Cairo for Advertising",
+    "stake": 9.969
+   },
+   {
+    "name": "Cooperative Association for Agrarian Reform",
+    "stake": 5.85
+   },
+   {
+    "name": "Bayt El Khebra for for Economic Investment",
+    "stake": 5.177
+   },
+   {
+    "name": "Mohamed Ibrahim Ibrahim Al Saidi",
+    "stake": 4.23
+   },
+   {
+    "name": "Essam Adel Gerges Obaid",
+    "stake": 2.81
+   },
+   {
+    "name": "Orient Tours for Touristic Villages and Hotels",
+    "stake": 2.711
+   },
+   {
+    "name": "Hana Ibrahim Ibrahim Ibrahim Al Saidi",
+    "stake": 2.567
+   },
+   {
+    "name": "Safaa Ibrahim Ibrahim Ibrahim Al Saidi",
+    "stake": 2.487
+   },
+   {
+    "name": "Susan Ibrahim Ibrahim Ibrahim Al Saidi",
+    "stake": 2.248
+   },
+   {
+    "name": "Bayt El Khebra Holding Kamar",
+    "stake": 1.68
+   },
+   {
+    "name": "Khaled Abdullah Mohamed Abdullah Salam",
+    "stake": 1.466
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Amwal Al Arabia for Cotton Co",
+    "stake": 99.998
+   },
+   {
+    "name": "Egypt for Cotton Ginning",
+    "stake": 99.6
+   },
+   {
+    "name": "Modern Nile Cotton",
+    "stake": 31.82
+   },
+   {
+    "name": "B Investments Holding",
+    "stake": 3.3426
+   },
+   {
+    "name": "Alexandria Spinning and Weaving",
+    "stake": 1.07
+   },
+   {
+    "name": "Upper Egypt Flour Mills",
+    "stake": 0.014
+   }
+  ],
+  "website": "www.arabcot.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ACGC/profile",
+  "fetched": "2026-08-24"
+ },
+ "ACTF": {
+  "name": "Act Financial for Consulting SAE (ACTF)",
+  "purpose": "Act Financial for Consulting SAE Known as Act Financial is a Listed company, listed on Egyptian Exchange (EGX) since April 2024. operating within the Asset Management & Capital Markets sector. Act Financial Established in 2015 & based in Cairo, Egypt.",
+  "established": "20 April 2015",
+  "financial_year_start": "",
+  "auditor": "Baker Tilly - Wahid Abdel Ghaffar and Co --> Ownership Bassem Ibrahim Azzab Ibrahim",
+  "owners": [
+   {
+    "name": "Bassem Ibrahim Azzab Ibrahim",
+    "stake": 13.18
+   },
+   {
+    "name": "Tareq Mahmoud Mohammed Mahmoud Mohammed Yousef",
+    "stake": 12.13
+   },
+   {
+    "name": "Mohamed Medhat Hassan Alaam",
+    "stake": 8.79
+   },
+   {
+    "name": "Karim George Victor Nehma",
+    "stake": 6.74
+   },
+   {
+    "name": "Mustafa Ahmed Abdel Aziz Ezz El Din Ahmed Hussein",
+    "stake": 6.031
+   },
+   {
+    "name": "Raafat Samir El Khanagry",
+    "stake": 4.59
+   },
+   {
+    "name": "Omar Mohamed Abdel Gawad Mahmoud Ahmed",
+    "stake": 3.38
+   },
+   {
+    "name": "Ramez Samir Mounir El Khanagry",
+    "stake": 1.91
+   },
+   {
+    "name": "Dina Essam El Kholy",
+    "stake": 1.5
+   },
+   {
+    "name": "Madiha Hood Abdul Qadir",
+    "stake": 1.18
+   },
+   {
+    "name": "Majed Samir Mounir El Khanagry",
+    "stake": 1.04
+   },
+   {
+    "name": "Ahmed Mustafa Issa",
+    "stake": 0.002
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "ACT Financial Holdings",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone Holding",
+    "stake": 7.265
+   }
+  ],
+  "website": "www.act-fin.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ACTF/profile",
+  "fetched": "2026-08-24"
+ },
+ "ADCI": {
+  "name": "Arab Pharmaceuticals (ADCI)",
+  "purpose": "Arab Pharmaceuticals (known as: ADCO) is a public company, listed on Egyptian Exchange (EGX) since February 1996. It operates within the pharmaceuticals, biotechnology & life sciences sector focusing on pharmaceuticals. ADCO is based in Cairo, Egypt and was established in July 1991.",
+  "established": "20 July 1991",
+  "financial_year_start": "First Quarter",
+  "auditor": "Central Auditing Organization Issa Rifai --> Ownership Holding Co for Pharmaceuticals",
+  "owners": [
+   {
+    "name": "Holding Co for Pharmaceuticals",
+    "stake": 60.3
+   },
+   {
+    "name": "Union Workers Shareholders - Arab Pharmaceuticals",
+    "stake": 10.0
+   },
+   {
+    "name": "Nazih Zakari Badwani Semaan",
+    "stake": 6.531
+   },
+   {
+    "name": "Maher Makar Tawadros Makar",
+    "stake": 4.725
+   },
+   {
+    "name": "Laila Ramzi Najib Khala",
+    "stake": 0.1
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Arab Company for Gelatin and Pharmaceutical Products",
+    "stake": 0.86
+   }
+  ],
+  "website": "www.adcopharma-eg.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ADCI/profile",
+  "fetched": "2026-08-24"
+ },
+ "ADIB": {
+  "name": "Abu Dhabi Islamic Bank - Egypt (ADIB)",
+  "purpose": "Abu Dhabi Islamic Bank - Egypt (known as: Abu Dhabi Islamic Bank) is a public company, listed on Egyptian Exchange (EGX) since June 1996. Abu Dhabi Islamic Bank operates within the Banks sector focusing on Diversified Banks. Abu Dhabi Islamic Bank is based in Cairo, Egypt and was established in June 1980.",
+  "established": "01 June 1980",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mazars Mostafa Shawki and Co Price Waterhouse Coopers - Ezz El Din and Diab and Partners Rashad Ahmed Kamel Hosni --> Ownership Abu Dhabi Islamic Bank PJSC",
+  "owners": [
+   {
+    "name": "Abu Dhabi Islamic Bank PJSC",
+    "stake": 53.2
+   },
+   {
+    "name": "Emirates International Investments LLC",
+    "stake": 13.44
+   },
+   {
+    "name": "Mohamed Mahmoud Mohamed Ali",
+    "stake": 0.07
+   },
+   {
+    "name": "Heidi Ahmed Kamal Mohamed Mohie",
+    "stake": 0.0
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Abu Dhabi Islamic Holding",
+    "stake": 99.6
+   },
+   {
+    "name": "Abu Dhabi Islamic Finance",
+    "stake": 99.2
+   },
+   {
+    "name": "ADI Taskeek",
+    "stake": 98.0
+   },
+   {
+    "name": "ADI Microfinance",
+    "stake": 98.0
+   },
+   {
+    "name": "Abu Dhabi Islamic Consumer Finance",
+    "stake": 98.0
+   },
+   {
+    "name": "Abu Dhabi Islamic Capital for Promoting and Covering Subscriptions in Securities",
+    "stake": 92.86
+   },
+   {
+    "name": "El Kahera El Watania Investment",
+    "stake": 64.75
+   },
+   {
+    "name": "National Company for Trading and Development",
+    "stake": 40.0
+   },
+   {
+    "name": "Orient Takaful Insurance Co - Egypt",
+    "stake": 20.0
+   },
+   {
+    "name": "Abu Dhabi Islamic Properties Co",
+    "stake": 5.0
+   }
+  ],
+  "website": "www.adib.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ADIB/profile",
+  "fetched": "2026-08-24"
+ },
+ "ADPC": {
+  "name": "The Arab Dairy Products Co. Arab Dairy - Panda (ADPC)",
+  "purpose": "The Arab Dairy Products Co. Arab Dairy - Panda (known as: Arab Dairy-Panda) is a public company, listed on Egyptian Exchange (EGX) since January 2001. Arab Dairy-Panda operates within the food, beverage sector focusing on packaged foods & meats. Arab Dairy-Panda is based in Cairo, Egypt and was established in June 1985.",
+  "established": "09 June 1985",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohammed Ahmed Abu Al Qasim --> Ownership Gadwa for Industrial Development",
+  "owners": [
+   {
+    "name": "Gadwa for Industrial Development",
+    "stake": 35.54
+   },
+   {
+    "name": "Baraka for Trade and Investment",
+    "stake": 12.188
+   },
+   {
+    "name": "Martina Fawzi Fouad Bakheet Nakhla",
+    "stake": 4.1057
+   },
+   {
+    "name": "Mohamed Al Mamoun El Sayed El Gohary",
+    "stake": 3.8173
+   },
+   {
+    "name": "Mohamed El Naser El Sayed El Sayed El Gohary",
+    "stake": 3.817
+   },
+   {
+    "name": "Mohamed Al Abbas Al Sayed Al Sayed Al Gohary",
+    "stake": 3.817
+   },
+   {
+    "name": "Alhsn for Consulting Co",
+    "stake": 3.08
+   },
+   {
+    "name": "Fouad Fawzi Fouad Bakhit",
+    "stake": 3.019
+   },
+   {
+    "name": "Peter Fawzi Fouad Bakhit",
+    "stake": 2.236
+   },
+   {
+    "name": "Fawzi Fouad Bakheet Nakhla",
+    "stake": 1.918
+   },
+   {
+    "name": "El Sayed El Sayed El Gohary",
+    "stake": 1.455
+   },
+   {
+    "name": "Marina Alfy Aziz Isaac",
+    "stake": 1.057
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Developed Arab Company for Trade and Import",
+    "stake": 80.0
+   },
+   {
+    "name": "Panda for Trade and Distribution",
+    "stake": 50.0001
+   }
+  ],
+  "website": "www.arabdairy.net",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ADPC/profile",
+  "fetched": "2026-08-24"
+ },
+ "ADRI": {
+  "name": "Arab for Development and Real Estate Investment (ADRI)",
+  "purpose": "Arab for Development and Real Estate Investment (known as: Arab for Development & Real Estate Investment) is a public company, listed on Egyptian Exchange (EGX) since September 2014. Arab for Development & Real Estate Investment operates within the Real Estate sector focusing on Real Estate Development. Arab for Development & Real Estate Investment is based in Cairo, Egypt and was established in February 2011.",
+  "established": "13 February 2011",
+  "financial_year_start": "",
+  "owners": [
+   {
+    "name": "Hesham Soliman Fahmy Abdulatif Abu Hussin",
+    "stake": 27.156
+   },
+   {
+    "name": "Arab Economic Group Trade",
+    "stake": 11.645
+   },
+   {
+    "name": "Mohamed El Azab Saad Ahmed Khatab",
+    "stake": 9.352
+   },
+   {
+    "name": "Mustafa El Sayed Mohamed Ahmed",
+    "stake": 6.4963
+   },
+   {
+    "name": "Bassem Al Qalshi Fahmi Hafez",
+    "stake": 4.764
+   },
+   {
+    "name": "Ahmed El Azab Saad Ahmed Khatab",
+    "stake": 3.279
+   },
+   {
+    "name": "Mohammad Hamed Al Senussi Abu Al Khair",
+    "stake": 3.009
+   },
+   {
+    "name": "Al Sayed Mustafa Al Sayed Khalel",
+    "stake": 2.54
+   },
+   {
+    "name": "Belal Mohamed Mahrous Badawi",
+    "stake": 1.962
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.arab-egypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ADRI/profile",
+  "fetched": "2026-08-24"
+ },
+ "AFDI": {
+  "name": "El Ahli Investment and Development (AFDI)",
+  "purpose": "Al Ahly for Development and Investment is a public company, listed on Egyptian Exchange (EGX) since May 1997. Al Ahly for Development and Investment operates within the diversified financials sector focusing on asset management and custody banking. Al Ahly for Development and Investment is based in Cairo, Egypt and was established in March 1995.",
+  "established": "27 March 1995",
+  "financial_year_start": "First Quarter",
+  "auditor": "Baker Tilly - Wahid Abdel Ghaffar and Co --> Ownership Pico Investments",
+  "owners": [
+   {
+    "name": "Pico Investments",
+    "stake": 15.855
+   },
+   {
+    "name": "South Valley Cement Co SAE",
+    "stake": 11.028
+   },
+   {
+    "name": "Tawfik Salah El Din Diab",
+    "stake": 6.967
+   },
+   {
+    "name": "Golden Pyramids Plaza",
+    "stake": 5.75
+   },
+   {
+    "name": "Amin Mostafa Mohamed Amin Elewa",
+    "stake": 3.54
+   },
+   {
+    "name": "Pico Energy Holding for Financial Investments",
+    "stake": 2.987
+   },
+   {
+    "name": "Hisham Ibrahim",
+    "stake": 1.11
+   },
+   {
+    "name": "Amr Ali Mustafa El Badri",
+    "stake": 0.08
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Nile Financial Leasing",
+    "stake": 99.99
+   },
+   {
+    "name": "Al Ahly Insurance Brokerage Co",
+    "stake": 98.0
+   },
+   {
+    "name": "ADI Securities Investment",
+    "stake": 65.35
+   },
+   {
+    "name": "Winter Partners Egypt",
+    "stake": 50.0
+   },
+   {
+    "name": "Metalart SAE",
+    "stake": 39.95
+   },
+   {
+    "name": "Tejari Egypt for Electronic Business",
+    "stake": 30.0
+   },
+   {
+    "name": "Cairo Capital for Financial Consulting",
+    "stake": 17.08
+   },
+   {
+    "name": "National Telecommunications Co",
+    "stake": 8.6
+   },
+   {
+    "name": "Arab Valves Co SAE",
+    "stake": 0.2802
+   }
+  ],
+  "website": "www.adi-alahly.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AFDI/profile",
+  "fetched": "2026-08-24"
+ },
+ "AFMC": {
+  "name": "Alexandria Flour Mills (AFMC)",
+  "purpose": "Alexandria Flour Mills is a public company, listed on Egyptian Exchange (EGX) since April 1997. It operates within the food, beverage sector focusing on agricultural products.also the company added the real estate investment to its activities. Alexandria Flour Mills is based in Alexandria, Egypt and was established in January 1965.",
+  "established": "01 January 1965",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohamed Mohamed Ismail Central Auditing Organization --> Ownership Food Industries Holding",
+  "owners": [
+   {
+    "name": "Food Industries Holding",
+    "stake": 60.1884
+   },
+   {
+    "name": "National Investment Co",
+    "stake": 26.6627
+   },
+   {
+    "name": "Union Workers Shareholders - Alexandria Flour Mills",
+    "stake": 6.152
+   },
+   {
+    "name": "Yemen Ahmed Diaa El Din Ali Mohamed Hussein",
+    "stake": 0.0015
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.alexflourmills.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AFMC/profile",
+  "fetched": "2026-08-24"
+ },
+ "AIDC": {
+  "name": "Arabia for Investment and Development (AIDC)",
+  "purpose": "Arabia for Investment and Development is a public company listed on the Egyptian Exchange (EGX) since August 2025. Arabia Investment and Development operates whithin Investment Management sector. Arabia Investment and Development is based in Cairo, Egypt and was established in March 2025.",
+  "established": "03 March 2025",
+  "financial_year_start": "",
+  "auditor": "Tamer El Nabawy and Partners Creston Egypt --> Ownership Jamal Abdel Fattah Othman",
+  "owners": [
+   {
+    "name": "Jamal Abdel Fattah Othman",
+    "stake": 31.7064
+   },
+   {
+    "name": "Sameh Mahmoud Hassan Jaballah",
+    "stake": 10.199
+   },
+   {
+    "name": "Hazem Mahmoud Hassan Gab Allah",
+    "stake": 1.653
+   },
+   {
+    "name": "Java Investment",
+    "stake": 1.236
+   },
+   {
+    "name": "Saif Mahmoud Hassan Jaballah",
+    "stake": 0.3851
+   },
+   {
+    "name": "Khaled Gamal Abdel Fattah Othman",
+    "stake": 0.0002
+   },
+   {
+    "name": "Ahmed Gamal Abdel Fattah Hassan",
+    "stake": 0.0002
+   },
+   {
+    "name": "Mohamed Abd Elfatah Othman Hassan",
+    "stake": 0.0002
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "C D C M Trade and Export",
+    "stake": 100.0
+   },
+   {
+    "name": "Rawajj SME Finance",
+    "stake": 99.9998
+   },
+   {
+    "name": "Energy Investments Co",
+    "stake": 99.9992
+   },
+   {
+    "name": "Cairo for Development and Cars Manufacturing",
+    "stake": 99.9951
+   },
+   {
+    "name": "Rawajj Auto Mart",
+    "stake": 99.99
+   },
+   {
+    "name": "Toblat Architectural Production",
+    "stake": 98.7
+   },
+   {
+    "name": "Nahda Misr for Oil and Gas",
+    "stake": 75.0
+   },
+   {
+    "name": "Misr for Mechanical and Electrical Projects",
+    "stake": 51.0
+   },
+   {
+    "name": "Global for Infrastructure Projects",
+    "stake": 35.0
+   },
+   {
+    "name": "East of Owainat Electricity Co",
+    "stake": 32.6
+   }
+  ],
+  "website": "www.aid-invest.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AIDC/profile",
+  "fetched": "2026-08-24"
+ },
+ "AIFI": {
+  "name": "Atlas For Investment and Food Industries (AIFI)",
+  "purpose": "Atlas For Investment and Food Industries (known as: Atlas) is a public company, listed on Egyptian Exchange (EGX) since November 2012. Atlas operates within the Food, Beverage sector focusing on Agricultural Products. Atlas is based in Giza, Egypt and was established in November 1997.",
+  "established": "05 November 1997",
+  "financial_year_start": "First Quarter",
+  "auditor": "Al Maazawy & Co --> Ownership Amon Real Estate and Tourism Development",
+  "owners": [
+   {
+    "name": "Amon Real Estate and Tourism Development",
+    "stake": 30.69
+   },
+   {
+    "name": "Emerald Communications and Information Technology",
+    "stake": 9.83
+   },
+   {
+    "name": "Marina Essam Adel Gerges Obaid",
+    "stake": 7.68
+   },
+   {
+    "name": "Juliana Essam Adel Gerges Obaid",
+    "stake": 7.68
+   },
+   {
+    "name": "Sherif Adly Kyrollus Paulus",
+    "stake": 5.6
+   },
+   {
+    "name": "New Kimet Media Advertising",
+    "stake": 4.15
+   },
+   {
+    "name": "Zaldy Investments",
+    "stake": 2.96
+   },
+   {
+    "name": "Essam Adel Gerges Obaid",
+    "stake": 1.14
+   },
+   {
+    "name": "Walid Sayed Abdel Karim Hassanein",
+    "stake": 0.92
+   },
+   {
+    "name": "Ascom Real Estate Investment",
+    "stake": 0.308
+   },
+   {
+    "name": "Sherif Mohamed Najm El Din Mohamed",
+    "stake": 0.17
+   },
+   {
+    "name": "Mohamed Najm El Din Mohamed Nour El Din Akasha",
+    "stake": 0.14
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Atlas for Investments and Real Estate Development SAE",
+    "stake": 99.9
+   },
+   {
+    "name": "Atlas Farms for Agricultural Investment",
+    "stake": 99.9
+   },
+   {
+    "name": "Atlas Siwa for Agricultural Development",
+    "stake": 60.0
+   },
+   {
+    "name": "Atlas for packaging and food industries",
+    "stake": 50.45
+   }
+  ],
+  "website": "www.atlasegypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AIFI/profile",
+  "fetched": "2026-08-24"
+ },
+ "AIH": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-08-24"
+ },
+ "ALCN": {
+  "name": "Alexandria Containers and goods (ALCN)",
+  "purpose": "Alexandria Container and Cargo Handling Co (known as: Alex Cont) is a public company, listed on Egyptian Exchange (EGX) since August 1995. Alex Cont operates within the transportation sector focusing on marine ports & services, also the company added the real estate investment to it's activity. Alex Cont is based in Alexandria, Egypt and was established in June 1984.",
+  "established": "11 June 1984",
+  "financial_year_start": "First Quarter",
+  "auditor": "Abd Elaziz Hegazy and Co - Crowe Horwath Central Auditing Organization --> Ownership Holding Company for Maritime and Land Transport",
+  "owners": [
+   {
+    "name": "Holding Company for Maritime and Land Transport",
+    "stake": 35.3693
+   },
+   {
+    "name": "Alpha Oryx Ltd",
+    "stake": 32.0
+   },
+   {
+    "name": "Saudi Egyptian Investment Co",
+    "stake": 19.3287
+   },
+   {
+    "name": "Alexandria Port Authority",
+    "stake": 7.63
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Abu Simbel and Thebes Shipping Agencies Co",
+    "stake": 44.0
+   },
+   {
+    "name": "Memphis Company for Shipping Agencies",
+    "stake": 44.0
+   },
+   {
+    "name": "Egyptian Group of Stations Multi Purpose",
+    "stake": 13.0
+   },
+   {
+    "name": "Egyptian Company for Integrated Projects",
+    "stake": 6.54
+   },
+   {
+    "name": "Egyptian Navigation Co",
+    "stake": 2.0
+   }
+  ],
+  "website": "www.alexcont.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ALCN/profile",
+  "fetched": "2026-08-24"
+ },
+ "ALEX": {
+  "name": "Alexandria Portland Cement (ALEX)",
+  "purpose": "Alexandria Portland Cement (known as: Alexandria Cement) is a public company, listed on Egyptian Exchange (EGX) since September 1995. Alexandria Cement operates within the materials sector focusing on construction materials. Alexandria Cement is based in Cairo, Egypt and was established in March 1948.",
+  "established": "07 March 1948",
+  "financial_year_start": "First Quarter",
+  "auditor": "Allied for Accounting and Auditing --> Ownership Alexandria Development Ltd",
+  "owners": [
+   {
+    "name": "Alexandria Development Ltd",
+    "stake": 89.767
+   },
+   {
+    "name": "Kocem Ltd",
+    "stake": 4.874
+   },
+   {
+    "name": "East Cement Trade Ltd",
+    "stake": 4.022
+   },
+   {
+    "name": "Lapeetos Ltd",
+    "stake": 0.9
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Beni Suef Cement Co SAE",
+    "stake": 99.998
+   },
+   {
+    "name": "Titan for Concrete and Rubble LLC",
+    "stake": 97.23
+   }
+  ],
+  "website": "titancementegypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ALEX/profile",
+  "fetched": "2026-08-24"
+ },
+ "ALUM": {
+  "name": "Arab Aluminum (ALUM)",
+  "purpose": "Arab Aluminum is a public company, listed on Egyptian Exchange (EGX) since September 1982. It operates within the materials sector focusing on aluminum. Arab Aluminum is based in Cairo, Egypt and was established in April 1976.",
+  "established": "15 April 1976",
+  "financial_year_start": "First Quarter",
+  "auditor": "Rashad Ahmed Kamel Hosni --> Ownership Al Bida Beach Co",
+  "owners": [
+   {
+    "name": "Al Bida Beach Co",
+    "stake": 15.0
+   },
+   {
+    "name": "Muhannad Al Kharafi General Trading",
+    "stake": 11.05
+   },
+   {
+    "name": "T’azur for General Trading",
+    "stake": 11.05
+   },
+   {
+    "name": "Sons of Jassim Mohammad Al Kharafi for General Trading",
+    "stake": 11.05
+   },
+   {
+    "name": "Sofar General Trading",
+    "stake": 9.84
+   },
+   {
+    "name": "Al Ghanima International General Trading",
+    "stake": 5.5
+   },
+   {
+    "name": "Ysama General Trading",
+    "stake": 5.5
+   },
+   {
+    "name": "Sahel Elbada for General Trading",
+    "stake": 5.5
+   },
+   {
+    "name": "Heba Nasser Mohammed Abdul Mohsen Al Kharafi",
+    "stake": 1.2
+   },
+   {
+    "name": "Mohammed Abdulmohsin Al Kharafi and Sons Co",
+    "stake": 0.0001
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.arabaluminum.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ALUM/profile",
+  "fetched": "2026-08-24"
+ },
+ "AMER": {
+  "name": "Amer Group Holding Co SAE (AMER)",
+  "purpose": "Amer Group Holding Co SAE (known as: Amer Group) is a public company, listed on Egyptian Exchange (EGX) since November 2010. Amer Group operates within the Real Estate sector focusing on Real Estate Development. Amer Group is based in Cairo, Egypt and was established in December 2007.",
+  "established": "16 December 2007",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohammed Ahmed Abu Al Qasim --> Ownership Porto Consultancy Dmcc",
+  "owners": [
+   {
+    "name": "Porto Consultancy Dmcc",
+    "stake": 48.76
+   },
+   {
+    "name": "Amer Wakf Ltd",
+    "stake": 6.171
+   },
+   {
+    "name": "Sol Global Holding Ltd",
+    "stake": 2.2076
+   },
+   {
+    "name": "Egyptian Wakf Ltd",
+    "stake": 2.0509
+   },
+   {
+    "name": "Lantess International Ltd",
+    "stake": 0.6909
+   },
+   {
+    "name": "Sherif Sami Khalil Ishaq",
+    "stake": 0.0007
+   },
+   {
+    "name": "Abdul Majeed Mansour Abdul Majeed Amer",
+    "stake": 0.0004
+   },
+   {
+    "name": "Fineby Estates Limited",
+    "stake": 0.0001
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Tropi 2 for Tourism Development",
+    "stake": 99.99
+   },
+   {
+    "name": "Tropicana for Projects Co S.A.E",
+    "stake": 99.97
+   },
+   {
+    "name": "Garage Masr SAE",
+    "stake": 99.9
+   },
+   {
+    "name": "Amer Energy and Infrastructure",
+    "stake": 99.9
+   },
+   {
+    "name": "Porto Home",
+    "stake": 98.5
+   },
+   {
+    "name": "Porto Air SAE",
+    "stake": 98.5
+   },
+   {
+    "name": "Total FM for Management and Services",
+    "stake": 97.0
+   },
+   {
+    "name": "Amer Raya Ltd",
+    "stake": 95.0
+   },
+   {
+    "name": "Amer Constructions SAE",
+    "stake": 70.0
+   },
+   {
+    "name": "Amer Tourism Development Co",
+    "stake": 60.0
+   }
+  ],
+  "website": "www.amer-group.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AMER/profile",
+  "fetched": "2026-08-24"
+ },
+ "AMES": {
+  "name": "Alexandria Medical Services - Alexandria New Medical Center SAE (AMES)",
+  "purpose": "public company, listed on Egyptian Exchange (EGX) since September 1999. Alexandria New Medical Center operates within the health care equipment & services sector focusing on health care. Alexandria New Medical Center is based in Alexandria, Egypt and was established in October 1983.",
+  "established": "15 October 1983",
+  "financial_year_start": "First Quarter",
+  "auditor": "KPMG - Hazem Hassan --> Ownership Lime Vest Partners Healthcare",
+  "owners": [
+   {
+    "name": "Lime Vest Partners Healthcare",
+    "stake": 61.355
+   },
+   {
+    "name": "Tawasul Holding for Financial Investments",
+    "stake": 34.733
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Racodh Medical Services",
+    "stake": 24.0
+   },
+   {
+    "name": "Weqaya Environmental Services",
+    "stake": 12.53
+   }
+  ],
+  "website": "www.anmchosp.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AMES/profile",
+  "fetched": "2026-08-24"
+ },
+ "AMIA": {
+  "name": "Arab Moltaqa Investments (AMIA)",
+  "purpose": "Arab Moltaqa Investments is a public company, listed on Egyptian Exchange (EGX) since December 1995. It operates within the capital goods sector focusing on industrial conglomerates. Arab Moltaqa Investments is based in Cairo, Egypt and was established in January 1990.",
+  "established": "03 January 1990",
+  "financial_year_start": "First Quarter",
+  "auditor": "United for review, taxation, consulting and financial services Mohammed Ahmed Abu Al Qasim --> Ownership Dallah Albaraka Holding Co.",
+  "owners": [
+   {
+    "name": "Dallah Albaraka Holding Co.",
+    "stake": 44.38
+   },
+   {
+    "name": "Al Tawfeek Development House Holding",
+    "stake": 37.86
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Al Tawfeek Leasing Company-A.T.LEASE",
+    "stake": 68.4177
+   },
+   {
+    "name": "Perfect Spinning",
+    "stake": 58.7
+   },
+   {
+    "name": "Al Yosr Water Desalination & Purification Egyptian Joint Stock Co.",
+    "stake": 47.87
+   },
+   {
+    "name": "Gomla International Trade",
+    "stake": 42.5
+   },
+   {
+    "name": "Al Rabie Poultry Co SAE",
+    "stake": 38.304
+   },
+   {
+    "name": "Misr Arab for Broiler Production S.A.E",
+    "stake": 15.0
+   },
+   {
+    "name": "Expedition Investment",
+    "stake": 14.0
+   }
+  ],
+  "website": "www.amic-eg.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
+  "fetched": "2026-08-24"
+ },
+ "AMII": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-08-24"
+ },
+ "AMOC": {
+  "name": "Alexandria Mineral Oils Co (AMOC)",
+  "purpose": "Alexandria Mineral Oils Co (known as: AMOC) is a public company, listed on Egyptian Exchange (EGX) since December 2004. AMOC operates within the coal & consumable fuels sector focusing on energy. AMOC is based in Alexandria, Egypt and was established in May 1997.",
+  "established": "06 May 1997",
+  "financial_year_start": "First Quarter",
+  "auditor": "Abd Elaziz Hegazy and Co - Crowe Horwath Central Auditing Organization --> Ownership Alexandria Petroleum Co",
+  "owners": [
+   {
+    "name": "Alexandria Petroleum Co",
+    "stake": 20.774
+   },
+   {
+    "name": "Al Ahly Capital Holding Co",
+    "stake": 15.033
+   },
+   {
+    "name": "Misr Insurance Co",
+    "stake": 5.479
+   },
+   {
+    "name": "Social Insurance Fund for Governmental Sector Employees",
+    "stake": 5.156
+   },
+   {
+    "name": "Social Insurance Fund for Public and Private Sector Employees",
+    "stake": 5.0
+   },
+   {
+    "name": "Misr Petroleum Co",
+    "stake": 3.57
+   },
+   {
+    "name": "Co-Operation Petroleum Co",
+    "stake": 3.57
+   },
+   {
+    "name": "National Bank of Egypt Employees insurance Fund",
+    "stake": 0.0058
+   },
+   {
+    "name": "Syed Ahmed Al Khrashi",
+    "stake": 0.0009
+   },
+   {
+    "name": "Anis Mohamed El Beltagy",
+    "stake": 0.0009
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Alexandria Wax Products Co",
+    "stake": 86.45
+   },
+   {
+    "name": "Alexandria Specialty Petroleum Products Co",
+    "stake": 5.2
+   }
+  ],
+  "website": "www.amoceg.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AMOC/profile",
+  "fetched": "2026-08-24"
+ },
+ "AMPI": {
+  "name": "Novida for Investment and Technology (AMPI)",
+  "purpose": "Novida for Investment and Technology (known as: Novida) is a public company, listed on Egyptian Exchange (EGX) since February 2010. Novida operates within the Software and Services sector focusing on Application Software. Novida is based in Giza, Egypt and was established in June 2003.",
+  "established": "15 June 2003",
+  "financial_year_start": "First Quarter",
+  "auditor": "Hisham Ahmed Labib and Co - Tiag --> Ownership Mohamed Ali Farg Baz",
+  "owners": [
+   {
+    "name": "Mohamed Ali Farg Baz",
+    "stake": 11.5
+   },
+   {
+    "name": "Hani Ismail Muhammad Sorour",
+    "stake": 9.47
+   },
+   {
+    "name": "Khalid Hanafy Hassan Al Miniawy",
+    "stake": 7.91
+   },
+   {
+    "name": "Mohamed Ibrahim El Sayed Abdul Salam",
+    "stake": 5.0
+   },
+   {
+    "name": "Ilham Arabi Mohamad Ali",
+    "stake": 1.892
+   },
+   {
+    "name": "Sara Mohammed Gamal El Dien Thabet",
+    "stake": 0.22
+   },
+   {
+    "name": "Mahmoud Ali Farg Baz",
+    "stake": 0.01
+   },
+   {
+    "name": "Hager Mohamed Abdelwahab Mohamed",
+    "stake": 0.003
+   },
+   {
+    "name": "Mahmoud Mostafa Negm",
+    "stake": 0.0003
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.almoasher.net",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AMPI/profile",
+  "fetched": "2026-08-24"
+ },
+ "ANCC": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-08-24"
+ },
+ "APPC": {
+  "name": "Advanced Pharmaceutical Packaging (APPC)",
+  "purpose": "Advanced Pharmaceutical Packaging is a public company, listed on Egyptian Exchange (EGX) since December 1999. Advanced Pharmaceutical Packaging operates within the health care equipment & services sector focusing on health care supplies. Advanced Pharmaceutical Packaging is based in Cairo, Egypt and was established in April 1995.",
+  "established": "15 April 1995",
+  "financial_year_start": "First Quarter",
+  "auditor": "Consultative Experience House Sayed Mohammed Salim Hamdan --> Ownership Mohamed Mahmoud Hassan Jaballah",
+  "owners": [
+   {
+    "name": "Mohamed Mahmoud Hassan Jaballah",
+    "stake": 5.34
+   },
+   {
+    "name": "Amin Mustafa Mohamed Amin Ailwa",
+    "stake": 0.002
+   },
+   {
+    "name": "Tarek Saad El Din Galal ( NA"
+   },
+   {
+    "name": "Mamdouh Hussein Sadek ( NA"
+   },
+   {
+    "name": "Ihab Qassim Awwad ( NA"
+   },
+   {
+    "name": "Jamil Zachary Wnie Zachary ( NA"
+   },
+   {
+    "name": "Abdul Rahman Feras Adnan Hassan ( NA"
+   },
+   {
+    "name": "Mohamed Mohammed Adly Raeef ( NA"
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.app-eg.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/APPC/profile",
+  "fetched": "2026-08-24"
+ },
+ "APSW": {
+  "name": "Arab Polvara Spinning and Weaving (APSW)",
+  "purpose": "Arab Polvara Spinning and Weaving (known as: Unirab) is a public company, listed on Egyptian Exchange (EGX) since April 1992. Unirab operates within the Transportation sector focusing on Marine Ports and Services. Unirab is based in Alexandria, Egypt and was established in August 1968.",
+  "established": "15 August 1968",
+  "financial_year_start": "First Quarter",
+  "auditor": "Central Auditing Organization Emad Mohamed Hassan El Gendy --> Ownership Abdel Sattar Sherif Helil Abou Redawy",
+  "owners": [
+   {
+    "name": "Abdel Sattar Sherif Helil Abou Redawy",
+    "stake": 20.627
+   },
+   {
+    "name": "Cotton and Textile Industries Holding Co",
+    "stake": 16.259
+   },
+   {
+    "name": "Hossam El Din Najib Abdulghany Khaled",
+    "stake": 5.337
+   },
+   {
+    "name": "Mohamed Hossam El Din Naguib Abdel Ghany Khaled",
+    "stake": 5.337
+   },
+   {
+    "name": "Naguib Hossam El Din Abdel Ghany Khaled",
+    "stake": 5.337
+   },
+   {
+    "name": "Khadiga Mohamed Eid Eid",
+    "stake": 5.337
+   },
+   {
+    "name": "National Textiles",
+    "stake": 5.337
+   },
+   {
+    "name": "Misr Insurance Co",
+    "stake": 3.4
+   },
+   {
+    "name": "Mustafa Hussein El Sawaf",
+    "stake": 0.822
+   },
+   {
+    "name": "Nasser Social Bank",
+    "stake": 0.74
+   },
+   {
+    "name": "Hana Hossam El Din Abdel Ghany Khaled",
+    "stake": 0.14
+   },
+   {
+    "name": "Nada Hossam El Din Abdel Ghany Khaled",
+    "stake": 0.084
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.arabpolvara.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/APSW/profile",
+  "fetched": "2026-08-24"
+ },
+ "ARAB": {
+  "name": "ARAB Developers Holding (ARAB)",
+  "purpose": "ARAB Developers Holding (known as: ARAB Developers) is a public company, listed on Egyptian Exchange (EGX) since October 2015. Developers operates within the Real Estate sector focusing on Diversified Real Estate Activities. Developers is based in Cairo, Egypt and was established in August 2015.",
+  "established": "30 August 2015",
+  "financial_year_start": "",
+  "auditor": "Hassan Bassiouni Hassan Albesha --> Ownership Ahmed Tarek Khalil Ali",
+  "owners": [
+   {
+    "name": "Ahmed Tarek Khalil Ali",
+    "stake": 27.04
+   },
+   {
+    "name": "Jamal Abdel Kader Abdel Baseer El Garhy",
+    "stake": 14.44
+   },
+   {
+    "name": "El Garhy Group for Investment and Development",
+    "stake": 7.53
+   },
+   {
+    "name": "Marwa Mohammed Al Amin Rajab Ahmed Gomaa",
+    "stake": 5.37
+   },
+   {
+    "name": "Abdul Salam Masood Abdelkarim",
+    "stake": 4.2839
+   },
+   {
+    "name": "Asmak Co",
+    "stake": 1.71
+   },
+   {
+    "name": "Egyptian for Steel",
+    "stake": 0.9181
+   },
+   {
+    "name": "Ayman Mokhtar Ibrahim Khalifa",
+    "stake": 0.1
+   },
+   {
+    "name": "Jamal Fawzy Mohamed Fath Alah",
+    "stake": 0.0641
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Porto Mediterranean Investment",
+    "stake": 100.0
+   },
+   {
+    "name": "Neom Assiut for Tourism Development",
+    "stake": 99.978
+   },
+   {
+    "name": "Neom for Tourism Development SAE",
+    "stake": 99.975
+   },
+   {
+    "name": "Porto Global",
+    "stake": 99.0
+   },
+   {
+    "name": "Porto International Holdings Ltd",
+    "stake": 95.348
+   },
+   {
+    "name": "Neom New Cairo SAE",
+    "stake": 92.363
+   },
+   {
+    "name": "Neom October for Tourism Development",
+    "stake": 92.037
+   },
+   {
+    "name": "Deals Marketing SAE",
+    "stake": 79.129
+   },
+   {
+    "name": "El Alamein for Education and Development",
+    "stake": 69.297
+   },
+   {
+    "name": "Delmar Real Estate Development SAE",
+    "stake": 63.517
+   },
+   {
+    "name": "Neom Real Estate Development",
+    "stake": 60.577
+   },
+   {
+    "name": "Neom Pyramids for Real Estate Projects Development",
+    "stake": 34.146
+   }
+  ],
+  "website": "www.ad-holding.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
+  "fetched": "2026-08-24"
+ },
+ "ARCC": {
+  "name": "Arabian Cement Company (ARCC)",
+  "purpose": "Arabian Cement Co SAE (known as: ACC) is a public company, listed on Egyptian Exchange (EGX) since March 2014. ACC operates within the Materials sector focusing on Construction Materials. ACC is based in Cairo, Egypt and was established in March 1997.",
+  "established": "05 March 1997",
+  "financial_year_start": "",
+  "auditor": "Wafiq Alfred Hanna --> Ownership Aridos Jativa SLU",
+  "owners": [
+   {
+    "name": "Aridos Jativa SLU",
+    "stake": 60.0
+   },
+   {
+    "name": "Sadiq Ahmed Sadiq El Sewedy",
+    "stake": 14.57
+   },
+   {
+    "name": "Fayek Mohammed Fayek Al Borini",
+    "stake": 10.1
+   },
+   {
+    "name": "Rania Fayak Mohamed Fayak El Bourini",
+    "stake": 1.49
+   },
+   {
+    "name": "Generoso Bertolin Agustin",
+    "stake": 0.003
+   },
+   {
+    "name": "Ricardo Vela Ibañez",
+    "stake": 0.003
+   },
+   {
+    "name": "Sergio Alcantarilla Rodriguez",
+    "stake": 0.003
+   },
+   {
+    "name": "Allan Hestbech",
+    "stake": 0.003
+   },
+   {
+    "name": "Ahmed Sadiq Ahmed El Sewedy",
+    "stake": 0.003
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Andalus Ready Mix Concrete",
+    "stake": 99.99
+   },
+   {
+    "name": "ACC for Management and Trading",
+    "stake": 99.99
+   },
+   {
+    "name": "Evolve for Investment and Project Management",
+    "stake": 99.99
+   },
+   {
+    "name": "Andalus Reliance Mining",
+    "stake": 50.0
+   }
+  ],
+  "website": "www.arabiancement.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ARCC/profile",
+  "fetched": "2026-08-24"
+ },
+ "AREH": {
+  "name": "Egyptian Real Estate Group (AREH)",
+  "purpose": "Real Estate Egyptian Consortium is a public company, listed on Egyptian Exchange (EGX) since February 1998. It operates within the real estate sector focusing on retail real estate investment. Real Estate Egyptian Consortium is based in Giza, Egypt and was established in February 1986.",
+  "established": "01 February 1986",
+  "financial_year_start": "First Quarter",
+  "auditor": "Ahmed Fouad Al Watan --> Ownership Mahmoud Hassan Gballah Hassan",
+  "owners": [
+   {
+    "name": "Mahmoud Hassan Gballah Hassan",
+    "stake": 9.56
+   },
+   {
+    "name": "Ali Mahmoud Abdel Latif Mahgoub",
+    "stake": 5.01
+   },
+   {
+    "name": "Ahmed Ayman Ahmed Abdel Moneim Hassan",
+    "stake": 4.83
+   },
+   {
+    "name": "Mai Mahmoud Hassan Gab Allah",
+    "stake": 3.1
+   },
+   {
+    "name": "Rashid Abdo Abdel Halim Hassan",
+    "stake": 2.59
+   },
+   {
+    "name": "Sameh Mahmoud Hassan Jaballah",
+    "stake": 1.01
+   },
+   {
+    "name": "Ayman Ahmed Abdel Moneim Hassan",
+    "stake": 0.65
+   },
+   {
+    "name": "Hazem Mahmoud Hassan Gab Allah",
+    "stake": 0.48
+   },
+   {
+    "name": "Target For Real Estate Investment, Development, Agricultural Reclamation and Tourism Development",
+    "stake": 0.268
+   },
+   {
+    "name": "Saif Mahmoud Hassan Jaballah",
+    "stake": 0.15
+   },
+   {
+    "name": "Mohamed Mahmoud Hassan Jaballah",
+    "stake": 0.07
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Investors for Development and Real Estate Investment Co",
+    "stake": 98.9
+   },
+   {
+    "name": "Rowad Tourism",
+    "stake": 9.01
+   }
+  ],
+  "website": "www.areheg.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AREH/profile",
+  "fetched": "2026-08-24"
+ },
+ "ASCM": {
+  "name": "Asek Company for Mining - Ascom (ASCM)",
+  "purpose": "Asek Company for Mining (known as: Ascom) is a public company, listed on Egyptian Exchange (EGX) since October 2003. Ascom operates within the materials sector focusing on diversified metals & mining. Ascom is based in Cairo, Egypt and was established in April 1999.",
+  "established": "29 April 1999",
+  "financial_year_start": "First Quarter",
+  "auditor": "Hassan Bassiouni Hassan Albesha Price Waterhouse Coopers - Ezz El Din and Diab and Partners --> Ownership QALA For Financial Investments",
+  "owners": [
+   {
+    "name": "QALA For Financial Investments",
+    "stake": 53.76
+   },
+   {
+    "name": "Financial Holdings International Ltd",
+    "stake": 15.83
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Ascom Precious Metals Investment",
+    "stake": 100.0
+   },
+   {
+    "name": "Ascom - Cyprus",
+    "stake": 99.999
+   },
+   {
+    "name": "Ascom Precious Metals Mining SAE",
+    "stake": 99.997
+   },
+   {
+    "name": "Ascom Carbonate and Chemical Manufacturing",
+    "stake": 99.99
+   },
+   {
+    "name": "ASCOMA - Algeria",
+    "stake": 99.4
+   },
+   {
+    "name": "Nabtah for Geology and Mining Ltd",
+    "stake": 99.0
+   },
+   {
+    "name": "ASCOM - Syria",
+    "stake": 95.0
+   },
+   {
+    "name": "Glassrock Insulation",
+    "stake": 94.76
+   },
+   {
+    "name": "Ascom - Sengal",
+    "stake": 80.0
+   },
+   {
+    "name": "Ascom - Sudan",
+    "stake": 70.0
+   },
+   {
+    "name": "Lazerg Travaux Public",
+    "stake": 70.0
+   },
+   {
+    "name": "ASCOM Emirates Mining",
+    "stake": 69.4
+   }
+  ],
+  "website": "www.ascom.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ASCM/profile",
+  "fetched": "2026-08-24"
+ },
+ "ASPI": {
+  "name": "Aspire Capital Holding for Financial Investments (ASPI)",
+  "purpose": "Aspire Capital Holding for Financial Investments (known as: Aspire Capital) is a public company, listed on Egyptian Exchange (EGX) since June 2008. Aspire Capital operates within the Diversified Financials sector focusing on Investment Banking and Brokerage. Aspire Capital is based in Cairo, Egypt and was established in March 2007.",
+  "established": "01 March 2007",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohammed Ahmed Abu Al Qasim --> Ownership Waled Mohamed Zaki Ibrahim",
+  "owners": [
+   {
+    "name": "Waled Mohamed Zaki Ibrahim",
+    "stake": 27.81
+   },
+   {
+    "name": "Beltone Accumulative Return Equity Fund",
+    "stake": 7.57
+   },
+   {
+    "name": "Thndr Multi-Tranche Equity Investment Fund – Tranche 1",
+    "stake": 5.05
+   },
+   {
+    "name": "Hossam Mohamed Zaki Ibrahim",
+    "stake": 4.008
+   },
+   {
+    "name": "Yasser Mohamed Zaki Ibrahim",
+    "stake": 0.93
+   },
+   {
+    "name": "Mohamed Walid Mohamed Zaki Ibrahim",
+    "stake": 0.004
+   },
+   {
+    "name": "Omar Walid Mohamed Zaki Ibrahim",
+    "stake": 0.0
+   },
+   {
+    "name": "Nour Walid Mohammed Zaki Ibrahim",
+    "stake": 0.0
+   },
+   {
+    "name": "Wazaki Co",
+    "stake": 0.0
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Al Khair Microfinance",
+    "stake": 99.99
+   },
+   {
+    "name": "Hulul for Financial Consulting",
+    "stake": 99.99
+   },
+   {
+    "name": "Pioneers Securities",
+    "stake": 99.99
+   },
+   {
+    "name": "Roaya Online Securities Trading",
+    "stake": 99.94
+   },
+   {
+    "name": "Prizma Securities Co SAE",
+    "stake": 99.7
+   },
+   {
+    "name": "International Investment Advisor Underwriting Co",
+    "stake": 99.67
+   },
+   {
+    "name": "Amwal Financial Investment",
+    "stake": 25.0
+   },
+   {
+    "name": "Pioneers International Holding Co",
+    "stake": 25.0
+   }
+  ],
+  "website": "aspireholding.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ASPI/profile",
+  "fetched": "2026-08-24"
+ },
+ "ATLC": {
+  "name": "Al Tawfeek Leasing Company-A.T.LEASE (ATLC)",
+  "purpose": "Al Tawfeek for Financial Lease (known as: AT Lease) is a public company, listed on Egyptian Exchange (EGX) since February 2015. AT Lease operates within the Diversified Financials sector focusing on Consumer Finance. AT Lease is based in Giza, Egypt and was established in April 2005.",
+  "established": "26 April 2005",
+  "financial_year_start": "",
+  "auditor": "Nabil Istanbuli Akram Istanbuli Mohammed Ahmed Abu Al Qasim --> Ownership Arab Moltaqa Investments",
+  "owners": [
+   {
+    "name": "Arab Moltaqa Investments",
+    "stake": 68.4177
+   },
+   {
+    "name": "Al Baraka Bank - Egypt",
+    "stake": 7.632
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Al Tawfeek Securitization Co",
+    "stake": 99.9
+   }
+  ],
+  "website": "www.at-lease.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ATLC/profile",
+  "fetched": "2026-08-24"
+ },
+ "ATQA": {
+  "name": "Misr National Steel - Ataqa (ATQA)",
+  "purpose": "Misr National Steel SAE (known as: Ataqa) is a public company, listed on Egyptian Exchange (EGX) since May 2006. Ataqa operates within the Materials sector focusing on Steel. Ataqa is based in Cairo, Egypt and was established in May 1998.",
+  "established": "30 May 1998",
+  "financial_year_start": "First Quarter",
+  "auditor": "Mohamed Hussein and Co Medhat Mahmoud Amin Al Salawy --> Ownership El Garhy Group for Investment and Development",
+  "owners": [
+   {
+    "name": "El Garhy Group for Investment and Development",
+    "stake": 62.7911
+   },
+   {
+    "name": "Al Organi Development and Investment",
+    "stake": 26.25
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Oriental Weavers",
+    "stake": 1.353
+   },
+   {
+    "name": "EFG Holding",
+    "stake": 0.031
+   },
+   {
+    "name": "Suez Steel Co",
+    "stake": 0.0014
+   }
+  ],
+  "website": "www.misrns.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/ATQA/profile",
+  "fetched": "2026-08-24"
+ },
+ "AXPH": {
+  "name": "Alexandria Pharmaceuticals and Chemical Industries (AXPH)",
+  "purpose": "Alexandria Pharmaceuticals and Chemical Industries (known as: Alexandria Pharmaceuticals) is a public company, listed on Egyptian Exchange (EGX) since February 1995. Alexandria Pharmaceuticals operates within the Pharmaceuticals, Biotechnology and Life Sciences sector focusing on Pharmaceuticals. Alexandria Pharmaceuticals is based in Alexandria, Egypt and was established in July 1991.",
+  "established": "20 July 1991",
+  "financial_year_start": "First Quarter",
+  "auditor": "Al Mazawi and Co Central Auditing Organization --> Ownership Holding Co for Pharmaceuticals",
+  "owners": [
+   {
+    "name": "Holding Co for Pharmaceuticals",
+    "stake": 60.0
+   },
+   {
+    "name": "Khaled Abdullah Mohamed Abdullah Salam",
+    "stake": 9.79
+   },
+   {
+    "name": "Union Workers Shareholders - Alexandria Pharmaceuticals",
+    "stake": 5.0
+   },
+   {
+    "name": "Bayt El Khebra Holding Kamar",
+    "stake": 2.75
+   },
+   {
+    "name": "Bayt Elkhebra for Factoring",
+    "stake": 2.69
+   },
+   {
+    "name": "Mohammed Khalid Abdullah",
+    "stake": 0.9917
+   },
+   {
+    "name": "Abdullah Khalid Abdullah Mohammed Abdullah Salam",
+    "stake": 0.752
+   },
+   {
+    "name": "Orient Tours for Touristic Villages and Hotels",
+    "stake": 0.077
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Medical Profession Investment Co.",
+    "stake": 5.0
+   }
+  ],
+  "website": "www.alexcopharma.net",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/AXPH/profile",
+  "fetched": "2026-08-24"
+ },
+ "BIDI": {
+  "name": "El Badr Investment and Development-BID (BIDI)",
+  "purpose": "El Badr Plastic is a public company, listed on Egyptian Exchange (EGX) since June 2008. It operates within the materials sector focusing on paper packaging. El Badr Plastic is based in Alexandria, Egypt and was established in September 2002.",
+  "established": "04 September 2002",
+  "financial_year_start": "First Quarter",
+  "auditor": "Amin El Sayed Ahmed Lotfy --> Ownership Abdullah Mohamed Saleh Abalkheil",
+  "owners": [
+   {
+    "name": "Abdullah Mohamed Saleh Abalkheil",
+    "stake": 14.52
+   },
+   {
+    "name": "Shahd Mohammad Abdul Rahman Mohammad Abdul Hamid Ghaleb",
+    "stake": 10.02
+   },
+   {
+    "name": "Abdul Rahman Mohammad Abdul Hamid Ghaleb",
+    "stake": 8.23
+   },
+   {
+    "name": "Abdullah Nasser Mohamed El Ebaid",
+    "stake": 8.16
+   },
+   {
+    "name": "Mohammad Abdel Hamid Ghaleb Abdullah Al Sharqawi",
+    "stake": 3.48
+   },
+   {
+    "name": "Nagham Mohamed Abdel Hamid Ghaleb Abdullah Al Sharqawi",
+    "stake": 2.95
+   },
+   {
+    "name": "Invest Time Contracting",
+    "stake": 0.4357
+   },
+   {
+    "name": "Value Capital",
+    "stake": 0.2669
+   },
+   {
+    "name": "Rowan Mohamed Abdel Hamid Ghaleb Abdullah Al Sharqawi",
+    "stake": 0.22
+   },
+   {
+    "name": "Atef Abdel Hamid Ghaleb Abdullah Al Sharqawi",
+    "stake": 0.13
+   },
+   {
+    "name": "Khaled Abdullah Abdul Fadil Saeed",
+    "stake": 0.007
+   },
+   {
+    "name": "Ehab Ebrahim Al Hindawy Ebrahim El Mahdy",
+    "stake": 0.0065
+   }
+  ],
+  "subsidiaries": [],
+  "website": "bid-investment.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BIDI/profile",
+  "fetched": "2026-08-24"
+ },
+ "BIGP": {
+  "name": "Barbary Investment Group (BIGP)",
+  "purpose": "Barbary Investment Group is a public company, listed on Egyptian Exchange (EGX) since October 2009. It operates within the retailing sector focusing on automotive retail. Barbary Investment Group is based in Giza, Egypt and was established in November 2008.",
+  "established": "25 November 2008",
+  "financial_year_start": "First Quarter",
+  "auditor": "Hany Fouad Rashed --> Ownership Mansour Faisal El Barbary",
+  "owners": [
+   {
+    "name": "Mansour Faisal El Barbary",
+    "stake": 22.391
+   },
+   {
+    "name": "Nageba Nour El Din Ahmed",
+    "stake": 10.29
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "American Automotive Group",
+    "stake": 94.0
+   },
+   {
+    "name": "B.I.G Gulf",
+    "stake": 60.0
+   }
+  ],
+  "website": "www.big.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BIGP/profile",
+  "fetched": "2026-08-24"
+ },
+ "BINV": {
+  "name": "B Investments Holding (BINV)",
+  "purpose": "B Investments Holdings is a public company, listed on Egyptian Exchange (EGX) since July 2015. B Investments Holdings operates within the diversified financials sector focusing on investment banking & brokerage.B Investments Holdings is based in Giza, Egypt and was established in December 2005.",
+  "established": "31 December 2005",
+  "financial_year_start": "",
+  "auditor": "Farid Samir Farid --> Ownership OTMT Acquisition SARL",
+  "owners": [
+   {
+    "name": "OTMT Acquisition SARL",
+    "stake": 21.86
+   },
+   {
+    "name": "Travco Group International Holding SAE",
+    "stake": 10.01
+   },
+   {
+    "name": "Rimco EGT Investment LLC",
+    "stake": 7.78
+   },
+   {
+    "name": "Samih Onsi Sawiris",
+    "stake": 6.73
+   },
+   {
+    "name": "Rolaco EGB Investment",
+    "stake": 6.55
+   },
+   {
+    "name": "Mohamed Hazim Adel Mohamad Fathallah Barakat",
+    "stake": 3.7592
+   },
+   {
+    "name": "Foray Capital for Investment",
+    "stake": 3.69
+   },
+   {
+    "name": "Arab Cotton Ginning",
+    "stake": 3.3426
+   },
+   {
+    "name": "Alaa El Dien Hassouna Saba",
+    "stake": 3.1247
+   },
+   {
+    "name": "Commercial International Bank - Egypt (CIB",
+    "stake": 2.9255
+   },
+   {
+    "name": "Fahad Mohamed Amin Al Tamimi",
+    "stake": 1.3673
+   },
+   {
+    "name": "SOS Holding",
+    "stake": 0.7885
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "B to invest in healthcare",
+    "stake": 70.0
+   },
+   {
+    "name": "O B Financial Holding",
+    "stake": 68.99
+   },
+   {
+    "name": "Energy Technologies Information System",
+    "stake": 68.04
+   },
+   {
+    "name": "B Pharma",
+    "stake": 60.0
+   },
+   {
+    "name": "Jormia Egypt",
+    "stake": 52.9
+   },
+   {
+    "name": "Red C Venture for Solar Energy",
+    "stake": 49.5
+   },
+   {
+    "name": "Infinity Solar 1BV Company",
+    "stake": 24.6
+   },
+   {
+    "name": "Retail for Trading and Investment",
+    "stake": 22.79
+   },
+   {
+    "name": "Infinity Solar 3 BV Company",
+    "stake": 17.5
+   },
+   {
+    "name": "Infinity Solar 2 BV Company",
+    "stake": 17.5
+   },
+   {
+    "name": "Ebtikar Holding for Financial Investments",
+    "stake": 16.5
+   },
+   {
+    "name": "Basata Financial Holding S.A.E.",
+    "stake": 16.45
+   }
+  ],
+  "website": "www.binvestmentsegypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BINV/profile",
+  "fetched": "2026-08-24"
+ },
+ "BIOC": {
+  "name": "Glaxo Smith Kline (BIOC)",
+  "purpose": "Glaxo SmithKline is a public company, listed on Egyptian Exchange (EGX) since October 1985. It operates within the Pharmaceuticals, Biotechnology and Life Sciences sector focusing on Pharmaceuticals. Glaxo SmithKline is based in Cairo, Egypt and was established in January 1981.",
+  "established": "14 January 1981",
+  "financial_year_start": "First Quarter",
+  "auditor": "Baker Tilly - Wahid Abdel Ghaffar and Co --> Ownership Glaxo Group Ltd",
+  "owners": [
+   {
+    "name": "Glaxo Group Ltd",
+    "stake": 91.2
+   },
+   {
+    "name": "Qatar National Bank",
+    "stake": 5.89
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Amoun Pharmaceutical Industries",
+    "stake": 99.64
+   },
+   {
+    "name": "Modern Pharma International",
+    "stake": 20.0
+   }
+  ],
+  "website": "www.gsk.com/en-gb/locations/egypt",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BIOC/profile",
+  "fetched": "2026-08-24"
+ },
+ "BONY": {
+  "name": "Bonyan for Development and Trade (BONY)",
+  "purpose": "Bonyan for Development and Trade (known as:Bonyan) is a public company, listed on Egyptian Exchange (EGX) since January 2025. Bonyan operates within the Real Estate sector focusing on Diversified Real Estate Activities. Bonyan is based in Giza, Egypt ,It was established in June 2007.",
+  "established": "21 June 2007",
+  "financial_year_start": "",
+  "auditor": "Price Waterhouse Coopers - Ezz El Din and Diab and Partners --> Ownership Sky Realty Holding Ltd",
+  "owners": [
+   {
+    "name": "Sky Realty Holding Ltd",
+    "stake": 82.19
+   },
+   {
+    "name": "Ayman Mamdouh Mohamed Fathy Abbas",
+    "stake": 0.0
+   },
+   {
+    "name": "Shamel Fahiem Lotfy Abu El Fadl",
+    "stake": 0.0
+   }
+  ],
+  "subsidiaries": [],
+  "website": "www.bonyanegypt.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BONY/profile",
+  "fetched": "2026-08-24"
+ },
+ "BTFH": {
+  "name": "Beltone Holding (BTFH)",
+  "purpose": "Beltone Holding (EGX: BTFH.CA) is a leading financial services provider with a multi-decade track record of success in the MENA region. The Company offers a comprehensive and growing set of financial solutions such as brokerage, investment banking, asset management, equity research, and private equity, in addition to end-to-end non-banking financial institutions (NBFIs) including leasing, factoring, consumer finance, venture capital, mortgage finance and microfinance. The Company is driven by a vision to redefine the financial ecosystem in the region by capitalizing on global expertise, knowledge, and disruptive, value-accretive solutions that unlock limitless opportunities for clients, to drive market value and impactful results.",
+  "established": "10 May 2006",
+  "financial_year_start": "First Quarter",
+  "auditor": "Sami Habib Dhaif Boulos --> Ownership Chimpe 1 Investment SPV RSC LTD",
+  "owners": [
+   {
+    "name": "Chimpe 1 Investment SPV RSC LTD",
+    "stake": 56.535
+   },
+   {
+    "name": "Act Financial for Consulting SAE",
+    "stake": 7.31
+   },
+   {
+    "name": "Ahmed Hamdi Abu Hashima Abdel Aziz",
+    "stake": 5.06
+   },
+   {
+    "name": "Tareq Mahmoud Mohammed Mahmoud Mohammed Yousef",
+    "stake": 0.79
+   },
+   {
+    "name": "Mohamed Medhat Hassan Alaam",
+    "stake": 0.43
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Cash for Microfinance",
+    "stake": 100.0
+   },
+   {
+    "name": "Beltone venture capital – Mauritius",
+    "stake": 100.0
+   },
+   {
+    "name": "Beltone Venture Capital Mauratius",
+    "stake": 100.0
+   },
+   {
+    "name": "Beltone Private Equity",
+    "stake": 100.0
+   },
+   {
+    "name": "Beltone Securities Brokerage",
+    "stake": 100.0
+   },
+   {
+    "name": "Beltone Consumer Finance",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone Venture Capital Co SAE",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone Information Technology",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone Management solutions",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone SMEs",
+    "stake": 99.99
+   },
+   {
+    "name": "Beltone Academy",
+    "stake": 99.98
+   },
+   {
+    "name": "Beltone Securitization",
+    "stake": 99.96
+   }
+  ],
+  "website": "www.beltoneholding.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/BTFH/profile",
+  "fetched": "2026-08-24"
+ },
+ "CAED": {
+  "name": "Cairo Educational Services (CAED)",
+  "purpose": "Cairo Educational Services is a public company, listed on Egyptian Exchange (EGX) since September 2000. It operates within the consumer services sector focusing on education services. Cairo Educational Services is based in Cairo, Egypt and was established in March 1997.",
+  "established": "01 March 1997",
+  "financial_year_start": "First Quarter",
+  "auditor": "PricewaterhouseCoopers - Mansour and Co --> Ownership Cairo For Investment And Real Estate Developments-CIRA Education",
+  "owners": [
+   {
+    "name": "Cairo For Investment And Real Estate Developments-CIRA Education",
+    "stake": 69.4
+   },
+   {
+    "name": "Dina Ahmed Ismail Ali",
+    "stake": 0.3
+   },
+   {
+    "name": "Laila Mohamed Hafez Ismail",
+    "stake": 0.15
+   },
+   {
+    "name": "Ahmad Raafat Hussein Helmy Khalil",
+    "stake": 0.14
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "EDU Systems International",
+    "stake": 10.0
+   }
+  ],
+  "website": "www.cairoedu.com",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/CAED/profile",
+  "fetched": "2026-08-24"
+ },
+ "CANA": {
+  "name": "Suez Canal Bank SAE (CANA)",
+  "purpose": "Suez Canal Bank SAE (known as: Suez Canal Bank) is a public company, listed on Egyptian Exchange (EGX) since September 1982. It operates within the Banks sector focusing on Diversified Banks. Suez Canal Bank is based in Cairo, Egypt and was established in March 1978.",
+  "established": "04 March 1978",
+  "financial_year_start": "First Quarter",
+  "auditor": "KPMG - Hazem Hassan BDO Khaled and Co --> Ownership Arab International Bank",
+  "owners": [
+   {
+    "name": "Arab International Bank",
+    "stake": 41.5
+   },
+   {
+    "name": "Libyan Foreign Bank",
+    "stake": 27.7062
+   },
+   {
+    "name": "Insurance Fund of Suez Canal Authority Employees",
+    "stake": 10.1062
+   },
+   {
+    "name": "Suez Canal Authority",
+    "stake": 3.208
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Anchors for Investment and Urban Development",
+    "stake": 40.0
+   },
+   {
+    "name": "Maadi Touristic and Recreation Investment Co",
+    "stake": 29.69
+   },
+   {
+    "name": "National Housing for Professional Syndicates",
+    "stake": 17.2898
+   },
+   {
+    "name": "El Sharkion for Industrial Projects",
+    "stake": 11.83
+   },
+   {
+    "name": "Sharm Dreams Co. for Tourism Investment",
+    "stake": 9.73
+   },
+   {
+    "name": "Credit Guarantee Co SAE",
+    "stake": 9.09
+   }
+  ],
+  "website": "www.scbank.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/CANA/profile",
+  "fetched": "2026-08-24"
+ }
+}
