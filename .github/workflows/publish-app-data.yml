@@ -79,6 +79,7 @@ concurrency:
 # was destroyed by the next run.
 env:
   STORES: >-
+    data-source/prices
     scripts/company_filings_seen.json
     scripts/company_names_ar.json
     scripts/financials_filed.json
@@ -276,7 +277,7 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
-            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$'; then
+            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
               return 1

@@ -32,6 +32,7 @@ import mubasher_statements  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 WORK = REPO.parent / "work"
+PRICES = REPO / "data-source" / "prices"
 API = REPO / "public" / "data" / "v1"
 FIXTURES = REPO / "app" / "assets" / "fixtures"
 
@@ -352,6 +353,63 @@ def history_union() -> dict[str, list[dict]]:
 KEEP_SESSIONS = 260
 
 
+def persist_history(union: dict[str, list[dict]]) -> int:
+    """Write the merged series back, so a scan that skips a company cannot
+    erase it.
+
+    `history_union` already takes the union of every scan on disk and the
+    durable store. The flaw was that only half of that was durable: the scans
+    are ephemeral — a CI runner has just the one it fetched this run — and
+    `data-source/prices` was a one-off backfill of 237 companies that nothing
+    in the pipeline ever added to. `history_sink.py` writes it, and that is a
+    browser tool a person runs by hand.
+
+    So a company outside those 237 held its chart only for as long as the
+    scans happened to cover it. SEIGA had 120 sessions this morning and none
+    by mid-morning, because one run's scan did not include it — 26 companies
+    were in that state, and which 26 changed between runs.
+
+    Writing the union back makes the store cumulative, which is the same
+    discipline every other store in this pipeline follows: read what is held,
+    merge what is new, write it back, commit it. A ticker whose series did not
+    change is not rewritten, so an unchanged run still produces no diff.
+    """
+    PRICES.mkdir(parents=True, exist_ok=True)
+    written = 0
+    for ticker, bars in union.items():
+        if not bars:
+            continue
+        path = PRICES / f"{ticker}.json"
+        held = {}
+        source = "scan"
+        if path.exists():
+            try:
+                doc = json.loads(path.read_text(encoding="utf-8"))
+                source = doc.get("source") or source
+                held = {b["date"]: b for b in doc.get("bars", []) if b.get("date")}
+            except (json.JSONDecodeError, OSError):
+                held = {}
+        merged = dict(held)
+        for bar in bars:
+            # A bar already held wins: the durable copy came from a source that
+            # carried the whole series, and a scan bar is a partial view of the
+            # same session. Only genuinely new dates are added.
+            merged.setdefault(bar["date"], bar)
+        if len(merged) == len(held) and held:
+            continue
+        body = {
+            "ticker": ticker,
+            "source": source,
+            "bars": [merged[d] for d in sorted(merged)],
+        }
+        path.write_text(
+            json.dumps(body, ensure_ascii=False, separators=(",", ":")),
+            encoding="utf-8",
+        )
+        written += 1
+    return written
+
+
 def published_profile(ticker: str) -> dict:
     """The profile last published for this company, or an empty one."""
     path = API / "companies" / f"{ticker}.json"
@@ -618,6 +676,11 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         researched = {c["ticker"] for c in studied["companies"]}
 
     union = history_union()
+    # Make the union durable before anything is built from it. A scan is
+    # ephemeral and this is the only moment its bars exist anywhere.
+    kept = persist_history(union)
+    if kept:
+        print(f"   price history: {kept} series written to data-source/prices")
     companies, stocks, details = [], {}, {}
     skipped = 0
 
