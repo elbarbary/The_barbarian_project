@@ -2,8 +2,8 @@
  "generated": "2026-08-24",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 452,
- "estimated": 391,
+ "count": 455,
+ "estimated": 394,
  "events": [
   {
    "date": "2026-06-02",
@@ -1868,6 +1868,23 @@
    "date": "2026-11-13",
    "kind": "results_expected",
    "note": "9M results usually filed around now",
+   "ticker": "RMTV",
+   "title": "Rowad Misr Tourism Investment — 9M results expected",
+   "title_ar": "",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-RMTV-9M-2026-09-30",
+   "estimated": true,
+   "period_end": "2026-09-30",
+   "window_start": "2026-11-04",
+   "window_end": "2026-11-14",
+   "observations": 5
+  },
+  {
+   "date": "2026-11-13",
+   "kind": "results_expected",
+   "note": "9M results usually filed around now",
    "ticker": "RUBX",
    "title": "Rubex International for Plastic & Acrylic Manufacturing — 9M results expected",
    "title_ar": "",
@@ -2594,6 +2611,23 @@
    "window_start": "2026-11-02",
    "window_end": "2026-11-17",
    "observations": 12
+  },
+  {
+   "date": "2026-11-14",
+   "kind": "results_expected",
+   "note": "9M results usually filed around now",
+   "ticker": "SUCE",
+   "title": "Suez Cement Co. — 9M results expected",
+   "title_ar": "",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-SUCE-9M-2026-09-30",
+   "estimated": true,
+   "period_end": "2026-09-30",
+   "window_start": "2026-10-23",
+   "window_end": "2026-12-02",
+   "observations": 7
   },
   {
    "date": "2026-11-14",
@@ -5501,6 +5535,23 @@
    "window_start": "2027-02-11",
    "window_end": "2027-03-19",
    "observations": 13
+  },
+  {
+   "date": "2027-03-06",
+   "kind": "results_expected",
+   "note": "FY results usually filed around now",
+   "ticker": "SUCE",
+   "title": "Suez Cement Co. — FY results expected",
+   "title_ar": "",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-SUCE-FY-2026-12-31",
+   "estimated": true,
+   "period_end": "2026-12-31",
+   "window_start": "2027-02-26",
+   "window_end": "2027-03-18",
+   "observations": 6
   },
   {
    "date": "2027-03-06",

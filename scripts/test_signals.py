@@ -119,6 +119,32 @@ class Silence(unittest.TestCase):
         )
 
 
+class StillTrading(unittest.TestCase):
+    """The gate that decides whether silence is a signal or a delisting.
+
+    It used to be the directory's `tradable` flag. That comes from a broker
+    page scraped on one machine, so `build_market_api` publishes None for it
+    anywhere else — and on every CI build the whole silence signal switched
+    itself off without a word.
+    """
+
+    def test_a_company_priced_on_the_last_session_is_trading(self):
+        live = s.still_trading({"A": "2026-08-23", "B": "2026-08-23"})
+        self.assertEqual(live, {"A", "B"})
+
+    def test_a_company_days_behind_the_session_is_not(self):
+        live = s.still_trading({"A": "2026-08-23", "OLD": "2026-08-17"})
+        self.assertEqual(live, {"A"})
+
+    def test_the_session_is_the_market_newest_not_today(self):
+        # A weekend build must not decide the entire exchange has stopped.
+        live = s.still_trading({"A": "2026-08-20", "B": "2026-08-20"})
+        self.assertEqual(live, {"A", "B"})
+
+    def test_no_prices_at_all_flags_nobody(self):
+        self.assertEqual(s.still_trading({}), set())
+
+
 class FirstOfKind(unittest.TestCase):
     def test_a_capital_increase_after_a_decade_is_a_first(self):
         got = s.firsts_of_kind([

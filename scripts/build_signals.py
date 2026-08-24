@@ -95,6 +95,24 @@ SILENT_MULTIPLE = 4
 SILENT_FLOOR = 45
 SILENT_MIN_FILINGS = 20
 
+# How far behind the market's newest session a company's own last price may be
+# and still count as currently traded.
+#
+# This replaces a gate on the directory's `tradable` flag, which turned out to
+# come from a broker page that only exists on one machine — `tradable_flag`
+# publishes None rather than a confident false anywhere else, so on every CI
+# build the field is absent for all 282 companies and the silence signal
+# switched itself off without saying so.
+#
+# Whether a share still trades is computable from the scan itself. 266 of 281
+# companies carry a price on the newest session and 15 do not; there is no
+# tail between 0 and 3 days, so the gap is real rather than a boundary drawn
+# through a crowd. The names that stopped filing years ago sit in that second
+# group — PACH, IRAX, ALEX, EITP all last priced four to six days back — and
+# the two that stopped filing six weeks ago while still trading every day do
+# not.
+TRADED_WITHIN = 3
+
 # "First X in N years" needs a gap worth printing.
 GAP_YEARS = 3
 
@@ -153,6 +171,38 @@ def directory() -> dict[str, dict]:
     except (OSError, json.JSONDecodeError):
         return {}
     return {c["ticker"]: c for c in doc.get("companies", []) if c.get("ticker")}
+
+
+def last_prices() -> dict[str, str]:
+    """ticker → the newest session this company has a published price for."""
+    out: dict[str, str] = {}
+    for path in sorted(glob.glob(str(COMPANIES / "*.json"))):
+        try:
+            doc = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        days = [
+            row.get("date") for row in (doc.get("price_history") or [])
+            if row.get("date")
+        ]
+        if days:
+            out[doc.get("ticker") or pathlib.Path(path).stem] = max(days)
+    return out
+
+
+def still_trading(prices: dict[str, str]) -> set[str]:
+    """The companies priced on, or within days of, the market's last session."""
+    if not prices:
+        return set()
+    session = day(max(prices.values()))
+    if not session:
+        return set()
+    live = set()
+    for ticker, stamp in prices.items():
+        when = day(stamp)
+        if when and (session - when).days <= TRADED_WITHIN:
+            live.add(ticker)
+    return live
 
 
 def day(stamp: str | None) -> datetime.date | None:
@@ -467,6 +517,7 @@ def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
     known = directory()
     archive = load_filings()
     due = expected_results(today)
+    live = still_trading(last_prices())
 
     per_company: dict[str, dict] = {}
     recent_firsts: list[dict] = []
@@ -479,8 +530,11 @@ def build(today: datetime.date) -> tuple[dict[str, dict], dict]:
         breaks = streak_breaks(ticker, today)
         kinds = firsts_of_kind(filings, today)
         # Silence is only a signal for a company somebody can still trade. For
-        # a delisted one it is the delisting, which the directory already says.
-        hush = silence(filings, today) if company.get("tradable") else None
+        # one that has stopped trading it is the delisting, which the price
+        # series already says. An explicit `tradable: false` still excludes;
+        # an absent one is no longer read as a no.
+        traded = ticker in live and company.get("tradable") is not False
+        hush = silence(filings, today) if traded else None
         signals = {
             "ticker": ticker,
             "generated": today.isoformat(),
