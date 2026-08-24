@@ -42,6 +42,36 @@ class BCompanyBrief extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // What the company *is*, before what its filings show it has done.
+        // A reader who has never heard of the ticker needs this sentence
+        // first; the record below only means something once they have it.
+        if (brief.hasStory) ...[
+          BSectionLabel(l.briefStoryLabel, bottomGap: 8),
+          BPaperCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  brief.storyFor(arabic),
+                  style: BarbarianType.bodyM.copyWith(
+                    color: c.textPrimary,
+                    height: 1.55,
+                  ),
+                ),
+                if (brief.storySource.isNotEmpty) ...[
+                  const SizedBox(height: 10),
+                  // Named on screen, because this is the one paragraph on the
+                  // page that is not the exchange's own record.
+                  Text(
+                    l.briefStorySource(brief.storySource),
+                    style: BarbarianType.labelNano.copyWith(color: c.textFaint),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
         BSectionLabel(l.briefHistoryLabel, bottomGap: 8),
         BPaperCard(
           child: Column(

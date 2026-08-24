@@ -27,6 +27,25 @@ abstract class CompanyBrief with _$CompanyBrief {
     @Default('') String ticker,
     @Default('') String history,
     @JsonKey(name: 'history_ar') @Default('') String historyAr,
+
+    /// What the company actually **does** — its business, how it earns, how it
+    /// has grown. Distinct from [history], which is what its filing record
+    /// shows it has *done*: a reader wanting one is not asking for the other.
+    ///
+    /// Empty whenever no citable source covers this company, and the section
+    /// simply does not render. That is deliberate: the filings themselves
+    /// cannot ground a business description — their bodies are one sentence
+    /// long (median 135 characters), the attachments are unfetched pointers,
+    /// and "is engaged in" appears zero times across all 191,484 of them — so
+    /// a story with no source behind it would be a story this app invented.
+    @Default('') String story,
+    @JsonKey(name: 'story_ar') @Default('') String storyAr,
+
+    /// Where [story] came from, shown under it. A business description carries
+    /// its source on screen because, unlike everything else on the page, it is
+    /// not the exchange's own record.
+    @JsonKey(name: 'story_source') @Default('') String storySource,
+    @JsonKey(name: 'story_url') @Default('') String storyUrl,
     @Default(<BriefPlan>[]) List<BriefPlan> plans,
     BriefRecord? record,
     String? generated,
@@ -43,6 +62,10 @@ abstract class CompanyBrief with _$CompanyBrief {
 
   String historyFor(bool arabic) =>
       arabic && historyAr.isNotEmpty ? historyAr : history;
+
+  String storyFor(bool arabic) => arabic && storyAr.isNotEmpty ? storyAr : story;
+
+  bool get hasStory => story.isNotEmpty || storyAr.isNotEmpty;
 }
 
 /// One thing the company announced it intends to do, and the filing that says

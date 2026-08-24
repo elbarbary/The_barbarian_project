@@ -2675,4 +2675,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get finFiguresPerRow => 'كل بند بالوحدة المكتوبة بجواره، كما أُودعت.';
+
+  @override
+  String get briefStoryLabel => 'ما تعمل به الشركة';
+
+  @override
+  String briefStorySource(String source) {
+    return 'من $source';
+  }
 }

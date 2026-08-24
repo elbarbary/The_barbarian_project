@@ -15,7 +15,20 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CompanyBrief {
 
- String get ticker; String get history;@JsonKey(name: 'history_ar') String get historyAr; List<BriefPlan> get plans; BriefRecord? get record; String? get generated;
+ String get ticker; String get history;@JsonKey(name: 'history_ar') String get historyAr;/// What the company actually **does** — its business, how it earns, how it
+/// has grown. Distinct from [history], which is what its filing record
+/// shows it has *done*: a reader wanting one is not asking for the other.
+///
+/// Empty whenever no citable source covers this company, and the section
+/// simply does not render. That is deliberate: the filings themselves
+/// cannot ground a business description — their bodies are one sentence
+/// long (median 135 characters), the attachments are unfetched pointers,
+/// and "is engaged in" appears zero times across all 191,484 of them — so
+/// a story with no source behind it would be a story this app invented.
+ String get story;@JsonKey(name: 'story_ar') String get storyAr;/// Where [story] came from, shown under it. A business description carries
+/// its source on screen because, unlike everything else on the page, it is
+/// not the exchange's own record.
+@JsonKey(name: 'story_source') String get storySource;@JsonKey(name: 'story_url') String get storyUrl; List<BriefPlan> get plans; BriefRecord? get record; String? get generated;
 /// Create a copy of CompanyBrief
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +41,16 @@ $CompanyBriefCopyWith<CompanyBrief> get copyWith => _$CompanyBriefCopyWithImpl<C
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyBrief&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.history, history) || other.history == history)&&(identical(other.historyAr, historyAr) || other.historyAr == historyAr)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.record, record) || other.record == record)&&(identical(other.generated, generated) || other.generated == generated));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyBrief&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.history, history) || other.history == history)&&(identical(other.historyAr, historyAr) || other.historyAr == historyAr)&&(identical(other.story, story) || other.story == story)&&(identical(other.storyAr, storyAr) || other.storyAr == storyAr)&&(identical(other.storySource, storySource) || other.storySource == storySource)&&(identical(other.storyUrl, storyUrl) || other.storyUrl == storyUrl)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.record, record) || other.record == record)&&(identical(other.generated, generated) || other.generated == generated));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,history,historyAr,const DeepCollectionEquality().hash(plans),record,generated);
+int get hashCode => Object.hash(runtimeType,ticker,history,historyAr,story,storyAr,storySource,storyUrl,const DeepCollectionEquality().hash(plans),record,generated);
 
 @override
 String toString() {
-  return 'CompanyBrief(ticker: $ticker, history: $history, historyAr: $historyAr, plans: $plans, record: $record, generated: $generated)';
+  return 'CompanyBrief(ticker: $ticker, history: $history, historyAr: $historyAr, story: $story, storyAr: $storyAr, storySource: $storySource, storyUrl: $storyUrl, plans: $plans, record: $record, generated: $generated)';
 }
 
 
@@ -48,7 +61,7 @@ abstract mixin class $CompanyBriefCopyWith<$Res>  {
   factory $CompanyBriefCopyWith(CompanyBrief value, $Res Function(CompanyBrief) _then) = _$CompanyBriefCopyWithImpl;
 @useResult
 $Res call({
- String ticker, String history,@JsonKey(name: 'history_ar') String historyAr, List<BriefPlan> plans, BriefRecord? record, String? generated
+ String ticker, String history,@JsonKey(name: 'history_ar') String historyAr, String story,@JsonKey(name: 'story_ar') String storyAr,@JsonKey(name: 'story_source') String storySource,@JsonKey(name: 'story_url') String storyUrl, List<BriefPlan> plans, BriefRecord? record, String? generated
 });
 
 
@@ -65,11 +78,15 @@ class _$CompanyBriefCopyWithImpl<$Res>
 
 /// Create a copy of CompanyBrief
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? history = null,Object? historyAr = null,Object? plans = null,Object? record = freezed,Object? generated = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? history = null,Object? historyAr = null,Object? story = null,Object? storyAr = null,Object? storySource = null,Object? storyUrl = null,Object? plans = null,Object? record = freezed,Object? generated = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
 as String,historyAr: null == historyAr ? _self.historyAr : historyAr // ignore: cast_nullable_to_non_nullable
+as String,story: null == story ? _self.story : story // ignore: cast_nullable_to_non_nullable
+as String,storyAr: null == storyAr ? _self.storyAr : storyAr // ignore: cast_nullable_to_non_nullable
+as String,storySource: null == storySource ? _self.storySource : storySource // ignore: cast_nullable_to_non_nullable
+as String,storyUrl: null == storyUrl ? _self.storyUrl : storyUrl // ignore: cast_nullable_to_non_nullable
 as String,plans: null == plans ? _self.plans : plans // ignore: cast_nullable_to_non_nullable
 as List<BriefPlan>,record: freezed == record ? _self.record : record // ignore: cast_nullable_to_non_nullable
 as BriefRecord?,generated: freezed == generated ? _self.generated : generated // ignore: cast_nullable_to_non_nullable
@@ -170,10 +187,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  String story, @JsonKey(name: 'story_ar')  String storyAr, @JsonKey(name: 'story_source')  String storySource, @JsonKey(name: 'story_url')  String storyUrl,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanyBrief() when $default != null:
-return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.record,_that.generated);case _:
+return $default(_that.ticker,_that.history,_that.historyAr,_that.story,_that.storyAr,_that.storySource,_that.storyUrl,_that.plans,_that.record,_that.generated);case _:
   return orElse();
 
 }
@@ -191,10 +208,10 @@ return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.rec
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  String story, @JsonKey(name: 'story_ar')  String storyAr, @JsonKey(name: 'story_source')  String storySource, @JsonKey(name: 'story_url')  String storyUrl,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)  $default,) {final _that = this;
 switch (_that) {
 case _CompanyBrief():
-return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.record,_that.generated);case _:
+return $default(_that.ticker,_that.history,_that.historyAr,_that.story,_that.storyAr,_that.storySource,_that.storyUrl,_that.plans,_that.record,_that.generated);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -211,10 +228,10 @@ return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.rec
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String history, @JsonKey(name: 'history_ar')  String historyAr,  String story, @JsonKey(name: 'story_ar')  String storyAr, @JsonKey(name: 'story_source')  String storySource, @JsonKey(name: 'story_url')  String storyUrl,  List<BriefPlan> plans,  BriefRecord? record,  String? generated)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanyBrief() when $default != null:
-return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.record,_that.generated);case _:
+return $default(_that.ticker,_that.history,_that.historyAr,_that.story,_that.storyAr,_that.storySource,_that.storyUrl,_that.plans,_that.record,_that.generated);case _:
   return null;
 
 }
@@ -226,12 +243,29 @@ return $default(_that.ticker,_that.history,_that.historyAr,_that.plans,_that.rec
 @JsonSerializable()
 
 class _CompanyBrief extends CompanyBrief {
-  const _CompanyBrief({this.ticker = '', this.history = '', @JsonKey(name: 'history_ar') this.historyAr = '', final  List<BriefPlan> plans = const <BriefPlan>[], this.record, this.generated}): _plans = plans,super._();
+  const _CompanyBrief({this.ticker = '', this.history = '', @JsonKey(name: 'history_ar') this.historyAr = '', this.story = '', @JsonKey(name: 'story_ar') this.storyAr = '', @JsonKey(name: 'story_source') this.storySource = '', @JsonKey(name: 'story_url') this.storyUrl = '', final  List<BriefPlan> plans = const <BriefPlan>[], this.record, this.generated}): _plans = plans,super._();
   factory _CompanyBrief.fromJson(Map<String, dynamic> json) => _$CompanyBriefFromJson(json);
 
 @override@JsonKey() final  String ticker;
 @override@JsonKey() final  String history;
 @override@JsonKey(name: 'history_ar') final  String historyAr;
+/// What the company actually **does** — its business, how it earns, how it
+/// has grown. Distinct from [history], which is what its filing record
+/// shows it has *done*: a reader wanting one is not asking for the other.
+///
+/// Empty whenever no citable source covers this company, and the section
+/// simply does not render. That is deliberate: the filings themselves
+/// cannot ground a business description — their bodies are one sentence
+/// long (median 135 characters), the attachments are unfetched pointers,
+/// and "is engaged in" appears zero times across all 191,484 of them — so
+/// a story with no source behind it would be a story this app invented.
+@override@JsonKey() final  String story;
+@override@JsonKey(name: 'story_ar') final  String storyAr;
+/// Where [story] came from, shown under it. A business description carries
+/// its source on screen because, unlike everything else on the page, it is
+/// not the exchange's own record.
+@override@JsonKey(name: 'story_source') final  String storySource;
+@override@JsonKey(name: 'story_url') final  String storyUrl;
  final  List<BriefPlan> _plans;
 @override@JsonKey() List<BriefPlan> get plans {
   if (_plans is EqualUnmodifiableListView) return _plans;
@@ -255,16 +289,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyBrief&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.history, history) || other.history == history)&&(identical(other.historyAr, historyAr) || other.historyAr == historyAr)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.record, record) || other.record == record)&&(identical(other.generated, generated) || other.generated == generated));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyBrief&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.history, history) || other.history == history)&&(identical(other.historyAr, historyAr) || other.historyAr == historyAr)&&(identical(other.story, story) || other.story == story)&&(identical(other.storyAr, storyAr) || other.storyAr == storyAr)&&(identical(other.storySource, storySource) || other.storySource == storySource)&&(identical(other.storyUrl, storyUrl) || other.storyUrl == storyUrl)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.record, record) || other.record == record)&&(identical(other.generated, generated) || other.generated == generated));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,history,historyAr,const DeepCollectionEquality().hash(_plans),record,generated);
+int get hashCode => Object.hash(runtimeType,ticker,history,historyAr,story,storyAr,storySource,storyUrl,const DeepCollectionEquality().hash(_plans),record,generated);
 
 @override
 String toString() {
-  return 'CompanyBrief(ticker: $ticker, history: $history, historyAr: $historyAr, plans: $plans, record: $record, generated: $generated)';
+  return 'CompanyBrief(ticker: $ticker, history: $history, historyAr: $historyAr, story: $story, storyAr: $storyAr, storySource: $storySource, storyUrl: $storyUrl, plans: $plans, record: $record, generated: $generated)';
 }
 
 
@@ -275,7 +309,7 @@ abstract mixin class _$CompanyBriefCopyWith<$Res> implements $CompanyBriefCopyWi
   factory _$CompanyBriefCopyWith(_CompanyBrief value, $Res Function(_CompanyBrief) _then) = __$CompanyBriefCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, String history,@JsonKey(name: 'history_ar') String historyAr, List<BriefPlan> plans, BriefRecord? record, String? generated
+ String ticker, String history,@JsonKey(name: 'history_ar') String historyAr, String story,@JsonKey(name: 'story_ar') String storyAr,@JsonKey(name: 'story_source') String storySource,@JsonKey(name: 'story_url') String storyUrl, List<BriefPlan> plans, BriefRecord? record, String? generated
 });
 
 
@@ -292,11 +326,15 @@ class __$CompanyBriefCopyWithImpl<$Res>
 
 /// Create a copy of CompanyBrief
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? history = null,Object? historyAr = null,Object? plans = null,Object? record = freezed,Object? generated = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? history = null,Object? historyAr = null,Object? story = null,Object? storyAr = null,Object? storySource = null,Object? storyUrl = null,Object? plans = null,Object? record = freezed,Object? generated = freezed,}) {
   return _then(_CompanyBrief(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,history: null == history ? _self.history : history // ignore: cast_nullable_to_non_nullable
 as String,historyAr: null == historyAr ? _self.historyAr : historyAr // ignore: cast_nullable_to_non_nullable
+as String,story: null == story ? _self.story : story // ignore: cast_nullable_to_non_nullable
+as String,storyAr: null == storyAr ? _self.storyAr : storyAr // ignore: cast_nullable_to_non_nullable
+as String,storySource: null == storySource ? _self.storySource : storySource // ignore: cast_nullable_to_non_nullable
+as String,storyUrl: null == storyUrl ? _self.storyUrl : storyUrl // ignore: cast_nullable_to_non_nullable
 as String,plans: null == plans ? _self._plans : plans // ignore: cast_nullable_to_non_nullable
 as List<BriefPlan>,record: freezed == record ? _self.record : record // ignore: cast_nullable_to_non_nullable
 as BriefRecord?,generated: freezed == generated ? _self.generated : generated // ignore: cast_nullable_to_non_nullable

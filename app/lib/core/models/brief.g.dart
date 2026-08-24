@@ -11,6 +11,10 @@ _CompanyBrief _$CompanyBriefFromJson(Map<String, dynamic> json) =>
       ticker: json['ticker'] as String? ?? '',
       history: json['history'] as String? ?? '',
       historyAr: json['history_ar'] as String? ?? '',
+      story: json['story'] as String? ?? '',
+      storyAr: json['story_ar'] as String? ?? '',
+      storySource: json['story_source'] as String? ?? '',
+      storyUrl: json['story_url'] as String? ?? '',
       plans:
           (json['plans'] as List<dynamic>?)
               ?.map((e) => BriefPlan.fromJson(e as Map<String, dynamic>))
@@ -27,6 +31,10 @@ Map<String, dynamic> _$CompanyBriefToJson(_CompanyBrief instance) =>
       'ticker': instance.ticker,
       'history': instance.history,
       'history_ar': instance.historyAr,
+      'story': instance.story,
+      'story_ar': instance.storyAr,
+      'story_source': instance.storySource,
+      'story_url': instance.storyUrl,
       'plans': instance.plans,
       'record': instance.record,
       'generated': instance.generated,

@@ -2216,5 +2216,15 @@
     }
   },
   "finFiguresPerRow": "Each line is in the unit shown beside it, as filed.",
-  "@finFiguresPerRow": {}
+  "@finFiguresPerRow": {},
+  "briefStoryLabel": "What the company does",
+  "@briefStoryLabel": {},
+  "briefStorySource": "From {source}",
+  "@briefStorySource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  }
 }

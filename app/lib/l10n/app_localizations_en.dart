@@ -2661,4 +2661,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get finFiguresPerRow =>
       'Each line is in the unit shown beside it, as filed.';
+
+  @override
+  String get briefStoryLabel => 'What the company does';
+
+  @override
+  String briefStorySource(String source) {
+    return 'From $source';
+  }
 }

@@ -4351,6 +4351,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Each line is in the unit shown beside it, as filed.'**
   String get finFiguresPerRow;
+
+  /// No description provided for @briefStoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What the company does'**
+  String get briefStoryLabel;
+
+  /// No description provided for @briefStorySource.
+  ///
+  /// In en, this message translates to:
+  /// **'From {source}'**
+  String briefStorySource(String source);
 }
 
 class _AppLocalizationsDelegate
