@@ -122,10 +122,43 @@ SOURCES = [
         "name": "Al Mal News",
         "name_ar": "المال",
         "home": "https://almalnews.com",
-        "endpoint": None,
-        "kind": "none",
-        "live": False,
-        "note": "sitemaps are archives — sitemap75 carries 2007 dates",
+        # Not a feed and not a sitemap. Al Mal moved to Next.js: there is no
+        # `/feed/`, `/wp-json/` 404s, and the 75 sitemaps carry `lastmod`
+        # values that run from 1899 to 2009 — which is what the old note here
+        # meant by "archives". What does work is the paper's own latest-news
+        # page, whose cards carry the full headline in a `title` attribute and
+        # the article's picture, and whose article pages each carry a
+        # `NewsArticle` JSON-LD block with a real `datePublished`.
+        # Its own finance sections rather than `latest-news`, which is the
+        # whole paper — sport, politics, education. Three pages, ~110 cards,
+        # and the noise a general front page would put in a markets feed
+        # never arrives.
+        "endpoint": "https://almalnews.com/category/stocks/1/",
+        "endpoints": [
+            "https://almalnews.com/category/stocks/1/",
+            "https://almalnews.com/category/economy-markets/1/",
+            "https://almalnews.com/category/banks/1/",
+        ],
+        "kind": "listing",
+        "live": True,
+    },
+    {
+        "id": "enterprise",
+        "name": "Enterprise",
+        "name_ar": "إنتربرايز",
+        "home": "https://enterpriseam.com",
+        # An ordinary WordPress RSS feed, and the only English-language
+        # Egyptian business wire in this list. Its robots.txt allows `*` and
+        # sets `Content-Signal: search=yes,ai-train=no,use=reference` — which
+        # is exactly the bargain this file already makes with every outlet:
+        # headline and link, never the body, nothing fed to a model.
+        "endpoint": "https://enterpriseam.com/feed/",
+        "kind": "rss",
+        "live": True,
+        # Published in English, so `translations.english_for` leaves these
+        # alone (`needs_english` is false) and the headline is its own
+        # translation.
+        "english": True,
     },
     {
         "id": "zawya",
@@ -227,6 +260,191 @@ def fetch_wp(source: dict) -> list[dict]:
             }
         )
     return items
+
+
+def fetch_rss(source: dict) -> list[dict]:
+    """An ordinary RSS 2.0 feed, read for the four fields that matter.
+
+    Deliberately not `feedparser`: this repository ships no dependency it does
+    not need, and an `<item>` is four regexes. The description is taken only
+    as a build-time excerpt for ticker matching and is dropped before
+    publication, like every other outlet's.
+    """
+    raw = get(source["endpoint"])
+    if raw is None:
+        return []
+    body = raw.decode("utf-8", "replace")
+
+    items = []
+    for block in re.findall(r"<item>(.*?)</item>", body, re.S):
+        def field(tag: str) -> str:
+            match = re.search(rf"<{tag}[^>]*>(.*?)</{tag}>", block, re.S)
+            if not match:
+                return ""
+            value = match.group(1).strip()
+            cdata = re.match(r"^<!\[CDATA\[(.*?)\]\]>$", value, re.S)
+            return (cdata.group(1) if cdata else value).strip()
+
+        headline = text(field("title"))
+        link = field("link")
+        if not headline or not link:
+            continue
+        # The guid carries the post id — a stable key that survives a headline
+        # being corrected, which a hash of the title would not.
+        guid = field("guid")
+        post = re.search(r"[?&]p=(\d+)", guid) or re.search(r"[?&]p=(\d+)", link)
+        ident = post.group(1) if post else hashlib.sha1(link.encode()).hexdigest()[:12]
+
+        # The picture the outlet chose, which RSS hides inside the description
+        # HTML rather than exposing as a field.
+        picture = re.search(r'<img[^>]+src="([^"]+)"', field("description"))
+
+        items.append(
+            {
+                "id": f"{source['id']}-{ident}",
+                "source": source["id"],
+                "headline": headline,
+                "link": link,
+                "published": rfc822(field("pubDate")),
+                "image": picture.group(1) if picture else None,
+                "_excerpt": text(field("description"))[:400],
+                "_tags": [],
+            }
+        )
+    return items
+
+
+# RFC-822 is what RSS specifies and what nothing else in this file uses, so the
+# conversion lives here rather than in a shared helper nobody else would call.
+RFC822 = "%a, %d %b %Y %H:%M:%S"
+
+
+def rfc822(stamp: str) -> str:
+    """`Mon, 24 Aug 2026 00:00:00 +0000` to an ISO instant, or empty."""
+    cleaned = re.sub(r"\s+", " ", (stamp or "").strip())
+    match = re.match(r"^([A-Za-z]{3}, \d{1,2} [A-Za-z]{3} \d{4} \d{2}:\d{2}:\d{2})", cleaned)
+    if not match:
+        return ""
+    try:
+        when = datetime.datetime.strptime(match.group(1), RFC822)
+    except ValueError:
+        return ""
+    return when.replace(tzinfo=datetime.UTC).isoformat().replace("+00:00", "Z")
+
+
+# How many article pages one run will open to date Al Mal's headlines. The
+# listing gives us everything except the timestamp; the timestamp needs the
+# article. Ids already in the published feed are skipped, so this is a cost
+# paid once per story and a normal quarter-hour brings a handful.
+ARTICLE_READS = 40
+
+
+def fetch_listing(source: dict, known: set[str]) -> list[dict]:
+    """Headlines from a paper that publishes no feed at all.
+
+    Al Mal's latest-news page is a list of cards; each card's anchor carries
+    the article's full headline in `title=` and its picture in the `img`. That
+    is headline, link and image in one request. The missing field is *when*,
+    and the only place it exists is the article's own JSON-LD — so an article
+    this feed has not seen before costs one extra request, and one that it has
+    costs nothing.
+
+    An article whose date cannot be read is dropped rather than stamped with
+    the time of the build: a story dated "now" sorts above real news and would
+    stay at the top of the feed until it aged out.
+    """
+    cards: list[tuple[str, str]] = []
+    pictures: dict[str, str] = {}
+    for endpoint in source.get("endpoints") or [source["endpoint"]]:
+        raw = get(endpoint)
+        if raw is None:
+            continue
+        page = raw.decode("utf-8", "replace")
+        # Two capture groups per card, and the id is the path's first segment.
+        cards += re.findall(r'href="(/\d{5,}/[^"]*)"\s+title="([^"]{8,})"', page)
+        pictures.update(
+            re.findall(r'href="(/\d{5,}/[^"]*)"[^>]*>\s*<img[^>]+src="([^"]+)"', page)
+        )
+    if not cards:
+        return []
+
+    seen: set[str] = set()
+
+    items = []
+    reads = 0
+    for path, title in cards:
+        ident = path.strip("/").split("/")[0]
+        if not ident.isdigit():
+            continue
+        key = f"{source['id']}-{ident}"
+        if key in seen:
+            continue
+        seen.add(key)
+        headline = text(html_lib.unescape(title))
+        if len(headline) < 12:
+            continue
+        # Al Mal's slugs are Arabic, and `http.client` encodes a request line
+        # as ASCII — an unescaped path raises before the request is made. The
+        # percent-encoded form is what the site itself serves and what the
+        # dedupe key should be, so it is what gets published too.
+        link = source["home"] + urllib.parse.quote(path, safe="/")
+        if link in known:
+            # Already published, already dated. `merge_with_published` keeps
+            # the stored copy, so re-opening this article would buy nothing.
+            continue
+        if reads >= ARTICLE_READS:
+            continue
+        reads += 1
+        published, picture = article_stamp(link)
+        if not published:
+            continue
+        items.append(
+            {
+                "id": key,
+                "source": source["id"],
+                "headline": headline,
+                "link": link,
+                "published": published,
+                "image": picture or pictures.get(path),
+                "_excerpt": "",
+                "_tags": [],
+            }
+        )
+    return items
+
+
+def article_stamp(link: str) -> tuple[str, str | None]:
+    """`datePublished` and the lead picture, from an article's JSON-LD."""
+    raw = get(link, timeout=20)
+    if raw is None:
+        return "", None
+    body = raw.decode("utf-8", "replace")
+    for script in re.findall(
+        r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', body, re.S
+    ):
+        try:
+            parsed = json.loads(script)
+        except json.JSONDecodeError:
+            continue
+        for node in (parsed if isinstance(parsed, list) else [parsed]):
+            if not isinstance(node, dict) or node.get("@type") != "NewsArticle":
+                continue
+            stamp = (node.get("datePublished") or "").strip()
+            # "2026-08-24T15:51:47 +03:00" — a space before the offset, which
+            # `fromisoformat` will not take.
+            normalised = re.sub(r"\s+(?=[+-]\d{2}:\d{2}$)", "", stamp)
+            try:
+                when = datetime.datetime.fromisoformat(normalised)
+            except ValueError:
+                continue
+            if when.tzinfo is None:
+                when = when.replace(tzinfo=datetime.UTC)
+            image = re.search(r'<meta property="og:image" content="([^"]+)"', body)
+            return (
+                when.astimezone(datetime.UTC).isoformat().replace("+00:00", "Z"),
+                image.group(1) if image else None,
+            )
+    return "", None
 
 
 def fetch_newsmap(source: dict) -> list[dict]:
@@ -732,7 +950,30 @@ def advice_leak(headline: str) -> str | None:
     return None
 
 
+def published_links() -> set[str]:
+    """Every article URL already in the published feed.
+
+    Only `fetch_listing` uses this, and only to avoid re-opening an article it
+    has already dated. Keyed on the **link** rather than the item id because
+    clustering keeps one id per story and discards the others: a story of ours
+    merged under another outlet's headline survives in the row's `sources` as
+    a link and nowhere else as an id, so an id-keyed check would re-read it
+    every quarter of an hour forever. A miss costs one request, never
+    correctness.
+    """
+    try:
+        doc = json.loads((OUT / "latest.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, KeyError):
+        return set()
+    links = {item.get("link") for item in doc.get("items", [])}
+    for item in doc.get("items", []):
+        for cited in item.get("sources", []) or []:
+            links.add(cited.get("link"))
+    return {link for link in links if link}
+
+
 def build(refresh_tags: bool = False) -> dict:
+    published_links_seen = published_links()
     tag_map: dict[str, int] = {}
     # The company names the exchange has printed for us, keyed for matching.
     # Grows every run that reads a filing title, at no cost.
@@ -747,12 +988,19 @@ def build(refresh_tags: bool = False) -> dict:
             print(f"── {source['name']}: {source.get('note', 'not reachable')}")
             continue
         print(f"── {source['name']}")
-        if not tag_map:
+        # Tags come from a WordPress taxonomy, so only a WordPress outlet can
+        # answer for them. Asking a sitemap or a Next.js paper would spend the
+        # whole per-company lookup on 404s and cache an empty map.
+        if not tag_map and source["kind"] == "wp":
             tag_map = resolve_tags(source, refresh_tags)
             print(f"   {len(tag_map)} companies mapped to the outlet's own tags")
         fetched = {
             "wp": fetch_wp,
             "newsmap": fetch_newsmap,
+            "rss": fetch_rss,
+            # The only fetcher that needs to know what is already out there,
+            # because it pays a request per story it has not dated yet.
+            "listing": lambda s: fetch_listing(s, published_links_seen),
         }.get(source["kind"], lambda _s: [])(source)
         if not fetched:
             continue
