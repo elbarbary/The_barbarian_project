@@ -64,3 +64,7 @@ data-source/egx-beta/calendar-export/
 # Derived financials extract — regenerable from the filings harvest with
 # scripts/build_financials_archive.py, and bulky.
 data-source/egx-beta/financials/
+
+# Vertex CI service-account key. Mirrored into the GOOGLE_VERTEX_SA_KEY
+# GitHub secret; never committed.
+.gcp-ci-key.json

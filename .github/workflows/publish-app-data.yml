@@ -90,6 +90,11 @@ env:
 
 permissions:
   contents: write
+  # Required for keyless auth to Google: the runner mints a short-lived OIDC
+  # token that Google exchanges for a Vertex access token. No service-account
+  # key exists to leak, which is also why one could not be created — Google now
+  # blocks key creation on new projects by default.
+  id-token: write
 
 jobs:
   build:
@@ -156,6 +161,21 @@ jobs:
       # refused, no scan is written, `build_market_api.py` finds no newer file
       # and leaves yesterday's prices exactly where they are — labelled with
       # yesterday's date, which is the honest failure.
+      # Vertex is where the Cloud credits live, and the only Gemini endpoint
+      # that can spend them. Without this the build still runs: gemini.py falls
+      # back to the API key, that key's separate prepay balance is empty, and
+      # filing typing and translation quietly degrade to rules-only.
+      - name: Authenticate to Google Cloud
+        id: gcp
+        uses: google-github-actions/auth@v2
+        continue-on-error: true
+        with:
+          project_id: project-8bba98ed-6d90-45af-ab8
+          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
+          token_format: access_token
+          audience: https://github.com/elbarbary
+
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -174,9 +194,15 @@ jobs:
         run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
 
       - name: Validate before writing anything
+        env:
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
         run: python3 scripts/build_all.py --check
 
       - name: Rebuild published data
+        env:
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
         run: python3 scripts/build_all.py
 
       - name: Show what changed
