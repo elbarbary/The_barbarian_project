@@ -48,6 +48,20 @@ STEPS = [
     # rather than a loss.
     ("Filed net profit", "build_financials_api.py", False),
     ("Market", "build_market_api.py", False),
+    # Immediately after Market, because Market rebuilds `companies/` from
+    # scratch on every run — `shutil.rmtree` then rewrite — and this is an
+    # enrichment applied on top of it. It was run once by hand in August and
+    # was gone by the next build: 11,336 filed net-profit figures back down to
+    # 4,062, and nobody noticed because the file still looked full. Anything
+    # that edits a published company document has to run here, in the list,
+    # after the step that recreates it.
+    ("EGX filed net profit", "merge_egx_financials.py", False),
+    # What is unusual about a company against its own record — streak breaks,
+    # silence measured against its own filing rhythm, first-in-years filings,
+    # and when results are next due. Pure arithmetic over the committed
+    # harvest, so it is safe in CI, and it reads the financials the step above
+    # just merged.
+    ("Signals", "build_signals.py", True),
     # News and rates run here too, so a full local build produces a complete
     # set — but their real cadence is publish-live-data.yml every 15 minutes.
     # A daily news feed is a bulletin, and an intraday metals price pinned for

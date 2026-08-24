@@ -232,6 +232,14 @@ def merge(dry_run: bool) -> int:
                 if existing:
                     held = existing.get("net_income")
                     if held == row["net_income"]:
+                        # The figure already agrees, but the provenance may not
+                        # be on it yet — this pass also carries the filing date
+                        # and id, and a row written before they existed would
+                        # otherwise never get them.
+                        if existing.get("filed") != row["filed"]:
+                            existing["filed"] = row["filed"]
+                            existing["filing_id"] = f"egx-{row['code']}"
+                            changed = True
                         continue
                     # A gap of this size is not two sources disagreeing, it is
                     # one of them denominated differently — several issuers file
@@ -244,6 +252,13 @@ def merge(dry_run: bool) -> int:
                     existing["net_income_source"] = SOURCE
                     existing["period_start"] = row["period_start"]
                     existing["period_end"] = row["period_end"]
+                    # The day the exchange received it, and the filing itself.
+                    # `build_signals.py` reads both: the lag between period end
+                    # and filing is what makes "results are due" computable,
+                    # and the id is what lets a streak break link to the
+                    # document that broke it rather than assert it.
+                    existing["filed"] = row["filed"]
+                    existing["filing_id"] = f"egx-{row['code']}"
                     overrode += 1
                     changed = True
                 elif label not in index:
@@ -253,6 +268,8 @@ def merge(dry_run: bool) -> int:
                         "net_income_source": SOURCE,
                         "period_start": row["period_start"],
                         "period_end": row["period_end"],
+                        "filed": row["filed"],
+                        "filing_id": f"egx-{row['code']}",
                         # Everything else genuinely unknown for this period. The
                         # exchange files one line, and inventing the rest is the
                         # mistake this repository has already made once.
