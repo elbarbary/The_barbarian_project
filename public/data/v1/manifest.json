@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "data_version": "a8b2106d4262d157",
-  "generated_at": "2026-08-24T06:41:37+00:00",
+  "data_version": "566742174eaef8cd",
+  "generated_at": "2026-08-24T07:03:04+00:00",
   "market_date": "2026-08-24",
   "versions": {
-    "market": 14735398,
-    "market_history": 54870814,
-    "companies": 7481381,
+    "market": 49945049,
+    "market_history": 8583711,
+    "companies": 31866417,
     "opportunities": 66619898,
     "cash_or_trash": 42225606,
-    "news": 30271210,
-    "rates": 48126194,
+    "news": 98289110,
+    "rates": 50208668,
     "disclosures": 5951456,
-    "macro": 58160427,
-    "connections": 63613732
+    "macro": 82601227,
+    "connections": 83527308
   }
 }
