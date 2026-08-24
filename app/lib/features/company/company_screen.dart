@@ -30,6 +30,7 @@ import '../../core/widgets/price_caption.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
+import 'company_brief.dart';
 import 'price_chart.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -519,6 +520,14 @@ class _Overview extends ConsumerWidget {
         // after tapping a name, and it used to be two taps away behind the
         // Price tab. The full chart still lives there; this is the glance.
         _RecentMoves(history: company.priceHistory),
+        // What the filing record says this company has done and announced.
+        //
+        // It sits high because it is the only block on the page that answers
+        // "what *is* this company" — everything else is a number about it. It
+        // renders nothing at all for a company the briefs have not reached, so
+        // a page is never padded with an empty heading.
+        const SizedBox(height: 20),
+        BCompanyBrief(ticker: ticker, parentTab: parentTab),
         // The exit question, placed by severity rather than by habit.
         //
         // A share that stops trading gets this above everything, because
@@ -1736,7 +1745,18 @@ class _FiledDocuments extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BSectionLabel(l.finFiledDocuments),
+          BSectionLabel(
+            l.finFiledDocuments,
+            // "50 of 704" rather than a bare list, so the page never implies
+            // that fifty is all this company ever filed. The rest is a
+            // separate document, fetched only if a reader asks for it.
+            trailing: (docs?.total ?? 0) > items.length
+                ? Text(
+                    l.filingsAllOf(items.length, docs!.total),
+                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+                  )
+                : null,
+          ),
           const SizedBox(height: 10),
           for (final (i, item) in items.indexed) ...[
             if (i > 0) ...[

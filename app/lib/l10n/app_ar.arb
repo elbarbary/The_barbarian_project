@@ -693,5 +693,17 @@
   "calFamilyRights": "حقوق",
   "calFamilyAssembly": "جمعية",
   "calFamilyTrading": "تداول",
-  "calFamilyOther": "أخرى"
+  "calFamilyOther": "أخرى",
+  "briefHistoryLabel": "ما قامت به هذه الشركة",
+  "briefPlansLabel": "ما أعلنت أنها ستفعله",
+  "briefRecordLabel": "السجل، بالأرقام",
+  "briefSourceNote": "مقروء من إفصاحات الشركة نفسها. كل خطة مرتبطة بالإفصاح الذي أعلنها.",
+  "briefNoVerdict": "لا رأي لنا في ما إذا كان أي من هذا جيدًا — فتلك نصيحة، ولسنا مرخّصين بتقديمها.",
+  "briefOpenFiling": "افتح الإفصاح",
+  "briefRecFilings": "{count} إفصاح مودع",
+  "briefRecSince": "منذ {date}",
+  "briefRecSuspensions": "{count, plural, =0{لم يتوقف تداولها قط} =1{توقف تداولها مرة} few{توقف تداولها {count} مرات} other{توقف تداولها {count} مرة}}",
+  "briefRecCapital": "{count, plural, =0{لا زيادات في رأس المال} =1{زيادة واحدة في رأس المال} few{{count} زيادات في رأس المال} other{{count} زيادة في رأس المال}}",
+  "briefRecLosses": "{count, plural, =0{لا فترة خاسرة} =1{فترة خاسرة واحدة} few{{count} فترات خاسرة} other{{count} فترة خاسرة}} من {total} فترة",
+  "filingsAllOf": "عرض {shown} من {total}"
 }

@@ -156,6 +156,7 @@ Map<String, dynamic> _$ArchivedMonthToJson(_ArchivedMonth instance) =>
 _CompanyDocuments _$CompanyDocumentsFromJson(Map<String, dynamic> json) =>
     _CompanyDocuments(
       ticker: json['ticker'] as String? ?? '',
+      total: (json['total'] as num?)?.toInt() ?? 0,
       items:
           (json['items'] as List<dynamic>?)
               ?.map((e) => FiledDocument.fromJson(e as Map<String, dynamic>))
@@ -164,7 +165,11 @@ _CompanyDocuments _$CompanyDocumentsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$CompanyDocumentsToJson(_CompanyDocuments instance) =>
-    <String, dynamic>{'ticker': instance.ticker, 'items': instance.items};
+    <String, dynamic>{
+      'ticker': instance.ticker,
+      'total': instance.total,
+      'items': instance.items,
+    };
 
 _FiledDocument _$FiledDocumentFromJson(Map<String, dynamic> json) =>
     _FiledDocument(

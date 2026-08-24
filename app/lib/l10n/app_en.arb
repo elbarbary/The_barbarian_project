@@ -1982,5 +1982,71 @@
   "calFamilyTrading": "Trading",
   "@calFamilyTrading": {},
   "calFamilyOther": "Other",
-  "@calFamilyOther": {}
+  "@calFamilyOther": {},
+  "briefHistoryLabel": "What this company has done",
+  "@briefHistoryLabel": {},
+  "briefPlansLabel": "What it has said it will do",
+  "@briefPlansLabel": {},
+  "briefRecordLabel": "The record, in counts",
+  "@briefRecordLabel": {},
+  "briefSourceNote": "Read from this company's own filings. Every plan links to the filing that announced it.",
+  "@briefSourceNote": {},
+  "briefNoVerdict": "No view on whether any of this is good — that would be advice, and we are not licensed to give it.",
+  "@briefNoVerdict": {},
+  "briefOpenFiling": "Open the filing",
+  "@briefOpenFiling": {},
+  "briefRecFilings": "{count} filings lodged",
+  "@briefRecFilings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecSince": "since {date}",
+  "@briefRecSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "briefRecSuspensions": "{count, plural, =0{never suspended from trading} =1{suspended from trading once} other{suspended from trading {count} times}}",
+  "@briefRecSuspensions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecCapital": "{count, plural, =0{no capital increases} =1{one capital increase} other{{count} capital increases}}",
+  "@briefRecCapital": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecLosses": "{count, plural, =0{no loss-making period reported} =1{one loss-making period} other{{count} loss-making periods}} of {total} reported",
+  "@briefRecLosses": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "filingsAllOf": "Showing {shown} of {total}",
+  "@filingsAllOf": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

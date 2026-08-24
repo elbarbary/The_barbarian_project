@@ -211,6 +211,12 @@ abstract class ArchivedMonth with _$ArchivedMonth {
 abstract class CompanyDocuments with _$CompanyDocuments {
   const factory CompanyDocuments({
     @Default('') String ticker,
+
+    /// How many filings this company has lodged in total, which is very often
+    /// more than [items] holds: the page document carries the newest fifty so
+    /// a phone does not download seven hundred to show a list. The complete
+    /// record is a separate document, fetched only when a reader asks.
+    @Default(0) int total,
     @Default(<FiledDocument>[]) List<FiledDocument> items,
   }) = _CompanyDocuments;
 

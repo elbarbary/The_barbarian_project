@@ -6,10 +6,18 @@ composing a sentence about a named issuer is the app speaking, and this
 publisher is not licensed to speak. Adding a capability here should require an
 argument, not an import.
 
-Two are allowed, and the argument for each is the same shape: neither invents a
-claim.
+Three are allowed, and the argument for each is the same shape: none of them
+invents a claim.
 
   * `choose` picks a label from a closed list, which is taxonomy.
+  * `extract` reads a set of documents and reports what they say, with a
+    citation for every statement. The caller supplies the documents and their
+    ids, checks that every id in the answer was one it supplied, and drops
+    whatever cannot be traced back. It is the only capability here that emits a
+    sentence, and it survives review because the sentence is the *issuer's*
+    claim and the caller can prove which filing it came from — see
+    `build_company_briefs.py`, which also refuses the whole answer if any
+    sentence reads as an instruction.
   * `translate` renders somebody else's sentence in another language. It is
     applied only to headlines and filing titles — words the exchange or an
     outlet wrote — and never to this app's own analysis. The original is always
@@ -350,6 +358,40 @@ def translate(texts: list[str], *, model: str = TRANSLATE_MODEL) -> dict[str, st
         if 0 <= index < len(texts) and english:
             out[texts[index]] = english
     return out
+
+
+def generate(prompt: str, *, model: str = MODEL) -> tuple[str, dict]:
+    """Free text from a prompt, with the token usage that produced it.
+
+    Deliberately not called `summarise` or `explain`. The one caller reads
+    filings and reports what the issuer said, with an id per statement it must
+    then verify — a capability with a leash, not a licence to compose. Anything
+    that wants to speak in this app's own voice about a named company still has
+    to argue for itself first.
+
+    The usage counts come back because the caller runs against a hard dollar
+    budget, and a budget estimated from string lengths is not a budget.
+    """
+    body = json.dumps({
+        "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "temperature": 0,
+            "maxOutputTokens": 4000,
+            **THINKING_OFF,
+        },
+    }).encode()
+    payload = _post(model, body, timeout=120)
+    candidates = payload.get("candidates") or []
+    text = ""
+    if candidates:
+        parts = candidates[0].get("content", {}).get("parts", [])
+        text = "".join(p.get("text", "") for p in parts).strip()
+    meta = payload.get("usageMetadata") or {}
+    usage = {
+        "prompt": meta.get("promptTokenCount", 0),
+        "candidates": meta.get("candidatesTokenCount", 0),
+    }
+    return text, usage
 
 
 def available() -> bool:

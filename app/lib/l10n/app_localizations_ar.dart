@@ -2431,4 +2431,78 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get calFamilyOther => 'أخرى';
+
+  @override
+  String get briefHistoryLabel => 'ما قامت به هذه الشركة';
+
+  @override
+  String get briefPlansLabel => 'ما أعلنت أنها ستفعله';
+
+  @override
+  String get briefRecordLabel => 'السجل، بالأرقام';
+
+  @override
+  String get briefSourceNote =>
+      'مقروء من إفصاحات الشركة نفسها. كل خطة مرتبطة بالإفصاح الذي أعلنها.';
+
+  @override
+  String get briefNoVerdict =>
+      'لا رأي لنا في ما إذا كان أي من هذا جيدًا — فتلك نصيحة، ولسنا مرخّصين بتقديمها.';
+
+  @override
+  String get briefOpenFiling => 'افتح الإفصاح';
+
+  @override
+  String briefRecFilings(int count) {
+    return '$count إفصاح مودع';
+  }
+
+  @override
+  String briefRecSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String briefRecSuspensions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'توقف تداولها $count مرة',
+      few: 'توقف تداولها $count مرات',
+      one: 'توقف تداولها مرة',
+      zero: 'لم يتوقف تداولها قط',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String briefRecCapital(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count زيادة في رأس المال',
+      few: '$count زيادات في رأس المال',
+      one: 'زيادة واحدة في رأس المال',
+      zero: 'لا زيادات في رأس المال',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String briefRecLosses(int count, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count فترة خاسرة',
+      few: '$count فترات خاسرة',
+      one: 'فترة خاسرة واحدة',
+      zero: 'لا فترة خاسرة',
+    );
+    return '$_temp0 من $total فترة';
+  }
+
+  @override
+  String filingsAllOf(int shown, int total) {
+    return 'عرض $shown من $total';
+  }
 }

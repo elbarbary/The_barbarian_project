@@ -2440,4 +2440,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get calFamilyOther => 'Other';
+
+  @override
+  String get briefHistoryLabel => 'What this company has done';
+
+  @override
+  String get briefPlansLabel => 'What it has said it will do';
+
+  @override
+  String get briefRecordLabel => 'The record, in counts';
+
+  @override
+  String get briefSourceNote =>
+      'Read from this company\'s own filings. Every plan links to the filing that announced it.';
+
+  @override
+  String get briefNoVerdict =>
+      'No view on whether any of this is good — that would be advice, and we are not licensed to give it.';
+
+  @override
+  String get briefOpenFiling => 'Open the filing';
+
+  @override
+  String briefRecFilings(int count) {
+    return '$count filings lodged';
+  }
+
+  @override
+  String briefRecSince(String date) {
+    return 'since $date';
+  }
+
+  @override
+  String briefRecSuspensions(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'suspended from trading $count times',
+      one: 'suspended from trading once',
+      zero: 'never suspended from trading',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String briefRecCapital(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count capital increases',
+      one: 'one capital increase',
+      zero: 'no capital increases',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String briefRecLosses(int count, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count loss-making periods',
+      one: 'one loss-making period',
+      zero: 'no loss-making period reported',
+    );
+    return '$_temp0 of $total reported';
+  }
+
+  @override
+  String filingsAllOf(int shown, int total) {
+    return 'Showing $shown of $total';
+  }
 }

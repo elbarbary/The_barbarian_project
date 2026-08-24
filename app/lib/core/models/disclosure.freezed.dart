@@ -2079,7 +2079,11 @@ as int,
 /// @nodoc
 mixin _$CompanyDocuments {
 
- String get ticker; List<FiledDocument> get items;
+ String get ticker;/// How many filings this company has lodged in total, which is very often
+/// more than [items] holds: the page document carries the newest fifty so
+/// a phone does not download seven hundred to show a list. The complete
+/// record is a separate document, fetched only when a reader asks.
+ int get total; List<FiledDocument> get items;
 /// Create a copy of CompanyDocuments
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2092,16 +2096,16 @@ $CompanyDocumentsCopyWith<CompanyDocuments> get copyWith => _$CompanyDocumentsCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyDocuments&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other.items, items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyDocuments&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other.items, items));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(items));
+int get hashCode => Object.hash(runtimeType,ticker,total,const DeepCollectionEquality().hash(items));
 
 @override
 String toString() {
-  return 'CompanyDocuments(ticker: $ticker, items: $items)';
+  return 'CompanyDocuments(ticker: $ticker, total: $total, items: $items)';
 }
 
 
@@ -2112,7 +2116,7 @@ abstract mixin class $CompanyDocumentsCopyWith<$Res>  {
   factory $CompanyDocumentsCopyWith(CompanyDocuments value, $Res Function(CompanyDocuments) _then) = _$CompanyDocumentsCopyWithImpl;
 @useResult
 $Res call({
- String ticker, List<FiledDocument> items
+ String ticker, int total, List<FiledDocument> items
 });
 
 
@@ -2129,10 +2133,11 @@ class _$CompanyDocumentsCopyWithImpl<$Res>
 
 /// Create a copy of CompanyDocuments
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? items = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? total = null,Object? items = null,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
-as String,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as String,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as int,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
 as List<FiledDocument>,
   ));
 }
@@ -2218,10 +2223,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  List<FiledDocument> items)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  int total,  List<FiledDocument> items)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CompanyDocuments() when $default != null:
-return $default(_that.ticker,_that.items);case _:
+return $default(_that.ticker,_that.total,_that.items);case _:
   return orElse();
 
 }
@@ -2239,10 +2244,10 @@ return $default(_that.ticker,_that.items);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  List<FiledDocument> items)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  int total,  List<FiledDocument> items)  $default,) {final _that = this;
 switch (_that) {
 case _CompanyDocuments():
-return $default(_that.ticker,_that.items);case _:
+return $default(_that.ticker,_that.total,_that.items);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2259,10 +2264,10 @@ return $default(_that.ticker,_that.items);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  List<FiledDocument> items)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  int total,  List<FiledDocument> items)?  $default,) {final _that = this;
 switch (_that) {
 case _CompanyDocuments() when $default != null:
-return $default(_that.ticker,_that.items);case _:
+return $default(_that.ticker,_that.total,_that.items);case _:
   return null;
 
 }
@@ -2274,10 +2279,15 @@ return $default(_that.ticker,_that.items);case _:
 @JsonSerializable()
 
 class _CompanyDocuments extends CompanyDocuments {
-  const _CompanyDocuments({this.ticker = '', final  List<FiledDocument> items = const <FiledDocument>[]}): _items = items,super._();
+  const _CompanyDocuments({this.ticker = '', this.total = 0, final  List<FiledDocument> items = const <FiledDocument>[]}): _items = items,super._();
   factory _CompanyDocuments.fromJson(Map<String, dynamic> json) => _$CompanyDocumentsFromJson(json);
 
 @override@JsonKey() final  String ticker;
+/// How many filings this company has lodged in total, which is very often
+/// more than [items] holds: the page document carries the newest fifty so
+/// a phone does not download seven hundred to show a list. The complete
+/// record is a separate document, fetched only when a reader asks.
+@override@JsonKey() final  int total;
  final  List<FiledDocument> _items;
 @override@JsonKey() List<FiledDocument> get items {
   if (_items is EqualUnmodifiableListView) return _items;
@@ -2299,16 +2309,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyDocuments&&(identical(other.ticker, ticker) || other.ticker == ticker)&&const DeepCollectionEquality().equals(other._items, _items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyDocuments&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.total, total) || other.total == total)&&const DeepCollectionEquality().equals(other._items, _items));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,const DeepCollectionEquality().hash(_items));
+int get hashCode => Object.hash(runtimeType,ticker,total,const DeepCollectionEquality().hash(_items));
 
 @override
 String toString() {
-  return 'CompanyDocuments(ticker: $ticker, items: $items)';
+  return 'CompanyDocuments(ticker: $ticker, total: $total, items: $items)';
 }
 
 
@@ -2319,7 +2329,7 @@ abstract mixin class _$CompanyDocumentsCopyWith<$Res> implements $CompanyDocumen
   factory _$CompanyDocumentsCopyWith(_CompanyDocuments value, $Res Function(_CompanyDocuments) _then) = __$CompanyDocumentsCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, List<FiledDocument> items
+ String ticker, int total, List<FiledDocument> items
 });
 
 
@@ -2336,10 +2346,11 @@ class __$CompanyDocumentsCopyWithImpl<$Res>
 
 /// Create a copy of CompanyDocuments
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? items = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? total = null,Object? items = null,}) {
   return _then(_CompanyDocuments(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
-as String,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as String,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as int,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
 as List<FiledDocument>,
   ));
 }

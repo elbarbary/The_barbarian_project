@@ -13,6 +13,7 @@ import 'data/research_repository.dart';
 import 'data/sourced.dart';
 import 'data/user_repository.dart';
 import 'models/cash_or_trash.dart';
+import 'models/brief.dart';
 import 'models/calendar.dart';
 import 'models/connection.dart';
 import 'models/disclosure.dart';
@@ -132,6 +133,14 @@ final disclosureMonthProvider =
 final connectionsProvider = StreamProvider<Sourced<ConnectionDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getConnections(),
 );
+
+/// One company's brief. A family, because it is fetched per company and only
+/// when that company's page is open.
+final companyBriefProvider =
+    StreamProvider.family<Sourced<CompanyBrief>, String>(
+      (ref, ticker) =>
+          ref.watch(researchRepositoryProvider).getCompanyBrief(ticker),
+    );
 
 final calendarProvider = StreamProvider<Sourced<CalendarDoc>>(
   (ref) => ref.watch(researchRepositoryProvider).getCalendar(),

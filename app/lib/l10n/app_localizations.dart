@@ -4099,6 +4099,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other'**
   String get calFamilyOther;
+
+  /// No description provided for @briefHistoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What this company has done'**
+  String get briefHistoryLabel;
+
+  /// No description provided for @briefPlansLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What it has said it will do'**
+  String get briefPlansLabel;
+
+  /// No description provided for @briefRecordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The record, in counts'**
+  String get briefRecordLabel;
+
+  /// No description provided for @briefSourceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Read from this company\'s own filings. Every plan links to the filing that announced it.'**
+  String get briefSourceNote;
+
+  /// No description provided for @briefNoVerdict.
+  ///
+  /// In en, this message translates to:
+  /// **'No view on whether any of this is good — that would be advice, and we are not licensed to give it.'**
+  String get briefNoVerdict;
+
+  /// No description provided for @briefOpenFiling.
+  ///
+  /// In en, this message translates to:
+  /// **'Open the filing'**
+  String get briefOpenFiling;
+
+  /// No description provided for @briefRecFilings.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} filings lodged'**
+  String briefRecFilings(int count);
+
+  /// No description provided for @briefRecSince.
+  ///
+  /// In en, this message translates to:
+  /// **'since {date}'**
+  String briefRecSince(String date);
+
+  /// No description provided for @briefRecSuspensions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{never suspended from trading} =1{suspended from trading once} other{suspended from trading {count} times}}'**
+  String briefRecSuspensions(int count);
+
+  /// No description provided for @briefRecCapital.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no capital increases} =1{one capital increase} other{{count} capital increases}}'**
+  String briefRecCapital(int count);
+
+  /// No description provided for @briefRecLosses.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{no loss-making period reported} =1{one loss-making period} other{{count} loss-making periods}} of {total} reported'**
+  String briefRecLosses(int count, int total);
+
+  /// No description provided for @filingsAllOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing {shown} of {total}'**
+  String filingsAllOf(int shown, int total);
 }
 
 class _AppLocalizationsDelegate
