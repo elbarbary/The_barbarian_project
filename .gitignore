@@ -60,3 +60,7 @@ __pycache__/
 # Derived calendar exports — regenerable from the filings harvest with
 # scripts/export_calendar.py, and bulky. The source of truth is filings/.
 data-source/egx-beta/calendar-export/
+
+# Derived financials extract — regenerable from the filings harvest with
+# scripts/build_financials_archive.py, and bulky.
+data-source/egx-beta/financials/
