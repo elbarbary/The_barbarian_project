@@ -79,6 +79,10 @@ STEPS = [
     # (data-source/egx-beta/) simply produces an empty calendar rather than
     # failing the build.
     ("Calendar", "build_calendar.py", False),
+    # Every filing a company ever lodged, on its own page. Reads the committed
+    # harvest off disk — no network — and is best-effort so a checkout without
+    # `data-source/egx-beta/` simply leaves the published documents alone.
+    ("Company filings", "build_company_filings.py", False),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and
     # both are resumable: whatever the host refuses today is simply first in
@@ -108,7 +112,22 @@ STEPS = [
 # a runner.
 BEST_EFFORT = {
     "Calendar",
+    "Company filings",
     "Disclosures",
+    # Egyptian news outlets, over a browser, and they time out. Today a
+    # `Page.goto: Timeout 120000ms` inside News failed the whole build twice,
+    # which meant the price-history recovery and the filed financials did not
+    # publish — because one outlet was slow.
+    #
+    # The same script is already best-effort where its cadence actually
+    # matters: `publish-live-data.yml` runs `build_news_api.py || true` every
+    # fifteen minutes, so the feed a reader sees is never more than a quarter
+    # of an hour old regardless of what this daily build does. Fatal here and
+    # non-fatal there, for the same script against the same hosts, was an
+    # inconsistency rather than a decision — and the expensive half was here.
+    #
+    # It already leaves the previously published document in place on failure.
+    "News",
     "Filed net profit",
     # Three third parties — IMF PortWatch, investing.com, the World Bank — none
     # of which owes this project an answer. A refusal leaves the last good
