@@ -23,21 +23,3 @@ Map<String, dynamic> _$ManifestToJson(_Manifest instance) => <String, dynamic>{
   'market_date': instance.marketDate,
   'versions': instance.versions,
 };
-
-_ManifestVersions _$ManifestVersionsFromJson(Map<String, dynamic> json) =>
-    _ManifestVersions(
-      market: (json['market'] as num?)?.toInt() ?? 0,
-      companies: (json['companies'] as num?)?.toInt() ?? 0,
-      opportunities: (json['opportunities'] as num?)?.toInt() ?? 0,
-      cashOrTrash: (json['cash_or_trash'] as num?)?.toInt() ?? 0,
-      macro: (json['macro'] as num?)?.toInt() ?? 0,
-    );
-
-Map<String, dynamic> _$ManifestVersionsToJson(_ManifestVersions instance) =>
-    <String, dynamic>{
-      'market': instance.market,
-      'companies': instance.companies,
-      'opportunities': instance.opportunities,
-      'cash_or_trash': instance.cashOrTrash,
-      'macro': instance.macro,
-    };

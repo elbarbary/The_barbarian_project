@@ -97,7 +97,14 @@ class StaticApi {
   Future<int> _expectedVersion(String? resource) async {
     final m = await manifest();
     if (m == null) return 0;
-    if (resource != null) return m.versions.versionOf(resource);
+    // Only a counter the manifest actually published can guard a document.
+    // A resource with no counter falls back to the publication fingerprint —
+    // the same guard an individual company file gets — because the
+    // alternative is comparing 0 against 0 and concluding the cache is
+    // current forever.
+    if (resource != null && m.versions.has(resource)) {
+      return m.versions.versionOf(resource);
+    }
     return m.dataVersion.hashCode;
   }
 

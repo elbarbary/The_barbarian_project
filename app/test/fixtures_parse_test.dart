@@ -46,6 +46,31 @@ void main() {
     test('an unknown resource resolves to 0 rather than throwing', () {
       final manifest = Manifest.fromJson(_read('manifest.json'));
       expect(manifest.versions.versionOf('not_a_resource'), 0);
+      expect(manifest.versions.has('not_a_resource'), isFalse);
+    });
+
+    test('every counter the pipeline publishes is readable', () {
+      // The bug this replaces: the model named five resources and returned 0
+      // for the other seven, `StaticApi` compared that 0 against the 0 the
+      // cache was written with, and news, disclosures, rates, connections,
+      // calendar, market_history and signals were fetched once per device and
+      // never again. The class reads whatever the manifest carries now, so a
+      // counter added to the pipeline needs no Dart change — and this test
+      // fails if one is ever dropped instead.
+      final manifest = Manifest.fromJson(_read('manifest.json'));
+
+      for (final resource in manifest.versions.counters.keys) {
+        expect(manifest.versions.has(resource), isTrue);
+        expect(
+          manifest.versions.versionOf(resource),
+          greaterThan(0),
+          reason: '$resource has no version counter',
+        );
+      }
+      expect(
+        manifest.versions.counters.keys,
+        containsAll(ManifestVersions.resources),
+      );
     });
   });
 
