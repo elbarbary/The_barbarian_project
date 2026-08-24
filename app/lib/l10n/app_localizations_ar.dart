@@ -2654,4 +2654,7 @@ class AppLocalizationsAr extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get finFiguresPerRow => 'كل بند بالوحدة المكتوبة بجواره، كما أُودعت.';
 }

@@ -1620,13 +1620,24 @@ class _StatementTableState extends State<_StatementTable> {
 
     if (periods.isEmpty || lines.isEmpty) return const SizedBox.shrink();
 
-    // Real published accounts state the unit once at the top and hold it. A
-    // grid where each cell picked its own scale was unreadable: the eye cannot
-    // compare 4.20 against 812 when one is billions and the other millions.
-    final scale = egpScaleFor([
-      for (final p in periods)
-        for (final line in lines) line.$2(p),
-    ]);
+    // One scale per **row**, not one per table.
+    //
+    // A single table-wide scale is what real published accounts do, and it is
+    // right when every line is the same order of magnitude. These lines are
+    // not: total assets sit three orders above net profit for most issuers, so
+    // the largest cell dragged the whole grid to billions and AJWA's profit —
+    // 2.80 million as filed — printed as `0.00`. The headline number on the
+    // financials tab read zero.
+    //
+    // The reason for holding one scale still stands, but it is about the axis
+    // a reader actually compares along, which is the row: FY 2024 against
+    // FY 2025 for the same line. Nobody compares net profit against total
+    // liabilities. So each row picks its own scale and states it beside its
+    // own label, and every period within that row is in it.
+    final scales = <int, EgpScale>{
+      for (var i = 0; i < lines.length; i++)
+        i: egpScaleFor([for (final p in periods) lines[i].$2(p)]),
+    };
 
     return BPaperCard(
       radius: BarbarianRadius.xl,
@@ -1647,7 +1658,7 @@ class _StatementTableState extends State<_StatementTable> {
           ],
           const SizedBox(height: 10),
           Text(
-            l.finFiguresUnit(egpUnit(scale, l)),
+            l.finFiguresPerRow,
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
           const SizedBox(height: 8),
@@ -1655,24 +1666,41 @@ class _StatementTableState extends State<_StatementTable> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: 116,
+                // Wider than it was, because each label now carries its own
+                // unit under it and the line above has one line instead of
+                // two: "التدفق النقدى التشغيلي" needs the room.
+                width: 142,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 22),
-                    for (final line in lines)
+                    for (var i = 0; i < lines.length; i++)
                       SizedBox(
                         height: 30,
                         child: Align(
                           alignment: AlignmentDirectional.centerStart,
-                          child: Text(
-                            line.$1,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: BarbarianType.bodyS.copyWith(
-                              color: c.textSecondary,
-                              height: 1.2,
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                lines[i].$1,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.bodyS.copyWith(
+                                  color: c.textSecondary,
+                                  height: 1.15,
+                                ),
+                              ),
+                              Text(
+                                egpUnit(scales[i]!, l),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: BarbarianType.labelNano.copyWith(
+                                  color: c.textFaint,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -1699,15 +1727,15 @@ class _StatementTableState extends State<_StatementTable> {
                                   ),
                                 ),
                               ),
-                              for (final line in lines)
+                              for (var i = 0; i < lines.length; i++)
                                 SizedBox(
                                   height: 30,
                                   child: Align(
                                     alignment: AlignmentDirectional.centerEnd,
                                     child: BNumText(
-                                      egpIn(line.$2(p), scale),
+                                      egpIn(lines[i].$2(p), scales[i]!),
                                       style: BarbarianType.bodyM.copyWith(
-                                        color: line.$2(p) == null
+                                        color: lines[i].$2(p) == null
                                             ? c.textFaint
                                             : c.textPrimary,
                                       ),

@@ -4345,6 +4345,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 more on the companies\' own pages} other{{count} more on the companies\' own pages}}'**
   String firstsMore(int count);
+
+  /// No description provided for @finFiguresPerRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Each line is in the unit shown beside it, as filed.'**
+  String get finFiguresPerRow;
 }
 
 class _AppLocalizationsDelegate

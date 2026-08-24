@@ -2214,5 +2214,7 @@
         "type": "int"
       }
     }
-  }
+  },
+  "finFiguresPerRow": "Each line is in the unit shown beside it, as filed.",
+  "@finFiguresPerRow": {}
 }

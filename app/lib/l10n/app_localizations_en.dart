@@ -2657,4 +2657,8 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get finFiguresPerRow =>
+      'Each line is in the unit shown beside it, as filed.';
 }
