@@ -23,9 +23,25 @@ gitignored. Nothing here reads a key from anywhere else, and nothing here runs
 on a device — every call happens at build time, so its output lands in a git
 commit that a person can review before it reaches a phone.
 
-The key is a Vertex Express key restricted to the **Gemini API**; an
-account-bound key can be allowed on that or on Agent Platform but not both,
-and the Agent Platform path returns BILLING_DISABLED regardless of billing.
+TWO BILLING PATHS, AND ONLY ONE OF THEM CAN SPEND THE FREE CREDITS
+------------------------------------------------------------------
+These are different products that both answer to the name "Gemini":
+
+  * **AI Studio** (`generativelanguage.googleapis.com`) takes an API key and
+    spends *prepay credits you buy inside AI Studio*.
+  * **Vertex AI** (`aiplatform.googleapis.com`) takes an OAuth token and spends
+    the *Google Cloud billing account* — which is where a $300 free-trial grant
+    actually sits.
+
+The free credits cannot be spent through AI Studio. That is the whole reason
+every model on this project answered "prepayment credits are depleted" while
+$300 sat unused: the pipeline was asking the one endpoint the money could not
+reach. So Vertex is tried first and the API key is the fallback.
+
+Location matters as much as the model: `us-central1` serves none of the current
+Gemini flash models to this project, and `global` serves all of them. A wrong
+region reports itself as "Publisher model ... was not found", which reads like
+a bad model name and is not one.
 """
 
 from __future__ import annotations
@@ -34,17 +50,39 @@ import json
 import os
 import pathlib
 import re
+import sys
+import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent"
 
+# Vertex, the path the Cloud billing account can actually pay for.
+VERTEX_ENDPOINT = (
+    "https://aiplatform.googleapis.com/v1beta1/projects/{project}"
+    "/locations/global/publishers/google/models/{model}:generateContent"
+)
+VERTEX_PROJECT_ENV = "GOOGLE_CLOUD_PROJECT"
+# A new project's per-minute quota is easily tripped by a tight loop, and the
+# answer to that is to wait rather than to give up on the endpoint that is
+# actually funded.
+VERTEX_ATTEMPTS = 3
+VERTEX_BACKOFF = 4
+OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token"
+
 # Benchmarked on real Arabic disclosure headlines: 5/5 correct, 1.1s, one
 # output token — against 3.0s and 511 tokens with thinking left on, for the
-# identical answer. Output is the expensive side of the meter, so this single
-# setting is the difference between pennies and tens of dollars.
-MODEL = "gemini-3.5-flash"
+# identical answer. Output is the expensive side of the meter, so `THINKING_OFF`
+# below is the difference between pennies and tens of dollars.
+#
+# 3.7 rather than 3.5 because it is **cheaper on both sides of the meter**, not
+# merely newer: $0.75/$3.75 per million in/out against 3.5's $1.50/$9.00. The
+# 3.7 figure is introductory and rises to $1.50/$7.50 on 1 Jan 2027 — still at
+# parity on input and cheaper on output, which is the side this workload
+# actually spends.
+MODEL = "gemini-3.7-flash"
 
 # Translation gets the cheapest model in the generation, deliberately. Turning
 # a headline into English is mechanical work — no reasoning, no judgement, a
@@ -52,15 +90,146 @@ MODEL = "gemini-3.5-flash"
 # pipeline does: every headline and filing title, every day. Paying the
 # reasoning-model rate for it is the one place the meter would actually notice.
 #
-# It buys availability nowhere. Every model on this account, lite included,
-# refuses with "prepayment credits are depleted" until credits are bought; the
-# cheap model only makes the bill smaller once they are.
+# Kept on `-lite` rather than moved to 3.7: there is no 3.7 lite, and this is
+# the highest-volume call in the pipeline. Paying a reasoning model's rate to
+# render a headline in English is the one place the meter would notice.
 TRANSLATE_MODEL = "gemini-3.5-flash-lite"
 THINKING_OFF = {"thinkingConfig": {"thinkingBudget": 0}}
 
 
 class GeminiUnavailable(RuntimeError):
     """No key, or the API refused. Callers fall back to their own rules."""
+
+
+def _vertex_project() -> str | None:
+    """The Cloud project to bill, from the environment or from ADC itself."""
+    if env := os.environ.get(VERTEX_PROJECT_ENV):
+        return env.strip()
+    adc = _adc_document()
+    return (adc or {}).get("quota_project_id")
+
+
+def _adc_document() -> dict | None:
+    """Application Default Credentials, if this machine has any.
+
+    Read as a file rather than shelled out to `gcloud`, because the build runs
+    on machines that have the credentials and not the CLI.
+    """
+    explicit = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    candidates = [pathlib.Path(explicit)] if explicit else []
+    candidates.append(
+        pathlib.Path.home() / ".config" / "gcloud"
+        / "application_default_credentials.json"
+    )
+    for path in candidates:
+        try:
+            if path.exists():
+                return json.loads(path.read_text())
+        except (OSError, ValueError):
+            continue
+    return None
+
+
+def _access_token() -> str | None:
+    """An OAuth token for Vertex, or None if this machine cannot mint one.
+
+    Three sources, cheapest first. A pre-minted token in the environment is how
+    CI passes one in without a key file; otherwise a stored refresh token is
+    exchanged directly against Google's token endpoint, which needs no SDK and
+    no `gcloud` on the box.
+    """
+    if token := os.environ.get("GOOGLE_VERTEX_ACCESS_TOKEN"):
+        return token.strip()
+
+    adc = _adc_document()
+    if not adc or adc.get("type") != "authorized_user":
+        return None
+    form = urllib.parse.urlencode({
+        "client_id": adc.get("client_id", ""),
+        "client_secret": adc.get("client_secret", ""),
+        "refresh_token": adc.get("refresh_token", ""),
+        "grant_type": "refresh_token",
+    }).encode()
+    request = urllib.request.Request(
+        OAUTH_TOKEN_URL,
+        data=form,
+        headers={"content-type": "application/x-www-form-urlencoded"},
+    )
+    try:
+        payload = json.loads(urllib.request.urlopen(request, timeout=30).read())
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError):
+        return None
+    return payload.get("access_token")
+
+
+def _note_vertex(code: int | None, detail: str) -> None:
+    """Say why Vertex was abandoned, once per reason.
+
+    The fallback used to swallow this. That is how a rate limit and an expired
+    token and a disabled API all present as the same thing — "Gemini is down"
+    — which is exactly the confusion that let a depleted API key look like a
+    broken pipeline for weeks.
+    """
+    reason = f"{code or 'transport'}: {detail.strip()[:150]}"
+    if reason in _VERTEX_NOTED:
+        return
+    _VERTEX_NOTED.add(reason)
+    print(f"   vertex unavailable ({reason}) — falling back to the API key",
+          file=sys.stderr)
+
+
+_VERTEX_NOTED: set[str] = set()
+
+
+def _post(model: str, body: bytes, *, timeout: int) -> dict:
+    """One generateContent call, over whichever transport is paid for.
+
+    Vertex first, because that is the endpoint the Cloud billing account — and
+    therefore any free-credit grant — can settle. The API key is the fallback,
+    and it is genuinely a fallback rather than a preference: it bills a
+    separate prepay balance that a Cloud grant never touches.
+    """
+    token = _access_token()
+    project = _vertex_project()
+    if token and project:
+        for attempt in range(VERTEX_ATTEMPTS):
+            request = urllib.request.Request(
+                VERTEX_ENDPOINT.format(project=project, model=model),
+                data=body,
+                headers={
+                    "authorization": f"Bearer {token}",
+                    "content-type": "application/json",
+                    # ADC without a quota project is refused outright by Vertex.
+                    "x-goog-user-project": project,
+                },
+            )
+            try:
+                return json.loads(
+                    urllib.request.urlopen(request, timeout=timeout).read()
+                )
+            except urllib.error.HTTPError as error:
+                # 429 here is a per-minute quota on the project, not an empty
+                # wallet — three calls fired back to back will trip it. Waiting
+                # is the fix; falling through to the API key would swap a
+                # transient limit for a permanently dead endpoint.
+                if error.code == 429 and attempt < VERTEX_ATTEMPTS - 1:
+                    time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                    continue
+                _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
+                break
+            except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+                _note_vertex(None, str(error)[:120])
+                break
+
+    request = urllib.request.Request(
+        ENDPOINT.format(model),
+        data=body,
+        headers={"x-goog-api-key": _key(), "content-type": "application/json"},
+    )
+    try:
+        return json.loads(urllib.request.urlopen(request, timeout=timeout).read())
+    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+        raise GeminiUnavailable(str(error)[:120]) from error
 
 
 def _key() -> str:
@@ -96,15 +265,7 @@ def choose(prompt: str, allowed: list[str], *, model: str = MODEL) -> str | None
         }
     ).encode()
 
-    request = urllib.request.Request(
-        ENDPOINT.format(model),
-        data=body,
-        headers={"x-goog-api-key": _key(), "content-type": "application/json"},
-    )
-    try:
-        payload = json.loads(urllib.request.urlopen(request, timeout=60).read())
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
-        raise GeminiUnavailable(str(error)[:120]) from error
+    payload = _post(model, body, timeout=60)
 
     candidates = payload.get("candidates") or []
     if not candidates:
@@ -158,13 +319,8 @@ def translate(texts: list[str], *, model: str = TRANSLATE_MODEL) -> dict[str, st
             },
         }
     ).encode()
-    request = urllib.request.Request(
-        ENDPOINT.format(model),
-        data=body,
-        headers={"x-goog-api-key": _key(), "content-type": "application/json"},
-    )
     try:
-        payload = json.loads(urllib.request.urlopen(request, timeout=120).read())
+        payload = _post(model, body, timeout=120)
     except urllib.error.HTTPError as error:
         # The quota response carries "Please retry in 51.9s". Passing that back
         # is the difference between a backoff that guesses and one that knows.
@@ -197,6 +353,13 @@ def translate(texts: list[str], *, model: str = TRANSLATE_MODEL) -> dict[str, st
 
 
 def available() -> bool:
+    """True when either transport can be reached.
+
+    A machine with Cloud credentials and no API key is fully configured — the
+    key is the fallback, not the requirement.
+    """
+    if _access_token() and _vertex_project():
+        return True
     try:
         _key()
         return True
