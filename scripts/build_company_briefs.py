@@ -62,16 +62,38 @@ COMPANIES = REPO / "public" / "data" / "v1" / "companies"
 OUT = REPO / "public" / "data" / "v1" / "briefs"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "briefs"
 STORE = pathlib.Path(__file__).resolve().parent / "company_briefs.json"
+SIGNALS = REPO / "public" / "data" / "v1" / "signals"
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 
 # gemini-3.7-flash, per million tokens, introductory rate.
 IN_PER_M, OUT_PER_M = 0.75, 3.75
 
-# How many filings to put in front of the model. Titles are short; a company's
-# most recent 120 covers several years for most issuers and keeps one prompt
-# well inside the context while costing about a cent.
-WINDOW = 120
+# What goes in front of the model, and why it is not the whole archive.
+#
+# The instinct was to send everything: 500 titles per company, the median
+# company having filed 504 times. It works and it costs about six dollars, but
+# it takes over two hours and it buys almost nothing, because the *history* is
+# now written from `facts_block` — which is computed over the entire record no
+# matter what is in the prompt — and the only thing the titles are needed for
+# is quoting a filing id against a plan. Plans are limited to the last three
+# years by [PLAN_YEARS], so the listing is too: 108 filings for the median
+# company, 270 for the busiest, and a batch that finishes in half an hour.
+PROMPT_YEARS = 3
+WINDOW = 300
+
+# A history has to contain something only this company's record could produce.
+#
+# This is not a style preference. The first batch of 110 briefs was measured
+# and 68 of them contained the phrase "and extraordinary general meetings";
+# 41 contained "standalone and consolidated financial". They were accurate and
+# they were interchangeable, because "files results, holds assemblies" is the
+# definition of a listed company rather than a fact about any one of them. So
+# two mechanical guards now stand between the model and the app: a history must
+# quote at least this many of the company's own computed figures, and it must
+# not read like one already accepted for a different company.
+MIN_SPECIFICS = 2
+SIMILARITY = 0.45
 
 FORWARD = re.compile(
     r"(زيادة رأس ?المال|رأس ?المال|اكتتاب|استحواذ|اندماج|توسع|مصنع|خطة|"
@@ -141,30 +163,145 @@ def factual_record(ticker: str, filings: list[dict]) -> dict:
     }
 
 
-def prompt_for(ticker: str, name: str, filings: list[dict], record: dict) -> str:
+def facts_block(record: dict, signals: dict) -> tuple[str, set[str]]:
+    """The numbers that make this company's record different from any other's.
+
+    Returned twice over: as prose for the prompt, and as the set of tokens a
+    history has to quote at least [MIN_SPECIFICS] of. The second return is the
+    guard — a paragraph that mentions none of these numbers is a paragraph
+    about listed companies in general.
+    """
+    profile = signals.get("profile") or {}
+    lines: list[str] = []
+    tokens: set[str] = set()
+
+    def fact(text: str, *values) -> None:
+        lines.append(f"- {text}")
+        for value in values:
+            if value not in (None, "", 0):
+                tokens.add(str(value))
+
+    span_from = (profile.get("first_filing") or "")[:4]
+    span_to = (profile.get("last_filing") or "")[:4]
+    if span_from:
+        fact(f"{record['filings']} filings on the exchange's record, "
+             f"from {span_from} to {span_to}.", record["filings"], span_from, span_to)
+    if profile.get("busiest_year"):
+        fact(f"Busiest year: {profile['busiest_year']}, with "
+             f"{profile['busiest_year_filings']} filings.",
+             profile["busiest_year"], profile["busiest_year_filings"])
+    if record.get("trading_suspensions"):
+        fact(f"Trading suspended {record['trading_suspensions']} times, resumed "
+             f"{record['trading_resumptions']} times.",
+             record["trading_suspensions"], record["trading_resumptions"])
+    if record.get("capital_increases"):
+        fact(f"{record['capital_increases']} capital-increase filings.",
+             record["capital_increases"])
+    if profile.get("periods_reported"):
+        fact(f"{profile['periods_reported']} periods of reported profit or loss, "
+             f"{profile['loss_making_periods']} of them loss-making, from "
+             f"{(profile.get('first_reported') or '')[:4]} to "
+             f"{(profile.get('last_reported') or '')[:4]}.",
+             profile["periods_reported"], profile["loss_making_periods"],
+             (profile.get("first_reported") or "")[:4],
+             (profile.get("last_reported") or "")[:4])
+    # Millions, which is the unit the filings are in and the unit every screen
+    # in the app already labels. Said in the prompt because a model handed a
+    # bare number will pick one, and it picked thousands.
+    if best := profile.get("best_period"):
+        fact(f"Highest reported net profit: {best['period']} at "
+             f"{best['net_income']:,.0f} million EGP.",
+             best["period"], best["period"].split()[-1])
+    if worst := profile.get("worst_period"):
+        fact(f"Lowest reported net result: {worst['period']} at "
+             f"{worst['net_income']:,.0f} million EGP.",
+             worst["period"], worst["period"].split()[-1])
+
+    for row in signals.get("streaks") or []:
+        if row["kind"] == "first_loss":
+            fact(f"{row['period']} was its first loss after {row['run']} "
+                 f"consecutive profitable reported periods.",
+                 row["period"], row["run"], row["period"][-4:])
+        else:
+            fact(f"{row['period']} returned to profit after {row['run']} "
+                 f"consecutive loss-making periods.",
+                 row["period"], row["run"], row["period"][-4:])
+    for row in signals.get("firsts") or []:
+        years = row["gap_days"] // 365
+        fact(f"Its {row['label']} on {row['date']} was the first in {years} years.",
+             row["date"][:4], years)
+    if quiet := signals.get("quiet"):
+        fact(f"It files every {quiet['typical_gap']} days on average and has "
+             f"filed nothing for {quiet['silent_days']}.",
+             quiet["typical_gap"], quiet["silent_days"])
+
+    types = (profile.get("by_type") or {})
+    if types:
+        spread = ", ".join(f"{k} {v}" for k, v in list(types.items())[:8])
+        lines.append(f"- Filings by type: {spread}.")
+        tokens.update(str(v) for v in list(types.values())[:8])
+
+    return "\n".join(lines), {t for t in tokens if len(str(t)) >= 2}
+
+
+# How far back an announcement can be and still be called a plan. Beyond
+# this a stated intention is a thing that either happened or did not, and the
+# record shows which — calling it a plan would be the app's own guess.
+PLAN_YEARS = 3
+
+
+def prompt_window(filings: list[dict]) -> list[dict]:
+    """The filings the model sees: the last [PROMPT_YEARS], capped at [WINDOW].
+
+    Newest first, as they arrive. The cap exists for the handful of issuers
+    that file every other day; for everyone else the date floor is what binds.
+    """
+    floor = (
+        datetime.date.today() - datetime.timedelta(days=PROMPT_YEARS * 365)
+    ).isoformat()
+    recent = [i for i in filings if (i.get("dateStamp") or "")[:10] >= floor]
+    # A company that has filed nothing for three years would otherwise get an
+    # empty listing and no plans to cite; fall back to its newest filings.
+    return (recent or filings)[:WINDOW]
+
+
+def prompt_for(ticker: str, name: str, filings: list[dict], record: dict,
+               signals: dict) -> tuple[str, set[str]]:
+    plan_floor = (
+        datetime.date.today() - datetime.timedelta(days=PLAN_YEARS * 365)
+    ).isoformat()
     lines = []
-    for item in filings[:WINDOW]:
+    for item in prompt_window(filings):
         title = (item.get("heading") or item.get("headingArabic") or "").strip()
         lines.append(f"[egx-{item['code']}] {(item.get('dateStamp') or '')[:10]} {title}")
     listing = "\n".join(lines)
-    return f"""You are reading the filing record of {name} ({ticker}), a company listed on the Egyptian Exchange. Below are its filings, newest first, each with an id in square brackets.
+    facts, tokens = facts_block(record, signals)
+
+    prompt = f"""You are reading the filing record of {name} ({ticker}), a company listed on the Egyptian Exchange.
+
+FACTS ALREADY COMPUTED FROM THAT RECORD. These are counted, not estimated, and you may rely on them. A "reported period" is one year-to-date filing — Egyptian issuers file Q1, H1, 9M and FY cumulatively — so never call them quarters:
+
+{facts}
+
+ITS FILINGS, newest first, each with an id in square brackets:
 
 {listing}
 
 Return ONLY a JSON object with exactly these keys:
 
-"history": a factual paragraph, 40-70 words, in English, describing what this company's filing record shows it has DONE. Describe events that already happened. Do not evaluate the company, do not use adjectives of quality, do not mention share price.
+"history": 45-80 words of English describing what is DISTINCTIVE about this company's record — what somebody who had read every filing would know that somebody who had read none would not. Anchor it in the computed facts above: quote specific years, counts and period names. Do NOT describe activities every listed company performs (filing results, holding assemblies, publishing disclosure forms) unless this company does them at a rate the facts show is unusual. Do not evaluate the company, do not use adjectives of quality, do not mention share price.
 
 "history_ar": the same paragraph in Arabic.
 
-"plans": an array of at most 5 objects, each {{"text": "...", "text_ar": "...", "id": "egx-NNNNNN"}}. Each must describe something the COMPANY ITSELF announced it intends to do in the future — a capital increase, an acquisition, a new facility, a rights issue, a signed contract. "text" is one factual sentence in English beginning with the company's action. "id" MUST be copied exactly from the square brackets of the filing that says it. If the record contains no forward-looking announcement, return an empty array.
+"plans": an array of at most 5 objects, each {{"text": "...", "text_ar": "...", "id": "egx-NNNNNN"}}. Each must be something the COMPANY ITSELF announced it WOULD DO, at the time it announced it — a planned capital increase, a proposed acquisition, a facility it intends to build, a rights issue it has called, a contract it has signed and not yet delivered. An action the filings show was already completed is NOT a plan; leave it out. Only use filings from {plan_floor} onwards, because an intention announced longer ago than that is history. "text" is one factual sentence in English beginning with the company's action. "id" MUST be copied exactly from the square brackets of the filing that says it. If the record contains no such announcement, return an empty array.
 
 RULES, which override anything above:
 - Never say whether anything is good, bad, cheap, expensive, promising or risky.
 - Never advise buying, selling or holding, and never address the reader.
 - Never state or imply a future share price, return or forecast of your own.
-- Only report what the filings say. Invent nothing. If unsure, omit it.
+- Only report what the filings and the computed facts say. Invent nothing.
 - Every id must appear in the list above."""
+    return prompt, tokens
 
 
 def parse(raw: str) -> dict | None:
@@ -181,8 +318,26 @@ def parse(raw: str) -> dict | None:
         return None
 
 
-def vet(brief: dict, allowed: set[str]) -> tuple[dict | None, str]:
-    """The three guards. Returns the cleaned brief, or None and a reason."""
+def shingles(text: str) -> set[str]:
+    """Four-word runs, for comparing one history against another."""
+    words = re.findall(r"[a-z0-9]+", (text or "").lower())
+    return {" ".join(words[i:i + 4]) for i in range(max(0, len(words) - 3))}
+
+
+def overlap(a: set[str], b: set[str]) -> float:
+    if not a or not b:
+        return 0.0
+    return len(a & b) / len(a | b)
+
+
+def vet(brief: dict, allowed: set[str], specifics: set[str],
+        accepted: list[set[str]]) -> tuple[dict | None, str]:
+    """The guards. Returns the cleaned brief, or None and a reason.
+
+    Five now, and the last two exist because the first three let a batch of
+    interchangeable paragraphs through: they check that a claim is *legal*,
+    not that it is *about this company*.
+    """
     history = (brief.get("history") or "").strip()
     history_ar = (brief.get("history_ar") or "").strip()
     if len(history) < 30:
@@ -191,6 +346,21 @@ def vet(brief: dict, allowed: set[str]) -> tuple[dict | None, str]:
     for field in (history, history_ar):
         if hit := macro_types.directive(field):
             return None, f"directive: {hit!r}"
+
+    # Specificity. At least [MIN_SPECIFICS] of the company's own computed
+    # figures have to appear in the paragraph, so "this company" is doing work
+    # in the sentence rather than standing in for "a company".
+    hits = sum(1 for token in specifics if re.search(rf"\b{re.escape(token)}\b", history))
+    if hits < MIN_SPECIFICS:
+        return None, f"generic — {hits} of its own figures quoted"
+
+    # Distinctness. Compared against every history already accepted in this
+    # run: two companies whose paragraphs are four-fifths the same words are
+    # one paragraph with two names on it.
+    mine = shingles(history)
+    for other in accepted:
+        if overlap(mine, other) > SIMILARITY:
+            return None, "reads like another company's history"
 
     plans = []
     for plan in brief.get("plans") or []:
@@ -206,11 +376,40 @@ def vet(brief: dict, allowed: set[str]) -> tuple[dict | None, str]:
             return None, "directive in a plan"
         plans.append({"text": text, "text_ar": text_ar, "id": cite})
 
+    accepted.append(mine)
     return {
         "history": history,
         "history_ar": history_ar,
         "plans": plans[:5],
     }, ""
+
+
+def load_signals(ticker: str) -> dict:
+    """What `build_signals.py` computed for this company, or nothing."""
+    try:
+        return json.loads((SIGNALS / f"{ticker}.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def publish(held: dict) -> None:
+    """Write the store and every per-company document.
+
+    Called after each batch rather than once at the end. The first run of this
+    script lost 167 companies to a single read timeout, because everything it
+    had generated lived in memory until the loop finished.
+    """
+    STORE.write_text(json.dumps(held, ensure_ascii=False, indent=1), encoding="utf-8")
+    for folder in (OUT, FIXTURES):
+        if folder is FIXTURES and not folder.parent.exists():
+            continue
+        folder.mkdir(parents=True, exist_ok=True)
+        for ticker, brief in held.items():
+            (folder / f"{ticker}.json").write_text(
+                json.dumps({"ticker": ticker, **brief}, ensure_ascii=False,
+                           separators=(",", ":")),
+                encoding="utf-8",
+            )
 
 
 def main() -> int:
@@ -237,11 +436,16 @@ def main() -> int:
     by_ticker = load_filings()
     directory = {}
     try:
+        # `name_en`, which is the field companies.json actually carries. This
+        # read `(c.get("name") or {}).get("en")` and so found nothing for any
+        # company: every prompt in the first batch opened by naming the ticker
+        # twice instead of the company once.
         directory = {
-            c["ticker"]: (c.get("name") or {}).get("en") or c["ticker"]
+            c["ticker"]: c.get("name_en") or c["ticker"]
             for c in json.loads(
                 (REPO / "public" / "data" / "v1" / "companies.json").read_text()
             ).get("companies", [])
+            if c.get("ticker")
         }
     except (OSError, json.JSONDecodeError, KeyError):
         pass
@@ -251,6 +455,11 @@ def main() -> int:
     )
     spent = 0.0
     done = refused = skipped = 0
+    # Every history accepted this run, as word-run sets, so the next one can be
+    # compared against all of them.
+    accepted: list[set[str]] = [
+        shingles(brief.get("history", "")) for brief in held.values()
+    ]
 
     for ticker in targets:
         filings = by_ticker.get(ticker) or []
@@ -267,8 +476,21 @@ def main() -> int:
         if args.limit and done >= args.limit:
             break
 
-        allowed = {f"egx-{i['code']}" for i in filings[:WINDOW]}
-        text = prompt_for(ticker, directory.get(ticker, ticker), filings, record)
+        # Ids the model may cite at all, and the narrower set a *plan* may
+        # cite: an intention announced four years ago is not a plan, and the
+        # guard enforces what the prompt asks for rather than trusting it.
+        window = prompt_window(filings)
+        allowed = {f"egx-{i['code']}" for i in window}
+        floor = (datetime.date.today()
+                 - datetime.timedelta(days=PLAN_YEARS * 365)).isoformat()
+        recent = {
+            f"egx-{i['code']}" for i in window
+            if (i.get("dateStamp") or "")[:10] >= floor
+        }
+        text, specifics = prompt_for(
+            ticker, directory.get(ticker, ticker), filings, record,
+            load_signals(ticker),
+        )
         try:
             raw, usage = gemini.generate(text)
         except gemini.GeminiUnavailable as error:
@@ -281,25 +503,21 @@ def main() -> int:
         if not brief:
             refused += 1
             continue
-        clean, why = vet(brief, allowed)
+        clean, why = vet(brief, recent or allowed, specifics, accepted)
         if not clean:
-            print(f"   {ticker}: refused — {why}")
+            print(f"   {ticker}: refused — {why}", flush=True)
             refused += 1
             continue
         clean["record"] = record
         clean["generated"] = datetime.date.today().isoformat()
         held[ticker] = clean
         done += 1
-        if done % 20 == 0:
-            print(f"   {done} written, ${spent:.2f} spent")
+        if done % 10 == 0:
+            print(f"   {done} written, {refused} refused, ${spent:.2f} spent",
+                  flush=True)
+            publish(held)
 
-    STORE.write_text(json.dumps(held, ensure_ascii=False, indent=1), encoding="utf-8")
-    OUT.mkdir(parents=True, exist_ok=True)
-    FIXTURES.mkdir(parents=True, exist_ok=True)
-    for ticker, brief in held.items():
-        body = json.dumps({"ticker": ticker, **brief}, ensure_ascii=False,
-                          separators=(",", ":"))
-        (OUT / f"{ticker}.json").write_text(body, encoding="utf-8")
+    publish(held)
     print(f"   {done} briefs written, {refused} refused, {skipped} already held")
     print(f"   spent ${spent:.2f} of ${args.budget:.2f}")
     return 0

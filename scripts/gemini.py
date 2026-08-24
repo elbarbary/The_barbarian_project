@@ -226,6 +226,13 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                 _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
                 break
             except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+                # A read timeout is the connection failing, not Vertex saying
+                # no, and the endpoint behind the fallback has an empty wallet
+                # — so retrying here is strictly better than dropping through.
+                # One timeout mid-batch ended a 276-company run at 109.
+                if attempt < VERTEX_ATTEMPTS - 1:
+                    time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                    continue
                 _note_vertex(None, str(error)[:120])
                 break
 
