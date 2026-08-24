@@ -40,6 +40,9 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
+import urllib.error
+import urllib.request
 from datetime import UTC, date, datetime, timedelta
 
 import translations
@@ -89,6 +92,18 @@ BASE = "https://www.egx.com.eg/ar/NewsSearch.aspx"
 # sec_id=20 is the disclosures section. The other sections are listing notices
 # and press releases, which are a different kind of thing.
 DISCLOSURES_SECTION = 20
+
+# The same scope, on the exchange's JSON API. `sec_id=20` on the old site maps
+# to these beta categories — General, General Assemblies, Financial Results,
+# Insider dealing, Trading Notices — verified by mapping every currently
+# published filing back to its beta section. Press releases, member news and
+# listing notices stay out, exactly as they did before.
+BETA_BASE = "https://beta.egx.com.eg"
+BETA_SECTIONS = [3, 5, 6, 7, 8]
+BETA_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+)
 
 # How long a published item stays in the document. Long enough that a reader
 # opening the app on Sunday still sees Thursday's filings; short enough that
@@ -211,6 +226,92 @@ def fetch(days: int) -> str:
 
 
 # ------------------------------------------------------------------- parsing
+
+
+def fetch_beta(days: int) -> list[dict] | None:
+    """Every disclosure in the window, from the exchange's JSON API.
+
+    The browser scrape below can only ever read page one — the ten most recent
+    filings — because the site's pager is broken on that host (see `walk`). On
+    a quiet day that is enough; on a morning that files forty, the earlier ones
+    scroll off page one before the job runs and are lost, because there is no
+    pagination to recover them. 20 filings vanished this way on 24 Aug 2026.
+
+    `beta.egx.com.eg` answers `news-search` with a date window and returns the
+    whole window in one request — no page-one cap, no browser. This is that
+    request. It returns None on any refusal or transport error so the caller
+    falls back to the scrape: the step is best-effort, and a beta outage must
+    never leave the app worse off than a scrape outage already did.
+
+    Serialised and paced, per the standing rule that EGX is never hit in
+    parallel — one page at a time, a second and a half apart. A three-day
+    window is almost always a single page.
+    """
+    end = date.today()
+    start = end - timedelta(days=days)
+    collected: dict[str, dict] = {}
+    page = 1
+    while page <= 20:
+        payload = json.dumps({
+            "marketSessionNews": False,
+            "secIds": BETA_SECTIONS,
+            "interval": 50,
+            "pageNumber": page,
+            "pageSize": 200,
+            "count": 50,
+            "dateFrom": start.isoformat(),
+            "dateTo": end.isoformat(),
+        }).encode()
+        req = urllib.request.Request(
+            f"{BETA_BASE}/api/bff/egx/news-search",
+            data=payload,
+            headers={
+                "user-agent": BETA_UA,
+                "accept": "application/json",
+                "content-type": "application/json",
+                "x-egx-bff-request": "1",
+                "referer": f"{BETA_BASE}/en",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=60) as response:
+                raw = response.read()
+        except (urllib.error.URLError, OSError) as error:
+            print(f"   beta: transport error ({error}) — will fall back")
+            return None
+        # The F5 answers 200 with an HTML rejection page rather than a status.
+        if raw[:6] == b"<html":
+            print("   beta: request rejected by the edge — will fall back")
+            return None
+        try:
+            doc = json.loads(raw)
+        except json.JSONDecodeError:
+            print("   beta: unparseable response — will fall back")
+            return None
+        if not doc.get("success"):
+            print(f"   beta: {doc.get('message', 'unsuccessful')} — will fall back")
+            return None
+        for row in doc.get("data") or []:
+            code = row.get("code")
+            if code is None:
+                continue
+            # The Arabic heading is what the app reads and what carries the
+            # (TICKER.CA) the match depends on; fall back to English.
+            title = (row.get("headingArabic") or row.get("heading") or "").strip()
+            if not title:
+                continue
+            collected[str(code)] = {
+                "id": f"egx-{code}",
+                "title": title,
+                "date": (row.get("dateStamp") or "")[:10],
+                "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={code}",
+                "tickers": sorted(set(TICKER.findall(title))),
+            }
+        if page >= (doc.get("totalPages") or 1):
+            break
+        page += 1
+        time.sleep(1.5)
+    return list(collected.values()) if collected else None
 
 
 def parse(html: str) -> list[dict]:
@@ -571,38 +672,39 @@ def main() -> int:
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
-    # No browser here is a fact about the machine, not an error.
-    #
-    # This used to `return 1`, and `build_all` treated that as a failed step,
-    # and `--check` treats a failed step as a validation failure — so on a
-    # runner with no Scrapling the entire daily build aborted before writing
-    # anything. The market snapshot, the company documents, the macro series
-    # and the crossings all stopped updating on 20 August because of this line,
-    # and it went unnoticed for three days: the fifteen-minute news job uses
-    # plain HTTP and kept succeeding, so the app looked alive.
-    if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
-        print(f"   {scrapling_python.missing_note()}")
-        return 0
-
     print("── EGX disclosures")
-    html = fetch(args.days)
-    if not html:
-        print("nothing fetched — leaving the published document alone")
-        return 1
 
-    items = parse(html)
-    claimed = TOTAL.search(html)
-    expected = int(claimed.group(1)) if claimed else None
-    print(f"   {len(items)} filings parsed" + (f" of {expected} the page reported" if expected else ""))
-    if not items:
-        print("parsed nothing — the page markup probably changed")
-        return 1
-    if expected and len(items) < expected:
-        # Expected, not an error: page one is all we can reach, and it is the
-        # newest ten. The count is printed so a run that suddenly returns two
-        # filings against a reported ninety is visible rather than quiet.
-        print(f"   newest {len(items)} of {expected} in the window "
-              f"(page one only — see walk() for why)")
+    # The exchange's JSON API first: one request, the whole window, no page-one
+    # cap. It needs no browser, so it runs on a machine with no Scrapling too.
+    items = fetch_beta(args.days)
+    if items:
+        print(f"   {len(items)} filings from the exchange API")
+    else:
+        # Fall back to the page-one browser scrape. No browser here is a fact
+        # about the machine, not an error: this used to `return 1`, which
+        # aborted the whole daily build on a runner with no Scrapling and went
+        # unnoticed for three days because the fifteen-minute news job kept
+        # succeeding over plain HTTP. Now it is a best-effort skip.
+        if SCRAPLING_PY is None or not SCRAPLING_PY.exists():
+            print(f"   beta unavailable and {scrapling_python.missing_note()}")
+            return 0
+        print("   beta unavailable — falling back to the page-one scrape")
+        html = fetch(args.days)
+        if not html:
+            print("nothing fetched — leaving the published document alone")
+            return 1
+        items = parse(html)
+        claimed = TOTAL.search(html)
+        expected = int(claimed.group(1)) if claimed else None
+        print(f"   {len(items)} filings parsed"
+              + (f" of {expected} the page reported" if expected else ""))
+        if not items:
+            print("parsed nothing — the page markup probably changed")
+            return 1
+        if expected and len(items) < expected:
+            # Page one is all the scrape can reach, and it is the newest ten.
+            print(f"   newest {len(items)} of {expected} in the window "
+                  f"(page one only — see walk() for why)")
 
     learn_names(items)
     classify_all(items)
