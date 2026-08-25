@@ -1,0 +1,1 @@
+{"ticker":"CPME","generated":"2026-08-25","sector":"Finance","metrics":[{"key":"profit","value":18.918,"unit":"egp_m","direction":"unknown","points":2,"series":[3.563,18.918],"peer_median":161.182,"peer":"below"},{"key":"eps","value":0.0627,"unit":"egp","direction":"unknown","points":2,"series":[0.0118,0.0627],"peer_median":0.7139,"peer":"below"}],"pattern":null}
