@@ -119,18 +119,18 @@
       "action": null,
       "position_withheld": true,
       "tape": {
-        "label": "23 August completed close",
-        "price": "EGP 92.50",
-        "detail": "+0.09% · captured after the 23 Aug close."
+        "label": "25 August 2026 · 10:49 Cairo",
+        "price": "EGP 91.39",
+        "detail": "Opening print EGP 90.76 · saved exit not breached."
       },
       "sources": [
         {
-          "name": "HDBK H1 filing",
-          "url": "https://www.mubasher.info/news/4656580/"
+          "name": "HDB investor relations",
+          "url": "https://www.hdb-egy.com/IR/en/results-center/"
         },
         {
-          "name": "Official EGX disclosure board",
-          "url": "https://beta.egx.com.eg/en"
+          "name": "EGX H1 announcement mirror",
+          "url": "https://www.mubasher.info/news/4656580/"
         },
         {
           "name": "EGX field note, 2026-08-20",
@@ -304,6 +304,36 @@
   ],
   "rejected": [],
   "outcomes": [
+    {
+      "ticker": "HDBK",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Qualified · booked / hold",
+      "status_label_ar": null,
+      "return_percent": "-42.00 EGP",
+      "direction": "down",
+      "note": "50 shares; P&L after entry friction. Five completed sessions elapsed through 24 Aug; hard enforcement first ordinary 30 Aug if still open."
+    },
+    {
+      "ticker": "EMFD",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Near miss · failed Session B",
+      "status_label_ar": null,
+      "return_percent": "+0.91%",
+      "direction": "down",
+      "note": "Price and close-strength gates passed, but RV20 2.66× failed the required 3×. No portfolio trade; new base required."
+    },
+    {
+      "ticker": "AXPH",
+      "label": null,
+      "status": "rejected",
+      "status_label": "Persistent repeat-buyer watch",
+      "status_label_ar": null,
+      "return_percent": "Watch only",
+      "direction": "down",
+      "note": "Fresh ownership evidence did not repair weak completed close quality or thin normal value. No backdated return and no portfolio entry."
+    },
     {
       "ticker": "AMIA",
       "label": null,
