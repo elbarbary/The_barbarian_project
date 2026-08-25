@@ -1,6 +1,3 @@
-import 'package:barbarian/core/models/company.dart';
-import 'package:barbarian/core/models/opportunity.dart';
-import 'package:barbarian/core/widgets/motion.dart';
 import 'package:barbarian/core/widgets/arc_gauge.dart';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/core/widgets/legal.dart';
@@ -9,7 +6,6 @@ import 'package:barbarian/features/cash_or_trash/cash_or_trash_screen.dart';
 import 'package:barbarian/features/company/company_screen.dart';
 import 'package:barbarian/features/home/home_screen.dart';
 import 'package:barbarian/features/market/market_screen.dart';
-import 'package:barbarian/features/opportunities/opportunity_screen.dart';
 import 'package:barbarian/features/calendar/calendar_screen.dart';
 import 'package:barbarian/features/profile/you_screen.dart';
 import 'package:flutter/material.dart';
@@ -159,153 +155,6 @@ void main() {
           reason: '"$banned" standing alone is a verdict on a named issuer',
         );
       }
-    });
-  });
-
-  group('Scanner', () {
-    Finder loaded() => find.text('Scanner');
-
-    testWidgets('offers all three buckets including the ones that failed', (
-      tester,
-    ) async {
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-
-      expect(find.textContaining('Cleared all'), findsWidgets);
-      expect(find.textContaining('Partly'), findsWidgets);
-      expect(find.textContaining('Not cleared'), findsWidgets);
-      expect(
-        find.textContaining('Rule log'),
-        findsWidgets,
-        reason: 'the published outcome record is never hidden',
-      );
-    });
-
-    testWidgets('never calls a share "qualified"', (tester) async {
-      // The founder pulled the word on 21 Aug 2026. "Qualified" reads as *this
-      // share qualifies* — a recommendation from a publisher with no FRA
-      // licence. What was measured is that the name cleared the published
-      // rules, which is a fact about the rules and not a view on the company.
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-
-      for (final word in ['Qualified', 'qualified', 'Opportunity']) {
-        expect(
-          find.textContaining(word),
-          findsNothing,
-          reason: 'the scanner must not say "$word"',
-        );
-      }
-    });
-
-    testWidgets('is never renamed "Daily Insights"', (tester) async {
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-
-      // Spec §4.
-      expect(find.textContaining('Daily Insight'), findsNothing);
-      expect(find.textContaining('Daily insight'), findsNothing);
-    });
-
-    testWidgets('shows no trading semantics anywhere', (tester) async {
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-
-      // Spec §8.
-      for (final banned in [
-        'BUY',
-        'SELL',
-        'BUY NOW',
-        'TARGET PRICE',
-        'STOP LOSS',
-        'EXPECTED RETURN',
-        'BEST STOCK TODAY',
-      ]) {
-        expect(
-          find.text(banned),
-          findsNothing,
-          reason: '"$banned" must never appear',
-        );
-      }
-    });
-
-    // A card whose narrative was a model position keeps its score, its gates
-    // and its tape, and loses its words. Rendering that silently produces a
-    // card that looks half-built; the screen says which half is missing and
-    // why, because "the publisher is not licensed to repeat this" is a fact
-    // about the app rather than a fault in it.
-    testWidgets('names the reason a withheld card has no reasoning', (
-      tester,
-    ) async {
-      final report = OpportunityReport.fromJson(
-        readFixtureObjectSync('opportunities/latest.json'),
-      );
-      final withheld = report.watching.where((w) => w.positionWithheld);
-      if (withheld.isEmpty) return; // no open position in today's report
-
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-
-      await pumpUntil(tester, find.text(withheld.first.ticker));
-      expect(find.text('NOT REPUBLISHED'), findsWidgets);
-      expect(find.textContaining('not licensed'), findsWidgets);
-    });
-
-    // MKIT was compulsorily delisted while its result was still on the board.
-    // The row stays — deleting a published result is the one thing this series
-    // exists not to do — but it cannot open a company screen that has no
-    // document behind it.
-    testWidgets('a delisted outcome is shown and is not a link', (
-      tester,
-    ) async {
-      final report = OpportunityReport.fromJson(
-        readFixtureObjectSync('opportunities/latest.json'),
-      );
-      final directory = CompanyDirectory.fromJson(
-        readFixtureObjectSync('companies.json'),
-      );
-      final gone = report.outcomes
-          .where((o) => directory.byTicker(o.ticker) == null)
-          .toList();
-      if (gone.isEmpty) return; // every result's company is still listed
-
-      await pumpScreen(
-        tester,
-        const OpportunityScreen(parentTab: BNavTab.home),
-        until: loaded(),
-      );
-      await tapVisible(tester, find.textContaining('Rule log'));
-      await pumpUntil(tester, find.text(gone.first.ticker));
-
-      final row = find.ancestor(
-        of: find.text(gone.first.ticker),
-        matching: find.byType(BPressable),
-      );
-      expect(row, findsWidgets);
-      // The row is a link until the directory arrives and says otherwise, so
-      // this waits for that answer rather than reading the first frame.
-      await pumpUntilTrue(
-        tester,
-        () => tester.widget<BPressable>(row.first).onTap == null,
-        reason:
-            '${gone.first.ticker} is not in the directory, so its row must '
-            'not offer a company screen that cannot load',
-      );
     });
   });
 
@@ -488,7 +337,6 @@ void main() {
       ('You', const YouScreen()),
       ('Calendar', const CalendarScreen(parentTab: BNavTab.home)),
       ('Six Pillars', const CashOrTrashScreen(parentTab: BNavTab.home)),
-      ('Scanner', const OpportunityScreen(parentTab: BNavTab.home)),
       (
         'Company',
         const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.today),

@@ -48,7 +48,6 @@ LAST_MONTH = (_TODAY.replace(day=1) - datetime.timedelta(days=1)).strftime("%Y-%
 # tolerates. Raise the cadence again and these come down again.
 STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
-    ("Opportunity Scanner", "build_opportunity_api.py", True),
     # Before Market, which reads both stores when it starts. Each reads the
     # disclosures document the previous run published, so a filing found today
     # reaches the app on tomorrow's build — cumulative stores make that a lag
@@ -101,6 +100,13 @@ STEPS = [
     # budget and vetted like the briefs; a read generated today reaches the app
     # on the next build, when build_review merges the store back in.
     ("Review reads", "build_review_reads.py", False,
+     ["--limit", "8", "--budget", "0.60"]),
+    # The sector view, after the review sheet it reads: per-sector movement
+    # counts and medians, a pure aggregation of the review docs. No network.
+    ("Sectors", "build_sectors.py", True),
+    # The natural-language read of each sector's movement — budgeted and vetted
+    # like the review reads, and merged back by build_sectors on the next build.
+    ("Sector reads", "build_sector_reads.py", False,
      ["--limit", "8", "--budget", "0.60"]),
     # News and rates run here too, so a full local build produces a complete
     # set — but their real cadence is publish-live-data.yml every 15 minutes.
@@ -212,6 +218,7 @@ BEST_EFFORT = {
     "Arabic names",
     "Stock info",
     "Review reads",
+    "Sector reads",
     "Company profiles",
     "Company briefs",
     "Company filings",

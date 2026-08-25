@@ -23,7 +23,7 @@ import '../../l10n/app_localizations.dart';
 ///
 /// The month document is fetched only when a month is opened. Twelve months of
 /// filings is five megabytes and nobody scrolls a year.
-class BFiledOnDay extends ConsumerWidget {
+class BFiledOnDay extends ConsumerStatefulWidget {
   const BFiledOnDay({
     required this.day,
     required this.parentTab,
@@ -36,7 +36,9 @@ class BFiledOnDay extends ConsumerWidget {
 
   /// How many rows to show before offering the rest. A busy Thursday on this
   /// exchange carries ninety filings, and ninety rows under a calendar is not
-  /// a calendar any more.
+  /// a calendar any more — so the tail is folded behind a tap rather than cut
+  /// off. Every filing that day is already loaded in the month document; the
+  /// toggle only decides how many of them are drawn.
   final int limit;
 
   static String monthKey(DateTime day) =>
@@ -44,14 +46,27 @@ class BFiledOnDay extends ConsumerWidget {
       '${day.month.toString().padLeft(2, '0')}';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BFiledOnDay> createState() => _BFiledOnDayState();
+}
+
+class _BFiledOnDayState extends ConsumerState<BFiledOnDay> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    final month = ref.watch(filedMonthProvider(monthKey(day))).value?.value;
+    final month = ref
+        .watch(filedMonthProvider(BFiledOnDay.monthKey(widget.day)))
+        .value
+        ?.value;
     if (month == null) return const SizedBox.shrink();
 
-    final filings = month.on(day);
+    final filings = month.on(widget.day);
     if (filings.isEmpty) return const SizedBox.shrink();
+
+    final overflow = filings.length > widget.limit;
+    final shown = _expanded ? filings : filings.take(widget.limit).toList();
 
     return Padding(
       padding: const EdgeInsets.only(top: 14),
@@ -74,17 +89,62 @@ class BFiledOnDay extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 8),
-          for (final filing in filings.take(limit))
-            _FiledRow(filing: filing, parentTab: parentTab),
-          if (filings.length > limit)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(
-                l.calFiledMore(filings.length - limit),
-                style: BarbarianType.labelNano.copyWith(color: c.textFaint),
-              ),
+          for (final filing in shown)
+            _FiledRow(filing: filing, parentTab: widget.parentTab),
+          if (overflow)
+            BExpandToggle(
+              expanded: _expanded,
+              collapsedLabel: l.calFiledMore(filings.length - widget.limit),
+              expandedLabel: l.calShowFewer,
+              onTap: () => setState(() => _expanded = !_expanded),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// The "+N more / show fewer" control the two calendars share. A centred,
+/// tappable row with a chevron — an affordance, not the faint dead-end label
+/// it replaced.
+class BExpandToggle extends StatelessWidget {
+  const BExpandToggle({
+    required this.expanded,
+    required this.collapsedLabel,
+    required this.expandedLabel,
+    required this.onTap,
+    super.key,
+  });
+
+  final bool expanded;
+  final String collapsedLabel;
+  final String expandedLabel;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.colors;
+    return BPressable(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              expanded ? expandedLabel : collapsedLabel,
+              style: BarbarianType.labelNano.copyWith(color: c.accent),
+            ),
+            const SizedBox(width: 4),
+            Icon(
+              expanded
+                  ? Icons.keyboard_arrow_up_rounded
+                  : Icons.keyboard_arrow_down_rounded,
+              size: 14,
+              color: c.accent,
+            ),
+          ],
+        ),
       ),
     );
   }

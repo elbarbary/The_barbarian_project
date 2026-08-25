@@ -943,6 +943,14 @@
       }
     }
   },
+  "finBalanceAsOf": "Balance sheet · {period}",
+  "@finBalanceAsOf": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
   "finFiguresUnit": "Unit: {unit}",
   "@finFiguresUnit": {
     "placeholders": {
@@ -1523,6 +1531,120 @@
   "sectorEnergyMinerals": "Energy Minerals",
   "sectorElectronicTechnology": "Electronic Technology",
   "sectorMiscellaneous": "Miscellaneous",
+  "sectorHeroLabel": "Sector analysis",
+  "@sectorHeroLabel": {},
+  "sectorHeroMoving": "{rising} of {total} companies show rising {metric}.",
+  "@sectorHeroMoving": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "metric": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorHeroFoot": "{count} sectors · as filed {date}",
+  "@sectorHeroFoot": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorScreenTitle": "Sector analysis",
+  "@sectorScreenTitle": {},
+  "sectorScreenDek": "Each sector read against its own companies — which way the group is moving, and the middle of its range. Medians, not verdicts.",
+  "@sectorScreenDek": {},
+  "sectorScreenMethod": "Counts are of companies that filed. A median is the middle company of the five or more that report each figure.",
+  "@sectorScreenMethod": {},
+  "sectorScreenAsOf": "As filed with the exchange · built {date}.",
+  "@sectorScreenAsOf": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorCompanyCount": "{count, plural, one{1 company} other{{count} companies}}",
+  "@sectorCompanyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorReadLabel": "The sector read",
+  "@sectorReadLabel": {},
+  "sectorReadFallback": "{rising} of {total} companies show rising {metric}; {falling} are falling.",
+  "@sectorReadFallback": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "falling": {
+        "type": "int"
+      },
+      "metric": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorMovingLabel": "How its companies are moving",
+  "@sectorMovingLabel": {},
+  "sectorMoveCounts": "{rising} rising · {falling} falling",
+  "@sectorMoveCounts": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "falling": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorMediansLabel": "Typical for the sector",
+  "@sectorMediansLabel": {},
+  "sectorMedianNote": "A median is the middle company of the five or more that report each figure.",
+  "@sectorMedianNote": {},
+  "sectorStandoutLabel": "Where the most measures move together",
+  "@sectorStandoutLabel": {},
+  "sectorMeasuresImproving": "{improving} of {readable} measures improving",
+  "@sectorMeasuresImproving": {
+    "placeholders": {
+      "improving": {
+        "type": "int"
+      },
+      "readable": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorMembersLabel": "All companies",
+  "@sectorMembersLabel": {},
+  "sectorNotEnoughHistory": "Not enough history to read yet",
+  "@sectorNotEnoughHistory": {},
+  "sectorHeldBack": "{names} each hold fewer than five companies here — too few to read as a group.",
+  "@sectorHeldBack": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorDoesNotShowTitle": "What this doesn't show",
+  "@sectorDoesNotShowTitle": {},
+  "sectorDoesNotShowBody": "No revenue, margins, market value, free float or price return — the exchange's filings don't carry them, so ESTHMR doesn't compute them.",
+  "@sectorDoesNotShowBody": {},
   "scanScoreOf": "{status} · of {max}",
   "@scanScoreOf": {
     "placeholders": {
@@ -2098,6 +2220,8 @@
       }
     }
   },
+  "calShowFewer": "Show fewer",
+  "@calShowFewer": {},
   "ccalScheduled": "Dates it filed",
   "@ccalScheduled": {},
   "ccalExpected": "When results are next due",
@@ -2124,6 +2248,16 @@
       "shown": {
         "type": "int"
       },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ccalShowAll": "Show all filings",
+  "@ccalShowAll": {},
+  "ccalShowingAll": "Showing all {total} filings.",
+  "@ccalShowingAll": {
+    "placeholders": {
       "total": {
         "type": "int"
       }
@@ -2261,6 +2395,14 @@
   "@revAboveSector": {},
   "revBelowSector": "below its sector",
   "@revBelowSector": {},
+  "revSectorMedian": "{sector} median",
+  "@revSectorMedian": {
+    "placeholders": {
+      "sector": {
+        "type": "String"
+      }
+    }
+  },
   "revOverPeriods": "over {n} reported periods",
   "@revOverPeriods": {
     "placeholders": {
@@ -2373,6 +2515,8 @@
   "@revMeansTitle": {},
   "revAskTitle": "Worth asking",
   "@revAskTitle": {},
+  "revAnswerTitle": "A probable answer",
+  "@revAnswerTitle": {},
   "revOnePoint": "One published figure — not enough history to read a direction.",
   "@revOnePoint": {},
   "revDirProfitRising": "Profit has been climbing year on year.",
@@ -2440,5 +2584,49 @@
   "revGroupRisk": "How it's financed",
   "@revGroupRisk": {},
   "revReadLabel": "The read",
-  "@revReadLabel": {}
+  "@revReadLabel": {},
+  "signInLead": "Read the exchange in plain words. Sign in to keep your own watchlist and see the live feed, or look around first as a guest.",
+  "@signInLead": {},
+  "signInApple": "Continue with Apple",
+  "@signInApple": {},
+  "signInGoogle": "Continue with Google",
+  "@signInGoogle": {},
+  "signInGuest": "Continue as guest",
+  "@signInGuest": {},
+  "signInGuestNote": "Guests browse sample data. Signing in switches on the live feed.",
+  "@signInGuestNote": {},
+  "signInFailed": "That didn’t work. Please try again.",
+  "@signInFailed": {},
+  "account": "Account",
+  "@account": {},
+  "accountGuest": "Guest",
+  "@accountGuest": {},
+  "accountSignedIn": "Signed in",
+  "@accountSignedIn": {},
+  "accountLive": "Live exchange feed",
+  "@accountLive": {},
+  "accountSample": "Sample data on this device",
+  "@accountSample": {},
+  "signOut": "Sign out",
+  "@signOut": {},
+  "signIn": "Sign in",
+  "@signIn": {},
+  "revOrientLabel": "Which way reads better",
+  "@revOrientLabel": {},
+  "revOrientPe": "A lower multiple is the cheaper valuation — though a low one can also mean the market expects earnings to fall.",
+  "@revOrientPe": {},
+  "revOrientPb": "A lower multiple is the cheaper valuation against the company’s book value.",
+  "@revOrientPb": {},
+  "revOrientYield": "A higher yield pays more per pound invested — but it can also be a price that has dropped.",
+  "@revOrientYield": {},
+  "revOrientHigherMore": "Higher is simply more.",
+  "@revOrientHigherMore": {},
+  "revOrientCash": "Higher means more of the profit actually arrived as cash.",
+  "@revOrientCash": {},
+  "revOrientReturn": "Higher is a stronger return on what has been put in.",
+  "@revOrientReturn": {},
+  "revOrientDebt": "Lower is less borrowed against equity — though some debt is normal, and can be productive.",
+  "@revOrientDebt": {},
+  "revOrientAssets": "Higher is a larger balance sheet — bigger, not by itself better.",
+  "@revOrientAssets": {}
 }

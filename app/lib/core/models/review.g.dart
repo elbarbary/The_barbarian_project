@@ -47,6 +47,8 @@ _ReviewMetric _$ReviewMetricFromJson(Map<String, dynamic> json) =>
       cause: json['cause'] as String?,
       peer: json['peer'] as String?,
       peerMedian: (json['peer_median'] as num?)?.toDouble(),
+      answer: json['answer'] as String? ?? '',
+      answerAr: json['answer_ar'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ReviewMetricToJson(_ReviewMetric instance) =>
@@ -60,6 +62,8 @@ Map<String, dynamic> _$ReviewMetricToJson(_ReviewMetric instance) =>
       'cause': instance.cause,
       'peer': instance.peer,
       'peer_median': instance.peerMedian,
+      'answer': instance.answer,
+      'answer_ar': instance.answerAr,
     };
 
 _ReviewPoint _$ReviewPointFromJson(Map<String, dynamic> json) => _ReviewPoint(

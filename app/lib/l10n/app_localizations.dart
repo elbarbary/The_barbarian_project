@@ -2630,6 +2630,12 @@ abstract class AppLocalizations {
   /// **'{unit} · {period}'**
   String finUnitPeriod(String unit, String period);
 
+  /// No description provided for @finBalanceAsOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance sheet · {period}'**
+  String finBalanceAsOf(String period);
+
   /// No description provided for @finFiguresUnit.
   ///
   /// In en, this message translates to:
@@ -3428,6 +3434,132 @@ abstract class AppLocalizations {
   /// **'Miscellaneous'**
   String get sectorMiscellaneous;
 
+  /// No description provided for @sectorHeroLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sector analysis'**
+  String get sectorHeroLabel;
+
+  /// No description provided for @sectorHeroMoving.
+  ///
+  /// In en, this message translates to:
+  /// **'{rising} of {total} companies show rising {metric}.'**
+  String sectorHeroMoving(int rising, int total, String metric);
+
+  /// No description provided for @sectorHeroFoot.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sectors · as filed {date}'**
+  String sectorHeroFoot(int count, String date);
+
+  /// No description provided for @sectorScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sector analysis'**
+  String get sectorScreenTitle;
+
+  /// No description provided for @sectorScreenDek.
+  ///
+  /// In en, this message translates to:
+  /// **'Each sector read against its own companies — which way the group is moving, and the middle of its range. Medians, not verdicts.'**
+  String get sectorScreenDek;
+
+  /// No description provided for @sectorScreenMethod.
+  ///
+  /// In en, this message translates to:
+  /// **'Counts are of companies that filed. A median is the middle company of the five or more that report each figure.'**
+  String get sectorScreenMethod;
+
+  /// No description provided for @sectorScreenAsOf.
+  ///
+  /// In en, this message translates to:
+  /// **'As filed with the exchange · built {date}.'**
+  String sectorScreenAsOf(String date);
+
+  /// No description provided for @sectorCompanyCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{1 company} other{{count} companies}}'**
+  String sectorCompanyCount(int count);
+
+  /// No description provided for @sectorReadLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The sector read'**
+  String get sectorReadLabel;
+
+  /// No description provided for @sectorReadFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'{rising} of {total} companies show rising {metric}; {falling} are falling.'**
+  String sectorReadFallback(int rising, int total, int falling, String metric);
+
+  /// No description provided for @sectorMovingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'How its companies are moving'**
+  String get sectorMovingLabel;
+
+  /// No description provided for @sectorMoveCounts.
+  ///
+  /// In en, this message translates to:
+  /// **'{rising} rising · {falling} falling'**
+  String sectorMoveCounts(int rising, int falling);
+
+  /// No description provided for @sectorMediansLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical for the sector'**
+  String get sectorMediansLabel;
+
+  /// No description provided for @sectorMedianNote.
+  ///
+  /// In en, this message translates to:
+  /// **'A median is the middle company of the five or more that report each figure.'**
+  String get sectorMedianNote;
+
+  /// No description provided for @sectorStandoutLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Where the most measures move together'**
+  String get sectorStandoutLabel;
+
+  /// No description provided for @sectorMeasuresImproving.
+  ///
+  /// In en, this message translates to:
+  /// **'{improving} of {readable} measures improving'**
+  String sectorMeasuresImproving(int improving, int readable);
+
+  /// No description provided for @sectorMembersLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'All companies'**
+  String get sectorMembersLabel;
+
+  /// No description provided for @sectorNotEnoughHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough history to read yet'**
+  String get sectorNotEnoughHistory;
+
+  /// No description provided for @sectorHeldBack.
+  ///
+  /// In en, this message translates to:
+  /// **'{names} each hold fewer than five companies here — too few to read as a group.'**
+  String sectorHeldBack(String names);
+
+  /// No description provided for @sectorDoesNotShowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What this doesn\'t show'**
+  String get sectorDoesNotShowTitle;
+
+  /// No description provided for @sectorDoesNotShowBody.
+  ///
+  /// In en, this message translates to:
+  /// **'No revenue, margins, market value, free float or price return — the exchange\'s filings don\'t carry them, so ESTHMR doesn\'t compute them.'**
+  String get sectorDoesNotShowBody;
+
   /// No description provided for @scanScoreOf.
   ///
   /// In en, this message translates to:
@@ -4220,6 +4352,12 @@ abstract class AppLocalizations {
   /// **'+{count} more that day'**
   String calFiledMore(int count);
 
+  /// No description provided for @calShowFewer.
+  ///
+  /// In en, this message translates to:
+  /// **'Show fewer'**
+  String get calShowFewer;
+
   /// No description provided for @ccalScheduled.
   ///
   /// In en, this message translates to:
@@ -4267,6 +4405,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Showing {shown} of {total} filings.'**
   String ccalFiledCount(int shown, int total);
+
+  /// No description provided for @ccalShowAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show all filings'**
+  String get ccalShowAll;
+
+  /// No description provided for @ccalShowingAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing all {total} filings.'**
+  String ccalShowingAll(int total);
 
   /// No description provided for @ccalFootnote.
   ///
@@ -4447,6 +4597,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'below its sector'**
   String get revBelowSector;
+
+  /// No description provided for @revSectorMedian.
+  ///
+  /// In en, this message translates to:
+  /// **'{sector} median'**
+  String revSectorMedian(String sector);
 
   /// No description provided for @revOverPeriods.
   ///
@@ -4712,6 +4868,12 @@ abstract class AppLocalizations {
   /// **'Worth asking'**
   String get revAskTitle;
 
+  /// No description provided for @revAnswerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A probable answer'**
+  String get revAnswerTitle;
+
   /// No description provided for @revOnePoint.
   ///
   /// In en, this message translates to:
@@ -4915,6 +5077,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The read'**
   String get revReadLabel;
+
+  /// No description provided for @signInLead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the exchange in plain words. Sign in to keep your own watchlist and see the live feed, or look around first as a guest.'**
+  String get signInLead;
+
+  /// No description provided for @signInApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get signInApple;
+
+  /// No description provided for @signInGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get signInGoogle;
+
+  /// No description provided for @signInGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue as guest'**
+  String get signInGuest;
+
+  /// No description provided for @signInGuestNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Guests browse sample data. Signing in switches on the live feed.'**
+  String get signInGuestNote;
+
+  /// No description provided for @signInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That didn’t work. Please try again.'**
+  String get signInFailed;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @accountGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get accountGuest;
+
+  /// No description provided for @accountSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in'**
+  String get accountSignedIn;
+
+  /// No description provided for @accountLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Live exchange feed'**
+  String get accountLive;
+
+  /// No description provided for @accountSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Sample data on this device'**
+  String get accountSample;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// No description provided for @signIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signIn;
+
+  /// No description provided for @revOrientLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Which way reads better'**
+  String get revOrientLabel;
+
+  /// No description provided for @revOrientPe.
+  ///
+  /// In en, this message translates to:
+  /// **'A lower multiple is the cheaper valuation — though a low one can also mean the market expects earnings to fall.'**
+  String get revOrientPe;
+
+  /// No description provided for @revOrientPb.
+  ///
+  /// In en, this message translates to:
+  /// **'A lower multiple is the cheaper valuation against the company’s book value.'**
+  String get revOrientPb;
+
+  /// No description provided for @revOrientYield.
+  ///
+  /// In en, this message translates to:
+  /// **'A higher yield pays more per pound invested — but it can also be a price that has dropped.'**
+  String get revOrientYield;
+
+  /// No description provided for @revOrientHigherMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher is simply more.'**
+  String get revOrientHigherMore;
+
+  /// No description provided for @revOrientCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher means more of the profit actually arrived as cash.'**
+  String get revOrientCash;
+
+  /// No description provided for @revOrientReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher is a stronger return on what has been put in.'**
+  String get revOrientReturn;
+
+  /// No description provided for @revOrientDebt.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower is less borrowed against equity — though some debt is normal, and can be productive.'**
+  String get revOrientDebt;
+
+  /// No description provided for @revOrientAssets.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher is a larger balance sheet — bigger, not by itself better.'**
+  String get revOrientAssets;
 }
 
 class _AppLocalizationsDelegate

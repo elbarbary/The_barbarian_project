@@ -534,6 +534,40 @@ def publish(held: dict) -> None:
             )
 
 
+def enrich_plans(held: dict, by_ticker: dict[str, list[dict]]) -> int:
+    """Attach each plan's own filing date and link, from the filing it cites.
+
+    A plan quotes an intention and names the filing that announced it by id.
+    The app's company page carries only that company's newest ~50 filings, so
+    a phone does not download seven hundred — but the intention a plan quotes
+    is very often older than that window, so the row could not find its own
+    citation and rendered as dead text with no date and nothing to open. This
+    is exactly the "connect it to the filing" gap.
+
+    The id is `egx-<NewsID>`, which is all the exchange's own URL needs, so the
+    link is rebuilt deterministically here rather than looked up on the phone —
+    and the filing row on disk carries the date and the title to show beside
+    it. Nothing here calls a model or the network; it runs on every build,
+    including a build with no Gemini transport, so the links stay current even
+    when no brief is regenerated.
+    """
+    linked = 0
+    for ticker, brief in held.items():
+        index = {f"egx-{row['code']}": row for row in (by_ticker.get(ticker) or [])}
+        for plan in brief.get("plans") or []:
+            row = index.get((plan.get("id") or "").strip())
+            if not row:
+                continue
+            plan["date"] = (row.get("dateStamp") or "")[:10]
+            plan["link"] = (
+                f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={row['code']}"
+            )
+            plan["title"] = (row.get("heading") or "").strip()
+            plan["title_ar"] = (row.get("headingArabic") or "").strip()
+            linked += 1
+    return linked
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--budget", type=float, default=20.0,
@@ -544,9 +578,6 @@ def main() -> int:
     args = ap.parse_args()
 
     print("── Company briefs")
-    if not gemini.available():
-        print("   no Gemini transport — leaving the published briefs alone")
-        return 0
 
     held = {}
     if STORE.exists():
@@ -556,6 +587,19 @@ def main() -> int:
             held = {}
 
     by_ticker = load_filings()
+
+    # The filing links are rebuilt every run, model or no model: a plan cites a
+    # filing that is very often older than the app's newest-fifty window, so the
+    # link has to be carried on the plan from here rather than looked up on the
+    # phone. Done before anything can return, so a Gemini-less CI still ships it.
+    linked = enrich_plans(held, by_ticker)
+
+    if not gemini.available():
+        print(f"   no Gemini transport — linked {linked} plans to their "
+              f"filings; leaving the briefs themselves alone")
+        publish(held)
+        return 0
+
     profiles = load_profiles()
     directory = {}
     try:
@@ -644,6 +688,8 @@ def main() -> int:
                   flush=True)
             publish(held)
 
+    # Newly generated plans this run need their filing links too.
+    enrich_plans(held, by_ticker)
     publish(held)
     print(f"   {done} briefs written, {refused} refused, {skipped} already held")
     print(f"   spent ${spent:.2f} of ${args.budget:.2f}")

@@ -67,6 +67,7 @@ import statistics
 REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES = REPO / "public" / "data" / "v1" / "companies"
 DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
+PRICES = REPO / "public" / "data" / "v1" / "prices"
 STOCK_INFO = pathlib.Path(__file__).resolve().parent / "stock_info.json"
 # The natural-language read of each company's metric pattern, generated
 # separately by `build_review_reads.py` under a budget and vetted like the
@@ -134,6 +135,40 @@ def load(path: pathlib.Path) -> dict:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
+
+
+def price_series(ticker: str) -> list[tuple[str, float]]:
+    """(date, close) for one company, oldest first — for a historical P/E.
+
+    The app already holds a daily close series per company; it was only ever
+    read for the price chart. A P/E for a past year needs the price *as it was*
+    at that year's end, which is exactly what this carries.
+    """
+    doc = load(PRICES / f"{ticker}.json")
+    out = [
+        (str(p["date"]), float(p["close"]))
+        for p in (doc.get("price_history") or [])
+        if p.get("date") and p.get("close") is not None
+    ]
+    out.sort(key=lambda x: x[0])
+    return out
+
+
+def close_on(history: list[tuple[str, float]], date: str) -> float | None:
+    """The close on the last session on or before `date`.
+
+    A period ends on 31 December; the exchange does not trade that day, so the
+    price that valued that year's earnings is the last one printed before it.
+    Returns None when the series does not reach back that far — a P/E is left
+    off rather than valued at a price from a different era.
+    """
+    chosen = None
+    for day, close in history:
+        if day <= date:
+            chosen = close
+        else:
+            break
+    return chosen
 
 
 def annual(doc: dict) -> list[dict]:
@@ -245,14 +280,24 @@ def plabel(row: dict) -> str:
     period = str(row.get("period") or "").strip()
     if period:
         parts = period.split()
-        if len(parts) == 2 and len(parts[1]) == 4:
-            return f"{parts[0]} {parts[1][2:]}"
+        if len(parts) >= 2 and len(parts[1]) == 4 and parts[1].isdigit():
+            label = f"{parts[0]} {parts[1][2:]}"
+            # A second fiscal stream — "FY 2021 (to 30 Jun)" — is a real, distinct
+            # period, not a duplicate. Tag it with its month so it neither
+            # renders as "FY 2021 " with a dangling space nor collides on the
+            # axis with the December row of the same year.
+            if len(parts) > 2:
+                month = parts[-1].strip("().")
+                if month:
+                    label += f" ({month})"
+            return label
         return period[:8]
     key = period_key(row) or ""
     return key[2:] if len(key) >= 4 else key
 
 
-def metrics_for(ticker: str, doc: dict, summary: dict, info: dict) -> list[dict]:
+def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
+                history: list[tuple[str, float]] | None = None) -> list[dict]:
     """Every metric this company has the data for. Absent is absent.
 
     Each series carries the period each value belongs to, not just the value —
@@ -298,14 +343,30 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict) -> list[dict]
 
     market_cap = summary.get("market_cap") or info.get("egx_market_cap")
     shares = info.get("listed_shares")
+    history = history or []
 
     # --- valuation -------------------------------------------------------
     #
-    # P/E ships as today's level with no direction. A historical P/E needs a
-    # historical price per year, and the app holds a price *series* but not one
-    # aligned to each period end. The sheet shows today's multiple beside the
-    # earnings direction underneath it — the comparison the framework asks for.
-    add("pe", summary.get("pe") or info.get("egx_pe"), [])
+    # A historical P/E, at last. It used to ship as today's level with no graph
+    # because a P/E for a past year needs the price *as it was* at that year's
+    # end — and both halves were already held, a daily close per company and
+    # net profit per annual filing; they were simply never divided. Each point
+    # is the close at a period end over that period's earnings per share. The
+    # headline is the newest of them so the figure and the graph agree. A
+    # company missing the price history or the share count falls back to today's
+    # published multiple with no series, which is the honest degrade.
+    pe_pts: list[tuple[str, float]] = []
+    if shares and history:
+        for r in rows:
+            profit, end = r.get("net_income"), period_key(r)
+            if profit is None or not end:
+                continue
+            eps = profit * 1e6 / shares
+            price = close_on(history, end)
+            if eps > 0 and price is not None:
+                pe_pts.append((plabel(r), price / eps))
+    add("pe", pe_pts[-1][1] if pe_pts
+        else (summary.get("pe") or info.get("egx_pe")), pe_pts)
 
     if market_cap:
         equity_now = _last(held, "equity")
@@ -467,7 +528,8 @@ def build(today: datetime.date) -> tuple[dict, dict]:
         ticker = doc.get("ticker") or pathlib.Path(path).stem
         if ticker not in summaries:
             continue
-        rows = metrics_for(ticker, doc, summaries[ticker], info.get(ticker) or {})
+        rows = metrics_for(ticker, doc, summaries[ticker], info.get(ticker) or {},
+                           price_series(ticker))
         if rows:
             everything[ticker] = rows
 
@@ -476,7 +538,16 @@ def build(today: datetime.date) -> tuple[dict, dict]:
     per_company = {}
     for ticker, rows in everything.items():
         sector = sectors.get(ticker)
+        read = reads.get(ticker) or {}
+        answers = read.get("answers") or {}
         for row in rows:
+            # The probable answer to this metric's question, read by the model
+            # off the sibling directions and vetted alongside the paragraph.
+            # Absent for a metric that was flat or had no likely reason to give.
+            if (answer := answers.get(row["key"])) and answer.get("en"):
+                row["answer"] = answer["en"]
+                if answer.get("ar"):
+                    row["answer_ar"] = answer["ar"]
             median = medians.get((sector, row["key"]))
             if median is None:
                 continue
@@ -489,9 +560,9 @@ def build(today: datetime.date) -> tuple[dict, dict]:
             "metrics": rows,
             "pattern": pattern(rows),
         }
-        if (r := reads.get(ticker)) and r.get("read"):
-            doc["read"] = r["read"]
-            doc["read_ar"] = r.get("read_ar", "")
+        if read.get("read"):
+            doc["read"] = read["read"]
+            doc["read_ar"] = read.get("read_ar", "")
         per_company[ticker] = doc
 
     index = {

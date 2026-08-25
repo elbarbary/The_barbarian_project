@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show ProviderOrFamily;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'auth/auth_controller.dart';
 import 'config/app_config.dart';
 import 'data/market_repository.dart';
 import 'data/research_repository.dart';
@@ -19,6 +20,7 @@ import 'models/connection.dart';
 import 'models/disclosure.dart';
 import 'models/filed.dart';
 import 'models/review.dart';
+import 'models/sector_report.dart';
 import 'models/signals.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
@@ -26,7 +28,6 @@ import 'models/company.dart';
 import 'models/macro.dart';
 import 'models/market_history.dart';
 import 'models/market_snapshot.dart';
-import 'models/opportunity.dart';
 import 'models/price_freshness.dart';
 import 'models/quote_snapshot.dart';
 import 'networking/document_source.dart';
@@ -40,15 +41,33 @@ final appConfigProvider = Provider<AppConfig>(
   (ref) => AppConfig.fromEnvironment(),
 );
 
+/// Whether to read the bundled sample snapshot rather than the live exchange
+/// feed. Two things force it: a fixtures build (a compile-time developer
+/// choice), and — the product rule the sign-in adds — a guest. A guest browses
+/// the app on the dummy data that ships in the binary; only a real account
+/// reaches for the network. Signed-out sits on the gate and never gets here.
+///
+/// This is read by the source and by the screens, but deliberately NOT by the
+/// seed or the [StaticApi]: dragging the auth notifier into the StaticApi's
+/// dependency graph would restart every document stream the moment auth
+/// settles. The source alone switches feeds, and switching identity rebuilds it.
+final useFixturesProvider = Provider<bool>(
+  (ref) =>
+      ref.watch(appConfigProvider).useBundledFixtures ||
+      !ref.watch(authControllerProvider).isAuthed,
+);
+
 final documentSourceProvider = Provider<DocumentSource>((ref) {
-  final config = ref.watch(appConfigProvider);
-  if (config.useBundledFixtures) return const FixtureDocumentSource();
-  return NetworkDocumentSource(config: config);
+  if (ref.watch(useFixturesProvider)) return const FixtureDocumentSource();
+  return NetworkDocumentSource(config: ref.watch(appConfigProvider));
 });
 
 /// The compiled-in snapshot [StaticApi] falls back to, and never caches.
 ///
-/// Null in fixture builds, where the primary source is already the bundle.
+/// Keyed only to the compile-time build, never to the identity: for a guest the
+/// primary source is already the bundle, so a bundled seed alongside it is
+/// harmless duplication — and keeping auth out of here is what stops the
+/// StaticApi from tearing its streams down when the identity resolves.
 final documentSeedProvider = Provider<DocumentSource?>((ref) {
   return ref.watch(appConfigProvider).useBundledFixtures
       ? null
@@ -79,14 +98,23 @@ final sharedPreferencesProvider = Provider<SharedPreferencesAsync>(
   (ref) => SharedPreferencesAsync(),
 );
 
+/// The on-device watchlist and bookmarks, namespaced to the current identity
+/// so an account and a guest — or two accounts — on one phone keep separate
+/// lists. Rebuilds when the identity changes, which is what re-reads the right
+/// list on sign-in and sign-out.
 final userRepositoryProvider = Provider<UserRepository>(
-  (ref) => LocalUserRepository(ref.watch(sharedPreferencesProvider)),
+  (ref) => LocalUserRepository(
+    ref.watch(sharedPreferencesProvider),
+    namespace: ref.watch(authControllerProvider).storageNamespace,
+  ),
 );
 
 /// True when the app is reading bundled fixtures, so screens can mark sample
-/// prices rather than letting them pass as real (spec §49).
+/// prices rather than letting them pass as real (spec §49). A guest is on the
+/// sample data, so a guest sees the notice; a signed-in reader on the live feed
+/// does not.
 final isSampleDataProvider = Provider<bool>(
-  (ref) => ref.watch(appConfigProvider).useBundledFixtures,
+  (ref) => ref.watch(useFixturesProvider),
 );
 
 // --------------------------------------------------------------------- data
@@ -101,10 +129,6 @@ final marketSnapshotProvider = StreamProvider<Sourced<MarketSnapshot>>(
 
 final companyDirectoryProvider = StreamProvider<Sourced<CompanyDirectory>>(
   (ref) => ref.watch(marketRepositoryProvider).getCompanies(),
-);
-
-final opportunityReportProvider = StreamProvider<Sourced<OpportunityReport>>(
-  (ref) => ref.watch(researchRepositoryProvider).getOpportunityScanner(),
 );
 
 final cashOrTrashProvider = StreamProvider<Sourced<CashOrTrashIndex>>(
@@ -179,10 +203,29 @@ final signalsProvider = StreamProvider<Sourced<SignalsIndex>>(
   (ref) => ref.watch(researchRepositoryProvider).getSignals(),
 );
 
+/// Every sector read against its own companies — the section list and the home
+/// card render from this one index.
+final sectorsProvider = StreamProvider<Sourced<SectorIndex>>(
+  (ref) => ref.watch(researchRepositoryProvider).getSectors(),
+);
+
+/// One sector in full, fetched only when the reader opens it.
+final sectorProvider = StreamProvider.family<Sourced<SectorReport>, String>(
+  (ref, slug) => ref.watch(researchRepositoryProvider).getSector(slug),
+);
+
 final companyDocumentsProvider =
     StreamProvider.family<Sourced<CompanyDocuments>, String>(
       (ref, ticker) =>
           ref.watch(researchRepositoryProvider).getCompanyDocuments(ticker),
+    );
+
+/// The complete filing record for one company, fetched only when a reader asks
+/// to see all of it — the page provider above carries only the newest window.
+final companyDocumentsAllProvider =
+    StreamProvider.family<Sourced<CompanyDocuments>, String>(
+      (ref, ticker) =>
+          ref.watch(researchRepositoryProvider).getCompanyDocumentsAll(ticker),
     );
 
 final marketHistoryProvider = StreamProvider<Sourced<MarketHistory>>(
@@ -260,7 +303,6 @@ void refreshPublishedContent({
 final publishedDocumentProviders = <ProviderOrFamily>[
   marketSnapshotProvider,
   companyDirectoryProvider,
-  opportunityReportProvider,
   cashOrTrashProvider,
   newsProvider,
   disclosuresProvider,
@@ -269,6 +311,7 @@ final publishedDocumentProviders = <ProviderOrFamily>[
   calendarProvider,
   filedIndexProvider,
   signalsProvider,
+  sectorsProvider,
   marketHistoryProvider,
   ratesProvider,
   macroProvider,
@@ -412,7 +455,11 @@ class WatchlistNotifier extends AsyncNotifier<List<String>> {
   UserRepository get _repo => ref.read(userRepositoryProvider);
 
   @override
-  Future<List<String>> build() => _repo.watchlist();
+  Future<List<String>> build() {
+    // Watched, not read: when the identity changes the repository rebuilds, and
+    // this re-runs to load the new account's (or guest's) own list.
+    return ref.watch(userRepositoryProvider).watchlist();
+  }
 
   Future<void> add(String ticker) async {
     await _repo.addToWatchlist(ticker);
@@ -448,7 +495,8 @@ class BookmarksNotifier extends AsyncNotifier<List<Bookmark>> {
   UserRepository get _repo => ref.read(userRepositoryProvider);
 
   @override
-  Future<List<Bookmark>> build() => _repo.bookmarks();
+  Future<List<Bookmark>> build() =>
+      ref.watch(userRepositoryProvider).bookmarks();
 
   Future<void> toggle(Bookmark bookmark) async {
     final saved = await _repo.isBookmarked(bookmark.kind, bookmark.id);

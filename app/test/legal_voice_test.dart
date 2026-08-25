@@ -6,7 +6,6 @@ import 'package:barbarian/core/widgets/legal.dart';
 import 'package:barbarian/core/widgets/nav.dart';
 import 'package:barbarian/features/cash_or_trash/cash_or_trash_screen.dart';
 import 'package:barbarian/features/company/company_screen.dart';
-import 'package:barbarian/features/opportunities/opportunity_screen.dart';
 import 'package:barbarian/core/widgets/composites.dart';
 import 'package:barbarian/features/profile/you_screen.dart';
 import 'package:barbarian/features/home/home_screen.dart';
@@ -40,7 +39,6 @@ void main() {
   group('§8.12 the non-licence line is on every scored screen', () {
     final scored = <String, Widget>{
       'Six Pillars': const CashOrTrashScreen(parentTab: BNavTab.home),
-      'Scanner': const OpportunityScreen(parentTab: BNavTab.today),
       'Company': const CompanyScreen(ticker: 'COMI', parentTab: BNavTab.home),
       'Today': const TodayScreen(),
     };

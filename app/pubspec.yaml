@@ -11,6 +11,11 @@ dependencies:
   fl_chart: ^1.2.0
   flutter:
     sdk: flutter
+  # Sign-in providers. Both work fully client-side (no backend): Apple returns a
+  # stable user identifier and Google an account id, which is all this app needs
+  # to namespace an on-device watchlist. See ios/ for the one-time provider setup.
+  google_sign_in: ^6.2.2
+  sign_in_with_apple: ^6.1.4
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.3.2
@@ -42,7 +47,6 @@ flutter:
     - assets/fixtures/
     - assets/fixtures/companies/
     - assets/fixtures/cash-or-trash/
-    - assets/fixtures/opportunities/
     - assets/fixtures/news/
     - assets/fixtures/rates/
     - assets/fixtures/disclosures/
@@ -54,6 +58,7 @@ flutter:
     - assets/fixtures/briefs/
     - assets/fixtures/signals/
     - assets/fixtures/review/
+    - assets/fixtures/sectors/
     # One month deep on purpose — `build_calendar.write_filed` mirrors only
     # the current month, because twelve of them is seven megabytes of binary
     # for filings a reader would have to scroll back a year to reach.

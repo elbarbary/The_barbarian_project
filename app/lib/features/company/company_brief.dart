@@ -123,21 +123,34 @@ class _Plan extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final c = context.colors;
     final arabic = Directionality.of(context) == TextDirection.rtl;
-    // The filing behind the claim, so the row can open the source rather than
-    // asking the reader to take our word for it.
-    final documents = ref
-        .watch(companyDocumentsProvider(ticker))
-        .value
-        ?.value
-        .items;
-    final source = () {
-      for (final item in documents ?? const <FiledDocument>[]) {
-        if (item.id == plan.id) return item;
-      }
-      return null;
-    }();
+
+    // The filing behind the claim travels on the plan itself — its id, date
+    // and link are stamped in at build time. The app page carries only a
+    // company's newest filings, and the announcement a plan quotes is very
+    // often older than that window, so the on-device documents list is used
+    // only as a fallback for a plan written before the link was carried.
+    final source = plan.hasLink
+        ? null
+        : () {
+            final documents = ref
+                .watch(companyDocumentsProvider(ticker))
+                .value
+                ?.value
+                .items;
+            for (final item in documents ?? const <FiledDocument>[]) {
+              if (item.id == plan.id) return item;
+            }
+            return null;
+          }();
+
+    final link = plan.hasLink ? plan.link : (source?.link ?? '');
+    final date = plan.date.isNotEmpty ? plan.date : (source?.date ?? '');
+    final filing = plan.title.isNotEmpty
+        ? plan.titleFor(arabic)
+        : (source?.titleFor(arabic) ?? '');
 
     final row = BPaperCard(
       padding: const EdgeInsets.fromLTRB(14, 13, 14, 13),
@@ -159,29 +172,52 @@ class _Plan extends ConsumerWidget {
                     height: 1.5,
                   ),
                 ),
-                if (source != null) ...[
+                // The filing that says so, named and dated under the claim, so
+                // the source is connected to the plan before it is opened.
+                if (link.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.description_outlined,
+                          size: 12, color: c.textFaint),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          [
+                            if (date.isNotEmpty) date,
+                            if (filing.isNotEmpty) filing else l.briefOpenFiling,
+                          ].join('  ·  '),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: BarbarianType.labelNano
+                              .copyWith(color: c.textFaint),
+                        ),
+                      ),
+                    ],
+                  ),
+                ] else if (date.isNotEmpty) ...[
                   const SizedBox(height: 6),
                   Text(
-                    source.date,
+                    date,
                     style: BarbarianType.labelNano.copyWith(color: c.textFaint),
                   ),
                 ],
               ],
             ),
           ),
-          if (source != null && source.link.isNotEmpty)
+          if (link.isNotEmpty)
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 8, top: 2),
-              child: Icon(Icons.north_east, size: 14, color: c.textFaint),
+              child: Icon(Icons.north_east, size: 14, color: c.accent),
             ),
         ],
       ),
     );
 
-    if (source == null || source.link.isEmpty) return row;
+    if (link.isEmpty) return row;
     return BPressable(
       onTap: () => context.push(
-        Routes.articlePath(parentTab, source.link, 'EGX filing'),
+        Routes.articlePath(parentTab, link, l.briefOpenFiling),
       ),
       child: row,
     );

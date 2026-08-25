@@ -14299,17 +14299,6 @@
    }
   },
   "ALUM": {
-   "Q1 2021": {
-    "assets": 182.754,
-    "balance_total": 182.754,
-    "equity": 80.819,
-    "financing_cash_flow": 5.776,
-    "investing_cash_flow": -1.603,
-    "liabilities": 101.936,
-    "net_change_in_cash": -13.069,
-    "net_income": 6.337,
-    "operating_cash_flow": -17.242
-   },
    "Q1 2022": {
     "assets": 302.91,
     "balance_total": 302.91,
@@ -14341,17 +14330,6 @@
     "net_change_in_cash": -0.751,
     "net_income": 6.095,
     "operating_cash_flow": 12.953
-   },
-   "Q2 2021": {
-    "assets": 204.988,
-    "balance_total": 204.988,
-    "equity": 87.189,
-    "financing_cash_flow": 14.147,
-    "investing_cash_flow": -0.149,
-    "liabilities": 117.798,
-    "net_change_in_cash": 3.534,
-    "net_income": 6.371,
-    "operating_cash_flow": -10.464
    },
    "Q2 2022": {
     "assets": 273.067,
@@ -14385,17 +14363,6 @@
     "net_income": 9.634,
     "operating_cash_flow": 33.984
    },
-   "Q3 2021": {
-    "assets": 274.638,
-    "balance_total": 274.638,
-    "equity": 92.434,
-    "financing_cash_flow": 2.714,
-    "investing_cash_flow": -0.097,
-    "liabilities": 182.204,
-    "net_change_in_cash": -3.296,
-    "net_income": 5.244,
-    "operating_cash_flow": -5.913
-   },
    "Q3 2022": {
     "assets": 258.313,
     "balance_total": 258.313,
@@ -14428,17 +14395,6 @@
     "net_change_in_cash": -3.033,
     "net_income": 2.224,
     "operating_cash_flow": -1.599
-   },
-   "Q4 2021": {
-    "assets": 266.556,
-    "balance_total": 266.556,
-    "equity": 95.397,
-    "financing_cash_flow": 20.056,
-    "investing_cash_flow": 1.239,
-    "liabilities": 171.16,
-    "net_change_in_cash": 0.78,
-    "net_income": 2.963,
-    "operating_cash_flow": -20.515
    },
    "Q4 2022": {
     "assets": 281.433,
@@ -25276,18 +25232,6 @@
    }
   },
   "EXPA": {
-   "Q1 2021": {
-    "assets": 55478.967,
-    "balance_total": 55478.967,
-    "dividends_paid": -134.6,
-    "equity": 6073.496,
-    "financing_cash_flow": -72.461,
-    "investing_cash_flow": -938.666,
-    "liabilities": 49405.471,
-    "net_change_in_cash": -4514.051,
-    "net_income": 183.635,
-    "operating_cash_flow": -3502.924
-   },
    "Q1 2022": {
     "assets": 80358.51,
     "balance_total": 80358.51,
@@ -25324,18 +25268,6 @@
     "net_income": 1086.823,
     "operating_cash_flow": 3799.505
    },
-   "Q2 2021": {
-    "assets": 64096.501,
-    "balance_total": 64096.501,
-    "dividends_paid": -0.578,
-    "equity": 6370.072,
-    "financing_cash_flow": -50.071,
-    "investing_cash_flow": -1588.051,
-    "liabilities": 57726.429,
-    "net_change_in_cash": 895.709,
-    "net_income": 221.526,
-    "operating_cash_flow": 2533.831
-   },
    "Q2 2022": {
     "assets": 84932.674,
     "balance_total": 84932.674,
@@ -25359,18 +25291,6 @@
     "net_change_in_cash": 8163.478,
     "net_income": 1287.844,
     "operating_cash_flow": 6769.249
-   },
-   "Q3 2021": {
-    "assets": 68924.255,
-    "balance_total": 68924.255,
-    "dividends_paid": -12.506,
-    "equity": 6399.815,
-    "financing_cash_flow": -220.795,
-    "investing_cash_flow": -1444.979,
-    "liabilities": 62524.44,
-    "net_change_in_cash": 1967.278,
-    "net_income": 122.483,
-    "operating_cash_flow": 3633.052
    },
    "Q3 2022": {
     "assets": 88172.602,
@@ -25407,18 +25327,6 @@
     "net_change_in_cash": 12346.361,
     "net_income": 1563.437,
     "operating_cash_flow": 14539.715
-   },
-   "Q4 2021": {
-    "assets": 77240.987,
-    "balance_total": 77240.987,
-    "dividends_paid": -13.463,
-    "equity": 6880.011,
-    "financing_cash_flow": 46.86,
-    "investing_cash_flow": -3057.284,
-    "liabilities": 70360.976,
-    "net_change_in_cash": 4675.136,
-    "net_income": 487.472,
-    "operating_cash_flow": 7685.56
    },
    "Q4 2022": {
     "assets": 98303.954,
@@ -26900,16 +26808,6 @@
    }
   },
   "GIHD": {
-   "Q1 2021": {
-    "assets": 38.98,
-    "balance_total": 38.98,
-    "equity": 36.711,
-    "investing_cash_flow": 0.241,
-    "liabilities": 2.268,
-    "net_change_in_cash": 0.453,
-    "net_income": 0.147,
-    "operating_cash_flow": 0.212
-   },
    "Q1 2022": {
     "assets": 38.521,
     "balance_total": 38.521,
@@ -26939,16 +26837,6 @@
     "net_change_in_cash": -9.418,
     "net_income": 0.191,
     "operating_cash_flow": -0.023
-   },
-   "Q2 2021": {
-    "assets": 39.039,
-    "balance_total": 39.039,
-    "equity": 36.803,
-    "investing_cash_flow": -0.495,
-    "liabilities": 2.236,
-    "net_change_in_cash": -1.023,
-    "net_income": 0.091,
-    "operating_cash_flow": -0.528
    },
    "Q2 2022": {
     "assets": 38.68,
@@ -26980,16 +26868,6 @@
     "net_income": 0.082,
     "operating_cash_flow": -1.776
    },
-   "Q3 2021": {
-    "assets": 38.202,
-    "balance_total": 38.202,
-    "equity": 35.985,
-    "investing_cash_flow": 1.287,
-    "liabilities": 2.217,
-    "net_change_in_cash": 1.051,
-    "net_income": -0.818,
-    "operating_cash_flow": -0.236
-   },
    "Q3 2022": {
     "assets": 40.029,
     "balance_total": 40.029,
@@ -27019,16 +26897,6 @@
     "net_change_in_cash": -1.375,
     "net_income": 1.354,
     "operating_cash_flow": 0.077
-   },
-   "Q4 2021": {
-    "assets": 38.123,
-    "balance_total": 38.123,
-    "equity": 36.131,
-    "investing_cash_flow": 4.984,
-    "liabilities": 1.992,
-    "net_change_in_cash": 4.685,
-    "net_income": 0.146,
-    "operating_cash_flow": -0.299
    },
    "Q4 2022": {
     "assets": 40.01,
@@ -27211,17 +27079,6 @@
    }
   },
   "GPIM": {
-   "Q1 2021": {
-    "assets": 62.811,
-    "balance_total": 62.811,
-    "equity": 54.172,
-    "financing_cash_flow": -1.652,
-    "investing_cash_flow": 0.008,
-    "liabilities": 8.639,
-    "net_change_in_cash": -0.379,
-    "net_income": 0.081,
-    "operating_cash_flow": 1.264
-   },
    "Q1 2022": {
     "assets": 63.257,
     "balance_total": 63.257,
@@ -27253,17 +27110,6 @@
     "net_change_in_cash": -3.295,
     "net_income": 1.27,
     "operating_cash_flow": -4.166
-   },
-   "Q2 2021": {
-    "assets": 63.236,
-    "balance_total": 63.236,
-    "equity": 54.431,
-    "financing_cash_flow": 1.252,
-    "investing_cash_flow": -1.026,
-    "liabilities": 8.805,
-    "net_change_in_cash": -0.117,
-    "net_income": 0.259,
-    "operating_cash_flow": -0.342
    },
    "Q2 2022": {
     "assets": 62.822,
@@ -27297,17 +27143,6 @@
     "net_income": 4.553,
     "operating_cash_flow": -6.121
    },
-   "Q3 2021": {
-    "assets": 63.532,
-    "balance_total": 63.532,
-    "equity": 54.792,
-    "financing_cash_flow": -0.711,
-    "investing_cash_flow": -1.193,
-    "liabilities": 8.74,
-    "net_change_in_cash": -0.1,
-    "net_income": 0.361,
-    "operating_cash_flow": 1.804
-   },
    "Q3 2022": {
     "assets": 65.777,
     "balance_total": 65.777,
@@ -27340,17 +27175,6 @@
     "net_change_in_cash": -11.559,
     "net_income": 4.061,
     "operating_cash_flow": -16.591
-   },
-   "Q4 2021": {
-    "assets": 63.356,
-    "balance_total": 63.356,
-    "equity": 53.539,
-    "financing_cash_flow": 0.0,
-    "investing_cash_flow": 0.006,
-    "liabilities": 9.817,
-    "net_change_in_cash": -0.518,
-    "net_income": -0.396,
-    "operating_cash_flow": -0.524
    },
    "Q4 2022": {
     "assets": 64.58,
@@ -30989,17 +30813,6 @@
    }
   },
   "MAAL": {
-   "Q1 2021": {
-    "assets": 2982.18,
-    "balance_total": 2982.18,
-    "equity": 117.181,
-    "financing_cash_flow": 19.002,
-    "investing_cash_flow": -0.073,
-    "liabilities": 2864.998,
-    "net_change_in_cash": -3.461,
-    "net_income": 1.01,
-    "operating_cash_flow": -22.39
-   },
    "Q1 2022": {
     "assets": 2648.459,
     "balance_total": 2648.459,
@@ -31044,17 +30857,6 @@
     "net_income": 10.734,
     "operating_cash_flow": 25.501
    },
-   "Q2 2021": {
-    "assets": 2974.001,
-    "balance_total": 2974.001,
-    "equity": 104.43,
-    "financing_cash_flow": -12.922,
-    "investing_cash_flow": -0.881,
-    "liabilities": 2869.57,
-    "net_change_in_cash": 4.175,
-    "net_income": -11.391,
-    "operating_cash_flow": 17.979
-   },
    "Q2 2022": {
     "assets": 2783.613,
     "balance_total": 2783.613,
@@ -31097,17 +30899,6 @@
     "net_change_in_cash": 76.169,
     "net_income": 28.296
    },
-   "Q3 2021": {
-    "assets": 3061.792,
-    "balance_total": 3061.792,
-    "equity": 89.693,
-    "financing_cash_flow": -6.881,
-    "investing_cash_flow": -0.875,
-    "liabilities": 2972.099,
-    "net_change_in_cash": -2.277,
-    "net_income": -14.751,
-    "operating_cash_flow": 5.48
-   },
    "Q3 2022": {
     "assets": 2916.316,
     "balance_total": 2916.316,
@@ -31149,17 +30940,6 @@
     "liabilities": 4393.333,
     "net_change_in_cash": -23.828,
     "net_income": 32.456
-   },
-   "Q4 2021": {
-    "assets": 2560.404,
-    "balance_total": 2560.404,
-    "equity": 132.994,
-    "financing_cash_flow": -11.455,
-    "investing_cash_flow": -5.285,
-    "liabilities": 2427.41,
-    "net_change_in_cash": -0.251,
-    "net_income": 51.372,
-    "operating_cash_flow": 16.489
    },
    "Q4 2022": {
     "assets": 2569.349,
@@ -34650,17 +34430,6 @@
    }
   },
   "NCCW": {
-   "Q1 2021": {
-    "assets": 469.459,
-    "balance_total": 469.459,
-    "equity": 192.855,
-    "financing_cash_flow": -0.96,
-    "investing_cash_flow": 0.708,
-    "liabilities": 276.604,
-    "net_change_in_cash": -3.165,
-    "net_income": -2.54,
-    "operating_cash_flow": -2.913
-   },
    "Q1 2022": {
     "assets": 543.217,
     "balance_total": 543.217,
@@ -34691,17 +34460,6 @@
     "net_change_in_cash": -15.005,
     "net_income": 0.91,
     "operating_cash_flow": -16.852
-   },
-   "Q2 2021": {
-    "assets": 458.09,
-    "balance_total": 458.09,
-    "equity": 185.922,
-    "financing_cash_flow": 0.0,
-    "investing_cash_flow": -0.086,
-    "liabilities": 272.168,
-    "net_change_in_cash": 1.355,
-    "net_income": -6.933,
-    "operating_cash_flow": 1.441
    },
    "Q2 2022": {
     "assets": 553.718,
@@ -34736,17 +34494,6 @@
     "net_income": 3.299,
     "operating_cash_flow": -18.205
    },
-   "Q3 2021": {
-    "assets": 465.027,
-    "balance_total": 465.027,
-    "equity": 180.683,
-    "financing_cash_flow": 0.0,
-    "investing_cash_flow": 0.34,
-    "liabilities": 284.344,
-    "net_change_in_cash": -1.249,
-    "net_income": -5.24,
-    "operating_cash_flow": -1.589
-   },
    "Q3 2022": {
     "assets": 546.522,
     "balance_total": 546.522,
@@ -34779,17 +34526,6 @@
     "net_change_in_cash": -3.937,
     "net_income": 1.276,
     "operating_cash_flow": -7.163
-   },
-   "Q4 2021": {
-    "assets": 555.805,
-    "balance_total": 555.805,
-    "equity": 225.161,
-    "financing_cash_flow": 26.795,
-    "investing_cash_flow": 2.699,
-    "liabilities": 330.644,
-    "net_change_in_cash": 29.233,
-    "net_income": 15.671,
-    "operating_cash_flow": -0.26
    },
    "Q4 2022": {
     "assets": 591.999,
@@ -43609,17 +43345,6 @@
    }
   },
   "VERT": {
-   "Q1 2021": {
-    "assets": 20.893,
-    "balance_total": 20.893,
-    "equity": 3.837,
-    "financing_cash_flow": 2.557,
-    "investing_cash_flow": -1.747,
-    "liabilities": 17.056,
-    "net_change_in_cash": 0.014,
-    "net_income": 0.257,
-    "operating_cash_flow": -0.796
-   },
    "Q1 2022": {
     "assets": 15.241,
     "balance_total": 15.241,
@@ -43662,17 +43387,6 @@
     "net_income": -0.072,
     "operating_cash_flow": 0.62
    },
-   "Q2 2021": {
-    "assets": 21.281,
-    "balance_total": 21.281,
-    "equity": 4.108,
-    "financing_cash_flow": -0.692,
-    "investing_cash_flow": -0.116,
-    "liabilities": 17.173,
-    "net_change_in_cash": 0.109,
-    "net_income": 0.272,
-    "operating_cash_flow": 0.918
-   },
    "Q2 2022": {
     "assets": 13.81,
     "balance_total": 13.81,
@@ -43704,17 +43418,6 @@
     "net_change_in_cash": -0.825,
     "net_income": 0.746,
     "operating_cash_flow": -0.485
-   },
-   "Q3 2021": {
-    "assets": 21.57,
-    "balance_total": 21.57,
-    "equity": 4.383,
-    "financing_cash_flow": 0.434,
-    "investing_cash_flow": -0.221,
-    "liabilities": 17.187,
-    "net_change_in_cash": -0.104,
-    "net_income": 0.275,
-    "operating_cash_flow": -0.317
    },
    "Q3 2022": {
     "assets": 12.831,
@@ -43748,17 +43451,6 @@
     "net_change_in_cash": 0.165,
     "net_income": 1.214,
     "operating_cash_flow": 0.51
-   },
-   "Q4 2021": {
-    "assets": 17.992,
-    "balance_total": 17.992,
-    "equity": 4.458,
-    "financing_cash_flow": -2.842,
-    "investing_cash_flow": -0.044,
-    "liabilities": 13.534,
-    "net_change_in_cash": -0.034,
-    "net_income": 0.075,
-    "operating_cash_flow": 2.853
    },
    "Q4 2022": {
     "assets": 13.238,
@@ -44469,6 +44161,7 @@
   "SPHT": "reports in US Dollar(USD)",
   "SPMD": "reports in another currency",
   "TALM": "reports in another currency",
+  "TORA": "scale could not be established",
   "TWSA": "scale could not be established",
   "TYCN": "scale could not be established",
   "UPMS": "scale could not be established",

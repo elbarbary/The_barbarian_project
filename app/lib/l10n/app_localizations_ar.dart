@@ -1470,6 +1470,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String finBalanceAsOf(String period) {
+    return 'الميزانية · $period';
+  }
+
+  @override
   String finFiguresUnit(String unit) {
     return 'الوحدة: $unit';
   }
@@ -1980,6 +1985,99 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sectorMiscellaneous => 'متنوعة';
+
+  @override
+  String get sectorHeroLabel => 'تحليل القطاعات';
+
+  @override
+  String sectorHeroMoving(int rising, int total, String metric) {
+    return '$rising من $total شركة تُظهر ارتفاع $metric.';
+  }
+
+  @override
+  String sectorHeroFoot(int count, String date) {
+    return '$count قطاعات · حسب الإفصاح $date';
+  }
+
+  @override
+  String get sectorScreenTitle => 'تحليل القطاعات';
+
+  @override
+  String get sectorScreenDek =>
+      'كل قطاع مقروء مقابل شركاته — إلى أين تتحرك المجموعة، ووسط نطاقها. وسطاء، لا أحكام.';
+
+  @override
+  String get sectorScreenMethod =>
+      'الأعداد لِلشركات التي أفصحت. الوسيط هو الشركة الوسطى من خمس شركات أو أكثر تُبلّغ عن كل رقم.';
+
+  @override
+  String sectorScreenAsOf(String date) {
+    return 'حسب الإفصاح للبورصة · بُني في $date.';
+  }
+
+  @override
+  String sectorCompanyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count شركة',
+      many: '$count شركة',
+      few: '$count شركات',
+      two: 'شركتان',
+      one: 'شركة واحدة',
+      zero: 'لا شركات',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sectorReadLabel => 'قراءة القطاع';
+
+  @override
+  String sectorReadFallback(int rising, int total, int falling, String metric) {
+    return '$rising من $total شركة تُظهر ارتفاع $metric؛ و$falling في تراجع.';
+  }
+
+  @override
+  String get sectorMovingLabel => 'كيف تتحرك شركاته';
+
+  @override
+  String sectorMoveCounts(int rising, int falling) {
+    return '$rising مرتفعة · $falling متراجعة';
+  }
+
+  @override
+  String get sectorMediansLabel => 'المعتاد في القطاع';
+
+  @override
+  String get sectorMedianNote =>
+      'الوسيط هو الشركة الوسطى من خمس شركات أو أكثر تُبلّغ عن كل رقم.';
+
+  @override
+  String get sectorStandoutLabel => 'حيث تتحرك أكثر المقاييس معًا';
+
+  @override
+  String sectorMeasuresImproving(int improving, int readable) {
+    return '$improving من $readable مقاييس في تحسّن';
+  }
+
+  @override
+  String get sectorMembersLabel => 'كل الشركات';
+
+  @override
+  String get sectorNotEnoughHistory => 'لا يوجد تاريخ كافٍ للقراءة بعد';
+
+  @override
+  String sectorHeldBack(String names) {
+    return '$names يضم كلٌّ منها أقل من خمس شركات هنا — أقل من أن تُقرأ كمجموعة.';
+  }
+
+  @override
+  String get sectorDoesNotShowTitle => 'ما لا يُظهره هذا';
+
+  @override
+  String get sectorDoesNotShowBody =>
+      'لا إيرادات ولا هوامش ولا قيمة سوقية ولا نسبة تداول حر ولا عائد سعري — إفصاحات البورصة لا تحملها، لذا لا يحسبها ESTHMR.';
 
   @override
   String scanScoreOf(String status, int max) {
@@ -2578,6 +2676,9 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get calShowFewer => 'عرض أقل';
+
+  @override
   String get ccalScheduled => 'مواعيد أفصحت عنها';
 
   @override
@@ -2604,6 +2705,14 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String ccalFiledCount(int shown, int total) {
     return 'عرض $shown من $total إفصاحاً.';
+  }
+
+  @override
+  String get ccalShowAll => 'عرض كل الإفصاحات';
+
+  @override
+  String ccalShowingAll(int total) {
+    return 'عرض كل الإفصاحات ($total).';
   }
 
   @override
@@ -2729,6 +2838,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get revBelowSector => 'أقل من قطاعها';
+
+  @override
+  String revSectorMedian(String sector) {
+    return 'وسيط $sector';
+  }
 
   @override
   String revOverPeriods(int n) {
@@ -2888,6 +3002,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get revAskTitle => 'يستحق أن تسأل';
 
   @override
+  String get revAnswerTitle => 'إجابة مُرجَّحة';
+
+  @override
   String get revOnePoint => 'رقم واحد منشور — لا يكفي من التاريخ لقراءة اتجاه.';
 
   @override
@@ -3006,4 +3123,77 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get revReadLabel => 'القراءة';
+
+  @override
+  String get signInLead =>
+      'اقرأ البورصة بكلام واضح. سجّل الدخول لتحتفظ بقائمة متابعتك وترى البيانات الحيّة، أو تصفّح أولاً كزائر.';
+
+  @override
+  String get signInApple => 'المتابعة عبر Apple';
+
+  @override
+  String get signInGoogle => 'المتابعة عبر Google';
+
+  @override
+  String get signInGuest => 'المتابعة كزائر';
+
+  @override
+  String get signInGuestNote =>
+      'الزائر يتصفّح بيانات تجريبية. تسجيل الدخول يُشغّل البيانات الحيّة.';
+
+  @override
+  String get signInFailed => 'لم ينجح ذلك. من فضلك حاول مرة أخرى.';
+
+  @override
+  String get account => 'الحساب';
+
+  @override
+  String get accountGuest => 'زائر';
+
+  @override
+  String get accountSignedIn => 'مُسجَّل الدخول';
+
+  @override
+  String get accountLive => 'بيانات البورصة الحيّة';
+
+  @override
+  String get accountSample => 'بيانات تجريبية على هذا الجهاز';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get signIn => 'تسجيل الدخول';
+
+  @override
+  String get revOrientLabel => 'أي اتجاه يُقرأ أفضل';
+
+  @override
+  String get revOrientPe =>
+      'المضاعف الأقل تقييم أرخص — وإن كان انخفاضه قد يعني أيضًا أن السوق يتوقّع تراجع الأرباح.';
+
+  @override
+  String get revOrientPb =>
+      'المضاعف الأقل تقييم أرخص مقابل القيمة الدفترية للشركة.';
+
+  @override
+  String get revOrientYield =>
+      'العائد الأعلى يدفع أكثر لكل جنيه مستثمَر — لكنه قد يكون أيضًا سعرًا هبط.';
+
+  @override
+  String get revOrientHigherMore => 'الأعلى ببساطة أكثر.';
+
+  @override
+  String get revOrientCash =>
+      'الأعلى يعني أن قدرًا أكبر من الربح وصل فعلًا نقدًا.';
+
+  @override
+  String get revOrientReturn => 'الأعلى عائد أقوى على ما جرى استثماره.';
+
+  @override
+  String get revOrientDebt =>
+      'الأقل اقتراض أقل مقابل حقوق الملكية — وإن كان بعض الدين معتادًا وقد يكون منتجًا.';
+
+  @override
+  String get revOrientAssets => 'الأعلى ميزانية أكبر — أكبر، لا أفضل بالضرورة.';
 }

@@ -10,11 +10,12 @@ import '../features/exchange/exchange_screen.dart';
 import '../features/exit/exit_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/market/market_screen.dart';
-import '../features/opportunities/opportunity_screen.dart';
 import '../features/calendar/calendar_screen.dart';
 import '../features/today/today_screen.dart';
 import '../features/profile/you_screen.dart';
 import '../features/research/article_screen.dart';
+import '../features/sectors/sector_screen.dart';
+import '../features/sectors/sector_detail_screen.dart';
 
 /// Route paths, in one place so nothing hard-codes a string.
 abstract final class Routes {
@@ -35,10 +36,14 @@ abstract final class Routes {
   /// history. What the Home hero opens.
   static const String exchange = 'exchange';
 
-  static const String scanner = 'scanner';
   static const String cashOrTrash = 'cash-or-trash';
   static const String company = 'company/:ticker';
   static const String article = 'article';
+
+  /// The sector view — every sector read against its own companies — and one
+  /// sector in full. What the Home sector card opens.
+  static const String sectors = 'sectors';
+  static const String sectorDetail = 'sectors/:slug';
 
   /// The directory. `focus` opens it with the keyboard already up, which is
   /// what tapping a search pill means — the reader has already decided to type.
@@ -51,11 +56,14 @@ abstract final class Routes {
   static String companyPath(BNavTab from, String ticker) =>
       '${_root(from)}company/$ticker'.replaceAll('//', '/');
 
-  static String scannerPath(BNavTab from) => '${_root(from)}scanner';
-
   static String exchangePath(BNavTab from) => '${_root(from)}exchange';
 
   static String cashOrTrashPath(BNavTab from) => '${_root(from)}cash-or-trash';
+
+  static String sectorsPath(BNavTab from) => '${_root(from)}sectors';
+
+  static String sectorDetailPath(BNavTab from, String slug) =>
+      '${_root(from)}sectors/$slug';
 
   static String articlePath(BNavTab from, String url, String title) => Uri(
     path: '${_root(from)}article',
@@ -100,12 +108,19 @@ GoRouter buildRouter() {
       builder: (context, state) => ExchangeScreen(parentTab: tab),
     ),
     GoRoute(
-      path: Routes.scanner,
-      builder: (context, state) => OpportunityScreen(parentTab: tab),
-    ),
-    GoRoute(
       path: Routes.cashOrTrash,
       builder: (context, state) => CashOrTrashScreen(parentTab: tab),
+    ),
+    GoRoute(
+      path: Routes.sectors,
+      builder: (context, state) => SectorScreen(parentTab: tab),
+    ),
+    GoRoute(
+      path: Routes.sectorDetail,
+      builder: (context, state) => SectorDetailScreen(
+        slug: state.pathParameters['slug']!,
+        parentTab: tab,
+      ),
     ),
     GoRoute(
       path: Routes.company,

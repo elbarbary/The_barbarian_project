@@ -73,7 +73,6 @@ class ManifestVersions {
 
   int get market => versionOf('market');
   int get companies => versionOf('companies');
-  int get opportunities => versionOf('opportunities');
   int get cashOrTrash => versionOf('cash_or_trash');
 
   /// The world outside the exchange — Suez transits, oil, gold, and Egypt's
@@ -83,7 +82,6 @@ class ManifestVersions {
   static const List<String> resources = [
     'market',
     'companies',
-    'opportunities',
     'cash_or_trash',
     'macro',
     'news',
@@ -93,6 +91,7 @@ class ManifestVersions {
     'calendar',
     'signals',
     'review',
+    'sectors',
     'market_history',
   ];
 

@@ -77,6 +77,20 @@ abstract class BriefPlan with _$BriefPlan {
     @Default('') String text,
     @JsonKey(name: 'text_ar') @Default('') String textAr,
     @Default('') String id,
+
+    /// The filing that announced this intention, carried on the plan itself so
+    /// the row can open its own source. The app page holds only a company's
+    /// newest filings, and the announcement a plan quotes is very often older
+    /// than that window — so the link is built at build time from the filing's
+    /// id and travels with the plan rather than being looked up on the phone.
+    /// Empty only for a plan written before this field existed.
+    @Default('') String date,
+    @Default('') String link,
+
+    /// The filing's own title, shown under the plan so the connection to the
+    /// document is legible before it is opened.
+    @Default('') String title,
+    @JsonKey(name: 'title_ar') @Default('') String titleAr,
   }) = _BriefPlan;
 
   const BriefPlan._();
@@ -85,6 +99,11 @@ abstract class BriefPlan with _$BriefPlan {
       _$BriefPlanFromJson(json);
 
   String textFor(bool arabic) => arabic && textAr.isNotEmpty ? textAr : text;
+
+  String titleFor(bool arabic) => arabic && titleAr.isNotEmpty ? titleAr : title;
+
+  /// Whether this plan carries its own link to the filing behind it.
+  bool get hasLink => link.isNotEmpty;
 }
 
 /// Counts, not judgements.

@@ -44,6 +44,10 @@ _BriefPlan _$BriefPlanFromJson(Map<String, dynamic> json) => _BriefPlan(
   text: json['text'] as String? ?? '',
   textAr: json['text_ar'] as String? ?? '',
   id: json['id'] as String? ?? '',
+  date: json['date'] as String? ?? '',
+  link: json['link'] as String? ?? '',
+  title: json['title'] as String? ?? '',
+  titleAr: json['title_ar'] as String? ?? '',
 );
 
 Map<String, dynamic> _$BriefPlanToJson(_BriefPlan instance) =>
@@ -51,6 +55,10 @@ Map<String, dynamic> _$BriefPlanToJson(_BriefPlan instance) =>
       'text': instance.text,
       'text_ar': instance.textAr,
       'id': instance.id,
+      'date': instance.date,
+      'link': instance.link,
+      'title': instance.title,
+      'title_ar': instance.titleAr,
     };
 
 _BriefRecord _$BriefRecordFromJson(Map<String, dynamic> json) => _BriefRecord(

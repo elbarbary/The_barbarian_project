@@ -85,18 +85,14 @@ class _TodayHeader extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
-    // `.value?.value` collapses loading, error and a genuinely absent report
-    // into the same null, so the second line of the screen said "the board has
-    // not published yet" on the first frame — an affirmative claim about the
-    // publisher, made before the document had been asked for. The same mistake
-    // `_DailyInsight` made, in a second place.
-    final async = ref.watch(opportunityReportProvider);
-    final report = async.value?.value;
-    final subtitle = switch (report?.reportDate) {
-      final DateTime at => l.todayPutTogether(context.dayMonth(at)),
-      // Nothing to say yet is said by saying nothing.
-      null when async.isLoading => null,
-      null => l.scannerNotPublished,
+    // The date the session belongs to — the last *available* session, which is
+    // what the whole screen is about. `.value?.value` collapses loading, error
+    // and a genuinely absent snapshot into the same null, so the line stays
+    // silent until there is a real date to name rather than asserting one.
+    final at = ref.watch(marketSnapshotProvider).value?.value.sessionDate;
+    final subtitle = switch (at) {
+      final DateTime day => l.todayPutTogether(context.dayMonth(day)),
+      null => null,
     };
 
     return Column(

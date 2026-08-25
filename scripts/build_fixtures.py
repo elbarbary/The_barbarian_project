@@ -90,7 +90,6 @@ RESOURCES = {
     "market": ["market.json"],
     "market_history": ["market-history.json"],
     "companies": ["companies.json"],
-    "opportunities": ["opportunities/latest.json"],
     "cash_or_trash": ["cash-or-trash/index.json"],
     "news": ["news/latest.json"],
     "rates": ["rates/latest.json"],
@@ -100,6 +99,7 @@ RESOURCES = {
     "calendar": ["calendar.json"],
     "signals": ["signals.json"],
     "review": ["review.json"],
+    "sectors": ["sectors.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by
@@ -114,7 +114,6 @@ RESOURCES = {
 # ever asks for it.
 UNVERSIONED = [
     "companies",
-    "opportunities/history",
     "prices",
     "disclosures/archive",
     "disclosures/documents",
@@ -125,6 +124,7 @@ UNVERSIONED = [
     # will never ask for the new ones.
     "signals",
     "review",
+    "sectors",
     "calendar/filed",
     # Same story, and it was already true before signals existed: a brief is
     # fetched with `disclosures` as its counter but lives in its own file.

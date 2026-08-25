@@ -361,7 +361,15 @@ $BriefRecordCopyWith<$Res>? get record {
 /// @nodoc
 mixin _$BriefPlan {
 
- String get text;@JsonKey(name: 'text_ar') String get textAr; String get id;
+ String get text;@JsonKey(name: 'text_ar') String get textAr; String get id;/// The filing that announced this intention, carried on the plan itself so
+/// the row can open its own source. The app page holds only a company's
+/// newest filings, and the announcement a plan quotes is very often older
+/// than that window — so the link is built at build time from the filing's
+/// id and travels with the plan rather than being looked up on the phone.
+/// Empty only for a plan written before this field existed.
+ String get date; String get link;/// The filing's own title, shown under the plan so the connection to the
+/// document is legible before it is opened.
+ String get title;@JsonKey(name: 'title_ar') String get titleAr;
 /// Create a copy of BriefPlan
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -374,16 +382,16 @@ $BriefPlanCopyWith<BriefPlan> get copyWith => _$BriefPlanCopyWithImpl<BriefPlan>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BriefPlan&&(identical(other.text, text) || other.text == text)&&(identical(other.textAr, textAr) || other.textAr == textAr)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BriefPlan&&(identical(other.text, text) || other.text == text)&&(identical(other.textAr, textAr) || other.textAr == textAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,text,textAr,id);
+int get hashCode => Object.hash(runtimeType,text,textAr,id,date,link,title,titleAr);
 
 @override
 String toString() {
-  return 'BriefPlan(text: $text, textAr: $textAr, id: $id)';
+  return 'BriefPlan(text: $text, textAr: $textAr, id: $id, date: $date, link: $link, title: $title, titleAr: $titleAr)';
 }
 
 
@@ -394,7 +402,7 @@ abstract mixin class $BriefPlanCopyWith<$Res>  {
   factory $BriefPlanCopyWith(BriefPlan value, $Res Function(BriefPlan) _then) = _$BriefPlanCopyWithImpl;
 @useResult
 $Res call({
- String text,@JsonKey(name: 'text_ar') String textAr, String id
+ String text,@JsonKey(name: 'text_ar') String textAr, String id, String date, String link, String title,@JsonKey(name: 'title_ar') String titleAr
 });
 
 
@@ -411,11 +419,15 @@ class _$BriefPlanCopyWithImpl<$Res>
 
 /// Create a copy of BriefPlan
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? text = null,Object? textAr = null,Object? id = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? text = null,Object? textAr = null,Object? id = null,Object? date = null,Object? link = null,Object? title = null,Object? titleAr = null,}) {
   return _then(_self.copyWith(
 text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,textAr: null == textAr ? _self.textAr : textAr // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,titleAr: null == titleAr ? _self.titleAr : titleAr // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -501,10 +513,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id,  String date,  String link,  String title, @JsonKey(name: 'title_ar')  String titleAr)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BriefPlan() when $default != null:
-return $default(_that.text,_that.textAr,_that.id);case _:
+return $default(_that.text,_that.textAr,_that.id,_that.date,_that.link,_that.title,_that.titleAr);case _:
   return orElse();
 
 }
@@ -522,10 +534,10 @@ return $default(_that.text,_that.textAr,_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id,  String date,  String link,  String title, @JsonKey(name: 'title_ar')  String titleAr)  $default,) {final _that = this;
 switch (_that) {
 case _BriefPlan():
-return $default(_that.text,_that.textAr,_that.id);case _:
+return $default(_that.text,_that.textAr,_that.id,_that.date,_that.link,_that.title,_that.titleAr);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -542,10 +554,10 @@ return $default(_that.text,_that.textAr,_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String text, @JsonKey(name: 'text_ar')  String textAr,  String id,  String date,  String link,  String title, @JsonKey(name: 'title_ar')  String titleAr)?  $default,) {final _that = this;
 switch (_that) {
 case _BriefPlan() when $default != null:
-return $default(_that.text,_that.textAr,_that.id);case _:
+return $default(_that.text,_that.textAr,_that.id,_that.date,_that.link,_that.title,_that.titleAr);case _:
   return null;
 
 }
@@ -557,12 +569,24 @@ return $default(_that.text,_that.textAr,_that.id);case _:
 @JsonSerializable()
 
 class _BriefPlan extends BriefPlan {
-  const _BriefPlan({this.text = '', @JsonKey(name: 'text_ar') this.textAr = '', this.id = ''}): super._();
+  const _BriefPlan({this.text = '', @JsonKey(name: 'text_ar') this.textAr = '', this.id = '', this.date = '', this.link = '', this.title = '', @JsonKey(name: 'title_ar') this.titleAr = ''}): super._();
   factory _BriefPlan.fromJson(Map<String, dynamic> json) => _$BriefPlanFromJson(json);
 
 @override@JsonKey() final  String text;
 @override@JsonKey(name: 'text_ar') final  String textAr;
 @override@JsonKey() final  String id;
+/// The filing that announced this intention, carried on the plan itself so
+/// the row can open its own source. The app page holds only a company's
+/// newest filings, and the announcement a plan quotes is very often older
+/// than that window — so the link is built at build time from the filing's
+/// id and travels with the plan rather than being looked up on the phone.
+/// Empty only for a plan written before this field existed.
+@override@JsonKey() final  String date;
+@override@JsonKey() final  String link;
+/// The filing's own title, shown under the plan so the connection to the
+/// document is legible before it is opened.
+@override@JsonKey() final  String title;
+@override@JsonKey(name: 'title_ar') final  String titleAr;
 
 /// Create a copy of BriefPlan
 /// with the given fields replaced by the non-null parameter values.
@@ -577,16 +601,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BriefPlan&&(identical(other.text, text) || other.text == text)&&(identical(other.textAr, textAr) || other.textAr == textAr)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BriefPlan&&(identical(other.text, text) || other.text == text)&&(identical(other.textAr, textAr) || other.textAr == textAr)&&(identical(other.id, id) || other.id == id)&&(identical(other.date, date) || other.date == date)&&(identical(other.link, link) || other.link == link)&&(identical(other.title, title) || other.title == title)&&(identical(other.titleAr, titleAr) || other.titleAr == titleAr));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,text,textAr,id);
+int get hashCode => Object.hash(runtimeType,text,textAr,id,date,link,title,titleAr);
 
 @override
 String toString() {
-  return 'BriefPlan(text: $text, textAr: $textAr, id: $id)';
+  return 'BriefPlan(text: $text, textAr: $textAr, id: $id, date: $date, link: $link, title: $title, titleAr: $titleAr)';
 }
 
 
@@ -597,7 +621,7 @@ abstract mixin class _$BriefPlanCopyWith<$Res> implements $BriefPlanCopyWith<$Re
   factory _$BriefPlanCopyWith(_BriefPlan value, $Res Function(_BriefPlan) _then) = __$BriefPlanCopyWithImpl;
 @override @useResult
 $Res call({
- String text,@JsonKey(name: 'text_ar') String textAr, String id
+ String text,@JsonKey(name: 'text_ar') String textAr, String id, String date, String link, String title,@JsonKey(name: 'title_ar') String titleAr
 });
 
 
@@ -614,11 +638,15 @@ class __$BriefPlanCopyWithImpl<$Res>
 
 /// Create a copy of BriefPlan
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? text = null,Object? textAr = null,Object? id = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? text = null,Object? textAr = null,Object? id = null,Object? date = null,Object? link = null,Object? title = null,Object? titleAr = null,}) {
   return _then(_BriefPlan(
 text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
 as String,textAr: null == textAr ? _self.textAr : textAr // ignore: cast_nullable_to_non_nullable
 as String,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
+as String,link: null == link ? _self.link : link // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String,titleAr: null == titleAr ? _self.titleAr : titleAr // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

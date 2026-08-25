@@ -69,10 +69,48 @@ NAMES = {
     "debt_equity": "debt to equity",
 }
 
+# The question each metric leaves a reader with — the same ones the sheet
+# prints, condensed. The model is asked for a *probable answer* to these,
+# grounded only in the directions it is given, so a reader is not left holding
+# the question alone. Kept in sync with `review_sheet._faceOf`.
+QUESTIONS = {
+    "pe": "Why is it priced this way against its sector, and what are earnings "
+          "doing underneath it?",
+    "pb": "Are the assets a buyer is paying for actually earning anything?",
+    "dividend_yield": "Is the dividend supported by profit and cash, or by a "
+                      "share price that fell?",
+    "profit": "Where did the change come from — the business, or something that "
+              "will not repeat?",
+    "eps": "Did the earnings belonging to each share move with total profit, or "
+           "did the share count change it?",
+    "assets": "Is the business actually getting bigger, and is profit keeping "
+              "pace with it?",
+    "cash_conversion": "Of the reported profit, how much actually arrived as cash?",
+    "roe": "Are the returns coming from the business or from borrowed money — "
+           "read against the debt row?",
+    "roa": "How hard is everything the company owns actually working?",
+    "debt_equity": "Is the borrowed money earning more than it costs?",
+}
+
 # A four-digit year is allowed in the prose; any other run of digits is a
 # figure the model produced on its own, and the read is refused for it.
 YEAR = re.compile(r"\b(19|20)\d{2}\b")
 DIGITS = re.compile(r"\d")
+
+
+def targets(doc: dict) -> list[tuple[str, str, str]]:
+    """(key, name, direction) for each metric moving in a readable direction.
+
+    Only rising or falling metrics get a probable answer: a flat or single-point
+    metric has no movement to explain, and inventing a reason for one would be
+    the model reaching past its facts.
+    """
+    out = []
+    for metric in doc.get("metrics", []):
+        key, direction = metric.get("key"), metric.get("direction")
+        if key in QUESTIONS and direction in ("rising", "falling"):
+            out.append((key, NAMES.get(key, key), direction))
+    return out
 
 
 def load(path: pathlib.Path) -> dict:
@@ -102,23 +140,41 @@ def facts(doc: dict) -> str:
     return "\n".join(lines)
 
 
+def answer_block(doc: dict) -> str:
+    lines = []
+    for key, name, direction in targets(doc):
+        lines.append(f'  [{key}] {name} is {direction}. '
+                     f'Question: {QUESTIONS[key]}')
+    return "\n".join(lines)
+
+
 def prompt_for(name: str, doc: dict) -> str:
+    answers = answer_block(doc)
+    answers_spec = (
+        f"""
+
+"answers": an object giving a PROBABLE answer to the question each moving metric leaves open, so a reader is not left holding the question alone. For EACH metric below, add a key exactly as written in the square brackets, whose value is an object {{"en": "...", "ar": "..."}}: one or two sentences in each language reading the OTHER directions above to say what is the LIKELY reason this metric is moving the way it is. It is a probable reason, not a certainty — phrase it as one ("likely", "the pattern suggests", "consistent with"). If the directions do not point to a probable reason, give the key an object with empty strings.
+
+{answers}"""
+        if answers else ""
+    )
+    keys = ', "answers"' if answers else ""
     return f"""You are reading a computed financial dashboard for {name}, a company listed on the Egyptian Exchange. Each line is a metric and the direction it has moved over this company's own reported history:
 
 {facts(doc)}
 
-Write a short reading of this pattern as a whole. Return ONLY a JSON object with two keys:
+Write a short reading of this pattern. Return ONLY a JSON object with the keys "read", "read_ar"{keys}:
 
 "read": 2 to 3 sentences of English. Describe what the directions say together — where they agree, and where they contradict each other. When they contradict, name the one metric whose row settles the question. Name the metrics in words. Write in the third person about the company; never address anyone and never use the words "should", "must" or "consider".
 
-"read_ar": the same, in Arabic.
+"read_ar": the same, in Arabic.{answers_spec}
 
-RULES, which override everything above:
+RULES, which override everything above and apply to every sentence including the answers:
 - Describe ONLY the directions given. Do not quote any number, ratio, percentage or figure — those are shown separately. You may mention a year.
 - Never say whether the company is good, bad, cheap, expensive, a buy, a sell, promising or risky.
 - Never advise buying, selling or holding. Never address the reader, and never write "readers should", "you should", "one should" or any instruction.
 - Never predict a price, a return or a future figure.
-- If the metrics broadly agree, say so plainly. If they contradict, say what the contradiction is and which metric to read next to resolve it.
+- An answer reads the other directions to explain one metric — it explains, it does not recommend. "Earnings per share rose with profit, so the gain is not diluted by new shares" explains; "this is a strong company" judges.
 - This is a description of a pattern, not a recommendation."""
 
 
@@ -136,6 +192,23 @@ def parse(raw: str) -> dict | None:
         return None
 
 
+def _clean(field: str) -> str | None:
+    """A vetted sentence, or None if it advises or quotes a figure.
+
+    The same two guards the read passes, factored out so every probable answer
+    clears the identical bar: no directive in either language, and no digit that
+    is not part of a four-digit year.
+    """
+    field = (field or "").strip()
+    if not field:
+        return ""
+    if macro_types.directive(field):
+        return None
+    if DIGITS.search(YEAR.sub(" ", field)):
+        return None
+    return field
+
+
 def vet(obj: dict) -> tuple[dict | None, str]:
     read = (obj.get("read") or "").strip()
     read_ar = (obj.get("read_ar") or "").strip()
@@ -149,7 +222,23 @@ def vet(obj: dict) -> tuple[dict | None, str]:
         stripped = YEAR.sub(" ", field)
         if DIGITS.search(stripped):
             return None, "quoted a figure"
-    return {"read": read, "read_ar": read_ar}, ""
+
+    # Probable answers are vetted one at a time and dropped individually — a
+    # single answer that reaches for a figure does not cost the read or the
+    # other answers. A whole metric key is kept only if its English clears the
+    # bar; the Arabic falls back to the English on the phone when it does not.
+    answers = {}
+    raw = obj.get("answers")
+    if isinstance(raw, dict):
+        for key, value in raw.items():
+            if key not in QUESTIONS or not isinstance(value, dict):
+                continue
+            en = _clean(value.get("en", ""))
+            ar = _clean(value.get("ar", ""))
+            if not en or len(en) < 15:
+                continue
+            answers[key] = {"en": en, "ar": ar or ""}
+    return {"read": read, "read_ar": read_ar, "answers": answers}, ""
 
 
 def directory() -> dict[str, str]:

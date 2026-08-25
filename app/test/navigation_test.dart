@@ -1,5 +1,7 @@
 import 'package:barbarian/app/router.dart';
 import 'package:barbarian/core/models/quote_snapshot.dart';
+import 'package:barbarian/core/auth/auth_controller.dart';
+import 'package:barbarian/core/auth/identity.dart';
 import 'package:barbarian/core/providers.dart';
 import 'package:barbarian/core/storage/document_cache.dart';
 import 'package:barbarian/core/theme/barbarian_theme.dart';
@@ -22,6 +24,13 @@ import 'package:barbarian/l10n/app_localizations.dart';
 Widget app({List<String>? watchlist, QuoteSnapshot? quotes}) {
   return ProviderScope(
     overrides: [
+      authInitialProvider.overrideWithValue(
+        const Identity(mode: AuthMode.google, userId: 'test-account'),
+      ),
+      // The tests are a signed-in, live session; pinning this keeps the
+      // auth notifier out of the document/freshness graph, which a fake-
+      // async test does not set up and which would stall its streams.
+      useFixturesProvider.overrideWithValue(false),
       documentSourceProvider.overrideWithValue(const DiskFixtureSource()),
       documentCacheProvider.overrideWithValue(MemoryDocumentCache()),
       quoteClientProvider.overrideWithValue(FakeQuoteClient(quotes)),
@@ -143,26 +152,6 @@ void main() {
   });
 
   group('pushed routes', () {
-    testWidgets('Home opens the Scanner and comes back', (tester) async {
-      await boot(tester);
-      await tapTab(tester, BNavTab.home);
-
-      // The hero is only tappable once the scanner report has landed. Tap the
-      // kicker, which is stable; the headline is now the report's own line.
-      // It sits below the busiest list on Home rather than at the top of
-      // Today, so it has to be scrolled to before it can be tapped.
-      await pumpUntil(tester, find.text('SCANNER'));
-      await tapVisible(tester, find.text('SCANNER'));
-      await pumpUntil(tester, find.text('Scanner'));
-
-      // Spec: a detail route never moves the app to another tab.
-      final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));
-      expect(nav.active, BNavTab.home);
-
-      await tester.tap(find.byIcon(Icons.arrow_back_ios_new_rounded).first);
-      await pumpUntil(tester, find.text('ESTHMR'));
-    });
-
     testWidgets('search opens a company, keeping the Home slot lit', (
       tester,
     ) async {
@@ -263,7 +252,9 @@ void main() {
       await tapTab(tester, BNavTab.you);
       await pumpUntil(tester, find.text('Empty watchlist'));
 
-      await tester.tap(find.text('Browse companies'));
+      // The account row sits above the watchlist now, so the empty-state
+      // action can be below the fold — scroll it into view before tapping.
+      await tapVisible(tester, find.text('Browse companies'));
       await pumpUntil(tester, find.text('The full directory'));
 
       final nav = tester.widget<BGlassNav>(find.byType(BGlassNav));

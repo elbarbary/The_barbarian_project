@@ -8,7 +8,6 @@ import '../../core/models/exit_liquidity.dart';
 import '../../core/models/explainer.dart';
 import '../../core/models/market_snapshot.dart';
 import '../../core/models/news.dart';
-import '../../core/models/opportunity.dart';
 import '../../core/models/profit_movement.dart';
 import '../../core/models/disclosure.dart';
 import '../../core/models/recency.dart';
@@ -696,6 +695,32 @@ class _FactCard extends StatelessWidget {
 
 /// What the company reported, and what it means.
 ///
+/// The newest filed balance sheet — which is very often not the newest row.
+///
+/// The exchange announces a year's net profit months before the audited
+/// balance sheet is transcribed, so the last annual row is frequently a
+/// profit-only figure with assets, equity and liabilities all absent. Reading
+/// the balance off that row blanked the whole balance-sheet block for 150 of
+/// 249 companies, even when a complete statement sat one row back on disk.
+///
+/// This walks back to the most recent period that actually carries a balance —
+/// the audited annual first, then an interim — and returns it so the block can
+/// render under *its own* period label. Nothing from one date is relabelled as
+/// another: the profit headline keeps its period, the balance keeps its own.
+FinancialPeriod? _latestBalance(
+  List<FinancialPeriod> annual,
+  List<FinancialPeriod> interim,
+) {
+  bool carries(FinancialPeriod p) => p.assets != null || p.equity != null;
+  for (final period in annual.reversed) {
+    if (carries(period)) return period;
+  }
+  for (final period in interim.reversed) {
+    if (carries(period)) return period;
+  }
+  return null;
+}
+
 /// Two sources, both filed. Annual statements — assets, liabilities, equity,
 /// net income, operating cash flow — come from the company's filed accounts and
 /// were checked line by line against El Sewedy's own published FY2024 and
@@ -726,6 +751,10 @@ class _Financials extends StatelessWidget {
     final prior = comparablePrior(annual.isNotEmpty ? annual : interim, latest);
     final move = profitMovement(latest, prior, l);
     final headline = egpMillions(latest.netIncome);
+    // The balance sheet is dated separately from the profit headline, because
+    // it is filed later: the newest row with a balance is often a year behind
+    // the newest row with a profit.
+    final balance = _latestBalance(annual, interim);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -791,24 +820,37 @@ class _Financials extends StatelessWidget {
           ),
         ],
 
-        if (latest.assets != null || latest.equity != null) ...[
+        if (balance != null) ...[
           const SizedBox(height: 14),
           Builder(
             builder: (context) {
               final scale = egpScaleFor([
-                latest.assets,
-                latest.equity,
-                latest.liabilities,
-                latest.operatingCashFlow,
+                balance.assets,
+                balance.equity,
+                balance.liabilities,
+                balance.operatingCashFlow,
               ]);
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Its own period, so a balance a year behind the profit
+                  // headline reads as exactly that rather than as this year's.
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      l.finBalanceAsOf(periodLabel(balance.period, l)),
+                      style: BarbarianType.labelNano.copyWith(
+                        color: c.textMuted,
+                        letterSpacing: 0.6,
+                      ),
+                    ),
+                  ),
                   Row(
                     children: [
                       Expanded(
                         child: BStatTile(
                           label: l.finTotalAssets,
-                          value: egpIn(latest.assets, scale),
+                          value: egpIn(balance.assets, scale),
                           unit: egpUnit(scale, l),
                         ),
                       ),
@@ -816,7 +858,7 @@ class _Financials extends StatelessWidget {
                       Expanded(
                         child: BStatTile(
                           label: l.ownersEquity,
-                          value: egpIn(latest.equity, scale),
+                          value: egpIn(balance.equity, scale),
                           unit: egpUnit(scale, l),
                         ),
                       ),
@@ -828,7 +870,7 @@ class _Financials extends StatelessWidget {
                       Expanded(
                         child: BStatTile(
                           label: l.finTotalLiabilities,
-                          value: egpIn(latest.liabilities, scale),
+                          value: egpIn(balance.liabilities, scale),
                           unit: egpUnit(scale, l),
                         ),
                       ),
@@ -836,7 +878,7 @@ class _Financials extends StatelessWidget {
                       Expanded(
                         child: BStatTile(
                           label: l.finCashFromOps,
-                          value: egpIn(latest.operatingCashFlow, scale),
+                          value: egpIn(balance.operatingCashFlow, scale),
                           unit: egpUnit(scale, l),
                         ),
                       ),
@@ -1068,15 +1110,12 @@ class _Research extends ConsumerWidget {
     final entry = ref
         .watch(cashOrTrashProvider)
         .whenOrNull(data: (s) => s.value.byTicker(ticker));
-    final scanned = ref
-        .watch(opportunityReportProvider)
-        .whenOrNull(data: (s) => s.value.allFor(ticker));
 
     // What the company itself has told the exchange.
     //
     // This tab used to be empty for 266 of 282 companies, because only eight
-    // have a study and eight are in the scanner — while the filings this
-    // issuer lodged were already on the device and simply never joined to it.
+    // have a study — while the filings this issuer lodged were already on the
+    // device and simply never joined to it.
     // A filing is not our opinion of a company, which is exactly why it can
     // sit here without a licence.
     final filings = ref
@@ -1098,10 +1137,7 @@ class _Research extends ConsumerWidget {
         if (item.tickers.contains(ticker)) item,
     ];
 
-    if (entry == null &&
-        (scanned == null || scanned.isEmpty) &&
-        filed.isEmpty &&
-        press.isEmpty) {
+    if (entry == null && filed.isEmpty && press.isEmpty) {
       return BEmptyState(title: l.noStudyYet, body: l.noStudyBody);
     }
 
@@ -1223,46 +1259,6 @@ class _Research extends ConsumerWidget {
               ],
             ),
           ),
-        ],
-        if (scanned != null && scanned.isNotEmpty) ...[
-          const SizedBox(height: 20),
-          BSectionLabel(l.scannerHistory),
-          for (final s in scanned)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: BPaperCard(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        BKindChip(switch (s.scanStatus) {
-                          ScanStatus.qualified => l.statusQualified,
-                          ScanStatus.watching => l.statusWatching,
-                          ScanStatus.rejected => l.statusRejected,
-                        }, variant: BChipVariant.ember),
-                        const Spacer(),
-                        BNumText(
-                          '${s.score} / ${s.maxScore}',
-                          style: BarbarianType.pill.copyWith(
-                            color: c.textMuted,
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (s.headline case final String h) ...[
-                      const SizedBox(height: 10),
-                      Text(
-                        h,
-                        style: BarbarianType.bodyM.copyWith(
-                          color: c.textPrimary,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-            ),
         ],
       ],
     );

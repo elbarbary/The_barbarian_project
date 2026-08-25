@@ -16,7 +16,7 @@ import '../../core/widgets/nav.dart';
 import 'busiest.dart';
 import '../today/rates_block.dart';
 import 'market_hero.dart';
-import 'scanner_hero.dart';
+import 'sector_hero.dart';
 import 'macro_block.dart';
 import '../../core/widgets/screen_scaffold.dart';
 import '../../core/widgets/surfaces.dart';
@@ -76,13 +76,12 @@ class HomeScreen extends ConsumerWidget {
         //
         //   1. what the whole exchange did, on one card
         //   2. which companies moved far outside their own normal
-        //   3. what the published rule found
-        //   4. the pound, the world, and the metals Egyptians hold
-        //   5. what moves Egypt underneath all of it
-        //   6. the watchlist, reached on purpose
+        //   3. the pound, the world, and the metals Egyptians hold
+        //   4. what moves Egypt underneath all of it
+        //   5. the watchlist, reached on purpose
         const BMarketHero(),
         const BBusiest(),
-        const BScannerHero(parentTab: BNavTab.home),
+        const BSectorHero(parentTab: BNavTab.home),
         const BRatesBlock(),
         const BMacroBlock(),
         const _WatchlistBlock(),

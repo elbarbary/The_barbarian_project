@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:barbarian/core/auth/auth_controller.dart';
+import 'package:barbarian/core/auth/identity.dart';
 import 'package:barbarian/core/data/user_repository.dart';
 import 'package:barbarian/core/models/quote_snapshot.dart';
 import 'package:barbarian/core/providers.dart';
@@ -199,6 +201,15 @@ Widget harness(
 }) {
   return ProviderScope(
     overrides: [
+      // The tests exercise the signed-in, live-data layout — the full app —
+      // so the sample-data notices a guest would see do not shift targets.
+      authInitialProvider.overrideWithValue(
+        const Identity(mode: AuthMode.google, userId: 'test-account'),
+      ),
+      // The tests are a signed-in, live session; pinning this keeps the
+      // auth notifier out of the document/freshness graph, which a fake-
+      // async test does not set up and which would stall its streams.
+      useFixturesProvider.overrideWithValue(false),
       documentSourceProvider.overrideWithValue(const DiskFixtureSource()),
       documentCacheProvider.overrideWithValue(MemoryDocumentCache()),
       // Without this the live-quote provider makes a real request and the test

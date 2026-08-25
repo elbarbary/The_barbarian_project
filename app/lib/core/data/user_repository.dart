@@ -80,13 +80,22 @@ class Bookmark {
 }
 
 class LocalUserRepository implements UserRepository {
-  LocalUserRepository(this._prefs);
+  LocalUserRepository(this._prefs, {this.namespace = 'guest'});
 
   final SharedPreferencesAsync _prefs;
   final StreamController<void> _changes = StreamController<void>.broadcast();
 
-  static const String _watchlistKey = 'watchlist.tickers';
-  static const String _bookmarksKey = 'bookmarks.entries';
+  /// Whose lists these are. Each identity keeps its own so a shared phone does
+  /// not merge two people's watchlists. The original guest keeps the app's
+  /// first, un-suffixed keys, so a device used before accounts existed does not
+  /// look like it lost its list.
+  final String namespace;
+
+  String get _watchlistKey => namespace == 'guest'
+      ? 'watchlist.tickers'
+      : 'watchlist.tickers.$namespace';
+  String get _bookmarksKey =>
+      namespace == 'guest' ? 'bookmarks.entries' : 'bookmarks.entries.$namespace';
 
   @override
   Stream<void> get changes => _changes.stream;

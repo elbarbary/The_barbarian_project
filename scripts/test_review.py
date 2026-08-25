@@ -233,6 +233,73 @@ class PeriodLabel(unittest.TestCase):
     def test_a_labelless_row_falls_back_to_the_date(self):
         self.assertEqual(r.plabel({"period_end": "2021-12-31"}), "21-12-31")
 
+    def test_a_second_fiscal_stream_is_tagged_not_squashed(self):
+        # ABUK files a December year and a "to 30 Jun" year. Both are real,
+        # distinct periods; the old label rendered the second as "FY 2021 "
+        # with a dangling space and collided it with the December row on the
+        # axis. The month keeps them apart.
+        self.assertEqual(r.plabel({"period": "FY 2021 (to 30 Jun)"}), "FY 21 (Jun)")
+
+
+class PriceAlignment(unittest.TestCase):
+    """A P/E for a past year needs that year's price, not this one's."""
+
+    HIST = [("2021-12-30", 120.0), ("2022-12-30", 100.0), ("2023-12-29", 80.0)]
+
+    def test_close_on_takes_the_last_session_on_or_before(self):
+        # 31 December is not a trading day; the price that valued the year is
+        # the last one printed before it.
+        self.assertEqual(r.close_on(self.HIST, "2022-12-31"), 100.0)
+        self.assertEqual(r.close_on(self.HIST, "2022-12-30"), 100.0)
+
+    def test_a_date_before_the_series_has_no_price(self):
+        # No price from a different era stands in — the point is left off.
+        self.assertIsNone(r.close_on(self.HIST, "2019-01-01"))
+
+    def test_a_date_after_the_series_takes_the_latest_close(self):
+        self.assertEqual(r.close_on(self.HIST, "2030-01-01"), 80.0)
+
+
+class TrailingPE(unittest.TestCase):
+    """The historical P/E: the price at a year's end over that year's EPS."""
+
+    DOC = {"financials": {"annual": [
+        {"period": "FY 2021", "period_end": "2021-12-31", "net_income": 1000},
+        {"period": "FY 2022", "period_end": "2022-12-31", "net_income": 1000},
+        {"period": "FY 2023", "period_end": "2023-12-31", "net_income": 1000},
+    ]}}
+    HIST = [("2021-12-30", 120.0), ("2022-12-30", 100.0), ("2023-12-29", 80.0)]
+    # 1000 (EGP m) * 1e6 / 1e8 shares = EPS of 10.
+    INFO = {"listed_shares": 100_000_000}
+
+    def pe(self, doc=None, summary=None, info=None):
+        rows = r.metrics_for("T", doc or self.DOC, summary or {},
+                             info if info is not None else self.INFO, self.HIST)
+        return next((m for m in rows if m["key"] == "pe"), None)
+
+    def test_each_point_is_price_at_period_end_over_that_years_eps(self):
+        pe = self.pe()
+        self.assertIsNotNone(pe)
+        self.assertEqual([p["v"] for p in pe["series"]], [12.0, 10.0, 8.0])
+        self.assertEqual(pe["value"], 8.0)
+        self.assertEqual(pe["direction"], "falling")
+
+    def test_without_a_share_count_it_falls_back_to_the_live_multiple(self):
+        # No shares, no historical EPS — the published level, and no graph.
+        pe = self.pe(summary={"pe": 9.1}, info={})
+        self.assertEqual(pe["value"], 9.1)
+        self.assertEqual(pe["series"], [])
+
+    def test_a_loss_year_produces_no_pe_point(self):
+        doc = {"financials": {"annual": [
+            {"period": "FY 2021", "period_end": "2021-12-31", "net_income": -500},
+            {"period": "FY 2022", "period_end": "2022-12-31", "net_income": 1000},
+            {"period": "FY 2023", "period_end": "2023-12-31", "net_income": 1000},
+        ]}}
+        pe = self.pe(doc=doc)
+        # The loss year is skipped; a negative P/E is not a smaller P/E.
+        self.assertEqual([p["p"] for p in pe["series"]], ["FY 22", "FY 23"])
+
 
 if __name__ == "__main__":
     unittest.main()

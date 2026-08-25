@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/models/recency.dart';
 import '../../core/models/review.dart';
+import '../../core/models/sector.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
@@ -84,7 +85,13 @@ class BReviewSheet extends ConsumerWidget {
                   children: [
                     for (final key in group.keys)
                       if (byKey[key] case final ReviewMetric m)
-                        SizedBox(width: w, child: _MetricTile(metric: m)),
+                        SizedBox(
+                          width: w,
+                          child: _MetricTile(
+                            metric: m,
+                            sector: review.sector ?? '',
+                          ),
+                        ),
                   ],
                 );
               },
@@ -252,6 +259,27 @@ String? _directionNote(ReviewMetric m, AppLocalizations l) {
   };
 }
 
+/// A neutral, security-agnostic note on which direction of a metric conventionally
+/// reads as the stronger or cheaper one, with the caveat that keeps it honest.
+///
+/// This is the line that answers "is below the sector good or bad here?" — but
+/// it answers it about the *measure*, never the company. "A lower P/E is the
+/// cheaper valuation" is a fact about the ratio; "this share is cheap" would be
+/// the verdict on a named security this publisher may not give (§8). The reader
+/// is handed the direction and the company's position against its sector, and
+/// keeps the judgement.
+String? _orientationNote(String key, AppLocalizations l) => switch (key) {
+  'pe' => l.revOrientPe,
+  'pb' => l.revOrientPb,
+  'dividend_yield' => l.revOrientYield,
+  'profit' || 'eps' => l.revOrientHigherMore,
+  'cash_conversion' => l.revOrientCash,
+  'roe' || 'roa' => l.revOrientReturn,
+  'debt_equity' => l.revOrientDebt,
+  'assets' => l.revOrientAssets,
+  _ => null,
+};
+
 /// The probable cause the builder computed from the sibling metrics.
 String? _causeNote(String? cause, AppLocalizations l) => switch (cause) {
   'profit_ahead_of_cash' => l.revCauseProfitAheadOfCash,
@@ -268,30 +296,36 @@ String? _causeNote(String? cause, AppLocalizations l) => switch (cause) {
   _ => null,
 };
 
-void _showMetricSheet(BuildContext context, ReviewMetric metric) {
+void _showMetricSheet(BuildContext context, ReviewMetric metric, String sector) {
   showModalBottomSheet<void>(
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
-    builder: (context) => _MetricSheet(metric: metric),
+    builder: (context) => _MetricSheet(metric: metric, sector: sector),
   );
 }
 
 /// What opens when a metric is tapped: what it is, which way it is moving and
 /// why, and the graph that proves the direction with every figure printed.
 class _MetricSheet extends StatelessWidget {
-  const _MetricSheet({required this.metric});
+  const _MetricSheet({required this.metric, this.sector = ''});
 
   final ReviewMetric metric;
+
+  /// The company's sector, so the median comparison can name the group the
+  /// figure is being read against.
+  final String sector;
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
     final face = _faceOf(metric.key, l);
     final body = _metricBody(metric.key, l);
     final dir = _directionNote(metric, l);
     final cause = _causeNote(metric.cause, l);
+    final answer = metric.answerFor(arabic);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.72,
@@ -361,6 +395,13 @@ class _MetricSheet extends StatelessWidget {
               ),
             ],
 
+            // Where this figure sits against the sector — the average it is
+            // being read against, named, so "above" and "below" mean something.
+            if (metric.hasPeers && sector.isNotEmpty) ...[
+              const SizedBox(height: 14),
+              _SectorCompare(metric: metric, sector: sector),
+            ],
+
             // The proof: every figure the direction was read from.
             if (metric.series.length >= 2) ...[
               const SizedBox(height: 20),
@@ -399,6 +440,11 @@ class _MetricSheet extends StatelessWidget {
               ),
             if (cause != null) _block(context, l.revCauseTitle, cause, accent: true),
             _block(context, l.revAskTitle, face.question, accent: true),
+            // The probable answer to that question, read by the model off the
+            // other rows and vetted. It follows the question rather than
+            // replacing it: the reader still holds the judgement, but is not
+            // left holding the question alone.
+            if (answer.isNotEmpty) _block(context, l.revAnswerTitle, answer),
           ],
         ),
       ),
@@ -433,6 +479,92 @@ class _MetricSheet extends StatelessWidget {
               height: 1.5,
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Where a company's figure sits against its sector: the sector named, its
+/// median printed in the same unit as the figure above, and the one word — above
+/// or below — that says which side of it the company is on. It answers the
+/// question the tile's "above its sector" leaves open: above *what*.
+class _SectorCompare extends StatelessWidget {
+  const _SectorCompare({required this.metric, required this.sector});
+
+  final ReviewMetric metric;
+  final String sector;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final orientation = _orientationNote(metric.key, l);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: c.textPrimary.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(BarbarianRadius.lg),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.revSectorMedian(sectorLabel(sector, l)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: BarbarianType.labelNano.copyWith(
+                        color: c.textMuted,
+                        letterSpacing: 0.4,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      metric.isAbovePeers ? l.revAboveSector : l.revBelowSector,
+                      style: BarbarianType.labelS.copyWith(
+                        color: c.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              BNumText(
+                reviewFigure(metric, metric.peerMedian!),
+                style: BarbarianType.titleM.copyWith(color: c.textPrimary),
+              ),
+            ],
+          ),
+          // Which direction of this measure conventionally reads as the
+          // stronger or cheaper one — a fact about the ratio, so the reader can
+          // tell what "above" or "below" its sector is worth without the app
+          // ruling on the share itself (§8).
+          if (orientation != null) ...[
+            const SizedBox(height: 10),
+            Divider(height: 1, color: c.hairline),
+            const SizedBox(height: 10),
+            Text(
+              l.revOrientLabel.toUpperCase(),
+              style: BarbarianType.labelNano.copyWith(
+                color: c.textFaint,
+                letterSpacing: 0.5,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              orientation,
+              style: BarbarianType.bodyS.copyWith(
+                color: c.textMuted,
+                height: 1.45,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -578,9 +710,10 @@ class _ReadCard extends StatelessWidget {
 /// One metric, as a tile you can scan: the figure, an arrow, the shape, and
 /// where it sits against its sector. The words are one tap away.
 class _MetricTile extends StatelessWidget {
-  const _MetricTile({required this.metric});
+  const _MetricTile({required this.metric, this.sector = ''});
 
   final ReviewMetric metric;
+  final String sector;
 
   @override
   Widget build(BuildContext context) {
@@ -590,7 +723,7 @@ class _MetricTile extends StatelessWidget {
     if (face.label.isEmpty) return const SizedBox.shrink();
 
     return BPressable(
-      onTap: () => _showMetricSheet(context, metric),
+      onTap: () => _showMetricSheet(context, metric, sector),
       child: Container(
         padding: const EdgeInsets.fromLTRB(13, 12, 13, 12),
         decoration: BoxDecoration(

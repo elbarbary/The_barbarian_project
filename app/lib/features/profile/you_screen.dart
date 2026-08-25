@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
+import '../../core/auth/auth_controller.dart';
 import '../../core/config/app_config.dart';
 import '../../core/config/feature_flags.dart';
 import '../../core/models/market_snapshot.dart';
@@ -67,6 +68,7 @@ class YouScreen extends ConsumerWidget {
             ),
           ],
         ),
+        const _AccountCard(),
         Row(
           children: [
             Expanded(
@@ -246,6 +248,80 @@ class YouScreen extends ConsumerWidget {
             FeatureFlags.enableBrokerConnections ||
             FeatureFlags.enablePortfolios)
           const SizedBox.shrink(),
+      ],
+    );
+  }
+}
+
+/// Who these lists belong to, and the way out. A guest sees a sample-data note
+/// and a way to sign in; an account sees its name and a way to sign out. Both
+/// actions land on the gate — signing out and "sign in" are the same door, the
+/// only difference is what it is called from where you stand.
+class _AccountCard extends ConsumerWidget {
+  const _AccountCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final identity = ref.watch(authControllerProvider);
+    final isGuest = identity.isGuest;
+    final title = isGuest
+        ? l.accountGuest
+        : (identity.label.isNotEmpty ? identity.label : l.accountSignedIn);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        BSectionLabel(l.account),
+        BPaperCard(
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: BarbarianType.titleS.copyWith(color: c.textPrimary),
+                    ),
+                    const SizedBox(height: 3),
+                    Text(
+                      identity.isAuthed ? l.accountLive : l.accountSample,
+                      style: BarbarianType.bodyS.copyWith(color: c.textMuted),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              BPressable(
+                // Both roles call the same thing: signing out returns to the
+                // gate, which is exactly where a guest goes to sign in.
+                onTap: () =>
+                    ref.read(authControllerProvider.notifier).signOut(),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 9,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isGuest ? c.accent : c.actionSurface,
+                    borderRadius: BorderRadius.circular(BarbarianRadius.pill),
+                    border: isGuest ? null : Border.all(color: c.hairlineStrong),
+                  ),
+                  child: Text(
+                    isGuest ? l.signIn : l.signOut,
+                    style: BarbarianType.label.copyWith(
+                      color: isGuest ? c.onAccent : c.textSecondary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

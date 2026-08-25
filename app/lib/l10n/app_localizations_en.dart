@@ -1478,6 +1478,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String finBalanceAsOf(String period) {
+    return 'Balance sheet · $period';
+  }
+
+  @override
   String finFiguresUnit(String unit) {
     return 'Unit: $unit';
   }
@@ -1989,6 +1994,95 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sectorMiscellaneous => 'Miscellaneous';
+
+  @override
+  String get sectorHeroLabel => 'Sector analysis';
+
+  @override
+  String sectorHeroMoving(int rising, int total, String metric) {
+    return '$rising of $total companies show rising $metric.';
+  }
+
+  @override
+  String sectorHeroFoot(int count, String date) {
+    return '$count sectors · as filed $date';
+  }
+
+  @override
+  String get sectorScreenTitle => 'Sector analysis';
+
+  @override
+  String get sectorScreenDek =>
+      'Each sector read against its own companies — which way the group is moving, and the middle of its range. Medians, not verdicts.';
+
+  @override
+  String get sectorScreenMethod =>
+      'Counts are of companies that filed. A median is the middle company of the five or more that report each figure.';
+
+  @override
+  String sectorScreenAsOf(String date) {
+    return 'As filed with the exchange · built $date.';
+  }
+
+  @override
+  String sectorCompanyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count companies',
+      one: '1 company',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sectorReadLabel => 'The sector read';
+
+  @override
+  String sectorReadFallback(int rising, int total, int falling, String metric) {
+    return '$rising of $total companies show rising $metric; $falling are falling.';
+  }
+
+  @override
+  String get sectorMovingLabel => 'How its companies are moving';
+
+  @override
+  String sectorMoveCounts(int rising, int falling) {
+    return '$rising rising · $falling falling';
+  }
+
+  @override
+  String get sectorMediansLabel => 'Typical for the sector';
+
+  @override
+  String get sectorMedianNote =>
+      'A median is the middle company of the five or more that report each figure.';
+
+  @override
+  String get sectorStandoutLabel => 'Where the most measures move together';
+
+  @override
+  String sectorMeasuresImproving(int improving, int readable) {
+    return '$improving of $readable measures improving';
+  }
+
+  @override
+  String get sectorMembersLabel => 'All companies';
+
+  @override
+  String get sectorNotEnoughHistory => 'Not enough history to read yet';
+
+  @override
+  String sectorHeldBack(String names) {
+    return '$names each hold fewer than five companies here — too few to read as a group.';
+  }
+
+  @override
+  String get sectorDoesNotShowTitle => 'What this doesn\'t show';
+
+  @override
+  String get sectorDoesNotShowBody =>
+      'No revenue, margins, market value, free float or price return — the exchange\'s filings don\'t carry them, so ESTHMR doesn\'t compute them.';
 
   @override
   String scanScoreOf(String status, int max) {
@@ -2565,6 +2659,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get calShowFewer => 'Show fewer';
+
+  @override
   String get ccalScheduled => 'Dates it filed';
 
   @override
@@ -2592,6 +2689,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String ccalFiledCount(int shown, int total) {
     return 'Showing $shown of $total filings.';
+  }
+
+  @override
+  String get ccalShowAll => 'Show all filings';
+
+  @override
+  String ccalShowingAll(int total) {
+    return 'Showing all $total filings.';
   }
 
   @override
@@ -2715,6 +2820,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get revBelowSector => 'below its sector';
+
+  @override
+  String revSectorMedian(String sector) {
+    return '$sector median';
+  }
 
   @override
   String revOverPeriods(int n) {
@@ -2879,6 +2989,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get revAskTitle => 'Worth asking';
 
   @override
+  String get revAnswerTitle => 'A probable answer';
+
+  @override
   String get revOnePoint =>
       'One published figure — not enough history to read a direction.';
 
@@ -3005,4 +3118,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get revReadLabel => 'The read';
+
+  @override
+  String get signInLead =>
+      'Read the exchange in plain words. Sign in to keep your own watchlist and see the live feed, or look around first as a guest.';
+
+  @override
+  String get signInApple => 'Continue with Apple';
+
+  @override
+  String get signInGoogle => 'Continue with Google';
+
+  @override
+  String get signInGuest => 'Continue as guest';
+
+  @override
+  String get signInGuestNote =>
+      'Guests browse sample data. Signing in switches on the live feed.';
+
+  @override
+  String get signInFailed => 'That didn’t work. Please try again.';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get accountGuest => 'Guest';
+
+  @override
+  String get accountSignedIn => 'Signed in';
+
+  @override
+  String get accountLive => 'Live exchange feed';
+
+  @override
+  String get accountSample => 'Sample data on this device';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get signIn => 'Sign in';
+
+  @override
+  String get revOrientLabel => 'Which way reads better';
+
+  @override
+  String get revOrientPe =>
+      'A lower multiple is the cheaper valuation — though a low one can also mean the market expects earnings to fall.';
+
+  @override
+  String get revOrientPb =>
+      'A lower multiple is the cheaper valuation against the company’s book value.';
+
+  @override
+  String get revOrientYield =>
+      'A higher yield pays more per pound invested — but it can also be a price that has dropped.';
+
+  @override
+  String get revOrientHigherMore => 'Higher is simply more.';
+
+  @override
+  String get revOrientCash =>
+      'Higher means more of the profit actually arrived as cash.';
+
+  @override
+  String get revOrientReturn =>
+      'Higher is a stronger return on what has been put in.';
+
+  @override
+  String get revOrientDebt =>
+      'Lower is less borrowed against equity — though some debt is normal, and can be productive.';
+
+  @override
+  String get revOrientAssets =>
+      'Higher is a larger balance sheet — bigger, not by itself better.';
 }

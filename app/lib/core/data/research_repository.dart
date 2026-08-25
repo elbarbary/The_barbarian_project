@@ -7,8 +7,8 @@ import '../models/connection.dart';
 import '../models/disclosure.dart';
 import '../models/filed.dart';
 import '../models/news.dart';
-import '../models/opportunity.dart';
 import '../models/rates.dart';
+import '../models/sector_report.dart';
 import '../models/review.dart';
 import '../models/signals.dart';
 import '../networking/static_api.dart';
@@ -19,21 +19,6 @@ class ResearchRepository {
   const ResearchRepository(this._api);
 
   final StaticApi _api;
-
-  /// Today's Scanner report (spec §7).
-  Stream<Sourced<OpportunityReport>> getOpportunityScanner() => _parsed(
-    'opportunities/latest.json',
-    'opportunities',
-    OpportunityReport.fromJson,
-  );
-
-  /// A specific past report, by `YYYY-MM-DD` (spec §7).
-  Stream<Sourced<OpportunityReport>> getOpportunityHistory(String date) =>
-      _parsed(
-        'opportunities/history/$date.json',
-        null,
-        OpportunityReport.fromJson,
-      );
 
   Stream<Sourced<CashOrTrashIndex>> getCashOrTrashIndex() => _parsed(
     'cash-or-trash/index.json',
@@ -104,6 +89,16 @@ class ResearchRepository {
   Stream<Sourced<CompanyReview>> getCompanyReview(String ticker) =>
       _parsed('review/$ticker.json', 'review', CompanyReview.fromJson);
 
+  /// Every sector read against its own companies — the index the section and
+  /// the home card render from.
+  Stream<Sourced<SectorIndex>> getSectors() =>
+      _parsed('sectors.json', 'sectors', SectorIndex.fromJson);
+
+  /// One sector in full — its read, movement, medians, standouts and members.
+  /// Fetched only when a reader opens the sector.
+  Stream<Sourced<SectorReport>> getSector(String slug) =>
+      _parsed('sectors/$slug.json', 'sectors', SectorReport.fromJson);
+
   /// The same, across the whole market, in one small document.
   Stream<Sourced<SignalsIndex>> getSignals() =>
       _parsed('signals.json', 'signals', SignalsIndex.fromJson);
@@ -112,6 +107,17 @@ class ResearchRepository {
   Stream<Sourced<CompanyDocuments>> getCompanyDocuments(String ticker) =>
       _parsed(
         'disclosures/documents/$ticker.json',
+        'disclosures',
+        CompanyDocuments.fromJson,
+      );
+
+  /// The complete filing record — every document, not just the newest window
+  /// the page document carries. Large (a company files hundreds), so it is
+  /// fetched only when a reader asks to see all of them, the same way the
+  /// disclosure archive is. Reads `<TICKER>-all.json`.
+  Stream<Sourced<CompanyDocuments>> getCompanyDocumentsAll(String ticker) =>
+      _parsed(
+        'disclosures/documents/$ticker-all.json',
         'disclosures',
         CompanyDocuments.fromJson,
       );

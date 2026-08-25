@@ -1,1 +1,1 @@
-{"ticker":"HDST","name":{"en":"HEDGESTONE INVESTMENT","ar":"هيدجستون للاستثمار"},"sector":null,"market":{"last_close":0.1,"date":"2026-08-25","open":0.1,"high":0.1,"low":0.1,"volume":0},"price_history":[{"date":"2026-08-23","close":0.1,"volume":0}],"profile":{"history_bars":0}}
+{"ticker":"HDST","name":{"en":"HEDGESTONE INVESTMENT","ar":"هيدجستون للاستثمار"},"sector":null,"tradable":false,"market":{"last_close":0.1,"date":"2026-08-25","open":0.1,"high":0.1,"low":0.1,"volume":0},"price_history":[{"date":"2026-08-23","close":0.1,"volume":0}],"profile":{"history_bars":0}}

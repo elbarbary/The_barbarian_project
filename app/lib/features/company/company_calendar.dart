@@ -14,6 +14,7 @@ import '../../core/widgets/nav.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
 import '../../l10n/app_localizations.dart';
+import '../calendar/filed_list.dart' show BExpandToggle;
 
 /// One company's dates: what is coming, and what it has already filed.
 ///
@@ -36,7 +37,7 @@ import '../../l10n/app_localizations.dart';
 /// about a **disclosure date** — never about the figures inside it, which
 /// would be a view on a named security and is not this publisher's to give
 /// (§8).
-class BCompanyCalendar extends ConsumerWidget {
+class BCompanyCalendar extends ConsumerStatefulWidget {
   const BCompanyCalendar({
     required this.ticker,
     required this.parentTab,
@@ -46,14 +47,26 @@ class BCompanyCalendar extends ConsumerWidget {
   final String ticker;
   final BNavTab parentTab;
 
-  /// How many past filings the tab shows before pointing at the archive.
+  /// How many past filings the tab shows before offering the rest.
   static const int recent = 25;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BCompanyCalendar> createState() => _BCompanyCalendarState();
+}
+
+class _BCompanyCalendarState extends ConsumerState<BCompanyCalendar> {
+  /// Whether the reader has asked to see the whole record. Off by default: the
+  /// full document is larger than the page and fetched only on request.
+  bool _showAll = false;
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
     final today = DateTime.now();
+    final ticker = widget.ticker;
+    final parentTab = widget.parentTab;
+    const recent = BCompanyCalendar.recent;
 
     final calendar =
         ref.watch(calendarProvider).value?.value ?? CalendarDoc.empty;
@@ -100,21 +113,45 @@ class BCompanyCalendar extends ConsumerWidget {
         BSectionLabel(l.ccalFiled, bottomGap: 8),
         if (filings.isEmpty)
           _Empty(text: l.ccalNoFilings)
-        else ...[
-          BPaperCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final filing in filings.take(recent))
-                  _FiledRow(filing: filing, parentTab: parentTab),
-              ],
-            ),
+        else if (_showAll) ...[
+          // The complete record is a separate, larger document fetched only
+          // when the reader asks for it. While it loads — or offline, where it
+          // is not bundled — the newest window we already hold stands in.
+          Builder(
+            builder: (context) {
+              final full = ref
+                  .watch(companyDocumentsAllProvider(ticker))
+                  .value
+                  ?.value
+                  .items;
+              final all = (full != null && full.isNotEmpty) ? full : filings;
+              return _FiledCard(rows: all, parentTab: parentTab);
+            },
           ),
-          if ((documents?.total ?? 0) > filings.take(recent).length) ...[
+          const SizedBox(height: 8),
+          BExpandToggle(
+            expanded: true,
+            collapsedLabel: l.ccalShowAll,
+            expandedLabel: l.calShowFewer,
+            onTap: () => setState(() => _showAll = false),
+          ),
+        ] else ...[
+          _FiledCard(
+            rows: filings.take(recent).toList(),
+            parentTab: parentTab,
+          ),
+          // Offer the rest unless we can see the newest window is the whole
+          // record. `total` is not always published, so an unknown total is
+          // treated as "there may be more" rather than hiding the record.
+          if (filings.length > recent ||
+              documents?.total == null ||
+              (documents?.total ?? 0) > recent) ...[
             const SizedBox(height: 8),
-            Text(
-              l.ccalFiledCount(filings.take(recent).length, documents!.total),
-              style: BarbarianType.labelNano.copyWith(color: c.textFaint),
+            BExpandToggle(
+              expanded: false,
+              collapsedLabel: l.ccalShowAll,
+              expandedLabel: l.calShowFewer,
+              onTap: () => setState(() => _showAll = true),
             ),
           ],
         ],
@@ -313,6 +350,26 @@ class _ExpectedCard extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The filed-documents list as one card — the same shape whether it holds the
+/// newest window or, expanded, the whole record.
+class _FiledCard extends StatelessWidget {
+  const _FiledCard({required this.rows, required this.parentTab});
+
+  final List<FiledDocument> rows;
+  final BNavTab parentTab;
+
+  @override
+  Widget build(BuildContext context) => BPaperCard(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final filing in rows)
+          _FiledRow(filing: filing, parentTab: parentTab),
+      ],
+    ),
+  );
 }
 
 class _FiledRow extends StatelessWidget {
