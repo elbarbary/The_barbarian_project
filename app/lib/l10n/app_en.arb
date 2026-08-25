@@ -311,6 +311,8 @@
   "finNetChangeCash": "Net change in cash",
   "finDividendsPaid": "Dividends paid",
   "finFiledDocuments": "The filed documents",
+  "finFiledStatements": "Financial statements filed",
+  "@finFiledStatements": {},
   "finOpenPdf": "Open PDF",
   "finNoDocuments": "No document is attached to this filing.",
   "exchangeSeeMore": "See earlier filings",

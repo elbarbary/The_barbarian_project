@@ -662,6 +662,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get finFiledDocuments => 'المستندات المودعة';
 
   @override
+  String get finFiledStatements => 'القوائم المالية المودعة';
+
+  @override
   String get finOpenPdf => 'فتح الملف';
 
   @override

@@ -664,6 +664,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finFiledDocuments => 'The filed documents';
 
   @override
+  String get finFiledStatements => 'Financial statements filed';
+
+  @override
   String get finOpenPdf => 'Open PDF';
 
   @override

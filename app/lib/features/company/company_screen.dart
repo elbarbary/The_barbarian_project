@@ -1793,7 +1793,15 @@ class _FiledDocuments extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final arabic = Directionality.of(context) == TextDirection.rtl;
     final docs = ref.watch(companyDocumentsProvider(ticker)).value?.value;
-    final items = docs?.items ?? const <FiledDocument>[];
+    // This block sits under the accounts, so it carries the accounts — the
+    // company's own filed statements — not the board meetings, borrowings and
+    // assemblies that make up most of a filing history. Those have their own
+    // home on the calendar; here they would bury the one document a reader on
+    // the Financials tab came for.
+    final items = [
+      for (final it in docs?.items ?? const <FiledDocument>[])
+        if (it.event == 'results') it,
+    ];
     if (items.isEmpty) return const SizedBox.shrink();
 
     return BPaperCard(
@@ -1801,18 +1809,7 @@ class _FiledDocuments extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BSectionLabel(
-            l.finFiledDocuments,
-            // "50 of 704" rather than a bare list, so the page never implies
-            // that fifty is all this company ever filed. The rest is a
-            // separate document, fetched only if a reader asks for it.
-            trailing: (docs?.total ?? 0) > items.length
-                ? Text(
-                    l.filingsAllOf(items.length, docs!.total),
-                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
-                  )
-                : null,
-          ),
+          BSectionLabel(l.finFiledStatements),
           const SizedBox(height: 10),
           for (final (i, item) in items.indexed) ...[
             if (i > 0) ...[

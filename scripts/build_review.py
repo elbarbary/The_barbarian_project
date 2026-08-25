@@ -297,7 +297,8 @@ def plabel(row: dict) -> str:
 
 
 def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
-                history: list[tuple[str, float]] | None = None) -> list[dict]:
+                history: list[tuple[str, float]] | None = None,
+                sector: str | None = None) -> list[dict]:
     """Every metric this company has the data for. Absent is absent.
 
     Each series carries the period each value belongs to, not just the value —
@@ -388,10 +389,17 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
     add("assets", newest(held, "assets"),
         paired(held, lambda r: r.get("assets")), unit="egp_m")
 
-    conv = derived(rows, lambda r: r["operating_cash_flow"] / r["net_income"]
-                   if r.get("net_income") and r.get("operating_cash_flow") is not None
-                   else None)
-    add("cash_conversion", conv[-1][1] if conv else None, conv)
+    # Cash conversion (operating cash flow over profit) is a quality-of-earnings
+    # read for an operating business. It is not one for the Finance sector: a
+    # bank, insurer or lessor runs its lending and investing THROUGH operating
+    # cash flow, so the figure is routinely large and negative (ATLC's −6× is a
+    # leasing book being funded, not profit failing to become cash) and reads as
+    # a red flag it is not. Absent is more honest than misleading here.
+    if (sector or "").strip().lower() != "finance":
+        conv = derived(rows, lambda r: r["operating_cash_flow"] / r["net_income"]
+                       if r.get("net_income") and r.get("operating_cash_flow") is not None
+                       else None)
+        add("cash_conversion", conv[-1][1] if conv else None, conv)
 
     # --- returns ---------------------------------------------------------
     roe = derived(rows, lambda r: r["net_income"] / r["equity"]
@@ -529,7 +537,7 @@ def build(today: datetime.date) -> tuple[dict, dict]:
         if ticker not in summaries:
             continue
         rows = metrics_for(ticker, doc, summaries[ticker], info.get(ticker) or {},
-                           price_series(ticker))
+                           price_series(ticker), sectors.get(ticker))
         if rows:
             everything[ticker] = rows
 

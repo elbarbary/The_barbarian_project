@@ -200,6 +200,7 @@
   "finNetChangeCash": "صافي التغير في النقدية",
   "finDividendsPaid": "التوزيعات المدفوعة",
   "finFiledDocuments": "المستندات المودعة",
+  "finFiledStatements": "القوائم المالية المودعة",
   "finOpenPdf": "فتح الملف",
   "finNoDocuments": "لا يوجد مستند مرفق بهذا الإفصاح.",
   "exchangeSeeMore": "إفصاحات أقدم",

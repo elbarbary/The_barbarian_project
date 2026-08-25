@@ -1298,6 +1298,12 @@ abstract class AppLocalizations {
   /// **'The filed documents'**
   String get finFiledDocuments;
 
+  /// No description provided for @finFiledStatements.
+  ///
+  /// In en, this message translates to:
+  /// **'Financial statements filed'**
+  String get finFiledStatements;
+
   /// No description provided for @finOpenPdf.
   ///
   /// In en, this message translates to:
