@@ -1118,5 +1118,20 @@
   "read": "The company shows broad operational strength, as net profit, earnings per share, total assets, return on equity, and return on assets are all rising alongside a falling debt-to-equity ratio. A contradiction arises between the expanding accounting profitability and a deteriorating cash conversion, which shows operating cash flow lagging behind reported earnings. The cash conversion metric settles this divergence by showing that recent earnings growth has not been matched by equivalent cash generation.",
   "read_ar": "تُظهر الشركة قوة تشغيلية عامة، حيث يرتفع صافي الربح وربحية السهم وإجمالي الأصول والعائد على حقوق الملكية والعائد على الأصول بالتزامن مع انخفاض نسبة الدين إلى حقوق الملكية. يظهر التناقض بين الربحية المحاسبية المتوسعة وتدهور تحويل النقد، مما يشير إلى تأخر التدفقات النقدية التشغيلية عن الأرباح المعلنة. ويحسم مقياس تحويل النقد هذا التباين بإظهار أن نمو الأرباح الأخير لم يقابله توليد نقدي مكافئ.",
   "generated": "2026-08-25"
+ },
+ "COPR": {
+  "read": "The company shows an improving operational and financial profile, with rising total assets, return on equity, return on assets, and cash conversion alongside a falling debt to equity. A minor divergence appears because net profit and earnings per share remained flat despite the growth in asset efficiency and cash generation. The rising cash conversion settles this question by confirming that actual cash flow quality strengthened even while reported net profit was flat.",
+  "read_ar": "تُظهر الشركة نمطاً مالياً وتشغيلياً في تحسن، حيث ترتفع الأصول الإجمالية، والعائد على حقوق الملكية، والعائد على الأصول، ومعدل تحويل الأرباح إلى سيولة نقدية، بالتزامن مع تراجع نسبة الدين إلى حقوق الملكية. ويظهر تعارض طفيف لكون صافي الأرباح وربحية السهم ظلا ثابتين على الرغم من تحسن كفاءة الأصول وتوليد النقد. ويحسم معدل تحويل الأرباح إلى سيولة نقدية هذا التعارض بتأكيده أن جودة التدفقات النقدية الفعلية قد تعززت حتى مع ثبات صافي الربح المعلن.",
+  "generated": "2026-08-25"
+ },
+ "DSCW": {
+  "read": "The company shows an expanding asset base alongside rising debt to equity, while net profit and earnings per share remain flat. This balance sheet expansion contradicts the operational efficiency measures, as return on equity, return on assets, and cash conversion are all falling. Reading cash conversion settles this divergence by showing that earnings are generating less cash even as total assets increase.",
+  "read_ar": "تُظهر الشركة توسعاً في قاعدة أصولها مصحوباً بارتفاع في نسبة الدين إلى حقوق الملكية، بينما يظل صافي الربح وربحية السهم ثابتين. يتناقض هذا التوسع في الميزانية العمومية مع مقاييس الكفاءة التشغيلية، حيث يتراجع كل من العائد على حقوق الملكية، والعائد على الأصول، والتحويل النقدي. وتوضح قراءة التحويل النقدي هذا التعارض من خلال تراجع قدرة الأرباح على توليد النقد بالتوازي مع زيادة إجمالي الأصول.",
+  "generated": "2026-08-25"
+ },
+ "EASB": {
+  "read": "The company shows operational efficiency gains with return on equity, return on assets, cash conversion, and total assets all rising over its reported history. However, these improvements contrast with flat bottom-line results, as net profit and earnings per share have remained unchanged while debt to equity is rising. Reviewing net profit settles this contradiction regarding whether the operational and asset growth has translated into nominal bottom-line expansion.",
+  "read_ar": "تُظهر الشركة تحسنًا في كفاءة التشغيل مع ارتفاع العائد على حقوق الملكية، والعائد على الأصول، والتحول النقدي، وإجمالي الأصول عبر تاريخها المالي المسجل. ومع ذلك، تتعارض هذه التحسينات مع استقرار النتائج النهائية، حيث ظل صافي الربح وربحية السهم دون تغيير بينما ترتفع نسبة الدين إلى حقوق الملكية. ويحسم الاطلاع على صافي الربح هذا التعارض لمعرفة ما إذا كان النمو التشغيلي ونمو الأصول قد تُرجم إلى زيادة فعلية في الأرباح الصافية.",
+  "generated": "2026-08-25"
  }
 }
