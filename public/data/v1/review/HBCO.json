@@ -1,1 +1,1 @@
-{"ticker":"HBCO","generated":"2026-08-25","sector":null,"metrics":[{"key":"profit","value":41.639,"unit":"egp_m","direction":"unknown","points":1,"series":[41.639]}],"pattern":null}
+{"ticker":"HBCO","generated":"2026-08-25","sector":null,"metrics":[{"key":"profit","value":41.639,"unit":"egp_m","direction":"unknown","points":1,"series":[{"p":"FY 24","v":41.639}]}],"pattern":null}
