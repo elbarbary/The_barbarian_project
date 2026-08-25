@@ -92,6 +92,7 @@ class ManifestVersions {
     'connections',
     'calendar',
     'signals',
+    'review',
     'market_history',
   ];
 

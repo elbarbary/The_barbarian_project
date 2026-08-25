@@ -4411,6 +4411,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reported result'**
   String get volKindResult;
+
+  /// No description provided for @revLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The numbers, and what to ask'**
+  String get revLabel;
+
+  /// No description provided for @revRising.
+  ///
+  /// In en, this message translates to:
+  /// **'rising'**
+  String get revRising;
+
+  /// No description provided for @revFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'falling'**
+  String get revFalling;
+
+  /// No description provided for @revFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'flat'**
+  String get revFlat;
+
+  /// No description provided for @revAboveSector.
+  ///
+  /// In en, this message translates to:
+  /// **'above its sector'**
+  String get revAboveSector;
+
+  /// No description provided for @revBelowSector.
+  ///
+  /// In en, this message translates to:
+  /// **'below its sector'**
+  String get revBelowSector;
+
+  /// No description provided for @revOverPeriods.
+  ///
+  /// In en, this message translates to:
+  /// **'over {n} reported periods'**
+  String revOverPeriods(int n);
+
+  /// No description provided for @revAgree.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} of {readable} readable metrics moved the same way.'**
+  String revAgree(int n, int readable);
+
+  /// No description provided for @revDisagree.
+  ///
+  /// In en, this message translates to:
+  /// **'{up} moved one way, {down} the other.'**
+  String revDisagree(int up, int down);
+
+  /// No description provided for @revAgreeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'When they all agree, ask what the market already knows that you do not.'**
+  String get revAgreeAsk;
+
+  /// No description provided for @revDisagreeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'When they disagree, the disagreement is the story. Which one is early?'**
+  String get revDisagreeAsk;
+
+  /// No description provided for @revMissingNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float is not published anywhere and has no substitute.'**
+  String get revMissingNote;
+
+  /// No description provided for @revPe.
+  ///
+  /// In en, this message translates to:
+  /// **'Price to earnings'**
+  String get revPe;
+
+  /// No description provided for @revPeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Why is it priced this way against its sector — and what are earnings doing underneath it?'**
+  String get revPeAsk;
+
+  /// No description provided for @revPeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Market value divided by profit: how much you pay for each pound the company earns. A falling P/E can mean the price got cheaper or the earnings got better — those are different stories. Rising with fast growth can mean the market is paying for what comes next; rising with flat growth is a stretch. Never read it without the earnings line below it.'**
+  String get revPeBody;
+
+  /// No description provided for @revPb.
+  ///
+  /// In en, this message translates to:
+  /// **'Price to book'**
+  String get revPb;
+
+  /// No description provided for @revPbAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'You are paying this much for each pound of company equity. Are those assets earning anything?'**
+  String get revPbAsk;
+
+  /// No description provided for @revPbBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Market value divided by shareholders\' equity. Below 1 means the market values the company under its accounting equity — which is only a bargain if the assets are productive. Read it beside return on equity: low price to book with a high return is a different company from low price to book with a poor one.'**
+  String get revPbBody;
+
+  /// No description provided for @revYield.
+  ///
+  /// In en, this message translates to:
+  /// **'Dividend yield'**
+  String get revYield;
+
+  /// No description provided for @revYieldAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Is the dividend supported by profit and cash — or by a share price that fell?'**
+  String get revYieldAsk;
+
+  /// No description provided for @revYieldBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.'**
+  String get revYieldBody;
+
+  /// No description provided for @revProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Net profit'**
+  String get revProfit;
+
+  /// No description provided for @revProfitAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Where did the change come from — the business, or something that will not repeat?'**
+  String get revProfitAsk;
+
+  /// No description provided for @revProfitBody.
+  ///
+  /// In en, this message translates to:
+  /// **'What the company filed as profit for the full year, as the exchange received it. Direction is read from the sign of each year\'s move rather than a percentage, because a percentage off a loss is meaningless: going from a loss to a profit is not growth of some number, it is a company that stopped losing money.'**
+  String get revProfitBody;
+
+  /// No description provided for @revEps.
+  ///
+  /// In en, this message translates to:
+  /// **'Earnings per share'**
+  String get revEps;
+
+  /// No description provided for @revEpsAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit rose — but did the earnings belonging to each share rise with it?'**
+  String get revEpsAsk;
+
+  /// No description provided for @revEpsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit divided by the shares in issue. This is the number that survives a company issuing more shares: total profit can climb while each share earns less. When you hear that profits increased, this is the follow-up question.'**
+  String get revEpsBody;
+
+  /// No description provided for @revAssets.
+  ///
+  /// In en, this message translates to:
+  /// **'Total assets'**
+  String get revAssets;
+
+  /// No description provided for @revAssetsAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Is the business actually getting bigger, and is profit keeping pace with it?'**
+  String get revAssetsAsk;
+
+  /// No description provided for @revAssetsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'What the company holds, from its filed balance sheet. This stands in for revenue growth, which no Egyptian source publishes: assets growing while profit does not is the same warning a falling margin would give — the company is putting more in to get the same out.'**
+  String get revAssetsBody;
+
+  /// No description provided for @revCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash conversion'**
+  String get revCash;
+
+  /// No description provided for @revCashAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Of every pound of reported profit, how much actually arrived as cash?'**
+  String get revCashAsk;
+
+  /// No description provided for @revCashBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Operating cash flow divided by reported profit. Above 1 means the company collected more cash than it booked as profit. This stands in for profit margin, which needs revenue nobody publishes — and it arguably answers the question better: when profit climbs and the cash does not follow, that is the thing worth investigating.'**
+  String get revCashBody;
+
+  /// No description provided for @revRoe.
+  ///
+  /// In en, this message translates to:
+  /// **'Return on equity'**
+  String get revRoe;
+
+  /// No description provided for @revRoeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Good returns on shareholders\' money — or on borrowed money? Check the debt row.'**
+  String get revRoeAsk;
+
+  /// No description provided for @revRoeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit as a share of shareholders\' equity: how much the company earns on the money its owners left in it. A high return is not automatically impressive — debt shrinks equity, which lifts the ratio without the business improving. Always read it beside debt to equity.'**
+  String get revRoeBody;
+
+  /// No description provided for @revRoa.
+  ///
+  /// In en, this message translates to:
+  /// **'Return on assets'**
+  String get revRoa;
+
+  /// No description provided for @revRoaAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'How hard is everything the company owns actually working?'**
+  String get revRoaAsk;
+
+  /// No description provided for @revRoaBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit as a share of total assets. Unlike return on equity, borrowing cannot flatter it — the assets stay on the books either way. The gap between the two is roughly how much of the return is coming from leverage.'**
+  String get revRoaBody;
+
+  /// No description provided for @revDebt.
+  ///
+  /// In en, this message translates to:
+  /// **'Debt to equity'**
+  String get revDebt;
+
+  /// No description provided for @revDebtAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'What did management do with the borrowed money — and is it earning more than it costs?'**
+  String get revDebtAsk;
+
+  /// No description provided for @revDebtBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Total liabilities against shareholders\' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.'**
+  String get revDebtBody;
 }
 
 class _AppLocalizationsDelegate

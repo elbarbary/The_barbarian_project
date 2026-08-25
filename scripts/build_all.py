@@ -89,6 +89,14 @@ STEPS = [
     # harvest, so it is safe in CI, and it reads the financials the step above
     # just merged.
     ("Signals", "build_signals.py", True),
+    # One request for the whole market: the dividend yield the exchange
+    # publishes, and the share count that turns a decade of filed profit into
+    # a decade of earnings per share. Best-effort — the app lived without
+    # these and can live one more run without them.
+    ("Stock info", "harvest_stock_info.py", True),
+    # The review sheet, after both: it reads the merged financials, the share
+    # count above, and the market scan. No network of its own.
+    ("Review sheet", "build_review.py", True),
     # News and rates run here too, so a full local build produces a complete
     # set — but their real cadence is publish-live-data.yml every 15 minutes.
     # A daily news feed is a bulletin, and an intraday metals price pinned for
@@ -197,6 +205,7 @@ BEST_EFFORT = {
     # macro.json in place, which is dated and labelled like everything else.
     "Macro",
     "Arabic names",
+    "Stock info",
     "Company profiles",
     "Company briefs",
     "Company filings",

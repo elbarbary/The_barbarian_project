@@ -1,0 +1,909 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'review.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+
+/// @nodoc
+mixin _$CompanyReview {
+
+ String get ticker; String? get generated; String? get sector; List<ReviewMetric> get metrics; ReviewPattern? get pattern;
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CompanyReviewCopyWith<CompanyReview> get copyWith => _$CompanyReviewCopyWithImpl<CompanyReview>(this as CompanyReview, _$identity);
+
+  /// Serializes this CompanyReview to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyReview&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.generated, generated) || other.generated == generated)&&(identical(other.sector, sector) || other.sector == sector)&&const DeepCollectionEquality().equals(other.metrics, metrics)&&(identical(other.pattern, pattern) || other.pattern == pattern));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,ticker,generated,sector,const DeepCollectionEquality().hash(metrics),pattern);
+
+@override
+String toString() {
+  return 'CompanyReview(ticker: $ticker, generated: $generated, sector: $sector, metrics: $metrics, pattern: $pattern)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CompanyReviewCopyWith<$Res>  {
+  factory $CompanyReviewCopyWith(CompanyReview value, $Res Function(CompanyReview) _then) = _$CompanyReviewCopyWithImpl;
+@useResult
+$Res call({
+ String ticker, String? generated, String? sector, List<ReviewMetric> metrics, ReviewPattern? pattern
+});
+
+
+$ReviewPatternCopyWith<$Res>? get pattern;
+
+}
+/// @nodoc
+class _$CompanyReviewCopyWithImpl<$Res>
+    implements $CompanyReviewCopyWith<$Res> {
+  _$CompanyReviewCopyWithImpl(this._self, this._then);
+
+  final CompanyReview _self;
+  final $Res Function(CompanyReview) _then;
+
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? generated = freezed,Object? sector = freezed,Object? metrics = null,Object? pattern = freezed,}) {
+  return _then(_self.copyWith(
+ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
+as String,generated: freezed == generated ? _self.generated : generated // ignore: cast_nullable_to_non_nullable
+as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as String?,metrics: null == metrics ? _self.metrics : metrics // ignore: cast_nullable_to_non_nullable
+as List<ReviewMetric>,pattern: freezed == pattern ? _self.pattern : pattern // ignore: cast_nullable_to_non_nullable
+as ReviewPattern?,
+  ));
+}
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReviewPatternCopyWith<$Res>? get pattern {
+    if (_self.pattern == null) {
+    return null;
+  }
+
+  return $ReviewPatternCopyWith<$Res>(_self.pattern!, (value) {
+    return _then(_self.copyWith(pattern: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [CompanyReview].
+extension CompanyReviewPatterns on CompanyReview {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CompanyReview value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CompanyReview() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CompanyReview value)  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyReview():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CompanyReview value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyReview() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  String? generated,  String? sector,  List<ReviewMetric> metrics,  ReviewPattern? pattern)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CompanyReview() when $default != null:
+return $default(_that.ticker,_that.generated,_that.sector,_that.metrics,_that.pattern);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  String? generated,  String? sector,  List<ReviewMetric> metrics,  ReviewPattern? pattern)  $default,) {final _that = this;
+switch (_that) {
+case _CompanyReview():
+return $default(_that.ticker,_that.generated,_that.sector,_that.metrics,_that.pattern);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  String? generated,  String? sector,  List<ReviewMetric> metrics,  ReviewPattern? pattern)?  $default,) {final _that = this;
+switch (_that) {
+case _CompanyReview() when $default != null:
+return $default(_that.ticker,_that.generated,_that.sector,_that.metrics,_that.pattern);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _CompanyReview extends CompanyReview {
+  const _CompanyReview({this.ticker = '', this.generated, this.sector, final  List<ReviewMetric> metrics = const <ReviewMetric>[], this.pattern}): _metrics = metrics,super._();
+  factory _CompanyReview.fromJson(Map<String, dynamic> json) => _$CompanyReviewFromJson(json);
+
+@override@JsonKey() final  String ticker;
+@override final  String? generated;
+@override final  String? sector;
+ final  List<ReviewMetric> _metrics;
+@override@JsonKey() List<ReviewMetric> get metrics {
+  if (_metrics is EqualUnmodifiableListView) return _metrics;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_metrics);
+}
+
+@override final  ReviewPattern? pattern;
+
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CompanyReviewCopyWith<_CompanyReview> get copyWith => __$CompanyReviewCopyWithImpl<_CompanyReview>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CompanyReviewToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyReview&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.generated, generated) || other.generated == generated)&&(identical(other.sector, sector) || other.sector == sector)&&const DeepCollectionEquality().equals(other._metrics, _metrics)&&(identical(other.pattern, pattern) || other.pattern == pattern));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,ticker,generated,sector,const DeepCollectionEquality().hash(_metrics),pattern);
+
+@override
+String toString() {
+  return 'CompanyReview(ticker: $ticker, generated: $generated, sector: $sector, metrics: $metrics, pattern: $pattern)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CompanyReviewCopyWith<$Res> implements $CompanyReviewCopyWith<$Res> {
+  factory _$CompanyReviewCopyWith(_CompanyReview value, $Res Function(_CompanyReview) _then) = __$CompanyReviewCopyWithImpl;
+@override @useResult
+$Res call({
+ String ticker, String? generated, String? sector, List<ReviewMetric> metrics, ReviewPattern? pattern
+});
+
+
+@override $ReviewPatternCopyWith<$Res>? get pattern;
+
+}
+/// @nodoc
+class __$CompanyReviewCopyWithImpl<$Res>
+    implements _$CompanyReviewCopyWith<$Res> {
+  __$CompanyReviewCopyWithImpl(this._self, this._then);
+
+  final _CompanyReview _self;
+  final $Res Function(_CompanyReview) _then;
+
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? generated = freezed,Object? sector = freezed,Object? metrics = null,Object? pattern = freezed,}) {
+  return _then(_CompanyReview(
+ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
+as String,generated: freezed == generated ? _self.generated : generated // ignore: cast_nullable_to_non_nullable
+as String?,sector: freezed == sector ? _self.sector : sector // ignore: cast_nullable_to_non_nullable
+as String?,metrics: null == metrics ? _self._metrics : metrics // ignore: cast_nullable_to_non_nullable
+as List<ReviewMetric>,pattern: freezed == pattern ? _self.pattern : pattern // ignore: cast_nullable_to_non_nullable
+as ReviewPattern?,
+  ));
+}
+
+/// Create a copy of CompanyReview
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ReviewPatternCopyWith<$Res>? get pattern {
+    if (_self.pattern == null) {
+    return null;
+  }
+
+  return $ReviewPatternCopyWith<$Res>(_self.pattern!, (value) {
+    return _then(_self.copyWith(pattern: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$ReviewMetric {
+
+ String get key; double get value;/// `ratio`, `percent`, `egp_m` or `egp` — how to print [value].
+ String get unit; String get direction;/// How many reported periods the direction was read from. Shown, because a
+/// direction off three periods is a weaker claim than one off nine and the
+/// reader is entitled to know which they have.
+ int get points;/// The last ten readings, oldest first, for a sparkline.
+ List<double> get series;/// `above` or `below` the sector median — absent when the sector has fewer
+/// than five companies carrying this metric, because a median of four is
+/// not a benchmark.
+ String? get peer;@JsonKey(name: 'peer_median') double? get peerMedian;
+/// Create a copy of ReviewMetric
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReviewMetricCopyWith<ReviewMetric> get copyWith => _$ReviewMetricCopyWithImpl<ReviewMetric>(this as ReviewMetric, _$identity);
+
+  /// Serializes this ReviewMetric to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewMetric&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.points, points) || other.points == points)&&const DeepCollectionEquality().equals(other.series, series)&&(identical(other.peer, peer) || other.peer == peer)&&(identical(other.peerMedian, peerMedian) || other.peerMedian == peerMedian));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,key,value,unit,direction,points,const DeepCollectionEquality().hash(series),peer,peerMedian);
+
+@override
+String toString() {
+  return 'ReviewMetric(key: $key, value: $value, unit: $unit, direction: $direction, points: $points, series: $series, peer: $peer, peerMedian: $peerMedian)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ReviewMetricCopyWith<$Res>  {
+  factory $ReviewMetricCopyWith(ReviewMetric value, $Res Function(ReviewMetric) _then) = _$ReviewMetricCopyWithImpl;
+@useResult
+$Res call({
+ String key, double value, String unit, String direction, int points, List<double> series, String? peer,@JsonKey(name: 'peer_median') double? peerMedian
+});
+
+
+
+
+}
+/// @nodoc
+class _$ReviewMetricCopyWithImpl<$Res>
+    implements $ReviewMetricCopyWith<$Res> {
+  _$ReviewMetricCopyWithImpl(this._self, this._then);
+
+  final ReviewMetric _self;
+  final $Res Function(ReviewMetric) _then;
+
+/// Create a copy of ReviewMetric
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? key = null,Object? value = null,Object? unit = null,Object? direction = null,Object? points = null,Object? series = null,Object? peer = freezed,Object? peerMedian = freezed,}) {
+  return _then(_self.copyWith(
+key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
+as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as double,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as String,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as String,points: null == points ? _self.points : points // ignore: cast_nullable_to_non_nullable
+as int,series: null == series ? _self.series : series // ignore: cast_nullable_to_non_nullable
+as List<double>,peer: freezed == peer ? _self.peer : peer // ignore: cast_nullable_to_non_nullable
+as String?,peerMedian: freezed == peerMedian ? _self.peerMedian : peerMedian // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ReviewMetric].
+extension ReviewMetricPatterns on ReviewMetric {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReviewMetric value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReviewMetric() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReviewMetric value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReviewMetric():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReviewMetric value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReviewMetric() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String key,  double value,  String unit,  String direction,  int points,  List<double> series,  String? peer, @JsonKey(name: 'peer_median')  double? peerMedian)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReviewMetric() when $default != null:
+return $default(_that.key,_that.value,_that.unit,_that.direction,_that.points,_that.series,_that.peer,_that.peerMedian);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String key,  double value,  String unit,  String direction,  int points,  List<double> series,  String? peer, @JsonKey(name: 'peer_median')  double? peerMedian)  $default,) {final _that = this;
+switch (_that) {
+case _ReviewMetric():
+return $default(_that.key,_that.value,_that.unit,_that.direction,_that.points,_that.series,_that.peer,_that.peerMedian);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String key,  double value,  String unit,  String direction,  int points,  List<double> series,  String? peer, @JsonKey(name: 'peer_median')  double? peerMedian)?  $default,) {final _that = this;
+switch (_that) {
+case _ReviewMetric() when $default != null:
+return $default(_that.key,_that.value,_that.unit,_that.direction,_that.points,_that.series,_that.peer,_that.peerMedian);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ReviewMetric extends ReviewMetric {
+  const _ReviewMetric({this.key = '', this.value = 0, this.unit = 'ratio', this.direction = 'unknown', this.points = 0, final  List<double> series = const <double>[], this.peer, @JsonKey(name: 'peer_median') this.peerMedian}): _series = series,super._();
+  factory _ReviewMetric.fromJson(Map<String, dynamic> json) => _$ReviewMetricFromJson(json);
+
+@override@JsonKey() final  String key;
+@override@JsonKey() final  double value;
+/// `ratio`, `percent`, `egp_m` or `egp` — how to print [value].
+@override@JsonKey() final  String unit;
+@override@JsonKey() final  String direction;
+/// How many reported periods the direction was read from. Shown, because a
+/// direction off three periods is a weaker claim than one off nine and the
+/// reader is entitled to know which they have.
+@override@JsonKey() final  int points;
+/// The last ten readings, oldest first, for a sparkline.
+ final  List<double> _series;
+/// The last ten readings, oldest first, for a sparkline.
+@override@JsonKey() List<double> get series {
+  if (_series is EqualUnmodifiableListView) return _series;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_series);
+}
+
+/// `above` or `below` the sector median — absent when the sector has fewer
+/// than five companies carrying this metric, because a median of four is
+/// not a benchmark.
+@override final  String? peer;
+@override@JsonKey(name: 'peer_median') final  double? peerMedian;
+
+/// Create a copy of ReviewMetric
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReviewMetricCopyWith<_ReviewMetric> get copyWith => __$ReviewMetricCopyWithImpl<_ReviewMetric>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ReviewMetricToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReviewMetric&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.direction, direction) || other.direction == direction)&&(identical(other.points, points) || other.points == points)&&const DeepCollectionEquality().equals(other._series, _series)&&(identical(other.peer, peer) || other.peer == peer)&&(identical(other.peerMedian, peerMedian) || other.peerMedian == peerMedian));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,key,value,unit,direction,points,const DeepCollectionEquality().hash(_series),peer,peerMedian);
+
+@override
+String toString() {
+  return 'ReviewMetric(key: $key, value: $value, unit: $unit, direction: $direction, points: $points, series: $series, peer: $peer, peerMedian: $peerMedian)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReviewMetricCopyWith<$Res> implements $ReviewMetricCopyWith<$Res> {
+  factory _$ReviewMetricCopyWith(_ReviewMetric value, $Res Function(_ReviewMetric) _then) = __$ReviewMetricCopyWithImpl;
+@override @useResult
+$Res call({
+ String key, double value, String unit, String direction, int points, List<double> series, String? peer,@JsonKey(name: 'peer_median') double? peerMedian
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReviewMetricCopyWithImpl<$Res>
+    implements _$ReviewMetricCopyWith<$Res> {
+  __$ReviewMetricCopyWithImpl(this._self, this._then);
+
+  final _ReviewMetric _self;
+  final $Res Function(_ReviewMetric) _then;
+
+/// Create a copy of ReviewMetric
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? key = null,Object? value = null,Object? unit = null,Object? direction = null,Object? points = null,Object? series = null,Object? peer = freezed,Object? peerMedian = freezed,}) {
+  return _then(_ReviewMetric(
+key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
+as String,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as double,unit: null == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
+as String,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as String,points: null == points ? _self.points : points // ignore: cast_nullable_to_non_nullable
+as int,series: null == series ? _self._series : series // ignore: cast_nullable_to_non_nullable
+as List<double>,peer: freezed == peer ? _self.peer : peer // ignore: cast_nullable_to_non_nullable
+as String?,peerMedian: freezed == peerMedian ? _self.peerMedian : peerMedian // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ReviewPattern {
+
+/// How many metrics had a direction that could be read at all.
+ int get readable; List<String> get improving; List<String> get deteriorating;
+/// Create a copy of ReviewPattern
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReviewPatternCopyWith<ReviewPattern> get copyWith => _$ReviewPatternCopyWithImpl<ReviewPattern>(this as ReviewPattern, _$identity);
+
+  /// Serializes this ReviewPattern to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewPattern&&(identical(other.readable, readable) || other.readable == readable)&&const DeepCollectionEquality().equals(other.improving, improving)&&const DeepCollectionEquality().equals(other.deteriorating, deteriorating));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,readable,const DeepCollectionEquality().hash(improving),const DeepCollectionEquality().hash(deteriorating));
+
+@override
+String toString() {
+  return 'ReviewPattern(readable: $readable, improving: $improving, deteriorating: $deteriorating)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ReviewPatternCopyWith<$Res>  {
+  factory $ReviewPatternCopyWith(ReviewPattern value, $Res Function(ReviewPattern) _then) = _$ReviewPatternCopyWithImpl;
+@useResult
+$Res call({
+ int readable, List<String> improving, List<String> deteriorating
+});
+
+
+
+
+}
+/// @nodoc
+class _$ReviewPatternCopyWithImpl<$Res>
+    implements $ReviewPatternCopyWith<$Res> {
+  _$ReviewPatternCopyWithImpl(this._self, this._then);
+
+  final ReviewPattern _self;
+  final $Res Function(ReviewPattern) _then;
+
+/// Create a copy of ReviewPattern
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? readable = null,Object? improving = null,Object? deteriorating = null,}) {
+  return _then(_self.copyWith(
+readable: null == readable ? _self.readable : readable // ignore: cast_nullable_to_non_nullable
+as int,improving: null == improving ? _self.improving : improving // ignore: cast_nullable_to_non_nullable
+as List<String>,deteriorating: null == deteriorating ? _self.deteriorating : deteriorating // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ReviewPattern].
+extension ReviewPatternPatterns on ReviewPattern {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReviewPattern value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReviewPattern() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReviewPattern value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReviewPattern():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReviewPattern value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReviewPattern() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int readable,  List<String> improving,  List<String> deteriorating)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReviewPattern() when $default != null:
+return $default(_that.readable,_that.improving,_that.deteriorating);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int readable,  List<String> improving,  List<String> deteriorating)  $default,) {final _that = this;
+switch (_that) {
+case _ReviewPattern():
+return $default(_that.readable,_that.improving,_that.deteriorating);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int readable,  List<String> improving,  List<String> deteriorating)?  $default,) {final _that = this;
+switch (_that) {
+case _ReviewPattern() when $default != null:
+return $default(_that.readable,_that.improving,_that.deteriorating);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ReviewPattern extends ReviewPattern {
+  const _ReviewPattern({this.readable = 0, final  List<String> improving = const <String>[], final  List<String> deteriorating = const <String>[]}): _improving = improving,_deteriorating = deteriorating,super._();
+  factory _ReviewPattern.fromJson(Map<String, dynamic> json) => _$ReviewPatternFromJson(json);
+
+/// How many metrics had a direction that could be read at all.
+@override@JsonKey() final  int readable;
+ final  List<String> _improving;
+@override@JsonKey() List<String> get improving {
+  if (_improving is EqualUnmodifiableListView) return _improving;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_improving);
+}
+
+ final  List<String> _deteriorating;
+@override@JsonKey() List<String> get deteriorating {
+  if (_deteriorating is EqualUnmodifiableListView) return _deteriorating;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_deteriorating);
+}
+
+
+/// Create a copy of ReviewPattern
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReviewPatternCopyWith<_ReviewPattern> get copyWith => __$ReviewPatternCopyWithImpl<_ReviewPattern>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ReviewPatternToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReviewPattern&&(identical(other.readable, readable) || other.readable == readable)&&const DeepCollectionEquality().equals(other._improving, _improving)&&const DeepCollectionEquality().equals(other._deteriorating, _deteriorating));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,readable,const DeepCollectionEquality().hash(_improving),const DeepCollectionEquality().hash(_deteriorating));
+
+@override
+String toString() {
+  return 'ReviewPattern(readable: $readable, improving: $improving, deteriorating: $deteriorating)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReviewPatternCopyWith<$Res> implements $ReviewPatternCopyWith<$Res> {
+  factory _$ReviewPatternCopyWith(_ReviewPattern value, $Res Function(_ReviewPattern) _then) = __$ReviewPatternCopyWithImpl;
+@override @useResult
+$Res call({
+ int readable, List<String> improving, List<String> deteriorating
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReviewPatternCopyWithImpl<$Res>
+    implements _$ReviewPatternCopyWith<$Res> {
+  __$ReviewPatternCopyWithImpl(this._self, this._then);
+
+  final _ReviewPattern _self;
+  final $Res Function(_ReviewPattern) _then;
+
+/// Create a copy of ReviewPattern
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? readable = null,Object? improving = null,Object? deteriorating = null,}) {
+  return _then(_ReviewPattern(
+readable: null == readable ? _self.readable : readable // ignore: cast_nullable_to_non_nullable
+as int,improving: null == improving ? _self._improving : improving // ignore: cast_nullable_to_non_nullable
+as List<String>,deteriorating: null == deteriorating ? _self._deteriorating : deteriorating // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
+// dart format on

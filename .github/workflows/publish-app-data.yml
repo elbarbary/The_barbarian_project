@@ -90,6 +90,7 @@ env:
     scripts/market_history.json
     scripts/news_images.json
     scripts/statements_filed.json
+    scripts/stock_info.json
     scripts/translations_en.json
 
 permissions:

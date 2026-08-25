@@ -18,6 +18,7 @@ import 'models/calendar.dart';
 import 'models/connection.dart';
 import 'models/disclosure.dart';
 import 'models/filed.dart';
+import 'models/review.dart';
 import 'models/signals.dart';
 import 'models/news.dart';
 import 'models/rates.dart';
@@ -164,6 +165,13 @@ final companySignalsProvider =
     StreamProvider.family<Sourced<CompanySignals>, String>(
       (ref, ticker) =>
           ref.watch(researchRepositoryProvider).getCompanySignals(ticker),
+    );
+
+/// One company's review sheet.
+final companyReviewProvider =
+    StreamProvider.family<Sourced<CompanyReview>, String>(
+      (ref, ticker) =>
+          ref.watch(researchRepositoryProvider).getCompanyReview(ticker),
     );
 
 /// The same across the market, for the feed.

@@ -2248,5 +2248,113 @@
   "volKindNews": "Headline",
   "@volKindNews": {},
   "volKindResult": "Reported result",
-  "@volKindResult": {}
+  "@volKindResult": {},
+  "revLabel": "The numbers, and what to ask",
+  "@revLabel": {},
+  "revRising": "rising",
+  "@revRising": {},
+  "revFalling": "falling",
+  "@revFalling": {},
+  "revFlat": "flat",
+  "@revFlat": {},
+  "revAboveSector": "above its sector",
+  "@revAboveSector": {},
+  "revBelowSector": "below its sector",
+  "@revBelowSector": {},
+  "revOverPeriods": "over {n} reported periods",
+  "@revOverPeriods": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "revAgree": "{n} of {readable} readable metrics moved the same way.",
+  "@revAgree": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "readable": {
+        "type": "int"
+      }
+    }
+  },
+  "revDisagree": "{up} moved one way, {down} the other.",
+  "@revDisagree": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      }
+    }
+  },
+  "revAgreeAsk": "When they all agree, ask what the market already knows that you do not.",
+  "@revAgreeAsk": {},
+  "revDisagreeAsk": "When they disagree, the disagreement is the story. Which one is early?",
+  "@revDisagreeAsk": {},
+  "revMissingNote": "Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float is not published anywhere and has no substitute.",
+  "@revMissingNote": {},
+  "revPe": "Price to earnings",
+  "@revPe": {},
+  "revPeAsk": "Why is it priced this way against its sector — and what are earnings doing underneath it?",
+  "@revPeAsk": {},
+  "revPeBody": "Market value divided by profit: how much you pay for each pound the company earns. A falling P/E can mean the price got cheaper or the earnings got better — those are different stories. Rising with fast growth can mean the market is paying for what comes next; rising with flat growth is a stretch. Never read it without the earnings line below it.",
+  "@revPeBody": {},
+  "revPb": "Price to book",
+  "@revPb": {},
+  "revPbAsk": "You are paying this much for each pound of company equity. Are those assets earning anything?",
+  "@revPbAsk": {},
+  "revPbBody": "Market value divided by shareholders' equity. Below 1 means the market values the company under its accounting equity — which is only a bargain if the assets are productive. Read it beside return on equity: low price to book with a high return is a different company from low price to book with a poor one.",
+  "@revPbBody": {},
+  "revYield": "Dividend yield",
+  "@revYield": {},
+  "revYieldAsk": "Is the dividend supported by profit and cash — or by a share price that fell?",
+  "@revYieldAsk": {},
+  "revYieldBody": "The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.",
+  "@revYieldBody": {},
+  "revProfit": "Net profit",
+  "@revProfit": {},
+  "revProfitAsk": "Where did the change come from — the business, or something that will not repeat?",
+  "@revProfitAsk": {},
+  "revProfitBody": "What the company filed as profit for the full year, as the exchange received it. Direction is read from the sign of each year's move rather than a percentage, because a percentage off a loss is meaningless: going from a loss to a profit is not growth of some number, it is a company that stopped losing money.",
+  "@revProfitBody": {},
+  "revEps": "Earnings per share",
+  "@revEps": {},
+  "revEpsAsk": "Profit rose — but did the earnings belonging to each share rise with it?",
+  "@revEpsAsk": {},
+  "revEpsBody": "Profit divided by the shares in issue. This is the number that survives a company issuing more shares: total profit can climb while each share earns less. When you hear that profits increased, this is the follow-up question.",
+  "@revEpsBody": {},
+  "revAssets": "Total assets",
+  "@revAssets": {},
+  "revAssetsAsk": "Is the business actually getting bigger, and is profit keeping pace with it?",
+  "@revAssetsAsk": {},
+  "revAssetsBody": "What the company holds, from its filed balance sheet. This stands in for revenue growth, which no Egyptian source publishes: assets growing while profit does not is the same warning a falling margin would give — the company is putting more in to get the same out.",
+  "@revAssetsBody": {},
+  "revCash": "Cash conversion",
+  "@revCash": {},
+  "revCashAsk": "Of every pound of reported profit, how much actually arrived as cash?",
+  "@revCashAsk": {},
+  "revCashBody": "Operating cash flow divided by reported profit. Above 1 means the company collected more cash than it booked as profit. This stands in for profit margin, which needs revenue nobody publishes — and it arguably answers the question better: when profit climbs and the cash does not follow, that is the thing worth investigating.",
+  "@revCashBody": {},
+  "revRoe": "Return on equity",
+  "@revRoe": {},
+  "revRoeAsk": "Good returns on shareholders' money — or on borrowed money? Check the debt row.",
+  "@revRoeAsk": {},
+  "revRoeBody": "Profit as a share of shareholders' equity: how much the company earns on the money its owners left in it. A high return is not automatically impressive — debt shrinks equity, which lifts the ratio without the business improving. Always read it beside debt to equity.",
+  "@revRoeBody": {},
+  "revRoa": "Return on assets",
+  "@revRoa": {},
+  "revRoaAsk": "How hard is everything the company owns actually working?",
+  "@revRoaAsk": {},
+  "revRoaBody": "Profit as a share of total assets. Unlike return on equity, borrowing cannot flatter it — the assets stay on the books either way. The gap between the two is roughly how much of the return is coming from leverage.",
+  "@revRoaBody": {},
+  "revDebt": "Debt to equity",
+  "@revDebt": {},
+  "revDebtAsk": "What did management do with the borrowed money — and is it earning more than it costs?",
+  "@revDebtAsk": {},
+  "revDebtBody": "Total liabilities against shareholders' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.",
+  "@revDebtBody": {}
 }

@@ -9,6 +9,7 @@ import '../models/filed.dart';
 import '../models/news.dart';
 import '../models/opportunity.dart';
 import '../models/rates.dart';
+import '../models/review.dart';
 import '../models/signals.dart';
 import '../networking/static_api.dart';
 import 'sourced.dart';
@@ -97,6 +98,11 @@ class ResearchRepository {
   /// silence, first-in-years filings, and when results are next due.
   Stream<Sourced<CompanySignals>> getCompanySignals(String ticker) =>
       _parsed('signals/$ticker.json', 'signals', CompanySignals.fromJson);
+
+  /// One company's review sheet — every metric, its direction, and the
+  /// question to ask next.
+  Stream<Sourced<CompanyReview>> getCompanyReview(String ticker) =>
+      _parsed('review/$ticker.json', 'review', CompanyReview.fromJson);
 
   /// The same, across the whole market, in one small document.
   Stream<Sourced<SignalsIndex>> getSignals() =>

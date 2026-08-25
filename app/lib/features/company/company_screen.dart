@@ -33,6 +33,7 @@ import '../../core/widgets/text.dart';
 import 'company_brief.dart';
 import 'company_calendar.dart';
 import 'company_signals.dart';
+import 'review_sheet.dart';
 import 'volume_explainer.dart';
 import 'price_chart.dart';
 import '../../l10n/app_localizations.dart';
@@ -129,9 +130,17 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                     ticker: widget.ticker,
                     onOpenStudy: () => setState(() => _tab = _Tab.research),
                   ),
-                  _Tab.financials => _Financials(
+                  _Tab.financials => Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Above the statements, because the sheet is the reading
+                      // and the statements are the evidence for it.
+                      BReviewSheet(ticker: widget.ticker),
+                      _Financials(
                     company: company,
                     parentTab: widget.parentTab,
+                  ),
+                    ],
                   ),
                   _Tab.price => _Price(
                     ticker: widget.ticker,

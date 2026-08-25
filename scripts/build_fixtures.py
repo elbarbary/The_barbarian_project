@@ -99,6 +99,7 @@ RESOURCES = {
     "connections": ["connections.json"],
     "calendar": ["calendar.json"],
     "signals": ["signals.json"],
+    "review": ["review.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by
@@ -123,6 +124,7 @@ UNVERSIONED = [
     # above, their bytes have to reach the fingerprint directly or a phone
     # will never ask for the new ones.
     "signals",
+    "review",
     "calendar/filed",
     # Same story, and it was already true before signals existed: a brief is
     # fetched with `disclosures` as its counter but lives in its own file.

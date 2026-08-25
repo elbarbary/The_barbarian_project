@@ -53,6 +53,7 @@ flutter:
     - assets/fixtures/disclosures/documents/
     - assets/fixtures/briefs/
     - assets/fixtures/signals/
+    - assets/fixtures/review/
     # One month deep on purpose — `build_calendar.write_filed` mirrors only
     # the current month, because twelve of them is seven megabytes of binary
     # for filings a reader would have to scroll back a year to reach.
