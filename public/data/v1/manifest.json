@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "data_version": "8e064d2d02fb5d01",
-  "generated_at": "2026-08-25T19:18:50+00:00",
+  "data_version": "fbd1f1edd672018b",
+  "generated_at": "2026-08-25T19:19:39+00:00",
   "market_date": "2026-08-25",
   "versions": {
     "market": 93524834,
@@ -12,7 +12,7 @@
     "rates": 28784653,
     "disclosures": 68725261,
     "macro": 85584530,
-    "connections": 81464072,
+    "connections": 5771701,
     "calendar": 27576973,
     "signals": 51395507,
     "review": 70234614,
