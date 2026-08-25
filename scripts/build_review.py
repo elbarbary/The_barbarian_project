@@ -68,6 +68,12 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES = REPO / "public" / "data" / "v1" / "companies"
 DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 STOCK_INFO = pathlib.Path(__file__).resolve().parent / "stock_info.json"
+# The natural-language read of each company's metric pattern, generated
+# separately by `build_review_reads.py` under a budget and vetted like the
+# briefs. Merged in here so build_review stays network-free and CI-safe; a
+# read generated today reaches the app on the next build, like every other
+# cumulative store in this pipeline.
+READS = pathlib.Path(__file__).resolve().parent / "review_reads.json"
 OUT = REPO / "public" / "data" / "v1" / "review"
 INDEX = REPO / "public" / "data" / "v1" / "review.json"
 FIXTURES = REPO / "app" / "assets" / "fixtures"
@@ -229,33 +235,66 @@ def growth(series: list[float]) -> tuple[str, int]:
     return "flat", len(series)
 
 
+def plabel(row: dict) -> str:
+    """A short period label for a chart axis: `FY21`, `H1 24`, `Q1 26`.
+
+    Read from `period` where the filing carries one, otherwise reconstructed
+    from the period-end date so a Mubasher row without a `period` field still
+    lands on the graph rather than dropping off it.
+    """
+    period = str(row.get("period") or "").strip()
+    if period:
+        parts = period.split()
+        if len(parts) == 2 and len(parts[1]) == 4:
+            return f"{parts[0]} {parts[1][2:]}"
+        return period[:8]
+    key = period_key(row) or ""
+    return key[2:] if len(key) >= 4 else key
+
+
 def metrics_for(ticker: str, doc: dict, summary: dict, info: dict) -> list[dict]:
-    """Every metric this company has the data for. Absent is absent."""
+    """Every metric this company has the data for. Absent is absent.
+
+    Each series carries the period each value belongs to, not just the value —
+    the graph a reader taps into is proof of the calculation, and a shape with
+    no periods under it is decoration rather than evidence.
+    """
     rows = annual(doc)      # flows
     held = balances(doc)    # stocks
     out: list[dict] = []
 
-    def series_of(field, source=None) -> list[float]:
-        return [
-            v for v in (field(r) for r in (source if source is not None else rows))
-            if v is not None
-        ]
-
-    def add(key: str, value: float | None, series: list[float],
+    def add(key: str, value: float | None, points: list[tuple[str, float]],
             *, signed: bool = False, unit: str = "ratio") -> None:
         value = sane(key, value)
         if value is None:
             return
-        clean = [s for s in (sane(key, v) for v in series) if s is not None]
-        way, points = (growth(clean) if signed else direction(clean))
+        clean = [(label, s) for label, v in points
+                 if (s := sane(key, v)) is not None]
+        values = [v for _, v in clean]
+        way, n = (growth(values) if signed else direction(values))
         out.append({
             "key": key,
             "value": round(value, 4),
             "unit": unit,
             "direction": way,
-            "points": points,
-            "series": [round(v, 4) for v in clean[-10:]],
+            "points": n,
+            # Last ten, oldest first, each with its period for the axis.
+            "series": [{"p": label, "v": round(v, 4)} for label, v in clean[-10:]],
         })
+
+    def paired(source, field) -> list[tuple[str, float]]:
+        """(`period label`, value) for a field read straight off a row."""
+        return [(plabel(r), v) for r in source
+                if (v := field(r)) is not None]
+
+    def derived(source, field) -> list[tuple[str, float]]:
+        """(`period label`, value) for a value computed from a row."""
+        out_pts = []
+        for r in source:
+            v = field(r)
+            if v is not None:
+                out_pts.append((plabel(r), v))
+        return out_pts
 
     market_cap = summary.get("market_cap") or info.get("egx_market_cap")
     shares = info.get("listed_shares")
@@ -264,51 +303,52 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict) -> list[dict]
     #
     # P/E ships as today's level with no direction. A historical P/E needs a
     # historical price per year, and the app holds a price *series* but not one
-    # aligned to each period end. Rather than reconstruct it approximately, the
-    # sheet shows today's multiple beside the earnings direction underneath it
-    # — which is the comparison the framework actually asks for: "is the P/E
-    # reasonable against the company's growth", not "which way has the P/E
-    # been drifting".
+    # aligned to each period end. The sheet shows today's multiple beside the
+    # earnings direction underneath it — the comparison the framework asks for.
     add("pe", summary.get("pe") or info.get("egx_pe"), [])
 
     if market_cap:
-        book = [r["equity"] for r in held if r.get("equity") and r["equity"] > 0]
-        add("pb", market_cap / book[-1] if book else None,
-            [market_cap / b for b in book])
+        equity_now = _last(held, "equity")
+        add("pb",
+            market_cap / equity_now if equity_now and equity_now > 0 else None,
+            derived(held, lambda r: market_cap / r["equity"]
+                    if r.get("equity") and r["equity"] > 0 else None))
 
     # --- the business ----------------------------------------------------
     add("profit", newest(rows, "net_income"),
-        series_of(lambda r: r.get("net_income")), signed=True, unit="egp_m")
+        paired(rows, lambda r: r.get("net_income")), signed=True, unit="egp_m")
 
     if shares:
-        eps = [r["net_income"] / shares * 1e6 for r in rows
-               if r.get("net_income") is not None]
-        add("eps", eps[-1] if eps else None, eps, signed=True, unit="egp")
+        eps_pts = derived(rows, lambda r: r["net_income"] / shares * 1e6
+                          if r.get("net_income") is not None else None)
+        add("eps", eps_pts[-1][1] if eps_pts else None, eps_pts,
+            signed=True, unit="egp")
 
     add("assets", newest(held, "assets"),
-        series_of(lambda r: r.get("assets"), held), unit="egp_m")
+        paired(held, lambda r: r.get("assets")), unit="egp_m")
 
-    conv = [
-        r["operating_cash_flow"] / r["net_income"]
-        for r in rows
-        if r.get("net_income") and r.get("operating_cash_flow") is not None
-    ]
-    add("cash_conversion", conv[-1] if conv else None, conv)
+    conv = derived(rows, lambda r: r["operating_cash_flow"] / r["net_income"]
+                   if r.get("net_income") and r.get("operating_cash_flow") is not None
+                   else None)
+    add("cash_conversion", conv[-1][1] if conv else None, conv)
 
     # --- returns ---------------------------------------------------------
-    roe = [r["net_income"] / r["equity"] for r in rows
-           if r.get("equity") and r["equity"] > 0 and r.get("net_income") is not None]
-    add("roe", roe[-1] if roe else None, roe)
+    roe = derived(rows, lambda r: r["net_income"] / r["equity"]
+                  if r.get("equity") and r["equity"] > 0
+                  and r.get("net_income") is not None else None)
+    add("roe", roe[-1][1] if roe else None, roe)
 
-    roa = [r["net_income"] / r["assets"] for r in rows
-           if r.get("assets") and r["assets"] > 0 and r.get("net_income") is not None]
-    add("roa", roa[-1] if roa else None, roa)
+    roa = derived(rows, lambda r: r["net_income"] / r["assets"]
+                  if r.get("assets") and r["assets"] > 0
+                  and r.get("net_income") is not None else None)
+    add("roa", roa[-1][1] if roa else None, roa)
 
     # --- risk ------------------------------------------------------------
     # Two balances, so any period is comparable with any other.
-    de = [r["liabilities"] / r["equity"] for r in held
-          if r.get("equity") and r["equity"] > 0 and r.get("liabilities") is not None]
-    add("debt_equity", de[-1] if de else None, de)
+    de = derived(held, lambda r: r["liabilities"] / r["equity"]
+                 if r.get("equity") and r["equity"] > 0
+                 and r.get("liabilities") is not None else None)
+    add("debt_equity", de[-1][1] if de else None, de)
 
     # --- cash back to the holder ----------------------------------------
     if (y := info.get("dividend_yield")) is not None and y > 0:
@@ -316,14 +356,53 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict) -> list[dict]
             "key": "dividend_yield",
             "value": round(y, 3),
             "unit": "percent",
-            # One published figure, so there is no direction to read. Said
-            # plainly rather than dressed as flat.
             "direction": "unknown",
             "points": 1,
             "series": [],
         })
 
+    attach_causes(out)
     return out
+
+
+def _last(rows: list[dict], field: str) -> float | None:
+    """The newest value of a field, or None — for a one-line denominator."""
+    return newest(rows, field)
+
+
+# The framework's own "combine the signals" logic, made deterministic. A cause
+# is never a verdict — it is a pointer at the other row a reader should read
+# next, which is exactly how the founder's notes phrase every probable cause:
+# "ROE up + debt up -> investigate whether it is leverage".
+def attach_causes(metrics: list[dict]) -> None:
+    way = {m["key"]: m["direction"] for m in metrics}
+    has = way.__contains__
+
+    for m in metrics:
+        key, d = m["key"], m["direction"]
+        cause = None
+        if key == "profit" and d == "rising":
+            cause = ("profit_ahead_of_cash"
+                     if way.get("cash_conversion") == "falling"
+                     else "profit_with_cash" if has("cash_conversion") else None)
+        elif key == "assets" and d == "rising":
+            cause = ("assets_ahead_of_profit"
+                     if way.get("profit") not in ("rising", None)
+                     else "assets_with_profit" if has("profit") else None)
+        elif key == "eps" and d == "rising":
+            cause = "eps_per_share"
+        elif key == "cash_conversion" and d == "falling":
+            cause = "cash_behind_profit"
+        elif key == "roe" and d == "rising":
+            cause = ("roe_leverage" if way.get("debt_equity") == "rising"
+                     else "roe_operational" if has("debt_equity") else None)
+        elif key == "roa" and d == "rising":
+            cause = "roa_unlevered"
+        elif key == "debt_equity" and d == "rising":
+            cause = ("debt_productive" if way.get("profit") == "rising"
+                     else "debt_watch")
+        if cause:
+            m["cause"] = cause
 
 
 def peers(everything: dict[str, list[dict]], sectors: dict[str, str]) -> dict:
@@ -393,6 +472,7 @@ def build(today: datetime.date) -> tuple[dict, dict]:
             everything[ticker] = rows
 
     medians = peers(everything, sectors)
+    reads = load(READS)
     per_company = {}
     for ticker, rows in everything.items():
         sector = sectors.get(ticker)
@@ -402,13 +482,17 @@ def build(today: datetime.date) -> tuple[dict, dict]:
                 continue
             row["peer_median"] = round(median, 4)
             row["peer"] = "above" if row["value"] > median else "below"
-        per_company[ticker] = {
+        doc = {
             "ticker": ticker,
             "generated": today.isoformat(),
             "sector": sector,
             "metrics": rows,
             "pattern": pattern(rows),
         }
+        if (r := reads.get(ticker)) and r.get("read"):
+            doc["read"] = r["read"]
+            doc["read_ar"] = r.get("read_ar", "")
+        per_company[ticker] = doc
 
     index = {
         "generated": today.isoformat(),

@@ -4663,6 +4663,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total liabilities against shareholders\' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.'**
   String get revDebtBody;
+
+  /// No description provided for @revNowRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now it\'s rising'**
+  String get revNowRising;
+
+  /// No description provided for @revNowFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now it\'s falling'**
+  String get revNowFalling;
+
+  /// No description provided for @revNowFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now it\'s holding steady'**
+  String get revNowFlat;
+
+  /// No description provided for @revProofTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The figure, period by period'**
+  String get revProofTitle;
+
+  /// No description provided for @revProofNote.
+  ///
+  /// In en, this message translates to:
+  /// **'These are the values the direction was read from — the exchange\'s filed figures, oldest first.'**
+  String get revProofNote;
+
+  /// No description provided for @revCauseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Probable cause'**
+  String get revCauseTitle;
+
+  /// No description provided for @revMeansTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What it is'**
+  String get revMeansTitle;
+
+  /// No description provided for @revAskTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Worth asking'**
+  String get revAskTitle;
+
+  /// No description provided for @revOnePoint.
+  ///
+  /// In en, this message translates to:
+  /// **'One published figure — not enough history to read a direction.'**
+  String get revOnePoint;
+
+  /// No description provided for @revDirProfitRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit has been climbing year on year.'**
+  String get revDirProfitRising;
+
+  /// No description provided for @revDirProfitFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit has been shrinking year on year.'**
+  String get revDirProfitFalling;
+
+  /// No description provided for @revDirEpsRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Each share is earning more — the growth is reaching shareholders rather than being diluted away.'**
+  String get revDirEpsRising;
+
+  /// No description provided for @revDirEpsFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Each share is earning less, even if the company\'s total profit has not fallen.'**
+  String get revDirEpsFalling;
+
+  /// No description provided for @revDirAssetsRising.
+  ///
+  /// In en, this message translates to:
+  /// **'The company is bigger than it was — more plant, inventory or cash on the books.'**
+  String get revDirAssetsRising;
+
+  /// No description provided for @revDirAssetsFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'The company\'s asset base is shrinking.'**
+  String get revDirAssetsFalling;
+
+  /// No description provided for @revDirCashRising.
+  ///
+  /// In en, this message translates to:
+  /// **'More of the reported profit is arriving as actual cash.'**
+  String get revDirCashRising;
+
+  /// No description provided for @revDirCashFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'Less of the reported profit is turning into cash — the gap is worth watching.'**
+  String get revDirCashFalling;
+
+  /// No description provided for @revDirRoeRising.
+  ///
+  /// In en, this message translates to:
+  /// **'The company is earning more on the money its owners left in it.'**
+  String get revDirRoeRising;
+
+  /// No description provided for @revDirRoeFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'The return on shareholders\' money is slipping.'**
+  String get revDirRoeFalling;
+
+  /// No description provided for @revDirRoaRising.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything the company owns is working harder.'**
+  String get revDirRoaRising;
+
+  /// No description provided for @revDirRoaFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'The assets are producing less than they were.'**
+  String get revDirRoaFalling;
+
+  /// No description provided for @revDirDebtRising.
+  ///
+  /// In en, this message translates to:
+  /// **'The company is carrying more debt relative to its own equity.'**
+  String get revDirDebtRising;
+
+  /// No description provided for @revDirDebtFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'The company is leaning on debt less than it used to.'**
+  String get revDirDebtFalling;
+
+  /// No description provided for @revDirPbRising.
+  ///
+  /// In en, this message translates to:
+  /// **'The market is paying more for each pound of book value than it was.'**
+  String get revDirPbRising;
+
+  /// No description provided for @revDirPbFalling.
+  ///
+  /// In en, this message translates to:
+  /// **'The market is paying less for each pound of book value.'**
+  String get revDirPbFalling;
+
+  /// No description provided for @revDirFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'This has held roughly steady across the periods on record.'**
+  String get revDirFlat;
+
+  /// No description provided for @revCauseProfitAheadOfCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit is rising, but cash conversion is falling — some of the reported profit has not arrived as cash. Read the cash-conversion row.'**
+  String get revCauseProfitAheadOfCash;
+
+  /// No description provided for @revCauseProfitWithCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit is rising and cash conversion is holding up, so the profit is backed by cash.'**
+  String get revCauseProfitWithCash;
+
+  /// No description provided for @revCauseAssetsAheadOfProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'The asset base is growing faster than profit — the company is putting more in for a similar return, which is what a falling margin would tell you.'**
+  String get revCauseAssetsAheadOfProfit;
+
+  /// No description provided for @revCauseAssetsWithProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Assets and profit are growing together.'**
+  String get revCauseAssetsWithProfit;
+
+  /// No description provided for @revCauseEpsPerShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Total profit and per-share earnings are both rising, so the growth is not being diluted by new shares.'**
+  String get revCauseEpsPerShare;
+
+  /// No description provided for @revCauseCashBehindProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash is lagging reported profit. When the two diverge, the reported profit is the number to question.'**
+  String get revCauseCashBehindProfit;
+
+  /// No description provided for @revCauseRoeLeverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Return on equity is rising while debt is too — some of the lift may be borrowing rather than the business. Return on assets, which debt cannot flatter, is the check.'**
+  String get revCauseRoeLeverage;
+
+  /// No description provided for @revCauseRoeOperational.
+  ///
+  /// In en, this message translates to:
+  /// **'Return on equity is rising without more debt, so the improvement is operational.'**
+  String get revCauseRoeOperational;
+
+  /// No description provided for @revCauseRoaUnlevered.
+  ///
+  /// In en, this message translates to:
+  /// **'The assets are earning more, and unlike return on equity, borrowing cannot flatter this figure.'**
+  String get revCauseRoaUnlevered;
+
+  /// No description provided for @revCauseDebtProductive.
+  ///
+  /// In en, this message translates to:
+  /// **'Debt is rising, but so is profit — the borrowed money may be doing work. Compare how fast each grew.'**
+  String get revCauseDebtProductive;
+
+  /// No description provided for @revCauseDebtWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Debt is rising while profit is not keeping pace. Ask what the borrowing is for.'**
+  String get revCauseDebtWatch;
+
+  /// No description provided for @revGroupValuation.
+  ///
+  /// In en, this message translates to:
+  /// **'What you pay'**
+  String get revGroupValuation;
+
+  /// No description provided for @revGroupBusiness.
+  ///
+  /// In en, this message translates to:
+  /// **'The business'**
+  String get revGroupBusiness;
+
+  /// No description provided for @revGroupReturns.
+  ///
+  /// In en, this message translates to:
+  /// **'What it earns on'**
+  String get revGroupReturns;
+
+  /// No description provided for @revGroupRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'How it\'s financed'**
+  String get revGroupRisk;
+
+  /// No description provided for @revReadLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'The read'**
+  String get revReadLabel;
 }
 
 class _AppLocalizationsDelegate

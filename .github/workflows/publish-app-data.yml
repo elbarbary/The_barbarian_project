@@ -91,6 +91,7 @@ env:
     scripts/news_images.json
     scripts/statements_filed.json
     scripts/stock_info.json
+    scripts/review_reads.json
     scripts/translations_en.json
 
 permissions:

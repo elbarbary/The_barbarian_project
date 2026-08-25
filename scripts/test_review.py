@@ -183,5 +183,56 @@ class Pattern(unittest.TestCase):
         self.assertIsInstance(got["deteriorating"], list)
 
 
+class Causes(unittest.TestCase):
+    """The probable cause is a pointer at the next row, never a verdict.
+
+    Every branch here is one the founder's own notes make: profit up while
+    cash lags, a return that might be leverage, growth outrunning profit.
+    """
+
+    def attach(self, **dirs):
+        metrics = [{"key": k, "direction": v} for k, v in dirs.items()]
+        r.attach_causes(metrics)
+        return {m["key"]: m.get("cause") for m in metrics}
+
+    def test_rising_profit_with_falling_cash_points_at_the_cash(self):
+        got = self.attach(profit="rising", cash_conversion="falling")
+        self.assertEqual(got["profit"], "profit_ahead_of_cash")
+
+    def test_rising_profit_with_healthy_cash_says_so(self):
+        got = self.attach(profit="rising", cash_conversion="rising")
+        self.assertEqual(got["profit"], "profit_with_cash")
+
+    def test_rising_roe_with_rising_debt_flags_leverage(self):
+        got = self.attach(roe="rising", debt_equity="rising")
+        self.assertEqual(got["roe"], "roe_leverage")
+
+    def test_rising_roe_without_rising_debt_is_operational(self):
+        got = self.attach(roe="rising", debt_equity="falling")
+        self.assertEqual(got["roe"], "roe_operational")
+
+    def test_growth_outrunning_profit_is_flagged(self):
+        got = self.attach(assets="rising", profit="flat")
+        self.assertEqual(got["assets"], "assets_ahead_of_profit")
+
+    def test_a_metric_with_no_sibling_gets_no_cause(self):
+        # ROE rising but nothing to compare debt against — no invented cause.
+        got = self.attach(roe="rising")
+        self.assertIsNone(got["roe"])
+
+    def test_a_flat_metric_has_no_cause(self):
+        got = self.attach(profit="flat", cash_conversion="rising")
+        self.assertIsNone(got["profit"])
+
+
+class PeriodLabel(unittest.TestCase):
+    def test_a_full_label_is_shortened_to_two_digits(self):
+        self.assertEqual(r.plabel({"period": "FY 2021"}), "FY 21")
+        self.assertEqual(r.plabel({"period": "H1 2024"}), "H1 24")
+
+    def test_a_labelless_row_falls_back_to_the_date(self):
+        self.assertEqual(r.plabel({"period_end": "2021-12-31"}), "21-12-31")
+
+
 if __name__ == "__main__":
     unittest.main()

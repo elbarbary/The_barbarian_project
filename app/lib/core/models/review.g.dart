@@ -19,6 +19,8 @@ _CompanyReview _$CompanyReviewFromJson(Map<String, dynamic> json) =>
       pattern: json['pattern'] == null
           ? null
           : ReviewPattern.fromJson(json['pattern'] as Map<String, dynamic>),
+      read: json['read'] as String? ?? '',
+      readAr: json['read_ar'] as String? ?? '',
     );
 
 Map<String, dynamic> _$CompanyReviewToJson(_CompanyReview instance) =>
@@ -28,6 +30,8 @@ Map<String, dynamic> _$CompanyReviewToJson(_CompanyReview instance) =>
       'sector': instance.sector,
       'metrics': instance.metrics,
       'pattern': instance.pattern,
+      'read': instance.read,
+      'read_ar': instance.readAr,
     };
 
 _ReviewMetric _$ReviewMetricFromJson(Map<String, dynamic> json) =>
@@ -37,11 +41,10 @@ _ReviewMetric _$ReviewMetricFromJson(Map<String, dynamic> json) =>
       unit: json['unit'] as String? ?? 'ratio',
       direction: json['direction'] as String? ?? 'unknown',
       points: (json['points'] as num?)?.toInt() ?? 0,
-      series:
-          (json['series'] as List<dynamic>?)
-              ?.map((e) => (e as num).toDouble())
-              .toList() ??
-          const <double>[],
+      series: json['series'] == null
+          ? const <ReviewPoint>[]
+          : reviewPointsFromJson(json['series'] as List?),
+      cause: json['cause'] as String?,
       peer: json['peer'] as String?,
       peerMedian: (json['peer_median'] as num?)?.toDouble(),
     );
@@ -54,9 +57,18 @@ Map<String, dynamic> _$ReviewMetricToJson(_ReviewMetric instance) =>
       'direction': instance.direction,
       'points': instance.points,
       'series': instance.series,
+      'cause': instance.cause,
       'peer': instance.peer,
       'peer_median': instance.peerMedian,
     };
+
+_ReviewPoint _$ReviewPointFromJson(Map<String, dynamic> json) => _ReviewPoint(
+  period: json['p'] as String? ?? '',
+  value: (json['v'] as num?)?.toDouble() ?? 0,
+);
+
+Map<String, dynamic> _$ReviewPointToJson(_ReviewPoint instance) =>
+    <String, dynamic>{'p': instance.period, 'v': instance.value};
 
 _ReviewPattern _$ReviewPatternFromJson(Map<String, dynamic> json) =>
     _ReviewPattern(

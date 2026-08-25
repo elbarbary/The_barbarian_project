@@ -2852,4 +2852,157 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get revDebtBody =>
       'Total liabilities against shareholders\' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.';
+
+  @override
+  String get revNowRising => 'Right now it\'s rising';
+
+  @override
+  String get revNowFalling => 'Right now it\'s falling';
+
+  @override
+  String get revNowFlat => 'Right now it\'s holding steady';
+
+  @override
+  String get revProofTitle => 'The figure, period by period';
+
+  @override
+  String get revProofNote =>
+      'These are the values the direction was read from — the exchange\'s filed figures, oldest first.';
+
+  @override
+  String get revCauseTitle => 'Probable cause';
+
+  @override
+  String get revMeansTitle => 'What it is';
+
+  @override
+  String get revAskTitle => 'Worth asking';
+
+  @override
+  String get revOnePoint =>
+      'One published figure — not enough history to read a direction.';
+
+  @override
+  String get revDirProfitRising => 'Profit has been climbing year on year.';
+
+  @override
+  String get revDirProfitFalling => 'Profit has been shrinking year on year.';
+
+  @override
+  String get revDirEpsRising =>
+      'Each share is earning more — the growth is reaching shareholders rather than being diluted away.';
+
+  @override
+  String get revDirEpsFalling =>
+      'Each share is earning less, even if the company\'s total profit has not fallen.';
+
+  @override
+  String get revDirAssetsRising =>
+      'The company is bigger than it was — more plant, inventory or cash on the books.';
+
+  @override
+  String get revDirAssetsFalling => 'The company\'s asset base is shrinking.';
+
+  @override
+  String get revDirCashRising =>
+      'More of the reported profit is arriving as actual cash.';
+
+  @override
+  String get revDirCashFalling =>
+      'Less of the reported profit is turning into cash — the gap is worth watching.';
+
+  @override
+  String get revDirRoeRising =>
+      'The company is earning more on the money its owners left in it.';
+
+  @override
+  String get revDirRoeFalling =>
+      'The return on shareholders\' money is slipping.';
+
+  @override
+  String get revDirRoaRising =>
+      'Everything the company owns is working harder.';
+
+  @override
+  String get revDirRoaFalling =>
+      'The assets are producing less than they were.';
+
+  @override
+  String get revDirDebtRising =>
+      'The company is carrying more debt relative to its own equity.';
+
+  @override
+  String get revDirDebtFalling =>
+      'The company is leaning on debt less than it used to.';
+
+  @override
+  String get revDirPbRising =>
+      'The market is paying more for each pound of book value than it was.';
+
+  @override
+  String get revDirPbFalling =>
+      'The market is paying less for each pound of book value.';
+
+  @override
+  String get revDirFlat =>
+      'This has held roughly steady across the periods on record.';
+
+  @override
+  String get revCauseProfitAheadOfCash =>
+      'Profit is rising, but cash conversion is falling — some of the reported profit has not arrived as cash. Read the cash-conversion row.';
+
+  @override
+  String get revCauseProfitWithCash =>
+      'Profit is rising and cash conversion is holding up, so the profit is backed by cash.';
+
+  @override
+  String get revCauseAssetsAheadOfProfit =>
+      'The asset base is growing faster than profit — the company is putting more in for a similar return, which is what a falling margin would tell you.';
+
+  @override
+  String get revCauseAssetsWithProfit =>
+      'Assets and profit are growing together.';
+
+  @override
+  String get revCauseEpsPerShare =>
+      'Total profit and per-share earnings are both rising, so the growth is not being diluted by new shares.';
+
+  @override
+  String get revCauseCashBehindProfit =>
+      'Cash is lagging reported profit. When the two diverge, the reported profit is the number to question.';
+
+  @override
+  String get revCauseRoeLeverage =>
+      'Return on equity is rising while debt is too — some of the lift may be borrowing rather than the business. Return on assets, which debt cannot flatter, is the check.';
+
+  @override
+  String get revCauseRoeOperational =>
+      'Return on equity is rising without more debt, so the improvement is operational.';
+
+  @override
+  String get revCauseRoaUnlevered =>
+      'The assets are earning more, and unlike return on equity, borrowing cannot flatter this figure.';
+
+  @override
+  String get revCauseDebtProductive =>
+      'Debt is rising, but so is profit — the borrowed money may be doing work. Compare how fast each grew.';
+
+  @override
+  String get revCauseDebtWatch =>
+      'Debt is rising while profit is not keeping pace. Ask what the borrowing is for.';
+
+  @override
+  String get revGroupValuation => 'What you pay';
+
+  @override
+  String get revGroupBusiness => 'The business';
+
+  @override
+  String get revGroupReturns => 'What it earns on';
+
+  @override
+  String get revGroupRisk => 'How it\'s financed';
+
+  @override
+  String get revReadLabel => 'The read';
 }

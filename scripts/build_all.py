@@ -97,6 +97,11 @@ STEPS = [
     # The review sheet, after both: it reads the merged financials, the share
     # count above, and the market scan. No network of its own.
     ("Review sheet", "build_review.py", True),
+    # The natural-language read of each company's metric pattern. Gated by a
+    # budget and vetted like the briefs; a read generated today reaches the app
+    # on the next build, when build_review merges the store back in.
+    ("Review reads", "build_review_reads.py", False,
+     ["--limit", "8", "--budget", "0.60"]),
     # News and rates run here too, so a full local build produces a complete
     # set — but their real cadence is publish-live-data.yml every 15 minutes.
     # A daily news feed is a bulletin, and an intraday metals price pinned for
@@ -206,6 +211,7 @@ BEST_EFFORT = {
     "Macro",
     "Arabic names",
     "Stock info",
+    "Review reads",
     "Company profiles",
     "Company briefs",
     "Company filings",

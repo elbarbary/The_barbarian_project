@@ -2861,4 +2861,149 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get revDebtBody =>
       'إجمالي الالتزامات منسوباً إلى حقوق المساهمين. ورقم الدين المطلق يقول القليل بشكل مدهش: فشركة مدينة بعشرة مليارات قد تكون أمتن من أخرى مدينة بمليار، تبعاً لحجم النشاط خلفها. وارتفاع الدين ليس مشكلة تلقائياً كذلك — المهم ما تحرّك بجانبه. دين يرتفع الخُمس وأرباح ترتفع النصف يعني أن المال المقترض يعمل. أما دين يرتفع أربعة أخماس وربح يزحف 5% فتلك هي الحالة التي تستحق النظر.';
+
+  @override
+  String get revNowRising => 'ترتفع الآن';
+
+  @override
+  String get revNowFalling => 'تنخفض الآن';
+
+  @override
+  String get revNowFlat => 'مستقرة الآن';
+
+  @override
+  String get revProofTitle => 'الرقم، فترة بفترة';
+
+  @override
+  String get revProofNote =>
+      'هذه هي القيم التي قُرئ منها الاتجاه — أرقام البورصة المودعة، من الأقدم إلى الأحدث.';
+
+  @override
+  String get revCauseTitle => 'السبب المُرجَّح';
+
+  @override
+  String get revMeansTitle => 'ما هو';
+
+  @override
+  String get revAskTitle => 'يستحق أن تسأل';
+
+  @override
+  String get revOnePoint => 'رقم واحد منشور — لا يكفي من التاريخ لقراءة اتجاه.';
+
+  @override
+  String get revDirProfitRising => 'الربح يتصاعد سنة بعد سنة.';
+
+  @override
+  String get revDirProfitFalling => 'الربح يتناقص سنة بعد سنة.';
+
+  @override
+  String get revDirEpsRising =>
+      'نصيب كل سهم من الربح يزيد — النمو يصل إلى المساهمين ولا يتبدّد بالتخفيف.';
+
+  @override
+  String get revDirEpsFalling =>
+      'نصيب كل سهم يقل، حتى وإن لم يتراجع إجمالي ربح الشركة.';
+
+  @override
+  String get revDirAssetsRising =>
+      'الشركة أكبر مما كانت — أصول ومخزون ونقد أكثر في الدفاتر.';
+
+  @override
+  String get revDirAssetsFalling => 'قاعدة أصول الشركة تتقلّص.';
+
+  @override
+  String get revDirCashRising => 'قدر أكبر من الربح المعلن يصل نقداً بالفعل.';
+
+  @override
+  String get revDirCashFalling =>
+      'قدر أقل من الربح المعلن يتحوّل إلى نقد — والفجوة تستحق المتابعة.';
+
+  @override
+  String get revDirRoeRising =>
+      'الشركة تربح أكثر على الأموال التي تركها ملّاكها فيها.';
+
+  @override
+  String get revDirRoeFalling => 'العائد على أموال المساهمين يتراجع.';
+
+  @override
+  String get revDirRoaRising => 'كل ما تملكه الشركة يعمل بكفاءة أعلى.';
+
+  @override
+  String get revDirRoaFalling => 'الأصول تُنتج أقل مما كانت.';
+
+  @override
+  String get revDirDebtRising =>
+      'الشركة تحمل ديناً أكبر نسبةً إلى حقوق ملكيتها.';
+
+  @override
+  String get revDirDebtFalling => 'الشركة تعتمد على الدين أقل مما كانت.';
+
+  @override
+  String get revDirPbRising =>
+      'السوق يدفع أكثر مقابل كل جنيه من القيمة الدفترية.';
+
+  @override
+  String get revDirPbFalling =>
+      'السوق يدفع أقل مقابل كل جنيه من القيمة الدفترية.';
+
+  @override
+  String get revDirFlat => 'ظلّت مستقرة تقريباً عبر الفترات المسجّلة.';
+
+  @override
+  String get revCauseProfitAheadOfCash =>
+      'الربح يرتفع لكن تحويل النقد ينخفض — بعض الربح المعلن لم يصل نقداً. راجع سطر تحويل النقد.';
+
+  @override
+  String get revCauseProfitWithCash =>
+      'الربح يرتفع وتحويل النقد صامد، فالربح مدعوم بالنقد.';
+
+  @override
+  String get revCauseAssetsAheadOfProfit =>
+      'قاعدة الأصول تنمو أسرع من الربح — الشركة تضخّ أكثر مقابل عائد مماثل، وهو ما يخبرك به تراجع الهامش.';
+
+  @override
+  String get revCauseAssetsWithProfit => 'الأصول والربح ينموان معاً.';
+
+  @override
+  String get revCauseEpsPerShare =>
+      'إجمالي الربح ونصيب السهم يرتفعان معاً، فالنمو لا يتبدّد بإصدار أسهم جديدة.';
+
+  @override
+  String get revCauseCashBehindProfit =>
+      'النقد يتأخّر عن الربح المعلن. وحين يفترقان، فالربح المعلن هو الرقم الذي يُسأل عنه.';
+
+  @override
+  String get revCauseRoeLeverage =>
+      'العائد على حقوق الملكية يرتفع والدين كذلك — قد يكون بعض الارتفاع اقتراضاً لا نشاطاً. والعائد على الأصول، الذي لا يجمّله الدين، هو الفيصل.';
+
+  @override
+  String get revCauseRoeOperational =>
+      'العائد على حقوق الملكية يرتفع دون مزيد من الدين، فالتحسّن تشغيلي.';
+
+  @override
+  String get revCauseRoaUnlevered =>
+      'الأصول تربح أكثر، وخلافاً للعائد على حقوق الملكية، لا يستطيع الاقتراض تجميل هذا الرقم.';
+
+  @override
+  String get revCauseDebtProductive =>
+      'الدين يرتفع لكن الربح كذلك — قد يكون المال المقترض يعمل. قارن سرعة نمو كلٍّ منهما.';
+
+  @override
+  String get revCauseDebtWatch =>
+      'الدين يرتفع والربح لا يواكبه. اسأل: فيمَ يُستخدم الاقتراض؟';
+
+  @override
+  String get revGroupValuation => 'ما تدفعه';
+
+  @override
+  String get revGroupBusiness => 'النشاط';
+
+  @override
+  String get revGroupReturns => 'عائده على';
+
+  @override
+  String get revGroupRisk => 'كيف يُموَّل';
+
+  @override
+  String get revReadLabel => 'القراءة';
 }
