@@ -82,6 +82,21 @@ STEPS = [
     # that edits a published company document has to run here, in the list,
     # after the step that recreates it.
     ("EGX filed net profit", "merge_egx_financials.py", False),
+    # The other half of that merge: the figures the template carries WITH a unit
+    # word — "17,738,347 Value In Thousand" — which the step above skips on
+    # purpose because reading them as whole pounds would divide a bank to a
+    # thousandth of its size. A model reads each, three guards verify it, and it
+    # lands through the same writer. Cached by filing code, so a warm run makes
+    # a handful of reads for genuinely new filings; best-effort, because a model
+    # the host cannot reach is one build stale, not a broken build.
+    ("Unit-scaled net profit", "extract_unit_financials.py", False),
+    # The reviewed hand-corrections for the filings neither path can scale on
+    # its own — the exchange's bare, unit-word-less figures that would otherwise
+    # store a bank a thousandfold small, plus the two the exchange itself misfiled
+    # and are better left blank than published wrong. Deterministic: it replays a
+    # committed table, re-proving each figure against the archive, and touches a
+    # period only while the automatic path still produces the value it targets.
+    ("Filing corrections", "apply_filing_corrections.py", True),
     # What is unusual about a company against its own record — streak breaks,
     # silence measured against its own filing rhythm, first-in-years filings,
     # and when results are next due. Pure arithmetic over the committed
@@ -227,6 +242,10 @@ BEST_EFFORT = {
     # once; a refusal here means the archive is one build older, which is the
     # cost the pacing exists to keep small.
     "New filings",
+    # A model read of the unit-carrying filings. Cached, so a warm build barely
+    # touches it; when the host cannot reach the model the banks are one build
+    # stale, which is the same trade as the harvest above — not a failed build.
+    "Unit-scaled net profit",
 }
 
 

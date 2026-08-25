@@ -205,14 +205,24 @@ def egx_rows() -> tuple[dict[tuple[str, str], dict], dict[str, int]]:
     return rows, skipped
 
 
-def merge(dry_run: bool) -> int:
-    rows, skipped = egx_rows()
-    print(f"── EGX filed net profit: {len(rows)} (ticker, period) figures")
-    print(f"   skipped — non-EGP {skipped['currency']}, no period "
-          f"{skipped['no_period']}, unmapped span {skipped['no_label']}, "
-          f"no ticker {skipped['no_ticker']}, "
-          f"non-template units {skipped['qualified']}, zero {skipped['zero']}")
+def write_rows(rows: dict, skipped: dict, dry_run: bool,
+               force_keys: frozenset = frozenset()) -> tuple[int, int, int]:
+    """Write a `{(ticker, label): row}` set into the company docs and fixtures.
 
+    Factored out of `merge()` so a second source of the same-shaped rows — the
+    unit-qualified figures a model reads in `extract_unit_financials.py` — lands
+    through the identical override guard, add rule and provenance stamping,
+    rather than a parallel writer that could drift from this one.
+
+    `force_keys` names the `(ticker, label)` pairs whose override may skip the
+    magnitude guard. The guard exists to stop a figure filed in a different unit
+    from overstating a company a million-fold — but the unit reader supplies
+    figures that are already verbatim-checked, regex-agreed and band-limited, so
+    for those the guard would do the opposite of its job: it would preserve a
+    stored value that is itself the thousand-fold error (a bank's half-year at
+    16m instead of 33bn) and refuse the corrected one. Only keys the caller has
+    verified belong here; everything else still faces the guard.
+    """
     touched = overrode = added = 0
     for path in sorted(glob.glob(str(COMPANIES / "*.json"))):
         doc = json.loads(pathlib.Path(path).read_text())
@@ -228,7 +238,15 @@ def merge(dry_run: bool) -> int:
                 annual = label.startswith("FY")
                 if annual != (bucket == "annual"):
                     continue
-                existing = index.get(label) if row["comparable"] else None
+                # A non-calendar (fiscal) label is normally never matched — its
+                # end-date suffix keeps it from colliding with a Mubasher row.
+                # But two EGX filings CAN share one fiscal label (a "Value In
+                # Thousand" one and a later unlabelled one the plain path scaled
+                # a thousandfold too small), so a verified force key is allowed
+                # to find and correct that stored twin.
+                existing = (index.get(label)
+                            if row["comparable"] or (tick, label) in force_keys
+                            else None)
                 if existing:
                     held = existing.get("net_income")
                     if held == row["net_income"]:
@@ -245,7 +263,9 @@ def merge(dry_run: bool) -> int:
                     # one of them denominated differently — several issuers file
                     # in thousands. Refuse rather than publish a figure a
                     # million out, and count the refusals so they stay visible.
-                    if held and abs(held) > 0 and not (0.01 < row["net_income"] / held < 100):
+                    if (held and abs(held) > 0
+                            and not (0.01 < row["net_income"] / held < 100)
+                            and (tick, label) not in force_keys):
                         skipped["magnitude"] = skipped.get("magnitude", 0) + 1
                         continue
                     existing["net_income"] = row["net_income"]
@@ -293,6 +313,17 @@ def merge(dry_run: bool) -> int:
     if skipped.get("magnitude"):
         print(f"   refused {skipped['magnitude']} override(s) as a likely unit "
               f"mismatch rather than publish a figure orders of magnitude out")
+    return touched, overrode, added
+
+
+def merge(dry_run: bool) -> int:
+    rows, skipped = egx_rows()
+    print(f"── EGX filed net profit: {len(rows)} (ticker, period) figures")
+    print(f"   skipped — non-EGP {skipped['currency']}, no period "
+          f"{skipped['no_period']}, unmapped span {skipped['no_label']}, "
+          f"no ticker {skipped['no_ticker']}, "
+          f"non-template units {skipped['qualified']}, zero {skipped['zero']}")
+    write_rows(rows, skipped, dry_run)
     return 0
 
 
