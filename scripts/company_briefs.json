@@ -457,7 +457,7 @@
    "trading_resumptions": 7,
    "capital_increases": 0,
    "general_assemblies": 35,
-   "periods_reported": 62,
+   "periods_reported": 59,
    "loss_making_periods": 5
   },
   "generated": "2026-08-24"
@@ -2463,7 +2463,7 @@
    "trading_resumptions": 6,
    "capital_increases": 7,
    "general_assemblies": 115,
-   "periods_reported": 43,
+   "periods_reported": 39,
    "loss_making_periods": 1
   },
   "generated": "2026-08-24"
@@ -2777,8 +2777,8 @@
    "trading_resumptions": 5,
    "capital_increases": 0,
    "general_assemblies": 48,
-   "periods_reported": 62,
-   "loss_making_periods": 5
+   "periods_reported": 59,
+   "loss_making_periods": 4
   },
   "generated": "2026-08-24"
  },
@@ -2833,8 +2833,8 @@
    "trading_resumptions": 0,
    "capital_increases": 0,
    "general_assemblies": 4,
-   "periods_reported": 23,
-   "loss_making_periods": 6
+   "periods_reported": 19,
+   "loss_making_periods": 5
   },
   "generated": "2026-08-24"
  },
@@ -3736,8 +3736,8 @@
    "trading_resumptions": 16,
    "capital_increases": 4,
    "general_assemblies": 80,
-   "periods_reported": 64,
-   "loss_making_periods": 18
+   "periods_reported": 61,
+   "loss_making_periods": 16
   },
   "generated": "2026-08-25"
  },
@@ -4436,8 +4436,8 @@
    "trading_resumptions": 9,
    "capital_increases": 3,
    "general_assemblies": 76,
-   "periods_reported": 62,
-   "loss_making_periods": 18
+   "periods_reported": 59,
+   "loss_making_periods": 16
   },
   "generated": "2026-08-25"
  },
@@ -6446,7 +6446,7 @@
    "trading_resumptions": 27,
    "capital_increases": 2,
    "general_assemblies": 54,
-   "periods_reported": 63,
+   "periods_reported": 60,
    "loss_making_periods": 13
   },
   "generated": "2026-08-25"
