@@ -43,8 +43,8 @@ on:
   #
   # 10:30's summer tick (07:30 UTC) is the same minute as 09:30's winter tick,
   # so that line is written once and does double duty rather than duplicated.
-  # On a market holiday the day collapses to a single run — the guard step
-  # below skips the heavy rebuild once the session is confirmed closed.
+  # On a market holiday every run is a no-op (nothing it reads has changed), so
+  # the extra runs cost runner minutes but never publish anything stale.
   schedule:
     # 09:30 Cairo
     - cron: '30 6 * * 0-4'      # summer
@@ -201,20 +201,6 @@ jobs:
           npm install ws --no-save --silent
           node scripts/egx_scan.mjs ../work
 
-      # Stand the heavy rebuild down on a confirmed market holiday.
-      #
-      # Reads the scan just fetched: past the morning, if the exchange returned
-      # no session stamped today, the market is closed and the four-times-a-day
-      # schedule collapses to its morning run. Fail-safe — any doubt builds — so
-      # this can never skip a real trading-day update; the worst it does on a
-      # holiday it misreads is an extra no-op build. `continue-on-error` means
-      # even a crash in the gate leaves `build` unset, and the guard below reads
-      # that as "build".
-      - name: Trading-day gate
-        id: gate
-        continue-on-error: true
-        run: python3 scripts/holiday_gate.py >> "$GITHUB_OUTPUT"
-
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
@@ -228,7 +214,6 @@ jobs:
         run: python3 scripts/build_all.py --check
 
       - name: Rebuild published data
-        if: steps.gate.outputs.build != 'false'
         env:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8

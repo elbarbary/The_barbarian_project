@@ -19,7 +19,7 @@ import 'support/harness.dart';
 /// It was deleted once and rebuilt, so these tests pin the two things that
 /// matter about it: that it shows the sections the board asks for, and that it
 /// stays a read-and-browse surface. A dashboard is where a recommendation list
-/// would be easiest to build by accident — four tiles the reader chose, each
+/// would be easiest to build by accident — the tiles the reader chose, each
 /// carrying this app's opinion, is exactly what §8.4 forbids.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -309,6 +309,25 @@ void main() {
     expect(find.byType(BVerdictBadge), findsNothing);
     expect(find.byType(BPillarLedger), findsNothing);
     expect(find.byType(BArcGauge), findsNothing);
+  });
+
+  testWidgets('the watchlist runs the whole list, not just the first four', (
+    tester,
+  ) async {
+    // It used to cap at a 2×2 of four with the rest hidden on You. The reader
+    // put each of these here on purpose, so the board now runs as far down as
+    // the list goes. Fabricated tickers so each can only come from the tile.
+    const followed = ['WLAA', 'WLBB', 'WLCC', 'WLDD', 'WLEE', 'WLFF'];
+    await pumpScreen(tester, const HomeScreen(), watchlist: followed);
+    await pumpUntil(tester, find.text('WLAA'));
+
+    for (final ticker in followed) {
+      expect(
+        find.text(ticker),
+        findsOneWidget,
+        reason: '$ticker is followed, so its tile must be on the board',
+      );
+    }
   });
 
   testWidgets('it offers no way to trade and no view on a price', (

@@ -279,9 +279,10 @@ class _WatchlistBlock extends ConsumerWidget {
       );
     }
 
-    // Four tiles: the board draws a 2×2 and more than that stops being a
-    // glance. The rest are on You.
-    final shown = watchlist.take(4).toList();
+    // Every followed company, two to a row, flowing down as far as the list
+    // goes. The reader put each one here on purpose, so the home board shows
+    // all of them rather than four with the rest hidden away on You.
+    final shown = watchlist;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
