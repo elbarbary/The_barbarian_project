@@ -3168,32 +3168,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get revOrientPe =>
-      'A lower multiple is the cheaper valuation — though a low one can also mean the market expects earnings to fall.';
+      'How many pounds you pay for each pound of a year\'s profit. Lower means paying less for the same profit — the cheaper price. A very low number can instead be a warning that the market expects profit to drop.';
 
   @override
   String get revOrientPb =>
-      'A lower multiple is the cheaper valuation against the company’s book value.';
+      'The price for each pound of the company\'s net worth on paper. Lower means paying less for that value — cheaper — though a low number can also flag assets the market doubts.';
 
   @override
   String get revOrientYield =>
-      'A higher yield pays more per pound invested — but it can also be a price that has dropped.';
+      'The cash dividend you get back each year for every pound invested. Higher pays you more — but a very high yield often means the price has fallen, or the payout may be cut.';
 
   @override
-  String get revOrientHigherMore => 'Higher is simply more.';
+  String get revOrientHigherMore =>
+      'Higher is simply more — more profit, or more earnings for each share. Rising over time is the healthy direction.';
 
   @override
   String get revOrientCash =>
-      'Higher means more of the profit actually arrived as cash.';
+      'How much of the reported profit actually arrived as cash. Higher is healthier — money in the bank, not just profit on paper.';
 
   @override
   String get revOrientReturn =>
-      'Higher is a stronger return on what has been put in.';
+      'How much profit the company makes from the money put into it. Higher means more efficient — more profit for each pound. Steadily higher is the stronger side.';
 
   @override
   String get revOrientDebt =>
-      'Lower is less borrowed against equity — though some debt is normal, and can be productive.';
+      'How much the company has borrowed against its own money. Lower means less debt and less risk in a squeeze — though some borrowing is normal and can fund growth.';
 
   @override
   String get revOrientAssets =>
-      'Higher is a larger balance sheet — bigger, not by itself better.';
+      'Higher means a bigger company by what it owns. Bigger is not automatically better — the assets still have to earn a return.';
 }

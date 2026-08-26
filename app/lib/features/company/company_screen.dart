@@ -909,7 +909,7 @@ class _Financials extends StatelessWidget {
         // signed document, and a reader who wants to check a number against
         // the source can now do it without leaving for a search engine.
         const SizedBox(height: 14),
-        _FiledDocuments(ticker: company.ticker),
+        _FiledDocuments(ticker: company.ticker, parentTab: parentTab),
 
         const SizedBox(height: 16),
         Text(
@@ -1602,7 +1602,19 @@ class _StatementTable extends StatefulWidget {
 }
 
 class _StatementTableState extends State<_StatementTable> {
-  int _tab = 0;
+  late int _tab = _freshestTab();
+
+  /// Open on whichever set carries the freshest filing. A company's latest
+  /// quarter lands months before its audited year — and 2026's figures live
+  /// ONLY under Quarterly — so defaulting to Annual hid the newest data behind
+  /// a tab a reader had to know to press. Annual is still one tap away.
+  int _freshestTab() {
+    if (widget.quarterly.isEmpty) return 0;
+    if (widget.annual.isEmpty) return 1;
+    final annualFiled = widget.annual.last.filedOn ?? '';
+    final quarterlyFiled = widget.quarterly.last.filedOn ?? '';
+    return quarterlyFiled.compareTo(annualFiled) >= 0 ? 1 : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1783,9 +1795,10 @@ class _StatementTableState extends State<_StatementTable> {
 /// entirely when the company has filed nothing with a document attached —
 /// which for most companies, most of the time, is the honest answer.
 class _FiledDocuments extends ConsumerWidget {
-  const _FiledDocuments({required this.ticker});
+  const _FiledDocuments({required this.ticker, required this.parentTab});
 
   final String ticker;
+  final BNavTab parentTab;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -1817,38 +1830,57 @@ class _FiledDocuments extends ConsumerWidget {
               Divider(height: 1, color: c.hairline),
               const SizedBox(height: 12),
             ],
-            Wrap(
-              spacing: 8,
-              runSpacing: 4,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                if (item.labelFor(arabic).isNotEmpty)
-                  BKindChip(item.labelFor(arabic)),
-                // "17 Aug", not "2026-08-17". A filing dated in ISO on a card
-                // whose siblings say "Today" is a machine's way of speaking.
-                if (context.filingAge(item.date) case final age?)
-                  Text(
-                    age,
-                    style: BarbarianType.labelNano.copyWith(color: c.textMuted),
+            // The whole statement opens the filing it came from. These rows used
+            // to render only `attachments`, and a results announcement carries
+            // none — the figures are in its body and the document is behind its
+            // `link` — so every one of them was a dead, unopenable row. Tapping
+            // now opens the filing, the same as a filing row anywhere else.
+            BPressable(
+              onTap: item.link.isEmpty
+                  ? null
+                  : () => context.push(
+                      Routes.articlePath(parentTab, item.link, 'EGX filing'),
+                    ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      if (item.labelFor(arabic).isNotEmpty)
+                        BKindChip(item.labelFor(arabic)),
+                      // "17 Aug", not "2026-08-17". A filing dated in ISO on a
+                      // card whose siblings say "Today" is a machine speaking.
+                      if (context.filingAge(item.date) case final age?)
+                        Text(
+                          age,
+                          style: BarbarianType.labelNano
+                              .copyWith(color: c.textMuted),
+                        ),
+                      if (item.link.isNotEmpty)
+                        Icon(Icons.north_east, size: 13, color: c.textFaint),
+                    ],
                   ),
-              ],
-            ),
-            const SizedBox(height: 7),
-            Directionality(
-              textDirection: isArabic(item.titleFor(arabic))
-                  ? TextDirection.rtl
-                  : TextDirection.ltr,
-              child: Text(
-                item.titleFor(arabic),
-                style: BarbarianType.bodyM.copyWith(
-                  color: c.textPrimary,
-                  height: 1.4,
-                ),
+                  const SizedBox(height: 7),
+                  Directionality(
+                    textDirection: isArabic(item.titleFor(arabic))
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: Text(
+                      item.titleFor(arabic),
+                      style: BarbarianType.bodyM.copyWith(
+                        color: c.textPrimary,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 9),
             for (final (n, url) in item.attachments.indexed) ...[
-              if (n > 0) const SizedBox(height: 8),
+              SizedBox(height: n == 0 ? 9 : 8),
               BFiledDocument(
                 url: url,
                 index: n,

@@ -7,6 +7,7 @@ import '../../core/models/sector.dart';
 import '../../core/providers.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
+import '../../core/widgets/nav.dart';
 import '../../core/widgets/charts.dart';
 import '../../core/widgets/surfaces.dart';
 import '../../core/widgets/text.dart';
@@ -341,7 +342,15 @@ class _MetricSheet extends StatelessWidget {
         ),
         child: ListView(
           controller: controller,
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
+          // Clear the floating navigation, which sits in the router above this
+          // sheet: at 32 the last block — the sector comparison and the note
+          // that explains the metric — was tucked behind the bar.
+          padding: const EdgeInsets.fromLTRB(
+            20,
+            12,
+            20,
+            BGlassNav.insetBottom + BGlassNav.height + 24,
+          ),
           children: [
             Center(
               child: Container(
