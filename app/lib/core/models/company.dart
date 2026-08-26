@@ -322,6 +322,32 @@ abstract class FinancialPeriod with _$FinancialPeriod {
   double? get operatingMargin => _ratio(operatingIncome, revenue);
   double? get netMargin => _ratio(netIncome, revenue);
 
+  /// A time-ordered sort key parsed from the label, because the stored lists
+  /// are sorted by label *string*. Alphabetically "H1 2026" and "Q1 2026" fall
+  /// before "Q4 2024" — 'H' and 'Q1' sort under 'Q4' — so the newest quarters,
+  /// which are exactly the interim figures the exchange files months before the
+  /// audited year, hid behind older columns and the table opened on stale data.
+  /// The key is year × 100 + the month the period ends (Q1→3, H1/Q2→6,
+  /// 9M/Q3→9, FY/Q4→12), so a plain numeric sort is chronological.
+  int get chronoOrder {
+    final year = RegExp(r'(\d{4})').firstMatch(period);
+    final y = year == null ? 0 : int.parse(year.group(1)!);
+    final label = period.toUpperCase().trimLeft();
+    final int endMonth;
+    if (label.startsWith('FY')) {
+      endMonth = 12;
+    } else if (label.startsWith('9M')) {
+      endMonth = 9;
+    } else if (label.startsWith('H1')) {
+      endMonth = 6;
+    } else if (label.startsWith('Q')) {
+      endMonth = (int.tryParse(label.substring(1, 2)) ?? 0) * 3;
+    } else {
+      endMonth = 0;
+    }
+    return y * 100 + endMonth;
+  }
+
   /// Free cash flow is derived only when it was not reported directly.
   double? get resolvedFreeCashFlow {
     if (freeCashFlow != null) return freeCashFlow;

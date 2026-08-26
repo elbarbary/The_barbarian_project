@@ -890,9 +890,16 @@ RELEVANCE = {
 # Both matter and neither wins outright. A pure time sort is what put American
 # beef tariffs at the top of an Egyptian investing app; a pure relevance sort
 # would hold a three-day-old canal story above this morning's rate decision.
-# One point of relevance is worth 24 hours, so today's Egyptian news leads,
-# yesterday's stays above foreign wire copy, and last week's does not.
-HOURS_PER_POINT = 24.0
+#
+# One point of relevance is worth 12 hours. At 24 the balance tipped too far
+# the other way: yesterday's high-relevance cluster (a rel-8 IPO wave) sat
+# above this morning's rel-6 company results, so the feed opened on yesterday
+# and read as if it had not refreshed. Halving it means today's genuine
+# company news leads the day — a fresh rel-6 story now outranks a ~26-hour-old
+# rel-8 one — while a full day of ageing still costs two relevance points, so
+# yesterday's real news stays above today's foreign wire copy and forex ticks,
+# and last week's does not surface at all.
+HOURS_PER_POINT = 12.0
 
 
 def relevance(item: dict) -> int:

@@ -143,4 +143,46 @@ void main() {
       );
     }
   });
+
+  group('periods order by time, not by the label string they are stored in', () {
+    FinancialPeriod p(String label) => FinancialPeriod(period: label);
+
+    test('the interim figures the exchange files outrank an older quarter', () {
+      // Alphabetically "H1 2026" and "Q1 2026" fall before "Q4 2024" — the very
+      // ordering that hid this year's quarters behind 2024's and opened the
+      // table on stale data.
+      expect(p('H1 2026').chronoOrder, greaterThan(p('Q4 2024').chronoOrder));
+      expect(p('Q1 2026').chronoOrder, greaterThan(p('Q4 2024').chronoOrder));
+      expect(p('9M 2025').chronoOrder, greaterThan(p('Q1 2025').chronoOrder));
+      expect(p('FY 2025').chronoOrder, greaterThan(p('FY 2024').chronoOrder));
+    });
+
+    test('sorting a shuffled quarter list puts the freshest first', () {
+      final periods = [
+        for (final l in ['Q4 2024', 'H1 2026', 'Q1 2021', '9M 2025', 'Q1 2026'])
+          p(l),
+      ]..sort((a, b) => b.chronoOrder.compareTo(a.chronoOrder));
+      expect(
+        periods.map((e) => e.period).toList(),
+        ['H1 2026', 'Q1 2026', '9M 2025', 'Q4 2024', 'Q1 2021'],
+      );
+    });
+
+    test('COMI opens on its freshest set — this year, under Quarterly', () {
+      // The regression in the flesh: the shipped fixture combines Mubasher's
+      // full statements with the exchange's net-profit-only 2026 quarters, and
+      // the freshest of the two sets is the quarter filed this July.
+      final company = Company.fromJson(
+        readFixtureObjectSync('companies/COMI.json'),
+      );
+      FinancialPeriod newest(List<FinancialPeriod> ps) =>
+          ps.reduce((a, b) => b.chronoOrder >= a.chronoOrder ? b : a);
+      expect(newest(company.financials.quarterly).period, 'H1 2026');
+      expect(
+        newest(company.financials.quarterly).chronoOrder,
+        greaterThan(newest(company.financials.annual).chronoOrder),
+        reason: 'so the statement table must open on Quarterly, not Annual',
+      );
+    });
+  });
 }

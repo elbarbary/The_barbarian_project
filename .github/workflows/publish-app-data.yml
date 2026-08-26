@@ -22,7 +22,7 @@ on:
       - 'scripts/**'
       - '.github/workflows/publish-app-data.yml'
 
-  # Three times a trading day, around the session rather than after it.
+  # Four times a trading day, around the session rather than after it.
   #
   # This used to run once, an hour after the close, on the reasoning that
   # everything it touches changes once a day. That stopped being true: the
@@ -31,6 +31,7 @@ on:
   # yesterday afternoon.
   #
   #   09:30 Cairo — before the 10:00 open, so the morning is current
+  #   10:30 Cairo — early in the session
   #   12:30 Cairo — mid-session
   #   14:45 Cairo — just after the 14:30 close
   #
@@ -39,16 +40,23 @@ on:
   # wrong hour is an ordinary run an hour early or late, and the build is a
   # no-op when nothing changed. That is the convention the two crons here used
   # before, kept rather than replaced with a timezone the runner does not have.
+  #
+  # 10:30's summer tick (07:30 UTC) is the same minute as 09:30's winter tick,
+  # so that line is written once and does double duty rather than duplicated.
+  # On a market holiday the day collapses to a single run — the guard step
+  # below skips the heavy rebuild once the session is confirmed closed.
   schedule:
     # 09:30 Cairo
-    - cron: '30 6 * * 0-4'
-    - cron: '30 7 * * 0-4'
+    - cron: '30 6 * * 0-4'      # summer
+    - cron: '30 7 * * 0-4'      # winter — also 10:30 summer
+    # 10:30 Cairo
+    - cron: '30 8 * * 0-4'      # winter
     # 12:30 Cairo
-    - cron: '30 9 * * 0-4'
-    - cron: '30 10 * * 0-4'
+    - cron: '30 9 * * 0-4'      # summer
+    - cron: '30 10 * * 0-4'     # winter
     # 14:45 Cairo
-    - cron: '45 11 * * 0-4'
-    - cron: '45 12 * * 0-4'
+    - cron: '45 11 * * 0-4'     # summer
+    - cron: '45 12 * * 0-4'     # winter
 
   workflow_dispatch:
     inputs:
@@ -193,6 +201,20 @@ jobs:
           npm install ws --no-save --silent
           node scripts/egx_scan.mjs ../work
 
+      # Stand the heavy rebuild down on a confirmed market holiday.
+      #
+      # Reads the scan just fetched: past the morning, if the exchange returned
+      # no session stamped today, the market is closed and the four-times-a-day
+      # schedule collapses to its morning run. Fail-safe — any doubt builds — so
+      # this can never skip a real trading-day update; the worst it does on a
+      # holiday it misreads is an extra no-op build. `continue-on-error` means
+      # even a crash in the gate leaves `build` unset, and the guard below reads
+      # that as "build".
+      - name: Trading-day gate
+        id: gate
+        continue-on-error: true
+        run: python3 scripts/holiday_gate.py >> "$GITHUB_OUTPUT"
+
       # The parsers these tests cover read filed financial figures. A silent
       # regression there publishes a wrong number about a real company rather
       # than crashing, so they run before anything is written.
@@ -206,6 +228,7 @@ jobs:
         run: python3 scripts/build_all.py --check
 
       - name: Rebuild published data
+        if: steps.gate.outputs.build != 'false'
         env:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
@@ -282,7 +305,7 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
-            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/'; then
+            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/.*\.json$' -e '^data-source/prices/' -e '^data-source/egx-beta/'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
               return 1

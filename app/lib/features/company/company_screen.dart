@@ -1611,22 +1611,30 @@ class _StatementTableState extends State<_StatementTable> {
   int _freshestTab() {
     if (widget.quarterly.isEmpty) return 0;
     if (widget.annual.isEmpty) return 1;
-    final annualFiled = widget.annual.last.filedOn ?? '';
-    final quarterlyFiled = widget.quarterly.last.filedOn ?? '';
+    // The newest period by time, not by list position: the stored lists are
+    // label-sorted, so `.last` is "Q4 2024", not this July's "H1 2026".
+    final annualFiled = _newest(widget.annual).filedOn ?? '';
+    final quarterlyFiled = _newest(widget.quarterly).filedOn ?? '';
     return quarterlyFiled.compareTo(annualFiled) >= 0 ? 1 : 0;
   }
+
+  static FinancialPeriod _newest(List<FinancialPeriod> periods) =>
+      periods.reduce((a, b) => b.chronoOrder >= a.chronoOrder ? b : a);
 
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final c = context.colors;
     final hasBoth = widget.annual.isNotEmpty && widget.quarterly.isNotEmpty;
+    // Newest first (leftmost), sorted by time rather than by the label string
+    // the list is stored in — otherwise this July's "H1 2026" sorts after
+    // "Q4 2024" and the freshest quarter lands at the far end of the scroll.
     final periods =
-        (_tab == 0 && widget.annual.isNotEmpty
-                ? widget.annual
-                : widget.quarterly)
-            .reversed
-            .toList();
+        [
+          ...(_tab == 0 && widget.annual.isNotEmpty
+              ? widget.annual
+              : widget.quarterly),
+        ]..sort((a, b) => b.chronoOrder.compareTo(a.chronoOrder));
 
     // The balance sheet, then the cash flow statement in the order it is
     // filed: operating, investing, financing, and the change the three of them
