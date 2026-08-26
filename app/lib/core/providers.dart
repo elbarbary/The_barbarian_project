@@ -58,7 +58,16 @@ final useFixturesProvider = Provider<bool>(
 );
 
 final documentSourceProvider = Provider<DocumentSource>((ref) {
-  if (ref.watch(useFixturesProvider)) return const FixtureDocumentSource();
+  // A guest reads the bundled fixtures rewritten into an obviously-fake demo —
+  // DEMO tickers, Sample Co names, invented figures — so the real market is
+  // something you sign in for. A fixtures *build* (a developer choice) still
+  // gets the real bundled data; only a logged-out reader gets the demo.
+  if (!ref.watch(authControllerProvider).isAuthed) {
+    return DemoDocumentSource(const FixtureDocumentSource());
+  }
+  if (ref.watch(appConfigProvider).useBundledFixtures) {
+    return const FixtureDocumentSource();
+  }
   return NetworkDocumentSource(config: ref.watch(appConfigProvider));
 });
 
