@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
-  "data_version": "0ec6f2e659a64c15",
-  "generated_at": "2026-08-26T12:04:50+00:00",
+  "data_version": "1cf48c68d0510891",
+  "generated_at": "2026-08-26T12:27:48+00:00",
   "market_date": "2026-08-26",
   "versions": {
-    "market": 93993584,
-    "market_history": 31929772,
-    "companies": 74417292,
+    "market": 51036032,
+    "market_history": 9829144,
+    "companies": 34849855,
     "cash_or_trash": 42225606,
     "news": 34826435,
-    "rates": 32559140,
-    "disclosures": 45325140,
-    "macro": 92499281,
-    "connections": 641803,
-    "calendar": 58203931,
-    "signals": 86677576,
-    "review": 97292469,
-    "sectors": 93109971
+    "rates": 98689452,
+    "disclosures": 89454315,
+    "macro": 55338836,
+    "connections": 88438585,
+    "calendar": 24151959,
+    "signals": 38444213,
+    "review": 11269032,
+    "sectors": 98096326
   }
 }
