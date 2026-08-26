@@ -519,11 +519,11 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AMES/profile",
   "record": {
-   "filings": 665,
+   "filings": 666,
    "first_filing": "2010-02-10",
    "trading_suspensions": 9,
    "trading_resumptions": 10,
-   "capital_increases": 3,
+   "capital_increases": 4,
    "general_assemblies": 73,
    "periods_reported": 49,
    "loss_making_periods": 0
@@ -2867,7 +2867,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
   "record": {
-   "filings": 531,
+   "filings": 532,
    "first_filing": "2010-01-31",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -2967,7 +2967,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/HAVC/profile",
   "record": {
-   "filings": 3,
+   "filings": 4,
    "first_filing": "2025-07-31",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -5960,11 +5960,11 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SVCE/profile",
   "record": {
-   "filings": 617,
+   "filings": 618,
    "first_filing": "2010-01-04",
    "trading_suspensions": 23,
    "trading_resumptions": 21,
-   "capital_increases": 0,
+   "capital_increases": 1,
    "general_assemblies": 81,
    "periods_reported": 62,
    "loss_making_periods": 37

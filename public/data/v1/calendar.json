@@ -2,7 +2,7 @@
  "generated": "2026-08-26",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 455,
+ "count": 457,
  "estimated": 394,
  "events": [
   {
@@ -712,6 +712,30 @@
    "section": "Corporate Actions",
    "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293607",
    "id": "egx-293607"
+  },
+  {
+   "date": "2026-09-10",
+   "kind": "dividend_payment",
+   "note": "Cash dividend payment",
+   "ticker": "GRCA",
+   "title": "Grand Investment Capital (GRCA.CA) Declares a Stock Dividend",
+   "title_ar": "جراند انفستمنت القابضة للاستثمارات المالية (GRCA.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-08-26",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293977",
+   "id": "egx-293977"
+  },
+  {
+   "date": "2026-09-10",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "GRCA",
+   "title": "Grand Investment Capital (GRCA.CA) Declares a Stock Dividend",
+   "title_ar": "جراند انفستمنت القابضة للاستثمارات المالية (GRCA.CA) تعلن عن توزيع أسهم مجانية",
+   "filed": "2026-08-26",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293977",
+   "id": "egx-293977"
   },
   {
    "date": "2026-09-15",
