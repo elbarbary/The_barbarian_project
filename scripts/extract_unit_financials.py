@@ -63,6 +63,20 @@ CACHE_PATH = pathlib.Path(__file__).resolve().parent / "extract_unit_cache.json"
 # not, so the reader's wins, loudly, and the pair is printed for review.
 CONFLICT_RATIO = 100
 
+
+def _corrected_keys() -> set:
+    """(ticker, period) pairs owned by the reviewed corrections table, so this
+    reader can leave them alone and never contradict the human verdict."""
+    path = pathlib.Path(__file__).resolve().parent / "filing_corrections.json"
+    try:
+        table = json.loads(path.read_text())["corrections"]
+    except (OSError, ValueError, KeyError):
+        return set()
+    return {(c["ticker"], c["period"]) for c in table}
+
+
+CORRECTED_KEYS = _corrected_keys()
+
 # thousand/million/billion → the factor that turns the written figure into whole
 # pounds. "" (no unit) never reaches here: those are the template this file does
 # not touch, handled whole-pounds by merge_egx_financials.
@@ -258,6 +272,13 @@ def qualified_rows(limit: int | None, model: str, since_year: int,
                 stats["no_label"] += 1
                 continue
             label, comparable = labelled
+            # A period the reviewed corrections table owns is left entirely to
+            # apply_filing_corrections. Otherwise the two fight every build:
+            # MICH's "282.951 Value In Thousand" reads here as 0.283m and the
+            # table restores 282.951m, a tug-of-war that only stays correct
+            # because the table runs last. One owner per period is the fix.
+            if (tick.group(1), label) in CORRECTED_KEYS:
+                continue
             basis = (M.BASIS.search(body).group(1).lower()
                      if M.BASIS.search(body) else "")
 
