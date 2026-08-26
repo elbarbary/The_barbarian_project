@@ -3168,33 +3168,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get revOrientPe =>
-      'How many pounds you pay for each pound of a year\'s profit. Lower means paying less for the same profit — the cheaper price. A very low number can instead be a warning that the market expects profit to drop.';
+      'Lower is the cheaper side. A P/E below its sector means you pay less than for similar companies for the same profit; above its sector means you pay more. Watch one thing: a very low reading can also mean the market expects the profit to drop.';
 
   @override
   String get revOrientPb =>
-      'The price for each pound of the company\'s net worth on paper. Lower means paying less for that value — cheaper — though a low number can also flag assets the market doubts.';
+      'Lower is the cheaper side. Below its sector means you pay less for each pound of the company\'s book value than its peers do; above its sector means more. A very low reading can also flag assets the market doubts are worth what the books say.';
 
   @override
   String get revOrientYield =>
-      'The cash dividend you get back each year for every pound invested. Higher pays you more — but a very high yield often means the price has fallen, or the payout may be cut.';
+      'Higher pays you more. Above its sector means more cash back each year per pound than its peers pay; below its sector means less. But a very high yield often comes from a share price that has dropped, or a payout that may be cut — so higher is not always steadier.';
 
   @override
   String get revOrientHigherMore =>
-      'Higher is simply more — more profit, or more earnings for each share. Rising over time is the healthy direction.';
+      'Higher is simply more — more profit, or more earnings for each share. Above its sector means more than its peers, but the direction over time matters most: rising reads better than falling.';
 
   @override
   String get revOrientCash =>
-      'How much of the reported profit actually arrived as cash. Higher is healthier — money in the bank, not just profit on paper.';
+      'Higher is healthier. Above its sector means more of the reported profit actually arrived as cash than for its peers — money in the bank, not just profit on paper; below its sector means more of it is still on paper.';
 
   @override
   String get revOrientReturn =>
-      'How much profit the company makes from the money put into it. Higher means more efficient — more profit for each pound. Steadily higher is the stronger side.';
+      'Higher is the stronger side. Above its sector means the company turns each pound put into it into more profit than its peers do; below its sector is weaker. Steady-and-high reads better than high-but-jumpy.';
 
   @override
   String get revOrientDebt =>
-      'How much the company has borrowed against its own money. Lower means less debt and less risk in a squeeze — though some borrowing is normal and can fund growth.';
+      'Lower is the safer side. Below its sector means the company has borrowed less against its own money than its peers; above its sector carries more debt — which can fund growth but adds risk if conditions tighten.';
 
   @override
   String get revOrientAssets =>
-      'Higher means a bigger company by what it owns. Bigger is not automatically better — the assets still have to earn a return.';
+      'Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.';
 }
