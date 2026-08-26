@@ -565,13 +565,13 @@
   "history_ar": "يتمركز سجل إفصاحات الشركة في البورصة المصرية بالكامل خلال عام 2026، بإجمالي 11 إفصاحاً. وخلال هذا العام، تركزت الإفصاحات بصورة رئيسية في 4 إفصاحات تعاملات داخلية، إلى جانب قراري لجنة قيد، وإفصاحين متعلقين بالجمعيات العامة، وتقرير مدقق حسابات حول الحوكمة، ومحضر اجتماع مجلس إدارة واحد.",
   "plans": [],
   "record": {
-   "filings": 11,
+   "filings": 12,
    "first_filing": "2026-07-27",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 0,
    "general_assemblies": 2,
-   "periods_reported": 0,
+   "periods_reported": 1,
    "loss_making_periods": 0
   },
   "generated": "2026-08-24"
@@ -1448,7 +1448,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CSAG/profile",
   "record": {
-   "filings": 623,
+   "filings": 624,
    "first_filing": "2010-02-11",
    "trading_suspensions": 9,
    "trading_resumptions": 8,
@@ -2651,14 +2651,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
   "record": {
-   "filings": 230,
+   "filings": 232,
    "first_filing": "2023-03-30",
    "trading_suspensions": 11,
    "trading_resumptions": 11,
    "capital_increases": 0,
    "general_assemblies": 15,
-   "periods_reported": 7,
-   "loss_making_periods": 5
+   "periods_reported": 8,
+   "loss_making_periods": 6
   },
   "generated": "2026-08-24"
  },
@@ -3796,7 +3796,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MASR/profile",
   "record": {
-   "filings": 271,
+   "filings": 272,
    "first_filing": "2023-09-10",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
@@ -4071,7 +4071,7 @@
    "trading_resumptions": 3,
    "capital_increases": 4,
    "general_assemblies": 91,
-   "periods_reported": 44,
+   "periods_reported": 43,
    "loss_making_periods": 1
   },
   "generated": "2026-08-25"
@@ -4995,12 +4995,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/PHDC/profile",
   "record": {
-   "filings": 1020,
+   "filings": 1021,
    "first_filing": "2010-01-10",
    "trading_suspensions": 11,
    "trading_resumptions": 10,
    "capital_increases": 15,
-   "general_assemblies": 99,
+   "general_assemblies": 100,
    "periods_reported": 59,
    "loss_making_periods": 0
   },
