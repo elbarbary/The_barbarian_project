@@ -46,10 +46,14 @@ import datetime
 import gzip
 import json
 import pathlib
+import random
+import subprocess
 import sys
 import time
 import urllib.error
 import urllib.request
+
+import scrapling_python
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "data-source" / "egx-beta"
@@ -96,26 +100,93 @@ class Rejected(RuntimeError):
 
 
 def request(path: str, body: dict | None = None, *, timeout: int = 150,
-            attempts: int = 3) -> dict:
+            attempts: int = 5) -> dict:
     """One call, with a retry for the transport and none for a refusal.
 
     A page of 200 filings carrying both languages of every body is a few
     hundred kilobytes, and this service takes its time producing one — a
-    sixty-second read timeout dropped a month mid-harvest. A timeout is the
-    connection failing, not the exchange saying no, so it is worth one more
-    try after a longer wait. [Rejected] is never retried.
+    sixty-second read timeout dropped a month mid-harvest. A timeout, or the
+    `Connection reset by peer` the exchange throws at a datacenter IP, is the
+    connection failing rather than the exchange saying no, so it is worth
+    several more tries over a couple of minutes with jittered backoff — the
+    reset is usually transient. A WAF `Rejected` is never retried over plain
+    HTTP; instead the browser fallback is tried once, because a real browser
+    carries the cookie the WAF is checking for.
     """
     last: Exception | None = None
     for attempt in range(attempts):
         try:
             return _once(path, body, timeout=timeout)
         except Rejected:
+            browsed = _via_browser(path, body, timeout=timeout)
+            if browsed is not None:
+                return browsed
             raise
         except (TimeoutError, urllib.error.URLError, OSError) as error:
             last = error
-            print(f"   … {type(error).__name__}, retrying in {8 * (attempt + 1)}s")
-            pause(8 * (attempt + 1))
-    raise RuntimeError(f"gave up after {attempts} attempts: {last}")
+            wait = 8 * (attempt + 1) + random.uniform(0, 5)
+            print(f"   … {type(error).__name__}, retrying in {wait:.0f}s")
+            pause(wait)
+    # Plain HTTP is exhausted — on CI that usually means the runner's IP is being
+    # reset. A headless browser is the last, best-effort recovery before we admit
+    # defeat and let the staleness guard raise the alarm.
+    browsed = _via_browser(path, body, timeout=timeout)
+    if browsed is not None:
+        return browsed
+    raise RuntimeError(f"gave up after {attempts} attempts and the browser: {last}")
+
+
+_BROWSER_SCRIPT = r'''
+import sys, json
+from scrapling.fetchers import StealthyFetcher
+
+base, path, body = sys.argv[1], sys.argv[2], sys.argv[3]
+out = []
+
+def act(page):
+    js = ("(async () => { const r = await fetch(" + json.dumps(path) + ", {"
+          " method: " + ("'GET'" if body == "null" else "'POST'") + ","
+          " headers: {'x-egx-bff-request':'1','accept':'application/json',"
+          "'content-type':'application/json'},"
+          " body: " + ("undefined" if body == "null" else json.dumps(body)) + " });"
+          " return await r.text(); })()")
+    out.append(page.evaluate(js))
+
+StealthyFetcher.fetch(base + "/en", headless=True, network_idle=True,
+                      timeout=120000, page_action=act)
+sys.stdout.write(out[0] if out else "")
+'''
+
+
+def _via_browser(path: str, body: dict | None, *, timeout: int) -> dict | None:
+    """One BFF call through a real browser, or None if it cannot be had.
+
+    The plain-HTTP path is reset by the exchange from a datacenter IP; a
+    headless browser presents a real TLS fingerprint and, having loaded the
+    site, carries the WAF cookie a same-origin `fetch` then rides through. This
+    is why the manual fix from a laptop works and CI does not — this puts the
+    laptop's browser in CI. Best-effort: no Scrapling interpreter, or the
+    browser is refused too, returns None and the caller surfaces its own error.
+    """
+    py = scrapling_python.find()
+    if py is None or not py.exists():
+        return None
+    payload = "null" if body is None else json.dumps(body)
+    try:
+        result = subprocess.run(
+            [str(py), "-c", _BROWSER_SCRIPT, BASE, path, payload],
+            capture_output=True, text=True, timeout=max(timeout, 180))
+    except (subprocess.SubprocessError, OSError):
+        return None
+    raw = (result.stdout or "").strip()
+    if result.returncode != 0 or not raw or raw[:6] == "<html":
+        return None
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        return None
+    print("   ↳ recovered through the browser fallback")
+    return parsed
 
 
 def _once(path: str, body: dict | None, *, timeout: int) -> dict:

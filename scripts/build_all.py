@@ -74,6 +74,16 @@ STEPS = [
     # EGX steps, because a filing harvested after the calendar is built does
     # not reach a reader until the next run four hours later.
     ("New filings", "harvest_egx_beta.py", False, ["--filings", "--from", LAST_MONTH]),
+    # The alarm on that harvest. It is best-effort — the exchange resets the
+    # runner's IP and the step is skipped — so on a trading day, once the
+    # session is an hour old, this refuses to let a day-stale archive through:
+    # it stops the build here, before a single stale document is rebuilt, the
+    # Commit step never runs, the last good data stays live, and the failure
+    # e-mail goes out. See CRITICAL below. supports_check=False on purpose: the
+    # --check validation pass runs BEFORE the harvest, when the archive is still
+    # yesterday's by design, so checking it there would fail every build. It
+    # runs only in the real pass, after New filings.
+    ("Staleness guard", "build_staleness_guard.py", False),
     # Immediately after Market, because Market rebuilds `companies/` from
     # scratch on every run — `shutil.rmtree` then rewrite — and this is an
     # enrichment applied on top of it. It was run once by hand in August and
@@ -248,6 +258,13 @@ BEST_EFFORT = {
     "Unit-scaled net profit",
 }
 
+# Steps whose failure should stop the build immediately rather than press on and
+# publish. The staleness guard is the one: once it says the archive is a day old,
+# every document after it would be rebuilt from that stale source.
+CRITICAL = {
+    "Staleness guard",
+}
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -274,6 +291,12 @@ def main() -> int:
                 continue
             failed.append(name)
             print(f"   FAILED — previously published data left in place")
+            if name in CRITICAL:
+                # No point rebuilding thirty minutes of documents from a source
+                # this step just declared unfit to publish. Stop now; the run
+                # exits non-zero, so CI never reaches its Commit step.
+                print("   critical — stopping before anything is rebuilt")
+                break
 
     print()
     if failed:
