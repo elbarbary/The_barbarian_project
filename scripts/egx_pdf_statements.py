@@ -135,6 +135,66 @@ def _identity_near(left: float, right: float) -> bool:
     return near(left, right, relative=0.01, absolute_m=5.0)
 
 
+# The balance sheet's own prior column. A statement of financial position
+# always prints one, so the direction of borrowings comes out of the same
+# document as the level — no second filing has to be fetched, which matters
+# because the interim announcements a year earlier carry no attachment at all.
+#
+# It is the previous *balance-sheet date*, normally the last year-end rather
+# than the same period a year earlier, so whatever is built on it has to say
+# which date it is comparing against instead of calling it a year.
+COMPARATIVE_FIELDS = frozenset({
+    "debt", "short_term_debt", "long_term_debt", "cash", "liabilities",
+})
+
+
+def verify_comparative(discovery: dict, audit: dict, *,
+                       period_end: str) -> dict | None:
+    """The prior column, only where both reads agree on the date and the figure.
+
+    Held to the same bar as the current period, and to one more: the date must
+    be genuinely earlier than the period being reported. A comparative read as
+    the same date is the failure that matters here — it would mean the model
+    read one column twice and the "change" computed from it would be a
+    fabrication dressed as arithmetic.
+    """
+    first, second = discovery.get("comparative"), audit.get("comparative")
+    if not isinstance(first, dict) or not isinstance(second, dict):
+        return None
+    when, also = _date(first.get("date")), _date(second.get("date"))
+    if when is None or when != also or when >= period_end:
+        return None
+
+    one, two = first.get("fields"), second.get("fields")
+    if not isinstance(one, dict) or not isinstance(two, dict):
+        return None
+    values: dict[str, float] = {}
+    for name in sorted(COMPARATIVE_FIELDS & set(one) & set(two)):
+        try:
+            left, right = float(one[name]["value_m"]), float(two[name]["value_m"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if not near(left, right):
+            continue
+        if name in NON_NEGATIVE and right < 0:
+            continue
+        values[name] = right
+
+    maturities = [values.get(k) for k in ("short_term_debt", "long_term_debt")]
+    if all(v is not None for v in maturities):
+        total = values.get("debt")
+        if total is None:
+            values["debt"] = round(sum(maturities), 3)
+        elif not _identity_near(total, sum(maturities)):
+            return None
+    if values.get("debt") is None:
+        return None
+    owed = values.get("liabilities")
+    if owed is not None and values["debt"] > owed and not _identity_near(values["debt"], owed):
+        return None
+    return {"date": when, "fields": values}
+
+
 def verify_readings(discovery: dict, audit: dict, *, known_net_m: float,
                     expected_period_end: str) -> dict:
     """Return verified fields/evidence or raise with the exact failed guard.
@@ -231,9 +291,12 @@ def verify_readings(discovery: dict, audit: dict, *, known_net_m: float,
         if held is not None and cash > held and not _identity_near(cash, held):
             raise ValueError("cash exceeds total assets")
 
+    comparative = verify_comparative(discovery, audit, period_end=expected)
+
     return {
         "fields": values,
         "evidence": evidence,
+        **({"comparative": comparative} if comparative else {}),
         "checks": {
             "two_reads_agree": True,
             "net_income_matches_announcement": True,

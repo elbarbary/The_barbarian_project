@@ -3302,4 +3302,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get debtNoneFiled =>
       'This company\'s last filed statement states no borrowings.';
+
+  @override
+  String debtUpSince(String date) {
+    return 'Higher than at $date';
+  }
+
+  @override
+  String debtDownSince(String date) {
+    return 'Lower than at $date';
+  }
+
+  @override
+  String debtFlatSince(String date) {
+    return 'About the same as at $date';
+  }
 }

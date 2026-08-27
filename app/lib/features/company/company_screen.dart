@@ -1819,6 +1819,18 @@ class _DebtBlock extends StatelessWidget {
 
   final CompanyDebt debt;
 
+  /// `2025-12-31` as `31 December 2025`, falling back to the raw string so a
+  /// date this never anticipated is still shown rather than swallowed.
+  static String _asOfLabel(String iso) {
+    final when = DateTime.tryParse(iso);
+    if (when == null) return iso;
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    return '${when.day} ${months[when.month - 1]} ${when.year}';
+  }
+
   String? _pattern(AppLocalizations l) => switch (debt.pattern) {
     'raised_and_invested' => l.debtPatternRaisedInvested,
     'raised_while_operations_consumed_cash' => l.debtPatternRaisedShortfall,
@@ -1857,12 +1869,23 @@ class _DebtBlock extends StatelessWidget {
 
     final notes = <String>[
       if (_pattern(l) case final String said) said,
-      if (debt.change?.direction case final String way)
-        switch (way) {
-          'up' => l.debtUpFrom,
-          'down' => l.debtDownFrom,
-          _ => l.debtFlatFrom,
-        },
+      // Named by the date it compares against, never as "a year ago": the
+      // balance sheet's own prior column is normally the last year-end, and
+      // calling six months a year would be the app inventing a window the
+      // filing never stated.
+      if (debt.change case final DebtChange moved)
+        if (moved.basis == 'balance_sheet' && moved.since != null)
+          switch (moved.direction) {
+            'up' => l.debtUpSince(_asOfLabel(moved.since!)),
+            'down' => l.debtDownSince(_asOfLabel(moved.since!)),
+            _ => l.debtFlatSince(_asOfLabel(moved.since!)),
+          }
+        else
+          switch (moved.direction) {
+            'up' => l.debtUpFrom,
+            'down' => l.debtDownFrom,
+            _ => l.debtFlatFrom,
+          },
       if ((debt.netDebt ?? 0) < 0) l.debtNetCash,
       if (debt.cover case final double cover)
         cover > 1

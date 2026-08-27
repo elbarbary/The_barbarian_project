@@ -227,6 +227,17 @@ abstract class CompanyDebt with _$CompanyDebt {
 abstract class DebtChange with _$DebtChange {
   const factory DebtChange({
     @Default('') String period,
+
+    /// The balance-sheet date being compared against, and how it was found.
+    ///
+    /// `balance_sheet` means the statement's own prior column, which is
+    /// normally the last year-end rather than the same period a year earlier —
+    /// a shorter window, and the only one obtainable, because the interim
+    /// filings a year back carry no attachment to read. `year_earlier` means a
+    /// genuine twelve months. The screen names [since] rather than saying
+    /// "a year ago", so the two can never be confused.
+    String? since,
+    @Default('balance_sheet') String basis,
     @Default(0) double borrowings,
     @Default(0) double delta,
     @Default('') String direction,

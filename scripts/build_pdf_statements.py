@@ -37,6 +37,7 @@ import argparse
 import base64
 import concurrent.futures
 import datetime
+import fcntl
 import functools
 import hashlib
 import html
@@ -118,6 +119,23 @@ Count as borrowings: قروض, تسهيلات ائتمانية, بنوك دائ�
 If a maturity has exactly one borrowing line, that line is the figure. If it
 has none at all, omit the key — a company with no borrowings is a real answer.
 
+Then, separately, read the statement of financial position's COMPARATIVE
+column — the previous balance-sheet date it prints beside the current one,
+normally the last year-end. Return it as its own object, never mixed into
+`fields`:
+
+  "comparative": {{"date": "YYYY-MM-DD",
+                  "fields": {{"debt": {{...}}, "short_term_debt": {{...}},
+                             "long_term_debt": {{...}}, "cash": {{...}},
+                             "liabilities": {{...}}}}}}
+
+`date` is the date that column is headed with. Read the SAME borrowing lines
+you read for the current period — the loans, bank facilities and lease
+liabilities on the statement of financial position — and add them up within
+each maturity exactly as above, naming the components in `printed`. Do not
+answer with only the headline totals if the borrowing lines are printed in that
+column. Omit `comparative` entirely if the statement prints no prior column.
+
 These are NOT borrowings, and must never be returned under those keys: total
 liabilities, trade payables (موردون / دائنون), provisions (مخصصات), deferred
 tax, customer advances (دفعات مقدمة من العملاء), and — for a bank — customer
@@ -161,6 +179,19 @@ combined total is itself printed — never add the two maturities yourself.
 statement signs it. Never return total liabilities, payables, provisions,
 customer advances, or a bank's customer deposits under any borrowing key —
 omit the key instead.
+
+These pages also carry the statement of financial position's COMPARATIVE
+column — the previous balance-sheet date printed beside the current one. Return
+it as its own object, never mixed into `fields`:
+
+  {{"comparative": {{"date": "YYYY-MM-DD", "fields": {{"short_term_debt": {{...}},
+   "long_term_debt": {{...}}, "debt": {{...}}, "cash": {{...}},
+   "liabilities": {{...}}}}}}}}
+
+Read the SAME borrowing lines in that column that you read for the current
+period, adding them up within each maturity the same way and naming the
+components in `printed`. Every field keeps the {{"value_m", "page", "printed"}}
+shape. Omit `comparative` only if no prior column is printed on these pages.
 
 Return JSON only.
 """
@@ -323,6 +354,35 @@ def resolve_mirror_attachments(code: str, ticker: str) -> list[str]:
     return _disclosure_links(page, ticker)
 
 
+def resolve_mirror_candidates(code: str, ticker: str) -> list[str]:
+    """Mirror PDFs filed on the result item or its matched companion item."""
+    found = list(resolve_mirror_attachments(code, ticker))
+    for suffix in ("", "-all"):
+        path = DISCLOSURE_DOCUMENTS / f"{ticker.upper()}{suffix}.json"
+        try:
+            document = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        sibling_urls = set(_sibling_document_attachments(document, code, None))
+        if not sibling_urls:
+            continue
+        for item in document.get("items") or []:
+            attachments = {
+                str(url) for url in item.get("attachments") or []
+                if str(url).lower().split("?", 1)[0].endswith(".pdf")
+            }
+            if not attachments.intersection(sibling_urls):
+                continue
+            filing_id = str(item.get("id") or "")
+            match = re.fullmatch(r"egx-(\d+)", filing_id)
+            if not match:
+                continue
+            for url in resolve_mirror_attachments(match.group(1), ticker):
+                if url not in found:
+                    found.append(url)
+    return found
+
+
 def _filed_document_attachments(document: dict, code: str) -> list[str]:
     filing_id = f"egx-{code}"
     for item in document.get("items") or []:
@@ -343,10 +403,18 @@ def _sibling_document_attachments(document: dict, code: str,
     as separate news items a few IDs apart. The structured profit anchor later
     proves that a sibling attachment belongs to the requested results period.
     """
-    if not filed_on or not str(code).isdigit():
+    if not str(code).isdigit():
+        return []
+    if not filed_on:
+        filing_id = f"egx-{code}"
+        for item in document.get("items") or []:
+            if item.get("id") == filing_id and item.get("date"):
+                filed_on = str(item["date"])
+                break
+    if not filed_on:
         return []
     target = int(code)
-    rows: list[tuple[int, int, list[str]]] = []
+    rows: list[tuple[int, int, int, list[str]]] = []
     for item in document.get("items") or []:
         filing_id = str(item.get("id") or "")
         match = re.fullmatch(r"egx-(\d+)", filing_id)
@@ -354,18 +422,35 @@ def _sibling_document_attachments(document: dict, code: str,
             continue
         sibling = int(match.group(1))
         distance = abs(sibling - target)
-        if sibling == target or distance > 3:
+        if sibling == target:
             continue
         urls = [
             str(url) for url in item.get("attachments") or []
             if str(url).lower().split("?", 1)[0].endswith(".pdf")
         ]
+        title = " ".join(str(item.get(key) or "") for key in ("title_en", "title")).lower()
+        direct_results = any(phrase in title for phrase in (
+            "financial result", "business result", "results for the period",
+            "results (consolidated)", "results (standalone)", "نتائج أعمال",
+        ))
+        companion = any(phrase in title for phrase in (
+            "board of directors", "board of director", "bod meeting",
+            "bod's meeting", "audit report", "audit committee", "auditor's report",
+            "مجلس إدارة", "مجلس الادارة", "لجنة المراجعة", "مراقب الحسابات",
+        ))
+        # The exchange interleaves companies while publishing a results batch,
+        # so a statement-bearing companion can be more than three news IDs
+        # away.  Same-day, same-company titles keep that wider match bounded;
+        # extraction still has to prove the exact period and profit anchor.
+        if distance > 3 and not (direct_results or companion):
+            continue
         if urls:
             # Prefer the preceding item when distances tie: EGX normally files
             # the board/statement attachment immediately before its results flash.
-            rows.append((distance, 0 if sibling < target else 1, urls))
+            title_rank = 0 if direct_results else 1 if companion else 2
+            rows.append((title_rank, distance, 0 if sibling < target else 1, urls))
     found: list[str] = []
-    for _, _, urls in sorted(rows):
+    for _, _, _, urls in sorted(rows):
         for url in urls:
             if url not in found:
                 found.append(url)
@@ -527,7 +612,7 @@ def _answer(parts: list[dict], *, timeout: int = 180) -> dict:
         "contents": [{"role": "user", "parts": parts}],
         "generationConfig": {
             "temperature": 0,
-            "maxOutputTokens": 3000,
+            "maxOutputTokens": 6000,
             **gemini.THINKING_OFF,
         },
     }).encode()
@@ -666,6 +751,11 @@ def extract(candidate: dict, pdf: pathlib.Path, folder: pathlib.Path) -> dict:
         "fields": verified["fields"],
         "evidence": verified["evidence"],
         "checks": verified["checks"],
+        # The balance sheet's own prior column, when both reads agreed on it.
+        # Only present where the statement prints one, so it stays absent
+        # rather than null for a filing that carries no comparative.
+        **({"comparative": verified["comparative"]}
+           if verified.get("comparative") else {}),
         "model": gemini.MODEL,
         "pdf_sha256": hashlib.sha256(pdf.read_bytes()).hexdigest(),
         "verified_on": datetime.date.today().isoformat(),
@@ -695,6 +785,11 @@ def extract_images(candidate: dict, pages: list[tuple[int, pathlib.Path]]) -> di
         "fields": verified["fields"],
         "evidence": verified["evidence"],
         "checks": verified["checks"],
+        # The balance sheet's own prior column, when both reads agreed on it.
+        # Only present where the statement prints one, so it stays absent
+        # rather than null for a filing that carries no comparative.
+        **({"comparative": verified["comparative"]}
+           if verified.get("comparative") else {}),
         "model": gemini.MODEL,
         "page_images_sha256": digest.hexdigest(),
         "verified_on": datetime.date.today().isoformat(),
@@ -727,6 +822,10 @@ def main() -> int:
                         help="PDFs to process; one is the safe default")
     parser.add_argument("--since", type=int, default=2025)
     parser.add_argument("--only", help="one ticker")
+    parser.add_argument(
+        "--codes",
+        help="comma-separated EGX news IDs to process (with or without egx-)",
+    )
     parser.add_argument("--period", help="exact displayed period label")
     parser.add_argument("--pdf", type=pathlib.Path,
                         help="use an already-downloaded PDF for the one target")
@@ -743,13 +842,30 @@ def main() -> int:
                         help="funded Google Cloud project for Vertex")
     args = parser.parse_args()
 
+    # Agent sessions share this checkout. Keep one writer for the whole run so
+    # atomic checkpoints cannot overwrite newer data from another process.
+    lock_handle = STORE.with_suffix(STORE.suffix + ".lock").open("a")
+    try:
+        fcntl.flock(lock_handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        print(f"another PDF statement writer already owns {STORE}", file=sys.stderr)
+        return 3
+
     os.environ["GOOGLE_CLOUD_PROJECT"] = args.vertex_project
 
     store = _store()
     todo = candidates(
         store, since=args.since, only=args.only, period=args.period,
         refresh=args.refresh, retry_failures=args.retry_failures,
-    )[:max(0, args.limit)]
+    )
+    if args.codes:
+        wanted_codes = {
+            value.strip().removeprefix("egx-")
+            for value in args.codes.split(",")
+            if value.strip()
+        }
+        todo = [row for row in todo if row["code"] in wanted_codes]
+    todo = todo[:max(0, args.limit)]
     if not todo:
         print(f"── EGX PDF statements: nothing to do ({len(store['filings'])} verified)")
         return 0
@@ -790,7 +906,7 @@ def main() -> int:
                 ) as pool:
                     futures = {
                         pool.submit(
-                            resolve_mirror_attachments,
+                            resolve_mirror_candidates,
                             candidate["code"], candidate["ticker"],
                         ): candidate
                         for candidate in group

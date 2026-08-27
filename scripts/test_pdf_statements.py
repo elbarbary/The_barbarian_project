@@ -178,6 +178,43 @@ class MirrorLinkTest(unittest.TestCase):
             ["https://www.egx.com.eg/downloads/Bulletins/343498_1.pdf"],
         )
 
+    def test_sibling_date_is_inferred_from_results_page_document(self):
+        document = {"items": [
+            {
+                "id": "egx-292840", "date": "2026-08-12",
+                "attachments": [],
+            },
+            {
+                "id": "egx-292838", "date": "2026-08-12",
+                "attachments": [
+                    "https://www.egx.com.eg/downloads/Bulletins/342488_1.pdf",
+                ],
+            },
+        ]}
+        self.assertEqual(
+            BUILD._sibling_document_attachments(document, "292840", None),
+            ["https://www.egx.com.eg/downloads/Bulletins/342488_1.pdf"],
+        )
+
+    def test_titled_results_companions_can_be_farther_than_three_ids(self):
+        document = {"items": [
+            {"id": "egx-293224", "date": "2026-08-16", "attachments": []},
+            {
+                "id": "egx-293234", "date": "2026-08-16",
+                "title_en": "Company Reports its Financial Results (Consolidated)",
+                "attachments": ["https://example.test/results.pdf"],
+            },
+            {
+                "id": "egx-293276", "date": "2026-08-16",
+                "title_en": "Release Concerning the Investor Relations Officer",
+                "attachments": ["https://example.test/unrelated.pdf"],
+            },
+        ]}
+        self.assertEqual(
+            BUILD._sibling_document_attachments(document, "293224", None),
+            ["https://example.test/results.pdf"],
+        )
+
 
 class PageImageTest(unittest.TestCase):
     def test_browser_pages_keep_their_pdf_page_numbers(self):

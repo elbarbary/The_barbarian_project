@@ -143,12 +143,19 @@ def facts_for(block: dict) -> str:
     if shape := PATTERNS.get(block.get("pattern") or ""):
         lines.append(f"- over the period, {shape}")
     change = block.get("change") or {}
+    # The window is named, not assumed. The balance sheet's own prior column is
+    # normally the last year-end rather than twelve months back, and the read
+    # may not quote the date itself — every digit that is not a year is refused
+    # — so it says "last balance-sheet date" and the screen prints which one.
+    when = ("at its last balance-sheet date"
+            if change.get("basis", "balance_sheet") == "balance_sheet"
+            else "a year earlier")
     if change.get("direction") == "up":
-        lines.append("- its borrowings are higher than a year earlier")
+        lines.append(f"- its borrowings are higher than they were {when}")
     elif change.get("direction") == "down":
-        lines.append("- its borrowings are lower than a year earlier")
+        lines.append(f"- its borrowings are lower than they were {when}")
     elif change.get("direction") == "flat":
-        lines.append("- its borrowings are about the same as a year earlier")
+        lines.append(f"- its borrowings are about the same as they were {when}")
     if (due := block.get("due_within_year")) is not None:
         lines.append(
             "- most of what it owes falls due within a year"

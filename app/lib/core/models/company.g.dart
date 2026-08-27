@@ -111,6 +111,8 @@ Map<String, dynamic> _$CompanyDebtToJson(_CompanyDebt instance) =>
 
 _DebtChange _$DebtChangeFromJson(Map<String, dynamic> json) => _DebtChange(
   period: json['period'] as String? ?? '',
+  since: json['since'] as String?,
+  basis: json['basis'] as String? ?? 'balance_sheet',
   borrowings: (json['borrowings'] as num?)?.toDouble() ?? 0,
   delta: (json['delta'] as num?)?.toDouble() ?? 0,
   direction: json['direction'] as String? ?? '',
@@ -119,6 +121,8 @@ _DebtChange _$DebtChangeFromJson(Map<String, dynamic> json) => _DebtChange(
 Map<String, dynamic> _$DebtChangeToJson(_DebtChange instance) =>
     <String, dynamic>{
       'period': instance.period,
+      'since': instance.since,
+      'basis': instance.basis,
       'borrowings': instance.borrowings,
       'delta': instance.delta,
       'direction': instance.direction,

@@ -3302,4 +3302,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get debtNoneFiled => 'آخر قوائم منشورة لهذه الشركة لا تذكر أي قروض.';
+
+  @override
+  String debtUpSince(String date) {
+    return 'أعلى مما كانت في $date';
+  }
+
+  @override
+  String debtDownSince(String date) {
+    return 'أقل مما كانت في $date';
+  }
+
+  @override
+  String debtFlatSince(String date) {
+    return 'قريبة مما كانت في $date';
+  }
 }

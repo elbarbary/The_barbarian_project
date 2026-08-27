@@ -5395,6 +5395,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This company\'s last filed statement states no borrowings.'**
   String get debtNoneFiled;
+
+  /// No description provided for @debtUpSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher than at {date}'**
+  String debtUpSince(String date);
+
+  /// No description provided for @debtDownSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower than at {date}'**
+  String debtDownSince(String date);
+
+  /// No description provided for @debtFlatSince.
+  ///
+  /// In en, this message translates to:
+  /// **'About the same as at {date}'**
+  String debtFlatSince(String date);
 }
 
 class _AppLocalizationsDelegate

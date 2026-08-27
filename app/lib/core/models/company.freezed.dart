@@ -1016,7 +1016,15 @@ $CompanyDebtReadCopyWith<$Res>? get read {
 /// @nodoc
 mixin _$DebtChange {
 
- String get period; double get borrowings; double get delta; String get direction;
+ String get period;/// The balance-sheet date being compared against, and how it was found.
+///
+/// `balance_sheet` means the statement's own prior column, which is
+/// normally the last year-end rather than the same period a year earlier —
+/// a shorter window, and the only one obtainable, because the interim
+/// filings a year back carry no attachment to read. `year_earlier` means a
+/// genuine twelve months. The screen names [since] rather than saying
+/// "a year ago", so the two can never be confused.
+ String? get since; String get basis; double get borrowings; double get delta; String get direction;
 /// Create a copy of DebtChange
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1029,16 +1037,16 @@ $DebtChangeCopyWith<DebtChange> get copyWith => _$DebtChangeCopyWithImpl<DebtCha
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.since, since) || other.since == since)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,period,borrowings,delta,direction);
+int get hashCode => Object.hash(runtimeType,period,since,basis,borrowings,delta,direction);
 
 @override
 String toString() {
-  return 'DebtChange(period: $period, borrowings: $borrowings, delta: $delta, direction: $direction)';
+  return 'DebtChange(period: $period, since: $since, basis: $basis, borrowings: $borrowings, delta: $delta, direction: $direction)';
 }
 
 
@@ -1049,7 +1057,7 @@ abstract mixin class $DebtChangeCopyWith<$Res>  {
   factory $DebtChangeCopyWith(DebtChange value, $Res Function(DebtChange) _then) = _$DebtChangeCopyWithImpl;
 @useResult
 $Res call({
- String period, double borrowings, double delta, String direction
+ String period, String? since, String basis, double borrowings, double delta, String direction
 });
 
 
@@ -1066,9 +1074,11 @@ class _$DebtChangeCopyWithImpl<$Res>
 
 /// Create a copy of DebtChange
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? since = freezed,Object? basis = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
   return _then(_self.copyWith(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,since: freezed == since ? _self.since : since // ignore: cast_nullable_to_non_nullable
+as String?,basis: null == basis ? _self.basis : basis // ignore: cast_nullable_to_non_nullable
 as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
 as double,delta: null == delta ? _self.delta : delta // ignore: cast_nullable_to_non_nullable
 as double,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
@@ -1157,10 +1167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double borrowings,  double delta,  String direction)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  String? since,  String basis,  double borrowings,  double delta,  String direction)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DebtChange() when $default != null:
-return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+return $default(_that.period,_that.since,_that.basis,_that.borrowings,_that.delta,_that.direction);case _:
   return orElse();
 
 }
@@ -1178,10 +1188,10 @@ return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double borrowings,  double delta,  String direction)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  String? since,  String basis,  double borrowings,  double delta,  String direction)  $default,) {final _that = this;
 switch (_that) {
 case _DebtChange():
-return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+return $default(_that.period,_that.since,_that.basis,_that.borrowings,_that.delta,_that.direction);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1198,10 +1208,10 @@ return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double borrowings,  double delta,  String direction)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  String? since,  String basis,  double borrowings,  double delta,  String direction)?  $default,) {final _that = this;
 switch (_that) {
 case _DebtChange() when $default != null:
-return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+return $default(_that.period,_that.since,_that.basis,_that.borrowings,_that.delta,_that.direction);case _:
   return null;
 
 }
@@ -1213,10 +1223,20 @@ return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case 
 @JsonSerializable()
 
 class _DebtChange implements DebtChange {
-  const _DebtChange({this.period = '', this.borrowings = 0, this.delta = 0, this.direction = ''});
+  const _DebtChange({this.period = '', this.since, this.basis = 'balance_sheet', this.borrowings = 0, this.delta = 0, this.direction = ''});
   factory _DebtChange.fromJson(Map<String, dynamic> json) => _$DebtChangeFromJson(json);
 
 @override@JsonKey() final  String period;
+/// The balance-sheet date being compared against, and how it was found.
+///
+/// `balance_sheet` means the statement's own prior column, which is
+/// normally the last year-end rather than the same period a year earlier —
+/// a shorter window, and the only one obtainable, because the interim
+/// filings a year back carry no attachment to read. `year_earlier` means a
+/// genuine twelve months. The screen names [since] rather than saying
+/// "a year ago", so the two can never be confused.
+@override final  String? since;
+@override@JsonKey() final  String basis;
 @override@JsonKey() final  double borrowings;
 @override@JsonKey() final  double delta;
 @override@JsonKey() final  String direction;
@@ -1234,16 +1254,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.since, since) || other.since == since)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,period,borrowings,delta,direction);
+int get hashCode => Object.hash(runtimeType,period,since,basis,borrowings,delta,direction);
 
 @override
 String toString() {
-  return 'DebtChange(period: $period, borrowings: $borrowings, delta: $delta, direction: $direction)';
+  return 'DebtChange(period: $period, since: $since, basis: $basis, borrowings: $borrowings, delta: $delta, direction: $direction)';
 }
 
 
@@ -1254,7 +1274,7 @@ abstract mixin class _$DebtChangeCopyWith<$Res> implements $DebtChangeCopyWith<$
   factory _$DebtChangeCopyWith(_DebtChange value, $Res Function(_DebtChange) _then) = __$DebtChangeCopyWithImpl;
 @override @useResult
 $Res call({
- String period, double borrowings, double delta, String direction
+ String period, String? since, String basis, double borrowings, double delta, String direction
 });
 
 
@@ -1271,9 +1291,11 @@ class __$DebtChangeCopyWithImpl<$Res>
 
 /// Create a copy of DebtChange
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? since = freezed,Object? basis = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
   return _then(_DebtChange(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,since: freezed == since ? _self.since : since // ignore: cast_nullable_to_non_nullable
+as String?,basis: null == basis ? _self.basis : basis // ignore: cast_nullable_to_non_nullable
 as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
 as double,delta: null == delta ? _self.delta : delta // ignore: cast_nullable_to_non_nullable
 as double,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable

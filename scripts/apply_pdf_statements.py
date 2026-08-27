@@ -85,6 +85,16 @@ def apply(check: bool = False) -> int:
             if row.get(name) is None:
                 row[name] = round(float(value), 3)
                 changes.append(name)
+        # The balance sheet's own prior column, carried onto the row so the
+        # debt step can say which way borrowings moved without a second filing
+        # — the interim announcements a year earlier carry no attachment at
+        # all, so this is the only route to a direction. Set before the
+        # early exit below: a row whose figures are all already filled has no
+        # `changes`, and that is exactly the common case here.
+        comparative = record.get("comparative")
+        if comparative and row.get("debt_comparative") != comparative:
+            row["debt_comparative"] = comparative
+            changes.append("debt_comparative")
         if not changes:
             continue
 

@@ -178,8 +178,27 @@ def debt_block(doc: dict) -> dict | None:
     if (gearing := _ratio(borrowings, equity)) is not None:
         block["gearing"] = gearing
 
-    # Against the same period a year earlier, which is the only comparison that
-    # holds for a company whose year does not start in January.
+    # Which way borrowings moved. The balance sheet's own prior column is
+    # preferred and is usually the last year-end rather than the same period a
+    # year earlier — a shorter window, but the one the company itself presents,
+    # and the only one obtainable: the interim filings a year back carry no
+    # attachment to read. Whatever is used, the date is published with it so
+    # the screen can name the window instead of implying a year.
+    if (prior := row.get("debt_comparative")) and isinstance(prior, dict):
+        was = prior.get("fields", {}).get("debt")
+        if isinstance(was, (int, float)):
+            block["change"] = {
+                "since": prior.get("date"),
+                "basis": "balance_sheet",
+                "borrowings": round(float(was), 3),
+                "delta": round(borrowings - float(was), 3),
+                "direction": ("up" if borrowings > was
+                              else "down" if borrowings < was else "flat"),
+            }
+            return block
+
+    # Failing that, the same period a year earlier, which holds for a company
+    # whose year does not start in January.
     if label := prior_label(str(row.get("period") or "")):
         for candidate in (financials.get(bucket) or []):
             if candidate.get("period") != label:
@@ -189,6 +208,7 @@ def debt_block(doc: dict) -> dict | None:
                 break
             block["change"] = {
                 "period": label,
+                "basis": "year_earlier",
                 "borrowings": round(was, 3),
                 "delta": round(borrowings - was, 3),
                 "direction": ("up" if borrowings > was

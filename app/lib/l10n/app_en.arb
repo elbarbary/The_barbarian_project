@@ -2674,5 +2674,29 @@
   "debtPatternFundingRepaid": "It repaid more funding than it took in.",
   "debtFinanceNote": "This is a lender, so borrowing is the raw material of the business rather than a load on it. Customer deposits are not counted here.",
   "debtFootnote": "Read from the borrowing lines of the company's own filed statement, not from its total liabilities. ESTHMR does not rate credit or say whether this position is sound.",
-  "debtNoneFiled": "This company's last filed statement states no borrowings."
+  "debtNoneFiled": "This company's last filed statement states no borrowings.",
+  "debtUpSince": "Higher than at {date}",
+  "@debtUpSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "debtDownSince": "Lower than at {date}",
+  "@debtDownSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "debtFlatSince": "About the same as at {date}",
+  "@debtFlatSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }
