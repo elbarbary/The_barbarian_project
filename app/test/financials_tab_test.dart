@@ -10,8 +10,8 @@ import 'support/harness.dart';
 ///
 /// This screen previously rendered five years of invented statements for El
 /// Sewedy as reported fact, so the tests that matter here are the ones that
-/// check what it does *not* say: no revenue it does not have, no margin it
-/// cannot derive, and nothing on screen without a source behind it.
+/// check both sides of the boundary: no revenue it does not have, real lines
+/// from a verified attachment where it does, and nothing without a source.
 void main() {
   Future<void> openFinancials(WidgetTester tester, String ticker) async {
     usePhoneSurface(tester);
@@ -85,7 +85,9 @@ void main() {
     );
   });
 
-  testWidgets('it presents no revenue and no margin', (tester) async {
+  testWidgets('it leaves unfiled revenue absent and explains the blank', (
+    tester,
+  ) async {
     await openFinancials(tester, 'SWDY');
 
     // Neither source states revenue, so no margin can be derived. A revenue
@@ -98,13 +100,35 @@ void main() {
       );
     }
 
-    // And it says so, rather than leaving the reader to notice the absence.
+    // And the general source note explains why any line may stay blank.
     expect(
-      find.textContaining(
-        RegExp('neither source states revenue', caseSensitive: false),
-      ),
+      find.textContaining(RegExp('line stays blank', caseSensitive: false)),
       findsOneWidget,
     );
+  });
+
+  testWidgets('it shows lines verified from a recent EGX attachment', (
+    tester,
+  ) async {
+    await openFinancials(tester, 'ABUK');
+
+    for (final label in ['Revenue', 'Gross profit', 'Operating profit']) {
+      expect(
+        find.text(label),
+        findsOneWidget,
+        reason: '$label should be shown',
+      );
+    }
+    final company = Company.fromJson(
+      readFixtureObjectSync('companies/ABUK.json'),
+    );
+    final h1 = company.financials.quarterly.singleWhere(
+      (period) => period.period == 'H1 2026',
+    );
+    expect(h1.revenue, 23525);
+    expect(h1.assets, 36870);
+    expect(h1.liabilities, 7410);
+    expect(h1.equity, 29462);
   });
 
   testWidgets('a company with nothing filed says so plainly', (tester) async {
@@ -139,7 +163,7 @@ void main() {
       expect(
         period.revenue,
         isNull,
-        reason: 'no source we have states revenue, so none may appear',
+        reason: 'SWDY has no verified revenue source, so none may appear',
       );
     }
   });
@@ -162,10 +186,13 @@ void main() {
         for (final l in ['Q4 2024', 'H1 2026', 'Q1 2021', '9M 2025', 'Q1 2026'])
           p(l),
       ]..sort((a, b) => b.chronoOrder.compareTo(a.chronoOrder));
-      expect(
-        periods.map((e) => e.period).toList(),
-        ['H1 2026', 'Q1 2026', '9M 2025', 'Q4 2024', 'Q1 2021'],
-      );
+      expect(periods.map((e) => e.period).toList(), [
+        'H1 2026',
+        'Q1 2026',
+        '9M 2025',
+        'Q4 2024',
+        'Q1 2021',
+      ]);
     });
 
     test('COMI opens on its freshest set — this year, under Quarterly', () {

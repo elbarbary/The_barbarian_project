@@ -304,8 +304,11 @@
   "finStatements": "The statements as filed",
   "finAnnual": "Annual",
   "finQuarterly": "Quarterly",
+  "finRevenueLine": "Revenue",
+  "finGrossProfitLine": "Gross profit",
+  "finOperatingProfitLine": "Operating profit",
   "finNetProfitLine": "Net profit",
-  "finStatementsNote": "Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.",
+  "finStatementsNote": "Every filed period collected from EGX and Mubasher. Scroll sideways for older periods.",
   "finCashInvesting": "Cash from investing",
   "finCashFinancing": "Cash from financing",
   "finNetChangeCash": "Net change in cash",
@@ -612,7 +615,7 @@
   "gateUnresolvedLabel": "Unresolved",
   "noDetailBodyFull": "The exchange scan carried only a closing price for this listing. More lands as a fuller record is published.",
   "finNoFiguresBodyFull": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
-  "finFootnoteFull": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "finFootnoteFull": "Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Read from {source}.",
   "@finFootnoteFull": {
     "placeholders": {
       "source": {

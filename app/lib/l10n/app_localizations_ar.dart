@@ -640,11 +640,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get finQuarterly => 'ربع سنوي';
 
   @override
+  String get finRevenueLine => 'الإيرادات';
+
+  @override
+  String get finGrossProfitLine => 'مجمل الربح';
+
+  @override
+  String get finOperatingProfitLine => 'أرباح التشغيل';
+
+  @override
   String get finNetProfitLine => 'صافي الربح';
 
   @override
   String get finStatementsNote =>
-      'كل فترة تنشرها «مباشر» عن هذه الشركة، كما أُودعت. اسحب جانبًا للفترات الأقدم.';
+      'كل فترة مودعة جمعناها من البورصة و«مباشر». اسحب جانبًا للفترات الأقدم.';
 
   @override
   String get finCashInvesting => 'التدفق النقدي من الاستثمار';
@@ -1081,7 +1090,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String finFootnoteFull(String source) {
-    return 'الأرقام بملايين الجنيهات كما أُودعت. لا يذكر أي من المصدرين الإيرادات، لذلك لا تُعرض الهوامش بدلًا من تقديرها. المصدر: $source.';
+    return 'الأرقام بملايين الجنيهات كما أُودعت. يبقى البند فارغًا إذا لم يذكره الملف المرفق بالمصدر. المصدر: $source.';
   }
 
   @override

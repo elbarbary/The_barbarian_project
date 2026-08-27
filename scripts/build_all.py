@@ -107,6 +107,11 @@ STEPS = [
     # committed table, re-proving each figure against the archive, and touches a
     # period only while the automatic path still produces the value it targets.
     ("Filing corrections", "apply_filing_corrections.py", True),
+    # Full statement fields read from the issuer's own scanned attachment.
+    # Collection is manual/local because the PDF host requires headed Chrome;
+    # this deterministic replay is safe in CI and restores the committed,
+    # verified fields after Market has recreated every company document.
+    ("EGX PDF statements", "apply_pdf_statements.py", True),
     # What is unusual about a company against its own record — streak breaks,
     # silence measured against its own filing rhythm, first-in-years filings,
     # and when results are next due. Pure arithmetic over the committed

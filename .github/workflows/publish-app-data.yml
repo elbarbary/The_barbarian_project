@@ -97,6 +97,7 @@ env:
     scripts/macro_insight.json
     scripts/market_history.json
     scripts/news_images.json
+    scripts/pdf_statements_filed.json
     scripts/statements_filed.json
     scripts/stock_info.json
     scripts/review_reads.json

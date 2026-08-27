@@ -642,11 +642,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get finQuarterly => 'Quarterly';
 
   @override
+  String get finRevenueLine => 'Revenue';
+
+  @override
+  String get finGrossProfitLine => 'Gross profit';
+
+  @override
+  String get finOperatingProfitLine => 'Operating profit';
+
+  @override
   String get finNetProfitLine => 'Net profit';
 
   @override
   String get finStatementsNote =>
-      'Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.';
+      'Every filed period collected from EGX and Mubasher. Scroll sideways for older periods.';
 
   @override
   String get finCashInvesting => 'Cash from investing';
@@ -1088,7 +1097,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String finFootnoteFull(String source) {
-    return 'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from $source.';
+    return 'Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Read from $source.';
   }
 
   @override

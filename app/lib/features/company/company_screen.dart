@@ -136,9 +136,9 @@ class _CompanyScreenState extends ConsumerState<CompanyScreen> {
                       // and the statements are the evidence for it.
                       BReviewSheet(ticker: widget.ticker),
                       _Financials(
-                    company: company,
-                    parentTab: widget.parentTab,
-                  ),
+                        company: company,
+                        parentTab: widget.parentTab,
+                      ),
                     ],
                   ),
                   _Tab.price => _Price(
@@ -549,11 +549,7 @@ class _Overview extends ConsumerWidget {
         // First on the page when it applies, and absent when it does not.
         // Somebody opening a company from the busiest list arrived asking one
         // question; this is where it gets answered.
-        BVolumeExplainer(
-          company: company,
-          quote: quote,
-          parentTab: parentTab,
-        ),
+        BVolumeExplainer(company: company, quote: quote, parentTab: parentTab),
         // Before the brief, because "first loss after 27 profitable periods"
         // is the strongest thing this page knows and it is arithmetic, while
         // the brief below it is a model reading the same record.
@@ -727,9 +723,9 @@ FinancialPeriod? _latestBalance(
 /// FY2021 releases, where they match to the pound. Interim net profit comes
 /// from the exchange's own results announcements.
 ///
-/// There is no revenue line in either source, so there are no margins here.
-/// The previous version of this screen drew a revenue bar chart from numbers
-/// nobody had ever filed; an absent line is now absent rather than invented.
+/// Revenue and profit lines appear only where a filed attachment states them.
+/// The previous version of this screen drew them from numbers nobody had ever
+/// filed; an absent line is still absent rather than inferred.
 class _Financials extends StatelessWidget {
   const _Financials({required this.company, required this.parentTab});
 
@@ -1629,18 +1625,20 @@ class _StatementTableState extends State<_StatementTable> {
     // Newest first (leftmost), sorted by time rather than by the label string
     // the list is stored in — otherwise this July's "H1 2026" sorts after
     // "Q4 2024" and the freshest quarter lands at the far end of the scroll.
-    final periods =
-        [
-          ...(_tab == 0 && widget.annual.isNotEmpty
-              ? widget.annual
-              : widget.quarterly),
-        ]..sort((a, b) => b.chronoOrder.compareTo(a.chronoOrder));
+    final periods = [
+      ...(_tab == 0 && widget.annual.isNotEmpty
+          ? widget.annual
+          : widget.quarterly),
+    ]..sort((a, b) => b.chronoOrder.compareTo(a.chronoOrder));
 
     // The balance sheet, then the cash flow statement in the order it is
     // filed: operating, investing, financing, and the change the three of them
     // come to. A line nobody filed for any period on show is dropped rather
     // than printed as a row of dashes.
     final lines = <(String, double? Function(FinancialPeriod))>[
+      (l.finRevenueLine, (p) => p.revenue),
+      (l.finGrossProfitLine, (p) => p.grossProfit),
+      (l.finOperatingProfitLine, (p) => p.operatingIncome),
       (l.finNetProfitLine, (p) => p.netIncome),
       (l.finTotalAssets, (p) => p.assets),
       (l.finTotalLiabilities, (p) => p.liabilities),
@@ -1864,8 +1862,9 @@ class _FiledDocuments extends ConsumerWidget {
                       if (context.filingAge(item.date) case final age?)
                         Text(
                           age,
-                          style: BarbarianType.labelNano
-                              .copyWith(color: c.textMuted),
+                          style: BarbarianType.labelNano.copyWith(
+                            color: c.textMuted,
+                          ),
                         ),
                       if (item.link.isNotEmpty)
                         Icon(Icons.north_east, size: 13, color: c.textFaint),

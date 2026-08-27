@@ -1256,6 +1256,24 @@ abstract class AppLocalizations {
   /// **'Quarterly'**
   String get finQuarterly;
 
+  /// No description provided for @finRevenueLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Revenue'**
+  String get finRevenueLine;
+
+  /// No description provided for @finGrossProfitLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Gross profit'**
+  String get finGrossProfitLine;
+
+  /// No description provided for @finOperatingProfitLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Operating profit'**
+  String get finOperatingProfitLine;
+
   /// No description provided for @finNetProfitLine.
   ///
   /// In en, this message translates to:
@@ -1265,7 +1283,7 @@ abstract class AppLocalizations {
   /// No description provided for @finStatementsNote.
   ///
   /// In en, this message translates to:
-  /// **'Every period Mubasher publishes for this company, as filed. Scroll sideways for older periods.'**
+  /// **'Every filed period collected from EGX and Mubasher. Scroll sideways for older periods.'**
   String get finStatementsNote;
 
   /// No description provided for @finCashInvesting.
@@ -1979,7 +1997,7 @@ abstract class AppLocalizations {
   /// No description provided for @finFootnoteFull.
   ///
   /// In en, this message translates to:
-  /// **'Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.'**
+  /// **'Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Read from {source}.'**
   String finFootnoteFull(String source);
 
   /// No description provided for @priceNoHistoryTitle.
