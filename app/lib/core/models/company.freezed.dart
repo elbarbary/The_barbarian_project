@@ -643,13 +643,925 @@ as double?,
 
 
 /// @nodoc
+mixin _$CompanyDebt {
+
+ String get period;@JsonKey(name: 'as_of') String? get asOf;@JsonKey(name: 'filing_id') String? get filingId; String? get source;/// `finance` for a bank or lender, where borrowing funds the book it lends
+/// out of, and `operating` for everybody else, where it has to be repaid
+/// out of what the business earns. The same figures, a different question.
+ String get frame; double get borrowings;@JsonKey(name: 'short_term') double? get shortTerm;@JsonKey(name: 'long_term') double? get longTerm; double? get cash;@JsonKey(name: 'net_debt') double? get netDebt;@JsonKey(name: 'finance_cost') double? get financeCost;/// Share of borrowings falling due inside a year, 0-1.
+@JsonKey(name: 'due_within_year') double? get dueWithinYear;/// Operating profit divided by what the borrowings cost for the same
+/// period, and borrowings divided by equity.
+ double? get cover; double? get gearing; String? get pattern; DebtChange? get change; CompanyDebtRead? get read;
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CompanyDebtCopyWith<CompanyDebt> get copyWith => _$CompanyDebtCopyWithImpl<CompanyDebt>(this as CompanyDebt, _$identity);
+
+  /// Serializes this CompanyDebt to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyDebt&&(identical(other.period, period) || other.period == period)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.filingId, filingId) || other.filingId == filingId)&&(identical(other.source, source) || other.source == source)&&(identical(other.frame, frame) || other.frame == frame)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.shortTerm, shortTerm) || other.shortTerm == shortTerm)&&(identical(other.longTerm, longTerm) || other.longTerm == longTerm)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.netDebt, netDebt) || other.netDebt == netDebt)&&(identical(other.financeCost, financeCost) || other.financeCost == financeCost)&&(identical(other.dueWithinYear, dueWithinYear) || other.dueWithinYear == dueWithinYear)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.gearing, gearing) || other.gearing == gearing)&&(identical(other.pattern, pattern) || other.pattern == pattern)&&(identical(other.change, change) || other.change == change)&&(identical(other.read, read) || other.read == read));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,period,asOf,filingId,source,frame,borrowings,shortTerm,longTerm,cash,netDebt,financeCost,dueWithinYear,cover,gearing,pattern,change,read);
+
+@override
+String toString() {
+  return 'CompanyDebt(period: $period, asOf: $asOf, filingId: $filingId, source: $source, frame: $frame, borrowings: $borrowings, shortTerm: $shortTerm, longTerm: $longTerm, cash: $cash, netDebt: $netDebt, financeCost: $financeCost, dueWithinYear: $dueWithinYear, cover: $cover, gearing: $gearing, pattern: $pattern, change: $change, read: $read)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CompanyDebtCopyWith<$Res>  {
+  factory $CompanyDebtCopyWith(CompanyDebt value, $Res Function(CompanyDebt) _then) = _$CompanyDebtCopyWithImpl;
+@useResult
+$Res call({
+ String period,@JsonKey(name: 'as_of') String? asOf,@JsonKey(name: 'filing_id') String? filingId, String? source, String frame, double borrowings,@JsonKey(name: 'short_term') double? shortTerm,@JsonKey(name: 'long_term') double? longTerm, double? cash,@JsonKey(name: 'net_debt') double? netDebt,@JsonKey(name: 'finance_cost') double? financeCost,@JsonKey(name: 'due_within_year') double? dueWithinYear, double? cover, double? gearing, String? pattern, DebtChange? change, CompanyDebtRead? read
+});
+
+
+$DebtChangeCopyWith<$Res>? get change;$CompanyDebtReadCopyWith<$Res>? get read;
+
+}
+/// @nodoc
+class _$CompanyDebtCopyWithImpl<$Res>
+    implements $CompanyDebtCopyWith<$Res> {
+  _$CompanyDebtCopyWithImpl(this._self, this._then);
+
+  final CompanyDebt _self;
+  final $Res Function(CompanyDebt) _then;
+
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? asOf = freezed,Object? filingId = freezed,Object? source = freezed,Object? frame = null,Object? borrowings = null,Object? shortTerm = freezed,Object? longTerm = freezed,Object? cash = freezed,Object? netDebt = freezed,Object? financeCost = freezed,Object? dueWithinYear = freezed,Object? cover = freezed,Object? gearing = freezed,Object? pattern = freezed,Object? change = freezed,Object? read = freezed,}) {
+  return _then(_self.copyWith(
+period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,asOf: freezed == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non_nullable
+as String?,filingId: freezed == filingId ? _self.filingId : filingId // ignore: cast_nullable_to_non_nullable
+as String?,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,frame: null == frame ? _self.frame : frame // ignore: cast_nullable_to_non_nullable
+as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
+as double,shortTerm: freezed == shortTerm ? _self.shortTerm : shortTerm // ignore: cast_nullable_to_non_nullable
+as double?,longTerm: freezed == longTerm ? _self.longTerm : longTerm // ignore: cast_nullable_to_non_nullable
+as double?,cash: freezed == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
+as double?,netDebt: freezed == netDebt ? _self.netDebt : netDebt // ignore: cast_nullable_to_non_nullable
+as double?,financeCost: freezed == financeCost ? _self.financeCost : financeCost // ignore: cast_nullable_to_non_nullable
+as double?,dueWithinYear: freezed == dueWithinYear ? _self.dueWithinYear : dueWithinYear // ignore: cast_nullable_to_non_nullable
+as double?,cover: freezed == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
+as double?,gearing: freezed == gearing ? _self.gearing : gearing // ignore: cast_nullable_to_non_nullable
+as double?,pattern: freezed == pattern ? _self.pattern : pattern // ignore: cast_nullable_to_non_nullable
+as String?,change: freezed == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as DebtChange?,read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as CompanyDebtRead?,
+  ));
+}
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DebtChangeCopyWith<$Res>? get change {
+    if (_self.change == null) {
+    return null;
+  }
+
+  return $DebtChangeCopyWith<$Res>(_self.change!, (value) {
+    return _then(_self.copyWith(change: value));
+  });
+}/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyDebtReadCopyWith<$Res>? get read {
+    if (_self.read == null) {
+    return null;
+  }
+
+  return $CompanyDebtReadCopyWith<$Res>(_self.read!, (value) {
+    return _then(_self.copyWith(read: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [CompanyDebt].
+extension CompanyDebtPatterns on CompanyDebt {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CompanyDebt value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CompanyDebt() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CompanyDebt value)  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyDebt():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CompanyDebt value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyDebt() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period, @JsonKey(name: 'as_of')  String? asOf, @JsonKey(name: 'filing_id')  String? filingId,  String? source,  String frame,  double borrowings, @JsonKey(name: 'short_term')  double? shortTerm, @JsonKey(name: 'long_term')  double? longTerm,  double? cash, @JsonKey(name: 'net_debt')  double? netDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'due_within_year')  double? dueWithinYear,  double? cover,  double? gearing,  String? pattern,  DebtChange? change,  CompanyDebtRead? read)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CompanyDebt() when $default != null:
+return $default(_that.period,_that.asOf,_that.filingId,_that.source,_that.frame,_that.borrowings,_that.shortTerm,_that.longTerm,_that.cash,_that.netDebt,_that.financeCost,_that.dueWithinYear,_that.cover,_that.gearing,_that.pattern,_that.change,_that.read);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period, @JsonKey(name: 'as_of')  String? asOf, @JsonKey(name: 'filing_id')  String? filingId,  String? source,  String frame,  double borrowings, @JsonKey(name: 'short_term')  double? shortTerm, @JsonKey(name: 'long_term')  double? longTerm,  double? cash, @JsonKey(name: 'net_debt')  double? netDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'due_within_year')  double? dueWithinYear,  double? cover,  double? gearing,  String? pattern,  DebtChange? change,  CompanyDebtRead? read)  $default,) {final _that = this;
+switch (_that) {
+case _CompanyDebt():
+return $default(_that.period,_that.asOf,_that.filingId,_that.source,_that.frame,_that.borrowings,_that.shortTerm,_that.longTerm,_that.cash,_that.netDebt,_that.financeCost,_that.dueWithinYear,_that.cover,_that.gearing,_that.pattern,_that.change,_that.read);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period, @JsonKey(name: 'as_of')  String? asOf, @JsonKey(name: 'filing_id')  String? filingId,  String? source,  String frame,  double borrowings, @JsonKey(name: 'short_term')  double? shortTerm, @JsonKey(name: 'long_term')  double? longTerm,  double? cash, @JsonKey(name: 'net_debt')  double? netDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'due_within_year')  double? dueWithinYear,  double? cover,  double? gearing,  String? pattern,  DebtChange? change,  CompanyDebtRead? read)?  $default,) {final _that = this;
+switch (_that) {
+case _CompanyDebt() when $default != null:
+return $default(_that.period,_that.asOf,_that.filingId,_that.source,_that.frame,_that.borrowings,_that.shortTerm,_that.longTerm,_that.cash,_that.netDebt,_that.financeCost,_that.dueWithinYear,_that.cover,_that.gearing,_that.pattern,_that.change,_that.read);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _CompanyDebt extends CompanyDebt {
+  const _CompanyDebt({this.period = '', @JsonKey(name: 'as_of') this.asOf, @JsonKey(name: 'filing_id') this.filingId, this.source, this.frame = 'operating', this.borrowings = 0, @JsonKey(name: 'short_term') this.shortTerm, @JsonKey(name: 'long_term') this.longTerm, this.cash, @JsonKey(name: 'net_debt') this.netDebt, @JsonKey(name: 'finance_cost') this.financeCost, @JsonKey(name: 'due_within_year') this.dueWithinYear, this.cover, this.gearing, this.pattern, this.change, this.read}): super._();
+  factory _CompanyDebt.fromJson(Map<String, dynamic> json) => _$CompanyDebtFromJson(json);
+
+@override@JsonKey() final  String period;
+@override@JsonKey(name: 'as_of') final  String? asOf;
+@override@JsonKey(name: 'filing_id') final  String? filingId;
+@override final  String? source;
+/// `finance` for a bank or lender, where borrowing funds the book it lends
+/// out of, and `operating` for everybody else, where it has to be repaid
+/// out of what the business earns. The same figures, a different question.
+@override@JsonKey() final  String frame;
+@override@JsonKey() final  double borrowings;
+@override@JsonKey(name: 'short_term') final  double? shortTerm;
+@override@JsonKey(name: 'long_term') final  double? longTerm;
+@override final  double? cash;
+@override@JsonKey(name: 'net_debt') final  double? netDebt;
+@override@JsonKey(name: 'finance_cost') final  double? financeCost;
+/// Share of borrowings falling due inside a year, 0-1.
+@override@JsonKey(name: 'due_within_year') final  double? dueWithinYear;
+/// Operating profit divided by what the borrowings cost for the same
+/// period, and borrowings divided by equity.
+@override final  double? cover;
+@override final  double? gearing;
+@override final  String? pattern;
+@override final  DebtChange? change;
+@override final  CompanyDebtRead? read;
+
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CompanyDebtCopyWith<_CompanyDebt> get copyWith => __$CompanyDebtCopyWithImpl<_CompanyDebt>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CompanyDebtToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyDebt&&(identical(other.period, period) || other.period == period)&&(identical(other.asOf, asOf) || other.asOf == asOf)&&(identical(other.filingId, filingId) || other.filingId == filingId)&&(identical(other.source, source) || other.source == source)&&(identical(other.frame, frame) || other.frame == frame)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.shortTerm, shortTerm) || other.shortTerm == shortTerm)&&(identical(other.longTerm, longTerm) || other.longTerm == longTerm)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.netDebt, netDebt) || other.netDebt == netDebt)&&(identical(other.financeCost, financeCost) || other.financeCost == financeCost)&&(identical(other.dueWithinYear, dueWithinYear) || other.dueWithinYear == dueWithinYear)&&(identical(other.cover, cover) || other.cover == cover)&&(identical(other.gearing, gearing) || other.gearing == gearing)&&(identical(other.pattern, pattern) || other.pattern == pattern)&&(identical(other.change, change) || other.change == change)&&(identical(other.read, read) || other.read == read));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,period,asOf,filingId,source,frame,borrowings,shortTerm,longTerm,cash,netDebt,financeCost,dueWithinYear,cover,gearing,pattern,change,read);
+
+@override
+String toString() {
+  return 'CompanyDebt(period: $period, asOf: $asOf, filingId: $filingId, source: $source, frame: $frame, borrowings: $borrowings, shortTerm: $shortTerm, longTerm: $longTerm, cash: $cash, netDebt: $netDebt, financeCost: $financeCost, dueWithinYear: $dueWithinYear, cover: $cover, gearing: $gearing, pattern: $pattern, change: $change, read: $read)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CompanyDebtCopyWith<$Res> implements $CompanyDebtCopyWith<$Res> {
+  factory _$CompanyDebtCopyWith(_CompanyDebt value, $Res Function(_CompanyDebt) _then) = __$CompanyDebtCopyWithImpl;
+@override @useResult
+$Res call({
+ String period,@JsonKey(name: 'as_of') String? asOf,@JsonKey(name: 'filing_id') String? filingId, String? source, String frame, double borrowings,@JsonKey(name: 'short_term') double? shortTerm,@JsonKey(name: 'long_term') double? longTerm, double? cash,@JsonKey(name: 'net_debt') double? netDebt,@JsonKey(name: 'finance_cost') double? financeCost,@JsonKey(name: 'due_within_year') double? dueWithinYear, double? cover, double? gearing, String? pattern, DebtChange? change, CompanyDebtRead? read
+});
+
+
+@override $DebtChangeCopyWith<$Res>? get change;@override $CompanyDebtReadCopyWith<$Res>? get read;
+
+}
+/// @nodoc
+class __$CompanyDebtCopyWithImpl<$Res>
+    implements _$CompanyDebtCopyWith<$Res> {
+  __$CompanyDebtCopyWithImpl(this._self, this._then);
+
+  final _CompanyDebt _self;
+  final $Res Function(_CompanyDebt) _then;
+
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? asOf = freezed,Object? filingId = freezed,Object? source = freezed,Object? frame = null,Object? borrowings = null,Object? shortTerm = freezed,Object? longTerm = freezed,Object? cash = freezed,Object? netDebt = freezed,Object? financeCost = freezed,Object? dueWithinYear = freezed,Object? cover = freezed,Object? gearing = freezed,Object? pattern = freezed,Object? change = freezed,Object? read = freezed,}) {
+  return _then(_CompanyDebt(
+period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,asOf: freezed == asOf ? _self.asOf : asOf // ignore: cast_nullable_to_non_nullable
+as String?,filingId: freezed == filingId ? _self.filingId : filingId // ignore: cast_nullable_to_non_nullable
+as String?,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,frame: null == frame ? _self.frame : frame // ignore: cast_nullable_to_non_nullable
+as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
+as double,shortTerm: freezed == shortTerm ? _self.shortTerm : shortTerm // ignore: cast_nullable_to_non_nullable
+as double?,longTerm: freezed == longTerm ? _self.longTerm : longTerm // ignore: cast_nullable_to_non_nullable
+as double?,cash: freezed == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
+as double?,netDebt: freezed == netDebt ? _self.netDebt : netDebt // ignore: cast_nullable_to_non_nullable
+as double?,financeCost: freezed == financeCost ? _self.financeCost : financeCost // ignore: cast_nullable_to_non_nullable
+as double?,dueWithinYear: freezed == dueWithinYear ? _self.dueWithinYear : dueWithinYear // ignore: cast_nullable_to_non_nullable
+as double?,cover: freezed == cover ? _self.cover : cover // ignore: cast_nullable_to_non_nullable
+as double?,gearing: freezed == gearing ? _self.gearing : gearing // ignore: cast_nullable_to_non_nullable
+as double?,pattern: freezed == pattern ? _self.pattern : pattern // ignore: cast_nullable_to_non_nullable
+as String?,change: freezed == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as DebtChange?,read: freezed == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as CompanyDebtRead?,
+  ));
+}
+
+/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DebtChangeCopyWith<$Res>? get change {
+    if (_self.change == null) {
+    return null;
+  }
+
+  return $DebtChangeCopyWith<$Res>(_self.change!, (value) {
+    return _then(_self.copyWith(change: value));
+  });
+}/// Create a copy of CompanyDebt
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyDebtReadCopyWith<$Res>? get read {
+    if (_self.read == null) {
+    return null;
+  }
+
+  return $CompanyDebtReadCopyWith<$Res>(_self.read!, (value) {
+    return _then(_self.copyWith(read: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$DebtChange {
+
+ String get period; double get borrowings; double get delta; String get direction;
+/// Create a copy of DebtChange
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DebtChangeCopyWith<DebtChange> get copyWith => _$DebtChangeCopyWithImpl<DebtChange>(this as DebtChange, _$identity);
+
+  /// Serializes this DebtChange to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,period,borrowings,delta,direction);
+
+@override
+String toString() {
+  return 'DebtChange(period: $period, borrowings: $borrowings, delta: $delta, direction: $direction)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DebtChangeCopyWith<$Res>  {
+  factory $DebtChangeCopyWith(DebtChange value, $Res Function(DebtChange) _then) = _$DebtChangeCopyWithImpl;
+@useResult
+$Res call({
+ String period, double borrowings, double delta, String direction
+});
+
+
+
+
+}
+/// @nodoc
+class _$DebtChangeCopyWithImpl<$Res>
+    implements $DebtChangeCopyWith<$Res> {
+  _$DebtChangeCopyWithImpl(this._self, this._then);
+
+  final DebtChange _self;
+  final $Res Function(DebtChange) _then;
+
+/// Create a copy of DebtChange
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
+  return _then(_self.copyWith(
+period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
+as double,delta: null == delta ? _self.delta : delta // ignore: cast_nullable_to_non_nullable
+as double,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [DebtChange].
+extension DebtChangePatterns on DebtChange {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DebtChange value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DebtChange() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DebtChange value)  $default,){
+final _that = this;
+switch (_that) {
+case _DebtChange():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DebtChange value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DebtChange() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double borrowings,  double delta,  String direction)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DebtChange() when $default != null:
+return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double borrowings,  double delta,  String direction)  $default,) {final _that = this;
+switch (_that) {
+case _DebtChange():
+return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double borrowings,  double delta,  String direction)?  $default,) {final _that = this;
+switch (_that) {
+case _DebtChange() when $default != null:
+return $default(_that.period,_that.borrowings,_that.delta,_that.direction);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _DebtChange implements DebtChange {
+  const _DebtChange({this.period = '', this.borrowings = 0, this.delta = 0, this.direction = ''});
+  factory _DebtChange.fromJson(Map<String, dynamic> json) => _$DebtChangeFromJson(json);
+
+@override@JsonKey() final  String period;
+@override@JsonKey() final  double borrowings;
+@override@JsonKey() final  double delta;
+@override@JsonKey() final  String direction;
+
+/// Create a copy of DebtChange
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DebtChangeCopyWith<_DebtChange> get copyWith => __$DebtChangeCopyWithImpl<_DebtChange>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DebtChangeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DebtChange&&(identical(other.period, period) || other.period == period)&&(identical(other.borrowings, borrowings) || other.borrowings == borrowings)&&(identical(other.delta, delta) || other.delta == delta)&&(identical(other.direction, direction) || other.direction == direction));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,period,borrowings,delta,direction);
+
+@override
+String toString() {
+  return 'DebtChange(period: $period, borrowings: $borrowings, delta: $delta, direction: $direction)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DebtChangeCopyWith<$Res> implements $DebtChangeCopyWith<$Res> {
+  factory _$DebtChangeCopyWith(_DebtChange value, $Res Function(_DebtChange) _then) = __$DebtChangeCopyWithImpl;
+@override @useResult
+$Res call({
+ String period, double borrowings, double delta, String direction
+});
+
+
+
+
+}
+/// @nodoc
+class __$DebtChangeCopyWithImpl<$Res>
+    implements _$DebtChangeCopyWith<$Res> {
+  __$DebtChangeCopyWithImpl(this._self, this._then);
+
+  final _DebtChange _self;
+  final $Res Function(_DebtChange) _then;
+
+/// Create a copy of DebtChange
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? borrowings = null,Object? delta = null,Object? direction = null,}) {
+  return _then(_DebtChange(
+period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
+as String,borrowings: null == borrowings ? _self.borrowings : borrowings // ignore: cast_nullable_to_non_nullable
+as double,delta: null == delta ? _self.delta : delta // ignore: cast_nullable_to_non_nullable
+as double,direction: null == direction ? _self.direction : direction // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$CompanyDebtRead {
+
+ String get read;@JsonKey(name: 'read_ar') String get readAr;
+/// Create a copy of CompanyDebtRead
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CompanyDebtReadCopyWith<CompanyDebtRead> get copyWith => _$CompanyDebtReadCopyWithImpl<CompanyDebtRead>(this as CompanyDebtRead, _$identity);
+
+  /// Serializes this CompanyDebtRead to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CompanyDebtRead&&(identical(other.read, read) || other.read == read)&&(identical(other.readAr, readAr) || other.readAr == readAr));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,read,readAr);
+
+@override
+String toString() {
+  return 'CompanyDebtRead(read: $read, readAr: $readAr)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $CompanyDebtReadCopyWith<$Res>  {
+  factory $CompanyDebtReadCopyWith(CompanyDebtRead value, $Res Function(CompanyDebtRead) _then) = _$CompanyDebtReadCopyWithImpl;
+@useResult
+$Res call({
+ String read,@JsonKey(name: 'read_ar') String readAr
+});
+
+
+
+
+}
+/// @nodoc
+class _$CompanyDebtReadCopyWithImpl<$Res>
+    implements $CompanyDebtReadCopyWith<$Res> {
+  _$CompanyDebtReadCopyWithImpl(this._self, this._then);
+
+  final CompanyDebtRead _self;
+  final $Res Function(CompanyDebtRead) _then;
+
+/// Create a copy of CompanyDebtRead
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? read = null,Object? readAr = null,}) {
+  return _then(_self.copyWith(
+read: null == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as String,readAr: null == readAr ? _self.readAr : readAr // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [CompanyDebtRead].
+extension CompanyDebtReadPatterns on CompanyDebtRead {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CompanyDebtRead value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _CompanyDebtRead() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CompanyDebtRead value)  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyDebtRead():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CompanyDebtRead value)?  $default,){
+final _that = this;
+switch (_that) {
+case _CompanyDebtRead() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String read, @JsonKey(name: 'read_ar')  String readAr)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _CompanyDebtRead() when $default != null:
+return $default(_that.read,_that.readAr);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String read, @JsonKey(name: 'read_ar')  String readAr)  $default,) {final _that = this;
+switch (_that) {
+case _CompanyDebtRead():
+return $default(_that.read,_that.readAr);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String read, @JsonKey(name: 'read_ar')  String readAr)?  $default,) {final _that = this;
+switch (_that) {
+case _CompanyDebtRead() when $default != null:
+return $default(_that.read,_that.readAr);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _CompanyDebtRead implements CompanyDebtRead {
+  const _CompanyDebtRead({this.read = '', @JsonKey(name: 'read_ar') this.readAr = ''});
+  factory _CompanyDebtRead.fromJson(Map<String, dynamic> json) => _$CompanyDebtReadFromJson(json);
+
+@override@JsonKey() final  String read;
+@override@JsonKey(name: 'read_ar') final  String readAr;
+
+/// Create a copy of CompanyDebtRead
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CompanyDebtReadCopyWith<_CompanyDebtRead> get copyWith => __$CompanyDebtReadCopyWithImpl<_CompanyDebtRead>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$CompanyDebtReadToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CompanyDebtRead&&(identical(other.read, read) || other.read == read)&&(identical(other.readAr, readAr) || other.readAr == readAr));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,read,readAr);
+
+@override
+String toString() {
+  return 'CompanyDebtRead(read: $read, readAr: $readAr)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CompanyDebtReadCopyWith<$Res> implements $CompanyDebtReadCopyWith<$Res> {
+  factory _$CompanyDebtReadCopyWith(_CompanyDebtRead value, $Res Function(_CompanyDebtRead) _then) = __$CompanyDebtReadCopyWithImpl;
+@override @useResult
+$Res call({
+ String read,@JsonKey(name: 'read_ar') String readAr
+});
+
+
+
+
+}
+/// @nodoc
+class __$CompanyDebtReadCopyWithImpl<$Res>
+    implements _$CompanyDebtReadCopyWith<$Res> {
+  __$CompanyDebtReadCopyWithImpl(this._self, this._then);
+
+  final _CompanyDebtRead _self;
+  final $Res Function(_CompanyDebtRead) _then;
+
+/// Create a copy of CompanyDebtRead
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? read = null,Object? readAr = null,}) {
+  return _then(_CompanyDebtRead(
+read: null == read ? _self.read : read // ignore: cast_nullable_to_non_nullable
+as String,readAr: null == readAr ? _self.readAr : readAr // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$Company {
 
  String get ticker; LocalizedName get name; String? get sector; CompanyMarket? get market;/// Whatever the ingestion source knew about the company beyond price —
 /// market cap, shares outstanding, free float. Deliberately loose: the
 /// fields available differ by provider and a missing one must simply not
 /// render (spec §49).
- Map<String, dynamic>? get profile;@JsonKey(name: 'price_history') List<PricePoint> get priceHistory; CompanyFinancials get financials; List<ResearchLink> get research;
+ Map<String, dynamic>? get profile;@JsonKey(name: 'price_history') List<PricePoint> get priceHistory; CompanyFinancials get financials; List<ResearchLink> get research;/// What the company is doing with its borrowings, when it has any it
+/// filed. Absent for a company that reported none, which is an answer
+/// rather than a gap.
+ CompanyDebt? get debt;
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -662,16 +1574,16 @@ $CompanyCopyWith<Company> get copyWith => _$CompanyCopyWithImpl<Company>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other.profile, profile)&&const DeepCollectionEquality().equals(other.priceHistory, priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other.research, research));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other.profile, profile)&&const DeepCollectionEquality().equals(other.priceHistory, priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other.research, research)&&(identical(other.debt, debt) || other.debt == debt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(profile),const DeepCollectionEquality().hash(priceHistory),financials,const DeepCollectionEquality().hash(research));
+int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(profile),const DeepCollectionEquality().hash(priceHistory),financials,const DeepCollectionEquality().hash(research),debt);
 
 @override
 String toString() {
-  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research)';
+  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt)';
 }
 
 
@@ -682,11 +1594,11 @@ abstract mixin class $CompanyCopyWith<$Res>  {
   factory $CompanyCopyWith(Company value, $Res Function(Company) _then) = _$CompanyCopyWithImpl;
 @useResult
 $Res call({
- String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research
+ String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt
 });
 
 
-$LocalizedNameCopyWith<$Res> get name;$CompanyMarketCopyWith<$Res>? get market;$CompanyFinancialsCopyWith<$Res> get financials;
+$LocalizedNameCopyWith<$Res> get name;$CompanyMarketCopyWith<$Res>? get market;$CompanyFinancialsCopyWith<$Res> get financials;$CompanyDebtCopyWith<$Res>? get debt;
 
 }
 /// @nodoc
@@ -699,7 +1611,7 @@ class _$CompanyCopyWithImpl<$Res>
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,}) {
   return _then(_self.copyWith(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -709,7 +1621,8 @@ as CompanyMarket?,profile: freezed == profile ? _self.profile : profile // ignor
 as Map<String, dynamic>?,priceHistory: null == priceHistory ? _self.priceHistory : priceHistory // ignore: cast_nullable_to_non_nullable
 as List<PricePoint>,financials: null == financials ? _self.financials : financials // ignore: cast_nullable_to_non_nullable
 as CompanyFinancials,research: null == research ? _self.research : research // ignore: cast_nullable_to_non_nullable
-as List<ResearchLink>,
+as List<ResearchLink>,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
+as CompanyDebt?,
   ));
 }
 /// Create a copy of Company
@@ -741,6 +1654,18 @@ $CompanyFinancialsCopyWith<$Res> get financials {
   
   return $CompanyFinancialsCopyWith<$Res>(_self.financials, (value) {
     return _then(_self.copyWith(financials: value));
+  });
+}/// Create a copy of Company
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyDebtCopyWith<$Res>? get debt {
+    if (_self.debt == null) {
+    return null;
+  }
+
+  return $CompanyDebtCopyWith<$Res>(_self.debt!, (value) {
+    return _then(_self.copyWith(debt: value));
   });
 }
 }
@@ -824,10 +1749,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Company() when $default != null:
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
   return orElse();
 
 }
@@ -845,10 +1770,10 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)  $default,) {final _that = this;
 switch (_that) {
 case _Company():
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -865,10 +1790,10 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String ticker,  LocalizedName name,  String? sector,  CompanyMarket? market,  Map<String, dynamic>? profile, @JsonKey(name: 'price_history')  List<PricePoint> priceHistory,  CompanyFinancials financials,  List<ResearchLink> research,  CompanyDebt? debt)?  $default,) {final _that = this;
 switch (_that) {
 case _Company() when $default != null:
-return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research);case _:
+return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,_that.priceHistory,_that.financials,_that.research,_that.debt);case _:
   return null;
 
 }
@@ -880,7 +1805,7 @@ return $default(_that.ticker,_that.name,_that.sector,_that.market,_that.profile,
 @JsonSerializable()
 
 class _Company extends Company {
-  const _Company({required this.ticker, required this.name, this.sector, this.market, final  Map<String, dynamic>? profile, @JsonKey(name: 'price_history') final  List<PricePoint> priceHistory = const <PricePoint>[], this.financials = const CompanyFinancials(), final  List<ResearchLink> research = const <ResearchLink>[]}): _profile = profile,_priceHistory = priceHistory,_research = research,super._();
+  const _Company({required this.ticker, required this.name, this.sector, this.market, final  Map<String, dynamic>? profile, @JsonKey(name: 'price_history') final  List<PricePoint> priceHistory = const <PricePoint>[], this.financials = const CompanyFinancials(), final  List<ResearchLink> research = const <ResearchLink>[], this.debt}): _profile = profile,_priceHistory = priceHistory,_research = research,super._();
   factory _Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
 
 @override final  String ticker;
@@ -919,6 +1844,10 @@ class _Company extends Company {
   return EqualUnmodifiableListView(_research);
 }
 
+/// What the company is doing with its borrowings, when it has any it
+/// filed. Absent for a company that reported none, which is an answer
+/// rather than a gap.
+@override final  CompanyDebt? debt;
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
@@ -933,16 +1862,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other._profile, _profile)&&const DeepCollectionEquality().equals(other._priceHistory, _priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other._research, _research));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Company&&(identical(other.ticker, ticker) || other.ticker == ticker)&&(identical(other.name, name) || other.name == name)&&(identical(other.sector, sector) || other.sector == sector)&&(identical(other.market, market) || other.market == market)&&const DeepCollectionEquality().equals(other._profile, _profile)&&const DeepCollectionEquality().equals(other._priceHistory, _priceHistory)&&(identical(other.financials, financials) || other.financials == financials)&&const DeepCollectionEquality().equals(other._research, _research)&&(identical(other.debt, debt) || other.debt == debt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(_profile),const DeepCollectionEquality().hash(_priceHistory),financials,const DeepCollectionEquality().hash(_research));
+int get hashCode => Object.hash(runtimeType,ticker,name,sector,market,const DeepCollectionEquality().hash(_profile),const DeepCollectionEquality().hash(_priceHistory),financials,const DeepCollectionEquality().hash(_research),debt);
 
 @override
 String toString() {
-  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research)';
+  return 'Company(ticker: $ticker, name: $name, sector: $sector, market: $market, profile: $profile, priceHistory: $priceHistory, financials: $financials, research: $research, debt: $debt)';
 }
 
 
@@ -953,11 +1882,11 @@ abstract mixin class _$CompanyCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   factory _$CompanyCopyWith(_Company value, $Res Function(_Company) _then) = __$CompanyCopyWithImpl;
 @override @useResult
 $Res call({
- String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research
+ String ticker, LocalizedName name, String? sector, CompanyMarket? market, Map<String, dynamic>? profile,@JsonKey(name: 'price_history') List<PricePoint> priceHistory, CompanyFinancials financials, List<ResearchLink> research, CompanyDebt? debt
 });
 
 
-@override $LocalizedNameCopyWith<$Res> get name;@override $CompanyMarketCopyWith<$Res>? get market;@override $CompanyFinancialsCopyWith<$Res> get financials;
+@override $LocalizedNameCopyWith<$Res> get name;@override $CompanyMarketCopyWith<$Res>? get market;@override $CompanyFinancialsCopyWith<$Res> get financials;@override $CompanyDebtCopyWith<$Res>? get debt;
 
 }
 /// @nodoc
@@ -970,7 +1899,7 @@ class __$CompanyCopyWithImpl<$Res>
 
 /// Create a copy of Company
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? ticker = null,Object? name = null,Object? sector = freezed,Object? market = freezed,Object? profile = freezed,Object? priceHistory = null,Object? financials = null,Object? research = null,Object? debt = freezed,}) {
   return _then(_Company(
 ticker: null == ticker ? _self.ticker : ticker // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -980,7 +1909,8 @@ as CompanyMarket?,profile: freezed == profile ? _self._profile : profile // igno
 as Map<String, dynamic>?,priceHistory: null == priceHistory ? _self._priceHistory : priceHistory // ignore: cast_nullable_to_non_nullable
 as List<PricePoint>,financials: null == financials ? _self.financials : financials // ignore: cast_nullable_to_non_nullable
 as CompanyFinancials,research: null == research ? _self._research : research // ignore: cast_nullable_to_non_nullable
-as List<ResearchLink>,
+as List<ResearchLink>,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
+as CompanyDebt?,
   ));
 }
 
@@ -1013,6 +1943,18 @@ $CompanyFinancialsCopyWith<$Res> get financials {
   
   return $CompanyFinancialsCopyWith<$Res>(_self.financials, (value) {
     return _then(_self.copyWith(financials: value));
+  });
+}/// Create a copy of Company
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CompanyDebtCopyWith<$Res>? get debt {
+    if (_self.debt == null) {
+    return null;
+  }
+
+  return $CompanyDebtCopyWith<$Res>(_self.debt!, (value) {
+    return _then(_self.copyWith(debt: value));
   });
 }
 }
@@ -2122,7 +3064,18 @@ as List<FinancialPeriod>,
 mixin _$FinancialPeriod {
 
 /// Display label, e.g. "FY25" or "Q2 FY25".
- String get period; double? get revenue;@JsonKey(name: 'gross_profit') double? get grossProfit;@JsonKey(name: 'operating_income') double? get operatingIncome;@JsonKey(name: 'net_income') double? get netIncome; double? get assets; double? get liabilities; double? get equity; double? get cash; double? get debt;@JsonKey(name: 'operating_cash_flow') double? get operatingCashFlow;/// The rest of the cash flow statement, and what was paid out of it.
+ String get period; double? get revenue;@JsonKey(name: 'gross_profit') double? get grossProfit;@JsonKey(name: 'operating_income') double? get operatingIncome;@JsonKey(name: 'net_income') double? get netIncome; double? get assets; double? get liabilities; double? get equity; double? get cash; double? get debt;/// Borrowings by when they fall due, and what carrying them cost.
+///
+/// `debt` is the total, and on its own it does not answer the question a
+/// reader actually has. Money owed inside a year has to be found or rolled
+/// inside a year; money owed beyond one does not. `financeCost` is the
+/// period's own charge, which is what turns a balance into a burden — or
+/// shows that it isn't one.
+///
+/// All three are read from the issuer's filed statement, where the
+/// borrowing lines are listed separately and summed; none is derived from
+/// the liabilities total, which is a different and much larger thing.
+@JsonKey(name: 'short_term_debt') double? get shortTermDebt;@JsonKey(name: 'long_term_debt') double? get longTermDebt;@JsonKey(name: 'finance_cost') double? get financeCost;@JsonKey(name: 'operating_cash_flow') double? get operatingCashFlow;/// The rest of the cash flow statement, and what was paid out of it.
 ///
 /// Published by the same source as the line above and read from the same
 /// filing; five of Mubasher's ten financial rows were being collected and
@@ -2148,16 +3101,16 @@ $FinancialPeriodCopyWith<FinancialPeriod> get copyWith => _$FinancialPeriodCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.investingCashFlow, investingCashFlow) || other.investingCashFlow == investingCashFlow)&&(identical(other.financingCashFlow, financingCashFlow) || other.financingCashFlow == financingCashFlow)&&(identical(other.netChangeInCash, netChangeInCash) || other.netChangeInCash == netChangeInCash)&&(identical(other.dividendsPaid, dividendsPaid) || other.dividendsPaid == dividendsPaid)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.shortTermDebt, shortTermDebt) || other.shortTermDebt == shortTermDebt)&&(identical(other.longTermDebt, longTermDebt) || other.longTermDebt == longTermDebt)&&(identical(other.financeCost, financeCost) || other.financeCost == financeCost)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.investingCashFlow, investingCashFlow) || other.investingCashFlow == investingCashFlow)&&(identical(other.financingCashFlow, financingCashFlow) || other.financingCashFlow == financingCashFlow)&&(identical(other.netChangeInCash, netChangeInCash) || other.netChangeInCash == netChangeInCash)&&(identical(other.dividendsPaid, dividendsPaid) || other.dividendsPaid == dividendsPaid)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,investingCashFlow,financingCashFlow,netChangeInCash,dividendsPaid,capex,freeCashFlow,basis,source,filedOn]);
+int get hashCode => Object.hashAll([runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,shortTermDebt,longTermDebt,financeCost,operatingCashFlow,investingCashFlow,financingCashFlow,netChangeInCash,dividendsPaid,capex,freeCashFlow,basis,source,filedOn]);
 
 @override
 String toString() {
-  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, investingCashFlow: $investingCashFlow, financingCashFlow: $financingCashFlow, netChangeInCash: $netChangeInCash, dividendsPaid: $dividendsPaid, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
+  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, shortTermDebt: $shortTermDebt, longTermDebt: $longTermDebt, financeCost: $financeCost, operatingCashFlow: $operatingCashFlow, investingCashFlow: $investingCashFlow, financingCashFlow: $financingCashFlow, netChangeInCash: $netChangeInCash, dividendsPaid: $dividendsPaid, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
 }
 
 
@@ -2168,7 +3121,7 @@ abstract mixin class $FinancialPeriodCopyWith<$Res>  {
   factory $FinancialPeriodCopyWith(FinancialPeriod value, $Res Function(FinancialPeriod) _then) = _$FinancialPeriodCopyWithImpl;
 @useResult
 $Res call({
- String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,@JsonKey(name: 'investing_cash_flow') double? investingCashFlow,@JsonKey(name: 'financing_cash_flow') double? financingCashFlow,@JsonKey(name: 'net_change_in_cash') double? netChangeInCash,@JsonKey(name: 'dividends_paid') double? dividendsPaid, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
+ String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'short_term_debt') double? shortTermDebt,@JsonKey(name: 'long_term_debt') double? longTermDebt,@JsonKey(name: 'finance_cost') double? financeCost,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,@JsonKey(name: 'investing_cash_flow') double? investingCashFlow,@JsonKey(name: 'financing_cash_flow') double? financingCashFlow,@JsonKey(name: 'net_change_in_cash') double? netChangeInCash,@JsonKey(name: 'dividends_paid') double? dividendsPaid, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
 });
 
 
@@ -2185,7 +3138,7 @@ class _$FinancialPeriodCopyWithImpl<$Res>
 
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? investingCashFlow = freezed,Object? financingCashFlow = freezed,Object? netChangeInCash = freezed,Object? dividendsPaid = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? shortTermDebt = freezed,Object? longTermDebt = freezed,Object? financeCost = freezed,Object? operatingCashFlow = freezed,Object? investingCashFlow = freezed,Object? financingCashFlow = freezed,Object? netChangeInCash = freezed,Object? dividendsPaid = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
   return _then(_self.copyWith(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
 as String,revenue: freezed == revenue ? _self.revenue : revenue // ignore: cast_nullable_to_non_nullable
@@ -2197,6 +3150,9 @@ as double?,liabilities: freezed == liabilities ? _self.liabilities : liabilities
 as double?,equity: freezed == equity ? _self.equity : equity // ignore: cast_nullable_to_non_nullable
 as double?,cash: freezed == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
 as double?,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
+as double?,shortTermDebt: freezed == shortTermDebt ? _self.shortTermDebt : shortTermDebt // ignore: cast_nullable_to_non_nullable
+as double?,longTermDebt: freezed == longTermDebt ? _self.longTermDebt : longTermDebt // ignore: cast_nullable_to_non_nullable
+as double?,financeCost: freezed == financeCost ? _self.financeCost : financeCost // ignore: cast_nullable_to_non_nullable
 as double?,operatingCashFlow: freezed == operatingCashFlow ? _self.operatingCashFlow : operatingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,investingCashFlow: freezed == investingCashFlow ? _self.investingCashFlow : investingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,financingCashFlow: freezed == financingCashFlow ? _self.financingCashFlow : financingCashFlow // ignore: cast_nullable_to_non_nullable
@@ -2292,10 +3248,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'short_term_debt')  double? shortTermDebt, @JsonKey(name: 'long_term_debt')  double? longTermDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FinancialPeriod() when $default != null:
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.shortTermDebt,_that.longTermDebt,_that.financeCost,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   return orElse();
 
 }
@@ -2313,10 +3269,10 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'short_term_debt')  double? shortTermDebt, @JsonKey(name: 'long_term_debt')  double? longTermDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)  $default,) {final _that = this;
 switch (_that) {
 case _FinancialPeriod():
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.shortTermDebt,_that.longTermDebt,_that.financeCost,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2333,10 +3289,10 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String period,  double? revenue, @JsonKey(name: 'gross_profit')  double? grossProfit, @JsonKey(name: 'operating_income')  double? operatingIncome, @JsonKey(name: 'net_income')  double? netIncome,  double? assets,  double? liabilities,  double? equity,  double? cash,  double? debt, @JsonKey(name: 'short_term_debt')  double? shortTermDebt, @JsonKey(name: 'long_term_debt')  double? longTermDebt, @JsonKey(name: 'finance_cost')  double? financeCost, @JsonKey(name: 'operating_cash_flow')  double? operatingCashFlow, @JsonKey(name: 'investing_cash_flow')  double? investingCashFlow, @JsonKey(name: 'financing_cash_flow')  double? financingCashFlow, @JsonKey(name: 'net_change_in_cash')  double? netChangeInCash, @JsonKey(name: 'dividends_paid')  double? dividendsPaid,  double? capex, @JsonKey(name: 'free_cash_flow')  double? freeCashFlow,  String? basis,  String? source, @JsonKey(name: 'filed_on')  String? filedOn)?  $default,) {final _that = this;
 switch (_that) {
 case _FinancialPeriod() when $default != null:
-return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
+return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingIncome,_that.netIncome,_that.assets,_that.liabilities,_that.equity,_that.cash,_that.debt,_that.shortTermDebt,_that.longTermDebt,_that.financeCost,_that.operatingCashFlow,_that.investingCashFlow,_that.financingCashFlow,_that.netChangeInCash,_that.dividendsPaid,_that.capex,_that.freeCashFlow,_that.basis,_that.source,_that.filedOn);case _:
   return null;
 
 }
@@ -2348,7 +3304,7 @@ return $default(_that.period,_that.revenue,_that.grossProfit,_that.operatingInco
 @JsonSerializable()
 
 class _FinancialPeriod extends FinancialPeriod {
-  const _FinancialPeriod({required this.period, this.revenue, @JsonKey(name: 'gross_profit') this.grossProfit, @JsonKey(name: 'operating_income') this.operatingIncome, @JsonKey(name: 'net_income') this.netIncome, this.assets, this.liabilities, this.equity, this.cash, this.debt, @JsonKey(name: 'operating_cash_flow') this.operatingCashFlow, @JsonKey(name: 'investing_cash_flow') this.investingCashFlow, @JsonKey(name: 'financing_cash_flow') this.financingCashFlow, @JsonKey(name: 'net_change_in_cash') this.netChangeInCash, @JsonKey(name: 'dividends_paid') this.dividendsPaid, this.capex, @JsonKey(name: 'free_cash_flow') this.freeCashFlow, this.basis, this.source, @JsonKey(name: 'filed_on') this.filedOn}): super._();
+  const _FinancialPeriod({required this.period, this.revenue, @JsonKey(name: 'gross_profit') this.grossProfit, @JsonKey(name: 'operating_income') this.operatingIncome, @JsonKey(name: 'net_income') this.netIncome, this.assets, this.liabilities, this.equity, this.cash, this.debt, @JsonKey(name: 'short_term_debt') this.shortTermDebt, @JsonKey(name: 'long_term_debt') this.longTermDebt, @JsonKey(name: 'finance_cost') this.financeCost, @JsonKey(name: 'operating_cash_flow') this.operatingCashFlow, @JsonKey(name: 'investing_cash_flow') this.investingCashFlow, @JsonKey(name: 'financing_cash_flow') this.financingCashFlow, @JsonKey(name: 'net_change_in_cash') this.netChangeInCash, @JsonKey(name: 'dividends_paid') this.dividendsPaid, this.capex, @JsonKey(name: 'free_cash_flow') this.freeCashFlow, this.basis, this.source, @JsonKey(name: 'filed_on') this.filedOn}): super._();
   factory _FinancialPeriod.fromJson(Map<String, dynamic> json) => _$FinancialPeriodFromJson(json);
 
 /// Display label, e.g. "FY25" or "Q2 FY25".
@@ -2362,6 +3318,20 @@ class _FinancialPeriod extends FinancialPeriod {
 @override final  double? equity;
 @override final  double? cash;
 @override final  double? debt;
+/// Borrowings by when they fall due, and what carrying them cost.
+///
+/// `debt` is the total, and on its own it does not answer the question a
+/// reader actually has. Money owed inside a year has to be found or rolled
+/// inside a year; money owed beyond one does not. `financeCost` is the
+/// period's own charge, which is what turns a balance into a burden — or
+/// shows that it isn't one.
+///
+/// All three are read from the issuer's filed statement, where the
+/// borrowing lines are listed separately and summed; none is derived from
+/// the liabilities total, which is a different and much larger thing.
+@override@JsonKey(name: 'short_term_debt') final  double? shortTermDebt;
+@override@JsonKey(name: 'long_term_debt') final  double? longTermDebt;
+@override@JsonKey(name: 'finance_cost') final  double? financeCost;
 @override@JsonKey(name: 'operating_cash_flow') final  double? operatingCashFlow;
 /// The rest of the cash flow statement, and what was paid out of it.
 ///
@@ -2399,16 +3369,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.investingCashFlow, investingCashFlow) || other.investingCashFlow == investingCashFlow)&&(identical(other.financingCashFlow, financingCashFlow) || other.financingCashFlow == financingCashFlow)&&(identical(other.netChangeInCash, netChangeInCash) || other.netChangeInCash == netChangeInCash)&&(identical(other.dividendsPaid, dividendsPaid) || other.dividendsPaid == dividendsPaid)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinancialPeriod&&(identical(other.period, period) || other.period == period)&&(identical(other.revenue, revenue) || other.revenue == revenue)&&(identical(other.grossProfit, grossProfit) || other.grossProfit == grossProfit)&&(identical(other.operatingIncome, operatingIncome) || other.operatingIncome == operatingIncome)&&(identical(other.netIncome, netIncome) || other.netIncome == netIncome)&&(identical(other.assets, assets) || other.assets == assets)&&(identical(other.liabilities, liabilities) || other.liabilities == liabilities)&&(identical(other.equity, equity) || other.equity == equity)&&(identical(other.cash, cash) || other.cash == cash)&&(identical(other.debt, debt) || other.debt == debt)&&(identical(other.shortTermDebt, shortTermDebt) || other.shortTermDebt == shortTermDebt)&&(identical(other.longTermDebt, longTermDebt) || other.longTermDebt == longTermDebt)&&(identical(other.financeCost, financeCost) || other.financeCost == financeCost)&&(identical(other.operatingCashFlow, operatingCashFlow) || other.operatingCashFlow == operatingCashFlow)&&(identical(other.investingCashFlow, investingCashFlow) || other.investingCashFlow == investingCashFlow)&&(identical(other.financingCashFlow, financingCashFlow) || other.financingCashFlow == financingCashFlow)&&(identical(other.netChangeInCash, netChangeInCash) || other.netChangeInCash == netChangeInCash)&&(identical(other.dividendsPaid, dividendsPaid) || other.dividendsPaid == dividendsPaid)&&(identical(other.capex, capex) || other.capex == capex)&&(identical(other.freeCashFlow, freeCashFlow) || other.freeCashFlow == freeCashFlow)&&(identical(other.basis, basis) || other.basis == basis)&&(identical(other.source, source) || other.source == source)&&(identical(other.filedOn, filedOn) || other.filedOn == filedOn));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,operatingCashFlow,investingCashFlow,financingCashFlow,netChangeInCash,dividendsPaid,capex,freeCashFlow,basis,source,filedOn]);
+int get hashCode => Object.hashAll([runtimeType,period,revenue,grossProfit,operatingIncome,netIncome,assets,liabilities,equity,cash,debt,shortTermDebt,longTermDebt,financeCost,operatingCashFlow,investingCashFlow,financingCashFlow,netChangeInCash,dividendsPaid,capex,freeCashFlow,basis,source,filedOn]);
 
 @override
 String toString() {
-  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, operatingCashFlow: $operatingCashFlow, investingCashFlow: $investingCashFlow, financingCashFlow: $financingCashFlow, netChangeInCash: $netChangeInCash, dividendsPaid: $dividendsPaid, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
+  return 'FinancialPeriod(period: $period, revenue: $revenue, grossProfit: $grossProfit, operatingIncome: $operatingIncome, netIncome: $netIncome, assets: $assets, liabilities: $liabilities, equity: $equity, cash: $cash, debt: $debt, shortTermDebt: $shortTermDebt, longTermDebt: $longTermDebt, financeCost: $financeCost, operatingCashFlow: $operatingCashFlow, investingCashFlow: $investingCashFlow, financingCashFlow: $financingCashFlow, netChangeInCash: $netChangeInCash, dividendsPaid: $dividendsPaid, capex: $capex, freeCashFlow: $freeCashFlow, basis: $basis, source: $source, filedOn: $filedOn)';
 }
 
 
@@ -2419,7 +3389,7 @@ abstract mixin class _$FinancialPeriodCopyWith<$Res> implements $FinancialPeriod
   factory _$FinancialPeriodCopyWith(_FinancialPeriod value, $Res Function(_FinancialPeriod) _then) = __$FinancialPeriodCopyWithImpl;
 @override @useResult
 $Res call({
- String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,@JsonKey(name: 'investing_cash_flow') double? investingCashFlow,@JsonKey(name: 'financing_cash_flow') double? financingCashFlow,@JsonKey(name: 'net_change_in_cash') double? netChangeInCash,@JsonKey(name: 'dividends_paid') double? dividendsPaid, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
+ String period, double? revenue,@JsonKey(name: 'gross_profit') double? grossProfit,@JsonKey(name: 'operating_income') double? operatingIncome,@JsonKey(name: 'net_income') double? netIncome, double? assets, double? liabilities, double? equity, double? cash, double? debt,@JsonKey(name: 'short_term_debt') double? shortTermDebt,@JsonKey(name: 'long_term_debt') double? longTermDebt,@JsonKey(name: 'finance_cost') double? financeCost,@JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,@JsonKey(name: 'investing_cash_flow') double? investingCashFlow,@JsonKey(name: 'financing_cash_flow') double? financingCashFlow,@JsonKey(name: 'net_change_in_cash') double? netChangeInCash,@JsonKey(name: 'dividends_paid') double? dividendsPaid, double? capex,@JsonKey(name: 'free_cash_flow') double? freeCashFlow, String? basis, String? source,@JsonKey(name: 'filed_on') String? filedOn
 });
 
 
@@ -2436,7 +3406,7 @@ class __$FinancialPeriodCopyWithImpl<$Res>
 
 /// Create a copy of FinancialPeriod
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? operatingCashFlow = freezed,Object? investingCashFlow = freezed,Object? financingCashFlow = freezed,Object? netChangeInCash = freezed,Object? dividendsPaid = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? period = null,Object? revenue = freezed,Object? grossProfit = freezed,Object? operatingIncome = freezed,Object? netIncome = freezed,Object? assets = freezed,Object? liabilities = freezed,Object? equity = freezed,Object? cash = freezed,Object? debt = freezed,Object? shortTermDebt = freezed,Object? longTermDebt = freezed,Object? financeCost = freezed,Object? operatingCashFlow = freezed,Object? investingCashFlow = freezed,Object? financingCashFlow = freezed,Object? netChangeInCash = freezed,Object? dividendsPaid = freezed,Object? capex = freezed,Object? freeCashFlow = freezed,Object? basis = freezed,Object? source = freezed,Object? filedOn = freezed,}) {
   return _then(_FinancialPeriod(
 period: null == period ? _self.period : period // ignore: cast_nullable_to_non_nullable
 as String,revenue: freezed == revenue ? _self.revenue : revenue // ignore: cast_nullable_to_non_nullable
@@ -2448,6 +3418,9 @@ as double?,liabilities: freezed == liabilities ? _self.liabilities : liabilities
 as double?,equity: freezed == equity ? _self.equity : equity // ignore: cast_nullable_to_non_nullable
 as double?,cash: freezed == cash ? _self.cash : cash // ignore: cast_nullable_to_non_nullable
 as double?,debt: freezed == debt ? _self.debt : debt // ignore: cast_nullable_to_non_nullable
+as double?,shortTermDebt: freezed == shortTermDebt ? _self.shortTermDebt : shortTermDebt // ignore: cast_nullable_to_non_nullable
+as double?,longTermDebt: freezed == longTermDebt ? _self.longTermDebt : longTermDebt // ignore: cast_nullable_to_non_nullable
+as double?,financeCost: freezed == financeCost ? _self.financeCost : financeCost // ignore: cast_nullable_to_non_nullable
 as double?,operatingCashFlow: freezed == operatingCashFlow ? _self.operatingCashFlow : operatingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,investingCashFlow: freezed == investingCashFlow ? _self.investingCashFlow : investingCashFlow // ignore: cast_nullable_to_non_nullable
 as double?,financingCashFlow: freezed == financingCashFlow ? _self.financingCashFlow : financingCashFlow // ignore: cast_nullable_to_non_nullable

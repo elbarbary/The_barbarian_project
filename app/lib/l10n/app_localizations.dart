@@ -5233,6 +5233,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.'**
   String get revOrientAssets;
+
+  /// No description provided for @debtTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'What it does with its borrowings'**
+  String get debtTitle;
+
+  /// No description provided for @debtTitleFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'How it funds itself'**
+  String get debtTitleFinance;
+
+  /// No description provided for @debtAsFiled.
+  ///
+  /// In en, this message translates to:
+  /// **'As filed for {period}'**
+  String debtAsFiled(String period);
+
+  /// No description provided for @debtBorrowings.
+  ///
+  /// In en, this message translates to:
+  /// **'Borrowings'**
+  String get debtBorrowings;
+
+  /// No description provided for @debtDueWithinYear.
+  ///
+  /// In en, this message translates to:
+  /// **'Falls due within a year'**
+  String get debtDueWithinYear;
+
+  /// No description provided for @debtDueLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Falls due later'**
+  String get debtDueLater;
+
+  /// No description provided for @debtCashHeld.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash held'**
+  String get debtCashHeld;
+
+  /// No description provided for @debtNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Borrowings net of cash'**
+  String get debtNet;
+
+  /// No description provided for @debtNetCash.
+  ///
+  /// In en, this message translates to:
+  /// **'It holds more cash than it owes'**
+  String get debtNetCash;
+
+  /// No description provided for @debtCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost over the period'**
+  String get debtCost;
+
+  /// No description provided for @debtCoverLine.
+  ///
+  /// In en, this message translates to:
+  /// **'Operating profit was {times} times that cost'**
+  String debtCoverLine(String times);
+
+  /// No description provided for @debtCoverUnder.
+  ///
+  /// In en, this message translates to:
+  /// **'That cost was more than the operating profit for the period'**
+  String get debtCoverUnder;
+
+  /// No description provided for @debtUpFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher than the same period a year earlier'**
+  String get debtUpFrom;
+
+  /// No description provided for @debtDownFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower than the same period a year earlier'**
+  String get debtDownFrom;
+
+  /// No description provided for @debtFlatFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'About the same as a year earlier'**
+  String get debtFlatFrom;
+
+  /// No description provided for @debtWhatMoved.
+  ///
+  /// In en, this message translates to:
+  /// **'What moved'**
+  String get debtWhatMoved;
+
+  /// No description provided for @debtPatternRaisedInvested.
+  ///
+  /// In en, this message translates to:
+  /// **'It raised money and spent on assets over the same period.'**
+  String get debtPatternRaisedInvested;
+
+  /// No description provided for @debtPatternRaisedShortfall.
+  ///
+  /// In en, this message translates to:
+  /// **'It raised money while its operations were using cash rather than producing it.'**
+  String get debtPatternRaisedShortfall;
+
+  /// No description provided for @debtPatternRaisedHeld.
+  ///
+  /// In en, this message translates to:
+  /// **'It raised money without spending it on assets.'**
+  String get debtPatternRaisedHeld;
+
+  /// No description provided for @debtPatternRepaidFromOps.
+  ///
+  /// In en, this message translates to:
+  /// **'It repaid or returned money, and its operations produced cash over the same period.'**
+  String get debtPatternRepaidFromOps;
+
+  /// No description provided for @debtPatternRepaidNoOps.
+  ///
+  /// In en, this message translates to:
+  /// **'It repaid or returned money while its operations were not producing cash.'**
+  String get debtPatternRepaidNoOps;
+
+  /// No description provided for @debtPatternFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'Its borrowings barely moved.'**
+  String get debtPatternFlat;
+
+  /// No description provided for @debtPatternFundingRaised.
+  ///
+  /// In en, this message translates to:
+  /// **'It took in more funding than it repaid.'**
+  String get debtPatternFundingRaised;
+
+  /// No description provided for @debtPatternFundingRepaid.
+  ///
+  /// In en, this message translates to:
+  /// **'It repaid more funding than it took in.'**
+  String get debtPatternFundingRepaid;
+
+  /// No description provided for @debtFinanceNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a lender, so borrowing is the raw material of the business rather than a load on it. Customer deposits are not counted here.'**
+  String get debtFinanceNote;
+
+  /// No description provided for @debtFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'Read from the borrowing lines of the company\'s own filed statement, not from its total liabilities. ESTHMR does not rate credit or say whether this position is sound.'**
+  String get debtFootnote;
+
+  /// No description provided for @debtNoneFiled.
+  ///
+  /// In en, this message translates to:
+  /// **'This company\'s last filed statement states no borrowings.'**
+  String get debtNoneFiled;
 }
 
 class _AppLocalizationsDelegate

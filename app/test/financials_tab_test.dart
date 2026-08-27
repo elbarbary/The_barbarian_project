@@ -168,6 +168,65 @@ void main() {
     }
   });
 
+  group('what the company does with its borrowings', () {
+    testWidgets('it shows the borrowings, when they fall due, and what they cost', (
+      tester,
+    ) async {
+      await openFinancials(tester, 'KORA');
+
+      // The heading, and the figures a holder actually asked for. Every one is
+      // read off the borrowing lines of the filed statement.
+      expect(find.textContaining('borrowings'), findsWidgets);
+      expect(find.text('Falls due within a year'), findsOneWidget);
+      expect(find.text('Cost over the period'), findsOneWidget);
+    });
+
+    testWidgets('§8 it describes the position without grading it', (
+      tester,
+    ) async {
+      await openFinancials(tester, 'KORA');
+
+      // The one place a model writes prose about a named company's solvency.
+      // A credit opinion is exactly what this publisher is not licensed to
+      // give, so none of these may reach the screen.
+      for (final verdict in [
+        'risky',
+        'safe',
+        'healthy',
+        'unsustainable',
+        'overleveraged',
+        'comfortable',
+        'strong balance sheet',
+      ]) {
+        expect(
+          find.textContaining(RegExp(verdict, caseSensitive: false)),
+          findsNothing,
+          reason: 'the debt block must not call the position "$verdict"',
+        );
+      }
+    });
+
+    test('the block is built from borrowings, never from total liabilities', () {
+      final company = Company.fromJson(
+        readFixtureObjectSync('companies/KORA.json'),
+      );
+      final debt = company.debt;
+      expect(debt, isNotNull);
+      final period = company.financials.quarterly.firstWhere(
+        (p) => p.period == debt!.period,
+      );
+      // The liabilities total carries payables, provisions and advances that
+      // nobody lent the company, so it must never be the borrowings figure.
+      expect(debt!.borrowings, isNot(equals(period.liabilities)));
+      expect(debt.borrowings, lessThan(period.liabilities!));
+      // And the halves the balance sheet actually lists add up to it.
+      expect(
+        (debt.shortTerm ?? 0) + (debt.longTerm ?? 0),
+        closeTo(debt.borrowings, 0.01),
+      );
+    });
+  });
+
   group('periods order by time, not by the label string they are stored in', () {
     FinancialPeriod p(String label) => FinancialPeriod(period: label);
 

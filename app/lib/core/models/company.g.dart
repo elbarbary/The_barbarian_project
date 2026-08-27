@@ -64,6 +64,75 @@ Map<String, dynamic> _$CompanySummaryToJson(_CompanySummary instance) =>
       'median_volume_20d': instance.medianVolume20d,
     };
 
+_CompanyDebt _$CompanyDebtFromJson(Map<String, dynamic> json) => _CompanyDebt(
+  period: json['period'] as String? ?? '',
+  asOf: json['as_of'] as String?,
+  filingId: json['filing_id'] as String?,
+  source: json['source'] as String?,
+  frame: json['frame'] as String? ?? 'operating',
+  borrowings: (json['borrowings'] as num?)?.toDouble() ?? 0,
+  shortTerm: (json['short_term'] as num?)?.toDouble(),
+  longTerm: (json['long_term'] as num?)?.toDouble(),
+  cash: (json['cash'] as num?)?.toDouble(),
+  netDebt: (json['net_debt'] as num?)?.toDouble(),
+  financeCost: (json['finance_cost'] as num?)?.toDouble(),
+  dueWithinYear: (json['due_within_year'] as num?)?.toDouble(),
+  cover: (json['cover'] as num?)?.toDouble(),
+  gearing: (json['gearing'] as num?)?.toDouble(),
+  pattern: json['pattern'] as String?,
+  change: json['change'] == null
+      ? null
+      : DebtChange.fromJson(json['change'] as Map<String, dynamic>),
+  read: json['read'] == null
+      ? null
+      : CompanyDebtRead.fromJson(json['read'] as Map<String, dynamic>),
+);
+
+Map<String, dynamic> _$CompanyDebtToJson(_CompanyDebt instance) =>
+    <String, dynamic>{
+      'period': instance.period,
+      'as_of': instance.asOf,
+      'filing_id': instance.filingId,
+      'source': instance.source,
+      'frame': instance.frame,
+      'borrowings': instance.borrowings,
+      'short_term': instance.shortTerm,
+      'long_term': instance.longTerm,
+      'cash': instance.cash,
+      'net_debt': instance.netDebt,
+      'finance_cost': instance.financeCost,
+      'due_within_year': instance.dueWithinYear,
+      'cover': instance.cover,
+      'gearing': instance.gearing,
+      'pattern': instance.pattern,
+      'change': instance.change,
+      'read': instance.read,
+    };
+
+_DebtChange _$DebtChangeFromJson(Map<String, dynamic> json) => _DebtChange(
+  period: json['period'] as String? ?? '',
+  borrowings: (json['borrowings'] as num?)?.toDouble() ?? 0,
+  delta: (json['delta'] as num?)?.toDouble() ?? 0,
+  direction: json['direction'] as String? ?? '',
+);
+
+Map<String, dynamic> _$DebtChangeToJson(_DebtChange instance) =>
+    <String, dynamic>{
+      'period': instance.period,
+      'borrowings': instance.borrowings,
+      'delta': instance.delta,
+      'direction': instance.direction,
+    };
+
+_CompanyDebtRead _$CompanyDebtReadFromJson(Map<String, dynamic> json) =>
+    _CompanyDebtRead(
+      read: json['read'] as String? ?? '',
+      readAr: json['read_ar'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$CompanyDebtReadToJson(_CompanyDebtRead instance) =>
+    <String, dynamic>{'read': instance.read, 'read_ar': instance.readAr};
+
 _Company _$CompanyFromJson(Map<String, dynamic> json) => _Company(
   ticker: json['ticker'] as String,
   name: LocalizedName.fromJson(json['name'] as Map<String, dynamic>),
@@ -85,6 +154,9 @@ _Company _$CompanyFromJson(Map<String, dynamic> json) => _Company(
           ?.map((e) => ResearchLink.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <ResearchLink>[],
+  debt: json['debt'] == null
+      ? null
+      : CompanyDebt.fromJson(json['debt'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$CompanyToJson(_Company instance) => <String, dynamic>{
@@ -96,6 +168,7 @@ Map<String, dynamic> _$CompanyToJson(_Company instance) => <String, dynamic>{
   'price_history': instance.priceHistory,
   'financials': instance.financials,
   'research': instance.research,
+  'debt': instance.debt,
 };
 
 _LocalizedName _$LocalizedNameFromJson(Map<String, dynamic> json) =>
@@ -175,6 +248,9 @@ _FinancialPeriod _$FinancialPeriodFromJson(Map<String, dynamic> json) =>
       equity: (json['equity'] as num?)?.toDouble(),
       cash: (json['cash'] as num?)?.toDouble(),
       debt: (json['debt'] as num?)?.toDouble(),
+      shortTermDebt: (json['short_term_debt'] as num?)?.toDouble(),
+      longTermDebt: (json['long_term_debt'] as num?)?.toDouble(),
+      financeCost: (json['finance_cost'] as num?)?.toDouble(),
       operatingCashFlow: (json['operating_cash_flow'] as num?)?.toDouble(),
       investingCashFlow: (json['investing_cash_flow'] as num?)?.toDouble(),
       financingCashFlow: (json['financing_cash_flow'] as num?)?.toDouble(),
@@ -199,6 +275,9 @@ Map<String, dynamic> _$FinancialPeriodToJson(_FinancialPeriod instance) =>
       'equity': instance.equity,
       'cash': instance.cash,
       'debt': instance.debt,
+      'short_term_debt': instance.shortTermDebt,
+      'long_term_debt': instance.longTermDebt,
+      'finance_cost': instance.financeCost,
       'operating_cash_flow': instance.operatingCashFlow,
       'investing_cash_flow': instance.investingCashFlow,
       'financing_cash_flow': instance.financingCashFlow,

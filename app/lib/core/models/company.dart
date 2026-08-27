@@ -177,6 +177,76 @@ abstract class CompanySummary with _$CompanySummary {
   }
 }
 
+/// The borrowing picture for the last period a company filed one.
+///
+/// Computed by `build_debt.py` from the borrowing lines on the issuer's own
+/// filed balance sheet — never from the liabilities total, which also carries
+/// payables, provisions and customer advances that nobody lent the company.
+///
+/// `read` is a vetted sentence written at build time; it is refused if it
+/// advises, quotes a figure, or grades the position, because this app is not
+/// licensed to issue a credit opinion (§8).
+@freezed
+abstract class CompanyDebt with _$CompanyDebt {
+  const factory CompanyDebt({
+    @Default('') String period,
+    @JsonKey(name: 'as_of') String? asOf,
+    @JsonKey(name: 'filing_id') String? filingId,
+    String? source,
+
+    /// `finance` for a bank or lender, where borrowing funds the book it lends
+    /// out of, and `operating` for everybody else, where it has to be repaid
+    /// out of what the business earns. The same figures, a different question.
+    @Default('operating') String frame,
+    @Default(0) double borrowings,
+    @JsonKey(name: 'short_term') double? shortTerm,
+    @JsonKey(name: 'long_term') double? longTerm,
+    double? cash,
+    @JsonKey(name: 'net_debt') double? netDebt,
+    @JsonKey(name: 'finance_cost') double? financeCost,
+
+    /// Share of borrowings falling due inside a year, 0-1.
+    @JsonKey(name: 'due_within_year') double? dueWithinYear,
+
+    /// Operating profit divided by what the borrowings cost for the same
+    /// period, and borrowings divided by equity.
+    double? cover,
+    double? gearing,
+    String? pattern,
+    DebtChange? change,
+    CompanyDebtRead? read,
+  }) = _CompanyDebt;
+
+  const CompanyDebt._();
+
+  factory CompanyDebt.fromJson(Map<String, dynamic> json) =>
+      _$CompanyDebtFromJson(json);
+}
+
+@freezed
+abstract class DebtChange with _$DebtChange {
+  const factory DebtChange({
+    @Default('') String period,
+    @Default(0) double borrowings,
+    @Default(0) double delta,
+    @Default('') String direction,
+  }) = _DebtChange;
+
+  factory DebtChange.fromJson(Map<String, dynamic> json) =>
+      _$DebtChangeFromJson(json);
+}
+
+@freezed
+abstract class CompanyDebtRead with _$CompanyDebtRead {
+  const factory CompanyDebtRead({
+    @Default('') String read,
+    @JsonKey(name: 'read_ar') @Default('') String readAr,
+  }) = _CompanyDebtRead;
+
+  factory CompanyDebtRead.fromJson(Map<String, dynamic> json) =>
+      _$CompanyDebtReadFromJson(json);
+}
+
 /// The per-company document (spec §19).
 @freezed
 abstract class Company with _$Company {
@@ -196,6 +266,11 @@ abstract class Company with _$Company {
     List<PricePoint> priceHistory,
     @Default(CompanyFinancials()) CompanyFinancials financials,
     @Default(<ResearchLink>[]) List<ResearchLink> research,
+
+    /// What the company is doing with its borrowings, when it has any it
+    /// filed. Absent for a company that reported none, which is an answer
+    /// rather than a gap.
+    CompanyDebt? debt,
   }) = _Company;
 
   const Company._();
@@ -285,6 +360,21 @@ abstract class FinancialPeriod with _$FinancialPeriod {
     double? equity,
     double? cash,
     double? debt,
+
+    /// Borrowings by when they fall due, and what carrying them cost.
+    ///
+    /// `debt` is the total, and on its own it does not answer the question a
+    /// reader actually has. Money owed inside a year has to be found or rolled
+    /// inside a year; money owed beyond one does not. `financeCost` is the
+    /// period's own charge, which is what turns a balance into a burden — or
+    /// shows that it isn't one.
+    ///
+    /// All three are read from the issuer's filed statement, where the
+    /// borrowing lines are listed separately and summed; none is derived from
+    /// the liabilities total, which is a different and much larger thing.
+    @JsonKey(name: 'short_term_debt') double? shortTermDebt,
+    @JsonKey(name: 'long_term_debt') double? longTermDebt,
+    @JsonKey(name: 'finance_cost') double? financeCost,
     @JsonKey(name: 'operating_cash_flow') double? operatingCashFlow,
 
     /// The rest of the cash flow statement, and what was paid out of it.

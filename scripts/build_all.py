@@ -112,6 +112,13 @@ STEPS = [
     # this deterministic replay is safe in CI and restores the committed,
     # verified fields after Market has recreated every company document.
     ("EGX PDF statements", "apply_pdf_statements.py", True),
+    # What the company is doing with its borrowings: how much, when it falls
+    # due, what it costs against what the business earns, and which way it
+    # moved. Arithmetic over the borrowing lines the step above just restored,
+    # so it has to run after it. The sentence beside the figures is written by
+    # `build_debt_reads.py` into a committed store and merged here — that step
+    # calls a model, so it stays out of the build like every other read.
+    ("Debt", "build_debt.py", True),
     # What is unusual about a company against its own record — streak breaks,
     # silence measured against its own filing rhythm, first-in-years filings,
     # and when results are next due. Pure arithmetic over the committed

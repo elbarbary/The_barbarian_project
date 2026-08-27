@@ -898,6 +898,16 @@ class _Financials extends StatelessWidget {
           _StatementTable(annual: annual, quarterly: interim),
         ],
 
+        // What it owes anybody who lent to it, and what it did with the money.
+        //
+        // Below the statement rather than above it because it is a reading of
+        // those figures, and absent entirely when the last filed statement
+        // states no borrowings — which is an answer, not a gap.
+        if (company.debt case final CompanyDebt debt) ...[
+          const SizedBox(height: 14),
+          _DebtBlock(debt: debt),
+        ],
+
         // The filings themselves, as the company lodged them.
         //
         // Everything above this is somebody's reading of the accounts —
@@ -1786,6 +1796,154 @@ class _StatementTableState extends State<_StatementTable> {
           const SizedBox(height: 12),
           Text(
             l.finStatementsNote,
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// What the company is doing with its borrowings.
+///
+/// Every figure is read off the borrowing lines of the issuer's own filed
+/// balance sheet — never the liabilities total, which also carries payables,
+/// provisions and customer advances that nobody lent the company.
+///
+/// The block describes and never grades. §8 forbids this publisher from
+/// issuing a credit opinion, so there is no rating here, no colour that means
+/// "bad", and the sentence at the bottom was refused at build time if it
+/// advised, quoted a figure or called the position safe or risky.
+class _DebtBlock extends StatelessWidget {
+  const _DebtBlock({required this.debt});
+
+  final CompanyDebt debt;
+
+  String? _pattern(AppLocalizations l) => switch (debt.pattern) {
+    'raised_and_invested' => l.debtPatternRaisedInvested,
+    'raised_while_operations_consumed_cash' => l.debtPatternRaisedShortfall,
+    'raised_and_held' => l.debtPatternRaisedHeld,
+    'repaid_from_operating_cash' => l.debtPatternRepaidFromOps,
+    'repaid_without_operating_cash' => l.debtPatternRepaidNoOps,
+    'little_movement' => l.debtPatternFlat,
+    'funding_raised' => l.debtPatternFundingRaised,
+    'funding_repaid' => l.debtPatternFundingRepaid,
+    _ => null,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final c = context.colors;
+    final arabic = Directionality.of(context) == TextDirection.rtl;
+    final finance = debt.frame == 'finance';
+    // One scale across the money rows, so the reader compares them by eye
+    // rather than re-reading a unit on every line.
+    final scale = egpScaleFor([
+      debt.borrowings,
+      debt.shortTerm,
+      debt.longTerm,
+      debt.cash,
+      debt.financeCost,
+    ]);
+
+    final rows = <(String, double?)>[
+      (l.debtBorrowings, debt.borrowings),
+      (l.debtDueWithinYear, debt.shortTerm),
+      (l.debtDueLater, debt.longTerm),
+      (l.debtCashHeld, debt.cash),
+      (l.debtCost, debt.financeCost),
+    ].where((row) => row.$2 != null).toList();
+
+    final notes = <String>[
+      if (_pattern(l) case final String said) said,
+      if (debt.change?.direction case final String way)
+        switch (way) {
+          'up' => l.debtUpFrom,
+          'down' => l.debtDownFrom,
+          _ => l.debtFlatFrom,
+        },
+      if ((debt.netDebt ?? 0) < 0) l.debtNetCash,
+      if (debt.cover case final double cover)
+        cover > 1
+            ? l.debtCoverLine(cover.toStringAsFixed(1))
+            : l.debtCoverUnder,
+    ];
+
+    final read = arabic
+        ? (debt.read?.readAr.isNotEmpty ?? false
+              ? debt.read!.readAr
+              : debt.read?.read ?? '')
+        : debt.read?.read ?? '';
+
+    return BPaperCard(
+      radius: BarbarianRadius.xl,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BSectionLabel(finance ? l.debtTitleFinance : l.debtTitle),
+          const SizedBox(height: 4),
+          Text(
+            l.debtAsFiled(periodLabel(debt.period, l)),
+            style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+          ),
+          const SizedBox(height: 12),
+          for (final row in rows)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Expanded(
+                    child: Text(
+                      row.$1,
+                      style: BarbarianType.bodyS.copyWith(
+                        color: c.textSecondary,
+                      ),
+                    ),
+                  ),
+                  BNumText(
+                    egpIn(row.$2, scale),
+                    style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    egpUnit(scale, l),
+                    style: BarbarianType.labelNano.copyWith(color: c.textFaint),
+                  ),
+                ],
+              ),
+            ),
+          if (notes.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            BSectionLabel(l.debtWhatMoved),
+            const SizedBox(height: 6),
+            for (final note in notes)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  note,
+                  style: BarbarianType.bodyS.copyWith(color: c.textSecondary),
+                ),
+              ),
+          ],
+          if (read.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Text(
+              read,
+              style: BarbarianType.bodyM.copyWith(color: c.textPrimary),
+            ),
+          ],
+          if (finance) ...[
+            const SizedBox(height: 10),
+            Text(
+              l.debtFinanceNote,
+              style: BarbarianType.bodyS.copyWith(color: c.textFaint),
+            ),
+          ],
+          const SizedBox(height: 10),
+          Text(
+            l.debtFootnote,
             style: BarbarianType.bodyS.copyWith(color: c.textFaint),
           ),
         ],

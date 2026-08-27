@@ -2633,5 +2633,46 @@
   "revOrientDebt": "Lower is the safer side. Below its sector means the company has borrowed less against its own money than its peers; above its sector carries more debt — which can fund growth but adds risk if conditions tighten.",
   "@revOrientDebt": {},
   "revOrientAssets": "Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.",
-  "@revOrientAssets": {}
+  "@revOrientAssets": {},
+  "debtTitle": "What it does with its borrowings",
+  "debtTitleFinance": "How it funds itself",
+  "debtAsFiled": "As filed for {period}",
+  "@debtAsFiled": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "debtBorrowings": "Borrowings",
+  "debtDueWithinYear": "Falls due within a year",
+  "debtDueLater": "Falls due later",
+  "debtCashHeld": "Cash held",
+  "debtNet": "Borrowings net of cash",
+  "debtNetCash": "It holds more cash than it owes",
+  "debtCost": "Cost over the period",
+  "debtCoverLine": "Operating profit was {times} times that cost",
+  "@debtCoverLine": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "debtCoverUnder": "That cost was more than the operating profit for the period",
+  "debtUpFrom": "Higher than the same period a year earlier",
+  "debtDownFrom": "Lower than the same period a year earlier",
+  "debtFlatFrom": "About the same as a year earlier",
+  "debtWhatMoved": "What moved",
+  "debtPatternRaisedInvested": "It raised money and spent on assets over the same period.",
+  "debtPatternRaisedShortfall": "It raised money while its operations were using cash rather than producing it.",
+  "debtPatternRaisedHeld": "It raised money without spending it on assets.",
+  "debtPatternRepaidFromOps": "It repaid or returned money, and its operations produced cash over the same period.",
+  "debtPatternRepaidNoOps": "It repaid or returned money while its operations were not producing cash.",
+  "debtPatternFlat": "Its borrowings barely moved.",
+  "debtPatternFundingRaised": "It took in more funding than it repaid.",
+  "debtPatternFundingRepaid": "It repaid more funding than it took in.",
+  "debtFinanceNote": "This is a lender, so borrowing is the raw material of the business rather than a load on it. Customer deposits are not counted here.",
+  "debtFootnote": "Read from the borrowing lines of the company's own filed statement, not from its total liabilities. ESTHMR does not rate credit or say whether this position is sound.",
+  "debtNoneFiled": "This company's last filed statement states no borrowings."
 }

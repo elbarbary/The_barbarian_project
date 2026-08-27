@@ -3211,4 +3211,95 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get revOrientAssets =>
       'الأعلى يعني ببساطة أكبر — تملك أكثر من نظائرها، لا أكثر. والحجم لا يفيد إلا إذا حققت الأصول عائدًا، وهو ما تُظهره صفوف الربح والعائد؛ فالأكبر ليس أقوى تلقائيًا.';
+
+  @override
+  String get debtTitle => 'ماذا تفعل بقروضها';
+
+  @override
+  String get debtTitleFinance => 'كيف تموّل نفسها';
+
+  @override
+  String debtAsFiled(String period) {
+    return 'كما وردت عن $period';
+  }
+
+  @override
+  String get debtBorrowings => 'القروض';
+
+  @override
+  String get debtDueWithinYear => 'يُستحق خلال سنة';
+
+  @override
+  String get debtDueLater => 'يُستحق بعد أكثر من سنة';
+
+  @override
+  String get debtCashHeld => 'النقدية المتاحة';
+
+  @override
+  String get debtNet => 'القروض بعد خصم النقدية';
+
+  @override
+  String get debtNetCash => 'النقدية لديها أكبر مما عليها من قروض';
+
+  @override
+  String get debtCost => 'تكلفتها خلال الفترة';
+
+  @override
+  String debtCoverLine(String times) {
+    return 'الربح التشغيلي بلغ $times أضعاف هذه التكلفة';
+  }
+
+  @override
+  String get debtCoverUnder => 'تكلفة القروض خلال الفترة تجاوزت الربح التشغيلي';
+
+  @override
+  String get debtUpFrom => 'أعلى من نفس الفترة قبل عام';
+
+  @override
+  String get debtDownFrom => 'أقل من نفس الفترة قبل عام';
+
+  @override
+  String get debtFlatFrom => 'قريبة مما كانت عليه قبل عام';
+
+  @override
+  String get debtWhatMoved => 'ما الذي تحرّك';
+
+  @override
+  String get debtPatternRaisedInvested =>
+      'حصلت على تمويل وأنفقت على الأصول خلال الفترة نفسها.';
+
+  @override
+  String get debtPatternRaisedShortfall =>
+      'حصلت على تمويل بينما كانت عملياتها تستهلك النقدية بدلاً من أن تولّدها.';
+
+  @override
+  String get debtPatternRaisedHeld => 'حصلت على تمويل دون أن تنفقه على الأصول.';
+
+  @override
+  String get debtPatternRepaidFromOps =>
+      'سدّدت أو وزّعت أموالاً، وولّدت عملياتها نقدية خلال الفترة نفسها.';
+
+  @override
+  String get debtPatternRepaidNoOps =>
+      'سدّدت أو وزّعت أموالاً بينما لم تكن عملياتها تولّد نقدية.';
+
+  @override
+  String get debtPatternFlat => 'لم تتغيّر قروضها تقريباً.';
+
+  @override
+  String get debtPatternFundingRaised => 'حصلت على تمويل أكبر مما سدّدت.';
+
+  @override
+  String get debtPatternFundingRepaid => 'سدّدت تمويلاً أكبر مما حصلت عليه.';
+
+  @override
+  String get debtFinanceNote =>
+      'هذه جهة مُقرِضة، فالاقتراض مادة خام لنشاطها وليس عبئاً عليه. ودائع العملاء غير محتسبة هنا.';
+
+  @override
+  String get debtFootnote =>
+      'مقروءة من بنود القروض في القوائم المالية المنشورة للشركة، وليس من إجمالي التزاماتها. «استثمر» لا يصنّف الجدارة الائتمانية ولا يقول ما إذا كان هذا الوضع سليماً.';
+
+  @override
+  String get debtNoneFiled => 'آخر قوائم منشورة لهذه الشركة لا تذكر أي قروض.';
 }

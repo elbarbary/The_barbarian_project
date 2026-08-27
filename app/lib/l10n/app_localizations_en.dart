@@ -3206,4 +3206,100 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get revOrientAssets =>
       'Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.';
+
+  @override
+  String get debtTitle => 'What it does with its borrowings';
+
+  @override
+  String get debtTitleFinance => 'How it funds itself';
+
+  @override
+  String debtAsFiled(String period) {
+    return 'As filed for $period';
+  }
+
+  @override
+  String get debtBorrowings => 'Borrowings';
+
+  @override
+  String get debtDueWithinYear => 'Falls due within a year';
+
+  @override
+  String get debtDueLater => 'Falls due later';
+
+  @override
+  String get debtCashHeld => 'Cash held';
+
+  @override
+  String get debtNet => 'Borrowings net of cash';
+
+  @override
+  String get debtNetCash => 'It holds more cash than it owes';
+
+  @override
+  String get debtCost => 'Cost over the period';
+
+  @override
+  String debtCoverLine(String times) {
+    return 'Operating profit was $times times that cost';
+  }
+
+  @override
+  String get debtCoverUnder =>
+      'That cost was more than the operating profit for the period';
+
+  @override
+  String get debtUpFrom => 'Higher than the same period a year earlier';
+
+  @override
+  String get debtDownFrom => 'Lower than the same period a year earlier';
+
+  @override
+  String get debtFlatFrom => 'About the same as a year earlier';
+
+  @override
+  String get debtWhatMoved => 'What moved';
+
+  @override
+  String get debtPatternRaisedInvested =>
+      'It raised money and spent on assets over the same period.';
+
+  @override
+  String get debtPatternRaisedShortfall =>
+      'It raised money while its operations were using cash rather than producing it.';
+
+  @override
+  String get debtPatternRaisedHeld =>
+      'It raised money without spending it on assets.';
+
+  @override
+  String get debtPatternRepaidFromOps =>
+      'It repaid or returned money, and its operations produced cash over the same period.';
+
+  @override
+  String get debtPatternRepaidNoOps =>
+      'It repaid or returned money while its operations were not producing cash.';
+
+  @override
+  String get debtPatternFlat => 'Its borrowings barely moved.';
+
+  @override
+  String get debtPatternFundingRaised =>
+      'It took in more funding than it repaid.';
+
+  @override
+  String get debtPatternFundingRepaid =>
+      'It repaid more funding than it took in.';
+
+  @override
+  String get debtFinanceNote =>
+      'This is a lender, so borrowing is the raw material of the business rather than a load on it. Customer deposits are not counted here.';
+
+  @override
+  String get debtFootnote =>
+      'Read from the borrowing lines of the company\'s own filed statement, not from its total liabilities. ESTHMR does not rate credit or say whether this position is sound.';
+
+  @override
+  String get debtNoneFiled =>
+      'This company\'s last filed statement states no borrowings.';
 }

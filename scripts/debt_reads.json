@@ -1,0 +1,34 @@
+{
+ "ELKA:H1 2026": {
+  "read": "During the period, the company repaid more funding than it brought in, and most of what it owes falls due after more than a year. Its operating profit for the period was larger than the cost of this funding.",
+  "read_ar": "سددت الشركة خلال هذه الفترة تمويلات تفوق ما حصلت عليه، ويستحق الجزء الأكبر مما عليها بعد أكثر من عام. كما تجاوزت أرباحها التشغيلية تكلفة هذا التمويل عن الفترة نفسها."
+ },
+ "KORA:H1 2026": {
+  "read": "During the period, the company took on new borrowings while purchasing assets, with most of its total debt due for repayment within a year. The profit it made from its everyday business operations was larger than the cost of these borrowings.",
+  "read_ar": "اقترضت الشركة أموالاً إضافية خلال هذه الفترة واشترت أصولاً في الوقت نفسه، ويستحق سداد معظم ديونها خلال عام. وكانت الأرباح الناتجة عن أنشطتها التشغيلية المعتادة أكبر من تكلفة هذه القروض."
+ },
+ "KRDI:H1 2026": {
+  "read": "During the period, the company took in more funding than it paid back, with most of what it owes coming due within the coming year. At the same time, it holds more cash than the total amount it owes in borrowings.",
+  "read_ar": "خلال هذه الفترة، حصلت الشركة على تمويلات تفوق ما قامت بسداده، ويستحق سداد معظم ما عليها خلال العام المقبل. وفي الوقت نفسه، تمتلك الشركة سيولة نقدية تتجاوز إجمالي ما عليها من قروض وتمويلات."
+ },
+ "MASR:H1 2026": {
+  "read": "During the period, the company brought in more new funding than it paid back on its borrowings. Its operating profit was higher than the cost of this financing, and it also distributed cash to shareholders.",
+  "read_ar": "خلال هذه الفترة، حصلت الشركة على تمويلات جديدة تفوق ما قامت بسداده من التزاماتها التمويلية. وتجاوزت أرباح عملياتها التشغيلية تكلفة هذا التمويل، كما قامت بتوزيع أموال على مساهميها."
+ },
+ "OBRI:H1 2026": {
+  "read": "Over the period, the company repaid more funding than it raised. Most of what it currently owes comes due within a year, while its cash holdings exceed its total borrowings.",
+  "read_ar": "سددت الشركة خلال هذه الفترة مبالغ تمويلية تفوق ما حصلت عليه. ويستحق الجزء الأكبر من هذه التمويلات خلال عام، في حين تتجاوز السيولة النقدية التي تحتفظ بها إجمالي المبالغ المستحقة عليها."
+ },
+ "PRDC:H1 2026": {
+  "read": "During the period, the company paid back more funding than it brought in from new borrowings. Most of what it currently owes comes due within a year. In the same period, its operating profit was larger than the cost of its borrowings.",
+  "read_ar": "سددت الشركة خلال الفترة تمويلات تفوق ما حصلت عليه من قروض جديدة، ويستحق الجزء الأكبر من التزاماتها التمويلية الحالية خلال عام. وخلال الفترة نفسها، تجاوزت أرباحها التشغيلية تكلفة هذه القروض."
+ },
+ "UEGC:H1 2026": {
+  "read": "During this period, the company brought in cash from its day-to-day operations, paid back part of its borrowings, and distributed money to its shareholders. The profit earned from running the business was larger than the borrowing costs, while most of the remaining debt is due for repayment within a year.",
+  "read_ar": "خلال هذه الفترة، حققت الشركة سيولة نقدية من عملياتها اليومية، وسددت جزءاً من قروضها، كما دفعت أموالاً للمساهمين. وكانت أرباح النشاط التشغيلي أكبر من تكلفة تلك القروض، في حين يستحق سداد معظم الديون المتبقية عليها خلال عام."
+ },
+ "UNIT:H1 2026": {
+  "read": "During the period, the company repaid more funding than it brought in, and most of what it owes comes due beyond the coming year. Its operating profit exceeded the cost of this funding, and it also paid money out to shareholders.",
+  "read_ar": "خلال الفترة، سددت الشركة تمويلات أكثر مما استقدمته، مع استحقاق الجزء الأكبر من التزاماتها بعد العام القادم. كما فاقت أرباحها التشغيلية تكلفة هذه التمويلات، وقامت أيضاً بدفع أموال للمساهمين."
+ }
+}
