@@ -32,6 +32,26 @@ FIELDS = frozenset({
     "financing_cash_flow",
     "net_change_in_cash",
     "dividends_paid",
+    # Borrowings, and what they cost. `liabilities` is not debt: it carries
+    # trade payables, provisions, deferred tax and customer advances, none of
+    # which anybody lent the company. Answering "what is this company doing
+    # with its debt" from a liabilities total would be describing the wrong
+    # number, so the interest-bearing lines are read separately.
+    #
+    # `debt` is the total of borrowings; the two maturities beside it say when
+    # it comes due, which is half of what the question means. `cash` nets
+    # against it, and `finance_cost` is what carrying it costs for the period.
+    "debt",
+    "short_term_debt",
+    "long_term_debt",
+    "cash",
+    "finance_cost",
+})
+
+# Balance-sheet lines that state a quantity held or owed, never a negative.
+# A minus here is a misread column, not a company with less than no cash.
+NON_NEGATIVE = frozenset({
+    "debt", "short_term_debt", "long_term_debt", "cash", "assets", "equity",
 })
 
 # A filing that only repeats the already-held profit has not enriched the app.
@@ -179,6 +199,38 @@ def verify_readings(discovery: dict, audit: dict, *, known_net_m: float,
         if not _identity_near(change, operating + investing + financing):
             raise ValueError("cash-flow components do not equal the net change")
 
+    # A held or owed quantity read as negative is a column misread.
+    for name in sorted(NON_NEGATIVE & set(values)):
+        if values[name] < 0:
+            raise ValueError(f"{name} was read as negative, which no filing states")
+
+    # Borrowings cannot exceed everything the company owes. This is the guard
+    # that catches the expensive mistake in the other direction too: a model
+    # that answers with total liabilities, or with a bank's customer deposits,
+    # when asked for borrowings lands on a number at or above the liabilities
+    # total and is refused rather than published as "debt".
+    debt, owed = values.get("debt"), values.get("liabilities")
+    if debt is not None and owed is not None and debt > owed and not _identity_near(debt, owed):
+        raise ValueError("borrowings exceed total liabilities")
+
+    maturities = [values.get(k) for k in ("short_term_debt", "long_term_debt")]
+    debt_split = "not_available"
+    if all(v is not None for v in maturities):
+        if debt is not None:
+            if not _identity_near(debt, sum(maturities)):
+                raise ValueError("the debt maturities do not sum to total borrowings")
+            debt_split = "passed"
+        else:
+            # Both halves without a printed total is the ordinary presentation;
+            # the total is then the sum of two figures that were each proved.
+            values["debt"] = round(sum(maturities), 3)
+            debt_split = "summed"
+
+    if (cash := values.get("cash")) is not None:
+        held = values.get("assets")
+        if held is not None and cash > held and not _identity_near(cash, held):
+            raise ValueError("cash exceeds total assets")
+
     return {
         "fields": values,
         "evidence": evidence,
@@ -191,5 +243,6 @@ def verify_readings(discovery: dict, audit: dict, *, known_net_m: float,
             "cash_flow_identity": (
                 "passed" if all(v is not None for v in flows) else "not_available"
             ),
+            "debt_maturities_sum": debt_split,
         },
     }

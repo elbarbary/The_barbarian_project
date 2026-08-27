@@ -91,7 +91,39 @@ Return one JSON object with currency, period_end, and fields. `fields` may use
 only these keys when the figure is printed:
 revenue, gross_profit, operating_income, net_income, assets, liabilities,
 equity, operating_cash_flow, investing_cash_flow, financing_cash_flow,
-net_change_in_cash, dividends_paid.
+net_change_in_cash, dividends_paid, debt, short_term_debt, long_term_debt,
+cash, finance_cost.
+
+The borrowing keys mean money that was lent to this company and carries
+interest. A balance sheet almost never prints a single "total borrowings" line
+— it lists them separately, so **add up the borrowing lines within each
+maturity** and put every component you added in `printed`, each with its Arabic
+label and its printed figure, so the arithmetic can be checked against the page.
+
+Count as borrowings: قروض, تسهيلات ائتمانية, بنوك دائنة (overdrafts), سندات
+/ صكوك, and finance-lease liabilities (التزامات عقود التأجير التمويلي / عقود
+إيجار).
+
+  short_term_debt   the current ones: قروض وتسهيلات قصيرة الأجل, بنوك دائنة,
+                    the current portion of long-term borrowings (الجزء المتداول
+                    من القروض طويلة الأجل), and current lease liabilities.
+  long_term_debt    the non-current ones: قروض طويلة الأجل and non-current
+                    lease liabilities.
+  debt              ONLY when the statement itself prints a combined total.
+                    Never add the two maturities together yourself.
+  cash              النقدية وما في حكمها / نقدية بالصندوق ولدى البنوك.
+  finance_cost      تكاليف التمويل / أعباء تمويلية / فوائد مدينة for the
+                    period, as a POSITIVE number however the statement signs it.
+
+If a maturity has exactly one borrowing line, that line is the figure. If it
+has none at all, omit the key — a company with no borrowings is a real answer.
+
+These are NOT borrowings, and must never be returned under those keys: total
+liabilities, trade payables (موردون / دائنون), provisions (مخصصات), deferred
+tax, customer advances (دفعات مقدمة من العملاء), and — for a bank — customer
+deposits (ودائع العملاء) and amounts due to banks, which are what a bank holds
+rather than money borrowed to run itself. If a filing prints no separate
+borrowings line, omit these keys entirely rather than substituting a total.
 
 Every field must be an object with:
   value_m: numeric value in EGP millions
@@ -113,8 +145,23 @@ rounded narrative prose.
 Return one JSON object with currency, period_end, and fields. `fields` may use
 only: revenue, gross_profit, operating_income, net_income, assets, liabilities,
 equity, operating_cash_flow, investing_cash_flow, financing_cash_flow,
-net_change_in_cash, dividends_paid. Every field is
+net_change_in_cash, dividends_paid, debt, short_term_debt, long_term_debt,
+cash, finance_cost. Every field is
 {{"value_m": number, "page": 1-based PDF page, "printed": "exact evidence"}}.
+
+The borrowing keys mean money lent to this company that carries interest —
+قروض, تسهيلات ائتمانية, بنوك دائنة, سندات, and finance-lease liabilities
+(التزامات عقود التأجير التمويلي). Balance sheets list these separately rather
+than as one total, so add up the borrowing lines within each maturity and put
+every component you added in `printed`, with its Arabic label and figure.
+`short_term_debt` covers the current ones including the current portion of
+long-term borrowings; `long_term_debt` the non-current ones; `debt` only when a
+combined total is itself printed — never add the two maturities yourself.
+`finance_cost` (تكاليف التمويل / أعباء تمويلية) is positive however the
+statement signs it. Never return total liabilities, payables, provisions,
+customer advances, or a bank's customer deposits under any borrowing key —
+omit the key instead.
+
 Return JSON only.
 """
 

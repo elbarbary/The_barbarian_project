@@ -61,6 +61,52 @@ class VerificationTest(unittest.TestCase):
                 expected_period_end="2026-06-30",
             )
 
+    def test_a_banks_deposits_are_not_published_as_borrowings(self):
+        # The expensive misread: a model asked for borrowings answers with the
+        # liabilities total (or a bank's customer deposits, which are the same
+        # size). Anything at or above everything the company owes is refused
+        # rather than published under a heading that says "debt".
+        with self.assertRaisesRegex(ValueError, "borrowings exceed"):
+            V.verify_readings(
+                reading(net_income=100, liabilities=7_410, debt=7_400_000),
+                reading(net_income=100, liabilities=7_410, debt=7_400_000),
+                known_net_m=100,
+                expected_period_end="2026-06-30",
+            )
+
+    def test_maturities_that_do_not_sum_to_the_printed_total_are_refused(self):
+        with self.assertRaisesRegex(ValueError, "maturities do not sum"):
+            V.verify_readings(
+                reading(net_income=100, debt=900,
+                        short_term_debt=100, long_term_debt=300),
+                reading(net_income=100, debt=900,
+                        short_term_debt=100, long_term_debt=300),
+                known_net_m=100,
+                expected_period_end="2026-06-30",
+            )
+
+    def test_two_maturities_without_a_printed_total_are_summed(self):
+        # The ordinary presentation: the balance sheet prints the current and
+        # non-current halves and never a combined line. Each half was proved by
+        # both reads, so their sum is evidence rather than an invention.
+        verified = V.verify_readings(
+            reading(net_income=100, short_term_debt=120, long_term_debt=380),
+            reading(net_income=100, short_term_debt=120, long_term_debt=380),
+            known_net_m=100,
+            expected_period_end="2026-06-30",
+        )
+        self.assertEqual(verified["fields"]["debt"], 500)
+        self.assertEqual(verified["checks"]["debt_maturities_sum"], "summed")
+
+    def test_a_negative_holding_is_refused(self):
+        with self.assertRaisesRegex(ValueError, "read as negative"):
+            V.verify_readings(
+                reading(net_income=100, cash=-250),
+                reading(net_income=100, cash=-250),
+                known_net_m=100,
+                expected_period_end="2026-06-30",
+            )
+
     def test_a_broken_balance_is_refused(self):
         bad = reading(net_income=100, assets=500, liabilities=200, equity=100)
         with self.assertRaisesRegex(ValueError, "assets do not equal"):
