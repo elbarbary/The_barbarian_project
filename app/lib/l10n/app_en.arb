@@ -2698,5 +2698,16 @@
         "type": "String"
       }
     }
-  }
+  },
+  "signInEmail": "Continue with email",
+  "emailGateTitle": "Read the live exchange",
+  "emailGateLead": "We will email you a six-digit code. No password to choose, and nothing to remember.",
+  "emailGateField": "Email",
+  "emailGateSend": "Send me a code",
+  "emailGateCodeField": "The six digits we just sent",
+  "emailGateVerify": "Sign in",
+  "emailGateOther": "Use a different email",
+  "emailGateSending": "One moment…",
+  "emailGateBadEmail": "That does not look like an email address.",
+  "emailGateHint": "you@example.com"
 }

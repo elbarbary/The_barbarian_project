@@ -3317,4 +3317,38 @@ class AppLocalizationsAr extends AppLocalizations {
   String debtFlatSince(String date) {
     return 'قريبة مما كانت في $date';
   }
+
+  @override
+  String get signInEmail => 'المتابعة بالبريد الإلكتروني';
+
+  @override
+  String get emailGateTitle => 'اقرأ بيانات البورصة الحيّة';
+
+  @override
+  String get emailGateLead =>
+      'سنرسل إليك رمزاً من ستة أرقام. لا كلمة مرور تختارها، ولا شيء تتذكره.';
+
+  @override
+  String get emailGateField => 'البريد الإلكتروني';
+
+  @override
+  String get emailGateSend => 'أرسل لي الرمز';
+
+  @override
+  String get emailGateCodeField => 'الأرقام الستة التي أرسلناها';
+
+  @override
+  String get emailGateVerify => 'تسجيل الدخول';
+
+  @override
+  String get emailGateOther => 'استخدام بريد آخر';
+
+  @override
+  String get emailGateSending => 'لحظة…';
+
+  @override
+  String get emailGateBadEmail => 'هذا لا يبدو بريداً إلكترونياً صحيحاً.';
+
+  @override
+  String get emailGateHint => 'you@example.com';
 }

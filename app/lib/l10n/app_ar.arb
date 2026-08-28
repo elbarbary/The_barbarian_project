@@ -912,5 +912,16 @@
   "debtNoneFiled": "آخر قوائم منشورة لهذه الشركة لا تذكر أي قروض.",
   "debtUpSince": "أعلى مما كانت في {date}",
   "debtDownSince": "أقل مما كانت في {date}",
-  "debtFlatSince": "قريبة مما كانت في {date}"
+  "debtFlatSince": "قريبة مما كانت في {date}",
+  "signInEmail": "المتابعة بالبريد الإلكتروني",
+  "emailGateTitle": "اقرأ بيانات البورصة الحيّة",
+  "emailGateLead": "سنرسل إليك رمزاً من ستة أرقام. لا كلمة مرور تختارها، ولا شيء تتذكره.",
+  "emailGateField": "البريد الإلكتروني",
+  "emailGateSend": "أرسل لي الرمز",
+  "emailGateCodeField": "الأرقام الستة التي أرسلناها",
+  "emailGateVerify": "تسجيل الدخول",
+  "emailGateOther": "استخدام بريد آخر",
+  "emailGateSending": "لحظة…",
+  "emailGateBadEmail": "هذا لا يبدو بريداً إلكترونياً صحيحاً.",
+  "emailGateHint": "you@example.com"
 }

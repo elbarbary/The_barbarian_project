@@ -36,8 +36,9 @@ abstract interface class DocumentSource {
 
 /// Reads from `https://<host>/data/v1/<path>`.
 class NetworkDocumentSource implements DocumentSource {
-  NetworkDocumentSource({required AppConfig config, Dio? dio})
+  NetworkDocumentSource({required AppConfig config, String token = '', Dio? dio})
     : _config = config,
+      _token = token,
       _dio =
           dio ??
           Dio(
@@ -52,7 +53,13 @@ class NetworkDocumentSource implements DocumentSource {
           );
 
   final AppConfig _config;
+  final String _token;
   final Dio _dio;
+
+  /// Whether this source is carrying a session at all. A source without one
+  /// will be refused by every document, so the caller can say so plainly
+  /// rather than reporting each 401 as a network fault.
+  bool get hasSession => _token.isNotEmpty;
 
   @override
   bool get isRefreshable => true;
@@ -61,13 +68,29 @@ class NetworkDocumentSource implements DocumentSource {
   Future<String> fetch(String path) async {
     final url = '${_config.dataRoot}/$path';
     try {
-      final response = await _dio.get<String>(url);
+      // The session travels with the REQUEST, not with the client. Putting it
+      // in BaseOptions meant an injected Dio — a test double, a shared client —
+      // silently sent no token at all, and the failure would have been a 401
+      // in production rather than a red test.
+      final response = await _dio.get<String>(
+        url,
+        options: _token.isEmpty
+            ? null
+            : Options(headers: {'Authorization': 'Bearer $_token'}),
+      );
       final body = response.data;
       if (body == null || body.isEmpty) {
         throw DocumentUnavailable(path, 'empty response from $url');
       }
       return body;
     } on DioException catch (e) {
+      final status = e.response?.statusCode;
+      if (status == 401 || status == 403) {
+        throw DocumentUnavailable(
+          path,
+          'this session cannot read the exchange data — sign in again',
+        );
+      }
       throw DocumentUnavailable(path, _describe(e));
     }
   }

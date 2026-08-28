@@ -3317,4 +3317,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String debtFlatSince(String date) {
     return 'About the same as at $date';
   }
+
+  @override
+  String get signInEmail => 'Continue with email';
+
+  @override
+  String get emailGateTitle => 'Read the live exchange';
+
+  @override
+  String get emailGateLead =>
+      'We will email you a six-digit code. No password to choose, and nothing to remember.';
+
+  @override
+  String get emailGateField => 'Email';
+
+  @override
+  String get emailGateSend => 'Send me a code';
+
+  @override
+  String get emailGateCodeField => 'The six digits we just sent';
+
+  @override
+  String get emailGateVerify => 'Sign in';
+
+  @override
+  String get emailGateOther => 'Use a different email';
+
+  @override
+  String get emailGateSending => 'One moment…';
+
+  @override
+  String get emailGateBadEmail => 'That does not look like an email address.';
+
+  @override
+  String get emailGateHint => 'you@example.com';
 }

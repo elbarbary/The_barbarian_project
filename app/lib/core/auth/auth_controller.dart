@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../config/app_config.dart';
 import 'auth_service.dart';
+import 'esthmr_session.dart';
 import 'identity.dart';
 
 /// The identity the app boots with, read from disk once in `main` and injected
@@ -29,6 +31,29 @@ class AuthController extends Notifier<Identity> {
   Identity build() => ref.read(authInitialProvider);
 
   Future<void> continueAsGuest() => _persist(Identity.guest);
+
+  EsthmrSession get _session =>
+      EsthmrSession(config: AppConfig.fromEnvironment());
+
+  /// Ask the server to email a six-digit code. Nothing changes on the device
+  /// until [signInWithCode] succeeds, so an abandoned attempt leaves no trace.
+  Future<void> requestCode(String email) => _session.requestCode(email);
+
+  /// Exchange the code for a session and become that identity.
+  ///
+  /// The token is what the exchange feed actually checks, so this is the mode
+  /// that opens the live data. The address doubles as the storage namespace,
+  /// which means signing back in on the same phone restores the same
+  /// watchlist.
+  Future<void> signInWithCode(String email, String code) async {
+    final result = await _session.verify(email, code);
+    await _persist(Identity(
+      mode: AuthMode.email,
+      userId: result.email,
+      email: result.email,
+      token: result.token,
+    ));
+  }
 
   /// Runs the native Apple flow and, on success, becomes that account. Throws
   /// [AuthException]; the caller decides what to show.

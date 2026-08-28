@@ -5,14 +5,17 @@ import '../../core/auth/auth_controller.dart';
 import '../../core/auth/auth_service.dart';
 import '../../core/theme/barbarian_theme.dart';
 import '../../core/widgets/motion.dart';
+import 'email_gate_sheet.dart';
 import '../../l10n/app_localizations.dart';
 
 /// The gate: the one screen shown before an identity exists.
 ///
-/// Three ways in, and none of them a dead end. Apple and Google establish a
-/// real account so the reader gets the live feed and a list that is theirs;
-/// guest asks for nothing and reads the sample data that ships in the app. The
-/// choice is remembered, so the gate is a first-run screen, not a wall.
+/// Four ways in, and none of them a dead end. Email is the one that reaches
+/// the live exchange, because the feed now requires a session and a code is
+/// what proves an inbox. Apple and Google establish a local account with its
+/// own watchlist; guest asks for nothing. All three of those read the sample
+/// data that ships in the app until a session exists. The choice is
+/// remembered, so the gate is a first-run screen, not a wall.
 class SignInScreen extends ConsumerStatefulWidget {
   const SignInScreen({super.key});
 
@@ -20,7 +23,7 @@ class SignInScreen extends ConsumerStatefulWidget {
   ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-enum _Method { apple, google, guest }
+enum _Method { email, apple, google, guest }
 
 class _SignInScreenState extends ConsumerState<SignInScreen> {
   _Method? _busy;
@@ -98,11 +101,26 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 ],
 
                 _AuthButton(
+                  label: l.signInEmail,
+                  onTap: () async {
+                    if (_busy != null) return;
+                    setState(() => _error = null);
+                    // The sheet reports its own failures; the gate only has to
+                    // know whether an identity now exists.
+                    await EmailGateSheet.show(context);
+                  },
+                  busy: _busy == _Method.email,
+                  enabled: _busy == null,
+                  filled: true,
+                  leading: Icon(Icons.alternate_email, size: 20, color: c.onInk),
+                ),
+                const SizedBox(height: 12),
+                _AuthButton(
                   label: l.signInApple,
                   onTap: () => _run(_Method.apple, auth.signInWithApple),
                   busy: _busy == _Method.apple,
                   enabled: _busy == null,
-                  filled: true,
+                  filled: false,
                   leading: Icon(Icons.apple, size: 22, color: c.onInk),
                 ),
                 const SizedBox(height: 12),

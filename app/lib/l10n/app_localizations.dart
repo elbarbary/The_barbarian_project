@@ -5413,6 +5413,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About the same as at {date}'**
   String debtFlatSince(String date);
+
+  /// No description provided for @signInEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with email'**
+  String get signInEmail;
+
+  /// No description provided for @emailGateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Read the live exchange'**
+  String get emailGateTitle;
+
+  /// No description provided for @emailGateLead.
+  ///
+  /// In en, this message translates to:
+  /// **'We will email you a six-digit code. No password to choose, and nothing to remember.'**
+  String get emailGateLead;
+
+  /// No description provided for @emailGateField.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailGateField;
+
+  /// No description provided for @emailGateSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send me a code'**
+  String get emailGateSend;
+
+  /// No description provided for @emailGateCodeField.
+  ///
+  /// In en, this message translates to:
+  /// **'The six digits we just sent'**
+  String get emailGateCodeField;
+
+  /// No description provided for @emailGateVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get emailGateVerify;
+
+  /// No description provided for @emailGateOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a different email'**
+  String get emailGateOther;
+
+  /// No description provided for @emailGateSending.
+  ///
+  /// In en, this message translates to:
+  /// **'One moment…'**
+  String get emailGateSending;
+
+  /// No description provided for @emailGateBadEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'That does not look like an email address.'**
+  String get emailGateBadEmail;
+
+  /// No description provided for @emailGateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'you@example.com'**
+  String get emailGateHint;
 }
 
 class _AppLocalizationsDelegate

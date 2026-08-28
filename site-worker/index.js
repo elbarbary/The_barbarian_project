@@ -109,6 +109,15 @@ function cookieValue(request, name) {
 
 async function session(request, env) {
   if (!env.SESSION_SECRET) return null;
+  // A browser carries the session in an httpOnly cookie it cannot read. A
+  // phone has no cookie jar worth the name, so the app holds the same signed
+  // token and presents it as a bearer. Same token, same signature, same
+  // expiry — only the envelope differs.
+  const header = request.headers.get('authorization') || '';
+  if (header.startsWith('Bearer ')) {
+    const who = await unsign(header.slice(7).trim(), env.SESSION_SECRET);
+    if (who) return who;
+  }
   return unsign(cookieValue(request, COOKIE), env.SESSION_SECRET);
 }
 
@@ -253,7 +262,9 @@ async function api(request, env, url) {
     const token = await sign(
       { e: email, x: Math.floor(Date.now() / 1000) + SESSION_DAYS * 86400 },
       env.SESSION_SECRET);
-    return json({ email }, 200, {
+    // The cookie serves the website; the token in the body serves the app,
+    // which has nowhere to put a cookie. A browser simply ignores it.
+    return json({ email, token, expires_in: SESSION_DAYS * 86400 }, 200, {
       'set-cookie': `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; `
         + `Secure; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}`,
     });

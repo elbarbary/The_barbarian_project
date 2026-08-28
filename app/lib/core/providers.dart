@@ -68,7 +68,13 @@ final documentSourceProvider = Provider<DocumentSource>((ref) {
   if (ref.watch(appConfigProvider).useBundledFixtures) {
     return const FixtureDocumentSource();
   }
-  return NetworkDocumentSource(config: ref.watch(appConfigProvider));
+  // The token goes with the source, not into StaticApi: this provider already
+  // depends on the identity, and keeping the dependency here is what stops the
+  // document streams being torn down every time auth settles.
+  return NetworkDocumentSource(
+    config: ref.watch(appConfigProvider),
+    token: ref.watch(authControllerProvider).token,
+  );
 });
 
 /// The compiled-in snapshot [StaticApi] falls back to, and never caches.
