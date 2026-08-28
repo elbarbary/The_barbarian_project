@@ -173,10 +173,12 @@ async function sendCode(env, email, code) {
     if (response.ok) return;
     const detail = await response.text().catch(() => '');
     failures.push(`${response.status}: ${detail.slice(0, 160)}`);
-    // A rejected message is rejected for every key — a bad sender or a
-    // malformed address will not become valid on the next one. Only move on
-    // when the key itself is the problem.
-    if (![401, 403, 429].includes(response.status) && response.status < 500) break;
+    // Move on only when the KEY is the problem: 401 revoked, 429 exhausted, or
+    // the provider itself down. A 403 is about the message — an unverified
+    // sending domain, a recipient the sender is not allowed to reach — and is
+    // refused identically by every key, so trying the rest only spends four
+    // more quotas on the same answer.
+    if (response.status !== 401 && response.status !== 429 && response.status < 500) break;
   }
   throw new Error(`resend ${failures.join(' | ')}`);
 }
