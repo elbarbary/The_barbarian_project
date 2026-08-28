@@ -167,6 +167,16 @@ export async function live() {
       // quantity anybody can read.
       cap: c.market_cap ?? null,
       pe: c.pe ?? null,
+      volume: q.volume ?? null,
+      // How busy the session was against this company's OWN normal. The median
+      // of the last twenty sessions, not the mean: a median is not dragged by
+      // one earlier spike, which matters most in the exact case this is
+      // looking for. Both numbers are already on the two documents Home reads,
+      // so this costs no extra request.
+      rv: (typeof q.volume === 'number' && typeof c.median_volume_20d === 'number'
+           && c.median_volume_20d > 0)
+        ? q.volume / c.median_volume_20d : null,
+      medianVolume: c.median_volume_20d ?? null,
     };
   });
   return {

@@ -767,3 +767,84 @@ test('an open month shows that month, and says how much of it', async () => {
   c.state.month = '2026-06';
   assert.equal(c.renderVals().archiveNote, '');
 });
+
+/* ── what traded unusually ─────────────────────────────────────────────── */
+
+/** A directory + quote pair, the shape live() reads. */
+const busyDocs = (rows) => ({
+  'companies.json': { companies: rows.map((r) => ({
+    ticker: r.t, name_en: r.t, sector: 'S', median_volume_20d: r.median })) },
+  'market.json': { date: '2026-08-27', stocks: Object.fromEntries(
+    rows.map((r) => [r.t, { close: 10, change_percent: 0.01, volume: r.volume }])) },
+  'manifest.json': {},
+});
+
+test('the busiest block is measured against each company\'s own normal', async () => {
+  const base = await liveFrom(busyDocs([
+    { t: 'AAAA', volume: 1000, median: 100 },    // 10.0x
+    { t: 'BBBB', volume: 300, median: 100 },     // 3.0x
+    { t: 'CCCC', volume: 199, median: 100 },     // 1.99x — under the line
+    { t: 'DDDD', volume: 5000, median: 5000 },   // 1.0x
+  ]));
+  const v = screen(base);
+  assert.deepEqual(v.busy.map((r) => r.ticker), ['AAAA', 'BBBB']);
+  // Twice the median is the line; 1.99 is not "nearly" anything.
+  assert.equal(v.busy[0].kicker, 'Traded 10.0× its usual volume');
+  assert.equal(v.hasBusy, true);
+  assert.equal(v.noBusy, false);
+});
+
+test('a company with no median is not counted as quiet', async () => {
+  // 230 of the 282 listed carry both numbers. The other 52 cannot be measured
+  // this way, and treating an absent median as a calm day would be inventing
+  // an observation.
+  const base = await liveFrom(busyDocs([
+    { t: 'AAAA', volume: 1000, median: null },
+    { t: 'BBBB', volume: 1000, median: 0 },
+  ]));
+  assert.equal(base.companies.every((c) => c.rv === null), true);
+  const v = screen(base);
+  assert.deepEqual(v.busy, []);
+  // Nothing measurable means the block says nothing, not "nothing unusual".
+  assert.equal(v.noBusy, false);
+  assert.equal(v.busyNote, '');
+});
+
+test('a quiet day says so', async () => {
+  const base = await liveFrom(busyDocs([{ t: 'AAAA', volume: 100, median: 100 }]));
+  const v = screen(base);
+  assert.deepEqual(v.busy, []);
+  assert.equal(v.noBusy, true, 'a measured, quiet market must say "nothing unusual today"');
+});
+
+test('§8 the threshold is named as ours, not as the exchange\'s', () => {
+  const base = { ...LIVE, companies: [{ ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'S',
+                                        close: 10, pct: 1, rv: 4 }] };
+  const v = screen(base);
+  // The block must not present 2× as a fact about the market. Nobody publishes
+  // an official line, and saying whose line it is is the whole disclosure.
+  assert.match(v.busyNote, /median of the last 20 sessions/);
+  // Curly apostrophes: the sentence is the app's, carried over character for
+  // character rather than retyped.
+  assert.match(v.busyNote, /this app\u2019s line rather than the exchange\u2019s/);
+  assert.match(v.busyNote, /without anything being wrong/);
+  // And it says what happened, never what to do about it.
+  assert.ok(!DIRECTIVE.test(v.busyNote), v.busyNote);
+  assert.ok(!DIRECTIVE.test(v.busy[0].kicker));
+});
+
+test('the busiest rows sit above the movers on Home', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const t = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const busy = t.indexOf('{{ L.busiest }}');
+  const movers = t.indexOf('{{ L.movers }}');
+  assert.ok(busy > 0 && movers > 0, 'a block is missing');
+  assert.ok(busy < movers, 'the movers come first — a big move on ordinary volume is just a price');
+  // Both belong to ONE column. Three children in a two-column grid pushes the
+  // movers into the rail and wraps the rail below it — which is exactly what
+  // happened the first time this block went in.
+  const grid = t.indexOf('grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)');
+  assert.ok(grid > 0 && grid < busy, 'the Home grid moved');
+  assert.match(t.slice(grid, busy), /flex-direction:column/,
+    'the two sections are separate grid children');
+});

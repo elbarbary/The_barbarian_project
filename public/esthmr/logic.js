@@ -38,6 +38,11 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      busiest:'Busiest against their own normal',
+      volumeKicker:'Traded {ratio}\u00d7 its usual volume',
+      nothingUnusual:'Nothing unusual today',
+      busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
+      busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
       archiveNote:'Showing {shown} of {total} filings published in {month}.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
       breadthWord:'How widely',
@@ -88,6 +93,11 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      busiest:'الأنشط مقارنة بمعتادها',
+      volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
+      nothingUnusual:'لا شيء غير معتاد اليوم',
+      busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
+      busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
       archiveNote:'عرض {shown} من {total} إفصاحاً نُشرت في {month}.',
       breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
       breadthWord:'ما اتساع الحركة',
@@ -306,6 +316,24 @@ export class Component extends Base {
     const byCap = D.companies.slice().sort((a,b) => (b.cap||0) - (a.cap||0));
     for (const c of byCap) { if (picked.length >= 5) break; if (!picked.includes(c)) picked.push(c); }
     const watchlist = picked.slice(0,5).map(mkRow);
+
+    // Which shares changed hands far more than they usually do. Twice their
+    // own twenty-session median is the line, and it is OURS rather than the
+    // exchange's — which is why the block says so underneath rather than
+    // presenting the threshold as a fact about the market. A busy day is a
+    // question worth asking, not an answer (§8): nothing here says why the
+    // volume was there or what to do about it.
+    const BUSY_AT = 2;
+    const busy = D.companies
+      .filter((c) => typeof c.rv === 'number' && c.rv >= BUSY_AT)
+      .sort((a, b) => b.rv - a.rv)
+      .slice(0, 9)
+      .map((c) => Object.assign({}, mkRow(c), {
+        kicker: L.volumeKicker.replace('{ratio}', c.rv.toFixed(1)),
+      }));
+    // 230 of the 282 listed carry both numbers; the rest cannot be measured
+    // this way and are not silently counted as quiet.
+    const busyMeasured = D.companies.filter((c) => typeof c.rv === 'number').length;
 
     // Both of these were design literals with no live source, so they never
     // failed and never went stale in a way anybody could see: a signed-in
@@ -727,6 +755,8 @@ export class Component extends Base {
             .replace('{total}', D.filedArchive.length)
             .replace('{month}', this.monthLabel(st.month))
         : '',
+      busy, hasBusy: busy.length > 0, noBusy: busyMeasured > 0 && busy.length === 0,
+      busyNote: busy.length ? L.busyWorkings + ' ' + L.busyYardstick : '',
       hasBreadth: Boolean(D.breadth),
       breadthBars: D.breadth ? [
         { n: D.breadth.up, color: 'var(--up)', label: L.rose },

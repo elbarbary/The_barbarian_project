@@ -97,25 +97,58 @@
       </sc-if>
 
       <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
-        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
-          <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4.2 20V11.2M9.4 20V4.6M14.6 20v-6.6M19.8 20V7.8"></path></svg>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.movers }}</div>
-          </div>
-          <sc-for list="{{ movers }}" as="m" hint-placeholder-count="9">
-            <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
-              <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
-              <div style="min-width:0">
+        <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+          <!-- Which shares changed hands far more than they usually do. Above
+               the movers on purpose: a big move on ordinary volume is a price,
+               a big move on unusual volume is a question. The threshold is
+               OURS and the note underneath says so — the exchange publishes
+               none. -->
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
+            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 9.4l4 3.4 3.2-5.4 4.2 6.2M3 20.6h18"></path></svg>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.busiest }}</div>
+            </div>
+            <sc-for list="{{ busy }}" as="m" hint-placeholder-count="9">
+              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
+                <div style="min-width:0">
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--accent);margin-top:3px">{{ m.kicker }}</div>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
                 <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
                   <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
                 </div>
-                <div style="height:3px;border-radius:999px;background:var(--rule2);overflow:hidden;margin-top:5px"><div style="height:3px;border-radius:999px;width:{{ m.mag }};background:{{ m.color }};opacity:.75"></div></div>
               </div>
+            </sc-for>
+            <sc-if value="{{ noBusy }}">
+              <div style="padding:6px 14px 12px;color:var(--faint);font-size:13px">{{ L.nothingUnusual }}</div>
+            </sc-if>
+            <sc-if value="{{ busyNote }}">
+              <div style="padding:12px 14px 4px;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ busyNote }}</div>
+            </sc-if>
+          </section>
+  
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
+            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4.2 20V11.2M9.4 20V4.6M14.6 20v-6.6M19.8 20V7.8"></path></svg>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.movers }}</div>
             </div>
-          </sc-for>
-        </section>
+            <sc-for list="{{ movers }}" as="m" hint-placeholder-count="9">
+              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
+                    <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
+                  </div>
+                  <div style="height:3px;border-radius:999px;background:var(--rule2);overflow:hidden;margin-top:5px"><div style="height:3px;border-radius:999px;width:{{ m.mag }};background:{{ m.color }};opacity:.75"></div></div>
+                </div>
+              </div>
+            </sc-for>
+          </section>
+        </div>
 
         <div style="display:flex;flex-direction:column;gap:16px">
           <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px 8px">
