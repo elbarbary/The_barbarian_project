@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Download F5-protected PDFs after one ephemeral browser warm-up per batch.
+"""Download F5-protected PDFs after ephemeral browser warm-ups per batch.
 
 The browser exists only long enough to execute the site's TSPD challenge. Its
-cookies stay in memory and are immediately reused by concurrent HTTP/3
-requests from the same machine and user agent. No browser profile or cookie
-file is retained.
+cookies stay in memory and are immediately reused by concurrent HTTP requests
+from the same machine and user agent. Interrupted PDF bytes are retained in a
+sidecar and resumed after a fresh warm-up. No browser profile or cookie file is
+retained.
 
 This helper runs under the repository's Scrapling environment because the
 normal builder Python deliberately has no browser dependencies.
@@ -16,7 +17,6 @@ import argparse
 import concurrent.futures
 import json
 import pathlib
-import tempfile
 import time
 
 
@@ -26,6 +26,8 @@ USER_AGENT = (
     "(KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
 )
 CHROME = pathlib.Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+TRANSFER_PROTOCOLS = ("v3", "v2", "v1")
+TRANSFER_TIMEOUT = 240
 
 
 def _warm_tspd() -> list[dict]:

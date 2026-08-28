@@ -125,10 +125,20 @@ void main() {
     final h1 = company.financials.quarterly.singleWhere(
       (period) => period.period == 'H1 2026',
     );
+    // The income-statement lines are printed figures and are pinned exactly.
     expect(h1.revenue, 23525);
     expect(h1.assets, 36870);
     expect(h1.liabilities, 7410);
-    expect(h1.equity, 29462);
+
+    // Equity is not pinned to the digit. These come from a model reading a
+    // scanned page, and two verified reads of the same filing can differ by a
+    // rounding step and both be right — this one moved 29462 → 29460 on a
+    // re-read, and the second is the better answer because the balance sheet
+    // then closes exactly. What must hold is the identity, so that is what is
+    // asserted; pinning the digit made a legitimate re-read look like a
+    // regression.
+    expect(h1.equity, closeTo(29460, 5));
+    expect(h1.liabilities! + h1.equity!, closeTo(h1.assets!, 5));
   });
 
   testWidgets('a company with nothing filed says so plainly', (tester) async {
