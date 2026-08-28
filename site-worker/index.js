@@ -13,9 +13,11 @@
  *
  *   npx wrangler secret put RESEND_API_KEYS   # one key, or several comma-separated
  *   npx wrangler secret put MAIL_FROM         # "ESTHMR <esthmr@thebarbarianproject.com>"
- *   npx wrangler secret put SENDPULSE_ID      # the API id from SendPulse
- *   npx wrangler secret put SENDPULSE_SECRET  # and its secret
- *   npx wrangler secret put SENDPULSE_FROM    # only if its verified sender differs
+ *   npx wrangler secret put SENDPULSE_TOKEN   # an API token, presented as it is
+ *     — or, for an account issued an OAuth pair instead —
+ *   npx wrangler secret put SENDPULSE_ID      # 32 hex characters
+ *   npx wrangler secret put SENDPULSE_SECRET  # 32 hex characters, exchanged for a token
+ *   npx wrangler secret put SENDPULSE_FROM    # its verified sender, name included
  *
  * Without a key, a code request answers 502 rather than pretending a mail was
  * sent. Without MAIL_FROM it falls back to Resend's own sending domain, which
@@ -219,8 +221,7 @@ function codeMessage(env, email, code) {
 export function providerChain(env) {
   const keys = mailKeys(env);
   const chain = keys.slice(0, 1).map((key) => ({ id: 'resend#1', provider: 'resend', key }));
-  if (String(env.SENDPULSE_ID || '').trim() && String(env.SENDPULSE_SECRET || '').trim()
-      && sendPulseFrom(env)) {
+  if (sendPulseCredential(env) && sendPulseFrom(env)) {
     chain.push({ id: 'sendpulse', provider: 'sendpulse' });
   }
   keys.slice(1).forEach((key, i) => {
@@ -275,14 +276,40 @@ async function postResend(key, message) {
   return { ok: false, status: response.status, detail: await response.text().catch(() => '') };
 }
 
-/** SendPulse's bearer token, cached for as long as it is good for.
+const HEX32 = /^[0-9a-f]{32}$/i;
+
+/** What this account was actually given to authenticate with.
  *
- * SendPulse takes no API key on the send itself: an id and a secret are
- * exchanged for a token that lasts an hour. Fetching one per code would put a
- * second round trip in front of every sign-in, so it is held in KV and dropped
- * the moment a send says it is no longer good.
+ * Two shapes exist and the account decides which you get, so the code has to
+ * cope with both. An OAuth PAIR — a 32-hex id and a 32-hex secret — is
+ * exchanged for a token that lasts an hour, which is worth caching. An API
+ * TOKEN is simply presented as it is; there is nothing to exchange and nothing
+ * to cache.
+ *
+ * They are told apart by shape rather than by which variable is set, because a
+ * token lands in whichever variable was to hand when it was pasted. That is
+ * not hypothetical: this account holds a 7-digit account number in
+ * SENDPULSE_ID and a 74-character API token in SENDPULSE_SECRET, and
+ * exchanging those two is refused with `invalid_client` — which reads exactly
+ * like a mistyped password and is nothing of the kind.
  */
+export function sendPulseCredential(env) {
+  const token = String(env.SENDPULSE_TOKEN || '').trim();
+  if (token) return { kind: 'token', token };
+  const id = String(env.SENDPULSE_ID || '').trim();
+  const secret = String(env.SENDPULSE_SECRET || '').trim();
+  if (HEX32.test(id) && HEX32.test(secret)) return { kind: 'oauth', id, secret };
+  if (secret) return { kind: 'token', token: secret };
+  return null;
+}
+
+/** The bearer to put on a send. Exchanged and cached, or handed straight back. */
 async function sendPulseToken(env, fresh) {
+  const cred = sendPulseCredential(env);
+  if (!cred) throw new Error('sendpulse: nothing configured');
+  // A token is already the thing the API wants. Caching it would add a KV read
+  // to every send in order to hand back what is already sitting in `env`.
+  if (cred.kind === 'token') return cred.token;
   if (!fresh) {
     const held = await env.ESTHMR_AUTH.get('sp:token');
     if (held) return held;
@@ -292,8 +319,8 @@ async function sendPulseToken(env, fresh) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       grant_type: 'client_credentials',
-      client_id: String(env.SENDPULSE_ID || '').trim(),
-      client_secret: String(env.SENDPULSE_SECRET || '').trim(),
+      client_id: cred.id,
+      client_secret: cred.secret,
     }),
   });
   if (!response.ok) {
@@ -327,9 +354,13 @@ async function postSendPulse(env, message) {
   });
 
   let response = await post(await sendPulseToken(env, false));
-  // The cached token outlived its welcome — KV is eventually consistent and a
-  // token can also be revoked under us. One retry with a fresh one, then stop.
-  if (response.status === 401) response = await post(await sendPulseToken(env, true));
+  // A CACHED token can outlive its welcome — KV is eventually consistent, and a
+  // token can be revoked under us. One retry with a fresh one, then stop. An
+  // API token is not cached, so re-fetching would present the same string again
+  // and buy a second identical 401.
+  if (response.status === 401 && sendPulseCredential(env).kind === 'oauth') {
+    response = await post(await sendPulseToken(env, true));
+  }
 
   if (!response.ok) {
     return { ok: false, status: response.status, detail: await response.text().catch(() => '') };

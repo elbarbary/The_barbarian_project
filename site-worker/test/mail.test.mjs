@@ -128,3 +128,51 @@ test('an address is split the way SendPulse wants it', () => {
   assert.deepEqual(parseAddress('a@b.com'), { name: 'ESTHMR', email: 'a@b.com' });
   assert.deepEqual(parseAddress('<a@b.com>'), { name: 'ESTHMR', email: 'a@b.com' });
 });
+
+/* ── which credential SendPulse actually handed out ────────────────────── */
+
+const { sendPulseCredential } = await import('../index.js');
+const HEX = 'a'.repeat(32);
+
+test('an OAuth pair is exchanged, an API token is presented as it is', () => {
+  assert.deepEqual(sendPulseCredential({ SENDPULSE_ID: HEX, SENDPULSE_SECRET: HEX }),
+    { kind: 'oauth', id: HEX, secret: HEX });
+  assert.deepEqual(sendPulseCredential({ SENDPULSE_TOKEN: 'sp_abcdef_0123' }),
+    { kind: 'token', token: 'sp_abcdef_0123' });
+  assert.equal(sendPulseCredential({}), null);
+});
+
+test('a token pasted into SENDPULSE_SECRET is still a token', () => {
+  // This is the live configuration, and the reason the integration failed for
+  // two rounds: a 7-digit account number in SENDPULSE_ID and a 74-character
+  // API token in SENDPULSE_SECRET. Exchanging those two is refused with
+  // `invalid_client`, which reads exactly like a wrong password and is not one.
+  // Neither value is half of a 32-hex pair, so the secret is the token.
+  const live = { SENDPULSE_ID: '8123456', SENDPULSE_SECRET: 'sp_abcdef_' + 'x'.repeat(64) };
+  assert.deepEqual(sendPulseCredential(live),
+    { kind: 'token', token: live.SENDPULSE_SECRET });
+  assert.deepEqual(ids({ RESEND_API_KEYS: 'k1', ...live, ...FROM }),
+    ['resend#1', 'sendpulse']);
+});
+
+test('an explicit token wins over anything else set', () => {
+  assert.deepEqual(
+    sendPulseCredential({ SENDPULSE_TOKEN: 'tok', SENDPULSE_ID: HEX, SENDPULSE_SECRET: HEX }),
+    { kind: 'token', token: 'tok' });
+});
+
+test('whitespace around a pasted value never reaches the wire', () => {
+  // `wrangler secret put` keeps whatever it is handed, newline included.
+  assert.deepEqual(sendPulseCredential({ SENDPULSE_TOKEN: '  tok\n' }),
+    { kind: 'token', token: 'tok' });
+  assert.deepEqual(sendPulseCredential({ SENDPULSE_ID: ` ${HEX} `, SENDPULSE_SECRET: `${HEX}\n` }),
+    { kind: 'oauth', id: HEX, secret: HEX });
+});
+
+test('half a pair is not a pair', () => {
+  // An id with no secret cannot be exchanged and is not a token either.
+  assert.equal(sendPulseCredential({ SENDPULSE_ID: HEX }), null);
+  // A secret with no id is treated as a token, which is the whole point.
+  assert.deepEqual(sendPulseCredential({ SENDPULSE_SECRET: HEX }),
+    { kind: 'token', token: HEX });
+});
