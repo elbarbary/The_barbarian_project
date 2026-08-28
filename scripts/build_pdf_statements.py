@@ -235,8 +235,22 @@ def _year(label: str) -> int:
 
 def candidates(store: dict, *, since: int, only: str | None,
                period: str | None, refresh: bool,
-               retry_failures: bool = False) -> list[dict]:
-    """Newest net-profit-only filed periods that still need enrichment."""
+               retry_failures: bool = False,
+               missing_debt: bool = False) -> list[dict]:
+    """Filed periods still worth reading an attachment for.
+
+    Two shapes of target. By default, the newest net-profit-only rows — the
+    periods where the exchange announced a figure and nothing else is known.
+
+    With `missing_debt`, rows that already carry a full statement but no
+    borrowing line. Those are invisible to the default rule, which treats any
+    filled field as "already enriched", and that is why two thirds of the
+    exchange was never attempted: Mubasher supplies the statement, so the row
+    looks complete, but Mubasher has never published a borrowings figure for
+    anybody. The attachment is the only place one exists. Capped at one filing
+    per company — the freshest — so the run is bounded by the size of the
+    exchange rather than by the length of its filing history.
+    """
     # `build_market_api` writes the authoritative flash first and a later merge
     # only fills its provenance. Some such rows therefore carry `filing_id` but
     # no `period_end`; the cumulative filing store has the date keyed by that
@@ -277,7 +291,12 @@ def candidates(store: dict, *, since: int, only: str | None,
                 # Focus the default run on the rows the user actually called
                 # out: recent EGX periods carrying profit and nothing else.
                 # `--refresh` can revisit a partially-filled attachment later.
-                if not refresh and any(row.get(name) is not None for name in V.ENRICHMENT_FIELDS):
+                if missing_debt:
+                    if any(row.get(name) is not None
+                           for name in ("debt", "short_term_debt", "long_term_debt")):
+                        continue
+                elif not refresh and any(
+                        row.get(name) is not None for name in V.ENRICHMENT_FIELDS):
                     continue
                 filed_record = filed_by_code.get(code) or {}
                 period_end = row.get("period_end") or filed_record.get("period_end")
@@ -304,8 +323,19 @@ def candidates(store: dict, *, since: int, only: str | None,
                 # row whose period end is latest; that is the filing's own one.
                 if held is None or candidate["period_end"] > held["period_end"]:
                     found[code] = candidate
+    picked = list(found.values())
+    if missing_debt:
+        # One per company, the freshest. Reading every historical period of
+        # every issuer would be thousands of attachments for a figure the app
+        # only shows for the latest filed period.
+        newest: dict[str, dict] = {}
+        for row in picked:
+            held = newest.get(row["ticker"])
+            if held is None or row["period_end"] > held["period_end"]:
+                newest[row["ticker"]] = row
+        picked = list(newest.values())
     return sorted(
-        found.values(),
+        picked,
         key=lambda row: (row.get("filed_on") or "", row["period_end"], row["ticker"]),
         reverse=True,
     )
@@ -905,6 +935,11 @@ def main() -> int:
         help="browser-rendered PDF page; repeat for one target when PDF bytes are blocked",
     )
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument(
+        "--missing-debt", action="store_true",
+        help="target companies whose statement is complete but carries no "
+             "borrowings — the one figure no other source publishes",
+    )
     parser.add_argument("--retry-failures", action="store_true",
                         help="revisit prior refusals without rereading verified filings")
     parser.add_argument("--dry-run", action="store_true")

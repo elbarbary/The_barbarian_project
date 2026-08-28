@@ -25,6 +25,75 @@ def reading(**values) -> dict:
     }
 
 
+class MissingDebtTargetTest(unittest.TestCase):
+    """The mode that reaches companies a full statement made invisible."""
+
+    def candidates(self, doc, **kw):
+        import build_pdf_statements as B
+        store = {"filings": {}, "failures": {}}
+        with mock.patch.object(B, "COMPANIES") as companies:
+            companies.glob.return_value = [_FakeDoc(doc)]
+            return B.candidates(store, since=2025, only=None, period=None,
+                                refresh=False, **kw)
+
+    def test_a_complete_statement_without_borrowings_is_still_a_target(self):
+        # The bug this mode fixes: Mubasher supplies revenue and the balance
+        # sheet, so the default rule calls the row enriched and skips it — but
+        # Mubasher has never published a borrowings figure for anybody, and the
+        # attachment is the only place one exists.
+        doc = {
+            "ticker": "AALR",
+            "financials": {"quarterly": [{
+                "period": "9M 2026 (to 31 Mar)", "period_end": "2026-03-31",
+                "filing_id": "egx-288724", "net_income": 12.0,
+                "revenue": 100.0, "assets": 500.0, "equity": 300.0,
+            }]},
+        }
+        self.assertEqual(len(self.candidates(doc, missing_debt=True)), 1)
+        self.assertEqual(self.candidates(doc), [])
+
+    def test_a_row_that_already_states_borrowings_is_not_re_read(self):
+        doc = {
+            "ticker": "KORA",
+            "financials": {"quarterly": [{
+                "period": "H1 2026", "period_end": "2026-06-30",
+                "filing_id": "egx-293566", "net_income": 12.0,
+                "short_term_debt": 1795.5, "long_term_debt": 73.7,
+            }]},
+        }
+        self.assertEqual(self.candidates(doc, missing_debt=True), [])
+
+    def test_only_the_freshest_period_per_company_is_taken(self):
+        # Reading every historical period of every issuer would be thousands of
+        # attachments for a figure the app shows only for the latest filing.
+        doc = {
+            "ticker": "AALR",
+            "financials": {"quarterly": [
+                {"period": "9M 2026 (to 31 Mar)", "period_end": "2026-03-31",
+                 "filing_id": "egx-288724", "net_income": 12.0, "revenue": 1.0},
+                {"period": "H1 2025 (to 31 Dec)", "period_end": "2025-12-31",
+                 "filing_id": "egx-284725", "net_income": 9.0, "revenue": 1.0},
+            ]},
+        }
+        picked = self.candidates(doc, missing_debt=True)
+        self.assertEqual(len(picked), 1)
+        self.assertEqual(picked[0]["period_end"], "2026-03-31")
+
+
+class _FakeDoc:
+    """A path whose read_text is one company document."""
+
+    def __init__(self, doc):
+        self._body = json.dumps(doc)
+        self.stem = doc["ticker"]
+
+    def read_text(self, *a, **k):
+        return self._body
+
+    def __lt__(self, other):
+        return self.stem < other.stem
+
+
 class VerificationTest(unittest.TestCase):
     def test_two_reads_anchor_and_balance_produce_verified_fields(self):
         first = reading(

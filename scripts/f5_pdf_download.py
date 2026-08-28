@@ -74,11 +74,33 @@ def _warm_tspd() -> list[dict]:
             browser.close()
 
 
-def _download_one(job: dict, cookies: list[dict]) -> dict:
+def _valid_pdf(path: pathlib.Path) -> bool:
+    if not path.is_file() or path.stat().st_size < 10_000:
+        return False
+    with path.open("rb") as handle:
+        return handle.read(4) == b"%PDF"
+
+
+def _partial_path(output: pathlib.Path) -> pathlib.Path:
+    return output.with_name(output.name + ".part")
+
+
+def _download_one(job: dict, cookies: list[dict], http_version: str) -> dict:
     from curl_cffi import requests
 
     url = str(job["url"])
     output = pathlib.Path(job["output"])
+    output.parent.mkdir(parents=True, exist_ok=True)
+    partial = _partial_path(output)
+    if _valid_pdf(output):
+        return {
+            "url": url, "output": str(output), "bytes": output.stat().st_size,
+            "seconds": 0, "protocol": "cached", "ok": True,
+        }
+    output.unlink(missing_ok=True)
+    if partial.exists() and not _valid_pdf(partial):
+        partial.unlink(missing_ok=True)
+    resume_at = partial.stat().st_size if partial.exists() else 0
     session = requests.Session(impersonate="chrome")
     for cookie in cookies:
         session.cookies.set(
@@ -87,64 +109,126 @@ def _download_one(job: dict, cookies: list[dict]) -> dict:
         )
     started = time.monotonic()
     try:
+        headers = {
+            "User-Agent": USER_AGENT,
+            "Accept": "application/pdf,*/*;q=0.8",
+            "Referer": HOME,
+        }
+        if resume_at:
+            headers["Range"] = f"bytes={resume_at}-"
         response = session.get(
             url,
-            headers={
-                "User-Agent": USER_AGENT,
-                "Accept": "application/pdf,*/*;q=0.8",
-                "Referer": HOME,
-            },
-            # Several scanned EGX statements are 10-20 MB and the exchange
-            # can deliver them at well under 200 KB/s.  Ninety seconds cut
-            # off otherwise valid transfers after most bytes had arrived.
-            timeout=240,
-            http_version="v3",
+            headers=headers,
+            timeout=TRANSFER_TIMEOUT,
+            http_version=http_version,
+            stream=True,
         )
-        data = response.content
-        if response.status_code != 200 or data[:4] != b"%PDF" or len(data) < 10_000:
+        if response.status_code == 416 and _valid_pdf(partial):
+            partial.replace(output)
+            return {
+                "url": url, "output": str(output), "bytes": output.stat().st_size,
+                "seconds": round(time.monotonic() - started, 3),
+                "protocol": http_version, "resumed": True, "ok": True,
+            }
+        if resume_at and response.status_code == 206:
+            mode = "ab"
+        elif response.status_code == 200:
+            # Some origins ignore Range. Restarting is safe; appending a full
+            # response to a partial PDF would silently corrupt the document.
+            resume_at = 0
+            mode = "wb"
+        else:
             raise RuntimeError(
-                f"HTTP {response.status_code} returned {len(data)} non-PDF bytes"
+                f"HTTP {response.status_code} did not return a PDF transfer"
             )
-        output.parent.mkdir(parents=True, exist_ok=True)
-        with tempfile.NamedTemporaryFile(dir=output.parent, delete=False) as handle:
-            handle.write(data)
-            staged = pathlib.Path(handle.name)
-        staged.replace(output)
+
+        expected_total = None
+        if response.status_code == 206:
+            content_range = response.headers.get("content-range") or ""
+            total = content_range.rsplit("/", 1)[-1]
+            if total.isdigit():
+                expected_total = int(total)
+        else:
+            content_length = response.headers.get("content-length") or ""
+            if content_length.isdigit():
+                expected_total = int(content_length)
+
+        first = True
+        with partial.open(mode) as handle:
+            for chunk in response.iter_content(chunk_size=256 * 1024):
+                if not chunk:
+                    continue
+                if first and resume_at == 0 and chunk[:4] != b"%PDF":
+                    handle.close()
+                    partial.unlink(missing_ok=True)
+                    raise RuntimeError(
+                        f"HTTP {response.status_code} returned non-PDF bytes"
+                    )
+                first = False
+                handle.write(chunk)
+        if not _valid_pdf(partial):
+            raise RuntimeError("transfer ended without a complete PDF header")
+        if expected_total is not None and partial.stat().st_size != expected_total:
+            raise RuntimeError(
+                f"transfer ended at {partial.stat().st_size} of {expected_total} bytes"
+            )
+        partial.replace(output)
         return {
             "url": url,
             "output": str(output),
-            "bytes": len(data),
+            "bytes": output.stat().st_size,
             "seconds": round(time.monotonic() - started, 3),
+            "protocol": http_version,
+            "resumed": bool(resume_at),
             "ok": True,
         }
     except Exception as error:
-        output.unlink(missing_ok=True)
-        return {"url": url, "output": str(output), "ok": False, "error": str(error)}
+        partial_bytes = partial.stat().st_size if partial.exists() else 0
+        return {
+            "url": url, "output": str(output), "ok": False,
+            "protocol": http_version, "partial_bytes": partial_bytes,
+            "error": str(error),
+        }
     finally:
         session.close()
 
 
 def download_batches(jobs: list[dict], batch_size: int = 6) -> list[dict]:
-    """Warm once, then race each batch before its TSPD cookie expires."""
+    """Race each batch, resuming failures after fresh warm-ups."""
     results: list[dict] = []
     for offset in range(0, len(jobs), batch_size):
         batch = jobs[offset:offset + batch_size]
-        cookies = None
-        last_error: Exception | None = None
-        for _ in range(2):
-            try:
-                cookies = _warm_tspd()
+        pending = list(batch)
+        latest: dict[str, dict] = {}
+        for http_version in TRANSFER_PROTOCOLS:
+            if not pending:
                 break
-            except Exception as error:
-                last_error = error
-        if cookies is None:
-            results.extend({
-                "url": job["url"], "output": job["output"], "ok": False,
-                "error": f"F5 warm-up failed after 2 attempts: {last_error}",
-            } for job in batch)
-            continue
-        with concurrent.futures.ThreadPoolExecutor(max_workers=len(batch)) as pool:
-            results.extend(pool.map(lambda job: _download_one(job, cookies), batch))
+            cookies = None
+            last_error: Exception | None = None
+            for _ in range(2):
+                try:
+                    cookies = _warm_tspd()
+                    break
+                except Exception as error:
+                    last_error = error
+            if cookies is None:
+                for job in pending:
+                    latest[str(job["url"])] = {
+                        "url": job["url"], "output": job["output"], "ok": False,
+                        "protocol": http_version,
+                        "error": f"F5 warm-up failed after 2 attempts: {last_error}",
+                    }
+                continue
+            with concurrent.futures.ThreadPoolExecutor(max_workers=len(pending)) as pool:
+                attempt = list(pool.map(
+                    lambda job: _download_one(job, cookies, http_version), pending
+                ))
+            latest.update({str(item["url"]): item for item in attempt})
+            pending = [
+                job for job in pending
+                if not latest[str(job["url"])].get("ok")
+            ]
+        results.extend(latest[str(job["url"])] for job in batch)
     return results
 
 
