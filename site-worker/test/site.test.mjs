@@ -155,7 +155,16 @@ test('no expected filings means no card at all', () => {
 test('the demo names no real instrument and no real issuer', () => {
   const d = data.demo();
   const v = screen(d);
-  const printed = JSON.stringify(v, (k, x) => (typeof x === 'function' ? undefined : x));
+  // The DATA the demo renders, not the phrasebook behind it. `L` carries a
+  // sentence for every screen in both languages — including "Moved with the
+  // EGX 30 …", which belongs to a macro row the demo has none of. What must
+  // not name a real instrument is a value that reaches a card.
+  const RENDERED = ['indices', 'readNow', 'feed', 'rates', 'ratesArrowed', 'macro',
+                    'studies', 'sectorCards', 'filedEvents', 'expectedEvents',
+                    'rows', 'movers', 'watchlist', 'co', 'fins', 'debt',
+                    'signals', 'filings', 'marketDate', 'dataVersion'];
+  const printed = JSON.stringify(Object.fromEntries(RENDERED.map((k) => [k, v[k]])),
+    (k, x) => (typeof x === 'function' ? undefined : x));
   for (const real of ['EGX 30', 'EGX 70', 'EGX 100', 'KORRA', 'Ezz Steel']) {
     assert.ok(!printed.includes(real), `the demo names ${real}`);
   }
@@ -601,4 +610,93 @@ test('a filed statement says when it was filed', () => {
   assert.equal(row.source, 'https://www.mubasher.info/x');
   const [none] = screen({ ...LIVE, fins: [{ period: 'X', revenue: 1 }] }).fins;
   assert.equal(none.filedOn, '', 'a row with no filing date must say nothing');
+});
+
+/* ── published, and previously never opened ────────────────────────────── */
+
+/** exchange()/sectors()/calendar() over the real documents on disk. */
+async function fromDisk(fn) {
+  const { readFile } = await import('node:fs/promises');
+  const real = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true, status: 200,
+    json: async () => JSON.parse(await readFile(
+      new URL('../../public/data/v1/' + String(url).replace('/data/v1/', ''), import.meta.url), 'utf8')),
+  });
+  try { return await fn(); } finally { globalThis.fetch = real; }
+}
+
+test('the pound and the metals reach the Exchange screen', async () => {
+  // rates/latest.json publishes five currencies and two metals. exchange()
+  // read `indices` and `world` and stopped, so the screen showed the indices
+  // and nothing about the currency in anybody's pocket.
+  const ex = await fromDisk(() => data.exchange());
+  const by = Object.fromEntries(ex.rates.map((r) => [r.label, r]));
+  assert.ok(by['US dollar'], 'the dollar is not on the screen');
+  assert.equal(by['US dollar'].unit, 'EGP');
+  assert.match(by['US dollar'].plain, /costs .* pounds/);
+  // Per gram, which is what an Egyptian shop window quotes — not per ounce.
+  assert.equal(by.Gold.unit, 'EGP/g');
+  assert.ok(by.Gold.karats.length >= 3, 'gold has no karat breakdown');
+  assert.match(by.Gold.karats.map((k) => k.karat).join(' '), /21k/);
+  // And each index keeps its own published sentence.
+  assert.match(by['EGX 30'].plain, /EGX 30 (rose|fell)/);
+});
+
+test('a price with no session move gets no arrow rather than a red one', () => {
+  const rates = [{ label: 'EGX 30', value: '1', pct: '-0.31%', color: 'var(--down)' },
+                 { label: 'US dollar', value: '50.25', pct: '', color: 'var(--ink)' }];
+  const [index, currency] = screen({ ...LIVE, rates }).ratesArrowed;
+  assert.equal(index.arrow, '↘');
+  assert.equal(currency.arrow, '', 'a currency has no session move to point at');
+  assert.equal(currency.tint, 'var(--sunk)');
+});
+
+test('a macro reading carries its unit, its chain and how much it actually moves', async () => {
+  const ex = await fromDisk(() => data.exchange());
+  const v = screen({ ...LIVE, macro: ex.macro });
+  const suez = v.macro.find((m) => /Suez/.test(m.label));
+  assert.equal(suez.unit, 'vessels');          // "37" alone is a number waiting to be misread
+  assert.equal(suez.hasUnit, true);
+  assert.match(suez.chain, /dollars/);         // why a canal reaches an Egyptian share
+  // Most of these barely move with the exchange, and saying so beats leaving a
+  // reader to assume a connection the number denies.
+  assert.match(suez.link, /Barely moved with the EGX 30 −0\.02 over 170 sessions\./);
+  const fdi = v.macro.find((m) => /Foreign direct/.test(m.label));
+  assert.equal(fdi.value, '15.45bn', 'a raw 15452700000 does not fit a cell or a head');
+});
+
+test('a sector card is not four blank lines', async () => {
+  // The mapper emitted `companies`, `lead` and `pe`; the card binds `count`,
+  // `read` and `medianPe`. Every card rendered its title and its bar over
+  // nothing at all.
+  const secs = await fromDisk(() => data.sectors());
+  const finance = secs.find((s) => s.name === 'Finance');
+  assert.equal(finance.count, '83');
+  assert.equal(finance.upCount + finance.downCount + finance.flatCount, 83);
+  assert.ok(finance.read.length > 40);
+  assert.equal(finance.medianPe, '10.4');
+  assert.match(finance.standout, /^[A-Z]+ · \d+\/\d+$/);
+  // The per-sector document was never opened: eight medians and seven or eight
+  // movement rows per sector, published and unread.
+  assert.ok(finance.medians.length >= 6, 'no medians');
+  assert.ok(finance.metrics.length >= 6, 'no movement rows');
+  // Named, not keyed: a chip is too small to explain "debt_equity".
+  const keys = finance.medians.map((m) => m.key);
+  assert.ok(keys.includes('Debt to equity'), keys.join(','));
+  assert.ok(!keys.some((k) => k.includes('_')), 'a wire key reached the screen');
+});
+
+test('a calendar entry says what it is, and an estimate says it is one', async () => {
+  const cal = await fromDisk(() => data.calendar());
+  const v = screen({ ...LIVE, filedEvents: cal.filed, expectedEvents: cal.expected });
+  // Five kinds in the document; the site showed none, so a dividend payment
+  // and a rights issue closing were identical-looking rows.
+  const kinds = new Set(v.filedEvents.map((e) => e.kind));
+  assert.ok(kinds.size > 1, `only one kind rendered: ${[...kinds]}`);
+  assert.ok([...kinds].every((k) => k && !k.includes('_')), [...kinds].join(','));
+  // An estimate names the window it sits in and how many past filings drew it.
+  const est = v.expectedEvents.find((e) => e.basis);
+  assert.match(est.basis, /Filed between \d{4}-\d{2}-\d{2} and \d{4}-\d{2}-\d{2} in \d+ past years\./);
+  assert.equal(v.filedEvents.every((e) => !e.basis), true, 'a filed event is not an estimate');
 });

@@ -524,8 +524,15 @@
               <span style="padding:3px 9px;border-radius:999px;background:var(--sunk);color:var(--faint)">{{ s.flatCount }} {{ L.flat }}</span>
             </div>
             <div style="font-size:13px;color:var(--t2);line-height:1.55;text-wrap:pretty">{{ s.read }}</div>
+            <!-- The middle company on every metric the sector can measure.
+                 Published per sector, and never opened until now. -->
+            <div style="display:flex;gap:5px;flex-wrap:wrap">
+              <sc-for list="{{ s.medians }}" as="md" hint-placeholder-count="6">
+                <span style="padding:3px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">{{ md.key }} {{ md.value }}</span>
+              </sc-for>
+            </div>
             <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--rule2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">
-              <span>{{ L.medianPE }} {{ s.medianPe }}</span><span>{{ s.standout }}</span>
+              <span>{{ L.medianPE }} {{ s.medianPe }} · {{ L.yieldWord }} {{ s.yield }}</span><span>{{ s.standout }}</span>
             </div>
           </div>
         </sc-for>
@@ -554,7 +561,15 @@
             <div style="display:grid;grid-template-columns:58px 62px minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 10px;border-radius:13px" style-hover="background:var(--sunk)">
               <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint)">{{ e.day }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ e.ticker }}</div>
-              <div style="font-size:13.5px;color:var(--t2);text-wrap:pretty">{{ e.what }}</div>
+              <div>
+                <div style="font-size:13.5px;color:var(--t2);text-wrap:pretty">{{ e.what }}</div>
+                <sc-if value="{{ e.hasKind }}">
+                  <div style="display:inline-flex;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)">{{ e.kind }}</div>
+                </sc-if>
+                <sc-if value="{{ e.basis }}">
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);margin-top:6px;line-height:1.5">{{ e.basis }}</div>
+                </sc-if>
+              </div>
             </div>
           </sc-for>
         </div>
@@ -569,6 +584,12 @@
               <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ e.ticker }}</div>
               <div>
                 <div style="font-size:13.5px;color:var(--t2);text-wrap:pretty">{{ e.what }}</div>
+              <sc-if value="{{ e.hasKind }}">
+                <div style="display:inline-flex;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)">{{ e.kind }}</div>
+              </sc-if>
+              <sc-if value="{{ e.basis }}">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);margin-top:6px;line-height:1.5">{{ e.basis }}</div>
+              </sc-if>
                 <div style="display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--irisTint);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--iris)">{{ L.estimate }}</div>
               </div>
             </div>
@@ -600,6 +621,21 @@
               <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:{{ r.color }}">{{ r.pct }}</span>
               <span style="font-size:10.5px;color:var(--faint)">{{ r.unit }}</span>
             </div>
+            <!-- The document writes its own sentence for every one of these.
+                 The site was printing the number and throwing the sentence
+                 away. -->
+            <sc-if value="{{ r.hasPlain }}">
+              <div style="font-size:11.5px;color:var(--t2);line-height:1.5;margin-top:9px;text-wrap:pretty">{{ r.plain }}</div>
+            </sc-if>
+            <!-- 21-karat is what a Cairo shop window quotes; the other two come
+                 with it. -->
+            <sc-if value="{{ r.hasKarats }}">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:9px">
+                <sc-for list="{{ r.karats }}" as="k" hint-placeholder-count="3">
+                  <span style="padding:3px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">{{ k.karat }} {{ k.value }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
           </div>
         </sc-for>
 <sc-if value="{{ noRates }}">
@@ -616,8 +652,25 @@
               <div style="font-size:15px;font-weight:500">{{ m.label }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:4px">{{ m.period }}</div>
             </div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:{{ m.color }}">{{ m.value }}</div>
-            <div style="font-size:14px;color:var(--t2);line-height:1.58;text-wrap:pretty">{{ m.meaning }}</div>
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:{{ m.color }}">{{ m.value }}</div>
+              <!-- "37" over the word "ships". Without it, a number is waiting
+                   to be misread. -->
+              <sc-if value="{{ m.hasUnit }}">
+                <div style="font-size:11px;color:var(--faint);margin-top:3px">{{ m.unit }}</div>
+              </sc-if>
+            </div>
+            <div>
+              <div style="font-size:14px;color:var(--t2);line-height:1.58;text-wrap:pretty">{{ m.meaning }}</div>
+              <!-- Why a canal, a metal or a barrel reaches an Egyptian share. -->
+              <sc-if value="{{ m.hasChain }}">
+                <div style="font-size:12.5px;color:var(--faint);line-height:1.6;margin-top:8px;text-wrap:pretty">{{ m.chain }}</div>
+              </sc-if>
+              <!-- And how much it actually has, which is mostly "barely". -->
+              <sc-if value="{{ m.hasLink }}">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:8px">{{ m.link }}</div>
+              </sc-if>
+            </div>
           </div>
         </sc-for>
 <sc-if value="{{ noMacro }}">

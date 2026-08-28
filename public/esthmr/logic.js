@@ -38,6 +38,10 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      calWindow:'Filed between {from} and {to} in {n} past years.',
+      yieldWord:'yield',
+      macroMoved:'Moved with the EGX 30 {r} over {n} sessions.',
+      macroBarely:'Barely moved with the EGX 30 {r} over {n} sessions.',
       sigFirstLoss:'{period} was its first loss after {run} profitable reported periods.',
       sigBackToProfit:'{period} returned to profit after {run} loss-making reported periods.',
       sigHeldSince:'The run had held since {year}.',
@@ -81,6 +85,10 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
+      yieldWord:'العائد',
+      macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
+      macroBarely:'يكاد لا يتحرك مع إيجي إكس 30، {r} على مدى {n} جلسة.',
       sigFirstLoss:'{period} أول خسارة بعد {run} فترة معلنة رابحة.',
       sigBackToProfit:'{period} عودة إلى الربح بعد {run} فترة معلنة خاسرة.',
       sigHeldSince:'استمرت السلسلة منذ {year}.',
@@ -579,7 +587,9 @@ export class Component extends Base {
       ['Financials','الخدمات المالية',17,6,9,2,5.6,'HRHO'],['Healthcare','الرعاية الصحية',11,7,3,1,12.4,'IDHC'],['Textiles','الغزل والنسيج',13,3,8,2,7.7,'ELSH'],
       ['Transport & Shipping','النقل والشحن',8,4,3,1,8.6,'CCAP'],['Travel & Leisure','السفر والترفيه',12,5,6,1,10.3,'ORHD'],['Media','الإعلام',5,2,2,1,9.4,'MEDI']
     ];
-    const sectorCards = D.sectorCards ? say(D.sectorCards, ['name']) : !D.demo ? [] : secDef.map(([en,arn,count,up,down,flat,pe,standout]) => {
+    const sectorCards = D.sectorCards ? say(D.sectorCards, ['name','read','full'])
+      .map((c) => Object.assign({}, c, { medians: say(c.medians || [], ['key']) }))
+      : !D.demo ? [] : secDef.map(([en,arn,count,up,down,flat,pe,standout]) => {
       const bars = [];
       for (let i = 0; i < 10; i++) {
         const isUp = i < Math.round(up/count*10);
@@ -596,7 +606,10 @@ export class Component extends Base {
     const monthDef = [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
     const months = monthDef.map(([id,label]) => ({ label, go: () => this.setState({ month:id }),
       color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
-    const filedEvents = D.filedEvents ? say(D.filedEvents, ['what']) : !D.demo ? [] : [
+    const filedEvents = D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
+      hasKind: Boolean(e.kind),
+      basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
+    })) : !D.demo ? [] : [
       { day:'26 Aug', ticker:'COMI', what: ar?'إفصاح عن توزيعات نقدية مرحلية':'Interim cash distribution disclosure' },
       { day:'14 Aug', ticker:'KORA', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'13 Aug', ticker:'SWDY', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
@@ -604,7 +617,10 @@ export class Component extends Base {
       { day:'07 Aug', ticker:'ABUK', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'04 Aug', ticker:'ETEL', what: ar?'إفصاح عن تعاقد':'Contract disclosure' }
     ];
-    const expectedEvents = D.expectedEvents ? say(D.expectedEvents, ['what']) : !D.demo ? [] : [
+    const expectedEvents = D.expectedEvents ? say(D.expectedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
+      hasKind: Boolean(e.kind),
+      basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
+    })) : !D.demo ? [] : [
       { day:'31 Aug', ticker:'ESRS', what: ar?'قوائم النصف الأول ٢٠٢٦ — الموعد النظامي':'H1 2026 statements — regulatory deadline' },
       { day:'30 Aug', ticker:'PHDC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'30 Aug', ticker:'SKPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
@@ -614,12 +630,25 @@ export class Component extends Base {
     ];
 
     // exchange
-    const rates = D.rates ? say(D.rates, ['label'])
+    const rates = D.rates ? say(D.rates, ['label','plain'])
       : (D.indices || []).map((ix) => ({ label: ix.label, labelAr: ix.labelAr,
           value: ix.value, pct: ix.pct, color: ix.color,
           unit: ar ? 'نقطة' : 'points' }));
 
-    const macro = D.macro ? say(D.macro, ['label','meaning']) : [];
+    const macro = (D.macro ? say(D.macro, ['label','meaning','chain']) : []).map((m) => {
+      // "Moved with the EGX 30 +0.13 over 163 sessions", or the honest version
+      // of it. Most of these series barely move with the exchange at all, and
+      // saying so is worth more than leaving a reader to assume a connection
+      // the number itself denies.
+      const c = m.correlation;
+      const strong = c && Math.abs(c.r) >= 0.2;
+      return Object.assign({}, m, {
+        hasUnit: Boolean(m.unit), hasChain: Boolean(m.chain), hasLink: Boolean(c),
+        link: !c ? '' : (strong ? L.macroMoved : L.macroBarely)
+          .replace('{r}', (c.r > 0 ? '+' : '\u2212') + Math.abs(c.r).toFixed(2))
+          .replace('{n}', c.sessions),
+      });
+    });
 
     const studies = !D.demo ? [] : [
       { venue:'Journal of Financial Economics', year:2024, score:82, band: ar?'منهجية موثّقة، بيانات متاحة':'Documented method, data available',
@@ -671,6 +700,9 @@ export class Component extends Base {
       // docs/data-sources.md makes about the pipeline as a whole.
       feedProvenance: this.provenance(D.newsProvenance, L, ar),
       hasDebt: Boolean(debt), noDebt: !debt,
+      // The sector cards carry a fuller read and a median per metric when the
+      // per-sector document came back; a card without one simply shows less.
+      sectorsHaveDetail: sectorCards.some((c) => (c.medians || []).length),
       signalFootnote: signals.length ? L.sigFootnote : '',
       noMacro: macro.length === 0,
       noStudies: studies.length === 0,
@@ -688,7 +720,7 @@ export class Component extends Base {
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
-      co, ranges, chart, ratesArrowed: rates.map(r => Object.assign({}, r, { arrow: r.pct.charAt(0) === '+' ? '\u2197' : '\u2198', tint: r.pct.charAt(0) === '+' ? 'var(--upTint)' : 'var(--downTint)' })), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
+      co, ranges, chart, ratesArrowed: rates.map((r) => { const flat = !r.pct || r.pct === '\u2014'; const up = String(r.pct).charAt(0) === '+'; return Object.assign({}, r, { arrow: flat ? '' : (up ? '\u2197' : '\u2198'), tint: flat ? 'var(--sunk)' : (up ? 'var(--upTint)' : 'var(--downTint)'), hasPlain: Boolean(r.plain), hasKarats: Boolean((r.karats || []).length) }); }), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies
     };
     // A demo must not put an invented event beside a real company's name.

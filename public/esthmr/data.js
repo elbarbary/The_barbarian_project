@@ -408,11 +408,31 @@ export async function newsProvenance() {
 export async function calendar() {
   const d = await doc('calendar.json');
   const events = d.events || [];
-  const shape = (e) => ({
-    day: day(e.date), ticker: e.ticker || '—',
-    what: e.title || e.note || e.kind, whatAr: e.title_ar || e.title || e.note || e.kind,
-    href: e.link || null,
-  });
+  // What the entry actually is. The document names five kinds and the site
+  // showed none of them, so a dividend payment, an ex-dividend date and a
+  // rights issue closing were three identical-looking rows.
+  const KIND = {
+    results_expected: ['Results expected', 'نتائج مرتقبة'],
+    dividend_payment: ['Dividend paid', 'توزيع أرباح'],
+    ex_dividend: ['Ex-dividend', 'بدون توزيع'],
+    rights_open: ['Rights issue opens', 'فتح حق الاكتتاب'],
+    rights_close: ['Rights issue closes', 'إغلاق حق الاكتتاب'],
+  };
+  const shape = (e) => {
+    const kind = KIND[e.kind] || [e.kind || '', e.kind || ''];
+    return {
+      day: day(e.date), date: e.date, ticker: e.ticker || '—',
+      what: e.title || e.note || e.kind, whatAr: e.title_ar || e.title || e.note || e.kind,
+      kind: kind[0], kindAr: kind[1],
+      href: e.link || null,
+      // An estimate says so, says the window it is drawn inside, and says how
+      // many past filings the window was drawn from. A date with none of that
+      // reads as an announcement.
+      estimated: Boolean(e.estimated),
+      windowFrom: e.window_start || '', windowTo: e.window_end || '',
+      observations: e.observations || 0,
+    };
+  };
   const expected = events.filter((e) => !e.filed);
   // Home says how many are due, and "394 expected" — every unfiled event the
   // calendar holds, out to next May — is true and useless. What it wants is
@@ -442,6 +462,8 @@ export async function calendar() {
 }
 
 /** Exchange: index levels and the world prices beside them, plus macro. */
+const ar_gram = 'EGP/g';
+
 export async function exchange() {
   const [r, m] = await Promise.all([doc('rates/latest.json'), doc('macro.json')]);
   const level = (x) => ({
@@ -454,20 +476,65 @@ export async function exchange() {
     // `token` is a combined display string, not a unit; the design wants the
     // word that follows the number.
     unit: x.kind ? '' : 'points',
+    // "EGX 30 fell 0.31% in the session." — the document's own sentence, which
+    // the site was throwing away in favour of the bare number.
+    plain: x.plain || '', plainAr: x.plain_ar || '',
   });
-  const rates = [...(r.indices || []), ...(r.world || [])].map(level);
+  const money = (v, dp) => (typeof v === 'number'
+    ? v.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })
+    : '—');
+  // The pound against five currencies, and the two metals at the price
+  // Egyptians actually buy them — per gram, not per ounce. Both blocks are
+  // published and neither was ever read, so the Exchange screen showed the
+  // indices and world prices and nothing about the currency in anybody's
+  // pocket. Each carries its own published sentence; none of them is written
+  // here.
+  const currency = (x) => ({
+    label: x.label, labelAr: x.label_ar || x.label,
+    value: money(x.egp, 2), pct: '', color: 'var(--ink)',
+    unit: 'EGP', plain: x.plain || '', plainAr: x.plain_ar || '',
+  });
+  const metal = (x) => ({
+    label: x.label, labelAr: x.label_ar || x.label,
+    value: money(x.egp_gram, 2), pct: '', color: 'var(--ink)',
+    unit: ar_gram, plain: x.plain || '', plainAr: x.plain_ar || '',
+    // 21-karat is what a Cairo shop window quotes; 24 and 18 come with it.
+    karats: (x.karats || []).map((k) => ({ karat: k.karat + 'k', value: money(k.egp_gram, 2) })),
+  });
+  const rates = [
+    ...(r.indices || []).map(level),
+    ...(r.world || []).map(level),
+    ...(r.currencies || []).map(currency),
+    ...(r.metals || []).map(metal),
+  ];
+  // How strongly each series has actually moved with the exchange, and over
+  // how many sessions. Published, and never shown — which left the reader to
+  // assume a connection the number itself mostly denies.
+  const linked = new Map((m.correlations || []).map((c) => [c.id, c]));
   const macro = [
     ...(m.series || []).map((s) => ({
       label: s.label, labelAr: s.label_ar || s.label,
       period: s.as_of || s.cadence || '', color: 'var(--ink)',
-      value: String(s.latest ?? '—'),
+      // "37" over the word "ships" is a reading; "37" alone is a number
+      // waiting to be misread.
+      value: typeof s.latest === 'number' ? s.latest.toLocaleString('en-US') : String(s.latest ?? '—'),
+      unit: s.unit || '',
       meaning: s.meaning || '', meaningAr: s.meaning_ar || s.meaning || '',
+      // Why a canal, a metal or a barrel reaches an Egyptian share at all.
+      chain: s.chain || '', chainAr: s.chain_ar || s.chain || '',
+      correlation: linked.get(s.id) || null,
     })),
     ...(m.indicators || []).map((i) => ({
       label: i.label, labelAr: i.label_ar || i.label,
       period: String(i.year || ''), color: 'var(--ink)',
-      value: String(i.value ?? '—'),
+      value: typeof i.value !== 'number' ? String(i.value ?? '—')
+        : Math.abs(i.value) >= 1e9 ? (i.value / 1e9).toFixed(2) + 'bn'
+        : Math.abs(i.value) >= 1e6 ? (i.value / 1e6).toFixed(1) + 'm'
+        : i.value.toLocaleString('en-US', { maximumFractionDigits: 2 }),
+      unit: i.unit || '',
       meaning: i.meaning || '', meaningAr: i.meaning_ar || i.meaning || '',
+      chain: i.chain || '', chainAr: i.chain_ar || i.chain || '',
+      correlation: null,
     })),
   ];
   // `indexLevels` is the raw published block, kept so Home can build its cards
@@ -479,7 +546,33 @@ export async function exchange() {
 /** Sectors: how each one moved, and the vetted read beneath it. */
 export async function sectors() {
   const d = await doc('sectors.json');
-  return (d.sectors || []).map((s) => {
+  const list = d.sectors || [];
+  // 17 files, 6 KB each. Fetched together because the screen shows all of them
+  // at once and a per-card fetch on hover would spend a reader's hourly
+  // allowance on scrolling. A detail that fails costs its own card's extra
+  // lines, not the card.
+  const details = await Promise.all(list.map(
+    (s) => doc(`sectors/${s.slug}.json`).catch(() => null)));
+
+  const UNIT = { percent: '%', ratio: '\u00d7', egp_m: 'm', egp: '' };
+  // The document keys these by wire name. `debt_equity` and `cash_conversion`
+  // are not words, and a chip is too small to explain itself.
+  const METRIC = {
+    pe: ['P/E', 'مكرر الربحية'], roe: ['Return on equity', 'العائد على حقوق الملكية'],
+    roa: ['Return on assets', 'العائد على الأصول'], debt_equity: ['Debt to equity', 'الدين إلى حقوق الملكية'],
+    dividend_yield: ['Dividend yield', 'عائد التوزيعات'], profit: ['Net profit', 'صافي الربح'],
+    eps: ['Earnings per share', 'ربحية السهم'], assets: ['Total assets', 'إجمالي الأصول'],
+    cash_conversion: ['Cash conversion', 'تحويل النقد'],
+  };
+  const median = (m) => {
+    if (typeof m.value !== 'number') return '\u2014';
+    const dp = m.unit === 'egp' ? 2 : m.unit === 'egp_m' ? 0 : m.unit === 'ratio' ? 2 : 1;
+    return m.value.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })
+      + (UNIT[m.unit] || '');
+  };
+
+  return list.map((s, i) => {
+    const detail = details[i] || {};
     // `movement` is one row per metric; `lead` is the one the sector's read is
     // written about, so the bar shows that rather than an average of eight.
     const move = s.lead
@@ -490,13 +583,34 @@ export async function sectors() {
     const flat = Math.max(0, (s.companies || 0) - rising - falling);
     // Ten cells, filled in proportion — the design draws the row as bars.
     const bar = (n, color) => Array.from(
-      { length: Math.round((n / Math.max(1, s.companies)) * 10) }, () => ({ color }));
+      { length: Math.round((n / Math.max(1, s.companies)) * 10) }, () => ({ color, op: 1 }));
+    const top = (detail.standouts || [])[0];
     return {
       slug: s.slug, name: s.sector, nameAr: s.sector,
-      companies: s.companies,
-      lead: s.readTeaser || '',
-      pe: s.medianPe ? Number(s.medianPe).toFixed(1) : '—',
-      yield: s.medianDividendYield ? Number(s.medianDividendYield).toFixed(1) + '%' : '—',
+      // The names the template actually binds. The mapper used to emit
+      // `companies`, `lead` and `pe`, while the card reads `count`, `read`
+      // and `medianPe` — so every card rendered its title and its bar over
+      // four blank lines.
+      count: String(s.companies ?? '\u2014'),
+      upCount: rising, downCount: falling, flatCount: flat,
+      read: s.readTeaser || '', readAr: s.readTeaser || '',
+      medianPe: s.medianPe ? Number(s.medianPe).toFixed(1) : '\u2014',
+      yield: s.medianDividendYield ? Number(s.medianDividendYield).toFixed(1) + '%' : '\u2014',
+      // The company with the most metrics improving. Named, never ranked:
+      // "most improving lines" is a count off the filings, not a verdict.
+      standout: top ? `${top.ticker} \u00b7 ${top.improving}/${top.readable}` : '',
+      // The full four-sentence read, and the middle company on every metric
+      // the sector can measure. Both published per sector and never opened.
+      full: detail.read || '', fullAr: detail.read_ar || detail.read || '',
+      medians: (detail.medians || []).map((m) => ({
+        key: (METRIC[m.key] || [m.key])[0], keyAr: (METRIC[m.key] || [m.key, m.key])[1],
+        value: median(m),
+      })),
+      metrics: (detail.movement || []).map((m) => ({
+        key: (METRIC[m.key] || [m.key])[0], keyAr: (METRIC[m.key] || [m.key, m.key])[1],
+        rising: m.rising || 0, falling: m.falling || 0,
+        flat: m.flat || 0, unknown: m.unknown || 0,
+      })),
       bars: [
         ...bar(rising, 'var(--up)'),
         ...bar(falling, 'var(--down)'),
