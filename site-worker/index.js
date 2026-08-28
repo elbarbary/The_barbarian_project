@@ -157,6 +157,18 @@ async function mailAuth(env, { fresh = false } = {}) {
   return token;
 }
 
+/** The From address, trimmed and sanity-checked.
+ *
+ * A secret pasted with a trailing newline is invisible in the dashboard and
+ * SendPulse rejects the whole message with "Argument from.email is invalid",
+ * which reads like an account problem rather than a stray character. Trim it,
+ * and fall back rather than sending something that cannot work.
+ */
+function sender(env) {
+  const raw = String(env.MAIL_FROM || '').trim();
+  return EMAIL.test(raw) ? raw : 'noreply@thebarbarianproject.com';
+}
+
 async function postMessage(env, token, email, code) {
   const text = `Your ESTHMR sign-in code is ${code}.\n\n`
     + 'It works once and expires in ten minutes. If you did not ask for it, '
@@ -173,10 +185,7 @@ async function postMessage(env, token, email, code) {
     body: JSON.stringify({
       email: {
         subject: `${code} is your ESTHMR sign-in code`,
-        from: {
-          name: 'ESTHMR',
-          email: env.MAIL_FROM || 'noreply@thebarbarianproject.com',
-        },
+        from: { name: 'ESTHMR', email: sender(env) },
         to: [{ email }],
         text,
         html: b64utf8(html),
@@ -196,7 +205,12 @@ async function sendCode(env, email, code) {
     // permanent key a 401 means the key is wrong, and retrying it is noise.
     response = await postMessage(env, await mailAuth(env, { fresh: true }), email, code);
   }
-  if (!response.ok) throw new Error(`sendpulse ${response.status}`);
+  if (!response.ok) {
+    // The status alone does not say which field it disliked; a rejected sender
+    // and a malformed payload are both 422.
+    const detail = await response.text().catch(() => '');
+    throw new Error(`sendpulse ${response.status}: ${detail.slice(0, 300)}`);
+  }
   // SendPulse can answer 200 with a refusal in the body.
   const body = await response.json().catch(() => ({}));
   if (body && body.result === false) {
@@ -236,6 +250,10 @@ async function api(request, env, url) {
     try {
       await sendCode(env, email, code);
     } catch (error) {
+      // The reader gets nothing useful from a provider's error, but whoever is
+      // reading `wrangler tail` needs the actual reason — a refused sender and
+      // a wrong key look identical from the outside.
+      console.warn('sendCode failed:', error && error.message);
       return json({ error: 'could not send the code' }, 502);
     }
     // Always the same answer, so this cannot be used to test who has an inbox.

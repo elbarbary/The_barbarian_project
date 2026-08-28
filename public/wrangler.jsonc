@@ -12,7 +12,15 @@
 
   "assets": {
     "directory": ".",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+
+    // Without this the gate does not exist. Cloudflare serves a matching
+    // static file BEFORE invoking the Worker, so /data/v1/companies.json
+    // answered 200 with the whole directory to anybody who asked — the Worker
+    // was never consulted. These prefixes run the Worker first; everything
+    // else still short-circuits to the asset, which is what keeps the rest of
+    // the site fast.
+    "run_worker_first": ["/data/v1/*", "/esthmr/api/*"]
   },
   "kv_namespaces": [
     {
