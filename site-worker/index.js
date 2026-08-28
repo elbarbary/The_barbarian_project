@@ -9,15 +9,19 @@
  * of an inbox; a signed cookie carries that proof afterwards. Nothing to leak,
  * nothing to reset.
  *
- * Codes go out through SendPulse. Three secrets make it work, and none of them
- * belongs in this file or in the repository:
+ * Codes go out through SendPulse. Either credential works, and neither belongs
+ * in this file or in the repository:
  *
- *   npx wrangler secret put SENDPULSE_ID       # API "ID" from their dashboard
- *   npx wrangler secret put SENDPULSE_SECRET   # the matching "Secret"
- *   npx wrangler secret put MAIL_FROM          # optional sender address
+ *   npx wrangler secret put SENDPULSE_KEY      # Settings > API > API keys
+ *   npx wrangler secret put MAIL_FROM          # optional verified sender
  *
- * Without the first two, a code request answers 502 rather than pretending a
- * mail was sent.
+ * or, to use the OAuth pair from Settings > API > Client credentials instead:
+ *
+ *   npx wrangler secret put SENDPULSE_ID
+ *   npx wrangler secret put SENDPULSE_SECRET
+ *
+ * With neither, a code request answers 502 rather than pretending a mail was
+ * sent.
  *
  * WHAT THIS DOES AND DOES NOT BUY
  * A gate stops indiscriminate crawling and casual copying. It does not make
@@ -119,13 +123,19 @@ function b64utf8(text) {
   return btoa(s);
 }
 
-/** A SendPulse bearer token, cached until it expires.
+/** Whatever SendPulse will accept in an Authorization header.
  *
- * Their documentation asks for exactly this — "request a new token only after
- * the current one expires" — and it also saves a round trip on every send.
- * A minute of headroom keeps a send from racing the expiry.
+ * Two ways in, and the simpler one wins when it is available:
+ *
+ *   SENDPULSE_KEY               a permanent API key, used as the bearer as-is.
+ *                               Nothing to refresh, nothing to cache.
+ *   SENDPULSE_ID + _SECRET      the OAuth pair, exchanged for an hour-long
+ *                               token which is cached until just before it
+ *                               expires — their documentation asks for exactly
+ *                               that, and it saves a round trip per send.
  */
-async function mailToken(env, { fresh = false } = {}) {
+async function mailAuth(env, { fresh = false } = {}) {
+  if (env.SENDPULSE_KEY) return env.SENDPULSE_KEY;
   if (!fresh) {
     const held = await env.ESTHMR_AUTH.get('sendpulse:token');
     if (held) return held;
@@ -176,14 +186,15 @@ async function postMessage(env, token, email, code) {
 }
 
 async function sendCode(env, email, code) {
-  if (!env.SENDPULSE_ID || !env.SENDPULSE_SECRET) {
+  if (!env.SENDPULSE_KEY && !(env.SENDPULSE_ID && env.SENDPULSE_SECRET)) {
     // Refusing loudly beats pretending a code was sent that never was.
     throw new Error('no mail provider configured');
   }
-  let response = await postMessage(env, await mailToken(env), email, code);
-  if (response.status === 401) {
-    // The cached token was rejected early — mint one and try once more.
-    response = await postMessage(env, await mailToken(env, { fresh: true }), email, code);
+  let response = await postMessage(env, await mailAuth(env), email, code);
+  if (response.status === 401 && !env.SENDPULSE_KEY) {
+    // A cached token was rejected early — mint one and try once more. With a
+    // permanent key a 401 means the key is wrong, and retrying it is noise.
+    response = await postMessage(env, await mailAuth(env, { fresh: true }), email, code);
   }
   if (!response.ok) throw new Error(`sendpulse ${response.status}`);
   // SendPulse can answer 200 with a refusal in the body.
