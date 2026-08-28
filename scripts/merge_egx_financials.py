@@ -70,9 +70,27 @@ EGP = {"egp", "l.e", "l.e.", "egyptian pound", "egyptian pounds", "جنيه مص
 
 SOURCE = "https://www.egx.com.eg"
 
+# The exchange template for this delayed NEDA filing advances both displayed
+# years by one: it was filed in February 2026 but says the current nine-month
+# period ends in September 2026. Its Q1/H1 filings from the same batch, the
+# prior 9M filing, and the comparative figures establish the intended window.
+# Keep the correction keyed to the source filing instead of weakening date
+# parsing for every issuer.
+KNOWN_PERIOD_CORRECTIONS: dict[str, tuple[str, str]] = {
+    "283236": ("2025-01-01", "2025-09-30"),
+}
+
 
 def flatten(html: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html or "")).strip()
+
+
+def corrected_period(code: str, start: datetime.date,
+                     end: datetime.date) -> tuple[datetime.date, datetime.date]:
+    correction = KNOWN_PERIOD_CORRECTIONS.get(str(code))
+    if not correction:
+        return start, end
+    return tuple(datetime.date.fromisoformat(value) for value in correction)
 
 
 def period_label(start: datetime.date, end: datetime.date) -> tuple[str, bool] | None:
@@ -165,6 +183,7 @@ def egx_rows() -> tuple[dict[tuple[str, str], dict], dict[str, int]]:
             if not start or not end or end <= start:
                 skipped["no_period"] += 1
                 continue
+            start, end = corrected_period(str(item.get("code") or ""), start, end)
             labelled = period_label(start, end)
             if not labelled:
                 skipped["no_label"] += 1
@@ -238,6 +257,20 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                 annual = label.startswith("FY")
                 if annual != (bucket == "annual"):
                     continue
+                # If a source-level period correction moves an existing filing
+                # to another label, remove its stale generated row first. A
+                # single EGX filing represents one period and must never remain
+                # published under both the erroneous and corrected dates.
+                filing_id = f"egx-{row['code']}"
+                stale = [
+                    period_row for period_row in periods
+                    if period_row.get("filing_id") == filing_id
+                    and period_row.get("period") != label
+                ]
+                if stale:
+                    periods[:] = [period_row for period_row in periods if period_row not in stale]
+                    index = {period_row.get("period"): period_row for period_row in periods}
+                    changed = True
                 # A non-calendar (fiscal) label is normally never matched — its
                 # end-date suffix keeps it from colliding with a Mubasher row.
                 # But two EGX filings CAN share one fiscal label (a "Value In

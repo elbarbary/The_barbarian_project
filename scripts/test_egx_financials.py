@@ -65,6 +65,13 @@ class Periods(unittest.TestCase):
             datetime.date(2026, 1, 1), datetime.date(2026, 9, 30))
         self.assertEqual(label, "9M 2026")
 
+    def test_known_future_dated_neda_filing_is_corrected_to_2025(self):
+        start, end = m.corrected_period(
+            "283236", datetime.date(2026, 1, 1), datetime.date(2026, 9, 30))
+        self.assertEqual(start, datetime.date(2025, 1, 1))
+        self.assertEqual(end, datetime.date(2025, 9, 30))
+        self.assertEqual(m.period_label(start, end), ("9M 2025", True))
+
 
 class Currency(unittest.TestCase):
     def test_egyptian_pounds_required_not_merely_unopposed(self):

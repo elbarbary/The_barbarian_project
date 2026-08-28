@@ -283,6 +283,10 @@
   "read": "During the period, the company took on new debt while also spending on assets, ending with higher total borrowings than at its previous reporting date. Most of the money it owes is due for repayment after the coming year, and the profit made from everyday operations was larger than the costs of these borrowings.",
   "read_ar": "اقترضت الشركة مبالغ إضافية خلال هذه الفترة بالتزامن مع إنفاقها على شراء أصول، ليرتفع إجمالي ديونها مقارنة بآخر تقرير مالي سابق. ويستحق سداد معظم هذه الديون بعد أكثر من عام، في حين فاقت الأرباح الناتجة عن عملياتها التشغيلية تكلفة هذه القروض."
  },
+ "MBEG:Q1 2026": {
+  "read": "The company took on new borrowings during a period when its day-to-day operations were consuming cash rather than generating it. Most of the money it owes must be repaid within a year, and the profit it made from its operations was larger than the cost of these borrowings.",
+  "read_ar": "اقترضت الشركة أموالاً إضافية خلال فترة كانت أنشطتها اليومية تستهلك فيها السيولة بدلاً من توفيرها. ويستحق سداد الجزء الأكبر من هذه الديون خلال عام، في حين كانت الأرباح الناتجة عن عملياتها أكبر من تكلفة هذا الاقتراض."
+ },
  "MCRO:H1 2026": {
   "read": "During the period, the company took on new financing while its day-to-day operations used cash, and it also distributed cash to shareholders. Its total debt is lower than at the previous reporting date, with most obligations due beyond the coming year. Additionally, the company's operating earnings exceeded the cost of its debt, and it holds more cash on hand than it owes in borrowings.",
   "read_ar": "خلال هذه الفترة، حصلت الشركة على تمويل إضافي في وقت استهلكت فيه أنشطتها التشغيلية السيولة النقدية، كما قامت بتوزيع أموال على المساهمين. وقد انخفض إجمالي ديونها مقارنة بتاريخ الميزانية السابقة، مع استحقاق معظم هذه الديون بعد العام القادم. وإلى جانب ذلك، فاقت أرباحها التشغيلية تكاليف الاقتراض، وهي تحتفظ بنقد يفوق إجمالي ما تدين به."
@@ -407,6 +411,10 @@
   "read": "The company took on additional borrowings during the period while its daily operations were consuming cash, though its total debt is lower than at the previous reporting date. Most of what it owes must be repaid within a year, and the costs of these borrowings exceeded the profit generated from its operations.",
   "read_ar": "اقترضت الشركة أموالاً إضافية خلال الفترة في وقت كانت أنشطتها التشغيلية تستهلك السيولة النقدية، مع أن إجمالي ديونها أصبح أقل مما كان عليه في تاريخ الميزانية السابق. ويستحق سداد معظم ما عليها من ديون خلال عام واحد، كما تجاوزت تكلفة هذه القروض الأرباح الناتجة عن عملياتها التشغيلية."
  },
+ "RUBX:Q1 2026": {
+  "read": "During the period, the company took on new debt while spending on assets, though its total borrowings ended up lower than at the previous reporting date. Most of what it owes is due for repayment within the coming year, and the cost of this debt exceeded the profit from its operations.",
+  "read_ar": "اقترضت الشركة أموالاً واشترت أصولاً خلال هذه الفترة، غير أن إجمالي ديونها بات أقل مما كان عليه في تاريخ الميزانية السابقة. ويستحق سداد معظم ما عليها خلال العام القادم، كما تجاوزت تكلفة هذه الديون أرباحها التشغيلية."
+ },
  "SAUD:Q1 2026": {
   "read": "During the period, the company repaid more of its funding than it brought in, and it also distributed money to shareholders. In addition, its total cash balance exceeds the amount it owes in borrowings.",
   "read_ar": "سددت الشركة خلال هذه الفترة من تمويلاتها مبالغ تزيد عما حصلت عليه، كما وزعت أموالاً على المساهمين. وإلى جانب ذلك، تمتلك الشركة سيولة نقدية تفوق إجمالي ما تدين به من تمويلات."
@@ -466,5 +474,9 @@
  "VERT:H1 2026": {
   "read": "During the period, the company generated cash from its day-to-day operations and paid down money it had borrowed. Most of what it owes is due for repayment within a year, though it currently holds more cash than its total borrowings. In addition, the profit generated from its operations was larger than what these borrowings cost the business.",
   "read_ar": "خلال هذه الفترة، حققت الشركة نقدًا من عملياتها التشغيلية وسددت جزءًا من الأموال المقترضة. ويستحق سداد معظم ما عليها من ديون خلال عام، مع احتفاظها بنقد يتجاوز إجمالي اقتراضها. كما فاقت أرباحها التشغيلية ما تكبدته من تكاليف مقابل هذه الاقتراضات."
+ },
+ "VERT:Q1 2026": {
+  "read": "During the period, the company paid back part of its borrowings while its everyday business brought in cash and earned more profit than what the loans cost. Most of what it still owes is due within a year, and the company currently holds more cash than the total amount of its borrowings.",
+  "read_ar": "سددت الشركة جزءاً من قروضها خلال الفترة، في حين حققت أعمالها اليومية سيولة نقدية وأرباحاً فاقت تكلفة تلك القروض. ويستحق سداد الجزء الأكبر من ديونها المتبقية خلال عام، كما تحتفظ الشركة حالياً بنقد يتجاوز إجمالي المبالغ المستحقة عليها."
  }
 }
