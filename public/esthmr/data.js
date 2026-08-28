@@ -342,16 +342,33 @@ const day = (iso) => {
 /** Today: headlines with their outlet, carried verbatim and linked back. */
 export async function news() {
   const d = await doc('news/latest.json');
+  // Each story's `sources` entry carries only {id, link}; the outlets' real
+  // names live once, at the top of the document. Without the join every card
+  // shouted its slug — ALBORSA, HAPI, ALMAL — because `source.name` was never
+  // there to be found and the code fell through to the id.
+  const outlets = new Map((d.sources || []).map((s) => [s.id, s]));
   return (d.items || []).slice(0, 40).map((it) => {
     const [kindColor, tint] = tintFor(it.event);
-    const source = (it.sources || [])[0] || {};
+    const attributions = it.sources || [];
+    const named = attributions.map((a) => outlets.get(a.id) || { name: a.id });
     return {
-      kind: it.event_label || 'Filing', kindAr: it.event_label_ar || it.event_label || '',
+      // "Other" is the event on 257 of 400 stories and says nothing; the app
+      // shows no pill at all rather than a coloured chip reading OTHER. The
+      // Arabic label must not fall back to the English one — that hands an
+      // Arabic reader a word in the wrong script — and there is no "Filing"
+      // default, because this is a newspaper feed and not the exchange.
+      kind: it.event_label || '', kindAr: it.event_label_ar || '',
+      hasKind: it.event !== 'other' && Boolean(it.event_label),
       kindColor, tint,
       time: hhmm(it.published), date: String(it.published || '').slice(0, 10),
-      source: source.name || source.id || 'EGX',
-      href: source.link || '#',
-      headline: it.headline, headlineAr: it.headline,
+      // Eleven stories today were carried by more than one outlet; all of them
+      // are credited, and the link goes to the first.
+      source: named.map((s) => s.name).filter(Boolean).join(' · ') || 'EGX',
+      sourceAr: named.map((s) => s.name_ar || s.name).filter(Boolean).join(' · ') || 'EGX',
+      href: (attributions[0] || {}).link || '#',
+      // The English headline where the translation cache has reached it — 14
+      // stories today, and more as it fills. The site never translates.
+      headline: it.headline_en || it.headline, headlineAr: it.headline,
       // The plain-language line: what the story does to somebody holding EGX
       // shares. The template calls it `why`; the document calls it `meaning`.
       // It was never mapped, so the box under every live headline was empty —
@@ -369,6 +386,22 @@ export async function news() {
       tickers: (it.tickers || []).map((ticker) => ({ ticker })),
     };
   });
+}
+
+/** Who the feed was read from, what was merged, and what could not be reached.
+ *
+ * A feed that lists only what worked is marketing — the same argument
+ * docs/data-sources.md makes one level up. The withheld count is the §8 line
+ * and its wording is the app's, unchanged. */
+export async function newsProvenance() {
+  const d = await doc('news/latest.json');
+  return {
+    outlets: (d.sources || []).map((s) => s.name).filter(Boolean),
+    outletsAr: (d.sources || []).map((s) => s.name_ar || s.name).filter(Boolean),
+    merged: d.merged || 0,
+    withheld: d.dropped_for_advice || 0,
+    unreachable: (d.unavailable || []).map((u) => u.name).filter(Boolean),
+  };
 }
 
 /** Calendar: what was filed, and what past filing rhythm says is due. */
@@ -480,12 +513,17 @@ export async function companyExtras(ticker) {
     doc(`disclosures/documents/${ticker}.json`).catch(() => null),
   ]);
   return {
-    signals: signals ? (signals.streaks || []).slice(0, 3).map((s) => ({
-      kind: s.kind || 'Signal', kindAr: s.kind || 'Signal',
-      title: `${s.value ?? ''} ${s.period || ''}`.trim(),
-      because: s.filed ? `filed ${s.filed}` : '',
-      becauseAr: s.filed ? `${s.filed}` : '',
-    })) : null,
+    // The raw signal rows. They are turned into sentences in logic.js, which
+    // is where the language lives — this used to render `${s.value} ${s.period}`
+    // and print "0.137 Q1 2026" under a chip reading `back_to_profit`, the raw
+    // wire enum, with an empty line beneath it because the card reads a
+    // `stamp` nothing produced. It was wired to the demo's field names.
+    signals: signals ? {
+      streaks: signals.streaks || [],
+      firsts: signals.firsts || [],
+      quiet: signals.quiet || null,
+      resultsDue: signals.results_due || [],
+    } : null,
     filings: filings ? (filings.items || []).slice(0, 6).map((f) => ({
       date: f.date, title: f.title_en || f.title, titleAr: f.title,
       id: f.id, href: f.link || '#',

@@ -18,8 +18,9 @@ async function load(email) {
     component.setData(base);
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, cal, ex, secs, att] = await Promise.all([
+    const [feed, prov, cal, ex, secs, att] = await Promise.all([
       data.news().catch(() => null),
+      data.newsProvenance().catch(() => null),
       data.calendar().catch(() => null),
       data.exchange().catch(() => null),
       data.sectors().catch(() => null),
@@ -28,6 +29,7 @@ async function load(email) {
     component.setData({
       ...base,
       feed: feed || undefined,
+      newsProvenance: prov || undefined,
       filedEvents: cal ? cal.filed : undefined,
       expectedEvents: cal ? cal.expected : undefined,
       rates: ex ? ex.rates : undefined,

@@ -281,13 +281,24 @@ function strings(value, out = [], seen = new Set()) {
 const DIRECTIVE = /\b(buy|sell|hold|avoid|overvalued|undervalued|verdicts?|recommend\w*|target price|price target)\b/i;
 
 test('§8 nothing the site can render tells a reader what to do', () => {
+  const withSignals = {
+    ...LIVE,
+    signals: { streaks: [{ kind: 'first_loss', period: 'Q1 2026', run: 7, since: '2024-01-01' }],
+               firsts: [], quiet: null },
+  };
   const views = [screen(LIVE), screen(data.demo()), company(LIVE, DOC),
                  company(LIVE, Object.assign({}, DOC, { debt: null })),
+                 screen(withSignals), screen(withSignals, 'ar'),
                  screen(LIVE, 'ar'), screen(data.demo(), 'ar')];
-  // The one sentence allowed to contain "buy" and "sell" is the one denying
-  // that we do either. It is exempt by identity, not by pattern, so a new
-  // sentence cannot smuggle itself in by quoting it.
-  const denial = new Set(views.map((v) => v.L.legalNotLicensed));
+  // Three sentences are allowed the forbidden words, and each is allowed
+  // because it is REFUSING to advise rather than advising: the non-licence
+  // line, the footnote saying a count off the filing record is not an
+  // instruction, and the feed's note that a headline was withheld precisely
+  // for carrying a recommendation. All three are exempt BY IDENTITY, not by
+  // pattern, so a new sentence cannot smuggle itself in by quoting them.
+  const denial = new Set(views.flatMap((v) => [
+    v.L.legalNotLicensed, v.L.sigFootnote, v.L.newsWithheld,
+  ]));
   for (const view of views) {
     for (const line of strings(view)) {
       if (denial.has(line)) continue;
@@ -474,4 +485,120 @@ test('market cap is whole pounds, printed at a scale a person can read', () => {
   for (const empty of [null, undefined, 0, -5, NaN, Infinity, 'x']) {
     assert.equal(c.money(empty), '—', `money(${String(empty)}) should be a dash`);
   }
+});
+
+/* ── things that were rendering the wrong string ───────────────────────── */
+
+const NEWSDOC = {
+  sources: [{ id: 'alborsa', name: 'Al Borsa', name_ar: 'جريدة البورصة' },
+            { id: 'hapi', name: 'Hapi Journal', name_ar: 'حابي' }],
+  merged: 56, dropped_for_advice: 1,
+  unavailable: [{ name: 'Mubasher' }, { name: 'Zawya' }],
+  items: [
+    { id: 'a', headline: 'عنوان', headline_en: 'A headline', published: '2026-08-28T10:00:00Z',
+      event: 'results', event_label: 'Results', event_label_ar: 'نتائج', weight: 'named',
+      sources: [{ id: 'alborsa', link: 'https://alborsaanews.com/a' }, { id: 'hapi', link: 'https://h/a' }],
+      tickers: ['COMI', 'NOPE'] },
+    { id: 'b', headline: 'ثان', published: '2026-08-28T09:00:00Z',
+      event: 'other', event_label: 'Other', weight: 'market',
+      sources: [{ id: 'hapi', link: 'https://h/b' }], tickers: [] },
+  ],
+};
+
+test('the source pill names the outlet, not its slug', async () => {
+  // Each item's `sources` entry carries only {id, link}; the names live once
+  // at the top of the document. Without the join, `source.name || source.id`
+  // always fell through and every card shouted ALBORSA, HAPI, ALMAL.
+  const real = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => NEWSDOC });
+  try {
+    const [first, second] = await data.news();
+    assert.equal(first.source, 'Al Borsa · Hapi Journal');   // both outlets credited
+    assert.equal(first.sourceAr, 'جريدة البورصة · حابي');
+    assert.equal(first.href, 'https://alborsaanews.com/a');  // link goes to the first
+    assert.equal(second.source, 'Hapi Journal');
+  } finally { globalThis.fetch = real; }
+});
+
+test('the meaningless event chip is not drawn', async () => {
+  const real = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => NEWSDOC });
+  try {
+    const [results, other] = await data.news();
+    assert.equal(results.hasKind, true);
+    assert.equal(other.hasKind, false);      // "Other" is the event on 257 of 400
+    assert.equal(other.kindAr, '');          // and never the English word in Arabic
+  } finally { globalThis.fetch = real; }
+});
+
+test('the English headline is used where the cache has reached it', async () => {
+  const real = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => NEWSDOC });
+  try {
+    const [a, b] = await data.news();
+    assert.equal(a.headline, 'A headline');
+    assert.equal(a.headlineAr, 'عنوان');
+    assert.equal(b.headline, 'ثان');         // untranslated: the Arabic stands
+  } finally { globalThis.fetch = real; }
+});
+
+test('a ticker pill opens the company, and only one the directory holds', () => {
+  const feed = [{ kind: 'K', headline: 'H', source: 'S',
+                  tickers: [{ ticker: 'AAAA' }, { ticker: 'NOPE' }] }];
+  const [card] = screen({ ...LIVE, feed }).feed;
+  // The design's pills carry an onClick; the live mapper emitted {ticker} only,
+  // and dc.js attaches nothing to a non-function — so every pill was inert and
+  // looked exactly like the demo's working ones.
+  assert.equal(card.tickers.length, 1, 'a pill was offered for a company we do not hold');
+  assert.equal(card.tickers[0].ticker, 'AAAA');
+  assert.equal(typeof card.tickers[0].go, 'function');
+});
+
+test('the feed says where it came from and what it withheld', () => {
+  const v = screen({ ...LIVE, feed: [{ kind: 'K', headline: 'H', source: 'S', tickers: [] }],
+    newsProvenance: { outlets: ['Al Borsa', 'Hapi Journal'], outletsAr: ['جريدة البورصة', 'حابي'],
+                      merged: 56, withheld: 1, unreachable: ['Mubasher', 'Zawya'] } });
+  assert.match(v.feedProvenance, /Headlines from Al Borsa, Hapi Journal/);
+  assert.match(v.feedProvenance, /56 duplicates merged/);
+  // The §8 sentence, in the app's words. Not to be reworded.
+  assert.match(v.feedProvenance, /1 withheld for carrying a recommendation/);
+  assert.match(v.feedProvenance, /Not reachable today: Mubasher, Zawya/);
+  assert.equal(screen({ ...LIVE, feed: [] }).feedProvenance, '');
+});
+
+test('a signal is a sentence, not the wire enum', () => {
+  const signals = {
+    streaks: [{ kind: 'back_to_profit', period: 'Q3 2025', run: 4, since: '2024-09-30',
+                filed: '2026-01-13', id: 'egx-282099', link: 'https://egx/1' }],
+    firsts: [{ label: 'capital increase', gap_days: 3150, date: '2026-08-26',
+               previous: '2018-01-10', id: 'egx-1' }],
+    quiet: { silent_days: 2543, typical_gap: 6, last_filed: '2019-09-11' },
+  };
+  const v = screen({ ...LIVE, signals });
+  // It printed "0.137 Q1 2026" under a chip reading `back_to_profit`, with a
+  // blank line beneath from a `stamp` nothing produced.
+  assert.equal(v.signals[0].title, 'Q3 2025 returned to profit after 4 loss-making reported periods.');
+  assert.equal(v.signals[0].because, 'The run had held since 2024.');
+  assert.equal(v.signals[0].stamp, '2026-01-13 · egx-282099');
+  assert.equal(v.signals[1].title, 'Its first capital increase in 9 years.');   // not 3150 days
+  assert.match(v.signals[2].title, /filed nothing for 2543 days/);
+  // §8: a count off the record must say it is not an instruction.
+  assert.match(v.signalFootnote, /not a signal to sell/);
+  assert.match(v.signalFootnote, /not a signal to buy/);
+  assert.equal(screen(LIVE).signalFootnote, '');
+});
+
+test('a filed statement says when it was filed', () => {
+  // logic.js read `filed_on` — 275 rows across the whole archive — while the
+  // documents carry `filed` on 8,608. Nearly every expanded period printed
+  // "Filed undefined".
+  const fins = [{ period: 'FY 2014', filed: '2014-09-08', filing_id: 'egx-130053',
+                  source: 'https://www.mubasher.info/x', revenue: 1 }];
+  const [row] = screen({ ...LIVE, fins }).fins;
+  assert.equal(row.filedOn, 'Filed 2014-09-08');
+  // And attributed to the document it actually came from — a balance sheet
+  // transcribed from Mubasher is not an exchange announcement.
+  assert.equal(row.source, 'https://www.mubasher.info/x');
+  const [none] = screen({ ...LIVE, fins: [{ period: 'X', revenue: 1 }] }).fins;
+  assert.equal(none.filedOn, '', 'a row with no filing date must say nothing');
 });

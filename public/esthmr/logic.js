@@ -38,6 +38,19 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      sigFirstLoss:'{period} was its first loss after {run} profitable reported periods.',
+      sigBackToProfit:'{period} returned to profit after {run} loss-making reported periods.',
+      sigHeldSince:'The run had held since {year}.',
+      sigFirstIn:'Its first {label} in {years} years.',
+      sigPreviousWas:'The one before was in {year}.',
+      sigQuiet:'It has filed nothing for {days} days, and normally files every {gap}.',
+      sigLastFiling:'Last filing {date}.',
+      sigStreak:'Streak', sigFirst:'First of its kind', sigSilence:'Silence',
+      sigFootnote:'Counts off the exchange\u2019s own record. A first loss is not a signal to sell and a return to profit is not a signal to buy \u2014 this is what happened, and what you make of it is yours.',
+      newsSourcedFrom:'Headlines from {outlets}, each linked to the outlet that ran it.',
+      newsMerged:'{count} duplicates merged.',
+      newsWithheld:'{count} withheld for carrying a recommendation.',
+      newsUnreachable:'Not reachable today: {outlets}.',
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Watchlist',
@@ -68,6 +81,19 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      sigFirstLoss:'{period} أول خسارة بعد {run} فترة معلنة رابحة.',
+      sigBackToProfit:'{period} عودة إلى الربح بعد {run} فترة معلنة خاسرة.',
+      sigHeldSince:'استمرت السلسلة منذ {year}.',
+      sigFirstIn:'أول {label} منذ {years} سنوات.',
+      sigPreviousWas:'وكانت السابقة في {year}.',
+      sigQuiet:'لم تُفصح عن شيء منذ {days} يوماً، وهي تُفصح عادةً كل {gap}.',
+      sigLastFiling:'آخر إفصاح {date}.',
+      sigStreak:'سلسلة', sigFirst:'الأولى من نوعها', sigSilence:'صمت',
+      sigFootnote:'أرقام محسوبة من سجل البورصة نفسه. أول خسارة ليست إشارة بيع، والعودة إلى الربح ليست إشارة شراء \u2014 هذا ما حدث، وما تراه فيه يخصك وحدك.',
+      newsSourcedFrom:'عناوين من {outlets}، كل واحد منها موصول بالجهة التي نشرته.',
+      newsMerged:'دُمج {count} خبرًا مكررًا.',
+      newsWithheld:'حُجب {count} خبرًا لاحتوائه على توصية.',
+      newsUnreachable:'تعذّر الوصول اليوم إلى: {outlets}.',
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'قائمة المتابعة',
@@ -106,6 +132,67 @@ export class Component extends Base {
   dcol(v) { if (!v) return 'var(--faint)'; return v > 0 ? 'var(--up)' : 'var(--down)'; }
   fold(s) { return (s||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[\u064B-\u0652\u0670\u0640]/g,''); }
   nm(o) { return this.state.lang === 'ar' ? (o.ar || o.en) : o.en; }
+  /** Signal rows as sentences, from the exchange's own filing record.
+   *
+   * Every number here is a count off the archive: how many reported periods a
+   * run lasted, how many days of silence, how long since the last filing of
+   * this kind. None of it is scored and none of it says what to do (§8) —
+   * which is what the footnote under the block exists to say out loud. */
+  signalCards(s, L, ar) {
+    const fill = (t, vals) => Object.entries(vals)
+      .reduce((out, [k, v]) => out.split('{' + k + '}').join(v), t);
+    const year = (iso) => String(iso || '').slice(0, 4);
+    const cards = [];
+    for (const k of (s.streaks || []).slice(0, 3)) {
+      cards.push({
+        kind: L.sigStreak,
+        title: fill(k.kind === 'first_loss' ? L.sigFirstLoss : L.sigBackToProfit,
+          { period: k.period || '', run: k.run ?? '' }),
+        because: k.since ? fill(L.sigHeldSince, { year: year(k.since) }) : '',
+        stamp: [k.filed, k.id].filter(Boolean).join(' \u00b7 '),
+        href: k.link || null,
+      });
+    }
+    for (const f of (s.firsts || []).slice(0, 3 - cards.length)) {
+      cards.push({
+        kind: L.sigFirst,
+        // gap_days is a raw count and reads as one; years is what a person
+        // holds in their head.
+        title: fill(L.sigFirstIn, { label: (ar ? f.label_ar : f.label) || f.label || '',
+          years: Math.max(1, Math.round((f.gap_days || 0) / 365)) }),
+        because: f.previous ? fill(L.sigPreviousWas, { year: year(f.previous) }) : '',
+        stamp: [f.date, f.id].filter(Boolean).join(' \u00b7 '),
+        href: f.link || null,
+      });
+    }
+    const q = s.quiet;
+    if (q && cards.length < 3) {
+      cards.push({
+        kind: L.sigSilence,
+        title: fill(L.sigQuiet, { days: q.silent_days ?? '', gap: q.typical_gap ?? '' }),
+        because: q.last_filed ? fill(L.sigLastFiling, { date: q.last_filed }) : '',
+        stamp: 'signals.json',
+        href: null,
+      });
+    }
+    return cards;
+  }
+
+  /** The sentence under the feed. Empty when nothing was published about it. */
+  provenance(p, L, ar) {
+    if (!p || !(p.outlets || []).length) return '';
+    const names = (ar ? p.outletsAr : p.outlets) || [];
+    // Arabic takes the Arabic comma; English does not.
+    const list = (xs) => xs.join(ar ? '\u060C ' : ', ');
+    const parts = [L.newsSourcedFrom.replace('{outlets}', list(names))];
+    if (p.merged) parts.push(L.newsMerged.replace('{count}', p.merged));
+    if (p.withheld) parts.push(L.newsWithheld.replace('{count}', p.withheld));
+    if ((p.unreachable || []).length) {
+      parts.push(L.newsUnreachable.replace('{outlets}', list(p.unreachable)));
+    }
+    return parts.join(' ');
+  }
+
   /** Whole pounds at a readable scale: 474.3bn, 4.19bn, 812m, 19.0m.
    *
    * companies.json states market_cap in whole EGP. The design divided by a
@@ -224,7 +311,7 @@ export class Component extends Base {
     }));
 
     // today
-    const feed = (D.feed ? say(D.feed, ['kind','headline','why','because']) : !D.demo ? [] : [
+    const feed = (D.feed ? say(D.feed, ['kind','headline','why','because','source']) : !D.demo ? [] : [
       { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source:'EGX', href:'https://www.egx.com.eg',
         headline: ar?'كورّة: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'KORRA: standalone and consolidated statements for the period ended 30 June 2026',
         why: ar?'الميزانية تذكر قروضاً بـ ١٨٦٩٫١ مليون جنيه، منها ١٧٩٥٫٥ مليون تستحق خلال عام.':'The balance sheet states borrowings of EGP 1,869.1m, of which 1,795.5m falls due within a year.',
@@ -248,6 +335,18 @@ export class Component extends Base {
     ]).map((f) => Object.assign({}, f, {
       hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
       hasImage: Boolean(f.image),
+      hasKind: f.hasKind === undefined ? Boolean(f.kind) : f.hasKind,
+      // The design's ticker pills carry an onClick. On the live path the
+      // mapper emitted {ticker} and nothing else, and dc.js attaches no
+      // handler to a non-function — so every pill was inert and looked
+      // exactly like the demo's working ones. Only offered for a company the
+      // directory actually holds; a pill that opens an empty screen is worse
+      // than no pill.
+      tickers: (f.tickers || []).map((t) => (t.go ? t : Object.assign({}, t, {
+        go: D.companies.some((c) => c.ticker === t.ticker)
+          ? () => this.setState({ screen: 'company', ticker: t.ticker })
+          : null,
+      }))).filter((t) => t.go),
     }));
 
     // company
@@ -348,7 +447,8 @@ export class Component extends Base {
         opColor: f.operating_income === null ? 'var(--faint)' : 'var(--ink)', niColor: f.net_income === null ? 'var(--faint)' : 'var(--ink)',
         caret: open ? '−' : '+', open, groups,
         toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [f.period]: !s.open[f.period] }) })),
-        filingId:f.filing_id, filedOn:(ar?'أُودع ':'Filed ') + f.filed_on, source:'https://www.egx.com.eg',
+        filingId:f.filing_id, filedOn: (f.filed || f.filed_on) ? (ar?'أُودع ':'Filed ') + (f.filed || f.filed_on) : '',
+        source: f.source || 'https://www.egx.com.eg',
         omitted: (total - present) > 0 ? ((ar?'':'') + (total-present) + (ar?' حقلاً لم يذكره الإفصاح':' fields not stated in this filing')) : (ar?'كل الحقول مذكورة':'All fields stated')
       };
     });
@@ -455,7 +555,9 @@ export class Component extends Base {
       toggleCaret: st.debtOpen ? '↑' : '↓',
     };
 
-    const signals = D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
+    const signals = (D.signals && !Array.isArray(D.signals))
+      ? this.signalCards(D.signals, L, ar)
+      : D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
       { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/KORA · 2026-08-26' },
       { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/KORA · egx-293566' },
       { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp:'calendar.json · estimate' }
@@ -564,7 +666,12 @@ export class Component extends Base {
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
       noFeed: feed.length === 0, noRates: rates.length === 0,
+      // Where the feed came from, what it merged, and what it could not reach.
+      // A list of only what worked is marketing — the same argument
+      // docs/data-sources.md makes about the pipeline as a whole.
+      feedProvenance: this.provenance(D.newsProvenance, L, ar),
       hasDebt: Boolean(debt), noDebt: !debt,
+      signalFootnote: signals.length ? L.sigFootnote : '',
       noMacro: macro.length === 0,
       noStudies: studies.length === 0,
       nav, sectorCount: sectorCards.length, themeLabel: st.theme === 'light' ? (ar?'نهاري':'Light') : (ar?'ليلي':'Dark'),
