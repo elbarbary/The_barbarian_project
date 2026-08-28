@@ -31,10 +31,23 @@ const CODE_TTL = 10 * 60;              // a code is good for ten minutes
 const SESSION_DAYS = 30;
 const COOKIE = 'esthmr_session';
 
-/* Ceilings. Generous for a person, tight for a crawler. */
+/* Ceilings. Generous for a person, tight for a crawler.
+ *
+ * The per-EMAIL limit is the one that matters: it is what stops somebody
+ * pointing the endpoint at an inbox they do not own and burying it. Five an
+ * hour is more than anyone signing in needs.
+ *
+ * The per-IP limit is a blunt burst guard and has to stay loose, because an
+ * address is not a person. A university, an office behind one NAT, a mobile
+ * carrier on CGNAT — all of those share an address between hundreds of
+ * readers, and a tight per-IP ceiling locks every one of them out because of
+ * what the others did. It was 20/hour, which this session exhausted by itself
+ * in testing; that is a warning about real shared addresses, not about
+ * testing.
+ */
 const LIMITS = {
   codePerEmail: { max: 5, window: 3600 },
-  codePerIp: { max: 20, window: 3600 },
+  codePerIp: { max: 60, window: 3600 },
   verifyPerEmail: { max: 8, window: 900 },
   dataPerSession: { max: 1500, window: 3600 },
 };
