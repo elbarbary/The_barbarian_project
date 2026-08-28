@@ -6489,5 +6489,20 @@
    }
   },
   "generated": "2026-08-25"
+ },
+ "CPME": {
+  "read": "Total assets and debt to equity are both rising over the reported history, showing an expansion in the balance sheet alongside higher financial leverage. However, profitability metrics including net profit, return on assets, and return on equity have an unknown trend, creating an incomplete picture of operating performance. The net profit row settles whether earnings have accompanied this asset growth.",
+  "read_ar": "يرتفع إجمالي الأصول ونسبة الدين إلى حقوق الملكية معاً عبر التاريخ المسجل، مما يوضح توسعاً في الميزانية العمومية بالتوازي مع زيادة الرفع المالي. ومع ذلك، فإن اتجاه مقاييس الربحية بما في ذلك صافي الربح والعائد على الأصول والعائد على حقوق الملكية غير معروف، مما يترك صورة غير مكتملة للأداء التشغيلي. ويحسم بند صافي الربح مسألة ما إذا كانت الأرباح قد واكبت هذا النمو في الأصول.",
+  "answers": {
+   "assets": {
+    "en": "The rise in total assets alongside a rising debt to equity ratio suggests the expansion in the asset base is likely funded in part by additional borrowing.",
+    "ar": "يشير ارتفاع إجمالي الأصول بالتزامن مع ارتفاع نسبة الدين إلى حقوق الملكية إلى أن التوسع في قاعدة الأصول ممول على الأرجح جزئياً من خلال اقتراض إضافي."
+   },
+   "debt_equity": {
+    "en": "Because profitability indicators like return on assets and return on equity are unknown, the pattern does not provide enough direction to determine whether the returns generated exceed the financing costs.",
+    "ar": "نظراً لأن مؤشرات الربحية مثل العائد على الأصول والعائد على حقوق الملكية غير معروفة، فإن هذا النمط لا يوفر اتجاهاً كافياً لتحديد ما إذا كانت العوائد المحققة تتجاوز تكاليف التمويل."
+   }
+  },
+  "generated": "2026-08-28"
  }
 }
