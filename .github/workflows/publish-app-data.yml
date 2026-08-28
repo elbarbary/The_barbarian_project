@@ -20,6 +20,8 @@ on:
       - 'public/cash-or-trash.html'
       - 'public/*-investigation.html'
       - 'scripts/**'
+      - 'public/esthmr/**'
+      - 'site-worker/**'
       - '.github/workflows/publish-app-data.yml'
 
   # Four times a trading day, around the session rather than after it.
@@ -207,6 +209,13 @@ jobs:
       # than crashing, so they run before anything is written.
       - name: Test the parsers
         run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+
+      # The website draws the same figures the parsers produce, and had no
+      # tests at all until it was found publishing the design canvas's invented
+      # EGX 30 level to signed-in readers. Same reasoning as above: a wrong
+      # number renders fine.
+      - name: Test the website
+        run: node --test site-worker/test/*.test.mjs
 
       - name: Validate before writing anything
         env:

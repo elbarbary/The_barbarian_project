@@ -79,7 +79,50 @@ export function demo() {
     demo: true,
   }));
 
-  return { demo: true, companies, series, fins, marketDate: null };
+  // Sample indices, not EGX 30/70/100. An invented level under a real index's
+  // name is the same fabricated figure as an invented price under a real
+  // company's name, and the banner at the top of the page is not enough:
+  // a screenshot travels without it.
+  const indices = [['Sample Index 30', 'مؤشر تجريبي ٣٠', 12800],
+                   ['Sample Index 70', 'مؤشر تجريبي ٧٠', 4310],
+                   ['Sample Index 100', 'مؤشر تجريبي ١٠٠', 6190]]
+    .map(([label, labelAr, base]) => {
+      const points = [];
+      let v = base;
+      for (let i = 0; i < 40; i++) { v += (rand() - 0.48) * base * 0.008; points.push(v); }
+      const pct = Math.round((rand() * 3 - 1.2) * 100) / 100;
+      const up = pct >= 0;
+      return {
+        id: label, label, labelAr,
+        value: v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        chg: (up ? '+' : '−') + Math.abs(v * pct / 100).toFixed(2),
+        pct: (up ? '+' : '−') + Math.abs(pct).toFixed(2) + '%',
+        color: up ? 'var(--up)' : 'var(--down)',
+        tint: up ? 'var(--upTint)' : 'var(--downTint)',
+        arrow: up ? '↗' : '↘',
+        up, points,
+      };
+    });
+
+  const readNow = [
+    { kind: 'Filing', kindAr: 'إفصاح', kindColor: 'var(--accent)', tint: 'var(--accTint)',
+      title: `${companies[0].name.en} files H1 2026: borrowings EGP 252.1m higher than at 31 December`,
+      titleAr: `${companies[0].name.ar} تُقدّم قوائم النصف الأول ٢٠٢٦: القروض أعلى منها في ٣١ ديسمبر بمقدار ٢٥٢٫١ مليون جنيه`,
+      stamp: '2026-08-14 · demo-293566', ticker: companies[0].ticker },
+    { kind: 'Silence', kindAr: 'صمت', kindColor: 'var(--iris)', tint: 'var(--irisTint)',
+      title: `${companies[7].name.en} has had no closing price for four sessions`,
+      titleAr: `${companies[7].name.ar} لم تُفصح عن سعر إغلاق في آخر أربع جلسات`,
+      stamp: 'demo/signals · 2026-08-26', ticker: companies[7].ticker },
+    { kind: 'Results due', kindAr: 'نتائج مرتقبة', kindColor: 'var(--iris)', tint: 'var(--irisTint)',
+      title: 'Six half-year filings expected before 31 August on past filing history',
+      titleAr: 'ستة إفصاحات نصف سنوية متوقعة قبل ٣١ أغسطس بحسب سجل الشركات',
+      stamp: 'demo/calendar · estimate', screen: 'calendar' },
+  ];
+
+  return {
+    demo: true, companies, series, fins, indices, readNow,
+    marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
+  };
 }
 
 /* ── the real thing ─────────────────────────────────────────────────────── */
@@ -102,7 +145,9 @@ async function doc(path) {
 }
 
 export async function live() {
-  const [directory, market] = await Promise.all([doc('companies.json'), doc('market.json')]);
+  const [directory, market, manifest] = await Promise.all([
+    doc('companies.json'), doc('market.json'), doc('manifest.json'),
+  ]);
   const quotes = market.stocks || {};
   const companies = (directory.companies || []).map((c) => {
     const q = quotes[c.ticker] || {};
@@ -116,12 +161,129 @@ export async function live() {
       pe: c.pe ?? null,
     };
   });
-  return { demo: false, companies, series: [], fins: [], marketDate: market.date };
+  return {
+    demo: false, companies, series: [], fins: [],
+    // The stamps the sidebar and every screen header print. These used to be
+    // frozen literals carried over from the design — "26 August 2026", built
+    // "2026-08-27 11:48 UTC", data_version 771314503e — which meant the page
+    // told every reader the same session date for ever, whatever the pipeline
+    // had actually published.
+    marketDate: market.date || manifest.market_date || null,
+    generatedAt: manifest.generated_at || null,
+    dataVersion: manifest.data_version || null,
+  };
+}
+
+/* ── Home's own two blocks ──────────────────────────────────────────────────
+ *
+ * Both were design literals with no live source at all, which is the worst
+ * shape a placeholder can take: it never fails, so nothing reveals it. A
+ * signed-in reader was shown EGX 30 at 44,883.36 rising 0.70% on a session
+ * that closed at 55,106.50 down 0.31%. Published under a real index name, that
+ * is a fabricated financial figure — the one thing this publisher must never
+ * emit — and it had no way of ever going away by itself.
+ */
+
+/** The documents Home needs beyond the directory: the index history, and the
+ *  archive's own read of what is worth looking at. */
+export async function attention() {
+  const [history, signals] = await Promise.all([
+    doc('market-history.json').catch(() => null),
+    doc('signals.json').catch(() => null),
+  ]);
+  return { history, signals };
+}
+
+/** Index cards from the published levels, sparked with the index's own closes.
+ *
+ * The design drew the spark from a seeded sine wave. Beside a real level that
+ * is a made-up price path, so the line here is the last forty sessions the
+ * archive actually holds for that index, and nothing is drawn when it holds
+ * none. */
+export function indexCards(indices, history) {
+  const sessions = (history && history.sessions) || [];
+  return (indices || []).map((x) => {
+    const up = (x.change_percent || 0) >= 0;
+    return {
+      id: x.id,
+      label: x.label, labelAr: x.label_ar || x.label,
+      value: typeof x.level === 'number'
+        ? x.level.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : '—',
+      chg: typeof x.change_points === 'number'
+        ? (x.change_points > 0 ? '+' : '−') + Math.abs(x.change_points).toLocaleString(
+          'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        : '—',
+      pct: typeof x.change_percent === 'number'
+        ? (x.change_percent > 0 ? '+' : '−') + Math.abs(x.change_percent).toFixed(2) + '%'
+        : '—',
+      color: up ? 'var(--up)' : 'var(--down)',
+      tint: up ? 'var(--upTint)' : 'var(--downTint)',
+      arrow: up ? '↗' : '↘',
+      up,
+      points: sessions.slice(-40)
+        .map((s) => (s.indices || {})[x.id])
+        .filter((v) => typeof v === 'number'),
+    };
+  });
+}
+
+/** "What to read now": a filing, a silence and the week ahead — each one a row
+ *  that exists in a published document, or nothing at all. */
+export function readNowCards(signals, expectedTotal, expectedFrom) {
+  const cards = [];
+  const first = ((signals && signals.firsts) || [])[0];
+  if (first) {
+    cards.push({
+      kind: 'Filing', kindAr: 'إفصاح',
+      kindColor: 'var(--accent)', tint: 'var(--accTint)',
+      title: first.title || first.name, titleAr: first.title_ar || first.title || first.name_ar,
+      // Why it is here at all: the exchange has not seen this kind of filing
+      // from this company since that date. Both dates are in the record.
+      stamp: `${first.date} · first since ${first.previous || '—'}`,
+      ticker: first.ticker,
+    });
+  }
+  // The longest silence the archive can see. A company that has not filed is a
+  // fact about the filing record and says nothing about the company.
+  const quiet = ((signals && signals.quiet) || [])[0];
+  if (quiet) {
+    cards.push({
+      kind: 'Silence', kindAr: 'صمت',
+      kindColor: 'var(--iris)', tint: 'var(--irisTint)',
+      title: `${quiet.name || quiet.ticker} has filed nothing since ${quiet.last_filed}`,
+      titleAr: `${quiet.name_ar || quiet.name || quiet.ticker} لم تُفصح عن شيء منذ ${quiet.last_filed}`,
+      stamp: `signals.json · ${quiet.silent_days} days`,
+      ticker: quiet.ticker,
+    });
+  }
+  if (expectedTotal) {
+    cards.push({
+      kind: 'Results due', kindAr: 'نتائج مرتقبة',
+      kindColor: 'var(--iris)', tint: 'var(--irisTint)',
+      title: expectedFrom
+        ? `${expectedTotal} filings expected from ${expectedFrom} on past filing rhythm`
+        : `${expectedTotal} filings expected on past filing rhythm`,
+      titleAr: expectedFrom
+        ? `${expectedTotal} إفصاحاً متوقعاً اعتباراً من ${expectedFrom} بحسب سجل الشركات`
+        : `${expectedTotal} إفصاحاً متوقعاً بحسب سجل الشركات`,
+      stamp: 'calendar.json · estimate',
+      screen: 'calendar',
+    });
+  }
+  return cards;
 }
 
 /** The per-company document, loaded when a company screen opens. */
 export async function company(ticker) {
-  const d = await doc(`companies/${ticker}.json`);
+  // The brief is what the header's description reads. Without it the screen
+  // used to fall back to the design's account of a company called KORRA, which
+  // sat under whichever real ticker was open; it is a separate document and
+  // its absence costs the paragraph, not the screen.
+  const [d, brief] = await Promise.all([
+    doc(`companies/${ticker}.json`),
+    doc(`briefs/${ticker}.json`).catch(() => null),
+  ]);
   const rows = [
     ...(d.financials?.annual || []),
     ...(d.financials?.quarterly || []),
@@ -133,6 +295,9 @@ export async function company(ticker) {
     profile: d.profile || {},
     sector: d.sector,
     name: d.name,
+    brief: brief ? (brief.story || brief.history || '') : '',
+    briefAr: brief ? (brief.story_ar || brief.history_ar || '') : '',
+    briefSource: brief ? `briefs/${ticker}.json` : null,
   };
 }
 
@@ -195,10 +360,31 @@ export async function calendar() {
     what: e.title || e.note || e.kind, whatAr: e.title_ar || e.title || e.note || e.kind,
     href: e.link || null,
   });
+  const expected = events.filter((e) => !e.filed);
+  // Home says how many are due, and "394 expected" — every unfiled event the
+  // calendar holds, out to next May — is true and useless. What it wants is
+  // the next wave: the earliest date still ahead, and everything within a
+  // fortnight of it. Filing seasons cluster, so a fixed window from today is
+  // empty for most of the year; this one never is, and both ends of it come
+  // out of the document.
+  const today = String(d.generated || '').slice(0, 10);
+  const ahead = expected.filter((e) => !today || e.date >= today)
+    .map((e) => e.date).sort();
+  const opens = ahead[0] || '';
+  const closes = opens
+    ? new Date(new Date(opens + 'T00:00:00Z').getTime() + 14 * 86400000).toISOString().slice(0, 10)
+    : '';
+  const soon = opens
+    ? expected.filter((e) => e.date >= opens && e.date <= closes)
+    : expected;
   return {
     filed: events.filter((e) => e.filed).slice(0, 12).map(shape),
     // An estimate is labelled as one; the design keeps them in their own list.
-    expected: events.filter((e) => !e.filed).slice(0, 12).map(shape),
+    expected: expected.slice(0, 12).map(shape),
+    // The lists are cut at twelve for the screen; the count is not, because
+    // Home prints it as a number and a truncated one would simply be wrong.
+    expectedTotal: soon.length,
+    expectedFrom: opens,
   };
 }
 
@@ -231,7 +417,10 @@ export async function exchange() {
       meaning: i.meaning || '', meaningAr: i.meaning_ar || i.meaning || '',
     })),
   ];
-  return { rates, macro };
+  // `indexLevels` is the raw published block, kept so Home can build its cards
+  // from the same document this screen already fetched rather than asking for
+  // it twice.
+  return { rates, macro, indexLevels: r.indices || [] };
 }
 
 /** Sectors: how each one moved, and the vetted read beneath it. */

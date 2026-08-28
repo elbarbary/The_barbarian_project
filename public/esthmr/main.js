@@ -18,11 +18,12 @@ async function load(email) {
     component.setData(base);
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, cal, ex, secs] = await Promise.all([
+    const [feed, cal, ex, secs, att] = await Promise.all([
       data.news().catch(() => null),
       data.calendar().catch(() => null),
       data.exchange().catch(() => null),
       data.sectors().catch(() => null),
+      data.attention().catch(() => null),
     ]);
     component.setData({
       ...base,
@@ -32,6 +33,12 @@ async function load(email) {
       rates: ex ? ex.rates : undefined,
       macro: ex ? ex.macro : undefined,
       sectorCards: secs || undefined,
+      // Home's two headline blocks. Both are assembled here because each needs
+      // documents two different screens already fetch, and asking for them
+      // twice would spend a reader's hourly allowance on nothing.
+      indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
+      readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal,
+        cal && cal.expectedFrom),
     });
   } catch (error) {
     // A session that expired mid-visit drops back to the demo rather than an
