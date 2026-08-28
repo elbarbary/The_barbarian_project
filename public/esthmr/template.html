@@ -81,6 +81,21 @@
 
       </div>
 
+      <!-- An index says what the market did on average; this says how widely,
+           which is the question an average cannot answer. Published in
+           market-history.json all along and never read. -->
+      <sc-if value="{{ hasBreadth }}">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
+          <div style="display:flex;gap:3px;margin-top:12px;border-radius:6px;overflow:hidden">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <div style="height:10px;width:{{ b.width }};background:{{ b.color }}"></div>
+            </sc-for>
+          </div>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:11px;line-height:1.55;text-wrap:pretty">{{ breadthLine }}</div>
+        </div>
+      </sc-if>
+
       <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
         <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
           <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
@@ -547,10 +562,13 @@
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.calendarTitle }}</h1>
         <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill)">
           <sc-for list="{{ months }}" as="m" hint-placeholder-count="4">
-            <div onClick="{{ m.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 13px;border-radius:11px;color:{{ m.color }};background:{{ m.bg }};box-shadow:{{ m.sh }}">{{ m.label }}</div>
+            <div onClick="{{ m.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 13px;border-radius:11px;color:{{ m.color }};background:{{ m.bg }};box-shadow:{{ m.sh }}">{{ m.label }}<span style="color:var(--faint);margin-inline-start:7px;font-size:9.5px;opacity:.8">· {{ m.count }}</span></div>
           </sc-for>
         </div>
       </div>
+      <sc-if value="{{ archiveNote }}">
+        <div style="padding:0 10px;color:var(--faint);font-size:11.5px">{{ archiveNote }}</div>
+      </sc-if>
       <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px">
         <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 14px 20px">
           <div style="display:flex;align-items:center;gap:9px;padding:0 10px 12px">

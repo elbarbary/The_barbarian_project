@@ -700,3 +700,70 @@ test('a calendar entry says what it is, and an estimate says it is one', async (
   assert.match(est.basis, /Filed between \d{4}-\d{2}-\d{2} and \d{4}-\d{2}-\d{2} in \d+ past years\./);
   assert.equal(v.filedEvents.every((e) => !e.basis), true, 'a filed event is not an estimate');
 });
+
+test('Home says how widely the market moved, not just how far', async () => {
+  // market-history.json records breadth for 26 of its 260 sessions, the most
+  // recent included, and nothing had ever read it. Three index cards say what
+  // the market did on average; only this says how many shares agreed.
+  const att = await fromDisk(() => data.attention());
+  assert.ok(att.breadth, 'no breadth found in the archive');
+  const v = screen({ ...LIVE, breadth: att.breadth });
+  assert.equal(v.hasBreadth, true);
+  assert.match(v.breadthLine, /\d+ rose, \d+ fell and \d+ held, of \d+ counted in the .+ session\./);
+  assert.equal(v.breadthBars.length, 3);
+  // The bars are a share of what was counted, not of the directory.
+  const total = v.breadthBars.reduce((n, b) => n + parseInt(b.width, 10), 0);
+  assert.ok(Math.abs(total - 100) <= 2, `bars sum to ${total}%`);
+  assert.equal(screen(LIVE).hasBreadth, false);
+});
+
+test('breadth from an archive that never counted it is absent, not zero', () => {
+  assert.equal(data.breadthOf(null), null);
+  assert.equal(data.breadthOf({ sessions: [{ date: '2026-01-01' }] }), null);
+  assert.equal(data.breadthOf({ sessions: [{ breadth: { counted: 0 } }] }), null);
+  // The most recent session that counted wins, not the last session.
+  const b = data.breadthOf({ sessions: [
+    { date: '2026-01-01', breadth: { up: 1, down: 2, flat: 3, counted: 6 } },
+    { date: '2026-01-02' },
+  ] });
+  assert.equal(b.date, '2026-01-01');
+  assert.equal(b.counted, 6);
+});
+
+test('the company chart gets the long series, not the short one', async () => {
+  // The company document carries 260 sessions and prices/ carries 1,500. The
+  // chart offers a 5Y range, which was showing the same 260 sessions as 1Y.
+  const co = await fromDisk(() => data.company('ACGC'));
+  assert.ok(co.series.length > 1000, `only ${co.series.length} sessions`);
+  assert.ok(co.series[0].date < '2022-01-01', co.series[0].date);
+});
+
+test('the month pills are the months the archive holds', async () => {
+  // Four hardcoded strings from the design — Jun to Sep 2026 — and clicking
+  // one changed a state field nothing read.
+  const months = await fromDisk(() => data.filedMonths());
+  assert.ok(months.length >= 12, `${months.length} months`);
+  assert.match(months[0].id, /^\d{4}-\d{2}$/);
+  assert.ok(months[0].count > 100);
+  const v = screen({ ...LIVE, filedMonths: months });
+  assert.equal(v.months.length, months.length);
+  assert.match(v.months[0].label, /^[A-Z][a-z]+t? \d{4}$/);
+  assert.equal(v.months[0].count, months[0].count);
+});
+
+test('an open month shows that month, and says how much of it', async () => {
+  const items = await fromDisk(() => data.filedMonth('2026-07'));
+  assert.ok(items.length > 1000, `${items.length} filings`);
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, filedArchive: items, filedArchiveMonth: '2026-07' });
+  c.state.month = '2026-07';
+  const v = c.renderVals();
+  assert.equal(v.filedEvents.length, 60);
+  // Sixty of 1,458 fit a column; saying which sixty is the difference between
+  // a sample and a claim.
+  assert.match(v.archiveNote, /Showing 60 of \d{4} filings published in Jul 2026\./);
+  assert.ok(v.filedEvents[0].ticker.length >= 3);
+  // A month the reader has not opened must not borrow another month's rows.
+  c.state.month = '2026-06';
+  assert.equal(c.renderVals().archiveNote, '');
+});

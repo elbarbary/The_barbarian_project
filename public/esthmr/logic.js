@@ -38,6 +38,9 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      archiveNote:'Showing {shown} of {total} filings published in {month}.',
+      breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
+      breadthWord:'How widely',
       calWindow:'Filed between {from} and {to} in {n} past years.',
       yieldWord:'yield',
       macroMoved:'Moved with the EGX 30 {r} over {n} sessions.',
@@ -85,6 +88,9 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      archiveNote:'عرض {shown} من {total} إفصاحاً نُشرت في {month}.',
+      breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
+      breadthWord:'ما اتساع الحركة',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
       yieldWord:'العائد',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
@@ -603,10 +609,20 @@ export class Component extends Base {
     });
 
     // calendar
-    const monthDef = [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
-    const months = monthDef.map(([id,label]) => ({ label, go: () => this.setState({ month:id }),
+    // The design named four months and clicking one changed a state field
+    // nothing read. The archive says which months it holds and how many
+    // filings are in each.
+    const monthDef = (D.filedMonths || []).length
+      ? D.filedMonths.map((m) => [m.id, this.monthLabel(m.id), m.count])
+      : [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
+    const months = monthDef.map(([id,label,count]) => ({ label, count: count || '', go: () => this.setState({ month:id }),
       color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
-    const filedEvents = D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
+    const archive = (D.filedArchive && D.filedArchiveMonth === st.month)
+      ? say(D.filedArchive, ['what']).slice(0, 60).map((e) => Object.assign({}, e, {
+          day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
+        }))
+      : null;
+    const filedEvents = archive ? archive : D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
     })) : !D.demo ? [] : [
@@ -700,6 +716,29 @@ export class Component extends Base {
       // docs/data-sources.md makes about the pipeline as a whole.
       feedProvenance: this.provenance(D.newsProvenance, L, ar),
       hasDebt: Boolean(debt), noDebt: !debt,
+      // An index says what the market did on average. Breadth says how widely,
+      // which is the question the average cannot answer — and it was published
+      // all along.
+      // How much of the chosen month is on screen. 1,467 filings in August;
+      // sixty of them fit a column, and saying which sixty is the difference
+      // between a sample and a claim.
+      archiveNote: (D.filedArchive && D.filedArchiveMonth === st.month)
+        ? L.archiveNote.replace('{shown}', Math.min(60, D.filedArchive.length))
+            .replace('{total}', D.filedArchive.length)
+            .replace('{month}', this.monthLabel(st.month))
+        : '',
+      hasBreadth: Boolean(D.breadth),
+      breadthBars: D.breadth ? [
+        { n: D.breadth.up, color: 'var(--up)', label: L.rose },
+        { n: D.breadth.down, color: 'var(--down)', label: L.fell },
+        { n: D.breadth.flat, color: 'var(--rule2)', label: L.flat },
+      ].map((b) => Object.assign({}, b, {
+        width: Math.round((b.n / Math.max(1, D.breadth.counted)) * 100) + '%',
+      })) : [],
+      breadthLine: D.breadth ? L.breadthLine
+        .replace('{up}', D.breadth.up).replace('{down}', D.breadth.down)
+        .replace('{flat}', D.breadth.flat).replace('{counted}', D.breadth.counted)
+        .replace('{date}', this.longDate(D.breadth.date)) : '',
       // The sector cards carry a fuller read and a median per metric when the
       // per-sector document came back; a card without one simply shows less.
       sectorsHaveDetail: sectorCards.some((c) => (c.medians || []).length),
@@ -840,6 +879,22 @@ export class Component extends Base {
         strokeWidth: 1.5, vectorEffect: 'non-scaling-stroke', strokeLinejoin: 'round',
         strokeLinecap: 'round' })
     );
+  }
+
+  /** "2026-08-02" as the calendar's day column reads it. */
+  dayLabel(iso) {
+    const at = new Date(String(iso) + 'T00:00:00Z');
+    if (isNaN(at)) return iso || '';
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { day: 'numeric', month: 'short', timeZone: 'UTC' }).format(at);
+  }
+
+  /** "2026-08" as a month pill reads it. */
+  monthLabel(id) {
+    const at = new Date(String(id) + '-01T00:00:00Z');
+    if (isNaN(at)) return id;
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(at);
   }
 
   /** "2026-08-27" as the session line reads it, in whichever language. */

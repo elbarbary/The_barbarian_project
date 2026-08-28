@@ -199,7 +199,24 @@ export async function attention() {
     doc('market-history.json').catch(() => null),
     doc('signals.json').catch(() => null),
   ]);
-  return { history, signals };
+  return { history, signals, breadth: breadthOf(history) };
+}
+
+/** How many shares rose, fell and held, in the last session that counted them.
+ *
+ * market-history.json records it for 26 of its 260 sessions, the most recent
+ * included, and nothing on the site has ever read it — so the three index
+ * cards said what the market did on average and nothing about how widely. */
+export function breadthOf(history) {
+  const sessions = (history && history.sessions) || [];
+  for (let i = sessions.length - 1; i >= 0; i--) {
+    const b = sessions[i].breadth;
+    if (b && typeof b.counted === 'number' && b.counted > 0) {
+      return { up: b.up || 0, down: b.down || 0, flat: b.flat || 0,
+               counted: b.counted, date: sessions[i].date };
+    }
+  }
+  return null;
 }
 
 /** Index cards from the published levels, sparked with the index's own closes.
@@ -288,16 +305,22 @@ export async function company(ticker) {
   // used to fall back to the design's account of a company called KORRA, which
   // sat under whichever real ticker was open; it is a separate document and
   // its absence costs the paragraph, not the screen.
-  const [d, brief] = await Promise.all([
+  const [d, brief, prices] = await Promise.all([
     doc(`companies/${ticker}.json`),
     doc(`briefs/${ticker}.json`).catch(() => null),
+    // The company document carries 260 sessions; prices/ carries 1,500. The
+    // chart offers a 5Y range, which was quietly showing the same 260 sessions
+    // as 1Y for every company on the exchange. 231 of 282 have this file; the
+    // rest keep the shorter series rather than losing the chart.
+    doc(`prices/${ticker}.json`).catch(() => null),
   ]);
   const rows = [
     ...(d.financials?.annual || []),
     ...(d.financials?.quarterly || []),
   ].sort((a, b) => String(b.period_end || '').localeCompare(String(a.period_end || '')));
   return {
-    series: (d.price_history || []).map((p) => ({ date: p.date, close: p.close })),
+    series: ((prices && prices.price_history) || d.price_history || [])
+      .map((p) => ({ date: p.date, close: p.close })),
     fins: rows,
     debt: d.debt || null,
     profile: d.profile || {},
@@ -459,6 +482,29 @@ export async function calendar() {
     expectedTotal: soon.length,
     expectedFrom: opens,
   };
+}
+
+/** The months the filed archive holds, newest first, with what each contains.
+ *
+ * The Calendar's month pills were four hardcoded strings from the design —
+ * Jun through Sep 2026 — and clicking one changed a state field nothing read.
+ * The archive holds twelve months and says how many filings are in each. */
+export async function filedMonths() {
+  const d = await doc('calendar/filed/index.json');
+  return (d.months || []).map((m) => ({ id: m.month, count: m.count || 0,
+                                        first: m.first, last: m.last }));
+}
+
+/** Everything the exchange published in one month. 1,467 filings in August. */
+export async function filedMonth(month) {
+  const d = await doc(`calendar/filed/${month}.json`);
+  return (d.items || []).map((it) => ({
+    date: it.date, ticker: it.ticker || '\u2014',
+    // The exchange files in Arabic and the English title is its own, where the
+    // exchange published one. Nothing here is translated on the site.
+    what: it.title_en || it.title, whatAr: it.title,
+    section: it.section || '', id: it.id, href: it.link || null,
+  }));
 }
 
 /** Exchange: index levels and the world prices beside them, plus macro. */
