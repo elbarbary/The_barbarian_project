@@ -331,3 +331,25 @@ test('§8 the non-licence line is rendered, in both languages', async () => {
   assert.match(template, /\{\{\s*L\.legalNotLicensed\s*\}\}/,
     'the template no longer prints the non-licence line');
 });
+
+/* ── the chrome around the screens ─────────────────────────────────────── */
+
+test('signing in actually takes the demo banner off the page', async () => {
+  // It did not, for as long as the site has been up. main.js sets
+  // `bar.hidden = true`, but `hidden` is only the user-agent rule
+  // `[hidden] { display: none }`, and ANY author rule outranks it — .gate sets
+  // `display: flex`. So the attribute flipped, nothing moved, and a signed-in
+  // reader kept being told the figures below were invented while looking at
+  // the exchange. Nothing in JS can catch that; the stylesheet has to.
+  const { readFile } = await import('node:fs/promises');
+  const css = await readFile(new URL('../../public/esthmr/shell.css', import.meta.url), 'utf8');
+
+  // Anything the shell hides by toggling `hidden` needs a real rule behind it.
+  for (const selector of ['.gate', '.account']) {
+    const sets = new RegExp(`\\${selector}\\s*\\{[^}]*display\\s*:`).test(css);
+    if (!sets) continue;   // no author display rule, so `hidden` works unaided
+    const hides = new RegExp(
+      `body\\[data-signed="(yes|no)"\\]\\s*\\${selector}\\s*\\{[^}]*display\\s*:\\s*none`).test(css);
+    assert.ok(hides, `${selector} sets its own display, so "hidden" cannot hide it`);
+  }
+});

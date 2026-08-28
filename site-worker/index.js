@@ -219,7 +219,8 @@ function codeMessage(env, email, code) {
 export function providerChain(env) {
   const keys = mailKeys(env);
   const chain = keys.slice(0, 1).map((key) => ({ id: 'resend#1', provider: 'resend', key }));
-  if (env.SENDPULSE_ID && env.SENDPULSE_SECRET && sendPulseFrom(env)) {
+  if (String(env.SENDPULSE_ID || '').trim() && String(env.SENDPULSE_SECRET || '').trim()
+      && sendPulseFrom(env)) {
     chain.push({ id: 'sendpulse', provider: 'sendpulse' });
   }
   keys.slice(1).forEach((key, i) => {
@@ -291,8 +292,8 @@ async function sendPulseToken(env, fresh) {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
       grant_type: 'client_credentials',
-      client_id: env.SENDPULSE_ID,
-      client_secret: env.SENDPULSE_SECRET,
+      client_id: String(env.SENDPULSE_ID || '').trim(),
+      client_secret: String(env.SENDPULSE_SECRET || '').trim(),
     }),
   });
   if (!response.ok) {

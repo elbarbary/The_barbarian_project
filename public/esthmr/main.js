@@ -51,6 +51,9 @@ async function load(email) {
 
 /** The chrome that reflects who is reading: a banner, and the button's job. */
 function setSigned(email) {
+  // The attribute carries the meaning for anything reading the page aloud;
+  // shell.css is what actually takes the banner off screen, because an author
+  // `display` rule beats `hidden` and .gate has one.
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');

@@ -17,6 +17,15 @@
 }
 .gate-cta:hover { background: #FF8340; }
 
+/* The banner is hidden HERE, not by main.js setting `bar.hidden = true`.
+   `hidden` is only a user-agent rule — `[hidden] { display: none }` — and any
+   author rule beats it. `.gate` above sets `display: flex`, so the attribute
+   was silently doing nothing and the "you are looking at an invented market"
+   line stayed on screen after signing in, over data that was by then real.
+   The account strip two rules down was always hidden this way; the banner
+   simply never got the same treatment. */
+body[data-signed="yes"] .gate { display: none; }
+
 .account {
   position: fixed; inset-inline-end: 18px; bottom: 18px; z-index: 40;
   display: flex; gap: 10px; align-items: center;
