@@ -283,9 +283,17 @@ export default {
         return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
       }
       const answer = await env.ASSETS.fetch(request);
-      // Never let a shared cache hold a document that needed a session.
       const headers = new Headers(answer.headers);
-      headers.set('cache-control', 'private, max-age=300');
+      // `private` keeps it out of shared caches, and `no-cache` means the
+      // browser may keep a copy but must revalidate before using it — so every
+      // read passes through the check above.
+      //
+      // It was `private, max-age=300`, which left the data readable for five
+      // minutes AFTER signing out: the browser answered from its own cache and
+      // never asked. On a shared machine that is somebody else reading it.
+      // Revalidation still returns 304 for an unchanged document, so this
+      // costs a round trip rather than the payload.
+      headers.set('cache-control', 'private, no-cache');
       return new Response(answer.body, { status: answer.status, headers });
     }
 
