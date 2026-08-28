@@ -9,19 +9,15 @@
  * of an inbox; a signed cookie carries that proof afterwards. Nothing to leak,
  * nothing to reset.
  *
- * Codes go out through SendPulse. Either credential works, and neither belongs
- * in this file or in the repository:
+ * Codes go out through Resend, and nothing here belongs in the repository:
  *
- *   npx wrangler secret put SENDPULSE_KEY      # Settings > API > API keys
- *   npx wrangler secret put MAIL_FROM          # optional verified sender
+ *   npx wrangler secret put RESEND_API_KEYS   # one key, or several comma-separated
+ *   npx wrangler secret put MAIL_FROM         # "ESTHMR <esthmr@thebarbarianproject.com>"
  *
- * or, to use the OAuth pair from Settings > API > Client credentials instead:
- *
- *   npx wrangler secret put SENDPULSE_ID
- *   npx wrangler secret put SENDPULSE_SECRET
- *
- * With neither, a code request answers 502 rather than pretending a mail was
- * sent.
+ * Without a key, a code request answers 502 rather than pretending a mail was
+ * sent. Without MAIL_FROM it falls back to Resend's own sending domain, which
+ * needs no DNS but only delivers to the account owner — enough to prove the
+ * flow, not enough to serve readers.
  *
  * WHAT THIS DOES AND DOES NOT BUY
  * A gate stops indiscriminate crawling and casual copying. It does not make
@@ -116,60 +112,22 @@ async function overLimit(env, bucket, key, { max, window }) {
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
 const normalise = (raw) => String(raw || '').trim().toLowerCase();
 
-/** Standard base64 of UTF-8 text — SendPulse wants the HTML part encoded. */
-function b64utf8(text) {
-  let s = '';
-  for (const b of enc.encode(text)) s += String.fromCharCode(b);
-  return btoa(s);
-}
-
-/** Whatever SendPulse will accept in an Authorization header.
+/** Every configured Resend key, in the order they should be tried.
  *
- * Two ways in, and the simpler one wins when it is available:
- *
- *   SENDPULSE_KEY               a permanent API key, used as the bearer as-is.
- *                               Nothing to refresh, nothing to cache.
- *   SENDPULSE_ID + _SECRET      the OAuth pair, exchanged for an hour-long
- *                               token which is cached until just before it
- *                               expires — their documentation asks for exactly
- *                               that, and it saves a round trip per send.
+ * RESEND_API_KEYS takes a comma-separated list; RESEND_API_KEY takes one. Keys are tried in order
+ * and the next is used on 401, 403, 429 or 5xx — Resend's quota and its per-second
+ * rate limit are both per account, so a second key on the same account raises
+ * neither. What it does is survive a key being revoked or rotated without the
+ * sign-in going down with it.
  */
-async function mailAuth(env, { fresh = false } = {}) {
-  if (env.SENDPULSE_KEY) return env.SENDPULSE_KEY;
-  if (!fresh) {
-    const held = await env.ESTHMR_AUTH.get('sendpulse:token');
-    if (held) return held;
-  }
-  const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      grant_type: 'client_credentials',
-      client_id: env.SENDPULSE_ID,
-      client_secret: env.SENDPULSE_SECRET,
-    }),
-  });
-  if (!response.ok) throw new Error(`sendpulse auth ${response.status}`);
-  const { access_token: token, expires_in: ttl } = await response.json();
-  if (!token) throw new Error('sendpulse returned no token');
-  await env.ESTHMR_AUTH.put('sendpulse:token', token,
-    { expirationTtl: Math.max(120, (ttl || 3600) - 60) });
-  return token;
+function mailKeys(env) {
+  return String(env.RESEND_API_KEYS || env.RESEND_API_KEY || '')
+    .split(',')
+    .map((k) => k.trim())
+    .filter(Boolean);
 }
 
-/** The From address, trimmed and sanity-checked.
- *
- * A secret pasted with a trailing newline is invisible in the dashboard and
- * SendPulse rejects the whole message with "Argument from.email is invalid",
- * which reads like an account problem rather than a stray character. Trim it,
- * and fall back rather than sending something that cannot work.
- */
-function sender(env) {
-  const raw = String(env.MAIL_FROM || '').trim();
-  return EMAIL.test(raw) ? raw : 'noreply@thebarbarianproject.com';
-}
-
-async function postMessage(env, token, email, code) {
+function codeMessage(env, email, code) {
   const text = `Your ESTHMR sign-in code is ${code}.\n\n`
     + 'It works once and expires in ten minutes. If you did not ask for it, '
     + 'nothing has happened to your account and you can ignore this.';
@@ -179,43 +137,48 @@ async function postMessage(env, token, email, code) {
     + '<p>It works once and expires in ten minutes.</p>'
     + '<p style="color:#6E6761;font-size:13px">If you did not ask for it, nothing '
     + 'has happened to your account and you can ignore this.</p></div>';
-  return fetch('https://api.sendpulse.com/smtp/emails', {
-    method: 'POST',
-    headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      email: {
-        subject: `${code} is your ESTHMR sign-in code`,
-        from: { name: 'ESTHMR', email: sender(env) },
-        to: [{ email }],
-        text,
-        html: b64utf8(html),
-      },
-    }),
-  });
+  // Resend's own sending domain works with no DNS and no verification, which is
+  // what makes it usable before a domain is set up. It only delivers to the
+  // account owner's address, so it is for proving the flow, not for readers.
+  const from = String(env.MAIL_FROM || '').trim() || 'ESTHMR <onboarding@resend.dev>';
+  return {
+    from,
+    to: [email],
+    subject: `${code} is your ESTHMR sign-in code`,
+    text,
+    html,
+  };
 }
 
 async function sendCode(env, email, code) {
-  if (!env.SENDPULSE_KEY && !(env.SENDPULSE_ID && env.SENDPULSE_SECRET)) {
+  const keys = mailKeys(env);
+  if (!keys.length) {
     // Refusing loudly beats pretending a code was sent that never was.
     throw new Error('no mail provider configured');
   }
-  let response = await postMessage(env, await mailAuth(env), email, code);
-  if (response.status === 401 && !env.SENDPULSE_KEY) {
-    // A cached token was rejected early — mint one and try once more. With a
-    // permanent key a 401 means the key is wrong, and retrying it is noise.
-    response = await postMessage(env, await mailAuth(env, { fresh: true }), email, code);
-  }
-  if (!response.ok) {
-    // The status alone does not say which field it disliked; a rejected sender
-    // and a malformed payload are both 422.
+  const body = JSON.stringify(codeMessage(env, email, code));
+  const failures = [];
+  for (const key of keys) {
+    let response;
+    try {
+      response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
+        body,
+      });
+    } catch (error) {
+      failures.push(`network: ${error.message}`);
+      continue;
+    }
+    if (response.ok) return;
     const detail = await response.text().catch(() => '');
-    throw new Error(`sendpulse ${response.status}: ${detail.slice(0, 300)}`);
+    failures.push(`${response.status}: ${detail.slice(0, 160)}`);
+    // A rejected message is rejected for every key — a bad sender or a
+    // malformed address will not become valid on the next one. Only move on
+    // when the key itself is the problem.
+    if (![401, 403, 429].includes(response.status) && response.status < 500) break;
   }
-  // SendPulse can answer 200 with a refusal in the body.
-  const body = await response.json().catch(() => ({}));
-  if (body && body.result === false) {
-    throw new Error(`sendpulse refused: ${body.message || 'no reason given'}`);
-  }
+  throw new Error(`resend ${failures.join(' | ')}`);
 }
 
 async function api(request, env, url) {
