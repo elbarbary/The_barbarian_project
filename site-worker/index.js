@@ -13,11 +13,18 @@
  *
  *   npx wrangler secret put RESEND_API_KEYS   # one key, or several comma-separated
  *   npx wrangler secret put MAIL_FROM         # "ESTHMR <esthmr@thebarbarianproject.com>"
+ *   npx wrangler secret put SENDPULSE_ID      # the API id from SendPulse
+ *   npx wrangler secret put SENDPULSE_SECRET  # and its secret
+ *   npx wrangler secret put SENDPULSE_FROM    # only if its verified sender differs
  *
  * Without a key, a code request answers 502 rather than pretending a mail was
  * sent. Without MAIL_FROM it falls back to Resend's own sending domain, which
  * needs no DNS but only delivers to the account owner — enough to prove the
  * flow, not enough to serve readers.
+ *
+ * SendPulse is the second thing asked, between the first Resend key and the
+ * rest; `providerChain` says why. Leaving its two secrets unset simply removes
+ * it from the chain, which is the behaviour that was there before it existed.
  *
  * WHAT THIS DOES AND DOES NOT BUY
  * A gate stops indiscriminate crawling and casual copying. It does not make
@@ -64,6 +71,14 @@ function b64url(bytes) {
   let s = '';
   for (const b of new Uint8Array(bytes)) s += String.fromCharCode(b);
   return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+/** Standard base64, as SendPulse wants its HTML — not the URL-safe unpadded
+ *  variant above, which its decoder rejects. */
+function b64(text) {
+  let s = '';
+  for (const b of enc.encode(text)) s += String.fromCharCode(b);
+  return btoa(s);
 }
 
 async function sha256(text) {
@@ -136,17 +151,36 @@ const normalise = (raw) => String(raw || '').trim().toLowerCase();
 
 /** Every configured Resend key, in the order they should be tried.
  *
- * RESEND_API_KEYS takes a comma-separated list; RESEND_API_KEY takes one. Keys are tried in order
- * and the next is used on 401, 403, 429 or 5xx — Resend's quota and its per-second
- * rate limit are both per account, so a second key on the same account raises
- * neither. What it does is survive a key being revoked or rotated without the
- * sign-in going down with it.
+ * RESEND_API_KEYS takes a comma-separated list; RESEND_API_KEY takes one.
+ * Resend's quota and its per-second rate limit are both per ACCOUNT, so five
+ * keys on five accounts raise the ceiling and five on one raise neither. What
+ * a second key always buys is surviving one being revoked or rotated without
+ * the sign-in going down with it.
  */
 function mailKeys(env) {
   return String(env.RESEND_API_KEYS || env.RESEND_API_KEY || '')
     .split(',')
     .map((k) => k.trim())
     .filter(Boolean);
+}
+
+/** "ESTHMR <esthmr@example.com>" split into the two fields SendPulse wants. */
+export function parseAddress(raw) {
+  const match = String(raw || '').match(/^\s*(.*?)\s*<([^>]+)>\s*$/);
+  if (!match) return { name: 'ESTHMR', email: String(raw || '').trim() };
+  return { name: match[1].replace(/^"|"$/g, '') || 'ESTHMR', email: match[2].trim() };
+}
+
+/** The address SendPulse would send as, or null if there is nothing to use.
+ *
+ * SendPulse verifies an individual SENDER, where Resend verifies a domain, so
+ * the two can legitimately differ — SENDPULSE_FROM exists for that. What it
+ * can never be is Resend's sandbox domain: that address belongs to Resend, and
+ * SendPulse would refuse it on every send.
+ */
+function sendPulseFrom(env) {
+  const raw = String(env.SENDPULSE_FROM || env.MAIL_FROM || '').trim();
+  return raw && !raw.includes('resend.dev') ? parseAddress(raw) : null;
 }
 
 function codeMessage(env, email, code) {
@@ -172,37 +206,155 @@ function codeMessage(env, email, code) {
   };
 }
 
-async function sendCode(env, email, code) {
+/* ── who gets asked, and in what order ─────────────────────────────────────
+ *
+ * The first Resend key, then SendPulse, then the remaining Resend keys.
+ *
+ * Second rather than last is the whole point of having it. The failure worth
+ * surviving is not an exhausted quota — it is Resend being down, or refusing
+ * this sender, and every other Resend key answers that identically. A second
+ * provider is the only thing in the list that can answer differently, so it
+ * goes as early as it can while still leaving Resend the default path.
+ */
+export function providerChain(env) {
   const keys = mailKeys(env);
-  if (!keys.length) {
+  const chain = keys.slice(0, 1).map((key) => ({ id: 'resend#1', provider: 'resend', key }));
+  if (env.SENDPULSE_ID && env.SENDPULSE_SECRET && sendPulseFrom(env)) {
+    chain.push({ id: 'sendpulse', provider: 'sendpulse' });
+  }
+  keys.slice(1).forEach((key, i) => {
+    chain.push({ id: `resend#${i + 2}`, provider: 'resend', key });
+  });
+  return chain;
+}
+
+/** Walk the chain until one of them takes the message. Returns which did.
+ *
+ * `attempt` is passed in rather than called directly so the order and the
+ * give-up rules can be tested without a network.
+ */
+export async function deliver(chain, attempt) {
+  const failures = [];
+  let resendRefusedTheMessage = false;
+  for (const step of chain) {
+    if (step.provider === 'resend' && resendRefusedTheMessage) {
+      failures.push(`${step.id}: skipped`);
+      continue;
+    }
+    let outcome;
+    try {
+      outcome = await attempt(step);
+    } catch (error) {
+      failures.push(`${step.id} network: ${error.message}`);
+      continue;
+    }
+    if (outcome.ok) return step.id;
+    failures.push(`${step.id} ${outcome.status}: ${String(outcome.detail || '').slice(0, 160)}`);
+    // Move to the next KEY only when the key is the problem: 401 revoked, 429
+    // exhausted, or Resend itself down. Anything else — a 403 for an
+    // unverified sending domain, a 422 for a malformed address — is about the
+    // message, and four more keys on the same provider buy four identical
+    // refusals. A different provider is still worth asking, because its sender
+    // is verified separately and its idea of a valid message is its own.
+    if (step.provider === 'resend' && outcome.status !== 401
+        && outcome.status !== 429 && outcome.status < 500) {
+      resendRefusedTheMessage = true;
+    }
+  }
+  throw new Error(failures.join(' | '));
+}
+
+async function postResend(key, message) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
+    body: JSON.stringify(message),
+  });
+  if (response.ok) return { ok: true };
+  return { ok: false, status: response.status, detail: await response.text().catch(() => '') };
+}
+
+/** SendPulse's bearer token, cached for as long as it is good for.
+ *
+ * SendPulse takes no API key on the send itself: an id and a secret are
+ * exchanged for a token that lasts an hour. Fetching one per code would put a
+ * second round trip in front of every sign-in, so it is held in KV and dropped
+ * the moment a send says it is no longer good.
+ */
+async function sendPulseToken(env, fresh) {
+  if (!fresh) {
+    const held = await env.ESTHMR_AUTH.get('sp:token');
+    if (held) return held;
+  }
+  const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: env.SENDPULSE_ID,
+      client_secret: env.SENDPULSE_SECRET,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`token ${response.status}: ${(await response.text().catch(() => '')).slice(0, 120)}`);
+  }
+  const body = await response.json();
+  if (!body.access_token) throw new Error('token: no access_token in the reply');
+  // A minute short of what it claims, so a cached token never expires in
+  // flight. KV will not hold anything for less than sixty seconds.
+  const ttl = Math.max(60, Math.min(3600, (body.expires_in || 3600) - 60));
+  await env.ESTHMR_AUTH.put('sp:token', body.access_token, { expirationTtl: ttl });
+  return body.access_token;
+}
+
+async function postSendPulse(env, message) {
+  const from = sendPulseFrom(env);
+  const payload = JSON.stringify({
+    email: {
+      subject: message.subject,
+      from: { name: from.name, email: from.email },
+      to: message.to.map((email) => ({ email })),
+      // SendPulse wants the HTML base64-encoded and the plain text as it is.
+      html: b64(message.html),
+      text: message.text,
+    },
+  });
+  const post = async (token) => fetch('https://api.sendpulse.com/smtp/emails', {
+    method: 'POST',
+    headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+    body: payload,
+  });
+
+  let response = await post(await sendPulseToken(env, false));
+  // The cached token outlived its welcome — KV is eventually consistent and a
+  // token can also be revoked under us. One retry with a fresh one, then stop.
+  if (response.status === 401) response = await post(await sendPulseToken(env, true));
+
+  if (!response.ok) {
+    return { ok: false, status: response.status, detail: await response.text().catch(() => '') };
+  }
+  // A 200 is not the same as a send: SendPulse reports a refused message in the
+  // body, and treating that as success loses the code silently.
+  const body = await response.json().catch(() => ({}));
+  if (body.result === false) {
+    return { ok: false, status: 200, detail: body.message || JSON.stringify(body).slice(0, 160) };
+  }
+  return { ok: true };
+}
+
+async function sendCode(env, email, code) {
+  const chain = providerChain(env);
+  if (!chain.length) {
     // Refusing loudly beats pretending a code was sent that never was.
     throw new Error('no mail provider configured');
   }
-  const body = JSON.stringify(codeMessage(env, email, code));
-  const failures = [];
-  for (const key of keys) {
-    let response;
-    try {
-      response = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
-        body,
-      });
-    } catch (error) {
-      failures.push(`network: ${error.message}`);
-      continue;
-    }
-    if (response.ok) return;
-    const detail = await response.text().catch(() => '');
-    failures.push(`${response.status}: ${detail.slice(0, 160)}`);
-    // Move on only when the KEY is the problem: 401 revoked, 429 exhausted, or
-    // the provider itself down. A 403 is about the message — an unverified
-    // sending domain, a recipient the sender is not allowed to reach — and is
-    // refused identically by every key, so trying the rest only spends four
-    // more quotas on the same answer.
-    if (response.status !== 401 && response.status !== 429 && response.status < 500) break;
-  }
-  throw new Error(`resend ${failures.join(' | ')}`);
+  const message = codeMessage(env, email, code);
+  const used = await deliver(chain, (step) => (step.provider === 'resend'
+    ? postResend(step.key, message)
+    : postSendPulse(env, message)));
+  // Which provider actually carried it — the thing you want in `wrangler tail`
+  // when somebody says the code never arrived.
+  console.log('code sent via', used);
 }
 
 async function api(request, env, url) {
