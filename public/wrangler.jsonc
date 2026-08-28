@@ -2,13 +2,23 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "thebarbarianproject",
   "compatibility_date": "2025-09-27",
-  "observability": {
-    "enabled": true
-  },
+  "observability": { "enabled": true },
+
+  // The Worker sits in front of the assets so /data/v1/ can be gated and
+  // /esthmr/api/ can answer. It lives OUTSIDE this directory on purpose:
+  // everything in `assets.directory` is publicly served, and the sign-in logic
+  // is not something to publish.
+  "main": "../site-worker/index.js",
+
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
-  ]
+  "kv_namespaces": [
+    {
+      "binding": "ESTHMR_AUTH",
+      "id": "b4f2d94463d54f8ca08942668fefff46"
+    }
+  ],
+  "compatibility_flags": ["nodejs_compat"]
 }

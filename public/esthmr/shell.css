@@ -1,0 +1,65 @@
+/* The frame around the design: the demo banner, the account strip, and the
+   sign-in sheet. The screens themselves are styled entirely by design.css. */
+.gate {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; gap: 16px; align-items: center; justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 18px;
+  background: #1B1917; color: #F5F1EC;
+  font: 400 13.5px/1.5 "IBM Plex Sans", system-ui, sans-serif;
+}
+.gate p { margin: 0; max-width: 74ch; }
+.gate strong { color: #FF8340; font-weight: 600; }
+.gate-cta, .account button {
+  font: 500 13px/1 "IBM Plex Sans", system-ui, sans-serif;
+  padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  background: #E8621C; color: #1B1917; border: 0;
+}
+.gate-cta:hover { background: #FF8340; }
+
+.account {
+  position: fixed; inset-inline-end: 18px; bottom: 18px; z-index: 40;
+  display: flex; gap: 10px; align-items: center;
+  font: 400 12.5px/1 "IBM Plex Mono", ui-monospace, monospace;
+}
+body[data-signed="no"] .account { display: none; }
+.account button { background: rgba(27,25,23,.9); color: #F5F1EC; }
+
+/* Sign-in sheet */
+#esthmr-signin { position: fixed; inset: 0; z-index: 60;
+  display: grid; place-items: center; }
+.si-scrim { position: absolute; inset: 0; background: rgba(27,25,23,.55);
+  backdrop-filter: blur(3px); }
+.si-sheet {
+  position: relative; width: min(420px, calc(100vw - 32px));
+  background: #F7F4F0; color: #1B1917; border-radius: 18px;
+  padding: 26px 26px 22px;
+  box-shadow: 0 24px 60px -20px rgba(27,25,23,.5);
+  font: 400 15px/1.55 "IBM Plex Sans", system-ui, sans-serif;
+}
+.si-sheet h2 { margin: 0 0 6px;
+  font: 600 21px/1.15 "Bricolage Grotesque", system-ui, sans-serif; }
+.si-lead { margin: 0 0 18px; color: #5C554F; font-size: 13.6px; }
+.si-step { display: grid; gap: 8px; }
+.si-step label { font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
+  color: #6E6761; font-family: "IBM Plex Mono", monospace; }
+.si-step input {
+  font: 400 16px/1.2 "IBM Plex Sans", system-ui, sans-serif;
+  padding: 11px 13px; border-radius: 10px;
+  border: 1px solid rgba(27,25,23,.22); background: #fff; color: #1B1917;
+}
+#si-code { font-family: "IBM Plex Mono", monospace; letter-spacing: .3em; }
+.si-step button[type=submit] {
+  margin-top: 4px; padding: 11px 16px; border: 0; border-radius: 10px;
+  background: #1B1917; color: #F5F1EC; cursor: pointer;
+  font: 500 14.5px/1 "IBM Plex Sans", system-ui, sans-serif;
+}
+.si-step button[type=submit]:disabled { opacity: .6; cursor: default; }
+.si-back { margin-top: 2px; background: none; border: 0; cursor: pointer;
+  color: #6E6761; font-size: 12.5px; text-decoration: underline; }
+.si-error { margin: 12px 0 0; color: #A3402F; font-size: 13px; }
+.si-close { position: absolute; top: 10px; inset-inline-end: 12px;
+  background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer;
+  color: #6E6761; }
+:focus-visible { outline: 2px solid #E8621C; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

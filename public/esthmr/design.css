@@ -1,0 +1,31 @@
+*{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#EDE8E2;-webkit-font-smoothing:antialiased}
+  [data-theme="light"]{--bg:#EDE8E2;--surface:#F7F4F0;--ink:#1B1917;--t2:#5C554F;--faint:#6E6761;--accent:#E8621C;--iris:#5F4B6E;--up:#3F6B52;--down:#A3402F;
+    --rule:rgba(27,25,23,.10);--rule2:rgba(27,25,23,.06);--sunk:rgba(27,25,23,.035);
+    --glass:rgba(247,244,240,.66);--edge:rgba(255,255,255,.75);--edgeIn:rgba(255,255,255,.55);
+    --sh:0 1px 2px rgba(27,25,23,.05),0 12px 32px -14px rgba(27,25,23,.22);
+    --shLift:0 2px 4px rgba(27,25,23,.06),0 22px 44px -18px rgba(27,25,23,.30);
+    --shPill:0 1px 2px rgba(27,25,23,.08);
+    --activeBg:rgba(255,255,255,.82);
+    --upTint:rgba(63,107,82,.10);--downTint:rgba(163,64,47,.10);--irisTint:rgba(95,75,110,.10);--accTint:rgba(232,98,28,.10);
+    --wash1:rgba(232,98,28,.055);--wash2:rgba(95,75,110,.05)}
+  [data-theme="dark"]{--bg:#141311;--surface:#1D1B19;--ink:#F0EBE5;--t2:#B8B0A8;--faint:#9C938B;--accent:#FF8340;--iris:#A99BB8;--up:#6EA487;--down:#D97D64;
+    --rule:rgba(240,235,229,.13);--rule2:rgba(240,235,229,.07);--sunk:rgba(240,235,229,.04);
+    --glass:rgba(29,27,25,.62);--edge:rgba(240,235,229,.10);--edgeIn:rgba(240,235,229,.06);
+    --sh:0 1px 2px rgba(0,0,0,.34),0 14px 34px -14px rgba(0,0,0,.6);
+    --shLift:0 2px 6px rgba(0,0,0,.4),0 24px 48px -18px rgba(0,0,0,.72);
+    --shPill:0 1px 2px rgba(0,0,0,.4);
+    --activeBg:rgba(240,235,229,.09);
+    --upTint:rgba(110,164,135,.13);--downTint:rgba(217,125,100,.13);--irisTint:rgba(169,155,184,.13);--accTint:rgba(255,131,64,.13);
+    --wash1:rgba(255,131,64,.07);--wash2:rgba(169,155,184,.06)}
+  a{color:var(--ink);text-decoration:none}
+  a:hover{color:var(--accent)}
+  ::selection{background:var(--accent);color:#1B1917}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .om-scr{animation:fadeUp .3s cubic-bezier(.2,.7,.3,1) both}
+  .om-main::-webkit-scrollbar,.om-rail::-webkit-scrollbar{width:11px}
+  .om-main::-webkit-scrollbar-thumb,.om-rail::-webkit-scrollbar-thumb{background:var(--rule);border-radius:9px;border:3px solid transparent;background-clip:content-box}
+  .om-main::-webkit-scrollbar-track,.om-rail::-webkit-scrollbar-track{background:transparent}
+  input::placeholder{color:var(--faint)}
+  .om-search:focus-within{border-color:color-mix(in oklch,var(--accent) 55%,transparent);box-shadow:var(--sh),0 0 0 3px var(--accTint)}

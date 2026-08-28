@@ -1,0 +1,629 @@
+<div data-theme="{{ theme }}" dir="{{ dir }}" style="min-height:100vh;background:var(--bg);background-image:radial-gradient(1100px 600px at 12% -8%,var(--wash1),transparent 62%),radial-gradient(900px 520px at 96% 4%,var(--wash2),transparent 60%);color:var(--ink);font-family:{{ bodyFont }};font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums">
+
+  <aside class="om-rail" style="position:fixed;inset-block:14px;inset-inline-start:14px;width:250px;border-radius:26px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.5);border:1px solid var(--edge);box-shadow:var(--sh);padding:24px 18px 20px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;overscroll-behavior:contain;z-index:5">
+    <div style="padding-inline:8px">
+      <div style="display:flex;align-items:center;gap:9px">
+        <div style="width:30px;height:30px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:var(--shPill)">
+          <span style="font-family:'Bricolage Grotesque',serif;font-weight:700;font-size:16px;color:#1B1917;letter-spacing:-.04em">E</span>
+        </div>
+        <div style="font-family:'Bricolage Grotesque',serif;font-weight:700;font-size:22px;letter-spacing:-.04em">ESTHMR</div>
+      </div>
+      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-top:9px">{{ L.publisher }}</div>
+    </div>
+
+    <div style="border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);padding:12px 14px">
+      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.session }}</div>
+      <div style="font-size:15px;font-weight:600;margin-top:5px">{{ marketDate }}</div>
+      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:3px">{{ generatedAt }}</div>
+    </div>
+
+    <nav style="display:flex;flex-direction:column;gap:3px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
+        <div onClick="{{ n.go }}" style="position:relative;cursor:pointer;padding:9px 12px;border-radius:13px;display:grid;grid-template-columns:19px minmax(0,1fr) auto;align-items:center;gap:11px;color:{{ n.color }};font-weight:{{ n.weight }};background:{{ n.bg }};box-shadow:{{ n.shadow }};transition:background .16s,color .16s" style-hover="background:var(--activeBg)">
+          <div style="position:absolute;inset-inline-start:2px;top:50%;transform:translateY(-50%);width:3px;height:{{ n.markH }};border-radius:999px;background:{{ n.dot }};transition:height .22s cubic-bezier(.2,.7,.3,1)"></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.9">
+            <path d="{{ n.icon }}"></path>
+          </svg>
+          <div style="font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ n.label }}</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ n.meta }}</div>
+        </div>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;gap:4px;padding:4px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn)">
+        <div onClick="{{ toEn }}" style="flex:1;text-align:center;padding:7px 0;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.07em;cursor:pointer;background:{{ enBg }};color:{{ enFg }};box-shadow:{{ enSh }}">EN</div>
+        <div onClick="{{ toAr }}" style="flex:1;text-align:center;padding:7px 0;border-radius:10px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;cursor:pointer;background:{{ arBg }};color:{{ arFg }};box-shadow:{{ arSh }}">العربية</div>
+      </div>
+      <div onClick="{{ flipTheme }}" style="padding:9px 13px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);font-size:12.5px;cursor:pointer;color:var(--t2);display:flex;justify-content:space-between;align-items:center;gap:8px" style-hover="color:var(--ink)">
+        <span style="display:flex;align-items:center;gap:7px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" style="width:15px;height:15px"><path d="{{ themeIcon }}"></path></svg>
+          <span>{{ L.theme }}</span>
+        </span>
+        <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">{{ themeLabel }}</span>
+      </div>
+      <div style="font-size:10px;color:var(--faint);padding-inline:4px">{{ L.dataVersion }} <span style="font-family:'IBM Plex Mono',monospace">771314503e</span></div>
+    </div>
+  </aside>
+
+  <main class="om-main" style="margin-inline-start:278px;padding:26px 30px 64px;max-width:1240px">
+
+  <!-- ══ HOME ══ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:6px 8px 0">
+        <div>
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.homeTitle }}</h1>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px">{{ L.closeOf }} {{ marketDate }}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ L.closeNote }}
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+        <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
+          <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ ix.label }}</div>
+              <div style="width:26px;height:26px;border-radius:9px;background:{{ ix.tint }};color:{{ ix.color }};display:flex;align-items:center;justify-content:center;font-size:13px">{{ ix.arrow }}</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(21px,2.5vw,32px);font-weight:500;letter-spacing:-.025em;margin-top:12px">{{ ix.value }}</div>
+            <div style="display:flex;gap:10px;align-items:baseline;margin-top:5px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ ix.color }}">
+              <span>{{ ix.chg }}</span><span>{{ ix.pct }}</span>
+            </div>
+            <div style="margin-top:14px">{{ ix.spark }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
+          <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4.2 20V11.2M9.4 20V4.6M14.6 20v-6.6M19.8 20V7.8"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.movers }}</div>
+          </div>
+          <sc-for list="{{ movers }}" as="m" hint-placeholder-count="9">
+            <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
+              <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
+              <div style="min-width:0">
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
+                  <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
+                </div>
+                <div style="height:3px;border-radius:999px;background:var(--rule2);overflow:hidden;margin-top:5px"><div style="height:3px;border-radius:999px;width:{{ m.mag }};background:{{ m.color }};opacity:.75"></div></div>
+              </div>
+            </div>
+          </sc-for>
+        </section>
+
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px 8px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.readNow }}</div>
+            <sc-for list="{{ readNow }}" as="r" hint-placeholder-count="3">
+              <div onClick="{{ r.go }}" style="cursor:pointer;padding:16px 0;border-bottom:1px solid var(--rule2)" style-hover="opacity:.72">
+                <div style="display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;background:{{ r.tint }};color:{{ r.kindColor }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ r.kind }}</div>
+                <div style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.28;margin-top:9px;text-wrap:pretty">{{ r.title }}</div>
+                <div style="font-size:11.5px;color:var(--faint);margin-top:6px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace">{{ r.stamp }}</div>
+              </div>
+            </sc-for>
+          </section>
+
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 12px 14px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:8px">{{ L.watchlist }}</div>
+            <div style="margin-top:8px">
+              <sc-for list="{{ watchlist }}" as="w" hint-placeholder-count="5">
+                <div onClick="{{ w.go }}" style="cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 8px;border-radius:12px" style-hover="background:var(--sunk)">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ w.ticker }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--t2)">{{ w.close }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ w.color }}">{{ w.pct }} {{ w.arrow }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ TODAY ══ -->
+  <sc-if value="{{ isToday }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 6px">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.todayTitle }}</h1>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ L.newestFirst }}</div>
+      </div>
+      <sc-for list="{{ feed }}" as="f" hint-placeholder-count="5">
+        <article style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,208px);gap:22px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--shLift)">
+          <div style="min-width:0">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <div style="display:inline-flex;padding:3px 10px;border-radius:999px;background:{{ f.tint }};color:{{ f.kindColor }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ f.kind }}</div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ f.date }} · {{ f.time }}</span>
+            </div>
+            <a href="{{ f.href }}" target="_blank" style="font-family:'Bricolage Grotesque',serif;font-size:25px;font-weight:500;letter-spacing:-.025em;line-height:1.22;display:block;margin-top:11px;text-wrap:pretty">{{ f.headline }}</a>
+            <div style="margin-top:13px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.why }}</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--rule);font-size:12px;color:var(--t2)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:13px;height:13px"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.2 1.2M13.4 10.6a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.2-1.2"></path></svg>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase">{{ f.source }}</span>
+              </div>
+              <a href="{{ f.href }}" target="_blank" style="font-size:12.5px;color:var(--faint)">{{ L.readAtSource }} →</a>
+              <sc-for list="{{ f.tickers }}" as="t" hint-placeholder-count="1">
+                <div onClick="{{ t.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--accTint);color:var(--accent)">{{ t.ticker }}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="aspect-ratio:4/3;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:flex-end;padding:11px;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.7"><path d="M4 5.5h16v13H4zM4 15l4.5-4.2 4 3.6 3-2.6L20 15M15.6 9.2h.01"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);line-height:1.5">{{ L.outletImage }}<br>{{ f.source }}</div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- ══ MARKET ══ -->
+  <sc-if value="{{ isMarket }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.marketTitle }}</h1>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ rowCount }} / 282<br>{{ marketDate }}</div>
+      </div>
+
+      <div class="om-search" style="border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 4px 12px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:17px;height:17px"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ L.searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
+        </div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--rule2)">
+          <sc-for list="{{ sectorChips }}" as="s" hint-placeholder-count="8">
+            <div onClick="{{ s.go }}" style="cursor:pointer;font-size:12.5px;padding:7px 13px;border-radius:999px;color:{{ s.color }};background:{{ s.bg }};border:1px solid {{ s.border }};box-shadow:{{ s.sh }};transition:background .15s,color .15s,border-color .15s" style-hover="border-color:var(--accent)">{{ s.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px">
+          <sc-for list="{{ cols }}" as="c" hint-placeholder-count="7">
+            <div onClick="{{ c.go }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:{{ c.color }};text-align:{{ c.align }}">{{ c.label }}{{ c.caret }}</div>
+          </sc-for>
+        </div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+          <div onClick="{{ r.go }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ r.ticker }}</div>
+            <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ r.name }}</div>
+            <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sector }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end">{{ r.close }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ r.color }}">{{ r.pct }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ r.cap }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ r.pe }}</div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:46px 14px 42px;text-align:center">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:23px;font-weight:500;letter-spacing:-.025em">{{ L.noMatchTitle }}</div>
+            <div style="font-size:13.5px;color:var(--t2);margin-top:8px;text-wrap:pretty">{{ L.noMatchBody }}</div>
+            <div onClick="{{ clearFilters }}" style="cursor:pointer;display:inline-flex;margin-top:16px;padding:8px 16px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ L.clearFilters }}</div>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
+        <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ COMPANY ══ -->
+  <sc-if value="{{ isCompany }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="border-radius:26px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:28px 28px 22px">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:flex-start">
+          <div style="min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span style="padding:4px 11px;border-radius:999px;background:var(--accent);color:#1B1917;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em">{{ co.ticker }}</span>
+              <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ co.sector }}</span>
+              <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ co.exchange }}</span>
+            </div>
+            <h1 style="font-family:'Bricolage Grotesque',serif;font-size:56px;font-weight:600;letter-spacing:-.045em;line-height:1;margin:14px 0 0">{{ co.nameEn }}</h1>
+            <div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:26px;color:var(--t2);margin-top:8px;width:fit-content;max-width:100%" dir="rtl">{{ co.nameAr }}</div>
+          </div>
+          <div style="text-align:end;padding:16px 20px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.lastClose }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(30px,3.4vw,44px);font-weight:500;letter-spacing:-.03em;line-height:1.12;margin-top:4px">{{ co.close }}</div>
+            <div style="display:flex;align-items:center;justify-content:flex-end;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:15px;color:{{ co.color }}">
+              <span>{{ co.chg }} {{ co.pct }}</span><span>{{ co.arrow }}</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);margin-top:6px">{{ L.asOf }} {{ co.closeDate }}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule2)">
+          <sc-for list="{{ co.stats }}" as="s" hint-placeholder-count="6">
+            <div style="padding:10px 16px;border-radius:15px;background:var(--sunk);min-width:0">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ s.label }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;margin-top:5px;color:{{ s.color }}">{{ s.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:9px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 10l3.6 3.2 4-5.4 4.8 5"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.priceHistory }}</div>
+          </div>
+          <div style="display:flex;gap:3px;padding:4px;border-radius:13px;background:var(--sunk)">
+            <sc-for list="{{ ranges }}" as="rg" hint-placeholder-count="5">
+              <div onClick="{{ rg.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:6px 12px;border-radius:10px;color:{{ rg.color }};background:{{ rg.bg }};box-shadow:{{ rg.sh }}">{{ rg.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:relative;margin-top:18px">{{ chart }}</div>
+        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
+          <span>{{ chartFrom }}</span><span>{{ L.sessionsShown }} {{ chartCount }}</span><span>{{ chartTo }}</span>
+        </div>
+      </section>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 26px">
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.whoTheyAre }}</div>
+        <p style="font-family:'Bricolage Grotesque',serif;font-size:23px;font-weight:400;line-height:1.42;letter-spacing:-.015em;margin:14px 0 0;max-width:64ch;text-wrap:pretty">{{ co.brief }}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:22px">
+          <sc-for list="{{ co.briefFacts }}" as="b" hint-placeholder-count="3">
+            <div style="padding:10px 16px;border-radius:15px;background:var(--sunk)">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ b.label }}</div>
+              <div style="font-size:14px;margin-top:4px;color:var(--t2)">{{ b.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:18px">{{ co.briefSource }}</div>
+      </section>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 12px">
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.asFiled }}</h2>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ L.egpMillions }}</div>
+        </div>
+        <div style="margin:16px 12px 8px;padding:14px 16px;border-radius:16px;background:var(--irisTint);font-size:12.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.cumulativeWarning }}</div>
+        <div style="display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:12px 14px">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.period }}</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.revenue }}</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.grossProfit }}</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.operatingIncome }}</div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.netIncome }}</div>
+          <div></div>
+        </div>
+        <sc-for list="{{ fins }}" as="p" hint-placeholder-count="5">
+          <div style="border-radius:16px;background:{{ p.bg }};margin-bottom:3px">
+            <div onClick="{{ p.toggle }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:14px;align-items:center;border-radius:16px" style-hover="background:var(--sunk)">
+              <div style="min-width:0">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:600">{{ p.period }}</div>
+                <div style="font-size:11px;color:var(--faint);margin-top:3px">{{ p.window }}</div>
+              </div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.revColor }}">{{ p.revenue }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.gpColor }}">{{ p.grossProfit }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.opColor }}">{{ p.operatingIncome }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;font-weight:600;color:{{ p.niColor }}">{{ p.netIncome }}</div>
+              <div style="justify-self:center;width:22px;height:22px;border-radius:8px;background:var(--sunk);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--faint)">{{ p.caret }}</div>
+            </div>
+            <sc-if value="{{ p.open }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:4px 14px 18px">
+                <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+                  <sc-for list="{{ p.groups }}" as="g" hint-placeholder-count="4">
+                    <div style="padding:14px 16px;border-radius:16px;background:var(--sunk)">
+                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ g.label }}</div>
+                      <div style="margin-top:8px">
+                        <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                          <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:12.5px">
+                            <span style="color:var(--t2)">{{ it.k }}</span>
+                            <span style="font-family:'IBM Plex Mono',monospace;color:{{ it.color }}">{{ it.v }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:14px;align-items:center;margin-top:14px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);flex-wrap:wrap">
+                  <span>{{ p.filingId }}</span><span>{{ p.filedOn }}</span>
+                  <a href="{{ p.source }}" target="_blank" style="color:var(--accent)">{{ L.openFiling }} →</a>
+                  <span>{{ p.omitted }}</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </section>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 24px 20px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0;max-width:26ch;line-height:1.12">{{ L.borrowingsTitle }}</h2>
+          <div style="display:flex;gap:7px">
+            <span style="padding:5px 12px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ debt.period }}</span>
+            <span style="padding:5px 12px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ L.asAt }} {{ debt.asOf }}</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:12px;margin-top:20px">
+          <div style="padding:24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.borrowings }}</div>
+            <div style="display:flex;align-items:baseline;gap:9px;margin-top:8px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(28px,3.2vw,42px);font-weight:500;letter-spacing:-.03em;line-height:1.1">{{ debt.borrowings }}</div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11.5px;color:var(--faint)">{{ L.egpM }}</div>
+            </div>
+            <div style="margin-top:22px">
+              <div style="display:flex;height:11px;border-radius:999px;overflow:hidden;background:var(--rule);gap:2px">
+                <div style="width:{{ debt.stPct }};background:var(--ink);border-radius:999px"></div>
+                <div style="flex:1;border-radius:999px"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:var(--t2)">
+                <span>{{ L.dueWithinYear }} <span style="font-family:'IBM Plex Mono',monospace;color:var(--ink)">{{ debt.shortTerm }}</span> ({{ debt.stPct }})</span>
+                <span>{{ L.dueLater }} <span style="font-family:'IBM Plex Mono',monospace;color:var(--ink)">{{ debt.longTerm }}</span></span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px">
+              <sc-for list="{{ debt.metrics }}" as="m" hint-placeholder-count="6">
+                <div style="padding:13px 15px;border-radius:15px;background:var(--surface)">
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ m.label }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;margin-top:5px">{{ m.value }}</div>
+                  <div style="font-size:11.5px;color:var(--faint);margin-top:4px;line-height:1.45">{{ m.note }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="padding:22px 24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.movementSince }} {{ debt.since }}</div>
+              <div style="display:flex;align-items:baseline;gap:11px;margin-top:9px;flex-wrap:wrap">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:27px;color:{{ debt.deltaColor }}">{{ debt.delta }}</div>
+                <div style="font-size:14px;color:var(--t2);text-wrap:pretty">{{ debt.directionLine }}</div>
+              </div>
+              <div style="font-size:12px;color:var(--faint);margin-top:8px;line-height:1.5">{{ debt.basisLine }}</div>
+            </div>
+
+            <div style="padding:22px 24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pattern }}</div>
+              <div style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1.34;margin-top:9px;text-wrap:pretty">{{ debt.patternLine }}</div>
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px">
+                <sc-for list="{{ debt.flows }}" as="fl" hint-placeholder-count="3">
+                  <div style="padding:11px 12px;border-radius:14px;background:var(--surface)">
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);line-height:1.4">{{ fl.label }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;margin-top:5px;color:{{ fl.color }}">{{ fl.value }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding:22px 24px;border-radius:20px;background:var(--accTint);margin-top:auto">
+              <p style="font-size:14px;line-height:1.62;color:var(--ink);margin:0;max-width:50ch;text-wrap:pretty">{{ debt.read }}</p>
+              <div onClick="{{ debt.toggle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:7px 13px;border-radius:999px;background:var(--surface);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)">
+                <span>{{ debt.toggleLabel }}</span><span>{{ debt.toggleCaret }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ debt.open }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:12px;padding:22px 24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px">
+            <div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.whereFrom }}</div>
+              <p style="font-size:13.5px;line-height:1.65;color:var(--t2);margin:10px 0 0;text-wrap:pretty">{{ L.whereFromBody }}</p>
+            </div>
+            <div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.sourceFiling }}</div>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:11px;font-family:'IBM Plex Mono',monospace;font-size:12.5px">
+                <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:var(--faint)">filing_id</span><span>{{ debt.filingId }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:var(--faint)">as_of</span><span>{{ debt.asOf }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:var(--faint)">frame</span><span>{{ debt.frame }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:10px"><span style="color:var(--faint)">basis</span><span>{{ debt.basis }}</span></div>
+              </div>
+              <a href="{{ debt.source }}" target="_blank" style="display:inline-block;margin-top:14px;font-size:13px;color:var(--accent)">{{ L.openSignedDoc }} →</a>
+            </div>
+          </div>
+        </sc-if>
+        <div style="font-size:12px;color:var(--faint);padding-top:14px;line-height:1.55;text-wrap:pretty">{{ L.notCreditRating }}</div>
+      </section>
+
+      <section>
+        <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:8px 8px 14px">{{ L.whatIsUnusual }}</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
+          <sc-for list="{{ signals }}" as="s" hint-placeholder-count="3">
+            <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px;display:flex;flex-direction:column;gap:11px;min-width:0;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+              <div style="display:inline-flex;align-self:flex-start;padding:4px 10px;border-radius:999px;background:var(--irisTint);color:var(--iris);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ s.kind }}</div>
+              <div style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.3;text-wrap:pretty">{{ s.title }}</div>
+              <div style="font-size:13.5px;color:var(--t2);line-height:1.58;text-wrap:pretty">{{ s.because }}</div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:auto;padding-top:8px">{{ s.stamp }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 12px">
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.itsFilings }}</h2>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ L.egxArchive }}</div>
+        </div>
+        <div style="margin-top:12px">
+          <sc-for list="{{ filings }}" as="d" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:92px minmax(0,1fr) minmax(88px,126px) minmax(72px,94px);gap:16px;align-items:center;padding:13px 14px;border-radius:14px" style-hover="background:var(--sunk)">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint)">{{ d.date }}</div>
+              <div style="font-size:14px;text-wrap:pretty">{{ d.title }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ d.id }}</div>
+              <a href="{{ d.href }}" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 0;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)" style-hover="color:var(--accent)">{{ L.document }}</a>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ══ SECTORS ══ -->
+  <sc-if value="{{ isSectors }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.sectorsTitle }}</h1>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ sectorCount }} {{ L.sectorsWord }}<br>{{ marketDate }}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
+        <sc-for list="{{ sectorCards }}" as="s" hint-placeholder-count="9">
+          <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:222px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <div style="font-family:'Bricolage Grotesque',serif;font-size:21px;font-weight:600;letter-spacing:-.025em;line-height:1.15;min-width:min-content">{{ s.name }}</div>
+              <div style="padding:3px 9px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);white-space:nowrap">{{ s.count }}</div>
+            </div>
+            <div style="display:flex;gap:3px;align-items:center">
+              <sc-for list="{{ s.bars }}" as="b" hint-placeholder-count="10">
+                <div style="height:24px;flex:1;border-radius:4px;background:{{ b.color }};opacity:{{ b.op }}"></div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
+              <span style="padding:3px 9px;border-radius:999px;background:var(--upTint);color:var(--up)">{{ s.upCount }} {{ L.rose }}</span>
+              <span style="padding:3px 9px;border-radius:999px;background:var(--downTint);color:var(--down)">{{ s.downCount }} {{ L.fell }}</span>
+              <span style="padding:3px 9px;border-radius:999px;background:var(--sunk);color:var(--faint)">{{ s.flatCount }} {{ L.flat }}</span>
+            </div>
+            <div style="font-size:13px;color:var(--t2);line-height:1.55;text-wrap:pretty">{{ s.read }}</div>
+            <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--rule2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">
+              <span>{{ L.medianPE }} {{ s.medianPe }}</span><span>{{ s.standout }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ CALENDAR ══ -->
+  <sc-if value="{{ isCalendar }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.calendarTitle }}</h1>
+        <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill)">
+          <sc-for list="{{ months }}" as="m" hint-placeholder-count="4">
+            <div onClick="{{ m.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 13px;border-radius:11px;color:{{ m.color }};background:{{ m.bg }};box-shadow:{{ m.sh }}">{{ m.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 14px 20px">
+          <div style="display:flex;align-items:center;gap:9px;padding:0 10px 12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--up)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M4.6 12.6 9.4 17.4 19.4 7"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.filed }}</div>
+          </div>
+          <sc-for list="{{ filedEvents }}" as="e" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:58px 62px minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 10px;border-radius:13px" style-hover="background:var(--sunk)">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint)">{{ e.day }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ e.ticker }}</div>
+              <div style="font-size:13.5px;color:var(--t2);text-wrap:pretty">{{ e.what }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 14px 20px">
+          <div style="display:flex;align-items:center;gap:9px;padding:0 10px 12px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--iris)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M12 4.4a7.6 7.6 0 1 0 0 15.2 7.6 7.6 0 0 0 0-15.2M12 8.4V12l2.6 2"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.expected }}</div>
+          </div>
+          <sc-for list="{{ expectedEvents }}" as="e" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:58px 62px minmax(0,1fr);gap:12px;align-items:baseline;padding:12px 10px;border-radius:13px" style-hover="background:var(--sunk)">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--iris)">{{ e.day }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ e.ticker }}</div>
+              <div>
+                <div style="font-size:13.5px;color:var(--t2);text-wrap:pretty">{{ e.what }}</div>
+                <div style="display:inline-block;margin-top:6px;padding:2px 8px;border-radius:999px;background:var(--irisTint);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--iris)">{{ L.estimate }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="font-size:11.5px;color:var(--faint);padding:14px 10px 0;line-height:1.5">{{ L.estimateNote }}</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ EXCHANGE ══ -->
+  <sc-if value="{{ isExchange }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.exchangeTitle }}</h1>
+        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--iris)"></span>{{ L.delayed15 }}
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+        <sc-for list="{{ ratesArrowed }}" as="r" hint-placeholder-count="12">
+          <div style="border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:17px 16px 15px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.label }}</div>
+              <div style="width:22px;height:22px;border-radius:8px;background:{{ r.tint }};color:{{ r.color }};display:flex;align-items:center;justify-content:center;font-size:11px;flex:none">{{ r.arrow }}</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(17px,1.8vw,23px);font-weight:500;letter-spacing:-.02em;margin-top:9px">{{ r.value }}</div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:4px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:{{ r.color }}">{{ r.pct }}</span>
+              <span style="font-size:10.5px;color:var(--faint)">{{ r.unit }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
+        <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0 0 8px;padding-inline:12px">{{ L.macro }}</h2>
+        <sc-for list="{{ macro }}" as="m" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:minmax(150px,240px) minmax(80px,130px) minmax(0,1fr);gap:22px;align-items:baseline;padding:18px 14px;border-radius:16px" style-hover="background:var(--sunk)">
+            <div>
+              <div style="font-size:15px;font-weight:500">{{ m.label }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:4px">{{ m.period }}</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:{{ m.color }}">{{ m.value }}</div>
+            <div style="font-size:14px;color:var(--t2);line-height:1.58;text-wrap:pretty">{{ m.meaning }}</div>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ══ RESEARCH ══ -->
+  <sc-if value="{{ isResearch }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.researchTitle }}</h1>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;max-width:32ch;line-height:1.6">{{ L.researchNote }}</div>
+      </div>
+      <sc-for list="{{ studies }}" as="s" hint-placeholder-count="3">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,288px);gap:24px">
+          <div style="min-width:0">
+            <div style="display:inline-block;padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);line-height:1.5">{{ s.venue }} · {{ s.year }}</div>
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:25px;font-weight:500;letter-spacing:-.025em;line-height:1.24;margin-top:11px;max-width:44ch;text-wrap:pretty">{{ s.title }}</div>
+            <div style="font-size:14px;color:var(--t2);line-height:1.62;margin-top:12px;max-width:66ch;text-wrap:pretty">{{ s.summary }}</div>
+            <a href="{{ s.href }}" target="_blank" style="display:inline-block;margin-top:14px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)">{{ L.readPaper }} →</a>
+          </div>
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.scorecard }}</div>
+            <div style="display:flex;align-items:baseline;gap:7px;margin-top:8px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:34px;font-weight:500">{{ s.score }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--faint)">/ 100</div>
+            </div>
+            <div style="font-size:12.5px;color:var(--t2);margin-top:3px;text-wrap:pretty">{{ s.band }}</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+              <sc-for list="{{ s.criteria }}" as="c" hint-placeholder-count="4">
+                <div>
+                  <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--t2)"><span>{{ c.label }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ c.value }}</span></div>
+                  <div style="height:4px;border-radius:999px;background:var(--rule);margin-top:5px"><div style="height:4px;border-radius:999px;width:{{ c.pct }};background:var(--ink)"></div></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- legal -->
+  <footer style="margin-top:20px;border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:20px 24px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:24px;height:24px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'Bricolage Grotesque',serif;font-weight:700;font-size:13px;color:#1B1917">E</span>
+      </div>
+      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.publisherStamp }}</div>
+    </div>
+    <p style="margin:0;font-size:12.5px;line-height:1.65;color:var(--t2);max-width:92ch;text-wrap:pretty">{{ L.legalNotLicensed }}</p>
+  </footer>
+
+  </main>
+</div>

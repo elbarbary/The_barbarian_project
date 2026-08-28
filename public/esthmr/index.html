@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESTHMR — the Egyptian Exchange, as filed</title>
+<meta name="description" content="Every company on the EGX, read from what it filed: prices, statements as filed, what each company is doing with its borrowings, and the day's disclosures.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<link rel="stylesheet" href="./shell.css">
+</head>
+<body data-signed="no">
+
+<!-- Says plainly what is on screen, because an invented market that does not
+     announce itself is a fabricated financial figure. -->
+<div id="gate" class="gate">
+  <p><strong>You are looking at an invented market.</strong>
+     Every ticker, price and figure below is made up for the demo.
+     Sign in to read what companies actually filed.</p>
+  <button id="signin" class="gate-cta">Sign in with email</button>
+</div>
+
+<div id="app"></div>
+
+<div class="account">
+  <span id="who" hidden></span>
+  <button id="signout">Sign out</button>
+</div>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>
