@@ -150,7 +150,12 @@
               <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ f.date }} · {{ f.time }}</span>
             </div>
             <a href="{{ f.href }}" target="_blank" style="font-family:'Bricolage Grotesque',serif;font-size:25px;font-weight:500;letter-spacing:-.025em;line-height:1.22;display:block;margin-top:11px;text-wrap:pretty">{{ f.headline }}</a>
-            <div style="margin-top:13px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.why }}</div>
+            <sc-if value="{{ f.hasWhy }}">
+              <div style="margin-top:13px;font-size:14px;color:var(--ink);line-height:1.55;text-wrap:pretty">{{ f.why }}</div>
+            </sc-if>
+            <sc-if value="{{ f.hasBecause }}">
+              <div style="margin-top:11px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.because }}</div>
+            </sc-if>
             <div style="display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap">
               <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--rule);font-size:12px;color:var(--t2)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:13px;height:13px"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.2 1.2M13.4 10.6a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.2-1.2"></path></svg>
@@ -162,9 +167,21 @@
               </sc-for>
             </div>
           </div>
-          <div style="aspect-ratio:4/3;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:flex-end;padding:11px;gap:6px">
+          <div style="aspect-ratio:4/3;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:11px;gap:6px">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.7"><path d="M4 5.5h16v13H4zM4 15l4.5-4.2 4 3.6 3-2.6L20 15M15.6 9.2h.01"></path></svg>
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);line-height:1.5">{{ L.outletImage }}<br>{{ f.source }}</div>
+            <!-- The outlet's own picture, over the frame the design drew for it
+                 rather than instead of it. Layered on purpose: a picture that
+                 404s or is blocked leaves the frame showing through, which is
+                 the app's rule too — a broken image is worse than none. The
+                 source is already named in the meta row, so it is not repeated
+                 here. No referrer is sent: which story a reader is looking at
+                 is not the outlet's business. -->
+            <sc-if value="{{ f.hasImage }}">
+              <a href="{{ f.href }}" target="_blank" rel="noreferrer" style="position:absolute;inset:0;display:block">
+                <img src="{{ f.image }}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
+              </a>
+            </sc-if>
           </div>
         </article>
       </sc-for>

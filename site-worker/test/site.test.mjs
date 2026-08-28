@@ -353,3 +353,74 @@ test('signing in actually takes the demo banner off the page', async () => {
     assert.ok(hides, `${selector} sets its own display, so "hidden" cannot hide it`);
   }
 });
+
+/* ── the news card ─────────────────────────────────────────────────────── */
+
+const STORY = {
+  id: 'x1', headline: 'A headline', published: '2026-08-28T16:34:38Z',
+  image: 'https://example.org/a.png',
+  event: 'macro', event_label: 'Economy and policy', event_label_ar: 'الاقتصاد',
+  meaning: 'What this does to somebody holding shares.',
+  meaning_ar: 'ما يعنيه هذا لحامل السهم.',
+  because: 'Names no listed company we can match.',
+  because_ar: 'لا يذكر شركة مقيدة.',
+  sources: [{ id: 'hapi', link: 'https://hapijournal.com/x' }],
+  tickers: [],
+};
+
+/** news() over a document, with fetch stubbed. */
+async function newsFrom(items) {
+  const real = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({ items }) });
+  try { return await data.news(); } finally { globalThis.fetch = real; }
+}
+
+test('a story carries its picture and its plain-language line', async () => {
+  // Both were dropped. `image` was mapped but never rendered — the design drew
+  // a placeholder frame and the real URL was never wired into it. The summary
+  // was worse: the template reads `f.why` and news() only ever produced
+  // `because`, so the box under every live headline was empty.
+  const [card] = await newsFrom([{ ...STORY, weight: 'company' }]);
+  assert.equal(card.image, 'https://example.org/a.png');
+  assert.equal(card.hasImage, true);
+  assert.equal(card.why, 'What this does to somebody holding shares.');
+  assert.equal(card.whyAr, 'ما يعنيه هذا لحامل السهم.');
+});
+
+test('the generic reason is withheld on market-weight stories', async () => {
+  // `because` falls back to "Names no listed company we can match…" whenever
+  // no listed company is involved, which is most of the feed. The app learned
+  // not to print that apology on row after row; the web follows the same rule.
+  const [market] = await newsFrom([{ ...STORY, weight: 'market' }]);
+  assert.equal(market.because, '');
+  assert.equal(market.becauseAr, '');
+  const [company] = await newsFrom([{ ...STORY, weight: 'company' }]);
+  assert.equal(company.because, 'Names no listed company we can match.');
+});
+
+test('a story with no picture keeps the frame rather than a broken image', async () => {
+  const [card] = await newsFrom([{ ...STORY, image: null, weight: 'company' }]);
+  assert.equal(card.hasImage, false);
+  assert.equal(card.image, null);
+});
+
+test('the card knows which of its parts it has', () => {
+  const feed = [
+    { kind: 'K', headline: 'H', why: 'w', because: 'b', image: 'i', source: 'S', tickers: [] },
+    { kind: 'K', headline: 'H', why: '', because: '', image: null, source: 'S', tickers: [] },
+  ];
+  const [full, bare] = screen({ ...LIVE, feed }).feed;
+  assert.deepEqual([full.hasWhy, full.hasBecause, full.hasImage], [true, true, true]);
+  assert.deepEqual([bare.hasWhy, bare.hasBecause, bare.hasImage], [false, false, false]);
+});
+
+test('the template renders the picture and both lines', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const t = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  assert.match(t, /<img src="\{\{ f\.image \}\}"/, 'the picture is not rendered');
+  assert.match(t, /\{\{ f\.why \}\}/, 'the plain-language line is not rendered');
+  assert.match(t, /\{\{ f\.because \}\}/, 'the measured reason is not rendered');
+  // Layered, not swapped: a picture that fails to load must leave the frame.
+  assert.match(t, /\{\{ L\.outletImage \}\}/, 'the fallback frame was removed');
+  assert.match(t, /referrerpolicy="no-referrer"/, 'the reader is leaking their page to the outlet');
+});

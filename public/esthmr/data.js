@@ -344,8 +344,20 @@ export async function news() {
       source: source.name || source.id || 'EGX',
       href: source.link || '#',
       headline: it.headline, headlineAr: it.headline,
-      because: it.because || '', becauseAr: it.because_ar || '',
+      // The plain-language line: what the story does to somebody holding EGX
+      // shares. The template calls it `why`; the document calls it `meaning`.
+      // It was never mapped, so the box under every live headline was empty —
+      // the template reads `f.why` and news() only ever produced `because`.
+      why: it.meaning || '', whyAr: it.meaning_ar || '',
+      // The measured reason, and only where it is measured. `because` falls
+      // back to one generic sentence — "Names no listed company we can
+      // match…" — whenever no listed company is involved, which is most of the
+      // feed. The app learned to withhold it on market-weight stories rather
+      // than print the same apology on row after row; same rule here.
+      because: it.weight === 'market' ? '' : (it.because || ''),
+      becauseAr: it.weight === 'market' ? '' : (it.because_ar || ''),
       image: it.image || null,
+      hasImage: Boolean(it.image),
       tickers: (it.tickers || []).map((ticker) => ({ ticker })),
     };
   });

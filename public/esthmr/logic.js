@@ -212,7 +212,7 @@ export class Component extends Base {
     }));
 
     // today
-    const feed = D.feed ? say(D.feed, ['kind','headline','because']) : !D.demo ? [] : [
+    const feed = (D.feed ? say(D.feed, ['kind','headline','why','because']) : !D.demo ? [] : [
       { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source:'EGX', href:'https://www.egx.com.eg',
         headline: ar?'كورّة: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'KORRA: standalone and consolidated statements for the period ended 30 June 2026',
         why: ar?'الميزانية تذكر قروضاً بـ ١٨٦٩٫١ مليون جنيه، منها ١٧٩٥٫٥ مليون تستحق خلال عام.':'The balance sheet states borrowings of EGP 1,869.1m, of which 1,795.5m falls due within a year.',
@@ -233,7 +233,10 @@ export class Component extends Base {
         headline: ar?'الإسكندرية للزيوت المعدنية تنهي الجلسة بأعلى تحرك في القطاع':'Alexandria Mineral Oils ends the session with the sector’s largest move',
         why: ar?'market.json يذكر ٤٫٠٢٪ على حجم ١٫٢ مليون سهم.':'market.json states +4.02% on volume of 1.2m shares.',
         tickers:[{ticker:'AMOC',go:this.go('company')}] }
-    ];
+    ]).map((f) => Object.assign({}, f, {
+      hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
+      hasImage: Boolean(f.image),
+    }));
 
     // company
     const co0 = D.companies.find(c => c.ticker === 'KORA');
