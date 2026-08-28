@@ -298,3 +298,39 @@ Two things worth knowing before writing more widget tests:
    asset channel stops completing after the first test in a run, which would
    leave every later screen stuck on its loading state. `DiskFixtureSource`
    sidesteps it. The real asset path is exercised on device.
+
+## The local EGX harvest (launchd)
+
+The filing archive is the one input CI cannot reliably fetch: the exchange's
+JSON API answers a laptop in Cairo far more readily than a GitHub runner. A
+launchd agent on the founder's Mac harvests it and pushes, four times a trading
+day, shortly before each scheduled build.
+
+    scripts/harvest_local.sh                        the job (canonical copy)
+    scripts/com.thebarbarianproject.egx-harvest.plist   the schedule
+    ~/Library/Application Support/esthmr/            where launchd runs it from
+    ~/.esthmr-harvest/                               its own sparse clone
+    ~/Library/Logs/esthmr-harvest.log                what it did
+
+It does **not** run in this checkout. macOS refuses a launchd agent access to
+anything under `~/Documents` — the agent dies with "Operation not permitted"
+before the script starts — so both the script and the repository it works in
+have to live elsewhere. The clone is `--filter=blob:none --sparse` over just
+`scripts/` and `data-source/egx-beta/filings/`: about 90 MB against the 3.4 GB
+a full one would take, and it means a scheduled job never resets a working tree
+somebody is editing.
+
+CI still attempts its own harvest. This is the belt to those braces: whichever
+reaches the exchange first, the archive carries the date it was written and
+`build_staleness_guard.py` passes on that.
+
+To install on another machine:
+
+    install -m 755 scripts/harvest_local.sh \
+      ~/Library/Application\ Support/esthmr/harvest_local.sh
+    cp scripts/com.thebarbarianproject.egx-harvest.plist ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) \
+      ~/Library/LaunchAgents/com.thebarbarianproject.egx-harvest.plist
+
+Edit the canonical copy in `scripts/`, then re-run the `install` line — the
+running agent reads the installed copy, not this one.

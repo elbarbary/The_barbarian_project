@@ -92,7 +92,10 @@ def _download_one(job: dict, cookies: list[dict]) -> dict:
                 "Accept": "application/pdf,*/*;q=0.8",
                 "Referer": HOME,
             },
-            timeout=90,
+            # Several scanned EGX statements are 10-20 MB and the exchange
+            # can deliver them at well under 200 KB/s.  Ninety seconds cut
+            # off otherwise valid transfers after most bytes had arrived.
+            timeout=240,
             http_version="v3",
         )
         data = response.content
