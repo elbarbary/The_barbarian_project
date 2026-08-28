@@ -1,26 +1,42 @@
 #!/usr/bin/env python3
-"""Fail the build, loudly, when the exchange archive did not move today.
+"""Fail the build, loudly, when the exchange archive did not actually refresh.
 
-The EGX filing harvest is best-effort: from a datacenter IP the exchange
-intermittently resets the connection, the step is skipped, and the build
-happily republishes yesterday — the exchange screen, the calendar and
-connecting-the-dots all a day stale, with a green tick. This guard is the
-alarm. It reads the current month's filing archive and, on a trading day once
-the session is well underway, refuses to let a stale archive through: build_all
-returns non-zero, the CI step fails, the Commit step never runs, and the last
-good data stays live while a person gets the failure e-mail.
+The EGX filing harvest is best-effort: from a datacenter IP the exchange can
+reset the connection, the step is skipped, and the build would happily
+republish yesterday — the exchange screen, the calendar and connecting-the-dots
+all a day stale, with a green tick. This guard is the alarm.
 
-Two thresholds, chosen to alarm without crying wolf before the exchange has
-filed anything:
+WHAT IT TESTS, AND WHY THAT CHANGED
+-----------------------------------
+The first version compared the newest filing in the archive against today's
+date and failed when they differed. That conflates two completely different
+situations:
 
-  * 2+ days behind on a trading day → fail at any hour (a clear outage; the day
-    before was itself a trading day and would have filed).
-  * exactly 1 day behind (newest is yesterday) → fail only from 08:00 UTC
-    (11:00 Cairo, an hour into the session), by when today's filings exist.
+  * the harvest failed, so we are missing filings the exchange has published
+    — a real outage, and the thing this guard exists to catch; and
+  * the harvest succeeded and the exchange published nothing — a holiday, or
+    simply a quiet day — where the archive is exactly as current as it can be.
 
-EGX trades Sun–Thu. Public holidays are not modelled, so a holiday can raise a
-false alarm — safe (someone re-checks) rather than silent. `--check` runs the
-same test and writes nothing, so it is safe in a validation pass.
+It could not tell them apart, so it failed three consecutive builds on
+27 August 2026, when a harvest from a residential IP returned byte-for-byte
+what CI had already fetched: 1,467 filings, newest 26 August. The exchange had
+filed nothing that Thursday. Nothing was wrong, and because the guard is
+critical, prices, news and rates stopped updating too — an outage caused
+entirely by the alarm.
+
+So the test is now on the harvest itself, which is the part that can fail. The
+archive records the date it was last written and the count the exchange said to
+expect, so:
+
+  * harvested today, with the expected number of filings → current, whatever
+    the newest filing date is. If the exchange published nothing, that is an
+    answer about the exchange, not a fault in the pipeline.
+  * harvested today but short of `expected` → truncated mid-run → fail.
+  * not harvested today → the step did not run or was refused → fall back to
+    the date test, which is now a genuine signal, and fail on the same
+    thresholds as before.
+
+EGX trades Sun–Thu. `--check` runs the same test and writes nothing.
 """
 
 from __future__ import annotations
@@ -41,55 +57,106 @@ TRADING_WEEKDAYS = {6, 0, 1, 2, 3}
 # today's only once the session has been open an hour.
 SESSION_UP_HOUR_UTC = 8
 
+FIX = (
+    "   Fix: re-run the harvest from a residential IP —\n"
+    "     python3 scripts/harvest_egx_beta.py --filings --from {month} --to {month}\n"
+    "   then rebuild the filing-fed docs and push (see "
+    "project-esthmr-harvest-staleness)."
+)
 
-def newest_filing_date(today: datetime.date) -> datetime.date | None:
-    path = FILINGS / f"{today:%Y-%m}.json.gz"
+
+def read_archive(month: str) -> dict | None:
+    """The month's archive, or None when it is missing or unreadable."""
+    path = FILINGS / f"{month}.json.gz"
     if not path.exists():
         return None
     try:
-        items = json.loads(gzip.decompress(path.read_bytes())).get("items", [])
+        return json.loads(gzip.decompress(path.read_bytes()))
     except (OSError, ValueError):
         return None
-    stamps = [it.get("dateStamp", "") for it in items if it.get("dateStamp")]
-    if not stamps:
-        return None
+
+
+def _date(raw: object) -> datetime.date | None:
     try:
-        return datetime.date.fromisoformat(max(stamps)[:10])
-    except ValueError:
+        return datetime.date.fromisoformat(str(raw)[:10])
+    except (TypeError, ValueError):
         return None
 
 
-def check() -> int:
+def newest_filing_date(archive: dict) -> datetime.date | None:
+    stamps = [it.get("dateStamp", "") for it in archive.get("items", [])
+              if it.get("dateStamp")]
+    return _date(max(stamps)) if stamps else None
+
+
+def check(today: datetime.date | None = None,
+          hour_utc: int | None = None) -> int:
     now = datetime.datetime.now(datetime.timezone.utc)
-    today = now.date()
+    today = today or now.date()
+    hour_utc = now.hour if hour_utc is None else hour_utc
+    month = f"{today:%Y-%m}"
+
     if today.weekday() not in TRADING_WEEKDAYS:
         print(f"── Staleness guard: {today} is not a trading day — skipping")
         return 0
 
-    newest = newest_filing_date(today)
+    archive = read_archive(month)
+    if archive is None:
+        # A month with no archive yet is normal on its first day, as long as
+        # the harvest itself ran — it writes the previous month in the same
+        # pass. Only an unharvested gap is an alarm.
+        previous = read_archive(
+            f"{(today.replace(day=1) - datetime.timedelta(days=1)):%Y-%m}")
+        if previous and _date(previous.get("harvested")) == today:
+            print(f"── Staleness guard: no {month} archive yet, but the harvest "
+                  f"ran today — ok")
+            return 0
+        print(f"!! Staleness guard: no filings in the {month} archive at all\n"
+              + FIX.format(month=month), file=sys.stderr)
+        return 1
+
+    harvested = _date(archive.get("harvested"))
+    newest = newest_filing_date(archive)
+    expected = archive.get("expected")
+    held = len(archive.get("items", []))
+
+    if harvested == today:
+        # The harvest reached the exchange today, so the archive holds what the
+        # exchange has. Only a short read is a fault.
+        if isinstance(expected, int) and held < expected:
+            print(f"!! Staleness guard: the {month} harvest ran today but stopped "
+                  f"short — {held} filings held against {expected} the exchange "
+                  f"reported. Failing rather than publish a truncated archive.\n"
+                  + FIX.format(month=month), file=sys.stderr)
+            return 1
+        quiet = "" if newest == today else (
+            f"; the exchange has published nothing since {newest}")
+        print(f"── Staleness guard: harvest ran today, {held} filings held"
+              f"{quiet} — ok")
+        return 0
+
+    # The harvest did not run today. Now a stale newest date means what the
+    # guard was always meant to catch.
     if newest is None:
-        print(f"!! Staleness guard: no filings in the {today:%Y-%m} archive at all",
-              file=sys.stderr)
+        print(f"!! Staleness guard: the {month} archive holds no dated filings\n"
+              + FIX.format(month=month), file=sys.stderr)
         return 1
 
     behind = (today - newest).days
-    if behind >= 2 or (behind >= 1 and now.hour >= SESSION_UP_HOUR_UTC):
+    if behind >= 2 or (behind >= 1 and hour_utc >= SESSION_UP_HOUR_UTC):
+        seen = f"last harvested {harvested}" if harvested else "never harvested"
         print(
             f"!! Staleness guard: the filing archive is {behind} day(s) behind "
-            f"(newest {newest}, today {today}). The EGX harvest did not bring in "
-            f"today's filings — most likely the exchange reset the runner's IP. "
+            f"(newest {newest}, today {today}) and the harvest did not run today "
+            f"({seen}). The exchange most likely refused this runner's address. "
             f"Failing rather than republish yesterday.\n"
-            f"   Fix: re-run the harvest from a residential IP —\n"
-            f"     python3 scripts/harvest_egx_beta.py --filings "
-            f"--from {today:%Y-%m} --to {today:%Y-%m}\n"
-            f"   then rebuild the filing-fed docs and push (see "
-            f"project-esthmr-harvest-staleness).",
+            + FIX.format(month=month),
             file=sys.stderr,
         )
         return 1
 
     print(f"── Staleness guard: archive current (newest {newest}, {behind} day(s) "
-          f"behind at {now:%H:%M} UTC) — ok")
+          f"behind at {hour_utc:02d}:00 UTC) — ok")
     return 0
 
 

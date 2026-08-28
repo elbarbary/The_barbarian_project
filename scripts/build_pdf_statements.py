@@ -50,6 +50,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.parse
 import urllib.request
 
 # This repository's funded Vertex project. The Mac's ADC quota project is
@@ -84,9 +85,12 @@ BROWSER_UA = (
 DISCOVERY_PROMPT = """Read this scanned filed-results attachment.
 
 Extract only figures visibly printed for the CURRENT period ending {period_end},
-in millions of Egyptian pounds. Do not calculate a missing field, do not copy a
-comparative-period value, and do not infer that an earnings release contains a
-complete financial statement.
+in millions of Egyptian pounds, and put them in `fields`. Never copy a
+comparative-period value into `fields` — the prior column has its own place at
+the end of these instructions. Do not invent a figure the statement does not
+print, and do not infer that an earnings release contains a complete financial
+statement. The only arithmetic you may do is adding up the borrowing lines
+within one maturity, exactly as described below.
 
 Return one JSON object with currency, period_end, and fields. `fields` may use
 only these keys when the figure is printed:
@@ -156,9 +160,12 @@ AUDIT_PROMPT = """Independently audit these rendered pages from one filed EGX
 attachment. You have not been shown another model answer.
 
 Read only figures visibly printed for the CURRENT period ending {period_end},
-in millions of Egyptian pounds. Do not calculate missing values and do not use
-the comparative period. Prefer the most precise table or chart label over
-rounded narrative prose.
+in millions of Egyptian pounds, and put them in `fields`. Never put a
+comparative-period value in `fields` — the prior column has its own place at
+the end of these instructions. Do not invent a figure the statement does not
+print; the only arithmetic you may do is adding up the borrowing lines within
+one maturity. Prefer the most precise table or chart label over rounded
+narrative prose.
 
 Return one JSON object with currency, period_end, and fields. `fields` may use
 only: revenue, gross_profit, operating_income, net_income, assets, liabilities,
@@ -340,23 +347,87 @@ def _disclosure_links(page: str, ticker: str) -> list[str]:
     ]
 
 
-def resolve_mirror_attachments(code: str, ticker: str) -> list[str]:
-    """Downloadable disclosure copies from the FoudaLens EGX news mirror."""
+def _official_page_links(page: str) -> list[str]:
+    """Direct EGX PDFs linked by the mirrored filing's HTML page.
+
+    FoudaLens may mirror a nearby board attachment while leaving the result
+    filing's own PDF as an external ``egx.com.eg`` link.  Those are distinct
+    documents and both must be tried; treating the mirror as exhaustive can
+    otherwise leave the actual statement unread.
+    """
+    found: list[str] = []
+    pattern = r'<a\b[^>]*href=["\']([^"\']+\.pdf(?:\?[^"\']*)?)["\']'
+    for href in re.findall(pattern, page, re.I | re.S):
+        href = html.unescape(href).strip()
+        parsed_href = urllib.parse.urlparse(href)
+        if not parsed_href.hostname and not href.lower().startswith("/downloads/"):
+            # `/disclosures/...` is a relative FoudaLens mirror path, not an
+            # official EGX path. Only EGX's `/downloads/...` links are safely
+            # resolvable against the classic exchange host.
+            continue
+        url = urllib.parse.urljoin(CLASSIC + "/", href)
+        parsed = urllib.parse.urlparse(url)
+        if parsed.hostname not in {"egx.com.eg", "www.egx.com.eg"}:
+            continue
+        if url not in found:
+            found.append(url)
+    return found
+
+
+@functools.lru_cache(maxsize=512)
+def _mirror_news_page(code: str) -> str:
     request = urllib.request.Request(
         FOUDALENS_NEWS.format(code),
         headers={"User-Agent": BROWSER_UA, "Accept": "text/html"},
     )
     try:
         with urllib.request.urlopen(request, timeout=12) as response:
-            page = response.read().decode("utf-8", "replace")
+            return response.read().decode("utf-8", "replace")
     except Exception:
+        return ""
+
+
+def resolve_mirror_attachments(code: str, ticker: str) -> list[str]:
+    """Downloadable disclosure copies from the FoudaLens EGX news mirror."""
+    return _disclosure_links(_mirror_news_page(code), ticker)
+
+
+def resolve_page_official_attachments(code: str) -> list[str]:
+    """Official PDFs exposed directly on the mirrored filing page."""
+    return _official_page_links(_mirror_news_page(code))
+
+
+@functools.lru_cache(maxsize=256)
+def _company_disclosures_page(ticker: str) -> str:
+    request = urllib.request.Request(
+        f"{FOUDALENS}/en/disclosures/{ticker.upper()}.CA",
+        headers={"User-Agent": BROWSER_UA, "Accept": "text/html"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return response.read().decode("utf-8", "replace")
+    except Exception:
+        return ""
+
+
+def resolve_same_day_company_attachments(ticker: str, filed_on: str | None) -> list[str]:
+    """All company PDFs shown on the filing date, ranked statements first."""
+    if not filed_on:
         return []
-    return _disclosure_links(page, ticker)
+    marker = f"/{filed_on}_"
+    return [
+        url for url in _disclosure_links(_company_disclosures_page(ticker), ticker)
+        if marker in url
+    ]
 
 
-def resolve_mirror_candidates(code: str, ticker: str) -> list[str]:
+def resolve_mirror_candidates(code: str, ticker: str,
+                              filed_on: str | None = None) -> list[str]:
     """Mirror PDFs filed on the result item or its matched companion item."""
     found = list(resolve_mirror_attachments(code, ticker))
+    for url in resolve_same_day_company_attachments(ticker, filed_on):
+        if url not in found:
+            found.append(url)
     for suffix in ("", "-all"):
         path = DISCLOSURE_DOCUMENTS / f"{ticker.upper()}{suffix}.json"
         try:
@@ -901,6 +972,7 @@ def main() -> int:
                 # avoid the F5 warm-up entirely. Resolve them concurrently for
                 # every candidate, then fall back to the filed official URL.
                 mirror_by_code: dict[str, list[str]] = {}
+                page_official_by_code: dict[str, list[str]] = {}
                 with concurrent.futures.ThreadPoolExecutor(
                     max_workers=max(1, len(group))
                 ) as pool:
@@ -908,17 +980,50 @@ def main() -> int:
                         pool.submit(
                             resolve_mirror_candidates,
                             candidate["code"], candidate["ticker"],
+                            candidate.get("filed_on"),
                         ): candidate
                         for candidate in group
                     }
                     for future, candidate in futures.items():
                         mirror_by_code[candidate["code"]] = future.result()
+                    page_futures = {
+                        pool.submit(
+                            resolve_page_official_attachments,
+                            candidate["code"],
+                        ): candidate
+                        for candidate in group
+                    }
+                    for future, candidate in page_futures.items():
+                        page_official_by_code[candidate["code"]] = future.result()
 
                 for candidate in group:
                     code = candidate["code"]
                     mirrors = mirror_by_code.get(code) or []
-                    if mirrors:
-                        retrievals[code] = [("mirror", url, None) for url in mirrors]
+                    page_official = page_official_by_code.get(code) or []
+                    if mirrors or page_official:
+                        reviewed_urls = {
+                            str(review.get("attachment_url") or "")
+                            for review in (
+                                store.get("failures", {}).get(code, {}).get("review_pdfs") or []
+                            )
+                        }
+                        new_mirrors = [url for url in mirrors if url not in reviewed_urls]
+                        # A newly found same-day mirror carries the same filed
+                        # evidence without the F5 gate. Audit it first; a later
+                        # retry can still fall through to the official page URL.
+                        if new_mirrors:
+                            retrievals[code] = [
+                                ("mirror", url, None) for url in new_mirrors
+                            ]
+                            continue
+                        retrievals[code] = []
+                        for number, url in enumerate(page_official):
+                            output = batch_folder / f"egx-{code}-{number}.pdf"
+                            retrievals[code].append(("official", url, output))
+                            official_jobs.append({"url": url, "output": str(output)})
+                        retrievals[code].extend(
+                            ("mirror", url, None) for url in mirrors
+                        )
                         continue
 
                     # The app's filing archive already contains most official
@@ -958,7 +1063,9 @@ def main() -> int:
                     folder = pathlib.Path(temp)
                     attachment = None
                     used_pdf = args.pdf
-                    review_pdfs: list[dict] = []
+                    review_pdfs: list[dict] = list(
+                        store.get("failures", {}).get(code, {}).get("review_pdfs") or []
+                    )
                     try:
                         if page_images:
                             urls = resolve_local_attachments(code, candidate["ticker"])
@@ -974,6 +1081,22 @@ def main() -> int:
                                 raise RuntimeError(
                                     "no PDF attachment in the filing archive, mirror, or beta metadata"
                                 )
+                            # On a retry, prefer genuinely new page links over
+                            # spending another model read on PDFs already kept
+                            # and refused. If no new link exists, preserve the
+                            # explicit refresh behaviour and revisit them all.
+                            reviewed_urls = {
+                                str(review.get("attachment_url") or "")
+                                for review in (
+                                    store.get("failures", {}).get(code, {}).get("review_pdfs") or []
+                                )
+                            }
+                            untried_sources = [
+                                source for source in sources
+                                if source[1] not in reviewed_urls
+                            ]
+                            if untried_sources:
+                                sources = untried_sources
                             last_error = None
                             record = None
                             for number, (kind, url, cached) in enumerate(sources):

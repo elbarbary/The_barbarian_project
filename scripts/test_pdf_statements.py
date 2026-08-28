@@ -7,6 +7,7 @@ import json
 import pathlib
 import tempfile
 import unittest
+from unittest import mock
 
 import apply_pdf_statements as APPLY
 import build_pdf_statements as BUILD
@@ -125,6 +126,39 @@ class VerificationTest(unittest.TestCase):
 
 
 class MirrorLinkTest(unittest.TestCase):
+    def test_direct_egx_pdfs_on_mirrored_page_are_not_ignored(self):
+        page = '''
+        <a href="/en/download">Download App</a>
+        <a href="/disclosures/MCQE.CA/other/not-an-egx-path.pdf">Mirror-relative</a>
+        <a href="/downloads/Bulletins/338780_1.pdf">Official-relative</a>
+        <a href="https://www.egx.com.eg/downloads/Bulletins/338781_1.pdf">Document 1</a>
+        <a href="https://www.egx.com.eg/downloads/Bulletins/338781_2.pdf?download=1">Document 2</a>
+        <a href="https://example.test/not-the-exchange.pdf">Other site</a>
+        '''
+        self.assertEqual(
+            BUILD._official_page_links(page),
+            [
+                "https://www.egx.com.eg/downloads/Bulletins/338780_1.pdf",
+                "https://www.egx.com.eg/downloads/Bulletins/338781_1.pdf",
+                "https://www.egx.com.eg/downloads/Bulletins/338781_2.pdf?download=1",
+            ],
+        )
+
+    def test_same_day_company_page_finds_the_other_statement_link(self):
+        page = '''
+        <a href="/disclosures/MCQE.CA/other/2026-05-21_338788_1.pdf">Board file</a>
+        <a href="/disclosures/MCQE.CA/financial_statement/2026-05-21_338786_1.pdf">Statements</a>
+        <a href="/disclosures/MCQE.CA/financial_statement/2026-08-06_292532_1.pdf">Other date</a>
+        '''
+        with mock.patch.object(BUILD, "_company_disclosures_page", return_value=page):
+            self.assertEqual(
+                BUILD.resolve_same_day_company_attachments("MCQE", "2026-05-21"),
+                [
+                    "https://foudalens.com/disclosures/MCQE.CA/financial_statement/2026-05-21_338786_1.pdf",
+                    "https://foudalens.com/disclosures/MCQE.CA/other/2026-05-21_338788_1.pdf",
+                ],
+            )
+
     def test_statement_and_english_copies_are_ranked_first(self):
         page = '''
         <a href="/disclosures/PHAR.CA/board_agm/2026-08-16_293147_1.pdf">Board report</a>
@@ -214,6 +248,33 @@ class MirrorLinkTest(unittest.TestCase):
             BUILD._sibling_document_attachments(document, "293224", None),
             ["https://example.test/results.pdf"],
         )
+
+    def test_companion_disclosure_mirror_is_used_before_f5(self):
+        document = {"items": [
+            {"id": "egx-293295", "date": "2026-08-16", "attachments": []},
+            {
+                "id": "egx-293289", "date": "2026-08-16",
+                "title_en": "Company - Decisions of the Board of Directors' Meeting",
+                "attachments": ["https://www.egx.com.eg/downloads/Bulletins/342827_1.pdf"],
+            },
+        ]}
+        with tempfile.TemporaryDirectory() as folder:
+            root = pathlib.Path(folder)
+            (root / "MOIN.json").write_text(json.dumps(document))
+
+            def mirrored(code, ticker):
+                if (code, ticker) == ("293289", "MOIN"):
+                    return ["https://foudalens.com/disclosures/MOIN.CA/other/293289_1.pdf"]
+                return []
+
+            with (
+                mock.patch.object(BUILD, "DISCLOSURE_DOCUMENTS", root),
+                mock.patch.object(BUILD, "resolve_mirror_attachments", side_effect=mirrored),
+            ):
+                self.assertEqual(
+                    BUILD.resolve_mirror_candidates("293295", "MOIN"),
+                    ["https://foudalens.com/disclosures/MOIN.CA/other/293289_1.pdf"],
+                )
 
 
 class PageImageTest(unittest.TestCase):
