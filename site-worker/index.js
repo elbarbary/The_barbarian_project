@@ -9,6 +9,16 @@
  * of an inbox; a signed cookie carries that proof afterwards. Nothing to leak,
  * nothing to reset.
  *
+ * Codes go out through SendPulse. Three secrets make it work, and none of them
+ * belongs in this file or in the repository:
+ *
+ *   npx wrangler secret put SENDPULSE_ID       # API "ID" from their dashboard
+ *   npx wrangler secret put SENDPULSE_SECRET   # the matching "Secret"
+ *   npx wrangler secret put MAIL_FROM          # optional sender address
+ *
+ * Without the first two, a code request answers 502 rather than pretending a
+ * mail was sent.
+ *
  * WHAT THIS DOES AND DOES NOT BUY
  * A gate stops indiscriminate crawling and casual copying. It does not make
  * the data unobtainable: anybody willing to sign up can read what they are
@@ -102,27 +112,85 @@ async function overLimit(env, bucket, key, { max, window }) {
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
 const normalise = (raw) => String(raw || '').trim().toLowerCase();
 
+/** Standard base64 of UTF-8 text — SendPulse wants the HTML part encoded. */
+function b64utf8(text) {
+  let s = '';
+  for (const b of enc.encode(text)) s += String.fromCharCode(b);
+  return btoa(s);
+}
+
+/** A SendPulse bearer token, cached until it expires.
+ *
+ * Their documentation asks for exactly this — "request a new token only after
+ * the current one expires" — and it also saves a round trip on every send.
+ * A minute of headroom keeps a send from racing the expiry.
+ */
+async function mailToken(env, { fresh = false } = {}) {
+  if (!fresh) {
+    const held = await env.ESTHMR_AUTH.get('sendpulse:token');
+    if (held) return held;
+  }
+  const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      grant_type: 'client_credentials',
+      client_id: env.SENDPULSE_ID,
+      client_secret: env.SENDPULSE_SECRET,
+    }),
+  });
+  if (!response.ok) throw new Error(`sendpulse auth ${response.status}`);
+  const { access_token: token, expires_in: ttl } = await response.json();
+  if (!token) throw new Error('sendpulse returned no token');
+  await env.ESTHMR_AUTH.put('sendpulse:token', token,
+    { expirationTtl: Math.max(120, (ttl || 3600) - 60) });
+  return token;
+}
+
+async function postMessage(env, token, email, code) {
+  const text = `Your ESTHMR sign-in code is ${code}.\n\n`
+    + 'It works once and expires in ten minutes. If you did not ask for it, '
+    + 'nothing has happened to your account and you can ignore this.';
+  const html = '<div style="font:400 15px/1.55 -apple-system,Segoe UI,sans-serif;'
+    + 'color:#1B1917"><p>Your ESTHMR sign-in code is</p>'
+    + `<p style="font:600 30px/1 ui-monospace,monospace;letter-spacing:.22em">${code}</p>`
+    + '<p>It works once and expires in ten minutes.</p>'
+    + '<p style="color:#6E6761;font-size:13px">If you did not ask for it, nothing '
+    + 'has happened to your account and you can ignore this.</p></div>';
+  return fetch('https://api.sendpulse.com/smtp/emails', {
+    method: 'POST',
+    headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email: {
+        subject: `${code} is your ESTHMR sign-in code`,
+        from: {
+          name: 'ESTHMR',
+          email: env.MAIL_FROM || 'noreply@thebarbarianproject.com',
+        },
+        to: [{ email }],
+        text,
+        html: b64utf8(html),
+      },
+    }),
+  });
+}
+
 async function sendCode(env, email, code) {
-  if (!env.RESEND_API_KEY) {
+  if (!env.SENDPULSE_ID || !env.SENDPULSE_SECRET) {
     // Refusing loudly beats pretending a code was sent that never was.
     throw new Error('no mail provider configured');
   }
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      authorization: `Bearer ${env.RESEND_API_KEY}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: env.MAIL_FROM || 'ESTHMR <noreply@thebarbarianproject.com>',
-      to: [email],
-      subject: `${code} is your ESTHMR sign-in code`,
-      text: `Your ESTHMR sign-in code is ${code}.\n\n`
-          + `It works once and expires in ten minutes. If you did not ask for `
-          + `it, nothing has happened to your account and you can ignore this.`,
-    }),
-  });
-  if (!response.ok) throw new Error(`mail provider ${response.status}`);
+  let response = await postMessage(env, await mailToken(env), email, code);
+  if (response.status === 401) {
+    // The cached token was rejected early — mint one and try once more.
+    response = await postMessage(env, await mailToken(env, { fresh: true }), email, code);
+  }
+  if (!response.ok) throw new Error(`sendpulse ${response.status}`);
+  // SendPulse can answer 200 with a refusal in the body.
+  const body = await response.json().catch(() => ({}));
+  if (body && body.result === false) {
+    throw new Error(`sendpulse refused: ${body.message || 'no reason given'}`);
+  }
 }
 
 async function api(request, env, url) {
