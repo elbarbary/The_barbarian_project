@@ -14,7 +14,25 @@ async function load(email) {
     return;
   }
   try {
-    component.setData(await data.live());
+    const base = await data.live();
+    component.setData(base);
+    // The rest of the screens, in parallel and each on its own: one document
+    // failing should cost that screen its content, not the whole session.
+    const [feed, cal, ex, secs] = await Promise.all([
+      data.news().catch(() => null),
+      data.calendar().catch(() => null),
+      data.exchange().catch(() => null),
+      data.sectors().catch(() => null),
+    ]);
+    component.setData({
+      ...base,
+      feed: feed || undefined,
+      filedEvents: cal ? cal.filed : undefined,
+      expectedEvents: cal ? cal.expected : undefined,
+      rates: ex ? ex.rates : undefined,
+      macro: ex ? ex.macro : undefined,
+      sectorCards: secs || undefined,
+    });
   } catch (error) {
     // A session that expired mid-visit drops back to the demo rather than an
     // empty screen, and says so.
@@ -65,6 +83,17 @@ document.getElementById('signout').onclick = async () => {
           component._co = { ticker: wanted, ...doc, close: row.close, pct: row.pct };
           component._d = { ...component.data(), series: doc.series, fins: doc.fins };
           draw();
+          // Its signals and its filings follow; they are extra, so a company
+          // without either still shows its statements.
+          data.companyExtras(wanted).then((extra) => {
+            if (component.state.ticker !== wanted) return;
+            component._d = {
+              ...component.data(),
+              signals: extra.signals || undefined,
+              filings: extra.filings || undefined,
+            };
+            draw();
+          }).catch(() => {});
         })
         .catch((error) => console.warn('[esthmr]', wanted, error.message));
     }

@@ -30,11 +30,76 @@
    "reason": "no attachment verified: F5 warm-up failed after 2 attempts: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.egx.com.eg/\nCall log:\n  - navigating to \"https://www.egx.com.eg/\", waiting until \"domcontentloaded\"\n",
    "ticker": "EEII"
   },
+  "289159": {
+   "attempted_on": "2026-08-28",
+   "period": "9M 2026 (to 31 Mar)",
+   "reason": "no attachment verified: F5 batch timed out before cookies could be reused",
+   "ticker": "WKOL"
+  },
   "289224": {
    "attempted_on": "2026-08-28",
    "period": "Q1 2026",
    "reason": "no attachment verified: F5 warm-up failed after 2 attempts: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.egx.com.eg/\nCall log:\n  - navigating to \"https://www.egx.com.eg/\", waiting until \"domcontentloaded\"\n",
    "ticker": "ECAP"
+  },
+  "289401": {
+   "attempted_on": "2026-08-28",
+   "period": "Q1 2026",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/EBSC.CA/other/2026-06-04_339294_1.pdf",
+     "bytes": 774159,
+     "local_path": "data-source/egx-beta/pdf-cache/review/EBSC-egx-289401-0-efe265a258d3.pdf",
+     "pdf_sha256": "efe265a258d39541f10e705923e93c999ef94c654b0f6fc295d29ad94db36754",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "EBSC"
+  },
+  "289489": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2026 (to 31 Mar)",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GRCA.CA/financial_statement/2026-06-07_339366_2.pdf",
+     "bytes": 3988855,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GRCA-egx-289489-0-b9554b27b60d.pdf",
+     "pdf_sha256": "b9554b27b60d138e6c25aa725070682174bf410acf2c61c3df2f833bc7131709",
+     "reason": "whole-PDF net income does not match the EGX announcement"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GRCA.CA/other/2026-06-07_339362_1.pdf",
+     "bytes": 1548722,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GRCA-egx-289489-1-b4e4bfa690d1.pdf",
+     "pdf_sha256": "b4e4bfa690d1387bd33eb411637fcfdc857ba72f57bace52eb3c47febccef55d",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GRCA.CA/board_agm/2026-06-07_339368_1.pdf",
+     "bytes": 2895108,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GRCA-egx-289489-2-e4ab91cedee2.pdf",
+     "pdf_sha256": "e4ab91cedee2530e1c1a464c91d1f74fc749129de06f295a72359a8eb52c6996",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "GRCA"
+  },
+  "289660": {
+   "attempted_on": "2026-08-28",
+   "period": "Q1 2026",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/EFIC.CA/other/2026-06-10_339497_1.pdf",
+     "bytes": 295204,
+     "local_path": "data-source/egx-beta/pdf-cache/review/EFIC-egx-289660-0-8504c574ce92.pdf",
+     "pdf_sha256": "8504c574ce92bea733dee98e8d72c46f2024a6bc6a46b66f121dfc08ec145a63",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "EFIC"
   },
   "289811": {
    "attempted_on": "2026-08-27",
@@ -180,11 +245,76 @@
    "reason": "no attachment verified: F5 warm-up failed after 2 attempts: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.egx.com.eg/\nCall log:\n  - navigating to \"https://www.egx.com.eg/\", waiting until \"domcontentloaded\"\n",
    "ticker": "GGCC"
   },
+  "290268": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASPI.CA/other/2026-06-24_290266_1.pdf",
+     "bytes": 3046161,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASPI-egx-290268-0-4c1a164bb45b.pdf",
+     "pdf_sha256": "4c1a164bb45b068d560b0bf7ae432d068f8ab4bfa5848740a367bb30d4eb0257",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASPI.CA/other/2026-06-24_290266_2.pdf",
+     "bytes": 2891270,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASPI-egx-290268-1-0d6a960d8bc3.pdf",
+     "pdf_sha256": "0d6a960d8bc3ebd79c2cc2e7370028a35052900964068a81565a1dff41a3242c",
+     "reason": "whole-PDF net income does not match the EGX announcement"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASPI.CA/other/2026-06-24_290266_3.pdf",
+     "bytes": 453475,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASPI-egx-290268-2-efcfb35f1239.pdf",
+     "pdf_sha256": "efcfb35f12399b4e7dce79b0de34af7d905463c65063c6f372c3d84dfef64b5f",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASPI.CA/other/2026-06-24_290266_4.pdf",
+     "bytes": 849179,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASPI-egx-290268-3-8849dea143df.pdf",
+     "pdf_sha256": "8849dea143dfaa0f5fa3f57a1d6a996dce6d77a302fa03a25f5f85862076e07c",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "ASPI"
+  },
   "290397": {
    "attempted_on": "2026-08-27",
    "period": "9M 2026 (to 31 Mar)",
    "reason": "no PDF attachment in the filing archive, mirror, or beta metadata",
    "ticker": "KABO"
+  },
+  "290627": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/AJWA.CA/other/2026-06-30_290627_2.pdf",
+     "bytes": 3705796,
+     "local_path": "data-source/egx-beta/pdf-cache/review/AJWA-egx-290627-0-d8ad483c5330.pdf",
+     "pdf_sha256": "d8ad483c5330352b4d24ee8dc161de85a8ef5d4a2694066a2b3527fe716f6946",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/AJWA.CA/board_agm/2026-06-30_290627_1.pdf",
+     "bytes": 2432863,
+     "local_path": "data-source/egx-beta/pdf-cache/review/AJWA-egx-290627-1-6c99dff6cd76.pdf",
+     "pdf_sha256": "6c99dff6cd768a160cd62bfa71bbc195d15fe97e44b2b580ee36481f44bb4253",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/AJWA.CA/other/2026-06-30_290626_1.pdf",
+     "bytes": 306222,
+     "local_path": "data-source/egx-beta/pdf-cache/review/AJWA-egx-290627-2-f599f7e6d345.pdf",
+     "pdf_sha256": "f599f7e6d345026992d7eed29732e8990450e4212501db19377566b551bb85b1",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "AJWA"
   },
   "290699": {
    "attempted_on": "2026-08-27",
@@ -208,6 +338,49 @@
    ],
    "ticker": "ELNA"
   },
+  "290795": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF net income does not match the EGX announcement",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/OIH.CA/other/2026-07-05_290793_1.pdf",
+     "bytes": 286178,
+     "local_path": "data-source/egx-beta/pdf-cache/review/OIH-egx-290795-0-7cb84897cf4b.pdf",
+     "pdf_sha256": "7cb84897cf4b98cdc0a11ba1a50d83c4fc201b86e0cefde63f921bc70f4358a9",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/OIH.CA/other/2026-07-05_290793_2.pdf",
+     "bytes": 765362,
+     "local_path": "data-source/egx-beta/pdf-cache/review/OIH-egx-290795-1-c2f7d1c23b82.pdf",
+     "pdf_sha256": "c2f7d1c23b821e397674021adfcb904ac3ee4bdec6fb9b011cb9c7ebef018e43",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/OIH.CA/other/2026-07-05_290797_1.pdf",
+     "bytes": 67535,
+     "local_path": "data-source/egx-beta/pdf-cache/review/OIH-egx-290795-2-5cdb841e9c00.pdf",
+     "pdf_sha256": "5cdb841e9c009c5ec4c3685e0e5377134fca070ab6f4234078c763fd00ac4a27",
+     "reason": "whole-PDF net income does not match the EGX announcement"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/OIH.CA/other/2026-07-05_290797_4.pdf",
+     "bytes": 790030,
+     "local_path": "data-source/egx-beta/pdf-cache/review/OIH-egx-290795-3-4cb827bc8b97.pdf",
+     "pdf_sha256": "4cb827bc8b97ec5d5bbad38dc6e032cae00e7ed44f632f53f39aaa4ceea59da2",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/OIH.CA/board_agm/2026-07-05_290797_2.pdf",
+     "bytes": 1356027,
+     "local_path": "data-source/egx-beta/pdf-cache/review/OIH-egx-290795-4-3fb0e195a823.pdf",
+     "pdf_sha256": "3fb0e195a8231efec642a64c78c46cbcb111ba6b0b56461d401eb02c86233274",
+     "reason": "whole-PDF net income does not match the EGX announcement"
+    }
+   ],
+   "ticker": "OIH"
+  },
   "290866": {
    "attempted_on": "2026-08-27",
    "period": "Q1 2026",
@@ -223,6 +396,64 @@
    ],
    "ticker": "AMPI"
   },
+  "291085": {
+   "attempted_on": "2026-08-28",
+   "period": "H1 2025 (to 31 Dec)",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/EALR.CA/other/2026-07-09_291085_2.pdf",
+     "bytes": 259936,
+     "local_path": "data-source/egx-beta/pdf-cache/review/EALR-egx-291085-0-4d7b8cd346d6.pdf",
+     "pdf_sha256": "4d7b8cd346d61c0f08f246295d7cde27602ada39e0bcbd8abb5995a9b92ecfe2",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/EALR.CA/board_agm/2026-07-09_291133_1.pdf",
+     "bytes": 1378256,
+     "local_path": "data-source/egx-beta/pdf-cache/review/EALR-egx-291085-1-4f48aa2041eb.pdf",
+     "pdf_sha256": "4f48aa2041eb68cdff95dfefd664cdf4060efaa60210a992ce055c20ea239d91",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "EALR"
+  },
+  "291420": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GMCI.CA/other/2026-07-15_291420_2.pdf",
+     "bytes": 5353702,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GMCI-egx-291420-0-81464c239d0c.pdf",
+     "pdf_sha256": "81464c239d0c412180a98eda22d6a737815cf36a2e16e7343146881914e0054e",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GMCI.CA/other/2026-07-15_291420_3.pdf",
+     "bytes": 797277,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GMCI-egx-291420-1-3bfd5c6d8626.pdf",
+     "pdf_sha256": "3bfd5c6d862664bfa0b200cdab5e1971f56dbebab60a129131d792c59cffcd06",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GMCI.CA/board_agm/2026-07-15_291420_1.pdf",
+     "bytes": 1545363,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GMCI-egx-291420-2-cc8288bdf0a2.pdf",
+     "pdf_sha256": "cc8288bdf0a2558f882b614a78d0e6ce9db77ce2727df8782fcfa93080bdd226",
+     "reason": "HTTP Error 429: Too Many Requests"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/GMCI.CA/other/2026-07-15_291409_1.pdf",
+     "bytes": 1741971,
+     "local_path": "data-source/egx-beta/pdf-cache/review/GMCI-egx-291420-3-e198c144a589.pdf",
+     "pdf_sha256": "e198c144a58957215de2eb69206e2eb7049c9232d667c5110c60f81aac276629",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "GMCI"
+  },
   "291486": {
    "attempted_on": "2026-08-27",
    "period": "9M 2026 (to 31 May)",
@@ -237,6 +468,35 @@
     }
    ],
    "ticker": "TALM"
+  },
+  "291496": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF net income does not match the EGX announcement",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASCM.CA/other/2026-07-16_291496_1.pdf",
+     "bytes": 5866989,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASCM-egx-291496-0-ae25d050122f.pdf",
+     "pdf_sha256": "ae25d050122ffa5534611116b5f0b59590ff3b52c710a960835ddea25b225b18",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASCM.CA/other/2026-07-16_291494_1.pdf",
+     "bytes": 144194,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASCM-egx-291496-1-6d3d1b28a2d4.pdf",
+     "pdf_sha256": "6d3d1b28a2d49842f76bea94087d889d1262931a41f6b3289ccb92c5b978682d",
+     "reason": "whole-PDF read named no evidence pages"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ASCM.CA/board_agm/2026-07-16_291497_2.pdf",
+     "bytes": 592680,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ASCM-egx-291496-2-c6524b5f2f55.pdf",
+     "pdf_sha256": "c6524b5f2f55c2c6cd94deae66433ac06495f8edcde14abfe7a1be242d502f77",
+     "reason": "whole-PDF net income does not match the EGX announcement"
+    }
+   ],
+   "ticker": "ASCM"
   },
   "291541": {
    "attempted_on": "2026-08-27",
@@ -462,6 +722,28 @@
    "period": "H1 2026",
    "reason": "no attachment verified: F5 warm-up failed after 2 attempts: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.egx.com.eg/\nCall log:\n  - navigating to \"https://www.egx.com.eg/\", waiting until \"domcontentloaded\"\n",
    "ticker": "MISR"
+  },
+  "292565": {
+   "attempted_on": "2026-08-28",
+   "period": "FY 2025",
+   "reason": "no attachment verified: whole-PDF read named no evidence pages",
+   "review_pdfs": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/FTNS.CA/board_agm/2026-08-06_292565_2.pdf",
+     "bytes": 372884,
+     "local_path": "data-source/egx-beta/pdf-cache/review/FTNS-egx-292565-0-da0c779b682a.pdf",
+     "pdf_sha256": "da0c779b682a35f4fded8952267cd85b7c647839eec9bb8704beb7d88bb9a072",
+     "reason": "the attachment contains no verified enrichment fields"
+    },
+    {
+     "attachment_url": "https://foudalens.com/disclosures/FTNS.CA/other/2026-08-06_292556_1.pdf",
+     "bytes": 237973,
+     "local_path": "data-source/egx-beta/pdf-cache/review/FTNS-egx-292565-1-c44c2f5973f2.pdf",
+     "pdf_sha256": "c44c2f5973f2a6bf9b3bc056e044f82b89612220f588e743c29ca073377cc772",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "ticker": "FTNS"
   },
   "292574": {
    "attempted_on": "2026-08-28",
@@ -15112,6 +15394,199 @@
    "ticker": "EEII",
    "verified_on": "2026-08-28"
   },
+  "289087": {
+   "attachment_url": "https://foudalens.com/disclosures/VERT.CA/financial_statement/2026-06-01_339120_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "not_available",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 4,
+      "printed": "١١ ٩٣٧ ٦٣٨",
+      "value_m": 11.937638
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "11 937 638",
+      "value_m": 11.937638
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 4,
+      "printed": "٤٤٦ ٧٦٣",
+      "value_m": 0.446763
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "446 763",
+      "value_m": 0.446763
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 4,
+      "printed": "٧ ٣٢٢ ٠٠٩",
+      "value_m": 7.322009
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "7 322 009",
+      "value_m": 7.322009
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 5,
+      "printed": "( ١٦ ٨٥١ )",
+      "value_m": 0.016851
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "(16 851)",
+      "value_m": 0.016851
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 8,
+      "printed": "( ٢٥١ ٢٦٠ )",
+      "value_m": -0.25126
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "(251 260)",
+      "value_m": -0.25126
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 5,
+      "printed": "١ ٦٢٠ ١٦٥",
+      "value_m": 1.620165
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "1 620 165",
+      "value_m": 1.620165
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 4,
+      "printed": "٤ ٦١٥ ٦٢٩",
+      "value_m": 4.615629
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "4 615 629",
+      "value_m": 4.615629
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 8,
+      "printed": "٣٧٩ ٠٤٣",
+      "value_m": 0.379043
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "379 043",
+      "value_m": 0.379043
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 5,
+      "printed": "١٤٧ ٦٠١",
+      "value_m": 0.147601
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "147 601",
+      "value_m": 0.147601
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 8,
+      "printed": "٦٣٠ ٣٠٣",
+      "value_m": 0.630303
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "630 303",
+      "value_m": 0.630303
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 5,
+      "printed": "١٥٧ ٠٨٢",
+      "value_m": 0.157082
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "157 082",
+      "value_m": 0.157082
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 5,
+      "printed": "٥ ١٧٩ ٢٤٠",
+      "value_m": 5.17924
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "5 179 240",
+      "value_m": 5.17924
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 4,
+      "printed": "التزامات عقود تأجير قصيرة الاجل ( تمويلي ) ١١٤ ٤٠٠",
+      "value_m": 0.1144
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "التزامات عقود تأجير قصيرة الاجل ( تمويلي ): 114 400 + التزامات عقود تأجير قصيرة الاجل ( تشغيلي ): 458 800",
+      "value_m": 0.5732
+     }
+    }
+   },
+   "fields": {
+    "assets": 11.937638,
+    "cash": 0.446763,
+    "equity": 7.322009,
+    "finance_cost": 0.016851,
+    "financing_cash_flow": -0.25126,
+    "gross_profit": 1.620165,
+    "liabilities": 4.615629,
+    "net_change_in_cash": 0.379043,
+    "net_income": 0.148,
+    "operating_cash_flow": 0.630303,
+    "operating_income": 0.157082,
+    "revenue": 5.17924,
+    "short_term_debt": 0.1144
+   },
+   "filed_on": "2026-06-01",
+   "model": "gemini-3.7-flash",
+   "months": 3,
+   "pdf_sha256": "3bfd051fd511b3bee0840da6ec7c2940c09cf67462a40bf4aae6136fe5784f15",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289087",
+   "ticker": "VERT",
+   "verified_on": "2026-08-28"
+  },
   "289117": {
    "attachment_url": "https://foudalens.com/disclosures/OFH.CA/financial_statement/2026-06-01_339119_1.pdf",
    "basis": null,
@@ -18763,6 +19238,183 @@
    "ticker": "CLHO",
    "verified_on": "2026-08-28"
   },
+  "289476": {
+   "attachment_url": "https://foudalens.com/disclosures/BINV.CA/financial_statement/2026-06-07_339348_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "not_available",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "summed",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "comparative": {
+    "date": "2025-12-31",
+    "fields": {
+     "cash": 2338.766533,
+     "debt": 58.505,
+     "long_term_debt": 1.588,
+     "short_term_debt": 56.917
+    }
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 3,
+      "printed": "٧ ٥٨٦ ٠٨٧ ٦٢٦",
+      "value_m": 7586.087626
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "7 586 087 626",
+      "value_m": 7586.087626
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 3,
+      "printed": "٢ ٧١٦ ٨٩٤ ٥٩٥",
+      "value_m": 2716.894595
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "2 716 894 595",
+      "value_m": 2716.894595
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 3,
+      "printed": "٧ ٠٦٧ ٦٠٣ ١٦٥",
+      "value_m": 7067.603165
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "7 066 703 165",
+      "value_m": 7066.703165
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 4,
+      "printed": "(۲ ۳۰۲ ۰۷۰)",
+      "value_m": 2.30207
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "مصروفات فوائد وعمولات: 2 302 070 + فوائد إلتزام الإيجار: 36 000",
+      "value_m": 2.33807
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 7,
+      "printed": "(۲۲ ۳۰۱ ۶۸۸)",
+      "value_m": -22.301688
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(22 301 688)",
+      "value_m": -22.301688
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 7,
+      "printed": "(۱۰ ۰۳۲ ٢٦٧)",
+      "value_m": -10.032267
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(10 032 267)",
+      "value_m": -10.032267
+     }
+    },
+    "long_term_debt": {
+     "audit": {
+      "page": 3,
+      "printed": "عقود تأجير - غير متداولة: ۱ ۷۳۰ ۰۰۰",
+      "value_m": 1.73
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "عقود تأجير - غير متداولة: 1 730 000",
+      "value_m": 1.73
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 7,
+      "printed": "(۸ ۵۵۰ ۰۶۱)",
+      "value_m": -8.550061
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(8 550 061)",
+      "value_m": -8.550061
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 4,
+      "printed": "٢١٢ ٨٤٩ ١١٦",
+      "value_m": 212.849116
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "212 849 116",
+      "value_m": 212.849116
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 7,
+      "printed": "۲۳ ۷۸۳ ۸۹٤",
+      "value_m": 23.783894
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "23 783 894",
+      "value_m": 23.783894
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 3,
+      "printed": "عقود تأجير - متداولة ٦٦٧ ٠٠٠ + قروض قصيرة الأجل ۳۷ ۵۰۰ ۰۰۰",
+      "value_m": 38.167
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "قروض قصيرة الأجل: 37 500 000",
+      "value_m": 37.5
+     }
+    }
+   },
+   "fields": {
+    "assets": 7586.087626,
+    "cash": 2716.894595,
+    "debt": 39.897,
+    "equity": 7067.603165,
+    "finance_cost": 2.30207,
+    "financing_cash_flow": -22.301688,
+    "investing_cash_flow": -10.032267,
+    "long_term_debt": 1.73,
+    "net_change_in_cash": -8.550061,
+    "net_income": 212.849,
+    "operating_cash_flow": 23.783894,
+    "short_term_debt": 38.167
+   },
+   "filed_on": "2026-06-07",
+   "model": "gemini-3.7-flash",
+   "months": 3,
+   "pdf_sha256": "4e736cb5b88962adbbbf0612e833fd5e8601efc9c50a0d1874773633c7b2eade",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289476",
+   "ticker": "BINV",
+   "verified_on": "2026-08-28"
+  },
   "289483": {
    "attachment_url": "https://foudalens.com/disclosures/DEIN.CA/financial_statement/2026-06-07_339355_1.pdf",
    "basis": null,
@@ -19690,6 +20342,249 @@
    "ticker": "HELI",
    "verified_on": "2026-08-28"
   },
+  "289643": {
+   "attachment_url": "https://foudalens.com/disclosures/MAAL.CA/financial_statement/2026-06-10_339492_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 4,
+      "printed": "٥٤١٠٣٢٢٦٨٠",
+      "value_m": 5410.32268
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "5 410 322 680",
+      "value_m": 5410.32268
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 4,
+      "printed": "٤٣١٩٥٠٧٠٦",
+      "value_m": 431.950706
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "431 950 706",
+      "value_m": 431.950706
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 4,
+      "printed": "٣١٥٣٢٦٤٠٠",
+      "value_m": 315.3264
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "315 326 400",
+      "value_m": 315.3264
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 6,
+      "printed": "(٧٨٦٦٤٠٠)",
+      "value_m": 7.8664
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "(7 866 400)",
+      "value_m": 7.8664
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 9,
+      "printed": "٤٨٥٦٧٤٤٥",
+      "value_m": 48.567445
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "48 567 445",
+      "value_m": 48.567445
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 6,
+      "printed": "١٢٨٥٩٦٩٧٧",
+      "value_m": 128.596977
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "128 596 977",
+      "value_m": 128.596977
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 9,
+      "printed": "(٤١٩٧٩٤٣)",
+      "value_m": -4.197943
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "(4 197 943)",
+      "value_m": -4.197943
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 5,
+      "printed": "٥٠٩٤٩٩٦٢٨٠",
+      "value_m": 5094.99628
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "5 094 996 280",
+      "value_m": 5094.99628
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 9,
+      "printed": "٢٨٠٣٥٣٤",
+      "value_m": 2.803534
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "2 803 534",
+      "value_m": 2.803534
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 6,
+      "printed": "٥٤٣٩٦٨٠٨",
+      "value_m": 54.396808
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "54 396 808",
+      "value_m": 54.396808
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 9,
+      "printed": "(٤١٥٦٥٩٦٨)",
+      "value_m": -41.565968
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "(41 565 968)",
+      "value_m": -41.565968
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 6,
+      "printed": "٩١٢٢٨١٦٣",
+      "value_m": 91.228163
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "91 228 163",
+      "value_m": 91.228163
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 6,
+      "printed": "٥٥٠١٧٧٥٥٦",
+      "value_m": 550.177556
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "550 177 556",
+      "value_m": 550.177556
+     }
+    }
+   },
+   "fields": {
+    "assets": 5410.32268,
+    "cash": 431.950706,
+    "equity": 315.3264,
+    "finance_cost": 7.8664,
+    "financing_cash_flow": 48.567445,
+    "gross_profit": 128.596977,
+    "investing_cash_flow": -4.197943,
+    "liabilities": 5094.99628,
+    "net_change_in_cash": 2.803534,
+    "net_income": 54.397,
+    "operating_cash_flow": -41.565968,
+    "operating_income": 91.228163,
+    "revenue": 550.177556
+   },
+   "filed_on": "2026-06-10",
+   "model": "gemini-3.7-flash",
+   "months": 3,
+   "pdf_sha256": "c3c8d901ffefb51048a67eca8fe60ec7a9ae9e327ccf17b0a617910338acdc5d",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289643",
+   "ticker": "MAAL",
+   "verified_on": "2026-08-28"
+  },
+  "289646": {
+   "attachment_url": "https://foudalens.com/disclosures/MIPH.CA/other/2026-06-10_339501_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "not_available",
+    "cash_flow_identity": "not_available",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "net_income": {
+     "audit": {
+      "page": 1,
+      "printed": "حققت الشركة صافي ربح مجمع بعد الضرائب في ٣١-١٢-٢٠٢٥ بلغ قدرة ٤٧,٢ مليون جنية",
+      "value_m": 47.2
+     },
+     "discovery": {
+      "page": 1,
+      "printed": "47,2 مليون جنية",
+      "value_m": 47.2
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 1,
+      "printed": "حققت الشركة صافي مبيعات مجمعة في ٣١-١٢-٢٠٢٥ بلغ قدرة ٦٤٣٨,٢ مليون جنية",
+      "value_m": 6438.2
+     },
+     "discovery": {
+      "page": 1,
+      "printed": "6438,2 مليون جنية",
+      "value_m": 6438.2
+     }
+    }
+   },
+   "fields": {
+    "net_income": 47.196,
+    "revenue": 6438.2
+   },
+   "filed_on": "2026-06-10",
+   "model": "gemini-3.7-flash",
+   "months": 12,
+   "pdf_sha256": "194fa1fa56a9b054ea5c80a95ad223e131c2ee4c57b01717e67f00abd3e068e9",
+   "period": "FY 2025",
+   "period_end": "2025-12-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289646",
+   "ticker": "MIPH",
+   "verified_on": "2026-08-28"
+  },
   "289671": {
    "attachment_url": "https://foudalens.com/disclosures/KRDI.CA/financial_statement/2026-06-10_339495_1.pdf",
    "basis": null,
@@ -19906,6 +20801,694 @@
    "ticker": "KRDI",
    "verified_on": "2026-08-28"
   },
+  "289680": {
+   "attachment_url": "https://foudalens.com/disclosures/MBEG.CA/financial_statement/2026-06-11_289679_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 4,
+      "printed": "٩٢٤ ٨٤٣ ١٩٠",
+      "value_m": 924.84319
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "924 843 190",
+      "value_m": 924.84319
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 4,
+      "printed": "١٥ ٦٠٤ ٤٣٧",
+      "value_m": 15.604437
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "15 604 437",
+      "value_m": 15.604437
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 4,
+      "printed": "٣٦٢ ٧٤٥ ٢٩٧",
+      "value_m": 362.745297
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "362 745 297",
+      "value_m": 362.745297
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 31,
+      "printed": "٨ ٩٦١ ٨٠٧",
+      "value_m": 8.961807
+     },
+     "discovery": {
+      "page": 31,
+      "printed": "8 961 807",
+      "value_m": 8.961807
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 8,
+      "printed": "٣٨ ٧٧٩ ٥٦٣",
+      "value_m": 38.779563
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "38 779 563",
+      "value_m": 38.779563
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 5,
+      "printed": "٣٦ ٠٠٦ ١٣٩",
+      "value_m": 36.006139
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "36 006 139",
+      "value_m": 36.006139
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 8,
+      "printed": "( ١٧ ٤١٧ ٧٤٦ )",
+      "value_m": -17.417746
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "(17 417 746)",
+      "value_m": -17.417746
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 4,
+      "printed": "٥٦٢ ٠٩٧ ٨٩٤",
+      "value_m": 562.097894
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "562 097 894",
+      "value_m": 562.097894
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 8,
+      "printed": "( ١ ٠٠٩ ٣٧٨ )",
+      "value_m": -1.009378
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "(1 009 378)",
+      "value_m": -1.009378
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 5,
+      "printed": "٤ ٩٨٤ ٩٩٥",
+      "value_m": 4.984995
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "4 984 995",
+      "value_m": 4.984995
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 8,
+      "printed": "( ٢٢ ٣٧١ ١٩٥ )",
+      "value_m": -22.371195
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "(22 371 195)",
+      "value_m": -22.371195
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 5,
+      "printed": "١٧ ٦٦٦ ٧٦٠",
+      "value_m": 17.66676
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "17 666 760",
+      "value_m": 17.66676
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 5,
+      "printed": "١٩٥ ٤١٦ ١٣٦",
+      "value_m": 195.416136
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "195 416 136",
+      "value_m": 195.416136
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 4,
+      "printed": "تسهيلات إئتمانية قصيرة الاجل: ١٥٩ ٨٨٧ ٨٧٩",
+      "value_m": 159.887879
+     },
+     "discovery": {
+      "page": 4,
+      "printed": "159 887 879",
+      "value_m": 159.887879
+     }
+    }
+   },
+   "fields": {
+    "assets": 924.84319,
+    "cash": 15.604437,
+    "equity": 362.745297,
+    "finance_cost": 8.961807,
+    "financing_cash_flow": 38.779563,
+    "gross_profit": 36.006139,
+    "investing_cash_flow": -17.417746,
+    "liabilities": 562.097894,
+    "net_change_in_cash": -1.009378,
+    "net_income": 4.985,
+    "operating_cash_flow": -22.371195,
+    "operating_income": 17.66676,
+    "revenue": 195.416136,
+    "short_term_debt": 159.887879
+   },
+   "filed_on": "2026-06-11",
+   "model": "gemini-3.7-flash",
+   "months": 3,
+   "pdf_sha256": "c6d65a80ecc4b50c9dc04e0100987a28655919fe1173552e473850764f7ae601",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289680",
+   "ticker": "MBEG",
+   "verified_on": "2026-08-28"
+  },
+  "289684": {
+   "attachment_url": "https://foudalens.com/disclosures/ACGC.CA/financial_statement/2026-06-11_289683_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "summed",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "comparative": {
+    "date": "2025-06-30",
+    "fields": {
+     "cash": 504.208988,
+     "debt": 1499.628,
+     "liabilities": 2335.978584,
+     "long_term_debt": 79.116646,
+     "short_term_debt": 1420.511236
+    }
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 6,
+      "printed": "إجمالي الأصول: ٥,٢٢٢,٠٥٥,٠٦١",
+      "value_m": 5222.055061
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "5,222,055,061",
+      "value_m": 5222.055061
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 6,
+      "printed": "النقدية وما في حكمها: ٢٨٧,٥٣٣,٥٢٢",
+      "value_m": 287.533522
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "287,533,522",
+      "value_m": 287.533522
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 6,
+      "printed": "إجمالي حقوق الملكية: ٣,٣٢٥,٤٢٣,١٠٤",
+      "value_m": 3325.423104
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "3,325,423,104",
+      "value_m": 3325.423104
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 7,
+      "printed": "مصروفات تمويلية: (٨٠,٥٠٠,٧١٩)",
+      "value_m": 80.500719
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(80,500,719)",
+      "value_m": 80.500719
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "صافي التدفقات النقدية (المستخدمة في) الأنشطة التمويلية: (٤٨١,٩٦١,٢٧٧)",
+      "value_m": -481.961277
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(481,961,277)",
+      "value_m": -481.961277
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 7,
+      "printed": "مجمل الربح: ١١٦,٥٠٨,٨٢٦",
+      "value_m": 116.508826
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "116,508,826",
+      "value_m": 116.508826
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "صافي التدفقات النقدية الناتجة من / (المستخدمة في) انشطة الإستثمار: (٩٥,٦٧٧,٣٥١)",
+      "value_m": -95.677351
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(95,677,351)",
+      "value_m": -95.677351
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 6,
+      "printed": "إجمالي الإلتزامات: ١,٨٩٦,٦٣١,٩٥٧",
+      "value_m": 1896.631957
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "1,896,631,957",
+      "value_m": 1896.631957
+     }
+    },
+    "long_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل: ٧١,٧٦٩,٠٢١ + إلتزامات عقود تاجير: ١٩,٢٣١,٧٧٣",
+      "value_m": 91.000794
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل: 71,769,021 + التزامات عقود تأجير: 19,231,773",
+      "value_m": 91.001794
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 10,
+      "printed": "صافي الزيادة (النقص) في النقدية وما في حكمها خلال السنة: (٢١٥,٥٨١,٥٦٤)",
+      "value_m": -215.581564
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(215,581,564)",
+      "value_m": -215.581564
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 7,
+      "printed": "صافي ربح الفترة: (٤٣,٠٣٣,٢٤٣)",
+      "value_m": -43.033243
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(43,033,243)",
+      "value_m": -43.033243
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "صافي التدفقات النقدية الناتجة من انشطة التشغيل: ٣٦٢,٠٥٧,٠٦٤",
+      "value_m": 362.057064
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "362,057,064",
+      "value_m": 362.057064
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 7,
+      "printed": "ناتج أنشطة التشغيل: ٣٣,٨٧٦,٢٣٠",
+      "value_m": 33.87623
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "33,876,230",
+      "value_m": 33.87623
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 7,
+      "printed": "صافي المبيعات / الإيرادات: ٧٠٥,١٥٤,٩٨١",
+      "value_m": 705.154981
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "705,154,981",
+      "value_m": 705.154981
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "تسهيلات ائتمانية: ٨٤٣,١٢٩,١١١ + المستحق خلال سنة من القروض طويلة الأجل: ٧٩,٠٦٣,٩٥٦ + المستحق خلال سنة من التزامات عقود تأجير: ٤,٤٦٧,٥١٢",
+      "value_m": 926.86058
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "تسهيلات ائتمانية: 843,129,111 + المستحق خلال سنة من القروض طويلة الأجل: 79,832,956 + المستحق خلال سنة من التزامات عقود تأجير: 4,467,512",
+      "value_m": 927.42908
+     }
+    }
+   },
+   "fields": {
+    "assets": 5222.055061,
+    "cash": 287.533522,
+    "debt": 1017.861,
+    "equity": 3325.423104,
+    "finance_cost": 80.500719,
+    "financing_cash_flow": -481.961277,
+    "gross_profit": 116.508826,
+    "investing_cash_flow": -95.677351,
+    "liabilities": 1896.631957,
+    "long_term_debt": 91.000794,
+    "net_change_in_cash": -215.581564,
+    "net_income": -43.033,
+    "operating_cash_flow": 362.057064,
+    "operating_income": 33.87623,
+    "revenue": 705.154981,
+    "short_term_debt": 926.86058
+   },
+   "filed_on": "2026-06-11",
+   "model": "gemini-3.7-flash",
+   "months": 9,
+   "pdf_sha256": "c4d26fe4a93528b41dd0617f1ff0eb0fee657486ed05d11b6d9bd2bd897f0b6d",
+   "period": "Q3 2025 (to 30 Sep)",
+   "period_end": "2025-09-30",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289684",
+   "ticker": "ACGC",
+   "verified_on": "2026-08-28"
+  },
+  "289686": {
+   "attachment_url": "https://foudalens.com/disclosures/ACGC.CA/financial_statement/2026-06-11_289685_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "summed",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "comparative": {
+    "date": "2025-06-30",
+    "fields": {
+     "cash": 40.421796,
+     "debt": 8.659,
+     "liabilities": 80.722441,
+     "long_term_debt": 5.310565,
+     "short_term_debt": 3.348156
+    }
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 6,
+      "printed": "١,٩١٧,٢٨٢,٠٢٨",
+      "value_m": 1917.282028
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "1,917,282,028",
+      "value_m": 1917.282028
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 6,
+      "printed": "٧,٧٤٩,٧٩٤",
+      "value_m": 7.749794
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "7,749,794",
+      "value_m": 7.749794
+     }
+    },
+    "dividends_paid": {
+     "audit": {
+      "page": 10,
+      "printed": "(٩,٥٣٥,٤٦١)",
+      "value_m": 9.535461
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(9,535,461)",
+      "value_m": 9.535461
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 6,
+      "printed": "١,٨٢٣,٤٤٢,٧٧٠",
+      "value_m": 1823.44277
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "1,823,442,770",
+      "value_m": 1823.44277
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 7,
+      "printed": "(١,٨٣٥,٩٧٢)",
+      "value_m": 1.835972
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(1,835,972)",
+      "value_m": 1.835972
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "(١٣,٣١٠,٩٩٤)",
+      "value_m": -13.310994
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(13,310,994)",
+      "value_m": -13.310994
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 7,
+      "printed": "٥١,٤٨٩,٩٤٨",
+      "value_m": 51.489948
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "51,489,948",
+      "value_m": 51.489948
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "٦٣,٦١٥,٥٥٣",
+      "value_m": 63.615553
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "63,615,553",
+      "value_m": 63.615553
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 6,
+      "printed": "٩٣,٨٣٩,٢٥٨",
+      "value_m": 93.839258
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "93,839,258",
+      "value_m": 93.839258
+     }
+    },
+    "long_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل ٥٨,٦١٢ + التزامات عقود تأجير ٥,٢٣٩,١١٧",
+      "value_m": 5.297729
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل: 58,612 + التزامات عقود تأجير: 5,239,117 = 5,297,729",
+      "value_m": 5.297729
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 10,
+      "printed": "(٣٢,٥٠٦,٣٧٢)",
+      "value_m": -32.506372
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(32,506,372)",
+      "value_m": -32.506372
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 7,
+      "printed": "٣٣,٤٧٨,٦٠٠",
+      "value_m": 33.4786
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "33,478,600",
+      "value_m": 33.4786
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "(٨٢,٨١٠,٩٣١)",
+      "value_m": -82.810931
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(82,811,931)",
+      "value_m": -82.811931
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 7,
+      "printed": "٣٦,٢٧٦,١٩٣",
+      "value_m": 36.276193
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "36,776,193",
+      "value_m": 36.776193
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 7,
+      "printed": "١٦٩,٣٢٩,٧٧٥",
+      "value_m": 169.329775
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "169,329,775",
+      "value_m": 169.329775
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "المستحق خلال سنة من التزامات عقود التأجير ١,٩٤٥,٥٤٠",
+      "value_m": 1.94554
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "المستحق خلال سنة من التزامات عقود التأجير: 1,965,040",
+      "value_m": 1.96504
+     }
+    }
+   },
+   "fields": {
+    "assets": 1917.282028,
+    "cash": 7.749794,
+    "debt": 7.243,
+    "dividends_paid": 9.535461,
+    "equity": 1823.44277,
+    "finance_cost": 1.835972,
+    "financing_cash_flow": -13.310994,
+    "gross_profit": 51.489948,
+    "investing_cash_flow": 63.615553,
+    "liabilities": 93.839258,
+    "long_term_debt": 5.297729,
+    "net_change_in_cash": -32.506372,
+    "net_income": 32.491,
+    "operating_cash_flow": -82.810931,
+    "operating_income": 36.276193,
+    "revenue": 169.329775,
+    "short_term_debt": 1.94554
+   },
+   "filed_on": "2026-06-11",
+   "model": "gemini-3.7-flash",
+   "months": 9,
+   "pdf_sha256": "7fe0e5f46f067865568c29798abd44f414a8ceee791adf86f7d775909ae4a271",
+   "period": "9M 2026 (to 31 Mar)",
+   "period_end": "2026-03-31",
+   "refused_attachment_reviews": [
+    {
+     "attachment_url": "https://foudalens.com/disclosures/ACGC.CA/financial_statement/2026-06-11_289683_1.pdf",
+     "bytes": 7256841,
+     "local_path": "data-source/egx-beta/pdf-cache/review/ACGC-egx-289686-0-c4d26fe4a935.pdf",
+     "pdf_sha256": "c4d26fe4a93528b41dd0617f1ff0eb0fee657486ed05d11b6d9bd2bd897f0b6d",
+     "reason": "whole-PDF read named no evidence pages"
+    }
+   ],
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289686",
+   "ticker": "ACGC",
+   "verified_on": "2026-08-28"
+  },
   "289793": {
    "attachment_url": "https://foudalens.com/disclosures/MFSC.CA/financial_statement/2026-06-14_289792_1.pdf",
    "basis": null,
@@ -20084,6 +21667,212 @@
    "period_end": "2026-03-31",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289793",
    "ticker": "MFSC",
+   "verified_on": "2026-08-28"
+  },
+  "289805": {
+   "attachment_url": "https://foudalens.com/disclosures/KZPC.CA/financial_statement/2026-06-14_289804_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 8,
+      "printed": "٣ ٣٢٧ ٢٩٩ ٥٨٠",
+      "value_m": 3327.29958
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "3 327 299 580",
+      "value_m": 3327.29958
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 8,
+      "printed": "٧٦ ٢٤١ ٠٦٨",
+      "value_m": 76.241068
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "76 241 068",
+      "value_m": 76.241068
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 8,
+      "printed": "٦٨٥ ٥٨٩ ٢٤٧",
+      "value_m": 685.589247
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "685 589 247",
+      "value_m": 685.589247
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 9,
+      "printed": "(١١٦ ٨٧٨ ٥١٣)",
+      "value_m": 116.878513
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "(116 878 513)",
+      "value_m": 116.878513
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 12,
+      "printed": "( ٦٢٩ ٥٧٨)",
+      "value_m": -0.629578
+     },
+     "discovery": {
+      "page": 12,
+      "printed": "(629 578)",
+      "value_m": -0.629578
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 9,
+      "printed": "١٠٢ ٧٠٠ ١٥٤",
+      "value_m": 102.700154
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "102 700 154",
+      "value_m": 102.700154
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 12,
+      "printed": "١٠ ٨٢٩ ٦٣٤",
+      "value_m": 10.829634
+     },
+     "discovery": {
+      "page": 12,
+      "printed": "10 829 634",
+      "value_m": 10.829634
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 8,
+      "printed": "٢ ٦٤١ ٧١٠ ٣٣٣",
+      "value_m": 2641.710333
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "2 641 710 333",
+      "value_m": 2641.710333
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 12,
+      "printed": "( ٢٤١ ٥٣٩ ٠٠٣)",
+      "value_m": -241.539003
+     },
+     "discovery": {
+      "page": 12,
+      "printed": "(241 539 003)",
+      "value_m": -241.539003
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 9,
+      "printed": "(١٣ ٢٠٤ ٦٤٦)",
+      "value_m": -13.204646
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "(13 204 646)",
+      "value_m": -13.204646
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 12,
+      "printed": "(٢٥١ ٧٣٩ ٠٥٩)",
+      "value_m": -251.739059
+     },
+     "discovery": {
+      "page": 12,
+      "printed": "(251 739 059)",
+      "value_m": -251.739059
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 9,
+      "printed": "٨٦ ٧٣٤ ٩٤١",
+      "value_m": 86.734941
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "86 734 941",
+      "value_m": 86.734941
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 9,
+      "printed": "٤٩٨ ٥٩٨ ٤٦٢",
+      "value_m": 498.598462
+     },
+     "discovery": {
+      "page": 9,
+      "printed": "498 598 462",
+      "value_m": 498.598462
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 8,
+      "printed": "بنوك سحب على المكشوف: ٢ ٠١٨ ٦٢٠ ٣٣٨",
+      "value_m": 2018.620338
+     },
+     "discovery": {
+      "page": 8,
+      "printed": "بنوك سحب على المكشوف: 2 018 620 338",
+      "value_m": 2018.620338
+     }
+    }
+   },
+   "fields": {
+    "assets": 3327.29958,
+    "cash": 76.241068,
+    "equity": 685.589247,
+    "finance_cost": 116.878513,
+    "financing_cash_flow": -0.629578,
+    "gross_profit": 102.700154,
+    "investing_cash_flow": 10.829634,
+    "liabilities": 2641.710333,
+    "net_change_in_cash": -241.539003,
+    "net_income": -13.205,
+    "operating_cash_flow": -251.739059,
+    "operating_income": 86.734941,
+    "revenue": 498.598462,
+    "short_term_debt": 2018.620338
+   },
+   "filed_on": "2026-06-14",
+   "model": "gemini-3.7-flash",
+   "months": 3,
+   "pdf_sha256": "f1369be5c488552881e4c24e392027b36e8cae421080a41b145018615bab0c94",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289805",
+   "ticker": "KZPC",
    "verified_on": "2026-08-28"
   },
   "289832": {
@@ -20925,6 +22714,173 @@
    "period_end": "2026-03-31",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289964",
    "ticker": "DAPH",
+   "verified_on": "2026-08-28"
+  },
+  "289991": {
+   "attachment_url": "https://foudalens.com/disclosures/MOSC.CA/financial_statement/2026-06-17_289990_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "not_available",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 5,
+      "printed": "٣٥٠ ٣٣٨ ٣٧٠",
+      "value_m": 350.33837
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "350 338 370",
+      "value_m": 350.33837
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 5,
+      "printed": "١٥ ٣٦٥ ٧٤٢",
+      "value_m": 15.365742
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "15 365 742",
+      "value_m": 15.365742
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 5,
+      "printed": "١١٦ ٧٢٠ ٤٤٨",
+      "value_m": 116.720448
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "116 770 448",
+      "value_m": 116.770448
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 6,
+      "printed": "١ ٤٣٩ ٨٨٠",
+      "value_m": 1.43988
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "1 439 880",
+      "value_m": 1.43988
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 3,
+      "printed": "٣٢ ٥٢٠ ٤٣٤",
+      "value_m": 32.520434
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "32 520 434",
+      "value_m": 32.520434
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 6,
+      "printed": "( ١٣٦ ٢١٩ )",
+      "value_m": -0.136219
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "( 136 219 )",
+      "value_m": -0.136219
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 6,
+      "printed": "( ٩ ٥٧٦ ٧٣٧ )",
+      "value_m": -9.576737
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "( 9 576 737 )",
+      "value_m": -9.576737
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 3,
+      "printed": "٢٩ ٣١٠",
+      "value_m": 0.02931
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "29 310",
+      "value_m": 0.02931
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 6,
+      "printed": "( ١٠ ٨٨٠ ٣٩٨ )",
+      "value_m": -10.880398
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "( 10 880 398 )",
+      "value_m": -10.880398
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 3,
+      "printed": "١٢ ٥٥٠ ٥٩٧",
+      "value_m": 12.550597
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "12 550 597",
+      "value_m": 12.550597
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 3,
+      "printed": "١ ٥٤٦ ٥٨٢ ٤٠٩",
+      "value_m": 1546.582409
+     },
+     "discovery": {
+      "page": 3,
+      "printed": "1 546 582 409",
+      "value_m": 1546.582409
+     }
+    }
+   },
+   "fields": {
+    "assets": 350.33837,
+    "cash": 15.365742,
+    "equity": 116.720448,
+    "financing_cash_flow": 1.43988,
+    "gross_profit": 32.520434,
+    "investing_cash_flow": -0.136219,
+    "net_change_in_cash": -9.576737,
+    "net_income": 0.029,
+    "operating_cash_flow": -10.880398,
+    "operating_income": 12.550597,
+    "revenue": 1546.582409
+   },
+   "filed_on": "2026-06-17",
+   "model": "gemini-3.7-flash",
+   "months": 6,
+   "pdf_sha256": "25faccc60942a5818c5e1254ed847fb5a82e11b5a7935ded4c135495318f2fe6",
+   "period": "H1 2025 (to 31 Dec)",
+   "period_end": "2025-12-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=289991",
+   "ticker": "MOSC",
    "verified_on": "2026-08-28"
   },
   "290050": {
@@ -23678,6 +25634,134 @@
    "period_end": "2026-03-31",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=290788",
    "ticker": "ELKA",
+   "verified_on": "2026-08-28"
+  },
+  "291036": {
+   "attachment_url": "https://foudalens.com/disclosures/MISR.CA/financial_statement/2026-07-08_291047_4.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "not_available",
+    "cash_flow_identity": "not_available",
+    "debt_maturities_sum": "not_available",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 5,
+      "printed": "٤ ٧٠٩ ١٠٢",
+      "value_m": 4.709102
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "اجمالي الاصول: 4 709 102",
+      "value_m": 4.709102
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 5,
+      "printed": "١ ٩٤١ ٢٥٦",
+      "value_m": 1.941256
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "النقدية ومافي حكمها: 1 941 256",
+      "value_m": 1.941256
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 5,
+      "printed": "١ ٨٠٤ ٢٤٣",
+      "value_m": 1.804243
+     },
+     "discovery": {
+      "page": 5,
+      "printed": "اجمالي حقوق الملكية: 1 804 243",
+      "value_m": 1.804243
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 6,
+      "printed": "٥٩ ٧٩٠",
+      "value_m": 0.05979
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "مجمل الربح: 59 790",
+      "value_m": 0.05979
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 10,
+      "printed": "٢٧٣ ٦٦٦",
+      "value_m": 0.273666
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(النقص) الزيادة في النقدية وما في حكمها خلال العام: 273 666",
+      "value_m": 0.273666
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 6,
+      "printed": "( ٧٥٦ ٥٨٩)",
+      "value_m": -0.756589
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "صافى الارباح /(الخسائر) بعد الضريبة: (756 589)",
+      "value_m": -0.756589
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "٢٧٣ ٦٦٦",
+      "value_m": 0.273666
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "صافي التدفقات النقدية من أنشطة التشغيل: 273 666",
+      "value_m": 0.273666
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 6,
+      "printed": "٢ ١٠٢ ٢٢٤",
+      "value_m": 2.102224
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "صافى المبيعات: 2 102 224",
+      "value_m": 2.102224
+     }
+    }
+   },
+   "fields": {
+    "assets": 4.709102,
+    "cash": 1.941256,
+    "equity": 1.804243,
+    "gross_profit": 0.05979,
+    "net_change_in_cash": 0.273666,
+    "net_income": -0.757,
+    "operating_cash_flow": 0.273666,
+    "revenue": 2.102224
+   },
+   "filed_on": "2026-07-08",
+   "model": "gemini-3.7-flash",
+   "months": 12,
+   "pdf_sha256": "f7c5dbf7c46253e93bc5e1f03a4892f855e80c83da104a46edd78d13cdebfb4a",
+   "period": "FY 2025",
+   "period_end": "2025-12-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=291036",
+   "ticker": "MISR",
    "verified_on": "2026-08-28"
   },
   "291075": {
@@ -26471,6 +28555,236 @@
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=292446",
    "ticker": "PRMH",
    "verified_on": "2026-08-27"
+  },
+  "292453": {
+   "attachment_url": "https://foudalens.com/disclosures/SPIN.CA/financial_statement/2026-08-04_292452_1.pdf",
+   "basis": null,
+   "checks": {
+    "balance_identity": "passed",
+    "cash_flow_identity": "passed",
+    "debt_maturities_sum": "summed",
+    "net_income_matches_announcement": true,
+    "two_reads_agree": true
+   },
+   "comparative": {
+    "date": "2025-06-30",
+    "fields": {
+     "cash": 160.303128,
+     "debt": 268.09,
+     "liabilities": 505.406647,
+     "long_term_debt": 50.094719,
+     "short_term_debt": 217.995711
+    }
+   },
+   "evidence": {
+    "assets": {
+     "audit": {
+      "page": 6,
+      "printed": "١,٢٦٨,٢٠٦,٨٦٢",
+      "value_m": 1268.206862
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "1,268,206,862",
+      "value_m": 1268.206862
+     }
+    },
+    "cash": {
+     "audit": {
+      "page": 6,
+      "printed": "١٦١,٢٦٧,٦٤٤",
+      "value_m": 161.267644
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "161,267,644",
+      "value_m": 161.267644
+     }
+    },
+    "equity": {
+     "audit": {
+      "page": 6,
+      "printed": "٧٤٩,٠١١,٣٠٠",
+      "value_m": 749.0113
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "749,011,300",
+      "value_m": 749.0113
+     }
+    },
+    "finance_cost": {
+     "audit": {
+      "page": 7,
+      "printed": "(٢٧,٠٤٢,٣٥٠)",
+      "value_m": 27.04235
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "(27,042,350)",
+      "value_m": 27.04235
+     }
+    },
+    "financing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "١٢,١١٠,٢٦٢",
+      "value_m": 12.110262
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "12,110,262",
+      "value_m": 12.110262
+     }
+    },
+    "gross_profit": {
+     "audit": {
+      "page": 7,
+      "printed": "٦٤,٧٢٣,١٣٧",
+      "value_m": 64.723137
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "64,723,137",
+      "value_m": 64.723137
+     }
+    },
+    "investing_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "٩,٧٦٧,٧٧٩",
+      "value_m": 9.767779
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "9,767,779",
+      "value_m": 9.767779
+     }
+    },
+    "liabilities": {
+     "audit": {
+      "page": 6,
+      "printed": "٥١٩,١٩٥,٥٦٢",
+      "value_m": 519.195562
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "519,195,562",
+      "value_m": 519.195562
+     }
+    },
+    "long_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل ٥٣,٥٤٨,٤٦٥",
+      "value_m": 53.548465
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "قروض طويلة الأجل: 53,548,465",
+      "value_m": 53.548465
+     }
+    },
+    "net_change_in_cash": {
+     "audit": {
+      "page": 10,
+      "printed": "٣,٠٩٧,٢٠٠",
+      "value_m": 3.0972
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "3,097,200",
+      "value_m": 3.0972
+     }
+    },
+    "net_income": {
+     "audit": {
+      "page": 7,
+      "printed": "٥٦٣,٢٥٠",
+      "value_m": 0.56325
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "563,250",
+      "value_m": 0.56325
+     }
+    },
+    "operating_cash_flow": {
+     "audit": {
+      "page": 10,
+      "printed": "(١٨,٧٨٠,٨٤١)",
+      "value_m": -18.780841
+     },
+     "discovery": {
+      "page": 10,
+      "printed": "(18,780,841)",
+      "value_m": -18.780841
+     }
+    },
+    "operating_income": {
+     "audit": {
+      "page": 7,
+      "printed": "٢٥,٧١٩,٣٧٥",
+      "value_m": 25.719375
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "25,719,375",
+      "value_m": 25.719375
+     }
+    },
+    "revenue": {
+     "audit": {
+      "page": 7,
+      "printed": "٢٩٠,٩٦٧,٣٣٧",
+      "value_m": 290.967337
+     },
+     "discovery": {
+      "page": 7,
+      "printed": "290,967,337",
+      "value_m": 290.967337
+     }
+    },
+    "short_term_debt": {
+     "audit": {
+      "page": 6,
+      "printed": "تسهيلات ائتمانية وسحب على المكشوف ١٦٥,٤٢٥,٣٩١ + المستحق خلال سنة من القروض طويلة الأجل ٦١,٢٢٦,٤٣٤",
+      "value_m": 227.151825
+     },
+     "discovery": {
+      "page": 6,
+      "printed": "تسهيلات ائتمانية وسحب على المكشوف: 165,425,491 + المستحق خلال سنة من القروض طويلة الأجل: 61,226,834",
+      "value_m": 226.652325
+     }
+    }
+   },
+   "fields": {
+    "assets": 1268.206862,
+    "cash": 161.267644,
+    "debt": 280.7,
+    "equity": 749.0113,
+    "finance_cost": 27.04235,
+    "financing_cash_flow": 12.110262,
+    "gross_profit": 64.723137,
+    "investing_cash_flow": 9.767779,
+    "liabilities": 519.195562,
+    "long_term_debt": 53.548465,
+    "net_change_in_cash": 3.0972,
+    "net_income": 0.563,
+    "operating_cash_flow": -18.780841,
+    "operating_income": 25.719375,
+    "revenue": 290.967337,
+    "short_term_debt": 227.151825
+   },
+   "filed_on": "2026-08-04",
+   "model": "gemini-3.7-flash",
+   "months": 6,
+   "pdf_sha256": "29bff6cde76aff2200bb49b0257441fe692fb87523fbcf3a44757cb5fa547351",
+   "period": "H1 2025 (to 31 Dec)",
+   "period_end": "2025-12-31",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=292453",
+   "ticker": "SPIN",
+   "verified_on": "2026-08-28"
   },
   "292486": {
    "attachment_url": "https://foudalens.com/disclosures/JUFO.CA/financial_statement/2026-08-05_292485_1.pdf",

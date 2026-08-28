@@ -195,6 +195,23 @@ class VerificationTest(unittest.TestCase):
 
 
 class MirrorLinkTest(unittest.TestCase):
+    def test_known_public_mirror_is_tried_before_page_discovery(self):
+        known = BUILD.KNOWN_MIRROR_ATTACHMENTS["289811"][0]
+        with (
+            mock.patch.object(BUILD, "resolve_mirror_attachments", return_value=[]),
+            mock.patch.object(BUILD, "resolve_same_day_company_attachments", return_value=[]),
+            mock.patch.object(BUILD, "DISCLOSURE_DOCUMENTS", pathlib.Path("/nonexistent")),
+        ):
+            self.assertEqual(
+                BUILD.resolve_mirror_candidates("289811", "SIPC", "2026-06-14"),
+                [known],
+            )
+
+    def test_known_hidden_official_attachment_survives_empty_page(self):
+        known = BUILD.KNOWN_OFFICIAL_ATTACHMENTS["287930"][0]
+        with mock.patch.object(BUILD, "_mirror_news_page", return_value=""):
+            self.assertEqual(BUILD.resolve_page_official_attachments("287930"), [known])
+
     def test_direct_egx_pdfs_on_mirrored_page_are_not_ignored(self):
         page = '''
         <a href="/en/download">Download App</a>

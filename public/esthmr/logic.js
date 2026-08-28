@@ -121,6 +121,17 @@ export class Component extends Base {
     const D = this.data();
     const acc = this.props.accent || 'var(--accent)';
 
+    // Real documents carry both languages side by side; the design's literals
+    // choose inline with `ar ? … : …`. This picks the same way for a mapped
+    // record, so a wired screen and a placeholder one behave identically.
+    const say = (rows, fields) => rows.map((row) => {
+      const out = Object.assign({}, row);
+      fields.forEach((f) => {
+        if (row[f + 'Ar'] !== undefined) out[f] = ar ? row[f + 'Ar'] : row[f];
+      });
+      return out;
+    });
+
     const ICON = {
       home:'M3.2 10.6 12 3.4l8.8 7.2M5.8 9.4V20a.6.6 0 0 0 .6.6h11.2a.6.6 0 0 0 .6-.6V9.4M9.9 20.6v-5.4h4.2v5.4',
       today:'M4.4 5.2h15.2v13.6H4.4zM7.4 8.6h5.6v4.2H7.4zM15.6 9h1.9M15.6 11.6h1.9M7.4 16.2h10.1',
@@ -211,7 +222,7 @@ export class Component extends Base {
     ];
 
     // today
-    const feed = [
+    const feed = D.feed ? say(D.feed, ['kind','headline','because']) : [
       { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source:'EGX', href:'https://www.egx.com.eg',
         headline: ar?'كورّة: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'KORRA: standalone and consolidated statements for the period ended 30 June 2026',
         why: ar?'الميزانية تذكر قروضاً بـ ١٨٦٩٫١ مليون جنيه، منها ١٧٩٥٫٥ مليون تستحق خلال عام.':'The balance sheet states borrowings of EGP 1,869.1m, of which 1,795.5m falls due within a year.',
@@ -334,13 +345,13 @@ export class Component extends Base {
       toggleLabel: st.debtOpen ? L.hideSource : L.showSource, toggleCaret: st.debtOpen ? '↑' : '↓'
     };
 
-    const signals = [
+    const signals = D.signals ? say(D.signals, ['kind','title','because']) : [
       { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/KORA · 2026-08-26' },
       { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/KORA · egx-293566' },
       { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp:'calendar.json · estimate' }
     ];
 
-    const filings = [
+    const filings = D.filings ? say(D.filings, ['title']) : [
       { date:'2026-08-14', title: ar?'القوائم المالية للفترة المنتهية ٣٠ يونيو ٢٠٢٦':'Financial statements for the period ended 30 June 2026', id:'egx-293566', href:'https://www.egx.com.eg' },
       { date:'2026-05-12', title: ar?'القوائم المالية للربع الأول ٢٠٢٦':'Financial statements for Q1 2026', id:'egx-288104', href:'https://www.egx.com.eg' },
       { date:'2026-03-28', title: ar?'القوائم المالية السنوية ٢٠٢٥ وتقرير مراقب الحسابات':'Annual financial statements 2025 with auditor’s report', id:'egx-271340', href:'https://www.egx.com.eg' },
@@ -356,7 +367,7 @@ export class Component extends Base {
       ['Financials','الخدمات المالية',17,6,9,2,5.6,'HRHO'],['Healthcare','الرعاية الصحية',11,7,3,1,12.4,'IDHC'],['Textiles','الغزل والنسيج',13,3,8,2,7.7,'ELSH'],
       ['Transport & Shipping','النقل والشحن',8,4,3,1,8.6,'CCAP'],['Travel & Leisure','السفر والترفيه',12,5,6,1,10.3,'ORHD'],['Media','الإعلام',5,2,2,1,9.4,'MEDI']
     ];
-    const sectorCards = secDef.map(([en,arn,count,up,down,flat,pe,standout]) => {
+    const sectorCards = D.sectorCards ? say(D.sectorCards, ['name']) : secDef.map(([en,arn,count,up,down,flat,pe,standout]) => {
       const bars = [];
       for (let i = 0; i < 10; i++) {
         const isUp = i < Math.round(up/count*10);
@@ -373,7 +384,7 @@ export class Component extends Base {
     const monthDef = [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
     const months = monthDef.map(([id,label]) => ({ label, go: () => this.setState({ month:id }),
       color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
-    const filedEvents = [
+    const filedEvents = D.filedEvents ? say(D.filedEvents, ['what']) : [
       { day:'26 Aug', ticker:'COMI', what: ar?'إفصاح عن توزيعات نقدية مرحلية':'Interim cash distribution disclosure' },
       { day:'14 Aug', ticker:'KORA', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'13 Aug', ticker:'SWDY', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
@@ -381,7 +392,7 @@ export class Component extends Base {
       { day:'07 Aug', ticker:'ABUK', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'04 Aug', ticker:'ETEL', what: ar?'إفصاح عن تعاقد':'Contract disclosure' }
     ];
-    const expectedEvents = [
+    const expectedEvents = D.expectedEvents ? say(D.expectedEvents, ['what']) : [
       { day:'31 Aug', ticker:'ESRS', what: ar?'قوائم النصف الأول ٢٠٢٦ — الموعد النظامي':'H1 2026 statements — regulatory deadline' },
       { day:'30 Aug', ticker:'PHDC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
       { day:'30 Aug', ticker:'SKPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
@@ -391,7 +402,7 @@ export class Component extends Base {
     ];
 
     // exchange
-    const rates = [
+    const rates = D.rates ? say(D.rates, ['label']) : [
       { label:'EGX 30', value:'44,883.36', pct:'+0.70%', color:'var(--up)', unit: ar?'نقطة':'points' },
       { label:'EGX 70 EWI', value:'12,207.81', pct:'−0.47%', color:'var(--down)', unit: ar?'نقطة':'points' },
       { label:'EGX 100 EWI', value:'15,940.12', pct:'+0.26%', color:'var(--up)', unit: ar?'نقطة':'points' },
@@ -405,7 +416,7 @@ export class Component extends Base {
       { label:'GBP / EGP', value:'61.44', pct:'−0.11%', color:'var(--down)', unit: ar?'شراء البنك':'bank bid' },
       { label:'SAR / EGP', value:'12.88', pct:'+0.04%', color:'var(--up)', unit: ar?'شراء البنك':'bank bid' }
     ];
-    const macro = [
+    const macro = D.macro ? say(D.macro, ['label','meaning']) : [
       { label: ar?'إيرادات قناة السويس':'Suez Canal receipts', period:'Jul 2026', value:'461', color:'var(--ink)',
         meaning: ar?'مليون دولار عبرت القناة في يوليو، مقابل ٤٢٨ مليوناً في يونيو. المصدر: هيئة قناة السويس.':'USD millions received in July, against 428m in June. Source: Suez Canal Authority.' },
       { label: ar?'التضخم السنوي الحضري':'Urban annual inflation', period:'Jul 2026', value:'12.4%', color:'var(--ink)',
@@ -451,7 +462,7 @@ export class Component extends Base {
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
-      co, ranges, chart, ratesArrowed: rates.map(r => Object.assign({}, r, { arrow: r.pct.charAt(0) === '+' ? '\u2197' : '\u2198', tint: r.pct.charAt(0) === '+' ? 'var(--upTint)' : 'var(--downTint)' })), chartFrom: slice[0].date, chartTo: slice[slice.length-1].date, chartCount: slice.length,
+      co, ranges, chart, ratesArrowed: rates.map(r => Object.assign({}, r, { arrow: r.pct.charAt(0) === '+' ? '\u2197' : '\u2198', tint: r.pct.charAt(0) === '+' ? 'var(--upTint)' : 'var(--downTint)' })), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies
     };
     // A demo must not put an invented event beside a real company's name.
@@ -542,6 +553,14 @@ export class Component extends Base {
   }
 
   buildChart(pts) {
+    // A company's price series arrives after its document does, and the market
+    // screens carry none at all. An empty chart is a blank frame, not a crash.
+    if (!Array.isArray(pts) || pts.length === 0) {
+      return React.createElement('div', {
+        style: { height: '260px', display: 'grid', placeItems: 'center',
+                 color: 'var(--faint)', fontSize: '13px' },
+      }, '—');
+    }
     const W = 1000, H = 260, pad = 4;
     const vals = pts.map(p => p.close);
     const lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), sp = (hi - lo) || 1;

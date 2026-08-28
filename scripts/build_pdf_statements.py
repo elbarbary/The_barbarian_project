@@ -75,12 +75,63 @@ SOURCE = "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={}"
 FOUDALENS = "https://foudalens.com"
 FOUDALENS_NEWS = FOUDALENS + "/en/news/{}"
 CLASSIC = "https://www.egx.com.eg"
+MUBASHER = "https://www.mubasher.info"
 F5_DOWNLOADER = pathlib.Path(__file__).resolve().parent / "f5_pdf_download.py"
 PDF_REVIEW = REPO / "data-source" / "egx-beta" / "pdf-cache" / "review"
 BROWSER_UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 )
+
+# Mubasher sometimes republishes the exact exchange attachment on its static
+# file host. These copies are especially valuable when the EGX URL is behind
+# an F5 redirect loop: the bytes are identical filed evidence, but download in
+# seconds without a challenge. Keep discoveries keyed by the EGX news ID so a
+# later retry is deterministic and does not depend on search-engine indexing.
+KNOWN_MIRROR_ATTACHMENTS: dict[str, list[str]] = {
+    "288724": [
+        "https://static.mubasher.info/File.Mix_Announcement_File/"
+        "7AC8B862-681A-4612-8E8B-8971CF55B046.pdf",
+    ],
+    "289811": [
+        "https://static.mubasher.info/File.Mix_Announcement_File/"
+        "CC9086A4-E8D6-494F-994C-88F6D3FF7D46.pdf",
+    ],
+    "291541": [
+        "https://static.mubasher.info/File.Mix_Announcement_File/"
+        "99861572-E62D-4EE2-9B85-D0ECFF2D9848.pdf",
+    ],
+    "292375": [
+        "https://static.mubasher.info/File.Mix_Announcement_File/"
+        "92C9EDE3-6C4C-462C-873F-0B0A13A30D3A.pdf",
+    ],
+    "293151": [
+        "https://static.mubasher.info/File.Mix_Announcement_File/"
+        "391FF3B6-82FD-4E31-841F-6E95283FA686.pdf",
+    ],
+}
+
+# A results flash can genuinely have no attachment in either EGX metadata or
+# the local archive while a public announcement page exposes the missing filed
+# PDF. Record those discoveries separately because they still need the F5
+# downloader rather than the mirror downloader.
+KNOWN_OFFICIAL_ATTACHMENTS: dict[str, list[str]] = {
+    "287930": [
+        "https://www.egx.com.eg/downloads/News/"
+        "%D8%A7%D9%84%D8%B4%D8%B1%D9%82%D9%8A%D8%A9%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%D8%A9%20"
+        "%D9%82%D9%88%D8%A7%D8%A6%D9%85%2011-05-2026.pdf",
+    ],
+    "289155": [
+        "https://www.egx.com.eg/downloads/News/"
+        "%D8%B4%D9%8A%D9%86%D9%8A%20%D9%82%D9%88%D8%A7%D8%A6%D9%85%20"
+        "%D9%85%D8%A7%D9%84%D9%8A%D8%A9%2025-05-2026.pdf",
+    ],
+    "293904": [
+        "https://www.egx.com.eg/downloads/News/"
+        "%D9%81%D8%AA%D9%86%D8%B3%20%D9%82%D9%88%D8%A7%D8%A6%D9%85%20"
+        "%D9%85%D8%B9%D8%AF%D9%84%2026-08-2026.pdf",
+    ],
+}
 
 DISCOVERY_PROMPT = """Read this scanned filed-results attachment.
 
@@ -424,7 +475,11 @@ def resolve_mirror_attachments(code: str, ticker: str) -> list[str]:
 
 def resolve_page_official_attachments(code: str) -> list[str]:
     """Official PDFs exposed directly on the mirrored filing page."""
-    return _official_page_links(_mirror_news_page(code))
+    found = list(KNOWN_OFFICIAL_ATTACHMENTS.get(str(code), []))
+    for url in _official_page_links(_mirror_news_page(code)):
+        if url not in found:
+            found.append(url)
+    return found
 
 
 @functools.lru_cache(maxsize=256)
@@ -454,7 +509,10 @@ def resolve_same_day_company_attachments(ticker: str, filed_on: str | None) -> l
 def resolve_mirror_candidates(code: str, ticker: str,
                               filed_on: str | None = None) -> list[str]:
     """Mirror PDFs filed on the result item or its matched companion item."""
-    found = list(resolve_mirror_attachments(code, ticker))
+    found = list(KNOWN_MIRROR_ATTACHMENTS.get(str(code), []))
+    for url in resolve_mirror_attachments(code, ticker):
+        if url not in found:
+            found.append(url)
     for url in resolve_same_day_company_attachments(ticker, filed_on):
         if url not in found:
             found.append(url)
@@ -628,10 +686,16 @@ def resolve_official_attachments(code: str) -> list[str]:
 
 
 def download_mirror_pdf(url: str, output: pathlib.Path) -> None:
-    """Download a same-origin FoudaLens disclosure copy without a browser."""
+    """Download a public disclosure mirror without a browser."""
+    host = (urllib.parse.urlparse(url).hostname or "").lower()
+    headers = {"User-Agent": BROWSER_UA, "Accept": "application/pdf"}
+    if host == "static.mubasher.info":
+        # The static host rejects bare scripted requests but serves the public
+        # attachment when the request carries the same referrer as its article.
+        headers["Referer"] = MUBASHER + "/"
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": BROWSER_UA, "Accept": "application/pdf"},
+        headers=headers,
     )
     staged = output.with_suffix(output.suffix + ".part")
     staged.unlink(missing_ok=True)
