@@ -424,3 +424,54 @@ test('the template renders the picture and both lines', async () => {
   assert.match(t, /\{\{ L\.outletImage \}\}/, 'the fallback frame was removed');
   assert.match(t, /referrerpolicy="no-referrer"/, 'the reader is leaking their page to the outlet');
 });
+
+/* ── scale ─────────────────────────────────────────────────────────────── */
+
+/** live() over real document shapes, with fetch stubbed. */
+async function liveFrom(docs) {
+  const real = globalThis.fetch;
+  globalThis.fetch = async (url) => ({
+    ok: true, status: 200,
+    json: async () => docs[String(url).replace('/data/v1/', '')],
+  });
+  try { return await data.live(); } finally { globalThis.fetch = real; }
+}
+
+test('the day\'s move is a fraction in the document and a percentage on screen', async () => {
+  // market.json states COMI's move as 0.011918. Printed straight, that reads
+  // "-0.01%" for a share that fell 1.19% — a wrong figure under a real ticker,
+  // on every row of the exchange. The app carries the same warning pointing
+  // the other way: quote_snapshot.dart:119, "a hundred times too large".
+  const base = await liveFrom({
+    'companies.json': { companies: [{ ticker: 'COMI', name_en: 'CIB', sector: 'Banks', market_cap: 474267676058 }] },
+    'market.json': { date: '2026-08-27', stocks: { COMI: { close: 139.28, change_percent: -0.011918 } } },
+    'manifest.json': { data_version: 'v', generated_at: 'g', market_date: '2026-08-27' },
+  });
+  assert.equal(base.companies[0].pct, -1.1918);
+  const v = screen(base);
+  assert.equal(v.rows[0].pct, '-1.19%');
+});
+
+test('a missing move stays missing rather than becoming zero per cent', async () => {
+  const base = await liveFrom({
+    'companies.json': { companies: [{ ticker: 'X', name_en: 'X', sector: 'S' }] },
+    'market.json': { date: '2026-08-27', stocks: { X: { close: 1 } } },
+    'manifest.json': {},
+  });
+  assert.equal(base.companies[0].pct, null);
+  assert.equal(screen(base).rows[0].pct, '—');
+});
+
+test('market cap is whole pounds, printed at a scale a person can read', () => {
+  const c = new Component({});
+  // The design divided by a thousand and suffixed "B", turning COMI's
+  // 474,267,676,058 into "474267676.1B" — not a quantity at any scale.
+  assert.equal(c.money(474267676058), '474.3bn');
+  assert.equal(c.money(273816133123), '273.8bn');
+  assert.equal(c.money(4190000000), '4.19bn');
+  assert.equal(c.money(812000000), '812m');
+  assert.equal(c.money(19043202), '19.0m');
+  for (const empty of [null, undefined, 0, -5, NaN, Infinity, 'x']) {
+    assert.equal(c.money(empty), '—', `money(${String(empty)}) should be a dash`);
+  }
+});

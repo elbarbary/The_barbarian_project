@@ -106,6 +106,18 @@ export class Component extends Base {
   dcol(v) { if (!v) return 'var(--faint)'; return v > 0 ? 'var(--up)' : 'var(--down)'; }
   fold(s) { return (s||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[\u064B-\u0652\u0670\u0640]/g,''); }
   nm(o) { return this.state.lang === 'ar' ? (o.ar || o.en) : o.en; }
+  /** Whole pounds at a readable scale: 474.3bn, 4.19bn, 812m, 19.0m.
+   *
+   * companies.json states market_cap in whole EGP. The design divided by a
+   * thousand and suffixed "B", which turned COMI's 474,267,676,058 into
+   * "474267676.1B" — a string with no meaning at any scale. */
+  money(v) {
+    if (typeof v !== 'number' || !isFinite(v) || v <= 0) return '—';
+    if (v >= 1e9) return (v / 1e9).toFixed(v >= 1e11 ? 1 : 2) + 'bn';
+    if (v >= 1e6) return (v / 1e6).toFixed(v >= 1e8 ? 0 : 1) + 'm';
+    return this.num(v, 0);
+  }
+
   go(screen) { return () => this.setState({ screen }); }
 
   // ── fixtures ──
@@ -177,7 +189,7 @@ export class Component extends Base {
 
     const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector:c.sector,
       close: c.close === '—' ? '—' : this.num(c.close), pct: this.pct(c.pct), color: this.dcol(c.pct),
-      cap: c.cap ? (c.cap/1000).toFixed(1) + 'B' : '—', pe: c.pe ? c.pe.toFixed(1) : '—',
+      cap: this.money(c.cap), pe: c.pe ? c.pe.toFixed(1) : '—',
       arrow: (c.pct === null || c.pct === undefined) ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
       mag: (c.pct === null || c.pct === undefined) ? '0%' : Math.max(6, Math.min(100, Math.abs(c.pct) / 6 * 100)).toFixed(0) + '%',
       go: () => this.setState({ screen:'company', ticker: c.ticker }) });

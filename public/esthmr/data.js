@@ -156,7 +156,15 @@ export async function live() {
       name: { en: c.name_en, ar: c.name_ar || c.name_en },
       sector: c.sector || '—',
       close: q.close ?? '—',
-      pct: q.change_percent ?? null,
+      // market.json states the day's move as a FRACTION — COMI fell 0.011918,
+      // which is 1.19%. The site printed it straight, so every move on the
+      // exchange read a hundred times too small: a real ticker with a wrong
+      // figure beside it. The app carries the same warning at
+      // quote_snapshot.dart:119, having been bitten in the other direction.
+      pct: typeof q.change_percent === 'number' ? q.change_percent * 100 : null,
+      // Whole pounds, not millions. COMI's 474,267,676,058 was being divided
+      // by a thousand and suffixed "B" — "474267676.1B", which is not a
+      // quantity anybody can read.
       cap: c.market_cap ?? null,
       pe: c.pe ?? null,
     };
