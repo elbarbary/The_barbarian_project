@@ -8,7 +8,7 @@ a journalist, or a reader who does not believe us would ask for first.
 `test_sources.py` fails the build if a host appears in `scripts/` and not here,
 so this cannot quietly fall out of date.
 
-Last reviewed: 21 August 2026.
+Last reviewed: 29 August 2026.
 
 ---
 
@@ -19,6 +19,26 @@ Last reviewed: 21 August 2026.
 | **EGX** — `egx.com.eg` | Disclosures filed by listed companies, and the net-profit figures inside them | A real browser via Scrapling; the page is JS-rendered and refuses plain HTTP. **Serialised — never in parallel**, after being blocked once for fanning three agents at it | Public filings. Arabic only, and the ticker is stamped into every title by the exchange rather than inferred by us |
 | **TradingView scanner** — `scanner.tradingview.com` | The daily snapshot: every listed share's close, change, volume and market cap, plus the three index levels | Public scanner endpoint, one request a session | Consumed as published. The app never learns the provider's name (§14) |
 | **FoudaLens** — `foudalens.com` | Nothing of its own: the issuer's **own filed results attachment**, mirrored under a stable same-origin PDF URL, for filings whose figures the exchange's announcement states only as a single net profit | A mirror, and the *first* place asked, because the exchange's own attachment host answers a headless browser with a decoy and rate-limits a real one. Filing pages are read at `/en/news/{code}`, keyed on the EGX filing code already stored in every company document, and the PDF is fetched from the link that page carries | `robots.txt` publishes `Allow: /` and disallows `/api/` and the signed-in areas; both paths used here are permitted. What is taken is the **issuer's** document, not FoudaLens's own work, and every figure read out of it is re-proved against the exchange's own announced net profit before it is published |
+
+## The official record
+
+Three collectors that read the bodies which *make* the record, rather than the
+ones that report on it. Listed here first and published nowhere yet — see the
+note under the table.
+
+| Source | What we take | How | Terms |
+|---|---|---|---|
+| **FRA** — `fra.gov.eg` | The regulator's own public record: news, regulations, company decrees, administrative actions and criminal-procedure notices — seven post types — with every PDF link they carry | The site's public pages run on WordPress, so its standard REST API at `/wp-json/wp/v2` answers for each type, a hundred objects a page, filtered by date. The raw objects are kept beside a normalised ledger, so a later change of mind about parsing never has to go back to the site | A regulator's published record. It serves no `robots.txt` — the path answers a WAF rejection page — so there is no crawl directive to honour, and it is read at the rate a person would. **A general FRA decision is never attached to a listed issuer unless the document names that issuer**, which is the discipline the collector is built around: the tempting inference is exactly the one that would put an enforcement action against the wrong company |
+| **Central Bank of Egypt** — `www.cbe.org.eg` | The official exchange rates, and the daily interbank rates and volumes | Both pages sit behind a browser challenge, so they are read through the same real-browser path the exchange's own pages need. The source HTML is stored immutably and only labelled tables are parsed; a future date with no figure published against it stays null rather than becoming a zero | The central bank's own statistics. No `robots.txt` is served — the path answers a WAF rejection carrying a support ID — so there is nothing published to honour. Two pages a day is the whole load |
+| **MCDR** — `www.mcdr.com.eg` | The public issuing-companies registry: issuer name and security code, reconciled against the ISINs already held | One plain request to the registry page. Kept as an independent cross-check on ISIN and issuer name rather than as a source of new figures — the value is that it disagrees with us when we are wrong | Public registry. **MCDR's full shareholder register and its scheduled-operations inquiry are authenticated services, and this collector does not touch either** — the row is here as much to record that boundary as to record the data. The site serves no `robots.txt` and its 404 carries `noindex` |
+
+**None of this is on a screen.** These three land raw snapshots under
+`data-source/official/`; nothing built from them is published, and no figure in
+the app or on the website comes from any of them today. They are declared here
+because `test_sources.py` requires every host named in `scripts/` to be
+declared, and because the point of this page is what the pipeline *reaches* —
+a source collected quietly and disclosed later is the thing the test exists to
+prevent.
 
 ## Prices and history
 
