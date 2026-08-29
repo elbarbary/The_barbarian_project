@@ -1322,12 +1322,18 @@
   "perf_3m": 0,
   "avg_volume_30d": 41.733333333333334,
   "relative_volume_10d": 0.05997001499250375,
+  "history_bars": 0,
   "median_volume_20d": 5,
   "rv20": 0.8,
   "normal_value_30d": 8125,
-  "five_session_change": 0,
-  "history_bars": 120
+  "five_session_change": 0
  },
+ "profile_carried": [
+  "five_session_change",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
