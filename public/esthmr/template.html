@@ -15,6 +15,7 @@
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.session }}</div>
       <div style="font-size:15px;font-weight:600;margin-top:5px">{{ marketDate }}</div>
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:3px">{{ generatedAt }}</div>
+      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:{{ sessionColor }};margin-top:4px;line-height:1.45">{{ sessionState }}</div>
     </div>
 
     <nav class="om-nav" style="display:flex;flex-direction:column;gap:3px">
@@ -264,7 +265,7 @@
       <div class="om-search" style="border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
         <div style="display:flex;align-items:center;gap:10px;padding:0 4px 12px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:17px;height:17px"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
-          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ L.searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
+          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
         </div>
         <div style="display:flex;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--rule2)">
           <sc-for list="{{ sectorChips }}" as="s" hint-placeholder-count="8">
@@ -299,7 +300,7 @@
         </sc-if>
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
-        <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div>
+        <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div><div>{{ L.peFoot }}</div>
       </div>
     </div>
   </sc-if>
@@ -332,6 +333,10 @@
             <div style="padding:10px 16px;border-radius:15px;background:var(--sunk);min-width:0">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ s.label }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;margin-top:5px;color:{{ s.color }}">{{ s.value }}</div>
+              <!-- Which filing the figure is over. The newest annual filing can
+                   be eighteen months old; without this line a multiple struck
+                   against 2024 earnings reads as one struck against today. -->
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.06em;color:var(--faint);margin-top:3px">{{ s.note }}</div>
             </div>
           </sc-for>
         </div>
@@ -445,6 +450,7 @@
                     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ rt.caret }}</div>
                   </div>
                   <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;letter-spacing:-.02em">{{ rt.value }}</div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);line-height:1.5">{{ rt.asAt }}</div>
                   <!-- One colour whatever direction it took: a falling P/E drawn in
                        red, or rising debt-to-equity in green, would be a judgement
                        the colour makes on the reader's behalf. -->

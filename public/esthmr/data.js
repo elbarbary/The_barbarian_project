@@ -14,8 +14,47 @@
  * shapes, same code paths, no chance of being mistaken for the exchange.
  */
 
-const SECTORS = ['Banks', 'Chemicals', 'Real Estate', 'Industrials', 'Consumer',
-                 'Telecom', 'Utilities', 'Energy'];
+/* The sector names in Arabic, lifted from the app's own strings so the two
+ * products name a sector the same way.
+ *
+ * The documents publish sector in English only — sectors.json says "Process
+ * Industries" and carries no Arabic — so an Arabic reader met English sector
+ * names on the market table, on every filter chip, in the company header, on
+ * the company rail and across all fifteen sector cards, set in the middle of
+ * otherwise Arabic copy. A sector the exchange adds later falls through to its
+ * English name, which is the honest degrade.
+ */
+export const SECTOR_AR = {
+  "Finance": "التمويل والخدمات المالية",
+  "Process Industries": "الصناعات التحويلية",
+  "Non-Energy Minerals": "معادن ومواد بناء",
+  "Consumer Non-Durables": "سلع استهلاكية غير معمّرة",
+  "Consumer Services": "خدمات استهلاكية",
+  "Industrial Services": "خدمات صناعية",
+  "Health Technology": "أدوية وتكنولوجيا طبية",
+  "Producer Manufacturing": "صناعات إنتاجية",
+  "Distribution Services": "خدمات التوزيع",
+  "Health Services": "خدمات صحية",
+  "Technology Services": "خدمات تكنولوجية",
+  "Consumer Durables": "سلع استهلاكية معمّرة",
+  "Retail Trade": "تجارة التجزئة",
+  "Transportation": "النقل",
+  "Commercial Services": "خدمات تجارية",
+  "Utilities": "المرافق",
+  "Communications": "الاتصالات",
+  "Energy Minerals": "موارد الطاقة",
+  "Electronic Technology": "تكنولوجيا إلكترونية",
+  "Miscellaneous": "متنوعة",
+};
+
+// The demo's sectors are drawn from the vocabulary the exchange actually
+// files under, not a parallel set of nicer words: the demo is there to show
+// what the screens do with real shapes, and "Banks / Chemicals / Real Estate"
+// exercised a sector vocabulary that appears in none of the documents — and
+// has no Arabic name anywhere in either product.
+const SECTORS = ['Finance', 'Process Industries', 'Non-Energy Minerals',
+                 'Consumer Services', 'Consumer Non-Durables', 'Health Technology',
+                 'Technology Services', 'Transportation'];
 
 /** A deterministic pseudo-random stream, so the demo is stable across loads. */
 function stream(seed) {
@@ -32,7 +71,7 @@ export function demo() {
       return {
         ticker: 'DEMO' + String(n).padStart(2, '0'),
         name: { en: `Sample Company ${n}`, ar: `شركة تجريبية ${n}` },
-        sector,
+        sector, sectorAr: SECTOR_AR[sector] || sector,
         close,
         pct: Math.round((rand() * 8 - 4) * 100) / 100,
         cap: Math.round(close * (2000 + rand() * 90000)),
@@ -58,11 +97,13 @@ export function demo() {
   }
 
   const fins = [
-    ['H1 2026', '2026-06-30', 1, 1], ['Q1 2026', '2026-03-31', 0.47, 0.96],
-    ['FY 2025', '2025-12-31', 1.82, 0.9], ['9M 2025 (to 30 Sep)', '2025-09-30', 1.33, 0.86],
-    ['FY 2024', '2024-12-31', 1.54, 0.8],
-  ].map(([period, end, rev, bal]) => ({
-    period, period_end: end,
+    ['H1 2026', '2026-01-01', '2026-06-30', 1, 1],
+    ['Q1 2026', '2026-01-01', '2026-03-31', 0.47, 0.96],
+    ['FY 2025', '2025-01-01', '2025-12-31', 1.82, 0.9],
+    ['9M 2025 (to 30 Sep)', '2025-01-01', '2025-09-30', 1.33, 0.86],
+    ['FY 2024', '2024-01-01', '2024-12-31', 1.54, 0.8],
+  ].map(([period, start, end, rev, bal]) => ({
+    period, period_start: start, period_end: end,
     revenue: Math.round(2100 * rev * 1000) / 1000,
     gross_profit: Math.round(600 * rev * 1000) / 1000,
     operating_income: Math.round(390 * rev * 1000) / 1000,
@@ -128,6 +169,7 @@ export function demo() {
   return {
     demo: true, companies, series, fins, indices, readNow,
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
+    isClose: true, capturedAt: '2026-08-27T11:48:00Z',
   };
 }
 
@@ -161,6 +203,7 @@ export async function live() {
       ticker: c.ticker,
       name: { en: c.name_en, ar: c.name_ar || c.name_en },
       sector: c.sector || '—',
+      sectorAr: SECTOR_AR[c.sector] || c.sector || '—',
       close: q.close ?? '—',
       // market.json states the day's move as a FRACTION — COMI fell 0.011918,
       // which is 1.19%. The site printed it straight, so every move on the
@@ -172,15 +215,22 @@ export async function live() {
       // by a thousand and suffixed "B" — "474267676.1B", which is not a
       // quantity anybody can read.
       cap: c.market_cap ?? null,
-      // companies.json has no `pe` field at all, so `c.pe` was undefined for
-      // every company on the exchange and the column was a dash 282 times.
-      // What it does publish is the last filed EPS and the period it belongs
-      // to; against today's close that is a multiple anybody can check.
-      // Negative earnings have no multiple — a company losing money is not
-      // "cheap", it is loss-making — so it stays blank.
-      pe: (typeof q.close === 'number' && typeof c.eps === 'number' && c.eps > 0)
-        ? q.close / c.eps : null,
-      epsPeriodForPe: c.eps_period || '',
+      // The published multiple, never a re-derived one. This column used to
+      // compute `close / eps` here, which quietly overrode four refusals the
+      // pipeline makes on purpose (build_market_api.py:price_earnings): a
+      // share count that does not multiply out against price and market cap,
+      // a loss, no filed net income, and a ratio outside 1–200. Sixteen of the
+      // 282 are refused for exactly those reasons, and re-deriving printed
+      // AALR at 34,048.9 — 306.44 over an EPS of 0.009, which is arithmetic on
+      // a rounding artefact — against a real ticker, in a sortable column, so
+      // sorting by P/E put it at the top of the exchange. It also disagreed
+      // with the same company's own page. A figure the pipeline withheld is
+      // withheld here too.
+      pe: typeof c.pe === 'number' ? c.pe : null,
+      // Which year's earnings the multiple is over. The newest annual filing
+      // can be eighteen months old, and the site should say so rather than let
+      // it read as today's.
+      pePeriod: c.pe_period || '',
       eps: c.eps ?? null, epsPeriod: c.eps_period || '',
       volume: q.volume ?? null,
       // How busy the session was against this company's OWN normal. The median
@@ -202,6 +252,13 @@ export async function live() {
     // told every reader the same session date for ever, whatever the pipeline
     // had actually published.
     marketDate: market.date || manifest.market_date || null,
+    // Whether those prices are closes or a session still running. The scan
+    // publishes both, and the site read neither — so an intraday capture was
+    // printed under the same "Session" heading as a settled close, and every
+    // price on the exchange read as final when it was not. `is_close` absent
+    // is treated as not-a-close: the cautious reading of a missing flag.
+    isClose: market.is_close === true,
+    capturedAt: market.captured_at || null,
     generatedAt: manifest.generated_at || null,
     dataVersion: manifest.data_version || null,
   };
@@ -687,14 +744,20 @@ export async function sectors() {
       { length: Math.round((n / Math.max(1, s.companies)) * 10) }, () => ({ color, op: 1 }));
     const top = (detail.standouts || [])[0];
     return {
-      slug: s.slug, name: s.sector, nameAr: s.sector,
+      slug: s.slug, name: s.sector, nameAr: SECTOR_AR[s.sector] || s.sector,
       // The names the template actually binds. The mapper used to emit
       // `companies`, `lead` and `pe`, while the card reads `count`, `read`
       // and `medianPe` — so every card rendered its title and its bar over
       // four blank lines.
       count: String(s.companies ?? '\u2014'),
       upCount: rising, downCount: falling, flatCount: flat,
-      read: s.readTeaser || '', readAr: s.readTeaser || '',
+      // The teaser exists in English only — sectors.json has no `readTeaser_ar`
+      // — so the Arabic card used to print the English sentence. The per-sector
+      // document does carry a full Arabic read; its opening sentence is the
+      // same sentence the English teaser is, so the card is written from that
+      // rather than left in the wrong language.
+      read: s.readTeaser || '',
+      readAr: firstSentence(detail.read_ar) || s.readTeaser || '',
       medianPe: s.medianPe ? Number(s.medianPe).toFixed(1) : '\u2014',
       yield: s.medianDividendYield ? Number(s.medianDividendYield).toFixed(1) + '%' : '\u2014',
       // The company with the most metrics improving. Named, never ranked:
@@ -719,6 +782,19 @@ export async function sectors() {
       ].slice(0, 10),
     };
   });
+}
+
+/** The opening sentence of a paragraph, for a card with room for one.
+ *
+ * Arabic ends a sentence with the same full stop, so the split is the same in
+ * both scripts; a paragraph that never ends one comes back whole rather than
+ * cut at an arbitrary width.
+ */
+function firstSentence(text) {
+  const t = String(text || '').trim();
+  if (!t) return '';
+  const stop = t.indexOf('. ');
+  return stop === -1 ? t : t.slice(0, stop + 1);
 }
 
 /** The per-company blocks the company screen shows under its statements. */
