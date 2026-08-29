@@ -6504,5 +6504,20 @@
    }
   },
   "generated": "2026-08-28"
+ },
+ "BONY": {
+  "read": "Total assets have expanded while the debt-to-equity ratio has remained flat, indicating balance sheet growth without an increase in financial leverage relative to equity. At the same time, the price-to-book ratio is falling, which might appear at odds with an expanding asset base. The question of whether the growing asset base is productive is settled by return on assets sitting above the sector benchmark.",
+  "read_ar": "نمت إجمالي الأصول في حين استقرت نسبة الدين إلى حقوق الملكية، مما يشير إلى توسع في الميزانية العمومية دون زيادة في الرافعة المالية مقارنة بحقوق الملكية. وفي الوقت نفسه، ينخفض مضاعف القيمة الدفترية، وهو ما قد يبدو متعارضاً مع نمو قاعدة الأصول. ويُحسم التساؤل حول مدى إنتاجية هذه الأصول المتنامية من خلال تفوق العائد على الأصول على متوسط القطاع.",
+  "answers": {
+   "pb": {
+    "en": "The compression in the price-to-book multiple is likely driven by the underlying book value expanding alongside rising total assets rather than a drop in operational quality. This pattern is consistent with return on assets remaining above the sector level, suggesting the underlying asset base continues to generate returns.",
+    "ar": "من المرجح أن انخفاض مضاعف القيمة الدفترية ناتج عن نمو القيمة الدفترية بالتوازي مع ارتفاع إجمالي الأصول بدلاً من تراجع الكفاءة التشغيلية. ويتماشى هذا النمط مع بقاء العائد على الأصول أعلى من مستوى القطاع، مما يشير إلى استمرار قدرة الأصول على توليد الأرباح."
+   },
+   "assets": {
+    "en": "The expansion in total assets coincides with stable leverage as debt to equity held flat, indicating genuine balance sheet enlargement. Because return on assets, net profit, and earnings per share all sit above their sector benchmarks, earnings appear to be keeping pace with the expanding asset base.",
+    "ar": "يتزامن توسع إجمالي الأصول مع استقرار الرافعة المالية لثبات نسبة الدين إلى حقوق الملكية، مما يعكس تضخماً حقيقياً في الميزانية العمومية. وبما أن العائد على الأصول وصافي الربح وربحية السهم جميعها تتجاوز متوسطات القطاع، فإن الأرباح تبدو مواكبة لنمو قاعدة الأصول."
+   }
+  },
+  "generated": "2026-08-29"
  }
 }
