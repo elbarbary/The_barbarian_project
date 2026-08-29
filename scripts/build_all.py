@@ -54,6 +54,16 @@ STEPS = [
     # rather than a loss.
     ("Filed net profit", "build_financials_api.py", False),
     ("Market", "build_market_api.py", False),
+    # Straight after Market, which is what it adds to.
+    #
+    # The P/E Market publishes is over the newest ANNUAL filing, which on this
+    # exchange is up to twenty months old — most of them are struck against
+    # FY 2024. This adds a second one over the last twelve months a company
+    # actually filed, which is three filed figures and a subtraction, not an
+    # estimate. It only ever ADDS fields to a company already in the directory,
+    # so it cannot repeat Market's own failure of deleting 33 of them from a
+    # short scan.
+    ("Trailing P/E", "build_ttm_pe.py", True),
     # New filings, before anything that reads them.
     #
     # The archive under `data-source/egx-beta/filings` is what the calendar's

@@ -126,7 +126,9 @@ document.getElementById('signout').onclick = async () => {
           const row = component.data().companies.find((c) => c.ticker === wanted) || {};
           component._co = { ticker: wanted, ...doc, close: row.close, pct: row.pct,
             eps: row.eps, epsPeriod: row.epsPeriod,
-            pe: row.pe, pePeriod: row.pePeriod };
+            pe: row.pe, pePeriod: row.pePeriod,
+            peTtm: row.peTtm, peTtmWindow: row.peTtmWindow,
+            peTtmTo: row.peTtmTo, epsTtm: row.epsTtm };
           component._d = { ...component.data(), series: doc.series, fins: doc.fins,
             review: doc.review };
           draw();

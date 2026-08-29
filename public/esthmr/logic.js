@@ -53,6 +53,7 @@ export class Component extends Base {
     const en = {
       nothingYet:'Nothing published for this yet.',
       peNote:'P/E is the last close divided by the last earnings per share the company filed. A company with no profit to divide by has none.',
+      ttmWorking:'The 12-month figure is {window}, which is EGP {eps} a share. Three filed figures and a subtraction \u2014 nothing here is forecast.',
       compareTitle:'The same line, period by period',
       compareNote:'Only periods of the same length are put side by side. An H1 is six months and an FY is twelve, and the exchange files both cumulatively — lining them up in one row would compare half a year with a whole one.',
       compareNothing:'No line is filed for more than one period of the same length yet.',
@@ -187,7 +188,7 @@ export class Component extends Base {
       marketTitle:'The market', searchPlaceholder:'Search {n} companies — English or Arabic',
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
-      peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out.',
+      peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
       lastClose:'Last close', asOf:'As of', priceHistory:'Price history', sessionsShown:'Sessions', whoTheyAre:'Who they are',
       asFiled:'Financials, as filed', egpMillions:'EGP millions unless stated', period:'Period', revenue:'Revenue',
@@ -211,6 +212,7 @@ export class Component extends Base {
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
       peNote:'مكرر الربحية هو آخر إغلاق مقسوماً على آخر ربحية سهم أودعتها الشركة. والشركة التي لا ربح لها لا مكرر لها.',
+      ttmWorking:'رقم الاثني عشر شهراً هو {window}، أي {eps} جنيه للسهم. ثلاثة أرقام مُفصح عنها وطرح — لا شيء هنا متوقَّع.',
       compareTitle:'السطر نفسه، فترة بفترة',
       compareNote:'لا تُقارَن إلا الفترات المتساوية في الطول. فالنصف الأول ستة أشهر والسنة اثنا عشر شهراً، والبورصة تودعهما تراكمياً — ووضعهما في صف واحد يقارن نصف عام بعام كامل.',
       compareNothing:'لا يوجد سطر مُودع لأكثر من فترة واحدة من الطول نفسه بعد.',
@@ -343,7 +345,7 @@ export class Component extends Base {
       marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
-      peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية.',
+      peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'من هي الشركة',
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
@@ -807,8 +809,13 @@ export class Component extends Base {
         { label: ar?'الحجم':'Volume', value:'118,422', color:'var(--ink)', note:'' },
         { label:'P/E', value: typeof demoCo0.pe === 'number' ? this.num(demoCo0.pe, 1) : '\u2014', color:'var(--ink)',
           note: ar?'عن FY 2024':'over FY 2024' },
+        { label: ar?'م/ر · ١٢ شهراً':'P/E · 12M', value:'9.4', color:'var(--ink)',
+          note: ar?'حتى H1 2026':'to H1 2026' },
         { label: ar?'ربحية السهم':'EPS', value:'1.11', color:'var(--ink)', note:'FY 2024' }
-      ]
+      ],
+      ttmWorking: ar
+        ? 'رقم الاثني عشر شهراً هو FY 2025 + H1 2026 − H1 2025، أي ١٫٣٢ جنيه للسهم. ثلاثة أرقام مُفصح عنها وطرح — لا شيء هنا متوقَّع.'
+        : 'The 12-month figure is FY 2025 + H1 2026 - H1 2025, which is EGP 1.32 a share. Three filed figures and a subtraction \u2014 nothing here is forecast.'
     };
 
     // Live, before a document lands — and live for a company whose document
@@ -821,7 +828,7 @@ export class Component extends Base {
       ticker: st.ticker || '—', sector:'—', sectorKey:'', exchange:'EGX',
       nameEn: st.ticker || '—', nameAr: st.ticker || '—',
       close:'—', chg:'—', pct:'—', color:'var(--faint)', arrow:'', closeDate:'—',
-      brief: L.nothingYet, briefFacts: [], briefSource:'—', stats: [],
+      brief: L.nothingYet, briefFacts: [], briefSource:'—', stats: [], ttmWorking:'',
     };
 
     if (loaded) {
@@ -856,11 +863,30 @@ export class Component extends Base {
             color: typeof loaded.pe === 'number' ? 'var(--ink)' : 'var(--faint)',
             note: typeof loaded.pe === 'number' && loaded.pePeriod
               ? (ar ? 'عن ' + loaded.pePeriod : 'over ' + loaded.pePeriod) : '' },
+          // The same price over the last twelve months the company FILED.
+          // The annual tile beside it can be struck against earnings twenty
+          // months old — most of the exchange is still on FY 2024 — so a
+          // company whose profit has doubled since reads as twice as expensive
+          // as it is. ARCC is 24.4 on its annual and 5.7 on its twelve months.
+          // Three filed figures and a subtraction (build_ttm_pe.py), never a
+          // forecast; the note names the window so two P/Es on one screen
+          // cannot read as one figure disagreeing with itself.
+          { label: ar?'م/ر · ١٢ شهراً':'P/E · 12M',
+            value: typeof loaded.peTtm === 'number' ? this.num(loaded.peTtm, 1) : '\u2014',
+            color: typeof loaded.peTtm === 'number' ? 'var(--ink)' : 'var(--faint)',
+            note: typeof loaded.peTtm === 'number' && loaded.peTtmTo
+              ? (ar ? 'حتى ' + loaded.peTtmTo : 'to ' + loaded.peTtmTo) : '' },
           { label: ar?'ربحية السهم':'EPS',
             value: typeof loaded.eps === 'number' ? this.num(loaded.eps, 2) : '\u2014',
             color: typeof loaded.eps === 'number' ? 'var(--ink)' : 'var(--faint)',
             note: typeof loaded.eps === 'number' && loaded.epsPeriod ? loaded.epsPeriod : '' },
         ],
+        // The sum behind the twelve months, under the tiles, so the figure can
+        // be taken apart without opening three filings.
+        ttmWorking: typeof loaded.peTtm === 'number' && loaded.peTtmWindow
+          ? L.ttmWorking.replace('{window}', loaded.peTtmWindow)
+              .replace('{eps}', this.num(loaded.epsTtm, 2))
+          : '',
         ticker: loaded.ticker,
         nameEn: loaded.name && loaded.name.en ? loaded.name.en : loaded.ticker,
         nameAr: loaded.name && loaded.name.ar ? loaded.name.ar : (loaded.name && loaded.name.en) || loaded.ticker,
