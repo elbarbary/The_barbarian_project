@@ -184,7 +184,30 @@ def annual(doc: dict) -> list[dict]:
         if period_key(row)
     ]
     rows.sort(key=period_key)
-    return rows
+    return one_basis(rows)
+
+
+def one_basis(rows: list[dict]) -> list[dict]:
+    """Drop rows prepared on the basis this company mostly does not use.
+
+    The exchange files many periods twice, standalone and consolidated, and the
+    two disagree — 2,433 periods carry different profits, some by thousands of
+    per cent. Standalone is the parent alone; consolidated is the group.
+    Neither is wrong, and a series that switches between them is: the step
+    between two bases reads as a collapse or a leap the business never had, and
+    every direction, ratio and peer comparison built on it inherits the error.
+    71 companies file on both.
+
+    The majority basis wins and the odd rows go. Rows whose filing states no
+    basis are kept — most of the archive is unlabelled, and dropping them would
+    cost far more than the handful of contaminated rows this removes.
+    """
+    labelled = [row.get("basis") for row in rows if row.get("basis")]
+    if len(set(labelled)) < 2:
+        return rows
+    dominant = collections.Counter(labelled).most_common(1)[0][0]
+    return [row for row in rows
+            if not row.get("basis") or row.get("basis") == dominant]
 
 
 def balances(doc: dict) -> list[dict]:
@@ -205,7 +228,7 @@ def balances(doc: dict) -> list[dict]:
         if period_key(row)
     ]
     rows.sort(key=period_key)
-    return rows
+    return one_basis(rows)
 
 
 def newest(rows: list[dict], field: str) -> float | None:
