@@ -1,7 +1,7 @@
 <div data-theme="{{ theme }}" dir="{{ dir }}" style="min-height:100vh;background:var(--bg);background-image:radial-gradient(1100px 600px at 12% -8%,var(--wash1),transparent 62%),radial-gradient(900px 520px at 96% 4%,var(--wash2),transparent 60%);color:var(--ink);font-family:{{ bodyFont }};font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums">
 
   <aside class="om-rail" style="position:fixed;inset-block:14px;inset-inline-start:14px;width:250px;border-radius:26px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.5);border:1px solid var(--edge);box-shadow:var(--sh);padding:24px 18px 20px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;overscroll-behavior:contain;z-index:5">
-    <div style="padding-inline:8px">
+    <div class="om-brand" style="padding-inline:8px">
       <div style="display:flex;align-items:center;gap:9px">
         <div style="width:30px;height:30px;border-radius:11px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:var(--shPill)">
           <span style="font-family:'Bricolage Grotesque',serif;font-weight:700;font-size:16px;color:#1B1917;letter-spacing:-.04em">E</span>
@@ -11,13 +11,13 @@
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-top:9px">{{ L.publisher }}</div>
     </div>
 
-    <div style="border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);padding:12px 14px">
+    <div class="om-session" style="border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);padding:12px 14px">
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.session }}</div>
       <div style="font-size:15px;font-weight:600;margin-top:5px">{{ marketDate }}</div>
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:3px">{{ generatedAt }}</div>
     </div>
 
-    <nav style="display:flex;flex-direction:column;gap:3px">
+    <nav class="om-nav" style="display:flex;flex-direction:column;gap:3px">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
         <div onClick="{{ n.go }}" style="position:relative;cursor:pointer;padding:9px 12px;border-radius:13px;display:grid;grid-template-columns:19px minmax(0,1fr) auto;align-items:center;gap:11px;color:{{ n.color }};font-weight:{{ n.weight }};background:{{ n.bg }};box-shadow:{{ n.shadow }};transition:background .16s,color .16s" style-hover="background:var(--activeBg)">
           <div style="position:absolute;inset-inline-start:2px;top:50%;transform:translateY(-50%);width:3px;height:{{ n.markH }};border-radius:999px;background:{{ n.dot }};transition:height .22s cubic-bezier(.2,.7,.3,1)"></div>
@@ -30,7 +30,7 @@
       </sc-for>
     </nav>
 
-    <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+    <div class="om-tools" style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
       <div style="display:flex;gap:4px;padding:4px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn)">
         <div onClick="{{ toEn }}" style="flex:1;text-align:center;padding:7px 0;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.07em;cursor:pointer;background:{{ enBg }};color:{{ enFg }};box-shadow:{{ enSh }}">EN</div>
         <div onClick="{{ toAr }}" style="flex:1;text-align:center;padding:7px 0;border-radius:10px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;cursor:pointer;background:{{ arBg }};color:{{ arFg }};box-shadow:{{ arSh }}">العربية</div>
@@ -188,7 +188,7 @@
     <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 6px">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.todayTitle }}</h1>
-        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ L.newestFirst }}</div>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ feedCount }}</div>
       </div>
       <sc-for list="{{ feed }}" as="f" hint-placeholder-count="5">
         <article style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,208px);gap:22px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--shLift)">
@@ -238,6 +238,13 @@
 <sc-if value="{{ noFeed }}">
   <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
 </sc-if>
+      <!-- The list was cut at forty with nothing saying so, which reads as
+           "this is the news" rather than "this is some of it" — and it
+           excluded whole outlets, because Enterprise files ten stories to Al
+           Borsa's 158 and none of them reached the top of the pile. -->
+      <sc-if value="{{ moreFeed }}">
+        <div onClick="{{ showMoreFeed }}" style="align-self:center;padding:10px 22px;border-radius:999px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--shPill);font-size:13px;color:var(--t2);cursor:pointer" style-hover="color:var(--ink)">{{ L.showMore }}</div>
+      </sc-if>
       <div style="padding:4px 10px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ feedProvenance }}</div>
 
     </div>
@@ -263,7 +270,7 @@
         </div>
       </div>
 
-      <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
+      <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
         <div style="display:grid;grid-template-columns:minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px">
           <sc-for list="{{ cols }}" as="c" hint-placeholder-count="7">
             <div onClick="{{ c.go }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:{{ c.color }};text-align:{{ c.align }}">{{ c.label }}{{ c.caret }}</div>

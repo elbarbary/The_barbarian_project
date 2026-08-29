@@ -38,6 +38,8 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      feedCount:'{shown} of {total} headlines, newest first.',
+      showMore:'Show more',
       busiest:'Busiest against their own normal',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
       nothingUnusual:'Nothing unusual today',
@@ -93,6 +95,8 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.',
+      showMore:'عرض المزيد',
       busiest:'الأنشط مقارنة بمعتادها',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
       nothingUnusual:'لا شيء غير معتاد اليوم',
@@ -353,7 +357,7 @@ export class Component extends Base {
     }));
 
     // today
-    const feed = (D.feed ? say(D.feed, ['kind','headline','why','because','source']) : !D.demo ? [] : [
+    const allFeed = (D.feed ? say(D.feed, ['kind','headline','why','because','source']) : !D.demo ? [] : [
       { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source:'EGX', href:'https://www.egx.com.eg',
         headline: ar?'كورّة: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'KORRA: standalone and consolidated statements for the period ended 30 June 2026',
         why: ar?'الميزانية تذكر قروضاً بـ ١٨٦٩٫١ مليون جنيه، منها ١٧٩٥٫٥ مليون تستحق خلال عام.':'The balance sheet states borrowings of EGP 1,869.1m, of which 1,795.5m falls due within a year.',
@@ -390,6 +394,10 @@ export class Component extends Base {
           : null,
       }))).filter((t) => t.go),
     }));
+
+    // A page at a time. The list used to be cut at forty with nothing saying
+    // so, which reads as "this is the news" rather than "this is some of it".
+    const feed = allFeed.slice(0, st.feedShown || 40);
 
     // company
     const co0 = D.companies.find(c => c.ticker === 'KORA');
@@ -755,6 +763,10 @@ export class Component extends Base {
             .replace('{total}', D.filedArchive.length)
             .replace('{month}', this.monthLabel(st.month))
         : '',
+      feedCount: allFeed.length
+        ? L.feedCount.replace('{shown}', feed.length).replace('{total}', allFeed.length) : '',
+      moreFeed: feed.length < allFeed.length,
+      showMoreFeed: () => this.setState({ feedShown: feed.length + 40 }),
       busy, hasBusy: busy.length > 0, noBusy: busyMeasured > 0 && busy.length === 0,
       busyNote: busy.length ? L.busyWorkings + ' ' + L.busyYardstick : '',
       hasBreadth: Boolean(D.breadth),

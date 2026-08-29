@@ -380,7 +380,12 @@ export async function news() {
   // shouted its slug — ALBORSA, HAPI, ALMAL — because `source.name` was never
   // there to be found and the code fell through to the id.
   const outlets = new Map((d.sources || []).map((s) => [s.id, s]));
-  return (d.items || []).slice(0, 40).map((it) => {
+  // Every story, not the newest forty. The cut was invisible and it silently
+  // excluded whole outlets: Enterprise files ten stories to Al Borsa's 158, so
+  // none of its work ever reached the top of the pile — while the footer went
+  // on naming it as a source. The screen still shows a page at a time; the
+  // difference is that the rest is now reachable.
+  return (d.items || []).map((it) => {
     const [kindColor, tint] = tintFor(it.event);
     const attributions = it.sources || [];
     const named = attributions.map((a) => outlets.get(a.id) || { name: a.id });

@@ -72,3 +72,95 @@ body[data-signed="no"] .account { display: none; }
   color: #6E6761; }
 :focus-visible { outline: 2px solid #E8621C; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ── phones ──────────────────────────────────────────────────────────────
+   The design is a fixed 250px rail beside a 1240px column, which on a 375px
+   screen puts the rail over two thirds of the width and pushes everything
+   else off the edge entirely.
+
+   Everything here is an override rather than a rewrite: the design's own
+   inline styles stay exactly as they are on a desktop, and !important is what
+   an inline style costs. Three moves — the rail becomes a bottom bar, the
+   card grids become one column, and the one genuinely wide table scrolls
+   inside its own card instead of taking the page with it. */
+@media (max-width: 860px) {
+  /* The nav is what a thumb needs; the brand, the session stamp and the
+     theme controls are chrome, and the session date is already printed at the
+     top of every screen. */
+  .om-rail {
+    position: fixed !important;
+    inset: auto 0 0 0 !important;
+    width: auto !important;
+    max-height: none !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-inline: 0 !important;
+    border-block-end: 0 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none;
+  }
+  .om-rail::-webkit-scrollbar { display: none; }
+  .om-brand, .om-session { display: none !important; }
+  /* A horizontal bar must let its items be as wide as their words. Left to
+     flex defaults they are squeezed to a shared 51px and every label is
+     clipped to two letters. */
+  .om-rail > * { flex: none !important; }
+  .om-nav { flex-direction: row !important; gap: 4px !important; }
+  .om-nav > div { flex: none !important; width: max-content !important; }
+  /* The active-tab marker is a vertical bar against a vertical list; lying on
+     its side it would read as an underline nobody asked for. */
+  .om-nav > div > div:first-child { display: none !important; }
+  .om-nav > div {
+    grid-template-columns: 18px auto !important;
+    gap: 7px !important;
+    padding: 9px 13px !important;
+    white-space: nowrap;
+  }
+  .om-nav > div > div:last-child { display: none !important; }   /* the count */
+  .om-tools { margin-top: 0 !important; flex-direction: row !important; gap: 8px !important; }
+  .om-tools > div:last-child { display: none !important; }        /* data_version */
+
+  .om-main {
+    margin-inline-start: 0 !important;
+    padding: 16px 14px 104px !important;   /* clear of the bar */
+  }
+
+  /* Card grids stack. Row grids — a mover, a calendar entry — are left alone,
+     because collapsing those puts a ticker, a price and a percentage on three
+     separate lines. */
+  [style*="grid-template-columns:repeat(2,minmax(0,1fr))"],
+  [style*="grid-template-columns:repeat(3,minmax(0,1fr))"],
+  [style*="grid-template-columns:repeat(4,minmax(0,1fr))"],
+  [style*="grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr)"],
+  [style*="grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)"],
+  [style*="grid-template-columns:minmax(0,1fr) minmax(0,1fr)"],
+  [style*="grid-template-columns:minmax(0,1fr) minmax(210px,288px)"],
+  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"],
+  [style*="grid-template-columns:minmax(150px,240px) minmax(80px,130px) minmax(0,1fr)"],
+  [style*="grid-template-columns:minmax(116px,176px)"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  /* The news picture sits above its headline rather than beside it, and stops
+     being a 4:3 slab of a small screen. */
+  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"] > div:last-child,
+  [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"] > a:last-child {
+    aspect-ratio: 16/9 !important;
+    order: -1;
+  }
+
+  /* Seven columns of market data will not fit a phone at any type size. The
+     card scrolls; the page does not. */
+  .om-table { overflow-x: auto !important; }
+  .om-table > div { min-width: 620px; }
+
+  .om-scr h1 { font-size: 32px !important; }
+  .om-scr h2 { font-size: 23px !important; }
+
+  .gate { padding: 10px 14px !important; font-size: 13px !important; }
+  .account { inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px)) !important; }
+}

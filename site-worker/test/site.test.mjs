@@ -848,3 +848,31 @@ test('the busiest rows sit above the movers on Home', async () => {
   assert.match(t.slice(grid, busy), /flex-direction:column/,
     'the two sections are separate grid children');
 });
+
+/* ── phones ────────────────────────────────────────────────────────────── */
+
+test('the layout has a phone case, and the rail stops eating the screen', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const css = await readFile(new URL('../../public/esthmr/shell.css', import.meta.url), 'utf8');
+  const html = await readFile(new URL('../../public/esthmr/index.html', import.meta.url), 'utf8');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+
+  // Without this the media query never matches on a real phone, whatever the
+  // stylesheet says.
+  assert.match(html, /<meta name="viewport" content="width=device-width/);
+
+  const at = css.indexOf('@media (max-width: 860px)');
+  assert.ok(at > 0, 'there is no phone case at all');
+  const mobile = css.slice(at);
+  // A fixed 250px rail on a 375px screen is two thirds of the width.
+  assert.match(mobile, /\.om-rail\s*\{[^}]*position:\s*fixed\s*!important/);
+  assert.match(mobile, /\.om-main\s*\{[^}]*margin-inline-start:\s*0\s*!important/);
+  // The hooks the phone case leans on must exist in the markup.
+  for (const hook of ['om-rail', 'om-main', 'om-nav', 'om-tools', 'om-brand',
+                      'om-session', 'om-table']) {
+    assert.ok(tpl.includes(hook), `the template has no ${hook} to hang the phone case on`);
+  }
+  // Seven columns of market data cannot fit a phone: the card scrolls, the
+  // page does not. A page that scrolls sideways is the bug this prevents.
+  assert.match(mobile, /\.om-table\s*\{[^}]*overflow-x:\s*auto/);
+});
