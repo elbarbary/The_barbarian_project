@@ -363,6 +363,52 @@ def metals(usd_egp: float | None) -> list[dict]:
     return out
 
 
+def published() -> dict:
+    """The document this build is about to replace, or an empty one."""
+    path = OUT / "latest.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {}
+
+
+def carry_forward(fresh: list[dict], before: list[dict], what: str) -> list[dict]:
+    """Keep a row the upstream would not answer for this run, and say so.
+
+    `metals()` and `currencies()` skip a row they cannot fetch, and main wrote
+    the list wholesale — so an upstream having a bad minute DELETED a published
+    figure. That is what happened to gold on 29 August 2026:
+
+        ! api.gold-api.com: <urlopen error [Errno -2] Name or service not known>
+
+    A DNS blip took gold and its karat breakdown off the Exchange screen
+    entirely, and the next build would have kept it off until the fetch
+    happened to succeed. Nothing said the figure had gone.
+
+    A dated last reading is worth more than a hole, and much more than a
+    silent one. The row is kept, marked `carried`, and its source line says
+    when it was actually read — so the screen can show its age rather than
+    present it as this minute's price.
+    """
+    have = {row.get("label") for row in fresh}
+    kept = list(fresh)
+    for row in before:
+        if row.get("label") in have:
+            continue
+        stale = dict(row)
+        # The row's own `source` already ends in the timestamp it was actually
+        # read at — "api.gold-api.com, 2026-08-29T14:12:03Z" — so it dates
+        # itself and goes on dating itself for as long as it is carried. This
+        # flag is the machine-readable half, for a screen that wants to say so
+        # rather than let a reader work it out from the stamp.
+        stale["carried"] = True
+        kept.append(stale)
+        print(f"   ! {what}: {row.get('label')} carried forward — the host did not answer")
+    return kept
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -383,6 +429,12 @@ def main() -> int:
     print("── Metals")
     metal_rows = metals(usd_egp)
     print(f"   {len(metal_rows)}")
+
+    # Whatever the hosts would not answer for this run keeps its last published
+    # reading rather than disappearing off the screen.
+    was = published()
+    currency_rows = carry_forward(currency_rows, was.get("currencies") or [], "the pound")
+    metal_rows = carry_forward(metal_rows, was.get("metals") or [], "metals")
 
     if not (index_rows or currency_rows or metal_rows or world_rows):
         print("nothing fetched — leaving the published document alone")
