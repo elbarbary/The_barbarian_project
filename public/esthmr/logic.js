@@ -174,7 +174,9 @@ export class Component extends Base {
       dotsFiling:'Filing', dotsNews:'In the press', dotsSession:'That session',
       dotsVolume:'{ratio}\u00d7 normal volume',
       dotsShare:'What they share',
-      dotsWindow:'The {days} days, and where each thread falls in them',
+      dotsWindow:'The {days}-day window',
+      dotsLegend:'On the line:',
+      dotsMore:'{n} more', dotsLess:'Show fewer',
       dotsThreads:'{n} threads', dotsOneThread:'1 thread',
       dotsPeers:'{n} other companies crossed in the same window, {same} of them in this sector',
       dotsPeersNone:'No other company crossed in this window',
@@ -328,7 +330,9 @@ export class Component extends Base {
       dotsFiling:'إفصاح', dotsNews:'في الصحافة', dotsSession:'تلك الجلسة',
       dotsVolume:'{ratio}\u00d7 الحجم المعتاد',
       dotsShare:'ما يجمع بينها',
-      dotsWindow:'الأيام {days}، وموضع كل خيط فيها',
+      dotsWindow:'نافذة {days} أيام',
+      dotsLegend:'على الخط:',
+      dotsMore:'{n} أخرى', dotsLess:'عرض أقل',
       dotsThreads:'{n} خيوط', dotsOneThread:'خيط واحد',
       dotsPeers:'تقاطعت {n} شركة أخرى في الفترة نفسها، منها {same} في هذا القطاع',
       dotsPeersNone:'لم تتقاطع أي شركة أخرى في هذه الفترة',
@@ -957,8 +961,8 @@ export class Component extends Base {
             first: n === 0, last: n === (item.strands || []).length - 1,
             // The gutter draws a line up to a dot and on to the next; the
             // first has nothing above it and the last nothing below.
-            stub: n === 0 ? 'transparent' : 'var(--thread)',
-            tail: n === (item.strands || []).length - 1 ? 'transparent' : 'var(--thread)',
+            stub: n === 0 ? 'transparent' : 'var(--thread, var(--rule))',
+            tail: n === (item.strands || []).length - 1 ? 'transparent' : 'var(--thread, var(--rule))',
             pad: n === (item.strands || []).length - 1 ? '0' : '13px',
           };
         });
@@ -975,6 +979,17 @@ export class Component extends Base {
           };
         });
         const count = strands.length;
+        // The thread list is capped so one company with nine filings does not
+        // make a card twice the height of the seven beside it. The rest are a
+        // tap away rather than gone.
+        const CAP = 4;
+        const open = Boolean(st.crossMore && st.crossMore[item.ticker]);
+        const shown = open ? strands : strands.slice(0, CAP);
+        // The last one drawn ends the line, whether or not it ends the list.
+        shown.forEach((x, n) => {
+          x.tail = n === shown.length - 1 ? 'transparent' : 'var(--thread, var(--rule))';
+          x.pad = n === shown.length - 1 ? '0' : '13px';
+        });
         return {
           ticker: item.ticker,
           mono: item.ticker,
@@ -999,10 +1014,16 @@ export class Component extends Base {
             ? L.dotsVolume.replace('{ratio}', item.ratio.toFixed(2)) : '',
           hasVolume: (item.kinds || []).includes('session') && item.ratio !== null,
           threads: count === 1 ? L.dotsOneThread : L.dotsThreads.replace('{n}', count),
+          hasMore: count > CAP,
+          moreLabel: open ? L.dotsLess : L.dotsMore.replace('{n}', count - CAP),
+          moreCaret: open ? '\u2212' : '+',
+          toggleMore: () => this.setState((x) => ({
+            crossMore: Object.assign({}, x.crossMore, { [item.ticker]: !open }),
+          })),
           peers: (item.peers || []).length
             ? L.dotsPeers.replace('{n}', item.peers.length).replace('{same}', item.sameSector)
             : L.dotsPeersNone,
-          cells, strands,
+          cells, strands: shown,
           // A crossing about a company the directory does not hold opens
           // nothing, rather than an empty screen.
           go: known ? () => this.setState({ screen: 'company', ticker: item.ticker }) : null,
@@ -1010,6 +1031,12 @@ export class Component extends Base {
         };
       });
     })();
+    // One key for the whole section. Eight axes of coloured dots say nothing
+    // until something names the colours, and naming them on every card would
+    // cost more room than the axes take.
+    const crossLegend = D.crossings
+      ? ['filing', 'news', 'session'].map((k) => ({ label: STRAND[k][0], color: STRAND[k][1] }))
+      : [];
     const crossWindow = D.crossings
       ? L.dotsWindow.replace('{days}', String(D.crossings.days || 4)) : '';
     const crossBody = D.crossings
@@ -1569,7 +1596,7 @@ export class Component extends Base {
       hasCompare: compareRows.length > 0 && comparePeriods.length > 1,
       noCompare: D.fins.length > 0 && compareRows.length === 0,
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies,
-      crossings, crossWindow, crossBody, crossWorkings,
+      crossings, crossWindow, crossBody, crossWorkings, crossLegend,
       noCrossings: crossings.length === 0,
       crossOpen: Boolean(st.crossOpen),
       crossToggle: () => this.setState((x) => ({ crossOpen: !x.crossOpen })),

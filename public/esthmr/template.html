@@ -210,6 +210,16 @@
             <div style="min-width:0">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.dotsLabel }}</div>
               <div style="font-size:13.5px;color:var(--t2);margin-top:6px;text-wrap:pretty">{{ crossBody }}</div>
+              <!-- What the colours on eight axes mean, said once. -->
+              <div style="display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:10px">
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.dotsLegend }}</span>
+                <sc-for list="{{ crossLegend }}" as="g" hint-placeholder-count="3">
+                  <span style="display:inline-flex;align-items:center;gap:6px">
+                    <span style="width:8px;height:8px;border-radius:999px;background:{{ g.color }}"></span>
+                    <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--t2)">{{ g.label }}</span>
+                  </span>
+                </sc-for>
+              </div>
             </div>
             <div onClick="{{ crossToggle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);white-space:nowrap" style-hover="border-color:var(--accent)">{{ L.dotsHow }} <span>{{ crossCaret }}</span></div>
           </div>
@@ -220,57 +230,47 @@
             </div>
           </sc-if>
 
-          <div class="om-dots-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:14px;align-items:start">
+          <div class="om-dots-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(326px,1fr));gap:14px;align-items:start">
             <sc-for list="{{ crossings }}" as="x" hint-placeholder-count="6">
               <article style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--shLift)">
 
                 <!-- The company, on its own tinted band: a screenful of
                      crossings was a screenful of identical rectangles until
                      each one had a face. -->
-                <div onClick="{{ x.go }}" style="display:flex;align-items:center;gap:11px;padding:13px 15px;background:var(--accTint);border-bottom:1px solid var(--edgeIn)">
+                <div onClick="{{ x.go }}" style="display:flex;align-items:flex-start;gap:11px;padding:13px 15px;background:var(--accTint);border-bottom:1px solid var(--edgeIn);transition:background .15s" style-hover="background:var(--sunk)">
                   <div style="flex:none;width:44px;height:44px;border-radius:13px;background:var(--surface);border:1px solid var(--edgeIn);display:grid;place-items:center;padding:0 4px;font-family:'IBM Plex Mono',monospace;font-size:{{ x.monoSize }};font-weight:600;letter-spacing:.02em;color:var(--accent);overflow:hidden;white-space:nowrap">{{ x.mono }}</div>
                   <div style="min-width:0;flex:1">
-                    <div style="display:flex;align-items:center;gap:6px;min-width:0">
-                      <span dir="auto" style="font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ x.name }}</span>
-                      <span style="font-size:11px;color:var(--faint);flex:none">{{ x.arrow }}</span>
+                    <!-- Two lines rather than one. On a 358px card the single
+                         nowrap line cut "Pioneers Properties for Urban
+                         Development" to "Pioneers Properties for Ur…", which
+                         is the half of the card's identity that matters. -->
+                    <div dir="auto" style="font-size:14.5px;font-weight:600;line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ x.name }}</div>
+                    <div style="display:flex;align-items:center;gap:5px;margin-top:3px;min-width:0">
+                      <span style="font-size:11.5px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ x.sector }}</span>
+                      <span style="font-size:10px;color:var(--faint);flex:none">{{ x.arrow }}</span>
                     </div>
-                    <div style="font-size:12px;color:var(--faint);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ x.sector }}</div>
                   </div>
-                  <div style="flex:none;text-align:end">
+                  <div style="flex:none;text-align:end;display:flex;flex-direction:column;align-items:flex-end;gap:3px">
                     <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ x.color }}">{{ x.pct }}</div>
-                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);margin-top:2px;white-space:nowrap">{{ x.volume }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2);white-space:nowrap">{{ x.threads }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);white-space:nowrap">{{ x.volume }}</div>
                   </div>
                 </div>
 
-                <div style="padding:14px 15px 15px;display:flex;flex-direction:column;gap:12px">
-                  <div style="font-size:14px;color:var(--ink);line-height:1.5;text-wrap:pretty">{{ x.why }}</div>
+                <div style="padding:13px 15px 14px;display:flex;flex-direction:column;gap:12px">
 
-                  <!-- The one line on the card a reader could not have got
-                       from any single document, so it is the one thing on the
-                       card that is not the surface colour. The app inverts to
-                       ink here; the site cannot, because `--ink` is a near
-                       white in the dark theme and the panel would turn into a
-                       white slab with orange 9px type on it. An accent tint
-                       and a drawn edge carry the same emphasis in both. -->
-                  <sc-if value="{{ x.hasInsight }}">
-                    <div style="border-radius:14px;background:var(--accTint);border:1px solid var(--edgeIn);border-inline-start:2px solid var(--accent);padding:12px 14px">
-                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)">{{ L.dotsShare }}</div>
-                      <div style="font-size:13.5px;color:var(--ink);line-height:1.55;margin-top:6px;text-wrap:pretty">{{ x.insight }}</div>
-                    </div>
-                  </sc-if>
-
-                  <!-- The window. One cell a day; a dot for every thread that
-                       landed on it. A day nothing happened on is drawn empty
-                       rather than dropped — the gap is what makes the cluster
-                       mean anything. -->
+                  <!-- The window, and the threads sitting on it. First,
+                       because it is the whole idea of the section: a crossing
+                       is a claim about time, and this is the claim. A day
+                       nothing landed on keeps its tick — the gap is what makes
+                       the cluster mean anything. -->
                   <div>
-                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ crossWindow }}</div>
-                    <div style="position:relative;margin-top:11px">
-                      <!-- One rule the whole width of the window, with the
-                           threads sitting on it. Drawn per cell it read as a
-                           bar chart — a lit segment under a day looks like a
-                           quantity, and two lit segments side by side look
-                           like a range. It is neither: it is a date line. -->
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ crossWindow }}</div>
+                    <div style="position:relative;margin-top:12px">
+                      <!-- One rule the whole width. Drawn per cell it read as
+                           a bar chart: a lit segment under a day looks like a
+                           quantity and two side by side look like a range. It
+                           is neither; it is a date line. -->
                       <div style="position:absolute;inset-inline:0;top:5px;height:1.5px;border-radius:999px;background:var(--rule)"></div>
                       <div style="position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px">
                         <sc-for list="{{ x.cells }}" as="d" hint-placeholder-count="4">
@@ -279,9 +279,6 @@
                               <sc-for list="{{ d.dots }}" as="p" hint-placeholder-count="1">
                                 <span style="width:9px;height:9px;border-radius:999px;background:{{ p.color }};box-shadow:0 0 0 2.5px var(--surface)"></span>
                               </sc-for>
-                              <!-- A day nothing happened on keeps its tick.
-                                   Dropping it would close the gap, and the gap
-                                   is what makes the cluster mean anything. -->
                               <sc-if value="{{ d.quiet }}">
                                 <span style="width:5px;height:5px;border-radius:999px;background:var(--surface);border:1.5px solid var(--rule)"></span>
                               </sc-if>
@@ -293,10 +290,31 @@
                     </div>
                   </div>
 
+                  <!-- The pipeline's sentence, as the caption to the shape
+                       above rather than as the opening paragraph. It says in
+                       words what the axis just said in dots, which is worth
+                       having and is not worth leading with. -->
+                  <div style="font-size:13px;color:var(--t2);line-height:1.5;text-wrap:pretty">{{ x.why }}</div>
+
+                  <!-- The one line on the card a reader could not have got
+                       from any single document, so it is the one thing that is
+                       not the surface colour. The app inverts to ink here; the
+                       site cannot, because `--ink` is a near white in the dark
+                       theme and the panel would turn into a white slab with
+                       orange 9px type on it. An accent tint and a drawn edge
+                       carry the same emphasis in both. -->
+                  <sc-if value="{{ x.hasInsight }}">
+                    <div style="border-radius:14px;background:var(--accTint);border:1px solid var(--edgeIn);border-inline-start:2px solid var(--accent);padding:11px 13px">
+                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)">{{ L.dotsShare }}</div>
+                      <div style="font-size:13.5px;color:var(--ink);line-height:1.55;margin-top:6px;text-wrap:pretty">{{ x.insight }}</div>
+                    </div>
+                  </sc-if>
+
                   <!-- The documents, on a drawn thread. Full-width dividers
                        said "these are three unrelated things" on a card whose
                        entire claim is that they are not. -->
-                  <div style="display:flex;flex-direction:column;padding-top:2px">
+                  <div style="display:flex;flex-direction:column;padding-top:2px;border-top:1px solid var(--rule2);margin-top:1px">
+                    <div style="height:11px"></div>
                     <sc-for list="{{ x.strands }}" as="s" hint-placeholder-count="3">
                       <div style="display:grid;grid-template-columns:9px minmax(0,1fr);gap:11px">
                         <div style="display:flex;flex-direction:column;align-items:center">
@@ -314,11 +332,17 @@
                         </a>
                       </div>
                     </sc-for>
+                    <!-- One company filed nine in the window. Capped, so its
+                         card is not twice the height of the seven beside it in
+                         the grid, and the rest are a tap away rather than
+                         dropped without saying so. -->
+                    <sc-if value="{{ x.hasMore }}">
+                      <div onClick="{{ x.toggleMore }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:12px;margin-inline-start:20px;padding:5px 11px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ x.moreLabel }} <span>{{ x.moreCaret }}</span></div>
+                    </sc-if>
                   </div>
 
-                  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:2px;border-top:1px solid var(--rule2)">
-                    <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding-top:10px">{{ x.threads }}</span>
-                    <span style="font-size:11.5px;color:var(--faint);line-height:1.5;padding-top:10px;text-wrap:pretty">{{ x.peers }}</span>
+                  <div style="padding-top:11px;border-top:1px solid var(--rule2)">
+                    <span style="font-size:11.5px;color:var(--faint);line-height:1.5;text-wrap:pretty">{{ x.peers }}</span>
                   </div>
                 </div>
               </article>
