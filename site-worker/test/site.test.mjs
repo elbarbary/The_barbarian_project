@@ -951,3 +951,27 @@ test('§8 nothing in the ratio block tells a reader what to do', async () => {
   }
   assert.ok(files.length > 200, `only ${files.length} review documents`);
 });
+
+test('a period with filed figures behind it says so on the row', async () => {
+  // COMI's H1 2026 carries a full balance sheet and cash-flow statement and
+  // displayed as "— — — 39,235.1": four dashes and a profit, with nothing to
+  // say that eight more filed figures sat behind the plus. The exchange
+  // announces a profit; the statement comes from the filing, and it was
+  // invisible.
+  const { readFile } = await import('node:fs/promises');
+  const co = JSON.parse(await readFile(
+    new URL('../../public/data/v1/companies/COMI.json', import.meta.url), 'utf8'));
+  const fins = [...(co.financials.quarterly || []), ...(co.financials.annual || [])]
+    .sort((a, b) => String(b.period_end || '').localeCompare(String(a.period_end || '')));
+  const v = screen({ ...LIVE, fins });
+  const h1 = v.fins.find((f) => f.period === 'H1 2026');
+  assert.equal(h1.revenue, '—', 'the exchange did not announce revenue for this period');
+  assert.equal(h1.hasMore, true, 'a full statement must announce itself on the row');
+  assert.match(h1.more, /^\+\d+ filed$/);
+  // A period the exchange only announced a profit for has nothing behind it,
+  // and must not pretend otherwise.
+  const bare = v.fins.find((f) => !f.groups.length);
+  if (bare) { assert.equal(bare.hasMore, false); assert.equal(bare.more, ''); }
+  assert.match(v.finsCoverage, /\d+ of \d+ periods carry a full statement\./);
+  assert.equal(screen(LIVE).finsCoverage, '');
+});

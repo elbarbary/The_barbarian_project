@@ -52,6 +52,8 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      moreFigures:'+{n} filed',
+      fullStatements:'{n} of {total} periods carry a full statement. The rest are announcements, where the exchange stated a profit and nothing else.',
       pickDay:'Pick a day',
       filedOnDay:'{n} filed on {date}',
       nothingFiledThatDay:'Nothing was filed that day.',
@@ -183,6 +185,8 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      moreFigures:'+{n} مُودعة',
+      fullStatements:'{n} من {total} فترة تحمل قائمة كاملة. والباقي إعلانات، ذكرت فيها البورصة ربحاً ولا شيء غيره.',
       pickDay:'اختر يوماً',
       filedOnDay:'{n} إفصاحاً في {date}',
       nothingFiledThatDay:'لم يُنشر شيء في ذلك اليوم.',
@@ -795,7 +799,9 @@ export class Component extends Base {
         revenue:this.num(f.revenue,1), grossProfit:this.num(f.gross_profit,1), operatingIncome:this.num(f.operating_income,1), netIncome:this.num(f.net_income,1),
         revColor: f.revenue === null ? 'var(--faint)' : 'var(--ink)', gpColor: f.gross_profit === null ? 'var(--faint)' : 'var(--ink)',
         opColor: f.operating_income === null ? 'var(--faint)' : 'var(--ink)', niColor: f.net_income === null ? 'var(--faint)' : 'var(--ink)',
-        caret: open ? '−' : '+', open, groups,
+        caret: open ? '\u2212' : '+', open, groups,
+        more: present ? L.moreFigures.replace('{n}', present) : '',
+        hasMore: present > 0,
         toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [f.period]: !s.open[f.period] }) })),
         filingId:f.filing_id, filedOn: (f.filed || f.filed_on) ? (ar?'أُودع ':'Filed ') + (f.filed || f.filed_on) : '',
         source: f.source || 'https://www.egx.com.eg',
@@ -1189,6 +1195,13 @@ export class Component extends Base {
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
       co, ranges, chart, ratesArrowed: rates.map((r) => { const flat = !r.pct || r.pct === '\u2014'; const up = String(r.pct).charAt(0) === '+'; return Object.assign({}, r, { arrow: flat ? '' : (up ? '\u2197' : '\u2198'), tint: flat ? 'var(--sunk)' : (up ? 'var(--upTint)' : 'var(--downTint)'), hasPlain: Boolean(r.plain), hasKarats: Boolean((r.karats || []).length) }); }), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
+      // How many of the periods on this table are a full statement rather than
+      // a one-line profit announcement. Without it the table reads as mostly
+      // empty, when what it mostly is, is honest.
+      finsCoverage: fins.length
+        ? L.fullStatements.replace('{n}', fins.filter((f) => f.hasMore).length)
+            .replace('{total}', fins.length)
+        : '',
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies
     };
     // A demo must not put an invented event beside a real company's name.

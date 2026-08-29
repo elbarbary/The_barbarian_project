@@ -525,6 +525,7 @@
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ L.egpMillions }}</div>
         </div>
         <div style="margin:16px 12px 8px;padding:14px 16px;border-radius:16px;background:var(--irisTint);font-size:12.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.cumulativeWarning }}</div>
+        <div style="margin:0 12px 4px;padding-inline:4px;font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ finsCoverage }}</div>
         <div style="display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:12px 14px">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.period }}</div>
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.revenue }}</div>
@@ -544,7 +545,17 @@
               <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.gpColor }}">{{ p.grossProfit }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.opColor }}">{{ p.operatingIncome }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;font-weight:600;color:{{ p.niColor }}">{{ p.netIncome }}</div>
-              <div style="justify-self:center;width:22px;height:22px;border-radius:8px;background:var(--sunk);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--faint)">{{ p.caret }}</div>
+              <!-- A period with a full balance sheet and cash-flow statement
+                   was displaying as "— — — 39,235.1" with nothing to say that
+                   eight more filed figures sat behind the plus. The exchange
+                   announces a profit; the statement comes from the filing, and
+                   it was invisible. -->
+              <div style="justify-self:center;display:flex;flex-direction:column;align-items:center;gap:3px">
+                <div style="width:22px;height:22px;border-radius:8px;background:var(--sunk);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--faint)">{{ p.caret }}</div>
+                <sc-if value="{{ p.hasMore }}">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--accent);white-space:nowrap">{{ p.more }}</div>
+                </sc-if>
+              </div>
             </div>
             <sc-if value="{{ p.open }}" hint-placeholder-val="{{ false }}">
               <div style="padding:4px 14px 18px">
