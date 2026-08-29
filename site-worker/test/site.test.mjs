@@ -495,9 +495,50 @@ test('market cap is whole pounds, printed at a scale a person can read', () => {
   assert.equal(c.money(4190000000), '4.19bn');
   assert.equal(c.money(812000000), '812m');
   assert.equal(c.money(19043202), '19.0m');
-  for (const empty of [null, undefined, 0, -5, NaN, Infinity, 'x']) {
+  // A dash means "the filing did not state it", so only genuine absence gets
+  // one. This used to include every negative, which is how 41 companies' filed
+  // losses became data gaps — a net-profit card reading "—" above a proof
+  // graph of ten bars drawn below the zero line.
+  for (const empty of [null, undefined, NaN, Infinity, 'x']) {
     assert.equal(c.money(empty), '—', `money(${String(empty)}) should be a dash`);
   }
+  assert.equal(c.money(0), '0', 'a filed zero is a figure, not a gap');
+  assert.equal(c.money(-24865000), '-24.9m', 'a filed loss is a figure, not a gap');
+  assert.equal(c.money(-4190000000), '-4.19bn');
+});
+
+test('a market capitalisation is guarded where it is printed, not in the formatter', () => {
+  // Moving the sign guard out of money() means the one caller that genuinely
+  // cannot show a negative has to say so itself: a market cap below zero is a
+  // units error, not a small company.
+  const rows = screen({ ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, cap: -100 },
+    { ticker: 'BBBB', name: { en: 'B', ar: 'ب' }, sector: 'Finance', close: 10, pct: 1, cap: 0 },
+    { ticker: 'CCCC', name: { en: 'C', ar: 'ج' }, sector: 'Finance', close: 10, pct: 1, cap: 4190000000 },
+  ] }).rows;
+  assert.equal(rows.find((r) => r.ticker === 'AAAA').cap, '—');
+  assert.equal(rows.find((r) => r.ticker === 'BBBB').cap, '—');
+  assert.equal(rows.find((r) => r.ticker === 'CCCC').cap, '4.19bn');
+});
+
+test('a return is a percentage on the site because it is one in the app', () => {
+  // roe and roa are published with unit "ratio", so they fell through to the
+  // multiple and 454 figures read "0.29×" where the app reads "29.1%" — on a
+  // card whose own body calls it "profit as a share of shareholders' equity".
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = 'en';
+  const L = c.copy();
+  const cards = c.ratioCards({ sector: 'Finance', metrics: [
+    { key: 'roe', value: 0.2914, unit: 'ratio', peer_median: 0.166, peer: 'above',
+      points: 2, series: [{ p: 'FY 2024', v: 0.2914 }, { p: 'FY 2025', v: 0.31 }] },
+    { key: 'pe', value: 8.4, unit: 'ratio', points: 1, series: [] },
+  ] }, L, false);
+  const roe = cards.find((x) => x.key === 'roe');
+  assert.equal(roe.value, '29.1%');
+  assert.ok(roe.peerMedian.includes('16.6%'), `median reads ${roe.peerMedian}`);
+  assert.equal(roe.proof[0].v, '29.1%');
+  // and a genuine multiple is still a multiple
+  assert.equal(cards.find((x) => x.key === 'pe').value, '8.40×');
 });
 
 /* ── things that were rendering the wrong string ───────────────────────── */
@@ -677,7 +718,17 @@ test('a sector card is not four blank lines', async () => {
   const secs = await fromDisk(() => data.sectors());
   const finance = secs.find((s) => s.name === 'Finance');
   assert.equal(finance.count, '83');
-  assert.equal(finance.upCount + finance.downCount + finance.flatCount, 83);
+  // `flat` is a published count, not "everything left over". Deriving it by
+  // subtraction folded the companies whose metric could not be READ into the
+  // ones that held STEADY: Finance said "10 flat" where the document says 3
+  // held and 7 were unmeasurable, and 11 of the 15 cards overstated it.
+  assert.equal(finance.upCount + finance.downCount + finance.flatCount
+               + finance.unknownCount, 83);
+  assert.ok(finance.unknownCount > 0, 'Finance has unmeasurable companies to report');
+  assert.equal(finance.hasUnknown, true);
+  // And the bar is drawn over what was measured, not over every listing, or
+  // the grey segment is padded by the companies nobody could read.
+  assert.ok(finance.bars.length <= 10);
   assert.ok(finance.read.length > 40);
   assert.equal(finance.medianPe, '10.4');
   assert.match(finance.standout, /^[A-Z]+ · \d+\/\d+$/);
@@ -1679,12 +1730,201 @@ test('the reader carries the trailing figure and its window off the document', a
   const { readFile } = await import('node:fs/promises');
   const raw = JSON.parse(await readFile(
     new URL('../../public/data/v1/companies.json', import.meta.url), 'utf8'));
+  // Shape, not census. A hard minimum here is the same brittleness that took
+  // the publish down when gold failed to resolve: a run whose checkout
+  // predates a builder writes a directory without its field, and a test that
+  // demands the field halts the publish over a race it cannot fix. The
+  // pipeline's own test owns coverage; this one owns "whatever is published
+  // is well formed".
   const withTtm = raw.companies.filter((c) => typeof c.pe_ttm === 'number');
-  assert.ok(withTtm.length > 50, `only ${withTtm.length} companies carry a trailing P/E`);
   for (const company of withTtm) {
     assert.ok(company.pe_ttm_window, `${company.ticker} publishes a ratio with no working`);
     assert.match(company.pe_ttm_window, /.+ \+ .+ - .+/, company.ticker);
     assert.ok(company.pe_ttm >= 1 && company.pe_ttm <= 200,
       `${company.ticker} publishes ${company.pe_ttm}`);
   }
+});
+
+/* ── the audit's remaining confirmed findings ──────────────────────────── */
+
+test('the header shows the session\'s volume, and says which is the average', () => {
+  // This tile printed the THIRTY-DAY MEAN directly beside the close and the
+  // session date, where it reads as that session's volume — COMI showed
+  // 3,192,564 against an actual 5,780,737 already mapped onto the row.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1,
+            volume: 5780737, profile: { avg_volume_30d: 3192564, free_float: 0.68401 } };
+  const stats = c.renderVals().co.stats;
+  const session = stats.find((s) => s.label === 'Volume');
+  assert.equal(session.value, '5,780,737');
+  assert.equal(session.note, 'in the session');
+  assert.equal(stats.find((s) => s.label === '30-day average').value, '3,192,564');
+});
+
+test('free float is a fact the document carries, not one the copy denies', () => {
+  // The ratios note told every reader on 258 pages that free float "is not
+  // published anywhere", while profile.free_float sat in the document the
+  // page had already loaded for its market cap.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1,
+            profile: { free_float: 0.68401, shares_outstanding: 3405140000 } };
+  const facts = c.renderVals().co.briefFacts;
+  assert.equal(facts.find((f) => f.label === 'Free float').value, '68.4%');
+  // A company whose document does not carry one gets no row rather than a dash.
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, profile: {} };
+  assert.equal(c.renderVals().co.briefFacts.some((f) => f.label === 'Free float'), false);
+});
+
+test('Home\'s list is derived and says what it is, not a watchlist nobody chose', () => {
+  // Five tickers the design named, padded from the largest companies, headed
+  // "Watchlist" — every signed-in reader saw the identical list, none of them
+  // had chosen it, and there was no control to change it.
+  const v = screen({ ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, cap: 300 },
+    { ticker: 'BBBB', name: { en: 'B', ar: 'ب' }, sector: 'Finance', close: 10, pct: 1, cap: 900 },
+    { ticker: 'CCCC', name: { en: 'C', ar: 'ج' }, sector: 'Finance', close: 10, pct: 1, cap: 600 },
+  ] });
+  assert.deepEqual(v.watchlist.map((w) => w.ticker), ['BBBB', 'CCCC', 'AAAA']);
+  assert.equal(v.L.watchlist, 'Largest by market value');
+  const printed = JSON.stringify(v, (k, x) => (typeof x === 'function' ? undefined : x));
+  for (const design of ['COMI', 'KORA', 'ETEL', 'TMGH', 'AMOC']) {
+    assert.ok(!printed.includes(`"${design}"`), `the design's ${design} is still named`);
+  }
+});
+
+test('a commodity is priced in dollars and an index in points', () => {
+  const world = [{ label: 'Oil', kind: 'commodity', level: 83.4, change_percent: -0.16 },
+                 { label: 'S&P 500', kind: 'index', level: 7711.76, change_percent: 0.1 }];
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, rates: world.map((x) => ({
+    label: x.label, unit: x.kind === 'commodity' ? 'USD' : 'points', value: String(x.level), pct: '' })) });
+  const by = Object.fromEntries(c.renderVals().ratesArrowed.map((r) => [r.label, r]));
+  assert.equal(by.Oil.unit, 'USD', 'oil printed as a bare number on a page of pounds');
+  assert.equal(by['S&P 500'].unit, 'points');
+});
+
+test('the borrowings panel is absent where the filing states no prior column', () => {
+  // 49 of the 120 companies with a borrowings block drew the heading
+  // "Movement since —", a 27px "—", a sentence "—" and an empty basis line.
+  const c = new Component({ accent: 'var(--accent)' });
+  const block = { period: 'H1 2026', as_of: '2026-06-30', borrowings: 100, short_term: 60,
+                  long_term: 40, cash: 10, net_debt: 90 };
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  // The block travels on the company document, which is where main.js puts it.
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance',
+            close: 10, pct: 1, profile: {}, debt: block };
+  assert.equal(c.renderVals().debt.hasChange, false);
+  assert.equal(c.renderVals().debt.directionLine, '');
+
+  c._co = { ...c._co, debt: { ...block,
+    change: { since: '2025-12-31', delta: 21496, direction: 'up', borrowings: 62509.2 } } };
+  const withChange = c.renderVals().debt;
+  assert.equal(withChange.hasChange, true);
+  // The date is printed once, by the heading, and read as a date.
+  assert.equal(withChange.since, '31 December 2025');
+  assert.equal(withChange.directionLine, 'Higher than they were, at 62,509.2.');
+  assert.ok(!withChange.directionLine.includes('2025-12-31'), 'the sentence repeats the heading');
+});
+
+test('an unstated figure on the statements table recedes', () => {
+  // `f.revenue === null` never fired because the field is ABSENT, not null,
+  // on roughly 97% of those cells — so every em dash was drawn at full
+  // strength and a table that is mostly unstated read as four equal columns.
+  const v = screen({ ...LIVE, fins: [
+    { period: 'FY 2025', period_end: '2025-12-31', net_income: 10 },
+    { period: 'FY 2024', period_end: '2024-12-31', revenue: 624, net_income: 8 },
+  ] });
+  assert.equal(v.fins[0].revenue, '—');
+  assert.ok(v.fins[0].revColor.includes('faint'), 'an absent figure is drawn at full strength');
+  assert.ok(v.fins[1].revColor.includes('ink'));
+});
+
+test('the median company is not described as below itself', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  const cards = c.ratioCards({ sector: 'Finance', metrics: [
+    { key: 'pe', value: 10.41, unit: 'ratio', peer_median: 10.41, peer: 'below', points: 1, series: [] },
+    { key: 'pb', value: 2.0, unit: 'ratio', peer_median: 3.0, peer: 'below', points: 1, series: [] },
+  ] }, c.copy(), false);
+  assert.equal(cards.find((x) => x.key === 'pe').peer, 'level with its sector');
+  assert.equal(cards.find((x) => x.key === 'pb').peer, 'below its sector');
+});
+
+test('the sort caret points the way the column is actually sorted', () => {
+  // The string branch multiplies by -1 so text reads A-Z on the first click
+  // while numbers put the largest first; the caret was read off `dir` alone,
+  // so the three text columns pointed the wrong way and the four numeric ones
+  // pointed the right way.
+  const set = { ...LIVE, companies: [
+    { ticker: 'ZZZZ', name: { en: 'Z', ar: 'ز' }, sector: 'Finance', close: 1, pct: 1, cap: 100 },
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 9, pct: 1, cap: 900 },
+  ] };
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(set);
+  c.state.sort = 'ticker'; c.state.dir = -1;
+  let v = c.renderVals();
+  assert.equal(v.rows[0].ticker, 'AAAA', 'text sorts A-Z on the first click');
+  assert.equal(v.cols[0].caret, ' ↑', 'A-Z is ascending and must point up');
+  c.state.sort = 'cap';
+  v = c.renderVals();
+  assert.equal(v.rows[0].ticker, 'AAAA', 'numbers put the largest first');
+  assert.equal(v.cols[5].caret, ' ↓', 'largest-first is descending and must point down');
+});
+
+test('a results-due expectation reaches the screen, labelled as an estimate', () => {
+  // 200 companies publish one and no screen showed it: streaks and firsts are
+  // usually empty and `quiet` is null for almost every ticker, so the block
+  // rendered one card or none.
+  const c = new Component({ accent: 'var(--accent)' });
+  const cards = c.signalCards({ streaks: [], firsts: [], quiet: null, resultsDue: [
+    { label: '9M', expected: '2026-11-14', window_start: '2026-10-19',
+      window_end: '2026-11-16', observations: 12 },
+  ] }, c.copy(), false);
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].kind, 'Results due');
+  assert.match(cards[0].title, /9M filing is expected in November/);
+  assert.match(cards[0].because, /12 past filings.*19 Oct.*16 Nov/);
+  assert.match(cards[0].stamp, /estimate/);
+});
+
+test('the unclassified bucket gets a word rather than an em dash', () => {
+  const set = { ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Unclassified',
+      sectorAr: 'غير مصنّف', close: 10, pct: 1, cap: 100 },
+  ] };
+  assert.equal(screen(set).rows[0].sector, 'Unclassified');
+  assert.equal(screen(set, 'ar').rows[0].sector, 'غير مصنّف');
+  assert.ok(!screen(set).sectorChips.some((s) => s.label === '—'),
+    'a chip whose whole label is an em dash reads as a rendering fault');
+});
+
+test('the search box filters as you type and keeps the caret', async () => {
+  // The design writes React's `onChange`, which fires per keystroke. Bound to
+  // the DOM event of the same name it fires on blur or Enter instead, so the
+  // Market screen's primary control did nothing at all while a reader typed —
+  // and when it did commit, the full rebuild destroyed the input and took the
+  // caret with it, so refining a search meant clicking back in every time.
+  //
+  // Driven in a real browser this reads 282 → 207 → 132 → 34 → 1 rows across
+  // "c", "co", "com", "comi" with focus and selection intact. The DOM stub
+  // here cannot mount, so this holds the two mechanisms in place instead.
+  const { readFile } = await import('node:fs/promises');
+  const dc = await readFile(new URL('../../public/esthmr/dc.js', import.meta.url), 'utf8');
+  assert.match(dc, /addEventListener\('input', handler\)/,
+    'onChange is not bound to the event React means by it');
+  assert.match(dc, /addEventListener\('change', handler\)/,
+    'a select or checkbox has only the change event');
+  assert.match(dc, /selectionStart/,
+    'the caret position is not recorded across the rebuild');
+  assert.match(dc, /setSelectionRange/,
+    'the caret is not restored after the rebuild');
+  // And the click path must not have picked up the input listener.
+  assert.ok(!/addEventListener\('input', handler\)[\s\S]{0,80}cursor = 'pointer'/.test(dc));
 });

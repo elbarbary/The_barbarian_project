@@ -121,9 +121,20 @@ function renderNode(node, scope, into) {
     if (lower === 'onclick' || lower === 'onchange') {
       const handler = interpolate(attr.value, scope);
       if (typeof handler === 'function') {
-        el.addEventListener(lower === 'onchange' ? 'change' : 'click', handler);
-        // Something that responds to a click should look like it does.
-        if (lower === 'onclick') el.style.cursor = 'pointer';
+        if (lower === 'onclick') {
+          el.addEventListener('click', handler);
+          // Something that responds to a click should look like it does.
+          el.style.cursor = 'pointer';
+        } else {
+          // The design writes React's `onChange`, which fires per keystroke.
+          // Bound to the DOM event of the same name it fires on blur or Enter
+          // instead — so the Market screen's search box, its primary control,
+          // did nothing at all while a reader typed into it. `input` is the
+          // event React's onChange actually means; `change` stays bound for
+          // the controls that only have one (a select, a checkbox).
+          el.addEventListener('input', handler);
+          el.addEventListener('change', handler);
+        }
       }
       continue;
     }
@@ -147,10 +158,32 @@ export function mount(templateHtml, root, component) {
     // Set per draw rather than per call: the component may change language
     // between one render and the next.
     TEXT = typeof component.text === 'function' ? (v) => component.text(v) : null;
+
+    // Rendering is a full rebuild, so the focused element is destroyed and
+    // recreated on every keystroke — which took the caret out of the search
+    // box the moment it did anything, and made refining a search a matter of
+    // clicking back in each time. Remember where the caret was and put it
+    // back. Matched on the field's own name rather than on identity, because
+    // the element that comes back is a different one.
+    const had = document.activeElement;
+    const focused = had && (had.tagName === 'INPUT' || had.tagName === 'TEXTAREA')
+      && root.contains(had)
+      ? { at: [...root.querySelectorAll('input,textarea')].indexOf(had),
+          start: had.selectionStart, end: had.selectionEnd }
+      : null;
+
     const scope = component.scope();
     const next = document.createDocumentFragment();
     for (const child of source.childNodes) renderNode(child, scope, next);
     root.replaceChildren(next);
+
+    if (focused && focused.at >= 0) {
+      const again = root.querySelectorAll('input,textarea')[focused.at];
+      if (again) {
+        again.focus();
+        try { again.setSelectionRange(focused.start, focused.end); } catch { /* not a text field */ }
+      }
+    }
   };
 
   component.onChange = () => {
