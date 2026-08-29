@@ -174,3 +174,8 @@ body[data-signed="no"] .account { display: none; }
    ticker chips, and the page must never scroll sideways with it. */
 .om-strip { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .om-strip::-webkit-scrollbar { display: none; }
+
+/* The period matrix needs a minimum width to stay legible; on a phone it
+   scrolls inside its own card rather than taking the page sideways — the same
+   rule as the market table. */
+.om-matrix { scrollbar-width: thin; }

@@ -52,6 +52,9 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      compareTitle:'The same line, period by period',
+      compareNote:'Only periods of the same length are put side by side. An H1 is six months and an FY is twelve, and the exchange files both cumulatively — lining them up in one row would compare half a year with a whole one.',
+      compareNothing:'No line is filed for more than one period of the same length yet.',
       moreFigures:'+{n} filed',
       fullStatements:'{n} of {total} periods carry a full statement. The rest are announcements, where the exchange stated a profit and nothing else.',
       pickDay:'Pick a day',
@@ -185,6 +188,9 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      compareTitle:'السطر نفسه، فترة بفترة',
+      compareNote:'لا تُقارَن إلا الفترات المتساوية في الطول. فالنصف الأول ستة أشهر والسنة اثنا عشر شهراً، والبورصة تودعهما تراكمياً — ووضعهما في صف واحد يقارن نصف عام بعام كامل.',
+      compareNothing:'لا يوجد سطر مُودع لأكثر من فترة واحدة من الطول نفسه بعد.',
       moreFigures:'+{n} مُودعة',
       fullStatements:'{n} من {total} فترة تحمل قائمة كاملة. والباقي إعلانات، ذكرت فيها البورصة ربحاً ولا شيء غيره.',
       pickDay:'اختر يوماً',
@@ -782,6 +788,103 @@ export class Component extends Base {
       go: () => this.setState({ pickSector: name }),
     }));
 
+    // ── the same line, period by period ────────────────────────────────
+    //
+    // The table above is one row per period and four columns; everything else
+    // a filing states is behind a plus, one period at a time. That is fine for
+    // reading a filing and useless for seeing what a number has been DOING,
+    // which is the question anybody looking at three years of statements
+    // actually has.
+    //
+    // Periods are only lined up with periods of the SAME LENGTH. The exchange
+    // files cumulatively — an H1 is six months, a 9M is nine, an FY is twelve
+    // — so putting them in one row would compare half a year with a whole one
+    // and draw a saw-tooth that means nothing. The type is chosen, and only
+    // that type is compared.
+    const LINES = [
+      ['revenue', ar ? 'الإيرادات' : 'Revenue'],
+      ['gross_profit', ar ? 'مجمل الربح' : 'Gross profit'],
+      ['operating_income', ar ? 'الربح التشغيلي' : 'Operating income'],
+      ['net_income', ar ? 'صافي الربح' : 'Net profit'],
+      ['assets', ar ? 'الأصول' : 'Assets'],
+      ['liabilities', ar ? 'الالتزامات' : 'Liabilities'],
+      ['equity', ar ? 'حقوق الملكية' : 'Equity'],
+      ['debt', ar ? 'إجمالي القروض' : 'Borrowings'],
+      ['short_term_debt', ar ? 'قصير الأجل' : 'Short-term borrowings'],
+      ['long_term_debt', ar ? 'طويل الأجل' : 'Long-term borrowings'],
+      ['cash', ar ? 'النقد' : 'Cash'],
+      ['finance_cost', ar ? 'تكلفة التمويل' : 'Finance cost'],
+      ['operating_cash_flow', ar ? 'التدفق التشغيلي' : 'Operating cash flow'],
+      ['investing_cash_flow', ar ? 'التدفق الاستثماري' : 'Investing cash flow'],
+      ['financing_cash_flow', ar ? 'التدفق التمويلي' : 'Financing cash flow'],
+      ['net_change_in_cash', ar ? 'صافي التغير في النقد' : 'Net change in cash'],
+      ['dividends_paid', ar ? 'توزيعات مدفوعة' : 'Dividends paid'],
+    ];
+    const typeOf = (label) => {
+      const m = /^(FY|H1|H2|9M|Q1|Q2|Q3|Q4)\b/.exec(String(label || ''));
+      return m ? m[1] : '';
+    };
+    // Sorting on period_end alone put "Q1 2014" between 2024 and 2025: many
+    // rows carry no period_end at all, sorted as an empty string, and landed
+    // in a clump at the front. The label always carries the year and the type
+    // always implies the month it ends in, so a missing date is recoverable
+    // rather than fatal.
+    const ENDS = { FY: '12-31', H1: '06-30', H2: '12-31', '9M': '09-30',
+                   Q1: '03-31', Q2: '06-30', Q3: '09-30', Q4: '12-31' };
+    const periodKey = (f) => {
+      if (f.period_end) return String(f.period_end);
+      const year = (/(\d{4})/.exec(String(f.period || '')) || [])[1];
+      const t = typeOf(f.period);
+      return year && ENDS[t] ? `${year}-${ENDS[t]}` : '';
+    };
+    const rowsByType = new Map();
+    for (const f of D.fins) {
+      const t = typeOf(f.period);
+      if (!t) continue;
+      if (!rowsByType.has(t)) rowsByType.set(t, []);
+      rowsByType.get(t).push(f);
+    }
+    // Only a type with more than one period is worth comparing at all.
+    const compareTypes = [...rowsByType.entries()]
+      .filter(([, rows]) => rows.length > 1)
+      .map(([t, rows]) => ({ t, n: rows.length,
+        newest: rows.reduce((a, b) => (periodKey(a) > periodKey(b) ? a : b)) }))
+      .sort((a, b) => periodKey(b.newest).localeCompare(periodKey(a.newest)));
+    const compareType = st.compareType && rowsByType.has(st.compareType)
+      ? st.compareType : (compareTypes[0] && compareTypes[0].t) || '';
+    const comparePeriods = (rowsByType.get(compareType) || [])
+      .slice()
+      .sort((a, b) => periodKey(a).localeCompare(periodKey(b)))
+      .slice(-8);                       // oldest to newest, the last eight                       // oldest to newest, the last eight
+    const compareRows = LINES.map(([key, label]) => {
+      const cells = comparePeriods.map((f) => f[key]);
+      if (!cells.some((v) => typeof v === 'number')) return null;
+      const nums = cells.filter((v) => typeof v === 'number');
+      const hi = Math.max(0, ...nums), lo = Math.min(0, ...nums), span = (hi - lo) || 1;
+      return {
+        label,
+        cells: cells.map((v, i) => ({
+          period: comparePeriods[i].period,
+          v: typeof v === 'number' ? this.num(v, 1) : '\u2014',
+          has: typeof v === 'number',
+          // a bar per period, from a real zero, so a negative cash flow reads
+          // as one rather than as a small positive
+          top: (((hi - Math.max(v || 0, 0)) / span) * 100).toFixed(2) + '%',
+          height: Math.max(1.5, (Math.abs(v || 0) / span) * 100).toFixed(2) + '%',
+          fill: (v || 0) < 0 ? 'var(--rule)' : 'var(--accent)',
+          color: (typeof v === 'number' && v < 0) ? 'var(--down)' : 'var(--ink)',
+        })),
+      };
+    }).filter(Boolean);
+    const compareChips = compareTypes.map(({ t, n }) => ({
+      name: t, count: n,
+      on: t === compareType,
+      bg: t === compareType ? 'var(--surface)' : 'transparent',
+      fg: t === compareType ? 'var(--ink)' : 'var(--t2)',
+      sh: t === compareType ? 'var(--shPill)' : 'none',
+      go: () => this.setState({ compareType: t }),
+    }));
+
     const dense = (this.props.density || 'editorial') === 'dense';
     const fins = D.fins.map((f,i) => {
       const open = dense || !!st.open[f.period];
@@ -1202,6 +1305,9 @@ export class Component extends Base {
         ? L.fullStatements.replace('{n}', fins.filter((f) => f.hasMore).length)
             .replace('{total}', fins.length)
         : '',
+      compareRows, compareChips, comparePeriods: comparePeriods.map((f) => f.period),
+      hasCompare: compareRows.length > 0 && comparePeriods.length > 1,
+      noCompare: D.fins.length > 0 && compareRows.length === 0,
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies
     };
     // A demo must not put an invented event beside a real company's name.

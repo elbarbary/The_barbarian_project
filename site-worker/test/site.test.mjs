@@ -975,3 +975,42 @@ test('a period with filed figures behind it says so on the row', async () => {
   assert.match(v.finsCoverage, /\d+ of \d+ periods carry a full statement\./);
   assert.equal(screen(LIVE).finsCoverage, '');
 });
+
+test('a line is compared only against periods of the same length', async () => {
+  // The exchange files cumulatively: an H1 is six months, a 9M is nine, an FY
+  // is twelve. Putting them in one row compares half a year with a whole one
+  // and draws a saw-tooth that means nothing.
+  const { readFile } = await import('node:fs/promises');
+  const co = JSON.parse(await readFile(
+    new URL('../../public/data/v1/companies/COMI.json', import.meta.url), 'utf8'));
+  const fins = [...(co.financials.quarterly || []), ...(co.financials.annual || [])];
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, fins });
+  c.state.screen = 'company';
+  const v = c.renderVals();
+  assert.equal(v.hasCompare, true);
+  assert.ok(v.compareRows.length > 4, `${v.compareRows.length} lines`);
+  // every column in the view is the same period type
+  const types = new Set(v.comparePeriods.map((p) => p.split(' ')[0]));
+  assert.equal(types.size, 1, `mixed period lengths: ${[...types]}`);
+  // and the columns run oldest to newest. Sorting on period_end alone put
+  // "Q1 2014" between 2024 and 2025, because many rows carry no period_end at
+  // all and sorted as an empty string.
+  const years = v.comparePeriods.map((p) => Number(p.match(/(\d{4})/)[1]));
+  assert.deepEqual(years, years.slice().sort((a, b) => a - b), v.comparePeriods.join(' '));
+  // switching type switches the whole view, and never mixes
+  c.state.compareType = 'FY';
+  const fy = c.renderVals();
+  assert.equal(new Set(fy.comparePeriods.map((p) => p.split(' ')[0])).size, 1);
+  assert.match(fy.comparePeriods[0], /^FY /);
+});
+
+test('a company with one period of each length has nothing to compare', () => {
+  const fins = [{ period: 'FY 2025', period_end: '2025-12-31', net_income: 5 },
+                { period: 'H1 2026', period_end: '2026-06-30', net_income: 3 }];
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, fins });
+  c.state.screen = 'company';
+  const v = c.renderVals();
+  assert.equal(v.hasCompare, false, 'one period of a length is not a comparison');
+});
