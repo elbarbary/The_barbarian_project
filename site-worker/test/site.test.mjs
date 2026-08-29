@@ -1382,3 +1382,197 @@ test('the demo cites no filing it does not have', () => {
   live.setData({ ...LIVE, fins: [{ period: 'FY 2024', period_end: '2024-12-31', net_income: 1 }] });
   assert.equal(live.renderVals().fins[0].source, 'https://www.egx.com.eg');
 });
+
+/* ── what ties these together ──────────────────────────────────────────── */
+
+const CROSS = {
+  days: 4, threshold: 2, axis: ['2026-08-24', '2026-08-25', '2026-08-26', '2026-08-27'],
+  items: [{
+    ticker: 'AAAA', name: 'A', nameAr: 'أ', sector: 'Finance', sectorAr: 'التمويل والخدمات المالية',
+    kinds: ['filing', 'news', 'session'],
+    why: 'AAAA filed, was written about and traded outside its own normal.',
+    whyAr: 'أودعت وكُتب عنها وتداولت خارج المعتاد.',
+    insight: 'This one filed two in the window.', insightAr: 'أودعت إفصاحين.',
+    pct: 4.74, ratio: 7.26, peers: ['BBBB', 'CCCC'], sameSector: 1,
+    strands: [
+      { kind: 'filing', date: '2026-08-25', title: 'An insider dealing form', titleAr: 'إخطار', link: 'https://www.egx.com.eg/x' },
+      { kind: 'news', date: '2026-08-26', title: 'A story', titleAr: 'خبر', link: 'https://example.test/s' },
+      { kind: 'session', date: '2026-08-27', title: '', titleAr: '', ratio: 7.26, link: '' },
+    ],
+  }],
+};
+
+test('a crossing carries the company, the reason, the window and every thread', () => {
+  const v = screen({ ...LIVE, crossings: CROSS });
+  assert.equal(v.crossings.length, 1);
+  const x = v.crossings[0];
+  assert.equal(x.ticker, 'AAAA');
+  assert.equal(x.why, CROSS.items[0].why);
+  assert.equal(x.insight, CROSS.items[0].insight);
+  assert.equal(x.hasInsight, true);
+  assert.equal(x.pct, '+4.74%');
+  assert.equal(x.threads, '3 threads');
+  assert.ok(x.peers.includes('2') && x.peers.includes('1'));
+  // The window is the document's, one cell a day, and a day nothing landed on
+  // keeps its place — the gap is what makes the cluster mean anything.
+  assert.equal(x.cells.length, 4);
+  assert.deepEqual(x.cells.map((d) => d.dots.length), [0, 1, 1, 1]);
+  assert.equal(x.cells[0].quiet, true);
+  // Every thread is a link back to the document it came from.
+  assert.deepEqual(x.strands.map((s) => s.label), ['Filing', 'In the press', 'That session']);
+  assert.equal(x.strands[0].href, 'https://www.egx.com.eg/x');
+  // A session is a number, not a headline it does not have.
+  assert.equal(x.strands[2].title, '7.26× normal volume');
+});
+
+test('the volume figure is printed only where the session is one of the threads', () => {
+  // Every crossing carries a ratio. Printing 1.09× beside a company whose
+  // crossing was a filing and a headline contradicts the number the rest of
+  // the site teaches: 2× is the line.
+  const on = screen({ ...LIVE, crossings: CROSS }).crossings[0];
+  assert.equal(on.volume, '7.26× normal volume');
+  const off = screen({ ...LIVE, crossings: { ...CROSS, items: [
+    { ...CROSS.items[0], kinds: ['filing', 'news'], ratio: 1.09 },
+  ] } }).crossings[0];
+  assert.equal(off.hasVolume, false);
+  assert.equal(off.volume, '');
+});
+
+test('a crossing about a company the directory does not hold opens nothing', () => {
+  const known = screen({ ...LIVE, crossings: CROSS }).crossings[0];
+  assert.equal(typeof known.go, 'function');
+  assert.equal(known.arrow, '↗');
+  const stranger = screen({ ...LIVE, crossings: { ...CROSS, items: [
+    { ...CROSS.items[0], ticker: 'ZZZZ' },
+  ] } }).crossings[0];
+  assert.equal(stranger.go, null);
+  assert.equal(stranger.arrow, '');
+});
+
+test('an Arabic reader gets the pipeline\'s Arabic sentences', () => {
+  const v = screen({ ...LIVE, crossings: CROSS }, 'ar').crossings[0];
+  assert.equal(v.why, CROSS.items[0].whyAr);
+  assert.equal(v.insight, CROSS.items[0].insightAr);
+  assert.equal(v.name, 'أ');
+  assert.equal(v.strands[0].title, 'إخطار');
+  assert.equal(v.sector, 'التمويل والخدمات المالية');
+});
+
+test('the block is absent, not empty, when the document is', () => {
+  const v = screen(LIVE);
+  assert.deepEqual(v.crossings, []);
+  assert.equal(v.noCrossings, true);
+  assert.equal(v.crossBody, '');
+});
+
+test('§8 nothing a crossing renders tells a reader what to do', () => {
+  const v = screen({ ...LIVE, crossings: CROSS });
+  const printed = JSON.stringify({ c: v.crossings, b: v.crossBody, w: v.crossWorkings,
+    y: v.L.dotsYardstick, s: v.L.dotsShare });
+  assert.ok(!DIRECTIVE.test(printed), '§8: a crossing renders directive language');
+});
+
+test('the document reader keeps every thread and drops nothing', async () => {
+  // Against the published document rather than a fixture: this is the one
+  // block whose whole claim is that the strands are real.
+  const { readFile } = await import('node:fs/promises');
+  const raw = JSON.parse(await readFile(
+    new URL('../../public/data/v1/connections.json', import.meta.url), 'utf8'));
+  const seen = [];
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => raw });
+  const doc = await data.connections();
+  delete globalThis.fetch;
+  assert.equal(doc.items.length, raw.items.length);
+  assert.equal(doc.days, raw.window_days);
+  // The window ends on the newest strand any crossing carries, so a document
+  // read on a later day is not drawn as if nothing had happened since.
+  const newest = raw.items.flatMap((i) => i.strands.map((s) => s.date)).sort().pop();
+  assert.equal(doc.axis[doc.axis.length - 1], newest);
+  assert.equal(doc.axis.length, raw.window_days);
+  raw.items.forEach((row, i) => {
+    assert.equal(doc.items[i].strands.length, row.strands.length,
+      `${row.ticker} lost a thread`);
+    assert.equal(doc.items[i].why, row.why);
+  });
+  // change_percent is a fraction on this document like everywhere else.
+  const moved = raw.items.find((i) => typeof i.change_percent === 'number');
+  if (moved) {
+    const got = doc.items.find((i) => i.ticker === moved.ticker);
+    assert.ok(Math.abs(got.pct - moved.change_percent * 100) < 1e-9,
+      'the day\'s move is a hundred times too small');
+  }
+  assert.ok(seen.length === 0);
+});
+
+test('Arabic bidi marks reach the reader and never the stylesheet', async () => {
+  // A figure set in an Arabic sentence needs a bidi isolate around it or the
+  // sign, the digits and the unit come apart. That isolation used to be
+  // applied to the whole of renderVals, which cannot tell a figure a reader
+  // looks at from one the browser parses — so `width:43%` became
+  // `width:\u2066\u200643%\u2069` (invalid CSS), every proportional bar on the
+  // site drew itself full width, and on the Arabic screens a 0.13% move and a
+  // 4% move were the same bar. Nine of them on the home screen alone.
+  const MARK = /[\u2066-\u2069]/;
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+
+  // Every expression the template binds INTO a style attribute.
+  const styled = new Set();
+  for (const m of tpl.matchAll(/style="([^"]*)"/g)) {
+    for (const b of m[1].matchAll(/\{\{([^}]+)\}\}/g)) styled.add(b[1].trim());
+  }
+  assert.ok(styled.size > 30, 'the scanner found no style bindings');
+
+  const loops = new Map();
+  for (const m of tpl.matchAll(/<sc-for\s+list="\{\{\s*([^}]+?)\s*\}\}"\s+as="(\w+)"/g)) {
+    loops.set(m[2], m[1]);
+  }
+
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = 'ar';
+  c.setData(data.demo());
+  const offenders = [];
+  const walk = (value, seen) => {
+    if (typeof value === 'string') return MARK.test(value);
+    if (!value || typeof value !== 'object' || seen.has(value)) return false;
+    seen.add(value);
+    return Object.values(value).some((v) => walk(v, seen));
+  };
+  for (const s of ['home', 'today', 'market', 'company', 'sectors', 'calendar', 'exchange']) {
+    c.state.screen = s;
+    const v = c.renderVals();
+    for (const expr of styled) {
+      const root = expr.split(/[.[( ]/)[0];
+      const rest = expr.slice(root.length + 1).split(/[.[( ]/)[0];
+      // A loop member is checked against every row the list holds.
+      const rows = loops.has(root)
+        ? (loops.get(root).split('.').reduce((o, k) => (o == null ? o : o[k.trim()]), v) || [])
+        : null;
+      const values = rows
+        ? (Array.isArray(rows) ? rows.map((r) => (r && typeof r === 'object' ? r[rest] : null)) : [])
+        : [expr.split('.').reduce((o, k) => (o == null ? o : o[k.trim()]), v)];
+      for (const got of values) {
+        if (typeof got === 'string' && MARK.test(got)) {
+          offenders.push(`${s}: style="...{{ ${expr} }}..." is ${JSON.stringify(got)}`);
+        }
+      }
+    }
+  }
+  assert.deepEqual([...new Set(offenders)], [],
+    'these values are bound into a style attribute and carry a bidi mark');
+
+  // The isolation itself is intact: it is now applied per text node, by dc.js,
+  // through this hook and nowhere else.
+  assert.equal(c.text('43%'), '\u206643%\u2069');
+  assert.equal(c.text('var(--accent)'), 'var(--accent)');
+  assert.equal(c.text(null), null);
+  const en = new Component({ accent: 'var(--accent)' });
+  assert.equal(en.text('43%'), '43%');
+
+  // And dc.js applies it to text nodes only — the attribute branch takes the
+  // raw value, which is the whole point.
+  const dc = await readFile(new URL('../../public/esthmr/dc.js', import.meta.url), 'utf8');
+  assert.match(dc, /TEXT_NODE[\s\S]{0,400}interpolate\(text, scope, TEXT\)/);
+  assert.ok(!/interpolate\(attr\.value, scope, TEXT\)/.test(dc),
+    'dc.js runs the text hook over attribute values');
+});
