@@ -170,6 +170,61 @@ export function demo() {
     demo: true, companies, series, fins, indices, readNow,
     marketDate: '2026-08-26', generatedAt: '2026-08-27 11:48 UTC', dataVersion: 'demo',
     isClose: true, capturedAt: '2026-08-27T11:48:00Z',
+    // Two crossings, so the block has a shape before anyone signs in: one
+    // company in three feeds at once and one in two, drawn on the same four
+    // days. Built from the demo directory, and every thread points nowhere on
+    // purpose — an invented filing with a link to the exchange would be a
+    // citation to a document that is not there.
+    crossings: {
+      days: 4, threshold: 2, updatedAt: '2026-08-27T11:48:00Z',
+      axis: ['2026-08-24', '2026-08-25', '2026-08-26', '2026-08-27'],
+      items: [
+        {
+          ticker: companies[0].ticker, name: companies[0].name.en, nameAr: companies[0].name.ar,
+          sector: companies[0].sector, sectorAr: companies[0].sectorAr,
+          kinds: ['filing', 'news', 'session'],
+          why: `${companies[0].ticker} filed with the exchange, was written about in the press and traded outside its own normal, within four days.`,
+          whyAr: `${companies[0].ticker} أودعت إفصاحًا لدى البورصة وكُتب عنها في الصحافة وتداولت خارج المعتاد، خلال أربعة أيام.`,
+          insight: 'This one filed two in the window.',
+          insightAr: 'وقد أودعت هذه الشركة إفصاحين في هذه الفترة.',
+          eventLabel: '', eventLabelAr: '',
+          pct: companies[0].pct, ratio: companies[0].rv,
+          peers: [companies[1].ticker, companies[4].ticker], sameSector: 1,
+          strands: [
+            { kind: 'filing', id: 'demo-000293', date: '2026-08-24', link: '',
+              title: `${companies[0].name.en} announces its results for the period ended 30 June 2026`,
+              titleAr: `${companies[0].name.ar} تعلن نتائج أعمالها عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦` },
+            { kind: 'filing', id: 'demo-000291', date: '2026-08-24', link: '',
+              title: `${companies[0].name.en} — board of directors' resolutions`,
+              titleAr: `${companies[0].name.ar} — قرارات مجلس إدارة الشركة` },
+            { kind: 'news', id: 'demo-wire-1', date: '2026-08-26', link: '',
+              title: `${companies[0].name.en} widens its loss at the end of March 2026`,
+              titleAr: `${companies[0].name.ar} تفاقم خسائرها بنهاية مارس ٢٠٢٦` },
+            { kind: 'session', id: 'demo-session-1', date: '2026-08-27', link: '',
+              ratio: companies[0].rv, title: '', titleAr: '' },
+          ],
+        },
+        {
+          ticker: companies[10].ticker, name: companies[10].name.en, nameAr: companies[10].name.ar,
+          sector: companies[10].sector, sectorAr: companies[10].sectorAr,
+          kinds: ['filing', 'news'],
+          why: `${companies[10].ticker} filed with the exchange and was written about in the press, within four days.`,
+          whyAr: `${companies[10].ticker} أودعت إفصاحًا لدى البورصة وكُتب عنها في الصحافة، خلال أربعة أيام.`,
+          insight: '', insightAr: '',
+          eventLabel: 'board decisions', eventLabelAr: 'قرارات مجلس الإدارة',
+          pct: companies[10].pct, ratio: companies[10].rv,
+          peers: [], sameSector: 0,
+          strands: [
+            { kind: 'filing', id: 'demo-000288', date: '2026-08-25', link: '',
+              title: `${companies[10].name.en} — board of directors' resolutions`,
+              titleAr: `${companies[10].name.ar} — قرارات مجلس إدارة الشركة` },
+            { kind: 'news', id: 'demo-wire-2', date: '2026-08-27', link: '',
+              title: `${companies[10].name.en} approves a capital increase`,
+              titleAr: `${companies[10].name.ar} توافق على زيادة رأس المال` },
+          ],
+        },
+      ],
+    },
   };
 }
 
@@ -795,6 +850,69 @@ function firstSentence(text) {
   if (!t) return '';
   const stop = t.indexOf('. ');
   return stop === -1 ? t : t.slice(0, stop + 1);
+}
+
+/** Where one company turned up in more than one feed in the same few days.
+ *
+ * The app's own block (connect_dots.dart) and the same document. Nothing here
+ * is a claim: every strand is a link back to the filing, the story or the
+ * session it came from, and the sentences are written at build time from fixed
+ * templates that `build_connections_api.py` refuses if they ever read as an
+ * instruction.
+ *
+ * The site adds one thing the app does not have room for: the strands are
+ * plotted on the window they happened in. A crossing is a statement ABOUT
+ * TIME — a filing and a story and a session inside four days — and on a wide
+ * screen that is a shape rather than three dates to hold in your head.
+ */
+export async function connections() {
+  const d = await doc('connections.json');
+  const items = d.items || [];
+  if (!items.length) return null;
+  const days = d.window_days || 4;
+
+  // The window every crossing is plotted against: the newest strand date any
+  // of them carries, back `days`. Taken off the strands rather than off the
+  // clock, so a document published on Friday is not drawn as three days old
+  // because a reader opened the page on Monday.
+  const dates = items.flatMap((i) => (i.strands || []).map((s) => s.date)).filter(Boolean).sort();
+  const last = dates[dates.length - 1] || '';
+  const axis = [];
+  if (last) {
+    const end = new Date(last + 'T00:00:00Z').getTime();
+    for (let k = days - 1; k >= 0; k--) {
+      axis.push(new Date(end - k * 86400000).toISOString().slice(0, 10));
+    }
+  }
+
+  return {
+    days, threshold: d.threshold ?? 2, axis, updatedAt: d.updated_at || null,
+    items: items.map((i) => ({
+      ticker: i.ticker,
+      name: i.name || '', nameAr: i.name_ar || i.name || '',
+      // Carried on the item rather than looked up off the directory: a
+      // crossing names a sector, and the company it names may not be one of
+      // the loaded rows.
+      sector: i.sector || '', sectorAr: SECTOR_AR[i.sector] || i.sector || '',
+      kinds: i.kinds || [],
+      // The pipeline's own sentence, in the reader's language.
+      why: i.why || '', whyAr: i.why_ar || i.why || '',
+      // Absent where there is nothing countable to say. A card that always
+      // has a second sentence teaches a reader to skip it.
+      insight: i.insight || '', insightAr: i.insight_ar || i.insight || '',
+      eventLabel: i.event_label || '', eventLabelAr: i.event_label_ar || i.event_label || '',
+      // A fraction on this document, like everywhere else the exchange's move
+      // is published.
+      pct: typeof i.change_percent === 'number' ? i.change_percent * 100 : null,
+      ratio: typeof i.ratio === 'number' ? i.ratio : null,
+      peers: i.peers || [], sameSector: i.same_sector || 0,
+      strands: (i.strands || []).map((s) => ({
+        kind: s.kind, id: s.id || '', date: s.date || '',
+        title: s.title || '', titleAr: s.title_ar || s.title || '',
+        link: s.link || '', ratio: typeof s.ratio === 'number' ? s.ratio : null,
+      })),
+    })),
+  };
 }
 
 /** The per-company blocks the company screen shows under its statements. */

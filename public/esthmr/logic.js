@@ -166,6 +166,22 @@ export class Component extends Base {
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Watchlist',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
+      // ── what ties these together ──
+      // The app's wording, kept word for word: the same block, on the same
+      // document, should not read as two different features.
+      dotsLabel:'What ties these together',
+      dotsBody:'Companies that turned up in more than one place in {days} days.',
+      dotsFiling:'Filing', dotsNews:'In the press', dotsSession:'That session',
+      dotsVolume:'{ratio}\u00d7 normal volume',
+      dotsShare:'What they share',
+      dotsWindow:'The {days} days, and where each thread falls in them',
+      dotsThreads:'{n} threads', dotsOneThread:'1 thread',
+      dotsPeers:'{n} other companies crossed in the same window, {same} of them in this sector',
+      dotsPeersNone:'No other company crossed in this window',
+      dotsHow:'How this is built',
+      dotsWorkings:'Three feeds are read for the same {days} days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new \u2014 every thread links back to the document it came from.',
+      dotsYardstick:'Two threads is common. Three \u2014 a filing, a story and a session outside its own normal \u2014 happens to a handful of companies a week. A crossing is a question, not an answer: it says a company was busy in more than one way, and nothing about whether that was good.',
+      dotsOpen:'Open the company',
       marketTitle:'The market', searchPlaceholder:'Search {n} companies — English or Arabic',
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
@@ -306,6 +322,20 @@ export class Component extends Base {
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'قائمة المتابعة',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
+      // ── ما الذي يربط بينها ──
+      dotsLabel:'ما الذي يربط بينها',
+      dotsBody:'شركات ظهرت في أكثر من مكان خلال {days} أيام.',
+      dotsFiling:'إفصاح', dotsNews:'في الصحافة', dotsSession:'تلك الجلسة',
+      dotsVolume:'{ratio}\u00d7 الحجم المعتاد',
+      dotsShare:'ما يجمع بينها',
+      dotsWindow:'الأيام {days}، وموضع كل خيط فيها',
+      dotsThreads:'{n} خيوط', dotsOneThread:'خيط واحد',
+      dotsPeers:'تقاطعت {n} شركة أخرى في الفترة نفسها، منها {same} في هذا القطاع',
+      dotsPeersNone:'لم تتقاطع أي شركة أخرى في هذه الفترة',
+      dotsHow:'كيف بُني هذا',
+      dotsWorkings:'نقرأ ثلاثة مصادر عن {days} من الأيام نفسها: ما أفصحت عنه البورصة، وما كتبته الصحافة، وما فعله السهم. وتُدرج الشركة هنا إذا ظهرت في اثنين منها على الأقل. لا شيء في البطاقة جديد \u2014 كل خيط يعود إلى المستند الذي جاء منه.',
+      dotsYardstick:'خيطان أمر معتاد. أما ثلاثة \u2014 إفصاح وخبر وتداول خارج المعتاد \u2014 فيحدث لعدد قليل من الشركات في الأسبوع. التقاطع سؤال وليس حكمًا: يقول إن الشركة كانت نشطة بأكثر من طريقة، ولا يقول إن ذلك جيد.',
+      dotsOpen:'افتح صفحة الشركة',
       marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
@@ -884,6 +914,109 @@ export class Component extends Base {
       go: () => this.setState({ pickSector: name }),
     }));
 
+
+    // ── what ties these together ─────────────────────────────────────────
+    //
+    // The app's block, on the same document, plus the one thing a wide screen
+    // can show that a phone cannot: WHEN. A crossing is a claim about time —
+    // a filing, a story and a session inside four days — and the app can only
+    // print three dates and leave the reader to hold them. Here the window is
+    // drawn, and each thread sits on the day it happened, so the shape of the
+    // crossing is visible before a word of it is read.
+    //
+    // Nothing on a card is this site's own claim. Every thread is a link back
+    // to the document it came from, and both sentences are the pipeline's,
+    // written from fixed templates (build_connections_api.py).
+    const STRAND = {
+      filing: [L.dotsFiling, 'var(--accent)', 'var(--accTint)',
+        'M6 3.4h7.4l4.2 4.2v13H6zM13.4 3.4v4.2h4.2M8.6 12h6.8M8.6 15.4h6.8'],
+      news: [L.dotsNews, 'var(--iris)', 'var(--irisTint)',
+        'M4.4 5.6h13v13H5.6a1.2 1.2 0 0 1-1.2-1.2zM17.4 8.4h2.2v8.8a1.2 1.2 0 0 1-2.2.7M7 8.8h7.4M7 12h7.4M7 15.2h4.6'],
+      session: [L.dotsSession, 'var(--ink)', 'var(--sunk)',
+        'M4.2 18.4 9 12.2l3.6 3 5.4-7.6M14.4 7.6h3.6v3.6'],
+    };
+    const crossings = (() => {
+      const src = D.crossings;
+      const rows = (src && src.items) || [];
+      if (!rows.length) return [];
+      const axis = (src.axis || []);
+      const days = src.days || 4;
+      return rows.map((item) => {
+        const known = D.companies.some((c) => c.ticker === item.ticker);
+        const strands = (item.strands || []).map((st, n) => {
+          const [label, color, tint, icon] = STRAND[st.kind] || STRAND.filing;
+          return {
+            // A session is a number rather than a document, so it says the
+            // number instead of a headline it does not have.
+            title: st.kind === 'session'
+              ? L.dotsVolume.replace('{ratio}', (st.ratio || item.ratio || 0).toFixed(2))
+              : (ar ? st.titleAr : st.title),
+            label, color, tint, icon,
+            day: this.dayLabel(st.date), date: st.date,
+            href: st.link || '', hasLink: Boolean(st.link),
+            first: n === 0, last: n === (item.strands || []).length - 1,
+            // The gutter draws a line up to a dot and on to the next; the
+            // first has nothing above it and the last nothing below.
+            stub: n === 0 ? 'transparent' : 'var(--thread)',
+            tail: n === (item.strands || []).length - 1 ? 'transparent' : 'var(--thread)',
+            pad: n === (item.strands || []).length - 1 ? '0' : '13px',
+          };
+        });
+        // The window, one cell a day, with a dot for every thread that landed
+        // on it. A day nothing happened on is drawn empty rather than dropped:
+        // the gap is what makes the cluster mean anything.
+        const cells = axis.map((iso) => {
+          const on = strands.filter((x) => x.date === iso);
+          return {
+            label: this.dayLabel(iso), iso,
+            dots: on.map((x) => ({ color: x.color })),
+            has: on.length > 0, quiet: on.length === 0,
+            dayColor: on.length ? 'var(--t2)' : 'var(--faint)',
+          };
+        });
+        const count = strands.length;
+        return {
+          ticker: item.ticker,
+          mono: item.ticker,
+          // EGX tickers run to four letters and occasionally six. The app
+          // shrinks to fit (BTickerMonogram); a fixed size here clipped the
+          // ends off the longer ones inside their own tile.
+          monoSize: item.ticker.length <= 4 ? '12px'
+            : item.ticker.length === 5 ? '10.5px' : '9px',
+          name: ar ? item.nameAr : item.name,
+          sector: (ar && item.sectorAr) || item.sector || '—',
+          why: ar ? item.whyAr : item.why,
+          insight: ar ? item.insightAr : item.insight,
+          hasInsight: Boolean(ar ? item.insightAr : item.insight),
+          pct: item.pct === null ? '' : this.pct(item.pct),
+          hasPct: item.pct !== null,
+          color: this.dcol(item.pct),
+          // Only where the session is one of the threads. Every crossing
+          // carries a ratio, and printing 1.09× beside a company whose
+          // crossing was a filing and a headline contradicts the number the
+          // rest of the site teaches: 2× is the line.
+          volume: (item.kinds || []).includes('session') && item.ratio !== null
+            ? L.dotsVolume.replace('{ratio}', item.ratio.toFixed(2)) : '',
+          hasVolume: (item.kinds || []).includes('session') && item.ratio !== null,
+          threads: count === 1 ? L.dotsOneThread : L.dotsThreads.replace('{n}', count),
+          peers: (item.peers || []).length
+            ? L.dotsPeers.replace('{n}', item.peers.length).replace('{same}', item.sameSector)
+            : L.dotsPeersNone,
+          cells, strands,
+          // A crossing about a company the directory does not hold opens
+          // nothing, rather than an empty screen.
+          go: known ? () => this.setState({ screen: 'company', ticker: item.ticker }) : null,
+          arrow: known ? '\u2197' : '',
+        };
+      });
+    })();
+    const crossWindow = D.crossings
+      ? L.dotsWindow.replace('{days}', String(D.crossings.days || 4)) : '';
+    const crossBody = D.crossings
+      ? L.dotsBody.replace('{days}', String(D.crossings.days || 4)) : '';
+    const crossWorkings = D.crossings
+      ? L.dotsWorkings.replace('{days}', String(D.crossings.days || 4)) : '';
+
     // ── the same line, period by period ────────────────────────────────
     //
     // The table above is one row per period and four columns; everything else
@@ -1435,7 +1568,12 @@ export class Component extends Base {
       compareRows, compareChips, comparePeriods: comparePeriods.map((f) => f.period),
       hasCompare: compareRows.length > 0 && comparePeriods.length > 1,
       noCompare: D.fins.length > 0 && compareRows.length === 0,
-      fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies
+      fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies,
+      crossings, crossWindow, crossBody, crossWorkings,
+      noCrossings: crossings.length === 0,
+      crossOpen: Boolean(st.crossOpen),
+      crossToggle: () => this.setState((x) => ({ crossOpen: !x.crossOpen })),
+      crossCaret: st.crossOpen ? '\u2212' : '+'
     };
     // A demo must not put an invented event beside a real company's name.
     //
@@ -1447,8 +1585,24 @@ export class Component extends Base {
     // fake market before a signed-out reader sees them; this is the same move.
     // Any screen still carrying design copy is therefore safe by construction
     // rather than by remembering to edit it.
-    const out2 = D.demo ? this.demoise(out, D.companies) : out;
-    return ar ? this.isolate(out2) : out2;
+    // The Arabic bidi isolation used to be applied to this whole object, which
+    // cannot tell a figure a reader looks at from one the browser parses — so
+    // the wrapping characters landed in `style` too and every proportional bar
+    // on the site drew itself full width in Arabic. It is now applied by dc.js
+    // to text nodes only, through `text()` below.
+    return D.demo ? this.demoise(out, D.companies) : out;
+  }
+
+  /** One string, on its way into a text node. dc.js calls this; nothing else.
+   *
+   * A figure set in an Arabic sentence needs a bidi isolate around it or the
+   * sign, the digits and the unit come apart — "‎-3.13%" reads as "%3.13-".
+   * Anything that is not a plain string, and anything not shaped like a
+   * figure, is returned untouched.
+   */
+  text(value) {
+    if (typeof value !== 'string' || this.state.lang !== 'ar') return value;
+    return this.isolate(value);
   }
 
   /** Swap every real issuer the design named for one from the demo set. */

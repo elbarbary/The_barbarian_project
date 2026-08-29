@@ -163,6 +163,12 @@ body[data-signed="no"] .account { display: none; }
   .om-table { overflow-x: auto !important; }
   .om-table > div { min-width: 620px; }
 
+  /* One crossing at a time. `auto-fill` with a 370px floor already gives one
+     column at 375, but the min is a floor on the TRACK, not on the card, so
+     at 360 the card overflows its own grid by ten pixels and the page scrolls
+     sideways — which is the one thing the phone layer is here to prevent. */
+  .om-dots-grid { grid-template-columns: minmax(0, 1fr) !important; }
+
   .om-scr h1 { font-size: 32px !important; }
   .om-scr h2 { font-size: 23px !important; }
 

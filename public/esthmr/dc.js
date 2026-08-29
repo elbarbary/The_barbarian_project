@@ -47,14 +47,32 @@ const BINDING = /\{\{([\s\S]*?)\}\}/g;
  * The capture must not be allowed to run past the first `}}`, or a string of
  * two bindings — `{{ L.closeOf }} {{ marketDate }}` — looks like one binding
  * whose body happens to contain braces, and compiles to nothing. */
-function interpolate(text, scope) {
+function interpolate(text, scope, wrap) {
   const whole = text.match(/^\s*\{\{((?:(?!\}\})[\s\S])*)\}\}\s*$/);
-  if (whole) return evaluate(whole[1], scope);
+  if (whole) {
+    const value = evaluate(whole[1], scope);
+    return wrap ? wrap(value) : value;
+  }
   return text.replace(BINDING, (_, expr) => {
     const value = evaluate(expr, scope);
-    return value === null || value === undefined ? '' : String(value);
+    if (value === null || value === undefined) return '';
+    return String(wrap ? wrap(value) : value);
   });
 }
+
+/** Whatever the component wants done to a string BEFORE it becomes text.
+ *
+ * There is exactly one of these and it is Arabic bidi isolation. It used to be
+ * applied to the whole of `renderVals` instead, which cannot tell a figure a
+ * reader looks at from one the browser parses: the wrapping characters landed
+ * inside `style` too, so every proportional bar on the site — a mover's
+ * magnitude, a breadth cell, a ratio bar, a compare bar — was handed
+ * `width:⁦64%⁩`, rejected it, and drew itself full width. On the Arabic
+ * screens a 0.13% move and a 4% move were the same bar.
+ *
+ * Here it can tell: this runs on text nodes and nothing else.
+ */
+let TEXT = null;
 
 function renderNode(node, scope, into) {
   if (node.nodeType === Node.TEXT_NODE) {
@@ -63,7 +81,7 @@ function renderNode(node, scope, into) {
       into.appendChild(document.createTextNode(text));
       return;
     }
-    const value = interpolate(text, scope);
+    const value = interpolate(text, scope, TEXT);
     // A binding may resolve to a real node — the design's charts are built as
     // element trees, not strings — so it is appended rather than stringified.
     into.appendChild(value instanceof Node
@@ -126,6 +144,9 @@ export function mount(templateHtml, root, component) {
   let queued = false;
   const draw = () => {
     queued = false;
+    // Set per draw rather than per call: the component may change language
+    // between one render and the next.
+    TEXT = typeof component.text === 'function' ? (v) => component.text(v) : null;
     const scope = component.scope();
     const next = document.createDocumentFragment();
     for (const child of source.childNodes) renderNode(child, scope, next);

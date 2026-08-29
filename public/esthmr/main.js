@@ -18,7 +18,7 @@ async function load(email) {
     component.setData(base);
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, prov, cal, ex, secs, att, months, meanings] = await Promise.all([
+    const [feed, prov, cal, ex, secs, att, months, meanings, cross] = await Promise.all([
       data.news().catch(() => null),
       data.newsProvenance().catch(() => null),
       data.calendar().catch(() => null),
@@ -27,6 +27,7 @@ async function load(email) {
       data.attention().catch(() => null),
       data.filedMonths().catch(() => null),
       data.disclosureMeanings().catch(() => null),
+      data.connections().catch(() => null),
     ]);
     component.setData({
       ...base,
@@ -46,6 +47,7 @@ async function load(email) {
       breadth: att ? att.breadth : undefined,
       filedMonths: months || undefined,
       disclosureMeanings: meanings || undefined,
+      crossings: cross || undefined,
     });
   } catch (error) {
     // A session that expired mid-visit drops back to the demo rather than an
