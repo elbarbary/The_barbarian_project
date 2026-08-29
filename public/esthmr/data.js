@@ -37,6 +37,12 @@ export function demo() {
         pct: Math.round((rand() * 8 - 4) * 100) / 100,
         cap: Math.round(close * (2000 + rand() * 90000)),
         pe: Math.round((3 + rand() * 14) * 10) / 10,
+        // The demo has to demonstrate the block, not just leave room for it:
+        // without a relative volume the "traded with abnormal volume" card
+        // rendered its heading over nothing, on the first screen a visitor
+        // sees. A few of the sixteen clear the 2x line, which is about the
+        // proportion a real session throws up.
+        rv: Math.round((0.4 + rand() * 4.2) * 10) / 10,
         demo: true,
       };
     }));

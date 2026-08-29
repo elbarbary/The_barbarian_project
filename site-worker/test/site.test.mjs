@@ -1042,3 +1042,53 @@ test('an SVG keeps the attributes that are camelCase in SVG', async () => {
   const el = (found || chart);
   assert.equal(el.getAttribute && el.getAttribute('viewBox'), '0 0 1000 260');
 });
+
+test('no block renders its heading over nothing', () => {
+  // The busiest block was ungated: with nothing measurable it drew "TRADED
+  // WITH ABNORMAL VOLUME" over an empty card — on the first screen a visitor
+  // sees, because the demo carried no relative volume at all.
+  const bare = screen({ ...LIVE, companies: [] });
+  assert.equal(bare.showBusy, false, 'an unmeasurable market must show no block');
+  // measured and quiet is different from unmeasurable, and says so
+  const quiet = screen({ ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'S', close: 1, pct: 0, rv: 1 }] });
+  assert.equal(quiet.showBusy, true);
+  assert.equal(quiet.noBusy, true);
+  // and the demo demonstrates the feature rather than leaving room for it
+  const demo = screen(data.demo());
+  assert.ok(demo.busy.length > 0, 'the demo shows an empty abnormal-volume card');
+  assert.equal(demo.showBusy, true);
+});
+
+test('every binding in the template resolves to something', async () => {
+  // dc.js renders an unresolved binding as an empty string and logs nothing,
+  // so a renamed key is invisible until somebody notices a blank card.
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const loops = new Set([...tpl.matchAll(/<sc-for\s+list="\{\{\s*[^}]+?\s*\}\}"\s+as="(\w+)"/g)]
+    .map((m) => m[1]));
+
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  const provided = new Set();
+  const labels = new Set();
+  for (const s of ['home', 'today', 'market', 'company', 'sectors', 'calendar', 'exchange', 'research']) {
+    c.state.screen = s;
+    const v = c.renderVals();
+    Object.keys(v).forEach((k) => provided.add(k));
+    Object.keys(v.L).forEach((k) => labels.add(k));
+  }
+
+  const unresolved = [];
+  for (const raw of new Set([...tpl.matchAll(/\{\{([^}]+)\}\}/g)].map((m) => m[1].trim()))) {
+    const root = raw.split(/[.[( ]/)[0];
+    if (loops.has(root) || ['true', 'false', 'null'].includes(root)) continue;
+    if (root === 'L') {
+      const name = raw.includes('.') ? raw.split('.')[1].split('(')[0].trim() : '';
+      if (name && !labels.has(name)) unresolved.push(`L.${name}`);
+      continue;
+    }
+    if (!provided.has(root)) unresolved.push(raw);
+  }
+  assert.deepEqual(unresolved, [], 'these bindings render as an empty string');
+});

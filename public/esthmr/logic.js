@@ -1266,6 +1266,7 @@ export class Component extends Base {
       moreFeed: feed.length < allFeed.length,
       showMoreFeed: () => this.setState({ feedShown: feed.length + 40 }),
       busy, hasBusy: busy.length > 0, noBusy: busyMeasured > 0 && busy.length === 0,
+      showBusy: busy.length > 0 || busyMeasured > 0,
       busyNote: busy.length ? L.busyWorkings + ' ' + L.busyYardstick : '',
       hasBreadth: Boolean(D.breadth),
       breadthBars: D.breadth ? [
