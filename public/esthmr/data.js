@@ -166,7 +166,15 @@ export async function live() {
       // by a thousand and suffixed "B" — "474267676.1B", which is not a
       // quantity anybody can read.
       cap: c.market_cap ?? null,
-      pe: c.pe ?? null,
+      // companies.json has no `pe` field at all, so `c.pe` was undefined for
+      // every company on the exchange and the column was a dash 282 times.
+      // What it does publish is the last filed EPS and the period it belongs
+      // to; against today's close that is a multiple anybody can check.
+      // Negative earnings have no multiple — a company losing money is not
+      // "cheap", it is loss-making — so it stays blank.
+      pe: (typeof q.close === 'number' && typeof c.eps === 'number' && c.eps > 0)
+        ? q.close / c.eps : null,
+      epsPeriodForPe: c.eps_period || '',
       eps: c.eps ?? null, epsPeriod: c.eps_period || '',
       volume: q.volume ?? null,
       // How busy the session was against this company's OWN normal. The median

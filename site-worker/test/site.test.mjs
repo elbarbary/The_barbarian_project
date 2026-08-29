@@ -1014,3 +1014,31 @@ test('a company with one period of each length has nothing to compare', () => {
   const v = c.renderVals();
   assert.equal(v.hasCompare, false, 'one period of a length is not a comparison');
 });
+
+test('an SVG keeps the attributes that are camelCase in SVG', async () => {
+  // setAttribute(kebab(name)) turned `viewBox` into `view-box`, which is not an
+  // attribute at all — so every chart and sparkline was drawn with NO viewBox.
+  // Their coordinates are 0–1000, and without a viewBox those are CSS pixels
+  // rather than a space to scale from. On a desktop column about a thousand
+  // pixels wide that looked right by coincidence; on a phone the price chart
+  // drew 1000px inside a 347px card and ran off the side.
+  const { default: React } = await import('../../public/esthmr/react-shim.js');
+  const svg = React.createElement('svg', {
+    viewBox: '0 0 1000 260', preserveAspectRatio: 'none',
+    strokeWidth: 1.5, vectorEffect: 'non-scaling-stroke',
+  });
+  assert.equal(svg.getAttribute('viewBox'), '0 0 1000 260');
+  assert.equal(svg.getAttribute('preserveAspectRatio'), 'none');
+  assert.equal(svg.getAttribute('view-box'), null, 'the hyphenated form is not an attribute');
+  // presentation attributes ARE hyphenated, and must stay that way
+  assert.equal(svg.getAttribute('stroke-width'), '1.5');
+  assert.equal(svg.getAttribute('vector-effect'), 'non-scaling-stroke');
+
+  // and the charts the site actually draws carry one
+  const { Component } = await import('../../public/esthmr/logic.js');
+  const c = new Component({ accent: 'var(--accent)' });
+  const chart = c.buildChart([{ date: '2026-01-01', close: 1 }, { date: '2026-01-02', close: 2 }]);
+  const found = chart.querySelector ? chart.querySelector('svg') : null;
+  const el = (found || chart);
+  assert.equal(el.getAttribute && el.getAttribute('viewBox'), '0 0 1000 260');
+});

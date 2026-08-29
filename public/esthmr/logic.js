@@ -52,6 +52,7 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      peNote:'P/E is the last close divided by the last earnings per share the company filed. A company with no profit to divide by has none.',
       compareTitle:'The same line, period by period',
       compareNote:'Only periods of the same length are put side by side. An H1 is six months and an FY is twelve, and the exchange files both cumulatively — lining them up in one row would compare half a year with a whole one.',
       compareNothing:'No line is filed for more than one period of the same length yet.',
@@ -133,7 +134,7 @@ export class Component extends Base {
       revYieldAsk:'Is the dividend supported by profit and cash — or by a share price that fell?',
       feedCount:'{shown} of {total} headlines, newest first.',
       showMore:'Show more',
-      busiest:'Busiest against their own normal',
+      busiest:'Traded with abnormal volume',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
@@ -188,6 +189,7 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      peNote:'مكرر الربحية هو آخر إغلاق مقسوماً على آخر ربحية سهم أودعتها الشركة. والشركة التي لا ربح لها لا مكرر لها.',
       compareTitle:'السطر نفسه، فترة بفترة',
       compareNote:'لا تُقارَن إلا الفترات المتساوية في الطول. فالنصف الأول ستة أشهر والسنة اثنا عشر شهراً، والبورصة تودعهما تراكمياً — ووضعهما في صف واحد يقارن نصف عام بعام كامل.',
       compareNothing:'لا يوجد سطر مُودع لأكثر من فترة واحدة من الطول نفسه بعد.',
@@ -269,7 +271,7 @@ export class Component extends Base {
       revYieldAsk:'هل التوزيع مدعوم بالربح والنقد — أم بسعر سهم هبط؟',
       feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.',
       showMore:'عرض المزيد',
-      busiest:'الأنشط مقارنة بمعتادها',
+      busiest:'تداول بحجم غير معتاد',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
       nothingUnusual:'لا شيء غير معتاد اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
@@ -612,6 +614,7 @@ export class Component extends Base {
       .slice(0, 9)
       .map((c) => Object.assign({}, mkRow(c), {
         kicker: L.volumeKicker.replace('{ratio}', c.rv.toFixed(1)),
+        rv: c.rv.toFixed(1) + '\u00d7',
       }));
     // 230 of the 282 listed carry both numbers; the rest cannot be measured
     // this way and are not silently counted as quiet.
@@ -740,7 +743,14 @@ export class Component extends Base {
           { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w) },
           { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m) },
           { label: ar?'الحجم':'Volume', value: whole(p.avg_volume_30d), color:'var(--ink)' },
-          { label:'P/E', value: loaded.pe === null || loaded.pe === undefined ? '—' : this.num(loaded.pe, 1), color:'var(--ink)' },
+          { label:'P/E',
+            value: (() => {
+              const fromReview = D.review && (D.review.metrics || [])
+                .find((m) => m.key === 'pe' && typeof m.value === 'number');
+              if (fromReview) return this.num(fromReview.value, 1);
+              return typeof loaded.pe === 'number' ? this.num(loaded.pe, 1) : '\u2014';
+            })(),
+            color:'var(--ink)' },
           { label: ar?'ربحية السهم':'EPS',
             value: typeof loaded.eps === 'number' ? this.num(loaded.eps, 2) : '\u2014',
             color: typeof loaded.eps === 'number' ? 'var(--ink)' : 'var(--faint)' },

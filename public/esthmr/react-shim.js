@@ -10,8 +10,29 @@ const SVG = 'http://www.w3.org/2000/svg';
 const SVG_TAGS = new Set(['svg', 'path', 'line', 'g', 'defs', 'linearGradient',
   'stop', 'circle', 'rect', 'text', 'polyline', 'polygon', 'ellipse', 'clipPath']);
 
-// SVG attributes are hyphenated; the design writes them the way JSX does.
+// Most SVG attributes are hyphenated; the design writes them the way JSX does.
 const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+
+/* …but not all of them, and the exceptions are the ones that matter.
+ *
+ * `viewBox` is camelCase in SVG and case-sensitive. Hyphenated to `view-box` it
+ * is simply not an attribute, so every chart and sparkline on this site was
+ * drawn with NO viewBox: the coordinates inside them are 0–1000, and without a
+ * viewBox those are CSS pixels rather than a coordinate space to scale from.
+ * On a desktop column that is about a thousand pixels wide it looked correct
+ * by coincidence; on a phone the price chart drew a thousand pixels wide
+ * inside a 347px card and ran off the side.
+ *
+ * `preserveAspectRatio` and the gradient attributes have the same problem and
+ * were failing silently in the same way.
+ */
+const CAMEL = new Set(['viewBox', 'preserveAspectRatio', 'gradientUnits',
+  'gradientTransform', 'patternUnits', 'patternTransform', 'clipPathUnits',
+  'spreadMethod', 'stdDeviation', 'pathLength', 'refX', 'refY',
+  'markerWidth', 'markerHeight', 'markerUnits', 'textLength', 'lengthAdjust',
+  'startOffset', 'baseFrequency', 'numOctaves']);
+
+const attrName = (name) => (CAMEL.has(name) ? name : kebab(name));
 
 function styleText(style) {
   return Object.entries(style)
@@ -38,7 +59,7 @@ export const React = {
       } else if (name === 'className') {
         el.setAttribute('class', String(value));
       } else {
-        el.setAttribute(kebab(name), String(value));
+        el.setAttribute(attrName(name), String(value));
       }
     }
     children.forEach((child) => append(el, child));

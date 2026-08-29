@@ -109,12 +109,13 @@
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.busiest }}</div>
             </div>
             <sc-for list="{{ busy }}" as="m" hint-placeholder-count="9">
-              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
+              <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(30px,1fr) minmax(44px,58px) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
                 <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
-                <div style="min-width:0">
-                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
-                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--accent);margin-top:3px">{{ m.kicker }}</div>
-                </div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+                <!-- The multiple gets a column. "Traded 17.5× its usual volume" under a
+                     company name wraps to two lines and pushes the row apart; the same
+                     fact beside the price needs only the space of a number. -->
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:var(--accent)">{{ m.rv }}</div>
                 <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
                 <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
                   <span>{{ m.pct }}</span><span style="font-size:12px">{{ m.arrow }}</span>
