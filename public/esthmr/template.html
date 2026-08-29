@@ -427,7 +427,11 @@
         <sc-for list="{{ ratioGroups }}" as="rg" hint-placeholder-count="4">
           <div>
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:0 8px 9px">{{ rg.title }}</div>
-            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+            <!-- auto-fill rather than a fixed two columns: at 1440 a two-up grid
+                 makes each tile 546px of mostly empty card, and at 375 a two-up
+                 grid makes them unreadable. The tile has a natural width; the
+                 grid fits as many as the column allows. -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px">
               <sc-for list="{{ rg.items }}" as="rt" hint-placeholder-count="4">
                 <div onClick="{{ rt.toggle }}" style="border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);padding:13px 14px;display:flex;flex-direction:column;gap:8px;min-width:0;cursor:pointer;transition:border-color .15s" style-hover="border-color:var(--rule)">
                   <!-- The face carries only what the app's tile carries: the name,
@@ -475,9 +479,29 @@
                       <sc-if value="{{ rt.hasProof }}">
                         <div>
                           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revProofTitle }}</div>
-                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:7px">
-                            <sc-for list="{{ rt.proof }}" as="pf" hint-placeholder-count="6">
-                              <span style="padding:3px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">{{ pf.p }} {{ pf.v }}</span>
+                          <!-- A bar per period, from a zero baseline. A row of chips is a list
+                               you read left to right; bars are a shape you take in at once,
+                               which is the point of showing eleven quarters rather than the
+                               latest one. A negative return sits BELOW the line rather than
+                               being flipped to look like a positive. -->
+                          <div style="display:flex;align-items:stretch;gap:3px;height:88px;margin-top:9px;position:relative">
+                            <sc-if value="{{ rt.hasZeroLine }}">
+                              <div style="position:absolute;inset-inline:0;top:{{ rt.zeroLine }};height:1px;background:var(--rule);z-index:1"></div>
+                            </sc-if>
+                            <sc-for list="{{ rt.bars }}" as="bx" hint-placeholder-count="8">
+                              <div title="{{ bx.p }} {{ bx.v }}" style="flex:1;min-width:0;position:relative">
+                                <div style="position:absolute;inset-inline:0;top:{{ bx.top }};height:{{ bx.height }};background:{{ bx.fill }};border-radius:3px;opacity:.85"></div>
+                              </div>
+                            </sc-for>
+                          </div>
+                          <div style="display:flex;gap:3px;margin-top:5px">
+                            <sc-for list="{{ rt.bars }}" as="bx" hint-placeholder-count="8">
+                              <div style="flex:1;min-width:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ bx.p }}</div>
+                            </sc-for>
+                          </div>
+                          <div style="display:flex;gap:3px;margin-top:2px">
+                            <sc-for list="{{ rt.bars }}" as="bx" hint-placeholder-count="8">
+                              <div style="flex:1;min-width:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ bx.v }}</div>
                             </sc-for>
                           </div>
                           <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:8px;text-wrap:pretty">{{ L.revProofNote }}</div>

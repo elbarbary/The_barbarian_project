@@ -386,6 +386,39 @@ export class Component extends Base {
         spark: this.sparkFlat(points),
         hasSpark: points.length > 1,
         proof: (m.series || []).map((x) => ({ p: x.p, v: fmt(x.v, m.unit) })),
+        // The same figures as a bar per period. A row of chips is a list you
+        // read left to right; bars are a shape you take in at once, which is
+        // the whole point of showing eleven quarters rather than the latest
+        // one. Drawn from a zero baseline so a negative return on equity sits
+        // BELOW the line rather than being flipped to look like a positive.
+        bars: (() => {
+          const vs = (m.series || []).map((x) => x.v).filter((v) => typeof v === 'number');
+          if (vs.length < 2) return [];
+          const hi = Math.max(0, ...vs), lo = Math.min(0, ...vs), span = (hi - lo) || 1;
+          const zero = ((hi - 0) / span) * 100;
+          return (m.series || []).map((x) => {
+            const v = typeof x.v === 'number' ? x.v : 0;
+            const top = ((hi - Math.max(v, 0)) / span) * 100;
+            return {
+              p: x.p, v: fmt(x.v, m.unit),
+              // percentages inside the plot box, so the markup needs no maths
+              top: top.toFixed(2) + '%',
+              height: Math.max(1.5, (Math.abs(v) / span) * 100).toFixed(2) + '%',
+              below: v < 0,
+              fill: v < 0 ? 'var(--rule)' : 'var(--accent)',
+            };
+          });
+        })(),
+        zeroLine: (() => {
+          const vs = (m.series || []).map((x) => x.v).filter((v) => typeof v === 'number');
+          if (vs.length < 2) return null;
+          const hi = Math.max(0, ...vs), lo = Math.min(0, ...vs), span = (hi - lo) || 1;
+          return lo < 0 ? (((hi - 0) / span) * 100).toFixed(2) + '%' : null;
+        })(),
+        hasZeroLine: (() => {
+          const vs = (m.series || []).map((x) => x.v).filter((v) => typeof v === 'number');
+          return vs.length > 1 && Math.min(...vs) < 0;
+        })(),
         hasProof: (m.series || []).length > 1,
         // What the ratio IS, and which way reads better — the two pieces of
         // teaching the app keeps one tap away rather than on the face.
