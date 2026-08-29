@@ -334,6 +334,33 @@
         </div>
       </div>
 
+      <!-- A rail of every listed company, so changing company does not mean going
+           back to the market table to find it. Grouped by sector: 282 tickers in
+           one strip is a haystack, and the sector already on screen is the one a
+           reader is most likely to want another of. Both strips scroll
+           horizontally and neither takes the page with it. -->
+      <sc-if value="{{ hasPickList }}">
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:16px 8px 14px;display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden">
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:12px">{{ L.pickCompany }}</div>
+        <div class="om-strip" style="display:flex;gap:4px;overflow-x:auto;padding:2px 10px 4px">
+          <sc-for list="{{ pickChips }}" as="pc" hint-placeholder-count="8">
+            <div onClick="{{ pc.go }}" style="flex:none;cursor:pointer;white-space:nowrap;padding:6px 12px;border-radius:11px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:{{ pc.fg }};background:{{ pc.bg }};box-shadow:{{ pc.sh }}">{{ pc.name }}</div>
+          </sc-for>
+        </div>
+        <div class="om-strip" style="display:flex;gap:8px;overflow-x:auto;padding:2px 10px 6px">
+          <sc-for list="{{ pickList }}" as="pk" hint-placeholder-count="12">
+            <div onClick="{{ pk.go }}" style="flex:none;cursor:pointer;min-width:118px;max-width:170px;padding:10px 13px;border-radius:14px;background:{{ pk.bg }};border:1px solid var(--edgeIn)">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:9px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:{{ pk.fg }}">{{ pk.ticker }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ pk.color }}">{{ pk.pct }}</span>
+              </div>
+              <div style="font-size:11.5px;color:var(--faint);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ pk.name }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      </sc-if>
+
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 18px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:9px">
@@ -661,6 +688,50 @@
           </sc-for>
         </div>
       </div>
+      <!-- The month as its days. A list of sixty rows says nothing about the
+           shape of a month; a grid shows at a glance that the exchange files
+           in bursts around results season and barely at all between. Empty
+           days are drawn too — a quiet day is a fact about the exchange, not
+           a gap in the data. -->
+      <sc-if value="{{ hasMonthDays }}">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 16px 16px">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.pickDay }}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:6px;margin-top:12px">
+            <sc-for list="{{ monthDays }}" as="dy" hint-placeholder-count="31">
+              <div onClick="{{ dy.go }}" style="cursor:pointer;border-radius:11px;background:{{ dy.bg }};opacity:{{ dy.weight }};border:1px solid var(--edgeIn);padding:8px 4px;text-align:center;transition:background .15s">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:{{ dy.fg }}">{{ dy.day }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:{{ dy.fg }};min-height:11px">{{ dy.count }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ hasDay }}">
+            <div style="margin-top:14px;padding-top:13px;border-top:1px solid var(--rule2)">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ dayNote }}</div>
+              <sc-for list="{{ dayFilings }}" as="df" hint-placeholder-count="6">
+                <div style="padding:13px 0;border-bottom:1px solid var(--rule2)">
+                  <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600">{{ df.ticker }}</span>
+                    <sc-if value="{{ df.hasKind }}">
+                      <span style="padding:2px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)">{{ df.kind }}</span>
+                    </sc-if>
+                  </div>
+                  <a href="{{ df.href }}" target="_blank" style="display:block;font-size:13.5px;color:var(--t2);line-height:1.5;margin-top:7px;text-wrap:pretty">{{ df.what }}</a>
+                  <!-- What this KIND of filing is, from the disclosure feed.
+                       About the instrument, never about this company's
+                       prospects. -->
+                  <sc-if value="{{ df.hasMeaning }}">
+                    <div style="margin-top:9px;padding:11px 13px;border-radius:13px;background:var(--sunk)">
+                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.whatItMeans }}</div>
+                      <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ df.meaning }}</div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
       <sc-if value="{{ archiveNote }}">
         <div style="padding:0 10px;color:var(--faint);font-size:11.5px">{{ archiveNote }}</div>
       </sc-if>

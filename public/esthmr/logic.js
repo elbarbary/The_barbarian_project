@@ -52,6 +52,12 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      pickDay:'Pick a day',
+      filedOnDay:'{n} filed on {date}',
+      nothingFiledThatDay:'Nothing was filed that day.',
+      whatItMeans:'What this kind of filing is',
+      pickCompany:'Jump to a company',
+      allSectors:'All',
       revLabel:'The numbers, and what to ask',
       revRising:'rising',
       revFalling:'falling',
@@ -74,6 +80,8 @@ export class Component extends Base {
       revNowFlat:'Right now it\'s holding steady',
       revOnePoint:'One published figure — not enough history to read a direction.',
       revReadLabel:'The read',
+      revCash:'Cash conversion',
+      revCashAsk:'Of every pound of reported profit, how much actually arrived as cash?',
       revPb:'Price to book',
       revPbAsk:'You are paying this much for each pound of company equity. Are those assets earning anything?',
       revPe:'Price to earnings',
@@ -149,6 +157,12 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      pickDay:'اختر يوماً',
+      filedOnDay:'{n} إفصاحاً في {date}',
+      nothingFiledThatDay:'لم يُنشر شيء في ذلك اليوم.',
+      whatItMeans:'ما هذا النوع من الإفصاح',
+      pickCompany:'انتقل إلى شركة',
+      allSectors:'الكل',
       revLabel:'الأرقام، وما ينبغي أن تسأله',
       revRising:'ترتفع',
       revFalling:'تنخفض',
@@ -171,6 +185,8 @@ export class Component extends Base {
       revNowFlat:'مستقرة الآن',
       revOnePoint:'رقم واحد منشور — لا يكفي من التاريخ لقراءة اتجاه.',
       revReadLabel:'القراءة',
+      revCash:'تحويل الربح إلى نقد',
+      revCashAsk:'من كل جنيه ربح معلن، كم وصل نقداً بالفعل؟',
       revPb:'السعر إلى القيمة الدفترية',
       revPbAsk:'أنت تدفع هذا مقابل كل جنيه من حقوق الملكية. فهل تُنتج هذه الأصول شيئاً؟',
       revPe:'مضاعف الربحية',
@@ -277,6 +293,7 @@ export class Component extends Base {
       eps: [L.revEps, L.revEpsAsk], assets: [L.revAssets, L.revAssetsAsk],
       roe: [L.revRoe, L.revRoeAsk], roa: [L.revRoa, L.revRoaAsk],
       debt_equity: [L.revDebt, L.revDebtAsk], dividend_yield: [L.revYield, L.revYieldAsk],
+      cash_conversion: [L.revCash, L.revCashAsk],
     };
     const fmt = (v, unit) => {
       if (typeof v !== 'number' || !isFinite(v)) return '\u2014';
@@ -612,12 +629,14 @@ export class Component extends Base {
           { label: ar?'وحدة الإفصاح':'Filing currency', value:'EGP' },
         ],
         stats: [
-          { label: ar?'القيمة السوقية':'Market cap', value: whole(p.market_cap), color:'var(--ink)' },
+          { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)' },
           { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w) },
           { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m) },
           { label: ar?'الحجم':'Volume', value: whole(p.avg_volume_30d), color:'var(--ink)' },
           { label:'P/E', value: loaded.pe === null || loaded.pe === undefined ? '—' : this.num(loaded.pe, 1), color:'var(--ink)' },
-          { label: ar?'ربحية السهم':'EPS', value:'—', color:'var(--faint)' },
+          { label: ar?'ربحية السهم':'EPS',
+            value: typeof loaded.eps === 'number' ? this.num(loaded.eps, 2) : '\u2014',
+            color: typeof loaded.eps === 'number' ? 'var(--ink)' : 'var(--faint)' },
         ],
         ticker: loaded.ticker,
         nameEn: loaded.name && loaded.name.en ? loaded.name.en : loaded.ticker,
@@ -631,6 +650,36 @@ export class Component extends Base {
         briefSource: loaded.briefSource || `companies/${loaded.ticker}.json`,
       });
     }
+
+    // A rail of every listed company, so changing company does not mean going
+    // back to the market table and finding it again. Grouped by sector because
+    // 282 tickers in one strip is a haystack, and the sector a reader is
+    // already looking at is the one they are most likely to want another of.
+    const pickSector = st.pickSector || (co.sector || 'All');
+    const pickSectors = [L.allSectors].concat(
+      Array.from(new Set(D.companies.map((c) => c.sector).filter(Boolean))).sort());
+    const pickList = D.companies
+      .filter((c) => pickSector === L.allSectors || pickSector === 'All' || c.sector === pickSector)
+      .slice()
+      .sort((a, b) => (b.cap || 0) - (a.cap || 0))
+      .map((c) => ({
+        ticker: c.ticker,
+        name: this.nm(c.name),
+        pct: c.pct === null || c.pct === undefined ? '' : this.pct(c.pct),
+        color: this.dcol(c.pct),
+        on: c.ticker === st.ticker,
+        bg: c.ticker === st.ticker ? 'var(--accTint)' : 'var(--sunk)',
+        fg: c.ticker === st.ticker ? 'var(--accent)' : 'var(--t2)',
+        go: () => this.setState({ screen: 'company', ticker: c.ticker }),
+      }));
+    const pickChips = pickSectors.map((name) => ({
+      name,
+      on: name === pickSector,
+      bg: name === pickSector ? 'var(--surface)' : 'transparent',
+      fg: name === pickSector ? 'var(--ink)' : 'var(--t2)',
+      sh: name === pickSector ? 'var(--shPill)' : 'none',
+      go: () => this.setState({ pickSector: name }),
+    }));
 
     const dense = (this.props.density || 'editorial') === 'dense';
     const fins = D.fins.map((f,i) => {
@@ -818,6 +867,52 @@ export class Component extends Base {
       : [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
     const months = monthDef.map(([id,label,count]) => ({ label, count: count || '', go: () => this.setState({ month:id }),
       color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
+    // A month as its days, the way the app draws it. A list of sixty rows says
+    // nothing about the shape of a month; a grid shows at a glance that the
+    // exchange files in bursts around results season and barely at all in
+    // between. Every day of the month is drawn, including the empty ones —
+    // a quiet Friday is a fact about the exchange, not a gap in the data.
+    const inMonth = (D.filedArchive && D.filedArchiveMonth === st.month) ? D.filedArchive : [];
+    const perDay = new Map();
+    for (const e of inMonth) perDay.set(e.date, (perDay.get(e.date) || 0) + 1);
+    const monthDays = [];
+    if (st.month) {
+      const [yy, mm] = st.month.split('-').map(Number);
+      const last = new Date(Date.UTC(yy, mm, 0)).getUTCDate();
+      const busiest = Math.max(1, ...perDay.values());
+      for (let day = 1; day <= last; day++) {
+        const iso = `${st.month}-${String(day).padStart(2, '0')}`;
+        const n = perDay.get(iso) || 0;
+        const on = st.day === iso;
+        monthDays.push({
+          day, iso, count: n || '',
+          // Weight rather than colour: a busy day is darker, and nothing on
+          // this grid is good or bad.
+          bg: on ? 'var(--accent)' : n ? 'var(--sunk)' : 'transparent',
+          fg: on ? 'var(--surface)' : n ? 'var(--ink)' : 'var(--faint)',
+          weight: on ? 1 : n ? (0.25 + 0.75 * (n / busiest)).toFixed(2) : 0.45,
+          go: () => this.setState({ day: st.day === iso ? '' : iso }),
+        });
+      }
+    }
+    const meanings = D.disclosureMeanings || null;
+    const dayFilings = !st.day ? [] : inMonth
+      .filter((e) => e.date === st.day)
+      .map((e) => {
+        const m = meanings && meanings.get ? meanings.get(e.id) : null;
+        return Object.assign({}, e, {
+          what: (m && m.titleEn && !ar) ? m.titleEn : (ar ? (e.whatAr || e.what) : e.what),
+          kind: m ? (ar ? m.labelAr : m.label) : (e.section || ''),
+          hasKind: Boolean(m || e.section),
+          // The plain-language line, where the disclosure feed carries one.
+          meaning: m ? (ar ? m.meaningAr : m.meaning) : '',
+          hasMeaning: Boolean(m && (ar ? m.meaningAr : m.meaning)),
+        });
+      });
+    const dayNote = !st.day ? '' : dayFilings.length
+      ? L.filedOnDay.replace('{n}', dayFilings.length).replace('{date}', this.longDate(st.day))
+      : L.nothingFiledThatDay;
+
     const archive = (D.filedArchive && D.filedArchiveMonth === st.month)
       ? say(D.filedArchive, ['what']).slice(0, 60).map((e) => Object.assign({}, e, {
           day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
@@ -923,6 +1018,8 @@ export class Component extends Base {
       // How much of the chosen month is on screen. 1,467 filings in August;
       // sixty of them fit a column, and saying which sixty is the difference
       // between a sample and a claim.
+      monthDays, hasMonthDays: monthDays.length > 0,
+      dayFilings, dayNote, hasDay: Boolean(st.day),
       archiveNote: (D.filedArchive && D.filedArchiveMonth === st.month)
         ? L.archiveNote.replace('{shown}', Math.min(60, D.filedArchive.length))
             .replace('{total}', D.filedArchive.length)
@@ -951,6 +1048,7 @@ export class Component extends Base {
       sectorsHaveDetail: sectorCards.some((c) => (c.medians || []).length),
       signalFootnote: signals.length ? L.sigFootnote : '',
       // The ratios, and the paragraph the pipeline writes over all of them.
+      pickList, pickChips, hasPickList: pickList.length > 0,
       ratios, hasRatios: ratios.length > 0,
       ratioRead: D.review ? (ar ? (D.review.read_ar || D.review.read) : D.review.read) || '' : '',
       // "Six of seven readable metrics moved the same way" — and then the

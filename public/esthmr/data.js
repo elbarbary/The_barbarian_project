@@ -167,6 +167,7 @@ export async function live() {
       // quantity anybody can read.
       cap: c.market_cap ?? null,
       pe: c.pe ?? null,
+      eps: c.eps ?? null, epsPeriod: c.eps_period || '',
       volume: q.volume ?? null,
       // How busy the session was against this company's OWN normal. The median
       // of the last twenty sessions, not the mean: a median is not dragged by
@@ -525,6 +526,26 @@ export async function filedMonth(month) {
     what: it.title_en || it.title, whatAr: it.title,
     section: it.section || '', id: it.id, href: it.link || null,
   }));
+}
+
+/** What each recent filing MEANS, keyed by its exchange id.
+ *
+ * The archive months carry a filing's title and nothing else. This document
+ * carries the plain-language line for the recent window — what a cash dividend
+ * does to a share price, what a capital increase is — and joining the two is
+ * what turns a list of Arabic titles into something readable. */
+export async function disclosureMeanings() {
+  const d = await doc('disclosures/latest.json');
+  const out = new Map();
+  for (const it of d.items || []) {
+    if (!it.id) continue;
+    out.set(it.id, {
+      label: it.event_label || '', labelAr: it.event_label_ar || it.event_label || '',
+      meaning: it.meaning || '', meaningAr: it.meaning_ar || it.meaning || '',
+      titleEn: it.title_en || '',
+    });
+  }
+  return out;
 }
 
 /** Exchange: index levels and the world prices beside them, plus macro. */

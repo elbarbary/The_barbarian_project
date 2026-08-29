@@ -164,3 +164,8 @@ body[data-signed="no"] .account { display: none; }
   .gate { padding: 10px 14px !important; font-size: 13px !important; }
   .account { inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px)) !important; }
 }
+
+/* A horizontal strip scrolls on its own; the scrollbar is noise on a rail of
+   ticker chips, and the page must never scroll sideways with it. */
+.om-strip { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.om-strip::-webkit-scrollbar { display: none; }
