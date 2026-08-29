@@ -1576,3 +1576,49 @@ test('Arabic bidi marks reach the reader and never the stylesheet', async () => 
   assert.ok(!/interpolate\(attr\.value, scope, TEXT\)/.test(dc),
     'dc.js runs the text hook over attribute values');
 });
+
+test('a company that filed nine times does not get a card twice the height', () => {
+  // One crossing in the published set carries nine threads and the rest carry
+  // two or three. Uncapped, its card was 714px against 377px for its
+  // neighbour, and the grid row it sat in took the tallest.
+  const many = { ...CROSS, items: [{ ...CROSS.items[0], strands: Array.from(
+    { length: 9 }, (_, i) => ({ kind: 'filing', date: '2026-08-26',
+      title: `Filing ${i + 1}`, titleAr: `إفصاح ${i + 1}`, link: `https://www.egx.com.eg/${i}` })) }] };
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, crossings: many });
+  let x = c.renderVals().crossings[0];
+  assert.equal(x.strands.length, 4, 'the thread list is not capped');
+  assert.equal(x.hasMore, true);
+  assert.equal(x.moreLabel, '5 more');
+  // The count still reports every thread — the cap is a display cap, and a
+  // card that says "4 threads" when nine were filed would be a wrong figure.
+  assert.equal(x.threads, '9 threads');
+  // The drawn line ends on the last row SHOWN, not the last row held.
+  assert.equal(x.strands[3].tail, 'transparent');
+
+  x.toggleMore();
+  x = c.renderVals().crossings[0];
+  assert.equal(x.strands.length, 9, 'expanding did not reveal the rest');
+  assert.equal(x.moreLabel, 'Show fewer');
+  assert.equal(x.strands[8].tail, 'transparent');
+  assert.equal(x.strands[3].tail, 'var(--thread, var(--rule))');
+
+  // A crossing under the cap is never asked to expand.
+  const few = new Component({ accent: 'var(--accent)' });
+  few.setData({ ...LIVE, crossings: CROSS });
+  assert.equal(few.renderVals().crossings[0].hasMore, false);
+});
+
+test('the colours on the axis are named once, for the whole section', () => {
+  // Eight axes of coloured dots say nothing until something names the
+  // colours, and a key on every card would cost more room than the axes take.
+  const v = screen({ ...LIVE, crossings: CROSS });
+  assert.deepEqual(v.crossLegend.map((g) => g.label), ['Filing', 'In the press', 'That session']);
+  // The legend and the dots have to agree, or the key is decoration.
+  const onAxis = v.crossings[0].cells.flatMap((d) => d.dots.map((p) => p.color));
+  for (const colour of onAxis) {
+    assert.ok(v.crossLegend.some((g) => g.color === colour),
+      `a dot is drawn in ${colour}, which the legend does not name`);
+  }
+  assert.deepEqual(screen(LIVE).crossLegend, []);
+});
