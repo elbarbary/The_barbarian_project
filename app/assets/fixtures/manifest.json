@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "data_version": "a4bc146b1bac504d",
-  "generated_at": "2026-08-29T08:43:24+00:00",
+  "data_version": "75a0724bf0b8d324",
+  "generated_at": "2026-08-29T08:53:55+00:00",
   "market_date": "2026-08-27",
   "versions": {
     "market": 62516338,
@@ -15,7 +15,7 @@
     "connections": 20117510,
     "calendar": 76591972,
     "signals": 71066997,
-    "review": 81025374,
-    "sectors": 86010348
+    "review": 13798000,
+    "sectors": 59748565
   }
 }

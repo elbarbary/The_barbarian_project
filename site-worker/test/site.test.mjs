@@ -306,6 +306,11 @@ test('§8 nothing the site can render tells a reader what to do', () => {
   // pattern, so a new sentence cannot smuggle itself in by quoting them.
   const denial = new Set(views.flatMap((v) => [
     v.L.legalNotLicensed, v.L.sigFootnote, v.L.newsWithheld,
+    // The app's own explanation of what price-to-book IS. It uses "bargain"
+    // to WITHHOLD the judgement — "only a bargain if the assets are
+    // productive" — which is teaching the word rather than applying it. The
+    // app's forbidden list governs verdict labels; this is not one.
+    v.L.revPbBody,
   ]));
   for (const view of views) {
     for (const line of strings(view)) {

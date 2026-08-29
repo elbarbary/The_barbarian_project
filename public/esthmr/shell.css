@@ -141,9 +141,15 @@ body[data-signed="no"] .account { display: none; }
   [style*="grid-template-columns:minmax(0,1fr) minmax(210px,288px)"],
   [style*="grid-template-columns:minmax(0,1fr) minmax(140px,208px)"],
   [style*="grid-template-columns:minmax(150px,240px) minmax(80px,130px) minmax(0,1fr)"],
-  [style*="grid-template-columns:minmax(116px,176px)"] {
+  [style*="grid-template-columns:minmax(116px,176px)"],
+  /* The company header: name beside a fixed-width close card. On a phone the
+     card wins and the name is squeezed to one word per line —
+     "Commercial / International / Bank - / Egypt / (CIB) / S.A.E." */
+  [style*="grid-template-columns:minmax(0,1fr) auto"] {
     grid-template-columns: minmax(0, 1fr) !important;
   }
+  /* Cards are roomy at desk width and wasteful at 375. */
+  .om-scr [style*="padding:28px 28px 22px"] { padding: 20px 18px 18px !important; }
 
   /* The news picture sits above its headline rather than beside it, and stops
      being a 4:3 slab of a small screen. */

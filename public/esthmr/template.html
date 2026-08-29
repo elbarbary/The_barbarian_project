@@ -405,45 +405,92 @@
            document's own reading is printed under "A probable answer" — never as
            a conclusion, and dropped entirely if it ever words itself as advice. -->
       <sc-if value="{{ hasRatios }}">
-      <section style="display:flex;flex-direction:column;gap:14px">
+      <section style="display:flex;flex-direction:column;gap:16px">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-inline:8px">
-          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.revLabel }}</h2>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.revLabel }}</div>
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ ratioAgreement }}</div>
         </div>
+      
         <sc-if value="{{ ratioRead }}">
           <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.revReadLabel }}</div>
-            <div style="font-size:14.5px;color:var(--ink);line-height:1.6;margin-top:10px;text-wrap:pretty">{{ ratioRead }}</div>
-            <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-top:10px;text-wrap:pretty">{{ ratioAsk }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revReadLabel }}</div>
+            <div style="font-size:15px;color:var(--ink);line-height:1.6;margin-top:9px;text-wrap:pretty">{{ ratioRead }}</div>
+            <div style="margin-top:12px;padding-top:11px;border-top:1px solid var(--rule2);font-size:13px;color:var(--t2);line-height:1.55;text-wrap:pretty">{{ ratioAsk }}</div>
           </div>
         </sc-if>
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px">
-          <sc-for list="{{ ratios }}" as="rt" hint-placeholder-count="8">
-            <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px;min-width:0">
-              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
-                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ rt.label }}</div>
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500;letter-spacing:-.02em">{{ rt.value }}</div>
-              </div>
-              <sc-if value="{{ rt.hasSpark }}">
-                <div>{{ rt.spark }}</div>
-              </sc-if>
-              <div style="font-size:12.5px;color:var(--t2);line-height:1.5">{{ rt.now }} · {{ rt.periods }}</div>
-              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ rt.peer }} · {{ rt.peerMedian }}</div>
-              <sc-if value="{{ rt.hasAsk }}">
-                <div style="margin-top:4px;padding-top:11px;border-top:1px solid var(--rule2)">
-                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAskTitle }}</div>
-                  <div style="font-size:13px;color:var(--ink);line-height:1.55;margin-top:6px;text-wrap:pretty">{{ rt.ask }}</div>
+      
+        <!-- Four groups, in the app's order and with the app's headings. Ten
+             identical cards in one flat grid is a spreadsheet; grouped, the reader
+             can see that "what you pay" and "what it earns on" are different
+             questions. A group whose metrics the document does not carry renders
+             nothing rather than an empty heading. -->
+        <sc-for list="{{ ratioGroups }}" as="rg" hint-placeholder-count="4">
+          <div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:0 8px 9px">{{ rg.title }}</div>
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+              <sc-for list="{{ rg.items }}" as="rt" hint-placeholder-count="4">
+                <div onClick="{{ rt.toggle }}" style="border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);padding:13px 14px;display:flex;flex-direction:column;gap:8px;min-width:0;cursor:pointer;transition:border-color .15s" style-hover="border-color:var(--rule)">
+                  <!-- The face carries only what the app's tile carries: the name,
+                       the figure, its shape over time, and which side of the sector
+                       it sits. Everything else is one tap away. -->
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                    <div style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ rt.label }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ rt.caret }}</div>
+                  </div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;letter-spacing:-.02em">{{ rt.value }}</div>
+                  <!-- One colour whatever direction it took: a falling P/E drawn in
+                       red, or rising debt-to-equity in green, would be a judgement
+                       the colour makes on the reader's behalf. -->
+                  <div style="min-height:24px">{{ rt.spark }}</div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ rt.peer }}</div>
+      
+                  <sc-if value="{{ rt.open }}">
+                    <div style="border-top:1px solid var(--rule2);padding-top:11px;display:flex;flex-direction:column;gap:11px">
+                      <div style="font-size:12.5px;color:var(--t2);line-height:1.5">{{ rt.now }} · {{ rt.periods }}</div>
+                      <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ rt.peerMedian }}</div>
+                      <sc-if value="{{ rt.hasBody }}">
+                        <div>
+                          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revMeansTitle }}</div>
+                          <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.body }}</div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ rt.hasOrient }}">
+                        <div>
+                          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revOrientLabel }}</div>
+                          <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.orient }}</div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ rt.hasAsk }}">
+                        <div>
+                          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAskTitle }}</div>
+                          <div style="font-size:13px;color:var(--ink);line-height:1.55;margin-top:6px;text-wrap:pretty">{{ rt.ask }}</div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ rt.hasAnswer }}">
+                        <div>
+                          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAnswerTitle }}</div>
+                          <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.answer }}</div>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ rt.hasProof }}">
+                        <div>
+                          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revProofTitle }}</div>
+                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:7px">
+                            <sc-for list="{{ rt.proof }}" as="pf" hint-placeholder-count="6">
+                              <span style="padding:3px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">{{ pf.p }} {{ pf.v }}</span>
+                            </sc-for>
+                          </div>
+                          <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:8px;text-wrap:pretty">{{ L.revProofNote }}</div>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
                 </div>
-              </sc-if>
-              <sc-if value="{{ rt.hasAnswer }}">
-                <div>
-                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAnswerTitle }}</div>
-                  <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.answer }}</div>
-                </div>
-              </sc-if>
+              </sc-for>
             </div>
-          </sc-for>
-        </div>
+          </div>
+        </sc-for>
+      
         <div style="padding-inline:8px;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ ratioMissing }}</div>
       </section>
       </sc-if>

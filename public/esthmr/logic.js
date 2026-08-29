@@ -58,6 +58,32 @@ export class Component extends Base {
       whatItMeans:'What this kind of filing is',
       pickCompany:'Jump to a company',
       allSectors:'All',
+      revGroupValuation:'What you pay',
+      revGroupBusiness:'The business',
+      revGroupReturns:'What it earns on',
+      revGroupRisk:'How it\'s financed',
+      revMeansTitle:'What it is',
+      revProofNote:'These are the values the direction was read from — the exchange\'s filed figures, oldest first.',
+      revProofTitle:'The figure, period by period',
+      revOrientLabel:'Which way reads better',
+      revPeBody:'Market value divided by profit: how much you pay for each pound the company earns. A falling P/E can mean the price got cheaper or the earnings got better — those are different stories. Rising with fast growth can mean the market is paying for what comes next; rising with flat growth is a stretch. Never read it without the earnings line below it.',
+      revPbBody:'Market value divided by shareholders\' equity. Below 1 means the market values the company under its accounting equity — which is only a bargain if the assets are productive. Read it beside return on equity: low price to book with a high return is a different company from low price to book with a poor one.',
+      revYieldBody:'The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.',
+      revProfitBody:'What the company filed as profit for the full year, as the exchange received it. Direction is read from the sign of each year\'s move rather than a percentage, because a percentage off a loss is meaningless: going from a loss to a profit is not growth of some number, it is a company that stopped losing money.',
+      revEpsBody:'Profit divided by the shares in issue. This is the number that survives a company issuing more shares: total profit can climb while each share earns less. When you hear that profits increased, this is the follow-up question.',
+      revAssetsBody:'What the company holds, from its filed balance sheet. This stands in for revenue growth, which no Egyptian source publishes: assets growing while profit does not is the same warning a falling margin would give — the company is putting more in to get the same out.',
+      revCashBody:'Operating cash flow divided by reported profit. Above 1 means the company collected more cash than it booked as profit. This stands in for profit margin, which needs revenue nobody publishes — and it arguably answers the question better: when profit climbs and the cash does not follow, that is the thing worth investigating.',
+      revRoeBody:'Profit as a share of shareholders\' equity: how much the company earns on the money its owners left in it. A high return is not automatically impressive — debt shrinks equity, which lifts the ratio without the business improving. Always read it beside debt to equity.',
+      revRoaBody:'Profit as a share of total assets. Unlike return on equity, borrowing cannot flatter it — the assets stay on the books either way. The gap between the two is roughly how much of the return is coming from leverage.',
+      revDebtBody:'Total liabilities against shareholders\' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.',
+      revOrientPe:'Lower is the cheaper side. A P/E below its sector means you pay less than for similar companies for the same profit; above its sector means you pay more. Watch one thing: a very low reading can also mean the market expects the profit to drop.',
+      revOrientPb:'Lower is the cheaper side. Below its sector means you pay less for each pound of the company\'s book value than its peers do; above its sector means more. A very low reading can also flag assets the market doubts are worth what the books say.',
+      revOrientYield:'Higher pays you more. Above its sector means more cash back each year per pound than its peers pay; below its sector means less. But a very high yield often comes from a share price that has dropped, or a payout that may be cut — so higher is not always steadier.',
+      revOrientHigherMore:'Higher is simply more — more profit, or more earnings for each share. Above its sector means more than its peers, but the direction over time matters most: rising reads better than falling.',
+      revOrientCash:'Higher is healthier. Above its sector means more of the reported profit actually arrived as cash than for its peers — money in the bank, not just profit on paper; below its sector means more of it is still on paper.',
+      revOrientReturn:'Higher is the stronger side. Above its sector means the company turns each pound put into it into more profit than its peers do; below its sector is weaker. Steady-and-high reads better than high-but-jumpy.',
+      revOrientDebt:'Lower is the safer side. Below its sector means the company has borrowed less against its own money than its peers; above its sector carries more debt — which can fund growth but adds risk if conditions tighten.',
+      revOrientAssets:'Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.',
       revLabel:'The numbers, and what to ask',
       revRising:'rising',
       revFalling:'falling',
@@ -163,6 +189,32 @@ export class Component extends Base {
       whatItMeans:'ما هذا النوع من الإفصاح',
       pickCompany:'انتقل إلى شركة',
       allSectors:'الكل',
+      revGroupValuation:'ما تدفعه',
+      revGroupBusiness:'النشاط',
+      revGroupReturns:'عائده على',
+      revGroupRisk:'كيف يُموَّل',
+      revMeansTitle:'ما هو',
+      revProofNote:'هذه هي القيم التي قُرئ منها الاتجاه — أرقام البورصة المودعة، من الأقدم إلى الأحدث.',
+      revProofTitle:'الرقم، فترة بفترة',
+      revOrientLabel:'أي اتجاه يُقرأ أفضل',
+      revPeBody:'القيمة السوقية مقسومة على الربح: كم تدفع مقابل كل جنيه تربحه الشركة. انخفاض المضاعف قد يعني أن السعر رخص أو أن الأرباح تحسّنت، وهما حكايتان مختلفتان. وارتفاعه مع نمو سريع قد يعني أن السوق يدفع مقابل ما هو آتٍ؛ وارتفاعه مع نمو ثابت توسّع في التقييم. لا تقرأه أبداً بمعزل عن سطر الأرباح تحته.',
+      revPbBody:'القيمة السوقية مقسومة على حقوق المساهمين. وأقل من 1 يعني أن السوق يقيّم الشركة دون حقوق ملكيتها الدفترية — وهذا لا يكون فرصة إلا إذا كانت الأصول مُنتِجة. اقرأه بجوار العائد على حقوق الملكية.',
+      revYieldBody:'التوزيع السنوي منسوباً إلى سعر السهم، كما تنشره البورصة. وقد يرتفع العائد لمجرد أن السعر انهار، وقد توزّع الشركة بسخاء وتُبقي القليل للاستثمار. اقرأه بجوار الربح والمديونية.',
+      revProfitBody:'ما أودعته الشركة كربح عن السنة كاملة، كما تسلّمته البورصة. والاتجاه يُقرأ من إشارة تغير كل سنة لا من نسبة مئوية، لأن النسبة المحسوبة على خسارة بلا معنى: الانتقال من خسارة إلى ربح ليس نمواً في رقم، بل شركة توقفت عن الخسارة.',
+      revEpsBody:'الربح مقسوماً على عدد الأسهم المُصدرة. وهذا هو الرقم الذي يصمد أمام إصدار الشركة أسهماً جديدة: قد يرتفع إجمالي الربح بينما يربح كل سهم أقل. فحين تسمع أن الأرباح زادت، هذا هو السؤال التالي.',
+      revAssetsBody:'ما تملكه الشركة، من ميزانيتها المودعة. وهذا يقوم مقام نمو الإيرادات الذي لا ينشره أي مصدر مصري: نمو الأصول دون نمو الربح هو التحذير نفسه الذي يعطيه تراجع الهامش — الشركة تضخّ أكثر لتخرج بالمثل.',
+      revCashBody:'التدفق النقدي التشغيلي مقسوماً على الربح المعلن. وفوق 1 يعني أن الشركة حصّلت نقداً أكثر مما قيّدته ربحاً. وهذا يقوم مقام هامش الربح الذي يحتاج إيرادات لا يُنشرها أحد — بل لعله يجيب عن السؤال أفضل: حين يصعد الربح ولا يتبعه النقد، فذلك ما يستحق البحث.',
+      revRoeBody:'الربح منسوباً إلى حقوق المساهمين: كم تربح الشركة على الأموال التي تركها ملّاكها فيها. والعائد المرتفع ليس مبهراً بالضرورة — فالاقتراض يُصغّر حقوق الملكية فترتفع النسبة دون أن يتحسّن النشاط. اقرأه دائماً بجوار نسبة الدين إلى حقوق الملكية.',
+      revRoaBody:'الربح منسوباً إلى إجمالي الأصول. وخلافاً للعائد على حقوق الملكية، لا يستطيع الاقتراض تجميله — فالأصول تبقى في الدفاتر على أي حال. والفرق بين النسبتين هو تقريباً مقدار ما يأتي من الرافعة المالية.',
+      revDebtBody:'إجمالي الالتزامات منسوباً إلى حقوق المساهمين. ورقم الدين المطلق يقول القليل بشكل مدهش: فشركة مدينة بعشرة مليارات قد تكون أمتن من أخرى مدينة بمليار، تبعاً لحجم النشاط خلفها. وارتفاع الدين ليس مشكلة تلقائياً كذلك — المهم ما تحرّك بجانبه. دين يرتفع الخُمس وأرباح ترتفع النصف يعني أن المال المقترض يعمل. أما دين يرتفع أربعة أخماس وربح يزحف 5% فتلك هي الحالة التي تستحق النظر.',
+      revOrientPe:'الأقل هو الجانب الأرخص. مكرر ربحية أقل من القطاع يعني أنك تدفع أقل من نظائرها مقابل نفس الربح؛ والأعلى من القطاع يعني أنك تدفع أكثر. لكن انتبه: الرقم المنخفض جدًا قد يعني أن السوق يتوقع تراجع الربح.',
+      revOrientPb:'الأقل هو الجانب الأرخص. أقل من القطاع يعني أنك تدفع أقل مقابل كل جنيه من القيمة الدفترية مقارنةً بنظائرها؛ والأعلى يعني أكثر. والرقم المنخفض جدًا قد يشير إلى أصول يشكّك السوق في قيمتها الدفترية.',
+      revOrientYield:'الأعلى يدفع لك أكثر. أعلى من القطاع يعني نقدًا سنويًا أكبر لكل جنيه مقارنةً بنظائرها؛ والأقل أدنى. لكن العائد المرتفع جدًا غالبًا ينتج عن سعر سهم هبط، أو توزيع قد يُخفَّض — فالأعلى ليس دائمًا أكثر ثباتًا.',
+      revOrientHigherMore:'الأعلى ببساطة أكثر — ربح أكبر أو أرباح أكبر لكل سهم. وأعلى من القطاع يعني أكثر من نظائرها، لكن الاتجاه بمرور الوقت هو الأهم: الصاعد أفضل قراءةً من الهابط.',
+      revOrientCash:'الأعلى أصح. أعلى من القطاع يعني أن نصيبًا أكبر من الربح المُعلن وصل فعلًا كنقد مقارنةً بنظائرها — نقد في البنك لا ربح على الورق؛ والأقل يعني أن جزءًا أكبر لا يزال على الورق.',
+      revOrientReturn:'الأعلى هو الجانب الأقوى. أعلى من القطاع يعني أن الشركة تحوّل كل جنيه موضوع فيها إلى ربح أكبر من نظائرها؛ والأقل أضعف. والثابت المرتفع أفضل قراءةً من المرتفع المتذبذب.',
+      revOrientDebt:'الأقل هو الجانب الأكثر أمانًا. أقل من القطاع يعني أن الشركة اقترضت أقل مقابل أموالها الخاصة مقارنةً بنظائرها؛ والأعلى يحمل ديونًا أكثر — قد تموّل النمو لكنها تزيد المخاطر عند الضيق.',
+      revOrientAssets:'الأعلى يعني ببساطة أكبر — تملك أكثر من نظائرها، لا أكثر. والحجم لا يفيد إلا إذا حققت الأصول عائدًا، وهو ما تُظهره صفوف الربح والعائد؛ فالأكبر ليس أقوى تلقائيًا.',
       revLabel:'الأرقام، وما ينبغي أن تسأله',
       revRising:'ترتفع',
       revFalling:'تنخفض',
@@ -287,13 +339,18 @@ export class Component extends Base {
    */
   ratioCards(review, L, ar) {
     if (!review || !Array.isArray(review.metrics)) return [];
+    // label, the question, what it is, and which way reads better.
     const NAME = {
-      pe: [L.revPe, L.revPeAsk], pb: [L.revPb, L.revPbAsk],
-      profit: [L.revProfit, L.revProfitAsk],
-      eps: [L.revEps, L.revEpsAsk], assets: [L.revAssets, L.revAssetsAsk],
-      roe: [L.revRoe, L.revRoeAsk], roa: [L.revRoa, L.revRoaAsk],
-      debt_equity: [L.revDebt, L.revDebtAsk], dividend_yield: [L.revYield, L.revYieldAsk],
-      cash_conversion: [L.revCash, L.revCashAsk],
+      pe: [L.revPe, L.revPeAsk, L.revPeBody, L.revOrientPe],
+      pb: [L.revPb, L.revPbAsk, L.revPbBody, L.revOrientPb],
+      dividend_yield: [L.revYield, L.revYieldAsk, L.revYieldBody, L.revOrientYield],
+      profit: [L.revProfit, L.revProfitAsk, L.revProfitBody, L.revOrientHigherMore],
+      eps: [L.revEps, L.revEpsAsk, L.revEpsBody, L.revOrientHigherMore],
+      assets: [L.revAssets, L.revAssetsAsk, L.revAssetsBody, L.revOrientAssets],
+      cash_conversion: [L.revCash, L.revCashAsk, L.revCashBody, L.revOrientCash],
+      roe: [L.revRoe, L.revRoeAsk, L.revRoeBody, L.revOrientReturn],
+      roa: [L.revRoa, L.revRoaAsk, L.revRoaBody, L.revOrientReturn],
+      debt_equity: [L.revDebt, L.revDebtAsk, L.revDebtBody, L.revOrientDebt],
     };
     const fmt = (v, unit) => {
       if (typeof v !== 'number' || !isFinite(v)) return '\u2014';
@@ -303,7 +360,9 @@ export class Component extends Base {
       return v.toFixed(2) + '\u00d7';
     };
     return review.metrics.map((m) => {
-      const [label, ask] = NAME[m.key] || [m.key, ''];
+      const named = NAME[m.key];
+      if (!named) return null;      // an unknown key degrades to nothing, never to a raw key
+      const [label, ask, body, orient] = named;
       const rising = m.direction === 'rising';
       const falling = m.direction === 'falling';
       const answer = ar ? (m.answer_ar || m.answer) : m.answer;
@@ -324,11 +383,16 @@ export class Component extends Base {
           ? L.revSectorMedian.replace('{sector}', review.sector || '') + ' ' + fmt(m.peer_median, m.unit)
           : '',
         answer: safe, hasAnswer: Boolean(safe), hasAsk: Boolean(ask),
-        spark: this.sparkOf(points, !falling),
+        spark: this.sparkFlat(points),
         hasSpark: points.length > 1,
         proof: (m.series || []).map((x) => ({ p: x.p, v: fmt(x.v, m.unit) })),
+        hasProof: (m.series || []).length > 1,
+        // What the ratio IS, and which way reads better — the two pieces of
+        // teaching the app keeps one tap away rather than on the face.
+        body: body || '', hasBody: Boolean(body),
+        orient: orient || '', hasOrient: Boolean(orient),
       };
-    });
+    }).filter(Boolean);
   }
 
   /** Signal rows as sentences, from the exchange's own filing record.
@@ -809,6 +873,26 @@ export class Component extends Base {
     };
 
     const ratios = this.ratioCards(D.review, L, ar);
+    // The app's four groups, in the app's order. A metric the document does
+    // not carry drops out; a group with nothing left renders nothing rather
+    // than an empty heading (review_sheet.dart, _groups).
+    const byKey = new Map(ratios.map((r) => [r.key, r]));
+    const ratioGroups = [
+      [L.revGroupValuation, ['pe', 'pb', 'dividend_yield']],
+      [L.revGroupBusiness, ['profit', 'eps', 'assets', 'cash_conversion']],
+      [L.revGroupReturns, ['roe', 'roa']],
+      [L.revGroupRisk, ['debt_equity']],
+    ].map(([title, keys]) => ({
+      title,
+      items: keys.map((k) => byKey.get(k)).filter(Boolean)
+        .map((r) => Object.assign({}, r, {
+          open: Boolean(st.openRatio && st.openRatio[r.key]),
+          caret: (st.openRatio && st.openRatio[r.key]) ? '\u2212' : '+',
+          toggle: () => this.setState((x) => ({
+            openRatio: Object.assign({}, x.openRatio, { [r.key]: !(x.openRatio || {})[r.key] }),
+          })),
+        })),
+    })).filter((g) => g.items.length);
     const pat = (D.review && D.review.pattern) || null;
     const up = pat ? (pat.improving || []).length : 0;
     const down = pat ? (pat.deteriorating || []).length : 0;
@@ -1049,7 +1133,7 @@ export class Component extends Base {
       signalFootnote: signals.length ? L.sigFootnote : '',
       // The ratios, and the paragraph the pipeline writes over all of them.
       pickList, pickChips, hasPickList: pickList.length > 0,
-      ratios, hasRatios: ratios.length > 0,
+      ratios, ratioGroups, hasRatios: ratios.length > 0,
       ratioRead: D.review ? (ar ? (D.review.read_ar || D.review.read) : D.review.read) || '' : '',
       // "Six of seven readable metrics moved the same way" — and then the
       // question that follows from it, which is the app's and not ours.
@@ -1207,6 +1291,27 @@ export class Component extends Base {
     if (isNaN(at)) return id;
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { month: 'short', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** A ratio's history, drawn in ONE colour whatever direction it took.
+   *
+   * sparkOf() paints green for rising and red for falling, which is right for
+   * a share price and wrong for a ratio: it would draw a falling P/E in red
+   * and rising debt-to-equity in green, and both readings are backwards. The
+   * app passes an accent colour explicitly to defeat exactly that
+   * (review_sheet.dart, _MetricTile). Direction is stated in words instead,
+   * where it can be read rather than inferred from a colour. */
+  sparkFlat(points) {
+    const pts = (points || []).filter((v) => typeof v === 'number');
+    if (pts.length < 2) return React.createElement('div', { style: { height: '24px' } });
+    const lo = Math.min.apply(null, pts), hi = Math.max.apply(null, pts), sp = (hi - lo) || 1;
+    const d = pts.map((p, i) => (i ? 'L' : 'M') + ((i / (pts.length - 1)) * 100).toFixed(2)
+      + ' ' + (2 + (1 - (p - lo) / sp) * 20).toFixed(2)).join(' ');
+    return React.createElement('svg', { viewBox: '0 0 100 24', preserveAspectRatio: 'none',
+      style: { width: '100%', height: '24px', display: 'block' } },
+      React.createElement('path', { d, fill: 'none', stroke: 'var(--accent)', strokeWidth: 1.5,
+        vectorEffect: 'non-scaling-stroke', strokeLinejoin: 'round', strokeLinecap: 'round' })
+    );
   }
 
   /** "2026-08-27" as the session line reads it, in whichever language. */
