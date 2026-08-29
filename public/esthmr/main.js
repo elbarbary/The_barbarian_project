@@ -111,11 +111,20 @@ document.getElementById('signout').onclick = async () => {
         && (!component._co || component._co.ticker !== wanted)
         && !component.data().demo) {
       loading = wanted;
+      // Drop the previous company's documents before the next one's arrive.
+      // Without this the statements, ratios, price series, signals and filings
+      // of the company just closed stay on screen under the new ticker's name
+      // for the length of a fetch — the one shape of wrong figure this site
+      // must never show, a real company's numbers under another real
+      // company's header. `_co` already guarded its own half; `_d` did not.
+      component._d = { ...component.data(), series: [], fins: [], review: null,
+        signals: undefined, filings: undefined };
       data.company(wanted)
         .then((doc) => {
           const row = component.data().companies.find((c) => c.ticker === wanted) || {};
           component._co = { ticker: wanted, ...doc, close: row.close, pct: row.pct,
-            eps: row.eps, epsPeriod: row.epsPeriod };
+            eps: row.eps, epsPeriod: row.epsPeriod,
+            pe: row.pe, pePeriod: row.pePeriod };
           component._d = { ...component.data(), series: doc.series, fins: doc.fins,
             review: doc.review };
           draw();

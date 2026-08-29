@@ -94,6 +94,7 @@ export class Component extends Base {
       revRising:'rising',
       revFalling:'falling',
       revFlat:'flat',
+      revAtClose:'At the {period} close, not today\u2019s — so it can differ from the P/E in the header.',
       revAboveSector:'above its sector',
       revBelowSector:'below its sector',
       revSectorMedian:'{sector} median',
@@ -161,12 +162,14 @@ export class Component extends Base {
       newsUnreachable:'Not reachable today: {outlets}.',
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
+      sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Watchlist',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
-      marketTitle:'The market', searchPlaceholder:'Search 282 companies — English or Arabic',
+      marketTitle:'The market', searchPlaceholder:'Search {n} companies — English or Arabic',
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
+      peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
       lastClose:'Last close', asOf:'As of', priceHistory:'Price history', sessionsShown:'Sessions', whoTheyAre:'Who they are',
       asFiled:'Financials, as filed', egpMillions:'EGP millions unless stated', period:'Period', revenue:'Revenue',
@@ -233,6 +236,7 @@ export class Component extends Base {
       revFlat:'مستقرة',
       revAboveSector:'أعلى من قطاعها',
       revBelowSector:'أقل من قطاعها',
+      revAtClose:'محسوب على إغلاق {period}، لا إغلاق اليوم — لذا قد يختلف عن مضاعف الربحية في الترويسة.',
       revSectorMedian:'وسيط {sector}',
       revOverPeriods:'على مدى {n} فترة معلنة',
       revAgree:'{n} من {readable} مؤشرات مقروءة تحركت في الاتجاه نفسه.',
@@ -298,12 +302,14 @@ export class Component extends Base {
       newsUnreachable:'تعذّر الوصول اليوم إلى: {outlets}.',
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
+      sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'قائمة المتابعة',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
-      marketTitle:'السوق', searchPlaceholder:'ابحث في ٢٨٢ شركة — بالعربية أو الإنجليزية',
+      marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
+      peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'من هي الشركة',
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
@@ -380,9 +386,22 @@ export class Component extends Base {
       const answer = ar ? (m.answer_ar || m.answer) : m.answer;
       const safe = answer && !DIRECTIVE.test(answer) ? answer : '';
       const points = (m.series || []).map((x) => x.v).filter((v) => typeof v === 'number');
+      // WHEN the headline figure was struck.
+      //
+      // A P/E on this card is not the one in the header above it, and for CIB
+      // the two differ by nearly a factor of two — 8.6 against 4.84×. Both are
+      // right: the header divides TODAY's close by the last filed earnings,
+      // and this card divides the close AT THAT PERIOD'S END, because it is
+      // the last point of a series and the rest of the series has to be struck
+      // that way or it would be eleven copies of today's price. Printed with
+      // no date on it, the pair simply reads as one of them being wrong.
+      const priced = m.key === 'pe';
+      const lastPeriod = ((m.series || [])[(m.series || []).length - 1] || {}).p || '';
       return {
         key: m.key, label, ask,
         value: fmt(m.value, m.unit),
+        asAt: priced && lastPeriod
+          ? L.revAtClose.replace('{period}', lastPeriod) : '',
         // The direction is the app's sentence, not an arrow: an arrow beside a
         // ratio invites the reading that up is good, and for a P/E or a debt
         // ratio it is not.
@@ -556,12 +575,23 @@ export class Component extends Base {
 
     // market table
     const q = this.fold(st.q);
+    // What a sector is called on screen. The documents publish sector in
+    // English only, so an Arabic reader was reading "Process Industries" in
+    // the middle of Arabic copy — on the table, the chips, the company header
+    // and the company rail. data.js carries the app's own Arabic name beside
+    // the English one; every label goes through here, and every filter, sort
+    // key and piece of state stays on the English name, which is the one the
+    // documents agree on.
+    const sectorAr = new Map(D.companies
+      .filter((c) => c.sector && c.sectorAr).map((c) => [c.sector, c.sectorAr]));
+    const sectorName = (en) => (ar && sectorAr.get(en)) || en || '—';
+
     let rows = D.companies.filter(c => (st.sector === 'All' || c.sector === st.sector))
       .filter(c => !q || this.fold(c.name.en).includes(q) || this.fold(c.name.ar).includes(q) || this.fold(c.ticker).includes(q));
     const key = st.sort;
     rows = rows.slice().sort((a,b) => {
-      const va = key === 'ticker' ? a.ticker : key === 'name' ? this.nm(a.name) : key === 'sector' ? a.sector : a[key];
-      const vb = key === 'ticker' ? b.ticker : key === 'name' ? this.nm(b.name) : key === 'sector' ? b.sector : b[key];
+      const va = key === 'ticker' ? a.ticker : key === 'name' ? this.nm(a.name) : key === 'sector' ? sectorName(a.sector) : a[key];
+      const vb = key === 'ticker' ? b.ticker : key === 'name' ? this.nm(b.name) : key === 'sector' ? sectorName(b.sector) : b[key];
       if (va === null || va === '—') return 1; if (vb === null || vb === '—') return -1;
       if (typeof va === 'string') return va.localeCompare(vb) * st.dir * -1;
       return (va - vb) * st.dir;
@@ -578,11 +608,11 @@ export class Component extends Base {
     const sectorList = ['All'].concat(Array.from(new Set(D.companies.map(c => c.sector))));
     const sectorChips = sectorList.map(s => {
       const on = st.sector === s;
-      return { label: s === 'All' ? (ar?'الكل':'All sectors') : s, go: () => this.setState({ sector:s }),
+      return { label: s === 'All' ? (ar?'الكل':'All sectors') : sectorName(s), go: () => this.setState({ sector:s }),
         border: on ? 'transparent' : 'var(--rule)', color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent', sh: on ? 'var(--shPill)' : 'none' };
     });
 
-    const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector:c.sector,
+    const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector: sectorName(c.sector),
       close: c.close === '—' ? '—' : this.num(c.close), pct: this.pct(c.pct), color: this.dcol(c.pct),
       cap: this.money(c.cap), pe: c.pe ? c.pe.toFixed(1) : '—',
       arrow: (c.pct === null || c.pct === undefined) ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
@@ -638,29 +668,45 @@ export class Component extends Base {
     }));
 
     // today
+    // The demo's stories run on the demo's companies, and are attributed to an
+    // outlet that does not exist. They used to name El Sewedy Electric, CIB,
+    // Alexandria Mineral Oils and the Suez Canal, each attributed to a real
+    // Egyptian outlet, with a time and a date on it — five invented news items
+    // about real listed companies, on the page every signed-out visitor lands
+    // on. data.js opens by saying why the demo exchange is DEMO01..DEMO16 and
+    // not COMI: "a screenshot of an invented price under a real company's name
+    // is a fabricated financial figure". A fabricated headline is the same
+    // thing with a byline on it. The feed had simply never been held to the
+    // rule the market table was built around.
+    const demoCo = (n) => {
+      const c = D.companies[n];
+      return c ? [{ ticker: c.ticker, go: () => this.setState({ screen:'company', ticker: c.ticker }) }] : [];
+    };
+    const demoWire = ar ? 'وكالة تجريبية' : 'Sample Wire';
     const allFeed = (D.feed ? say(D.feed, ['kind','headline','why','because','source']) : !D.demo ? [] : [
-      { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source:'EGX', href:'https://www.egx.com.eg',
-        headline: ar?'كورّة: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'KORRA: standalone and consolidated statements for the period ended 30 June 2026',
+      { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'11:48', date:'2026-08-27', source: demoWire, href:'#',
+        headline: ar?'شركة تجريبية ١: القوائم المالية المستقلة والمجمعة عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦':'Sample Company 1: standalone and consolidated statements for the period ended 30 June 2026',
         why: ar?'الميزانية تذكر قروضاً بـ ١٨٦٩٫١ مليون جنيه، منها ١٧٩٥٫٥ مليون تستحق خلال عام.':'The balance sheet states borrowings of EGP 1,869.1m, of which 1,795.5m falls due within a year.',
-        tickers:[{ticker:'KORA',go:this.go('company')}] },
-      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'10:12', date:'2026-08-27', source:'Al Borsa', href:'https://alborsaanews.com',
-        headline: ar?'السويدي إليكتريك توقّع عقداً لتوريد كابلات لمشروع نقل كهرباء':'El Sewedy Electric signs cable supply contract for power transmission project',
+        tickers: demoCo(0) },
+      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'10:12', date:'2026-08-27', source: demoWire, href:'#',
+        headline: ar?'شركة تجريبية ٥ توقّع عقداً لتوريد كابلات لمشروع نقل كهرباء':'Sample Company 5 signs a cable supply contract for a power transmission project',
         why: ar?'الشركة لم تُفصح عن قيمة العقد للبورصة حتى وقت النشر.':'The company has not filed a contract value with the exchange as at publication.',
-        tickers:[{ticker:'SWDY',go:this.go('company')}] },
-      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'09:35', date:'2026-08-27', source:'Enterprise', href:'https://enterprise.press',
-        headline: ar?'إيرادات قناة السويس ترتفع للشهر الثالث على التوالي':'Suez Canal receipts rise for a third consecutive month',
-        why: ar?'macro.json يذكر ٤٦١ مليون دولار لشهر يوليو، مقابل ٤٢٨ مليوناً في يونيو.':'macro.json states USD 461m for July against 428m in June.',
+        tickers: demoCo(4) },
+      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'09:35', date:'2026-08-27', source: demoWire, href:'#',
+        headline: ar?'مؤشر الشحن في السوق التجريبي يرتفع للشهر الثالث على التوالي':'Shipping receipts on the sample exchange rise for a third consecutive month',
+        why: ar?'هذه بيانات تجريبية، وليست رقماً منشوراً عن أي جهة حقيقية.':'These are demonstration figures, not a published number about any real body.',
         tickers:[] },
-      { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'16:02', date:'2026-08-26', source:'EGX', href:'https://www.egx.com.eg',
-        headline: ar?'البنك التجاري الدولي: إفصاح عن توزيعات نقدية مرحلية':'Commercial International Bank: disclosure of an interim cash distribution',
+      { kind: ar?'إفصاح':'Filing', kindColor:'var(--accent)', tint:'var(--accTint)', time:'16:02', date:'2026-08-26', source: demoWire, href:'#',
+        headline: ar?'شركة تجريبية ٣: إفصاح عن توزيعات نقدية مرحلية':'Sample Company 3: disclosure of an interim cash distribution',
         why: ar?'المستند الموقّع مُتاح في أرشيف الإفصاحات.':'The signed document is available in the disclosure archive.',
-        tickers:[{ticker:'COMI',go:this.go('company')}] },
-      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'14:20', date:'2026-08-26', source:'Hapi Journal', href:'https://hapijournal.com',
-        headline: ar?'الإسكندرية للزيوت المعدنية تنهي الجلسة بأعلى تحرك في القطاع':'Alexandria Mineral Oils ends the session with the sector’s largest move',
-        why: ar?'market.json يذكر ٤٫٠٢٪ على حجم ١٫٢ مليون سهم.':'market.json states +4.02% on volume of 1.2m shares.',
-        tickers:[{ticker:'AMOC',go:this.go('company')}] }
+        tickers: demoCo(2) },
+      { kind: ar?'خبر':'News', kindColor:'var(--t2)', tint:'var(--sunk)', time:'14:20', date:'2026-08-26', source: demoWire, href:'#',
+        headline: ar?'شركة تجريبية ١١ تُنهي الجلسة بأعلى تحرك في القطاع':'Sample Company 11 ends the session with the sector\u2019s largest move',
+        why: ar?'بيانات العرض التجريبي تذكر ٤٫٠٢٪ على حجم ١٫٢ مليون سهم.':'The demonstration data states +4.02% on volume of 1.2m shares.',
+        tickers: demoCo(10) }
     ]).map((f) => Object.assign({}, f, {
       hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
+      because: f.because || '', image: f.image || '',
       hasImage: Boolean(f.image),
       hasKind: f.hasKind === undefined ? Boolean(f.kind) : f.hasKind,
       // The design's ticker pills carry an onClick. On the live path the
@@ -681,7 +727,6 @@ export class Component extends Base {
     const feed = allFeed.slice(0, st.feedShown || 40);
 
     // company
-    const co0 = D.companies.find(c => c.ticker === 'KORA');
     const rangeMap = { '1W':5, '1M':21, '3M':63, '1Y':250, '5Y':1250 };
     const ranges = Object.keys(rangeMap).map(k => ({ label:k, go: () => this.setState({ range:k }),
       color: st.range === k ? 'var(--ink)' : 'var(--t2)', bg: st.range === k ? 'var(--surface)' : 'transparent', sh: st.range === k ? 'var(--shPill)' : 'none' }));
@@ -689,27 +734,46 @@ export class Component extends Base {
     const chart = this.buildChart(slice);
 
     // The company on screen. `this._co` is the loaded document, set by main.js
-    // when a ticker is opened; the literal below is the design's worked
-    // example and remains the shape everything else is written against.
+    // when a ticker is opened; the block below is the demo's worked example and
+    // remains the shape everything else is written against.
+    //
+    // It used to be a literal headed KORA / KORRA / Utilities, with a close of
+    // 12.40, a market cap, a P/E, an EPS, a share count of 337,096,774 and a
+    // paragraph describing the company's generation and distribution assets —
+    // and KORA is not an invented ticker. It is قرة لمشروعات الطاقة والاستثمار,
+    // listed on EGX, in exactly that sector. So the signed-out company screen
+    // published a full invented profile, five periods of invented statements
+    // included, under a real listed company's name. data.js:8 sets out why the
+    // demo exchange is DEMO01..DEMO16; this screen had never been brought
+    // inside that rule. It now runs on the demo's own first company, so the
+    // worked example demonstrates the layout and asserts nothing about anyone.
     const loaded = this._co && this._co.ticker === st.ticker ? this._co : null;
+    const demoCo0 = D.companies[0] || {};
     const coDesign = {
-      ticker:'KORA', sector: ar?'المرافق':'Utilities', exchange:'EGX', nameEn:'KORRA', nameAr:'كورّة',
-      close: this.num(12.40), chg:'−0.40', pct:'−3.12%', color:'var(--down)', arrow:'\u2198', closeDate:'2026-08-26',
-      brief: ar?'كورّة شركة مرافق مقيدة في البورصة المصرية، تُشغّل أصول توليد وتوزيع وتُفصح عن نتائجها ربع سنوية بالجنيه المصري. النص أعلاه مأخوذ من briefs/KORA.json كما وُلّد في البناء اليومي.'
-        :'KORRA is a utilities company listed on the Egyptian Exchange. It operates generation and distribution assets and files quarterly results in Egyptian pounds. This description is rendered from briefs/KORA.json as generated in the daily build.',
+      ticker: demoCo0.ticker || 'DEMO01', sector: sectorName(demoCo0.sector), sectorKey: demoCo0.sector || '',
+      exchange: ar?'سوق تجريبي':'Sample exchange',
+      nameEn: (demoCo0.name && demoCo0.name.en) || 'Sample Company 1',
+      nameAr: (demoCo0.name && demoCo0.name.ar) || 'شركة تجريبية ١',
+      close: this.num(demoCo0.close), chg: this.signed(typeof demoCo0.close === 'number' && typeof demoCo0.pct === 'number'
+        ? demoCo0.close - demoCo0.close / (1 + demoCo0.pct / 100) : null),
+      pct: this.pct(demoCo0.pct), color: this.dcol(demoCo0.pct),
+      arrow: !demoCo0.pct ? '' : (demoCo0.pct > 0 ? '\u2197' : '\u2198'), closeDate: D.marketDate || '—',
+      brief: ar?'هذه شركة تجريبية لا وجود لها، تُستخدم لعرض شكل الشاشة قبل تسجيل الدخول: أرقامها مولّدة، وليست مأخوذة من أي إفصاح. بعد تسجيل الدخول تقرأ هذه الفقرة من briefs/<الرمز>.json كما وُلّدت في البناء اليومي.'
+        :'This is an invented company, shown so the screen has a shape before you sign in: its figures are generated, not filed by anyone. Once you are signed in this paragraph is rendered from briefs/<ticker>.json as generated in the daily build.',
       briefFacts:[
-        { label: ar?'القطاع':'Sector', value: ar?'المرافق':'Utilities' },
+        { label: ar?'القطاع':'Sector', value: sectorName(demoCo0.sector) },
         { label: ar?'الأسهم المُصدرة':'Shares outstanding', value:'337,096,774' },
         { label: ar?'وحدة الإفصاح':'Filing currency', value:'EGP' }
       ],
-      briefSource:'briefs/KORA.json · generated 2026-08-27',
+      briefSource: ar?'بيانات عرض تجريبي':'demonstration data',
       stats:[
-        { label: ar?'القيمة السوقية':'Market cap', value:'4,180', color:'var(--ink)' },
-        { label: ar?'أسبوع':'1W', value:'−1.84%', color:'var(--down)' },
-        { label: ar?'شهر':'1M', value:'+6.21%', color:'var(--up)' },
-        { label: ar?'الحجم':'Volume', value:'118,422', color:'var(--ink)' },
-        { label:'P/E', value:'11.2', color:'var(--ink)' },
-        { label: ar?'ربحية السهم':'EPS', value:'1.11', color:'var(--ink)' }
+        { label: ar?'القيمة السوقية':'Market cap', value: this.money(demoCo0.cap), color:'var(--ink)', note:'' },
+        { label: ar?'أسبوع':'1W', value:'−1.84%', color:'var(--down)', note:'' },
+        { label: ar?'شهر':'1M', value:'+6.21%', color:'var(--up)', note:'' },
+        { label: ar?'الحجم':'Volume', value:'118,422', color:'var(--ink)', note:'' },
+        { label:'P/E', value: typeof demoCo0.pe === 'number' ? this.num(demoCo0.pe, 1) : '\u2014', color:'var(--ink)',
+          note: ar?'عن FY 2024':'over FY 2024' },
+        { label: ar?'ربحية السهم':'EPS', value:'1.11', color:'var(--ink)', note:'FY 2024' }
       ]
     };
 
@@ -720,7 +784,7 @@ export class Component extends Base {
     // would have said. Under a real ticker in the header, that is an invented
     // company file.
     const co = D.demo ? Object.assign({}, coDesign) : {
-      ticker: st.ticker || '—', sector:'—', exchange:'EGX',
+      ticker: st.ticker || '—', sector:'—', sectorKey:'', exchange:'EGX',
       nameEn: st.ticker || '—', nameAr: st.ticker || '—',
       close:'—', chg:'—', pct:'—', color:'var(--faint)', arrow:'', closeDate:'—',
       brief: L.nothingYet, briefFacts: [], briefSource:'—', stats: [],
@@ -734,33 +798,55 @@ export class Component extends Base {
       Object.assign(co, {
         brief: (ar ? loaded.briefAr : loaded.brief) || L.nothingYet,
         briefFacts: [
-          { label: ar?'القطاع':'Sector', value: loaded.sector || '—' },
+          { label: ar?'القطاع':'Sector', value: sectorName(loaded.sector) },
           { label: ar?'الأسهم المُصدرة':'Shares outstanding', value: whole(p.shares_outstanding) },
           { label: ar?'وحدة الإفصاح':'Filing currency', value:'EGP' },
         ],
+        // A tile always carries a `note`, even an empty one, so the markup can
+        // ask every tile the same question. The two tiles built on a filing
+        // fill it with the period that filing covers.
         stats: [
-          { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)' },
-          { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w) },
-          { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m) },
-          { label: ar?'الحجم':'Volume', value: whole(p.avg_volume_30d), color:'var(--ink)' },
+          { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)', note:'' },
+          { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w), note:'' },
+          { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m), note:'' },
+          { label: ar?'الحجم':'Volume', value: whole(p.avg_volume_30d), color:'var(--ink)', note:'' },
+          // The multiple the pipeline published, beside the price it was struck
+          // against. This used to prefer the review document's figure, which is
+          // a different claim wearing the same two letters: the review divides
+          // the close *at the last filed period end* by that period's earnings,
+          // so it is a P/E as it stood a year ago, printed under today's close.
+          // The historical series still belongs — it is in the ratios block
+          // below, where every point carries its own period label.
           { label:'P/E',
-            value: (() => {
-              const fromReview = D.review && (D.review.metrics || [])
-                .find((m) => m.key === 'pe' && typeof m.value === 'number');
-              if (fromReview) return this.num(fromReview.value, 1);
-              return typeof loaded.pe === 'number' ? this.num(loaded.pe, 1) : '\u2014';
-            })(),
-            color:'var(--ink)' },
+            value: typeof loaded.pe === 'number' ? this.num(loaded.pe, 1) : '\u2014',
+            color: typeof loaded.pe === 'number' ? 'var(--ink)' : 'var(--faint)',
+            note: typeof loaded.pe === 'number' && loaded.pePeriod
+              ? (ar ? 'عن ' + loaded.pePeriod : 'over ' + loaded.pePeriod) : '' },
           { label: ar?'ربحية السهم':'EPS',
             value: typeof loaded.eps === 'number' ? this.num(loaded.eps, 2) : '\u2014',
-            color: typeof loaded.eps === 'number' ? 'var(--ink)' : 'var(--faint)' },
+            color: typeof loaded.eps === 'number' ? 'var(--ink)' : 'var(--faint)',
+            note: typeof loaded.eps === 'number' && loaded.epsPeriod ? loaded.epsPeriod : '' },
         ],
         ticker: loaded.ticker,
         nameEn: loaded.name && loaded.name.en ? loaded.name.en : loaded.ticker,
         nameAr: loaded.name && loaded.name.ar ? loaded.name.ar : (loaded.name && loaded.name.en) || loaded.ticker,
-        sector: loaded.sector || co.sector,
+        sector: sectorName(loaded.sector) || co.sector,
+        sectorKey: loaded.sector || co.sectorKey || '',
         close: loaded.close === null || loaded.close === undefined ? '—' : this.num(loaded.close),
         pct: pct === null ? '—' : this.pct(pct),
+        // The move in pounds, beside the move in percent. Every real company
+        // printed a literal em dash here — the design's default, which the
+        // loaded branch overwrote for close, percent, colour and arrow and
+        // never for this — so the header read "— −1.19% ↘". market.json gives
+        // the close and the fraction; the previous close is the one implied by
+        // the pair, and the difference is what a reader can check against it.
+        chg: (() => {
+          const c = loaded.close;
+          if (pct === null || typeof c !== 'number' || pct <= -100) return '—';
+          // Signed the same way `pct` beside it is, so the header does not put
+          // a typographic minus next to an arithmetic one.
+          return this.signed(c - c / (1 + pct / 100));
+        })(),
         color: this.dcol(pct),
         arrow: pct === null ? '' : (pct > 0 ? '\u2197' : '\u2198'),
         closeDate: loaded.closeDate || D.marketDate || co.closeDate,
@@ -772,7 +858,7 @@ export class Component extends Base {
     // back to the market table and finding it again. Grouped by sector because
     // 282 tickers in one strip is a haystack, and the sector a reader is
     // already looking at is the one they are most likely to want another of.
-    const pickSector = st.pickSector || (co.sector || 'All');
+    const pickSector = st.pickSector || (co.sectorKey || 'All');
     const pickSectors = [L.allSectors].concat(
       Array.from(new Set(D.companies.map((c) => c.sector).filter(Boolean))).sort());
     const pickList = D.companies
@@ -790,7 +876,7 @@ export class Component extends Base {
         go: () => this.setState({ screen: 'company', ticker: c.ticker }),
       }));
     const pickChips = pickSectors.map((name) => ({
-      name,
+      name: name === L.allSectors ? name : sectorName(name),
       on: name === pickSector,
       bg: name === pickSector ? 'var(--surface)' : 'transparent',
       fg: name === pickSector ? 'var(--ink)' : 'var(--t2)',
@@ -895,6 +981,12 @@ export class Component extends Base {
       go: () => this.setState({ compareType: t }),
     }));
 
+    // Where a filing is cited from. The exchange, for a filing the exchange
+    // actually holds — and nowhere at all in the demo, whose filings do not
+    // exist: an invented filing id pointed at egx.com.eg is a citation to a
+    // document that is not there, which is worse than no citation.
+    const filingSource = (given) => (given || (D.demo ? '' : 'https://www.egx.com.eg'));
+
     const dense = (this.props.density || 'editorial') === 'dense';
     const fins = D.fins.map((f,i) => {
       const open = dense || !!st.open[f.period];
@@ -908,7 +1000,7 @@ export class Component extends Base {
       ].filter(x => x.items.length);
       const total = 15, present = groups.reduce((n,x) => n + x.items.length, 0);
       return {
-        period:f.period, window:f.window, bg: i === 0 ? 'var(--sunk)' : 'transparent',
+        period:f.period, window: this.filedWindow(f), bg: i === 0 ? 'var(--sunk)' : 'transparent',
         revenue:this.num(f.revenue,1), grossProfit:this.num(f.gross_profit,1), operatingIncome:this.num(f.operating_income,1), netIncome:this.num(f.net_income,1),
         revColor: f.revenue === null ? 'var(--faint)' : 'var(--ink)', gpColor: f.gross_profit === null ? 'var(--faint)' : 'var(--ink)',
         opColor: f.operating_income === null ? 'var(--faint)' : 'var(--ink)', niColor: f.net_income === null ? 'var(--faint)' : 'var(--ink)',
@@ -917,13 +1009,13 @@ export class Component extends Base {
         hasMore: present > 0,
         toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [f.period]: !s.open[f.period] }) })),
         filingId:f.filing_id, filedOn: (f.filed || f.filed_on) ? (ar?'أُودع ':'Filed ') + (f.filed || f.filed_on) : '',
-        source: f.source || 'https://www.egx.com.eg',
+        source: filingSource(f.source),
         omitted: (total - present) > 0 ? ((ar?'':'') + (total-present) + (ar?' حقلاً لم يذكره الإفصاح':' fields not stated in this filing')) : (ar?'كل الحقول مذكورة':'All fields stated')
       };
     });
 
     const debtDesign = {
-      period:'H1 2026', asOf:'2026-06-30', frame:'operating', basis:'balance_sheet', filingId:'egx-293566', source:'https://www.egx.com.eg',
+      period:'H1 2026', asOf:'2026-06-30', frame:'operating', basis:'balance_sheet', filingId:'demo-000293', source:'',
       borrowings: this.num(1869.119,1), shortTerm: this.num(1795.468,1), longTerm: this.num(73.652,1), stPct: '96%',
       metrics:[
         { label: ar?'النقد':'Cash', value: this.num(375.378,1), note: ar?'كما في ٣٠ يونيو ٢٠٢٦':'As at 30 June 2026' },
@@ -957,7 +1049,7 @@ export class Component extends Base {
     const d0 = loaded && loaded.debt;
     const debt = D.demo && !d0 ? debtDesign : !d0 ? null : {
       period: d0.period, asOf: d0.as_of, frame: d0.frame, basis: (d0.change || {}).basis,
-      filingId: d0.filing_id, source: d0.source || 'https://www.egx.com.eg',
+      filingId: d0.filing_id, source: filingSource(d0.source),
       borrowings: this.num(d0.borrowings, 1), shortTerm: this.num(d0.short_term, 1),
       longTerm: this.num(d0.long_term, 1),
       stPct: d0.due_within_year === null || d0.due_within_year === undefined
@@ -1058,26 +1150,31 @@ export class Component extends Base {
     const signals = (D.signals && !Array.isArray(D.signals))
       ? this.signalCards(D.signals, L, ar)
       : D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
-      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/KORA · 2026-08-26' },
-      { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/KORA · egx-293566' },
+      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/demo · 2026-08-26' },
+      { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/demo · demo-000293' },
       { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp:'calendar.json · estimate' }
     ];
 
     const filings = D.filings ? say(D.filings, ['title']) : !D.demo ? [] : [
-      { date:'2026-08-14', title: ar?'القوائم المالية للفترة المنتهية ٣٠ يونيو ٢٠٢٦':'Financial statements for the period ended 30 June 2026', id:'egx-293566', href:'https://www.egx.com.eg' },
-      { date:'2026-05-12', title: ar?'القوائم المالية للربع الأول ٢٠٢٦':'Financial statements for Q1 2026', id:'egx-288104', href:'https://www.egx.com.eg' },
-      { date:'2026-03-28', title: ar?'القوائم المالية السنوية ٢٠٢٥ وتقرير مراقب الحسابات':'Annual financial statements 2025 with auditor’s report', id:'egx-271340', href:'https://www.egx.com.eg' },
-      { date:'2026-03-02', title: ar?'إفصاح عن دعوة الجمعية العامة العادية':'Notice convening the ordinary general assembly', id:'egx-269911', href:'https://www.egx.com.eg' },
-      { date:'2025-11-11', title: ar?'القوائم المالية لتسعة أشهر ٢٠٢٥':'Financial statements for 9M 2025', id:'egx-264880', href:'https://www.egx.com.eg' }
+      { date:'2026-08-14', title: ar?'القوائم المالية للفترة المنتهية ٣٠ يونيو ٢٠٢٦':'Financial statements for the period ended 30 June 2026', id:'demo-293566', href:'' },
+      { date:'2026-05-12', title: ar?'القوائم المالية للربع الأول ٢٠٢٦':'Financial statements for Q1 2026', id:'demo-288104', href:'' },
+      { date:'2026-03-28', title: ar?'القوائم المالية السنوية ٢٠٢٥ وتقرير مراقب الحسابات':'Annual financial statements 2025 with auditor’s report', id:'demo-271340', href:'' },
+      { date:'2026-03-02', title: ar?'إفصاح عن دعوة الجمعية العامة العادية':'Notice convening the ordinary general assembly', id:'demo-269911', href:'' },
+      { date:'2025-11-11', title: ar?'القوائم المالية لتسعة أشهر ٢٠٢٥':'Financial statements for 9M 2025', id:'demo-264880', href:'' }
     ];
 
     // sectors
+    // The same sector vocabulary the rest of the demo runs on. These names used
+    // to be a second, invented taxonomy — Banks, Chemicals, Real Estate — so a
+    // visitor moving from Market to Sectors was shown two different sets of
+    // sectors for one exchange, neither of them the one the documents file
+    // under.
     const secDef = [
-      ['Banks','البنوك',12,8,3,1,4.9,'COMI'],['Real Estate','العقارات',31,19,10,2,6.2,'TMGH'],['Chemicals','الكيماويات',18,7,9,2,7.4,'ABUK'],
-      ['Industrials','الصناعة',26,16,8,2,8.1,'SWDY'],['Basic Resources','الموارد الأساسية',14,5,7,2,9.0,'ESRS'],['Consumer','السلع الاستهلاكية',22,11,9,2,6.8,'EAST'],
-      ['Telecom','الاتصالات',4,2,1,1,4.2,'ETEL'],['Utilities','المرافق',6,2,4,0,11.2,'KORA'],['Energy','الطاقة',9,6,2,1,9.1,'AMOC'],
-      ['Financials','الخدمات المالية',17,6,9,2,5.6,'HRHO'],['Healthcare','الرعاية الصحية',11,7,3,1,12.4,'IDHC'],['Textiles','الغزل والنسيج',13,3,8,2,7.7,'ELSH'],
-      ['Transport & Shipping','النقل والشحن',8,4,3,1,8.6,'CCAP'],['Travel & Leisure','السفر والترفيه',12,5,6,1,10.3,'ORHD'],['Media','الإعلام',5,2,2,1,9.4,'MEDI']
+      ['Finance','التمويل والخدمات المالية',12,8,3,1,4.9,'COMI'],['Process Industries','الصناعات التحويلية',31,19,10,2,6.2,'TMGH'],['Non-Energy Minerals','معادن ومواد بناء',18,7,9,2,7.4,'ABUK'],
+      ['Producer Manufacturing','صناعات إنتاجية',26,16,8,2,8.1,'SWDY'],['Industrial Services','خدمات صناعية',14,5,7,2,9.0,'ESRS'],['Consumer Non-Durables','سلع استهلاكية غير معمّرة',22,11,9,2,6.8,'EAST'],
+      ['Communications','الاتصالات',4,2,1,1,4.2,'ETEL'],['Utilities','المرافق',6,2,4,0,11.2,'KORA'],['Energy Minerals','موارد الطاقة',9,6,2,1,9.1,'AMOC'],
+      ['Distribution Services','خدمات التوزيع',17,6,9,2,5.6,'HRHO'],['Health Technology','أدوية وتكنولوجيا طبية',11,7,3,1,12.4,'IDHC'],['Consumer Durables','سلع استهلاكية معمّرة',13,3,8,2,7.7,'ELSH'],
+      ['Transportation','النقل',8,4,3,1,8.6,'CCAP'],['Consumer Services','خدمات استهلاكية',12,5,6,1,10.3,'ORHD'],['Technology Services','خدمات تكنولوجية',5,2,2,1,9.4,'MEDI']
     ];
     const sectorCards = D.sectorCards ? say(D.sectorCards, ['name','read','full'])
       .map((c) => Object.assign({}, c, { medians: say(c.medians || [], ['key']) }))
@@ -1091,15 +1188,26 @@ export class Component extends Base {
       return { name: ar ? arn : en, count: count + (ar?' شركة':' listed'), bars, upCount:up, downCount:down, flatCount:flat,
         read: ar ? ('صعد ' + up + ' من ' + count + ' سهماً في القطاع في جلسة ٢٦ أغسطس. وسيط مضاعف الربحية ' + pe.toFixed(1) + '.')
                  : (up + ' of ' + count + ' listed names rose in the 26 August session. Median P/E ' + pe.toFixed(1) + '.'),
-        medianPe: pe.toFixed(1), standout: (ar?'الأكبر تحركاً ':'Largest move ') + standout };
+        // The card prints the yield beside the median P/E without gating it, so
+        // a demo card missing the field read "Median P/E 4.9 · Yield" with the
+        // sentence stopping mid-air.
+        medianPe: pe.toFixed(1), yield: (2.5 + (pe % 3)).toFixed(1) + '%',
+        full: '', fullAr: '', medians: [], metrics: [], slug: en.toLowerCase().replace(/[^a-z]+/g, '-'),
+        standout: (ar?'الأكبر تحركاً ':'Largest move ') + standout };
     });
 
     // calendar
     // The design named four months and clicking one changed a state field
     // nothing read. The archive says which months it holds and how many
     // filings are in each.
+    // The four-month fallback is the design's, and it was reached by a
+    // signed-in reader whenever filedMonths failed to load — four months the
+    // archive may not hold, each of which then draws an empty grid, with
+    // nothing saying the list was invented. It is the last design literal that
+    // could reach live data; like every other it is now demo-only.
     const monthDef = (D.filedMonths || []).length
       ? D.filedMonths.map((m) => [m.id, this.monthLabel(m.id), m.count])
+      : !D.demo ? []
       : [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
     const months = monthDef.map(([id,label,count]) => ({ label, count: count || '', go: () => this.setState({ month:id }),
       color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
@@ -1158,29 +1266,29 @@ export class Component extends Base {
       hasKind: Boolean(e.kind),
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
     })) : !D.demo ? [] : [
-      { day:'26 Aug', ticker:'COMI', what: ar?'إفصاح عن توزيعات نقدية مرحلية':'Interim cash distribution disclosure' },
-      { day:'14 Aug', ticker:'KORA', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'13 Aug', ticker:'SWDY', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'11 Aug', ticker:'TMGH', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'07 Aug', ticker:'ABUK', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'04 Aug', ticker:'ETEL', what: ar?'إفصاح عن تعاقد':'Contract disclosure' }
+      { day:'26 Aug', ticker:'COMI', what: ar?'إفصاح عن توزيعات نقدية مرحلية':'Interim cash distribution disclosure', kind:'', hasKind:false, basis:'' },
+      { day:'14 Aug', ticker:'KORA', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'13 Aug', ticker:'SWDY', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'11 Aug', ticker:'TMGH', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'07 Aug', ticker:'ABUK', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'04 Aug', ticker:'ETEL', what: ar?'إفصاح عن تعاقد':'Contract disclosure', kind:'', hasKind:false, basis:'' }
     ];
     const expectedEvents = D.expectedEvents ? say(D.expectedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
     })) : !D.demo ? [] : [
-      { day:'31 Aug', ticker:'ESRS', what: ar?'قوائم النصف الأول ٢٠٢٦ — الموعد النظامي':'H1 2026 statements — regulatory deadline' },
-      { day:'30 Aug', ticker:'PHDC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'30 Aug', ticker:'SKPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'28 Aug', ticker:'MFPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'28 Aug', ticker:'CIEB', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' },
-      { day:'27 Aug', ticker:'ORAS', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements' }
+      { day:'31 Aug', ticker:'ESRS', what: ar?'قوائم النصف الأول ٢٠٢٦ — الموعد النظامي':'H1 2026 statements — regulatory deadline', kind:'', hasKind:false, basis:'' },
+      { day:'30 Aug', ticker:'PHDC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'30 Aug', ticker:'SKPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'28 Aug', ticker:'MFPC', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'28 Aug', ticker:'CIEB', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
+      { day:'27 Aug', ticker:'ORAS', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' }
     ];
 
     // exchange
     const rates = D.rates ? say(D.rates, ['label','plain'])
       : (D.indices || []).map((ix) => ({ label: ix.label, labelAr: ix.labelAr,
-          value: ix.value, pct: ix.pct, color: ix.color,
+          value: ix.value, pct: ix.pct, color: ix.color, plain: '', plainAr: '',
           unit: ar ? 'نقطة' : 'points' }));
 
     const macro = (D.macro ? say(D.macro, ['label','meaning','chain']) : []).map((m) => {
@@ -1240,6 +1348,10 @@ export class Component extends Base {
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
       bodyFont: ar ? "'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif" : "'IBM Plex Sans',sans-serif",
       marketDate: this.longDate(D.marketDate), generatedAt: D.generatedAt || '—',
+      // Whether the prices on every screen are settled closes or a session
+      // still running. market.json has always said; nothing here had asked.
+      sessionState: D.isClose ? L.sessionClose : L.sessionLive,
+      sessionColor: D.isClose ? 'var(--faint)' : 'var(--accent)',
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
       noFeed: feed.length === 0, noRates: rates.length === 0,
@@ -1305,6 +1417,10 @@ export class Component extends Base {
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       indices, movers, watchlist, readNow, feed,
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
+      // The placeholder used to assert "282 companies" in both languages. The
+      // exchange is not a constant — build_market_api has already moved it
+      // once — so it counts what was actually loaded.
+      searchPlaceholder: L.searchPlaceholder.replace('{n}', String(D.companies.length)),
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
@@ -1484,6 +1600,32 @@ export class Component extends Base {
     if (isNaN(at)) return iso;
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** "1 Jul 2013", short enough to sit under a period label. */
+  shortDate(iso) {
+    if (!iso) return '';
+    const at = new Date(String(iso).slice(0, 10) + 'T00:00:00Z');
+    if (isNaN(at)) return String(iso);
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** The dates a filed period actually covers, or '' when it does not say.
+   *
+   * This line used to bind `f.window`, a field no document has ever carried:
+   * a census of all 11,480 filed rows finds it on none of them, so every
+   * period on every company printed an empty line under its label. What the
+   * documents do carry is `period_start` and `period_end`, on 8,002 of those
+   * rows — which is the thing the line was for. It matters most where the
+   * label is least literal: "FY 2014" on a June year-end, and the cumulative
+   * H1 and 9M filings, where the label names an end and says nothing about
+   * where the count began.
+   */
+  filedWindow(row) {
+    const a = this.shortDate(row.period_start), b = this.shortDate(row.period_end);
+    if (a && b) return a + ' \u2192 ' + b;
+    return b ? (this.state.lang === 'ar' ? 'حتى ' + b : 'to ' + b) : '';
   }
 
   buildChart(pts) {

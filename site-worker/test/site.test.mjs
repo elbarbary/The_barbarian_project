@@ -1092,3 +1092,293 @@ test('every binding in the template resolves to something', async () => {
   }
   assert.deepEqual(unresolved, [], 'these bindings render as an empty string');
 });
+
+test('every field a loop row is asked for exists on the row', async () => {
+  // The test above deliberately skips loop-variable members, because it cannot
+  // know what a row holds without one. That gap is where `{{ p.window }}` sat:
+  // a field on 0 of 11,480 filed rows, drawing an empty line under every period
+  // label on every company, for as long as the screen has existed. So resolve
+  // the lists and ask the rows themselves.
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+
+  // Which list each loop variable iterates, and which loop encloses it.
+  const scopes = [];                       // {varName, listExpr, parent, uses:Set}
+  const stack = [];
+  const TAG = /<sc-for\s+list="\{\{\s*([^}]+?)\s*\}\}"\s+as="(\w+)"|<\/sc-for>|\{\{([^}]+)\}\}/g;
+  for (const m of tpl.matchAll(TAG)) {
+    if (m[2]) {
+      const scope = { varName: m[2], listExpr: m[1], parent: stack[stack.length - 1] || null, uses: new Set() };
+      scopes.push(scope);
+      stack.push(scope);
+    } else if (m[0] === '</sc-for>') {
+      stack.pop();
+    } else if (m[3]) {
+      const raw = m[3].trim();
+      const root = raw.split(/[.[( ]/)[0];
+      const dot = raw.indexOf('.');
+      if (dot === -1) continue;
+      for (let i = stack.length - 1; i >= 0; i--) {
+        if (stack[i].varName === root) {
+          stack[i].uses.add(raw.slice(dot + 1).split(/[.[( ]/)[0]);
+          break;
+        }
+      }
+    }
+  }
+  assert.ok(scopes.length > 20, 'the template scanner found no loops');
+
+  // Every screen, so a list that only one of them fills is still seen.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  const rowsFor = new Map();               // scope -> sample rows seen anywhere
+  const collect = (scope, container) => {
+    const list = scope.listExpr.split('.').reduce((o, k) => (o == null ? o : o[k.trim()]), container);
+    if (!Array.isArray(list)) return [];
+    const seen = rowsFor.get(scope) || [];
+    rowsFor.set(scope, seen.concat(list));
+    return list;
+  };
+  for (const s of ['home', 'today', 'market', 'company', 'sectors', 'calendar', 'exchange', 'research']) {
+    c.state.screen = s;
+    for (const opened of [{}, { ...c.state.open }]) {
+      c.state.open = opened;
+      const v = c.renderVals();
+      // Outer loops read off renderVals; inner loops read off a row of their parent.
+      for (const scope of scopes) {
+        if (scope.parent) continue;
+        const rows = collect(scope, v);
+        const descend = (parent, parentRows) => {
+          for (const child of scopes.filter((x) => x.parent === parent)) {
+            const childRows = parentRows.flatMap((r) => collect(child, r));
+            descend(child, childRows);
+          }
+        };
+        descend(scope, rows);
+      }
+    }
+    // Open the first period so the nested statement groups are reachable.
+    const v = c.renderVals();
+    if (Array.isArray(v.fins) && v.fins[0]) c.state.open = { [v.fins[0].period]: true };
+  }
+
+  const missing = [];
+  for (const scope of scopes) {
+    const rows = (rowsFor.get(scope) || []).filter((r) => r && typeof r === 'object');
+    if (!rows.length) continue;            // an empty list says nothing either way
+    for (const field of scope.uses) {
+      if (!rows.some((r) => field in r)) {
+        missing.push(`${scope.listExpr} → {{ ${scope.varName}.${field} }}`);
+      }
+    }
+  }
+  assert.deepEqual(missing, [], 'these rows never carry the field the markup asks for');
+});
+
+/* ── the P/E column ────────────────────────────────────────────────────── */
+
+test('the market table publishes the P/E the pipeline published, or none', () => {
+  // build_market_api refuses a multiple in four cases — a loss, no filed
+  // profit, a share count that does not cohere with price and market cap, and
+  // a ratio outside 1–200 — and omits the field. The site used to re-derive
+  // close/eps over the top of every one of those refusals: AALR came out at
+  // 34,048.9 on an EPS of 0.009, in a sortable column, so sorting by P/E put a
+  // rounding artefact at the top of the exchange.
+  const c = data.__marketRow
+    ? null
+    : null;
+  const rows = screen({
+    ...LIVE,
+    companies: [
+      { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, cap: 100, pe: 8.4, pePeriod: 'FY 2024' },
+      // Published EPS, no published multiple: the pipeline refused it.
+      { ticker: 'BBBB', name: { en: 'B', ar: 'ب' }, sector: 'Finance', close: 306.44, pct: 1, cap: 100, eps: 0.009, pe: null },
+    ],
+  }).rows;
+  assert.equal(rows.find((r) => r.ticker === 'AAAA').pe, '8.4');
+  assert.equal(rows.find((r) => r.ticker === 'BBBB').pe, '—');
+});
+
+test('a refused multiple is refused by the reader too', async () => {
+  // The refusal has to survive the document reader, not just the screen —
+  // the derivation that produced 34,048.9 lived in data.js.
+  const { readFile } = await import('node:fs/promises');
+  const src = await readFile(new URL('../../public/esthmr/data.js', import.meta.url), 'utf8');
+  const body = src.split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
+  assert.ok(!/q\.close\s*\/\s*c\.eps/.test(body),
+    'data.js derives a P/E instead of reading the published one');
+});
+
+test('a multiple says which year it is earned over', () => {
+  const v = screen({ ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, cap: 100,
+      pe: 8.4, pePeriod: 'FY 2024', eps: 1.19, epsPeriod: 'FY 2024' },
+  ] });
+  // Before a document lands the screen shows dashes; the note is what the
+  // company screen prints once the row is carried onto it.
+  const printed = JSON.stringify(v.L);
+  assert.ok(printed.includes('left blank'), 'the table never says why a P/E is missing');
+});
+
+/* ── a filed period says what it covers ────────────────────────────────── */
+
+test('a filed period prints the dates it covers', () => {
+  const v = screen({
+    ...LIVE,
+    fins: [{ period: 'FY 2014 (to 30 Jun)', period_start: '2013-07-01', period_end: '2014-06-30',
+             net_income: -31.724 }],
+  });
+  assert.equal(v.fins[0].window, '1 Jul 2013 → 30 Jun 2014');
+  // 3,478 of the filed rows carry only an end; those say so rather than lying
+  // about where the count began.
+  const only = screen({ ...LIVE, fins: [{ period: 'FY 2014', period_end: '2014-12-31' }] });
+  assert.equal(only.fins[0].window, 'to 31 Dec 2014');
+  const none = screen({ ...LIVE, fins: [{ period: 'FY 2014' }] });
+  assert.equal(none.fins[0].window, '');
+});
+
+/* ── the header's move in pounds ───────────────────────────────────────── */
+
+test('a company header shows the move in pounds, not an em dash', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 12.4, pct: -3.125, cap: 100 },
+  ] });
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance',
+            close: 12.4, pct: -3.125, profile: {} };
+  const v = c.renderVals();
+  assert.equal(v.co.pct, '-3.13%');
+  assert.equal(v.co.chg, '-0.40');        // 12.40 against a previous 12.80
+  // Both signs in the same header are the same glyph.
+  assert.equal(v.co.chg[0], v.co.pct[0]);
+  assert.notEqual(v.co.chg, '—');
+});
+
+/* ── whether the prices are final ──────────────────────────────────────── */
+
+test('a session still running is not printed as a close', () => {
+  assert.equal(screen({ ...LIVE, isClose: true }).sessionState, 'Closing prices');
+  const live = screen({ ...LIVE, isClose: false });
+  assert.equal(live.sessionState, 'Session in progress — prices not final');
+  assert.notEqual(live.sessionColor, screen({ ...LIVE, isClose: true }).sessionColor);
+  // market.json publishes the flag; the reader has to carry it.
+  assert.equal(typeof data.demo().isClose, 'boolean');
+});
+
+/* ── the sector's name in Arabic ───────────────────────────────────────── */
+
+test('an Arabic reader gets Arabic sector names, and English keys keep filtering', () => {
+  const set = { ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Process Industries',
+      sectorAr: 'الصناعات التحويلية', close: 10, pct: 1, cap: 100, pe: 8 },
+  ] };
+  assert.equal(screen(set, 'ar').rows[0].sector, 'الصناعات التحويلية');
+  assert.equal(screen(set, 'en').rows[0].sector, 'Process Industries');
+  // The chip's label is translated; the state it sets is the filed name, or
+  // the filter it drives would match nothing.
+  const chip = screen(set, 'ar').sectorChips.find((s) => s.label === 'الصناعات التحويلية');
+  assert.ok(chip, 'the Arabic screen has no Arabic sector chip');
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = 'ar';
+  c.setData(set);
+  c.renderVals().sectorChips.find((s) => s.label === 'الصناعات التحويلية').go();
+  assert.equal(c.state.sector, 'Process Industries');
+  assert.equal(c.renderVals().rows.length, 1, 'the Arabic chip filtered the table to nothing');
+});
+
+test('the company rail groups on the filed sector, not the translated one', () => {
+  const set = { ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Process Industries',
+      sectorAr: 'الصناعات التحويلية', close: 10, pct: 1, cap: 100, pe: 8 },
+    { ticker: 'BBBB', name: { en: 'B', ar: 'ب' }, sector: 'Process Industries',
+      sectorAr: 'الصناعات التحويلية', close: 20, pct: 1, cap: 200, pe: 8 },
+  ] };
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = 'ar';
+  c.setData(set);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Process Industries',
+            close: 10, pct: 1, profile: {} };
+  const v = c.renderVals();
+  assert.equal(v.co.sector, 'الصناعات التحويلية');
+  assert.equal(v.pickList.length, 2, 'the rail emptied itself against a translated key');
+});
+
+/* ── the demo names nobody ─────────────────────────────────────────────── */
+
+test('the demo screens name no real company and no real outlet', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  for (const lang of ['en', 'ar']) {
+    c.state.lang = lang;
+    for (const s of ['home', 'today', 'market', 'company', 'sectors', 'calendar', 'exchange', 'research']) {
+      c.state.screen = s;
+      const printed = JSON.stringify(c.renderVals(), (k, x) => (typeof x === 'function' ? undefined : x));
+      for (const real of ['KORRA', 'كورّة', 'El Sewedy', 'السويدي', 'Commercial International Bank',
+                          'البنك التجاري', 'Alexandria Mineral Oils', 'Ezz Steel', 'Suez Canal',
+                          'قناة السويس', 'Al Borsa', 'alborsaanews', 'Enterprise', 'hapijournal',
+                          'egx.com.eg']) {
+        assert.ok(!printed.includes(real), `the demo ${s} screen (${lang}) names ${real}`);
+      }
+      // And no real four-letter EGX ticker: the demo directory is DEMO01..16.
+      for (const t of ['COMI', 'KORA', 'SWDY', 'AMOC', 'ETEL', 'TMGH', 'ABUK', 'ESRS']) {
+        assert.ok(!printed.includes(`"${t}"`), `the demo ${s} screen (${lang}) names ${t}`);
+      }
+    }
+  }
+});
+
+test('the calendar months are the archive\'s, and the design\'s only in the demo', () => {
+  // A signed-in reader whose filedMonths document failed used to be offered
+  // four months the archive may not hold, each drawing an empty grid.
+  const v = screen({ ...LIVE, filedMonths: undefined });
+  assert.deepEqual(v.months, []);
+  const d = new Component({ accent: 'var(--accent)' });
+  d.setData(data.demo());
+  assert.ok(d.renderVals().months.length > 0, 'the demo lost its month pills');
+});
+
+test('the two P/Es on a company screen each say what they are', () => {
+  // The header divides today's close by the last filed earnings; the ratio
+  // card divides the close at that period's end, because it is the last point
+  // of a series. For CIB they are 8.6 and 4.84×, and with no date on either
+  // the pair reads as one of them being wrong.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, review: { sector: 'Finance', metrics: [
+    { key: 'pe', value: 4.84, unit: 'ratio', points: 5, direction: 'flat',
+      series: [{ p: 'FY 2023', v: 5.1 }, { p: 'FY 2024', v: 4.84 }] },
+  ] } });
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance',
+            close: 139.28, pct: -1.19, pe: 8.6, pePeriod: 'FY 2024', profile: {} };
+  const v = c.renderVals();
+  const header = v.co.stats.find((s) => s.label === 'P/E');
+  assert.equal(header.value, '8.6');
+  assert.equal(header.note, 'over FY 2024');
+  const card = v.ratios.find((r) => r.key === 'pe');
+  assert.equal(card.value, '4.84×');
+  assert.ok(card.asAt.includes('FY 2024'), 'the ratio card does not date its P/E');
+  // Only the price-struck ratio carries the caveat.
+  assert.equal(v.ratios.filter((r) => r.asAt).length, 1);
+});
+
+test('the demo cites no filing it does not have', () => {
+  // An invented filing id pointed at egx.com.eg is a citation to a document
+  // that is not there.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  for (const s of ['company', 'today', 'calendar']) {
+    c.state.screen = s;
+    const printed = JSON.stringify(c.renderVals(), (k, x) => (typeof x === 'function' ? undefined : x));
+    assert.ok(!printed.includes('egx.com.eg'), `the demo ${s} screen cites the exchange`);
+    assert.ok(!/"egx-\d+"/.test(printed), `the demo ${s} screen cites a real filing id`);
+  }
+  // A signed-in screen still cites it.
+  const live = new Component({ accent: 'var(--accent)' });
+  live.setData({ ...LIVE, fins: [{ period: 'FY 2024', period_end: '2024-12-31', net_income: 1 }] });
+  assert.equal(live.renderVals().fins[0].source, 'https://www.egx.com.eg');
+});
