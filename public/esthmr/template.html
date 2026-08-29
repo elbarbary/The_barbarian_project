@@ -497,6 +497,12 @@
             </div>
           </sc-for>
         </div>
+        <!-- The sum behind the twelve-month tile. Two P/Es on one screen need
+             the second one to show its working, or the pair reads as one
+             figure disagreeing with itself. -->
+        <sc-if value="{{ co.ttmWorking }}">
+          <div style="margin-top:12px;font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ co.ttmWorking }}</div>
+        </sc-if>
       </div>
 
       <!-- A rail of every listed company, so changing company does not mean going

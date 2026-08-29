@@ -286,6 +286,15 @@ export async function live() {
       // can be eighteen months old, and the site should say so rather than let
       // it read as today's.
       pePeriod: c.pe_period || '',
+      // And the same price over the last twelve months the company FILED,
+      // which for most of the exchange is a year fresher. Three filed figures
+      // and a subtraction — build_ttm_pe.py — never a forecast. The window is
+      // carried with it because a trailing year that ended eight months ago is
+      // a different claim from one that ended in June.
+      peTtm: typeof c.pe_ttm === 'number' ? c.pe_ttm : null,
+      peTtmWindow: c.pe_ttm_window || '',
+      peTtmTo: c.pe_ttm_to || '',
+      epsTtm: typeof c.eps_ttm === 'number' ? c.eps_ttm : null,
       eps: c.eps ?? null, epsPeriod: c.eps_period || '',
       volume: q.volume ?? null,
       // How busy the session was against this company's OWN normal. The median

@@ -1622,3 +1622,69 @@ test('the colours on the axis are named once, for the whole section', () => {
   }
   assert.deepEqual(screen(LIVE).crossLegend, []);
 });
+
+/* ── the trailing twelve months ────────────────────────────────────────── */
+
+test('a company screen shows both P/Es, each saying what it is over', () => {
+  // The annual one can be struck against earnings twenty months old. ARCC is
+  // 24.4 on FY 2024 and 5.7 on its last twelve months — the same company, the
+  // same price, a year of difference in the earnings. Undated, the pair reads
+  // as one figure disagreeing with itself.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', profile: {},
+            close: 75.6, pct: 1, pe: 24.44, pePeriod: 'FY 2024',
+            peTtm: 5.73, peTtmTo: 'H1 2026', epsTtm: 13.189,
+            peTtmWindow: 'FY 2025 + H1 2026 - H1 2025',
+            eps: 3.09, epsPeriod: 'FY 2024' };
+  const v = c.renderVals();
+  const annual = v.co.stats.find((s) => s.label === 'P/E');
+  const twelve = v.co.stats.find((s) => s.label === 'P/E · 12M');
+  assert.equal(annual.value, '24.4');
+  assert.equal(annual.note, 'over FY 2024');
+  assert.equal(twelve.value, '5.7');
+  assert.equal(twelve.note, 'to H1 2026');
+  // And the sum is printed, so the figure can be taken apart.
+  assert.ok(v.co.ttmWorking.includes('FY 2025 + H1 2026 - H1 2025'));
+  assert.ok(v.co.ttmWorking.includes('13.19'));
+  assert.ok(/nothing here is forecast/.test(v.co.ttmWorking));
+});
+
+test('a company the pipeline refused a trailing P/E shows a dash, not the annual', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', profile: {},
+            close: 10, pct: 1, pe: 8.4, pePeriod: 'FY 2024', peTtm: null };
+  const v = c.renderVals();
+  assert.equal(v.co.stats.find((s) => s.label === 'P/E · 12M').value, '—');
+  assert.equal(v.co.ttmWorking, '', 'a refused figure still printed its working');
+});
+
+test('§8 the trailing figure is described as filed arithmetic, never a forecast', () => {
+  const en = screen(LIVE).L.ttmWorking;
+  const ar = screen(LIVE, 'ar').L.ttmWorking;
+  for (const copy of [en, ar]) {
+    assert.ok(!DIRECTIVE.test(copy), '§8: the trailing note reads as advice');
+  }
+  // The word that would make it a claim about the future.
+  assert.ok(!/\b(estimate|estimated|projected|forecast to|expected to)\b/i.test(en),
+    'the note calls a filed sum an estimate');
+});
+
+test('the reader carries the trailing figure and its window off the document', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const raw = JSON.parse(await readFile(
+    new URL('../../public/data/v1/companies.json', import.meta.url), 'utf8'));
+  const withTtm = raw.companies.filter((c) => typeof c.pe_ttm === 'number');
+  assert.ok(withTtm.length > 50, `only ${withTtm.length} companies carry a trailing P/E`);
+  for (const company of withTtm) {
+    assert.ok(company.pe_ttm_window, `${company.ticker} publishes a ratio with no working`);
+    assert.match(company.pe_ttm_window, /.+ \+ .+ - .+/, company.ticker);
+    assert.ok(company.pe_ttm >= 1 && company.pe_ttm <= 200,
+      `${company.ticker} publishes ${company.pe_ttm}`);
+  }
+});
