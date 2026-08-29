@@ -24,6 +24,8 @@
  * otherwise Arabic copy. A sector the exchange adds later falls through to its
  * English name, which is the honest degrade.
  */
+export const UNCLASSIFIED = { en: 'Unclassified', ar: 'غير مصنّف' };
+
 export const SECTOR_AR = {
   "Finance": "التمويل والخدمات المالية",
   "Process Industries": "الصناعات التحويلية",
@@ -257,8 +259,12 @@ export async function live() {
     return {
       ticker: c.ticker,
       name: { en: c.name_en, ar: c.name_ar || c.name_en },
-      sector: c.sector || '—',
-      sectorAr: SECTOR_AR[c.sector] || c.sector || '—',
+      // A chip whose entire label is an em dash sat fourth in the Market
+      // screen's filter row. It filters to the 24 companies the exchange has
+      // not classified, so it is not dead — it just reads as a rendering
+      // fault. Those companies get a word.
+      sector: c.sector || UNCLASSIFIED.en,
+      sectorAr: SECTOR_AR[c.sector] || (c.sector ? c.sector : UNCLASSIFIED.ar),
       close: q.close ?? '—',
       // market.json states the day's move as a FRACTION — COMI fell 0.011918,
       // which is 1.19%. The site printed it straight, so every move on the
@@ -686,6 +692,12 @@ export async function disclosureMeanings() {
 /** Exchange: index levels and the world prices beside them, plus macro. */
 const ar_gram = 'EGP/g';
 
+// Until the pipeline publishes one (scripts/macro_types.py), keyed off the id
+// the document already carries. The values are already percent-scaled — 4.392
+// means 4.4% — so only the label was missing, never the scale.
+const UNIT_BY_ID = { gdp_growth: '%', inflation: '%', fdi: 'USD', remittances: 'USD' };
+const PERCENT = new Set(['gdp_growth', 'inflation']);
+
 export async function exchange() {
   const [r, m] = await Promise.all([doc('rates/latest.json'), doc('macro.json')]);
   const level = (x) => ({
@@ -696,8 +708,12 @@ export async function exchange() {
       : (x.change_percent > 0 ? '+' : '\u2212') + Math.abs(x.change_percent).toFixed(2) + '%',
     color: (x.change_percent || 0) >= 0 ? 'var(--up)' : 'var(--down)',
     // `token` is a combined display string, not a unit; the design wants the
-    // word that follows the number.
-    unit: x.kind ? '' : 'points',
+    // word that follows the number. Keying off the PRESENCE of `kind` gave
+    // every world row an empty one — so "Oil 83.40" and "Copper 6.66" sat
+    // beside "US dollar 50.25 EGP" on a page whose every other money figure
+    // is pounds, and the four world indices lost the "points" the three EGX
+    // ones keep. It is the VALUE of `kind` that says which.
+    unit: x.kind === 'commodity' ? 'USD' : 'points',
     // "EGX 30 fell 0.31% in the session." — the document's own sentence, which
     // the site was throwing away in favour of the bare number.
     plain: x.plain || '', plainAr: x.plain_ar || '',
@@ -750,10 +766,17 @@ export async function exchange() {
       label: i.label, labelAr: i.label_ar || i.label,
       period: String(i.year || ''), color: 'var(--ink)',
       value: typeof i.value !== 'number' ? String(i.value ?? '—')
+        : PERCENT.has(i.id) ? i.value.toFixed(2)
         : Math.abs(i.value) >= 1e9 ? (i.value / 1e9).toFixed(2) + 'bn'
         : Math.abs(i.value) >= 1e6 ? (i.value / 1e6).toFixed(1) + 'm'
         : i.value.toLocaleString('en-US', { maximumFractionDigits: 2 }),
-      unit: i.unit || '',
+      // macro.json states no unit on an indicator — 0 of 4 carry one — so all
+      // four printed bare, directly under three rows that DO show theirs
+      // ("37 vessels", "4,456.4 USD/ounce"). Growth of 4.4% and inflation of
+      // 14.1% read as the same kind of quantity as a canal-traffic count, and
+      // 41.52bn of remittances read as pounds on a page where everything else
+      // is pounds — understating them by the 50.25 on the card above.
+      unit: i.unit || UNIT_BY_ID[i.id] || '',
       meaning: i.meaning || '', meaningAr: i.meaning_ar || i.meaning || '',
       chain: i.chain || '', chainAr: i.chain_ar || i.chain || '',
       correlation: null,
@@ -788,6 +811,10 @@ export async function sectors() {
   };
   const median = (m) => {
     if (typeof m.value !== 'number') return '\u2014';
+    // Same reason as the ratio cards: a return is a ratio in the document and
+    // a percentage to a reader, and "ratio" would otherwise print it as a
+    // multiple. The sector median has to agree with the card it sits beside.
+    if (m.key === 'roe' || m.key === 'roa') return (m.value * 100).toFixed(1) + '%';
     const dp = m.unit === 'egp' ? 2 : m.unit === 'egp_m' ? 0 : m.unit === 'ratio' ? 2 : 1;
     return m.value.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })
       + (UNIT[m.unit] || '');
@@ -802,10 +829,19 @@ export async function sectors() {
       || (s.movement || [])[0] || {};
     const rising = move.rising || 0;
     const falling = move.falling || 0;
-    const flat = Math.max(0, (s.companies || 0) - rising - falling);
+    // The document publishes `flat` AND `unknown`; this derived flat by
+    // subtraction and swallowed the second into the first. Finance read
+    // "10 flat" where 3 held and 7 could not be measured, and 11 of the 15
+    // cards overstated it. A company whose metric could not be read has not
+    // held steady — it has not been read.
+    const flat = move.flat || 0;
+    const unknown = move.unknown || 0;
+    const measured = rising + falling + flat;
     // Ten cells, filled in proportion — the design draws the row as bars.
+    // Ten cells over what was actually measured. Drawn over every listed
+    // company, the grey segment was padded by the unread ones.
     const bar = (n, color) => Array.from(
-      { length: Math.round((n / Math.max(1, s.companies)) * 10) }, () => ({ color, op: 1 }));
+      { length: Math.round((n / Math.max(1, measured)) * 10) }, () => ({ color, op: 1 }));
     const top = (detail.standouts || [])[0];
     return {
       slug: s.slug, name: s.sector, nameAr: SECTOR_AR[s.sector] || s.sector,
@@ -815,6 +851,9 @@ export async function sectors() {
       // four blank lines.
       count: String(s.companies ?? '\u2014'),
       upCount: rising, downCount: falling, flatCount: flat,
+      // Named rather than folded in, so the card can say the group is partly
+      // unmeasurable instead of quietly calling it steady.
+      unknownCount: unknown, hasUnknown: unknown > 0,
       // The teaser exists in English only — sectors.json has no `readTeaser_ar`
       // — so the Arabic card used to print the English sentence. The per-sector
       // document does carry a full Arabic read; its opening sentence is the

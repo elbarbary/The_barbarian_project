@@ -96,6 +96,7 @@ export class Component extends Base {
       revFalling:'falling',
       revFlat:'flat',
       revAtClose:'At the {period} close, not today\u2019s — so it can differ from the P/E in the header.',
+      revAtSector:'level with its sector',
       revAboveSector:'above its sector',
       revBelowSector:'below its sector',
       revSectorMedian:'{sector} median',
@@ -104,7 +105,7 @@ export class Component extends Base {
       revDisagree:'{up} moved one way, {down} the other.',
       revAgreeAsk:'When they all agree, ask what the market already knows that you do not.',
       revDisagreeAsk:'When they disagree, the disagreement is the story. Which one is early?',
-      revMissingNote:'Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float is not published anywhere and has no substitute.',
+      revMissingNote:'Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float IS published, for 161 of the 282 listed companies, and is shown above where the company\u2019s own profile carries it.',
       revAskTitle:'Worth asking',
       revAnswerTitle:'A probable answer',
       revProofTitle:'The figure, period by period',
@@ -156,6 +157,9 @@ export class Component extends Base {
       sigQuiet:'It has filed nothing for {days} days, and normally files every {gap}.',
       sigLastFiling:'Last filing {date}.',
       sigStreak:'Streak', sigFirst:'First of its kind', sigSilence:'Silence',
+      sigDue:'Results due', sigEstimate:'estimate',
+      sigDueOn:'A {label} filing is expected in {month} on the company\u2019s own history',
+      sigDueWindow:'Drawn from {n} past filings, which put it between {from} and {to}.',
       sigFootnote:'Counts off the exchange\u2019s own record. A first loss is not a signal to sell and a return to profit is not a signal to buy \u2014 this is what happened, and what you make of it is yours.',
       newsSourcedFrom:'Headlines from {outlets}, each linked to the outlet that ran it.',
       newsMerged:'{count} duplicates merged.',
@@ -164,7 +168,7 @@ export class Component extends Base {
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
       sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
-      homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Watchlist',
+      homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
@@ -196,12 +200,16 @@ export class Component extends Base {
       cumulativeWarning:'Periods are cumulative as the exchange files them. H1 and 9M are year-to-date and are not comparable to a single quarter. Nothing here is subtracted to synthesise a quarter, and a blank is a figure the filing did not state — not a zero.',
       openFiling:'Open filing', borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
       dueWithinYear:'Due within a year', dueLater:'Due later', movementSince:'Movement since', pattern:'Pattern',
+      debtHigherThan:'Higher than they were, at {was}.',
+      debtLowerThan:'Lower than they were, at {was}.',
+      debtLevelWith:'Unchanged, at {was}.',
       whereFrom:'Where these figures come from',
       whereFromBody:'Read from the borrowing lines of the company’s own filed balance sheet — loans, bank facilities and lease liabilities, summed by maturity. Never from total liabilities, which also carry payables, provisions and customer advances that nobody lent the company.',
       sourceFiling:'Source filing', openSignedDoc:'Open the signed document', showSource:'Where these figures come from', hideSource:'Hide source',
       notCreditRating:'This is not a credit rating. The figures above are stated as filed, with no grade, band or colour attached to them.',
       whatIsUnusual:'What is unusual', itsFilings:'Its filings', egxArchive:'EGX archive', document:'Document',
       sectorsTitle:'Sectors', sectorsWord:'sectors', rose:'rose', fell:'fell', flat:'flat', medianPE:'Median P/E',
+      notRead:'not measurable',
       calendarTitle:'Calendar', filed:'Filed', expected:'Expected', estimate:'Estimate',
       estimateNote:'Expected dates are estimated from each company’s own filing history. They are not announcements.',
       exchangeTitle:'Exchange', delayed15:'Quotes delayed ~15 minutes', macro:'Macro, in plain language',
@@ -257,13 +265,14 @@ export class Component extends Base {
       revAboveSector:'أعلى من قطاعها',
       revBelowSector:'أقل من قطاعها',
       revAtClose:'محسوب على إغلاق {period}، لا إغلاق اليوم — لذا قد يختلف عن مضاعف الربحية في الترويسة.',
+      revAtSector:'مطابق لوسيط قطاعه',
       revSectorMedian:'وسيط {sector}',
       revOverPeriods:'على مدى {n} فترة معلنة',
       revAgree:'{n} من {readable} مؤشرات مقروءة تحركت في الاتجاه نفسه.',
       revDisagree:'{up} تحرك في اتجاه و{down} في الاتجاه الآخر.',
       revAgreeAsk:'حين تتفق كلها، اسأل عمّا يعرفه السوق ولا تعرفه أنت.',
       revDisagreeAsk:'حين تختلف، فالاختلاف نفسه هو الحكاية. أيّها سبق الآخر؟',
-      revMissingNote:'الإيرادات لا تنشرها البورصة ولا أي مصدر بيانات متاح من مصر، لذا لا يمكن عرض نمو الإيرادات ولا هامش الربح. ونمو الأصول وتحويل النقد يطرحان السؤال نفسه على أرقام منشورة فعلاً. أما نسبة الأسهم الحرة فلا تُنشر في أي مكان ولا بديل لها.',
+      revMissingNote:'الإيرادات لا تنشرها البورصة ولا أي مصدر بيانات متاح من مصر، لذا لا يمكن عرض نمو الإيرادات ولا هامش الربح. ونمو الأصول وتحويل النقد يطرحان السؤال نفسه على أرقام منشورة فعلاً. أما نسبة التداول الحر فهي منشورة لـ ١٦١ شركة من أصل ٢٨٢، وتظهر أعلاه حيثما حملها ملف الشركة نفسه.',
       revAskTitle:'يستحق أن تسأل',
       revAnswerTitle:'إجابة مُرجَّحة',
       revProofTitle:'الرقم، فترة بفترة',
@@ -315,6 +324,9 @@ export class Component extends Base {
       sigQuiet:'لم تُفصح عن شيء منذ {days} يوماً، وهي تُفصح عادةً كل {gap}.',
       sigLastFiling:'آخر إفصاح {date}.',
       sigStreak:'سلسلة', sigFirst:'الأولى من نوعها', sigSilence:'صمت',
+      sigDue:'نتائج مرتقبة', sigEstimate:'تقدير',
+      sigDueOn:'يُتوقع إيداع قوائم {label} في {month} بحسب سجل الشركة',
+      sigDueWindow:'مبني على {n} إفصاحاً سابقاً، تضعه بين {from} و{to}.',
       sigFootnote:'أرقام محسوبة من سجل البورصة نفسه. أول خسارة ليست إشارة بيع، والعودة إلى الربح ليست إشارة شراء \u2014 هذا ما حدث، وما تراه فيه يخصك وحدك.',
       newsSourcedFrom:'عناوين من {outlets}، كل واحد منها موصول بالجهة التي نشرته.',
       newsMerged:'دُمج {count} خبرًا مكررًا.',
@@ -323,7 +335,7 @@ export class Component extends Base {
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
       sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
-      homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'قائمة المتابعة',
+      homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
@@ -353,12 +365,16 @@ export class Component extends Base {
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
       openFiling:'افتح الإفصاح', borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
+      debtHigherThan:'أعلى مما كانت عليه، إذ بلغت {was}.',
+      debtLowerThan:'أقل مما كانت عليه، إذ بلغت {was}.',
+      debtLevelWith:'دون تغيّر، عند {was}.',
       whereFrom:'من أين جاءت هذه الأرقام',
       whereFromBody:'قُرئت من بنود القروض في الميزانية المُفصح عنها — القروض والتسهيلات البنكية والتزامات الإيجار، مجموعة بحسب تاريخ الاستحقاق. وليست من إجمالي الالتزامات الذي يضم دائنين ومخصصات ودفعات مقدمة من العملاء لم يقرضها أحد للشركة.',
       sourceFiling:'الإفصاح المصدر', openSignedDoc:'افتح المستند الموقّع', showSource:'من أين جاءت هذه الأرقام', hideSource:'إخفاء المصدر',
       notCreditRating:'هذا ليس تصنيفاً ائتمانياً. الأرقام أعلاه مذكورة كما وردت، دون درجة أو نطاق أو لون.',
       whatIsUnusual:'ما هو غير المعتاد', itsFilings:'إفصاحاتها', egxArchive:'أرشيف البورصة', document:'المستند',
       sectorsTitle:'القطاعات', sectorsWord:'قطاعاً', rose:'صعدت', fell:'هبطت', flat:'ثابتة', medianPE:'وسيط م/ر',
+      notRead:'غير قابلة للقياس',
       calendarTitle:'التقويم', filed:'مُفصح عنه', expected:'متوقع', estimate:'تقدير',
       estimateNote:'التواريخ المتوقعة مُقدّرة من سجل إفصاحات كل شركة، وليست إعلانات.',
       exchangeTitle:'البورصة والاقتصاد', delayed15:'الأسعار متأخرة نحو ١٥ دقيقة', macro:'مؤشرات الاقتصاد بلغة واضحة',
@@ -406,11 +422,18 @@ export class Component extends Base {
       roa: [L.revRoa, L.revRoaAsk, L.revRoaBody, L.revOrientReturn],
       debt_equity: [L.revDebt, L.revDebtAsk, L.revDebtBody, L.revOrientDebt],
     };
-    const fmt = (v, unit) => {
+    const fmt = (v, unit, key) => {
       if (typeof v !== 'number' || !isFinite(v)) return '\u2014';
       if (unit === 'percent') return v.toFixed(1) + '%';
       if (unit === 'egp_m') return this.money(v * 1e6);
       if (unit === 'egp') return v.toFixed(2);
+      // A return is a ratio in the document and a percentage to a reader. The
+      // review publishes roe and roa with unit "ratio", so they fell through
+      // to the multiple below and 454 figures across the exchange read as
+      // "0.29×" where the app reads "29.1%" — on a card whose own body calls
+      // it "profit as a share of shareholders' equity". A share is not a
+      // multiple. review_sheet.dart:202 has carried this case all along.
+      if (key === 'roe' || key === 'roa') return (v * 100).toFixed(1) + '%';
       return v.toFixed(2) + '\u00d7';
     };
     return review.metrics.map((m) => {
@@ -435,7 +458,7 @@ export class Component extends Base {
       const lastPeriod = ((m.series || [])[(m.series || []).length - 1] || {}).p || '';
       return {
         key: m.key, label, ask,
-        value: fmt(m.value, m.unit),
+        value: fmt(m.value, m.unit, m.key),
         asAt: priced && lastPeriod
           ? L.revAtClose.replace('{period}', lastPeriod) : '',
         // The direction is the app's sentence, not an arrow: an arrow beside a
@@ -445,14 +468,19 @@ export class Component extends Base {
         color: 'var(--t2)',
         periods: m.points ? L.revOverPeriods.replace('{n}', m.points) : '',
         onePoint: m.points === 1,
-        peer: m.peer === 'above' ? L.revAboveSector : m.peer === 'below' ? L.revBelowSector : '',
+        // 71 cards read "Below the sector" directly above a median identical
+        // to the value they were describing — AMER's P/E card said 10.41× was
+        // below a sector median of 10.41×. The median company is not below
+        // itself.
+        peer: (typeof m.value === 'number' && m.value === m.peer_median) ? L.revAtSector
+          : m.peer === 'above' ? L.revAboveSector : m.peer === 'below' ? L.revBelowSector : '',
         peerMedian: typeof m.peer_median === 'number'
-          ? L.revSectorMedian.replace('{sector}', review.sector || '') + ' ' + fmt(m.peer_median, m.unit)
+          ? L.revSectorMedian.replace('{sector}', review.sector || '') + ' ' + fmt(m.peer_median, m.unit, m.key)
           : '',
         answer: safe, hasAnswer: Boolean(safe), hasAsk: Boolean(ask),
         spark: this.sparkFlat(points),
         hasSpark: points.length > 1,
-        proof: (m.series || []).map((x) => ({ p: x.p, v: fmt(x.v, m.unit) })),
+        proof: (m.series || []).map((x) => ({ p: x.p, v: fmt(x.v, m.unit, m.key) })),
         // The same figures as a bar per period. A row of chips is a list you
         // read left to right; bars are a shape you take in at once, which is
         // the whole point of showing eleven quarters rather than the latest
@@ -467,7 +495,7 @@ export class Component extends Base {
             const v = typeof x.v === 'number' ? x.v : 0;
             const top = ((hi - Math.max(v, 0)) / span) * 100;
             return {
-              p: x.p, v: fmt(x.v, m.unit),
+              p: x.p, v: fmt(x.v, m.unit, m.key),
               // percentages inside the plot box, so the markup needs no maths
               top: top.toFixed(2) + '%',
               height: Math.max(1.5, (Math.abs(v) / span) * 100).toFixed(2) + '%',
@@ -528,6 +556,25 @@ export class Component extends Base {
         href: f.link || null,
       });
     }
+    // 200 companies publish a results-due expectation and no screen showed
+    // one: streaks and firsts are usually empty and `quiet` is null for
+    // almost every ticker, so the block rendered one card or none while this
+    // sat unread in a document the page had already fetched. The demo has
+    // advertised the card since the design landed.
+    for (const r of (s.resultsDue || []).slice(0, 3 - cards.length)) {
+      cards.push({
+        kind: L.sigDue,
+        title: fill(L.sigDueOn, { label: r.label || '', month: this.monthOf(r.expected) }),
+        // An estimate says it is one, and says what it was drawn from — the
+        // same discipline the calendar's expected entries keep.
+        because: r.observations
+          ? fill(L.sigDueWindow, { n: r.observations, from: this.dayLabel(r.window_start),
+                                   to: this.dayLabel(r.window_end) })
+          : '',
+        stamp: 'signals.json \u00b7 ' + L.sigEstimate,
+        href: null,
+      });
+    }
     const q = s.quiet;
     if (q && cards.length < 3) {
       cards.push({
@@ -562,9 +609,19 @@ export class Component extends Base {
    * thousand and suffixed "B", which turned COMI's 474,267,676,058 into
    * "474267676.1B" — a string with no meaning at any scale. */
   money(v) {
-    if (typeof v !== 'number' || !isFinite(v) || v <= 0) return '—';
-    if (v >= 1e9) return (v / 1e9).toFixed(v >= 1e11 ? 1 : 2) + 'bn';
-    if (v >= 1e6) return (v / 1e6).toFixed(v >= 1e8 ? 0 : 1) + 'm';
+    // An em dash on this site means "the filing did not state it". A filed
+    // loss is a stated figure, and this returned the dash for every one of
+    // them: 41 companies' net-profit cards showed "—" with a proof graph of
+    // ten bars drawn correctly BELOW the zero line — the shape saying ten
+    // years of losses while every number beside it said nothing was
+    // published. The app's own _compact branches on the absolute value and
+    // keeps the sign; so does this now, and '—' is reserved for what is
+    // genuinely absent. A caller that must not show a negative — a market
+    // capitalisation cannot be one — guards at its own call site.
+    if (typeof v !== 'number' || !isFinite(v)) return '—';
+    const a = Math.abs(v), sign = v < 0 ? '-' : '';
+    if (a >= 1e9) return sign + (a / 1e9).toFixed(a >= 1e11 ? 1 : 2) + 'bn';
+    if (a >= 1e6) return sign + (a / 1e6).toFixed(a >= 1e8 ? 0 : 1) + 'm';
     return this.num(v, 0);
   }
 
@@ -635,8 +692,16 @@ export class Component extends Base {
 
     const colDef = [['ticker',ar?'الرمز':'Ticker','start'],['name',ar?'الاسم':'Company','start'],['sector',ar?'القطاع':'Sector','start'],
       ['close',ar?'الإغلاق':'Close','end'],['pct','%','end'],['cap',ar?'القيمة':'Cap','end'],['pe','P/E','end']];
+    // A-Z under a down arrow, because the string branch below multiplies by
+    // -1 to put text in reading order on the first click while the numeric
+    // columns put the largest first. The caret was read off `st.dir` alone,
+    // so Ticker, Company and Sector all pointed the wrong way while Close, %,
+    // Cap and P/E pointed the right one.
+    const TEXT_COL = new Set(['ticker', 'name', 'sector']);
     const cols = colDef.map(([id,label,align]) => ({
-      label, align, caret: st.sort === id ? (st.dir === -1 ? ' ↓' : ' ↑') : '',
+      label, align,
+      caret: st.sort === id
+        ? ((st.dir === -1) !== TEXT_COL.has(id) ? ' ↓' : ' ↑') : '',
       color: st.sort === id ? 'var(--ink)' : 'var(--faint)',
       go: () => this.setState(s => ({ sort:id, dir: s.sort === id ? -s.dir : -1 }))
     }));
@@ -650,7 +715,10 @@ export class Component extends Base {
 
     const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector: sectorName(c.sector),
       close: c.close === '—' ? '—' : this.num(c.close), pct: this.pct(c.pct), color: this.dcol(c.pct),
-      cap: this.money(c.cap), pe: c.pe ? c.pe.toFixed(1) : '—',
+      // A market capitalisation cannot be negative; anything that says so
+      // is a units error, not a small company.
+      cap: (typeof c.cap === 'number' && c.cap > 0) ? this.money(c.cap) : '—',
+      pe: c.pe ? c.pe.toFixed(1) : '—',
       arrow: (c.pct === null || c.pct === undefined) ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
       mag: (c.pct === null || c.pct === undefined) ? '0%' : Math.max(6, Math.min(100, Math.abs(c.pct) / 6 * 100)).toFixed(0) + '%',
       go: () => this.setState({ screen:'company', ticker: c.ticker }) });
@@ -661,11 +729,16 @@ export class Component extends Base {
     // The design named five tickers; a real dataset may not contain them, and a
     // demo deliberately does not. Prefer the named ones when present, then fill
     // from the largest companies, so the block is never short or empty-handed.
-    const wanted = ['COMI','KORA','ETEL','TMGH','AMOC'];
-    const picked = wanted.map(t => D.companies.find(c => c.ticker === t)).filter(Boolean);
-    const byCap = D.companies.slice().sort((a,b) => (b.cap||0) - (a.cap||0));
-    for (const c of byCap) { if (picked.length >= 5) break; if (!picked.includes(c)) picked.push(c); }
-    const watchlist = picked.slice(0,5).map(mkRow);
+    // Headed "Watchlist", this was five tickers the design happened to name —
+    // COMI, KORA, ETEL, TMGH, AMOC — padded from the largest companies. All
+    // five exist, so it looked entirely plausible; every signed-in reader saw
+    // the identical list, none of them had chosen it, and there was no control
+    // to change it. A heading that claims a personalisation the site does not
+    // have is a claim about the reader, not about the exchange. It is derived
+    // now, and says what it is.
+    const watchlist = D.companies.slice()
+      .sort((a, b) => (b.cap || 0) - (a.cap || 0))
+      .slice(0, 5).map(mkRow);
 
     // Which shares changed hands far more than they usually do. Twice their
     // own twenty-session median is the line, and it is OURS rather than the
@@ -842,6 +915,13 @@ export class Component extends Base {
           { label: ar?'القطاع':'Sector', value: sectorName(loaded.sector) },
           { label: ar?'الأسهم المُصدرة':'Shares outstanding', value: whole(p.shares_outstanding) },
           { label: ar?'وحدة الإفصاح':'Filing currency', value:'EGP' },
+          // The ratios section told every reader free float "is not published
+          // anywhere and has no substitute", on 258 pages, while the profile
+          // the same page had already loaded for its market cap carried it.
+          ...(typeof p.free_float === 'number'
+            ? [{ label: ar?'نسبة التداول الحر':'Free float',
+                 value: (p.free_float * 100).toFixed(1) + '%' }]
+            : []),
         ],
         // A tile always carries a `note`, even an empty one, so the markup can
         // ask every tile the same question. The two tiles built on a filing
@@ -850,7 +930,16 @@ export class Component extends Base {
           { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)', note:'' },
           { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w), note:'' },
           { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m), note:'' },
-          { label: ar?'الحجم':'Volume', value: whole(p.avg_volume_30d), color:'var(--ink)', note:'' },
+          // The session's own volume, which market.json publishes and data.js
+          // has always mapped onto every directory row. This tile printed the
+          // THIRTY-DAY MEAN directly beside the close and the session date,
+          // where it reads as the volume for that session — COMI showed
+          // 3,192,564 against an actual 5,780,737 already in memory. The
+          // average is worth having and now says that it is one.
+          { label: ar?'الحجم':'Volume', value: whole(loaded.volume), color:'var(--ink)',
+            note: ar?'في الجلسة':'in the session' },
+          { label: ar?'متوسط ٣٠ يوماً':'30-day average', value: whole(p.avg_volume_30d),
+            color:'var(--t2)', note:'' },
           // The multiple the pipeline published, beside the price it was struck
           // against. This used to prefer the review document's figure, which is
           // a different claim wearing the same two letters: the review divides
@@ -1188,8 +1277,8 @@ export class Component extends Base {
       return {
         period:f.period, window: this.filedWindow(f), bg: i === 0 ? 'var(--sunk)' : 'transparent',
         revenue:this.num(f.revenue,1), grossProfit:this.num(f.gross_profit,1), operatingIncome:this.num(f.operating_income,1), netIncome:this.num(f.net_income,1),
-        revColor: f.revenue === null ? 'var(--faint)' : 'var(--ink)', gpColor: f.gross_profit === null ? 'var(--faint)' : 'var(--ink)',
-        opColor: f.operating_income === null ? 'var(--faint)' : 'var(--ink)', niColor: f.net_income === null ? 'var(--faint)' : 'var(--ink)',
+        revColor: typeof f.revenue !== 'number' ? 'var(--faint)' : 'var(--ink)', gpColor: typeof f.gross_profit !== 'number' ? 'var(--faint)' : 'var(--ink)',
+        opColor: typeof f.operating_income !== 'number' ? 'var(--faint)' : 'var(--ink)', niColor: typeof f.net_income !== 'number' ? 'var(--faint)' : 'var(--ink)',
         caret: open ? '\u2212' : '+', open, groups,
         more: present ? L.moreFigures.replace('{n}', present) : '',
         hasMore: present > 0,
@@ -1248,7 +1337,12 @@ export class Component extends Base {
         { label: ar?'الرفع المالي':'Gearing', value: d0.gearing === null || d0.gearing === undefined ? '—' : this.num(d0.gearing, 2) + '×', note: ar?'القروض ÷ حقوق الملكية':'Borrowings ÷ equity' },
         { label: ar?'يستحق خلال عام':'Due within a year', value: d0.due_within_year === null || d0.due_within_year === undefined ? '—' : Math.round(d0.due_within_year * 100) + '%', note: ar?'من إجمالي القروض':'Of total borrowings' },
       ],
-      since: (d0.change || {}).since || '—',
+      // 49 of the 120 companies with a borrowings block have no `change` at
+      // all, and the panel rendered its heading as "Movement since —", a 27px
+      // "—", a sentence "—" and an empty basis line. Four dashes in a box is
+      // not a degraded reading; it is a box that should not be there.
+      hasChange: Boolean(d0.change),
+      since: this.longDate((d0.change || {}).since) || '—',
       delta: (d0.change || {}).delta === null || (d0.change || {}).delta === undefined
         ? '—' : this.signed(d0.change.delta, 1),
       deltaColor: 'var(--ink)',
@@ -1256,10 +1350,17 @@ export class Component extends Base {
       // states and what moved, never what to do about it. They are written by
       // build_debt_reads.py against the directions alone, and are carried here
       // verbatim rather than re-phrased.
-      directionLine: (d0.change || {}).direction
-        ? (ar ? 'مقارنةً بـ ' : 'Against ') + ((d0.change || {}).since || '') + ': '
-          + this.num((d0.change || {}).borrowings, 1)
-        : '—',
+      // The heading already says the date; this said it again and then
+      // stopped — "Movement since 2025-12-31 / +21,496.0  Against 2025-12-31:
+      // 62,509.2" — where the demo has a sentence. Say what the borrowings
+      // were, and let the heading date it.
+      directionLine: (() => {
+        const way = (d0.change || {}).direction;
+        const key = way === 'up' ? 'debtHigherThan'
+          : way === 'down' ? 'debtLowerThan'
+          : way === 'flat' ? 'debtLevelWith' : null;
+        return key ? L[key].replace('{was}', this.num((d0.change || {}).borrowings, 1)) : '';
+      })(),
       basisLine: (d0.change || {}).basis === 'balance_sheet'
         ? (ar?'الأساس: العمود المقارن في الميزانية نفسها — وليس مقارنة بالعام السابق.'
              :'Basis: the statement\u2019s own prior column \u2014 not a comparison with a year ago.')
@@ -1372,6 +1473,7 @@ export class Component extends Base {
         bars.push({ color: isFlat ? 'var(--rule)' : isUp ? 'var(--up)' : 'var(--down)', op: isFlat ? 1 : (0.45 + 0.055*i) });
       }
       return { name: ar ? arn : en, count: count + (ar?' شركة':' listed'), bars, upCount:up, downCount:down, flatCount:flat,
+        unknownCount: 0, hasUnknown: false,
         read: ar ? ('صعد ' + up + ' من ' + count + ' سهماً في القطاع في جلسة ٢٦ أغسطس. وسيط مضاعف الربحية ' + pe.toFixed(1) + '.')
                  : (up + ' of ' + count + ' listed names rose in the 26 August session. Median P/E ' + pe.toFixed(1) + '.'),
         // The card prints the yield beside the median P/E without gating it, so
@@ -1769,6 +1871,14 @@ export class Component extends Base {
     if (isNaN(at)) return iso || '';
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { day: 'numeric', month: 'short', timeZone: 'UTC' }).format(at);
+  }
+
+  /** The month an expected filing falls in — "November", not "2026-11-14". */
+  monthOf(iso) {
+    const at = new Date(String(iso || '') + 'T00:00:00Z');
+    if (isNaN(at)) return '';
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { month: 'long', timeZone: 'UTC' }).format(at);
   }
 
   /** "2026-08" as a month pill reads it. */

@@ -849,6 +849,11 @@
           </div>
 
           <div style="display:flex;flex-direction:column;gap:12px">
+            <!-- Only where the filing states a prior column. On 49 of the 120
+                 companies with a borrowings block it does not, and this drew
+                 its heading, a 27px figure, a sentence and a basis line as
+                 four dashes in a box. -->
+            <sc-if value="{{ debt.hasChange }}">
             <div style="padding:22px 24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.movementSince }} {{ debt.since }}</div>
               <div style="display:flex;align-items:baseline;gap:11px;margin-top:9px;flex-wrap:wrap">
@@ -857,6 +862,7 @@
               </div>
               <div style="font-size:12px;color:var(--faint);margin-top:8px;line-height:1.5">{{ debt.basisLine }}</div>
             </div>
+            </sc-if>
 
             <div style="padding:22px 24px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pattern }}</div>
@@ -966,6 +972,12 @@
               <span style="padding:3px 9px;border-radius:999px;background:var(--upTint);color:var(--up)">{{ s.upCount }} {{ L.rose }}</span>
               <span style="padding:3px 9px;border-radius:999px;background:var(--downTint);color:var(--down)">{{ s.downCount }} {{ L.fell }}</span>
               <span style="padding:3px 9px;border-radius:999px;background:var(--sunk);color:var(--faint)">{{ s.flatCount }} {{ L.flat }}</span>
+              <!-- The companies whose metric could not be read. They used to be
+                   added to "flat", which says they held steady — they did not,
+                   they were not measurable. -->
+              <sc-if value="{{ s.hasUnknown }}">
+                <span style="padding:3px 9px;border-radius:999px;background:var(--sunk);color:var(--faint)">{{ s.unknownCount }} {{ L.notRead }}</span>
+              </sc-if>
             </div>
             <div style="font-size:13px;color:var(--t2);line-height:1.55;text-wrap:pretty">{{ s.read }}</div>
             <!-- The middle company on every metric the sector can measure.
