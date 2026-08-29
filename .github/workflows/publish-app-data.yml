@@ -14,14 +14,21 @@ name: Publish app data
 on:
   push:
     branches: [main]
+    # Only what the build actually reads.
+    #
+    # `public/esthmr/**` and `site-worker/**` were here and feed nothing: no
+    # script in `scripts/` reads either path. A change to the site's template
+    # or the auth worker triggered a live market scan and twenty-eight
+    # builders — thirty-four minutes — to republish data that could not have
+    # changed, and took a place in this workflow's queue while doing it, so
+    # the next real publish waited behind it. Their tests moved to
+    # `check-website.yml`, which is the two seconds those pushes needed.
     paths:
       - 'public/evidence/cash-or-trash/criteria.md'
       - 'public/egx-insights.html'
       - 'public/cash-or-trash.html'
       - 'public/*-investigation.html'
       - 'scripts/**'
-      - 'public/esthmr/**'
-      - 'site-worker/**'
       - '.github/workflows/publish-app-data.yml'
 
   # Four times a trading day, around the session rather than after it.
