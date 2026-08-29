@@ -1,0 +1,60 @@
+name: Check the website
+
+# The website's own tests, without the pipeline behind them.
+#
+# `publish-app-data.yml` used to fire on `public/esthmr/**` and
+# `site-worker/**` as well. Those two paths feed nothing it builds — no script
+# in `scripts/` reads either — so a change to the site's template, its logic,
+# its stylesheet or the auth worker triggered a full rebuild: a live market
+# scan, twenty-eight builders against rate-limited upstreams, thirty-four
+# minutes, to republish data that could not have changed.
+#
+# Worse than the waste: that workflow runs under `concurrency: publish-app-data`
+# with `cancel-in-progress: false`, so a website push took a place in the queue
+# and the next real data publish waited behind it. Three website pushes in an
+# hour delayed the data by an hour and a half.
+#
+# What those pushes actually needed proving was the tests, and the tests take
+# two seconds. This runs them and nothing else.
+#
+# Cloudflare deploys the site from its own Git integration, not from here, so
+# nothing about publishing the website depends on this workflow passing.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/esthmr/**'
+      - 'site-worker/**'
+      - '.github/workflows/check-website.yml'
+  pull_request:
+    paths:
+      - 'public/esthmr/**'
+      - 'site-worker/**'
+  workflow_dispatch:
+
+# Website checks are independent of each other and of the data publish, so they
+# neither queue behind it nor hold it up. A superseded run on the same branch
+# is worth cancelling, which is the opposite of the publish workflow's rule —
+# that one commits, and a cancelled commit is a lost one.
+concurrency:
+  group: check-website-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The site draws figures the pipeline produces, and a wrong number
+      # renders perfectly. These are what stand between that and a live page:
+      # every template binding resolves, every field a loop row is asked for
+      # exists on the row, no §8 directive language reaches a screen, and no
+      # bidi mark reaches a stylesheet.
+      - name: Test the website
+        run: node --test site-worker/test/*.test.mjs
