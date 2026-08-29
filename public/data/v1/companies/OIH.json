@@ -882,12 +882,12 @@
   {
    "date": "2026-04-16",
    "close": 1.58,
-   "volume": 285462620
+   "volume": 285462619
   },
   {
    "date": "2026-04-19",
    "close": 1.54,
-   "volume": 273613040
+   "volume": 273613038
   },
   {
    "date": "2026-04-20",
@@ -937,7 +937,7 @@
   {
    "date": "2026-05-03",
    "close": 1.56,
-   "volume": 300674200
+   "volume": 300674196
   },
   {
    "date": "2026-05-04",
@@ -1161,7 +1161,7 @@
   },
   {
    "date": "2026-07-14",
-   "close": 1.41,
+   "close": 1.42,
    "volume": 23349160
   },
   {
@@ -1318,19 +1318,26 @@
  "profile": {
   "market_cap": 10491380859,
   "shares_outstanding": 5245690000,
-  "free_float": 0.48338700000000007,
   "float_shares": 2535698352.03,
   "perf_1w": 10.497237569060768,
   "perf_1m": 34.22818791946309,
   "perf_3m": 34.22818791946309,
   "avg_volume_30d": 74621097.89999995,
   "relative_volume_10d": 1.2840011562930378,
+  "history_bars": 0,
   "median_volume_20d": 71885280,
   "rv20": 1.3168232077554682,
   "normal_value_30d": 106768425.63,
   "five_session_change": 6.951871657753994,
-  "history_bars": 120
+  "free_float": 0.48338700000000007
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {

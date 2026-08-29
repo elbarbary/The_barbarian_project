@@ -1318,19 +1318,26 @@
  "profile": {
   "market_cap": 32047141294,
   "shares_outstanding": 10718100000,
-  "free_float": 0.31143200000000004,
   "float_shares": 3337959319.2000003,
   "perf_1w": -2.9220779220779174,
   "perf_1m": -2.6058631921823983,
   "perf_3m": -2.6058631921823983,
   "avg_volume_30d": 67289549.56666665,
   "relative_volume_10d": 0.38388491076500836,
+  "history_bars": 0,
   "median_volume_20d": 60240739.5,
   "rv20": 0.2843206298953219,
   "normal_value_30d": 183917871.115,
   "five_session_change": -0.6644518272425071,
-  "history_bars": 120
+  "free_float": 0.31143200000000004
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
