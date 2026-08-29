@@ -741,7 +741,7 @@
   },
   {
    "date": "2026-03-02",
-   "close": 3.57,
+   "close": 3.56,
    "volume": 333846
   },
   {
@@ -761,12 +761,12 @@
   },
   {
    "date": "2026-03-08",
-   "close": 3.7,
+   "close": 3.69,
    "volume": 471745
   },
   {
    "date": "2026-03-09",
-   "close": 3.7,
+   "close": 3.68,
    "volume": 543830
   },
   {
@@ -786,7 +786,7 @@
   },
   {
    "date": "2026-03-15",
-   "close": 3.82,
+   "close": 3.81,
    "volume": 1132955
   },
   {
@@ -911,7 +911,7 @@
   },
   {
    "date": "2026-04-26",
-   "close": 4.67,
+   "close": 4.65,
    "volume": 1360777
   },
   {
@@ -981,7 +981,7 @@
   },
   {
    "date": "2026-05-17",
-   "close": 4.5,
+   "close": 4.51,
    "volume": 389248
   },
   {
@@ -1061,7 +1061,7 @@
   },
   {
    "date": "2026-06-14",
-   "close": 5.76,
+   "close": 5.78,
    "volume": 784878
   },
   {
@@ -1231,12 +1231,12 @@
   },
   {
    "date": "2026-08-04",
-   "close": 8.76,
+   "close": 8.71,
    "volume": 830997
   },
   {
    "date": "2026-08-05",
-   "close": 8.75,
+   "close": 8.74,
    "volume": 577518
   },
   {
@@ -1296,7 +1296,7 @@
   },
   {
    "date": "2026-08-23",
-   "close": 8.83,
+   "close": 8.82,
    "volume": 415039
   },
   {
@@ -1323,12 +1323,18 @@
   "perf_3m": 102.56410256410258,
   "avg_volume_30d": 1431225.2666666661,
   "relative_volume_10d": 0.9848582435533176,
+  "history_bars": 0,
   "median_volume_20d": 887250.5,
   "rv20": 1.2107031779638333,
   "normal_value_30d": 10471586.24,
-  "five_session_change": 9.090909090909104,
-  "history_bars": 120
+  "five_session_change": 9.090909090909104
  },
+ "profile_carried": [
+  "five_session_change",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
