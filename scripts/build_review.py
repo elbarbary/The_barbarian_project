@@ -370,10 +370,15 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
         else (summary.get("pe") or info.get("egx_pe")), pe_pts)
 
     if market_cap:
+        # market_cap is whole pounds; every statement figure on this row is in
+        # MILLIONS of pounds. Dividing one by the other put price-to-book near
+        # 3.1e6 for every company on the exchange, outside SANE["pb"], so the
+        # metric was silently dropped from all 258 review documents — while the
+        # app carried finished copy for a row nothing ever produced.
         equity_now = _last(held, "equity")
         add("pb",
-            market_cap / equity_now if equity_now and equity_now > 0 else None,
-            derived(held, lambda r: market_cap / r["equity"]
+            market_cap / (equity_now * 1e6) if equity_now and equity_now > 0 else None,
+            derived(held, lambda r: market_cap / (r["equity"] * 1e6)
                     if r.get("equity") and r["equity"] > 0 else None))
 
     # --- the business ----------------------------------------------------

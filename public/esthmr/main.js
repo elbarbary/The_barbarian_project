@@ -113,7 +113,8 @@ document.getElementById('signout').onclick = async () => {
         .then((doc) => {
           const row = component.data().companies.find((c) => c.ticker === wanted) || {};
           component._co = { ticker: wanted, ...doc, close: row.close, pct: row.pct };
-          component._d = { ...component.data(), series: doc.series, fins: doc.fins };
+          component._d = { ...component.data(), series: doc.series, fins: doc.fins,
+            review: doc.review };
           draw();
           // Its signals and its filings follow; they are extra, so a company
           // without either still shows its statements.

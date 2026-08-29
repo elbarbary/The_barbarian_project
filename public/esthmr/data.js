@@ -315,7 +315,7 @@ export async function company(ticker) {
   // used to fall back to the design's account of a company called KORRA, which
   // sat under whichever real ticker was open; it is a separate document and
   // its absence costs the paragraph, not the screen.
-  const [d, brief, prices] = await Promise.all([
+  const [d, brief, prices, review] = await Promise.all([
     doc(`companies/${ticker}.json`),
     doc(`briefs/${ticker}.json`).catch(() => null),
     // The company document carries 260 sessions; prices/ carries 1,500. The
@@ -323,6 +323,10 @@ export async function company(ticker) {
     // as 1Y for every company on the exchange. 231 of 282 have this file; the
     // rest keep the shorter series rather than losing the chart.
     doc(`prices/${ticker}.json`).catch(() => null),
+    // Eight ratios, each with its own history and the sector's middle company
+    // beside it. 258 companies have one; the site had never opened the
+    // directory.
+    doc(`review/${ticker}.json`).catch(() => null),
   ]);
   const rows = [
     ...(d.financials?.annual || []),
@@ -333,6 +337,7 @@ export async function company(ticker) {
       .map((p) => ({ date: p.date, close: p.close })),
     fins: rows,
     debt: d.debt || null,
+    review: review || null,
     profile: d.profile || {},
     sector: d.sector,
     name: d.name,

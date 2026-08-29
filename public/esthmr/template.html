@@ -366,6 +366,61 @@
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:18px">{{ co.briefSource }}</div>
       </section>
 
+      <!-- The ratios, and the questions that go with them.
+           This is the whole interpretive layer the pipeline publishes for 258
+           companies, which the site had never opened. It sits BEFORE the
+           statements because it frames them: a P/E is a question about the
+           profit line two sections down.
+      
+           Its shape is the app's, and the shape is what makes it publishable by
+           somebody without a licence: a figure, which way it has been moving,
+           where the sector's middle company sits, and then a QUESTION. The
+           document's own reading is printed under "A probable answer" — never as
+           a conclusion, and dropped entirely if it ever words itself as advice. -->
+      <sc-if value="{{ hasRatios }}">
+      <section style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-inline:8px">
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.revLabel }}</h2>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ ratioAgreement }}</div>
+        </div>
+        <sc-if value="{{ ratioRead }}">
+          <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.revReadLabel }}</div>
+            <div style="font-size:14.5px;color:var(--ink);line-height:1.6;margin-top:10px;text-wrap:pretty">{{ ratioRead }}</div>
+            <div style="font-size:13px;color:var(--t2);line-height:1.6;margin-top:10px;text-wrap:pretty">{{ ratioAsk }}</div>
+          </div>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px">
+          <sc-for list="{{ ratios }}" as="rt" hint-placeholder-count="8">
+            <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 20px 16px;display:flex;flex-direction:column;gap:10px;min-width:0">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ rt.label }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:500;letter-spacing:-.02em">{{ rt.value }}</div>
+              </div>
+              <sc-if value="{{ rt.hasSpark }}">
+                <div>{{ rt.spark }}</div>
+              </sc-if>
+              <div style="font-size:12.5px;color:var(--t2);line-height:1.5">{{ rt.now }} · {{ rt.periods }}</div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint)">{{ rt.peer }} · {{ rt.peerMedian }}</div>
+              <sc-if value="{{ rt.hasAsk }}">
+                <div style="margin-top:4px;padding-top:11px;border-top:1px solid var(--rule2)">
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAskTitle }}</div>
+                  <div style="font-size:13px;color:var(--ink);line-height:1.55;margin-top:6px;text-wrap:pretty">{{ rt.ask }}</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ rt.hasAnswer }}">
+                <div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.revAnswerTitle }}</div>
+                  <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-top:6px;text-wrap:pretty">{{ rt.answer }}</div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding-inline:8px;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ ratioMissing }}</div>
+      </section>
+      </sc-if>
+
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 12px">
           <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.asFiled }}</h2>

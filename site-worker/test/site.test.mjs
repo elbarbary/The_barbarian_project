@@ -17,7 +17,7 @@ import { installDom } from './dom-stub.mjs';
 
 installDom();
 
-const { Component } = await import('../../public/esthmr/logic.js');
+const { Component, DIRECTIVE } = await import('../../public/esthmr/logic.js');
 const data = await import('../../public/esthmr/data.js');
 
 /** The component as main.js drives it: construct, set a dataset, read a screen. */
@@ -287,7 +287,6 @@ function strings(value, out = [], seen = new Set()) {
 }
 
 // A directive about a named security, in one word. These are the app's list.
-const DIRECTIVE = /\b(buy|sell|hold|avoid|overvalued|undervalued|verdicts?|recommend\w*|target price|price target)\b/i;
 
 test('§8 nothing the site can render tells a reader what to do', () => {
   const withSignals = {
@@ -875,4 +874,75 @@ test('the layout has a phone case, and the rail stops eating the screen', async 
   // Seven columns of market data cannot fit a phone: the card scrolls, the
   // page does not. A page that scrolls sideways is the bug this prevents.
   assert.match(mobile, /\.om-table\s*\{[^}]*overflow-x:\s*auto/);
+});
+
+/* ── the ratios, and what may be said about them ───────────────────────── */
+
+test('a company screen carries its ratios, each with its own history', async () => {
+  const review = await fromDisk(async () => {
+    const { readFile } = await import('node:fs/promises');
+    return JSON.parse(await readFile(
+      new URL('../../public/data/v1/review/COMI.json', import.meta.url), 'utf8'));
+  });
+  const v = screen({ ...LIVE, review });
+  assert.ok(v.ratios.length >= 8, `only ${v.ratios.length} ratios`);
+  const pe = v.ratios.find((r) => r.key === 'pe');
+  assert.equal(pe.label, 'Price to earnings');
+  assert.match(pe.value, /^[\d.]+×$/);
+  // The direction is a sentence, not an arrow: an arrow beside a P/E invites
+  // the reading that up is good, and for a P/E or a debt ratio it is not.
+  assert.match(pe.now, /Right now it's (rising|falling)|holding steady/);
+  assert.match(pe.peer, /(above|below) its sector/);
+  assert.equal(pe.hasSpark, true, 'a ratio with a series must draw one');
+  assert.ok(pe.proof.length > 1, 'the figures the direction was read from are missing');
+});
+
+test('price to book is published again', async () => {
+  // build_review.py divided whole-pound market cap by EGP-MILLION equity, so
+  // every company's price-to-book landed near 3.1e6, outside the sane band,
+  // and was dropped from all 258 documents — while the app carried finished
+  // copy for a row nothing ever produced.
+  const { readFile } = await import('node:fs/promises');
+  const review = JSON.parse(await readFile(
+    new URL('../../public/data/v1/review/COMI.json', import.meta.url), 'utf8'));
+  const pb = review.metrics.find((m) => m.key === 'pb');
+  assert.ok(pb, 'price-to-book is still missing from the document');
+  assert.ok(pb.value > 0.02 && pb.value < 50, `price-to-book is ${pb.value}`);
+  const v = screen({ ...LIVE, review });
+  assert.equal(v.ratios.find((r) => r.key === 'pb').label, 'Price to book');
+});
+
+test('§8 a generated answer that reads as advice is dropped, its figure is not', () => {
+  const review = {
+    sector: 'Finance',
+    metrics: [
+      { key: 'pe', value: 4.26, unit: 'ratio', direction: 'falling', points: 6,
+        peer_median: 10.4, peer: 'below',
+        series: [{ p: 'FY 24', v: 4.8 }, { p: 'FY 25', v: 4.26 }],
+        answer: 'The shares look undervalued and investors should buy.' },
+    ],
+  };
+  const [card] = screen({ ...LIVE, review }).ratios;
+  // The prose goes; the filed figures stay, because a filed figure was never
+  // the part at risk.
+  assert.equal(card.answer, '');
+  assert.equal(card.hasAnswer, false);
+  assert.equal(card.value, '4.26×');
+  assert.equal(card.hasSpark, true);
+  assert.match(card.peer, /below its sector/);
+});
+
+test('§8 nothing in the ratio block tells a reader what to do', async () => {
+  const { readFile, readdir } = await import('node:fs/promises');
+  const dir = new URL('../../public/data/v1/review/', import.meta.url);
+  const files = (await readdir(dir)).filter((f) => f.endsWith('.json'));
+  for (const f of files) {
+    const review = JSON.parse(await readFile(new URL(f, dir), 'utf8'));
+    for (const card of screen({ ...LIVE, review }).ratios) {
+      for (const text of [card.answer, card.ask, card.now, card.peer]) {
+        assert.ok(!DIRECTIVE.test(text || ''), `${f}: ${text}`);
+      }
+    }
+  }
+  assert.ok(files.length > 200, `only ${files.length} review documents`);
 });

@@ -12,6 +12,20 @@
 
 import React from './react-shim.js';
 
+/** Language this publisher may not use about a named security (§8).
+ *
+ * ESTHMR is not licensed by Egypt's FRA, so nothing it renders may tell a
+ * reader what to do with a share. Most of the site's copy is written here and
+ * is safe by construction; the review documents are GENERATED, and a future
+ * pipeline run could word an answer badly. This is what stands between that and
+ * a reader — the prose is dropped, the figures stay, because a filed figure was
+ * never the part at risk.
+ *
+ * Exported so the tests assert against this exact expression rather than a
+ * copy of it that can drift.
+ */
+export const DIRECTIVE = /\b(buy|sell|hold|avoid|accumulate|overweight|underweight|undervalued|overvalued|cheap|expensive|bargain|verdicts?|recommend\w*|target price|price target|should (buy|sell|own|avoid)|go (long|short)|(long|short) position|will (rise|fall|reach|hit))\b/i;
+
 /** What the design tool called DCLogic: state, props, and a redraw hook. */
 class Base {
   constructor(props) {
@@ -38,6 +52,46 @@ export class Component extends Base {
   copy() {
     const en = {
       nothingYet:'Nothing published for this yet.',
+      revLabel:'The numbers, and what to ask',
+      revRising:'rising',
+      revFalling:'falling',
+      revFlat:'flat',
+      revAboveSector:'above its sector',
+      revBelowSector:'below its sector',
+      revSectorMedian:'{sector} median',
+      revOverPeriods:'over {n} reported periods',
+      revAgree:'{n} of {readable} readable metrics moved the same way.',
+      revDisagree:'{up} moved one way, {down} the other.',
+      revAgreeAsk:'When they all agree, ask what the market already knows that you do not.',
+      revDisagreeAsk:'When they disagree, the disagreement is the story. Which one is early?',
+      revMissingNote:'Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float is not published anywhere and has no substitute.',
+      revAskTitle:'Worth asking',
+      revAnswerTitle:'A probable answer',
+      revProofTitle:'The figure, period by period',
+      revProofNote:'These are the values the direction was read from — the exchange\'s filed figures, oldest first.',
+      revNowRising:'Right now it\'s rising',
+      revNowFalling:'Right now it\'s falling',
+      revNowFlat:'Right now it\'s holding steady',
+      revOnePoint:'One published figure — not enough history to read a direction.',
+      revReadLabel:'The read',
+      revPb:'Price to book',
+      revPbAsk:'You are paying this much for each pound of company equity. Are those assets earning anything?',
+      revPe:'Price to earnings',
+      revProfit:'Net profit',
+      revEps:'Earnings per share',
+      revAssets:'Total assets',
+      revRoe:'Return on equity',
+      revRoa:'Return on assets',
+      revDebt:'Debt to equity',
+      revYield:'Dividend yield',
+      revPeAsk:'Why is it priced this way against its sector — and what are earnings doing underneath it?',
+      revProfitAsk:'Where did the change come from — the business, or something that will not repeat?',
+      revEpsAsk:'Profit rose — but did the earnings belonging to each share rise with it?',
+      revAssetsAsk:'Is the business actually getting bigger, and is profit keeping pace with it?',
+      revRoeAsk:'Good returns on shareholders\' money — or on borrowed money? Check the debt row.',
+      revRoaAsk:'How hard is everything the company owns actually working?',
+      revDebtAsk:'What did management do with the borrowed money — and is it earning more than it costs?',
+      revYieldAsk:'Is the dividend supported by profit and cash — or by a share price that fell?',
       feedCount:'{shown} of {total} headlines, newest first.',
       showMore:'Show more',
       busiest:'Busiest against their own normal',
@@ -95,6 +149,46 @@ export class Component extends Base {
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
+      revLabel:'الأرقام، وما ينبغي أن تسأله',
+      revRising:'ترتفع',
+      revFalling:'تنخفض',
+      revFlat:'مستقرة',
+      revAboveSector:'أعلى من قطاعها',
+      revBelowSector:'أقل من قطاعها',
+      revSectorMedian:'وسيط {sector}',
+      revOverPeriods:'على مدى {n} فترة معلنة',
+      revAgree:'{n} من {readable} مؤشرات مقروءة تحركت في الاتجاه نفسه.',
+      revDisagree:'{up} تحرك في اتجاه و{down} في الاتجاه الآخر.',
+      revAgreeAsk:'حين تتفق كلها، اسأل عمّا يعرفه السوق ولا تعرفه أنت.',
+      revDisagreeAsk:'حين تختلف، فالاختلاف نفسه هو الحكاية. أيّها سبق الآخر؟',
+      revMissingNote:'الإيرادات لا تنشرها البورصة ولا أي مصدر بيانات متاح من مصر، لذا لا يمكن عرض نمو الإيرادات ولا هامش الربح. ونمو الأصول وتحويل النقد يطرحان السؤال نفسه على أرقام منشورة فعلاً. أما نسبة الأسهم الحرة فلا تُنشر في أي مكان ولا بديل لها.',
+      revAskTitle:'يستحق أن تسأل',
+      revAnswerTitle:'إجابة مُرجَّحة',
+      revProofTitle:'الرقم، فترة بفترة',
+      revProofNote:'هذه هي القيم التي قُرئ منها الاتجاه — أرقام البورصة المودعة، من الأقدم إلى الأحدث.',
+      revNowRising:'ترتفع الآن',
+      revNowFalling:'تنخفض الآن',
+      revNowFlat:'مستقرة الآن',
+      revOnePoint:'رقم واحد منشور — لا يكفي من التاريخ لقراءة اتجاه.',
+      revReadLabel:'القراءة',
+      revPb:'السعر إلى القيمة الدفترية',
+      revPbAsk:'أنت تدفع هذا مقابل كل جنيه من حقوق الملكية. فهل تُنتج هذه الأصول شيئاً؟',
+      revPe:'مضاعف الربحية',
+      revProfit:'صافي الربح',
+      revEps:'ربحية السهم',
+      revAssets:'إجمالي الأصول',
+      revRoe:'العائد على حقوق الملكية',
+      revRoa:'العائد على الأصول',
+      revDebt:'الدين إلى حقوق الملكية',
+      revYield:'عائد التوزيعات',
+      revPeAsk:'لماذا يُسعَّر هكذا مقارنة بقطاعه — وماذا تفعل الأرباح تحته؟',
+      revProfitAsk:'من أين جاء التغير — من النشاط، أم من شيء لن يتكرر؟',
+      revEpsAsk:'ارتفع الربح — لكن هل ارتفع نصيب كل سهم منه؟',
+      revAssetsAsk:'هل يكبر النشاط فعلاً، وهل يواكبه الربح؟',
+      revRoeAsk:'عائد جيد على أموال المساهمين — أم على أموال مقترضة؟ راجع سطر المديونية.',
+      revRoaAsk:'ما مدى كفاءة تشغيل كل ما تملكه الشركة؟',
+      revDebtAsk:'ماذا فعلت الإدارة بالأموال المقترضة — وهل تُدرّ أكثر مما تكلّف؟',
+      revYieldAsk:'هل التوزيع مدعوم بالربح والنقد — أم بسعر سهم هبط؟',
       feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.',
       showMore:'عرض المزيد',
       busiest:'الأنشط مقارنة بمعتادها',
@@ -160,6 +254,66 @@ export class Component extends Base {
   dcol(v) { if (!v) return 'var(--faint)'; return v > 0 ? 'var(--up)' : 'var(--down)'; }
   fold(s) { return (s||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[\u064B-\u0652\u0670\u0640]/g,''); }
   nm(o) { return this.state.lang === 'ar' ? (o.ar || o.en) : o.en; }
+  /** The eight ratios, each with its own history and its sector beside it.
+   *
+   * This is the whole interpretive layer the pipeline publishes for 258
+   * companies and the site had never opened. What makes it publishable by an
+   * unlicensed publisher is the shape the app arrived at (§8): every card
+   * states a figure, states which way it has been moving, says where the
+   * sector's middle company sits, and then asks a QUESTION. The document's own
+   * answer is printed under "A probable answer" and never as a conclusion.
+   *
+   * The prose is guarded at render rather than trusted. 1,452 strings in the
+   * current corpus contain no directive, but the pipeline regenerates these and
+   * a future run could word one badly. A card whose answer trips the guard
+   * still shows its figure, its direction and its history — the numbers are
+   * filed facts and are never the part at risk.
+   */
+  ratioCards(review, L, ar) {
+    if (!review || !Array.isArray(review.metrics)) return [];
+    const NAME = {
+      pe: [L.revPe, L.revPeAsk], pb: [L.revPb, L.revPbAsk],
+      profit: [L.revProfit, L.revProfitAsk],
+      eps: [L.revEps, L.revEpsAsk], assets: [L.revAssets, L.revAssetsAsk],
+      roe: [L.revRoe, L.revRoeAsk], roa: [L.revRoa, L.revRoaAsk],
+      debt_equity: [L.revDebt, L.revDebtAsk], dividend_yield: [L.revYield, L.revYieldAsk],
+    };
+    const fmt = (v, unit) => {
+      if (typeof v !== 'number' || !isFinite(v)) return '\u2014';
+      if (unit === 'percent') return v.toFixed(1) + '%';
+      if (unit === 'egp_m') return this.money(v * 1e6);
+      if (unit === 'egp') return v.toFixed(2);
+      return v.toFixed(2) + '\u00d7';
+    };
+    return review.metrics.map((m) => {
+      const [label, ask] = NAME[m.key] || [m.key, ''];
+      const rising = m.direction === 'rising';
+      const falling = m.direction === 'falling';
+      const answer = ar ? (m.answer_ar || m.answer) : m.answer;
+      const safe = answer && !DIRECTIVE.test(answer) ? answer : '';
+      const points = (m.series || []).map((x) => x.v).filter((v) => typeof v === 'number');
+      return {
+        key: m.key, label, ask,
+        value: fmt(m.value, m.unit),
+        // The direction is the app's sentence, not an arrow: an arrow beside a
+        // ratio invites the reading that up is good, and for a P/E or a debt
+        // ratio it is not.
+        now: rising ? L.revNowRising : falling ? L.revNowFalling : L.revNowFlat,
+        color: 'var(--t2)',
+        periods: m.points ? L.revOverPeriods.replace('{n}', m.points) : '',
+        onePoint: m.points === 1,
+        peer: m.peer === 'above' ? L.revAboveSector : m.peer === 'below' ? L.revBelowSector : '',
+        peerMedian: typeof m.peer_median === 'number'
+          ? L.revSectorMedian.replace('{sector}', review.sector || '') + ' ' + fmt(m.peer_median, m.unit)
+          : '',
+        answer: safe, hasAnswer: Boolean(safe), hasAsk: Boolean(ask),
+        spark: this.sparkOf(points, !falling),
+        hasSpark: points.length > 1,
+        proof: (m.series || []).map((x) => ({ p: x.p, v: fmt(x.v, m.unit) })),
+      };
+    });
+  }
+
   /** Signal rows as sentences, from the exchange's own filing record.
    *
    * Every number here is a count off the archive: how many reported periods a
@@ -605,6 +759,17 @@ export class Component extends Base {
       toggleCaret: st.debtOpen ? '↑' : '↓',
     };
 
+    const ratios = this.ratioCards(D.review, L, ar);
+    const pat = (D.review && D.review.pattern) || null;
+    const up = pat ? (pat.improving || []).length : 0;
+    const down = pat ? (pat.deteriorating || []).length : 0;
+    const readable = pat ? (pat.readable || up + down) : 0;
+    const agreement = !pat ? ''
+      : (down === 0 || up === 0)
+        ? L.revAgree.replace('{n}', Math.max(up, down)).replace('{readable}', readable)
+        : L.revDisagree.replace('{up}', up).replace('{down}', down);
+    const agreementAsk = !pat ? '' : (down === 0 || up === 0) ? L.revAgreeAsk : L.revDisagreeAsk;
+
     const signals = (D.signals && !Array.isArray(D.signals))
       ? this.signalCards(D.signals, L, ar)
       : D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
@@ -785,6 +950,13 @@ export class Component extends Base {
       // per-sector document came back; a card without one simply shows less.
       sectorsHaveDetail: sectorCards.some((c) => (c.medians || []).length),
       signalFootnote: signals.length ? L.sigFootnote : '',
+      // The ratios, and the paragraph the pipeline writes over all of them.
+      ratios, hasRatios: ratios.length > 0,
+      ratioRead: D.review ? (ar ? (D.review.read_ar || D.review.read) : D.review.read) || '' : '',
+      // "Six of seven readable metrics moved the same way" — and then the
+      // question that follows from it, which is the app's and not ours.
+      ratioAgreement: agreement, ratioAsk: agreementAsk,
+      ratioMissing: ratios.length ? L.revMissingNote : '',
       noMacro: macro.length === 0,
       noStudies: studies.length === 0,
       nav, sectorCount: sectorCards.length, themeLabel: st.theme === 'light' ? (ar?'نهاري':'Light') : (ar?'ليلي':'Dark'),
