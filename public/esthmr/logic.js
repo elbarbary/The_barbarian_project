@@ -132,7 +132,7 @@ export class Component extends Base {
   // opens on a month with no pill lit and 31 empty day cells while 1,467
   // filings sit one click away. renderVals falls back to the newest month the
   // archive actually publishes.
-  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', rateOpen:'' };
+  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', heatSector:'', rateOpen:'' };
 
   // ── copy ──
   copy() {
@@ -280,6 +280,8 @@ export class Component extends Base {
       followEmpty:'Tap the star beside any company \u2014 in the market table, or on its own page \u2014 and it appears here.',
       followBrowse:'Open the market',
       followClear:'Empty the list',
+      followSessions:'{n} sessions',
+      followNoSeries:'No published price series',
       followKeptAccount:'Kept to your account, so the same list opens in another browser. A ticker and nothing else: no share count, no price paid, nothing about what you own.',
       followKeptDevice:'Kept in this browser only, because there is no account to keep it against while you are signed out. Sign in and it follows you.',
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
@@ -300,6 +302,15 @@ export class Component extends Base {
       rateSessions:'{n} sessions',
       rateOunce:'EGP {egp} an ounce \u00b7 USD {usd}',
       rateHow:'How this figure is reached',
+      rateOunceSeries:'the dollar ounce',
+      // A line is a claim about the past. Six of these rows have no
+      // published series anywhere this pipeline can reach, and the
+      // honest thing is a number with no line under it — said once,
+      // rather than left as a gap a reader has to notice.
+      rateNoSeries:'{n} of these carry a published daily series and are drawn with one. The rest \u2014 Tadawul and the five pound rates \u2014 are the latest reading only: no source this pipeline can reach publishes their history.',
+      heatZoomIn:'Tap a sector to fill the map with it.',
+      heatZoomDrawn:'{n} in {sector}, of {of} on this map.',
+      heatZoomOut:'Showing one sector. Tap it again, or the name above, for the whole map.',
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
@@ -492,6 +503,8 @@ export class Component extends Base {
       followEmpty:'اضغط النجمة بجوار أي شركة \u2014 في جدول السوق أو في صفحتها \u2014 فتظهر هنا.',
       followBrowse:'افتح السوق',
       followClear:'إفراغ القائمة',
+      followSessions:'{n} جلسة',
+      followNoSeries:'لا سلسلة أسعار منشورة',
       followKeptAccount:'محفوظة في حسابك، فتفتح القائمة نفسها في متصفح آخر. يُحفظ الرمز فقط: لا عدد أسهم، ولا سعر شراء، ولا شيء عمّا تملكه.',
       followKeptDevice:'محفوظة في هذا المتصفح وحده، إذ لا حساب تُحفظ فيه وأنت غير مسجَّل الدخول. سجِّل الدخول فتتبعك القائمة.',
       followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
@@ -512,6 +525,11 @@ export class Component extends Base {
       rateSessions:'{n} جلسة',
       rateOunce:'{egp} جنيه للأونصة \u00b7 {usd} دولار',
       rateHow:'كيف يُحسب هذا الرقم',
+      rateOunceSeries:'الأونصة بالدولار',
+      rateNoSeries:'{n} من هذه الصفوف لها سلسلة يومية منشورة وتُرسم بها. أما البقية \u2014 تداول وأسعار الجنيه الخمسة \u2014 فهي آخر قراءة فقط: لا مصدر تصله هذه المنظومة ينشر تاريخها.',
+      heatZoomIn:'اضغط قطاعاً لتملأ به الخريطة.',
+      heatZoomDrawn:'{n} في {sector}، من {of} على هذه الخريطة.',
+      heatZoomOut:'قطاع واحد معروض. اضغطه مرة أخرى، أو الاسم أعلاه، للخريطة كاملة.',
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
@@ -942,7 +960,21 @@ export class Component extends Base {
     const followedCos = (this._watch || [])
       .map((t) => D.companies.find((c) => c.ticker === t))
       .filter(Boolean);
-    const followed = followedCos.map(mkRow);
+    // A card each, with the company's own closes under it. `_series` is what
+    // main.js fetches per followed ticker; a company with no published series
+    // keeps its card and loses its line rather than getting an invented one.
+    const followed = followedCos.map((c) => {
+      const row = mkRow(c);
+      const points = ((this._series || {})[c.ticker] || []).slice(-90);
+      const up = (c.pct || 0) >= 0;
+      return Object.assign(row, {
+        spark: this.sparkOf(points, up),
+        hasSpark: points.length > 1,
+        sparkNote: points.length > 1
+          ? L.followSessions.replace('{n}', String(points.length)) : L.followNoSeries,
+        tint: !c.pct ? 'var(--sunk)' : (up ? 'var(--upTint)' : 'var(--downTint)'),
+      });
+    });
     // Counted off the companies rather than off the rendered rows: a row shows
     // an empty arrow both for a share that closed exactly flat and for one
     // with no price at all, and those are not the same fact. Only the priced
@@ -1985,7 +2017,7 @@ export class Component extends Base {
       const on = id === heatOn;
       const doc = (D.indexMembers || []).find((i) => i.id === id);
       return { label, count: doc ? String(doc.count) : String(D.companies.length),
-        go: () => this.setState({ heat: id }),
+        go: () => this.setState({ heat: id, heatSector: '' }),
         color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent',
         border: on ? 'transparent' : 'var(--rule)', sh: on ? 'var(--shPill)' : 'none' };
     });
@@ -2010,6 +2042,19 @@ export class Component extends Base {
       if (!bySector.has(key)) bySector.set(key, []);
       bySector.get(key).push(c);
     }
+    /* Zoom is one sector filling the box.
+     *
+     * On the whole exchange the smallest tiles are a hairline, because the
+     * largest company is worth twenty-five thousand times the smallest and
+     * the map is to scale. Inside one sector the spread is a fraction of
+     * that, so the same companies come back at a size a reader can read and a
+     * thumb can hit — without the map ever having lied about a size to get
+     * there. It is the box that changed, not the arithmetic.
+     */
+    const heatZoom = bySector.has(st.heatSector) ? st.heatSector : '';
+    const heatDrawSectors = heatZoom
+      ? [[heatZoom, bySector.get(heatZoom)]]
+      : [...bySector.entries()];
     const heatBlocks = [];
     const heatTiles = [];
     const GAP = 0.32;          // per cent of the box, between sector blocks
@@ -2019,7 +2064,7 @@ export class Component extends Base {
     // to hold it at all.
     const STRIP = 3.0;
     const sectorRects = squarify(
-      [...bySector.entries()].map(([key, list]) => ({
+      heatDrawSectors.map(([key, list]) => ({
         key, list, value: list.reduce((sum, c) => sum + c.cap, 0) })),
       0, 0, 100, 100);
     for (const block of sectorRects) {
@@ -2034,8 +2079,16 @@ export class Component extends Base {
       const w = Math.max(0, block.w - gap * 2), h = Math.max(0, block.h - gap * 2);
       const strip = h > STRIP * 3 && w > 7 ? STRIP : 0;
       heatBlocks.push({ label: sectorName(block.key), showLabel: strip > 0,
+        count: String(block.list.length),
         left: pc(x), top: pc(y), width: pc(w), height: pc(h),
-        labelTop: pc(y + 0.25), labelLeft: pc(x + 0.5), labelWidth: pc(w - 1) });
+        // Clicking a sector fills the box with it; clicking it again, or the
+        // crumb above the map, goes back out.
+        // On the NAME only. It used to be on the block as well, and a click
+        // on the name bubbled into the block and toggled the zoom straight
+        // back off — one control firing twice looks exactly like a control
+        // that does not work.
+        zoom: () => this.setState((prev) => ({
+          heatSector: prev.heatSector === block.key ? '' : block.key })) });
       for (const t of squarify(block.list.map((c) => ({ c, value: c.cap })),
                                x, y + strip, w, Math.max(0, h - strip))) {
         const priced = typeof t.c.pct === 'number';
@@ -2129,6 +2182,7 @@ export class Component extends Base {
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
       noFeed: feed.length === 0, noRates: rates.length === 0,
+      hasRates: rates.length > 0,
       // Where the feed came from, what it merged, and what it could not reach.
       // A list of only what worked is marketing — the same argument
       // docs/data-sources.md makes about the pipeline as a whole.
@@ -2214,13 +2268,22 @@ export class Component extends Base {
       isWatchlist: st.screen === 'watchlist',
       isHeat: st.screen === 'heat',
       heatTabs, heatBlocks, heatTiles,
+      heatZoomed: Boolean(heatZoom),
+      heatZoomLabel: heatZoom ? sectorName(heatZoom) : '',
+      heatZoomOut: () => this.setState({ heatSector: '' }),
+      heatZoomHint: heatZoom ? L.heatZoomOut : L.heatZoomIn,
       noHeat: heatTiles.length === 0,
       noHeatIndex: (D.indexMembers || []).length === 0,
-      heatDrawn: heatMissingCount === 0
-        ? L.heatAllDrawn.replace('{drawn}', String(heatSized.length))
-        : L.heatDrawn.replace('{drawn}', String(heatSized.length))
-            .replace('{total}', String(heatPool.length))
-            .replace('{missing}', String(heatMissingCount)),
+      heatDrawn: (heatZoom
+        ? L.heatZoomDrawn.replace('{n}', String(heatTiles.length))
+            .replace('{sector}', sectorName(heatZoom))
+            .replace('{of}', String(heatSized.length)) + ' '
+        : '')
+        + (heatMissingCount === 0
+          ? L.heatAllDrawn.replace('{drawn}', String(heatSized.length))
+          : L.heatDrawn.replace('{drawn}', String(heatSized.length))
+              .replace('{total}', String(heatPool.length))
+              .replace('{missing}', String(heatMissingCount))),
       hasHeatSliver: heatSlivers > 0,
       heatSliver: L.heatSliver.replace('{n}', String(heatSlivers))
         .replace('{times}', Math.round(heatSpread).toLocaleString('en-US')),
@@ -2283,15 +2346,22 @@ export class Component extends Base {
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
-      co, ranges, chart, ratesArrowed: rates.map((r) => {
+      co, ranges, chart, rateSeriesNote: L.rateNoSeries.replace('{n}',
+        String(rates.filter((r) => ((indexById.get(r.id) || {}).points || r.points || []).length > 1).length)),
+      ratesArrowed: rates.map((r) => {
         const flat = !r.pct || r.pct === '\u2014';
         const up = String(r.pct).charAt(0) === '+';
         // The three EGX indices have 260 sessions of closing levels in
         // market-history.json and had a bare number on this screen. The
         // series is joined by id to the cards Home already builds from it —
         // the same figures, so the two screens cannot disagree.
+        // Two sources, joined the same way. The three EGX indices have their
+        // series in market-history.json and Home already builds cards from
+        // it; everything else has its own in rates/history.json. Whichever
+        // answers, the line is drawn from published closes and never from a
+        // shape invented to fill the space.
         const line = indexById.get(r.id);
-        const points = (line && line.points) || [];
+        const points = (line && line.points) || r.points || [];
         const open = st.rateOpen === (r.id || r.label);
         return Object.assign({}, r, {
           arrow: flat ? '' : (up ? '\u2197' : '\u2198'),
@@ -2300,7 +2370,10 @@ export class Component extends Base {
           // A card opens onto the arithmetic the document already writes for
           // it — how the figure was reached, not a second figure.
           spark: this.sparkOf(points, up), hasSpark: points.length > 1,
-          sessions: points.length ? L.rateSessions.replace('{n}', String(points.length)) : '',
+          sessions: points.length
+            ? L.rateSessions.replace('{n}', String(points.length))
+              + (r.pointsAre === 'usdOunce' ? ' \u00b7 ' + L.rateOunceSeries : '')
+            : '',
           open, caret: open ? '\u2212' : '+',
           hasWorkings: Boolean(ar ? r.workingsAr : r.workings),
           workings: (ar ? r.workingsAr : r.workings) || '',

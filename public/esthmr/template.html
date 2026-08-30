@@ -660,11 +660,22 @@
       </sc-if>
 
       <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:12px">
+        <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:2px 4px 11px">
+          <sc-if value="{{ heatZoomed }}">
+            <div onClick="{{ heatZoomOut }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)"><span>←</span>{{ heatZoomLabel }}</div>
+          </sc-if>
+          <div style="font-size:11.5px;color:var(--faint)">{{ heatZoomHint }}</div>
+        </div>
         <div class="om-heat" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden">
           <sc-for list="{{ heatBlocks }}" as="b" hint-placeholder-count="10">
             <div style="position:absolute;left:{{ b.left }};top:{{ b.top }};width:{{ b.width }};height:{{ b.height }};border-radius:8px;background:var(--hmSunk)">
+              <!-- The name is the zoom control, and it sits ABOVE the tiles:
+                   the block itself is drawn under them, so a click on the
+                   block only lands in the gaps. A tile always opens its
+                   company — the two targets never compete for the same
+                   pixel. -->
               <sc-if value="{{ b.showLabel }}">
-                <div class="hm-sec" style="position:absolute;inset-inline:7px;top:2px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:8.5px;line-height:1.1;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.label }}</div>
+                <div onClick="{{ b.zoom }}" class="hm-sec" style="position:absolute;inset-inline:7px;top:2px;z-index:2;cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:8.5px;line-height:1.1;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" style-hover="color:var(--accent)">{{ b.label }} <span style="opacity:.7">{{ b.count }}</span></div>
               </sc-if>
             </div>
           </sc-for>
@@ -730,8 +741,7 @@
            guess at otherwise. They do not sort: the order is the order they
            were followed in, which is the reader's own and not a ranking. -->
       <sc-if value="{{ hasFollowed }}">
-        <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:0 10px 12px;overflow:hidden">
-          <div class="om-follow-sum" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:16px 14px 15px;border-bottom:1px solid var(--rule2)">
+        <div class="om-follow-sum" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:15px 18px 14px">
             <div style="display:flex;align-items:baseline;gap:9px">
               <span style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--up)">{{ followUp }}</span>
               <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.followRose }}</span>
@@ -745,23 +755,34 @@
               <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.followFlat }}</span>
             </div>
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);margin-inline-start:auto">{{ followOf }}</div>
-          </div>
-          <div style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:13px 14px 9px">
-            <div></div>
-            <sc-for list="{{ followCols }}" as="c" hint-placeholder-count="7">
-              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:{{ c.align }}">{{ c.label }}</div>
-            </sc-for>
-          </div>
+        </div>
+
+        <!-- A card each rather than a row each. A row is for scanning a list
+             somebody else ordered; this list is the reader's own and short, so
+             it gets the room to show what the company has been doing as well
+             as what it did today. The line is the company's own published
+             closes — no line where there is no series. -->
+        <div class="om-follow-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:12px">
           <sc-for list="{{ followed }}" as="w" hint-placeholder-count="6">
-            <div class="om-follow-row" style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:13px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
-              <div onClick="{{ w.follow }}" title="{{ L.unfollow }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ w.starColor }}" style-hover="color:var(--accent)">{{ w.star }}</div>
-              <div onClick="{{ w.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ w.ticker }}</div>
-              <div onClick="{{ w.go }}" style="cursor:pointer;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ w.name }}</div>
-              <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.sector }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end">{{ w.close }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ w.color }}">{{ w.pct }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ w.cap }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ w.pe }}</div>
+            <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:15px 16px 12px;min-width:0;display:flex;flex-direction:column;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                <div onClick="{{ w.go }}" style="cursor:pointer;min-width:0">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:600">{{ w.ticker }}</div>
+                  <div style="font-size:12.5px;color:var(--t2);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.name }}</div>
+                </div>
+                <div onClick="{{ w.follow }}" title="{{ L.unfollow }}" style="cursor:pointer;font-size:15px;line-height:1;flex:none;color:{{ w.starColor }}" style-hover="color:var(--accent)">{{ w.star }}</div>
+              </div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:11px">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;letter-spacing:-.02em">{{ w.close }}</div>
+                <div style="display:flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;background:{{ w.tint }};font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ w.color }}">{{ w.pct }}<span>{{ w.arrow }}</span></div>
+              </div>
+              <sc-if value="{{ w.hasSpark }}">
+                <div style="margin-top:10px">{{ w.spark }}</div>
+              </sc-if>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:9px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint)">
+                <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.sector }}</span>
+                <span style="flex:none">{{ w.sparkNote }}</span>
+              </div>
             </div>
           </sc-for>
         </div>
@@ -1549,6 +1570,11 @@
 </sc-if>
 
       </div>
+
+      <!-- Which of these have a past, and which are only a present. -->
+      <sc-if value="{{ hasRates }}">
+        <div style="padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:88ch;text-wrap:pretty">{{ rateSeriesNote }}</div>
+      </sc-if>
 
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
         <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0 0 8px;padding-inline:12px">{{ L.macro }}</h2>
