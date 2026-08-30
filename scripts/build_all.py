@@ -53,6 +53,12 @@ STEPS = [
     # reaches the app on tomorrow's build — cumulative stores make that a lag
     # rather than a loss.
     ("Filed net profit", "build_financials_api.py", False),
+    # Before Market, which reads the file it writes. The exchange's own market
+    # values beat the vendor's where the two disagree — and on 30 August 2026
+    # they disagreed by up to two thirds on five companies, one of which was
+    # simply wrong. Best-effort and carried forward: a missing file means the
+    # vendor's figure stands, exactly as before this existed.
+    ("EGX market value", "harvest_egx_market_cap.py", True),
     ("Market", "build_market_api.py", False),
     # New filings, before anything that reads them.
     #
@@ -187,6 +193,11 @@ STEPS = [
     # companies because a host had a bad minute.
     ("Index constituents", "build_indices_api.py", True),
     ("Rates", "build_rates_api.py", True),
+    # After Rates, because it checks every series it fetches against the level
+    # Rates just published and refuses the ones that disagree. An instrument id
+    # is not a name, and the site has already shipped a chart of the wrong
+    # instrument once.
+    ("Rate history", "rate_history.py", True),
     # The world outside the exchange.
     #
     # This was in no STEPS list and in no workflow: `macro.json` had four

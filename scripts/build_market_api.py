@@ -278,6 +278,25 @@ def _filed_financials(
 FILED_FINANCIALS = _filed_financials()
 
 
+# The exchange's own market values, harvested by harvest_egx_market_cap.py.
+# The exchange wins where it has an answer — it is the authority on how many
+# shares of an Egyptian company are listed, and on 30 August 2026 the vendor
+# had FAIT at 3.15 times its own price × share count while the exchange had it
+# exactly right. Absent file, absent ticker: the vendor's figure stands, so
+# this can be added and removed without the directory losing a column.
+def _egx_market_cap() -> dict[str, float]:
+    path = REPO / "data-source" / "egx-beta" / "market-cap.json"
+    try:
+        held = json.loads(path.read_text(encoding="utf-8")).get("market_cap") or {}
+    except (OSError, ValueError):
+        return {}
+    return {k: float(v) for k, v in held.items()
+            if isinstance(v, (int, float)) and v > 0}
+
+
+EGX_MARKET_CAP = _egx_market_cap()
+
+
 def newest_scan() -> pathlib.Path | None:
     """The freshest daily scan, or None when this machine has no scan archive.
 
@@ -716,12 +735,24 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         change_pct = clean(r.get("change"))
         previous = previous_close(history, session, close, change_pct)
 
-        cap = clean(r.get("marketCap"))
+        vendor_cap = clean(r.get("marketCap"))
+        cap = EGX_MARKET_CAP.get(ticker) or vendor_cap
         avg_volume = clean(r.get("scannerAverageVolume30d"))
         normal_volume = clean(r.get("median20Volume"))
+        # Deliberately the VENDOR's own triple, not the published cap.
+        #
+        # `share_count_agrees` asks whether price, shares and market value
+        # multiply out — an INTERNAL consistency check on one source, and the
+        # thing that keeps per-share arithmetic honest. Feeding it the
+        # exchange's cap against the vendor's share count turns it into a
+        # cross-source comparison, which is a different question with a
+        # different meaning: it would withhold 24 more P/Es on the strength of
+        # a share-count disagreement, not an arithmetic error. Those 24 are
+        # worth chasing to the filings; they are not worth deleting on a
+        # guess. The guard keeps testing what it was written to test.
         share_profile = {
             "shares_outstanding": clean(r.get("sharesOutstanding")),
-            "market_cap": cap,
+            "market_cap": vendor_cap,
         }
         filed = FILED_FINANCIALS.get(ticker)
         pe, pe_period = price_earnings(close, share_profile, filed)
@@ -820,7 +851,6 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         # stays absent and the app renders "—" rather than a zero (spec §49).
         profile = {}
         for key, field in (
-            ("market_cap", "marketCap"),
             ("shares_outstanding", "sharesOutstanding"),
             ("free_float", "freeFloat"),
             ("float_shares", "floatShares"),
@@ -838,6 +868,13 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
             value = clean(r.get(field))
             if value is not None:
                 profile[key] = value
+        # The same market value the directory publishes, so the company screen
+        # and the market table cannot show a reader two different numbers for
+        # the same company under the same word.
+        if cap is not None:
+            profile["market_cap"] = cap
+            profile["market_cap_source"] = (
+                "EGX" if ticker in EGX_MARKET_CAP else "scan")
         # What this scan did not carry, kept from the last one that did.
         #
         # The company documents are deleted and rewritten every run, and an
