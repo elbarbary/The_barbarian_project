@@ -504,7 +504,7 @@
       <div class="om-search" style="border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
         <div style="display:flex;align-items:center;gap:10px;padding:0 4px 12px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:17px;height:17px"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
-          <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
+          <input id="om-market-search" name="market-search" autocomplete="off" aria-label="{{ searchPlaceholder }}" value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
         </div>
         <div style="display:flex;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--rule2)">
           <sc-for list="{{ sectorChips }}" as="s" hint-placeholder-count="8">
@@ -1374,7 +1374,7 @@
       <div class="om-search" style="border-radius:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:14px 16px">
         <div style="display:flex;align-items:center;gap:10px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:16px;height:16px;flex:none"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
-          <input value="{{ filedQ }}" onChange="{{ onFiledQuery }}" placeholder="{{ L.filedSearch }}" style="flex:1;min-width:0;padding:7px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;outline:none">
+          <input id="om-filed-search" name="filed-search" autocomplete="off" aria-label="{{ L.filedSearch }}" value="{{ filedQ }}" onChange="{{ onFiledQuery }}" placeholder="{{ L.filedSearch }}" style="flex:1;min-width:0;padding:7px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;outline:none">
           <sc-if value="{{ hasFiledFilter }}">
             <div onClick="{{ clearFiled }}" style="cursor:pointer;flex:none;padding:6px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ L.filedClear }}</div>
           </sc-if>
