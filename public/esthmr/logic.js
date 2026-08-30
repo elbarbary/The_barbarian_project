@@ -46,7 +46,13 @@ class Base {
 
 
 export class Component extends Base {
-  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'2026-08' };
+  // `month` is deliberately empty. It was the literal '2026-08', which is right
+  // until 1 September: the archive index rolls, the Calendar keeps opening on
+  // August, and once 2026-08 falls out of the twelve-month window the screen
+  // opens on a month with no pill lit and 31 empty day cells while 1,467
+  // filings sit one click away. renderVals falls back to the newest month the
+  // archive actually publishes.
+  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'' };
 
   // ── copy ──
   copy() {
@@ -142,7 +148,7 @@ export class Component extends Base {
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
-      archiveNote:'Showing {shown} of {total} filings published in {month}.',
+      archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
       breadthWord:'How widely',
       calWindow:'Filed between {from} and {to} in {n} past years.',
@@ -198,7 +204,9 @@ export class Component extends Base {
       asFiled:'Financials, as filed', egpMillions:'EGP millions unless stated', period:'Period', revenue:'Revenue',
       grossProfit:'Gross profit', operatingIncome:'Operating income', netIncome:'Net income',
       cumulativeWarning:'Periods are cumulative as the exchange files them. H1 and 9M are year-to-date and are not comparable to a single quarter. Nothing here is subtracted to synthesise a quarter, and a blank is a figure the filing did not state — not a zero.',
-      openFiling:'Open filing', borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
+      openFiling:'Open filing',
+      openOnExchange:'Open on the Egyptian Exchange', openOnMubasher:'Open on Mubasher',
+      borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
       dueWithinYear:'Due within a year', dueLater:'Due later', movementSince:'Movement since', pattern:'Pattern',
       debtHigherThan:'Higher than they were, at {was}.',
       debtLowerThan:'Lower than they were, at {was}.',
@@ -309,7 +317,7 @@ export class Component extends Base {
       nothingUnusual:'لا شيء غير معتاد اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
-      archiveNote:'عرض {shown} من {total} إفصاحاً نُشرت في {month}.',
+      archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
       breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
       breadthWord:'ما اتساع الحركة',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
@@ -363,7 +371,9 @@ export class Component extends Base {
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
       grossProfit:'الربح الإجمالي', operatingIncome:'الربح التشغيلي', netIncome:'صافي الربح',
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
-      openFiling:'افتح الإفصاح', borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
+      openFiling:'افتح الإفصاح',
+      openOnExchange:'افتح في البورصة المصرية', openOnMubasher:'افتح في مباشر',
+      borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
       debtHigherThan:'أعلى مما كانت عليه، إذ بلغت {was}.',
       debtLowerThan:'أقل مما كانت عليه، إذ بلغت {was}.',
@@ -407,7 +417,11 @@ export class Component extends Base {
    * still shows its figure, its direction and its history — the numbers are
    * filed facts and are never the part at risk.
    */
-  ratioCards(review, L, ar) {
+  ratioCards(review, L, ar, sectorName) {
+    // The median line interpolated `review.sector` raw, so an Arabic reader
+    // read "وسيط Finance 10.41×" — a Latin sector name inside an Arabic
+    // sentence, on all 1,848 median lines the 258 reviewed companies publish.
+    const sectorLabel = sectorName || ((x) => x);
     if (!review || !Array.isArray(review.metrics)) return [];
     // label, the question, what it is, and which way reads better.
     const NAME = {
@@ -475,7 +489,7 @@ export class Component extends Base {
         peer: (typeof m.value === 'number' && m.value === m.peer_median) ? L.revAtSector
           : m.peer === 'above' ? L.revAboveSector : m.peer === 'below' ? L.revBelowSector : '',
         peerMedian: typeof m.peer_median === 'number'
-          ? L.revSectorMedian.replace('{sector}', review.sector || '') + ' ' + fmt(m.peer_median, m.unit, m.key)
+          ? L.revSectorMedian.replace('{sector}', sectorLabel(review.sector) || '') + ' ' + fmt(m.peer_median, m.unit, m.key)
           : '',
         answer: safe, hasAnswer: Boolean(safe), hasAsk: Boolean(ask),
         spark: this.sparkFlat(points),
@@ -541,7 +555,7 @@ export class Component extends Base {
           { period: k.period || '', run: k.run ?? '' }),
         because: k.since ? fill(L.sigHeldSince, { year: year(k.since) }) : '',
         stamp: [k.filed, k.id].filter(Boolean).join(' \u00b7 '),
-        href: k.link || null,
+        href: k.link || '', hasHref: Boolean(k.link),
       });
     }
     for (const f of (s.firsts || []).slice(0, 3 - cards.length)) {
@@ -553,7 +567,7 @@ export class Component extends Base {
           years: Math.max(1, Math.round((f.gap_days || 0) / 365)) }),
         because: f.previous ? fill(L.sigPreviousWas, { year: year(f.previous) }) : '',
         stamp: [f.date, f.id].filter(Boolean).join(' \u00b7 '),
-        href: f.link || null,
+        href: f.link || '', hasHref: Boolean(f.link),
       });
     }
     // 200 companies publish a results-due expectation and no screen showed
@@ -572,7 +586,7 @@ export class Component extends Base {
                                    to: this.dayLabel(r.window_end) })
           : '',
         stamp: 'signals.json \u00b7 ' + L.sigEstimate,
-        href: null,
+        href: '', hasHref: false,
       });
     }
     const q = s.quiet;
@@ -582,7 +596,7 @@ export class Component extends Base {
         title: fill(L.sigQuiet, { days: q.silent_days ?? '', gap: q.typical_gap ?? '' }),
         because: q.last_filed ? fill(L.sigLastFiling, { date: q.last_filed }) : '',
         stamp: 'signals.json',
-        href: null,
+        href: '', hasHref: false,
       });
     }
     return cards;
@@ -719,7 +733,11 @@ export class Component extends Base {
       // is a units error, not a small company.
       cap: (typeof c.cap === 'number' && c.cap > 0) ? this.money(c.cap) : '—',
       pe: c.pe ? c.pe.toFixed(1) : '—',
-      arrow: (c.pct === null || c.pct === undefined) ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
+            // A share that closed exactly flat is not a share that fell. 50 of the
+      // 282 did today, and each got a down arrow beside "0.00%" on the same
+      // site whose Home screen counts them as held. `dcol(0)` already returns
+      // the neutral colour, so only the glyph contradicted the figure.
+      arrow: !c.pct ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
       mag: (c.pct === null || c.pct === undefined) ? '0%' : Math.max(6, Math.min(100, Math.abs(c.pct) / 6 * 100)).toFixed(0) + '%',
       go: () => this.setState({ screen:'company', ticker: c.ticker }) });
 
@@ -997,7 +1015,8 @@ export class Component extends Base {
           return this.signed(c - c / (1 + pct / 100));
         })(),
         color: this.dcol(pct),
-        arrow: pct === null ? '' : (pct > 0 ? '\u2197' : '\u2198'),
+        // As above: exactly flat is not a fall.
+        arrow: !pct ? '' : (pct > 0 ? '\u2197' : '\u2198'),
         closeDate: loaded.closeDate || D.marketDate || co.closeDate,
         briefSource: loaded.briefSource || `companies/${loaded.ticker}.json`,
       });
@@ -1285,6 +1304,32 @@ export class Component extends Base {
         toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [f.period]: !s.open[f.period] }) })),
         filingId:f.filing_id, filedOn: (f.filed || f.filed_on) ? (ar?'أُودع ':'Filed ') + (f.filed || f.filed_on) : '',
         source: filingSource(f.source),
+        // Name the destination, and only offer it where there is one.
+        //
+        // "Open filing →" was printed on all 11,480 rows against whatever
+        // `source` held. For 4,047 of them that is a Mubasher stock page — a
+        // third-party summary, not the signed document — under a table headed
+        // "as filed"; for the 7,433 exchange-sourced rows it is egx.com.eg's
+        // FRONT PAGE, not the filing. Where the row carries an EGX filing id
+        // the deep link exists and is used.
+        ...(() => {
+          const src = filingSource(f.source);
+          const id = String(f.filing_id || '');
+          const deep = /^egx-(\d+)$/.exec(id);
+          if (deep) {
+            return { openHref: `https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=${deep[1]}`,
+                     openLabel: L.openOnExchange, hasOpen: true };
+          }
+          if (/mubasher/i.test(src)) return { openHref: src, openLabel: L.openOnMubasher, hasOpen: true };
+          // A bare host with no path is the exchange's front page, which is
+          // not the filing and is where 7,417 of these rows pointed. No
+          // destination is better than the wrong one.
+          const deepEnough = /^https?:\/\/[^/]+\/.+/.test(src);
+          if (deepEnough && /egx\.com\.eg/i.test(src)) {
+            return { openHref: src, openLabel: L.openOnExchange, hasOpen: true };
+          }
+          return { openHref: '', openLabel: '', hasOpen: false };
+        })(),
         omitted: (total - present) > 0 ? ((ar?'':'') + (total-present) + (ar?' حقلاً لم يذكره الإفصاح':' fields not stated in this filing')) : (ar?'كل الحقول مذكورة':'All fields stated')
       };
     });
@@ -1403,7 +1448,7 @@ export class Component extends Base {
       toggleCaret: st.debtOpen ? '↑' : '↓',
     };
 
-    const ratios = this.ratioCards(D.review, L, ar);
+    const ratios = this.ratioCards(D.review, L, ar, sectorName);
     // The app's four groups, in the app's order. A metric the document does
     // not carry drops out; a group with nothing left renders nothing rather
     // than an empty heading (review_sheet.dart, _groups).
@@ -1437,8 +1482,8 @@ export class Component extends Base {
     const signals = (D.signals && !Array.isArray(D.signals))
       ? this.signalCards(D.signals, L, ar)
       : D.signals ? say(D.signals, ['kind','title','because']) : !D.demo ? [] : [
-      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/demo · 2026-08-26' },
-      { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/demo · demo-000293' },
+      { kind: ar?'انقطاع نمط':'Streak break', title: ar?'أول جلسة هبوط بعد خمس جلسات صاعدة':'First falling session after five rising ones', because: ar?'market.json يذكر −٣٫١٢٪ يوم ٢٦ أغسطس، بعد خمس جلسات مغلقة على ارتفاع.':'market.json states −3.12% on 26 August, following five consecutive higher closes.', stamp:'signals/demo · 2026-08-26', href:'', hasHref:false },
+      { kind: ar?'حركة القروض':'Borrowings moved', title: ar?'القروض قصيرة الأجل أعلى بـ ٢٩٧٫١ مليون منها في ٣١ ديسمبر':'Short-term borrowings 297.1 higher than at 31 December', because: ar?'١٧٩٥٫٥ مقابل ١٤٩٨٫٣ في العمود المقارن للميزانية نفسها.':'1,795.5 against 1,498.3 in the statement’s own prior column.', stamp:'signals/demo · demo-000293', href:'', hasHref:false },
       { kind: ar?'نتائج مرتقبة':'Results due', title: ar?'إفصاح تسعة أشهر متوقع في نوفمبر بحسب سجل الشركة':'A 9M filing is expected in November on the company’s own history', because: ar?'أُودعت الإفصاحات المكافئة في ١١ نوفمبر ٢٠٢٥ و١٢ نوفمبر ٢٠٢٤. تقدير، وليس إعلاناً.':'Equivalent filings landed on 11 November 2025 and 12 November 2024. An estimate, not an announcement.', stamp:'calendar.json · estimate' }
     ];
 
@@ -1497,23 +1542,30 @@ export class Component extends Base {
       ? D.filedMonths.map((m) => [m.id, this.monthLabel(m.id), m.count])
       : !D.demo ? []
       : [['2026-06','Jun 2026'],['2026-07','Jul 2026'],['2026-08','Aug 2026'],['2026-09','Sep 2026']];
+    // The month on show: the reader's pick when it is one the archive holds,
+    // and otherwise the newest month published (index.json is newest-first).
+    // Reconciling here rather than in state means a month that rolls out of
+    // the window silently corrects instead of drawing an empty grid.
+    const monthIds = monthDef.map(([id]) => id);
+    const openMonth = monthIds.includes(st.month) ? st.month
+      : (this.openMonth() || monthIds[0] || '');
     const months = monthDef.map(([id,label,count]) => ({ label, count: count || '', go: () => this.setState({ month:id }),
-      color: st.month === id ? 'var(--ink)' : 'var(--t2)', bg: st.month === id ? 'var(--surface)' : 'transparent', sh: st.month === id ? 'var(--shPill)' : 'none' }));
+      color: openMonth === id ? 'var(--ink)' : 'var(--t2)', bg: openMonth === id ? 'var(--surface)' : 'transparent', sh: openMonth === id ? 'var(--shPill)' : 'none' }));
     // A month as its days, the way the app draws it. A list of sixty rows says
     // nothing about the shape of a month; a grid shows at a glance that the
     // exchange files in bursts around results season and barely at all in
     // between. Every day of the month is drawn, including the empty ones —
     // a quiet Friday is a fact about the exchange, not a gap in the data.
-    const inMonth = (D.filedArchive && D.filedArchiveMonth === st.month) ? D.filedArchive : [];
+    const inMonth = (D.filedArchive && D.filedArchiveMonth === openMonth) ? D.filedArchive : [];
     const perDay = new Map();
     for (const e of inMonth) perDay.set(e.date, (perDay.get(e.date) || 0) + 1);
     const monthDays = [];
-    if (st.month) {
-      const [yy, mm] = st.month.split('-').map(Number);
+    if (openMonth) {
+      const [yy, mm] = openMonth.split('-').map(Number);
       const last = new Date(Date.UTC(yy, mm, 0)).getUTCDate();
       const busiest = Math.max(1, ...perDay.values());
       for (let day = 1; day <= last; day++) {
-        const iso = `${st.month}-${String(day).padStart(2, '0')}`;
+        const iso = `${openMonth}-${String(day).padStart(2, '0')}`;
         const n = perDay.get(iso) || 0;
         const on = st.day === iso;
         monthDays.push({
@@ -1545,8 +1597,14 @@ export class Component extends Base {
       ? L.filedOnDay.replace('{n}', dayFilings.length).replace('{date}', this.longDate(st.day))
       : L.nothingFiledThatDay;
 
-    const archive = (D.filedArchive && D.filedArchiveMonth === st.month)
-      ? say(D.filedArchive, ['what']).slice(0, 60).map((e) => Object.assign({}, e, {
+    const archive = (D.filedArchive && D.filedArchiveMonth === openMonth)
+      // Newest first, THEN cut. Cutting the document's own order took the 60
+      // OLDEST of the month: on 30 August the panel was 60 rows every one of
+      // them dated 2 August, and nothing filed between the 3rd and the 26th
+      // was reachable from it at all.
+      ? say(D.filedArchive.slice().sort((a, b) =>
+          String(b.date || '').localeCompare(String(a.date || ''))), ['what'])
+        .slice(0, 60).map((e) => Object.assign({}, e, {
           day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
         }))
       : null;
@@ -1620,7 +1678,11 @@ export class Component extends Base {
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
       ['calendar', ar?'التقويم':'Calendar', ''],
       ['exchange', ar?'البورصة':'Exchange', ''],
-      ['research', ar?'الأبحاث':'Research', '']
+      // Only where there is something to open. `studies` is the demo's three
+      // mock-up papers and nothing else — no research document is published —
+      // so every signed-in reader who clicked this got a 50px heading and the
+      // line "Nothing published for this yet.", every time.
+      ...(studies.length ? [['research', ar?'الأبحاث':'Research', '']] : [])
     ];
     const nav = navDef.map(([id,label,meta]) => {
       const on = st.screen === id;
@@ -1656,10 +1718,10 @@ export class Component extends Base {
       // between a sample and a claim.
       monthDays, hasMonthDays: monthDays.length > 0,
       dayFilings, dayNote, hasDay: Boolean(st.day),
-      archiveNote: (D.filedArchive && D.filedArchiveMonth === st.month)
+      archiveNote: (D.filedArchive && D.filedArchiveMonth === openMonth)
         ? L.archiveNote.replace('{shown}', Math.min(60, D.filedArchive.length))
             .replace('{total}', D.filedArchive.length)
-            .replace('{month}', this.monthLabel(st.month))
+            .replace('{month}', this.monthLabel(openMonth))
         : '',
       feedCount: allFeed.length
         ? L.feedCount.replace('{shown}', feed.length).replace('{total}', allFeed.length) : '',
@@ -1879,6 +1941,19 @@ export class Component extends Base {
     if (isNaN(at)) return '';
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { month: 'long', timeZone: 'UTC' }).format(at);
+  }
+
+  /** The calendar month on show: the reader's pick, or the newest published.
+   *
+   * Both `renderVals` and main.js need this and must agree — main.js fetches
+   * the month's filings, renderVals draws them, and if the two disagree the
+   * grid is drawn for one month out of the archive of another.
+   */
+  openMonth() {
+    const held = ((this.data() && this.data().filedMonths) || []).map((m) => m.id);
+    if (held.includes(this.state.month)) return this.state.month;
+    // index.json is published newest-first.
+    return held[0] || this.state.month || '';
   }
 
   /** "2026-08" as a month pill reads it. */

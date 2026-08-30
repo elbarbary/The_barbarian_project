@@ -473,7 +473,7 @@ export async function company(ticker) {
   const rows = [
     ...(d.financials?.annual || []),
     ...(d.financials?.quarterly || []),
-  ].sort((a, b) => String(b.period_end || '').localeCompare(String(a.period_end || '')));
+  ].sort((a, b) => periodEnd(b).localeCompare(periodEnd(a)));
   return {
     series: ((prices && prices.price_history) || d.price_history || [])
       .map((p) => ({ date: p.date, close: p.close })),
@@ -806,6 +806,11 @@ export async function sectors() {
     pe: ['P/E', 'مكرر الربحية'], roe: ['Return on equity', 'العائد على حقوق الملكية'],
     roa: ['Return on assets', 'العائد على الأصول'], debt_equity: ['Debt to equity', 'الدين إلى حقوق الملكية'],
     dividend_yield: ['Dividend yield', 'عائد التوزيعات'], profit: ['Net profit', 'صافي الربح'],
+    // Missing here, so 11 of the 15 sector cards ended their median row with a
+    // chip reading "pb 2.59×" — a lowercase wire key beside "P/E" and "Return
+    // on equity", and still Latin in the Arabic view. Same pair logic.js uses
+    // for the ratio card.
+    pb: ['Price to book', 'السعر إلى القيمة الدفترية'],
     eps: ['Earnings per share', 'ربحية السهم'], assets: ['Total assets', 'إجمالي الأصول'],
     cash_conversion: ['Cash conversion', 'تحويل النقد'],
   };
@@ -961,6 +966,42 @@ export async function connections() {
       })),
     })),
   };
+}
+
+/* The date a filed period ended, recovered from its label when the exchange
+ * did not state one.
+ *
+ * 8,002 of the 11,480 filed rows carry `period_end`; the rest carry only a
+ * label. Sorting on `period_end` alone therefore put every unstated row into
+ * one block at the foot of the table in raw document order — on AALR the last
+ * 21 of 70 rows read "Q3 2025, Q4 2022, Q4 2023, Q4 2024, Q4 2025" under a
+ * correctly ordered 49, and 227 of the 249 companies with statements have at
+ * least one such row.
+ *
+ * The label is enough to recover it. Most say the quarter or the year, and a
+ * company on a non-calendar year says so outright — "FY 2025 (to 30 Jun)",
+ * "9M 2026 (to 31 Mar)" — which is the half a fixed quarter-end table would
+ * get wrong: 408 of the annual filings here do not end in December.
+ */
+const MONTHS = { jan: '01', feb: '02', mar: '03', apr: '04', may: '05', jun: '06',
+                 jul: '07', aug: '08', sep: '09', sept: '09', oct: '10',
+                 nov: '11', dec: '12' };
+const PERIOD_ENDS = { FY: '12-31', H1: '06-30', H2: '12-31', '9M': '09-30',
+                      Q1: '03-31', Q2: '06-30', Q3: '09-30', Q4: '12-31' };
+
+export function periodEnd(row) {
+  if (row && row.period_end) return String(row.period_end);
+  const label = String((row && row.period) || '');
+  const year = (/(\d{4})/.exec(label) || [])[1];
+  if (!year) return '';
+  // "(to 30 Jun)" is the company telling us its year-end; believe it over the
+  // shape of the label.
+  const stated = /\(to\s+(\d{1,2})\s+([A-Za-z]+)\)/.exec(label);
+  if (stated && MONTHS[stated[2].toLowerCase()]) {
+    return `${year}-${MONTHS[stated[2].toLowerCase()]}-${String(stated[1]).padStart(2, '0')}`;
+  }
+  const shape = (/^(Q[1-4]|H[12]|9M|FY)\b/.exec(label) || [])[1];
+  return shape && PERIOD_ENDS[shape] ? `${year}-${PERIOD_ENDS[shape]}` : '';
 }
 
 /** The per-company blocks the company screen shows under its statements. */

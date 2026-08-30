@@ -96,7 +96,7 @@ document.getElementById('signout').onclick = async () => {
     month = wanted;
     data.filedMonth(wanted)
       .then((items) => {
-        if (component.state.month !== wanted) return;
+        if (component.openMonth() !== wanted) return;
         component._d = { ...component.data(), filedArchive: items, filedArchiveMonth: wanted };
         draw();
       })
@@ -107,7 +107,10 @@ document.getElementById('signout').onclick = async () => {
   let loading = null;
   const draw = component.onChange;
   component.onChange = () => {
-    loadMonth(component.state.month);
+    // The month the screen is SHOWING, not the one in state — state starts
+    // empty so the calendar can open on the newest month the archive holds
+    // rather than on a date compiled into the page.
+    loadMonth(component.openMonth());
     const wanted = component.state.ticker;
     if (wanted && wanted !== loading
         && (!component._co || component._co.ticker !== wanted)
@@ -124,7 +127,18 @@ document.getElementById('signout').onclick = async () => {
       data.company(wanted)
         .then((doc) => {
           const row = component.data().companies.find((c) => c.ticker === wanted) || {};
-          component._co = { ticker: wanted, ...doc, close: row.close, pct: row.pct,
+          // Everything the company screen reads off `loaded`. The document
+          // carries the company; the directory row carries the session, and
+          // this is the only place the two meet — so a field the screen reads
+          // and this list forgets renders as an em dash on all 282 companies
+          // and nothing fails. That is exactly what happened to `volume`: the
+          // tile was moved off the thirty-day mean and onto the session's own
+          // figure, the figure was never threaded through here, and every
+          // company page printed a dash beside a "30-day average" that had a
+          // number in it. `session.test.mjs` now checks this list against what
+          // logic.js actually reads.
+          component._co = { ticker: wanted, ...doc,
+            close: row.close, pct: row.pct, volume: row.volume,
             eps: row.eps, epsPeriod: row.epsPeriod,
             pe: row.pe, pePeriod: row.pePeriod,
             peTtm: row.peTtm, peTtmWindow: row.peTtmWindow,

@@ -748,7 +748,9 @@
                 </div>
                 <div style="display:flex;gap:14px;align-items:center;margin-top:14px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);flex-wrap:wrap">
                   <span>{{ p.filingId }}</span><span>{{ p.filedOn }}</span>
-                  <a href="{{ p.source }}" target="_blank" style="color:var(--accent)">{{ L.openFiling }} →</a>
+                  <sc-if value="{{ p.hasOpen }}">
+                    <a href="{{ p.openHref }}" target="_blank" rel="noopener" style="color:var(--accent)">{{ p.openLabel }} →</a>
+                  </sc-if>
                   <span>{{ p.omitted }}</span>
                 </div>
               </div>
@@ -809,6 +811,18 @@
         </div>
       </section>
       </sc-if>
+        <!-- Six companies file statements but never two periods of the same
+             length, so the comparison cannot be drawn. The heading and the
+             sentence explaining that have been written and translated since
+             the block landed and were bound to nothing: the section simply
+             vanished, with no reason given, on a page that shows it for every
+             other company. -->
+        <sc-if value="{{ noCompare }}">
+          <div style="margin-top:26px;padding-top:22px;border-top:1px solid var(--rule2)">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:23px;font-weight:500;letter-spacing:-.025em">{{ L.compareTitle }}</div>
+            <div style="font-size:13.5px;color:var(--t2);margin-top:9px;line-height:1.6;text-wrap:pretty">{{ L.compareNothing }}</div>
+          </div>
+        </sc-if>
       <sc-if value="{{ hasDebt }}">
 
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 24px 20px">
@@ -924,6 +938,15 @@
               <div style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.3;text-wrap:pretty">{{ s.title }}</div>
               <div style="font-size:13.5px;color:var(--t2);line-height:1.58;text-wrap:pretty">{{ s.because }}</div>
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:auto;padding-top:8px">{{ s.stamp }}</div>
+              <!-- The card has always computed the link to the filing behind
+                   it and never rendered one, so 44 cards across 41 companies
+                   named a filing id you could not open. The app makes the same
+                   row a tap-through. The estimate cards — results due, quiet —
+                   carry no link because they are read off signals.json rather
+                   than off a document, and they get no anchor. -->
+              <sc-if value="{{ s.hasHref }}">
+                <a href="{{ s.href }}" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.05em;color:var(--accent)">{{ L.openFiling }} →</a>
+              </sc-if>
             </div>
           </sc-for>
         </div>
