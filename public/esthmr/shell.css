@@ -3,6 +3,8 @@
 .gate {
   position: sticky; top: 0; z-index: 40;
   display: flex; gap: 16px; align-items: center; justify-content: center;
+  /* room for the account control now sitting in the same corner */
+  padding-inline-end: 210px;
   flex-wrap: wrap;
   padding: 10px 18px;
   background: #1B1917; color: #F5F1EC;
@@ -26,13 +28,26 @@
    simply never got the same treatment. */
 body[data-signed="yes"] .gate { display: none; }
 
+/* Top right, and always there: signed out it offers the way in, signed in it
+   says who you are and offers the way out. It used to be bottom-right and
+   signed-in only, while the way IN was a button in the middle of the demo
+   banner — so the control moved across the page the moment you used it. */
 .account {
-  position: fixed; inset-inline-end: 18px; bottom: 18px; z-index: 40;
+  position: fixed; inset-inline-end: 18px; top: 14px; z-index: 60;
   display: flex; gap: 10px; align-items: center;
   font: 400 12.5px/1 "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--t2);
 }
-body[data-signed="no"] .account { display: none; }
-.account button { background: rgba(27,25,23,.9); color: #F5F1EC; }
+body[data-signed="yes"] .account { top: 18px; }
+body[data-signed="yes"] #signin,
+body[data-signed="no"]  #signout { display: none; }
+.account #who {
+  padding: 7px 12px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--edgeIn);
+  max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.account #signout { background: var(--surface); color: var(--t2); border: 1px solid var(--edgeIn); }
+.account #signout:hover { color: var(--ink); border-color: var(--rule); }
 
 /* Sign-in sheet */
 #esthmr-signin { position: fixed; inset: 0; z-index: 60;
@@ -167,7 +182,10 @@ body[data-signed="no"] .account { display: none; }
      column at 375, but the min is a floor on the TRACK, not on the card, so
      at 360 the card overflows its own grid by ten pixels and the page scrolls
      sideways — which is the one thing the phone layer is here to prevent. */
-  .om-dots-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .om-dots-grid,
+  .om-news-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  /* Three big index cards side by side become unreadable at 375. */
+  .om-idx { grid-template-columns: minmax(0, 1fr) !important; }
 
   .om-scr h1 { font-size: 32px !important; }
   .om-scr h2 { font-size: 23px !important; }

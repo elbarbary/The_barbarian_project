@@ -1004,6 +1004,62 @@ export function periodEnd(row) {
   return shape && PERIOD_ENDS[shape] ? `${year}-${PERIOD_ENDS[shape]}` : '';
 }
 
+/** Who actually bought and sold: the exchange's own split of the market.
+ *
+ * Egyptians, Arabs and non-Arab foreigners, each as individuals and as
+ * institutions, with the value bought, the value sold and the net between
+ * them. Published by the exchange and never read here until now, so the site
+ * could say how much changed hands and never who changed it.
+ *
+ * `Arabs & Foreigners` is the exchange's own combined row — the sum of the two
+ * beside it, not a fourth party — and is kept out of anything that adds up.
+ */
+export async function investors() {
+  const d = await doc('investors.json');
+  const rows = (list) => (list || []).filter((r) => !r.combined);
+  const combined = (list) => (list || []).find((r) => r.combined) || null;
+
+  const byParty = rows(d.by_nationality).map((r) => ({
+    party: r.party, partyAr: r.party_ar,
+    percent: typeof r.percent === 'number' ? r.percent : null,
+    buyPercent: r.buy_percent ?? null, sellPercent: r.sell_percent ?? null,
+    net: r.net ?? null, buy: r.buy ?? null, sell: r.sell ?? null,
+  }));
+
+  // The table the app draws: a row per investor type, a column per
+  // nationality, in the exchange's own order.
+  const order = byParty.map((p) => p.party);
+  const cell = (list, party) => (list || []).find((r) => r.party === party) || null;
+  const band = (label, labelAr, list) => ({
+    label, labelAr,
+    cells: order.map((party) => {
+      const row = cell(list, party);
+      return { party, net: row ? row.net : null, buy: row ? row.buy : null,
+               sell: row ? row.sell : null };
+    }),
+    // Every pound bought is a pound sold, so a type's own net across the three
+    // nationalities is what it took out of the market or put into it.
+    net: rows(list).reduce((n, r) => n + (r.net || 0), 0),
+  });
+
+  return {
+    updatedAt: d.updated_at || null,
+    source: d.source || '',
+    // The exchange states this period-to-date, not for one session. A screen
+    // that lets it read as today's is stating a different fact.
+    basis: d.basis || '',
+    parties: byParty,
+    partyOrder: order,
+    bands: [
+      band('Individuals', 'أفراد', d.individuals),
+      band('Institutions', 'مؤسسات', d.institutions),
+    ],
+    // Carried so a card can say what the exchange's own combined row says
+    // without anything re-deriving it.
+    arabsAndForeigners: combined(d.by_nationality),
+  };
+}
+
 /** The per-company blocks the company screen shows under its statements. */
 export async function companyExtras(ticker) {
   const [signals, filings] = await Promise.all([

@@ -149,6 +149,9 @@ export class Component extends Base {
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
       archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
+      filedShowing:'{n} filings match {what}.', filedShowingOne:'1 filing matches {what}.',
+      filedSearch:'Filter by company or ticker',
+      filedClear:'Clear', filedNothing:'No filing this month matches that.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
       breadthWord:'How widely',
       calWindow:'Filed between {from} and {to} in {n} past years.',
@@ -174,7 +177,15 @@ export class Component extends Base {
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
       sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
+      investorsTitle:'Who is buying', investorsLead:'The exchange\u2019s own split of everything traded, by who traded it.',
+      investorsShare:'Share of all value traded', investorsNet:'Bought less sold',
+      investorsTable:'By investor type', investorsType:'Type',
+      investorsBuying:'a net buyer', investorsSelling:'a net seller',
+      investorsEgpM:'EGP millions, bought less sold',
+      investorsBasis:'The exchange states these period to date, not for a single session.',
+      investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
+      following:'Following', follow:'Follow', unfollow:'Following',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
@@ -218,7 +229,7 @@ export class Component extends Base {
       whatIsUnusual:'What is unusual', itsFilings:'Its filings', egxArchive:'EGX archive', document:'Document',
       sectorsTitle:'Sectors', sectorsWord:'sectors', rose:'rose', fell:'fell', flat:'flat', medianPE:'Median P/E',
       notRead:'not measurable',
-      calendarTitle:'Calendar', filed:'Filed', expected:'Expected', estimate:'Estimate',
+      calendarTitle:'Disclosures', filed:'Filed', expected:'Expected', estimate:'Estimate',
       estimateNote:'Expected dates are estimated from each company’s own filing history. They are not announcements.',
       exchangeTitle:'Exchange', delayed15:'Quotes delayed ~15 minutes', macro:'Macro, in plain language',
       researchTitle:'Research', researchNote:'Bands describe the scorecard applied to a study. They describe no security.',
@@ -318,6 +329,9 @@ export class Component extends Base {
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
+      filedShowing:'{n} إفصاحاً يطابق {what}.', filedShowingOne:'إفصاح واحد يطابق {what}.',
+      filedSearch:'تصفية بالشركة أو الرمز',
+      filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
       breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
       breadthWord:'ما اتساع الحركة',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
@@ -343,7 +357,15 @@ export class Component extends Base {
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
       sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
+      investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
+      investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
+      investorsTable:'بحسب نوع المستثمر', investorsType:'النوع',
+      investorsBuying:'مشترٍ صافٍ', investorsSelling:'بائع صافٍ',
+      investorsEgpM:'مليون جنيه، المشتراة ناقص المباعة',
+      investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً للفترة، لا لجلسة واحدة.',
+      investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
+      following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
@@ -385,7 +407,7 @@ export class Component extends Base {
       whatIsUnusual:'ما هو غير المعتاد', itsFilings:'إفصاحاتها', egxArchive:'أرشيف البورصة', document:'المستند',
       sectorsTitle:'القطاعات', sectorsWord:'قطاعاً', rose:'صعدت', fell:'هبطت', flat:'ثابتة', medianPE:'وسيط م/ر',
       notRead:'غير قابلة للقياس',
-      calendarTitle:'التقويم', filed:'مُفصح عنه', expected:'متوقع', estimate:'تقدير',
+      calendarTitle:'الإفصاحات', filed:'مُفصح عنه', expected:'متوقع', estimate:'تقدير',
       estimateNote:'التواريخ المتوقعة مُقدّرة من سجل إفصاحات كل شركة، وليست إعلانات.',
       exchangeTitle:'البورصة والاقتصاد', delayed15:'الأسعار متأخرة نحو ١٥ دقيقة', macro:'مؤشرات الاقتصاد بلغة واضحة',
       researchTitle:'الأبحاث', researchNote:'النطاقات تصف بطاقة تقييم الدراسة، ولا تصف أي ورقة مالية.',
@@ -677,7 +699,11 @@ export class Component extends Base {
       sectors:'M4.2 4.2h6.4v6.4H4.2zM13.4 4.2h6.4v6.4h-6.4zM4.2 13.4h6.4v6.4H4.2zM13.4 13.4h6.4v6.4h-6.4',
       calendar:'M4.4 6.4h15.2v13.4H4.4zM4.4 10.8h15.2M8.4 3.4v4M15.6 3.4v4M8 14.4h2M14 14.4h2',
       exchange:'M3.6 8.4h13.8l-3.4-3.6M20.4 15.6H6.6l3.4 3.6',
-      research:'M6 3.4h7.4l4.2 4.2v3.8M6 3.4v17.2h6.2M14.2 15.9a3.4 3.4 0 1 0 6.8 0 3.4 3.4 0 0 0-6.8 0M20.6 18.6 22.4 20.6'
+      research:'M6 3.4h7.4l4.2 4.2v3.8M6 3.4v17.2h6.2M14.2 15.9a3.4 3.4 0 1 0 6.8 0 3.4 3.4 0 0 0-6.8 0M20.6 18.6 22.4 20.6',
+      // Three figures side by side, which is what the screen is.
+      investors:'M4.2 20.4V13M9.4 20.4V6.6M14.6 20.4v-9.6M19.8 20.4V9.2M3 20.8h18M9.4 3.4v3.2',
+      // Two threads meeting a point.
+      crossings:'M4.6 6.2h4.2l4 6h6.6M4.6 17.8h4.2l4-6M18.4 9.4l2 2.8-2 2.8'
     };
 
     // market table
@@ -727,6 +753,9 @@ export class Component extends Base {
         border: on ? 'transparent' : 'var(--rule)', color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent', sh: on ? 'var(--shPill)' : 'none' };
     });
 
+    // Above mkRow, which reads it — and mkRow is called by the movers and the
+    // watchlist alike, so it has to exist before the first of them.
+    const watchedSet = new Set(this._watch || []);
     const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector: sectorName(c.sector),
       close: c.close === '—' ? '—' : this.num(c.close), pct: this.pct(c.pct), color: this.dcol(c.pct),
       // A market capitalisation cannot be negative; anything that says so
@@ -739,7 +768,13 @@ export class Component extends Base {
       // the neutral colour, so only the glyph contradicted the figure.
       arrow: !c.pct ? '' : (c.pct > 0 ? '\u2197' : '\u2198'),
       mag: (c.pct === null || c.pct === undefined) ? '0%' : Math.max(6, Math.min(100, Math.abs(c.pct) / 6 * 100)).toFixed(0) + '%',
-      go: () => this.setState({ screen:'company', ticker: c.ticker }) });
+      go: () => this.setState({ screen:'company', ticker: c.ticker }),
+      // A ticker and nothing else, which is all a watchlist entry is.
+      watched: watchedSet.has(c.ticker),
+      star: watchedSet.has(c.ticker) ? '\u2605' : '\u2606',
+      starColor: watchedSet.has(c.ticker) ? 'var(--accent)' : 'var(--faint)',
+      follow: (e) => { if (e && e.stopPropagation) e.stopPropagation();
+        this.onWatch && this.onWatch(c.ticker); } });
 
     // home
     const byMove = D.companies.filter(c => c.pct !== null).slice().sort((a,b) => Math.abs(b.pct) - Math.abs(a.pct));
@@ -747,6 +782,16 @@ export class Component extends Base {
     // The design named five tickers; a real dataset may not contain them, and a
     // demo deliberately does not. Prefer the named ones when present, then fill
     // from the largest companies, so the block is never short or empty-handed.
+    // The reader's own list. `_watch` is the ticker array main.js keeps in
+    // step with localStorage; the rows are the directory's, so a followed
+    // company carries the same close and move it does everywhere else. A
+    // ticker followed and later delisted simply drops out rather than
+    // rendering a row of dashes.
+    const followed = (this._watch || [])
+      .map((t) => D.companies.find((c) => c.ticker === t))
+      .filter(Boolean)
+      .map(mkRow);
+
     // Headed "Watchlist", this was five tickers the design happened to name —
     // COMI, KORA, ETEL, TMGH, AMOC — padded from the largest companies. All
     // five exist, so it looked entirely plausible; every signed-in reader saw
@@ -1178,6 +1223,50 @@ export class Component extends Base {
     const crossWorkings = D.crossings
       ? L.dotsWorkings.replace('{days}', String(D.crossings.days || 4)) : '';
 
+    // ── who bought and who sold ──────────────────────────────────────────
+    //
+    // The exchange's own split, which it has always published and nothing here
+    // read. Two facts a reader cannot get from a price: which nationality was
+    // a net buyer, and whether the money moving was individuals' or
+    // institutions'. Stated by the exchange period-to-date, so the screen says
+    // so rather than let it read as today's session.
+    const investors = (() => {
+      const d = D.investors;
+      if (!d || !d.parties || !d.parties.length) return null;
+      const money = (v) => (typeof v === 'number' ? this.money(v) : '\u2014');
+      const pct = (v) => (typeof v === 'number' ? v.toFixed(2) + '%' : '\u2014');
+      const partyName = (p) => (ar ? (p.partyAr || p.party) : p.party);
+      const widest = Math.max(1, ...d.parties.map((p) => Math.abs(p.net || 0)));
+      return {
+        basis: d.basis, source: d.source, updatedAt: d.updatedAt,
+        // The share-of-value row: a bar apiece, drawn to the same scale.
+        parties: d.parties.map((p) => ({
+          party: partyName(p),
+          percent: pct(p.percent),
+          width: Math.max(2, (p.percent || 0)).toFixed(2) + '%',
+          net: this.signed(typeof p.net === 'number' ? p.net / 1e6 : null, 1),
+          netColor: this.dcol(p.net),
+          buy: money(p.buy), sell: money(p.sell),
+          // Net against the widest net on the row, so the three are comparable
+          // at a glance and a net buyer reads differently from a net seller.
+          bar: Math.max(2, (Math.abs(p.net || 0) / widest) * 100).toFixed(1) + '%',
+          buying: (p.net || 0) >= 0,
+          barColor: (p.net || 0) >= 0 ? 'var(--up)' : 'var(--down)',
+        })),
+        columns: d.parties.map(partyName),
+        // A row per investor type, a column per nationality — the app's table.
+        bands: d.bands.map((b) => ({
+          label: ar ? b.labelAr : b.label,
+          net: this.signed(b.net / 1e6, 1), netColor: this.dcol(b.net),
+          cells: b.cells.map((c) => ({
+            net: this.signed(typeof c.net === 'number' ? c.net / 1e6 : null, 1),
+            color: this.dcol(c.net),
+            buy: money(c.buy), sell: money(c.sell),
+          })),
+        })),
+      };
+    })();
+
     // ── the same line, period by period ────────────────────────────────
     //
     // The table above is one row per period and four columns; everything else
@@ -1597,12 +1686,37 @@ export class Component extends Base {
       ? L.filedOnDay.replace('{n}', dayFilings.length).replace('{date}', this.longDate(st.day))
       : L.nothingFiledThatDay;
 
-    const archive = (D.filedArchive && D.filedArchiveMonth === openMonth)
+    // What the reader is filtering the month down to: a day picked off the
+    // grid, or a company typed into the box. The screen was named "Calendar"
+    // and could only answer "what was filed on this day" — but a month holds
+    // 1,467 filings and the other question a reader arrives with is "what has
+    // THIS company filed", which the grid cannot express at all.
+    const filedQuery = String(st.filedQ || '').trim();
+    const filedFold = this.fold(filedQuery);
+    const monthRows = (D.filedArchive && D.filedArchiveMonth === openMonth)
+      ? D.filedArchive : null;
+    const matches = (e) => !filedFold
+      || this.fold(e.ticker || '').includes(filedFold)
+      || this.fold(e.what || '').includes(filedFold)
+      || this.fold(e.whatAr || '').includes(filedFold)
+      || (() => {
+        // A reader typing a company's NAME should reach its filings; the
+        // archive row carries only the ticker, and the directory has the rest.
+        const co = D.companies.find((c) => c.ticker === e.ticker);
+        return co ? (this.fold(co.name.en).includes(filedFold)
+                     || this.fold(co.name.ar).includes(filedFold)) : false;
+      })();
+
+    const filtered = monthRows
+      ? monthRows.filter((e) => (!st.day || e.date === st.day) && matches(e))
+      : null;
+
+    const archive = filtered
       // Newest first, THEN cut. Cutting the document's own order took the 60
       // OLDEST of the month: on 30 August the panel was 60 rows every one of
       // them dated 2 August, and nothing filed between the 3rd and the 26th
       // was reachable from it at all.
-      ? say(D.filedArchive.slice().sort((a, b) =>
+      ? say(filtered.slice().sort((a, b) =>
           String(b.date || '').localeCompare(String(a.date || ''))), ['what'])
         .slice(0, 60).map((e) => Object.assign({}, e, {
           day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
@@ -1674,9 +1788,18 @@ export class Component extends Base {
       ['home', ar?'الرئيسية':'Home', ''],
       ['today', ar?'اليوم':'Today', feed.length ? String(feed.length) : ''],
       ['market', ar?'السوق':'Market', String(D.companies.length)],
+      // Fourth, and its own screen: who bought and who sold is a different
+      // question from what moved, and the exchange answers it separately.
+      ['investors', ar?'المستثمرون':'Investors', ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
-      ['calendar', ar?'التقويم':'Calendar', ''],
+      // "Calendar" described the grid; what a reader comes here for is the
+      // filings, so it is named for them.
+      ['calendar', ar?'الإفصاحات':'Disclosures', ''],
+      // The crossings were a block on Today under the news. They are a
+      // different claim — one company in more than one feed at once — and
+      // reading them mixed into a headline list buried them.
+      ['crossings', ar?'التقاطعات':'Crossings', crossings.length ? String(crossings.length) : ''],
       ['exchange', ar?'البورصة':'Exchange', ''],
       // Only where there is something to open. `studies` is the demo's three
       // mock-up papers and nothing else — no research document is published —
@@ -1717,6 +1840,27 @@ export class Component extends Base {
       // sixty of them fit a column, and saying which sixty is the difference
       // between a sample and a claim.
       monthDays, hasMonthDays: monthDays.length > 0,
+      // Filter the month by a company as well as by a day. A month holds
+      // 1,467 filings and the grid can only ask "what was filed on this day";
+      // the other question a reader arrives with is "what has this company
+      // filed", which the grid cannot express.
+      filedQ: st.filedQ || '',
+      onFiledQuery: (e) => this.setState({ filedQ: e.target.value }),
+      clearFiled: () => this.setState({ filedQ: '', day: '' }),
+      hasFiledFilter: Boolean((st.filedQ || '').trim() || st.day),
+      filedFilterNote: (() => {
+        if (!filtered) return '';
+        const bits = [];
+        if (st.day) bits.push(this.longDate(st.day));
+        const q = String(st.filedQ || '').trim();
+        if (q) bits.push('\u201c' + q + '\u201d');
+        if (!bits.length) return '';
+        const what = bits.join(' \u00b7 ');
+        return filtered.length === 1
+          ? L.filedShowingOne.replace('{what}', what)
+          : L.filedShowing.replace('{n}', filtered.length).replace('{what}', what);
+      })(),
+      filedNoMatch: Boolean(filtered && filtered.length === 0),
       dayFilings, dayNote, hasDay: Boolean(st.day),
       archiveNote: (D.filedArchive && D.filedArchiveMonth === openMonth)
         ? L.archiveNote.replace('{shown}', Math.min(60, D.filedArchive.length))
@@ -1765,7 +1909,13 @@ export class Component extends Base {
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
+      isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
       indices, movers, watchlist, readNow, feed,
+      followed, noFollowed: followed.length === 0, followedCount: followed.length,
+      investors, noInvestors: investors === null,
+      companyWatched: watchedSet.has(st.ticker),
+      companyStar: watchedSet.has(st.ticker) ? '\u2605' : '\u2606',
+      companyFollow: () => { this.onWatch && this.onWatch(st.ticker); },
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
       // The placeholder used to assert "282 companies" in both languages. The
       // exchange is not a constant — build_market_api has already moved it
@@ -1787,6 +1937,9 @@ export class Component extends Base {
       noCompare: D.fins.length > 0 && compareRows.length === 0,
       fins, debt, signals, filings, sectorCards, months, filedEvents, expectedEvents, rates, macro, studies,
       crossings, crossWindow, crossBody, crossWorkings, crossLegend,
+      crossCount: crossings.length
+        ? (ar ? crossings.length + ' تقاطعاً' : crossings.length + (crossings.length === 1 ? ' crossing' : ' crossings'))
+        : '',
       noCrossings: crossings.length === 0,
       crossOpen: Boolean(st.crossOpen),
       crossToggle: () => this.setState((x) => ({ crossOpen: !x.crossOpen })),

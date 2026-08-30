@@ -369,12 +369,28 @@ test('signing in actually takes the demo banner off the page', async () => {
   const css = await readFile(new URL('../../public/esthmr/shell.css', import.meta.url), 'utf8');
 
   // Anything the shell hides by toggling `hidden` needs a real rule behind it.
-  for (const selector of ['.gate', '.account']) {
-    const sets = new RegExp(`\\${selector}\\s*\\{[^}]*display\\s*:`).test(css);
+  // The list is read out of main.js rather than written here, because the one
+  // that broke was the one nobody thought to add: `.gate` grew a `display`
+  // rule long after the attribute was first set on it.
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  const ids = new Set([...main.matchAll(/getElementById\('([\w-]+)'\)\.hidden\s*=/g)].map((m) => m[1]));
+  for (const [, id] of main.matchAll(/const (\w+) = document\.getElementById\('([\w-]+)'\)/g)) { /* below */ }
+  // `const bar = getElementById('gate'); bar.hidden = …` — resolve the alias.
+  const alias = new Map([...main.matchAll(/const (\w+) = document\.getElementById\('([\w-]+)'\)/g)]
+    .map((m) => [m[1], m[2]]));
+  for (const [, name] of main.matchAll(/\b(\w+)\.hidden\s*=/g)) {
+    if (alias.has(name)) ids.add(alias.get(name));
+  }
+  assert.ok(ids.size >= 2, `the scanner found only ${[...ids]} toggling hidden`);
+
+  for (const id of ids) {
+    const sets = new RegExp(`(^|[,\\s])#${id}\\s*(,[^{]*)?\\{[^}]*display\\s*:`, 'm').test(css)
+      // an id can also be styled through a class rule it belongs to
+      || (id === 'gate' && /\.gate\s*\{[^}]*display\s*:/.test(css));
     if (!sets) continue;   // no author display rule, so `hidden` works unaided
     const hides = new RegExp(
-      `body\\[data-signed="(yes|no)"\\]\\s*\\${selector}\\s*\\{[^}]*display\\s*:\\s*none`).test(css);
-    assert.ok(hides, `${selector} sets its own display, so "hidden" cannot hide it`);
+      `body\\[data-signed="(yes|no)"\\][^{]*(#${id}|\\.${id})[^{]*\\{[^}]*display\\s*:\\s*none`).test(css);
+    assert.ok(hides, `#${id} has an author display rule, so "hidden" cannot hide it`);
   }
 });
 
@@ -2130,4 +2146,182 @@ test('the Research rail entry is offered only when something is published', () =
   c.setData(data.demo());
   assert.ok(c.renderVals().nav.some((n) => /Research/.test(n.label)),
     'the demo lost its Research entry');
+});
+
+test('the template closes every element it opens', async () => {
+  // A stray `</div>` closed a screen early and every screen after it rendered
+  // one level shallower — which the browser silently repairs, so the page
+  // looks almost right and the bindings all still resolve. Nothing else here
+  // would have caught it: dc.js builds elements from the parsed tree, so a
+  // mis-nested template is a layout bug with no error attached.
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+
+  for (const tag of ['div', 'section', 'article', 'sc-for', 'sc-if', 'a', 'main', 'aside']) {
+    const open = (tpl.match(new RegExp(`<${tag}[ >]`, 'g')) || []).length;
+    const close = (tpl.match(new RegExp(`</${tag}>`, 'g')) || []).length;
+    assert.equal(open, close, `<${tag}> is opened ${open} times and closed ${close}`);
+  }
+
+  // And every screen sits at the same nesting depth, which is the shape a
+  // stray close actually breaks.
+  const lines = tpl.split('\n');
+  let depth = 0;
+  const screens = [];
+  for (const line of lines) {
+    const isScreen = /<sc-if value="\{\{ is\w+ \}\}"/.exec(line);
+    if (isScreen) screens.push([/is(\w+)/.exec(line)[1], depth]);
+    depth += (line.match(/<div[ >]/g) || []).length - (line.match(/<\/div>/g) || []).length;
+  }
+  assert.ok(screens.length >= 8, `only ${screens.length} screens found`);
+  const [, first] = screens[0];
+  for (const [name, at] of screens) {
+    assert.equal(at, first, `the ${name} screen opens at depth ${at}, not ${first}`);
+  }
+  assert.equal(depth, 0, 'the template does not close back to the root');
+});
+
+/* ── the six edits ─────────────────────────────────────────────────────── */
+
+const INVDOC = {
+  updated_at: '2026-08-30T09:00:00Z', source: 'beta.egx.com.eg /api/bff/egx/investor-full-statistics',
+  currency: 'EGP', basis: 'period to date, as published by the exchange',
+  by_nationality: [
+    { party: 'Egyptians', party_ar: 'مصريين', percent: 60.27, net: 3827816945, buy: 1, sell: 1, combined: false },
+    { party: 'Arab', party_ar: 'عرب', percent: 13.14, net: -4434018063, buy: 1, sell: 1, combined: false },
+    { party: 'Non-Arab Foreigners', party_ar: 'أجانب', percent: 26.58, net: 606201118, buy: 1, sell: 1, combined: false },
+    { party: 'Arabs & Foreigners', party_ar: 'عرب وأجانب', percent: 39.72, net: -3827816945, combined: true },
+  ],
+  individuals: [
+    { party: 'Egyptians', net: 377553473, combined: false },
+    { party: 'Arab', net: -38378118, combined: false },
+    { party: 'Non-Arab Foreigners', net: 18511127, combined: false },
+    { party: 'Arabs & Foreigners', net: -19866990, combined: true },
+  ],
+  institutions: [
+    { party: 'Egyptians', net: 3450263472, combined: false },
+    { party: 'Arab', net: -4395639946, combined: false },
+    { party: 'Non-Arab Foreigners', net: 587689991, combined: false },
+    { party: 'Arabs & Foreigners', net: -3807949955, combined: true },
+  ],
+};
+
+test('the investor split keeps the exchange\'s parties and drops its combined row', async () => {
+  // "Arabs & Foreigners" is the exchange's own convenience total — the sum of
+  // the two beside it, not a fourth party. Counting it beside its parts
+  // double-counts the market.
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => INVDOC });
+  const inv = await data.investors();
+  delete globalThis.fetch;
+  assert.deepEqual(inv.parties.map((p) => p.party), ['Egyptians', 'Arab', 'Non-Arab Foreigners']);
+  assert.equal(inv.arabsAndForeigners.party, 'Arabs & Foreigners');
+  assert.deepEqual(inv.bands.map((b) => b.label), ['Individuals', 'Institutions']);
+  // Every pound bought is a pound sold, so the two bands must cancel — to
+  // within the rounding the exchange publishes at, not to the pound.
+  const [ind, inst] = inv.bands;
+  const drift = Math.abs(ind.net + inst.net) / Math.max(Math.abs(ind.net), Math.abs(inst.net));
+  assert.ok(drift < 1e-6, `${ind.net} and ${inst.net} do not cancel (${drift})`);
+  // and each band's cells follow the same party order as the header row
+  assert.deepEqual(ind.cells.map((c) => c.party), inv.partyOrder);
+});
+
+test('the investors screen says what period the figures cover', () => {
+  const v = screen({ ...LIVE, investors: {
+    basis: 'period to date, as published by the exchange', source: 'beta.egx.com.eg',
+    parties: [{ party: 'Egyptians', partyAr: 'مصريين', percent: 60.27, net: 3827816945 }],
+    partyOrder: ['Egyptians'],
+    bands: [{ label: 'Individuals', labelAr: 'أفراد', net: 1, cells: [{ party: 'Egyptians', net: 1 }] }],
+  } });
+  assert.equal(v.noInvestors, false);
+  assert.equal(v.investors.parties[0].percent, '60.27%');
+  // The exchange states this period-to-date. A screen that lets it read as
+  // today's session is stating a different fact.
+  assert.match(v.L.investorsBasis, /period to date/i);
+  // And it does not draw a curve the exchange does not publish.
+  assert.match(v.L.investorsNoIntraday, /no intraday/i);
+  assert.equal(screen(LIVE).noInvestors, true);
+});
+
+test('the watchlist is a ticker and nothing else, kept per reader', async () => {
+  const w = await import('../../public/esthmr/watchlist.js');
+  const store = {};
+  globalThis.localStorage = { getItem: (k) => store[k] ?? null, setItem: (k, v) => { store[k] = v; } };
+  try {
+    w.add('a@b.c', 'COMI');
+    w.add('A@B.C', 'ABUK');                       // the same reader, cased differently
+    assert.deepEqual(w.read('a@b.c'), ['ABUK', 'COMI'], 'newest first');
+    assert.deepEqual(w.read('other@x.com'), [], 'one reader can see another\'s list');
+    assert.deepEqual(w.read(null), [], 'signing out hands over the previous reader\'s list');
+    w.toggle('a@b.c', 'COMI');
+    assert.deepEqual(w.read('a@b.c'), ['ABUK']);
+    // A ticker and nothing else — no share count, no cost basis (§33).
+    assert.ok(JSON.parse(store[Object.keys(store)[0]]).every((x) => typeof x === 'string'));
+  } finally { delete globalThis.localStorage; }
+});
+
+test('a followed company that leaves the exchange drops out rather than showing dashes', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c._watch = ['AAAA', 'GONE'];
+  const v = c.renderVals();
+  assert.deepEqual(v.followed.map((f) => f.ticker), ['AAAA']);
+  assert.equal(v.followedCount, 1);
+  assert.equal(v.followed[0].watched, true);
+  assert.equal(v.followed[0].star, '★');
+  // and an unfollowed row offers the empty star
+  assert.equal(v.rows.find((r) => r.ticker === 'BBBB').star, '☆');
+});
+
+test('the disclosures screen filters by day and by company', () => {
+  const rows = [
+    { date: '2026-08-24', ticker: 'AAAA', what: 'A results release', section: 'Results' },
+    { date: '2026-08-24', ticker: 'BBBB', what: 'B board decisions', section: 'Board' },
+    { date: '2026-08-25', ticker: 'AAAA', what: 'A treasury stock', section: 'Treasury' },
+  ];
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, filedMonths: [{ id: '2026-08', count: 3 }],
+              filedArchive: rows, filedArchiveMonth: '2026-08' });
+  c.state.screen = 'calendar';
+  assert.equal(c.renderVals().filedEvents.length, 3);
+
+  c.state.day = '2026-08-24';
+  let v = c.renderVals();
+  assert.equal(v.filedEvents.length, 2);
+  assert.match(v.filedFilterNote, /2 filings match 24 August 2026/);
+
+  // By company: the ticker, either language of the title, and the company's
+  // own name — the archive row carries only the ticker.
+  c.state.day = ''; c.state.filedQ = 'AAAA';
+  v = c.renderVals();
+  assert.equal(v.filedEvents.length, 2);
+  c.state.filedQ = 'treasury';
+  v = c.renderVals();
+  assert.equal(v.filedEvents.length, 1);
+  assert.match(v.filedFilterNote, /^1 filing matches/);
+
+  c.state.filedQ = 'nothing here';
+  v = c.renderVals();
+  assert.equal(v.filedNoMatch, true);
+  assert.equal(v.hasFiledFilter, true);
+  v.clearFilters ? null : null;
+  c.renderVals().clearFiled();
+  assert.equal(c.state.filedQ, '');
+  assert.equal(c.state.day, '');
+
+  // and it is named for what it holds
+  assert.equal(screen(LIVE).L.calendarTitle, 'Disclosures');
+});
+
+test('the crossings have a screen of their own and Today has the news', () => {
+  const v = screen({ ...LIVE, crossings: CROSS, feed: [] });
+  assert.ok(v.nav.some((n) => n.label === 'Crossings'));
+  assert.ok(v.nav.some((n) => n.label === 'Disclosures'));
+  // Investors is the fourth entry.
+  assert.equal(v.nav[3].label, 'Investors');
+  assert.equal(v.isCrossings, false);
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, crossings: CROSS });
+  c.state.screen = 'crossings';
+  assert.equal(c.renderVals().isCrossings, true);
+  assert.equal(c.renderVals().crossings.length, 1);
 });

@@ -172,6 +172,13 @@ STEPS = [
     # twenty-four hours is stale data wearing today's date.
     ("Disclosures", "build_disclosures_api.py", True),
     ("News", "build_news_api.py", True),
+    # Who traded, not just how much. The exchange has always published the
+    # market split by nationality and by individual-versus-institution, and
+    # nothing here read it — so the site could say what changed hands and
+    # never who changed it. One GET against the same host the filing archive
+    # uses; best-effort, because a screen losing a section beats a build
+    # stopping over it.
+    ("Investors", "build_investors_api.py", True),
     ("Rates", "build_rates_api.py", True),
     # The world outside the exchange.
     #
@@ -289,6 +296,7 @@ BEST_EFFORT = {
     # touches it; when the host cannot reach the model the banks are one build
     # stale, which is the same trade as the harvest above — not a failed build.
     "Unit-scaled net profit",
+    "Investors",
 }
 
 # Steps whose failure should stop the build immediately rather than press on and

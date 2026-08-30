@@ -8,7 +8,7 @@ a journalist, or a reader who does not believe us would ask for first.
 `test_sources.py` fails the build if a host appears in `scripts/` and not here,
 so this cannot quietly fall out of date.
 
-Last reviewed: 29 August 2026.
+Last reviewed: 30 August 2026.
 
 ---
 
@@ -17,6 +17,7 @@ Last reviewed: 29 August 2026.
 | Source | What we take | How | Terms |
 |---|---|---|---|
 | **EGX** — `egx.com.eg` | Disclosures filed by listed companies, and the net-profit figures inside them | A real browser via Scrapling; the page is JS-rendered and refuses plain HTTP. **Serialised — never in parallel**, after being blocked once for fanning three agents at it | Public filings. Arabic only, and the ticker is stamped into every title by the exchange rather than inferred by us |
+| **EGX investor statistics** — `beta.egx.com.eg` | Who actually traded: the market split by Egyptians, Arabs and non-Arab foreigners, each as individuals and as institutions, with value bought, value sold and the net between them | `/api/bff/egx/investor-full-statistics`, one GET, the same host and the same WAF-aware request path the filing archive already uses. Found by reading what the exchange's own `/en/market/investors` page calls, rather than guessing endpoint names at a host that has blocked us before | The exchange's own figures and its own labels in both languages, so nothing here is translated by us. Stated **period to date, not per session**, which the screen says — and there is no intraday breakdown on this endpoint, so the site draws no curve. `Arabs & Foreigners` is the exchange's convenience total, the sum of the two beside it, and is flagged rather than counted as a fourth party |
 | **TradingView scanner** — `scanner.tradingview.com` | The daily snapshot: every listed share's close, change, volume and market cap, plus the three index levels | Public scanner endpoint, one request a session | Consumed as published. The app never learns the provider's name (§14) |
 | **FoudaLens** — `foudalens.com` | Nothing of its own: the issuer's **own filed results attachment**, mirrored under a stable same-origin PDF URL, for filings whose figures the exchange's announcement states only as a single net profit | A mirror, and the *first* place asked, because the exchange's own attachment host answers a headless browser with a decoy and rate-limits a real one. Filing pages are read at `/en/news/{code}`, keyed on the EGX filing code already stored in every company document, and the PDF is fetched from the link that page carries | `robots.txt` publishes `Allow: /` and disallows `/api/` and the signed-in areas; both paths used here are permitted. What is taken is the **issuer's** document, not FoudaLens's own work, and every figure read out of it is re-proved against the exchange's own announced net profit before it is published |
 

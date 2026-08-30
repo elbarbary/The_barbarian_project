@@ -21,15 +21,19 @@
   <p><strong>You are looking at an invented market.</strong>
      Every ticker, price and figure below is made up for the demo.
      Sign in to read what companies actually filed.</p>
+</div>
+
+<!-- Signing in and who is signed in are the same corner. The button lived in
+     the middle of the demo banner and the account strip lived at the bottom of
+     the window, so the two halves of one idea sat at opposite ends of the page
+     and the one that mattered moved when the banner went away. -->
+<div class="account">
+  <span id="who" hidden></span>
   <button id="signin" class="gate-cta">Sign in with email</button>
+  <button id="signout" hidden>Sign out</button>
 </div>
 
 <div id="app"></div>
-
-<div class="account">
-  <span id="who" hidden></span>
-  <button id="signout">Sign out</button>
-</div>
 
 <script type="module" src="./main.js"></script>
 </body>
