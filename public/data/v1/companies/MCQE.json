@@ -6,12 +6,12 @@
  },
  "sector": "Non-Energy Minerals",
  "market": {
-  "last_close": 234.2,
+  "last_close": 232,
   "date": "2026-08-30",
   "open": 233,
   "high": 238,
   "low": 231.02,
-  "volume": 53981
+  "volume": 56254
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 96000000,
   "free_float": 0.186592,
   "float_shares": 17912832,
-  "perf_1w": 5.49549549549549,
-  "perf_1m": 27.964156922740674,
-  "perf_3m": 20.72787257075106,
-  "avg_volume_30d": 230145.63333333321,
-  "relative_volume_10d": 0.17889762923606428,
+  "perf_1w": 4.504504504504505,
+  "perf_1m": 26.762102502458742,
+  "perf_3m": 19.59379349451002,
+  "avg_volume_30d": 230221.39999999988,
+  "relative_volume_10d": 0.18643054472954484,
   "median_volume_20d": 224934.5,
   "rv20": 0.30121213064247593,
   "normal_value_30d": 28138907.310000002,

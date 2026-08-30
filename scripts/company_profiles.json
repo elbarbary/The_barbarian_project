@@ -15197,5 +15197,36 @@
   "source": "Mubasher",
   "source_url": "https://english.mubasher.info/markets/EGX/stocks/ZMID/profile",
   "fetched": "2026-08-24"
+ },
+ "TOUR": {
+  "name": "Tourism Urbanization (TOUR)",
+  "purpose": "Tourism Urbanization is a public company, listed on Egyptian Exchange since November 1995. It operates within the consumer services sector focusing on hotels, resorts & cruise lines. Tourism Urbanization is based in Cairo, Egypt and was established in January 1976.",
+  "established": "01 January 1976",
+  "financial_year_start": "First Quarter",
+  "auditor": "Central Auditing Organization Mazars Mostafa Shawki and Co --> Ownership The Egyptian General Company for Tourism & Hotels",
+  "owners": [
+   {
+    "name": "The Egyptian General Company for Tourism & Hotels",
+    "stake": 66.247
+   },
+   {
+    "name": "El Shams Housing & Urbanization",
+    "stake": 14.3
+   },
+   {
+    "name": "Al Montazah Company for Tourism and Investment",
+    "stake": 10.131
+   }
+  ],
+  "subsidiaries": [
+   {
+    "name": "Steigenberger Pyramids Cairo Hotel",
+    "stake": 100.0
+   }
+  ],
+  "website": "www.tuc.com.eg",
+  "source": "Mubasher",
+  "source_url": "https://english.mubasher.info/markets/EGX/stocks/TOUR/profile",
+  "fetched": "2026-08-30"
  }
 }

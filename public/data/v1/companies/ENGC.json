@@ -6,12 +6,12 @@
  },
  "sector": "Producer Manufacturing",
  "market": {
-  "last_close": 45.4,
+  "last_close": 45.72,
   "date": "2026-08-30",
   "open": 45.15,
   "high": 46.27,
   "low": 44.56,
-  "volume": 74403
+  "volume": 80080
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 145500000,
   "free_float": 0.413215,
   "float_shares": 60122782.5,
-  "perf_1w": 0.6651884700665125,
-  "perf_1m": 5.975723622782435,
-  "perf_3m": 38.372447424565664,
-  "avg_volume_30d": 504582.3666666666,
-  "relative_volume_10d": 0.18510598756406624,
+  "perf_1w": 1.3747228381374665,
+  "perf_1m": 6.722689075630241,
+  "perf_3m": 39.34775982932031,
+  "avg_volume_30d": 504771.5999999999,
+  "relative_volume_10d": 0.1992297015460455,
   "median_volume_20d": 415780.5,
   "rv20": 0.7010886753948298,
   "normal_value_30d": 18335657.225,
