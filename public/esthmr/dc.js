@@ -46,12 +46,27 @@ const BINDING = /\{\{([\s\S]*?)\}\}/g;
  *
  * The capture must not be allowed to run past the first `}}`, or a string of
  * two bindings — `{{ L.closeOf }} {{ marketDate }}` — looks like one binding
- * whose body happens to contain braces, and compiles to nothing. */
-function interpolate(text, scope, wrap) {
-  const whole = text.match(/^\s*\{\{((?:(?!\}\})[\s\S])*)\}\}\s*$/);
+ * whose body happens to contain braces, and compiles to nothing.
+ *
+ * The type-preserving branch used to swallow the whitespace around the
+ * binding with it, because `\s*` was inside the match and nothing put it
+ * back. Six places in the template write `{{ label }} <span>{{ figure
+ * }}</span>`, and every one of them ran the two together: "Due within a
+ * yearEGP 4.2bn", "data_versiondemo". A space between a label and a number is
+ * not decoration — it is the difference between two facts and one. It is
+ * restored for anything that is going to become text, and only for those: a
+ * handler has to stay a function and a chart has to stay a node. */
+export function interpolate(text, scope, wrap) {
+  const whole = text.match(/^(\s*)\{\{((?:(?!\}\})[\s\S])*)\}\}(\s*)$/);
   if (whole) {
-    const value = evaluate(whole[1], scope);
-    return wrap ? wrap(value) : value;
+    const [, lead, expr, trail] = whole;
+    const value = evaluate(expr, scope);
+    const wrapped = wrap ? wrap(value) : value;
+    if ((lead || trail) && typeof wrapped !== 'function' && !(wrapped instanceof Node)) {
+      const text = wrapped === null || wrapped === undefined ? '' : String(wrapped);
+      return lead + text + trail;
+    }
+    return wrapped;
   }
   return text.replace(BINDING, (_, expr) => {
     const value = evaluate(expr, scope);

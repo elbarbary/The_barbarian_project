@@ -544,6 +544,26 @@ async function api(request, env, url) {
 const ESTHMR_HOSTS = new Set(['esthmr.com', 'www.esthmr.com']);
 const UNPREFIXED = ['/esthmr/', '/data/v1/'];
 
+/* Six months, and no `preload`. The redirect above only helps a reader who has
+ * already been sent over http once; this is what stops the browser trying it
+ * again. `preload` is deliberately not asserted: it is a submission to a list
+ * baked into browsers and effectively permanent, and this domain is a day old.
+ * `includeSubDomains` is left off for the same reason — nothing is on a
+ * subdomain of it yet, and the day something is, it inherits a promise nobody
+ * made for it. */
+const HSTS = 'max-age=15552000';
+
+/** The same response, with the header that keeps the next visit encrypted. */
+function secure(answer) {
+  const headers = new Headers(answer.headers);
+  headers.set('strict-transport-security', HSTS);
+  return new Response(answer.body, {
+    status: answer.status,
+    statusText: answer.statusText,
+    headers,
+  });
+}
+
 function underEsthmr(url) {
   if (UNPREFIXED.some((prefix) => url.pathname.startsWith(prefix))) return null;
   const target = new URL(url);
@@ -572,12 +592,59 @@ function unprefixLocation(answer, url) {
   return new Response(answer.body, { status: answer.status, headers });
 }
 
+/** Everything that is the same on either host: the API, the gate, the assets. */
+async function serve(request, env, url) {
+  if (url.pathname.startsWith('/esthmr/api/')) {
+    return api(request, env, url).catch(() => json({ error: 'server' }, 500));
+  }
+
+  // The gate. Everything the pipeline publishes lives under this prefix.
+  if (url.pathname.startsWith('/data/v1/')) {
+    const who = await session(request, env);
+    if (!who) {
+      return json({ error: 'sign in to read the exchange data' }, 401, {
+        'cache-control': 'no-store',
+        'www-authenticate': 'Session realm="esthmr"',
+      });
+    }
+    if (await overLimit(env, 'data', who.e, LIMITS.dataPerSession)) {
+      return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
+    }
+    const answer = await env.ASSETS.fetch(request);
+    const headers = new Headers(answer.headers);
+    // `private` keeps it out of shared caches, and `no-cache` means the
+    // browser may keep a copy but must revalidate before using it — so every
+    // read passes through the check above.
+    //
+    // It was `private, max-age=300`, which left the data readable for five
+    // minutes AFTER signing out: the browser answered from its own cache and
+    // never asked. On a shared machine that is somebody else reading it.
+    // Revalidation still returns 304 for an unchanged document, so this
+    // costs a round trip rather than the payload.
+    headers.set('cache-control', 'private, no-cache');
+    return new Response(answer.body, { status: answer.status, headers });
+  }
+
+  return env.ASSETS.fetch(request);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
 
     if (ESTHMR_HOSTS.has(host)) {
+      /* Over http the whole site answered in the clear, which on this host is
+         worse than it sounds: the session cookie is `Secure`, so signing in
+         there could not work and nothing said why. thebarbarianproject.com has
+         had Always Use HTTPS on at the zone since it went up; the new zone was
+         created without it. Doing it here rather than in a dashboard setting
+         means it is in the repository, it is tested, and it cannot be quietly
+         turned off. */
+      if (url.protocol === 'http:') {
+        url.protocol = 'https:';
+        return Response.redirect(url.toString(), 301);
+      }
       // One address for one site: www is a second name for the same pages, and
       // two names mean two sets of cookies and two things to link to.
       if (host === 'www.esthmr.com') {
@@ -587,42 +654,12 @@ export default {
       const mapped = underEsthmr(url);
       if (mapped) {
         const answer = await env.ASSETS.fetch(new Request(mapped, request));
-        if (answer.status !== 404) return unprefixLocation(answer, url);
-        return env.ASSETS.fetch(request);
+        return secure(answer.status !== 404 ? unprefixLocation(answer, url)
+          : await env.ASSETS.fetch(request));
       }
+      return secure(await serve(request, env, url));
     }
 
-    if (url.pathname.startsWith('/esthmr/api/')) {
-      return api(request, env, url).catch(() => json({ error: 'server' }, 500));
-    }
-
-    // The gate. Everything the pipeline publishes lives under this prefix.
-    if (url.pathname.startsWith('/data/v1/')) {
-      const who = await session(request, env);
-      if (!who) {
-        return json({ error: 'sign in to read the exchange data' }, 401, {
-          'cache-control': 'no-store',
-          'www-authenticate': 'Session realm="esthmr"',
-        });
-      }
-      if (await overLimit(env, 'data', who.e, LIMITS.dataPerSession)) {
-        return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
-      }
-      const answer = await env.ASSETS.fetch(request);
-      const headers = new Headers(answer.headers);
-      // `private` keeps it out of shared caches, and `no-cache` means the
-      // browser may keep a copy but must revalidate before using it — so every
-      // read passes through the check above.
-      //
-      // It was `private, max-age=300`, which left the data readable for five
-      // minutes AFTER signing out: the browser answered from its own cache and
-      // never asked. On a shared machine that is somebody else reading it.
-      // Revalidation still returns 304 for an unchanged document, so this
-      // costs a round trip rather than the payload.
-      headers.set('cache-control', 'private, no-cache');
-      return new Response(answer.body, { status: answer.status, headers });
-    }
-
-    return env.ASSETS.fetch(request);
+    return serve(request, env, url);
   },
 };

@@ -185,6 +185,38 @@ test('nothing on esthmr.com sends the reader to the prefix it hides', async () =
   assert.equal(await body(await call(e, 'https://esthmr.com/')), 'served /esthmr/index.html');
 });
 
+test('esthmr.com is never served in the clear', async () => {
+  // The zone was created without Always Use HTTPS, so http:// answered 200
+  // with the whole site — and the session cookie is Secure, so signing in
+  // over it could not work and nothing said why.
+  const e = env();
+  const answer = await call(e, 'http://esthmr.com/sectors?q=1');
+  assert.equal(answer.status, 301);
+  assert.equal(answer.headers.get('location'), 'https://esthmr.com/sectors?q=1');
+  // www over http gets there in one hop of its own, not a chain of three.
+  assert.equal((await call(e, 'http://www.esthmr.com/')).headers.get('location'),
+    'https://www.esthmr.com/');
+});
+
+test('every answer on esthmr.com tells the browser not to try http again', async () => {
+  const e = env();
+  const headers = await bearer('reader@example.com');
+  for (const path of ['/', '/logic.js', '/favicon.svg', '/data/v1/companies.json',
+                      '/esthmr/api/watchlist', '/nothing-here']) {
+    const answer = await call(e, `https://esthmr.com${path}`, { headers });
+    assert.match(answer.headers.get('strict-transport-security') || '', /max-age=\d{6,}/,
+      `${path} carries no HSTS`);
+  }
+  // Not asserted for a domain that is a day old: preload is a submission to a
+  // list baked into browsers, and includeSubDomains is a promise made on
+  // behalf of subdomains that do not exist yet.
+  const one = await call(e, 'https://esthmr.com/', { headers });
+  assert.doesNotMatch(one.headers.get('strict-transport-security'), /preload|includeSubDomains/);
+  // And the site's own host is not signed up to any of it here.
+  const other = await call(e, 'https://thebarbarianproject.com/', { headers });
+  assert.equal(other.headers.get('strict-transport-security'), null);
+});
+
 test('www is a second name for the same site, and says so once', async () => {
   const e = env();
   const answer = await call(e, 'https://www.esthmr.com/sectors');

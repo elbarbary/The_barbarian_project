@@ -264,7 +264,7 @@ test('the nav counts what is loaded rather than what the design drew', () => {
   const v = screen(LIVE);
   const meta = Object.fromEntries(v.nav.map((n) => [n.label, n.meta]));
   assert.equal(meta.Market, '2');       // the directory, not 282
-  assert.equal(meta.Today, '');         // no feed loaded, so no count
+  assert.equal(meta.News, '');          // no feed loaded, so no count
   assert.equal(meta.Company, '');       // nothing open, so no ticker
 });
 
@@ -355,6 +355,41 @@ test('§8 the non-licence line is rendered, in both languages', async () => {
   assert.match(template, /\{\{\s*L\.legalNotLicensed\s*\}\}/,
     'the template no longer prints the non-licence line');
 });
+
+test('a label and the figure beside it keep the space between them', async () => {
+  // `{{ label }} <span>{{ figure }}</span>` is six places in the template, and
+  // every one of them rendered as one word: "Due within a yearEGP 4.2bn",
+  // "data_versiondemo". The type-preserving branch matched the whitespace
+  // around a lone binding and nothing put it back.
+  const { interpolate } = await import('../../public/esthmr/dc.js');
+  assert.equal(interpolate('{{ a }} ', { a: 'data_version' }), 'data_version ');
+  assert.equal(interpolate(' {{ a }}', { a: 'x' }), ' x');
+  assert.equal(interpolate('{{ a }} {{ b }}', { a: 'x', b: 'y' }), 'x y');
+
+  // What the branch is FOR still holds: a handler stays callable, padding or
+  // no padding, because `onClick=" {{ go }} "` must not become a string.
+  const go = () => 'went';
+  assert.equal(interpolate('{{ go }}', { go }), go);
+  assert.equal(interpolate('  {{ go }}  ', { go }), go);
+  // And a number stays a number when nothing is around it.
+  assert.equal(interpolate('{{ n }}', { n: 0 }), 0);
+
+  // Every place in the template that separates a binding from a sibling
+  // element with a space still gets one.
+  const { readFile } = await import('node:fs/promises');
+  const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const separated = [...template.matchAll(/>\s*\{\{((?:(?!\}\})[\s\S])*)\}\} </g)];
+  assert.ok(separated.length >= 6, `only ${separated.length} of these found`);
+  for (const [, expr] of separated) {
+    assert.match(interpolate(`{{${expr}}} `, { [expr.trim().split('.')[0]]: mockFor(expr) }), / $/);
+  }
+});
+
+/** A stand-in for whatever the binding reads, deep enough to resolve it. */
+function mockFor(expr) {
+  const deep = { toString: () => 'value' };
+  return new Proxy(deep, { get: (t, k) => (k in t ? t[k] : deep) });
+}
 
 /* ── the chrome around the screens ─────────────────────────────────────── */
 
@@ -2321,6 +2356,27 @@ test('there is a way to follow a company, on the two screens that say so', async
   none.setData(LIVE);
   assert.equal(none.renderVals().canFollowCompany, false);
   assert.equal(none.renderVals().co.ticker, '\u2014');
+});
+
+test('the demo answers a click with the company that was clicked', () => {
+  // Every row on the demo led to the one worked example, so opening DEMO15
+  // drew a card headed DEMO01, at DEMO01's close, with DEMO01's sector. On a
+  // screen whose whole job is showing what the real one looks like, that is
+  // the wrong company under the reader's own click.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  const wanted = c.renderVals().rows[3];
+  c.state.screen = 'company';
+  c.state.ticker = wanted.ticker;
+  const v = c.renderVals();
+  assert.equal(v.co.ticker, wanted.ticker);
+  assert.equal(v.co.nameEn, wanted.name);
+  assert.equal(v.co.close, wanted.close);
+  assert.equal(v.co.pct, wanted.pct);
+  // And with nothing opened it still has a shape to show.
+  const fresh = new Component({ accent: 'var(--accent)' });
+  fresh.setData(data.demo());
+  assert.ok(fresh.renderVals().co.ticker);
 });
 
 test('the watchlist screen is there before anything is in it', () => {
