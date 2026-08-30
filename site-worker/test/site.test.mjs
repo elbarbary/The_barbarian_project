@@ -2259,13 +2259,113 @@ test('the watchlist is a ticker and nothing else, kept per reader', async () => 
   } finally { delete globalThis.localStorage; }
 });
 
-test('the watchlist section is there before anything is in it', () => {
-  // Empty is the state most readers see first, and a section that simply is
-  // not on the page reads as a feature that does not exist.
+test('the watchlist has a screen of its own, and Home no longer keeps one', async () => {
+  // It was a block half way down Home, under the day's summary, being
+  // scrolled past. A list a reader BUILDS is not a summary of the day, and a
+  // place to go back to has to be somewhere you can go.
+  const v = screen(LIVE);
+  const entry = v.nav.find((n) => n.label === 'Watchlist');
+  assert.ok(entry, 'the rail offers it');
+  assert.equal(screen(LIVE, 'ar').nav.some((n) => n.label === 'المتابَعة'), true);
+
+  const { readFile } = await import('node:fs/promises');
+  const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  assert.equal(template.includes('{{ isWatchlist }}'), true, 'the screen exists');
+  // Exactly one loop over the list, so the same companies cannot be drawn in
+  // two places and drift apart.
+  assert.equal(template.split('list="{{ followed }}"').length - 1, 1);
+
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  c.state.screen = 'watchlist';
+  assert.equal(c.renderVals().isWatchlist, true);
+  assert.equal(c.renderVals().isHome, false);
+});
+
+test('there is a way to follow a company, on the two screens that say so', async () => {
+  // The feature shipped write-only: every row computed `star`, `starColor` and
+  // `follow`, the company screen computed `companyStar` and `companyFollow`,
+  // and the template rendered none of them. The only star on the page was on
+  // the followed block itself — which could unfollow what was already there,
+  // and nothing could get there. The empty state promised "tap the star beside
+  // any company, in the market table or on its own page" and neither existed.
+  const { readFile } = await import('node:fs/promises');
+  const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  assert.ok(template.includes('onClick="{{ r.follow }}"'), 'the market table offers it');
+  assert.ok(template.includes('onClick="{{ companyFollow }}"'), 'a company screen offers it');
+  assert.ok(template.includes('{{ r.star }}') && template.includes('{{ companyStar }}'));
+
+  // And pressing it reaches the handler main.js installs.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  const asked = [];
+  c.onWatch = (t) => asked.push(t);
+  c.renderVals().rows.find((r) => r.ticker === 'BBBB').follow({ stopPropagation() {} });
+  c.state.ticker = 'AAAA';
+  c.renderVals().companyFollow();
+  assert.deepEqual(asked, ['BBBB', 'AAAA']);
+
+  // It follows the company the CARD is showing, not the ticker in the state.
+  // On the demo every company opens the one worked example, so a control bound
+  // to the state would put DEMO15 on the list from a card headed DEMO01.
+  const d = new Component({ accent: 'var(--accent)' });
+  d.setData(data.demo());
+  d.state.ticker = 'DEMO15';
+  const shown = d.renderVals();
+  d.onWatch = (t) => asked.push(t);
+  shown.companyFollow();
+  assert.equal(asked[asked.length - 1], shown.co.ticker);
+
+  // And with no company chosen there is nothing to follow, so no control.
+  const none = new Component({ accent: 'var(--accent)' });
+  none.setData(LIVE);
+  assert.equal(none.renderVals().canFollowCompany, false);
+  assert.equal(none.renderVals().co.ticker, '\u2014');
+});
+
+test('the watchlist screen is there before anything is in it', () => {
+  // Empty is the state every reader meets first, and a screen that says only
+  // "nothing here" is a dead end. It says what to press, and offers the way.
   const v = screen(LIVE);
   assert.equal(v.noFollowed, true);
+  assert.equal(v.hasFollowed, false);
   assert.equal(v.followedCount, '');
   assert.match(v.L.followEmpty, /star/i);
+  assert.equal(typeof v.goMarket, 'function');
+  assert.equal(typeof v.clearWatch, 'function');
+});
+
+test('the list says where it is actually kept, which depends on who is reading', () => {
+  // Signed in it follows the account to another browser; signed out there is
+  // no account to keep it against. Telling a reader the wrong one of those is
+  // telling them their list is somewhere it is not.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  assert.equal(c.renderVals().followKept, c.renderVals().L.followKeptDevice);
+  c._reader = 'me@example.com';
+  assert.equal(c.renderVals().followKept, c.renderVals().L.followKeptAccount);
+  assert.match(c.renderVals().L.followKeptAccount, /account/i);
+});
+
+test('the followed counters count prices, not arrows', () => {
+  // A row draws no arrow both for a share that closed exactly flat and for one
+  // with no price at all, and those are not the same fact. Counted off the
+  // rows, an unpriced company would be reported as unchanged.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData({ ...LIVE, companies: [
+    ...LIVE.companies,
+    { ticker: 'CCCC', name: { en: 'C', ar: 'ج' }, sector: 'Banks', close: 5, pct: 0, cap: 30, pe: 5 },
+    { ticker: 'DDDD', name: { en: 'D', ar: 'د' }, sector: 'Banks', close: '—', pct: null, cap: 40, pe: null },
+  ] });
+  c._watch = ['AAAA', 'BBBB', 'CCCC', 'DDDD'];
+  const v = c.renderVals();
+  assert.equal(v.followedCount, '4');
+  assert.equal(v.followUp, '1');
+  assert.equal(v.followDown, '1');
+  assert.equal(v.followFlatCount, '1');
+  // Three of four are priced, and the total on the cards says three so that
+  // the three figures add up to it.
+  assert.equal(v.followOf, 'of 3');
 });
 
 test('a followed company that leaves the exchange drops out rather than showing dashes', () => {

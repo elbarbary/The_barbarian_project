@@ -188,7 +188,17 @@ export class Component extends Base {
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
-      followEmpty:'Nothing followed yet. Tap the star beside any company \u2014 in the market table or on its own page \u2014 and it appears here. A ticker and nothing else is kept, on this device.',
+      // ── the reader's own list ──
+      followTitle:'Watchlist',
+      followLead:'The companies you follow, carrying the same close and the same move they carry everywhere else on this site.',
+      followEmptyTitle:'Nothing followed yet',
+      followEmpty:'Tap the star beside any company \u2014 in the market table, or on its own page \u2014 and it appears here.',
+      followBrowse:'Open the market',
+      followClear:'Empty the list',
+      followKeptAccount:'Kept to your account, so the same list opens in another browser. A ticker and nothing else: no share count, no price paid, nothing about what you own.',
+      followKeptDevice:'Kept in this browser only, because there is no account to keep it against while you are signed out. Sign in and it follows you.',
+      followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
+      followOfCount:'of {n}',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
@@ -371,7 +381,17 @@ export class Component extends Base {
       investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
       following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
-      followEmpty:'لا شيء تتابعه بعد. اضغط النجمة بجوار أي شركة \u2014 في جدول السوق أو في صفحتها \u2014 فتظهر هنا. يُحفظ الرمز فقط، على هذا الجهاز.',
+      // ── قائمة المتابعة ──
+      followTitle:'المتابَعة',
+      followLead:'الشركات التي تتابعها، بالإغلاق نفسه والتغير نفسه الظاهرين في باقي أنحاء الموقع.',
+      followEmptyTitle:'لا شيء تتابعه بعد',
+      followEmpty:'اضغط النجمة بجوار أي شركة \u2014 في جدول السوق أو في صفحتها \u2014 فتظهر هنا.',
+      followBrowse:'افتح السوق',
+      followClear:'إفراغ القائمة',
+      followKeptAccount:'محفوظة في حسابك، فتفتح القائمة نفسها في متصفح آخر. يُحفظ الرمز فقط: لا عدد أسهم، ولا سعر شراء، ولا شيء عمّا تملكه.',
+      followKeptDevice:'محفوظة في هذا المتصفح وحده، إذ لا حساب تُحفظ فيه وأنت غير مسجَّل الدخول. سجِّل الدخول فتتبعك القائمة.',
+      followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
+      followOfCount:'من {n}',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
@@ -709,7 +729,10 @@ export class Component extends Base {
       // Three figures side by side, which is what the screen is.
       investors:'M4.2 20.4V13M9.4 20.4V6.6M14.6 20.4v-9.6M19.8 20.4V9.2M3 20.8h18M9.4 3.4v3.2',
       // Two threads meeting a point.
-      crossings:'M4.6 6.2h4.2l4 6h6.6M4.6 17.8h4.2l4-6M18.4 9.4l2 2.8-2 2.8'
+      crossings:'M4.6 6.2h4.2l4 6h6.6M4.6 17.8h4.2l4-6M18.4 9.4l2 2.8-2 2.8',
+      // The same star that follows a company, so the control and the screen it
+      // fills are recognisably one thing.
+      watchlist:'M12 3.6 14.6 9l5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.8 9.4 9z'
     };
 
     // market table
@@ -793,10 +816,15 @@ export class Component extends Base {
     // company carries the same close and move it does everywhere else. A
     // ticker followed and later delisted simply drops out rather than
     // rendering a row of dashes.
-    const followed = (this._watch || [])
+    const followedCos = (this._watch || [])
       .map((t) => D.companies.find((c) => c.ticker === t))
-      .filter(Boolean)
-      .map(mkRow);
+      .filter(Boolean);
+    const followed = followedCos.map(mkRow);
+    // Counted off the companies rather than off the rendered rows: a row shows
+    // an empty arrow both for a share that closed exactly flat and for one
+    // with no price at all, and those are not the same fact. Only the priced
+    // ones are counted, and the total says so, so the three add up.
+    const followPriced = followedCos.filter((c) => typeof c.pct === 'number');
 
     // Headed "Watchlist", this was five tickers the design happened to name —
     // COMI, KORA, ETEL, TMGH, AMOC — padded from the largest companies. All
@@ -1813,6 +1841,11 @@ export class Component extends Base {
       // Fourth, and its own screen: who bought and who sold is a different
       // question from what moved, and the exchange answers it separately.
       ['investors', ar?'المستثمرون':'Investors', ''],
+      // Its own screen rather than a block on Home. A list a reader builds is
+      // not a summary of the day, and it was sitting under the day's summary
+      // being scrolled past — a place to go back to has to be somewhere you
+      // can go.
+      ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
       // "Calendar" described the grid; what a reader comes here for is the
@@ -1932,14 +1965,44 @@ export class Component extends Base {
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
+      isWatchlist: st.screen === 'watchlist',
       indices, movers, watchlist, readNow, feed,
-      followed, noFollowed: followed.length === 0,
+      followed, noFollowed: followed.length === 0, hasFollowed: followed.length > 0,
       followedCount: followed.length ? String(followed.length) : '',
+      // How the followed companies closed — counted, not characterised. Three
+      // of yours rose is a fact about the session; whether that is good news
+      // depends on facts about the reader this site does not have and would
+      // not be licensed to act on if it did (§8).
+      followUp: String(followPriced.filter((c) => c.pct > 0).length),
+      followDown: String(followPriced.filter((c) => c.pct < 0).length),
+      followFlatCount: String(followPriced.filter((c) => c.pct === 0).length),
+      followOf: L.followOfCount.replace('{n}', String(followPriced.length)),
+      // The market table's own labels, minus the sort: the order here is the
+      // order they were followed in, which is the reader's and not a ranking.
+      followCols: colDef.map(([, label, align]) => ({ label, align })),
+      // Where the list is actually kept, which is a different answer signed in
+      // and signed out, and the reader is entitled to the right one.
+      followKept: this._reader ? L.followKeptAccount : L.followKeptDevice,
+      clearWatch: () => { this.onClearWatch && this.onClearWatch(); },
+      goMarket: this.go('market'),
       goInvestors: this.go('investors'),
       investors, noInvestors: investors === null,
-      companyWatched: watchedSet.has(st.ticker),
-      companyStar: watchedSet.has(st.ticker) ? '\u2605' : '\u2606',
-      companyFollow: () => { this.onWatch && this.onWatch(st.ticker); },
+      // Bound to the company ON SCREEN rather than to the ticker in the state.
+      // They are the same thing live. They are not on the demo, where every
+      // company opens the one worked example — so following from there would
+      // have put a different ticker on the list from the one whose card the
+      // reader was looking at.
+      companyWatched: watchedSet.has(co.ticker),
+      companyStar: watchedSet.has(co.ticker) ? '\u2605' : '\u2606',
+      // Says what it IS when following and what it OFFERS when not, which is
+      // the way round a control has to read to be pressable without guessing.
+      companyWatchLabel: watchedSet.has(co.ticker) ? L.unfollow : L.follow,
+      companyWatchColor: watchedSet.has(co.ticker) ? 'var(--accent)' : 'var(--t2)',
+      companyWatchBorder: watchedSet.has(co.ticker) ? 'var(--accent)' : 'var(--edgeIn)',
+      // No company, nothing to follow: the screen before a ticker is chosen
+      // shows dashes, and a star beside a dash would store one.
+      canFollowCompany: co.ticker !== '\u2014',
+      companyFollow: () => { if (co.ticker !== '\u2014') this.onWatch && this.onWatch(co.ticker); },
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
       // The placeholder used to assert "282 companies" in both languages. The
       // exchange is not a constant — build_market_api has already moved it

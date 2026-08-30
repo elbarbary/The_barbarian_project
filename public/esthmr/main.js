@@ -70,9 +70,19 @@ let reader = null;
  * data: it is this device's, and the screens read it exactly the way they read
  * a document. The app keeps its own the same way (user_repository.dart).
  */
-function syncWatchlist() {
-  component._watch = watch.read(reader);
+function syncWatchlist(list) {
+  component._watch = list || watch.read(reader);
   if (component.onChange) component.onChange();
+}
+
+/** Bring the account's list down, once the reader is known.
+ *
+ * Deliberately not awaited by the boot: the list is one KV read, but a slow
+ * one should delay a star, not the exchange. Until it lands the browser's own
+ * copy is on screen, which for a returning reader is the same list.
+ */
+function pullWatchlist(email) {
+  watch.sync(email).then(syncWatchlist).catch(() => { /* the mirror stands */ });
 }
 
 /** The chrome that reflects who is reading: a banner, and the button's job. */
@@ -81,7 +91,11 @@ function setSigned(email) {
   // shell.css is what actually takes the banner off screen, because an author
   // `display` rule beats `hidden` and .gate has one.
   reader = email || null;
+  // The watchlist screen says where the list is kept, and that is a different
+  // sentence signed in and signed out.
+  component._reader = reader;
   component._watch = watch.read(reader);
+  pullWatchlist(reader);
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');
@@ -108,9 +122,12 @@ document.getElementById('signout').onclick = async () => {
   // Following a company is a click on any row that shows one.
   component.onWatch = (ticker) => {
     if (!ticker) return;
-    watch.toggle(reader, ticker);
-    syncWatchlist();
+    syncWatchlist(watch.toggleSynced(reader, ticker, syncWatchlist));
   };
+
+  // Emptying the list is the reader's own delete: the account keeps a list
+  // until it is told otherwise, so there has to be a way to tell it.
+  component.onClearWatch = () => syncWatchlist(watch.clearSynced(reader));
 
   const template = await (await fetch('./template.html')).text();
   const email = await whoami();

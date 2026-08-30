@@ -207,7 +207,17 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
   .om-scr h2 { font-size: 23px !important; }
 
   .gate { padding: 10px 14px !important; font-size: 13px !important; }
-  .account { inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px)) !important; }
+  /* On a phone the control moves to the bottom, clear of the demo banner —
+     but `top: 14px` was never released, and a fixed box with BOTH insets set
+     and no height stretches to fill the gap between them. The strip became
+     726px tall and centred its button in the middle of the page, where it sat
+     across whatever card happened to be there. `top: auto` is the whole fix:
+     the box goes back to being the height of its contents. */
+  .account,
+  body[data-signed="yes"] .account {
+    top: auto !important;
+    inset-block-end: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 
 /* A horizontal strip scrolls on its own; the scrollbar is noise on a rail of
@@ -219,3 +229,10 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
    scrolls inside its own card rather than taking the page sideways — the same
    rule as the market table. */
 .om-matrix { scrollbar-width: thin; }
+
+/* The watchlist's counters sit inside the table card, and that card scrolls
+   sideways on a phone with a 620px floor under its rows. The band is not a
+   row of data and must not be dragged out to that width with them. */
+@media (max-width: 860px) {
+  .om-follow-sum { min-width: 0 !important; gap: 16px !important; position: sticky; inset-inline-start: 0; }
+}
