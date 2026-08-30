@@ -245,3 +245,46 @@ class PublishedTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BuildOrderTest(unittest.TestCase):
+    """Where the step sits in `build_all.py`, which is what made it a no-op.
+
+    It was placed straight after Market, on the reasoning that Market is what
+    it adds a field to. But Market REWRITES the company documents, and the
+    five steps after it are what put the filed financials back into them — so
+    on every CI run this reported "0 of 282 — no filed period states a
+    profit" and published nothing, while the same command locally reported
+    110 because the checked-out documents still held the previous run's
+    figures. A builder that reads one document and writes another has to be
+    ordered against the one it READS.
+    """
+
+    def steps(self) -> list[str]:
+        import re
+        source = (REPO / "scripts" / "build_all.py").read_text(encoding="utf-8")
+        return [name for name, _ in
+                re.findall(r'\("([^"]+)", "(\w+\.py)"', source)]
+
+    def test_it_runs_after_everything_that_writes_a_filed_row(self):
+        names = self.steps()
+        self.assertIn("Trailing P/E", names, "the step is not in the build")
+        mine = names.index("Trailing P/E")
+        for writer in ("EGX filed net profit", "Unit-scaled net profit",
+                       "Filing corrections", "EGX PDF statements", "Statement basis"):
+            self.assertLess(
+                names.index(writer), mine,
+                f"'{writer}' writes filed rows and runs AFTER the trailing P/E, "
+                f"so the ratio is computed from documents it has not filled yet")
+
+    def test_it_runs_after_the_directory_it_adds_to_exists(self):
+        names = self.steps()
+        self.assertLess(names.index("Market"), names.index("Trailing P/E"),
+                        "Market publishes companies.json; there is nothing to add to before it")
+
+    def test_it_runs_before_the_manifest_is_fingerprinted(self):
+        # The manifest's per-resource version is what tells an installed app
+        # its cache is stale. A field added after it is fingerprinted ships
+        # to a phone that has been told nothing changed.
+        names = self.steps()
+        self.assertLess(names.index("Trailing P/E"), names.index("Manifest + fixtures"))
