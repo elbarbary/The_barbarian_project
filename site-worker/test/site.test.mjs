@@ -391,6 +391,104 @@ function mockFor(expr) {
   return new Proxy(deep, { get: (t, k) => (k in t ? t[k] : deep) });
 }
 
+/* ── the price on the screen, and how old it is ────────────────────────── */
+
+/** The three documents live() reads, plus whatever the quotes feed answers. */
+function served({ feed, market }) {
+  const docs = {
+    'companies.json': { companies: [
+      { ticker: 'AAAA', name_en: 'A', name_ar: 'أ', sector: 'Banks', market_cap: 100, pe: 8 },
+      { ticker: 'BBBB', name_en: 'B', name_ar: 'ب', sector: 'Banks', market_cap: 200, pe: 9 },
+    ] },
+    'market.json': market,
+    'manifest.json': { generated_at: '2026-08-30T07:19:23Z', data_version: 'v1' },
+  };
+  globalThis.fetch = async (url) => {
+    if (String(url).includes('quotes.thebarbarianproject.com')) {
+      if (!feed) throw new Error('feed down');
+      return new Response(JSON.stringify(feed), { status: 200 });
+    }
+    const name = String(url).split('/data/v1/')[1];
+    return new Response(JSON.stringify(docs[name]), { status: 200 });
+  };
+  return () => { delete globalThis.fetch; };
+}
+
+const RUNNING = {
+  date: '2026-08-30', captured_at: '2026-08-30T07:19:23.175Z', is_close: false,
+  stocks: {
+    AAAA: { close: 10, change_percent: 0.011918, volume: 100 },
+    BBBB: { close: 20, change_percent: -0.025, volume: 200 },
+  },
+};
+
+const FEED = {
+  as_of: '2026-08-30T10:16:12.506Z', delay_seconds: 900, stale: false,
+  session: { open: true }, count: 1,
+  quotes: { AAAA: { c: 11.5, ch: 2.5781, v: 654737, pc: 11.21 } },
+};
+
+test('during a session the price on screen is the live one, in the right units', async () => {
+  // The documents state a move as a FRACTION and the vendor as a PERCENT.
+  // Mixing them multiplies every move on the exchange by a hundred, which is
+  // the failure the merge exists to prevent — so it is checked from both.
+  const stop = served({ feed: FEED, market: RUNNING });
+  try {
+    const d = await data.live();
+    const a = d.companies.find((c) => c.ticker === 'AAAA');
+    assert.equal(a.close, 11.5);
+    assert.ok(Math.abs(a.pct - 2.5781) < 1e-9, `pct was ${a.pct}`);
+    assert.equal(a.volume, 654737);
+    // A company the feed does not carry keeps the published capture, still in
+    // percent: 0.011918 of one is 1.19 per cent.
+    const b = d.companies.find((c) => c.ticker === 'BBBB');
+    assert.equal(b.close, 20);
+    assert.ok(Math.abs(b.pct + 2.5) < 1e-9, `pct was ${b.pct}`);
+    // And nothing struck at build time moves with it: a multiple computed
+    // against the published close must not be shown beside a different price
+    // as though it were the same fact.
+    assert.equal(a.pe, 8);
+  } finally { stop(); }
+});
+
+test('a feed that is down, stale or shut costs freshness and nothing else', async () => {
+  for (const feed of [null,
+                      { ...FEED, stale: true },
+                      { ...FEED, session: { open: false } }]) {
+    const stop = served({ feed, market: RUNNING });
+    try {
+      const d = await data.live();
+      const a = d.companies.find((c) => c.ticker === 'AAAA');
+      assert.equal(a.close, 10, 'fell back to the published capture');
+      assert.ok(Math.abs(a.pct - 1.1918) < 1e-9);
+      assert.equal(d.livePrices, false);
+    } finally { stop(); }
+  }
+});
+
+test('the session line says where the prices came from and when', async () => {
+  const c = new Component({ accent: 'var(--accent)' });
+
+  // Settled closes are the session's last word and need no clock.
+  c.setData({ ...LIVE, isClose: true });
+  assert.equal(c.renderVals().sessionState, c.renderVals().L.sessionClose);
+
+  // A running session on the published capture says how old it is. It used to
+  // say only "prices not final" over a number three hours old.
+  c.setData({ ...LIVE, isClose: false, livePrices: false,
+              capturedAt: '2026-08-30T07:19:23.175Z' });
+  let line = c.renderVals().sessionState;
+  assert.match(line, /10:19/, `Cairo time, not UTC — got "${line}"`);
+
+  // And on the feed it says the delay as well, because a fifteen-minute price
+  // read four minutes ago is not a price from four minutes ago.
+  c.setData({ ...LIVE, isClose: false, livePrices: true,
+              liveAsOf: '2026-08-30T10:16:12.506Z', liveDelaySeconds: 900 });
+  line = c.renderVals().sessionState;
+  assert.match(line, /15 min/);
+  assert.match(line, /13:16/);
+});
+
 /* ── the chrome around the screens ─────────────────────────────────────── */
 
 test('signing in actually takes the demo banner off the page', async () => {
