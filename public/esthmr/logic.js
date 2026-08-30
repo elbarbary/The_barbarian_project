@@ -179,6 +179,8 @@ export class Component extends Base {
       sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
       investorsTitle:'Who is buying', investorsLead:'The exchange\u2019s own split of everything traded, by who traded it.',
       investorsShare:'Share of all value traded', investorsNet:'Bought less sold',
+      investorsWho:'Who traded it', investorsTypeSplit:'Institutions against individuals',
+      investorsOpen:'The full split',
       investorsTable:'By investor type', investorsType:'Type',
       investorsBuying:'a net buyer', investorsSelling:'a net seller',
       investorsEgpM:'EGP millions, bought less sold',
@@ -186,6 +188,7 @@ export class Component extends Base {
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
+      followEmpty:'Nothing followed yet. Tap the star beside any company \u2014 in the market table or on its own page \u2014 and it appears here. A ticker and nothing else is kept, on this device.',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
@@ -359,6 +362,8 @@ export class Component extends Base {
       sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
       investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
       investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
+      investorsWho:'من تداولها', investorsTypeSplit:'المؤسسات مقابل الأفراد',
+      investorsOpen:'التقسيم الكامل',
       investorsTable:'بحسب نوع المستثمر', investorsType:'النوع',
       investorsBuying:'مشترٍ صافٍ', investorsSelling:'بائع صافٍ',
       investorsEgpM:'مليون جنيه، المشتراة ناقص المباعة',
@@ -366,6 +371,7 @@ export class Component extends Base {
       investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
       following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
+      followEmpty:'لا شيء تتابعه بعد. اضغط النجمة بجوار أي شركة \u2014 في جدول السوق أو في صفحتها \u2014 فتظهر هنا. يُحفظ الرمز فقط، على هذا الجهاز.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
@@ -1237,8 +1243,24 @@ export class Component extends Base {
       const pct = (v) => (typeof v === 'number' ? v.toFixed(2) + '%' : '\u2014');
       const partyName = (p) => (ar ? (p.partyAr || p.party) : p.party);
       const widest = Math.max(1, ...d.parties.map((p) => Math.abs(p.net || 0)));
+      // Two stacked bars, which is what the split actually is: one whole,
+      // divided. Three separate progress bars invite reading each against the
+      // full width, and the three shares are parts of the same 100%.
+      const PARTY_TINT = ['var(--accent)', 'var(--iris)', 'var(--up)'];
+      const stack = (rowsIn, name, value) => rowsIn.map((r, i) => ({
+        label: name(r),
+        percent: (value(r) || 0).toFixed(2) + '%',
+        width: (value(r) || 0).toFixed(3) + '%',
+        color: PARTY_TINT[i % PARTY_TINT.length],
+      }));
+
       return {
         basis: d.basis, source: d.source, updatedAt: d.updatedAt,
+        // Egyptians against Arabs against non-Arab foreigners.
+        nationalityBar: stack(d.parties, partyName, (r) => r.percent),
+        // And institutions against individuals, over turnover — see data.js.
+        typeBar: stack(d.byType || [], (t) => (ar ? t.typeAr : t.type), (t) => t.percent),
+        hasTypeBar: (d.byType || []).length > 0,
         // The share-of-value row: a bar apiece, drawn to the same scale.
         parties: d.parties.map((p) => ({
           party: partyName(p),
@@ -1911,7 +1933,9 @@ export class Component extends Base {
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
       indices, movers, watchlist, readNow, feed,
-      followed, noFollowed: followed.length === 0, followedCount: followed.length,
+      followed, noFollowed: followed.length === 0,
+      followedCount: followed.length ? String(followed.length) : '',
+      goInvestors: this.go('investors'),
       investors, noInvestors: investors === null,
       companyWatched: watchedSet.has(st.ticker),
       companyStar: watchedSet.has(st.ticker) ? '\u2605' : '\u2606',

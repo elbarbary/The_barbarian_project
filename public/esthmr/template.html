@@ -77,6 +77,59 @@
 
       </div>
 
+      <!-- Who traded it, beside where it closed. An index says what the
+           market did; this says who did it, and the two belong on the same
+           screen. Two stacked bars because each split is one whole divided —
+           three separate progress bars would invite reading each against the
+           full width. The full table is a click away on Investors. -->
+      <sc-if value="{{ investors }}">
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsWho }}</div>
+            <div onClick="{{ goInvestors }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.investorsOpen }} →</div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:16px">
+            <div>
+              <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--sunk)">
+                <sc-for list="{{ investors.nationalityBar }}" as="s" hint-placeholder-count="3">
+                  <div style="width:{{ s.width }};background:{{ s.color }}"></div>
+                </sc-for>
+              </div>
+              <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:11px">
+                <sc-for list="{{ investors.nationalityBar }}" as="s" hint-placeholder-count="3">
+                  <div style="display:inline-flex;align-items:center;gap:7px;min-width:0">
+                    <span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none"></span>
+                    <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.label }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ s.percent }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <sc-if value="{{ investors.hasTypeBar }}">
+              <div>
+                <div style="display:flex;height:12px;border-radius:999px;overflow:hidden;background:var(--sunk)">
+                  <sc-for list="{{ investors.typeBar }}" as="s" hint-placeholder-count="2">
+                    <div style="width:{{ s.width }};background:{{ s.color }}"></div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:11px">
+                  <sc-for list="{{ investors.typeBar }}" as="s" hint-placeholder-count="2">
+                    <div style="display:inline-flex;align-items:center;gap:7px;min-width:0">
+                      <span style="width:9px;height:9px;border-radius:3px;background:{{ s.color }};flex:none"></span>
+                      <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.label }}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ s.percent }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:14px;text-wrap:pretty">{{ L.investorsBasis }}</div>
+        </section>
+      </sc-if>
+
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 8px">
         <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
           <h1 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:0">{{ L.homeTitle }}</h1>
@@ -90,8 +143,7 @@
       <!-- The reader's own list, which is a ticker and nothing else — no share
            count, no cost basis. Kept on this device and namespaced to whoever
            is signed in, the way the app keeps its own. -->
-      <sc-if value="{{ followedCount }}">
-        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 20px 14px">
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 20px 14px">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.following }}</div>
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ followedCount }}</div>
@@ -108,8 +160,12 @@
               </div>
             </sc-for>
           </div>
+          <!-- Empty is the state most readers see first, and a section that
+               simply is not there reads as a feature that does not exist. -->
+          <sc-if value="{{ noFollowed }}">
+            <div style="margin-top:12px;padding:16px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.followEmpty }}</div>
+          </sc-if>
         </section>
-      </sc-if>
 
       <!-- An index says what the market did on average; this says how widely,
            which is the question an average cannot answer. Published in

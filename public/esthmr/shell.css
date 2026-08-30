@@ -49,6 +49,18 @@ body[data-signed="no"]  #signout { display: none; }
 .account #signout { background: var(--surface); color: var(--t2); border: 1px solid var(--edgeIn); }
 .account #signout:hover { color: var(--ink); border-color: var(--rule); }
 
+/* The account control is FIXED, so it floats over whatever is at the top of
+   the screen — which on Home is the third index card, and the email chip sat
+   across EGX 100's level. Reserve the strip it occupies rather than move it:
+   the corner is where it belongs, and the page can start below it.
+
+   Applied to `main` rather than to a screen, because every screen has
+   something at the top and Home was only the first to collide. The demo
+   banner is sticky and already pushes content down, so the reservation is
+   needed on the signed-in path — where there is no banner — most of all. */
+.om-main { padding-top: 62px !important; }
+body[data-signed="no"] .om-main { padding-top: 26px !important; }
+
 /* Sign-in sheet */
 #esthmr-signin { position: fixed; inset: 0; z-index: 60;
   display: grid; place-items: center; }
@@ -142,6 +154,10 @@ body[data-signed="no"]  #signout { display: none; }
   .om-main {
     margin-inline-start: 0 !important;
     padding: 16px 14px 104px !important;   /* clear of the bar */
+    /* AFTER the shorthand, which would otherwise reset the top and put the
+       account chip back over the first card. The control is fixed at this
+       width too. */
+    padding-top: 58px !important;
   }
 
   /* Card grids stack. Row grids — a mover, a calendar entry — are left alone,
