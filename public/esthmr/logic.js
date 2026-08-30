@@ -132,7 +132,12 @@ export class Component extends Base {
   // opens on a month with no pill lit and 31 empty day cells while 1,467
   // filings sit one click away. renderVals falls back to the newest month the
   // archive actually publishes.
-  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', heatSector:'', rateOpen:'' };
+  // Arabic first. The exchange is Egyptian, the filings it publishes are in
+  // Arabic, and most of the people reading about them read Arabic — an
+  // English default made every one of them change the language before they
+  // could start. main.js remembers whichever a reader chooses, so the default
+  // is only ever the FIRST answer, never an argument.
+  state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', heatSector:'', rateOpen:'' };
 
   // ── copy ──
   copy() {
@@ -303,6 +308,7 @@ export class Component extends Base {
       rateOunce:'EGP {egp} an ounce \u00b7 USD {usd}',
       rateHow:'How this figure is reached',
       rateOunceSeries:'the dollar ounce',
+      rateSeriesTo:'The world series run to {at}.',
       // A line is a claim about the past. Six of these rows have no
       // published series anywhere this pipeline can reach, and the
       // honest thing is a number with no line under it — said once,
@@ -528,6 +534,7 @@ export class Component extends Base {
       rateOunce:'{egp} جنيه للأونصة \u00b7 {usd} دولار',
       rateHow:'كيف يُحسب هذا الرقم',
       rateOunceSeries:'الأونصة بالدولار',
+      rateSeriesTo:'سلاسل العالم تمتد حتى {at}.',
       rateNoSeries:'{n} من هذه الصفوف لها سلسلة يومية منشورة وتُرسم بها. أما البقية \u2014 تداول وأسعار الجنيه الخمسة \u2014 فهي آخر قراءة فقط: لا مصدر تصله هذه المنظومة ينشر تاريخها.',
       heatZoomIn:'اضغط قطاعاً لتملأ به الخريطة.',
       heatZoomDrawn:'{n} في {sector}، من {of} على هذه الخريطة.',
@@ -2378,7 +2385,8 @@ export class Component extends Base {
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
       co, ranges, chart, rateSeriesNote: L.rateNoSeries.replace('{n}',
-        String(rates.filter((r) => ((indexById.get(r.id) || {}).points || r.points || []).length > 1).length)),
+        String(rates.filter((r) => ((indexById.get(r.id) || {}).points || r.points || []).length > 1).length))
+        + (D.seriesTo ? ' ' + L.rateSeriesTo.replace('{at}', this.shortDate(D.seriesTo)) : ''),
       ratesArrowed: rates.map((r) => {
         const flat = !r.pct || r.pct === '\u2014';
         const up = String(r.pct).charAt(0) === '+';

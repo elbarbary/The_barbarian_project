@@ -8,6 +8,59 @@ import * as watch from './watchlist.js';
 const root = document.getElementById('app');
 const component = new Component({ accent: 'var(--accent)' });
 
+/* Whichever language the reader last chose.
+ *
+ * The default is Arabic, which is right for most readers of an Egyptian
+ * exchange and wrong for the rest — and a default that cannot be overruled
+ * for longer than one visit is not a default, it is an argument. Kept here
+ * rather than in logic.js so the screens stay a pure function of their state
+ * and go on running under `node --test` with no storage at all.
+ */
+const LANG = 'esthmr:lang';
+try {
+  const chosen = localStorage.getItem(LANG);
+  if (chosen === 'en' || chosen === 'ar') component.state.lang = chosen;
+} catch { /* a blocked store costs the preference, not the page */ }
+
+/* The chrome around the screens, in the reader's language.
+ *
+ * The banner, the two account buttons and the sign-in sheet live in
+ * index.html and auth.js rather than in the template, so they were written
+ * once, in English, and stayed English. With Arabic the default that put an
+ * English warning about invented figures above an Arabic exchange — and left
+ * the way in written in the language the reader had just not chosen.
+ */
+const CHROME = {
+  en: {
+    lead: 'You are looking at an invented market.',
+    body: 'Every ticker, price and figure below is made up for the demo.'
+      + ' Sign in to read what companies actually filed.',
+    signIn: 'Sign in with email',
+    signOut: 'Sign out',
+  },
+  ar: {
+    lead: 'أنت تنظر إلى سوق مُتخيَّلة.',
+    body: 'كل رمز وسعر ورقم بالأسفل مُختلَق للعرض التجريبي.'
+      + ' سجّل الدخول لتقرأ ما أفصحت عنه الشركات فعلاً.',
+    signIn: 'سجّل الدخول بالبريد',
+    signOut: 'تسجيل الخروج',
+  },
+};
+
+/** Put the page itself into the reader's language, chrome and all. */
+function setChrome(lang) {
+  const words = CHROME[lang] || CHROME.ar;
+  // On <html>, not on the app's own root: it is what a screen reader reads
+  // the page as, and what the browser hyphenates and quotes by.
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('gate-lead').textContent = words.lead;
+  document.getElementById('gate-body').textContent = words.body;
+  document.getElementById('signin').textContent = words.signIn;
+  document.getElementById('signout').textContent = words.signOut;
+}
+setChrome(component.state.lang);
+
 /** Swap the whole dataset — demo for signed-out, the exchange for signed-in. */
 async function load(email) {
   if (!email) {
@@ -39,6 +92,7 @@ async function load(email) {
       filedEvents: cal ? cal.filed : undefined,
       expectedEvents: cal ? cal.expected : undefined,
       rates: ex ? ex.rates : undefined,
+      seriesTo: ex ? ex.seriesTo : undefined,
       macro: ex ? ex.macro : undefined,
       sectorCards: secs || undefined,
       // Home's two headline blocks. Both are assembled here because each needs
@@ -117,7 +171,8 @@ function setSigned(email) {
 }
 
 document.getElementById('signin').onclick = () =>
-  openSignIn(async (email) => { setSigned(email); await load(email); });
+  openSignIn(async (email) => { setSigned(email); await load(email); },
+    component.state.lang);
 
 document.getElementById('signout').onclick = async () => {
   await signOut();
@@ -184,7 +239,13 @@ document.getElementById('signout').onclick = async () => {
   // Opening a company loads its document; the screens redraw when it lands.
   let loading = null;
   const draw = component.onChange;
+  let lastLang = component.state.lang;
   component.onChange = () => {
+    if (component.state.lang !== lastLang) {
+      lastLang = component.state.lang;
+      setChrome(lastLang);
+      try { localStorage.setItem(LANG, lastLang); } catch { /* nothing to keep */ }
+    }
     // The month the screen is SHOWING, not the one in state — state starts
     // empty so the calendar can open on the newest month the archive holds
     // rather than on a date compiled into the page.

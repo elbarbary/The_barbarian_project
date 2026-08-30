@@ -20,9 +20,21 @@ installDom();
 const { Component, DIRECTIVE } = await import('../../public/esthmr/logic.js');
 const data = await import('../../public/esthmr/data.js');
 
+/** A component whose assertions are written in English.
+ *
+ * The site's default is Arabic — right for most readers of an Egyptian
+ * exchange — so a test that checks an English string has to ask for English
+ * rather than inherit it. Tests about Arabic set `lang` themselves.
+ */
+function fresh(lang = 'en') {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = lang;
+  return c;
+}
+
 /** The component as main.js drives it: construct, set a dataset, read a screen. */
 function screen(dataset, lang = 'en') {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = lang;
   c.setData(dataset);
   return c.renderVals();
@@ -209,7 +221,7 @@ const DOC = {
 
 /** The component with a company open, the way main.js leaves it. */
 function company(dataset, doc) {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(dataset);
   c.state.screen = 'company';
   c.state.ticker = doc ? doc.ticker : 'ACGC';
@@ -467,7 +479,7 @@ test('a feed that is down, stale or shut costs freshness and nothing else', asyn
 });
 
 test('the session line says where the prices came from and when', async () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
 
   // Settled closes are the session's last word and need no clock.
   c.setData({ ...LIVE, isClose: true });
@@ -564,7 +576,7 @@ test('every company the map counts is a company the map draws', () => {
   // twenty sectors come out 0.585% wide — narrower than the gap on both
   // sides. Their width went negative, clamped to zero, and those companies
   // disappeared from a map whose own caption said it had drawn them.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(heatData());
   c.state.screen = 'heat';
   const v = c.renderVals();
@@ -581,7 +593,7 @@ test('a company with no market value is named, not drawn at a made-up size', () 
   const data0 = heatData();
   data0.companies[5].cap = null;
   data0.companies[6].cap = 0;
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data0);
   c.state.screen = 'heat';
   const v = c.renderVals();
@@ -594,7 +606,7 @@ test('the index tabs are the exchange\'s membership or they do not exist', () =>
   // "The thirty biggest by market value" is a plausible rule and not the one
   // the exchange uses. A list computed here under a real index's name is an
   // invented fact about a real index, so with no document there is no tab.
-  const bare = new Component({ accent: 'var(--accent)' });
+  const bare = fresh();
   bare.setData(heatData());
   bare.state.screen = 'heat';
   let v = bare.renderVals();
@@ -602,7 +614,7 @@ test('the index tabs are the exchange\'s membership or they do not exist', () =>
   assert.equal(v.noHeatIndex, true);
   assert.equal(v.hasHeatSource, false);
 
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(heatData({ indexMembers: [{ id: 'EGX30', label: 'EGX 30', labelAr: 'إيجي إكس 30',
     count: 3, asOf: '2026-08-30', carried: false, tickers: ['T00', 'T01', 'NOPE'] }] }));
   c.state.screen = 'heat';
@@ -628,7 +640,7 @@ test('zooming a sector changes the box, never the arithmetic', () => {
   // come back at a readable size — and they have to come back at the same
   // RELATIVE size, or the zoom would be redrawing the market rather than
   // magnifying it.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(heatData());
   c.state.screen = 'heat';
   const whole = c.renderVals();
@@ -690,7 +702,7 @@ test('zooming a sector changes the box, never the arithmetic', () => {
 });
 
 test('changing the index tab does not leave the map zoomed into nothing', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(heatData({ indexMembers: [{ id: 'EGX30', label: 'EGX 30', labelAr: 'إيجي إكس 30',
     count: 2, asOf: '2026-08-30', carried: false, tickers: ['T12', 'T13'] }] }));
   c.state.screen = 'heat';
@@ -718,6 +730,35 @@ test('main.js never hands the component two values under one name', async () => 
   }
 });
 
+test('the site opens in Arabic, and remembers being told otherwise', async () => {
+  // The exchange is Egyptian and its filings are in Arabic, so an English
+  // default made most readers change the language before they could start.
+  const c = new Component({ accent: 'var(--accent)' });
+  assert.equal(c.state.lang, 'ar');
+  c.setData(LIVE);
+  assert.equal(c.renderVals().dir, 'rtl');
+  assert.equal(c.renderVals().L.marketTitle, screen(LIVE, 'ar').L.marketTitle);
+
+  // A default that cannot be overruled for longer than one visit is not a
+  // default, it is an argument — so main.js restores the reader's own choice
+  // before the first draw, and writes it when they change it.
+  const { readFile } = await import('node:fs/promises');
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  assert.match(main, /localStorage\.getItem\(LANG\)/, 'the choice is never restored');
+  assert.match(main, /localStorage\.setItem\(LANG, lastLang\)/, 'the choice is never kept');
+  // Restored onto the component BEFORE it is mounted, or the first paint is
+  // in the wrong language and then jumps.
+  assert.ok(main.indexOf('component.state.lang = chosen') < main.indexOf('mount(template'),
+    'the language is restored after the first draw');
+  // And both halves are wrapped: a blocked store costs the preference, never
+  // the page.
+  for (const call of ['getItem(LANG)', 'setItem(LANG, lastLang)']) {
+    const at = main.indexOf(call);
+    assert.ok(main.lastIndexOf('try {', at) > main.lastIndexOf('} catch', at),
+      `${call} is not inside a try`);
+  }
+});
+
 /* ── the chrome around the screens ─────────────────────────────────────── */
 
 test('signing in actually takes the demo banner off the page', async () => {
@@ -735,6 +776,27 @@ test('signing in actually takes the demo banner off the page', async () => {
   // that broke was the one nobody thought to add: `.gate` grew a `display`
   // rule long after the attribute was first set on it.
   const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+
+  /* The same check for the sign-in sheet, which is built in auth.js and was
+     never scanned — so it fell into the identical trap and nobody saw it:
+     `.si-step` sets `display: grid`, so `f.hidden = true` flipped an attribute
+     and moved nothing, and BOTH steps of the sheet were on screen at once,
+     asking for an email and for a six-digit code that had not been sent yet.
+     Any class auth.js hides by attribute needs a rule behind it. */
+  const auth = await readFile(new URL('../../public/esthmr/auth.js', import.meta.url), 'utf8');
+  const byClass = new Set();
+  for (const [, cls] of auth.matchAll(/querySelector(?:All)?\('\.([\w-]+)'\)/g)) byClass.add(cls);
+  for (const cls of byClass) {
+    const styled = new RegExp(`\\.${cls}\\s*\\{[^}]*display\\s*:`).test(css);
+    if (!styled) continue;
+    // It only matters for a class the code actually hides.
+    const hides = new RegExp(`\\.${cls}[\\s\\S]{0,400}?\\.hidden\\s*=`).test(auth)
+      || new RegExp(`hidden`).test(auth);
+    if (!hides) continue;
+    assert.match(css, new RegExp(`\\.${cls}\\[hidden\\]\\s*\\{[^}]*display\\s*:\\s*none`),
+      `.${cls} has an author display rule, so "hidden" cannot hide it`);
+  }
+
   const ids = new Set([...main.matchAll(/getElementById\('([\w-]+)'\)\.hidden\s*=/g)].map((m) => m[1]));
   for (const [, id] of main.matchAll(/const (\w+) = document\.getElementById\('([\w-]+)'\)/g)) { /* below */ }
   // `const bar = getElementById('gate'); bar.hidden = …` — resolve the alias.
@@ -903,7 +965,7 @@ test('a return is a percentage on the site because it is one in the app', () => 
   // roe and roa are published with unit "ratio", so they fell through to the
   // multiple and 454 figures read "0.29×" where the app reads "29.1%" — on a
   // card whose own body calls it "profit as a share of shareholders' equity".
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = 'en';
   const L = c.copy();
   const cards = c.ratioCards({ sector: 'Finance', metrics: [
@@ -1187,7 +1249,7 @@ test('the month pills are the months the archive holds', async () => {
 test('an open month shows that month, and says how much of it', async () => {
   const items = await fromDisk(() => data.filedMonth('2026-07'));
   assert.ok(items.length > 1000, `${items.length} filings`);
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, filedArchive: items, filedArchiveMonth: '2026-07' });
   c.state.month = '2026-07';
   const v = c.renderVals();
@@ -1419,7 +1481,7 @@ test('a line is compared only against periods of the same length', async () => {
   const co = JSON.parse(await readFile(
     new URL('../../public/data/v1/companies/COMI.json', import.meta.url), 'utf8'));
   const fins = [...(co.financials.quarterly || []), ...(co.financials.annual || [])];
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, fins });
   c.state.screen = 'company';
   const v = c.renderVals();
@@ -1443,7 +1505,7 @@ test('a line is compared only against periods of the same length', async () => {
 test('a company with one period of each length has nothing to compare', () => {
   const fins = [{ period: 'FY 2025', period_end: '2025-12-31', net_income: 5 },
                 { period: 'H1 2026', period_end: '2026-06-30', net_income: 3 }];
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, fins });
   c.state.screen = 'company';
   const v = c.renderVals();
@@ -1471,7 +1533,7 @@ test('an SVG keeps the attributes that are camelCase in SVG', async () => {
 
   // and the charts the site actually draws carry one
   const { Component } = await import('../../public/esthmr/logic.js');
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   const chart = c.buildChart([{ date: '2026-01-01', close: 1 }, { date: '2026-01-02', close: 2 }]);
   const found = chart.querySelector ? chart.querySelector('svg') : null;
   const el = (found || chart);
@@ -1503,7 +1565,7 @@ test('every binding in the template resolves to something', async () => {
   const loops = new Set([...tpl.matchAll(/<sc-for\s+list="\{\{\s*[^}]+?\s*\}\}"\s+as="(\w+)"/g)]
     .map((m) => m[1]));
 
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   const provided = new Set();
   const labels = new Set();
@@ -1564,7 +1626,7 @@ test('every field a loop row is asked for exists on the row', async () => {
   assert.ok(scopes.length > 20, 'the template scanner found no loops');
 
   // Every screen, so a list that only one of them fills is still seen.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   const rowsFor = new Map();               // scope -> sample rows seen anywhere
   const collect = (scope, container) => {
@@ -1675,7 +1737,7 @@ test('a filed period prints the dates it covers', () => {
 /* ── the header's move in pounds ───────────────────────────────────────── */
 
 test('a company header shows the move in pounds, not an em dash', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, companies: [
     { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 12.4, pct: -3.125, cap: 100 },
   ] });
@@ -1715,7 +1777,7 @@ test('an Arabic reader gets Arabic sector names, and English keys keep filtering
   // the filter it drives would match nothing.
   const chip = screen(set, 'ar').sectorChips.find((s) => s.label === 'الصناعات التحويلية');
   assert.ok(chip, 'the Arabic screen has no Arabic sector chip');
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = 'ar';
   c.setData(set);
   c.renderVals().sectorChips.find((s) => s.label === 'الصناعات التحويلية').go();
@@ -1730,7 +1792,7 @@ test('the company rail groups on the filed sector, not the translated one', () =
     { ticker: 'BBBB', name: { en: 'B', ar: 'ب' }, sector: 'Process Industries',
       sectorAr: 'الصناعات التحويلية', close: 20, pct: 1, cap: 200, pe: 8 },
   ] };
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = 'ar';
   c.setData(set);
   c.state.screen = 'company';
@@ -1745,7 +1807,7 @@ test('the company rail groups on the filed sector, not the translated one', () =
 /* ── the demo names nobody ─────────────────────────────────────────────── */
 
 test('the demo screens name no real company and no real outlet', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   for (const lang of ['en', 'ar']) {
     c.state.lang = lang;
@@ -1771,7 +1833,7 @@ test('the calendar months are the archive\'s, and the design\'s only in the demo
   // four months the archive may not hold, each drawing an empty grid.
   const v = screen({ ...LIVE, filedMonths: undefined });
   assert.deepEqual(v.months, []);
-  const d = new Component({ accent: 'var(--accent)' });
+  const d = fresh();
   d.setData(data.demo());
   assert.ok(d.renderVals().months.length > 0, 'the demo lost its month pills');
 });
@@ -1781,7 +1843,7 @@ test('the two P/Es on a company screen each say what they are', () => {
   // card divides the close at that period's end, because it is the last point
   // of a series. For CIB they are 8.6 and 4.84×, and with no date on either
   // the pair reads as one of them being wrong.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, review: { sector: 'Finance', metrics: [
     { key: 'pe', value: 4.84, unit: 'ratio', points: 5, direction: 'flat',
       series: [{ p: 'FY 2023', v: 5.1 }, { p: 'FY 2024', v: 4.84 }] },
@@ -1804,7 +1866,7 @@ test('the two P/Es on a company screen each say what they are', () => {
 test('the demo cites no filing it does not have', () => {
   // An invented filing id pointed at egx.com.eg is a citation to a document
   // that is not there.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   for (const s of ['company', 'today', 'calendar']) {
     c.state.screen = s;
@@ -1813,7 +1875,7 @@ test('the demo cites no filing it does not have', () => {
     assert.ok(!/"egx-\d+"/.test(printed), `the demo ${s} screen cites a real filing id`);
   }
   // A signed-in screen still cites it.
-  const live = new Component({ accent: 'var(--accent)' });
+  const live = fresh();
   live.setData({ ...LIVE, fins: [{ period: 'FY 2024', period_end: '2024-12-31', net_income: 1 }] });
   assert.equal(live.renderVals().fins[0].source, 'https://www.egx.com.eg');
 });
@@ -1963,7 +2025,7 @@ test('Arabic bidi marks reach the reader and never the stylesheet', async () => 
     loops.set(m[2], m[1]);
   }
 
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = 'ar';
   c.setData(data.demo());
   const offenders = [];
@@ -2001,7 +2063,7 @@ test('Arabic bidi marks reach the reader and never the stylesheet', async () => 
   assert.equal(c.text('43%'), '\u206643%\u2069');
   assert.equal(c.text('var(--accent)'), 'var(--accent)');
   assert.equal(c.text(null), null);
-  const en = new Component({ accent: 'var(--accent)' });
+  const en = fresh();
   assert.equal(en.text('43%'), '43%');
 
   // And dc.js applies it to text nodes only — the attribute branch takes the
@@ -2019,7 +2081,7 @@ test('a company that filed nine times does not get a card twice the height', () 
   const many = { ...CROSS, items: [{ ...CROSS.items[0], strands: Array.from(
     { length: 9 }, (_, i) => ({ kind: 'filing', date: '2026-08-26',
       title: `Filing ${i + 1}`, titleAr: `إفصاح ${i + 1}`, link: `https://www.egx.com.eg/${i}` })) }] };
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, crossings: many });
   let x = c.renderVals().crossings[0];
   assert.equal(x.strands.length, 4, 'the thread list is not capped');
@@ -2039,7 +2101,7 @@ test('a company that filed nine times does not get a card twice the height', () 
   assert.equal(x.strands[3].tail, 'var(--thread, var(--rule))');
 
   // A crossing under the cap is never asked to expand.
-  const few = new Component({ accent: 'var(--accent)' });
+  const few = fresh();
   few.setData({ ...LIVE, crossings: CROSS });
   assert.equal(few.renderVals().crossings[0].hasMore, false);
 });
@@ -2065,7 +2127,7 @@ test('a company screen shows both P/Es, each saying what it is over', () => {
   // 24.4 on FY 2024 and 5.7 on its last twelve months — the same company, the
   // same price, a year of difference in the earnings. Undated, the pair reads
   // as one figure disagreeing with itself.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c.state.screen = 'company';
   c.state.ticker = 'AAAA';
@@ -2088,7 +2150,7 @@ test('a company screen shows both P/Es, each saying what it is over', () => {
 });
 
 test('a company the pipeline refused a trailing P/E shows a dash, not the annual', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c.state.screen = 'company';
   c.state.ticker = 'AAAA';
@@ -2135,7 +2197,7 @@ test('the header shows the session\'s volume, and says which is the average', ()
   // This tile printed the THIRTY-DAY MEAN directly beside the close and the
   // session date, where it reads as that session's volume — COMI showed
   // 3,192,564 against an actual 5,780,737 already mapped onto the row.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c.state.screen = 'company';
   c.state.ticker = 'AAAA';
@@ -2152,7 +2214,7 @@ test('free float is a fact the document carries, not one the copy denies', () =>
   // The ratios note told every reader on 258 pages that free float "is not
   // published anywhere", while profile.free_float sat in the document the
   // page had already loaded for its market cap.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c.state.screen = 'company';
   c.state.ticker = 'AAAA';
@@ -2185,7 +2247,7 @@ test('Home\'s list is derived and says what it is, not a watchlist nobody chose'
 test('a commodity is priced in dollars and an index in points', () => {
   const world = [{ label: 'Oil', kind: 'commodity', level: 83.4, change_percent: -0.16 },
                  { label: 'S&P 500', kind: 'index', level: 7711.76, change_percent: 0.1 }];
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, rates: world.map((x) => ({
     label: x.label, unit: x.kind === 'commodity' ? 'USD' : 'points', value: String(x.level), pct: '' })) });
   const by = Object.fromEntries(c.renderVals().ratesArrowed.map((r) => [r.label, r]));
@@ -2196,7 +2258,7 @@ test('a commodity is priced in dollars and an index in points', () => {
 test('the borrowings panel is absent where the filing states no prior column', () => {
   // 49 of the 120 companies with a borrowings block drew the heading
   // "Movement since —", a 27px "—", a sentence "—" and an empty basis line.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   const block = { period: 'H1 2026', as_of: '2026-06-30', borrowings: 100, short_term: 60,
                   long_term: 40, cash: 10, net_debt: 90 };
   c.setData(LIVE);
@@ -2232,7 +2294,7 @@ test('an unstated figure on the statements table recedes', () => {
 });
 
 test('the median company is not described as below itself', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   const cards = c.ratioCards({ sector: 'Finance', metrics: [
     { key: 'pe', value: 10.41, unit: 'ratio', peer_median: 10.41, peer: 'below', points: 1, series: [] },
     { key: 'pb', value: 2.0, unit: 'ratio', peer_median: 3.0, peer: 'below', points: 1, series: [] },
@@ -2250,7 +2312,7 @@ test('the sort caret points the way the column is actually sorted', () => {
     { ticker: 'ZZZZ', name: { en: 'Z', ar: 'ز' }, sector: 'Finance', close: 1, pct: 1, cap: 100 },
     { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 9, pct: 1, cap: 900 },
   ] };
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(set);
   c.state.sort = 'ticker'; c.state.dir = -1;
   let v = c.renderVals();
@@ -2266,7 +2328,7 @@ test('a results-due expectation reaches the screen, labelled as an estimate', ()
   // 200 companies publish one and no screen showed it: streaks and firsts are
   // usually empty and `quiet` is null for almost every ticker, so the block
   // rendered one card or none.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   const cards = c.signalCards({ streaks: [], firsts: [], quiet: null, resultsDue: [
     { label: '9M', expected: '2026-11-14', window_start: '2026-10-19',
       window_end: '2026-11-16', observations: 12 },
@@ -2345,7 +2407,7 @@ test('main.js hands the company screen every session field it reads', async () =
   const copied = new Set([...literal.matchAll(/(\w+)\s*:\s*row\.\w+/g)].map((m) => m[1]));
   copied.add('ticker');
 
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   const fromDoc = new Set(['series', 'fins', 'debt', 'review', 'profile', 'sector',
                            'name', 'brief', 'briefAr', 'briefSource']);
@@ -2404,7 +2466,7 @@ test('an open-filing link names where it actually goes', () => {
 });
 
 test('a signal card that names a filing can open it', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   const cards = c.signalCards({
     streaks: [{ kind: 'back_to_profit', period: 'Q3 2025', run: 4, since: '2024-01-01',
                 filed: '2026-01-13', id: 'egx-282099',
@@ -2436,7 +2498,7 @@ test('a share that did not move gets no arrow', () => {
   assert.equal(rows.DOWN.arrow, '↘');
 
   // and the same on the company header
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(set);
   c.state.screen = 'company';
   c.state.ticker = 'FLAT';
@@ -2468,7 +2530,7 @@ test('an Arabic reader gets the sector name in Arabic on the median line', () =>
     { key: 'pe', value: 8.4, unit: 'ratio', peer_median: 10.41, peer: 'below',
       points: 1, series: [] },
   ] } };
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.state.lang = 'ar';
   c.setData(set);
   c.state.screen = 'company';
@@ -2484,7 +2546,7 @@ test('the calendar opens on a month the archive holds, not on a date in the sour
   // September: the index rolls, the screen keeps opening on August, and once
   // 2026-08 leaves the twelve-month window it opens on a month with no pill
   // lit and 31 empty cells while 1,467 filings sit one click away.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   assert.equal(c.state.month, '', 'the default month is hardcoded again');
   c.setData({ ...LIVE, filedMonths: [
     { id: '2026-09', count: 12 }, { id: '2026-08', count: 1467 },
@@ -2504,7 +2566,7 @@ test('the Research rail entry is offered only when something is published', () =
   assert.equal(live.studies.length, 0);
   assert.ok(!live.nav.some((n) => /Research/.test(n.label)),
     'the rail offers a destination that cannot answer');
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   assert.ok(c.renderVals().nav.some((n) => /Research/.test(n.label)),
     'the demo lost its Research entry');
@@ -2637,7 +2699,7 @@ test('the watchlist has a screen of its own, and Home no longer keeps one', asyn
   // two places and drift apart.
   assert.equal(template.split('list="{{ followed }}"').length - 1, 1);
 
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c.state.screen = 'watchlist';
   assert.equal(c.renderVals().isWatchlist, true);
@@ -2658,7 +2720,7 @@ test('there is a way to follow a company, on the two screens that say so', async
   assert.ok(template.includes('{{ r.star }}') && template.includes('{{ companyStar }}'));
 
   // And pressing it reaches the handler main.js installs.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   const asked = [];
   c.onWatch = (t) => asked.push(t);
@@ -2670,7 +2732,7 @@ test('there is a way to follow a company, on the two screens that say so', async
   // It follows the company the CARD is showing, not the ticker in the state.
   // On the demo every company opens the one worked example, so a control bound
   // to the state would put DEMO15 on the list from a card headed DEMO01.
-  const d = new Component({ accent: 'var(--accent)' });
+  const d = fresh();
   d.setData(data.demo());
   d.state.ticker = 'DEMO15';
   const shown = d.renderVals();
@@ -2679,7 +2741,7 @@ test('there is a way to follow a company, on the two screens that say so', async
   assert.equal(asked[asked.length - 1], shown.co.ticker);
 
   // And with no company chosen there is nothing to follow, so no control.
-  const none = new Component({ accent: 'var(--accent)' });
+  const none = fresh();
   none.setData(LIVE);
   assert.equal(none.renderVals().canFollowCompany, false);
   assert.equal(none.renderVals().co.ticker, '\u2014');
@@ -2690,7 +2752,7 @@ test('the demo answers a click with the company that was clicked', () => {
   // drew a card headed DEMO01, at DEMO01's close, with DEMO01's sector. On a
   // screen whose whole job is showing what the real one looks like, that is
   // the wrong company under the reader's own click.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(data.demo());
   const wanted = c.renderVals().rows[3];
   c.state.screen = 'company';
@@ -2701,9 +2763,9 @@ test('the demo answers a click with the company that was clicked', () => {
   assert.equal(v.co.close, wanted.close);
   assert.equal(v.co.pct, wanted.pct);
   // And with nothing opened it still has a shape to show.
-  const fresh = new Component({ accent: 'var(--accent)' });
-  fresh.setData(data.demo());
-  assert.ok(fresh.renderVals().co.ticker);
+  const unopened = fresh();
+  unopened.setData(data.demo());
+  assert.ok(unopened.renderVals().co.ticker);
 });
 
 test('the watchlist screen is there before anything is in it', () => {
@@ -2722,7 +2784,7 @@ test('the list says where it is actually kept, which depends on who is reading',
   // Signed in it follows the account to another browser; signed out there is
   // no account to keep it against. Telling a reader the wrong one of those is
   // telling them their list is somewhere it is not.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   assert.equal(c.renderVals().followKept, c.renderVals().L.followKeptDevice);
   c._reader = 'me@example.com';
@@ -2734,7 +2796,7 @@ test('the followed counters count prices, not arrows', () => {
   // A row draws no arrow both for a share that closed exactly flat and for one
   // with no price at all, and those are not the same fact. Counted off the
   // rows, an unpriced company would be reported as unchanged.
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, companies: [
     ...LIVE.companies,
     { ticker: 'CCCC', name: { en: 'C', ar: 'ج' }, sector: 'Banks', close: 5, pct: 0, cap: 30, pe: 5 },
@@ -2752,7 +2814,7 @@ test('the followed counters count prices, not arrows', () => {
 });
 
 test('a followed company that leaves the exchange drops out rather than showing dashes', () => {
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData(LIVE);
   c._watch = ['AAAA', 'GONE'];
   const v = c.renderVals();
@@ -2770,7 +2832,7 @@ test('the disclosures screen filters by day and by company', () => {
     { date: '2026-08-24', ticker: 'BBBB', what: 'B board decisions', section: 'Board' },
     { date: '2026-08-25', ticker: 'AAAA', what: 'A treasury stock', section: 'Treasury' },
   ];
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, filedMonths: [{ id: '2026-08', count: 3 }],
               filedArchive: rows, filedArchiveMonth: '2026-08' });
   c.state.screen = 'calendar';
@@ -2811,7 +2873,7 @@ test('the crossings have a screen of their own and Today has the news', () => {
   // Investors is the fourth entry.
   assert.equal(v.nav[3].label, 'Investors');
   assert.equal(v.isCrossings, false);
-  const c = new Component({ accent: 'var(--accent)' });
+  const c = fresh();
   c.setData({ ...LIVE, crossings: CROSS });
   c.state.screen = 'crossings';
   assert.equal(c.renderVals().isCrossings, true);

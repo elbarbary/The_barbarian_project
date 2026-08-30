@@ -804,6 +804,15 @@ export async function exchange() {
   ]);
   const series = new Map(((h && h.series) || []).map((x) => [x.id,
     (x.sessions || []).map((row) => row.close).filter((v) => typeof v === 'number')]));
+  // The newest session any of these series reaches. It is worth carrying
+  // because the source refuses the build runner's address — the fetch is a
+  // local errand, and a series that quietly stops advancing looks exactly
+  // like one that is up to date. A line with a date on it does not.
+  const seriesTo = ((h && h.series) || [])
+    .map((x) => ((x.sessions || [])[(x.sessions || []).length - 1] || {}).date)
+    .filter(Boolean)
+    .sort()
+    .pop() || null;
   const level = (x) => ({
     // Carried so the Exchange screen can join an index row to the series
     // market-history.json already keeps for it. The document has always had
@@ -911,7 +920,7 @@ export async function exchange() {
   // `indexLevels` is the raw published block, kept so Home can build its cards
   // from the same document this screen already fetched rather than asking for
   // it twice.
-  return { rates, macro, indexLevels: r.indices || [] };
+  return { rates, macro, indexLevels: r.indices || [], seriesTo };
 }
 
 /** Sectors: how each one moved, and the vetted read beneath it. */

@@ -77,6 +77,13 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
   font: 600 21px/1.15 "Bricolage Grotesque", system-ui, sans-serif; }
 .si-lead { margin: 0 0 18px; color: #5C554F; font-size: 13.6px; }
 .si-step { display: grid; gap: 8px; }
+/* The same trap the demo banner fell into, in the other file nobody scanned.
+   `hidden` is only the user-agent rule `[hidden] { display: none }`, and ANY
+   author rule outranks it — so `f.hidden = true` on a `.si-step` flipped the
+   attribute and moved nothing. Both steps of the sign-in sheet were on screen
+   at once, asking for an email and a six-digit code that had not been sent
+   yet, for as long as the sheet has existed. */
+.si-step[hidden] { display: none; }
 .si-step label { font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: #6E6761; font-family: "IBM Plex Mono", monospace; }
 .si-step input {
@@ -94,6 +101,7 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 .si-back { margin-top: 2px; background: none; border: 0; cursor: pointer;
   color: #6E6761; font-size: 12.5px; text-decoration: underline; }
 .si-error { margin: 12px 0 0; color: #A3402F; font-size: 13px; }
+.si-error[hidden] { display: none; }
 .si-close { position: absolute; top: 10px; inset-inline-end: 12px;
   background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer;
   color: #6E6761; }

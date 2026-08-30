@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- lang and dir follow the reader's choice; main.js sets both before the
+     first paint. Arabic is the default. -->
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +20,7 @@
 <!-- Says plainly what is on screen, because an invented market that does not
      announce itself is a fabricated financial figure. -->
 <div id="gate" class="gate">
-  <p><strong>You are looking at an invented market.</strong>
-     Every ticker, price and figure below is made up for the demo.
-     Sign in to read what companies actually filed.</p>
+  <p><strong id="gate-lead"></strong> <span id="gate-body"></span></p>
 </div>
 
 <!-- Signing in and who is signed in are the same corner. The button lived in
@@ -29,8 +29,8 @@
      and the one that mattered moved when the banner went away. -->
 <div class="account">
   <span id="who" hidden></span>
-  <button id="signin" class="gate-cta">Sign in with email</button>
-  <button id="signout" hidden>Sign out</button>
+  <button id="signin" class="gate-cta"></button>
+  <button id="signout" hidden></button>
 </div>
 
 <div id="app"></div>
