@@ -54,15 +54,27 @@ function kv() {
 const ASSET = new Set(['/index.html', '/favicon.svg', '/esthmr/index.html',
   '/esthmr/logic.js', '/esthmr/template.html', '/data/v1/companies.json']);
 
+/* The real asset server does not simply serve a file at whatever path is
+   asked for. It canonicalises: /esthmr/index.html answers 307 to /esthmr/,
+   and only the directory form serves the page. The stub has to do the same,
+   or the test proves the mapping against a server that does not exist. */
+function canonical(path) {
+  if (path.endsWith('/index.html')) return { redirect: path.slice(0, -'index.html'.length) };
+  return { path: path.replace(/\/$/, '/index.html') };
+}
+
 function env(overrides) {
   return {
     SESSION_SECRET: SECRET,
     ESTHMR_AUTH: kv(),
     ASSETS: {
       async fetch(request) {
-        const path = new URL(request.url).pathname.replace(/\/$/, '/index.html');
-        return ASSET.has(path)
-          ? new Response(`served ${path}`, { status: 200 })
+        const asked = canonical(new URL(request.url).pathname);
+        if (asked.redirect) {
+          return new Response(null, { status: 307, headers: { location: asked.redirect } });
+        }
+        return ASSET.has(asked.path)
+          ? new Response(`served ${asked.path}`, { status: 200 })
           : new Response('not found', { status: 404 });
       },
     },
@@ -160,6 +172,19 @@ test('the two absolute paths the client writes are not prefixed', async () => {
   assert.deepEqual(await me.json(), { email: 'reader@example.com' });
 });
 
+test('nothing on esthmr.com sends the reader to the prefix it hides', async () => {
+  // The asset server canonicalises on its own — /index.html answers 307 to /
+  // — and every one of those Locations names /esthmr/. Passed through, the
+  // front page of this host redirected the reader to esthmr.com/esthmr/,
+  // which is the one address the mapping exists to avoid.
+  const e = env();
+  const answer = await call(e, 'https://esthmr.com/index.html');
+  assert.equal(answer.status, 307);
+  assert.equal(answer.headers.get('location'), '/');
+  // And the front page itself is served, not redirected.
+  assert.equal(await body(await call(e, 'https://esthmr.com/')), 'served /esthmr/index.html');
+});
+
 test('www is a second name for the same site, and says so once', async () => {
   const e = env();
   const answer = await call(e, 'https://www.esthmr.com/sectors');
@@ -171,8 +196,14 @@ test('the site\'s own host is untouched by any of it', async () => {
   const e = env();
   assert.equal(await body(await call(e, 'https://thebarbarianproject.com/')), 'served /index.html');
   // Not the product's front page: that is still at /esthmr/.
-  assert.equal(await body(await call(e, 'https://thebarbarianproject.com/esthmr/index.html')),
+  assert.equal(await body(await call(e, 'https://thebarbarianproject.com/esthmr/')),
     'served /esthmr/index.html');
+  // And the asset server's own canonicalising is passed through as it is,
+  // prefix and all — on this host the prefix is the address, not a detail to
+  // be hidden.
+  const canonicalised = await call(e, 'https://thebarbarianproject.com/esthmr/index.html');
+  assert.equal(canonicalised.status, 307);
+  assert.equal(canonicalised.headers.get('location'), '/esthmr/');
 });
 
 /* ── the browser's half of it ──────────────────────────────────────────── */
