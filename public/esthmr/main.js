@@ -3,6 +3,7 @@ import { mount } from './dc.js';
 import { Component } from './logic.js';
 import * as data from './data.js';
 import { whoami, openSignIn, signOut } from './auth.js';
+import * as watch from './watchlist.js';
 
 const root = document.getElementById('app');
 const component = new Component({ accent: 'var(--accent)' });
@@ -18,7 +19,7 @@ async function load(email) {
     component.setData(base);
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, prov, cal, ex, secs, att, months, meanings, cross] = await Promise.all([
+    const [feed, prov, cal, ex, secs, att, months, meanings, cross, inv] = await Promise.all([
       data.news().catch(() => null),
       data.newsProvenance().catch(() => null),
       data.calendar().catch(() => null),
@@ -28,6 +29,7 @@ async function load(email) {
       data.filedMonths().catch(() => null),
       data.disclosureMeanings().catch(() => null),
       data.connections().catch(() => null),
+      data.investors().catch(() => null),
     ]);
     component.setData({
       ...base,
@@ -48,6 +50,7 @@ async function load(email) {
       filedMonths: months || undefined,
       disclosureMeanings: meanings || undefined,
       crossings: cross || undefined,
+      investors: inv || undefined,
     });
   } catch (error) {
     // A session that expired mid-visit drops back to the demo rather than an
@@ -58,17 +61,38 @@ async function load(email) {
   }
 }
 
+/** Who is reading, for the watchlist's sake. Signed out has its own list. */
+let reader = null;
+
+/** Put the reader's own list on the component and redraw.
+ *
+ * Kept on `_watch` rather than in the dataset because it is not published
+ * data: it is this device's, and the screens read it exactly the way they read
+ * a document. The app keeps its own the same way (user_repository.dart).
+ */
+function syncWatchlist() {
+  component._watch = watch.read(reader);
+  if (component.onChange) component.onChange();
+}
+
 /** The chrome that reflects who is reading: a banner, and the button's job. */
 function setSigned(email) {
   // The attribute carries the meaning for anything reading the page aloud;
   // shell.css is what actually takes the banner off screen, because an author
   // `display` rule beats `hidden` and .gate has one.
+  reader = email || null;
+  component._watch = watch.read(reader);
   document.body.dataset.signed = email ? 'yes' : 'no';
   const bar = document.getElementById('gate');
   const who = document.getElementById('who');
   bar.hidden = Boolean(email);
   who.textContent = email || '';
   who.hidden = !email;
+  // Both buttons live in the same corner and shell.css shows whichever the
+  // reader needs; `hidden` alone would lose to the author rule, as it did on
+  // the banner.
+  document.getElementById('signin').hidden = Boolean(email);
+  document.getElementById('signout').hidden = !email;
 }
 
 document.getElementById('signin').onclick = () =>
@@ -81,6 +105,13 @@ document.getElementById('signout').onclick = async () => {
 };
 
 (async () => {
+  // Following a company is a click on any row that shows one.
+  component.onWatch = (ticker) => {
+    if (!ticker) return;
+    watch.toggle(reader, ticker);
+    syncWatchlist();
+  };
+
   const template = await (await fetch('./template.html')).text();
   const email = await whoami();
   setSigned(email);

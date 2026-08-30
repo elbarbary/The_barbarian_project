@@ -52,25 +52,20 @@
   <!-- ══ HOME ══ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:6px 8px 0">
-        <div>
-          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.homeTitle }}</h1>
-          <div style="font-size:13.5px;color:var(--t2);margin-top:9px">{{ L.closeOf }} {{ marketDate }}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
-          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ L.closeNote }}
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+      <!-- The three index levels first and biggest. They were under a 50px
+           page title and a session note, at 21-32px — the smallest headline
+           figures on a screen whose whole subject is where the market closed,
+           and the first thing anybody opens this for. Title and note now sit
+           beside them rather than above. -->
+      <div class="om-idx" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:4px">
         <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
           <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ ix.label }}</div>
               <div style="width:26px;height:26px;border-radius:9px;background:{{ ix.tint }};color:{{ ix.color }};display:flex;align-items:center;justify-content:center;font-size:13px">{{ ix.arrow }}</div>
             </div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(21px,2.5vw,32px);font-weight:500;letter-spacing:-.025em;margin-top:12px">{{ ix.value }}</div>
-            <div style="display:flex;gap:10px;align-items:baseline;margin-top:5px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ ix.color }}">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:clamp(30px,3.6vw,46px);font-weight:600;letter-spacing:-.03em;margin-top:12px;line-height:1.05">{{ ix.value }}</div>
+            <div style="display:flex;gap:10px;align-items:baseline;margin-top:7px;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:500;color:{{ ix.color }}">
               <span>{{ ix.chg }}</span><span>{{ ix.pct }}</span>
             </div>
             <div style="margin-top:14px">{{ ix.spark }}</div>
@@ -81,6 +76,40 @@
 </sc-if>
 
       </div>
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 8px">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:0">{{ L.homeTitle }}</h1>
+          <div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ L.closeNote }}
+        </div>
+      </div>
+
+      <!-- The reader's own list, which is a ticker and nothing else — no share
+           count, no cost basis. Kept on this device and namespaced to whoever
+           is signed in, the way the app keeps its own. -->
+      <sc-if value="{{ followedCount }}">
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 20px 14px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.following }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ followedCount }}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:8px;margin-top:12px">
+            <sc-for list="{{ followed }}" as="w" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:14px;background:var(--sunk);min-width:0">
+                <div onClick="{{ w.follow }}" style="cursor:pointer;font-size:13px;color:{{ w.starColor }};flex:none" style-hover="color:var(--accent)">{{ w.star }}</div>
+                <div onClick="{{ w.go }}" style="cursor:pointer;min-width:0;flex:1">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ w.ticker }}</div>
+                  <div style="font-size:11.5px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.name }}</div>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:end;color:{{ w.color }};flex:none">{{ w.pct }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
 
       <!-- An index says what the market did on average; this says how widely,
            which is the question an average cannot answer. Published in
@@ -195,6 +224,88 @@
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ feedCount }}</div>
       </div>
 
+      <!-- A grid, not a column. Forty stories stacked one to a row is a
+           scroll; the same forty three across is a page you can scan, and a
+           headline is short enough that the extra width was going to the
+           margin rather than to the words. The picture sits above the
+           headline, which is what the phone layer already did to it. -->
+      <div class="om-news-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(324px,1fr));gap:16px;align-items:start">
+      <sc-for list="{{ feed }}" as="f" hint-placeholder-count="6">
+        <article style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:16px;display:flex;flex-direction:column-reverse;gap:14px;min-width:0;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--shLift)">
+          <div style="min-width:0">
+            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+              <sc-if value="{{ f.hasKind }}">
+                <div style="display:inline-flex;padding:3px 10px;border-radius:999px;background:{{ f.tint }};color:{{ f.kindColor }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ f.kind }}</div>
+              </sc-if>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ f.date }} · {{ f.time }}</span>
+            </div>
+            <a href="{{ f.href }}" target="_blank" rel="noopener" dir="auto" style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.28;display:block;margin-top:10px;text-wrap:pretty">{{ f.headline }}</a>
+            <sc-if value="{{ f.hasWhy }}">
+              <div style="margin-top:13px;font-size:14px;color:var(--ink);line-height:1.55;text-wrap:pretty">{{ f.why }}</div>
+            </sc-if>
+            <sc-if value="{{ f.hasBecause }}">
+              <div style="margin-top:11px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.because }}</div>
+            </sc-if>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--rule);font-size:12px;color:var(--t2)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:13px;height:13px"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.2 1.2M13.4 10.6a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.2-1.2"></path></svg>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase">{{ f.source }}</span>
+              </div>
+              <a href="{{ f.href }}" target="_blank" style="font-size:12.5px;color:var(--faint)">{{ L.readAtSource }} →</a>
+              <sc-for list="{{ f.tickers }}" as="t" hint-placeholder-count="1">
+                <div onClick="{{ t.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--accTint);color:var(--accent)">{{ t.ticker }}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="aspect-ratio:16/9;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:10px;gap:6px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.7"><path d="M4 5.5h16v13H4zM4 15l4.5-4.2 4 3.6 3-2.6L20 15M15.6 9.2h.01"></path></svg>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);line-height:1.5">{{ L.outletImage }}<br>{{ f.source }}</div>
+            <!-- The outlet's own picture, over the frame the design drew for it
+                 rather than instead of it. Layered on purpose: a picture that
+                 404s or is blocked leaves the frame showing through, which is
+                 the app's rule too — a broken image is worse than none. The
+                 source is already named in the meta row, so it is not repeated
+                 here. No referrer is sent: which story a reader is looking at
+                 is not the outlet's business. -->
+            <sc-if value="{{ f.hasImage }}">
+              <a href="{{ f.href }}" target="_blank" rel="noreferrer" style="position:absolute;inset:0;display:block">
+                <img src="{{ f.image }}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
+              </a>
+            </sc-if>
+          </div>
+        </article>
+      </sc-for>
+      </div>
+<sc-if value="{{ noFeed }}">
+  <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
+</sc-if>
+      <!-- The list was cut at forty with nothing saying so, which reads as
+           "this is the news" rather than "this is some of it" — and it
+           excluded whole outlets, because Enterprise files ten stories to Al
+           Borsa's 158 and none of them reached the top of the pile. -->
+      <sc-if value="{{ moreFeed }}">
+        <div onClick="{{ showMoreFeed }}" style="align-self:center;padding:10px 22px;border-radius:999px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--shPill);font-size:13px;color:var(--t2);cursor:pointer" style-hover="color:var(--ink)">{{ L.showMore }}</div>
+      </sc-if>
+      <div style="padding:4px 10px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ feedProvenance }}</div>
+
+    </div>
+  </sc-if>
+
+  <!-- ══ CROSSINGS ══
+       Its own screen. It was a block on Today above the news, which mixed two
+       different claims: a headline is one company saying something, a crossing
+       is one company turning up in more than one feed inside a few days. Read
+       one after the other in a single column, the second reads as a preamble
+       to the first. -->
+  <sc-if value="{{ isCrossings }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.dotsLabel }}</h1>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ crossCount }}</div>
+      </div>
+      <sc-if value="{{ noCrossings }}">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:34px 24px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.nothingYet }}</div>
+      </sc-if>
       <!-- ══ WHAT TIES THESE TOGETHER ══
            The app's block (connect_dots.dart) on the same document, with the
            one thing a wide screen can add: the window, drawn. A crossing is a
@@ -350,64 +461,6 @@
           </div>
         </section>
       </sc-if>
-
-      <sc-for list="{{ feed }}" as="f" hint-placeholder-count="5">
-        <article style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,208px);gap:22px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--shLift)">
-          <div style="min-width:0">
-            <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
-              <sc-if value="{{ f.hasKind }}">
-                <div style="display:inline-flex;padding:3px 10px;border-radius:999px;background:{{ f.tint }};color:{{ f.kindColor }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase">{{ f.kind }}</div>
-              </sc-if>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ f.date }} · {{ f.time }}</span>
-            </div>
-            <a href="{{ f.href }}" target="_blank" style="font-family:'Bricolage Grotesque',serif;font-size:25px;font-weight:500;letter-spacing:-.025em;line-height:1.22;display:block;margin-top:11px;text-wrap:pretty">{{ f.headline }}</a>
-            <sc-if value="{{ f.hasWhy }}">
-              <div style="margin-top:13px;font-size:14px;color:var(--ink);line-height:1.55;text-wrap:pretty">{{ f.why }}</div>
-            </sc-if>
-            <sc-if value="{{ f.hasBecause }}">
-              <div style="margin-top:11px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.because }}</div>
-            </sc-if>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap">
-              <div style="display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;border:1px solid var(--rule);font-size:12px;color:var(--t2)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="width:13px;height:13px"><path d="M10.6 13.4a4 4 0 0 0 5.7 0l3.1-3.1a4 4 0 0 0-5.7-5.7l-1.2 1.2M13.4 10.6a4 4 0 0 0-5.7 0l-3.1 3.1a4 4 0 0 0 5.7 5.7l1.2-1.2"></path></svg>
-                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase">{{ f.source }}</span>
-              </div>
-              <a href="{{ f.href }}" target="_blank" style="font-size:12.5px;color:var(--faint)">{{ L.readAtSource }} →</a>
-              <sc-for list="{{ f.tickers }}" as="t" hint-placeholder-count="1">
-                <div onClick="{{ t.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--accTint);color:var(--accent)">{{ t.ticker }}</div>
-              </sc-for>
-            </div>
-          </div>
-          <div style="aspect-ratio:4/3;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:11px;gap:6px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.7"><path d="M4 5.5h16v13H4zM4 15l4.5-4.2 4 3.6 3-2.6L20 15M15.6 9.2h.01"></path></svg>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);line-height:1.5">{{ L.outletImage }}<br>{{ f.source }}</div>
-            <!-- The outlet's own picture, over the frame the design drew for it
-                 rather than instead of it. Layered on purpose: a picture that
-                 404s or is blocked leaves the frame showing through, which is
-                 the app's rule too — a broken image is worse than none. The
-                 source is already named in the meta row, so it is not repeated
-                 here. No referrer is sent: which story a reader is looking at
-                 is not the outlet's business. -->
-            <sc-if value="{{ f.hasImage }}">
-              <a href="{{ f.href }}" target="_blank" rel="noreferrer" style="position:absolute;inset:0;display:block">
-                <img src="{{ f.image }}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
-              </a>
-            </sc-if>
-          </div>
-        </article>
-      </sc-for>
-<sc-if value="{{ noFeed }}">
-  <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
-</sc-if>
-      <!-- The list was cut at forty with nothing saying so, which reads as
-           "this is the news" rather than "this is some of it" — and it
-           excluded whole outlets, because Enterprise files ten stories to Al
-           Borsa's 158 and none of them reached the top of the pile. -->
-      <sc-if value="{{ moreFeed }}">
-        <div onClick="{{ showMoreFeed }}" style="align-self:center;padding:10px 22px;border-radius:999px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--shPill);font-size:13px;color:var(--t2);cursor:pointer" style-hover="color:var(--ink)">{{ L.showMore }}</div>
-      </sc-if>
-      <div style="padding:4px 10px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ feedProvenance }}</div>
-
     </div>
   </sc-if>
 
@@ -459,6 +512,89 @@
       <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
         <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div><div>{{ L.peFoot }}</div>
       </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ INVESTORS ══
+       Who bought and who sold. The exchange has always published this and
+       nothing here read it, so the site could say how much changed hands and
+       never who changed it. Its own figures, its own labels in both languages,
+       period to date — which the screen says, because a reader who takes it
+       for today's session is reading a different fact. -->
+  <sc-if value="{{ isInvestors }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
+        <div style="min-width:0">
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.investorsTitle }}</h1>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:60ch;text-wrap:pretty">{{ L.investorsLead }}</div>
+        </div>
+      </div>
+
+      <sc-if value="{{ noInvestors }}">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:34px 24px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.nothingYet }}</div>
+      </sc-if>
+
+      <sc-if value="{{ investors }}">
+        <!-- Share of everything traded, and whether each side ended a net
+             buyer or a net seller. The two are different questions: a party
+             can be a quarter of the market and still have taken money off the
+             table. -->
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 20px">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsShare }}</div>
+          <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+            <sc-for list="{{ investors.parties }}" as="p" hint-placeholder-count="3">
+              <div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                  <div style="font-size:15px;font-weight:600">{{ p.party }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;letter-spacing:-.02em">{{ p.percent }}</div>
+                </div>
+                <div style="height:8px;border-radius:999px;background:var(--sunk);overflow:hidden;margin-top:9px">
+                  <div style="height:8px;border-radius:999px;width:{{ p.width }};background:var(--accent);opacity:.85"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ p.netColor }}">{{ p.net }}</div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)">{{ L.investorsEgpM }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <!-- A row per investor type, a column per nationality: the table the
+             app draws, and the one figure a price cannot give you — whether
+             the money moving was individuals' or institutions'. -->
+        <section class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;overflow:hidden">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsTable }}</div>
+          <div style="margin-top:14px">
+            <div style="display:grid;grid-template-columns:minmax(96px,150px) repeat(3,minmax(0,1fr)) minmax(80px,120px);gap:10px;padding:0 8px 10px;border-bottom:1px solid var(--rule2)">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.investorsType }}</div>
+              <sc-for list="{{ investors.columns }}" as="col" hint-placeholder-count="3">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ col }}</div>
+              </sc-for>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.investorsNet }}</div>
+            </div>
+            <sc-for list="{{ investors.bands }}" as="b" hint-placeholder-count="2">
+              <div style="display:grid;grid-template-columns:minmax(96px,150px) repeat(3,minmax(0,1fr)) minmax(80px,120px);gap:10px;padding:13px 8px;align-items:center;border-bottom:1px solid var(--rule2)">
+                <div style="font-size:14px;font-weight:600">{{ b.label }}</div>
+                <sc-for list="{{ b.cells }}" as="c" hint-placeholder-count="3">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ c.color }}">{{ c.net }}</div>
+                </sc-for>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;font-weight:600;color:{{ b.netColor }}">{{ b.net }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding:12px 8px 0">{{ L.investorsEgpM }}</div>
+        </section>
+
+        <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
+          <div>{{ L.investorsBasis }}</div>
+          <!-- The app screenshot's minute-by-minute curve comes from a feed
+               this endpoint does not carry. Saying so beats drawing a shape
+               the exchange has not published. -->
+          <div>{{ L.investorsNoIntraday }}</div>
+          <div>{{ investors.source }}</div>
+        </div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -1030,6 +1166,30 @@
           </sc-for>
         </div>
       </div>
+
+      <!-- Two ways into a month of 1,467 filings: a day off the grid below, or
+           a company typed here. The grid can only ask "what was filed on this
+           day"; the other question a reader arrives with is "what has this
+           company filed", and the screen could not express it at all. The box
+           matches on ticker, on either language of the title, and on the
+           company's own name from the directory — the archive row carries only
+           the ticker. -->
+      <div class="om-search" style="border-radius:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:16px;height:16px;flex:none"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
+          <input value="{{ filedQ }}" onChange="{{ onFiledQuery }}" placeholder="{{ L.filedSearch }}" style="flex:1;min-width:0;padding:7px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;outline:none">
+          <sc-if value="{{ hasFiledFilter }}">
+            <div onClick="{{ clearFiled }}" style="cursor:pointer;flex:none;padding:6px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ L.filedClear }}</div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ filedFilterNote }}">
+          <div style="font-size:12px;color:var(--t2);margin-top:9px">{{ filedFilterNote }}</div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ filedNoMatch }}">
+        <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);padding:26px 22px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.filedNothing }}</div>
+      </sc-if>
+
       <!-- The month as its days. A list of sixty rows says nothing about the
            shape of a month; a grid shows at a glance that the exchange files
            in bursts around results season and barely at all between. Empty
