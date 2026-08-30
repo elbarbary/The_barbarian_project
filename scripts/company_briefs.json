@@ -2517,7 +2517,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FCMD/profile",
   "record": {
-   "filings": 24,
+   "filings": 25,
    "first_filing": "2026-05-17",
    "trading_suspensions": 0,
    "trading_resumptions": 1,
@@ -2537,7 +2537,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FIRE/profile",
   "record": {
-   "filings": 580,
+   "filings": 581,
    "first_filing": "2013-05-16",
    "trading_suspensions": 12,
    "trading_resumptions": 11,
@@ -5861,13 +5861,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SPIN/profile",
   "record": {
-   "filings": 596,
+   "filings": 597,
    "first_filing": "2010-02-11",
    "trading_suspensions": 7,
    "trading_resumptions": 7,
    "capital_increases": 1,
    "general_assemblies": 87,
-   "periods_reported": 66,
+   "periods_reported": 67,
    "loss_making_periods": 28
   },
   "generated": "2026-08-25"
@@ -6460,7 +6460,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
   "record": {
-   "filings": 12,
+   "filings": 13,
    "first_filing": "2026-06-07",
    "trading_suspensions": 0,
    "trading_resumptions": 0,

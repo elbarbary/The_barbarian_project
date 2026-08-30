@@ -3623,23 +3623,6 @@
    "observations": 13
   },
   {
-   "date": "2026-11-22",
-   "kind": "results_expected",
-   "note": "9M results usually filed around now",
-   "ticker": "SPIN",
-   "title": "Alexandria Spinning & Weaving — 9M results expected",
-   "title_ar": "",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-SPIN-9M-2026-09-30",
-   "estimated": true,
-   "period_end": "2026-09-30",
-   "window_start": "2026-11-13",
-   "window_end": "2026-12-10",
-   "observations": 12
-  },
-  {
    "date": "2026-11-23",
    "kind": "results_expected",
    "note": "9M results usually filed around now",
@@ -3825,6 +3808,23 @@
    "window_start": "2026-11-13",
    "window_end": "2026-12-13",
    "observations": 12
+  },
+  {
+   "date": "2026-11-28",
+   "kind": "results_expected",
+   "note": "9M results usually filed around now",
+   "ticker": "SPIN",
+   "title": "Alexandria Spinning & Weaving — 9M results expected",
+   "title_ar": "",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-SPIN-9M-2026-09-30",
+   "estimated": true,
+   "period_end": "2026-09-30",
+   "window_start": "2026-11-13",
+   "window_end": "2027-03-01",
+   "observations": 13
   },
   {
    "date": "2026-11-28",
