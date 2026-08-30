@@ -6,12 +6,12 @@
  },
  "sector": "Process Industries",
  "market": {
-  "last_close": 39.42,
+  "last_close": 40,
   "date": "2026-08-30",
-  "open": 36.91,
-  "high": 39.6,
-  "low": 36.91,
-  "volume": 1638669
+  "open": 39.42,
+  "high": 40.49,
+  "low": 39.42,
+  "volume": 50633
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 89856499,
   "free_float": 0.19851500000000002,
   "float_shares": 17837862.898985002,
-  "perf_1w": 9.591326105087582,
-  "perf_1m": 27.16129032258065,
-  "perf_3m": 50.74569789674953,
-  "avg_volume_30d": 925938.5333333318,
-  "relative_volume_10d": 2.699676813559952,
+  "perf_1w": 11.11111111111111,
+  "perf_1m": 25.786163522012576,
+  "perf_3m": 51.97568389057751,
+  "avg_volume_30d": 917295.4999999985,
+  "relative_volume_10d": 0.0729704100397183,
   "median_volume_20d": 544815,
   "rv20": 3.0077530904986096,
   "normal_value_30d": 18735557.34,

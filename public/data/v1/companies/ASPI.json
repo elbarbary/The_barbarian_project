@@ -6,12 +6,12 @@
  },
  "sector": "Finance",
  "market": {
-  "last_close": 0.48,
+  "last_close": 0.483,
   "date": "2026-08-30",
-  "open": 0.503,
-  "high": 0.51,
+  "open": 0.48,
+  "high": 0.491,
   "low": 0.48,
-  "volume": 83642419
+  "volume": 2161751
  },
  "price_history": [
   {
@@ -716,8 +716,8 @@
   },
   {
    "date": "2026-02-23",
-   "close": 0.2382,
-   "volume": 6689253
+   "close": 0.2406,
+   "volume": 5532876
   },
   {
    "date": "2026-02-24",
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 3900000000,
   "free_float": 0.901744,
   "float_shares": 3516801600,
-  "perf_1w": -13.824057450628377,
-  "perf_1m": 21.212121212121204,
-  "perf_3m": 92.79753399100856,
-  "avg_volume_30d": 100440101.06666669,
-  "relative_volume_10d": 1.259381689358916,
+  "perf_1w": -4.733727810650891,
+  "perf_1m": 7.5723830734966535,
+  "perf_3m": 88.671875,
+  "avg_volume_30d": 96572907.86666672,
+  "relative_volume_10d": 0.03176127899060911,
   "median_volume_20d": 65491213.5,
   "rv20": 1.2771548201653036,
   "normal_value_30d": 33151812.602,
@@ -1522,6 +1522,16 @@
     "filing_id": "egx-277464",
     "source": "https://www.egx.com.eg",
     "basis": "consolidated"
+   },
+   {
+    "period": "H1 2026",
+    "net_income": 74.735,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2026-01-01",
+    "period_end": "2026-06-30",
+    "filed": "2026-08-30",
+    "filing_id": "egx-293994",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2020",

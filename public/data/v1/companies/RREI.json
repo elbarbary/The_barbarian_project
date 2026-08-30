@@ -6,12 +6,12 @@
  },
  "sector": "Consumer Durables",
  "market": {
-  "last_close": 4.28,
+  "last_close": 4.29,
   "date": "2026-08-30",
-  "open": 4.3,
-  "high": 4.38,
-  "low": 4.24,
-  "volume": 5668316
+  "open": 4.28,
+  "high": 4.3,
+  "low": 4.28,
+  "volume": 83987
  },
  "price_history": [
   {
@@ -1318,11 +1318,11 @@
  "profile": {
   "market_cap": 1054592026,
   "shares_outstanding": 246400000,
-  "perf_1w": -6.55021834061135,
-  "perf_1m": -2.0594965675057173,
-  "perf_3m": 25.51319648093842,
-  "avg_volume_30d": 13621481.233333332,
-  "relative_volume_10d": 0.564930146813253,
+  "perf_1w": -3.595505617977531,
+  "perf_1m": -13.855421686746995,
+  "perf_3m": 26.1764705882353,
+  "avg_volume_30d": 12833731.766666668,
+  "relative_volume_10d": 0.008351600148769,
   "history_bars": 0,
   "median_volume_20d": 9029201,
   "rv20": 0.6277760346679623,

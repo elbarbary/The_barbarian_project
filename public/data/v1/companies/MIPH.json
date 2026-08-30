@@ -6,12 +6,12 @@
  },
  "sector": "Health Technology",
  "market": {
-  "last_close": 784,
+  "last_close": 800,
   "date": "2026-08-30",
-  "open": 766.83,
-  "high": 795,
-  "low": 766.83,
-  "volume": 3252
+  "open": 790.75,
+  "high": 806.99,
+  "low": 784,
+  "volume": 668
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 11780900,
   "free_float": 0.42128099999999996,
   "float_shares": 4963069.3329,
-  "perf_1w": 1.056973446764636,
-  "perf_1m": 6.608648354636935,
-  "perf_3m": 20.674793744612742,
-  "avg_volume_30d": 5580.699999999996,
-  "relative_volume_10d": 0.9543653705062363,
+  "perf_1w": 1.2414735696477992,
+  "perf_1m": 8.782855821922471,
+  "perf_3m": 22.73703590058301,
+  "avg_volume_30d": 5222.233333333329,
+  "relative_volume_10d": 0.194808982210557,
   "median_volume_20d": 3848,
   "rv20": 0.8451143451143451,
   "normal_value_30d": 2227835.9450000003,

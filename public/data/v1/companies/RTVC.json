@@ -6,12 +6,12 @@
  },
  "sector": "Industrial Services",
  "market": {
-  "last_close": 4.13,
+  "last_close": 4.07,
   "date": "2026-08-30",
-  "open": 4.12,
-  "high": 4.2,
-  "low": 3.97,
-  "volume": 1006182
+  "open": 4.13,
+  "high": 4.13,
+  "low": 4.06,
+  "volume": 109122
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 246798000,
   "free_float": 0.243659,
   "float_shares": 60134553.882,
-  "perf_1w": 4.030226700251881,
-  "perf_1m": 4.556962025316448,
-  "perf_3m": 7.552083333333335,
-  "avg_volume_30d": 1755494.2666666645,
-  "relative_volume_10d": 0.40158661079422847,
+  "perf_1w": -3.0952380952380927,
+  "perf_1m": 3.299492385786811,
+  "perf_3m": 8.244680851063844,
+  "avg_volume_30d": 1739009.7999999977,
+  "relative_volume_10d": 0.04528317295767694,
   "median_volume_20d": 1226381.5,
   "rv20": 0.8204477970354249,
   "normal_value_30d": 4569752.085000001,

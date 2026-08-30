@@ -6,12 +6,12 @@
  },
  "sector": "Producer Manufacturing",
  "market": {
-  "last_close": 45.15,
+  "last_close": 45.11,
   "date": "2026-08-30",
-  "open": 45.92,
-  "high": 46.49,
-  "low": 44.5,
-  "volume": 291499
+  "open": 45.15,
+  "high": 45.3,
+  "low": 45.04,
+  "volume": 4410
  },
  "price_history": [
   {
@@ -716,7 +716,7 @@
   },
   {
    "date": "2026-02-23",
-   "close": 34.21,
+   "close": 34.35,
    "volume": 191468
   },
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 145500000,
   "free_float": 0.413215,
   "float_shares": 60122782.5,
-  "perf_1w": -9.700000000000003,
-  "perf_1m": 7.551214864221063,
-  "perf_3m": 36.81818181818181,
-  "avg_volume_30d": 514438.8333333333,
-  "relative_volume_10d": 0.7050712088082205,
+  "perf_1w": 0.022172949002212883,
+  "perf_1m": 5.298786181139112,
+  "perf_3m": 37.48857055775677,
+  "avg_volume_30d": 502249.2666666666,
+  "relative_volume_10d": 0.010971565731993765,
   "median_volume_20d": 415780.5,
   "rv20": 0.7010886753948298,
   "normal_value_30d": 18335657.225,
@@ -1733,6 +1733,16 @@
     "period_end": "2025-06-30",
     "filed": "2025-08-17",
     "filing_id": "egx-274904",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2026",
+    "net_income": -11.827,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2026-01-01",
+    "period_end": "2026-06-30",
+    "filed": "2026-08-30",
+    "filing_id": "egx-294009",
     "source": "https://www.egx.com.eg"
    },
    {

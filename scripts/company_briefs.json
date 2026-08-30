@@ -734,7 +734,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AREH/profile",
   "record": {
-   "filings": 503,
+   "filings": 504,
    "first_filing": "2014-12-01",
    "trading_suspensions": 12,
    "trading_resumptions": 10,
@@ -774,13 +774,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ASPI/profile",
   "record": {
-   "filings": 192,
+   "filings": 195,
    "first_filing": "2021-10-11",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
    "capital_increases": 4,
    "general_assemblies": 21,
-   "periods_reported": 32,
+   "periods_reported": 33,
    "loss_making_periods": 4
   },
   "generated": "2026-08-24"
@@ -1139,7 +1139,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CEFM/profile",
   "record": {
-   "filings": 712,
+   "filings": 713,
    "first_filing": "2010-01-13",
    "trading_suspensions": 22,
    "trading_resumptions": 20,
@@ -1658,7 +1658,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EASB/profile",
   "record": {
-   "filings": 568,
+   "filings": 569,
    "first_filing": "2010-01-03",
    "trading_suspensions": 10,
    "trading_resumptions": 9,
@@ -2337,14 +2337,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ENGC/profile",
   "record": {
-   "filings": 639,
+   "filings": 641,
    "first_filing": "2010-03-10",
    "trading_suspensions": 15,
    "trading_resumptions": 14,
    "capital_increases": 5,
    "general_assemblies": 62,
-   "periods_reported": 57,
-   "loss_making_periods": 2
+   "periods_reported": 58,
+   "loss_making_periods": 3
   },
   "generated": "2026-08-24"
  },
@@ -3710,7 +3710,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/LUTS/profile",
   "record": {
-   "filings": 129,
+   "filings": 130,
    "first_filing": "2022-11-23",
    "trading_suspensions": 2,
    "trading_resumptions": 1,
@@ -3816,7 +3816,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MBEG/profile",
   "record": {
-   "filings": 46,
+   "filings": 48,
    "first_filing": "2024-07-07",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -4300,14 +4300,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MPCO/profile",
   "record": {
-   "filings": 726,
+   "filings": 729,
    "first_filing": "2010-01-14",
    "trading_suspensions": 15,
    "trading_resumptions": 14,
    "capital_increases": 2,
    "general_assemblies": 88,
-   "periods_reported": 57,
-   "loss_making_periods": 10
+   "periods_reported": 58,
+   "loss_making_periods": 11
   },
   "generated": "2026-08-25"
  },
@@ -5331,12 +5331,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/RMDA/profile",
   "record": {
-   "filings": 397,
+   "filings": 398,
    "first_filing": "2019-11-27",
    "trading_suspensions": 2,
    "trading_resumptions": 2,
    "capital_increases": 5,
-   "general_assemblies": 63,
+   "general_assemblies": 64,
    "periods_reported": 37,
    "loss_making_periods": 0
   },
