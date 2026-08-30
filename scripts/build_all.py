@@ -54,16 +54,6 @@ STEPS = [
     # rather than a loss.
     ("Filed net profit", "build_financials_api.py", False),
     ("Market", "build_market_api.py", False),
-    # Straight after Market, which is what it adds to.
-    #
-    # The P/E Market publishes is over the newest ANNUAL filing, which on this
-    # exchange is up to twenty months old — most of them are struck against
-    # FY 2024. This adds a second one over the last twelve months a company
-    # actually filed, which is three filed figures and a subtraction, not an
-    # estimate. It only ever ADDS fields to a company already in the directory,
-    # so it cannot repeat Market's own failure of deleting 33 of them from a
-    # short scan.
-    ("Trailing P/E", "build_ttm_pe.py", True),
     # New filings, before anything that reads them.
     #
     # The archive under `data-source/egx-beta/filings` is what the calendar's
@@ -123,6 +113,26 @@ STEPS = [
     # verified fields after Market has recreated every company document.
     ("EGX PDF statements", "apply_pdf_statements.py", True),
     ("Statement basis", "apply_statement_basis.py", True),
+    # After every step that writes a filed row, and after the basis is named
+    # on them — not after Market, which is only where the field it adds LANDS.
+    #
+    # It sat straight after Market and reported "0 of 282 — no filed period
+    # states a profit" on every CI run, because Market has just rewritten the
+    # company documents and the five steps above are what put the financials
+    # back into them. It looked right locally only because the checked-out
+    # documents still held the previous run's figures.
+    #
+    # The basis matters as much as the profits: this refuses a twelve months
+    # whose three legs are not all on one basis, and `apply_statement_basis`
+    # is what names it.
+    #
+    # The P/E Market publishes is over the newest ANNUAL filing, which on this
+    # exchange is up to twenty months old — most are struck against FY 2024.
+    # This adds a second over the last twelve months a company actually filed:
+    # three filed figures and a subtraction, never an estimate. It only ADDS
+    # fields to a company already in the directory, so it cannot repeat
+    # Market's own failure of deleting 33 of them from a short scan.
+    ("Trailing P/E", "build_ttm_pe.py", True),
     # What the company is doing with its borrowings: how much, when it falls
     # due, what it costs against what the business earns, and which way it
     # moved. Arithmetic over the borrowing lines the step above just restored,
