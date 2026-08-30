@@ -664,17 +664,17 @@
           <sc-for list="{{ heatBlocks }}" as="b" hint-placeholder-count="10">
             <div style="position:absolute;left:{{ b.left }};top:{{ b.top }};width:{{ b.width }};height:{{ b.height }};border-radius:8px;background:var(--hmSunk)">
               <sc-if value="{{ b.showLabel }}">
-                <div style="position:absolute;inset-inline:7px;top:3px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.label }}</div>
+                <div class="hm-sec" style="position:absolute;inset-inline:7px;top:2px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:8.5px;line-height:1.1;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.label }}</div>
               </sc-if>
             </div>
           </sc-for>
           <sc-for list="{{ heatTiles }}" as="t" hint-placeholder-count="60">
             <div onClick="{{ t.go }}" title="{{ t.title }}" style="position:absolute;left:{{ t.left }};top:{{ t.top }};width:{{ t.width }};height:{{ t.height }};background:{{ t.bg }};color:{{ t.fg }};border-radius:3px;outline:1px solid var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;transition:filter .12s" style-hover="filter:brightness(1.18)">
               <sc-if value="{{ t.showTicker }}">
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.ticker }}</div>
+                <div class="hm-tick" style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.ticker }}</div>
               </sc-if>
               <sc-if value="{{ t.showPct }}">
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;line-height:1.3;opacity:.86">{{ t.pct }}</div>
+                <div class="hm-pct" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;line-height:1.3;opacity:.86">{{ t.pct }}</div>
               </sc-if>
             </div>
           </sc-for>
@@ -1504,6 +1504,13 @@
               <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:{{ r.color }}">{{ r.pct }}</span>
               <span style="font-size:10.5px;color:var(--faint)">{{ r.unit }}</span>
             </div>
+            <!-- The three EGX indices have 260 sessions of closing levels in
+                 market-history.json, and this screen showed a bare number.
+                 The same series Home sparks, under the same figure. -->
+            <sc-if value="{{ r.hasSpark }}">
+              <div style="margin-top:10px">{{ r.spark }}</div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);margin-top:2px">{{ r.sessions }}</div>
+            </sc-if>
             <!-- The document writes its own sentence for every one of these.
                  The site was printing the number and throwing the sentence
                  away. -->
@@ -1517,6 +1524,22 @@
                 <sc-for list="{{ r.karats }}" as="k" hint-placeholder-count="3">
                   <span style="padding:3px 8px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">{{ k.karat }} {{ k.value }}</span>
                 </sc-for>
+              </div>
+            </sc-if>
+            <!-- Every one of these figures is reached from another one, and
+                 the document writes the sum out. It was published and never
+                 shown, so a reader had a number and no way to check it. The
+                 card opens onto the arithmetic rather than onto a second
+                 number: nothing here is computed on the way to the screen. -->
+            <sc-if value="{{ r.hasWorkings }}">
+              <div onClick="{{ r.toggle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:11px;padding:5px 11px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ L.rateHow }} <span>{{ r.caret }}</span></div>
+            </sc-if>
+            <sc-if value="{{ r.open }}">
+              <div style="margin-top:10px;padding:11px 13px;border-radius:12px;background:var(--sunk);border-inline-start:2px solid var(--accent)">
+                <sc-if value="{{ r.hasOunce }}">
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--t2);margin-bottom:7px">{{ r.ounce }}</div>
+                </sc-if>
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;line-height:1.75;color:var(--t2);white-space:pre-wrap">{{ r.workings }}</div>
               </div>
             </sc-if>
           </div>

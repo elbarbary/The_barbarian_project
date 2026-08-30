@@ -784,6 +784,10 @@ const PERCENT = new Set(['gdp_growth', 'inflation']);
 export async function exchange() {
   const [r, m] = await Promise.all([doc('rates/latest.json'), doc('macro.json')]);
   const level = (x) => ({
+    // Carried so the Exchange screen can join an index row to the series
+    // market-history.json already keeps for it. The document has always had
+    // both and nothing ever put them together.
+    id: x.id || '',
     label: x.label, labelAr: x.label_ar || x.label,
     value: typeof x.level === 'number' ? x.level.toLocaleString('en-US',
       { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : String(x.level ?? '—'),
@@ -797,6 +801,9 @@ export async function exchange() {
     // is pounds, and the four world indices lost the "points" the three EGX
     // ones keep. It is the VALUE of `kind` that says which.
     unit: x.kind === 'commodity' ? 'USD' : 'points',
+    // The sum behind the figure, in the document's own words. Printed only
+    // when a reader asks for it, which is what the card opening is for.
+    workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
     // "EGX 30 fell 0.31% in the session." — the document's own sentence, which
     // the site was throwing away in favour of the bare number.
     plain: x.plain || '', plainAr: x.plain_ar || '',
@@ -812,13 +819,21 @@ export async function exchange() {
   // here.
   const currency = (x) => ({
     label: x.label, labelAr: x.label_ar || x.label,
+    id: x.code || '',
     value: money(x.egp, 2), pct: '', color: 'var(--ink)',
     unit: 'EGP', plain: x.plain || '', plainAr: x.plain_ar || '',
+    workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
   });
   const metal = (x) => ({
     label: x.label, labelAr: x.label_ar || x.label,
+    id: x.id || '',
     value: money(x.egp_gram, 2), pct: '', color: 'var(--ink)',
     unit: ar_gram, plain: x.plain || '', plainAr: x.plain_ar || '',
+    workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
+    // What an ounce costs, which is the figure every wire story quotes and
+    // the one this screen could not show because it only read the gram.
+    ounceUsd: typeof x.usd_ounce === 'number' ? money(x.usd_ounce, 2) : '',
+    ounceEgp: typeof x.egp_ounce === 'number' ? money(x.egp_ounce, 2) : '',
     // 21-karat is what a Cairo shop window quotes; 24 and 18 come with it.
     karats: (x.karats || []).map((k) => ({ karat: k.karat + 'k', value: money(k.egp_gram, 2) })),
   });

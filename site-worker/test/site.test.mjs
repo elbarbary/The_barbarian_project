@@ -473,6 +473,15 @@ test('the session line says where the prices came from and when', async () => {
   c.setData({ ...LIVE, isClose: true });
   assert.equal(c.renderVals().sessionState, c.renderVals().L.sessionClose);
 
+  // The two flags disagree exactly when it matters. `is_close` belongs to the
+  // last published capture, and the first hours of a session are spent under
+  // yesterday's document — so a live feed over a closed capture was labelled
+  // "Closing prices" while the numbers moved. The feed wins.
+  c.setData({ ...LIVE, isClose: true, livePrices: true,
+              liveAsOf: '2026-08-30T10:16:12.506Z', liveDelaySeconds: 900 });
+  assert.match(c.renderVals().sessionState, /15 min/);
+  assert.equal(c.renderVals().sessionColor, 'var(--accent)');
+
   // A running session on the published capture says how old it is. It used to
   // say only "prices not final" over a number three hours old.
   c.setData({ ...LIVE, isClose: false, livePrices: false,

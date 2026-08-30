@@ -297,6 +297,9 @@ export class Component extends Base {
       heatFrom:'Index membership as published by the exchange, {at}.',
       heatCarried:'Held from {at} \u2014 the exchange did not answer on the last build.',
       heatNoIndex:'No membership document has been published, so the index tabs have nothing to draw. The whole market is unaffected.',
+      rateSessions:'{n} sessions',
+      rateOunce:'EGP {egp} an ounce \u00b7 USD {usd}',
+      rateHow:'How this figure is reached',
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
@@ -506,6 +509,9 @@ export class Component extends Base {
       heatFrom:'مكوّنات المؤشر كما تنشرها البورصة، {at}.',
       heatCarried:'محفوظة من {at} \u2014 لم تُجب البورصة في آخر بناء.',
       heatNoIndex:'لم يُنشر مستند للمكوّنات، فلا شيء ترسمه تبويبات المؤشرات. السوق كاملةً غير متأثرة.',
+      rateSessions:'{n} جلسة',
+      rateOunce:'{egp} جنيه للأونصة \u00b7 {usd} دولار',
+      rateHow:'كيف يُحسب هذا الرقم',
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
@@ -980,9 +986,13 @@ export class Component extends Base {
     // about a company the archive says no such thing about. They now come from
     // the published documents, and a missing document leaves the block empty
     // rather than invented.
-    const indices = say(D.indices || [], ['label']).map((ix) => Object.assign({}, ix, {
-      spark: this.sparkOf(ix.points, ix.up),
-    }));
+    // Home's index cards, keyed, so the Exchange screen can draw the same
+    // series under the same number rather than a second reading of it.
+    const indexById = new Map();
+    const indices = say(D.indices || [], ['label']).map((ix) => {
+      indexById.set(ix.id, ix);
+      return Object.assign({}, ix, { spark: this.sparkOf(ix.points, ix.up) });
+    });
 
     const readNow = say(D.readNow || [], ['kind', 'title']).map((r) => Object.assign({}, r, {
       go: r.ticker
@@ -2003,7 +2013,11 @@ export class Component extends Base {
     const heatBlocks = [];
     const heatTiles = [];
     const GAP = 0.32;          // per cent of the box, between sector blocks
-    const STRIP = 2.4;         // the sector's name, where there is room for it
+    // The sector's name, where there is room for it. Per cent of the box, so
+    // it is 19px on a desktop and 13px on a phone — the label has to fit the
+    // smaller of those, and design.css hides it outright on a block too small
+    // to hold it at all.
+    const STRIP = 3.0;
     const sectorRects = squarify(
       [...bySector.entries()].map(([key, list]) => ({
         key, list, value: list.reduce((sum, c) => sum + c.cap, 0) })),
@@ -2029,12 +2043,14 @@ export class Component extends Base {
           ticker: t.c.ticker, name: this.nm(t.c.name),
           pct: priced ? this.pct(t.c.pct) : '\u2014',
           bg: heatColour(t.c.pct), fg: 'var(--hmInk)',
-          // A ticker printed into a tile too small to hold it is a smear. The
-          // threshold is in per cent of the box because that is the only unit
-          // this side of the layout knows; the box's own aspect ratio makes it
-          // pixels.
-          showTicker: t.w >= 2.9 && t.h >= 2.2,
-          showPct: t.w >= 5 && t.h >= 4.4,
+          // A coarse gate only: it keeps four hundred label nodes out of the
+          // DOM for tiles that are a hairline at any width. Whether a label
+          // actually FITS is a question in pixels, and this side of the layout
+          // has only per cent — the same 2.9% is 32px on a desktop and 10px
+          // on a phone, which is how the map came out legible on one and a
+          // smear on the other. design.css decides, per tile, in pixels.
+          showTicker: t.w >= 1 && t.h >= 0.9,
+          showPct: t.w >= 1.6 && t.h >= 1.6,
           left: pc(t.x), top: pc(t.y), width: pc(t.w), height: pc(t.h),
           title: `${t.c.ticker} \u00b7 ${this.nm(t.c.name)} \u00b7 ${priced ? this.pct(t.c.pct) : '\u2014'}`,
           go: () => this.setState({ screen: 'company', ticker: t.c.ticker }),
@@ -2109,7 +2125,7 @@ export class Component extends Base {
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
       sessionState: this.sessionLine(D, L),
-      sessionColor: D.isClose ? 'var(--faint)' : 'var(--accent)',
+      sessionColor: (D.isClose && !D.livePrices) ? 'var(--faint)' : 'var(--accent)',
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
       noFeed: feed.length === 0, noRates: rates.length === 0,
@@ -2267,7 +2283,34 @@ export class Component extends Base {
       noRows: rows.length === 0,
       clearFilters: () => this.setState({ q:'', sector:'All' }),
       onQuery: e => this.setState({ q: e.target.value }),
-      co, ranges, chart, ratesArrowed: rates.map((r) => { const flat = !r.pct || r.pct === '\u2014'; const up = String(r.pct).charAt(0) === '+'; return Object.assign({}, r, { arrow: flat ? '' : (up ? '\u2197' : '\u2198'), tint: flat ? 'var(--sunk)' : (up ? 'var(--upTint)' : 'var(--downTint)'), hasPlain: Boolean(r.plain), hasKarats: Boolean((r.karats || []).length) }); }), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
+      co, ranges, chart, ratesArrowed: rates.map((r) => {
+        const flat = !r.pct || r.pct === '\u2014';
+        const up = String(r.pct).charAt(0) === '+';
+        // The three EGX indices have 260 sessions of closing levels in
+        // market-history.json and had a bare number on this screen. The
+        // series is joined by id to the cards Home already builds from it —
+        // the same figures, so the two screens cannot disagree.
+        const line = indexById.get(r.id);
+        const points = (line && line.points) || [];
+        const open = st.rateOpen === (r.id || r.label);
+        return Object.assign({}, r, {
+          arrow: flat ? '' : (up ? '\u2197' : '\u2198'),
+          tint: flat ? 'var(--sunk)' : (up ? 'var(--upTint)' : 'var(--downTint)'),
+          hasPlain: Boolean(r.plain), hasKarats: Boolean((r.karats || []).length),
+          // A card opens onto the arithmetic the document already writes for
+          // it — how the figure was reached, not a second figure.
+          spark: this.sparkOf(points, up), hasSpark: points.length > 1,
+          sessions: points.length ? L.rateSessions.replace('{n}', String(points.length)) : '',
+          open, caret: open ? '\u2212' : '+',
+          hasWorkings: Boolean(ar ? r.workingsAr : r.workings),
+          workings: (ar ? r.workingsAr : r.workings) || '',
+          hasOunce: Boolean(r.ounceEgp),
+          ounce: r.ounceEgp ? L.rateOunce.replace('{egp}', r.ounceEgp)
+            .replace('{usd}', r.ounceUsd || '\u2014') : '',
+          toggle: () => this.setState((prev) => ({
+            rateOpen: prev.rateOpen === (r.id || r.label) ? '' : (r.id || r.label) })),
+        });
+      }), chartFrom: slice.length ? slice[0].date : '—', chartTo: slice.length ? slice[slice.length-1].date : '—', chartCount: slice.length,
       // How many of the periods on this table are a full statement rather than
       // a one-line profit announcement. Without it the table reads as mostly
       // empty, when what it mostly is, is honest.
@@ -2514,12 +2557,16 @@ export class Component extends Base {
    * which they are looking at.
    */
   sessionLine(D, L) {
-    if (D.isClose) return L.sessionClose;
+    // The live feed is asked FIRST, because the two flags disagree exactly
+    // when it matters. `is_close` belongs to the last published capture, and
+    // the first hours of a session are spent under yesterday's document: the
+    // screen said "Closing prices" over prices that were moving.
     if (D.livePrices) {
       return L.sessionFeed
         .replace('{delay}', String(Math.round((D.liveDelaySeconds || 0) / 60)))
         .replace('{at}', this.clock(D.liveAsOf));
     }
+    if (D.isClose) return L.sessionClose;
     if (D.capturedAt) return L.sessionHeld.replace('{at}', this.clock(D.capturedAt));
     return L.sessionLive;
   }
