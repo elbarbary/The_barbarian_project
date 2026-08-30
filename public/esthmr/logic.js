@@ -310,6 +310,8 @@ export class Component extends Base {
       rateNoSeries:'{n} of these carry a published daily series and are drawn with one. The rest \u2014 Tadawul and the five pound rates \u2014 are the latest reading only: no source this pipeline can reach publishes their history.',
       heatZoomIn:'Tap a sector to fill the map with it.',
       heatZoomDrawn:'{n} in {sector}, of {of} on this map.',
+      heatRoot:'Inside a sector the tiles are sized by the square root of market value, so the smaller companies are large enough to read. The bigger companies are still the bigger ones; a tile is no longer its share of the sector. On the whole map, area is market value exactly.',
+      heatUnsized:'{n} more in this sector carry no market value on file. There is no honest size to give them, so they are named rather than drawn:',
       heatZoomOut:'Showing one sector. Tap it again, or the name above, for the whole map.',
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
@@ -529,6 +531,8 @@ export class Component extends Base {
       rateNoSeries:'{n} من هذه الصفوف لها سلسلة يومية منشورة وتُرسم بها. أما البقية \u2014 تداول وأسعار الجنيه الخمسة \u2014 فهي آخر قراءة فقط: لا مصدر تصله هذه المنظومة ينشر تاريخها.',
       heatZoomIn:'اضغط قطاعاً لتملأ به الخريطة.',
       heatZoomDrawn:'{n} في {sector}، من {of} على هذه الخريطة.',
+      heatRoot:'داخل القطاع تُحسب مساحة المربع بالجذر التربيعي للقيمة السوقية، لتكبر الشركات الصغيرة بما يكفي لقراءتها. تبقى الكبرى هي الكبرى، لكن المربع لم يعد يمثل حصته من القطاع. أما على الخريطة كاملة فالمساحة هي القيمة السوقية تماماً.',
+      heatUnsized:'{n} أخرى في هذا القطاع بلا قيمة سوقية مسجّلة. لا حجم صادق يُعطى لها، فتُذكر بالاسم بدل أن تُرسم:',
       heatZoomOut:'قطاع واحد معروض. اضغطه مرة أخرى، أو الاسم أعلاه، للخريطة كاملة.',
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
@@ -2052,6 +2056,24 @@ export class Component extends Base {
      * there. It is the box that changed, not the arithmetic.
      */
     const heatZoom = bySector.has(st.heatSector) ? st.heatSector : '';
+    /* Zoomed, a tile's area is the SQUARE ROOT of market value.
+     *
+     * Filling the box with one sector was not enough. Strict proportionality
+     * over Finance's own spread still left EOSB at five pixels by three and
+     * twenty-seven of eighty companies too small to carry their own ticker —
+     * a view of a sector that a reader cannot read the sector in.
+     *
+     * The root compresses that: the same eighty come back with two unlabelled
+     * and nothing under eight pixels, and the largest is still five times the
+     * linear size of the smallest, so which companies are the big ones
+     * survives intact. What does not survive is proportion, and that is a real
+     * cost — a tile is no longer a share of the sector. It is stated on the
+     * screen rather than absorbed quietly, and it applies ONLY here: on the
+     * whole map, where the claim is about the market's own weights, area is
+     * market value exactly.
+     */
+    const heatRoot = Boolean(heatZoom);
+    const heatSize = (cap) => (heatRoot ? Math.sqrt(cap) : cap);
     const heatDrawSectors = heatZoom
       ? [[heatZoom, bySector.get(heatZoom)]]
       : [...bySector.entries()];
@@ -2089,7 +2111,7 @@ export class Component extends Base {
         // that does not work.
         zoom: () => this.setState((prev) => ({
           heatSector: prev.heatSector === block.key ? '' : block.key })) });
-      for (const t of squarify(block.list.map((c) => ({ c, value: c.cap })),
+      for (const t of squarify(block.list.map((c) => ({ c, value: heatSize(c.cap) })),
                                x, y + strip, w, Math.max(0, h - strip))) {
         const priced = typeof t.c.pct === 'number';
         heatTiles.push({
@@ -2110,6 +2132,12 @@ export class Component extends Base {
         });
       }
     }
+    const heatUnsized = heatZoom
+      ? heatPool.filter((c) => (c.sector || '') === heatZoom
+          && !(typeof c.cap === 'number' && c.cap > 0))
+        .map((c) => ({ ticker: c.ticker, name: this.nm(c.name),
+          go: () => this.setState({ screen: 'company', ticker: c.ticker }) }))
+      : [];
     const heatUnpriced = heatSized.filter((c) => typeof c.pct !== 'number').length;
     const heatMissingCount = heatPool.length - heatSized.length;
     // The map is to scale and the exchange is not evenly sized: the largest
@@ -2269,6 +2297,9 @@ export class Component extends Base {
       isHeat: st.screen === 'heat',
       heatTabs, heatBlocks, heatTiles,
       heatZoomed: Boolean(heatZoom),
+      heatRootNote: heatRoot ? L.heatRoot : '',
+      heatUnsized, hasHeatUnsized: heatUnsized.length > 0,
+      heatUnsizedNote: L.heatUnsized.replace('{n}', String(heatUnsized.length)),
       heatZoomLabel: heatZoom ? sectorName(heatZoom) : '',
       heatZoomOut: () => this.setState({ heatSector: '' }),
       heatZoomHint: heatZoom ? L.heatZoomOut : L.heatZoomIn,

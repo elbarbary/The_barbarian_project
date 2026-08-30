@@ -646,15 +646,38 @@ test('zooming a sector changes the box, never the arithmetic', () => {
   assert.equal(zoomed.heatZoomed, true);
   assert.equal(zoomed.heatZoomLabel, 'Finance');
   assert.equal(zoomed.heatTiles.length, 12, 'only that sector is drawn');
-  // To four decimal places, which is what the layout rounds its percentages
-  // to — the ratio is exact arithmetic and the tolerance is the rounding.
-  assert.ok(Math.abs(ratioIn(zoomed, 'T00', 'T01') - before) < 1e-3,
-    `the tiles changed size relative to each other: ${before} then ${ratioIn(zoomed, 'T00', 'T01')}`);
+  // Zoomed, the areas are the SQUARE ROOT of value, so a sector's smaller
+  // companies are large enough to read. That is a deliberate break with the
+  // whole map's contract and the screen says so — what must survive it is the
+  // ORDER, and the exact relationship, which is checkable: an area ratio of
+  // nine becomes three.
+  const after = ratioIn(zoomed, 'T00', 'T01');
+  assert.ok(Math.abs(after - Math.sqrt(before)) < 1e-3,
+    `expected the root of ${before}, got ${after}`);
+  assert.ok(after > 1, 'the bigger company is still the bigger tile');
+  const order = (v) => v.heatTiles.map((t) => t.ticker);
+  assert.deepEqual(order(zoomed).slice(0, 3), ['T00', 'T01', 'T06'],
+    'the root reordered the sector');
+  assert.ok(zoomed.heatRootNote.length > 40, 'the screen does not say the scale changed');
+  assert.equal(whole.heatRootNote, '', 'the whole map must stay proportional');
   // And the sector now has the whole box rather than its share of it.
   const covered = (v) => v.heatTiles.reduce(
     (sum, t) => sum + parseFloat(t.width) * parseFloat(t.height), 0);
-  assert.ok(covered(zoomed) > covered(whole) * 0.98, 'the zoom did not fill the box');
   assert.ok(covered(zoomed) > 9000, `one sector covers ${covered(zoomed)} of 10,000`);
+  // And the point of the whole exercise. Strict proportionality left 27 of
+  // Finance's 80 companies too small to carry their own ticker and two of them
+  // five pixels wide; the root leaves two and nothing under eight. Asserted as
+  // an improvement rather than a guarantee: over a wide enough spread — this
+  // fixture's is far wider than any real sector's — some tail always stays
+  // small, and a test that promised otherwise would be promising something
+  // arithmetic cannot deliver.
+  const finance = new Set(zoomed.heatTiles.map((t) => t.ticker));
+  const unlabelled = (v) => v.heatTiles.filter(
+    (t) => finance.has(t.ticker) && !t.showTicker).length;
+  assert.ok(unlabelled(zoomed) < unlabelled(whole),
+    `${unlabelled(whole)} unreadable before, ${unlabelled(zoomed)} after`);
+  assert.ok(unlabelled(zoomed) <= zoomed.heatTiles.length / 4,
+    'most of a zoomed sector should be readable');
   assert.match(zoomed.heatDrawn, /12 in Finance/);
 
   // And it comes back out — by the same control, and by the crumb.

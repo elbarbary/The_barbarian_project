@@ -704,9 +704,22 @@
         </div>
       </div>
 
+      <!-- The companies this sector holds that cannot be sized at all. Named
+           and openable, because a sector view that quietly holds four fewer
+           companies than the sector does is a sector view that is wrong. -->
+      <sc-if value="{{ hasHeatUnsized }}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:0 10px">
+          <span style="font-size:11.5px;color:var(--faint);line-height:1.55">{{ heatUnsizedNote }}</span>
+          <sc-for list="{{ heatUnsized }}" as="u" hint-placeholder-count="4">
+            <span onClick="{{ u.go }}" title="{{ u.name }}" style="cursor:pointer;padding:4px 11px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--accent)">{{ u.ticker }}</span>
+          </sc-for>
+        </div>
+      </sc-if>
+
       <!-- What is NOT on the picture. A map that silently drops what it could
            not size is a map that claims to be the whole exchange. -->
       <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55;text-wrap:pretty">
+        <sc-if value="{{ heatZoomed }}"><div>{{ heatRootNote }}</div></sc-if>
         <div>{{ heatDrawn }}</div>
         <sc-if value="{{ hasHeatSliver }}"><div>{{ heatSliver }}</div></sc-if>
         <sc-if value="{{ hasHeatUnpriced }}"><div>{{ heatUnpriced }}</div></sc-if>
