@@ -349,6 +349,30 @@ def search(date_from: str, date_to: str, page: int) -> dict:
     )
 
 
+def note_run(year: int, month_no: int, *, held: int, expected: int) -> None:
+    """Record that the exchange answered today, whether or not it had news.
+
+    Read by `build_staleness_guard.py` when the month archive's own `harvested`
+    stamp is older than today — which happens on every quiet day, because a
+    complete archive is not rewritten. Small on purpose: the month files are
+    gzipped blobs of a third of a megabyte and git keeps every version of one,
+    so stamping the date onto that would cost roughly a third of a gigabyte a
+    year to record something that fits in a line.
+    """
+    (OUT / "filings").mkdir(parents=True, exist_ok=True)
+    (OUT / "filings" / "last-run.json").write_text(
+        json.dumps({
+            "harvested": datetime.date.today().isoformat(),
+            "month": f"{year:04d}-{month_no:02d}",
+            "held": held,
+            "expected": expected,
+            "note": "written when the archive was already complete, so a quiet "
+                    "day is distinguishable from a refused one",
+        }, ensure_ascii=False, indent=1) + "\n",
+        encoding="utf-8",
+    )
+
+
 def harvest_month(year: int, month: int, *, force: bool = False) -> int | None:
     """One month of filings, or None when it was already complete."""
     out = OUT / "filings"
@@ -363,6 +387,16 @@ def harvest_month(year: int, month: int, *, force: bool = False) -> int | None:
         held = json.loads(gzip.decompress(path.read_bytes()))
         if len(held.get("items", [])) >= expected:
             print(f"   {year}-{month:02d}: held {len(held['items'])}/{expected}")
+            # A complete read leaves proof that it happened.
+            #
+            # This returned here without touching anything, so a harvest that
+            # reached the exchange and found nothing new was indistinguishable
+            # from one that never ran — and `build_staleness_guard.py` reads
+            # exactly that distinction. On a quiet stretch the guard failed the
+            # daily build with "the harvest did not run today (last harvested
+            # 2026-08-28)" while the harvest had run minutes earlier and
+            # correctly found nothing.
+            note_run(year, month, held=len(held.get("items", [])), expected=expected)
             return None
 
     items = list(first.get("data") or [])

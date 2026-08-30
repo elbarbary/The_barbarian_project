@@ -83,6 +83,23 @@ def _date(raw: object) -> datetime.date | None:
         return None
 
 
+def last_run() -> dict | None:
+    """What `harvest_egx_beta` wrote the last time it found nothing to add.
+
+    A separate file rather than a field on the month archive: those are
+    gzipped blobs of a third of a megabyte, and stamping a date onto one four
+    times a trading day would cost the repository roughly a third of a
+    gigabyte a year.
+    """
+    path = FILINGS / "last-run.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return None
+
+
 def newest_filing_date(archive: dict) -> datetime.date | None:
     stamps = [it.get("dateStamp", "") for it in archive.get("items", [])
               if it.get("dateStamp")]
@@ -134,6 +151,25 @@ def check(today: datetime.date | None = None,
         print(f"── Staleness guard: harvest ran today, {held} filings held"
               f"{quiet} — ok")
         return 0
+
+    # A complete archive is not rewritten, so its own `harvested` stamp goes
+    # stale on every quiet day even though the harvest ran and the exchange
+    # simply had nothing new. `harvest_egx_beta.note_run` records that in a few
+    # bytes beside the month files; without it this guard failed the daily
+    # build on 30 August 2026 with "the harvest did not run today (last
+    # harvested 2026-08-28)" — minutes after a harvest that had run and
+    # correctly found nothing.
+    ran = last_run()
+    if ran and _date(ran.get("harvested")) == today and ran.get("month") == month:
+        short = (isinstance(ran.get("expected"), int)
+                 and isinstance(ran.get("held"), int)
+                 and ran["held"] < ran["expected"])
+        if not short:
+            print(f"── Staleness guard: the harvest asked today and the {month} "
+                  f"archive was already complete "
+                  f"({ran.get('held')}/{ran.get('expected')}); the exchange has "
+                  f"published nothing since {newest} — ok")
+            return 0
 
     # The harvest did not run today. Now a stale newest date means what the
     # guard was always meant to catch.
