@@ -24,6 +24,86 @@ import React from './react-shim.js';
  * Exported so the tests assert against this exact expression rather than a
  * copy of it that can drift.
  */
+/* ── the treemap ──────────────────────────────────────────────────────────
+ *
+ * Squarified (Bruls, Huizing & van Wijk, 2000). A naive treemap slices one
+ * axis and produces slivers — at 282 companies over four orders of magnitude
+ * of market value, the small ones come out a pixel wide and a hundred tall,
+ * which is a shape nobody can read a ticker in, let alone compare. Squarifying
+ * lays each row along the shorter side and stops adding to it when the aspect
+ * ratio would get worse, so tiles stay near square.
+ *
+ * Pure and exported so it can be tested against the properties that matter:
+ * no overlap, nothing outside the box, and area proportional to value. Those
+ * are hard to see and easy to break.
+ */
+export function squarify(items, x, y, w, h) {
+  const out = [];
+  const list = items.filter((i) => i.value > 0).sort((a, b) => b.value - a.value);
+  const total = list.reduce((sum, i) => sum + i.value, 0);
+  if (!list.length || total <= 0 || w <= 0 || h <= 0) return out;
+
+  const scale = (w * h) / total;
+  const areas = list.map((i) => i.value * scale);
+  let i = 0;
+  while (i < list.length) {
+    const side = Math.min(w, h);
+    const row = [];
+    let rowArea = 0;
+    let best = Infinity;
+    // Grow the row while the WORST tile in it is getting squarer, and stop at
+    // the first item that would make it worse.
+    while (i + row.length < list.length) {
+      const next = areas[i + row.length];
+      const area = rowArea + next;
+      const min = row.length ? Math.min(...row, next) : next;
+      const max = row.length ? Math.max(...row, next) : next;
+      const s2 = side * side;
+      const ratio = Math.max((s2 * max) / (area * area), (area * area) / (s2 * min));
+      if (row.length && ratio > best) break;
+      best = ratio;
+      row.push(next);
+      rowArea = area;
+    }
+    const thick = rowArea / side;
+    let along = 0;
+    for (let k = 0; k < row.length; k++) {
+      const len = row[k] / thick;
+      out.push(w >= h
+        ? Object.assign({}, list[i + k], { x, y: y + along, w: thick, h: len })
+        : Object.assign({}, list[i + k], { x: x + along, y, w: len, h: thick }));
+      along += len;
+    }
+    if (w >= h) { x += thick; w -= thick; } else { y += thick; h -= thick; }
+    i += row.length;
+  }
+  return out;
+}
+
+/** A number as a CSS percentage, clamped out of the sub-pixel weeds. */
+function pc(v) {
+  return (Math.max(0, v)).toFixed(4) + '%';
+}
+
+/* Seven steps and a grey. The grey is for a company that did not trade at all
+ * today, and it is deliberately NOT the neutral colour a flat close gets: "no
+ * trade" and "no change" look identical on a map that paints them the same,
+ * and they are opposite facts about a share.
+ *
+ * The steps are the same ones the market itself talks in — half a per cent,
+ * one and a half, three — rather than a smooth gradient, because a reader
+ * comparing two tiles can count steps and cannot count shades. */
+export function heatColour(pct) {
+  if (typeof pct !== 'number') return 'var(--hmNone)';
+  if (pct <= -3) return 'var(--hmD3)';
+  if (pct <= -1.5) return 'var(--hmD2)';
+  if (pct < 0) return 'var(--hmD1)';
+  if (pct === 0) return 'var(--hmZ)';
+  if (pct < 1.5) return 'var(--hmU1)';
+  if (pct < 3) return 'var(--hmU2)';
+  return 'var(--hmU3)';
+}
+
 export const DIRECTIVE = /\b(buy|sell|hold|avoid|accumulate|overweight|underweight|undervalued|overvalued|cheap|expensive|bargain|verdicts?|recommend\w*|target price|price target|should (buy|sell|own|avoid)|go (long|short)|(long|short) position|will (rise|fall|reach|hit))\b/i;
 
 /** What the design tool called DCLogic: state, props, and a redraw hook. */
@@ -52,7 +132,7 @@ export class Component extends Base {
   // opens on a month with no pill lit and 31 empty day cells while 1,467
   // filings sit one click away. renderVals falls back to the newest month the
   // archive actually publishes.
-  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'' };
+  state = { screen:'home', theme:'light', lang:'en', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', rateOpen:'' };
 
   // ── copy ──
   copy() {
@@ -204,6 +284,20 @@ export class Component extends Base {
       followKeptDevice:'Kept in this browser only, because there is no account to keep it against while you are signed out. Sign in and it follows you.',
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
       followOfCount:'of {n}',
+      // ── the heat map ──
+      heatTitle:'Heat map',
+      heatLead:'Every company sized by what the market says it is worth, coloured by how it moved today. Grouped by sector, because a red block is a different fact from a red company.',
+      heatAll:'All EGX',
+      heatCount:'{n} companies',
+      heatLegend:'Today\u2019s move',
+      heatDrawn:'{drawn} of {total} drawn. {missing} carry no market value on file, so there is no size to give them.',
+      heatAllDrawn:'All {drawn} sized and drawn.',
+      heatNoPrice:'{n} of them have no price today and are drawn grey rather than flat \u2014 no trade is not the same as no change.',
+      heatMissing:'{n} in the index are not in this directory and cannot be drawn: {which}.',
+      heatFrom:'Index membership as published by the exchange, {at}.',
+      heatCarried:'Held from {at} \u2014 the exchange did not answer on the last build.',
+      heatNoIndex:'No membership document has been published, so the index tabs have nothing to draw. The whole market is unaffected.',
+      heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
@@ -399,6 +493,20 @@ export class Component extends Base {
       followKeptDevice:'محفوظة في هذا المتصفح وحده، إذ لا حساب تُحفظ فيه وأنت غير مسجَّل الدخول. سجِّل الدخول فتتبعك القائمة.',
       followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
+      // ── الخريطة الحرارية ──
+      heatTitle:'الخريطة الحرارية',
+      heatLead:'كل شركة بحجم ما تقول السوق إنها تساويه، وبلون تحرّكها اليوم. مجمّعة بالقطاع، لأن قطاعاً أحمر غير شركة حمراء.',
+      heatAll:'البورصة كلها',
+      heatCount:'{n} شركة',
+      heatLegend:'تغيّر اليوم',
+      heatDrawn:'رُسمت {drawn} من {total}. {missing} بلا قيمة سوقية مسجّلة، فلا حجم يُعطى لها.',
+      heatAllDrawn:'رُسمت {drawn} جميعها.',
+      heatNoPrice:'{n} منها بلا سعر اليوم، وتُرسم رمادية لا محايدة \u2014 غياب التداول ليس ثبات السعر.',
+      heatMissing:'{n} من المؤشر غير موجودة في هذا الدليل ولا يمكن رسمها: {which}.',
+      heatFrom:'مكوّنات المؤشر كما تنشرها البورصة، {at}.',
+      heatCarried:'محفوظة من {at} \u2014 لم تُجب البورصة في آخر بناء.',
+      heatNoIndex:'لم يُنشر مستند للمكوّنات، فلا شيء ترسمه تبويبات المؤشرات. السوق كاملةً غير متأثرة.',
+      heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
@@ -739,7 +847,9 @@ export class Component extends Base {
       crossings:'M4.6 6.2h4.2l4 6h6.6M4.6 17.8h4.2l4-6M18.4 9.4l2 2.8-2 2.8',
       // The same star that follows a company, so the control and the screen it
       // fills are recognisably one thing.
-      watchlist:'M12 3.6 14.6 9l5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.8 9.4 9z'
+      watchlist:'M12 3.6 14.6 9l5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.8 9.4 9z',
+      // Tiles of unequal size, which is the whole idea of the screen.
+      heat:'M3.6 3.6h9.6v7.2H3.6zM15 3.6h5.4v4.2H15zM15 9.6h5.4v10.8H15zM3.6 12.6h5.4v7.8H3.6zM10.8 12.6h2.4v7.8h-2.4z'
     };
 
     // market table
@@ -1846,6 +1956,105 @@ export class Component extends Base {
         href:'https://example.org', criteria:[{label:ar?'الشفافية':'Transparency',value:'9/25',pct:'36%'},{label:ar?'حجم العينة':'Sample size',value:'11/25',pct:'44%'},{label:ar?'قابلية التكرار':'Replicability',value:'7/25',pct:'28%'},{label:ar?'مراجعة الأقران':'Peer review',value:'11/25',pct:'44%'}] }
     ];
 
+    /* ── the heat map ────────────────────────────────────────────────────
+     *
+     * Two levels. Sectors first, because a map of 282 companies with no
+     * grouping answers "what moved" and never "what moved TOGETHER", and the
+     * second question is the one a map is better at than a table.
+     *
+     * Size is market value as the pipeline publishes it — whole pounds, and
+     * NOT recomputed from the live price. Tiles that resized every five
+     * minutes would make the map jump under the reader for a reason nothing
+     * on screen explains, and the day's move is already the colour.
+     */
+    const HEAT_TABS = [['ALL', L.heatAll]].concat(
+      (D.indexMembers || []).map((i) => [i.id, ar ? i.labelAr : i.label]));
+    const heatOn = HEAT_TABS.some(([id]) => id === st.heat) ? st.heat : 'ALL';
+    const heatDoc = (D.indexMembers || []).find((i) => i.id === heatOn) || null;
+    const heatTabs = HEAT_TABS.map(([id, label]) => {
+      const on = id === heatOn;
+      const doc = (D.indexMembers || []).find((i) => i.id === id);
+      return { label, count: doc ? String(doc.count) : String(D.companies.length),
+        go: () => this.setState({ heat: id }),
+        color: on ? '#1B1917' : 'var(--t2)', bg: on ? 'var(--accent)' : 'transparent',
+        border: on ? 'transparent' : 'var(--rule)', sh: on ? 'var(--shPill)' : 'none' };
+    });
+
+    const heatPool = heatDoc
+      ? heatDoc.tickers.map((t) => D.companies.find((c) => c.ticker === t)).filter(Boolean)
+      : D.companies;
+    // A company with no market value cannot be given a size. Saying so beats
+    // drawing it at some arbitrary minimum, which would put a company the
+    // pipeline knows nothing about beside one it does, at the same weight.
+    const heatSized = heatPool.filter((c) => typeof c.cap === 'number' && c.cap > 0);
+    // Named, because a constituent of a real index that this directory has
+    // never heard of is a gap worth a reader knowing about rather than a row
+    // quietly missing from a picture.
+    const heatAbsent = heatDoc
+      ? heatDoc.tickers.filter((t) => !D.companies.some((c) => c.ticker === t))
+      : [];
+
+    const bySector = new Map();
+    for (const c of heatSized) {
+      const key = c.sector || '';
+      if (!bySector.has(key)) bySector.set(key, []);
+      bySector.get(key).push(c);
+    }
+    const heatBlocks = [];
+    const heatTiles = [];
+    const GAP = 0.32;          // per cent of the box, between sector blocks
+    const STRIP = 2.4;         // the sector's name, where there is room for it
+    const sectorRects = squarify(
+      [...bySector.entries()].map(([key, list]) => ({
+        key, list, value: list.reduce((sum, c) => sum + c.cap, 0) })),
+      0, 0, 100, 100);
+    for (const block of sectorRects) {
+      // The gap has to be a fraction of the block, never a constant. Two of
+      // the twenty sectors come out 0.585% wide — one company each — and a
+      // fixed 0.32% on both sides is more than the whole block: the width went
+      // negative, clamped to zero, and those companies vanished from a map
+      // that had just told the reader it drew 239 of them. The neighbouring
+      // slivers came from the same arithmetic.
+      const gap = Math.min(GAP, block.w / 5, block.h / 5);
+      const x = block.x + gap, y = block.y + gap;
+      const w = Math.max(0, block.w - gap * 2), h = Math.max(0, block.h - gap * 2);
+      const strip = h > STRIP * 3 && w > 7 ? STRIP : 0;
+      heatBlocks.push({ label: sectorName(block.key), showLabel: strip > 0,
+        left: pc(x), top: pc(y), width: pc(w), height: pc(h),
+        labelTop: pc(y + 0.25), labelLeft: pc(x + 0.5), labelWidth: pc(w - 1) });
+      for (const t of squarify(block.list.map((c) => ({ c, value: c.cap })),
+                               x, y + strip, w, Math.max(0, h - strip))) {
+        const priced = typeof t.c.pct === 'number';
+        heatTiles.push({
+          ticker: t.c.ticker, name: this.nm(t.c.name),
+          pct: priced ? this.pct(t.c.pct) : '\u2014',
+          bg: heatColour(t.c.pct), fg: 'var(--hmInk)',
+          // A ticker printed into a tile too small to hold it is a smear. The
+          // threshold is in per cent of the box because that is the only unit
+          // this side of the layout knows; the box's own aspect ratio makes it
+          // pixels.
+          showTicker: t.w >= 2.9 && t.h >= 2.2,
+          showPct: t.w >= 5 && t.h >= 4.4,
+          left: pc(t.x), top: pc(t.y), width: pc(t.w), height: pc(t.h),
+          title: `${t.c.ticker} \u00b7 ${this.nm(t.c.name)} \u00b7 ${priced ? this.pct(t.c.pct) : '\u2014'}`,
+          go: () => this.setState({ screen: 'company', ticker: t.c.ticker }),
+        });
+      }
+    }
+    const heatUnpriced = heatSized.filter((c) => typeof c.pct !== 'number').length;
+    const heatMissingCount = heatPool.length - heatSized.length;
+    // The map is to scale and the exchange is not evenly sized: the largest
+    // company on it is worth twenty-five thousand times the smallest, so the
+    // smallest come out a hairline. The alternative is a floor under the tile
+    // size, which would draw a company worth a rounding error at the same
+    // weight as one fifty times bigger — a prettier map that says something
+    // false. The slivers stay and the screen says why.
+    const heatSlivers = heatTiles.filter((t) => Math.min(
+      parseFloat(t.width), parseFloat(t.height)) < 0.7).length;
+    const heatCaps = heatSized.map((c) => c.cap);
+    const heatSpread = heatCaps.length
+      ? Math.max(...heatCaps) / Math.min(...heatCaps) : 0;
+
     // Built here rather than at the top because its counters are the lists
     // themselves — the design had 18 stories, 282 listings and KORA open,
     // whatever the documents actually held.
@@ -1859,6 +2068,9 @@ export class Component extends Base {
       // Fourth, and its own screen: who bought and who sold is a different
       // question from what moved, and the exchange answers it separately.
       ['investors', ar?'المستثمرون':'Investors', ''],
+      // Beside Market, because it answers the same question — what did the
+      // exchange do today — for a reader who would rather see it than read it.
+      ['heat', ar?'الخريطة':'Heat map', String(heatTiles.length)],
       // Its own screen rather than a block on Home. A list a reader builds is
       // not a summary of the day, and it was sitting under the day's summary
       // being scrolled past — a place to go back to has to be somewhere you
@@ -1984,6 +2196,32 @@ export class Component extends Base {
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
       isWatchlist: st.screen === 'watchlist',
+      isHeat: st.screen === 'heat',
+      heatTabs, heatBlocks, heatTiles,
+      noHeat: heatTiles.length === 0,
+      noHeatIndex: (D.indexMembers || []).length === 0,
+      heatDrawn: heatMissingCount === 0
+        ? L.heatAllDrawn.replace('{drawn}', String(heatSized.length))
+        : L.heatDrawn.replace('{drawn}', String(heatSized.length))
+            .replace('{total}', String(heatPool.length))
+            .replace('{missing}', String(heatMissingCount)),
+      hasHeatSliver: heatSlivers > 0,
+      heatSliver: L.heatSliver.replace('{n}', String(heatSlivers))
+        .replace('{times}', Math.round(heatSpread).toLocaleString('en-US')),
+      hasHeatUnpriced: heatUnpriced > 0,
+      heatUnpriced: L.heatNoPrice.replace('{n}', String(heatUnpriced)),
+      hasHeatAbsent: heatAbsent.length > 0,
+      heatAbsent: L.heatMissing.replace('{n}', String(heatAbsent.length))
+        .replace('{which}', heatAbsent.join(', ')),
+      hasHeatSource: Boolean(heatDoc),
+      heatSource: heatDoc
+        ? (heatDoc.carried
+            ? L.heatCarried.replace('{at}', this.shortDate(heatDoc.asOf))
+            : L.heatFrom.replace('{at}', this.shortDate(heatDoc.asOf)))
+        : '',
+      // The key under the map, in the map's own colours.
+      heatKey: [-3.5, -2, -0.7, 0, 0.7, 2, 3.5].map((v) => ({
+        bg: heatColour(v), label: v === 0 ? '0' : this.pct(v) })),
       indices, movers, watchlist, readNow, feed,
       followed, noFollowed: followed.length === 0, hasFollowed: followed.length > 0,
       followedCount: followed.length ? String(followed.length) : '',

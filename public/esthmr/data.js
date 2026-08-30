@@ -402,6 +402,31 @@ export async function live() {
  * emit — and it had no way of ever going away by itself.
  */
 
+/** Who is in EGX 30, EGX 70 EWI and EGX 100 EWI, as the exchange states it.
+ *
+ * Membership is not derivable. "The thirty biggest by market value" is a
+ * plausible rule and not the one the exchange uses — it weights by free float,
+ * screens on liquidity, and reviews twice a year — so a list computed here and
+ * captioned "EGX 30" would be an invented fact about a real index.
+ * build_indices_api.py asks the exchange and publishes the answer; this reads
+ * it, and a screen with no document draws no index.
+ */
+export async function indices() {
+  const doc0 = await doc('indices.json');
+  return {
+    asOf: doc0.as_of || null,
+    list: (doc0.indices || []).map((i) => ({
+      id: i.id, label: i.label, labelAr: i.label_ar || i.label,
+      count: typeof i.count === 'number' ? i.count : (i.tickers || []).length,
+      asOf: i.as_of || doc0.as_of || null,
+      // A list kept from an earlier day because the exchange would not answer
+      // this one. It dates itself rather than passing for today's.
+      carried: i.carried === true,
+      tickers: (i.tickers || []).filter((t) => typeof t === 'string'),
+    })),
+  };
+}
+
 /** The documents Home needs beyond the directory: the index history, and the
  *  archive's own read of what is worth looking at. */
 export async function attention() {

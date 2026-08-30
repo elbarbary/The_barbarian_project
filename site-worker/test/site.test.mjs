@@ -489,6 +489,146 @@ test('the session line says where the prices came from and when', async () => {
   assert.match(line, /13:16/);
 });
 
+/* ── the heat map ──────────────────────────────────────────────────────── */
+
+const { squarify, heatColour } = await import('../../public/esthmr/logic.js');
+
+test('the treemap fills its box exactly, once, in proportion', async () => {
+  // Three properties, all invisible on a screenshot and all easy to break:
+  // every tile inside the box, no two overlapping, and area proportional to
+  // value. A map that fails the third is a picture that lies about size.
+  const items = Array.from({ length: 60 }, (_, i) => ({ id: `T${i}`, value: Math.pow(1.3, 60 - i) }));
+  const tiles = squarify(items, 0, 0, 100, 100);
+  assert.equal(tiles.length, 60);
+  const total = items.reduce((sum, i) => sum + i.value, 0);
+  for (const t of tiles) {
+    assert.ok(t.x >= -1e-9 && t.y >= -1e-9 && t.x + t.w <= 100 + 1e-9 && t.y + t.h <= 100 + 1e-9,
+      `${t.id} escapes the box`);
+    assert.ok(Math.abs((t.w * t.h) / 10000 - t.value / total) < 1e-9, `${t.id} is the wrong size`);
+  }
+  const area = tiles.reduce((sum, t) => sum + t.w * t.h, 0);
+  assert.ok(Math.abs(area - 10000) < 1e-6, `the tiles cover ${area}, not the box`);
+  for (let i = 0; i < tiles.length; i++) {
+    for (let j = i + 1; j < tiles.length; j++) {
+      const a = tiles[i], b = tiles[j];
+      const over = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x) > 1e-9
+        && Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y) > 1e-9;
+      assert.ok(!over, `${a.id} and ${b.id} overlap`);
+    }
+  }
+  // A degenerate box draws nothing rather than throwing or drawing rubbish.
+  assert.deepEqual(squarify(items, 0, 0, 0, 50), []);
+  assert.deepEqual(squarify([{ id: 'x', value: 0 }], 0, 0, 100, 100), []);
+});
+
+test('no trade and no change are not the same colour', () => {
+  // A company that did not trade has no price to move, and painting it the
+  // neutral colour a flat close gets makes two opposite facts identical.
+  assert.equal(heatColour(null), 'var(--hmNone)');
+  assert.equal(heatColour(0), 'var(--hmZ)');
+  assert.notEqual(heatColour(null), heatColour(0));
+  assert.equal(heatColour(-4), 'var(--hmD3)');
+  assert.equal(heatColour(4), 'var(--hmU3)');
+  assert.equal(heatColour(-0.2), 'var(--hmD1)');
+});
+
+/** A directory wide enough to make sector blocks of very unequal size. */
+function heatData(extra) {
+  const sectors = ['Finance', 'Utilities', 'Miscellaneous', 'Electronic Technology'];
+  const companies = [];
+  for (let i = 0; i < 24; i++) {
+    companies.push({
+      ticker: `T${String(i).padStart(2, '0')}`,
+      name: { en: `Company ${i}`, ar: `شركة ${i}` },
+      // Four orders of magnitude, which is the exchange's own spread: one
+      // sector ends up a fraction of a per cent wide.
+      sector: i < 12 ? sectors[0] : sectors[1 + (i % 3)],
+      close: 10, pct: (i % 7) - 3, cap: Math.pow(9, 6 - (i % 6)) * (i < 2 ? 900 : 1),
+      pe: 8,
+    });
+  }
+  return { demo: false, companies, series: [], fins: [], marketDate: '2026-08-30', ...extra };
+}
+
+test('every company the map counts is a company the map draws', () => {
+  // The gap between sector blocks was a constant, and two of the exchange's
+  // twenty sectors come out 0.585% wide — narrower than the gap on both
+  // sides. Their width went negative, clamped to zero, and those companies
+  // disappeared from a map whose own caption said it had drawn them.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(heatData());
+  c.state.screen = 'heat';
+  const v = c.renderVals();
+  assert.equal(v.heatTiles.length, 24, v.heatDrawn);
+  assert.match(v.heatDrawn, /All 24/);
+  const drawn = new Set(v.heatTiles.map((t) => t.ticker));
+  assert.equal(drawn.size, 24, 'a company drawn twice is a company counted twice');
+  for (const t of v.heatTiles) {
+    assert.ok(parseFloat(t.width) > 0 && parseFloat(t.height) > 0, `${t.ticker} has no size`);
+  }
+});
+
+test('a company with no market value is named, not drawn at a made-up size', () => {
+  const data0 = heatData();
+  data0.companies[5].cap = null;
+  data0.companies[6].cap = 0;
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data0);
+  c.state.screen = 'heat';
+  const v = c.renderVals();
+  assert.equal(v.heatTiles.length, 22);
+  assert.match(v.heatDrawn, /22 of 24/);
+  assert.match(v.heatDrawn, /2 carry no market value/);
+});
+
+test('the index tabs are the exchange\'s membership or they do not exist', () => {
+  // "The thirty biggest by market value" is a plausible rule and not the one
+  // the exchange uses. A list computed here under a real index's name is an
+  // invented fact about a real index, so with no document there is no tab.
+  const bare = new Component({ accent: 'var(--accent)' });
+  bare.setData(heatData());
+  bare.state.screen = 'heat';
+  let v = bare.renderVals();
+  assert.deepEqual(v.heatTabs.map((t) => t.label), ['All EGX']);
+  assert.equal(v.noHeatIndex, true);
+  assert.equal(v.hasHeatSource, false);
+
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(heatData({ indexMembers: [{ id: 'EGX30', label: 'EGX 30', labelAr: 'إيجي إكس 30',
+    count: 3, asOf: '2026-08-30', carried: false, tickers: ['T00', 'T01', 'NOPE'] }] }));
+  c.state.screen = 'heat';
+  c.state.heat = 'EGX30';
+  v = c.renderVals();
+  assert.deepEqual(v.heatTabs.map((t) => t.label), ['All EGX', 'EGX 30']);
+  assert.deepEqual(v.heatTiles.map((t) => t.ticker).sort(), ['T00', 'T01']);
+  // A constituent this directory has never heard of is named rather than
+  // quietly dropped from a picture captioned with the index's name.
+  assert.equal(v.hasHeatAbsent, true);
+  assert.match(v.heatAbsent, /NOPE/);
+  assert.match(v.heatSource, /as published by the exchange/);
+
+  // A list held from an earlier day says so instead of passing for today's.
+  c.setData(heatData({ indexMembers: [{ id: 'EGX30', label: 'EGX 30', labelAr: 'إيجي إكس 30',
+    count: 2, asOf: '2026-08-24', carried: true, tickers: ['T00', 'T01'] }] }));
+  assert.match(c.renderVals().heatSource, /Held from 24 Aug 2026/);
+});
+
+test('main.js never hands the component two values under one name', async () => {
+  // `indices` was already the index CARDS Home draws when the heat map's
+  // membership arrived under the same name in the same object literal. The
+  // second key wins silently, and Home loses its three level cards.
+  const { readFile } = await import('node:fs/promises');
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  for (const [, body] of main.matchAll(/setData\(\{([\s\S]*?)\n\s*\}\);/g)) {
+    const keys = [...body.matchAll(/^\s{6}([a-zA-Z_$][\w$]*):/gm)].map((m) => m[1]);
+    const seen = new Set();
+    for (const key of keys) {
+      assert.ok(!seen.has(key), `main.js sets "${key}" twice in one setData`);
+      seen.add(key);
+    }
+  }
+});
+
 /* ── the chrome around the screens ─────────────────────────────────────── */
 
 test('signing in actually takes the demo banner off the page', async () => {

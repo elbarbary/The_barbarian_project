@@ -179,6 +179,13 @@ STEPS = [
     # uses; best-effort, because a screen losing a section beats a build
     # stopping over it.
     ("Investors", "build_investors_api.py", True),
+    # Who is in EGX 30, EGX 70 and EGX 100. Membership is not derivable —
+    # "the thirty biggest by market value" is a plausible rule and not the
+    # exchange's — so a heat map of an index either has the exchange's own
+    # list or it has no business drawing one. Best-effort and carry-forward,
+    # for the same reason as Investors: an index does not lose thirty
+    # companies because a host had a bad minute.
+    ("Index constituents", "build_indices_api.py", True),
     ("Rates", "build_rates_api.py", True),
     # The world outside the exchange.
     #
