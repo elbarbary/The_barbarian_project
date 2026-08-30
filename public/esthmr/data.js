@@ -535,6 +535,19 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
 }
 
 /** The per-company document, loaded when a company screen opens. */
+/** Closing prices for one company, for a line beside its name.
+ *
+ * The same document the company chart reads. It is asked for one ticker at a
+ * time and never insisted on: 231 of 282 have a series, and a company without
+ * one keeps its card and loses its line.
+ */
+export async function priceSeries(ticker) {
+  const held = await doc(`prices/${ticker}.json`).catch(() => null);
+  return ((held && held.price_history) || [])
+    .map((p) => p.close)
+    .filter((v) => typeof v === 'number');
+}
+
 export async function company(ticker) {
   // The brief is what the header's description reads. Without it the screen
   // used to fall back to the design's account of a company called KORRA, which
@@ -782,7 +795,15 @@ const UNIT_BY_ID = { gdp_growth: '%', inflation: '%', fdi: 'USD', remittances: '
 const PERCENT = new Set(['gdp_growth', 'inflation']);
 
 export async function exchange() {
-  const [r, m] = await Promise.all([doc('rates/latest.json'), doc('macro.json')]);
+  // The history is asked for and never insisted on: it is a second document
+  // for a line under a number, and a screen should lose the line rather than
+  // the figure.
+  const [r, m, h] = await Promise.all([
+    doc('rates/latest.json'), doc('macro.json'),
+    doc('rates/history.json').catch(() => null),
+  ]);
+  const series = new Map(((h && h.series) || []).map((x) => [x.id,
+    (x.sessions || []).map((row) => row.close).filter((v) => typeof v === 'number')]));
   const level = (x) => ({
     // Carried so the Exchange screen can join an index row to the series
     // market-history.json already keeps for it. The document has always had
@@ -804,6 +825,7 @@ export async function exchange() {
     // The sum behind the figure, in the document's own words. Printed only
     // when a reader asks for it, which is what the card opening is for.
     workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
+    points: series.get(x.id) || [],
     // "EGX 30 fell 0.31% in the session." — the document's own sentence, which
     // the site was throwing away in favour of the bare number.
     plain: x.plain || '', plainAr: x.plain_ar || '',
@@ -830,6 +852,12 @@ export async function exchange() {
     value: money(x.egp_gram, 2), pct: '', color: 'var(--ink)',
     unit: ar_gram, plain: x.plain || '', plainAr: x.plain_ar || '',
     workings: x.workings || '', workingsAr: x.workings_ar || x.workings || '',
+    // The dollar-an-ounce series, which is the price the metal actually has a
+    // history in. The gram-in-pounds figure on the face of the card is that
+    // same price through today's dollar, and drawing a year of it as though
+    // it were a pound series would be two moves — the metal's and the
+    // currency's — presented as one.
+    points: series.get(x.id) || [], pointsAre: 'usdOunce',
     // What an ounce costs, which is the figure every wire story quotes and
     // the one this screen could not show because it only read the gram.
     ounceUsd: typeof x.usd_ounce === 'number' ? money(x.usd_ounce, 2) : '',

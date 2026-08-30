@@ -622,6 +622,63 @@ test('the index tabs are the exchange\'s membership or they do not exist', () =>
   assert.match(c.renderVals().heatSource, /Held from 24 Aug 2026/);
 });
 
+test('zooming a sector changes the box, never the arithmetic', () => {
+  // On the whole exchange the smallest tiles are a hairline, because the map
+  // is to scale over a 25,000:1 spread. Inside one sector the same companies
+  // come back at a readable size — and they have to come back at the same
+  // RELATIVE size, or the zoom would be redrawing the market rather than
+  // magnifying it.
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(heatData());
+  c.state.screen = 'heat';
+  const whole = c.renderVals();
+  const ratioIn = (v, a, b) => {
+    const A = v.heatTiles.find((t) => t.ticker === a);
+    const B = v.heatTiles.find((t) => t.ticker === b);
+    return (parseFloat(A.width) * parseFloat(A.height))
+      / (parseFloat(B.width) * parseFloat(B.height));
+  };
+  const before = ratioIn(whole, 'T00', 'T01');
+
+  const block = whole.heatBlocks.find((b) => b.label === 'Finance');
+  block.zoom();
+  const zoomed = c.renderVals();
+  assert.equal(zoomed.heatZoomed, true);
+  assert.equal(zoomed.heatZoomLabel, 'Finance');
+  assert.equal(zoomed.heatTiles.length, 12, 'only that sector is drawn');
+  // To four decimal places, which is what the layout rounds its percentages
+  // to — the ratio is exact arithmetic and the tolerance is the rounding.
+  assert.ok(Math.abs(ratioIn(zoomed, 'T00', 'T01') - before) < 1e-3,
+    `the tiles changed size relative to each other: ${before} then ${ratioIn(zoomed, 'T00', 'T01')}`);
+  // And the sector now has the whole box rather than its share of it.
+  const covered = (v) => v.heatTiles.reduce(
+    (sum, t) => sum + parseFloat(t.width) * parseFloat(t.height), 0);
+  assert.ok(covered(zoomed) > covered(whole) * 0.98, 'the zoom did not fill the box');
+  assert.ok(covered(zoomed) > 9000, `one sector covers ${covered(zoomed)} of 10,000`);
+  assert.match(zoomed.heatDrawn, /12 in Finance/);
+
+  // And it comes back out — by the same control, and by the crumb.
+  zoomed.heatBlocks[0].zoom();
+  assert.equal(c.renderVals().heatZoomed, false);
+  block.zoom();
+  assert.equal(c.renderVals().heatZoomed, true);
+  c.renderVals().heatZoomOut();
+  assert.equal(c.renderVals().heatZoomed, false);
+});
+
+test('changing the index tab does not leave the map zoomed into nothing', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(heatData({ indexMembers: [{ id: 'EGX30', label: 'EGX 30', labelAr: 'إيجي إكس 30',
+    count: 2, asOf: '2026-08-30', carried: false, tickers: ['T12', 'T13'] }] }));
+  c.state.screen = 'heat';
+  c.renderVals().heatBlocks.find((b) => b.label === 'Finance').zoom();
+  assert.equal(c.renderVals().heatZoomed, true);
+  c.renderVals().heatTabs.find((t) => t.label === 'EGX 30').go();
+  const v = c.renderVals();
+  assert.equal(v.heatZoomed, false, 'a sector the new index has none of would draw an empty box');
+  assert.ok(v.heatTiles.length > 0);
+});
+
 test('main.js never hands the component two values under one name', async () => {
   // `indices` was already the index CARDS Home draws when the heat map's
   // membership arrived under the same name in the same object literal. The

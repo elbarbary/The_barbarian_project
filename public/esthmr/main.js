@@ -158,6 +158,29 @@ document.getElementById('signout').onclick = async () => {
       .catch((error) => console.warn('[esthmr] month', wanted, error.message));
   };
 
+  /* A line beside every followed company.
+   *
+   * One document per company, so it is fetched only for the list a reader
+   * actually keeps and only once each — a watchlist of eight costs eight
+   * requests in its lifetime, not eight per redraw. Asked for when the screen
+   * that shows them is open, because most visits never open it.
+   */
+  const seriesAsked = new Set();
+  const loadWatchSeries = () => {
+    if (component.state.screen !== 'watchlist' || component.data().demo) return;
+    for (const ticker of (component._watch || []).slice(0, 30)) {
+      if (seriesAsked.has(ticker)) continue;
+      seriesAsked.add(ticker);
+      data.priceSeries(ticker)
+        .then((points) => {
+          if (!points.length) return;
+          component._series = { ...(component._series || {}), [ticker]: points };
+          draw();
+        })
+        .catch(() => { /* a card without a line is still a card */ });
+    }
+  };
+
   // Opening a company loads its document; the screens redraw when it lands.
   let loading = null;
   const draw = component.onChange;
@@ -166,6 +189,7 @@ document.getElementById('signout').onclick = async () => {
     // empty so the calendar can open on the newest month the archive holds
     // rather than on a date compiled into the page.
     loadMonth(component.openMonth());
+    loadWatchSeries();
     const wanted = component.state.ticker;
     if (wanted && wanted !== loading
         && (!component._co || component._co.ticker !== wanted)
