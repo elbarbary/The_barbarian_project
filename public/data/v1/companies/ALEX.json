@@ -1316,7 +1316,6 @@
   }
  ],
  "profile": {
-  "market_cap": 5038324280,
   "shares_outstanding": 458029000,
   "free_float": 0.110721,
   "float_shares": 50713428.909,
@@ -1329,7 +1328,9 @@
   "rv20": 0.08111803129272369,
   "normal_value_30d": 70505.14499999999,
   "five_session_change": 5.000000000000004,
-  "history_bars": 120
+  "history_bars": 120,
+  "market_cap": 5038324280,
+  "market_cap_source": "scan"
  },
  "financials": {
   "annual": [

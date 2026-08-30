@@ -1325,7 +1325,9 @@
   "rv20": 0.41142413835767144,
   "normal_value_30d": 4437679.5200000005,
   "five_session_change": -1.526717557251911,
-  "history_bars": 120
+  "history_bars": 120,
+  "market_cap": 278640000.0,
+  "market_cap_source": "EGX"
  },
  "financials": {
   "annual": [

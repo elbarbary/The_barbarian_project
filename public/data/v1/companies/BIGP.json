@@ -1316,7 +1316,6 @@
   }
  ],
  "profile": {
-  "market_cap": 80703084,
   "shares_outstanding": 328061000,
   "perf_1w": -0.8130081300813016,
   "perf_1m": -6.8702290076335935,
@@ -1327,7 +1326,9 @@
   "rv20": 0.6621757701943968,
   "normal_value_30d": 3040856.3965000003,
   "five_session_change": 2.489626556016611,
-  "history_bars": 120
+  "history_bars": 120,
+  "market_cap": 80703084,
+  "market_cap_source": "scan"
  },
  "financials": {
   "annual": [

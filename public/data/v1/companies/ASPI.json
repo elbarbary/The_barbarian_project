@@ -1316,7 +1316,6 @@
   }
  ],
  "profile": {
-  "market_cap": 1871999958,
   "shares_outstanding": 3900000000,
   "free_float": 0.901744,
   "float_shares": 3516801600,
@@ -1329,7 +1328,9 @@
   "rv20": 1.2771548201653036,
   "normal_value_30d": 33151812.602,
   "five_session_change": -8.045977011494266,
-  "history_bars": 120
+  "history_bars": 120,
+  "market_cap": 950000000.0,
+  "market_cap_source": "EGX"
  },
  "financials": {
   "annual": [

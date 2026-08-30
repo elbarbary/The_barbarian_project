@@ -1316,7 +1316,6 @@
   }
  ],
  "profile": {
-  "market_cap": 1799399963,
   "shares_outstanding": 12000000,
   "perf_1w": -12.659916328139207,
   "perf_1m": 12.101167315175106,
@@ -1327,7 +1326,9 @@
   "rv20": 0.5921893043500687,
   "normal_value_30d": 37655201.105000004,
   "five_session_change": -10.749360157133502,
-  "history_bars": 120
+  "history_bars": 120,
+  "market_cap": 1728600000.0,
+  "market_cap_source": "EGX"
  },
  "financials": {
   "annual": [
