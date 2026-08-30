@@ -547,8 +547,29 @@ const UNPREFIXED = ['/esthmr/', '/data/v1/'];
 function underEsthmr(url) {
   if (UNPREFIXED.some((prefix) => url.pathname.startsWith(prefix))) return null;
   const target = new URL(url);
-  target.pathname = '/esthmr' + (url.pathname === '/' ? '/index.html' : url.pathname);
+  // '/esthmr/' rather than '/esthmr/index.html': the asset server's own
+  // html_handling answers the explicit file with a 307 to the directory, and
+  // that redirect would land the reader on esthmr.com/esthmr/ — the prefix
+  // this host exists to hide, in the address bar of its own front page.
+  target.pathname = '/esthmr' + (url.pathname === '/' ? '/' : url.pathname);
   return target;
+}
+
+/** A redirect from the prefixed fetch, said in this host's own terms.
+ *
+ * The asset server still redirects some paths on its own — /index.html to /,
+ * a directory without its slash — and every one of those Locations names the
+ * prefix. Left alone they walk the reader out of the clean URL one link at a
+ * time.
+ */
+function unprefixLocation(answer, url) {
+  const location = answer.headers.get('location');
+  if (!location) return answer;
+  const to = new URL(location, url);
+  if (to.origin !== url.origin || !to.pathname.startsWith('/esthmr/')) return answer;
+  const headers = new Headers(answer.headers);
+  headers.set('location', to.pathname.slice('/esthmr'.length) + to.search + to.hash);
+  return new Response(answer.body, { status: answer.status, headers });
 }
 
 export default {
@@ -566,7 +587,7 @@ export default {
       const mapped = underEsthmr(url);
       if (mapped) {
         const answer = await env.ASSETS.fetch(new Request(mapped, request));
-        if (answer.status !== 404) return answer;
+        if (answer.status !== 404) return unprefixLocation(answer, url);
         return env.ASSETS.fetch(request);
       }
     }
