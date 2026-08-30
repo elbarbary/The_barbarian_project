@@ -7,7 +7,7 @@
  "sector": "Industrial Services",
  "market": {
   "last_close": 4.13,
-  "date": "2026-08-27",
+  "date": "2026-08-30",
   "open": 4.12,
   "high": 4.2,
   "low": 3.97,
@@ -751,7 +751,7 @@
   },
   {
    "date": "2026-03-04",
-   "close": 3.4,
+   "close": 3.44,
    "volume": 456442
   },
   {
@@ -781,7 +781,7 @@
   },
   {
    "date": "2026-03-12",
-   "close": 3.52,
+   "close": 3.5,
    "volume": 186249
   },
   {
@@ -801,7 +801,7 @@
   },
   {
    "date": "2026-03-18",
-   "close": 3.66,
+   "close": 3.69,
    "volume": 215326
   },
   {
@@ -836,7 +836,7 @@
   },
   {
    "date": "2026-04-01",
-   "close": 3.6,
+   "close": 3.58,
    "volume": 323484
   },
   {
@@ -881,7 +881,7 @@
   },
   {
    "date": "2026-04-16",
-   "close": 3.62,
+   "close": 3.6,
    "volume": 304786
   },
   {
@@ -901,12 +901,12 @@
   },
   {
    "date": "2026-04-22",
-   "close": 4.04,
+   "close": 4.01,
    "volume": 2541349
   },
   {
    "date": "2026-04-23",
-   "close": 4.1,
+   "close": 4.11,
    "volume": 2026074
   },
   {
@@ -946,7 +946,7 @@
   },
   {
    "date": "2026-05-05",
-   "close": 4.0,
+   "close": 3.97,
    "volume": 617293
   },
   {
@@ -1016,7 +1016,7 @@
   },
   {
    "date": "2026-06-01",
-   "close": 3.84,
+   "close": 3.83,
    "volume": 768102
   },
   {
@@ -1106,12 +1106,12 @@
   },
   {
    "date": "2026-06-28",
-   "close": 3.66,
+   "close": 3.64,
    "volume": 422179
   },
   {
    "date": "2026-06-29",
-   "close": 3.64,
+   "close": 3.65,
    "volume": 949117
   },
   {
@@ -1171,7 +1171,7 @@
   },
   {
    "date": "2026-07-16",
-   "close": 3.96,
+   "close": 3.97,
    "volume": 1640604
   },
   {
@@ -1201,7 +1201,7 @@
   },
   {
    "date": "2026-07-27",
-   "close": 3.99,
+   "close": 3.98,
    "volume": 1145603
   },
   {
@@ -1318,19 +1318,26 @@
  "profile": {
   "market_cap": 1019274966,
   "shares_outstanding": 246798000,
-  "free_float": 0.243659,
   "float_shares": 60134553.882,
   "perf_1w": 4.030226700251881,
   "perf_1m": 4.556962025316448,
   "perf_3m": 7.552083333333335,
   "avg_volume_30d": 1755494.2666666645,
   "relative_volume_10d": 0.40158661079422847,
+  "history_bars": 0,
   "median_volume_20d": 1226381.5,
   "rv20": 0.8204477970354249,
   "normal_value_30d": 4569752.085000001,
   "five_session_change": -0.48192771084338837,
-  "history_bars": 120
+  "free_float": 0.243659
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
