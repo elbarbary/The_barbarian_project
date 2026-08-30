@@ -59,6 +59,10 @@ const LIMITS = {
   codePerIp: { max: 60, window: 3600 },
   verifyPerEmail: { max: 8, window: 900 },
   dataPerSession: { max: 1500, window: 3600 },
+  // Following and unfollowing is a click, and a reader may click a lot of
+  // them in one sitting. This is here so a stuck client cannot write in a
+  // loop, not to ration anybody's list.
+  watchPerSession: { max: 400, window: 3600 },
 };
 
 const enc = new TextEncoder();
@@ -150,6 +154,44 @@ async function overLimit(env, bucket, key, { max, window }) {
 
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
 const normalise = (raw) => String(raw || '').trim().toLowerCase();
+
+/* ── the reader's own list ────────────────────────────────────────────────
+ *
+ * A ticker and nothing else. Not a holding: no share count, no cost basis, no
+ * price paid. Those are facts about a person's money, and a publisher with no
+ * licence to advise has no business holding them.
+ *
+ * It is kept against the email the session already proves, so the list follows
+ * the reader to another browser instead of dying with one device's storage.
+ * That is a per-reader record, which the browser-only version deliberately
+ * avoided — so it is worth being exact about what it costs: this store now
+ * knows that a given inbox follows a given set of tickers. It is not deleted
+ * on sign-out, because a list that vanished when you signed out would not be
+ * saved at all; the screen carries a control that empties it, and an empty
+ * list is what is written.
+ */
+const WATCH_MAX = 60;
+const TICKER = /^[A-Z0-9.]{1,12}$/;
+
+/** The tickers in a payload, or null if it is not a list of them at all.
+ *
+ * Deliberately forgiving about the ITEMS and strict about the SHAPE: an
+ * unknown ticker is a company that may list tomorrow or delist today, and
+ * refusing the whole list over one of them would lose the other fifty-nine.
+ * Something that is not an array is a bug in the caller, and says so.
+ */
+export function cleanTickers(raw) {
+  if (!Array.isArray(raw)) return null;
+  const out = [];
+  for (const item of raw) {
+    if (typeof item !== 'string') continue;
+    const ticker = item.trim().toUpperCase();
+    if (!TICKER.test(ticker) || out.includes(ticker)) continue;
+    out.push(ticker);
+    if (out.length >= WATCH_MAX) break;
+  }
+  return out;
+}
 
 /** Every configured Resend key, in the order they should be tried.
  *
@@ -404,6 +446,32 @@ async function api(request, env, url) {
     });
   }
 
+  /* Read and replace, rather than add and remove one at a time. The list is
+     sixty short strings; sending all of it makes the client's copy and the
+     stored one the same object, so they cannot drift apart, and a lost
+     response costs one redraw instead of one silently dropped company. */
+  if (path === '/watchlist') {
+    const who = await session(request, env);
+    if (!who) return json({ error: 'signed out' }, 401, { 'cache-control': 'no-store' });
+    const key = `wl:${who.e}`;
+    if (request.method === 'GET') {
+      const held = await env.ESTHMR_AUTH.get(key, 'json').catch(() => null);
+      return json({ tickers: cleanTickers(held) || [] }, 200, { 'cache-control': 'no-store' });
+    }
+    if (request.method === 'PUT') {
+      if (await overLimit(env, 'watch', who.e, LIMITS.watchPerSession)) {
+        return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
+      }
+      let sent = {};
+      try { sent = await request.json(); } catch { /* answered below */ }
+      const tickers = cleanTickers(sent && sent.tickers);
+      if (!tickers) return json({ error: 'tickers' }, 400);
+      await env.ESTHMR_AUTH.put(key, JSON.stringify(tickers));
+      return json({ tickers }, 200, { 'cache-control': 'no-store' });
+    }
+    return json({ error: 'method' }, 405);
+  }
+
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
   let body = {};
   try { body = await request.json(); } catch { /* handled below */ }
@@ -457,9 +525,51 @@ async function api(request, env, url) {
   return json({ error: 'no such endpoint' }, 404);
 }
 
+/* ── esthmr.com ───────────────────────────────────────────────────────────
+ *
+ * The product lives at /esthmr/ inside this site's assets and now has a domain
+ * of its own. Rather than copy the files to a second place — two copies of a
+ * site drift, and the one nobody is watching drifts first — that host serves
+ * the same assets with the prefix implied: esthmr.com/ is /esthmr/index.html,
+ * and esthmr.com/logic.js is /esthmr/logic.js.
+ *
+ * Two paths are left alone. /esthmr/api/ and /data/v1/ are written absolute in
+ * the client and answer identically on either host, and prefixing them would
+ * ask for /esthmr/data/v1/, which does not exist.
+ *
+ * A path that has no file under the prefix falls back to the unprefixed one,
+ * which is what keeps /favicon.svg and the touch icon — shared with the rest
+ * of the site and living at its root — from 404ing on this host alone.
+ */
+const ESTHMR_HOSTS = new Set(['esthmr.com', 'www.esthmr.com']);
+const UNPREFIXED = ['/esthmr/', '/data/v1/'];
+
+function underEsthmr(url) {
+  if (UNPREFIXED.some((prefix) => url.pathname.startsWith(prefix))) return null;
+  const target = new URL(url);
+  target.pathname = '/esthmr' + (url.pathname === '/' ? '/index.html' : url.pathname);
+  return target;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const host = url.hostname.toLowerCase();
+
+    if (ESTHMR_HOSTS.has(host)) {
+      // One address for one site: www is a second name for the same pages, and
+      // two names mean two sets of cookies and two things to link to.
+      if (host === 'www.esthmr.com') {
+        url.hostname = 'esthmr.com';
+        return Response.redirect(url.toString(), 301);
+      }
+      const mapped = underEsthmr(url);
+      if (mapped) {
+        const answer = await env.ASSETS.fetch(new Request(mapped, request));
+        if (answer.status !== 404) return answer;
+        return env.ASSETS.fetch(request);
+      }
+    }
 
     if (url.pathname.startsWith('/esthmr/api/')) {
       return api(request, env, url).catch(() => json({ error: 'server' }, 500));

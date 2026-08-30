@@ -20,7 +20,13 @@
     // was never consulted. These prefixes run the Worker first; everything
     // else still short-circuits to the asset, which is what keeps the rest of
     // the site fast.
-    "run_worker_first": ["/data/v1/*", "/esthmr/api/*"]
+    //
+    // "/" and "/index.html" are here for a second reason. esthmr.com serves
+    // the same assets with the /esthmr/ prefix implied, and its front page is
+    // the one path where a file already exists at the root — this site's own
+    // index.html. Without the Worker running first, that host would be handed
+    // thebarbarianproject.com's home page and never reach the mapping.
+    "run_worker_first": ["/data/v1/*", "/esthmr/api/*", "/", "/index.html"]
   },
   "kv_namespaces": [
     {

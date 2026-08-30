@@ -140,33 +140,6 @@
         </div>
       </div>
 
-      <!-- The reader's own list, which is a ticker and nothing else — no share
-           count, no cost basis. Kept on this device and namespaced to whoever
-           is signed in, the way the app keeps its own. -->
-      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 20px 14px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.following }}</div>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ followedCount }}</div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:8px;margin-top:12px">
-            <sc-for list="{{ followed }}" as="w" hint-placeholder-count="4">
-              <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:14px;background:var(--sunk);min-width:0">
-                <div onClick="{{ w.follow }}" style="cursor:pointer;font-size:13px;color:{{ w.starColor }};flex:none" style-hover="color:var(--accent)">{{ w.star }}</div>
-                <div onClick="{{ w.go }}" style="cursor:pointer;min-width:0;flex:1">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ w.ticker }}</div>
-                  <div style="font-size:11.5px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.name }}</div>
-                </div>
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:end;color:{{ w.color }};flex:none">{{ w.pct }}</div>
-              </div>
-            </sc-for>
-          </div>
-          <!-- Empty is the state most readers see first, and a section that
-               simply is not there reads as a feature that does not exist. -->
-          <sc-if value="{{ noFollowed }}">
-            <div style="margin-top:12px;padding:16px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.followEmpty }}</div>
-          </sc-if>
-        </section>
-
       <!-- An index says what the market did on average; this says how widely,
            which is the question an average cannot answer. Published in
            market-history.json all along and never read. -->
@@ -541,13 +514,15 @@
       </div>
 
       <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
-        <div style="display:grid;grid-template-columns:minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px">
+        <div style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px">
+          <div></div>
           <sc-for list="{{ cols }}" as="c" hint-placeholder-count="7">
             <div onClick="{{ c.go }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:{{ c.color }};text-align:{{ c.align }}">{{ c.label }}{{ c.caret }}</div>
           </sc-for>
         </div>
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
-          <div onClick="{{ r.go }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
+          <div onClick="{{ r.go }}" style="cursor:pointer;display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
+            <div onClick="{{ r.follow }}" title="{{ L.follow }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ r.starColor }}" style-hover="color:var(--accent)">{{ r.star }}</div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ r.ticker }}</div>
             <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ r.name }}</div>
             <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sector }}</div>
@@ -655,6 +630,92 @@
   </sc-if>
 
   <!-- ══ COMPANY ══ -->
+  <!-- ══ WATCHLIST ══
+       The reader's own list, on a screen of its own rather than a block half
+       way down Home. Everything a market row carries, because a list you built
+       is worth as much detail as a list you searched — and the star that put a
+       company here is the same control that takes it away. -->
+  <sc-if value="{{ isWatchlist }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
+        <div style="min-width:0">
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.followTitle }}</h1>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:62ch;text-wrap:pretty">{{ L.followLead }}</div>
+        </div>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ followedCount }}<br>{{ marketDate }}</div>
+      </div>
+
+      <!-- One card: how the list closed, what each column is, and the list.
+           The counts were three cards of their own and each was a word and a
+           single digit stretched across a third of a 1440px screen. Sitting
+           above the rows they describe, they are both smaller and clearer.
+
+           The columns are LABELLED here where the market table labels them,
+           because "50.30  +1.31%  1.7m  15.5" is four numbers a reader has to
+           guess at otherwise. They do not sort: the order is the order they
+           were followed in, which is the reader's own and not a ranking. -->
+      <sc-if value="{{ hasFollowed }}">
+        <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:0 10px 12px;overflow:hidden">
+          <div class="om-follow-sum" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:16px 14px 15px;border-bottom:1px solid var(--rule2)">
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--up)">{{ followUp }}</span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.followRose }}</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--down)">{{ followDown }}</span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.followFell }}</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <span style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--t2)">{{ followFlatCount }}</span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.followFlat }}</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);margin-inline-start:auto">{{ followOf }}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:13px 14px 9px">
+            <div></div>
+            <sc-for list="{{ followCols }}" as="c" hint-placeholder-count="7">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:{{ c.align }}">{{ c.label }}</div>
+            </sc-for>
+          </div>
+          <sc-for list="{{ followed }}" as="w" hint-placeholder-count="6">
+            <div class="om-follow-row" style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:13px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
+              <div onClick="{{ w.follow }}" title="{{ L.unfollow }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ w.starColor }}" style-hover="color:var(--accent)">{{ w.star }}</div>
+              <div onClick="{{ w.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ w.ticker }}</div>
+              <div onClick="{{ w.go }}" style="cursor:pointer;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ w.name }}</div>
+              <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ w.sector }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end">{{ w.close }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ w.color }}">{{ w.pct }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ w.cap }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;text-align:end;color:var(--t2)">{{ w.pe }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- Empty is the state every reader meets first, so it has to say what
+           to do rather than only that there is nothing here. -->
+      <sc-if value="{{ noFollowed }}">
+        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:52px 26px 48px;text-align:center">
+          <div style="font-size:30px;line-height:1;color:var(--faint)">☆</div>
+          <div style="font-family:'Bricolage Grotesque',serif;font-size:25px;font-weight:500;letter-spacing:-.025em;margin-top:14px">{{ L.followEmptyTitle }}</div>
+          <div style="font-size:13.5px;color:var(--t2);margin-top:9px;max-width:46ch;margin-inline:auto;line-height:1.6;text-wrap:pretty">{{ L.followEmpty }}</div>
+          <div onClick="{{ goMarket }}" style="cursor:pointer;display:inline-flex;margin-top:20px;padding:9px 18px;border-radius:999px;background:var(--accent);color:#1B1917;box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase">{{ L.followBrowse }}</div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:0 10px">
+        <div style="max-width:64ch;display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:var(--faint);line-height:1.55;text-wrap:pretty">
+          <div>{{ followKept }}</div>
+        </div>
+        <!-- A store that keeps a list until it is told otherwise needs a way
+             to tell it otherwise, and that way belongs beside the list. -->
+        <sc-if value="{{ hasFollowed }}">
+          <div onClick="{{ clearWatch }}" style="cursor:pointer;flex:none;padding:8px 15px;border-radius:999px;background:transparent;border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--t2)" style-hover="border-color:var(--down);color:var(--down)">{{ L.followClear }}</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ isCompany }}">
     <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
       <div style="border-radius:26px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:28px 28px 22px">
@@ -662,6 +723,11 @@
           <div style="min-width:0">
             <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
               <span style="padding:4px 11px;border-radius:999px;background:var(--accent);color:#1B1917;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.06em">{{ co.ticker }}</span>
+              <!-- Follow, on the screen a reader is most likely to decide on:
+                   the one company they came to read about. -->
+              <sc-if value="{{ canFollowCompany }}">
+              <span onClick="{{ companyFollow }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid {{ companyWatchBorder }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:{{ companyWatchColor }}" style-hover="border-color:var(--accent)"><span style="font-size:13px;line-height:1">{{ companyStar }}</span>{{ companyWatchLabel }}</span>
+              </sc-if>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ co.sector }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ co.exchange }}</span>
             </div>
