@@ -200,7 +200,7 @@ export class Component extends Base {
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
       followOfCount:'of {n}',
       closeNote:'Official close from market.json. Not a live price.',
-      todayTitle:'Today', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
+      todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── what ties these together ──
       // The app's wording, kept word for word: the same block, on the same
       // document, should not read as two different features.
@@ -393,7 +393,7 @@ export class Component extends Base {
       followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
-      todayTitle:'اليوم', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
+      todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ما الذي يربط بينها ──
       dotsLabel:'ما الذي يربط بينها',
       dotsBody:'شركات ظهرت في أكثر من مكان خلال {days} أيام.',
@@ -954,7 +954,15 @@ export class Component extends Base {
     // inside that rule. It now runs on the demo's own first company, so the
     // worked example demonstrates the layout and asserts nothing about anyone.
     const loaded = this._co && this._co.ticker === st.ticker ? this._co : null;
-    const demoCo0 = D.companies[0] || {};
+    // The company the reader actually opened, not always the first one. The
+    // demo has one worked example and every row led to it, so clicking DEMO15
+    // gave a card headed DEMO01 — the site answering a click with a different
+    // company than the one clicked. Its identity and its prices are the demo
+    // exchange's own for that ticker; the rest of the tiles stay the worked
+    // example, which the brief on the same card says in both languages is
+    // generated and filed by nobody.
+    const demoCo0 = (st.ticker && D.companies.find((c) => c.ticker === st.ticker))
+      || D.companies[0] || {};
     const coDesign = {
       ticker: demoCo0.ticker || 'DEMO01', sector: sectorName(demoCo0.sector), sectorKey: demoCo0.sector || '',
       exchange: ar?'سوق تجريبي':'Sample exchange',
@@ -1836,7 +1844,10 @@ export class Component extends Base {
     // whatever the documents actually held.
     const navDef = [
       ['home', ar?'الرئيسية':'Home', ''],
-      ['today', ar?'اليوم':'Today', feed.length ? String(feed.length) : ''],
+      // Named for what is on it. It was "Today", which described when
+      // rather than what — and since the crossings moved to a screen of
+      // their own, what is on it is the news and nothing else.
+      ['today', ar?'الأخبار':'News', feed.length ? String(feed.length) : ''],
       ['market', ar?'السوق':'Market', String(D.companies.length)],
       // Fourth, and its own screen: who bought and who sold is a different
       // question from what moved, and the exchange answers it separately.
