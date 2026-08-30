@@ -2259,13 +2259,22 @@ test('the watchlist is a ticker and nothing else, kept per reader', async () => 
   } finally { delete globalThis.localStorage; }
 });
 
+test('the watchlist section is there before anything is in it', () => {
+  // Empty is the state most readers see first, and a section that simply is
+  // not on the page reads as a feature that does not exist.
+  const v = screen(LIVE);
+  assert.equal(v.noFollowed, true);
+  assert.equal(v.followedCount, '');
+  assert.match(v.L.followEmpty, /star/i);
+});
+
 test('a followed company that leaves the exchange drops out rather than showing dashes', () => {
   const c = new Component({ accent: 'var(--accent)' });
   c.setData(LIVE);
   c._watch = ['AAAA', 'GONE'];
   const v = c.renderVals();
   assert.deepEqual(v.followed.map((f) => f.ticker), ['AAAA']);
-  assert.equal(v.followedCount, 1);
+  assert.equal(v.followedCount, '1');   // a count for the chip, blank when none
   assert.equal(v.followed[0].watched, true);
   assert.equal(v.followed[0].star, '★');
   // and an unfollowed row offers the empty star

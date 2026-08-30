@@ -1057,6 +1057,23 @@ export async function investors() {
     // Carried so a card can say what the exchange's own combined row says
     // without anything re-deriving it.
     arabsAndForeigners: combined(d.by_nationality),
+    // Institutions against individuals, which the exchange does not state as a
+    // percentage and the app's screen shows as one. Turnover — bought plus
+    // sold — is the only honest denominator here: netting the two would
+    // compare a difference with a volume, and the nets cancel to zero across
+    // the market by construction.
+    byType: (() => {
+      const turnover = (list) => rows(list)
+        .reduce((n, r) => n + (r.buy || 0) + (r.sell || 0), 0);
+      const ind = turnover(d.individuals);
+      const inst = turnover(d.institutions);
+      const all = ind + inst;
+      if (!all) return [];
+      return [
+        { type: 'Institutions', typeAr: 'مؤسسات', percent: (inst / all) * 100, turnover: inst },
+        { type: 'Individuals', typeAr: 'أفراد', percent: (ind / all) * 100, turnover: ind },
+      ];
+    })(),
   };
 }
 
