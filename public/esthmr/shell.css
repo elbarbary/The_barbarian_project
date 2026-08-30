@@ -236,3 +236,22 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 @media (max-width: 860px) {
   .om-follow-sum { min-width: 0 !important; gap: 16px !important; position: sticky; inset-inline-start: 0; }
 }
+
+/* ── the heat map's labels ────────────────────────────────────────────────
+   Whether a ticker fits in a tile is a question in PIXELS, and the layout that
+   places the tiles knows only per cent of the box. The same 2.9% is 32px on a
+   desktop and 10px on a phone, which is how the map came out legible on one
+   and a smear on the other. Each tile is its own container and answers for
+   itself, at whatever width the box happens to be. */
+.om-heat > div { container-type: size; }
+.hm-tick, .hm-pct, .hm-sec { display: none; }
+@container (min-width: 62px) and (min-height: 40px) { .hm-sec { display: block; } }
+@container (min-width: 34px) and (min-height: 19px) { .hm-tick { display: block; } }
+@container (min-width: 46px) and (min-height: 32px) { .hm-pct { display: block; } }
+
+/* A 16:9 map is 195px tall inside a phone's card, which is not a picture of an
+   exchange. Portrait gives the tiles four times the area for the same
+   information. */
+@media (max-width: 860px) {
+  .om-heat { aspect-ratio: 3 / 4 !important; }
+}
