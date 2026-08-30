@@ -816,7 +816,13 @@ test('an open month shows that month, and says how much of it', async () => {
   assert.equal(v.filedEvents.length, 60);
   // Sixty of 1,458 fit a column; saying which sixty is the difference between
   // a sample and a claim.
-  assert.match(v.archiveNote, /Showing 60 of \d{4} filings published in Jul 2026\./);
+  assert.match(v.archiveNote,
+    /Showing the 60 most recent of \d{4} filings published in Jul 2026\./);
+  // Newest first, then cut. Cutting the document's order took the 60 OLDEST:
+  // on 30 August the panel was 60 rows all dated 2 August, and nothing filed
+  // between the 3rd and the 26th was reachable from it.
+  const dates = v.filedEvents.map((e) => e.date).filter(Boolean);
+  assert.deepEqual(dates, [...dates].sort().reverse(), 'the filed panel is not newest-first');
   assert.ok(v.filedEvents[0].ticker.length >= 3);
   // A month the reader has not opened must not borrow another month's rows.
   c.state.month = '2026-06';
@@ -1927,4 +1933,201 @@ test('the search box filters as you type and keeps the caret', async () => {
     'the caret is not restored after the rebuild');
   // And the click path must not have picked up the input listener.
   assert.ok(!/addEventListener\('input', handler\)[\s\S]{0,80}cursor = 'pointer'/.test(dc));
+});
+
+test('main.js hands the company screen every session field it reads', async () => {
+  // The bug this exists for, and it was mine: the Volume tile was moved off
+  // the thirty-day mean onto the session's own figure, and `volume` was never
+  // added to the object main.js builds — so all 282 company pages printed an
+  // em dash beside a "30-day average" that had a number in it, while the
+  // figure sat in the directory row in memory. Nothing failed.
+  //
+  // The test that was supposed to cover it hand-wrote `c._co = { ..., volume:
+  // 5780737 }`, which exercises logic.js in isolation and never touches the
+  // wiring. So this reads the wiring itself: every `loaded.X` the company
+  // screen reads must be a key the document supplies or a key main.js copies
+  // off the directory row.
+  const { readFile } = await import('node:fs/promises');
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  const logic = await readFile(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');
+
+  // What the screen reads WITHOUT a fallback. `loaded.closeDate || D.marketDate`
+  // degrades on purpose and is not this test's business; `whole(loaded.volume)`
+  // has nowhere to go but a dash, and that is the shape that shipped.
+  const all = [...logic.matchAll(/\bloaded\.([a-zA-Z_$][\w$]*)\s*(\|\||\?\?)?/g)];
+  assert.ok(all.length > 20, 'the scanner found almost no loaded.* reads');
+  const guarded = new Set(all.filter((m) => m[2]).map((m) => m[1]));
+  const read = new Set(all.map((m) => m[1]).filter((k) => !guarded.has(k)));
+
+  // What main.js copies off the directory row, plus whatever data.company()
+  // spreads in.
+  const literal = main.slice(main.indexOf('component._co = {'),
+                             main.indexOf('component._d = {', main.indexOf('component._co = {')));
+  assert.ok(literal.includes('...doc'), 'the company document is no longer spread in');
+  const copied = new Set([...literal.matchAll(/(\w+)\s*:\s*row\.\w+/g)].map((m) => m[1]));
+  copied.add('ticker');
+
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(LIVE);
+  const fromDoc = new Set(['series', 'fins', 'debt', 'review', 'profile', 'sector',
+                           'name', 'brief', 'briefAr', 'briefSource']);
+
+  const dropped = [...read].filter((k) => k && !copied.has(k) && !fromDoc.has(k));
+  assert.deepEqual(dropped, [],
+    'the company screen reads these off `loaded` and main.js never puts them there — '
+    + 'they render as an em dash on every company page');
+
+  // And specifically the one that broke, end to end through the real wiring.
+  assert.ok(/volume:\s*row\.volume/.test(literal),
+    'the session volume is not threaded onto the company screen');
+});
+
+/* ── the audit's unverified half, once it had verdicts ─────────────────── */
+
+test('the statements table is chronological, including the rows with no stated end', async () => {
+  // 8,002 of 11,480 filed rows carry `period_end`; the rest carry only a
+  // label, and sorting on the field alone dropped them into one unordered
+  // block at the foot — AALR's last 21 rows read "Q3 2025, Q4 2022, Q4 2023,
+  // Q4 2024" under a correctly ordered 49. 227 of the 249 companies with
+  // statements had at least one.
+  assert.equal(data.periodEnd({ period_end: '2026-06-30', period: 'H1 2026' }), '2026-06-30');
+  // The label is enough, and "(to 30 Jun)" is the company telling us its
+  // year-end — which a fixed quarter-end table would get wrong for the 408
+  // annual filings here that do not end in December.
+  assert.equal(data.periodEnd({ period: 'FY 2025 (to 30 Jun)' }), '2025-06-30');
+  assert.equal(data.periodEnd({ period: '9M 2026 (to 31 Mar)' }), '2026-03-31');
+  assert.equal(data.periodEnd({ period: 'Q4 2022' }), '2022-12-31');
+  assert.equal(data.periodEnd({ period: 'H1 2024' }), '2024-06-30');
+  assert.equal(data.periodEnd({ period: 'nothing dated' }), '');
+
+  const doc = await fromDisk(() => data.company('AALR'));
+  const keys = doc.fins.map(data.periodEnd);
+  assert.ok(keys.length > 20);
+  assert.deepEqual(keys, [...keys].sort().reverse(), 'AALR is out of order');
+});
+
+test('an open-filing link names where it actually goes', () => {
+  // "Open filing →" was printed on all 11,480 rows: for 4,047 it opened a
+  // Mubasher stock page — a third-party summary, not the signed document —
+  // and for the exchange-sourced rows it opened egx.com.eg's FRONT PAGE.
+  const v = screen({ ...LIVE, fins: [
+    { period: 'H1 2026', period_end: '2026-06-30', net_income: 1,
+      filing_id: 'egx-293904', source: 'https://www.egx.com.eg' },
+    { period: 'FY 2025', period_end: '2025-12-31', net_income: 1,
+      source: 'https://english.mubasher.info/markets/EGX/stocks/EOSB/financial-statements' },
+    { period: 'FY 2024', period_end: '2024-12-31', net_income: 1, source: '' },
+  ] });
+  const [filed, mubasher, none] = v.fins;
+  assert.equal(filed.openLabel, 'Open on the Egyptian Exchange');
+  assert.equal(filed.openHref, 'https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293904',
+    'a row with a filing id still points at the front page');
+  assert.equal(mubasher.openLabel, 'Open on Mubasher');
+  assert.equal(none.hasOpen, false, 'a row with no source still offers a link');
+});
+
+test('a signal card that names a filing can open it', () => {
+  const c = new Component({ accent: 'var(--accent)' });
+  const cards = c.signalCards({
+    streaks: [{ kind: 'back_to_profit', period: 'Q3 2025', run: 4, since: '2024-01-01',
+                filed: '2026-01-13', id: 'egx-282099',
+                link: 'https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=282099' }],
+    firsts: [], quiet: null,
+    // An estimate is read off signals.json, not off a document, so it gets no
+    // anchor — the same line the calendar's expected entries keep.
+    resultsDue: [{ label: '9M', expected: '2026-11-14', observations: 12,
+                   window_start: '2026-10-19', window_end: '2026-11-16' }],
+  }, c.copy(), false);
+  const [streak, due] = cards;
+  assert.equal(streak.hasHref, true);
+  assert.match(streak.href, /NewsID=282099/);
+  assert.equal(due.hasHref, false);
+  assert.equal(due.href, '');
+});
+
+test('a share that did not move gets no arrow', () => {
+  // 50 of the 282 closed exactly flat and every one carried a falling arrow
+  // beside "0.00%", on a site whose Home screen counts them as held.
+  const set = { ...LIVE, companies: [
+    { ticker: 'FLAT', name: { en: 'F', ar: 'ف' }, sector: 'Finance', close: 24.99, pct: 0, cap: 100 },
+    { ticker: 'UPPP', name: { en: 'U', ar: 'ي' }, sector: 'Finance', close: 10, pct: 1.2, cap: 100 },
+    { ticker: 'DOWN', name: { en: 'D', ar: 'د' }, sector: 'Finance', close: 10, pct: -1.2, cap: 100 },
+  ] };
+  const rows = Object.fromEntries(screen(set).rows.map((r) => [r.ticker, r]));
+  assert.equal(rows.FLAT.arrow, '', 'a flat share is drawn as falling');
+  assert.equal(rows.UPPP.arrow, '↗');
+  assert.equal(rows.DOWN.arrow, '↘');
+
+  // and the same on the company header
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(set);
+  c.state.screen = 'company';
+  c.state.ticker = 'FLAT';
+  c._co = { ticker: 'FLAT', name: { en: 'F', ar: 'ف' }, sector: 'Finance',
+            close: 24.99, pct: 0, profile: {} };
+  assert.equal(c.renderVals().co.arrow, '');
+});
+
+test('a sector median chip is named, never keyed', async () => {
+  // 11 of the 15 cards ended their median row with a chip reading "pb 2.59×"
+  // — a lowercase wire key beside "P/E" and "Return on equity", still Latin
+  // in the Arabic view.
+  const secs = await fromDisk(() => data.sectors());
+  const raw = secs.flatMap((s) => (s.medians || []).map((m) => m.key))
+    .filter((k) => /^[a-z][a-z_]*$/.test(k));
+  assert.deepEqual([...new Set(raw)], [], 'these wire keys reach a sector card');
+  const finance = secs.find((s) => s.name === 'Finance');
+  const pb = (finance.medians || []).find((m) => /Price to book/.test(m.key));
+  if (pb) assert.match((finance.medians.find((m) => m.keyAr && /القيمة الدفترية/.test(m.keyAr)) || {}).keyAr, /السعر/);
+});
+
+test('an Arabic reader gets the sector name in Arabic on the median line', () => {
+  // 1,848 median lines across 258 companies read "وسيط Finance 10.41×" — a
+  // Latin sector name inside an Arabic sentence.
+  const set = { ...LIVE, companies: [
+    { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance',
+      sectorAr: 'التمويل والخدمات المالية', close: 10, pct: 1, cap: 100 },
+  ], review: { sector: 'Finance', metrics: [
+    { key: 'pe', value: 8.4, unit: 'ratio', peer_median: 10.41, peer: 'below',
+      points: 1, series: [] },
+  ] } };
+  const c = new Component({ accent: 'var(--accent)' });
+  c.state.lang = 'ar';
+  c.setData(set);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  c._co = { ticker: 'AAAA', name: { en: 'A', ar: 'أ' }, sector: 'Finance', close: 10, pct: 1, profile: {} };
+  const pe = c.renderVals().ratios.find((r) => r.key === 'pe');
+  assert.ok(pe.peerMedian.includes('التمويل والخدمات المالية'), pe.peerMedian);
+  assert.ok(!pe.peerMedian.includes('Finance'), 'the Latin sector name is still there');
+});
+
+test('the calendar opens on a month the archive holds, not on a date in the source', () => {
+  // '2026-08' was compiled into the state initialiser. Right until 1
+  // September: the index rolls, the screen keeps opening on August, and once
+  // 2026-08 leaves the twelve-month window it opens on a month with no pill
+  // lit and 31 empty cells while 1,467 filings sit one click away.
+  const c = new Component({ accent: 'var(--accent)' });
+  assert.equal(c.state.month, '', 'the default month is hardcoded again');
+  c.setData({ ...LIVE, filedMonths: [
+    { id: '2026-09', count: 12 }, { id: '2026-08', count: 1467 },
+  ] });
+  assert.equal(c.openMonth(), '2026-09', 'it does not open on the newest month');
+  c.state.month = '2026-08';
+  assert.equal(c.openMonth(), '2026-08', 'it ignores the reader\'s pick');
+  c.state.month = '2019-04';                    // rolled out of the window
+  assert.equal(c.openMonth(), '2026-09', 'a month the archive lost is not reconciled');
+});
+
+test('the Research rail entry is offered only when something is published', () => {
+  // `studies` is the demo's three mock-up papers and nothing else, so every
+  // signed-in reader who clicked Research got a 50px heading and the line
+  // "Nothing published for this yet." — every time.
+  const live = screen(LIVE);
+  assert.equal(live.studies.length, 0);
+  assert.ok(!live.nav.some((n) => /Research/.test(n.label)),
+    'the rail offers a destination that cannot answer');
+  const c = new Component({ accent: 'var(--accent)' });
+  c.setData(data.demo());
+  assert.ok(c.renderVals().nav.some((n) => /Research/.test(n.label)),
+    'the demo lost its Research entry');
 });
