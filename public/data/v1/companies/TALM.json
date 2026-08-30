@@ -6,12 +6,12 @@
  },
  "sector": "Consumer Services",
  "market": {
-  "last_close": 17.74,
+  "last_close": 17.52,
   "date": "2026-08-30",
   "open": 17.65,
   "high": 17.85,
-  "low": 17.65,
-  "volume": 11323
+  "low": 17.36,
+  "volume": 989371
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 734037000,
   "free_float": 0.259514,
   "float_shares": 190492878.018,
-  "perf_1w": -8.556701030927835,
-  "perf_1m": -1.3896609227348529,
-  "perf_3m": 14.3041237113402,
-  "avg_volume_30d": 2061560.9666666666,
-  "relative_volume_10d": 0.007945348241743483,
+  "perf_1w": -9.69072164948453,
+  "perf_1m": -2.612562534741517,
+  "perf_3m": 12.88659793814433,
+  "avg_volume_30d": 2094162.5666666667,
+  "relative_volume_10d": 0.6942415557080271,
   "median_volume_20d": 1622498,
   "rv20": 1.3714032313136904,
   "normal_value_30d": 24328108.95,

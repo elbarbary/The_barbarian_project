@@ -6,12 +6,12 @@
  },
  "sector": "Utilities",
  "market": {
-  "last_close": 17.26,
+  "last_close": 17.41,
   "date": "2026-08-30",
   "open": 17,
-  "high": 17.26,
+  "high": 17.6,
   "low": 17,
-  "volume": 1389
+  "volume": 1308674
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 1050000000,
   "free_float": 0.59243,
   "float_shares": 622051500,
-  "perf_1w": 2.860548271752088,
-  "perf_1m": -2.9246344206974104,
-  "perf_3m": -11.98368179500254,
-  "avg_volume_30d": 1993440.1666666428,
-  "relative_volume_10d": 0.0007836796926757029,
+  "perf_1w": 3.7544696066746064,
+  "perf_1m": -2.0809898762654724,
+  "perf_3m": -11.218765935747065,
+  "avg_volume_30d": 2037016.3333333095,
+  "relative_volume_10d": 0.7383594227017155,
   "median_volume_20d": 1838891,
   "rv20": 0.3629807313212148,
   "normal_value_30d": 32886417.6,

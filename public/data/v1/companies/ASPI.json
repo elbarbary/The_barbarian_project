@@ -6,12 +6,12 @@
  },
  "sector": "Finance",
  "market": {
-  "last_close": 0.483,
+  "last_close": 0.477,
   "date": "2026-08-30",
   "open": 0.48,
-  "high": 0.491,
-  "low": 0.48,
-  "volume": 2161751
+  "high": 0.515,
+  "low": 0.473,
+  "volume": 241496312
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 3900000000,
   "free_float": 0.901744,
   "float_shares": 3516801600,
-  "perf_1w": -4.733727810650891,
-  "perf_1m": 7.5723830734966535,
-  "perf_3m": 88.671875,
-  "avg_volume_30d": 96572907.86666672,
-  "relative_volume_10d": 0.03176127899060911,
+  "perf_1w": -6.114398422090735,
+  "perf_1m": 6.013363028953222,
+  "perf_3m": 85.93749999999999,
+  "avg_volume_30d": 104521045.03333333,
+  "relative_volume_10d": 3.5350741305557905,
   "median_volume_20d": 65491213.5,
   "rv20": 1.2771548201653036,
   "normal_value_30d": 33151812.602,

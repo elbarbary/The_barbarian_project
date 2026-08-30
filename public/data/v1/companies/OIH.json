@@ -6,12 +6,12 @@
  },
  "sector": "Communications",
  "market": {
-  "last_close": 1.99,
+  "last_close": 2.08,
   "date": "2026-08-30",
   "open": 2,
-  "high": 2.01,
+  "high": 2.09,
   "low": 1.98,
-  "volume": 9021517
+  "volume": 106657569
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 5245690000,
   "free_float": 0.48338700000000007,
   "float_shares": 2535698352.03,
-  "perf_1w": 4.736842105263162,
-  "perf_1m": 34.45945945945946,
-  "perf_3m": 34.45945945945946,
-  "avg_volume_30d": 74402468.56666662,
-  "relative_volume_10d": 0.12736749182456977,
+  "perf_1w": 9.473684210526324,
+  "perf_1m": 40.54054054054055,
+  "perf_3m": 40.54054054054055,
+  "avg_volume_30d": 77657003.63333328,
+  "relative_volume_10d": 1.5058118327146073,
   "median_volume_20d": 71885280,
   "rv20": 1.3168232077554682,
   "normal_value_30d": 106768425.63,

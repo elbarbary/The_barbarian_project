@@ -6,12 +6,12 @@
  },
  "sector": "Commercial Services",
  "market": {
-  "last_close": 619,
+  "last_close": 618,
   "date": "2026-08-30",
   "open": 620.69,
-  "high": 620.69,
-  "low": 619,
-  "volume": 100
+  "high": 625.5,
+  "low": 617,
+  "volume": 2967
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 90900000,
   "free_float": 0.276637,
   "float_shares": 25146303.3,
-  "perf_1w": -0.18704850361196598,
-  "perf_1m": 1.3923013923013923,
-  "perf_3m": -2.2981248816213062,
-  "avg_volume_30d": 14336.733333333334,
-  "relative_volume_10d": 0.008286995218403759,
+  "perf_1w": -0.3482972136222859,
+  "perf_1m": 1.2285012285012284,
+  "perf_3m": -2.4559631289854074,
+  "avg_volume_30d": 14432.3,
+  "relative_volume_10d": 0.24587514813003952,
   "median_volume_20d": 5952.5,
   "rv20": 0.5170936581268375,
   "normal_value_30d": 3524803.4000000004,

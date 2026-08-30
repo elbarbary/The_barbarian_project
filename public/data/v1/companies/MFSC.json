@@ -6,12 +6,12 @@
  },
  "sector": "Retail Trade",
  "market": {
-  "last_close": 49.52,
+  "last_close": 50.71,
   "date": "2026-08-30",
   "open": 49.32,
-  "high": 49.52,
+  "high": 52,
   "low": 49.32,
-  "volume": 174
+  "volume": 147245
  },
  "price_history": [
   {
@@ -1319,11 +1319,11 @@
   "market_cap": 4623749971,
   "shares_outstanding": 93750000,
   "float_shares": 12724218.75,
-  "perf_1w": 1.0406039583758522,
-  "perf_1m": 5.970468649689721,
-  "perf_3m": -4.086771257021111,
-  "avg_volume_30d": 184942.8,
-  "relative_volume_10d": 0.0023189765583455832,
+  "perf_1w": 3.4686798612528116,
+  "perf_1m": 8.517012625722243,
+  "perf_3m": -1.7819097423978338,
+  "avg_volume_30d": 189845.16666666666,
+  "relative_volume_10d": 1.962400593871238,
   "history_bars": 0,
   "median_volume_20d": 108081.5,
   "rv20": 0.5335140611483001,
