@@ -756,7 +756,7 @@
   },
   {
    "date": "2026-03-05",
-   "close": 1.71,
+   "close": 1.7,
    "volume": 2609174
   },
   {
@@ -1281,7 +1281,7 @@
   },
   {
    "date": "2026-08-18",
-   "close": 2.32,
+   "close": 2.31,
    "volume": 4839551
   },
   {
@@ -1296,7 +1296,7 @@
   },
   {
    "date": "2026-08-23",
-   "close": 2.28,
+   "close": 2.29,
    "volume": 4216060
   },
   {
@@ -1323,12 +1323,18 @@
   "perf_3m": 39.20454545454546,
   "avg_volume_30d": 10432342.633333331,
   "relative_volume_10d": 1.125041006716436,
+  "history_bars": 0,
   "median_volume_20d": 6263898.5,
   "rv20": 2.2871285350488995,
   "normal_value_30d": 14079346.46,
-  "five_session_change": 4.347826086956519,
-  "history_bars": 120
+  "five_session_change": 4.347826086956519
  },
+ "profile_carried": [
+  "five_session_change",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
