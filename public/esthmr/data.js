@@ -249,13 +249,62 @@ async function doc(path) {
   return response.json();
 }
 
+/* ── the live feed ───────────────────────────────────────────────────────
+ *
+ * The published documents are rebuilt three times a trading day. That is the
+ * right cadence for filings and for a P/E, and the wrong one for a price: at
+ * ten past one in the afternoon the site was printing a capture taken at
+ * twenty past ten under a heading that said the session was still running. A
+ * number that old, presented as now, is the failure §49 is about — a price
+ * shown without its age.
+ *
+ * quotes.thebarbarianproject.com is the same vendor the daily scan reads,
+ * re-read at most every five minutes and cached for everybody in between. It
+ * was built for the app and the website never called it.
+ *
+ * The published document stays the source of truth and the fallback: this
+ * replaces the PRICE, the MOVE and the VOLUME during an open session and
+ * nothing else, and only when the feed answers, says the market is open, and
+ * does not report itself stale. Everything derived at build time against the
+ * published close — the P/E above all — is left alone, because a multiple
+ * struck against one price and displayed beside another is two facts
+ * pretending to be one.
+ */
+const QUOTES = 'https://quotes.thebarbarianproject.com/quotes.json';
+
+/** The live snapshot, or null. Never throws: a price feed that is down must
+ *  cost the page its freshness, not its contents. */
+async function liveQuotes() {
+  try {
+    const response = await fetch(QUOTES, { mode: 'cors' });
+    if (!response.ok) return null;
+    const body = await response.json();
+    if (!body || !body.quotes || body.stale) return null;
+    return body.session && body.session.open ? body : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function live() {
-  const [directory, market, manifest] = await Promise.all([
+  const [directory, market, manifest, feed] = await Promise.all([
     doc('companies.json'), doc('market.json'), doc('manifest.json'),
+    liveQuotes(),
   ]);
   const quotes = market.stocks || {};
+  const fresh = (feed && feed.quotes) || {};
   const companies = (directory.companies || []).map((c) => {
-    const q = quotes[c.ticker] || {};
+    const held = quotes[c.ticker] || {};
+    const now = fresh[c.ticker];
+    // The two feeds state the same move in different units and always have:
+    // the document a FRACTION, the vendor a PERCENT. Reconciled here, once,
+    // rather than left for each screen to get right — mixing them silently
+    // multiplies every move on the exchange by a hundred.
+    const q = now && typeof now.c === 'number'
+      ? { close: now.c, change_percent: now.ch === null || now.ch === undefined
+            ? null : now.ch / 100,
+          volume: now.v === null || now.v === undefined ? held.volume : now.v }
+      : held;
     return {
       ticker: c.ticker,
       name: { en: c.name_en, ar: c.name_ar || c.name_en },
@@ -329,6 +378,15 @@ export async function live() {
     // is treated as not-a-close: the cautious reading of a missing flag.
     isClose: market.is_close === true,
     capturedAt: market.captured_at || null,
+    // Where the prices on screen actually came from, and how old they are.
+    // The screen says it rather than implying it: during a session these are
+    // two different claims — a fifteen-minute-delayed read from four minutes
+    // ago, or a published capture from three hours ago — and a reader cannot
+    // tell them apart from the numbers.
+    livePrices: Boolean(feed),
+    liveAsOf: feed ? feed.as_of : null,
+    liveDelaySeconds: feed ? feed.delay_seconds : null,
+    liveCount: feed ? Object.keys(fresh).length : 0,
     generatedAt: manifest.generated_at || null,
     dataVersion: manifest.data_version || null,
   };

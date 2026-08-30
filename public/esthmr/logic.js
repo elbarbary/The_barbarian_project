@@ -177,6 +177,11 @@ export class Component extends Base {
       noBorrowings:'No filing held for this company states borrowings.',
       publisher:'Publisher · EGX filings', session:'Session', builtAt:'Built', theme:'Theme', dataVersion:'data_version',
       sessionClose:'Closing prices', sessionLive:'Session in progress — prices not final',
+      // A price with no age is the thing §49 forbids, and during a session
+      // "not final" was the whole of what the screen said while showing a
+      // capture three hours old.
+      sessionFeed:'Session in progress — {delay} min delayed, read {at}',
+      sessionHeld:'Session in progress — prices not final, captured {at}',
       investorsTitle:'Who is buying', investorsLead:'The exchange\u2019s own split of everything traded, by who traded it.',
       investorsShare:'Share of all value traded', investorsNet:'Bought less sold',
       investorsWho:'Who traded it', investorsTypeSplit:'Institutions against individuals',
@@ -370,6 +375,8 @@ export class Component extends Base {
       noBorrowings:'لا يوجد إفصاح محفوظ لهذه الشركة يذكر قروضاً.',
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
       sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
+      sessionFeed:'الجلسة جارية — بتأخير {delay} دقيقة، قُرئت {at}',
+      sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
       investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
       investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
       investorsWho:'من تداولها', investorsTypeSplit:'المؤسسات مقابل الأفراد',
@@ -1889,7 +1896,7 @@ export class Component extends Base {
       marketDate: this.longDate(D.marketDate), generatedAt: D.generatedAt || '—',
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
-      sessionState: D.isClose ? L.sessionClose : L.sessionLive,
+      sessionState: this.sessionLine(D, L),
       sessionColor: D.isClose ? 'var(--faint)' : 'var(--accent)',
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
@@ -2243,6 +2250,40 @@ export class Component extends Base {
     if (isNaN(at)) return iso;
     return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
       { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(at);
+  }
+
+  /** A clock reading in Cairo, which is the only clock the exchange keeps.
+   *
+   * UTC would be defensible and wrong for a reader in Egypt: a session that
+   * runs 10:00 to 14:30 local, stamped "07:19", reads as a price from before
+   * the market opened.
+   */
+  clock(iso) {
+    if (!iso) return '—';
+    const at = new Date(iso);
+    if (isNaN(at)) return String(iso);
+    return new Intl.DateTimeFormat(this.state.lang === 'ar' ? 'ar-EG' : 'en-GB',
+      { hour: '2-digit', minute: '2-digit', hour12: false,
+        timeZone: 'Africa/Cairo' }).format(at);
+  }
+
+  /** What the prices on screen are, and how old. Three different sentences.
+   *
+   * Settled closes need no age — they are the session's last word. A running
+   * session needs one, and which one depends on where the numbers came from:
+   * a delayed feed read minutes ago is a different claim from a published
+   * capture taken hours ago, and the numbers themselves cannot tell a reader
+   * which they are looking at.
+   */
+  sessionLine(D, L) {
+    if (D.isClose) return L.sessionClose;
+    if (D.livePrices) {
+      return L.sessionFeed
+        .replace('{delay}', String(Math.round((D.liveDelaySeconds || 0) / 60)))
+        .replace('{at}', this.clock(D.liveAsOf));
+    }
+    if (D.capturedAt) return L.sessionHeld.replace('{at}', this.clock(D.capturedAt));
+    return L.sessionLive;
   }
 
   /** "1 Jul 2013", short enough to sit under a period label. */
