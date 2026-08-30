@@ -19,7 +19,7 @@ async function load(email) {
     component.setData(base);
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, prov, cal, ex, secs, att, months, meanings, cross, inv] = await Promise.all([
+    const [feed, prov, cal, ex, secs, att, months, meanings, cross, inv, idx] = await Promise.all([
       data.news().catch(() => null),
       data.newsProvenance().catch(() => null),
       data.calendar().catch(() => null),
@@ -30,6 +30,7 @@ async function load(email) {
       data.disclosureMeanings().catch(() => null),
       data.connections().catch(() => null),
       data.investors().catch(() => null),
+      data.indices().catch(() => null),
     ]);
     component.setData({
       ...base,
@@ -51,6 +52,12 @@ async function load(email) {
       disclosureMeanings: meanings || undefined,
       crossings: cross || undefined,
       investors: inv || undefined,
+      // Who is in each index, so the heat map can draw one without inventing
+      // its membership. NOT `indices`: that name is already the index CARDS
+      // Home draws, in the same object literal, and the second key silently
+      // wins — which took the three level cards off Home the moment this was
+      // added.
+      indexMembers: idx ? idx.list : undefined,
     });
   } catch (error) {
     // A session that expired mid-visit drops back to the demo rather than an
