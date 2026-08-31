@@ -6,19 +6,14 @@
  },
  "sector": "Consumer Durables",
  "market": {
-  "last_close": 4.32,
-  "date": "2026-08-30",
-  "open": 4.28,
-  "high": 4.41,
-  "low": 4.28,
-  "volume": 1962668
+  "last_close": 4.41,
+  "date": "2026-08-31",
+  "open": 4.32,
+  "high": 4.5,
+  "low": 4.32,
+  "volume": 2105759
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 2.29,
-   "volume": 10878152
-  },
   {
    "date": "2025-07-23",
    "close": 2.32,
@@ -1313,22 +1308,29 @@
    "date": "2026-08-26",
    "close": 4.28,
    "volume": 5668316
+  },
+  {
+   "date": "2026-08-30",
+   "close": 4.32,
+   "volume": 1962668
   }
  ],
  "profile": {
   "shares_outstanding": 246400000,
-  "perf_1w": -2.921348314606739,
-  "perf_1m": -13.253012048192772,
-  "perf_3m": 27.05882352941178,
-  "avg_volume_30d": 12896354.466666667,
-  "relative_volume_10d": 0.19516613714960834,
-  "median_volume_20d": 9029201,
-  "rv20": 0.6277760346679623,
-  "normal_value_30d": 40781833.879999995,
-  "five_session_change": -6.550218340611346,
+  "perf_1w": -2.217294900221722,
+  "perf_1m": -11.445783132530126,
+  "perf_3m": 26.000000000000004,
+  "avg_volume_30d": 12774404.966666667,
+  "relative_volume_10d": 0.21618169233111983,
+  "median_volume_20d": 8607718,
+  "rv20": 0.2280125812671837,
+  "normal_value_30d": 39852329.18,
+  "five_session_change": -2.921348314606742,
   "history_bars": 120,
-  "market_cap": 1064448000.0,
-  "market_cap_source": "EGX"
+  "market_cap": 1089088000.0,
+  "market_cap_source": "EGX",
+  "trades": 307,
+  "turnover": 9670667
  },
  "financials": {
   "annual": [

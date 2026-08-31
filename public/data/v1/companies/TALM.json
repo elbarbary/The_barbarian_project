@@ -6,19 +6,14 @@
  },
  "sector": "Consumer Services",
  "market": {
-  "last_close": 17.52,
-  "date": "2026-08-30",
-  "open": 17.65,
-  "high": 17.85,
-  "low": 17.36,
-  "volume": 1022880
+  "last_close": 17.93,
+  "date": "2026-08-31",
+  "open": 17.52,
+  "high": 18.84,
+  "low": 17.11,
+  "volume": 2235434
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 10.62,
-   "volume": 432127
-  },
   {
    "date": "2025-07-23",
    "close": 10.57,
@@ -1313,24 +1308,31 @@
    "date": "2026-08-26",
    "close": 17.65,
    "volume": 2225099
+  },
+  {
+   "date": "2026-08-30",
+   "close": 17.52,
+   "volume": 1022880
   }
  ],
  "profile": {
   "shares_outstanding": 734037000,
   "free_float": 0.259514,
   "float_shares": 190492878.018,
-  "perf_1w": -9.69072164948453,
-  "perf_1m": -2.612562534741517,
-  "perf_3m": 12.88659793814433,
-  "avg_volume_30d": 2095279.5333333334,
-  "relative_volume_10d": 0.7177548184681245,
+  "perf_1w": -8.706720977596746,
+  "perf_1m": -0.3335186214563576,
+  "perf_3m": 13.84126984126984,
+  "avg_volume_30d": 2141890.7666666666,
+  "relative_volume_10d": 1.5657763506646882,
   "median_volume_20d": 1622498,
-  "rv20": 1.3714032313136904,
-  "normal_value_30d": 24328108.95,
-  "five_session_change": -10.406091370558379,
+  "rv20": 0.6304352917538265,
+  "normal_value_30d": 26692651.159999996,
+  "five_session_change": -9.690721649484535,
   "history_bars": 120,
-  "market_cap": 12860331586.32,
-  "market_cap_source": "EGX"
+  "market_cap": 13205329066.09,
+  "market_cap_source": "EGX",
+  "trades": 1071,
+  "turnover": 42308954
  },
  "financials": {
   "annual": [

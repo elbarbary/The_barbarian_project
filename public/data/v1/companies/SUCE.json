@@ -7,7 +7,7 @@
  "sector": "Non-Energy Minerals",
  "market": {
   "last_close": 19,
-  "date": "2026-08-30",
+  "date": "2026-08-31",
   "open": 19,
   "high": 19,
   "low": 19,
@@ -1318,17 +1318,23 @@
  "profile": {
   "perf_1w": -5,
   "perf_1m": -5,
-  "perf_3m": 11.306385471587578,
-  "avg_volume_30d": 100600.83333333333,
+  "perf_3m": 2.7582477014602573,
+  "avg_volume_30d": 97226.93333333333,
   "relative_volume_10d": 0,
+  "history_bars": 0,
+  "market_cap": 6364978256,
+  "market_cap_source": "scan",
   "median_volume_20d": 98905,
   "rv20": 1.98571356352055,
   "normal_value_30d": 1245479.5899999999,
-  "five_session_change": 14.457831325301186,
-  "history_bars": 120,
-  "market_cap": 6364978256,
-  "market_cap_source": "scan"
+  "five_session_change": 14.457831325301186
  },
+ "profile_carried": [
+  "five_session_change",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {

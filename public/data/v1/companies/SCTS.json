@@ -6,19 +6,14 @@
  },
  "sector": "Commercial Services",
  "market": {
-  "last_close": 622.87,
-  "date": "2026-08-30",
-  "open": 620.69,
-  "high": 625.5,
-  "low": 617,
-  "volume": 3119
+  "last_close": 618.5,
+  "date": "2026-08-31",
+  "open": 618.56,
+  "high": 624,
+  "low": 618,
+  "volume": 3737
  },
  "price_history": [
-  {
-   "date": "2025-07-21",
-   "close": 147.51,
-   "volume": 3017
-  },
   {
    "date": "2025-07-22",
    "close": 147.51,
@@ -721,7 +716,7 @@
   },
   {
    "date": "2026-02-24",
-   "close": 272.22,
+   "close": 275.12,
    "volume": 3134
   },
   {
@@ -1313,24 +1308,31 @@
    "date": "2026-08-26",
    "close": 620.03,
    "volume": 3078
+  },
+  {
+   "date": "2026-08-30",
+   "close": 622.87,
+   "volume": 3119
   }
  ],
  "profile": {
   "shares_outstanding": 90900000,
   "free_float": 0.276637,
   "float_shares": 25146303.3,
-  "perf_1w": 0.4369840041279729,
-  "perf_1m": 2.026208026208027,
-  "perf_3m": -1.6872908643222333,
-  "avg_volume_30d": 14437.366666666667,
-  "relative_volume_10d": 0.2584713808620132,
+  "perf_1w": 0,
+  "perf_1m": 1.3104013104013104,
+  "perf_3m": -1.7567825147722134,
+  "avg_volume_30d": 14434.333333333334,
+  "relative_volume_10d": 0.3136566982533594,
   "median_volume_20d": 5952.5,
-  "rv20": 0.5170936581268375,
+  "rv20": 0.5239815203695926,
   "normal_value_30d": 3524803.4000000004,
-  "five_session_change": -0.28145003055742857,
+  "five_session_change": 0.7880258899676473,
   "history_bars": 120,
-  "market_cap": 56227104000.0,
-  "market_cap_source": "EGX"
+  "market_cap": 56218923000.0,
+  "market_cap_source": "EGX",
+  "trades": 89,
+  "turnover": 2330499
  },
  "financials": {
   "annual": [

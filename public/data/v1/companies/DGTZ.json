@@ -6,19 +6,14 @@
  },
  "sector": "Technology Services",
  "market": {
-  "last_close": 2.58,
-  "date": "2026-08-30",
-  "open": 2.56,
+  "last_close": 2.55,
+  "date": "2026-08-31",
+  "open": 2.58,
   "high": 2.6,
-  "low": 2.52,
-  "volume": 1094821
+  "low": 2.53,
+  "volume": 492447
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 5.92,
-   "volume": 3928180
-  },
   {
    "date": "2025-07-23",
    "close": 6.09,
@@ -1313,21 +1308,28 @@
    "date": "2026-08-26",
    "close": 2.58,
    "volume": 615184
+  },
+  {
+   "date": "2026-08-30",
+   "close": 2.58,
+   "volume": 1094821
   }
  ],
  "profile": {
-  "perf_1w": -0.7692307692307699,
-  "perf_1m": -4.797047970479701,
-  "perf_3m": -2.2727272727272747,
-  "avg_volume_30d": 1809204.3999999997,
-  "relative_volume_10d": 0.728858321394524,
-  "median_volume_20d": 1495255,
-  "rv20": 0.41142413835767144,
-  "normal_value_30d": 4437679.5200000005,
+  "perf_1w": -1.9230769230769333,
+  "perf_1m": -5.904059040590411,
+  "perf_3m": -2.2988505747126458,
+  "avg_volume_30d": 1752282.4999999998,
+  "relative_volume_10d": 0.32501023974939375,
+  "median_volume_20d": 1448907,
+  "rv20": 0.7556185455657265,
+  "normal_value_30d": 4322702.73,
   "five_session_change": -1.526717557251911,
   "history_bars": 120,
-  "market_cap": 278640000.0,
-  "market_cap_source": "EGX"
+  "market_cap": 275400000.0,
+  "market_cap_source": "EGX",
+  "trades": 116,
+  "turnover": 1279196
  },
  "financials": {
   "annual": [

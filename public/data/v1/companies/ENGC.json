@@ -6,19 +6,14 @@
  },
  "sector": "Producer Manufacturing",
  "market": {
-  "last_close": 45.72,
-  "date": "2026-08-30",
-  "open": 45.15,
-  "high": 46.27,
-  "low": 44.56,
-  "volume": 80080
+  "last_close": 46.36,
+  "date": "2026-08-31",
+  "open": 45.72,
+  "high": 47,
+  "low": 45.72,
+  "volume": 123472
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 26.25,
-   "volume": 2302482
-  },
   {
    "date": "2025-07-23",
    "close": 25.37,
@@ -1313,24 +1308,31 @@
    "date": "2026-08-26",
    "close": 45.15,
    "volume": 291499
+  },
+  {
+   "date": "2026-08-30",
+   "close": 45.72,
+   "volume": 80080
   }
  ],
  "profile": {
   "shares_outstanding": 145500000,
   "free_float": 0.413215,
   "float_shares": 60122782.5,
-  "perf_1w": 1.3747228381374665,
-  "perf_1m": 6.722689075630241,
-  "perf_3m": 39.34775982932031,
-  "avg_volume_30d": 504771.5999999999,
-  "relative_volume_10d": 0.1992297015460455,
+  "perf_1w": -2.7276542173730536,
+  "perf_1m": 8.216619981325854,
+  "perf_3m": 40.39975772259235,
+  "avg_volume_30d": 500968.76666666666,
+  "relative_volume_10d": 0.3196579324599906,
   "median_volume_20d": 415780.5,
-  "rv20": 0.7010886753948298,
-  "normal_value_30d": 18335657.225,
-  "five_session_change": 0.33333333333334103,
+  "rv20": 0.19260162513633997,
+  "normal_value_30d": 18265182.79,
+  "five_session_change": 1.3747228381374654,
   "history_bars": 120,
-  "market_cap": 6652260000.0,
-  "market_cap_source": "EGX"
+  "market_cap": 6546045000.0,
+  "market_cap_source": "EGX",
+  "trades": 361,
+  "turnover": 6552227
  },
  "financials": {
   "annual": [

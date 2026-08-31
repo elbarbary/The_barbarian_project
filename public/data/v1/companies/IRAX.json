@@ -7,11 +7,11 @@
  "sector": "Non-Energy Minerals",
  "market": {
   "last_close": 1250,
-  "date": "2026-08-30",
+  "date": "2026-08-31",
   "open": 1250,
   "high": 1250,
   "low": 1250,
-  "volume": 4
+  "volume": 0
  },
  "price_history": [
   {
@@ -1317,10 +1317,10 @@
  ],
  "profile": {
   "perf_1w": 0,
-  "perf_1m": 0.40160642570281124,
+  "perf_1m": 0,
   "perf_3m": 0,
-  "avg_volume_30d": 41.733333333333334,
-  "relative_volume_10d": 0.05997001499250375,
+  "avg_volume_30d": 41.6,
+  "relative_volume_10d": 0,
   "median_volume_20d": 5,
   "rv20": 0.8,
   "normal_value_30d": 8125,
