@@ -6,12 +6,12 @@
  },
  "sector": "Process Industries",
  "market": {
-  "last_close": 38,
+  "last_close": 34.71,
   "date": "2026-08-31",
   "open": 38.6,
   "high": 38.95,
-  "low": 36.9,
-  "volume": 267946
+  "low": 34.51,
+  "volume": 537611
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 89856499,
   "free_float": 0.19851500000000002,
   "float_shares": 17837862.898985002,
-  "perf_1w": 7.526881720430097,
-  "perf_1m": 19.496855345911946,
-  "perf_3m": 44.7067783701447,
-  "avg_volume_30d": 934333.5999999985,
-  "relative_volume_10d": 0.3569299595588782,
+  "perf_1w": -1.7826825127334536,
+  "perf_1m": 9.150943396226415,
+  "perf_3m": 32.17821782178217,
+  "avg_volume_30d": 943322.4333333318,
+  "relative_volume_10d": 0.7161497931986597,
   "median_volume_20d": 544815,
   "rv20": 1.568124959848756,
   "normal_value_30d": 19626775.95,
   "five_session_change": 7.222222222222219,
   "history_bars": 120,
-  "market_cap": 3341763197.81,
+  "market_cap": 3118919080.29,
   "market_cap_source": "EGX",
-  "trades": 390,
-  "turnover": 11171581
+  "trades": 627,
+  "turnover": 19862974
  },
  "financials": {
   "annual": [

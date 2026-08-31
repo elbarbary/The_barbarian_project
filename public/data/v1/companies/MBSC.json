@@ -6,12 +6,12 @@
  },
  "sector": "Non-Energy Minerals",
  "market": {
-  "last_close": 409.89,
+  "last_close": 408.7,
   "date": "2026-08-31",
   "open": 403.01,
   "high": 420,
   "low": 400.01,
-  "volume": 73076
+  "volume": 88074
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 55022300,
   "free_float": 0.14335,
   "float_shares": 7887446.705,
-  "perf_1w": 11.823762106124668,
-  "perf_1m": 66.87293897325246,
-  "perf_3m": 52.41512661287323,
-  "avg_volume_30d": 210862.46666666606,
-  "relative_volume_10d": 0.3567000607223816,
+  "perf_1w": 11.499113354249074,
+  "perf_1m": 66.38847046370557,
+  "perf_3m": 51.97263228349384,
+  "avg_volume_30d": 211362.3999999994,
+  "relative_volume_10d": 0.42990860402954506,
   "median_volume_20d": 128631.5,
   "rv20": 0.6156112616272064,
   "normal_value_30d": 31078280.145,
   "five_session_change": 8.045576407506694,
   "history_bars": 120,
-  "market_cap": 22277989979.03,
+  "market_cap": 22487625044.9,
   "market_cap_source": "EGX",
-  "trades": 833,
-  "turnover": 31902117
+  "trades": 959,
+  "turnover": 36313822
  },
  "financials": {
   "annual": [

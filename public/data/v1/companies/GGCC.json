@@ -6,12 +6,12 @@
  },
  "sector": "Industrial Services",
  "market": {
-  "last_close": 0.9,
+  "last_close": 0.863,
   "date": "2026-08-31",
   "open": 0.944,
   "high": 0.959,
-  "low": 0.891,
-  "volume": 45517126
+  "low": 0.859,
+  "volume": 82214882
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 2164070000,
   "free_float": 0.324044,
   "float_shares": 701253899.08,
-  "perf_1w": -3.7433155080213933,
-  "perf_1m": 7.1428571428571495,
-  "perf_3m": 120.04889975550124,
-  "avg_volume_30d": 51824137.86666667,
-  "relative_volume_10d": 0.784639164173309,
+  "perf_1w": -7.700534759358296,
+  "perf_1m": 2.738095238095241,
+  "perf_3m": 111.00244498777506,
+  "avg_volume_30d": 53047396.4,
+  "relative_volume_10d": 1.4172471323230564,
   "median_volume_20d": 38106106.5,
   "rv20": 3.3558299376505443,
   "normal_value_30d": 48168027.54,
   "five_session_change": 1.5053763440860068,
   "history_bars": 120,
-  "market_cap": 1947663000.0,
+  "market_cap": 1867592410.0,
   "market_cap_source": "EGX",
-  "trades": 1466,
-  "turnover": 43136268
+  "trades": 2432,
+  "turnover": 74006391
  },
  "financials": {
   "annual": [

@@ -6,12 +6,12 @@
  },
  "sector": "Utilities",
  "market": {
-  "last_close": 17.19,
+  "last_close": 17.16,
   "date": "2026-08-31",
   "open": 17.44,
   "high": 17.65,
-  "low": 17.1,
-  "volume": 2073647
+  "low": 16.9,
+  "volume": 2477199
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 1050000000,
   "free_float": 0.59243,
   "float_shares": 622051500,
-  "perf_1w": -0.05813953488370936,
-  "perf_1m": -3.3183352080989867,
-  "perf_3m": -18.95332390381895,
-  "avg_volume_30d": 2007761.1666666428,
-  "relative_volume_10d": 1.1914577358392076,
+  "perf_1w": -0.23255813953487878,
+  "perf_1m": -3.487064116985382,
+  "perf_3m": -19.094766619519095,
+  "avg_volume_30d": 2021212.8999999762,
+  "relative_volume_10d": 1.423327071465466,
   "median_volume_20d": 1838891,
   "rv20": 0.7188898091295243,
   "normal_value_30d": 32886417.6,
   "five_session_change": 3.933253873659126,
   "history_bars": 120,
-  "market_cap": 17955000000.0,
+  "market_cap": 18018000000.0,
   "market_cap_source": "EGX",
-  "trades": 338,
-  "turnover": 37254743
+  "trades": 449,
+  "turnover": 42772320
  },
  "financials": {
   "annual": [

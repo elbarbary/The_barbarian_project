@@ -6,12 +6,12 @@
  },
  "sector": "Distribution Services",
  "market": {
-  "last_close": 262,
+  "last_close": 259.76,
   "date": "2026-08-31",
   "open": 261.87,
   "high": 264,
-  "low": 260.03,
-  "volume": 22805
+  "low": 259.1,
+  "volume": 37206
  },
  "price_history": [
   {
@@ -1317,20 +1317,20 @@
  ],
  "profile": {
   "shares_outstanding": 9600000,
-  "perf_1w": 0.17205123303383238,
-  "perf_1m": 13.488694446850898,
-  "perf_3m": 26.655709175287623,
-  "avg_volume_30d": 102182.83333333336,
-  "relative_volume_10d": 0.5242215407814705,
+  "perf_1w": -0.6843815714012695,
+  "perf_1m": 12.51840942562591,
+  "perf_3m": 25.572851203712645,
+  "avg_volume_30d": 102662.8666666667,
+  "relative_volume_10d": 0.8552592258853494,
   "median_volume_20d": 66421.5,
   "rv20": 0.4424772099395527,
   "normal_value_30d": 14908019.09,
   "five_session_change": -0.011454753722783817,
   "history_bars": 120,
-  "market_cap": 2496096000.0,
+  "market_cap": 2493696000.0,
   "market_cap_source": "EGX",
-  "trades": 292,
-  "turnover": 6819792
+  "trades": 384,
+  "turnover": 9719936
  },
  "financials": {
   "annual": [
