@@ -26,6 +26,16 @@ import os
 import urllib.parse
 import urllib.request
 
+# The hosts the relay will actually serve. It MUST match the allowlist in
+# worker/fetchrelay/src/index.js, and it is here for a reason a test now
+# guards: `macro_sources` fetches Suez traffic from ArcGIS and figures from the
+# World Bank through the same helper as oil, and routing those at a relay that
+# refuses them turned one 403 into a 400 and dropped Suez off the Exchange
+# screen entirely. Anything not on this list goes direct, exactly as it did
+# before the relay existed — which is what makes adding it transparent instead
+# of a change to every source at once.
+HOSTS = frozenset({"api.investing.com", "www.investing.com", "beta.egx.com.eg"})
+
 # The headers the relay is willing to carry, prefixed so it can tell a header
 # meant for the upstream from one meant for itself.
 RELAY_PREFIX = "x-relay-"
@@ -44,6 +54,15 @@ RELAY_PREFIX = "x-relay-"
 CALLER = "esthmr-build/1.0"
 
 
+def blocked(url: str) -> bool:
+    """Whether this URL is one of the hosts the relay exists for."""
+    try:
+        host = (urllib.parse.urlsplit(url).hostname or "").lower()
+    except ValueError:
+        return False
+    return host in HOSTS
+
+
 def relay() -> tuple[str, str] | None:
     """`(url, token)` when the build has a relay configured, else None."""
     url = (os.environ.get("ESTHMR_RELAY_URL") or "").strip()
@@ -55,7 +74,7 @@ def request(url: str, headers: dict | None = None) -> urllib.request.Request:
     """The Request to send: direct, or wrapped for the relay."""
     headers = dict(headers or {})
     configured = relay()
-    if not configured:
+    if not configured or not blocked(url):
         return urllib.request.Request(url, headers=headers)
     endpoint, token = configured
     wrapped = {RELAY_PREFIX + k.lower(): v for k, v in headers.items()}
