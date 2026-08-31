@@ -1,0 +1,8 @@
+{
+  // A private relay for the build, not a public endpoint. See src/index.js for
+  // what that distinction is worth and how it is enforced.
+  "name": "barbarian-fetch",
+  "main": "src/index.js",
+  "compatibility_date": "2025-09-27",
+  "observability": { "enabled": true }
+}

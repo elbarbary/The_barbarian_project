@@ -228,12 +228,26 @@ jobs:
         env:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+          # Investing.com refuses this runner's address and answers a laptop's,
+          # so every build has logged seven 403s and carried the world series
+          # forward unchanged. These route those requests through the project's
+          # own relay (worker/fetchrelay), which will fetch two declared hosts
+          # and nothing else. Unset — on a laptop — the code goes direct.
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         run: python3 scripts/build_all.py --check
 
       - name: Rebuild published data
         env:
           GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+          # Investing.com refuses this runner's address and answers a laptop's,
+          # so every build has logged seven 403s and carried the world series
+          # forward unchanged. These route those requests through the project's
+          # own relay (worker/fetchrelay), which will fetch two declared hosts
+          # and nothing else. Unset — on a laptop — the code goes direct.
+          ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
+          ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
         run: python3 scripts/build_all.py
 
       - name: Show what changed

@@ -96,18 +96,40 @@ def published() -> dict[str, float]:
     return out
 
 
+# How many recent sessions the published level is looked for in.
+#
+# It used to be one — the newest — which quietly assumed the two sides were
+# never a day apart. They are, in both directions: rates/latest.json carries no
+# date, and the world rows are a previous close that can be two sessions behind
+# a series fetched at noon. Oil was refused on 31 August for exactly that,
+# 86.39 against a published 83.40, when both figures were right and three days
+# apart. Five is enough to cover a weekend and a holiday, and far too few for a
+# wrong instrument to hit by accident.
+WINDOW = 5
+
+
 def verified(instrument: int, label: str, level: float, since: str) -> dict[str, float]:
-    """The daily closes, or nothing at all if the newest one disagrees."""
+    """The daily closes, or nothing at all if none of them is our figure.
+
+    The test is whether the level this site publishes appears ANYWHERE in the
+    instrument's recent history, not whether it equals the newest bar. A wrong
+    instrument misses every session by an order of magnitude — Tadawul's
+    candidates came back at 1,985 and 66,405 against a published 11,238 — and
+    the right one matches on whichever day the two happen to share.
+    """
     ih.INSTRUMENTS["_probe"] = instrument
     today = datetime.date.today().isoformat()
     rows = ih.series("_probe", since, today)
     if not rows:
         raise Refused(f"{label}: instrument {instrument} returned no rows")
-    newest_date, newest = sorted(rows.items())[-1]
-    gap = abs(newest - level) / max(abs(level), 1e-9)
+    recent = sorted(rows.items())[-WINDOW:]
+    best = min(recent, key=lambda row: abs(row[1] - level))
+    gap = abs(best[1] - level) / max(abs(level), 1e-9)
     if gap > TOLERANCE:
+        newest_date, newest = recent[-1]
         raise Refused(
             f"{label}: instrument {instrument} closed {newest:,.4f} on {newest_date}"
+            f" and its nearest of {len(recent)} sessions is {best[1]:,.4f}"
             f" against a published {level:,.4f} — {gap * 100:.1f}% apart, refused"
         )
     return rows

@@ -31,11 +31,17 @@ from __future__ import annotations
 
 import datetime
 import json
+import pathlib
 import re
+import sys
 import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import fetch_relay  # noqa: E402
 
 # ----------------------------------------------------------------- transport
 
@@ -50,8 +56,11 @@ class MacroUnavailable(RuntimeError):
 
 
 def _get(url: str, *, headers: dict | None = None, timeout: int = 60) -> bytes:
-    request = urllib.request.Request(
-        url, headers={"User-Agent": UA, "Accept": "*/*", **(headers or {})}
+    # Investing refuses a CI runner's address and answers a laptop's, which is
+    # why oil has been "unavailable — HTTP 403" in every build. The relay is
+    # transparent where it is not configured; see scripts/fetch_relay.py.
+    request = fetch_relay.request(
+        url, {"User-Agent": UA, "Accept": "*/*", **(headers or {})}
     )
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:

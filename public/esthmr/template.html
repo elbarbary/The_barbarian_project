@@ -853,9 +853,15 @@
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);margin-top:6px">{{ L.asOf }} {{ co.closeDate }}</div>
           </div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule2)">
+        <!-- A grid, not a wrapping flex row. Flex sized every tile to its own
+             number, so nine tiles of nine different widths broke wherever they
+             happened to run out of room and left the last one stranded beside
+             an expanse of nothing — which reads as a mistake rather than as a
+             row that ended. Equal columns end the same way every time, and a
+             partial last row of equal tiles reads as a grid. -->
+        <div class="om-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule2)">
           <sc-for list="{{ co.stats }}" as="s" hint-placeholder-count="6">
-            <div style="padding:10px 16px;border-radius:15px;background:var(--sunk);min-width:0">
+            <div style="padding:10px 14px;border-radius:15px;background:var(--sunk);min-width:0;overflow:hidden">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ s.label }}</div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;margin-top:5px;color:{{ s.color }}">{{ s.value }}</div>
               <!-- Which filing the figure is over. The newest annual filing can

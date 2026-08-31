@@ -29,8 +29,13 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import sys
 import urllib.error
 import urllib.request
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import fetch_relay  # noqa: E402
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 RATES = REPO / "public" / "data" / "v1" / "rates" / "latest.json"
@@ -85,7 +90,10 @@ class IndexHistoryUnavailable(RuntimeError):
 
 
 def _get(url: str) -> dict:
-    request = urllib.request.Request(url, headers=HEADERS)
+    # Through the build's relay where one is configured, and straight out
+    # everywhere else. The source refuses a CI runner's address and answers a
+    # laptop's; see scripts/fetch_relay.py.
+    request = fetch_relay.request(url, HEADERS)
     try:
         return json.loads(urllib.request.urlopen(request, timeout=60).read())
     except urllib.error.HTTPError as error:
