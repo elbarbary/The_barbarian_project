@@ -278,23 +278,31 @@ def _filed_financials(
 FILED_FINANCIALS = _filed_financials()
 
 
-# The exchange's own market values, harvested by harvest_egx_market_cap.py.
-# The exchange wins where it has an answer — it is the authority on how many
-# shares of an Egyptian company are listed, and on 30 August 2026 the vendor
-# had FAIT at 3.15 times its own price × share count while the exchange had it
-# exactly right. Absent file, absent ticker: the vendor's figure stands, so
-# this can be added and removed without the directory losing a column.
-def _egx_market_cap() -> dict[str, float]:
-    path = REPO / "data-source" / "egx-beta" / "market-cap.json"
+# The exchange's own session figures, harvested by harvest_egx_session.py.
+#
+# The exchange wins on market value where it has an answer — it is the
+# authority on how many shares of an Egyptian company are listed, and on 30
+# August 2026 the vendor had FAIT at 3.15 times its own price × share count
+# while the exchange had it exactly right. Absent file, absent ticker: the
+# vendor's figure stands, so this can be added and removed without the
+# directory losing a column.
+#
+# It also carries the trade count and the turnover, which nothing else here
+# has. Those are live on the quotes feed during a session and gone from it at
+# the close, so the copy written here is what lets a company screen still show
+# them in the evening.
+def _egx_session() -> dict[str, dict]:
+    path = REPO / "data-source" / "egx-beta" / "session.json"
     try:
-        held = json.loads(path.read_text(encoding="utf-8")).get("market_cap") or {}
+        held = json.loads(path.read_text(encoding="utf-8")).get("securities") or {}
     except (OSError, ValueError):
         return {}
-    return {k: float(v) for k, v in held.items()
-            if isinstance(v, (int, float)) and v > 0}
+    return {k: v for k, v in held.items() if isinstance(v, dict)}
 
 
-EGX_MARKET_CAP = _egx_market_cap()
+EGX_SESSION = _egx_session()
+EGX_MARKET_CAP = {k: v["market_cap"] for k, v in EGX_SESSION.items()
+                  if isinstance(v.get("market_cap"), (int, float)) and v["market_cap"] > 0}
 
 
 def newest_scan() -> pathlib.Path | None:
@@ -875,6 +883,16 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
             profile["market_cap"] = cap
             profile["market_cap_source"] = (
                 "EGX" if ticker in EGX_MARKET_CAP else "scan")
+        # How many times the share changed hands, and for how much. The
+        # exchange's figures for its own last published session — the live feed
+        # carries the same two while the market is open and drops them at the
+        # close, and a tile that disappears every afternoon is worse than one
+        # that dates itself.
+        session_row = EGX_SESSION.get(ticker) or {}
+        if isinstance(session_row.get("trades"), int):
+            profile["trades"] = session_row["trades"]
+        if isinstance(session_row.get("value"), int):
+            profile["turnover"] = session_row["value"]
         # What this scan did not carry, kept from the last one that did.
         #
         # The company documents are deleted and rewritten every run, and an

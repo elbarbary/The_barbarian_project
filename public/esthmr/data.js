@@ -303,7 +303,10 @@ export async function live() {
     const q = now && typeof now.c === 'number'
       ? { close: now.c, change_percent: now.ch === null || now.ch === undefined
             ? null : now.ch / 100,
-          volume: now.v === null || now.v === undefined ? held.volume : now.v }
+          volume: now.v === null || now.v === undefined ? held.volume : now.v,
+          // Only the exchange's rows carry these; the vendor's do not, and a
+          // company on the vendor half keeps whatever the last harvest wrote.
+          trades: now.t, turnover: now.val }
       : held;
     return {
       ticker: c.ticker,
@@ -352,6 +355,12 @@ export async function live() {
       epsTtm: typeof c.eps_ttm === 'number' ? c.eps_ttm : null,
       eps: c.eps ?? null, epsPeriod: c.eps_period || '',
       volume: q.volume ?? null,
+      // How many times it changed hands this session, and for how much. Live
+      // from the exchange while the market is open; from the company document
+      // — the exchange's own figures for its last published session — after
+      // the close, which is where `company()` picks them up.
+      trades: typeof q.trades === 'number' ? q.trades : null,
+      turnover: typeof q.turnover === 'number' ? q.turnover : null,
       // How busy the session was against this company's OWN normal. The median
       // of the last twenty sessions, not the mean: a median is not dragged by
       // one earlier spike, which matters most in the exact case this is
