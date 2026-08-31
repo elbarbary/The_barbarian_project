@@ -1157,6 +1157,15 @@ export class Component extends Base {
         { label: ar?'أسبوع':'1W', value:'−1.84%', color:'var(--down)', note:'' },
         { label: ar?'شهر':'1M', value:'+6.21%', color:'var(--up)', note:'' },
         { label: ar?'الحجم':'Volume', value:'118,422', color:'var(--ink)', note:'' },
+        // The same two tiles the live screen carries, so the demo goes on
+        // being a picture of the real screen rather than of most of it. The
+        // turnover is this demo's own volume times its own close — invented,
+        // like every figure here, and at least arithmetic a reader who checks
+        // will find holds.
+        { label: ar?'الصفقات':'Trades', value:'642', color:'var(--ink)',
+          note: ar?'في الجلسة':'in the session' },
+        { label: ar?'قيمة التداول':'Turnover', value: this.money(5956626),
+          color:'var(--ink)', note: ar?'في الجلسة':'in the session' },
         { label:'P/E', value: typeof demoCo0.pe === 'number' ? this.num(demoCo0.pe, 1) : '\u2014', color:'var(--ink)',
           note: ar?'عن FY 2024':'over FY 2024' },
         { label: ar?'م/ر · ١٢ شهراً':'P/E · 12M', value:'9.4', color:'var(--ink)',
@@ -1184,6 +1193,12 @@ export class Component extends Base {
     if (loaded) {
       const pct = loaded.pct === null || loaded.pct === undefined ? null : loaded.pct;
       const p = loaded.profile || {};
+      // The live feed's figures while the session runs, the document's own —
+      // written by the last harvest of the day — once it does not. Same
+      // bargain the price makes one tile up.
+      const num = (v) => (typeof v === 'number' ? v : null);
+      const sessionTrades = num(loaded.trades) ?? num(p.trades);
+      const sessionValue = num(loaded.turnover) ?? num(p.turnover);
       const perf = (v) => (v === null || v === undefined ? '—' : this.pct(v));
       const whole = (v) => (v === null || v === undefined ? '—' : this.num(v, 0));
       Object.assign(co, {
@@ -1217,6 +1232,27 @@ export class Component extends Base {
             note: ar?'في الجلسة':'in the session' },
           { label: ar?'متوسط ٣٠ يوماً':'30-day average', value: whole(p.avg_volume_30d),
             color:'var(--t2)', note:'' },
+          /* How many times the share changed hands, and for how much.
+           *
+           * Volume is shares and turnover is pounds, and the pair says
+           * something neither says alone: a million shares of a two-pound
+           * company and a million of a hundred-pound one are the same volume
+           * and fifty times the money. The trade count is the third leg —
+           * turnover divided by it is roughly what one buyer brought, which
+           * is how a day of institutional blocks reads differently from a day
+           * of retail.
+           *
+           * Both are the EXCHANGE's, and only 221 of 282 are on that half of
+           * the feed; the rest show a dash rather than a nought, because no
+           * trades and no figure are different facts about a session.
+           */
+          { label: ar?'الصفقات':'Trades',
+            value: whole(sessionTrades), color: sessionTrades === null ? 'var(--faint)' : 'var(--ink)',
+            note: sessionTrades === null ? '' : (ar?'في الجلسة':'in the session') },
+          { label: ar?'قيمة التداول':'Turnover',
+            value: sessionValue === null ? '\u2014' : this.money(sessionValue),
+            color: sessionValue === null ? 'var(--faint)' : 'var(--ink)',
+            note: sessionValue === null ? '' : (ar?'في الجلسة':'in the session') },
           // The multiple the pipeline published, beside the price it was struck
           // against. This used to prefer the review document's figure, which is
           // a different claim wearing the same two letters: the review divides

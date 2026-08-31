@@ -58,7 +58,7 @@ STEPS = [
     # they disagreed by up to two thirds on five companies, one of which was
     # simply wrong. Best-effort and carried forward: a missing file means the
     # vendor's figure stands, exactly as before this existed.
-    ("EGX market value", "harvest_egx_market_cap.py", True),
+    ("EGX session figures", "harvest_egx_session.py", True),
     ("Market", "build_market_api.py", False),
     # New filings, before anything that reads them.
     #

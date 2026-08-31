@@ -1,0 +1,1118 @@
+{
+ "harvested": "2026-08-31",
+ "source": "beta.egx.com.eg /api/bff/egx/market-watch",
+ "write_time": "202608311253",
+ "count": 222,
+ "securities": {
+  "AALR": {
+   "market_cap": 2015496000.0,
+   "trades": 335,
+   "value": 7915383
+  },
+  "ABUK": {
+   "market_cap": 99145575320.4,
+   "trades": 1993,
+   "value": 55152240
+  },
+  "ACAMD": {
+   "market_cap": 2648158810.0,
+   "trades": 629,
+   "value": 23592822
+  },
+  "ACAP": {
+   "market_cap": 6508211961.9,
+   "trades": 126,
+   "value": 1728523
+  },
+  "ACGC": {
+   "market_cap": 4075516401.75,
+   "trades": 264,
+   "value": 6697695
+  },
+  "ACTF": {
+   "market_cap": 3050665322.94,
+   "trades": 481,
+   "value": 28735427
+  },
+  "ADCI": {
+   "market_cap": 3684480000.0,
+   "trades": 740,
+   "value": 24706969
+  },
+  "ADIB": {
+   "market_cap": 81780000000.0,
+   "trades": 1827,
+   "value": 57966163
+  },
+  "ADPC": {
+   "market_cap": 1913374300.0,
+   "trades": 437,
+   "value": 10575463
+  },
+  "AFDI": {
+   "market_cap": 1029600000.0,
+   "trades": 2182,
+   "value": 88380139
+  },
+  "AFMC": {
+   "market_cap": 6746103667.8,
+   "trades": 1711,
+   "value": 35553967
+  },
+  "AIDC": {
+   "market_cap": 1216898513.138,
+   "trades": 2934,
+   "value": 151489521
+  },
+  "AIFI": {
+   "market_cap": 2809136376.0,
+   "trades": 377,
+   "value": 9798544
+  },
+  "AIHC": {
+   "market_cap": 1067318158.13,
+   "trades": 6458,
+   "value": 397089513
+  },
+  "AJWA": {
+   "market_cap": 3666990344.0,
+   "trades": 1620,
+   "value": 470366829
+  },
+  "ALCN": {
+   "market_cap": 90845162332.0,
+   "trades": 301,
+   "value": 6326094
+  },
+  "ALUM": {
+   "market_cap": 1216601610.0,
+   "trades": 270,
+   "value": 8350200
+  },
+  "AMER": {
+   "market_cap": 5579241211.2,
+   "trades": 1998,
+   "value": 59256469
+  },
+  "AMES": {
+   "market_cap": 16675247160.0,
+   "trades": 1442,
+   "value": 23034306
+  },
+  "AMIA": {
+   "market_cap": 9603832252.41,
+   "trades": 650,
+   "value": 29803053
+  },
+  "AMII": {
+   "market_cap": 1126390088.61,
+   "trades": 759,
+   "value": 25262659
+  },
+  "AMOC": {
+   "market_cap": 15239700000.0,
+   "trades": 2913,
+   "value": 101526086
+  },
+  "APSW": {
+   "market_cap": 817883668.8,
+   "trades": 68,
+   "value": 527562
+  },
+  "ARAB": {
+   "market_cap": 6143061591.23,
+   "trades": 1809,
+   "value": 77128421
+  },
+  "ARCC": {
+   "market_cap": 29445837804.75,
+   "trades": 1982,
+   "value": 64502770
+  },
+  "AREH": {
+   "market_cap": 576000000.0,
+   "trades": 201,
+   "value": 4026759
+  },
+  "ASCM": {
+   "market_cap": 3185000000.0,
+   "trades": 658,
+   "value": 25022268
+  },
+  "ASPI": {
+   "market_cap": 922000000.0,
+   "trades": 1219,
+   "value": 51675072
+  },
+  "ATLC": {
+   "market_cap": 2196000000.0,
+   "trades": 229,
+   "value": 7493637
+  },
+  "ATQA": {
+   "market_cap": 14100000000.0,
+   "trades": 1292,
+   "value": 55312350
+  },
+  "AXPH": {
+   "market_cap": 8578750000.0,
+   "trades": 411,
+   "value": 15770794
+  },
+  "BINV": {
+   "market_cap": 11306825059.08,
+   "trades": 696,
+   "value": 23134239
+  },
+  "BIOC": {
+   "market_cap": 29721868638.0,
+   "trades": 8102,
+   "value": 324227034
+  },
+  "BONY": {
+   "market_cap": 8418047535.01,
+   "trades": 1302,
+   "value": 43568323
+  },
+  "BTFH": {
+   "market_cap": 31832777623.68,
+   "trades": 743,
+   "value": 40292332
+  },
+  "CAED": {
+   "market_cap": 1721160000.0,
+   "trades": 452,
+   "value": 5975821
+  },
+  "CANA": {
+   "market_cap": 41540000000.0,
+   "trades": 192,
+   "value": 10164621
+  },
+  "CCAP": {
+   "market_cap": 18687706857.61,
+   "trades": 1895,
+   "value": 234508301
+  },
+  "CCRS": {
+   "market_cap": 562800000.0,
+   "trades": 676,
+   "value": 20136272
+  },
+  "CEFM": {
+   "market_cap": 2171338453.8,
+   "trades": 763,
+   "value": 16836160
+  },
+  "CERA": {
+   "market_cap": 1347656250.0,
+   "trades": 278,
+   "value": 6387765
+  },
+  "CFGH": {
+   "market_cap": 2803695770.7,
+   "trades": 44,
+   "value": 1785715
+  },
+  "CICH": {
+   "market_cap": 12310000000.0,
+   "trades": 100,
+   "value": 1936980
+  },
+  "CIEB": {
+   "market_cap": 31262500000.0,
+   "trades": 305,
+   "value": 8135745
+  },
+  "CIRA": {
+   "market_cap": 19814871050.0,
+   "trades": 537,
+   "value": 20177279
+  },
+  "CLHO": {
+   "market_cap": 25089980954.04,
+   "trades": 1075,
+   "value": 13985223
+  },
+  "CNFN": {
+   "market_cap": 5793354160.0,
+   "trades": 271,
+   "value": 8099909
+  },
+  "COMI": {
+   "market_cap": 466504056700.0,
+   "trades": 2137,
+   "value": 325701761
+  },
+  "COPR": {
+   "market_cap": 805664225.52,
+   "trades": 1395,
+   "value": 40521688
+  },
+  "COSG": {
+   "market_cap": 1129440000.0,
+   "trades": 607,
+   "value": 16982929
+  },
+  "CPCI": {
+   "market_cap": 8267221968.75,
+   "trades": 260,
+   "value": 5239289
+  },
+  "CPME": {
+   "market_cap": 11387740912.76,
+   "trades": 24,
+   "value": 1053520
+  },
+  "CRST": {
+   "market_cap": 3356309349.12,
+   "trades": 2977,
+   "value": 187407480
+  },
+  "CSAG": {
+   "market_cap": 11973000000.0,
+   "trades": 335,
+   "value": 6530892
+  },
+  "DAPH": {
+   "market_cap": 3358763496.0,
+   "trades": 4147,
+   "value": 179602435
+  },
+  "DGTZ": {
+   "market_cap": 278640000.0,
+   "trades": 77,
+   "value": 800663
+  },
+  "DOMT": {
+   "market_cap": 8122173894.3,
+   "trades": 217,
+   "value": 6192405
+  },
+  "DSCW": {
+   "market_cap": 5091937624.9,
+   "trades": 725,
+   "value": 27314850
+  },
+  "DTPP": {
+   "market_cap": 1731072000.0,
+   "trades": 910,
+   "value": 35695976
+  },
+  "EALR": {
+   "market_cap": 2082912000.0,
+   "trades": 238,
+   "value": 6146843
+  },
+  "EASB": {
+   "market_cap": 791000000.0,
+   "trades": 384,
+   "value": 10118821
+  },
+  "EAST": {
+   "market_cap": 107700000000.0,
+   "trades": 1410,
+   "value": 32458248
+  },
+  "EBSC": {
+   "market_cap": 1123726632.5,
+   "trades": 945,
+   "value": 23497573
+  },
+  "ECAP": {
+   "market_cap": 1731497971.98,
+   "trades": 448,
+   "value": 15357042
+  },
+  "EDFM": {
+   "market_cap": 2435760000.0,
+   "trades": 19,
+   "value": 473767
+  },
+  "EEII": {
+   "market_cap": 679670920.8,
+   "trades": 692,
+   "value": 15163939
+  },
+  "EFIC": {
+   "market_cap": 20105000000.0,
+   "trades": 390,
+   "value": 11892684
+  },
+  "EFID": {
+   "market_cap": 42630831650.4,
+   "trades": 1812,
+   "value": 43534386
+  },
+  "EFIH": {
+   "market_cap": 80114666674.37,
+   "trades": 2262,
+   "value": 42338467
+  },
+  "EGAL": {
+   "market_cap": 148087500000.0,
+   "trades": 3476,
+   "value": 149717705
+  },
+  "EGAS": {
+   "market_cap": 8437007065.5,
+   "trades": 701,
+   "value": 14852147
+  },
+  "EGBE": {
+   "market_cap": 14057133644.843557,
+   "trades": 25,
+   "value": 1829709
+  },
+  "EGCH": {
+   "market_cap": 27176400706.32,
+   "trades": 762,
+   "value": 30020459
+  },
+  "EGREF": {
+   "market_cap": 598623690.0,
+   "trades": 2207,
+   "value": 42027359
+  },
+  "EGSA": {
+   "market_cap": 16388510422.831535,
+   "trades": 10,
+   "value": 145204
+  },
+  "EGTS": {
+   "market_cap": 18070500000.0,
+   "trades": 269,
+   "value": 32612487
+  },
+  "EHDR": {
+   "market_cap": 1928640000.0,
+   "trades": 312,
+   "value": 9731136
+  },
+  "ELEC": {
+   "market_cap": 6925299379.57,
+   "trades": 590,
+   "value": 18185628
+  },
+  "ELKA": {
+   "market_cap": 3435014428.6,
+   "trades": 1198,
+   "value": 49718181
+  },
+  "ELNA": {
+   "market_cap": 291020836.0,
+   "trades": 8,
+   "value": 50903
+  },
+  "ELSH": {
+   "market_cap": 3171712500.0,
+   "trades": 879,
+   "value": 68616442
+  },
+  "ELWA": {
+   "market_cap": 338520000.0,
+   "trades": 70,
+   "value": 1214033
+  },
+  "EMFD": {
+   "market_cap": 70047511878.24,
+   "trades": 3070,
+   "value": 250516142
+  },
+  "ENGC": {
+   "market_cap": 6809400000.0,
+   "trades": 294,
+   "value": 5053506
+  },
+  "EOSB": {
+   "market_cap": 46315000.0,
+   "trades": 18,
+   "value": 60287
+  },
+  "EPCO": {
+   "market_cap": 480189600.0,
+   "trades": 192,
+   "value": 3852483
+  },
+  "EPPK": {
+   "market_cap": 99923200.0,
+   "trades": 127,
+   "value": 2859059
+  },
+  "ETEL": {
+   "market_cap": 197849598440.0,
+   "trades": 2108,
+   "value": 78746536
+  },
+  "ETRS": {
+   "market_cap": 2481196481.51,
+   "trades": 305,
+   "value": 8818326
+  },
+  "EXPA": {
+   "market_cap": 28356000000.0,
+   "trades": 635,
+   "value": 36687269
+  },
+  "FAIT": {
+   "market_cap": 9729982807.56,
+   "trades": 328,
+   "value": 12320840
+  },
+  "FAITA": {
+   "market_cap": 20605493952.40941,
+   "trades": 37,
+   "value": 6113976
+  },
+  "FCMD": {
+   "market_cap": 863788470.0,
+   "trades": 1215,
+   "value": 32929809
+  },
+  "FERC": {
+   "market_cap": 31236000000.0,
+   "trades": 141,
+   "value": 3418716
+  },
+  "FWRY": {
+   "market_cap": 65030528727.96,
+   "trades": 1450,
+   "value": 436832734
+  },
+  "GBCO": {
+   "market_cap": 30730505000.0,
+   "trades": 598,
+   "value": 8722387
+  },
+  "GDWA": {
+   "market_cap": 4308971546.425,
+   "trades": 480,
+   "value": 14716986
+  },
+  "GGCC": {
+   "market_cap": 1939006720.0,
+   "trades": 1259,
+   "value": 38701947
+  },
+  "GGRN": {
+   "market_cap": 1932000000.0,
+   "trades": 299,
+   "value": 4627691
+  },
+  "GIHD": {
+   "market_cap": 380925000.0,
+   "trades": 1394,
+   "value": 52356375
+  },
+  "GMCI": {
+   "market_cap": 77822542.71,
+   "trades": 36,
+   "value": 137216
+  },
+  "GOUR": {
+   "market_cap": 6652000000.0,
+   "trades": 317,
+   "value": 4524817
+  },
+  "GPIM": {
+   "market_cap": 2536363626.5,
+   "trades": 610,
+   "value": 20457576
+  },
+  "GPPL": {
+   "market_cap": 40857220493.41464,
+   "trades": 2,
+   "value": 9744
+  },
+  "GRCA": {
+   "market_cap": 640926000.0,
+   "trades": 1026,
+   "value": 41507058
+  },
+  "GSSC": {
+   "market_cap": 4966850000.0,
+   "trades": 79,
+   "value": 4048925
+  },
+  "GTEX": {
+   "market_cap": 1045445880.6,
+   "trades": 19,
+   "value": 768740
+  },
+  "GTWL": {
+   "market_cap": 3437005638.69,
+   "trades": 4663,
+   "value": 185320605
+  },
+  "HDBK": {
+   "market_cap": 108077046000.0,
+   "trades": 1321,
+   "value": 45394215
+  },
+  "HELI": {
+   "market_cap": 31281046236.0,
+   "trades": 1916,
+   "value": 88341219
+  },
+  "HRHO": {
+   "market_cap": 36758861004.8,
+   "trades": 809,
+   "value": 452812321
+  },
+  "ICFC": {
+   "market_cap": 2664805500.0,
+   "trades": 948,
+   "value": 41549411
+  },
+  "ICID": {
+   "market_cap": 1664000000.0,
+   "trades": 204,
+   "value": 6844522
+  },
+  "IDRE": {
+   "market_cap": 1967899315.0,
+   "trades": 445,
+   "value": 13135541
+  },
+  "IEEC": {
+   "market_cap": 1589220000.0,
+   "trades": 1095,
+   "value": 35560847
+  },
+  "IFAP": {
+   "market_cap": 10214303037.64,
+   "trades": 487,
+   "value": 12556933
+  },
+  "INFI": {
+   "market_cap": 3184505940.0,
+   "trades": 421,
+   "value": 16330792
+  },
+  "IRON": {
+   "market_cap": 29784835756.22,
+   "trades": 312,
+   "value": 7859893
+  },
+  "ISMA": {
+   "market_cap": 3349850282.72,
+   "trades": 255,
+   "value": 5399235
+  },
+  "ISMQ": {
+   "market_cap": 8879769007.02,
+   "trades": 590,
+   "value": 15018731
+  },
+  "ISPH": {
+   "market_cap": 13093920000.0,
+   "trades": 1383,
+   "value": 41350532
+  },
+  "JUFO": {
+   "market_cap": 39421337818.8,
+   "trades": 768,
+   "value": 14814164
+  },
+  "KABO": {
+   "market_cap": 5217771090.84,
+   "trades": 240,
+   "value": 30922724
+  },
+  "KASABF": {
+   "market_cap": 188119987.36,
+   "trades": 4762,
+   "value": 89720568
+  },
+  "KORA": {
+   "market_cap": 7897500000.0,
+   "trades": 2882,
+   "value": 128796911
+  },
+  "KRDI": {
+   "market_cap": 1755000000.0,
+   "trades": 1195,
+   "value": 46678847
+  },
+  "KWIN": {
+   "market_cap": 1385895000.0,
+   "trades": 2676,
+   "value": 143617526
+  },
+  "KZPC": {
+   "market_cap": 3748275712.8,
+   "trades": 529,
+   "value": 22450138
+  },
+  "LCSW": {
+   "market_cap": 2726400000.0,
+   "trades": 518,
+   "value": 19057982
+  },
+  "LUTS": {
+   "market_cap": 1611960000.0,
+   "trades": 7728,
+   "value": 200672829
+  },
+  "MAAL": {
+   "market_cap": 1904132160.0,
+   "trades": 202,
+   "value": 7974580
+  },
+  "MASR": {
+   "market_cap": 16375450000.0,
+   "trades": 1982,
+   "value": 50792047
+  },
+  "MBEG": {
+   "market_cap": 1338817300.81,
+   "trades": 129,
+   "value": 1313214
+  },
+  "MBSC": {
+   "market_cap": 22608123941.03,
+   "trades": 751,
+   "value": 28539260
+  },
+  "MCQE": {
+   "market_cap": 23209920000.0,
+   "trades": 1493,
+   "value": 49595790
+  },
+  "MCRO": {
+   "market_cap": 5097645716.64,
+   "trades": 723,
+   "value": 34547646
+  },
+  "MENA": {
+   "market_cap": 1678936146.9,
+   "trades": 64,
+   "value": 2003678
+  },
+  "MEPA": {
+   "market_cap": 1237950000.0,
+   "trades": 848,
+   "value": 28149252
+  },
+  "MFPC": {
+   "market_cap": 117622432185.63,
+   "trades": 1689,
+   "value": 52734259
+  },
+  "MFSC": {
+   "market_cap": 4696875000.0,
+   "trades": 143,
+   "value": 3413682
+  },
+  "MHOT": {
+   "market_cap": 14747040000.0,
+   "trades": 238,
+   "value": 14836711
+  },
+  "MICH": {
+   "market_cap": 5519475000.0,
+   "trades": 459,
+   "value": 10330486
+  },
+  "MILS": {
+   "market_cap": 2302854000.0,
+   "trades": 608,
+   "value": 23263889
+  },
+  "MIPH": {
+   "market_cap": 9425576665.8,
+   "trades": 108,
+   "value": 3230955
+  },
+  "MOED": {
+   "market_cap": 833145000.0,
+   "trades": 3176,
+   "value": 138098716
+  },
+  "MOIL": {
+   "market_cap": 16370931910.479277,
+   "trades": 133,
+   "value": 14203855
+  },
+  "MOIN": {
+   "market_cap": 8897200000.0,
+   "trades": 127,
+   "value": 2861020
+  },
+  "MOSC": {
+   "market_cap": 1938840000.0,
+   "trades": 880,
+   "value": 21166073
+  },
+  "MPCI": {
+   "market_cap": 10241367500.0,
+   "trades": 6585,
+   "value": 450810345
+  },
+  "MPCO": {
+   "market_cap": 2140000000.0,
+   "trades": 1816,
+   "value": 60593614
+  },
+  "MPRC": {
+   "market_cap": 8518179600.0,
+   "trades": 498,
+   "value": 34995524
+  },
+  "MTIE": {
+   "market_cap": 19328384418.34,
+   "trades": 1094,
+   "value": 22837206
+  },
+  "NAHO": {
+   "market_cap": 2469186907.371912,
+   "trades": 24,
+   "value": 928687
+  },
+  "NAPR": {
+   "market_cap": 6679805512.38,
+   "trades": 29,
+   "value": 587560
+  },
+  "NARE": {
+   "market_cap": 2190827573.2,
+   "trades": 174,
+   "value": 7358874
+  },
+  "NCCW": {
+   "market_cap": 1479240000.0,
+   "trades": 410,
+   "value": 8000331
+  },
+  "NEDA": {
+   "market_cap": 174615512.5,
+   "trades": 49,
+   "value": 646689
+  },
+  "NHPS": {
+   "market_cap": 1455680000.0,
+   "trades": 321,
+   "value": 12504956
+  },
+  "NINH": {
+   "market_cap": 7140000000.0,
+   "trades": 770,
+   "value": 22288896
+  },
+  "NIPH": {
+   "market_cap": 18199500000.0,
+   "trades": 7245,
+   "value": 426469717
+  },
+  "OBRI": {
+   "market_cap": 1319600000.0,
+   "trades": 689,
+   "value": 23260323
+  },
+  "OCDI": {
+   "market_cap": 40006779973.58,
+   "trades": 654,
+   "value": 38314050
+  },
+  "OCPH": {
+   "market_cap": 6184320000.0,
+   "trades": 937,
+   "value": 21330265
+  },
+  "ODIN": {
+   "market_cap": 1872000000.0,
+   "trades": 749,
+   "value": 20830180
+  },
+  "OFH": {
+   "market_cap": 4811767155.52,
+   "trades": 1116,
+   "value": 64895908
+  },
+  "OIH": {
+   "market_cap": 10701208864.8,
+   "trades": 1761,
+   "value": 102215319
+  },
+  "OLFI": {
+   "market_cap": 9236000000.0,
+   "trades": 706,
+   "value": 13506264
+  },
+  "ORAS": {
+   "market_cap": 93157227514.35,
+   "trades": 1303,
+   "value": 91716859
+  },
+  "ORHD": {
+   "market_cap": 47231183790.94,
+   "trades": 1160,
+   "value": 46834066
+  },
+  "ORWE": {
+   "market_cap": 17352648622.12,
+   "trades": 555,
+   "value": 17863875
+  },
+  "PHAR": {
+   "market_cap": 22140754400.0,
+   "trades": 3726,
+   "value": 175562089
+  },
+  "PHDC": {
+   "market_cap": 42326729760.4,
+   "trades": 1288,
+   "value": 77369635
+  },
+  "PHGC": {
+   "market_cap": 2079474997.6,
+   "trades": 272,
+   "value": 4081031
+  },
+  "PHTV": {
+   "market_cap": 8622802500.0,
+   "trades": 44,
+   "value": 626874
+  },
+  "POUL": {
+   "market_cap": 18475091712.0,
+   "trades": 627,
+   "value": 13391441
+  },
+  "PRCL": {
+   "market_cap": 1699345466.0,
+   "trades": 239,
+   "value": 21143140
+  },
+  "PRDC": {
+   "market_cap": 10063113037.6,
+   "trades": 924,
+   "value": 90087872
+  },
+  "PRMH": {
+   "market_cap": 913500000.0,
+   "trades": 296,
+   "value": 9334210
+  },
+  "QNBE": {
+   "market_cap": 125906305903.38,
+   "trades": 174,
+   "value": 4111052
+  },
+  "RACC": {
+   "market_cap": 1884490670.92,
+   "trades": 522,
+   "value": 8149680
+  },
+  "RAKT": {
+   "market_cap": 663300000.0,
+   "trades": 32,
+   "value": 557446
+  },
+  "RAYA": {
+   "market_cap": 30611279041.2,
+   "trades": 1148,
+   "value": 22839465
+  },
+  "RMDA": {
+   "market_cap": 12400185749.6,
+   "trades": 1641,
+   "value": 36256376
+  },
+  "ROTO": {
+   "market_cap": 768297684.0,
+   "trades": 100,
+   "value": 2371721
+  },
+  "RREI": {
+   "market_cap": 1086624000.0,
+   "trades": 278,
+   "value": 8699816
+  },
+  "RTVC": {
+   "market_cap": 1036550814.6,
+   "trades": 119,
+   "value": 3400744
+  },
+  "RUBX": {
+   "market_cap": 800374497.46,
+   "trades": 398,
+   "value": 15496931
+  },
+  "SAIB": {
+   "market_cap": 4231568644.545,
+   "trades": 1,
+   "value": 4746
+  },
+  "SAUD": {
+   "market_cap": 16695114424.8,
+   "trades": 233,
+   "value": 4492707
+  },
+  "SCEM": {
+   "market_cap": 25731758980.82,
+   "trades": 1299,
+   "value": 92208213
+  },
+  "SCFM": {
+   "market_cap": 1742760000.0,
+   "trades": 232,
+   "value": 6058179
+  },
+  "SCTS": {
+   "market_cap": 56358000000.0,
+   "trades": 74,
+   "value": 1983533
+  },
+  "SDTI": {
+   "market_cap": 3680899906.2,
+   "trades": 135,
+   "value": 7045843
+  },
+  "SEIG": {
+   "market_cap": 671000000.0,
+   "trades": 24,
+   "value": 351996
+  },
+  "SIPC": {
+   "market_cap": 1210000000.0,
+   "trades": 764,
+   "value": 17245473
+  },
+  "SKPC": {
+   "market_cap": 19856340000.0,
+   "trades": 969,
+   "value": 41220414
+  },
+  "SMFR": {
+   "market_cap": 2497632000.0,
+   "trades": 238,
+   "value": 5503650
+  },
+  "SNFC": {
+   "market_cap": 1693367149.6,
+   "trades": 287,
+   "value": 9338447
+  },
+  "SPIN": {
+   "market_cap": 7181953338.01,
+   "trades": 391,
+   "value": 9751465
+  },
+  "SPMD": {
+   "market_cap": 753663671.895,
+   "trades": 282,
+   "value": 4274653
+  },
+  "SUGR": {
+   "market_cap": 8091070467.5,
+   "trades": 721,
+   "value": 32573009
+  },
+  "SVCE": {
+   "market_cap": 5232486714.0,
+   "trades": 1170,
+   "value": 46713705
+  },
+  "SWDY": {
+   "market_cap": 267248316042.72,
+   "trades": 932,
+   "value": 18590917
+  },
+  "TALM": {
+   "market_cap": 13344796132.38,
+   "trades": 932,
+   "value": 34257022
+  },
+  "TANM": {
+   "market_cap": 737685000.0,
+   "trades": 763,
+   "value": 14133565
+  },
+  "TAQA": {
+   "market_cap": 21637660800.0,
+   "trades": 810,
+   "value": 27639792
+  },
+  "TMGH": {
+   "market_cap": 196895469252.3,
+   "trades": 5246,
+   "value": 202798235
+  },
+  "TRTO": {
+   "market_cap": 257685660.0,
+   "trades": 18,
+   "value": 246852
+  },
+  "TWSA": {
+   "market_cap": 842950000.0,
+   "trades": 585,
+   "value": 13120740
+  },
+  "TYCN": {
+   "market_cap": 777480000.0,
+   "trades": 326,
+   "value": 6498186
+  },
+  "UBEE": {
+   "market_cap": 16060000000.0,
+   "trades": 56,
+   "value": 688902
+  },
+  "UEFM": {
+   "market_cap": 3783080000.0,
+   "trades": 40,
+   "value": 1286457
+  },
+  "UEGC": {
+   "market_cap": 1363435567.8,
+   "trades": 1317,
+   "value": 47998980
+  },
+  "UNIP": {
+   "market_cap": 854708092.038,
+   "trades": 324,
+   "value": 8136394
+  },
+  "UNIT": {
+   "market_cap": 4447152049.57,
+   "trades": 46,
+   "value": 1596967
+  },
+  "VALU": {
+   "market_cap": 23233112448.69,
+   "trades": 455,
+   "value": 15559080
+  },
+  "VLMR": {
+   "market_cap": 29007859415.920868,
+   "trades": 27,
+   "value": 1964944
+  },
+  "VLMRA": {
+   "market_cap": 10525866598.8,
+   "trades": 383,
+   "value": 17554048
+  },
+  "WCDF": {
+   "market_cap": 4868025000.0,
+   "trades": 61,
+   "value": 1267523
+  },
+  "WKOL": {
+   "market_cap": 1955296000.0,
+   "trades": 178,
+   "value": 4014123
+  },
+  "ZEOT": {
+   "market_cap": 2816000000.0,
+   "trades": 281,
+   "value": 4243573
+  },
+  "ZMID": {
+   "market_cap": 8950000000.0,
+   "trades": 2773,
+   "value": 228615611
+  }
+ }
+}

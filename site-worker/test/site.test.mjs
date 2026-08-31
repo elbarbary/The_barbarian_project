@@ -2193,6 +2193,50 @@ test('the reader carries the trailing figure and its window off the document', a
 
 /* ── the audit's remaining confirmed findings ──────────────────────────── */
 
+test('the session carries how many trades and how much money, or a dash', async () => {
+  // Volume is shares and turnover is pounds, and one without the other says
+  // nothing about size: a million shares of a two-pound company and a million
+  // of a hundred-pound one are the same volume and fifty times the money.
+  const c = fresh();
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'AAAA';
+  const tileIn = (stats, label) => stats.find((t) => t.label === label);
+
+  c._co = { ticker: 'AAAA', profile: { trades: 900, turnover: 12000000 },
+            trades: 1986, turnover: 294469912, close: 10, pct: 1.5 };
+  const live = c.renderVals().co.stats;
+  assert.equal(tileIn(live, 'Trades').value, '1,986', 'the live feed should win');
+  assert.match(tileIn(live, 'Turnover').value, /294/);
+  assert.equal(tileIn(live, 'Trades').note, 'in the session');
+
+  // After the close the feed carries neither, and the document's own — written
+  // by the last harvest of the day — keeps the tiles from emptying every
+  // afternoon.
+  c._co = { ticker: 'AAAA', profile: { trades: 900, turnover: 12000000 },
+            trades: null, turnover: null, close: 10, pct: 1.5 };
+  assert.equal(tileIn(c.renderVals().co.stats, 'Trades').value, '900');
+
+  // A company on the vendor half of the feed has neither anywhere. A dash,
+  // never a nought: no trades and no figure are different facts.
+  c._co = { ticker: 'AAAA', profile: {}, close: 10, pct: 1.5 };
+  const none = c.renderVals().co.stats;
+  assert.equal(tileIn(none, 'Trades').value, '\u2014');
+  assert.equal(tileIn(none, 'Turnover').value, '\u2014');
+  assert.equal(tileIn(none, 'Trades').note, '',
+    'a dash must not be labelled "in the session"');
+
+  // main.js has to hand both across, or every company prints a dash and
+  // nothing fails — which is exactly how Volume broke.
+  const { readFile } = await import('node:fs/promises');
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  const co = main.slice(main.indexOf('component._co = {'), main.indexOf('component._co = {') + 700);
+  for (const field of ['trades', 'turnover']) {
+    assert.match(co, new RegExp(`\\b${field}: row\\.${field}\\b`),
+      `${field} never reaches the company screen`);
+  }
+});
+
 test('the header shows the session\'s volume, and says which is the average', () => {
   // This tile printed the THIRTY-DAY MEAN directly beside the close and the
   // session date, where it reads as that session's volume — COMI showed

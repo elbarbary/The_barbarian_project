@@ -279,6 +279,7 @@ document.getElementById('signout').onclick = async () => {
           // logic.js actually reads.
           component._co = { ticker: wanted, ...doc,
             close: row.close, pct: row.pct, volume: row.volume,
+            trades: row.trades, turnover: row.turnover,
             eps: row.eps, epsPeriod: row.epsPeriod,
             pe: row.pe, pePeriod: row.pePeriod,
             peTtm: row.peTtm, peTtmWindow: row.peTtmWindow,
