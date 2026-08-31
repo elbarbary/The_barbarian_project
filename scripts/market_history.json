@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-08-31T12:16:46.859Z",
+ "updated_at": "2026-08-31T14:39:23.787Z",
  "sessions": [
   {
    "date": "2025-10-30",
@@ -2861,15 +2861,15 @@
     "EGX100EWI": 27262.4
    },
    "breadth": {
-    "up": 92,
-    "down": 144,
-    "flat": 47,
+    "up": 96,
+    "down": 143,
+    "flat": 44,
     "counted": 283,
     "basis": "session"
    },
    "metals": {
-    "XAU": 4452.5,
-    "XAG": 67.27
+    "XAU": 4432.4,
+    "XAG": 66.41
    }
   }
  ]

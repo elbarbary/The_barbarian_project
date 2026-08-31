@@ -6,7 +6,7 @@
  },
  "sector": "Distribution Services",
  "market": {
-  "last_close": 259.76,
+  "last_close": 259.1,
   "date": "2026-08-31",
   "open": 261.87,
   "high": 264,
@@ -1317,9 +1317,9 @@
  ],
  "profile": {
   "shares_outstanding": 9600000,
-  "perf_1w": -0.6843815714012695,
-  "perf_1m": 12.51840942562591,
-  "perf_3m": 25.572851203712645,
+  "perf_1w": -0.9367233798508845,
+  "perf_1m": 12.232521874729276,
+  "perf_3m": 25.253794837087888,
   "avg_volume_30d": 102662.8666666667,
   "relative_volume_10d": 0.8552592258853494,
   "median_volume_20d": 66421.5,
