@@ -27,6 +27,41 @@
 
 const SCANNER = 'https://scanner.tradingview.com/egypt/scan';
 
+/* The exchange's own tape, asked first.
+ *
+ * It is NOT fresher. Both feeds are about fifteen minutes behind — measured
+ * on 31 August 2026 with the market open, the two agreed to a few hundredths
+ * minute after minute, and the exchange's own `writeTime` sat 14 minutes
+ * behind the Cairo clock. Anyone expecting the exchange to be live should
+ * know that before it is wired in: EGX publishes its public feed delayed, the
+ * same as the vendor does.
+ *
+ * What it buys is three things the vendor cannot give:
+ *
+ *   * `writeTime` — the exchange stamps the row itself, so the delay stops
+ *     being a tier name we assume and becomes a number we measure;
+ *   * `trades` and `value` — how many times a share changed hands and for how
+ *     much, neither of which is in the scanner;
+ *   * the same source the market values already come from, so a company's
+ *     price and its market capitalisation stop being two vendors' opinions.
+ *
+ * It covers 221 securities against a directory of 282, so the scanner stays
+ * and fills the rest. Per ticker: the exchange where it has one, the vendor
+ * where it does not.
+ */
+const EGX = 'https://beta.egx.com.eg/api/bff/egx/market-watch?Page=1&PageSize=500';
+
+/** The header the exchange's gateway checks for. Without `x-egx-bff-request`
+ *  it answers 404 to a Worker; with it, 200. */
+const EGX_HEADERS = {
+  'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+    + ' (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+  accept: 'application/json',
+  'accept-language': 'en-US,en;q=0.9',
+  'x-egx-bff-request': '1',
+  referer: 'https://beta.egx.com.eg/en',
+};
+
 /** How long a snapshot is served before the market is re-read. */
 const FRESH_FOR_SECONDS = 300;
 
@@ -92,9 +127,9 @@ export default {
       return withHeaders(hit, Math.round(ageSeconds));
     }
 
-    let snapshot;
+    let shot;
     try {
-      snapshot = await readMarket();
+      shot = await snapshot();
     } catch (err) {
       // Upstream is down or has changed shape. Keep serving what we have and
       // say so, rather than turning every price in the app into an error.
@@ -107,7 +142,7 @@ export default {
       return json({ error: 'quotes unavailable', reason: String(err) }, 503);
     }
 
-    const response = json(snapshot, 200, 0);
+    const response = json(shot, 200, 0);
     const stored = response.clone();
     stored.headers.set('x-snapshot-age-basis', String(Date.now()));
     // The stored copy must outlive its own freshness, or the degradation path
@@ -123,6 +158,88 @@ export default {
     return response;
   },
 };
+
+/* ── the exchange ──────────────────────────────────────────────────────── */
+
+/** "202608311218" against the same clock the exchange keeps, in seconds.
+ *
+ * Both sides are read as Cairo wall time and subtracted, so the offset never
+ * has to be known and the summer change never has to be handled: EEST and EET
+ * cancel. The one hour a year they do not cancel is the small hours of a
+ * Friday, when the exchange is shut.
+ */
+export function stampAge(writeTime, now = new Date()) {
+  const m = /^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})$/.exec(String(writeTime || ''));
+  if (!m) return null;
+  const written = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+  // `now`, expressed in Cairo, as the same kind of naive wall-clock instant.
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Africa/Cairo', year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', hour12: false,
+  }).formatToParts(now).map((x) => [x.type, x.value]));
+  const here = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute);
+  const seconds = Math.round((here - written) / 1000);
+  // A stamp from the future is a clock disagreement, not a negative delay.
+  return seconds < 0 ? 0 : seconds;
+}
+
+/** The exchange's rows, keyed by ticker. Same shape the scanner produces. */
+export function cleanEgx(rows) {
+  const quotes = {};
+  let writeTime = null;
+  for (const row of rows || []) {
+    const ticker = String(row.reuters || '').split('.')[0].trim().toUpperCase();
+    const last = row.lastPrice;
+    if (!TICKER.test(ticker) || typeof last !== 'number' || last <= 0) continue;
+    if (row.writeTime) writeTime = String(row.writeTime);
+    quotes[ticker] = {
+      c: round(last),
+      o: round(row.openPrice),
+      h: round(row.high),
+      l: round(row.low),
+      v: typeof row.volume === 'number' ? Math.round(row.volume) : null,
+      // Percent, as the exchange gives it — the same unit the scanner uses
+      // and the opposite of the fraction the published documents store.
+      ch: typeof row.chgPer === 'number' ? Number(row.chgPer.toFixed(4)) : null,
+      pc: round(row.prevClose),
+      // Two figures the scanner has no column for.
+      t: typeof row.trades === 'number' ? Math.round(row.trades) : null,
+      val: typeof row.value === 'number' ? Math.round(row.value) : null,
+      s: 'egx',
+    };
+  }
+  return { quotes, writeTime };
+}
+
+async function readEgx() {
+  const response = await fetch(EGX, { headers: EGX_HEADERS });
+  if (!response.ok) throw new Error(`egx http ${response.status}`);
+  const payload = await response.json();
+  const rows = ((payload || {}).data || {}).data;
+  if (!Array.isArray(rows)) throw new Error('egx shape changed');
+  const { quotes, writeTime } = cleanEgx(rows);
+  if (!Object.keys(quotes).length) throw new Error('egx returned no quotes');
+  return { quotes, writeTime };
+}
+
+/** The exchange where it has an answer, the vendor everywhere else.
+ *
+ * Per ticker, never per feed: taking the whole of one and discarding the other
+ * would drop sixty-one companies the exchange does not carry, or throw away
+ * the trade counts for the two hundred it does.
+ */
+export function mergeQuotes(vendor, exchange) {
+  const quotes = { ...vendor };
+  for (const [ticker, row] of Object.entries(exchange || {})) quotes[ticker] = row;
+  const used = Object.values(quotes);
+  return {
+    quotes,
+    from: {
+      egx: used.filter((q) => q.s === 'egx').length,
+      vendor: used.filter((q) => q.s !== 'egx').length,
+    },
+  };
+}
 
 async function readMarket() {
   const upstream = await fetch(SCANNER, {
@@ -177,13 +294,52 @@ async function readMarket() {
 
   if (Object.keys(quotes).length === 0) throw new Error('upstream returned no quotes');
 
+  return { quotes, modes };
+}
+
+/** Both feeds, merged, with an age that is the worst of what is on the screen.
+ *
+ * The exchange is asked first and is allowed to fail: it answers a Worker with
+ * an occasional 404 before it settles, and a quotes endpoint that goes down
+ * with it would be worse than one carrying the vendor's numbers. The vendor is
+ * NOT allowed to fail on its own — losing it costs the sixty-one companies the
+ * exchange does not carry — but if the exchange answered, its 221 are still
+ * worth serving alone.
+ */
+async function snapshot() {
+  const [exchange, vendor] = await Promise.all([
+    readEgx().catch((error) => ({ error: String(error && error.message) })),
+    readMarket().catch((error) => ({ error: String(error && error.message) })),
+  ]);
+  if (exchange.error && vendor.error) {
+    throw new Error(`egx: ${exchange.error} | vendor: ${vendor.error}`);
+  }
+  const { quotes, from } = mergeQuotes(vendor.quotes || {}, exchange.quotes || {});
+
+  // The caption has to be true of EVERY price on the screen, so the delay is
+  // the worst of the sources actually used — never the best. The exchange
+  // stamps its own rows, so that half is measured rather than assumed; the
+  // vendor's is the tier it declares. Where both are on screen, the larger
+  // wins, which is the only honest answer to "how old is this page".
+  const measured = exchange.writeTime ? stampAge(exchange.writeTime) : null;
+  const vendorDelay = vendor.quotes ? delayFromModes(vendor.modes) : null;
+  const worst = Math.max(
+    from.egx && measured !== null ? measured : 0,
+    from.vendor && vendorDelay !== null ? vendorDelay : 0,
+  );
+
   return {
     as_of: new Date().toISOString(),
-    // Derived from the feed's own tag rather than assumed. If the vendor ever
-    // upgrades the tier this number drops on its own and the app's caption
-    // follows it without a release.
-    delay_seconds: delayFromModes(modes),
-    update_modes: [...modes],
+    delay_seconds: worst,
+    // Kept apart so a reader — or a screen — can say WHICH half is which
+    // rather than being handed one number for two different claims.
+    egx_delay_seconds: measured,
+    egx_write_time: exchange.writeTime || null,
+    vendor_delay_seconds: vendorDelay,
+    update_modes: [...(vendor.modes || [])],
+    from,
+    unavailable: [exchange.error && `egx: ${exchange.error}`,
+                  vendor.error && `vendor: ${vendor.error}`].filter(Boolean),
     session: cairoSession(new Date()),
     count: Object.keys(quotes).length,
     stale: false,

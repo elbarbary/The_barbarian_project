@@ -26,11 +26,13 @@ on:
     paths:
       - 'public/esthmr/**'
       - 'site-worker/**'
+      - 'worker/quotes/**'
       - '.github/workflows/check-website.yml'
   pull_request:
     paths:
       - 'public/esthmr/**'
       - 'site-worker/**'
+      - 'worker/quotes/**'
   workflow_dispatch:
 
 # Website checks are independent of each other and of the data publish, so they
@@ -57,4 +59,4 @@ jobs:
       # exists on the row, no §8 directive language reaches a screen, and no
       # bidi mark reaches a stylesheet.
       - name: Test the website
-        run: node --test site-worker/test/*.test.mjs
+        run: node --test site-worker/test/*.test.mjs worker/quotes/test/*.test.mjs

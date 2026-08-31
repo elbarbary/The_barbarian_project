@@ -387,6 +387,12 @@ export async function live() {
     liveAsOf: feed ? feed.as_of : null,
     liveDelaySeconds: feed ? feed.delay_seconds : null,
     liveCount: feed ? Object.keys(fresh).length : 0,
+    // How many of the prices on screen are the exchange's own figure and how
+    // many are a vendor's. The exchange carries 221 of the 282 listed, so the
+    // vendor is not a fallback that never runs — it is most of the tail, on
+    // every session, and a reader is entitled to know which they are looking
+    // at rather than being told "live prices" over two different sources.
+    liveFrom: feed && feed.from ? feed.from : null,
     generatedAt: manifest.generated_at || null,
     dataVersion: manifest.data_version || null,
   };

@@ -266,6 +266,7 @@ export class Component extends Base {
       // "not final" was the whole of what the screen said while showing a
       // capture three hours old.
       sessionFeed:'Session in progress — {delay} min delayed, read {at}',
+      priceFrom:'{egx} of these prices are the exchange\u2019s own figures; {vendor} come from a market-data vendor, because the exchange does not publish them. Both are quoted delayed.',
       sessionHeld:'Session in progress — prices not final, captured {at}',
       investorsTitle:'Who is buying', investorsLead:'The exchange\u2019s own split of everything traded, by who traded it.',
       investorsShare:'Share of all value traded', investorsNet:'Bought less sold',
@@ -492,6 +493,7 @@ export class Component extends Base {
       publisher:'ناشر · إفصاحات البورصة', session:'الجلسة', builtAt:'حُدِّث', theme:'المظهر', dataVersion:'إصدار البيانات',
       sessionClose:'أسعار إغلاق', sessionLive:'الجلسة جارية — الأسعار غير نهائية',
       sessionFeed:'الجلسة جارية — بتأخير {delay} دقيقة، قُرئت {at}',
+      priceFrom:'{egx} من هذه الأسعار أرقام البورصة نفسها، و{vendor} من مزوّد بيانات لأن البورصة لا تنشرها. وكلاهما بتأخير.',
       sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
       investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
       investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
@@ -2213,6 +2215,11 @@ export class Component extends Base {
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
       sessionState: this.sessionLine(D, L),
+      hasPriceSource: Boolean(D.liveFrom && D.liveFrom.egx),
+      priceSource: D.liveFrom
+        ? L.priceFrom.replace('{egx}', String(D.liveFrom.egx))
+            .replace('{vendor}', String(D.liveFrom.vendor))
+        : '',
       sessionColor: (D.isClose && !D.livePrices) ? 'var(--faint)' : 'var(--accent)',
       dataVersion: D.dataVersion || '—', totalCount: D.companies.length,
       noIndices: indices.length === 0, noReadNow: readNow.length === 0,
