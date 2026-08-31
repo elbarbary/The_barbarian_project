@@ -72,5 +72,51 @@ class ToleranceTest(unittest.TestCase):
             rh.verified(40977, "Tadawul", 11237.93, "2026-08-01")
 
 
+class WindowTest(unittest.TestCase):
+    """Whether the published level is FOUND in the series, not whether it is
+    the last bar of it.
+
+    It used to be the last bar, which assumed the two sides were never a day
+    apart. They are, in both directions — rates/latest.json carries no date for
+    its world rows, and its levels are a previous close. Oil was refused on 31
+    August at 86.39 against a published 83.40 with both figures right and three
+    sessions apart.
+    """
+
+    def series(self, closes):
+        rh.ih.INSTRUMENTS = {}
+        rh.ih.series = lambda *a, **k: closes
+        return closes
+
+    def test_a_level_a_few_sessions_back_still_verifies(self):
+        self.series({"2026-08-26": 83.40, "2026-08-27": 84.10,
+                     "2026-08-28": 85.02, "2026-08-31": 86.39})
+        rows = rh.verified(8849, "Oil", 83.40, "2026-08-01")
+        self.assertEqual(len(rows), 4)
+
+    def test_the_wrong_instrument_still_misses_every_session(self):
+        # Tadawul's plausible candidates came back at 1,985 and 66,405 against
+        # a published 11,238. A window five wide does not rescue those.
+        self.series({f"2026-08-{d:02d}": 1985.0 + d for d in range(20, 32)})
+        with self.assertRaises(rh.Refused) as caught:
+            rh.verified(39932, "Tadawul", 11237.93, "2026-08-01")
+        self.assertIn("nearest", str(caught.exception))
+
+    def test_a_match_outside_the_window_does_not_count(self):
+        # Far enough back and it is not evidence about this instrument any
+        # more, it is a coincidence with an old price.
+        closes = {f"2026-08-{d:02d}": 400.0 for d in range(1, 26)}
+        closes["2026-08-10"] = 83.40
+        closes.update({f"2026-08-{d:02d}": 400.0 for d in range(26, 32)})
+        self.series(closes)
+        with self.assertRaises(rh.Refused):
+            rh.verified(8849, "Oil", 83.40, "2026-08-01")
+
+    def test_an_empty_series_is_refused(self):
+        self.series({})
+        with self.assertRaises(rh.Refused):
+            rh.verified(8849, "Oil", 83.40, "2026-08-01")
+
+
 if __name__ == "__main__":
     unittest.main()
