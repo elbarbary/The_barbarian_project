@@ -68,7 +68,7 @@ STEPS = [
     # fixed, but the market build only runs where the daily scan exists, which
     # is not CI. This runs everywhere and costs nothing, so the rule holds
     # rather than depending on an optional input.
-    ("Company sectors", "apply_company_sector.py", True),
+    ("Company facts", "apply_company_facts.py", True),
     # New filings, before anything that reads them.
     #
     # The archive under `data-source/egx-beta/filings` is what the calendar's

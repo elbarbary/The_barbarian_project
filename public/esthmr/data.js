@@ -605,6 +605,13 @@ export async function company(ticker) {
     review: review || null,
     profile: d.profile || {},
     sector: d.sector,
+    // Which money this listing's PRICE is in. The market value beside it is
+    // always pounds, so on the eleven dollar listings the two figures on this
+    // screen are in different currencies and neither said so: CFGH's 0.118
+    // read as eleven piastres against a market value of 2.83 billion, and
+    // price times shares came to a fiftieth of the company.
+    currency: d.currency || '',
+    foreignCurrency: Boolean(d.currency),
     name: d.name,
     brief: brief ? (brief.story || brief.history || '') : '',
     briefAr: brief ? (brief.story_ar || brief.history_ar || '') : '',

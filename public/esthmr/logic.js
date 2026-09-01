@@ -1271,7 +1271,12 @@ export class Component extends Base {
         // ask every tile the same question. The two tiles built on a filing
         // fill it with the period that filing covers.
         stats: [
-          { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)', note:'' },
+          // The exchange states every market value in pounds, including for
+          // the listings it quotes in dollars. Unlabelled, the two figures on
+          // this screen invite a reader to divide one by the other and get a
+          // company a fiftieth of its own size.
+          { label: ar?'القيمة السوقية':'Market cap', value: this.money(p.market_cap), color:'var(--ink)',
+            note: loaded.currency ? (ar ? 'بالجنيه' : 'in EGP') : '' },
           { label: ar?'أسبوع':'1W', value: perf(p.perf_1w), color: this.dcol(p.perf_1w), note:'' },
           { label: ar?'شهر':'1M', value: perf(p.perf_1m), color: this.dcol(p.perf_1m), note:'' },
           // The session's own volume, which market.json publishes and data.js
@@ -1346,7 +1351,12 @@ export class Component extends Base {
         nameAr: loaded.name && loaded.name.ar ? loaded.name.ar : (loaded.name && loaded.name.en) || loaded.ticker,
         sector: sectorName(loaded.sector) || co.sector,
         sectorKey: loaded.sector || co.sectorKey || '',
-        close: loaded.close === null || loaded.close === undefined ? '—' : this.num(loaded.close),
+        // Eleven listings are quoted in dollars. The market table says so;
+        // this screen printed the bare number in a design where every other
+        // figure is pounds.
+        close: loaded.close === null || loaded.close === undefined
+          ? '—'
+          : (loaded.currency ? loaded.currency + ' ' : '') + this.num(loaded.close),
         pct: pct === null ? '—' : this.pct(pct),
         // The move in pounds, beside the move in percent. Every real company
         // printed a literal em dash here — the design's default, which the

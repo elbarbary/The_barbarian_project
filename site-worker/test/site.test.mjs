@@ -1263,6 +1263,34 @@ test('a price in dollars says so, and one in pounds does not', () => {
   assert.doesNotMatch(comi.close, /[A-Z$]/, `pound price printed as "${comi.close}"`);
 });
 
+test('a dollar listing says which money each of its two figures is in', () => {
+  // The market table was taught this and the company screen was not, so the
+  // page a reader lands on printed 0.118 over a market value of 2.83 billion
+  // with nothing between them. Divide one by the other and the company is a
+  // fiftieth of its own size; the difference is the exchange rate, and the
+  // screen never mentioned it. The exchange states every market value in
+  // pounds, including for the listings it quotes in dollars.
+  const c = fresh();
+  c.setData(LIVE);
+  c.state.ticker = 'CFGH';
+  c._co = { ticker: 'CFGH', close: 0.118, pct: 1.2, currency: 'US$',
+            profile: { market_cap: 2.83e9, shares_outstanding: 470250000 },
+            name: { en: 'Concrete Fashion', ar: 'كونكريت' }, sector: 'Textile & Durables' };
+  const co = c.renderVals().co;
+  assert.match(co.close, /^US\$ /, `the price printed as "${co.close}"`);
+  const cap = co.stats.find((s) => /Market cap/.test(s.label));
+  assert.equal(cap.note, 'in EGP', 'the market value does not say which money it is in');
+
+  // And a pound listing says neither, because saying it 273 times is noise.
+  c.state.ticker = 'COMI';
+  c._co = { ticker: 'COMI', close: 137.4, pct: -0.5,
+            profile: { market_cap: 468e9 },
+            name: { en: 'CIB', ar: 'التجاري' }, sector: 'Banks' };
+  const comi = c.renderVals().co;
+  assert.doesNotMatch(comi.close, /[A-Z$]/, `the price printed as "${comi.close}"`);
+  assert.equal(comi.stats.find((s) => /Market cap/.test(s.label)).note, '');
+});
+
 test('a sector card is not four blank lines', async () => {
   // The mapper emitted `companies`, `lead` and `pe`; the card binds `count`,
   // `read` and `medianPe`. Every card rendered its title and its bar over
@@ -2598,8 +2626,17 @@ test('main.js hands the company screen every session field it reads', async () =
 
   const c = fresh();
   c.setData(LIVE);
-  const fromDoc = new Set(['series', 'fins', 'debt', 'review', 'profile', 'sector',
-                           'name', 'brief', 'briefAr', 'briefSource']);
+  // What `data.company()` actually spreads in, asked of the function rather
+  // than copied from it. This was a hand-kept list of ten key names, so adding
+  // a field to `company()` made this test fail on the field it had just been
+  // given — the one shape of drift a wiring test must not have.
+  const published = JSON.parse(await readFile(
+    new URL('../../public/data/v1/companies.json', import.meta.url), 'utf8'));
+  const real = published.companies.find((x) => x.ticker);
+  const fromDoc = new Set(Object.keys(
+    await fromDisk(() => data.company(real.ticker))));
+  assert.ok(fromDoc.has('profile') && fromDoc.has('series'),
+    'company() no longer returns the document it is read for');
 
   const dropped = [...read].filter((k) => k && !copied.has(k) && !fromDoc.has(k));
   assert.deepEqual(dropped, [],
