@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 2,
+  "fetchedAt": "2026-09-01T13:56:02.760800+00:00",
+  "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
+  "sourceSha256": "14908257c509d6fa09eb1a0bad20b03ad97e171d5cd28409d80ef0f2f5dedcb4",
+  "issuers": [
+    {
+      "isin": "EGS01081C016",
+      "issuerName": "The General Co. For Land Reclamation"
+    },
+    {
+      "isin": "EGS21FG1C015",
+      "issuerName": "ALMAZA FOR CONSTRUCTION AND BUILDING AND AGRICULTURAL RECLAMATION"
+    },
+    {
+      "isin": "EGS23FV1C014",
+      "issuerName": "HBA Contracting"
+    },
+    {
+      "isin": "EGS30221C013",
+      "issuerName": "The Arab Dairy Products Co."
+    },
+    {
+      "isin": "EGS32221C011",
+      "issuerName": "Arab Cotton Ginning"
+    },
+    {
+      "isin": "EGS341K1C013",
+      "issuerName": "Innovation for retail and supplies-ARTIFEX"
+    },
+    {
+      "isin": "EGS341K1C021",
+      "issuerName": "Innovation for retail and supplies-ARTIFEX"
+    },
+    {
+      "isin": "EGS38191C010",
+      "issuerName": "Abu Qir Fertilizers and Chemical Industries"
+    },
+    {
+      "isin": "EGS38321C013",
+      "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
+    },
+    {
+      "isin": "EGS3E2F1C011",
+      "issuerName": "Alexandria for Refractories- ACR"
+    },
+    {
+      "isin": "EGS3E6X1C015",
+      "issuerName": "G C P FOR FOR DUCTILE IRON PIPE PRODUCTI"
+    },
+    {
+      "isin": "EGS3J4C1C011",
+      "issuerName": "Canteks For Diapers And Papers Product"
+    },
+    {
+      "isin": "EGS3J591C015",
+      "issuerName": "Modern Lebanese Egyptian Al-Eshraq For Manufacturing"
+    },
+    {
+      "isin": "EGS473U1C011",
+      "issuerName": "G Mac for logistics and transportation"
+    },
+    {
+      "isin": "EGS497L1C014",
+      "issuerName": "Intro Utilities"
+    },
+    {
+      "isin": "EGS497L1C022",
+      "issuerName": "Intro Utilities"
+    },
+    {
+      "isin": "EGS55381C015",
+      "issuerName": "Nile Engineering for Agencies (Nile Engineering)"
+    },
+    {
+      "isin": "EGS585B1C019",
+      "issuerName": "VALENCIA FOR RESTURANTS"
+    },
+    {
+      "isin": "EGS60111C019",
+      "issuerName": "Abu Dhabi Islamic Bank - Egypt"
+    },
+    {
+      "isin": "EGS66H81C016",
+      "issuerName": "El Sewedy for Real Estate Development"
+    },
+    {
+      "isin": "EGS697S1C015",
+      "issuerName": "A Capital Holding"
+    },
+    {
+      "isin": "EGS72AQ1C016",
+      "issuerName": "Arab Co. For Assets Management And Development"
+    },
+    {
+      "isin": "EGS74PG1C019",
+      "issuerName": "Frona Software"
+    },
+    {
+      "isin": "EGS74Q81C011",
+      "issuerName": "Roaderz Technologies"
+    },
+    {
+      "isin": "EGS74TQ1C013",
+      "issuerName": "eDigits Consulting"
+    },
+    {
+      "isin": "EGS7AB21C014",
+      "issuerName": "IMPERIAL FOR TOURISTIC CAMPS"
+    },
+    {
+      "isin": "EGS7AC41C010",
+      "issuerName": "Taba for Tourist Investment"
+    },
+    {
+      "isin": "EGS7C141C012",
+      "issuerName": "El Fayrouz For Security & Safety"
+    },
+    {
+      "isin": "EGS7CMO1C014",
+      "issuerName": "T.E.A.M.S Security Solution Company"
+    },
+    {
+      "isin": "EGS7CTR1C014",
+      "issuerName": "Paky Art for Guards"
+    },
+    {
+      "isin": "EGS7CU91C013",
+      "issuerName": "The Capital for Excellence In Education"
+    },
+    {
+      "isin": "EGS7CVG1C013",
+      "issuerName": "Al Khalil For Educational Services"
+    },
+    {
+      "isin": "EGS7CVM1C015",
+      "issuerName": "HOHO Electrical & Furniture Co"
+    },
+    {
+      "isin": "EGS7D5P1C019",
+      "issuerName": "ِAct Financial"
+    },
+    {
+      "isin": "EGS7DNR1C019",
+      "issuerName": "Well Med For Medical Tourism"
+    }
+  ],
+  "egxReconciliation": {
+    "egxTickersWithIsin": 260,
+    "matchedAtMcdr": 10,
+    "exactIsinsQueried": 10,
+    "confirmedNotFoundAfterExactSearch": {},
+    "transportErrors": {},
+    "notYetIndividuallyQueried": {
+      "AJWA": "EGS30211C014",
+      "ANCC": "EGS3C6P1C019",
+      "APSW": "EGS32331C018",
+      "ASCM": "EGS10001C013",
+      "SAUD": "EGS60101C010",
+      "KRDI": "EGS02291C010",
+      "ATLC": "EGS676N1C015",
+      "ALCN": "EGS42111C012",
+      "AFMC": "EGS30471C014",
+      "AMOC": "EGS380P1C010",
+      "AMES": "EGS72081C010",
+      "AXPH": "EGS38341C011",
+      "SPIN": "EGS32041C013",
+      "AMER": "EGS675S1C011",
+      "ALUM": "EGS3D031C018",
+      "ARAB": "EGS694A1C018",
+      "AMIA": "EGS67221C019",
+      "RREI": "EGS65011C016",
+      "AIHC": "EGS21351C019",
+      "AIDC": "EGS65R01C015",
+      "ARCC": "EGS3C0O1C016",
+      "DOMT": "EGS30031C016",
+      "AMII": "EGS3E1E1C013",
+      "ASPI": "EGS691L1C018",
+      "AIFI": "EGS071L1C018",
+      "BINV": "EGS691T1C010",
+      "BQDC": "EGS600K1C019",
+      "BTFH": "EGS691G1C015",
+      "BONY": "EGS656M1C010",
+      "CICH": "EGS691D1C018",
+      "CAED": "EGS72201C014",
+      "CIRA": "EGS65541C012",
+      "COSG": "EGS30581C010",
+      "CPCI": "EGS38391C016",
+      "POUL": "EGS02051C018",
+      "CSAG": "EGS44031C010",
+      "CPME": "EGS698X1C017",
+      "PRCL": "EGS3C111C019",
+      "KASABF": "EGS696Z1C017",
+      "SIDC": "EGS38361C019",
+      "CLHO": "EGS729J1C018",
+      "COMI": "EGS60121C018",
+      "CFGH": "EGS672I2C014",
+      "CNFN": "EGS738I1C018",
+      "COPR": "EGS65511C015",
+      "CRST": "EGS23141C012",
+      "CIEB": "EGS60041C018",
+      "DCCC": "EGS42121C011",
+      "DTPP": "EGS370W1C013",
+      "DEIN": "EGS63031C016",
+      "SUGR": "EGS30201C015",
+      "DAPH": "EGS65081C019",
+      "DSCW": "EGS33321C018",
+      "DGTZ": "EGS74F71C015",
+      "EFIH": "EGS743O1C013",
+      "HRHO": "EGS69101C011",
+      "EGX30ETF": "EGS69491M015",
+      "NMIN": "EGS14041C015",
+      "KNGC": "EGS3C6Q1C018",
+      "NFCI": "EGS5ACC1C014",
+      "SWDY": "EGS3G0Z1C014",
+      "EDFM": "EGS30351C018",
+      "EAST": "EGS37091C013",
+      "EFID": "EGS305I1C011",
+      "EGAL": "EGS3E181C010",
+      "EEPM": "EGS72FL1C016",
+      "EPCO": "EGS02211C018",
+      "EASB": "EGS681D1C010",
+      "EGCH": "EGS38201C017",
+      "SIEG": "EGS3C9X1C016",
+      "EFAC": "EGS3D0A1C010",
+      "EFIC": "EGS38381C017",
+      "EGBE": "EGS60182C010",
+      "MAAL": "EGS739Z1C016",
+      "PHAR": "EGS38081C013",
+      "IRON": "EGS3D061C015",
+      "MPRC": "EGS78021C010",
+      "AREH": "EGS65211C012",
+      "EGSA": "EGS48022C015",
+      "ETRS": "EGS42051C010",
+      "EGTS": "EGS70431C019",
+      "EHDR": "EGS65341C017",
+      "EGREF": "EGS694B1C017",
+      "AFDI": "EGS69021C011",
+      "EPPK": "EGS360A1C011",
+      "EEII": "EGS3G111C015",
+      "EALR": "EGS65771C015",
+      "ECAP": "EGS3C071C015",
+      "KWIN": "EGS69011C012",
+      "ELKA": "EGS65071C010",
+      "MMHC": "EGS651F1C014",
+      "EGOT": "EGS70311C013",
+      "KABO": "EGS33061C010",
+      "ELNA": "EGS300L1C011",
+      "ENHD": "EGS65621C012",
+      "OBRI": "EGS65551C011",
+      "EOSB": "EGS681I1C015",
+      "ELSH": "EGS65091C018",
+      "SPHT": "EGS70H02C014",
+      "ELWA": "EGS70R91C016",
+      "NIPH": "EGS38331C012",
+      "ELEC": "EGS3G231C011",
+      "UEGC": "EGS21531C016",
+      "EMFD": "EGS673Y1C015",
+      "ENGC": "EGS3F021C017",
+      "ENPI": "EGS39022C016",
+      "EXPA": "EGS60241C014",
+      "ZEOT": "EGS38251C012",
+      "FERC": "EGS385S1C012",
+      "FAIT": "EGS60321C014",
+      "FAITA": "EGS60322C012",
+      "FWRY": "EGS745L1C014",
+      "FCMD": "EGS3I0S1C019",
+      "GBCO": "EGS673T1C012",
+      "GMCI": "EGS46051C016",
+      "GPIM": "EGS213S1C010",
+      "GTEX": "EGS59U92C011",
+      "GDWA": "EGS3JM11C012",
+      "GSSC": "EGS30441C017",
+      "GEOS": "EGS51LQ1C018",
+      "GIHD": "EGS65461C013",
+      "GGCC": "EGS21541C015",
+      "BIOC": "EGS38171C012",
+      "GGRN": "EGS07DR1C012",
+      "GPPL": "EGS70342C018",
+      "GTWL": "EGS32161C019",
+      "GOUR": "EGS540S1C014",
+      "GRCA": "EGS69261C013",
+      "CCRS": "EGS651B1C018",
+      "HAVC": "EGS69921C012",
+      "HELI": "EGS65591C017",
+      "HDBK": "EGS60301C016",
+      "ISPH": "EGS512O1C012",
+      "IEEC": "EGS22171C010",
+      "IFAP": "EGS07061C012",
+      "ICID": "EGS67191C014",
+      "ICFC": "EGS520D1C015",
+      "ICLE": "EGS67001C015",
+      "ISMQ": "EGS102S1C014",
+      "IDRE": "EGS214Q1C011",
+      "ISMA": "EGS02021C011",
+      "INFI": "EGS01041C010",
+      "JUFO": "EGS30901C010",
+      "KORA": "EGS07911C018",
+      "KZPC": "EGS38411C012",
+      "LCSW": "EGS3C161C014",
+      "LUTS": "EGS07661C019",
+      "MBEG": "EGS221V1C015",
+      "MTIE": "EGS75011C014",
+      "MCRO": "EGS7D971C011",
+      "MASR": "EGS65571C019",
+      "MPCO": "EGS02091C014",
+      "MOIL": "EGS44012C010",
+      "MMAT": "EGS70P91C010",
+      "MEPA": "EGS3C4L1C015",
+      "MPCI": "EGS38351C010",
+      "MENA": "EGS65441C015",
+      "WCDF": "EGS30421C019",
+      "MEGM": "EGS3C001C012",
+      "CEFM": "EGS30401C011",
+      "MIPH": "EGS380G1C011",
+      "MBSC": "EGS3C371C019",
+      "MCQE": "EGS3C391C017",
+      "MICH": "EGS38211C016",
+      "MFSC": "EGS53051C016",
+      "MFPC": "EGS39061C014",
+      "MHOT": "EGS70081C012",
+      "MLIC": "EGS632D1C010",
+      "ATQA": "EGS3D0C1C018",
+      "MOSC": "EGS38421C011",
+      "MITR": "EGS79031C018",
+      "MOIN": "EGS63041C015",
+      "NAHO": "EGS69182C011",
+      "NARE": "EGS69191C012",
+      "NCCW": "EGS23111C015",
+      "NHPS": "EGS65131C012",
+      "NAPR": "EGS370O1C013",
+      "EGAS": "EGS39011C019",
+      "MILS": "EGS30361C017",
+      "NEDA": "EGS52041C018",
+      "NINH": "EGS72011C017",
+      "OFH": "EGS696S1C016",
+      "OCAP": "EGS699Z1C014",
+      "ODIN": "EGS67181C015",
+      "OLFI": "EGS30AL1C012",
+      "OCPH": "EGS380R1C018",
+      "ORAS": "EGS95001C011",
+      "ORHD": "EGS70321C012",
+      "OIH": "EGS693V1C014",
+      "ORWE": "EGS33041C012",
+      "EBSC": "EGS68181C014",
+      "PHDC": "EGS655L1C012",
+      "SIMO": "EGS36091C014",
+      "PMSC": "EGS3J7D2C015",
+      "PRDC": "EGS21FW1C015",
+      "POCO": "EGS42101C013",
+      "PHGC": "EGS72XL1C014",
+      "PRMH": "EGS691A1C011",
+      "PHTV": "EGS70331C011",
+      "CCAPP": "EGS73541P048",
+      "CCAP": "EGS73541C012",
+      "QNBE": "EGS60081C014",
+      "RAKT": "EGS36021C011",
+      "RACC": "EGS74191C015",
+      "RAYA": "EGS690C1C010",
+      "RTVC": "EGS70271C019",
+      "ROTO": "EGS70281C018",
+      "RUBX": "EGS3A221C018",
+      "SIPC": "EGS382M1C011",
+      "SMFR": "EGS51191C012",
+      "SEIG": "EGS67031C012",
+      "SEIGA": "EGS67032C010",
+      "SNFC": "EGS30291C016",
+      "SDTI": "EGS70571C012",
+      "SKPC": "EGS380S1C017",
+      "SCEM": "EGS3C401C014",
+      "SINA": "EGS103V1C018",
+      "OCDI": "EGS65851C015",
+      "SAIB": "EGS60142C014",
+      "SCFM": "EGS30411C010",
+      "SVCE": "EGS3C351C011",
+      "SPMD": "EGS73BR1C013",
+      "YAYT": "EGS3E7F1C016",
+      "AMES_r2": "EGS924F1C015",
+      "ASPI_r3": "EGS924G1C014",
+      "SVCE_r1": "EGS924E1C016",
+      "SCTS": "EGS740C1C010",
+      "CANA": "EGS60231C015",
+      "TMGH": "EGS691S1C011",
+      "TWSA": "EGS7D231C010",
+      "TALM": "EGS597R1C017",
+      "TANM": "EGS21EB1C011",
+      "TAQA": "EGS490S1C014",
+      "ETEL": "EGS48031C016",
+      "RMDA": "EGS381B1C015",
+      "CERA": "EGS3C151C015",
+      "EGCN": "EGS65861C014",
+      "ELAB": "EGS3E1Z2C016",
+      "MOED": "EGS729F1C012",
+      "UBEE": "EGS600M1C017",
+      "TRTO": "EGS79072C012",
+      "TYCN": "EGS67331C016",
+      "VALU": "EGS505Z1C018",
+      "UNIT": "EGS65061C011",
+      "UNIP": "EGS38161C013",
+      "UEFM": "EGS30451C016",
+      "VLMR": "EGS69082C013",
+      "VLMRA": "EGS69081C023",
+      "WKOL": "EGS01071C017",
+      "ZMID": "EGS21171C011"
+    },
+    "note": "The unfiltered MCDR page is paginated. An ISIN absent from its first page is not treated as missing; only an exact completed search can establish not-found status."
+  },
+  "publicCoverage": {
+    "issuerAndIsinDirectory": true,
+    "corporateActionDefinitionsAndProcedures": true,
+    "datedCorporateActionCalendar": false,
+    "completeShareholderRegister": false,
+    "investorTransactionHistory": false
+  },
+  "limitations": [
+    "MCDR's complete shareholder register is delivered to authorized issuers, not published anonymously.",
+    "MCDR's scheduled-operations inquiry is an authenticated subscriber service; dates must continue to come from EGX/issuer disclosures unless licensed access is supplied."
+  ]
+}
