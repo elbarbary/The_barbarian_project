@@ -7140,7 +7140,7 @@
    "observations": 12
   },
   {
-   "date": "2027-04-06",
+   "date": "2027-04-07",
    "kind": "results_expected",
    "note": "FY results usually filed around now",
    "ticker": "RTVC",
@@ -7153,8 +7153,8 @@
    "estimated": true,
    "period_end": "2026-12-31",
    "window_start": "2027-03-29",
-   "window_end": "2027-05-08",
-   "observations": 9
+   "window_end": "2027-05-22",
+   "observations": 10
   },
   {
    "date": "2027-04-08",
