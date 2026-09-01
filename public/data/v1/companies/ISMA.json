@@ -1,1 +1,2129 @@
-{"ticker":"ISMA","name":{"en":"Ismailia Misr Poultry","ar":"الاسماعيلية مصر للدواجن"},"sector":"Food, Beverages and Tobacco","market":{"last_close":32.66,"date":"2026-09-01","open":34.71,"high":37.28,"low":31.7,"volume":1004445},"price_history":[{"date":"2025-07-27","close":10.27,"volume":164393},{"date":"2025-07-28","close":10.1,"volume":130736},{"date":"2025-07-29","close":10.14,"volume":129252},{"date":"2025-07-30","close":10.0,"volume":205390},{"date":"2025-07-31","close":10.2,"volume":291467},{"date":"2025-08-03","close":10.3,"volume":327967},{"date":"2025-08-04","close":10.35,"volume":1650948},{"date":"2025-08-05","close":10.35,"volume":802748},{"date":"2025-08-06","close":12.42,"volume":15469136},{"date":"2025-08-07","close":12.67,"volume":6091476},{"date":"2025-08-10","close":12.7,"volume":3587989},{"date":"2025-08-11","close":12.15,"volume":2171416},{"date":"2025-08-12","close":12.4,"volume":3489344},{"date":"2025-08-13","close":11.99,"volume":1939221},{"date":"2025-08-14","close":11.74,"volume":1087011},{"date":"2025-08-17","close":11.67,"volume":598385},{"date":"2025-08-18","close":11.92,"volume":1807415},{"date":"2025-08-19","close":12.5,"volume":2965046},{"date":"2025-08-20","close":12.35,"volume":3304918},{"date":"2025-08-21","close":12.25,"volume":920262},{"date":"2025-08-24","close":12.31,"volume":1154312},{"date":"2025-08-25","close":11.86,"volume":2345479},{"date":"2025-08-26","close":11.35,"volume":3949857},{"date":"2025-08-27","close":11.11,"volume":1075395},{"date":"2025-08-28","close":12.24,"volume":4369484},{"date":"2025-08-31","close":11.36,"volume":3249561},{"date":"2025-09-01","close":12.52,"volume":5484526},{"date":"2025-09-02","close":12.38,"volume":4701756},{"date":"2025-09-03","close":12.04,"volume":2121443},{"date":"2025-09-07","close":11.75,"volume":936587},{"date":"2025-09-08","close":12.04,"volume":1594786},{"date":"2025-09-09","close":11.97,"volume":1797226},{"date":"2025-09-10","close":12.25,"volume":1589612},{"date":"2025-09-11","close":12.22,"volume":2631512},{"date":"2025-09-14","close":12.05,"volume":921375},{"date":"2025-09-15","close":11.85,"volume":724171},{"date":"2025-09-16","close":11.39,"volume":853279},{"date":"2025-09-17","close":11.4,"volume":562210},{"date":"2025-09-18","close":11.44,"volume":653949},{"date":"2025-09-21","close":11.35,"volume":595018},{"date":"2025-09-22","close":11.45,"volume":1618813},{"date":"2025-09-23","close":11.31,"volume":748508},{"date":"2025-09-24","close":11.51,"volume":445565},{"date":"2025-09-25","close":11.98,"volume":2576525},{"date":"2025-09-28","close":12.41,"volume":6097300},{"date":"2025-09-29","close":12.66,"volume":5635776},{"date":"2025-09-30","close":12.3,"volume":2746796},{"date":"2025-10-01","close":12.0,"volume":1509056},{"date":"2025-10-02","close":11.71,"volume":1248473},{"date":"2025-10-05","close":12.15,"volume":1956705},{"date":"2025-10-06","close":12.65,"volume":3151561},{"date":"2025-10-07","close":13.06,"volume":8980529},{"date":"2025-10-08","close":12.84,"volume":3751604},{"date":"2025-10-12","close":12.71,"volume":1846530},{"date":"2025-10-13","close":13.0,"volume":2015170},{"date":"2025-10-14","close":12.76,"volume":1337071},{"date":"2025-10-15","close":12.68,"volume":733373},{"date":"2025-10-20","close":12.73,"volume":1244251},{"date":"2025-10-21","close":13.98,"volume":5740926},{"date":"2025-10-22","close":13.61,"volume":4165770},{"date":"2025-10-26","close":13.82,"volume":4386103},{"date":"2025-10-27","close":13.6,"volume":2071605},{"date":"2025-10-28","close":13.45,"volume":1055118},{"date":"2025-10-29","close":13.27,"volume":643177},{"date":"2025-10-30","close":13.33,"volume":749455},{"date":"2025-11-02","close":13.46,"volume":975864},{"date":"2025-11-03","close":13.5,"volume":794751},{"date":"2025-11-04","close":13.33,"volume":833196},{"date":"2025-11-05","close":13.01,"volume":958102},{"date":"2025-11-06","close":13.03,"volume":803192},{"date":"2025-11-09","close":12.95,"volume":576969},{"date":"2025-11-10","close":12.84,"volume":675264},{"date":"2025-11-11","close":12.7,"volume":382361},{"date":"2025-11-12","close":12.95,"volume":563993},{"date":"2025-11-13","close":12.81,"volume":634395},{"date":"2025-11-16","close":12.7,"volume":332434},{"date":"2025-11-17","close":12.76,"volume":341338},{"date":"2025-11-18","close":12.69,"volume":369146},{"date":"2025-11-19","close":12.72,"volume":202680},{"date":"2025-11-20","close":12.73,"volume":692956},{"date":"2025-11-23","close":13.6,"volume":4970425},{"date":"2025-11-24","close":13.16,"volume":3577345},{"date":"2025-11-26","close":12.67,"volume":841244},{"date":"2025-11-27","close":12.55,"volume":535737},{"date":"2025-11-30","close":12.71,"volume":375635},{"date":"2025-12-01","close":12.73,"volume":700112},{"date":"2025-12-03","close":13.0,"volume":792587},{"date":"2025-12-07","close":13.21,"volume":656696},{"date":"2025-12-09","close":13.16,"volume":1055868},{"date":"2025-12-10","close":13.4,"volume":533601},{"date":"2025-12-11","close":13.34,"volume":2424268},{"date":"2025-12-14","close":13.38,"volume":859069},{"date":"2025-12-15","close":13.35,"volume":603280},{"date":"2025-12-16","close":14.56,"volume":7332648},{"date":"2025-12-17","close":13.81,"volume":4851237},{"date":"2025-12-18","close":13.69,"volume":1457684},{"date":"2025-12-21","close":13.9,"volume":1808714},{"date":"2025-12-22","close":13.87,"volume":2195339},{"date":"2025-12-23","close":14.04,"volume":5746683},{"date":"2025-12-24","close":13.92,"volume":1001280},{"date":"2025-12-25","close":13.86,"volume":711077},{"date":"2025-12-28","close":13.81,"volume":418911},{"date":"2025-12-29","close":13.91,"volume":1041749},{"date":"2025-12-30","close":13.91,"volume":464626},{"date":"2025-12-31","close":13.8,"volume":497637},{"date":"2026-01-04","close":13.79,"volume":648265},{"date":"2026-01-06","close":13.63,"volume":339613},{"date":"2026-01-08","close":13.4,"volume":659046},{"date":"2026-01-11","close":13.27,"volume":294968},{"date":"2026-01-12","close":13.12,"volume":454875},{"date":"2026-01-13","close":12.8,"volume":430867},{"date":"2026-01-14","close":12.53,"volume":296343},{"date":"2026-01-15","close":12.22,"volume":266978},{"date":"2026-01-18","close":12.4,"volume":205636},{"date":"2026-01-19","close":12.76,"volume":355757},{"date":"2026-01-20","close":12.65,"volume":197391},{"date":"2026-01-21","close":12.6,"volume":133093},{"date":"2026-01-22","close":12.6,"volume":327606},{"date":"2026-01-25","close":12.66,"volume":649332},{"date":"2026-01-26","close":12.45,"volume":560542},{"date":"2026-01-27","close":12.45,"volume":353996},{"date":"2026-01-28","close":12.05,"volume":305080},{"date":"2026-02-01","close":12.5,"volume":282380},{"date":"2026-02-02","close":12.6,"volume":197624},{"date":"2026-02-03","close":13.33,"volume":1914501},{"date":"2026-02-04","close":13.43,"volume":2490951},{"date":"2026-02-05","close":13.8,"volume":4979720},{"date":"2026-02-08","close":14.0,"volume":2042454},{"date":"2026-02-09","close":13.81,"volume":1409856},{"date":"2026-02-10","close":13.61,"volume":511034},{"date":"2026-02-11","close":13.63,"volume":902559},{"date":"2026-02-12","close":13.73,"volume":568559},{"date":"2026-02-15","close":15.69,"volume":6275756},{"date":"2026-02-16","close":14.7,"volume":2372080},{"date":"2026-02-17","close":14.4,"volume":1535998},{"date":"2026-02-18","close":15.5,"volume":2337230},{"date":"2026-02-19","close":14.85,"volume":1023201},{"date":"2026-02-22","close":13.95,"volume":1548135},{"date":"2026-02-23","close":14.54,"volume":517643},{"date":"2026-02-24","close":14.1,"volume":561770},{"date":"2026-02-25","close":13.5,"volume":633696},{"date":"2026-02-26","close":13.77,"volume":553160},{"date":"2026-03-01","close":13.05,"volume":709227},{"date":"2026-03-02","close":12.83,"volume":388713},{"date":"2026-03-03","close":12.74,"volume":314671},{"date":"2026-03-04","close":13.07,"volume":571489},{"date":"2026-03-05","close":13.1,"volume":323725},{"date":"2026-03-08","close":13.66,"volume":826225},{"date":"2026-03-09","close":13.64,"volume":383050},{"date":"2026-03-10","close":13.71,"volume":538230},{"date":"2026-03-11","close":13.65,"volume":317710},{"date":"2026-03-12","close":13.49,"volume":202274},{"date":"2026-03-15","close":13.12,"volume":210187},{"date":"2026-03-16","close":12.79,"volume":422358},{"date":"2026-03-17","close":12.93,"volume":313682},{"date":"2026-03-18","close":12.96,"volume":144096},{"date":"2026-03-24","close":13.29,"volume":975374},{"date":"2026-03-25","close":13.71,"volume":2237821},{"date":"2026-03-26","close":13.3,"volume":940803},{"date":"2026-03-29","close":13.02,"volume":414351},{"date":"2026-03-30","close":12.85,"volume":437913},{"date":"2026-03-31","close":12.81,"volume":275678},{"date":"2026-04-01","close":12.93,"volume":271120},{"date":"2026-04-02","close":13.28,"volume":800550},{"date":"2026-04-05","close":13.45,"volume":464377},{"date":"2026-04-06","close":13.72,"volume":450811},{"date":"2026-04-07","close":14.07,"volume":2172312},{"date":"2026-04-08","close":14.2,"volume":2088886},{"date":"2026-04-09","close":14.11,"volume":557252},{"date":"2026-04-14","close":14.17,"volume":606015},{"date":"2026-04-15","close":14.5,"volume":1841661},{"date":"2026-04-16","close":15.0,"volume":2250511},{"date":"2026-04-19","close":14.8,"volume":879168},{"date":"2026-04-20","close":14.69,"volume":389403},{"date":"2026-04-21","close":14.89,"volume":1176371},{"date":"2026-04-22","close":15.38,"volume":3326286},{"date":"2026-04-23","close":16.4,"volume":5320227},{"date":"2026-04-26","close":17.07,"volume":3104168},{"date":"2026-04-27","close":17.3,"volume":1334038},{"date":"2026-04-28","close":18.47,"volume":5507033},{"date":"2026-04-29","close":18.64,"volume":2403532},{"date":"2026-04-30","close":19.19,"volume":3438709},{"date":"2026-05-03","close":19.07,"volume":1054455},{"date":"2026-05-04","close":19.0,"volume":2287712},{"date":"2026-05-05","close":19.45,"volume":2231416},{"date":"2026-05-06","close":20.2,"volume":9814681},{"date":"2026-05-10","close":20.24,"volume":2609317},{"date":"2026-05-11","close":20.85,"volume":3051582},{"date":"2026-05-12","close":22.98,"volume":1749371},{"date":"2026-05-13","close":22.5,"volume":2825314},{"date":"2026-05-14","close":23.0,"volume":2537453},{"date":"2026-05-17","close":23.5,"volume":1098173},{"date":"2026-05-18","close":24.1,"volume":1987837},{"date":"2026-05-19","close":24.38,"volume":1246127},{"date":"2026-05-20","close":24.4,"volume":741639},{"date":"2026-05-21","close":25.15,"volume":1501207},{"date":"2026-05-24","close":26.15,"volume":2687138},{"date":"2026-05-25","close":26.32,"volume":854891},{"date":"2026-06-01","close":26.26,"volume":840280},{"date":"2026-06-02","close":26.45,"volume":784449},{"date":"2026-06-03","close":26.95,"volume":1048070},{"date":"2026-06-04","close":27.7,"volume":1191209},{"date":"2026-06-07","close":29.2,"volume":1539166},{"date":"2026-06-08","close":28.8,"volume":1911711},{"date":"2026-06-09","close":29.99,"volume":2250374},{"date":"2026-06-10","close":29.8,"volume":566097},{"date":"2026-06-11","close":30.39,"volume":1692026},{"date":"2026-06-14","close":30.72,"volume":1220168},{"date":"2026-06-15","close":30.38,"volume":770053},{"date":"2026-06-16","close":30.15,"volume":4733274},{"date":"2026-06-17","close":30.0,"volume":1047616},{"date":"2026-06-21","close":30.22,"volume":895575},{"date":"2026-06-22","close":30.38,"volume":891832},{"date":"2026-06-23","close":29.61,"volume":468520},{"date":"2026-06-24","close":29.64,"volume":484300},{"date":"2026-06-25","close":29.59,"volume":321824},{"date":"2026-06-28","close":29.29,"volume":688415},{"date":"2026-06-29","close":29.0,"volume":322075},{"date":"2026-06-30","close":28.69,"volume":591098},{"date":"2026-07-01","close":28.3,"volume":613331},{"date":"2026-07-05","close":28.07,"volume":679235},{"date":"2026-07-06","close":27.86,"volume":785912},{"date":"2026-07-07","close":27.5,"volume":726641},{"date":"2026-07-08","close":27.13,"volume":552177},{"date":"2026-07-09","close":27.8,"volume":550212},{"date":"2026-07-12","close":27.25,"volume":675706},{"date":"2026-07-13","close":27.35,"volume":279023},{"date":"2026-07-14","close":27.22,"volume":468491},{"date":"2026-07-15","close":27.43,"volume":309924},{"date":"2026-07-16","close":27.5,"volume":560508},{"date":"2026-07-19","close":28.2,"volume":1080381},{"date":"2026-07-20","close":28.58,"volume":956373},{"date":"2026-07-21","close":28.15,"volume":812012},{"date":"2026-07-22","close":28.29,"volume":675710},{"date":"2026-07-26","close":31.0,"volume":3777393},{"date":"2026-07-27","close":31.9,"volume":2017742},{"date":"2026-07-28","close":31.86,"volume":576123},{"date":"2026-07-29","close":31.8,"volume":945297},{"date":"2026-07-30","close":30.68,"volume":576276},{"date":"2026-08-02","close":31.0,"volume":258681},{"date":"2026-08-03","close":31.17,"volume":530249},{"date":"2026-08-04","close":31.27,"volume":343739},{"date":"2026-08-05","close":31.24,"volume":343433},{"date":"2026-08-06","close":30.9,"volume":338108},{"date":"2026-08-09","close":32.25,"volume":1498006},{"date":"2026-08-10","close":33.3,"volume":1999935},{"date":"2026-08-11","close":34.76,"volume":2469726},{"date":"2026-08-12","close":34.9,"volume":769700},{"date":"2026-08-13","close":35.0,"volume":286215},{"date":"2026-08-16","close":34.48,"volume":320329},{"date":"2026-08-17","close":35.09,"volume":468847},{"date":"2026-08-18","close":35.97,"volume":580552},{"date":"2026-08-19","close":35.64,"volume":1191326},{"date":"2026-08-20","close":36.0,"volume":559381},{"date":"2026-08-23","close":35.34,"volume":434926},{"date":"2026-08-24","close":35.12,"volume":244952},{"date":"2026-08-25","close":36.91,"volume":1213643},{"date":"2026-08-26","close":39.42,"volume":1638669},{"date":"2026-08-30","close":38.6,"volume":854338},{"date":"2026-08-31","close":34.71,"volume":537611}],"profile":{"shares_outstanding":89856499,"free_float":0.19851500000000002,"float_shares":17837862.898985002,"perf_1w":-7.00455580865604,"perf_1m":6.4537157757496635,"perf_3m":23.478260869565208,"avg_volume_30d":940791.2333333319,"relative_volume_10d":1.3003795192928216,"median_volume_20d":544815,"rv20":0.9867771628901554,"normal_value_30d":20510085.72,"five_session_change":-1.7826825127334578,"history_bars":120,"market_cap":2934713257.34,"market_cap_source":"EGX","trades":1486,"turnover":34236035},"financials":{"annual":[{"period":"FY 2014","net_income":-12.872,"net_income_source":"https://www.egx.com.eg","period_start":"2014-01-01","period_end":"2014-12-31","filed":"2015-03-12","filing_id":"egx-135873","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"FY 2015","net_income":24.883,"net_income_source":"https://www.egx.com.eg","period_start":"2015-01-01","period_end":"2015-12-31","filed":"2016-03-09","filing_id":"egx-147157","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"FY 2016","net_income":7.13,"net_income_source":"https://www.egx.com.eg","period_start":"2016-01-01","period_end":"2016-12-31","filed":"2017-03-15","filing_id":"egx-158954","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"FY 2017","net_income":-0.663,"net_income_source":"https://www.egx.com.eg","period_start":"2017-01-01","period_end":"2017-12-31","filed":"2018-02-22","filing_id":"egx-169951","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"FY 2018","net_income":14.195,"net_income_source":"https://www.egx.com.eg","period_start":"2018-01-01","period_end":"2018-12-31","filed":"2019-02-17","filing_id":"egx-182043","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"FY 2019","net_income":-5.163,"net_income_source":"https://www.egx.com.eg","period_start":"2019-01-01","period_end":"2019-12-31","filed":"2020-03-01","filing_id":"egx-195079","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"FY 2020","net_income":-20.764,"net_income_source":"https://www.egx.com.eg","period_start":"2020-01-01","period_end":"2020-12-31","filed":"2021-03-01","filing_id":"egx-207427","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"FY 2021","assets":453.652,"equity":332.587,"financing_cash_flow":3.653,"investing_cash_flow":-26.387,"liabilities":121.065,"net_change_in_cash":8.546,"net_income":0.327,"operating_cash_flow":31.281,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","egx_net_income":0.34,"egx_net_income_basis":"standalone","egx_filing_id":"egx-221284"},{"period":"FY 2022","assets":421.851,"equity":195.154,"financing_cash_flow":20.737,"investing_cash_flow":-57.596,"liabilities":226.697,"net_change_in_cash":-5.95,"net_income":-129.767,"operating_cash_flow":30.908,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2023-03-19","filing_id":"egx-235737","basis":"consolidated"},{"period":"FY 2023","assets":323.33,"equity":98.974,"financing_cash_flow":-15.646,"investing_cash_flow":-9.486,"liabilities":224.356,"net_change_in_cash":-0.382,"net_income":-96.183,"operating_cash_flow":24.75,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2024-02-26","filing_id":"egx-249563","basis":"consolidated"},{"period":"FY 2024","assets":346.961,"equity":136.538,"financing_cash_flow":-15.655,"investing_cash_flow":-0.227,"liabilities":210.423,"net_change_in_cash":1.136,"net_income":37.565,"operating_cash_flow":17.018,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2025-02-11","filing_id":"egx-265686","basis":"consolidated"},{"period":"FY 2025","assets":348.911,"equity":182.18,"investing_cash_flow":6.083,"liabilities":166.731,"net_change_in_cash":-2.151,"net_income":45.641,"operating_cash_flow":-8.233,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2026-02-11","filing_id":"egx-283404","basis":"consolidated"}],"quarterly":[{"period":"9M 2014","net_income":-7.258,"net_income_source":"https://www.egx.com.eg","period_start":"2014-01-01","period_end":"2014-09-30","filed":"2014-11-13","filing_id":"egx-132481","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"9M 2015","net_income":22.615,"net_income_source":"https://www.egx.com.eg","period_start":"2015-01-01","period_end":"2015-09-30","filed":"2015-11-12","filing_id":"egx-143864","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"9M 2016","net_income":10.98,"net_income_source":"https://www.egx.com.eg","period_start":"2016-01-01","period_end":"2016-09-30","filed":"2016-11-14","filing_id":"egx-155674","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2017","net_income":-0.181,"net_income_source":"https://www.egx.com.eg","period_start":"2017-01-01","period_end":"2017-09-30","filed":"2017-11-15","filing_id":"egx-167485","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2018","net_income":8.648,"net_income_source":"https://www.egx.com.eg","period_start":"2018-01-01","period_end":"2018-09-30","filed":"2018-11-14","filing_id":"egx-179466","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2019","net_income":8.399,"net_income_source":"https://www.egx.com.eg","period_start":"2019-01-01","period_end":"2019-09-30","filed":"2019-11-17","filing_id":"egx-192191","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2020","net_income":-16.624,"net_income_source":"https://www.egx.com.eg","period_start":"2020-01-01","period_end":"2020-09-30","filed":"2020-11-15","filing_id":"egx-204245","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2021","net_income":-10.965,"net_income_source":"https://www.egx.com.eg","period_start":"2021-01-01","period_end":"2021-09-30","filed":"2021-11-16","filing_id":"egx-217431","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2022","net_income":-32.069,"net_income_source":"https://www.egx.com.eg","period_start":"2022-01-01","period_end":"2022-09-30","filed":"2022-11-15","filing_id":"egx-231514","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2023","net_income":-80.742,"net_income_source":"https://www.egx.com.eg","period_start":"2023-01-01","period_end":"2023-09-30","filed":"2023-11-14","filing_id":"egx-245540","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2024","net_income":6.939,"net_income_source":"https://www.egx.com.eg","period_start":"2024-01-01","period_end":"2024-09-30","filed":"2024-11-07","filing_id":"egx-261497","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"9M 2025","net_income":39.258,"net_income_source":"https://www.egx.com.eg","period_start":"2025-01-01","period_end":"2025-09-30","filed":"2025-11-11","filing_id":"egx-278841","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2014","net_income":0.821,"net_income_source":"https://www.egx.com.eg","period_start":"2014-01-01","period_end":"2014-06-30","filed":"2014-08-17","filing_id":"egx-129512","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"H1 2015","net_income":17.416,"net_income_source":"https://www.egx.com.eg","period_start":"2015-01-01","period_end":"2015-06-30","filed":"2015-08-13","filing_id":"egx-141180","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"H1 2016","net_income":11.379,"net_income_source":"https://www.egx.com.eg","period_start":"2016-01-01","period_end":"2016-06-30","filed":"2016-08-09","filing_id":"egx-152311","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"H1 2017","net_income":2.923,"net_income_source":"https://www.egx.com.eg","period_start":"2017-01-01","period_end":"2017-06-30","filed":"2017-08-06","filing_id":"egx-163812","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2018","net_income":-4.185,"net_income_source":"https://www.egx.com.eg","period_start":"2018-01-01","period_end":"2018-06-30","filed":"2018-08-05","filing_id":"egx-176079","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"H1 2019","net_income":4.658,"net_income_source":"https://www.egx.com.eg","period_start":"2019-01-01","period_end":"2019-06-30","filed":"2019-07-28","filing_id":"egx-188079","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2020","net_income":-2.568,"net_income_source":"https://www.egx.com.eg","period_start":"2020-01-01","period_end":"2020-06-30","filed":"2020-08-13","filing_id":"egx-201055","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2021","net_income":-12.03,"net_income_source":"https://www.egx.com.eg","period_start":"2021-01-01","period_end":"2021-06-30","filed":"2021-08-16","filing_id":"egx-213902","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2022","net_income":-21.007,"net_income_source":"https://www.egx.com.eg","period_start":"2022-01-01","period_end":"2022-06-30","filed":"2022-08-14","filing_id":"egx-227530","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2023","net_income":-55.252,"net_income_source":"https://www.egx.com.eg","period_start":"2023-01-01","period_end":"2023-06-30","filed":"2023-08-14","filing_id":"egx-241642","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2024","net_income":4.843,"net_income_source":"https://www.egx.com.eg","period_start":"2024-01-01","period_end":"2024-06-30","filed":"2024-08-13","filing_id":"egx-257639","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2025","net_income":25.044,"net_income_source":"https://www.egx.com.eg","period_start":"2025-01-01","period_end":"2025-06-30","filed":"2025-08-12","filing_id":"egx-274403","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"H1 2026","net_income":22.315,"net_income_source":"https://www.egx.com.eg","period_start":"2026-01-01","period_end":"2026-06-30","filed":"2026-08-11","filing_id":"egx-292764","basis":"consolidated","source":"https://www.egx.com.eg","assets":374.94,"equity":209.745,"gross_profit":24.858,"investing_cash_flow":-0.017,"liabilities":165.195,"net_change_in_cash":21.403,"operating_cash_flow":21.42,"operating_income":22.04,"revenue":28.25,"filed_on":"2026-08-11"},{"period":"Q1 2014","net_income":0.538,"net_income_source":"https://www.egx.com.eg","period_start":"2014-01-01","period_end":"2014-03-31","filed":"2014-05-15","filing_id":"egx-126867","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"Q1 2015","net_income":3.214,"net_income_source":"https://www.egx.com.eg","period_start":"2015-01-01","period_end":"2015-03-31","filed":"2015-05-13","filing_id":"egx-138290","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"Q1 2016","net_income":3.754,"net_income_source":"https://www.egx.com.eg","period_start":"2016-01-01","period_end":"2016-03-31","filed":"2016-05-23","filing_id":"egx-150208","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"Q1 2017","net_income":-9.155,"net_income_source":"https://www.egx.com.eg","period_start":"2017-01-01","period_end":"2017-03-31","filed":"2017-05-14","filing_id":"egx-161507","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"Q1 2018","net_income":-9.029,"net_income_source":"https://www.egx.com.eg","period_start":"2018-01-01","period_end":"2018-03-31","filed":"2018-05-13","filing_id":"egx-173182","basis":"unstated","source":"https://www.egx.com.eg"},{"period":"Q1 2019","net_income":0.064,"net_income_source":"https://www.egx.com.eg","period_start":"2019-01-01","period_end":"2019-03-31","filed":"2019-05-15","filing_id":"egx-185958","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"Q1 2020","net_income":-0.691,"net_income_source":"https://www.egx.com.eg","period_start":"2020-01-01","period_end":"2020-03-31","filed":"2020-06-09","filing_id":"egx-198463","basis":"consolidated","source":"https://www.egx.com.eg"},{"period":"Q1 2021","assets":441.469,"equity":325.891,"financing_cash_flow":-9.475,"investing_cash_flow":-10.856,"liabilities":115.578,"net_change_in_cash":0.911,"net_income":-6.463,"operating_cash_flow":21.242,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","basis":"consolidated","net_income_source":"https://www.egx.com.eg","period_start":"2021-01-01","period_end":"2021-03-31","filed":"2021-05-10","filing_id":"egx-210164"},{"period":"Q1 2022","assets":443.247,"equity":319.635,"financing_cash_flow":1.521,"investing_cash_flow":-13.271,"liabilities":123.612,"net_change_in_cash":-7.17,"net_income":-12.408,"operating_cash_flow":4.58,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2022-05-23","filing_id":"egx-224130","basis":"consolidated"},{"period":"Q1 2023","assets":428.151,"equity":171.431,"financing_cash_flow":-0.699,"investing_cash_flow":-8.738,"liabilities":256.72,"net_change_in_cash":24.115,"net_income":-23.722,"operating_cash_flow":33.551,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2023-06-14","filing_id":"egx-239426","basis":"consolidated"},{"period":"Q1 2024","assets":319.631,"equity":101.17,"financing_cash_flow":-0.322,"investing_cash_flow":-0.009,"liabilities":218.461,"net_change_in_cash":-1.138,"net_income":2.196,"operating_cash_flow":-0.808,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2024-05-21","filing_id":"egx-253724","basis":"consolidated"},{"period":"Q1 2025","assets":354.358,"equity":152.862,"investing_cash_flow":6.105,"liabilities":201.496,"net_change_in_cash":9.116,"net_income":16.323,"operating_cash_flow":3.011,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements","filed":"2025-05-15","filing_id":"egx-270125","basis":"consolidated"},{"period":"Q1 2026","net_income":10.661,"net_income_source":"https://www.egx.com.eg","period_start":"2026-01-01","period_end":"2026-03-31","filed":"2026-05-12","filing_id":"egx-288024","basis":"consolidated","source":"https://www.egx.com.eg","assets":363.606,"cash":10.522,"equity":198.091,"gross_profit":12.263,"investing_cash_flow":-0.017,"liabilities":165.515,"net_change_in_cash":4.595,"operating_cash_flow":4.612,"operating_income":10.483,"revenue":14.125,"filed_on":"2026-05-12"},{"period":"Q2 2021","assets":452.755,"equity":320.264,"financing_cash_flow":4.03,"investing_cash_flow":-10.689,"liabilities":132.491,"net_change_in_cash":3.736,"net_income":-5.549,"operating_cash_flow":10.395,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q2 2022","assets":431.911,"equity":309.706,"financing_cash_flow":-9.792,"investing_cash_flow":-10.683,"liabilities":122.205,"net_change_in_cash":2.809,"net_income":-8.599,"operating_cash_flow":23.283,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q2 2023","assets":381.744,"equity":139.902,"financing_cash_flow":-2.429,"investing_cash_flow":-0.701,"liabilities":241.842,"net_change_in_cash":-1.92,"net_income":-31.529,"operating_cash_flow":1.21,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q2 2024","assets":318.439,"equity":103.817,"financing_cash_flow":-7.328,"investing_cash_flow":-0.188,"liabilities":214.622,"net_change_in_cash":0.952,"net_income":2.647,"operating_cash_flow":8.468,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q2 2025","assets":354.87,"equity":161.582,"investing_cash_flow":-0.346,"liabilities":193.288,"net_change_in_cash":2.294,"net_income":8.72,"operating_cash_flow":2.641,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q3 2021","assets":449.544,"equity":321.33,"financing_cash_flow":9.006,"investing_cash_flow":-12.906,"liabilities":128.215,"net_change_in_cash":2.139,"net_income":1.065,"operating_cash_flow":6.039,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q3 2022","assets":436.701,"equity":297.039,"financing_cash_flow":7.892,"investing_cash_flow":-18.009,"liabilities":139.661,"net_change_in_cash":-3.749,"net_income":-11.062,"operating_cash_flow":6.368,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q3 2023","assets":336.946,"equity":114.415,"financing_cash_flow":-10.077,"investing_cash_flow":-0.008,"liabilities":222.531,"net_change_in_cash":-15.714,"net_income":-25.491,"operating_cash_flow":-5.629,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q3 2024","assets":313.862,"equity":105.913,"financing_cash_flow":-8.005,"investing_cash_flow":-0.03,"liabilities":207.949,"net_change_in_cash":1.942,"net_income":2.096,"operating_cash_flow":9.977,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q3 2025","assets":356.679,"equity":175.796,"investing_cash_flow":0.3,"liabilities":180.882,"net_change_in_cash":-8.552,"net_income":14.214,"operating_cash_flow":-8.852,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q4 2021","assets":453.652,"equity":332.587,"financing_cash_flow":0.093,"investing_cash_flow":8.064,"liabilities":121.065,"net_change_in_cash":1.761,"net_income":11.292,"operating_cash_flow":-6.396,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q4 2022","assets":421.851,"equity":195.154,"financing_cash_flow":21.117,"investing_cash_flow":-15.633,"liabilities":226.697,"net_change_in_cash":2.161,"net_income":-97.698,"operating_cash_flow":-3.323,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q4 2023","assets":323.33,"equity":98.974,"financing_cash_flow":-2.441,"investing_cash_flow":-0.04,"liabilities":224.356,"net_change_in_cash":-6.864,"net_income":-15.441,"operating_cash_flow":-4.384,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q4 2024","assets":346.961,"equity":136.538,"financing_cash_flow":0.0,"investing_cash_flow":0.0,"liabilities":210.423,"net_change_in_cash":-0.619,"net_income":30.625,"operating_cash_flow":-0.619,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"},{"period":"Q4 2025","assets":348.911,"equity":182.18,"liabilities":166.731,"source":"https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"}]},"sector_ar":"أغذية و مشروبات و تبغ"}
+{
+ "ticker": "ISMA",
+ "name": {
+  "en": "Ismailia Misr Poultry",
+  "ar": "الاسماعيلية مصر للدواجن"
+ },
+ "sector": "Food, Beverages and Tobacco",
+ "sector_ar": "أغذية و مشروبات و تبغ",
+ "market": {
+  "last_close": 32.66,
+  "date": "2026-09-01",
+  "open": 34.71,
+  "high": 37.28,
+  "low": 31.7,
+  "volume": 1004445
+ },
+ "price_history": [
+  {
+   "date": "2025-07-27",
+   "close": 10.27,
+   "volume": 164393
+  },
+  {
+   "date": "2025-07-28",
+   "close": 10.1,
+   "volume": 130736
+  },
+  {
+   "date": "2025-07-29",
+   "close": 10.14,
+   "volume": 129252
+  },
+  {
+   "date": "2025-07-30",
+   "close": 10.0,
+   "volume": 205390
+  },
+  {
+   "date": "2025-07-31",
+   "close": 10.2,
+   "volume": 291467
+  },
+  {
+   "date": "2025-08-03",
+   "close": 10.3,
+   "volume": 327967
+  },
+  {
+   "date": "2025-08-04",
+   "close": 10.35,
+   "volume": 1650948
+  },
+  {
+   "date": "2025-08-05",
+   "close": 10.35,
+   "volume": 802748
+  },
+  {
+   "date": "2025-08-06",
+   "close": 12.42,
+   "volume": 15469136
+  },
+  {
+   "date": "2025-08-07",
+   "close": 12.67,
+   "volume": 6091476
+  },
+  {
+   "date": "2025-08-10",
+   "close": 12.7,
+   "volume": 3587989
+  },
+  {
+   "date": "2025-08-11",
+   "close": 12.15,
+   "volume": 2171416
+  },
+  {
+   "date": "2025-08-12",
+   "close": 12.4,
+   "volume": 3489344
+  },
+  {
+   "date": "2025-08-13",
+   "close": 11.99,
+   "volume": 1939221
+  },
+  {
+   "date": "2025-08-14",
+   "close": 11.74,
+   "volume": 1087011
+  },
+  {
+   "date": "2025-08-17",
+   "close": 11.67,
+   "volume": 598385
+  },
+  {
+   "date": "2025-08-18",
+   "close": 11.92,
+   "volume": 1807415
+  },
+  {
+   "date": "2025-08-19",
+   "close": 12.5,
+   "volume": 2965046
+  },
+  {
+   "date": "2025-08-20",
+   "close": 12.35,
+   "volume": 3304918
+  },
+  {
+   "date": "2025-08-21",
+   "close": 12.25,
+   "volume": 920262
+  },
+  {
+   "date": "2025-08-24",
+   "close": 12.31,
+   "volume": 1154312
+  },
+  {
+   "date": "2025-08-25",
+   "close": 11.86,
+   "volume": 2345479
+  },
+  {
+   "date": "2025-08-26",
+   "close": 11.35,
+   "volume": 3949857
+  },
+  {
+   "date": "2025-08-27",
+   "close": 11.11,
+   "volume": 1075395
+  },
+  {
+   "date": "2025-08-28",
+   "close": 12.24,
+   "volume": 4369484
+  },
+  {
+   "date": "2025-08-31",
+   "close": 11.36,
+   "volume": 3249561
+  },
+  {
+   "date": "2025-09-01",
+   "close": 12.52,
+   "volume": 5484526
+  },
+  {
+   "date": "2025-09-02",
+   "close": 12.38,
+   "volume": 4701756
+  },
+  {
+   "date": "2025-09-03",
+   "close": 12.04,
+   "volume": 2121443
+  },
+  {
+   "date": "2025-09-07",
+   "close": 11.75,
+   "volume": 936587
+  },
+  {
+   "date": "2025-09-08",
+   "close": 12.04,
+   "volume": 1594786
+  },
+  {
+   "date": "2025-09-09",
+   "close": 11.97,
+   "volume": 1797226
+  },
+  {
+   "date": "2025-09-10",
+   "close": 12.25,
+   "volume": 1589612
+  },
+  {
+   "date": "2025-09-11",
+   "close": 12.22,
+   "volume": 2631512
+  },
+  {
+   "date": "2025-09-14",
+   "close": 12.05,
+   "volume": 921375
+  },
+  {
+   "date": "2025-09-15",
+   "close": 11.85,
+   "volume": 724171
+  },
+  {
+   "date": "2025-09-16",
+   "close": 11.39,
+   "volume": 853279
+  },
+  {
+   "date": "2025-09-17",
+   "close": 11.4,
+   "volume": 562210
+  },
+  {
+   "date": "2025-09-18",
+   "close": 11.44,
+   "volume": 653949
+  },
+  {
+   "date": "2025-09-21",
+   "close": 11.35,
+   "volume": 595018
+  },
+  {
+   "date": "2025-09-22",
+   "close": 11.45,
+   "volume": 1618813
+  },
+  {
+   "date": "2025-09-23",
+   "close": 11.31,
+   "volume": 748508
+  },
+  {
+   "date": "2025-09-24",
+   "close": 11.51,
+   "volume": 445565
+  },
+  {
+   "date": "2025-09-25",
+   "close": 11.98,
+   "volume": 2576525
+  },
+  {
+   "date": "2025-09-28",
+   "close": 12.41,
+   "volume": 6097300
+  },
+  {
+   "date": "2025-09-29",
+   "close": 12.66,
+   "volume": 5635776
+  },
+  {
+   "date": "2025-09-30",
+   "close": 12.3,
+   "volume": 2746796
+  },
+  {
+   "date": "2025-10-01",
+   "close": 12.0,
+   "volume": 1509056
+  },
+  {
+   "date": "2025-10-02",
+   "close": 11.71,
+   "volume": 1248473
+  },
+  {
+   "date": "2025-10-05",
+   "close": 12.15,
+   "volume": 1956705
+  },
+  {
+   "date": "2025-10-06",
+   "close": 12.65,
+   "volume": 3151561
+  },
+  {
+   "date": "2025-10-07",
+   "close": 13.06,
+   "volume": 8980529
+  },
+  {
+   "date": "2025-10-08",
+   "close": 12.84,
+   "volume": 3751604
+  },
+  {
+   "date": "2025-10-12",
+   "close": 12.71,
+   "volume": 1846530
+  },
+  {
+   "date": "2025-10-13",
+   "close": 13.0,
+   "volume": 2015170
+  },
+  {
+   "date": "2025-10-14",
+   "close": 12.76,
+   "volume": 1337071
+  },
+  {
+   "date": "2025-10-15",
+   "close": 12.68,
+   "volume": 733373
+  },
+  {
+   "date": "2025-10-20",
+   "close": 12.73,
+   "volume": 1244251
+  },
+  {
+   "date": "2025-10-21",
+   "close": 13.98,
+   "volume": 5740926
+  },
+  {
+   "date": "2025-10-22",
+   "close": 13.61,
+   "volume": 4165770
+  },
+  {
+   "date": "2025-10-26",
+   "close": 13.82,
+   "volume": 4386103
+  },
+  {
+   "date": "2025-10-27",
+   "close": 13.6,
+   "volume": 2071605
+  },
+  {
+   "date": "2025-10-28",
+   "close": 13.45,
+   "volume": 1055118
+  },
+  {
+   "date": "2025-10-29",
+   "close": 13.27,
+   "volume": 643177
+  },
+  {
+   "date": "2025-10-30",
+   "close": 13.33,
+   "volume": 749455
+  },
+  {
+   "date": "2025-11-02",
+   "close": 13.46,
+   "volume": 975864
+  },
+  {
+   "date": "2025-11-03",
+   "close": 13.5,
+   "volume": 794751
+  },
+  {
+   "date": "2025-11-04",
+   "close": 13.33,
+   "volume": 833196
+  },
+  {
+   "date": "2025-11-05",
+   "close": 13.01,
+   "volume": 958102
+  },
+  {
+   "date": "2025-11-06",
+   "close": 13.03,
+   "volume": 803192
+  },
+  {
+   "date": "2025-11-09",
+   "close": 12.95,
+   "volume": 576969
+  },
+  {
+   "date": "2025-11-10",
+   "close": 12.84,
+   "volume": 675264
+  },
+  {
+   "date": "2025-11-11",
+   "close": 12.7,
+   "volume": 382361
+  },
+  {
+   "date": "2025-11-12",
+   "close": 12.95,
+   "volume": 563993
+  },
+  {
+   "date": "2025-11-13",
+   "close": 12.81,
+   "volume": 634395
+  },
+  {
+   "date": "2025-11-16",
+   "close": 12.7,
+   "volume": 332434
+  },
+  {
+   "date": "2025-11-17",
+   "close": 12.76,
+   "volume": 341338
+  },
+  {
+   "date": "2025-11-18",
+   "close": 12.69,
+   "volume": 369146
+  },
+  {
+   "date": "2025-11-19",
+   "close": 12.72,
+   "volume": 202680
+  },
+  {
+   "date": "2025-11-20",
+   "close": 12.73,
+   "volume": 692956
+  },
+  {
+   "date": "2025-11-23",
+   "close": 13.6,
+   "volume": 4970425
+  },
+  {
+   "date": "2025-11-24",
+   "close": 13.16,
+   "volume": 3577345
+  },
+  {
+   "date": "2025-11-26",
+   "close": 12.67,
+   "volume": 841244
+  },
+  {
+   "date": "2025-11-27",
+   "close": 12.55,
+   "volume": 535737
+  },
+  {
+   "date": "2025-11-30",
+   "close": 12.71,
+   "volume": 375635
+  },
+  {
+   "date": "2025-12-01",
+   "close": 12.73,
+   "volume": 700112
+  },
+  {
+   "date": "2025-12-03",
+   "close": 13.0,
+   "volume": 792587
+  },
+  {
+   "date": "2025-12-07",
+   "close": 13.21,
+   "volume": 656696
+  },
+  {
+   "date": "2025-12-09",
+   "close": 13.16,
+   "volume": 1055868
+  },
+  {
+   "date": "2025-12-10",
+   "close": 13.4,
+   "volume": 533601
+  },
+  {
+   "date": "2025-12-11",
+   "close": 13.34,
+   "volume": 2424268
+  },
+  {
+   "date": "2025-12-14",
+   "close": 13.38,
+   "volume": 859069
+  },
+  {
+   "date": "2025-12-15",
+   "close": 13.35,
+   "volume": 603280
+  },
+  {
+   "date": "2025-12-16",
+   "close": 14.56,
+   "volume": 7332648
+  },
+  {
+   "date": "2025-12-17",
+   "close": 13.81,
+   "volume": 4851237
+  },
+  {
+   "date": "2025-12-18",
+   "close": 13.69,
+   "volume": 1457684
+  },
+  {
+   "date": "2025-12-21",
+   "close": 13.9,
+   "volume": 1808714
+  },
+  {
+   "date": "2025-12-22",
+   "close": 13.87,
+   "volume": 2195339
+  },
+  {
+   "date": "2025-12-23",
+   "close": 14.04,
+   "volume": 5746683
+  },
+  {
+   "date": "2025-12-24",
+   "close": 13.92,
+   "volume": 1001280
+  },
+  {
+   "date": "2025-12-25",
+   "close": 13.86,
+   "volume": 711077
+  },
+  {
+   "date": "2025-12-28",
+   "close": 13.81,
+   "volume": 418911
+  },
+  {
+   "date": "2025-12-29",
+   "close": 13.91,
+   "volume": 1041749
+  },
+  {
+   "date": "2025-12-30",
+   "close": 13.91,
+   "volume": 464626
+  },
+  {
+   "date": "2025-12-31",
+   "close": 13.8,
+   "volume": 497637
+  },
+  {
+   "date": "2026-01-04",
+   "close": 13.79,
+   "volume": 648265
+  },
+  {
+   "date": "2026-01-06",
+   "close": 13.63,
+   "volume": 339613
+  },
+  {
+   "date": "2026-01-08",
+   "close": 13.4,
+   "volume": 659046
+  },
+  {
+   "date": "2026-01-11",
+   "close": 13.27,
+   "volume": 294968
+  },
+  {
+   "date": "2026-01-12",
+   "close": 13.12,
+   "volume": 454875
+  },
+  {
+   "date": "2026-01-13",
+   "close": 12.8,
+   "volume": 430867
+  },
+  {
+   "date": "2026-01-14",
+   "close": 12.53,
+   "volume": 296343
+  },
+  {
+   "date": "2026-01-15",
+   "close": 12.22,
+   "volume": 266978
+  },
+  {
+   "date": "2026-01-18",
+   "close": 12.4,
+   "volume": 205636
+  },
+  {
+   "date": "2026-01-19",
+   "close": 12.76,
+   "volume": 355757
+  },
+  {
+   "date": "2026-01-20",
+   "close": 12.65,
+   "volume": 197391
+  },
+  {
+   "date": "2026-01-21",
+   "close": 12.6,
+   "volume": 133093
+  },
+  {
+   "date": "2026-01-22",
+   "close": 12.6,
+   "volume": 327606
+  },
+  {
+   "date": "2026-01-25",
+   "close": 12.66,
+   "volume": 649332
+  },
+  {
+   "date": "2026-01-26",
+   "close": 12.45,
+   "volume": 560542
+  },
+  {
+   "date": "2026-01-27",
+   "close": 12.45,
+   "volume": 353996
+  },
+  {
+   "date": "2026-01-28",
+   "close": 12.05,
+   "volume": 305080
+  },
+  {
+   "date": "2026-02-01",
+   "close": 12.5,
+   "volume": 282380
+  },
+  {
+   "date": "2026-02-02",
+   "close": 12.6,
+   "volume": 197624
+  },
+  {
+   "date": "2026-02-03",
+   "close": 13.33,
+   "volume": 1914501
+  },
+  {
+   "date": "2026-02-04",
+   "close": 13.43,
+   "volume": 2490951
+  },
+  {
+   "date": "2026-02-05",
+   "close": 13.8,
+   "volume": 4979720
+  },
+  {
+   "date": "2026-02-08",
+   "close": 14.0,
+   "volume": 2042454
+  },
+  {
+   "date": "2026-02-09",
+   "close": 13.81,
+   "volume": 1409856
+  },
+  {
+   "date": "2026-02-10",
+   "close": 13.61,
+   "volume": 511034
+  },
+  {
+   "date": "2026-02-11",
+   "close": 13.63,
+   "volume": 902559
+  },
+  {
+   "date": "2026-02-12",
+   "close": 13.73,
+   "volume": 568559
+  },
+  {
+   "date": "2026-02-15",
+   "close": 15.69,
+   "volume": 6275756
+  },
+  {
+   "date": "2026-02-16",
+   "close": 14.7,
+   "volume": 2372080
+  },
+  {
+   "date": "2026-02-17",
+   "close": 14.4,
+   "volume": 1535998
+  },
+  {
+   "date": "2026-02-18",
+   "close": 15.5,
+   "volume": 2337230
+  },
+  {
+   "date": "2026-02-19",
+   "close": 14.85,
+   "volume": 1023201
+  },
+  {
+   "date": "2026-02-22",
+   "close": 13.95,
+   "volume": 1548135
+  },
+  {
+   "date": "2026-02-23",
+   "close": 14.54,
+   "volume": 517643
+  },
+  {
+   "date": "2026-02-24",
+   "close": 14.1,
+   "volume": 561770
+  },
+  {
+   "date": "2026-02-25",
+   "close": 13.5,
+   "volume": 633696
+  },
+  {
+   "date": "2026-02-26",
+   "close": 13.77,
+   "volume": 553160
+  },
+  {
+   "date": "2026-03-01",
+   "close": 13.05,
+   "volume": 709227
+  },
+  {
+   "date": "2026-03-02",
+   "close": 12.83,
+   "volume": 388713
+  },
+  {
+   "date": "2026-03-03",
+   "close": 12.74,
+   "volume": 314671
+  },
+  {
+   "date": "2026-03-04",
+   "close": 13.07,
+   "volume": 571489
+  },
+  {
+   "date": "2026-03-05",
+   "close": 13.1,
+   "volume": 323725
+  },
+  {
+   "date": "2026-03-08",
+   "close": 13.66,
+   "volume": 826225
+  },
+  {
+   "date": "2026-03-09",
+   "close": 13.64,
+   "volume": 383050
+  },
+  {
+   "date": "2026-03-10",
+   "close": 13.71,
+   "volume": 538230
+  },
+  {
+   "date": "2026-03-11",
+   "close": 13.65,
+   "volume": 317710
+  },
+  {
+   "date": "2026-03-12",
+   "close": 13.49,
+   "volume": 202274
+  },
+  {
+   "date": "2026-03-15",
+   "close": 13.12,
+   "volume": 210187
+  },
+  {
+   "date": "2026-03-16",
+   "close": 12.79,
+   "volume": 422358
+  },
+  {
+   "date": "2026-03-17",
+   "close": 12.93,
+   "volume": 313682
+  },
+  {
+   "date": "2026-03-18",
+   "close": 12.96,
+   "volume": 144096
+  },
+  {
+   "date": "2026-03-24",
+   "close": 13.29,
+   "volume": 975374
+  },
+  {
+   "date": "2026-03-25",
+   "close": 13.71,
+   "volume": 2237821
+  },
+  {
+   "date": "2026-03-26",
+   "close": 13.3,
+   "volume": 940803
+  },
+  {
+   "date": "2026-03-29",
+   "close": 13.02,
+   "volume": 414351
+  },
+  {
+   "date": "2026-03-30",
+   "close": 12.85,
+   "volume": 437913
+  },
+  {
+   "date": "2026-03-31",
+   "close": 12.81,
+   "volume": 275678
+  },
+  {
+   "date": "2026-04-01",
+   "close": 12.93,
+   "volume": 271120
+  },
+  {
+   "date": "2026-04-02",
+   "close": 13.28,
+   "volume": 800550
+  },
+  {
+   "date": "2026-04-05",
+   "close": 13.45,
+   "volume": 464377
+  },
+  {
+   "date": "2026-04-06",
+   "close": 13.72,
+   "volume": 450811
+  },
+  {
+   "date": "2026-04-07",
+   "close": 14.07,
+   "volume": 2172312
+  },
+  {
+   "date": "2026-04-08",
+   "close": 14.2,
+   "volume": 2088886
+  },
+  {
+   "date": "2026-04-09",
+   "close": 14.11,
+   "volume": 557252
+  },
+  {
+   "date": "2026-04-14",
+   "close": 14.17,
+   "volume": 606015
+  },
+  {
+   "date": "2026-04-15",
+   "close": 14.5,
+   "volume": 1841661
+  },
+  {
+   "date": "2026-04-16",
+   "close": 15.0,
+   "volume": 2250511
+  },
+  {
+   "date": "2026-04-19",
+   "close": 14.8,
+   "volume": 879168
+  },
+  {
+   "date": "2026-04-20",
+   "close": 14.69,
+   "volume": 389403
+  },
+  {
+   "date": "2026-04-21",
+   "close": 14.89,
+   "volume": 1176371
+  },
+  {
+   "date": "2026-04-22",
+   "close": 15.38,
+   "volume": 3326286
+  },
+  {
+   "date": "2026-04-23",
+   "close": 16.4,
+   "volume": 5320227
+  },
+  {
+   "date": "2026-04-26",
+   "close": 17.07,
+   "volume": 3104168
+  },
+  {
+   "date": "2026-04-27",
+   "close": 17.3,
+   "volume": 1334038
+  },
+  {
+   "date": "2026-04-28",
+   "close": 18.47,
+   "volume": 5507033
+  },
+  {
+   "date": "2026-04-29",
+   "close": 18.64,
+   "volume": 2403532
+  },
+  {
+   "date": "2026-04-30",
+   "close": 19.19,
+   "volume": 3438709
+  },
+  {
+   "date": "2026-05-03",
+   "close": 19.07,
+   "volume": 1054455
+  },
+  {
+   "date": "2026-05-04",
+   "close": 19.0,
+   "volume": 2287712
+  },
+  {
+   "date": "2026-05-05",
+   "close": 19.45,
+   "volume": 2231416
+  },
+  {
+   "date": "2026-05-06",
+   "close": 20.2,
+   "volume": 9814681
+  },
+  {
+   "date": "2026-05-10",
+   "close": 20.24,
+   "volume": 2609317
+  },
+  {
+   "date": "2026-05-11",
+   "close": 20.85,
+   "volume": 3051582
+  },
+  {
+   "date": "2026-05-12",
+   "close": 22.98,
+   "volume": 1749371
+  },
+  {
+   "date": "2026-05-13",
+   "close": 22.5,
+   "volume": 2825314
+  },
+  {
+   "date": "2026-05-14",
+   "close": 23.0,
+   "volume": 2537453
+  },
+  {
+   "date": "2026-05-17",
+   "close": 23.5,
+   "volume": 1098173
+  },
+  {
+   "date": "2026-05-18",
+   "close": 24.1,
+   "volume": 1987837
+  },
+  {
+   "date": "2026-05-19",
+   "close": 24.38,
+   "volume": 1246127
+  },
+  {
+   "date": "2026-05-20",
+   "close": 24.4,
+   "volume": 741639
+  },
+  {
+   "date": "2026-05-21",
+   "close": 25.15,
+   "volume": 1501207
+  },
+  {
+   "date": "2026-05-24",
+   "close": 26.15,
+   "volume": 2687138
+  },
+  {
+   "date": "2026-05-25",
+   "close": 26.32,
+   "volume": 854891
+  },
+  {
+   "date": "2026-06-01",
+   "close": 26.26,
+   "volume": 840280
+  },
+  {
+   "date": "2026-06-02",
+   "close": 26.45,
+   "volume": 784449
+  },
+  {
+   "date": "2026-06-03",
+   "close": 26.95,
+   "volume": 1048070
+  },
+  {
+   "date": "2026-06-04",
+   "close": 27.7,
+   "volume": 1191209
+  },
+  {
+   "date": "2026-06-07",
+   "close": 29.2,
+   "volume": 1539166
+  },
+  {
+   "date": "2026-06-08",
+   "close": 28.8,
+   "volume": 1911711
+  },
+  {
+   "date": "2026-06-09",
+   "close": 29.99,
+   "volume": 2250374
+  },
+  {
+   "date": "2026-06-10",
+   "close": 29.8,
+   "volume": 566097
+  },
+  {
+   "date": "2026-06-11",
+   "close": 30.39,
+   "volume": 1692026
+  },
+  {
+   "date": "2026-06-14",
+   "close": 30.72,
+   "volume": 1220168
+  },
+  {
+   "date": "2026-06-15",
+   "close": 30.38,
+   "volume": 770053
+  },
+  {
+   "date": "2026-06-16",
+   "close": 30.15,
+   "volume": 4733274
+  },
+  {
+   "date": "2026-06-17",
+   "close": 30.0,
+   "volume": 1047616
+  },
+  {
+   "date": "2026-06-21",
+   "close": 30.22,
+   "volume": 895575
+  },
+  {
+   "date": "2026-06-22",
+   "close": 30.38,
+   "volume": 891832
+  },
+  {
+   "date": "2026-06-23",
+   "close": 29.61,
+   "volume": 468520
+  },
+  {
+   "date": "2026-06-24",
+   "close": 29.64,
+   "volume": 484300
+  },
+  {
+   "date": "2026-06-25",
+   "close": 29.59,
+   "volume": 321824
+  },
+  {
+   "date": "2026-06-28",
+   "close": 29.29,
+   "volume": 688415
+  },
+  {
+   "date": "2026-06-29",
+   "close": 29.0,
+   "volume": 322075
+  },
+  {
+   "date": "2026-06-30",
+   "close": 28.69,
+   "volume": 591098
+  },
+  {
+   "date": "2026-07-01",
+   "close": 28.3,
+   "volume": 613331
+  },
+  {
+   "date": "2026-07-05",
+   "close": 28.07,
+   "volume": 679235
+  },
+  {
+   "date": "2026-07-06",
+   "close": 27.86,
+   "volume": 785912
+  },
+  {
+   "date": "2026-07-07",
+   "close": 27.5,
+   "volume": 726641
+  },
+  {
+   "date": "2026-07-08",
+   "close": 27.13,
+   "volume": 552177
+  },
+  {
+   "date": "2026-07-09",
+   "close": 27.8,
+   "volume": 550212
+  },
+  {
+   "date": "2026-07-12",
+   "close": 27.25,
+   "volume": 675706
+  },
+  {
+   "date": "2026-07-13",
+   "close": 27.35,
+   "volume": 279023
+  },
+  {
+   "date": "2026-07-14",
+   "close": 27.22,
+   "volume": 468491
+  },
+  {
+   "date": "2026-07-15",
+   "close": 27.43,
+   "volume": 309924
+  },
+  {
+   "date": "2026-07-16",
+   "close": 27.5,
+   "volume": 560508
+  },
+  {
+   "date": "2026-07-19",
+   "close": 28.2,
+   "volume": 1080381
+  },
+  {
+   "date": "2026-07-20",
+   "close": 28.58,
+   "volume": 956373
+  },
+  {
+   "date": "2026-07-21",
+   "close": 28.15,
+   "volume": 812012
+  },
+  {
+   "date": "2026-07-22",
+   "close": 28.29,
+   "volume": 675710
+  },
+  {
+   "date": "2026-07-26",
+   "close": 31.0,
+   "volume": 3777393
+  },
+  {
+   "date": "2026-07-27",
+   "close": 31.9,
+   "volume": 2017742
+  },
+  {
+   "date": "2026-07-28",
+   "close": 31.86,
+   "volume": 576123
+  },
+  {
+   "date": "2026-07-29",
+   "close": 31.8,
+   "volume": 945297
+  },
+  {
+   "date": "2026-07-30",
+   "close": 30.68,
+   "volume": 576276
+  },
+  {
+   "date": "2026-08-02",
+   "close": 31.0,
+   "volume": 258681
+  },
+  {
+   "date": "2026-08-03",
+   "close": 31.17,
+   "volume": 530249
+  },
+  {
+   "date": "2026-08-04",
+   "close": 31.27,
+   "volume": 343739
+  },
+  {
+   "date": "2026-08-05",
+   "close": 31.24,
+   "volume": 343433
+  },
+  {
+   "date": "2026-08-06",
+   "close": 30.9,
+   "volume": 338108
+  },
+  {
+   "date": "2026-08-09",
+   "close": 32.25,
+   "volume": 1498006
+  },
+  {
+   "date": "2026-08-10",
+   "close": 33.3,
+   "volume": 1999935
+  },
+  {
+   "date": "2026-08-11",
+   "close": 34.76,
+   "volume": 2469726
+  },
+  {
+   "date": "2026-08-12",
+   "close": 34.9,
+   "volume": 769700
+  },
+  {
+   "date": "2026-08-13",
+   "close": 35.0,
+   "volume": 286215
+  },
+  {
+   "date": "2026-08-16",
+   "close": 34.48,
+   "volume": 320329
+  },
+  {
+   "date": "2026-08-17",
+   "close": 35.09,
+   "volume": 468847
+  },
+  {
+   "date": "2026-08-18",
+   "close": 35.97,
+   "volume": 580552
+  },
+  {
+   "date": "2026-08-19",
+   "close": 35.64,
+   "volume": 1191326
+  },
+  {
+   "date": "2026-08-20",
+   "close": 36.0,
+   "volume": 559381
+  },
+  {
+   "date": "2026-08-23",
+   "close": 35.34,
+   "volume": 434926
+  },
+  {
+   "date": "2026-08-24",
+   "close": 35.12,
+   "volume": 244952
+  },
+  {
+   "date": "2026-08-25",
+   "close": 36.91,
+   "volume": 1213643
+  },
+  {
+   "date": "2026-08-26",
+   "close": 39.42,
+   "volume": 1638669
+  },
+  {
+   "date": "2026-08-30",
+   "close": 38.6,
+   "volume": 854338
+  },
+  {
+   "date": "2026-08-31",
+   "close": 34.71,
+   "volume": 537611
+  }
+ ],
+ "profile": {
+  "shares_outstanding": 89856499,
+  "free_float": 0.19851500000000002,
+  "float_shares": 17837862.898985002,
+  "perf_1w": -7.00455580865604,
+  "perf_1m": 6.4537157757496635,
+  "perf_3m": 23.478260869565208,
+  "avg_volume_30d": 940791.2333333319,
+  "relative_volume_10d": 1.3003795192928216,
+  "median_volume_20d": 544815,
+  "rv20": 0.9867771628901554,
+  "normal_value_30d": 20510085.72,
+  "five_session_change": -1.7826825127334578,
+  "history_bars": 120,
+  "market_cap": 2934713257.34,
+  "market_cap_source": "EGX",
+  "trades": 1486,
+  "turnover": 34236035
+ },
+ "financials": {
+  "annual": [
+   {
+    "period": "FY 2014",
+    "net_income": -12.872,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2014-01-01",
+    "period_end": "2014-12-31",
+    "filed": "2015-03-12",
+    "filing_id": "egx-135873",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2015",
+    "net_income": 24.883,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2015-01-01",
+    "period_end": "2015-12-31",
+    "filed": "2016-03-09",
+    "filing_id": "egx-147157",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2016",
+    "net_income": 7.13,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2016-01-01",
+    "period_end": "2016-12-31",
+    "filed": "2017-03-15",
+    "filing_id": "egx-158954",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2017",
+    "net_income": -0.663,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2017-01-01",
+    "period_end": "2017-12-31",
+    "filed": "2018-02-22",
+    "filing_id": "egx-169951",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2018",
+    "net_income": 14.195,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2018-01-01",
+    "period_end": "2018-12-31",
+    "filed": "2019-02-17",
+    "filing_id": "egx-182043",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2019",
+    "net_income": -5.163,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2019-01-01",
+    "period_end": "2019-12-31",
+    "filed": "2020-03-01",
+    "filing_id": "egx-195079",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2020",
+    "net_income": -20.764,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2020-01-01",
+    "period_end": "2020-12-31",
+    "filed": "2021-03-01",
+    "filing_id": "egx-207427",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "FY 2021",
+    "assets": 453.652,
+    "equity": 332.587,
+    "financing_cash_flow": 3.653,
+    "investing_cash_flow": -26.387,
+    "liabilities": 121.065,
+    "net_change_in_cash": 8.546,
+    "net_income": 0.327,
+    "operating_cash_flow": 31.281,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "egx_net_income": 0.34,
+    "egx_net_income_basis": "standalone",
+    "egx_filing_id": "egx-221284"
+   },
+   {
+    "period": "FY 2022",
+    "assets": 421.851,
+    "equity": 195.154,
+    "financing_cash_flow": 20.737,
+    "investing_cash_flow": -57.596,
+    "liabilities": 226.697,
+    "net_change_in_cash": -5.95,
+    "net_income": -129.767,
+    "operating_cash_flow": 30.908,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2023-03-19",
+    "filing_id": "egx-235737",
+    "basis": "consolidated"
+   },
+   {
+    "period": "FY 2023",
+    "assets": 323.33,
+    "equity": 98.974,
+    "financing_cash_flow": -15.646,
+    "investing_cash_flow": -9.486,
+    "liabilities": 224.356,
+    "net_change_in_cash": -0.382,
+    "net_income": -96.183,
+    "operating_cash_flow": 24.75,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2024-02-26",
+    "filing_id": "egx-249563",
+    "basis": "consolidated"
+   },
+   {
+    "period": "FY 2024",
+    "assets": 346.961,
+    "equity": 136.538,
+    "financing_cash_flow": -15.655,
+    "investing_cash_flow": -0.227,
+    "liabilities": 210.423,
+    "net_change_in_cash": 1.136,
+    "net_income": 37.565,
+    "operating_cash_flow": 17.018,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2025-02-11",
+    "filing_id": "egx-265686",
+    "basis": "consolidated"
+   },
+   {
+    "period": "FY 2025",
+    "assets": 348.911,
+    "equity": 182.18,
+    "investing_cash_flow": 6.083,
+    "liabilities": 166.731,
+    "net_change_in_cash": -2.151,
+    "net_income": 45.641,
+    "operating_cash_flow": -8.233,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2026-02-11",
+    "filing_id": "egx-283404",
+    "basis": "consolidated"
+   }
+  ],
+  "quarterly": [
+   {
+    "period": "9M 2014",
+    "net_income": -7.258,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2014-01-01",
+    "period_end": "2014-09-30",
+    "filed": "2014-11-13",
+    "filing_id": "egx-132481",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2015",
+    "net_income": 22.615,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2015-01-01",
+    "period_end": "2015-09-30",
+    "filed": "2015-11-12",
+    "filing_id": "egx-143864",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2016",
+    "net_income": 10.98,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2016-01-01",
+    "period_end": "2016-09-30",
+    "filed": "2016-11-14",
+    "filing_id": "egx-155674",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2017",
+    "net_income": -0.181,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2017-01-01",
+    "period_end": "2017-09-30",
+    "filed": "2017-11-15",
+    "filing_id": "egx-167485",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2018",
+    "net_income": 8.648,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2018-01-01",
+    "period_end": "2018-09-30",
+    "filed": "2018-11-14",
+    "filing_id": "egx-179466",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2019",
+    "net_income": 8.399,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2019-01-01",
+    "period_end": "2019-09-30",
+    "filed": "2019-11-17",
+    "filing_id": "egx-192191",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2020",
+    "net_income": -16.624,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2020-01-01",
+    "period_end": "2020-09-30",
+    "filed": "2020-11-15",
+    "filing_id": "egx-204245",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2021",
+    "net_income": -10.965,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2021-01-01",
+    "period_end": "2021-09-30",
+    "filed": "2021-11-16",
+    "filing_id": "egx-217431",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2022",
+    "net_income": -32.069,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2022-01-01",
+    "period_end": "2022-09-30",
+    "filed": "2022-11-15",
+    "filing_id": "egx-231514",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2023",
+    "net_income": -80.742,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2023-01-01",
+    "period_end": "2023-09-30",
+    "filed": "2023-11-14",
+    "filing_id": "egx-245540",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2024",
+    "net_income": 6.939,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2024-01-01",
+    "period_end": "2024-09-30",
+    "filed": "2024-11-07",
+    "filing_id": "egx-261497",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "9M 2025",
+    "net_income": 39.258,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2025-01-01",
+    "period_end": "2025-09-30",
+    "filed": "2025-11-11",
+    "filing_id": "egx-278841",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2014",
+    "net_income": 0.821,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2014-01-01",
+    "period_end": "2014-06-30",
+    "filed": "2014-08-17",
+    "filing_id": "egx-129512",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2015",
+    "net_income": 17.416,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2015-01-01",
+    "period_end": "2015-06-30",
+    "filed": "2015-08-13",
+    "filing_id": "egx-141180",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2016",
+    "net_income": 11.379,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2016-01-01",
+    "period_end": "2016-06-30",
+    "filed": "2016-08-09",
+    "filing_id": "egx-152311",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2017",
+    "net_income": 2.923,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2017-01-01",
+    "period_end": "2017-06-30",
+    "filed": "2017-08-06",
+    "filing_id": "egx-163812",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2018",
+    "net_income": -4.185,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2018-01-01",
+    "period_end": "2018-06-30",
+    "filed": "2018-08-05",
+    "filing_id": "egx-176079",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2019",
+    "net_income": 4.658,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2019-01-01",
+    "period_end": "2019-06-30",
+    "filed": "2019-07-28",
+    "filing_id": "egx-188079",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2020",
+    "net_income": -2.568,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2020-01-01",
+    "period_end": "2020-06-30",
+    "filed": "2020-08-13",
+    "filing_id": "egx-201055",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2021",
+    "net_income": -12.03,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2021-01-01",
+    "period_end": "2021-06-30",
+    "filed": "2021-08-16",
+    "filing_id": "egx-213902",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2022",
+    "net_income": -21.007,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2022-01-01",
+    "period_end": "2022-06-30",
+    "filed": "2022-08-14",
+    "filing_id": "egx-227530",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2023",
+    "net_income": -55.252,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2023-01-01",
+    "period_end": "2023-06-30",
+    "filed": "2023-08-14",
+    "filing_id": "egx-241642",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2024",
+    "net_income": 4.843,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2024-01-01",
+    "period_end": "2024-06-30",
+    "filed": "2024-08-13",
+    "filing_id": "egx-257639",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2025",
+    "net_income": 25.044,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2025-01-01",
+    "period_end": "2025-06-30",
+    "filed": "2025-08-12",
+    "filing_id": "egx-274403",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "H1 2026",
+    "net_income": 22.315,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2026-01-01",
+    "period_end": "2026-06-30",
+    "filed": "2026-08-11",
+    "filing_id": "egx-292764",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg",
+    "assets": 374.94,
+    "equity": 209.745,
+    "gross_profit": 24.858,
+    "investing_cash_flow": -0.017,
+    "liabilities": 165.195,
+    "net_change_in_cash": 21.403,
+    "operating_cash_flow": 21.42,
+    "operating_income": 22.04,
+    "revenue": 28.25,
+    "filed_on": "2026-08-11"
+   },
+   {
+    "period": "Q1 2014",
+    "net_income": 0.538,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2014-01-01",
+    "period_end": "2014-03-31",
+    "filed": "2014-05-15",
+    "filing_id": "egx-126867",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2015",
+    "net_income": 3.214,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2015-01-01",
+    "period_end": "2015-03-31",
+    "filed": "2015-05-13",
+    "filing_id": "egx-138290",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2016",
+    "net_income": 3.754,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2016-01-01",
+    "period_end": "2016-03-31",
+    "filed": "2016-05-23",
+    "filing_id": "egx-150208",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2017",
+    "net_income": -9.155,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2017-01-01",
+    "period_end": "2017-03-31",
+    "filed": "2017-05-14",
+    "filing_id": "egx-161507",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2018",
+    "net_income": -9.029,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2018-01-01",
+    "period_end": "2018-03-31",
+    "filed": "2018-05-13",
+    "filing_id": "egx-173182",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2019",
+    "net_income": 0.064,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2019-01-01",
+    "period_end": "2019-03-31",
+    "filed": "2019-05-15",
+    "filing_id": "egx-185958",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2020",
+    "net_income": -0.691,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2020-01-01",
+    "period_end": "2020-03-31",
+    "filed": "2020-06-09",
+    "filing_id": "egx-198463",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
+   {
+    "period": "Q1 2021",
+    "assets": 441.469,
+    "equity": 325.891,
+    "financing_cash_flow": -9.475,
+    "investing_cash_flow": -10.856,
+    "liabilities": 115.578,
+    "net_change_in_cash": 0.911,
+    "net_income": -6.463,
+    "operating_cash_flow": 21.242,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "basis": "consolidated",
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2021-01-01",
+    "period_end": "2021-03-31",
+    "filed": "2021-05-10",
+    "filing_id": "egx-210164"
+   },
+   {
+    "period": "Q1 2022",
+    "assets": 443.247,
+    "equity": 319.635,
+    "financing_cash_flow": 1.521,
+    "investing_cash_flow": -13.271,
+    "liabilities": 123.612,
+    "net_change_in_cash": -7.17,
+    "net_income": -12.408,
+    "operating_cash_flow": 4.58,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2022-05-23",
+    "filing_id": "egx-224130",
+    "basis": "consolidated"
+   },
+   {
+    "period": "Q1 2023",
+    "assets": 428.151,
+    "equity": 171.431,
+    "financing_cash_flow": -0.699,
+    "investing_cash_flow": -8.738,
+    "liabilities": 256.72,
+    "net_change_in_cash": 24.115,
+    "net_income": -23.722,
+    "operating_cash_flow": 33.551,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2023-06-14",
+    "filing_id": "egx-239426",
+    "basis": "consolidated"
+   },
+   {
+    "period": "Q1 2024",
+    "assets": 319.631,
+    "equity": 101.17,
+    "financing_cash_flow": -0.322,
+    "investing_cash_flow": -0.009,
+    "liabilities": 218.461,
+    "net_change_in_cash": -1.138,
+    "net_income": 2.196,
+    "operating_cash_flow": -0.808,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2024-05-21",
+    "filing_id": "egx-253724",
+    "basis": "consolidated"
+   },
+   {
+    "period": "Q1 2025",
+    "assets": 354.358,
+    "equity": 152.862,
+    "investing_cash_flow": 6.105,
+    "liabilities": 201.496,
+    "net_change_in_cash": 9.116,
+    "net_income": 16.323,
+    "operating_cash_flow": 3.011,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements",
+    "filed": "2025-05-15",
+    "filing_id": "egx-270125",
+    "basis": "consolidated"
+   },
+   {
+    "period": "Q1 2026",
+    "net_income": 10.661,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2026-01-01",
+    "period_end": "2026-03-31",
+    "filed": "2026-05-12",
+    "filing_id": "egx-288024",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg",
+    "assets": 363.606,
+    "cash": 10.522,
+    "equity": 198.091,
+    "gross_profit": 12.263,
+    "investing_cash_flow": -0.017,
+    "liabilities": 165.515,
+    "net_change_in_cash": 4.595,
+    "operating_cash_flow": 4.612,
+    "operating_income": 10.483,
+    "revenue": 14.125,
+    "filed_on": "2026-05-12"
+   },
+   {
+    "period": "Q2 2021",
+    "assets": 452.755,
+    "equity": 320.264,
+    "financing_cash_flow": 4.03,
+    "investing_cash_flow": -10.689,
+    "liabilities": 132.491,
+    "net_change_in_cash": 3.736,
+    "net_income": -5.549,
+    "operating_cash_flow": 10.395,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q2 2022",
+    "assets": 431.911,
+    "equity": 309.706,
+    "financing_cash_flow": -9.792,
+    "investing_cash_flow": -10.683,
+    "liabilities": 122.205,
+    "net_change_in_cash": 2.809,
+    "net_income": -8.599,
+    "operating_cash_flow": 23.283,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q2 2023",
+    "assets": 381.744,
+    "equity": 139.902,
+    "financing_cash_flow": -2.429,
+    "investing_cash_flow": -0.701,
+    "liabilities": 241.842,
+    "net_change_in_cash": -1.92,
+    "net_income": -31.529,
+    "operating_cash_flow": 1.21,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q2 2024",
+    "assets": 318.439,
+    "equity": 103.817,
+    "financing_cash_flow": -7.328,
+    "investing_cash_flow": -0.188,
+    "liabilities": 214.622,
+    "net_change_in_cash": 0.952,
+    "net_income": 2.647,
+    "operating_cash_flow": 8.468,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q2 2025",
+    "assets": 354.87,
+    "equity": 161.582,
+    "investing_cash_flow": -0.346,
+    "liabilities": 193.288,
+    "net_change_in_cash": 2.294,
+    "net_income": 8.72,
+    "operating_cash_flow": 2.641,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q3 2021",
+    "assets": 449.544,
+    "equity": 321.33,
+    "financing_cash_flow": 9.006,
+    "investing_cash_flow": -12.906,
+    "liabilities": 128.215,
+    "net_change_in_cash": 2.139,
+    "net_income": 1.065,
+    "operating_cash_flow": 6.039,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q3 2022",
+    "assets": 436.701,
+    "equity": 297.039,
+    "financing_cash_flow": 7.892,
+    "investing_cash_flow": -18.009,
+    "liabilities": 139.661,
+    "net_change_in_cash": -3.749,
+    "net_income": -11.062,
+    "operating_cash_flow": 6.368,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q3 2023",
+    "assets": 336.946,
+    "equity": 114.415,
+    "financing_cash_flow": -10.077,
+    "investing_cash_flow": -0.008,
+    "liabilities": 222.531,
+    "net_change_in_cash": -15.714,
+    "net_income": -25.491,
+    "operating_cash_flow": -5.629,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q3 2024",
+    "assets": 313.862,
+    "equity": 105.913,
+    "financing_cash_flow": -8.005,
+    "investing_cash_flow": -0.03,
+    "liabilities": 207.949,
+    "net_change_in_cash": 1.942,
+    "net_income": 2.096,
+    "operating_cash_flow": 9.977,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q3 2025",
+    "assets": 356.679,
+    "equity": 175.796,
+    "investing_cash_flow": 0.3,
+    "liabilities": 180.882,
+    "net_change_in_cash": -8.552,
+    "net_income": 14.214,
+    "operating_cash_flow": -8.852,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q4 2021",
+    "assets": 453.652,
+    "equity": 332.587,
+    "financing_cash_flow": 0.093,
+    "investing_cash_flow": 8.064,
+    "liabilities": 121.065,
+    "net_change_in_cash": 1.761,
+    "net_income": 11.292,
+    "operating_cash_flow": -6.396,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q4 2022",
+    "assets": 421.851,
+    "equity": 195.154,
+    "financing_cash_flow": 21.117,
+    "investing_cash_flow": -15.633,
+    "liabilities": 226.697,
+    "net_change_in_cash": 2.161,
+    "net_income": -97.698,
+    "operating_cash_flow": -3.323,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q4 2023",
+    "assets": 323.33,
+    "equity": 98.974,
+    "financing_cash_flow": -2.441,
+    "investing_cash_flow": -0.04,
+    "liabilities": 224.356,
+    "net_change_in_cash": -6.864,
+    "net_income": -15.441,
+    "operating_cash_flow": -4.384,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q4 2024",
+    "assets": 346.961,
+    "equity": 136.538,
+    "financing_cash_flow": 0.0,
+    "investing_cash_flow": 0.0,
+    "liabilities": 210.423,
+    "net_change_in_cash": -0.619,
+    "net_income": 30.625,
+    "operating_cash_flow": -0.619,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   },
+   {
+    "period": "Q4 2025",
+    "assets": 348.911,
+    "equity": 182.18,
+    "liabilities": 166.731,
+    "source": "https://english.mubasher.info/markets/EGX/stocks/ISMA/financial-statements"
+   }
+  ]
+ }
+}
