@@ -1,0 +1,112 @@
+{
+  "EGS01081C016": {
+    "ticker": "AALR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS01081C016",
+        "issuerName": "The General Co. For Land Reclamation"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:23.624808+00:00"
+  },
+  "EGS38191C010": {
+    "ticker": "ABUK",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38191C010",
+        "issuerName": "Abu Qir Fertilizers and Chemical Industries"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:24.312332+00:00"
+  },
+  "EGS72AQ1C016": {
+    "ticker": "ACAMD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72AQ1C016",
+        "issuerName": "Arab Co. For Assets Management And Development"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:25.100446+00:00"
+  },
+  "EGS697S1C015": {
+    "ticker": "ACAP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS697S1C015",
+        "issuerName": "A Capital Holding"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:25.776634+00:00"
+  },
+  "EGS3E2F1C011": {
+    "ticker": "ACFR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3E2F1C011",
+        "issuerName": "Alexandria for Refractories- ACR"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:26.527392+00:00"
+  },
+  "EGS32221C011": {
+    "ticker": "ACGC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS32221C011",
+        "issuerName": "Arab Cotton Ginning"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:27.286498+00:00"
+  },
+  "EGS7D5P1C019": {
+    "ticker": "ACTF",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS7D5P1C019",
+        "issuerName": "ِAct Financial"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:28.347129+00:00"
+  },
+  "EGS38321C013": {
+    "ticker": "ADCI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38321C013",
+        "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:29.134348+00:00"
+  },
+  "EGS60111C019": {
+    "ticker": "ADIB",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60111C019",
+        "issuerName": "Abu Dhabi Islamic Bank - Egypt"
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:29.950505+00:00"
+  },
+  "EGS30221C013": {
+    "ticker": "ADPC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30221C013",
+        "issuerName": "The Arab Dairy Products Co."
+      }
+    ],
+    "fetchedAt": "2026-08-28T16:02:30.693229+00:00"
+  }
+}

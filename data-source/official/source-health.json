@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "builtAt": "2026-09-01T14:10:27.712375+00:00",
+  "sources": {
+    "egxCheckpointArchive": {
+      "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
+      "observedAt": "2026-08-31T06:21:40Z",
+      "observations": 5,
+      "status": "available",
+      "ageHours": 31.813
+    },
+    "ownershipLedger": {
+      "path": "data-source/official/ownership/ownership-ledger.json",
+      "observedAt": "2026-09-01T14:03:55.843208+00:00",
+      "documents": 25810,
+      "parsedDailySummaries": 8,
+      "dailySummaries": 2012,
+      "status": "partial",
+      "ageHours": 0.109
+    },
+    "fraLedger": {
+      "path": "data-source/official/fra/fra-ledger.json",
+      "observedAt": "2026-09-01T14:08:52.910587+00:00",
+      "items": 555,
+      "status": "available",
+      "ageHours": 0.026
+    },
+    "mcdrRegistry": {
+      "path": "data-source/official/mcdr/issuer-registry.json",
+      "observedAt": "2026-09-01T13:56:02.760800+00:00",
+      "matchedAtMcdr": 10,
+      "exactIsinsQueried": 10,
+      "notYetIndividuallyQueried": 250,
+      "status": "partial",
+      "ageHours": 0.24
+    },
+    "filingCompleteness": {
+      "path": "data-source/official/filing-completeness.json",
+      "observedAt": "2026-09-01T14:10:07.687308+00:00",
+      "issuers": 282,
+      "verifiedIrArchives": 0,
+      "status": "partial",
+      "ageHours": 0.006
+    },
+    "cbeContext": {
+      "path": "data-source/official/cbe/cbe-context.json",
+      "observedAt": "2026-09-01T13:56:20.352072+00:00",
+      "officialFxDate": "01/09/2026",
+      "status": "available",
+      "ageHours": 0.235
+    }
+  },
+  "capabilities": {
+    "officialCheckpointOhlcv": true,
+    "officialCumulativeTradedValue": true,
+    "sameClockVolumePace": false,
+    "fiveMinuteStockBars": false,
+    "bestBidAsk": false,
+    "orderBookDepth": false,
+    "namedInvestorFromDailySummary": false,
+    "completePublicShareholderRegister": false,
+    "verifiedIssuerIrArchiveCoverage": false,
+    "officialMacroContext": true
+  },
+  "monitorRules": [
+    "Unavailable capabilities award zero evidence, confirmation or liquidity points.",
+    "A daily insider summary cannot establish the buyer's identity.",
+    "Same-clock volume pace stays disabled until at least 20 comparable checkpoint observations exist.",
+    "CBE and index data are context only and transfer zero qualification points to a stock.",
+    "MCDR not-yet-queried ISINs are unknown, never missing."
+  ]
+}

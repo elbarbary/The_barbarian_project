@@ -1,0 +1,4842 @@
+{
+  "schemaVersion": 1,
+  "builtAt": "2026-09-01T14:10:07.687308+00:00",
+  "egx": {
+    "source": "beta.egx.com.eg news-search",
+    "items": 191892,
+    "withoutTickerInHeading": 36023,
+    "tickerNotInThisDirectory": 29208,
+    "attributedToAnIssuer": 126661,
+    "months": [
+      {
+        "month": "2005-01",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-02",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-03",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-04",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-05",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-06",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-07",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-08",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-09",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-10",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-11",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2005-12",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-01",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-02",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-03",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-04",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-05",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-06",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-07",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-08",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-09",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-10",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-11",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2006-12",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-01",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-02",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-03",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-04",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-05",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-06",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-07",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-08",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-09",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-10",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-11",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2007-12",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-01",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-02",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-03",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-04",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-05",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-06",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-07",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-08",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-09",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-10",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-11",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2008-12",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-01",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-02",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-03",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-04",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-05",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-06",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-07",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-08",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-09",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-10",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-11",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2009-12",
+        "harvested": "2026-08-24",
+        "items": 0,
+        "expected": 0,
+        "status": "complete"
+      },
+      {
+        "month": "2010-01",
+        "harvested": "2026-08-24",
+        "items": 305,
+        "expected": 305,
+        "status": "complete"
+      },
+      {
+        "month": "2010-02",
+        "harvested": "2026-08-24",
+        "items": 435,
+        "expected": 435,
+        "status": "complete"
+      },
+      {
+        "month": "2010-03",
+        "harvested": "2026-08-24",
+        "items": 694,
+        "expected": 694,
+        "status": "complete"
+      },
+      {
+        "month": "2010-04",
+        "harvested": "2026-08-24",
+        "items": 550,
+        "expected": 550,
+        "status": "complete"
+      },
+      {
+        "month": "2010-05",
+        "harvested": "2026-08-24",
+        "items": 654,
+        "expected": 654,
+        "status": "complete"
+      },
+      {
+        "month": "2010-06",
+        "harvested": "2026-08-24",
+        "items": 402,
+        "expected": 402,
+        "status": "complete"
+      },
+      {
+        "month": "2010-07",
+        "harvested": "2026-08-24",
+        "items": 310,
+        "expected": 310,
+        "status": "complete"
+      },
+      {
+        "month": "2010-08",
+        "harvested": "2026-08-24",
+        "items": 657,
+        "expected": 657,
+        "status": "complete"
+      },
+      {
+        "month": "2010-09",
+        "harvested": "2026-08-24",
+        "items": 472,
+        "expected": 472,
+        "status": "complete"
+      },
+      {
+        "month": "2010-10",
+        "harvested": "2026-08-24",
+        "items": 415,
+        "expected": 415,
+        "status": "complete"
+      },
+      {
+        "month": "2010-11",
+        "harvested": "2026-08-24",
+        "items": 631,
+        "expected": 631,
+        "status": "complete"
+      },
+      {
+        "month": "2010-12",
+        "harvested": "2026-08-24",
+        "items": 351,
+        "expected": 351,
+        "status": "complete"
+      },
+      {
+        "month": "2011-01",
+        "harvested": "2026-08-24",
+        "items": 262,
+        "expected": 262,
+        "status": "complete"
+      },
+      {
+        "month": "2011-02",
+        "harvested": "2026-08-24",
+        "items": 257,
+        "expected": 257,
+        "status": "complete"
+      },
+      {
+        "month": "2011-03",
+        "harvested": "2026-08-24",
+        "items": 1128,
+        "expected": 1128,
+        "status": "complete"
+      },
+      {
+        "month": "2011-04",
+        "harvested": "2026-08-24",
+        "items": 613,
+        "expected": 613,
+        "status": "complete"
+      },
+      {
+        "month": "2011-05",
+        "harvested": "2026-08-24",
+        "items": 853,
+        "expected": 853,
+        "status": "complete"
+      },
+      {
+        "month": "2011-06",
+        "harvested": "2026-08-24",
+        "items": 652,
+        "expected": 652,
+        "status": "complete"
+      },
+      {
+        "month": "2011-07",
+        "harvested": "2026-08-24",
+        "items": 644,
+        "expected": 644,
+        "status": "complete"
+      },
+      {
+        "month": "2011-08",
+        "harvested": "2026-08-24",
+        "items": 770,
+        "expected": 770,
+        "status": "complete"
+      },
+      {
+        "month": "2011-09",
+        "harvested": "2026-08-24",
+        "items": 577,
+        "expected": 577,
+        "status": "complete"
+      },
+      {
+        "month": "2011-10",
+        "harvested": "2026-08-24",
+        "items": 880,
+        "expected": 880,
+        "status": "complete"
+      },
+      {
+        "month": "2011-11",
+        "harvested": "2026-08-24",
+        "items": 929,
+        "expected": 929,
+        "status": "complete"
+      },
+      {
+        "month": "2011-12",
+        "harvested": "2026-08-24",
+        "items": 581,
+        "expected": 581,
+        "status": "complete"
+      },
+      {
+        "month": "2012-01",
+        "harvested": "2026-08-24",
+        "items": 807,
+        "expected": 807,
+        "status": "complete"
+      },
+      {
+        "month": "2012-02",
+        "harvested": "2026-08-24",
+        "items": 699,
+        "expected": 699,
+        "status": "complete"
+      },
+      {
+        "month": "2012-03",
+        "harvested": "2026-08-24",
+        "items": 925,
+        "expected": 925,
+        "status": "complete"
+      },
+      {
+        "month": "2012-04",
+        "harvested": "2026-08-24",
+        "items": 1040,
+        "expected": 1040,
+        "status": "complete"
+      },
+      {
+        "month": "2012-05",
+        "harvested": "2026-08-24",
+        "items": 1158,
+        "expected": 1158,
+        "status": "complete"
+      },
+      {
+        "month": "2012-06",
+        "harvested": "2026-08-24",
+        "items": 502,
+        "expected": 502,
+        "status": "complete"
+      },
+      {
+        "month": "2012-07",
+        "harvested": "2026-08-24",
+        "items": 736,
+        "expected": 736,
+        "status": "complete"
+      },
+      {
+        "month": "2012-08",
+        "harvested": "2026-08-24",
+        "items": 910,
+        "expected": 910,
+        "status": "complete"
+      },
+      {
+        "month": "2012-09",
+        "harvested": "2026-08-24",
+        "items": 568,
+        "expected": 568,
+        "status": "complete"
+      },
+      {
+        "month": "2012-10",
+        "harvested": "2026-08-24",
+        "items": 858,
+        "expected": 858,
+        "status": "complete"
+      },
+      {
+        "month": "2012-11",
+        "harvested": "2026-08-24",
+        "items": 1056,
+        "expected": 1056,
+        "status": "complete"
+      },
+      {
+        "month": "2012-12",
+        "harvested": "2026-08-24",
+        "items": 537,
+        "expected": 537,
+        "status": "complete"
+      },
+      {
+        "month": "2013-01",
+        "harvested": "2026-08-24",
+        "items": 697,
+        "expected": 697,
+        "status": "complete"
+      },
+      {
+        "month": "2013-02",
+        "harvested": "2026-08-24",
+        "items": 725,
+        "expected": 725,
+        "status": "complete"
+      },
+      {
+        "month": "2013-03",
+        "harvested": "2026-08-24",
+        "items": 1056,
+        "expected": 1056,
+        "status": "complete"
+      },
+      {
+        "month": "2013-04",
+        "harvested": "2026-08-24",
+        "items": 1079,
+        "expected": 1079,
+        "status": "complete"
+      },
+      {
+        "month": "2013-05",
+        "harvested": "2026-08-24",
+        "items": 1101,
+        "expected": 1101,
+        "status": "complete"
+      },
+      {
+        "month": "2013-06",
+        "harvested": "2026-08-24",
+        "items": 559,
+        "expected": 559,
+        "status": "complete"
+      },
+      {
+        "month": "2013-07",
+        "harvested": "2026-08-24",
+        "items": 566,
+        "expected": 566,
+        "status": "complete"
+      },
+      {
+        "month": "2013-08",
+        "harvested": "2026-08-24",
+        "items": 988,
+        "expected": 988,
+        "status": "complete"
+      },
+      {
+        "month": "2013-09",
+        "harvested": "2026-08-24",
+        "items": 661,
+        "expected": 661,
+        "status": "complete"
+      },
+      {
+        "month": "2013-10",
+        "harvested": "2026-08-24",
+        "items": 824,
+        "expected": 824,
+        "status": "complete"
+      },
+      {
+        "month": "2013-11",
+        "harvested": "2026-08-24",
+        "items": 1008,
+        "expected": 1008,
+        "status": "complete"
+      },
+      {
+        "month": "2013-12",
+        "harvested": "2026-08-24",
+        "items": 633,
+        "expected": 633,
+        "status": "complete"
+      },
+      {
+        "month": "2014-01",
+        "harvested": "2026-08-24",
+        "items": 724,
+        "expected": 724,
+        "status": "complete"
+      },
+      {
+        "month": "2014-02",
+        "harvested": "2026-08-24",
+        "items": 784,
+        "expected": 784,
+        "status": "complete"
+      },
+      {
+        "month": "2014-03",
+        "harvested": "2026-08-24",
+        "items": 1273,
+        "expected": 1273,
+        "status": "complete"
+      },
+      {
+        "month": "2014-04",
+        "harvested": "2026-08-24",
+        "items": 1201,
+        "expected": 1201,
+        "status": "complete"
+      },
+      {
+        "month": "2014-05",
+        "harvested": "2026-08-24",
+        "items": 1106,
+        "expected": 1106,
+        "status": "complete"
+      },
+      {
+        "month": "2014-06",
+        "harvested": "2026-08-24",
+        "items": 528,
+        "expected": 528,
+        "status": "complete"
+      },
+      {
+        "month": "2014-07",
+        "harvested": "2026-08-24",
+        "items": 716,
+        "expected": 716,
+        "status": "complete"
+      },
+      {
+        "month": "2014-08",
+        "harvested": "2026-08-24",
+        "items": 967,
+        "expected": 967,
+        "status": "complete"
+      },
+      {
+        "month": "2014-09",
+        "harvested": "2026-08-24",
+        "items": 760,
+        "expected": 760,
+        "status": "complete"
+      },
+      {
+        "month": "2014-10",
+        "harvested": "2026-08-24",
+        "items": 987,
+        "expected": 987,
+        "status": "complete"
+      },
+      {
+        "month": "2014-11",
+        "harvested": "2026-08-24",
+        "items": 1181,
+        "expected": 1181,
+        "status": "complete"
+      },
+      {
+        "month": "2014-12",
+        "harvested": "2026-08-24",
+        "items": 645,
+        "expected": 645,
+        "status": "complete"
+      },
+      {
+        "month": "2015-01",
+        "harvested": "2026-08-24",
+        "items": 736,
+        "expected": 736,
+        "status": "complete"
+      },
+      {
+        "month": "2015-02",
+        "harvested": "2026-08-24",
+        "items": 733,
+        "expected": 733,
+        "status": "complete"
+      },
+      {
+        "month": "2015-03",
+        "harvested": "2026-08-24",
+        "items": 1199,
+        "expected": 1199,
+        "status": "complete"
+      },
+      {
+        "month": "2015-04",
+        "harvested": "2026-08-24",
+        "items": 1170,
+        "expected": 1170,
+        "status": "complete"
+      },
+      {
+        "month": "2015-05",
+        "harvested": "2026-08-24",
+        "items": 1113,
+        "expected": 1113,
+        "status": "complete"
+      },
+      {
+        "month": "2015-06",
+        "harvested": "2026-08-24",
+        "items": 547,
+        "expected": 547,
+        "status": "complete"
+      },
+      {
+        "month": "2015-07",
+        "harvested": "2026-08-24",
+        "items": 721,
+        "expected": 721,
+        "status": "complete"
+      },
+      {
+        "month": "2015-08",
+        "harvested": "2026-08-24",
+        "items": 1001,
+        "expected": 1001,
+        "status": "complete"
+      },
+      {
+        "month": "2015-09",
+        "harvested": "2026-08-24",
+        "items": 532,
+        "expected": 532,
+        "status": "complete"
+      },
+      {
+        "month": "2015-10",
+        "harvested": "2026-08-24",
+        "items": 835,
+        "expected": 835,
+        "status": "complete"
+      },
+      {
+        "month": "2015-11",
+        "harvested": "2026-08-24",
+        "items": 1126,
+        "expected": 1126,
+        "status": "complete"
+      },
+      {
+        "month": "2015-12",
+        "harvested": "2026-08-24",
+        "items": 583,
+        "expected": 583,
+        "status": "complete"
+      },
+      {
+        "month": "2016-01",
+        "harvested": "2026-08-24",
+        "items": 786,
+        "expected": 786,
+        "status": "complete"
+      },
+      {
+        "month": "2016-02",
+        "harvested": "2026-08-24",
+        "items": 709,
+        "expected": 709,
+        "status": "complete"
+      },
+      {
+        "month": "2016-03",
+        "harvested": "2026-08-24",
+        "items": 1372,
+        "expected": 1372,
+        "status": "complete"
+      },
+      {
+        "month": "2016-04",
+        "harvested": "2026-08-24",
+        "items": 1121,
+        "expected": 1121,
+        "status": "complete"
+      },
+      {
+        "month": "2016-05",
+        "harvested": "2026-08-24",
+        "items": 1125,
+        "expected": 1125,
+        "status": "complete"
+      },
+      {
+        "month": "2016-06",
+        "harvested": "2026-08-24",
+        "items": 516,
+        "expected": 516,
+        "status": "complete"
+      },
+      {
+        "month": "2016-07",
+        "harvested": "2026-08-24",
+        "items": 742,
+        "expected": 742,
+        "status": "complete"
+      },
+      {
+        "month": "2016-08",
+        "harvested": "2026-08-24",
+        "items": 1100,
+        "expected": 1100,
+        "status": "complete"
+      },
+      {
+        "month": "2016-09",
+        "harvested": "2026-08-24",
+        "items": 596,
+        "expected": 596,
+        "status": "complete"
+      },
+      {
+        "month": "2016-10",
+        "harvested": "2026-08-24",
+        "items": 926,
+        "expected": 926,
+        "status": "complete"
+      },
+      {
+        "month": "2016-11",
+        "harvested": "2026-08-24",
+        "items": 1034,
+        "expected": 1034,
+        "status": "complete"
+      },
+      {
+        "month": "2016-12",
+        "harvested": "2026-08-24",
+        "items": 487,
+        "expected": 487,
+        "status": "complete"
+      },
+      {
+        "month": "2017-01",
+        "harvested": "2026-08-24",
+        "items": 797,
+        "expected": 797,
+        "status": "complete"
+      },
+      {
+        "month": "2017-02",
+        "harvested": "2026-08-24",
+        "items": 732,
+        "expected": 732,
+        "status": "complete"
+      },
+      {
+        "month": "2017-03",
+        "harvested": "2026-08-24",
+        "items": 1098,
+        "expected": 1098,
+        "status": "complete"
+      },
+      {
+        "month": "2017-04",
+        "harvested": "2026-08-24",
+        "items": 1238,
+        "expected": 1238,
+        "status": "complete"
+      },
+      {
+        "month": "2017-05",
+        "harvested": "2026-08-24",
+        "items": 1253,
+        "expected": 1253,
+        "status": "complete"
+      },
+      {
+        "month": "2017-06",
+        "harvested": "2026-08-24",
+        "items": 406,
+        "expected": 406,
+        "status": "complete"
+      },
+      {
+        "month": "2017-07",
+        "harvested": "2026-08-24",
+        "items": 846,
+        "expected": 846,
+        "status": "complete"
+      },
+      {
+        "month": "2017-08",
+        "harvested": "2026-08-24",
+        "items": 1025,
+        "expected": 1025,
+        "status": "complete"
+      },
+      {
+        "month": "2017-09",
+        "harvested": "2026-08-24",
+        "items": 544,
+        "expected": 544,
+        "status": "complete"
+      },
+      {
+        "month": "2017-10",
+        "harvested": "2026-08-24",
+        "items": 1004,
+        "expected": 1004,
+        "status": "complete"
+      },
+      {
+        "month": "2017-11",
+        "harvested": "2026-08-24",
+        "items": 1059,
+        "expected": 1059,
+        "status": "complete"
+      },
+      {
+        "month": "2017-12",
+        "harvested": "2026-08-24",
+        "items": 624,
+        "expected": 624,
+        "status": "complete"
+      },
+      {
+        "month": "2018-01",
+        "harvested": "2026-08-24",
+        "items": 762,
+        "expected": 762,
+        "status": "complete"
+      },
+      {
+        "month": "2018-02",
+        "harvested": "2026-08-24",
+        "items": 837,
+        "expected": 837,
+        "status": "complete"
+      },
+      {
+        "month": "2018-03",
+        "harvested": "2026-08-24",
+        "items": 1120,
+        "expected": 1120,
+        "status": "complete"
+      },
+      {
+        "month": "2018-04",
+        "harvested": "2026-08-24",
+        "items": 1254,
+        "expected": 1254,
+        "status": "complete"
+      },
+      {
+        "month": "2018-05",
+        "harvested": "2026-08-24",
+        "items": 1300,
+        "expected": 1300,
+        "status": "complete"
+      },
+      {
+        "month": "2018-06",
+        "harvested": "2026-08-24",
+        "items": 639,
+        "expected": 639,
+        "status": "complete"
+      },
+      {
+        "month": "2018-07",
+        "harvested": "2026-08-24",
+        "items": 963,
+        "expected": 963,
+        "status": "complete"
+      },
+      {
+        "month": "2018-08",
+        "harvested": "2026-08-24",
+        "items": 1018,
+        "expected": 1018,
+        "status": "complete"
+      },
+      {
+        "month": "2018-09",
+        "harvested": "2026-08-24",
+        "items": 576,
+        "expected": 576,
+        "status": "complete"
+      },
+      {
+        "month": "2018-10",
+        "harvested": "2026-08-24",
+        "items": 942,
+        "expected": 942,
+        "status": "complete"
+      },
+      {
+        "month": "2018-11",
+        "harvested": "2026-08-24",
+        "items": 1039,
+        "expected": 1039,
+        "status": "complete"
+      },
+      {
+        "month": "2018-12",
+        "harvested": "2026-08-24",
+        "items": 627,
+        "expected": 627,
+        "status": "complete"
+      },
+      {
+        "month": "2019-01",
+        "harvested": "2026-08-24",
+        "items": 788,
+        "expected": 788,
+        "status": "complete"
+      },
+      {
+        "month": "2019-02",
+        "harvested": "2026-08-24",
+        "items": 1015,
+        "expected": 1015,
+        "status": "complete"
+      },
+      {
+        "month": "2019-03",
+        "harvested": "2026-08-24",
+        "items": 1245,
+        "expected": 1245,
+        "status": "complete"
+      },
+      {
+        "month": "2019-04",
+        "harvested": "2026-08-24",
+        "items": 1195,
+        "expected": 1195,
+        "status": "complete"
+      },
+      {
+        "month": "2019-05",
+        "harvested": "2026-08-24",
+        "items": 1239,
+        "expected": 1239,
+        "status": "complete"
+      },
+      {
+        "month": "2019-06",
+        "harvested": "2026-08-24",
+        "items": 587,
+        "expected": 587,
+        "status": "complete"
+      },
+      {
+        "month": "2019-07",
+        "harvested": "2026-08-24",
+        "items": 965,
+        "expected": 965,
+        "status": "complete"
+      },
+      {
+        "month": "2019-08",
+        "harvested": "2026-08-24",
+        "items": 871,
+        "expected": 871,
+        "status": "complete"
+      },
+      {
+        "month": "2019-09",
+        "harvested": "2026-08-24",
+        "items": 917,
+        "expected": 917,
+        "status": "complete"
+      },
+      {
+        "month": "2019-10",
+        "harvested": "2026-08-24",
+        "items": 885,
+        "expected": 885,
+        "status": "complete"
+      },
+      {
+        "month": "2019-11",
+        "harvested": "2026-08-24",
+        "items": 986,
+        "expected": 986,
+        "status": "complete"
+      },
+      {
+        "month": "2019-12",
+        "harvested": "2026-08-24",
+        "items": 637,
+        "expected": 637,
+        "status": "complete"
+      },
+      {
+        "month": "2020-01",
+        "harvested": "2026-08-24",
+        "items": 778,
+        "expected": 778,
+        "status": "complete"
+      },
+      {
+        "month": "2020-02",
+        "harvested": "2026-08-24",
+        "items": 975,
+        "expected": 975,
+        "status": "complete"
+      },
+      {
+        "month": "2020-03",
+        "harvested": "2026-08-24",
+        "items": 1224,
+        "expected": 1224,
+        "status": "complete"
+      },
+      {
+        "month": "2020-04",
+        "harvested": "2026-08-24",
+        "items": 1081,
+        "expected": 1081,
+        "status": "complete"
+      },
+      {
+        "month": "2020-05",
+        "harvested": "2026-08-24",
+        "items": 736,
+        "expected": 736,
+        "status": "complete"
+      },
+      {
+        "month": "2020-06",
+        "harvested": "2026-08-24",
+        "items": 1075,
+        "expected": 1075,
+        "status": "complete"
+      },
+      {
+        "month": "2020-07",
+        "harvested": "2026-08-24",
+        "items": 976,
+        "expected": 976,
+        "status": "complete"
+      },
+      {
+        "month": "2020-08",
+        "harvested": "2026-08-24",
+        "items": 1007,
+        "expected": 1007,
+        "status": "complete"
+      },
+      {
+        "month": "2020-09",
+        "harvested": "2026-08-24",
+        "items": 740,
+        "expected": 740,
+        "status": "complete"
+      },
+      {
+        "month": "2020-10",
+        "harvested": "2026-08-24",
+        "items": 777,
+        "expected": 777,
+        "status": "complete"
+      },
+      {
+        "month": "2020-11",
+        "harvested": "2026-08-24",
+        "items": 1200,
+        "expected": 1200,
+        "status": "complete"
+      },
+      {
+        "month": "2020-12",
+        "harvested": "2026-08-24",
+        "items": 708,
+        "expected": 708,
+        "status": "complete"
+      },
+      {
+        "month": "2021-01",
+        "harvested": "2026-08-24",
+        "items": 840,
+        "expected": 840,
+        "status": "complete"
+      },
+      {
+        "month": "2021-02",
+        "harvested": "2026-08-24",
+        "items": 869,
+        "expected": 869,
+        "status": "complete"
+      },
+      {
+        "month": "2021-03",
+        "harvested": "2026-08-24",
+        "items": 1237,
+        "expected": 1237,
+        "status": "complete"
+      },
+      {
+        "month": "2021-04",
+        "harvested": "2026-08-24",
+        "items": 1183,
+        "expected": 1183,
+        "status": "complete"
+      },
+      {
+        "month": "2021-05",
+        "harvested": "2026-08-24",
+        "items": 1024,
+        "expected": 1024,
+        "status": "complete"
+      },
+      {
+        "month": "2021-06",
+        "harvested": "2026-08-24",
+        "items": 1040,
+        "expected": 1040,
+        "status": "complete"
+      },
+      {
+        "month": "2021-07",
+        "harvested": "2026-08-24",
+        "items": 801,
+        "expected": 801,
+        "status": "complete"
+      },
+      {
+        "month": "2021-08",
+        "harvested": "2026-08-24",
+        "items": 1166,
+        "expected": 1166,
+        "status": "complete"
+      },
+      {
+        "month": "2021-09",
+        "harvested": "2026-08-24",
+        "items": 783,
+        "expected": 783,
+        "status": "complete"
+      },
+      {
+        "month": "2021-10",
+        "harvested": "2026-08-24",
+        "items": 1042,
+        "expected": 1042,
+        "status": "complete"
+      },
+      {
+        "month": "2021-11",
+        "harvested": "2026-08-24",
+        "items": 1353,
+        "expected": 1353,
+        "status": "complete"
+      },
+      {
+        "month": "2021-12",
+        "harvested": "2026-08-24",
+        "items": 831,
+        "expected": 831,
+        "status": "complete"
+      },
+      {
+        "month": "2022-01",
+        "harvested": "2026-08-24",
+        "items": 949,
+        "expected": 949,
+        "status": "complete"
+      },
+      {
+        "month": "2022-02",
+        "harvested": "2026-08-24",
+        "items": 804,
+        "expected": 804,
+        "status": "complete"
+      },
+      {
+        "month": "2022-03",
+        "harvested": "2026-08-24",
+        "items": 1358,
+        "expected": 1358,
+        "status": "complete"
+      },
+      {
+        "month": "2022-04",
+        "harvested": "2026-08-24",
+        "items": 1312,
+        "expected": 1312,
+        "status": "complete"
+      },
+      {
+        "month": "2022-05",
+        "harvested": "2026-08-24",
+        "items": 1249,
+        "expected": 1249,
+        "status": "complete"
+      },
+      {
+        "month": "2022-06",
+        "harvested": "2026-08-24",
+        "items": 908,
+        "expected": 908,
+        "status": "complete"
+      },
+      {
+        "month": "2022-07",
+        "harvested": "2026-08-24",
+        "items": 1001,
+        "expected": 1001,
+        "status": "complete"
+      },
+      {
+        "month": "2022-08",
+        "harvested": "2026-08-24",
+        "items": 1299,
+        "expected": 1299,
+        "status": "complete"
+      },
+      {
+        "month": "2022-09",
+        "harvested": "2026-08-24",
+        "items": 914,
+        "expected": 914,
+        "status": "complete"
+      },
+      {
+        "month": "2022-10",
+        "harvested": "2026-08-24",
+        "items": 1216,
+        "expected": 1216,
+        "status": "complete"
+      },
+      {
+        "month": "2022-11",
+        "harvested": "2026-08-24",
+        "items": 1385,
+        "expected": 1385,
+        "status": "complete"
+      },
+      {
+        "month": "2022-12",
+        "harvested": "2026-08-24",
+        "items": 716,
+        "expected": 716,
+        "status": "complete"
+      },
+      {
+        "month": "2023-01",
+        "harvested": "2026-08-24",
+        "items": 987,
+        "expected": 987,
+        "status": "complete"
+      },
+      {
+        "month": "2023-02",
+        "harvested": "2026-08-24",
+        "items": 951,
+        "expected": 951,
+        "status": "complete"
+      },
+      {
+        "month": "2023-03",
+        "harvested": "2026-08-24",
+        "items": 1144,
+        "expected": 1144,
+        "status": "complete"
+      },
+      {
+        "month": "2023-04",
+        "harvested": "2026-08-24",
+        "items": 1108,
+        "expected": 1108,
+        "status": "complete"
+      },
+      {
+        "month": "2023-05",
+        "harvested": "2026-08-24",
+        "items": 1424,
+        "expected": 1424,
+        "status": "complete"
+      },
+      {
+        "month": "2023-06",
+        "harvested": "2026-08-24",
+        "items": 796,
+        "expected": 796,
+        "status": "complete"
+      },
+      {
+        "month": "2023-07",
+        "harvested": "2026-08-24",
+        "items": 1094,
+        "expected": 1094,
+        "status": "complete"
+      },
+      {
+        "month": "2023-08",
+        "harvested": "2026-08-24",
+        "items": 1299,
+        "expected": 1299,
+        "status": "complete"
+      },
+      {
+        "month": "2023-09",
+        "harvested": "2026-08-24",
+        "items": 887,
+        "expected": 887,
+        "status": "complete"
+      },
+      {
+        "month": "2023-10",
+        "harvested": "2026-08-24",
+        "items": 1278,
+        "expected": 1278,
+        "status": "complete"
+      },
+      {
+        "month": "2023-11",
+        "harvested": "2026-08-24",
+        "items": 1456,
+        "expected": 1456,
+        "status": "complete"
+      },
+      {
+        "month": "2023-12",
+        "harvested": "2026-08-24",
+        "items": 905,
+        "expected": 905,
+        "status": "complete"
+      },
+      {
+        "month": "2024-01",
+        "harvested": "2026-08-24",
+        "items": 1160,
+        "expected": 1160,
+        "status": "complete"
+      },
+      {
+        "month": "2024-02",
+        "harvested": "2026-08-24",
+        "items": 1193,
+        "expected": 1193,
+        "status": "complete"
+      },
+      {
+        "month": "2024-03",
+        "harvested": "2026-08-24",
+        "items": 1317,
+        "expected": 1317,
+        "status": "complete"
+      },
+      {
+        "month": "2024-04",
+        "harvested": "2026-08-24",
+        "items": 1442,
+        "expected": 1442,
+        "status": "complete"
+      },
+      {
+        "month": "2024-05",
+        "harvested": "2026-08-24",
+        "items": 1566,
+        "expected": 1566,
+        "status": "complete"
+      },
+      {
+        "month": "2024-06",
+        "harvested": "2026-08-24",
+        "items": 868,
+        "expected": 868,
+        "status": "complete"
+      },
+      {
+        "month": "2024-07",
+        "harvested": "2026-08-24",
+        "items": 1520,
+        "expected": 1520,
+        "status": "complete"
+      },
+      {
+        "month": "2024-08",
+        "harvested": "2026-08-24",
+        "items": 1273,
+        "expected": 1273,
+        "status": "complete"
+      },
+      {
+        "month": "2024-09",
+        "harvested": "2026-08-24",
+        "items": 1185,
+        "expected": 1185,
+        "status": "complete"
+      },
+      {
+        "month": "2024-10",
+        "harvested": "2026-08-24",
+        "items": 1394,
+        "expected": 1394,
+        "status": "complete"
+      },
+      {
+        "month": "2024-11",
+        "harvested": "2026-08-24",
+        "items": 1396,
+        "expected": 1396,
+        "status": "complete"
+      },
+      {
+        "month": "2024-12",
+        "harvested": "2026-08-24",
+        "items": 1104,
+        "expected": 1104,
+        "status": "complete"
+      },
+      {
+        "month": "2025-01",
+        "harvested": "2026-08-24",
+        "items": 1199,
+        "expected": 1199,
+        "status": "complete"
+      },
+      {
+        "month": "2025-02",
+        "harvested": "2026-08-24",
+        "items": 1082,
+        "expected": 1082,
+        "status": "complete"
+      },
+      {
+        "month": "2025-03",
+        "harvested": "2026-08-24",
+        "items": 1267,
+        "expected": 1267,
+        "status": "complete"
+      },
+      {
+        "month": "2025-04",
+        "harvested": "2026-08-24",
+        "items": 1555,
+        "expected": 1555,
+        "status": "complete"
+      },
+      {
+        "month": "2025-05",
+        "harvested": "2026-08-24",
+        "items": 1584,
+        "expected": 1584,
+        "status": "complete"
+      },
+      {
+        "month": "2025-06",
+        "harvested": "2026-08-24",
+        "items": 1220,
+        "expected": 1220,
+        "status": "complete"
+      },
+      {
+        "month": "2025-07",
+        "harvested": "2026-08-24",
+        "items": 1480,
+        "expected": 1480,
+        "status": "complete"
+      },
+      {
+        "month": "2025-08",
+        "harvested": "2026-08-24",
+        "items": 1541,
+        "expected": 1541,
+        "status": "complete"
+      },
+      {
+        "month": "2025-09",
+        "harvested": "2026-08-24",
+        "items": 1195,
+        "expected": 1195,
+        "status": "complete"
+      },
+      {
+        "month": "2025-10",
+        "harvested": "2026-08-24",
+        "items": 1386,
+        "expected": 1386,
+        "status": "complete"
+      },
+      {
+        "month": "2025-11",
+        "harvested": "2026-08-24",
+        "items": 1584,
+        "expected": 1584,
+        "status": "complete"
+      },
+      {
+        "month": "2025-12",
+        "harvested": "2026-08-24",
+        "items": 1292,
+        "expected": 1292,
+        "status": "complete"
+      },
+      {
+        "month": "2026-01",
+        "harvested": "2026-08-23",
+        "items": 1228,
+        "expected": 1228,
+        "status": "complete"
+      },
+      {
+        "month": "2026-02",
+        "harvested": "2026-08-24",
+        "items": 1180,
+        "expected": 1180,
+        "status": "complete"
+      },
+      {
+        "month": "2026-03",
+        "harvested": "2026-08-24",
+        "items": 1539,
+        "expected": 1539,
+        "status": "complete"
+      },
+      {
+        "month": "2026-04",
+        "harvested": "2026-08-24",
+        "items": 1744,
+        "expected": 1744,
+        "status": "complete"
+      },
+      {
+        "month": "2026-05",
+        "harvested": "2026-08-24",
+        "items": 1380,
+        "expected": 1380,
+        "status": "complete"
+      },
+      {
+        "month": "2026-06",
+        "harvested": "2026-08-24",
+        "items": 1575,
+        "expected": 1575,
+        "status": "complete"
+      },
+      {
+        "month": "2026-07",
+        "harvested": "2026-08-24",
+        "items": 1458,
+        "expected": 1458,
+        "status": "complete"
+      },
+      {
+        "month": "2026-08",
+        "harvested": "2026-09-01",
+        "items": 1666,
+        "expected": 1666,
+        "status": "complete"
+      },
+      {
+        "month": "2026-09",
+        "harvested": "2026-09-01",
+        "items": 3,
+        "expected": 3,
+        "status": "complete"
+      }
+    ],
+    "completeMonths": 261
+  },
+  "fra": {
+    "source": "https://fra.gov.eg/wp-json/wp/v2",
+    "items": 555,
+    "failures": {}
+  },
+  "issuers": [
+    {
+      "ticker": "AALR",
+      "egxFilingCount": 696,
+      "latestEgxFilingId": "294193",
+      "latestEgxFilingAt": "2026-09-01T08:59:30",
+      "candidateIssuerWebsite": "https://www.gclr.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AALR/profile",
+      "websiteStatus": {
+        "status": "unreachable",
+        "error": "curl: (7) Failed to connect to www.gclr.com.eg port 443 after 14 ms: Couldn't connect to server",
+        "probedAt": "2026-08-28T16:06:51.338067+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ABUK",
+      "egxFilingCount": 658,
+      "latestEgxFilingId": "294044",
+      "latestEgxFilingAt": "2026-08-30T12:38:26",
+      "candidateIssuerWebsite": "https://www.abuqir.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://abuqir.net/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:06:53.522216+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ACAMD",
+      "egxFilingCount": 489,
+      "latestEgxFilingId": "293876",
+      "latestEgxFilingAt": "2026-08-25T14:11:24",
+      "candidateIssuerWebsite": "https://www.arabco-amd.com/default.aspx",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ACAMD/profile",
+      "websiteStatus": {
+        "status": "unreachable",
+        "error": "curl: (60) SSL certificate problem: self signed certificate\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore ",
+        "probedAt": "2026-08-28T16:06:53.996469+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ACAP",
+      "egxFilingCount": 169,
+      "latestEgxFilingId": "292676",
+      "latestEgxFilingAt": "2026-08-10T09:11:12",
+      "candidateIssuerWebsite": "https://www.acapitalholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ACAP/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.acapitalholding.com/",
+        "contentType": "text/html",
+        "probedAt": "2026-08-28T16:06:54.849325+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ACFR",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286162",
+      "latestEgxFilingAt": "2026-04-08T16:10:55",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "ACGC",
+      "egxFilingCount": 745,
+      "latestEgxFilingId": "293641",
+      "latestEgxFilingAt": "2026-08-20T10:54:59",
+      "candidateIssuerWebsite": "https://www.arabcot.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ACGC/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.arabcot.com/",
+        "contentType": "text/html; charset=utf-8",
+        "probedAt": "2026-08-28T16:06:55.259406+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ACTF",
+      "egxFilingCount": 126,
+      "latestEgxFilingId": "293772",
+      "latestEgxFilingAt": "2026-08-24T10:37:06",
+      "candidateIssuerWebsite": "https://www.act-fin.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ACTF/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://act-fin.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:06:57.752383+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ADCI",
+      "egxFilingCount": 833,
+      "latestEgxFilingId": "292261",
+      "latestEgxFilingAt": "2026-08-02T09:58:01",
+      "candidateIssuerWebsite": "https://www.adcopharma-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADCI/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.adcopharma-eg.com/",
+        "contentType": "text/html; charset=utf-8",
+        "probedAt": "2026-08-28T16:06:58.141014+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ADIB",
+      "egxFilingCount": 503,
+      "latestEgxFilingId": "293112",
+      "latestEgxFilingAt": "2026-08-13T15:29:41",
+      "candidateIssuerWebsite": "https://www.adib.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADIB/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.adib.eg/",
+        "contentType": "text/html; charset=utf-8",
+        "probedAt": "2026-08-28T16:06:58.357849+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ADPC",
+      "egxFilingCount": 673,
+      "latestEgxFilingId": "293728",
+      "latestEgxFilingAt": "2026-08-23T10:59:18",
+      "candidateIssuerWebsite": "https://www.arabdairy.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADPC/profile",
+      "websiteStatus": {
+        "status": "unreachable",
+        "error": "curl: (60) SSL: no alternative certificate subject name matches target host name 'www.arabdairy.net'\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify th",
+        "probedAt": "2026-08-28T16:06:58.845942+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ADRI",
+      "egxFilingCount": 461,
+      "latestEgxFilingId": "293843",
+      "latestEgxFilingAt": "2026-08-24T16:20:01",
+      "candidateIssuerWebsite": "https://www.arab-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADRI/profile",
+      "websiteStatus": {
+        "status": "http_error",
+        "httpStatus": 403,
+        "effectiveUrl": "https://www.arab-egypt.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:06:59.101521+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AFDI",
+      "egxFilingCount": 487,
+      "latestEgxFilingId": "293849",
+      "latestEgxFilingAt": "2026-08-25T09:58:10",
+      "candidateIssuerWebsite": "https://www.adi-alahly.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AFDI/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.adi-alahly.com/",
+        "contentType": "text/html; charset=utf-8",
+        "probedAt": "2026-08-28T16:06:59.392568+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AFMC",
+      "egxFilingCount": 594,
+      "latestEgxFilingId": "292885",
+      "latestEgxFilingAt": "2026-08-12T13:17:42",
+      "candidateIssuerWebsite": "https://www.alexflourmills.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AFMC/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.alexflourmills.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:00.295047+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AIDC",
+      "egxFilingCount": 61,
+      "latestEgxFilingId": "294145",
+      "latestEgxFilingAt": "2026-08-31T12:49:32",
+      "candidateIssuerWebsite": "https://www.aid-invest.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AIDC/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://aid-holding.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:03.204249+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AIFI",
+      "egxFilingCount": 327,
+      "latestEgxFilingId": "294030",
+      "latestEgxFilingAt": "2026-08-30T11:46:18",
+      "candidateIssuerWebsite": "https://www.atlasegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AIFI/profile",
+      "websiteStatus": {
+        "status": "unreachable",
+        "error": "curl: (60) SSL: no alternative certificate subject name matches target host name 'www.atlasegypt.com'\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify t",
+        "probedAt": "2026-08-28T16:07:03.287824+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AIH",
+      "egxFilingCount": 322,
+      "latestEgxFilingId": "294184",
+      "latestEgxFilingAt": "2026-08-31T15:06:23",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "AJWA",
+      "egxFilingCount": 682,
+      "latestEgxFilingId": "294191",
+      "latestEgxFilingAt": "2026-08-31T15:33:06",
+      "candidateIssuerWebsite": "https://www.ajwa-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AJWA/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://ajwa-egypt.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:05.205316+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ALCN",
+      "egxFilingCount": 1032,
+      "latestEgxFilingId": "293354",
+      "latestEgxFilingAt": "2026-08-17T09:22:52",
+      "candidateIssuerWebsite": "https://www.alexcont.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ALCN/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://alexcont.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:09.093637+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ALEX",
+      "egxFilingCount": 411,
+      "latestEgxFilingId": "201130",
+      "latestEgxFilingAt": "2020-08-13T15:22:39",
+      "candidateIssuerWebsite": "https://titancementegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ALEX/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://titancementegypt.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:10.697039+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ALUM",
+      "egxFilingCount": 389,
+      "latestEgxFilingId": "293286",
+      "latestEgxFilingAt": "2026-08-16T12:52:57",
+      "candidateIssuerWebsite": "https://www.arabaluminum.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ALUM/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://www.arabaluminum.com/",
+        "contentType": "text/html",
+        "probedAt": "2026-08-28T16:07:11.238208+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AMER",
+      "egxFilingCount": 793,
+      "latestEgxFilingId": "293137",
+      "latestEgxFilingAt": "2026-08-13T16:26:54",
+      "candidateIssuerWebsite": "https://www.amer-group.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMER/profile",
+      "websiteStatus": {
+        "status": "reachable",
+        "httpStatus": 200,
+        "effectiveUrl": "https://amer-group.com/",
+        "contentType": "text/html; charset=UTF-8",
+        "probedAt": "2026-08-28T16:07:13.420935+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AMES",
+      "egxFilingCount": 666,
+      "latestEgxFilingId": "293967",
+      "latestEgxFilingAt": "2026-08-26T16:13:11",
+      "candidateIssuerWebsite": "https://www.anmchosp.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMES/profile",
+      "websiteStatus": {
+        "status": "unreachable",
+        "error": "curl: (28) Operation timed out after 10000 milliseconds with 0 bytes received",
+        "probedAt": "2026-08-28T16:07:23.456896+00:00"
+      },
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AMIA",
+      "egxFilingCount": 500,
+      "latestEgxFilingId": "293583",
+      "latestEgxFilingAt": "2026-08-19T12:18:13",
+      "candidateIssuerWebsite": "https://www.amic-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AMII",
+      "egxFilingCount": 12,
+      "latestEgxFilingId": "294047",
+      "latestEgxFilingAt": "2026-08-30T13:01:47",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "AMOC",
+      "egxFilingCount": 794,
+      "latestEgxFilingId": "293305",
+      "latestEgxFilingAt": "2026-08-16T13:25:57",
+      "candidateIssuerWebsite": "https://www.amoceg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMOC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AMPI",
+      "egxFilingCount": 523,
+      "latestEgxFilingId": "294038",
+      "latestEgxFilingAt": "2026-08-30T12:03:53",
+      "candidateIssuerWebsite": "https://www.almoasher.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMPI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ANCC",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286157",
+      "latestEgxFilingAt": "2026-04-08T15:50:40",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "APPC",
+      "egxFilingCount": 363,
+      "latestEgxFilingId": "205160",
+      "latestEgxFilingAt": "2020-12-13T14:27:48",
+      "candidateIssuerWebsite": "https://www.app-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/APPC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "APSW",
+      "egxFilingCount": 1040,
+      "latestEgxFilingId": "293313",
+      "latestEgxFilingAt": "2026-08-16T13:41:50",
+      "candidateIssuerWebsite": "https://www.arabpolvara.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/APSW/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ARAB",
+      "egxFilingCount": 30,
+      "latestEgxFilingId": "294051",
+      "latestEgxFilingAt": "2026-08-30T13:40:13",
+      "candidateIssuerWebsite": "https://www.ad-holding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ARCC",
+      "egxFilingCount": 438,
+      "latestEgxFilingId": "294049",
+      "latestEgxFilingAt": "2026-08-30T13:31:59",
+      "candidateIssuerWebsite": "https://www.arabiancement.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ARCC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AREH",
+      "egxFilingCount": 493,
+      "latestEgxFilingId": "293991",
+      "latestEgxFilingAt": "2026-08-30T09:58:07",
+      "candidateIssuerWebsite": "https://www.areheg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AREH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ASCM",
+      "egxFilingCount": 661,
+      "latestEgxFilingId": "293900",
+      "latestEgxFilingAt": "2026-08-26T10:17:38",
+      "candidateIssuerWebsite": "https://www.ascom.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ASCM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ASPI",
+      "egxFilingCount": 195,
+      "latestEgxFilingId": "294126",
+      "latestEgxFilingAt": "2026-08-31T11:46:05",
+      "candidateIssuerWebsite": "https://aspireholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ASPI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ATLC",
+      "egxFilingCount": 396,
+      "latestEgxFilingId": "293519",
+      "latestEgxFilingAt": "2026-08-18T13:53:10",
+      "candidateIssuerWebsite": "https://www.at-lease.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ATLC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ATQA",
+      "egxFilingCount": 493,
+      "latestEgxFilingId": "293284",
+      "latestEgxFilingAt": "2026-08-16T12:51:53",
+      "candidateIssuerWebsite": "https://www.misrns.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ATQA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "AXPH",
+      "egxFilingCount": 631,
+      "latestEgxFilingId": "293831",
+      "latestEgxFilingAt": "2026-08-24T15:06:00",
+      "candidateIssuerWebsite": "https://www.alexcopharma.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AXPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BIDI",
+      "egxFilingCount": 207,
+      "latestEgxFilingId": "293646",
+      "latestEgxFilingAt": "2026-08-20T11:07:19",
+      "candidateIssuerWebsite": "https://bid-investment.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BIDI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BIGP",
+      "egxFilingCount": 556,
+      "latestEgxFilingId": "294041",
+      "latestEgxFilingAt": "2026-08-30T12:10:45",
+      "candidateIssuerWebsite": "https://www.big.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BIGP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BINV",
+      "egxFilingCount": 400,
+      "latestEgxFilingId": "293139",
+      "latestEgxFilingAt": "2026-08-13T16:32:49",
+      "candidateIssuerWebsite": "https://www.binvestmentsegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BINV/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BIOC",
+      "egxFilingCount": 523,
+      "latestEgxFilingId": "293084",
+      "latestEgxFilingAt": "2026-08-13T14:14:26",
+      "candidateIssuerWebsite": "https://www.gsk.com/en-gb/locations/egypt",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BIOC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BONY",
+      "egxFilingCount": 51,
+      "latestEgxFilingId": "293346",
+      "latestEgxFilingAt": "2026-08-16T15:45:31",
+      "candidateIssuerWebsite": "https://www.bonyanegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BONY/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "BTFH",
+      "egxFilingCount": 460,
+      "latestEgxFilingId": "293767",
+      "latestEgxFilingAt": "2026-08-24T09:24:43",
+      "candidateIssuerWebsite": "https://www.beltoneholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/BTFH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CAED",
+      "egxFilingCount": 391,
+      "latestEgxFilingId": "293885",
+      "latestEgxFilingAt": "2026-08-26T08:54:56",
+      "candidateIssuerWebsite": "https://www.cairoedu.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CAED/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CANA",
+      "egxFilingCount": 472,
+      "latestEgxFilingId": "293587",
+      "latestEgxFilingAt": "2026-08-19T14:48:48",
+      "candidateIssuerWebsite": "https://www.scbank.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CANA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CCAP",
+      "egxFilingCount": 38,
+      "latestEgxFilingId": "291865",
+      "latestEgxFilingAt": "2026-07-26T09:55:41",
+      "candidateIssuerWebsite": "https://www.qalaaholdings.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CCAP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CCRS",
+      "egxFilingCount": 553,
+      "latestEgxFilingId": "294034",
+      "latestEgxFilingAt": "2026-08-30T11:53:56",
+      "candidateIssuerWebsite": "https://www.g-canadian-arsi.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CCRS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CEFM",
+      "egxFilingCount": 713,
+      "latestEgxFilingId": "294010",
+      "latestEgxFilingAt": "2026-08-30T10:29:49",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CEFM/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "CERA",
+      "egxFilingCount": 415,
+      "latestEgxFilingId": "293241",
+      "latestEgxFilingAt": "2026-08-16T11:39:17",
+      "candidateIssuerWebsite": "https://www.ceramicaremas.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CERA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CFGH",
+      "egxFilingCount": 86,
+      "latestEgxFilingId": "291988",
+      "latestEgxFilingAt": "2026-07-27T13:33:21",
+      "candidateIssuerWebsite": "https://www.concretefashiongroup.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CFGH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CICH",
+      "egxFilingCount": 412,
+      "latestEgxFilingId": "293712",
+      "latestEgxFilingAt": "2026-08-23T09:37:03",
+      "candidateIssuerWebsite": "https://www.cicapital.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CICH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CID",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "CIEB",
+      "egxFilingCount": 594,
+      "latestEgxFilingId": "292172",
+      "latestEgxFilingAt": "2026-07-30T10:28:43",
+      "candidateIssuerWebsite": "https://www.ca-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CIEB/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CIRA",
+      "egxFilingCount": 600,
+      "latestEgxFilingId": "292785",
+      "latestEgxFilingAt": "2026-08-11T15:21:17",
+      "candidateIssuerWebsite": "https://cira.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CIRA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CLHO",
+      "egxFilingCount": 653,
+      "latestEgxFilingId": "293697",
+      "latestEgxFilingAt": "2026-08-23T09:06:40",
+      "candidateIssuerWebsite": "https://www.cleopatrahospitals.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CLHO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CNFN",
+      "egxFilingCount": 178,
+      "latestEgxFilingId": "293037",
+      "latestEgxFilingAt": "2026-08-13T12:13:11",
+      "candidateIssuerWebsite": "https://www.contact.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CNFN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "COMI",
+      "egxFilingCount": 704,
+      "latestEgxFilingId": "293628",
+      "latestEgxFilingAt": "2026-08-20T09:55:27",
+      "candidateIssuerWebsite": "https://www.cibeg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/COMI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "COPR",
+      "egxFilingCount": 224,
+      "latestEgxFilingId": "294039",
+      "latestEgxFilingAt": "2026-08-30T12:04:43",
+      "candidateIssuerWebsite": "https://www.copper-invest.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/COPR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "COSG",
+      "egxFilingCount": 557,
+      "latestEgxFilingId": "294045",
+      "latestEgxFilingAt": "2026-08-30T12:47:52",
+      "candidateIssuerWebsite": "https://www.cairooil.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/COSG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CPCI",
+      "egxFilingCount": 674,
+      "latestEgxFilingId": "292373",
+      "latestEgxFilingAt": "2026-08-03T09:00:50",
+      "candidateIssuerWebsite": "https://www.kahirapharma.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CPCI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CPME",
+      "egxFilingCount": 72,
+      "latestEgxFilingId": "294065",
+      "latestEgxFilingAt": "2026-08-30T14:56:29",
+      "candidateIssuerWebsite": "https://www.catalystpartners.me/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CPME/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CRST",
+      "egxFilingCount": 98,
+      "latestEgxFilingId": "294192",
+      "latestEgxFilingAt": "2026-09-01T08:46:27",
+      "candidateIssuerWebsite": "https://www.creastmark.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CRST/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "CSAG",
+      "egxFilingCount": 624,
+      "latestEgxFilingId": "293905",
+      "latestEgxFilingAt": "2026-08-26T10:31:34",
+      "candidateIssuerWebsite": "https://www.canalshipping.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CSAG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DAPH",
+      "egxFilingCount": 655,
+      "latestEgxFilingId": "294055",
+      "latestEgxFilingAt": "2026-08-30T14:05:42",
+      "candidateIssuerWebsite": "https://www.Tameer.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DAPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DCCC",
+      "egxFilingCount": 4,
+      "latestEgxFilingId": "266372",
+      "latestEgxFilingAt": "2025-02-27T10:41:55",
+      "candidateIssuerWebsite": "https://www.dchc-egdam.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DCCC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DCRC",
+      "egxFilingCount": 483,
+      "latestEgxFilingId": "246478",
+      "latestEgxFilingAt": "2023-11-29T16:24:45",
+      "candidateIssuerWebsite": "https://www.deltaegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DCRC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DEIN",
+      "egxFilingCount": 591,
+      "latestEgxFilingId": "291325",
+      "latestEgxFilingAt": "2026-07-14T10:23:25",
+      "candidateIssuerWebsite": "https://www.delta-ins.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DGTZ",
+      "egxFilingCount": 186,
+      "latestEgxFilingId": "293888",
+      "latestEgxFilingAt": "2026-08-26T09:05:57",
+      "candidateIssuerWebsite": "https://www.digitize.org/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DGTZ/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DOMT",
+      "egxFilingCount": 389,
+      "latestEgxFilingId": "293901",
+      "latestEgxFilingAt": "2026-08-26T10:24:03",
+      "candidateIssuerWebsite": "https://www.domty.org/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DOMT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DSCW",
+      "egxFilingCount": 708,
+      "latestEgxFilingId": "293206",
+      "latestEgxFilingAt": "2026-08-16T10:51:32",
+      "candidateIssuerWebsite": "https://www.dice.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DSCW/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "DTPP",
+      "egxFilingCount": 422,
+      "latestEgxFilingId": "293043",
+      "latestEgxFilingAt": "2026-08-13T12:18:31",
+      "candidateIssuerWebsite": "https://www.deltaalex.org/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DTPP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EALR",
+      "egxFilingCount": 597,
+      "latestEgxFilingId": "293649",
+      "latestEgxFilingAt": "2026-08-20T11:14:45",
+      "candidateIssuerWebsite": "https://www.arclam.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EALR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EASB",
+      "egxFilingCount": 569,
+      "latestEgxFilingId": "294002",
+      "latestEgxFilingAt": "2026-08-30T10:12:35",
+      "candidateIssuerWebsite": "https://www.eacfn.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EASB/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EAST",
+      "egxFilingCount": 867,
+      "latestEgxFilingId": "293444",
+      "latestEgxFilingAt": "2026-08-18T09:30:40",
+      "candidateIssuerWebsite": "https://www.easternegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EAST/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EBSC",
+      "egxFilingCount": 436,
+      "latestEgxFilingId": "293311",
+      "latestEgxFilingAt": "2026-08-16T13:39:51",
+      "candidateIssuerWebsite": "https://www.osoolonline.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EBSC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ECAP",
+      "egxFilingCount": 384,
+      "latestEgxFilingId": "292523",
+      "latestEgxFilingAt": "2026-08-06T10:47:39",
+      "candidateIssuerWebsite": "https://www.gemma.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ECAP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EDFM",
+      "egxFilingCount": 682,
+      "latestEgxFilingId": "291705",
+      "latestEgxFilingAt": "2026-07-21T10:45:07",
+      "candidateIssuerWebsite": "https://www.eastdelta-mills.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EEII",
+      "egxFilingCount": 463,
+      "latestEgxFilingId": "293724",
+      "latestEgxFilingAt": "2026-08-23T10:08:05",
+      "candidateIssuerWebsite": "https://www.aei-wirecond.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EEII/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EEP",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "EFAC",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286159",
+      "latestEgxFilingAt": "2026-04-08T15:56:25",
+      "candidateIssuerWebsite": "https://www.efaco.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFAC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EFIC",
+      "egxFilingCount": 730,
+      "latestEgxFilingId": "293677",
+      "latestEgxFilingAt": "2026-08-20T12:03:13",
+      "candidateIssuerWebsite": "https://www.efic-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EFID",
+      "egxFilingCount": 607,
+      "latestEgxFilingId": "293664",
+      "latestEgxFilingAt": "2026-08-20T11:39:14",
+      "candidateIssuerWebsite": "https://www.edita.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFID/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EFIH",
+      "egxFilingCount": 324,
+      "latestEgxFilingId": "293769",
+      "latestEgxFilingAt": "2026-08-24T09:32:34",
+      "candidateIssuerWebsite": "https://www.efinanceinvestment.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EFIH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGAL",
+      "egxFilingCount": 753,
+      "latestEgxFilingId": "292809",
+      "latestEgxFilingAt": "2026-08-12T09:38:23",
+      "candidateIssuerWebsite": "https://www.egyptalum.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGAL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGAS",
+      "egxFilingCount": 625,
+      "latestEgxFilingId": "293160",
+      "latestEgxFilingAt": "2026-08-16T09:39:14",
+      "candidateIssuerWebsite": "https://www.egyptgas.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGAS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGBE",
+      "egxFilingCount": 660,
+      "latestEgxFilingId": "293047",
+      "latestEgxFilingAt": "2026-08-13T12:24:34",
+      "candidateIssuerWebsite": "https://www.eg-bank.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGBE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGCH",
+      "egxFilingCount": 1038,
+      "latestEgxFilingId": "292772",
+      "latestEgxFilingAt": "2026-08-11T13:01:43",
+      "candidateIssuerWebsite": "https://www.kimaegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGCH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGOTH",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "EGREF",
+      "egxFilingCount": 248,
+      "latestEgxFilingId": "294119",
+      "latestEgxFilingAt": "2026-08-31T11:08:59",
+      "candidateIssuerWebsite": "https://www.egy-fund.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGREF/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGSA",
+      "egxFilingCount": 541,
+      "latestEgxFilingId": "292944",
+      "latestEgxFilingAt": "2026-08-13T09:46:28",
+      "candidateIssuerWebsite": "https://www.nilesat.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGSA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGTS",
+      "egxFilingCount": 821,
+      "latestEgxFilingId": "293461",
+      "latestEgxFilingAt": "2026-08-18T10:45:26",
+      "candidateIssuerWebsite": "https://www.erc-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGTS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EGWA",
+      "egxFilingCount": 4,
+      "latestEgxFilingId": "265483",
+      "latestEgxFilingAt": "2025-02-05T15:02:46",
+      "candidateIssuerWebsite": "https://www.egywarehouses.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGWA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EHDR",
+      "egxFilingCount": 534,
+      "latestEgxFilingId": "292975",
+      "latestEgxFilingAt": "2026-08-13T10:27:38",
+      "candidateIssuerWebsite": "https://www.egy-housing.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EHDR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EITP",
+      "egxFilingCount": 468,
+      "latestEgxFilingId": "202052",
+      "latestEgxFilingAt": "2020-09-10T09:08:20",
+      "candidateIssuerWebsite": "https://www.ecitp-americana.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EITP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ELAB",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "290517",
+      "latestEgxFilingAt": "2026-06-28T16:25:17",
+      "candidateIssuerWebsite": "https://www.elab-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELAB/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ELEC",
+      "egxFilingCount": 998,
+      "latestEgxFilingId": "293763",
+      "latestEgxFilingAt": "2026-08-23T15:32:01",
+      "candidateIssuerWebsite": "https://www.ececables.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELEC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ELKA",
+      "egxFilingCount": 634,
+      "latestEgxFilingId": "293661",
+      "latestEgxFilingAt": "2026-08-20T11:33:42",
+      "candidateIssuerWebsite": "https://www.cairo-housing.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELKA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ELNA",
+      "egxFilingCount": 624,
+      "latestEgxFilingId": "292906",
+      "latestEgxFilingAt": "2026-08-12T15:19:30",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELNA/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "ELSH",
+      "egxFilingCount": 771,
+      "latestEgxFilingId": "293495",
+      "latestEgxFilingAt": "2026-08-18T13:05:31",
+      "candidateIssuerWebsite": "https://www.alshamscompany.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELSH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ELWA",
+      "egxFilingCount": 550,
+      "latestEgxFilingId": "293889",
+      "latestEgxFilingAt": "2026-08-26T09:12:00",
+      "candidateIssuerWebsite": "https://www.elwadi-inv.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ELWA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EMFD",
+      "egxFilingCount": 400,
+      "latestEgxFilingId": "292593",
+      "latestEgxFilingAt": "2026-08-09T10:25:07",
+      "candidateIssuerWebsite": "https://www.emaarmisr.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EMFD/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ENGC",
+      "egxFilingCount": 643,
+      "latestEgxFilingId": "294101",
+      "latestEgxFilingAt": "2026-08-31T10:23:37",
+      "candidateIssuerWebsite": "https://www.iconegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ENGC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ENPI",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "290518",
+      "latestEgxFilingAt": "2026-06-28T16:34:01",
+      "candidateIssuerWebsite": "https://www.enppi.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ENPI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EOSB",
+      "egxFilingCount": 647,
+      "latestEgxFilingId": "293338",
+      "latestEgxFilingAt": "2026-08-16T14:46:33",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EOSB/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "EPCO",
+      "egxFilingCount": 610,
+      "latestEgxFilingId": "293678",
+      "latestEgxFilingAt": "2026-08-20T12:05:49",
+      "candidateIssuerWebsite": "https://www.epco-chickina.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EPCO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EPPK",
+      "egxFilingCount": 851,
+      "latestEgxFilingId": "294187",
+      "latestEgxFilingAt": "2026-08-31T15:21:08",
+      "candidateIssuerWebsite": "https://www.ahramco.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EPPK/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ETEL",
+      "egxFilingCount": 1076,
+      "latestEgxFilingId": "293751",
+      "latestEgxFilingAt": "2026-08-23T13:46:50",
+      "candidateIssuerWebsite": "https://www.te.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ETEL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ETRS",
+      "egxFilingCount": 1095,
+      "latestEgxFilingId": "293721",
+      "latestEgxFilingAt": "2026-08-23T10:02:57",
+      "candidateIssuerWebsite": "https://www.egytrans.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ETRS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "EXPA",
+      "egxFilingCount": 787,
+      "latestEgxFilingId": "293824",
+      "latestEgxFilingAt": "2026-08-24T13:58:05",
+      "candidateIssuerWebsite": "https://www.ebank.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EXPA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FAIT",
+      "egxFilingCount": 26,
+      "latestEgxFilingId": "291455",
+      "latestEgxFilingAt": "2026-07-16T10:29:49",
+      "candidateIssuerWebsite": "https://www.faisalbank.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FAIT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FAITA",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "154671",
+      "latestEgxFilingAt": "2016-10-19T13:08:09",
+      "candidateIssuerWebsite": "https://www.faisalbank.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FAITA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FCMD",
+      "egxFilingCount": 25,
+      "latestEgxFilingId": "293982",
+      "latestEgxFilingAt": "2026-08-30T09:16:16",
+      "candidateIssuerWebsite": "https://www.icmiegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FCMD/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FIRE",
+      "egxFilingCount": 582,
+      "latestEgxFilingId": "294064",
+      "latestEgxFilingAt": "2026-08-30T14:48:05",
+      "candidateIssuerWebsite": "https://www.first-realtors.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FIRE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FNAR",
+      "egxFilingCount": 400,
+      "latestEgxFilingId": "294090",
+      "latestEgxFilingAt": "2026-08-31T09:43:06",
+      "candidateIssuerWebsite": "https://www.alfanar-eg.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FNAR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FTNS",
+      "egxFilingCount": 232,
+      "latestEgxFilingId": "293904",
+      "latestEgxFilingAt": "2026-08-26T10:28:43",
+      "candidateIssuerWebsite": "https://www.fitness-prime-elite.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "FWRY",
+      "egxFilingCount": 331,
+      "latestEgxFilingId": "293133",
+      "latestEgxFilingAt": "2026-08-13T16:18:36",
+      "candidateIssuerWebsite": "https://www.fawry.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FWRY/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GBCO",
+      "egxFilingCount": 128,
+      "latestEgxFilingId": "293584",
+      "latestEgxFilingAt": "2026-08-19T12:22:59",
+      "candidateIssuerWebsite": "https://www.gb-corporation.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GBCO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GDWA",
+      "egxFilingCount": 281,
+      "latestEgxFilingId": "293573",
+      "latestEgxFilingAt": "2026-08-19T11:43:07",
+      "candidateIssuerWebsite": "https://www.gadwa.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GDWA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GEOS",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "274644",
+      "latestEgxFilingAt": "2025-08-13T23:17:03",
+      "candidateIssuerWebsite": "https://www.geosegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GEOS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GGCC",
+      "egxFilingCount": 753,
+      "latestEgxFilingId": "293571",
+      "latestEgxFilingAt": "2026-08-19T11:24:35",
+      "candidateIssuerWebsite": "https://www.al-giza.com/Default.aspx",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GGCC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GGRN",
+      "egxFilingCount": 83,
+      "latestEgxFilingId": "293292",
+      "latestEgxFilingAt": "2026-08-16T13:02:07",
+      "candidateIssuerWebsite": "https://www.gogreen-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GGRN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GIHD",
+      "egxFilingCount": 412,
+      "latestEgxFilingId": "292840",
+      "latestEgxFilingAt": "2026-08-12T10:53:06",
+      "candidateIssuerWebsite": "https://www.islamicgharbia.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GIHD/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GMCI",
+      "egxFilingCount": 617,
+      "latestEgxFilingId": "293650",
+      "latestEgxFilingAt": "2026-08-20T11:16:15",
+      "candidateIssuerWebsite": "https://gmcegypt.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GMCI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GOUR",
+      "egxFilingCount": 32,
+      "latestEgxFilingId": "293056",
+      "latestEgxFilingAt": "2026-08-13T12:40:41",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "GPIM",
+      "egxFilingCount": 26,
+      "latestEgxFilingId": "293347",
+      "latestEgxFilingAt": "2026-08-16T15:48:45",
+      "candidateIssuerWebsite": "https://www.eiud-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GPIM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GPPL",
+      "egxFilingCount": 706,
+      "latestEgxFilingId": "293726",
+      "latestEgxFilingAt": "2026-08-23T10:15:10",
+      "candidateIssuerWebsite": "https://www.goldenpyramidsplaza.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GPPL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GRCA",
+      "egxFilingCount": 532,
+      "latestEgxFilingId": "293977",
+      "latestEgxFilingAt": "2026-08-26T16:36:52",
+      "candidateIssuerWebsite": "https://www.grandcapital.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GSSC",
+      "egxFilingCount": 782,
+      "latestEgxFilingId": "294133",
+      "latestEgxFilingAt": "2026-08-31T12:23:45",
+      "candidateIssuerWebsite": "https://www.gcss-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GSSC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GTEX",
+      "egxFilingCount": 81,
+      "latestEgxFilingId": "291502",
+      "latestEgxFilingAt": "2026-07-16T14:40:19",
+      "candidateIssuerWebsite": "https://www.gtexholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GTEX/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GTHE",
+      "egxFilingCount": 396,
+      "latestEgxFilingId": "189695",
+      "latestEgxFilingAt": "2019-09-11T13:06:12",
+      "candidateIssuerWebsite": "https://www.gtelecom.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GTHE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "GTWL",
+      "egxFilingCount": 502,
+      "latestEgxFilingId": "294134",
+      "latestEgxFilingAt": "2026-08-31T12:28:54",
+      "candidateIssuerWebsite": "https://www.goldentex.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GTWL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "HAVC",
+      "egxFilingCount": 4,
+      "latestEgxFilingId": "293979",
+      "latestEgxFilingAt": "2026-08-26T16:47:50",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HAVC/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "HBCO",
+      "egxFilingCount": 77,
+      "latestEgxFilingId": "293689",
+      "latestEgxFilingAt": "2026-08-20T15:06:12",
+      "candidateIssuerWebsite": "https://www.heibco.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HBCO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "HDBK",
+      "egxFilingCount": 609,
+      "latestEgxFilingId": "292795",
+      "latestEgxFilingAt": "2026-08-12T09:01:17",
+      "candidateIssuerWebsite": "https://www.hdb-egy.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HDBK/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "HDST",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "263850",
+      "latestEgxFilingAt": "2024-12-26T09:18:17",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HDST/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "HELI",
+      "egxFilingCount": 1140,
+      "latestEgxFilingId": "292964",
+      "latestEgxFilingAt": "2026-08-13T10:15:27",
+      "candidateIssuerWebsite": "https://misr-algadida.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HELI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "HRHO",
+      "egxFilingCount": 693,
+      "latestEgxFilingId": "293826",
+      "latestEgxFilingAt": "2026-08-24T14:18:41",
+      "candidateIssuerWebsite": "https://www.efg-hermes.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/HRHO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IBCT",
+      "egxFilingCount": 415,
+      "latestEgxFilingId": "293405",
+      "latestEgxFilingAt": "2026-08-17T12:20:40",
+      "candidateIssuerWebsite": "https://www.thermokingegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IBCT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ICFC",
+      "egxFilingCount": 542,
+      "latestEgxFilingId": "293226",
+      "latestEgxFilingAt": "2026-08-16T11:11:46",
+      "candidateIssuerWebsite": "https://www.eldawlia.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ICFC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ICID",
+      "egxFilingCount": 640,
+      "latestEgxFilingId": "294082",
+      "latestEgxFilingAt": "2026-08-31T09:15:24",
+      "candidateIssuerWebsite": "https://www.alamiya-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ICID/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ICLE",
+      "egxFilingCount": 556,
+      "latestEgxFilingId": "293981",
+      "latestEgxFilingAt": "2026-08-30T09:04:27",
+      "candidateIssuerWebsite": "https://www.incolease.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ICLE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IDRE",
+      "egxFilingCount": 424,
+      "latestEgxFilingId": "293497",
+      "latestEgxFilingAt": "2026-08-18T13:11:32",
+      "candidateIssuerWebsite": "https://www.new-ismailia.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IDRE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IEEC",
+      "egxFilingCount": 178,
+      "latestEgxFilingId": "294186",
+      "latestEgxFilingAt": "2026-08-31T15:12:34",
+      "candidateIssuerWebsite": "https://www.ieec-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IEEC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IFAP",
+      "egxFilingCount": 606,
+      "latestEgxFilingId": "293841",
+      "latestEgxFilingAt": "2026-08-24T15:54:22",
+      "candidateIssuerWebsite": "https://www.mahaseel.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IFAP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "INEG",
+      "egxFilingCount": 514,
+      "latestEgxFilingId": "294042",
+      "latestEgxFilingAt": "2026-08-30T12:15:05",
+      "candidateIssuerWebsite": "https://www.iegegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/INEG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "INFI",
+      "egxFilingCount": 603,
+      "latestEgxFilingId": "294031",
+      "latestEgxFilingAt": "2026-08-30T11:48:55",
+      "candidateIssuerWebsite": "https://www.foodico.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/INFI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IRAX",
+      "egxFilingCount": 547,
+      "latestEgxFilingId": "243733",
+      "latestEgxFilingAt": "2023-10-04T15:03:26",
+      "candidateIssuerWebsite": "https://www.ezzsteel.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IRAX/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "IRON",
+      "egxFilingCount": 863,
+      "latestEgxFilingId": "291078",
+      "latestEgxFilingAt": "2026-07-09T10:21:20",
+      "candidateIssuerWebsite": "https://www.hadisolb.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/IRON/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ISMA",
+      "egxFilingCount": 502,
+      "latestEgxFilingId": "292764",
+      "latestEgxFilingAt": "2026-08-11T12:15:28",
+      "candidateIssuerWebsite": "https://www.ismailiamisrpoultry.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ISMA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ISMQ",
+      "egxFilingCount": 218,
+      "latestEgxFilingId": "294027",
+      "latestEgxFilingAt": "2026-08-30T11:35:36",
+      "candidateIssuerWebsite": "https://www.ismq-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ISMQ/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ISPH",
+      "egxFilingCount": 525,
+      "latestEgxFilingId": "293558",
+      "latestEgxFilingAt": "2026-08-19T10:37:09",
+      "candidateIssuerWebsite": "https://www.ibnsina-pharma.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ISPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "JUFO",
+      "egxFilingCount": 643,
+      "latestEgxFilingId": "292488",
+      "latestEgxFilingAt": "2026-08-05T10:53:25",
+      "candidateIssuerWebsite": "https://www.juhayna.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/JUFO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "KABO",
+      "egxFilingCount": 523,
+      "latestEgxFilingId": "294073",
+      "latestEgxFilingAt": "2026-08-30T16:30:44",
+      "candidateIssuerWebsite": "https://www.kabo.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KABO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "KNGC",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286149",
+      "latestEgxFilingAt": "2026-04-08T15:19:14",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "KORA",
+      "egxFilingCount": 23,
+      "latestEgxFilingId": "293675",
+      "latestEgxFilingAt": "2026-08-20T11:55:42",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "KRDI",
+      "egxFilingCount": 273,
+      "latestEgxFilingId": "294029",
+      "latestEgxFilingAt": "2026-08-30T11:43:53",
+      "candidateIssuerWebsite": "https://www.nahrelkhair.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KRDI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "KWIN",
+      "egxFilingCount": 557,
+      "latestEgxFilingId": "292576",
+      "latestEgxFilingAt": "2026-08-09T09:57:53",
+      "candidateIssuerWebsite": "https://www.caironational.org/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KWIN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "KZPC",
+      "egxFilingCount": 532,
+      "latestEgxFilingId": "293232",
+      "latestEgxFilingAt": "2026-08-16T11:29:25",
+      "candidateIssuerWebsite": "https://www.kz.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KZPC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "LCSW",
+      "egxFilingCount": 441,
+      "latestEgxFilingId": "293328",
+      "latestEgxFilingAt": "2026-08-16T14:21:33",
+      "candidateIssuerWebsite": "https://www.lecico.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/LCSW/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "LKGP",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "LUTS",
+      "egxFilingCount": 131,
+      "latestEgxFilingId": "294052",
+      "latestEgxFilingAt": "2026-08-30T13:55:12",
+      "candidateIssuerWebsite": "https://www.lotusagri.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/LUTS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MAAL",
+      "egxFilingCount": 707,
+      "latestEgxFilingId": "294127",
+      "latestEgxFilingAt": "2026-08-31T11:51:26",
+      "candidateIssuerWebsite": "https://www.marseilia.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MAAL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MASR",
+      "egxFilingCount": 274,
+      "latestEgxFilingId": "294083",
+      "latestEgxFilingAt": "2026-08-31T09:18:05",
+      "candidateIssuerWebsite": "https://www.madinetmasr.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MASR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MBEG",
+      "egxFilingCount": 48,
+      "latestEgxFilingId": "294006",
+      "latestEgxFilingAt": "2026-08-30T10:22:27",
+      "candidateIssuerWebsite": "https://mb.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MBEG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MBSC",
+      "egxFilingCount": 494,
+      "latestEgxFilingId": "294086",
+      "latestEgxFilingAt": "2026-08-31T09:29:17",
+      "candidateIssuerWebsite": "https://www.mbccegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MBSC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MCQE",
+      "egxFilingCount": 753,
+      "latestEgxFilingId": "292560",
+      "latestEgxFilingAt": "2026-08-06T15:18:43",
+      "candidateIssuerWebsite": "https://www.misrcementgroup.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MCQE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MCRO",
+      "egxFilingCount": 221,
+      "latestEgxFilingId": "294040",
+      "latestEgxFilingAt": "2026-08-30T12:07:06",
+      "candidateIssuerWebsite": "https://www.macro-egy.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MCRO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MEGM",
+      "egxFilingCount": 589,
+      "latestEgxFilingId": "292160",
+      "latestEgxFilingAt": "2026-07-29T15:21:15",
+      "candidateIssuerWebsite": "https://www.meg.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MEGM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MENA",
+      "egxFilingCount": 570,
+      "latestEgxFilingId": "292769",
+      "latestEgxFilingAt": "2026-08-11T12:22:24",
+      "candidateIssuerWebsite": "https://www.mena.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MENA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MEPA",
+      "egxFilingCount": 582,
+      "latestEgxFilingId": "293532",
+      "latestEgxFilingAt": "2026-08-18T14:42:09",
+      "candidateIssuerWebsite": "https://www.mepa.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MEPA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MFPC",
+      "egxFilingCount": 508,
+      "latestEgxFilingId": "293627",
+      "latestEgxFilingAt": "2026-08-20T09:51:20",
+      "candidateIssuerWebsite": "https://www.mopco-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MFPC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MFSC",
+      "egxFilingCount": 527,
+      "latestEgxFilingId": "293550",
+      "latestEgxFilingAt": "2026-08-18T15:07:39",
+      "candidateIssuerWebsite": "https://www.efsco.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MFSC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MHOT",
+      "egxFilingCount": 809,
+      "latestEgxFilingId": "293840",
+      "latestEgxFilingAt": "2026-08-24T15:51:02",
+      "candidateIssuerWebsite": "https://www.misrhotels.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MHOT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MICH",
+      "egxFilingCount": 903,
+      "latestEgxFilingId": "294085",
+      "latestEgxFilingAt": "2026-08-31T09:25:53",
+      "candidateIssuerWebsite": "https://www.mci.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MICH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MILS",
+      "egxFilingCount": 806,
+      "latestEgxFilingId": "294088",
+      "latestEgxFilingAt": "2026-08-31T09:37:54",
+      "candidateIssuerWebsite": "https://www.northcairomills.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MILS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MIPH",
+      "egxFilingCount": 578,
+      "latestEgxFilingId": "294190",
+      "latestEgxFilingAt": "2026-08-31T15:30:15",
+      "candidateIssuerWebsite": "https://www.minapharm.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MIPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MISR",
+      "egxFilingCount": 361,
+      "latestEgxFilingId": "293647",
+      "latestEgxFilingAt": "2026-08-20T11:08:49",
+      "candidateIssuerWebsite": "https://www.salamastone.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MISR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MITR",
+      "egxFilingCount": 3,
+      "latestEgxFilingId": "288211",
+      "latestEgxFilingAt": "2026-05-14T16:26:29",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "MLIC",
+      "egxFilingCount": 2,
+      "latestEgxFilingId": "287875",
+      "latestEgxFilingAt": "2026-05-10T15:05:48",
+      "candidateIssuerWebsite": "https://www.misrlife.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MLIC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MMAT",
+      "egxFilingCount": 525,
+      "latestEgxFilingId": "293821",
+      "latestEgxFilingAt": "2026-08-24T13:46:23",
+      "candidateIssuerWebsite": "https://www.badawiamarsaalam.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MMAT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MMHC",
+      "egxFilingCount": 2,
+      "latestEgxFilingId": "290516",
+      "latestEgxFilingAt": "2026-06-28T16:16:22",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "MOED",
+      "egxFilingCount": 577,
+      "latestEgxFilingId": "293750",
+      "latestEgxFilingAt": "2026-08-23T13:30:23",
+      "candidateIssuerWebsite": "https://www.moed.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOED/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MOIL",
+      "egxFilingCount": 772,
+      "latestEgxFilingId": "293704",
+      "latestEgxFilingAt": "2026-08-23T09:22:42",
+      "candidateIssuerWebsite": "https://www.maridive.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOIL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MOIN",
+      "egxFilingCount": 925,
+      "latestEgxFilingId": "293714",
+      "latestEgxFilingAt": "2026-08-23T09:46:39",
+      "candidateIssuerWebsite": "https://www.mohins.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOIN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MOSC",
+      "egxFilingCount": 876,
+      "latestEgxFilingId": "294153",
+      "latestEgxFilingAt": "2026-08-31T13:19:32",
+      "candidateIssuerWebsite": "https://www.misroil.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOSC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MPCI",
+      "egxFilingCount": 869,
+      "latestEgxFilingId": "294084",
+      "latestEgxFilingAt": "2026-08-31T09:22:43",
+      "candidateIssuerWebsite": "https://www.memphis.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MPCI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MPCO",
+      "egxFilingCount": 729,
+      "latestEgxFilingId": "294001",
+      "latestEgxFilingAt": "2026-08-30T10:10:17",
+      "candidateIssuerWebsite": "https://www.mpcopoultry.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MPCO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MPRC",
+      "egxFilingCount": 761,
+      "latestEgxFilingId": "293154",
+      "latestEgxFilingAt": "2026-08-16T09:27:15",
+      "candidateIssuerWebsite": "https://www.empc.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MPRC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "MTIE",
+      "egxFilingCount": 388,
+      "latestEgxFilingId": "293276",
+      "latestEgxFilingAt": "2026-08-16T12:23:02",
+      "candidateIssuerWebsite": "https://www.mti-mmgroup.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MTIE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NAHO",
+      "egxFilingCount": 614,
+      "latestEgxFilingId": "292986",
+      "latestEgxFilingAt": "2026-08-13T10:38:39",
+      "candidateIssuerWebsite": "https://www.naeemholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NAHO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NARE",
+      "egxFilingCount": 50,
+      "latestEgxFilingId": "293094",
+      "latestEgxFilingAt": "2026-08-13T15:09:09",
+      "candidateIssuerWebsite": "https://naeemrealestate.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NARE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NBKE",
+      "egxFilingCount": 182,
+      "latestEgxFilingId": "220046",
+      "latestEgxFilingAt": "2022-02-10T14:53:27",
+      "candidateIssuerWebsite": "https://www.nbk.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NBKE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NCCW",
+      "egxFilingCount": 557,
+      "latestEgxFilingId": "292597",
+      "latestEgxFilingAt": "2026-08-09T10:33:45",
+      "candidateIssuerWebsite": "https://www.nccweg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NCCW/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NCGC",
+      "egxFilingCount": 264,
+      "latestEgxFilingId": "211501",
+      "latestEgxFilingAt": "2021-06-14T09:52:22",
+      "candidateIssuerWebsite": "https://www.elnilecotton.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NCGC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NDRL",
+      "egxFilingCount": 153,
+      "latestEgxFilingId": "292959",
+      "latestEgxFilingAt": "2026-08-13T10:06:47",
+      "candidateIssuerWebsite": "https://www.ndcdrill.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NDRL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NEDA",
+      "egxFilingCount": 622,
+      "latestEgxFilingId": "293256",
+      "latestEgxFilingAt": "2026-08-16T12:02:35",
+      "candidateIssuerWebsite": "https://www.Nudap-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NEDA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NFCI",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "288199",
+      "latestEgxFilingAt": "2026-05-14T15:13:09",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "NHPS",
+      "egxFilingCount": 494,
+      "latestEgxFilingId": "293837",
+      "latestEgxFilingAt": "2026-08-24T15:39:42",
+      "candidateIssuerWebsite": "https://www.nch-elwatania.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NHPS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NINH",
+      "egxFilingCount": 505,
+      "latestEgxFilingId": "292440",
+      "latestEgxFilingAt": "2026-08-04T11:45:40",
+      "candidateIssuerWebsite": "https://www.nih.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NINH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NIPH",
+      "egxFilingCount": 767,
+      "latestEgxFilingId": "292821",
+      "latestEgxFilingAt": "2026-08-12T10:01:54",
+      "candidateIssuerWebsite": "https://www.nilepharma.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/NIPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "NMIN",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286151",
+      "latestEgxFilingAt": "2026-04-08T15:26:52",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "OBRI",
+      "egxFilingCount": 590,
+      "latestEgxFilingId": "294036",
+      "latestEgxFilingAt": "2026-08-30T11:58:43",
+      "candidateIssuerWebsite": "https://www.elobouregy.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OBRI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "OCAP",
+      "egxFilingCount": 5,
+      "latestEgxFilingId": "292248",
+      "latestEgxFilingAt": "2026-08-02T09:15:12",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "OCDI",
+      "egxFilingCount": 836,
+      "latestEgxFilingId": "294129",
+      "latestEgxFilingAt": "2026-08-31T12:03:57",
+      "candidateIssuerWebsite": "https://www.sodic.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OCDI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "OCPH",
+      "egxFilingCount": 462,
+      "latestEgxFilingId": "293189",
+      "latestEgxFilingAt": "2026-08-16T10:27:54",
+      "candidateIssuerWebsite": "https://www.octoberpharma.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OCPH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ODIN",
+      "egxFilingCount": 216,
+      "latestEgxFilingId": "294189",
+      "latestEgxFilingAt": "2026-08-31T15:25:25",
+      "candidateIssuerWebsite": "https://www.odin-investments.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ODIN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "OFH",
+      "egxFilingCount": 263,
+      "latestEgxFilingId": "293249",
+      "latestEgxFilingAt": "2026-08-16T11:46:05",
+      "candidateIssuerWebsite": "http://orascomfh.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OFH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "OIH",
+      "egxFilingCount": 380,
+      "latestEgxFilingId": "294167",
+      "latestEgxFilingAt": "2026-08-31T14:00:17",
+      "candidateIssuerWebsite": "https://www.orascomih.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OIH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "OLFI",
+      "egxFilingCount": 323,
+      "latestEgxFilingId": "293345",
+      "latestEgxFilingAt": "2026-08-16T15:40:14",
+      "candidateIssuerWebsite": "https://www.obourland.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/OLFI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ORAS",
+      "egxFilingCount": 518,
+      "latestEgxFilingId": "293400",
+      "latestEgxFilingAt": "2026-08-17T12:07:17",
+      "candidateIssuerWebsite": "https://www.orascom.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ORAS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ORHD",
+      "egxFilingCount": 592,
+      "latestEgxFilingId": "292870",
+      "latestEgxFilingAt": "2026-08-12T12:31:57",
+      "candidateIssuerWebsite": "https://www.orascomde.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ORHD/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ORWE",
+      "egxFilingCount": 558,
+      "latestEgxFilingId": "292853",
+      "latestEgxFilingAt": "2026-08-12T11:37:03",
+      "candidateIssuerWebsite": "https://www.orientalweavers.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ORWE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PACH",
+      "egxFilingCount": 560,
+      "latestEgxFilingId": "245885",
+      "latestEgxFilingAt": "2023-11-15T15:34:14",
+      "candidateIssuerWebsite": "https://www.pachin.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PACH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PHAR",
+      "egxFilingCount": 569,
+      "latestEgxFilingId": "293149",
+      "latestEgxFilingAt": "2026-08-16T09:18:28",
+      "candidateIssuerWebsite": "https://www.eipico.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PHAR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PHDC",
+      "egxFilingCount": 1021,
+      "latestEgxFilingId": "293906",
+      "latestEgxFilingAt": "2026-08-26T10:34:10",
+      "candidateIssuerWebsite": "https://www.phdint.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PHDC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PHGC",
+      "egxFilingCount": 145,
+      "latestEgxFilingId": "294037",
+      "latestEgxFilingAt": "2026-08-30T12:02:20",
+      "candidateIssuerWebsite": "https://www.phg.global/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PHGC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PHTV",
+      "egxFilingCount": 623,
+      "latestEgxFilingId": "293549",
+      "latestEgxFilingAt": "2026-08-18T15:03:56",
+      "candidateIssuerWebsite": "https://www.pyramisaegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PHTV/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PMSC",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "290515",
+      "latestEgxFilingAt": "2026-06-28T16:08:05",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "POCO",
+      "egxFilingCount": 4,
+      "latestEgxFilingId": "264961",
+      "latestEgxFilingAt": "2025-01-22T15:48:11",
+      "candidateIssuerWebsite": "https://www.pscchc.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/POCO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "POUL",
+      "egxFilingCount": 612,
+      "latestEgxFilingId": "293069",
+      "latestEgxFilingAt": "2026-08-13T13:16:45",
+      "candidateIssuerWebsite": "https://www.cpg.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/POUL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PRCL",
+      "egxFilingCount": 822,
+      "latestEgxFilingId": "292745",
+      "latestEgxFilingAt": "2026-08-11T10:12:16",
+      "candidateIssuerWebsite": "https://www.sheeni-egypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRCL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PRDC",
+      "egxFilingCount": 318,
+      "latestEgxFilingId": "294017",
+      "latestEgxFilingAt": "2026-08-30T10:42:54",
+      "candidateIssuerWebsite": "https://www.predco.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "PRMH",
+      "egxFilingCount": 670,
+      "latestEgxFilingId": "293414",
+      "latestEgxFilingAt": "2026-08-17T15:07:13",
+      "candidateIssuerWebsite": "https://www.primeholdingco.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRMH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "QNBE",
+      "egxFilingCount": 64,
+      "latestEgxFilingId": "291267",
+      "latestEgxFilingAt": "2026-07-13T11:00:14",
+      "candidateIssuerWebsite": "https://www.qnb.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/QNBE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RACC",
+      "egxFilingCount": 504,
+      "latestEgxFilingId": "293681",
+      "latestEgxFilingAt": "2026-08-20T12:21:45",
+      "candidateIssuerWebsite": "https://www.rayacx.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RACC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RAKT",
+      "egxFilingCount": 730,
+      "latestEgxFilingId": "292420",
+      "latestEgxFilingAt": "2026-08-03T12:53:18",
+      "candidateIssuerWebsite": "https://www.rakta-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RAKT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RAYA",
+      "egxFilingCount": 946,
+      "latestEgxFilingId": "293621",
+      "latestEgxFilingAt": "2026-08-20T09:21:07",
+      "candidateIssuerWebsite": "https://www.rayacorp.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RAYA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RKAZ",
+      "egxFilingCount": 108,
+      "latestEgxFilingId": "292385",
+      "latestEgxFilingAt": "2026-08-03T09:58:13",
+      "candidateIssuerWebsite": "https://www.rekaz-holding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RKAZ/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RMDA",
+      "egxFilingCount": 398,
+      "latestEgxFilingId": "294007",
+      "latestEgxFilingAt": "2026-08-30T10:25:43",
+      "candidateIssuerWebsite": "https://www.remco.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RMDA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RMTV",
+      "egxFilingCount": 276,
+      "latestEgxFilingId": "216951",
+      "latestEgxFilingAt": "2021-11-14T11:01:54",
+      "candidateIssuerWebsite": "https://www.rowadmisr.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RMTV/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ROTO",
+      "egxFilingCount": 852,
+      "latestEgxFilingId": "293004",
+      "latestEgxFilingAt": "2026-08-13T11:07:35",
+      "candidateIssuerWebsite": "https://www.rowadtourism.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ROTO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RREI",
+      "egxFilingCount": 413,
+      "latestEgxFilingId": "294195",
+      "latestEgxFilingAt": "2026-09-01T09:26:55",
+      "candidateIssuerWebsite": "https://www.arabianrealestate-aleco.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RREI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RTVC",
+      "egxFilingCount": 636,
+      "latestEgxFilingId": "293634",
+      "latestEgxFilingAt": "2026-08-20T10:31:02",
+      "candidateIssuerWebsite": "https://www.remcogroup.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RTVC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "RUBX",
+      "egxFilingCount": 687,
+      "latestEgxFilingId": "292520",
+      "latestEgxFilingAt": "2026-08-06T10:39:10",
+      "candidateIssuerWebsite": "https://www.rubexegypt.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RUBX/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SAIB",
+      "egxFilingCount": 437,
+      "latestEgxFilingId": "293027",
+      "latestEgxFilingAt": "2026-08-13T11:58:08",
+      "candidateIssuerWebsite": "https://www.saib.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SAIB/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SAUD",
+      "egxFilingCount": 461,
+      "latestEgxFilingId": "293375",
+      "latestEgxFilingAt": "2026-08-17T10:30:58",
+      "candidateIssuerWebsite": "https://www.albaraka.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SAUD/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SCEM",
+      "egxFilingCount": 523,
+      "latestEgxFilingId": "293638",
+      "latestEgxFilingAt": "2026-08-20T10:44:07",
+      "candidateIssuerWebsite": "https://www.sinaicement.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCEM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SCFM",
+      "egxFilingCount": 713,
+      "latestEgxFilingId": "294067",
+      "latestEgxFilingAt": "2026-08-30T15:02:21",
+      "candidateIssuerWebsite": "https://www.scgmills.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCFM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SCTS",
+      "egxFilingCount": 634,
+      "latestEgxFilingId": "291368",
+      "latestEgxFilingAt": "2026-07-15T09:14:24",
+      "candidateIssuerWebsite": "https://www.scts-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SCTS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SDTI",
+      "egxFilingCount": 483,
+      "latestEgxFilingId": "292790",
+      "latestEgxFilingAt": "2026-08-11T15:33:13",
+      "candidateIssuerWebsite": "https://www.sharmdreams.info/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SDTI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SEIG",
+      "egxFilingCount": 62,
+      "latestEgxFilingId": "290264",
+      "latestEgxFilingAt": "2026-06-24T09:12:41",
+      "candidateIssuerWebsite": "https://www.saudi-egy.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SEIG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SEIGA",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": "https://www.saudi-egy.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SEIGA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SIEG",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286153",
+      "latestEgxFilingAt": "2026-04-08T15:40:11",
+      "candidateIssuerWebsite": "https://www.siegwarteg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SIEG/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SINA",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286976",
+      "latestEgxFilingAt": "2026-04-23T18:19:28",
+      "candidateIssuerWebsite": "https://www.smc-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SINA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SIPC",
+      "egxFilingCount": 417,
+      "latestEgxFilingId": "293418",
+      "latestEgxFilingAt": "2026-08-17T15:15:23",
+      "candidateIssuerWebsite": "https://www.sabaapharmagroup.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SIPC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SKPC",
+      "egxFilingCount": 717,
+      "latestEgxFilingId": "292935",
+      "latestEgxFilingAt": "2026-08-13T09:40:15",
+      "candidateIssuerWebsite": "https://www.sidpec.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SKPC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SMFR",
+      "egxFilingCount": 469,
+      "latestEgxFilingId": "292750",
+      "latestEgxFilingAt": "2026-08-11T10:17:14",
+      "candidateIssuerWebsite": "https://www.egyfert.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SMFR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SMPP",
+      "egxFilingCount": 282,
+      "latestEgxFilingId": "218236",
+      "latestEgxFilingAt": "2021-12-08T14:55:19",
+      "candidateIssuerWebsite": "https://www.shoroukpress.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SMPP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SNFC",
+      "egxFilingCount": 586,
+      "latestEgxFilingId": "292465",
+      "latestEgxFilingAt": "2026-08-04T14:53:42",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SNFC/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "SNFI",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "178662",
+      "latestEgxFilingAt": "2018-10-29T09:54:33",
+      "candidateIssuerWebsite": "https://www.sohagelwatania-snfi.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SNFI/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SPHT",
+      "egxFilingCount": 633,
+      "latestEgxFilingId": "294035",
+      "latestEgxFilingAt": "2026-08-30T11:56:17",
+      "candidateIssuerWebsite": "https://www.elshamspyramids.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPHT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SPIN",
+      "egxFilingCount": 596,
+      "latestEgxFilingId": "293989",
+      "latestEgxFilingAt": "2026-08-30T09:44:31",
+      "candidateIssuerWebsite": "https://www.spinalex.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPIN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SPMD",
+      "egxFilingCount": 553,
+      "latestEgxFilingId": "291783",
+      "latestEgxFilingAt": "2026-07-21T15:16:12",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "SUCE",
+      "egxFilingCount": 448,
+      "latestEgxFilingId": "206300",
+      "latestEgxFilingAt": "2021-01-24T15:32:33",
+      "candidateIssuerWebsite": "https://www.suezcement.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SUCE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SUGR",
+      "egxFilingCount": 574,
+      "latestEgxFilingId": "292842",
+      "latestEgxFilingAt": "2026-08-12T10:57:06",
+      "candidateIssuerWebsite": "https://www.deltasugar.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SUGR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SVCE",
+      "egxFilingCount": 618,
+      "latestEgxFilingId": "293964",
+      "latestEgxFilingAt": "2026-08-26T16:08:14",
+      "candidateIssuerWebsite": "https://svcc-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SVCE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "SWDY",
+      "egxFilingCount": 865,
+      "latestEgxFilingId": "292908",
+      "latestEgxFilingAt": "2026-08-12T15:25:19",
+      "candidateIssuerWebsite": "https://www.elsewedyelectric.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SWDY/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TALM",
+      "egxFilingCount": 219,
+      "latestEgxFilingId": "291492",
+      "latestEgxFilingAt": "2026-07-16T14:08:35",
+      "candidateIssuerWebsite": "https://www.taaleem.me/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TALM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TANM",
+      "egxFilingCount": 146,
+      "latestEgxFilingId": "292925",
+      "latestEgxFilingAt": "2026-08-13T09:12:51",
+      "candidateIssuerWebsite": "https://www.tanmiyaegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TANM/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TAQA",
+      "egxFilingCount": 137,
+      "latestEgxFilingId": "294015",
+      "latestEgxFilingAt": "2026-08-30T10:38:42",
+      "candidateIssuerWebsite": "https://www.taqa.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TAQA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TMGH",
+      "egxFilingCount": 656,
+      "latestEgxFilingId": "292938",
+      "latestEgxFilingAt": "2026-08-13T09:42:31",
+      "candidateIssuerWebsite": "https://www.talaatmoustafa.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TMGH/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TORA",
+      "egxFilingCount": 336,
+      "latestEgxFilingId": "205963",
+      "latestEgxFilingAt": "2021-01-13T10:49:44",
+      "candidateIssuerWebsite": "https://www.tourahcement.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TORA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TRTO",
+      "egxFilingCount": 359,
+      "latestEgxFilingId": "292912",
+      "latestEgxFilingAt": "2026-08-12T15:28:12",
+      "candidateIssuerWebsite": "https://www.totegypt.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TRTO/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TWSA",
+      "egxFilingCount": 55,
+      "latestEgxFilingId": "294188",
+      "latestEgxFilingAt": "2026-08-31T15:23:28",
+      "candidateIssuerWebsite": "https://www.tawasoa.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TWSA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "TYCN",
+      "egxFilingCount": 11,
+      "latestEgxFilingId": "293686",
+      "latestEgxFilingAt": "2026-08-20T14:52:45",
+      "candidateIssuerWebsite": "https://tycoonholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TYCN/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UBEE",
+      "egxFilingCount": 68,
+      "latestEgxFilingId": "293217",
+      "latestEgxFilingAt": "2026-08-16T11:03:47",
+      "candidateIssuerWebsite": "https://www.theubeg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UBEE/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UEFM",
+      "egxFilingCount": 763,
+      "latestEgxFilingId": "294087",
+      "latestEgxFilingAt": "2026-08-31T09:34:50",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UEFM/profile",
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "UEGC",
+      "egxFilingCount": 859,
+      "latestEgxFilingId": "293613",
+      "latestEgxFilingAt": "2026-08-19T16:38:17",
+      "candidateIssuerWebsite": "https://www.elsaeed-contracting.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UEGC/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UNIP",
+      "egxFilingCount": 573,
+      "latestEgxFilingId": "293882",
+      "latestEgxFilingAt": "2026-08-25T14:50:36",
+      "candidateIssuerWebsite": "https://www.universal-unipack.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UNIP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UNIT",
+      "egxFilingCount": 857,
+      "latestEgxFilingId": "293580",
+      "latestEgxFilingAt": "2026-08-19T12:08:46",
+      "candidateIssuerWebsite": "https://www.united-housing.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UNIT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UPMS",
+      "egxFilingCount": 335,
+      "latestEgxFilingId": "293846",
+      "latestEgxFilingAt": "2026-08-25T09:22:15",
+      "candidateIssuerWebsite": "https://www.unionpharmacist.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UPMS/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "UTOP",
+      "egxFilingCount": 472,
+      "latestEgxFilingId": "292504",
+      "latestEgxFilingAt": "2026-08-05T12:26:58",
+      "candidateIssuerWebsite": "https://www.utopia-eg.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UTOP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "VALU",
+      "egxFilingCount": 58,
+      "latestEgxFilingId": "293436",
+      "latestEgxFilingAt": "2026-08-18T09:07:02",
+      "candidateIssuerWebsite": "https://www.valu.com.eg/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VALU/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "VERT",
+      "egxFilingCount": 518,
+      "latestEgxFilingId": "294185",
+      "latestEgxFilingAt": "2026-08-31T15:09:28",
+      "candidateIssuerWebsite": "https://www.vertika.company/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VERT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "VLMR",
+      "egxFilingCount": 0,
+      "latestEgxFilingId": null,
+      "latestEgxFilingAt": null,
+      "candidateIssuerWebsite": "https://www.ekholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VLMR/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "VLMRA",
+      "egxFilingCount": 13,
+      "latestEgxFilingId": "293990",
+      "latestEgxFilingAt": "2026-08-30T09:48:59",
+      "candidateIssuerWebsite": "https://www.ekholding.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "WATP",
+      "egxFilingCount": 300,
+      "latestEgxFilingId": "204923",
+      "latestEgxFilingAt": "2020-12-03T08:00:45",
+      "candidateIssuerWebsite": "https://www.modernfinancial.net/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/WATP/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "WCDF",
+      "egxFilingCount": 550,
+      "latestEgxFilingId": "293356",
+      "latestEgxFilingAt": "2026-08-17T09:36:51",
+      "candidateIssuerWebsite": "https://www.middleandwestdeltamills.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/WCDF/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "WKOL",
+      "egxFilingCount": 653,
+      "latestEgxFilingId": "291097",
+      "latestEgxFilingAt": "2026-07-09T10:58:14",
+      "candidateIssuerWebsite": "https://www.wadikomombo.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/WKOL/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "YAYT",
+      "egxFilingCount": 1,
+      "latestEgxFilingId": "286974",
+      "latestEgxFilingAt": "2026-04-23T18:15:08",
+      "candidateIssuerWebsite": null,
+      "websiteDirectorySource": null,
+      "websiteStatus": {
+        "status": "not_available"
+      },
+      "irArchiveStatus": "no_candidate_website"
+    },
+    {
+      "ticker": "ZEOT",
+      "egxFilingCount": 699,
+      "latestEgxFilingId": "292725",
+      "latestEgxFilingAt": "2026-08-11T09:28:37",
+      "candidateIssuerWebsite": "https://www.extractedoils.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ZEOT/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    },
+    {
+      "ticker": "ZMID",
+      "egxFilingCount": 747,
+      "latestEgxFilingId": "293700",
+      "latestEgxFilingAt": "2026-08-23T09:17:17",
+      "candidateIssuerWebsite": "https://zahraa-elmaadi.com/",
+      "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ZMID/profile",
+      "websiteStatus": null,
+      "irArchiveStatus": "unverified"
+    }
+  ],
+  "coverage": {
+    "issuers": 282,
+    "withEgxFilings": 276,
+    "withCandidateWebsite": 256,
+    "websitesProbed": 20,
+    "verifiedIrArchives": 0
+  },
+  "limitations": [
+    "A reachable issuer home page is not proof that it publishes a complete investor-relations archive.",
+    "Candidate issuer websites originate in a secondary directory and require issuer-by-issuer verification.",
+    "No filing is considered absent until EGX, FRA and the issuer source have all been checked at the decision timestamp."
+  ]
+}

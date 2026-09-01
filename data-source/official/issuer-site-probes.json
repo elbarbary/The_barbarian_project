@@ -1,0 +1,132 @@
+{
+  "https://www.gclr.com.eg/": {
+    "status": "unreachable",
+    "error": "curl: (7) Failed to connect to www.gclr.com.eg port 443 after 14 ms: Couldn't connect to server",
+    "probedAt": "2026-08-28T16:06:51.338067+00:00"
+  },
+  "https://www.abuqir.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://abuqir.net/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:06:53.522216+00:00"
+  },
+  "https://www.arabco-amd.com/default.aspx": {
+    "status": "unreachable",
+    "error": "curl: (60) SSL certificate problem: self signed certificate\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify the legitimacy of the server and therefore ",
+    "probedAt": "2026-08-28T16:06:53.996469+00:00"
+  },
+  "https://www.acapitalholding.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.acapitalholding.com/",
+    "contentType": "text/html",
+    "probedAt": "2026-08-28T16:06:54.849325+00:00"
+  },
+  "https://www.arabcot.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.arabcot.com/",
+    "contentType": "text/html; charset=utf-8",
+    "probedAt": "2026-08-28T16:06:55.259406+00:00"
+  },
+  "https://www.act-fin.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://act-fin.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:06:57.752383+00:00"
+  },
+  "https://www.adcopharma-eg.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.adcopharma-eg.com/",
+    "contentType": "text/html; charset=utf-8",
+    "probedAt": "2026-08-28T16:06:58.141014+00:00"
+  },
+  "https://www.adib.eg/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.adib.eg/",
+    "contentType": "text/html; charset=utf-8",
+    "probedAt": "2026-08-28T16:06:58.357849+00:00"
+  },
+  "https://www.arabdairy.net/": {
+    "status": "unreachable",
+    "error": "curl: (60) SSL: no alternative certificate subject name matches target host name 'www.arabdairy.net'\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify th",
+    "probedAt": "2026-08-28T16:06:58.845942+00:00"
+  },
+  "https://www.arab-egypt.com/": {
+    "status": "http_error",
+    "httpStatus": 403,
+    "effectiveUrl": "https://www.arab-egypt.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:06:59.101521+00:00"
+  },
+  "https://www.adi-alahly.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.adi-alahly.com/",
+    "contentType": "text/html; charset=utf-8",
+    "probedAt": "2026-08-28T16:06:59.392568+00:00"
+  },
+  "https://www.alexflourmills.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.alexflourmills.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:00.295047+00:00"
+  },
+  "https://www.aid-invest.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://aid-holding.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:03.204249+00:00"
+  },
+  "https://www.atlasegypt.com/": {
+    "status": "unreachable",
+    "error": "curl: (60) SSL: no alternative certificate subject name matches target host name 'www.atlasegypt.com'\nMore details here: https://curl.se/docs/sslcerts.html\n\ncurl failed to verify t",
+    "probedAt": "2026-08-28T16:07:03.287824+00:00"
+  },
+  "https://www.ajwa-egypt.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://ajwa-egypt.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:05.205316+00:00"
+  },
+  "https://www.alexcont.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://alexcont.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:09.093637+00:00"
+  },
+  "https://titancementegypt.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://titancementegypt.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:10.697039+00:00"
+  },
+  "https://www.arabaluminum.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://www.arabaluminum.com/",
+    "contentType": "text/html",
+    "probedAt": "2026-08-28T16:07:11.238208+00:00"
+  },
+  "https://www.amer-group.com/": {
+    "status": "reachable",
+    "httpStatus": 200,
+    "effectiveUrl": "https://amer-group.com/",
+    "contentType": "text/html; charset=UTF-8",
+    "probedAt": "2026-08-28T16:07:13.420935+00:00"
+  },
+  "https://www.anmchosp.com/": {
+    "status": "unreachable",
+    "error": "curl: (28) Operation timed out after 10000 milliseconds with 0 bytes received",
+    "probedAt": "2026-08-28T16:07:23.456896+00:00"
+  }
+}

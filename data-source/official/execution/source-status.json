@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-01T13:59:52.251796+00:00",
+  "publicEgx": {
+    "source": "beta.egx market-watch timestamped archive",
+    "checkpointObservations": 5,
+    "firstCheckpoint": "2026-08-28T15:52:16Z",
+    "latestCheckpoint": "2026-08-31T06:21:40Z",
+    "fields": {
+      "cumulativeSessionOhlcv": true,
+      "actualCumulativeTradedValue": true,
+      "numberOfTrades": true,
+      "fiveMinuteStockBars": false,
+      "historicalSameTimeVolume": false,
+      "bestBidAsk": false,
+      "orderBookDepth": false,
+      "individualTradeTape": false
+    }
+  },
+  "licensedSnapshots": 0,
+  "decisionRule": "Checkpoint differences may measure provisional same-time pace only after enough same-clock observations exist. They are not order-book or completed-session evidence.",
+  "gap": "A licensed broker/vendor export is still required for five-minute stock bars, spread, depth and the individual trade tape. No public source is substituted."
+}
