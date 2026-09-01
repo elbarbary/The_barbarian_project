@@ -214,6 +214,36 @@ def indicted_by_its_own_series(periods: list[dict], label: str,
     return inside and outside
 
 
+def breaks_the_income_statement(existing: dict, filed) -> bool:
+    """Would taking this figure leave a row that cannot be true?
+
+    Replacing only the bottom line is safe when the bottom line is all the row
+    has. It is not safe when the row also carries revenue, because those lines
+    were filed on their own basis: a consolidated profit dropped onto a
+    parent's revenue gives TMGH's H1 2026 a profit of 9,945.756m over revenue
+    of 336.025m, which is the TMGH hazard arriving through a different door.
+
+    Net income above revenue is not impossible in itself — a holding company
+    earns most of its money below that line, and ten such rows were already
+    published. So the test is not "is this row odd" but "does this change MAKE
+    it odd": a row whose stored profit fitted its revenue and whose incoming
+    one does not is a row this step would be breaking.
+    """
+    revenue = existing.get("revenue")
+    stated = existing.get("net_income")
+    if not isinstance(revenue, (int, float)) or revenue <= 0:
+        return False
+    if not isinstance(stated, (int, float)) or not isinstance(filed, (int, float)):
+        return False
+    # Signed on both sides, because a LOSS larger than revenue is ordinary — a
+    # company can lose more than it earns — while a PROFIT larger than revenue
+    # is the shape that needs a reason. Comparing magnitudes let EPCO and CNFN
+    # through: each stored a loss bigger than its revenue, which read as
+    # "already odd, leave it", and each then took a consolidated profit six
+    # times its revenue.
+    return filed > revenue and stated <= revenue
+
+
 def keep_statement_figure(existing: dict, filed) -> bool:
     """Put the statement's own profit beside the exchange's. True when it moved.
 
@@ -229,6 +259,16 @@ def keep_statement_figure(existing: dict, filed) -> bool:
     complete = existing.get("assets") is not None or existing.get("equity") is not None
     stated = existing.get("net_income")
     if not complete or stated is None or stated == filed:
+        return False
+    # And only when the figure standing there IS the statement's.
+    #
+    # This step is idempotent, so on a second run the value it finds is often
+    # its own from the first — an exchange figure. Recording that under
+    # `statement_net_income_source: mubasher` publishes an EGX standalone
+    # number under a redistributor's name, which is a worse lie than dropping
+    # it. TMGH FY 2024 carried 801.961 that way, and Mubasher never said
+    # 801.961: it said 10,723.074.
+    if existing.get("net_income_source") == SOURCE:
         return False
     existing["statement_net_income"] = stated
     existing["statement_net_income_source"] = existing.get("source")
@@ -456,6 +496,9 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                     complete = existing.get("assets") is not None or existing.get("equity") is not None
                     stated = existing.get("net_income")
 
+                    if breaks_the_income_statement(existing, row["net_income"]):
+                        skipped["incoherent"] = skipped.get("incoherent", 0) + 1
+                        continue
                     if keep_statement_figure(existing, row["net_income"]):
                         kept_statement += 1
                     existing["net_income"] = row["net_income"]
