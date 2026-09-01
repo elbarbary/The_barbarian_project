@@ -140,6 +140,50 @@ test('a malformed write is refused rather than stored', async () => {
   assert.deepEqual([...e.ESTHMR_AUTH.store.keys()].filter((k) => k.startsWith('wl:')), []);
 });
 
+/* ── the challenge in front of the mail sender ─────────────────────────── */
+
+test('a browser on our own page must solve the challenge; the app need not', async () => {
+  // /auth/request sends an email per call — the one endpoint here where an
+  // abuser spends somebody else's money and fills a stranger's inbox. A
+  // browser cannot suppress Origin on a cross-origin POST, so a request
+  // claiming to come from our own pages is held to it. The phone app signs in
+  // through the same endpoint and sends none.
+  const { mustSolve } = await import('../index.js');
+  for (const origin of ['https://esthmr.com', 'https://www.esthmr.com',
+                        'https://thebarbarianproject.com', 'HTTPS://ESTHMR.COM']) {
+    assert.equal(mustSolve(origin, true), true, origin);
+  }
+  // No Origin at all — the app, and curl.
+  assert.equal(mustSolve(null, true), false);
+  assert.equal(mustSolve('', true), false);
+  // Somebody else's page posting at us is not one of ours; it is refused by
+  // CORS long before this, and is not what the challenge is for.
+  assert.equal(mustSolve('https://evil.example', true), false);
+  // And with no secret configured there is nothing to enforce — an
+  // unconfigured challenge must not close the door on every reader.
+  assert.equal(mustSolve('https://esthmr.com', false), false);
+});
+
+test('the mail sender is never reached without a solved challenge', async () => {
+  // The gate runs before the counters and before a byte of mail is composed.
+  const e = env({ TURNSTILE_SECRET: 'shh', RESEND_API_KEYS: 'k1',
+                  MAIL_FROM: 'ESTHMR <esthmr@thebarbarianproject.com>' });
+  let mailed = false;
+  globalThis.fetch = async () => { mailed = true; return new Response('{}', { status: 200 }); };
+  try {
+    const answer = await call(e, 'https://esthmr.com/esthmr/api/auth/request', {
+      method: 'POST',
+      headers: { origin: 'https://esthmr.com', 'content-type': 'application/json' },
+      body: JSON.stringify({ email: 'someone@example.com' }),
+    });
+    assert.equal(answer.status, 403);
+    assert.deepEqual(await answer.json(), { error: 'challenge' });
+    assert.equal(mailed, false, 'a refused request still sent mail');
+    // And it did not spend the reader's rate-limit allowance on the way out.
+    assert.deepEqual([...e.ESTHMR_AUTH.store.keys()].filter((k) => k.startsWith('rl:')), []);
+  } finally { delete globalThis.fetch; }
+});
+
 /* ── the ceiling, and what it costs to enforce ─────────────────────────── */
 
 test('reading the data costs no storage writes at all', async () => {
