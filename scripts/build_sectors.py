@@ -37,6 +37,8 @@ import json
 import pathlib
 import re
 
+import sector_read_text
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 REVIEW = REPO / "public" / "data" / "v1" / "review"
@@ -44,6 +46,21 @@ REVIEW_INDEX = REPO / "public" / "data" / "v1" / "review.json"
 # The vetted natural-language read per sector, generated separately by
 # build_sector_reads.py and merged in here so this stays network-free.
 READS = pathlib.Path(__file__).resolve().parent / "sector_reads.json"
+
+
+def fingerprint(tickers) -> str:
+    """The membership a read was written about, in twelve characters.
+
+    A read describes the companies that were in the sector when it was written.
+    Nothing recorded which ones, so when the sectors were re-keyed to the
+    exchange's own taxonomy every membership changed and the reads did not: two
+    slugs collided by coincidence and served paragraphs about the companies that
+    used to be there. Finance kept a four-sentence read written when it held
+    eighty-three companies, a quarter of them property developers, and nine
+    remained.
+    """
+    joined = ",".join(sorted(t for t in tickers if t))
+    return hashlib.sha256(joined.encode("utf-8")).hexdigest()[:12]
 OUT = REPO / "public" / "data" / "v1" / "sectors"
 INDEX = REPO / "public" / "data" / "v1" / "sectors.json"
 FIXTURES = REPO / "app" / "assets" / "fixtures"
@@ -147,6 +164,11 @@ def build(today: datetime.date) -> tuple[dict, dict]:
     names = {c["ticker"]: c for c in directory if c.get("ticker")}
     sector_of = {c["ticker"]: c.get("sector")
                  for c in directory if c.get("ticker")}
+    # The exchange publishes its sector names in Arabic too, so the Arabic read
+    # can name the sector in Arabic rather than dropping an English phrase into
+    # the middle of a sentence.
+    sector_ar_of = {c.get("sector"): c.get("sector_ar")
+                    for c in directory if c.get("sector") and c.get("sector_ar")}
 
     review_index = load(REVIEW_INDEX)
     medians = review_index.get("sector_medians") or {}
@@ -212,9 +234,22 @@ def build(today: datetime.date) -> tuple[dict, dict]:
         lead_key = "assets" if has_metric(docs, "assets") else "profit"
         lead = {"key": lead_key, **tally(docs, lead_key)}
 
-        read = reads.get(slug) or {}
-        read_en = (read.get("read") or "").strip()
-        read_ar = (read.get("read_ar") or "").strip()
+        # Every sector gets a read, derived from the counts just computed. A
+        # stored model read is richer, so it wins — but only while it still
+        # describes the companies now in the sector. An entry with no recorded
+        # membership predates that rule and cannot be shown to match, so it is
+        # treated as stale rather than trusted.
+        stamp = fingerprint(d["_ticker"] for d in docs)
+        held = reads.get(slug) or {}
+        computed = sector_read_text.describe(
+            sector, movement, sector_ar_of.get(sector))
+        if held.get("members") == stamp and (held.get("read") or "").strip():
+            read_en = held["read"].strip()
+            read_ar = (held.get("read_ar") or "").strip()
+        elif computed:
+            read_en, read_ar = computed["read"], computed["read_ar"]
+        else:
+            read_en = read_ar = ""
         if read_en:
             teaser = first_sentence(read_en)
         else:
