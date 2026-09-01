@@ -7,18 +7,13 @@
  "sector": "Consumer Durables",
  "market": {
   "last_close": 4.31,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 4.32,
   "high": 4.5,
   "low": 4.31,
   "volume": 3847759
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 2.32,
-   "volume": 18440011
-  },
   {
    "date": "2025-07-27",
    "close": 2.35,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 4.32,
    "volume": 1962668
+  },
+  {
+   "date": "2026-08-31",
+   "close": 4.31,
+   "volume": 3847759
   }
  ],
  "profile": {
@@ -1322,10 +1322,10 @@
   "perf_3m": 23.14285714285713,
   "avg_volume_30d": 12832471.633333333,
   "relative_volume_10d": 0.39501911296700964,
-  "median_volume_20d": 8607718,
-  "rv20": 0.2280125812671837,
-  "normal_value_30d": 39852329.18,
-  "five_session_change": -2.921348314606742,
+  "median_volume_20d": 7577674.5,
+  "rv20": 0.507775703482645,
+  "normal_value_30d": 38030382.36,
+  "five_session_change": -4.434589800443467,
   "history_bars": 120,
   "market_cap": 1061984000.0,
   "market_cap_source": "EGX",

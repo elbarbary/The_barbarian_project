@@ -7,18 +7,13 @@
  "sector": "Technology Services",
  "market": {
   "last_close": 2.54,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 2.58,
   "high": 2.6,
   "low": 2.53,
   "volume": 649425
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 6.09,
-   "volume": 3061756
-  },
   {
    "date": "2025-07-27",
    "close": 5.98,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 2.58,
    "volume": 1094821
+  },
+  {
+   "date": "2026-08-31",
+   "close": 2.54,
+   "volume": 649425
   }
  ],
  "profile": {
@@ -1321,10 +1321,10 @@
   "perf_3m": -2.681992337164745,
   "avg_volume_30d": 1757515.0999999999,
   "relative_volume_10d": 0.4286141959424061,
-  "median_volume_20d": 1448907,
-  "rv20": 0.7556185455657265,
-  "normal_value_30d": 4322702.73,
-  "five_session_change": -1.526717557251911,
+  "median_volume_20d": 1404646,
+  "rv20": 0.46234068939789813,
+  "normal_value_30d": 4108979.0599999996,
+  "five_session_change": -2.3076923076923106,
   "history_bars": 120,
   "market_cap": 274320000.0,
   "market_cap_source": "EGX",

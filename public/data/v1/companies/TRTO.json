@@ -7,18 +7,13 @@
  "sector": "Commercial Services",
  "market": {
   "last_close": 0.052,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 0.051,
   "high": 0.053,
   "low": 0.051,
   "volume": 102895
  },
  "price_history": [
-  {
-   "date": "2025-04-07",
-   "close": 0.04,
-   "volume": 5250
-  },
   {
    "date": "2025-04-08",
    "close": 0.04,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 0.051,
    "volume": 237643
+  },
+  {
+   "date": "2026-08-31",
+   "close": 0.052,
+   "volume": 102895
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 52.94117647058822,
   "avg_volume_30d": 246419.1,
   "relative_volume_10d": 0.17035773717507324,
-  "median_volume_20d": 78869,
-  "rv20": 3.0131357060441997,
-  "normal_value_30d": 1906.8815,
-  "five_session_change": 4.081632653061207,
+  "median_volume_20d": 81747,
+  "rv20": 1.258700625099392,
+  "normal_value_30d": 2236.1800000000003,
+  "five_session_change": 0,
   "history_bars": 120,
   "market_cap": 257685660.0,
   "market_cap_source": "EGX",

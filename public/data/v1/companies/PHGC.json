@@ -7,18 +7,13 @@
  "sector": "Health Services",
  "market": {
   "last_close": 0.089,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 0.089,
   "high": 0.09,
   "low": 0.088,
   "volume": 87270460
  },
  "price_history": [
-  {
-   "date": "2025-07-14",
-   "close": 0.18,
-   "volume": 14812663
-  },
   {
    "date": "2025-07-15",
    "close": 0.17,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 0.09,
    "volume": 107254663
+  },
+  {
+   "date": "2026-08-31",
+   "close": 0.089,
+   "volume": 87270460
   }
  ],
  "profile": {
@@ -1322,9 +1322,9 @@
   "avg_volume_30d": 217415132.8333333,
   "relative_volume_10d": 0.27801192769435856,
   "median_volume_20d": 152317036.5,
-  "rv20": 0.7041540819368555,
+  "rv20": 0.5729527176035886,
   "normal_value_30d": 12882475.927499998,
-  "five_session_change": 0,
+  "five_session_change": -2.197802197802201,
   "history_bars": 120,
   "market_cap": 2103105395.3,
   "market_cap_source": "EGX",

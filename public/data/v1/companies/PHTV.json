@@ -7,18 +7,13 @@
  "sector": "Consumer Services",
  "market": {
   "last_close": 339.88,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 340.16,
   "high": 353.89,
   "low": 311.27,
   "volume": 3718
  },
  "price_history": [
-  {
-   "date": "2025-07-17",
-   "close": 110.23,
-   "volume": 342
-  },
   {
    "date": "2025-07-20",
    "close": 110.23,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 344.84,
    "volume": 5564
+  },
+  {
+   "date": "2026-08-31",
+   "close": 339.88,
+   "volume": 3718
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 59.568075117370896,
   "avg_volume_30d": 7849.666666666659,
   "relative_volume_10d": 0.4332929330598546,
-  "median_volume_20d": 7344,
-  "rv20": 0.7576252723311547,
-  "normal_value_30d": 2356724.6,
-  "five_session_change": -8.042666666666676,
+  "median_volume_20d": 6977,
+  "rv20": 0.5328937938942239,
+  "normal_value_30d": 2163719.275,
+  "five_session_change": -6.8949458978222244,
   "history_bars": 120,
   "market_cap": 8615958000.0,
   "market_cap_source": "EGX",

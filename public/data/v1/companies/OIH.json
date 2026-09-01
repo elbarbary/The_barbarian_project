@@ -7,18 +7,13 @@
  "sector": "Communications",
  "market": {
   "last_close": 2.02,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 2.11,
   "high": 2.11,
   "low": 1.99,
   "volume": 85434898
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 1.35,
-   "volume": 389241233
-  },
   {
    "date": "2025-07-27",
    "close": 1.34,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 2.11,
    "volume": 124438014
+  },
+  {
+   "date": "2026-08-31",
+   "close": 2.02,
+   "volume": 85434898
   }
  ],
  "profile": {
@@ -1325,9 +1325,9 @@
   "avg_volume_30d": 80493933.73333329,
   "relative_volume_10d": 1.1831876204682736,
   "median_volume_20d": 86367687.5,
-  "rv20": 1.440793630140902,
-  "normal_value_30d": 109940313.97,
-  "five_session_change": 11.05263157894736,
+  "rv20": 0.9891997860889815,
+  "normal_value_30d": 112137214.36,
+  "five_session_change": 7.446808510638303,
   "history_bars": 120,
   "market_cap": 10596295052.4,
   "market_cap_source": "EGX",

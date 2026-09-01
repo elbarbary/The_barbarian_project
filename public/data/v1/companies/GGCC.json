@@ -7,18 +7,13 @@
  "sector": "Industrial Services",
  "market": {
   "last_close": 0.863,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 0.944,
   "high": 0.959,
   "low": 0.859,
   "volume": 82214882
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 0.55,
-   "volume": 5177167
-  },
   {
    "date": "2025-07-27",
    "close": 0.54,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 0.944,
    "volume": 127877613
+  },
+  {
+   "date": "2026-08-31",
+   "close": 0.863,
+   "volume": 82214882
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 111.00244498777506,
   "avg_volume_30d": 53047396.4,
   "relative_volume_10d": 1.4172471323230564,
-  "median_volume_20d": 38106106.5,
-  "rv20": 3.3558299376505443,
+  "median_volume_20d": 43104651,
+  "rv20": 1.9073320417325732,
   "normal_value_30d": 48168027.54,
-  "five_session_change": 1.5053763440860068,
+  "five_session_change": -7.700534759358291,
   "history_bars": 120,
   "market_cap": 1867592410.0,
   "market_cap_source": "EGX",

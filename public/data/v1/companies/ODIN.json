@@ -7,18 +7,13 @@
  "sector": "Finance",
  "market": {
   "last_close": 3.03,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 3.23,
   "high": 3.28,
   "low": 2.99,
   "volume": 11929226
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 1.57,
-   "volume": 2280541
-  },
   {
    "date": "2025-07-27",
    "close": 1.58,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 3.23,
    "volume": 12609450
+  },
+  {
+   "date": "2026-08-31",
+   "close": 3.03,
+   "volume": 11929226
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 56.99481865284974,
   "avg_volume_30d": 12322907.933333332,
   "relative_volume_10d": 0.9708673450922357,
-  "median_volume_20d": 13302858,
-  "rv20": 0.9478752610905116,
-  "normal_value_30d": 34675269.06,
-  "five_session_change": 0.6230529595015577,
+  "median_volume_20d": 12427816,
+  "rv20": 0.9598811247285927,
+  "normal_value_30d": 36474706.260000005,
+  "five_session_change": -2.5723472668810365,
   "history_bars": 120,
   "market_cap": 1818000000.0,
   "market_cap_source": "EGX",

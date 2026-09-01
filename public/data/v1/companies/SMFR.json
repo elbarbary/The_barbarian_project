@@ -7,18 +7,13 @@
  "sector": "Distribution Services",
  "market": {
   "last_close": 259.1,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 261.87,
   "high": 264,
   "low": 259.1,
   "volume": 37206
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 195.9,
-   "volume": 14605
-  },
   {
    "date": "2025-07-23",
    "close": 197.4,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 261.87,
    "volume": 29390
+  },
+  {
+   "date": "2026-08-31",
+   "close": 259.1,
+   "volume": 37206
   }
  ],
  "profile": {
@@ -1322,10 +1322,10 @@
   "perf_3m": 25.253794837087888,
   "avg_volume_30d": 102662.8666666667,
   "relative_volume_10d": 0.8552592258853494,
-  "median_volume_20d": 66421.5,
-  "rv20": 0.4424772099395527,
-  "normal_value_30d": 14908019.09,
-  "five_session_change": -0.011454753722783817,
+  "median_volume_20d": 62141.5,
+  "rv20": 0.5987303170988791,
+  "normal_value_30d": 13601437.5,
+  "five_session_change": -0.93672337985089,
   "history_bars": 120,
   "market_cap": 2493696000.0,
   "market_cap_source": "EGX",

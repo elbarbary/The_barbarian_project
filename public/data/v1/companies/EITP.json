@@ -7,18 +7,13 @@
  "sector": "Consumer Services",
  "market": {
   "last_close": 8.22,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 8.73,
   "high": 8.73,
   "low": 8.22,
   "volume": 4479
  },
  "price_history": [
-  {
-   "date": "2022-08-31",
-   "close": 6.32,
-   "volume": 87
-  },
   {
    "date": "2023-02-27",
    "close": 6.32,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-26",
    "close": 8.72,
    "volume": 15
+  },
+  {
+   "date": "2026-08-31",
+   "close": 8.22,
+   "volume": 4479
   }
  ],
  "profile": {
@@ -1321,10 +1321,10 @@
   "perf_3m": -11.13513513513513,
   "avg_volume_30d": 1318.9333333333334,
   "relative_volume_10d": 3.8968157299460584,
-  "median_volume_20d": 836.5,
-  "rv20": 0.017931858936043037,
+  "median_volume_20d": 810,
+  "rv20": 5.529629629629629,
   "normal_value_30d": 7367.345000000001,
-  "five_session_change": 0.8092485549132888,
+  "five_session_change": -5.625717566016075,
   "history_bars": 120
  },
  "financials": {

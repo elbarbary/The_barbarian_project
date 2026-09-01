@@ -7,18 +7,13 @@
  "sector": "Distribution Services",
  "market": {
   "last_close": 0.243,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 0.244,
   "high": 0.244,
   "low": 0.24,
   "volume": 3684319
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 0.16,
-   "volume": 3251361
-  },
   {
    "date": "2025-07-27",
    "close": 0.16,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 0.244,
    "volume": 3977752
+  },
+  {
+   "date": "2026-08-31",
+   "close": 0.243,
+   "volume": 3684319
   }
  ],
  "profile": {
@@ -1322,10 +1322,10 @@
   "perf_3m": 34.25414364640884,
   "avg_volume_30d": 12608561.266666668,
   "relative_volume_10d": 0.4351374585209884,
-  "median_volume_20d": 8510505,
-  "rv20": 0.4673931805456903,
-  "normal_value_30d": 2965784.3335,
-  "five_session_change": -0.8130081300813052,
+  "median_volume_20d": 8245369.5,
+  "rv20": 0.4468349174648874,
+  "normal_value_30d": 2834310.745,
+  "five_session_change": 0.4132231404958775,
   "history_bars": 120,
   "market_cap": 80703084,
   "market_cap_source": "scan"

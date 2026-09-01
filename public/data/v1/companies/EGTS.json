@@ -7,18 +7,13 @@
  "sector": "Utilities",
  "market": {
   "last_close": 17.16,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 17.44,
   "high": 17.65,
   "low": 16.9,
   "volume": 2477199
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 8.17,
-   "volume": 2035114
-  },
   {
    "date": "2025-07-27",
    "close": 8.1,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 17.44,
    "volume": 1321960
+  },
+  {
+   "date": "2026-08-31",
+   "close": 17.16,
+   "volume": 2477199
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": -19.094766619519095,
   "avg_volume_30d": 2021212.8999999762,
   "relative_volume_10d": 1.423327071465466,
-  "median_volume_20d": 1838891,
-  "rv20": 0.7188898091295243,
-  "normal_value_30d": 32886417.6,
-  "five_session_change": 3.933253873659126,
+  "median_volume_20d": 1630390,
+  "rv20": 1.5193904525910977,
+  "normal_value_30d": 29290440.279999997,
+  "five_session_change": -0.23255813953487747,
   "history_bars": 120,
   "market_cap": 18018000000.0,
   "market_cap_source": "EGX",

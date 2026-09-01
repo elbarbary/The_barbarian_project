@@ -7,7 +7,7 @@
  "sector": "Consumer Services",
  "market": {
   "last_close": 100,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 100,
   "high": 100,
   "low": 100,
@@ -18,7 +18,7 @@
   "perf_1w": 0,
   "perf_1m": 0,
   "perf_3m": 0,
-  "history_bars": 1
+  "history_bars": 0
  },
  "financials": {
   "annual": [

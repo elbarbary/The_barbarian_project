@@ -7,18 +7,13 @@
  "sector": "Non-Energy Minerals",
  "market": {
   "last_close": 234.1,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 232,
   "high": 249.3,
   "low": 232,
   "volume": 271424
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 59.0,
-   "volume": 691079
-  },
   {
    "date": "2025-07-27",
    "close": 60.09,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 232.0,
    "volume": 56254
+  },
+  {
+   "date": "2026-08-31",
+   "close": 234.1,
+   "volume": 271424
   }
  ],
  "profile": {
@@ -1325,9 +1325,9 @@
   "avg_volume_30d": 236838.16666666654,
   "relative_volume_10d": 1.066818434438921,
   "median_volume_20d": 224934.5,
-  "rv20": 0.25009058192496036,
+  "rv20": 1.206680166893029,
   "normal_value_30d": 28138907.310000002,
-  "five_session_change": 4.504504504504503,
+  "five_session_change": 6.360745115856425,
   "history_bars": 120,
   "market_cap": 22473600000.0,
   "market_cap_source": "EGX",

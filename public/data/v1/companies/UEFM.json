@@ -7,18 +7,13 @@
  "sector": "Process Industries",
  "market": {
   "last_close": 540.05,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 549.59,
   "high": 549.59,
   "low": 538.25,
   "volume": 2843
  },
  "price_history": [
-  {
-   "date": "2025-07-22",
-   "close": 590.11,
-   "volume": 646
-  },
   {
    "date": "2025-07-23",
    "close": 588.93,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 542.17,
    "volume": 3722
+  },
+  {
+   "date": "2026-08-31",
+   "close": 540.05,
+   "volume": 2843
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 12.491668055324107,
   "avg_volume_30d": 9458.333333333334,
   "relative_volume_10d": 0.44454521289071663,
-  "median_volume_20d": 3713.5,
-  "rv20": 1.0022889457385216,
-  "normal_value_30d": 2036693.5,
-  "five_session_change": 0.7732198286277248,
+  "median_volume_20d": 3637,
+  "rv20": 0.7816882045642013,
+  "normal_value_30d": 2080415.8699999999,
+  "five_session_change": -0.6347746090156425,
   "history_bars": 120,
   "market_cap": 3785810000.0,
   "market_cap_source": "EGX",

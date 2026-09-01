@@ -1,46 +1,10 @@
 {
- "generated": "2026-08-31",
+ "generated": "2026-09-01",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 459,
+ "count": 456,
  "estimated": 396,
  "events": [
-  {
-   "date": "2026-06-02",
-   "kind": "rights_open",
-   "note": "Rights issue subscription opens",
-   "ticker": "ASPI",
-   "title": "Aspire Capital Holding  for Financial Investments (ASPI.CA) - Rights Issue",
-   "title_ar": "اسباير كابيتال القابضة للاستثمارات المالية (ASPI.CA) - حق إكتتاب",
-   "filed": "2026-05-18",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288423",
-   "id": "egx-288423"
-  },
-  {
-   "date": "2026-06-02",
-   "kind": "dividend_payment",
-   "note": "Cash dividend payment",
-   "ticker": "EGBE",
-   "title": "Egyptian Gulf Bank (EGBE.CA) Declares a Stock Dividends",
-   "title_ar": "يعلن البنك المصرى الخليجى (EGBE.CA) عن توزيع اسهم مجانية",
-   "filed": "2026-05-14",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288202",
-   "id": "egx-288202"
-  },
-  {
-   "date": "2026-06-02",
-   "kind": "ex_dividend",
-   "note": "Ex-dividend — last day to own for the coupon",
-   "ticker": "EGBE",
-   "title": "Egyptian Gulf Bank (EGBE.CA) Declares a Stock Dividends",
-   "title_ar": "يعلن البنك المصرى الخليجى (EGBE.CA) عن توزيع اسهم مجانية",
-   "filed": "2026-05-14",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288202",
-   "id": "egx-288202"
-  },
   {
    "date": "2026-06-03",
    "kind": "dividend_payment",

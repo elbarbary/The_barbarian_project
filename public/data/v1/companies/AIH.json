@@ -7,7 +7,7 @@
  "sector": "Finance",
  "market": {
   "last_close": 0.665,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 0.603,
   "high": 0.723,
   "low": 0.603,
@@ -638,6 +638,11 @@
    "date": "2026-08-30",
    "close": 0.603,
    "volume": 478160200
+  },
+  {
+   "date": "2026-08-31",
+   "close": 0.665,
+   "volume": 714764270
   }
  ],
  "profile": {
@@ -649,10 +654,10 @@
   "perf_3m": 92.19653179190753,
   "avg_volume_30d": 111881210.49999997,
   "relative_volume_10d": 4.331814486165092,
-  "median_volume_20d": 54823461.5,
-  "rv20": 8.721817027186436,
+  "median_volume_20d": 61061138,
+  "rv20": 11.70571485254664,
   "normal_value_30d": 22324082.417499997,
-  "five_session_change": 28.297872340425535,
+  "five_session_change": 40.29535864978904,
   "history_bars": 120,
   "market_cap": 783738811,
   "market_cap_source": "scan"

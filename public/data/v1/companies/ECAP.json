@@ -7,18 +7,13 @@
  "sector": "Producer Manufacturing",
  "market": {
   "last_close": 32.28,
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "open": 33.41,
   "high": 33.41,
   "low": 32.05,
   "volume": 733383
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 32.7,
-   "volume": 429762
-  },
   {
    "date": "2025-07-27",
    "close": 33.02,
@@ -1313,6 +1308,11 @@
    "date": "2026-08-30",
    "close": 33.41,
    "volume": 470194
+  },
+  {
+   "date": "2026-08-31",
+   "close": 32.28,
+   "volume": 733383
   }
  ],
  "profile": {
@@ -1324,10 +1324,10 @@
   "perf_3m": 6.429277942631068,
   "avg_volume_30d": 390744.6333333334,
   "relative_volume_10d": 2.0038016829701344,
-  "median_volume_20d": 244290,
-  "rv20": 1.924736992918253,
-  "normal_value_30d": 7263819.300000001,
-  "five_session_change": -7.961432506887056,
+  "median_volume_20d": 298572.5,
+  "rv20": 2.456297884098502,
+  "normal_value_30d": 7482675.54,
+  "five_session_change": -12.80388978930308,
   "history_bars": 120,
   "market_cap": 1721896319.64,
   "market_cap_source": "EGX",
