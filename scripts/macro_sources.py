@@ -73,9 +73,19 @@ def _get(url: str, *, headers: dict | None = None, timeout: int = 60) -> bytes:
 
 def _json(url: str, **kw) -> dict:
     try:
-        return json.loads(_get(url, **kw))
+        payload = json.loads(_get(url, **kw))
     except ValueError as error:
         raise MacroUnavailable(f"not JSON: {error}") from error
+    # ArcGIS answers a refusal with HTTP 200 and an `error` object, so a
+    # rate-limited query looked exactly like a query with nothing in it. The
+    # Suez indicator disappeared from macro.json under "suez: no rows" — which
+    # reads as "no vessels transited the canal" and meant "PortWatch told us to
+    # slow down". A source that refused us is not a world with nothing in it.
+    if isinstance(payload, dict) and isinstance(payload.get("error"), dict):
+        detail = payload["error"]
+        raise MacroUnavailable(
+            f"refused: {detail.get('code')} {detail.get('message')}")
+    return payload
 
 
 # --------------------------------------------------------------------- Suez
