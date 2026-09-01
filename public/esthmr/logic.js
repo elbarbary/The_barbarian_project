@@ -979,7 +979,11 @@ export class Component extends Base {
     // watchlist alike, so it has to exist before the first of them.
     const watchedSet = new Set(this._watch || []);
     const mkRow = c => ({ ticker:c.ticker, name:this.nm(c.name), sector: sectorName(c.sector),
-      close: c.close === '—' ? '—' : this.num(c.close), pct: this.pct(c.pct), color: this.dcol(c.pct),
+      // A price in another currency says which. It is one word, and without
+      // it the figure is wrong by a factor of fifty.
+      close: c.close === '\u2014' ? '\u2014'
+        : (c.foreignCurrency ? c.currency + ' ' : '') + this.num(c.close),
+      pct: this.pct(c.pct), color: this.dcol(c.pct),
       // A market capitalisation cannot be negative; anything that says so
       // is a units error, not a small company.
       cap: (typeof c.cap === 'number' && c.cap > 0) ? this.money(c.cap) : '—',

@@ -93,8 +93,25 @@ def fetch() -> tuple[dict[str, dict], str | None]:
         # and it is the authority on how an Egyptian listing is classified.
         # The Arabic name comes with it, which retires a hand-kept map that had
         # to be extended by hand every time a sector appeared.
+        # WHICH CURRENCY THE PRICE IS IN.
+        #
+        # Eleven of the exchange's listings are quoted in dollars, not pounds
+        # — CFGH at $0.117, GPPL at $1.34 — and the site printed those in a
+        # column every other figure on it denominates in EGP. The market value
+        # beside them is in pounds, so `shares x close` came out 51.28 times
+        # smaller than the published capitalisation, which is not a data error:
+        # it is the exchange rate, and it is the only reason anybody noticed.
+        #
+        # Deliberately recorded rather than converted. Converting a price is a
+        # claim about a rate on a day, and this file is a record of what the
+        # exchange published. The screen can say "US$" for the cost of a word.
+        currency = (row.get("currShort") or "").strip()
         sector = (row.get("sector") or "").strip()
         sector_ar = (row.get("sectorA") or "").strip()
+        # Only where it is NOT the pound: absent means EGP, which is 216 of
+        # the 227 and does not need saying on every row.
+        if currency and currency != "L.E":
+            held["currency"] = currency
         if sector:
             held["sector"] = sector
             if sector_ar:
@@ -146,8 +163,9 @@ def main() -> int:
     }
     traded = sum(1 for v in rows.values() if v.get("trades"))
     classified = sum(1 for v in rows.values() if v.get("sector"))
+    foreign = sum(1 for v in rows.values() if v.get("currency"))
     print(f"   {len(rows)} securities carry a market value, {traded} a trade count,"
-          f" {classified} the exchange's own sector"
+          f" {classified} the exchange's own sector, {foreign} a price not in pounds"
           f"{f' (written {written})' if written else ''}")
     if args.check:
         return 0

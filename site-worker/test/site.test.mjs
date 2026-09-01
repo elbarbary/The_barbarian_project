@@ -1239,6 +1239,28 @@ test('a sector opens, and shows what the card was already reading', async () => 
   assert.equal(c.renderVals().noOpenSector, true);
 });
 
+test('a price in dollars says so, and one in pounds does not', () => {
+  // Eleven of the exchange's listings are quoted in dollars. Printed in a
+  // column where every other figure is pounds, CFGH at 0.117 reads as eleven
+  // piastres and is eleven cents — and the market value beside it really is in
+  // pounds, which is how `shares x close` came out 51.28 times smaller than
+  // the published capitalisation. That number is the exchange rate, and it is
+  // the only reason anybody noticed.
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    { ticker: 'CFGH', name: { en: 'CI Capital', ar: 'سي آي' }, sector: 'Non-bank financial services',
+      close: 0.117, pct: 1.2, cap: 2.83e9, pe: null, currency: 'US$', foreignCurrency: true },
+    { ticker: 'COMI', name: { en: 'CIB', ar: 'التجاري' }, sector: 'Banks',
+      close: 137.4, pct: -0.5, cap: 468e9, pe: 8.6 },
+  ] });
+  const rows = c.renderVals().rows;
+  const cfgh = rows.find((r) => r.ticker === 'CFGH');
+  const comi = rows.find((r) => r.ticker === 'COMI');
+  assert.match(cfgh.close, /^US\$ /, `dollar price printed as "${cfgh.close}"`);
+  // The pound is 216 of the 227 and does not need saying on every row.
+  assert.doesNotMatch(comi.close, /[A-Z$]/, `pound price printed as "${comi.close}"`);
+});
+
 test('a sector card is not four blank lines', async () => {
   // The mapper emitted `companies`, `lead` and `pe`; the card binds `count`,
   // `read` and `medianPe`. Every card rendered its title and its bar over
