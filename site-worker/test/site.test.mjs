@@ -1204,17 +1204,19 @@ test('a sector opens, and shows what the card was already reading', async () => 
   assert.equal(c.renderVals().noOpenSector, true);
   assert.equal(c.renderVals().hasOpenSector, false);
 
-  const finance = c.renderVals().sectorCards.find((x) => x.name === 'Finance');
+  // The biggest sector, not a named one — see the note on the card test.
+  const finance = c.renderVals().sectorCards.slice()
+    .sort((a, b) => Number(b.count) - Number(a.count))[0];
   finance.open();
   const open = c.renderVals().openSector;
   assert.ok(open, 'the card did not open');
-  assert.equal(open.name, 'Finance');
+  assert.equal(open.name, finance.name);
   assert.match(open.as, /^\d+ companies · read of /);
 
   // The full read, not the teaser the card shows.
   assert.ok(open.read.length > finance.read.length, 'the teaser reached the screen');
   assert.ok(open.hasMedians && open.medians.length >= 6);
-  assert.ok(open.hasMembers && open.members.length > 50, `${open.members.length} members`);
+  assert.ok(open.hasMembers && open.members.length > 5, `${open.members.length} members`);
   assert.ok(open.hasStandouts);
 
   // A member is a count off the filings and a place it stands — never a rank.
@@ -1266,7 +1268,12 @@ test('a sector card is not four blank lines', async () => {
   // `read` and `medianPe`. Every card rendered its title and its bar over
   // nothing at all.
   const secs = await fromDisk(() => data.sectors());
-  const finance = secs.find((s) => s.name === 'Finance');
+  // The biggest sector, whichever it is. This named "Finance", which was the
+  // biggest only because the vendor filed seven industries under it — 83
+  // companies, 25 of them property developers. The exchange's own taxonomy
+  // leaves Finance with nine, and a test that names a sector is a test that
+  // breaks when the classification gets better.
+  const finance = secs.slice().sort((a, b) => Number(b.count) - Number(a.count))[0];
   // Counts, not a count. This asserted `'83'` and broke the day the exchange's
   // own market values landed and Finance gained a company — a red build that
   // reported a correct data change as a defect. What the card must not be is
