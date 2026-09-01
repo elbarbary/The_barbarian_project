@@ -196,5 +196,65 @@ class WhichSideIsWrong(unittest.TestCase):
             rows, "FY 2024", 12453.812, 27.992))
 
 
+
+
+class Coherence(unittest.TestCase):
+    """Replacing only the bottom line of an income statement it does not belong to."""
+
+    def row(self, **over):
+        r = {"period": "H1 2026", "net_income": 285.408, "revenue": 336.025,
+             "assets": 1000.0, "source": "mubasher"}
+        r.update(over)
+        return r
+
+    def test_a_consolidated_profit_is_refused_onto_a_parents_revenue(self):
+        """TMGH H1 2026 would read 9,945.756m of profit on 336.025m of revenue."""
+        self.assertTrue(m.breaks_the_income_statement(self.row(), 9945.756))
+
+    def test_a_figure_that_fits_the_revenue_is_taken(self):
+        self.assertFalse(m.breaks_the_income_statement(self.row(), 300.0))
+
+    def test_a_row_already_above_its_revenue_is_not_this_step_s_doing(self):
+        """Ten such rows were already published; a holding company earns most
+        of its money below the revenue line."""
+        self.assertFalse(m.breaks_the_income_statement(
+            self.row(net_income=400.0), 9945.756))
+
+    def test_a_loss_larger_than_revenue_is_ordinary_and_not_a_licence(self):
+        """EPCO and CNFN each stored a loss bigger than revenue, which read as
+        'already odd, leave it', and each then took a profit six times it."""
+        self.assertTrue(m.breaks_the_income_statement(
+            self.row(net_income=-18.455, revenue=14.729), 89.130))
+
+    def test_an_incoming_loss_is_never_refused_on_these_grounds(self):
+        """DAPH filed "Net Loss : 140,758,402" and it must reach the row."""
+        self.assertFalse(m.breaks_the_income_statement(
+            self.row(revenue=50.0, net_income=17.946), -140.758))
+
+    def test_a_row_with_no_revenue_has_no_income_statement_to_break(self):
+        self.assertFalse(m.breaks_the_income_statement(
+            self.row(revenue=None), 9945.756))
+
+
+class Attribution(unittest.TestCase):
+    """`statement_net_income` must be what the STATEMENT said."""
+
+    def test_an_exchange_figure_is_not_recorded_as_the_statements(self):
+        """This step is idempotent, so on a second run the value it finds is
+        often its own from the first. TMGH carried 801.961 under Mubasher's
+        name; Mubasher never said 801.961, it said 10,723.074."""
+        row = {"period": "FY 2024", "net_income": 801.961, "assets": 356781.349,
+               "source": "mubasher", "net_income_source": m.SOURCE}
+        self.assertFalse(m.keep_statement_figure(row, 14467.526))
+        self.assertNotIn("statement_net_income", row)
+
+    def test_a_genuine_statement_figure_is_recorded(self):
+        row = {"period": "FY 2024", "net_income": 10723.074, "assets": 356781.349,
+               "source": "mubasher"}
+        self.assertTrue(m.keep_statement_figure(row, 14467.526))
+        self.assertEqual(row["statement_net_income"], 10723.074)
+        self.assertEqual(row["statement_net_income_source"], "mubasher")
+
+
 if __name__ == "__main__":
     unittest.main()
