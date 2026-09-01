@@ -57,6 +57,12 @@ const COOKIE = 'esthmr_session';
 const LIMITS = {
   codePerEmail: { max: 5, window: 3600 },
   codePerIp: { max: 60, window: 3600 },
+  // The same address without a solved challenge. Ten times tighter, and
+  // deliberately not zero: an address is not a person — an office behind one
+  // NAT or a carrier on CGNAT shares it between hundreds of readers, and the
+  // comment above this list is there because a tight per-IP ceiling once
+  // locked all of them out for what one of them did.
+  codePerIpUnsolved: { max: 6, window: 3600 },
   verifyPerEmail: { max: 8, window: 900 },
   // The data gate is on the platform's limiter now (see `overRate`) and no
   // longer reads this. Kept as the record of what the ceiling used to be:
@@ -572,10 +578,26 @@ async function api(request, env, url) {
   if (path === '/auth/request') {
     const email = normalise(body.email);
     if (!EMAIL.test(email) || email.length > 200) return json({ error: 'email' }, 400);
-    // Before the counters, and before a single byte of mail is composed.
-    if (mustSolve(request.headers.get('origin'), Boolean(env.TURNSTILE_SECRET))
-        && !(await solved(env, body.turnstile, ip))) {
-      return json({ error: 'challenge' }, 403);
+    /* A solved challenge buys the ordinary allowance. Failing to solve one
+     * buys a much smaller allowance — it does not buy a locked door.
+     *
+     * The hard refusal this replaces was written before watching Turnstile
+     * fail on a machine that could not resolve one of its own challenge hosts
+     * — brunhild.challenges.cloudflare.com, no DNS answer, widget times out.
+     * A reader behind that, or an aggressive blocker, or a network Cloudflare
+     * is having a bad day with, could not sign in at all and could do nothing
+     * about it. Their sign-in is not the attack.
+     *
+     * So an unsolved browser gets six sends an hour from its address instead
+     * of sixty. A bot spraying addresses from one machine loses ninety per
+     * cent of its throughput; a person who cannot render a widget waits, at
+     * worst, and still gets in. The per-EMAIL ceiling is untouched either
+     * way, because that is the one protecting a stranger's inbox.
+     */
+    const challenged = mustSolve(request.headers.get('origin'), Boolean(env.TURNSTILE_SECRET));
+    const passed = challenged ? await solved(env, body.turnstile, ip) : true;
+    if (!passed && await overLimit(env, 'unsolved', ip, LIMITS.codePerIpUnsolved)) {
+      return json({ error: 'too many requests' }, 429);
     }
     if (await overLimit(env, 'ip', ip, LIMITS.codePerIp)
         || await overLimit(env, 'email', email, LIMITS.codePerEmail)) {

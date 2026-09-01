@@ -164,23 +164,32 @@ test('a browser on our own page must solve the challenge; the app need not', asy
   assert.equal(mustSolve('https://esthmr.com', false), false);
 });
 
-test('the mail sender is never reached without a solved challenge', async () => {
-  // The gate runs before the counters and before a byte of mail is composed.
+test('an unsolved challenge is rationed, not refused', async () => {
+  // A hard 403 here locked out anyone whose Turnstile could not complete —
+  // watched happen on a machine that could not resolve one of Cloudflare's own
+  // challenge hosts. Ninety per cent less throughput for a bot, and a door
+  // that still opens for a person.
   const e = env({ TURNSTILE_SECRET: 'shh', RESEND_API_KEYS: 'k1',
                   MAIL_FROM: 'ESTHMR <esthmr@thebarbarianproject.com>' });
   let mailed = false;
   globalThis.fetch = async () => { mailed = true; return new Response('{}', { status: 200 }); };
   try {
-    const answer = await call(e, 'https://esthmr.com/esthmr/api/auth/request', {
+    // A different address each time, which is the shape the per-email ceiling
+    // cannot see and this one is for: one machine spraying strangers' inboxes.
+    let n = 0;
+    const ask = () => call(e, 'https://esthmr.com/esthmr/api/auth/request', {
       method: 'POST',
       headers: { origin: 'https://esthmr.com', 'content-type': 'application/json' },
-      body: JSON.stringify({ email: 'someone@example.com' }),
+      body: JSON.stringify({ email: `someone${n++}@example.com` }),
     });
-    assert.equal(answer.status, 403);
-    assert.deepEqual(await answer.json(), { error: 'challenge' });
-    assert.equal(mailed, false, 'a refused request still sent mail');
-    // And it did not spend the reader's rate-limit allowance on the way out.
-    assert.deepEqual([...e.ESTHMR_AUTH.store.keys()].filter((k) => k.startsWith('rl:')), []);
+    // Unsolved is not locked out — Turnstile fails for reasons a reader cannot
+    // control, and a sign-in they cannot complete is not the attack. It is
+    // rationed: six an hour from that address instead of sixty.
+    for (let i = 0; i < 6; i++) assert.equal((await ask()).status, 200, `send ${i + 1}`);
+    const seventh = await ask();
+    assert.equal(seventh.status, 429);
+    assert.deepEqual(await seventh.json(), { error: 'too many requests' });
+    assert.equal(mailed, true, 'the first six should have been sent');
   } finally { delete globalThis.fetch; }
 });
 
