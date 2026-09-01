@@ -186,6 +186,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", action="store_true", help="the findings, machine-readable")
     ap.add_argument("--ticker", help="one company")
+    # Accepted and ignored: this reads and never writes, so the validate pass
+    # and the real one are the same run. It was registered in build_all as a
+    # step that takes the flag and did not take it, so `build_all --check` —
+    # the "Validate before writing anything" job — has failed on
+    # "unrecognized arguments: --check" in every CI run since the audit landed.
+    ap.add_argument("--check", action="store_true", help=argparse.SUPPRESS)
     args = ap.parse_args()
 
     directory = load(V1 / "companies.json") or {}
