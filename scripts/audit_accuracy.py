@@ -172,7 +172,14 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
 # Kinds where two of our own documents disagree about the same company. Not
 # "the data is thin" — "the data is inconsistent with itself", which is a bug
 # with an address. See the note in main().
-CONTRADICTIONS = ("sector_split", "pe_vs_eps")
+#
+# `profit_split` joined once it reached zero. It sat at 12 for weeks and rose to
+# 33 the moment the exchange's filings took priority, because the directory's
+# annual profit, EPS and P/E were derived at STEPS line 62 and the documents
+# they came from were revised at line 112 — the row said one thing and the
+# document beside it another. `build_ttm_pe` re-derives them after every step
+# that can touch a filed figure, and the count is nought.
+CONTRADICTIONS = ("sector_split", "pe_vs_eps", "profit_split")
 
 
 def fx() -> dict[str, float]:

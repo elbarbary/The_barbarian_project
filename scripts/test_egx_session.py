@@ -154,3 +154,49 @@ class DocumentTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ListedShares(unittest.TestCase):
+    """The exchange's own share count, recovered from two of its own figures.
+
+    The vendor's is wrong for nineteen companies by three to two hundred and
+    seventy-four times, and it is the denominator of the free float the company
+    screen prints. EGX publishes no share count, but it publishes `mc` and
+    `closePrice` in one row and computes the first as the second times the
+    listed shares — so the division returns the count exactly.
+    """
+
+    def rows(self, **over):
+        row = {"reuters": "COMI.CA", "mc": 473314334900.0, "closePrice": 139.0,
+               "sector": "Banks", "trades": 10, "value": 100}
+        row.update(over)
+        return row
+
+    def held(self, row):
+        return harvest.extract({"data": {"data": [row]}})[0]
+
+    def test_the_count_is_the_market_value_over_the_price(self):
+        held = self.held(self.rows(mc=1000.0, closePrice=4.0))
+        self.assertEqual(held["COMI"]["listed_shares"], 250)
+
+    def test_a_quotient_that_is_not_a_whole_number_is_refused(self):
+        """An exact integer or the relation is not what we think it is."""
+        held = self.held(self.rows(mc=1000.0, closePrice=3.0))
+        self.assertNotIn("listed_shares", held["COMI"])
+
+    def test_a_dollar_listing_gets_no_count(self):
+        """There `mc` is pounds and the price is dollars, so the quotient is
+        shares times the exchange rate — CFGH and GTEX both came out at
+        23,615,014,500, which is the tell."""
+        held = self.held(self.rows(currShort="US$", mc=1000.0, closePrice=4.0))
+        self.assertNotIn("listed_shares", held["COMI"])
+
+    def test_the_pound_is_not_treated_as_a_foreign_currency(self):
+        held = self.held(self.rows(currShort="L.E", mc=1000.0, closePrice=4.0))
+        self.assertEqual(held["COMI"]["listed_shares"], 250)
+
+    def test_no_price_is_no_count_rather_than_a_guess(self):
+        held = self.held(self.rows(closePrice=None, mc=1000.0))
+        self.assertNotIn("listed_shares", held["COMI"])
+        held = self.held(self.rows(closePrice=0, mc=1000.0))
+        self.assertNotIn("listed_shares", held["COMI"])

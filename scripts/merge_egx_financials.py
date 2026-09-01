@@ -74,7 +74,22 @@ PERIOD = re.compile(
     r"Period\s*:?\s*From\s*(\d{1,2}/\d{1,2}/20\d{2})\s*To\s*(\d{1,2}/\d{1,2}/20\d{2})", re.I
 )
 CURRENCY = re.compile(r"Currency\s*:?\s*([^\r\n<]{1,24}?)\s*(?:F/S|ISIN|Net|Source|$)", re.I)
-BASIS = re.compile(r"F/S\s+(Standalone|Consolidated)\s+Period", re.I)
+# The exchange files this line in two templates and this knew one.
+#
+#     F/S Consolidated Period : From 01/01/2024 To 31/12/2024     <- matched
+#     F/S (Standalone) Period: From 01/01/2024 to 31/12/2024      <- did not
+#
+# 2,468 filings — 1,244 standalone and 1,224 consolidated — stated their basis
+# in the parenthesised form and were recorded as "unstated". That is 22% of
+# every basis-bearing filing in the archive, and it disabled the rule directly
+# below this one: `egx_rows` prefers a consolidated filing over a standalone
+# one for the same period, and it cannot prefer what it cannot see.
+#
+# TMGH filed both for FY 2024 — standalone 801,960,651 and consolidated
+# 14,467,525,731 — and the site published the parent's 801.961m beside the
+# group's 356,781m of assets, because the standalone line was the only one
+# whose basis was legible.
+BASIS = re.compile(r"F/S\s*\(?\s*(Standalone|Consolidated)\s*\)?\s*Period", re.I)
 
 # Only Egyptian pounds. The template also carries `$` and `EUR` filings, and
 # converting those needs a rate on the filing's own date that this app does not
@@ -145,6 +160,79 @@ def period_label(start: datetime.date, end: datetime.date) -> tuple[str, bool] |
         return stem, True
     # A fiscal year of its own: label it by the window it actually covers.
     return f"{stem} (to {end:%-d %b})", False
+
+
+def _when(period: dict) -> tuple:
+    """A sortable position for a filed period, label first, end date after."""
+    label = str(period.get("period") or "")
+    year = re.search(r"(19|20)\d{2}", label)
+    return (int(year.group(0)) if year else 0,
+            str(period.get("period_end") or ""), label)
+
+
+def indicted_by_its_own_series(periods: list[dict], label: str,
+                               incoming, held) -> bool:
+    """Do the periods either side say the STORED figure is the wrong one?
+
+    A gap of four hundred times is either a scale error or one source being
+    badly wrong, and the ratio alone cannot tell which — refusing on size
+    protects a stored error exactly as readily as it blocks an incoming one.
+    Housing & Development Bank stood at 27.992m for FY 2024 with 6,559.603m
+    filed either side of it in 2023 and 18,714.779m in 2025, while its own
+    filing reads "Net Profit : 12,453,812,253" consolidated. The exchange was
+    right and the guard was keeping it out.
+
+    The neighbours are asked rather than the whole history, because a company
+    that grew from 306m to 18,715m has no single typical year to be measured
+    against. The incoming figure must sit in the range its neighbours span and
+    the stored one must sit far outside it — both, or this returns False and
+    the size guard stands.
+
+    Eastern Tobacco is the case that must keep standing: its stored 6,048.733m
+    belongs beside its neighbours and the exchange's 6.048m does not, because
+    that filing states thousands.
+    """
+    ordered = [p for p in periods
+               if isinstance(p.get("net_income"), (int, float)) and p["net_income"]]
+    # By the year the period is OF, not by `period_end` — 3 of HDBK's 12 annual
+    # rows carry no end date, and sorting on the string put them after 2025,
+    # which handed FY 2024 the neighbours from 2020 and 2022.
+    ordered.sort(key=_when)
+    spot = next((i for i, p in enumerate(ordered) if p.get("period") == label), None)
+    if spot is None:
+        return False
+    neighbours = [abs(p["net_income"]) for p in
+                  ordered[max(0, spot - 2):spot] + ordered[spot + 1:spot + 3]]
+    if len(neighbours) < 2:
+        return False
+    low, high = min(neighbours), max(neighbours)
+    if not low:
+        return False
+    # A little room either side of the range the neighbours actually span.
+    inside = low / 3 <= abs(incoming) <= high * 3
+    outside = abs(held) < low / 10 or abs(held) > high * 10
+    return inside and outside
+
+
+def keep_statement_figure(existing: dict, filed) -> bool:
+    """Put the statement's own profit beside the exchange's. True when it moved.
+
+    The exchange wins the figure a reader sees, which is what the owner asked
+    for and what the filing deserves — it is the company's own submission to
+    its own regulator. But the statement's number is not wrong for being
+    second: it is what a balance sheet in the same row was built from, and
+    losing it would leave a reader unable to see that the two disagree at all.
+
+    So it is kept, named, and only where a statement actually exists. A period
+    with no balance sheet has nothing to preserve.
+    """
+    complete = existing.get("assets") is not None or existing.get("equity") is not None
+    stated = existing.get("net_income")
+    if not complete or stated is None or stated == filed:
+        return False
+    existing["statement_net_income"] = stated
+    existing["statement_net_income_source"] = existing.get("source")
+    return True
 
 
 def egx_rows() -> tuple[dict[tuple[str, str], dict], dict[str, int]]:
@@ -310,41 +398,66 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                     # one of them denominated differently — several issuers file
                     # in thousands. Refuse rather than publish a figure a
                     # million out, and count the refusals so they stay visible.
+                    #
+                    # Eastern Tobacco is the one to picture: its half-year
+                    # filing reads "Net Profit : 6,048,458" against a statement
+                    # of 6,048.7 million. Identical digits, one template stating
+                    # thousands. This guard is why giving the exchange priority
+                    # below is safe — without it that period would publish a
+                    # real company's profit a thousandfold light.
+                    #
+                    # The ratio is taken on the MAGNITUDES. It used to be
+                    # signed, so a profit where the other source recorded a
+                    # loss came out negative, failed `0.01 < r < 100`, and was
+                    # refused as a unit mismatch — 48 of 58 refusals were that,
+                    # counted and printed as scale errors. They are the
+                    # opposite: two sources contradicting each other about
+                    # whether a company made money, which is the single most
+                    # important thing on the row and exactly what the exchange's
+                    # own filing should settle. DAPH's FY 2025 filing reads
+                    # "Net Loss : 140,758,402" and the site published +17.946m.
                     if (held and abs(held) > 0
-                            and not (0.01 < row["net_income"] / held < 100)
-                            and (tick, label) not in force_keys):
+                            and not (0.01 < abs(row["net_income"] / held) < 100)
+                            and (tick, label) not in force_keys
+                            and not indicted_by_its_own_series(
+                                periods, label, row["net_income"], held)):
                         skipped["magnitude"] = skipped.get("magnitude", 0) + 1
                         continue
-                    # A COMPLETE statement is not overruled by a bare line of
-                    # unstated basis.
+                    # THE EXCHANGE WINS WHERE THE TWO SOURCES INTERSECT.
                     #
-                    # "The exchange wins" was written for two sources reporting
-                    # the same thing, where the registry beats a redistributor.
-                    # It is not what was happening. TMGH's FY 2024 came out at
-                    # 801.961m against a statement of 10,723.074m — thirteen
-                    # times apart, which is not a disagreement about a number,
-                    # it is two different numbers: a group's consolidated
-                    # result and, almost certainly, its parent's. Its own FY
-                    # 2023 row is labelled `consolidated` and agrees to one per
-                    # cent, which is what agreement looks like.
+                    # The previous rule was the opposite: a complete statement
+                    # was never overruled by a filing of unstated basis, because
+                    # TMGH's FY 2024 came out at 801.961m against a statement of
+                    # 10,723.074m and that is not a disagreement about a number,
+                    # it is a parent's result standing where a group's belongs.
                     #
-                    # 77 companies published one figure in the directory and
-                    # another in their own document for the same year, and 75
-                    # of the 77 had a full balance sheet behind the directory's.
+                    # That reasoning was right and the remedy was aimed at the
+                    # wrong thing. TMGH filed BOTH figures for FY 2024 —
+                    # standalone 801,960,651 and consolidated 14,467,525,731 —
+                    # and `egx_rows` already prefers the consolidated one. It
+                    # could not, because the basis regex read `F/S Consolidated
+                    # Period` and the exchange had written `F/S (Standalone)
+                    # Period:`. 2,468 filings stated a basis that was recorded
+                    # as "unstated", and the preference that would have picked
+                    # the right figure was blind for all of them.
                     #
-                    # So the registry still wins when it says it is reporting
-                    # the same basis. An unlabelled line does not overwrite a
-                    # period that has assets, equity and a cash flow behind it;
-                    # it is kept beside it, named for what it is, so nothing is
-                    # lost and nothing is silently swapped.
+                    # And the guard never fired once: `egx_net_income` appears
+                    # in none of the 282 published documents. The balance sheet
+                    # it tested for is added by `apply_pdf_statements`, which
+                    # runs AFTER this step, so `complete` was always False and
+                    # the bare line overwrote anyway. The protection was
+                    # ordered out of existence, and TMGH's parent profit went
+                    # to readers beside the group's assets regardless.
+                    #
+                    # With the basis legible, the exchange's own filing is the
+                    # better figure for the 153 periods where the two genuinely
+                    # differ, and it wins. What the statement said is kept
+                    # beside it rather than discarded.
                     complete = existing.get("assets") is not None or existing.get("equity") is not None
-                    if complete and row["basis"] != "consolidated":
-                        existing["egx_net_income"] = row["net_income"]
-                        existing["egx_net_income_basis"] = row["basis"] or "unstated"
-                        existing["egx_filing_id"] = f"egx-{row['code']}"
+                    stated = existing.get("net_income")
+
+                    if keep_statement_figure(existing, row["net_income"]):
                         kept_statement += 1
-                        changed = True
-                        continue
                     existing["net_income"] = row["net_income"]
                     # What basis the figure that WON was filed on, so a reader
                     # is never shown a profit whose basis nobody recorded.
@@ -396,8 +509,8 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
     print(f"   {verb} {touched} companies — {overrode} figures replaced by the "
           f"exchange's, {added} periods added that Mubasher never had")
     if kept_statement:
-        print(f"   left {kept_statement} complete statement(s) standing against an "
-              f"unlabelled filing, and kept the filing's figure beside them")
+        print(f"   took the exchange's figure on {kept_statement} period(s) that "
+              f"had a statement, and kept the statement's own beside it")
     if skipped.get("magnitude"):
         print(f"   refused {skipped['magnitude']} override(s) as a likely unit "
               f"mismatch rather than publish a figure orders of magnitude out")
