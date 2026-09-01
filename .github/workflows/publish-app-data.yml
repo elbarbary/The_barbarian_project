@@ -353,3 +353,27 @@ jobs:
           done
           echo 'could not push after three attempts'
           exit 1
+
+      # The site serves its data from the Worker's own assets, so a commit here
+      # does not reach a reader until something deploys — and nothing did. Every
+      # rebuild landed in git and sat there until somebody ran `wrangler deploy`
+      # by hand, which is how a fifteen-minute news cadence ended up hours old on
+      # screen. Deploying in the run that committed removes the gap and the race
+      # with it: the assets uploaded are exactly the commit just pushed.
+      #
+      # Best-effort on purpose. A failed deploy must not fail a build whose data
+      # is already committed and correct; the next run carries it. And with no
+      # token configured it says so and does nothing, so the workflow keeps
+      # working on a fork or before the secret exists.
+      - name: Deploy the site
+        if: always() && steps.diff.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 7262f969df05178d5542f19912e8f9ba
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo 'no CLOUDFLARE_API_TOKEN secret — the data is committed but not deployed'
+            exit 0
+          fi
+          npx --yes wrangler@4 deploy --config public/wrangler.jsonc

@@ -100,6 +100,7 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 .si-step button[type=submit]:disabled { opacity: .6; cursor: default; }
 .si-back { margin-top: 2px; background: none; border: 0; cursor: pointer;
   color: #6E6761; font-size: 12.5px; text-decoration: underline; }
+.si-turnstile { min-height: 65px; display: flex; justify-content: center; }
 .si-error { margin: 12px 0 0; color: #A3402F; font-size: 13px; }
 .si-error[hidden] { display: none; }
 .si-close { position: absolute; top: 10px; inset-inline-end: 12px;

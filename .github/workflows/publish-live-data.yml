@@ -80,6 +80,7 @@ jobs:
         run: python3 scripts/build_fixtures.py
 
       - name: Commit if anything moved
+        id: commit
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -93,8 +94,10 @@ jobs:
                   app/assets/fixtures/manifest.json
           if git diff --cached --quiet; then
             echo 'nothing moved'
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
           git commit -m 'data: live news and rates'
           # A 15-minute job racing the daily build will lose a push now and
           # then. Rebasing and retrying is cheaper than failing the run, and
@@ -154,3 +157,27 @@ jobs:
 # cadence anyway: five runs across the session rather than ninety-six. It runs
 # from the machine that holds the EGX monitor, alongside the daily build, until
 # a browser image is worth adding to CI.
+
+      # The site serves its data from the Worker's own assets, so a commit here
+      # does not reach a reader until something deploys — and nothing did. Every
+      # rebuild landed in git and sat there until somebody ran `wrangler deploy`
+      # by hand, which is how a fifteen-minute news cadence ended up hours old on
+      # screen. Deploying in the run that committed removes the gap and the race
+      # with it: the assets uploaded are exactly the commit just pushed.
+      #
+      # Best-effort on purpose. A failed deploy must not fail a build whose data
+      # is already committed and correct; the next run carries it. And with no
+      # token configured it says so and does nothing, so the workflow keeps
+      # working on a fork or before the secret exists.
+      - name: Deploy the site
+        if: always() && steps.commit.outputs.changed == 'true'
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 7262f969df05178d5542f19912e8f9ba
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo 'no CLOUDFLARE_API_TOKEN secret — the data is committed but not deployed'
+            exit 0
+          fi
+          npx --yes wrangler@4 deploy --config public/wrangler.jsonc

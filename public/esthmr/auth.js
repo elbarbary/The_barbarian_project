@@ -9,6 +9,35 @@
  */
 const API = '/esthmr/api/auth';
 
+/* The challenge in front of the mail sender.
+ *
+ * /auth/request sends an email on every call, which makes it the one place
+ * here where an abuser spends somebody else's money and fills a stranger's
+ * inbox. The widget is rendered explicitly rather than by class, because the
+ * sheet stays on screen after a failed attempt and a Turnstile token is
+ * redeemed exactly once — a second submit with the first token is refused,
+ * and looks to the reader like a sign-in that stopped working.
+ */
+const SITEKEY = '0x4AAAAAAEjzvIH3DBUY0QbA';
+const TURNSTILE_JS = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
+/** The script, loaded once and only when somebody opens the sheet. */
+let turnstileReady = null;
+function loadTurnstile() {
+  if (turnstileReady) return turnstileReady;
+  turnstileReady = new Promise((resolve, reject) => {
+    if (window.turnstile) return resolve(window.turnstile);
+    const tag = document.createElement('script');
+    tag.src = TURNSTILE_JS;
+    tag.async = true;
+    tag.defer = true;
+    tag.onload = () => resolve(window.turnstile);
+    tag.onerror = () => reject(new Error('turnstile'));
+    document.head.appendChild(tag);
+  });
+  return turnstileReady;
+}
+
 async function post(path, body) {
   const response = await fetch(API + path, {
     method: 'POST',
@@ -31,7 +60,8 @@ export async function whoami() {
   }
 }
 
-export const requestCode = (email) => post('/request', { email });
+export const requestCode = (email, turnstile) =>
+  post('/request', turnstile ? { email, turnstile } : { email });
 export const verifyCode = (email, code) => post('/verify', { email, code });
 export const signOut = () => post('/signout');
 
@@ -100,6 +130,7 @@ export function openSignIn(onDone, lang) {
         <label for="si-email">${t.email}</label>
         <input id="si-email" type="email" autocomplete="email" required dir="ltr"
                placeholder="you@example.com" />
+        <div id="si-turnstile" class="si-turnstile"></div>
         <button type="submit">${t.send}</button>
       </form>
       <form class="si-step" data-step="code" hidden>
@@ -118,6 +149,13 @@ export function openSignIn(onDone, lang) {
   const error = wrap.querySelector('.si-error');
   const close = () => wrap.remove();
   const said = (WORDS[lang] ? lang : 'ar');
+  /** Whatever the widget currently holds, or '' if it holds nothing. */
+  const token = () => {
+    try {
+      return (widgetId !== null && window.turnstile
+        ? window.turnstile.getResponse(widgetId) : '') || '';
+    } catch { return ''; }
+  };
   const fail = (message) => {
     error.textContent = (REASONS[said] || {})[message] || message;
     error.hidden = false;
@@ -135,6 +173,30 @@ export function openSignIn(onDone, lang) {
     if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
   });
 
+  /* The widget, rendered explicitly so its id can be kept and reset.
+   *
+   * Failing to load must not lock a reader out: the server only insists on a
+   * token when the browser sends an Origin it recognises, so a challenge that
+   * never appeared would refuse a sign-in the reader can do nothing about.
+   * The submit goes ahead with no token and the server answers — which is the
+   * same shape as any other outage, and visible rather than silent.
+   */
+  let widgetId = null;
+  loadTurnstile()
+    .then((ts) => {
+      const slot = wrap.querySelector('#si-turnstile');
+      if (!ts || !slot) return;
+      widgetId = ts.render(slot, {
+        sitekey: SITEKEY,
+        action: 'signin',
+        // The sheet's own language, so the challenge does not arrive in
+        // English over an Arabic form.
+        language: (WORDS[lang] ? lang : 'ar'),
+        theme: 'light',
+      });
+    })
+    .catch(() => { /* the server will say so */ });
+
   let email = '';
   const busy = (form, on, label) => {
     const button = form.querySelector('button[type=submit]');
@@ -147,11 +209,15 @@ export function openSignIn(onDone, lang) {
     email = wrap.querySelector('#si-email').value.trim();
     busy(steps[0], true, t.send);
     try {
-      await requestCode(email);
+      await requestCode(email, token());
       step('code');
     } catch (err) {
       fail(err.message);
     } finally {
+      // A token is redeemed exactly once. Whether the request succeeded or
+      // not, the one on screen is now spent, and a reader who tries again
+      // with it would be refused for a reason they cannot see.
+      if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
       busy(steps[0], false, t.send);
     }
   };

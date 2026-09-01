@@ -177,6 +177,74 @@ async function overLimit(env, bucket, key, { max, window }) {
   return false;
 }
 
+/* ── the challenge on the way in ──────────────────────────────────────────
+ *
+ * /auth/request sends an EMAIL on every call. That makes it the one endpoint
+ * here where an abuser spends somebody else's money — a mail quota, a sender
+ * reputation, and a stranger's inbox. It has per-email and per-IP counters,
+ * which bound how fast one address can be hit and do nothing at all about a
+ * spread of addresses.
+ *
+ * WHAT IS ENFORCED, AND ON WHOM
+ * The token is required of BROWSERS and not of the app. A browser cannot
+ * suppress the `Origin` header on a cross-origin POST, so a request that
+ * claims to come from one of this site's own pages must carry a solved
+ * challenge or it is refused. The phone app signs in through this same
+ * endpoint and sends no Origin, so it keeps working on the counters alone.
+ *
+ * That is a deliberate, partial answer and worth saying plainly: a script
+ * that simply omits Origin skips the challenge. What it buys is that the
+ * cheap attack — a browser, a headless one included, pointed at the sign-in
+ * form — stops working, and the expensive one has to be written on purpose.
+ * Closing the rest means requiring a token from the app too, which is an app
+ * release, not a deploy.
+ */
+const TURNSTILE = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
+/** Hosts whose pages carry the widget. An Origin from one of these is a
+ *  browser on our own site, and is held to the challenge. */
+const CHALLENGED = new Set([
+  'https://esthmr.com', 'https://www.esthmr.com',
+  'https://thebarbarianproject.com',
+  'http://localhost:8438', 'http://127.0.0.1:8438',
+]);
+
+/** Whether this request must present a solved challenge. */
+export function mustSolve(origin, hasSecret) {
+  if (!hasSecret) return false;              // unconfigured means unenforced
+  return CHALLENGED.has(String(origin || '').trim().toLowerCase());
+}
+
+/** Whether the token is good for this action, from this site. Fails closed. */
+async function solved(env, token, ip) {
+  if (typeof token !== 'string' || !token || token.length > 2048) return false;
+  let result;
+  try {
+    const answer = await fetch(TURNSTILE, {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      signal: AbortSignal.timeout(10000),
+      body: new URLSearchParams({
+        secret: env.TURNSTILE_SECRET,
+        response: token,
+        ...(ip ? { remoteip: ip } : {}),
+      }),
+    });
+    if (!answer.ok) return false;
+    result = await answer.json();
+  } catch {
+    // A challenge service that cannot be reached refuses the request. The
+    // alternative is an endpoint that sends mail whenever Cloudflare has a
+    // bad minute, which is the thing being defended against.
+    return false;
+  }
+  // The action pins the token to THIS form: one minted on some other page of
+  // ours cannot be replayed here. The hostname pins it to our own domains.
+  return result.success === true
+    && result.action === 'signin'
+    && CHALLENGED.has(`https://${result.hostname}`.toLowerCase());
+}
+
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
 const normalise = (raw) => String(raw || '').trim().toLowerCase();
 
@@ -504,6 +572,11 @@ async function api(request, env, url) {
   if (path === '/auth/request') {
     const email = normalise(body.email);
     if (!EMAIL.test(email) || email.length > 200) return json({ error: 'email' }, 400);
+    // Before the counters, and before a single byte of mail is composed.
+    if (mustSolve(request.headers.get('origin'), Boolean(env.TURNSTILE_SECRET))
+        && !(await solved(env, body.turnstile, ip))) {
+      return json({ error: 'challenge' }, 403);
+    }
     if (await overLimit(env, 'ip', ip, LIMITS.codePerIp)
         || await overLimit(env, 'email', email, LIMITS.codePerEmail)) {
       return json({ error: 'too many requests' }, 429);
