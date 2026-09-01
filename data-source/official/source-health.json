@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-01T14:10:27.712375+00:00",
+  "builtAt": "2026-09-01T14:33:54.720503+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-08-31T06:21:40Z",
-      "observations": 5,
+      "observedAt": "2026-09-01T14:32:23Z",
+      "observations": 4,
       "status": "available",
-      "ageHours": 31.813
+      "ageHours": 0.025
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
-      "observedAt": "2026-09-01T14:03:55.843208+00:00",
-      "documents": 25810,
-      "parsedDailySummaries": 8,
-      "dailySummaries": 2012,
-      "status": "partial",
-      "ageHours": 0.109
+      "observedAt": null,
+      "documents": 0,
+      "parsedDailySummaries": 0,
+      "dailySummaries": 0,
+      "status": "missing",
+      "ageHours": null
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-01T14:08:52.910587+00:00",
+      "observedAt": "2026-09-01T14:32:12.365699+00:00",
       "items": 555,
       "status": "available",
-      "ageHours": 0.026
+      "ageHours": 0.028
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
@@ -32,22 +32,22 @@
       "exactIsinsQueried": 10,
       "notYetIndividuallyQueried": 250,
       "status": "partial",
-      "ageHours": 0.24
+      "ageHours": 0.631
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-01T14:10:07.687308+00:00",
-      "issuers": 282,
+      "observedAt": "2026-09-01T14:33:54.426572+00:00",
+      "issuers": 284,
       "verifiedIrArchives": 0,
       "status": "partial",
-      "ageHours": 0.006
+      "ageHours": 0.0
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-01T13:56:20.352072+00:00",
+      "observedAt": "2026-09-01T14:32:19.771451+00:00",
       "officialFxDate": "01/09/2026",
       "status": "available",
-      "ageHours": 0.235
+      "ageHours": 0.026
     }
   },
   "capabilities": {
