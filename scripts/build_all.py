@@ -98,7 +98,10 @@ STEPS = [
     # --check validation pass runs BEFORE the harvest, when the archive is still
     # yesterday's by design, so checking it there would fail every build. It
     # runs only in the real pass, after New filings.
-    ("Staleness guard", "build_staleness_guard.py", False),
+    # It has a --check mode; declaring otherwise made `build_all --check` skip
+    # the guard entirely, so the validate pass never once checked whether the
+    # archive it was validating was stale.
+    ("Staleness guard", "build_staleness_guard.py", True),
     # Immediately after Market, because Market rebuilds `companies/` from
     # scratch on every run — `shutil.rmtree` then rewrite — and this is an
     # enrichment applied on top of it. It was run once by hand in August and
