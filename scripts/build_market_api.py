@@ -800,6 +800,11 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 "name_en": r.get("company") or ticker,
                 "name_ar": ARABIC.get(ticker),
                 "sector": sector_en,
+                # Eleven listings are quoted in dollars. Saying so is the
+                # difference between a price and a wrong price: CFGH at 0.117
+                # is not eleven piastres, it is eleven cents.
+                **({"currency": (EGX_SESSION[ticker] or {}).get("currency")}
+                   if (EGX_SESSION.get(ticker) or {}).get("currency") else {}),
                 **({"sector_ar": sector_ar} if sector_ar else {}),
                 # Which of the two named it, so a reader — or the next person
                 # looking at an odd grouping — can tell without guessing.

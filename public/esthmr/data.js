@@ -322,6 +322,14 @@ export async function live() {
       // documents no longer use — it is the fallback, not the source.
       sectorAr: c.sector_ar || SECTOR_AR[c.sector] || (c.sector ? c.sector : UNCLASSIFIED.ar),
       close: q.close ?? '—',
+      // Eleven of the exchange's listings are quoted in DOLLARS. Printed in a
+      // column where every other figure is pounds, CFGH at 0.117 reads as
+      // eleven piastres and is eleven cents — and the market value beside it
+      // really is in pounds, which is how a share came to look 51 times
+      // smaller than its own company. Absent means the pound: 216 of the 227,
+      // which does not need saying on every row.
+      currency: c.currency || '',
+      foreignCurrency: Boolean(c.currency),
       // market.json states the day's move as a FRACTION — COMI fell 0.011918,
       // which is 1.19%. The site printed it straight, so every move on the
       // exchange read a hundred times too small: a real ticker with a wrong

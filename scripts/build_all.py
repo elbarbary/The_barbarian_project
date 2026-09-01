@@ -198,6 +198,13 @@ STEPS = [
     # is not a name, and the site has already shipped a chart of the wrong
     # instrument once.
     ("Rate history", "rate_history.py", True),
+    # Last, and reporting only. It reads what every step above published and
+    # counts what is wrong with it — a market value that is not its own price
+    # times its own shares, a directory and a document disagreeing about the
+    # same period, a multiple that does not divide out. Every check is one this
+    # repository has already been bitten by, so the count going up is a
+    # regression and the log is where it shows.
+    ("Accuracy audit", "audit_accuracy.py", True),
     # The world outside the exchange.
     #
     # This was in no STEPS list and in no workflow: `macro.json` had four

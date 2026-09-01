@@ -1,0 +1,195 @@
+#!/usr/bin/env python3
+"""What is actually wrong with each company's published data.
+
+Coverage is easy to feel good about and easy to be wrong about. This counts
+instead: for every company the site publishes, which figures exist, which ones
+contradict each other, and which are old enough that a reader would be misled
+by their absence of a date.
+
+Every check here is one this repository has already been bitten by:
+
+  * a market value that is not its own price times its own share count — the
+    check that keeps per-share arithmetic honest, and the reason sixteen P/Es
+    are withheld on purpose;
+  * the directory and a company's own document disagreeing about the same
+    period, which was 77 companies until a bare filed line stopped overwriting
+    whole balance sheets;
+  * a P/E that does not divide out against the EPS printed beside it;
+  * a sector in the directory that is not the sector in the document;
+  * a newest filing old enough that "latest" means something else.
+
+It reads only what is published. No network, no vendor, nothing it cannot
+point a reader at — so it can run in CI and say the same thing twice.
+
+Usage:
+    python3 scripts/audit_accuracy.py [--json] [--ticker COMI]
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime
+import json
+import pathlib
+
+REPO = pathlib.Path(__file__).resolve().parent.parent
+V1 = REPO / "public" / "data" / "v1"
+
+# How far a derived figure may sit from the one it is derived from. The same
+# 5% the P/E guard uses, for the same reason: rounding in a published document
+# is not a disagreement.
+TOLERANCE = 0.05
+
+# A filed year older than this is not "the latest"; it is history. Egyptian
+# annuals land through the spring, so a year and a half allows for a company
+# that files late without flagging the whole exchange every January.
+STALE_DAYS = 550
+
+
+def load(path: pathlib.Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def near(a, b, tol=TOLERANCE) -> bool:
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        return False
+    if a == 0 and b == 0:
+        return True
+    return abs(a - b) / max(abs(a), abs(b), 1e-9) <= tol
+
+
+def newest_period_end(doc: dict) -> str | None:
+    ends = []
+    for bucket in ("annual", "quarterly"):
+        for row in (doc.get("financials") or {}).get(bucket) or []:
+            end = row.get("period_end")
+            if isinstance(end, str) and len(end) >= 10:
+                ends.append(end[:10])
+    return max(ends) if ends else None
+
+
+def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date) -> list[dict]:
+    """Every fault found on one company, each with the figures behind it."""
+    faults = []
+    t = row["ticker"]
+
+    def fault(kind, detail, **numbers):
+        faults.append({"ticker": t, "kind": kind, "detail": detail, **numbers})
+
+    profile = (doc or {}).get("profile") or {}
+    close = quote.get("close")
+    cap = row.get("market_cap")
+    shares = profile.get("shares_outstanding")
+
+    # ── the figures a reader is shown ────────────────────────────────────
+    if not isinstance(close, (int, float)):
+        fault("no_price", "no close in market.json")
+    if not isinstance(cap, (int, float)) or cap <= 0:
+        fault("no_market_cap", "no market value, so it cannot be sized or ranked")
+    if not row.get("sector"):
+        fault("no_sector", "unclassified")
+
+    # ── figures that must agree with each other ──────────────────────────
+    if all(isinstance(x, (int, float)) for x in (close, cap, shares)) and shares > 0:
+        implied = close * shares
+        if implied > 0 and not near(cap, implied):
+            fault("cap_vs_shares",
+                  "market value is not this company's own price times its own shares",
+                  cap=cap, implied=round(implied, 2), ratio=round(cap / implied, 3))
+
+    pe, eps = row.get("pe"), row.get("eps")
+    if isinstance(pe, (int, float)) and isinstance(eps, (int, float)) and eps != 0 \
+            and isinstance(close, (int, float)):
+        if not near(pe, close / eps):
+            fault("pe_vs_eps", "the multiple does not divide out against the EPS beside it",
+                  pe=pe, eps=eps, close=close, implied=round(close / eps, 2))
+
+    if doc:
+        if doc.get("sector") and row.get("sector") and doc["sector"] != row["sector"]:
+            fault("sector_split", "the directory and the document name different sectors",
+                  directory=row["sector"], document=doc["sector"])
+
+        # The one that was 77 companies wide.
+        period, profit = row.get("net_income_period"), row.get("net_income")
+        if period and isinstance(profit, (int, float)):
+            for r in (doc.get("financials") or {}).get("annual") or []:
+                if r.get("period") == period and isinstance(r.get("net_income"), (int, float)):
+                    if not near(profit, r["net_income"]):
+                        fault("profit_split",
+                              "the directory and the document disagree on the same period",
+                              period=period, directory=profit, document=r["net_income"],
+                              apart=round(abs(r["net_income"] - profit)
+                                          / max(abs(profit), 1e-9), 3))
+
+        end = newest_period_end(doc)
+        if end:
+            age = (today - datetime.date.fromisoformat(end)).days
+            if age > STALE_DAYS:
+                fault("stale_filings", "the newest filed period is old enough to mislead",
+                      newest=end, days=age)
+        elif (doc.get("financials") or {}).get("annual"):
+            fault("undated_filings", "filed periods carry no period_end to age them by")
+
+        # A profit with no balance sheet AND no basis is a figure whose meaning
+        # nobody recorded — it could be a group, a parent, or a quarter, and
+        # the reader cannot tell. A full statement without the word on it is
+        # not the same thing: the assets and equity beside it say what it is.
+        bare = [r.get("period") for r in (doc.get("financials") or {}).get("annual") or []
+                if r.get("net_income") is not None and not r.get("basis")
+                and r.get("assets") is None and r.get("equity") is None]
+        if bare:
+            fault("bare_profit", "filed profit with neither a basis nor a statement behind it",
+                  periods=bare[:4], count=len(bare))
+    else:
+        fault("no_document", "in the directory with no company document")
+
+    return faults
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--json", action="store_true", help="the findings, machine-readable")
+    ap.add_argument("--ticker", help="one company")
+    args = ap.parse_args()
+
+    directory = load(V1 / "companies.json") or {}
+    market = (load(V1 / "market.json") or {}).get("stocks") or {}
+    today = datetime.date.today()
+
+    rows = directory.get("companies") or []
+    if args.ticker:
+        rows = [r for r in rows if r["ticker"] == args.ticker.upper()]
+
+    faults = []
+    for row in rows:
+        doc = load(V1 / "companies" / f"{row['ticker']}.json")
+        faults += audit_one(row, doc, market.get(row["ticker"]) or {}, today)
+
+    if args.json:
+        print(json.dumps({"companies": len(rows), "faults": faults}, ensure_ascii=False))
+        return 0
+
+    from collections import Counter
+    counts = Counter(f["kind"] for f in faults)
+    affected = len({f["ticker"] for f in faults})
+    print(f"── {len(rows)} companies, {affected} with something wrong, "
+          f"{len(faults)} findings")
+    for kind, n in counts.most_common():
+        print(f"   {kind:<18} {n:>4}")
+    # The worst of each kind, with its numbers, because a count is not a lead.
+    for kind, _ in counts.most_common():
+        worst = [f for f in faults if f["kind"] == kind][:3]
+        print(f"\n   {kind}")
+        for f in worst:
+            extra = {k: v for k, v in f.items() if k not in ("ticker", "kind", "detail")}
+            print(f"      {f['ticker']:<7}{f['detail']}")
+            if extra:
+                print(f"             {extra}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
