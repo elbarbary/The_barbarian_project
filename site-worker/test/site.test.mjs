@@ -1151,6 +1151,54 @@ test('a macro reading carries its unit, its chain and how much it actually moves
   assert.equal(fdi.value, '15.45bn', 'a raw 15452700000 does not fit a cell or a head');
 });
 
+test('a sector opens, and shows what the card was already reading', async () => {
+  // The card fetched a four-sentence read, eight medians, eight movement rows,
+  // four standouts and every member — and printed a teaser, one median and a
+  // bar. The app has had a screen for all of it since it shipped.
+  const c = fresh();
+  const secs = await fromDisk(() => data.sectors());
+  c.setData({ ...LIVE, sectorCards: secs });
+  c.state.screen = 'sectors';
+
+  // Closed, the grid is what shows.
+  assert.equal(c.renderVals().noOpenSector, true);
+  assert.equal(c.renderVals().hasOpenSector, false);
+
+  const finance = c.renderVals().sectorCards.find((x) => x.name === 'Finance');
+  finance.open();
+  const open = c.renderVals().openSector;
+  assert.ok(open, 'the card did not open');
+  assert.equal(open.name, 'Finance');
+  assert.match(open.as, /^\d+ companies · read of /);
+
+  // The full read, not the teaser the card shows.
+  assert.ok(open.read.length > finance.read.length, 'the teaser reached the screen');
+  assert.ok(open.hasMedians && open.medians.length >= 6);
+  assert.ok(open.hasMembers && open.members.length > 50, `${open.members.length} members`);
+  assert.ok(open.hasStandouts);
+
+  // A member is a count off the filings and a place it stands — never a rank.
+  const withPattern = open.members.find((m) => !m.dim);
+  assert.match(withPattern.measures, /^\d+ of \d+ improving$/);
+  assert.equal(typeof withPattern.go, 'function');
+  const unread = open.members.find((m) => m.dim);
+  if (unread) assert.match(unread.measures, /Not enough filed history/);
+
+  // Every movement row says what its numbers mean rather than printing four
+  // unlabelled colours.
+  for (const m of open.metrics) {
+    assert.ok(m.parts.length > 0, m.key);
+    for (const part of m.parts) {
+      assert.match(part.n, /^\d+$/);
+      assert.ok(part.word.length > 2, `${m.key} has an unlabelled count`);
+    }
+  }
+
+  // And it closes back to the grid.
+  open.back();
+  assert.equal(c.renderVals().noOpenSector, true);
+});
+
 test('a sector card is not four blank lines', async () => {
   // The mapper emitted `companies`, `lead` and `pe`; the card binds `count`,
   // `read` and `medianPe`. Every card rendered its title and its bar over
@@ -2924,7 +2972,14 @@ test('the disclosures screen filters by day and by company', () => {
 
 test('the crossings have a screen of their own and Today has the news', () => {
   const v = screen({ ...LIVE, crossings: CROSS, feed: [] });
-  assert.ok(v.nav.some((n) => n.label === 'Crossings'));
+  // "Crossings" in the rail and "What ties these together" on the screen were
+  // one feature with two names. Both are "Connecting the dots" now, and the
+  // rail's label and the screen's heading have to be the same string or the
+  // pair drifts apart again.
+  assert.ok(v.nav.some((n) => n.label === 'Connecting the dots'), 
+    v.nav.map((n) => n.label).join(', '));
+  assert.equal(v.L.dotsLabel, 'Connecting the dots');
+  assert.ok(screen(LIVE, 'ar').nav.some((n) => n.label === 'ربط النقاط'));
   assert.ok(v.nav.some((n) => n.label === 'Disclosures'));
   // Investors is the fourth entry.
   assert.equal(v.nav[3].label, 'Investors');

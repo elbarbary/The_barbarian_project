@@ -970,6 +970,10 @@ export async function sectors() {
     // a percentage to a reader, and "ratio" would otherwise print it as a
     // multiple. The sector median has to agree with the card it sits beside.
     if (m.key === 'roe' || m.key === 'roa') return (m.value * 100).toFixed(1) + '%';
+    // A P/E is a ratio in the document and a bare number to a reader. The unit
+    // map turned it into "10.41×" on the opened sector while the card beside
+    // it said "10.4" — one figure, two ways of writing it, on one screen.
+    if (m.key === 'pe') return m.value.toFixed(1);
     const dp = m.unit === 'egp' ? 2 : m.unit === 'egp_m' ? 0 : m.unit === 'ratio' ? 2 : 1;
     return m.value.toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp })
       + (UNIT[m.unit] || '');
@@ -1027,6 +1031,29 @@ export async function sectors() {
       medians: (detail.medians || []).map((m) => ({
         key: (METRIC[m.key] || [m.key])[0], keyAr: (METRIC[m.key] || [m.key, m.key])[1],
         value: median(m),
+      })),
+      // The whole standout list and every company in the sector — both
+      // published per sector and, until the sector screen could be opened,
+      // both read for one line of a summary card and thrown away. The app's
+      // sector screen has shown them all along.
+      generated: detail.generated || '',
+      standouts: (detail.standouts || []).map((x) => ({
+        ticker: x.ticker, name: x.name_en || x.ticker, nameAr: x.name_ar || x.name_en || x.ticker,
+        improving: x.improving || 0, readable: x.readable || 0,
+        deteriorating: x.deteriorating || 0,
+      })),
+      members: (detail.members || []).map((x) => ({
+        ticker: x.ticker, name: x.name_en || x.ticker, nameAr: x.name_ar || x.name_en || x.ticker,
+        improving: x.improving || 0, readable: x.readable || 0,
+        deteriorating: x.deteriorating || 0,
+        // Whether the company sits above or below its sector's middle on the
+        // metric the sector is read on. A word, not a rank: "above" is where
+        // it stands, not an opinion about whether that is good.
+        peer: x.peer || '', peerKey: (METRIC[x.peerKey] || [x.peerKey || ''])[0],
+        peerKeyAr: (METRIC[x.peerKey] || [x.peerKey || '', x.peerKey || ''])[1],
+        // A company with no readable metric has not held steady — it has not
+        // been read, and the row says which.
+        hasPattern: (x.readable || 0) > 0,
       })),
       metrics: (detail.movement || []).map((m) => ({
         key: (METRIC[m.key] || [m.key])[0], keyAr: (METRIC[m.key] || [m.key, m.key])[1],
