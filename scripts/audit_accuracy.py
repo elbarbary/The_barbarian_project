@@ -105,12 +105,19 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
         rate = (rates or {}).get(str(row.get("currency") or "").strip())
         expected = implied * rate if rate else implied
         if expected > 0 and not near(cap, expected):
+            # The share count the exchange's own market value implies, beside
+            # the one the vendor states. That is the actionable half: SEIGA is
+            # published with 2,500,000 shares against a capitalisation that
+            # needs 685 million of them, and the figure feeds the free float
+            # the screen prints as a percentage.
             fault("cap_vs_shares" if not rate else "cap_vs_rate",
                   "market value is not this company's own price times its own shares"
                   if not rate else
                   "the market value and the price disagree by more than the exchange rate",
                   cap=cap, implied=round(expected, 2),
                   ratio=round(cap / expected, 3),
+                  shares=shares,
+                  shares_implied=round(cap / (close * (rate or 1))) if close else None,
                   **({"rate": rate} if rate else {}))
 
     pe, eps = row.get("pe"), row.get("eps")
