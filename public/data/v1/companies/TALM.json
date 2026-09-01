@@ -6,12 +6,12 @@
  },
  "sector": "Consumer Services",
  "market": {
-  "last_close": 17.85,
+  "last_close": 18.1,
   "date": "2026-09-01",
-  "open": 17.52,
-  "high": 18.84,
-  "low": 17.11,
-  "volume": 3120031
+  "open": 17.85,
+  "high": 18.24,
+  "low": 17.85,
+  "volume": 273886
  },
  "price_history": [
   {
@@ -716,7 +716,7 @@
   },
   {
    "date": "2026-02-25",
-   "close": 15.36,
+   "close": 15.49,
    "volume": 593195
   },
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 734037000,
   "free_float": 0.259514,
   "float_shares": 190492878.018,
-  "perf_1w": -9.114052953156818,
-  "perf_1m": -0.778210116731501,
-  "perf_3m": 13.333333333333343,
-  "avg_volume_30d": 2171377.3333333335,
-  "relative_volume_10d": 2.1853791045231925,
+  "perf_1w": -6.7010309278350375,
+  "perf_1m": 3.72492836676219,
+  "perf_3m": 14.484503478810884,
+  "avg_volume_30d": 2165794,
+  "relative_volume_10d": 0.18381718067749792,
   "median_volume_20d": 1568414,
   "rv20": 1.9892904551986912,
   "normal_value_30d": 26692651.159999996,
   "five_session_change": -9.114052953156815,
   "history_bars": 120,
-  "market_cap": 13264052041.37,
+  "market_cap": 13308094272.83,
   "market_cap_source": "EGX",
-  "trades": 45,
-  "turnover": 1565449
+  "trades": 245,
+  "turnover": 5044585
  },
  "financials": {
   "annual": [

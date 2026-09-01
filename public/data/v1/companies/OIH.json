@@ -6,12 +6,12 @@
  },
  "sector": "Communications",
  "market": {
-  "last_close": 2.02,
+  "last_close": 2.05,
   "date": "2026-09-01",
-  "open": 2.11,
-  "high": 2.11,
-  "low": 1.99,
-  "volume": 85434898
+  "open": 2.02,
+  "high": 2.05,
+  "low": 1.98,
+  "volume": 37188145
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 5245690000,
   "free_float": 0.48338700000000007,
   "float_shares": 2535698352.03,
-  "perf_1w": 7.446808510638305,
-  "perf_1m": 36.486486486486484,
-  "perf_3m": 37.41496598639456,
-  "avg_volume_30d": 80493933.73333329,
-  "relative_volume_10d": 1.1831876204682736,
+  "perf_1w": 7.329842931937168,
+  "perf_1m": 40.41095890410958,
+  "perf_3m": 38.5135135135135,
+  "avg_volume_30d": 79410305.19999996,
+  "relative_volume_10d": 0.48614658367245783,
   "median_volume_20d": 86367687.5,
   "rv20": 0.9891997860889815,
   "normal_value_30d": 112137214.36,
   "five_session_change": 7.446808510638303,
   "history_bars": 120,
-  "market_cap": 10491381240.0,
+  "market_cap": 10753665771.0,
   "market_cap_source": "EGX",
-  "trades": 168,
-  "turnover": 2988360
+  "trades": 1323,
+  "turnover": 88736229
  },
  "financials": {
   "annual": [

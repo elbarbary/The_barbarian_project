@@ -6,19 +6,14 @@
  },
  "sector": "Finance",
  "market": {
-  "last_close": 56.21,
+  "last_close": 56.22,
   "date": "2026-09-01",
-  "open": 53.6,
-  "high": 61.74,
-  "low": 53.6,
-  "volume": 2020818
+  "open": 56.21,
+  "high": 57.69,
+  "low": 55.25,
+  "volume": 383860
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 31.89,
-   "volume": 530648
-  },
   {
    "date": "2025-07-27",
    "close": 32.9,
@@ -746,7 +741,7 @@
   },
   {
    "date": "2026-03-04",
-   "close": 31.64,
+   "close": 31.69,
    "volume": 190649
   },
   {
@@ -781,17 +776,17 @@
   },
   {
    "date": "2026-03-15",
-   "close": 32.7,
+   "close": 32.52,
    "volume": 64481
   },
   {
    "date": "2026-03-16",
-   "close": 32.35,
+   "close": 32.67,
    "volume": 113023
   },
   {
    "date": "2026-03-17",
-   "close": 32.55,
+   "close": 32.5,
    "volume": 62569
   },
   {
@@ -821,17 +816,17 @@
   },
   {
    "date": "2026-03-30",
-   "close": 32.74,
+   "close": 32.5,
    "volume": 74721
   },
   {
    "date": "2026-03-31",
-   "close": 32.79,
+   "close": 32.64,
    "volume": 29539
   },
   {
    "date": "2026-04-01",
-   "close": 33.03,
+   "close": 33.04,
    "volume": 49382
   },
   {
@@ -1313,34 +1308,32 @@
    "date": "2026-08-30",
    "close": 53.6,
    "volume": 865645
+  },
+  {
+   "date": "2026-08-31",
+   "close": 56.21,
+   "volume": 2020818
   }
  ],
  "profile": {
   "shares_outstanding": 18000000,
+  "free_float": 0.6227,
   "float_shares": 11208600,
-  "perf_1w": -13.523076923076921,
-  "perf_1m": 7.230064860740173,
-  "perf_3m": 34.796163069544356,
-  "avg_volume_30d": 509122.2999999981,
-  "relative_volume_10d": 4.251227465781479,
-  "history_bars": 0,
-  "market_cap": 1021140000.0,
-  "market_cap_source": "EGX",
-  "trades": 63,
-  "turnover": 1762143,
+  "perf_1w": -10.832672482157015,
+  "perf_1m": 9.526592635885448,
+  "perf_3m": 29.24137931034483,
+  "avg_volume_30d": 516724.49999999814,
+  "relative_volume_10d": 0.5825844493995674,
   "median_volume_20d": 365273.5,
-  "rv20": 2.369854369397178,
-  "normal_value_30d": 23080990,
-  "five_session_change": -14.281145050375821,
-  "free_float": 0.6227
+  "rv20": 5.5323422038554675,
+  "normal_value_30d": 23683162.65,
+  "five_session_change": -13.523076923076927,
+  "history_bars": 120,
+  "market_cap": 1018080000.0,
+  "market_cap_source": "EGX",
+  "trades": 567,
+  "turnover": 22185312
  },
- "profile_carried": [
-  "five_session_change",
-  "free_float",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {

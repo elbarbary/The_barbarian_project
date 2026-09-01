@@ -6,12 +6,12 @@
  },
  "sector": "Producer Manufacturing",
  "market": {
-  "last_close": 43.4,
+  "last_close": 43.99,
   "date": "2026-09-01",
-  "open": 45.72,
-  "high": 47,
-  "low": 42.15,
-  "volume": 304532
+  "open": 43.4,
+  "high": 44.98,
+  "low": 43.4,
+  "volume": 138775
  },
  "price_history": [
   {
@@ -721,12 +721,12 @@
   },
   {
    "date": "2026-02-26",
-   "close": 33.0,
+   "close": 32.9,
    "volume": 35736
   },
   {
    "date": "2026-03-01",
-   "close": 31.99,
+   "close": 31.69,
    "volume": 102697
   },
   {
@@ -736,12 +736,12 @@
   },
   {
    "date": "2026-03-03",
-   "close": 31.7,
+   "close": 31.47,
    "volume": 249795
   },
   {
    "date": "2026-03-04",
-   "close": 31.73,
+   "close": 31.36,
    "volume": 51560
   },
   {
@@ -761,12 +761,12 @@
   },
   {
    "date": "2026-03-10",
-   "close": 32.26,
+   "close": 32.11,
    "volume": 27267
   },
   {
    "date": "2026-03-11",
-   "close": 32.74,
+   "close": 32.37,
    "volume": 39581
   },
   {
@@ -781,12 +781,12 @@
   },
   {
    "date": "2026-03-16",
-   "close": 32.5,
+   "close": 32.48,
    "volume": 48787
   },
   {
    "date": "2026-03-17",
-   "close": 32.21,
+   "close": 32.34,
    "volume": 12077
   },
   {
@@ -806,12 +806,12 @@
   },
   {
    "date": "2026-03-26",
-   "close": 31.7,
+   "close": 31.79,
    "volume": 61881
   },
   {
    "date": "2026-03-29",
-   "close": 31.5,
+   "close": 31.46,
    "volume": 30861
   },
   {
@@ -826,27 +826,27 @@
   },
   {
    "date": "2026-04-01",
-   "close": 31.36,
+   "close": 31.5,
    "volume": 39312
   },
   {
    "date": "2026-04-02",
-   "close": 31.38,
+   "close": 31.47,
    "volume": 24048
   },
   {
    "date": "2026-04-05",
-   "close": 31.63,
+   "close": 31.18,
    "volume": 51096
   },
   {
    "date": "2026-04-06",
-   "close": 31.5,
+   "close": 31.47,
    "volume": 79198
   },
   {
    "date": "2026-04-07",
-   "close": 32.25,
+   "close": 31.97,
    "volume": 400145
   },
   {
@@ -876,7 +876,7 @@
   },
   {
    "date": "2026-04-19",
-   "close": 32.75,
+   "close": 32.59,
    "volume": 87727
   },
   {
@@ -886,7 +886,7 @@
   },
   {
    "date": "2026-04-21",
-   "close": 32.2,
+   "close": 32.15,
    "volume": 84488
   },
   {
@@ -921,7 +921,7 @@
   },
   {
    "date": "2026-04-30",
-   "close": 34.05,
+   "close": 34.08,
    "volume": 956214
   },
   {
@@ -1317,23 +1317,30 @@
  ],
  "profile": {
   "shares_outstanding": 145500000,
-  "free_float": 0.413215,
   "float_shares": 60122782.5,
-  "perf_1w": -8.938313050776328,
-  "perf_1m": 1.3071895424836488,
-  "perf_3m": 31.435493640218034,
-  "avg_volume_30d": 507004.1,
-  "relative_volume_10d": 0.7884060312289899,
+  "perf_1w": -7.447927624658108,
+  "perf_1m": 6.590743881754298,
+  "perf_3m": 30.805828129646148,
+  "avg_volume_30d": 499147.7333333333,
+  "relative_volume_10d": 0.3497500147435606,
+  "history_bars": 0,
+  "market_cap": 6262320000.0,
+  "market_cap_source": "EGX",
+  "trades": 338,
+  "turnover": 8931944,
   "median_volume_20d": 399396,
   "rv20": 0.7624813468337189,
   "normal_value_30d": 18265182.79,
   "five_session_change": -8.938313050776326,
-  "history_bars": 120,
-  "market_cap": 6495120000.0,
-  "market_cap_source": "EGX",
-  "trades": 36,
-  "turnover": 588190
+  "free_float": 0.413215
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {

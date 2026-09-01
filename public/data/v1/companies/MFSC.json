@@ -6,12 +6,12 @@
  },
  "sector": "Retail Trade",
  "market": {
-  "last_close": 49.85,
+  "last_close": 49.99,
   "date": "2026-09-01",
-  "open": 50.15,
-  "high": 51.05,
-  "low": 49.84,
-  "volume": 87148
+  "open": 49.85,
+  "high": 50.5,
+  "low": 49.5,
+  "volume": 21707
  },
  "price_history": [
   {
@@ -716,7 +716,7 @@
   },
   {
    "date": "2026-02-25",
-   "close": 32.0,
+   "close": 32.94,
    "volume": 2251
   },
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 93750000,
   "free_float": 0.135725,
   "float_shares": 12724218.75,
-  "perf_1w": -0.8157580580978843,
-  "perf_1m": 6.67665311363151,
-  "perf_3m": -4.300249568055293,
-  "avg_volume_30d": 186521.03333333333,
-  "relative_volume_10d": 1.0732538750095444,
+  "perf_1w": 0.6645187273459634,
+  "perf_1m": 7.551635111876087,
+  "perf_3m": -2.534607135893931,
+  "avg_volume_30d": 185577.4,
+  "relative_volume_10d": 0.2726051137790727,
   "median_volume_20d": 123591.5,
   "rv20": 0.7051293980573098,
   "normal_value_30d": 4406846.619999999,
   "five_session_change": -0.8157580580978818,
   "history_bars": 120,
-  "market_cap": 4673437500.0,
+  "market_cap": 4664062500.0,
   "market_cap_source": "EGX",
-  "trades": 5,
-  "turnover": 56986
+  "trades": 89,
+  "turnover": 1473791
  },
  "financials": {
   "annual": [

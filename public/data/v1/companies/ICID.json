@@ -6,12 +6,12 @@
  },
  "sector": "Finance",
  "market": {
-  "last_close": 16.67,
+  "last_close": 17.66,
   "date": "2026-09-01",
-  "open": 16.64,
-  "high": 17,
-  "low": 16.2,
-  "volume": 642580
+  "open": 16.67,
+  "high": 18,
+  "low": 16.65,
+  "volume": 1118396
  },
  "price_history": [
   {
@@ -716,7 +716,7 @@
   },
   {
    "date": "2026-02-25",
-   "close": 3.71,
+   "close": 3.72,
    "volume": 1426333
   },
   {
@@ -1317,20 +1317,20 @@
  ],
  "profile": {
   "shares_outstanding": 100000000,
-  "perf_1w": -4.688393367638632,
-  "perf_1m": 105.54870530209621,
-  "perf_3m": 218.12977099236645,
-  "avg_volume_30d": 1926503.3666666667,
-  "relative_volume_10d": 0.24603647257718322,
+  "perf_1w": 3.8823529411764715,
+  "perf_1m": 115.36585365853661,
+  "perf_3m": 221.67577413479052,
+  "avg_volume_30d": 1914070.933333333,
+  "relative_volume_10d": 0.5499288664663792,
   "median_volume_20d": 1673919,
   "rv20": 0.38387759503297353,
   "normal_value_30d": 13877719.845,
   "five_session_change": -4.688393367638632,
   "history_bars": 120,
-  "market_cap": 1667000000.0,
+  "market_cap": 1763000000.0,
   "market_cap_source": "EGX",
-  "trades": 16,
-  "turnover": 168197
+  "trades": 529,
+  "turnover": 20535335
  },
  "financials": {
   "annual": [
