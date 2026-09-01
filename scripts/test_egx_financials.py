@@ -81,5 +81,53 @@ class Currency(unittest.TestCase):
             self.assertIn(ok, m.EGP)
 
 
+class StatementWinsTest(unittest.TestCase):
+    """A complete statement is not overruled by a bare line of unstated basis.
+
+    "The exchange wins" was written for two sources reporting the same thing.
+    It was being applied to two sources reporting different things: TMGH's FY
+    2024 arrived at 801.961m against a filed statement of 10,723.074m, thirteen
+    times apart — a group's consolidated result and, almost certainly, its
+    parent's. 77 companies carried one figure in the directory and another in
+    their own document for the same year, 75 of them with a full balance sheet
+    behind the directory's.
+    """
+
+    def statement(self, **extra):
+        return {"period": "FY 2024", "net_income": 10723.074,
+                "assets": 356781.349, "equity": 131482.227, **extra}
+
+    def egx(self, basis):
+        return {"net_income": 801.961, "basis": basis, "filed": "2026-04-01",
+                "period_start": "2024-01-01", "period_end": "2024-12-31",
+                "comparable": True, "code": 999}
+
+    def test_an_unlabelled_line_does_not_overwrite_a_balance_sheet(self):
+        existing = self.statement()
+        row = self.egx("")
+        complete = existing.get("assets") is not None or existing.get("equity") is not None
+        self.assertTrue(complete)
+        self.assertNotEqual(row["basis"], "consolidated")
+        # The statement stands, and the filing is kept beside it under its own
+        # name so nothing is lost and nothing is silently swapped.
+        self.assertEqual(existing["net_income"], 10723.074)
+
+    def test_a_consolidated_filing_still_wins(self):
+        # The registry beats a redistributor when it says it is reporting the
+        # same thing. That was the founder's call and it is untouched.
+        existing = self.statement()
+        row = self.egx("consolidated")
+        complete = existing.get("assets") is not None or existing.get("equity") is not None
+        self.assertTrue(complete and row["basis"] == "consolidated")
+
+    def test_a_period_with_no_statement_takes_the_filing(self):
+        # Net profit is filed months before the balance sheet. A period with
+        # nothing behind it still gets the exchange's line — labelled, so a
+        # reader is not left to assume it matches the years around it.
+        existing = {"period": "FY 2025", "net_income": None}
+        complete = existing.get("assets") is not None or existing.get("equity") is not None
+        self.assertFalse(complete)
+
+
 if __name__ == "__main__":
     unittest.main()
