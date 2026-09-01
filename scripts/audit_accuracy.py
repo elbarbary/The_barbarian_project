@@ -71,7 +71,8 @@ def newest_period_end(doc: dict) -> str | None:
     return max(ends) if ends else None
 
 
-def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date) -> list[dict]:
+def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
+              rates: dict[str, float] | None = None) -> list[dict]:
     """Every fault found on one company, each with the figures behind it."""
     faults = []
     t = row["ticker"]
@@ -95,10 +96,22 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date) ->
     # ── figures that must agree with each other ──────────────────────────
     if all(isinstance(x, (int, float)) for x in (close, cap, shares)) and shares > 0:
         implied = close * shares
-        if implied > 0 and not near(cap, implied):
-            fault("cap_vs_shares",
-                  "market value is not this company's own price times its own shares",
-                  cap=cap, implied=round(implied, 2), ratio=round(cap / implied, 3))
+        # Eleven listings are quoted in dollars while the exchange states every
+        # market value in pounds, so for those the two figures are SUPPOSED to
+        # differ — by the exchange rate, and by nothing else. Checking that is
+        # stronger than excusing them: the eleven implied 50.92 pounds to the
+        # dollar against a published 50.87, which is how the currency was found
+        # in the first place.
+        rate = (rates or {}).get(str(row.get("currency") or "").strip())
+        expected = implied * rate if rate else implied
+        if expected > 0 and not near(cap, expected):
+            fault("cap_vs_shares" if not rate else "cap_vs_rate",
+                  "market value is not this company's own price times its own shares"
+                  if not rate else
+                  "the market value and the price disagree by more than the exchange rate",
+                  cap=cap, implied=round(expected, 2),
+                  ratio=round(cap / expected, 3),
+                  **({"rate": rate} if rate else {}))
 
     pe, eps = row.get("pe"), row.get("eps")
     if isinstance(pe, (int, float)) and isinstance(eps, (int, float)) and eps != 0 \
@@ -155,6 +168,20 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date) ->
 CONTRADICTIONS = ("sector_split", "pe_vs_eps")
 
 
+def fx() -> dict[str, float]:
+    """Pounds per unit, keyed by the SHORT NAME the exchange files a price under.
+
+    `currShort` is "US$", not "USD" — the exchange's own label, kept verbatim
+    because converting it to a code is a mapping that can go wrong silently.
+    """
+    doc = load(V1 / "rates" / "latest.json")
+    by_code = {c.get("code"): c.get("egp") for c in (doc.get("currencies") or [])
+               if isinstance(c.get("egp"), (int, float))}
+    return {short: by_code[code]
+            for short, code in (("US$", "USD"), ("EUR", "EUR"), ("GBP", "GBP"))
+            if by_code.get(code)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", action="store_true", help="the findings, machine-readable")
@@ -163,6 +190,7 @@ def main() -> int:
 
     directory = load(V1 / "companies.json") or {}
     market = (load(V1 / "market.json") or {}).get("stocks") or {}
+    rates = fx()
     today = datetime.date.today()
 
     rows = directory.get("companies") or []
@@ -172,7 +200,7 @@ def main() -> int:
     faults = []
     for row in rows:
         doc = load(V1 / "companies" / f"{row['ticker']}.json")
-        faults += audit_one(row, doc, market.get(row["ticker"]) or {}, today)
+        faults += audit_one(row, doc, market.get(row["ticker"]) or {}, today, rates)
 
     if args.json:
         print(json.dumps({"companies": len(rows), "faults": faults}, ensure_ascii=False))
