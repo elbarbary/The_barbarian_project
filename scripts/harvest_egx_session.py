@@ -63,7 +63,17 @@ def number(value, *, whole: bool = False):
 
 
 def fetch() -> tuple[dict[str, dict], str | None]:
-    payload = beta.request("/api/bff/egx/market-watch?Page=1&PageSize=500")
+    """One call to the exchange, then the pure part."""
+    return extract(beta.request("/api/bff/egx/market-watch?Page=1&PageSize=500"))
+
+
+def extract(payload: dict) -> tuple[dict[str, dict], str | None]:
+    """What the market-watch payload says, without going near a socket.
+
+    Separated from the request so the rules below — which currency counts as
+    foreign, when a share count is exact enough to publish — can be tested
+    against a row rather than against the exchange's mood.
+    """
     rows = ((payload.get("data") or {}).get("data")) or []
     if not isinstance(rows, list) or not rows:
         raise RuntimeError("market-watch returned no rows")
@@ -116,6 +126,33 @@ def fetch() -> tuple[dict[str, dict], str | None]:
             held["sector"] = sector
             if sector_ar:
                 held["sector_ar"] = sector_ar
+        # HOW MANY SHARES THE EXCHANGE HAS LISTED, recovered rather than guessed.
+        #
+        # The vendor's share count is wrong for nineteen companies, by three to
+        # two hundred and seventy-four times: SEIGA is published with 2,500,000
+        # shares against a capitalisation that needs 685 million of them, and
+        # that figure feeds the free float printed on the company screen.
+        #
+        # The exchange does not publish a share count, but it publishes `mc`
+        # and `closePrice` in the same row of the same document, and it
+        # computes the first as the second times the listed shares. Dividing
+        # returns an EXACT INTEGER for every pound-quoted listing in every
+        # capture on disk — 221 of 221 — which is what proves the relation
+        # rather than assumes it. So this is arithmetic on two of the
+        # exchange's own figures, not an inference about a company.
+        #
+        # Not attempted for the eleven dollar listings: there `mc` is in pounds
+        # and `closePrice` in dollars, so the quotient is shares times the
+        # exchange rate. CFGH and GTEX both come out at 23,615,014,500, which
+        # is the tell — two different companies cannot have one share count.
+        close = number(row.get("closePrice"))
+        if close and not held.get("currency"):
+            shares = cap / close
+            # An exact integer or it is not the relation we think it is, and a
+            # number this feeds must never be a rounding.
+            if abs(shares - round(shares)) < 1e-6 * max(1.0, shares):
+                held["listed_shares"] = int(round(shares))
+
         trades = number(row.get("trades"), whole=True)
         value = number(row.get("value"), whole=True)
         if trades is not None:

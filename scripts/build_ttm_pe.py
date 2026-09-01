@@ -46,6 +46,8 @@ import json
 import pathlib
 import re
 
+import build_market_api
+
 REPO = pathlib.Path(__file__).resolve().parent.parent
 V1 = REPO / "public" / "data" / "v1"
 DIRECTORY = V1 / "companies.json"
@@ -187,6 +189,32 @@ def closes() -> dict:
     return {q["ticker"]: q.get("close") for q in (stocks or []) if q.get("ticker")}
 
 
+def annual_figures(doc: dict, close) -> dict | None:
+    """The directory's annual profit, EPS and P/E, re-derived from the document.
+
+    Same functions `build_market_api` uses, imported rather than reimplemented:
+    a second copy of a ratio is a second answer waiting to disagree with the
+    first.
+    """
+    profile = doc.get("profile") or {}
+    filed = doc.get("financials") or {}
+    annual = filed.get("annual") or []
+    latest = next((a for a in reversed(annual)
+                   if a.get("net_income") is not None), None)
+    if latest is None:
+        return None
+    out = {"net_income": latest["net_income"],
+           "net_income_period": latest.get("period")}
+    eps, eps_period = build_market_api.per_share(profile, filed, close)
+    ratio, pe_period = build_market_api.price_earnings(close, profile, filed)
+    # An absent ratio must clear the stored one rather than leave last run's
+    # standing beside a profit it was not struck on.
+    out["eps"], out["eps_period"] = eps, eps_period
+    out["pe"], out["pe_period"] = ratio, pe_period
+    return {k: v for k, v in out.items() if v is not None} | {
+        k: None for k in ("eps", "pe") if out[k] is None}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true",
@@ -200,7 +228,7 @@ def main() -> int:
     directory = json.loads(DIRECTORY.read_text(encoding="utf-8"))
     price = closes()
     refusals: collections.Counter = collections.Counter()
-    written = 0
+    written = reconciled = 0
 
     for company in directory.get("companies", []):
         ticker = company.get("ticker")
@@ -212,8 +240,28 @@ def main() -> int:
         if not path.exists():
             refusals["no company document"] += 1
             continue
-        found, refused = ratio_for(
-            json.loads(path.read_text(encoding="utf-8")), price.get(ticker))
+        doc = json.loads(path.read_text(encoding="utf-8"))
+
+        # The ANNUAL figures too, because the directory's were computed before
+        # the exchange's filings were merged in.
+        #
+        # `build_market_api` derives net_income, eps and the P/E from the
+        # company documents at STEPS line 62; `merge_egx_financials` then
+        # revises those documents at line 112. So the directory has always been
+        # one step behind, and giving the exchange priority made it visible:
+        # TMGH's document said 14,467.526m consolidated while the row beside it
+        # still said 10,723.074m, with an EPS and a P/E struck on the old one.
+        # 21 companies contradicted themselves that way.
+        #
+        # This runs after every step that can touch a filed figure, and it uses
+        # `build_market_api`'s own functions so there is one definition of each
+        # ratio rather than a second that can drift from it.
+        refreshed = annual_figures(doc, price.get(ticker))
+        if refreshed:
+            company.update(refreshed)
+            reconciled += 1
+
+        found, refused = ratio_for(doc, price.get(ticker))
         if found is None:
             refusals[refused] += 1
             continue
@@ -222,6 +270,9 @@ def main() -> int:
 
     total = len(directory.get("companies", []))
     print(f"── Trailing P/E: {written} of {total} companies")
+    if reconciled:
+        print(f"   and {reconciled} annual figure(s) brought back into line "
+              f"with the documents the filings had since revised")
     for reason, count in refusals.most_common():
         print(f"   {count:4d} refused — {reason}")
 

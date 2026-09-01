@@ -72,6 +72,10 @@ SESSION = REPO / "data-source" / "egx-beta" / "session.json"
 # What the exchange states, and what it is called on a published document.
 FIELDS = (("sector", "sector"), ("sector_ar", "sector_ar"), ("currency", "currency"))
 
+# The share count lives in the company document's `profile`, not beside the
+# other listing facts, so it is carried separately.
+SHARES = "listed_shares"
+
 
 def load(path: pathlib.Path) -> dict:
     try:
@@ -86,9 +90,37 @@ def stated() -> dict[str, dict]:
     out = {}
     for ticker, held in securities.items():
         facts = {name: held.get(key) for key, name in FIELDS if held.get(key)}
+        if held.get(SHARES):
+            facts[SHARES] = held[SHARES]
         if facts:
             out[str(ticker).strip().upper()] = facts
     return out
+
+
+def align_shares(doc: dict, listed: int | None) -> bool:
+    """The exchange's own listed-share count, over the vendor's guess.
+
+    The vendor's `shares_outstanding` contradicts the exchange's market value
+    for nineteen companies, by three to two hundred and seventy-four times, and
+    it is the denominator of the free float the company screen prints as a
+    percentage. The exchange does not publish a count, but `mc / closePrice`
+    recovers one exactly (see harvest_egx_session).
+
+    `float_shares` is recomputed with it, because a float derived from a wrong
+    denominator is wrong in the same proportion. `free_float` is the vendor's
+    own ratio and is left alone.
+    """
+    if not listed:
+        return False
+    profile = doc.get("profile")
+    if not isinstance(profile, dict) or profile.get("shares_outstanding") == listed:
+        return False
+    profile["shares_outstanding"] = listed
+    profile["shares_outstanding_source"] = "EGX"
+    ratio = profile.get("free_float")
+    if isinstance(ratio, (int, float)):
+        profile["float_shares"] = listed * ratio
+    return True
 
 
 def align(doc: dict, facts: dict) -> bool:
@@ -140,7 +172,11 @@ def apply(write: bool = True) -> int:
         for root in (COMPANIES, FIXTURES / "companies"):
             path = root / f"{ticker}.json"
             doc = load(path)
-            if not doc or not align(doc, stated_facts):
+            if not doc:
+                continue
+            moved = align(doc, stated_facts)
+            moved = align_shares(doc, stated_facts.get(SHARES)) or moved
+            if not moved:
                 continue
             if root is COMPANIES:
                 docs += 1
@@ -151,8 +187,9 @@ def apply(write: bool = True) -> int:
 
     verb = "would be" if not write else ""
     foreign = sum(1 for f in facts.values() if f.get("currency"))
+    counted = sum(1 for f in facts.values() if f.get(SHARES))
     print(f"   {len(facts)} listings stated by the exchange, {foreign} priced "
-          f"in another currency")
+          f"in another currency, {counted} with a listed-share count")
     print(f"   {listed} directory rows and {docs} company documents {verb} "
           f"realigned".replace("  ", " "))
     return 0

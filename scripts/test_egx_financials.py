@@ -4,6 +4,7 @@
 Every case here is a real filing shape found in the archive, not a hypothetical.
 """
 import datetime
+import re
 import unittest
 
 import merge_egx_financials as m
@@ -81,52 +82,118 @@ class Currency(unittest.TestCase):
             self.assertIn(ok, m.EGP)
 
 
-class StatementWinsTest(unittest.TestCase):
-    """A complete statement is not overruled by a bare line of unstated basis.
+class BasisTemplates(unittest.TestCase):
+    """The exchange writes this line two ways and the regex knew one."""
 
-    "The exchange wins" was written for two sources reporting the same thing.
-    It was being applied to two sources reporting different things: TMGH's FY
-    2024 arrived at 801.961m against a filed statement of 10,723.074m, thirteen
-    times apart — a group's consolidated result and, almost certainly, its
-    parent's. 77 companies carried one figure in the directory and another in
-    their own document for the same year, 75 of them with a full balance sheet
-    behind the directory's.
+    OLD = re.compile(r"F/S\s+(Standalone|Consolidated)\s+Period", re.I)
+
+    def test_both_templates_are_read(self):
+        for body, want in (
+            ("F/S Consolidated Period : From 01/01/2024 To 31/12/2024", "consolidated"),
+            ("F/S (Standalone) Period: From 01/01/2024 to 31/12/2024", "standalone"),
+            ("F/S (Consolidated) Period: From 01/01/2024 to 31/12/2024", "consolidated"),
+            ("F/S Standalone Period : From 01/01/2024 To 31/12/2024", "standalone"),
+        ):
+            found = m.BASIS.search(body)
+            self.assertIsNotNone(found, body)
+            self.assertEqual(found.group(1).lower(), want, body)
+
+    def test_the_parenthesised_form_is_the_one_that_was_missed(self):
+        """2,468 filings stated a basis and were recorded as unstated.
+
+        It disabled the rule directly below it — a consolidated filing is
+        preferred over a standalone one for the same period, and it cannot be
+        preferred if it cannot be seen. TMGH filed both for FY 2024, standalone
+        801,960,651 and consolidated 14,467,525,731, and the site published the
+        parent's figure beside the group's 356,781m of assets.
+        """
+        body = "F/S (Standalone) Period: From 01/01/2024 to 31/12/2024"
+        self.assertIsNone(self.OLD.search(body))
+        self.assertEqual(m.BASIS.search(body).group(1).lower(), "standalone")
+
+    def test_a_line_stating_no_basis_still_states_none(self):
+        self.assertIsNone(m.BASIS.search("F/S Period : From 01/01/2024 To 31/12/2024"))
+
+
+class ExchangeWins(unittest.TestCase):
+    """The filing wins the figure; the statement's own is kept beside it.
+
+    The owner's rule: mix the two sources on the as-filed table and give the
+    exchange priority where they intersect. A company's submission to its own
+    regulator outranks a redistributor's copy of it.
     """
 
     def statement(self, **extra):
-        return {"period": "FY 2024", "net_income": 10723.074,
-                "assets": 356781.349, "equity": 131482.227, **extra}
+        return {"period": "FY 2024", "net_income": 10723.074, "assets": 356781.349,
+                "equity": 131482.227, "source": "mubasher", **extra}
 
-    def egx(self, basis):
-        return {"net_income": 801.961, "basis": basis, "filed": "2026-04-01",
-                "period_start": "2024-01-01", "period_end": "2024-12-31",
-                "comparable": True, "code": 999}
+    def test_the_statement_figure_is_kept_beside_the_filing(self):
+        row = self.statement()
+        self.assertTrue(m.keep_statement_figure(row, 14467.526))
+        self.assertEqual(row["statement_net_income"], 10723.074)
+        self.assertEqual(row["statement_net_income_source"], "mubasher")
 
-    def test_an_unlabelled_line_does_not_overwrite_a_balance_sheet(self):
-        existing = self.statement()
-        row = self.egx("")
-        complete = existing.get("assets") is not None or existing.get("equity") is not None
-        self.assertTrue(complete)
-        self.assertNotEqual(row["basis"], "consolidated")
-        # The statement stands, and the filing is kept beside it under its own
-        # name so nothing is lost and nothing is silently swapped.
-        self.assertEqual(existing["net_income"], 10723.074)
+    def test_an_agreeing_filing_leaves_no_second_copy(self):
+        """1,312 of the 1,480 intersecting periods agree; they need no sidecar."""
+        row = self.statement()
+        self.assertFalse(m.keep_statement_figure(row, 10723.074))
+        self.assertNotIn("statement_net_income", row)
 
-    def test_a_consolidated_filing_still_wins(self):
-        # The registry beats a redistributor when it says it is reporting the
-        # same thing. That was the founder's call and it is untouched.
-        existing = self.statement()
-        row = self.egx("consolidated")
-        complete = existing.get("assets") is not None or existing.get("equity") is not None
-        self.assertTrue(complete and row["basis"] == "consolidated")
+    def test_a_period_with_no_balance_sheet_has_nothing_to_preserve(self):
+        row = {"period": "FY 2025", "net_income": 839.858}
+        self.assertFalse(m.keep_statement_figure(row, 18201.981))
+        self.assertNotIn("statement_net_income", row)
 
-    def test_a_period_with_no_statement_takes_the_filing(self):
-        # Net profit is filed months before the balance sheet. A period with
-        # nothing behind it still gets the exchange's line — labelled, so a
-        # reader is not left to assume it matches the years around it.
-        existing = {"period": "FY 2025", "net_income": None}
-        complete = existing.get("assets") is not None or existing.get("equity") is not None
-        self.assertFalse(complete)
+    def test_a_period_with_no_stated_profit_has_nothing_to_preserve(self):
+        row = {"period": "FY 2025", "net_income": None, "assets": 12.0}
+        self.assertFalse(m.keep_statement_figure(row, 18201.981))
+        self.assertNotIn("statement_net_income", row)
+
+
+
+
+class WhichSideIsWrong(unittest.TestCase):
+    """A four-hundredfold gap does not say which of the two figures is the error."""
+
+    def series(self, **override):
+        rows = [{"period": "FY 2021", "net_income": 2028.149},
+                {"period": "FY 2022", "net_income": 2709.883},
+                {"period": "FY 2023", "net_income": 6559.603},
+                {"period": "FY 2024", "net_income": 27.992},
+                {"period": "FY 2025", "net_income": 18714.779}]
+        for row in rows:
+            if row["period"] in override:
+                row["net_income"] = override[row["period"]]
+        return rows
+
+    def test_a_stored_figure_its_neighbours_disown_is_indicted(self):
+        """HDBK sat at 27.992m between 6,559.603m and 18,714.779m, and its own
+        filing reads "Net Profit : 12,453,812,253"."""
+        self.assertTrue(m.indicted_by_its_own_series(
+            self.series(), "FY 2024", 12453.812, 27.992))
+
+    def test_a_stored_figure_that_belongs_is_not(self):
+        """Eastern Tobacco: the stored figure fits, the filing states thousands."""
+        self.assertFalse(m.indicted_by_its_own_series(
+            self.series(**{"FY 2024": 6048.733}), "FY 2024", 6.048, 6048.733))
+
+    def test_it_needs_neighbours_on_the_record_to_speak(self):
+        self.assertFalse(m.indicted_by_its_own_series(
+            [{"period": "FY 2024", "net_income": 27.992}], "FY 2024", 12453.812, 27.992))
+
+    def test_a_period_that_is_not_in_the_series_is_not_judged(self):
+        self.assertFalse(m.indicted_by_its_own_series(
+            self.series(), "FY 2099", 1.0, 2.0))
+
+    def test_the_year_orders_the_series_not_the_end_date(self):
+        """3 of HDBK's 12 annual rows carry no `period_end`; sorting on the
+        string put them after 2025 and handed FY 2024 the wrong neighbours."""
+        rows = self.series()
+        for row in rows:
+            row["period_end"] = None if row["period"] == "FY 2024" else \
+                f"{row['period'][3:]}-12-31"
+        self.assertTrue(m.indicted_by_its_own_series(
+            rows, "FY 2024", 12453.812, 27.992))
 
 
 if __name__ == "__main__":
