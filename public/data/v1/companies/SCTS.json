@@ -6,12 +6,12 @@
  },
  "sector": "Commercial Services",
  "market": {
-  "last_close": 617.5,
+  "last_close": 619.99,
   "date": "2026-09-01",
   "open": 617.43,
   "high": 621.5,
   "low": 610,
-  "volume": 2094
+  "volume": 3749
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 90900000,
   "free_float": 0.276637,
   "float_shares": 25146303.3,
-  "perf_1w": -1.6014660186439256,
-  "perf_1m": 1.510742877809021,
-  "perf_3m": -1.945216355696705,
-  "avg_volume_30d": 14155.9,
-  "relative_volume_10d": 0.18487127873715437,
+  "perf_1w": -1.2046848856664722,
+  "perf_1m": 1.9200736466604305,
+  "perf_3m": -1.5498213576816182,
+  "avg_volume_30d": 14211.066666666668,
+  "relative_volume_10d": 0.33098492071900276,
   "median_volume_20d": 5952.5,
   "rv20": 0.9283494330113398,
   "normal_value_30d": 3524803.4000000004,
   "five_session_change": -0.17299919159257104,
   "history_bars": 120,
-  "market_cap": 55596258000.0,
+  "market_cap": 56033487000.0,
   "market_cap_source": "EGX",
-  "trades": 73,
-  "turnover": 1288281
+  "trades": 111,
+  "turnover": 2408904
  },
  "financials": {
   "annual": [

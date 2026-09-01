@@ -6,12 +6,12 @@
  },
  "sector": "Health Technology",
  "market": {
-  "last_close": 776,
+  "last_close": 783,
   "date": "2026-09-01",
   "open": 800.08,
   "high": 815.8,
   "low": 700.2,
-  "volume": 3019
+  "volume": 3942
  },
  "price_history": [
   {
@@ -1319,20 +1319,20 @@
   "shares_outstanding": 11780900,
   "free_float": 0.42128099999999996,
   "float_shares": 4963069.3329,
-  "perf_1w": 0.10190787012550968,
-  "perf_1m": 4.852112580902318,
-  "perf_3m": 17.444077852105217,
-  "avg_volume_30d": 5374.699999999996,
-  "relative_volume_10d": 0.6306136942808205,
+  "perf_1w": 1.004888997819941,
+  "perf_1m": 5.79794349335891,
+  "perf_3m": 18.503496080152555,
+  "avg_volume_30d": 5405.466666666663,
+  "relative_volume_10d": 0.8234114550695576,
   "median_volume_20d": 5592,
   "rv20": 1.426859799713877,
   "normal_value_30d": 2227835.9450000003,
   "five_session_change": 1.0062893081761004,
   "history_bars": 120,
-  "market_cap": 9334038762.0,
+  "market_cap": 9403664117.4,
   "market_cap_source": "EGX",
-  "trades": 111,
-  "turnover": 2894439
+  "trades": 166,
+  "turnover": 7153067
  },
  "financials": {
   "annual": [
