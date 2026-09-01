@@ -28,6 +28,31 @@
     // thebarbarianproject.com's home page and never reach the mapping.
     "run_worker_first": ["/data/v1/*", "/esthmr/api/*", "/", "/index.html"]
   },
+  /* The ceiling on how fast one account can pull, moved off KV.
+   *
+   * It was a fixed-window counter in KV, which meant a READ AND A WRITE on
+   * every single /data/v1 request. A signed-in page load fetches 33 documents,
+   * so a visit cost 33 KV writes — and the free plan allows 1,000 a day. That
+   * is thirty visits before `put()` starts throwing inside the gate, and the
+   * gate has no catch: the whole site's data would 500 for everyone until
+   * midnight UTC.
+   *
+   * The platform's own limiter costs no storage operations at all. It only
+   * does 10- or 60-second windows, so the hourly ceiling becomes a per-minute
+   * one — 90 requests a minute is under three page loads, generous for a
+   * person and a hard stop for anything pulling the directory. That is a
+   * genuine change in what is enforced: mirroring the site now takes minutes
+   * of sustained maximum-rate pulling rather than being cut off for an hour.
+   * A slower scraper for a site that cannot break at thirty visits a day is
+   * the right way round.
+   */
+  "ratelimits": [
+    {
+      "name": "DATA_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 90, "period": 60 }
+    }
+  ],
   "kv_namespaces": [
     {
       "binding": "ESTHMR_AUTH",

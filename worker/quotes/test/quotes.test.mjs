@@ -83,3 +83,75 @@ test('the age is measured off the exchange\'s own stamp, on Cairo\'s clock', () 
   assert.equal(stampAge('nonsense'), null);
   assert.equal(stampAge(null), null);
 });
+
+/* ── the tape ──────────────────────────────────────────────────────────── */
+
+const { record } = await import('../src/index.js');
+
+const SNAPSHOT = {
+  as_of: '2026-09-01T09:35:12.000Z',
+  session: { open: true },
+  from: { egx: 2, vendor: 1 },
+  egx_write_time: '202609011220',
+  quotes: {
+    COMI: { c: 137.4, o: 138.1, h: 138.9, l: 137.1, v: 1585899, ch: -0.51,
+            pc: 138.1, t: 1496, val: 216331844, s: 'egx' },
+    ORWE: { c: 26.26, ch: 2.5781, v: 654737 },
+  },
+};
+
+function bucket() {
+  const puts = [];
+  return { puts, put: async (key, body, opts) => { puts.push({ key, body, opts }); } };
+}
+
+test('a fresh reading is written once, keyed by its own minute', async () => {
+  const TAPE = bucket();
+  await record({ TAPE }, SNAPSHOT);
+  assert.equal(TAPE.puts.length, 1);
+  // Partitioned by day, named for the minute — so a re-read inside the same
+  // minute overwrites rather than doubling the row.
+  assert.equal(TAPE.puts[0].key, 'quotes/2026-09-01/0935.ndjson');
+  assert.equal(TAPE.puts[0].opts.httpMetadata.contentType, 'application/x-ndjson');
+  // The exchange's own stamp rides along, so a row's real age survives into
+  // the tape instead of being inferred from the filename later.
+  assert.equal(TAPE.puts[0].opts.customMetadata.write_time, '202609011220');
+  assert.equal(TAPE.puts[0].opts.customMetadata.egx, '2');
+});
+
+test('every row carries its ticker, its time and where it came from', async () => {
+  const TAPE = bucket();
+  await record({ TAPE }, SNAPSHOT);
+  const rows = TAPE.puts[0].body.trim().split('\n').map((l) => JSON.parse(l));
+  assert.equal(rows.length, 2);
+  assert.deepEqual(rows[0], {
+    t: 'COMI', at: '2026-09-01T09:35:12.000Z', c: 137.4, o: 138.1, h: 138.9,
+    l: 137.1, v: 1585899, ch: -0.51, pc: 138.1, tr: 1496, val: 216331844, s: 'egx',
+  });
+  // A vendor row has no trade count and says so with a null rather than a
+  // zero — and says it is the vendor's.
+  assert.equal(rows[1].tr, undefined);
+  assert.equal(rows[1].s, 'tv');
+});
+
+test('nothing is recorded with the market shut, or with no bucket', async () => {
+  // Outside the session the upstream repeats the same close, and a tape of
+  // one row two hundred times is not a record of anything.
+  const shut = bucket();
+  await record({ TAPE: shut }, { ...SNAPSHOT, session: { open: false } });
+  assert.equal(shut.puts.length, 0);
+  // No binding, no tape — and no error either.
+  await record({}, SNAPSHOT);
+  await record({ TAPE: {} }, SNAPSHOT);
+});
+
+test('a bucket that fails costs the recording and never the reader', async () => {
+  // The tape is a recording, not a dependency: nothing a reader is shown may
+  // fail because a bucket did.
+  const broken = { put: async () => { throw new Error('r2 down'); } };
+  await record({ TAPE: broken }, SNAPSHOT);
+  // An unparseable stamp is not a crash either.
+  const TAPE = bucket();
+  await record({ TAPE }, { ...SNAPSHOT, as_of: 'nonsense' });
+  assert.equal(TAPE.puts.length, 0);
+});

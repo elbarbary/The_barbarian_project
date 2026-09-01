@@ -58,7 +58,10 @@ const LIMITS = {
   codePerEmail: { max: 5, window: 3600 },
   codePerIp: { max: 60, window: 3600 },
   verifyPerEmail: { max: 8, window: 900 },
-  dataPerSession: { max: 1500, window: 3600 },
+  // The data gate is on the platform's limiter now (see `overRate`) and no
+  // longer reads this. Kept as the record of what the ceiling used to be:
+  // 1,500 an hour, at the cost of a KV write per document fetched.
+  // dataPerSession: { max: 1500, window: 3600 },
   // Following and unfollowing is a click, and a reader may click a lot of
   // them in one sitting. This is here so a stuck client cannot write in a
   // loop, not to ration anybody's list.
@@ -140,6 +143,28 @@ async function session(request, env) {
     if (who) return who;
   }
   return unsign(cookieValue(request, COOKIE), env.SESSION_SECRET);
+}
+
+/** The platform's own limiter, where there is one. Returns true when over.
+ *
+ * Used for the data gate and nothing else. The sign-in paths keep the KV
+ * counter below: they need an HOURLY window — five codes an email an hour —
+ * which this binding cannot express, and they cost a handful of writes a day
+ * rather than thirty-three a visit.
+ *
+ * An absent binding means an absent limit rather than a broken gate. The whole
+ * reason for moving off KV was that a limiter must not be able to take the
+ * site down; that has to be true of this one too, so it fails open and the
+ * gate itself — which is what keeps the data behind a session — is untouched.
+ */
+async function overRate(env, key) {
+  if (!env.DATA_LIMIT || typeof env.DATA_LIMIT.limit !== 'function') return false;
+  try {
+    const { success } = await env.DATA_LIMIT.limit({ key });
+    return !success;
+  } catch {
+    return false;
+  }
 }
 
 /** A fixed-window counter in KV. Returns true when the caller is over. */
@@ -607,7 +632,7 @@ async function serve(request, env, url) {
         'www-authenticate': 'Session realm="esthmr"',
       });
     }
-    if (await overLimit(env, 'data', who.e, LIMITS.dataPerSession)) {
+    if (await overRate(env, `data:${who.e}`)) {
       return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
     }
     const answer = await env.ASSETS.fetch(request);
