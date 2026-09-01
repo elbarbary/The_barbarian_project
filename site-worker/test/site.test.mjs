@@ -1339,7 +1339,13 @@ test('the month pills are the months the archive holds', async () => {
   const months = await fromDisk(() => data.filedMonths());
   assert.ok(months.length >= 12, `${months.length} months`);
   assert.match(months[0].id, /^\d{4}-\d{2}$/);
-  assert.ok(months[0].count > 100);
+  // Every pill carries a real count, and the archive as a whole holds a
+  // year's worth. NOT "the newest month has more than 100": on the first of
+  // the month it holds one day — 16 filings on 1 September — and this failed
+  // every month-boundary for a reason that is the calendar, not a defect.
+  assert.ok(months.every((m) => m.count > 0), 'a pill with no filings behind it');
+  assert.ok(months.reduce((sum, m) => sum + m.count, 0) > 5000,
+    'the archive should hold a year of filings');
   const v = screen({ ...LIVE, filedMonths: months });
   assert.equal(v.months.length, months.length);
   assert.match(v.months[0].label, /^[A-Z][a-z]+t? \d{4}$/);
@@ -1347,6 +1353,8 @@ test('the month pills are the months the archive holds', async () => {
 });
 
 test('an open month shows that month, and says how much of it', async () => {
+  // A completed month, picked by name rather than by position, so this does
+  // not start reading a half-finished one on the first of a month.
   const items = await fromDisk(() => data.filedMonth('2026-07'));
   assert.ok(items.length > 1000, `${items.length} filings`);
   const c = fresh();
