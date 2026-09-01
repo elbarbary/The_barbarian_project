@@ -316,7 +316,11 @@ export async function live() {
       // not classified, so it is not dead — it just reads as a rendering
       // fault. Those companies get a word.
       sector: c.sector || UNCLASSIFIED.en,
-      sectorAr: SECTOR_AR[c.sector] || (c.sector ? c.sector : UNCLASSIFIED.ar),
+      // The exchange's own Arabic name where it published one, and the
+      // hand-kept map only where it did not. That map had to be extended by
+      // hand every time a sector appeared, and now covers a taxonomy the
+      // documents no longer use — it is the fallback, not the source.
+      sectorAr: c.sector_ar || SECTOR_AR[c.sector] || (c.sector ? c.sector : UNCLASSIFIED.ar),
       close: q.close ?? '—',
       // market.json states the day's move as a FRACTION — COMI fell 0.011918,
       // which is 1.19%. The site printed it straight, so every move on the
