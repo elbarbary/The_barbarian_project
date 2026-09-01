@@ -1165,7 +1165,7 @@
    "trading_resumptions": 10,
    "capital_increases": 1,
    "general_assemblies": 54,
-   "periods_reported": 60,
+   "periods_reported": 59,
    "loss_making_periods": 3
   },
   "generated": "2026-08-24"
@@ -2154,7 +2154,7 @@
    "trading_resumptions": 3,
    "capital_increases": 3,
    "general_assemblies": 69,
-   "periods_reported": 60,
+   "periods_reported": 59,
    "loss_making_periods": 1
   },
   "generated": "2026-08-24"
@@ -2543,8 +2543,8 @@
    "trading_resumptions": 11,
    "capital_increases": 0,
    "general_assemblies": 25,
-   "periods_reported": 57,
-   "loss_making_periods": 13
+   "periods_reported": 56,
+   "loss_making_periods": 12
   },
   "generated": "2026-08-24"
  },
@@ -3510,7 +3510,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/KABO/profile",
   "record": {
-   "filings": 523,
+   "filings": 524,
    "first_filing": "2010-02-11",
    "trading_suspensions": 10,
    "trading_resumptions": 9,
@@ -5672,7 +5672,7 @@
    "trading_resumptions": 15,
    "capital_increases": 1,
    "general_assemblies": 48,
-   "periods_reported": 58,
+   "periods_reported": 57,
    "loss_making_periods": 14
   },
   "generated": "2026-08-25"

@@ -11,7 +11,7 @@
   "open": 2.97,
   "high": 3.03,
   "low": 2.97,
-  "volume": 38569403
+  "volume": 42538320
  },
  "price_history": [
   {
@@ -1322,8 +1322,8 @@
   "perf_1w": 1.0101010101010035,
   "perf_1m": -1.960784313725492,
   "perf_3m": -6.250000000000005,
-  "avg_volume_30d": 61671001.19999997,
-  "relative_volume_10d": 0.9315722739569378,
+  "avg_volume_30d": 61803298.43333331,
+  "relative_volume_10d": 1.0274340905071278,
   "median_volume_20d": 46838720,
   "rv20": 0.5625190654227955,
   "normal_value_30d": 183917871.115,
@@ -1331,8 +1331,8 @@
   "history_bars": 120,
   "market_cap": 32154320832.0,
   "market_cap_source": "EGX",
-  "trades": 1495,
-  "turnover": 120691352
+  "trades": 1533,
+  "turnover": 127658220
  },
  "financials": {
   "annual": [
@@ -1344,8 +1344,8 @@
     "period_end": "2013-12-31",
     "filed": "2014-03-26",
     "filing_id": "egx-124503",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2015",
@@ -1355,8 +1355,8 @@
     "period_end": "2015-12-31",
     "filed": "2016-04-28",
     "filing_id": "egx-149262",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2016",
@@ -1366,8 +1366,8 @@
     "period_end": "2016-12-31",
     "filed": "2017-04-02",
     "filing_id": "egx-159631",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2019",
@@ -1377,8 +1377,8 @@
     "period_end": "2019-12-31",
     "filed": "2020-03-17",
     "filing_id": "egx-195679",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2020",
@@ -1456,8 +1456,8 @@
     "period_end": "2016-09-30",
     "filed": "2016-11-15",
     "filing_id": "egx-155832",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2015",
@@ -1467,8 +1467,8 @@
     "period_end": "2015-06-30",
     "filed": "2015-08-12",
     "filing_id": "egx-140956",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2017",
@@ -1478,8 +1478,8 @@
     "period_end": "2017-06-30",
     "filed": "2017-08-13",
     "filing_id": "egx-164145",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2019",
@@ -1489,8 +1489,8 @@
     "period_end": "2019-06-30",
     "filed": "2019-08-08",
     "filing_id": "egx-188642",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2016",
@@ -1500,8 +1500,8 @@
     "period_end": "2016-03-31",
     "filed": "2016-08-08",
     "filing_id": "egx-152246",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2020",
@@ -1511,8 +1511,8 @@
     "period_end": "2020-03-31",
     "filed": "2020-06-11",
     "filing_id": "egx-198648",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2021",
@@ -1522,8 +1522,8 @@
     "period_end": "2021-03-31",
     "filed": "2021-05-17",
     "filing_id": "egx-210443",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2022",

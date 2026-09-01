@@ -15228,5 +15228,15 @@
   "source": "Mubasher",
   "source_url": "https://english.mubasher.info/markets/EGX/stocks/TOUR/profile",
   "fetched": "2026-08-30"
+ },
+ "ALXD": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-09-01"
+ },
+ "GROV": {
+  "source": "Mubasher",
+  "missing": true,
+  "checked": "2026-09-01"
  }
 }

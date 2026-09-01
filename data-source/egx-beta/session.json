@@ -1,7 +1,7 @@
 {
  "harvested": "2026-09-01",
  "source": "beta.egx.com.eg /api/bff/egx/market-watch",
- "write_time": "202609011505",
+ "write_time": "202609011451",
  "count": 224,
  "securities": {
   "AALR": {
@@ -293,7 +293,6 @@
   },
   "CFGH": {
    "market_cap": 2825763944.85,
-   "currency": "US$",
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "trades": 17,
@@ -511,7 +510,6 @@
   },
   "EGBE": {
    "market_cap": 14141247350.46175,
-   "currency": "US$",
    "sector": "Banks",
    "sector_ar": "بنوك",
    "trades": 30,
@@ -533,7 +531,6 @@
   },
   "EGSA": {
    "market_cap": 16517506052.760328,
-   "currency": "US$",
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "trades": 9,
@@ -653,7 +650,6 @@
   },
   "FAITA": {
    "market_cap": 20767681887.969555,
-   "currency": "US$",
    "sector": "Banks",
    "sector_ar": "بنوك",
    "trades": 29,
@@ -738,7 +734,6 @@
   },
   "GPPL": {
    "market_cap": 41178811825.31172,
-   "currency": "US$",
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "trades": 1,
@@ -760,7 +755,6 @@
   },
   "GTEX": {
    "market_cap": 1101568995.45,
-   "currency": "US$",
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "trades": 60,
@@ -1041,7 +1035,6 @@
   },
   "MOIL": {
    "market_cap": 16475841733.771616,
-   "currency": "US$",
    "sector": "Energy & Support Services",
    "sector_ar": "طاقة وخدمات مساندة",
    "trades": 26,
@@ -1091,7 +1084,6 @@
   },
   "NAHO": {
    "market_cap": 2506398000.6313796,
-   "currency": "US$",
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "trades": 61,
@@ -1407,7 +1399,6 @@
   },
   "SPHT": {
    "market_cap": 8183718777.975195,
-   "currency": "US$",
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "trades": 2,
@@ -1478,7 +1469,6 @@
   },
   "TRTO": {
    "market_cap": 305545800.0,
-   "currency": "US$",
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "trades": 111,
@@ -1542,7 +1532,6 @@
   },
   "VLMR": {
    "market_cap": 29405423068.37282,
-   "currency": "US$",
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "trades": 117,

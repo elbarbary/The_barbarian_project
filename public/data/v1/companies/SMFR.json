@@ -6,12 +6,12 @@
  },
  "sector": "Distribution Services",
  "market": {
-  "last_close": 257.56,
+  "last_close": 257.31,
   "date": "2026-09-01",
   "open": 259.76,
   "high": 261,
-  "low": 257,
-  "volume": 14604
+  "low": 255.6,
+  "volume": 18204
  },
  "price_history": [
   {
@@ -1317,11 +1317,11 @@
  ],
  "profile": {
   "shares_outstanding": 9600000,
-  "perf_1w": -1.431305013394569,
-  "perf_1m": 10.318242172441858,
-  "perf_3m": 23.89244311895715,
-  "avg_volume_30d": 94360.80000000003,
-  "relative_volume_10d": 0.346126225626708,
+  "perf_1w": -1.5269804822043662,
+  "perf_1m": 10.211162033665998,
+  "perf_3m": 23.772187214392236,
+  "avg_volume_30d": 94480.80000000003,
+  "relative_volume_10d": 0.4314490421328808,
   "median_volume_20d": 62141.5,
   "rv20": 0.5987303170988791,
   "normal_value_30d": 13601437.5,
@@ -1329,8 +1329,8 @@
   "history_bars": 120,
   "market_cap": 2470176000.0,
   "market_cap_source": "EGX",
-  "trades": 251,
-  "turnover": 4491459
+  "trades": 260,
+  "turnover": 4710172
  },
  "financials": {
   "annual": [
@@ -1342,8 +1342,8 @@
     "period_end": "2014-12-31",
     "filed": "2015-03-02",
     "filing_id": "egx-135445",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2015",
@@ -1353,8 +1353,8 @@
     "period_end": "2015-12-31",
     "filed": "2016-02-29",
     "filing_id": "egx-146764",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2016",
@@ -1364,8 +1364,8 @@
     "period_end": "2016-12-31",
     "filed": "2017-02-22",
     "filing_id": "egx-158227",
-    "source": "https://www.egx.com.eg",
-    "basis": "standalone"
+    "basis": "standalone",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "FY 2017",
@@ -1375,6 +1375,7 @@
     "period_end": "2017-12-31",
     "filed": "2018-02-14",
     "filing_id": "egx-169729",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1385,6 +1386,7 @@
     "period_end": "2018-12-31",
     "filed": "2019-02-20",
     "filing_id": "egx-182168",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1395,6 +1397,7 @@
     "period_end": "2019-12-31",
     "filed": "2020-02-24",
     "filing_id": "egx-194777",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1405,6 +1408,7 @@
     "period_end": "2020-12-31",
     "filed": "2021-03-04",
     "filing_id": "egx-207603",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1415,14 +1419,12 @@
     "investing_cash_flow": -0.229,
     "liabilities": 13.957,
     "net_change_in_cash": -6.127,
-    "net_income": 1.969,
+    "net_income": 1.256,
     "operating_cash_flow": -5.716,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2021-01-01",
-    "period_end": "2021-12-31",
-    "filed": "2022-02-28",
-    "filing_id": "egx-220637"
+    "egx_net_income": 1.969,
+    "egx_net_income_basis": "unstated",
+    "egx_filing_id": "egx-220637"
    },
    {
     "period": "FY 2022",
@@ -1461,14 +1463,12 @@
     "investing_cash_flow": 109.17,
     "liabilities": 31.943,
     "net_change_in_cash": 23.991,
-    "net_income": 111.116,
+    "net_income": 109.947,
     "operating_cash_flow": 8.468,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2024-01-01",
-    "period_end": "2024-12-31",
-    "filed": "2025-03-04",
-    "filing_id": "egx-266692"
+    "egx_net_income": 111.116,
+    "egx_net_income_basis": "unstated",
+    "egx_filing_id": "egx-266692"
    },
    {
     "period": "FY 2025",
@@ -1478,14 +1478,12 @@
     "investing_cash_flow": 66.426,
     "liabilities": 67.661,
     "net_change_in_cash": -47.229,
-    "net_income": 63.258,
+    "net_income": 63.172,
     "operating_cash_flow": -113.242,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2025-01-01",
-    "period_end": "2025-12-31",
-    "filed": "2026-02-26",
-    "filing_id": "egx-284083"
+    "egx_net_income": 63.258,
+    "egx_net_income_basis": "unstated",
+    "egx_filing_id": "egx-284083"
    }
   ],
   "quarterly": [
@@ -1497,8 +1495,8 @@
     "period_end": "2014-09-30",
     "filed": "2014-11-12",
     "filing_id": "egx-132296",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2015",
@@ -1508,8 +1506,8 @@
     "period_end": "2015-09-30",
     "filed": "2015-11-11",
     "filing_id": "egx-143673",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2016",
@@ -1519,8 +1517,8 @@
     "period_end": "2016-09-30",
     "filed": "2016-11-09",
     "filing_id": "egx-155234",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2017",
@@ -1530,8 +1528,8 @@
     "period_end": "2017-09-30",
     "filed": "2017-11-08",
     "filing_id": "egx-166809",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2018",
@@ -1541,6 +1539,7 @@
     "period_end": "2018-09-30",
     "filed": "2018-11-12",
     "filing_id": "egx-179175",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1551,6 +1550,7 @@
     "period_end": "2019-09-30",
     "filed": "2019-11-14",
     "filing_id": "egx-191881",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1561,6 +1561,7 @@
     "period_end": "2020-09-30",
     "filed": "2020-11-12",
     "filing_id": "egx-203924",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1571,6 +1572,7 @@
     "period_end": "2021-09-30",
     "filed": "2021-11-10",
     "filing_id": "egx-216743",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1581,8 +1583,8 @@
     "period_end": "2022-09-30",
     "filed": "2022-11-14",
     "filing_id": "egx-231433",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2023",
@@ -1592,8 +1594,8 @@
     "period_end": "2023-09-30",
     "filed": "2023-11-13",
     "filing_id": "egx-245380",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2024",
@@ -1603,6 +1605,7 @@
     "period_end": "2024-09-30",
     "filed": "2024-11-12",
     "filing_id": "egx-261703",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1613,8 +1616,8 @@
     "period_end": "2025-09-30",
     "filed": "2025-11-11",
     "filing_id": "egx-278882",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2014",
@@ -1624,8 +1627,8 @@
     "period_end": "2014-06-30",
     "filed": "2014-08-13",
     "filing_id": "egx-129119",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2015",
@@ -1635,8 +1638,8 @@
     "period_end": "2015-06-30",
     "filed": "2015-08-12",
     "filing_id": "egx-140974",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2016",
@@ -1646,8 +1649,8 @@
     "period_end": "2016-06-30",
     "filed": "2016-08-15",
     "filing_id": "egx-152798",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2017",
@@ -1657,6 +1660,7 @@
     "period_end": "2017-06-30",
     "filed": "2017-08-07",
     "filing_id": "egx-163829",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1667,6 +1671,7 @@
     "period_end": "2018-06-30",
     "filed": "2018-08-08",
     "filing_id": "egx-176198",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1677,6 +1682,7 @@
     "period_end": "2019-06-30",
     "filed": "2019-08-06",
     "filing_id": "egx-188407",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1687,8 +1693,8 @@
     "period_end": "2020-06-30",
     "filed": "2020-08-13",
     "filing_id": "egx-201097",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2021",
@@ -1698,6 +1704,7 @@
     "period_end": "2021-06-30",
     "filed": "2021-08-11",
     "filing_id": "egx-213466",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1708,6 +1715,7 @@
     "period_end": "2022-06-30",
     "filed": "2022-08-10",
     "filing_id": "egx-227251",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1718,8 +1726,8 @@
     "period_end": "2023-06-30",
     "filed": "2023-08-14",
     "filing_id": "egx-241639",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2024",
@@ -1729,6 +1737,7 @@
     "period_end": "2024-06-30",
     "filed": "2024-08-12",
     "filing_id": "egx-257501",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1739,8 +1748,8 @@
     "period_end": "2025-06-30",
     "filed": "2025-08-14",
     "filing_id": "egx-274691",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2026",
@@ -1750,6 +1759,7 @@
     "period_end": "2026-06-30",
     "filed": "2026-08-11",
     "filing_id": "egx-292748",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg",
     "assets": 1998.739,
     "dividends_paid": -40.429,
@@ -1770,8 +1780,8 @@
     "period_end": "2014-03-31",
     "filed": "2014-05-12",
     "filing_id": "egx-126424",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2015",
@@ -1781,8 +1791,8 @@
     "period_end": "2015-03-31",
     "filed": "2015-05-13",
     "filing_id": "egx-138419",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2016",
@@ -1792,8 +1802,8 @@
     "period_end": "2016-03-31",
     "filed": "2016-05-09",
     "filing_id": "egx-149529",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2017",
@@ -1803,8 +1813,8 @@
     "period_end": "2017-03-31",
     "filed": "2017-05-10",
     "filing_id": "egx-161140",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2018",
@@ -1814,6 +1824,7 @@
     "period_end": "2018-03-31",
     "filed": "2018-05-09",
     "filing_id": "egx-172974",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1824,6 +1835,7 @@
     "period_end": "2019-03-31",
     "filed": "2019-05-13",
     "filing_id": "egx-185588",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1834,6 +1846,7 @@
     "period_end": "2020-03-31",
     "filed": "2020-06-15",
     "filing_id": "egx-198871",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1858,14 +1871,12 @@
     "investing_cash_flow": 0.115,
     "liabilities": 22.336,
     "net_change_in_cash": -1.066,
-    "net_income": -0.015,
+    "net_income": -0.051,
     "operating_cash_flow": -1.181,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2022-01-01",
-    "period_end": "2022-03-31",
-    "filed": "2022-05-26",
-    "filing_id": "egx-224368"
+    "egx_net_income": -0.015,
+    "egx_net_income_basis": "unstated",
+    "egx_filing_id": "egx-224368"
    },
    {
     "period": "Q1 2023",
@@ -1875,15 +1886,12 @@
     "investing_cash_flow": -0.09,
     "liabilities": 61.939,
     "net_change_in_cash": 13.61,
-    "net_income": 29.607,
+    "net_income": 29.842,
     "operating_cash_flow": 16.722,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2023-01-01",
-    "period_end": "2023-03-31",
-    "filed": "2023-05-15",
-    "filing_id": "egx-237910",
-    "basis": "standalone"
+    "egx_net_income": 29.607,
+    "egx_net_income_basis": "standalone",
+    "egx_filing_id": "egx-237910"
    },
    {
     "period": "Q1 2024",
@@ -1909,12 +1917,12 @@
     "net_income": 0.156,
     "operating_cash_flow": 0.715,
     "source": "https://english.mubasher.info/markets/EGX/stocks/SMFR/financial-statements",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2025-01-01",
     "period_end": "2025-03-31",
     "filed": "2025-05-13",
-    "filing_id": "egx-269895",
-    "basis": "consolidated"
+    "filing_id": "egx-269895"
    },
    {
     "period": "Q1 2026",
@@ -1924,6 +1932,7 @@
     "period_end": "2026-03-31",
     "filed": "2026-05-14",
     "filing_id": "egx-288139",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg",
     "assets": 2098.469,
     "cash": 121.532,

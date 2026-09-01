@@ -6,12 +6,12 @@
  },
  "sector": "Finance",
  "market": {
-  "last_close": 0.431,
+  "last_close": 0.432,
   "date": "2026-09-01",
   "open": 0.452,
   "high": 0.46,
   "low": 0.425,
-  "volume": 145159346
+  "volume": 156109939
  },
  "price_history": [
   {
@@ -1319,11 +1319,11 @@
   "shares_outstanding": 3900000000,
   "free_float": 0.901744,
   "float_shares": 3516801600,
-  "perf_1w": -15.157480314960631,
-  "perf_1m": 2.1327014218009497,
-  "perf_3m": 56.72727272727271,
-  "avg_volume_30d": 105920970.49999999,
-  "relative_volume_10d": 1.4947307820134799,
+  "perf_1w": -14.960629921259844,
+  "perf_1m": 2.3696682464455,
+  "perf_3m": 57.09090909090908,
+  "avg_volume_30d": 106285990.26666665,
+  "relative_volume_10d": 1.6074909238124195,
   "median_volume_20d": 67286544,
   "rv20": 3.5538767602627948,
   "normal_value_30d": 33997646.3495,
@@ -1331,8 +1331,8 @@
   "history_bars": 120,
   "market_cap": 864000000.0,
   "market_cap_source": "EGX",
-  "trades": 1631,
-  "turnover": 67966632
+  "trades": 1661,
+  "turnover": 68922969
  },
  "financials": {
   "annual": [
@@ -1359,12 +1359,12 @@
     "net_income": 578.078,
     "operating_cash_flow": -78.544,
     "source": "https://english.mubasher.info/markets/EGX/stocks/ASPI/financial-statements",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2021-01-01",
     "period_end": "2021-12-31",
     "filed": "2022-03-07",
-    "filing_id": "egx-221017",
-    "basis": "consolidated"
+    "filing_id": "egx-221017"
    },
    {
     "period": "FY 2022",
@@ -1392,12 +1392,12 @@
     "net_income": 40.696,
     "operating_cash_flow": -167.579,
     "source": "https://english.mubasher.info/markets/EGX/stocks/ASPI/financial-statements",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2023-01-01",
     "period_end": "2023-12-31",
     "filed": "2024-03-25",
-    "filing_id": "egx-250917",
-    "basis": "consolidated"
+    "filing_id": "egx-250917"
    },
    {
     "period": "FY 2024",
@@ -1407,14 +1407,12 @@
     "investing_cash_flow": -171.578,
     "liabilities": 1996.639,
     "net_change_in_cash": 306.16,
-    "net_income": 67.881,
+    "net_income": 67.932,
     "operating_cash_flow": -159.031,
     "source": "https://english.mubasher.info/markets/EGX/stocks/ASPI/financial-statements",
-    "net_income_source": "https://www.egx.com.eg",
-    "period_start": "2024-01-01",
-    "period_end": "2024-12-31",
-    "filed": "2025-04-30",
-    "filing_id": "egx-269275"
+    "egx_net_income": 67.881,
+    "egx_net_income_basis": "unstated",
+    "egx_filing_id": "egx-269275"
    },
    {
     "period": "FY 2025",
@@ -1424,6 +1422,7 @@
     "period_end": "2025-12-31",
     "filed": "2026-06-24",
     "filing_id": "egx-290268",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    }
   ],
@@ -1436,8 +1435,8 @@
     "period_end": "2021-09-30",
     "filed": "2021-11-30",
     "filing_id": "egx-217949",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2022",
@@ -1447,8 +1446,8 @@
     "period_end": "2022-09-30",
     "filed": "2022-11-15",
     "filing_id": "egx-231625",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2023",
@@ -1458,8 +1457,8 @@
     "period_end": "2023-09-30",
     "filed": "2023-11-28",
     "filing_id": "egx-246409",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2024",
@@ -1469,8 +1468,8 @@
     "period_end": "2024-09-30",
     "filed": "2024-12-05",
     "filing_id": "egx-263216",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "9M 2025",
@@ -1480,8 +1479,8 @@
     "period_end": "2025-09-30",
     "filed": "2025-12-28",
     "filing_id": "egx-281382",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2022",
@@ -1491,8 +1490,8 @@
     "period_end": "2022-06-30",
     "filed": "2022-08-15",
     "filing_id": "egx-227794",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2023",
@@ -1502,8 +1501,8 @@
     "period_end": "2023-06-30",
     "filed": "2023-08-28",
     "filing_id": "egx-242368",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2024",
@@ -1513,6 +1512,7 @@
     "period_end": "2024-06-30",
     "filed": "2024-08-29",
     "filing_id": "egx-258572",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1523,8 +1523,8 @@
     "period_end": "2025-06-30",
     "filed": "2025-10-12",
     "filing_id": "egx-277464",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "H1 2026",
@@ -1534,6 +1534,7 @@
     "period_end": "2026-06-30",
     "filed": "2026-08-30",
     "filing_id": "egx-293994",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg"
    },
    {
@@ -1559,12 +1560,12 @@
     "net_income": 1.805,
     "operating_cash_flow": -13.493,
     "source": "https://english.mubasher.info/markets/EGX/stocks/ASPI/financial-statements",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2022-01-01",
     "period_end": "2022-03-31",
     "filed": "2022-06-05",
-    "filing_id": "egx-225092",
-    "basis": "consolidated"
+    "filing_id": "egx-225092"
    },
    {
     "period": "Q1 2023",
@@ -1592,12 +1593,12 @@
     "net_income": 8.391,
     "operating_cash_flow": 25.083,
     "source": "https://english.mubasher.info/markets/EGX/stocks/ASPI/financial-statements",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2024-01-01",
     "period_end": "2024-03-31",
     "filed": "2024-06-10",
-    "filing_id": "egx-254992",
-    "basis": "consolidated"
+    "filing_id": "egx-254992"
    },
    {
     "period": "Q1 2025",
@@ -1607,8 +1608,8 @@
     "period_end": "2025-03-31",
     "filed": "2025-08-31",
     "filing_id": "egx-275748",
-    "source": "https://www.egx.com.eg",
-    "basis": "consolidated"
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
    },
    {
     "period": "Q1 2026",
@@ -1618,6 +1619,7 @@
     "period_end": "2026-03-31",
     "filed": "2026-08-05",
     "filing_id": "egx-292494",
+    "basis": "unstated",
     "source": "https://www.egx.com.eg",
     "assets": 994.147,
     "equity": 505.463,
