@@ -80,6 +80,25 @@ def fetch() -> tuple[dict[str, dict], str | None]:
         if row.get("writeTime"):
             written = str(row["writeTime"])
         held = {"market_cap": cap}
+        # The exchange's own classification, in both languages.
+        #
+        # The vendor's taxonomy files real estate developers, banks, brokers,
+        # contractors, hotels and a textile company all under one word:
+        # "Finance". On 1 September that made a 75-company bucket out of seven
+        # industries — MASR, TMGH and OCDI are property developers and were
+        # being read, ranked and drawn as financials. 218 of the 220 companies
+        # the exchange names a sector for disagreed with the vendor.
+        #
+        # The exchange publishes 18 sectors against the vendor's coarser set,
+        # and it is the authority on how an Egyptian listing is classified.
+        # The Arabic name comes with it, which retires a hand-kept map that had
+        # to be extended by hand every time a sector appeared.
+        sector = (row.get("sector") or "").strip()
+        sector_ar = (row.get("sectorA") or "").strip()
+        if sector:
+            held["sector"] = sector
+            if sector_ar:
+                held["sector_ar"] = sector_ar
         trades = number(row.get("trades"), whole=True)
         value = number(row.get("value"), whole=True)
         if trades is not None:
@@ -126,7 +145,9 @@ def main() -> int:
         "securities": {k: rows[k] for k in sorted(rows)},
     }
     traded = sum(1 for v in rows.values() if v.get("trades"))
-    print(f"   {len(rows)} securities carry a market value, {traded} a trade count"
+    classified = sum(1 for v in rows.values() if v.get("sector"))
+    print(f"   {len(rows)} securities carry a market value, {traded} a trade count,"
+          f" {classified} the exchange's own sector"
           f"{f' (written {written})' if written else ''}")
     if args.check:
         return 0

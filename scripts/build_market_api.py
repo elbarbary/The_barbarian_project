@@ -305,6 +305,23 @@ EGX_MARKET_CAP = {k: v["market_cap"] for k, v in EGX_SESSION.items()
                   if isinstance(v.get("market_cap"), (int, float)) and v["market_cap"] > 0}
 
 
+def egx_sector(ticker: str, fallback: str | None) -> tuple[str | None, str | None]:
+    """The exchange's classification, or the vendor's where it has none.
+
+    The vendor files real estate developers, banks, brokers, contractors,
+    hotels and a textile company under one word — "Finance" — which made a
+    75-company sector out of seven industries and had MASR, TMGH and OCDI read
+    and ranked as financials. 218 of the 220 companies the exchange classifies
+    disagreed with it.
+    """
+    held = EGX_SESSION.get(ticker) or {}
+    sector = held.get("sector")
+    if isinstance(sector, str) and sector.strip():
+        ar = held.get("sector_ar")
+        return sector.strip(), (ar.strip() if isinstance(ar, str) and ar.strip() else None)
+    return fallback, None
+
+
 def newest_scan() -> pathlib.Path | None:
     """The freshest daily scan, or None when this machine has no scan archive.
 
@@ -743,6 +760,7 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         change_pct = clean(r.get("change"))
         previous = previous_close(history, session, close, change_pct)
 
+        sector_en, sector_ar = egx_sector(ticker, r.get("sector"))
         vendor_cap = clean(r.get("marketCap"))
         cap = EGX_MARKET_CAP.get(ticker) or vendor_cap
         avg_volume = clean(r.get("scannerAverageVolume30d"))
@@ -781,7 +799,12 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
                 "ticker": ticker,
                 "name_en": r.get("company") or ticker,
                 "name_ar": ARABIC.get(ticker),
-                "sector": r.get("sector"),
+                "sector": sector_en,
+                **({"sector_ar": sector_ar} if sector_ar else {}),
+                # Which of the two named it, so a reader — or the next person
+                # looking at an odd grouping — can tell without guessing.
+                "sector_source": "EGX" if ticker in EGX_SESSION
+                                 and (EGX_SESSION[ticker] or {}).get("sector") else "scan",
                 "exchange": "EGX",
                 # Numbers the directory itself can filter on.
                 #

@@ -74,6 +74,36 @@ class TickersTest(unittest.TestCase):
             harvest.fetch()
 
 
+class SectorTest(unittest.TestCase):
+    """The exchange classifies its own listings; the vendor guesses.
+
+    On 1 September the vendor filed real estate developers, banks, brokers,
+    contractors, hotels and a textile company under one word — "Finance" — a
+    75-company sector made of seven industries, with MASR, TMGH and OCDI read
+    and ranked as financials. 218 of the 220 the exchange classifies disagreed.
+    """
+
+    def test_the_sector_and_its_arabic_name_are_both_kept(self):
+        harvest.beta.request = lambda path: {"data": {"data": [
+            {"reuters": "MASR.CA", "mc": 30e9,
+             "sector": "Real Estate", "sectorA": "عقارات"},
+        ]}}
+        rows, _ = harvest.fetch()
+        self.assertEqual(rows["MASR"]["sector"], "Real Estate")
+        self.assertEqual(rows["MASR"]["sector_ar"], "عقارات")
+
+    def test_a_row_with_no_sector_carries_none(self):
+        # Absent stays absent: the vendor's word is better than an empty one,
+        # and the builder falls back to it.
+        harvest.beta.request = lambda path: {"data": {"data": [
+            {"reuters": "AAAA.CA", "mc": 1e9, "sector": "   "},
+            {"reuters": "BBBB.CA", "mc": 1e9},
+        ]}}
+        rows, _ = harvest.fetch()
+        self.assertNotIn("sector", rows["AAAA"])
+        self.assertNotIn("sector", rows["BBBB"])
+
+
 class GuardTest(unittest.TestCase):
     def test_the_share_count_guard_still_tests_one_source_against_itself(self):
         # AMES: our own price x shares = our own cap exactly, and the exchange
