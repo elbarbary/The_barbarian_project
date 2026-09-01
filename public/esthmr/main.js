@@ -236,6 +236,31 @@ document.getElementById('signout').onclick = async () => {
     }
   };
 
+  /* The whole archive, once, and only when somebody searches it.
+   *
+   * A search used to look through the open month alone, so typing a company's
+   * name found its filings if they happened to land in the month on screen and
+   * answered "nothing" otherwise. Twelve months is twelve requests and seven
+   * megabytes — the right price for a search across a year, and far too high
+   * to pay on the way in, so it is paid on the first keystroke and never
+   * again.
+   */
+  let wholeArchive = null;
+  const loadWholeArchive = () => {
+    if (wholeArchive || component.data().demo) return;
+    if (!String(component.state.filedQ || '').trim()) return;
+    const months = (component.data().filedMonths || []).map((m) => m.id);
+    if (!months.length) return;
+    wholeArchive = Promise.all(months.map((id) => data.filedMonth(id).catch(() => [])))
+      .then((all) => {
+        const rows = all.flat();
+        if (!rows.length) return;
+        component._d = { ...component.data(), filedAll: rows };
+        draw();
+      })
+      .catch((error) => console.warn('[esthmr] archive', error.message));
+  };
+
   // Opening a company loads its document; the screens redraw when it lands.
   let loading = null;
   const draw = component.onChange;
@@ -250,6 +275,7 @@ document.getElementById('signout').onclick = async () => {
     // empty so the calendar can open on the newest month the archive holds
     // rather than on a date compiled into the page.
     loadMonth(component.openMonth());
+    loadWholeArchive();
     loadWatchSeries();
     const wanted = component.state.ticker;
     if (wanted && wanted !== loading

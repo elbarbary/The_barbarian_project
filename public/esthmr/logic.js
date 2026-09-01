@@ -235,6 +235,8 @@ export class Component extends Base {
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
       archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
+      archiveSearched:'Showing the {shown} most recent of {total} matches across {months} months of the archive, newest first. Pick a month above to narrow it.',
+      archiveSearchedMonth:'Showing the {shown} most recent of {total} matches in {month}. Clear the month to search the whole archive.',
       filedShowing:'{n} filings match {what}.', filedShowingOne:'1 filing matches {what}.',
       filedSearch:'Filter by company or ticker',
       filedClear:'Clear', filedNothing:'No filing this month matches that.',
@@ -484,6 +486,8 @@ export class Component extends Base {
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
+      archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
+      archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
       filedShowing:'{n} إفصاحاً يطابق {what}.', filedShowingOne:'إفصاح واحد يطابق {what}.',
       filedSearch:'تصفية بالشركة أو الرمز',
       filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
@@ -2010,8 +2014,24 @@ export class Component extends Base {
     // THIS company filed", which the grid cannot express at all.
     const filedQuery = String(st.filedQ || '').trim();
     const filedFold = this.fold(filedQuery);
-    const monthRows = (D.filedArchive && D.filedArchiveMonth === openMonth)
-      ? D.filedArchive : null;
+    /* What a search looks through.
+     *
+     * It used to be the open month and only the open month, so typing a
+     * company's name found its filings if they happened to land in the month
+     * on screen and nothing otherwise — a search that answers "no filings" for
+     * a company with eleven of them in the other months. `filedAll` is every
+     * month, fetched once and only when somebody actually searches: twelve
+     * requests and seven megabytes is the right price for a search across a
+     * year and much too high to pay on the way in.
+     *
+     * A month is a FILTER on that, applied when the reader picks one rather
+     * than by default. The default is the newest filings on the exchange,
+     * which is what the newest month already is.
+     */
+    const everything = filedQuery && Array.isArray(D.filedAll) && D.filedAll.length
+      ? D.filedAll : null;
+    const monthRows = everything ? everything
+      : (D.filedArchive && D.filedArchiveMonth === openMonth) ? D.filedArchive : null;
     const matches = (e) => !filedFold
       || this.fold(e.ticker || '').includes(filedFold)
       || this.fold(e.what || '').includes(filedFold)
@@ -2025,7 +2045,13 @@ export class Component extends Base {
       })();
 
     const filtered = monthRows
-      ? monthRows.filter((e) => (!st.day || e.date === st.day) && matches(e))
+      ? monthRows.filter((e) => (!st.day || e.date === st.day)
+          // A chosen month narrows a search; an unchosen one must not. `month`
+          // is empty until a pill is clicked, and `openMonth` falls back to
+          // the newest for the list — so the filter reads the state, never the
+          // fallback.
+          && (!everything || !st.month || String(e.date || '').startsWith(st.month))
+          && matches(e))
       : null;
 
     const archive = filtered
@@ -2036,11 +2062,25 @@ export class Component extends Base {
       ? say(filtered.slice().sort((a, b) =>
           String(b.date || '').localeCompare(String(a.date || ''))), ['what'])
         .slice(0, 60).map((e) => Object.assign({}, e, {
+          // The exchange's own document. Every row in the archive carries one
+          // — 1,467 of 1,467 in August — and the panel bound none of them, so
+          // a row with a hover state and a pointer opened nothing at all.
           day: this.dayLabel(e.date), kind: e.section, hasKind: Boolean(e.section), basis: '',
+          hasHref: Boolean(e.href), noHref: !e.href,
+          // The ticker goes to the company; the row goes to the filing. Two
+          // different questions about the same line, and a reader who wants
+          // the company should not have to read the filing to get there.
+          go: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation();
+            this.setState({ screen: 'company', ticker: e.ticker }); },
         }))
       : null;
     const filedEvents = archive ? archive : D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
+      // An expected filing has not been filed, so there is no document to
+      // open — but its ticker is still a company worth reaching.
+      href: '', hasHref: false, noHref: true,
+      go: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation();
+        if (e.ticker) this.setState({ screen: 'company', ticker: e.ticker }); },
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
     })) : !D.demo ? [] : [
       { day:'26 Aug', ticker:'COMI', what: ar?'إفصاح عن توزيعات نقدية مرحلية':'Interim cash distribution disclosure', kind:'', hasKind:false, basis:'' },
@@ -2049,7 +2089,14 @@ export class Component extends Base {
       { day:'11 Aug', ticker:'TMGH', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
       { day:'07 Aug', ticker:'ABUK', what: ar?'قوائم النصف الأول ٢٠٢٦':'H1 2026 financial statements', kind:'', hasKind:false, basis:'' },
       { day:'04 Aug', ticker:'ETEL', what: ar?'إفصاح عن تعاقد':'Contract disclosure', kind:'', hasKind:false, basis:'' }
-    ];
+    ].map((e) => Object.assign({}, e, {
+      // The same fields the live rows carry. Written once here rather than
+      // five times above, because a demo row that falls behind the markup is
+      // how this list breaks: nothing fails, the binding renders empty.
+      href: '', hasHref: false, noHref: true,
+      go: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation();
+        this.setState({ screen: 'company', ticker: e.ticker }); },
+    }));
     const expectedEvents = D.expectedEvents ? say(D.expectedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
@@ -2224,7 +2271,28 @@ export class Component extends Base {
           showPct: t.w >= 1.6 && t.h >= 1.6,
           left: pc(t.x), top: pc(t.y), width: pc(t.w), height: pc(t.h),
           title: `${t.c.ticker} \u00b7 ${this.nm(t.c.name)} \u00b7 ${priced ? this.pct(t.c.pct) : '\u2014'}`,
-          go: () => this.setState({ screen: 'company', ticker: t.c.ticker }),
+          /* A tile smaller than a fingertip opens its SECTOR, not its company.
+           *
+           * On the whole map the smallest names are a few pixels across, and
+           * sending that straight to a company screen lands a reader on a
+           * company they could not read and did not choose — with no way to
+           * tell whether they hit the one they aimed at. Zooming first makes
+           * it legible; the second click, on a tile that now says what it is,
+           * opens the company.
+           *
+           * Measured at click time from the element's own box rather than
+           * guessed from its percentage, because whether a tile is small is a
+           * question in pixels and this side of the layout has only per cent
+           * — the same 2% is 22px on a desktop and 7px on a phone. 44px is
+           * the smallest thing a finger can be trusted to hit.
+           */
+          go: (ev) => {
+            const box = ev && ev.currentTarget && ev.currentTarget.getBoundingClientRect
+              ? ev.currentTarget.getBoundingClientRect() : null;
+            const tiny = box ? (box.width < 44 || box.height < 28) : false;
+            if (tiny && !heatZoom) this.setState({ heatSector: block.key });
+            else this.setState({ screen: 'company', ticker: t.c.ticker });
+          },
         });
       }
     }
@@ -2399,7 +2467,20 @@ export class Component extends Base {
       })(),
       filedNoMatch: Boolean(filtered && filtered.length === 0),
       dayFilings, dayNote, hasDay: Boolean(st.day),
-      archiveNote: (D.filedArchive && D.filedArchiveMonth === openMonth)
+      // Searching spans the year, so the note cannot go on naming one month.
+      // It says what was actually looked through, which is the only way a
+      // reader can tell "no filings" from "none in the month you are on".
+      archiveNote: everything
+        ? (st.month
+          // Narrowed by a month the reader picked: say the month, not the
+          // year it was picked out of.
+          ? L.archiveSearchedMonth.replace('{shown}', String((archive || []).length))
+              .replace('{total}', String(filtered ? filtered.length : 0))
+              .replace('{month}', this.monthLabel(st.month))
+          : L.archiveSearched.replace('{shown}', String((archive || []).length))
+              .replace('{total}', String(filtered ? filtered.length : 0))
+              .replace('{months}', String((D.filedMonths || []).length)))
+        : (D.filedArchive && D.filedArchiveMonth === openMonth)
         ? L.archiveNote.replace('{shown}', Math.min(60, D.filedArchive.length))
             .replace('{total}', D.filedArchive.length)
             .replace('{month}', this.monthLabel(openMonth))
