@@ -108,5 +108,270 @@
       }
     ],
     "fetchedAt": "2026-08-28T16:02:30.693229+00:00"
+  },
+  "EGS69021C011": {
+    "ticker": "AFDI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69021C011",
+        "issuerName": "El Ahly for Investment And Development"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:25.191862+00:00"
+  },
+  "EGS30471C014": {
+    "ticker": "AFMC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30471C014",
+        "issuerName": "Alexandria Flour Mills & Bakeries"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:27.987093+00:00"
+  },
+  "EGS65R01C015": {
+    "ticker": "AIDC",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-01T14:51:30.434976+00:00"
+  },
+  "EGS071L1C018": {
+    "ticker": "AIFI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS071L1C018",
+        "issuerName": "Atlas for Investment & food Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:32.882578+00:00"
+  },
+  "EGS21351C019": {
+    "ticker": "AIHC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21351C019",
+        "issuerName": "Arabia Investments Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:35.253163+00:00"
+  },
+  "EGS30211C014": {
+    "ticker": "AJWA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30211C014",
+        "issuerName": "Ajwa for Food Industies"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:37.720449+00:00"
+  },
+  "EGS42111C012": {
+    "ticker": "ALCN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS42111C012",
+        "issuerName": "Alexandria Container and Cargo Handling"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:40.202038+00:00"
+  },
+  "EGS3D031C018": {
+    "ticker": "ALUM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3D031C018",
+        "issuerName": "Arab Aluminium Co."
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:42.676203+00:00"
+  },
+  "EGS66DU1C015": {
+    "ticker": "ALXD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS66DU1C015",
+        "issuerName": "Alexandria for Investment and Urban Development"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:44.634522+00:00"
+  },
+  "EGS675S1C011": {
+    "ticker": "AMER",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS675S1C011",
+        "issuerName": "Amer Group"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:46.828408+00:00"
+  },
+  "EGS72081C010": {
+    "ticker": "AMES",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72081C010",
+        "issuerName": "ALEXANDIRA NEW MEDICAL CENTER"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:48.900653+00:00"
+  },
+  "EGS67221C019": {
+    "ticker": "AMIA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67221C019",
+        "issuerName": "Arab Moltaqa Investments"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:51.284038+00:00"
+  },
+  "EGS3E1E1C013": {
+    "ticker": "AMII",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3E1E1C013",
+        "issuerName": "Arab Valves Company"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:53.556579+00:00"
+  },
+  "EGS380P1C010": {
+    "ticker": "AMOC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS380P1C010",
+        "issuerName": "Alexanderia Minerals Oils Co."
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:56.049136+00:00"
+  },
+  "EGS3C6P1C019": {
+    "ticker": "ANCC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C6P1C019",
+        "issuerName": "Al Nahda Industries Co."
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:51:58.171179+00:00"
+  },
+  "EGS32331C018": {
+    "ticker": "APSW",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS32331C018",
+        "issuerName": "Arab Polvara Spinning & Weaving Company"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:00.290961+00:00"
+  },
+  "EGS694A1C018": {
+    "ticker": "ARAB",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS694A1C018",
+        "issuerName": "Arab Developers Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:02.803534+00:00"
+  },
+  "EGS3C0O1C016": {
+    "ticker": "ARCC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C0O1C016",
+        "issuerName": "Arabian Cement"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:05.323741+00:00"
+  },
+  "EGS65211C012": {
+    "ticker": "AREH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65211C012",
+        "issuerName": "Real Estate Egyptian Consortium"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:07.436755+00:00"
+  },
+  "EGS10001C013": {
+    "ticker": "ASCM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS10001C013",
+        "issuerName": "Asec for Mining"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:09.729359+00:00"
+  },
+  "EGS691L1C018": {
+    "ticker": "ASPI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691L1C018",
+        "issuerName": "Aspire Capital Holding For Financial Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:12.617308+00:00"
+  },
+  "EGS924G1C014": {
+    "ticker": "ASPI_r3",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-01T14:52:14.803156+00:00"
+  },
+  "EGS676N1C015": {
+    "ticker": "ATLC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS676N1C015",
+        "issuerName": "AlTawfeek Leasing Company a.t.lease"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:17.382436+00:00"
+  },
+  "EGS3D0C1C018": {
+    "ticker": "ATQA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3D0C1C018",
+        "issuerName": "Misr National Steel Company-AtaQa"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:19.422737+00:00"
+  },
+  "EGS38341C011": {
+    "ticker": "AXPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38341C011",
+        "issuerName": "Alexandria For Pharmaceuticals Chemical Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-01T14:52:21.961257+00:00"
   }
 }

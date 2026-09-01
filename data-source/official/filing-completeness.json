@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-01T14:33:54.426572+00:00",
+  "builtAt": "2026-09-01T14:53:58.061847+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
     "items": 191936,
@@ -1841,7 +1841,14 @@
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
     "items": 555,
-    "failures": {}
+    "failures": {
+      "fra_news": "curl: (28) Operation timed out after 60000 milliseconds with 0 bytes received\n",
+      "reg_procedure_compan": "curl: (56) Recv failure: Connection reset by peer\n",
+      "companies_decrees": "curl: (56) Recv failure: Connection reset by peer\n",
+      "admin_actions": "curl: (56) Recv failure: Connection reset by peer\n",
+      "criminal_procedures": "curl: (56) Recv failure: Connection reset by peer\n",
+      "f_criminal_procedure": "curl: (56) Recv failure: Connection reset by peer\n"
+    }
   },
   "issuers": [
     {

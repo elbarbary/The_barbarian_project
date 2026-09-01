@@ -1,12 +1,24 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-01T13:56:02.760800+00:00",
+  "fetchedAt": "2026-09-01T14:52:22.312190+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "14908257c509d6fa09eb1a0bad20b03ad97e171d5cd28409d80ef0f2f5dedcb4",
+  "sourceSha256": "92d1cc50c3a9b103744d8221432f54b73e27c6b4cf35493f3f0b748a32cf7f03",
   "issuers": [
     {
       "isin": "EGS01081C016",
       "issuerName": "The General Co. For Land Reclamation"
+    },
+    {
+      "isin": "EGS071L1C018",
+      "issuerName": "Atlas for Investment & food Industries"
+    },
+    {
+      "isin": "EGS10001C013",
+      "issuerName": "Asec for Mining"
+    },
+    {
+      "isin": "EGS21351C019",
+      "issuerName": "Arabia Investments Holding"
     },
     {
       "isin": "EGS21FG1C015",
@@ -17,12 +29,24 @@
       "issuerName": "HBA Contracting"
     },
     {
+      "isin": "EGS30211C014",
+      "issuerName": "Ajwa for Food Industies"
+    },
+    {
       "isin": "EGS30221C013",
       "issuerName": "The Arab Dairy Products Co."
     },
     {
+      "isin": "EGS30471C014",
+      "issuerName": "Alexandria Flour Mills & Bakeries"
+    },
+    {
       "isin": "EGS32221C011",
       "issuerName": "Arab Cotton Ginning"
+    },
+    {
+      "isin": "EGS32331C018",
+      "issuerName": "Arab Polvara Spinning & Weaving Company"
     },
     {
       "isin": "EGS341K1C013",
@@ -33,12 +57,40 @@
       "issuerName": "Innovation for retail and supplies-ARTIFEX"
     },
     {
+      "isin": "EGS380P1C010",
+      "issuerName": "Alexanderia Minerals Oils Co."
+    },
+    {
       "isin": "EGS38191C010",
       "issuerName": "Abu Qir Fertilizers and Chemical Industries"
     },
     {
       "isin": "EGS38321C013",
       "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
+    },
+    {
+      "isin": "EGS38341C011",
+      "issuerName": "Alexandria For Pharmaceuticals Chemical Industries"
+    },
+    {
+      "isin": "EGS3C0O1C016",
+      "issuerName": "Arabian Cement"
+    },
+    {
+      "isin": "EGS3C6P1C019",
+      "issuerName": "Al Nahda Industries Co."
+    },
+    {
+      "isin": "EGS3D031C018",
+      "issuerName": "Arab Aluminium Co."
+    },
+    {
+      "isin": "EGS3D0C1C018",
+      "issuerName": "Misr National Steel Company-AtaQa"
+    },
+    {
+      "isin": "EGS3E1E1C013",
+      "issuerName": "Arab Valves Company"
     },
     {
       "isin": "EGS3E2F1C011",
@@ -55,6 +107,10 @@
     {
       "isin": "EGS3J591C015",
       "issuerName": "Modern Lebanese Egyptian Al-Eshraq For Manufacturing"
+    },
+    {
+      "isin": "EGS42111C012",
+      "issuerName": "Alexandria Container and Cargo Handling"
     },
     {
       "isin": "EGS473U1C011",
@@ -81,12 +137,48 @@
       "issuerName": "Abu Dhabi Islamic Bank - Egypt"
     },
     {
+      "isin": "EGS65211C012",
+      "issuerName": "Real Estate Egyptian Consortium"
+    },
+    {
+      "isin": "EGS66DU1C015",
+      "issuerName": "Alexandria for Investment and Urban Development"
+    },
+    {
       "isin": "EGS66H81C016",
       "issuerName": "El Sewedy for Real Estate Development"
     },
     {
+      "isin": "EGS67221C019",
+      "issuerName": "Arab Moltaqa Investments"
+    },
+    {
+      "isin": "EGS675S1C011",
+      "issuerName": "Amer Group"
+    },
+    {
+      "isin": "EGS676N1C015",
+      "issuerName": "AlTawfeek Leasing Company a.t.lease"
+    },
+    {
+      "isin": "EGS69021C011",
+      "issuerName": "El Ahly for Investment And Development"
+    },
+    {
+      "isin": "EGS691L1C018",
+      "issuerName": "Aspire Capital Holding For Financial Investment"
+    },
+    {
+      "isin": "EGS694A1C018",
+      "issuerName": "Arab Developers Holding"
+    },
+    {
       "isin": "EGS697S1C015",
       "issuerName": "A Capital Holding"
+    },
+    {
+      "isin": "EGS72081C010",
+      "issuerName": "ALEXANDIRA NEW MEDICAL CENTER"
     },
     {
       "isin": "EGS72AQ1C016",
@@ -146,37 +238,21 @@
     }
   ],
   "egxReconciliation": {
-    "egxTickersWithIsin": 260,
-    "matchedAtMcdr": 10,
-    "exactIsinsQueried": 10,
-    "confirmedNotFoundAfterExactSearch": {},
+    "egxTickersWithIsin": 261,
+    "matchedAtMcdr": 33,
+    "exactIsinsQueried": 35,
+    "confirmedNotFoundAfterExactSearch": {
+      "AIDC": "EGS65R01C015",
+      "ASPI_r3": "EGS924G1C014"
+    },
     "transportErrors": {},
     "notYetIndividuallyQueried": {
-      "AJWA": "EGS30211C014",
-      "ANCC": "EGS3C6P1C019",
-      "APSW": "EGS32331C018",
-      "ASCM": "EGS10001C013",
+      "NBCC": "EGS220N1C016",
       "SAUD": "EGS60101C010",
       "KRDI": "EGS02291C010",
-      "ATLC": "EGS676N1C015",
-      "ALCN": "EGS42111C012",
-      "AFMC": "EGS30471C014",
-      "AMOC": "EGS380P1C010",
-      "AMES": "EGS72081C010",
-      "AXPH": "EGS38341C011",
       "SPIN": "EGS32041C013",
-      "AMER": "EGS675S1C011",
-      "ALUM": "EGS3D031C018",
-      "ARAB": "EGS694A1C018",
-      "AMIA": "EGS67221C019",
       "RREI": "EGS65011C016",
-      "AIHC": "EGS21351C019",
-      "AIDC": "EGS65R01C015",
-      "ARCC": "EGS3C0O1C016",
       "DOMT": "EGS30031C016",
-      "AMII": "EGS3E1E1C013",
-      "ASPI": "EGS691L1C018",
-      "AIFI": "EGS071L1C018",
       "BINV": "EGS691T1C010",
       "BQDC": "EGS600K1C019",
       "BTFH": "EGS691G1C015",
@@ -229,13 +305,11 @@
       "PHAR": "EGS38081C013",
       "IRON": "EGS3D061C015",
       "MPRC": "EGS78021C010",
-      "AREH": "EGS65211C012",
       "EGSA": "EGS48022C015",
       "ETRS": "EGS42051C010",
       "EGTS": "EGS70431C019",
       "EHDR": "EGS65341C017",
       "EGREF": "EGS694B1C017",
-      "AFDI": "EGS69021C011",
       "EPPK": "EGS360A1C011",
       "EEII": "EGS3G111C015",
       "EALR": "EGS65771C015",
@@ -280,8 +354,8 @@
       "GTWL": "EGS32161C019",
       "GOUR": "EGS540S1C014",
       "GRCA": "EGS69261C013",
+      "GROV": "EGS69921C012",
       "CCRS": "EGS651B1C018",
-      "HAVC": "EGS69921C012",
       "HELI": "EGS65591C017",
       "HDBK": "EGS60301C016",
       "ISPH": "EGS512O1C012",
@@ -320,7 +394,6 @@
       "MFPC": "EGS39061C014",
       "MHOT": "EGS70081C012",
       "MLIC": "EGS632D1C010",
-      "ATQA": "EGS3D0C1C018",
       "MOSC": "EGS38421C011",
       "MITR": "EGS79031C018",
       "MOIN": "EGS63041C015",
@@ -375,9 +448,7 @@
       "SVCE": "EGS3C351C011",
       "SPMD": "EGS73BR1C013",
       "YAYT": "EGS3E7F1C016",
-      "AMES_r2": "EGS924F1C015",
-      "ASPI_r3": "EGS924G1C014",
-      "SVCE_r1": "EGS924E1C016",
+      "LUTS_r1": "EGS924K1C018",
       "SCTS": "EGS740C1C010",
       "CANA": "EGS60231C015",
       "TMGH": "EGS691S1C011",
