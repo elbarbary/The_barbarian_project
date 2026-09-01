@@ -140,6 +140,47 @@ test('a malformed write is refused rather than stored', async () => {
   assert.deepEqual([...e.ESTHMR_AUTH.store.keys()].filter((k) => k.startsWith('wl:')), []);
 });
 
+/* ── the ceiling, and what it costs to enforce ─────────────────────────── */
+
+test('reading the data costs no storage writes at all', async () => {
+  // It used to cost one KV read and one KV WRITE per document. A signed-in
+  // page load fetches 33 of them, and the free plan allows 1,000 writes a day
+  // — thirty visits before `put()` throws inside a gate with no catch, and the
+  // site's data 500s for everyone until midnight UTC.
+  const e = env();
+  const headers = await bearer('reader@example.com');
+  for (let i = 0; i < 40; i++) {
+    const answer = await call(e, 'https://thebarbarianproject.com/data/v1/companies.json', { headers });
+    assert.equal(answer.status, 200);
+  }
+  assert.equal(e.ESTHMR_AUTH.store.size, 0,
+    `forty document reads wrote ${e.ESTHMR_AUTH.store.size} KV keys`);
+});
+
+test('the limiter stops a caller who is over, and never the whole gate', async () => {
+  const calls = [];
+  const limited = env({ DATA_LIMIT: { limit: async ({ key }) => {
+    calls.push(key);
+    return { success: calls.length <= 2 };
+  } } });
+  const headers = await bearer('reader@example.com');
+  const get = () => call(limited, 'https://thebarbarianproject.com/data/v1/companies.json', { headers });
+  assert.equal((await get()).status, 200);
+  assert.equal((await get()).status, 200);
+  assert.equal((await get()).status, 429, 'the third should have been refused');
+  // Keyed by the account, so one reader cannot spend another's allowance.
+  assert.deepEqual([...new Set(calls)], ['data:reader@example.com']);
+
+  // A limiter that throws must not take the data down with it — that failure
+  // is the entire reason this moved off KV.
+  const broken = env({ DATA_LIMIT: { limit: async () => { throw new Error('down'); } } });
+  assert.equal((await call(broken, 'https://thebarbarianproject.com/data/v1/companies.json',
+    { headers })).status, 200);
+
+  // And the gate itself still refuses a reader with no session, limiter or no.
+  assert.equal((await call(limited, 'https://thebarbarianproject.com/data/v1/companies.json')).status, 401);
+});
+
 /* ── esthmr.com ────────────────────────────────────────────────────────── */
 
 const body = async (response) => (await response.text());

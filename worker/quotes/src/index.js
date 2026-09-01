@@ -101,6 +101,64 @@ const COLUMNS = [
  */
 const TICKER = /^[A-Z]{3,6}$/;
 
+/* ── the tape ─────────────────────────────────────────────────────────────
+ *
+ * Every five minutes this Worker reads 282 companies, hands them out, and
+ * throws them away. The only thing the project keeps is the four-times-a-day
+ * snapshot in market.json, so every company file holds 1,500 daily closes and
+ * no intraday at all — and questions the site cannot answer today are all the
+ * same question: what did this look like at eleven?
+ *
+ * Chief among them is the one the busy block gets wrong. It divides part of a
+ * day's volume by a twenty-session median, so at eleven in the morning
+ * everything looks quiet and the ranking is noise until the close. Knowing
+ * what fraction of a normal day HAS usually traded by eleven is the fix, and
+ * that needs a tape.
+ *
+ * One object per fresh read, newline-delimited JSON, partitioned by day.
+ * 282 rows is about 25 KB; a session is 54 of them, a month about 30 MB and
+ * 1,200 writes. Deliberately plain files rather than a streaming pipeline:
+ * at this size the pipeline would be more moving parts than data, and these
+ * files are the same rows a pipeline would ingest if it ever earns its place.
+ *
+ * Absent binding, absent tape. It is a recording, not a dependency: nothing
+ * the reader is shown may fail because a bucket did.
+ */
+export const TAPE_PREFIX = 'quotes';
+
+/** One snapshot, appended out of band. Never awaited by the response. */
+export async function record(env, snapshot) {
+  if (!env.TAPE || typeof env.TAPE.put !== 'function') return;
+  // Only while the market is open: outside it the upstream repeats the same
+  // close, and a tape of the same row 200 times is not a record of anything.
+  if (!snapshot.session || !snapshot.session.open) return;
+  const at = new Date(snapshot.as_of);
+  if (isNaN(at)) return;
+  const day = snapshot.as_of.slice(0, 10);
+  // Named for the reading's own minute, so a re-read inside the same minute
+  // overwrites rather than doubling the row.
+  const minute = snapshot.as_of.slice(11, 16).replace(':', '');
+  const rows = Object.entries(snapshot.quotes).map(([ticker, q]) => JSON.stringify({
+    t: ticker, at: snapshot.as_of, c: q.c, o: q.o, h: q.h, l: q.l,
+    v: q.v, ch: q.ch, pc: q.pc, tr: q.t, val: q.val, s: q.s || 'tv',
+  }));
+  try {
+    await env.TAPE.put(`${TAPE_PREFIX}/${day}/${minute}.ndjson`, rows.join('\n') + '\n', {
+      httpMetadata: { contentType: 'application/x-ndjson' },
+      customMetadata: {
+        as_of: snapshot.as_of,
+        egx: String((snapshot.from || {}).egx || 0),
+        vendor: String((snapshot.from || {}).vendor || 0),
+        // The exchange's own stamp, so a row's real age survives into the
+        // tape rather than being inferred from the filename later.
+        write_time: snapshot.egx_write_time || '',
+      },
+    });
+  } catch {
+    /* a recording that fails is a recording that fails */
+  }
+}
+
 /** Cache key. A synthetic GET, because the upstream call is a POST. */
 const CACHE_KEY = new Request('https://quotes.thebarbarianproject.com/__snapshot');
 
@@ -141,6 +199,11 @@ export default {
       }
       return json({ error: 'quotes unavailable', reason: String(err) }, 503);
     }
+
+    // Out of band on purpose: the tape must never be between a reader and a
+    // price. A fresh read is the only thing worth recording — a cache hit is
+    // the same snapshot again.
+    ctx.waitUntil(record(env, shot));
 
     const response = json(shot, 200, 0);
     const stored = response.clone();
