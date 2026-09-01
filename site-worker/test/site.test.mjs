@@ -589,6 +589,46 @@ test('every company the map counts is a company the map draws', () => {
   }
 });
 
+test('a tile too small to read opens its sector, not a company nobody chose', () => {
+  // On the whole map the smallest names are a few pixels across. A click there
+  // used to land on a company the reader could not read and did not choose,
+  // with no way to tell whether they hit the one they aimed at.
+  const c = fresh();
+  c.setData(heatData());
+  c.state.screen = 'heat';
+  const v = c.renderVals();
+  const click = (w, h) => ({ currentTarget: { getBoundingClientRect: () => ({ width: w, height: h }) } });
+
+  const tile = v.heatTiles[v.heatTiles.length - 1];
+  tile.go(click(9, 6));
+  assert.equal(c.renderVals().heatZoomed, true, 'a 9x6 tile should have zoomed');
+  assert.equal(c.renderVals().screen === 'company', false);
+
+  // Zoomed, the same tile is readable and opens its company — the second click
+  // is the one that means what it says.
+  const big = c.renderVals().heatTiles.find((t) => t.ticker === tile.ticker);
+  big.go(click(120, 80));
+  assert.equal(c.state.screen, 'company');
+  assert.equal(c.state.ticker, tile.ticker);
+
+  // A tile a finger can hit was never the problem and still opens directly.
+  const fresh2 = fresh();
+  fresh2.setData(heatData());
+  fresh2.state.screen = 'heat';
+  const biggest = fresh2.renderVals().heatTiles[0];
+  biggest.go(click(220, 180));
+  assert.equal(fresh2.state.screen, 'company');
+  assert.equal(fresh2.state.ticker, biggest.ticker);
+
+  // And a click with no box to measure — a keyboard, a test, a browser that
+  // will not say — opens the company rather than silently doing something else.
+  const fresh3 = fresh();
+  fresh3.setData(heatData());
+  fresh3.state.screen = 'heat';
+  fresh3.renderVals().heatTiles[0].go();
+  assert.equal(fresh3.state.screen, 'company');
+});
+
 test('a company with no market value is named, not drawn at a made-up size', () => {
   const data0 = heatData();
   data0.companies[5].cap = null;
@@ -2928,6 +2968,88 @@ test('a followed company that leaves the exchange drops out rather than showing 
   assert.equal(v.followed[0].star, '★');
   // and an unfollowed row offers the empty star
   assert.equal(v.rows.find((r) => r.ticker === 'BBBB').star, '☆');
+});
+
+test('a filing opens the document, and its ticker opens the company', () => {
+  // The row had a hover state, a pointer and no handler at all: every filing
+  // in the archive carries the exchange's own link — 1,467 of 1,467 in August
+  // — and the panel bound none of them.
+  const rows = [
+    { date: '2026-08-24', ticker: 'AAAA', what: 'A results release', section: 'Results',
+      href: 'https://example.egx/filing/1' },
+    { date: '2026-08-23', ticker: 'BBBB', what: 'B board decisions', section: 'Board', href: null },
+  ];
+  const c = fresh();
+  c.setData({ ...LIVE, filedMonths: [{ id: '2026-08', count: 2 }],
+              filedArchive: rows, filedArchiveMonth: '2026-08' });
+  c.state.screen = 'calendar';
+  const events = c.renderVals().filedEvents;
+  assert.equal(events[0].hasHref, true);
+  assert.equal(events[0].href, 'https://example.egx/filing/1');
+  // A filing with no document says so rather than rendering an empty link.
+  assert.equal(events[1].hasHref, false);
+  assert.equal(events[1].noHref, true);
+
+  // The ticker is a separate target: a reader who wants the company should not
+  // have to open the filing to get there.
+  let stopped = false;
+  events[0].go({ stopPropagation: () => { stopped = true; } });
+  assert.equal(stopped, true, 'the ticker click must not also open the document');
+  assert.equal(c.state.screen, 'company');
+  assert.equal(c.state.ticker, 'AAAA');
+});
+
+test('the whole archive is fetched on the first search and never twice', async () => {
+  // Twelve months is twelve requests and seven megabytes: the right price for
+  // a search across a year, and far too high to pay on the way in.
+  const { readFile } = await import('node:fs/promises');
+  const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
+  const fn = main.slice(main.indexOf('const loadWholeArchive'),
+                        main.indexOf('// Opening a company loads its document'));
+  assert.match(fn, /if \(wholeArchive \|\| component\.data\(\)\.demo\) return;/,
+    'it would fetch the archive again on every redraw');
+  assert.match(fn, /if \(!String\(component\.state\.filedQ \|\| ''\)\.trim\(\)\) return;/,
+    'it would fetch seven megabytes for a reader who never searched');
+  assert.match(fn, /filedAll/);
+});
+
+test('searching the disclosures looks through every month, not the open one', () => {
+  // It searched the month on screen and nothing else, so a company with
+  // eleven filings across the year answered "nothing" unless one of them
+  // happened to land in the month showing.
+  const august = [{ date: '2026-08-24', ticker: 'AAAA', what: 'A results release', section: 'Results' }];
+  const wholeYear = august.concat([
+    { date: '2026-03-11', ticker: 'AAAA', what: 'A capital increase', section: 'Capital' },
+    { date: '2025-11-02', ticker: 'AAAA', what: 'A board change', section: 'Board' },
+    { date: '2026-05-06', ticker: 'BBBB', what: 'B results release', section: 'Results' },
+  ]);
+  const c = fresh();
+  c.setData({ ...LIVE, filedMonths: [{ id: '2026-08', count: 1 }],
+              filedArchive: august, filedArchiveMonth: '2026-08', filedAll: wholeYear });
+  c.state.screen = 'calendar';
+
+  // Unsearched, the panel is the open month — the newest filings, which is
+  // what it was already.
+  assert.equal(c.renderVals().filedEvents.length, 1);
+
+  // Searched, it is the whole archive, newest first.
+  c.state.filedQ = 'AAAA';
+  const found = c.renderVals().filedEvents;
+  assert.deepEqual(found.map((e) => e.date), ['2026-08-24', '2026-03-11', '2025-11-02']);
+
+  // A month is a filter on that, and only once the reader picks one.
+  c.state.month = '2026-03';
+  assert.deepEqual(c.renderVals().filedEvents.map((e) => e.date), ['2026-03-11']);
+  c.state.month = '';
+  assert.equal(c.renderVals().filedEvents.length, 3);
+
+  // Until every month has landed it searches what it has rather than nothing.
+  const partial = fresh();
+  partial.setData({ ...LIVE, filedMonths: [{ id: '2026-08', count: 1 }],
+                    filedArchive: august, filedArchiveMonth: '2026-08' });
+  partial.state.screen = 'calendar';
+  partial.state.filedQ = 'AAAA';
+  assert.equal(partial.renderVals().filedEvents.length, 1);
 });
 
 test('the disclosures screen filters by day and by company', () => {
