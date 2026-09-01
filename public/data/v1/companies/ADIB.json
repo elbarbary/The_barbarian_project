@@ -1329,10 +1329,10 @@
   "normal_value_30d": 68492405.345,
   "five_session_change": 0.5330882352941213,
   "history_bars": 120,
-  "market_cap": 82035000000.0,
+  "market_cap": 80880000000.0,
   "market_cap_source": "EGX",
-  "trades": 2736,
-  "turnover": 120038940
+  "trades": 156,
+  "turnover": 2812782
  },
  "financials": {
   "annual": [

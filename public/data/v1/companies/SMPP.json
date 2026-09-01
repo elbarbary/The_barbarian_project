@@ -15,11 +15,6 @@
  },
  "price_history": [
   {
-   "date": "2021-08-11",
-   "close": 54.06,
-   "volume": 8440
-  },
-  {
    "date": "2021-08-15",
    "close": 54.06,
    "volume": 1810
@@ -1313,6 +1308,11 @@
    "date": "2026-08-24",
    "close": 103.6,
    "volume": 15
+  },
+  {
+   "date": "2026-08-31",
+   "close": 126.08,
+   "volume": 8
   }
  ],
  "profile": {
@@ -1321,20 +1321,14 @@
   "perf_3m": 14.62860260023639,
   "avg_volume_30d": 111.13333333333334,
   "relative_volume_10d": 0.07060900264783761,
-  "history_bars": 0,
+  "median_volume_20d": 51.5,
+  "rv20": 0.1553398058252427,
+  "normal_value_30d": 5850,
+  "five_session_change": 7.760683760683751,
+  "history_bars": 120,
   "market_cap": 1206602065,
-  "market_cap_source": "scan",
-  "median_volume_20d": 56,
-  "rv20": 0.26785714285714285,
-  "normal_value_30d": 6029.65,
-  "five_session_change": -9.913043478260875
+  "market_cap_source": "scan"
  },
- "profile_carried": [
-  "five_session_change",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {
