@@ -6,8 +6,22 @@ assets, equity, cash flow, net income — for 227 of 280 companies. The exchange
 publishes only one line of that, net profit, but it publishes it **as the
 issuer filed it**, in a fixed template, stamped with the ISIN.
 
-Where the two disagree, the exchange wins. That is the founder's call and it is
-the right one: Mubasher is a redistributor and EGX is the registry.
+Where the two disagree ON THE SAME BASIS, the exchange wins: Mubasher is a
+redistributor and EGX is the registry.
+
+Where they disagree because they are reporting different things, it does not.
+That distinction was missing and it mattered: TMGH's FY 2024 came through at
+801.961m against a filed statement of 10,723.074m — thirteen times apart, which
+is not two sources disagreeing about a number but two different numbers, a
+group's consolidated result and its parent's. Its own FY 2023 row is labelled
+`consolidated` and agrees to one per cent, which is what agreement looks like.
+
+77 companies were publishing one figure in the directory and another in their
+own document for the same year; 75 of the 77 had a full balance sheet behind
+the directory's. So a bare line of UNSTATED basis no longer overwrites a period
+that has assets, equity and a cash flow behind it. It is kept beside it under
+its own name, so nothing is lost and nothing is silently swapped, and the
+figure that wins now records the basis it was filed on.
 
 What this does NOT do
 ---------------------
@@ -242,7 +256,7 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
     16m instead of 33bn) and refuse the corrected one. Only keys the caller has
     verified belong here; everything else still faces the guard.
     """
-    touched = overrode = added = 0
+    touched = overrode = added = kept_statement = 0
     for path in sorted(glob.glob(str(COMPANIES / "*.json"))):
         doc = json.loads(pathlib.Path(path).read_text())
         ticker = doc.get("ticker") or pathlib.Path(path).stem
@@ -301,7 +315,40 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                             and (tick, label) not in force_keys):
                         skipped["magnitude"] = skipped.get("magnitude", 0) + 1
                         continue
+                    # A COMPLETE statement is not overruled by a bare line of
+                    # unstated basis.
+                    #
+                    # "The exchange wins" was written for two sources reporting
+                    # the same thing, where the registry beats a redistributor.
+                    # It is not what was happening. TMGH's FY 2024 came out at
+                    # 801.961m against a statement of 10,723.074m — thirteen
+                    # times apart, which is not a disagreement about a number,
+                    # it is two different numbers: a group's consolidated
+                    # result and, almost certainly, its parent's. Its own FY
+                    # 2023 row is labelled `consolidated` and agrees to one per
+                    # cent, which is what agreement looks like.
+                    #
+                    # 77 companies published one figure in the directory and
+                    # another in their own document for the same year, and 75
+                    # of the 77 had a full balance sheet behind the directory's.
+                    #
+                    # So the registry still wins when it says it is reporting
+                    # the same basis. An unlabelled line does not overwrite a
+                    # period that has assets, equity and a cash flow behind it;
+                    # it is kept beside it, named for what it is, so nothing is
+                    # lost and nothing is silently swapped.
+                    complete = existing.get("assets") is not None or existing.get("equity") is not None
+                    if complete and row["basis"] != "consolidated":
+                        existing["egx_net_income"] = row["net_income"]
+                        existing["egx_net_income_basis"] = row["basis"] or "unstated"
+                        existing["egx_filing_id"] = f"egx-{row['code']}"
+                        kept_statement += 1
+                        changed = True
+                        continue
                     existing["net_income"] = row["net_income"]
+                    # What basis the figure that WON was filed on, so a reader
+                    # is never shown a profit whose basis nobody recorded.
+                    existing["basis"] = row["basis"] or existing.get("basis") or "unstated"
                     existing["net_income_source"] = SOURCE
                     existing["period_start"] = row["period_start"]
                     existing["period_end"] = row["period_end"]
@@ -323,6 +370,11 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                         "period_end": row["period_end"],
                         "filed": row["filed"],
                         "filing_id": f"egx-{row['code']}",
+                        # No statement exists for this period, so the
+                        # exchange's line is all there is — and it says which
+                        # basis it was filed on rather than leaving a reader to
+                        # assume it matches the years around it.
+                        "basis": row["basis"] or "unstated",
                         # Everything else genuinely unknown for this period. The
                         # exchange files one line, and inventing the rest is the
                         # mistake this repository has already made once.
@@ -343,10 +395,13 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
     verb = "would touch" if dry_run else "touched"
     print(f"   {verb} {touched} companies — {overrode} figures replaced by the "
           f"exchange's, {added} periods added that Mubasher never had")
+    if kept_statement:
+        print(f"   left {kept_statement} complete statement(s) standing against an "
+              f"unlabelled filing, and kept the filing's figure beside them")
     if skipped.get("magnitude"):
         print(f"   refused {skipped['magnitude']} override(s) as a likely unit "
               f"mismatch rather than publish a figure orders of magnitude out")
-    return touched, overrode, added
+    return touched, overrode, added, kept_statement
 
 
 def merge(dry_run: bool) -> int:
