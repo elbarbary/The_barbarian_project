@@ -44,6 +44,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import gzip
+import hashlib
 import json
 import pathlib
 import random
@@ -97,6 +98,48 @@ FIRST_YEAR = 2005
 
 class Rejected(RuntimeError):
     """The WAF turned us away. Stop the run; do not retry into a block."""
+
+
+def archive_snapshot(name: str, payload: dict, *, fetched_at: str | None = None) -> pathlib.Path:
+    """Keep one immutable, timestamped copy beside the replaceable latest file.
+
+    The old harvester deliberately kept only `snapshots/<name>.json`. That is
+    useful for a builder but unusable as market history: the next checkpoint
+    erases the preceding one. This archive is append-only and stores the exact
+    response plus its hash and query timestamp. Identical observations are
+    still retained because "unchanged at 10:45" is itself a dated observation.
+    """
+    when = datetime.datetime.fromisoformat(fetched_at) if fetched_at else datetime.datetime.now(
+        datetime.timezone.utc
+    )
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=datetime.timezone.utc)
+    when = when.astimezone(datetime.timezone.utc)
+    stamp = when.strftime("%Y-%m-%dT%H:%M:%SZ")
+    raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    digest = hashlib.sha256(raw).hexdigest()
+    day = OUT / "snapshot-history" / when.strftime("%Y-%m-%d")
+    day.mkdir(parents=True, exist_ok=True)
+    path = day / f"{when.strftime('%H%M%S')}-{name}.json.gz"
+    wrapped = {
+        "source": f"beta.egx.com.eg {dict(SNAPSHOTS).get(name, name)}",
+        "fetchedAt": stamp,
+        "sha256": digest,
+        "payload": payload,
+    }
+    path.write_bytes(gzip.compress(
+        json.dumps(wrapped, ensure_ascii=False, separators=(",", ":")).encode(),
+        mtime=0,
+    ))
+    manifest = OUT / "snapshot-history" / "manifest.jsonl"
+    with manifest.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps({
+            "name": name,
+            "fetchedAt": stamp,
+            "sha256": digest,
+            "path": str(path.relative_to(REPO)),
+        }, ensure_ascii=False, separators=(",", ":")) + "\n")
+    return path
 
 
 def request(path: str, body: dict | None = None, *, timeout: int = 150,
@@ -281,9 +324,11 @@ def harvest_snapshots() -> int:
     out.mkdir(parents=True, exist_ok=True)
     for name, path in SNAPSHOTS:
         payload = request(path)
+        fetched_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
         (out / f"{name}.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8"
         )
+        archived = archive_snapshot(name, payload, fetched_at=fetched_at)
         data = payload.get("data")
         if isinstance(data, dict) and isinstance(data.get("data"), list):
             size = len(data["data"])
@@ -291,7 +336,7 @@ def harvest_snapshots() -> int:
             size = len(data)
         else:
             size = 1
-        print(f"   {name}: {size} row(s)")
+        print(f"   {name}: {size} row(s) · archived {archived.name}")
         pause()
     return len(SNAPSHOTS)
 
@@ -313,12 +358,14 @@ def harvest_statements(pages: int = 3) -> int:
         if page >= (payload.get("totalPages") or 1):
             break
         pause()
+    document = {"source": "beta.egx.com.eg /api/bff/egx/financial-statements-filter",
+                "harvested": datetime.date.today().isoformat(),
+                "items": rows}
     (out / "financial-statements-filter.json").write_text(
-        json.dumps({"source": "beta.egx.com.eg /api/bff/egx/financial-statements-filter",
-                    "harvested": datetime.date.today().isoformat(),
-                    "items": rows}, ensure_ascii=False, indent=1),
+        json.dumps(document, ensure_ascii=False, indent=1),
         encoding="utf-8",
     )
+    archive_snapshot("financial-statements-filter", document)
     print(f"   financial-statements-filter: {len(rows)} announcements")
     return len(rows)
 
