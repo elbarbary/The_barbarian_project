@@ -18,6 +18,7 @@ import html
 import json
 import pathlib
 import re
+import ssl
 import subprocess
 import time
 import urllib.parse
@@ -37,10 +38,35 @@ ROW = re.compile(
 TAG = re.compile(r"<[^>]+>")
 
 
+# The intermediate MCDR does not send.
+#
+# www.mcdr.com.eg presents its leaf certificate and stops: `openssl s_client`
+# reports "Verify return code: 21 (unable to verify the first certificate)".
+# macOS fetches the missing issuer over AIA and caches it, so a laptop verifies
+# the site and a fresh Linux runner cannot — the collector died on every
+# scheduled run with CERTIFICATE_VERIFY_FAILED while working perfectly here.
+#
+# This is Thawte TLS RSA CA G1, the issuer named in the leaf's own AIA
+# extension, and it chains to DigiCert Global Root G2, which is in every trust
+# store. Supplying it does not weaken anything: the hostname, the expiry and
+# the chain to a trusted root are all still checked. It fills in the link the
+# server omits, which is the only honest way to reach a misconfigured host.
+INTERMEDIATE = pathlib.Path(__file__).resolve().parent / "certs" / "thawte-tls-rsa-ca-g1.pem"
+
+
+def tls_context() -> ssl.SSLContext:
+    """The system trust store, plus the issuer this host forgets to send."""
+    context = ssl.create_default_context()
+    if INTERMEDIATE.exists():
+        context.load_verify_locations(cafile=str(INTERMEDIATE))
+    return context
+
+
 def fetch_url(url: str, timeout: int = 60) -> bytes:
     request = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html"})
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
+        with urllib.request.urlopen(request, timeout=timeout,
+                                    context=tls_context()) as response:
             return response.read()
     except OSError as error:
         # Some Homebrew Python builds do not inherit the macOS trust store,
