@@ -149,6 +149,12 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date) ->
     return faults
 
 
+# Kinds where two of our own documents disagree about the same company. Not
+# "the data is thin" — "the data is inconsistent with itself", which is a bug
+# with an address. See the note in main().
+CONTRADICTIONS = ("sector_split", "pe_vs_eps")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--json", action="store_true", help="the findings, machine-readable")
@@ -188,6 +194,27 @@ def main() -> int:
             print(f"      {f['ticker']:<7}{f['detail']}")
             if extra:
                 print(f"             {extra}")
+
+    # Most of what this finds is the world being incomplete: a company the
+    # exchange has not valued, a filing nobody has updated since 2016. Those are
+    # reported and left alone, because the fix is upstream and a red build would
+    # not move it.
+    #
+    # CONTRADICTIONS are different. They are two documents this pipeline wrote
+    # disagreeing about the same company, which is always our own bug and always
+    # fixable here. The company screen said "Finance" over a contractor while
+    # the market table said "Contracting & Construction Engineering" — 217 of
+    # 284 companies disagreed with themselves, for weeks, silently, because this
+    # audit only ever printed.
+    #
+    # A kind joins this list when it reaches zero and is expected to stay there.
+    broken = [k for k in CONTRADICTIONS if counts.get(k)]
+    if broken:
+        print("\n   These are documents this pipeline wrote disagreeing with "
+              "each other, not gaps in the world:")
+        for kind in broken:
+            print(f"      {kind}: {counts[kind]}")
+        return 1
     return 0
 
 

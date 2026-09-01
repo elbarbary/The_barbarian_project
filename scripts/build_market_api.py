@@ -871,7 +871,13 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         detail = {
             "ticker": ticker,
             "name": {"en": r.get("company") or ticker},
-            "sector": r.get("sector"),
+            # The exchange's classification, the same one the directory row and
+            # the sector screen use. This took the vendor's raw column instead,
+            # so the company screen said "Finance" over a contractor while the
+            # market table two taps away said "Contracting & Construction
+            # Engineering" — 217 of 284 companies disagreed with themselves.
+            "sector": sector_en,
+            **({"sector_ar": sector_ar} if sector_ar else {}),
             **(
                 {"tradable": flag}
                 if (flag := tradable_flag(r, scan_has_scope)) is not None

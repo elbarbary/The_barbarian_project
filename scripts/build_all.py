@@ -60,6 +60,15 @@ STEPS = [
     # vendor's figure stands, exactly as before this existed.
     ("EGX session figures", "harvest_egx_session.py", True),
     ("Market", "build_market_api.py", False),
+    # And the same classification on the company screen as on the market table.
+    #
+    # The market build already resolves the exchange's sector — and then wrote
+    # the vendor's raw column into the per-company document, so 217 of 284
+    # companies contradicted themselves between two screens. That one line is
+    # fixed, but the market build only runs where the daily scan exists, which
+    # is not CI. This runs everywhere and costs nothing, so the rule holds
+    # rather than depending on an optional input.
+    ("Company sectors", "apply_company_sector.py", True),
     # New filings, before anything that reads them.
     #
     # The archive under `data-source/egx-beta/filings` is what the calendar's
