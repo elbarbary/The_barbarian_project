@@ -1279,16 +1279,24 @@ test('a sector card is not four blank lines', async () => {
   // reported a correct data change as a defect. What the card must not be is
   // empty; how many banks are listed this month is the pipeline's business.
   assert.match(finance.count, /^\d+$/);
-  assert.ok(Number(finance.count) > 50, `Finance has ${finance.count} companies`);
+  // Five is the floor the builder publishes at; the middle of four is not the
+  // middle of a market.
+  assert.ok(Number(finance.count) >= 5, `${finance.name} has ${finance.count}`);
   // `flat` is a published count, not "everything left over". Deriving it by
   // subtraction folded the companies whose metric could not be READ into the
   // ones that held STEADY: Finance said "10 flat" where the document says 3
-  // held and 7 were unmeasurable, and 11 of the 15 cards overstated it.
-  assert.equal(finance.upCount + finance.downCount + finance.flatCount
-               + finance.unknownCount, Number(finance.count),
-    'the four movement counts must account for every company on the card');
-  assert.ok(finance.unknownCount > 0, 'Finance has unmeasurable companies to report');
-  assert.equal(finance.hasUnknown, true);
+  // held and 7 were unmeasurable, and 11 of the 15 cards overstated it. Every
+  // card, not one — the arithmetic has to hold for all of them.
+  for (const card of secs) {
+    assert.equal(card.upCount + card.downCount + card.flatCount
+                 + card.unknownCount, Number(card.count),
+      `${card.name}: the four movement counts must account for every company`);
+  }
+  // And the distinction has to survive somewhere: at least one sector holds
+  // companies nobody could measure, reported as unknown rather than as flat.
+  const unmeasured = secs.filter((x) => x.unknownCount > 0);
+  assert.ok(unmeasured.length > 0, 'no sector reports unmeasurable companies');
+  assert.ok(unmeasured.every((x) => x.hasUnknown === true));
   // And the bar is drawn over what was measured, not over every listing, or
   // the grey segment is padded by the companies nobody could read.
   assert.ok(finance.bars.length <= 10);

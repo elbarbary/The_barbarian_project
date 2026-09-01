@@ -40,6 +40,7 @@ import pathlib
 import re
 import time
 
+import build_sectors
 import gemini
 import macro_types
 
@@ -206,6 +207,13 @@ def main() -> int:
             refused += 1
             continue
         clean["generated"] = datetime.date.today().isoformat()
+        # Which companies this paragraph is about. A read outlives its sector
+        # otherwise: re-keying to the exchange's taxonomy changed every
+        # membership, and the slugs that survived by coincidence went on
+        # serving prose about the companies that had moved out. build_sectors
+        # drops a read whose fingerprint no longer matches.
+        clean["members"] = build_sectors.fingerprint(
+            m.get("ticker") for m in shard.get("members") or [])
         held[slug] = clean
         done += 1
 
