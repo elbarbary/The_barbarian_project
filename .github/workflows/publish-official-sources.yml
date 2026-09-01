@@ -1,0 +1,188 @@
+name: Publish official sources
+
+# The regulator, the central bank, the depository, and what this project can
+# honestly claim from each.
+#
+# Six collectors sit beside the market pipeline rather than inside it. They
+# gather from the sources that govern an Egyptian listing — FRA rules and
+# enforcement, CBE exchange rates and interbank tenors, MCDR's issuer registry,
+# the exchange's own filing coverage — and end with a machine-readable contract
+# saying which of them is usable today and which fields must stay absent.
+#
+# WHY THIS IS NOT A STEP IN `build_all.py`
+#
+# Nothing here reaches a published document yet. `build_all` runs three times a
+# trading day and every second in it sits on the critical path of the market
+# data a reader is waiting for. The FRA harvest alone is ~55 seconds, and its
+# `--check` is a no-write mode rather than a dry run — it makes the same fifteen
+# requests and takes the same minute — so putting it in STEPS would spend about
+# two minutes per build on a regulator that publishes daily at most, twice, for
+# nothing a reader sees.
+#
+# The cadence is also just different. A market moves through the session; a
+# regulator posts a decision. This runs once a day, after the close.
+
+on:
+  schedule:
+    # 05:30 UTC — after the overnight archive has settled and well before the
+    # first market build of the Egyptian trading day, so the two jobs are never
+    # committing to main at the same moment.
+    - cron: '30 5 * * *'
+
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/harvest_fra.py'
+      - 'scripts/harvest_cbe.py'
+      - 'scripts/harvest_mcdr.py'
+      - 'scripts/execution_source.py'
+      - 'scripts/build_official_completeness.py'
+      - 'scripts/build_source_health.py'
+      - '.github/workflows/publish-official-sources.yml'
+
+  workflow_dispatch:
+
+concurrency:
+  group: publish-official-sources
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The CBE pages are behind a browser challenge, the same way the exchange
+      # is. Best-effort exactly as in `publish-app-data.yml`: if the install
+      # fails, `scrapling_python.find()` returns None, the CBE step says so and
+      # leaves the last good context file in place.
+      - name: Install Scrapling
+        id: scrapling
+        continue-on-error: true
+        run: |
+          python3 -m pip install --quiet "scrapling[fetchers]" \
+            || python3 -m pip install --quiet "scrapling[all]" \
+            || python3 -m pip install --quiet scrapling patchright playwright
+          python3 -m scrapling install || scrapling install \
+            || python3 -m patchright install --with-deps chromium || true
+          if python3 -c 'from scrapling.fetchers import StealthyFetcher'; then
+            echo "SCRAPLING_PYTHON=$(which python3)" >> "$GITHUB_ENV"
+          else
+            echo 'scrapling fetchers unavailable — the CBE step will say so and skip'
+          fi
+
+      # Every one of these is best-effort, and none of them is a build the site
+      # depends on. A host that will not answer leaves its last good document in
+      # place — the same bargain the market pipeline makes — so `|| true` here
+      # means "one source is a day stale", never "the collection failed".
+      #
+      # The order is the dependency order: the two ledgers that read the others
+      # come last.
+      - name: Collect from the official sources
+        run: |
+          # The regulator. Year-to-date every run, deliberately: the ledger
+          # merges rather than replaces, and a full window is what makes it
+          # complete rather than "whatever was posted since the last cursor".
+          python3 scripts/harvest_fra.py || true
+          # The central bank, through a real browser.
+          python3 scripts/harvest_cbe.py || true
+          # The depository, and the argument matters.
+          #
+          # A bare run scrapes the first page of an unfiltered registry that is
+          # 580 pages long. None of those 25 rows is an EGX listing, so the
+          # request that runs every time contributes nothing to the
+          # reconciliation the script exists for: all ten confirmed matches came
+          # from targeted exact-ISIN searches, and 250 EGX tickers have never
+          # been looked up at all.
+          #
+          # So it runs the half that advances, 25 new lookups a night, which
+          # works through the backlog in a fortnight and then costs nothing
+          # because the answers are cached. Serial and budgeted on purpose:
+          # this is a depository's public search box, not an API.
+          python3 scripts/harvest_mcdr.py --lookup-egx --budget 25 || true
+          # One timestamped checkpoint of the exchange's own market-watch, which
+          # is the only evidence `execution_source` has for what execution data
+          # is publicly obtainable at all.
+          #
+          # Expected to fail here, and attempted anyway. beta.egx.com.eg answers
+          # a laptop in Cairo and resets the connection on a GitHub runner, so
+          # in practice this archive grows from the machine that runs the EGX
+          # monitor. It costs one refused request to try, and on the day the
+          # exchange stops refusing, the archive starts growing on its own.
+          python3 scripts/harvest_egx_beta.py --snapshots || true
+
+      - name: Rebuild the ledgers that read them
+        run: |
+          # What the committed checkpoint archive can and cannot establish
+          # about execution. Writes nothing when the archive is absent.
+          python3 scripts/execution_source.py || true
+          # Filing coverage per issuer, off the committed EGX archive. The IR
+          # probing is opt-in and stays off here: it is 256 requests to 256
+          # company websites and proves nothing this job needs daily.
+          python3 scripts/build_official_completeness.py || true
+          # Last, because it reads all of the above and reports which are
+          # usable, which are stale, and which fields must earn zero rather
+          # than being inferred.
+          python3 scripts/build_source_health.py || true
+
+      - name: What the collection can claim today
+        run: python3 scripts/build_source_health.py --check
+
+      - name: Commit if anything moved
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A data-source/official data-source/egx-beta/snapshot-history
+          if git diff --cached --quiet; then
+            echo 'nothing moved'
+            exit 0
+          fi
+          git diff --cached --stat
+          git commit -m 'data: official sources — regulator, central bank, depository'
+          # The market build commits to main three times a day. Losing a race
+          # is normal; these files are regenerated from the same sources on the
+          # next run, so a rebase and retry is cheaper than a failed job.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main; then
+              git push origin main && exit 0
+            fi
+            unmerged=$(git diff --name-only --diff-filter=U)
+            if [ -n "$unmerged" ]; then
+              if echo "$unmerged" | grep -qvE '^data-source/(official|egx-beta/snapshot-history)/'; then
+                echo "conflict outside this job's own output:"; echo "$unmerged"
+                git rebase --abort || true
+                exit 1
+              fi
+              # During a rebase "theirs" is the commit being replayed, which is
+              # this run's collection — the newer answer from the same sources.
+              echo "$unmerged" | while read -r f; do
+                git checkout --theirs -- "$f" 2>/dev/null || true
+                git add -- "$f"
+              done
+              GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+              git push origin main && exit 0
+            fi
+            echo "push attempt $attempt lost the race; retrying"
+            sleep 5
+          done
+          echo 'could not push after three attempts'
+          exit 1
+
+# NOTE — `ownership_ledger.py` is deliberately NOT here.
+#
+# Its document half reads the committed EGX filing archive and would run fine.
+# The half that carries the value does not: growing the transaction table needs
+# `--download-pdfs`, which shells `scripts/f5_pdf_download.py` to execute the
+# exchange's F5 challenge in a real, headed Chrome at a hardcoded macOS path.
+# Eight of 2,012 daily-summary disclosures have been downloaded so far, so the
+# ledger's limit is its PDF corpus rather than its parser, and that corpus can
+# only grow on the machine with the browser. It runs there, next to the EGX
+# disclosures harvest, for the same reason.

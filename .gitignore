@@ -73,3 +73,33 @@ tmp/
 # Vertex CI service-account key. Mirrored into the GOOGLE_VERTEX_SA_KEY
 # GitHub secret; never committed.
 .gcp-ci-key.json
+
+# The ownership ledger's own output.
+#
+# `ownership_ledger.py` writes a 19 MB document, 12.5 MB of which is a
+# re-listing of 25,810 filings already committed under
+# data-source/egx-beta/filings — a derived index, rebuilt from the archive on
+# every run. Committing it would add that much to history each time it changed,
+# for nothing a reader can reach.
+#
+# The script itself is tracked and runs on the machine with the browser: its
+# transaction table needs the exchange's F5 challenge solved in a real Chrome,
+# and 8 of 2,012 daily-summary disclosures have been downloaded so far. When
+# the ledger has a consumer, the part worth publishing is `transactions` and
+# `coverage`, not the index.
+data-source/official/ownership/
+
+# The raw captures behind the official ledgers.
+#
+# `harvest_fra.py` stores ~300 KB of the regulator's API response per run and
+# `harvest_cbe.py` ~40 KB of page HTML per page per run. Both rotate on disk
+# (KEEP_RAW / KEEP_CAPTURES), but rotation does not bound a git repository:
+# every version ever committed stays in history, so a nightly schedule would
+# add roughly 110 MB a year of debugging aid.
+#
+# The parsed ledgers ARE the record and they are committed. `fra-ledger.json`
+# carries `rawSha256` of the response it was built from, so a capture kept
+# locally can still be checked against what was published.
+data-source/official/fra/fra-raw-*.json.gz
+data-source/official/cbe/*.html.gz
+data-source/official/mcdr/issuer-registry-*.json.gz
