@@ -185,6 +185,9 @@
             <sc-if value="{{ noBusy }}">
               <div style="padding:6px 14px 12px;color:var(--faint);font-size:13px">{{ L.nothingUnusual }}</div>
             </sc-if>
+            <sc-if value="{{ hasBusyCut }}">
+              <div style="padding:12px 14px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ busyCut }}</div>
+            </sc-if>
             <sc-if value="{{ busyNote }}">
               <div style="padding:12px 14px 4px;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ busyNote }}</div>
             </sc-if>
@@ -1353,9 +1356,10 @@
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.sectorsTitle }}</h1>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ sectorCount }} {{ L.sectorsWord }}<br>{{ marketDate }}</div>
       </div>
+      <sc-if value="{{ noOpenSector }}">
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
         <sc-for list="{{ sectorCards }}" as="s" hint-placeholder-count="9">
-          <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:222px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+          <div onClick="{{ s.open }}" title="{{ L.secOpen }}" style="cursor:pointer;border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:222px;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
               <div style="font-family:'Bricolage Grotesque',serif;font-size:21px;font-weight:600;letter-spacing:-.025em;line-height:1.15;min-width:min-content">{{ s.name }}</div>
               <div style="padding:3px 9px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint);white-space:nowrap">{{ s.count }}</div>
@@ -1390,6 +1394,86 @@
           </div>
         </sc-for>
       </div>
+      </sc-if>
+
+      <!-- One sector, opened. Every section the app's own sector screen shows,
+           in the order it shows them — the card was reading all of this and
+           printing a teaser, one median and a bar. -->
+      <sc-if value="{{ hasOpenSector }}">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div onClick="{{ openSector.back }}" style="cursor:pointer;display:inline-flex;align-self:flex-start;align-items:center;gap:7px;padding:5px 13px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)"><span>←</span>{{ L.secBack }}</div>
+
+          <div>
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:0">{{ openSector.name }}</h2>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);margin-top:7px">{{ openSector.as }}</div>
+          </div>
+
+          <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.secRead }}</div>
+            <div style="font-size:14.5px;line-height:1.65;margin-top:11px;max-width:78ch;text-wrap:pretty">{{ openSector.read }}</div>
+          </section>
+
+          <sc-if value="{{ openSector.hasMetrics }}">
+            <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 24px 16px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.secMoving }}</div>
+              <sc-for list="{{ openSector.metrics }}" as="m" hint-placeholder-count="8">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:11px 0;border-bottom:1px solid var(--rule2)">
+                  <div style="font-size:13.5px">{{ m.key }}</div>
+                  <div style="display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
+                    <sc-for list="{{ m.parts }}" as="p" hint-placeholder-count="3">
+                      <span style="color:{{ p.color }}">{{ p.n }} {{ p.word }}</span>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ openSector.hasMedians }}">
+            <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 24px 18px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.secMedians }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:13px">
+                <sc-for list="{{ openSector.medians }}" as="m" hint-placeholder-count="8">
+                  <div style="padding:11px 14px;border-radius:15px;background:var(--sunk);min-width:0;overflow:hidden">
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.key }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;margin-top:5px">{{ m.value }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:12px;max-width:74ch;text-wrap:pretty">{{ L.secMedianNote }}</div>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ openSector.hasStandouts }}">
+            <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 14px 12px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:10px">{{ L.secStandouts }}</div>
+              <sc-for list="{{ openSector.standouts }}" as="m" hint-placeholder-count="4">
+                <div onClick="{{ m.go }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(52px,66px) minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:11px 10px;border-radius:12px" style-hover="background:var(--sunk)">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ m.ticker }}</div>
+                  <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px">{{ m.name }}</div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--t2);text-align:end">{{ m.measures }}</div>
+                </div>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ openSector.hasMembers }}">
+            <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 14px 12px">
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:10px">{{ L.secMembers }}</div>
+              <sc-for list="{{ openSector.members }}" as="m" hint-placeholder-count="10">
+                <div onClick="{{ m.go }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(52px,66px) minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:10px;border-radius:12px" style-hover="background:var(--sunk)">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600">{{ m.ticker }}</div>
+                  <div style="min-width:0">
+                    <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13.5px">{{ m.name }}</div>
+                    <div style="font-size:11px;color:var(--faint);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.peer }}</div>
+                  </div>
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;text-align:end;color:var(--t2)">{{ m.measures }}</div>
+                </div>
+              </sc-for>
+            </section>
+          </sc-if>
+        </div>
+      </sc-if>
     </div>
   </sc-if>
 

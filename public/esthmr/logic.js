@@ -137,7 +137,7 @@ export class Component extends Base {
   // English default made every one of them change the language before they
   // could start. main.js remembers whichever a reader chooses, so the default
   // is only ever the FIRST answer, never an argument.
-  state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', heat:'ALL', heatSector:'', rateOpen:'' };
+  state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'' };
 
   // ── copy ──
   copy() {
@@ -230,6 +230,7 @@ export class Component extends Base {
       showMore:'Show more',
       busiest:'Traded with abnormal volume',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
+      busyCut:'The {shown} busiest of {all} that traded at twice their own normal volume today. Sorting the market table by volume shows the rest.',
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
@@ -292,6 +293,21 @@ export class Component extends Base {
       followKeptDevice:'Kept in this browser only, because there is no account to keep it against while you are signed out. Sign in and it follows you.',
       followRose:'Rose', followFell:'Fell', followFlat:'Unchanged',
       followOfCount:'of {n}',
+      // ── one sector, opened ──
+      secOpen:'Open the sector',
+      secBack:'All sectors',
+      secAsOf:'{n} companies \u00b7 read of {at}',
+      secRead:'The read',
+      secMoving:'How its companies are moving',
+      secMedians:'Typical for the sector',
+      secMedianNote:'The middle company on each measure, not an average \u2014 one very large or very odd company cannot drag a median the way it drags a mean.',
+      secStandouts:'Most measures moving together',
+      secMembers:'Every company in the sector',
+      secImproving:'{n} of {of} improving',
+      secNoHistory:'Not enough filed history to read',
+      secAbove:'above the sector on {key}',
+      secBelow:'below the sector on {key}',
+      secRising:'rising', secFalling:'falling', secFlat:'flat', secUnknown:'unreadable',
       // ── the heat map ──
       heatTitle:'Heat map',
       heatLead:'Every company sized by what the market says it is worth, coloured by how it moved today. Grouped by sector, because a red block is a different fact from a red company.',
@@ -323,10 +339,13 @@ export class Component extends Base {
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
-      // ── what ties these together ──
-      // The app's wording, kept word for word: the same block, on the same
-      // document, should not read as two different features.
-      dotsLabel:'What ties these together',
+      // ── connecting the dots ──
+      // One name for one feature: the rail said "Crossings", the screen said
+      // "What ties these together", and the two were the same thing. The app
+      // still carries the old wording in its own `dotsLabel`; it should be
+      // brought over on the next release rather than left saying something
+      // different about the same block on the same document.
+      dotsLabel:'Connecting the dots',
       dotsBody:'Companies that turned up in more than one place in {days} days.',
       dotsFiling:'Filing', dotsNews:'In the press', dotsSession:'That session',
       dotsVolume:'{ratio}\u00d7 normal volume',
@@ -460,6 +479,7 @@ export class Component extends Base {
       showMore:'عرض المزيد',
       busiest:'تداول بحجم غير معتاد',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
+      busyCut:'الأكثر نشاطاً: {shown} من {all} شركة تداولت اليوم بضعف حجمها المعتاد. رتّب جدول السوق بالحجم لترى البقية.',
       nothingUnusual:'لا شيء غير معتاد اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
@@ -519,6 +539,21 @@ export class Component extends Base {
       followKeptDevice:'محفوظة في هذا المتصفح وحده، إذ لا حساب تُحفظ فيه وأنت غير مسجَّل الدخول. سجِّل الدخول فتتبعك القائمة.',
       followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
+      // ── قطاع واحد، مفتوحاً ──
+      secOpen:'افتح القطاع',
+      secBack:'كل القطاعات',
+      secAsOf:'{n} شركة \u00b7 قراءة {at}',
+      secRead:'القراءة',
+      secMoving:'كيف تتحرك شركاته',
+      secMedians:'المعتاد في القطاع',
+      secMedianNote:'الشركة الوسطى في كل مقياس، لا المتوسط \u2014 شركة واحدة كبيرة جداً أو شاذة لا تجرّ الوسيط كما تجرّ المتوسط.',
+      secStandouts:'الأكثر تحرّكاً في مقاييسها معاً',
+      secMembers:'كل شركة في القطاع',
+      secImproving:'{n} من {of} تتحسن',
+      secNoHistory:'لا تاريخ مُفصح عنه يكفي للقراءة',
+      secAbove:'أعلى من القطاع في {key}',
+      secBelow:'أدنى من القطاع في {key}',
+      secRising:'صاعدة', secFalling:'هابطة', secFlat:'ثابتة', secUnknown:'غير مقروءة',
       // ── الخريطة الحرارية ──
       heatTitle:'الخريطة الحرارية',
       heatLead:'كل شركة بحجم ما تقول السوق إنها تساويه، وبلون تحرّكها اليوم. مجمّعة بالقطاع، لأن قطاعاً أحمر غير شركة حمراء.',
@@ -546,8 +581,8 @@ export class Component extends Base {
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
-      // ── ما الذي يربط بينها ──
-      dotsLabel:'ما الذي يربط بينها',
+      // ── ربط النقاط ──
+      dotsLabel:'ربط النقاط',
       dotsBody:'شركات ظهرت في أكثر من مكان خلال {days} أيام.',
       dotsFiling:'إفصاح', dotsNews:'في الصحافة', dotsSession:'تلك الجلسة',
       dotsVolume:'{ratio}\u00d7 الحجم المعتاد',
@@ -1012,10 +1047,19 @@ export class Component extends Base {
     // question worth asking, not an answer (§8): nothing here says why the
     // volume was there or what to do about it.
     const BUSY_AT = 2;
-    const busy = D.companies
+    const BUSY_SHOWN = 9;
+    // Every company that cleared the line, before the block takes nine of
+    // them. Counted because the nine were presented as though they were the
+    // whole list: on 31 August sixty-four companies traded at twice their own
+    // normal volume and Home showed the busiest nine, so a crossing could say
+    // CPME went at 7.07x its usual and Home — which had it eleventh — showed
+    // nothing. Two screens telling a reader different things about the same
+    // company, and neither of them wrong.
+    const busyAll = D.companies
       .filter((c) => typeof c.rv === 'number' && c.rv >= BUSY_AT)
-      .sort((a, b) => b.rv - a.rv)
-      .slice(0, 9)
+      .sort((a, b) => b.rv - a.rv);
+    const busy = busyAll
+      .slice(0, BUSY_SHOWN)
       .map((c) => Object.assign({}, mkRow(c), {
         kicker: L.volumeKicker.replace('{ratio}', c.rv.toFixed(1)),
         rv: c.rv.toFixed(1) + '\u00d7',
@@ -1864,7 +1908,8 @@ export class Component extends Base {
       ['Transportation','النقل',8,4,3,1,8.6,'CCAP'],['Consumer Services','خدمات استهلاكية',12,5,6,1,10.3,'ORHD'],['Technology Services','خدمات تكنولوجية',5,2,2,1,9.4,'MEDI']
     ];
     const sectorCards = D.sectorCards ? say(D.sectorCards, ['name','read','full'])
-      .map((c) => Object.assign({}, c, { medians: say(c.medians || [], ['key']) }))
+      .map((c) => Object.assign({}, c, { medians: say(c.medians || [], ['key']),
+        open: () => this.setState({ sector1: c.slug }) }))
       : !D.demo ? [] : secDef.map(([en,arn,count,up,down,flat,pe,standout]) => {
       const bars = [];
       for (let i = 0; i < 10; i++) {
@@ -1880,7 +1925,13 @@ export class Component extends Base {
         // a demo card missing the field read "Median P/E 4.9 · Yield" with the
         // sentence stopping mid-air.
         medianPe: pe.toFixed(1), yield: (2.5 + (pe % 3)).toFixed(1) + '%',
-        full: '', fullAr: '', medians: [], metrics: [], slug: en.toLowerCase().replace(/[^a-z]+/g, '-'),
+        full: '', fullAr: '', medians: [], metrics: [], standouts: [], members: [],
+        generated: '', slug: en.toLowerCase().replace(/[^a-z]+/g, '-'),
+        // The demo's cards open too, or the screen a signed-out reader is
+        // shown is a screen with a control that does nothing. What opens is
+        // thinner than the real one — the demo has no per-sector document —
+        // and every section that has nothing simply is not drawn.
+        open: function () { this.setState({ sector1: en.toLowerCase().replace(/[^a-z]+/g, '-') }); }.bind(this),
         standout: (ar?'الأكبر تحركاً ':'Largest move ') + standout };
     });
 
@@ -2197,6 +2248,57 @@ export class Component extends Base {
     const heatSpread = heatCaps.length
       ? Math.max(...heatCaps) / Math.min(...heatCaps) : 0;
 
+    /* One sector, opened.
+     *
+     * The card carried a four-sentence read, eight medians and eight movement
+     * rows and showed a teaser, one median and a bar; the standouts and every
+     * member were fetched and dropped on the floor. The app has had a screen
+     * for this since it shipped. Same document, same sections, in the order
+     * the app puts them: the read, then how the companies are moving, then
+     * what is typical, then who is moving most, then all of them.
+     */
+    const sector1 = sectorCards.find((c) => c.slug === st.sector1) || null;
+    const peerWord = (m) => (!m.peer || !m.peerKey ? ''
+      : (m.peer === 'above' ? L.secAbove : L.secBelow)
+        .replace('{key}', (ar ? m.peerKeyAr : m.peerKey) || ''));
+    const memberRow = (m) => ({
+      ticker: m.ticker, name: ar ? m.nameAr : m.name,
+      // A count off the filings, never a rank. "Six of seven measures
+      // improving" is arithmetic; "the best in the sector" would be a verdict
+      // this publisher has no licence to reach (§8).
+      measures: m.hasPattern
+        ? L.secImproving.replace('{n}', String(m.improving)).replace('{of}', String(m.readable))
+        : L.secNoHistory,
+      dim: !m.hasPattern,
+      peer: peerWord(m),
+      go: () => this.setState({ screen: 'company', ticker: m.ticker }),
+    });
+    const openSector = !sector1 ? null : {
+      name: sector1.name,
+      as: L.secAsOf.replace('{n}', String(sector1.count))
+        .replace('{at}', this.shortDate(sector1.generated) || sector1.generated || '\u2014'),
+      read: (ar ? sector1.fullAr : sector1.full) || sector1.read || L.nothingYet,
+      medians: sector1.medians || [],
+      hasMedians: (sector1.medians || []).length > 0,
+      // Every metric the sector can be read on, with what each count means
+      // spelled out — "3 · 1 · 4 · 2" over four unlabelled colours is a row
+      // nobody can read.
+      metrics: (sector1.metrics || []).map((m) => Object.assign({}, m, {
+        parts: [
+          { n: String(m.rising), word: L.secRising, color: 'var(--up)' },
+          { n: String(m.falling), word: L.secFalling, color: 'var(--down)' },
+          { n: String(m.flat || 0), word: L.secFlat, color: 'var(--t2)' },
+          { n: String(m.unknown || 0), word: L.secUnknown, color: 'var(--faint)' },
+        ].filter((p) => p.n !== '0'),
+      })),
+      hasMetrics: (sector1.metrics || []).length > 0,
+      standouts: (sector1.standouts || []).map(memberRow),
+      hasStandouts: (sector1.standouts || []).length > 0,
+      members: (sector1.members || []).map(memberRow),
+      hasMembers: (sector1.members || []).length > 0,
+      back: () => this.setState({ sector1: '' }),
+    };
+
     // Built here rather than at the top because its counters are the lists
     // themselves — the design had 18 stories, 282 listings and KORA open,
     // whatever the documents actually held.
@@ -2226,7 +2328,9 @@ export class Component extends Base {
       // The crossings were a block on Today under the news. They are a
       // different claim — one company in more than one feed at once — and
       // reading them mixed into a headline list buried them.
-      ['crossings', ar?'التقاطعات':'Crossings', crossings.length ? String(crossings.length) : ''],
+      // Named for what it does rather than for the geometry of it. The app
+      // has called this block "what ties these together" all along.
+      ['crossings', ar?'ربط النقاط':'Connecting the dots', crossings.length ? String(crossings.length) : ''],
       ['exchange', ar?'البورصة':'Exchange', ''],
       // Only where there is something to open. `studies` is the demo's three
       // mock-up papers and nothing else — no research document is published —
@@ -2307,6 +2411,13 @@ export class Component extends Base {
       busy, hasBusy: busy.length > 0, noBusy: busyMeasured > 0 && busy.length === 0,
       showBusy: busy.length > 0 || busyMeasured > 0,
       busyNote: busy.length ? L.busyWorkings + ' ' + L.busyYardstick : '',
+      // Said out loud, because a list that is a slice and does not say so is a
+      // list that claims to be all of them.
+      busyCut: busyAll.length > busy.length
+        ? L.busyCut.replace('{shown}', String(busy.length))
+            .replace('{all}', String(busyAll.length))
+        : '',
+      hasBusyCut: busyAll.length > busy.length,
       hasBreadth: Boolean(D.breadth),
       breadthBars: D.breadth ? [
         { n: D.breadth.up, color: 'var(--up)', label: L.rose },
@@ -2333,7 +2444,9 @@ export class Component extends Base {
       ratioMissing: ratios.length ? L.revMissingNote : '',
       noMacro: macro.length === 0,
       noStudies: studies.length === 0,
-      nav, sectorCount: sectorCards.length, themeLabel: st.theme === 'light' ? (ar?'نهاري':'Light') : (ar?'ليلي':'Dark'),
+      nav, sectorCount: sectorCards.length,
+      openSector, hasOpenSector: Boolean(openSector),
+      noOpenSector: !openSector, themeLabel: st.theme === 'light' ? (ar?'نهاري':'Light') : (ar?'ليلي':'Dark'),
       flipTheme: () => this.setState(s => ({ theme: s.theme === 'light' ? 'dark' : 'light' })),
       toEn: () => this.setState({ lang:'en' }), toAr: () => this.setState({ lang:'ar' }),
       enBg: !ar ? 'var(--surface)' : 'transparent', enFg: !ar ? 'var(--ink)' : 'var(--t2)', enSh: !ar ? 'var(--shPill)' : 'none',
