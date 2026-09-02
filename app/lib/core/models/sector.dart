@@ -8,8 +8,11 @@ import '../../l10n/app_localizations.dart';
 /// entirely in Arabic, and the same English word again on every company page
 /// under the heading "القطاع".
 ///
-/// A closed set of twenty covers all 256 companies that carry one, so this is
-/// a table rather than a translation problem. Anything outside it is returned
+/// The exchange's own eighteen sectors sit beside the vendor's twenty: EGX
+/// classifies 220 of the 284 listings and publishes `sectorA` with each, so
+/// those Arabic names are the exchange's own words rather than a translation
+/// anyone here made up. The vendor's set stays for the 64 it does not name.
+/// This is a table rather than a translation problem. Anything outside it is returned
 /// untouched — a sector this app has no word for is better shown as filed than
 /// guessed at, and the guard is what tells us a new one has appeared.
 String sectorLabel(String sector, AppLocalizations l) => switch (sector) {
@@ -33,12 +36,46 @@ String sectorLabel(String sector, AppLocalizations l) => switch (sector) {
   'Energy Minerals' => l.sectorEnergyMinerals,
   'Electronic Technology' => l.sectorElectronicTechnology,
   'Miscellaneous' => l.sectorMiscellaneous,
+  'Banks' => l.sectorBanks,
+  'Basic Resources' => l.sectorBasicResources,
+  'Building Materials' => l.sectorBuildingMaterials,
+  'Contracting & Construction Engineering' => l.sectorContractingConstructionEngineering,
+  'Education Services' => l.sectorEducationServices,
+  'Energy & Support Services' => l.sectorEnergySupportServices,
+  'Food, Beverages and Tobacco' => l.sectorFoodBeveragesAndTobacco,
+  'Health Care & Pharmaceuticals' => l.sectorHealthCarePharmaceuticals,
+  'IT , Media & Communication Services' => l.sectorItMediaCommunicationServices,
+  'Industrial Goods , Services and Automobiles' => l.sectorIndustrialGoodsServicesAndAutomobiles,
+  'Non-bank financial services' => l.sectorNonBankFinancialServices,
+  'Paper & Packaging' => l.sectorPaperPackaging,
+  'Real Estate' => l.sectorRealEstate,
+  'Shipping & Transportation Services' => l.sectorShippingTransportationServices,
+  'Textile & Durables' => l.sectorTextileDurables,
+  'Trade & Distributors' => l.sectorTradeDistributors,
+  'Travel & Leisure' => l.sectorTravelLeisure,
   _ => sector,
 };
 
 /// Every sector this app can name. The published directory must not grow one
 /// outside it without somebody writing the Arabic.
 const knownSectors = {
+  'Banks',
+  'Basic Resources',
+  'Building Materials',
+  'Contracting & Construction Engineering',
+  'Education Services',
+  'Energy & Support Services',
+  'Food, Beverages and Tobacco',
+  'Health Care & Pharmaceuticals',
+  'IT , Media & Communication Services',
+  'Industrial Goods , Services and Automobiles',
+  'Non-bank financial services',
+  'Paper & Packaging',
+  'Real Estate',
+  'Shipping & Transportation Services',
+  'Textile & Durables',
+  'Trade & Distributors',
+  'Travel & Leisure',
   'Finance',
   'Process Industries',
   'Non-Energy Minerals',

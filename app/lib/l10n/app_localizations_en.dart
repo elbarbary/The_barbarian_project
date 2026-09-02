@@ -1956,6 +1956,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectorFinance => 'Finance';
 
   @override
+  String get sectorBanks => 'Banks';
+
+  @override
+  String get sectorBasicResources => 'Basic Resources';
+
+  @override
+  String get sectorBuildingMaterials => 'Building Materials';
+
+  @override
+  String get sectorContractingConstructionEngineering =>
+      'Contracting & Construction Engineering';
+
+  @override
+  String get sectorEducationServices => 'Education Services';
+
+  @override
+  String get sectorEnergySupportServices => 'Energy & Support Services';
+
+  @override
+  String get sectorFoodBeveragesAndTobacco => 'Food, Beverages and Tobacco';
+
+  @override
+  String get sectorHealthCarePharmaceuticals => 'Health Care & Pharmaceuticals';
+
+  @override
+  String get sectorItMediaCommunicationServices =>
+      'IT , Media & Communication Services';
+
+  @override
+  String get sectorIndustrialGoodsServicesAndAutomobiles =>
+      'Industrial Goods , Services and Automobiles';
+
+  @override
+  String get sectorNonBankFinancialServices => 'Non-bank financial services';
+
+  @override
+  String get sectorPaperPackaging => 'Paper & Packaging';
+
+  @override
+  String get sectorRealEstate => 'Real Estate';
+
+  @override
+  String get sectorShippingTransportationServices =>
+      'Shipping & Transportation Services';
+
+  @override
+  String get sectorTextileDurables => 'Textile & Durables';
+
+  @override
+  String get sectorTradeDistributors => 'Trade & Distributors';
+
+  @override
+  String get sectorTravelLeisure => 'Travel & Leisure';
+
+  @override
   String get sectorProcessIndustries => 'Process Industries';
 
   @override

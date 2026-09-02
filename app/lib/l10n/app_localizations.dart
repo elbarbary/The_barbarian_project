@@ -3350,6 +3350,108 @@ abstract class AppLocalizations {
   /// **'Finance'**
   String get sectorFinance;
 
+  /// No description provided for @sectorBanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Banks'**
+  String get sectorBanks;
+
+  /// No description provided for @sectorBasicResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic Resources'**
+  String get sectorBasicResources;
+
+  /// No description provided for @sectorBuildingMaterials.
+  ///
+  /// In en, this message translates to:
+  /// **'Building Materials'**
+  String get sectorBuildingMaterials;
+
+  /// No description provided for @sectorContractingConstructionEngineering.
+  ///
+  /// In en, this message translates to:
+  /// **'Contracting & Construction Engineering'**
+  String get sectorContractingConstructionEngineering;
+
+  /// No description provided for @sectorEducationServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Education Services'**
+  String get sectorEducationServices;
+
+  /// No description provided for @sectorEnergySupportServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy & Support Services'**
+  String get sectorEnergySupportServices;
+
+  /// No description provided for @sectorFoodBeveragesAndTobacco.
+  ///
+  /// In en, this message translates to:
+  /// **'Food, Beverages and Tobacco'**
+  String get sectorFoodBeveragesAndTobacco;
+
+  /// No description provided for @sectorHealthCarePharmaceuticals.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Care & Pharmaceuticals'**
+  String get sectorHealthCarePharmaceuticals;
+
+  /// No description provided for @sectorItMediaCommunicationServices.
+  ///
+  /// In en, this message translates to:
+  /// **'IT , Media & Communication Services'**
+  String get sectorItMediaCommunicationServices;
+
+  /// No description provided for @sectorIndustrialGoodsServicesAndAutomobiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Industrial Goods , Services and Automobiles'**
+  String get sectorIndustrialGoodsServicesAndAutomobiles;
+
+  /// No description provided for @sectorNonBankFinancialServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-bank financial services'**
+  String get sectorNonBankFinancialServices;
+
+  /// No description provided for @sectorPaperPackaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Paper & Packaging'**
+  String get sectorPaperPackaging;
+
+  /// No description provided for @sectorRealEstate.
+  ///
+  /// In en, this message translates to:
+  /// **'Real Estate'**
+  String get sectorRealEstate;
+
+  /// No description provided for @sectorShippingTransportationServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping & Transportation Services'**
+  String get sectorShippingTransportationServices;
+
+  /// No description provided for @sectorTextileDurables.
+  ///
+  /// In en, this message translates to:
+  /// **'Textile & Durables'**
+  String get sectorTextileDurables;
+
+  /// No description provided for @sectorTradeDistributors.
+  ///
+  /// In en, this message translates to:
+  /// **'Trade & Distributors'**
+  String get sectorTradeDistributors;
+
+  /// No description provided for @sectorTravelLeisure.
+  ///
+  /// In en, this message translates to:
+  /// **'Travel & Leisure'**
+  String get sectorTravelLeisure;
+
   /// No description provided for @sectorProcessIndustries.
   ///
   /// In en, this message translates to:
