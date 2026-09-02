@@ -7,12 +7,12 @@
  "sector": "Paper & Packaging",
  "sector_ar": "ورق ومواد تعبئة و تغليف",
  "market": {
-  "last_close": 0.374,
+  "last_close": 0.372,
   "date": "2026-09-02",
   "open": 0.378,
   "high": 0.38,
-  "low": 0.373,
-  "volume": 20516130
+  "low": 0.372,
+  "volume": 23139510
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 2291442606,
   "free_float": 0.205,
   "float_shares": 469745734.22999996,
-  "perf_1w": 1.6304347826086971,
-  "perf_1m": -3.35917312661499,
-  "perf_3m": 28.52233676975946,
-  "avg_volume_30d": 79840109.2333333,
-  "relative_volume_10d": 0.19158992085730708,
+  "perf_1w": 1.0869565217391315,
+  "perf_1m": -3.8759689922480653,
+  "perf_3m": 27.83505154639176,
+  "avg_volume_30d": 79927555.2333333,
+  "relative_volume_10d": 0.21608836021105665,
   "median_volume_20d": 46636860.5,
   "rv20": 0.9223797772579482,
   "normal_value_30d": 22040735.442,
