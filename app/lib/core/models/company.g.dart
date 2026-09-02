@@ -264,6 +264,7 @@ _FinancialPeriod _$FinancialPeriodFromJson(Map<String, dynamic> json) =>
       freeCashFlow: (json['free_cash_flow'] as num?)?.toDouble(),
       basis: json['basis'] as String?,
       source: json['source'] as String?,
+      netIncomeSource: json['net_income_source'] as String?,
       filedOn: json['filed_on'] as String?,
     );
 
@@ -291,6 +292,7 @@ Map<String, dynamic> _$FinancialPeriodToJson(_FinancialPeriod instance) =>
       'free_cash_flow': instance.freeCashFlow,
       'basis': instance.basis,
       'source': instance.source,
+      'net_income_source': instance.netIncomeSource,
       'filed_on': instance.filedOn,
     };
 

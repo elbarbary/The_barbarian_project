@@ -1094,6 +1094,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String finFootnoteSplit(String profit, String statement) {
+    return 'الأرقام بملايين الجنيهات كما أُودعت. يبقى البند فارغًا إذا لم يذكره الملف المرفق بالمصدر. صافي الربح من $profit، وأرقام القوائم من $statement.';
+  }
+
+  @override
   String get priceNoHistoryTitle => 'لم يُنزَّل تاريخ الأسعار';
 
   @override

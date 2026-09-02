@@ -919,11 +919,30 @@ class _Financials extends StatelessWidget {
 
         const SizedBox(height: 16),
         Text(
-          l.finFootnoteFull(_sourceName(context, latest.source)),
+          _footnote(context, latest),
           style: BarbarianType.bodyS.copyWith(color: c.textFaint),
         ),
       ],
     );
+  }
+
+  /// One source, or two when the row genuinely has two.
+  ///
+  /// 575 periods carry a balance sheet Mubasher published and a net profit the
+  /// exchange filed, because the exchange's own submission to its own
+  /// regulator wins that line. This named a single source for the whole block
+  /// and took it from `source`, so it printed "Mubasher" over a profit
+  /// Mubasher never reported. The site made the mirror-image mistake on the
+  /// same rows, citing the exchange filing under a balance sheet that is not
+  /// in it.
+  static String _footnote(BuildContext context, FinancialPeriod latest) {
+    final l = AppLocalizations.of(context);
+    final statement = _sourceName(context, latest.source);
+    final profit = latest.netIncomeSource == null
+        ? statement
+        : _sourceName(context, latest.netIncomeSource);
+    if (profit == statement) return l.finFootnoteFull(statement);
+    return l.finFootnoteSplit(profit, statement);
   }
 
   /// Named from the URL so the attribution cannot drift from the link.

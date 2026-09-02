@@ -373,6 +373,7 @@ export class Component extends Base {
       cumulativeWarning:'Periods are cumulative as the exchange files them. H1 and 9M are year-to-date and are not comparable to a single quarter. Nothing here is subtracted to synthesise a quarter, and a blank is a figure the filing did not state — not a zero.',
       openFiling:'Open filing',
       openOnExchange:'Open on the Egyptian Exchange', openOnMubasher:'Open on Mubasher',
+      mixedRow:'Net profit from this filing; the statement figures as published by Mubasher',
       borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
       dueWithinYear:'Due within a year', dueLater:'Due later', movementSince:'Movement since', pattern:'Pattern',
       debtHigherThan:'Higher than they were, at {was}.',
@@ -612,6 +613,7 @@ export class Component extends Base {
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
       openFiling:'افتح الإفصاح',
       openOnExchange:'افتح في البورصة المصرية', openOnMubasher:'افتح في مباشر',
+      mixedRow:'صافي الربح من هذا الإفصاح، وأرقام القوائم كما نشرتها مباشر',
       borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
       debtHigherThan:'أعلى مما كانت عليه، إذ بلغت {was}.',
@@ -1721,6 +1723,23 @@ export class Component extends Base {
         toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [f.period]: !s.open[f.period] }) })),
         filingId:f.filing_id, filedOn: (f.filed || f.filed_on) ? (ar?'أُودع ':'Filed ') + (f.filed || f.filed_on) : '',
         source: filingSource(f.source),
+        // WHERE THE ROW'S FIGURES CAME FROM, when they did not all come from
+        // one place.
+        //
+        // 575 rows carry a balance sheet Mubasher published and a net profit
+        // the exchange filed, and the footer cited only the filing — "Open on
+        // the Egyptian Exchange" under a row whose assets, cash flow and
+        // revenue are not in that document. The app made the opposite mistake
+        // with the same rows, naming Mubasher over a profit the exchange
+        // filed. A citation that covers one line of a row and is printed
+        // under all of them is the shape this repo already calls worse than
+        // no citation.
+        mixed: (f.net_income_source && /egx\.com\.eg/i.test(f.net_income_source)
+                && /mubasher/i.test(String(f.source || ''))
+                && (f.assets !== undefined && f.assets !== null
+                    || f.equity !== undefined && f.equity !== null
+                    || f.revenue !== undefined && f.revenue !== null))
+          ? L.mixedRow : '',
         // Name the destination, and only offer it where there is one.
         //
         // "Open filing →" was printed on all 11,480 rows against whatever

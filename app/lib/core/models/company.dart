@@ -411,6 +411,16 @@ abstract class FinancialPeriod with _$FinancialPeriod {
     /// reader cannot trace back is not worth much more than one we invented —
     /// which is exactly what was here before.
     String? source,
+
+    /// Where the NET PROFIT came from, when that is not where the rest came
+    /// from.
+    ///
+    /// 575 periods carry a balance sheet Mubasher published and a profit the
+    /// exchange filed, because the exchange's own submission wins that line.
+    /// The footnote named one source for the whole block and so named Mubasher
+    /// over a figure Mubasher never reported. A row with two sources has to
+    /// say two.
+    @JsonKey(name: 'net_income_source') String? netIncomeSource,
     @JsonKey(name: 'filed_on') String? filedOn,
   }) = _FinancialPeriod;
 
