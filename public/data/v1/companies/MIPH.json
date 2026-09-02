@@ -7,12 +7,12 @@
  "sector": "Health Care & Pharmaceuticals",
  "sector_ar": "رعاية صحية و ادوية",
  "market": {
-  "last_close": 781,
+  "last_close": 800,
   "date": "2026-09-02",
   "open": 798.21,
   "high": 819.99,
-  "low": 776,
-  "volume": 4426
+  "low": 770,
+  "volume": 6343
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 11780940,
   "free_float": 0.42128099999999996,
   "float_shares": 4963086.18414,
-  "perf_1w": 1.8478671935109423,
-  "perf_1m": -0.02560163850487013,
-  "perf_3m": 19.477420144413177,
-  "avg_volume_30d": 5658.399999999996,
-  "relative_volume_10d": 0.9386863481156285,
+  "perf_1w": 4.325600198218635,
+  "perf_1m": 2.4065540194572392,
+  "perf_3m": 22.38404112103783,
+  "avg_volume_30d": 5722.2999999999965,
+  "relative_volume_10d": 1.3452524866916926,
   "median_volume_20d": 5592,
   "rv20": 1.6164163090128756,
   "normal_value_30d": 2227835.9450000003,
   "five_session_change": 4.438642297650142,
   "history_bars": 120,
-  "market_cap": 9164039797.8,
+  "market_cap": 9299756226.6,
   "market_cap_source": "EGX",
-  "trades": 128,
-  "turnover": 3550154,
+  "trades": 188,
+  "turnover": 5033886,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

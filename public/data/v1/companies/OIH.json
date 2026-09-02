@@ -12,7 +12,7 @@
   "open": 2.05,
   "high": 2.05,
   "low": 1.98,
-  "volume": 24789883
+  "volume": 43517750
  },
  "price_history": [
   {
@@ -1323,8 +1323,8 @@
   "perf_1w": 2.5641025641025665,
   "perf_1m": 34.22818791946309,
   "perf_3m": 36.986301369863014,
-  "avg_volume_30d": 76901885.66666661,
-  "relative_volume_10d": 0.325853144342842,
+  "avg_volume_30d": 77526147.89999995,
+  "relative_volume_10d": 0.5720235013705274,
   "median_volume_20d": 88058157.5,
   "rv20": 0.6464606757187714,
   "normal_value_30d": 119190835.44,
@@ -1332,8 +1332,8 @@
   "history_bars": 120,
   "market_cap": 10491381240.0,
   "market_cap_source": "EGX",
-  "trades": 959,
-  "turnover": 51444661,
+  "trades": 1542,
+  "turnover": 90760864,
   "shares_outstanding_source": "EGX"
  },
  "financials": {
