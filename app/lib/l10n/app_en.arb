@@ -623,6 +623,17 @@
       }
     }
   },
+  "finFootnoteSplit": "Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Net profit read from {profit}; the statement figures from {statement}.",
+  "@finFootnoteSplit": {
+    "placeholders": {
+      "profit": {
+        "type": "String"
+      },
+      "statement": {
+        "type": "String"
+      }
+    }
+  },
   "priceNoHistoryTitle": "No price history downloaded",
   "priceNoSeriesBodyFull": "Neither the exchange scan nor the price source publishes a series for this listing yet.",
   "exitZeroDays": "Nothing traded at all on {days} of the last {sessions} sessions.",

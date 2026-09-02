@@ -2000,6 +2000,12 @@ abstract class AppLocalizations {
   /// **'Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Read from {source}.'**
   String finFootnoteFull(String source);
 
+  /// No description provided for @finFootnoteSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Net profit read from {profit}; the statement figures from {statement}.'**
+  String finFootnoteSplit(String profit, String statement);
+
   /// No description provided for @priceNoHistoryTitle.
   ///
   /// In en, this message translates to:

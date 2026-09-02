@@ -1284,6 +1284,37 @@ test('a price in dollars says so, and one in pounds does not', () => {
   assert.doesNotMatch(comi.close, /[A-Z$]/, `pound price printed as "${comi.close}"`);
 });
 
+test('a row built from two sources says so, and one built from a filing does not', () => {
+  // 575 rows carry a balance sheet Mubasher published and a net profit the
+  // exchange filed, and the footer cited only the filing — "Open on the
+  // Egyptian Exchange" under a row whose assets, cash flow and revenue are not
+  // in that document. This repo already calls a citation to a document that
+  // does not contain the figure worse than no citation.
+  const MUB = 'https://english.mubasher.info/markets/EGX/stocks/PHDC/financial-statements';
+  const row = (extra) => ({ period: 'FY 2024', net_income: 3254.945, assets: 91234.5,
+                            filing_id: 'egx-266830', filed: '2025-03-30', ...extra });
+  const shown = (fin) => {
+    const c = fresh();
+    c.setData({ ...LIVE, fins: [fin] });
+    c.state.ticker = 'PHDC';
+    c._co = { ticker: 'PHDC', name: { en: 'PHD', ar: 'بالم' }, profile: {} };
+    return c.renderVals().fins[0];
+  };
+
+  const mixed = shown(row({ source: MUB, net_income_source: 'https://www.egx.com.eg' }));
+  assert.match(mixed.mixed, /Mubasher/, 'the row does not say where its figures came from');
+  assert.match(mixed.mixed, /^Net profit from this filing/);
+  // The deep link still goes to the filing, which is right for the profit.
+  assert.equal(mixed.openHref, 'https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=266830');
+
+  // A row whose figures all came from the statement says nothing extra.
+  assert.equal(shown(row({ source: MUB })).mixed, '');
+
+  // Nor does one that is entirely the exchange's.
+  assert.equal(shown(row({ source: 'https://www.egx.com.eg', assets: undefined,
+                           net_income_source: 'https://www.egx.com.eg' })).mixed, '');
+});
+
 test('a dollar listing says which money each of its two figures is in', () => {
   // The market table was taught this and the company screen was not, so the
   // page a reader lands on printed 0.118 over a market value of 2.83 billion

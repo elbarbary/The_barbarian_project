@@ -1101,6 +1101,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String finFootnoteSplit(String profit, String statement) {
+    return 'Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Net profit read from $profit; the statement figures from $statement.';
+  }
+
+  @override
   String get priceNoHistoryTitle => 'No price history downloaded';
 
   @override
