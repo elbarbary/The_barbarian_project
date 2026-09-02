@@ -83,9 +83,30 @@ def build(payload: dict) -> dict | None:
     if not (types and individuals and institutions):
         return None
 
+    # THE EXCHANGE'S OWN STAMP, which this threw away.
+    #
+    # `invsetorsStatistics` (the exchange's spelling) is the same split in a
+    # flat shape, and it carries `tradeDate` — when the exchange computed these
+    # figures, in Cairo time — and `totalValue`, the value traded in the window
+    # they cover. Neither was read. The document stamped `updated_at` with OUR
+    # fetch time instead, so a reader saw "fresh" nine builds in a row on
+    # 1 September while every figure stood still after the close, and could not
+    # see the window roll the next morning when Egyptians' buying fell from
+    # 181bn to 12bn because the exchange had started a new period. §49: a
+    # figure without its own date is a claim about a different day.
+    stamp = data.get("invsetorsStatistics") or {}
+    total = stamp.get("totalValue")
+
     return {
+        # When THIS PIPELINE fetched it. Kept under the old name so nothing
+        # reading it breaks, and no longer the only date on the document.
         "updated_at": datetime.datetime.now(datetime.timezone.utc)
                               .replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        # When THE EXCHANGE computed the figures, exactly as it states it.
+        # Local Cairo time with no zone marker, because that is how it is
+        # published; the screen says "Cairo" beside it.
+        "as_of": stamp.get("tradeDate") or None,
+        "total_value": total if isinstance(total, (int, float)) else None,
         "source": f"beta.egx.com.eg {ENDPOINT}",
         "currency": "EGP",
         # What the exchange states this covers. It is period-to-date, not one

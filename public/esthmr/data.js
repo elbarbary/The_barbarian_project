@@ -1240,6 +1240,11 @@ export async function investors() {
 
   return {
     updatedAt: d.updated_at || null,
+    // The exchange's own stamp on the figures and the value traded in the
+    // window they cover. `updated_at` above is when WE fetched; a reader who is
+    // told only that is told the wrong date.
+    asOf: d.as_of || null,
+    totalValue: typeof d.total_value === 'number' ? d.total_value : null,
     source: d.source || '',
     // The exchange states this period-to-date, not for one session. A screen
     // that lets it read as today's is stating a different fact.

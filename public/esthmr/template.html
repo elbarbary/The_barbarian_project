@@ -623,6 +623,8 @@
 
         <div style="display:flex;flex-direction:column;gap:6px;padding:0 10px;font-size:11.5px;color:var(--faint);line-height:1.55">
           <div>{{ L.investorsBasis }}</div>
+          <sc-if value="{{ investors.asOfLine }}"><div>{{ investors.asOfLine }}</div></sc-if>
+          <sc-if value="{{ investors.totalLine }}"><div>{{ investors.totalLine }}</div></sc-if>
           <!-- The app screenshot's minute-by-minute curve comes from a feed
                this endpoint does not carry. Saying so beats drawing a shape
                the exchange has not published. -->

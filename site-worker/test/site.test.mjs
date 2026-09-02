@@ -2944,6 +2944,29 @@ test('the investors screen says what period the figures cover', () => {
   assert.equal(screen(LIVE).noInvestors, true);
 });
 
+test('the investors screen dates its figures by the exchange, not by the fetch', async () => {
+  // Nine builds on 1 September stamped a fresh `updated_at` while every figure
+  // stood still after the close, and the next morning the window rolled from
+  // 181bn to 12bn with nothing on the screen to say so. The exchange sends its
+  // own `tradeDate` and the value traded in the window; both were discarded.
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({
+    ...INVDOC, updated_at: '2026-09-01T20:52:04Z', as_of: '2026-09-02T11:39:41',
+    total_value: 14296755539.5593 }) });
+  const inv = await data.investors();
+  delete globalThis.fetch;
+  assert.equal(inv.asOf, '2026-09-02T11:39:41');
+  assert.equal(inv.totalValue, 14296755539.5593);
+
+  const v = screen({ ...LIVE, investors: { ...inv, parties: inv.parties, bands: inv.bands } });
+  assert.match(v.investors.asOfLine, /2026-09-02 11:39 \(Cairo\)$/, v.investors.asOfLine);
+  assert.doesNotMatch(v.investors.asOfLine, /20:52/, 'the fetch time reached the screen as the figures\u2019 date');
+  assert.match(v.investors.totalLine, /EGP 14\.30bn$/, v.investors.totalLine);
+  // And a document without the stamp shows no date rather than the fetch time.
+  const bare = screen({ ...LIVE, investors: { ...inv, asOf: null, totalValue: null } });
+  assert.equal(bare.investors.asOfLine, '');
+  assert.equal(bare.investors.totalLine, '');
+});
+
 test('the watchlist is a ticker and nothing else, kept per reader', async () => {
   const w = await import('../../public/esthmr/watchlist.js');
   const store = {};
