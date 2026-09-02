@@ -100,6 +100,9 @@ RESOURCES = {
     "signals": ["signals.json"],
     "review": ["review.json"],
     "sectors": ["sectors.json"],
+    # It had no counter: the one document rebuilt every run was the one no
+    # installed app could ever learn had changed.
+    "investors": ["investors.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by

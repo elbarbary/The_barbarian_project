@@ -278,7 +278,8 @@ export class Component extends Base {
       investorsTable:'By investor type', investorsType:'Type',
       investorsBuying:'a net buyer', investorsSelling:'a net seller',
       investorsEgpM:'EGP millions, bought less sold',
-      investorsBasis:'The exchange states these period to date, not for a single session.',
+      investorsBasis:'The exchange states these period to date for its current reporting period, not for a single session. The period resets when the exchange starts a new one, and the date beside the figures is the exchange\u2019s own.',
+      investorsAsOf:'Exchange figures as of', investorsTotal:'Value traded in the period:',
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
       homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
@@ -527,7 +528,8 @@ export class Component extends Base {
       investorsTable:'بحسب نوع المستثمر', investorsType:'النوع',
       investorsBuying:'مشترٍ صافٍ', investorsSelling:'بائع صافٍ',
       investorsEgpM:'مليون جنيه، المشتراة ناقص المباعة',
-      investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً للفترة، لا لجلسة واحدة.',
+      investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً لفترة التقرير الحالية، لا لجلسة واحدة. وتبدأ الفترة من جديد عندما تفتح البورصة فترة أخرى، والتاريخ المجاور للأرقام هو تاريخ البورصة نفسها.',
+      investorsAsOf:'أرقام البورصة بتاريخ', investorsTotal:'قيمة التداول في الفترة:',
       investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
       homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
       following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
@@ -1564,6 +1566,13 @@ export class Component extends Base {
 
       return {
         basis: d.basis, source: d.source, updatedAt: d.updatedAt,
+        // The exchange's own date on the figures — not the fetch time — and the
+        // value traded in the window. Without these the screen showed
+        // cumulative figures with no date at all, and "period to date" named
+        // no period. The stamp is Cairo local time as the exchange publishes it.
+        asOfLine: d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).replace('T', ' ').slice(0, 16) + ' (Cairo)' : '',
+        totalLine: typeof d.totalValue === 'number'
+          ? L.investorsTotal + ' EGP ' + this.num(d.totalValue / 1e9, 2) + 'bn' : '',
         // Egyptians against Arabs against non-Arab foreigners.
         nationalityBar: stack(d.parties, partyName, (r) => r.percent),
         // And institutions against individuals, over turnover — see data.js.
