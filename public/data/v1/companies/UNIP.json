@@ -7,19 +7,14 @@
  "sector": "Paper & Packaging",
  "sector_ar": "ورق ومواد تعبئة و تغليف",
  "market": {
-  "last_close": 0.378,
-  "date": "2026-09-01",
-  "open": 0.37,
-  "high": 0.382,
-  "low": 0.37,
-  "volume": 43016897
+  "last_close": 0.379,
+  "date": "2026-09-02",
+  "open": 0.378,
+  "high": 0.38,
+  "low": 0.373,
+  "volume": 10338208
  },
  "price_history": [
-  {
-   "date": "2025-07-27",
-   "close": 0.92,
-   "volume": 16203891
-  },
   {
    "date": "2025-07-28",
    "close": 0.9,
@@ -722,7 +717,7 @@
   },
   {
    "date": "2026-02-26",
-   "close": 0.272,
+   "close": 0.27,
    "volume": 35692732
   },
   {
@@ -1314,26 +1309,31 @@
    "date": "2026-08-31",
    "close": 0.37,
    "volume": 41724801
+  },
+  {
+   "date": "2026-09-01",
+   "close": 0.378,
+   "volume": 43016897
   }
  ],
  "profile": {
   "shares_outstanding": 2291442606,
   "free_float": 0.205,
   "float_shares": 469745734.22999996,
-  "perf_1w": 2.7173913043478284,
-  "perf_1m": 0.2652519893899207,
-  "perf_3m": 30.344827586206907,
-  "avg_volume_30d": 87064988.36666663,
-  "relative_volume_10d": 0.40030371117241553,
+  "perf_1w": 2.9891304347826115,
+  "perf_1m": -2.0671834625323013,
+  "perf_3m": 30.240549828178704,
+  "avg_volume_30d": 79500845.16666664,
+  "relative_volume_10d": 0.09654337599373658,
   "median_volume_20d": 46636860.5,
-  "rv20": 0.8946743102486497,
-  "normal_value_30d": 23263057.751000002,
-  "five_session_change": -2.1164021164021163,
+  "rv20": 0.9223797772579482,
+  "normal_value_30d": 22040735.442,
+  "five_session_change": 2.717391304347827,
   "history_bars": 120,
-  "market_cap": 866165305.068,
+  "market_cap": 863873862.462,
   "market_cap_source": "EGX",
-  "trades": 633,
-  "turnover": 16214216,
+  "trades": 159,
+  "turnover": 4369173,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

@@ -1,1 +1,1 @@
-{"ticker":"RMTV","generated":"2026-09-01","sector":"Consumer Services","metrics":[{"key":"profit","value":-22.8,"unit":"egp_m","direction":"unknown","points":2,"series":[{"p":"FY 16","v":-2.714},{"p":"FY 17","v":-22.8}]}],"pattern":null}
+{"ticker":"RMTV","generated":"2026-09-02","sector":"Consumer Services","metrics":[{"key":"profit","value":-22.8,"unit":"egp_m","direction":"unknown","points":2,"series":[{"p":"FY 16","v":-2.714},{"p":"FY 17","v":-22.8}],"peer_median":0.303,"peer":"below"}],"pattern":null}

@@ -7,19 +7,14 @@
  "sector": "IT , Media & Communication Services",
  "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
  "market": {
-  "last_close": 2.05,
-  "date": "2026-09-01",
-  "open": 2.02,
-  "high": 2.06,
+  "last_close": 2,
+  "date": "2026-09-02",
+  "open": 2.05,
+  "high": 2.05,
   "low": 1.98,
-  "volume": 56926136
+  "volume": 24789883
  },
  "price_history": [
-  {
-   "date": "2025-07-27",
-   "close": 1.34,
-   "volume": 235852960
-  },
   {
    "date": "2025-07-28",
    "close": 1.27,
@@ -1314,26 +1309,31 @@
    "date": "2026-08-31",
    "close": 2.02,
    "volume": 85434898
+  },
+  {
+   "date": "2026-09-01",
+   "close": 2.05,
+   "volume": 56926136
   }
  ],
  "profile": {
   "shares_outstanding": 5245690620,
   "free_float": 0.48338700000000007,
   "float_shares": 2535698651.7299404,
-  "perf_1w": 7.329842931937168,
-  "perf_1m": 40.41095890410958,
-  "perf_3m": 38.5135135135135,
-  "avg_volume_30d": 80068238.23333329,
-  "relative_volume_10d": 0.7441738903103049,
-  "median_volume_20d": 86367687.5,
-  "rv20": 0.9891997860889815,
-  "normal_value_30d": 112137214.36,
-  "five_session_change": 7.446808510638303,
+  "perf_1w": 2.5641025641025665,
+  "perf_1m": 34.22818791946309,
+  "perf_3m": 36.986301369863014,
+  "avg_volume_30d": 76901885.66666661,
+  "relative_volume_10d": 0.325853144342842,
+  "median_volume_20d": 88058157.5,
+  "rv20": 0.6464606757187714,
+  "normal_value_30d": 119190835.44,
+  "five_session_change": 7.329842931937169,
   "history_bars": 120,
-  "market_cap": 10753665771.0,
+  "market_cap": 10491381240.0,
   "market_cap_source": "EGX",
-  "trades": 1692,
-  "turnover": 115189724,
+  "trades": 959,
+  "turnover": 51444661,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

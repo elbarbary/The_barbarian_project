@@ -7,19 +7,14 @@
  "sector": "Non-bank financial services",
  "sector_ar": "خدمات مالية غير مصرفية",
  "market": {
-  "last_close": 0.432,
-  "date": "2026-09-01",
-  "open": 0.452,
-  "high": 0.46,
+  "last_close": 0.435,
+  "date": "2026-09-02",
+  "open": 0.432,
+  "high": 0.436,
   "low": 0.425,
-  "volume": 156109939
+  "volume": 37765833
  },
  "price_history": [
-  {
-   "date": "2025-07-27",
-   "close": 0.2323,
-   "volume": 30345860
-  },
   {
    "date": "2025-07-28",
    "close": 0.224,
@@ -722,8 +717,8 @@
   },
   {
    "date": "2026-02-26",
-   "close": 0.2341,
-   "volume": 10398480
+   "close": 0.2323,
+   "volume": 8600885
   },
   {
    "date": "2026-03-01",
@@ -1314,26 +1309,31 @@
    "date": "2026-08-31",
    "close": 0.452,
    "volume": 239128085
+  },
+  {
+   "date": "2026-09-01",
+   "close": 0.432,
+   "volume": 156109939
   }
  ],
  "profile": {
   "shares_outstanding": 2000000000,
   "free_float": 0.901744,
   "float_shares": 1803488000.0,
-  "perf_1w": -14.960629921259844,
-  "perf_1m": 2.3696682464455,
-  "perf_3m": 57.09090909090908,
-  "avg_volume_30d": 106285990.26666665,
-  "relative_volume_10d": 1.6074909238124195,
-  "median_volume_20d": 67286544,
-  "rv20": 3.5538767602627948,
+  "perf_1w": -13.51888667992048,
+  "perf_1m": 0.230414746543779,
+  "perf_3m": 31.818181818181813,
+  "avg_volume_30d": 103985539.06666665,
+  "relative_volume_10d": 0.3543798710967779,
+  "median_volume_20d": 68457520,
+  "rv20": 2.2803913872427746,
   "normal_value_30d": 33997646.3495,
-  "five_session_change": -16.296296296296298,
+  "five_session_change": -14.96062992125985,
   "history_bars": 120,
-  "market_cap": 864000000.0,
+  "market_cap": 862000000.0,
   "market_cap_source": "EGX",
-  "trades": 1661,
-  "turnover": 68922969,
+  "trades": 603,
+  "turnover": 16746815,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

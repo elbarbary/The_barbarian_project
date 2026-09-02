@@ -1,22 +1,10 @@
 {
- "generated": "2026-09-01",
+ "generated": "2026-09-02",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 456,
+ "count": 455,
  "estimated": 396,
  "events": [
-  {
-   "date": "2026-06-03",
-   "kind": "dividend_payment",
-   "note": "Cash dividend payment",
-   "ticker": "RMDA",
-   "title": "Tenth Of Ramadan Pharmaceutical Industries&Diagnostic-Rameda (RMDA.CA) Declares Cash Dividends",
-   "title_ar": "العاشر من رمضان للصناعات الدوائية والمستحضرات تشخيصية-راميدا (RMDA.CA) تعلن عن توزيع نقدي",
-   "filed": "2026-05-19",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288449",
-   "id": "egx-288449"
-  },
   {
    "date": "2026-06-04",
    "kind": "rights_close",
@@ -6769,6 +6757,23 @@
    "date": "2027-03-31",
    "kind": "results_expected",
    "note": "FY results usually filed around now",
+   "ticker": "CEFM",
+   "title": "Middle Egypt Flour Mills — FY results expected",
+   "title_ar": "",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-CEFM-FY-2026-12-31",
+   "estimated": true,
+   "period_end": "2026-12-31",
+   "window_start": "2027-02-27",
+   "window_end": "2027-06-02",
+   "observations": 12
+  },
+  {
+   "date": "2027-03-31",
+   "kind": "results_expected",
+   "note": "FY results usually filed around now",
    "ticker": "ELNA",
    "title": "El Nasr for Manufacturing Agricultural Crops — FY results expected",
    "title_ar": "",
@@ -6985,23 +6990,6 @@
    "window_start": "2027-03-07",
    "window_end": "2027-06-24",
    "observations": 5
-  },
-  {
-   "date": "2027-04-03",
-   "kind": "results_expected",
-   "note": "FY results usually filed around now",
-   "ticker": "CEFM",
-   "title": "Middle Egypt Flour Mills — FY results expected",
-   "title_ar": "",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-CEFM-FY-2026-12-31",
-   "estimated": true,
-   "period_end": "2026-12-31",
-   "window_start": "2027-02-27",
-   "window_end": "2027-06-02",
-   "observations": 11
   },
   {
    "date": "2027-04-03",
