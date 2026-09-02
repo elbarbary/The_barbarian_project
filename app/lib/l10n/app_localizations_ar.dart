@@ -1947,6 +1947,60 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sectorFinance => 'التمويل والخدمات المالية';
 
   @override
+  String get sectorBanks => 'بنوك';
+
+  @override
+  String get sectorBasicResources => 'موارد أساسية';
+
+  @override
+  String get sectorBuildingMaterials => 'مواد البناء';
+
+  @override
+  String get sectorContractingConstructionEngineering =>
+      'مقاولات و إنشاءات هندسية';
+
+  @override
+  String get sectorEducationServices => 'خدمات تعليمية';
+
+  @override
+  String get sectorEnergySupportServices => 'طاقة وخدمات مساندة';
+
+  @override
+  String get sectorFoodBeveragesAndTobacco => 'أغذية و مشروبات و تبغ';
+
+  @override
+  String get sectorHealthCarePharmaceuticals => 'رعاية صحية و ادوية';
+
+  @override
+  String get sectorItMediaCommunicationServices =>
+      'اتصالات و  اعلام و تكنولوجيا المعلومات';
+
+  @override
+  String get sectorIndustrialGoodsServicesAndAutomobiles =>
+      'خدمات و منتجات صناعية وسيارات';
+
+  @override
+  String get sectorNonBankFinancialServices => 'خدمات مالية غير مصرفية';
+
+  @override
+  String get sectorPaperPackaging => 'ورق ومواد تعبئة و تغليف';
+
+  @override
+  String get sectorRealEstate => 'عقارات';
+
+  @override
+  String get sectorShippingTransportationServices => 'خدمات النقل والشحن';
+
+  @override
+  String get sectorTextileDurables => 'منسوجات و سلع معمرة';
+
+  @override
+  String get sectorTradeDistributors => 'تجارة و موزعون';
+
+  @override
+  String get sectorTravelLeisure => 'سياحة وترفيه';
+
+  @override
   String get sectorProcessIndustries => 'الصناعات التحويلية';
 
   @override

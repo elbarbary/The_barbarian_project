@@ -487,6 +487,12 @@ void main() {
       // rather than instructing one, and the pipeline keeps it deliberately.
       final body = file
           .readAsStringSync()
+          // A URL is a machine address, never published prose. Al Borsa names
+          // its images after the article, so a fixture carried
+          // `.../كيف-اشتري-من-شي-ان-1.jpg` — "how to buy from Shein" — and this
+          // read it as an instruction to buy. Nothing inside an http(s) address
+          // is something this publisher said.
+          .replaceAll(RegExp(r'https?://\S+'), '')
           .replaceAll(RegExp('no holding period', caseSensitive: false), '')
           .replaceAll(RegExp('no entry', caseSensitive: false), '');
       for (final pattern in blocked) {
