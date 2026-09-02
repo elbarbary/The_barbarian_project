@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-01T14:51:20.689150+00:00",
+  "fetchedAt": "2026-09-02T09:48:01.913293+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
@@ -107,10 +107,6 @@
         "tenor": "Overnight",
         "observations": [
           {
-            "date": "18/08",
-            "value": 0.19565000000000002
-          },
-          {
             "date": "19/08",
             "value": 0.19537
           },
@@ -145,16 +141,16 @@
           {
             "date": "31/08",
             "value": 0.19253
+          },
+          {
+            "date": "01/09",
+            "value": 0.19594999999999999
           }
         ]
       },
       {
         "tenor": "Less than a Week",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 0.19608
-          },
           {
             "date": "19/08",
             "value": 0.19635999999999998
@@ -190,16 +186,16 @@
           {
             "date": "31/08",
             "value": null
+          },
+          {
+            "date": "01/09",
+            "value": null
           }
         ]
       },
       {
         "tenor": "One Week",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 0.1962
-          },
           {
             "date": "19/08",
             "value": null
@@ -235,16 +231,16 @@
           {
             "date": "31/08",
             "value": null
+          },
+          {
+            "date": "01/09",
+            "value": 0.19643999999999998
           }
         ]
       },
       {
         "tenor": "Less than a Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 0.19699999999999998
-          },
           {
             "date": "19/08",
             "value": null
@@ -280,16 +276,16 @@
           {
             "date": "31/08",
             "value": 0.196
+          },
+          {
+            "date": "01/09",
+            "value": 0.19811
           }
         ]
       },
       {
         "tenor": "One Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": null
-          },
           {
             "date": "19/08",
             "value": null
@@ -325,16 +321,16 @@
           {
             "date": "31/08",
             "value": null
+          },
+          {
+            "date": "01/09",
+            "value": null
           }
         ]
       },
       {
         "tenor": "More than a Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": null
-          },
           {
             "date": "19/08",
             "value": null
@@ -370,6 +366,10 @@
           {
             "date": "31/08",
             "value": null
+          },
+          {
+            "date": "01/09",
+            "value": null
           }
         ]
       }
@@ -378,10 +378,6 @@
       {
         "tenor": "Overnight",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 38129.0
-          },
           {
             "date": "19/08",
             "value": 26038.0
@@ -417,16 +413,16 @@
           {
             "date": "31/08",
             "value": 79300.0
+          },
+          {
+            "date": "01/09",
+            "value": 46223.0
           }
         ]
       },
       {
         "tenor": "Less than a Week",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 55000.0
-          },
           {
             "date": "19/08",
             "value": 5500.0
@@ -462,16 +458,16 @@
           {
             "date": "31/08",
             "value": 0.0
+          },
+          {
+            "date": "01/09",
+            "value": 0.0
           }
         ]
       },
       {
         "tenor": "One Week",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 66405.0
-          },
           {
             "date": "19/08",
             "value": 0.0
@@ -507,16 +503,16 @@
           {
             "date": "31/08",
             "value": 0.0
+          },
+          {
+            "date": "01/09",
+            "value": 95745.0
           }
         ]
       },
       {
         "tenor": "Less than a Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 1000.0
-          },
           {
             "date": "19/08",
             "value": 0.0
@@ -552,16 +548,16 @@
           {
             "date": "31/08",
             "value": 18742.5
+          },
+          {
+            "date": "01/09",
+            "value": 4750.0
           }
         ]
       },
       {
         "tenor": "One Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 0.0
-          },
           {
             "date": "19/08",
             "value": 0.0
@@ -597,16 +593,16 @@
           {
             "date": "31/08",
             "value": 0.0
+          },
+          {
+            "date": "01/09",
+            "value": 0.0
           }
         ]
       },
       {
         "tenor": "More than a Month",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 0.0
-          },
           {
             "date": "19/08",
             "value": 0.0
@@ -642,16 +638,16 @@
           {
             "date": "31/08",
             "value": 0.0
+          },
+          {
+            "date": "01/09",
+            "value": 0.0
           }
         ]
       },
       {
         "tenor": "Total Value",
         "observations": [
-          {
-            "date": "18/08",
-            "value": 160534.0
-          },
           {
             "date": "19/08",
             "value": 31538.0
@@ -687,6 +683,10 @@
           {
             "date": "31/08",
             "value": 98042.5
+          },
+          {
+            "date": "01/09",
+            "value": 146718.0
           }
         ]
       }

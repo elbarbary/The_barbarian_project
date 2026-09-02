@@ -373,5 +373,275 @@
       }
     ],
     "fetchedAt": "2026-09-01T14:52:21.961257+00:00"
+  },
+  "EGS691T1C010": {
+    "ticker": "BINV",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691T1C010",
+        "issuerName": "B Investments Holding S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:05.810966+00:00"
+  },
+  "EGS38171C012": {
+    "ticker": "BIOC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38171C012",
+        "issuerName": "Glaxo Smithkline"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:07.871706+00:00"
+  },
+  "EGS656M1C010": {
+    "ticker": "BONY",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS656M1C010",
+        "issuerName": "Bonyan Development And Trade"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:10.064968+00:00"
+  },
+  "EGS600K1C019": {
+    "ticker": "BQDC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS600K1C019",
+        "issuerName": "Banque du Caire"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:11.991658+00:00"
+  },
+  "EGS691G1C015": {
+    "ticker": "BTFH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691G1C015",
+        "issuerName": "Belton Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:14.022228+00:00"
+  },
+  "EGS72201C014": {
+    "ticker": "CAED",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72201C014",
+        "issuerName": "CAIRO FOR EDUCATIONAL Services"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:15.934748+00:00"
+  },
+  "EGS60231C015": {
+    "ticker": "CANA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60231C015",
+        "issuerName": "Suez Canal Bank"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:17.977862+00:00"
+  },
+  "EGS73541C012": {
+    "ticker": "CCAP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS73541C012",
+        "issuerName": "CITADEL for Financial Investments"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:19.801421+00:00"
+  },
+  "EGS73541P048": {
+    "ticker": "CCAPP",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-02T09:48:21.856625+00:00"
+  },
+  "EGS651B1C018": {
+    "ticker": "CCRS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS651B1C018",
+        "issuerName": "canadian gulf real estate investment co"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:23.958521+00:00"
+  },
+  "EGS30401C011": {
+    "ticker": "CEFM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30401C011",
+        "issuerName": "Central Egypt Flour Mills"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:26.097858+00:00"
+  },
+  "EGS3C151C015": {
+    "ticker": "CERA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C151C015",
+        "issuerName": "The Arab Ceramic Co. - ceramica remas"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:27.692366+00:00"
+  },
+  "EGS672I2C014": {
+    "ticker": "CFGH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS672I2C014",
+        "issuerName": "Concrete Fashion Group"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:29.290784+00:00"
+  },
+  "EGS691D1C018": {
+    "ticker": "CICH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691D1C018",
+        "issuerName": "C I Capital Holding For Financial Investments"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:30.903444+00:00"
+  },
+  "EGS60041C018": {
+    "ticker": "CIEB",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60041C018",
+        "issuerName": "Credit Agricole Egypt"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:32.998228+00:00"
+  },
+  "EGS65541C012": {
+    "ticker": "CIRA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65541C012",
+        "issuerName": "CIRA Education"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:35.110315+00:00"
+  },
+  "EGS729J1C018": {
+    "ticker": "CLHO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS729J1C018",
+        "issuerName": "Cleopatra Hospital Company"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:37.156290+00:00"
+  },
+  "EGS738I1C018": {
+    "ticker": "CNFN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS738I1C018",
+        "issuerName": "Contact Financial Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:39.259641+00:00"
+  },
+  "EGS60121C018": {
+    "ticker": "COMI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60121C018",
+        "issuerName": "(C.I.B.)"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:41.185223+00:00"
+  },
+  "EGS65511C015": {
+    "ticker": "COPR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65511C015",
+        "issuerName": "Coper for Commercial Investment & Real Estate"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:43.071361+00:00"
+  },
+  "EGS30581C010": {
+    "ticker": "COSG",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30581C010",
+        "issuerName": "Cairo Oil & Soap"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:44.775286+00:00"
+  },
+  "EGS38391C016": {
+    "ticker": "CPCI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38391C016",
+        "issuerName": "Kahira Pharmaceuticals"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:46.386780+00:00"
+  },
+  "EGS698X1C017": {
+    "ticker": "CPME",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS698X1C017",
+        "issuerName": "Catalyst Partners Middle East (CPME)"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:47.884275+00:00"
+  },
+  "EGS23141C012": {
+    "ticker": "CRST",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS23141C012",
+        "issuerName": "Crestmark Contracting and Real Estate Development"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:49.427656+00:00"
+  },
+  "EGS44031C010": {
+    "ticker": "CSAG",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS44031C010",
+        "issuerName": "Canal Shipping Agencies"
+      }
+    ],
+    "fetchedAt": "2026-09-02T09:48:51.434195+00:00"
   }
 }

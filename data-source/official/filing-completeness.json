@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-01T14:53:58.061847+00:00",
+  "builtAt": "2026-09-02T09:49:54.146541+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 191936,
-    "withoutTickerInHeading": 36040,
+    "items": 191958,
+    "withoutTickerInHeading": 36045,
     "tickerNotInThisDirectory": 28857,
-    "attributedToAnIssuer": 127039,
+    "attributedToAnIssuer": 127056,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-01",
-        "items": 47,
-        "expected": 47,
+        "harvested": "2026-09-02",
+        "items": 69,
+        "expected": 69,
         "status": "complete"
       }
     ],
@@ -1840,15 +1840,8 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 555,
-    "failures": {
-      "fra_news": "curl: (28) Operation timed out after 60000 milliseconds with 0 bytes received\n",
-      "reg_procedure_compan": "curl: (56) Recv failure: Connection reset by peer\n",
-      "companies_decrees": "curl: (56) Recv failure: Connection reset by peer\n",
-      "admin_actions": "curl: (56) Recv failure: Connection reset by peer\n",
-      "criminal_procedures": "curl: (56) Recv failure: Connection reset by peer\n",
-      "f_criminal_procedure": "curl: (56) Recv failure: Connection reset by peer\n"
-    }
+    "items": 558,
+    "failures": {}
   },
   "issuers": [
     {
@@ -1957,9 +1950,9 @@
     },
     {
       "ticker": "ADCI",
-      "egxFilingCount": 833,
-      "latestEgxFilingId": "292261",
-      "latestEgxFilingAt": "2026-08-02T09:58:01",
+      "egxFilingCount": 834,
+      "latestEgxFilingId": "294242",
+      "latestEgxFilingAt": "2026-09-02T08:55:16",
       "candidateIssuerWebsite": "https://www.adcopharma-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ADCI/profile",
       "websiteStatus": {
@@ -2453,9 +2446,9 @@
     },
     {
       "ticker": "CEFM",
-      "egxFilingCount": 713,
-      "latestEgxFilingId": "294010",
-      "latestEgxFilingAt": "2026-08-30T10:29:49",
+      "egxFilingCount": 714,
+      "latestEgxFilingId": "294245",
+      "latestEgxFilingAt": "2026-09-02T09:14:26",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CEFM/profile",
       "websiteStatus": {
@@ -2475,9 +2468,9 @@
     },
     {
       "ticker": "CFGH",
-      "egxFilingCount": 86,
-      "latestEgxFilingId": "291988",
-      "latestEgxFilingAt": "2026-07-27T13:33:21",
+      "egxFilingCount": 88,
+      "latestEgxFilingId": "294252",
+      "latestEgxFilingAt": "2026-09-02T10:01:40",
       "candidateIssuerWebsite": "https://www.concretefashiongroup.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CFGH/profile",
       "websiteStatus": null,
@@ -2647,9 +2640,9 @@
     },
     {
       "ticker": "DEIN",
-      "egxFilingCount": 592,
-      "latestEgxFilingId": "294208",
-      "latestEgxFilingAt": "2026-09-01T10:23:28",
+      "egxFilingCount": 593,
+      "latestEgxFilingId": "294261",
+      "latestEgxFilingAt": "2026-09-02T10:33:35",
       "candidateIssuerWebsite": "https://www.delta-ins.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
       "websiteStatus": null,
@@ -2747,9 +2740,9 @@
     },
     {
       "ticker": "EDFM",
-      "egxFilingCount": 682,
-      "latestEgxFilingId": "291705",
-      "latestEgxFilingAt": "2026-07-21T10:45:07",
+      "egxFilingCount": 683,
+      "latestEgxFilingId": "294248",
+      "latestEgxFilingAt": "2026-09-02T09:36:02",
       "candidateIssuerWebsite": "https://www.eastdelta-mills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
       "websiteStatus": null,
@@ -2891,9 +2884,9 @@
     },
     {
       "ticker": "EGTS",
-      "egxFilingCount": 821,
-      "latestEgxFilingId": "293461",
-      "latestEgxFilingAt": "2026-08-18T10:45:26",
+      "egxFilingCount": 822,
+      "latestEgxFilingId": "294247",
+      "latestEgxFilingAt": "2026-09-02T09:31:18",
       "candidateIssuerWebsite": "https://www.erc-egypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGTS/profile",
       "websiteStatus": null,
@@ -3185,9 +3178,9 @@
     },
     {
       "ticker": "GGCC",
-      "egxFilingCount": 754,
-      "latestEgxFilingId": "294240",
-      "latestEgxFilingAt": "2026-09-01T16:12:37",
+      "egxFilingCount": 755,
+      "latestEgxFilingId": "294260",
+      "latestEgxFilingAt": "2026-09-02T10:29:32",
       "candidateIssuerWebsite": "https://www.al-giza.com/Default.aspx",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GGCC/profile",
       "websiteStatus": null,
@@ -3247,9 +3240,9 @@
     },
     {
       "ticker": "GPPL",
-      "egxFilingCount": 706,
-      "latestEgxFilingId": "293726",
-      "latestEgxFilingAt": "2026-08-23T10:15:10",
+      "egxFilingCount": 707,
+      "latestEgxFilingId": "294253",
+      "latestEgxFilingAt": "2026-09-02T10:05:06",
       "candidateIssuerWebsite": "https://www.goldenpyramidsplaza.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GPPL/profile",
       "websiteStatus": null,
@@ -3501,9 +3494,9 @@
     },
     {
       "ticker": "ISPH",
-      "egxFilingCount": 525,
-      "latestEgxFilingId": "293558",
-      "latestEgxFilingAt": "2026-08-19T10:37:09",
+      "egxFilingCount": 526,
+      "latestEgxFilingId": "294259",
+      "latestEgxFilingAt": "2026-09-02T10:22:48",
       "candidateIssuerWebsite": "https://www.ibnsina-pharma.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ISPH/profile",
       "websiteStatus": null,
@@ -3831,9 +3824,9 @@
     },
     {
       "ticker": "MOIL",
-      "egxFilingCount": 773,
-      "latestEgxFilingId": "294220",
-      "latestEgxFilingAt": "2026-09-01T11:41:13",
+      "egxFilingCount": 774,
+      "latestEgxFilingId": "294241",
+      "latestEgxFilingAt": "2026-09-02T08:47:52",
       "candidateIssuerWebsite": "https://www.maridive.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOIL/profile",
       "websiteStatus": null,
@@ -4229,9 +4222,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 319,
-      "latestEgxFilingId": "294196",
-      "latestEgxFilingAt": "2026-09-01T09:32:17",
+      "egxFilingCount": 320,
+      "latestEgxFilingId": "294246",
+      "latestEgxFilingAt": "2026-09-02T09:20:48",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4705,9 +4698,9 @@
     },
     {
       "ticker": "UEGC",
-      "egxFilingCount": 859,
-      "latestEgxFilingId": "293613",
-      "latestEgxFilingAt": "2026-08-19T16:38:17",
+      "egxFilingCount": 862,
+      "latestEgxFilingId": "294262",
+      "latestEgxFilingAt": "2026-09-02T10:54:07",
       "candidateIssuerWebsite": "https://www.elsaeed-contracting.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UEGC/profile",
       "websiteStatus": null,
@@ -4755,9 +4748,9 @@
     },
     {
       "ticker": "VALU",
-      "egxFilingCount": 59,
-      "latestEgxFilingId": "294226",
-      "latestEgxFilingAt": "2026-09-01T12:50:27",
+      "egxFilingCount": 60,
+      "latestEgxFilingId": "294243",
+      "latestEgxFilingAt": "2026-09-02T08:59:11",
       "candidateIssuerWebsite": "https://www.valu.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VALU/profile",
       "websiteStatus": null,
@@ -4785,9 +4778,9 @@
     },
     {
       "ticker": "VLMRA",
-      "egxFilingCount": 13,
-      "latestEgxFilingId": "293990",
-      "latestEgxFilingAt": "2026-08-30T09:48:59",
+      "egxFilingCount": 14,
+      "latestEgxFilingId": "294244",
+      "latestEgxFilingAt": "2026-09-02T09:06:32",
       "candidateIssuerWebsite": "https://www.ekholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
       "websiteStatus": null,

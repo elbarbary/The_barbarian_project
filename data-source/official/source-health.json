@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-01T14:53:58.364179+00:00",
+  "builtAt": "2026-09-02T09:49:54.452928+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-09-01T14:52:25Z",
-      "observations": 5,
+      "observedAt": "2026-09-02T09:48:54Z",
+      "observations": 6,
       "status": "available",
-      "ageHours": 0.026
+      "ageHours": 0.017
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
@@ -20,23 +20,23 @@
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-01T14:51:10.453941+00:00",
-      "items": 555,
+      "observedAt": "2026-09-02T09:47:53.795661+00:00",
+      "items": 558,
       "status": "available",
-      "ageHours": 0.047
+      "ageHours": 0.034
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
-      "observedAt": "2026-09-01T14:52:22.312190+00:00",
-      "matchedAtMcdr": 33,
-      "exactIsinsQueried": 35,
-      "notYetIndividuallyQueried": 226,
+      "observedAt": "2026-09-02T09:48:51.785274+00:00",
+      "matchedAtMcdr": 57,
+      "exactIsinsQueried": 60,
+      "notYetIndividuallyQueried": 201,
       "status": "partial",
-      "ageHours": 0.027
+      "ageHours": 0.017
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-01T14:53:58.061847+00:00",
+      "observedAt": "2026-09-02T09:49:54.146541+00:00",
       "issuers": 284,
       "verifiedIrArchives": 0,
       "status": "partial",
@@ -44,10 +44,10 @@
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-01T14:51:20.689150+00:00",
+      "observedAt": "2026-09-02T09:48:01.913293+00:00",
       "officialFxDate": "01/09/2026",
       "status": "available",
-      "ageHours": 0.044
+      "ageHours": 0.031
     }
   },
   "capabilities": {

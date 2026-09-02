@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-01T14:52:22.312190+00:00",
+  "fetchedAt": "2026-09-02T09:48:51.785274+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "92d1cc50c3a9b103744d8221432f54b73e27c6b4cf35493f3f0b748a32cf7f03",
+  "sourceSha256": "24cbbe8faa86058b7c2c9db51ebf9cbab0c1e3e1b4473f7c9996b18e11995c77",
   "issuers": [
     {
       "isin": "EGS01081C016",
@@ -25,6 +25,10 @@
       "issuerName": "ALMAZA FOR CONSTRUCTION AND BUILDING AND AGRICULTURAL RECLAMATION"
     },
     {
+      "isin": "EGS23141C012",
+      "issuerName": "Crestmark Contracting and Real Estate Development"
+    },
+    {
       "isin": "EGS23FV1C014",
       "issuerName": "HBA Contracting"
     },
@@ -37,8 +41,16 @@
       "issuerName": "The Arab Dairy Products Co."
     },
     {
+      "isin": "EGS30401C011",
+      "issuerName": "Central Egypt Flour Mills"
+    },
+    {
       "isin": "EGS30471C014",
       "issuerName": "Alexandria Flour Mills & Bakeries"
+    },
+    {
+      "isin": "EGS30581C010",
+      "issuerName": "Cairo Oil & Soap"
     },
     {
       "isin": "EGS32221C011",
@@ -61,6 +73,10 @@
       "issuerName": "Alexanderia Minerals Oils Co."
     },
     {
+      "isin": "EGS38171C012",
+      "issuerName": "Glaxo Smithkline"
+    },
+    {
       "isin": "EGS38191C010",
       "issuerName": "Abu Qir Fertilizers and Chemical Industries"
     },
@@ -73,8 +89,16 @@
       "issuerName": "Alexandria For Pharmaceuticals Chemical Industries"
     },
     {
+      "isin": "EGS38391C016",
+      "issuerName": "Kahira Pharmaceuticals"
+    },
+    {
       "isin": "EGS3C0O1C016",
       "issuerName": "Arabian Cement"
+    },
+    {
+      "isin": "EGS3C151C015",
+      "issuerName": "The Arab Ceramic Co. - ceramica remas"
     },
     {
       "isin": "EGS3C6P1C019",
@@ -113,6 +137,10 @@
       "issuerName": "Alexandria Container and Cargo Handling"
     },
     {
+      "isin": "EGS44031C010",
+      "issuerName": "Canal Shipping Agencies"
+    },
+    {
       "isin": "EGS473U1C011",
       "issuerName": "G Mac for logistics and transportation"
     },
@@ -133,12 +161,44 @@
       "issuerName": "VALENCIA FOR RESTURANTS"
     },
     {
+      "isin": "EGS60041C018",
+      "issuerName": "Credit Agricole Egypt"
+    },
+    {
+      "isin": "EGS600K1C019",
+      "issuerName": "Banque du Caire"
+    },
+    {
       "isin": "EGS60111C019",
       "issuerName": "Abu Dhabi Islamic Bank - Egypt"
     },
     {
+      "isin": "EGS60121C018",
+      "issuerName": "(C.I.B.)"
+    },
+    {
+      "isin": "EGS60231C015",
+      "issuerName": "Suez Canal Bank"
+    },
+    {
+      "isin": "EGS651B1C018",
+      "issuerName": "canadian gulf real estate investment co"
+    },
+    {
       "isin": "EGS65211C012",
       "issuerName": "Real Estate Egyptian Consortium"
+    },
+    {
+      "isin": "EGS65511C015",
+      "issuerName": "Coper for Commercial Investment & Real Estate"
+    },
+    {
+      "isin": "EGS65541C012",
+      "issuerName": "CIRA Education"
+    },
+    {
+      "isin": "EGS656M1C010",
+      "issuerName": "Bonyan Development And Trade"
     },
     {
       "isin": "EGS66DU1C015",
@@ -153,6 +213,10 @@
       "issuerName": "Arab Moltaqa Investments"
     },
     {
+      "isin": "EGS672I2C014",
+      "issuerName": "Concrete Fashion Group"
+    },
+    {
       "isin": "EGS675S1C011",
       "issuerName": "Amer Group"
     },
@@ -165,8 +229,20 @@
       "issuerName": "El Ahly for Investment And Development"
     },
     {
+      "isin": "EGS691D1C018",
+      "issuerName": "C I Capital Holding For Financial Investments"
+    },
+    {
+      "isin": "EGS691G1C015",
+      "issuerName": "Belton Holding"
+    },
+    {
       "isin": "EGS691L1C018",
       "issuerName": "Aspire Capital Holding For Financial Investment"
+    },
+    {
+      "isin": "EGS691T1C010",
+      "issuerName": "B Investments Holding S.A.E"
     },
     {
       "isin": "EGS694A1C018",
@@ -177,12 +253,32 @@
       "issuerName": "A Capital Holding"
     },
     {
+      "isin": "EGS698X1C017",
+      "issuerName": "Catalyst Partners Middle East (CPME)"
+    },
+    {
       "isin": "EGS72081C010",
       "issuerName": "ALEXANDIRA NEW MEDICAL CENTER"
     },
     {
+      "isin": "EGS72201C014",
+      "issuerName": "CAIRO FOR EDUCATIONAL Services"
+    },
+    {
+      "isin": "EGS729J1C018",
+      "issuerName": "Cleopatra Hospital Company"
+    },
+    {
       "isin": "EGS72AQ1C016",
       "issuerName": "Arab Co. For Assets Management And Development"
+    },
+    {
+      "isin": "EGS73541C012",
+      "issuerName": "CITADEL for Financial Investments"
+    },
+    {
+      "isin": "EGS738I1C018",
+      "issuerName": "Contact Financial Holding"
     },
     {
       "isin": "EGS74PG1C019",
@@ -239,10 +335,11 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 33,
-    "exactIsinsQueried": 35,
+    "matchedAtMcdr": 57,
+    "exactIsinsQueried": 60,
     "confirmedNotFoundAfterExactSearch": {
       "AIDC": "EGS65R01C015",
+      "CCAPP": "EGS73541P048",
       "ASPI_r3": "EGS924G1C014"
     },
     "transportErrors": {},
@@ -253,28 +350,10 @@
       "SPIN": "EGS32041C013",
       "RREI": "EGS65011C016",
       "DOMT": "EGS30031C016",
-      "BINV": "EGS691T1C010",
-      "BQDC": "EGS600K1C019",
-      "BTFH": "EGS691G1C015",
-      "BONY": "EGS656M1C010",
-      "CICH": "EGS691D1C018",
-      "CAED": "EGS72201C014",
-      "CIRA": "EGS65541C012",
-      "COSG": "EGS30581C010",
-      "CPCI": "EGS38391C016",
       "POUL": "EGS02051C018",
-      "CSAG": "EGS44031C010",
-      "CPME": "EGS698X1C017",
       "PRCL": "EGS3C111C019",
       "KASABF": "EGS696Z1C017",
       "SIDC": "EGS38361C019",
-      "CLHO": "EGS729J1C018",
-      "COMI": "EGS60121C018",
-      "CFGH": "EGS672I2C014",
-      "CNFN": "EGS738I1C018",
-      "COPR": "EGS65511C015",
-      "CRST": "EGS23141C012",
-      "CIEB": "EGS60041C018",
       "DCCC": "EGS42121C011",
       "DTPP": "EGS370W1C013",
       "DEIN": "EGS63031C016",
@@ -348,14 +427,12 @@
       "GEOS": "EGS51LQ1C018",
       "GIHD": "EGS65461C013",
       "GGCC": "EGS21541C015",
-      "BIOC": "EGS38171C012",
       "GGRN": "EGS07DR1C012",
       "GPPL": "EGS70342C018",
       "GTWL": "EGS32161C019",
       "GOUR": "EGS540S1C014",
       "GRCA": "EGS69261C013",
       "GROV": "EGS69921C012",
-      "CCRS": "EGS651B1C018",
       "HELI": "EGS65591C017",
       "HDBK": "EGS60301C016",
       "ISPH": "EGS512O1C012",
@@ -385,7 +462,6 @@
       "MENA": "EGS65441C015",
       "WCDF": "EGS30421C019",
       "MEGM": "EGS3C001C012",
-      "CEFM": "EGS30401C011",
       "MIPH": "EGS380G1C011",
       "MBSC": "EGS3C371C019",
       "MCQE": "EGS3C391C017",
@@ -424,8 +500,6 @@
       "PHGC": "EGS72XL1C014",
       "PRMH": "EGS691A1C011",
       "PHTV": "EGS70331C011",
-      "CCAPP": "EGS73541P048",
-      "CCAP": "EGS73541C012",
       "QNBE": "EGS60081C014",
       "RAKT": "EGS36021C011",
       "RACC": "EGS74191C015",
@@ -450,7 +524,6 @@
       "YAYT": "EGS3E7F1C016",
       "LUTS_r1": "EGS924K1C018",
       "SCTS": "EGS740C1C010",
-      "CANA": "EGS60231C015",
       "TMGH": "EGS691S1C011",
       "TWSA": "EGS7D231C010",
       "TALM": "EGS597R1C017",
@@ -458,7 +531,6 @@
       "TAQA": "EGS490S1C014",
       "ETEL": "EGS48031C016",
       "RMDA": "EGS381B1C015",
-      "CERA": "EGS3C151C015",
       "EGCN": "EGS65861C014",
       "ELAB": "EGS3E1Z2C016",
       "MOED": "EGS729F1C012",
