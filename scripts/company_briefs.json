@@ -1145,7 +1145,7 @@
    "trading_resumptions": 20,
    "capital_increases": 0,
    "general_assemblies": 61,
-   "periods_reported": 69,
+   "periods_reported": 71,
    "loss_making_periods": 0
   },
   "generated": "2026-08-24"
@@ -1185,7 +1185,7 @@
    "trading_resumptions": 0,
    "capital_increases": 0,
    "general_assemblies": 7,
-   "periods_reported": 5,
+   "periods_reported": 7,
    "loss_making_periods": 2
   },
   "generated": "2026-08-24"
@@ -2078,7 +2078,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EGSA/profile",
   "record": {
-   "filings": 541,
+   "filings": 542,
    "first_filing": "2010-03-31",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -2651,7 +2651,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
   "record": {
-   "filings": 232,
+   "filings": 233,
    "first_filing": "2023-03-30",
    "trading_suspensions": 11,
    "trading_resumptions": 11,
@@ -3460,7 +3460,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ISPH/profile",
   "record": {
-   "filings": 528,
+   "filings": 529,
    "first_filing": "2017-12-28",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -4015,7 +4015,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MFSC/profile",
   "record": {
-   "filings": 528,
+   "filings": 529,
    "first_filing": "2010-01-27",
    "trading_suspensions": 5,
    "trading_resumptions": 5,
@@ -5162,7 +5162,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
   "record": {
-   "filings": 321,
+   "filings": 322,
    "first_filing": "2021-10-11",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
@@ -5252,12 +5252,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/RAKT/profile",
   "record": {
-   "filings": 730,
+   "filings": 731,
    "first_filing": "2010-01-10",
    "trading_suspensions": 12,
    "trading_resumptions": 13,
    "capital_increases": 2,
-   "general_assemblies": 90,
+   "general_assemblies": 91,
    "periods_reported": 59,
    "loss_making_periods": 54
   },
@@ -6220,7 +6220,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/TRTO/profile",
   "record": {
-   "filings": 359,
+   "filings": 360,
    "first_filing": "2010-03-07",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
@@ -6380,12 +6380,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/UPMS/profile",
   "record": {
-   "filings": 335,
+   "filings": 336,
    "first_filing": "2016-10-05",
    "trading_suspensions": 11,
    "trading_resumptions": 10,
    "capital_increases": 0,
-   "general_assemblies": 26,
+   "general_assemblies": 27,
    "periods_reported": 39,
    "loss_making_periods": 17
   },
@@ -6460,7 +6460,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
   "record": {
-   "filings": 15,
+   "filings": 16,
    "first_filing": "2026-06-07",
    "trading_suspensions": 0,
    "trading_resumptions": 0,

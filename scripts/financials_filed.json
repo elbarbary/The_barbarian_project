@@ -265,6 +265,44 @@
    "prior_period_start": "2025-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293757",
    "ticker": "OBRI"
+  },
+  "294245": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-09-02",
+   "isin": "EGS30401C011",
+   "months": 12,
+   "name_ar": "مطاحن مصر الوسطي",
+   "net_profit_egp": 203760774.0,
+   "news_id": "294245",
+   "period": "FY 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2025-07-01",
+   "prior_net_profit_egp": 140112324.0,
+   "prior_period": "FY 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2024-07-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294245",
+   "ticker": "CEFM"
+  },
+  "294269": {
+   "basis": "consolidated",
+   "currency": "دولار امريكي",
+   "filed_on": "2026-09-02",
+   "isin": "EGS672I2C014",
+   "months": 6,
+   "name_ar": "كونكريت فاشون جروب للاستثمارات التجارية والصناعية",
+   "net_profit_egp": 4132385.0,
+   "news_id": "294269",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 4761922.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294269",
+   "ticker": "CFGH"
   }
  },
  "read": {
@@ -296,6 +334,12 @@
   "293895": "2026-08-26",
   "293897": "2026-08-26",
   "293898": "2026-08-26",
-  "293904": "2026-08-26"
+  "293904": "2026-08-26",
+  "294219": "2026-09-01",
+  "294220": "2026-09-01",
+  "294245": "2026-09-02",
+  "294251": "2026-09-02",
+  "294267": "2026-09-02",
+  "294269": "2026-09-02"
  }
 }
