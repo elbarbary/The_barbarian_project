@@ -137,7 +137,10 @@ export class Component extends Base {
   // English default made every one of them change the language before they
   // could start. main.js remembers whichever a reader chooses, so the default
   // is only ever the FIRST answer, never an argument.
-  state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'' };
+  state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
+    // One per search surface, so setting a test on the market table does not
+    // silently reshape the filings list on another screen.
+    rq:{ m:'', op:'gt', a:'', b:'' }, frq:{ m:'', op:'gt', a:'', b:'' } };
 
   // ── copy ──
   copy() {
@@ -368,6 +371,17 @@ export class Component extends Base {
       marketTitle:'The market', searchPlaceholder:'Search {n} companies — English or Arabic',
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
+      ratioFilter:'Filter on a filed ratio', ratioValue:'value', ratioAnd:'and', ratioClear:'Clear',
+      screenTitle:'Four tests, as filed', screenCount:'{n} companies pass all four',
+      screenPe:'Price-to-earnings at or below the market median, {v} — the median of every company that published one.',
+      screenVol:'Thirty-day average volume at or above the market median, {v} shares — a figure a reader could act on without moving it.',
+      screenCash:'Cash conversion of 1.0 or better where it is published: the company collected at least as much cash as it reported in profit.',
+      screenCashNone:'Cash conversion is not published for any company in this set, so that test could not be applied.',
+      screenActionNone:'The calendar has not loaded, so no expected filing could be excluded.',
+      screenAction:'No filing expected in the calendar window — a price is hard to read against a rights issue or a distribution nobody has seen yet.',
+      screenMore:'and {n} more',
+      screenOpen:'Open the table with these tests',
+      screenNoBack:'No past return is shown for this. Testing it against history would need the exchange\u2019s rankings as they stood on each past date, and reconstructing them from today\u2019s figures would quietly drop the companies that have since delisted — a backtest that flatters itself. The tests are stated so a reader can judge them directly.',
       peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
       lastClose:'Last close', asOf:'As of', priceHistory:'Price history', sessionsShown:'Sessions', whoTheyAre:'Who they are',
@@ -613,6 +627,17 @@ export class Component extends Base {
       marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
+      ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
+      screenTitle:'أربعة اختبارات على الأرقام كما وردت', screenCount:'{n} شركة تجتاز الأربعة',
+      screenPe:'مضاعف ربحية عند وسيط السوق أو أقل، {v} — وهو وسيط كل شركة أفصحت عنه.',
+      screenVol:'متوسط حجم تداول ثلاثين يوماً عند وسيط السوق أو أعلى، {v} سهم — حجم يمكن التعامل معه دون تحريك السعر.',
+      screenCash:'تحويل نقدي عند ١٫٠ أو أفضل حيثما أُفصح عنه: حصّلت الشركة نقداً لا يقل عمّا أعلنته ربحاً.',
+      screenCashNone:'التحويل النقدي غير مُفصح عنه لأي شركة في هذه المجموعة، لذا تعذّر تطبيق هذا الاختبار.',
+      screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
+      screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
+      screenMore:'و{n} أخرى',
+      screenOpen:'افتح الجدول بهذه الاختبارات',
+      screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
       lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'من هي الشركة',
@@ -892,6 +917,100 @@ export class Component extends Base {
 
   go(screen) { return () => this.setState({ screen }); }
 
+  /* ── filtering on a filed ratio ──────────────────────────────────────────
+   *
+   * The table could already be sorted by the four columns it draws. These are
+   * the figures a reader actually asks a screen for — a P/E under ten, a
+   * dividend yield over five — and they were published per company and
+   * reachable only one company at a time.
+   *
+   * WHAT A NUMBER IN THE BOX MEANS. The documents do not agree with each
+   * other on this: `dividend_yield` is stated as a percent (4.26 is 4.26%)
+   * and `roe`/`roa` as fractions (0.3612 is 36.12%). A reader typing "20"
+   * into a return-on-equity box means twenty per cent either way, so the
+   * entered number is scaled to the unit the document uses and the box says
+   * which unit it is in. Getting this wrong does not error — it silently
+   * returns every company or none.
+   */
+  ratioMetrics(ar) {
+    return [
+      { id:'pe', label:'P/E', labelAr:'مضاعف الربحية', unit:'', scale:1 },
+      { id:'pb', label:'P/B', labelAr:'السعر/القيمة الدفترية', unit:'', scale:1 },
+      { id:'roe', label:'ROE', labelAr:'العائد على حقوق الملكية', unit:'%', scale:0.01 },
+      { id:'roa', label:'ROA', labelAr:'العائد على الأصول', unit:'%', scale:0.01 },
+      { id:'debt_equity', label:'Debt / equity', labelAr:'الدين إلى حقوق الملكية', unit:'', scale:1 },
+      { id:'dividend_yield', label:'Dividend yield', labelAr:'عائد التوزيعات', unit:'%', scale:1 },
+      { id:'cash_conversion', label:'Cash conversion', labelAr:'التحويل النقدي', unit:'', scale:1 },
+    ].map((m) => Object.assign({}, m, { name: ar ? m.labelAr : m.label }));
+  }
+
+  /** What the documents publish for one company on one ratio, or null.
+   *
+   * `pe` sits on the row itself and the rest under `ratios`, which
+   * `apply_company_ratios` folds in from the per-company review documents.
+   * Coverage is genuinely partial — a company that never published a
+   * dividend has no dividend yield — and absent stays absent. */
+  ratioValue(c, id) {
+    if (!c) return null;
+    const raw = id === 'pe' ? c.pe : (c.ratios || {})[id];
+    return typeof raw === 'number' && isFinite(raw) ? raw : null;
+  }
+
+  /** Does this company pass the ratio test, if one is set.
+   *
+   * A company with no published figure for the ratio FAILS rather than
+   * passes. Filtering for a P/E under ten and being handed companies that
+   * have never published one would be answering a different question. */
+  passesRatio(c, rq, ar) {
+    if (!rq || !rq.m) return true;
+    const metric = this.ratioMetrics(ar).find((x) => x.id === rq.m);
+    if (!metric) return true;
+    const a = parseFloat(rq.a);
+    if (!isFinite(a)) return true;                       // nothing typed yet
+    const value = this.ratioValue(c, rq.m);
+    if (value === null) return false;
+    const lo = a * metric.scale;
+    if (rq.op === 'lt') return value < lo;
+    if (rq.op === 'bt') {
+      const b = parseFloat(rq.b);
+      if (!isFinite(b)) return value > lo;
+      const hi = b * metric.scale;
+      return value >= Math.min(lo, hi) && value <= Math.max(lo, hi);
+    }
+    return value > lo;
+  }
+
+  /** The control itself, built once and drawn on each search surface. */
+  ratioControl(key, L, ar) {
+    const rq = this.state[key] || { m:'', op:'gt', a:'', b:'' };
+    const set = (patch) => this.setState((s) => ({ [key]: Object.assign({}, s[key], patch) }));
+    const metrics = this.ratioMetrics(ar);
+    const chosen = metrics.find((m) => m.id === rq.m) || null;
+    return {
+      metrics: metrics.map((m) => ({
+        label: m.name, on: rq.m === m.id,
+        // Picking the ratio already on is how you turn the test off.
+        go: () => set({ m: rq.m === m.id ? '' : m.id }),
+        bg: rq.m === m.id ? 'var(--accent)' : 'transparent',
+        color: rq.m === m.id ? '#1B1917' : 'var(--t2)',
+        border: rq.m === m.id ? 'transparent' : 'var(--rule)',
+      })),
+      ops: [['gt', ar ? 'أكبر من' : 'more than'], ['lt', ar ? 'أقل من' : 'less than'],
+            ['bt', ar ? 'بين' : 'between']].map(([id, label]) => ({
+        label, on: rq.op === id, go: () => set({ op: id }),
+        bg: rq.op === id ? 'var(--sunk)' : 'transparent',
+        color: rq.op === id ? 'var(--ink)' : 'var(--faint)',
+      })),
+      hasMetric: Boolean(chosen),
+      unit: chosen ? (chosen.unit || '') : '',
+      a: rq.a, b: rq.b, showB: rq.op === 'bt',
+      onA: (e) => set({ a: e.target.value }),
+      onB: (e) => set({ b: e.target.value }),
+      clear: () => set({ m:'', op:'gt', a:'', b:'' }),
+      active: Boolean(rq.m && isFinite(parseFloat(rq.a))),
+    };
+  }
+
   // ── fixtures ──
   /** Whatever the page is currently allowed to show. Set by main.js. */
   data() {
@@ -937,6 +1056,7 @@ export class Component extends Base {
       // fills are recognisably one thing.
       watchlist:'M12 3.6 14.6 9l5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.8 9.4 9z',
       // Tiles of unequal size, which is the whole idea of the screen.
+      search:'M10.6 3.8a6.8 6.8 0 1 0 0 13.6 6.8 6.8 0 0 0 0-13.6M15.6 15.6 20.4 20.4',
       heat:'M3.6 3.6h9.6v7.2H3.6zM15 3.6h5.4v4.2H15zM15 9.6h5.4v10.8H15zM3.6 12.6h5.4v7.8H3.6zM10.8 12.6h2.4v7.8h-2.4z'
     };
 
@@ -953,19 +1073,36 @@ export class Component extends Base {
       .filter((c) => c.sector && c.sectorAr).map((c) => [c.sector, c.sectorAr]));
     const sectorName = (en) => (ar && sectorAr.get(en)) || en || '—';
 
+    const ratio = this.ratioControl('rq', L, ar);
     let rows = D.companies.filter(c => (st.sector === 'All' || c.sector === st.sector))
-      .filter(c => !q || this.fold(c.name.en).includes(q) || this.fold(c.name.ar).includes(q) || this.fold(c.ticker).includes(q));
+      .filter(c => !q || this.fold(c.name.en).includes(q) || this.fold(c.name.ar).includes(q) || this.fold(c.ticker).includes(q))
+      .filter(c => this.passesRatio(c, st.rq, ar));
     const key = st.sort;
+    // A ratio can be sorted on whether or not it is one of the drawn columns:
+    // it lives under `ratios` rather than on the row, so `a[key]` finds
+    // nothing and every company would tie.
+    const RATIO_KEYS = new Set(this.ratioMetrics(ar).map((m) => m.id));
+    const cell = (row) => key === 'ticker' ? row.ticker
+      : key === 'name' ? this.nm(row.name)
+      : key === 'sector' ? sectorName(row.sector)
+      : RATIO_KEYS.has(key) ? this.ratioValue(row, key)
+      : row[key];
     rows = rows.slice().sort((a,b) => {
-      const va = key === 'ticker' ? a.ticker : key === 'name' ? this.nm(a.name) : key === 'sector' ? sectorName(a.sector) : a[key];
-      const vb = key === 'ticker' ? b.ticker : key === 'name' ? this.nm(b.name) : key === 'sector' ? sectorName(b.sector) : b[key];
+      const va = cell(a);
+      const vb = cell(b);
       if (va === null || va === '—') return 1; if (vb === null || vb === '—') return -1;
       if (typeof va === 'string') return va.localeCompare(vb) * st.dir * -1;
       return (va - vb) * st.dir;
     });
 
+    // The ratio being tested becomes a column of its own, so a reader can see
+    // the figure the filter acted on rather than take it on trust. P/E is
+    // already drawn, so it is not drawn twice.
+    const shownRatio = st.rq && st.rq.m && st.rq.m !== 'pe'
+      ? this.ratioMetrics(ar).find((m) => m.id === st.rq.m) : null;
     const colDef = [['ticker',ar?'الرمز':'Ticker','start'],['name',ar?'الاسم':'Company','start'],['sector',ar?'القطاع':'Sector','start'],
-      ['close',ar?'الإغلاق':'Close','end'],['pct','%','end'],['cap',ar?'القيمة':'Cap','end'],['pe','P/E','end']];
+      ['close',ar?'الإغلاق':'Close','end'],['pct','%','end'],['cap',ar?'القيمة':'Cap','end'],['pe','P/E','end']]
+      .concat(shownRatio ? [[shownRatio.id, shownRatio.name, 'end']] : []);
     // A-Z under a down arrow, because the string branch below multiplies by
     // -1 to put text in reading order on the first click while the numeric
     // columns put the largest first. The caret was read off `st.dir` alone,
@@ -1000,6 +1137,16 @@ export class Component extends Base {
       // is a units error, not a small company.
       cap: (typeof c.cap === 'number' && c.cap > 0) ? this.money(c.cap) : '—',
       pe: c.pe ? c.pe.toFixed(1) : '—',
+      // The figure the filter acted on, in the same unit the box asks for, so
+      // "ROE more than 20" and a column reading 36.1% are the same scale.
+      extra: (() => {
+        if (!shownRatio) return '';
+        const v = this.ratioValue(c, shownRatio.id);
+        if (v === null) return '—';
+        return shownRatio.scale === 0.01 ? (v * 100).toFixed(1) + '%'
+          : shownRatio.unit === '%' ? v.toFixed(2) + '%' : v.toFixed(2);
+      })(),
+      hasExtra: Boolean(shownRatio),
             // A share that closed exactly flat is not a share that fell. 50 of the
       // 282 did today, and each got a down arrow beside "0.00%" on the same
       // site whose Home screen counts them as held. `dcol(0)` already returns
@@ -2085,6 +2232,10 @@ export class Component extends Base {
     // and could only answer "what was filed on this day" — but a month holds
     // 1,467 filings and the other question a reader arrives with is "what has
     // THIS company filed", which the grid cannot express at all.
+    // The same company test as the market table, applied to the company each
+    // filing belongs to.
+    const byTicker = new Map((D.companies || []).map((c) => [c.ticker, c]));
+    const filedPassesRatio = (e) => this.passesRatio(byTicker.get(e && e.ticker), st.frq, ar);
     const filedQuery = String(st.filedQ || '').trim();
     const filedFold = this.fold(filedQuery);
     /* What a search looks through.
@@ -2124,7 +2275,7 @@ export class Component extends Base {
           // the newest for the list — so the filter reads the state, never the
           // fallback.
           && (!everything || !st.month || String(e.date || '').startsWith(st.month))
-          && matches(e))
+          && matches(e) && filedPassesRatio(e))
       : null;
 
     const archive = filtered
@@ -2147,7 +2298,7 @@ export class Component extends Base {
             this.setState({ screen: 'company', ticker: e.ticker }); },
         }))
       : null;
-    const filedEvents = archive ? archive : D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
+    const filedEvents = archive ? archive : D.filedEvents ? say(D.filedEvents.filter(filedPassesRatio), ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
       // These are FILED events, and calendar() attached the exchange's own
       // link to each. This branch stripped it — under a comment written for
@@ -2506,6 +2657,71 @@ export class Component extends Base {
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
       sessionState: this.sessionLine(D, L),
+      goMarket: this.go('market'),
+      searchIcon: ICON.search,
+      /* FOUR TESTS, AS FILED.
+       *
+       * A "cheapest by P/E" list is a screen anyone can build and nearly
+       * everyone builds badly: it fills with companies nobody can trade, with
+       * profits that never became cash, and with a price that is low because
+       * a rights issue is about to change what a share is. So the same three
+       * filters run beside the multiple.
+       *
+       * EVERY THRESHOLD IS READ, NOT CHOSEN. The P/E line and the volume line
+       * are the market's own medians, computed here from the companies that
+       * published each figure; the cash line is 1.0, which is the point where
+       * a company collected as much cash as it reported in profit. Picking
+       * numbers would make this an opinion about companies, and this
+       * publisher does not hold one.
+       *
+       * It is a filter, not a verdict: it names the tests, shows how many
+       * passed, and hands the reader the same table with the same tests on.
+       * No company is ranked, and no return is claimed — see `screenNoBack`.
+       */
+      screen: (() => {
+        const all = D.companies || [];
+        const mid = (xs) => {
+          const v = xs.filter((x) => typeof x === 'number' && isFinite(x)).sort((a, b) => a - b);
+          return v.length ? v[Math.floor((v.length - 1) / 2)] : null;
+        };
+        const pe = mid(all.map((c) => (typeof c.pe === 'number' && c.pe > 0 ? c.pe : null)));
+        const vol = mid(all.map((c) => c.avgVolume));
+        if (pe === null || vol === null) return null;
+        // The calendar arrives on its own fetch, after the directory. Until it
+        // does, the corporate-action test has nothing to exclude — which is
+        // stated on the card rather than left to look like a clean pass.
+        const cal = D.expectedEvents || [];
+        const due = new Set(cal.map((e) => e.ticker).filter(Boolean));
+        const cash = (c) => (c.ratios || {}).cash_conversion;
+        // Cash conversion is published for some companies and not others, and
+        // a test nothing can be measured against is not a test. It is applied
+        // where it exists and named as unavailable where it does not, rather
+        // than quietly passing everyone.
+        const measured = all.filter((c) => typeof cash(c) === 'number').length;
+        const passed = all.filter((c) =>
+          typeof c.pe === 'number' && c.pe > 0 && c.pe <= pe
+          && typeof c.avgVolume === 'number' && c.avgVolume >= vol
+          && (typeof cash(c) !== 'number' || cash(c) >= 1)
+          && !due.has(c.ticker));
+        return {
+          count: String(passed.length),
+          tests: [
+            { n: '1', text: L.screenPe.replace('{v}', pe.toFixed(1)) },
+            { n: '2', text: L.screenVol.replace('{v}', this.num(vol, 0)) },
+            { n: '3', text: measured ? L.screenCash : L.screenCashNone },
+            { n: '4', text: cal.length ? L.screenAction : L.screenActionNone },
+          ],
+          names: passed.slice(0, 8).map((c) => ({
+            ticker: c.ticker, name: this.nm(c.name),
+            pe: typeof c.pe === 'number' ? c.pe.toFixed(1) : '—',
+            go: () => this.setState({ screen: 'company', ticker: c.ticker }),
+          })),
+          more: passed.length > 8 ? L.screenMore.replace('{n}', String(passed.length - 8)) : '',
+          // The same tests, on the table, where they can be changed.
+          open: () => this.setState({ screen: 'market', sort: 'pe', dir: 1,
+            rq: { m: 'pe', op: 'lt', a: pe.toFixed(1), b: '' } }),
+        };
+      })(),
       // Home's headline and its pill said "The close — official close from
       // market.json, not a live price" as unconditional literals, including
       // through the whole trading session, while the sidebar beside them said
@@ -2546,8 +2762,8 @@ export class Component extends Base {
       // filed", which the grid cannot express.
       filedQ: st.filedQ || '',
       onFiledQuery: (e) => this.setState({ filedQ: e.target.value }),
-      clearFiled: () => this.setState({ filedQ: '', day: '' }),
-      hasFiledFilter: Boolean((st.filedQ || '').trim() || st.day),
+      clearFiled: () => this.setState({ filedQ: '', day: '', frq: { m:'', op:'gt', a:'', b:'' } }),
+      hasFiledFilter: Boolean((st.filedQ || '').trim() || st.day || (st.frq && st.frq.m)),
       filedFilterNote: (() => {
         if (!filtered) return '';
         const bits = [];
@@ -2712,6 +2928,7 @@ export class Component extends Base {
       canFollowCompany: co.ticker !== '\u2014',
       companyFollow: () => { if (co.ticker !== '\u2014') this.onWatch && this.onWatch(co.ticker); },
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
+      ratio, filedRatio: this.ratioControl('frq', L, ar),
       // The placeholder used to assert "282 companies" in both languages. The
       // exchange is not a constant — build_market_api has already moved it
       // once — so it counts what was actually loaded.

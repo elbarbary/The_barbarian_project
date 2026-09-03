@@ -1515,6 +1515,125 @@ test('a comparative row says which filing restated it', () => {
   assert.equal(shown({ period: 'H1 2026', net_income: 10011.52, filing_id: 'egx-293025' }).restated, '');
 });
 
+/* ── filtering on a filed ratio ────────────────────────────────────────── */
+
+const RATIOCO = (t, pe, extra) => ({ ticker: t, name: { en: t, ar: t }, sector: 'Banks',
+  close: 10, pct: 1, cap: 1e9, pe, avgVolume: 1e6, ...extra });
+
+test('a ratio filter takes more than, less than and between', () => {
+  const companies = [
+    RATIOCO('AAA', 5, { ratios: { roe: 0.30 } }),
+    RATIOCO('BBB', 12, { ratios: { roe: 0.10 } }),
+    RATIOCO('CCC', 20, { ratios: { roe: 0.22 } }),
+  ];
+  const on = (rq) => {
+    const c = fresh();
+    c.setData({ ...LIVE, companies });
+    c.state.screen = 'market';
+    c.state.rq = rq;
+    return c.renderVals().rows.map((r) => r.ticker);
+  };
+  assert.deepEqual(on({ m: 'pe', op: 'lt', a: '13', b: '' }), ['AAA', 'BBB']);
+  assert.deepEqual(on({ m: 'pe', op: 'gt', a: '13', b: '' }), ['CCC']);
+  assert.deepEqual(on({ m: 'pe', op: 'bt', a: '10', b: '25' }), ['BBB', 'CCC']);
+  // Between is inclusive and does not care which end was typed first.
+  assert.deepEqual(on({ m: 'pe', op: 'bt', a: '25', b: '10' }), ['BBB', 'CCC']);
+  // Nothing typed yet is not a filter.
+  assert.equal(on({ m: 'pe', op: 'lt', a: '', b: '' }).length, 3);
+});
+
+test('a ratio entered as a percentage is matched against the fraction on file', () => {
+  // The documents disagree with each other: `roe` is a fraction (0.3612) and
+  // `dividend_yield` a percent (4.26). A reader typing 20 means twenty per
+  // cent either way, and getting this wrong returns everything or nothing.
+  const companies = [RATIOCO('AAA', 5, { ratios: { roe: 0.30, dividend_yield: 6.1 } }),
+                     RATIOCO('BBB', 6, { ratios: { roe: 0.10, dividend_yield: 2.0 } })];
+  const on = (rq) => {
+    const c = fresh();
+    c.setData({ ...LIVE, companies });
+    c.state.screen = 'market';
+    c.state.rq = rq;
+    return c.renderVals().rows.map((r) => r.ticker);
+  };
+  assert.deepEqual(on({ m: 'roe', op: 'gt', a: '20', b: '' }), ['AAA']);
+  assert.deepEqual(on({ m: 'dividend_yield', op: 'gt', a: '5', b: '' }), ['AAA']);
+});
+
+test('a company that never published the ratio is not handed back as a match', () => {
+  // Filtering for a P/B under two and being given companies that have never
+  // published one would be answering a different question.
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [RATIOCO('AAA', 5, { ratios: { pb: 1.2 } }),
+                                   RATIOCO('BBB', 5, {})] });
+  c.state.screen = 'market';
+  c.state.rq = { m: 'pb', op: 'lt', a: '2', b: '' };
+  assert.deepEqual(c.renderVals().rows.map((r) => r.ticker), ['AAA']);
+});
+
+test('the ratio being filtered on becomes a column, and can be sorted', () => {
+  const companies = [RATIOCO('AAA', 5, { ratios: { roe: 0.10 } }),
+                     RATIOCO('BBB', 6, { ratios: { roe: 0.30 } })];
+  const c = fresh();
+  c.setData({ ...LIVE, companies });
+  c.state.screen = 'market';
+  c.state.rq = { m: 'roe', op: 'gt', a: '1', b: '' };
+  c.state.sort = 'roe';
+  c.state.dir = -1;
+  const v = c.renderVals();
+  assert.equal(v.cols[v.cols.length - 1].label, 'ROE');
+  // It lives under `ratios`, so a naive row lookup would tie every company.
+  assert.deepEqual(v.rows.map((r) => r.ticker), ['BBB', 'AAA']);
+  assert.equal(v.rows[0].extra, '30.0%');
+  // P/E is already a column and is not drawn twice.
+  c.state.rq = { m: 'pe', op: 'lt', a: '99', b: '' };
+  assert.equal(c.renderVals().cols.filter((x) => x.label === 'P/E').length, 1);
+});
+
+test('the filings list takes the same company test', () => {
+  const c = fresh();
+  c.setData({ ...LIVE,
+    companies: [RATIOCO('AAA', 5, { ratios: { roe: 0.30 } }), RATIOCO('BBB', 6, { ratios: { roe: 0.05 } })],
+    filedEvents: [{ date: '2026-09-02', ticker: 'AAA', what: 'w', whatAr: 'و', kind: 'Results' },
+                  { date: '2026-09-02', ticker: 'BBB', what: 'w', whatAr: 'و', kind: 'Results' }] });
+  c.state.screen = 'calendar';
+  c.state.frq = { m: 'roe', op: 'gt', a: '20', b: '' };
+  assert.deepEqual(c.renderVals().filedEvents.map((e) => e.ticker), ['AAA']);
+  assert.equal(c.renderVals().hasFiledFilter, true);
+});
+
+test('the four tests are read off the market, not chosen, and rank nobody', () => {
+  const companies = [
+    RATIOCO('CHEAP', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+    RATIOCO('THIN', 4, { avgVolume: 1, ratios: { cash_conversion: 1.4 } }),
+    RATIOCO('PAPER', 4, { avgVolume: 2e6, ratios: { cash_conversion: 0.2 } }),
+    RATIOCO('DEAR', 40, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+    RATIOCO('DUE', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+  ];
+  const c = fresh();
+  c.setData({ ...LIVE, companies, expectedEvents: [{ ticker: 'DUE', date: '2026-10-01' }] });
+  c.state.screen = 'home';
+  const v = c.renderVals();
+  assert.ok(v.screen, 'the screen did not build');
+  // Thin volume, poor cash conversion, a high multiple and a pending filing
+  // each knock one out; only CHEAP passes all four.
+  assert.deepEqual(v.screen.names.map((n) => n.ticker), ['CHEAP']);
+  assert.equal(v.screen.count, '1');
+  // The thresholds are the market's own medians, quoted in the test text.
+  assert.match(v.screen.tests[0].text, /market median, 4\.0/);
+  assert.equal(v.screen.tests.length, 4);
+  // §8: it names tests, never merit, and claims no return.
+  const prose = v.screen.tests.map((t) => t.text).join(' ') + ' ' + v.L.screenTitle + ' ' + v.L.screenNoBack;
+  assert.doesNotMatch(prose, /\b(buy|sell|hold|cheap|undervalued|bargain|opportunity|recommend)\b/i);
+  assert.match(v.L.screenNoBack, /No past return is shown/);
+});
+
+test('home offers a way into the search', () => {
+  const v = screen(LIVE);
+  assert.equal(typeof v.goMarket, 'function');
+  assert.ok(String(v.searchIcon).startsWith('M'), 'no search icon path');
+  v.goMarket();
+});
+
 test('a dollar listing says which money each of its two figures is in', () => {
   // The market table was taught this and the company screen was not, so the
   // page a reader lands on printed 0.118 over a market value of 2.83 billion

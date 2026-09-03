@@ -137,10 +137,41 @@
           <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
           <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
         </div>
+        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(18px);margin-inline-end:2px" style-hover="background:var(--sunk)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ searchIcon }}"></path></svg>
+        </div>
         <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ homeNote }}
         </div>
       </div>
+
+      <sc-if value="{{ screen }}">
+        <section style="margin-top:18px;padding:20px 22px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:21px;font-weight:600;letter-spacing:-.02em">{{ L.screenTitle }}</div>
+            <div onClick="{{ screen.open }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.screenOpen }} →</div>
+          </div>
+          <ol style="margin:14px 0 0;padding:0;list-style:none;display:grid;gap:7px">
+            <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
+              <li style="display:flex;gap:10px;align-items:baseline;font-size:12.5px;color:var(--t2);line-height:1.55;text-wrap:pretty">
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ t.n }}</span><span>{{ t.text }}</span>
+              </li>
+            </sc-for>
+          </ol>
+          <div style="margin-top:15px;padding-top:13px;border-top:1px solid var(--rule);display:flex;align-items:baseline;gap:9px;flex-wrap:wrap">
+            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)">{{ L.screenCount }}</span>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ screen.names }}" as="n" hint-placeholder-count="6">
+              <div onClick="{{ n.go }}" style="cursor:pointer;display:inline-flex;align-items:baseline;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid var(--rule);font-size:12.5px" style-hover="background:var(--sunk)">
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-weight:600">{{ n.ticker }}</span><span style="color:var(--faint);font-size:11.5px">{{ n.pe }}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ screen.more }}"><div style="align-self:center;font-size:12px;color:var(--faint)">{{ screen.more }}</div></sc-if>
+          </div>
+          <div style="margin-top:14px;font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ L.screenNoBack }}</div>
+        </section>
+      </sc-if>
 
       <!-- An index says what the market did on average; this says how widely,
            which is the question an average cannot answer. Published in
@@ -516,6 +547,27 @@
             <div onClick="{{ s.go }}" style="cursor:pointer;font-size:12.5px;padding:7px 13px;border-radius:999px;color:{{ s.color }};background:{{ s.bg }};border:1px solid {{ s.border }};box-shadow:{{ s.sh }};transition:background .15s,color .15s,border-color .15s" style-hover="border-color:var(--accent)">{{ s.label }}</div>
           </sc-for>
         </div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.ratioFilter }}</span>
+          <sc-for list="{{ ratio.metrics }}" as="m" hint-placeholder-count="7">
+            <div onClick="{{ m.go }}" style="cursor:pointer;font-size:12px;padding:5px 11px;border-radius:999px;color:{{ m.color }};background:{{ m.bg }};border:1px solid {{ m.border }}">{{ m.label }}</div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ ratio.hasMetric }}">
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+            <sc-for list="{{ ratio.ops }}" as="o" hint-placeholder-count="3">
+              <div onClick="{{ o.go }}" style="cursor:pointer;font-size:12px;padding:5px 11px;border-radius:9px;color:{{ o.color }};background:{{ o.bg }};border:1px solid var(--rule)">{{ o.label }}</div>
+            </sc-for>
+            <input inputmode="decimal" autocomplete="off" aria-label="{{ L.ratioValue }}" value="{{ ratio.a }}" onChange="{{ ratio.onA }}" placeholder="{{ L.ratioValue }}" style="width:84px;padding:6px 9px;border-radius:9px;border:1px solid var(--rule);background:transparent;color:var(--ink);font-family:inherit;font-size:13px;outline:none">
+            <sc-if value="{{ ratio.showB }}">
+              <span style="font-size:12px;color:var(--faint)">{{ L.ratioAnd }}</span>
+              <input inputmode="decimal" autocomplete="off" aria-label="{{ L.ratioValue }}" value="{{ ratio.b }}" onChange="{{ ratio.onB }}" placeholder="{{ L.ratioValue }}" style="width:84px;padding:6px 9px;border-radius:9px;border:1px solid var(--rule);background:transparent;color:var(--ink);font-family:inherit;font-size:13px;outline:none">
+            </sc-if>
+            <sc-if value="{{ ratio.unit }}"><span style="font-size:12px;color:var(--faint)">{{ ratio.unit }}</span></sc-if>
+            <div onClick="{{ ratio.clear }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)">{{ L.ratioClear }}</div>
+          </div>
+        </sc-if>
+
       </div>
 
       <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
@@ -1510,6 +1562,27 @@
           <input id="om-filed-search" name="filed-search" autocomplete="off" aria-label="{{ L.filedSearch }}" value="{{ filedQ }}" onChange="{{ onFiledQuery }}" placeholder="{{ L.filedSearch }}" style="flex:1;min-width:0;padding:7px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:14.5px;outline:none">
           <sc-if value="{{ hasFiledFilter }}">
             <div onClick="{{ clearFiled }}" style="cursor:pointer;flex:none;padding:6px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)" style-hover="border-color:var(--accent)">{{ L.filedClear }}</div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+          <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.ratioFilter }}</span>
+          <sc-for list="{{ filedRatio.metrics }}" as="m" hint-placeholder-count="7">
+            <div onClick="{{ m.go }}" style="cursor:pointer;font-size:12px;padding:5px 11px;border-radius:999px;color:{{ m.color }};background:{{ m.bg }};border:1px solid {{ m.border }}">{{ m.label }}</div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ filedRatio.hasMetric }}">
+          <div style="margin-top:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+            <sc-for list="{{ filedRatio.ops }}" as="o" hint-placeholder-count="3">
+              <div onClick="{{ o.go }}" style="cursor:pointer;font-size:12px;padding:5px 11px;border-radius:9px;color:{{ o.color }};background:{{ o.bg }};border:1px solid var(--rule)">{{ o.label }}</div>
+            </sc-for>
+            <input inputmode="decimal" autocomplete="off" aria-label="{{ L.ratioValue }}" value="{{ filedRatio.a }}" onChange="{{ filedRatio.onA }}" placeholder="{{ L.ratioValue }}" style="width:84px;padding:6px 9px;border-radius:9px;border:1px solid var(--rule);background:transparent;color:var(--ink);font-family:inherit;font-size:13px;outline:none">
+            <sc-if value="{{ filedRatio.showB }}">
+              <span style="font-size:12px;color:var(--faint)">{{ L.ratioAnd }}</span>
+              <input inputmode="decimal" autocomplete="off" aria-label="{{ L.ratioValue }}" value="{{ filedRatio.b }}" onChange="{{ filedRatio.onB }}" placeholder="{{ L.ratioValue }}" style="width:84px;padding:6px 9px;border-radius:9px;border:1px solid var(--rule);background:transparent;color:var(--ink);font-family:inherit;font-size:13px;outline:none">
+            </sc-if>
+            <sc-if value="{{ filedRatio.unit }}"><span style="font-size:12px;color:var(--faint)">{{ filedRatio.unit }}</span></sc-if>
+            <div onClick="{{ filedRatio.clear }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)">{{ L.ratioClear }}</div>
+          </div>
+        </sc-if>
+
           </sc-if>
         </div>
         <sc-if value="{{ filedFilterNote }}">
