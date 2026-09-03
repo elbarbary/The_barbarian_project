@@ -41,11 +41,20 @@ LAST_MONTH = (_TODAY.replace(day=1) - datetime.timedelta(days=1)).strftime("%Y-%
 # in a day and has blocked us outright once before — so the archive is built by
 # asking for a little every run rather than a lot once.
 #
-# **The limits are per run, and this now runs six times a trading day** (three
-# Cairo times, each scheduled at both UTC offsets for DST). Five companies and
-# eight filings a run is the same daily footprint the old fifteen-and-twenty-
-# five had across two runs, spread thinner — which is the shape this host
-# tolerates. Raise the cadence again and these come down again.
+# **The limits are per run, and this now runs four times a trading day** (two
+# Cairo times — one before the open, one after the close — each scheduled at
+# both UTC offsets for DST). It was six until the session ticks moved to
+# `publish-prices.yml`, which rebuilds prices in three minutes and asks this
+# host for nothing at all.
+#
+# The limits are deliberately NOT raised to compensate. Four runs instead of
+# six is about a third less archive a day, and the archive is cumulative, so
+# that is a slower fill rather than a hole. Raising the per-run numbers to
+# claw it back would push more requests into each burst at a host that
+# "stopped answering after roughly forty requests in a day and has blocked us
+# outright once before" — the opposite of the "a little every run" shape these
+# limits exist to hold. If the fill turns out too slow, raise them then, on
+# their own, where the effect can be attributed.
 STEPS = [
     ("Cash or Trash", "build_cash_or_trash_api.py", True),
     # Before Market, which reads both stores when it starts. Each reads the
@@ -87,7 +96,8 @@ STEPS = [
     #
     # It is here, above the readers, rather than at the end with the other
     # EGX steps, because a filing harvested after the calendar is built does
-    # not reach a reader until the next run four hours later.
+    # not reach a reader until the next run — which, now that this runs twice a
+    # trading day rather than six times, is the next session.
     ("New filings", "harvest_egx_beta.py", False, ["--filings", "--from", LAST_MONTH]),
     # The alarm on that harvest. It is best-effort — the exchange resets the
     # runner's IP and the step is skipped — so on a trading day, once the

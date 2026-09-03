@@ -1,0 +1,202 @@
+name: Publish prices
+
+# The trading session, at the speed a trading session moves.
+#
+# `publish-app-data.yml` rebuilds everything — thirty-nine steps, 27 to 115
+# minutes — and it used to carry the session too, four Cairo times a day. It
+# could not. Seven scheduled runs needed 376.6 minutes of serial work inside a
+# 375-minute window, so the queue never drained and each new arrival cancelled
+# the one waiting; and since 27 August GitHub has been delivering this
+# repository's cron events 3.4 to 7.8 hours late, so every one of those Cairo
+# times landed after the 14:30 close. In the five trading days to 3 September
+# 2026, not one scheduled publish reached a reader during a session.
+#
+# This job does the one thing a reader notices intraday: the prices. It runs
+# `build_market_api.py --quotes-only`, which writes `market.json` and stops.
+# That is the only published document a price comes out of — the market table,
+# the heat map's colour and a company screen's header all read it — so it is
+# the whole of the intraday job and about three minutes of work.
+#
+# What it deliberately does NOT touch: `companies.json` and `companies/`. The
+# full build rewrites that directory from scratch and roughly fourteen later
+# steps put the filed financials back into it; running that half on this
+# cadence would strip them, which is how 11,336 filed net-profit figures once
+# became 4,062 with every file still looking full. Those documents change once
+# a day and belong to the daily build.
+
+on:
+  # Six separate expressions, not `0 7-12 * * 0-4`, and that is not a style
+  # choice. In the current drift this repository's workflows are delivered at
+  # roughly one run per cron EXPRESSION per day: `publish-app-data` declares
+  # seven expressions and gets all seven, while `publish-live-data` declares
+  # one `*/15` and gets about seven of its ninety-six ticks. Six lines is six
+  # chances; one line with a range would be one.
+  #
+  # 07:00-12:00 UTC covers the 10:00-14:30 Cairo session in summer (UTC+3) and
+  # in winter (UTC+2) alike, an hour either side.
+  #
+  # Say plainly what the cron can and cannot buy: while GitHub is hours late
+  # these are a floor, not a schedule. `workflow_dispatch` is dispatched on
+  # demand and arrives at the second it is asked for — every dispatch in this
+  # repository's history started immediately — so anything that must land at a
+  # wall-clock time should call that, from the machine that already runs the
+  # local EGX harvest, and let these stand as the fallback.
+  schedule:
+    - cron: '0 7 * * 0-4'
+    - cron: '0 8 * * 0-4'
+    - cron: '0 9 * * 0-4'
+    - cron: '0 10 * * 0-4'
+    - cron: '0 11 * * 0-4'
+    - cron: '0 12 * * 0-4'
+
+  push:
+    branches: [main]
+    # Only what this job actually runs.
+    paths:
+      - 'scripts/build_market_api.py'
+      - 'scripts/egx_scan.mjs'
+      - 'scripts/build_fixtures.py'
+      - '.github/workflows/publish-prices.yml'
+
+  workflow_dispatch:
+
+concurrency:
+  # Its own group, which is the point of the split. Sharing `publish-app-data`
+  # would put a three-minute job behind a forty-minute one and, worse, make
+  # each price tick cancel whatever was pending there.
+  group: publish-prices
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      # A full checkout, no sparse or partial. `build_fixtures.py` hashes the
+      # real published bytes — including `companies/` and `prices/`, which have
+      # no manifest counter of their own — into `data_version`. Hashing a
+      # partial tree would publish a fingerprint describing a tree that never
+      # existed and invalidate every company document on every device.
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # No Scrapling, no Google credentials: the price path calls neither. The
+      # daily build needs both and takes the minutes they cost.
+      - name: Fetch the market scan
+        # Best-effort. With no scan on disk `build_market_api.py` prints why and
+        # leaves the published market data exactly as it is, which is the right
+        # answer for a job that runs again in an hour.
+        continue-on-error: true
+        run: |
+          mkdir -p ../work
+          npm install ws --no-save --silent
+          node scripts/egx_scan.mjs ../work
+
+      - name: Test the parsers
+        # The same reasoning as the daily build: a regression here publishes a
+        # wrong number about a real company rather than crashing. These are
+        # seconds.
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+
+      - name: Build the quotes
+        # Plain `run:`, no `|| true`. Every refusal this script makes now
+        # happens BEFORE it writes anything — a short scan, a capture older
+        # than the published one, or a quote whose change and change_percent
+        # disagree in sign — so a non-zero exit means nothing was written and
+        # the last good prices are still live. Failing the run is then the
+        # correct, visible outcome rather than something to swallow.
+        run: |
+          python3 scripts/build_market_api.py --quotes-only
+
+      - name: Refresh the manifest
+        # `market.json` has its own manifest counter, and moving it is what
+        # tells an installed app to fetch the new prices. Without this the JSON
+        # sits on the CDN and every phone keeps serving what it already had.
+        run: |
+          python3 scripts/build_fixtures.py
+
+      - name: Commit if the prices moved
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          # Four paths, and no `git add -A`. This job owns `market.json` and
+          # the manifest; anything else in the tree belongs to another workflow
+          # and staging it here is how one job silently publishes another's
+          # half-finished work.
+          git add public/data/v1/market.json app/assets/fixtures/market.json \
+                  public/data/v1/manifest.json app/assets/fixtures/manifest.json
+          if git diff --cached --quiet; then
+            echo 'prices unchanged since the last publish'
+            exit 0
+          fi
+          # The fingerprint has to move when the content does, or an installed
+          # app never drops its cache — the failure the whole update path
+          # exists to prevent. `market.json` changed, so `versions.market` must
+          # differ from what is published.
+          if git diff --cached --quiet -- public/data/v1/manifest.json; then
+            echo '::error::market.json changed but the manifest did not move.'
+            echo 'Installed apps would keep serving the old prices forever.'
+            exit 1
+          fi
+          git commit -m 'data: session prices'
+
+          # This races the daily build and the fifteen-minute news job. These
+          # four files are snapshots rather than accumulators and this job just
+          # regenerated them from the current scan, so on a collision ours is
+          # the newer answer and wins. A conflict anywhere else is not
+          # something to resolve automatically, so it stops.
+          resolve_ours () {
+            local unmerged
+            unmerged=$(git diff --name-only --diff-filter=U)
+            [ -z "$unmerged" ] && return 0
+            if echo "$unmerged" | grep -qv -e '^public/data/v1/market\.json$' \
+                                           -e '^public/data/v1/manifest\.json$' \
+                                           -e '^app/assets/fixtures/market\.json$' \
+                                           -e '^app/assets/fixtures/manifest\.json$'; then
+              echo "conflict outside this job's four files:"; echo "$unmerged"
+              git rebase --abort || true
+              return 1
+            fi
+            # During a rebase "theirs" is the commit being replayed, which is
+            # this build's output.
+            echo "$unmerged" | while read -r f; do
+              git checkout --theirs -- "$f" 2>/dev/null || git checkout --ours -- "$f" 2>/dev/null || true
+              git add "$f"
+            done
+            GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
+            # The fingerprint has to describe the bytes that actually ended up
+            # here, so it is recomputed after any merge and folded in.
+            python3 scripts/build_fixtures.py >/dev/null 2>&1 || true
+            git add public/data/v1/market.json app/assets/fixtures/market.json \
+                    public/data/v1/manifest.json app/assets/fixtures/manifest.json
+            git diff --cached --quiet || git commit --amend --no-edit >/dev/null
+            return 0
+          }
+
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main; then
+              git push origin main && exit 0
+            else
+              resolve_ours || exit 1
+              git push origin main && exit 0
+            fi
+            echo "push race, attempt ${attempt} — retrying"
+          done
+          echo '::error::could not push after three attempts'
+          exit 1
+
+      # No deploy step. Cloudflare deploys this repository from its own Git
+      # integration — every commit to main is live within one to three minutes,
+      # verified against the deployment log. The `wrangler deploy` step the
+      # other two workflows carry has never once run: there is no
+      # CLOUDFLARE_API_TOKEN secret, so it exits 0 in zero seconds every time.

@@ -31,39 +31,52 @@ on:
       - 'scripts/**'
       - '.github/workflows/publish-app-data.yml'
 
-  # Four times a trading day, around the session rather than after it.
+  # Twice a trading day now: once before the open, once after the close.
   #
-  # This used to run once, an hour after the close, on the reasoning that
-  # everything it touches changes once a day. That stopped being true: the
-  # filings feed, the company snapshots and the crossings all move while the
-  # market is open, and a reader looking at the app at noon was reading
-  # yesterday afternoon.
+  # It used to ask for four Cairo times — 09:30, 10:30, 12:30, 14:45 — on the
+  # reasoning that a reader looking at the app at noon should not be reading
+  # yesterday afternoon. That reasoning is still right. This workflow is simply
+  # the wrong instrument for it, for two measured reasons.
   #
-  #   09:30 Cairo — before the 10:00 open, so the morning is current
-  #   10:30 Cairo — early in the session
-  #   12:30 Cairo — mid-session
-  #   14:45 Cairo — just after the 14:30 close
+  # It does not fit. A successful run takes 27-115 minutes (p50 41, p90 75).
+  # On 2 September 2026 the seven scheduled runs needed 376.6 minutes of
+  # strictly serial work inside a 375-minute cron window — 100.4% of a
+  # single-slot concurrency group, before the ten-odd pushes a day that enter
+  # the same group. At that load the queue cannot drain, and because
+  # `cancel-in-progress: false` keeps exactly ONE run pending, each new arrival
+  # cancels the one waiting: 33 of 100 runs were cancelled in the week to
+  # 3 September, 32 of them before they ever allocated a runner.
   #
-  # **Each time is scheduled twice** because GitHub cron is UTC and Cairo is
-  # UTC+2 in winter and UTC+3 in summer. Both fire year-round; the one at the
+  # And it does not arrive. Since 27 August GitHub has been creating this
+  # repository's scheduled runs 3.4 to 7.8 hours after their cron time — a
+  # platform-side regression, reproduced on a fully idle repository and on a
+  # brand-new one-cron workflow, and acknowledged by GitHub staff. Every one of
+  # the four Cairo times was landing after the 14:30 close. Not one scheduled
+  # publish reached readers during a trading session in the five days to
+  # 3 September; every in-session refresh in that window came from a human
+  # pushing code.
+  #
+  # So the session belongs to `publish-prices.yml`, which rebuilds the one
+  # document a price comes out of in about three minutes, in its own
+  # concurrency group where it can never queue behind this. What is left here
+  # is the slow, cumulative work — the harvests, the filed financials, the
+  # briefs — which only needs to be current daily, and which is exactly what
+  # this is good at.
+  #
+  # Two Cairo times, four legs, because GitHub cron is UTC and Cairo is UTC+3
+  # in summer and UTC+2 in winter. Both legs fire year-round; the one at the
   # wrong hour is an ordinary run an hour early or late, and the build is a
-  # no-op when nothing changed. That is the convention the two crons here used
-  # before, kept rather than replaced with a timezone the runner does not have.
+  # no-op when nothing changed. In summer that reads 09:30/10:30 before the
+  # open and 14:45/15:45 after the close; in winter 08:30/09:30 and
+  # 13:45/14:45.
   #
-  # 10:30's summer tick (07:30 UTC) is the same minute as 09:30's winter tick,
-  # so that line is written once and does double duty rather than duplicated.
-  # On a market holiday every run is a no-op (nothing it reads has changed), so
-  # the extra runs cost runner minutes but never publish anything stale.
+  # Four runs at ~54 minutes is 216 minutes in the same 375-minute window —
+  # 58% utilisation, with room for the pushes that share the group.
   schedule:
-    # 09:30 Cairo
+    # 09:30 Cairo — before the 10:00 open, so the morning is current
     - cron: '30 6 * * 0-4'      # summer
-    - cron: '30 7 * * 0-4'      # winter — also 10:30 summer
-    # 10:30 Cairo
-    - cron: '30 8 * * 0-4'      # winter
-    # 12:30 Cairo
-    - cron: '30 9 * * 0-4'      # summer
-    - cron: '30 10 * * 0-4'     # winter
-    # 14:45 Cairo
+    - cron: '30 7 * * 0-4'      # winter
+    # 14:45 Cairo — just after the 14:30 close
     - cron: '45 11 * * 0-4'     # summer
     - cron: '45 12 * * 0-4'     # winter
 
@@ -86,7 +99,7 @@ concurrency:
 # queue was identical to today's, because the store was thrown away with the
 # machine — so `harvest_names_mubasher --limit 12`, `harvest_company_filings
 # --limit 5`, `enrich_disclosures --limit 8` and `build_financials_api` spent
-# their whole request budget six times a trading day and advanced nothing.
+# their whole request budget on every run of the day and advanced nothing.
 # `translations.py` says its cache "is committed … the file is the review
 # surface"; CI had never written a line into it.
 #
@@ -335,7 +348,7 @@ jobs:
           git config user.email 'noreply@thebarbarianproject.com'
           git commit -m 'data: rebuild published app data' \
                      -m 'Generated by .github/workflows/publish-app-data.yml'
-          # This races the 15-minute job, six times a trading day.
+          # This races the 15-minute job and the price job, four times a day.
           # These outputs are generated, and this job just generated them from
           # the current sources — so on a collision with the fifteen-minute
           # job, ours is the newer answer and wins. A conflict anywhere else
