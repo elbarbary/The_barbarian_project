@@ -172,6 +172,20 @@ STEPS = [
     # The review sheet, after both: it reads the merged financials, the share
     # count above, and the market scan. No network of its own.
     ("Review sheet", "build_review.py", True),
+    # Immediately after it, because it reads the documents that step just
+    # wrote. The review sheet's ratios — price-to-book, the two returns,
+    # debt-to-equity, dividend yield, cash conversion — live one document per
+    # company, which is the right shape for the company screen and the wrong
+    # one for the market table: filtering 284 rows out of them means fetching
+    # 259 documents to draw one screen. This copies them onto the row under a
+    # `ratios` key, so the table can filter on what was already computed.
+    #
+    # No network, no arithmetic, and it only ever adds a key to a row that
+    # already exists. It runs here rather than inside build_market_api for the
+    # same reason Company facts does: that build needs the daily scan, which
+    # CI does not have, so a ratio folded in there would reach the row on one
+    # laptop and nowhere else.
+    ("Company ratios", "apply_company_ratios.py", True),
     # The natural-language read of each company's metric pattern. Gated by a
     # budget and vetted like the briefs; a read generated today reaches the app
     # on the next build, when build_review merges the store back in.
