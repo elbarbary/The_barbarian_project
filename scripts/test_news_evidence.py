@@ -284,5 +284,17 @@ class EvidenceBasisTest(unittest.TestCase):
                 )
 
 
+    def test_with_no_session_it_says_nothing_rather_than_apologising(self):
+        """The block adds a measured fact; with no fact there is no block.
+
+        Apologising filled 46 of 400 cards with "We hold no completed
+        session's trading figures", displacing the sentences that were there.
+        """
+        basis = news.Basis(None, {}, {})
+        out = news.triage({"tickers": ["COMI"], "headline": "h"}, basis)
+        self.assertEqual(out["because"], "")
+        self.assertEqual(out["because_ar"], "")
+        self.assertIsNone(out["evidence"])
+
 if __name__ == "__main__":
     unittest.main()
