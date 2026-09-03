@@ -7,12 +7,12 @@
  "sector": "Paper & Packaging",
  "sector_ar": "ورق ومواد تعبئة و تغليف",
  "market": {
-  "last_close": 0.372,
+  "last_close": 0.375,
   "date": "2026-09-03",
   "open": 0.372,
   "high": 0.377,
   "low": 0.371,
-  "volume": 15192584
+  "volume": 25153591
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 2291442606,
   "free_float": 0.205,
   "float_shares": 469745734.22999996,
-  "perf_1w": 1.0869565217391315,
-  "perf_1m": -2.872062663185381,
-  "perf_3m": 27.83505154639176,
-  "avg_volume_30d": 75299349.09999998,
-  "relative_volume_10d": 0.16247940144487313,
+  "perf_1w": 1.90217391304348,
+  "perf_1m": -2.0887728459530046,
+  "perf_3m": 28.865979381443307,
+  "avg_volume_30d": 75631382.66666666,
+  "relative_volume_10d": 0.2690089065737038,
   "median_volume_20d": 46636860.5,
   "rv20": 0.4961635442848903,
   "normal_value_30d": 22040735.442,
   "five_session_change": 1.0869565217391353,
   "history_bars": 120,
-  "market_cap": 854708092.038,
+  "market_cap": 859290977.25,
   "market_cap_source": "EGX",
-  "trades": 289,
-  "turnover": 7016646,
+  "trades": 315,
+  "turnover": 9394369,
   "shares_outstanding_source": "EGX"
  },
  "financials": {
