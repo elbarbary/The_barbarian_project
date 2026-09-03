@@ -405,6 +405,13 @@ export async function live() {
            && c.median_volume_20d > 0)
         ? q.volume / c.median_volume_20d : null,
       medianVolume: c.median_volume_20d ?? null,
+      // The thirty-day average the screen's liquidity test reads, and the
+      // filed ratios `apply_company_ratios` folds onto the row. Both are
+      // carried straight through: a ratio a company never published is absent
+      // here too, and the filter that reads it treats absent as "cannot be
+      // tested" rather than as a pass.
+      avgVolume: c.avg_volume_30d ?? null,
+      ratios: c.ratios || null,
     };
   });
   return {
