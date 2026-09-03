@@ -412,7 +412,10 @@ def history_union() -> dict[str, list[dict]]:
     # Series fetched separately for the tail the scan could not reach — see
     # scripts/history_sink.py. Merged by date, so a scan bar and a fetched bar
     # for the same session collapse rather than duplicate.
-    for path in sorted((REPO / "data-source" / "prices").glob("*.json")):
+    # `PRICES`, not the path spelled out again: this read and the write in
+    # `persist_history` are the same store, and spelling it twice is how they
+    # would quietly stop being the same store.
+    for path in sorted(PRICES.glob("*.json")):
         try:
             doc = json.loads(path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
@@ -747,9 +750,37 @@ def previous_close(
     return None
 
 
-def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
+def build(scan_path: pathlib.Path, write_fixtures: bool,
+          quotes_only: bool = False) -> int:
     scan = json.loads(scan_path.read_text(encoding="utf-8"))
     records = scan["records"]
+
+    # A short scan is not a market that shrank.
+    #
+    # This build rewrites `companies/` from scratch and rebuilds `stocks` from
+    # the scan's records alone, so a scan that came back with two thirds of the
+    # exchange deletes the rest: 282 companies became 249 that way, and the
+    # documents looked perfectly well-formed afterwards.
+    #
+    # The scanner already knows. `egx_scan.mjs` records how many listings it was
+    # told exist and how many it actually merged, prints a warning when they
+    # differ — and writes the file anyway. This makes that warning binding.
+    # Checked against all 37 archived scans: every one reports the two equal, so
+    # there is no threshold to tune and no false refusal to absorb.
+    #
+    # It is checked here, before `history_union` and before anything is written,
+    # so a refusal leaves every published document exactly as it was (spec §21).
+    # It guards the full build too, not only `--quotes-only`: the full build is
+    # where the deletion actually happened and is still where it would happen.
+    listed = scan.get("scannerTotal")
+    merged = scan.get("scannerReturned", len(records))
+    if isinstance(listed, int) and listed and merged < listed:
+        print(f"error: the scan carries {merged} of the {listed} listings the")
+        print("       scanner itself reported. That is a short scan, not a")
+        print("       market that shrank — published market data is left as it")
+        print(f"       is. Re-run the scan. ({scan_path.name})")
+        return 1
+
     # Whether this scan knows about broker scope at all — see `tradable_flag`.
     scan_has_scope = any("thndrScope" in r for r in records)
     session = session_date(scan.get("asOf")) or scan["asOf"][:10]
@@ -763,7 +794,13 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     union = history_union()
     # Make the union durable before anything is built from it. A scan is
     # ephemeral and this is the only moment its bars exist anywhere.
-    kept = persist_history(union)
+    #
+    # Except under `--quotes-only`, which owns two files and no stores. The
+    # union is still read — `previous_close` falls back to it for names the
+    # scan did not price — but nothing is written back, so the fast path can
+    # never race the full build over `data-source/prices`. The cost is that a
+    # bar seen only by a fast run is discarded; the full build refetches it.
+    kept = 0 if quotes_only else persist_history(union)
     if kept:
         print(f"   price history: {kept} series written to data-source/prices")
     companies, stocks, details = [], {}, {}
@@ -1019,7 +1056,86 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
         "stocks": stocks,
     }
 
+    # A quote carries the move twice — as pounds and as a percentage — and the
+    # app reads whichever the screen needs. If the two disagree in sign the same
+    # company shows as rising on one screen and falling on another, which is how
+    # the history[-2] bug stayed invisible until a reviewer diffed two screens.
+    # Refuse to publish that.
+    #
+    # This used to sit at the very end, *after* the write — so the run it
+    # refused had already published the contradiction it was refusing. Checked
+    # here, a refusal leaves the previous documents standing, which is what
+    # spec §21 and this file's own docstring say happens when a step fails.
+    disagree = [
+        t
+        for t, q in stocks.items()
+        if q.get("change") is not None
+        and q.get("change_percent") is not None
+        and q["change"] * q["change_percent"] < 0
+    ]
+    if disagree:
+        print(f"\nerror: {len(disagree)} tickers have change and change_percent")
+        print("       disagreeing in sign — the same move in two directions.")
+        for t in sorted(disagree)[:8]:
+            print(f"       {t}: {stocks[t]}")
+        return 1
+    print("checked  change and change_percent agree in sign for every quote")
+
+    # Never rewind the published capture.
+    #
+    # Two workflows now write market.json — the full rebuild and the fast price
+    # job — and they can be in flight together. Whichever commits second wins
+    # the file, so without this a slow build that started before the open could
+    # land after a fast run and put a pre-open snapshot back on every screen.
+    # Times only ever move forward here; an equal capture is the same scan and
+    # is allowed through, because a re-run of the same scan is a no-op diff.
+    published = API / "market.json"
+    if published.exists():
+        try:
+            was = json.loads(published.read_text(encoding="utf-8")).get("captured_at")
+        except (ValueError, OSError):
+            was = None
+        now = snapshot.get("captured_at")
+        if was and now and str(now) < str(was):
+            print(f"\nerror: this scan was captured at {now}, but the published")
+            print(f"       market.json already carries {was}. Publishing would")
+            print("       move every price backwards — left as published.")
+            return 1
+
     targets = [API] + ([FIXTURES] if write_fixtures else [])
+
+    # Prices, and nothing else.
+    #
+    # `market.json` is the only published document a reader's price comes out
+    # of — the market table, the heat map's colour and a company screen's header
+    # all read it through `livePricesProvider`. So the fast job that runs
+    # through the session writes that, and stops.
+    #
+    # It must not touch the other two. The loop below rebuilds `companies/` from
+    # scratch — rmtree, then rewrite — and roughly fourteen later steps in
+    # build_all.py exist to put the filed financials back into those documents
+    # afterwards. Running that half here strips them: it is how 11,336 filed
+    # net-profit figures once became 4,062 while every file still looked full.
+    # `companies.json` carries post-Market enrichment too (the trailing P/E, the
+    # ratios, the corrected sector), so it is left alone for the same reason.
+    #
+    # The cost, stated rather than hidden: `market.json` has its own manifest
+    # counter, but its digest also folds into `data_version`, and `data_version`
+    # is what guards every document with no counter of its own. So each fast
+    # publish marks the per-company documents stale on every device even though
+    # this did not change one of them. They are refetched lazily, one company at
+    # a time as a reader opens a screen, not eagerly — but it is real traffic
+    # for no new bytes. Splitting `market` out of that combined digest would fix
+    # it and would also change the hinge of the whole update path, so it is a
+    # deliberate change on its own, not a rider on this one.
+    if quotes_only:
+        for root in targets:
+            write(root / "market.json", snapshot)
+        print(f"scan     {scan_path.name}  ({session})")
+        print(f"quotes   {len(stocks)} written, is_close={snapshot['is_close']}")
+        print("kept     companies.json and companies/ exactly as published")
+        return 0
+
     for root in targets:
         write(root / "companies.json", directory)
         write(root / "market.json", snapshot)
@@ -1044,25 +1160,6 @@ def build(scan_path: pathlib.Path, write_fixtures: bool) -> int:
     sectors = sorted({c['sector'] for c in companies if c['sector']})
     print(f"sectors  {len(sectors)}: {', '.join(sectors[:8])}…")
 
-    # A quote carries the move twice — as pounds and as a percentage — and the
-    # app reads whichever the screen needs. If the two disagree in sign the same
-    # company shows as rising on one screen and falling on another, which is how
-    # the history[-2] bug stayed invisible until a reviewer diffed two screens.
-    # Refuse to publish that.
-    disagree = [
-        t
-        for t, q in stocks.items()
-        if q.get("change") is not None
-        and q.get("change_percent") is not None
-        and q["change"] * q["change_percent"] < 0
-    ]
-    if disagree:
-        print(f"\nerror: {len(disagree)} tickers have change and change_percent")
-        print("       disagreeing in sign — the same move in two directions.")
-        for t in sorted(disagree)[:8]:
-            print(f"       {t}: {stocks[t]}")
-        return 1
-    print("checked  change and change_percent agree in sign for every quote")
     return 0
 
 
@@ -1070,7 +1167,18 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--scan", type=pathlib.Path, default=None)
     ap.add_argument("--no-fixtures", action="store_true")
+    # The fast session job: refresh the prices and leave every enriched
+    # document as published. See the block above the write for what that costs.
+    ap.add_argument("--quotes-only", action="store_true")
     args = ap.parse_args()
+    if args.quotes_only and args.no_fixtures:
+        sys.exit(
+            "error: --quotes-only needs the fixture copy too. build_fixtures.py\n"
+            "       refuses to write a manifest while a bundled fixture differs\n"
+            "       from what is published, and with no manifest the fingerprint\n"
+            "       never moves — so no installed app would ever ask for the\n"
+            "       prices this just published."
+        )
 
     scan = args.scan or newest_scan()
     if scan is None:
@@ -1086,7 +1194,7 @@ def main() -> int:
         print(f"  {published.relative_to(REPO)} kept as published")
         return 0
 
-    return build(scan, not args.no_fixtures)
+    return build(scan, not args.no_fixtures, quotes_only=args.quotes_only)
 
 
 if __name__ == "__main__":
