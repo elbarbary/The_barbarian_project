@@ -303,3 +303,59 @@ class TrailingPE(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ImpossibleYield(unittest.TestCase):
+    """A dividend yield the vendor states and no company could pay.
+
+    `dividend_yield` is the one metric on this sheet that is not computed from
+    a filing — it arrives from the stock-info harvest as stated. Of 80
+    companies publishing one the median was 2.98% and the 95th percentile
+    11.86%, and then nothing at all until DCCC at 104.50% and POCO at 162.20%.
+    """
+
+    DOC = {"financials": {"annual": []}}
+
+    def setUp(self):
+        r.REFUSED_YIELDS.clear()
+        self.addCleanup(r.REFUSED_YIELDS.clear)
+
+    def yield_of(self, value):
+        rows = r.metrics_for("T", self.DOC, {}, {"dividend_yield": value})
+        return next((m for m in rows if m["key"] == "dividend_yield"), None)
+
+    def test_an_ordinary_yield_is_published_untouched(self):
+        row = self.yield_of(4.32)
+        self.assertIsNotNone(row)
+        self.assertEqual(row["value"], 4.32)
+        self.assertEqual(row["unit"], "percent")
+        self.assertEqual(r.REFUSED_YIELDS, [])
+
+    def test_paying_out_more_than_the_company_is_worth_is_refused(self):
+        self.assertIsNone(self.yield_of(162.2))
+        self.assertEqual(r.REFUSED_YIELDS, [("T", 162.2)])
+
+    def test_the_refusal_is_counted_and_named_rather_than_silent(self):
+        """A figure dropped without a word is the failure mode this repo keeps
+        finding; the ticker and the figure both survive the refusal."""
+        self.yield_of(104.5)
+        self.assertEqual([t for t, _ in r.REFUSED_YIELDS], ["T"])
+        self.assertEqual([round(v, 2) for _, v in r.REFUSED_YIELDS], [104.5])
+
+    def test_the_line_is_where_it_means_something(self):
+        """100% is a payout of the whole market value — the last figure that
+        describes a company rather than an arithmetic error."""
+        self.assertIsNotNone(self.yield_of(100.0))
+        self.assertIsNone(self.yield_of(100.01))
+
+    def test_a_high_but_possible_yield_still_reaches_a_reader(self):
+        # CIEB publishes 13.19% and Egyptian rates make that ordinary.
+        self.assertIsNotNone(self.yield_of(13.19))
+        self.assertEqual(r.REFUSED_YIELDS, [])
+
+    def test_nothing_stated_is_still_nothing(self):
+        """A refusal must not turn into an absence that looks like a zero."""
+        self.assertIsNone(self.yield_of(0))
+        rows = r.metrics_for("T", self.DOC, {}, {})
+        self.assertIsNone(next((m for m in rows if m["key"] == "dividend_yield"), None))
+        self.assertEqual(r.REFUSED_YIELDS, [], "nothing stated is not a refusal")

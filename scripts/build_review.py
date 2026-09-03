@@ -319,6 +319,34 @@ def plabel(row: dict) -> str:
     return key[2:] if len(key) >= 4 else key
 
 
+# A yield above this is not a yield.
+#
+# `dividend_yield` is the one metric here that is not computed from a filing —
+# it arrives from the stock-info harvest as the vendor states it, and is
+# carried verbatim like every other figure. Verbatim is right until the figure
+# cannot be true: a dividend yield of 100% says a company handed its holders
+# its entire market value in a year and remained a going concern, and 162.2%
+# says it handed over half as much again.
+#
+# The published distribution says the same thing without any judgement about
+# what a good yield is. Of 80 companies stating one: the median is 2.98%, the
+# 90th percentile 7.25%, the 95th 11.86% — and then nothing whatsoever until
+# DCCC at 104.50% and POCO at 162.20%. A gap that wide, with two points beyond
+# it, is the shape a units error makes, not the shape a market makes. Both
+# divide by a hundred into ordinary yields (1.045% and 1.622%), which is the
+# tell — but rescaling them would be inventing the fix, so they are refused
+# and counted instead, the way merge_egx_financials refuses a filing whose
+# figure is a thousandfold out rather than quietly dividing it.
+#
+# 100 is the line because it MEANS something: everything at or below it is a
+# payout a company could actually make. Anything above is arithmetic that
+# describes no company, whatever the vendor believes.
+IMPOSSIBLE_YIELD = 100.0
+
+# Named, so a refusal is inspectable rather than a number in a summary.
+REFUSED_YIELDS: list[tuple[str, float]] = []
+
+
 def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
                 history: list[tuple[str, float]] | None = None,
                 sector: str | None = None) -> list[dict]:
@@ -449,14 +477,17 @@ def metrics_for(ticker: str, doc: dict, summary: dict, info: dict,
 
     # --- cash back to the holder ----------------------------------------
     if (y := info.get("dividend_yield")) is not None and y > 0:
-        out.append({
-            "key": "dividend_yield",
-            "value": round(y, 3),
-            "unit": "percent",
-            "direction": "unknown",
-            "points": 1,
-            "series": [],
-        })
+        if y > IMPOSSIBLE_YIELD:
+            REFUSED_YIELDS.append((ticker, y))
+        else:
+            out.append({
+                "key": "dividend_yield",
+                "value": round(y, 3),
+                "unit": "percent",
+                "direction": "unknown",
+                "points": 1,
+                "series": [],
+            })
 
     attach_causes(out)
     return out
@@ -654,6 +685,11 @@ def main() -> int:
     for key, n in counts.most_common():
         print(f"   {key:<16} {n}")
     print(f"   {patterned} have enough readable directions to name a pattern")
+    if REFUSED_YIELDS:
+        named = ", ".join(f"{t} {v:.2f}%" for t, v in sorted(REFUSED_YIELDS))
+        print(f"   refused {len(REFUSED_YIELDS)} dividend yield(s) above "
+              f"{IMPOSSIBLE_YIELD:.0f}% — a company cannot pay out more than "
+              f"it is worth: {named}")
     print(f"   {len(index['sector_medians'])} sector medians "
           f"(sectors of {MIN_PEERS}+ only)")
     if args.check:
