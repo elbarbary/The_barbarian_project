@@ -303,7 +303,7 @@
    "trading_resumptions": 1,
    "capital_increases": 0,
    "general_assemblies": 9,
-   "periods_reported": 6,
+   "periods_reported": 7,
    "loss_making_periods": 3
   },
   "generated": "2026-08-24"
@@ -3532,7 +3532,7 @@
    "trading_resumptions": 0,
    "capital_increases": 0,
    "general_assemblies": 0,
-   "periods_reported": 2,
+   "periods_reported": 3,
    "loss_making_periods": 0
   },
   "generated": "2026-08-25"
