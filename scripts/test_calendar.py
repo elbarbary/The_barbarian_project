@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """The forward calendar reads only what the issuer scheduled, never guesses."""
 import datetime
+import json
+import pathlib
+import tempfile
 import unittest
 
 import build_calendar as cal
+import macro_types
 
 
 class Extract(unittest.TestCase):
@@ -103,6 +107,83 @@ class Expected(unittest.TestCase):
 
     def test_a_company_the_app_does_not_list_gets_no_row(self):
         self.assertEqual([r["ticker"] for r in self.rows()], ["ELEC"])
+
+    # 2026-09-02: all 396 estimated rows shipped with `title_ar: ""`, so the
+    # Arabic-default calendar's Expected panel was the one screen in English.
+    # The name is the one the exchange publishes for ELEC (company_names_ar.json).
+    def test_an_estimate_is_titled_in_arabic_from_the_same_template(self):
+        row = cal.expected_rows(datetime.date(2026, 8, 24), {"ELEC": "Electro Cable"},
+                                {"ELEC": "الكابلات الكهربائية المصرية"})[0]
+        self.assertEqual(row["title"], "Electro Cable — 9M results expected")
+        self.assertEqual(row["title_ar"],
+                         "الكابلات الكهربائية المصرية — نتائج تسعة أشهر مرتقبة")
+
+    def test_no_published_arabic_name_means_the_english_one_not_a_blank(self):
+        # GOUR (Gourmet Egypt.Com Foods) has no Arabic name on the record.
+        # Inventing one is forbidden and a blank is the defect; the English
+        # name goes inside the Arabic sentence. rows() passes no Arabic map at
+        # all, which is the same case.
+        for row in self.rows():
+            self.assertEqual(row["title_ar"], "Electro Cable — نتائج تسعة أشهر مرتقبة")
+
+    def test_period_words_are_the_ones_the_site_already_prints(self):
+        self.assertEqual(cal.expected_title_ar("س", "Q1"), "س — نتائج الربع الأول مرتقبة")
+        self.assertEqual(cal.expected_title_ar("س", "H1"), "س — نتائج النصف الأول مرتقبة")
+        self.assertEqual(cal.expected_title_ar("س", "9M"), "س — نتائج تسعة أشهر مرتقبة")
+        self.assertEqual(cal.expected_title_ar("س", "FY"), "س — نتائج السنة المالية مرتقبة")
+        # Every label the signals step can produce has a word here.
+        self.assertEqual(set(cal.PERIOD_AR), {label for label, _, _ in cal.build_signals.PERIOD_ENDS})
+        # One it cannot is printed as it is, not translated by guesswork.
+        self.assertEqual(cal.expected_title_ar("س", "H2"), "س — نتائج H2 مرتقبة")
+
+    def test_the_arabic_title_anticipates_a_date_not_a_figure(self):
+        # §8: "أرباح متوقعة" is on macro_types.DIRECTIVE. The row is a claim
+        # about a filing date, and its wording must not read as a forecast.
+        for label in cal.PERIOD_AR:
+            title = cal.expected_title_ar("الكابلات الكهربائية المصرية", label)
+            self.assertFalse(any(p.search(title) for p in macro_types.DIRECTIVE), title)
+
+
+class ArabicNames(unittest.TestCase):
+    """Where the Arabic half of an estimate's title comes from, and where it must not."""
+
+    def _with(self, companies, names):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        root = pathlib.Path(tmp.name)
+        saved = cal.COMPANIES, cal.NAMES_AR
+        self.addCleanup(lambda: setattr(cal, "COMPANIES", saved[0]))
+        self.addCleanup(lambda: setattr(cal, "NAMES_AR", saved[1]))
+        cal.COMPANIES = root / "companies.json"
+        cal.NAMES_AR = root / "company_names_ar.json"
+        if companies is not None:
+            cal.COMPANIES.write_text(json.dumps({"companies": companies}, ensure_ascii=False),
+                                     encoding="utf-8")
+        if names is not None:
+            cal.NAMES_AR.write_text(json.dumps(names, ensure_ascii=False), encoding="utf-8")
+
+    def test_companies_json_wins_and_the_harvest_map_fills_the_rest(self):
+        self._with(
+            companies=[
+                {"ticker": "ELEC", "name_en": "Electro Cable",
+                 "name_ar": "الكابلات الكهربائية المصرية"},
+                # 14 of the 284 listed on 2026-09-03 have no Arabic name at all.
+                {"ticker": "GOUR", "name_en": "Gourmet Egypt.Com Foods", "name_ar": None},
+            ],
+            names={"ELEC": "(from the map)", "JUFO": "جهينة للصناعات الغذائية ش م م",
+                   "BLANK": "  "},
+        )
+        got = cal.arabic_names()
+        self.assertEqual(got["ELEC"], "الكابلات الكهربائية المصرية")
+        self.assertEqual(got["JUFO"], "جهينة للصناعات الغذائية ش م م")
+        self.assertNotIn("GOUR", got)
+        self.assertNotIn("BLANK", got)
+
+    def test_missing_or_broken_inputs_yield_nothing_rather_than_a_crash(self):
+        self._with(companies=None, names=None)
+        self.assertEqual(cal.arabic_names(), {})
+        self._with(companies=[], names=["not", "a", "map"])
+        self.assertEqual(cal.arabic_names(), {})
 
 
 if __name__ == "__main__":

@@ -92,6 +92,23 @@ QUARTER_END = {
     "Q4": "12-31",
 }
 
+# The exchange's news id in the `egx-<id>` form `merge_egx_financials` stamps
+# as `filing_id` and the site already turns into a NewsDetails link, so a row
+# can name the filing it was read OUT OF in the same vocabulary as the filing
+# it belongs to. A record from `build_financials_api` carries the id outright;
+# the URL it was read from is the only other place it lives; a record with
+# neither names no filing rather than a guessed one.
+NEWS_ID = re.compile(r"NewsID=(\d+)")
+
+
+def filing_ref(record: dict) -> str | None:
+    news_id = str(record.get("news_id") or "").strip()
+    if not news_id:
+        found = NEWS_ID.search(str(record.get("source") or ""))
+        news_id = found.group(1) if found else ""
+    return f"egx-{news_id}" if news_id else None
+
+
 def _filed_financials(
     filings_store: pathlib.Path | None = None,
     statements_store: pathlib.Path | None = None,
@@ -113,7 +130,8 @@ def _filed_financials(
 
     Two filings for one period is normal and consolidated wins; see `rank`.
     Each EGX filing also states the year-earlier comparative, which becomes its
-    own period when nothing better supplies it.
+    own period when nothing better supplies it — marked as one, because its
+    `source` is a document headlined with a different period; see `offer`.
     """
     here = pathlib.Path(__file__).resolve().parent
     filings_store = filings_store or (here / "financials_filed.json")
@@ -153,7 +171,8 @@ def _filed_financials(
     def offer(ticker: str, period: str, fields: dict, *, basis: str | None,
               source: str | None, filed_on: str | None, end: str | None,
               months: int | None, comparative: bool = False,
-              exchange: bool = False) -> None:
+              exchange: bool = False, restated_in: str | None = None,
+              restated_for: str | None = None) -> None:
         key = (ticker, period)
         score = rank(basis, comparative, exchange)
         existing = picked.get(key)
@@ -183,6 +202,26 @@ def _filed_financials(
             "basis": basis,
             "source": source,
             "filed_on": filed_on,
+            # A comparative is a line INSIDE a later filing, so its `source`
+            # is that later filing's page. ABUK's "H1 2025" row (4,568.416m)
+            # pointed at NewsID=293025 with `filed_on` 2026-08-13 — the same
+            # document as its "H1 2026" row, because 4,568,415,986 is the
+            # "Net Comparative profit" line of the H1 2026 announcement. A
+            # reader following "Open on the Egyptian Exchange" from a row
+            # labelled H1 2025 landed on a document headlined H1 2026 with
+            # nothing saying why. So the row names the filing that restated
+            # it and the period that filing is about, in the `egx-<id>` form
+            # `filing_id` uses.
+            #
+            # Written explicitly, and None on a primary, for two reasons: the
+            # emit below drops None, so a company's own filing never carries
+            # the marks; and — the one that bites — when a primary displaces
+            # a comparative, the "outranked" merge above copies every line the
+            # loser had that the winner lacks, which would otherwise carry the
+            # loser's marks onto the company's own figure.
+            "comparative": True if comparative else None,
+            "restated_in": restated_in if comparative else None,
+            "restated_for": restated_for if comparative else None,
         }
 
     # Mubasher's annual statements, labelled to match the exchange's own "FY"
@@ -259,7 +298,9 @@ def _filed_financials(
                   filed_on=record.get("filed_on"),
                   end=record.get("prior_period_end"),
                   months=record.get("months"),
-                  comparative=True, exchange=True)
+                  comparative=True, exchange=True,
+                  restated_in=filing_ref(record),
+                  restated_for=record["period"])
 
     out: dict[str, dict] = {}
     for (ticker, _period), period in sorted(

@@ -66,6 +66,11 @@ FILED_MONTHS = 12
 # bundled copy matches the published one and fails the build if it drifts.
 FIXTURE = REPO / "app" / "assets" / "fixtures" / "calendar.json"
 FIXTURE_FILED = REPO / "app" / "assets" / "fixtures" / "calendar" / "filed"
+COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
+# The exchange's own Arabic street names, read back out of filing headings by
+# harvest_company_names.py — the file build_market_api.py fills companies.json
+# `name_ar` from.
+NAMES_AR = pathlib.Path(__file__).resolve().parent / "company_names_ar.json"
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 # The heading of a filing that names two listings writes them inside one pair
@@ -195,22 +200,74 @@ def build(*, on_or_after: datetime.date | None) -> list[dict]:
     return sorted(rows.values(), key=lambda r: (r["date"], r["ticker"] or "", r["kind"]))
 
 
+def _listed() -> list[dict]:
+    """The companies the app actually lists, as build_market_api published them."""
+    try:
+        doc = json.loads(COMPANIES.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    return [c for c in doc.get("companies", []) if c.get("ticker")]
+
+
 def company_names() -> dict[str, str]:
     """ticker → English name, for the companies the app actually lists."""
+    return {c["ticker"]: c.get("name_en") or c["ticker"] for c in _listed()}
+
+
+def arabic_names() -> dict[str, str]:
+    """ticker → Arabic name, only where the exchange has published one.
+
+    `companies.json` first — it is what the company page shows — then the
+    harvest map it was filled from, for a ticker the day's scan dropped.
+    Nothing is transliterated or guessed: a company with no Arabic name on the
+    record — 14 of the 284 listed on 2026-09-03, GOUR and LKGP among them — is
+    simply absent here, and its row carries the English name inside the Arabic
+    sentence instead of a blank.
+    """
+    names: dict[str, str] = {}
     try:
-        doc = json.loads(
-            (REPO / "public" / "data" / "v1" / "companies.json").read_text(encoding="utf-8")
-        )
-    except (OSError, json.JSONDecodeError):
-        return {}
-    return {
-        c["ticker"]: c.get("name_en") or c["ticker"]
-        for c in doc.get("companies", [])
-        if c.get("ticker")
-    }
+        names.update(json.loads(NAMES_AR.read_text(encoding="utf-8")))
+    except (OSError, ValueError, TypeError):
+        pass
+    for c in _listed():
+        if c.get("name_ar"):
+            names[c["ticker"]] = c["name_ar"]
+    return {t: n.strip() for t, n in names.items() if isinstance(n, str) and n.strip()}
 
 
-def expected_rows(today: datetime.date, known: dict[str, str]) -> list[dict]:
+# The Arabic for a results-expected row, from the same template as the English.
+#
+# Every one of the 396 estimated rows published on 2026-09-02 carried
+# `title_ar: ""`, so the Arabic-default Calendar showed its whole Expected panel
+# in English — while the 59 filed rows beside it were in Arabic, because the
+# exchange writes those headings itself. Nobody writes this one, so it is
+# composed here from words already in use elsewhere: the period names the site
+# and the app print for these year-to-date filings ("قوائم النصف الأول ٢٠٢٦",
+# "القوائم المالية لتسعة أشهر ٢٠٢٥", "السنة المالية") and the label the site's
+# calendar gives this kind of row, "نتائج مرتقبة". "مرتقبة" rather than
+# "متوقعة" on purpose: the row anticipates a filing *date*, never a figure, and
+# "أرباح متوقعة" is on the §8 list in macro_types for exactly that reason.
+PERIOD_AR = {
+    "Q1": "الربع الأول",
+    "H1": "النصف الأول",
+    "9M": "تسعة أشهر",
+    "FY": "السنة المالية",
+}
+
+
+def expected_title_ar(name: str, label: str) -> str:
+    """`{company} — نتائج {period} مرتقبة`, mirroring `{company} — {label} results expected`.
+
+    `name` is the Arabic name where one is published and the English one where
+    it is not. A `label` outside PERIOD_AR is printed as it is rather than
+    translated by guesswork — the four in build_signals.PERIOD_ENDS are the
+    only ones the signals step produces.
+    """
+    return f"{name} — نتائج {PERIOD_AR.get(label, label)} مرتقبة"
+
+
+def expected_rows(today: datetime.date, known: dict[str, str],
+                  arabic: dict[str, str] | None = None) -> list[dict]:
     """When each company's next results are due — a window, plainly labelled.
 
     This is the one thing on the calendar that the exchange has not published.
@@ -242,7 +299,8 @@ def expected_rows(today: datetime.date, known: dict[str, str]) -> list[dict]:
                 "note": f"{entry['label']} results usually filed around now",
                 "ticker": ticker,
                 "title": f"{known[ticker]} — {entry['label']} results expected",
-                "title_ar": "",
+                "title_ar": expected_title_ar((arabic or {}).get(ticker) or known[ticker],
+                                              entry["label"]),
                 "filed": "",
                 "section": "Estimated",
                 "link": "",
@@ -370,7 +428,7 @@ def main() -> int:
     # obvious in this file which rows the exchange published and which ones we
     # computed. `--no-estimates` drops them entirely.
     known = company_names()
-    estimates = [] if args.no_estimates else expected_rows(today, known)
+    estimates = [] if args.no_estimates else expected_rows(today, known, arabic_names())
     rows = sorted(rows + estimates,
                   key=lambda r: (r["date"], r["ticker"] or "", r["kind"]))
 
