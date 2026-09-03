@@ -1,102 +1,102 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-02T09:48:01.913293+00:00",
+  "fetchedAt": "2026-09-03T10:00:13.173586+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
   },
   "exchangeRates": {
-    "ratesForDate": "01/09/2026",
+    "ratesForDate": "02/09/2026",
     "currencies": [
       {
         "currency": "US Dollar",
-        "buy": 50.8671,
-        "sell": 51.0054
+        "buy": 51.0414,
+        "sell": 51.1808
       },
       {
         "currency": "Euro",
-        "buy": 58.955,
-        "sell": 59.1204
+        "buy": 59.06,
+        "sell": 59.2315
       },
       {
         "currency": "Pound Sterling",
-        "buy": 68.8283,
-        "sell": 69.0307
+        "buy": 68.8192,
+        "sell": 69.0224
       },
       {
         "currency": "Canadian Dollar",
-        "buy": 36.6584,
-        "sell": 36.7659
+        "buy": 36.6387,
+        "sell": 36.7493
       },
       {
         "currency": "Danish Krone",
-        "buy": 7.8869,
-        "sell": 7.9097
+        "buy": 7.901,
+        "sell": 7.9238
       },
       {
         "currency": "Norwegian Krone",
-        "buy": 5.4505,
-        "sell": 5.4663
+        "buy": 5.4654,
+        "sell": 5.4812
       },
       {
         "currency": "Swedish Krona",
-        "buy": 5.3013,
-        "sell": 5.3165
+        "buy": 5.2853,
+        "sell": 5.3001
       },
       {
         "currency": "Swiss Franc",
-        "buy": 62.7679,
-        "sell": 62.9696
+        "buy": 62.6122,
+        "sell": 62.7985
       },
       {
         "currency": "Japanese Yen 100",
-        "buy": 31.7662,
-        "sell": 31.8605
+        "buy": 31.9188,
+        "sell": 32.008
       },
       {
         "currency": "Saudi Riyal",
-        "buy": 13.548,
-        "sell": 13.5855
+        "buy": 13.5929,
+        "sell": 13.6315
       },
       {
         "currency": "Kuwaiti Dinar",
-        "buy": 165.5831,
-        "sell": 166.0873
+        "buy": 166.1505,
+        "sell": 166.6584
       },
       {
         "currency": "UAE Dirham",
-        "buy": 13.8482,
-        "sell": 13.887
+        "buy": 13.8968,
+        "sell": 13.9355
       },
       {
         "currency": "Australian Dollar",
-        "buy": 36.3191,
-        "sell": 36.4383
+        "buy": 36.4027,
+        "sell": 36.5073
       },
       {
         "currency": "Bahraini Dinar",
-        "buy": 134.9154,
-        "sell": 135.3
+        "buy": 135.374,
+        "sell": 135.7617
       },
       {
         "currency": "Omani Riyal",
-        "buy": 132.1122,
-        "sell": 132.4884
+        "buy": 132.5648,
+        "sell": 132.944
       },
       {
         "currency": "Qatari Riyal",
-        "buy": 13.9534,
-        "sell": 13.9933
+        "buy": 14.0012,
+        "sell": 14.0414
       },
       {
         "currency": "Jordanian Dinar",
-        "buy": 71.6439,
-        "sell": 72.0415
+        "buy": 71.8893,
+        "sell": 72.2892
       },
       {
         "currency": "Chinese Yuan",
-        "buy": 7.5669,
-        "sell": 7.5876
+        "buy": 7.5929,
+        "sell": 7.6139
       }
     ]
   },
@@ -107,44 +107,44 @@
         "tenor": "Overnight",
         "observations": [
           {
-            "date": "19/08",
-            "value": 0.19537
+            "date": "01/09",
+            "value": 0.19594999999999999
           },
           {
-            "date": "20/08",
-            "value": 0.19577999999999998
-          },
-          {
-            "date": "23/08",
-            "value": 0.1959
-          },
-          {
-            "date": "24/08",
-            "value": 0.19576000000000002
-          },
-          {
-            "date": "25/08",
-            "value": 0.19623000000000002
-          },
-          {
-            "date": "26/08",
-            "value": 0.19605
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 0.19509
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 0.19253
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 0.19594999999999999
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -152,43 +152,43 @@
         "tenor": "Less than a Week",
         "observations": [
           {
-            "date": "19/08",
-            "value": 0.19635999999999998
-          },
-          {
-            "date": "20/08",
-            "value": 0.19574000000000003
-          },
-          {
-            "date": "23/08",
-            "value": 0.19519999999999998
-          },
-          {
-            "date": "24/08",
-            "value": null
-          },
-          {
-            "date": "25/08",
-            "value": 0.1905
-          },
-          {
-            "date": "26/08",
-            "value": 0.19626000000000002
-          },
-          {
-            "date": "27/08",
-            "value": null
-          },
-          {
-            "date": "30/08",
-            "value": 0.19523
-          },
-          {
-            "date": "31/08",
-            "value": null
-          },
-          {
             "date": "01/09",
+            "value": null
+          },
+          {
+            "date": "02/09",
+            "value": null
+          },
+          {
+            "date": "03/09",
+            "value": null
+          },
+          {
+            "date": "06/09",
+            "value": null
+          },
+          {
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
             "value": null
           }
         ]
@@ -197,44 +197,44 @@
         "tenor": "One Week",
         "observations": [
           {
-            "date": "19/08",
-            "value": null
-          },
-          {
-            "date": "20/08",
-            "value": null
-          },
-          {
-            "date": "23/08",
-            "value": 0.19667
-          },
-          {
-            "date": "24/08",
-            "value": 0.196
-          },
-          {
-            "date": "25/08",
-            "value": 0.19658
-          },
-          {
-            "date": "26/08",
-            "value": 0.19649999999999998
-          },
-          {
-            "date": "27/08",
-            "value": null
-          },
-          {
-            "date": "30/08",
-            "value": 0.19699999999999998
-          },
-          {
-            "date": "31/08",
-            "value": null
-          },
-          {
             "date": "01/09",
             "value": 0.19643999999999998
+          },
+          {
+            "date": "02/09",
+            "value": null
+          },
+          {
+            "date": "03/09",
+            "value": null
+          },
+          {
+            "date": "06/09",
+            "value": null
+          },
+          {
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -242,44 +242,44 @@
         "tenor": "Less than a Month",
         "observations": [
           {
-            "date": "19/08",
-            "value": null
-          },
-          {
-            "date": "20/08",
-            "value": 0.19699999999999998
-          },
-          {
-            "date": "23/08",
-            "value": 0.19
-          },
-          {
-            "date": "24/08",
-            "value": 0.19634000000000001
-          },
-          {
-            "date": "25/08",
-            "value": 0.198
-          },
-          {
-            "date": "26/08",
-            "value": null
-          },
-          {
-            "date": "27/08",
-            "value": null
-          },
-          {
-            "date": "30/08",
-            "value": null
-          },
-          {
-            "date": "31/08",
-            "value": 0.196
-          },
-          {
             "date": "01/09",
             "value": 0.19811
+          },
+          {
+            "date": "02/09",
+            "value": null
+          },
+          {
+            "date": "03/09",
+            "value": null
+          },
+          {
+            "date": "06/09",
+            "value": null
+          },
+          {
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -287,43 +287,43 @@
         "tenor": "One Month",
         "observations": [
           {
-            "date": "19/08",
-            "value": null
-          },
-          {
-            "date": "20/08",
-            "value": null
-          },
-          {
-            "date": "23/08",
-            "value": null
-          },
-          {
-            "date": "24/08",
-            "value": null
-          },
-          {
-            "date": "25/08",
-            "value": 0.19649999999999998
-          },
-          {
-            "date": "26/08",
-            "value": null
-          },
-          {
-            "date": "27/08",
-            "value": null
-          },
-          {
-            "date": "30/08",
-            "value": null
-          },
-          {
-            "date": "31/08",
-            "value": null
-          },
-          {
             "date": "01/09",
+            "value": null
+          },
+          {
+            "date": "02/09",
+            "value": null
+          },
+          {
+            "date": "03/09",
+            "value": null
+          },
+          {
+            "date": "06/09",
+            "value": null
+          },
+          {
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
             "value": null
           }
         ]
@@ -332,43 +332,43 @@
         "tenor": "More than a Month",
         "observations": [
           {
-            "date": "19/08",
-            "value": null
-          },
-          {
-            "date": "20/08",
-            "value": null
-          },
-          {
-            "date": "23/08",
-            "value": 0.19673
-          },
-          {
-            "date": "24/08",
-            "value": null
-          },
-          {
-            "date": "25/08",
-            "value": null
-          },
-          {
-            "date": "26/08",
-            "value": null
-          },
-          {
-            "date": "27/08",
-            "value": null
-          },
-          {
-            "date": "30/08",
-            "value": null
-          },
-          {
-            "date": "31/08",
-            "value": null
-          },
-          {
             "date": "01/09",
+            "value": null
+          },
+          {
+            "date": "02/09",
+            "value": null
+          },
+          {
+            "date": "03/09",
+            "value": null
+          },
+          {
+            "date": "06/09",
+            "value": null
+          },
+          {
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
             "value": null
           }
         ]
@@ -379,44 +379,44 @@
         "tenor": "Overnight",
         "observations": [
           {
-            "date": "19/08",
-            "value": 26038.0
+            "date": "01/09",
+            "value": 46223.0
           },
           {
-            "date": "20/08",
-            "value": 41815.0
-          },
-          {
-            "date": "23/08",
-            "value": 55086.5
-          },
-          {
-            "date": "24/08",
-            "value": 41557.0
-          },
-          {
-            "date": "25/08",
-            "value": 41906.0
-          },
-          {
-            "date": "26/08",
-            "value": 54246.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 33925.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 79300.0
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 46223.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -424,44 +424,44 @@
         "tenor": "Less than a Week",
         "observations": [
           {
-            "date": "19/08",
-            "value": 5500.0
-          },
-          {
-            "date": "20/08",
-            "value": 3610.0
-          },
-          {
-            "date": "23/08",
-            "value": 7400.0
-          },
-          {
-            "date": "24/08",
+            "date": "01/09",
             "value": 0.0
           },
           {
-            "date": "25/08",
-            "value": 1900.0
-          },
-          {
-            "date": "26/08",
-            "value": 16800.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 22840.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 0.0
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 0.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -469,44 +469,44 @@
         "tenor": "One Week",
         "observations": [
           {
-            "date": "19/08",
-            "value": 0.0
+            "date": "01/09",
+            "value": 95745.0
           },
           {
-            "date": "20/08",
-            "value": 0.0
-          },
-          {
-            "date": "23/08",
-            "value": 15000.0
-          },
-          {
-            "date": "24/08",
-            "value": 18742.5
-          },
-          {
-            "date": "25/08",
-            "value": 67010.0
-          },
-          {
-            "date": "26/08",
-            "value": 2000.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 5000.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 0.0
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 95745.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -514,44 +514,44 @@
         "tenor": "Less than a Month",
         "observations": [
           {
-            "date": "19/08",
-            "value": 0.0
+            "date": "01/09",
+            "value": 4750.0
           },
           {
-            "date": "20/08",
-            "value": 2000.0
-          },
-          {
-            "date": "23/08",
-            "value": 9000.0
-          },
-          {
-            "date": "24/08",
-            "value": 3925.0
-          },
-          {
-            "date": "25/08",
-            "value": 1778.8
-          },
-          {
-            "date": "26/08",
-            "value": 0.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 0.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 18742.5
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 4750.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -559,44 +559,44 @@
         "tenor": "One Month",
         "observations": [
           {
-            "date": "19/08",
+            "date": "01/09",
             "value": 0.0
           },
           {
-            "date": "20/08",
-            "value": 0.0
-          },
-          {
-            "date": "23/08",
-            "value": 0.0
-          },
-          {
-            "date": "24/08",
-            "value": 0.0
-          },
-          {
-            "date": "25/08",
-            "value": 2000.0
-          },
-          {
-            "date": "26/08",
-            "value": 0.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 0.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 0.0
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 0.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -604,44 +604,44 @@
         "tenor": "More than a Month",
         "observations": [
           {
-            "date": "19/08",
+            "date": "01/09",
             "value": 0.0
           },
           {
-            "date": "20/08",
-            "value": 0.0
-          },
-          {
-            "date": "23/08",
-            "value": 13000.0
-          },
-          {
-            "date": "24/08",
-            "value": 0.0
-          },
-          {
-            "date": "25/08",
-            "value": 0.0
-          },
-          {
-            "date": "26/08",
-            "value": 0.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 0.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 0.0
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 0.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       },
@@ -649,44 +649,44 @@
         "tenor": "Total Value",
         "observations": [
           {
-            "date": "19/08",
-            "value": 31538.0
+            "date": "01/09",
+            "value": 146718.0
           },
           {
-            "date": "20/08",
-            "value": 47425.0
-          },
-          {
-            "date": "23/08",
-            "value": 99486.5
-          },
-          {
-            "date": "24/08",
-            "value": 64224.5
-          },
-          {
-            "date": "25/08",
-            "value": 114594.8
-          },
-          {
-            "date": "26/08",
-            "value": 73046.0
-          },
-          {
-            "date": "27/08",
+            "date": "02/09",
             "value": null
           },
           {
-            "date": "30/08",
-            "value": 61765.0
+            "date": "03/09",
+            "value": null
           },
           {
-            "date": "31/08",
-            "value": 98042.5
+            "date": "06/09",
+            "value": null
           },
           {
-            "date": "01/09",
-            "value": 146718.0
+            "date": "07/09",
+            "value": null
+          },
+          {
+            "date": "08/09",
+            "value": null
+          },
+          {
+            "date": "09/09",
+            "value": null
+          },
+          {
+            "date": "10/09",
+            "value": null
+          },
+          {
+            "date": "13/09",
+            "value": null
+          },
+          {
+            "date": "14/09",
+            "value": null
           }
         ]
       }
