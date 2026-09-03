@@ -551,6 +551,7 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
       // Why it is here at all: the exchange has not seen this kind of filing
       // from this company since that date. Both dates are in the record.
       stamp: `${first.date} · first since ${first.previous || '—'}`,
+      stampAr: `${first.date} · الأول منذ ${first.previous || '—'}`,
       ticker: first.ticker,
     });
   }
@@ -564,6 +565,7 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
       title: `${quiet.name || quiet.ticker} has filed nothing since ${quiet.last_filed}`,
       titleAr: `${quiet.name_ar || quiet.name || quiet.ticker} لم تُفصح عن شيء منذ ${quiet.last_filed}`,
       stamp: `signals.json · ${quiet.silent_days} days`,
+      stampAr: `signals.json · ${quiet.silent_days} يوماً`,
       ticker: quiet.ticker,
     });
   }
@@ -577,7 +579,7 @@ export function readNowCards(signals, expectedTotal, expectedFrom) {
       titleAr: expectedFrom
         ? `${expectedTotal} إفصاحاً متوقعاً اعتباراً من ${expectedFrom} بحسب سجل الشركات`
         : `${expectedTotal} إفصاحاً متوقعاً بحسب سجل الشركات`,
-      stamp: 'calendar.json · estimate',
+      stamp: 'calendar.json · estimate', stampAr: 'calendar.json · تقدير',
       screen: 'calendar',
     });
   }
@@ -661,10 +663,22 @@ const TINT = {
 };
 const tintFor = (event) => TINT[event] || ['var(--accent)', 'var(--accTint)'];
 
+// Cairo, explicitly, for both halves. `date` was the UTC day sliced off the
+// string and `time` was the machine's own zone, so eight stories filed between
+// 21:00 and midnight UTC showed a date one day before the time beside them.
+// And 34 of 400 items are published as a bare date — T00:00:00Z — which
+// rendered as "03:00", a time of day no outlet stated.
+const CAIRO = 'Africa/Cairo';
+const dateOnly = (iso) => /T00:00:00(?:\.0+)?(?:Z|\+00:00)$/.test(String(iso || ''));
 const hhmm = (iso) => {
   const when = new Date(iso);
-  return Number.isNaN(when.getTime()) ? '' :
-    String(when.getHours()).padStart(2, '0') + ':' + String(when.getMinutes()).padStart(2, '0');
+  if (Number.isNaN(when.getTime()) || dateOnly(iso)) return '';
+  return new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: CAIRO }).format(when);
+};
+const ymd = (iso) => {
+  const when = new Date(iso);
+  if (Number.isNaN(when.getTime())) return String(iso || '').slice(0, 10);
+  return new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: CAIRO }).format(when);
 };
 const day = (iso) => {
   const when = new Date(iso);
@@ -685,7 +699,7 @@ export async function news() {
   // none of its work ever reached the top of the pile — while the footer went
   // on naming it as a source. The screen still shows a page at a time; the
   // difference is that the rest is now reachable.
-  return (d.items || []).map((it) => {
+  const items = (d.items || []).map((it) => {
     const [kindColor, tint] = tintFor(it.event);
     const attributions = it.sources || [];
     const named = attributions.map((a) => outlets.get(a.id) || { name: a.id });
@@ -698,7 +712,12 @@ export async function news() {
       kind: it.event_label || '', kindAr: it.event_label_ar || '',
       hasKind: it.event !== 'other' && Boolean(it.event_label),
       kindColor, tint,
-      time: hhmm(it.published), date: String(it.published || '').slice(0, 10),
+      id: it.id || null,
+      time: hhmm(it.published), date: ymd(it.published), published: it.published || '',
+      // The session the volume in `because` belongs to, which is not always
+      // the day the story ran: DEIN's ran on the 1st over a ratio measured
+      // on the 2nd, and the card said "that day".
+      evidenceDate: (it.evidence && it.evidence.date) || null,
       // Eleven stories today were carried by more than one outlet; all of them
       // are credited, and the link goes to the first.
       source: named.map((s) => s.name).filter(Boolean).join(' · ') || 'EGX',
@@ -724,6 +743,10 @@ export async function news() {
       tickers: (it.tickers || []).map((ticker) => ({ ticker })),
     };
   });
+  // Newest first. The heading says so and the document is not sorted: 111
+  // order breaks, the newest item at index 107 — outside the first page — and
+  // 29 items past the top forty newer than card one.
+  return items.sort((a, b) => String(b.published).localeCompare(String(a.published)));
 }
 
 /** Who the feed was read from, what was merged, and what could not be reached.

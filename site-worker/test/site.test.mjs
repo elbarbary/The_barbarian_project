@@ -83,7 +83,9 @@ test('an absent document empties its block rather than inventing one', () => {
 test('the session stamps come from the documents, not from a literal', () => {
   const v = screen(LIVE);
   assert.equal(v.marketDate, '27 August 2026');
-  assert.equal(v.generatedAt, '2026-08-28T16:38:17+00:00');
+  // Labelled and clocked, not a raw ISO string under a bold date.
+  assert.match(v.generatedAt, /^Built \d{2}:\d{2}$/, v.generatedAt);
+  assert.match(screen(LIVE, 'ar').generatedAt, /^حُدِّث /);
   assert.equal(v.dataVersion, '14274003b1cf7c8d');
   assert.equal(v.totalCount, 2);          // the directory, not a hardcoded 282
   assert.equal(screen(LIVE, 'ar').marketDate.includes('٢٠٢٦'), true);
@@ -1427,6 +1429,74 @@ test('the watchlist reports what it kept, not what it was handed', async () => {
   } finally { delete globalThis.localStorage; }
 });
 
+test('a headline is dated in Cairo, and a date-only stamp gets no invented clock', async () => {
+  // `date` was the UTC day and `time` the machine's zone, so eight stories
+  // filed 21:00–23:59Z showed a date one day before the time beside them; and
+  // 34 of 400 items are published as a bare date, which rendered as "03:00".
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({ items: [
+    { id: 'late', headline: 'a', outlet: 'o', published: '2026-09-01T22:30:00Z' },
+    { id: 'bare', headline: 'b', outlet: 'o', published: '2026-09-02T00:00:00Z' },
+    { id: 'old',  headline: 'c', outlet: 'o', published: '2026-08-30T09:00:00Z',
+      evidence: { date: '2026-08-31', volume: 1 }, because: 'Volume ran 3.1× normal that day.' },
+  ] }) });
+  const feed = await data.news();
+  delete globalThis.fetch;
+  // Newest first, whatever order the document arrived in.
+  assert.deepEqual(feed.map((f) => f.id), ['bare', 'late', 'old']);
+  const late = feed.find((f) => f.id === 'late');
+  assert.equal(late.date, '2026-09-02', 'the Cairo day, not the UTC day');
+  assert.equal(late.time, '01:30');
+  const bare = feed.find((f) => f.id === 'bare');
+  assert.equal(bare.time, '', 'a bare date has no time of day');
+  const old = feed.find((f) => f.id === 'old');
+  assert.equal(old.evidenceDate, '2026-08-31');
+
+  const c = fresh();
+  c.setData({ ...LIVE, feed });
+  c.state.screen = 'today';
+  const cards = c.renderVals().feed;
+  const shownOld = cards.find((f) => f.id === 'old');
+  assert.match(shownOld.becauseDate, /31 Aug/, 'the volume is dated by its own session');
+  assert.doesNotMatch(cards.find((f) => f.id === 'bare').when, /·/, 'no separator, no clock');
+  assert.match(cards.find((f) => f.id === 'late').when, /2 Sept? · 01:30/);
+});
+
+test('the News badge counts the feed, not the page', () => {
+  const feed = Array.from({ length: 95 }, (_, i) => ({ id: 'n' + i, headline: 'h', outlet: 'o', published: '2026-09-02T10:00:00Z' }));
+  const v = screen({ ...LIVE, feed });
+  const news = v.nav.find((n) => /News/.test(n.label));
+  assert.equal(news.meta, '95');
+  assert.match(v.feedCount, /^40 of 95 headlines/);
+});
+
+test('what to read now carries its stamp in Arabic too', () => {
+  const v = screen({ ...LIVE, readNow: [{ kind: 'Filing', kindAr: 'إفصاح', title: 't', titleAr: 'ع',
+    stamp: '2026-09-02 · first since 2026-06-01', stampAr: '2026-09-02 · الأول منذ 2026-06-01', ticker: 'AAAA' }] }, 'ar');
+  assert.equal(v.readNow[0].stamp, '2026-09-02 · الأول منذ 2026-06-01');
+});
+
+test('a filed event keeps the exchange link before the month archive arrives', () => {
+  // The branch stripped every href under a comment written for expected
+  // events, so no filed row could be opened until the archive loaded — or
+  // ever, if that fetch failed.
+  const v = screen({ ...LIVE, filedEvents: [{ date: '2026-09-02', ticker: 'AAAA', what: 'w', whatAr: 'و',
+    kind: 'Results', kindAr: 'نتائج', href: 'https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=1' }] });
+  assert.equal(v.filedEvents[0].hasHref, true);
+  assert.equal(v.filedEvents[0].href, 'https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=1');
+});
+
+test('a dollar filer is told why its statements table lags its filings', () => {
+  const c = fresh();
+  c.setData(LIVE);
+  c.state.screen = 'company';
+  c.state.ticker = 'CFGH';
+  c._co = { ticker: 'CFGH', name: { en: 'C', ar: 'ك' }, profile: {}, currency: 'US$' };
+  assert.match(c.renderVals().finsCurrencyNote, /files in US dollars/);
+  c._co = { ticker: 'COMI', name: { en: 'C', ar: 'ك' }, profile: {} };
+  c.state.ticker = 'COMI';
+  assert.equal(c.renderVals().finsCurrencyNote, '');
+});
+
 test('a dollar listing says which money each of its two figures is in', () => {
   // The market table was taught this and the company screen was not, so the
   // page a reader lands on printed 0.118 over a market value of 2.83 billion
@@ -2253,10 +2323,12 @@ test('a crossing carries the company, the reason, the window and every thread', 
   assert.deepEqual(x.cells.map((d) => d.dots.length), [0, 1, 1, 1]);
   assert.equal(x.cells[0].quiet, true);
   // Every thread is a link back to the document it came from.
-  assert.deepEqual(x.strands.map((s) => s.label), ['Filing', 'In the press', 'That session']);
-  assert.equal(x.strands[0].href, 'https://www.egx.com.eg/x');
+  // The session thread first: it dates the header's move and its volume
+  // ratio, and behind a cap of four it was the one thread readers lost.
+  assert.deepEqual(x.strands.map((s) => s.label), ['That session', 'Filing', 'In the press']);
+  assert.equal(x.strands[1].href, 'https://www.egx.com.eg/x');
   // A session is a number, not a headline it does not have.
-  assert.equal(x.strands[2].title, '7.26× normal volume');
+  assert.equal(x.strands[0].title, '7.26× normal volume');
 });
 
 test('the volume figure is printed only where the session is one of the threads', () => {
@@ -2288,7 +2360,7 @@ test('an Arabic reader gets the pipeline\'s Arabic sentences', () => {
   assert.equal(v.why, CROSS.items[0].whyAr);
   assert.equal(v.insight, CROSS.items[0].insightAr);
   assert.equal(v.name, 'أ');
-  assert.equal(v.strands[0].title, 'إخطار');
+  assert.equal(v.strands[1].title, 'إخطار');
   assert.equal(v.sector, 'التمويل والخدمات المالية');
 });
 
