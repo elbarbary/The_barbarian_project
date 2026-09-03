@@ -127,16 +127,18 @@
             </sc-if>
           </div>
           <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:14px;text-wrap:pretty">{{ L.investorsBasis }}</div>
+          <sc-if value="{{ investors.asOfLine }}"><div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:6px">{{ investors.asOfLine }}</div></sc-if>
         </section>
       </sc-if>
 
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 8px">
         <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:0">{{ L.homeTitle }}</h1>
-          <div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div>
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:0">{{ homeTitle }}</h1>
+          <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
+          <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
         </div>
         <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
-          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ L.closeNote }}
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ homeNote }}
         </div>
       </div>
 
@@ -625,6 +627,7 @@
           <div>{{ L.investorsBasis }}</div>
           <sc-if value="{{ investors.asOfLine }}"><div>{{ investors.asOfLine }}</div></sc-if>
           <sc-if value="{{ investors.totalLine }}"><div>{{ investors.totalLine }}</div></sc-if>
+          <sc-if value="{{ investors.equitiesLine }}"><div>{{ investors.equitiesLine }}</div></sc-if>
           <!-- The app screenshot's minute-by-minute curve comes from a feed
                this endpoint does not carry. Saying so beats drawing a shape
                the exchange has not published. -->

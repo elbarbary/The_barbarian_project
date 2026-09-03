@@ -763,13 +763,17 @@ export default {
          turned off. */
       if (url.protocol === 'http:') {
         url.protocol = 'https:';
-        return Response.redirect(url.toString(), 301);
+        // Through secure(): a bare Response.redirect carries no HSTS, so a
+        // browser that had only ever seen www.esthmr.com had no pin for it.
+        return secure(Response.redirect(url.toString(), 301));
       }
       // One address for one site: www is a second name for the same pages, and
       // two names mean two sets of cookies and two things to link to.
       if (host === 'www.esthmr.com') {
         url.hostname = 'esthmr.com';
-        return Response.redirect(url.toString(), 301);
+        // Through secure(): a bare Response.redirect carries no HSTS, so a
+        // browser that had only ever seen www.esthmr.com had no pin for it.
+        return secure(Response.redirect(url.toString(), 301));
       }
       const mapped = underEsthmr(url);
       if (mapped) {

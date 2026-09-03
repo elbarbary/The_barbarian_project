@@ -45,12 +45,16 @@ export function read(email) {
 }
 
 function write(email, list) {
+  // What was kept, not what was handed in. This persisted sixty and returned
+  // all of it, so past the cap the star lit up for a company the store had
+  // already dropped — until the next reload, when it went out.
+  const kept = list.slice(0, 60);
   try {
-    localStorage.setItem(keyFor(email), JSON.stringify(list.slice(0, 60)));
+    localStorage.setItem(keyFor(email), JSON.stringify(kept));
   } catch {
     /* a full or blocked store costs the change, not the page */
   }
-  return list;
+  return kept;
 }
 
 export function has(email, ticker) {

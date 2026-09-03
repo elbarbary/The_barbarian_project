@@ -118,7 +118,11 @@ async function load(email) {
     // empty screen, and says so.
     console.warn('[esthmr] falling back to the demo:', error.message);
     component.setData(data.demo());
-    setSigned(null);
+    // Only a 401/403 means the session went. doc() marks exactly those; a
+    // transient 5xx or a dropped connection on one of eleven documents threw
+    // an unmarked Error, and this signed the reader out for it — silently,
+    // into the demo, with a valid session still in their cookie jar.
+    if (error && error.unauthorized) setSigned(null);
   }
 }
 

@@ -1315,6 +1315,118 @@ test('a row built from two sources says so, and one built from a filing does not
                            net_income_source: 'https://www.egx.com.eg' })).mixed, '');
 });
 
+test('Home does not call a moving price the official close', () => {
+  // The headline and its pill were unconditional literals — "The close —
+  // official close from market.json, not a live price" — through the whole
+  // session, while the sidebar beside them said "live feed, delayed 15 min"
+  // from the same flags.
+  const live = screen({ ...LIVE, isClose: true, livePrices: true, liveDelaySeconds: 900, liveAsOf: '2026-09-02T11:20:00Z' });
+  assert.equal(live.homeIsLive, true);
+  assert.equal(live.homeIsClose, false);
+  assert.equal(live.homeTitle, 'The session');
+  assert.match(live.homeNote, /not the official close/i);
+  const closed = screen({ ...LIVE, isClose: true, livePrices: false });
+  assert.equal(closed.homeIsClose, true);
+  assert.equal(closed.homeTitle, 'The close');
+  assert.match(closed.homeNote, /official close/i);
+});
+
+test('a sector standout is read the same way a member is', async () => {
+  // Every standout on every sector said "Not enough filed history to read"
+  // because the flag the shared row reads was set on members and never here.
+  const secs = await fromDisk(() => data.sectors());
+  const c = fresh();
+  c.setData({ ...LIVE, sectorCards: secs });
+  c.state.screen = 'sectors';
+  const biggest = c.renderVals().sectorCards.slice().sort((a, b) => Number(b.count) - Number(a.count))[0];
+  biggest.open();
+  const open = c.renderVals().openSector;
+  const withPattern = open.standouts.filter((s) => !s.dim);
+  assert.ok(withPattern.length > 0, 'no standout carries a pattern');
+  assert.match(withPattern[0].measures, /^\d+ of \d+ improving$/);
+});
+
+test('a strand with no link is not a link to the page itself', () => {
+  // dc.js drops a null attribute and sets href="" verbatim; an empty href
+  // opens the current page in a new tab, which every "That session" strand did.
+  const c = fresh();
+  c.setData({ ...LIVE, crossings: { days: 4, threshold: 2, axis: ['2026-08-30', '2026-08-31', '2026-09-01', '2026-09-02'],
+    items: [{ ticker: 'KORA', name: 'K', nameAr: 'ك', sector: 'Banks', sectorAr: 'بنوك', kinds: ['news', 'session'],
+      why: 'w', whyAr: 'و', insight: '', insightAr: '', pct: 2.0, ratio: 2.1, peers: [], sameSector: 0,
+      strands: [{ kind: 'session', date: '2026-09-02', title: '', titleAr: '', ratio: 2.1, link: '' },
+                { kind: 'news', date: '2026-09-02', title: 'x', titleAr: 'س', link: 'https://example.com/a' }] }] } });
+  c.state.screen = 'crossings';
+  const item = c.renderVals().crossings[0];
+  const list = item.strands || item.threads || [];
+  assert.ok(list.length >= 2, 'the strands did not render');
+  const session = list.find((s) => !s.hasLink);
+  const press = list.find((s) => s.hasLink);
+  assert.equal(session.href, null);
+  assert.equal(press.href, 'https://example.com/a');
+});
+
+test('every published sector has Arabic on the site, from the exchange', async () => {
+  // Fourteen of the eighteen exchange sectors fell through to English on the
+  // Arabic-default Sectors screen; the table held only the vendor's twenty.
+  const secs = await fromDisk(() => data.sectors());
+  const english = secs.filter((s) => s.nameAr === s.name && /[A-Za-z]/.test(s.name));
+  assert.deepEqual(english.map((s) => s.name), [], 'these sectors have no Arabic');
+});
+
+test('the §8 guard covers the review paragraph and the brief, not only the metric answers', () => {
+  const c = fresh();
+  c.setData({ ...LIVE, review: { read: 'Investors should buy this cheap stock.', read_ar: '' } });
+  c.state.screen = 'company';
+  c.state.ticker = 'PHDC';
+  c._co = { ticker: 'PHDC', name: { en: 'PHD', ar: 'بالم' }, profile: {},
+            brief: 'A bargain at these levels — buy.', briefAr: '' };
+  const v = c.renderVals();
+  assert.equal(v.ratioRead, '', 'a directive review paragraph reached the screen');
+  assert.doesNotMatch(v.co.brief, /buy|bargain/i, 'a directive brief reached the screen');
+  c.setData({ ...LIVE, review: { read: 'Net profit rose at most names.', read_ar: '' } });
+  c._co = { ticker: 'PHDC', name: { en: 'PHD', ar: 'بالم' }, profile: {}, brief: 'A cement producer in Suez.', briefAr: '' };
+  const ok = c.renderVals();
+  assert.equal(ok.ratioRead, 'Net profit rose at most names.');
+  assert.equal(ok.co.brief, 'A cement producer in Suez.');
+});
+
+test('the investor split says it counts bonds, and shows shares alone', async () => {
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({
+    ...INVDOC, excluding_bonds: [{ party: 'Egyptians', party_ar: 'مصريين', percent: 88.1 },
+                                 { party: 'Arabs & Foreigners', party_ar: 'عرب وأجانب', percent: 11.9, combined: true }] }) });
+  const inv = await data.investors();
+  delete globalThis.fetch;
+  assert.deepEqual(inv.equities.map((p) => p.party), ['Egyptians']);
+  const v = screen({ ...LIVE, investors: inv });
+  assert.match(v.investors.equitiesLine, /bonds and T-bills too\. Shares alone: Egyptians 88\.10%/);
+});
+
+test('an image address with a literal &amp; is unescaped', async () => {
+  globalThis.fetch = async () => ({ ok: true, status: 200, json: async () => ({
+    items: [{ id: 'x', headline: 'h', published: '2026-09-02T10:00:00Z', outlet: 'o',
+              image: 'https://img.example/a.jpg?w=1&amp;ssl=1' }] }) });
+  const feed = await data.news();
+  delete globalThis.fetch;
+  // news() returns the mapped items directly.
+  assert.equal(feed[0].image, 'https://img.example/a.jpg?w=1&ssl=1');
+});
+
+test('the watchlist reports what it kept, not what it was handed', async () => {
+  // write() persisted list.slice(0, 60) and returned the full list, so past
+  // the cap the star lit up on screen for a company the store had dropped.
+  const store = {};
+  globalThis.localStorage = { getItem: (k) => store[k] ?? null, setItem: (k, v) => { store[k] = v; } };
+  try {
+    const w = await import('../../public/esthmr/watchlist.js');
+    let last = null;
+    for (let i = 0; i < 70; i++) last = w.add('cap@test', 'T' + i);
+    assert.equal(w.read('cap@test').length, 60, 'the store keeps sixty');
+    assert.equal(last.length, 60, `add() returned ${last.length} for a store that kept 60`);
+    // Newest first, so the sixty kept are the sixty most recently followed.
+    assert.equal(last[0], 'T69');
+  } finally { delete globalThis.localStorage; }
+});
+
 test('a dollar listing says which money each of its two figures is in', () => {
   // The market table was taught this and the company screen was not, so the
   // page a reader lands on printed 0.118 over a market value of 2.83 billion

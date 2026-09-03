@@ -280,8 +280,9 @@ export class Component extends Base {
       investorsEgpM:'EGP millions, bought less sold',
       investorsBasis:'The exchange states these period to date for its current reporting period, not for a single session. The period resets when the exchange starts a new one, and the date beside the figures is the exchange\u2019s own.',
       investorsAsOf:'Exchange figures as of', investorsTotal:'Value traded in the period:',
+      investorsEquities:'The split above counts government bonds and T-bills too. Shares alone:',
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
-      homeTitle:'The close', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
+      homeTitle:'The close', homeTitleLive:'The session', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
       // ── the reader's own list ──
       followTitle:'Watchlist',
@@ -341,6 +342,7 @@ export class Component extends Base {
       heatZoomOut:'Showing one sector. Tap it again, or the name above, for the whole map.',
       heatSliver:'{n} are drawn as a hairline. The largest company here is worth {times} times the smallest and the map is to scale — putting a floor under the small ones would draw a rounding error at the weight of a real company. Use the market table to open those.',
       closeNote:'Official close from market.json. Not a live price.',
+      closeNoteLive:'Live feed, delayed — not the official close.',
       todayTitle:'News', newestFirst:'Newest first', readAtSource:'Read at source', outletImage:'Outlet picture',
       // ── connecting the dots ──
       // One name for one feature: the rail said "Crossings", the screen said
@@ -530,8 +532,9 @@ export class Component extends Base {
       investorsEgpM:'مليون جنيه، المشتراة ناقص المباعة',
       investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً لفترة التقرير الحالية، لا لجلسة واحدة. وتبدأ الفترة من جديد عندما تفتح البورصة فترة أخرى، والتاريخ المجاور للأرقام هو تاريخ البورصة نفسها.',
       investorsAsOf:'أرقام البورصة بتاريخ', investorsTotal:'قيمة التداول في الفترة:',
+      investorsEquities:'التقسيم أعلاه يشمل السندات وأذون الخزانة أيضاً. الأسهم وحدها:',
       investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
-      homeTitle:'الإغلاق', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
+      homeTitle:'الإغلاق', homeTitleLive:'الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
       following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
       // ── قائمة المتابعة ──
       followTitle:'المتابَعة',
@@ -587,6 +590,7 @@ export class Component extends Base {
       heatZoomOut:'قطاع واحد معروض. اضغطه مرة أخرى، أو الاسم أعلاه، للخريطة كاملة.',
       heatSliver:'{n} تُرسم كخيط رفيع. أكبر شركة هنا تساوي {times} ضعف أصغرها والخريطة بالمقياس \u2014 ووضع حد أدنى للحجم يرسم فارقاً لا يُذكر بوزن شركة حقيقية. افتح تلك الشركات من جدول السوق.',
       closeNote:'الإغلاق الرسمي من market.json، وليس سعراً لحظياً.',
+      closeNoteLive:'تغذية لحظية متأخرة — وليست الإغلاق الرسمي.',
       todayTitle:'الأخبار', newestFirst:'الأحدث أولاً', readAtSource:'اقرأ في المصدر', outletImage:'صورة الجهة الناشرة',
       // ── ربط النقاط ──
       dotsLabel:'ربط النقاط',
@@ -1258,7 +1262,7 @@ export class Component extends Base {
       const perf = (v) => (v === null || v === undefined ? '—' : this.pct(v));
       const whole = (v) => (v === null || v === undefined ? '—' : this.num(v, 0));
       Object.assign(co, {
-        brief: (ar ? loaded.briefAr : loaded.brief) || L.nothingYet,
+        brief: (() => { const b = (ar ? loaded.briefAr : loaded.brief) || ''; return (b && !DIRECTIVE.test(b) ? b : '') || L.nothingYet; })(),
         briefFacts: [
           { label: ar?'القطاع':'Sector', value: sectorName(loaded.sector) },
           { label: ar?'الأسهم المُصدرة':'Shares outstanding', value: whole(p.shares_outstanding) },
@@ -1373,7 +1377,7 @@ export class Component extends Base {
           if (pct === null || typeof c !== 'number' || pct <= -100) return '—';
           // Signed the same way `pct` beside it is, so the header does not put
           // a typographic minus next to an arithmetic one.
-          return this.signed(c - c / (1 + pct / 100));
+          return (loaded.currency ? loaded.currency + ' ' : '') + this.signed(c - c / (1 + pct / 100));
         })(),
         color: this.dcol(pct),
         // As above: exactly flat is not a fall.
@@ -1452,7 +1456,10 @@ export class Component extends Base {
               : (ar ? st.titleAr : st.title),
             label, color, tint, icon,
             day: this.dayLabel(st.date), date: st.date,
-            href: st.link || '', hasLink: Boolean(st.link),
+            // null, not '': dc.js sets href="" verbatim, and an empty href is
+            // a link to the page you are on, opened in a new tab. Every
+            // "That session" strand did exactly that.
+            href: st.link || null, hasLink: Boolean(st.link),
             first: n === 0, last: n === (item.strands || []).length - 1,
             // The gutter draws a line up to a dot and on to the next; the
             // first has nothing above it and the last nothing below.
@@ -1571,6 +1578,9 @@ export class Component extends Base {
         // cumulative figures with no date at all, and "period to date" named
         // no period. The stamp is Cairo local time as the exchange publishes it.
         asOfLine: d.asOf ? L.investorsAsOf + ' ' + String(d.asOf).replace('T', ' ').slice(0, 16) + ' (Cairo)' : '',
+        equitiesLine: (d.equities && d.equities.length)
+          ? L.investorsEquities + ' ' + d.equities.map((p) => (ar ? p.partyAr : p.party) + ' ' + (p.percent === null ? '—' : p.percent.toFixed(2) + '%')).join(' · ')
+          : '',
         totalLine: typeof d.totalValue === 'number'
           ? L.investorsTotal + ' EGP ' + this.num(d.totalValue / 1e9, 2) + 'bn' : '',
         // Egyptians against Arabs against non-Arab foreigners.
@@ -2166,6 +2176,10 @@ export class Component extends Base {
       const strong = c && Math.abs(c.r) >= 0.2;
       return Object.assign({}, m, {
         hasUnit: Boolean(m.unit), hasChain: Boolean(m.chain), hasLink: Boolean(c),
+        // The four world indices carry the unit word 'points' from data.js as
+        // an English literal; the index cards a few lines up already say
+        // نقطة in Arabic. Same word, same rule.
+        unit: m.unit === 'points' ? (ar ? 'نقطة' : 'points') : m.unit,
         link: !c ? '' : (strong ? L.macroMoved : L.macroBarely)
           .replace('{r}', (c.r > 0 ? '+' : '\u2212') + Math.abs(c.r).toFixed(2))
           .replace('{n}', c.sessions),
@@ -2465,6 +2479,18 @@ export class Component extends Base {
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
       sessionState: this.sessionLine(D, L),
+      // Home's headline and its pill said "The close — official close from
+      // market.json, not a live price" as unconditional literals, including
+      // through the whole trading session, while the sidebar beside them said
+      // "live feed, delayed 15 min" from the same flags. During a session a
+      // reader was told the moving number was an official close. Same test
+      // sessionLine() makes: the live feed first, because `is_close` belongs
+      // to the last capture and the first hours of a session sit under
+      // yesterday's document.
+      homeIsClose: Boolean(D.isClose && !D.livePrices),
+      homeIsLive: !(D.isClose && !D.livePrices),
+      homeTitle: (D.isClose && !D.livePrices) ? L.homeTitle : L.homeTitleLive,
+      homeNote: (D.isClose && !D.livePrices) ? L.closeNote : L.closeNoteLive,
       hasPriceSource: Boolean(D.liveFrom && D.liveFrom.egx),
       priceSource: D.liveFrom
         ? L.priceFrom.replace('{egx}', String(D.liveFrom.egx))
@@ -2560,7 +2586,10 @@ export class Component extends Base {
       // The ratios, and the paragraph the pipeline writes over all of them.
       pickList, pickChips, hasPickList: pickList.length > 0,
       ratios, ratioGroups, hasRatios: ratios.length > 0,
-      ratioRead: D.review ? (ar ? (D.review.read_ar || D.review.read) : D.review.read) || '' : '',
+      // The same §8 guard the metric answers pass through. This paragraph is
+      // the most prominent generated prose on the screen and was the one
+      // path that skipped it.
+      ratioRead: (() => { const r = D.review ? (ar ? (D.review.read_ar || D.review.read) : D.review.read) || '' : ''; return r && !DIRECTIVE.test(r) ? r : ''; })(),
       // "Six of seven readable metrics moved the same way" — and then the
       // question that follows from it, which is the app's and not ours.
       ratioAgreement: agreement, ratioAsk: agreementAsk,
