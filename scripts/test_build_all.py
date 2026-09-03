@@ -102,5 +102,59 @@ class ExitCodes(unittest.TestCase):
         critical = sorted(build_all.CRITICAL)[0]
         self.assertEqual(self._run({fatal[0], critical}), 2)
 
+
+class TheManifestIsLast(unittest.TestCase):
+    """`data_version` must be a hash of everything that ships with it.
+
+    The module docstring has always said the manifest is built last "on
+    purpose", because that hash is the only thing telling an installed app its
+    cache is stale. It was not last. Five best-effort harvests were appended
+    below it, and two of them publish: `build_company_briefs` writes (and
+    unlinks from) `public/data/v1/briefs/`, and `enrich_disclosures` writes the
+    disclosures window and archive. All three of those folders sit in
+    `build_fixtures.UNVERSIONED` — no counter of their own, guarded by
+    `data_version` alone — so every brief shipped under a fingerprint computed
+    before it existed and no device ever asked for it.
+
+    This is the guard, not the comment: anything appended after the manifest
+    fails here.
+    """
+
+    def test_the_last_step_builds_the_manifest(self):
+        name, script = build_all.STEPS[-1][0], build_all.STEPS[-1][1]
+        self.assertEqual(
+            script, "build_fixtures.py",
+            f"the last step is {name} ({script}); anything that writes into "
+            "public/data/v1 after the manifest ships unfingerprinted",
+        )
+
+    def test_the_unversioned_folders_are_still_the_reason(self):
+        """If these ever gain counters of their own the rule can relax — until
+        then they are guarded by `data_version` and nothing else."""
+        import build_fixtures
+
+        guarded = set(build_fixtures.UNVERSIONED)
+        for folder in ("briefs", "disclosures/archive", "disclosures/documents"):
+            self.assertIn(folder, guarded, folder)
+
+    def test_nothing_publishes_after_it(self):
+        """The two tail harvests that write into the published tree must sit
+        above the final manifest, not below it."""
+        scripts = [s[1] for s in build_all.STEPS]
+        last = len(scripts) - 1 - scripts[::-1].index("build_fixtures.py")
+        for publisher in ("build_company_briefs.py", "enrich_disclosures.py"):
+            if publisher not in scripts:
+                continue
+            # The LAST time it runs, not the first. A step listed twice — once
+            # correctly above the manifest and once appended below it — would
+            # slip past a check that only looked at the first occurrence, which
+            # is exactly the shape of the bug this class exists to catch.
+            latest = len(scripts) - 1 - scripts[::-1].index(publisher)
+            self.assertLess(
+                latest, last,
+                f"{publisher} writes published data after the final manifest",
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

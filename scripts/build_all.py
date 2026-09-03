@@ -305,6 +305,31 @@ STEPS = [
      ["--limit", "5", "--spacing", "6"]),
     ("Filed documents", "enrich_disclosures.py", False,
      ["--limit", "8", "--spacing", "6"]),
+    # The manifest again, and this time it is last.
+    #
+    # This module's own docstring says "The manifest is built last on purpose:
+    # its `data_version` is a hash of the other documents, and that hash is the
+    # only thing that tells an installed app its cached copy is stale." That
+    # stopped being true when the harvests were appended below it. Two of them
+    # publish: `build_company_briefs.py` writes `public/data/v1/briefs/` — and
+    # unlinks the briefs a later run refused — and `enrich_disclosures.py`
+    # writes the disclosures window and archive. `briefs`, `disclosures/archive`
+    # and `disclosures/documents` are all in `build_fixtures.UNVERSIONED`, which
+    # means they have no counter of their own and are guarded by `data_version`
+    # alone.
+    #
+    # So every brief and every newly attached document was shipping under a
+    # fingerprint computed before it existed, and no phone asked for it until
+    # some later run happened to move the hash for another reason. Measured: a
+    # single byte changed in one brief moves `data_version`, so the gap is real
+    # and not theoretical.
+    #
+    # It costs nothing to close. `build_fixtures.py` makes no network call and
+    # is byte-stable when the content has not moved, so on a run where the
+    # harvests found nothing this rewrites the identical file and the commit
+    # step sees no diff. `test_build_all` now refuses to let anything be
+    # appended after it.
+    ("Manifest + fixtures", "build_fixtures.py", False),
 ]
 
 # Steps whose failure is a shrug rather than a problem.
