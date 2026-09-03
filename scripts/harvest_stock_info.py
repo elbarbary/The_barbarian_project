@@ -37,6 +37,7 @@ import pathlib
 import sys
 import urllib.error
 import urllib.request
+import transport
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = pathlib.Path(__file__).resolve().parent / "stock_info.json"
@@ -128,7 +129,7 @@ def main() -> int:
     print("── Stock info (one request, whole market)")
     try:
         rows = fetch()
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+    except transport.TRANSPORT as error:
         # Best-effort by design: the app has lived without these three metrics
         # and can live one more run without them. Never fail the build for it.
         print(f"   exchange did not answer — {error}", file=sys.stderr)

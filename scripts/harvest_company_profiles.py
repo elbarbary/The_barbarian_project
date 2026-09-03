@@ -55,6 +55,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import transport
 
 from mubasher_statements import BROWSER_UA
 
@@ -120,7 +121,7 @@ def fetch(ticker: str, timeout: int = 30) -> str | None:
         if error.code in (403, 429, 503):
             raise Refused(f"HTTP {error.code}") from error
         return None
-    except (urllib.error.URLError, TimeoutError, OSError):
+    except transport.TRANSPORT:
         return None
 
 

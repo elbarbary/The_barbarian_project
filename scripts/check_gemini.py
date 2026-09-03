@@ -21,6 +21,7 @@ import re
 import sys
 import urllib.error
 import urllib.request
+import transport
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -86,7 +87,7 @@ def main() -> int:
         if wait := re.search(r"retry in ([\d.]+)s", detail):
             print(f"   retry in    {float(wait.group(1)):.0f}s")
         return 1
-    except (urllib.error.URLError, TimeoutError, OSError) as error:
+    except transport.TRANSPORT as error:
         print(f"   unreachable {str(error)[:120]}")
         return 1
 

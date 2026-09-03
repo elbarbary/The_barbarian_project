@@ -38,6 +38,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import transport
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -67,7 +68,7 @@ def _get(url: str, *, headers: dict | None = None, timeout: int = 60) -> bytes:
             return response.read()
     except urllib.error.HTTPError as error:
         raise MacroUnavailable(f"HTTP {error.code}") from error
-    except (urllib.error.URLError, TimeoutError, OSError) as error:
+    except transport.TRANSPORT as error:
         raise MacroUnavailable(str(error)[:120]) from error
 
 

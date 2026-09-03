@@ -33,6 +33,7 @@ import urllib.parse
 import urllib.request
 
 import gemini
+import transport
 
 ENDPOINT = "https://translation.googleapis.com/language/translate/v2"
 
@@ -82,7 +83,7 @@ def translate(texts: list[str]) -> dict[str, str]:
             except Exception:
                 pass
             raise TranslateUnavailable(f"HTTP {error.code}: {detail[:300]}") from error
-        except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+        except transport.TRANSPORT as error:
             raise TranslateUnavailable(str(error)[:160]) from error
 
         rendered = payload.get("data", {}).get("translations") or []

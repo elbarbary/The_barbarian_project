@@ -38,6 +38,8 @@ import pathlib
 import sys
 import urllib.error
 import urllib.request
+import transport
+import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -117,12 +119,26 @@ def get(url: str, body: bytes | None = None, timeout: int = 25):
     if body is not None:
         headers["content-type"] = "application/json"
     request = urllib.request.Request(url, data=body, headers=headers)
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return json.loads(response.read())
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
-        print(f"   ! {url.split('/')[2]}: {error}")
-        return None
+    # Three looks before giving up. A body that stopped arriving mid-flight is
+    # the connection rather than an answer, and the next attempt usually
+    # completes — where an unretried one loses the whole document, because a
+    # single None here unwinds past carry_forward() and nothing is written at
+    # all, not even the rows that fetched cleanly.
+    last = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return json.loads(response.read())
+        except urllib.error.HTTPError as error:
+            # A status is an answer; asking again gets the same one.
+            print(f"   ! {url.split('/')[2]}: HTTP {error.code}")
+            return None
+        except transport.TRANSPORT as error:
+            last = error
+            if attempt < 2:
+                time.sleep(2.0 * (attempt + 1))
+    print(f"   ! {url.split('/')[2]}: {last}")
+    return None
 
 
 def money(value: float, dp: int = 2) -> str:

@@ -48,6 +48,7 @@ from datetime import UTC, date, datetime, timedelta
 import translations
 
 import scrapling_python
+import transport
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "disclosures"
@@ -276,7 +277,7 @@ def fetch_beta(days: int) -> list[dict] | None:
         try:
             with urllib.request.urlopen(req, timeout=60) as response:
                 raw = response.read()
-        except (urllib.error.URLError, OSError) as error:
+        except transport.TRANSPORT as error:
             print(f"   beta: transport error ({error}) — will fall back")
             return None
         # The F5 answers 200 with an HTML rejection page rather than a status.

@@ -43,6 +43,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import transport
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -110,7 +111,7 @@ def _get(url: str, timeout: int = 45) -> str:
             return response.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as error:
         raise PriceHistoryUnavailable(f"HTTP {error.code}") from error
-    except (urllib.error.URLError, TimeoutError, OSError) as error:
+    except transport.TRANSPORT as error:
         raise PriceHistoryUnavailable(str(error)[:120]) from error
 
 

@@ -63,6 +63,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import transport
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent"
@@ -165,7 +166,7 @@ def _access_token() -> str | None:
     )
     try:
         payload = json.loads(urllib.request.urlopen(request, timeout=30).read())
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError):
+    except transport.TRANSPORT:
         return None
     return payload.get("access_token")
 
@@ -225,7 +226,7 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
                     continue
                 _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
                 break
-            except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+            except transport.TRANSPORT as error:
                 # A read timeout is the connection failing, not Vertex saying
                 # no, and the endpoint behind the fallback has an empty wallet
                 # — so retrying here is strictly better than dropping through.
@@ -243,7 +244,7 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
     )
     try:
         return json.loads(urllib.request.urlopen(request, timeout=timeout).read())
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+    except transport.TRANSPORT as error:
         raise GeminiUnavailable(str(error)[:120]) from error
 
 
@@ -345,7 +346,7 @@ def translate(texts: list[str], *, model: str = TRANSLATE_MODEL) -> dict[str, st
         except Exception:
             pass
         raise GeminiUnavailable(f"HTTP {error.code}: {detail[:400]}") from error
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
+    except transport.TRANSPORT as error:
         raise GeminiUnavailable(str(error)[:120]) from error
 
     candidates = payload.get("candidates") or []

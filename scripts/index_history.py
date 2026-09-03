@@ -34,6 +34,7 @@ import pathlib
 import sys
 import urllib.error
 import urllib.request
+import transport
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -109,10 +110,6 @@ class IndexHistoryUnavailable(RuntimeError):
 RETRIES = 3
 BACKOFF = 2.0
 
-# Everything that means "the transport failed", as opposed to "the host said
-# no". HTTPException is the one that was missing.
-TRANSPORT = (http.client.HTTPException, urllib.error.URLError, TimeoutError,
-             OSError, ValueError)
 
 
 def _get(url: str) -> dict:
@@ -127,7 +124,7 @@ def _get(url: str) -> dict:
         except urllib.error.HTTPError as error:
             # A status is an answer. Retrying a 403 asks the same question.
             raise IndexHistoryUnavailable(f"HTTP {error.code} for {url}") from error
-        except TRANSPORT as error:
+        except transport.TRANSPORT as error:
             last = error
             if attempt + 1 < RETRIES:
                 time.sleep(BACKOFF * (attempt + 1))

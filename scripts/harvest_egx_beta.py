@@ -55,6 +55,7 @@ import urllib.error
 import urllib.request
 
 import scrapling_python
+import transport
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "data-source" / "egx-beta"
@@ -165,7 +166,7 @@ def request(path: str, body: dict | None = None, *, timeout: int = 150,
             if browsed is not None:
                 return browsed
             raise
-        except (TimeoutError, urllib.error.URLError, OSError) as error:
+        except transport.TRANSPORT as error:
             last = error
             wait = 8 * (attempt + 1) + random.uniform(0, 5)
             print(f"   … {type(error).__name__}, retrying in {wait:.0f}s")

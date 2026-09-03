@@ -55,6 +55,7 @@ import filing_types as ft
 import news_context
 import news_images
 import translations
+import transport
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 OUT = REPO / "public" / "data" / "v1" / "news"
@@ -205,7 +206,7 @@ def get(url: str, timeout: int = 25) -> bytes | None:
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             return response.read()
-    except (urllib.error.URLError, TimeoutError, OSError) as error:
+    except transport.TRANSPORT as error:
         print(f"   ! {url.split('/')[2]}: {error}", file=sys.stderr)
         return None
 
