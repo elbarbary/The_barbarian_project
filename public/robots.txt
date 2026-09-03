@@ -1,0 +1,21 @@
+# esthmr.com / thebarbarianproject.com
+#
+# Cloudflare serves a content-signal preamble above this. Until now that was
+# the whole file: twenty lines explaining what a content signal means, and not
+# one directive. It declared nothing.
+#
+# What is here now says two things.
+#
+# The figures under /data/v1/ answer only to a signed-in session. A crawler
+# gets 401 there whatever this file says, so the Disallow does not protect
+# them — the session does. It is written down so a well-behaved crawler spends
+# its budget on the pages instead of collecting refusals, and so that anything
+# ignoring it has been told plainly.
+#
+# The pages are open and meant to be found. search=yes is the point of
+# publishing them.
+
+User-agent: *
+Disallow: /data/v1/
+Disallow: /esthmr/api/
+Content-Signal: search=yes, ai-input=no, ai-train=no

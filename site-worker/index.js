@@ -163,10 +163,11 @@ async function session(request, env) {
  * site down; that has to be true of this one too, so it fails open and the
  * gate itself — which is what keeps the data behind a session — is untouched.
  */
-async function overRate(env, key) {
-  if (!env.DATA_LIMIT || typeof env.DATA_LIMIT.limit !== 'function') return false;
+async function overRate(env, key, binding = 'DATA_LIMIT') {
+  const limiter = env[binding];
+  if (!limiter || typeof limiter.limit !== 'function') return false;
   try {
-    const { success } = await env.DATA_LIMIT.limit({ key });
+    const { success } = await limiter.limit({ key });
     return !success;
   } catch {
     return false;
@@ -662,7 +663,11 @@ async function api(request, env, url) {
  * of the site and living at its root — from 404ing on this host alone.
  */
 const ESTHMR_HOSTS = new Set(['esthmr.com', 'www.esthmr.com']);
-const UNPREFIXED = ['/esthmr/', '/data/v1/'];
+// '/robots.txt' is root-only by specification: there is no such thing as a
+// robots file for a path prefix. Without it here, esthmr.com asks the asset
+// server for /esthmr/robots.txt, takes a 404, and falls back — one wasted
+// fetch to arrive at the same file.
+const UNPREFIXED = ['/esthmr/', '/data/v1/', '/robots.txt'];
 
 /* Six months, and no `preload`. The redirect above only helps a reader who has
  * already been sent over http once; this is what stops the browser trying it
@@ -727,7 +732,26 @@ async function serve(request, env, url) {
         'www-authenticate': 'Session realm="esthmr"',
       });
     }
-    if (await overRate(env, `data:${who.e}`)) {
+    /* Two ceilings, because one account is not the unit an abuser is limited
+     * to. Minting another costs an email round trip, and the sign-in counters
+     * above say exactly how cheap that is: six an hour from one address
+     * without solving the challenge, sixty with. So a per-account ceiling of
+     * 90/min is really 540/min from one machine, or 5,400 if it solves — the
+     * account limit does not bind the thing doing the pulling.
+     *
+     * The address does. It is deliberately much looser than the per-account
+     * one for the reason this file keeps repeating: an address is not a
+     * person. An office behind one NAT and a carrier on CGNAT put hundreds of
+     * readers on a single address, and a tight ceiling there locks all of them
+     * out for what one of them did. 300/min is around nine full page loads a
+     * minute shared between everyone on that address — slack for a crowd,
+     * still a hard stop for a machine rotating accounts.
+     *
+     * Both fail open, for the reason `overRate` gives: a limiter must not be
+     * able to take the site down. The gate itself is the session, not this. */
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+    if (await overRate(env, `data:${who.e}`)
+        || await overRate(env, `data-ip:${ip}`, 'DATA_IP_LIMIT')) {
       return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
     }
     const answer = await env.ASSETS.fetch(request);

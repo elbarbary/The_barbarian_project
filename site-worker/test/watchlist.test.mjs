@@ -234,6 +234,66 @@ test('the limiter stops a caller who is over, and never the whole gate', async (
   assert.equal((await call(limited, 'https://thebarbarianproject.com/data/v1/companies.json')).status, 401);
 });
 
+test('a fresh account does not buy a fresh allowance from the same address', async () => {
+  /* The hole this closes. The per-account ceiling bounds a credential, and a
+     credential costs one email — the sign-in counters in the Worker allow six
+     an hour from one unchallenged address. So 90/min per account was really
+     540/min from one machine, simply by rotating who it claimed to be.
+
+     Both limiters are asked on every read. The account key changes when the
+     puller swaps accounts; the address key does not, and that is the one that
+     has to refuse. */
+  const seen = [];
+  const e = env({
+    DATA_LIMIT: { limit: async ({ key }) => { seen.push(key); return { success: true }; } },
+    DATA_IP_LIMIT: { limit: async ({ key }) => { seen.push(key); return { success: false }; } },
+  });
+  const url = 'https://thebarbarianproject.com/data/v1/companies.json';
+  const from = '198.51.100.7';
+
+  for (const who of ['one@example.com', 'two@example.com', 'three@example.com']) {
+    const answer = await call(e, url, {
+      headers: { ...(await bearer(who)), 'cf-connecting-ip': from },
+    });
+    assert.equal(answer.status, 429, `${who} got through on a spent address`);
+  }
+  // Three different accounts, one address: the account key moved, the address
+  // key stayed put.
+  assert.deepEqual(seen.filter((k) => k.startsWith('data-ip:')),
+    Array(3).fill(`data-ip:${from}`));
+  assert.equal(new Set(seen.filter((k) => k.startsWith('data:'))).size, 3);
+});
+
+test('the address ceiling fails open and never outranks the session', async () => {
+  const url = 'https://thebarbarianproject.com/data/v1/companies.json';
+  const headers = { ...(await bearer('reader@example.com')), 'cf-connecting-ip': '203.0.113.9' };
+
+  // A limiter that throws must not take the data down — the same promise the
+  // account limiter above makes.
+  const broken = env({ DATA_IP_LIMIT: { limit: async () => { throw new Error('down'); } } });
+  assert.equal((await call(broken, url, { headers })).status, 200);
+
+  // An absent binding is an absent limit, not a broken gate.
+  assert.equal((await call(env(), url, { headers })).status, 200);
+
+  // Under the ceiling, a signed-in reader is served and a stranger still is not.
+  const under = env({ DATA_IP_LIMIT: { limit: async () => ({ success: true }) } });
+  assert.equal((await call(under, url, { headers })).status, 200);
+  assert.equal((await call(under, url)).status, 401);
+});
+
+test('robots.txt is the same file on both hosts, and names the gated paths', async () => {
+  /* It is not served through the /esthmr/ mapping: a robots file for a path
+     prefix is not a thing that exists. */
+  const { readFileSync } = await import('node:fs');
+  const text = readFileSync(new URL('../../public/robots.txt', import.meta.url), 'utf8');
+  const rules = text.split('\n').filter((line) => line && !line.startsWith('#'));
+  assert.ok(rules.includes('Disallow: /data/v1/'), 'the gated data is not declared');
+  assert.ok(rules.includes('Disallow: /esthmr/api/'), 'the API is not declared');
+  assert.ok(rules.some((line) => line.startsWith('User-agent:')),
+    'directives without a User-agent line apply to nobody');
+});
+
 /* ── esthmr.com ────────────────────────────────────────────────────────── */
 
 const body = async (response) => (await response.text());
