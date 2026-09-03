@@ -994,19 +994,22 @@ def triage(item: dict, basis: Basis) -> dict:
         # scan does not reach; it is not true at ten in the morning, when the
         # figures exist and simply belong to a session nobody has finished.
         if basis.session is None:
-            return {
-                "weight": "named",
-                "because": (
-                    f"This is about {', '.join(item['tickers'])}. We hold no "
-                    "completed session's trading figures to compare the story "
-                    "against."
-                ),
-                "because_ar": (
-                    f"هذا الخبر عن {isolate(', '.join(item['tickers']))}. لا "
-                    "نملك أرقام تداول لجلسة مكتملة نقارن بها الخبر."
-                ),
-                "evidence": None,
-            }
+            # SAY NOTHING, rather than apologising on every card.
+            #
+            # This block exists to add a measured fact. When there is no
+            # completed session to measure against there is no fact, and an
+            # apology in its place is worse than an empty space: it filled 46
+            # of 400 cards with "We hold no completed session's trading
+            # figures", displacing the sentences that were there — including
+            # real ones like "0.84x their normal". The site gates the block on
+            # `hasBecause`, so an empty string simply does not render and the
+            # card keeps its headline, its outlet and its date.
+            #
+            # It is a transition state, not a resting one: the first run after
+            # a close publishes `evidence_session`, and from then on an open
+            # session carries those measured blocks forward instead of
+            # reaching this branch at all.
+            return {"weight": "named", "because": "", "because_ar": "", "evidence": None}
         return {
             "weight": "named",
             "because": (
