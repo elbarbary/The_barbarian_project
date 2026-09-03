@@ -1332,8 +1332,8 @@
   "history_bars": 120,
   "market_cap": 852416649.432,
   "market_cap_source": "EGX",
-  "trades": 360,
-  "turnover": 8679452,
+  "trades": 10,
+  "turnover": 37223,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

@@ -4,8 +4,7 @@
   "en": "Pyramisa Hotels",
   "ar": "بيراميزا للفنادق والقرى السياحية - بيراميزا"
  },
- "sector": "Travel & Leisure",
- "sector_ar": "سياحة وترفيه",
+ "sector": "Consumer Services",
  "market": {
   "last_close": 355,
   "date": "2026-09-03",
@@ -1330,13 +1329,22 @@
   "normal_value_30d": 1996999.505,
   "five_session_change": 2.7912902478573143,
   "history_bars": 120,
-  "market_cap": 8906722500.0,
-  "market_cap_source": "EGX",
-  "trades": 44,
-  "turnover": 1233559
+  "market_cap": 8821293411,
+  "market_cap_source": "scan"
  },
  "financials": {
   "annual": [
+   {
+    "period": "FY 2013",
+    "net_income": 46.145,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2013-01-01",
+    "period_end": "2013-12-31",
+    "filed": "2014-02-27",
+    "filing_id": "egx-123409",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
    {
     "period": "FY 2014",
     "net_income": 92.394,

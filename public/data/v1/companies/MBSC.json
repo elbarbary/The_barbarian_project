@@ -1330,14 +1330,25 @@
   "normal_value_30d": 33779283.21,
   "five_session_change": 13.773081550452492,
   "history_bars": 120,
-  "market_cap": 23934712245.0,
+  "market_cap": 23226024673.24,
   "market_cap_source": "EGX",
-  "trades": 1342,
-  "turnover": 44351629,
+  "trades": 79,
+  "turnover": 1328478,
   "shares_outstanding_source": "EGX"
  },
  "financials": {
   "annual": [
+   {
+    "period": "FY 2013",
+    "net_income": 336.066,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2013-01-01",
+    "period_end": "2013-12-31",
+    "filed": "2014-03-17",
+    "filing_id": "egx-124185",
+    "basis": "unstated",
+    "source": "https://www.egx.com.eg"
+   },
    {
     "period": "FY 2014",
     "net_income": 225.213,

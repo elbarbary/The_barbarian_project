@@ -1330,11 +1330,22 @@
   "history_bars": 120,
   "market_cap": 2422080000.0,
   "market_cap_source": "EGX",
-  "trades": 344,
-  "turnover": 8199009
+  "trades": 13,
+  "turnover": 132551
  },
  "financials": {
   "annual": [
+   {
+    "period": "FY 2013",
+    "net_income": 0.132,
+    "net_income_source": "https://www.egx.com.eg",
+    "period_start": "2013-01-01",
+    "period_end": "2013-12-31",
+    "filed": "2014-02-26",
+    "filing_id": "egx-123374",
+    "basis": "consolidated",
+    "source": "https://www.egx.com.eg"
+   },
    {
     "period": "FY 2014",
     "net_income": -0.946,
@@ -1359,13 +1370,13 @@
    },
    {
     "period": "FY 2016",
-    "net_income": 0.402,
+    "net_income": -1.122,
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2016-01-01",
     "period_end": "2016-12-31",
     "filed": "2017-02-22",
-    "filing_id": "egx-158227",
-    "basis": "standalone",
+    "filing_id": "egx-158228",
+    "basis": "consolidated",
     "source": "https://www.egx.com.eg"
    },
    {
