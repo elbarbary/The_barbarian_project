@@ -226,7 +226,7 @@ export class Component extends Base {
       revRoaAsk:'How hard is everything the company owns actually working?',
       revDebtAsk:'What did management do with the borrowed money — and is it earning more than it costs?',
       revYieldAsk:'Is the dividend supported by profit and cash — or by a share price that fell?',
-      feedCount:'{shown} of {total} headlines, newest first.',
+      feedCount:'{shown} of {total} headlines, newest first.', volumeOn:'volume on',
       showMore:'Show more',
       busiest:'Traded with abnormal volume',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
@@ -377,6 +377,7 @@ export class Component extends Base {
       openFiling:'Open filing',
       openOnExchange:'Open on the Egyptian Exchange', openOnMubasher:'Open on Mubasher',
       mixedRow:'Net profit from this filing; the statement figures as published by Mubasher',
+      finsInDollars:'This company files in US dollars. The exchange\u2019s own announcements are not merged into this pounds table, so it can lag the filings listed below.',
       borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
       dueWithinYear:'Due within a year', dueLater:'Due later', movementSince:'Movement since', pattern:'Pattern',
       debtHigherThan:'Higher than they were, at {was}.',
@@ -481,7 +482,7 @@ export class Component extends Base {
       revRoaAsk:'ما مدى كفاءة تشغيل كل ما تملكه الشركة؟',
       revDebtAsk:'ماذا فعلت الإدارة بالأموال المقترضة — وهل تُدرّ أكثر مما تكلّف؟',
       revYieldAsk:'هل التوزيع مدعوم بالربح والنقد — أم بسعر سهم هبط؟',
-      feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.',
+      feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.', volumeOn:'حجم التداول في',
       showMore:'عرض المزيد',
       busiest:'تداول بحجم غير معتاد',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
@@ -620,6 +621,7 @@ export class Component extends Base {
       openFiling:'افتح الإفصاح',
       openOnExchange:'افتح في البورصة المصرية', openOnMubasher:'افتح في مباشر',
       mixedRow:'صافي الربح من هذا الإفصاح، وأرقام القوائم كما نشرتها مباشر',
+      finsInDollars:'تودع هذه الشركة قوائمها بالدولار الأمريكي، ولا تُدمج إعلانات البورصة الخاصة بها في هذا الجدول المقوَّم بالجنيه، لذا قد يتأخر عن الإفصاحات المدرجة أدناه.',
       borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
       debtHigherThan:'أعلى مما كانت عليه، إذ بلغت {was}.',
@@ -1099,7 +1101,7 @@ export class Component extends Base {
       return Object.assign({}, ix, { spark: this.sparkOf(ix.points, ix.up) });
     });
 
-    const readNow = say(D.readNow || [], ['kind', 'title']).map((r) => Object.assign({}, r, {
+    const readNow = say(D.readNow || [], ['kind', 'title', 'stamp']).map((r) => Object.assign({}, r, {
       go: r.ticker
         ? () => this.setState({ screen: 'company', ticker: r.ticker })
         : this.go(r.screen || 'calendar'),
@@ -1144,6 +1146,10 @@ export class Component extends Base {
         tickers: demoCo(10) }
     ]).map((f) => Object.assign({}, f, {
       hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
+      // One stamp, through the same formatter the Crossings screen uses, so
+      // the two screens side by side agree on how a date looks in Arabic.
+      when: (f.date ? this.dayLabel(f.date) : '') + (f.time ? ' · ' + f.time : ''),
+      becauseDate: f.evidenceDate && f.evidenceDate !== f.date ? this.dayLabel(f.evidenceDate) : '',
       because: f.because || '', image: f.image || '',
       hasImage: Boolean(f.image),
       hasKind: f.hasKind === undefined ? Boolean(f.kind) : f.hasKind,
@@ -1446,7 +1452,12 @@ export class Component extends Base {
       const days = src.days || 4;
       return rows.map((item) => {
         const known = D.companies.some((c) => c.ticker === item.ticker);
-        const strands = (item.strands || []).map((st, n) => {
+        // Session first. The cap shows four, in document order, and CFGH's
+        // four were all press — the "That session" thread that dates the
+        // header's move and its volume ratio sat behind "1 more".
+        const raw = item.strands || [];
+        const ordered = raw.filter((s) => s.kind === 'session').concat(raw.filter((s) => s.kind !== 'session'));
+        const strands = ordered.map((st, n) => {
           const [label, color, tint, icon] = STRAND[st.kind] || STRAND.filing;
           return {
             // A session is a number rather than a document, so it says the
@@ -2128,9 +2139,12 @@ export class Component extends Base {
       : null;
     const filedEvents = archive ? archive : D.filedEvents ? say(D.filedEvents, ['what','kind']).map((e) => Object.assign({}, e, {
       hasKind: Boolean(e.kind),
-      // An expected filing has not been filed, so there is no document to
-      // open — but its ticker is still a company worth reaching.
-      href: '', hasHref: false, noHref: true,
+      // These are FILED events, and calendar() attached the exchange's own
+      // link to each. This branch stripped it — under a comment written for
+      // the expected-events branch, where there is no document yet — so until
+      // the month archive loaded (or forever, if that fetch failed) no filed
+      // row could be opened. The ticker still reaches the company.
+      href: e.href || '', hasHref: Boolean(e.href), noHref: !e.href,
       go: (ev) => { if (ev && ev.stopPropagation) ev.stopPropagation();
         if (e.ticker) this.setState({ screen: 'company', ticker: e.ticker }); },
       basis: e.estimated && e.windowFrom ? L.calWindow.replace('{from}', e.windowFrom).replace('{to}', e.windowTo).replace('{n}', e.observations) : '',
@@ -2431,7 +2445,7 @@ export class Component extends Base {
       // Named for what is on it. It was "Today", which described when
       // rather than what — and since the crossings moved to a screen of
       // their own, what is on it is the news and nothing else.
-      ['today', ar?'الأخبار':'News', feed.length ? String(feed.length) : ''],
+      ['today', ar?'الأخبار':'News', allFeed.length ? String(allFeed.length) : ''],
       ['market', ar?'السوق':'Market', String(D.companies.length)],
       // Fourth, and its own screen: who bought and who sold is a different
       // question from what moved, and the exchange answers it separately.
@@ -2475,7 +2489,10 @@ export class Component extends Base {
     const out = {
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
       bodyFont: ar ? "'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif" : "'IBM Plex Sans',sans-serif",
-      marketDate: this.longDate(D.marketDate), generatedAt: D.generatedAt || '—',
+      marketDate: this.longDate(D.marketDate),
+      // "Built 14:11" rather than "2026-09-02T12:11:22+00:00": L.builtAt has
+      // existed in both languages for exactly this line and was never bound.
+      generatedAt: D.generatedAt ? L.builtAt + ' ' + this.clock(D.generatedAt) : '',
       // Whether the prices on every screen are settled closes or a session
       // still running. market.json has always said; nothing here had asked.
       sessionState: this.sessionLine(D, L),
@@ -2734,6 +2751,12 @@ export class Component extends Base {
       // How many of the periods on this table are a full statement rather than
       // a one-line profit announcement. Without it the table reads as mostly
       // empty, when what it mostly is, is honest.
+      // Eleven listings file in dollars, and the merge correctly refuses to
+      // put a dollar profit into a pounds column. The table then stops while
+      // the filings list a scroll below keeps growing, and nothing said why:
+      // CFGH's read "5 of 5 periods carry a full statement" over FY 2024 with
+      // three newer results filed, the latest that morning.
+      finsCurrencyNote: loaded && loaded.currency ? L.finsInDollars : '',
       finsCoverage: fins.length
         ? L.fullStatements.replace('{n}', fins.filter((f) => f.hasMore).length)
             .replace('{total}', fins.length)

@@ -214,7 +214,12 @@ document.getElementById('signout').onclick = async () => {
         component._d = { ...component.data(), filedArchive: items, filedArchiveMonth: wanted };
         draw();
       })
-      .catch((error) => console.warn('[esthmr] month', wanted, error.message));
+      .catch((error) => {
+        // Forget the attempt, or one dropped fetch pins this month to the
+        // twelve rows from calendar.json for the rest of the visit.
+        month = null;
+        console.warn('[esthmr] month', wanted, error.message);
+      });
   };
 
   /* A line beside every followed company.
