@@ -248,7 +248,34 @@ jobs:
           # and nothing else. Unset — on a laptop — the code goes direct.
           ESTHMR_RELAY_URL: ${{ secrets.ESTHMR_RELAY_URL }}
           ESTHMR_RELAY_TOKEN: ${{ secrets.ESTHMR_RELAY_TOKEN }}
-        run: python3 scripts/build_all.py
+        # build_all distinguishes two failures, and so does this.
+        #
+        #   2  a critical step called the inputs unfit. Everything built before
+        #      it came from those inputs, so nothing here should be published:
+        #      fail now, and the Commit step never runs.
+        #
+        #   1  a source would not answer. That step left its published document
+        #      alone and every other step produced correct output. Carry on to
+        #      Commit and Deploy so that work reaches readers, then fail the run
+        #      at the end so nobody mistakes it for a clean build.
+        #
+        # This is the fix for 3 Sep 2026, when a truncated read from
+        # investing.com discarded 107 minutes of finished work — 25 steps'
+        # output thrown away because the 26th could not reach its host.
+        id: rebuild
+        run: |
+          set +e
+          python3 scripts/build_all.py
+          code=$?
+          set -e
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          if [ "$code" -le 1 ]; then
+            if [ "$code" -eq 1 ]; then
+              echo "::warning::A source did not refresh. Publishing what succeeded; this run will be marked failed at the end."
+            fi
+            exit 0
+          fi
+          exit "$code"
 
       - name: Show what changed
         id: diff
@@ -377,3 +404,17 @@ jobs:
             exit 0
           fi
           npx --yes wrangler@4 deploy --config public/wrangler.jsonc
+
+      # Last, and only after the good work is committed and deployed.
+      #
+      # A run where a source refused is not a clean run, and a green tick on it
+      # is how a frozen feed goes unnoticed for eight days — which is exactly
+      # what happened to the disclosures document. The data is published; the
+      # run is still red; the warning above names the step that did not answer.
+      - name: Fail the run if a source did not refresh
+        if: always() && steps.rebuild.outputs.code == '1'
+        run: |
+          echo "::error::A build step could not reach its source. What the other"
+          echo "::error::steps produced has been committed and deployed — see the"
+          echo "::error::warning on the rebuild step for which one failed."
+          exit 1

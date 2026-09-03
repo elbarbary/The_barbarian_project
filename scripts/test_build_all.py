@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import pathlib
 import re
+import subprocess
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -48,6 +50,57 @@ class Steps(unittest.TestCase):
                           f"declared as doing so, so the validate pass runs it "
                           f"for real or skips it")
 
+
+class ExitCodes(unittest.TestCase):
+    """What the run tells CI, and why the two failures are not the same.
+
+    On 3 Sep 2026 a truncated read from investing.com inside "Index levels +
+    breadth" made this return 1 after every other step had already produced
+    correct output. The workflow reads non-zero as "publish nothing", so 107
+    minutes of finished work was discarded to carry forward one stale series.
+
+    A source that will not answer leaves its own document alone and says so.
+    That is not the same event as a critical step declaring the inputs unfit,
+    and collapsing both into 1 is what made the expensive answer the only one.
+    """
+
+    def _run(self, failing):
+        """build_all.main() with `failing` the set of step names that exit 1."""
+        def fake(cmd, cwd=None):
+            script = pathlib.Path(cmd[1]).name
+            names = [n for n, s, *_ in build_all.STEPS if s == script]
+            bad = any(n in failing for n in names)
+            return subprocess.CompletedProcess(cmd, 1 if bad else 0)
+
+        with mock.patch.object(build_all.subprocess, "run", side_effect=fake), \
+             mock.patch.object(build_all.sys, "argv", ["build_all.py"]):
+            return build_all.main()
+
+    def test_a_clean_build_is_zero(self):
+        self.assertEqual(self._run(set()), 0)
+
+    def test_a_source_that_would_not_answer_is_one(self):
+        """1 means: publish what succeeded, then mark the run failed."""
+        fatal = [n for n, *_ in build_all.STEPS
+                 if n not in build_all.BEST_EFFORT and n not in build_all.CRITICAL]
+        self.assertTrue(fatal, "no non-critical fatal step to test with")
+        self.assertEqual(self._run({fatal[0]}), 1)
+
+    def test_a_critical_step_is_two(self):
+        """2 means: publish nothing — what ran before it came from bad inputs."""
+        for name in build_all.CRITICAL:
+            self.assertEqual(self._run({name}), 2, name)
+
+    def test_a_best_effort_step_does_not_fail_the_run_at_all(self):
+        for name in list(build_all.BEST_EFFORT)[:3]:
+            self.assertEqual(self._run({name}), 0, name)
+
+    def test_critical_outranks_a_plain_failure(self):
+        """Both kinds at once is still 2: the unfit inputs are what matter."""
+        fatal = [n for n, *_ in build_all.STEPS
+                 if n not in build_all.BEST_EFFORT and n not in build_all.CRITICAL]
+        critical = sorted(build_all.CRITICAL)[0]
+        self.assertEqual(self._run({fatal[0], critical}), 2)
 
 if __name__ == "__main__":
     unittest.main()

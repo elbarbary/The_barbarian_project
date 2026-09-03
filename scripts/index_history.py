@@ -27,7 +27,9 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
+import time
 import pathlib
 import sys
 import urllib.error
@@ -89,17 +91,47 @@ class IndexHistoryUnavailable(RuntimeError):
     """The fetch failed, or the numbers did not agree. Nothing is written."""
 
 
+# Two truths about a truncated read.
+#
+# The first is that it is not covered by the obvious handler. On 3 Sep 2026
+# this raised `http.client.IncompleteRead(67425 bytes read, 60256 more
+# expected)` and it went straight past `except (URLError, TimeoutError,
+# OSError, ValueError)` — because IncompleteRead's bases are HTTPException and
+# Exception, and none of the four. So the careful `IndexHistoryUnavailable`
+# path below, whose entire job is to leave the published series alone, was
+# never reached: the exception left the process, and the daily build died
+# after 107 minutes with every other step's output discarded.
+#
+# The second is that it is worth retrying. A refused request is an answer and
+# asking again just gets the same one, which is why HTTPError is still fatal
+# on the first look. A body that stopped arriving mid-flight is not an answer
+# at all — it is the connection, and the next attempt usually completes.
+RETRIES = 3
+BACKOFF = 2.0
+
+# Everything that means "the transport failed", as opposed to "the host said
+# no". HTTPException is the one that was missing.
+TRANSPORT = (http.client.HTTPException, urllib.error.URLError, TimeoutError,
+             OSError, ValueError)
+
+
 def _get(url: str) -> dict:
     # Through the build's relay where one is configured, and straight out
     # everywhere else. The source refuses a CI runner's address and answers a
     # laptop's; see scripts/fetch_relay.py.
     request = fetch_relay.request(url, HEADERS)
-    try:
-        return json.loads(urllib.request.urlopen(request, timeout=60).read())
-    except urllib.error.HTTPError as error:
-        raise IndexHistoryUnavailable(f"HTTP {error.code} for {url}") from error
-    except (urllib.error.URLError, TimeoutError, OSError, ValueError) as error:
-        raise IndexHistoryUnavailable(str(error)[:160]) from error
+    last: Exception | None = None
+    for attempt in range(RETRIES):
+        try:
+            return json.loads(urllib.request.urlopen(request, timeout=60).read())
+        except urllib.error.HTTPError as error:
+            # A status is an answer. Retrying a 403 asks the same question.
+            raise IndexHistoryUnavailable(f"HTTP {error.code} for {url}") from error
+        except TRANSPORT as error:
+            last = error
+            if attempt + 1 < RETRIES:
+                time.sleep(BACKOFF * (attempt + 1))
+    raise IndexHistoryUnavailable(str(last)[:160]) from last
 
 
 def series(index_id: str, since: str, until: str) -> dict[str, float]:

@@ -364,6 +364,7 @@ def main() -> int:
     args = ap.parse_args()
 
     failed = []
+    stopped = None
     for step in STEPS:
         name, script, supports_check = step[0], step[1], step[2]
         extra = step[3] if len(step) > 3 else []
@@ -385,14 +386,42 @@ def main() -> int:
             print(f"   FAILED — previously published data left in place")
             if name in CRITICAL:
                 # No point rebuilding thirty minutes of documents from a source
-                # this step just declared unfit to publish. Stop now; the run
-                # exits non-zero, so CI never reaches its Commit step.
+                # this step just declared unfit to publish. Stop now, and say so
+                # with an exit code the workflow can tell apart from the other
+                # kind of failure.
                 print("   critical — stopping before anything is rebuilt")
+                stopped = name
                 break
 
     print()
+    # TWO KINDS OF FAILURE, AND THEY DESERVE DIFFERENT ANSWERS.
+    #
+    # 2 — a critical step said the inputs are unfit. Whatever ran before it
+    #     was built from those inputs, so none of it should be published.
+    #
+    # 1 — a source would not answer. That step left its previously published
+    #     document exactly where it was, and every other step in this run
+    #     produced correct output from sources that did answer. Discarding all
+    #     of it is the expensive mistake: on 3 Sep 2026 a truncated read from
+    #     investing.com threw away 107 minutes of finished work, because the
+    #     only signal this function had was "non-zero", and the workflow reads
+    #     non-zero as "publish nothing".
+    #
+    #     The comment beside News in BEST_EFFORT records the same accident from
+    #     the other direction — one slow outlet, twice, and the filed
+    #     financials did not publish. That was fixed by naming News as
+    #     best-effort. This is the same bug arriving through a step nobody had
+    #     named yet, and it will keep arriving that way, because the list is a
+    #     list of sources that have already failed once.
+    #
+    #     So the workflow publishes what succeeded and still ends red. Loud and
+    #     lossless, rather than the choice between them.
+    if stopped:
+        print(f"build_all: stopped at a critical step: {stopped}")
+        return 2
     if failed:
-        print(f"build_all: {len(failed)} step(s) failed: {', '.join(failed)}")
+        print(f"build_all: {len(failed)} step(s) did not refresh: {', '.join(failed)}")
+        print("build_all: every other step's output is fit to publish")
         return 1
     print("build_all: all steps succeeded")
     return 0
