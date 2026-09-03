@@ -72,6 +72,23 @@ jobs:
           # current. Without it a headline that lands at ten in the morning
           # cannot cross with a filing until the next daily run.
           python3 scripts/build_connections_api.py || true
+          # Disclosures. The note that used to sit at the foot of this file
+          # said these could not run here because they need Scrapling driving
+          # a real Chromium — EGX serves a 7 KB stub to anything that is not a
+          # browser. That stopped being true when `fetch_beta` was added: the
+          # exchange's own JSON API answers the whole date window in one
+          # request, no browser, and it is what the script reaches for first.
+          #
+          # Nothing ran this on a schedule in the meantime. Not this workflow,
+          # which excluded it; not the daily one; not `harvest_local.sh`, which
+          # only ever harvested filings. So it ran when somebody remembered,
+          # and on 3 Sep 2026 the published feed's newest filing was 26 Aug —
+          # eight days stale on the live site, with no counter to say so.
+          #
+          # The browser scrape is still the fallback and still cannot run here.
+          # That is fine and deliberate: with no Scrapling installed the script
+          # prints why and exits 0, leaving the last good document in place.
+          python3 scripts/build_disclosures_api.py || true
 
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app
@@ -149,14 +166,14 @@ jobs:
           exit 1
           exit 1
 
-# NOTE — disclosures are deliberately NOT in this workflow.
+# NOTE — disclosures now run in this workflow, above.
 #
-# `build_disclosures_api.py` needs Scrapling driving a real Chromium, because
-# EGX serves a 7 KB stub to anything that is not a browser. That is a heavier
-# dependency than this fifteen-minute job should carry, and it wants its own
-# cadence anyway: five runs across the session rather than ninety-six. It runs
-# from the machine that holds the EGX monitor, alongside the daily build, until
-# a browser image is worth adding to CI.
+# They were excluded because `build_disclosures_api.py` needed Scrapling
+# driving a real Chromium: EGX serves a 7 KB stub to anything that is not a
+# browser, and that is a heavier dependency than a fifteen-minute job should
+# carry. `fetch_beta` removed the requirement — the exchange's own JSON API
+# returns the whole window in one request — but nothing moved the step, so for
+# a while no schedule built them at all.
 
       # The site serves its data from the Worker's own assets, so a commit here
       # does not reach a reader until something deploys — and nothing did. Every
