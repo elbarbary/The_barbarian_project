@@ -8,18 +8,13 @@
  "sector_ar": "ورق ومواد تعبئة و تغليف",
  "market": {
   "last_close": 0.372,
-  "date": "2026-09-02",
+  "date": "2026-09-03",
   "open": 0.378,
   "high": 0.38,
   "low": 0.372,
   "volume": 23139510
  },
  "price_history": [
-  {
-   "date": "2025-07-28",
-   "close": 0.9,
-   "volume": 21211060
-  },
   {
    "date": "2025-07-29",
    "close": 0.93,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-01",
    "close": 0.378,
    "volume": 43016897
+  },
+  {
+   "date": "2026-09-02",
+   "close": 0.372,
+   "volume": 23139510
   }
  ],
  "profile": {
@@ -1326,9 +1326,9 @@
   "avg_volume_30d": 79927555.2333333,
   "relative_volume_10d": 0.21608836021105665,
   "median_volume_20d": 46636860.5,
-  "rv20": 0.9223797772579482,
+  "rv20": 0.4961635442848903,
   "normal_value_30d": 22040735.442,
-  "five_session_change": 2.717391304347827,
+  "five_session_change": 1.0869565217391353,
   "history_bars": 120,
   "market_cap": 852416649.432,
   "market_cap_source": "EGX",

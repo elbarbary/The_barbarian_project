@@ -1,46 +1,10 @@
 {
- "generated": "2026-09-02",
+ "generated": "2026-09-03",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 455,
+ "count": 452,
  "estimated": 396,
  "events": [
-  {
-   "date": "2026-06-04",
-   "kind": "rights_close",
-   "note": "Rights issue subscription closes",
-   "ticker": "AMES",
-   "title": "Alexandria Medical Services (AMES.CA) - Rights Issue",
-   "title_ar": "الاسكندرية للخدمات الطبية - المركز الطبى الجديد - الاسكندرية (AMES.CA) - حق اكتتاب",
-   "filed": "2026-04-15",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=286423",
-   "id": "egx-286423"
-  },
-  {
-   "date": "2026-06-04",
-   "kind": "dividend_payment",
-   "note": "Cash dividend payment",
-   "ticker": "RMDA",
-   "title": "Tenth Of Ramadan Pharmaceutical Industries&Diagnostic-Rameda (RMDA.CA) Declares Cash Dividends (a Correction)",
-   "title_ar": "العاشر من رمضان للصناعات الدوائية والمستحضرات تشخيصية-راميدا (RMDA.CA) تعلن عن توزيع نقدي (استدراك)",
-   "filed": "2026-05-21",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288682",
-   "id": "egx-288682"
-  },
-  {
-   "date": "2026-06-04",
-   "kind": "dividend_payment",
-   "note": "Cash dividend payment",
-   "ticker": "SWDY",
-   "title": "El sewedy Electric (SWDY.CA) Declares Cash Dividends",
-   "title_ar": "السويدى اليكتريك (SWDY.CA) تعلن عن توزيع نقدي",
-   "filed": "2026-05-18",
-   "section": "Corporate Actions",
-   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=288411",
-   "id": "egx-288411"
-  },
   {
    "date": "2026-06-16",
    "kind": "ex_dividend",
