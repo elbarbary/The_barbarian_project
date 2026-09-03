@@ -14,6 +14,9 @@ and divided by 31.1035. Publishing the working means a reader can check our
 number against the jeweller's, and see for themselves that the difference is
 the shop's margin rather than a different truth.
 
+Every row is dated by its own source and the document by its build — see
+"freshness" below. A row whose source gave no date has none.
+
 Sources, all free, all checked 19 August 2026:
   * EGX index levels — TradingView's public scanner, the same upstream the
     quotes Worker uses. A direct POST works from here; only the per-company
@@ -28,6 +31,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import datetime
+import email.utils
 import json
 import pathlib
 import sys
@@ -125,6 +130,81 @@ def money(value: float, dp: int = 2) -> str:
     return f"{whole}.{frac}" if frac else whole
 
 
+# ----------------------------------------------------------------- freshness
+#
+# Until 3 September 2026 this document carried no date anywhere. The only
+# freshness signal on the sixteen rate cards was the Exchange screen's static
+# "Quotes delayed ~15 minutes" badge (logic.js `delayed15`) — true of a live
+# TradingView read, and false of everything else on the page: open.er-api.com
+# publishes once a day at 00:02 UTC, and a row `carry_forward` keeps can be
+# days old. The 29 August gold outage below was invisible for exactly this
+# reason, and a frozen upstream would look identical to a fresh one.
+#
+# So the document now says when it was built (`fetched_at`) and each row says
+# what its source said about its own reading (`as_of`):
+#
+#   * TradingView's scanner has a `time` column — the open of the bar the
+#     `close` belongs to, in epoch seconds. Read on 3 September at 06:51 UTC it
+#     gave 1788332400 for every EGX index = 2026-09-02T07:00:00Z, 10:00 Cairo,
+#     the open of the session whose close 55,679.70 is. It is kept as that
+#     instant and not flattened to a date: oil's bar opened at 1788386400 =
+#     2026-09-02T22:00:00Z, which is 18:00 New York and the START of the
+#     3 September trade date, so a date cut from it is right for Cairo and
+#     wrong for NYMEX. The instant is what the source said; the calendar day
+#     is the screen's inference to make, in the reader's own timezone.
+#   * open.er-api.com gives `time_last_update_unix` (1788393751) beside the
+#     RFC-2822 `time_last_update_utc` the source line has always quoted.
+#   * api.gold-api.com gives `updatedAt`, "2026-09-03T06:51:24Z".
+#
+# A row whose source gave no stamp gets no `as_of` at all. Filling it with
+# `fetched_at` would say the reading was taken this minute — which is exactly
+# the claim a frozen upstream must not be allowed to make.
+
+
+def utc(stamp: datetime.datetime) -> str:
+    """One shape for every stamp in the document: 2026-09-03T06:51:24+00:00."""
+    return stamp.astimezone(datetime.UTC).isoformat(timespec="seconds")
+
+
+def from_epoch(seconds) -> str | None:
+    """Epoch seconds as a source gives them, or None when it gave none."""
+    if isinstance(seconds, bool) or not isinstance(seconds, (int, float)):
+        return None
+    if seconds <= 0:
+        return None
+    return utc(datetime.datetime.fromtimestamp(seconds, datetime.UTC))
+
+
+def from_iso(text) -> str | None:
+    """An ISO stamp as a source gives it — "2026-09-03T06:51:24Z" — or None."""
+    if not isinstance(text, str) or not text:
+        return None
+    try:
+        stamp = datetime.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if stamp.tzinfo is None:
+        stamp = stamp.replace(tzinfo=datetime.UTC)
+    return utc(stamp)
+
+
+def from_rfc2822(text) -> str | None:
+    """"Thu, 03 Sep 2026 00:02:31 +0000", the form open.er-api.com writes."""
+    if not isinstance(text, str) or not text:
+        return None
+    try:
+        return utc(email.utils.parsedate_to_datetime(text))
+    except (TypeError, ValueError):
+        return None
+
+
+def dated(row: dict, as_of: str | None) -> dict:
+    """Attach `as_of` only when the source gave one. Absent is the honest gap."""
+    if as_of:
+        row["as_of"] = as_of
+    return row
+
+
 # ------------------------------------------------------------------- indices
 
 
@@ -138,7 +218,7 @@ def indices() -> list[dict]:
                 ],
                 "options": {"lang": "en"},
                 "symbols": {"query": {"types": ["index"]}, "tickers": []},
-                "columns": ["name", "close", "change", "change_abs"],
+                "columns": ["name", "close", "change", "change_abs", "time"],
                 "range": [0, 20],
             }
         ).encode(),
@@ -153,8 +233,11 @@ def indices() -> list[dict]:
         if not row or row[1] is None:
             continue
         level, pct, points = row[1], row[2] or 0.0, row[3] or 0.0
+        # The bar's open — 07:00 UTC for every EGX session — which names the
+        # session this close belongs to. See "freshness" above.
+        as_of = from_epoch(row[4] if len(row) > 4 else None)
         direction = "rose" if pct >= 0 else "fell"
-        out.append(
+        out.append(dated(
             {
                 "id": symbol,
                 "label": label,
@@ -180,8 +263,9 @@ def indices() -> list[dict]:
                 ),
                 "yardstick_ar": rates_ar.yardstick(symbol),
                 "source": "TradingView, EGX index feed",
-            }
-        )
+            },
+            as_of,
+        ))
     return out
 
 
@@ -192,7 +276,7 @@ def world() -> list[dict]:
         json.dumps(
             {
                 "symbols": {"tickers": [w[0] for w in WORLD]},
-                "columns": ["close", "change"],
+                "columns": ["close", "change", "time"],
             }
         ).encode(),
     )
@@ -206,9 +290,10 @@ def world() -> list[dict]:
         if not row or row[0] is None:
             continue
         level, pct = row[0], row[1] or 0.0
+        as_of = from_epoch(row[2] if len(row) > 2 else None)
         direction = "rose" if pct >= 0 else "fell"
         unit = {"commodity": "$", "index": ""}[kind]
-        out.append(
+        out.append(dated(
             {
                 "id": symbol.replace(":", "_"),
                 "label": label,
@@ -226,8 +311,9 @@ def world() -> list[dict]:
                 "yardstick": what,
                 "yardstick_ar": rates_ar.yardstick(symbol),
                 "source": "TradingView",
-            }
-        )
+            },
+            as_of,
+        ))
     return out
 
 
@@ -244,6 +330,10 @@ def currencies() -> tuple[list[dict], float | None, str]:
     if not usd_egp:
         return [], None, ""
     as_of = payload.get("time_last_update_utc", "")
+    # The feed's own reading time. The unix field is the one to trust — the
+    # RFC-2822 string beside it stays on the source line where it always was,
+    # and is only parsed if the number is missing.
+    stamped = from_epoch(payload.get("time_last_update_unix")) or from_rfc2822(as_of)
 
     out = []
     for code, name in PAIRS:
@@ -254,7 +344,7 @@ def currencies() -> tuple[list[dict], float | None, str]:
         # the other currency's per-USD rate. Written out because a reader who
         # only ever sees "EUR 59.07" has no way to check it.
         egp = usd_egp / per_usd
-        out.append(
+        out.append(dated(
             {
                 "code": code,
                 "label": name,
@@ -281,8 +371,9 @@ def currencies() -> tuple[list[dict], float | None, str]:
                 ),
                 "yardstick_ar": rates_ar.CURRENCY_YARDSTICK,
                 "source": f"open.er-api.com{f', {as_of}' if as_of else ''}",
-            }
-        )
+            },
+            stamped,
+        ))
     return out, usd_egp, as_of
 
 
@@ -304,6 +395,11 @@ def metals(usd_egp: float | None) -> list[dict]:
         egp_ounce = usd_ounce * usd_egp
         egp_gram = egp_ounce / TROY_OUNCE_GRAMS
         as_of = (payload.get("updatedAt") or "")[:19]
+        # The metal quote's own stamp. The row is two sources multiplied, and
+        # this dates the one it is named for; the pound leg dates itself on
+        # the US dollar row, which is where a reader checking the working
+        # would look for it.
+        stamped = from_iso(payload.get("updatedAt"))
 
         karats = (
             [
@@ -325,7 +421,7 @@ def metals(usd_egp: float | None) -> list[dict]:
             else []
         )
 
-        out.append(
+        out.append(dated(
             {
                 "id": symbol,
                 "label": name,
@@ -358,8 +454,9 @@ def metals(usd_egp: float | None) -> list[dict]:
                 ),
                 "source": f"api.gold-api.com{f', {as_of}Z' if as_of else ''}"
                 f" · pound rate from open.er-api.com",
-            }
-        )
+            },
+            stamped,
+        ))
     return out
 
 
@@ -402,7 +499,9 @@ def carry_forward(fresh: list[dict], before: list[dict], what: str) -> list[dict
         # read at — "api.gold-api.com, 2026-08-29T14:12:03Z" — so it dates
         # itself and goes on dating itself for as long as it is carried. This
         # flag is the machine-readable half, for a screen that wants to say so
-        # rather than let a reader work it out from the stamp.
+        # rather than let a reader work it out from the stamp. Its `as_of`
+        # travels with it untouched, for the same reason: a carried gold row
+        # dated 2026-08-29 beside a `fetched_at` of today IS the freeze signal.
         stale["carried"] = True
         kept.append(stale)
         print(f"   ! {what}: {row.get('label')} carried forward — the host did not answer")
@@ -413,6 +512,9 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
+
+    # Taken before the first request goes out: the moment this run asked.
+    fetched_at = utc(datetime.datetime.now(datetime.UTC))
 
     print("── Indices")
     index_rows = indices()
@@ -441,14 +543,18 @@ def main() -> int:
         return 1
 
     doc = {
+        "fetched_at": fetched_at,
         "indices": index_rows,
         "world": world_rows,
         "currencies": currency_rows,
         "metals": metal_rows,
     }
 
+    print(f"── fetched_at {fetched_at}")
     for row in index_rows + world_rows + currency_rows + metal_rows:
-        print(f"   {row.get('label'):14} {row['plain']}")
+        # The stamp beside the sentence, so a --check run shows what the
+        # screen will be able to say about each card's age.
+        print(f"   {row.get('label'):14} {row.get('as_of') or 'no source stamp':25}  {row['plain']}")
 
     if args.check:
         return 0

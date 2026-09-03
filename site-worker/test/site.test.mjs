@@ -1497,6 +1497,24 @@ test('a dollar filer is told why its statements table lags its filings', () => {
   assert.equal(c.renderVals().finsCurrencyNote, '');
 });
 
+test('a comparative row says which filing restated it', () => {
+  // ABUK's H1 2025 figure is the "Net Comparative profit" line inside the
+  // H1 2026 announcement, so its own citation is headlined with a different
+  // period. Eight rows across the archive are in that position.
+  const shown = (fin) => {
+    const c = fresh();
+    c.setData({ ...LIVE, fins: [fin] });
+    c.state.ticker = 'ABUK';
+    c._co = { ticker: 'ABUK', name: { en: 'A', ar: 'أ' }, profile: {} };
+    return c.renderVals().fins[0];
+  };
+  const row = shown({ period: 'H1 2025', net_income: 4568.416, filing_id: 'egx-293025',
+                      comparative: true, restated_in: 'egx-293025', restated_for: 'H1 2026' });
+  assert.match(row.restated, /year-earlier comparative inside the H1 2026 filing/);
+  // A company's own filing for the period carries no such mark.
+  assert.equal(shown({ period: 'H1 2026', net_income: 10011.52, filing_id: 'egx-293025' }).restated, '');
+});
+
 test('a dollar listing says which money each of its two figures is in', () => {
   // The market table was taught this and the company screen was not, so the
   // page a reader lands on printed 0.118 over a market value of 2.83 billion

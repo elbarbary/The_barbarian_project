@@ -285,6 +285,13 @@ def keep_statement_figure(existing: dict, filed) -> bool:
     # 801.961: it said 10,723.074.
     if existing.get("net_income_source") == SOURCE:
         return False
+    # Nor when it is the exchange's own comparative line. Market lets a
+    # comparative outrank Mubasher's figure for the same period and keeps the
+    # aggregator's balance sheet beside it, so the row is complete and its
+    # `source` is an EGX NewsDetails page — and the figure standing there was
+    # never the statement's.
+    if existing.get("comparative"):
+        return False
     existing["statement_net_income"] = stated
     existing["statement_net_income_source"] = existing.get("source")
     return True
@@ -381,6 +388,38 @@ def egx_rows() -> tuple[dict[tuple[str, str], dict], dict[str, int]]:
     return rows, skipped
 
 
+# What `build_market_api` writes on a period it only knows as the year-earlier
+# line of a later announcement — see `offer` there.
+COMPARATIVE_MARKS = ("comparative", "restated_in", "restated_for")
+
+
+def own_filing_lifts_the_marks(existing: dict) -> bool:
+    """Remove the comparative marks once the company's own filing is on the row.
+
+    ELKA's "H1 2025" leaves Market as the 34,369,934 quoted as "Net Comparative
+    Profit" inside the H1 2026 filing (egx-293659, received 2026-08-20), and
+    marked as such. This step then reads the whole archive and finds the
+    company's own H1 2025 filing — egx-275510 of 2025-08-27, stating the same
+    34,369,934 — and stamps its id and date onto the row. From that moment the
+    row IS the company's filing for the period: the site deep-links
+    `filing_id`, so the reader lands on the H1 2025 document, and a mark still
+    saying "restated in the H1 2026 filing" would be a false statement printed
+    beside a true link. It goes, whether the figure agreed or was replaced.
+    When this step refuses the filing (the magnitude or income-statement
+    guards) nothing is stamped and the marks stay, because the comparative is
+    still all the row has.
+
+    Returns whether anything was removed, so a row that changed only here is
+    still counted and written.
+    """
+    removed = False
+    for mark in COMPARATIVE_MARKS:
+        if mark in existing:
+            del existing[mark]
+            removed = True
+    return removed
+
+
 def write_rows(rows: dict, skipped: dict, dry_run: bool,
                force_keys: frozenset = frozenset()) -> tuple[int, int, int]:
     """Write a `{(ticker, label): row}` set into the company docs and fixtures.
@@ -447,6 +486,8 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                         if existing.get("filed") != row["filed"]:
                             existing["filed"] = row["filed"]
                             existing["filing_id"] = f"egx-{row['code']}"
+                            changed = True
+                        if own_filing_lifts_the_marks(existing):
                             changed = True
                         continue
                     # A gap of this size is not two sources disagreeing, it is
@@ -530,6 +571,7 @@ def write_rows(rows: dict, skipped: dict, dry_run: bool,
                     # document that broke it rather than assert it.
                     existing["filed"] = row["filed"]
                     existing["filing_id"] = f"egx-{row['code']}"
+                    own_filing_lifts_the_marks(existing)
                     overrode += 1
                     changed = True
                 elif label not in index:

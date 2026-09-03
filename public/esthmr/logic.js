@@ -377,6 +377,7 @@ export class Component extends Base {
       openFiling:'Open filing',
       openOnExchange:'Open on the Egyptian Exchange', openOnMubasher:'Open on Mubasher',
       mixedRow:'Net profit from this filing; the statement figures as published by Mubasher',
+      restatedIn:'Stated as the year-earlier comparative inside the {period} filing.',
       finsInDollars:'This company files in US dollars. The exchange\u2019s own announcements are not merged into this pounds table, so it can lag the filings listed below.',
       borrowingsTitle:'What it does with its borrowings', asAt:'As at', borrowings:'Borrowings', egpM:'EGP millions',
       dueWithinYear:'Due within a year', dueLater:'Due later', movementSince:'Movement since', pattern:'Pattern',
@@ -621,6 +622,7 @@ export class Component extends Base {
       openFiling:'افتح الإفصاح',
       openOnExchange:'افتح في البورصة المصرية', openOnMubasher:'افتح في مباشر',
       mixedRow:'صافي الربح من هذا الإفصاح، وأرقام القوائم كما نشرتها مباشر',
+      restatedIn:'مذكور كرقم مقارن للعام السابق داخل إفصاح {period}.',
       finsInDollars:'تودع هذه الشركة قوائمها بالدولار الأمريكي، ولا تُدمج إعلانات البورصة الخاصة بها في هذا الجدول المقوَّم بالجنيه، لذا قد يتأخر عن الإفصاحات المدرجة أدناه.',
       borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
@@ -1764,6 +1766,14 @@ export class Component extends Base {
         // filed. A citation that covers one line of a row and is printed
         // under all of them is the shape this repo already calls worse than
         // no citation.
+        // A COMPARATIVE row: the figure is the year-earlier line restated
+        // inside a later filing, so its citation is a document headlined with
+        // a different period. ABUK's H1 2025 (4,568.416m) is the "Net
+        // Comparative profit" of the H1 2026 announcement, and "Open on the
+        // Egyptian Exchange" landed a reader on H1 2026 with nothing saying
+        // why. Eight rows carry the mark.
+        restated: f.comparative && f.restated_for
+          ? L.restatedIn.replace('{period}', f.restated_for) : '',
         mixed: (f.net_income_source && /egx\.com\.eg/i.test(f.net_income_source)
                 && /mubasher/i.test(String(f.source || ''))
                 && (f.assets !== undefined && f.assets !== null
