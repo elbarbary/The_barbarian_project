@@ -256,5 +256,30 @@ class Attribution(unittest.TestCase):
         self.assertEqual(row["statement_net_income_source"], "mubasher")
 
 
+class Entities(unittest.TestCase):
+    """The template pads its labels with &nbsp;, and a regex cannot see through it."""
+
+    def test_a_padded_label_still_matches(self):
+        """"Net Profit&nbsp;&nbsp; : 15,195,209" is FCMD's own Q1 2026, and it was
+        neither matched nor counted — 4,925 filings went the same way."""
+        body = m.flatten("Net Profit&nbsp;&nbsp; : 15,195,209 F/S Consolidated Period")
+        found = m.NET.search(body)
+        self.assertIsNotNone(found)
+        self.assertEqual(found.group(2), "15,195,209")
+
+    def test_entities_decode_before_tags_are_stripped(self):
+        """The other order turns an escaped tag into a real one."""
+        self.assertEqual(m.flatten("<b>Net</b>&nbsp;Loss&nbsp;:&nbsp;1,209,667"),
+                         "Net Loss : 1,209,667")
+        self.assertEqual(m.flatten("Value &amp; Volume"), "Value & Volume")
+
+    def test_whitespace_is_still_collapsed(self):
+        self.assertEqual(m.flatten("Net\n\n  Profit&nbsp; : \t 5"), "Net Profit : 5")
+
+    def test_empty_and_none_are_empty(self):
+        self.assertEqual(m.flatten(None), "")
+        self.assertEqual(m.flatten(""), "")
+
+
 if __name__ == "__main__":
     unittest.main()

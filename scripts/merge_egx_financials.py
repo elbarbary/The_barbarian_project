@@ -47,6 +47,7 @@ import argparse
 import datetime
 import glob
 import gzip
+import html
 import json
 import pathlib
 import re
@@ -110,8 +111,22 @@ KNOWN_PERIOD_CORRECTIONS: dict[str, tuple[str, str]] = {
 }
 
 
-def flatten(html: str) -> str:
-    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html or "")).strip()
+def flatten(raw: str) -> str:
+    """The filing's content as plain text the NET regex can actually match.
+
+    Stripped tags, decoded entities, collapsed whitespace — in that order. This
+    dropped the entity decode for a long time, and the effect was invisible:
+    "Net Profit&nbsp;&nbsp; : 15,195,209" survived tag-stripping with the
+    entity intact, `&nbsp;` is not `\\s`, and `NET.search()` came back `None`.
+    `if not profit: continue` at the one call site has no counter next to it —
+    unlike every other refusal in this file — so 4,925 filings (286 companies,
+    63 of them left with ZERO EGX-sourced net income anywhere) vanished from
+    every skip total this script prints. Not fabricated, not wrong — just gone,
+    with nothing to show for it. `html.unescape` runs first: doing it after tag
+    stripping would unescape `&lt;/td&gt;` into a literal tag placed exactly
+    where a real one used to be.
+    """
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(raw or ""))).strip()
 
 
 def corrected_period(code: str, start: datetime.date,
