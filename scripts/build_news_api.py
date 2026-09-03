@@ -45,6 +45,7 @@ import json
 import pathlib
 import re
 import sys
+import typing
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -60,6 +61,9 @@ OUT = REPO / "public" / "data" / "v1" / "news"
 FIXTURES = REPO / "app" / "assets" / "fixtures" / "news"
 COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 DETAILS = REPO / "public" / "data" / "v1" / "companies"
+# The capture that says which session the company documents beside it hold,
+# and whether that session has closed.
+MARKET = REPO / "public" / "data" / "v1" / "market.json"
 
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ESTHMR/1.0"
 
@@ -745,15 +749,129 @@ def classify(headline: str) -> tuple[str, str]:
 
 # ------------------------------------------------------------ the triage step
 
+# The session an "unusual volume" claim is measured on.
+#
+# This document is rebuilt every fifteen minutes; `market.json` is rebuilt three
+# times a trading day, and only the last of those three runs after the close. So
+# for most of a session the company documents on disk hold a *partial* day —
+# `market.json {"is_close": false}` says so out loud — and a ratio taken from
+# them is a fraction of a day divided by a whole one.
+#
+# It shipped that way. On 2 September the 12:08 Cairo scan had CFGH at 280,216
+# shares against a 42,112 median, and the headline triaged in that window kept
+# "6.65× their usual volume" for the rest of the day. The 14:31 capture, after
+# the close, had 427,947 against 70,740 — 6.05× — which is what the company
+# screen, market.json and Connecting the dots all printed for the same company
+# on the same day. Sixteen of the seventeen blocks dated 2 September carried a
+# volume smaller than the session's own; the seventeenth was DEIN, whose 66
+# shares were the same 66 in both captures.
+#
+# Two rules follow, and between them one company on one day has one ratio
+# everywhere:
+#
+#   1. A ratio is only ever measured on a capture whose session has closed —
+#      the same capture `build_market_api` stamped `is_close` on and the same
+#      company documents `build_connections_api` divides.
+#   2. While a session is open the evidence stays on the last completed one,
+#      dated as that session rather than as today. `evidence.date` names the
+#      day the volume belongs to; the site prints it whenever it differs from
+#      the story's own date.
+#
+# What it does not do is invent a figure to fill the gap. A document that has
+# never carried a closed session — a first build, or a machine with no
+# market.json — publishes headlines with no evidence block at all, because the
+# honest answer to "how unusual was that session" before a session ends is that
+# we do not know yet.
 
-def session_facts(ticker: str) -> dict | None:
+
+class Basis(typing.NamedTuple):
+    """What this run is allowed to measure an unusual session against."""
+
+    # {"date", "captured_at"} of the last completed session, or None when no
+    # closed capture is reachable and nothing may be claimed.
+    session: dict | None
+    # Ticker → the evidence block already published against that session, used
+    # while the current session is still open. None means the capture on disk
+    # *is* that session, so read the company documents instead.
+    carried: dict[str, dict] | None
+    # One company document per ticker per run, not per item: the same company
+    # is named by several headlines and triaged again on every merge.
+    cache: dict
+
+
+def evidence_basis() -> Basis:
+    """The session every ratio in this document is measured on."""
+    try:
+        capture = json.loads(MARKET.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        capture = {}
+
+    if capture.get("is_close") and capture.get("date"):
+        # The company documents beside it were written by the same build, from
+        # the same scan, so their volumes are that session's finished volumes.
+        return Basis(
+            {
+                "date": capture["date"],
+                "captured_at": capture.get("captured_at"),
+            },
+            None,
+            {},
+        )
+
+    # Session in progress (or an unreadable capture). Whatever this document
+    # last published against a closed session stands, unchanged, until the next
+    # close — including the session it names.
+    try:
+        published = json.loads((OUT / "latest.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return Basis(None, {}, {})
+
+    session = published.get("evidence_session")
+    if not isinstance(session, dict) or not session.get("date"):
+        # Written before this rule existed, so there is no record of which
+        # session those blocks were measured on and no way to tell a closed
+        # figure from a snapshot. They are dropped rather than re-published.
+        return Basis(None, {}, {})
+
+    carried: dict[str, dict] = {}
+    for item in published.get("items") or []:
+        block = item.get("evidence")
+        if not block or block.get("date") != session["date"]:
+            continue
+        ticker = block.get("ticker")
+        if ticker:
+            carried[ticker] = block
+    return Basis(session, carried, {})
+
+
+def session_facts(ticker: str, basis: Basis) -> dict | None:
     """The published session numbers behind an importance claim."""
+    if basis.session is None:
+        return None
+    if ticker in basis.cache:
+        return basis.cache[ticker]
+    facts = (
+        _facts_from_company(ticker, basis.session)
+        if basis.carried is None
+        else _facts_carried(ticker, basis)
+    )
+    basis.cache[ticker] = facts
+    return facts
+
+
+def _facts_from_company(ticker: str, session: dict) -> dict | None:
+    """Volume and median off the company document, as connections divides them."""
     path = DETAILS / f"{ticker}.json"
     if not path.exists():
         return None
     doc = json.loads(path.read_text())
     market = doc.get("market") or {}
     profile = doc.get("profile") or {}
+    # The company document is rewritten by the same build that wrote the
+    # capture, but a company the scan missed keeps the session it last had.
+    # Dividing that volume by today's median would be two different days.
+    if market.get("date") != session["date"]:
+        return None
     volume = market.get("volume")
     median = profile.get("median_volume_20d")
     if not volume or not median:
@@ -763,7 +881,27 @@ def session_facts(ticker: str) -> dict | None:
         "volume": volume,
         "median_volume_20d": median,
         "rv": volume / median,
-        "date": market.get("date"),
+        "date": session["date"],
+    }
+
+
+def _facts_carried(ticker: str, basis: Basis) -> dict | None:
+    """The block this document already published against the closed session."""
+    block = (basis.carried or {}).get(ticker)
+    if not block:
+        return None
+    volume = block.get("volume")
+    median = block.get("median_volume_20d")
+    if not volume or not median:
+        return None
+    # Divided again rather than trusting the stored `ratio`, so a block can
+    # never disagree with its own two numbers.
+    return {
+        "ticker": ticker,
+        "volume": volume,
+        "median_volume_20d": median,
+        "rv": volume / median,
+        "date": block["date"],
     }
 
 
@@ -776,61 +914,99 @@ def isolate(value: str) -> str:
     return f"\u2068{value}\u2069"
 
 
-def triage(item: dict) -> dict:
+def evidence_of(fact: dict) -> dict:
+    """The arithmetic, published so a reader can redo it.
+
+    `date` is the session the volume was traded in, not the day this ran and
+    not the day the story was filed — those are three different dates while a
+    session is open, and the block is only readable if it says which one it is.
+    """
+    return {
+        "ticker": fact["ticker"],
+        "volume": fact["volume"],
+        "median_volume_20d": round(fact["median_volume_20d"]),
+        "ratio": round(fact["rv"], 2),
+        "threshold": UNUSUAL_VOLUME,
+        "date": fact["date"],
+    }
+
+
+def when(fact: dict, item: dict) -> tuple[str, str]:
+    """"That day" — but only when the volume really is from the story's day.
+
+    The two dates are usually the same and were treated as always the same,
+    which the fifteen-minute cadence makes wrong twice over: before the close
+    the evidence is the previous session's, and a headline from last week is
+    re-measured against the session that has since finished. The site prints
+    `evidence.date` beside the sentence whenever they differ; the app shows the
+    sentence alone, so the sentence has to be true on its own.
+    """
+    if (item.get("published") or "")[:10] == fact["date"]:
+        return "that day", "في ذلك اليوم"
+    return "in the last completed session", "في آخر جلسة مكتملة"
+
+
+def triage(item: dict, basis: Basis) -> dict:
     """Attach the reason an item is, or is not, worth a second look."""
-    facts = [f for f in (session_facts(t) for t in item["tickers"]) if f]
+    facts = [f for f in (session_facts(t, basis) for t in item["tickers"]) if f]
     unusual = [f for f in facts if f["rv"] >= UNUSUAL_VOLUME]
 
     if unusual:
         top = max(unusual, key=lambda f: f["rv"])
+        day_en, day_ar = when(top, item)
         return {
             "weight": "check",
             # Stated as the join of two facts, with both of them shown.
             # A multiple of the normal, not an addition to it.
             "because": (
                 f"This is about {top['ticker']}, whose shares changed hands "
-                f"{top['rv']:.2f}× their usual volume that day."
+                f"{top['rv']:.2f}× their usual volume {day_en}."
             ),
             "because_ar": (
                 f"هذا الخبر عن {isolate(top['ticker'])}، وتداول سهمها "
-                f"{isolate(f'{top['rv']:.2f}×')} حجمه المعتاد في ذلك اليوم."
+                f"{isolate(f'{top['rv']:.2f}×')} حجمه المعتاد {day_ar}."
             ),
-            "evidence": {
-                "ticker": top["ticker"],
-                "volume": top["volume"],
-                "median_volume_20d": round(top["median_volume_20d"]),
-                "ratio": round(top["rv"], 2),
-                "threshold": UNUSUAL_VOLUME,
-                "date": top["date"],
-            },
+            "evidence": evidence_of(top),
         }
 
     if facts:
         top = max(facts, key=lambda f: f["rv"])
+        day_en, day_ar = when(top, item)
         return {
             "weight": "named",
             "because": (
                 f"This is about {top['ticker']}. Its shares traded about as "
-                f"much as usual that day — {top['rv']:.2f}× their normal, and "
+                f"much as usual {day_en} — {top['rv']:.2f}× their normal, and "
                 f"we only point out anything above {UNUSUAL_VOLUME:g}×."
             ),
             "because_ar": (
-                f"هذا الخبر عن {isolate(top['ticker'])}. وتداول سهمها في ذلك "
-                f"اليوم كالمعتاد تقريبًا — {isolate(f'{top['rv']:.2f}×')} من "
+                f"هذا الخبر عن {isolate(top['ticker'])}. وتداول سهمها "
+                f"{day_ar} كالمعتاد تقريبًا — {isolate(f'{top['rv']:.2f}×')} من "
                 f"المعتاد، ولا ننبّه إلا لما يتجاوز "
                 f"{isolate(f'{UNUSUAL_VOLUME:g}×')}."
             ),
-            "evidence": {
-                "ticker": top["ticker"],
-                "volume": top["volume"],
-                "median_volume_20d": round(top["median_volume_20d"]),
-                "ratio": round(top["rv"], 2),
-                "threshold": UNUSUAL_VOLUME,
-                "date": top["date"],
-            },
+            "evidence": evidence_of(top),
         }
 
     if item["tickers"]:
+        # Two different silences, and saying the wrong one is a false claim
+        # about the company. "No figures are published" is true of a name the
+        # scan does not reach; it is not true at ten in the morning, when the
+        # figures exist and simply belong to a session nobody has finished.
+        if basis.session is None:
+            return {
+                "weight": "named",
+                "because": (
+                    f"This is about {', '.join(item['tickers'])}. We hold no "
+                    "completed session's trading figures to compare the story "
+                    "against."
+                ),
+                "because_ar": (
+                    f"هذا الخبر عن {isolate(', '.join(item['tickers']))}. لا "
+                    "نملك أرقام تداول لجلسة مكتملة نقارن بها الخبر."
+                ),
+                "evidence": None,
+            }
         return {
             "weight": "named",
             "because": (
@@ -979,7 +1155,7 @@ def published_links() -> set[str]:
     return {link for link in links if link}
 
 
-def build(refresh_tags: bool = False) -> dict:
+def build(basis: Basis, refresh_tags: bool = False) -> dict:
     published_links_seen = published_links()
     tag_map: dict[str, int] = {}
     # The company names the exchange has printed for us, keyed for matching.
@@ -1017,7 +1193,7 @@ def build(refresh_tags: bool = False) -> dict:
                 dropped.append({"headline": item["headline"], "matched": leak})
                 continue
             item["tickers"] = match_tickers(item, tag_map, name_keys)
-            item.update(triage(item))
+            item.update(triage(item, basis))
             # The excerpt was for matching. It does not get published.
             item.pop("_excerpt", None)
             item.pop("_tags", None)
@@ -1084,6 +1260,17 @@ def build(refresh_tags: bool = False) -> dict:
     items.sort(key=lambda i: i["published"], reverse=True)
 
     return {
+        # When this ran, which is not when the market it describes was
+        # captured and not when the outlets filed. A feed rebuilt every
+        # fifteen minutes needs to say which of the three each date is.
+        "generated_at": datetime.datetime.now(datetime.UTC).isoformat(
+            timespec="seconds"
+        ),
+        # The session every `evidence` block below is measured on, and the
+        # capture it was read from. Between the close and the next scan that
+        # is yesterday — which is correct, because yesterday's close IS the
+        # last completed session — and this is where the document says so.
+        "evidence_session": basis.session,
         "sources": [
             {
                 "id": s["id"],
@@ -1112,7 +1299,7 @@ KEEP_DAYS = 14
 KEEP_ITEMS = 500
 
 
-def merge_with_published(fresh: list[dict]) -> list[dict]:
+def merge_with_published(fresh: list[dict], basis: Basis) -> list[dict]:
     """Today's headlines on top of the ones already out there."""
     published = OUT / "latest.json"
     existing: list[dict] = []
@@ -1147,10 +1334,48 @@ def merge_with_published(fresh: list[dict]) -> list[dict]:
     #
     # A stored item is re-scored from scratch, so a change to the rules reaches
     # the archive on the next run instead of only the fresh headlines.
+    #
+    # And **re-measured** from scratch, which is the half that was missing. The
+    # session numbers were written once, on the run that first saw the story,
+    # and then travelled with it forever: a headline picked up at noon kept the
+    # half-day volume the noon scan had, while Connecting the dots — which
+    # divides the same two documents on every run — moved to the close two
+    # hours later. That is how CFGH came to be 6.65× on News and 6.05× on
+    # Crossings on 2 September, off one company on one day. Measuring here
+    # means both feeds read the same capture at the same moment, because
+    # neither of them stores an answer.
     for item in kept:
         item.setdefault("event", "other")
+        item.update(triage(item, basis))
     rank(kept)
     return kept[:MAX_ITEMS]
+
+
+def stamped(doc: dict) -> str:
+    """`generated_at` on the clock, unless nothing else moved.
+
+    This runs every fifteen minutes and most of those runs find the same
+    headlines they found last time. A timestamp stamped unconditionally makes
+    the file differ every run, which commits a no-op to main, bumps the
+    resource's fingerprint in the manifest, and sends every installed phone to
+    re-download a document identical to the one it holds — ninety-six times a
+    day. `build_fixtures` learned this about `manifest.json`; the rule is the
+    same here, and it is what keeps "the file changed" meaning something.
+    """
+    def body(d: dict) -> str:
+        return json.dumps(
+            {k: v for k, v in d.items() if k != "generated_at"},
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+
+    try:
+        previous = json.loads((OUT / "latest.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return doc["generated_at"]
+    if body(previous) == body(doc) and previous.get("generated_at"):
+        return previous["generated_at"]
+    return doc["generated_at"]
 
 
 def main() -> int:
@@ -1163,7 +1388,17 @@ def main() -> int:
     parser.add_argument("--images", type=int, default=60)
     args = parser.parse_args()
 
-    doc = build(refresh_tags=args.refresh_tags)
+    # Read once, before a single headline is fetched, so every item in this
+    # run — the fresh ones and the fortnight already published — is measured
+    # against one session rather than against whenever it happened to arrive.
+    basis = evidence_basis()
+    if basis.session:
+        print(f"── volume measured on the {basis.session['date']} close"
+              f"{' (carried, session in progress)' if basis.carried is not None else ''}")
+    else:
+        print("── no closed session on file: no volume evidence this run")
+
+    doc = build(basis, refresh_tags=args.refresh_tags)
 
     if not doc["items"]:
         print("no headlines fetched — leaving the published document alone")
@@ -1179,7 +1414,7 @@ def main() -> int:
     #
     # Deduplicated on the id the outlet gave it, and the *new* copy wins so a
     # headline that was later corrected shows the correction.
-    doc["items"] = merge_with_published(doc["items"])
+    doc["items"] = merge_with_published(doc["items"], basis)
 
     # Name every outlet the merged items cite, not only the ones that answered
     # this run.
@@ -1228,6 +1463,7 @@ def main() -> int:
     if args.check:
         return 0
 
+    doc["generated_at"] = stamped(doc)
     for directory in (OUT, FIXTURES):
         directory.mkdir(parents=True, exist_ok=True)
         (directory / "latest.json").write_text(

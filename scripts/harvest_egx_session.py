@@ -30,6 +30,14 @@ close, is what makes them survive into the evening.
 Carried forward on refusal, like every other best-effort read of this host: a
 company does not lose its market value because a WAF had a bad minute.
 
+That protection was per-RUN and the gap was per-ROW. This endpoint returns a
+different set of securities every time it is asked — 227 rows on 1 September,
+221 on 2 September, 202 on 3 September, against a directory of 284 — and a
+listing that fell out of one capture lost the currency it is quoted in, which
+is a listing fact and not a session figure. SAIB and GPPL both published as
+pound listings that way. `carry_currency` holds that one field for a ticker
+today's capture does not carry, and only that one.
+
 Usage:
     python3 scripts/harvest_egx_session.py [--check]
 """
@@ -172,6 +180,42 @@ def load() -> dict:
         return {}
 
 
+def carry_currency(rows: dict[str, dict], held: dict) -> dict[str, str]:
+    """A currency the exchange stated, held through a capture that dropped the row.
+
+    Everything else in this file is a figure about a MOMENT and is replaced
+    wholesale — a stale trade count is worse than none. The currency a listing
+    is quoted in is not: it is a listing fact, it changes by announcement and
+    not by session, and it is the one field here whose absence is read as an
+    answer rather than a gap.
+
+    Which made it hostage to whichever securities the last capture happened to
+    return. SAIB was in the 28 August capture at `currShort` "US$" and in no
+    capture since; GPPL was in the 1 September capture at "US$" and gone the
+    next morning. Both were republished as pound listings — a dollar price in
+    a column of pounds, because a row was missing for a day. On 3 September it
+    took eight minutes: the 10:00 capture held 223 rows and ten dollar
+    listings, the 10:08 harvest held 202 and three.
+
+    Only for a ticker TODAY'S capture does not carry. A ticker that comes back
+    quoting the pound has no `currency` key and keeps none — this cannot pin a
+    stale flag on a company that redenominates, because the exchange saying
+    "L.E" today still beats anything held from before.
+    """
+    carried: dict[str, str] = {}
+    for ticker, before in (held.get("securities") or {}).items():
+        currency = (before or {}).get("currency")
+        if not currency or ticker in rows:
+            continue
+        # Dated with the capture that STATED it, not the run that carried it,
+        # so a currency held for a month cannot read as a fresh observation.
+        rows[ticker] = {"currency": currency,
+                        "currency_stated": before.get("currency_stated")
+                        or held.get("harvested")}
+        carried[ticker] = currency
+    return carried
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="fetch and report, write nothing")
@@ -188,6 +232,11 @@ def main() -> int:
         print(f"! {error} — holding {len(kept)} from {held.get('harvested')}")
         return 0
 
+    # Counted before the carry, so `count` keeps meaning what the capture
+    # returned and a held currency cannot inflate it.
+    captured = len(rows)
+    carried = carry_currency(rows, held)
+
     document = {
         "harvested": datetime.date.today().isoformat(),
         "source": SOURCE,
@@ -195,15 +244,18 @@ def main() -> int:
         # trade count is a figure about a MOMENT, and one with no moment on it
         # is the thing §49 is about.
         "write_time": written,
-        "count": len(rows),
+        "count": captured,
         "securities": {k: rows[k] for k in sorted(rows)},
     }
     traded = sum(1 for v in rows.values() if v.get("trades"))
     classified = sum(1 for v in rows.values() if v.get("sector"))
     foreign = sum(1 for v in rows.values() if v.get("currency"))
-    print(f"   {len(rows)} securities carry a market value, {traded} a trade count,"
+    print(f"   {captured} securities carry a market value, {traded} a trade count,"
           f" {classified} the exchange's own sector, {foreign} a price not in pounds"
           f"{f' (written {written})' if written else ''}")
+    if carried:
+        print(f"   {len(carried)} not in this capture, currency held from an "
+              f"earlier one: {', '.join(sorted(carried))}")
     if args.check:
         return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
