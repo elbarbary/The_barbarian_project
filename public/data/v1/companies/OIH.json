@@ -7,12 +7,12 @@
  "sector": "IT , Media & Communication Services",
  "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
  "market": {
-  "last_close": 2,
+  "last_close": 2.01,
   "date": "2026-09-03",
-  "open": 2.05,
-  "high": 2.05,
-  "low": 1.98,
-  "volume": 45381150
+  "open": 2,
+  "high": 2.03,
+  "low": 1.99,
+  "volume": 30804909
  },
  "price_history": [
   {
@@ -863,12 +863,12 @@
   {
    "date": "2026-04-16",
    "close": 1.58,
-   "volume": 285462620
+   "volume": 285462619
   },
   {
    "date": "2026-04-19",
    "close": 1.54,
-   "volume": 273613040
+   "volume": 273613038
   },
   {
    "date": "2026-04-20",
@@ -918,7 +918,7 @@
   {
    "date": "2026-05-03",
    "close": 1.56,
-   "volume": 300674200
+   "volume": 300674196
   },
   {
    "date": "2026-05-04",
@@ -1142,7 +1142,7 @@
   },
   {
    "date": "2026-07-14",
-   "close": 1.41,
+   "close": 1.42,
    "volume": 23349160
   },
   {
@@ -1318,24 +1318,31 @@
  ],
  "profile": {
   "shares_outstanding": 5245690620,
-  "free_float": 0.48338700000000007,
   "float_shares": 2535698651.7299404,
-  "perf_1w": 2.5641025641025665,
-  "perf_1m": 34.22818791946309,
-  "perf_3m": 36.986301369863014,
-  "avg_volume_30d": 77588261.23333329,
-  "relative_volume_10d": 0.5965171526382018,
+  "perf_1w": 3.076923076923068,
+  "perf_1m": 34.89932885906039,
+  "perf_3m": 37.67123287671232,
+  "avg_volume_30d": 75800454.13333328,
+  "relative_volume_10d": 0.4138035820534367,
+  "history_bars": 0,
+  "market_cap": 10596295052.4,
+  "market_cap_source": "EGX",
+  "trades": 911,
+  "turnover": 67063994,
   "median_volume_20d": 83744428,
   "rv20": 0.5419005309821926,
   "normal_value_30d": 121256435.28999999,
   "five_session_change": 2.564102564102577,
-  "history_bars": 120,
-  "market_cap": 10491381240.0,
-  "market_cap_source": "EGX",
-  "trades": 59,
-  "turnover": 777186,
+  "free_float": 0.48338700000000007,
   "shares_outstanding_source": "EGX"
  },
+ "profile_carried": [
+  "five_session_change",
+  "free_float",
+  "median_volume_20d",
+  "normal_value_30d",
+  "rv20"
+ ],
  "financials": {
   "annual": [
    {
