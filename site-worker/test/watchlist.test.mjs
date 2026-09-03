@@ -408,3 +408,18 @@ test('signed out, nothing is asked of the server', async () => {
     assert.deepEqual(await w.sync(null), ['COMI']);
   } finally { b.done(); }
 });
+
+test('the redirects carry HSTS too', async () => {
+  // Both 301s were built with a bare Response.redirect and never passed
+  // through secure(), so no answer from www.esthmr.com — or from a plain
+  // http request — ever carried strict-transport-security. The apex policy
+  // deliberately omits includeSubDomains, so a browser that had only ever
+  // seen www had no pin for it.
+  const e = env();
+  for (const url of ['http://esthmr.com/x', 'https://www.esthmr.com/x', 'http://www.esthmr.com/x']) {
+    const a = await call(e, url);
+    assert.equal(a.status, 301, url);
+    assert.match(a.headers.get('strict-transport-security') || '', /max-age=\d{6,}/,
+      `${url}: the redirect carries no HSTS`);
+  }
+});

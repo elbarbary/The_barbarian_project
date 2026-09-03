@@ -27,6 +27,29 @@
 export const UNCLASSIFIED = { en: 'Unclassified', ar: 'غير مصنّف' };
 
 export const SECTOR_AR = {
+  // The exchange's own eighteen, in the Arabic it publishes beside each
+  // listing (`sectorA`) — the same strings the app carries. This table held
+  // only the vendor's twenty, so once the sectors were re-keyed to the
+  // exchange's taxonomy fourteen of them fell through to English on the
+  // Arabic-default screen.
+  "Banks": "بنوك",
+  "Basic Resources": "موارد أساسية",
+  "Building Materials": "مواد البناء",
+  "Contracting & Construction Engineering": "مقاولات و إنشاءات هندسية",
+  "Education Services": "خدمات تعليمية",
+  "Energy & Support Services": "طاقة وخدمات مساندة",
+  "Food, Beverages and Tobacco": "أغذية و مشروبات و تبغ",
+  "Health Care & Pharmaceuticals": "رعاية صحية و ادوية",
+  "IT , Media & Communication Services": "اتصالات و  اعلام و تكنولوجيا المعلومات",
+  "Industrial Goods , Services and Automobiles": "خدمات و منتجات صناعية وسيارات",
+  "Non-bank financial services": "خدمات مالية غير مصرفية",
+  "Paper & Packaging": "ورق ومواد تعبئة و تغليف",
+  "Real Estate": "عقارات",
+  "Shipping & Transportation Services": "خدمات النقل والشحن",
+  "Textile & Durables": "منسوجات و سلع معمرة",
+  "Trade & Distributors": "تجارة و موزعون",
+  "Travel & Leisure": "سياحة وترفيه",
+  "Utilities": "مرافق",
   "Finance": "التمويل والخدمات المالية",
   "Process Industries": "الصناعات التحويلية",
   "Non-Energy Minerals": "معادن ومواد بناء",
@@ -696,7 +719,7 @@ export async function news() {
       // than print the same apology on row after row; same rule here.
       because: it.weight === 'market' ? '' : (it.because || ''),
       becauseAr: it.weight === 'market' ? '' : (it.because_ar || ''),
-      image: it.image || null,
+      image: it.image ? String(it.image).replace(/&amp;/g, '&') : null,
       hasImage: Boolean(it.image),
       tickers: (it.tickers || []).map((ticker) => ({ ticker })),
     };
@@ -1060,6 +1083,11 @@ export async function sectors() {
         ticker: x.ticker, name: x.name_en || x.ticker, nameAr: x.name_ar || x.name_en || x.ticker,
         improving: x.improving || 0, readable: x.readable || 0,
         deteriorating: x.deteriorating || 0,
+        // The same row builder the members list uses reads this flag, and the
+        // standouts never set it — so every standout on all eighteen sectors,
+        // in both languages, said "Not enough filed history to read" over a
+        // company chosen precisely because it had the most.
+        hasPattern: (x.readable || 0) > 0,
       })),
       members: (detail.members || []).map((x) => ({
         ticker: x.ticker, name: x.name_en || x.ticker, nameAr: x.name_ar || x.name_en || x.ticker,
@@ -1251,6 +1279,12 @@ export async function investors() {
     basis: d.basis || '',
     parties: byParty,
     partyOrder: order,
+    // The same split over shares alone. The headline split counts government
+    // bonds and T-bills too, which on a heavy bond day is most of the money.
+    equities: rows(d.excluding_bonds).map((r) => ({
+      party: r.party, partyAr: r.party_ar,
+      percent: typeof r.percent === 'number' ? r.percent : null,
+    })),
     bands: [
       band('Individuals', 'أفراد', d.individuals),
       band('Institutions', 'مؤسسات', d.institutions),
