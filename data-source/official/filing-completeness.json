@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-03T10:03:03.906154+00:00",
+  "builtAt": "2026-09-04T09:49:45.823236+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 191990,
-    "withoutTickerInHeading": 36055,
+    "items": 192024,
+    "withoutTickerInHeading": 36070,
     "tickerNotInThisDirectory": 28859,
-    "attributedToAnIssuer": 127076,
+    "attributedToAnIssuer": 127095,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-03",
-        "items": 101,
-        "expected": 101,
+        "items": 135,
+        "expected": 135,
         "status": "complete"
       }
     ],
@@ -1841,7 +1841,15 @@
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
     "items": 560,
-    "failures": {}
+    "failures": {
+      "fra_news": "Expecting value: line 1 column 1 (char 0)",
+      "regulations": "Expecting value: line 1 column 1 (char 0)",
+      "reg_procedure_compan": "Expecting value: line 1 column 1 (char 0)",
+      "companies_decrees": "Expecting value: line 1 column 1 (char 0)",
+      "admin_actions": "Expecting value: line 1 column 1 (char 0)",
+      "criminal_procedures": "Expecting value: line 1 column 1 (char 0)",
+      "f_criminal_procedure": "Expecting value: line 1 column 1 (char 0)"
+    }
   },
   "issuers": [
     {
@@ -2012,9 +2020,9 @@
     },
     {
       "ticker": "AFDI",
-      "egxFilingCount": 487,
-      "latestEgxFilingId": "293849",
-      "latestEgxFilingAt": "2026-08-25T09:58:10",
+      "egxFilingCount": 488,
+      "latestEgxFilingId": "294301",
+      "latestEgxFilingAt": "2026-09-03T11:38:00",
       "candidateIssuerWebsite": "https://www.adi-alahly.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AFDI/profile",
       "websiteStatus": {
@@ -2102,9 +2110,9 @@
     },
     {
       "ticker": "ALCN",
-      "egxFilingCount": 1032,
-      "latestEgxFilingId": "293354",
-      "latestEgxFilingAt": "2026-08-17T09:22:52",
+      "egxFilingCount": 1033,
+      "latestEgxFilingId": "294303",
+      "latestEgxFilingAt": "2026-09-03T11:44:16",
       "candidateIssuerWebsite": "https://www.alexcont.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ALCN/profile",
       "websiteStatus": {
@@ -2426,9 +2434,9 @@
     },
     {
       "ticker": "CCAP",
-      "egxFilingCount": 38,
-      "latestEgxFilingId": "291865",
-      "latestEgxFilingAt": "2026-07-26T09:55:41",
+      "egxFilingCount": 41,
+      "latestEgxFilingId": "294306",
+      "latestEgxFilingAt": "2026-09-03T12:04:55",
       "candidateIssuerWebsite": "https://www.qalaaholdings.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CCAP/profile",
       "websiteStatus": null,
@@ -2550,9 +2558,9 @@
     },
     {
       "ticker": "COPR",
-      "egxFilingCount": 224,
-      "latestEgxFilingId": "294039",
-      "latestEgxFilingAt": "2026-08-30T12:04:43",
+      "egxFilingCount": 225,
+      "latestEgxFilingId": "294305",
+      "latestEgxFilingAt": "2026-09-03T11:50:48",
       "candidateIssuerWebsite": "https://www.copper-invest.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/COPR/profile",
       "websiteStatus": null,
@@ -2874,9 +2882,9 @@
     },
     {
       "ticker": "EGSA",
-      "egxFilingCount": 541,
-      "latestEgxFilingId": "292944",
-      "latestEgxFilingAt": "2026-08-13T09:46:28",
+      "egxFilingCount": 542,
+      "latestEgxFilingId": "294328",
+      "latestEgxFilingAt": "2026-09-03T16:46:31",
       "candidateIssuerWebsite": "https://www.nilesat.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EGSA/profile",
       "websiteStatus": null,
@@ -3048,9 +3056,9 @@
     },
     {
       "ticker": "ETEL",
-      "egxFilingCount": 1076,
-      "latestEgxFilingId": "293751",
-      "latestEgxFilingAt": "2026-08-23T13:46:50",
+      "egxFilingCount": 1077,
+      "latestEgxFilingId": "294297",
+      "latestEgxFilingAt": "2026-09-03T11:07:37",
       "candidateIssuerWebsite": "https://www.te.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ETEL/profile",
       "websiteStatus": null,
@@ -3128,9 +3136,9 @@
     },
     {
       "ticker": "FTNS",
-      "egxFilingCount": 232,
-      "latestEgxFilingId": "293904",
-      "latestEgxFilingAt": "2026-08-26T10:28:43",
+      "egxFilingCount": 233,
+      "latestEgxFilingId": "294323",
+      "latestEgxFilingAt": "2026-09-03T16:00:05",
       "candidateIssuerWebsite": "https://www.fitness-prime-elite.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FTNS/profile",
       "websiteStatus": null,
@@ -3494,9 +3502,9 @@
     },
     {
       "ticker": "ISPH",
-      "egxFilingCount": 526,
-      "latestEgxFilingId": "294259",
-      "latestEgxFilingAt": "2026-09-02T10:22:48",
+      "egxFilingCount": 527,
+      "latestEgxFilingId": "294324",
+      "latestEgxFilingAt": "2026-09-03T16:11:37",
       "candidateIssuerWebsite": "https://www.ibnsina-pharma.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ISPH/profile",
       "websiteStatus": null,
@@ -3548,9 +3556,9 @@
     },
     {
       "ticker": "KRDI",
-      "egxFilingCount": 273,
-      "latestEgxFilingId": "294029",
-      "latestEgxFilingAt": "2026-08-30T11:43:53",
+      "egxFilingCount": 274,
+      "latestEgxFilingId": "294298",
+      "latestEgxFilingAt": "2026-09-03T11:12:52",
       "candidateIssuerWebsite": "https://www.nahrelkhair.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KRDI/profile",
       "websiteStatus": null,
@@ -3710,9 +3718,9 @@
     },
     {
       "ticker": "MFSC",
-      "egxFilingCount": 528,
-      "latestEgxFilingId": "294225",
-      "latestEgxFilingAt": "2026-09-01T12:45:57",
+      "egxFilingCount": 529,
+      "latestEgxFilingId": "294322",
+      "latestEgxFilingAt": "2026-09-03T15:56:12",
       "candidateIssuerWebsite": "https://www.efsco.net/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MFSC/profile",
       "websiteStatus": null,
@@ -3814,9 +3822,9 @@
     },
     {
       "ticker": "MOED",
-      "egxFilingCount": 578,
-      "latestEgxFilingId": "294283",
-      "latestEgxFilingAt": "2026-09-02T16:17:44",
+      "egxFilingCount": 579,
+      "latestEgxFilingId": "294308",
+      "latestEgxFilingAt": "2026-09-03T14:50:59",
       "candidateIssuerWebsite": "https://www.moed.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOED/profile",
       "websiteStatus": null,
@@ -4222,9 +4230,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 321,
-      "latestEgxFilingId": "294285",
-      "latestEgxFilingAt": "2026-09-03T09:53:39",
+      "egxFilingCount": 322,
+      "latestEgxFilingId": "294330",
+      "latestEgxFilingAt": "2026-09-03T17:01:35",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4262,9 +4270,9 @@
     },
     {
       "ticker": "RAKT",
-      "egxFilingCount": 730,
-      "latestEgxFilingId": "292420",
-      "latestEgxFilingAt": "2026-08-03T12:53:18",
+      "egxFilingCount": 731,
+      "latestEgxFilingId": "294326",
+      "latestEgxFilingAt": "2026-09-03T16:31:38",
       "candidateIssuerWebsite": "https://www.rakta-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RAKT/profile",
       "websiteStatus": null,
@@ -4646,9 +4654,9 @@
     },
     {
       "ticker": "TRTO",
-      "egxFilingCount": 359,
-      "latestEgxFilingId": "292912",
-      "latestEgxFilingAt": "2026-08-12T15:28:12",
+      "egxFilingCount": 360,
+      "latestEgxFilingId": "294329",
+      "latestEgxFilingAt": "2026-09-03T16:54:51",
       "candidateIssuerWebsite": "https://www.totegypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TRTO/profile",
       "websiteStatus": null,
@@ -4698,9 +4706,9 @@
     },
     {
       "ticker": "UEGC",
-      "egxFilingCount": 862,
-      "latestEgxFilingId": "294262",
-      "latestEgxFilingAt": "2026-09-02T10:54:07",
+      "egxFilingCount": 863,
+      "latestEgxFilingId": "294302",
+      "latestEgxFilingAt": "2026-09-03T11:41:01",
       "candidateIssuerWebsite": "https://www.elsaeed-contracting.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UEGC/profile",
       "websiteStatus": null,
@@ -4728,9 +4736,9 @@
     },
     {
       "ticker": "UPMS",
-      "egxFilingCount": 335,
-      "latestEgxFilingId": "293846",
-      "latestEgxFilingAt": "2026-08-25T09:22:15",
+      "egxFilingCount": 336,
+      "latestEgxFilingId": "294325",
+      "latestEgxFilingAt": "2026-09-03T16:27:38",
       "candidateIssuerWebsite": "https://www.unionpharmacist.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/UPMS/profile",
       "websiteStatus": null,
@@ -4778,9 +4786,9 @@
     },
     {
       "ticker": "VLMRA",
-      "egxFilingCount": 14,
-      "latestEgxFilingId": "294244",
-      "latestEgxFilingAt": "2026-09-02T09:06:32",
+      "egxFilingCount": 15,
+      "latestEgxFilingId": "294327",
+      "latestEgxFilingAt": "2026-09-03T16:35:30",
       "candidateIssuerWebsite": "https://www.ekholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
       "websiteStatus": null,

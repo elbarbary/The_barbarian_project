@@ -643,5 +643,275 @@
       }
     ],
     "fetchedAt": "2026-09-02T09:48:51.434195+00:00"
+  },
+  "EGS65081C019": {
+    "ticker": "DAPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65081C019",
+        "issuerName": "Construction And Consulting Engineering"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:45.827965+00:00"
+  },
+  "EGS42121C011": {
+    "ticker": "DCCC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS42121C011",
+        "issuerName": "Damietta Container and Cargo Handling"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:48.553650+00:00"
+  },
+  "EGS63031C016": {
+    "ticker": "DEIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS63031C016",
+        "issuerName": "Delta Insurance Company"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:51.106948+00:00"
+  },
+  "EGS74F71C015": {
+    "ticker": "DGTZ",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS74F71C015",
+        "issuerName": "Digitize for Investment and Technology"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:53.134567+00:00"
+  },
+  "EGS30031C016": {
+    "ticker": "DOMT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30031C016",
+        "issuerName": "Arabian Food Industries co. - Domty"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:55.236724+00:00"
+  },
+  "EGS33321C018": {
+    "ticker": "DSCW",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS33321C018",
+        "issuerName": "Dice sport &casual wear"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:47:57.726692+00:00"
+  },
+  "EGS370W1C013": {
+    "ticker": "DTPP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS370W1C013",
+        "issuerName": "Delta Co. For Printing and Packaging"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:00.234828+00:00"
+  },
+  "EGS65771C015": {
+    "ticker": "EALR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65771C015",
+        "issuerName": "Arab Company For Land Reclamation"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:02.414561+00:00"
+  },
+  "EGS681D1C010": {
+    "ticker": "EASB",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS681D1C010",
+        "issuerName": "Egyptian Arabian Co. For securitiesBrokerage"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:04.378065+00:00"
+  },
+  "EGS37091C013": {
+    "ticker": "EAST",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS37091C013",
+        "issuerName": "Eastern Company For Tobacco"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:06.792428+00:00"
+  },
+  "EGS68181C014": {
+    "ticker": "EBSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS68181C014",
+        "issuerName": "Osool ESB Securities Brokerage Co."
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:09.254299+00:00"
+  },
+  "EGS3C071C015": {
+    "ticker": "ECAP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C071C015",
+        "issuerName": "AL-EZZ Porcelin ( GEMMA )"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:11.532837+00:00"
+  },
+  "EGS30351C018": {
+    "ticker": "EDFM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30351C018",
+        "issuerName": "East Delta Mills"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:13.971079+00:00"
+  },
+  "EGS3G111C015": {
+    "ticker": "EEII",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3G111C015",
+        "issuerName": "Arab Engineering Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:16.385007+00:00"
+  },
+  "EGS72FL1C016": {
+    "ticker": "EEPM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72FL1C016",
+        "issuerName": "Egypt Education Platform"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:18.388239+00:00"
+  },
+  "EGS3D0A1C010": {
+    "ticker": "EFAC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3D0A1C010",
+        "issuerName": "the Egyptian Ferro Alloys Co."
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:20.839559+00:00"
+  },
+  "EGS38381C017": {
+    "ticker": "EFIC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38381C017",
+        "issuerName": "Egyptian Financial & Industrial- EFIC"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:23.229742+00:00"
+  },
+  "EGS305I1C011": {
+    "ticker": "EFID",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS305I1C011",
+        "issuerName": "Edita Food Industries S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:25.702401+00:00"
+  },
+  "EGS743O1C013": {
+    "ticker": "EFIH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS743O1C013",
+        "issuerName": "E. Finance"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:27.725637+00:00"
+  },
+  "EGS3E181C010": {
+    "ticker": "EGAL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3E181C010",
+        "issuerName": "Egypt Aluminium Company"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:30.433241+00:00"
+  },
+  "EGS39011C019": {
+    "ticker": "EGAS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS39011C019",
+        "issuerName": "Egypt Gas Company"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:32.375519+00:00"
+  },
+  "EGS60182C010": {
+    "ticker": "EGBE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60182C010",
+        "issuerName": "Egyptian Gulf Bank"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:34.409994+00:00"
+  },
+  "EGS38201C017": {
+    "ticker": "EGCH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38201C017",
+        "issuerName": "Egyptian Chemical Industries \" KIMA \""
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:36.378526+00:00"
+  },
+  "EGS65861C014": {
+    "ticker": "EGCN",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-04T09:48:38.928057+00:00"
+  },
+  "EGS70311C013": {
+    "ticker": "EGOT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70311C013",
+        "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
+      }
+    ],
+    "fetchedAt": "2026-09-04T09:48:41.387654+00:00"
   }
 }

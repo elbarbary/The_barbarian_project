@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-02T09:48:51.785274+00:00",
+  "fetchedAt": "2026-09-04T09:48:41.739006+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "24cbbe8faa86058b7c2c9db51ebf9cbab0c1e3e1b4473f7c9996b18e11995c77",
+  "sourceSha256": "e104c7385dbbc3dd899a8ef4b61b3e8881f0c5cfb584d87168eb13c111d3c5ee",
   "issuers": [
     {
       "isin": "EGS01081C016",
@@ -33,12 +33,20 @@
       "issuerName": "HBA Contracting"
     },
     {
+      "isin": "EGS30031C016",
+      "issuerName": "Arabian Food Industries co. - Domty"
+    },
+    {
       "isin": "EGS30211C014",
       "issuerName": "Ajwa for Food Industies"
     },
     {
       "isin": "EGS30221C013",
       "issuerName": "The Arab Dairy Products Co."
+    },
+    {
+      "isin": "EGS30351C018",
+      "issuerName": "East Delta Mills"
     },
     {
       "isin": "EGS30401C011",
@@ -53,6 +61,10 @@
       "issuerName": "Cairo Oil & Soap"
     },
     {
+      "isin": "EGS305I1C011",
+      "issuerName": "Edita Food Industries S.A.E"
+    },
+    {
       "isin": "EGS32221C011",
       "issuerName": "Arab Cotton Ginning"
     },
@@ -61,12 +73,24 @@
       "issuerName": "Arab Polvara Spinning & Weaving Company"
     },
     {
+      "isin": "EGS33321C018",
+      "issuerName": "Dice sport &casual wear"
+    },
+    {
       "isin": "EGS341K1C013",
       "issuerName": "Innovation for retail and supplies-ARTIFEX"
     },
     {
       "isin": "EGS341K1C021",
       "issuerName": "Innovation for retail and supplies-ARTIFEX"
+    },
+    {
+      "isin": "EGS37091C013",
+      "issuerName": "Eastern Company For Tobacco"
+    },
+    {
+      "isin": "EGS370W1C013",
+      "issuerName": "Delta Co. For Printing and Packaging"
     },
     {
       "isin": "EGS380P1C010",
@@ -81,6 +105,10 @@
       "issuerName": "Abu Qir Fertilizers and Chemical Industries"
     },
     {
+      "isin": "EGS38201C017",
+      "issuerName": "Egyptian Chemical Industries \" KIMA \""
+    },
+    {
       "isin": "EGS38321C013",
       "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
     },
@@ -89,8 +117,20 @@
       "issuerName": "Alexandria For Pharmaceuticals Chemical Industries"
     },
     {
+      "isin": "EGS38381C017",
+      "issuerName": "Egyptian Financial & Industrial- EFIC"
+    },
+    {
       "isin": "EGS38391C016",
       "issuerName": "Kahira Pharmaceuticals"
+    },
+    {
+      "isin": "EGS39011C019",
+      "issuerName": "Egypt Gas Company"
+    },
+    {
+      "isin": "EGS3C071C015",
+      "issuerName": "AL-EZZ Porcelin ( GEMMA )"
     },
     {
       "isin": "EGS3C0O1C016",
@@ -109,8 +149,16 @@
       "issuerName": "Arab Aluminium Co."
     },
     {
+      "isin": "EGS3D0A1C010",
+      "issuerName": "the Egyptian Ferro Alloys Co."
+    },
+    {
       "isin": "EGS3D0C1C018",
       "issuerName": "Misr National Steel Company-AtaQa"
+    },
+    {
+      "isin": "EGS3E181C010",
+      "issuerName": "Egypt Aluminium Company"
     },
     {
       "isin": "EGS3E1E1C013",
@@ -125,6 +173,10 @@
       "issuerName": "G C P FOR FOR DUCTILE IRON PIPE PRODUCTI"
     },
     {
+      "isin": "EGS3G111C015",
+      "issuerName": "Arab Engineering Industries"
+    },
+    {
       "isin": "EGS3J4C1C011",
       "issuerName": "Canteks For Diapers And Papers Product"
     },
@@ -135,6 +187,10 @@
     {
       "isin": "EGS42111C012",
       "issuerName": "Alexandria Container and Cargo Handling"
+    },
+    {
+      "isin": "EGS42121C011",
+      "issuerName": "Damietta Container and Cargo Handling"
     },
     {
       "isin": "EGS44031C010",
@@ -177,8 +233,20 @@
       "issuerName": "(C.I.B.)"
     },
     {
+      "isin": "EGS60182C010",
+      "issuerName": "Egyptian Gulf Bank"
+    },
+    {
       "isin": "EGS60231C015",
       "issuerName": "Suez Canal Bank"
+    },
+    {
+      "isin": "EGS63031C016",
+      "issuerName": "Delta Insurance Company"
+    },
+    {
+      "isin": "EGS65081C019",
+      "issuerName": "Construction And Consulting Engineering"
     },
     {
       "isin": "EGS651B1C018",
@@ -199,6 +267,10 @@
     {
       "isin": "EGS656M1C010",
       "issuerName": "Bonyan Development And Trade"
+    },
+    {
+      "isin": "EGS65771C015",
+      "issuerName": "Arab Company For Land Reclamation"
     },
     {
       "isin": "EGS66DU1C015",
@@ -223,6 +295,14 @@
     {
       "isin": "EGS676N1C015",
       "issuerName": "AlTawfeek Leasing Company a.t.lease"
+    },
+    {
+      "isin": "EGS68181C014",
+      "issuerName": "Osool ESB Securities Brokerage Co."
+    },
+    {
+      "isin": "EGS681D1C010",
+      "issuerName": "Egyptian Arabian Co. For securitiesBrokerage"
     },
     {
       "isin": "EGS69021C011",
@@ -257,6 +337,10 @@
       "issuerName": "Catalyst Partners Middle East (CPME)"
     },
     {
+      "isin": "EGS70311C013",
+      "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
+    },
+    {
       "isin": "EGS72081C010",
       "issuerName": "ALEXANDIRA NEW MEDICAL CENTER"
     },
@@ -273,12 +357,24 @@
       "issuerName": "Arab Co. For Assets Management And Development"
     },
     {
+      "isin": "EGS72FL1C016",
+      "issuerName": "Egypt Education Platform"
+    },
+    {
       "isin": "EGS73541C012",
       "issuerName": "CITADEL for Financial Investments"
     },
     {
       "isin": "EGS738I1C018",
       "issuerName": "Contact Financial Holding"
+    },
+    {
+      "isin": "EGS743O1C013",
+      "issuerName": "E. Finance"
+    },
+    {
+      "isin": "EGS74F71C015",
+      "issuerName": "Digitize for Investment and Technology"
     },
     {
       "isin": "EGS74PG1C019",
@@ -335,12 +431,13 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 57,
-    "exactIsinsQueried": 60,
+    "matchedAtMcdr": 81,
+    "exactIsinsQueried": 85,
     "confirmedNotFoundAfterExactSearch": {
       "AIDC": "EGS65R01C015",
       "CCAPP": "EGS73541P048",
-      "ASPI_r3": "EGS924G1C014"
+      "ASPI_r3": "EGS924G1C014",
+      "EGCN": "EGS65861C014"
     },
     "transportErrors": {},
     "notYetIndividuallyQueried": {
@@ -349,37 +446,19 @@
       "KRDI": "EGS02291C010",
       "SPIN": "EGS32041C013",
       "RREI": "EGS65011C016",
-      "DOMT": "EGS30031C016",
       "POUL": "EGS02051C018",
       "PRCL": "EGS3C111C019",
       "KASABF": "EGS696Z1C017",
       "SIDC": "EGS38361C019",
-      "DCCC": "EGS42121C011",
-      "DTPP": "EGS370W1C013",
-      "DEIN": "EGS63031C016",
       "SUGR": "EGS30201C015",
-      "DAPH": "EGS65081C019",
-      "DSCW": "EGS33321C018",
-      "DGTZ": "EGS74F71C015",
-      "EFIH": "EGS743O1C013",
       "HRHO": "EGS69101C011",
       "EGX30ETF": "EGS69491M015",
       "NMIN": "EGS14041C015",
       "KNGC": "EGS3C6Q1C018",
       "NFCI": "EGS5ACC1C014",
       "SWDY": "EGS3G0Z1C014",
-      "EDFM": "EGS30351C018",
-      "EAST": "EGS37091C013",
-      "EFID": "EGS305I1C011",
-      "EGAL": "EGS3E181C010",
-      "EEPM": "EGS72FL1C016",
       "EPCO": "EGS02211C018",
-      "EASB": "EGS681D1C010",
-      "EGCH": "EGS38201C017",
       "SIEG": "EGS3C9X1C016",
-      "EFAC": "EGS3D0A1C010",
-      "EFIC": "EGS38381C017",
-      "EGBE": "EGS60182C010",
       "MAAL": "EGS739Z1C016",
       "PHAR": "EGS38081C013",
       "IRON": "EGS3D061C015",
@@ -390,13 +469,9 @@
       "EHDR": "EGS65341C017",
       "EGREF": "EGS694B1C017",
       "EPPK": "EGS360A1C011",
-      "EEII": "EGS3G111C015",
-      "EALR": "EGS65771C015",
-      "ECAP": "EGS3C071C015",
       "KWIN": "EGS69011C012",
       "ELKA": "EGS65071C010",
       "MMHC": "EGS651F1C014",
-      "EGOT": "EGS70311C013",
       "KABO": "EGS33061C010",
       "ELNA": "EGS300L1C011",
       "ENHD": "EGS65621C012",
@@ -478,7 +553,6 @@
       "NCCW": "EGS23111C015",
       "NHPS": "EGS65131C012",
       "NAPR": "EGS370O1C013",
-      "EGAS": "EGS39011C019",
       "MILS": "EGS30361C017",
       "NEDA": "EGS52041C018",
       "NINH": "EGS72011C017",
@@ -491,7 +565,6 @@
       "ORHD": "EGS70321C012",
       "OIH": "EGS693V1C014",
       "ORWE": "EGS33041C012",
-      "EBSC": "EGS68181C014",
       "PHDC": "EGS655L1C012",
       "SIMO": "EGS36091C014",
       "PMSC": "EGS3J7D2C015",
@@ -531,7 +604,6 @@
       "TAQA": "EGS490S1C014",
       "ETEL": "EGS48031C016",
       "RMDA": "EGS381B1C015",
-      "EGCN": "EGS65861C014",
       "ELAB": "EGS3E1Z2C016",
       "MOED": "EGS729F1C012",
       "UBEE": "EGS600M1C017",
