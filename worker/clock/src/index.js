@@ -8,6 +8,7 @@ const UA    = 'esthmr-clock/1.0';
 // Africa/Cairo local time. The EGX trading week is Sunday (0) to Thursday (4).
 export const SCHEDULE = [
   { file: 'publish-app-data.yml',         days: [0,1,2,3,4],     at: ['09:30','10:30','12:30','14:45'], serialize: true  },
+  { file: 'publish-prices.yml',           days: [0,1,2,3,4],     at: ['10:00','11:00','12:00','13:00','14:00','15:00'], serialize: true },
   { file: 'publish-official-sources.yml', days: [0,1,2,3,4,5,6], at: ['08:30'],                         serialize: true  },
   { file: 'publish-live-data.yml',        days: [0,1,2,3,4,5,6], every: 15,                             serialize: false },
 ];
@@ -15,6 +16,7 @@ export const SCHEDULE = [
 // Staleness thresholds in minutes since last successful run
 export const STALE = {
   'publish-live-data.yml':        75,
+  'publish-prices.yml':          240,
   'publish-app-data.yml':     26 * 60,
   'publish-official-sources.yml': 30 * 60,
 };
