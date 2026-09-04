@@ -535,6 +535,27 @@ async function api(request, env, url) {
   const path = url.pathname.replace('/esthmr/api', '');
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
 
+  /* The fingerprint of what this deployment is actually serving. Ungated.
+   *
+   * /data/v1/manifest.json is behind the session gate below, so nothing
+   * outside can ask "is what you are serving the same as what was committed?"
+   * — which is the only question an external watchdog exists to answer, and
+   * the one a committed file cannot answer, because a committed file says what
+   * was BUILT. This reads the manifest out of the asset bundle that is live.
+   *
+   * It discloses a sixteen-character hash and a build time. No company, no
+   * price, no figure — nothing the gate is there to protect. */
+  if (path === '/version') {
+    const manifest = await env.ASSETS
+      .fetch(new Request(new URL('/data/v1/manifest.json', url)))
+      .then((answer) => (answer.ok ? answer.json() : null))
+      .catch(() => null);
+    return json({
+      data_version: manifest?.data_version ?? null,
+      generated_at: manifest?.generated_at ?? null,
+    }, manifest ? 200 : 503, { 'cache-control': 'no-store' });
+  }
+
   if (path === '/auth/me') {
     const who = await session(request, env);
     return who ? json({ email: who.e }) : json({ error: 'signed out' }, 401);

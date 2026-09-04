@@ -483,3 +483,60 @@ test('the redirects carry HSTS too', async () => {
       `${url}: the redirect carries no HSTS`);
   }
 });
+
+/* ── the deployed fingerprint ──────────────────────────────────────────────
+ *
+ * An external watchdog has to be able to ask this deployment what it is
+ * actually serving, and it cannot sign in. It used to read a committed file,
+ * public/esthmr/stamp.json, which no workflow staged — so it never moved, the
+ * watchdog read "deployed" as permanently behind "committed", and its alarm
+ * latched open on a false positive and could never report anything real.
+ * Everything else under /data/v1/ stays behind the gate.
+ */
+function versionEnv(manifest) {
+  return env({
+    ASSETS: {
+      async fetch(request) {
+        if (new URL(request.url).pathname === '/data/v1/manifest.json' && manifest) {
+          return new Response(JSON.stringify(manifest), { status: 200 });
+        }
+        return new Response('not found', { status: 404 });
+      },
+    },
+  });
+}
+
+const MANIFEST = {
+  schema_version: 1,
+  data_version: '4563348d009b2a12',
+  generated_at: '2026-09-04T12:47:44+00:00',
+  market_date: '2026-09-03',
+  versions: { companies: 'aaa', prices: 'bbb' },
+};
+
+test('the deployed data_version is readable without signing in', async () => {
+  for (const host of ['https://thebarbarianproject.com', 'https://esthmr.com']) {
+    const a = await call(versionEnv(MANIFEST), `${host}/esthmr/api/version`);
+    assert.equal(a.status, 200, host);
+    assert.equal((await a.json()).data_version, '4563348d009b2a12', host);
+  }
+});
+
+test('it discloses the fingerprint and nothing else', async () => {
+  const a = await call(versionEnv(MANIFEST), 'https://esthmr.com/esthmr/api/version');
+  // `versions` is a per-folder hash map and `market_date` is a trading fact.
+  // Neither belongs on an ungated endpoint just because it was in the file.
+  assert.deepEqual(Object.keys(await a.json()).sort(), ['data_version', 'generated_at']);
+});
+
+test('the gate over the rest of /data/v1/ is untouched', async () => {
+  const a = await call(versionEnv(MANIFEST), 'https://esthmr.com/data/v1/manifest.json');
+  assert.equal(a.status, 401, 'the manifest itself must still require a session');
+});
+
+test('a missing manifest refuses rather than reporting a null version', async () => {
+  // Answering 200 with data_version null would read to the watchdog as "the
+  // deployment has no version", which is indistinguishable from drift.
+  const a = await call(versionEnv(null), 'https://esthmr.com/esthmr/api/version');
+  assert.equal(a.status, 503);
+});

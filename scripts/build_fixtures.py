@@ -259,13 +259,16 @@ def main() -> int:
     # publish all it liked and no device ever noticed.
     write(API / "manifest.json", manifest)
     write(FIXTURES / "manifest.json", manifest)
-    # Ungated deploy stamp for the external watchdog
-    stamp_path = REPO / "public" / "esthmr" / "stamp.json"
-    write(stamp_path, {
-        "data_version": data_version,
-        "generated_at": generated_at,
-        "market_date": market_date,
-    })
+    # There was an ungated copy of this fingerprint at public/esthmr/stamp.json,
+    # written here for the external watchdog to read. No workflow ever staged
+    # it, so it froze at whatever was committed by hand and the watchdog read
+    # "deployed" as permanently behind "committed" — which latched its alarm
+    # open on a false positive and left it unable to report anything real.
+    #
+    # Staging it would have fixed the freeze and kept the wrong shape: a
+    # committed file records what was BUILT, and the question is what is
+    # DEPLOYED. The site Worker answers that directly now, out of the live
+    # asset bundle, at GET /esthmr/api/version.
     print(f"  data_version {data_version}")
 
     print(f"\n{len(COMPANIES)} companies, {studied['studied']} real investigations")
