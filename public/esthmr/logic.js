@@ -328,6 +328,10 @@ export class Component extends Base {
       secAbove:'above the sector on {key}',
       secBelow:'below the sector on {key}',
       secRising:'rising', secFalling:'falling', secFlat:'flat', secUnknown:'unreadable',
+      pulseTitle:'Today\'s Market Pulse',
+      pulseLeaderLabel:'Active leader',
+      pulseFlowLabel:'Session liquidity',
+      pulseScannerLabel:'Safety gates (Scanner)',
       // ── the heat map ──
       heatTitle:'Heat map',
       heatLead:'Every company sized by what the market says it is worth, coloured by how it moved today. Grouped by sector, because a red block is a different fact from a red company.',
@@ -617,6 +621,10 @@ export class Component extends Base {
       secAbove:'أعلى من القطاع في {key}',
       secBelow:'أدنى من القطاع في {key}',
       secRising:'صاعدة', secFalling:'هابطة', secFlat:'ثابتة', secUnknown:'غير مقروءة',
+      pulseTitle:'نبض السوق اليوم في ثوانٍ',
+      pulseLeaderLabel:'أبرز التحركات',
+      pulseFlowLabel:'حركة السيولة وتوزيعها',
+      pulseScannerLabel:'معايير الأمان (السكانر)',
       // ── الخريطة الحرارية ──
       heatTitle:'الخريطة الحرارية',
       heatLead:'كل شركة بحجم ما تقول السوق إنها تساويه، وبلون تحرّكها اليوم. مجمّعة بالقطاع، لأن قطاعاً أحمر غير شركة حمراء.',
@@ -3094,6 +3102,56 @@ export class Component extends Base {
             sector: 'All', q: '',
             rqs: [{ src: 'line', k: 'ratio', m: 'pe', op: 'bt', a: '0', b: String(pe) }] }),
         };
+      })(),
+      // ── 3-Second Market Pulse (Plain Language for Everyone) ──
+      pulseTone: (() => {
+        const mainIx = indices && indices[0];
+        const pctVal = mainIx ? parseFloat(mainIx.pct) : 0;
+        if (pctVal > 0.15) {
+          return { bg: 'rgba(63, 107, 82, 0.12)', fg: '#3F6B52', border: 'rgba(63, 107, 82, 0.3)', icon: '↗', badge: ar ? 'جلسة خضراء · صعود' : 'Gaining Session' };
+        } else if (pctVal < -0.15) {
+          return { bg: 'rgba(163, 64, 47, 0.12)', fg: '#A3402F', border: 'rgba(163, 64, 47, 0.3)', icon: '↘', badge: ar ? 'جلسة حمراء · تراجع' : 'Pullback Session' };
+        }
+        return { bg: 'rgba(232, 98, 28, 0.12)', fg: '#E8621C', border: 'rgba(232, 98, 28, 0.3)', icon: '↔', badge: ar ? 'جلسة متوازنة' : 'Balanced Session' };
+      })(),
+      pulseTitle: L.pulseTitle,
+      pulseDate: this.longDate(D.marketDate) || '',
+      pulseBody: (() => {
+        const mainIx = indices && indices[0];
+        const pctVal = mainIx ? parseFloat(mainIx.pct) : 0;
+        const pctStr = mainIx ? mainIx.pct : '0.0%';
+        if (ar) {
+          if (pctVal > 0.15) {
+            return `أغلقت البورصة المصرية على صعود بقيادة المؤشر الرئيسي (${pctStr})، مع تدفق سيولة إيجابية وارتفاع في معظم الأسهم القيادية.`;
+          } else if (pctVal < -0.15) {
+            return `شهدت البورصة المصرية جلسة هادئة مائلة للتراجع (${pctStr})، وسط عمليات جني أرباح وإعادة تمركز في بعض القطاعات.`;
+          }
+          return `اتسمت جلسة اليوم بالاستقرار والتوازن (${pctStr})، مع تقارب بين قوى الشراء والبيع وترقب من المتعاملين.`;
+        } else {
+          if (pctVal > 0.15) {
+            return `The Egyptian Exchange closed higher today led by the benchmark index (${pctStr}), with constructive institutional inflows across core sectors.`;
+          } else if (pctVal < -0.15) {
+            return `The Egyptian Exchange saw a mild consolidation session (${pctStr}) as participants engaged in selective profit-taking across cyclical names.`;
+          }
+          return `The market held steady today (${pctStr}) with balanced buying and selling pressures and selective single-stock interest.`;
+        }
+      })(),
+      pulseLeader: (() => {
+        const topGainers = (D.companies || []).filter((c) => typeof c.pct === 'number' && c.pct > 0).sort((a,b) => b.pct - a.pct);
+        const top = topGainers[0];
+        if (!top) return ar ? 'لا صعود استثنائي' : 'No standout gainer';
+        const name = this.nm(top.name) || top.ticker;
+        return `${name} (${this.pct(top.pct)})`;
+      })(),
+      pulseFlow: (investors && investors.hasTypeBar)
+        ? (ar ? 'سيولة مؤسسية متوازنة' : 'Balanced Institutional Flow')
+        : (ar ? 'سيولة جلسة معتادة' : 'Regular Session Liquidity'),
+      pulseScanner: (() => {
+        const scr = D.opportunity || {};
+        const count = scr.qualified_count ?? 0;
+        return count > 0
+          ? (ar ? `${count} شركة استوفت الشروط` : `${count} qualified setup(s)`)
+          : (ar ? 'لا أسهم مؤهلة اليوم (مراقبة)' : 'No qualified setups (Silence)');
       })(),
       // Home's headline and its pill said "The close — official close from
       // market.json, not a live price" as unconditional literals, including

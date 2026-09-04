@@ -259,6 +259,13 @@ def main() -> int:
     # publish all it liked and no device ever noticed.
     write(API / "manifest.json", manifest)
     write(FIXTURES / "manifest.json", manifest)
+    # Ungated deploy stamp for the external watchdog
+    stamp_path = REPO / "public" / "esthmr" / "stamp.json"
+    write(stamp_path, {
+        "data_version": data_version,
+        "generated_at": generated_at,
+        "market_date": market_date,
+    })
     print(f"  data_version {data_version}")
 
     print(f"\n{len(COMPANIES)} companies, {studied['studied']} real investigations")
