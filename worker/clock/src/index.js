@@ -146,10 +146,14 @@ async function watchdog(env) {
 
 export default {
   async scheduled(event, env, ctx) {
-    const c = cairo(new Date(event.scheduledTime));
+    // Round to nearest 15-minute slot so cloud execution drift cannot miss hh:mm targets
+    const targetMs = event && event.scheduledTime
+      ? Math.round(Number(event.scheduledTime) / (15 * 60 * 1000)) * (15 * 60 * 1000)
+      : Date.now();
+    const c = cairo(new Date(targetMs));
     for (const job of SCHEDULE) {
       if (!job.days.includes(c.day)) continue;
-      const due = job.every ? c.minutes % job.every === 0 : job.at.includes(c.hhmm);
+      const due = job.every ? true : job.at.includes(c.hhmm);
       if (!due) continue;
       if (job.serialize && (await busy(env, job.file))) {
         console.log(`skip ${job.file}: already running or queued`);

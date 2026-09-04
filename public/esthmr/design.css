@@ -1,15 +1,15 @@
 *{box-sizing:border-box}
   html,body{margin:0;padding:0}
-  body{background:#EDE8E2;-webkit-font-smoothing:antialiased}
-  [data-theme="light"]{--bg:#EDE8E2;--surface:#F7F4F0;--ink:#1B1917;--t2:#5C554F;--faint:#6E6761;--accent:#E8621C;--iris:#5F4B6E;--up:#3F6B52;--down:#A3402F;
+  body{background:var(--bg,#EDE8E2);color:var(--ink,#1B1917);-webkit-font-smoothing:antialiased}
+  :root[data-theme="light"],[data-theme="light"]{--bg:#EDE8E2;--surface:#F7F4F0;--ink:#1B1917;--t2:#5C554F;--faint:#6E6761;--accent:#B84305;--iris:#5F4B6E;--up:#3F6B52;--down:#A3402F;
     --rule:rgba(27,25,23,.10);--rule2:rgba(27,25,23,.06);--thread:rgba(27,25,23,.22);--sunk:rgba(27,25,23,.035);
     --glass:rgba(247,244,240,.66);--edge:rgba(255,255,255,.75);--edgeIn:rgba(255,255,255,.55);
     --sh:0 1px 2px rgba(27,25,23,.05),0 12px 32px -14px rgba(27,25,23,.22);
     --shLift:0 2px 4px rgba(27,25,23,.06),0 22px 44px -18px rgba(27,25,23,.30);
     --shPill:0 1px 2px rgba(27,25,23,.08);
     --activeBg:rgba(255,255,255,.82);
-    --upTint:rgba(63,107,82,.10);--downTint:rgba(163,64,47,.10);--irisTint:rgba(95,75,110,.10);--accTint:rgba(232,98,28,.10);
-    --wash1:rgba(232,98,28,.055);--wash2:rgba(95,75,110,.05);
+    --upTint:rgba(63,107,82,.10);--downTint:rgba(163,64,47,.10);--irisTint:rgba(95,75,110,.10);--accTint:rgba(184,67,5,.10);
+    --wash1:rgba(184,67,5,.055);--wash2:rgba(95,75,110,.05);
     /* The heat map. Seven steps rather than a gradient, because a reader can
        count steps and cannot count shades. --hmNone is a company that did not
        trade, and is deliberately not --hmZ: no trade and no change look the
@@ -19,7 +19,7 @@
     --hmD3:#8C2B1C;--hmD2:#A2432F;--hmD1:#B05C46;--hmZ:#776E66;
     --hmU1:#4A7F62;--hmU2:#386E4E;--hmU3:#22593B;--hmNone:#8E857D;
     --hmInk:#FFFFFF;--hmSunk:rgba(27,25,23,.05)}
-  [data-theme="dark"]{--bg:#141311;--surface:#1D1B19;--ink:#F0EBE5;--t2:#B8B0A8;--faint:#9C938B;--accent:#FF8340;--iris:#A99BB8;--up:#6EA487;--down:#D97D64;
+  :root[data-theme="dark"],[data-theme="dark"]{--bg:#141311;--surface:#1D1B19;--ink:#F0EBE5;--t2:#B8B0A8;--faint:#9C938B;--accent:#FF8340;--iris:#A99BB8;--up:#6EA487;--down:#D97D64;
     --rule:rgba(240,235,229,.13);--rule2:rgba(240,235,229,.07);--thread:rgba(240,235,229,.26);--sunk:rgba(240,235,229,.04);
     --glass:rgba(29,27,25,.62);--edge:rgba(240,235,229,.10);--edgeIn:rgba(240,235,229,.06);
     --sh:0 1px 2px rgba(0,0,0,.34),0 14px 34px -14px rgba(0,0,0,.6);

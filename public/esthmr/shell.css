@@ -64,18 +64,19 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 /* Sign-in sheet */
 #esthmr-signin { position: fixed; inset: 0; z-index: 60;
   display: grid; place-items: center; }
-.si-scrim { position: absolute; inset: 0; background: rgba(27,25,23,.55);
-  backdrop-filter: blur(3px); }
+.si-scrim { position: absolute; inset: 0; background: rgba(0,0,0,.55);
+  backdrop-filter: blur(4px); }
 .si-sheet {
   position: relative; width: min(420px, calc(100vw - 32px));
-  background: #F7F4F0; color: #1B1917; border-radius: 18px;
+  background: var(--surface, #F7F4F0); color: var(--ink, #1B1917); border-radius: 18px;
+  border: 1px solid var(--edgeIn, rgba(255,255,255,.3));
   padding: 26px 26px 22px;
-  box-shadow: 0 24px 60px -20px rgba(27,25,23,.5);
+  box-shadow: var(--shLift, 0 24px 60px -20px rgba(0,0,0,.5));
   font: 400 15px/1.55 "IBM Plex Sans", system-ui, sans-serif;
 }
 .si-sheet h2 { margin: 0 0 6px;
   font: 600 21px/1.15 "Bricolage Grotesque", system-ui, sans-serif; }
-.si-lead { margin: 0 0 18px; color: #5C554F; font-size: 13.6px; }
+.si-lead { margin: 0 0 18px; color: var(--t2, #5C554F); font-size: 13.6px; }
 .si-step { display: grid; gap: 8px; }
 /* The same trap the demo banner fell into, in the other file nobody scanned.
    `hidden` is only the user-agent rule `[hidden] { display: none }`, and ANY
@@ -85,28 +86,32 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
    yet, for as long as the sheet has existed. */
 .si-step[hidden] { display: none; }
 .si-step label { font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
-  color: #6E6761; font-family: "IBM Plex Mono", monospace; }
+  color: var(--faint, #6E6761); font-family: "IBM Plex Mono", monospace; }
 .si-step input {
   font: 400 16px/1.2 "IBM Plex Sans", system-ui, sans-serif;
   padding: 11px 13px; border-radius: 10px;
-  border: 1px solid rgba(27,25,23,.22); background: #fff; color: #1B1917;
+  border: 1px solid var(--rule, rgba(27,25,23,.22)); background: var(--sunk, #fff); color: var(--ink, #1B1917);
 }
 #si-code { font-family: "IBM Plex Mono", monospace; letter-spacing: .3em; }
 .si-step button[type=submit] {
   margin-top: 4px; padding: 11px 16px; border: 0; border-radius: 10px;
-  background: #1B1917; color: #F5F1EC; cursor: pointer;
+  background: var(--accent, #B84305); color: #fff; cursor: pointer;
   font: 500 14.5px/1 "IBM Plex Sans", system-ui, sans-serif;
+  transition: opacity .15s;
 }
-.si-step button[type=submit]:disabled { opacity: .6; cursor: default; }
+.si-step button[type=submit]:hover { opacity: .9; }
+.si-step button[type=submit]:disabled { opacity: .5; cursor: default; }
 .si-back { margin-top: 2px; background: none; border: 0; cursor: pointer;
-  color: #6E6761; font-size: 12.5px; text-decoration: underline; }
+  color: var(--faint, #6E6761); font-size: 12.5px; text-decoration: underline; }
+.si-back:hover { color: var(--ink); }
 .si-turnstile { min-height: 65px; display: flex; justify-content: center; }
-.si-error { margin: 12px 0 0; color: #A3402F; font-size: 13px; }
+.si-error { margin: 12px 0 0; color: var(--down, #A3402F); font-size: 13px; }
 .si-error[hidden] { display: none; }
 .si-close { position: absolute; top: 10px; inset-inline-end: 12px;
   background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer;
-  color: #6E6761; }
-:focus-visible { outline: 2px solid #E8621C; outline-offset: 2px; }
+  color: var(--faint, #6E6761); }
+.si-close:hover { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent, #B84305); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 /* ── phones ──────────────────────────────────────────────────────────────
@@ -146,19 +151,20 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
      clipped to two letters. */
   .om-rail > * { flex: none !important; }
   .om-nav { flex-direction: row !important; gap: 4px !important; }
-  .om-nav > div { flex: none !important; width: max-content !important; }
+  .om-nav > div { flex: none !important; width: max-content !important; min-height: 40px !important; }
   /* The active-tab marker is a vertical bar against a vertical list; lying on
      its side it would read as an underline nobody asked for. */
   .om-nav > div > div:first-child { display: none !important; }
   .om-nav > div {
     grid-template-columns: 18px auto !important;
     gap: 7px !important;
-    padding: 9px 13px !important;
+    padding: 10px 14px !important;
     white-space: nowrap;
   }
   .om-nav > div > div:last-child { display: none !important; }   /* the count */
   .om-tools { margin-top: 0 !important; flex-direction: row !important; gap: 8px !important; }
   .om-tools > div:last-child { display: none !important; }        /* data_version */
+  .om-strip > * { min-height: 38px !important; display: inline-flex !important; align-items: center !important; }
 
   .om-main {
     margin-inline-start: 0 !important;

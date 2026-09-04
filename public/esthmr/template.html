@@ -488,7 +488,7 @@
                  is not the outlet's business. -->
             <sc-if value="{{ f.hasImage }}">
               <a href="{{ f.href }}" target="_blank" rel="noreferrer" style="position:absolute;inset:0;display:block">
-                <img src="{{ f.image }}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
+                <img src="{{ f.image }}" alt="{{ f.headline }}" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
               </a>
             </sc-if>
           </div>

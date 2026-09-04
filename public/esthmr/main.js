@@ -22,6 +22,13 @@ try {
   if (chosen === 'en' || chosen === 'ar') component.state.lang = chosen;
 } catch { /* a blocked store costs the preference, not the page */ }
 
+const THEME = 'esthmr:theme';
+try {
+  const chosenTheme = localStorage.getItem(THEME);
+  if (chosenTheme === 'light' || chosenTheme === 'dark') component.state.theme = chosenTheme;
+} catch { /* a blocked store costs the preference, not the page */ }
+document.documentElement.dataset.theme = component.state.theme || 'light';
+
 /* The chrome around the screens, in the reader's language.
  *
  * The banner, the two account buttons and the sign-in sheet live in
@@ -274,11 +281,17 @@ document.getElementById('signout').onclick = async () => {
   let loading = null;
   const draw = component.onChange;
   let lastLang = component.state.lang;
+  let lastTheme = component.state.theme || 'light';
   component.onChange = () => {
     if (component.state.lang !== lastLang) {
       lastLang = component.state.lang;
       setChrome(lastLang);
       try { localStorage.setItem(LANG, lastLang); } catch { /* nothing to keep */ }
+    }
+    if (component.state.theme !== lastTheme) {
+      lastTheme = component.state.theme;
+      document.documentElement.dataset.theme = lastTheme;
+      try { localStorage.setItem(THEME, lastTheme); } catch { /* nothing to keep */ }
     }
     // The month the screen is SHOWING, not the one in state — state starts
     // empty so the calendar can open on the newest month the archive holds
@@ -338,4 +351,26 @@ document.getElementById('signout').onclick = async () => {
     }
     draw();
   };
+
+  // Global search shortcut: '/' (when not editing text) or Cmd+K / Ctrl+K
+  window.addEventListener('keydown', (e) => {
+    const el = document.activeElement;
+    const isInput = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
+    const isSlash = e.key === '/' && !isInput;
+    const isCmdK = (e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K');
+    if (isSlash || isCmdK) {
+      e.preventDefault();
+      if (component.state.screen !== 'market') {
+        component.state.screen = 'market';
+        draw();
+      }
+      requestAnimationFrame(() => {
+        const input = document.getElementById('om-market-search');
+        if (input) {
+          input.focus();
+          if (typeof input.select === 'function') input.select();
+        }
+      });
+    }
+  });
 })();

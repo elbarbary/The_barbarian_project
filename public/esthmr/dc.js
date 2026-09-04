@@ -157,6 +157,16 @@ function renderNode(node, scope, into) {
     if (value === false || value === null || value === undefined) continue;
     el.setAttribute(attr.name, String(value));
   }
+  if (el.style.cursor === 'pointer' && tag !== 'button' && tag !== 'a' && tag !== 'input') {
+    if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        el.click();
+      }
+    });
+  }
   for (const child of node.childNodes) renderNode(child, scope, el);
   into.appendChild(el);
 }
@@ -186,6 +196,10 @@ export function mount(templateHtml, root, component) {
       ? { at: [...root.querySelectorAll('input,textarea')].indexOf(had),
           start: had.selectionStart, end: had.selectionEnd }
       : null;
+    const focusedBtn = had && had.getAttribute && had.getAttribute('role') === 'button'
+      && root.contains(had)
+      ? (had.id ? { id: had.id } : { at: [...root.querySelectorAll('[role="button"]')].indexOf(had) })
+      : null;
 
     const scope = component.scope();
     const next = document.createDocumentFragment();
@@ -198,6 +212,11 @@ export function mount(templateHtml, root, component) {
         again.focus();
         try { again.setSelectionRange(focused.start, focused.end); } catch { /* not a text field */ }
       }
+    } else if (focusedBtn) {
+      const again = focusedBtn.id
+        ? root.querySelector('#' + focusedBtn.id)
+        : (focusedBtn.at >= 0 ? root.querySelectorAll('[role="button"]')[focusedBtn.at] : null);
+      if (again) again.focus();
     }
   };
 
