@@ -1,0 +1,2741 @@
+{
+  "@@locale": "en",
+  "appName": "ESTHMR",
+  "appTagline": "Egyptian shares, in plain words",
+  "@appTagline": {
+    "description": "Masthead subtitle under the wordmark"
+  },
+  "navHome": "Home",
+  "navToday": "Today",
+  "navPit": "The Pit",
+  "navYou": "You",
+  "searchPlaceholder": "Search by company name or symbol…",
+  "oldestThingHere": "The oldest thing here: {age}",
+  "@oldestThingHere": {
+    "placeholders": {
+      "age": {
+        "type": "String"
+      }
+    }
+  },
+  "refresh": "Refresh",
+  "homeTodayKicker": "Today · {event}",
+  "@homeTodayKicker": {
+    "placeholders": {
+      "event": {
+        "type": "String"
+      }
+    }
+  },
+  "homeNothingFiled": "Nothing filed yet today",
+  "homeNothingFiledBody": "When a company tells the exchange something, it appears here with what it means for anyone who owns the shares.",
+  "homeWatchlistLabel": "From your watchlist",
+  "homeWatchlistManage": "Manage",
+  "homeWatchlistEmpty": "Follow companies to build your watchlist",
+  "homeWatchlistEmptyBody": "Open any company and tap the bookmark. What you follow shows its last price here, and nothing else.",
+  "homePricesCaption": "Last close · end-of-day EGX data",
+  "noQuote": "No quote",
+  "financialsTitle": "Net profit, as reported",
+  "financialsUnitPeriod": "EGP m · {period}",
+  "@financialsUnitPeriod": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "financialsNone": "No reported figures yet",
+  "financialsNoneBody": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "financialsLatestFiling": "Latest filing",
+  "financialsReadFiling": "Read the filing",
+  "financialsByYear": "Net profit by year",
+  "financialsTotalAssets": "Total assets",
+  "financialsEquity": "Owners' equity",
+  "financialsLiabilities": "Total liabilities",
+  "financialsOperatingCash": "Cash from operations",
+  "financialsBasisGroup": "Group",
+  "financialsBasisCompany": "Company only",
+  "financialsFootnote": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "@financialsFootnote": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceExchange": "the Egyptian Exchange",
+  "sourceFiledAccounts": "filed accounts",
+  "language": "Language",
+  "languageEnglish": "English",
+  "languageArabic": "العربية",
+  "languageSystem": "System",
+  "legalNotLicensed": "ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.",
+  "@legalNotLicensed": {
+    "description": "LEGAL. Spec §8.12. Must be reviewed by an Egyptian lawyer before release — see lib/core/widgets/legal.dart."
+  },
+  "scannerTitle": "Scanner",
+  "scannerSubtitle": "What the published rule found, and what it missed",
+  "scannerOpen": "Open the scanner",
+  "scannerNotDownloaded": "Scanner not downloaded yet",
+  "scannerNotDownloadedBody": "Open the app with a connection to fetch the latest report.",
+  "scannerNotPublished": "The board has not published yet",
+  "scannerFoundToday": "What the published rule found today",
+  "countQualified": "Cleared every rule",
+  "countWatching": "Cleared some rules",
+  "countOutcomes": "Rule log",
+  "theSession": "The day's trading",
+  "youSubtitle": "No account needed to read",
+  "watchlist": "Watchlist",
+  "watchlistPricesOnly": "Prices only. No score and no opinion appears here — those live on the company page, which you open yourself.",
+  "watchlistEmpty": "Empty watchlist",
+  "watchlistEmptyBody": "Follow a company and its price, filings and research land here.",
+  "browseCompanies": "Browse companies",
+  "appearance": "Appearance",
+  "followTheSystem": "Follow the system",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "aboutTheData": "About the data",
+  "marketData": "Market data",
+  "notDownloaded": "Not downloaded",
+  "companies": "Companies",
+  "prices": "Prices",
+  "noRealTimeFeed": "Last close only. No real-time feed.",
+  "mostActive": "Most active",
+  "fullDirectory": "The full directory",
+  "searchCompanies": "Search companies, tickers…",
+  "directoryMissing": "The company directory is not on the device yet",
+  "researched": "Researched",
+  "noCompanyMatches": "No listed company matches that",
+  "clearSearch": "Clear search",
+  "noMarketData": "No market data downloaded yet",
+  "pitTitle": "Discussion, with the evidence",
+  "pitComingSoon": "Coming in the next development phase",
+  "pitWhatItCarries": "What it will carry",
+  "pitDiscussion": "Discussion",
+  "pitDiscussionBody": "Open conversation about a company",
+  "pitQuestion": "Question",
+  "pitQuestionBody": "Ask the people reading the same filing",
+  "pitResearchNote": "Research note",
+  "pitResearchNoteBody": "Your own work, with sources",
+  "couldNotLoad": "Could not load this",
+  "couldNotLoadBody": "You may be offline. Anything already downloaded is still here.",
+  "tryAgain": "Try again",
+  "sampleData": "Sample data · not live prices",
+  "homeAlsoFiled": "Filed with the exchange",
+  "homeAllFilings": "All announcements",
+  "homeFilingsCount": "{count} announcements today",
+  "@homeFilingsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "legalNotLicensedShort": "Not licensed by the FRA. Not a recommendation.",
+  "homeImportantToday": "Important today",
+  "homeNothingUnusual": "Nothing unusual today",
+  "homeNothingUnusualBody": "No company traded much more than usual on the day it announced something. A quiet day is a real answer.",
+  "homeLatestNews": "Latest news",
+  "homeAllNews": "All news",
+  "homeVolumeKicker": "Traded {ratio}× its usual volume",
+  "@homeVolumeKicker": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "homeFiledToday": "Filed today",
+  "tabOverview": "Overview",
+  "tabFinancials": "Financials",
+  "tabPrice": "Price",
+  "tabResearch": "The file",
+  "tabTalk": "Talk",
+  "companyNotOnDevice": "{ticker} is not on the device",
+  "@companyNotOnDevice": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "companyNotOnDeviceBody": "Open this company once with a connection and it stays available offline.",
+  "discussionArrives": "Discussion arrives with The Pit",
+  "discussionArrivesBody": "Company threads land here once the community backend exists. Everything else on this screen works without it.",
+  "back": "Back",
+  "followTicker": "Follow {ticker}",
+  "@followTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "followingTicker": "Following {ticker}. Tap to unfollow.",
+  "@followingTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "prevClose": "Prev close",
+  "volume": "Volume",
+  "marketCap": "Mkt cap",
+  "dayHigh": "Day high",
+  "dayLow": "Day low",
+  "previousClose": "Previous close",
+  "avgVolume30d": "Avg volume 30d",
+  "sharesOutstanding": "Shares outstanding",
+  "floatShares": "Float shares",
+  "sector": "Sector",
+  "movedThisMonth": "How it has moved this month",
+  "whatNumbersSay": "What the numbers say",
+  "whatThatMeans": "What that means",
+  "thisSession": "This day's trading",
+  "performance": "Performance",
+  "sizeAndOwnership": "Company",
+  "noDetailYet": "No detail for this company yet",
+  "noPriceHistory": "No price history for this company",
+  "noSessionsInRange": "No sessions in this range",
+  "noStudyYet": "No study published on this company yet",
+  "noStudyYetBody": "Companies are studied one at a time. When this one is read, the investigation appears here.",
+  "readFullInvestigation": "Read the full investigation",
+  "scannerHistory": "Scanner history",
+  "studyLabel": "Six Pillars",
+  "lastSessions": "Last {count} sessions",
+  "@lastSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "canIGetOut": "Can I get out?",
+  "itStopsTrading": "It stops trading",
+  "scanNoReport": "No scanner report downloaded yet",
+  "scanNoReportBody": "The scanner publishes after each session. Open this once with a connection and it stays on the device.",
+  "scanNotRunToday": "The scanner has not run today",
+  "scanNotRunTodayBody": "Nothing has cleared the test since the last session. That is a result, not an error.",
+  "scanReportDateUnknown": "Report date unknown",
+  "scanQualifiedBlurb": "Cleared every rule. Clearing a rule is a fact about the rule, not a view on the company.",
+  "scanWatchingBlurb": "Cleared some rules and not others. Incomplete evidence is a statement about our test, not about the share.",
+  "scanRejectedBlurb": "Did not clear the rules, and kept on the record so the test can be audited.",
+  "scanLogEmpty": "The rule log is empty",
+  "scanNothingQualified": "Nothing cleared every rule today",
+  "scanNothingWatch": "Nothing on the watch list",
+  "scanNothingRejected": "Nothing failed the rules today",
+  "scanEmptyBlurb": "An empty section is a real answer. The test does not lower itself to fill a screen.",
+  "coverage": "Coverage",
+  "coverageTradable": "Tradable",
+  "coverageListed": "Listed",
+  "coverageAdjusted": "Adjusted",
+  "coverageBlurb": "Every listed company is read. Most of them fail, and the ones that fail are published too.",
+  "catalyst": "Catalyst",
+  "fullRecord": "Full record",
+  "sourcesLabel": "Sources",
+  "evidenceLabel": "Evidence",
+  "whatWasChecked": "What was checked",
+  "gatePassed": "Passed",
+  "gateFailed": "Failed",
+  "gateUnresolved": "Unresolved",
+  "scannerTitleFull": "Scanner",
+  "scanUpdated": "Updated · {date}",
+  "@scanUpdated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "scanQualifiedCount": "Cleared all {count}",
+  "@scanQualifiedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanWatchCount": "Partly {count}",
+  "@scanWatchCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanRejectedCount": "Not cleared {count}",
+  "@scanRejectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanLogCount": "Rule log {count}",
+  "@scanLogCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanLogBlurb": "What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.",
+  "scanLogEmptyBody": "Entries appear here as each published rule is measured against what happened next.",
+  "scanNotRepublished": "Not republished",
+  "scanNoComponent": "No rubric component scored.",
+  "scanStocks": "Stocks",
+  "scanScoredNames": "Scored names",
+  "scanSectorNone": "None today",
+  "scanOneCohort": "One cohort",
+  "scanHowItWasRead": "How it was read",
+  "scanNoSectorToday": "No sector read today",
+  "statusQualified": "Cleared every rule",
+  "statusWatching": "Cleared some rules",
+  "statusRejected": "Did not clear the rules",
+  "figPrevClose": "Prev close",
+  "figDayHigh": "Day high",
+  "figPreviousClose": "Previous close",
+  "figAvgVolume30d": "Avg volume 30d",
+  "figSharesOutstanding": "Shares outstanding",
+  "figFloatShares": "Float shares",
+  "finNoFigures": "No reported figures yet",
+  "finNetProfitReported": "Net profit, as reported",
+  "finStatements": "The statements as filed",
+  "finAnnual": "Annual",
+  "finQuarterly": "Quarterly",
+  "finRevenueLine": "Revenue",
+  "finGrossProfitLine": "Gross profit",
+  "finOperatingProfitLine": "Operating profit",
+  "finNetProfitLine": "Net profit",
+  "finStatementsNote": "Every filed period collected from EGX and Mubasher. Scroll sideways for older periods.",
+  "finCashInvesting": "Cash from investing",
+  "finCashFinancing": "Cash from financing",
+  "finNetChangeCash": "Net change in cash",
+  "finDividendsPaid": "Dividends paid",
+  "finFiledDocuments": "The filed documents",
+  "finFiledStatements": "Financial statements filed",
+  "@finFiledStatements": {},
+  "finOpenPdf": "Open PDF",
+  "finNoDocuments": "No document is attached to this filing.",
+  "exchangeSeeMore": "See earlier filings",
+  "exchangeShowingMonth": "{month} · {count} filings",
+  "@exchangeShowingMonth": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeArchiveNote": "Filings we have collected and kept. The exchange serves only its newest page, so anything older than that exists here because we saved it.",
+  "filingOpenCompany": "Open {ticker}",
+  "@filingOpenCompany": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "filingReadFiling": "Read the filing",
+  "companyFilings": "Filed with the exchange",
+  "companyFilingsBody": "Everything {ticker} has told the exchange that we have kept, newest first.",
+  "@companyFilingsBody": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "companyNoFilings": "Nothing filed",
+  "companyNoFilingsBody": "We have kept no filings from this company yet. The exchange serves only its newest page, so the record here starts when we started collecting.",
+  "unusualLabel": "Busier than usual",
+  "unusualBody": "{count} of the {total} announcements we hold came from a company whose shares changed hands far more than they normally do.",
+  "@unusualBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualTimes": "{ratio}× normal",
+  "@unusualTimes": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "youNotAdvice": "ESTHMR helps you understand the EGX. It does not decide what you should buy. Nothing here is investment advice.",
+  "wiresBody": "{count} headlines from the Egyptian financial press, newest and most relevant first.",
+  "@wiresBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wiresBodyChecks": "{count} of them name a company whose shares changed hands far more than usual that day.",
+  "@wiresBodyChecks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeSourceNote": "Source: the Egyptian Exchange. Each row links to the filing itself.",
+  "watchlistRemove": "Remove {ticker} from watchlist",
+  "@watchlistRemove": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "directorySearchBody": "Try a ticker, or the Arabic legal name. The directory covers {count} companies.",
+  "@directorySearchBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "directoryNoQuote": "no quote",
+  "directoryShareOfListings": "{percent}% of listings",
+  "@directoryShareOfListings": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "exitWaitNone": "no published trading to measure",
+  "exitWaitDay": "about a day to sell",
+  "exitWaitSessions": "{count} sessions to sell",
+  "@exitWaitSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exitWaitYears": "{years} years of trading",
+  "@exitWaitYears": {
+    "placeholders": {
+      "years": {
+        "type": "String"
+      }
+    }
+  },
+  "exitWaitDecades": "over {years} years of trading",
+  "@exitWaitDecades": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "exitShareUnknown": "There is not enough published trading to work this out.",
+  "exitShareWholeDay": "More than a whole normal day of trading in this share.",
+  "exitShareUnderOne": "Under 1% of a normal day’s trading.",
+  "exitSharePercent": "{percent}% of a normal day’s trading.",
+  "@exitSharePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "exitNeedsBuyer": "A share only sells when somebody else wants to buy it.",
+  "exitOneSession": "About this much can leave in one session",
+  "exitLastTraded": "Last session that traded: {date}",
+  "@exitLastTraded": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNotEnough": "Not enough published trading for {ticker}",
+  "@exitNotEnough": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNothingChanged": "Nothing at all changed hands on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell.",
+  "@exitNothingChanged": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "exitHowItWorks": "On this exchange a share can move at most 20% up or down in a session. When a name falls to that lower limit the buyers stop appearing, and there is no price at which a holder can sell — because selling needs somebody on the other side.\n\nSome shares here do not trade on some days at all. Not “traded a little” — nothing changed hands. This shows how much of a normal day a given sum would be, and how many sessions it would take to leave without being most of the trading.",
+  "exitPastThat": "Past that, selling is more than a fifth of a normal day here and starts to take more than one session. That figure is different for every company on this exchange.",
+  "exitAssumption": "The sessions figure assumes no more than a fifth of a day’s trading. That is a stated assumption rather than a market rule — selling faster moves the price against the seller, which is the cost being measured.",
+  "exitNoHistoryBody": "This needs a run of sessions with volume behind them and this listing does not have one yet. The absence is worth knowing on its own: a share with no published trading history is not one anybody can show an exit for.",
+  "goldKaratGram": "{karat} karat gold, a gram",
+  "@goldKaratGram": {
+    "placeholders": {
+      "karat": {
+        "type": "int"
+      }
+    }
+  },
+  "goldPerOunce": "EGP {amount} / oz",
+  "@goldPerOunce": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "dotsLabel": "What ties these together",
+  "dotsBody": "Companies that turned up in more than one place in {days} days.",
+  "@dotsBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dotsFiling": "Filing",
+  "dotsNews": "In the press",
+  "dotsSession": "That session",
+  "dotsVolume": "{ratio}× normal volume",
+  "@dotsVolume": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "filterTitle": "Narrow the list",
+  "filterAdd": "Add a filter",
+  "filterNone": "No filters",
+  "filterClearAll": "Clear all",
+  "filterApply": "Show results",
+  "filterMarketCap": "Market cap",
+  "filterPrice": "Price",
+  "filterChange": "Change today",
+  "filterVolume": "Volume today",
+  "filterAvgVolume": "Average volume",
+  "filterPe": "P/E",
+  "filterAbove": "more than",
+  "filterBelow": "less than",
+  "filterBetween": "between",
+  "filterUnitEgp": "EGP",
+  "filterUnitPercent": "%",
+  "filterUnitShares": "shares",
+  "filterUnitTimes": "×",
+  "filterAnd": "and",
+  "filterMatchCount": "{count} of {total} companies",
+  "@filterMatchCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "filterEps": "EPS",
+  "filterProfit": "Net profit",
+  "filterBusy": "Relative volume",
+  "filterUnitMillions": "million EGP",
+  "noteMarketCap": "What the whole company is worth at today’s price — the share price times every share in existence. From this morning’s rebuild.",
+  "notePrice": "The last price a share changed hands at. From the live feed, fifteen minutes behind at worst.",
+  "noteChange": "How far the price has moved since yesterday’s close. From the live feed.",
+  "noteVolume": "How many shares have changed hands today. From the live feed.",
+  "noteAvgVolume": "How many shares change hands on an ordinary day, averaged over the last thirty. From this morning’s rebuild.",
+  "notePe": "The price divided by what the company earned per share last year. A lower number means you are paying less for each pound of profit — it says nothing about whether the company is a good one. Absent for 121 of 280: a loss, nothing filed, or the figure did not check out.",
+  "noteEps": "The company’s own filed annual profit divided by the number of its shares. A loss shows as a minus.",
+  "noteProfit": "What the company filed as its profit for the year, in millions of pounds. Not per share — a big company can earn far more and still earn less per share.",
+  "noteBusy": "Today’s trading against what this company trades on an ordinary day. 1 is a normal day; the filings feed points out anything above 2. Below 1 means quieter than usual.",
+  "finTotalAssets": "Total assets",
+  "finTotalLiabilities": "Total liabilities",
+  "finCashFromOps": "Cash from operations",
+  "finNetProfitByYear": "Net profit by year",
+  "finLatestFiling": "Latest filing",
+  "finCompanyOnly": "Company only",
+  "finReadFiling": "Read the filing",
+  "priceNoHistoryDownloaded": "No price history downloaded",
+  "priceLastSessions": "Last {count} sessions",
+  "@priceLastSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "discussionBody": "Company threads land here once the community backend exists. Everything else on this screen works without it.",
+  "movedThisMonthLabel": "How it has moved this month",
+  "noDetailBody": "The exchange scan carried only a closing price for this company. Everything else appears once a fuller record is published.",
+  "finNoFiguresBody": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "finFootnote": "Figures in EGP millions, as filed. Neither source states revenue, so margins are not shown rather than estimated. Read from {source}.",
+  "@finFootnote": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceMubasher": "Mubasher",
+  "priceNoHistoryBody": "Open this company once with a connection.",
+  "priceNoSeriesBody": "Neither the exchange scan nor the price source publishes a usable series for it yet.",
+  "noStudyBody": "Companies are studied one at a time. When this one is read, the investigation appears here.",
+  "exitStopsTrading": "It stops trading",
+  "exitCanIGetOut": "Can I get out?",
+  "scanNotRunBody": "Nothing has cleared the test since the last session. That is a result, not an error.",
+  "scanRecordBlurb": "What the published rule said, what the tape did next, and what was changed in the rule afterwards. It is an audit of the method, not a scoreboard: there is no total here and there never will be.",
+  "scanLogEmptyBlurb": "Entries appear here as each published rule is measured against what happened next.",
+  "scanEmptySectionBlurb": "An empty section is a real answer. The test does not lower itself to fill a screen.",
+  "scanCoverageBlurb": "Every listed company is read. Most of them fail, and the ones that fail are published too.",
+  "scanCohortNames": "The cohort · {count} names",
+  "@scanCohortNames": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "scanSectorBlurb": "A sector read changes what gets investigated first. It is a reading order, not a view on any company in it.",
+  "scanNoSectorBody": "A cohort appears when several names in one industry move for the same reason. Most days none does, and that is a result rather than a gap.",
+  "gateUnresolvedLabel": "Unresolved",
+  "noDetailBodyFull": "The exchange scan carried only a closing price for this listing. More lands as a fuller record is published.",
+  "finNoFiguresBodyFull": "Figures are read from each company's filed accounts and from the results it announces to the exchange. Nothing has been read for this company yet.",
+  "finFootnoteFull": "Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Read from {source}.",
+  "@finFootnoteFull": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "finFootnoteSplit": "Figures in EGP millions, as filed. A line stays blank when its source attachment did not state it. Net profit read from {profit}; the statement figures from {statement}.",
+  "@finFootnoteSplit": {
+    "placeholders": {
+      "profit": {
+        "type": "String"
+      },
+      "statement": {
+        "type": "String"
+      }
+    }
+  },
+  "priceNoHistoryTitle": "No price history downloaded",
+  "priceNoSeriesBodyFull": "Neither the exchange scan nor the price source publishes a series for this listing yet.",
+  "exitZeroDays": "Nothing traded at all on {days} of the last {sessions} sessions.",
+  "@exitZeroDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "exitFiftyK": "EGP 50,000 here is {share}",
+  "@exitFiftyK": {
+    "placeholders": {
+      "share": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNoPrice": "On those days there was no price at which a holder could sell.",
+  "meansSameDay": "About {amount} can leave in one session here. Above that, selling is more than a fifth of a normal day and starts to move the price against whoever is selling.",
+  "@meansSameDay": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "meansZeroDays": "It did not trade at all on {days} of the last {sessions} sessions. On those days there was no price at which a holder could sell, because there was nobody on the other side.",
+  "@meansZeroDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "sessions": {
+        "type": "int"
+      }
+    }
+  },
+  "meansNetProfit": "It reported {amount} of net profit in {period}.",
+  "@meansNetProfit": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "scanLogEmptyBodyFull": "Entries appear here as each published rule reaches its stated end.",
+  "scanEmptySectionFull": "An empty section is a real answer. The test does not lower its bar to fill a page.",
+  "scanSectorBlurbFull": "A sector read changes what gets investigated first. It scores nothing on the record and names nothing to act on.",
+  "detailFirstSeen": "First seen · {date}",
+  "@detailFirstSeen": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "detailWhyScored": "Why it scored what it scored",
+  "detailLastSession": "Last completed session",
+  "detailMoveSince": "Move since it was flagged",
+  "detailHowScored": "How a name is scored",
+  "detailOpenTicker": "Open {ticker}",
+  "@detailOpenTicker": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "homeFiledHero": "Company announcements",
+  "homeRoseAndFell": "What rose and what fell",
+  "homeIndices": "How the whole market moved",
+  "breadthUp": "rose",
+  "breadthDown": "fell",
+  "breadthFlat": "unchanged",
+  "breadthOf": "of {count} shares",
+  "@breadthOf": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "breadthChartTitle": "How the market split, session by session",
+  "breadthOneSession": "One session recorded so far. The lines grow as each session is written down — there is no published breadth history to backfill from.",
+  "indexNoSeries": "Levels are recorded one session at a time. No index series is published to backfill from.",
+  "ratesWorld": "Was it Egypt, or everywhere?",
+  "ratesMetals": "Gold and silver",
+  "ratesPound": "The pound",
+  "ratesPerGram": "per gram",
+  "ratesIndicesMovedHome": "Index levels are on Home",
+  "ageJustNow": "just now",
+  "ageToday": "Today",
+  "ageYesterday": "Yesterday",
+  "ageMinutes": "{count}m ago",
+  "@ageMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageHours": "{count}h ago",
+  "@ageHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ageDays": "{count}d ago",
+  "@ageDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unusualVolume": "Unusual volume",
+  "saved": "Saved",
+  "loading": "Loading",
+  "mainNavigation": "Main navigation",
+  "priceLow": "Low",
+  "priceHigh": "High",
+  "priceOpen": "Open",
+  "priceClose": "Close",
+  "showMore": "Show more",
+  "showingCount": "Showing {shown} of {total}",
+  "@showingCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "theWires": "News",
+  "sortByScore": "By score",
+  "sortMostRecent": "Most recent",
+  "cotNoneYet": "No investigations yet",
+  "cotNoMatch": "Nothing matches that",
+  "readInvestigation": "Read investigation",
+  "articleFailed": "Could not open the investigation",
+  "exitHeadline": "How much this share absorbs, and how long it takes to leave",
+  "exitIfYouPutIn": "At this size",
+  "exitNumbersBehind": "The numbers behind it",
+  "companyLabel": "Company",
+  "explTraded": "How much it traded",
+  "explFinished": "Where it finished",
+  "explBuyable": "How much of it can actually be bought",
+  "explValued": "What the whole company is priced at",
+  "rubricFreshDisclosure": "Fresh disclosure",
+  "rubricEconomicImportance": "Economic importance",
+  "rubricVolumeConfirmation": "Volume confirmation",
+  "rubricOwnershipCluster": "Ownership cluster",
+  "rubricDatedCatalyst": "Dated catalyst",
+  "rubricAntiChasing": "Anti-chasing",
+  "rubricLimitUpPenalty": "Limit-up penalty",
+  "rubricIssuerDenial": "Issuer denial",
+  "rubricRiskPenalty": "Risk penalty",
+  "ownersEquity": "Owners' equity",
+  "homeMacro": "What moves Egypt",
+  "macroWhyItMatters": "Why this reaches Egyptian shares",
+  "macroMovesWith": "Moved with the EGX 30",
+  "macroWeakLink": "Barely moves with the EGX 30 day to day",
+  "macroEgyptLine": "Egypt's own line",
+  "macroSessions": "over {count} sessions",
+  "@macroSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "macroUnavailable": "Some sources could not be reached",
+  "macroCoverage": "What is being reported",
+  "homeLeadStory": "Today's story",
+  "feedNews": "News",
+  "feedExchange": "From the exchange",
+  "freshLoading": "Prices loading",
+  "freshSample": "Sample data · not real prices",
+  "freshLastClose": "Closing prices",
+  "freshDuringSession": "Prices from while trading was open",
+  "freshOnDay": "{state} · {day}",
+  "@freshOnDay": {
+    "placeholders": {
+      "state": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "freshMarketClosed": "Market closed · closing prices",
+  "freshMarketClosedOn": "Market closed · prices from {day}",
+  "@freshMarketClosedOn": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelayed": "{delay} behind the exchange · updated {since}",
+  "@freshDelayed": {
+    "placeholders": {
+      "delay": {
+        "type": "String"
+      },
+      "since": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelayedShort": "{delay} behind the exchange",
+  "@freshDelayedShort": {
+    "placeholders": {
+      "delay": {
+        "type": "String"
+      }
+    }
+  },
+  "freshDelaySeconds": "{count} sec",
+  "@freshDelaySeconds": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshDelayMinutes": "{count} min",
+  "@freshDelayMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshDelayHours": "{count} hr",
+  "@freshDelayHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceJustNow": "just now",
+  "freshSinceMinutes": "{count} min ago",
+  "@freshSinceMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceHours": "{count} hr ago",
+  "@freshSinceHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "freshSinceDays": "{count} days ago",
+  "@freshSinceDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "youCompaniesCount": "{count} in the directory",
+  "@youCompaniesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "youPricesLive": "{delay} minutes behind the exchange, refreshed every {refresh} minutes. There is no live feed.",
+  "@youPricesLive": {
+    "placeholders": {
+      "delay": {
+        "type": "int"
+      },
+      "refresh": {
+        "type": "int"
+      }
+    }
+  },
+  "youPricesClose": "Closing prices only. There is no live feed.",
+  "unitBillionsEgp": "billion EGP",
+  "unitMillionsEgp": "million EGP",
+  "unitThousandsEgp": "thousand EGP",
+  "unitEgp": "EGP",
+  "moneyWithUnit": "{value} {unit}",
+  "@moneyWithUnit": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      },
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "finUnitPeriod": "{unit} · {period}",
+  "@finUnitPeriod": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      },
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "finBalanceAsOf": "Balance sheet · {period}",
+  "@finBalanceAsOf": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "finFiguresUnit": "Unit: {unit}",
+  "@finFiguresUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "pmToProfit": "to a profit",
+  "pmToLoss": "to a loss",
+  "pmUnchanged": "unchanged",
+  "pmWiderLoss": "wider loss",
+  "pmSmallerLoss": "smaller loss",
+  "pmMadeMoneyAfterBreakEven": "It made money in {now}, after breaking even in {prior}.",
+  "@pmMadeMoneyAfterBreakEven": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmMadeMoneyAfterLoss": "It made money in {now}, after losing {amount} in {prior}.",
+  "@pmMadeMoneyAfterLoss": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLostAfterProfit": "It lost money in {now}, after making {amount} in {prior}.",
+  "@pmLostAfterProfit": {
+    "placeholders": {
+      "now": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossSame": "The loss was the same as in {prior}, at {amount}.",
+  "@pmLossSame": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossGrew": "The loss grew, from {from} to {to} against {prior}.",
+  "@pmLossGrew": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmLossShrank": "The loss shrank, from {from} to {to} against {prior}.",
+  "@pmLossShrank": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmProfitUnchanged": "Profit was unchanged against {prior}, at {amount}.",
+  "@pmProfitUnchanged": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmTimesSentence": "That is {times} times the {amount} it reported in {prior}.",
+  "@pmTimesSentence": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      },
+      "prior": {
+        "type": "String"
+      }
+    }
+  },
+  "pmRose": "Profit rose against {prior}, when it reported {amount}.",
+  "@pmRose": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "pmFell": "Profit fell against {prior}, when it reported {amount}.",
+  "@pmFell": {
+    "placeholders": {
+      "prior": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "figSharesTradedToday": "Shares traded today",
+  "perf1Week": "1 week",
+  "perf1Month": "1 month",
+  "perf3Months": "3 months",
+  "perf5Sessions": "5 sessions",
+  "finGroupBasis": "Group",
+  "periodQuarter1": "Q1 {year}",
+  "@periodQuarter1": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter2": "Q2 {year}",
+  "@periodQuarter2": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter3": "Q3 {year}",
+  "@periodQuarter3": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodQuarter4": "Q4 {year}",
+  "@periodQuarter4": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodHalf1": "H1 {year}",
+  "@periodHalf1": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodHalf2": "H2 {year}",
+  "@periodHalf2": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "periodFullYear": "FY {year}",
+  "@periodFullYear": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "filedCountWithChecks": "Company announcements: {total}. Of the ones we could check, {count} came from a company whose shares changed hands far more than usual.",
+  "@filedCountWithChecks": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "filedCountNoChecks": "Company announcements: {total}. None of the ones we could check came from a company whose shares changed hands far more than usual.",
+  "@filedCountNoChecks": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "todayPutTogether": "Put together after trading closed on {date}",
+  "@todayPutTogether": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "updatedOn": "Updated · {date}",
+  "@updatedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "macroUnitUsdOunce": "USD · an ounce",
+  "macroUnitUsdBarrel": "USD · a barrel",
+  "macroUnitVessels": "ships",
+  "macroUnitPercent": "per cent",
+  "macroUnitUsdBillion": "USD · billions",
+  "explainerHowWorkedOut": "How it is worked out",
+  "explainerWhatCountsUnusual": "What counts as unusual",
+  "studySumOfSix": "Sum of the six",
+  "studyWhatWouldChange": "What would change this",
+  "studyNoConditions": "The published study does not yet name a filing that would move these pillars. Until it does, the reading below is a record of what the rule produced on its date and nothing more.",
+  "studyIndexNotOnDevice": "The studies are not on the device yet",
+  "studyIndexNotOnDeviceBody": "Open it once with a connection and it stays on the device.",
+  "studyAllBand": "All",
+  "studyClearFilters": "Clear filters",
+  "studyNoneInBand": "No company has landed in that band yet.",
+  "studyNoMatch": "No investigated company matches “{query}”. Try a ticker, or clear the filter.",
+  "@studyNoMatch": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "studyOneAtATime": "Companies appear here one at a time, after each has been read in full.",
+  "studyFullWriteUp": "Full write-up in the criteria file",
+  "studyScoreRange": "Scores run from {min} to +{max} across six pillars: valuation, earnings quality, growth, balance sheet, tradability and governance.",
+  "@studyScoreRange": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "exitNotDownloaded": "Nothing downloaded for {ticker} yet",
+  "@exitNotDownloaded": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNotDownloadedBody": "Open this once with a connection and it stays on the device.",
+  "exitThinSessions": "Sessions under 1,000 shares",
+  "exitFreeToTrade": "Shares free to trade",
+  "exitDailyLimit": "Daily price limit",
+  "exitDailyLimitValue": "±20%, set by the exchange",
+  "directoryNotOnDevice": "The company directory is not on the device yet",
+  "directoryNotOnDeviceBody": "Open the app once with a connection and the whole directory stays available offline.",
+  "directorySectors": "Sectors",
+  "pitSource": "Source",
+  "pitSourceBody": "A disclosure, posted straight from the record",
+  "pitNoCalls": "No buy or sell calls, no price targets, no performance leaderboards.",
+  "articleNeedsConnection": "The full write-up lives on thebarbarianproject.com and needs a connection. Everything already downloaded is still available offline.",
+  "articleGoBack": "Go back",
+  "priceNoHistory": "No price history for this company yet",
+  "priceSessionRange": "{count}-session range",
+  "@priceSessionRange": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "priceSessionsTo": "{count} sessions · to {date}",
+  "@priceSessionsTo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "scanPositionWithheld": "The report's note on this name describes a model position — a size and a price. ESTHMR is not licensed to republish that, so the score and the evidence are here and the position is not.",
+  "newsSourcedFrom": "Headlines from {outlets}, each linked to the outlet that ran it.",
+  "@newsSourcedFrom": {
+    "placeholders": {
+      "outlets": {
+        "type": "String"
+      }
+    }
+  },
+  "newsMergedCount": "{count} duplicates merged.",
+  "@newsMergedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "newsWithheldCount": "{count} withheld for carrying a recommendation.",
+  "@newsWithheldCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "newsUnreachable": "Not reachable today: {outlets}.",
+  "@newsUnreachable": {
+    "placeholders": {
+      "outlets": {
+        "type": "String"
+      }
+    }
+  },
+  "cotInvestigatedCount": "{studied} of {total} investigated",
+  "@cotInvestigatedCount": {
+    "placeholders": {
+      "studied": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pitWhatItIs": "The Pit is where the evidence gets argued over. Companies, filings and the research behind them — discussed by people reading the same numbers.\n\nEverything else in the app works without it, and will keep working if it ever goes down.",
+  "a11yBreadthOneSession": "One session: {up} rose, {down} fell, {flat} unchanged",
+  "@a11yBreadthOneSession": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      },
+      "flat": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yBreadthSessions": "{count} sessions of market breadth",
+  "@a11yBreadthSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yTrendRising": "{count}-session trend, rising",
+  "@a11yTrendRising": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yTrendFalling": "{count}-session trend, falling",
+  "@a11yTrendFalling": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yVerdictWithScore": "{sentence} The six sum to {score} out of {max}.",
+  "@a11yVerdictWithScore": {
+    "placeholders": {
+      "sentence": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "a11yExplainerHint": "{title}. {plain} {token}. Press for the arithmetic.",
+  "@a11yExplainerHint": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "plain": {
+        "type": "String"
+      },
+      "token": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionUnchanged": "{date}: unchanged",
+  "@a11ySessionUnchanged": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionUp": "{date}: up {percent} per cent",
+  "@a11ySessionUp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "a11ySessionDown": "{date}: down {percent} per cent",
+  "@a11ySessionDown": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yPriceHistory": "Price history, {count} sessions, from {first} to {last}, low {low}, high {high}",
+  "@a11yPriceHistory": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      }
+    }
+  },
+  "a11yRangeGauge": "{caption}: {value}, range {low} to {high}",
+  "@a11yRangeGauge": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      }
+    }
+  },
+  "youTitle": "You",
+  "sortAlphabetical": "A–Z",
+  "sortGainers": "Risers",
+  "sortLosers": "Fallers",
+  "sortMostActive": "Most traded",
+  "directoryCompaniesSorted": "Companies · {order}",
+  "@directoryCompaniesSorted": {
+    "placeholders": {
+      "order": {
+        "type": "String"
+      }
+    }
+  },
+  "newsReadStory": "Read the story",
+  "newsSourceHeader": "Source",
+  "filingReaderHeader": "EGX filing",
+  "companyInThePress": "In the press",
+  "companyInThePressBody": "Stories that named {ticker}, from the outlets we read. Their reporting, on their pages.",
+  "@companyInThePressBody": {
+    "placeholders": {
+      "ticker": {
+        "type": "String"
+      }
+    }
+  },
+  "homeWhichCompanies": "Busiest against their own normal",
+  "volumeTeaching": "“Traded unusually” means one thing here: the company's shares changed hands at least twice as often as they normally do. That is a question worth asking, not a verdict — busy days happen for good reasons and bad ones alike.",
+  "volumeTeachingTitle": "What “traded unusually” means",
+  "volumeTeachingWorkings": "Shares traded in the session ÷ the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.",
+  "volumeTeachingYardstick": "Twice the usual is the line, and it is this app's line rather than the exchange's — nobody publishes an official one. It is set where it is because a day at twice a company's normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.",
+  "learnMore": "What does this mean?",
+  "goldKaratPlain": "A gram of {karat}-karat gold costs {price} pounds.",
+  "@goldKaratPlain": {
+    "placeholders": {
+      "karat": {
+        "type": "int"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "goldKaratYardstick": "{karat} parts gold in every 24. Most Egyptian jewellery is 21. The metal is the same price either way; the karat is how much of it is in the piece.",
+  "@goldKaratYardstick": {
+    "placeholders": {
+      "karat": {
+        "type": "int"
+      }
+    }
+  },
+  "ratesPerGramEgp": "EGP · {per}",
+  "@ratesPerGramEgp": {
+    "placeholders": {
+      "per": {
+        "type": "String"
+      }
+    }
+  },
+  "exitNormalDay": "A normal day’s trading",
+  "exitNotPublished": "not published",
+  "exitFloatRest": "{percent}% — the rest do not move",
+  "@exitFloatRest": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "exitSearchHint": "Check a company by name or symbol…",
+  "studySearchHint": "Search ticker or company",
+  "sectorFinance": "Finance",
+  "sectorBanks": "Banks",
+  "sectorBasicResources": "Basic Resources",
+  "sectorBuildingMaterials": "Building Materials",
+  "sectorContractingConstructionEngineering": "Contracting & Construction Engineering",
+  "sectorEducationServices": "Education Services",
+  "sectorEnergySupportServices": "Energy & Support Services",
+  "sectorFoodBeveragesAndTobacco": "Food, Beverages and Tobacco",
+  "sectorHealthCarePharmaceuticals": "Health Care & Pharmaceuticals",
+  "sectorItMediaCommunicationServices": "IT , Media & Communication Services",
+  "sectorIndustrialGoodsServicesAndAutomobiles": "Industrial Goods , Services and Automobiles",
+  "sectorNonBankFinancialServices": "Non-bank financial services",
+  "sectorPaperPackaging": "Paper & Packaging",
+  "sectorRealEstate": "Real Estate",
+  "sectorShippingTransportationServices": "Shipping & Transportation Services",
+  "sectorTextileDurables": "Textile & Durables",
+  "sectorTradeDistributors": "Trade & Distributors",
+  "sectorTravelLeisure": "Travel & Leisure",
+  "sectorProcessIndustries": "Process Industries",
+  "sectorNonEnergyMinerals": "Non-Energy Minerals",
+  "sectorConsumerNonDurables": "Consumer Non-Durables",
+  "sectorConsumerServices": "Consumer Services",
+  "sectorIndustrialServices": "Industrial Services",
+  "sectorHealthTechnology": "Health Technology",
+  "sectorProducerManufacturing": "Producer Manufacturing",
+  "sectorDistributionServices": "Distribution Services",
+  "sectorHealthServices": "Health Services",
+  "sectorTechnologyServices": "Technology Services",
+  "sectorConsumerDurables": "Consumer Durables",
+  "sectorRetailTrade": "Retail Trade",
+  "sectorTransportation": "Transportation",
+  "sectorCommercialServices": "Commercial Services",
+  "sectorUtilities": "Utilities",
+  "sectorCommunications": "Communications",
+  "sectorEnergyMinerals": "Energy Minerals",
+  "sectorElectronicTechnology": "Electronic Technology",
+  "sectorMiscellaneous": "Miscellaneous",
+  "sectorHeroLabel": "Sector analysis",
+  "@sectorHeroLabel": {},
+  "sectorHeroMoving": "{rising} of {total} companies show rising {metric}.",
+  "@sectorHeroMoving": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "metric": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorHeroFoot": "{count} sectors · as filed {date}",
+  "@sectorHeroFoot": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorScreenTitle": "Sector analysis",
+  "@sectorScreenTitle": {},
+  "sectorScreenDek": "Each sector read against its own companies — which way the group is moving, and the middle of its range. Medians, not verdicts.",
+  "@sectorScreenDek": {},
+  "sectorScreenMethod": "Counts are of companies that filed. A median is the middle company of the five or more that report each figure.",
+  "@sectorScreenMethod": {},
+  "sectorScreenAsOf": "As filed with the exchange · built {date}.",
+  "@sectorScreenAsOf": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorCompanyCount": "{count, plural, one{1 company} other{{count} companies}}",
+  "@sectorCompanyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorReadLabel": "The sector read",
+  "@sectorReadLabel": {},
+  "sectorReadFallback": "{rising} of {total} companies show rising {metric}; {falling} are falling.",
+  "@sectorReadFallback": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "falling": {
+        "type": "int"
+      },
+      "metric": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorMovingLabel": "How its companies are moving",
+  "@sectorMovingLabel": {},
+  "sectorMoveCounts": "{rising} rising · {falling} falling",
+  "@sectorMoveCounts": {
+    "placeholders": {
+      "rising": {
+        "type": "int"
+      },
+      "falling": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorMediansLabel": "Typical for the sector",
+  "@sectorMediansLabel": {},
+  "sectorMedianNote": "A median is the middle company of the five or more that report each figure.",
+  "@sectorMedianNote": {},
+  "sectorStandoutLabel": "Where the most measures move together",
+  "@sectorStandoutLabel": {},
+  "sectorMeasuresImproving": "{improving} of {readable} measures improving",
+  "@sectorMeasuresImproving": {
+    "placeholders": {
+      "improving": {
+        "type": "int"
+      },
+      "readable": {
+        "type": "int"
+      }
+    }
+  },
+  "sectorMembersLabel": "All companies",
+  "@sectorMembersLabel": {},
+  "sectorNotEnoughHistory": "Not enough history to read yet",
+  "@sectorNotEnoughHistory": {},
+  "sectorHeldBack": "{names} each hold fewer than five companies here — too few to read as a group.",
+  "@sectorHeldBack": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "sectorDoesNotShowTitle": "What this doesn't show",
+  "@sectorDoesNotShowTitle": {},
+  "sectorDoesNotShowBody": "No revenue, margins, market value, free float or price return — the exchange's filings don't carry them, so ESTHMR doesn't compute them.",
+  "@sectorDoesNotShowBody": {},
+  "scanScoreOf": "{status} · of {max}",
+  "@scanScoreOf": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "scanScoreSpoken": "{score} of {max}, {status}",
+  "@scanScoreSpoken": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "expRvTitle": "How much it traded",
+  "expRvNoTrade": "It did not trade at all.",
+  "expRvExact": "Traded exactly its normal amount.",
+  "expRvMore": "Traded {pct}% more than its normal amount.",
+  "@expRvMore": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expRvLess": "Traded {pct}% less than its normal amount.",
+  "@expRvLess": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expRvToken": "{ratio}× normal",
+  "@expRvToken": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "expRvWorkings": "{volume} shares traded\n÷ {median} — the middle session of the last 20\n= {ratio}",
+  "@expRvWorkings": {
+    "placeholders": {
+      "volume": {
+        "type": "String"
+      },
+      "median": {
+        "type": "String"
+      },
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "expRvYardstickNoTrade": "Nothing changed hands. There was no price at which a holder could sell, because selling needs somebody on the other side.",
+  "expRvYardstick": "Below 1 is quieter than usual. Above 2 is unusual and worth reading the filings for.",
+  "expRvCaveat": "The comparison is against the middle session of the last twenty, not the average. A holiday week or a trading halt moves it.",
+  "expCloseTitle": "Where it finished",
+  "expCloseUpper": "Finished in the upper half of the day it traded in.",
+  "expCloseLower": "Finished in the lower half of the day it traded in.",
+  "expCloseToken": "{pct}% of the day’s range",
+  "@expCloseToken": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expCloseWorkings": "Closed at {close}\n− the day’s low {low}\n÷ (high {high} − low {low})\n= {pct}%",
+  "@expCloseWorkings": {
+    "placeholders": {
+      "close": {
+        "type": "String"
+      },
+      "low": {
+        "type": "String"
+      },
+      "high": {
+        "type": "String"
+      },
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "expCloseYardstick": "100% means it closed at the very top of its range, 0% at the very bottom. One session on its own says little.",
+  "expFloatTitle": "How much of it can actually be bought",
+  "expFloatPlain": "Only {count} shares in every 100 actually trade.",
+  "@expFloatPlain": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "expFloatToken": "{pct}% free float",
+  "@expFloatToken": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsShort": "{pct}% of the shares are free to trade.",
+  "@expFloatWorkingsShort": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsHead": "{shares} shares are free to trade",
+  "@expFloatWorkingsHead": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsDiv": "÷ {shares} shares in issue",
+  "@expFloatWorkingsDiv": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatWorkingsSum": "= {pct}%",
+  "@expFloatWorkingsSum": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "expFloatYardstick": "The rest sit with owners who do not sell. A small float means the price moves further on the same order — in both directions — and that selling in size can take days.",
+  "expFloatSource": "Ownership table, most recent filing",
+  "expFloatCaveat": "A market value calculated on all the shares is not what the company would fetch when only a fraction of them trade.",
+  "expCapTitle": "What the whole company is priced at",
+  "expCapPlainBillions": "The whole company is priced at {value} billion pounds.",
+  "@expCapPlainBillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapPlainMillions": "The whole company is priced at {value} million pounds.",
+  "@expCapPlainMillions": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapWorkings": "{shares} shares in issue\n× EGP {price} a share\n= EGP {cap}",
+  "@expCapWorkings": {
+    "placeholders": {
+      "shares": {
+        "type": "String"
+      },
+      "price": {
+        "type": "String"
+      },
+      "cap": {
+        "type": "String"
+      }
+    }
+  },
+  "expCapYardstick": "This is what the market is charging for the company today, not a measure of what it owns or earns.",
+  "expCapSource": "Shares in issue from the latest filing, price from the close",
+  "expCapCaveat": "It multiplies every share by the last traded price, including the shares that never trade.",
+  "expMoveHigher": "Priced {pct}% higher than it was {window} ago.",
+  "@expMoveHigher": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveLower": "Priced {pct}% lower than it was {window} ago.",
+  "@expMoveLower": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveWorkings": "The closing price now, against the closing price {window} ago, as a percentage of the older one.",
+  "@expMoveWorkings": {
+    "placeholders": {
+      "window": {
+        "type": "String"
+      }
+    }
+  },
+  "expMoveYardstick": "A move on its own says what happened, not why. The reason — if one was published — is in the filings and the study.",
+  "expSourceSession": "EGX session data",
+  "expSourceSessionOn": "EGX session data, {date}",
+  "@expSourceSessionOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "expSourceCloses": "EGX closing prices",
+  "expSourceClosesOn": "EGX closing prices, {date}",
+  "@expSourceClosesOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "notabilityOrdinary": "Ordinary",
+  "notabilityUnusual": "Unusual",
+  "notabilityUnjudged": "No published threshold",
+  "provenanceFact": "Fact",
+  "provenanceCalculation": "Calculation",
+  "provenanceInterpretation": "Interpretation",
+  "dotsWhatTheyShare": "What they share",
+  "busyBody": "{count} traded at least twice their usual volume today.",
+  "@busyBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "busyNone": "No company traded far outside its own normal today. A quiet day is a real answer.",
+  "busyFiledToo": "Announced something",
+  "busyFloorNote": "Sessions worth under {amount} are left out.",
+  "@busyFloorNote": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSearchHint": "Search a company, or a symbol",
+  "homeSearchNone": "Nothing matches “{query}”",
+  "@homeSearchNone": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSearchMore": "See all {count} results",
+  "@homeSearchMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volumeTeachingShort": "Unusual volume is a question, not a verdict.",
+  "heroLabel": "The exchange today",
+  "heroBreadth": "{up} rose · {flat} unchanged · {down} fell",
+  "@heroBreadth": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "flat": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      }
+    }
+  },
+  "heroOf": "of {count} shares",
+  "@heroOf": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "volumeTeachingFloor": "A session worth very little is left off the list however large the multiple is. Today the raw ranking opens with a company that traded 567 shares against a usual four — 141 times its normal, and 708,750 pounds. A multiple of a very small number is arithmetic, not news.",
+  "dotsExplainerTitle": "Crossings",
+  "@dotsExplainerTitle": {},
+  "dotsExplainerPlain": "One company turning up in more than one place at once.",
+  "@dotsExplainerPlain": {},
+  "dotsExplainerWorkings": "Three feeds are read for the same {days} days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new — every thread links back to the document it came from.",
+  "@dotsExplainerWorkings": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "dotsExplainerYardstick": "Two threads is common. Three — a filing, a story and a session outside its own normal — happens to a handful of companies a week. A crossing is a question, not a verdict: it says a company was busy in more than one way, and nothing about whether that was good.",
+  "@dotsExplainerYardstick": {},
+  "dotsThreads": "{count, plural, =1{1 thread} other{{count} threads}}",
+  "@dotsThreads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeIndicesLabel": "The three indices",
+  "@exchangeIndicesLabel": {},
+  "exchangeRecorded": "{count} sessions recorded, since {date}",
+  "@exchangeRecorded": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "exchangeWindowMove": "over that stretch",
+  "@exchangeWindowMove": {},
+  "exchangeMoversLabel": "What rose and what fell",
+  "@exchangeMoversLabel": {},
+  "exchangeMoversBody": "The session's biggest moves, from the {count} shares that traded enough to count.",
+  "@exchangeMoversBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeBreadthLabel": "How wide each session was",
+  "@exchangeBreadthLabel": {},
+  "exchangeBreadthBody": "Rose, fell and unchanged, across every session this app has recorded.",
+  "@exchangeBreadthBody": {},
+  "exchangeRoseMore": "More shares rose than fell in {rose} of those {total} sessions.",
+  "@exchangeRoseMore": {
+    "placeholders": {
+      "rose": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "exchangeOneSession": "One session recorded so far. The lines start here.",
+  "@exchangeOneSession": {},
+  "legendRose": "Rose",
+  "@legendRose": {},
+  "legendFell": "Fell",
+  "@legendFell": {},
+  "legendUnchanged": "Unchanged",
+  "@legendUnchanged": {},
+  "priceLatestSessionOnly": "Latest session only — no series published for this listing",
+  "@priceLatestSessionOnly": {},
+  "directoryAllCount": "All {count}",
+  "@directoryAllCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "navCalendar": "Calendar",
+  "@navCalendar": {},
+  "calendarTitle": "Dates the filings put on the record",
+  "@calendarTitle": {},
+  "calViewDay": "Day",
+  "@calViewDay": {},
+  "calViewWeek": "Week",
+  "@calViewWeek": {},
+  "calViewMonth": "Month",
+  "@calViewMonth": {},
+  "calNothingDay": "Nothing scheduled for this day.",
+  "@calNothingDay": {},
+  "calNothingRange": "Nothing scheduled in this stretch.",
+  "@calNothingRange": {},
+  "calUpcoming": "Next up",
+  "@calUpcoming": {},
+  "calToday": "Today",
+  "@calToday": {},
+  "calAnnounced": "announced {date}",
+  "@calAnnounced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "calInDays": "{days, plural, =0{today} =1{tomorrow} other{in {days} days}}",
+  "@calInDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "calAgoDays": "{days, plural, =1{yesterday} other{{days} days ago}}",
+  "@calAgoDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "calExplainerTitle": "Where these dates come from",
+  "@calExplainerTitle": {},
+  "calExplainerPlain": "Dates a company already filed — not a forecast.",
+  "@calExplainerPlain": {},
+  "calExplainerBody": "Companies file dividend dates, rights-issue windows, meeting dates and trading notices days to weeks ahead of the event. This reads those dates out of the filings and lays them on a calendar, with every entry linking back to the filing it came from. One kind of row is different and says so: a company's expected results date is not filed by anybody — it is worked out from the dates that company filed the same period in previous years, shown as a range, and marked Estimated wherever it appears. Under both sits what actually landed on the day.",
+  "@calExplainerBody": {},
+  "calKindDividendPayment": "Dividend paid",
+  "@calKindDividendPayment": {},
+  "calKindExDividend": "Ex-dividend",
+  "@calKindExDividend": {},
+  "calKindRightsOpen": "Rights issue opens",
+  "@calKindRightsOpen": {},
+  "calKindRightsClose": "Rights issue closes",
+  "@calKindRightsClose": {},
+  "calKindRightsEntitlement": "Rights entitlement cutoff",
+  "@calKindRightsEntitlement": {},
+  "calKindAssemblyAgm": "Annual general assembly",
+  "@calKindAssemblyAgm": {},
+  "calKindAssemblyEgm": "Extraordinary assembly",
+  "@calKindAssemblyEgm": {},
+  "calKindTradingResume": "Trading resumes",
+  "@calKindTradingResume": {},
+  "calKindTradingSuspend": "Trading suspended",
+  "@calKindTradingSuspend": {},
+  "calKindListingEffective": "Listing change",
+  "@calKindListingEffective": {},
+  "calKindOther": "Scheduled event",
+  "@calKindOther": {},
+  "calFamilyCash": "Cash",
+  "@calFamilyCash": {},
+  "calFamilyRights": "Rights",
+  "@calFamilyRights": {},
+  "calFamilyAssembly": "Meeting",
+  "@calFamilyAssembly": {},
+  "calFamilyTrading": "Trading",
+  "@calFamilyTrading": {},
+  "calFamilyOther": "Other",
+  "@calFamilyOther": {},
+  "briefHistoryLabel": "What this company has done",
+  "@briefHistoryLabel": {},
+  "briefPlansLabel": "What it has said it will do",
+  "@briefPlansLabel": {},
+  "briefRecordLabel": "The record, in counts",
+  "@briefRecordLabel": {},
+  "briefSourceNote": "Read from this company's own filings. Every plan links to the filing that announced it.",
+  "@briefSourceNote": {},
+  "briefNoVerdict": "No view on whether any of this is good — that would be advice, and we are not licensed to give it.",
+  "@briefNoVerdict": {},
+  "briefOpenFiling": "Open the filing",
+  "@briefOpenFiling": {},
+  "briefRecFilings": "{count} filings lodged",
+  "@briefRecFilings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecSince": "since {date}",
+  "@briefRecSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "briefRecSuspensions": "{count, plural, =0{never suspended from trading} =1{suspended from trading once} other{suspended from trading {count} times}}",
+  "@briefRecSuspensions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecCapital": "{count, plural, =0{no capital increases} =1{one capital increase} other{{count} capital increases}}",
+  "@briefRecCapital": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "briefRecLosses": "{count, plural, =0{no loss-making period reported} =1{one loss-making period} other{{count} loss-making periods}} of {total} reported",
+  "@briefRecLosses": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "filingsAllOf": "Showing {shown} of {total}",
+  "@filingsAllOf": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tabCalendar": "Calendar",
+  "@tabCalendar": {},
+  "calEstimated": "Estimated",
+  "@calEstimated": {},
+  "calKindResultsExpected": "Results expected",
+  "@calKindResultsExpected": {},
+  "calExpectedHeading": "{count, plural, =1{1 company usually reports around now} other{{count} companies usually report around now}}",
+  "@calExpectedHeading": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calExpectedWindow": "Filed between {start} and {end} in past years.",
+  "@calExpectedWindow": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "calExpectedBasis": "{years, plural, =1{From 1 past filing of the same period} other{From {years} past filings of the same period}}",
+  "@calExpectedBasis": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "calFiledHeading": "{count, plural, =1{1 filing landed} other{{count} filings landed}}",
+  "@calFiledHeading": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calFiledMore": "+{count} more that day",
+  "@calFiledMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "calShowFewer": "Show fewer",
+  "@calShowFewer": {},
+  "ccalScheduled": "Dates it filed",
+  "@ccalScheduled": {},
+  "ccalExpected": "When results are next due",
+  "@ccalExpected": {},
+  "ccalFiled": "What it has filed",
+  "@ccalFiled": {},
+  "ccalNothingScheduled": "Nothing scheduled ahead. Every date this company put on the record has passed.",
+  "@ccalNothingScheduled": {},
+  "ccalNoRhythm": "Not enough past results filings to read a rhythm from.",
+  "@ccalNoRhythm": {},
+  "ccalNoFilings": "No filings held for this company yet.",
+  "@ccalNoFilings": {},
+  "ccalResultsDue": "{label} results",
+  "@ccalResultsDue": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "ccalFiledCount": "Showing {shown} of {total} filings.",
+  "@ccalFiledCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ccalShowAll": "Show all filings",
+  "@ccalShowAll": {},
+  "ccalShowingAll": "Showing all {total} filings.",
+  "@ccalShowingAll": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ccalFootnote": "Scheduled dates are the company's own, quoted from its filings. The expected window is worked out from the dates it filed the same period in previous years — it is when a document is likely to arrive, not what will be in it.",
+  "@ccalFootnote": {},
+  "sigLabel": "Unusual against its own record",
+  "@sigLabel": {},
+  "sigFirstLoss": "{period} was its first loss after {run} profitable reported periods.",
+  "@sigFirstLoss": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "run": {
+        "type": "int"
+      }
+    }
+  },
+  "sigBackToProfit": "{period} returned to profit after {run} loss-making reported periods.",
+  "@sigBackToProfit": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "run": {
+        "type": "int"
+      }
+    }
+  },
+  "sigStreakSince": "The run had held since {year}.",
+  "@sigStreakSince": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "sigFirstOfType": "Its first {label} in {years} years.",
+  "@sigFirstOfType": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "sigLastSeen": "The one before was in {year}.",
+  "@sigLastSeen": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "sigQuiet": "It has filed nothing for {days} days, and normally files every {gap}.",
+  "@sigQuiet": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "gap": {
+        "type": "int"
+      }
+    }
+  },
+  "sigQuietSince": "Last filing {date}.",
+  "@sigQuietSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sigFootnote": "Counts off the exchange's own record. A first loss is not a signal to sell and a return to profit is not a signal to buy — this is what happened, and what you make of it is yours.",
+  "@sigFootnote": {},
+  "firstsLabel": "First time since",
+  "@firstsLabel": {},
+  "firstsBlurb": "Runs that just ended, measured against each company's own record — not the market's.",
+  "@firstsBlurb": {},
+  "firstsMore": "{count, plural, =1{1 more on the companies' own pages} other{{count} more on the companies' own pages}}",
+  "@firstsMore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "finFiguresPerRow": "Each line is in the unit shown beside it, as filed.",
+  "@finFiguresPerRow": {},
+  "briefStoryLabel": "Who the company is",
+  "@briefStoryLabel": {},
+  "briefStorySource": "From {source}",
+  "@briefStorySource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "languageSwitch": "Switch language",
+  "@languageSwitch": {},
+  "volBusy": "It has traded {ratio} its usual volume today.",
+  "@volBusy": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "volAlsoThisWeek": "Also on this company in the last few days:",
+  "@volAlsoThisWeek": {},
+  "volNothingFiled": "Nothing was filed and no headline named it in the last few days.",
+  "@volNothingFiled": {},
+  "volFootnote": "Volume measured against this company's own 20-session median. What is listed here happened in the same few days — the app is not saying it caused anything.",
+  "@volFootnote": {},
+  "volKindFiling": "Filing",
+  "@volKindFiling": {},
+  "volKindNews": "Headline",
+  "@volKindNews": {},
+  "volKindResult": "Reported result",
+  "@volKindResult": {},
+  "revLabel": "The numbers, and what to ask",
+  "@revLabel": {},
+  "revRising": "rising",
+  "@revRising": {},
+  "revFalling": "falling",
+  "@revFalling": {},
+  "revFlat": "flat",
+  "@revFlat": {},
+  "revAboveSector": "above its sector",
+  "@revAboveSector": {},
+  "revBelowSector": "below its sector",
+  "@revBelowSector": {},
+  "revSectorMedian": "{sector} median",
+  "@revSectorMedian": {
+    "placeholders": {
+      "sector": {
+        "type": "String"
+      }
+    }
+  },
+  "revOverPeriods": "over {n} reported periods",
+  "@revOverPeriods": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "revAgree": "{n} of {readable} readable metrics moved the same way.",
+  "@revAgree": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "readable": {
+        "type": "int"
+      }
+    }
+  },
+  "revDisagree": "{up} moved one way, {down} the other.",
+  "@revDisagree": {
+    "placeholders": {
+      "up": {
+        "type": "int"
+      },
+      "down": {
+        "type": "int"
+      }
+    }
+  },
+  "revAgreeAsk": "When they all agree, ask what the market already knows that you do not.",
+  "@revAgreeAsk": {},
+  "revDisagreeAsk": "When they disagree, the disagreement is the story. Which one is early?",
+  "@revDisagreeAsk": {},
+  "revMissingNote": "Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float is not published anywhere and has no substitute.",
+  "@revMissingNote": {},
+  "revPe": "Price to earnings",
+  "@revPe": {},
+  "revPeAsk": "Why is it priced this way against its sector — and what are earnings doing underneath it?",
+  "@revPeAsk": {},
+  "revPeBody": "Market value divided by profit: how much you pay for each pound the company earns. A falling P/E can mean the price got cheaper or the earnings got better — those are different stories. Rising with fast growth can mean the market is paying for what comes next; rising with flat growth is a stretch. Never read it without the earnings line below it.",
+  "@revPeBody": {},
+  "revPb": "Price to book",
+  "@revPb": {},
+  "revPbAsk": "You are paying this much for each pound of company equity. Are those assets earning anything?",
+  "@revPbAsk": {},
+  "revPbBody": "Market value divided by shareholders' equity. Below 1 means the market values the company under its accounting equity — which is only a bargain if the assets are productive. Read it beside return on equity: low price to book with a high return is a different company from low price to book with a poor one.",
+  "@revPbBody": {},
+  "revYield": "Dividend yield",
+  "@revYield": {},
+  "revYieldAsk": "Is the dividend supported by profit and cash — or by a share price that fell?",
+  "@revYieldAsk": {},
+  "revYieldBody": "The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.",
+  "@revYieldBody": {},
+  "revProfit": "Net profit",
+  "@revProfit": {},
+  "revProfitAsk": "Where did the change come from — the business, or something that will not repeat?",
+  "@revProfitAsk": {},
+  "revProfitBody": "What the company filed as profit for the full year, as the exchange received it. Direction is read from the sign of each year's move rather than a percentage, because a percentage off a loss is meaningless: going from a loss to a profit is not growth of some number, it is a company that stopped losing money.",
+  "@revProfitBody": {},
+  "revEps": "Earnings per share",
+  "@revEps": {},
+  "revEpsAsk": "Profit rose — but did the earnings belonging to each share rise with it?",
+  "@revEpsAsk": {},
+  "revEpsBody": "Profit divided by the shares in issue. This is the number that survives a company issuing more shares: total profit can climb while each share earns less. When you hear that profits increased, this is the follow-up question.",
+  "@revEpsBody": {},
+  "revAssets": "Total assets",
+  "@revAssets": {},
+  "revAssetsAsk": "Is the business actually getting bigger, and is profit keeping pace with it?",
+  "@revAssetsAsk": {},
+  "revAssetsBody": "What the company holds, from its filed balance sheet. This stands in for revenue growth, which no Egyptian source publishes: assets growing while profit does not is the same warning a falling margin would give — the company is putting more in to get the same out.",
+  "@revAssetsBody": {},
+  "revCash": "Cash conversion",
+  "@revCash": {},
+  "revCashAsk": "Of every pound of reported profit, how much actually arrived as cash?",
+  "@revCashAsk": {},
+  "revCashBody": "Operating cash flow divided by reported profit. Above 1 means the company collected more cash than it booked as profit. This stands in for profit margin, which needs revenue nobody publishes — and it arguably answers the question better: when profit climbs and the cash does not follow, that is the thing worth investigating.",
+  "@revCashBody": {},
+  "revRoe": "Return on equity",
+  "@revRoe": {},
+  "revRoeAsk": "Good returns on shareholders' money — or on borrowed money? Check the debt row.",
+  "@revRoeAsk": {},
+  "revRoeBody": "Profit as a share of shareholders' equity: how much the company earns on the money its owners left in it. A high return is not automatically impressive — debt shrinks equity, which lifts the ratio without the business improving. Always read it beside debt to equity.",
+  "@revRoeBody": {},
+  "revRoa": "Return on assets",
+  "@revRoa": {},
+  "revRoaAsk": "How hard is everything the company owns actually working?",
+  "@revRoaAsk": {},
+  "revRoaBody": "Profit as a share of total assets. Unlike return on equity, borrowing cannot flatter it — the assets stay on the books either way. The gap between the two is roughly how much of the return is coming from leverage.",
+  "@revRoaBody": {},
+  "revDebt": "Debt to equity",
+  "@revDebt": {},
+  "revDebtAsk": "What did management do with the borrowed money — and is it earning more than it costs?",
+  "@revDebtAsk": {},
+  "revDebtBody": "Total liabilities against shareholders' equity. The absolute amount of debt says surprisingly little: a company owing ten billion can be sounder than one owing one, depending on the size of the business behind it. Rising debt is not automatically a problem either — what matters is what moved alongside it. Debt up a fifth while earnings rose by half is borrowed money doing work. Debt up by four fifths while profit crept 5% is the case to look at.",
+  "@revDebtBody": {},
+  "revNowRising": "Right now it's rising",
+  "@revNowRising": {},
+  "revNowFalling": "Right now it's falling",
+  "@revNowFalling": {},
+  "revNowFlat": "Right now it's holding steady",
+  "@revNowFlat": {},
+  "revProofTitle": "The figure, period by period",
+  "@revProofTitle": {},
+  "revProofNote": "These are the values the direction was read from — the exchange's filed figures, oldest first.",
+  "@revProofNote": {},
+  "revCauseTitle": "Probable cause",
+  "@revCauseTitle": {},
+  "revMeansTitle": "What it is",
+  "@revMeansTitle": {},
+  "revAskTitle": "Worth asking",
+  "@revAskTitle": {},
+  "revAnswerTitle": "A probable answer",
+  "@revAnswerTitle": {},
+  "revOnePoint": "One published figure — not enough history to read a direction.",
+  "@revOnePoint": {},
+  "revDirProfitRising": "Profit has been climbing year on year.",
+  "@revDirProfitRising": {},
+  "revDirProfitFalling": "Profit has been shrinking year on year.",
+  "@revDirProfitFalling": {},
+  "revDirEpsRising": "Each share is earning more — the growth is reaching shareholders rather than being diluted away.",
+  "@revDirEpsRising": {},
+  "revDirEpsFalling": "Each share is earning less, even if the company's total profit has not fallen.",
+  "@revDirEpsFalling": {},
+  "revDirAssetsRising": "The company is bigger than it was — more plant, inventory or cash on the books.",
+  "@revDirAssetsRising": {},
+  "revDirAssetsFalling": "The company's asset base is shrinking.",
+  "@revDirAssetsFalling": {},
+  "revDirCashRising": "More of the reported profit is arriving as actual cash.",
+  "@revDirCashRising": {},
+  "revDirCashFalling": "Less of the reported profit is turning into cash — the gap is worth watching.",
+  "@revDirCashFalling": {},
+  "revDirRoeRising": "The company is earning more on the money its owners left in it.",
+  "@revDirRoeRising": {},
+  "revDirRoeFalling": "The return on shareholders' money is slipping.",
+  "@revDirRoeFalling": {},
+  "revDirRoaRising": "Everything the company owns is working harder.",
+  "@revDirRoaRising": {},
+  "revDirRoaFalling": "The assets are producing less than they were.",
+  "@revDirRoaFalling": {},
+  "revDirDebtRising": "The company is carrying more debt relative to its own equity.",
+  "@revDirDebtRising": {},
+  "revDirDebtFalling": "The company is leaning on debt less than it used to.",
+  "@revDirDebtFalling": {},
+  "revDirPbRising": "The market is paying more for each pound of book value than it was.",
+  "@revDirPbRising": {},
+  "revDirPbFalling": "The market is paying less for each pound of book value.",
+  "@revDirPbFalling": {},
+  "revDirFlat": "This has held roughly steady across the periods on record.",
+  "@revDirFlat": {},
+  "revCauseProfitAheadOfCash": "Profit is rising, but cash conversion is falling — some of the reported profit has not arrived as cash. Read the cash-conversion row.",
+  "@revCauseProfitAheadOfCash": {},
+  "revCauseProfitWithCash": "Profit is rising and cash conversion is holding up, so the profit is backed by cash.",
+  "@revCauseProfitWithCash": {},
+  "revCauseAssetsAheadOfProfit": "The asset base is growing faster than profit — the company is putting more in for a similar return, which is what a falling margin would tell you.",
+  "@revCauseAssetsAheadOfProfit": {},
+  "revCauseAssetsWithProfit": "Assets and profit are growing together.",
+  "@revCauseAssetsWithProfit": {},
+  "revCauseEpsPerShare": "Total profit and per-share earnings are both rising, so the growth is not being diluted by new shares.",
+  "@revCauseEpsPerShare": {},
+  "revCauseCashBehindProfit": "Cash is lagging reported profit. When the two diverge, the reported profit is the number to question.",
+  "@revCauseCashBehindProfit": {},
+  "revCauseRoeLeverage": "Return on equity is rising while debt is too — some of the lift may be borrowing rather than the business. Return on assets, which debt cannot flatter, is the check.",
+  "@revCauseRoeLeverage": {},
+  "revCauseRoeOperational": "Return on equity is rising without more debt, so the improvement is operational.",
+  "@revCauseRoeOperational": {},
+  "revCauseRoaUnlevered": "The assets are earning more, and unlike return on equity, borrowing cannot flatter this figure.",
+  "@revCauseRoaUnlevered": {},
+  "revCauseDebtProductive": "Debt is rising, but so is profit — the borrowed money may be doing work. Compare how fast each grew.",
+  "@revCauseDebtProductive": {},
+  "revCauseDebtWatch": "Debt is rising while profit is not keeping pace. Ask what the borrowing is for.",
+  "@revCauseDebtWatch": {},
+  "revGroupValuation": "What you pay",
+  "@revGroupValuation": {},
+  "revGroupBusiness": "The business",
+  "@revGroupBusiness": {},
+  "revGroupReturns": "What it earns on",
+  "@revGroupReturns": {},
+  "revGroupRisk": "How it's financed",
+  "@revGroupRisk": {},
+  "revReadLabel": "The read",
+  "@revReadLabel": {},
+  "signInLead": "Read the exchange in plain words. Sign in to keep your own watchlist and see the live feed, or look around first as a guest.",
+  "@signInLead": {},
+  "signInApple": "Continue with Apple",
+  "@signInApple": {},
+  "signInGoogle": "Continue with Google",
+  "@signInGoogle": {},
+  "signInGuest": "Continue as guest",
+  "@signInGuest": {},
+  "signInGuestNote": "Guests browse sample data. Signing in switches on the live feed.",
+  "@signInGuestNote": {},
+  "signInFailed": "That didn’t work. Please try again.",
+  "@signInFailed": {},
+  "account": "Account",
+  "@account": {},
+  "accountGuest": "Guest",
+  "@accountGuest": {},
+  "accountSignedIn": "Signed in",
+  "@accountSignedIn": {},
+  "accountLive": "Live exchange feed",
+  "@accountLive": {},
+  "accountSample": "Sample data on this device",
+  "@accountSample": {},
+  "signOut": "Sign out",
+  "@signOut": {},
+  "signIn": "Sign in",
+  "@signIn": {},
+  "revOrientLabel": "Which way reads better",
+  "@revOrientLabel": {},
+  "revOrientPe": "Lower is the cheaper side. A P/E below its sector means you pay less than for similar companies for the same profit; above its sector means you pay more. Watch one thing: a very low reading can also mean the market expects the profit to drop.",
+  "@revOrientPe": {},
+  "revOrientPb": "Lower is the cheaper side. Below its sector means you pay less for each pound of the company's book value than its peers do; above its sector means more. A very low reading can also flag assets the market doubts are worth what the books say.",
+  "@revOrientPb": {},
+  "revOrientYield": "Higher pays you more. Above its sector means more cash back each year per pound than its peers pay; below its sector means less. But a very high yield often comes from a share price that has dropped, or a payout that may be cut — so higher is not always steadier.",
+  "@revOrientYield": {},
+  "revOrientHigherMore": "Higher is simply more — more profit, or more earnings for each share. Above its sector means more than its peers, but the direction over time matters most: rising reads better than falling.",
+  "@revOrientHigherMore": {},
+  "revOrientCash": "Higher is healthier. Above its sector means more of the reported profit actually arrived as cash than for its peers — money in the bank, not just profit on paper; below its sector means more of it is still on paper.",
+  "@revOrientCash": {},
+  "revOrientReturn": "Higher is the stronger side. Above its sector means the company turns each pound put into it into more profit than its peers do; below its sector is weaker. Steady-and-high reads better than high-but-jumpy.",
+  "@revOrientReturn": {},
+  "revOrientDebt": "Lower is the safer side. Below its sector means the company has borrowed less against its own money than its peers; above its sector carries more debt — which can fund growth but adds risk if conditions tighten.",
+  "@revOrientDebt": {},
+  "revOrientAssets": "Higher just means bigger — more owned than its peers, nothing more. Size only counts if those assets earn a return, which the profit and return rows show; bigger is not automatically stronger.",
+  "@revOrientAssets": {},
+  "debtTitle": "What it does with its borrowings",
+  "debtTitleFinance": "How it funds itself",
+  "debtAsFiled": "As filed for {period}",
+  "@debtAsFiled": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "debtBorrowings": "Borrowings",
+  "debtDueWithinYear": "Falls due within a year",
+  "debtDueLater": "Falls due later",
+  "debtCashHeld": "Cash held",
+  "debtNet": "Borrowings net of cash",
+  "debtNetCash": "It holds more cash than it owes",
+  "debtCost": "Cost over the period",
+  "debtCoverLine": "Operating profit was {times} times that cost",
+  "@debtCoverLine": {
+    "placeholders": {
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "debtCoverUnder": "That cost was more than the operating profit for the period",
+  "debtUpFrom": "Higher than the same period a year earlier",
+  "debtDownFrom": "Lower than the same period a year earlier",
+  "debtFlatFrom": "About the same as a year earlier",
+  "debtWhatMoved": "What moved",
+  "debtPatternRaisedInvested": "It raised money and spent on assets over the same period.",
+  "debtPatternRaisedShortfall": "It raised money while its operations were using cash rather than producing it.",
+  "debtPatternRaisedHeld": "It raised money without spending it on assets.",
+  "debtPatternRepaidFromOps": "It repaid or returned money, and its operations produced cash over the same period.",
+  "debtPatternRepaidNoOps": "It repaid or returned money while its operations were not producing cash.",
+  "debtPatternFlat": "Its borrowings barely moved.",
+  "debtPatternFundingRaised": "It took in more funding than it repaid.",
+  "debtPatternFundingRepaid": "It repaid more funding than it took in.",
+  "debtFinanceNote": "This is a lender, so borrowing is the raw material of the business rather than a load on it. Customer deposits are not counted here.",
+  "debtFootnote": "Read from the borrowing lines of the company's own filed statement, not from its total liabilities. ESTHMR does not rate credit or say whether this position is sound.",
+  "debtNoneFiled": "This company's last filed statement states no borrowings.",
+  "debtUpSince": "Higher than at {date}",
+  "@debtUpSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "debtDownSince": "Lower than at {date}",
+  "@debtDownSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "debtFlatSince": "About the same as at {date}",
+  "@debtFlatSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "signInEmail": "Continue with email",
+  "emailGateTitle": "Read the live exchange",
+  "emailGateLead": "We will email you a six-digit code. No password to choose, and nothing to remember.",
+  "emailGateField": "Email",
+  "emailGateSend": "Send me a code",
+  "emailGateCodeField": "The six digits we just sent",
+  "emailGateVerify": "Sign in",
+  "emailGateOther": "Use a different email",
+  "emailGateSending": "One moment…",
+  "emailGateBadEmail": "That does not look like an email address.",
+  "emailGateHint": "you@example.com"
+}

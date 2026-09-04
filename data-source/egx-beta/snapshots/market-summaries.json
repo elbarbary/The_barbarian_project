@@ -2,71 +2,71 @@
  "data": {
   "records": [
    {
-    "totalNumberOfCompanies": 258,
-    "totalValue": 22827875831.402,
-    "totalVolume": 4326717837,
-    "totalNumberOfTrades": 277692,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "Listed",
     "identifier_Ar": "داخل المقصورة"
    },
    {
-    "totalNumberOfCompanies": 223,
-    "totalValue": 12852482573.402,
-    "totalVolume": 4326276000,
-    "totalNumberOfTrades": 277507,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "Main Market",
     "identifier_Ar": "السوق الرئيسى"
    },
    {
-    "totalNumberOfCompanies": 35,
-    "totalValue": 9975393258,
-    "totalVolume": 441837,
-    "totalNumberOfTrades": 185,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "T. Bonds/Bills/Sukuk",
     "identifier_Ar": " سندات / اذون الخزانة  /صكوك"
    },
    {
-    "totalNumberOfCompanies": 14,
-    "totalValue": 142731906.845,
-    "totalVolume": 130600723,
-    "totalNumberOfTrades": 6873,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "SME",
     "identifier_Ar": "الصغيرة والمتوسطة"
    },
    {
-    "totalNumberOfCompanies": 13,
-    "totalValue": 119860149.5,
-    "totalVolume": 4612832,
-    "totalNumberOfTrades": 24,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "OTC",
     "identifier_Ar": "خارج المقصورة"
    },
    {
-    "totalNumberOfCompanies": 157,
-    "totalValue": 10388060881.936,
-    "totalVolume": 3592660809,
-    "totalNumberOfTrades": 209803,
-    "identifier": "Gainers",
-    "identifier_Ar": "مرتفع"
-   },
-   {
-    "totalNumberOfCompanies": 52,
-    "totalValue": 2311079648.243,
-    "totalVolume": 712475639,
-    "totalNumberOfTrades": 62324,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "Decliners",
     "identifier_Ar": "منخفض"
    },
    {
-    "totalNumberOfCompanies": 14,
-    "totalValue": 152412369.323,
-    "totalVolume": 21018026,
-    "totalNumberOfTrades": 5379,
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
+    "identifier": "Gainers",
+    "identifier_Ar": "مرتفع"
+   },
+   {
+    "totalNumberOfCompanies": 0,
+    "totalValue": 0,
+    "totalVolume": 0,
+    "totalNumberOfTrades": 0,
     "identifier": "Unchanged",
     "identifier_Ar": "لم تتغير"
    }
   ],
-  "marketCap": 4278916463681
+  "marketCap": 4294114314125
  },
  "success": true,
  "message": "Market summaries calculated successfully",
