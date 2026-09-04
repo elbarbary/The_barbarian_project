@@ -675,3 +675,85 @@ test('a redirect loop terminates rather than hanging', async () => {
     assert.equal(a.status, 502);
   } finally { globalThis.fetch = orig; }
 });
+
+/* The hole a host-only allowlist could not see.
+ *
+ * Jetpack's Photon CDN takes the ORIGIN HOST IN ITS PATH —
+ * https://i0.wp.com/<any-host>/<any-path> — so allowing `i0.wp.com` by
+ * hostname readmitted every host on the internet through the one entry that
+ * was not a literal. Verified against real Photon: 4.7 MB of
+ * upload.wikimedia.org served from this origin, cached immutable for a week.
+ * The earlier "it is not an open proxy" test passed throughout, because it
+ * only ever tried hosts OUTSIDE the list.
+ */
+test('Photon cannot be used to launder a host we do not carry', async () => {
+  const orig = globalThis.fetch;
+  let reached = false;
+  try {
+    const e = imgEnv(async () => { reached = true; return okImage(); });
+    for (const u of [
+      'https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/x.jpg',
+      'https://i0.wp.com/evil.example/payload.jpg',
+      'https://i3.wp.com/169.254.169.254/latest/meta-data/',
+      'https://i1.wp.com/www.google.com/images/branding/x.png',
+      'https://i0.wp.com/',
+    ]) {
+      const a = await call(e, 'https://esthmr.com/esthmr/api/img?u=' + encodeURIComponent(u));
+      assert.equal(a.status, 403, `${u} was laundered through Photon`);
+    }
+    assert.equal(reached, false, 'a laundered host must never be fetched');
+  } finally { globalThis.fetch = orig; }
+});
+
+test('Photon still serves the outlet it was added for', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(okImage);
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://i0.wp.com/ent.news/2026/09/27.jpg?fit=1024%2C1024&ssl=1'));
+    assert.equal(a.status, 200);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('an SVG is not treated as a picture', async () => {
+  const orig = globalThis.fetch;
+  try {
+    // SVG is a document that may carry script, and from this origin that
+    // script would run as this origin.
+    const e = imgEnv(async () => new Response('<svg xmlns="http://www.w3.org/2000/svg"/>', {
+      status: 200, headers: { 'content-type': 'image/svg+xml' },
+    }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/x.svg'));
+    assert.equal(a.status, 502);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('something far too large to be a thumbnail is refused', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(async () => new Response(PNG, {
+      status: 200,
+      headers: { 'content-type': 'image/png', 'content-length': String(64 * 1024 * 1024) },
+    }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/huge.png'));
+    assert.equal(a.status, 502);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('an address hammering the route is slowed, and the limiter fails open', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(okImage);
+    // No binding in the test env: an absent limiter must not close the gate.
+    const open = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/a.png'));
+    assert.equal(open.status, 200);
+
+    e.DATA_IP_LIMIT = { limit: async () => ({ success: false }) };
+    const capped = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/a.png'));
+    assert.equal(capped.status, 429);
+  } finally { globalThis.fetch = orig; }
+});

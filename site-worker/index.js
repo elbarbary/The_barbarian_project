@@ -582,8 +582,20 @@ async function api(request, env, url) {
     } catch {
       return new Response('bad url', { status: 400 });
     }
-    if (target.protocol !== 'https:' || !imageHostAllowed(target.hostname)) {
+    if (!imageAllowed(target)) {
       return new Response('host not carried', { status: 403 });
+    }
+
+    /* The same address ceiling the data gate uses.
+     *
+     * This route is unauthenticated and every request is a Worker invocation
+     * against a shared daily budget — the same budget the sign-in and the data
+     * gate spend. A reader loading the news list costs about forty of them,
+     * which is fine; a script looping on `?u=` with a cache-busting query is
+     * not, and nothing else here would stop it. Fails open, for the reason
+     * `overRate` gives. */
+    if (await overRate(env, `img-ip:${ip}`, 'DATA_IP_LIMIT')) {
+      return new Response('slow down', { status: 429 });
     }
 
     /* Redirects are followed by hand, one hop at a time, with the allowlist
@@ -599,6 +611,9 @@ async function api(request, env, url) {
         upstream = await fetch(next.toString(), {
           headers: { 'user-agent': IMAGE_UA, accept: 'image/*,*/*;q=0.8' },
           redirect: 'manual',
+          // The same ten seconds `solved()` allows Turnstile. Without it a
+          // slow outlet holds a Worker open for as long as it likes.
+          signal: AbortSignal.timeout(10000),
           cf: { cacheEverything: true, cacheTtl: 604800 },
         });
         if (![301, 302, 303, 307, 308].includes(upstream.status)) break;
@@ -609,7 +624,7 @@ async function api(request, env, url) {
         } catch {
           return new Response('bad redirect', { status: 502 });
         }
-        if (moved.protocol !== 'https:' || !imageHostAllowed(moved.hostname)) {
+        if (!imageAllowed(moved)) {
           return new Response('redirected off the allowlist', { status: 403 });
         }
         next = moved;
@@ -618,12 +633,24 @@ async function api(request, env, url) {
       return new Response('upstream', { status: 502 });
     }
 
-    const type = upstream.headers.get('content-type') || '';
+    const type = (upstream.headers.get('content-type') || '').toLowerCase();
     /* Anything that is not an image is refused rather than passed through.
        Without this the route would serve another site's HTML from this origin,
-       which is a redirect the address bar does not show. */
-    if (!upstream.ok || !type.toLowerCase().startsWith('image/')) {
+       which is a redirect the address bar does not show.
+
+       SVG is excluded from "an image" on purpose: it is a document that may
+       carry script, and served from this origin that script would run as this
+       origin. None of these outlets illustrate a story with one. */
+    if (!upstream.ok || !type.startsWith('image/') || type.startsWith('image/svg')) {
       return new Response('not an image', { status: 502 });
+    }
+
+    /* A thumbnail is tens of kilobytes; the largest in the current feed is
+       under a megabyte. Anything claiming more than this is not a thumbnail,
+       and streaming it would spend bandwidth and cache on one object. */
+    const declared = Number(upstream.headers.get('content-length') || 0);
+    if (declared > 8 * 1024 * 1024) {
+      return new Response('too large', { status: 502 });
     }
 
     const headers = new Headers({
@@ -779,15 +806,37 @@ const IMAGE_HOSTS = new Set([
   'hapijournal.com', 'www.hapijournal.com',
   'almalnews.com', 'www.almalnews.com', 'media.almalnews.com',
   'arabfinance.com', 'www.arabfinance.com',
+  // Reached only through Photon below, never directly, but it belongs in the
+  // same list because it is the same decision: an outlet whose pictures we
+  // carry.
+  'ent.news', 'www.ent.news',
 ]);
 
-/** Is this a host whose pictures we carry? */
-function imageHostAllowed(hostname) {
-  const host = String(hostname || '').toLowerCase();
+const PHOTON = /^i[0-3]\.wp\.com$/;
+
+/* Is this a URL whose picture we carry?
+ *
+ * Takes the whole URL, not the hostname, and that is the entire point.
+ * Checking only the host admitted Jetpack's Photon CDN — `i0.wp.com` — whose
+ * public interface puts the ORIGIN HOST IN THE PATH:
+ * `https://i0.wp.com/<any-host>/<any-path>`. So one entry on the allowlist
+ * quietly readmitted every host on the internet, and this route served 4.7 MB
+ * of upload.wikimedia.org from esthmr.com, on this account's bandwidth, pinned
+ * in the edge cache for a week. The redirect loop below re-checks every hop
+ * precisely so an outlet cannot point us elsewhere; Photon did it in one hop
+ * with no redirect at all.
+ *
+ * The fix is not to drop wp.com — 14 items genuinely need it — but to require
+ * that the host it is asked to fetch is itself one we carry.
+ */
+function imageAllowed(target) {
+  if (!target || target.protocol !== 'https:') return false;
+  const host = String(target.hostname || '').toLowerCase();
   if (IMAGE_HOSTS.has(host)) return true;
-  // Several of these outlets serve their media through Jetpack's CDN, which
-  // answers on a small numbered set of hosts rather than one.
-  return /^i[0-3]\.wp\.com$/.test(host);
+  if (!PHOTON.test(host)) return false;
+  // Photon's first path segment is the origin host, optionally with a port.
+  const first = target.pathname.split('/').filter(Boolean)[0] || '';
+  return IMAGE_HOSTS.has(first.toLowerCase().split(':')[0]);
 }
 
 const IMAGE_UA = (
