@@ -126,6 +126,43 @@
               </div>
             </sc-if>
           </div>
+          <!-- BOUGHT AND SOLD, PER PARTY.
+               The share bars above answer who the market was; these answer how
+               much each side actually moved. Two bars per party, each drawn
+               against ITS OWN total — buying against all buying, selling
+               against all selling — because a pair drawn to one shared
+               maximum would claim one side was bigger than the other, and
+               every pound bought is a pound sold. -->
+          <div style="margin-top:18px;padding-top:15px;border-top:1px solid var(--rule)">
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.investorsBought }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px">
+                <span style="width:16px;height:7px;border-radius:999px;background:var(--up);opacity:.85"></span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ L.investorsSold }}</span>
+                <span style="width:16px;height:7px;border-radius:999px;background:var(--down);opacity:.85"></span>
+              </span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 20px;margin-top:12px">
+              <sc-for list="{{ investors.parties }}" as="p" hint-placeholder-count="3">
+                <div style="min-width:0">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                    <span style="font-size:12.5px;color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.party }}</span>
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ p.netColor }};white-space:nowrap">{{ p.net }}</span>
+                  </div>
+                  <div style="margin-top:7px;height:7px;border-radius:999px;background:var(--sunk);overflow:hidden">
+                    <div style="height:7px;width:{{ p.buyW }};background:var(--up);border-radius:999px;opacity:.85"></div>
+                  </div>
+                  <div style="margin-top:4px;height:7px;border-radius:999px;background:var(--sunk);overflow:hidden">
+                    <div style="height:7px;width:{{ p.sellW }};background:var(--down);border-radius:999px;opacity:.85"></div>
+                  </div>
+                  <div style="margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">
+                    <span>{{ p.buy }}</span><span>{{ p.sell }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:11px;color:var(--faint);line-height:1.55;margin-top:11px;text-wrap:pretty">{{ L.investorsSides }}</div>
+          </div>
           <div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:14px;text-wrap:pretty">{{ L.investorsBasis }}</div>
           <sc-if value="{{ investors.asOfLine }}"><div style="font-size:11.5px;color:var(--faint);line-height:1.55;margin-top:6px">{{ investors.asOfLine }}</div></sc-if>
         </section>
@@ -165,41 +202,64 @@
            fix is not to finish the sentence — a completed "17 companies pass
            all four" over the same pills would be worse than the bug. -->
       <sc-if value="{{ screen }}">
-        <section style="margin-top:18px;padding:20px 22px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
+        <section style="margin-top:18px;padding:20px 22px 18px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
-            <div style="font-family:'Bricolage Grotesque',serif;font-size:21px;font-weight:600;letter-spacing:-.02em">{{ L.screenTitle }}</div>
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:600;letter-spacing:-.02em">{{ L.screenTitle }}</div>
             <div onClick="{{ screen.open }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.screenOpen }} →</div>
           </div>
-          <div style="margin-top:9px;font-size:12.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.screenLead }}</div>
-          <div style="margin-top:4px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
+          <div style="margin-top:3px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
 
-          <!-- One bar per line, each against the companies that can answer it.
-               A shared denominator of every listing was the dishonest drawing:
-               only 170 companies publish a price-to-earnings figure at all, so
-               the median line drew at 30% of the exchange beside a sentence
-               calling it the median. Against its own base a median is half,
-               which is what a median means. -->
-          <div style="margin-top:15px;display:flex;flex-direction:column;gap:13px">
+          <!-- The market, drawn. Home carries the shapes and the numbers; the
+               sentence explaining each line lives on Crossings, because four
+               paragraphs on a card is a page of prose with a graph attached
+               rather than a graph. -->
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
             <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
               <div>
-                <div style="display:flex;gap:10px;align-items:baseline">
-                  <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ t.n }}</span>
-                  <span style="flex:1;min-width:0;font-size:12.5px;color:var(--t2);line-height:1.55;text-wrap:pretty">{{ t.text }}</span>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                  <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ t.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);white-space:nowrap">{{ t.of }}</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:11px;margin-top:7px;padding-inline-start:20px">
-                  <div style="flex:1;min-width:0;height:7px;border-radius:999px;background:var(--sunk);overflow:hidden">
-                    <div style="height:7px;border-radius:999px;width:{{ t.width }};background:var(--accent);opacity:.8"></div>
+
+                <sc-if value="{{ t.hasDist }}">
+                  <!-- One column per slice of the measure, height = how many
+                       companies are in it, and a rule where the market's own
+                       middle falls. `inset-inline-start`, never `left`: the
+                       columns mirror under dir=rtl and a physical offset would
+                       put the median on the wrong side of an Arabic page. -->
+                  <div style="position:relative;height:46px;margin-top:9px;display:flex;align-items:flex-end;gap:1.5px">
+                    <sc-for list="{{ t.dist.bars }}" as="b" hint-placeholder-count="26">
+                      <div style="flex:1 1 0;min-width:0;height:{{ b.h }};background:{{ b.c }};border-radius:2px 2px 0 0"></div>
+                    </sc-for>
+                    <div style="position:absolute;inset-block:-2px;inset-inline-start:{{ t.dist.medianAt }};width:1.5px;background:var(--ink);opacity:.55"></div>
                   </div>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--t2);white-space:nowrap">{{ t.of }}</span>
-                </div>
-                <sc-if value="{{ t.hasSilent }}">
-                  <div style="margin-top:5px;padding-inline-start:20px;font-size:11px;color:var(--faint)">{{ t.silent }}</div>
                 </sc-if>
+
+                <sc-if value="{{ t.noDist }}">
+                  <!-- Nothing to bucket: this line is in or out, so it is drawn
+                       as the one proportion it is rather than a fake spread. -->
+                  <div style="height:46px;margin-top:9px;display:flex;align-items:flex-end">
+                    <div style="width:100%;height:7px;border-radius:999px;background:var(--rule);overflow:hidden">
+                      <div style="height:7px;width:{{ t.width }};background:var(--accent);opacity:.75;border-radius:999px"></div>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <div style="margin-top:7px;min-height:15px;font-size:10.5px;color:var(--faint);line-height:1.45">{{ t.foot }}</div>
               </div>
             </sc-for>
           </div>
 
-          <div style="margin-top:15px;padding-top:13px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ L.screenQuestion }}</div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span style="width:9px;height:9px;border-radius:2px;background:var(--accent)"></span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ L.screenNamedSide }}</span>
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span style="width:1.5px;height:11px;background:var(--ink);opacity:.55"></span>
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ L.screenMedianMark }}</span>
+            </span>
+          </div>
         </section>
       </sc-if>
 
@@ -208,13 +268,30 @@
            market-history.json all along and never read. -->
       <sc-if value="{{ hasBreadth }}">
         <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px">
-          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
-          <div style="display:flex;gap:3px;margin-top:12px;border-radius:6px;overflow:hidden">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ breadthCounted }}</div>
+          </div>
+          <!-- One whole, divided, with the numbers ON it. A 10px band and a
+               sentence underneath made the reader hold three figures in their
+               head to see a shape that is right there. -->
+          <div style="display:flex;gap:3px;margin-top:13px;border-radius:8px;overflow:hidden">
             <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
-              <div style="height:10px;width:{{ b.width }};background:{{ b.color }}"></div>
+              <div style="height:34px;width:{{ b.width }};background:{{ b.color }};display:flex;align-items:center;justify-content:center;min-width:0">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ b.ink }};opacity:.95">{{ b.count }}</span>
+              </div>
             </sc-for>
           </div>
-          <div style="font-size:13.5px;color:var(--t2);margin-top:11px;line-height:1.55;text-wrap:pretty">{{ breadthLine }}</div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:11px">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <span style="display:inline-flex;align-items:center;gap:7px">
+                <span style="width:9px;height:9px;border-radius:3px;background:{{ b.color }}"></span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ b.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint)">{{ b.pct }}</span>
+              </span>
+            </sc-for>
+          </div>
+          <div style="font-size:12.5px;color:var(--faint);margin-top:11px;line-height:1.55;text-wrap:pretty">{{ breadthLine }}</div>
         </div>
       </sc-if>
 
@@ -580,19 +657,30 @@
                   <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ t.n }}</span>
                   <span style="flex:1;min-width:0;font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ t.text }}</span>
                 </div>
-                <div style="display:flex;align-items:center;gap:11px;margin-top:8px;padding-inline-start:20px">
-                  <div style="flex:1;min-width:0;height:8px;border-radius:999px;background:var(--sunk);overflow:hidden">
-                    <div style="height:8px;border-radius:999px;width:{{ t.width }};background:var(--accent);opacity:.8"></div>
-                  </div>
+                <div style="display:flex;align-items:flex-end;gap:12px;margin-top:9px;padding-inline-start:20px">
+                  <sc-if value="{{ t.hasDist }}">
+                    <div style="position:relative;flex:1;min-width:0;height:54px;display:flex;align-items:flex-end;gap:1.5px">
+                      <sc-for list="{{ t.dist.bars }}" as="b" hint-placeholder-count="26">
+                        <div style="flex:1 1 0;min-width:0;height:{{ b.h }};background:{{ b.c }};border-radius:2px 2px 0 0"></div>
+                      </sc-for>
+                      <div style="position:absolute;inset-block:-2px;inset-inline-start:{{ t.dist.medianAt }};width:1.5px;background:var(--ink);opacity:.55"></div>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ t.noDist }}">
+                    <div style="flex:1;min-width:0;height:7px;border-radius:999px;background:var(--rule);overflow:hidden">
+                      <div style="height:7px;width:{{ t.width }};background:var(--accent);opacity:.75;border-radius:999px"></div>
+                    </div>
+                  </sc-if>
                   <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t2);white-space:nowrap">{{ t.of }}</span>
                 </div>
-                <sc-if value="{{ t.hasSilent }}">
-                  <div style="margin-top:5px;padding-inline-start:20px;font-size:11.5px;color:var(--faint)">{{ t.silent }}</div>
+                <sc-if value="{{ t.hasFoot }}">
+                  <div style="margin-top:5px;padding-inline-start:20px;font-size:11.5px;color:var(--faint)">{{ t.foot }}</div>
                 </sc-if>
               </div>
             </sc-for>
           </div>
           <div style="padding-top:12px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:9px;font-size:11.5px;color:var(--faint);line-height:1.65;text-wrap:pretty">
+            <div>{{ L.screenBars }}</div>
             <div>{{ L.screenQuestion }}</div>
             <div>{{ L.screenNoBack }}</div>
           </div>

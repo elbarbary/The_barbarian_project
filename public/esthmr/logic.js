@@ -244,7 +244,7 @@ export class Component extends Base {
       filedSearch:'Filter by company or ticker',
       filedClear:'Clear', filedNothing:'No filing this month matches that.',
       breadthLine:'{up} rose, {down} fell and {flat} held, of {counted} counted in the {date} session.',
-      breadthWord:'How widely',
+      breadthWord:'How widely', breadthOf:'{n} shares counted',
       calWindow:'Filed between {from} and {to} in {n} past years.',
       yieldWord:'yield',
       macroMoved:'Moved with the EGX 30 {r} over {n} sessions.',
@@ -378,6 +378,11 @@ export class Component extends Base {
       screenTitle:'Four lines, as filed',
       screenLead:'Four lines drawn on the exchange\u2019s own medians, and how much of the market sits inside each. Every line is read from the market; none is chosen here.',
       screenUniverse:'{n} companies on file',
+      screenPeShort:'Price to earnings', screenVolShort:'30-day volume',
+      screenCashShort:'Cash conversion', screenActionShort:'No filing due',
+      screenOver:'{n} outside the range drawn',
+      screenNamedSide:'the side the line names', screenMedianMark:'market median',
+      screenBars:'Each column is how many companies fall in that slice of the measure, and the mark is the market\u2019s own middle. Filled columns are the side of the middle the line names. Nothing is ranked and no company is a column.',
       screenOf:'{n} of {of}',
       screenSilent:'{n} published no figure to test',
       screenQuestion:'Sitting inside a line is a question, not an answer: it says a figure falls on one side of the market\u2019s middle, and nothing about whether that is good. No company is named here. The lines are applied on the table, where they are the reader\u2019s to move.',
@@ -520,7 +525,7 @@ export class Component extends Base {
       filedSearch:'تصفية بالشركة أو الرمز',
       filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
       breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
-      breadthWord:'ما اتساع الحركة',
+      breadthWord:'ما اتساع الحركة', breadthOf:'{n} سهماً محسوباً',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
       yieldWord:'العائد',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
@@ -640,8 +645,12 @@ export class Component extends Base {
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
       ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
       screenTitle:'أربعة خطوط على الأرقام كما وردت',
-      screenLead:'أربعة خطوط مرسومة على وسائط البورصة نفسها، وكم من السوق يقع داخل كل خط. كل خط مقروء من السوق، ولم يُختر أي منها هنا.',
       screenUniverse:'{n} شركة في السجل',
+      screenPeShort:'مضاعف الربحية', screenVolShort:'حجم التداول ٣٠ يوماً',
+      screenCashShort:'التحويل النقدي', screenActionShort:'لا إفصاح مرتقب',
+      screenOver:'{n} خارج المدى المرسوم',
+      screenNamedSide:'الجانب الذي يسمّيه الخط', screenMedianMark:'وسيط السوق',
+      screenBars:'كل عمود هو عدد الشركات الواقعة في تلك الشريحة من المقياس، والعلامة هي وسط السوق نفسه. الأعمدة المملوءة هي الجانب الذي يسمّيه الخط. لا ترتيب هنا، ولا عمود يمثل شركة بعينها.',
       screenOf:'{n} من {of}',
       screenSilent:'{n} لم تُفصح عن رقم يُختبر',
       screenQuestion:'الوقوع داخل خط سؤال وليس حكمًا: يقول إن رقمًا يقع على جانب من وسط السوق، ولا يقول إن ذلك جيد. لا تُسمّى هنا أي شركة. وتُطبّق الخطوط على الجدول، حيث يملك القارئ تحريكها.',
@@ -1780,6 +1789,12 @@ export class Component extends Base {
           // entirely plausible-looking.
           buyShare: L.investorsOfBuying.replace('{n}', pct(p.buyPercent)),
           sellShare: L.investorsOfSelling.replace('{n}', pct(p.sellPercent)),
+          // Widths for the paired bars: each side against its own 100%, never
+          // against the other. A bar drawn to a shared maximum would say the
+          // larger side was the market, which it is not — every pound bought
+          // is a pound sold.
+          buyW: Math.max(1.5, p.buyPercent || 0).toFixed(2) + '%',
+          sellW: Math.max(1.5, p.sellPercent || 0).toFixed(2) + '%',
           hasSides: typeof p.buy === 'number' || typeof p.sell === 'number',
           // Net against the widest net on the row, so the three are comparable
           // at a glance and a net buyer reads differently from a net seller.
@@ -2716,37 +2731,115 @@ export class Component extends Base {
         const due = new Set(cal.map((e) => e.ticker).filter(Boolean));
         const cash = (c) => (c.ratios || {}).cash_conversion;
 
+        // THE SHAPE OF THE EXCHANGE, NOT A PROPORTION OF IT.
+        //
+        // A single filled bar says how many companies sit inside a line and
+        // nothing about how they are spread, which is the more interesting
+        // half: a median with everything bunched against it is a different
+        // market from one with two clusters either side. So each measure is
+        // bucketed and drawn, with the median marked where it actually falls.
+        //
+        // Counts, not values, set the height — a column is how many companies
+        // are in that bucket. Bars left of the line carry the accent and bars
+        // right of it are faint, so the reading is "this much of the market,
+        // shaped like this", and no column is a company anybody chose.
+        const BUCKETS = 26;
+        // The range is read off the data, not written here.
+        //
+        // Fixed bounds wasted the drawing — 1e3..1e8 on volume left the whole
+        // left half empty — and plain percentiles were no better: the 98th
+        // percentile of the multiple is 186.6, which put the median at 7% of
+        // the width and squashed the market into a corner. These are Tukey
+        // fences (a quartile either side, plus one and a half times the spread
+        // between them) computed in the space the bars are drawn in, which is
+        // log for the two measures that run over orders of magnitude. The
+        // median then lands near the middle because that is where it is, and
+        // what falls beyond the fences is counted and said rather than clipped
+        // into the end column.
+        const histogram = (values, line, below, log) => {
+          const raw = values.filter((x) => typeof x === 'number' && isFinite(x)
+                                           && (!log || x > 0));
+          if (raw.length < 8) return null;
+          const tx = (x) => (log ? Math.log10(x) : x);
+          const t = raw.map(tx).sort((a, b) => a - b);
+          const q = (f) => t[Math.min(t.length - 1, Math.max(0, Math.round((t.length - 1) * f)))];
+          const q1 = q(0.25), q3 = q(0.75), reach = 1.5 * (q3 - q1);
+          const lo = Math.max(t[0], q1 - reach), hi = Math.min(t[t.length - 1], q3 + reach);
+          if (!(hi > lo)) return null;
+          const at = (x) => Math.min(1, Math.max(0, (tx(x) - lo) / (hi - lo)));
+          const counts = new Array(BUCKETS).fill(0);
+          let outside = 0;
+          for (const x of raw) {
+            const y = tx(x);
+            if (y < lo || y > hi) { outside += 1; continue; }
+            counts[Math.min(BUCKETS - 1, Math.floor(at(x) * BUCKETS))] += 1;
+          }
+          const top = Math.max(1, ...counts);
+          const cut = at(line) * BUCKETS;
+          return {
+            // A bucket holding one company must still be visible, or a thin
+            // tail reads as an empty market rather than a thin one.
+            bars: counts.map((n, i) => {
+              const on = below ? i < cut : i + 1 > cut;
+              return {
+                h: (n === 0 ? 0 : Math.max(7, (n / top) * 100)).toFixed(1) + '%',
+                on,
+                // The colour travels with the bar: the template engine binds
+                // values, not conditions, and a column that decided its own
+                // shade in the markup would need an expression the engine has
+                // no way to evaluate.
+                c: on ? 'var(--accent)' : 'var(--rule)',
+              };
+            }),
+            medianAt: (at(line) * 100).toFixed(1) + '%',
+            over: outside ? L.screenOver.replace('{n}', this.num(outside, 0)) : '',
+            hasOver: outside > 0,
+          };
+        };
+
         // EACH LINE AGAINST THE COMPANIES THAT CAN ANSWER IT.
         //
-        // One shared denominator of 284 was the dishonest version: only 170
-        // companies have published a price-to-earnings figure at all, so
-        // "at or below the median" drew at 30% of the exchange beside a
+        // One shared denominator of every listing was the dishonest version:
+        // only 170 companies have published a price-to-earnings figure at all,
+        // so "at or below the median" drew at 30% of the exchange beside a
         // sentence calling it the median. A median of the companies that
-        // published one is 50% of the companies that published one, and the
-        // 114 that published nothing are the other half of what this
-        // computation knows — named here rather than folded into the bar.
+        // published one is half of them, and the 114 that published nothing
+        // are the other half of what this knows — named, not folded in.
         const havePe = all.filter((c) => typeof c.pe === 'number' && c.pe > 0);
         const haveVol = all.filter((c) => typeof c.avgVolume === 'number');
         const haveCash = all.filter((c) => typeof cash(c) === 'number');
-        const line = (n, text, inside, base) => ({
-          n, text,
-          of: L.screenOf.replace('{n}', this.num(inside, 0)).replace('{of}', this.num(base, 0)),
-          width: base ? ((inside / base) * 100).toFixed(1) + '%' : '0%',
-          silent: base < all.length
-            ? L.screenSilent.replace('{n}', this.num(all.length - base, 0)) : '',
-          hasSilent: base < all.length,
-        });
+        const line = (n, label, text, inside, base, dist) => {
+          const silent = base < all.length
+            ? L.screenSilent.replace('{n}', this.num(all.length - base, 0)) : '';
+          // One short line under each drawing, carrying both the companies
+          // that could not be tested and the ones beyond the fences. Kept to a
+          // single line on purpose: the card is a graph, and a graph with a
+          // paragraph under every panel is a paragraph.
+          const foot = [silent, dist && dist.over].filter(Boolean).join(' · ');
+          return {
+            n, label, text,
+            of: L.screenOf.replace('{n}', this.num(inside, 0)).replace('{of}', this.num(base, 0)),
+            width: base ? ((inside / base) * 100).toFixed(1) + '%' : '0%',
+            silent, hasSilent: Boolean(silent),
+            foot, hasFoot: Boolean(foot),
+            dist: dist || null, hasDist: Boolean(dist), noDist: !dist,
+          };
+        };
         return {
           universe: L.screenUniverse.replace('{n}', this.num(all.length, 0)),
           tests: [
-            line('1', L.screenPe.replace('{v}', pe.toFixed(1)),
-                 havePe.filter((c) => c.pe <= pe).length, havePe.length),
-            line('2', L.screenVol.replace('{v}', this.num(vol, 0)),
-                 haveVol.filter((c) => c.avgVolume >= vol).length, haveVol.length),
-            line('3', haveCash.length ? L.screenCash : L.screenCashNone,
-                 haveCash.filter((c) => cash(c) >= 1).length, haveCash.length),
-            line('4', cal.length ? L.screenAction : L.screenActionNone,
-                 all.filter((c) => !due.has(c.ticker)).length, all.length),
+            line('1', L.screenPeShort, L.screenPe.replace('{v}', pe.toFixed(1)),
+                 havePe.filter((c) => c.pe <= pe).length, havePe.length,
+                 histogram(havePe.map((c) => c.pe), pe, true, true)),
+            line('2', L.screenVolShort, L.screenVol.replace('{v}', this.num(vol, 0)),
+                 haveVol.filter((c) => c.avgVolume >= vol).length, haveVol.length,
+                 histogram(haveVol.map((c) => c.avgVolume), vol, false, true)),
+            line('3', L.screenCashShort, haveCash.length ? L.screenCash : L.screenCashNone,
+                 haveCash.filter((c) => cash(c) >= 1).length, haveCash.length,
+                 haveCash.length
+                   ? histogram(haveCash.map(cash), 1, false, false) : null),
+            line('4', L.screenActionShort, cal.length ? L.screenAction : L.screenActionNone,
+                 all.filter((c) => !due.has(c.ticker)).length, all.length, null),
           ],
           // The same line, on the table, where the reader owns it.
           //
@@ -2754,8 +2847,7 @@ export class Component extends Base {
           // said 16.7 and the filter asked for 16.7, which quietly dropped the
           // company sitting at 16.72. And the sector chip and the search box
           // are cleared, or the filter arrives on top of whatever the reader
-          // had narrowed to and returns a number that matches nothing said
-          // here.
+          // had narrowed to and returns a number matching nothing said here.
           open: () => this.setState({ screen: 'market', sort: 'pe', dir: 1,
             sector: 'All', q: '',
             rq: { m: 'pe', op: 'lt', a: String(pe), b: '' } }),
@@ -2851,12 +2943,22 @@ export class Component extends Base {
       hasBusyCut: busyAll.length > busy.length,
       hasBreadth: Boolean(D.breadth),
       breadthBars: D.breadth ? [
-        { n: D.breadth.up, color: 'var(--up)', label: L.rose },
-        { n: D.breadth.down, color: 'var(--down)', label: L.fell },
-        { n: D.breadth.flat, color: 'var(--rule2)', label: L.flat },
+        // `ink` travels with the band because the flat band is a pale rule and
+        // the other two are saturated: one shared text colour is unreadable on
+        // one of them whichever is chosen.
+        { n: D.breadth.up, color: 'var(--up)', label: L.rose, ink: '#fff' },
+        { n: D.breadth.down, color: 'var(--down)', label: L.fell, ink: '#fff' },
+        { n: D.breadth.flat, color: 'var(--rule2)', label: L.flat, ink: 'var(--t2)' },
       ].map((b) => Object.assign({}, b, {
         width: Math.round((b.n / Math.max(1, D.breadth.counted)) * 100) + '%',
+        // The count and its share travel with the band so the bar can be read
+        // without the sentence under it. A stacked bar with no numbers on it
+        // is a decoration.
+        count: this.num(b.n, 0),
+        pct: Math.round((b.n / Math.max(1, D.breadth.counted)) * 100) + '%',
       })) : [],
+      breadthCounted: D.breadth
+        ? L.breadthOf.replace('{n}', this.num(D.breadth.counted, 0)) : '',
       breadthLine: D.breadth ? L.breadthLine
         .replace('{up}', D.breadth.up).replace('{down}', D.breadth.down)
         .replace('{flat}', D.breadth.flat).replace('{counted}', D.breadth.counted)
