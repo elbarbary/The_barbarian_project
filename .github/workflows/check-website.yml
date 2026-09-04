@@ -28,6 +28,7 @@ on:
       - 'site-worker/**'
       - 'worker/quotes/**'
       - 'worker/fetchrelay/**'
+      - 'worker/clock/**'
       - '.github/workflows/check-website.yml'
   pull_request:
     paths:
@@ -35,6 +36,7 @@ on:
       - 'site-worker/**'
       - 'worker/quotes/**'
       - 'worker/fetchrelay/**'
+      - 'worker/clock/**'
   workflow_dispatch:
 
 # Website checks are independent of each other and of the data publish, so they
@@ -61,4 +63,4 @@ jobs:
       # exists on the row, no §8 directive language reaches a screen, and no
       # bidi mark reaches a stylesheet.
       - name: Test the website
-        run: node --test site-worker/test/*.test.mjs worker/quotes/test/*.test.mjs worker/fetchrelay/test/*.test.mjs
+        run: node --test site-worker/test/*.test.mjs worker/quotes/test/*.test.mjs worker/fetchrelay/test/*.test.mjs worker/clock/test/*.test.mjs

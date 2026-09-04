@@ -52,6 +52,39 @@
   <!-- ══ HOME ══ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
+      <!-- ── 3-Second Market Pulse Card ── -->
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
+            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ pulseDate }}</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:{{ pulseTone.bg }};color:{{ pulseTone.fg }};border:1px solid {{ pulseTone.border }};font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:600">
+            <span style="font-size:14px;line-height:1">{{ pulseTone.icon }}</span>
+            <span>{{ pulseTone.badge }}</span>
+          </div>
+        </div>
+
+        <div style="font-size:15px;line-height:1.65;color:var(--ink);margin-top:14px;text-wrap:pretty;max-width:860px">
+          {{ pulseBody }}
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--edgeIn)">
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
+            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseLeader }}</div>
+          </div>
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseFlowLabel }}</div>
+            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseFlow }}</div>
+          </div>
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseScannerLabel }}</div>
+            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseScanner }}</div>
+          </div>
+        </div>
+      </section>
+
       <!-- The three index levels first and biggest. They were under a 50px
            page title and a session note, at 21-32px — the smallest headline
            figures on a screen whose whole subject is where the market closed,
@@ -203,8 +236,8 @@
             </div>
             <sc-for list="{{ busy }}" as="m" hint-placeholder-count="9">
               <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(30px,1fr) minmax(44px,58px) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
-                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:2.5px 4px;border-radius:6px;background:var(--sunk);border:1px solid var(--edgeIn);text-align:center;color:var(--t2)">{{ m.ticker }}</div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:500;color:var(--ink)">{{ m.name }}</div>
                 <!-- The multiple gets a column. "Traded 17.5× its usual volume" under a
                      company name wraps to two lines and pushes the row apart; the same
                      fact beside the price needs only the space of a number. -->
@@ -234,8 +267,8 @@
             </div>
             <sc-for list="{{ movers }}" as="m" hint-placeholder-count="9">
               <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(36px,1fr) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ m.ticker }}</div>
-                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--t2)">{{ m.name }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:2.5px 4px;border-radius:6px;background:var(--sunk);border:1px solid var(--edgeIn);text-align:center;color:var(--t2)">{{ m.ticker }}</div>
+                <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px;font-weight:500;color:var(--ink)">{{ m.name }}</div>
                 <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end">{{ m.close }}</div>
                 <div style="min-width:0">
                   <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:{{ m.color }}">
