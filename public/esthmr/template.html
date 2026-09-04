@@ -207,8 +207,9 @@
           <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
           <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
         </div>
-        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(18px);margin-inline-end:2px" style-hover="background:var(--sunk)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ searchIcon }}"></path></svg>
+        <div onClick="{{ goMarket }}" title="{{ L.marketTitle }}" aria-label="{{ L.marketTitle }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(18px);margin-inline-end:2px;font-size:12.5px;color:var(--t2);transition:background .15s,color .15s,border-color .15s" style-hover="background:var(--sunk);color:var(--ink);border-color:var(--accent)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ searchIcon }}"></path></svg>
+          <span>{{ L.marketTitle }}</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>{{ homeNote }}
