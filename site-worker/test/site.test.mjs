@@ -2118,12 +2118,45 @@ test('Home says how widely the market moved, not just how far', async () => {
   assert.ok(att.breadth, 'no breadth found in the archive');
   const v = screen({ ...LIVE, breadth: att.breadth });
   assert.equal(v.hasBreadth, true);
-  assert.match(v.breadthLine, /\d+ rose, \d+ fell and \d+ held, of \d+ counted in the .+ session\./);
   assert.equal(v.breadthBars.length, 3);
   // The bars are a share of what was counted, not of the directory.
   const total = v.breadthBars.reduce((n, b) => n + parseInt(b.width, 10), 0);
   assert.ok(Math.abs(total - 100) <= 2, `bars sum to ${total}%`);
-  assert.equal(screen(LIVE).hasBreadth, false);
+  // The published counts win when the archive has them.
+  assert.equal(v.breadthBars[0].count, String(att.breadth.up));
+  // The sentence moved into the pulse commentary, which is the one place the
+  // words are asked for. It is drawn from the same three numbers as the bar.
+  assert.match(v.pulseBody, /\d+ rose, \d+ fell and \d+ held, of \d+ counted\./);
+});
+
+/* The archive records breadth for 26 of 260 sessions and the demo tree records
+   none, so the one genuinely visual answer on Home rendered for members and
+   vanished for every reader meeting the product signed out. The companies are
+   loaded either way and each carries the day's percentage. */
+test('breadth is counted from the companies when the archive has none', () => {
+  const v = screen(LIVE);
+  assert.equal(v.hasBreadth, true, 'a reader without the archive still sees the shape');
+  const moved = LIVE.companies.filter((c) => typeof c.pct === 'number');
+  assert.match(v.breadthCounted, new RegExp(`${moved.length}`),
+    'the denominator drawn is the number actually counted');
+  const up = moved.filter((c) => c.pct > 0).length;
+  assert.equal(v.breadthBars[0].count, String(up));
+  const total = v.breadthBars.reduce((n, b) => n + parseInt(b.width, 10), 0);
+  assert.ok(Math.abs(total - 100) <= 2, `bars sum to ${total}%`);
+});
+
+/* Two of the three pulse cells asserted things nothing measured: "Balanced
+   Institutional Flow" came from `investors.hasTypeBar`, which only says a
+   chart exists, and the commentary gave every move a cause — inflows for a
+   rise, profit-taking for a fall — from the sign of one percentage. */
+test('the pulse states what was measured and never why', () => {
+  const v = screen({ ...LIVE, breadth: { up: 4, down: 3, flat: 2, counted: 9, date: '2026-08-26' } });
+  assert.equal(v.pulseFlow, undefined, 'liquidity was never read from anything');
+  assert.equal(v.pulseScanner, undefined, 'the product does not pass on the whole market');
+  for (const t of [/inflow/i, /profit-taking/i, /institutional/i, /sentiment/i, /investors? (are|were)/i]) {
+    assert.doesNotMatch(v.pulseBody, t, `pulse commentary asserts a cause: ${t}`);
+  }
+  assert.match(v.pulseBody, /4 rose, 3 fell and 2 held, of 9 counted\./);
 });
 
 test('breadth from an archive that never counted it is absent, not zero', () => {

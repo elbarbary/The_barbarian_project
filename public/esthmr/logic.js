@@ -330,9 +330,12 @@ export class Component extends Base {
       secBelow:'below the sector on {key}',
       secRising:'rising', secFalling:'falling', secFlat:'flat', secUnknown:'unreadable',
       pulseTitle:'Today\'s Market Pulse',
-      pulseLeaderLabel:'Active leader',
-      pulseFlowLabel:'Session liquidity',
-      pulseScannerLabel:'Safety gates (Scanner)',
+      // 'Session liquidity' and 'Safety gates (Scanner)' were the other two
+      // cells. The first was filled from `investors.hasTypeBar`, which says a
+      // chart exists and nothing about liquidity; the second announced "No
+      // qualified setups (Silence)" — this publisher passing on every listed
+      // company at once, from a scanner that no longer exists.
+      pulseLeaderLabel:'Largest move today',
       // ── the heat map ──
       heatTitle:'Heat map',
       heatLead:'Every company sized by what the market says it is worth, coloured by how it moved today. Grouped by sector, because a red block is a different fact from a red company.',
@@ -624,9 +627,7 @@ export class Component extends Base {
       secBelow:'أدنى من القطاع في {key}',
       secRising:'صاعدة', secFalling:'هابطة', secFlat:'ثابتة', secUnknown:'غير مقروءة',
       pulseTitle:'نبض السوق اليوم في ثوانٍ',
-      pulseLeaderLabel:'أبرز التحركات',
-      pulseFlowLabel:'حركة السيولة وتوزيعها',
-      pulseScannerLabel:'معايير الأمان (السكانر)',
+      pulseLeaderLabel:'أكبر صعود اليوم',
       // ── الخريطة الحرارية ──
       heatTitle:'الخريطة الحرارية',
       heatLead:'كل شركة بحجم ما تقول السوق إنها تساويه، وبلون تحرّكها اليوم. مجمّعة بالقطاع، لأن قطاعاً أحمر غير شركة حمراء.',
@@ -1477,6 +1478,25 @@ export class Component extends Base {
     // CPME went at 7.07x its usual and Home — which had it eleventh — showed
     // nothing. Two screens telling a reader different things about the same
     // company, and neither of them wrong.
+    /* How widely the market moved, published if we have it and counted if we
+       do not.
+       `market-history.json` carries a breadth block, but a signed-out reader
+       gets the demo tree, which has none — so the one genuinely visual answer
+       on Home rendered for members and vanished for everybody meeting the
+       product for the first time. The companies are already loaded either way
+       and each carries the day's percentage, so the same three numbers can be
+       counted from them. `counted` travels with the result and is drawn, so
+       the denominator is never implied. */
+    const breadth = (() => {
+      const pub = D.breadth;
+      if (pub && typeof pub.counted === 'number' && pub.counted > 0) return pub;
+      const moved = (D.companies || []).filter((c) => typeof c.pct === 'number');
+      if (!moved.length) return null;
+      const up = moved.filter((c) => c.pct > 0).length;
+      const down = moved.filter((c) => c.pct < 0).length;
+      return { up, down, flat: moved.length - up - down, counted: moved.length, date: D.marketDate };
+    })();
+
     const busyAll = D.companies
       .filter((c) => typeof c.rv === 'number' && c.rv >= BUSY_AT)
       .sort((a, b) => b.rv - a.rv);
@@ -3132,42 +3152,47 @@ export class Component extends Base {
       })(),
       pulseTitle: L.pulseTitle,
       pulseDate: this.longDate(D.marketDate) || '',
+      /* What the session did, from the two figures that were actually
+         measured: the index level and the count of what moved with it.
+         This paragraph used to add a cause to every move. A rising index was
+         reported with "constructive institutional inflows across core
+         sectors", a falling one with "selective profit-taking across cyclical
+         names" — neither read from anything. The only input was the sign of
+         one percentage, and no document here records why anybody bought. The
+         reasons are gone; the numbers they were wrapped around are kept, and
+         breadth is added because it is the part an index cannot say. */
       pulseBody: (() => {
+        /* Two independent clauses, each written only if its own figures are
+           there. Joining them the other way round — the index sentence with
+           breadth appended — meant a market with no index level published
+           dropped the breadth sentence too, and the reader was told nothing
+           about a session both numbers described. */
+        const said = [];
         const mainIx = indices && indices[0];
-        const pctVal = mainIx ? parseFloat(mainIx.pct) : 0;
-        const pctStr = mainIx ? mainIx.pct : '0.0%';
-        if (ar) {
-          if (pctVal > 0.15) {
-            return `أغلقت البورصة المصرية على صعود بقيادة المؤشر الرئيسي (${pctStr})، مع تدفق سيولة إيجابية وارتفاع في معظم الأسهم القيادية.`;
-          } else if (pctVal < -0.15) {
-            return `شهدت البورصة المصرية جلسة هادئة مائلة للتراجع (${pctStr})، وسط عمليات جني أرباح وإعادة تمركز في بعض القطاعات.`;
-          }
-          return `اتسمت جلسة اليوم بالاستقرار والتوازن (${pctStr})، مع تقارب بين قوى الشراء والبيع وترقب من المتعاملين.`;
-        } else {
-          if (pctVal > 0.15) {
-            return `The Egyptian Exchange closed higher today led by the benchmark index (${pctStr}), with constructive institutional inflows across core sectors.`;
-          } else if (pctVal < -0.15) {
-            return `The Egyptian Exchange saw a mild consolidation session (${pctStr}) as participants engaged in selective profit-taking across cyclical names.`;
-          }
-          return `The market held steady today (${pctStr}) with balanced buying and selling pressures and selective single-stock interest.`;
+        if (mainIx) {
+          said.push(ar
+            ? `أغلق ${mainIx.label} عند ${mainIx.value} بتغير ${mainIx.pct}.`
+            : `${mainIx.label} closed at ${mainIx.value}, a change of ${mainIx.pct}.`);
         }
+        if (breadth) {
+          const [u, d, f, c] = [breadth.up, breadth.down, breadth.flat, breadth.counted]
+            .map((n) => this.num(n, 0));
+          said.push(ar
+            ? `صعد ${u} سهماً وتراجع ${d} وثبت ${f}، من ${c} سهماً محسوباً.`
+            : `${u} rose, ${d} fell and ${f} held, of ${c} counted.`);
+        }
+        return said.join(' ');
       })(),
+      /* The largest gain on the board, named as that and nothing more.
+         It is a fact about one day's percentage, not a shortlist and not a
+         judgement about the company — which is why it says "largest move
+         today" rather than anything that would read as a pick. */
       pulseLeader: (() => {
         const topGainers = (D.companies || []).filter((c) => typeof c.pct === 'number' && c.pct > 0).sort((a,b) => b.pct - a.pct);
         const top = topGainers[0];
-        if (!top) return ar ? 'لا صعود استثنائي' : 'No standout gainer';
+        if (!top) return ar ? 'لا صعود اليوم' : 'Nothing rose today';
         const name = this.nm(top.name) || top.ticker;
         return `${name} (${this.pct(top.pct)})`;
-      })(),
-      pulseFlow: (investors && investors.hasTypeBar)
-        ? (ar ? 'سيولة مؤسسية متوازنة' : 'Balanced Institutional Flow')
-        : (ar ? 'سيولة جلسة معتادة' : 'Regular Session Liquidity'),
-      pulseScanner: (() => {
-        const scr = D.opportunity || {};
-        const count = scr.qualified_count ?? 0;
-        return count > 0
-          ? (ar ? `${count} شركة استوفت الشروط` : `${count} qualified setup(s)`)
-          : (ar ? 'لا أسهم مؤهلة اليوم (مراقبة)' : 'No qualified setups (Silence)');
       })(),
       pulseExpanded: Boolean(st.pulseExpanded),
       togglePulse: () => this.setState({ pulseExpanded: !st.pulseExpanded }),
@@ -3263,28 +3288,29 @@ export class Component extends Base {
             .replace('{all}', String(busyAll.length))
         : '',
       hasBusyCut: busyAll.length > busy.length,
-      hasBreadth: Boolean(D.breadth),
-      breadthBars: D.breadth ? [
+      hasBreadth: Boolean(breadth),
+      breadthBars: breadth ? [
         // `ink` travels with the band because the flat band is a pale rule and
         // the other two are saturated: one shared text colour is unreadable on
         // one of them whichever is chosen.
-        { n: D.breadth.up, color: 'var(--up)', label: L.rose, ink: '#fff' },
-        { n: D.breadth.down, color: 'var(--down)', label: L.fell, ink: '#fff' },
-        { n: D.breadth.flat, color: 'var(--rule2)', label: L.flat, ink: 'var(--t2)' },
+        { n: breadth.up, color: 'var(--up)', label: L.rose, ink: '#fff' },
+        { n: breadth.down, color: 'var(--down)', label: L.fell, ink: '#fff' },
+        { n: breadth.flat, color: 'var(--rule2)', label: L.flat, ink: 'var(--t2)' },
       ].map((b) => Object.assign({}, b, {
-        width: Math.round((b.n / Math.max(1, D.breadth.counted)) * 100) + '%',
+        width: Math.round((b.n / Math.max(1, breadth.counted)) * 100) + '%',
         // The count and its share travel with the band so the bar can be read
         // without the sentence under it. A stacked bar with no numbers on it
         // is a decoration.
         count: this.num(b.n, 0),
-        pct: Math.round((b.n / Math.max(1, D.breadth.counted)) * 100) + '%',
+        pct: Math.round((b.n / Math.max(1, breadth.counted)) * 100) + '%',
       })) : [],
-      breadthCounted: D.breadth
-        ? L.breadthOf.replace('{n}', this.num(D.breadth.counted, 0)) : '',
-      breadthLine: D.breadth ? L.breadthLine
-        .replace('{up}', D.breadth.up).replace('{down}', D.breadth.down)
-        .replace('{flat}', D.breadth.flat).replace('{counted}', D.breadth.counted)
-        .replace('{date}', this.longDate(D.breadth.date)) : '',
+      breadthCounted: breadth
+        ? L.breadthOf.replace('{n}', this.num(breadth.counted, 0)) : '',
+      // `breadthLine` used to be drawn under the bar. It says in a sentence
+      // what the bar says in a shape, and it now reads once, inside the
+      // pulse commentary, where somebody who wanted the words has asked for
+      // them. Computing it here and binding it nowhere is how a figure goes
+      // stale unnoticed, so it is gone rather than merely unused.
       // The sector cards carry a fuller read and a median per metric when the
       // per-sector document came back; a card without one simply shows less.
       sectorsHaveDetail: sectorCards.some((c) => (c.medians || []).length),

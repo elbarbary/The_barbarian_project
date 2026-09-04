@@ -52,49 +52,6 @@
   <!-- ══ HOME ══ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
-      <!-- ── 3-Second Market Pulse Card ── -->
-      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px;position:relative;overflow:hidden">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-          <div style="display:flex;align-items:baseline;gap:10px">
-            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
-            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ pulseDate }}</span>
-          </div>
-          <div style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:{{ pulseTone.bg }};color:{{ pulseTone.fg }};border:1px solid {{ pulseTone.border }};font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:600">
-            <span style="font-size:14px;line-height:1">{{ pulseTone.icon }}</span>
-            <span>{{ pulseTone.badge }}</span>
-          </div>
-        </div>
-
-        <!-- Visuals First: 3 Key Metrics directly visible -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px">
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
-            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseLeader }}</div>
-          </div>
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseFlowLabel }}</div>
-            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseFlow }}</div>
-          </div>
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseScannerLabel }}</div>
-            <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseScanner }}</div>
-          </div>
-        </div>
-
-        <!-- Progressive Disclosure: Text commentary expands on request -->
-        <div style="margin-top:14px;display:flex;align-items:center;justify-content:flex-start">
-          <div onClick="{{ togglePulse }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
-            <span>{{ pulseExpandLabel }}</span>
-          </div>
-        </div>
-
-        <sc-if value="{{ pulseExpanded }}">
-          <div style="font-size:14px;line-height:1.65;color:var(--t2);margin-top:12px;padding:13px 16px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);text-wrap:pretty;max-width:860px">
-            {{ pulseBody }}
-          </div>
-        </sc-if>
-      </section>
-
       <!-- The three index levels first and biggest. They were under a 50px
            page title and a session note, at 21-32px — the smallest headline
            figures on a screen whose whole subject is where the market closed,
@@ -119,6 +76,68 @@
 </sc-if>
 
       </div>
+
+      <!-- ── The session in one card ──
+           Three text cells sat here, under a comment that called them "Visuals
+           First": a leader, a "session liquidity" reading filled from whether a
+           chart existed, and a scanner verdict announcing that no company had
+           qualified today. Breadth replaces them. It is measured rather than
+           inferred, it is a shape rather than a sentence, and it answers the
+           one thing an index cannot — an average says what the market did, this
+           says how widely — so it came up from the foot of the page to be the
+           card. The indices now sit above it, which is where the note under
+           them always said they belonged. -->
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
+            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ pulseDate }}</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:{{ pulseTone.bg }};color:{{ pulseTone.fg }};border:1px solid {{ pulseTone.border }};font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12.5px;font-weight:600">
+            <span style="font-size:14px;line-height:1">{{ pulseTone.icon }}</span>
+            <span>{{ pulseTone.badge }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasBreadth }}">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:18px">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ breadthCounted }}</div>
+          </div>
+          <!-- One whole, divided, with the numbers ON it. A stacked bar with no
+               numbers on it is a decoration. -->
+          <div style="display:flex;gap:3px;margin-top:11px;border-radius:8px;overflow:hidden">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <div style="height:34px;width:{{ b.width }};background:{{ b.color }};display:flex;align-items:center;justify-content:center;min-width:0">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ b.ink }};opacity:.95">{{ b.count }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:11px">
+            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
+              <span style="display:inline-flex;align-items:center;gap:7px">
+                <span style="width:9px;height:9px;border-radius:3px;background:{{ b.color }}"></span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ b.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint)">{{ b.pct }}</span>
+              </span>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--edgeIn)">
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ pulseLeader }}</div>
+          <div onClick="{{ togglePulse }}" style="cursor:pointer;margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+            <span>{{ pulseExpandLabel }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ pulseExpanded }}">
+          <div style="font-size:14px;line-height:1.65;color:var(--t2);margin-top:12px;padding:13px 16px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);text-wrap:pretty;max-width:860px">
+            {{ pulseBody }}
+          </div>
+        </sc-if>
+      </section>
 
       <!-- Who traded it, beside where it closed. An index says what the
            market did; this says who did it, and the two belong on the same
@@ -318,38 +337,6 @@
             </span>
           </div>
         </section>
-      </sc-if>
-
-      <!-- An index says what the market did on average; this says how widely,
-           which is the question an average cannot answer. Published in
-           market-history.json all along and never read. -->
-      <sc-if value="{{ hasBreadth }}">
-        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.breadthWord }}</div>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ breadthCounted }}</div>
-          </div>
-          <!-- One whole, divided, with the numbers ON it. A 10px band and a
-               sentence underneath made the reader hold three figures in their
-               head to see a shape that is right there. -->
-          <div style="display:flex;gap:3px;margin-top:13px;border-radius:8px;overflow:hidden">
-            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
-              <div style="height:34px;width:{{ b.width }};background:{{ b.color }};display:flex;align-items:center;justify-content:center;min-width:0">
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ b.ink }};opacity:.95">{{ b.count }}</span>
-              </div>
-            </sc-for>
-          </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:11px">
-            <sc-for list="{{ breadthBars }}" as="b" hint-placeholder-count="3">
-              <span style="display:inline-flex;align-items:center;gap:7px">
-                <span style="width:9px;height:9px;border-radius:3px;background:{{ b.color }}"></span>
-                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ b.label }}</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint)">{{ b.pct }}</span>
-              </span>
-            </sc-for>
-          </div>
-          <div style="font-size:12.5px;color:var(--faint);margin-top:11px;line-height:1.55;text-wrap:pretty">{{ breadthLine }}</div>
-        </div>
       </sc-if>
 
       <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
