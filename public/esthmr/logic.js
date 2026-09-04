@@ -276,6 +276,9 @@ export class Component extends Base {
       sessionHeld:'Session in progress — prices not final, captured {at}',
       investorsTitle:'Who is buying', investorsLead:'The exchange\u2019s own split of everything traded, by who traded it.',
       investorsShare:'Share of all value traded', investorsNet:'Bought less sold',
+      investorsBought:'Bought', investorsSold:'Sold',
+      investorsOfBuying:'{n} of all buying', investorsOfSelling:'{n} of all selling',
+      investorsSides:'The exchange states each side separately, so each is shown against its own total. Buying and selling are not two halves of one bar: every pound bought is a pound sold, and the shares below answer who was on each side, not which side was larger.',
       investorsWho:'Who traded it', investorsTypeSplit:'Institutions against individuals',
       investorsOpen:'The full split',
       investorsTable:'By investor type', investorsType:'Type',
@@ -372,15 +375,20 @@ export class Component extends Base {
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
       ratioFilter:'Filter on a filed ratio', ratioValue:'value', ratioAnd:'and', ratioClear:'Clear',
-      screenTitle:'Four tests, as filed', screenCount:'{n} companies pass all four',
+      screenTitle:'Four lines, as filed',
+      screenLead:'Four lines drawn on the exchange\u2019s own medians, and how much of the market sits inside each. Every line is read from the market; none is chosen here.',
+      screenUniverse:'{n} companies on file',
+      screenOf:'{n} of {of}',
+      screenSilent:'{n} published no figure to test',
+      screenQuestion:'Sitting inside a line is a question, not an answer: it says a figure falls on one side of the market\u2019s middle, and nothing about whether that is good. No company is named here. The lines are applied on the table, where they are the reader\u2019s to move.',
       screenPe:'Price-to-earnings at or below the market median, {v} — the median of every company that published one.',
       screenVol:'Thirty-day average volume at or above the market median, {v} shares — a figure a reader could act on without moving it.',
       screenCash:'Cash conversion of 1.0 or better where it is published: the company collected at least as much cash as it reported in profit.',
       screenCashNone:'Cash conversion is not published for any company in this set, so that test could not be applied.',
       screenActionNone:'The calendar has not loaded, so no expected filing could be excluded.',
       screenAction:'No filing expected in the calendar window — a price is hard to read against a rights issue or a distribution nobody has seen yet.',
-      screenMore:'and {n} more',
-      screenOpen:'Open the table with these tests',
+      screenOpen:'Put the first line on the table',
+      screenBeside:'The same kind of question, asked of the whole market instead of one company. A crossing asks whether one company turned up in more than one place inside a few days; these four lines ask where the exchange\u2019s own middle falls, and how much of the market sits either side of it. Neither answers whether that is good.',
       screenNoBack:'No past return is shown for this. Testing it against history would need the exchange\u2019s rankings as they stood on each past date, and reconstructing them from today\u2019s figures would quietly drop the companies that have since delisted — a backtest that flatters itself. The tests are stated so a reader can judge them directly.',
       peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
@@ -541,6 +549,9 @@ export class Component extends Base {
       sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
       investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
       investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
+      investorsBought:'اشترت', investorsSold:'باعت',
+      investorsOfBuying:'{n} من إجمالي الشراء', investorsOfSelling:'{n} من إجمالي البيع',
+      investorsSides:'تنشر البورصة كل جانب على حدة، فيُعرض كل جانب منسوباً إلى إجماليه هو. الشراء والبيع ليسا نصفَي شريط واحد: كل جنيه اشتراه أحدٌ باعه آخر، والنسب أدناه تجيب عن مَن كان في كل جانب، لا عن أي الجانبين كان أكبر.',
       investorsWho:'من تداولها', investorsTypeSplit:'المؤسسات مقابل الأفراد',
       investorsOpen:'التقسيم الكامل',
       investorsTable:'بحسب نوع المستثمر', investorsType:'النوع',
@@ -628,15 +639,20 @@ export class Component extends Base {
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
       ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
-      screenTitle:'أربعة اختبارات على الأرقام كما وردت', screenCount:'{n} شركة تجتاز الأربعة',
+      screenTitle:'أربعة خطوط على الأرقام كما وردت',
+      screenLead:'أربعة خطوط مرسومة على وسائط البورصة نفسها، وكم من السوق يقع داخل كل خط. كل خط مقروء من السوق، ولم يُختر أي منها هنا.',
+      screenUniverse:'{n} شركة في السجل',
+      screenOf:'{n} من {of}',
+      screenSilent:'{n} لم تُفصح عن رقم يُختبر',
+      screenQuestion:'الوقوع داخل خط سؤال وليس حكمًا: يقول إن رقمًا يقع على جانب من وسط السوق، ولا يقول إن ذلك جيد. لا تُسمّى هنا أي شركة. وتُطبّق الخطوط على الجدول، حيث يملك القارئ تحريكها.',
       screenPe:'مضاعف ربحية عند وسيط السوق أو أقل، {v} — وهو وسيط كل شركة أفصحت عنه.',
       screenVol:'متوسط حجم تداول ثلاثين يوماً عند وسيط السوق أو أعلى، {v} سهم — حجم يمكن التعامل معه دون تحريك السعر.',
       screenCash:'تحويل نقدي عند ١٫٠ أو أفضل حيثما أُفصح عنه: حصّلت الشركة نقداً لا يقل عمّا أعلنته ربحاً.',
       screenCashNone:'التحويل النقدي غير مُفصح عنه لأي شركة في هذه المجموعة، لذا تعذّر تطبيق هذا الاختبار.',
       screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
       screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
-      screenMore:'و{n} أخرى',
-      screenOpen:'افتح الجدول بهذه الاختبارات',
+      screenOpen:'ضع الخط الأول على الجدول',
+      screenBeside:'النوع نفسه من السؤال، مطروحاً على السوق كلها بدل شركة بعينها. التقاطع يسأل إن كانت شركة واحدة ظهرت في أكثر من مكان خلال أيام قليلة؛ وهذه الخطوط الأربعة تسأل أين يقع وسط البورصة نفسها، وكم من السوق يقع على كل جانب منه. ولا يجيب أيٌّ منهما عن كون ذلك جيداً.',
       screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
@@ -1756,6 +1772,15 @@ export class Component extends Base {
           net: this.signed(typeof p.net === 'number' ? p.net / 1e6 : null, 1),
           netColor: this.dcol(p.net),
           buy: money(p.buy), sell: money(p.sell),
+          // Each side against its OWN total, which is the exchange's own pair
+          // of percentages — not one shared axis. Bonds carry 69bn of buying
+          // against 10bn for shares alone, so a single scale would draw the
+          // equity market as a hairline; and bills sold 105bn against 39bn
+          // bought, so a figure read off the wrong side is both very wrong and
+          // entirely plausible-looking.
+          buyShare: L.investorsOfBuying.replace('{n}', pct(p.buyPercent)),
+          sellShare: L.investorsOfSelling.replace('{n}', pct(p.sellPercent)),
+          hasSides: typeof p.buy === 'number' || typeof p.sell === 'number',
           // Net against the widest net on the row, so the three are comparable
           // at a glance and a net buyer reads differently from a net seller.
           bar: Math.max(2, (Math.abs(p.net || 0) / widest) * 100).toFixed(1) + '%',
@@ -2687,39 +2712,53 @@ export class Component extends Base {
         const pe = mid(all.map((c) => (typeof c.pe === 'number' && c.pe > 0 ? c.pe : null)));
         const vol = mid(all.map((c) => c.avgVolume));
         if (pe === null || vol === null) return null;
-        // The calendar arrives on its own fetch, after the directory. Until it
-        // does, the corporate-action test has nothing to exclude — which is
-        // stated on the card rather than left to look like a clean pass.
         const cal = D.expectedEvents || [];
         const due = new Set(cal.map((e) => e.ticker).filter(Boolean));
         const cash = (c) => (c.ratios || {}).cash_conversion;
-        // Cash conversion is published for some companies and not others, and
-        // a test nothing can be measured against is not a test. It is applied
-        // where it exists and named as unavailable where it does not, rather
-        // than quietly passing everyone.
-        const measured = all.filter((c) => typeof cash(c) === 'number').length;
-        const passed = all.filter((c) =>
-          typeof c.pe === 'number' && c.pe > 0 && c.pe <= pe
-          && typeof c.avgVolume === 'number' && c.avgVolume >= vol
-          && (typeof cash(c) !== 'number' || cash(c) >= 1)
-          && !due.has(c.ticker));
+
+        // EACH LINE AGAINST THE COMPANIES THAT CAN ANSWER IT.
+        //
+        // One shared denominator of 284 was the dishonest version: only 170
+        // companies have published a price-to-earnings figure at all, so
+        // "at or below the median" drew at 30% of the exchange beside a
+        // sentence calling it the median. A median of the companies that
+        // published one is 50% of the companies that published one, and the
+        // 114 that published nothing are the other half of what this
+        // computation knows — named here rather than folded into the bar.
+        const havePe = all.filter((c) => typeof c.pe === 'number' && c.pe > 0);
+        const haveVol = all.filter((c) => typeof c.avgVolume === 'number');
+        const haveCash = all.filter((c) => typeof cash(c) === 'number');
+        const line = (n, text, inside, base) => ({
+          n, text,
+          of: L.screenOf.replace('{n}', this.num(inside, 0)).replace('{of}', this.num(base, 0)),
+          width: base ? ((inside / base) * 100).toFixed(1) + '%' : '0%',
+          silent: base < all.length
+            ? L.screenSilent.replace('{n}', this.num(all.length - base, 0)) : '',
+          hasSilent: base < all.length,
+        });
         return {
-          count: String(passed.length),
+          universe: L.screenUniverse.replace('{n}', this.num(all.length, 0)),
           tests: [
-            { n: '1', text: L.screenPe.replace('{v}', pe.toFixed(1)) },
-            { n: '2', text: L.screenVol.replace('{v}', this.num(vol, 0)) },
-            { n: '3', text: measured ? L.screenCash : L.screenCashNone },
-            { n: '4', text: cal.length ? L.screenAction : L.screenActionNone },
+            line('1', L.screenPe.replace('{v}', pe.toFixed(1)),
+                 havePe.filter((c) => c.pe <= pe).length, havePe.length),
+            line('2', L.screenVol.replace('{v}', this.num(vol, 0)),
+                 haveVol.filter((c) => c.avgVolume >= vol).length, haveVol.length),
+            line('3', haveCash.length ? L.screenCash : L.screenCashNone,
+                 haveCash.filter((c) => cash(c) >= 1).length, haveCash.length),
+            line('4', cal.length ? L.screenAction : L.screenActionNone,
+                 all.filter((c) => !due.has(c.ticker)).length, all.length),
           ],
-          names: passed.slice(0, 8).map((c) => ({
-            ticker: c.ticker, name: this.nm(c.name),
-            pe: typeof c.pe === 'number' ? c.pe.toFixed(1) : '—',
-            go: () => this.setState({ screen: 'company', ticker: c.ticker }),
-          })),
-          more: passed.length > 8 ? L.screenMore.replace('{n}', String(passed.length - 8)) : '',
-          // The same tests, on the table, where they can be changed.
+          // The same line, on the table, where the reader owns it.
+          //
+          // Full precision, not the rounded figure the card prints: the card
+          // said 16.7 and the filter asked for 16.7, which quietly dropped the
+          // company sitting at 16.72. And the sector chip and the search box
+          // are cleared, or the filter arrives on top of whatever the reader
+          // had narrowed to and returns a number that matches nothing said
+          // here.
           open: () => this.setState({ screen: 'market', sort: 'pe', dir: 1,
-            rq: { m: 'pe', op: 'lt', a: pe.toFixed(1), b: '' } }),
+            sector: 'All', q: '',
+            rq: { m: 'pe', op: 'lt', a: String(pe), b: '' } }),
         };
       })(),
       // Home's headline and its pill said "The close — official close from

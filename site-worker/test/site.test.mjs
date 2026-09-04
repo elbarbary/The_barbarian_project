@@ -356,6 +356,98 @@ test('§8 every borrowings pattern the pipeline emits has words to print', () =>
   assert.equal(unknown.debt.patternLine, '');
 });
 
+test('no string the template prints raw still has its hole in it', async () => {
+  // `{{ L.screenCount }}` was bound straight into the page and the string
+  // behind it read "{n} companies pass all four". The builder computed the
+  // number, bound it nowhere, and every reader saw a literal {n} — in both
+  // languages, for as long as the card has existed.
+  //
+  // The existing "every binding resolves to something" test cannot see this:
+  // the binding resolved perfectly, and the hole was inside the string it
+  // resolved to. This reads the other way round — every string the template
+  // prints unsubstituted must have nothing left to substitute.
+  //
+  // Collected rather than asserted in the loop, because throwing on the first
+  // hit would report English and never reach Arabic, and §8.8 is explicit that
+  // the translated strings count.
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const bound = new Set([...tpl.matchAll(/\{\{\s*L\.(\w+)\s*\}\}/g)].map((m) => m[1]));
+  assert.ok(bound.size > 100, `only ${bound.size} bindings found — the scan is broken`);
+  const leaks = [];
+  for (const lang of ['en', 'ar']) {
+    const { L } = screen(LIVE, lang);
+    for (const key of bound) {
+      if (/\{[a-z]+\}/.test(String(L[key] ?? ''))) {
+        leaks.push(`${lang}: L.${key} is printed raw and still reads "${L[key]}"`);
+      }
+    }
+  }
+  assert.deepEqual(leaks, [], leaks.join(' | '));
+});
+
+test('§8 the four lines cannot grow a shortlist again', () => {
+  // The shape, not the vocabulary. The card that read as a recommendation
+  // used no banned word: it named eight securities the publisher had selected
+  // and printed the selecting metric beside each. The DIRECTIVE regex looks
+  // for instructions and found nothing, correctly, because nobody was being
+  // instructed — they were being pointed at.
+  //
+  // So this asserts the surface is gone by identity, and cannot be restored by
+  // binding what the builder happens to expose. Without the second half, the
+  // cheapest way to make the placeholder test above go green is to bind the
+  // count — which finishes the sentence "17 companies pass all four" over the
+  // same pills, and is worse than the bug it fixes.
+  for (const lang of ['en', 'ar']) {
+    const { L } = screen(LIVE, lang);
+    assert.equal(L.screenCount, undefined, `${lang} still carries screenCount`);
+    assert.equal(L.screenMore, undefined, `${lang} still carries screenMore`);
+  }
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    RATIOCO('AAA', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+    RATIOCO('BBB', 9, { avgVolume: 1e6, ratios: { cash_conversion: 1.1 } }),
+  ] });
+  c.state.screen = 'home';
+  const v = c.renderVals();
+  assert.ok(v.screen, 'the four lines did not build');
+  assert.equal(v.screen.names, undefined);
+  assert.equal(v.screen.count, undefined);
+  assert.equal(v.screen.more, undefined);
+});
+
+test('§8 the template binds no per-name list out of the four lines', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  for (const gone of ['screen.names', 'screen.count', 'screen.more', 'L.screenCount', 'L.screenMore']) {
+    assert.ok(!tpl.includes(`{{ ${gone} }}`), `the template binds ${gone} again`);
+  }
+  // And the replacement is actually drawn, so this cannot pass by the card
+  // having been deleted outright.
+  assert.match(tpl, /\{\{\s*t\.width\s*\}\}/, 'the distribution bars are gone');
+  assert.match(tpl, /\{\{\s*screen\.universe\s*\}\}/, 'the universe count is gone');
+});
+
+test('investors shows both sides, each against its own total', () => {
+  // `buy` and `sell` were computed for every party and bound nowhere, so the
+  // screen showed a share and a net and never the two figures the net comes
+  // out of. A net of +3.8bn is a different fact when it is 119bn bought
+  // against 115bn sold than when it is 4bn against 0.2bn.
+  const v = screen(LIVE);
+  if (!v.investors) return; // the fixture may carry no investors document
+  for (const p of v.investors.parties) {
+    assert.ok('buy' in p && 'sell' in p, 'a party carries no sides');
+    assert.ok(typeof p.buyShare === 'string' && p.buyShare.length,
+      'the buying share is not stated');
+    assert.ok(typeof p.sellShare === 'string' && p.sellShare.length,
+      'the selling share is not stated');
+    // Each side against its OWN total. Bills sold 105bn against 39bn bought,
+    // so a sell rendered on the buying scale is both very wrong and entirely
+    // plausible-looking.
+    assert.notEqual(p.buyShare, p.sellShare === p.buyShare ? 'x' : p.buyShare);
+  }
+});
+
 test('§8 the non-licence line is rendered, in both languages', async () => {
   for (const lang of ['en', 'ar']) {
     const v = screen(LIVE, lang);
@@ -1601,7 +1693,7 @@ test('the filings list takes the same company test', () => {
   assert.equal(c.renderVals().hasFiledFilter, true);
 });
 
-test('the four tests are read off the market, not chosen, and rank nobody', () => {
+test('the four lines are read off the market, and name nobody', () => {
   const companies = [
     RATIOCO('CHEAP', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
     RATIOCO('THIN', 4, { avgVolume: 1, ratios: { cash_conversion: 1.4 } }),
@@ -1614,17 +1706,61 @@ test('the four tests are read off the market, not chosen, and rank nobody', () =
   c.state.screen = 'home';
   const v = c.renderVals();
   assert.ok(v.screen, 'the screen did not build');
-  // Thin volume, poor cash conversion, a high multiple and a pending filing
-  // each knock one out; only CHEAP passes all four.
-  assert.deepEqual(v.screen.names.map((n) => n.ticker), ['CHEAP']);
-  assert.equal(v.screen.count, '1');
-  // The thresholds are the market's own medians, quoted in the test text.
-  assert.match(v.screen.tests[0].text, /market median, 4\.0/);
+
+  // §8 — THE SHAPE, NOT THE VOCABULARY.
+  //
+  // This card used to end in eight ticker pills with a price-to-earnings
+  // apiece, under "{n} companies pass all four". Every threshold was read from
+  // the market and the prose refused to claim a return, and it still read as an
+  // unlicensed publisher's shortlist, because the shape was a shortlist. These
+  // two assertions are the guard: the builder must expose no per-name list and
+  // no pass count, so the surface cannot be rebuilt by binding what is there.
+  assert.equal(v.screen.names, undefined, 'the pass-list is back');
+  assert.equal(v.screen.count, undefined, 'the pass-count is back');
+
+  // What replaced it: each line against the companies that can answer it.
+  // Four of the five sit inside every line here — one thin, one poor on cash,
+  // one dear, one with a filing due — so each bar reads 4 of 5, and the
+  // denominator is the testable set rather than the whole exchange.
   assert.equal(v.screen.tests.length, 4);
-  // §8: it names tests, never merit, and claims no return.
-  const prose = v.screen.tests.map((t) => t.text).join(' ') + ' ' + v.L.screenTitle + ' ' + v.L.screenNoBack;
+  for (const t of v.screen.tests) {
+    assert.match(t.of, /\b4\b.*\b5\b/, `bar reads "${t.of}"`);
+    assert.equal(t.width, '80.0%');
+  }
+  // The thresholds are the market's own medians, quoted in the line's text.
+  assert.match(v.screen.tests[0].text, /market median, 4\.0/);
+  assert.equal(v.screen.universe, v.L.screenUniverse.replace('{n}', '5'));
+
+  // §8: it names lines, never merit, and claims no return.
+  const prose = v.screen.tests.map((t) => t.text).join(' ')
+    + ' ' + v.L.screenTitle + ' ' + v.L.screenLead
+    + ' ' + v.L.screenQuestion + ' ' + v.L.screenNoBack;
   assert.doesNotMatch(prose, /\b(buy|sell|hold|cheap|undervalued|bargain|opportunity|recommend)\b/i);
   assert.match(v.L.screenNoBack, /No past return is shown/);
+});
+
+test('the line handed to the table is the line the card printed', () => {
+  // The card printed a median rounded to one decimal and the filter asked for
+  // the rounded figure, so a company sitting between the two — 16.72 against a
+  // printed 16.7 — was inside the bar and outside the table. And the filter
+  // arrived on top of whatever sector chip the reader already had, returning a
+  // count that matched nothing the card said.
+  const companies = [
+    RATIOCO('AAA', 4.44, { avgVolume: 2e6 }),
+    RATIOCO('BBB', 16.72, { avgVolume: 2e6 }),
+    RATIOCO('CCC', 40, { avgVolume: 2e6 }),
+  ];
+  const c = fresh();
+  c.setData({ ...LIVE, companies });
+  c.state.screen = 'home';
+  c.state.sector = 'Banks';
+  c.state.q = 'something';
+  c.renderVals().screen.open();
+  assert.equal(c.state.screen, 'market');
+  assert.equal(c.state.sector, 'All', 'the sector chip was left on');
+  assert.equal(c.state.q, '', 'the search box was left filled');
+  // Full precision, not the printed rounding.
+  assert.equal(c.state.rq.a, String(16.72));
 });
 
 test('home offers a way into the search', () => {
