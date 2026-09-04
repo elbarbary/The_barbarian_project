@@ -1148,8 +1148,8 @@
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ co.sector }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ co.exchange }}</span>
             </div>
-            <h1 style="font-family:'Bricolage Grotesque',serif;font-size:56px;font-weight:600;letter-spacing:-.045em;line-height:1;margin:14px 0 0">{{ co.nameEn }}</h1>
-            <div style="font-family:'IBM Plex Sans Arabic',sans-serif;font-size:26px;color:var(--t2);margin-top:8px;width:fit-content;max-width:100%" dir="rtl">{{ co.nameAr }}</div>
+            <h1 style="font-family:{{ co.primaryFont }};font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:14px 0 0">{{ co.primaryName }}</h1>
+            <div style="font-size:clamp(16px,2vw,22px);color:var(--t2);margin-top:8px">{{ co.secondaryName }}</div>
           </div>
           <div style="text-align:end;padding:16px 20px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.lastClose }}</div>
