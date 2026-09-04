@@ -556,6 +556,88 @@ async function api(request, env, url) {
     }, manifest ? 200 : 503, { 'cache-control': 'no-store' });
   }
 
+  /* The outlet's picture, fetched by this site rather than by the reader.
+   *
+   * News thumbnails were hotlinked straight from the publisher, so a picture
+   * appeared only if the READER's own network could reach that publisher's
+   * host. Two of the five outlets we carry — Al Borsa and Hapi, 266 of 400
+   * items — answer on Cloudflare addresses (188.114.96.7, 188.114.97.7) that
+   * some routes cannot reach at all. From such a network the request does not
+   * fail, it HANGS: measured at fifteen seconds with no response, so the
+   * `onerror` that hides a broken picture never fires in time and the frame
+   * sits empty. Two thirds of the news list, for anyone on those routes.
+   *
+   * Fetching it here makes the picture depend on a host the reader has already
+   * reached — this one — and lets the edge cache each image once for everyone
+   * instead of every reader pulling from the outlet.
+   *
+   * `no-referrer` on the tag stopped the outlet learning which story was being
+   * read; that property is kept, because the fetch below sends no referrer
+   * either.
+   */
+  if (path === '/img') {
+    let target;
+    try {
+      target = new URL(url.searchParams.get('u') || '');
+    } catch {
+      return new Response('bad url', { status: 400 });
+    }
+    if (target.protocol !== 'https:' || !imageHostAllowed(target.hostname)) {
+      return new Response('host not carried', { status: 403 });
+    }
+
+    /* Redirects are followed by hand, one hop at a time, with the allowlist
+       applied to every hop.
+       `redirect: 'follow'` checks the host you asked for and nothing after it:
+       a carried outlet answering 302 to anywhere would have this origin serve
+       that instead, on this account's bandwidth. Two hops is more than any of
+       these outlets uses and still terminates. */
+    let upstream;
+    let next = target;
+    try {
+      for (let hop = 0; ; hop += 1) {
+        upstream = await fetch(next.toString(), {
+          headers: { 'user-agent': IMAGE_UA, accept: 'image/*,*/*;q=0.8' },
+          redirect: 'manual',
+          cf: { cacheEverything: true, cacheTtl: 604800 },
+        });
+        if (![301, 302, 303, 307, 308].includes(upstream.status)) break;
+        if (hop >= 2) return new Response('too many redirects', { status: 502 });
+        let moved;
+        try {
+          moved = new URL(upstream.headers.get('location') || '', next);
+        } catch {
+          return new Response('bad redirect', { status: 502 });
+        }
+        if (moved.protocol !== 'https:' || !imageHostAllowed(moved.hostname)) {
+          return new Response('redirected off the allowlist', { status: 403 });
+        }
+        next = moved;
+      }
+    } catch {
+      return new Response('upstream', { status: 502 });
+    }
+
+    const type = upstream.headers.get('content-type') || '';
+    /* Anything that is not an image is refused rather than passed through.
+       Without this the route would serve another site's HTML from this origin,
+       which is a redirect the address bar does not show. */
+    if (!upstream.ok || !type.toLowerCase().startsWith('image/')) {
+      return new Response('not an image', { status: 502 });
+    }
+
+    const headers = new Headers({
+      'content-type': type,
+      // A published article's picture does not change, which is what makes a
+      // long immutable cache correct here rather than merely convenient.
+      'cache-control': 'public, max-age=604800, immutable',
+      'x-content-type-options': 'nosniff',
+    });
+    const length = upstream.headers.get('content-length');
+    if (length) headers.set('content-length', length);
+    return new Response(upstream.body, { status: 200, headers });
+  }
+
   if (path === '/auth/me') {
     const who = await session(request, env);
     return who ? json({ email: who.e }) : json({ error: 'signed out' }, 401);
@@ -683,6 +765,36 @@ async function api(request, env, url) {
  * which is what keeps /favicon.svg and the touch icon — shared with the rest
  * of the site and living at its root — from 404ing on this host alone.
  */
+/* The outlets whose pictures this site will fetch on a reader's behalf.
+ *
+ * An allowlist rather than "any image URL", because the route below fetches
+ * whatever it is handed: without this it is an open proxy anyone can point at
+ * any host, serving someone else's bytes from this origin and on this
+ * account's bandwidth. A new outlet in the news pipeline needs a line here, and
+ * until it gets one its pictures simply do not show — which is the safe way
+ * round.
+ */
+const IMAGE_HOSTS = new Set([
+  'alborsaanews.com', 'www.alborsaanews.com', 'images.alborsaanews.com',
+  'hapijournal.com', 'www.hapijournal.com',
+  'almalnews.com', 'www.almalnews.com', 'media.almalnews.com',
+  'arabfinance.com', 'www.arabfinance.com',
+]);
+
+/** Is this a host whose pictures we carry? */
+function imageHostAllowed(hostname) {
+  const host = String(hostname || '').toLowerCase();
+  if (IMAGE_HOSTS.has(host)) return true;
+  // Several of these outlets serve their media through Jetpack's CDN, which
+  // answers on a small numbered set of hosts rather than one.
+  return /^i[0-3]\.wp\.com$/.test(host);
+}
+
+const IMAGE_UA = (
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 '
+  + '(KHTML, like Gecko) Chrome/140.0 Safari/537.36'
+);
+
 const ESTHMR_HOSTS = new Set(['esthmr.com', 'www.esthmr.com']);
 // '/robots.txt' is root-only by specification: there is no such thing as a
 // robots file for a path prefix. Without it here, esthmr.com asks the asset

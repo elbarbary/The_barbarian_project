@@ -746,6 +746,22 @@ export class Component extends Base {
   dcol(v) { if (!v) return 'var(--faint)'; return v > 0 ? 'var(--up)' : 'var(--down)'; }
   fold(s) { return (s||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[\u064B-\u0652\u0670\u0640]/g,''); }
   nm(o) { return this.state.lang === 'ar' ? (o.ar || o.en) : o.en; }
+  /** An outlet's picture, asked of this site rather than of the outlet.
+   *
+   * Hotlinking made a thumbnail conditional on the READER reaching the
+   * publisher's host. Al Borsa and Hapi — 266 of the 400 items — sit on
+   * Cloudflare addresses some routes cannot reach, and the request hangs for
+   * fifteen seconds rather than failing, so `onerror` cannot even hide the
+   * frame. The /esthmr/api/img route fetches it instead, from a host the
+   * reader has plainly reached, and the edge caches it once for everybody.
+   * A host that route does not carry answers 403, which fires `onerror`
+   * immediately and leaves the frame the design drew.
+   */
+  imageSrc(raw) {
+    if (typeof raw !== 'string' || !raw) return '';
+    if (!/^https:\/\//i.test(raw)) return raw;
+    return '/esthmr/api/img?u=' + encodeURIComponent(raw);
+  }
   /** The eight ratios, each with its own history and its sector beside it.
    *
    * This is the whole interpretive layer the pipeline publishes for 258
@@ -1574,7 +1590,7 @@ export class Component extends Base {
       // the two screens side by side agree on how a date looks in Arabic.
       when: (f.date ? this.dayLabel(f.date) : '') + (f.time ? ' · ' + f.time : ''),
       becauseDate: f.evidenceDate && f.evidenceDate !== f.date ? this.dayLabel(f.evidenceDate) : '',
-      because: f.because || '', image: f.image || '',
+      because: f.because || '', image: this.imageSrc(f.image),
       hasImage: Boolean(f.image),
       loadingAttr: idx < 4 ? 'eager' : 'lazy',
       priorityAttr: idx < 4 ? 'high' : 'auto',

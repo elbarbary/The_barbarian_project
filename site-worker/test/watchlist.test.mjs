@@ -540,3 +540,138 @@ test('a missing manifest refuses rather than reporting a null version', async ()
   const a = await call(versionEnv(null), 'https://esthmr.com/esthmr/api/version');
   assert.equal(a.status, 503);
 });
+
+/* ── the outlet's picture, fetched by us ───────────────────────────────────
+ *
+ * News thumbnails were hotlinked, so a picture loaded only if the READER's
+ * network could reach the publisher. Al Borsa and Hapi — 266 of 400 items —
+ * answer on Cloudflare addresses some routes cannot reach, and the request
+ * hangs rather than failing, so even `onerror` could not hide the frame.
+ */
+function imgEnv(upstream) {
+  const e = env();
+  globalThis.fetch = upstream;
+  return e;
+}
+
+const PNG = new Uint8Array([0x89, 0x50, 0x4e, 0x47]);
+const okImage = async () => new Response(PNG, {
+  status: 200,
+  headers: { 'content-type': 'image/png', 'content-length': '4' },
+});
+
+test('a carried outlet\'s picture is fetched and cached hard', async () => {
+  const orig = globalThis.fetch;
+  let asked = null;
+  try {
+    const e = imgEnv(async (input) => { asked = String(input); return okImage(); });
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://images.alborsaanews.com/2026/09/x.jpeg'));
+    assert.equal(a.status, 200);
+    assert.equal(a.headers.get('content-type'), 'image/png');
+    assert.match(a.headers.get('cache-control'), /max-age=604800/);
+    assert.equal(a.headers.get('x-content-type-options'), 'nosniff');
+    assert.equal(asked, 'https://images.alborsaanews.com/2026/09/x.jpeg');
+  } finally { globalThis.fetch = orig; }
+});
+
+test('hapijournal is carried too — it is half the reason this exists', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(okImage);
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/wp-content/uploads/2026/09/31.png'));
+    assert.equal(a.status, 200);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('it is not an open proxy', async () => {
+  const orig = globalThis.fetch;
+  let reached = false;
+  try {
+    const e = imgEnv(async () => { reached = true; return okImage(); });
+    for (const u of [
+      'https://example.com/cat.png',
+      'https://evil.example/steal.png',
+      'http://images.alborsaanews.com/x.jpeg',            // not https
+      'https://images.alborsaanews.com.evil.test/x.jpeg', // suffix trick
+      'https://hapijournal.com.attacker.test/x.png',
+    ]) {
+      const a = await call(e, 'https://esthmr.com/esthmr/api/img?u=' + encodeURIComponent(u));
+      assert.equal(a.status, 403, `${u} was not refused`);
+    }
+    assert.equal(reached, false, 'a refused host must never be fetched');
+
+    const bad = await call(e, 'https://esthmr.com/esthmr/api/img?u=not-a-url');
+    assert.equal(bad.status, 400);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('anything that is not an image is refused, not passed through', async () => {
+  const orig = globalThis.fetch;
+  try {
+    // Otherwise the route serves another site's HTML from this origin, which
+    // is a redirect the address bar does not show.
+    const e = imgEnv(async () => new Response('<h1>hello</h1>', {
+      status: 200, headers: { 'content-type': 'text/html' },
+    }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/page.html'));
+    assert.equal(a.status, 502);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('an upstream that hangs or fails answers quickly, so onerror can fire', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(async () => { throw new Error('ETIMEDOUT'); });
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/wp-content/uploads/2026/09/31.png'));
+    assert.equal(a.status, 502);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('a redirect off the allowlist is refused, not followed', async () => {
+  const orig = globalThis.fetch;
+  const seen = [];
+  try {
+    // `redirect: "follow"` validates the host you asked for and nothing after
+    // it, so a carried outlet answering 302 could point this origin anywhere.
+    const e = imgEnv(async (input) => {
+      seen.push(String(input));
+      if (String(input).includes('hapijournal.com')) {
+        return new Response(null, { status: 302, headers: { location: 'https://evil.example/x.png' } });
+      }
+      return okImage();
+    });
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/wp-content/uploads/2026/09/31.png'));
+    assert.equal(a.status, 403);
+    assert.equal(seen.some((u) => u.includes('evil.example')), false,
+      'the off-allowlist target must never be fetched');
+  } finally { globalThis.fetch = orig; }
+});
+
+test('a redirect within the allowlist is followed', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(async (input) => (String(input).includes('www.hapijournal.com')
+      ? okImage()
+      : new Response(null, { status: 301, headers: { location: 'https://www.hapijournal.com/a.png' } })));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/a.png'));
+    assert.equal(a.status, 200);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('a redirect loop terminates rather than hanging', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(async () => new Response(null, {
+      status: 302, headers: { location: 'https://hapijournal.com/loop.png' },
+    }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/loop.png'));
+    assert.equal(a.status, 502);
+  } finally { globalThis.fetch = orig; }
+});
