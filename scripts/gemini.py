@@ -110,12 +110,22 @@ class GeminiUnavailable(RuntimeError):
     """No key, or the API refused. Callers fall back to their own rules."""
 
 
+def _vertex_projects() -> list[str]:
+    """The Cloud projects to bill, from the environment and from ADC itself."""
+    candidates = []
+    if env := os.environ.get(VERTEX_PROJECT_ENV):
+        candidates.append(env.strip())
+    adc = _adc_document()
+    if adc and (qp := adc.get("quota_project_id")):
+        if qp not in candidates:
+            candidates.append(qp)
+    return candidates
+
+
 def _vertex_project() -> str | None:
     """The Cloud project to bill, from the environment or from ADC itself."""
-    if env := os.environ.get(VERTEX_PROJECT_ENV):
-        return env.strip()
-    adc = _adc_document()
-    return (adc or {}).get("quota_project_id")
+    projects = _vertex_projects()
+    return projects[0] if projects else None
 
 
 def _adc_document() -> dict | None:
@@ -199,43 +209,44 @@ def _post(model: str, body: bytes, *, timeout: int) -> dict:
     separate prepay balance that a Cloud grant never touches.
     """
     token = _access_token()
-    project = _vertex_project()
-    if token and project:
-        for attempt in range(VERTEX_ATTEMPTS):
-            request = urllib.request.Request(
-                VERTEX_ENDPOINT.format(project=project, model=model),
-                data=body,
-                headers={
-                    "authorization": f"Bearer {token}",
-                    "content-type": "application/json",
-                    # ADC without a quota project is refused outright by Vertex.
-                    "x-goog-user-project": project,
-                },
-            )
-            try:
-                return json.loads(
-                    urllib.request.urlopen(request, timeout=timeout).read()
+    projects = _vertex_projects()
+    if token and projects:
+        for project in projects:
+            for attempt in range(VERTEX_ATTEMPTS):
+                request = urllib.request.Request(
+                    VERTEX_ENDPOINT.format(project=project, model=model),
+                    data=body,
+                    headers={
+                        "authorization": f"Bearer {token}",
+                        "content-type": "application/json",
+                        # ADC without a quota project is refused outright by Vertex.
+                        "x-goog-user-project": project,
+                    },
                 )
-            except urllib.error.HTTPError as error:
-                # 429 here is a per-minute quota on the project, not an empty
-                # wallet — three calls fired back to back will trip it. Waiting
-                # is the fix; falling through to the API key would swap a
-                # transient limit for a permanently dead endpoint.
-                if error.code == 429 and attempt < VERTEX_ATTEMPTS - 1:
-                    time.sleep(VERTEX_BACKOFF * (attempt + 1))
-                    continue
-                _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
-                break
-            except transport.TRANSPORT as error:
-                # A read timeout is the connection failing, not Vertex saying
-                # no, and the endpoint behind the fallback has an empty wallet
-                # — so retrying here is strictly better than dropping through.
-                # One timeout mid-batch ended a 276-company run at 109.
-                if attempt < VERTEX_ATTEMPTS - 1:
-                    time.sleep(VERTEX_BACKOFF * (attempt + 1))
-                    continue
-                _note_vertex(None, str(error)[:120])
-                break
+                try:
+                    return json.loads(
+                        urllib.request.urlopen(request, timeout=timeout).read()
+                    )
+                except urllib.error.HTTPError as error:
+                    # 429 here is a per-minute quota on the project, not an empty
+                    # wallet — three calls fired back to back will trip it. Waiting
+                    # is the fix; falling through to the API key would swap a
+                    # transient limit for a permanently dead endpoint.
+                    if error.code == 429 and attempt < VERTEX_ATTEMPTS - 1:
+                        time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                        continue
+                    _note_vertex(error.code, error.read()[:200].decode("utf-8", "ignore"))
+                    break
+                except transport.TRANSPORT as error:
+                    # A read timeout is the connection failing, not Vertex saying
+                    # no, and the endpoint behind the fallback has an empty wallet
+                    # — so retrying here is strictly better than dropping through.
+                    # One timeout mid-batch ended a 276-company run at 109.
+                    if attempt < VERTEX_ATTEMPTS - 1:
+                        time.sleep(VERTEX_BACKOFF * (attempt + 1))
+                        continue
+                    _note_vertex(None, str(error)[:120])
+                    break
 
     request = urllib.request.Request(
         ENDPOINT.format(model),

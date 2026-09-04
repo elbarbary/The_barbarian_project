@@ -240,6 +240,7 @@ export class Component extends Base {
       revDebtAsk:'What did management do with the borrowed money — and is it earning more than it costs?',
       revYieldAsk:'Is the dividend supported by profit and cash — or by a share price that fell?',
       feedCount:'{shown} of {total} headlines, newest first.', volumeOn:'volume on',
+      insightBadge:'Market Impact',
       showMore:'Show more',
       busiest:'Traded with abnormal volume',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
@@ -536,6 +537,7 @@ export class Component extends Base {
       revDebtAsk:'ماذا فعلت الإدارة بالأموال المقترضة — وهل تُدرّ أكثر مما تكلّف؟',
       revYieldAsk:'هل التوزيع مدعوم بالربح والنقد — أم بسعر سهم هبط؟',
       feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.', volumeOn:'حجم التداول في',
+      insightBadge:'الأثر المالي',
       showMore:'عرض المزيد',
       busiest:'تداول بحجم غير معتاد',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
@@ -1546,7 +1548,7 @@ export class Component extends Base {
         headline: ar?'شركة تجريبية ١١ تُنهي الجلسة بأعلى تحرك في القطاع':'Sample Company 11 ends the session with the sector\u2019s largest move',
         why: ar?'بيانات العرض التجريبي تذكر ٤٫٠٢٪ على حجم ١٫٢ مليون سهم.':'The demonstration data states +4.02% on volume of 1.2m shares.',
         tickers: demoCo(10) }
-    ]).map((f) => Object.assign({}, f, {
+    ]).map((f, idx) => Object.assign({}, f, {
       hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
       // One stamp, through the same formatter the Crossings screen uses, so
       // the two screens side by side agree on how a date looks in Arabic.
@@ -1554,6 +1556,8 @@ export class Component extends Base {
       becauseDate: f.evidenceDate && f.evidenceDate !== f.date ? this.dayLabel(f.evidenceDate) : '',
       because: f.because || '', image: f.image || '',
       hasImage: Boolean(f.image),
+      loadingAttr: idx < 4 ? 'eager' : 'lazy',
+      priorityAttr: idx < 4 ? 'high' : 'auto',
       hasKind: f.hasKind === undefined ? Boolean(f.kind) : f.hasKind,
       // The design's ticker pills carry an onClick. On the live path the
       // mapper emitted {ticker} and nothing else, and dc.js attaches no
@@ -3165,6 +3169,11 @@ export class Component extends Base {
           ? (ar ? `${count} شركة استوفت الشروط` : `${count} qualified setup(s)`)
           : (ar ? 'لا أسهم مؤهلة اليوم (مراقبة)' : 'No qualified setups (Silence)');
       })(),
+      pulseExpanded: Boolean(st.pulseExpanded),
+      togglePulse: () => this.setState({ pulseExpanded: !st.pulseExpanded }),
+      pulseExpandLabel: st.pulseExpanded
+        ? (ar ? 'إخفاء التحليل المكتوب ↑' : 'Hide commentary ↑')
+        : (ar ? 'عرض التفاصيل والتحليل المكتوب ↓' : 'Read details & commentary ↓'),
       // Home's headline and its pill said "The close — official close from
       // market.json, not a live price" as unconditional literals, including
       // through the whole trading session, while the sidebar beside them said

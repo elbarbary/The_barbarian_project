@@ -153,9 +153,27 @@ function renderNode(node, scope, into) {
       }
       continue;
     }
+    if (lower === 'onload' || lower === 'onerror') {
+      const eventName = lower.slice(2);
+      const handler = interpolate(attr.value, scope);
+      if (typeof handler === 'function') {
+        el.addEventListener(eventName, handler);
+      } else if (typeof attr.value === 'string') {
+        const script = attr.value;
+        el.addEventListener(eventName, function(e) {
+          try { (new Function('event', script)).call(this, e); } catch (_) {}
+        });
+      }
+      continue;
+    }
     const value = attr.value.indexOf('{{') === -1 ? attr.value : interpolate(attr.value, scope);
     if (value === false || value === null || value === undefined) continue;
     el.setAttribute(attr.name, String(value));
+  }
+  if (tag === 'img') {
+    requestAnimationFrame(() => {
+      if (el.complete && el.naturalWidth > 0) el.style.opacity = '1';
+    });
   }
   if (el.style.cursor === 'pointer' && tag !== 'button' && tag !== 'a' && tag !== 'input') {
     if (!el.hasAttribute('role')) el.setAttribute('role', 'button');

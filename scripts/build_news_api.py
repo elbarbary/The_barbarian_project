@@ -54,6 +54,7 @@ import company_match
 import filing_types as ft
 import news_context
 import news_images
+import news_insights
 import translations
 import transport
 
@@ -1390,6 +1391,9 @@ def main() -> int:
     # permanent, so this only ever costs anything for stories nobody has read
     # yet — a normal day brings a few dozen.
     parser.add_argument("--images", type=int, default=60)
+    # How many top headlines to enrich with AI insights if missing.
+    # Non-blocking and permanently cached in news_insights.json.
+    parser.add_argument("--insights", type=int, default=15)
     args = parser.parse_args()
 
     # Read once, before a single headline is fetched, so every item in this
@@ -1433,6 +1437,11 @@ def main() -> int:
     # The picture the outlet put on the story, for the outlet that has no feed
     # to hand us one. Cached per article and read once, ever.
     news_images.fill(doc["items"], limit=args.images)
+
+    # The economic insight for stories missing one. Cached per headline and read
+    # top-first so the most visible stories gain insights first without delaying
+    # publication.
+    news_insights.enrich(doc["items"], limit=args.insights)
 
     cited = {a["id"] for item in doc["items"] for a in item.get("sources", [])}
     named = {s["id"] for s in doc["sources"]} | cited

@@ -34,6 +34,7 @@ on:
     paths:
       - 'scripts/build_news_api.py'
       - 'scripts/build_rates_api.py'
+      - 'scripts/news_insights.py'
       - '.github/workflows/publish-live-data.yml'
 
   workflow_dispatch:
@@ -108,7 +109,8 @@ jobs:
                   app/assets/fixtures/news app/assets/fixtures/rates \
                   app/assets/fixtures/disclosures \
                   app/assets/fixtures/connections.json \
-                  app/assets/fixtures/manifest.json
+                  app/assets/fixtures/manifest.json \
+                  scripts/news_insights.json scripts/news_images.json
           if git diff --cached --quiet; then
             echo 'nothing moved'
             echo 'changed=false' >> "$GITHUB_OUTPUT"
@@ -132,7 +134,7 @@ jobs:
             local unmerged
             unmerged=$(git diff --name-only --diff-filter=U)
             [ -z "$unmerged" ] && return 0
-            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/'; then
+            if echo "$unmerged" | grep -qv -e '^public/data/' -e '^app/assets/fixtures/' -e '^scripts/news_'; then
               echo "conflict outside generated data:"; echo "$unmerged"
               git rebase --abort || true
               return 1

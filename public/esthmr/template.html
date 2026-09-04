@@ -53,7 +53,7 @@
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
       <!-- ── 3-Second Market Pulse Card ── -->
-      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px;position:relative;overflow:hidden">
+      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
           <div style="display:flex;align-items:baseline;gap:10px">
             <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
@@ -65,24 +65,34 @@
           </div>
         </div>
 
-        <div style="font-size:15px;line-height:1.65;color:var(--ink);margin-top:14px;text-wrap:pretty;max-width:860px">
-          {{ pulseBody }}
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--edgeIn)">
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+        <!-- Visuals First: 3 Key Metrics directly visible -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px">
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
             <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseLeader }}</div>
           </div>
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseFlowLabel }}</div>
             <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseFlow }}</div>
           </div>
-          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:11px 14px">
+          <div style="background:var(--sunk);border:1px solid var(--edgeIn);border-radius:14px;padding:12px 14px">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseScannerLabel }}</div>
             <div style="font-size:13.5px;font-weight:600;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)">{{ pulseScanner }}</div>
           </div>
         </div>
+
+        <!-- Progressive Disclosure: Text commentary expands on request -->
+        <div style="margin-top:14px;display:flex;align-items:center;justify-content:flex-start">
+          <div onClick="{{ togglePulse }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+            <span>{{ pulseExpandLabel }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ pulseExpanded }}">
+          <div style="font-size:14px;line-height:1.65;color:var(--t2);margin-top:12px;padding:13px 16px;border-radius:14px;background:var(--sunk);border:1px solid var(--edgeIn);text-wrap:pretty;max-width:860px">
+            {{ pulseBody }}
+          </div>
+        </sc-if>
       </section>
 
       <!-- The three index levels first and biggest. They were under a 50px
@@ -460,7 +470,13 @@
             </div>
             <a href="{{ f.href }}" target="_blank" rel="noopener" dir="auto" style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.28;display:block;margin-top:10px;text-wrap:pretty">{{ f.headline }}</a>
             <sc-if value="{{ f.hasWhy }}">
-              <div style="margin-top:13px;font-size:14px;color:var(--ink);line-height:1.55;text-wrap:pretty">{{ f.why }}</div>
+              <div style="margin-top:12px;padding:10px 13px;border-radius:12px;background:var(--sunk);border-inline-start:3px solid var(--accent);font-size:13px;color:var(--ink);line-height:1.58;text-wrap:pretty">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:5px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+                  <span>{{ L.insightBadge }}</span>
+                </div>
+                {{ f.why }}
+              </div>
             </sc-if>
             <sc-if value="{{ f.hasBecause }}">
               <div style="margin-top:11px;padding:12px 14px;border-radius:14px;background:var(--sunk);font-size:13px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ f.because }}<sc-if value="{{ f.becauseDate }}"> <span style="color:var(--faint)">({{ L.volumeOn }} {{ f.becauseDate }})</span></sc-if></div>
@@ -488,7 +504,7 @@
                  is not the outlet's business. -->
             <sc-if value="{{ f.hasImage }}">
               <a href="{{ f.href }}" target="_blank" rel="noreferrer" style="position:absolute;inset:0;display:block">
-                <img src="{{ f.image }}" alt="{{ f.headline }}" loading="lazy" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block">
+                <img src="{{ f.image }}" alt="{{ f.headline }}" loading="{{ f.loadingAttr }}" fetchpriority="{{ f.priorityAttr }}" decoding="async" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s ease" onload="this.style.opacity=1" onerror="this.style.display='none'">
               </a>
             </sc-if>
           </div>
