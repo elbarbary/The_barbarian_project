@@ -207,12 +207,17 @@
             <div style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:600;letter-spacing:-.02em">{{ L.screenTitle }}</div>
             <div onClick="{{ screen.open }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.screenOpen }} →</div>
           </div>
-          <div style="margin-top:3px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
+          <div style="margin-top:7px;font-size:13px;color:var(--t2);line-height:1.6;max-width:62ch;text-wrap:pretty">{{ L.screenSub }}</div>
+          <div style="margin-top:5px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
 
-          <!-- The market, drawn. Home carries the shapes and the numbers; the
-               sentence explaining each line lives on Crossings, because four
-               paragraphs on a card is a page of prose with a graph attached
-               rather than a graph. -->
+          <!-- The market, drawn — and now saying what it is.
+               The four sentences were moved to Crossings to keep this a graph
+               rather than a page of prose. That went too far: the founder
+               looked at the result and could not tell what the card was, which
+               is a worse failure than being wordy. Each panel now carries a
+               one-line plain definition of the measure, and what a column is
+               is said once here rather than four times. -->
+          <div style="margin-top:14px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:70ch;text-wrap:pretty">{{ L.screenBarsShort }}</div>
           <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
             <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
               <div>
@@ -220,6 +225,7 @@
                   <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ t.label }}</span>
                   <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);white-space:nowrap">{{ t.of }}</span>
                 </div>
+                <div style="margin-top:4px;font-size:11px;color:var(--t2);line-height:1.5;text-wrap:pretty">{{ t.what }}</div>
 
                 <sc-if value="{{ t.hasDist }}">
                   <!-- One column per slice of the measure, height = how many

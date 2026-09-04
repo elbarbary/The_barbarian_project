@@ -375,25 +375,32 @@ export class Component extends Base {
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
       ratioFilter:'Filter on a filed ratio', ratioValue:'value', ratioAnd:'and', ratioClear:'Clear',
-      screenTitle:'Four lines, as filed',
+      screenTitle:'The market, on four measures',
+      screenSub:'One panel per measure, drawn over the companies that published that figure, with the market\u2019s own middle marked.',
+      screenBarsShort:'Each column counts the companies whose figure lands in that slice. The upright rule is the market\u2019s own middle.',
       screenLead:'Four lines drawn on the exchange\u2019s own medians, and how much of the market sits inside each. Every line is read from the market; none is chosen here.',
       screenUniverse:'{n} companies on file',
       screenPeShort:'Price to earnings', screenVolShort:'30-day volume',
       screenCashShort:'Cash conversion', screenActionShort:'No filing due',
       screenOver:'{n} outside the range drawn',
-      screenNamedSide:'the side the line names', screenMedianMark:'market median',
+      screenNamedSide:'the side this measure names', screenMedianMark:'market median',
       screenBars:'Each column is how many companies fall in that slice of the measure, and the mark is the market\u2019s own middle. Filled columns are the side of the middle the line names. Nothing is ranked and no company is a column.',
       screenOf:'{n} of {of}',
       screenSilent:'{n} published no figure to test',
-      screenQuestion:'Sitting inside a line is a question, not an answer: it says a figure falls on one side of the market\u2019s middle, and nothing about whether that is good. No company is named here. The lines are applied on the table, where they are the reader\u2019s to move.',
+      screenQuestion:'Sitting on one side of the middle is a question, not an answer: it says where a figure falls against the rest of the market, and nothing about whether that is good. No company is named here. A measure is applied on the table, where it is the reader\u2019s to change.',
+      screenPeWhat:'What a share costs against a year of the profit the company filed.',
+      screenVolWhat:'How many shares changed hands on an average day over the past month.',
+      screenCashWhat:'How much of the profit a company reported arrived as cash from its operations.',
+      screenActionWhat:'Whether the company appears in the filing dates the calendar is carrying.',
+      screenActionWhatNone:'The calendar has not loaded, so this measure excluded nobody.',
       screenPe:'Price-to-earnings at or below the market median, {v} — the median of every company that published one.',
       screenVol:'Thirty-day average volume at or above the market median, {v} shares — a figure a reader could act on without moving it.',
       screenCash:'Cash conversion of 1.0 or better where it is published: the company collected at least as much cash as it reported in profit.',
       screenCashNone:'Cash conversion is not published for any company in this set, so that test could not be applied.',
       screenActionNone:'The calendar has not loaded, so no expected filing could be excluded.',
       screenAction:'No filing expected in the calendar window — a price is hard to read against a rights issue or a distribution nobody has seen yet.',
-      screenOpen:'Put the first line on the table',
-      screenBeside:'The same kind of question, asked of the whole market instead of one company. A crossing asks whether one company turned up in more than one place inside a few days; these four lines ask where the exchange\u2019s own middle falls, and how much of the market sits either side of it. Neither answers whether that is good.',
+      screenOpen:'Put the first measure on the table',
+      screenBeside:'The same kind of question, asked of the whole market instead of one company. A crossing asks whether one company turned up in more than one place inside a few days; these four measures ask where the exchange\u2019s own middle falls, and how much of the market sits either side of it. Neither answers whether that is good.',
       screenNoBack:'No past return is shown for this. Testing it against history would need the exchange\u2019s rankings as they stood on each past date, and reconstructing them from today\u2019s figures would quietly drop the companies that have since delisted — a backtest that flatters itself. The tests are stated so a reader can judge them directly.',
       peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
       noMatchTitle:'Nothing matches', noMatchBody:'No company in the filed set matches this search and this sector.', clearFilters:'Clear filters',
@@ -644,24 +651,31 @@ export class Component extends Base {
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
       ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
-      screenTitle:'أربعة خطوط على الأرقام كما وردت',
+      screenTitle:'السوق على أربعة مقاييس',
+      screenSub:'لوحة لكل مقياس، مرسومة على الشركات التي أفصحت عن ذلك الرقم، مع تحديد وسط السوق.',
+      screenBarsShort:'كل عمود يعدّ الشركات التي يقع رقمها في تلك الشريحة، والخط القائم هو وسيط السوق نفسه.',
       screenUniverse:'{n} شركة في السجل',
       screenPeShort:'مضاعف الربحية', screenVolShort:'حجم التداول ٣٠ يوماً',
       screenCashShort:'التحويل النقدي', screenActionShort:'لا إفصاح مرتقب',
       screenOver:'{n} خارج المدى المرسوم',
-      screenNamedSide:'الجانب الذي يسمّيه الخط', screenMedianMark:'وسيط السوق',
+      screenNamedSide:'الجانب الذي يسمّيه المقياس', screenMedianMark:'وسيط السوق',
       screenBars:'كل عمود هو عدد الشركات الواقعة في تلك الشريحة من المقياس، والعلامة هي وسط السوق نفسه. الأعمدة المملوءة هي الجانب الذي يسمّيه الخط. لا ترتيب هنا، ولا عمود يمثل شركة بعينها.',
       screenOf:'{n} من {of}',
       screenSilent:'{n} لم تُفصح عن رقم يُختبر',
-      screenQuestion:'الوقوع داخل خط سؤال وليس حكمًا: يقول إن رقمًا يقع على جانب من وسط السوق، ولا يقول إن ذلك جيد. لا تُسمّى هنا أي شركة. وتُطبّق الخطوط على الجدول، حيث يملك القارئ تحريكها.',
+      screenQuestion:'الوقوع على جانب من الوسط سؤال وليس حكمًا: يقول أين يقع رقم بالنسبة لبقية السوق، ولا يقول إن ذلك جيد. لا تُسمّى هنا أي شركة. ويُطبّق المقياس على الجدول، حيث يملك القارئ تغييره.',
+      screenPeWhat:'كم يكلّف السهم مقابل ربح سنة كما أفصحت عنه الشركة.',
+      screenVolWhat:'كم سهماً جرى تداوله في اليوم المتوسط خلال الشهر الماضي.',
+      screenCashWhat:'كم من الربح الذي أعلنته الشركة وصل نقداً من نشاطها.',
+      screenActionWhat:'هل تظهر الشركة ضمن مواعيد الإفصاح التي يحملها التقويم.',
+      screenActionWhatNone:'لم يُحمّل التقويم، لذا لم يستبعد هذا المقياس أحداً.',
       screenPe:'مضاعف ربحية عند وسيط السوق أو أقل، {v} — وهو وسيط كل شركة أفصحت عنه.',
       screenVol:'متوسط حجم تداول ثلاثين يوماً عند وسيط السوق أو أعلى، {v} سهم — حجم يمكن التعامل معه دون تحريك السعر.',
       screenCash:'تحويل نقدي عند ١٫٠ أو أفضل حيثما أُفصح عنه: حصّلت الشركة نقداً لا يقل عمّا أعلنته ربحاً.',
       screenCashNone:'التحويل النقدي غير مُفصح عنه لأي شركة في هذه المجموعة، لذا تعذّر تطبيق هذا الاختبار.',
       screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
       screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
-      screenOpen:'ضع الخط الأول على الجدول',
-      screenBeside:'النوع نفسه من السؤال، مطروحاً على السوق كلها بدل شركة بعينها. التقاطع يسأل إن كانت شركة واحدة ظهرت في أكثر من مكان خلال أيام قليلة؛ وهذه الخطوط الأربعة تسأل أين يقع وسط البورصة نفسها، وكم من السوق يقع على كل جانب منه. ولا يجيب أيٌّ منهما عن كون ذلك جيداً.',
+      screenOpen:'ضع المقياس الأول على الجدول',
+      screenBeside:'النوع نفسه من السؤال، مطروحاً على السوق كلها بدل شركة بعينها. التقاطع يسأل إن كانت شركة واحدة ظهرت في أكثر من مكان خلال أيام قليلة؛ وهذه المقاييس الأربعة تسأل أين يقع وسط البورصة نفسها، وكم من السوق يقع على كل جانب منه. ولا يجيب أيٌّ منهما عن كون ذلك جيداً.',
       screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
@@ -979,6 +993,32 @@ export class Component extends Base {
     if (!c) return null;
     const raw = id === 'pe' ? c.pe : (c.ratios || {})[id];
     return typeof raw === 'number' && isFinite(raw) ? raw : null;
+  }
+
+  /** The four lines, read off the market rather than chosen.
+   *
+   * Lifted out of Home's card because the market table filters on them too,
+   * and a threshold computed in two places is how a card and a table quietly
+   * start disagreeing about the same number.
+   *
+   * Returns null when the market cannot state a middle — a dataset with no
+   * published multiple and no volume has no lines to draw, and inventing one
+   * would be a threshold this publisher chose.
+   */
+  marketLines(D) {
+    const all = (D && D.companies) || [];
+    const mid = (xs) => {
+      const v = xs.filter((x) => typeof x === 'number' && isFinite(x)).sort((a, b) => a - b);
+      return v.length ? v[Math.floor((v.length - 1) / 2)] : null;
+    };
+    const pe = mid(all.map((c) => (typeof c.pe === 'number' && c.pe > 0 ? c.pe : null)));
+    const vol = mid(all.map((c) => c.avgVolume));
+    if (pe === null || vol === null) return null;
+    return {
+      all, pe, vol,
+      due: new Set(((D && D.expectedEvents) || []).map((e) => e.ticker).filter(Boolean)),
+      cash: (c) => (c.ratios || {}).cash_conversion,
+    };
   }
 
   /** Does this company pass the ratio test, if one is set.
@@ -2719,17 +2759,10 @@ export class Component extends Base {
        * No company is ranked, and no return is claimed — see `screenNoBack`.
        */
       screen: (() => {
-        const all = D.companies || [];
-        const mid = (xs) => {
-          const v = xs.filter((x) => typeof x === 'number' && isFinite(x)).sort((a, b) => a - b);
-          return v.length ? v[Math.floor((v.length - 1) / 2)] : null;
-        };
-        const pe = mid(all.map((c) => (typeof c.pe === 'number' && c.pe > 0 ? c.pe : null)));
-        const vol = mid(all.map((c) => c.avgVolume));
-        if (pe === null || vol === null) return null;
+        const lines = this.marketLines(D);
+        if (!lines) return null;
+        const { all, pe, vol, due, cash } = lines;
         const cal = D.expectedEvents || [];
-        const due = new Set(cal.map((e) => e.ticker).filter(Boolean));
-        const cash = (c) => (c.ratios || {}).cash_conversion;
 
         // THE SHAPE OF THE EXCHANGE, NOT A PROPORTION OF IT.
         //
@@ -2808,7 +2841,7 @@ export class Component extends Base {
         const havePe = all.filter((c) => typeof c.pe === 'number' && c.pe > 0);
         const haveVol = all.filter((c) => typeof c.avgVolume === 'number');
         const haveCash = all.filter((c) => typeof cash(c) === 'number');
-        const line = (n, label, text, inside, base, dist) => {
+        const line = (n, label, what, text, inside, base, dist) => {
           const silent = base < all.length
             ? L.screenSilent.replace('{n}', this.num(all.length - base, 0)) : '';
           // One short line under each drawing, carrying both the companies
@@ -2817,7 +2850,7 @@ export class Component extends Base {
           // paragraph under every panel is a paragraph.
           const foot = [silent, dist && dist.over].filter(Boolean).join(' · ');
           return {
-            n, label, text,
+            n, label, what, text,
             of: L.screenOf.replace('{n}', this.num(inside, 0)).replace('{of}', this.num(base, 0)),
             width: base ? ((inside / base) * 100).toFixed(1) + '%' : '0%',
             silent, hasSilent: Boolean(silent),
@@ -2828,17 +2861,17 @@ export class Component extends Base {
         return {
           universe: L.screenUniverse.replace('{n}', this.num(all.length, 0)),
           tests: [
-            line('1', L.screenPeShort, L.screenPe.replace('{v}', pe.toFixed(1)),
+            line('1', L.screenPeShort, L.screenPeWhat, L.screenPe.replace('{v}', pe.toFixed(1)),
                  havePe.filter((c) => c.pe <= pe).length, havePe.length,
                  histogram(havePe.map((c) => c.pe), pe, true, true)),
-            line('2', L.screenVolShort, L.screenVol.replace('{v}', this.num(vol, 0)),
+            line('2', L.screenVolShort, L.screenVolWhat, L.screenVol.replace('{v}', this.num(vol, 0)),
                  haveVol.filter((c) => c.avgVolume >= vol).length, haveVol.length,
                  histogram(haveVol.map((c) => c.avgVolume), vol, false, true)),
-            line('3', L.screenCashShort, haveCash.length ? L.screenCash : L.screenCashNone,
+            line('3', L.screenCashShort, L.screenCashWhat, haveCash.length ? L.screenCash : L.screenCashNone,
                  haveCash.filter((c) => cash(c) >= 1).length, haveCash.length,
                  haveCash.length
                    ? histogram(haveCash.map(cash), 1, false, false) : null),
-            line('4', L.screenActionShort, cal.length ? L.screenAction : L.screenActionNone,
+            line('4', L.screenActionShort, cal.length ? L.screenActionWhat : L.screenActionWhatNone, cal.length ? L.screenAction : L.screenActionNone,
                  all.filter((c) => !due.has(c.ticker)).length, all.length, null),
           ],
           // The same line, on the table, where the reader owns it.
@@ -2848,9 +2881,22 @@ export class Component extends Base {
           // company sitting at 16.72. And the sector chip and the search box
           // are cleared, or the filter arrives on top of whatever the reader
           // had narrowed to and returns a number matching nothing said here.
-          open: () => this.setState({ screen: 'market', sort: 'pe', dir: 1,
+          // The table, filtered — and NOT ranked.
+          //
+          // This used to land on `sort:'pe', dir:1`: ascending multiple, so
+          // the first row was the cheapest company that had passed a filter
+          // this publisher chose. That is a pick rendered as a lead, and it
+          // does not stop being one because the ranking is implicit in a sort
+          // order. The table's own default ordering stands, and the reader
+          // sorts by whatever they want to sort by.
+          //
+          // `bt` from zero, not `lt`: `lt` is strict, so the company sitting
+          // exactly ON the median was counted in the panel and missing from
+          // the table it handed you — 85 drawn, 84 delivered, every day. The
+          // between branch is inclusive at both ends.
+          open: () => this.setState({ screen: 'market',
             sector: 'All', q: '',
-            rq: { m: 'pe', op: 'lt', a: String(pe), b: '' } }),
+            rq: { m: 'pe', op: 'bt', a: '0', b: String(pe) } }),
         };
       })(),
       // Home's headline and its pill said "The close — official close from

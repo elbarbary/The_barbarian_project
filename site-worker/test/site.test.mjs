@@ -1739,15 +1739,20 @@ test('the four lines are read off the market, and name nobody', () => {
   assert.match(v.L.screenNoBack, /No past return is shown/);
 });
 
-test('the line handed to the table is the line the card printed', () => {
-  // The card printed a median rounded to one decimal and the filter asked for
-  // the rounded figure, so a company sitting between the two — 16.72 against a
-  // printed 16.7 — was inside the bar and outside the table. And the filter
-  // arrived on top of whatever sector chip the reader already had, returning a
-  // count that matched nothing the card said.
+test('the measure handed to the table is the measure the card drew', () => {
+  // Two ways this used to lie to the reader, both live until today.
+  //
+  // The panel counted `c.pe <= median` and the table filtered `c.pe < median`,
+  // so the company sitting exactly ON the median was inside the drawing and
+  // missing from the table the drawing handed you. On the real dataset that is
+  // 85 drawn against 84 delivered, every single day.
+  //
+  // And the landing sort was `pe` ascending, which made the first row the
+  // cheapest company that had passed a filter this publisher chose. §8.6 does
+  // not care that the ranking was implicit in a sort order.
   const companies = [
     RATIOCO('AAA', 4.44, { avgVolume: 2e6 }),
-    RATIOCO('BBB', 16.72, { avgVolume: 2e6 }),
+    RATIOCO('MED', 16.72, { avgVolume: 2e6 }),
     RATIOCO('CCC', 40, { avgVolume: 2e6 }),
   ];
   const c = fresh();
@@ -1755,12 +1760,66 @@ test('the line handed to the table is the line the card printed', () => {
   c.state.screen = 'home';
   c.state.sector = 'Banks';
   c.state.q = 'something';
+  const before = c.state.sort;
   c.renderVals().screen.open();
+
   assert.equal(c.state.screen, 'market');
   assert.equal(c.state.sector, 'All', 'the sector chip was left on');
   assert.equal(c.state.q, '', 'the search box was left filled');
-  // Full precision, not the printed rounding.
-  assert.equal(c.state.rq.a, String(16.72));
+
+  // It must not rank the reader's landing by the very figure it filtered on.
+  assert.equal(c.state.sort, before, 'open() re-sorted the table it filtered');
+  assert.notEqual(c.state.sort, 'pe');
+
+  // Inclusive at the median, and at full precision.
+  assert.equal(c.state.rq.op, 'bt');
+  assert.equal(c.state.rq.b, String(16.72));
+  const rows = c.renderVals().rows.map((r) => r.ticker);
+  assert.ok(rows.includes('MED'), 'the company on the median is missing from its own table');
+  assert.deepEqual(rows.slice().sort(), ['AAA', 'MED']);
+});
+
+test('the count the panel draws is the count the table returns', () => {
+  // The panel's "N of M" and the rows behind the button are the same claim.
+  // They drifted once by an operator; this is what keeps them together.
+  const companies = [
+    RATIOCO('AAA', 4.44, { avgVolume: 2e6 }),
+    RATIOCO('MED', 16.72, { avgVolume: 2e6 }),
+    RATIOCO('CCC', 40, { avgVolume: 2e6 }),
+  ];
+  const c = fresh();
+  c.setData({ ...LIVE, companies });
+  c.state.screen = 'home';
+  const v = c.renderVals();
+  const drawn = Number(String(v.screen.tests[0].of).match(/\d+/)[0]);
+  v.screen.open();
+  assert.equal(c.renderVals().rows.length, drawn,
+    `panel drew ${drawn} and the table returned a different number`);
+});
+
+test('every measure on the card says what it is, in both languages', () => {
+  // The founder could not tell what the card was. The sentence explaining each
+  // measure was computed on the object and bound only on Crossings, so Home
+  // drew four charts with four bare jargon labels over them.
+  for (const lang of ['en', 'ar']) {
+    const c = fresh();
+    c.state.lang = lang;
+    c.setData({ ...LIVE, companies: [
+      RATIOCO('AAA', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+      RATIOCO('BBB', 9, { avgVolume: 1e6, ratios: { cash_conversion: 1.1 } }),
+    ] });
+    c.state.screen = 'home';
+    const v = c.renderVals();
+    assert.ok(v.screen, `${lang}: the card did not build`);
+    for (const t of v.screen.tests) {
+      assert.ok(t.what && t.what.length > 20,
+        `${lang}: ${t.label} has no plain-language definition`);
+      assert.ok(t.label && t.label.length, `${lang}: a measure has no label`);
+    }
+    assert.ok(v.L.screenSub && v.L.screenSub.length > 30, `${lang}: no subtitle`);
+    assert.ok(v.L.screenBarsShort && v.L.screenBarsShort.length > 30,
+      `${lang}: nothing explains what a column is`);
+  }
 });
 
 test('home offers a way into the search', () => {
