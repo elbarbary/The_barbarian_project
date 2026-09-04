@@ -140,7 +140,17 @@ export class Component extends Base {
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
-    rq:{ m:'', op:'gt', a:'', b:'' }, frq:{ m:'', op:'gt', a:'', b:'' } };
+    // ARRAYS, and renamed from `rq`/`frq` on purpose.
+    //
+    // Renaming only the predicate would have left `ratioControl`, `shownRatio`
+    // and `hasFiledFilter` reading `.m` off an array: `[].m` is undefined, so
+    // every one of them degrades silently — the control draws empty, the
+    // column disappears, the disclosures screen reports "not filtered" while
+    // filtering. The whole suite still passes in that state. Renaming the slot
+    // makes each missed reader an undefined, which shows up immediately.
+    rqs: [], frqs: [],
+    // The per-measure definitions on Home, folded away until asked for.
+    linesHow: false };
 
   // ── copy ──
   copy() {
@@ -400,6 +410,10 @@ export class Component extends Base {
       screenActionNone:'The calendar has not loaded, so no expected filing could be excluded.',
       screenAction:'No filing expected in the calendar window — a price is hard to read against a rights issue or a distribution nobody has seen yet.',
       screenOpen:'Put the first measure on the table',
+      screenHowOpen:'What these mean', screenHowClose:'Hide',
+      chipsLabel:'Measures', chipAtMost:'at or below {v}', chipAtLeast:'at or above {v}',
+      chipNotDue:'no filing expected',
+      chipsNote:'Each measure is the market\u2019s own middle, and they narrow together. Switch one off and the table widens again.',
       screenBeside:'The same kind of question, asked of the whole market instead of one company. A crossing asks whether one company turned up in more than one place inside a few days; these four measures ask where the exchange\u2019s own middle falls, and how much of the market sits either side of it. Neither answers whether that is good.',
       screenNoBack:'No past return is shown for this. Testing it against history would need the exchange\u2019s rankings as they stood on each past date, and reconstructing them from today\u2019s figures would quietly drop the companies that have since delisted — a backtest that flatters itself. The tests are stated so a reader can judge them directly.',
       peFoot:'P/E is the last close over the last filed annual earnings per share. It is left blank — never estimated — where the company reported a loss, filed no annual profit, or where its share count, price and market capitalisation do not multiply out. That filing can be twenty months old, so each company\u2019s own page also carries the same ratio over the last twelve months it filed.',
@@ -675,6 +689,10 @@ export class Component extends Base {
       screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
       screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
       screenOpen:'ضع المقياس الأول على الجدول',
+      screenHowOpen:'ما معنى هذه المقاييس', screenHowClose:'إخفاء',
+      chipsLabel:'المقاييس', chipAtMost:'عند {v} أو أقل', chipAtLeast:'عند {v} أو أعلى',
+      chipNotDue:'لا إفصاح مرتقب',
+      chipsNote:'كل مقياس هو وسط السوق نفسه، وتضيق النتائج معاً. أطفئ واحداً فيتّسع الجدول من جديد.',
       screenBeside:'النوع نفسه من السؤال، مطروحاً على السوق كلها بدل شركة بعينها. التقاطع يسأل إن كانت شركة واحدة ظهرت في أكثر من مكان خلال أيام قليلة؛ وهذه المقاييس الأربعة تسأل أين يقع وسط البورصة نفسها، وكم من السوق يقع على كل جانب منه. ولا يجيب أيٌّ منهما عن كون ذلك جيداً.',
       screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
@@ -971,7 +989,37 @@ export class Component extends Base {
    * which unit it is in. Getting this wrong does not error — it silently
    * returns every company or none.
    */
+  /** Every measure a clause can name — filed ratios AND the two that are not.
+   *
+   * `ratioMetrics` is the reader-facing list and stays at seven: the control
+   * above it is headed "Filter on a filed ratio", and a thirty-day trading
+   * average is a vendor's arithmetic over sessions, not a figure any company
+   * filed. Putting it in that list would be a provenance lie on a site that
+   * footnotes where every number came from — and it would appear on the
+   * disclosures screen too, which never asked for it.
+   *
+   * So the registry is the union and `ratioMetrics` is the filed half of it.
+   * A chip can name volume; the typed control cannot offer it.
+   */
+  measures(ar) {
+    return this.filedRatios(ar).map((m) => Object.assign({}, m, {
+      typed: true, read: (c) => this.ratioValue(c, m.id),
+    })).concat([
+      // Top-level on the row, not under `ratios` — `ratioValue` cannot reach
+      // it, which is why the clause carries its own accessor.
+      { id:'avgVolume', label:'30-day volume', labelAr:'حجم التداول ٣٠ يوماً',
+        unit:'', scale:1, typed: false, whole: true,
+        name: ar ? 'حجم التداول ٣٠ يوماً' : '30-day volume',
+        read: (c) => (c && typeof c.avgVolume === 'number' && isFinite(c.avgVolume)
+          ? c.avgVolume : null) },
+    ]);
+  }
+
   ratioMetrics(ar) {
+    return this.filedRatios(ar);
+  }
+
+  filedRatios(ar) {
     return [
       { id:'pe', label:'P/E', labelAr:'مضاعف الربحية', unit:'', scale:1 },
       { id:'pb', label:'P/B', labelAr:'السعر/القيمة الدفترية', unit:'', scale:1 },
@@ -1005,6 +1053,16 @@ export class Component extends Base {
    * published multiple and no volume has no lines to draw, and inventing one
    * would be a threshold this publisher chose.
    */
+  /** Tickers the calendar expects a filing from, in its window.
+   *
+   * Lifted out of `marketLines`, which returns null when either median is
+   * missing — the calendar test must not vanish because a different measure
+   * had no data.
+   */
+  dueTickers(D) {
+    return new Set(((D && D.expectedEvents) || []).map((e) => e.ticker).filter(Boolean));
+  }
+
   marketLines(D) {
     const all = (D && D.companies) || [];
     const mid = (xs) => {
@@ -1016,7 +1074,7 @@ export class Component extends Base {
     if (pe === null || vol === null) return null;
     return {
       all, pe, vol,
-      due: new Set(((D && D.expectedEvents) || []).map((e) => e.ticker).filter(Boolean)),
+      due: this.dueTickers(D),
       cash: (c) => (c.ratios || {}).cash_conversion,
     };
   }
@@ -1026,18 +1084,39 @@ export class Component extends Base {
    * A company with no published figure for the ratio FAILS rather than
    * passes. Filtering for a P/E under ten and being handed companies that
    * have never published one would be answering a different question. */
-  passesRatio(c, rq, ar) {
-    if (!rq || !rq.m) return true;
-    const metric = this.ratioMetrics(ar).find((x) => x.id === rq.m);
+  passesRatio(c, q, ar, ctx) {
+    // The guard belongs here, not inherited from `ratioValue`. The disclosures
+    // screen hands this `byTicker.get(e.ticker)` for a filing whose ticker is
+    // not a listed company, which is `undefined` — and a row accessor or a set
+    // test would throw on it where `ratioValue` merely returned null.
+    if (!q) return true;
+    if (q.k === 'absent') {
+      // Absence is the PASS. A company clears "no filing due" by NOT being in
+      // the calendar's window — the opposite rule to every numeric clause
+      // below, which is why it is a kind of its own rather than an operator.
+      const set = (ctx && ctx.sets && ctx.sets[q.set]) || null;
+      if (!set) return true;                             // nothing to test against
+      return Boolean(c && c.ticker) && !set.has(c.ticker);
+    }
+    if (!q.m) return true;
+    const metric = this.measures(ar).find((x) => x.id === q.m);
     if (!metric) return true;
-    const a = parseFloat(rq.a);
+    const a = parseFloat(q.a);
     if (!isFinite(a)) return true;                       // nothing typed yet
-    const value = this.ratioValue(c, rq.m);
+    if (!c) return false;
+    const value = metric.read(c);
     if (value === null) return false;
     const lo = a * metric.scale;
-    if (rq.op === 'lt') return value < lo;
-    if (rq.op === 'bt') {
-      const b = parseFloat(rq.b);
+    // `gte` and `lte` exist for chips and are never offered in the typed
+    // control. The reader's three operators stay strict: making `gt` inclusive
+    // would silently reinterpret every number already typed into the box, so
+    // "more than 10" would start returning a company sitting exactly at 10.
+    // Only a chip has a drawn panel it has to agree with.
+    if (q.op === 'lt') return value < lo;
+    if (q.op === 'lte') return value <= lo;
+    if (q.op === 'gte') return value >= lo;
+    if (q.op === 'bt') {
+      const b = parseFloat(q.b);
       if (!isFinite(b)) return value > lo;
       const hi = b * metric.scale;
       return value >= Math.min(lo, hi) && value <= Math.max(lo, hi);
@@ -1045,10 +1124,39 @@ export class Component extends Base {
     return value > lo;
   }
 
+  /** Every clause, ANDed. An empty list filters nothing.
+   *
+   * The list is never handed to `passesRatio` — that reads `.m` off whatever
+   * it is given, and `[].m` is undefined, which returns true for everyone. A
+   * half-migrated caller would therefore not throw; it would quietly stop
+   * filtering and hand back the whole exchange looking perfectly normal.
+   */
+  passesClauses(c, qs, ar, ctx) {
+    if (!Array.isArray(qs)) return true;
+    return qs.every((q) => this.passesRatio(c, q, ar, ctx));
+  }
+
   /** The control itself, built once and drawn on each search surface. */
   ratioControl(key, L, ar) {
-    const rq = this.state[key] || { m:'', op:'gt', a:'', b:'' };
-    const set = (patch) => this.setState((s) => ({ [key]: Object.assign({}, s[key], patch) }));
+    // The typed control owns exactly one clause — the one the reader types
+    // into. Chips add and remove their own clauses beside it and never touch
+    // this one, so the two controls cannot fight over a single slot.
+    const list = Array.isArray(this.state[key]) ? this.state[key] : [];
+    const rq = list.find((q) => q && q.src === 'typed') || { m:'', op:'gt', a:'', b:'' };
+    // `Object.assign({}, s[key], patch)` was the old write path, and against an
+    // array it produced `{0:{…}, m:'roe'}` — array no longer, every later
+    // `.every`/`.map` over the clause list throwing or silently skipped. This
+    // replaces the typed clause in place, or appends it if there is none.
+    const set = (patch) => this.setState((s) => {
+      const cur = Array.isArray(s[key]) ? s[key] : [];
+      const typed = cur.find((q) => q && q.src === 'typed');
+      const next = Object.assign({ src: 'typed', k: 'ratio', m: '', op: 'gt', a: '', b: '' },
+        typed || {}, patch);
+      // A metric cleared is a clause removed, not a clause with an empty name
+      // sitting in the list forever.
+      const rest = cur.filter((q) => q && q.src !== 'typed');
+      return { [key]: next.m ? rest.concat([next]) : rest };
+    });
     const metrics = this.ratioMetrics(ar);
     const chosen = metrics.find((m) => m.id === rq.m) || null;
     return {
@@ -1138,19 +1246,80 @@ export class Component extends Base {
       .filter((c) => c.sector && c.sectorAr).map((c) => [c.sector, c.sectorAr]));
     const sectorName = (en) => (ar && sectorAr.get(en)) || en || '—';
 
-    const ratio = this.ratioControl('rq', L, ar);
+    // Sets a clause can test membership against. Passed in rather than stored:
+    // state holds data, and a Set of tickers rebuilt every render is not state.
+    const rctx = { sets: { expectedFiling: this.dueTickers(D) } };
+
+    // THE FOUR MEASURE CHIPS.
+    //
+    // Independent switches, ANDed with each other and with whatever the reader
+    // typed into the box beside them. Every threshold is the market's own —
+    // the two medians, and the point where a company collected as much cash as
+    // it reported in profit — so switching one on is the reader asking a
+    // question, not the publisher answering one.
+    //
+    // A chip is OFFERED only when the market can state its line. `marketLines`
+    // returns null on a dataset with no published multiple or no volume (the
+    // signed-out demo is one), and a chip lit over a line that does not exist
+    // would filter nothing while claiming to. Not offered beats inert.
+    const lines = this.marketLines(D);
+    const dueSet = rctx.sets.expectedFiling;
+    const chipDefs = [];
+    if (lines) {
+      chipDefs.push(
+        { id: 'pe', label: L.screenPeShort,
+          note: L.chipAtMost.replace('{v}', lines.pe.toFixed(1)),
+          // `bt` from zero rather than `lte`: the card's own denominator is
+          // the companies with a POSITIVE multiple, and a bare `lte median`
+          // would hand back non-positive ones the panel never counted.
+          clause: { src: 'line', k: 'ratio', m: 'pe', op: 'bt', a: '0', b: String(lines.pe) } },
+        { id: 'vol', label: L.screenVolShort,
+          note: L.chipAtLeast.replace('{v}', this.num(lines.vol, 0)),
+          clause: { src: 'line', k: 'ratio', m: 'avgVolume', op: 'gte', a: String(lines.vol) } },
+        // `gte`, not `gt`. The card counts `cash >= 1`; every operator the
+        // typed box offers is strict on that side, so a `gt` chip would draw
+        // one number and deliver one fewer — the 85-drawn/84-delivered bug
+        // this file fixed for the multiple, rebuilt on a second measure.
+        { id: 'cash', label: L.screenCashShort, note: L.chipAtLeast.replace('{v}', '1.0'),
+          clause: { src: 'line', k: 'ratio', m: 'cash_conversion', op: 'gte', a: '1' } });
+    }
+    if (dueSet.size) {
+      chipDefs.push({ id: 'due', label: L.screenActionShort, note: L.chipNotDue,
+        clause: { src: 'line', k: 'absent', set: 'expectedFiling' } });
+    }
+    const onNow = (id) => (Array.isArray(st.rqs) ? st.rqs : [])
+      .some((q) => q && q.src === 'line' && q.id === id);
+    const measureChips = chipDefs.map((d) => ({
+      label: d.label, note: d.note, on: onNow(d.id),
+      bg: onNow(d.id) ? 'var(--accent)' : 'transparent',
+      color: onNow(d.id) ? '#1B1917' : 'var(--t2)',
+      border: onNow(d.id) ? 'transparent' : 'var(--rule)',
+      go: () => this.setState((x) => {
+        const cur = Array.isArray(x.rqs) ? x.rqs : [];
+        const had = cur.some((q) => q && q.src === 'line' && q.id === d.id);
+        const rest = cur.filter((q) => !(q && q.src === 'line' && q.id === d.id));
+        return { rqs: had ? rest : rest.concat([Object.assign({ id: d.id }, d.clause)]) };
+      }),
+    }));
+    const ratio = this.ratioControl('rqs', L, ar);
     let rows = D.companies.filter(c => (st.sector === 'All' || c.sector === st.sector))
       .filter(c => !q || this.fold(c.name.en).includes(q) || this.fold(c.name.ar).includes(q) || this.fold(c.ticker).includes(q))
-      .filter(c => this.passesRatio(c, st.rq, ar));
+      .filter(c => this.passesClauses(c, st.rqs, ar, rctx));
     const key = st.sort;
     // A ratio can be sorted on whether or not it is one of the drawn columns:
     // it lives under `ratios` rather than on the row, so `a[key]` finds
     // nothing and every company would tie.
-    const RATIO_KEYS = new Set(this.ratioMetrics(ar).map((m) => m.id));
+    // Widened to the whole registry ONLY together with the accessor below.
+    // Widening the Set alone would send a volume sort through `ratioValue`,
+    // which reads `(c.ratios||{}).avgVolume` — null for all 284 — so every row
+    // ties, the comparator sinks them all, and the column silently stops
+    // sorting while looking fine.
+    const MEASURES = this.measures(ar);
+    const RATIO_KEYS = new Map(MEASURES.map((m) => [m.id, m]));
     const cell = (row) => key === 'ticker' ? row.ticker
       : key === 'name' ? this.nm(row.name)
       : key === 'sector' ? sectorName(row.sector)
-      : RATIO_KEYS.has(key) ? this.ratioValue(row, key)
+      : RATIO_KEYS.has(key) ? RATIO_KEYS.get(key).read(row)
       : row[key];
     rows = rows.slice().sort((a,b) => {
       const va = cell(a);
@@ -1163,8 +1332,15 @@ export class Component extends Base {
     // The ratio being tested becomes a column of its own, so a reader can see
     // the figure the filter acted on rather than take it on trust. P/E is
     // already drawn, so it is not drawn twice.
-    const shownRatio = st.rq && st.rq.m && st.rq.m !== 'pe'
-      ? this.ratioMetrics(ar).find((m) => m.id === st.rq.m) : null;
+    // The figure a filter acted on becomes a column, so a reader can see it
+    // rather than take it on trust — the principle this file already states
+    // above. It now resolves through `measures()` rather than the filed seven,
+    // because a volume chip filters on a number the table draws nowhere, which
+    // is the invisible-filter version of the same trust problem.
+    const shownClause = (Array.isArray(st.rqs) ? st.rqs : [])
+      .find((q) => q && q.k !== 'absent' && q.m && q.m !== 'pe');
+    const shownRatio = shownClause
+      ? this.measures(ar).find((m) => m.id === shownClause.m) : null;
     const colDef = [['ticker',ar?'الرمز':'Ticker','start'],['name',ar?'الاسم':'Company','start'],['sector',ar?'القطاع':'Sector','start'],
       ['close',ar?'الإغلاق':'Close','end'],['pct','%','end'],['cap',ar?'القيمة':'Cap','end'],['pe','P/E','end']]
       .concat(shownRatio ? [[shownRatio.id, shownRatio.name, 'end']] : []);
@@ -1206,8 +1382,12 @@ export class Component extends Base {
       // "ROE more than 20" and a column reading 36.1% are the same scale.
       extra: (() => {
         if (!shownRatio) return '';
-        const v = this.ratioValue(c, shownRatio.id);
+        // Through the measure's own accessor, so a column can draw a figure
+        // `ratioValue` cannot reach.
+        const v = shownRatio.read(c);
         if (v === null) return '—';
+        // `.toFixed(2)` on two million is not a volume.
+        if (shownRatio.whole) return this.num(v, 0);
         return shownRatio.scale === 0.01 ? (v * 100).toFixed(1) + '%'
           : shownRatio.unit === '%' ? v.toFixed(2) + '%' : v.toFixed(2);
       })(),
@@ -2315,7 +2495,7 @@ export class Component extends Base {
     // The same company test as the market table, applied to the company each
     // filing belongs to.
     const byTicker = new Map((D.companies || []).map((c) => [c.ticker, c]));
-    const filedPassesRatio = (e) => this.passesRatio(byTicker.get(e && e.ticker), st.frq, ar);
+    const filedPassesRatio = (e) => this.passesClauses(byTicker.get(e && e.ticker), st.frqs, ar);
     const filedQuery = String(st.filedQ || '').trim();
     const filedFold = this.fold(filedQuery);
     /* What a search looks through.
@@ -2860,6 +3040,14 @@ export class Component extends Base {
         };
         return {
           universe: L.screenUniverse.replace('{n}', this.num(all.length, 0)),
+          // The definitions fold away. The subtitle does not: the card was
+          // opaque once already, and hiding the one sentence that says what it
+          // is would put it straight back. What folds is the per-measure
+          // detail — useful the first time, noise every time after.
+          howOn: Boolean(st.linesHow),
+          howLabel: st.linesHow ? L.screenHowClose : L.screenHowOpen,
+          howCaret: st.linesHow ? '\u2013' : '+',
+          toggleHow: () => this.setState((x) => ({ linesHow: !x.linesHow })),
           tests: [
             line('1', L.screenPeShort, L.screenPeWhat, L.screenPe.replace('{v}', pe.toFixed(1)),
                  havePe.filter((c) => c.pe <= pe).length, havePe.length,
@@ -2894,9 +3082,17 @@ export class Component extends Base {
           // exactly ON the median was counted in the panel and missing from
           // the table it handed you — 85 drawn, 84 delivered, every day. The
           // between branch is inclusive at both ends.
+          // ONE measure, not four.
+          //
+          // Switching all four on from a single tap is a selection this
+          // publisher made, not one the reader did — and run against the live
+          // market the four ANDed collapse 284 companies to 15, a number that
+          // appears nowhere on the card. The button says "put the FIRST
+          // measure on the table" and that is exactly what it does; the other
+          // three are chips the reader adds.
           open: () => this.setState({ screen: 'market',
             sector: 'All', q: '',
-            rq: { m: 'pe', op: 'bt', a: '0', b: String(pe) } }),
+            rqs: [{ src: 'line', k: 'ratio', m: 'pe', op: 'bt', a: '0', b: String(pe) }] }),
         };
       })(),
       // Home's headline and its pill said "The close — official close from
@@ -2939,8 +3135,9 @@ export class Component extends Base {
       // filed", which the grid cannot express.
       filedQ: st.filedQ || '',
       onFiledQuery: (e) => this.setState({ filedQ: e.target.value }),
-      clearFiled: () => this.setState({ filedQ: '', day: '', frq: { m:'', op:'gt', a:'', b:'' } }),
-      hasFiledFilter: Boolean((st.filedQ || '').trim() || st.day || (st.frq && st.frq.m)),
+      clearFiled: () => this.setState({ filedQ: '', day: '', frqs: [] }),
+      hasFiledFilter: Boolean((st.filedQ || '').trim() || st.day
+        || (Array.isArray(st.frqs) && st.frqs.some((q) => q && q.m))),
       filedFilterNote: (() => {
         if (!filtered) return '';
         const bits = [];
@@ -3115,7 +3312,8 @@ export class Component extends Base {
       canFollowCompany: co.ticker !== '\u2014',
       companyFollow: () => { if (co.ticker !== '\u2014') this.onWatch && this.onWatch(co.ticker); },
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
-      ratio, filedRatio: this.ratioControl('frq', L, ar),
+      ratio, filedRatio: this.ratioControl('frqs', L, ar),
+      measureChips, hasMeasureChips: measureChips.length > 0,
       // The placeholder used to assert "282 companies" in both languages. The
       // exchange is not a constant — build_market_api has already moved it
       // once — so it counts what was actually loaded.

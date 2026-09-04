@@ -1622,7 +1622,7 @@ test('a ratio filter takes more than, less than and between', () => {
     const c = fresh();
     c.setData({ ...LIVE, companies });
     c.state.screen = 'market';
-    c.state.rq = rq;
+    c.state.rqs = [{ src: 'typed', k: 'ratio', ...rq }];
     return c.renderVals().rows.map((r) => r.ticker);
   };
   assert.deepEqual(on({ m: 'pe', op: 'lt', a: '13', b: '' }), ['AAA', 'BBB']);
@@ -1644,7 +1644,7 @@ test('a ratio entered as a percentage is matched against the fraction on file', 
     const c = fresh();
     c.setData({ ...LIVE, companies });
     c.state.screen = 'market';
-    c.state.rq = rq;
+    c.state.rqs = [{ src: 'typed', k: 'ratio', ...rq }];
     return c.renderVals().rows.map((r) => r.ticker);
   };
   assert.deepEqual(on({ m: 'roe', op: 'gt', a: '20', b: '' }), ['AAA']);
@@ -1658,7 +1658,7 @@ test('a company that never published the ratio is not handed back as a match', (
   c.setData({ ...LIVE, companies: [RATIOCO('AAA', 5, { ratios: { pb: 1.2 } }),
                                    RATIOCO('BBB', 5, {})] });
   c.state.screen = 'market';
-  c.state.rq = { m: 'pb', op: 'lt', a: '2', b: '' };
+  c.state.rqs = [{ src: 'typed', k: 'ratio', m: 'pb', op: 'lt', a: '2', b: '' }];
   assert.deepEqual(c.renderVals().rows.map((r) => r.ticker), ['AAA']);
 });
 
@@ -1668,7 +1668,7 @@ test('the ratio being filtered on becomes a column, and can be sorted', () => {
   const c = fresh();
   c.setData({ ...LIVE, companies });
   c.state.screen = 'market';
-  c.state.rq = { m: 'roe', op: 'gt', a: '1', b: '' };
+  c.state.rqs = [{ src: 'typed', k: 'ratio', m: 'roe', op: 'gt', a: '1', b: '' }];
   c.state.sort = 'roe';
   c.state.dir = -1;
   const v = c.renderVals();
@@ -1677,7 +1677,7 @@ test('the ratio being filtered on becomes a column, and can be sorted', () => {
   assert.deepEqual(v.rows.map((r) => r.ticker), ['BBB', 'AAA']);
   assert.equal(v.rows[0].extra, '30.0%');
   // P/E is already a column and is not drawn twice.
-  c.state.rq = { m: 'pe', op: 'lt', a: '99', b: '' };
+  c.state.rqs = [{ src: 'typed', k: 'ratio', m: 'pe', op: 'lt', a: '99', b: '' }];
   assert.equal(c.renderVals().cols.filter((x) => x.label === 'P/E').length, 1);
 });
 
@@ -1688,7 +1688,7 @@ test('the filings list takes the same company test', () => {
     filedEvents: [{ date: '2026-09-02', ticker: 'AAA', what: 'w', whatAr: 'و', kind: 'Results' },
                   { date: '2026-09-02', ticker: 'BBB', what: 'w', whatAr: 'و', kind: 'Results' }] });
   c.state.screen = 'calendar';
-  c.state.frq = { m: 'roe', op: 'gt', a: '20', b: '' };
+  c.state.frqs = [{ src: 'typed', k: 'ratio', m: 'roe', op: 'gt', a: '20', b: '' }];
   assert.deepEqual(c.renderVals().filedEvents.map((e) => e.ticker), ['AAA']);
   assert.equal(c.renderVals().hasFiledFilter, true);
 });
@@ -1772,8 +1772,9 @@ test('the measure handed to the table is the measure the card drew', () => {
   assert.notEqual(c.state.sort, 'pe');
 
   // Inclusive at the median, and at full precision.
-  assert.equal(c.state.rq.op, 'bt');
-  assert.equal(c.state.rq.b, String(16.72));
+  assert.equal(c.state.rqs.length, 1, 'the landing applied more than one measure');
+  assert.equal(c.state.rqs[0].op, 'bt');
+  assert.equal(c.state.rqs[0].b, String(16.72));
   const rows = c.renderVals().rows.map((r) => r.ticker);
   assert.ok(rows.includes('MED'), 'the company on the median is missing from its own table');
   assert.deepEqual(rows.slice().sort(), ['AAA', 'MED']);
@@ -1795,6 +1796,188 @@ test('the count the panel draws is the count the table returns', () => {
   v.screen.open();
   assert.equal(c.renderVals().rows.length, drawn,
     `panel drew ${drawn} and the table returned a different number`);
+});
+
+const CHIPCO = (t, pe, vol, cash) => RATIOCO(t, pe, {
+  avgVolume: vol, ratios: cash === null ? {} : { cash_conversion: cash } });
+
+/** A market screen with four companies that separate the four measures. */
+function chipBoard() {
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    // pe median is 10, volume median 2e6.
+    CHIPCO('CHEAP', 4, 3e6, 1.4),   // inside all three numeric measures
+    CHIPCO('THIN', 4, 1e3, 1.4),    // cheap, but barely trades
+    CHIPCO('PAPER', 4, 3e6, 0.2),   // cheap and liquid, profit never arrived
+    CHIPCO('DEAR', 40, 3e6, 1.4),   // liquid and cash-backed, dear
+  ], expectedEvents: [{ ticker: 'CHEAP', date: '2026-10-01' }] });
+  c.state.screen = 'market';
+  return c;
+}
+const chip = (c, label) => c.renderVals().measureChips.find((k) => k.label === label);
+const tickers = (c) => c.renderVals().rows.map((r) => r.ticker).sort();
+
+test('each measure is a switch, and two of them narrow together', () => {
+  // The founder asked for four chips that work. The thing that makes them
+  // chips rather than one control is that they AND: turning on a second must
+  // return the intersection, never the union.
+  const c = chipBoard();
+  const L = c.renderVals().L;
+  assert.equal(tickers(c).length, 4, 'nothing is filtered before a chip is on');
+
+  chip(c, L.screenPeShort).go();
+  assert.deepEqual(tickers(c), ['CHEAP', 'PAPER', 'THIN']);
+
+  chip(c, L.screenVolShort).go();
+  assert.deepEqual(tickers(c), ['CHEAP', 'PAPER'], 'two chips did not intersect');
+
+  chip(c, L.screenCashShort).go();
+  assert.deepEqual(tickers(c), ['CHEAP'], 'three chips did not intersect');
+
+  // And a chip switches off again, widening the table back out.
+  chip(c, L.screenCashShort).go();
+  assert.deepEqual(tickers(c), ['CHEAP', 'PAPER']);
+});
+
+test('a lit chip is a chip that is actually filtering', () => {
+  // The volume chip filters on a top-level row field that `ratioValue` cannot
+  // reach. Registered the naive way it returns true for every company, so the
+  // reader sees a liquidity floor switched on and the table still hands them a
+  // share that trades a thousand a day. A lit no-op is worse than no chip.
+  const c = chipBoard();
+  const L = c.renderVals().L;
+  chip(c, L.screenVolShort).go();
+  assert.equal(chip(c, L.screenVolShort).on, true, 'the chip does not report itself on');
+  assert.ok(!tickers(c).includes('THIN'), 'the volume chip is lit and filtering nothing');
+  assert.deepEqual(tickers(c), ['CHEAP', 'DEAR', 'PAPER']);
+});
+
+test('the cash measure includes the company sitting exactly on the line', () => {
+  // The card counts `cash >= 1`. Every operator the typed box offers is strict
+  // on that side, so a chip built from them draws one number and delivers one
+  // fewer — the 85-drawn/84-delivered bug, rebuilt on a second measure.
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    CHIPCO('ON', 4, 3e6, 1.0),
+    CHIPCO('UNDER', 4, 3e6, 0.99),
+  ] });
+  c.state.screen = 'market';
+  chip(c, c.renderVals().L.screenCashShort).go();
+  assert.deepEqual(tickers(c), ['ON'], 'the company on the line was dropped');
+});
+
+test('a company passes the calendar measure by being absent from it', () => {
+  // The opposite rule to every numeric measure, which is why it is its own
+  // kind: absence is the pass, and a company with no figure is not silently
+  // admitted through it.
+  const c = chipBoard();
+  chip(c, c.renderVals().L.screenActionShort).go();
+  const rows = tickers(c);
+  assert.ok(!rows.includes('CHEAP'), 'a company with a filing due was not excluded');
+  assert.deepEqual(rows, ['DEAR', 'PAPER', 'THIN']);
+});
+
+test('a measure the market cannot state is not offered as a chip', () => {
+  // The signed-out demo publishes no volume, so there is no median to draw a
+  // line at. A chip lit over a line that does not exist would filter nothing
+  // while claiming to; not offering it is the honest answer.
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    { ticker: 'AAA', name: { en: 'AAA', ar: 'AAA' }, sector: 'Banks', pe: 4 },
+  ] });
+  c.state.screen = 'market';
+  const chips = c.renderVals().measureChips;
+  assert.deepEqual(chips.map((k) => k.label), [], 'a chip was offered with no line behind it');
+  assert.equal(c.renderVals().hasMeasureChips, false);
+});
+
+test('a chip and the typed box coexist instead of overwriting each other', () => {
+  // The old write path was `Object.assign({}, state[key], patch)`, which
+  // against an array produced `{0:{…}, m:'roe'}` — not an array any more, so
+  // every later pass over the clause list threw or was skipped.
+  const c = chipBoard();
+  chip(c, c.renderVals().L.screenPeShort).go();
+  const ratio = c.renderVals().ratio;
+  ratio.metrics.find((m) => m.label === 'P/B').go();
+  assert.ok(Array.isArray(c.state.rqs), 'the clause list stopped being a list');
+  assert.equal(c.state.rqs.filter((q) => q.src === 'line').length, 1, 'the chip clause was lost');
+  assert.equal(c.state.rqs.filter((q) => q.src === 'typed').length, 1, 'the typed clause was lost');
+  // And the typed control still reports itself, which is how the reader turns
+  // it off again.
+  assert.equal(c.renderVals().ratio.hasMetric, true);
+});
+
+test('a measure the table cannot otherwise show becomes a column when it filters', () => {
+  // This file already states the principle: "The ratio being tested becomes a
+  // column of its own, so a reader can see the figure the filter acted on
+  // rather than take it on trust." Volume is not one of the drawn columns and
+  // is not a filed ratio, so without this the chip drops rows on a number that
+  // appears nowhere on the screen — the invisible-filter version of exactly
+  // the problem that column was added to solve.
+  const c = chipBoard();
+  const L = c.renderVals().L;
+  const labels = () => c.renderVals().cols.map((x) => x.label);
+  assert.ok(!labels().includes(L.screenVolShort), 'the column is there before the chip is on');
+
+  chip(c, L.screenVolShort).go();
+  assert.ok(labels().includes(L.screenVolShort), 'the chip filters on a figure it never shows');
+  // And as a count of shares, not two decimal places.
+  const shown = c.renderVals().rows.find((r) => r.ticker === 'CHEAP');
+  assert.equal(shown.extra, c.renderVals().L === undefined ? '' : shown.extra);
+  assert.ok(!/\.\d\d$/.test(String(shown.extra)), `volume drawn as "${shown.extra}"`);
+  assert.match(String(shown.extra), /^[\d,]+$/);
+});
+
+test('the disclosures screen still filters, and still says that it is filtering', () => {
+  // It shares `passesRatio` and `ratioControl` through its own clause list. A
+  // change that only traced the market table would narrow this list silently
+  // while the clear affordance reported nothing was on.
+  const c = fresh();
+  c.setData({ ...LIVE,
+    companies: [RATIOCO('AAA', 4, { ratios: { roe: 0.30 } }),
+                RATIOCO('BBB', 9, { ratios: { roe: 0.05 } })],
+    filedEvents: [{ ticker: 'AAA', date: '2026-09-01', title: 'a' },
+                  { ticker: 'BBB', date: '2026-09-01', title: 'b' }] });
+  c.state.screen = 'disclosures';
+  c.state.frqs = [{ src: 'typed', k: 'ratio', m: 'roe', op: 'gt', a: '20', b: '' }];
+  const v = c.renderVals();
+  assert.equal(v.hasFiledFilter, true, 'it filtered and reported that it had not');
+  const shown = (v.filedEvents || []).map((e) => e.ticker);
+  assert.ok(!shown.includes('BBB'), 'the filed list was not filtered');
+});
+
+test('the definitions fold away, and the sentence saying what the card is does not', async () => {
+  // The founder asked for the explanation to be hidden until expanded. The
+  // per-measure detail is useful once and noise afterwards, so it folds. The
+  // subtitle does not: this card was already opaque once, and folding the one
+  // line that says what it is would put it straight back there.
+  const c = fresh();
+  c.setData({ ...LIVE, companies: [
+    RATIOCO('AAA', 4, { avgVolume: 2e6, ratios: { cash_conversion: 1.4 } }),
+    RATIOCO('BBB', 9, { avgVolume: 1e6, ratios: { cash_conversion: 1.1 } }),
+  ] });
+  c.state.screen = 'home';
+
+  assert.equal(c.renderVals().screen.howOn, false, 'the detail starts open');
+  c.renderVals().screen.toggleHow();
+  assert.equal(c.renderVals().screen.howOn, true, 'expanding did nothing');
+  c.renderVals().screen.toggleHow();
+  assert.equal(c.renderVals().screen.howOn, false, 'it does not fold back');
+
+  // The label says which way it goes.
+  const shut = c.renderVals();
+  assert.equal(shut.screen.howLabel, shut.L.screenHowOpen);
+  shut.screen.toggleHow();
+  const open = c.renderVals();
+  assert.equal(open.screen.howLabel, open.L.screenHowClose);
+
+  // And the template folds the detail, never the subtitle.
+  const { readFile } = await import('node:fs/promises');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const sub = tpl.indexOf('{{ L.screenSub }}');
+  const gate = tpl.indexOf('{{ screen.howOn }}');
+  assert.ok(sub !== -1 && gate !== -1, 'the card lost a binding');
+  assert.ok(sub < gate, 'the subtitle was folded behind the expander');
 });
 
 test('every measure on the card says what it is, in both languages', () => {
