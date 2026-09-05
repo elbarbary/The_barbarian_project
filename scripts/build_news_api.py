@@ -158,7 +158,14 @@ SOURCES = [
         # sets `Content-Signal: search=yes,ai-train=no,use=reference` — which
         # is exactly the bargain this file already makes with every outlet:
         # headline and link, never the body, nothing fed to a model.
-        "endpoint": "https://enterpriseam.com/feed/",
+        # `/feed/` was this until the site reorganised behind a country
+        # prefix. It still answers 200 with a valid RSS channel — and zero
+        # items, `lastBuildDate` frozen at 4 January 2026 — so nothing failed
+        # loudly and Enterprise simply stopped arriving. The homepage
+        # advertises this one, and `enterpriseam.com/` now redirects to
+        # `/egypt/`. A feed that returns no items is the failure worth
+        # watching for here: it looks exactly like a quiet news day.
+        "endpoint": "https://enterpriseam.com/egypt/feed/",
         "kind": "rss",
         "live": True,
         # Published in English, so `translations.english_for` leaves these
@@ -1064,6 +1071,18 @@ RELEVANCE = {
     # that came with a title field and a photograph. This is a statement about
     # how well we read the story, not about the outlet.
     "reconstructed": -2,
+    # The only English-language Egyptian business wire in this list, and an
+    # edited daily briefing rather than a wire dump — so a story appearing in
+    # it has already been chosen by somebody, which none of the other terms
+    # can express.
+    #
+    # Two points, not more, and the reason is Friday. Enterprise's weekend
+    # issue is culture: a film review, a restaurant, a book. Those score 1 on
+    # their own and reach 3 here — above nothing much, and still well below a
+    # company result at 6-9, which is where they belong. A weekday Enterprise
+    # story naming a listed company scores 6 and reaches 8, which is the first
+    # screen. A larger bonus would have put the restaurant there too.
+    "enterprise": 2,
 }
 
 # Relevance outranks recency for about a day, then recency takes over.
@@ -1083,6 +1102,41 @@ RELEVANCE = {
 HOURS_PER_POINT = 12.0
 
 
+# Where the site fetches an outlet's picture on the reader's behalf. See the
+# `/img` route in site-worker/index.js.
+IMAGE_PROXY = "https://esthmr.com/esthmr/api/img?u="
+
+
+def through_our_own_host(items: list[dict]) -> None:
+    """Point every picture at our own host instead of the outlet's.
+
+    A hotlinked thumbnail only loads if THE READER's network can reach that
+    publisher. Al Borsa and Hapi — two thirds of the pictures in this document
+    — answer on Cloudflare addresses (188.114.96.7, 188.114.97.7) that some
+    routes cannot reach at all, and the request does not fail, it hangs: fifteen
+    seconds with no response, so even the app's own error branch cannot collapse
+    the row in time.
+
+    This is done to the DOCUMENT rather than in each client on purpose. The
+    website could rewrite the URL as it renders, and did; the Flutter app could
+    too, but only after a release, and the copies already on people's phones
+    would stay broken until they updated. Rewriting here fixes every installed
+    app on the next data fetch, which is this afternoon rather than next month.
+
+    The outlet's own address is kept beside it. Losing it would make the
+    document unable to say where a picture came from, and would make this step
+    impossible to undo from the data alone.
+    """
+    for item in items:
+        raw = (item.get("image") or "").strip()
+        if not raw or not raw.startswith("https://"):
+            continue
+        if raw.startswith(IMAGE_PROXY):        # already rewritten; do not nest
+            continue
+        item["image_origin"] = raw
+        item["image"] = IMAGE_PROXY + urllib.parse.quote(raw, safe="")
+
+
 def relevance(item: dict) -> int:
     """The points this story scores, with the reasons kept on the record."""
     score = 0
@@ -1098,6 +1152,8 @@ def relevance(item: dict) -> int:
         score += RELEVANCE["event"]
     if item.get("reconstructed"):
         score += RELEVANCE["reconstructed"]
+    if any(a.get("id") == "enterprise" for a in item.get("sources") or []):
+        score += RELEVANCE["enterprise"]
     return score
 
 
@@ -1437,6 +1493,7 @@ def main() -> int:
     # The picture the outlet put on the story, for the outlet that has no feed
     # to hand us one. Cached per article and read once, ever.
     news_images.fill(doc["items"], limit=args.images)
+    through_our_own_host(doc["items"])
 
     # The economic insight for stories missing one. Cached per headline and read
     # top-first so the most visible stories gain insights first without delaying

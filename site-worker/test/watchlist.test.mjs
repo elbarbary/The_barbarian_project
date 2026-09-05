@@ -757,3 +757,71 @@ test('an address hammering the route is slowed, and the limiter fails open', asy
     assert.equal(capped.status, 429);
   } finally { globalThis.fetch = orig; }
 });
+
+/* The pipeline now rewrites `image` in the document itself, so an app already
+   on somebody's phone is fixed by the next data fetch rather than by a release.
+   A URL that has been through the rewrite must not go through it twice — the
+   inner address would be esthmr.com, which the route's own allowlist refuses,
+   and every picture on the site would 403. */
+test('a picture already routed through us is not routed twice', async () => {
+  // No `catch(() => null)` and no early return: a test that skips itself when
+  // the import moves is a test that reports green while checking nothing,
+  // which is the exact shape that let the open proxy ship.
+  const logic = await import('../../public/esthmr/logic.js');
+  const K = Object.values(logic).find((v) => typeof v === 'function' && v.prototype?.imageSrc);
+  assert.ok(K, 'no class on logic.js exposes imageSrc');
+  const f = K.prototype.imageSrc;
+  const once = f('https://hapijournal.com/a.png');
+  assert.equal(f(once), once, 'a proxied URL must pass through unchanged');
+  assert.equal(f('https://esthmr.com/esthmr/api/img?u=x'),
+    'https://esthmr.com/esthmr/api/img?u=x', 'the absolute form too');
+});
+
+/* Edge caching bounds the work, not the invocation count. On a Worker route
+   the script runs in front of cache, so every thumbnail is billed whatever
+   these tests assert — what is saved is the redirect walk, the upstream fetch
+   and the outlet's bandwidth. */
+test('a picture asked for twice is fetched upstream once', async () => {
+  const orig = globalThis.fetch;
+  const origCaches = globalThis.caches;
+  const shelf = new Map();
+  let upstreamCalls = 0;
+  globalThis.caches = {
+    default: {
+      async match(req) { return shelf.get(new Request(req).url) || undefined; },
+      async put(req, res) { shelf.set(new Request(req).url, res); },
+    },
+  };
+  const kept = [];
+  const ctx = { waitUntil: (p) => kept.push(p) };
+  try {
+    const e = imgEnv(async () => { upstreamCalls += 1; return okImage(); });
+    const url = 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/a.png');
+
+    const first = await worker.fetch(new Request(url), e, ctx);
+    assert.equal(first.status, 200);
+    await Promise.all(kept);
+    assert.equal(upstreamCalls, 1);
+
+    const second = await worker.fetch(new Request(url), e, ctx);
+    assert.equal(second.status, 200);
+    assert.equal(upstreamCalls, 1, 'the second read must come from the edge');
+  } finally { globalThis.fetch = orig; globalThis.caches = origCaches; }
+});
+
+test('a refusal is not cached for a week', async () => {
+  const orig = globalThis.fetch;
+  const origCaches = globalThis.caches;
+  const stored = [];
+  globalThis.caches = {
+    default: { async match() { return undefined; }, async put(req) { stored.push(String(req)); } },
+  };
+  try {
+    const e = imgEnv(async () => new Response('nope', { status: 404 }));
+    const res = await worker.fetch(new Request('https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://hapijournal.com/gone.png')), e, { waitUntil: () => {} });
+    assert.equal(res.status, 502);
+    assert.equal(stored.length, 0, 'a 502 kept for a week outlives its cause');
+  } finally { globalThis.fetch = orig; globalThis.caches = origCaches; }
+});

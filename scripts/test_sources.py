@@ -26,6 +26,12 @@ NOT_A_SOURCE = {
     "fonts.gstatic.com",
     "www.w3.org",         # SVG namespaces in generated markup
     "schema.org",
+    # Our own host, and the one direction this set exists for: the news builder
+    # writes esthmr.com/esthmr/api/img into the document so a thumbnail is
+    # fetched by the site rather than by the reader. The pipeline never calls
+    # it — it is an address published, not an upstream read, and declaring it
+    # in the catalogue would claim we source data from ourselves.
+    "esthmr.com",
 }
 
 HOST = re.compile(r"https?://([a-zA-Z0-9._-]+)")

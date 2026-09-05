@@ -760,6 +760,12 @@ export class Component extends Base {
   imageSrc(raw) {
     if (typeof raw !== 'string' || !raw) return '';
     if (!/^https:\/\//i.test(raw)) return raw;
+    /* The pipeline rewrites `image` to this route in the document itself, so
+       the app already on somebody's phone is fixed by the next data fetch
+       rather than by a release. A URL that has been through it must not go
+       through it twice: the inner address would then be esthmr.com, which the
+       route's own allowlist refuses, and every picture would 403. */
+    if (/\/esthmr\/api\/img\?u=/.test(raw)) return raw;
     return '/esthmr/api/img?u=' + encodeURIComponent(raw);
   }
   /** The eight ratios, each with its own history and its sector beside it.

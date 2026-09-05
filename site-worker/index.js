@@ -531,7 +531,7 @@ async function sendCode(env, email, code) {
   console.log('code sent via', used);
 }
 
-async function api(request, env, url) {
+async function api(request, env, url, ctx) {
   const path = url.pathname.replace('/esthmr/api', '');
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
 
@@ -585,6 +585,25 @@ async function api(request, env, url) {
     if (!imageAllowed(target)) {
       return new Response('host not carried', { status: 403 });
     }
+
+    /* Served from the edge when it has been asked for before.
+     *
+     * This does NOT save the Worker invocation — on a Worker route the script
+     * runs in front of cache, so every thumbnail is billed whatever this does,
+     * and there is no arrangement of headers that changes it. What it saves is
+     * everything after: the redirect walk, the upstream fetch, the outlet's
+     * bandwidth and ours. A published article's picture never changes, so the
+     * second reader of a story — and the same reader on a new device — gets it
+     * from the colo rather than from Hapi.
+     *
+     * The key is the CANONICAL upstream URL rather than the request as it
+     * arrived, so two encodings of the same picture are one cache entry
+     * instead of two.
+     */
+    const shelf = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+    const key = new Request(`https://esthmr.com/esthmr/api/img?u=${encodeURIComponent(target.toString())}`);
+    const known = shelf ? await shelf.match(key) : undefined;
+    if (known) return known;
 
     /* The same address ceiling the data gate uses.
      *
@@ -662,7 +681,12 @@ async function api(request, env, url) {
     });
     const length = upstream.headers.get('content-length');
     if (length) headers.set('content-length', length);
-    return new Response(upstream.body, { status: 200, headers });
+    const answer = new Response(upstream.body, { status: 200, headers });
+    // Stored after the response is on its way, not before it: a reader waits
+    // for the picture, not for our bookkeeping. Only 200s are kept — a refusal
+    // cached for a week outlives whatever caused it.
+    if (shelf && ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(shelf.put(key, answer.clone()));
+    return answer;
   }
 
   if (path === '/auth/me') {
@@ -900,9 +924,9 @@ function unprefixLocation(answer, url) {
 }
 
 /** Everything that is the same on either host: the API, the gate, the assets. */
-async function serve(request, env, url) {
+async function serve(request, env, url, ctx) {
   if (url.pathname.startsWith('/esthmr/api/')) {
-    return api(request, env, url).catch(() => json({ error: 'server' }, 500));
+    return api(request, env, url, ctx).catch(() => json({ error: 'server' }, 500));
   }
 
   // The gate. Everything the pipeline publishes lives under this prefix.
@@ -955,7 +979,7 @@ async function serve(request, env, url) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
 
@@ -987,9 +1011,9 @@ export default {
         return secure(answer.status !== 404 ? unprefixLocation(answer, url)
           : await env.ASSETS.fetch(request));
       }
-      return secure(await serve(request, env, url));
+      return secure(await serve(request, env, url, ctx));
     }
 
-    return serve(request, env, url);
+    return serve(request, env, url, ctx);
   },
 };
