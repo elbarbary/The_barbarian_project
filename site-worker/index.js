@@ -361,16 +361,47 @@ function codeMessage(env, email, code) {
  * provider is the only thing in the list that can answer differently, so it
  * goes as early as it can while still leaving Resend the default path.
  */
+/* Which address each Resend key sends as.
+ *
+ * MAIL_FROMS is a comma list parallel to RESEND_API_KEYS; an empty slot means
+ * MAIL_FROM. It exists because the keys do not all belong to one account, and
+ * Resend verifies a domain PER ACCOUNT: probed on 2026-09-05, key #3's account
+ * verifies esthmr.com and the other four refuse it with 403. One shared From
+ * meant esthmr.com could never be the sender — the only key allowed to use it
+ * was handed an address it had to reject.
+ */
+export function mailFroms(env) {
+  const keys = mailKeys(env);
+  const froms = String(env.MAIL_FROMS || '').split(',').map((s) => s.trim());
+  const fallback = String(env.MAIL_FROM || '').trim() || 'ESTHMR <onboarding@resend.dev>';
+  return keys.map((_, i) => froms[i] || fallback);
+}
+
+/* The chain in the order MAIL_ORDER asks for.
+ *
+ * A comma list of step ids. Steps it names come first, in that order; steps it
+ * does not name follow in the default order; ids it names that do not exist
+ * are ignored rather than fatal, so a typo cannot silence sign-in. Unset, the
+ * chain is exactly what it was before this existed. */
+function ordered(chain, spec) {
+  const want = String(spec || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (!want.length) return chain;
+  const byId = new Map(chain.map((s) => [s.id, s]));
+  const first = want.map((id) => byId.get(id)).filter(Boolean);
+  const named = new Set(first.map((s) => s.id));
+  return first.concat(chain.filter((s) => !named.has(s.id)));
+}
+
 export function providerChain(env) {
   const keys = mailKeys(env);
-  const chain = keys.slice(0, 1).map((key) => ({ id: 'resend#1', provider: 'resend', key }));
+  const froms = mailFroms(env);
+  const steps = keys.map((key, i) => ({ id: `resend#${i + 1}`, provider: 'resend', key, from: froms[i] }));
+  const chain = steps.slice(0, 1);
   if (sendPulseCredential(env) && sendPulseFrom(env)) {
     chain.push({ id: 'sendpulse', provider: 'sendpulse' });
   }
-  keys.slice(1).forEach((key, i) => {
-    chain.push({ id: `resend#${i + 2}`, provider: 'resend', key });
-  });
-  return chain;
+  chain.push(...steps.slice(1));
+  return ordered(chain, env.MAIL_ORDER);
 }
 
 /** Walk the chain until one of them takes the message. Returns which did.
@@ -380,9 +411,14 @@ export function providerChain(env) {
  */
 export async function deliver(chain, attempt) {
   const failures = [];
-  let resendRefusedTheMessage = false;
+  /* The From addresses Resend has refused the message for. Scoped to the
+     address rather than one flag for the provider, because keys now send as
+     different addresses: a 403 for esthmr.com on key #3 says nothing about
+     whether key #1 may send as thebarbarianproject.com, and a single flag would
+     have skipped every remaining key on the first domain refusal. */
+  const refusedFrom = new Set();
   for (const step of chain) {
-    if (step.provider === 'resend' && resendRefusedTheMessage) {
+    if (step.provider === 'resend' && refusedFrom.has(step.from || '')) {
       failures.push(`${step.id}: skipped`);
       continue;
     }
@@ -403,7 +439,7 @@ export async function deliver(chain, attempt) {
     // is verified separately and its idea of a valid message is its own.
     if (step.provider === 'resend' && outcome.status !== 401
         && outcome.status !== 429 && outcome.status < 500) {
-      resendRefusedTheMessage = true;
+      refusedFrom.add(step.from || '');
     }
   }
   throw new Error(failures.join(' | '));
@@ -528,7 +564,7 @@ async function sendCode(env, email, code) {
   }
   const message = codeMessage(env, email, code);
   const used = await deliver(chain, (step) => (step.provider === 'resend'
-    ? postResend(step.key, message)
+    ? postResend(step.key, { ...message, from: step.from || message.from })
     : postSendPulse(env, message)));
   // Which provider actually carried it — the thing you want in `wrangler tail`
   // when somebody says the code never arrived.

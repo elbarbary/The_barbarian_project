@@ -4086,3 +4086,110 @@ test('the crossings have a screen of their own and Today has the news', () => {
   assert.equal(c.renderVals().isCrossings, true);
   assert.equal(c.renderVals().crossings.length, 1);
 });
+
+/* ── §8 on the investor calculator ────────────────────────────────────────
+ *
+ * The comparison cards project an asset class forward — EGX30 at ~28% a year,
+ * gold at 25%, certificates at 23.5% — and that is a deliberate, disclosed
+ * choice. These tests do not argue with it. They pin the line it must not
+ * cross, which moved the day the calculator learned to search for a company:
+ * a projection attached to a NAMED SHARE is a price target, and no disclaimer
+ * makes it anything else.
+ */
+const ARABIC_DIRECTIVE = new RegExp([
+  'اشتر', 'اشتري', 'اشترِ', 'بيع ', 'بِع ', 'تخلص من',
+  'ننصح', 'نوصي', 'توصية', 'يُنصح', 'ينصح',
+  'فرصة شراء', 'سهم رابح', 'مضمون', 'سيرتفع', 'سيصعد', 'سينخفض', 'سيهبط',
+  'مقوم بأقل', 'مقوم بأكثر', 'رخيص', 'غالي',
+].join('|'));
+
+test('§8 the calculator never projects a named company forward', () => {
+  const picked = { ...LIVE, companies: LIVE.companies };
+  const before = screen(picked).calc;
+  const match = screen({ ...picked, __state: {} }).calcMatches;
+  // Whatever a reader picks, the three asset-class figures are unchanged:
+  // they describe EGX30, gold and a certificate, never the share chosen.
+  for (const key of ['egx1Y', 'egx3Y', 'gold1Y', 'gold3Y', 'cd1Y', 'cd3Y']) {
+    assert.ok(before[key], `${key} is not rendered at all`);
+  }
+  assert.equal(Array.isArray(match), true, 'calcMatches must always be a list');
+});
+
+test('§8 a search result is not a shortlist: no measure orders it', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const dir = new URL('../../public/esthmr/', import.meta.url);
+  const logic = await readFile(new URL('logic.js', dir), 'utf8');
+  // Sliced to `hits.sort` from calcMatches directly. Ending the slice at
+  // `calcPicked:` looked right and was not: that string also appears inside
+  // the pick() closure, so the block stopped before the sort and the test
+  // asserted over an empty string — green, and checking nothing.
+  const from = logic.indexOf('calcMatches:');
+  assert.ok(from > 0, 'calcMatches not found');
+  const at = logic.indexOf('hits.sort', from);
+  assert.ok(at > from, 'the search no longer sorts its hits');
+  // Ordering may consider how the TEXT matched and the ticker, and nothing
+  // else. A sort touching yield, P/E, cap or change is a ranked shortlist
+  // with a text field in front of it.
+  const sortLine = logic.slice(at, logic.indexOf(';', at));
+  for (const measure of ['dividend_yield', 'pe', 'cap', 'pct', 'close', 'market_cap', 'volume']) {
+    assert.ok(!sortLine.includes(measure),
+      `search results are ordered by ${measure}, which makes them a ranking`);
+  }
+});
+
+test('§8 no Tools string tells a reader what to do, in either language', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const logic = await readFile(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');
+  // Both dictionaries, because §8.8 covers the translated string and the
+  // shipped DIRECTIVE regex is English-only — an Arabic-first product whose
+  // only compliance check cannot read its own primary language.
+  const strings = [...logic.matchAll(/^ {6}(calc[A-Za-z0-9]*|tools[A-Za-z0-9]*):\s*'((?:[^'\\]|\\.)*)'/gm)]
+    .map((m) => m[2]);
+  assert.ok(strings.length > 20, `only ${strings.length} calculator strings found`);
+  for (const text of strings) {
+    // A disclaimer says the opposite of a directive and has to use the words
+    // to do it — "does not constitute a recommendation to buy or sell". It is
+    // checked below for the negation instead of here for the vocabulary.
+    if (/لا تمثل|لا تعتبر|not financial advice/i.test(text)) continue;
+    assert.ok(!DIRECTIVE.test(text), `§8 (en): "${text}"`);
+    assert.ok(!ARABIC_DIRECTIVE.test(text), `§8 (ar): "${text}"`);
+  }
+  const arabic = strings.find((t) => /لا تمثل توصية/.test(t));
+  assert.ok(arabic, 'the Arabic disclaimer no longer denies being a recommendation');
+  assert.match(arabic, /٩٥|95/, 'the disclaimer stops citing the law it rests on');
+});
+
+test('§8 a projected figure always carries the rate it assumes', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const html = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  const tools = html.slice(html.indexOf('{{ isTools }}'));
+  // A number with no stated assumption reads as a fact about the future.
+  // Each card that renders a projection states the rate it used.
+  assert.ok(tools.includes('{{ scenarioCards }}'));
+  assert.ok(tools.includes('{{ s.label }}') && tools.includes('{{ s.three }}'));
+  assert.ok(tools.includes('{{ scenarioNote }}'));
+  for (const lang of ['en', 'ar']) {
+    const v = screen(LIVE, lang);
+    const rates = lang === 'ar' ? ['٢٨','٢٣٫٥','٢٥'] : ['28','23.5','25'];
+    const multipliers = [1.28 ** 3, 1 + .235 * 3, 1.25 ** 3];
+    v.scenarioCards.forEach((card, i) => {
+      assert.ok(card.label.includes(rates[i]), 'projection must name its rate in both languages');
+      assert.equal(card.three, Math.round(100000 * multipliers[i]).toLocaleString('en-US'));
+    });
+  }
+  assert.ok(tools.includes('{{ L.calcDisclaimer }}'), 'the Tools disclaimer is not rendered');
+});
+
+test('§8 the calculator opens on nothing it made up about a real company', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const logic = await readFile(new URL('../../public/esthmr/logic.js', import.meta.url), 'utf8');
+  // Five chips used to set a hardcoded price and dividend for five real
+  // tickers, every one wrong against the filed figures — ABUK 62.5/7.5
+  // against 92.39/2.26, a 12% yield on a real company. Prices for a named
+  // ticker come from the filed data or they do not appear.
+  for (const ticker of ['ABUK', 'EAST', 'COMI', 'ETEL', 'ALCN']) {
+    const assigns = new RegExp(`calcPrice:\\s*[\\d.]+[^\\n]*${ticker}|${ticker}[^\\n]*calcPrice:\\s*[\\d.]+`);
+    assert.ok(!assigns.test(logic), `${ticker} still carries a hardcoded price`);
+  }
+  assert.ok(!/setPreset[A-Za-z]+:/.test(logic), 'a hardcoded ticker preset is back');
+});

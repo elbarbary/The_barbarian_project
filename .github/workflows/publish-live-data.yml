@@ -184,13 +184,10 @@ jobs:
       # screen. Deploying in the run that committed removes the gap and the race
       # with it: the assets uploaded are exactly the commit just pushed.
       #
-      # Best-effort on purpose. A failed deploy must not fail a build whose data
-      # is already committed and correct; the next run carries it. And with no
-      # token configured it says so and does nothing, so the workflow keeps
-      # working on a fork or before the secret exists.
+      # Deploy only validated, successfully published output. A failed deploy
+      # must be visible; an absent token still skips this optional path.
       - name: Deploy the site
-        if: always() && steps.commit.outputs.changed == 'true'
-        continue-on-error: true
+        if: success() && steps.commit.outputs.changed == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 7262f969df05178d5542f19912e8f9ba

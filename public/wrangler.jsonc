@@ -75,5 +75,16 @@
       "id": "b4f2d94463d54f8ca08942668fefff46"
     }
   ],
+  /* Who carries the sign-in code first.
+   *
+   * Sign-in codes from thebarbarianproject.com were landing in spam — the
+   * domain was eight days old in Resend and had no DMARC. A test from
+   * esthmr.com through the one key whose account verifies it reached the inbox
+   * (5 Sep 2026). That key goes first. SendPulse is second, not first: it sends
+   * as thebarbarianproject.com, and if it succeeds the chain stops there, so
+   * putting it first would keep sending from the domain that was failing.
+   * Steps not named here follow in their default order. The per-key sender is
+   * the MAIL_FROMS secret, parallel to RESEND_API_KEYS. */
+  "vars": { "MAIL_ORDER": "resend#3,sendpulse" },
   "compatibility_flags": ["nodejs_compat"]
 }

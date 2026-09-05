@@ -511,7 +511,13 @@ export class Component extends Base {
       calcAmountLabel:'Investment Capital (EGP)',
       calcSharePriceLabel:'Share Price (EGP)',
       calcDividendLabel:'Annual Dividend Per Share (EGP)',
-      calcPresetStocks:'Illustrative presets · not current quotes',
+      calcSearchLabel:'Fill from a listed company',
+      calcSearchHint:'Type a ticker or a name',
+      calcNoDividend:'no dividend published',
+      calcPickedFrom:'Filled from the exchange\u2019s filed figures for',
+      calcNeedsDividend:'The exchange publishes no dividend for this company, so the payout box is yours to fill.',
+      calcClearPick:'clear',
+      calcSearchNote:'Matches are ordered by how the text matches, not by any measure of the company.',
       calcSharesCount:'Shares Owned',
       calcAnnualCash:'Annual Cash Dividend',
       calcMonthlyCash:'Monthly Cash Equivalent',
@@ -812,7 +818,13 @@ export class Component extends Base {
       calcAmountLabel:'المبلغ المستثمر (بالجنيه المصري)',
       calcSharePriceLabel:'سعر السهم (ج.م)',
       calcDividendLabel:'الكوبون السنوي الموزع للسهم (ج.م)',
-      calcPresetStocks:'أمثلة حسابية · ليست أسعاراً حالية',
+      calcSearchLabel:'املأ البيانات من شركة مقيدة',
+      calcSearchHint:'اكتب الكود أو اسم الشركة',
+      calcNoDividend:'لا يوجد توزيع منشور',
+      calcPickedFrom:'مملوء من الأرقام المقيدة لدى البورصة لـ',
+      calcNeedsDividend:'البورصة لا تنشر توزيعاً لهذه الشركة، فخانة التوزيع متروكة لك.',
+      calcClearPick:'مسح',
+      calcSearchNote:'النتائج مرتبة حسب مطابقة النص، لا حسب أي مقياس من مقاييس الشركة.',
       calcSharesCount:'عدد الأسهم المملوكة',
       calcAnnualCash:'إجمالي الكوبونات السنوية كاش',
       calcMonthlyCash:'متوسط العائد الشهري المعادل',
@@ -3733,6 +3745,67 @@ export class Component extends Base {
       calcCd3Y: Math.round((st.calcInvest ?? 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
       calcGold1Y: Math.round((st.calcInvest ?? 100000) * 1.25).toLocaleString('en-US'),
       calcGold3Y: Math.round((st.calcInvest ?? 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
+      /* Find a listed company and fill the two boxes from what is filed.
+       *
+       * The calculator opened on a made-up 50.00 and 4.50, so every figure it
+       * produced was arithmetic about a share that does not exist. This puts a
+       * real close and, where the exchange publishes one, a real dividend
+       * behind it.
+       *
+       * Ordered by how well the text matches — ticker first, then name — and
+       * deliberately NOT by yield, P/E or anything else a reader could read as
+       * a ranking. A search box that sorts companies by an investment measure
+       * is a shortlist with a text field in front of it (§8.6), which is the
+       * one thing this must not become.
+       *
+       * A company with no filed dividend fills only the price and says so.
+       * Carrying the previous company's payout under a new name would be the
+       * worst outcome here: a plausible number, wrong, under a real ticker.
+       */
+      calcQuery: st.calcQuery || '',
+      calcMatches: (() => {
+        const q = this.fold((st.calcQuery || '').trim());
+        if (q.length < 2) return [];
+        const hits = [];
+        for (const c of D.companies || []) {
+          if (typeof c.close !== 'number') continue;
+          const ticker = this.fold(c.ticker || '');
+          const name = this.fold(this.nm(c.name) || '');
+          const where = ticker.startsWith(q) ? 0
+            : name.startsWith(q) ? 1
+              : ticker.includes(q) ? 2
+                : name.includes(q) ? 3 : -1;
+          if (where < 0) continue;
+          const yieldPct = ((c.ratios || {}).dividend_yield);
+          hits.push({
+            rank: where,
+            ticker: c.ticker,
+            name: this.nm(c.name),
+            close: this.num(c.close),
+            // `dividend_yield` is published as a percent (4.26 means 4.26%).
+            perShare: typeof yieldPct === 'number' && yieldPct > 0
+              ? Number((c.close * yieldPct / 100).toFixed(2)) : null,
+            hasDividend: typeof yieldPct === 'number' && yieldPct > 0,
+            note: typeof yieldPct === 'number' && yieldPct > 0 ? '' : L.calcNoDividend,
+            pick: () => this.setState({
+              calcPrice: c.close,
+              calcDividend: typeof yieldPct === 'number' && yieldPct > 0
+                ? Number((c.close * yieldPct / 100).toFixed(2)) : 0,
+              calcPicked: `${c.ticker} · ${this.nm(c.name)}`,
+              calcPickedHasDividend: Boolean(typeof yieldPct === 'number' && yieldPct > 0),
+              calcQuery: '',
+            }),
+          });
+        }
+        hits.sort((a, b) => a.rank - b.rank
+          || String(a.ticker).localeCompare(String(b.ticker)));
+        return hits.slice(0, 8).map((h) => Object.assign({}, h, { rank: undefined }));
+      })(),
+      calcPicked: st.calcPicked || '',
+      hasCalcPicked: Boolean(st.calcPicked),
+      calcPickedNeedsDividend: Boolean(st.calcPicked) && !st.calcPickedHasDividend,
+      onCalcQuery: (e) => this.setState({ calcQuery: e.target.value }),
+      clearCalcPick: () => this.setState({ calcPicked: '', calcQuery: '' }),
       onCalcInvestChange: (e) => this.setState({ calcInvest: Math.max(0, parseFloat(e.target.value) || 0) }),
       onCalcPriceChange: (e) => this.setState({ calcPrice: Math.max(0.01, parseFloat(e.target.value) || 0) }),
       onCalcDividendChange: (e) => this.setState({ calcDividend: Math.max(0, parseFloat(e.target.value) || 0) }),
@@ -3740,11 +3813,6 @@ export class Component extends Base {
       setInvest100k: () => this.setState({ calcInvest: 100000 }),
       setInvest250k: () => this.setState({ calcInvest: 250000 }),
       setInvest500k: () => this.setState({ calcInvest: 500000 }),
-      setPresetAbuk: () => this.setState({ calcPrice: 62.5, calcDividend: 7.5 }),
-      setPresetEast: () => this.setState({ calcPrice: 34.0, calcDividend: 3.75 }),
-      setPresetComi: () => this.setState({ calcPrice: 89.0, calcDividend: 3.0 }),
-      setPresetEtel: () => this.setState({ calcPrice: 38.5, calcDividend: 1.5 }),
-      setPresetAlcn: () => this.setState({ calcPrice: 44.0, calcDividend: 5.0 }),
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
       ratio, filedRatio: this.ratioControl('frqs', L, ar),
       measureChips, hasMeasureChips: measureChips.length > 0,

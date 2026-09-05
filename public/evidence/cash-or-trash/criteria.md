@@ -488,6 +488,89 @@ Full files: `outputs/cira_research_dossier_2026-08-03.md`,
 - Full dossier: `outputs/cira_research_dossier_2026-08-03.md`; price history `outputs/cira_price_history_2026-08-03.json`
 - **Not established, and recorded as such:** capex on the new JV seats, and CIRA's economic share of them
 
+### 🪙 LOOSE CHANGE
+
+**AMOC — Alexandria Mineral Oils Company · score +16 on five pillars · 3 Sep 2026** *(event narrative corrected 5 Sep; balance sheet unscored)*
+Flags: ❓ BALANCE SHEET UNSCORED · 📈 AT ITS ALL-TIME HIGH · 🗓️ FISCAL-YEAR CHANGE · ⚙️ DRIVER UNIDENTIFIED
+
+*The company told everyone in June. The market read it in July. The price got there in September.*
+
+**This is the series' first partial score, and it is published as one.** Five of six pillars are evidenced
+from exchange filings; the balance sheet is not, because the statements attached to the results are not
+published on the exchange page and the archive's large attachments would not download. The five pillars
+sum to **+16**; the missing pillar is worth ±10, so the honest range is **+6 to +26** — Loose Change on
+the midpoint, Cash only at the top of it. It sits in Loose Change until the balance sheet is read.
+
+Price basis: **close of 2 September 2026, EGP 13.50**, against an all-time high of **EGP 14.13 set the same
+day**. 1,291,500,000 shares *(vendor figure — the Article 30 filing exists but was not read)* = **EGP 17.44bn**.
+
+| Pillar | Score | Basis |
+|---|---:|---|
+| Valuation | +4 | **6.77× trailing earnings** on the twelve months to 30 June 2026 (**EGP 2,577,135,254** consolidated, after minorities) — a **14.8% earnings yield**, on a **20% payout** and a **2.96%** dividend. The cheapest real earnings this series has scored. Held to +4 because the shares are **+82% in a year at an all-time high**, and because 14.8% is still below the 19% CBE deposit rate — a comparison that is itself not like-for-like, and is used here only as a hurdle, never as an equivalence |
+| Earnings quality | 0 | **Undetermined, and scored as such.** In its favour: audited by **Dr. Abdel Aziz Hegazy & Partners, members of Crowe Global**, with a limited review by the **Central Auditing Organization** that was issued and approved with no findings published — the same state auditor that filed a findings list against Delta Sugar three months earlier. Against: cash conversion **untested**, one-off content **unknown**, and a second quarter that **tripled for a reason nothing in the filings identifies**. Neither an audit stack nor a suspicion is a score |
+| Growth | +6 | Consolidated half-years, after minorities: **EGP 641.6m → 910.3m → 656.4m → 1,920.7m**. The latest half is **2.9× the one before it** and **2.1× the year-ago half**. Standalone: Q1 2026 **+36.0%** (EGP 468,125,614), H1 **+141.2%** (EGP 1,634,682,358), so **Q2 alone went EGP 333.5m → 1,166.6m, +249.7%**. Preliminary revenue ≈ EGP 26.2bn, **+35%** — profit ran three times faster than sales, and the reason is not established. Held at +6 because it is one half-year with an unidentified driver |
+| Balance sheet | — | **Not scored.** The H1 statements are filed but not published on the exchange page; the transitional-period board report (9.5 MB) would not download. Debt, cash and working capital unknown |
+| Tradability | +3 | Median daily traded value **EGP 63.5m**; EGP 25m exits in **1.2 sessions**, EGP 100m in 4.7. Workable, not deep. Vendor float **40.7237%** is unverified — this series has caught three vendor float errors and does not trust a fourth |
+| Governance | +3 | Dual audit with a **clean state-auditor review**, an **Audit & Governance Committee** report ratified each period, **TCFD and ESG** reports filed, bilingual board and governance reports, and every filing **inside the 45-day window** — transitional period filed 18 Feb, Q1 filed 17 May, H1 filed 16 Aug. Deducted for the **chairman and managing director being the same person** (Chem. Maged El-Kordy), and for a formal **إستدراك correction filed to its own Article 30 disclosure on the day it was published** (14 July 2026) |
+
+**The timeline — corrected.** The 3 September report said the largest move came on 13 August, the board-meeting
+day, "three days before the numbers were published." **That was wrong, and it is recorded here as wrong.** The
+numbers were public on **30 July**.
+
+| Date | Disclosure | Close | Change | Volume |
+|---|---|---:|---:|---:|
+| **29 Jun** | Board revises the budget: net-profit expectation **EGP 1.024bn → 2.099bn (+105%)**, sales EGP 37.66bn → 44.88bn (EGX 290526) | 7.52 | **+1.21%** | **0.4× median** |
+| **30 Jul** | **Preliminary unaudited H1 indicators**: consolidated profit **EGP 1.903bn vs 910.3m, +109%**, revenue ≈ EGP 26.2bn (EGX 292184) | 8.91 | **+6.96%** | **6.0× — 44,465,398 shares, the heaviest session in the window** |
+| 13 Aug | Board meets and resolves on the reviewed accounts | 10.30 | +7.85% | 3.3× |
+| 16 Aug | Reviewed H1 filed: **EGP 1,920,706,543 vs 910,309,920, +111.0%** (EGX 293305) | 10.93 | +6.12% | 2.8× |
+| 2 Sep | All-time high EGP 14.13 | 13.50 | +1.89% | 3.6× |
+
+**The June disclosure is the story.** The company stated in writing, on the exchange, that it expected profit to
+roughly double. The stock rose 1.2% on a quarter of normal volume. One month later the preliminary results said
+the same thing and 44 million shares traded. **EGP 7.52 on the day nobody read it; EGP 13.50 today — +79.5%.** The
+June figure was a budget, not a result, and is never quoted here as anything else.
+
+**Three things a reader must not blend.** The **29 June** figure is a **budget**. The **30 July** figure is
+**preliminary and unaudited**. The **16 August** figure is **reviewed** — a limited review, not an annual audit.
+
+**The fiscal year changed.** AMOC ran a July–June year and filed a **transitional period of 1 July to 31 December
+2025** (consolidated profit **EGP 656,428,711** against **EGP 641,640,411** for July–December 2024, +2.3%) before
+moving to calendar reporting. There is no ordinary "FY2025" for this company, and the H1 comparative is the second
+half of the old year.
+
+**Dividend — and a trap.** Coupon 22, **EGP 0.40 a share** in two EGP 0.20 instalments: paid 22 April 2026, and
+due **15 October 2026**. **End of right was 19 April 2026** — a buyer today does not receive the October instalment.
+
+**A real operational lead, held as a lead.** On 27 October 2025 AMOC announced an agreement with MIDOR to process
+AMOC diesel at MIDOR, targeting roughly **350,000 tonnes a year** of higher-quality diesel for the local market.
+It is the most plausible honest candidate for what changed in Q2. **It is not established as the cause**, and this
+entry does not present it as one.
+
+**What would move it up:** the H1 statements showing operating cash flow tracking the EGP 1.92bn — one secondary
+report puts consolidated operating cash flow at ~EGP 1.41bn but mislabels the period, so it is a lead, not a figure —
+and an identified, repeatable reason for the Q2 step-change. Those two alone take +16 to +21–26 with the balance
+sheet unchanged. **What would move it down:** a Q2 driven by a one-off, or a balance sheet the half-year profit is
+flattering.
+
+Full file: `outputs/amoc_research_report_2026-09-03.md` *(event narrative corrected 5 Sep)*; video research addendum, 5 Sep 2026
+
+**Sources**
+- H1 2026 reviewed consolidated results — EGX disclosure **NewsID 293305**, 16 August 2026: **EGP 1,920,706,543** vs **EGP 910,309,920**, after minority interests, limited review attached
+- H1 2026 reviewed standalone results — EGX **NewsID 293300**, 16 August 2026: **EGP 1,634,682,358** vs **EGP 677,724,962**
+- Preliminary unaudited H1 indicators and board decisions of 29 July — EGX **NewsID 292184**, 30 July 2026 (attachments 341922_1–3.pdf): consolidated profit EGP 1.903bn vs 910.309m, revenue ≈ EGP 26.2bn
+- Revised planning and capital budgets, board of 28 June — EGX **NewsID 290526**, 29 June 2026 (attachment 340363_1.pdf); company publication [amoceg.com/ar/media-center/news/185](https://www.amoceg.com/ar/media-center/news/185)
+- Q1 2026 standalone results — EGX **NewsID 288286**, 17 May 2026: EGP 468,125,614 vs 344,181,268
+- Transitional-period consolidated results, 1 July – 31 December 2025 — EGX **NewsID 283714**, 18 February 2026: EGP 656,428,711 vs 641,640,411 — the evidence of the fiscal-year change; company context [amoceg.com/en/media-center/news/176](https://amoceg.com/en/media-center/news/176)
+- Board resolution of 13 August 2026 — EGX **NewsID 293296**: statements approved by Dr. Abdel Aziz Hegazy & Partners / Dr. Khaled Abdel Aziz Hegazy, members of Crowe Global; report issued and approved by the Central Auditing Organization with its limited review; audit and governance committee report ratified; signed by Chem. Maged El-Kordy, Chairman and Managing Director (`work/amoc/342832_1.pdf`)
+- Coupon 22 — EGX **NewsID 285422**, 29 March 2026: EGP 0.400 a share, two instalments, end of right 19 April 2026, second instalment 15 October 2026
+- AGM of 26 March 2026 — EGX **NewsID 285389** (decisions) and **285813** (minutes)
+- Article 30 board-and-ownership disclosure — EGX **NewsID 291317**, 14 July 2026, and the same-day correction **NewsID 291363**. Located, not read
+- Article 29 periodic disclosure — EGX **NewsID 291915**; TCFD and ESG reports — **NewsID 283718**
+- MIDOR agreement, 27 October 2025 — [amoceg.com/ar/media-center/news/170](https://www.amoceg.com/ar/media-center/news/170)
+- Secondary: Egypt Oil & Gas, 30 July 2026 — operating cash flow ~EGP 1.41bn, **period mislabelled**, used as a lead only
+- Daily closes and volumes for 29 June, 30 July, 13 August and 2 September; the gap scan across 3,000 bars — exchange feed (`work/amoc_long.json`)
+- **Not established, and recorded as such:** the statements themselves; the cause of the Q2 step-change; cash conversion and one-off content; float, share count and ownership from a filing; the extent of state ownership; and what moved the price on 13 August. No allegation of wrongdoing, of trading on non-public information, or of any impropriety by Alexandria Mineral Oils Company, its directors, its auditors or any other person is made or implied.
+
 ### 💰 CASH
 
 **MCQE — Misr Cement Qena · score +20 · 11 Aug 2026**
@@ -561,7 +644,7 @@ Full file: `outputs/mcqe_research_dossier_2026-08-11.md`
 
 ## Progress
 
-**8 of ~224 scored.** 💰 Cash 1 · 🪙 Loose change 0 · ♻️ Recyclable 2 · 🗑️ Trash 3 · ☠️ Toxic 2.
+**9 of ~224 scored.** 💰 Cash 1 · 🪙 Loose change 1 · ♻️ Recyclable 2 · 🗑️ Trash 3 · ☠️ Toxic 2.
 
 **Rescore, 16 August 2026 — the first time a named flip condition actually fired.** GBCO was scored
 **−6 on 9 August** on Q1-2026 data, and the entry named two things that would change it. The H1 release
@@ -577,7 +660,7 @@ The only entry that moved shelf is **CIRA at −1**, from Trash to Recyclable. A
 BIOC (−25) all sit at −10 or below and stay Trash; KWIN and DGTZ are unaffected. If a future rescore
 pushes something across the new line, that reclassification gets its own dated note, same as this one.
 
-### A recurring lesson from the first eight
+### A recurring lesson from the first nine
 
 The first three are thin-float names, and in every case the *vendor* float number was wrong or misleading.
 TradingView reported AMES at **27.22%** free float; the company's own filing says **3.90961%** — off by

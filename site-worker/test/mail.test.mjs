@@ -176,3 +176,73 @@ test('half a pair is not a pair', () => {
   assert.deepEqual(sendPulseCredential({ SENDPULSE_SECRET: HEX }),
     { kind: 'token', token: HEX });
 });
+
+/* ── one sender per key, and a chosen order ────────────────────────────────
+ *
+ * Probed on 2026-09-05: the five keys do not belong to one Resend account, and
+ * Resend verifies a domain PER ACCOUNT. Key #3's account verifies esthmr.com;
+ * the other four refuse it with 403 before sending. A single MAIL_FROM meant
+ * the one key allowed to send as esthmr.com was handed an address it had to
+ * reject — and codes from thebarbarianproject.com were landing in spam while
+ * a test from esthmr.com reached the inbox.
+ */
+const { mailFroms } = await import('../index.js');
+
+test('each key sends as its own address, falling back to MAIL_FROM', () => {
+  const env = { RESEND_API_KEYS: FIVE, ...FROM, MAIL_FROMS: ',,ESTHMR <sign-in@esthmr.com>,,' };
+  assert.deepEqual(mailFroms(env), [
+    FROM.MAIL_FROM, FROM.MAIL_FROM, 'ESTHMR <sign-in@esthmr.com>', FROM.MAIL_FROM, FROM.MAIL_FROM,
+  ]);
+  const chain = providerChain(env);
+  assert.equal(chain.find((s) => s.id === 'resend#3').from, 'ESTHMR <sign-in@esthmr.com>');
+  assert.equal(chain.find((s) => s.id === 'resend#1').from, FROM.MAIL_FROM);
+  // Unset, every key sends as MAIL_FROM — exactly what it did before.
+  assert.ok(providerChain({ RESEND_API_KEYS: FIVE, ...FROM }).every((s) => s.provider !== 'resend' || s.from === FROM.MAIL_FROM));
+});
+
+test('MAIL_ORDER puts the named steps first and leaves the rest as they were', () => {
+  const env = { RESEND_API_KEYS: FIVE, ...SP, ...FROM, MAIL_ORDER: 'resend#3,sendpulse' };
+  assert.deepEqual(ids(env), ['resend#3', 'sendpulse', 'resend#1', 'resend#2', 'resend#4', 'resend#5']);
+  // A typo names nothing and must not silence sign-in.
+  assert.deepEqual(ids({ ...env, MAIL_ORDER: 'resend#9,nope' }),
+    ['resend#1', 'sendpulse', 'resend#2', 'resend#3', 'resend#4', 'resend#5']);
+  assert.deepEqual(ids({ ...env, MAIL_ORDER: '' }),
+    ['resend#1', 'sendpulse', 'resend#2', 'resend#3', 'resend#4', 'resend#5']);
+});
+
+/* The refusal rule is what this change most easily breaks. deliver() skips
+   the remaining Resend keys once one refuses the MESSAGE (a 403 for an
+   unverified domain), because four more keys buy four identical refusals.
+   That was true while every key sent the same address. It is false now: a
+   403 for esthmr.com on key #3 says nothing about thebarbarianproject.com on
+   key #1. The skip has to follow the address, not the provider. */
+test('a refusal of one sending address does not skip the keys using another', async () => {
+  const env = { RESEND_API_KEYS: FIVE, ...SP, ...FROM,
+    MAIL_FROMS: ',,ESTHMR <sign-in@esthmr.com>,,', MAIL_ORDER: 'resend#3,sendpulse' };
+  const chain = providerChain(env);
+  const tried = [];
+  const attempt = async (step) => {
+    tried.push(step.id);
+    if (step.id === 'resend#3') return { ok: false, status: 403, detail: 'esthmr.com is not verified' };
+    if (step.id === 'sendpulse') return { ok: false, status: 500 };
+    return { ok: true };
+  };
+  assert.equal(await deliver(chain, attempt), 'resend#1');
+  assert.deepEqual(tried, ['resend#3', 'sendpulse', 'resend#1'],
+    'the thebarbarianproject.com keys must still be tried after esthmr.com is refused');
+});
+
+test('a refusal still skips the other keys that send the SAME address', async () => {
+  const env = { RESEND_API_KEYS: FIVE, ...SP, ...FROM,
+    MAIL_FROMS: ',,ESTHMR <sign-in@esthmr.com>,,', MAIL_ORDER: 'resend#3,sendpulse' };
+  const tried = [];
+  const attempt = async (step) => {
+    tried.push(step.id);
+    if (step.provider === 'sendpulse') return { ok: false, status: 500 };
+    return { ok: false, status: 403, detail: 'not verified' };
+  };
+  await assert.rejects(deliver(providerChain(env), attempt));
+  // #3 refused (esthmr.com), then #1 refused (thebarbarianproject.com) — and
+  // #2, #4, #5 share #1's address, so they are skipped, not spent.
+  assert.deepEqual(tried, ['resend#3', 'sendpulse', 'resend#1']);
+});
