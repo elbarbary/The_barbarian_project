@@ -47,6 +47,11 @@ concurrency:
 
 permissions:
   contents: write
+  # Required by google-github-actions/auth: workload identity federation
+  # mints an OIDC token, and without this the step cannot request one. It
+  # is `continue-on-error`, so the failure is silent and the only symptom
+  # is news insights quietly not being written.
+  id-token: write
 
 jobs:
   publish:
@@ -58,12 +63,36 @@ jobs:
         with:
           python-version: '3.12'
 
+      # The news insights are written by a model, and this is the credential
+      # that can pay for one. `GEMINI_API_KEY` was the only thing this job
+      # offered and there is no such secret on the repository, so
+      # `gemini.available()` has been false on every run this workflow has ever
+      # made: `enrich()` filled from cache and returned before generating
+      # anything. Every insight in `news_insights.json` was written on a
+      # laptop and committed by hand, which is why 207 of 400 stories reached
+      # readers with none. Vertex is where the Cloud credits live — the same
+      # step publish-app-data.yml uses, for the same reason.
+      - name: Authenticate to Google Cloud
+        id: gcp
+        uses: google-github-actions/auth@v2
+        continue-on-error: true
+        with:
+          project_id: project-8bba98ed-6d90-45af-ab8
+          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
+          token_format: access_token
+          audience: https://github.com/elbarbary
+
       - name: Fetch headlines and rates
         # No script writes anything when its sources are unreachable, so a bad
         # upstream leaves the last good document in place rather than
         # publishing an empty one. `|| true` keeps one dead source from
         # blocking another's update.
         env:
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+          # Kept as the fallback it is. gemini.py prefers Vertex when both are
+          # present, and this secret does not currently exist.
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python3 scripts/build_news_api.py || true

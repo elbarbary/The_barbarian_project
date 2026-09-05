@@ -357,3 +357,64 @@ def directive(text: str) -> str | None:
         if found:
             return found.group(0).strip()
     return None
+
+
+# The third check, for the claim `DIRECTIVE` was never built to catch.
+#
+# §8 is not only about instructions. A sentence that forecasts how a named
+# company will do is a claim this publisher is not licensed to make, and it
+# reaches for none of the words above. The one that prompted this shipped in
+# the news feed and read, in full: "…potentially opening new revenue streams
+# and export channels." No trade verb, no valuation adjective, nothing for
+# `directive()` to find — and a forecast about a real company all the same.
+#
+# The tell is not the tense and not the noun. "The assembly will meet on 15
+# October" is a scheduled fact; "revenue" is the subject matter. What marks a
+# forecast is a HEDGE OR FUTURE MODAL POINTED AT A CLAIM OF CHANGE — will
+# boost, may compress, من شأنه أن يعزز — so that is the shape matched here,
+# and each half alone is left alone. Calibrated against everything the models
+# have already written: 1,026 company-brief sentences, 1,186 news strings, the
+# sector reads, the connections and the macro glossary. It flags exactly one,
+# and that one is the sentence above.
+_HEDGE = (r"will|would|could|may|might|expected to|is expected|are expected|likely|"
+          r"set to|poised to|potentially|potential to|anticipated|projected|"
+          r"forecast(?:ed)?|stands to|going forward|in the future")
+# `ris(?:e|es|ing)` and not `ris\w*`, or the guard refuses every sentence
+# containing "risk" — which is most of the honest ones.
+_CHANGE = (r"increas\w*|boost\w*|rais\w*|lift\w*|expand\w*|grow\w*|improv\w*|"
+           r"strengthen\w*|weaken\w*|driv\w*|support\w*|open\w*|unlock\w*|"
+           r"reduc\w*|lower\w*|compress\w*|erod\w*|weigh\w*|pressur\w*|"
+           r"benefit\w*|enhanc\w*|widen\w*|narrow\w*|accelerat\w*|deepen\w*|"
+           r"ris(?:e|es|ing)|fall(?:s|ing)?|climb\w*|declin\w*|drop\w*|"
+           r"jump\w*|surg\w*|soften\w*|slow(?:s|ing)?")
+# Same rule as the Arabic above: no `\b`, because the proclitic is attached.
+# "قد " keeps its space — bare "قد" also marks a completed past ("قد فعل").
+_AR_HEDGE = ("من المتوقع|يُتوقع|يتوقع|المتوقع|المرتقب|المحتمل|ربما|سوف|من شأنه|من شأنها|"
+             "يمهد|تمهد|آفاق|توقعات|قد ")
+_AR_CHANGE = ("يزيد|تزيد|زيادة|يرفع|ترفع|رفع |يعزز|تعزز|تعزيز|نمو|ينمو|يحسن|تحسن|تحسين|"
+              "يخفض|تخفض|خفض |يقلل|تقلل|يدعم|تدعم|دعم |يفتح|تفتح|فتح |يوسع|توسع|توسيع|"
+              "يتيح|تتيح|إتاحة|يسهم|تسهم")
+# A claim about the security itself needs no change verb to be a forecast.
+_SECURITY = (r"share price|stock price|the stock|the shares|valuation|market cap|"
+             r"سعر السهم|سعر أسهم|قيمة السهم|تقييم السهم")
+
+# Hedge first, claim second, and only that way round. Both languages put the
+# modal in front of what it qualifies — "may rise", "من المتوقع أن تزيد" — so a
+# mirrored pair earns nothing and costs a false refusal: the gold entry in this
+# very file reads "when it rises hard, money that might have reached shares goes
+# into metal instead", which is a mechanism in the past conditional, not a
+# forecast. Matching change-then-hedge refused it.
+SPECULATIVE = (
+    re.compile(rf"\b({_HEDGE})\b[^.!?]{{0,50}}?\b({_CHANGE})\b", re.I),
+    re.compile(rf"({_AR_HEDGE})[^.!\u061f]{{0,50}}?({_AR_CHANGE})"),
+    re.compile(rf"({_SECURITY})[^.!?\u061f]{{0,40}}?\b({_HEDGE})\b", re.I),
+)
+
+
+def speculative(text: str) -> str | None:
+    """The forecast this sentence makes, or None when it only describes."""
+    for pattern in SPECULATIVE:
+        found = pattern.search(text or "")
+        if found:
+            return found.group(0).strip()
+    return None

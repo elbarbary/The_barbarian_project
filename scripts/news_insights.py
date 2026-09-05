@@ -7,14 +7,29 @@ Every generated sentence MUST strictly describe the objective economic or
 market mechanism (e.g. impact on supply chain, dollar demand, free float,
 operating costs, or corporate governance). It NEVER provides advice, never
 speculates on future stock price directions, and never suggests buying or selling.
-Every result is verified against `macro_types.directive()`.
+Every result is verified against `macro_types.directive()` for an instruction
+and `macro_types.speculative()` for a forecast. The second check exists because
+the first one cannot see a sentence like "…potentially opening new revenue
+streams and export channels" — no trade verb, no valuation word, and a claim
+about a named company's future all the same. It shipped, on this feed.
 
-Non-Blocking & Permanent Cache:
--------------------------------
+Non-Blocking Cache:
+-------------------
 Headlines are enriched newest/highest-priority first up to a per-run limit.
-Results are cached permanently in `news_insights.json` so every headline is
-only ever analyzed once. If Gemini is unreachable or rate-limited, the news
-feed publishes immediately without delay.
+An insight is cached in `news_insights.json` and never asked for twice.
+
+A REFUSAL IS NOT AN ANSWER ABOUT THE HEADLINE, only about one sample. The model
+samples, and the same prompt returns different prose: four headlines were
+refused in the first backfill, and re-asking one of them produced a clean
+present-tense mechanism. So a refusal is counted, not final — `MAX_REFUSALS`
+attempts across runs, then the headline is left alone so a story that genuinely
+invites a forecast cannot be paid for forever.
+
+A FAILURE TO REACH THE MODEL IS NOT AN ANSWER EITHER and is not cached at all:
+the earlier code wrote an empty entry for it, and because both paths below skip
+any headline already in the store, one rate-limited minute blacklisted those
+headlines for good. If the model is unreachable the run stops asking and the
+feed publishes anyway.
 """
 
 from __future__ import annotations
@@ -44,6 +59,12 @@ Explain the objective economic or market mechanism in 1-2 concise factual senten
 
 CRITICAL §8 COMPLIANCE RULES:
 - Strictly factual mechanism only (explain operational, supply chain, balance sheet, or sector mechanism).
+- Write in the PRESENT TENSE about what this arrangement IS and HOW it works.
+- NEVER forecast an outcome. Do not write that anything will, could, may, or is
+  expected to increase, improve, boost, support, reduce or open anything, and do
+  not describe potential revenue, margins, growth or demand. "Localising
+  production adds a second manufacturing line" is the register; "potentially
+  opening new revenue streams" is a forecast and will be rejected.
 - NEVER give financial advice or opinion.
 - NEVER use words like buy, sell, hold, invest, avoid, recommended, fair value, target price, or predict future share movements.
 - Return ONLY valid JSON in this exact structure:
@@ -81,39 +102,53 @@ def extract_json(raw: str) -> dict | None:
         return None
 
 
-def generate_insight(headline: str) -> tuple[str, str] | None:
-    """Call Gemini to generate objective insight for a headline."""
+# Why a headline came back without an insight. The three are not the same
+# thing and must not be cached the same way: a REFUSED sentence is an answer
+# about that headline and asking again returns it, while UNREACHABLE and
+# UNUSABLE say nothing about the headline at all.
+OK, REFUSED, UNREACHABLE, UNUSABLE = "ok", "refused", "unreachable", "unusable"
+
+# How many times one headline may be refused before it is left alone. Three
+# samples is enough to tell an unlucky draw from a story that cannot be
+# described without forecasting — "Citigroup delays its rate-cut forecast" is
+# the second kind more often than the first.
+MAX_REFUSALS = 3
+
+
+def generate_insight(headline: str) -> tuple[tuple[str, str] | None, str]:
+    """The insight for a headline, and why there is none when there is none."""
     if not gemini.available():
-        return None
+        return None, UNREACHABLE
 
     prompt = PROMPT_TEMPLATE.format(headline=headline)
     try:
         response_text, _usage = gemini.generate(prompt)
     except Exception as err:
         print(f"   [news_insights] Gemini call skipped: {err}", file=sys.stderr)
-        return None
+        return None, UNREACHABLE
 
     data = extract_json(response_text)
     if not data:
-        return None
+        return None, UNUSABLE
 
     meaning = str(data.get("meaning") or "").strip()
     meaning_ar = str(data.get("meaning_ar") or "").strip()
 
     if not meaning or not meaning_ar:
-        return None
+        return None, UNUSABLE
 
-    # §8 verification: verify that neither language contains trade directives
-    dir_en = macro_types.directive(meaning)
-    dir_ar = macro_types.directive(meaning_ar)
-    if dir_en or dir_ar:
-        print(
-            f"   [news_insights] Dropped non-compliant insight (EN: {dir_en}, AR: {dir_ar})",
-            file=sys.stderr,
-        )
-        return None
+    # §8, in both languages and on both counts: an instruction aimed at a
+    # reader, and a forecast about a company this publisher may not make.
+    for label, text in (("EN", meaning), ("AR", meaning_ar)):
+        broke = macro_types.directive(text) or macro_types.speculative(text)
+        if broke:
+            print(
+                f"   [news_insights] Refused ({label}: {broke!r}): {headline[:70]}",
+                file=sys.stderr,
+            )
+            return None, REFUSED
 
-    return meaning, meaning_ar
+    return (meaning, meaning_ar), OK
 
 
 def key_for(headline: str) -> str:
@@ -130,6 +165,7 @@ def enrich(items: list[dict], limit: int = 15) -> int:
     store = load_store()
     gained = 0
     generated = 0
+    changed = False
 
     # 1. Fill from cache first for all items
     for item in items:
@@ -150,6 +186,7 @@ def enrich(items: list[dict], limit: int = 15) -> int:
             print(f"   news insights: {gained} filled from cache ({len(store)} cached)")
         return gained
 
+    refused = 0
     for item in items:
         if generated >= limit:
             break
@@ -161,25 +198,49 @@ def enrich(items: list[dict], limit: int = 15) -> int:
             continue
 
         k = key_for(headline)
-        if k in store:
+        # An insight is final; a refusal is only final once it has happened
+        # MAX_REFUSALS times. `refused` was a bool before it was a count, and
+        # True == 1, so an old entry simply has two attempts left.
+        held = store.get(k)
+        if held is not None and (held.get("meaning")
+                                 or int(held.get("refused") or 0) >= MAX_REFUSALS):
             continue
 
-        res = generate_insight(headline)
-        if res:
-            meaning, meaning_ar = res
+        result, why = generate_insight(headline)
+        if result:
+            meaning, meaning_ar = result
             store[k] = {"meaning": meaning, "meaning_ar": meaning_ar}
             item["meaning"] = meaning
             item["meaning_ar"] = meaning_ar
             generated += 1
             gained += 1
-        else:
-            # Mark as attempted/empty to avoid endless loops on transient errors
-            store[k] = {"meaning": "", "meaning_ar": ""}
+            changed = True
+            # Write as we go. A backfill is a few hundred paid calls over
+            # twenty minutes, and a single write at the end means an
+            # interruption at call 190 buys nothing at all.
+            if generated % 10 == 0:
+                save_store(store)
+        elif why == REFUSED:
+            # One sample broke a rule. Count it and let a later run try again;
+            # only the count reaching MAX_REFUSALS retires the headline.
+            attempts = int((store.get(k) or {}).get("refused") or 0) + 1
+            store[k] = {"meaning": "", "meaning_ar": "", "refused": attempts}
+            refused += 1
+            changed = True
+        elif why == UNREACHABLE:
+            # Not an answer about anything. Marking it here is what blacklisted
+            # headlines for good; stop asking this run and leave the store alone.
+            print("   news insights: the model is unreachable; stopping this run",
+                  file=sys.stderr)
+            break
+        # UNUSABLE: a malformed reply, also not an answer. Move on and let a
+        # later run ask again.
 
-    if generated > 0:
+    if changed:
         save_store(store)
 
-    print(f"   news insights: {gained} filled ({generated} generated, {len(store)} cached)")
+    print(f"   news insights: {gained} filled ({generated} generated, "
+          f"{refused} refused, {len(store)} cached)")
     return gained
 
 

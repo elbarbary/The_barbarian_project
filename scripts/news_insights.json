@@ -1,75 +1,858 @@
 {
+  "\"معيط\": هذه اهم المحاور التي يجب ان تعمل عليها الحكومه بعد انتهاء برنامج «الصندوق» نهايه العام الجاري": {
+    "meaning": "Post-program economic policy frameworks transition macroeconomic management from multilateral lending conditions to domestic fiscal discipline, private sector enablement, and structural revenue measures.",
+    "meaning_ar": "تعتمد أطر السياسات الاقتصادية لما بعد برامج التمويل الدولي على التحول من الالتزام بشروط المقرضين إلى تطبيق الانضباط المالي المحلي، وتمكين القطاع الخاص، وتنفيذ الإصلاحات الهيكلية للإيرادات العامة."
+  },
+  "10 مستثمرين يضخون 100 مليون دولار في مشروعات صناعيه ب «العين السخنه»": {
+    "meaning": "This capital allocation represents direct capital expenditure across multiple manufacturing facilities in the Ain Sokhna industrial zone, adding operational physical assets and production infrastructure to the local industrial base.",
+    "meaning_ar": "يمثل هذا التخصيص الرأسمالي إنفاقاً رأسمالياً مباشراً عبر عدة منشآت تصنيعية في منطقة العين السخنة الصناعية، مما يضيف أصولاً تشغيلية مادية وبنية تحتية إنتاجية للقاعدة الصناعية المحلية."
+  },
+  "20 years of letters between a New York writer and a London bookseller, with not a word wasted": {
+    "meaning": "Cross-border mail-order commerce operates through direct consumer-to-retailer communication, long-term customer relationship management, and international logistics fulfillment for specialized inventory.",
+    "meaning_ar": "تعمل تجارة الطلبات البريدية عبر الحدود من خلال التواصل المباشر بين المستهلك وبائع التجزئة، وإدارة علاقات العملاء طويلة الأجل، وعمليات الشحن واللوجستيات الدولية للبضائع المتخصصة."
+  },
+  "235 مليون دولار مشتريات الاجانب في ادوات الدين المصريه بالسوق الثانوي": {
+    "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
+    "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
+  },
+  "500 مكتب بريد تستقبل طلبات تحديث بيانات البطاقات التموينيه المتوقفه": {
+    "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
+    "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
+  },
+  "Beijing and Cairo put working tracks around their relationship": {
+    "meaning": "Establishing structured bilateral working tracks sets up standardized administrative channels for institutional coordination between Egyptian and Chinese entities on industrial projects, trade agreements, and joint infrastructure initiatives.",
+    "meaning_ar": "يؤسس تحديد مسارات العمل الثنائية قنوات إدارية منظمة للتنسيق المؤسسي بين الكيانات المصرية والصينية في مجالات المشاريع الصناعية والاتفاقيات التجارية والمبادرات الاستثمارية المشتركة."
+  },
+  "Insider trading blackout now runs on the earnings calendar only": {
+    "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
+    "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
+  },
+  "Meet Egyptian 3D concrete printing company Layn’s Zeyad Zein": {
+    "meaning": "3D concrete printing introduces additive manufacturing technology to the domestic construction and building materials sector, automating on-site material deposition and altering standard construction supply chains.",
+    "meaning_ar": "يُدخل قطاع الطباعة الخرسانية ثلاثية الأبعاد تقنيات التصنيع المضاف إلى قطاع التشييد ومواد البناء المحلي، مما يؤتمت عمليات صب الخرسانة ويغير سلاسل الإمداد الإنشائية التقليدية."
+  },
+  "Ridley Scott’s The Dog Stars is a well-acted post-apocalyptic film, but predictable": {
+    "meaning": "Critical media reception serves as a consumer performance metric in the film and entertainment distribution industry, where operational activity centers on box office releases and content licensing.",
+    "meaning_ar": "تمثل التقييمات النقدية مؤشراً لقياس استجابة المستهلكين في قطاع الترفيه والتوزيع السينمائي، حيث يرتكز النشاط التشغيلي على طرح الأفلام في دور العرض وترخيص المحتوى."
+  },
+  "The little details make the meal at Château Ayadina in New Cairo": {
+    "meaning": "This highlights product differentiation and operational service standards within the food and beverage (F&B) consumer sector operating in the New Cairo commercial market.",
+    "meaning_ar": "يوضح هذا تميز المنتجات ومستويات التشغيل وجودة الخدمة في قطاع الأغذية والمشروبات الاستهلاكي العامل بالسوق التجاري في القاهرة الجديدة."
+  },
+  "Why NPR’s Book of the Day is worth adding to your daily listening": {
+    "meaning": "Daily short-form podcast programming operates as a digital content distribution model, connecting media networks with the book publishing sector through audio streaming channels.",
+    "meaning_ar": "يعمل البث الصوتي القصير اليومي كنموذج لتوزيع المحتوى الرقمي، حيث يربط بين شبكات الإعلام وقطاع نشر الكتب عبر قنوات البث الرقمي."
+  },
+  "back to school pre university education in focus": {
+    "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
+    "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
+  },
+  "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
+    "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
+  },
+  "«الطرق والكباري» تطرح 32.4 الف متر مربع للشراكه مع القطاع الخاص": {
+    "meaning": "The General Authority for Roads and Bridges offers state-owned land plots through a public-private partnership framework, granting private developers long-term development, operation, or usufruct rights over public infrastructure-adjacent real estate.",
+    "meaning_ar": "تطرح الهيئة العامة للطرق والكباري مساحات من الأراضي المملوكة للدولة عبر نموذج الشراكة مع القطاع الخاص، مما يمنح المطورين حقوق تطوير الأصول العقارية المجاورة للبنية التحتية وتشغيلها بنظام حق الانتفاع."
+  },
+  "«لي فارما» الهنديه تدرس انشاء مصنع للخامات الدواييه في مصر": {
+    "meaning": "Establishing an active pharmaceutical ingredient (API) facility represents an upstream integration in the domestic drug manufacturing supply chain, transitioning component sourcing from direct importation to local chemical synthesis.",
+    "meaning_ar": "يمثل إنشاء مصنع للمواد الخام الدوائية تكاملاً رأسياً في سلاسل إمداد تصنيع الدواء محلياً، حيث يحول توفير المكونات الفعالة من الاستيراد المباشر إلى مسار التصنيع والإنتاج المحلي."
+  },
+  "«لينج لونج» تدشن مجمعا صناعيا متكاملا لانتاج اطارات السيارات باستثمارات 2 مليار دولار": {
+    "meaning": "A direct capital deployment of $2 billion to establish a dedicated tire manufacturing complex introduces large-scale domestic production capacity to Egypt's automotive supply chain.",
+    "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة ملياري دولار لإنشاء مجمع صناعي لإطارات السيارات إضافة لطاقات إنتاجية محلية واسعة النطاق داخل سلاسل إمداد قطاع السيارات في مصر."
+  },
+  "اتحاد منتجي الدواجن: سعر كيلو الفراخ ب65 جنيه وطبق البيض ب60 تسليم المزرعه": {
+    "meaning": "The Poultry Producers Association sets baseline wholesale farm-gate prices for live chicken at EGP 65 per kilogram and egg crates at EGP 60, establishing the direct production-level cost basis before intermediary distribution, transport, and retail markups are applied across the supply chain.",
+    "meaning_ar": "يحدد اتحاد منتجي الدواجن أسعار تسليم المزرعة للكيلو من الدواجن الحية عند 65 جنيهاً ولطبق البيض عند 60 جنيهاً، وهو ما يمثل التكلفة الأساسية عند مستوى الإنتاج قبل إضافة هوامش النقل والتوزيع وتجارة التجزئة في سلاسل الإمداد."
+  },
+  "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
+    "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
+    "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
+  },
+  "ارباح “الماليه والصناعيه” تنمو 42% في النصف الاول": {
+    "meaning": "The company's semi-annual financial results record a 42% year-over-year rise in net profit, reflecting higher operational output, realized product pricing, or operating margin efficiency during the six-month period.",
+    "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة نموًا بنسبة 42% في صافي الأرباح مقارنة بالفترة المقابلة من العام السابق، وهو ما يعكس زيادة في حجم الإنتاج التشغيلي، أو أسعار بيع المنتجات، أو كفاءة هوامش التشغيل خلال فترة الستة أشهر."
+  },
+  "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
+    "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
+    "meaning_ar": "يؤدي نقص قدرات التكرير إلى تقليص المعروض من المشتقات البترولية، مما يرفع أسعار الوقود ويزيد تكاليف النقل والتشغيل المباشرة عبر سلاسل التوريد."
+  },
+  "ارتفاع اسعار الوقود يضغط علي المزارعين في بريطانيا والولايات المتحده": {
+    "meaning": "Higher fuel prices raise the direct operational costs of agricultural machinery, transport, and energy-intensive inputs for farming businesses.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الوقود إلى زيادة تكاليف التشغيل المباشرة للآلات الزراعية وعمليات النقل والمدخلات كثيفة الاستهلاك للطاقة في قطاع الزراعة."
+  },
+  "ارتفاع تكاليف الاقتراض في بريطانيا يدفع الاسر الي مراجعه الرهون العقاريه وتكاليف المعيشه": {
+    "meaning": "Higher benchmark interest rates raise debt-servicing expenses on variable-rate and refinancing mortgages, increasing the allocation of disposable household income toward interest obligations.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الفائدة المرجعية إلى زيادة أعباء خدمة الدين على الرهون العقارية ذات الفائدة المتغيرة وتلك المعاد تمويلها، مما يرفع نسبة الفوائد المسددة من الدخل المتاح للأسر."
+  },
   "ارتفاع سهم “فولكس فاجن” 9% عقب اتفاق لاعاده الهيكله": {
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
     "meaning_ar": "يعكس ارتفاع السهم استجابة السوق لاتفاق إعادة الهيكلة، والذي يتضمن عادةً خفض التكاليف التشغيلية وإعادة تنظيم الطاقات الإنتاجية وتوجيه رأس المال لتحسين الكفاءة التشغيلية للشركة."
+  },
+  "استجابه لتصريحات بشان اسعار الفايده..عوايد سندات الخزانه الامريكيه تتراجع الخميس": {
+    "meaning": "Lower US Treasury yields reflect higher bond prices following monetary policy commentary, setting the global benchmark rate for sovereign and corporate debt pricing.",
+    "meaning_ar": "يعكس انخفاض عوائد سندات الخزانة الأمريكية ارتفاع أسعارها استجابةً لتصريحات السياسة النقدية، وهو ما يحدد السعر المرجعي لتسعير أدوات الدين السيادية وتكاليف اقتراض الشركات عالمياً."
   },
   "اسعار اعلاف الدواجن والمواشي والبط اليوم الجمعه 4-9-2026": {
     "meaning": "Feed represents the primary direct operational input cost for the poultry and livestock industries, directly impacting production costs, producer operating margins, and end-market protein prices.",
     "meaning_ar": "تمثل الأعلاف عنصر التكلفة التشغيلية المباشرة الرئيسي لقطاعي الدواجن والثروة الحيوانية، مما يؤثر بشكل مباشر على تكلفة الإنتاج وهوامش ربح المربين والمنتجين وأسعار السلع النهائية."
   },
+  "اسعار البيض اليوم الجمعه 4-9-2026 في مصر": {
+    "meaning": "Daily egg price updates track spot clearing levels across farms and retail channels, reflecting current feed input costs and market supply balances within the domestic food commodities sector.",
+    "meaning_ar": "تعكس نشرات أسعار البيض اليومية مستويات التداول الفورية في المزارع ومنافذ التجزئة، بناءً على تكاليف مدخلات الأعلاف وحجم المعروض المتاح في قطاع السلع الغذائية المحلي."
+  },
+  "اسعار البيض اليوم السبت 5-9-2026 في مصر": {
+    "meaning": "Daily egg price reporting reflects current wholesale farm-gate and retail market clearing rates shaped by poultry feed input costs and daily supply chain distribution volumes.",
+    "meaning_ar": "يعكس رصد أسعار بيض المائدة اليومية مستويات التوازن السعرية الحالية في المزارع ومنافذ التجزئة، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف وحجم المعروض اليومي في سلاسل الإمداد."
+  },
+  "اسعار الحديد في مصر خلال سبتمبر 2026.. حديد عز عند 39850 جنيها": {
+    "meaning": "The announced factory-gate price for Ezz Steel sets the monthly benchmark for local rebar distribution, directly determining the raw material procurement costs for domestic construction projects.",
+    "meaning_ar": "يحدد السعر المعلن لحديد عز من أرض المصنع السعر المرجعي الشهري لتوزيع حديد التسليح محلياً، وهو ما يحدد تكاليف توريد المواد الخام لمشروعات التشييد والبناء المحلية."
+  },
+  "اسعار الخضروات والفاكهه والبطاطس والطماطم اليوم السبت 5-9-2026": {
+    "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
+    "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
+  },
+  "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن حركة العرض والطلب وتكاليف الأعلاف ومصروفات التوزيع في قطاع الإنتاج الداجني والغذائي المصري."
+  },
+  "اسعار الدواجن اليوم السبت 5-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect current spot market rates determined by feed input costs, farm-level operational expenses, and prevailing supply-demand dynamics in the domestic market.",
+    "meaning_ar": "تعكس النشرات اليومية لأسعار الدواجن مستويات الأسعار الفورية في السوق المحلي، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف ومصروفات التشغيل في المزارع وتوازنات العرض والطلب."
+  },
+  "اسعار الديزل تسجل مستوي قياسيا في امريكا": {
+    "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
+    "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
+  },
   "اسعار السمك اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "This indicates regular market updates on wholesale and retail seafood commodity prices, reflecting local aquaculture supply levels, fuel logistics costs, and consumer demand in Egypt's food and protein sector.",
     "meaning_ar": "يشير ذلك إلى المتابعة الدورية لأسعار تداول الأسماك بالجملة والتجزئة، والتي تعكس مستويات المعروض من الاستزراع السمكي، وتكاليف النقل والخدمات اللوجستية، وحجم الطلب الاستهلاكي في قطاع السلع الغذائية بمصر."
+  },
+  "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
+    "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
+    "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الجمعه 4-9-2026": {
     "meaning": "This headline reflects daily pricing updates in the local poultry exchange, which directly affect operating revenue and profit margins for agribusiness and poultry producers based on prevailing feed costs and supply-demand dynamics.",
     "meaning_ar": "يعكس هذا العنوان تحديثات الأسعار اليومية في بورصة الدواجن، والتي تؤثر بشكل مباشر على الإيرادات التشغيلية وهامش ربحية شركات الإنتاج الداجني وفقاً لتكاليف الأعلاف وتوازنات العرض والطلب."
   },
+  "اسعار الفراخ في بورصه الدواجن اليوم السبت 5-9-2026": {
+    "meaning": "The poultry exchange publishes daily spot wholesale prices, establishing the benchmark reference rate for trading live birds between commercial farms, distributors, and retail markets.",
+    "meaning_ar": "تحدد بورصة الدواجن الأسعار اليومية الفورية لتداول الدواجن الحية بالجملة، مما يوفر السعر المرجعي المنظم للتعاملات بين المزارع والموزعين ومنافذ البيع بالتجزئة."
+  },
+  "اسعار الفضه في مصر ترتفع جنيهين.. عيار 999 يسجل 106 جنيهات للجرام": {
+    "meaning": "Local retail silver prices in Egypt track changes in global spot commodity prices and the exchange rate of the Egyptian pound against the US dollar.",
+    "meaning_ar": "تتبع أسعار تداول الفضة في السوق المحلي المصري التغيرات في الأسعار الفورية للسلع عالمياً وحركة سعر صرف الجنيه المصري مقابل الدولار الأمريكي."
+  },
+  "اسعار الفضه في مصر تهبط 2.89% خلال اسبوع.. عيار 999 يسجل 104.75 جنيه": {
+    "meaning": "Domestic silver prices adjust according to movements in international metal spot benchmarks and the local USD/EGP exchange rate, repricing raw bullion and manufacturing inputs across the local market.",
+    "meaning_ar": "تتحدد أسعار الفضة في السوق المحلي وفقاً لتغيرات الأسعار الفورية في البورصات العالمية وسعر صرف الجنيه مقابل الدولار، مما يعيد تسعير السبائك ومدخلات التصنيع."
+  },
+  "اسعار الكتاكيت اليوم السبت 5-9-2026 في مصر": {
+    "meaning": "Daily chick prices represent the baseline input cost for poultry farm production cycles, determined by the interaction of hatchery supply volumes and feed costs across the domestic livestock value chain.",
+    "meaning_ar": "تمثل الأسعار اليومية للكتاكيت تكلفة المدخلات الأساسية لدورات الإنتاج في مزارع الدواجن، وتتحدد بناءً على حجم معروض معامل التفريخ وتكاليف الأعلاف ضمن سلاسل إمداد الثروة الداجنة المحلية."
+  },
   "اسعار اللحوم الجملي والضاني والبقري والمفروم اليوم الجمعه 4-9-2026": {
     "meaning": "Daily tracking of retail meat prices reflects underlying shifts in livestock supply chains, feed costs, and domestic consumer demand patterns affecting the broader food and protein sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار اللحوم بالتجزئة التغيرات في سلاسل إمداد الثروة الحيوانية وتكاليف الأعلاف ومستويات الطلب الاستهلاكي المحلي المؤثرة على قطاع الصناعات الغذائية والبروتينية."
+  },
+  "اسعار اللحوم اليوم السبت 5-9-2026 في الاسواق": {
+    "meaning": "This is a daily commodity pricing bulletin tracking wholesale and retail meat prices, which directly reflect current livestock feed costs, import pricing mechanisms, and immediate supply levels across domestic distribution channels.",
+    "meaning_ar": "يمثل هذا رصداً يومياً لأسعار بيع اللحوم بالجملة والتجزئة، والتي تعكس بشكل مباشر تكاليف الأعلاف الحالية، وآليات تسعير الاستيراد، ومستويات المعروض في قنوات التوزيع المحلية."
+  },
+  "اصدارات السندات الامريكيه تتجه نحو مستوي قياسي في سبتمبر": {
+    "meaning": "A record volume of US bond issuances reflects an expansion in the total supply of fixed-income securities, whereby sovereign or corporate issuers absorb liquidity directly from global capital markets through structured debt offerings.",
+    "meaning_ar": "يمثل تسجيل مستويات قياسية في إصدارات السندات الأمريكية توسعاً في المعروض الكلي من أدوات الدخل الثابت، حيث تقوم الجهات المصدرة بسحب سيولة من أسواق رأس المال العالمية عبر طرح أدوات دين جديدة."
   },
   "اصلاحات قايمه علي اليات السوق الحره تدخل حيز التنفيذ في كوبا": {
     "meaning": "The implementation of free-market reforms transitions pricing and resource allocation from state-directed planning to supply and demand mechanisms, facilitating private enterprise growth and opening channels for cross-border trade and foreign investment.",
     "meaning_ar": "يشير بدء سريان إصلاحات السوق الحرة إلى تحول آليات التسعير وتوزيع الموارد الاقتصادية من التخطيط المركزي للدولة إلى قوى العرض والطلب، مما يدعم نمو المشروعات الخاصة وتدفقات الاستثمار والتجارة الخارجية."
   },
+  "اطلاق اول برنامج استرالي لتاهيل كوادر هييه الثروه المعدنيه في علوم التعدين": {
+    "meaning": "The initiative establishes a technical training framework between Australia and the Egyptian Mineral Resources Authority to transfer operational expertise in mining sciences and regulatory oversight.",
+    "meaning_ar": "تؤسس المبادرة إطاراً للتدريب الفني بين أستراليا وهيئة الثروة المعدنية لنقل الخبرات التشغيلية في علوم التعدين وآليات الرقابة التنظيمية."
+  },
+  "الاتحاد الاوروبي يدرس حظر تصدير النفايات وخرده الالومنيوم": {
+    "meaning": "An export restriction on European aluminum scrap retains secondary raw material within the EU market, which alters global scrap trade flows and affects input procurement dynamics for international recyclers and smelters.",
+    "meaning_ar": "يُبقي فرض قيود على تصدير خردة الألومنيوم الأوروبية المواد الخام الثانوية داخل السوق الأوروبية، مما يغير مسارات التجارة العالمية للخردة ويؤثر على آليات توريد المدخلات لشركات الصهر وإعادة التدوير دولياً."
+  },
+  "الاتحاد الاوروبي ينضم الي حمله واشنطن لخنق شرايين ايران الماليه": {
+    "meaning": "The expansion of coordinated multilateral financial sanctions restricts cross-border banking transactions, limits foreign currency access, and enforces asset freezes across European and US jurisdictions.",
+    "meaning_ar": "يؤدي تنسيق وتوسيع نطاق العقوبات المالية متعددة الأطراف إلى تقييد المعاملات المصرفية عبر الحدود، وتحديد الوصول إلى العملات الأجنبية، وتطبيق تجميد الأصول ضمن النطاقات القضائية للاتحاد الأوروبي والولايات المتحدة."
+  },
+  "الاسترليني يستقر مع تغلب ضعف الدولار علي مخاوف السندات البريطانيه": {
+    "meaning": "Broad-based weakness in the US dollar counterbalances downward valuation pressure stemming from volatility and higher yields in the UK sovereign debt market, keeping the exchange rate of the currency pair stable.",
+    "meaning_ar": "يوازن التراجع العام في سعر صرف الدولار الأمريكي الضغوط النزولية الناتجة عن تقلبات عوائد السندات السيادية البريطانية، مما يحافظ على استقرار تداول زوج العملات في سوق الصرف الأجنبي."
+  },
+  "الاسهم الامريكيه تتراجع وتسجل اداء اسبوعيا متباينا": {
+    "meaning": "US equity indices experience downward price movements at the close, reflecting divergent weekly performance across different market sectors based on corporate earnings reports and macroeconomic data releases.",
+    "meaning_ar": "تشهد مؤشرات الأسهم الأمريكية تراجعاً في أسعارها، وهو ما يعكس تبايناً في الأداء الأسبوعي لمختلف القطاعات الاقتصادية بناءً على نتائج الأعمال الفصلية والبيانات الاقتصادية الكلية الصادرة."
+  },
+  "الاسهم الاوروبيه تتراجع الجمعه بعد صدور بيانات التوظيف الامريكيه القويه": {
+    "meaning": "Strong US employment data keeps Federal Reserve interest rates elevated for longer, increasing global yields and triggering equity capital outflows from European markets.",
+    "meaning_ar": "تؤدي بيانات التوظيف الأمريكية القوية إلى إبقاء أسعار الفائدة لدى الاحتياطي الفيدرالي مرتفعة لفترة أطول، مما يرفع العوائد العالمية ويدفع تدفقات رؤوس الأموال خارج أسواق الأسهم الأوروبية."
+  },
+  "الاسهم الاوروبيه تتراجع قبل صدور بيانات الوظايف الامريكيه": {
+    "meaning": "Equity markets adjust trading volumes and asset pricing ahead of major macroeconomic reports, as US employment data directly influences global benchmark interest rates and international capital allocation.",
+    "meaning_ar": "تُعدّل أسواق الأسهم أحجام التداول وتقييمات الأصول قبل صدور التقارير الاقتصادية الكلية الرئيسية، حيث تؤثر بيانات التوظيف الأمريكية بشكل مباشر في مسارات أسعار الفائدة القياسية العالمية وتوزيع رؤوس الأموال الدولية."
+  },
+  "الاسهم الاوروبيه ترتفع في الختام لكنها تسجل خساير اسبوعيه": {
+    "meaning": "European equities reflect a daily technical rebound at the market close, while the cumulative weekly performance captures net capital outflows across trading sessions.",
+    "meaning_ar": "تعكس الأسهم الأوروبية ارتداداً فنياً يومياً عند الإغلاق، بينما يسجل الأداء الأسبوعي التراكمي صافي تدفقات نقدية خارجة عبر جلسات التداول."
+  },
+  "الاسهم الاوروبيه تصعد الخميس مع استقرار اسعار النفط وتراجع سندات الخزانه": {
+    "meaning": "Declining treasury yields lower discount rates for equity valuation models, while stable oil prices maintain predictable input and energy costs for European corporations.",
+    "meaning_ar": "يؤدي تراجع عوائد السندات إلى خفض معدلات الخصم المستخدمة في تقييم الأسهم، بينما يحدد استقرار أسعار النفط تكاليف الطاقة ومدخلات الإنتاج للشركات الأوروبية."
+  },
+  "الاسهم اليابانيه ترتفع للمره الاولي في 5 جلسات": {
+    "meaning": "Japanese equity indices record a positive trading session following four consecutive sessions of net capital outflows and index declines, reflecting intraday purchasing activity across major listed constituents.",
+    "meaning_ar": "تسجل مؤشرات الأسهم اليابانية جلسة تداول إيجابية بعد أربع جلسات متتالية من صافي خروج السيولة وتراجع المؤشرات، مما يعكس نشاط شراء خلال الجلسة عبر الشركات الرئيسية المدرجة."
+  },
+  "الاقتصاد الامريكي يضيف 162 الف وظيفه في اغسطس متجاوزا التوقعات باكثر من 3 اضعاف": {
+    "meaning": "Higher-than-expected US non-farm payroll additions reflect elevated labor market activity, which correlates with benchmark interest rate settings and global capital flow allocations.",
+    "meaning_ar": "تعكس إضافة وظائف في الاقتصاد الأمريكي بأعلى من التقديرات قوة النشاط في سوق العمل، وهو ما يرتبط بمحددات أسعار الفائدة وتدفقات السيولة ورؤوس الأموال عالمياً."
+  },
+  "الاقتصاد الامريكي يضيف 162 الف وظيفه في اغسطس.. والبطاله تستقر عند 4.1%": {
+    "meaning": "US non-farm payroll additions reflect net hiring activity across non-agricultural sectors, while the unemployment rate measures the proportion of the active labor force seeking employment, serving as core macroeconomic indicators for global monetary policy and liquidity conditions.",
+    "meaning_ar": "تعكس إضافة الوظائف غير الزراعية صافي نشاط التوظيف عبر القطاعات غير الزراعية في الولايات المتحدة، بينما يقيس معدل البطالة نسبة القوى العاملة النشطة التي تبحث عن عمل، وتُعد هذه الأرقام مؤشرات اقتصادية كلية أساسية للسياسة النقدية والسيولة العالمية."
+  },
+  "البنوك الصينيه تشتري سندات الخزانه الامريكيه مع ارتفاع عوايدها مجددا": {
+    "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
+    "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة العائد الدوري المحقق على الأصول المقومة بالنقد الأجنبي، حيث تقوم المحافظ المصرفية بإدارة فوائض السيولة الأجنبية عبر حيازة هذه الأدوات ذات العائد الثابت."
+  },
+  "البيتكوين تهبط دون 80 الف دولار بعد تقرير الوظايف الامريكي": {
+    "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
+    "meaning_ar": "تؤثر بيانات تقرير الوظائف الأمريكي على توقعات أسعار الفائدة ومستويات السيولة العالمية، مما ينعكس مباشرة على التقييمات السعرية للأصول عالية المخاطر مثل العملات المشفرة."
+  },
+  "الجيش الامريكي يعلن استهداف 3 ناقلات نفط ايرانيه": {
+    "meaning": "Disruptions to maritime energy transport affect global crude logistics by increasing geopolitical risk premiums on oil benchmarks and raising marine freight insurance rates across regional shipping corridors.",
+    "meaning_ar": "تؤثر الاضطرابات في النقل البحري للطاقة على سلاسل إمداد النفط العالمية عبر زيادة علاوة المخاطر الجيوسياسية في أسعار الخام ورفع تكاليف التأمين على الشحن البحري في الممرات الإقليمية."
+  },
+  "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
+    "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
+    "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
+  },
+  "الحكومه توافق علي تجديد بروتوكول تنفيذ مشروعات مصر الرقميه لمده 3 سنوات": {
+    "meaning": "Extending the Digital Egypt project protocol establishes a continuous three-year operational framework for contracted technology firms to supply digital transformation and IT infrastructure services to government entities.",
+    "meaning_ar": "يضع تجديد بروتوكول مشروعات مصر الرقمية إطاراً تشغيلياً مستمراً لمدة ثلاث سنوات يتيح لشركات التكنولوجيا المتعاقدة تقديم خدمات التحول الرقمي والبنية التحتية لتكنولوجيا المعلومات للجهات الحكومية."
+  },
+  "الحكومه توافق علي صرف اعانات اجتماعيه الي 304 حالات متضرره من توسعه الطريق الدايري": {
+    "meaning": "The government allocates public compensation funds to individuals displaced or affected by national infrastructure expansion projects.",
+    "meaning_ar": "تخصص الحكومة مخصصات مالية من الموازنة العامة لتعويض الأفراد المتضررين من نزع الملكية لتنفيذ مشروعات البنية التحتية القومية."
+  },
+  "الدولار يرتفع مع تجاوز الوظايف الامريكيه للتوقعات": {
+    "meaning": "Stronger-than-expected US labor market data reinforces higher US interest rate benchmarks, strengthening the US dollar index against global currencies and shifting foreign capital flows toward dollar-denominated sovereign assets.",
+    "meaning_ar": "تؤدي بيانات سوق العمل الأمريكي الأقوى من المتوقع إلى ترسيخ أسعار الفائدة المرتفعة على الدولار، مما يرفع مؤشر العملة الأمريكية مقابل العملات العالمية ويوجه تدفقات رؤوس الأموال نحو الأصول المقومة بالدولار."
+  },
+  "الدولار ينتعش مع تجاوز نمو الوظايف الامريكيه التوقعات": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 2
+  },
+  "الذهب يتجه لمكاسب اسبوعيه طفيفه وسط ترقب بيانات الوظايف الامريكيه": {
+    "meaning": "Gold prices trade with narrow weekly gains as market participants price in interest rate expectations ahead of official US employment data.",
+    "meaning_ar": "تتداول أسعار الذهب بمكاسب أسبوعية طفيفة مع تسعير المتعاملين لتوقعات أسعار الفائدة قبيل صدور بيانات التوظيف الأمريكية الرسمية."
+  },
+  "الذهب يهبط بعدما عززت بيانات الوظايف الامريكيه توقعات رفع الفايده": {
+    "meaning": "Strong US labor data increases the likelihood of higher interest rates, which raises sovereign bond yields and the opportunity cost of holding non-yielding assets like gold, leading to price declines on global and local exchanges.",
+    "meaning_ar": "تؤدي قوة بيانات التوظيف الأمريكية إلى زيادة احتمالات رفع أسعار الفائدة، مما يرفع عوائد السندات وتكلفة الفرصة البديلة لحيازة الأصول غير المدرة للعائد مثل الذهب، وينعكس في انخفاض أسعاره بالأسواق العالمية والمحلية."
+  },
+  "الذهب يهبط مع توقعات رفع الفايده الامريكيه": {
+    "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
+  },
+  "الرقابه الماليه تصدر اول دليل شامل لقواعد وضوابط نشاط التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority (FRA) establishes a unified regulatory handbook consolidating operating standards, licensing conditions, and compliance rules for consumer finance companies.",
+    "meaning_ar": "تضع الهيئة العامة للرقابة المالية دليلاً تنظيمياً موحداً يجمع المعايير التشغيلية وضوابط الترخيص وقواعد الامتثال للشركات العاملة في نشاط التمويل الاستهلاكي."
+  },
+  "الرقابه الماليه توافق علي دعوه عموميه فيركيم مصر للنظر في اضافه نشاط انتاج وبيع الطاقه الكهرباييه": {
+    "meaning": "The regulatory approval allows the company to convene its general assembly to amend its corporate purpose, adding power generation and electricity sales to its registered commercial activities.",
+    "meaning_ar": "تتيح موافقة الهيئة للشركة دعوة جمعيتها العامة لتعديل غرضها الأساسي بإضافة نشاط توليد وبيع الطاقة الكهربائية إلى سجل أنشطتها التجارية."
+  },
+  "الرييس السيسي يوجه بتبني مشروع لتخضير القاهره وتحويل المساحات المخلاه الي مسطحات خضراء": {
+    "meaning": "This presidential directive allocates urban redevelopment activities toward landscaping and environmental contracting, involving public works tenders for contracting firms, nursery suppliers, and irrigation infrastructure providers across cleared municipal land in Cairo.",
+    "meaning_ar": "يوجه هذا التكليف الرئاسي أعمال التطوير الحضري نحو قطاعات تنسيق الحدائق والمقاولات البيئية، عبر طرح مناقصات أعمال عامة لشركات المقاولات، وموردي المسطحات الخضراء، وشبكات الري في المساحات المفرغة بمحافظة القاهرة."
+  },
+  "الزراعه: توطين تقاوي البطاطس في مصر يسهم في ضخ استثمارات جديده": {
+    "meaning": "Localizing potato seed production substitutes imported agricultural inputs with domestic propagation facilities, shifting capital deployment toward local multiplication infrastructure and domestic supply chains.",
+    "meaning_ar": "يرتكز توطين إنتاج تقاوي البطاطس على إحلال المدخلات الزراعية المستوردة بوحدات إكثار محلية، مما يوجه النفقات الرأسمالية نحو تأسيس البنية التحتية الزراعية وسلاسل التوريد داخل السوق المحلي."
+  },
+  "السيسي لولي العهد السعودي: امن المملكه وساير الدول العربيه يعد امتدادا للامن القومي المصري": {
+    "meaning": "Bilateral strategic and security coordination between Egypt and Saudi Arabia provides the foundational framework for cross-border capital flows, sovereign investment partnerships, and intergovernmental financial arrangements between both economies.",
+    "meaning_ar": "يشكل التنسيق الأمني والسياسي الثنائي بين مصر والمملكة العربية السعودية الإطار الحاكم لتدفقات رؤوس الأموال العابرة للحدود، والشراكات الاستثمارية السيادية، والترتيبات المالية الحكومية المشتركة بين البلدين."
+  },
+  "السيوله المحليه M2 ترتفع الي 15.5 تريليون جنيه بنهايه يوليو": {
+    "meaning": "An increase in domestic liquidity (M2) to 15.5 trillion EGP represents an expansion in the broad money supply circulating within the banking sector and the economy, comprising currency in circulation and total deposits in local and foreign currencies.",
+    "meaning_ar": "يمثل ارتفاع السيولة المحلية (M2) إلى 15.5 تريليون جنيه توسعاً في إجمالي المعروض النقدي المتداول في القطاع المصرفي والاقتصاد، والذي يضم النقد المتداول خارج البنوك وإجمالي الودائع بالعملتين المحلية والأجنبية."
+  },
+  "السيوله تتنقل بين القطاعات وتدفع EGX30 للاقتراب من 57 الف نقطه": {
+    "meaning": "Sector rotation reallocates trading capital across different industry groups, maintaining aggregate market turnover and driving upward movement in the benchmark EGX30 index.",
+    "meaning_ar": "تعيد عمليات التدوير القطاعي توزيع السيولة النقدية بين مختلف القطاعات، مما يحافظ على إجمالي قيم التداول في السوق ويدفع مؤشر EGX30 الرئيسي نحو مستويات أعلى."
+  },
+  "الصحه: 25 مليار جنيه تكلفه العلاج علي نفقه الدوله خلال 8 اشهر": {
+    "meaning": "State-funded medical expenditures channel public healthcare budget allocations directly into operational claims and procurement volumes for public hospitals and authorized private healthcare providers.",
+    "meaning_ar": "توجه مخصصات العلاج على نفقة الدولة الإنفاق الحكومي المباشر نحو سداد مستحقات الخدمات الطبية وتوريدات الأدوية في المستشفيات العامة ومقدمي الرعاية الصحية المعتمدين."
+  },
+  "الصعيد العامه للمقاولات: PRE Group تخفض حصتها في الشركه الي 2.81%": {
+    "meaning": "A reduction in equity stake by a major shareholder alters the company's ownership structure and redistributes voting power among the remaining equity holders.",
+    "meaning_ar": "يؤدي تخفيض حصة مساهم رئيسي إلى تعديل هيكل ملكية الشركة وإعادة توزيع القوة التصويتية بين المساهمين المتبقين."
+  },
+  "الصومال تصادق علي اتفاقيه التجاره الحره القاريه الافريقيه": {
+    "meaning": "Ratification integrates Somalia into the continental trade framework, applying preferential tariff schedules and standardized customs protocols for cross-border goods trade among member states, including Egypt.",
+    "meaning_ar": "يُدرج هذا التصديق دولة الصومال ضمن الإطار التجاري للاتفاقية القارية، مما يُطبق جداول التعريفات الجمركية التفضيلية والإجراءات الجمركية الموحدة لتبادل السلع بين الدول الأعضاء ومنها مصر."
+  },
+  "الصين تتفوق علي امريكا في معدلات استخراج اليورانيوم من البحر": {
+    "meaning": "Seawater uranium extraction introduces an unconventional raw material supply source for nuclear fuel cycles, altering global feedstock access and technological distribution between major industrial economies.",
+    "meaning_ar": "يمثل استخراج اليورانيوم من مياه البحر مصدراً غير تقليدي لتأمين المواد الخام اللازمة لدورة الوقود النووي، مما يغير آليات توفير الإمدادات والتوزيع التكنولوجي بين الاقتصادات الصناعية الكبرى."
+  },
+  "الصين تكشف عن خطه خمسيه لتعزيز تطوير الشركات الصغيره والمتوسطه": {
+    "meaning": "Government five-year development plans for small and medium-sized enterprises establish regulatory frameworks, allocate state-directed financing and tax incentives, and set procurement quotas across industrial supply chains.",
+    "meaning_ar": "تحدد الخطط الخمسية الحكومية للمشروعات الصغيرة والمتوسطة الأطر التنظيمية، وتوجه التمويل والحوافز الضريبية المعتمدة من الدولة، وتضع معايير المشتريات ضمن سلاسل التوريد الصناعية."
+  },
+  "الطرق والكباري تنفي سوء حاله طريق قفط القصير وتوكد استمرار اعمال التطوير": {
+    "meaning": "The continuity of infrastructure maintenance on the Qift-Quseir corridor maintains the operational flow of logistics and freight transport between Upper Egypt and the Red Sea mining and trade hubs.",
+    "meaning_ar": "يضمن استمرار أعمال الصيانة والتطوير في محور قفط-القصير تدفق حركة النقل والخدمات اللوجستية بين صعيد مصر ومراكز التعدين والتجارة على البحر الأحمر دون انقطاع تشغيلي."
+  },
   "الطماطم ب25 جنيها.. اسعار الخضراوات والفاكهه اليوم الجمعه 4-9-2026": {
     "meaning": "Changes in daily retail prices for fresh produce reflect seasonal agricultural supply dynamics, logistics costs, and wholesale market liquidity, which directly influence household food consumption and headline CPI inflation trends.",
     "meaning_ar": "تعكس تغيرات أسعار تجزئة الخضراوات والفاكهة اليومية ديناميكيات المعروض الزراعي الموسمي وتكاليف النقل واللوجستيات، وهو ما يؤثر بشكل مباشر على الإنفاق الاستهلاكي للأسر ومؤشرات التضخم العام."
+  },
+  "العريان يتوقع استمرار موجه بيع السندات الحكوميه العالميه وارتفاع العوايد": {
+    "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
+    "meaning_ar": "تؤدي مبيعات السندات السيادية العالمية إلى انخفاض أسعارها وارتفاع عوائدها بحكم العلاقة العكسية بين السعر والعائد، مما يرفع تكاليف الاقتراض القياسية في أسواق الدين الدولية."
+  },
+  "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
+    "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
+    "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
+  },
+  "الماليه والصناعيه المصريه تحقق 343.8 مليون جنيه ارباحا مستقله بالنصف الاول بارتفاع 42%": {
+    "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
+    "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
+  },
+  "النفط يتجه لمكاسب اسبوعيه بفعل توترات ايران": {
+    "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
+    "meaning_ar": "تؤدي التوترات الجيوسياسية المرتبطة بدولة رئيسية منتجة للنفط إلى إضافة علاوة مخاطر العرض إلى الأسعار القياسية العالمية، مما ينعكس على تكاليف استيراد الطاقة وأسعار مدخلات الإنتاج للقطاعات المرتبطة."
+  },
+  "الهند تشترط الحصول علي رسوم جمركيه تفضيليه في اتفاق التجاره مع امريكا": {
+    "meaning": "Preferential customs tariffs establish reduced import duties between negotiating trade partners compared to standard Most Favored Nation rates. This trade mechanism directly determines the landed border cost of goods traded between the two countries.",
+    "meaning_ar": "تحدد الرسوم الجمركية التفضيلية تعريفات استيراد مخفضة بين الشركاء التجاريين مقارنة بمعدلات دولة الرعاية الأولى القياسية. وتحدد هذه الآلية التجارية بشكل مباشر تكلفة البضائع المتبادلة بين الدولتين عند المنافذ الجمركية."
+  },
+  "الوظايف الامريكيه تقفز 162 الفا في اغسطس.. واستقرار معدل البطاله": {
+    "meaning": "The US labor market data reflects net non-farm payroll growth alongside an unchanged unemployment rate, serving as a primary macroeconomic indicator for global monetary policy benchmarks and cross-border capital flows.",
+    "meaning_ar": "توضح بيانات سوق العمل الأمريكي إضافة صافية في الوظائف غير الزراعية مع ثبات معدل البطالة، وتعمل هذه الأرقام كمؤشر اقتصادي كلي رئيسي يوجه السياسات النقدية العالمية وتدفقات رؤوس الأموال الدولية."
+  },
+  "اليابان وامريكا تحرزان تقدما في اتفاق استثماري بقيمه 550 مليار دولار": {
+    "meaning": "A large-scale bilateral investment agreement establishes formal mechanisms for cross-border capital allocation, joint venture funding, and supply chain integration between participating nations across targeted sectors.",
+    "meaning_ar": "يحدد الاتفاق الاستثماري الثنائي آليات رسمية لتوجيه تدفقات رؤوس الأموال عبر الحدود، والتمويل المشترك للمشروعات، والربط التشغيلي لسلاسل التوريد بين الدولتين في قطاعات محددة."
+  },
+  "امريكا تحقق في سلامه سيارات سايبركاب التابعه ل”تسلا”": {
+    "meaning": "Regulatory safety investigations involve formal compliance reviews, technical audits, and verification procedures that assess autonomous vehicle systems against federal safety standards.",
+    "meaning_ar": "تتضمن تحقيقات السلامة التنظيمية مراجعات رسمية للامتثال وتدقيقاً فنياً وإجراءات تحقق لتقييم أنظمة المركبات ذاتية القيادة وفقاً لمعايير السلامة المعتمدة."
+  },
+  "امريكا تستهدف كيانات تركيه بعقوبات جديده مرتبطه بايران": {
+    "meaning": "The imposition of secondary sanctions restricts targeted entities from accessing dollar-clearing systems and international banking networks, halting cross-border trade settlements and supply chain operations tied to sanctioned jurisdictions.",
+    "meaning_ar": "يؤدي فرض العقوبات الثانوية إلى حظر وصول الكيانات المستهدفة إلى أنظمة المقاصة بالدولار والشبكات المصرفية الدولية، مما يعطل التسويات التجارية وسلاسل الإمداد المرتبطة بالجهات الخاضعة للعقوبات."
+  },
+  "انهيار مطور عقاري استرالي يهز سوق الايتمان الخاص": {
+    "meaning": "The collapse of a major real estate developer exposes private credit funds to non-performing debt assets and prompts direct lenders to reprice risk across non-bank lending portfolios.",
+    "meaning_ar": "يؤدي انهيار مطور عقاري إلى تعريض صناديق الائتمان الخاص لأصول ديون متعثرة، ويدفع جهات الإقراض المباشر إلى إعادة تسعير المخاطر عبر محافظ التمويل غير المصرفي."
+  },
+  "ايرادات اغسطس القياسيه ب29 مليار دولار تعزز توقعات فوكسكون لربع ثالث قوي": {
+    "meaning": "Monthly revenue figures provide the primary accounting data used to compile top-line financial results for the quarterly reporting period in electronics manufacturing.",
+    "meaning_ar": "تُشكل بيانات الإيرادات الشهرية الأساس المحاسبي المباشر لاحتساب إجمالي نتائج الأعمال المالية للفترة الربع سنوية في قطاع تصنيع الإلكترونيات."
+  },
+  "ايرادات النفط الروسيه تهبط لادني مستوي في 6 اشهر": {
+    "meaning": "A decline in Russian oil revenue reflects lower realized export prices and shipped crude volumes, which directly determines the state's fiscal cash inflows from the hydrocarbon sector.",
+    "meaning_ar": "يعكس هبوط إيرادات النفط الروسية تراجع أسعار البيع الفعلية وأحجام الخام المصدر، وهو ما يحدد التدفقات المالية للموازنة العامة من قطاع الطاقة."
+  },
+  "ايطاليا تدعو البنوك وشركات الطاقه لدعم الماليه العامه": {
+    "meaning": "Government calls for contributions from the banking and energy sectors involve fiscal mechanisms such as solidarity levies, windfall taxes, or pre-paid tax arrangements, transferring liquidity directly from corporate balance sheets to the state treasury.",
+    "meaning_ar": "تتضمن دعوات الحكومات للمساهمة المالية من قطاعي البنوك والطاقة آليات مالية مثل الضرائب الاستثنائية على الأرباح أو الرسوم التضامنية، مما ينقل السيولة مباشرة من الميزانيات العمومية للشركات إلى الخزانة العامة للدولة."
+  },
+  "بايونيرز بروبرتيز تقلص نسبتها في الصعيد للمقاولات الي 2و81": {
+    "meaning": "Pioneers Properties for Urban Development reduces its equity ownership stake in Upper Egypt Contracting to 2.81%, which scales down its direct voting power and representation on the company's shareholder register.",
+    "meaning_ar": "تخفض شركة بايونيرز بروبرتيز للتنمية العمرانية حصة ملكيتها في رأسمال شركة الصعيد العامة للمقاولات إلى 2.81%، مما يقلص قوتها التصويتية ونسبة مساهمتها المباشرة في هيكل الملكية."
+  },
+  "بدء حجز 25 الف وحده سكنيه بنظامي «الايجار» و«المنتهي بالتملك» 20 سبتمبر": {
+    "meaning": "The state introduces 25,000 public residential units under fixed lease and rent-to-own models, providing long-term occupancy contracts without immediate full capital outlays by tenants.",
+    "meaning_ar": "طرح 25 ألف وحدة سكنية حكومية بنظامي الإيجار العادي والإيجار المنتهي بالتملك، وهو ما يتيح عقود إشغال طويلة الأجل دون سداد كامل القيمة الرأسمالية للوحدة مقدماً."
   },
   "بروتوكول تعاون بين الرقابه الماليه والبريد المصري لاتاحه خدمه بريدي للمراسلات الرسميه الالكترونيه": {
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
     "meaning_ar": "يؤسس البروتوكول بنية تحتية رقمية موحدة بين الهيئة العامة للرقابة المالية والبريد المصري لأتمتة المراسلات الرسمية، مما يقلل التكاليف التشغيلية ويسرع الإجراءات الإدارية داخل القطاع المالي غير المصرفي."
   },
+  "بريطانيا تخفف قواعد الموافقه علي مشروعات البنيه التحتيه لتعزيز الاستثمار": {
+    "meaning": "Easing regulatory approval frameworks streamlines the planning process and reduces the administrative lead time required to initiate infrastructure developments.",
+    "meaning_ar": "يؤدي تخفيف الأطر التنظيمية للموافقات إلى تبسيط الإجراءات التخطيطية وتقليص المدة الزمنية الإدارية اللازمة لبدء تنفيذ مشروعات البنية التحتية."
+  },
+  "بشاير المحصول الجديد تهبط باسعار الارز الشعير الف جنيه للطن": {
+    "meaning": "The entry of the new seasonal harvest expands immediate supply in the local market, lowering raw paddy rice spot prices by 1,000 EGP per ton and adjusting procurement input costs for agricultural processing and milling operations.",
+    "meaning_ar": "يؤدي تدفق التوريدات الأولية للمحصول الجديد إلى زيادة حجم المعروض في السوق المحلي، مما يخفض أسعار التداول الفوري للأرز الشعير بمقدار ألف جنيه للطن ويحدد تكاليف شراء المواد الخام لمضارب ومصنعي الأغذية."
+  },
+  "بنك استثمار: 40 مليار دولار فقط من الاصول المرمزه عالميا حتي الان": {
+    "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
+    "meaning_ar": "تمثل الأصول المرمّزة أدوات مالية وأصولاً تقليدية تم تحويلها إلى رموز رقمية على شبكات السجلات الموزعة، حيث يبلغ إجمالي قيمتها السوقية عالمياً 40 مليار دولار في الوقت الحالي."
+  },
+  "بنك انجلترا: مخاوف تمويل الانفاق الدفاعي توجج اضطرابات اسواق السندات": {
+    "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
+    "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
+  },
+  "بورتو السخنه تنطلق الي عصر جديد": {
+    "meaning": "The headline refers to operational restructuring, renovation, or a new phase of project delivery and service management at the Porto Sokhna real estate development.",
+    "meaning_ar": "يشير العنوان إلى تنفيذ خطة لإعادة الهيكلة التشغيلية، أو أعمال التجديد، أو إطلاق مرحلة جديدة من التسليمات وإدارة الخدمات في مشروع بورتو السخنة العقاري."
+  },
+  "بيسنت: اسعار النفط قد تهبط الي 40 دولارا للبرميل بعد انتهاء الصراع مع ايران": {
+    "meaning": "Global crude oil benchmarks incorporate a geopolitical risk premium during regional conflicts, and the cessation of supply disruption risks realigns pricing with baseline global supply-demand balances and marginal extraction costs.",
+    "meaning_ar": "تعكس أسعار النفط العالمية علاوة مخاطر جيوسياسية أثناء النزاعات الإقليمية، بينما يعيد انحسار مخاطر انقطاع الإمدادات تسعير الخام وفقاً لتوازنات العرض والطلب الأساسية وتكاليف الإنتاج الحدية."
+  },
+  "تايلاند تطلق برنامجا لتوسيع نطاق وصول الجمهور الي ادوات الذكاء الاصطناعي": {
+    "meaning": "The initiative establishes a state-supported digital infrastructure framework that distributes artificial intelligence tools and computing resources across public and commercial channels.",
+    "meaning_ar": "تؤسس المبادرة إطاراً للبنية التحتية الرقمية المدعومة حكومياً لتوزيع أدوات الذكاء الاصطناعي وموارد الحوسبة عبر القنوات العامة والتجارية."
+  },
+  "تباطو نمو النشاط الخدمي في منطقه اليورو لادني مستوي منذ شهرين": {
+    "meaning": "A slowdown in Eurozone services growth reflects a deceleration in the expansion rate of business operations and new order volumes across European service industries.",
+    "meaning_ar": "يعكس تباطؤ نمو النشاط الخدمي في منطقة اليورو انخفاضاً في وتيرة توسع العمليات التشغيلية وحجم الطلبيات الجديدة لدى شركات قطاع الخدمات الأوروبية."
+  },
+  "تباين الاسهم الامريكيه عقب صدور تقرير الوظايف": {
+    "meaning": "Official employment data provides data points on labor market tightness, causing equity sectors to trade in diverging directions based on their varying sensitivities to benchmark interest rate trajectories.",
+    "meaning_ar": "توفر بيانات التوظيف الرسمية مؤشرات حول مرونة سوق العمل، مما يؤدي إلى تباين أداء القطاعات في أسواق الأسهم وفقاً لدرجة تأثر كل قطاع باتجاهات أسعار الفائدة."
+  },
+  "تخصيص 12.53 فدان في سوهاج لانشاء صوامع غلال": {
+    "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
+    "meaning_ar": "يُعد تخصيص الأراضي لإنشاء صوامع الغلال توسيعاً للبنية التحتية للتخزين الفعلي ودمجاً للخدمات اللوجستية الزراعية ضمن سلاسل إمداد السلع الاستراتيجية."
+  },
+  "تراجع اسعار الذهب قبيل صدور تقرير الوظايف في امريكا": {
+    "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
+    "meaning_ar": "تتحرك أسعار الذهب عالمياً نتيجة لإعادة تموضع المتعاملين قبل صدور البيانات الاقتصادية الكلية، حيث تؤثر بيانات سوق العمل الأمريكي بشكل مباشر على تقييم الدولار وتسعير المعادن الثمينة."
+  },
+  "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
+    "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
+    "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
+  },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
+  },
+  "تراجع عوايد سندات الخزانه الامريكيه مع ترقب بيانات الوظايف": {
+    "meaning": "Yields on U.S. Treasury securities decrease as debt prices rise, reflecting shifts in sovereign bond market trading prior to the release of official labor market statistics.",
+    "meaning_ar": "تنخفض عوائد سندات الخزانة الأمريكية مع ارتفاع أسعارها في الأسواق، وهو ما يعكس حركة التداول على أدوات الدين السيادي قبيل صدور البيانات الرسمية لسوق العمل."
+  },
+  "تراجع مبيعات التجزيه بمنطقه اليورو 0.6% خلال يوليو مخالفه التوقعات": {
+    "meaning": "Retail sales data measures consumer spending on final goods, and a 0.6% contraction reflects an active decline in household goods consumption and retail turnover across the Eurozone economy for the period.",
+    "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي على السلع النهائية، ويشير انكماشها بنسبة 0.6% إلى تراجع فعلي في وتيرة استهلاك الأسر وحجم التداول التجاري داخل منطقة اليورو خلال تلك الفترة."
+  },
+  "ترامب يضغط لخفض الفايده ويهدد بوقف التجاره مع الدول التي لديها فوايض": {
+    "meaning": "Lowering central bank interest rates alters sovereign borrowing costs and currency valuation dynamics, while restricting trade with surplus nations establishes cross-border tariff barriers and regulates bilateral import and export volumes.",
+    "meaning_ar": "يؤدي خفض أسعار الفائدة إلى تغيير تكاليف الاقتراض ومحددات تسعير العملة، بينما يفرض تقييد التجارة مع الدول ذات الفوائض حواجز جمركية وينظم أحجام تدفقات التصدير والاستيراد الثنائية."
+  },
+  "ترامب يطالب الفيدرالي الامريكي بخفض الفايده": {
+    "meaning": "The US Federal Reserve's benchmark policy rate sets the cost of US dollar borrowing globally and determines the yield differential between dollar assets and emerging market debt instruments.",
+    "meaning_ar": "تحدد أسعار الفائدة المرجعية لمجلس الاحتياطي الفيدرالي تكلفة الاقتراض بالدولار الأمريكي عالمياً، وتشكل الفارق في العائد بين الأصول الدولارية وأدوات الدين في الأسواق الناشئة."
+  },
+  "تركيا تعيد احياء خطه خصخصه جسرين شهيرين وطرق سريعه": {
+    "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
+    "meaning_ar": "تنقل خصخصة البنية التحتية حقوق الإدارة التشغيلية والصيانة وتحصيل رسوم المرور الخاصة بالجسور والطرق السريعة المملوكة للدولة إلى شركات امتياز من القطاع الخاص مقابل رسوم امتياز تُسدد للحكومة."
+  },
+  "تضم سندات باندا.. مجلس الوزراء: طرح سندات دوليه باجمالي 3 مليارات دولار خلال العام المالي الحالي": {
+    "meaning": "The government issues foreign-currency debt instruments, including Chinese renminbi-denominated Panda bonds, to secure $3 billion in external budget financing during the current fiscal year.",
+    "meaning_ar": "تُصدر الحكومة أدوات دين بالعملة الأجنبية، بما في ذلك سندات الباندا المقومة باليوان الصيني، لتوفير تمويل خارجي للموازنة العامة بقيمة 3 مليارات دولار خلال العام المالي الحالي."
+  },
+  "تقرير: 400 مليار دولار تدفقات اجنبيه الي الاسهم الامريكيه في الربع الثاني": {
+    "meaning": "Foreign portfolio inflows represent the transfer and allocation of non-domestic capital into US-listed equity securities, expanding cross-border ownership of shares within the US stock market during the quarter.",
+    "meaning_ar": "تمثل التدفقات الأجنبية حركة رؤوس الأموال الدولية الوافدة من خارج الولايات المتحدة والموجهة لحيازة الأسهم المدرجة في الأسواق المالية الأمريكية خلال الربع الثاني."
+  },
+  "تقرير: 800 مليار دولار انفاق متوقع علي الذكاء الاصطناعي في امريكا خلال 2026": {
+    "meaning": "Capital spending of this scale allocates corporate cash flows directly into technology supply chains, focusing on data center infrastructure, specialized semiconductor procurement, and compute-power resources.",
+    "meaning_ar": "يوجه الإنفاق الرأسمالي بهذا الحجم التدفقات النقدية للشركات نحو سلاسل إمداد التكنولوجيا، وتحديداً البنية التحتية لمراكز البيانات، وتوريد أشباه الموصلات المتخصصة، وموارد الحوسبة."
+  },
+  "تقرير: اوروبا تضع اموال البنوك المركزيه في قلب الاسواق المرمزه": {
+    "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
+    "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
+  },
+  "توقعات بتعافي الوظايف الامريكيه وسط ترقب قرار الفيدرالي بشان الفايده": {
+    "meaning": "US employment metrics serve as primary inputs for Federal Reserve interest rate policy, which directly determines international capital flows and USD liquidity pricing across emerging markets such as Egypt.",
+    "meaning_ar": "تُشكّل مؤشرات الوظائف الأمريكية مدخلات رئيسية لقرارات الفائدة لدى مجلس الاحتياطي الفيدرالي، والتي تحدد مسار تدفقات رؤوس الأموال الدولية وتكلفة تسعير سيولة الدولار في الأسواق الناشئة ومنها مصر."
+  },
+  "توقيع مذكره تفاهم لاقامه قاعده لتخطيط وانشاء مصانع السيارات في مصر": {
+    "meaning": "This memorandum of understanding establishes a collaborative framework for designing and developing automotive manufacturing facilities within the domestic market.",
+    "meaning_ar": "تحدد مذكرة التفاهم هذه إطاراً تعاونياً لتخطيط وتطوير منشآت لتصنيع السيارات داخل السوق المحلي."
+  },
+  "ثروه مليارديرات العالم تتجاوز 15 تريليون دولار": {
+    "meaning": "Total billionaire wealth represents the aggregated market valuation of equity holdings in publicly traded and private enterprises, real estate, and financial assets priced across global capital markets.",
+    "meaning_ar": "يمثل إجمالي ثروات المليارديرات القيمة السوقية المجمعة لحصص الملكية في الشركات المدرجة والخاصة والأصول المالية والرأسمالية المقومة بالأسعار الجارية في الأسواق العالمية."
+  },
+  "جهاز تنميه المشروعات يشارك في معرض الصين الدولي": {
+    "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
+    "meaning_ar": "توفر المشاركة في المعارض التجارية الدولية منصات عرض للمشروعات الصغيرة والمتوسطة المحلية وتربط المنتجين المحليين بالأسواق والمشترين الخارجيين عبر قنوات تواصل مباشر."
+  },
+  "جون سعد: دليل ضوابط التمويل الاستهلاكي يغلق الثغرات ويرفع انضباط السوق": {
+    "meaning": "The consumer finance regulatory guide establishes standardized compliance and operational requirements for non-bank financial institutions, defining uniform credit assessment rules and contract terms across the sector.",
+    "meaning_ar": "يضع دليل ضوابط التمويل الاستهلاكي معايير تشغيلية وإلزامية موحدة للمؤسسات المالية غير المصرفية، محددًا قواعد التقييم الائتماني وشروط التعاقد عبر القطاع."
+  },
+  "خبيره تمويل: مصر تستطيع خفض تكلفه الدين ب «سندات طريق الحرير»": {
+    "meaning": "Silk Road bonds (Panda bonds) are renminbi-denominated debt instruments issued in the Chinese onshore market, offering sovereign issuers an alternative funding venue with interest rates linked to Chinese market benchmarks rather than US dollar or euro rates.",
+    "meaning_ar": "سندات طريق الحرير (سندات الباندا) هي أدوات دين مقومة باليوان الصيني يتم إصدارها في السوق الصينية المحلية، مما يتيح للجهات السيادية مصادر تمويل مرتبطة بأسعار الفائدة القياسية الصينية كبديل عن أسواق الدين المقومة بالدولار أو اليورو."
+  },
+  "د. محمد عوض: مصر وايطاليا امام فرصه حقيقيه للانتقال بالشراكه الاقتصاديه الي افاق اكثر تاثيرا": {
+    "meaning": "Bilateral economic partnerships between Egypt and Italy involve direct cross-border trade, joint industrial ventures, and technological cooperation across energy, manufacturing, and agricultural sectors.",
+    "meaning_ar": "تتضمن الشراكات الاقتصادية الثنائية بين مصر وإيطاليا التبادل التجاري المباشر، والمشروعات الصناعية المشتركة، والتعاون الفني في قطاعات الطاقة والتصنيع والزراعة."
+  },
+  "د. محمود محيي الدين: لماذا لا يشعر عموم الناس عن حق بتحسن في الموشرات الاقتصاديه الكليه وما هو الحل؟": {
+    "meaning": "Macroeconomic indicators reflect aggregate metrics such as headline GDP, currency stabilization, and inflation rates, while household purchasing power depends on the transmission lag of real wage adjustments and consumer price distribution. This structural lag creates a disparity between top-level balance sheet improvements and micro-level disposable income.",
+    "meaning_ar": "تعكس المؤشرات الاقتصادية الكلية بيانات مجمعة مثل الناتج المحلي الإجمالي واستقرار العملة ومعدلات التضخم العامة، بينما ترتبط القدرة الشرائية للأفراد بالفارق الزمني لتعديل الأجور الحقيقية وانتقال استقرار الأسعار إلى السلع، مما يفرز فجوة زمنية بين تحسن المؤشرات القومية والدخل المتاح للإنفاق."
+  },
+  "د. مدبولي: استمرار الحرب وتداعياتها احد اسوا السيناريوهات للاقتصاد المصري حتي 2030": {
+    "meaning": "Geopolitical conflicts in the region directly impact external revenue streams, particularly Suez Canal receipts, while raising import costs for energy and commodities and increasing sovereign borrowing spreads.",
+    "meaning_ar": "تؤثر النزاعات الجيوسياسية الإقليمية بشكل مباشر على مصادر الدخل الخارجي، لا سيما إيرادات قناة السويس، كما ترفع تكاليف استيراد الطاقة والسلع الأساسية وتزيد من هوامش الاقتراض السيادي."
+  },
+  "درجات الحراره غدا.. طقس شديد الحراره علي جنوب الصعيد والاقصر 40": {
+    "meaning": "High temperatures in Upper Egypt directly raise cooling and power operating loads for industrial, agricultural, and hospitality facilities in the region.",
+    "meaning_ar": "يؤدي ارتفاع درجات الحرارة في صعيد مصر بصورة مباشرة إلى زيادة أحمال التبريد واستهلاك الطاقة التشغيلية في المنشآت الصناعية والزراعية والفندقية بالمنطقة."
+  },
+  "دويتشه بنك: العملات المستقره قد تدعم الطلب علي اصول الخزانه الامريكيه": {
+    "meaning": "Stablecoin issuers back the value of their tokens by holding liquid reserve assets, which consist primarily of short-term US Treasury bills and cash equivalents.",
+    "meaning_ar": "يقوم مصدرو العملات المستقرة بتغطية قيمة رموزهم الرقمية عبر الاحتفاظ بأصول احتياطية سائلة، تتكون أساساً من أذون الخزانة الأمريكية قصيرة الأجل والنقد وما يعادله."
+  },
+  "دويتشه بنك: امريكا تراهن علي ترميز الاصول لتعزيز قوه الدولار": {
+    "meaning": "Asset tokenization represents traditional financial assets as digital tokens on distributed ledger networks, using dollar-denominated instruments and stablecoins as the primary medium of exchange and settlement.",
+    "meaning_ar": "يتمثل ترميز الأصول في تحويل الأصول المالية التقليدية إلى رموز رقمية على شبكات السجلات الموزعة، مع استخدام الأدوات المالية والعملات المستقرة المقومة بالدولار كوسيط أساسي للتبادل والتسوية."
+  },
+  "رجال الاعمال المصريين تبحث فرص الاستثمار واداره الثروات وهيكله الصناديق بين مصر وموريشيوس": {
+    "meaning": "Cross-border cooperation in fund structuring and wealth management utilizes established financial center frameworks and bilateral treaties to facilitate the formation of investment vehicles and capital deployment between jurisdictions.",
+    "meaning_ar": "تُوظف الشراكات في هيكلة الصناديق وإدارة الثروات الأطر التنظيمية والاتفاقيات الثنائية لتأسيس الأوعية الاستثمارية وتسهيل حركة رؤوس الأموال بين الدولتين."
+  },
+  "رداد ونظيرته الايطاليه يعلنان فتح مسارات جديده امام الكوادر المصريه المدربه للعمل في روما": {
+    "meaning": "Bilateral labor agreements establish structured regulatory channels for skilled cross-border workforce deployment and align domestic vocational training standards with foreign labor market requirements.",
+    "meaning_ar": "تؤسس الاتفاقيات العمالية الثنائية أطراً تنظيمية رسمية لانتقال الكوادر الفنية عبر الحدود، وتربط معايير التدريب المهني المحلية باحتياجات سوق العمل الخارجي."
   },
   "رسوم الانتقالات الصيفيه لنجوم كاس العالم تبلغ 3.3 مليار دولار": {
     "meaning": "This reflects substantial capital circulation and liquidity deployment within the global sports entertainment industry, directly impacting football clubs' revenue streams, intangible asset valuations, and player-related operational expenditures.",
     "meaning_ar": "يعكس ذلك تدفقات رأسمالية وسيولة نقدية ضخمة داخل قطاع الترفيه الرياضي العالمي، مما يؤثر بشكل مباشر على إيرادات أندية كرة القدم، وتقييم الأصول غير الملموسة، والمصروفات التشغيلية المرتبطة بعقود اللاعبين."
   },
+  "روسنفت: الصين ساهمت في استقرار اسواق النفط العالميه خلال ازمه هرمز": {
+    "meaning": "Large-scale strategic petroleum reserves and diversified import logistics in major consumer nations absorb maritime transit disruptions and maintain equilibrium in physical crude supply chains.",
+    "meaning_ar": "تمتص الاحتياطيات البترولية الاستراتيجية وتنوع مسارات الاستيراد في الدول المستهلكة الكبرى اضطرابات الملاحة البحرية، مما يحافظ على توازن سلاسل إمداد النفط الخام الفعلية."
+  },
+  "روسيا تعزز صادراتها النفطيه الي الصين عبر القطب الشمالي": {
+    "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
+    "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
+  },
+  "رييس البورصه: 450 الف مستثمر جديد انضموا للسوق خلال ال8 اشهر الاخيره": {
+    "meaning": "An influx of 450,000 new registered market participants expands the exchange's investor base and broadens the distribution of domestic trading accounts across listed instruments.",
+    "meaning_ar": "يؤدي انضمام 450 ألف متعامل جديد إلى توسيع قاعدة المستثمرين في البورصة وزيادة انتشار حسابات التداول المحلية عبر الأوراق المالية المقيدة."
+  },
+  "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
+    "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
+    "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
+  },
+  "رييس الوزراء يوكد اهميه القطاع غير المصرفي ودور الرقابه الماليه في استقرار الاسواق": {
+    "meaning": "The non-banking financial sector operates alternative financing and liquidity channels—such as capital markets, leasing, factoring, and consumer finance—while the Financial Regulatory Authority (FRA) enforces disclosure rules, compliance frameworks, and systemic risk controls across these activities.",
+    "meaning_ar": "يوفر القطاع المالي غير المصرفي قنوات تمويل وسيولة بديلة تشمل سوق رأس المال والتأجير التمويلي والتخصيم والتمويل الاستهلاكي، بينما تتولى الهيئة العامة للرقابة المالية تطبيق أطر الامتثال ومعايير الإفصاح وضوابط إدارة المخاطر النظامية في هذه الأنشطة."
+  },
+  "رييس الوزراء: العام المالي 2025/2026 شهد تحقيق معدل نمو 5.1%": {
+    "meaning": "A 5.1% gross domestic product growth rate measures the annual rate of expansion in aggregate economic output across productive and service sectors relative to the prior fiscal year.",
+    "meaning_ar": "يعكس معدل نمو الناتج المحلي الإجمالي البالغ 5.1% نسبة التوسع السنوي في إجمالي حجم الإنتاج الاقتصادي عبر مختلف القطاعات الإنتاجية والخدمية مقارنة بالعام المالي السابق."
+  },
+  "رييس تنميه المشروعات: المشاركه في معرض الصين تعزز فرص التعاون التجاري": {
+    "meaning": "International trade fair participation connects domestic small and medium enterprises directly with foreign buyers and suppliers, establishing cross-border B2B commercial channels and supply chain networks.",
+    "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية ربط المشروعات الصغيرة والمتوسطة المحلية بالمشترين والموردين الأجانب، وإنشاء قنوات تجارية وشبكات توريد مباشرة عبر الحدود."
+  },
+  "رييس جهاز شوون البييه: مفتاح نجاح ملف التشجير يبدا من تخطيط طويل المدي": {
+    "meaning": "Long-term environmental planning for national afforestation structures municipal and state infrastructure expenditures, establishing multi-year procurement frameworks for agricultural nurseries, irrigation systems, and landscape contracting services.",
+    "meaning_ar": "يحدد التخطيط البيئي طويل المدى لملف التشجير أطر الإنفاق الحكومي والمحلي على البنية التحتية، من خلال وضع جداول توريد وتوريدات تعاقدية متعددة السنوات للمشاتل الزراعية وشبكات الري وشركات الصيانة والتنسيق."
+  },
+  "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
+    "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
+    "meaning_ar": "تؤدي زيادة أسعار الفائدة الأمريكية إلى رفع تكلفة الفرصة البديلة لحيازة الذهب كأصل عديم العائد وتعزيز قوة الدولار، مما يضغط سلبًا على تسعير السلع المقومة بالعملة الأمريكية."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
+  },
+  "سعر كرتونه البيض اليوم 5/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Daily price tracking for table eggs reflects the market equilibrium between consumer retail demand and poultry sector operational costs, including feed inputs, transport, and retail distribution margins.",
+    "meaning_ar": "يعكس الرصد اليومي لأسعار بيض المائدة التوازن الفعلي في السوق بين الطلب الاستهلاكي وتكاليف التشغيل في قطاع الدواجن، والتي تشمل مدخلات الأعلاف والنقل وهوامش التوزيع للتجزئة."
+  },
+  "سهم تسلا يرتفع 7% مع ترقب اطلاق سياره سايبركاب": {
+    "meaning": "Product unveilings price in market-clearing demand adjustments based on the introduction of new vehicle segments into the company's product line.",
+    "meaning_ar": "تعكس حركة الأسعار تسعير السوق لإضافة فئات مركبات جديدة إلى خطوط إنتاج الشركة."
+  },
+  "سهم سنوفليك يقفز 21% بدعم من الذكاء الاصطناعي": {
+    "meaning": "The share price of the cloud data company rises by 21% following reported commercial adoption and operational integration of artificial intelligence workloads on its platform.",
+    "meaning_ar": "يرتفع سعر سهم شركة البيانات السحابية بنسبة 21% إثر تسجيل نمو في الاستخدام التجاري والتكامل التشغيلي لأعباء عمل الذكاء الاصطناعي عبر منصتها."
+  },
+  "سهم “شي ان” يتراجع 9% في ثالث جلسات تداوله": {
+    "meaning": "Early trading sessions for newly listed shares often reflect an initial price discovery mechanism as open-market supply and demand dynamics adjust from initial offering levels.",
+    "meaning_ar": "تعكس جلسات التداول الأولى للأسهم حديثة الإدراج آلية اكتشاف السعر الأولي، حيث تتكيف قوى العرض والطلب في السوق المفتوحة مقارنة بمستويات الطرح الأولي."
+  },
+  "سياتل تايمز ونيوزداي تقاضيان اوبن ايه اي ومايكروسوفت بتهمه انتهاك حقوق النشر": {
+    "meaning": "Copyright litigation by news publishers against artificial intelligence developers introduces legal liability and directly involves the intellectual property licensing framework for training datasets.",
+    "meaning_ar": "تفرض الدعاوى القضائية المتعلقة بحقوق النشر والمرفوعة من المؤسسات الإعلامية ضد مطوري الذكاء الاصطناعي التزامات قانونية مباشرة تتعلق بأطر ترخيص الملكية الفكرية لبيانات التدريب."
+  },
+  "سيتي جروب يوجل توقع خفض الفايده الامريكيه الي يونيو 2027": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 2
+  },
+  "سيطره امريكا علي نفط فنزويلا تهدد مليارات الدولارات المستحقه للصين": {
+    "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
+    "meaning_ar": "تؤدي السيطرة الأمريكية على الأصول النفطية الفنزويلية إلى تعديل آلية سداد القروض المضمونة بالنفط، مما يعيد توجيه تدفقات الخام والإيرادات النقدية المرتبطة به بعيداً عن الدائنين الصينيين."
+  },
+  "صادرات كوريا الجنوبيه تتجاوز الرقم القياسي السنوي عند 709.4 مليار دولار": {
+    "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
+    "meaning_ar": "يعكس تسجيل الصادرات السنوية لمستويات قياسية ارتفاع إجمالي الشحنات الموجهة للأسواق الخارجية من السلع الصناعية، مما يوسع الميزان التجاري ويزيد من المقبوضات بالعملات الأجنبية."
+  },
+  "صناديق الاسهم الامريكيه تشهد سحوبات للاسبوع الثاني علي التوالي": {
+    "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
+    "meaning_ar": "تعني التدفقات الخارجة الصافية تجاوز إجمالي طلبات الاسترداد لحجم الاكتتابات الجديدة في صناديق الأسهم الأمريكية خلال فترة محددة، حيث يقوم مديرو الصناديق بتغطية هذه الاستردادات عبر استخدام الفوائض النقدية أو تسييل أجزاء من الأوراق المالية في المحافظ."
+  },
+  "صندوق CDP وبنك الاسكندريه يوقعان اتفاقيه ضمان لمحافظ القروض بقيمه حتي 30 مليون يورو": {
+    "meaning": "The agreement establishes a risk-sharing mechanism where CDP provides credit default guarantee coverage of up to EUR 30 million on designated loan portfolios originated by Bank of Alexandria.",
+    "meaning_ar": "تؤسس هذه الاتفاقية آلية لتوزيع المخاطر الائتمانية، حيث يقدم صندوق CDP تغطية ضد مخاطر تعثر السداد لمحفظة قروض محددة يصدرها بنك الإسكندرية بقيمة تصل إلى 30 مليون يورو."
+  },
+  "عاجل.. الرقابه الماليه تصدر دليلا شاملا لقواعد وضوابط التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
+    "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشغيلياً موحداً يحدد معايير الترخيص، وضوابط التقييم الائتماني، ومتطلبات الامتثال وإدارة المخاطر لشركات التمويل الاستهلاكي في مصر."
   },
   "عاجل.. هييه ميناء الاسكندريه والقابضه للنقل البحري ترفضان بيع حصتيهما في الاسكندريه لتداول الحاويات": {
     "meaning": "This decision preserves the company's current ownership structure and majority state control, keeping its maritime operational management unchanged and halting any transfer of controlling equity to external parties.",
     "meaning_ar": "يؤدي هذا القرار إلى الإبقاء على هيكل الملكية الحالي وحصة الأغلبية التابعة للقطاع العام دون تعديل، مما يحافظ على استقرار إدارة العمليات اللوجستية ويوقف أي انتقال للحصص الحاكمة إلى مستثمرين آخرين."
   },
+  "عاجل..البورصه المصريه تسجل قمه تاريخيه جديده فوق 56 الف نقطه": {
+    "meaning": "A market index reaching a new historical peak reflects an increase in the aggregate market capitalization of its constituent listed companies, driven by trades executing at higher settlement prices across the exchange.",
+    "meaning_ar": "يعكس تسجيل مؤشر السوق لقمة تاريخية جديدة ارتفاعاً في القيمة السوقية الإجمالية للشركات المدرجة المكونة له، نتيجة تنفيذ العمليات عند مستويات سعرية أعلى عبر منصة التداول."
+  },
+  "عزاء ابنه نجلاء فتحي بمسجد عمر بن عبد العزيز في مصر الجديده": {
+    "meaning": "This headline reports a personal social event and contains no operational, financial, or corporate mechanisms impacting capital markets or listed companies.",
+    "meaning_ar": "يتناول هذا الخبر مناسبة اجتماعية وشخصية، ولا يتضمن أي آليات تشغيلية أو مالية تؤثر على الشركات المدرجة أو أسواق المال."
+  },
+  "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
+    "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
+    "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
+  },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
     "meaning_ar": "يؤدي تأجيل الجمعية العامة لشركة ابن سينا فارما لعدم اكتمال النصاب القانوني إلى إرجاء التصويت الرسمي والقرارات المؤسسية بشأن بنود جدول الأعمال، مثل اعتماد القوائم المالية أو توزيعات الأرباح، لحين انعقاد الاجتماع الثاني وفقاً للضوابط القانونية."
+  },
+  "فيتش تبقي تصنيف قطر عند AA وترفع اسمها من قايمه المراقبه السلبيه": {
+    "meaning": "A sovereign credit rating of AA reflects high creditworthiness and low default risk, while removing the issuer from the negative watch list stabilizes its credit outlook under the rating agency's assessment framework.",
+    "meaning_ar": "يعكس التصنيف الائتماني السيادي عند مستوى AA جدارة ائتمانية مرتفعة ومخاطر تخلف منخفضة عن السداد، بينما يمثل رفع الدولة من قائمة المراقبة السلبية تثبيتاً لنظرتها الائتمانية وفق معايير وكالة التصنيف."
+  },
+  "قناه بنما تخفض عدد السفن العابره بسبب ظاهره ال نينيو المناخيه": {
+    "meaning": "Reducing daily vessel transit slots at the Panama Canal constrains throughput capacity on trans-oceanic maritime routes, altering cargo allocation across global shipping networks and alternative maritime corridors.",
+    "meaning_ar": "يؤدي تقليص عدد السفن اليومية العابرة لقناة بنما إلى تقييد الطاقة الاستيعابية لحركة النقل البحري وتغيير توزيع حركة الشحن عبر الممرات الملاحية الدولية البديلة."
+  },
+  "كندا تفقد 41.7 الف وظيفه قبل بدء تاثير الرسوم الامريكيه الجديده": {
+    "meaning": "Employment data shows a contraction of 41.7 thousand jobs in the Canadian labor market prior to the implementation of new US trade tariffs, reflecting pre-existing workforce reductions across affected economic sectors.",
+    "meaning_ar": "تُظهر بيانات التوظيف انكماشًا قدره 41.7 ألف وظيفة في سوق العمل الكندي قبل سريان الرسوم الجمركية الأمريكية الجديدة، مما يعكس تقليصًا فعليًا في حجم العمالة عبر القطاعات الاقتصادية المعنية."
+  },
+  "كوريا الجنوبيه تستعد لارسال قوات الي مضيق هرمز": {
+    "meaning": "The Strait of Hormuz functions as a critical maritime corridor for global oil shipments, where military deployments operate to protect commercial vessels and secure international energy supply routes.",
+    "meaning_ar": "يُمثّل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعمل التعزيزات العسكرية على تأمين حركة السفن التجارية وحماية مسارات إمدادات الطاقة الدولية."
+  },
+  "كيف تتاكد من سلامه زجاجه المياه المعباه قبل شرايها؟ 4 خطوات لحمايه صحتك": {
+    "meaning": "Consumer verification standards interface directly with packaging compliance, product traceability, and quality assurance protocols enforced across the bottled water and consumer beverages sector.",
+    "meaning_ar": "ترتبط معايير الفحص والتحقق لدى المستهلكين مباشرةً ببروتوكولات الامتثال للتعبئة والتغليف، وتتبع المنتجات، وضمان الجودة المطبقة في قطاع الأغذية والمشروبات المعبأة."
+  },
+  "كيف يتحول سوق الملابس الرياضه من نزيف استيرادي الي صناعه للتصدير؟": {
+    "meaning": "This transition involves replacing imported finished sportswear with domestic manufacturing capacity, utilizing local textile supply chains to serve both the domestic market and foreign buyers.",
+    "meaning_ar": "يتمثل هذا التحول في إحلال المنتجات تامة الصنع المستوردة في قطاع الملابس الرياضية عبر إنشاء قدرات تصنيع محلي، مع الاعتماد على سلاسل إمداد الغزل والنسيج لتلبية متطلبات السوق المحلي والأسواق الخارجية."
+  },
+  "لينج لونج الصينيه تستثمر ملياري دولار لتدشين مجمع صناعي في مصر لانتاج اطارات السيارات": {
+    "meaning": "This foreign direct investment establishes a local manufacturing complex for automotive tires, integrating industrial production capacity directly into Egypt's domestic supply chain.",
+    "meaning_ar": "يمثل هذا الاستثمار الأجنبي المباشر إنشاء مجمع تصنيع محلي لإطارات السيارات، مما يدمج طاقة إنتاجية صناعية مباشرة في سلاسل الإمداد المحلية في مصر."
+  },
+  "متحدث الصحه: الاولويه في اختيار الادويه للاكثر امانا وفاعليه وكفاءه": {
+    "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
+    "meaning_ar": "تعتمد المناقصات الحكومية والمشتريات المؤسسية للقطاع الصحي معايير محددة لترسية عقود التوريد تقوم على الفاعلية السريرية، ومعايير الأمان، وكفاءة التكلفة، مما ينظم تدفق المنتجات الدوائية داخل المنظومة الصحية التابعة للدولة."
+  },
+  "مجلس اداره ڤاليو يجدد الثقه في وليد حسونه رييسا تنفيذيا واعضاء اللجنه التنفيذيه لمده 3 سنوات": {
+    "meaning": "The extension of the executive committee's term for three years maintains management continuity and keeps existing operational strategies and corporate governance structures in place at the consumer finance firm.",
+    "meaning_ar": "يؤدي تمديد تفويض اللجنة التنفيذية لمدة ثلاث سنوات إلى الحفاظ على استمرارية الإدارة واستقرار الهياكل التشغيلية وأطر الحوكمة القائمة في شركة التمويل الاستهلاكي."
+  },
+  "محافظ القاهره يفتتح المهرجان الوطني للسلع بمشاركه «التموين» و«الزراعه» و«الانتاج الحربي»": {
+    "meaning": "This initiative establishes a direct-to-consumer distribution channel by coordinating state entities—Supply, Agriculture, and Military Production—to supply staple goods directly in Cairo, bypassing traditional wholesale and retail intermediary layers.",
+    "meaning_ar": "تنشئ هذه المبادرة قناة توزيع مباشرة للمستهلكين من خلال تنسيق جهات حكومية تشمل التموين والزراعة والإنتاج الحربي لتوفير السلع الأساسية في القاهرة، متجاوزةً حلقات الوساطة التقليدية لتجارة الجملة والتجزئة."
+  },
+  "محافظه الاسكندريه تطرح استغلال 3 شواطي لمده 3 سنوات": {
+    "meaning": "This public tender offers concession and operational rights for local beach facilities to commercial operators under a fixed three-year lease framework.",
+    "meaning_ar": "يمثل هذا الطرح مزايدة عامة لمنح حقوق استغلال وتشغيل منشآت الشواطئ للشركات بموجب عقود إيجار محددة بمدة ثلاث سنوات."
   },
   "محمد عوض: نستهدف تحويل الشراكه المصريه الايطاليه الي مشروعات واستثمارات ملموسه": {
     "meaning": "The statement reflects efforts to convert bilateral diplomatic and economic agreements between Egypt and Italy into foreign direct investment (FDI) inflows, industrial joint ventures, and localized infrastructure projects.",
     "meaning_ar": "يعكس التصريح التوجه نحو تحويل الاتفاقيات الاقتصادية الثنائية بين مصر وإيطاليا إلى تدفقات استثمار أجنبي مباشر، ومشاريع صناعية مشتركة، وتوسعات تشغيلية ملموسة."
   },
+  "محمود عصمت: الربط الكهربايي مع ايطاليا يعزز مكانه مصر كمركز اقليمي للطاقه": {
+    "meaning": "Cross-border electricity interconnection infrastructure links the national power transmission grid with European markets, establishing bilateral transmission capacity for energy trade.",
+    "meaning_ar": "تربط البنية التحتية للربط الكهربائي العابر للحدود شبكة نقل الكهرباء القومية بالأسواق الأوروبية، مما يوفر قدرات نقل ثنائية لتبادل الطاقة."
+  },
+  "مخاوف من تراجع محصول الكاكاو الغاني مع الطقس المتقلب والامراض": {
+    "meaning": "Adverse weather conditions and crop diseases in Ghana contract raw agricultural supply, directly affecting input availability and procurement dynamics across global chocolate and food processing supply chains.",
+    "meaning_ar": "تؤدي التقلبات الجوية والأمراض الزراعية في غانا إلى تقليص المعروض من المحاصيل، مما يؤثر مباشرة على وفرة المواد الخام وتكاليف التوريد ضمن سلاسل إمداد الصناعات الغذائية وصناعة الشوكولاتة عالمياً."
+  },
+  "مساعد وزير الصناعه للشيون الاستراتيجيه: صناعه السيارات منظومه متكامله وقاطره لنمو قطاعات عديده": {
+    "meaning": "The automotive industry operates as a multi-tier manufacturing ecosystem that sources inputs from domestic feeding industries, including metallurgy, plastics, electronics, and glass manufacturing. Assembly operations generate backward supply chain linkages across these industrial segments.",
+    "meaning_ar": "تعمل صناعة السيارات كمنظومة تصنيع متعددة المراحل تعتمد على مدخلات إنتاج من الصناعات المغذية المحلية، مثل المعادن والبلاستيك والإلكترونيات والزجاج، حيث ترتبط عمليات التجميع بسلاسل توريد خلفية مع هذه القطاعات الصناعية."
+  },
+  "مساعد وزير الصناعه: لو وصلنا لقاعده قويه من الموردين والمكون المحلي لازم اسعار السيارات تقل": {
+    "meaning": "Expanding the domestic automotive component supplier base substitutes imported vehicle inputs with locally manufactured parts, eliminating foreign currency requirements, ocean freight expenses, and import tariffs from the assembly cost structure.",
+    "meaning_ar": "يؤدي توسيع قاعدة موردي مكونات السيارات محلياً إلى إحلال المدخلات المستوردة بأجزاء مصنعة محلياً، مما يزيل متطلبات النقد الأجنبي ومصاريف الشحن الدولي والرسوم الجمركية من هيكل تكلفة تجميع المركبات."
+  },
+  "مساعد وزير الصناعه: نستهدف رفع المكون المحلي في صناعه السيارات من 20% الي 40%": {
+    "meaning": "Raising the domestic component requirement shifts automotive supply chain procurement toward local feeder manufacturers and alters the proportion of imported assembly parts in production input costs.",
+    "meaning_ar": "يؤدي رفع نسبة المكون المحلي إلى إعادة توجيه عمليات الشراء في سلاسل إمداد قطاع السيارات نحو مصنعي الصناعات المغذية المحلية وتغيير حصة أجزاء التجميع المستوردة ضمن مدخلات الإنتاج."
+  },
+  "مساعد وزير الصناعه: نعمل علي اعاده برنامج قوي لتطوير الموردين في قطاع السيارات": {
+    "meaning": "Supplier development programs in the automotive industry establish technical qualification standards and operational frameworks to integrate domestic component manufacturers directly into automotive assembly supply chains.",
+    "meaning_ar": "تضع برامج تطوير الموردين في قطاع السيارات معايير التأهيل الفني والأطر التشغيلية لدمج مصنعي المكونات المحلية مباشرة ضمن سلاسل إمداد مصانع تجميع السيارات."
+  },
   "مساهم يتخارج من “الاهرام للطباعه” بقيمه 1.69 مليون جنيه": {
     "meaning": "A shareholder executed a complete equity divestment in El Ahram for Printing and Packaging with a transaction value of EGP 1.69 million, shifting the company's ownership structure and free-float distribution on the EGX.",
     "meaning_ar": "قام أحد المساهمين بتنفيذ تخارج كامل من هيكل ملكية شركة الأهرام للطباعة والتغليف بقيمة تداول بلغت 1.69 مليون جنيه، مما يعيد توزيع الحصص ونسبة الأسهم حرة التداول في البورصة المصرية."
+  },
+  "مستشفي مصر للطيران تستعد لتطبيق المتابعه الطبيه عن بعد للمرضي علي متن الرحلات": {
+    "meaning": "This initiative integrates in-flight connectivity and biometric data transmission with EgyptAir Hospital's ground medical infrastructure, enabling real-time clinical assessment of passengers during flights.",
+    "meaning_ar": "يربط تطبيق المتابعة الطبية عن بُعد بين أنظمة نقل البيانات الحيوية على متن الطائرات والكوادر الطبية بالمستشفى، مما يتيح التقييم الصحي المباشر للمسافرين أثناء الرحلات الجوية."
+  },
+  "مصانع الصلصه تعاني من شحيه المعروض من الطماطم": {
+    "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
+    "meaning_ar": "يؤدي نقص المعروض من محصول الطماطم الخام إلى تقييد توافر المدخلات الإنتاجية لمصانع الصلصة، مما يؤثر على معدلات التشغيل وتكاليف توريد المواد الخام في قطاع الصناعات الغذائية."
+  },
+  "مصر تستهدف اصدارات دوليه بقيمه 3 مليارات دولار خلال العام المالي 2026/2027": {
+    "meaning": "The Ministry of Finance schedules foreign-currency debt issuances in international capital markets to cover external financing requirements for the specified fiscal year.",
+    "meaning_ar": "تدرج وزارة المالية أدوات دين بالعملة الأجنبية في الأسواق الدولية لتغطية الاحتياجات التمويلية الخارجية خلال العام المالي المحدد."
+  },
+  "مصر تعتزم اصدار سندات دوليه بنحو 3 مليارات دولار خلال 2026-2027": {
+    "meaning": "International sovereign bond issuances act as external debt financing mechanisms that supply foreign currency to the state treasury and create fixed-rate debt service liabilities on the government balance sheet.",
+    "meaning_ar": "يُعد طرح السندات السيادية الدولية آلية تمويل عبر الاقتراض الخارجي توفر السيولة بالنقد الأجنبي للخزانة العامة، وتترتب عليها التزامات لسداد أعباء الدين ذات العائد الثابت في الموازنة العامة."
+  },
+  "مصر والبوسنه تعززان التعاون في الصناعات الدفاعيه": {
+    "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
+    "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
+  },
+  "مصر وايطاليا تبحثان الربط الكهربايي البيني قدره 3000 ميجاوات": {
+    "meaning": "The proposed 3,000 MW subsea electrical interconnection establishes direct grid infrastructure between Egypt and Italy for cross-border power transmission.",
+    "meaning_ar": "يؤسس مشروع الربط الكهربائي المقترح بقدرة 3000 ميجاوات بنية تحتية لنقل الطاقة عبر كابلات بحرية مباشرة بين شبكتي الكهرباء في مصر وإيطاليا."
+  },
+  "مصر وايطاليا تبحثان تسريع تنفيذ مشروع الربط الكهربايي بقدره 3000 ميجاوات": {
+    "meaning": "The project establishes cross-border transmission infrastructure with a 3,000 MW capacity to export surplus electricity from the Egyptian grid directly to European power markets.",
+    "meaning_ar": "يؤسس المشروع بنية تحتية لخطوط نقل كهرباء عابرة للحدود بقدرة 3000 ميجاوات تتيح تصدير فائض التوليد من الشبكة القومية المصرية مباشرة إلى أسواق الطاقة الأوروبية."
   },
   "مصر وايطاليا تستهدفان مضاعفه التجاره والاستثمارات خلال السنوات المقبله": {
     "meaning": "Expanding bilateral trade and investment targets between Egypt and Italy can increase cross-border capital inflows and export volumes, particularly across energy, manufacturing, and agribusiness sectors operating between the two markets.",
     "meaning_ar": "يؤدي استهداف مضاعفة التجارة والاستثمارات الثنائية بين مصر وإيطاليا إلى زيادة تدفقات رؤوس الأموال وحجم الصادرات، لا سيما في قطاعات الطاقة والتصنيع والحاصلات الزراعية المرتبطة بالتبادل التجاري بين البلدين."
   },
+  "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
+    "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
+    "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
+  },
+  "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 4-9-2026": {
+    "meaning": "Daily train schedules represent the operational transport capacity and logistics grid managed by the national railway authority, facilitating regular passenger mobility and intercity transit across governorates.",
+    "meaning_ar": "تمثل مواعيد القطارات اليومية الطاقة التشغيلية لشبكة النقل والخدمات اللوجستية التي تديرها الهيئة القومية لسكك حديد مصر، حيث تنظم حركة نقل الركاب والربط بين المحافظات."
+  },
+  "موجه بيع السندات تعيد توزيع فاتوره الدين عالميا": {
+    "meaning": "A widespread drop in bond prices raises benchmark yields, which alters the structure of borrowing costs and debt service obligations for sovereign and corporate issuers across global markets.",
+    "meaning_ar": "يؤدي انخفاض أسعار السندات إلى ارتفاع العوائد القياسية، مما يغير هيكل تكاليف الاقتراض وخدمة الدين للجهات السيادية والشركات عبر الأسواق المالية العالمية."
+  },
+  "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
+    "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
+    "meaning_ar": "تعكس مؤشرات قوة سوق العمل انخفاض معدلات البطالة واستمرار الضغوط المرتبطة بالأجور، وهو ما يرتبط بآليات السياسة النقدية للبنوك المركزية القائمة على تطبيق أسعار فائدة مرتفعة لإدارة التضخم."
+  },
+  "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
+    "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
+    "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
+  },
+  "نموا بمبيعات كونكريت فاشون بنهايه يونيو": {
+    "meaning": "Concrete Fashion records an increase in top-line revenue through higher volumes of apparel sold or adjusted unit pricing across its retail and export operations as of the period ending in June.",
+    "meaning_ar": "تسجل شركة كونكريت فاشون زيادة في إجمالي إيرادات المبيعات عبر تصريف كميات أكبر من منتجات الملابس أو تعديل أسعار بيع الوحدات في عمليات التجزئة والتصدير بنهاية فترة يونيو."
+  },
+  "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
+    "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
+    "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
+  },
+  "هييه الدواء المصريه تنفي ما تم تداوله بشان اشتراطات جديده لترخيص الصيدليات": {
+    "meaning": "The regulatory clarification maintains the existing licensing procedures and operational requirements for retail pharmacies, leaving the sector's administrative barriers to entry and compliance costs unchanged.",
+    "meaning_ar": "يُبقي النفي التنظيمي على إجراءات التراخيص والاشتراطات التشغيلية الحالية للصيدليات كما هي، مما يحافظ على تكاليف الامتثال ومعايير الدخول المعمول بها في السوق دون تعديل."
+  },
+  "هييه الدواء تبحث مع «مينا فارم» تصنيع لقاح مصري مضاد لفيروس ايبولا": {
+    "meaning": "The Egyptian Drug Authority's discussions with Minapharm involve evaluating the regulatory licensing and technical requirements to localize biotech vaccine manufacturing. This mechanism utilizes existing specialized biopharmaceutical production lines for viral vaccine development under state regulatory oversight.",
+    "meaning_ar": "تتضمن مباحثات هيئة الدواء المصرية مع شركة مينا فارم دراسة المتطلبات الفنية والتنظيمية لتوطين صناعة اللقاحات الحيوية، وتعتمد هذه الآلية على تشغيل خطوط الإنتاج البيوتكنولوجية القائمة لتصنيع اللقاحات تحت إشراف رقابي مباشر."
+  },
+  "واشنطن تصعد شروطها وايران ترفض الخضوع": {
+    "meaning": "Geopolitical friction between the US and Iran maintains elevated risk premiums in global energy markets and alters maritime freight insurance rates in regional trade corridors.",
+    "meaning_ar": "يؤدي التوتر الجيوسياسي بين الولايات المتحدة وإيران إلى استمرار علاوات المخاطر المرتفعة في أسواق الطاقة العالمية وتغيير تسعير وثائق التأمين على الشحن البحري في الممرات التجارية بالمنطقة."
+  },
+  "وزاره الدوله للاعلام تبدا التنسيق مع الوزارات لتحقيق تدفق ودقه المعلومات لوسايل الاعلام": {
+    "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
+    "meaning_ar": "يضع هذا التنسيق المؤسسي إطار عمل مركزي بين الجهات الحكومية للإفصاح عن المعلومات الرسمية وإدارة قنوات التواصل الإعلامي."
+  },
+  "وزاره الكهرباء تتراجع عن اشتراط موافقه الهييه الهندسيه لتركيب العدادات الكوديه": {
+    "meaning": "Removing the Armed Forces Engineering Authority pre-approval requirement streamlines the administrative process for installing prepayment code meters, accelerating the transition of informal electricity consumption onto formal utility billing systems.",
+    "meaning_ar": "يؤدي إلغاء اشتراط الموافقة المسبقة من الهيئة الهندسية للقوات المسلحة إلى تبسيط الإجراءات الإدارية لتركيب العدادات الكودية، مما يسرّع وتيرة تحويل استهلاك الكهرباء غير الرسمي إلى منظومة الفوترة والتحصيل الرسمية."
+  },
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
     "meaning_ar": "يؤدي هذا الإجراء التشغيلي إلى زيادة الطاقة الاستيعابية وكثافة الرحلات عبر شبكة النقل العام، لاستيعاب الزيادة الموسمية في أعداد الركاب وتعزيز الإيرادات التشغيلية لهيئات السكك الحديدية والمترو."
   },
+  "وزير الخزانه الامريكي يتوقع هبوط النفط الي 40 دولارا بعد انتهاء الحرب": {
+    "meaning": "Crude oil prices function as a primary determinant of fuel import costs and state energy subsidy burdens, directly setting production input costs for energy-intensive sectors including petrochemicals, transportation, and heavy manufacturing.",
+    "meaning_ar": "تحدد أسعار النفط الخام تكاليف استيراد الوقود وفاتورة دعم الطاقة الحكومية، كما تشكل عنصراً مباشراً في تكلفة المدخلات الإنتاجية للقطاعات كثيفة الاستهلاك للطاقة مثل البتروكيماويات والنقل والصناعات الثقيلة."
+  },
+  "وزير الخزانه البريطاني يحذر من ميزانيه صعبه وسط تداعيات حرب الشرق الاوسط": {
+    "meaning": "Geopolitical tensions in the Middle East elevate global energy prices and shipping freight rates, which raises imported inflation and constrains fiscal spending allocations in import-reliant economies.",
+    "meaning_ar": "تؤدي التوترات الجيوسياسية في الشرق الأوسط إلى ارتفاع أسعار الطاقة العالمية وتكاليف الشحن البحري، مما يرفع معدلات التضخم المستورد ويفرض ضغوطاً على مخصصات الإنفاق في الموازنات العامة للاقتصادات المعتمدة على الاستيراد."
+  },
   "وزير الزراعه يستقبل سفير مصر الجديد لدي العراق لبحث تعزيز التعاون": {
-    "meaning": "Strengthening bilateral agricultural cooperation with Iraq can facilitate trade corridors, potentially increasing Egyptian agricultural and fertilizer export volumes to the Iraqi market.",
-    "meaning_ar": "يساهم تعزيز التعاون الزراعي الثنائي مع العراق في فتح مسارات تجارية قد تدعم زيادة حجم الصادرات الزراعية والأسمدة المصرية إلى السوق العراقي."
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
+  },
+  "وزير الزراعه: مستعدون لنقل الخبرات في استصلاح الاراضي والري الحديث الي العراق": {
+    "meaning": "This framework establishes bilateral technical cooperation in land reclamation and modern irrigation, involving the export of agricultural engineering expertise and operational consulting services between Egypt and Iraq.",
+    "meaning_ar": "يحدد هذا الإطار آلية للتعاون الفني الثنائي في مجالات استصلاح الأراضي والري الحديث، تتضمن تبادل الخبرات الهندسية الزراعية وتقديم الخدمات الاستشارية والتشغيلية بين مصر والعراق."
+  },
+  "وزير الصحه يتفقد المخزون الاستراتيجي من المستلزمات الطبيه": {
+    "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
+    "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
+  },
+  "​الرقابه الماليه تعتمد اضافه نشاط “بيع الطاقه الكهرباييه ل”فيركيم”": {
+    "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
+    "meaning_ar": "تتيح الموافقة الرقابية للشركة تعديل غرضها المؤسسي لإدراج نشاط بيع وتوزيع الطاقة الكهربائية، مما يدمج عمليات توليد وتوريد الكهرباء ضمن أنشطتها التشغيلية المرخصة رسمياً."
+  },
+  "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
+    "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
+    "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
+  },
+  "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
+    "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
+    "meaning_ar": "يمثل خفض حيازة السندات الحكومية عملية إعادة توزيع للأصول الاستثمارية، حيث يقلص الصندوق السيادي نسبة انكشافه على أدوات الدين الحكومية المقومة بالدولار الأمريكي ضمن محفظة أدوات الدخل الثابت."
+  },
+  "“العامه للاستثمار”: ايطاليا رابع اكبر مستثمر اجنبي في مصر ب23.4 مليار دولار": {
+    "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
+    "meaning_ar": "تُصنف البيانات الرسمية إيطاليا في المرتبة الرابعة بين أكبر مصادر الاستثمار الأجنبي المباشر في مصر برأسمال تراكمي يبلغ 23.4 مليار دولار، يتركز بصورة أساسية في قطاعات الطاقة والتصنيع والبنية التحتية."
+  },
+  "“المركزي” يحذر من استهداف عملاء “انستاباي”": {
+    "meaning": "The Central Bank of Egypt enforces operational security directives across the national Instant Payment Network (InstaPay) to mitigate electronic fraud and protect digital banking infrastructure. This operational framework mandates adherence to strict cybersecurity protocols and customer data verification mechanisms across participating banks.",
+    "meaning_ar": "يُفعّل البنك المركزي المصري توجيهات الأمان التشغيلي عبر شبكة المدفوعات اللحظية (إنستاباي) للحد من الاحتيال الإلكتروني وتأمين البنية التحتية المصرفية الرقمية. يُلزم هذا الإطار التشغيلي البنوك المشاركة بتطبيق بروتوكولات الأمن السيبراني وآليات التحقق من بيانات العملاء."
+  },
+  "“الوزراء” يستعرض تفاصيل الطرح الجديد للوحدات السكنيه بنظام الايجار": {
+    "meaning": "The government operates a state-sponsored residential program that offers public housing units under structured lease agreements as an alternative to direct ownership models.",
+    "meaning_ar": "تُدير الحكومة برنامجاً للإسكان العام يتيح وحدات سكنية عبر عقود إيجار محددة الشروط كبديل عن نماذج التمليك المباشر."
+  },
+  "“اميرالد” تبيع 20 مليون سهم في “المشروعات الصناعيه” ب23.4 مليون جنيه": {
+    "meaning": "This transaction represents a secondary market equity transfer of 20 million shares, reducing Emerald's ownership stake in Industrial and Engineering Projects Company while converting an equity holding into 23.4 million EGP in cash liquidity on its balance sheet.",
+    "meaning_ar": "تمثل هذه العملية نقل ملكية 20 مليون سهم عبر السوق الثانوي، مما يقلص حصة مساهمة شركة إميرالد في شركة المشروعات الصناعية والهندسية ويحول جزءاً من أصولها المالية إلى سيولة نقدية بقيمة 23.4 مليون جنيه في ميزانيتها العمومية."
+  },
+  "“انثروبيك” تقترب من طرح تاريخي بتقييم تريليوني دولار": {
+    "meaning": "An initial public offering at this scale involves listing corporate equity on a public exchange to transition ownership structure from private venture capital to institutional and retail market participants.",
+    "meaning_ar": "يتضمن الطرح العام الأولي بهذا الحجم إدراج أسهم الشركة في سوق الأوراق المالية لنقل هيكل الملكية من رأس المال المخاطر الخاص إلى متداولي السوق من المؤسسات والأفراد."
+  },
+  "“انثروبيك” توسع تسهيلها الايتماني الي 15 مليار دولار قبل الطرح": {
+    "meaning": "Expanding a credit facility increases available debt-based liquidity on the balance sheet prior to a public listing. This structure provides access to committed capital for operational and infrastructure expenditures without altering the existing equity ownership ratio.",
+    "meaning_ar": "يؤدي توسيع التسهيل الائتماني إلى رفع حجم السيولة المتاحة القائمة على الاقتراض في الميزانية العمومية قبل الطرح العام. يوفر هذا الترتيب تمويلاً للنفقات التشغيلية والرأسمالية دون إحداث تغيير فوري في هيكل ملكية الأسهم."
   },
   "“اودن” تشتري 2.8 مليون سهم *المصريين للاسكان”": {
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
@@ -78,5 +861,37 @@
   "“بايونيرز بروبرتيز” تشتري 230 الف سهم خزينه": {
     "meaning": "This transaction entails acquiring 230,000 treasury shares, which reduces the volume of actively circulating shares in the market and adjusts the equity structure on the balance sheet.",
     "meaning_ar": "تمثل هذه العملية استرداد الشركة لعدد 230 ألف سهم لتصبح أسهم خزينة، مما يقلص كمية الأسهم المتاحة للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
+  },
+  "“ترامب” يدفع الحلفاء بعيدا عن امريكا": {
+    "meaning": "Changes in international trade and geopolitical policies lead partner nations to diversify trade agreements, bilateral settlement currencies, and cross-border supply chains to decrease reliance on a single market.",
+    "meaning_ar": "تؤدي التغيرات في السياسات التجارية والجيوسياسية إلى قيام الدول الشريكة بتنويع اتفاقياتها التجارية، وتسوياتها النقدية الثنائية، وشبكات سلاسل الإمداد للحد من الاعتماد على سوق موحدة."
+  },
+  "“جي بي مورجان” يتوقع رفع المركزي الاوروبي الفايده للمره الثالثه في ديسمبر": {
+    "meaning": "A policy rate increase by the European Central Bank raises the benchmark cost of borrowing in euros and alters yield differentials across international debt markets.",
+    "meaning_ar": "رفع سعر الفائدة من قبل البنك المركزي الأوروبي يحدد تكلفة إقراض مرجعية أعلى للتمويلات باليورو ويعدل فروق العوائد في أسواق الدين الدولية."
+  },
+  "“سيتي جروب” يرجي توقعاته لخفض الفايده الامريكيه الي 2027": {
+    "meaning": "The shift in monetary policy expectations maintains higher global benchmark interest rates for an extended period, which sets cross-border funding costs and sovereign borrowing yields at elevated levels.",
+    "meaning_ar": "يؤدي تعديل توقعات السياسة النقدية إلى استمرار أسعار الفائدة القياسية العالمية المرتفعة لفترة أطول، مما يحدد تكاليف التمويل عبر الحدود وعوائد الاقتراض السيادي عند مستويات مرتفعة."
+  },
+  "“فيتش”: حرب ايران تدفع اقتصاد قطر لانكماش 18.8% خلال 2026": {
+    "meaning": "Fitch models a mechanism where regional military conflict disrupts maritime shipping lanes and energy infrastructure in the Gulf, halting hydrocarbon exports and contracting overall gross domestic product.",
+    "meaning_ar": "توضح وكالة فيتش آلية تؤدي فيها النزاعات العسكرية الإقليمية إلى تعطيل الملاحة البحرية والبنية التحتية للطاقة في الخليج، مما يوقف صادرات الهيدروكربونات ويقلص الناتج المحلي الإجمالي."
+  },
+  "“كامينا للصناعات الغذاييه” تستعد لطرح منتجات جديده من اللحوم والدواجن والعصاير": {
+    "meaning": "This operational expansion broadens the company's manufacturing scope across multiple food processing categories, involving the utilization of production lines for processed meats, poultry, and beverage packaging.",
+    "meaning_ar": "يمثل هذا التوسع التشغيلي تنويعاً في المحفظة الإنتاجية للشركة عبر قطاعات تصنيع الأغذية، مما يتضمن تشغيل خطوط إنتاج لتصنيع وتعبئة منتجات اللحوم والدواجن والمشروبات."
+  },
+  "“كينجدوم” الصينيه تعتزم تشغيل مصنع للكتان في مصر الربع الاول 2027": {
+    "meaning": "The setup establishes an industrial manufacturing base for flax processing within the Egyptian textiles sector, scheduled for commercial operation in the first quarter of 2027.",
+    "meaning_ar": "يُمثّل هذا الإجراء إنشاء قاعدة تصنيع صناعية لمعالجة الكتان داخل قطاع الغزل والنسيج المصري، والمحدد بدء تشغيلها التجاري في الربع الأول من عام 2027."
+  },
+  "“وادي للاستشارات” تخفض حصتها في “الصعيد للمقاولات” الي 1.7%": {
+    "meaning": "Wadi Consulting decreases its equity stake in Upper Egypt Contracting to 1.7%, which alters the company's shareholder structure and increases the free-float shares available for trading on the exchange.",
+    "meaning_ar": "تخفض شركة وادي للاستشارات حصتها في رأسمال الصعيد للمقاولات إلى 1.7%، مما يغير هيكل الملكية في الشركة ويزيد من نسبة الأسهم الحرة المتاحة للتداول في البورصة."
+  },
+  "“وول ستريت” تترقب بيانات التضخم لتحديد مسار اسعار الفايده الامريكيه": {
+    "meaning": "Inflation metrics serve as primary benchmark data for central bank monetary policy decisions, directly governing sovereign interest rates, corporate borrowing costs, and valuation discount rates across equity markets.",
+    "meaning_ar": "تُعد مؤشرات التضخم البيانات الأساسية الموجهة لقرارات السياسة النقدية للبنوك المركزية، حيث تُحدد أسعار الفائدة تكاليف الاقتراض ومعدلات الخصم المالي في أسواق الأسهم."
   }
 }
