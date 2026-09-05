@@ -98,7 +98,7 @@ function b64(text) {
   return btoa(s);
 }
 
-async function sha256(text) {
+export async function sha256(text) {
   return b64url(await crypto.subtle.digest('SHA-256', enc.encode(text)));
 }
 
@@ -650,6 +650,56 @@ async function smallJson(request) {
   return body;
 }
 
+/** Save verified user to KV directory and sync to Brevo Contacts. */
+export async function recordUser(env, email, ctx) {
+  const now = new Date().toISOString();
+  const userKey = `user:${email}`;
+  let record = { email, created_at: now, last_login: now, logins: 1 };
+  try {
+    if (env.ESTHMR_AUTH && typeof env.ESTHMR_AUTH.get === 'function') {
+      const existing = await env.ESTHMR_AUTH.get(userKey, 'json');
+      if (existing && typeof existing === 'object') {
+        record = {
+          email,
+          created_at: existing.created_at || now,
+          last_login: now,
+          logins: (Number(existing.logins) || 1) + 1,
+        };
+      }
+      await env.ESTHMR_AUTH.put(userKey, JSON.stringify(record));
+
+      // Maintain master user directory index in KV:
+      const indexKey = 'users:all';
+      const held = await env.ESTHMR_AUTH.get(indexKey, 'json');
+      const users = Array.isArray(held) ? held : [];
+      if (!users.includes(email)) {
+        users.push(email);
+        await env.ESTHMR_AUTH.put(indexKey, JSON.stringify(users));
+      }
+    }
+  } catch (err) {
+    console.warn('[auth] recordUser KV write failed:', err && err.message);
+  }
+
+  // Sync to Brevo Contacts in the background:
+  const brevo = brevoKey(env);
+  if (brevo) {
+    const sync = fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'api-key': brevo,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ email, updateEnabled: true }),
+    }).catch((err) => console.warn('[auth] Brevo contact sync failed:', err && err.message));
+    if (ctx && typeof ctx.waitUntil === 'function') {
+      ctx.waitUntil(sync);
+    }
+  }
+  return record;
+}
+
 async function api(request, env, url, ctx) {
   const path = url.pathname.replace('/esthmr/api', '');
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
@@ -848,6 +898,26 @@ async function api(request, env, url, ctx) {
     return json({ error: 'method' }, 405);
   }
 
+  if (path === '/auth/users') {
+    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
+    const secret = env.STATUS_TOKEN || env.SESSION_SECRET;
+    if (!secret) return json({ error: 'not configured' }, 503);
+    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '')
+      || url.searchParams.get('token') || '';
+    if (!offered || offered !== secret) {
+      return json({ error: 'unauthorized' }, 401);
+    }
+    const targetEmail = normalise(url.searchParams.get('email') || '');
+    if (targetEmail) {
+      const user = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get(`user:${targetEmail}`, 'json') : null;
+      if (!user) return json({ error: 'user not found' }, 404);
+      return json(user, 200, { 'cache-control': 'no-store' });
+    }
+    const held = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get('users:all', 'json') : [];
+    const users = Array.isArray(held) ? held : [];
+    return json({ count: users.length, users }, 200, { 'cache-control': 'no-store' });
+  }
+
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
   const body = await smallJson(request);
 
@@ -907,6 +977,7 @@ async function api(request, env, url, ctx) {
       return json({ error: 'that code is not right' }, 401);
     }
     await env.ESTHMR_AUTH.delete(`code:${email}`);       // one use only
+    await recordUser(env, email, ctx);
     const token = await sign(
       { e: email, x: Math.floor(Date.now() / 1000) + SESSION_DAYS * 86400 },
       env.SESSION_SECRET);
