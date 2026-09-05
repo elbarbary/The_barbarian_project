@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-05T05:33:43.158055+00:00",
+  "fetchedAt": "2026-09-05T09:13:53.470714+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "0ffd183fe11a7347f1d50b1cecdac6735d48b4b715b3ea8f141d007e13033357",
+  "sourceSha256": "5b05f10034b9c49a52c8918fd8e2a3254133dccd6782b4d79f17b45074036f49",
   "issuers": [
     {
       "isin": "EGS01081C016",
@@ -13,8 +13,16 @@
       "issuerName": "Egyptian Poultry Company"
     },
     {
+      "isin": "EGS07061C012",
+      "issuerName": "The International Co. For Agricutural Crops"
+    },
+    {
       "isin": "EGS071L1C018",
       "issuerName": "Atlas for Investment & food Industries"
+    },
+    {
+      "isin": "EGS07DR1C012",
+      "issuerName": "Go Green For Agricultural Investment And Development"
     },
     {
       "isin": "EGS10001C013",
@@ -25,8 +33,24 @@
       "issuerName": "Arabia Investments Holding"
     },
     {
+      "isin": "EGS213S1C010",
+      "issuerName": "Egyptians For Investment and Development"
+    },
+    {
+      "isin": "EGS214Q1C011",
+      "issuerName": "New Ismailia for Urban Development"
+    },
+    {
+      "isin": "EGS21541C015",
+      "issuerName": "Giza General- Contracting & Real Estate Investment"
+    },
+    {
       "isin": "EGS21FG1C015",
       "issuerName": "ALMAZA FOR CONSTRUCTION AND BUILDING AND AGRICULTURAL RECLAMATION"
+    },
+    {
+      "isin": "EGS22171C010",
+      "issuerName": "Industrial and Engineering Projects"
     },
     {
       "isin": "EGS23141C012",
@@ -61,6 +85,10 @@
       "issuerName": "Central Egypt Flour Mills"
     },
     {
+      "isin": "EGS30441C017",
+      "issuerName": "General Company for Silos and Storage"
+    },
+    {
       "isin": "EGS30471C014",
       "issuerName": "Alexandria Flour Mills & Bakeries"
     },
@@ -71,6 +99,10 @@
     {
       "isin": "EGS305I1C011",
       "issuerName": "Edita Food Industries S.A.E"
+    },
+    {
+      "isin": "EGS32161C019",
+      "issuerName": "Goldentex Wool Co."
     },
     {
       "isin": "EGS32221C011",
@@ -221,6 +253,10 @@
       "issuerName": "Modern Lebanese Egyptian Al-Eshraq For Manufacturing"
     },
     {
+      "isin": "EGS3JM11C012",
+      "issuerName": "GADWA FOR INDUSTRIAL DEVELOPMENT"
+    },
+    {
       "isin": "EGS42051C010",
       "issuerName": "Egyptian Transport & Commercial Services Company- EgyTrans"
     },
@@ -235,6 +271,10 @@
     {
       "isin": "EGS44031C010",
       "issuerName": "Canal Shipping Agencies"
+    },
+    {
+      "isin": "EGS46051C016",
+      "issuerName": "GMC Group For Industrial Commercial & Financial Investment"
     },
     {
       "isin": "EGS473U1C011",
@@ -253,12 +293,28 @@
       "issuerName": "Intro Utilities"
     },
     {
+      "isin": "EGS51LQ1C018",
+      "issuerName": "Geos For Trading and Contracting"
+    },
+    {
+      "isin": "EGS520D1C015",
+      "issuerName": "International Company Fertilizer Chemicals"
+    },
+    {
+      "isin": "EGS540S1C014",
+      "issuerName": "Gourmet Egypt Com Foods"
+    },
+    {
       "isin": "EGS55381C015",
       "issuerName": "Nile Engineering for Agencies (Nile Engineering)"
     },
     {
       "isin": "EGS585B1C019",
       "issuerName": "VALENCIA FOR RESTURANTS"
+    },
+    {
+      "isin": "EGS59U92C011",
+      "issuerName": "GTEX for Commercial and Industrial Investments"
     },
     {
       "isin": "EGS60041C018",
@@ -287,6 +343,10 @@
     {
       "isin": "EGS60241C014",
       "issuerName": "Export Development Bank of Egypt"
+    },
+    {
+      "isin": "EGS60301C016",
+      "issuerName": "Housing and Development Bank"
     },
     {
       "isin": "EGS60321C014",
@@ -325,12 +385,20 @@
       "issuerName": "Egyptians For Housing & Development Co."
     },
     {
+      "isin": "EGS65461C013",
+      "issuerName": "Gharbia Islamic Company For Urban Development"
+    },
+    {
       "isin": "EGS65511C015",
       "issuerName": "Coper for Commercial Investment & Real Estate"
     },
     {
       "isin": "EGS65541C012",
       "issuerName": "CIRA Education"
+    },
+    {
+      "isin": "EGS65591C017",
+      "issuerName": "Heliopolis For Housing & Development"
     },
     {
       "isin": "EGS65621C012",
@@ -353,12 +421,24 @@
       "issuerName": "El Sewedy for Real Estate Development"
     },
     {
+      "isin": "EGS67001C015",
+      "issuerName": "International Co. For Leasing (INCOLEASE)"
+    },
+    {
+      "isin": "EGS67191C014",
+      "issuerName": "International Company For Investment & Development"
+    },
+    {
       "isin": "EGS67221C019",
       "issuerName": "Arab Moltaqa Investments"
     },
     {
       "isin": "EGS672I2C014",
       "issuerName": "Concrete Fashion Group"
+    },
+    {
+      "isin": "EGS673T1C012",
+      "issuerName": "GB Corp SAE"
     },
     {
       "isin": "EGS673Y1C015",
@@ -389,6 +469,10 @@
       "issuerName": "El Ahly for Investment And Development"
     },
     {
+      "isin": "EGS69101C011",
+      "issuerName": "E.F.G Holding"
+    },
+    {
       "isin": "EGS691D1C018",
       "issuerName": "C I Capital Holding For Financial Investments"
     },
@@ -403,6 +487,10 @@
     {
       "isin": "EGS691T1C010",
       "issuerName": "B Investments Holding S.A.E"
+    },
+    {
+      "isin": "EGS69261C013",
+      "issuerName": "Grand Investment Capital"
     },
     {
       "isin": "EGS69491M015",
@@ -425,8 +513,16 @@
       "issuerName": "Catalyst Partners Middle East (CPME)"
     },
     {
+      "isin": "EGS69921C012",
+      "issuerName": "Hassan Hllam Investments & Venture Capital s a e"
+    },
+    {
       "isin": "EGS70311C013",
       "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
+    },
+    {
+      "isin": "EGS70342C018",
+      "issuerName": "Golden Pyramids Plaza"
     },
     {
       "isin": "EGS70431C019",
@@ -467,6 +563,10 @@
     {
       "isin": "EGS743O1C013",
       "issuerName": "E. Finance"
+    },
+    {
+      "isin": "EGS745L1C014",
+      "issuerName": "Fawry Banking And Payment Technology services"
     },
     {
       "isin": "EGS74F71C015",
@@ -527,8 +627,8 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 105,
-    "exactIsinsQueried": 110,
+    "matchedAtMcdr": 130,
+    "exactIsinsQueried": 135,
     "confirmedNotFoundAfterExactSearch": {
       "AIDC": "EGS65R01C015",
       "EGSA": "EGS48022C015",
@@ -548,7 +648,6 @@
       "KASABF": "EGS696Z1C017",
       "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
-      "HRHO": "EGS69101C011",
       "NMIN": "EGS14041C015",
       "KNGC": "EGS3C6Q1C018",
       "NFCI": "EGS5ACC1C014",
@@ -566,32 +665,8 @@
       "NIPH": "EGS38331C012",
       "UEGC": "EGS21531C016",
       "ZEOT": "EGS38251C012",
-      "FWRY": "EGS745L1C014",
-      "GBCO": "EGS673T1C012",
-      "GMCI": "EGS46051C016",
-      "GPIM": "EGS213S1C010",
-      "GTEX": "EGS59U92C011",
-      "GDWA": "EGS3JM11C012",
-      "GSSC": "EGS30441C017",
-      "GEOS": "EGS51LQ1C018",
-      "GIHD": "EGS65461C013",
-      "GGCC": "EGS21541C015",
-      "GGRN": "EGS07DR1C012",
-      "GPPL": "EGS70342C018",
-      "GTWL": "EGS32161C019",
-      "GOUR": "EGS540S1C014",
-      "GRCA": "EGS69261C013",
-      "GROV": "EGS69921C012",
-      "HELI": "EGS65591C017",
-      "HDBK": "EGS60301C016",
       "ISPH": "EGS512O1C012",
-      "IEEC": "EGS22171C010",
-      "IFAP": "EGS07061C012",
-      "ICID": "EGS67191C014",
-      "ICFC": "EGS520D1C015",
-      "ICLE": "EGS67001C015",
       "ISMQ": "EGS102S1C014",
-      "IDRE": "EGS214Q1C011",
       "ISMA": "EGS02021C011",
       "INFI": "EGS01041C010",
       "JUFO": "EGS30901C010",

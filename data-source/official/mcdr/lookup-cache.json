@@ -1183,5 +1183,280 @@
       }
     ],
     "fetchedAt": "2026-09-05T05:33:42.806385+00:00"
+  },
+  "EGS745L1C014": {
+    "ticker": "FWRY",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS745L1C014",
+        "issuerName": "Fawry Banking And Payment Technology services"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:06.533616+00:00"
+  },
+  "EGS673T1C012": {
+    "ticker": "GBCO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS673T1C012",
+        "issuerName": "GB Corp SAE"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:08.491603+00:00"
+  },
+  "EGS3JM11C012": {
+    "ticker": "GDWA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3JM11C012",
+        "issuerName": "GADWA FOR INDUSTRIAL DEVELOPMENT"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:10.814866+00:00"
+  },
+  "EGS51LQ1C018": {
+    "ticker": "GEOS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS51LQ1C018",
+        "issuerName": "Geos For Trading and Contracting"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:13.008476+00:00"
+  },
+  "EGS21541C015": {
+    "ticker": "GGCC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21541C015",
+        "issuerName": "Giza General- Contracting & Real Estate Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:14.677536+00:00"
+  },
+  "EGS07DR1C012": {
+    "ticker": "GGRN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS07DR1C012",
+        "issuerName": "Go Green For Agricultural Investment And Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:16.365256+00:00"
+  },
+  "EGS65461C013": {
+    "ticker": "GIHD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65461C013",
+        "issuerName": "Gharbia Islamic Company For Urban Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:18.467195+00:00"
+  },
+  "EGS46051C016": {
+    "ticker": "GMCI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS46051C016",
+        "issuerName": "GMC Group For Industrial Commercial & Financial Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:20.727392+00:00"
+  },
+  "EGS540S1C014": {
+    "ticker": "GOUR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS540S1C014",
+        "issuerName": "Gourmet Egypt Com Foods"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:22.914505+00:00"
+  },
+  "EGS213S1C010": {
+    "ticker": "GPIM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS213S1C010",
+        "issuerName": "Egyptians For Investment and Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:25.168821+00:00"
+  },
+  "EGS70342C018": {
+    "ticker": "GPPL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70342C018",
+        "issuerName": "Golden Pyramids Plaza"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:27.140096+00:00"
+  },
+  "EGS69261C013": {
+    "ticker": "GRCA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69261C013",
+        "issuerName": "Grand Investment Capital"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:29.423111+00:00"
+  },
+  "EGS69921C012": {
+    "ticker": "GROV",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69921C012",
+        "issuerName": "Hassan Hllam Investments & Venture Capital s a e"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:31.238607+00:00"
+  },
+  "EGS30441C017": {
+    "ticker": "GSSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30441C017",
+        "issuerName": "General Company for Silos and Storage"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:33.015867+00:00"
+  },
+  "EGS59U92C011": {
+    "ticker": "GTEX",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS59U92C011",
+        "issuerName": "GTEX for Commercial and Industrial Investments"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:35.069709+00:00"
+  },
+  "EGS32161C019": {
+    "ticker": "GTWL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS32161C019",
+        "issuerName": "Goldentex Wool Co."
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:37.072446+00:00"
+  },
+  "EGS60301C016": {
+    "ticker": "HDBK",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60301C016",
+        "issuerName": "Housing and Development Bank"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:38.865181+00:00"
+  },
+  "EGS65591C017": {
+    "ticker": "HELI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65591C017",
+        "issuerName": "Heliopolis For Housing & Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:40.663092+00:00"
+  },
+  "EGS69101C011": {
+    "ticker": "HRHO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69101C011",
+        "issuerName": "E.F.G Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:42.341058+00:00"
+  },
+  "EGS520D1C015": {
+    "ticker": "ICFC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS520D1C015",
+        "issuerName": "International Company Fertilizer Chemicals"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:44.181601+00:00"
+  },
+  "EGS67191C014": {
+    "ticker": "ICID",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67191C014",
+        "issuerName": "International Company For Investment & Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:45.759357+00:00"
+  },
+  "EGS67001C015": {
+    "ticker": "ICLE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67001C015",
+        "issuerName": "International Co. For Leasing (INCOLEASE)"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:47.564085+00:00"
+  },
+  "EGS214Q1C011": {
+    "ticker": "IDRE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS214Q1C011",
+        "issuerName": "New Ismailia for Urban Development"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:49.243225+00:00"
+  },
+  "EGS22171C010": {
+    "ticker": "IEEC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS22171C010",
+        "issuerName": "Industrial and Engineering Projects"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:51.360279+00:00"
+  },
+  "EGS07061C012": {
+    "ticker": "IFAP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS07061C012",
+        "issuerName": "The International Co. For Agricutural Crops"
+      }
+    ],
+    "fetchedAt": "2026-09-05T09:13:53.119012+00:00"
   }
 }
