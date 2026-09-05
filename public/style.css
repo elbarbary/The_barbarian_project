@@ -1942,6 +1942,7 @@ body::before {
 .cot-board .v-trash { color: #f6a8c9; }
 .cot-board .v-recycle { color: #8ee0b6; }
 .cot-board .v-cash    { color: #cde84a; }
+.cot-board .v-loose   { color: #7fe3f5; }
 .cot-board strong { color: #f5f2ff; }
 
 /* ─── cash or trash ──────────────────────────────────────────── */
@@ -2053,6 +2054,7 @@ body::before {
 .verdict-trash { background: rgba(194,24,91,0.14); color: #a8154e; border: 1px solid rgba(194,24,91,0.3); }
 .verdict-recycle { background: rgba(16,138,92,0.14); color: #0c6e49; border: 1px solid rgba(16,138,92,0.34); }
 .verdict-cash  { background: rgba(205,232,74,0.28); color: #4d600e; }
+.verdict-loose { background: rgba(21,144,171,0.14); color: #0e6f85; border: 1px solid rgba(21,144,171,0.34); }
 .score-total { text-align: right; }
 .score-total b { display: block; font: 800 clamp(2.4rem,5vw,3.4rem)/1 var(--f-display); letter-spacing: -0.05em; color: var(--ink); }
 .score-total span { font-size: 0.62rem; color: var(--ink-35); font-variant-numeric: tabular-nums; }
