@@ -77,14 +77,14 @@
   ],
   /* Who carries the sign-in code first.
    *
-   * Sign-in codes from thebarbarianproject.com were landing in spam — the
-   * domain was eight days old in Resend and had no DMARC. A test from
-   * esthmr.com through the one key whose account verifies it reached the inbox
-   * (5 Sep 2026). That key goes first. SendPulse is second, not first: it sends
-   * as thebarbarianproject.com, and if it succeeds the chain stops there, so
-   * putting it first would keep sending from the domain that was failing.
-   * Steps not named here follow in their default order. The per-key sender is
-   * the MAIL_FROMS secret, parallel to RESEND_API_KEYS. */
-  "vars": { "MAIL_ORDER": "resend#3,sendpulse" },
+   * 1. resend#3: The one Resend account that has esthmr.com domain-verified
+   *    (delivers instantly to inbox).
+   * 2. brevo: Free 300 emails/day (9,000/mo) via Brevo transactional API,
+   *    active when BREVO_API_KEY secret is configured.
+   * 3. sendpulse: 12,000 emails/month SMTP API backup (50/hr free rate cap).
+   * 4. Remaining resend keys follow automatically if all three above fail.
+   *
+   * If BREVO_API_KEY is not set, brevo is silently omitted without error. */
+  "vars": { "MAIL_ORDER": "resend#3,brevo,sendpulse" },
   "compatibility_flags": ["nodejs_compat"]
 }

@@ -8,10 +8,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-const { providerChain, deliver, parseAddress } = await import('../index.js');
+const { providerChain, deliver, parseAddress, brevoKey, brevoFrom, postBrevo } = await import('../index.js');
 
 const FIVE = 'k1,k2,k3,k4,k5';
 const SP = { SENDPULSE_ID: 'id', SENDPULSE_SECRET: 'shh' };
+const BV = { BREVO_API_KEY: 'xkeysib-test' };
 const FROM = { MAIL_FROM: 'ESTHMR <esthmr@thebarbarianproject.com>' };
 
 const ids = (env) => providerChain(env).map((s) => s.id);
@@ -245,4 +246,73 @@ test('a refusal still skips the other keys that send the SAME address', async ()
   // #3 refused (esthmr.com), then #1 refused (thebarbarianproject.com) — and
   // #2, #4, #5 share #1's address, so they are skipped, not spent.
   assert.deepEqual(tried, ['resend#3', 'sendpulse', 'resend#1']);
+});
+
+/* ── brevo integration ─────────────────────────────────────────────────── */
+
+test('Brevo sits after the first Resend key, before SendPulse and remaining keys', () => {
+  assert.deepEqual(ids({ RESEND_API_KEYS: FIVE, ...BV, ...SP, ...FROM }),
+    ['resend#1', 'brevo', 'sendpulse', 'resend#2', 'resend#3', 'resend#4', 'resend#5']);
+});
+
+test('Brevo is omitted when no key is configured', () => {
+  assert.equal(brevoKey({}), '');
+  assert.deepEqual(ids({ RESEND_API_KEYS: 'k1', ...FROM }), ['resend#1']);
+});
+
+test('Brevo is dropped when there is no address it could send as', () => {
+  assert.deepEqual(ids({ RESEND_API_KEYS: 'k1', ...BV, MAIL_FROM: 'ESTHMR <onboarding@resend.dev>' }),
+    ['resend#1']);
+  assert.deepEqual(ids({ RESEND_API_KEYS: 'k1', ...BV,
+    MAIL_FROM: 'ESTHMR <onboarding@resend.dev>',
+    BREVO_FROM: 'ESTHMR <sign-in@esthmr.com>' }), ['resend#1', 'brevo']);
+});
+
+test('MAIL_ORDER puts resend#3, brevo, sendpulse in that exact order', () => {
+  const env = { RESEND_API_KEYS: FIVE, ...BV, ...SP, ...FROM, MAIL_ORDER: 'resend#3,brevo,sendpulse' };
+  assert.deepEqual(ids(env),
+    ['resend#3', 'brevo', 'sendpulse', 'resend#1', 'resend#2', 'resend#4', 'resend#5']);
+});
+
+test('deliver falls through from resend to brevo when resend is rate-limited', async () => {
+  const env = { RESEND_API_KEYS: FIVE, ...BV, ...SP, ...FROM, MAIL_ORDER: 'resend#3,brevo,sendpulse' };
+  const chain = providerChain(env);
+  const s = scripted({ 'resend#3': { ok: false, status: 429 }, brevo: { ok: true } });
+  assert.equal(await deliver(chain, s.attempt), 'brevo');
+  assert.deepEqual(s.tried, ['resend#3', 'brevo']);
+});
+
+test('deliver falls through from brevo to sendpulse when brevo is exhausted', async () => {
+  const env = { RESEND_API_KEYS: FIVE, ...BV, ...SP, ...FROM, MAIL_ORDER: 'resend#3,brevo,sendpulse' };
+  const chain = providerChain(env);
+  const s = scripted({ 'resend#3': { ok: false, status: 429 }, brevo: { ok: false, status: 402 }, sendpulse: { ok: true } });
+  assert.equal(await deliver(chain, s.attempt), 'sendpulse');
+  assert.deepEqual(s.tried, ['resend#3', 'brevo', 'sendpulse']);
+});
+
+test('postBrevo formats payload with api-key header and sender object', async () => {
+  const originalFetch = globalThis.fetch;
+  let intercepted = null;
+  globalThis.fetch = async (url, opts) => {
+    intercepted = { url, opts };
+    return { ok: true, status: 201, json: async () => ({ messageId: '<test-id>' }) };
+  };
+  try {
+    const res = await postBrevo('xkeysib-mykey', {
+      from: 'ESTHMR <sign-in@esthmr.com>',
+      to: ['user@example.com'],
+      subject: '123456 code',
+      html: '<p>code</p>',
+      text: 'code',
+    });
+    assert.equal(res.ok, true);
+    assert.equal(intercepted.url, 'https://api.brevo.com/v3/smtp/email');
+    assert.equal(intercepted.opts.headers['api-key'], 'xkeysib-mykey');
+    const body = JSON.parse(intercepted.opts.body);
+    assert.deepEqual(body.sender, { name: 'ESTHMR', email: 'sign-in@esthmr.com' });
+    assert.deepEqual(body.to, [{ email: 'user@example.com' }]);
+    assert.equal(body.subject, '123456 code');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

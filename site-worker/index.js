@@ -12,7 +12,9 @@
  * Codes go out through Resend, and nothing here belongs in the repository:
  *
  *   npx wrangler secret put RESEND_API_KEYS   # one key, or several comma-separated
- *   npx wrangler secret put MAIL_FROM         # "ESTHMR <esthmr@thebarbarianproject.com>"
+ *   npx wrangler secret put MAIL_FROM         # "ESTHMR <sign-in@esthmr.com>"
+ *   npx wrangler secret put BREVO_API_KEY     # Brevo API key (xkeysib-...)
+ *   npx wrangler secret put BREVO_FROM        # optional: "ESTHMR <sign-in@esthmr.com>"
  *   npx wrangler secret put SENDPULSE_TOKEN   # an API token, presented as it is
  *     — or, for an account issued an OAuth pair instead —
  *   npx wrangler secret put SENDPULSE_ID      # 32 hex characters
@@ -24,9 +26,9 @@
  * needs no DNS but only delivers to the account owner — enough to prove the
  * flow, not enough to serve readers.
  *
- * SendPulse is the second thing asked, between the first Resend key and the
- * rest; `providerChain` says why. Leaving its two secrets unset simply removes
- * it from the chain, which is the behaviour that was there before it existed.
+ * Brevo and SendPulse act as fallback and volume providers in the chain;
+ * `providerChain` says why. Leaving their secrets unset simply removes them
+ * from the chain, which is the behaviour that was there before they existed.
  *
  * WHAT THIS DOES AND DOES NOT BUY
  * A gate stops indiscriminate crawling and casual copying. It does not make
@@ -328,16 +330,33 @@ function sendPulseFrom(env) {
   return raw && !raw.includes('resend.dev') ? parseAddress(raw) : null;
 }
 
+export function brevoKey(env) {
+  return String(env.BREVO_API_KEY || '').trim();
+}
+
+export function brevoFrom(env) {
+  const raw = String(env.BREVO_FROM || env.SENDPULSE_FROM || env.MAIL_FROM || '').trim();
+  return raw && !raw.includes('resend.dev') ? parseAddress(raw) : null;
+}
+
 function codeMessage(env, email, code) {
-  const text = `Your ESTHMR sign-in code is ${code}.\n\n`
+  const text = `${code} هو رمز الدخول الخاص بك في منصة استثمر.\n`
+    + 'صلاحية هذا الرمز عشر دقائق ويُستخدم لمرة واحدة فقط.\n\n'
+    + `Your ESTHMR sign-in code is ${code}.\n`
     + 'It works once and expires in ten minutes. If you did not ask for it, '
     + 'nothing has happened to your account and you can ignore this.';
-  const html = '<div style="font:400 15px/1.55 -apple-system,Segoe UI,sans-serif;'
-    + 'color:#1B1917"><p>Your ESTHMR sign-in code is</p>'
-    + `<p style="font:600 30px/1 ui-monospace,monospace;letter-spacing:.22em">${code}</p>`
-    + '<p>It works once and expires in ten minutes.</p>'
-    + '<p style="color:#6E6761;font-size:13px">If you did not ask for it, nothing '
-    + 'has happened to your account and you can ignore this.</p></div>';
+  const html = '<div style="font:400 15px/1.55 -apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;color:#1B1917;max-width:440px;margin:0 auto;padding:24px;border-radius:16px;background:#FBF9F5;border:1px solid #E6E0D8">'
+    + '<div style="direction:rtl;text-align:right;margin-bottom:18px">'
+    + '<p style="font-size:15px;font-weight:600;margin:0 0 6px;color:#1B1917">رمز الدخول الخاص بك في منصة استثمر:</p>'
+    + `<p style="font:700 32px/1.2 ui-monospace,monospace;letter-spacing:.25em;color:#C84E0E;margin:10px 0">${code}</p>`
+    + '<p style="font-size:12.5px;color:#6E6761;margin:0">صلاحية هذا الرمز ١٠ دقائق ولا تشاركه مع أحد.</p>'
+    + '</div>'
+    + '<div style="border-top:1px solid #E6E0D8;padding-top:16px;direction:ltr;text-align:left">'
+    + '<p style="font-size:14px;color:#1B1917;margin:0 0 4px">Your ESTHMR sign-in code is</p>'
+    + `<p style="font:600 24px/1.2 ui-monospace,monospace;letter-spacing:.2em;color:#1B1917;margin:6px 0">${code}</p>`
+    + '<p style="color:#6E6761;font-size:12px;margin:0">It works once and expires in ten minutes. If you did not ask for it, you can safely ignore this email.</p>'
+    + '</div>'
+    + '</div>';
   // Resend's own sending domain works with no DNS and no verification, which is
   // what makes it usable before a domain is set up. It only delivers to the
   // account owner's address, so it is for proving the flow, not for readers.
@@ -345,7 +364,7 @@ function codeMessage(env, email, code) {
   return {
     from,
     to: [email],
-    subject: `${code} is your ESTHMR sign-in code`,
+    subject: `${code} · رمز دخول استثمر / ESTHMR sign-in code`,
     text,
     html,
   };
@@ -397,6 +416,9 @@ export function providerChain(env) {
   const froms = mailFroms(env);
   const steps = keys.map((key, i) => ({ id: `resend#${i + 1}`, provider: 'resend', key, from: froms[i] }));
   const chain = steps.slice(0, 1);
+  if (brevoKey(env) && brevoFrom(env)) {
+    chain.push({ id: 'brevo', provider: 'brevo', key: brevoKey(env), from: brevoFrom(env) });
+  }
   if (sendPulseCredential(env) && sendPulseFrom(env)) {
     chain.push({ id: 'sendpulse', provider: 'sendpulse' });
   }
@@ -556,6 +578,29 @@ async function postSendPulse(env, message) {
   return { ok: true };
 }
 
+export async function postBrevo(key, message, fromAddress) {
+  const sender = fromAddress || parseAddress(message.from);
+  const payload = JSON.stringify({
+    sender: { name: sender.name || 'ESTHMR', email: sender.email },
+    to: message.to.map((email) => ({ email })),
+    subject: message.subject,
+    htmlContent: message.html,
+    textContent: message.text,
+  });
+  const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+    signal: AbortSignal.timeout(10000),
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'api-key': key,
+      'content-type': 'application/json',
+    },
+    body: payload,
+  });
+  if (response.ok) return { ok: true };
+  return { ok: false, status: response.status, detail: await response.text().catch(() => '') };
+}
+
 async function sendCode(env, email, code) {
   const chain = providerChain(env);
   if (!chain.length) {
@@ -563,9 +608,15 @@ async function sendCode(env, email, code) {
     throw new Error('no mail provider configured');
   }
   const message = codeMessage(env, email, code);
-  const used = await deliver(chain, (step) => (step.provider === 'resend'
-    ? postResend(step.key, { ...message, from: step.from || message.from })
-    : postSendPulse(env, message)));
+  const used = await deliver(chain, (step) => {
+    if (step.provider === 'resend') {
+      return postResend(step.key, { ...message, from: step.from || message.from });
+    }
+    if (step.provider === 'brevo') {
+      return postBrevo(step.key, message, step.from);
+    }
+    return postSendPulse(env, message);
+  });
   // Which provider actually carried it — the thing you want in `wrangler tail`
   // when somebody says the code never arrived.
   console.log('code sent via', used);
