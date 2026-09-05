@@ -2101,14 +2101,39 @@
           <div>
             <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcSharePriceLabel }}</label>
             <input inputmode="decimal" autocomplete="off" value="{{ calc.priceRaw }}" onChange="{{ onCalcPriceChange }}" placeholder="50.00" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);margin-top:8px">{{ L.calcPresetStocks }}:</div>
-            <div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">
-              <span onClick="{{ setPresetAbuk }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ABUK (62.5 / 7.5)</span>
-              <span onClick="{{ setPresetEast }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">EAST (34 / 3.75)</span>
-              <span onClick="{{ setPresetComi }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">COMI (89 / 3.0)</span>
-              <span onClick="{{ setPresetEtel }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ETEL (38.5 / 1.5)</span>
-              <span onClick="{{ setPresetAlcn }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ALCN (44 / 5.0)</span>
-            </div>
+            <!-- Filled from what the exchange filed, not from a number typed
+                 here. The five chips this replaces set a hardcoded price and
+                 dividend for five real tickers, and every one was wrong:
+                 ABUK 62.5/7.5 against a filed 92.39/2.26, ETEL 38.5 against
+                 115.99, COMI 89 against 141. A reader clicking ABUK was shown
+                 a 12% dividend yield on a real company.
+
+                 Results are ordered by how the text matches — ticker before
+                 name, prefix before substring — and deliberately not by yield
+                 or any other measure. A search box that sorts companies by an
+                 investment measure is a shortlist with a text field in front
+                 of it, which is the thing §8.6 does not allow. -->
+            <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin:14px 0 6px">{{ L.calcSearchLabel }}</label>
+            <input autocomplete="off" value="{{ calcQuery }}" onChange="{{ onCalcQuery }}" placeholder="{{ L.calcSearchHint }}" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:14px;outline:none;box-sizing:border-box">
+            <sc-for list="{{ calcMatches }}" as="m" hint-placeholder-count="3">
+              <div onClick="{{ m.pick }}" style="cursor:pointer;display:flex;align-items:baseline;gap:9px;padding:7px 11px;margin-top:5px;border-radius:10px;background:var(--surface);border:1px solid var(--rule)" style-hover="border-color:var(--accent)">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent)">{{ m.ticker }}</span>
+                <span style="font-size:12.5px;color:var(--ink);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ m.name }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--t2)">{{ m.close }}</span>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;color:var(--faint)">{{ m.note }}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ hasCalcPicked }}">
+              <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint)">{{ L.calcPickedFrom }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink)">{{ calcPicked }}</span>
+                <span onClick="{{ clearCalcPick }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--accent)" style-hover="opacity:.7">{{ L.calcClearPick }}</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ calcPickedNeedsDividend }}">
+              <div style="font-size:11.5px;color:var(--t2);margin-top:6px;line-height:1.5">{{ L.calcNeedsDividend }}</div>
+            </sc-if>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;color:var(--faint);margin-top:8px;line-height:1.5">{{ L.calcSearchNote }}</div>
           </div>
 
           <div>
@@ -2204,6 +2229,11 @@
             <div>
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
                 <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">الذهب عيار ٢١</span>
+                <!-- The other two cards named the rate they project at and this
+                     one did not, so its three-year figure was a bare number
+                     about the future with nothing a reader could weigh it
+                     against. -->
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--accTint);color:var(--accent);font-weight:600">تاريخي ~٢٥٪ سنوي</span>
                 <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface);color:var(--t2);border:1px solid var(--rule)">تحوط العملة والتضخم</span>
               </div>
               <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">أداة تحوط وحفظ قيمة ممتازة ضد انخفاض الجنيه والتضخم، لكن لا يولد أي عائد نقدي دوري أو كوبونات.</p>
