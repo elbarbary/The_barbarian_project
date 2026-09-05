@@ -1,12 +1,16 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-04T09:48:41.739006+00:00",
+  "fetchedAt": "2026-09-05T05:33:43.158055+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "e104c7385dbbc3dd899a8ef4b61b3e8881f0c5cfb584d87168eb13c111d3c5ee",
+  "sourceSha256": "0ffd183fe11a7347f1d50b1cecdac6735d48b4b715b3ea8f141d007e13033357",
   "issuers": [
     {
       "isin": "EGS01081C016",
       "issuerName": "The General Co. For Land Reclamation"
+    },
+    {
+      "isin": "EGS02211C018",
+      "issuerName": "Egyptian Poultry Company"
     },
     {
       "isin": "EGS071L1C018",
@@ -35,6 +39,10 @@
     {
       "isin": "EGS30031C016",
       "issuerName": "Arabian Food Industries co. - Domty"
+    },
+    {
+      "isin": "EGS300L1C011",
+      "issuerName": "Al-Nasr for Manufacturing Agricultural Crops"
     },
     {
       "isin": "EGS30211C014",
@@ -85,6 +93,10 @@
       "issuerName": "Innovation for retail and supplies-ARTIFEX"
     },
     {
+      "isin": "EGS360A1C011",
+      "issuerName": "al-ahram for printing and packaging"
+    },
+    {
       "isin": "EGS37091C013",
       "issuerName": "Eastern Company For Tobacco"
     },
@@ -125,8 +137,16 @@
       "issuerName": "Kahira Pharmaceuticals"
     },
     {
+      "isin": "EGS385S1C012",
+      "issuerName": "Ferchem masr Fertilizers and Chemicals"
+    },
+    {
       "isin": "EGS39011C019",
       "issuerName": "Egypt Gas Company"
+    },
+    {
+      "isin": "EGS39022C016",
+      "issuerName": "(ENPPI)"
     },
     {
       "isin": "EGS3C071C015",
@@ -165,6 +185,10 @@
       "issuerName": "Arab Valves Company"
     },
     {
+      "isin": "EGS3E1Z2C016",
+      "issuerName": "Egyptian Linear Alkyl Benzene Elab"
+    },
+    {
       "isin": "EGS3E2F1C011",
       "issuerName": "Alexandria for Refractories- ACR"
     },
@@ -173,8 +197,20 @@
       "issuerName": "G C P FOR FOR DUCTILE IRON PIPE PRODUCTI"
     },
     {
+      "isin": "EGS3F021C017",
+      "issuerName": "Industrial Engineering Company for Construction and Development ( Icon )"
+    },
+    {
       "isin": "EGS3G111C015",
       "issuerName": "Arab Engineering Industries"
+    },
+    {
+      "isin": "EGS3G231C011",
+      "issuerName": "Electro Cable Egypt"
+    },
+    {
+      "isin": "EGS3I0S1C019",
+      "issuerName": "International Company for Medical Industries - ICMI"
     },
     {
       "isin": "EGS3J4C1C011",
@@ -183,6 +219,10 @@
     {
       "isin": "EGS3J591C015",
       "issuerName": "Modern Lebanese Egyptian Al-Eshraq For Manufacturing"
+    },
+    {
+      "isin": "EGS42051C010",
+      "issuerName": "Egyptian Transport & Commercial Services Company- EgyTrans"
     },
     {
       "isin": "EGS42111C012",
@@ -199,6 +239,10 @@
     {
       "isin": "EGS473U1C011",
       "issuerName": "G Mac for logistics and transportation"
+    },
+    {
+      "isin": "EGS48031C016",
+      "issuerName": "Telecom Egypt"
     },
     {
       "isin": "EGS497L1C014",
@@ -241,12 +285,32 @@
       "issuerName": "Suez Canal Bank"
     },
     {
+      "isin": "EGS60241C014",
+      "issuerName": "Export Development Bank of Egypt"
+    },
+    {
+      "isin": "EGS60321C014",
+      "issuerName": "Faisal Islamic Bank of Egypt-EGP"
+    },
+    {
+      "isin": "EGS60322C012",
+      "issuerName": "Faisal Islamic Bank of Egypt-USD"
+    },
+    {
       "isin": "EGS63031C016",
       "issuerName": "Delta Insurance Company"
     },
     {
+      "isin": "EGS65071C010",
+      "issuerName": "El Kahera For Housing & Development Company"
+    },
+    {
       "isin": "EGS65081C019",
       "issuerName": "Construction And Consulting Engineering"
+    },
+    {
+      "isin": "EGS65091C018",
+      "issuerName": "EL-Shams Housing & Urbanization"
     },
     {
       "isin": "EGS651B1C018",
@@ -257,12 +321,20 @@
       "issuerName": "Real Estate Egyptian Consortium"
     },
     {
+      "isin": "EGS65341C017",
+      "issuerName": "Egyptians For Housing & Development Co."
+    },
+    {
       "isin": "EGS65511C015",
       "issuerName": "Coper for Commercial Investment & Real Estate"
     },
     {
       "isin": "EGS65541C012",
       "issuerName": "CIRA Education"
+    },
+    {
+      "isin": "EGS65621C012",
+      "issuerName": "El Nasr Housing & Development"
     },
     {
       "isin": "EGS656M1C010",
@@ -289,6 +361,10 @@
       "issuerName": "Concrete Fashion Group"
     },
     {
+      "isin": "EGS673Y1C015",
+      "issuerName": "Emaar Misr for Development"
+    },
+    {
       "isin": "EGS675S1C011",
       "issuerName": "Amer Group"
     },
@@ -303,6 +379,10 @@
     {
       "isin": "EGS681D1C010",
       "issuerName": "Egyptian Arabian Co. For securitiesBrokerage"
+    },
+    {
+      "isin": "EGS681I1C015",
+      "issuerName": "Elorouba Securities"
     },
     {
       "isin": "EGS69021C011",
@@ -325,8 +405,16 @@
       "issuerName": "B Investments Holding S.A.E"
     },
     {
+      "isin": "EGS69491M015",
+      "issuerName": "EGX 30 INDEX ETF"
+    },
+    {
       "isin": "EGS694A1C018",
       "issuerName": "Arab Developers Holding"
+    },
+    {
+      "isin": "EGS694B1C017",
+      "issuerName": "EGYPTIAN REAL ESTATE FUND"
     },
     {
       "isin": "EGS697S1C015",
@@ -339,6 +427,14 @@
     {
       "isin": "EGS70311C013",
       "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
+    },
+    {
+      "isin": "EGS70431C019",
+      "issuerName": "Egyptian Resorts Company-ERC"
+    },
+    {
+      "isin": "EGS70R91C016",
+      "issuerName": "El Wadi for International & Investment Development"
     },
     {
       "isin": "EGS72081C010",
@@ -431,10 +527,11 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 81,
-    "exactIsinsQueried": 85,
+    "matchedAtMcdr": 105,
+    "exactIsinsQueried": 110,
     "confirmedNotFoundAfterExactSearch": {
       "AIDC": "EGS65R01C015",
+      "EGSA": "EGS48022C015",
       "CCAPP": "EGS73541P048",
       "ASPI_r3": "EGS924G1C014",
       "EGCN": "EGS65861C014"
@@ -452,47 +549,24 @@
       "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
       "HRHO": "EGS69101C011",
-      "EGX30ETF": "EGS69491M015",
       "NMIN": "EGS14041C015",
       "KNGC": "EGS3C6Q1C018",
       "NFCI": "EGS5ACC1C014",
       "SWDY": "EGS3G0Z1C014",
-      "EPCO": "EGS02211C018",
       "SIEG": "EGS3C9X1C016",
       "MAAL": "EGS739Z1C016",
       "PHAR": "EGS38081C013",
       "IRON": "EGS3D061C015",
       "MPRC": "EGS78021C010",
-      "EGSA": "EGS48022C015",
-      "ETRS": "EGS42051C010",
-      "EGTS": "EGS70431C019",
-      "EHDR": "EGS65341C017",
-      "EGREF": "EGS694B1C017",
-      "EPPK": "EGS360A1C011",
       "KWIN": "EGS69011C012",
-      "ELKA": "EGS65071C010",
       "MMHC": "EGS651F1C014",
       "KABO": "EGS33061C010",
-      "ELNA": "EGS300L1C011",
-      "ENHD": "EGS65621C012",
       "OBRI": "EGS65551C011",
-      "EOSB": "EGS681I1C015",
-      "ELSH": "EGS65091C018",
       "SPHT": "EGS70H02C014",
-      "ELWA": "EGS70R91C016",
       "NIPH": "EGS38331C012",
-      "ELEC": "EGS3G231C011",
       "UEGC": "EGS21531C016",
-      "EMFD": "EGS673Y1C015",
-      "ENGC": "EGS3F021C017",
-      "ENPI": "EGS39022C016",
-      "EXPA": "EGS60241C014",
       "ZEOT": "EGS38251C012",
-      "FERC": "EGS385S1C012",
-      "FAIT": "EGS60321C014",
-      "FAITA": "EGS60322C012",
       "FWRY": "EGS745L1C014",
-      "FCMD": "EGS3I0S1C019",
       "GBCO": "EGS673T1C012",
       "GMCI": "EGS46051C016",
       "GPIM": "EGS213S1C010",
@@ -602,9 +676,7 @@
       "TALM": "EGS597R1C017",
       "TANM": "EGS21EB1C011",
       "TAQA": "EGS490S1C014",
-      "ETEL": "EGS48031C016",
       "RMDA": "EGS381B1C015",
-      "ELAB": "EGS3E1Z2C016",
       "MOED": "EGS729F1C012",
       "UBEE": "EGS600M1C017",
       "TRTO": "EGS79072C012",

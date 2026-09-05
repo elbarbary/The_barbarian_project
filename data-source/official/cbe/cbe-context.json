@@ -1,102 +1,102 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-03T10:00:13.173586+00:00",
+  "fetchedAt": "2026-09-05T05:32:50.391041+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
   },
   "exchangeRates": {
-    "ratesForDate": "02/09/2026",
+    "ratesForDate": "03/09/2026",
     "currencies": [
       {
         "currency": "US Dollar",
-        "buy": 51.0414,
-        "sell": 51.1808
+        "buy": 50.878,
+        "sell": 51.0168
       },
       {
         "currency": "Euro",
-        "buy": 59.06,
-        "sell": 59.2315
+        "buy": 59.0287,
+        "sell": 59.1948
       },
       {
         "currency": "Pound Sterling",
-        "buy": 68.8192,
-        "sell": 69.0224
+        "buy": 68.6242,
+        "sell": 68.8523
       },
       {
         "currency": "Canadian Dollar",
-        "buy": 36.6387,
-        "sell": 36.7493
+        "buy": 36.8468,
+        "sell": 36.9607
       },
       {
         "currency": "Danish Krone",
-        "buy": 7.901,
-        "sell": 7.9238
+        "buy": 7.8966,
+        "sell": 7.9194
       },
       {
         "currency": "Norwegian Krone",
-        "buy": 5.4654,
-        "sell": 5.4812
+        "buy": 5.4658,
+        "sell": 5.4816
       },
       {
         "currency": "Swedish Krona",
-        "buy": 5.2853,
-        "sell": 5.3001
+        "buy": 5.3086,
+        "sell": 5.3233
       },
       {
         "currency": "Swiss Franc",
-        "buy": 62.6122,
-        "sell": 62.7985
+        "buy": 62.8589,
+        "sell": 63.046
       },
       {
         "currency": "Japanese Yen 100",
-        "buy": 31.9188,
-        "sell": 32.008
+        "buy": 32.5369,
+        "sell": 32.6319
       },
       {
         "currency": "Saudi Riyal",
-        "buy": 13.5929,
-        "sell": 13.6315
+        "buy": 13.549,
+        "sell": 13.5867
       },
       {
         "currency": "Kuwaiti Dinar",
-        "buy": 166.1505,
-        "sell": 166.6584
+        "buy": 165.6994,
+        "sell": 166.2055
       },
       {
         "currency": "UAE Dirham",
-        "buy": 13.8968,
-        "sell": 13.9355
+        "buy": 13.8526,
+        "sell": 13.8912
       },
       {
         "currency": "Australian Dollar",
-        "buy": 36.4027,
-        "sell": 36.5073
+        "buy": 36.5762,
+        "sell": 36.6811
       },
       {
         "currency": "Bahraini Dinar",
-        "buy": 135.374,
-        "sell": 135.7617
+        "buy": 134.937,
+        "sell": 135.323
       },
       {
         "currency": "Omani Riyal",
-        "buy": 132.5648,
-        "sell": 132.944
+        "buy": 132.1404,
+        "sell": 132.518
       },
       {
         "currency": "Qatari Riyal",
-        "buy": 14.0012,
-        "sell": 14.0414
+        "buy": 13.9564,
+        "sell": 13.9964
       },
       {
         "currency": "Jordanian Dinar",
-        "buy": 71.8893,
-        "sell": 72.2892
+        "buy": 71.6592,
+        "sell": 72.0576
       },
       {
         "currency": "Chinese Yuan",
-        "buy": 7.5929,
-        "sell": 7.6139
+        "buy": 7.5712,
+        "sell": 7.5926
       }
     ]
   },
@@ -112,7 +112,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.19545
           },
           {
             "date": "03/09",
@@ -157,7 +157,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.19695000000000001
           },
           {
             "date": "03/09",
@@ -202,7 +202,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.1962
           },
           {
             "date": "03/09",
@@ -384,7 +384,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 11939.0
           },
           {
             "date": "03/09",
@@ -429,7 +429,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 5250.0
           },
           {
             "date": "03/09",
@@ -474,7 +474,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 5000.0
           },
           {
             "date": "03/09",
@@ -519,7 +519,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "03/09",
@@ -564,7 +564,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "03/09",
@@ -609,7 +609,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "03/09",
@@ -654,7 +654,7 @@
           },
           {
             "date": "02/09",
-            "value": null
+            "value": 22189.0
           },
           {
             "date": "03/09",

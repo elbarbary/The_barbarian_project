@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-04T09:49:46.162227+00:00",
+  "builtAt": "2026-09-05T05:35:52.850849+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-09-04T09:48:44Z",
-      "observations": 8,
+      "observedAt": "2026-09-05T05:33:45Z",
+      "observations": 9,
       "status": "available",
-      "ageHours": 0.017
+      "ageHours": 0.036
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
@@ -20,23 +20,23 @@
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-04T09:47:37.439748+00:00",
-      "items": 560,
+      "observedAt": "2026-09-05T05:32:41.988499+00:00",
+      "items": 561,
       "status": "available",
-      "ageHours": 0.036
+      "ageHours": 0.053
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
-      "observedAt": "2026-09-04T09:48:41.739006+00:00",
-      "matchedAtMcdr": 81,
-      "exactIsinsQueried": 85,
-      "notYetIndividuallyQueried": 176,
+      "observedAt": "2026-09-05T05:33:43.158055+00:00",
+      "matchedAtMcdr": 105,
+      "exactIsinsQueried": 110,
+      "notYetIndividuallyQueried": 151,
       "status": "partial",
-      "ageHours": 0.018
+      "ageHours": 0.036
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-04T09:49:45.823236+00:00",
+      "observedAt": "2026-09-05T05:35:52.560225+00:00",
       "issuers": 284,
       "verifiedIrArchives": 0,
       "status": "partial",
@@ -44,10 +44,10 @@
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-03T10:00:13.173586+00:00",
-      "officialFxDate": "02/09/2026",
+      "observedAt": "2026-09-05T05:32:50.391041+00:00",
+      "officialFxDate": "03/09/2026",
       "status": "available",
-      "ageHours": 23.826
+      "ageHours": 0.051
     }
   },
   "capabilities": {

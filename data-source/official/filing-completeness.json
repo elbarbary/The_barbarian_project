@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-04T09:49:45.823236+00:00",
+  "builtAt": "2026-09-05T05:35:52.560225+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
     "items": 192024,
@@ -1840,16 +1840,8 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 560,
-    "failures": {
-      "fra_news": "Expecting value: line 1 column 1 (char 0)",
-      "regulations": "Expecting value: line 1 column 1 (char 0)",
-      "reg_procedure_compan": "Expecting value: line 1 column 1 (char 0)",
-      "companies_decrees": "Expecting value: line 1 column 1 (char 0)",
-      "admin_actions": "Expecting value: line 1 column 1 (char 0)",
-      "criminal_procedures": "Expecting value: line 1 column 1 (char 0)",
-      "f_criminal_procedure": "Expecting value: line 1 column 1 (char 0)"
-    }
+    "items": 561,
+    "failures": {}
   },
   "issuers": [
     {
