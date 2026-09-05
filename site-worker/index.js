@@ -304,7 +304,7 @@ export function cleanTickers(raw) {
  * a second key always buys is surviving one being revoked or rotated without
  * the sign-in going down with it.
  */
-function mailKeys(env) {
+export function mailKeys(env) {
   return String(env.RESEND_API_KEYS || env.RESEND_API_KEY || '')
     .split(',')
     .map((k) => k.trim())
@@ -700,6 +700,165 @@ export async function recordUser(env, email, ctx) {
   return record;
 }
 
+/** Recover user emails from Resend API (sent emails and audiences) across all configured keys. */
+export async function syncFromResend(env, ctx) {
+  const keys = mailKeys(env);
+  const found = new Map(); // email -> earliest created_at
+  const details = [];
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const keyId = `resend#${i + 1}`;
+    let emailCount = 0;
+    let audienceCount = 0;
+    const errors = [];
+
+    // 1. Fetch sent emails from /emails
+    try {
+      const res = await fetch('https://api.resend.com/emails?limit=100', {
+        headers: {
+          authorization: `Bearer ${key}`,
+          accept: 'application/json',
+        },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const list = Array.isArray(json?.data) ? json.data : (Array.isArray(json) ? json : []);
+        for (const item of list) {
+          const recipients = Array.isArray(item.to) ? item.to : (item.to ? [item.to] : []);
+          for (const raw of recipients) {
+            const addr = parseAddress(raw).email.toLowerCase().trim();
+            if (EMAIL.test(addr)) {
+              emailCount++;
+              const prev = found.get(addr);
+              if (!prev || (item.created_at && item.created_at < prev)) {
+                found.set(addr, item.created_at || new Date().toISOString());
+              }
+            }
+          }
+        }
+      } else {
+        errors.push(`emails: HTTP ${res.status}`);
+      }
+    } catch (err) {
+      errors.push(`emails: ${err && err.message}`);
+    }
+
+    // 2. Fetch audience contacts from /audiences
+    try {
+      const audRes = await fetch('https://api.resend.com/audiences', {
+        headers: {
+          authorization: `Bearer ${key}`,
+          accept: 'application/json',
+        },
+      });
+      if (audRes.ok) {
+        const audData = await audRes.json();
+        const audiences = Array.isArray(audData?.data) ? audData.data : [];
+        for (const aud of audiences) {
+          if (!aud?.id) continue;
+          const cRes = await fetch(`https://api.resend.com/audiences/${aud.id}/contacts`, {
+            headers: {
+              authorization: `Bearer ${key}`,
+              accept: 'application/json',
+            },
+          });
+          if (cRes.ok) {
+            const cData = await cRes.json();
+            const contacts = Array.isArray(cData?.data) ? cData.data : [];
+            for (const c of contacts) {
+              const addr = (c.email || '').toLowerCase().trim();
+              if (EMAIL.test(addr)) {
+                audienceCount++;
+                const prev = found.get(addr);
+                if (!prev || (c.created_at && c.created_at < prev)) {
+                  found.set(addr, c.created_at || new Date().toISOString());
+                }
+              }
+            }
+          }
+        }
+      }
+    } catch (err) {
+      // Audiences optional
+    }
+
+    details.push({
+      key: keyId,
+      emails_seen: emailCount,
+      audience_contacts: audienceCount,
+      errors: errors.length ? errors : undefined,
+    });
+  }
+
+  // 3. Save all found emails into KV and Brevo:
+  const newlyAdded = [];
+  const existingUsers = [];
+  const now = new Date().toISOString();
+
+  for (const [email, createdAt] of found.entries()) {
+    const userKey = `user:${email}`;
+    let existing = null;
+    if (env.ESTHMR_AUTH && typeof env.ESTHMR_AUTH.get === 'function') {
+      existing = await env.ESTHMR_AUTH.get(userKey, 'json');
+    }
+    if (!existing) {
+      const record = {
+        email,
+        created_at: createdAt || now,
+        last_login: createdAt || now,
+        logins: 1,
+      };
+      if (env.ESTHMR_AUTH && typeof env.ESTHMR_AUTH.put === 'function') {
+        await env.ESTHMR_AUTH.put(userKey, JSON.stringify(record));
+      }
+      newlyAdded.push(email);
+    } else {
+      existingUsers.push(email);
+    }
+
+    // Sync to Brevo Contacts in background:
+    const brevo = brevoKey(env);
+    if (brevo) {
+      const sync = fetch('https://api.brevo.com/v3/contacts', {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'api-key': brevo,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ email, updateEnabled: true }),
+      }).catch((err) => console.warn('[auth] Brevo sync failed for', email, err && err.message));
+      if (ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(sync);
+    }
+  }
+
+  // 4. Update users:all in KV:
+  if (env.ESTHMR_AUTH && typeof env.ESTHMR_AUTH.get === 'function') {
+    const held = await env.ESTHMR_AUTH.get('users:all', 'json');
+    const users = Array.isArray(held) ? held : [];
+    let updated = false;
+    for (const email of found.keys()) {
+      if (!users.includes(email)) {
+        users.push(email);
+        updated = true;
+      }
+    }
+    if (updated) {
+      await env.ESTHMR_AUTH.put('users:all', JSON.stringify(users));
+    }
+  }
+
+  return {
+    total_recovered: found.size,
+    newly_added: newlyAdded.length,
+    already_in_db: existingUsers.length,
+    new_emails: newlyAdded,
+    all_recovered_emails: Array.from(found.keys()),
+    details_per_key: details,
+  };
+}
+
 async function api(request, env, url, ctx) {
   const path = url.pathname.replace('/esthmr/api', '');
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
@@ -916,6 +1075,18 @@ async function api(request, env, url, ctx) {
     const held = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get('users:all', 'json') : [];
     const users = Array.isArray(held) ? held : [];
     return json({ count: users.length, users }, 200, { 'cache-control': 'no-store' });
+  }
+
+  if (path === '/auth/sync-resend') {
+    const secret = env.STATUS_TOKEN || env.SESSION_SECRET;
+    if (!secret) return json({ error: 'not configured' }, 503);
+    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '')
+      || url.searchParams.get('token') || '';
+    if (!offered || offered !== secret) {
+      return json({ error: 'unauthorized' }, 401);
+    }
+    const report = await syncFromResend(env, ctx);
+    return json(report, 200, { 'cache-control': 'no-store' });
   }
 
   if (request.method !== 'POST') return json({ error: 'method' }, 405);

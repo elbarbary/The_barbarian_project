@@ -155,3 +155,67 @@ test('/auth/users admin endpoint checks authorization and returns users list or 
   const notFoundRes = await worker.fetch(notFoundReq, env);
   assert.equal(notFoundRes.status, 404);
 });
+
+test('syncFromResend recovers emails from Resend /emails and /audiences and updates KV and Brevo', async () => {
+  const kv = mockKv();
+  const env = {
+    ESTHMR_AUTH: kv,
+    RESEND_API_KEYS: 're_key1,re_key2',
+    BREVO_API_KEY: 'xkeysib-brevo',
+    STATUS_TOKEN: 'secret-token',
+  };
+
+  const originalFetch = globalThis.fetch;
+  const brevoSynced = [];
+  globalThis.fetch = async (url, opts) => {
+    const u = String(url);
+    if (u.includes('api.resend.com/emails')) {
+      if (opts.headers.authorization === 'Bearer re_key1') {
+        return new Response(JSON.stringify({
+          data: [
+            { to: ['recovered1@esthmr.com'], created_at: '2026-09-01T10:00:00Z' },
+            { to: ['recovered2@esthmr.com'], created_at: '2026-09-02T10:00:00Z' },
+          ],
+        }), { status: 200 });
+      }
+      return new Response(JSON.stringify({ data: [] }), { status: 200 });
+    }
+    if (u.includes('api.resend.com/audiences')) {
+      if (u.endsWith('/contacts')) {
+        return new Response(JSON.stringify({
+          data: [
+            { email: 'audience1@esthmr.com', created_at: '2026-08-30T10:00:00Z' },
+          ],
+        }), { status: 200 });
+      }
+      return new Response(JSON.stringify({
+        data: [{ id: 'aud_123' }],
+      }), { status: 200 });
+    }
+    if (u.includes('api.brevo.com/v3/contacts')) {
+      brevoSynced.push(JSON.parse(opts.body).email);
+      return new Response(null, { status: 204 });
+    }
+    return originalFetch(url, opts);
+  };
+
+  try {
+    const req = new Request('https://esthmr.com/esthmr/api/auth/sync-resend', {
+      headers: { authorization: 'Bearer secret-token' },
+    });
+    const res = await worker.fetch(req, env);
+    assert.equal(res.status, 200);
+    const data = await res.json();
+    assert.equal(data.total_recovered, 3);
+    assert.equal(data.newly_added, 3);
+    assert.deepEqual(data.all_recovered_emails.sort(), ['audience1@esthmr.com', 'recovered1@esthmr.com', 'recovered2@esthmr.com']);
+
+    const users = await kv.get('users:all', 'json');
+    assert.equal(users.length, 3);
+    assert.ok(await kv.get('user:recovered1@esthmr.com', 'json'));
+    assert.ok(await kv.get('user:audience1@esthmr.com', 'json'));
+    assert.equal(brevoSynced.length, 3);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
