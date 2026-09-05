@@ -112,17 +112,16 @@ async function sign(payload, secret) {
 }
 
 async function unsign(token, secret) {
-  if (typeof token !== 'string' || !token.includes('.')) return null;
+  if (typeof token !== 'string' || token.length > 2048
+      || !/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{43}$/.test(token)) return null;
   const [body, mac] = token.split('.');
-  const expected = b64url(await crypto.subtle.sign('HMAC', await hmacKey(secret), enc.encode(body)));
-  // Constant-time-ish: compare full strings of equal length only.
-  if (mac.length !== expected.length) return null;
-  let diff = 0;
-  for (let i = 0; i < mac.length; i++) diff |= mac.charCodeAt(i) ^ expected.charCodeAt(i);
-  if (diff !== 0) return null;
   try {
+    const signature = Uint8Array.from(atob(mac.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
+    if (!await crypto.subtle.verify('HMAC', await hmacKey(secret), signature, enc.encode(body))) return null;
     const payload = JSON.parse(atob(body.replace(/-/g, '+').replace(/_/g, '/')));
-    return payload.x > Date.now() / 1000 ? payload : null;
+    return payload && typeof payload.e === 'string' && EMAIL.test(payload.e)
+      && payload.e.length <= 200 && Number.isFinite(payload.x)
+      && payload.x > Date.now() / 1000 ? payload : null;
   } catch {
     return null;
   }
@@ -132,7 +131,9 @@ function cookieValue(request, name) {
   const raw = request.headers.get('cookie') || '';
   for (const part of raw.split(';')) {
     const [k, ...v] = part.trim().split('=');
-    if (k === name) return decodeURIComponent(v.join('='));
+    if (k === name) {
+      try { return decodeURIComponent(v.join('=')); } catch { return null; }
+    }
   }
   return null;
 }
@@ -410,6 +411,7 @@ export async function deliver(chain, attempt) {
 
 async function postResend(key, message) {
   const response = await fetch('https://api.resend.com/emails', {
+    signal: AbortSignal.timeout(10000),
     method: 'POST',
     headers: { authorization: `Bearer ${key}`, 'content-type': 'application/json' },
     body: JSON.stringify(message),
@@ -457,6 +459,7 @@ async function sendPulseToken(env, fresh) {
     if (held) return held;
   }
   const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
+    signal: AbortSignal.timeout(10000),
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
@@ -490,6 +493,7 @@ async function postSendPulse(env, message) {
     },
   });
   const post = async (token) => fetch('https://api.sendpulse.com/smtp/emails', {
+    signal: AbortSignal.timeout(10000),
     method: 'POST',
     headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
     body: payload,
@@ -529,6 +533,34 @@ async function sendCode(env, email, code) {
   // Which provider actually carried it — the thing you want in `wrangler tail`
   // when somebody says the code never arrived.
   console.log('code sent via', used);
+}
+
+// Enforce the limit on bytes actually received, including chunked bodies.
+// A declared Content-Length alone is not a bound on an untrusted request.
+async function smallJson(request) {
+  const limit = 16384;
+  const invalid = (status) => Object.assign(new Error('invalid request body'), { status });
+  if (Number(request.headers.get('content-length')) > limit) throw invalid(413);
+  if (!request.body) throw invalid(400);
+  const reader = request.body.getReader();
+  const chunks = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > limit) { await reader.cancel(); throw invalid(413); }
+      chunks.push(value);
+    }
+  } finally { reader.releaseLock(); }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  let body;
+  try { body = JSON.parse(new TextDecoder().decode(bytes)); } catch { throw invalid(400); }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) throw invalid(400);
+  return body;
 }
 
 async function api(request, env, url, ctx) {
@@ -690,11 +722,13 @@ async function api(request, env, url, ctx) {
   }
 
   if (path === '/auth/me') {
+    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
     const who = await session(request, env);
     return who ? json({ email: who.e }) : json({ error: 'signed out' }, 401);
   }
 
   if (path === '/auth/signout') {
+    if (request.method !== 'POST') return json({ error: 'method' }, 405, { allow: 'POST' });
     return json({ ok: true }, 200, {
       'set-cookie': `${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`,
     });
@@ -709,15 +743,16 @@ async function api(request, env, url, ctx) {
     if (!who) return json({ error: 'signed out' }, 401, { 'cache-control': 'no-store' });
     const key = `wl:${who.e}`;
     if (request.method === 'GET') {
-      const held = await env.ESTHMR_AUTH.get(key, 'json').catch(() => null);
+      let held;
+      try { held = await env.ESTHMR_AUTH.get(key, 'json'); }
+      catch { return json({ error: 'watchlist unavailable' }, 503, { 'cache-control': 'no-store' }); }
       return json({ tickers: cleanTickers(held) || [] }, 200, { 'cache-control': 'no-store' });
     }
     if (request.method === 'PUT') {
       if (await overLimit(env, 'watch', who.e, LIMITS.watchPerSession)) {
         return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
       }
-      let sent = {};
-      try { sent = await request.json(); } catch { /* answered below */ }
+      const sent = await smallJson(request);
       const tickers = cleanTickers(sent && sent.tickers);
       if (!tickers) return json({ error: 'tickers' }, 400);
       await env.ESTHMR_AUTH.put(key, JSON.stringify(tickers));
@@ -727,8 +762,7 @@ async function api(request, env, url, ctx) {
   }
 
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
-  let body = {};
-  try { body = await request.json(); } catch { /* handled below */ }
+  const body = await smallJson(request);
 
   if (path === '/auth/request') {
     const email = normalise(body.email);
@@ -926,7 +960,14 @@ function unprefixLocation(answer, url) {
 /** Everything that is the same on either host: the API, the gate, the assets. */
 async function serve(request, env, url, ctx) {
   if (url.pathname.startsWith('/esthmr/api/')) {
-    return api(request, env, url, ctx).catch(() => json({ error: 'server' }, 500));
+    const answer = await api(request, env, url, ctx).catch((error) =>
+      json({ error: error.status === 413 ? 'request too large' : error.status === 400 ? 'invalid JSON object' : 'server' }, error.status || 500));
+    if (url.pathname.includes('/auth/') || url.pathname.endsWith('/watchlist')) {
+      const headers = new Headers(answer.headers);
+      headers.set('cache-control', 'no-store');
+      return new Response(answer.body, { status: answer.status, headers });
+    }
+    return answer;
   }
 
   // The gate. Everything the pipeline publishes lives under this prefix.

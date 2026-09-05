@@ -4,9 +4,12 @@ import { Component } from './logic.js';
 import * as data from './data.js';
 import { whoami, openSignIn, signOut } from './auth.js';
 import * as watch from './watchlist.js';
+import { readRoute, connectNavigation } from './navigation.js';
+import { readResponse } from './requests.js';
 
 const root = document.getElementById('app');
 const component = new Component({ accent: 'var(--accent)' });
+Object.assign(component.state, readRoute(location.search));
 
 /* Whichever language the reader last chose.
  *
@@ -69,72 +72,71 @@ function setChrome(lang) {
 setChrome(component.state.lang);
 
 /** Swap the whole dataset — demo for signed-out, the exchange for signed-in. */
+let loadVersion = 0;
 async function load(email) {
+  const version = ++loadVersion;
   if (!email) {
+    component.setState({ dataLoading: false, dataError: false, extrasLoading: false, extrasError: false });
     component.setData(data.demo());
     return;
   }
+  component.setState({ dataLoading: true, dataError: false });
   try {
     const base = await data.live();
+    if (version !== loadVersion) return;
     component.setData(base);
+    component.setState({ dataLoading: false });
     // The rest of the screens, in parallel and each on its own: one document
     // failing should cost that screen its content, not the whole session.
-    const [feed, prov, cal, ex, secs, att, months, meanings, cross, inv, idx] = await Promise.all([
-      data.news().catch(() => null),
-      data.newsProvenance().catch(() => null),
-      data.calendar().catch(() => null),
-      data.exchange().catch(() => null),
-      data.sectors().catch(() => null),
-      data.attention().catch(() => null),
-      data.filedMonths().catch(() => null),
-      data.disclosureMeanings().catch(() => null),
-      data.connections().catch(() => null),
-      data.investors().catch(() => null),
-      data.indices().catch(() => null),
+    const patch = (fields) => {
+      if (version === loadVersion) component.setData({ ...component.data(), ...fields });
+    };
+    let failed = false;
+    const slice = async (request, map) => {
+      try { const value = await request; patch(map(value)); return value; }
+      catch { failed = true; return null; }
+    };
+    const calendar = slice(data.calendar(), (c) => ({ filedEvents: c.filed, expectedEvents: c.expected }));
+    const exchange = slice(data.exchange(), (e) => ({ rates: e.rates, seriesTo: e.seriesTo, macro: e.macro }));
+    const attention = slice(data.attention(), (a) => ({ breadth: a.breadth }));
+    component.setState({ extrasLoading: true, extrasError: false });
+    await Promise.all([
+      slice(data.news(), (feed) => ({ feed })),
+      slice(data.newsProvenance(), (newsProvenance) => ({ newsProvenance })),
+      slice(data.sectors(), (sectorCards) => ({ sectorCards })),
+      slice(data.filedMonths(), (filedMonths) => ({ filedMonths })),
+      slice(data.disclosureMeanings(), (disclosureMeanings) => ({ disclosureMeanings })),
+      slice(data.connections(), (crossings) => ({ crossings })),
+      slice(data.investors(), (investors) => ({ investors })),
+      slice(data.indices(), (idx) => ({ indexMembers: idx.list })),
+      Promise.all([calendar, exchange, attention]).then(([cal, ex, att]) => patch({
+        indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
+        readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal, cal && cal.expectedFrom),
+      })),
     ]);
-    component.setData({
-      ...base,
-      feed: feed || undefined,
-      newsProvenance: prov || undefined,
-      filedEvents: cal ? cal.filed : undefined,
-      expectedEvents: cal ? cal.expected : undefined,
-      rates: ex ? ex.rates : undefined,
-      seriesTo: ex ? ex.seriesTo : undefined,
-      macro: ex ? ex.macro : undefined,
-      sectorCards: secs || undefined,
-      // Home's two headline blocks. Both are assembled here because each needs
-      // documents two different screens already fetch, and asking for them
-      // twice would spend a reader's hourly allowance on nothing.
-      indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,
-      readNow: data.readNowCards(att && att.signals, cal && cal.expectedTotal,
-        cal && cal.expectedFrom),
-      breadth: att ? att.breadth : undefined,
-      filedMonths: months || undefined,
-      disclosureMeanings: meanings || undefined,
-      crossings: cross || undefined,
-      investors: inv || undefined,
-      // Who is in each index, so the heat map can draw one without inventing
-      // its membership. NOT `indices`: that name is already the index CARDS
-      // Home draws, in the same object literal, and the second key silently
-      // wins — which took the three level cards off Home the moment this was
-      // added.
-      indexMembers: idx ? idx.list : undefined,
-    });
+    if (version === loadVersion) component.setState({ extrasLoading: false, extrasError: failed });
   } catch (error) {
-    // A session that expired mid-visit drops back to the demo rather than an
-    // empty screen, and says so.
-    console.warn('[esthmr] falling back to the demo:', error.message);
-    component.setData(data.demo());
+    if (version !== loadVersion) return;
+    // Only an expired session returns to the clearly marked demo. A network
+    // failure keeps verified data or an empty retry state, never invented data.
+    console.warn('[esthmr] data load failed:', error.message);
+    if (component.data().demo) component.setData({ demo:false, companies:[], series:[], fins:[] });
+    component.setState({ dataLoading:false, dataError:true });
     // Only a 401/403 means the session went. doc() marks exactly those; a
     // transient 5xx or a dropped connection on one of eleven documents threw
     // an unmarked Error, and this signed the reader out for it — silently,
     // into the demo, with a valid session still in their cookie jar.
-    if (error && error.unauthorized) setSigned(null);
+    if (error && error.unauthorized) {
+      setSigned(null);
+      component.setData(data.demo());
+      component.setState({ dataError:false });
+    }
   }
 }
 
 /** Who is reading, for the watchlist's sake. Signed out has its own list. */
 let reader = null;
+component.onRetryData = () => load(reader);
 
 /** Put the reader's own list on the component and redraw.
  *
@@ -154,15 +156,26 @@ function syncWatchlist(list) {
  * copy is on screen, which for a returning reader is the same list.
  */
 function pullWatchlist(email) {
-  watch.sync(email).then(syncWatchlist).catch(() => { /* the mirror stands */ });
+  const version = readerVersion;
+  watch.sync(email).then((list) => {
+    if (version === readerVersion) syncWatchlist(list);
+  }).catch(() => { /* the mirror stands */ });
 }
 
 /** The chrome that reflects who is reading: a banner, and the button's job. */
+let readerVersion = 0;
 function setSigned(email) {
   // The attribute carries the meaning for anything reading the page aloud;
   // shell.css is what actually takes the banner off screen, because an author
   // `display` rule beats `hidden` and .gate has one.
   reader = email || null;
+  readerVersion++;
+  watch.activate();
+  component._co = null;
+  component._series = {};
+  component.state.watchStatus = '';
+  component.state.companyError = false;
+  component.state.companyLoading = false;
   // The watchlist screen says where the list is kept, and that is a different
   // sentence signed in and signed out.
   component._reader = reader;
@@ -195,17 +208,25 @@ document.getElementById('signout').onclick = async () => {
   // Following a company is a click on any row that shows one.
   component.onWatch = (ticker) => {
     if (!ticker) return;
-    syncWatchlist(watch.toggleSynced(reader, ticker, syncWatchlist));
+    syncWatchlist(watch.toggleSynced(reader, ticker, null, watchStatus()));
   };
 
   // Emptying the list is the reader's own delete: the account keeps a list
   // until it is told otherwise, so there has to be a way to tell it.
-  component.onClearWatch = () => syncWatchlist(watch.clearSynced(reader));
+  const watchStatus = () => {
+    const version = readerVersion;
+    return (watchStatus) => {
+      if (version === readerVersion) component.setState({ watchStatus });
+    };
+  };
+  component.onClearWatch = () => syncWatchlist(watch.clearSynced(reader, watchStatus()));
+  component.onRetryWatch = () => watch.retrySynced(reader, watchStatus());
 
-  const template = await (await fetch('./template.html')).text();
-  const email = await whoami();
-  setSigned(email);
-  await load(email);
+  const template = await readResponse('./template.html', {}, (response) => {
+    if (!response.ok) throw new Error('The page template could not load');
+    return response.text();
+  });
+  component.state.dataLoading = true;
   mount(template, root, component);
 
   // Choosing a month loads that month of the filed archive. The pills used to
@@ -213,15 +234,17 @@ document.getElementById('signout').onclick = async () => {
   // rows drawn from calendar.json.
   let month = null;
   const loadMonth = (wanted) => {
-    if (!wanted || wanted === month || component.data().demo) return;
+    if (!reader || component.state.dataLoading || !wanted || wanted === month || component.data().demo) return;
     month = wanted;
+    const version = loadVersion;
     data.filedMonth(wanted)
       .then((items) => {
-        if (component.openMonth() !== wanted) return;
+        if (version !== loadVersion || component.openMonth() !== wanted) return;
         component._d = { ...component.data(), filedArchive: items, filedArchiveMonth: wanted };
         draw();
       })
       .catch((error) => {
+        if (version !== loadVersion) return;
         // Forget the attempt, or one dropped fetch pins this month to the
         // twelve rows from calendar.json for the rest of the visit.
         month = null;
@@ -238,13 +261,14 @@ document.getElementById('signout').onclick = async () => {
    */
   const seriesAsked = new Set();
   const loadWatchSeries = () => {
-    if (component.state.screen !== 'watchlist' || component.data().demo) return;
+    if (!reader || component.state.dataLoading || component.state.screen !== 'watchlist' || component.data().demo) return;
     for (const ticker of (component._watch || []).slice(0, 30)) {
       if (seriesAsked.has(ticker)) continue;
       seriesAsked.add(ticker);
+      const version = loadVersion;
       data.priceSeries(ticker)
         .then((points) => {
-          if (!points.length) return;
+          if (version !== loadVersion || !points.length) return;
           component._series = { ...(component._series || {}), [ticker]: points };
           draw();
         })
@@ -262,27 +286,52 @@ document.getElementById('signout').onclick = async () => {
    * again.
    */
   let wholeArchive = null;
+  const archiveMonths = new Map();
   const loadWholeArchive = () => {
-    if (wholeArchive || component.data().demo) return;
+    if (!reader || component.state.dataLoading || wholeArchive || component.data().demo) return;
     if (!String(component.state.filedQ || '').trim()) return;
     const months = (component.data().filedMonths || []).map((m) => m.id);
     if (!months.length) return;
-    wholeArchive = Promise.all(months.map((id) => data.filedMonth(id).catch(() => [])))
+    const version = loadVersion;
+    component.state.archiveLoading = true;
+    component.state.archiveError = false;
+    wholeArchive = Promise.allSettled(months.map(async (id) => {
+      if (!archiveMonths.has(id)) {
+        const items = await data.filedMonth(id);
+        if (version === loadVersion) archiveMonths.set(id, items);
+      }
+    }))
       .then((all) => {
-        const rows = all.flat();
-        if (!rows.length) return;
+        if (version !== loadVersion) return;
+        const rows = months.flatMap((id) => archiveMonths.get(id) || []);
         component._d = { ...component.data(), filedAll: rows };
+        component.state.archiveLoading = false;
+        component.state.archiveError = all.some((r) => r.status === 'rejected');
         draw();
-      })
-      .catch((error) => console.warn('[esthmr] archive', error.message));
+      });
   };
+  component.onRetryArchive = () => { wholeArchive = null; component.onChange(); };
 
   // Opening a company loads its document; the screens redraw when it lands.
   let loading = null;
+  let companyVersion = 0;
+  let seenLoad = loadVersion;
+  component.onRetryCompany = () => { loading = null; component.onChange(); };
   const draw = component.onChange;
   let lastLang = component.state.lang;
   let lastTheme = component.state.theme || 'light';
+  const syncNavigation = connectNavigation(component);
   component.onChange = () => {
+    if (seenLoad !== loadVersion) {
+      seenLoad = loadVersion;
+      companyVersion++;
+      loading = month = wholeArchive = null;
+      archiveMonths.clear();
+      seriesAsked.clear();
+      component._co = null;
+      Object.assign(component.state, { companyLoading: false, companyError: false, archiveLoading: false, archiveError: false });
+    }
+    syncNavigation();
     if (component.state.lang !== lastLang) {
       lastLang = component.state.lang;
       setChrome(lastLang);
@@ -300,10 +349,18 @@ document.getElementById('signout').onclick = async () => {
     loadWholeArchive();
     loadWatchSeries();
     const wanted = component.state.ticker;
-    if (wanted && wanted !== loading
+    if (reader && !component.state.dataLoading && wanted && wanted !== loading
         && (!component._co || component._co.ticker !== wanted)
         && !component.data().demo) {
       loading = wanted;
+      const ticket = ++companyVersion;
+      const version = loadVersion;
+      const owner = readerVersion;
+      const current = () => ticket === companyVersion && version === loadVersion
+        && owner === readerVersion && component.state.ticker === wanted;
+      component._co = null;
+      component.state.companyLoading = true;
+      component.state.companyError = false;
       // Drop the previous company's documents before the next one's arrive.
       // Without this the statements, ratios, price series, signals and filings
       // of the company just closed stay on screen under the new ticker's name
@@ -314,6 +371,7 @@ document.getElementById('signout').onclick = async () => {
         signals: undefined, filings: undefined };
       data.company(wanted)
         .then((doc) => {
+          if (!current()) return;
           const row = component.data().companies.find((c) => c.ticker === wanted) || {};
           // Everything the company screen reads off `loaded`. The document
           // carries the company; the directory row carries the session, and
@@ -334,11 +392,12 @@ document.getElementById('signout').onclick = async () => {
             peTtmTo: row.peTtmTo, epsTtm: row.epsTtm };
           component._d = { ...component.data(), series: doc.series, fins: doc.fins,
             review: doc.review };
+          component.state.companyLoading = false;
           draw();
           // Its signals and its filings follow; they are extra, so a company
           // without either still shows its statements.
           data.companyExtras(wanted).then((extra) => {
-            if (component.state.ticker !== wanted) return;
+            if (!current()) return;
             component._d = {
               ...component.data(),
               signals: extra.signals || undefined,
@@ -347,10 +406,28 @@ document.getElementById('signout').onclick = async () => {
             draw();
           }).catch(() => {});
         })
-        .catch((error) => console.warn('[esthmr]', wanted, error.message));
+        .catch((error) => {
+          if (!current()) return;
+          component.state.companyLoading = false;
+          component.state.companyError = true;
+          console.warn('[esthmr]', wanted, error.message);
+          draw();
+        });
     }
     draw();
   };
+
+  // A bookmarked company or archive screen needs its documents immediately.
+  component.onChange();
+
+  // The shell and loading state are already interactive while identity and
+  // market feeds arrive. Secondary feeds never hold up the first render.
+  const bootReader = readerVersion;
+  void whoami().then((email) => {
+    if (bootReader !== readerVersion) return;
+    setSigned(email);
+    return load(email);
+  }).catch(() => component.setState({ dataLoading: false, dataError: true }));
 
   // Global search shortcut: '/' (when not editing text) or Cmd+K / Ctrl+K
   window.addEventListener('keydown', (e) => {
@@ -362,7 +439,7 @@ document.getElementById('signout').onclick = async () => {
       e.preventDefault();
       if (component.state.screen !== 'market') {
         component.state.screen = 'market';
-        draw();
+        component.onChange();
       }
       requestAnimationFrame(() => {
         const input = document.getElementById('om-market-search');

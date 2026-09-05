@@ -55,6 +55,87 @@ const LIVE = {
 
 /* ── the bug that was live ─────────────────────────────────────────────── */
 
+test('visual home keeps its evidence and opens real destinations', () => {
+  const c = fresh();
+  c.setData(LIVE);
+  const v = c.renderVals();
+  assert.equal(v.primaryNav.length, 5);
+  assert.equal(v.showHomeDetails, false);
+  assert.equal(v.snapshotMoves.length, 2);
+  assert.match(v.breadthRing, /50%/);
+  assert.equal(v.breadthTotal, '2');
+  v.toggleHomeDetails();
+  assert.equal(c.renderVals().showHomeDetails, true);
+  v.goToday();
+  assert.equal(c.state.screen, 'today');
+});
+
+test('market mosaic uses published market value, not performance ranking', () => {
+  const c = fresh();
+  c.setData(LIVE);
+  const v = c.renderVals();
+  assert.deepEqual(v.mosaicTiles.map(t => t.ticker), ['BBBB', 'AAAA']);
+  assert.equal(v.mosaicTiles[0].tileBg, 'var(--mosaic-down)');
+  assert.equal(v.mosaicTiles[1].tileBg, 'var(--mosaic-up)');
+  v.mosaicTiles[0].go();
+  assert.equal(c.state.ticker, 'BBBB');
+  assert.equal(c.state.screen, 'company');
+  assert.equal(screen({...LIVE, companies:[]}).noMosaic, true);
+  const neutral = screen({...LIVE, companies:[{...LIVE.companies[0], pct:0}]});
+  assert.equal(neutral.mosaicTiles[0].tileBg, 'var(--sunk)');
+});
+
+test('company sections are exclusive and retain all evidence', () => {
+  const c = fresh();
+  c.setData(data.demo());
+  c.state.screen = 'company';
+  for (let i = 0; i < 3; i++) {
+    c.renderVals().companySections[i].go();
+    const v = c.renderVals();
+    assert.equal([v.companyOverview, v.companyFinancials, v.companyFilings].filter(Boolean).length, 1);
+    assert.equal(v.companySections[i].current, 'page');
+    assert.ok(v.fins.length > 0, 'switching sections must not discard statements');
+  }
+});
+
+test('calculator accepts zero capital and zero distributions', () => {
+  const c = fresh();
+  c.setData(data.demo());
+  c.state.calcInvest = 0;
+  c.state.calcDividend = 0;
+  const v = c.renderVals();
+  assert.equal(v.calc.investRaw, 0);
+  assert.equal(v.calc.dividendRaw, 0);
+  assert.equal(v.calc.shares, '0');
+  assert.equal(v.calc.annualCash, '0');
+  assert.equal(v.calc.yieldPct, '0.00%');
+  assert.equal(v.calc.paybackYears, '—');
+  assert.ok(v.scenarioCards.every(s => s.one === '0' && s.three === '0'));
+});
+
+test('every screen renders in both languages and both themes', () => {
+  for (const lang of ['en', 'ar']) for (const theme of ['light', 'dark']) {
+    const c = fresh(lang);
+    c.setData(data.demo());
+    c.state.theme = theme;
+    for (const screen of ['home','market','company','today','heat','watchlist','sectors','calendar','exchange','tools','research','investors','crossings']) {
+      c.state.screen = screen;
+      const v = c.renderVals();
+      assert.equal(v.theme, theme);
+      assert.equal(v.dir, lang === 'ar' ? 'rtl' : 'ltr');
+      assert.equal(v.primaryNav.filter(n => n.current === 'page').length, 1);
+    }
+  }
+});
+
+test('index graphs remain visible in the visual home template', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const template = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  assert.match(template, /\{\{ ix\.spark \}\}/);
+  assert.ok(template.indexOf('{{ ix.spark }}') < template.indexOf('value="{{ showHomeDetails }}"'));
+  assert.equal(screen({ ...LIVE, companies: [] }).breadthRing, 'none');
+});
+
 test('a signed-in screen never carries the design mock-up', () => {
   const v = screen(LIVE);
   const printed = JSON.stringify(v, (k, x) => (typeof x === 'function' ? undefined : x));
@@ -494,7 +575,7 @@ test('a label and the figure beside it keep the space between them', async () =>
 /** A stand-in for whatever the binding reads, deep enough to resolve it. */
 function mockFor(expr) {
   const deep = { toString: () => 'value' };
-  return new Proxy(deep, { get: (t, k) => (k in t ? t[k] : deep) });
+  return new Proxy(deep, { get: (t, k) => (k === Symbol.toPrimitive ? () => 'value' : k in t ? t[k] : deep) });
 }
 
 /* ── the price on the screen, and how old it is ────────────────────────── */
@@ -2292,7 +2373,8 @@ test('§8 the threshold is named as ours, not as the exchange\'s', () => {
 test('the busiest rows sit above the movers on Home', async () => {
   const { readFile } = await import('node:fs/promises');
   const t = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
-  const busy = t.indexOf('{{ L.busiest }}');
+  const detailStart = t.indexOf('value="{{ showHomeDetails }}"');
+  const busy = t.indexOf('{{ L.busiest }}', detailStart);
   const movers = t.indexOf('{{ L.movers }}');
   assert.ok(busy > 0 && movers > 0, 'a block is missing');
   assert.ok(busy < movers, 'the movers come first — a big move on ordinary volume is just a price');
@@ -3888,18 +3970,21 @@ test('a filing opens the document, and its ticker opens the company', () => {
   assert.equal(c.state.ticker, 'AAAA');
 });
 
-test('the whole archive is fetched on the first search and never twice', async () => {
+test('the archive is searched on demand and successful months are reused on retry', async () => {
   // Twelve months is twelve requests and seven megabytes: the right price for
   // a search across a year, and far too high to pay on the way in.
   const { readFile } = await import('node:fs/promises');
   const main = await readFile(new URL('../../public/esthmr/main.js', import.meta.url), 'utf8');
   const fn = main.slice(main.indexOf('const loadWholeArchive'),
                         main.indexOf('// Opening a company loads its document'));
-  assert.match(fn, /if \(wholeArchive \|\| component\.data\(\)\.demo\) return;/,
+  assert.match(fn, /if \([^\n]*wholeArchive \|\| component\.data\(\)\.demo\) return;/,
     'it would fetch the archive again on every redraw');
   assert.match(fn, /if \(!String\(component\.state\.filedQ \|\| ''\)\.trim\(\)\) return;/,
     'it would fetch seven megabytes for a reader who never searched');
   assert.match(fn, /filedAll/);
+  assert.match(fn, /archiveMonths\.has\(id\)/);
+  assert.match(fn, /Promise\.allSettled/);
+  assert.match(fn, /onRetryArchive/);
 });
 
 test('searching the disclosures looks through every month, not the open one', () => {

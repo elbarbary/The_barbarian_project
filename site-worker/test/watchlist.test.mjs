@@ -86,6 +86,44 @@ const call = (e, url, init) => worker.fetch(new Request(url, init), e);
 const bearer = async (email) => ({ authorization: `Bearer ${await token(email)}` });
 const API = 'https://thebarbarianproject.com/esthmr/api/watchlist';
 
+test('storage failure is not returned as a successful empty watchlist', async () => {
+  const e=env();
+  e.ESTHMR_AUTH.get=async()=>{throw new Error('storage unavailable');};
+  const result=await call(e,API,{headers:await bearer('reader@example.com')});
+  assert.equal(result.status,503);
+  assert.equal(result.headers.get('cache-control'),'no-store');
+});
+
+test('signout requires an explicit POST and never caches the session response', async () => {
+  const url='https://esthmr.com/esthmr/api/auth/signout';
+  assert.equal((await call(env(),url)).status,405);
+  const result=await call(env(),url,{method:'POST'});
+  assert.equal(result.status,200);
+  assert.match(result.headers.get('set-cookie'),/Max-Age=0/);
+  assert.equal(result.headers.get('cache-control'),'no-store');
+});
+
+test('malformed session cookies fail closed without crashing the data gate', async () => {
+  for(const value of ['%E0%A4%A','not-a-token','x.y.z']) {
+    const result=await call(env(),'https://esthmr.com/data/v1/companies.json',{headers:{cookie:`esthmr_session=${value}`}});
+    assert.equal(result.status,401);
+  }
+  const valid=await token('reader@example.com');
+  const result=await call(env(),API,{headers:{authorization:`Bearer ${valid}.extra`}});
+  assert.equal(result.status,401,'extra token segments must not be silently ignored');
+});
+
+test('auth bodies must be bounded JSON objects and responses cannot be cached', async () => {
+  for(const body of ['null','[]','42','broken']) {
+    const result=await call(env(),'https://esthmr.com/esthmr/api/auth/request',{method:'POST',body});
+    assert.equal(result.status,400);
+    assert.equal(result.headers.get('cache-control'),'no-store');
+  }
+  const result=await call(env(),'https://esthmr.com/esthmr/api/auth/request',{
+    method:'POST',body:JSON.stringify({email:'reader@example.com',padding:'x'.repeat(17000)})});
+  assert.equal(result.status,413,'limit applies without a Content-Length header');
+});
+
 /* ── what is stored ────────────────────────────────────────────────────── */
 
 test('a payload is cleaned to tickers, uppercased, deduped and capped', () => {
@@ -467,6 +505,45 @@ test('signed out, nothing is asked of the server', async () => {
     b.local['esthmr:watchlist:guest'] = JSON.stringify(['COMI']);
     assert.deepEqual(await w.sync(null), ['COMI']);
   } finally { b.done(); }
+});
+
+test('rapid watchlist changes serialize and a failed save remains retryable', async () => {
+  const w=await import('../../public/esthmr/watchlist.js');
+  const b=browser(); w.activate();
+  const pending=[], calls=[], statuses=[];
+  const tick=()=>new Promise(resolve=>setImmediate(resolve));
+  try {
+    globalThis.fetch=async(_,init)=> {
+      calls.push(JSON.parse(init.body).tickers);
+      return new Promise(resolve=>pending.push(resolve));
+    };
+    w.toggleSynced('me@x.com','COMI',null,s=>statuses.push(s)); await tick();
+    w.toggleSynced('me@x.com','ABUK',null,s=>statuses.push(s));
+    w.toggleSynced('me@x.com','SWDY',null,s=>statuses.push(s));
+    assert.equal(calls.length,1,'only one write may be in flight');
+    pending.shift()(new Response('{}',{status:500})); await tick();
+    assert.deepEqual(calls,[['COMI'],['SWDY','ABUK','COMI']]);
+    assert.deepEqual(w.read('me@x.com'),['SWDY','ABUK','COMI'],'old failure must not roll back newer clicks');
+    pending.shift()(new Response('{}',{status:500})); await tick();
+    assert.equal(statuses.at(-1),'error');
+    const retry=w.retrySynced('me@x.com',s=>statuses.push(s)); await tick();
+    pending.shift()(new Response('{}')); await retry;
+    assert.equal(statuses.at(-1),'saved');
+  } finally {w.activate();b.done();}
+});
+
+test('queued watchlist writes do not cross a login boundary', async () => {
+  const w=await import('../../public/esthmr/watchlist.js');
+  const b=browser(); w.activate();
+  const tick=()=>new Promise(resolve=>setImmediate(resolve));
+  let finish, calls=0;
+  try {
+    globalThis.fetch=()=>{calls++;return new Promise(resolve=>{finish=resolve;});};
+    w.toggleSynced('me@x.com','COMI'); await tick();
+    w.toggleSynced('me@x.com','ABUK'); w.activate();
+    finish(new Response('{}')); await tick();
+    assert.equal(calls,1);
+  } finally {w.activate();b.done();}
 });
 
 test('the redirects carry HSTS too', async () => {

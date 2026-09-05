@@ -107,6 +107,11 @@ export function demo() {
         // sees. A few of the sixteen clear the 2x line, which is about the
         // proportion a real session throws up.
         rv: Math.round((0.4 + rand() * 4.2) * 10) / 10,
+        // Invented like the rest of this clearly labelled demo; exercise every ranking.
+        profit: n === 3 ? -24 : n * 18.5,
+        profitPeriod: 'FY 2025 · demo',
+        ratios: { dividend_yield: n % 5 === 0 ? null : (n % 7) * 0.85,
+          debt_equity: n % 6 === 0 ? null : (n % 4) * 0.35 },
         demo: true,
       };
     }));
@@ -255,14 +260,15 @@ export function demo() {
 
 /* ── the real thing ─────────────────────────────────────────────────────── */
 
+import { readResponse } from './requests.js';
 const ROOT = '/data/v1';
 
 /** One JSON document. 401 means the session went; the caller falls back. */
 async function doc(path) {
-  const response = await fetch(`${ROOT}/${path}`, {
+  return readResponse(`${ROOT}/${path}`, {
     credentials: 'same-origin',
     headers: { Accept: 'application/json' },
-  });
+  }, async (response) => {
   if (response.status === 401 || response.status === 403) {
     const error = new Error('not signed in');
     error.unauthorized = true;
@@ -270,6 +276,7 @@ async function doc(path) {
   }
   if (!response.ok) throw new Error(`${path}: ${response.status}`);
   return response.json();
+  });
 }
 
 /* ── the live feed ───────────────────────────────────────────────────────
@@ -412,6 +419,8 @@ export async function live() {
       // tested" rather than as a pass.
       avgVolume: c.avg_volume_30d ?? null,
       ratios: c.ratios || null,
+      profit: typeof c.net_income === 'number' ? c.net_income : null,
+      profitPeriod: c.net_income_period || '',
     };
   });
   return {

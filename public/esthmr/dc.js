@@ -130,7 +130,11 @@ function renderNode(node, scope, into) {
     return;
   }
 
-  const el = document.createElement(tag);
+  // Template SVGs must retain their namespace or browsers create inert HTML
+  // elements: their paths exist in the DOM but never paint.
+  const el = node.namespaceURI === 'http://www.w3.org/2000/svg'
+    ? document.createElementNS(node.namespaceURI, node.localName)
+    : document.createElement(tag);
   for (const attr of node.attributes) {
     const lower = attr.name.toLowerCase();
     if (lower === 'onclick' || lower === 'onchange') {
@@ -167,7 +171,7 @@ function renderNode(node, scope, into) {
       continue;
     }
     const value = attr.value.indexOf('{{') === -1 ? attr.value : interpolate(attr.value, scope);
-    if (value === false || value === null || value === undefined) continue;
+    if ((value === false && !lower.startsWith('aria-')) || value === null || value === undefined) continue;
     el.setAttribute(attr.name, String(value));
   }
   if (tag === 'img') {
@@ -214,9 +218,9 @@ export function mount(templateHtml, root, component) {
       ? { at: [...root.querySelectorAll('input,textarea')].indexOf(had),
           start: had.selectionStart, end: had.selectionEnd }
       : null;
-    const focusedBtn = had && had.getAttribute && had.getAttribute('role') === 'button'
+    const focusedBtn = had && had.getAttribute && (had.tagName === 'BUTTON' || had.getAttribute('role') === 'button')
       && root.contains(had)
-      ? (had.id ? { id: had.id } : { at: [...root.querySelectorAll('[role="button"]')].indexOf(had) })
+      ? (had.id ? { id: had.id } : { at: [...root.querySelectorAll('button,[role="button"]')].indexOf(had) })
       : null;
 
     const scope = component.scope();
@@ -233,7 +237,7 @@ export function mount(templateHtml, root, component) {
     } else if (focusedBtn) {
       const again = focusedBtn.id
         ? root.querySelector('#' + focusedBtn.id)
-        : (focusedBtn.at >= 0 ? root.querySelectorAll('[role="button"]')[focusedBtn.at] : null);
+        : (focusedBtn.at >= 0 ? root.querySelectorAll('button,[role="button"]')[focusedBtn.at] : null);
       if (again) again.focus();
     }
   };

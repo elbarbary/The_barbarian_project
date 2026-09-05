@@ -7,6 +7,7 @@
  * reader gets the whole site running on an invented exchange, so they can see
  * exactly what they would be signing in for. The button says what changes.
  */
+import { readResponse } from './requests.js';
 const API = '/esthmr/api/auth';
 
 /* The challenge in front of the mail sender.
@@ -39,22 +40,24 @@ function loadTurnstile() {
 }
 
 async function post(path, body) {
-  const response = await fetch(API + path, {
+  return readResponse(API + path, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     credentials: 'same-origin',
     body: JSON.stringify(body || {}),
-  });
+  }, async (response) => {
   let payload = {};
   try { payload = await response.json(); } catch { /* empty body is fine */ }
   if (!response.ok) throw new Error(payload.error || `signin failed (${response.status})`);
   return payload;
+  }, 60000);
 }
 
 export async function whoami() {
   try {
-    const response = await fetch(API + '/me', { credentials: 'same-origin' });
+    return await readResponse(API + '/me', { credentials: 'same-origin' }, async (response) => {
     return response.ok ? (await response.json()).email : null;
+    });
   } catch {
     return null;
   }

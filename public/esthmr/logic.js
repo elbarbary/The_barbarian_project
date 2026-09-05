@@ -1,3 +1,4 @@
+import { explorer } from './explorer.js';
 /* The screens, ported from the Claude Design canvas.
  *
  * Everything below `class Component` is the design's own logic, carried over
@@ -138,7 +139,7 @@ export class Component extends Base {
   // could start. main.js remembers whichever a reader chooses, so the default
   // is only ever the FIRST answer, never an argument.
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
-    audioPlaying: false, audioItem: '',
+    audioPlaying: false, audioItem: '', filtersOpen: false, sectorQuery: '', preferencesOpen: false,
     calcInvest: 100000, calcPrice: 50, calcDividend: 4.5,
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
@@ -229,7 +230,7 @@ export class Component extends Base {
       revYieldBody:'The annual dividend against the share price, as the exchange publishes it. A yield can climb simply because the price collapsed, and a company paying out heavily may be keeping too little to invest. Read it beside profit and debt.',
       revProfitBody:'What the company filed as profit for the full year, as the exchange received it. Direction is read from the sign of each year\'s move rather than a percentage, because a percentage off a loss is meaningless: going from a loss to a profit is not growth of some number, it is a company that stopped losing money.',
       revEpsBody:'Profit divided by the shares in issue. This is the number that survives a company issuing more shares: total profit can climb while each share earns less. When you hear that profits increased, this is the follow-up question.',
-      revAssetsBody:'What the company holds, from its filed balance sheet. This stands in for revenue growth, which no Egyptian source publishes: assets growing while profit does not is the same warning a falling margin would give — the company is putting more in to get the same out.',
+      revAssetsBody:'Assets reported in the filed balance sheet. Compare their growth with profit and cash flow; asset growth is not revenue growth.',
       revCashBody:'Operating cash flow divided by reported profit. Above 1 means the company collected more cash than it booked as profit. This stands in for profit margin, which needs revenue nobody publishes — and it arguably answers the question better: when profit climbs and the cash does not follow, that is the thing worth investigating.',
       revRoeBody:'Profit as a share of shareholders\' equity: how much the company earns on the money its owners left in it. A high return is not automatically impressive — debt shrinks equity, which lifts the ratio without the business improving. Always read it beside debt to equity.',
       revRoaBody:'Profit as a share of total assets. Unlike return on equity, borrowing cannot flatter it — the assets stay on the books either way. The gap between the two is roughly how much of the return is coming from leverage.',
@@ -256,7 +257,7 @@ export class Component extends Base {
       revDisagree:'{up} moved one way, {down} the other.',
       revAgreeAsk:'When they all agree, ask what the market already knows that you do not.',
       revDisagreeAsk:'When they disagree, the disagreement is the story. Which one is early?',
-      revMissingNote:'Revenue is not published by the exchange or by any data source reachable from Egypt, so revenue growth and profit margin cannot be shown. Asset growth and cash conversion ask the same questions of figures that are published. Free float IS published, for 161 of the 282 listed companies, and is shown above where the company\u2019s own profile carries it.',
+      revMissingNote:'Revenue appears in the financial statements when the retrieved filing contains it. Missing figures mean unavailable data, not zero. Each measure and free-float figure is shown only where its source supports it.',
       revAskTitle:'Worth asking',
       revAnswerTitle:'A probable answer',
       revProofTitle:'The figure, period by period',
@@ -510,7 +511,7 @@ export class Component extends Base {
       calcAmountLabel:'Investment Capital (EGP)',
       calcSharePriceLabel:'Share Price (EGP)',
       calcDividendLabel:'Annual Dividend Per Share (EGP)',
-      calcPresetStocks:'EGX Listed Stock Presets',
+      calcPresetStocks:'Illustrative presets · not current quotes',
       calcSharesCount:'Shares Owned',
       calcAnnualCash:'Annual Cash Dividend',
       calcMonthlyCash:'Monthly Cash Equivalent',
@@ -548,7 +549,7 @@ export class Component extends Base {
       revYieldBody:'التوزيع السنوي منسوباً إلى سعر السهم، كما تنشره البورصة. وقد يرتفع العائد لمجرد أن السعر انهار، وقد توزّع الشركة بسخاء وتُبقي القليل للاستثمار. اقرأه بجوار الربح والمديونية.',
       revProfitBody:'ما أودعته الشركة كربح عن السنة كاملة، كما تسلّمته البورصة. والاتجاه يُقرأ من إشارة تغير كل سنة لا من نسبة مئوية، لأن النسبة المحسوبة على خسارة بلا معنى: الانتقال من خسارة إلى ربح ليس نمواً في رقم، بل شركة توقفت عن الخسارة.',
       revEpsBody:'الربح مقسوماً على عدد الأسهم المُصدرة. وهذا هو الرقم الذي يصمد أمام إصدار الشركة أسهماً جديدة: قد يرتفع إجمالي الربح بينما يربح كل سهم أقل. فحين تسمع أن الأرباح زادت، هذا هو السؤال التالي.',
-      revAssetsBody:'ما تملكه الشركة، من ميزانيتها المودعة. وهذا يقوم مقام نمو الإيرادات الذي لا ينشره أي مصدر مصري: نمو الأصول دون نمو الربح هو التحذير نفسه الذي يعطيه تراجع الهامش — الشركة تضخّ أكثر لتخرج بالمثل.',
+      revAssetsBody:'الأصول كما وردت بالميزانية المودعة. قارن نموها بالأرباح والتدفقات النقدية؛ نمو الأصول ليس نمو الإيرادات.',
       revCashBody:'التدفق النقدي التشغيلي مقسوماً على الربح المعلن. وفوق 1 يعني أن الشركة حصّلت نقداً أكثر مما قيّدته ربحاً. وهذا يقوم مقام هامش الربح الذي يحتاج إيرادات لا يُنشرها أحد — بل لعله يجيب عن السؤال أفضل: حين يصعد الربح ولا يتبعه النقد، فذلك ما يستحق البحث.',
       revRoeBody:'الربح منسوباً إلى حقوق المساهمين: كم تربح الشركة على الأموال التي تركها ملّاكها فيها. والعائد المرتفع ليس مبهراً بالضرورة — فالاقتراض يُصغّر حقوق الملكية فترتفع النسبة دون أن يتحسّن النشاط. اقرأه دائماً بجوار نسبة الدين إلى حقوق الملكية.',
       revRoaBody:'الربح منسوباً إلى إجمالي الأصول. وخلافاً للعائد على حقوق الملكية، لا يستطيع الاقتراض تجميله — فالأصول تبقى في الدفاتر على أي حال. والفرق بين النسبتين هو تقريباً مقدار ما يأتي من الرافعة المالية.',
@@ -575,7 +576,7 @@ export class Component extends Base {
       revDisagree:'{up} تحرك في اتجاه و{down} في الاتجاه الآخر.',
       revAgreeAsk:'حين تتفق كلها، اسأل عمّا يعرفه السوق ولا تعرفه أنت.',
       revDisagreeAsk:'حين تختلف، فالاختلاف نفسه هو الحكاية. أيّها سبق الآخر؟',
-      revMissingNote:'الإيرادات لا تنشرها البورصة ولا أي مصدر بيانات متاح من مصر، لذا لا يمكن عرض نمو الإيرادات ولا هامش الربح. ونمو الأصول وتحويل النقد يطرحان السؤال نفسه على أرقام منشورة فعلاً. أما نسبة التداول الحر فهي منشورة لـ ١٦١ شركة من أصل ٢٨٢، وتظهر أعلاه حيثما حملها ملف الشركة نفسه.',
+      revMissingNote:'تظهر الإيرادات في القوائم المالية عندما يتضمنها الإفصاح المسترجع. الخانات الفارغة تعني بيانات غير متاحة، وليست صفراً. لا نعرض مقياساً أو نسبة تداول حر دون بيانات تدعمها.',
       revAskTitle:'يستحق أن تسأل',
       revAnswerTitle:'إجابة مُرجَّحة',
       revProofTitle:'الرقم، فترة بفترة',
@@ -811,7 +812,7 @@ export class Component extends Base {
       calcAmountLabel:'المبلغ المستثمر (بالجنيه المصري)',
       calcSharePriceLabel:'سعر السهم (ج.م)',
       calcDividendLabel:'الكوبون السنوي الموزع للسهم (ج.م)',
-      calcPresetStocks:'نماذج سريعة لأسهم من البورصة المصرية',
+      calcPresetStocks:'أمثلة حسابية · ليست أسعاراً حالية',
       calcSharesCount:'عدد الأسهم المملوكة',
       calcAnnualCash:'إجمالي الكوبونات السنوية كاش',
       calcMonthlyCash:'متوسط العائد الشهري المعادل',
@@ -1522,6 +1523,7 @@ export class Component extends Base {
       watched: watchedSet.has(c.ticker),
       star: watchedSet.has(c.ticker) ? '\u2605' : '\u2606',
       starColor: watchedSet.has(c.ticker) ? 'var(--accent)' : 'var(--faint)',
+      followLabel: watchedSet.has(c.ticker) ? L.unfollow : L.follow,
       follow: (e) => { if (e && e.stopPropagation) e.stopPropagation();
         this.onWatch && this.onWatch(c.ticker); } });
 
@@ -1630,7 +1632,7 @@ export class Component extends Base {
     const indexById = new Map();
     const indices = say(D.indices || [], ['label']).map((ix) => {
       indexById.set(ix.id, ix);
-      return Object.assign({}, ix, { spark: this.sparkOf(ix.points, ix.up) });
+      return Object.assign({}, ix, { spark: this.sparkOf(ix.points, ix.up), go: this.go('exchange') });
     });
 
     const readNow = say(D.readNow || [], ['kind', 'title', 'stamp']).map((r) => Object.assign({}, r, {
@@ -3068,8 +3070,129 @@ export class Component extends Base {
         dot: on ? acc : 'transparent' };
     });
 
+    // Organize by the reader's task, keeping every existing screen reachable.
+    const groups = [
+      { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home'] },
+      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'company', 'investors', 'exchange'] },
+      { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
+      { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
+      { id: 'tools', label: ar ? 'الأدوات' : 'Tools', screens: ['tools'] },
+    ];
+    const activeGroup = groups.find(g => g.screens.includes(st.screen)) || groups[0];
+    const primaryNav = groups.map(g => ({ ...g, icon: ICON[g.id],
+      current: activeGroup.id === g.id ? 'page' : null,
+      go: this.go(g.id) }));
+    const secondaryNav = navDef.filter(([id]) => activeGroup.screens.includes(id)
+      && (id !== 'company' || st.ticker)).map(([id, label]) => ({
+        label, current: st.screen === id ? 'page' : null, go: this.go(id),
+      }));
+
+    const marketExplorer = explorer(this, D.companies, ar);
     const out = {
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
+      primaryNav, secondaryNav: secondaryNav.length > 1 ? secondaryNav : [],
+      navigationLabel: ar ? 'التنقل الرئيسي' : 'Main navigation',
+      sectionNavigationLabel: ar ? 'أقسام الصفحة' : 'Section navigation',
+      findCompany: ar ? 'ابحث عن شركة' : 'Find a company',
+      journalLabel: ar ? 'البورصة المصرية، من المصدر' : 'The Egyptian Exchange, from the source',
+      overviewTitle: ar ? 'السوق في لمحة' : 'Market at a glance',
+      welcomeLabel: ar ? 'مساحتك لفهم البورصة' : 'Your space to understand the market',
+      mosaicTitle: ar ? 'السوق بالألوان' : 'The market in colour',
+      mosaicNote: ar ? 'الأكبر قيمة سوقية · اللون يعكس تغير الجلسة' : 'Largest by market value · colour shows session change',
+      noMosaic: !D.companies.some(c => Number.isFinite(c.cap) && c.cap > 0),
+      mosaicTiles: D.companies.filter(c => Number.isFinite(c.cap) && c.cap > 0)
+        .sort((a, b) => b.cap - a.cap).slice(0, 12).map(c => ({...mkRow(c),
+          tileBg: Number.isFinite(c.pct) && c.pct !== 0 ? (c.pct > 0 ? 'var(--mosaic-up)' : 'var(--mosaic-down)') : 'var(--sunk)',
+          tileInk: Number.isFinite(c.pct) && c.pct !== 0 ? (c.pct > 0 ? 'var(--mosaic-up-ink)' : 'var(--mosaic-down-ink)') : 'var(--t2)',
+        })),
+      quickActions: [
+        {label: ar ? 'استكشف الشركات' : 'Explore companies', note: ar ? 'أرقام، رسوم، وإفصاحات' : 'Figures, charts & filings', icon: ICON.market, go: this.go('market')},
+        {label: ar ? 'قائمة متابعتك' : 'Your watchlist', note: ar ? 'شركاتك في مكان واحد' : 'Your companies, together', icon: ICON.watchlist, go: this.go('watchlist')},
+      ],
+      openHeat: this.go('heat'),
+      insightHeading: ar ? 'وراء حركة السوق' : 'Behind the market moves',
+      dataShellClass: st.dataLoading ? 'app-data-pending' : '',
+      dataLoading: Boolean(st.dataLoading), dataError: Boolean(st.dataError),
+      loadingLabel: ar ? 'نحمّل بيانات السوق لحسابك…' : 'Loading market data for your account…',
+      dataErrorLabel: ar ? 'تعذّر تحميل بيانات السوق. أعد المحاولة؛ لم نستبدلها بأرقام تجريبية.' : 'Market data could not load. Please retry; it has not been replaced with demo figures.',
+      retryLabel: ar ? 'إعادة المحاولة' : 'Try again',
+      retryData: () => this.onRetryData && this.onRetryData(),
+      extrasLoading: Boolean(st.extrasLoading), extrasError: Boolean(st.extrasError),
+      extrasLabel: ar ? 'نستكمل المؤشرات والأخبار…' : 'Adding indices and insights…',
+      extrasErrorLabel: ar ? 'بعض الأقسام لم تُحمّل. البيانات الظاهرة ما زالت متاحة.' : 'Some sections could not load. The available data is still here.',
+      companyLoading: Boolean(st.companyLoading), companyError: Boolean(st.companyError),
+      companyLoadingLabel: ar ? 'نحمّل بيانات هذه الشركة…' : 'Loading this company’s documents…',
+      companyErrorLabel: ar ? 'تعذّر تحميل بيانات الشركة. حاول مرة أخرى.' : 'This company’s documents could not load. Please try again.',
+      retryCompany: () => this.onRetryCompany && this.onRetryCompany(),
+      archiveLoading: Boolean(st.archiveLoading), archiveError: Boolean(st.archiveError),
+      archiveLoadingLabel: ar ? 'نبحث في جميع أشهر الأرشيف…' : 'Searching all archive months…',
+      archiveErrorLabel: ar ? 'نتائج جزئية: بعض أشهر الأرشيف لم تُحمّل بعد.' : 'Partial results: some archive months could not load.',
+      retryArchive: () => this.onRetryArchive && this.onRetryArchive(),
+      watchStatus: st.watchStatus || '', watchSaveError: st.watchStatus === 'error',
+      watchStatusLabel: ({ saving: ar ? 'جارٍ حفظ المتابعة…' : 'Saving watchlist…',
+        saved: ar ? 'تم حفظ المتابعة' : 'Watchlist saved',
+        error: ar ? 'التغييرات على هذا الجهاز فقط؛ لم تُحفظ في الحساب.' : 'Changes are on this device only; account save failed.' })[st.watchStatus] || '',
+      retryWatch: () => this.onRetryWatch && this.onRetryWatch(),
+      explorer: marketExplorer,
+      marketVisibleCount: marketExplorer.isExplorer ? marketExplorer.count : rows.length,
+      insightBusy: busy.slice(0, 4),
+      insightBusyNote: ar ? 'حجم الجلسة ÷ الحجم المعتاد · مقياس للنشاط فقط' : 'Session volume ÷ usual volume · activity measure only',
+      insightMissing: ar ? 'لم تصل بيانات هذا القسم بعد. افتحه للاطلاع على التغطية.' : 'No data loaded for this section yet. Open it to check coverage.',
+      insightMeasuresNote: ar ? 'أين يقع متوسط السوق؟ وما الذي يتقاطع في البيانات؟' : 'Where does the market sit—and which signals overlap?',
+      openConnections: this.go('crossings'),
+      revealHomeDetails: () => this.setState({ showHomeDetails: true }),
+      snapshotMoves: movers.slice(0, 6),
+      snapshotStories: readNow.slice(0, 2),
+      goToday: this.go('today'),
+      detailLabel: ar ? 'التفاصيل والمصادر' : 'Details & sources',
+      browseLabel: ar ? 'عرض الكل' : 'View all',
+      snapshotMovesLabel: ar ? 'أكبر التحركات' : 'Largest moves',
+      breadthRing: breadth ? `conic-gradient(var(--up) 0 ${breadth.up / breadth.counted * 100}%, var(--down) ${breadth.up / breadth.counted * 100}% ${(breadth.up + breadth.down) / breadth.counted * 100}%, var(--rule) ${(breadth.up + breadth.down) / breadth.counted * 100}% 100%)` : 'none',
+      breadthTotal: breadth ? this.num(breadth.counted, 0) : '',
+      noBreadth: !breadth,
+      skipLabel: ar ? 'انتقل إلى المحتوى' : 'Skip to content',
+      companyOverview: !st.companyPanel || st.companyPanel === 'overview',
+      companyFinancials: st.companyPanel === 'financials',
+      companyFilings: st.companyPanel === 'filings',
+      companySections: [
+        ['overview', ar ? 'نظرة عامة' : 'Overview', ICON.market, ar ? 'السعر ونشاط الشركة' : 'Price & profile'],
+        ['financials', ar ? 'القوائم والتحليل' : 'Financials & analysis', ICON.sectors,
+          D.fins?.length ? `${this.num(D.fins.length, 0)} ${ar ? 'فترة مالية' : 'financial periods'}` : (ar ? 'القوائم والنسب' : 'Statements & ratios')],
+        ['filings', ar ? 'الإفصاحات' : 'Filings', ICON.today,
+          D.filings?.length ? `${this.num(D.filings.length, 0)} ${ar ? 'إفصاح' : 'disclosures'}` : (ar ? 'المستندات والمصادر' : 'Documents & sources')],
+      ].map(([id, label, icon, note]) => ({ label, icon, note, current: (st.companyPanel || 'overview') === id ? 'page' : null,
+        go: () => this.setState({ companyPanel: id }) })),
+      switchCompanyLabel: ar ? 'استكشف شركات أخرى' : 'Explore other companies',
+      scenarioTitle: ar ? 'مقارنة افتراضية' : 'Hypothetical comparison',
+      scenarioNote: ar ? 'أمثلة حسابية وليست توقعات أو أسعاراً حالية. الأسهم والذهب بفائدة مركبة؛ المثال البنكي دون إعادة استثمار. لا تشمل الرسوم والضرائب.' : 'Calculation examples, not forecasts or current rates. Equity and gold compound; the bank example does not reinvest. Fees and taxes excluded.',
+      scenarioCards: [
+        [ar ? 'أسهم · افتراض ٢٨٪' : 'Equity · assumed 28%', 1.28, Math.pow(1.28, 3)],
+        [ar ? 'بنك · افتراض ٢٣٫٥٪' : 'Bank · assumed 23.5%', 1.235, 1 + .235 * 3],
+        [ar ? 'ذهب · افتراض ٢٥٪' : 'Gold · assumed 25%', 1.25, Math.pow(1.25, 3)],
+      ].map(([label, one, three]) => ({ label,
+        one: Math.round((st.calcInvest ?? 100000) * one).toLocaleString('en-US'),
+        three: Math.round((st.calcInvest ?? 100000) * three).toLocaleString('en-US'),
+        width: (three / Math.pow(1.28, 3) * 100).toFixed(1) + '%' })),
+      afterOne: ar ? 'بعد سنة · ج.م' : 'After 1 year · EGP',
+      afterThree: ar ? 'بعد ٣ سنوات · ج.م' : 'After 3 years · EGP',
+      breadthTotalLabel: ar ? 'سهم' : 'shares',
+      showHomeDetails: Boolean(st.showHomeDetails),
+      toggleHomeDetails: () => this.setState({ showHomeDetails: !st.showHomeDetails }),
+      overviewIntro: ar ? 'ابدأ بملخص الجلسة، ثم انتقل إلى الشركة والدليل وراء أرقامها.' : 'Start with the session, then explore a company and the evidence behind its figures.',
+      preferencesLabel: ar ? 'اللغة والمظهر' : 'Language & appearance',
+      preferencesOpen: st.preferencesOpen,
+      togglePreferences: () => this.setState({ preferencesOpen: !st.preferencesOpen }),
+      filtersOpen: st.filtersOpen,
+      filterLabel: ar ? 'القطاع والمقاييس' : 'Sector & measures',
+      toggleFilters: () => this.setState({ filtersOpen: !st.filtersOpen }),
+      resetFilters: () => this.setState({ sector: 'All', rqs: [], sectorQuery: '' }),
+      resetFiltersLabel: ar ? 'مسح التصفية' : 'Reset filters',
+      activeFiltersLabel: (ar ? 'القطاع: ' : 'Sector: ') + (st.sector === 'All' ? (ar ? 'الكل' : 'All') : sectorName(st.sector))
+        + (ar ? ' · مقاييس مفعّلة: ' : ' · Active measures: ') + st.rqs.length,
+      sectorSearchLabel: ar ? 'ابحث عن قطاع' : 'Find a sector',
+      sectorQuery: st.sectorQuery,
+      onSectorQuery: e => this.setState({ sectorQuery: e.target.value }),
+      filteredSectorChips: sectorChips.filter(s => !st.sectorQuery || s.label.toLowerCase().includes(st.sectorQuery.toLowerCase())),
       bodyFont: ar ? "'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif" : "'IBM Plex Sans',sans-serif",
       marketDate: this.longDate(D.marketDate),
       // "Built 14:11" rather than "2026-09-02T12:11:22+00:00": L.builtAt has
@@ -3567,49 +3690,49 @@ export class Component extends Base {
       },
       // ── Investor Tools & Calculators ──
       calc: {
-        invest: (st.calcInvest || 100000).toLocaleString('en-US'),
-        investRaw: st.calcInvest || 100000,
+        invest: (st.calcInvest ?? 100000).toLocaleString('en-US'),
+        investRaw: st.calcInvest ?? 100000,
         price: (st.calcPrice || 50).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
         priceRaw: st.calcPrice || 50,
-        dividend: (st.calcDividend || 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-        dividendRaw: st.calcDividend || 4.5,
-        shares: Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
-        annualCash: Math.round(Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)).toLocaleString('en-US'),
-        monthlyCash: Math.round((Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)) / 12).toLocaleString('en-US'),
-        yieldPct: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
-        paybackYears: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
-          ? (100 / (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
+        dividend: (st.calcDividend ?? 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        dividendRaw: st.calcDividend ?? 4.5,
+        shares: Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
+        annualCash: Math.round(Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend ?? 4.5)).toLocaleString('en-US'),
+        monthlyCash: Math.round((Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend ?? 4.5)) / 12).toLocaleString('en-US'),
+        yieldPct: (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
+        paybackYears: (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
+          ? (100 / (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
           : '—',
-        cdAnnualPayout: Math.round((st.calcInvest || 100000) * 0.235).toLocaleString('en-US'),
-        cdMonthlyPayout: Math.round(((st.calcInvest || 100000) * 0.235) / 12).toLocaleString('en-US'),
-        egx1Y: Math.round((st.calcInvest || 100000) * 1.28).toLocaleString('en-US'),
-        egx3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
-        cd1Y: Math.round((st.calcInvest || 100000) * 1.235).toLocaleString('en-US'),
-        cd3Y: Math.round((st.calcInvest || 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
-        gold1Y: Math.round((st.calcInvest || 100000) * 1.25).toLocaleString('en-US'),
-        gold3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
+        cdAnnualPayout: Math.round((st.calcInvest ?? 100000) * 0.235).toLocaleString('en-US'),
+        cdMonthlyPayout: Math.round(((st.calcInvest ?? 100000) * 0.235) / 12).toLocaleString('en-US'),
+        egx1Y: Math.round((st.calcInvest ?? 100000) * 1.28).toLocaleString('en-US'),
+        egx3Y: Math.round((st.calcInvest ?? 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
+        cd1Y: Math.round((st.calcInvest ?? 100000) * 1.235).toLocaleString('en-US'),
+        cd3Y: Math.round((st.calcInvest ?? 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
+        gold1Y: Math.round((st.calcInvest ?? 100000) * 1.25).toLocaleString('en-US'),
+        gold3Y: Math.round((st.calcInvest ?? 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
       },
-      calcInvest: (st.calcInvest || 100000).toLocaleString('en-US'),
-      calcInvestRaw: st.calcInvest || 100000,
+      calcInvest: (st.calcInvest ?? 100000).toLocaleString('en-US'),
+      calcInvestRaw: st.calcInvest ?? 100000,
       calcPrice: (st.calcPrice || 50).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
       calcPriceRaw: st.calcPrice || 50,
-      calcDividend: (st.calcDividend || 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-      calcDividendRaw: st.calcDividend || 4.5,
-      calcShares: Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
-      calcAnnualCash: Math.round(Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)).toLocaleString('en-US'),
-      calcMonthlyCash: Math.round((Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)) / 12).toLocaleString('en-US'),
-      calcYieldPct: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
-      calcPaybackYears: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
-        ? (100 / (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
+      calcDividend: (st.calcDividend ?? 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      calcDividendRaw: st.calcDividend ?? 4.5,
+      calcShares: Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
+      calcAnnualCash: Math.round(Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend ?? 4.5)).toLocaleString('en-US'),
+      calcMonthlyCash: Math.round((Math.floor((st.calcInvest ?? 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend ?? 4.5)) / 12).toLocaleString('en-US'),
+      calcYieldPct: (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
+      calcPaybackYears: (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
+        ? (100 / (((st.calcDividend ?? 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
         : '—',
-      calcCdAnnualPayout: Math.round((st.calcInvest || 100000) * 0.235).toLocaleString('en-US'),
-      calcCdMonthlyPayout: Math.round(((st.calcInvest || 100000) * 0.235) / 12).toLocaleString('en-US'),
-      calcEgx1Y: Math.round((st.calcInvest || 100000) * 1.28).toLocaleString('en-US'),
-      calcEgx3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
-      calcCd1Y: Math.round((st.calcInvest || 100000) * 1.235).toLocaleString('en-US'),
-      calcCd3Y: Math.round((st.calcInvest || 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
-      calcGold1Y: Math.round((st.calcInvest || 100000) * 1.25).toLocaleString('en-US'),
-      calcGold3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
+      calcCdAnnualPayout: Math.round((st.calcInvest ?? 100000) * 0.235).toLocaleString('en-US'),
+      calcCdMonthlyPayout: Math.round(((st.calcInvest ?? 100000) * 0.235) / 12).toLocaleString('en-US'),
+      calcEgx1Y: Math.round((st.calcInvest ?? 100000) * 1.28).toLocaleString('en-US'),
+      calcEgx3Y: Math.round((st.calcInvest ?? 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
+      calcCd1Y: Math.round((st.calcInvest ?? 100000) * 1.235).toLocaleString('en-US'),
+      calcCd3Y: Math.round((st.calcInvest ?? 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
+      calcGold1Y: Math.round((st.calcInvest ?? 100000) * 1.25).toLocaleString('en-US'),
+      calcGold3Y: Math.round((st.calcInvest ?? 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
       onCalcInvestChange: (e) => this.setState({ calcInvest: Math.max(0, parseFloat(e.target.value) || 0) }),
       onCalcPriceChange: (e) => this.setState({ calcPrice: Math.max(0.01, parseFloat(e.target.value) || 0) }),
       onCalcDividendChange: (e) => this.setState({ calcDividend: Math.max(0, parseFloat(e.target.value) || 0) }),

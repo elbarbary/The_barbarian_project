@@ -1,4 +1,4 @@
-<div data-theme="{{ theme }}" dir="{{ dir }}" style="min-height:100vh;background:var(--bg);background-image:radial-gradient(1100px 600px at 12% -8%,var(--wash1),transparent 62%),radial-gradient(900px 520px at 96% 4%,var(--wash2),transparent 60%);color:var(--ink);font-family:{{ bodyFont }};font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums">
+<div class="{{ dataShellClass }}" data-theme="{{ theme }}" dir="{{ dir }}" style="min-height:100vh;background:var(--bg);background-image:radial-gradient(1100px 600px at 12% -8%,var(--wash1),transparent 62%),radial-gradient(900px 520px at 96% 4%,var(--wash2),transparent 60%);color:var(--ink);font-family:{{ bodyFont }};font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums">
 
   <aside class="om-rail" style="position:fixed;inset-block:14px;inset-inline-start:14px;width:250px;border-radius:26px;background:var(--glass);backdrop-filter:blur(24px) saturate(1.5);border:1px solid var(--edge);box-shadow:var(--sh);padding:24px 18px 20px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;overscroll-behavior:contain;z-index:5">
     <div class="om-brand" style="padding-inline:8px">
@@ -18,16 +18,12 @@
       <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:{{ sessionColor }};margin-top:4px;line-height:1.45">{{ sessionState }}</div>
     </div>
 
-    <nav class="om-nav" style="display:flex;flex-direction:column;gap:3px">
-      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8">
-        <div onClick="{{ n.go }}" style="position:relative;cursor:pointer;padding:9px 12px;border-radius:13px;display:grid;grid-template-columns:19px minmax(0,1fr) auto;align-items:center;gap:11px;color:{{ n.color }};font-weight:{{ n.weight }};background:{{ n.bg }};box-shadow:{{ n.shadow }};transition:background .16s,color .16s" style-hover="background:var(--activeBg)">
-          <div style="position:absolute;inset-inline-start:2px;top:50%;transform:translateY(-50%);width:3px;height:{{ n.markH }};border-radius:999px;background:{{ n.dot }};transition:height .22s cubic-bezier(.2,.7,.3,1)"></div>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;opacity:.9">
-            <path d="{{ n.icon }}"></path>
-          </svg>
-          <div style="font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ n.label }}</div>
-          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--faint)">{{ n.meta }}</div>
-        </div>
+    <nav class="om-nav journal-nav" aria-label="{{ navigationLabel }}">
+      <sc-for list="{{ primaryNav }}" as="n" hint-placeholder-count="5">
+        <button type="button" onClick="{{ n.go }}" aria-current="{{ n.current }}">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ n.icon }}"></path></svg>
+          <span>{{ n.label }}</span>
+        </button>
       </sc-for>
     </nav>
 
@@ -47,11 +43,40 @@
     </div>
   </aside>
 
-  <main class="om-main" style="margin-inline-start:278px;padding:26px 30px 64px;max-width:1240px">
+  <a class="skip-content" href="#main-content">{{ skipLabel }}</a>
+  <main id="main-content" tabindex="-1" class="om-main" style="margin-inline-start:278px;padding:26px 30px 64px;max-width:1240px">
 
+  <header class="journal-toolbar">
+    <span class="journal-wordmark">ESTHMR <span>{{ journalLabel }}</span></span>
+    <button type="button" class="journal-search" onClick="{{ goMarket }}">{{ findCompany }}</button>
+    <button type="button" class="journal-preferences" onClick="{{ togglePreferences }}" aria-expanded="{{ preferencesOpen }}">{{ preferencesLabel }}</button>
+  </header>
+  <sc-if value="{{ preferencesOpen }}">
+    <div class="journal-preferences-panel">
+      <button type="button" onClick="{{ toAr }}">العربية</button>
+      <button type="button" onClick="{{ toEn }}">English</button>
+      <button type="button" onClick="{{ flipTheme }}">{{ L.theme }} · {{ themeLabel }}</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ secondaryNav.length }}"><nav class="journal-subnav" aria-label="{{ sectionNavigationLabel }}">
+    <sc-for list="{{ secondaryNav }}" as="n"><button type="button" onClick="{{ n.go }}" aria-current="{{ n.current }}">{{ n.label }}</button></sc-for>
+  </nav></sc-if>
+
+  <sc-if value="{{ dataLoading }}"><div class="loading-islands" role="status"><div class="data-status"><span class="loading-dot" aria-hidden="true"></span>{{ loadingLabel }}</div><div class="loading-island-grid" aria-hidden="true"><div><i></i><b></b><span></span></div><div><i></i><b></b><span></span></div><div><i></i><b></b><span></span></div></div></div></sc-if>
+  <sc-if value="{{ dataError }}"><div class="data-status" role="alert"><span>{{ dataErrorLabel }}</span><button type="button" onClick="{{ retryData }}">{{ retryLabel }}</button></div></sc-if>
+  <sc-if value="{{ extrasLoading }}"><div class="feed-status" role="status"><span class="loading-dot" aria-hidden="true"></span>{{ extrasLabel }}</div></sc-if>
+  <sc-if value="{{ extrasError }}"><div class="feed-status" role="status">{{ extrasErrorLabel }}<button type="button" onClick="{{ retryData }}">{{ retryLabel }}</button></div></sc-if>
+  <sc-if value="{{ watchStatus }}"><div class="watch-save-status" role="status" data-status="{{ watchStatus }}">{{ watchStatusLabel }}<sc-if value="{{ watchSaveError }}"><button type="button" onClick="{{ retryWatch }}">{{ retryLabel }}</button></sc-if></div></sc-if>
   <!-- ══ HOME ══ -->
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
+    <div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:20px">
+      <header class="journal-intro">
+        <p class="journal-eyebrow">{{ marketDate }} · {{ sessionState }}</p>
+        <h1>{{ overviewTitle }}</h1>
+      </header>
+      <div class="quick-paths"><sc-for list="{{ quickActions }}" as="q">
+        <button type="button" onClick="{{ q.go }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="{{ q.icon }}"></path></svg><span><strong>{{ q.label }}</strong><small>{{ q.note }}</small></span><span class="quick-arrow" aria-hidden="true">↗</span></button>
+      </sc-for></div>
       <!-- The three index levels first and biggest. They were under a 50px
            page title and a session note, at 21-32px — the smallest headline
            figures on a screen whose whole subject is where the market closed,
@@ -59,7 +84,7 @@
            beside them rather than above. -->
       <div class="om-idx" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-top:4px">
         <sc-for list="{{ indices }}" as="ix" hint-placeholder-count="3">
-          <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
+          <div onClick="{{ ix.go }}" aria-label="{{ ix.label }} {{ ix.value }} {{ ix.pct }}" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 22px 18px;min-width:0;overflow:hidden;transition:transform .2s cubic-bezier(.2,.7,.3,1),box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:var(--shLift)">
             <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ ix.label }}</div>
               <div style="width:26px;height:26px;border-radius:9px;background:{{ ix.tint }};color:{{ ix.color }};display:flex;align-items:center;justify-content:center;font-size:13px">{{ ix.arrow }}</div>
@@ -77,6 +102,79 @@
 
       </div>
 
+      <section class="insight-shelf">
+        <h2>{{ insightHeading }}</h2>
+        <div class="insight-grid">
+          <article class="insight-card">
+            <header class="island-heading"><h3>{{ L.investorsWho }}</h3><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} →</button></header>
+            <sc-if value="{{ investors }}">
+              <p class="insight-caption">{{ investors.asOfLine }}</p>
+              <div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div>
+              <sc-for list="{{ investors.parties }}" as="p"><div class="investor-summary-row"><span>{{ p.party }} <strong>{{ p.percent }}</strong></span><span>{{ L.investorsNet }} <b style="color:{{ p.netColor }}">{{ p.net }}</b></span></div></sc-for>
+              <p class="insight-caption">{{ L.investorsEgpM }}</p>
+              <sc-if value="{{ investors.hasTypeBar }}"><div class="investor-mini-bar"><sc-for list="{{ investors.typeBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.typeBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></sc-if>
+              <p class="insight-caption">{{ investors.basis }}</p>
+            </sc-if>
+            <sc-if value="{{ noInvestors }}"><p class="insight-caption">{{ insightMissing }}</p></sc-if>
+          </article>
+          <article class="insight-card">
+            <header class="island-heading"><h3>{{ L.busiest }}</h3><button type="button" onClick="{{ explorer.openVolume }}">{{ browseLabel }} →</button></header>
+            <sc-for list="{{ insightBusy }}" as="b"><button type="button" class="volume-preview-row" onClick="{{ b.go }}"><span><b>{{ b.ticker }}</b><small>{{ b.name }}</small></span><strong>{{ b.rv }}</strong><span style="color:{{ b.color }}">{{ b.pct }}</span><span aria-hidden="true">↗</span></button></sc-for>
+            <sc-if value="{{ noBusy }}"><p class="insight-caption">{{ L.nothingUnusual }}</p></sc-if>
+            <p class="insight-caption">{{ insightBusyNote }}</p>
+          </article>
+        </div>
+      </section>
+      <section class="ranking-panel">
+        <header class="island-heading"><div><h2>{{ explorer.title }}</h2><p class="insight-caption">{{ explorer.subtitle }}</p></div><button type="button" onClick="{{ explorer.open }}">{{ browseLabel }} →</button></header>
+        <div class="ranking-controls"><sc-for list="{{ explorer.metrics }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for><button type="button" onClick="{{ explorer.toggleDirection }}">{{ explorer.directionLabel }}</button></div>
+        <div class="ranking-controls ranking-pairs"><span>{{ explorer.pairLabel }}</span><sc-for list="{{ explorer.pairs }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for></div>
+        <div class="explorer-scroll" tabindex="0"><div class="explorer-table" role="table" aria-label="{{ explorer.title }}"><div role="row"><span role="columnheader">#</span><span role="columnheader">{{ explorer.companyLabel }}</span><sc-for list="{{ explorer.rankColumns }}" as="m"><span role="columnheader">{{ m.label }}<small>{{ m.unit }}</small></span></sc-for></div><sc-for list="{{ explorer.preview }}" as="r"><div role="row"><span role="cell">{{ r.rank }}</span><span role="rowheader"><button type="button" onClick="{{ r.go }}">{{ r.ticker }} <small>{{ r.name }}</small></button></span><sc-for list="{{ r.cells }}" as="v"><span role="cell">{{ v.value }}<small>{{ v.note }}</small></span></sc-for></div></sc-for></div></div>
+        <p class="insight-caption">{{ explorer.coverage }} · {{ explorer.note }}</p>
+      </section>
+      <div class="island-board">
+        <section class="island island-mosaic">
+          <header class="island-heading"><h2>{{ mosaicTitle }}</h2><button type="button" onClick="{{ openHeat }}">{{ browseLabel }} ↗</button></header>
+          <p class="mosaic-note">{{ mosaicNote }}</p>
+          <div class="market-mosaic"><sc-for list="{{ mosaicTiles }}" as="m">
+            <button type="button" onClick="{{ m.go }}" title="{{ m.name }}" aria-label="{{ m.name }} {{ m.pct }}" style="background:{{ m.tileBg }};color:{{ m.tileInk }}">
+              <span>{{ m.ticker }}</span><strong>{{ m.pct }}</strong>
+            </button>
+          </sc-for></div>
+          <sc-if value="{{ noMosaic }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+        <section class="island island-breadth">
+          <header class="island-heading"><h2>{{ L.breadthWord }}</h2><span>{{ marketDate }}</span></header>
+          <sc-if value="{{ hasBreadth }}">
+            <div class="island-ring" style="background:{{ breadthRing }}" role="img" aria-label="{{ breadthCounted }}">
+              <div><strong>{{ breadthTotal }}</strong><span>{{ breadthTotalLabel }}</span></div>
+            </div>
+            <div class="island-legend"><sc-for list="{{ breadthBars }}" as="b">
+              <div><span class="island-dot" style="background:{{ b.color }}"></span><span>{{ b.label }}</span><strong>{{ b.count }}</strong></div>
+            </sc-for></div>
+          </sc-if>
+          <sc-if value="{{ noBreadth }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+        <section class="island island-moves">
+          <header class="island-heading"><h2>{{ snapshotMovesLabel }}</h2><button type="button" onClick="{{ goMarket }}">{{ browseLabel }} ↗</button></header>
+          <div class="island-move-grid"><sc-for list="{{ snapshotMoves }}" as="m">
+            <button type="button" class="island-move" onClick="{{ m.go }}" style="--move-color:{{ m.color }}">
+              <span class="island-ticker">{{ m.ticker }}</span><strong>{{ m.pct }}</strong><span class="island-company">{{ m.name }}</span>
+              <span class="island-track"><span style="width:{{ m.mag }}"></span></span>
+            </button>
+          </sc-for></div>
+        </section>
+        <section class="island island-stories">
+          <header class="island-heading"><h2>{{ L.readNow }}</h2><button type="button" onClick="{{ goToday }}">{{ browseLabel }} ↗</button></header>
+          <sc-for list="{{ snapshotStories }}" as="r"><button type="button" class="island-story" onClick="{{ r.go }}">
+            <span class="island-story-kind" style="color:{{ r.kindColor }};background:{{ r.tint }}">{{ r.kind }}</span>
+            <span class="island-story-title">{{ r.title }}</span><span class="island-story-stamp">{{ r.stamp }}</span>
+          </button></sc-for>
+          <sc-if value="{{ noReadNow }}"><p>{{ L.nothingYet }}</p></sc-if>
+        </section>
+      </div>
+      <button type="button" class="island-details-toggle" onClick="{{ toggleHomeDetails }}" aria-expanded="{{ showHomeDetails }}">{{ detailLabel }} <span>⌄</span></button>
+      <sc-if value="{{ showHomeDetails }}">
       <!-- ── The session in one card ──
            Three text cells sat here, under a comment that called them "Visuals
            First": a leader, a "session liquidity" reading filled from whether a
@@ -87,7 +185,7 @@
            says how widely — so it came up from the foot of the page to be the
            card. The indices now sit above it, which is where the note under
            them always said they belonged. -->
-      <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;position:relative;overflow:hidden">
+      <section class="journal-pulse" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
           <div style="display:flex;align-items:baseline;gap:10px">
             <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ pulseTitle }}</h2>
@@ -235,7 +333,7 @@
 
       <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:2px 8px">
         <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:34px;font-weight:600;letter-spacing:-.035em;line-height:1;margin:0">{{ homeTitle }}</h1>
+          <h2 style="font-family:var(--font-heading);font-size:28px;font-weight:600;letter-spacing:-.025em;line-height:1.2;margin:0">{{ homeTitle }}</h2>
           <sc-if value="{{ homeIsClose }}"><div style="font-size:13.5px;color:var(--t2)">{{ L.closeOf }} {{ marketDate }}</div></sc-if>
           <sc-if value="{{ homeIsLive }}"><div style="font-size:13.5px;color:var(--t2)">{{ sessionState }}</div></sc-if>
         </div>
@@ -432,12 +530,13 @@
           </section>
         </div>
       </div>
+      </sc-if>
     </div>
   </sc-if>
 
   <!-- ══ TODAY ══ -->
   <sc-if value="{{ isToday }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-today" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 6px">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.todayTitle }}</h1>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ feedCount }}</div>
@@ -526,7 +625,7 @@
        one after the other in a single column, the second reads as a preamble
        to the first. -->
   <sc-if value="{{ isCrossings }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-crossings" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.dotsLabel }}</h1>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ crossCount }}</div>
@@ -747,10 +846,10 @@
 
   <!-- ══ MARKET ══ -->
   <sc-if value="{{ isMarket }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-market" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.marketTitle }}</h1>
-        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ rowCount }} / {{ totalCount }}<br>{{ marketDate }}</div>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ marketVisibleCount }} / {{ totalCount }}<br>{{ marketDate }}</div>
       </div>
 
       <div class="om-search" style="border-radius:22px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:16px;transition:box-shadow .18s,border-color .18s">
@@ -758,8 +857,17 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:17px;height:17px"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
           <input id="om-market-search" name="market-search" autocomplete="off" aria-label="{{ searchPlaceholder }}" value="{{ query }}" onChange="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" style="flex:1;min-width:0;padding:10px 0;border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;outline:none">
         </div>
+        <div class="ranking-controls"><sc-for list="{{ explorer.views }}" as="v"><button type="button" aria-pressed="{{ v.selected }}" onClick="{{ v.go }}">{{ v.label }}</button></sc-for></div>
+        <sc-if value="{{ explorer.isPrices }}">
+        <div class="journal-filter-toggle">
+          <button type="button" onClick="{{ toggleFilters }}" aria-expanded="{{ filtersOpen }}">{{ filterLabel }}</button>
+          <span>{{ activeFiltersLabel }}</span>
+          <button type="button" onClick="{{ resetFilters }}">{{ resetFiltersLabel }}</button>
+        </div>
+        <sc-if value="{{ filtersOpen }}">
+        <input id="sector-query" class="journal-input" aria-label="{{ sectorSearchLabel }}" placeholder="{{ sectorSearchLabel }}" value="{{ sectorQuery }}" onChange="{{ onSectorQuery }}">
         <div style="display:flex;gap:7px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--rule2)">
-          <sc-for list="{{ sectorChips }}" as="s" hint-placeholder-count="8">
+          <sc-for list="{{ filteredSectorChips }}" as="s" hint-placeholder-count="8">
             <div onClick="{{ s.go }}" style="cursor:pointer;font-size:12.5px;padding:7px 13px;border-radius:999px;color:{{ s.color }};background:{{ s.bg }};border:1px solid {{ s.border }};box-shadow:{{ s.sh }};transition:background .15s,color .15s,border-color .15s" style-hover="border-color:var(--accent)">{{ s.label }}</div>
           </sc-for>
         </div>
@@ -803,8 +911,26 @@
           </div>
         </sc-if>
 
+        </sc-if>
+        </sc-if>
       </div>
 
+      <sc-if value="{{ explorer.isExplorer }}">
+        <section class="ranking-panel">
+          <sc-if value="{{ explorer.isRanking }}">
+            <h2>{{ explorer.title }}</h2><p class="insight-caption">{{ explorer.subtitle }}</p>
+            <div class="ranking-controls"><sc-for list="{{ explorer.metrics }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for><button type="button" onClick="{{ explorer.toggleDirection }}">{{ explorer.directionLabel }}</button></div>
+            <div class="ranking-controls ranking-pairs"><span>{{ explorer.pairLabel }}</span><sc-for list="{{ explorer.pairs }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for></div>
+            <p class="insight-caption">{{ explorer.coverage }}</p>
+          </sc-if>
+          <sc-if value="{{ explorer.isVolume }}"><h2>{{ L.busiest }} <span class="volume-count">{{ explorer.count }}</span></h2><p class="insight-caption">{{ L.busyWorkings }}</p></sc-if>
+          <div class="explorer-scroll" tabindex="0"><div class="explorer-table" role="table" aria-label="{{ explorer.title }}"><div role="row"><span role="columnheader">#</span><span role="columnheader">{{ explorer.companyLabel }}</span><sc-for list="{{ explorer.columns }}" as="m"><span role="columnheader">{{ m.label }}<small>{{ m.unit }}</small></span></sc-for></div><sc-for list="{{ explorer.rows }}" as="r"><div role="row"><span role="cell">{{ r.rank }}</span><span role="rowheader"><button type="button" onClick="{{ r.go }}">{{ r.ticker }} <small>{{ r.name }} · {{ r.sector }}</small></button></span><sc-for list="{{ r.cells }}" as="v"><span role="cell">{{ v.value }}<small>{{ v.note }}</small></span></sc-for></div></sc-for></div></div>
+          <sc-if value="{{ explorer.empty }}"><p>{{ L.noMatchBody }}</p></sc-if>
+          <sc-if value="{{ explorer.isRanking }}"><p class="insight-caption">{{ explorer.note }}</p></sc-if>
+          <sc-if value="{{ explorer.isVolume }}"><p class="insight-caption">{{ L.busyYardstick }}</p></sc-if>
+        </section>
+      </sc-if>
+      <sc-if value="{{ explorer.isPrices }}">
       <div class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:8px 10px 12px;overflow:hidden">
         <div style="display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px">
           <div></div>
@@ -814,7 +940,7 @@
         </div>
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
           <div onClick="{{ r.go }}" style="cursor:pointer;display:grid;grid-template-columns:26px minmax(52px,68px) minmax(96px,1.5fr) minmax(64px,104px) minmax(60px,86px) minmax(60px,80px) minmax(56px,86px) minmax(44px,64px);gap:10px;padding:12px 14px;border-radius:14px;align-items:center" style-hover="background:var(--sunk)">
-            <div onClick="{{ r.follow }}" title="{{ L.follow }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ r.starColor }}" style-hover="color:var(--accent)">{{ r.star }}</div>
+            <div onClick="{{ r.follow }}" title="{{ r.followLabel }}" aria-label="{{ r.followLabel }}" style="cursor:pointer;font-size:15px;line-height:1;color:{{ r.starColor }}" style-hover="color:var(--accent)">{{ r.star }}</div>
             <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600">{{ r.ticker }}</div>
             <div style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px">{{ r.name }}</div>
             <div style="font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sector }}</div>
@@ -836,6 +962,7 @@
         <sc-if value="{{ hasPriceSource }}"><div>{{ priceSource }}</div></sc-if>
         <div>{{ L.foldNote }}</div><div>{{ L.marketFoot }}</div><div>{{ L.peFoot }}</div>
       </div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -846,7 +973,7 @@
        period to date — which the screen says, because a reader who takes it
        for today's session is reading a different fact. -->
   <sc-if value="{{ isInvestors }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-investors" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
           <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.investorsTitle }}</h1>
@@ -863,7 +990,16 @@
              buyer or a net seller. The two are different questions: a party
              can be a quarter of the market and still have taken money off the
              table. -->
-        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 20px">
+        <section class="investor-full-summary ranking-panel">
+          <header class="island-heading"><h2>{{ L.investorsWho }}</h2><span>{{ investors.asOfLine }}</span></header>
+          <p class="insight-caption">{{ investors.totalLine }}</p>
+          <div class="investor-summary-grid">
+            <div><h3>{{ L.investorsShare }}</h3><div class="investor-mini-bar"><sc-for list="{{ investors.nationalityBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.nationalityBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div>
+            <sc-if value="{{ investors.hasTypeBar }}"><div><h3>{{ L.investorsTypeSplit }}</h3><div class="investor-mini-bar"><sc-for list="{{ investors.typeBar }}" as="s"><span style="width:{{ s.width }};background:{{ s.color }}"></span></sc-for></div><div class="investor-type-legend"><sc-for list="{{ investors.typeBar }}" as="s"><span>{{ s.label }} <strong>{{ s.percent }}</strong></span></sc-for></div></div></sc-if>
+          </div>
+          <p class="insight-caption">{{ L.investorsBasis }}</p>
+        </section>
+        <section class="investor-party-details" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 20px">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsShare }}</div>
           <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
             <sc-for list="{{ investors.parties }}" as="p" hint-placeholder-count="3">
@@ -908,7 +1044,7 @@
         <!-- A row per investor type, a column per nationality: the table the
              app draws, and the one figure a price cannot give you — whether
              the money moving was individuals' or institutions'. -->
-        <section class="om-table" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;overflow:hidden">
+        <section class="om-table investor-breakdown" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:20px 22px 18px;overflow:hidden">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.investorsTable }}</div>
           <div style="margin-top:14px">
             <div style="display:grid;grid-template-columns:minmax(96px,150px) repeat(3,minmax(0,1fr)) minmax(80px,120px);gap:10px;padding:0 8px 10px;border-bottom:1px solid var(--rule2)">
@@ -922,7 +1058,7 @@
               <div style="display:grid;grid-template-columns:minmax(96px,150px) repeat(3,minmax(0,1fr)) minmax(80px,120px);gap:10px;padding:13px 8px;align-items:center;border-bottom:1px solid var(--rule2)">
                 <div style="font-size:14px;font-weight:600">{{ b.label }}</div>
                 <sc-for list="{{ b.cells }}" as="c" hint-placeholder-count="3">
-                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;color:{{ c.color }}">{{ c.net }}</div>
+                  <div class="investor-detail-cell"><span>{{ L.investorsBought }} <b>{{ c.buy }}</b></span><span>{{ L.investorsSold }} <b>{{ c.sell }}</b></span><span>{{ L.investorsNet }} <b style="color:{{ c.color }}">{{ c.net }}</b></span></div>
                 </sc-for>
                 <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;text-align:end;font-weight:600;color:{{ b.netColor }}">{{ b.net }}</div>
               </div>
@@ -954,7 +1090,7 @@
        banks were red" and "one bank was red" are different facts and a flat
        map cannot tell them apart. -->
   <sc-if value="{{ isHeat }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-heat" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
           <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.heatTitle }}</h1>
@@ -1053,7 +1189,7 @@
        is worth as much detail as a list you searched — and the star that put a
        company here is the same control that takes it away. -->
   <sc-if value="{{ isWatchlist }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-watchlist" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <div style="min-width:0">
           <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.followTitle }}</h1>
@@ -1144,7 +1280,7 @@
   </sc-if>
 
   <sc-if value="{{ isCompany }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-company" style="display:flex;flex-direction:column;gap:16px">
       <div style="border-radius:26px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:28px 28px 22px">
         <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:flex-start">
           <div style="min-width:0">
@@ -1198,12 +1334,19 @@
         </sc-if>
       </div>
 
+      <nav class="company-sections" aria-label="{{ sectionNavigationLabel }}">
+        <sc-for list="{{ companySections }}" as="s"><button type="button" onClick="{{ s.go }}" aria-current="{{ s.current }}"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="{{ s.icon }}"></path></svg><span><strong>{{ s.label }}</strong><small>{{ s.note }}</small></span></button></sc-for>
+      </nav>
+      <sc-if value="{{ companyLoading }}"><div class="feed-status" role="status"><span class="loading-dot" aria-hidden="true"></span>{{ companyLoadingLabel }}</div></sc-if>
+      <sc-if value="{{ companyError }}"><div class="data-status" role="alert">{{ companyErrorLabel }}<button type="button" onClick="{{ retryCompany }}">{{ retryLabel }}</button></div></sc-if>
+      <sc-if value="{{ companyOverview }}">
       <!-- A rail of every listed company, so changing company does not mean going
            back to the market table to find it. Grouped by sector: 282 tickers in
            one strip is a haystack, and the sector already on screen is the one a
            reader is most likely to want another of. Both strips scroll
            horizontally and neither takes the page with it. -->
       <sc-if value="{{ hasPickList }}">
+      <details class="company-picker"><summary>{{ switchCompanyLabel }}</summary>
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:16px 8px 14px;display:flex;flex-direction:column;gap:10px;min-width:0;overflow:hidden">
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);padding-inline:12px">{{ L.pickCompany }}</div>
         <div class="om-strip" style="display:flex;gap:4px;overflow-x:auto;padding:2px 10px 4px">
@@ -1223,7 +1366,7 @@
           </sc-for>
         </div>
       </section>
-      </sc-if>
+      </details></sc-if>
 
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 24px 18px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
@@ -1238,7 +1381,7 @@
           </div>
         </div>
         <div style="position:relative;margin-top:18px">{{ chart }}</div>
-        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
+        <div dir="ltr" style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
           <span>{{ chartFrom }}</span><span>{{ L.sessionsShown }} {{ chartCount }}</span><span>{{ chartTo }}</span>
         </div>
       </section>
@@ -1257,6 +1400,8 @@
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:18px">{{ co.briefSource }}</div>
       </section>
 
+      </sc-if>
+      <sc-if value="{{ companyFinancials }}">
       <!-- The ratios, and the questions that go with them.
            This is the whole interpretive layer the pipeline publishes for 258
            companies, which the site had never opened. It sits BEFORE the
@@ -1392,7 +1537,7 @@
         <div style="margin:16px 12px 8px;padding:14px 16px;border-radius:16px;background:var(--irisTint);font-size:12.5px;color:var(--t2);line-height:1.6;text-wrap:pretty">{{ L.cumulativeWarning }}</div>
         <div style="margin:0 12px 4px;padding-inline:4px;font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ finsCoverage }}</div>
         <sc-if value="{{ finsCurrencyNote }}"><div style="margin:0 12px 4px;padding-inline:4px;font-size:11.5px;color:var(--faint);line-height:1.6;text-wrap:pretty">{{ finsCurrencyNote }}</div></sc-if>
-        <div style="display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:12px 14px">
+        <div class="financial-column-headings" style="display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:12px 14px">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.period }}</div>
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.revenue }}</div>
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.grossProfit }}</div>
@@ -1402,15 +1547,15 @@
         </div>
         <sc-for list="{{ fins }}" as="p" hint-placeholder-count="5">
           <div style="border-radius:16px;background:{{ p.bg }};margin-bottom:3px">
-            <div onClick="{{ p.toggle }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:14px;align-items:center;border-radius:16px" style-hover="background:var(--sunk)">
+            <div class="financial-period-card" onClick="{{ p.toggle }}" style="cursor:pointer;display:grid;grid-template-columns:minmax(116px,176px) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 26px;gap:12px;padding:14px;align-items:center;border-radius:16px" style-hover="background:var(--sunk)">
               <div style="min-width:0">
                 <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:600">{{ p.period }}</div>
                 <div style="font-size:11px;color:var(--faint);margin-top:3px">{{ p.window }}</div>
               </div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.revColor }}">{{ p.revenue }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.gpColor }}">{{ p.grossProfit }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.opColor }}">{{ p.operatingIncome }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;font-weight:600;color:{{ p.niColor }}">{{ p.netIncome }}</div>
+              <div class="financial-value" style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.revColor }}"><span class="financial-mobile-label">{{ L.revenue }}</span><span>{{ p.revenue }}</span></div>
+              <div class="financial-value" style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.gpColor }}"><span class="financial-mobile-label">{{ L.grossProfit }}</span><span>{{ p.grossProfit }}</span></div>
+              <div class="financial-value" style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;color:{{ p.opColor }}"><span class="financial-mobile-label">{{ L.operatingIncome }}</span><span>{{ p.operatingIncome }}</span></div>
+              <div class="financial-value" style="font-family:'IBM Plex Mono',monospace;font-size:14px;text-align:end;font-weight:600;color:{{ p.niColor }}"><span class="financial-mobile-label">{{ L.netIncome }}</span><span>{{ p.netIncome }}</span></div>
               <!-- A period with a full balance sheet and cash-flow statement
                    was displaying as "— — — 39,235.1" with nothing to say that
                    eight more filed figures sat behind the plus. The exchange
@@ -1625,6 +1770,8 @@
       </sc-if>
 
 
+      </sc-if>
+      <sc-if value="{{ companyFilings }}">
       <section>
         <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:8px 8px 14px">{{ L.whatIsUnusual }}</h2>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
@@ -1665,12 +1812,13 @@
           </sc-for>
         </div>
       </section>
+      </sc-if>
     </div>
   </sc-if>
 
   <!-- ══ SECTORS ══ -->
   <sc-if value="{{ isSectors }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-sectors" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.sectorsTitle }}</h1>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;line-height:1.6">{{ sectorCount }} {{ L.sectorsWord }}<br>{{ marketDate }}</div>
@@ -1798,7 +1946,9 @@
 
   <!-- ══ CALENDAR ══ -->
   <sc-if value="{{ isCalendar }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <sc-if value="{{ archiveLoading }}"><div class="feed-status" role="status">{{ archiveLoadingLabel }}</div></sc-if>
+    <sc-if value="{{ archiveError }}"><div class="feed-status" role="status">{{ archiveErrorLabel }}<button type="button" onClick="{{ retryArchive }}">{{ retryLabel }}</button></div></sc-if>
+    <div class="om-scr screen-calendar" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.calendarTitle }}</h1>
         <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill)">
@@ -1958,7 +2108,7 @@
 
   <!-- ══ EXCHANGE ══ -->
   <sc-if value="{{ isExchange }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-exchange" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.exchangeTitle }}</h1>
         <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">
@@ -2067,7 +2217,7 @@
 
   <!-- ══ TOOLS & CALCULATORS ══ -->
   <sc-if value="{{ isTools }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
+    <div class="om-scr screen-tools" style="display:flex;flex-direction:column;gap:20px">
       <!-- Title row -->
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <div>
@@ -2089,7 +2239,7 @@
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
           <div>
             <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcAmountLabel }}</label>
-            <input inputmode="decimal" autocomplete="off" value="{{ calc.investRaw }}" onChange="{{ onCalcInvestChange }}" placeholder="100000" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <input id="calc-invest" aria-label="{{ L.calcAmountLabel }}" inputmode="decimal" autocomplete="off" value="{{ calc.investRaw }}" onChange="{{ onCalcInvestChange }}" placeholder="100000" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
             <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
               <span onClick="{{ setInvest50k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">50,000</span>
               <span onClick="{{ setInvest100k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">100,000</span>
@@ -2100,7 +2250,7 @@
 
           <div>
             <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcSharePriceLabel }}</label>
-            <input inputmode="decimal" autocomplete="off" value="{{ calc.priceRaw }}" onChange="{{ onCalcPriceChange }}" placeholder="50.00" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <input id="calc-price" aria-label="{{ L.calcSharePriceLabel }}" inputmode="decimal" autocomplete="off" value="{{ calc.priceRaw }}" onChange="{{ onCalcPriceChange }}" placeholder="50.00" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);margin-top:8px">{{ L.calcPresetStocks }}:</div>
             <div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">
               <span onClick="{{ setPresetAbuk }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ABUK (62.5 / 7.5)</span>
@@ -2113,7 +2263,7 @@
 
           <div>
             <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcDividendLabel }}</label>
-            <input inputmode="decimal" autocomplete="off" value="{{ calc.dividendRaw }}" onChange="{{ onCalcDividendChange }}" placeholder="4.50" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <input id="calc-dividend" aria-label="{{ L.calcDividendLabel }}" inputmode="decimal" autocomplete="off" value="{{ calc.dividendRaw }}" onChange="{{ onCalcDividendChange }}" placeholder="4.50" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
             <div style="font-size:11.5px;color:var(--t2);line-height:1.5;margin-top:10px">{{ L.revYieldAsk }}</div>
           </div>
         </div>
@@ -2142,80 +2292,18 @@
           </div>
         </div>
 
-        <!-- Bank Certificate Comparison Banner -->
-        <div style="margin-top:20px;padding:18px 22px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,1fr);gap:20px;align-items:center">
-          <div>
-            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">{{ L.calcCdComparison }}</div>
-            <div style="font-size:13.5px;color:var(--t2);line-height:1.65;text-wrap:pretty">{{ L.calcCdNote }}</div>
-          </div>
-          <div style="display:flex;gap:12px;align-items:center;justify-content:space-around;padding:14px;border-radius:14px;background:var(--surface);border:1px solid var(--rule)">
-            <div>
-              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;text-transform:uppercase;color:var(--faint)">شهادة بنكية ٢٣٫٥٪</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--ink);margin-top:3px">{{ calc.cdAnnualPayout }} <span style="font-size:11px">ج.م/سنة</span></div>
-            </div>
-            <div style="width:1px;height:36px;background:var(--rule)"></div>
-            <div>
-              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;text-transform:uppercase;color:var(--faint)">كوبونات السهم كاش</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#3F6B52;margin-top:3px">{{ calc.annualCash }} <span style="font-size:11px">ج.م/سنة</span></div>
-            </div>
-          </div>
-        </div>
       </section>
-
-      <!-- Section 2: Asset Return Comparison -->
-      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-          <span style="font-size:22px;line-height:1">⚖️</span>
-          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcCompareTitle }}</h2>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
-          <!-- EGX Card -->
-          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">البورصة المصرية (EGX30)</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--accTint);color:var(--accent);font-weight:600">تاريخي ~٢٨٪ سنوي</span>
-              </div>
-              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">أرباح رأسمالية وتوزيعات نقدية مدعومة بنمو إيرادات الشركات مع التضخم، مع تقلبات سعرية دورية.</p>
-            </div>
-            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
-              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.egx1Y }} ج.م</strong></div>
-              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3F6B52">{{ calc.egx3Y }} ج.م</strong></div>
-            </div>
-          </div>
-
-          <!-- Bank CD Card -->
-          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">شهادات الادخار البنكية</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface);color:var(--t2);border:1px solid var(--rule)">٢٣٫٥٪ - ٢٧٪ سنوي</span>
-              </div>
-              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">عائد نقدي شهري مضمون ومستقر تماماً، لكن أصل المبلغ الاسمي ثابت ويتعرض لتآكل القوة الشرائية.</p>
-            </div>
-            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
-              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.cd1Y }} ج.م</strong></div>
-              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.cd3Y }} ج.م</strong></div>
-            </div>
-          </div>
-
-          <!-- Gold Card -->
-          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">الذهب عيار ٢١</span>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface);color:var(--t2);border:1px solid var(--rule)">تحوط العملة والتضخم</span>
-              </div>
-              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">أداة تحوط وحفظ قيمة ممتازة ضد انخفاض الجنيه والتضخم، لكن لا يولد أي عائد نقدي دوري أو كوبونات.</p>
-            </div>
-            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
-              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.gold1Y }} ج.م</strong></div>
-              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3F6B52">{{ calc.gold3Y }} ج.م</strong></div>
-            </div>
-          </div>
-        </div>
+      <section class="tool-scenarios">
+        <h2>{{ scenarioTitle }}</h2>
+        <p class="scenario-note">{{ scenarioNote }}</p>
+        <div class="scenario-grid"><sc-for list="{{ scenarioCards }}" as="s">
+          <article class="scenario-card"><h3>{{ s.label }}</h3>
+            <span>{{ afterOne }}</span><strong>{{ s.one }}</strong>
+            <span>{{ afterThree }}</span><strong>{{ s.three }}</strong>
+            <div class="scenario-track"><div style="width:{{ s.width }}"></div></div>
+          </article>
+        </sc-for></div>
       </section>
-
       <!-- Section 3: Plain Language Valuation Guide -->
       <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
@@ -2249,7 +2337,7 @@
 
   <!-- ══ RESEARCH ══ -->
   <sc-if value="{{ isResearch }}">
-    <div class="om-scr" style="display:flex;flex-direction:column;gap:16px">
+    <div class="om-scr screen-research" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.researchTitle }}</h1>
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);text-align:end;max-width:32ch;line-height:1.6">{{ L.researchNote }}</div>
