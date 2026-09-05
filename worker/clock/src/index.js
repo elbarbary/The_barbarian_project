@@ -329,17 +329,37 @@ async function cachedHealth(env) {
   return value;
 }
 
+/* The slot a tick belongs to.
+ *
+ * Rounded to the nearest fifteen minutes so execution drift cannot miss an
+ * hh:mm target — every `at:` time in SCHEDULE is a multiple of fifteen, which
+ * a test pins, so this can only ever snap onto a real slot.
+ */
+export function slotOf(atMs) {
+  const step = 15 * 60 * 1000;
+  return Math.round(Number(atMs) / step) * step;
+}
+
+/* Which jobs are due at an instant, and whether the watchdog runs with them.
+ *
+ * Exported because two schedulers now read it: this Worker's `scheduled()`
+ * below, and `scripts/clock_tick.mjs` on the Mac. The rule for "what is due
+ * now" has to be one piece of code — the moment it is two, they disagree on a
+ * DST boundary or a trading day and nobody finds out until a publish is
+ * missed.
+ */
+export function dueAt(atMs) {
+  const c = cairo(new Date(slotOf(atMs)));
+  const jobs = SCHEDULE.filter((job) => job.days.includes(c.day)
+    && (job.every ? true : job.at.includes(c.hhmm)));
+  return { cairo: c, jobs, watchdog: c.minutes % 30 === 0 };
+}
+
 export default {
   async scheduled(event, env, ctx) {
-    // Round to nearest 15-minute slot so cloud execution drift cannot miss hh:mm targets
-    const targetMs = event && event.scheduledTime
-      ? Math.round(Number(event.scheduledTime) / (15 * 60 * 1000)) * (15 * 60 * 1000)
-      : Date.now();
-    const c = cairo(new Date(targetMs));
-    for (const job of SCHEDULE) {
-      if (!job.days.includes(c.day)) continue;
-      const due = job.every ? true : job.at.includes(c.hhmm);
-      if (!due) continue;
+    const at = event && event.scheduledTime ? Number(event.scheduledTime) : Date.now();
+    const { cairo: c, jobs, watchdog: alsoWatch } = dueAt(at);
+    for (const job of jobs) {
       if (job.serialize) {
         const inFlight = await busy(env, job.file);
         // A due slot is a bounded, scheduled event: at worst four a day for
@@ -356,7 +376,7 @@ export default {
       }
       await dispatch(env, job.file, 'timer');
     }
-    if (c.minutes % 30 === 0) {
+    if (alsoWatch) {
       ctx.waitUntil(watchdog(env));
     }
   },

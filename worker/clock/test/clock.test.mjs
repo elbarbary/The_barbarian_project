@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdir } from 'node:fs/promises';
 
-const { cairo, lastDue, staleness, alarmBody, SCHEDULE, STALE, default: worker } =
+const { cairo, lastDue, staleness, alarmBody, slotOf, dueAt, SCHEDULE, STALE, default: worker } =
   await import('../src/index.js');
 
 const job = (file) => SCHEDULE.find((j) => j.file === file);
@@ -180,4 +180,50 @@ test('the alarm body names no endpoint', () => {
   assert.doesNotMatch(body, /workers\.dev|https?:\/\//,
     'the alarm must not publish a URL into a public repo');
   assert.match(body, /publish-live-data\.yml/);
+});
+
+/* `dueAt` is the one rule two schedulers read: this Worker's scheduled() and
+   scripts/clock_tick.mjs on the Mac, after Cloudflare turned out never to
+   invoke the Worker at all. Two copies of a trading calendar disagree on a DST
+   boundary and nobody finds out until a publish is missed. */
+test('a tick is snapped to the slot it belongs to', () => {
+  const q = 15 * 60 * 1000;
+  assert.equal(slotOf(utc('2026-09-06T09:30:00Z')) % q, 0);
+  // Drift either side of a slot still lands on it.
+  assert.equal(slotOf(utc('2026-09-06T09:27:00Z')), utc('2026-09-06T09:30:00Z'));
+  assert.equal(slotOf(utc('2026-09-06T09:36:00Z')), utc('2026-09-06T09:30:00Z'));
+});
+
+test('dueAt names the trading-day jobs and only on trading days', () => {
+  // Sunday 09:30 Cairo (06:30 UTC): the pre-open app-data slot.
+  const open = dueAt(utc('2026-09-06T06:30:00Z'));
+  const files = open.jobs.map((j) => j.file).sort();
+  assert.deepEqual(files, ['publish-app-data.yml', 'publish-live-data.yml']);
+  assert.equal(open.cairo.hhmm, '09:30');
+  assert.equal(open.watchdog, true, '09:30 is a half hour');
+
+  // Friday, same wall-clock time: the exchange is shut, so only the job that
+  // runs every day is due.
+  const shut = dueAt(utc('2026-09-04T06:30:00Z'));
+  assert.deepEqual(shut.jobs.map((j) => j.file), ['publish-live-data.yml']);
+});
+
+test('the watchdog runs on the half hour and not between', () => {
+  assert.equal(dueAt(utc('2026-09-06T07:00:00Z')).watchdog, true);
+  assert.equal(dueAt(utc('2026-09-06T07:30:00Z')).watchdog, true);
+  assert.equal(dueAt(utc('2026-09-06T07:15:00Z')).watchdog, false);
+  assert.equal(dueAt(utc('2026-09-06T07:45:00Z')).watchdog, false);
+});
+
+test('every scheduled job is reachable by some tick of the cron', () => {
+  // A slot the */15 cron can never land on would sit in SCHEDULE looking
+  // configured and never fire — silently, and only for that one job.
+  const seen = new Set();
+  const start = utc('2026-09-06T00:00:00Z');
+  for (let i = 0; i < 7 * 96; i += 1) {
+    for (const job of dueAt(start + i * 15 * 60 * 1000).jobs) seen.add(job.file);
+  }
+  for (const job of SCHEDULE) {
+    assert.ok(seen.has(job.file), `${job.file} is never due on any tick of a week`);
+  }
 });
