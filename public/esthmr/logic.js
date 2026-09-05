@@ -138,6 +138,8 @@ export class Component extends Base {
   // could start. main.js remembers whichever a reader chooses, so the default
   // is only ever the FIRST answer, never an argument.
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
+    audioPlaying: false, audioItem: '',
+    calcInvest: 100000, calcPrice: 50, calcDividend: 4.5,
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
     // ARRAYS, and renamed from `rq`/`frq` on purpose.
@@ -151,6 +153,51 @@ export class Component extends Base {
     rqs: [], frqs: [],
     // The per-measure definitions on Home, folded away until asked for.
     linesHow: false };
+
+  // ── Audio playback (Web Speech API) ──
+  playSpeech(text, itemId) {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    if (this.state.audioPlaying && this.state.audioItem === itemId) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+      this.setState({ audioPlaying: false, audioItem: '' });
+      return;
+    }
+    try {
+      window.speechSynthesis.cancel();
+      const utt = new window.SpeechSynthesisUtterance(text);
+      const isAr = this.state.lang === 'ar';
+      utt.lang = isAr ? 'ar-EG' : 'en-US';
+      utt.rate = 1.0;
+      utt.pitch = 1.0;
+      if (window.speechSynthesis.getVoices) {
+        const voices = window.speechSynthesis.getVoices() || [];
+        if (isAr) {
+          const v = voices.find(x => x.lang && (x.lang === 'ar-EG' || x.lang.startsWith('ar')));
+          if (v) utt.voice = v;
+        } else {
+          const v = voices.find(x => x.lang && (x.lang === 'en-US' || x.lang.startsWith('en')));
+          if (v) utt.voice = v;
+        }
+      }
+      utt.onend = () => {
+        this.setState({ audioPlaying: false, audioItem: '' });
+      };
+      utt.onerror = () => {
+        this.setState({ audioPlaying: false, audioItem: '' });
+      };
+      this.setState({ audioPlaying: true, audioItem: itemId });
+      window.speechSynthesis.speak(utt);
+    } catch (e) {
+      this.setState({ audioPlaying: false, audioItem: '' });
+    }
+  }
+
+  stopSpeech() {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+    this.setState({ audioPlaying: false, audioItem: '' });
+  }
 
   // ── copy ──
   copy() {
@@ -452,7 +499,26 @@ export class Component extends Base {
       exchangeTitle:'Exchange', delayed15:'Quotes delayed ~15 minutes', macro:'Macro, in plain language',
       researchTitle:'Research', researchNote:'Bands describe the scorecard applied to a study. They describe no security.',
       readPaper:'Read the paper', scorecard:'Scorecard', publisherStamp:'ESTHMR · Publisher',
-      legalNotLicensed:'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.'
+      legalNotLicensed:'ESTHMR is a publisher and is not licensed by the Financial Regulatory Authority. We do not buy, we do not sell, and we do not advise. Nothing here is a recommendation to trade any security.',
+      // ── Investor Tools ──
+      toolsTitle:'Investor Tools',
+      toolsLead:'Interactive financial calculators and valuation guides designed for Egyptian market investors.',
+      calcDivTitle:'Dividend & Cash Flow Calculator',
+      calcCompareTitle:'Asset Returns in Egypt (EGX vs Certificates vs Gold)',
+      calcGuideTitle:'Egyptian Valuation & Ratios Guide',
+      calcCompanyAction:'Calculate Dividend Yield',
+      calcAmountLabel:'Investment Capital (EGP)',
+      calcSharePriceLabel:'Share Price (EGP)',
+      calcDividendLabel:'Annual Dividend Per Share (EGP)',
+      calcPresetStocks:'EGX Listed Stock Presets',
+      calcSharesCount:'Shares Owned',
+      calcAnnualCash:'Annual Cash Dividend',
+      calcMonthlyCash:'Monthly Cash Equivalent',
+      calcYield:'Dividend Yield',
+      calcPayback:'Capital Payback Period',
+      calcCdComparison:'Comparison with Egyptian Bank Certificates (23.5% - 27%)',
+      calcCdNote:'Bank certificates deliver fixed cash payments while underlying nominal principal stays vulnerable to purchasing power erosion. Cash-dividend stocks combine cash returns with equity ownership in productive business assets.',
+      calcDisclaimer:'Calculations are mathematical representations based on user inputs for educational purposes, not financial advice or price targets under Law 95/1992 §8.'
     };
     const ar = {
       nothingYet:'لم يُنشر شيء لهذا بعد.',
@@ -519,45 +585,45 @@ export class Component extends Base {
       revNowFlat:'مستقرة الآن',
       revOnePoint:'رقم واحد منشور — لا يكفي من التاريخ لقراءة اتجاه.',
       revReadLabel:'القراءة',
-      revCash:'تحويل الربح إلى نقد',
-      revCashAsk:'من كل جنيه ربح معلن، كم وصل نقداً بالفعل؟',
-      revPb:'السعر إلى القيمة الدفترية',
-      revPbAsk:'أنت تدفع هذا مقابل كل جنيه من حقوق الملكية. فهل تُنتج هذه الأصول شيئاً؟',
-      revPe:'مضاعف الربحية',
+      revCash:'جودة الأرباح والتدفق النقدي',
+      revCashAsk:'من كل جنيه ربح معلن، كم وصل نقداً وتشغيلياً بالفعل إلى البنك؟',
+      revPb:'مضاعف القيمة الدفترية (P/B)',
+      revPbAsk:'كم تدفع مقابل كل جنيه من صافي أصول الشركة وحقوق المساهمين؟',
+      revPe:'مكرر الربحية (P/E)',
       revProfit:'صافي الربح',
-      revEps:'ربحية السهم',
+      revEps:'ربحية السهم (EPS)',
       revAssets:'إجمالي الأصول',
-      revRoe:'العائد على حقوق الملكية',
-      revRoa:'العائد على الأصول',
-      revDebt:'الدين إلى حقوق الملكية',
-      revYield:'عائد التوزيعات',
-      revPeAsk:'لماذا يُسعَّر هكذا مقارنة بقطاعه — وماذا تفعل الأرباح تحته؟',
-      revProfitAsk:'من أين جاء التغير — من النشاط، أم من شيء لن يتكرر؟',
-      revEpsAsk:'ارتفع الربح — لكن هل ارتفع نصيب كل سهم منه؟',
-      revAssetsAsk:'هل يكبر النشاط فعلاً، وهل يواكبه الربح؟',
-      revRoeAsk:'عائد جيد على أموال المساهمين — أم على أموال مقترضة؟ راجع سطر المديونية.',
-      revRoaAsk:'ما مدى كفاءة تشغيل كل ما تملكه الشركة؟',
-      revDebtAsk:'ماذا فعلت الإدارة بالأموال المقترضة — وهل تُدرّ أكثر مما تكلّف؟',
-      revYieldAsk:'هل التوزيع مدعوم بالربح والنقد — أم بسعر سهم هبط؟',
+      revRoe:'العائد على حقوق الملكية (ROE)',
+      revRoa:'العائد على الأصول (ROA)',
+      revDebt:'نسبة الدين إلى حقوق الملكية',
+      revYield:'عائد الكوبون والتوزيعات النقدية',
+      revPeAsk:'لماذا يُسعَّر هكذا مقارنة بنظائره في القطاع — وكيف تتحرك الأرباح التشغيلية؟',
+      revProfitAsk:'من أين جاء التغير — من النشاط التشغيلي الأساسي، أم من بنود استثنائية لن تتكرر؟',
+      revEpsAsk:'ارتفع الربح الإجمالي — لكن هل انعكس ذلك على نصيب كل سهم بعد أي زيادات في رأس المال؟',
+      revAssetsAsk:'هل تتوسع أصول الشركة فعلاً، وهل يواكب ذلك نمو في الربحية؟',
+      revRoeAsk:'عائد تشغيلي قوي على أموال المساهمين — أم ناتج عن اقتراض مكثف؟ راجع نسبة المديونية.',
+      revRoaAsk:'ما مدى كفاءة إدارة الشركة في تشغيل كافة أصولها ومواردها؟',
+      revDebtAsk:'كيف وُظفت أموال القروض — وهل تُدر عائداً يتجاوز تكلفة الفائدة البنكية؟',
+      revYieldAsk:'هل التوزيع النقدي مدعوم بأرباح وتدفقات نقدية قوية — أم ناتج عن هبوط في سعر السهم؟',
       feedCount:'{shown} من {total} عنواناً، الأحدث أولاً.', volumeOn:'حجم التداول في',
       insightBadge:'الأثر المالي',
       showMore:'عرض المزيد',
-      busiest:'تداول بحجم غير معتاد',
+      busiest:'أنشط الأسهم (أحجام تداول استثنائية)',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
-      busyCut:'الأكثر نشاطاً: {shown} من {all} شركة تداولت اليوم بضعف حجمها المعتاد. رتّب جدول السوق بالحجم لترى البقية.',
-      nothingUnusual:'لا شيء غير معتاد اليوم',
-      busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه غير معتاد.',
-      busyYardstick:'الضعف هو الحد الفاصل، وهو حد يضعه هذا التطبيق لا البورصة \u2014 فلا أحد ينشر حدًا رسميًا. وهو عند هذا الرقم لأن يومًا بضعف حجم التداول المعتاد نادر بما يكفي ليستحق النظر، ومألوف بما يكفي ليحدث دون أن يكون هناك خطب ما.',
+      busyCut:'الأسهم الأكثر نشاطاً: {shown} من {all} شركة تداولت اليوم بأكثر من ضعف متوسط حجمها المعتاد.',
+      nothingUnusual:'لا توجد أحجام تداول استثنائية اليوم',
+      busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه استثنائي.',
+      busyYardstick:'الضعف هو الحد الفاصل، وهو حد إحصائي يضعه هذا التطبيق لا البورصة لتسليط الضوء على النشاط الاستثنائي دون أن يمثل ذلك حكماً أو توصية.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
       archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
       archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
       filedShowing:'{n} إفصاحاً يطابق {what}.', filedShowingOne:'إفصاح واحد يطابق {what}.',
       filedSearch:'تصفية بالشركة أو الرمز',
       filedClear:'مسح', filedNothing:'لا يوجد إفصاح هذا الشهر يطابق ذلك.',
-      breadthLine:'ارتفع {up} وتراجع {down} وثبت {flat}، من {counted} سهماً في جلسة {date}.',
-      breadthWord:'ما اتساع الحركة', breadthOf:'{n} سهماً محسوباً',
+      breadthLine:'صعد {up} سهماً وتراجع {down} وثبت {flat}، من إجمالي {counted} سهماً في جلسة {date}.',
+      breadthWord:'اتساع حركة السوق', breadthOf:'{n} سهماً محسوباً',
       calWindow:'أُودعت بين {from} و{to} في {n} سنوات سابقة.',
-      yieldWord:'العائد',
+      yieldWord:'عائد الكوبون',
       macroMoved:'تحرك مع إيجي إكس 30 بمقدار {r} على مدى {n} جلسة.',
       macroBarely:'يكاد لا يتحرك مع إيجي إكس 30، {r} على مدى {n} جلسة.',
       sigFirstLoss:'{period} أول خسارة بعد {run} فترة معلنة رابحة.',
@@ -567,9 +633,9 @@ export class Component extends Base {
       sigPreviousWas:'وكانت السابقة في {year}.',
       sigQuiet:'لم تُفصح عن شيء منذ {days} يوماً، وهي تُفصح عادةً كل {gap}.',
       sigLastFiling:'آخر إفصاح {date}.',
-      sigStreak:'سلسلة', sigFirst:'الأولى من نوعها', sigSilence:'صمت',
-      sigDue:'نتائج مرتقبة', sigEstimate:'تقدير',
-      sigDueOn:'يُتوقع إيداع قوائم {label} في {month} بحسب سجل الشركة',
+      sigStreak:'سلسلة', sigFirst:'الأولى من نوعها', sigSilence:'فترة سكون',
+      sigDue:'نتائج مرتقبة', sigEstimate:'تقدير زمني',
+      sigDueOn:'يُتوقع إيداع قوائم {label} في {month} بحسب سجل إفصاحات الشركة',
       sigDueWindow:'مبني على {n} إفصاحاً سابقاً، تضعه بين {from} و{to}.',
       sigFootnote:'أرقام محسوبة من سجل البورصة نفسه. أول خسارة ليست إشارة بيع، والعودة إلى الربح ليست إشارة شراء \u2014 هذا ما حدث، وما تراه فيه يخصك وحدك.',
       newsSourcedFrom:'عناوين من {outlets}، كل واحد منها موصول بالجهة التي نشرته.',
@@ -582,34 +648,34 @@ export class Component extends Base {
       sessionFeed:'الجلسة جارية — بتأخير {delay} دقيقة، قُرئت {at}',
       priceFrom:'{egx} من هذه الأسعار أرقام البورصة نفسها، و{vendor} من مزوّد بيانات لأن البورصة لا تنشرها. وكلاهما بتأخير.',
       sessionHeld:'الجلسة جارية — الأسعار غير نهائية، رُصدت {at}',
-      investorsTitle:'من يشتري', investorsLead:'تقسيم البورصة نفسها لكل ما جرى تداوله، بحسب من تداوله.',
-      investorsShare:'الحصة من إجمالي قيمة التداول', investorsNet:'المشتراة ناقص المباعة',
-      investorsBought:'اشترت', investorsSold:'باعت',
+      investorsTitle:'تعاملات فئات المستثمرين', investorsLead:'بيانات البورصة الرسمية لتعاملات فئات المستثمرين وأحجام السيولة.',
+      investorsShare:'نسبة الاستحواذ من إجمالي التداول', investorsNet:'صافي التعاملات (شراء / بيع)',
+      investorsBought:'إجمالي الشراء', investorsSold:'إجمالي البيع',
       investorsOfBuying:'{n} من إجمالي الشراء', investorsOfSelling:'{n} من إجمالي البيع',
-      investorsSides:'تنشر البورصة كل جانب على حدة، فيُعرض كل جانب منسوباً إلى إجماليه هو. الشراء والبيع ليسا نصفَي شريط واحد: كل جنيه اشتراه أحدٌ باعه آخر، والنسب أدناه تجيب عن مَن كان في كل جانب، لا عن أي الجانبين كان أكبر.',
-      investorsWho:'من تداولها', investorsTypeSplit:'المؤسسات مقابل الأفراد',
-      investorsOpen:'التقسيم الكامل',
-      investorsTable:'بحسب نوع المستثمر', investorsType:'النوع',
-      investorsBuying:'مشترٍ صافٍ', investorsSelling:'بائع صافٍ',
-      investorsEgpM:'مليون جنيه، المشتراة ناقص المباعة',
-      investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً لفترة التقرير الحالية، لا لجلسة واحدة. وتبدأ الفترة من جديد عندما تفتح البورصة فترة أخرى، والتاريخ المجاور للأرقام هو تاريخ البورصة نفسها.',
-      investorsAsOf:'أرقام البورصة بتاريخ', investorsTotal:'قيمة التداول في الفترة:',
-      investorsEquities:'التقسيم أعلاه يشمل السندات وأذون الخزانة أيضاً. الأسهم وحدها:',
-      investorsNoIntraday:'لا تنشر البورصة تقسيماً خلال الجلسة، لذا لا يوجد منحنى هنا \u2014 بل موضع الفترة فقط.',
-      homeTitle:'الإغلاق', homeTitleLive:'الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أكبر التحركات', readNow:'ما يُقرأ الآن', watchlist:'الأكبر بالقيمة السوقية',
-      following:'تتابعها', follow:'تابِع', unfollow:'تتابعها',
+      investorsSides:'تُفصح البورصة عن قيم الشراء والبيع لكل فئة استثمارية على حدة. تُعرض النسب منسوبة إلى إجمالي جانبها لتوضيح حجم مشاركة كل فئة في حركة السيولة.',
+      investorsWho:'فئات المتعاملين', investorsTypeSplit:'المؤسسات في مواجهة الأفراد',
+      investorsOpen:'تفاصيل تعاملات الفئات',
+      investorsTable:'تعاملات فئات المستثمرين', investorsType:'فئة المستثمر',
+      investorsBuying:'صافي شراء', investorsSelling:'صافي بيع',
+      investorsEgpM:'مليون جنيه (صافي تعاملات)',
+      investorsBasis:'تنشر البورصة هذه الأرقام تراكمياً للفترة الحالية (منذ بداية العام أو بداية الشهر). وتُحدّث البيانات فور إعلان البورصة للفترة الجديدة، والتاريخ المجاور هو تاريخ البورصة نفسها.',
+      investorsAsOf:'بيانات البورصة الرسمية كما في', investorsTotal:'إجمالي قيمة التداول في الفترة:',
+      investorsEquities:'الجدول أعلاه يشمل الأسهم والسندات وأذون الخزانة. تعاملات الأسهم المقيدة فقط:',
+      investorsNoIntraday:'لا تنشر البورصة تقسيماً لحظياً لفئات المستثمرين خلال ساعات الجلسة، لذا تُعرض أحدث فترة معلنة رسمياً.',
+      homeTitle:'إغلاق السوق', homeTitleLive:'تداولات الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أنشط الأسهم تحركاً', readNow:'أبرز الأخبار والإفصاحات', watchlist:'الأكبر وزناً وقيمة سوقية',
+      following:'في قائمة المتابعة', follow:'أضف للمتابعة', unfollow:'في قائمة المتابعة',
       // ── قائمة المتابعة ──
       followTitle:'المتابَعة',
       followLead:'الشركات التي تتابعها، بالإغلاق نفسه والتغير نفسه الظاهرين في باقي أنحاء الموقع.',
-      followEmptyTitle:'لا شيء تتابعه بعد',
-      followEmpty:'اضغط النجمة بجوار أي شركة \u2014 في جدول السوق أو في صفحتها \u2014 فتظهر هنا.',
-      followBrowse:'افتح السوق',
-      followClear:'إفراغ القائمة',
+      followEmptyTitle:'قائمة المتابعة فارغة حالياً',
+      followEmpty:'اضغط رمز النجمة بجوار أي سهم لإضافته إلى قائمة متابعتك الخاصة هنا.',
+      followBrowse:'تصفح جدول السوق',
+      followClear:'إفراغ القائمة بالكامل',
       followSessions:'{n} جلسة',
-      followNoSeries:'لا سلسلة أسعار منشورة',
-      followKeptAccount:'محفوظة في حسابك، فتفتح القائمة نفسها في متصفح آخر. يُحفظ الرمز فقط: لا عدد أسهم، ولا سعر شراء، ولا شيء عمّا تملكه.',
-      followKeptDevice:'محفوظة في هذا المتصفح وحده، إذ لا حساب تُحفظ فيه وأنت غير مسجَّل الدخول. سجِّل الدخول فتتبعك القائمة.',
-      followRose:'ارتفعت', followFell:'انخفضت', followFlat:'دون تغيّر',
+      followNoSeries:'لا توجد سلسلة أسعار منشورة',
+      followKeptAccount:'محفوظة في حسابك، فتفتح القائمة نفسها في أي متصفح. يُحفظ الرمز فقط: لا عدد أسهم، ولا سعر شراء، ولا شيء عمّا تملكه.',
+      followKeptDevice:'محفوظة في هذا المتصفح وحده. سجّل الدخول لتنتقل قائمتك معك تلقائياً.',
+      followRose:'صعدت', followFell:'تراجعت', followFlat:'دون تغيّر',
       followOfCount:'من {n}',
       // ── قطاع واحد، مفتوحاً ──
       secOpen:'افتح القطاع',
@@ -676,18 +742,18 @@ export class Component extends Base {
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
       ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
-      screenTitle:'السوق على أربعة مقاييس',
+      screenTitle:'فحص السوق عبر ٤ مقاييس استثمارية',
       screenSub:'لوحة لكل مقياس، مرسومة على الشركات التي أفصحت عن ذلك الرقم، مع تحديد وسط السوق.',
       screenBarsShort:'كل عمود يعدّ الشركات التي يقع رقمها في تلك الشريحة، والخط القائم هو وسيط السوق نفسه.',
       screenUniverse:'{n} شركة في السجل',
-      screenPeShort:'مضاعف الربحية', screenVolShort:'حجم التداول ٣٠ يوماً',
-      screenCashShort:'التحويل النقدي', screenActionShort:'لا إفصاح مرتقب',
+      screenPeShort:'مكرر الربحية (P/E)', screenVolShort:'حجم التداول ٣٠ يوماً',
+      screenCashShort:'جودة التدفق النقدي', screenActionShort:'لا إفصاح مرتقب',
       screenOver:'{n} خارج المدى المرسوم',
       screenNamedSide:'الجانب الذي يسمّيه المقياس', screenMedianMark:'وسيط السوق',
       screenBars:'كل عمود هو عدد الشركات الواقعة في تلك الشريحة من المقياس، والعلامة هي وسط السوق نفسه. الأعمدة المملوءة هي الجانب الذي يسمّيه الخط. لا ترتيب هنا، ولا عمود يمثل شركة بعينها.',
       screenOf:'{n} من {of}',
       screenSilent:'{n} لم تُفصح عن رقم يُختبر',
-      screenQuestion:'الوقوع على جانب من الوسط سؤال وليس حكمًا: يقول أين يقع رقم بالنسبة لبقية السوق، ولا يقول إن ذلك جيد. لا تُسمّى هنا أي شركة. ويُطبّق المقياس على الجدول، حيث يملك القارئ تغييره.',
+      screenQuestion:'الوقوع على جانب من الوسط سؤال وليس حكمًا: يوضح أين تقع أرقام الشركة بالنسبة لبقية السوق، ولا يمثل توصية. لا يُفضل هنا سهم على آخر، ويُطبق المقياس على الجدول حيث يملك القارئ كامل التحكم.',
       screenPeWhat:'كم يكلّف السهم مقابل ربح سنة كما أفصحت عنه الشركة.',
       screenVolWhat:'كم سهماً جرى تداوله في اليوم المتوسط خلال الشهر الماضي.',
       screenCashWhat:'كم من الربح الذي أعلنته الشركة وصل نقداً من نشاطها.',
@@ -699,7 +765,7 @@ export class Component extends Base {
       screenCashNone:'التحويل النقدي غير مُفصح عنه لأي شركة في هذه المجموعة، لذا تعذّر تطبيق هذا الاختبار.',
       screenActionNone:'لم يُحمّل التقويم بعد، لذا لم يُستبعد أي إفصاح مرتقب.',
       screenAction:'لا إفصاح مرتقب في نافذة التقويم — يصعب قراءة السعر أمام زيادة رأس مال أو توزيع لم يُعلن بعد.',
-      screenOpen:'ضع المقياس الأول على الجدول',
+      screenOpen:'تطبيق أول مقياس على جدول الأسهم',
       screenHowOpen:'ما معنى هذه المقاييس', screenHowClose:'إخفاء',
       chipsLabel:'المقاييس', chipAtMost:'عند {v} أو أقل', chipAtLeast:'عند {v} أو أعلى',
       chipNotDue:'لا إفصاح مرتقب',
@@ -708,7 +774,7 @@ export class Component extends Base {
       screenNoBack:'لا يُعرض أي عائد سابق لهذه الاختبارات. قياسها تاريخياً يتطلب ترتيب البورصة كما كان في كل تاريخ ماضٍ، وإعادة بنائه من أرقام اليوم تُسقط الشركات التي شُطبت منذ ذلك الحين — وهو اختبار يُجمّل نفسه. الاختبارات مذكورة كي يحكم عليها القارئ مباشرة.',
       peFoot:'مضاعف الربحية = آخر إغلاق مقسوماً على ربحية السهم السنوية كما وردت في آخر إفصاح. ويُترك فارغاً — دون تقدير — إذا سجّلت الشركة خسارة، أو لم تُفصح عن ربح سنوي، أو إذا لم يتّسق عدد الأسهم مع السعر والقيمة السوقية. وقد يعود ذلك الإفصاح إلى عشرين شهراً مضت، لذا تحمل صفحة كل شركة النسبة نفسها محسوبة على آخر اثني عشر شهراً أفصحت عنها.',
       noMatchTitle:'لا نتائج', noMatchBody:'لا توجد شركة في المجموعة المُفصح عنها تطابق هذا البحث وهذا القطاع.', clearFilters:'مسح التصفية',
-      lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'من هي الشركة',
+      lastClose:'آخر إغلاق', asOf:'بتاريخ', priceHistory:'تاريخ السعر', sessionsShown:'جلسات', whoTheyAre:'نبذة عن الشركة',
       asFiled:'القوائم المالية كما وردت', egpMillions:'بملايين الجنيهات ما لم يُذكر غير ذلك', period:'الفترة', revenue:'الإيرادات',
       grossProfit:'الربح الإجمالي', operatingIncome:'الربح التشغيلي', netIncome:'صافي الربح',
       cumulativeWarning:'الفترات تراكمية كما تُقدّمها البورصة. النصف الأول وتسعة أشهر أرقام من بداية العام ولا تُقارن بربع واحد. لا يُطرح شيء لاستخراج ربع، والخانة الفارغة رقم لم يذكره الإفصاح — وليست صفراً.',
@@ -717,7 +783,7 @@ export class Component extends Base {
       mixedRow:'صافي الربح من هذا الإفصاح، وأرقام القوائم كما نشرتها مباشر',
       restatedIn:'مذكور كرقم مقارن للعام السابق داخل إفصاح {period}.',
       finsInDollars:'تودع هذه الشركة قوائمها بالدولار الأمريكي، ولا تُدمج إعلانات البورصة الخاصة بها في هذا الجدول المقوَّم بالجنيه، لذا قد يتأخر عن الإفصاحات المدرجة أدناه.',
-      borrowingsTitle:'ما تفعله الشركة بقروضها', asAt:'كما في', borrowings:'القروض', egpM:'مليون جنيه',
+      borrowingsTitle:'هيكل ديون الشركة والتزاماتها المالية', asAt:'كما في', borrowings:'القروض والتسهيلات', egpM:'مليون جنيه',
       dueWithinYear:'يستحق خلال عام', dueLater:'يستحق لاحقاً', movementSince:'الحركة منذ', pattern:'النمط',
       debtHigherThan:'أعلى مما كانت عليه، إذ بلغت {was}.',
       debtLowerThan:'أقل مما كانت عليه، إذ بلغت {was}.',
@@ -726,7 +792,7 @@ export class Component extends Base {
       whereFromBody:'قُرئت من بنود القروض في الميزانية المُفصح عنها — القروض والتسهيلات البنكية والتزامات الإيجار، مجموعة بحسب تاريخ الاستحقاق. وليست من إجمالي الالتزامات الذي يضم دائنين ومخصصات ودفعات مقدمة من العملاء لم يقرضها أحد للشركة.',
       sourceFiling:'الإفصاح المصدر', openSignedDoc:'افتح المستند الموقّع', showSource:'من أين جاءت هذه الأرقام', hideSource:'إخفاء المصدر',
       notCreditRating:'هذا ليس تصنيفاً ائتمانياً. الأرقام أعلاه مذكورة كما وردت، دون درجة أو نطاق أو لون.',
-      whatIsUnusual:'ما هو غير المعتاد', itsFilings:'إفصاحاتها', egxArchive:'أرشيف البورصة', document:'المستند',
+      whatIsUnusual:'أحجام تداول استثنائية', itsFilings:'إفصاحاتها', egxArchive:'أرشيف البورصة', document:'المستند',
       sectorsTitle:'القطاعات', sectorsWord:'قطاعاً', rose:'صعدت', fell:'هبطت', flat:'ثابتة', medianPE:'وسيط م/ر',
       notRead:'غير قابلة للقياس',
       calendarTitle:'الإفصاحات', filed:'مُفصح عنه', expected:'متوقع', estimate:'تقدير',
@@ -734,7 +800,26 @@ export class Component extends Base {
       exchangeTitle:'البورصة والاقتصاد', delayed15:'الأسعار متأخرة نحو ١٥ دقيقة', macro:'مؤشرات الاقتصاد بلغة واضحة',
       researchTitle:'الأبحاث', researchNote:'النطاقات تصف بطاقة تقييم الدراسة، ولا تصف أي ورقة مالية.',
       readPaper:'اقرأ الورقة', scorecard:'بطاقة التقييم', publisherStamp:'ESTHMR · ناشر',
-      legalNotLicensed:'ESTHMR ناشر وغير مرخّص من الهيئة العامة للرقابة المالية. نحن لا نشتري ولا نبيع ولا نقدّم مشورة. لا شيء هنا توصية بالتعامل في أي ورقة مالية.'
+      legalNotLicensed:'ESTHMR ناشر وغير مرخّص من الهيئة العامة للرقابة المالية. نحن لا نشتري ولا نبيع ولا نقدّم مشورة. لا شيء هنا توصية بالتعامل في أي ورقة مالية.',
+      // ── Investor Tools & Calculators ──
+      toolsTitle:'حاسبة وأدوات المستثمر',
+      toolsLead:'أدوات وحاسبات مالية تفاعلية لمساعدة المستثمر في حساب عوائد الكوبونات النقدية ومقارنة بدائل الاستثمار في مصر.',
+      calcDivTitle:'حاسبة الكوبونات والتدفق النقدي',
+      calcCompareTitle:'مقارنة عوائد الاستثمار في مصر (البورصة vs الشهادات vs الذهب)',
+      calcGuideTitle:'دليل مصطلحات البورصة والتقييم المبسط',
+      calcCompanyAction:'احسب عائد الكوبون للسهم',
+      calcAmountLabel:'المبلغ المستثمر (بالجنيه المصري)',
+      calcSharePriceLabel:'سعر السهم (ج.م)',
+      calcDividendLabel:'الكوبون السنوي الموزع للسهم (ج.م)',
+      calcPresetStocks:'نماذج سريعة لأسهم من البورصة المصرية',
+      calcSharesCount:'عدد الأسهم المملوكة',
+      calcAnnualCash:'إجمالي الكوبونات السنوية كاش',
+      calcMonthlyCash:'متوسط العائد الشهري المعادل',
+      calcYield:'نسبة عائد التوزيع (Dividend Yield)',
+      calcPayback:'فترة استرداد رأس المال من الكوبونات',
+      calcCdComparison:'المقارنة مع شهادات الادخار البنكية (23.5% - 27%)',
+      calcCdNote:'شهادات البنوك تمنح عائداً نقدياً ثابتاً مع تآكل القوة الشرائية للأصل بفعل التضخم؛ بينما الاستثمار في أسهم الشركات ذات التوزيعات النقدية يمنح تدفقاً نقدياً دورياً مع ملكية في أصول تشغيلية حقيقية قادرة على إعادة تسعير نفسها والنمو مع التضخم.',
+      calcDisclaimer:'هذه الحسابات رياضية استرشادية بناءً على الأرقام المدخلة لأغراض المعرفة والمقارنة، ولا تمثل توصية بشراء أو بيع أي ورقة مالية وفقاً للمادة ٨ من قانون سوق رأس المال رقم ٩٥ لسنة ١٩٩٢.'
     };
     return this.state.lang === 'ar' ? ar : en;
   }
@@ -1254,6 +1339,7 @@ export class Component extends Base {
       calendar:'M4.4 6.4h15.2v13.4H4.4zM4.4 10.8h15.2M8.4 3.4v4M15.6 3.4v4M8 14.4h2M14 14.4h2',
       exchange:'M3.6 8.4h13.8l-3.4-3.6M20.4 15.6H6.6l3.4 3.6',
       research:'M6 3.4h7.4l4.2 4.2v3.8M6 3.4v17.2h6.2M14.2 15.9a3.4 3.4 0 1 0 6.8 0 3.4 3.4 0 0 0-6.8 0M20.6 18.6 22.4 20.6',
+      tools:'M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-7 2h6v2h-6V5zm-6 0h4v2H6V5zm0 4h4v2H6V9zm6 0h6v2h-6V9zm-6 4h4v2H6v-2zm6 0h6v2h-6v-2zm-6 4h4v2H6v-2zm6 0h6v2h-6v-2z',
       // Three figures side by side, which is what the screen is.
       investors:'M4.2 20.4V13M9.4 20.4V6.6M14.6 20.4v-9.6M19.8 20.4V9.2M3 20.8h18M9.4 3.4v3.2',
       // Two threads meeting a point.
@@ -1592,6 +1678,14 @@ export class Component extends Base {
         tickers: demoCo(10) }
     ]).map((f, idx) => Object.assign({}, f, {
       hasWhy: Boolean(f.why), hasBecause: Boolean(f.because),
+      audioPlaying: Boolean(st.audioPlaying && st.audioItem === ('news-' + (f.id || f.headline || idx))),
+      audioLabel: (st.audioPlaying && st.audioItem === ('news-' + (f.id || f.headline || idx)))
+        ? (ar ? '⏸️ إيقاف' : '⏸️ Stop')
+        : (ar ? '🔊 استمع' : '🔊 Listen'),
+      toggleAudio: () => {
+        const text = (f.headline || '') + '. ' + (f.why || f.because || '');
+        this.playSpeech(text, 'news-' + (f.id || f.headline || idx));
+      },
       // One stamp, through the same formatter the Crossings screen uses, so
       // the two screens side by side agree on how a date looks in Arabic.
       when: (f.date ? this.dayLabel(f.date) : '') + (f.time ? ' · ' + f.time : ''),
@@ -2957,6 +3051,7 @@ export class Component extends Base {
       // has called this block "what ties these together" all along.
       ['crossings', ar?'ربط النقاط':'Connecting the dots', crossings.length ? String(crossings.length) : ''],
       ['exchange', ar?'البورصة':'Exchange', ''],
+      ['tools', ar?'حاسبة المستثمر':'Tools', ''],
       // Only where there is something to open. `studies` is the demo's three
       // mock-up papers and nothing else — no research document is published —
       // so every signed-in reader who clicked this got a 50px heading and the
@@ -3193,14 +3288,14 @@ export class Component extends Base {
         const mainIx = indices && indices[0];
         if (mainIx) {
           said.push(ar
-            ? `أغلق ${mainIx.label} عند ${mainIx.value} بتغير ${mainIx.pct}.`
+            ? `أغلق مؤشر ${mainIx.label} عند ${mainIx.value} نقطة بتغير ${mainIx.pct}.`
             : `${mainIx.label} closed at ${mainIx.value}, a change of ${mainIx.pct}.`);
         }
         if (breadth) {
           const [u, d, f, c] = [breadth.up, breadth.down, breadth.flat, breadth.counted]
             .map((n) => this.num(n, 0));
           said.push(ar
-            ? `صعد ${u} سهماً وتراجع ${d} وثبت ${f}، من ${c} سهماً محسوباً.`
+            ? `شهدت الجلسة صعود ${u} سهماً وتراجع ${d} واستقرار ${f} سهماً، من إجمالي ${c} سهماً جرى تداولها.`
             : `${u} rose, ${d} fell and ${f} held, of ${c} counted.`);
         }
         return said.join(' ');
@@ -3221,6 +3316,20 @@ export class Component extends Base {
       pulseExpandLabel: st.pulseExpanded
         ? (ar ? 'إخفاء التحليل المكتوب ↑' : 'Hide commentary ↑')
         : (ar ? 'عرض التفاصيل والتحليل المكتوب ↓' : 'Read details & commentary ↓'),
+      pulseAudioPlaying: Boolean(st.audioPlaying && st.audioItem === 'pulse'),
+      pulseAudioLabel: (st.audioPlaying && st.audioItem === 'pulse')
+        ? (ar ? '⏸️ إيقاف التلاوة' : '⏸️ Stop Audio')
+        : (ar ? '🔊 استمع لملخص الجلسة' : '🔊 Audio Briefing'),
+      togglePulseAudio: () => {
+        const pMain = indices && indices[0];
+        const pBody = ar
+          ? `أغلق مؤشر ${pMain ? pMain.label : 'إيجي إكس 30'} عند ${pMain ? pMain.value : ''} نقطة بتغير ${pMain ? pMain.pct : ''}. صعد ${breadth ? breadth.up : 0} سهماً وتراجع ${breadth ? breadth.down : 0} وثبت ${breadth ? breadth.flat : 0} سهماً.`
+          : `${pMain ? pMain.label : 'EGX30'} closed at ${pMain ? pMain.value : ''}, a change of ${pMain ? pMain.pct : ''}. ${breadth ? breadth.up : 0} rose, ${breadth ? breadth.down : 0} fell and ${breadth ? breadth.flat : 0} held.`;
+        const text = (ar
+          ? `ملخص جلسة البورصة المصرية ليوم ${this.longDate(D.marketDate) || ''}. ${pBody}`
+          : `Egyptian Exchange market briefing for ${this.longDate(D.marketDate) || ''}. ${pBody}`);
+        this.playSpeech(text, 'pulse');
+      },
       // Home's headline and its pill said "The close — official close from
       // market.json, not a live price" as unconditional literals, including
       // through the whole trading session, while the sidebar beside them said
@@ -3362,7 +3471,8 @@ export class Component extends Base {
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
-      isWatchlist: st.screen === 'watchlist',
+      isWatchlist: st.screen === 'watchlist', isTools: st.screen === 'tools',
+      goTools: this.go('tools'),
       isHeat: st.screen === 'heat',
       heatTabs, heatBlocks, heatTiles,
       heatZoomed: Boolean(heatZoom),
@@ -3438,6 +3548,80 @@ export class Component extends Base {
       // shows dashes, and a star beside a dash would store one.
       canFollowCompany: co.ticker !== '\u2014',
       companyFollow: () => { if (co.ticker !== '\u2014') this.onWatch && this.onWatch(co.ticker); },
+      companyAudioPlaying: Boolean(st.audioPlaying && st.audioItem === 'company'),
+      companyAudioLabel: (st.audioPlaying && st.audioItem === 'company')
+        ? (ar ? '⏸️ إيقاف التلاوة' : '⏸️ Stop Audio')
+        : (ar ? '🔊 استمع لملخص الشركة' : '🔊 Company Briefing'),
+      toggleCompanyAudio: () => {
+        const coName = co.primaryName || co.ticker;
+        const text = ar
+          ? `ملخص شركة ${coName}، الرمز ${co.ticker}. الإغلاق ${co.close} جنيه، نسبة التغير ${co.pct}.`
+          : `Company briefing for ${coName}, ticker ${co.ticker}. Last close ${co.close} EGP, change ${co.pct}.`;
+        this.playSpeech(text, 'company');
+      },
+      openCalculatorForCompany: () => {
+        const priceNum = parseFloat(String(co.close || '').replace(/,/g, '')) || 50;
+        const yieldNum = parseFloat(String(co.yield || '').replace(/%/g, '')) || 0;
+        const divNum = yieldNum > 0 ? Number(((priceNum * yieldNum) / 100).toFixed(2)) : 4.5;
+        this.setState({ screen: 'tools', calcPrice: priceNum, calcDividend: divNum });
+      },
+      // ── Investor Tools & Calculators ──
+      calc: {
+        invest: (st.calcInvest || 100000).toLocaleString('en-US'),
+        investRaw: st.calcInvest || 100000,
+        price: (st.calcPrice || 50).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        priceRaw: st.calcPrice || 50,
+        dividend: (st.calcDividend || 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        dividendRaw: st.calcDividend || 4.5,
+        shares: Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
+        annualCash: Math.round(Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)).toLocaleString('en-US'),
+        monthlyCash: Math.round((Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)) / 12).toLocaleString('en-US'),
+        yieldPct: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
+        paybackYears: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
+          ? (100 / (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
+          : '—',
+        cdAnnualPayout: Math.round((st.calcInvest || 100000) * 0.235).toLocaleString('en-US'),
+        cdMonthlyPayout: Math.round(((st.calcInvest || 100000) * 0.235) / 12).toLocaleString('en-US'),
+        egx1Y: Math.round((st.calcInvest || 100000) * 1.28).toLocaleString('en-US'),
+        egx3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
+        cd1Y: Math.round((st.calcInvest || 100000) * 1.235).toLocaleString('en-US'),
+        cd3Y: Math.round((st.calcInvest || 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
+        gold1Y: Math.round((st.calcInvest || 100000) * 1.25).toLocaleString('en-US'),
+        gold3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
+      },
+      calcInvest: (st.calcInvest || 100000).toLocaleString('en-US'),
+      calcInvestRaw: st.calcInvest || 100000,
+      calcPrice: (st.calcPrice || 50).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      calcPriceRaw: st.calcPrice || 50,
+      calcDividend: (st.calcDividend || 4.5).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      calcDividendRaw: st.calcDividend || 4.5,
+      calcShares: Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)).toLocaleString('en-US'),
+      calcAnnualCash: Math.round(Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)).toLocaleString('en-US'),
+      calcMonthlyCash: Math.round((Math.floor((st.calcInvest || 100000) / Math.max(0.01, st.calcPrice || 50)) * (st.calcDividend || 4.5)) / 12).toLocaleString('en-US'),
+      calcYieldPct: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100).toFixed(2) + '%',
+      calcPaybackYears: (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) > 0)
+        ? (100 / (((st.calcDividend || 4.5) / Math.max(0.01, st.calcPrice || 50)) * 100)).toFixed(1) + (ar ? ' سنة' : ' yrs')
+        : '—',
+      calcCdAnnualPayout: Math.round((st.calcInvest || 100000) * 0.235).toLocaleString('en-US'),
+      calcCdMonthlyPayout: Math.round(((st.calcInvest || 100000) * 0.235) / 12).toLocaleString('en-US'),
+      calcEgx1Y: Math.round((st.calcInvest || 100000) * 1.28).toLocaleString('en-US'),
+      calcEgx3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.28, 3)).toLocaleString('en-US'),
+      calcCd1Y: Math.round((st.calcInvest || 100000) * 1.235).toLocaleString('en-US'),
+      calcCd3Y: Math.round((st.calcInvest || 100000) * (1 + 0.235 * 3)).toLocaleString('en-US'),
+      calcGold1Y: Math.round((st.calcInvest || 100000) * 1.25).toLocaleString('en-US'),
+      calcGold3Y: Math.round((st.calcInvest || 100000) * Math.pow(1.25, 3)).toLocaleString('en-US'),
+      onCalcInvestChange: (e) => this.setState({ calcInvest: Math.max(0, parseFloat(e.target.value) || 0) }),
+      onCalcPriceChange: (e) => this.setState({ calcPrice: Math.max(0.01, parseFloat(e.target.value) || 0) }),
+      onCalcDividendChange: (e) => this.setState({ calcDividend: Math.max(0, parseFloat(e.target.value) || 0) }),
+      setInvest50k: () => this.setState({ calcInvest: 50000 }),
+      setInvest100k: () => this.setState({ calcInvest: 100000 }),
+      setInvest250k: () => this.setState({ calcInvest: 250000 }),
+      setInvest500k: () => this.setState({ calcInvest: 500000 }),
+      setPresetAbuk: () => this.setState({ calcPrice: 62.5, calcDividend: 7.5 }),
+      setPresetEast: () => this.setState({ calcPrice: 34.0, calcDividend: 3.75 }),
+      setPresetComi: () => this.setState({ calcPrice: 89.0, calcDividend: 3.0 }),
+      setPresetEtel: () => this.setState({ calcPrice: 38.5, calcDividend: 1.5 }),
+      setPresetAlcn: () => this.setState({ calcPrice: 44.0, calcDividend: 5.0 }),
       rows: rows.map(mkRow), rowCount: rows.length, cols, sectorChips, query: st.q,
       ratio, filedRatio: this.ratioControl('frqs', L, ar),
       measureChips, hasMeasureChips: measureChips.length > 0,

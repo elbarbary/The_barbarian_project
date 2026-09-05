@@ -127,7 +127,10 @@
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px solid var(--edgeIn)">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.pulseLeaderLabel }}</div>
           <div style="font-size:13.5px;font-weight:600;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ pulseLeader }}</div>
-          <div onClick="{{ togglePulse }}" style="cursor:pointer;margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+          <div onClick="{{ togglePulseAudio }}" style="cursor:pointer;margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
+            <span>{{ pulseAudioLabel }}</span>
+          </div>
+          <div onClick="{{ togglePulse }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:12px;color:var(--accent);font-weight:500;transition:background .15s" style-hover="background:var(--surface)">
             <span>{{ pulseExpandLabel }}</span>
           </div>
         </div>
@@ -474,6 +477,9 @@
                 <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase">{{ f.source }}</span>
               </div>
               <a href="{{ f.href }}" target="_blank" style="font-size:12.5px;color:var(--faint)">{{ L.readAtSource }} →</a>
+              <div onClick="{{ f.toggleAudio }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-size:11px;color:var(--t2)" style-hover="background:var(--surface);color:var(--ink)">
+                <span>{{ f.audioLabel }}</span>
+              </div>
               <sc-for list="{{ f.tickers }}" as="t" hint-placeholder-count="1">
                 <div onClick="{{ t.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--accTint);color:var(--accent)">{{ t.ticker }}</div>
               </sc-for>
@@ -1149,6 +1155,8 @@
               <sc-if value="{{ canFollowCompany }}">
               <span onClick="{{ companyFollow }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid {{ companyWatchBorder }};font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:{{ companyWatchColor }}" style-hover="border-color:var(--accent)"><span style="font-size:13px;line-height:1">{{ companyStar }}</span>{{ companyWatchLabel }}</span>
               </sc-if>
+              <span onClick="{{ toggleCompanyAudio }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent)" style-hover="border-color:var(--accent)">{{ companyAudioLabel }}</span>
+              <span onClick="{{ openCalculatorForCompany }}" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent)" style-hover="border-color:var(--accent)">🧮 {{ L.calcCompanyAction }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--t2)">{{ co.sector }}</span>
               <span style="padding:4px 11px;border-radius:999px;background:var(--sunk);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2)">{{ co.exchange }}</span>
             </div>
@@ -2053,6 +2061,188 @@
   <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
 </sc-if>
 
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ══ TOOLS & CALCULATORS ══ -->
+  <sc-if value="{{ isTools }}">
+    <div class="om-scr" style="display:flex;flex-direction:column;gap:20px">
+      <!-- Title row -->
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
+        <div>
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.toolsTitle }}</h1>
+          <p style="margin:10px 0 0;font-size:15px;color:var(--t2);line-height:1.6;max-width:74ch;text-wrap:pretty">{{ L.toolsLead }}</p>
+        </div>
+      </div>
+
+      <!-- Section 1: Dividend & Cash Flow Calculator -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:22px;line-height:1">🧮</span>
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcDivTitle }}</h2>
+          </div>
+        </div>
+
+        <!-- Controls Grid -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+          <div>
+            <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcAmountLabel }}</label>
+            <input inputmode="decimal" autocomplete="off" value="{{ calc.investRaw }}" onChange="{{ onCalcInvestChange }}" placeholder="100000" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <span onClick="{{ setInvest50k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">50,000</span>
+              <span onClick="{{ setInvest100k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">100,000</span>
+              <span onClick="{{ setInvest250k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">250,000</span>
+              <span onClick="{{ setInvest500k }}" style="cursor:pointer;padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">500,000</span>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcSharePriceLabel }}</label>
+            <input inputmode="decimal" autocomplete="off" value="{{ calc.priceRaw }}" onChange="{{ onCalcPriceChange }}" placeholder="50.00" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);margin-top:8px">{{ L.calcPresetStocks }}:</div>
+            <div style="display:flex;gap:5px;margin-top:4px;flex-wrap:wrap">
+              <span onClick="{{ setPresetAbuk }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ABUK (62.5 / 7.5)</span>
+              <span onClick="{{ setPresetEast }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">EAST (34 / 3.75)</span>
+              <span onClick="{{ setPresetComi }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">COMI (89 / 3.0)</span>
+              <span onClick="{{ setPresetEtel }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ETEL (38.5 / 1.5)</span>
+              <span onClick="{{ setPresetAlcn }}" style="cursor:pointer;padding:3px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--t2)" style-hover="border-color:var(--accent);color:var(--ink)">ALCN (44 / 5.0)</span>
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ L.calcDividendLabel }}</label>
+            <input inputmode="decimal" autocomplete="off" value="{{ calc.dividendRaw }}" onChange="{{ onCalcDividendChange }}" placeholder="4.50" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+            <div style="font-size:11.5px;color:var(--t2);line-height:1.5;margin-top:10px">{{ L.revYieldAsk }}</div>
+          </div>
+        </div>
+
+        <!-- Output Cards Grid -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px">
+          <div style="padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.calcSharesCount }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:var(--ink);margin-top:5px">{{ calc.shares }}</div>
+          </div>
+          <div style="padding:16px 18px;border-radius:16px;background:rgba(63,107,82,0.08);border:1px solid rgba(63,107,82,0.25)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#3F6B52">{{ L.calcAnnualCash }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:#3F6B52;margin-top:5px">{{ calc.annualCash }} <span style="font-size:12px;font-weight:400">EGP</span></div>
+          </div>
+          <div style="padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.calcMonthlyCash }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:var(--ink);margin-top:5px">{{ calc.monthlyCash }} <span style="font-size:12px;font-weight:400">EGP/mo</span></div>
+          </div>
+          <div style="padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.calcYield }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:var(--accent);margin-top:5px">{{ calc.yieldPct }}</div>
+          </div>
+          <div style="padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ L.calcPayback }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;color:var(--ink);margin-top:5px">{{ calc.paybackYears }}</div>
+          </div>
+        </div>
+
+        <!-- Bank Certificate Comparison Banner -->
+        <div style="margin-top:20px;padding:18px 22px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,1fr);gap:20px;align-items:center">
+          <div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">{{ L.calcCdComparison }}</div>
+            <div style="font-size:13.5px;color:var(--t2);line-height:1.65;text-wrap:pretty">{{ L.calcCdNote }}</div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;justify-content:space-around;padding:14px;border-radius:14px;background:var(--surface);border:1px solid var(--rule)">
+            <div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;text-transform:uppercase;color:var(--faint)">شهادة بنكية ٢٣٫٥٪</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--ink);margin-top:3px">{{ calc.cdAnnualPayout }} <span style="font-size:11px">ج.م/سنة</span></div>
+            </div>
+            <div style="width:1px;height:36px;background:var(--rule)"></div>
+            <div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9px;text-transform:uppercase;color:var(--faint)">كوبونات السهم كاش</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#3F6B52;margin-top:3px">{{ calc.annualCash }} <span style="font-size:11px">ج.م/سنة</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Asset Return Comparison -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <span style="font-size:22px;line-height:1">⚖️</span>
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcCompareTitle }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+          <!-- EGX Card -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">البورصة المصرية (EGX30)</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--accTint);color:var(--accent);font-weight:600">تاريخي ~٢٨٪ سنوي</span>
+              </div>
+              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">أرباح رأسمالية وتوزيعات نقدية مدعومة بنمو إيرادات الشركات مع التضخم، مع تقلبات سعرية دورية.</p>
+            </div>
+            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
+              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.egx1Y }} ج.م</strong></div>
+              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3F6B52">{{ calc.egx3Y }} ج.م</strong></div>
+            </div>
+          </div>
+
+          <!-- Bank CD Card -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">شهادات الادخار البنكية</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface);color:var(--t2);border:1px solid var(--rule)">٢٣٫٥٪ - ٢٧٪ سنوي</span>
+              </div>
+              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">عائد نقدي شهري مضمون ومستقر تماماً، لكن أصل المبلغ الاسمي ثابت ويتعرض لتآكل القوة الشرائية.</p>
+            </div>
+            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
+              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.cd1Y }} ج.م</strong></div>
+              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.cd3Y }} ج.م</strong></div>
+            </div>
+          </div>
+
+          <!-- Gold Card -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink)">الذهب عيار ٢١</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface);color:var(--t2);border:1px solid var(--rule)">تحوط العملة والتضخم</span>
+              </div>
+              <p style="margin:0 0 14px;font-size:13px;color:var(--t2);line-height:1.6">أداة تحوط وحفظ قيمة ممتازة ضد انخفاض الجنيه والتضخم، لكن لا يولد أي عائد نقدي دوري أو كوبونات.</p>
+            </div>
+            <div style="padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--rule);display:flex;justify-content:space-between">
+              <div><span style="font-size:11px;color:var(--faint)">القيمة بعد سنة:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink)">{{ calc.gold1Y }} ج.م</strong></div>
+              <div><span style="font-size:11px;color:var(--faint)">بعد ٣ سنوات:</span> <strong style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#3F6B52">{{ calc.gold3Y }} ج.م</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Plain Language Valuation Guide -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+          <span style="font-size:22px;line-height:1">📖</span>
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.calcGuideTitle }}</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+          <div style="padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revPe }}</div>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPeBody }}</p>
+          </div>
+          <div style="padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revPb }}</div>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revPbBody }}</p>
+          </div>
+          <div style="padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revRoe }}</div>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revRoeBody }}</p>
+          </div>
+          <div style="padding:18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'Bricolage Grotesque',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px">{{ L.revCash }}</div>
+            <p style="margin:0;font-size:13px;color:var(--t2);line-height:1.6">{{ L.revCashBody }}</p>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding:12px 16px;border-radius:12px;background:var(--sunk);border:1px solid var(--rule);font-size:12px;color:var(--faint);line-height:1.6">
+          {{ L.calcDisclaimer }}
+        </div>
       </section>
     </div>
   </sc-if>
