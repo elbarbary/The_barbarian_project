@@ -719,6 +719,7 @@ export async function syncFromResend(env, ctx) {
         headers: {
           authorization: `Bearer ${key}`,
           accept: 'application/json',
+          'user-agent': 'ESTHMR/1.0',
         },
       });
       if (res.ok) {
@@ -738,7 +739,8 @@ export async function syncFromResend(env, ctx) {
           }
         }
       } else {
-        errors.push(`emails: HTTP ${res.status}`);
+        const body = await res.text().catch(() => '');
+        errors.push(`emails: HTTP ${res.status} - ${body}`);
       }
     } catch (err) {
       errors.push(`emails: ${err && err.message}`);
@@ -750,6 +752,7 @@ export async function syncFromResend(env, ctx) {
         headers: {
           authorization: `Bearer ${key}`,
           accept: 'application/json',
+          'user-agent': 'ESTHMR/1.0',
         },
       });
       if (audRes.ok) {
@@ -761,6 +764,7 @@ export async function syncFromResend(env, ctx) {
             headers: {
               authorization: `Bearer ${key}`,
               accept: 'application/json',
+              'user-agent': 'ESTHMR/1.0',
             },
           });
           if (cRes.ok) {
@@ -776,8 +780,14 @@ export async function syncFromResend(env, ctx) {
                 }
               }
             }
+          } else {
+            const cBody = await cRes.text().catch(() => '');
+            errors.push(`contacts(${aud.id}): HTTP ${cRes.status} - ${cBody}`);
           }
         }
+      } else {
+        const audBody = await audRes.text().catch(() => '');
+        errors.push(`audiences: HTTP ${audRes.status} - ${audBody}`);
       }
     } catch (err) {
       // Audiences optional
