@@ -182,10 +182,10 @@ test('the alarm body names no endpoint', () => {
   assert.match(body, /publish-live-data\.yml/);
 });
 
-/* `dueAt` is the one rule two schedulers read: this Worker's scheduled() and
-   scripts/clock_tick.mjs on the Mac, after Cloudflare turned out never to
-   invoke the Worker at all. Two copies of a trading calendar disagree on a DST
-   boundary and nobody finds out until a publish is missed. */
+/* `dueAt` is the rule a trading calendar gets silently wrong: a DST boundary, a
+   Friday, a slot no tick can land on. None of those announce themselves — they
+   show up as a publish that did not happen, days later. Tested here directly
+   against dates rather than only through a live tick. */
 test('a tick is snapped to the slot it belongs to', () => {
   const q = 15 * 60 * 1000;
   assert.equal(slotOf(utc('2026-09-06T09:30:00Z')) % q, 0);

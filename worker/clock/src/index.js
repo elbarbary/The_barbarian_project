@@ -342,11 +342,13 @@ export function slotOf(atMs) {
 
 /* Which jobs are due at an instant, and whether the watchdog runs with them.
  *
- * Exported because two schedulers now read it: this Worker's `scheduled()`
- * below, and `scripts/clock_tick.mjs` on the Mac. The rule for "what is due
- * now" has to be one piece of code — the moment it is two, they disagree on a
- * DST boundary or a trading day and nobody finds out until a publish is
- * missed.
+ * Split out of `scheduled()` and exported so the decision can be tested
+ * directly against a calendar rather than only through a live tick. It was
+ * written when a second scheduler briefly existed on the Mac, and the reason it
+ * stays after that was deleted is the same reason it was worth writing: this is
+ * the rule a trading calendar gets silently wrong — a DST boundary, a Friday, a
+ * slot no tick can land on — and none of those announce themselves. They show
+ * up as a publish that did not happen.
  */
 export function dueAt(atMs) {
   const c = cairo(new Date(slotOf(atMs)));
