@@ -719,6 +719,10 @@
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
   },
+  "رييس الوزراء يفتتح مصنع “ليجيالونج” للفرش باستثمارات 10 ملايين دولار": {
+    "meaning": "The commissioning of the facility deploys $10 million in foreign direct industrial capital, establishing domestic manufacturing capacity for mattresses and related furnishings.",
+    "meaning_ar": "يُمثل تشغيل المنشأة ضخاً لاستثمارات صناعية مباشرة بقيمة 10 ملايين دولار، مما يضيف خطوط إنتاج وتصنيع محلي في قطاع الفرش والمستلزمات المرتبطة به."
+  },
   "رييس الوزراء يوكد اهميه القطاع غير المصرفي ودور الرقابه الماليه في استقرار الاسواق": {
     "meaning": "The non-banking financial sector operates alternative financing and liquidity channels—such as capital markets, leasing, factoring, and consumer finance—while the Financial Regulatory Authority (FRA) enforces disclosure rules, compliance frameworks, and systemic risk controls across these activities.",
     "meaning_ar": "يوفر القطاع المالي غير المصرفي قنوات تمويل وسيولة بديلة تشمل سوق رأس المال والتأجير التمويلي والتخصيم والتمويل الاستهلاكي، بينما تتولى الهيئة العامة للرقابة المالية تطبيق أطر الامتثال ومعايير الإفصاح وضوابط إدارة المخاطر النظامية في هذه الأنشطة."
@@ -847,6 +851,10 @@
   "فشل انعقاد عموميه “الاهرام للطباعه” لعدم اكتمال النصاب القانوني بعد ازمه المزاد": {
     "meaning": "The lack of a legal quorum postpones the company's General Assembly, which suspends formal shareholder voting on agenda items and requires rescheduling the meeting pursuant to corporate governance regulations.",
     "meaning_ar": "يؤدي عدم اكتمال النصاب القانوني إلى تأجيل انعقاد الجمعية العامة للشركة، مما يعلق التصويت الرسمي للمساهمين على بنود جدول الأعمال ويتطلب إعادة الدعوة للانعقاد وفقاً للضوابط المنظمة."
+  },
+  "فولفو مصر تفتتح صاله العرض ومركز الخدمه الرييسي D5 وتطلق EX90 الكهرباييه": {
+    "meaning": "Opening an integrated showroom and service facility expands the brand's physical retail and after-sales maintenance infrastructure in the domestic market, while the rollout of the EX90 introduces a new battery electric vehicle into its commercial product portfolio.",
+    "meaning_ar": "يؤدي افتتاح صالة عرض ومركز خدمة متكامل إلى توسيع البنية التحتية لعمليات البيع وخدمات ما بعد البيع في السوق المحلي، بينما يضيف طرح طراز EX90 مركبة كهربائية بالكامل إلى المحفظة التجارية للعلامة."
   },
   "فيتش تبقي تصنيف قطر عند AA وترفع اسمها من قايمه المراقبه السلبيه": {
     "meaning": "A sovereign credit rating of AA reflects high creditworthiness and low default risk, while removing the issuer from the negative watch list stabilizes its credit outlook under the rating agency's assessment framework.",
@@ -1091,6 +1099,10 @@
   "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
     "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
     "meaning_ar": "يمثل خفض حيازة السندات الحكومية عملية إعادة توزيع للأصول الاستثمارية، حيث يقلص الصندوق السيادي نسبة انكشافه على أدوات الدين الحكومية المقومة بالدولار الأمريكي ضمن محفظة أدوات الدخل الثابت."
+  },
+  "“السيسي” يوكد اهميه دعم موسسات التمويل للاقتصادات الناشيه في مواجهه الصدمات": {
+    "meaning": "Multilateral development financing provides foreign currency liquidity and concessionary credit lines to emerging market central banks and governments during external trade and capital balance shocks.",
+    "meaning_ar": "يوفر التمويل التنموي متعدد الأطراف سيولة بالنقد الأجنبي وخطوط ائتمان ميسرة للبنوك المركزية والحكومات في الأسواق الناشئة أثناء صدمات موازين التجارة ورؤوس الأموال الخارجية."
   },
   "“العامه للاستثمار”: ايطاليا رابع اكبر مستثمر اجنبي في مصر ب23.4 مليار دولار": {
     "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
