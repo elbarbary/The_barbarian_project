@@ -1,3 +1,11 @@
+/* Components and their layouts. NO PALETTE.
+ *
+ * This file used to redeclare `--bg` and its neighbours three times over,
+ * each block overriding the last, so the colour a reader saw came from the
+ * third one and `design.css` — the file named for the palette — described a
+ * site that did not exist. Tokens live there now, including the mosaic and
+ * island tints and the radii this file still asks for by name.
+ */
 /* Esthmr's shared layer. Shared tokens and controls replace canvas chrome
    incrementally; legacy financial tables keep their existing data bindings. */
 :root {
@@ -9,7 +17,7 @@
 .feed-status, .watch-save-status { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:12px 18px; margin-block:12px; border-radius:22px; background:var(--surface); color:var(--t2); font-size:13px; border:1px solid var(--rule); }
 .feed-status button, .watch-save-status button { margin-inline-start:auto; border:1px solid var(--rule); border-radius:16px; background:var(--sunk); padding:8px 16px; min-height:44px; cursor:pointer; }
 .watch-save-status { width:fit-content; max-width:100%; }
-.watch-save-status[data-status="saved"]::before { content:'✓'; display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--up-bg); color:var(--up); font-weight:700; }
+.watch-save-status[data-status="saved"]::before { content:'✓'; display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--upTint); color:var(--up); font-weight:700; }
 .watch-save-status[data-status="error"] { border-style:dashed; }
 .loading-island-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:18px; padding-block:8px 24px; }
 .loading-island-grid > div { border:1px solid var(--rule); background:var(--surface); border-radius:34px; padding:26px; min-height:220px; overflow:hidden; }
@@ -26,22 +34,8 @@
   .loading-island-grid > div:first-child { grid-column:1 / -1; }
 }
 [dir="rtl"] { --font-heading: 'IBM Plex Sans Arabic','Bricolage Grotesque',sans-serif; }
-#app [data-theme="light"] {
-  --bg: #f3f0e8; --surface: #faf8f2; --ink: #202923;
-  --t2: #4d5850; --faint: #656b61; --accent: #a34423;
-  --glass: #faf8f2; --edge: #d9dbd0; --edgeIn: #e2e3d9;
-  --rule: #d9dbd0; --rule2: #e6e6dc; --sunk: #eeeee4;
-  --sh: none; --shLift: none; --shPill: none;
-  --wash1: transparent; --wash2: transparent;
-}
-#app [data-theme="dark"] {
-  --bg: #18201c; --surface: #202923; --ink: #f3f0e8;
-  --t2: #c2c9bd; --faint: #a9b4a5; --accent: #f4a07c;
-  --glass: #202923; --edge: #39463c; --edgeIn: #344037;
-  --rule: #39463c; --rule2: #303b33; --sunk: #29352d;
-  --sh: none; --shLift: none; --shPill: none;
-  --wash1: transparent; --wash2: transparent;
-}
+
+
 #app button, #app input { font: inherit; }
 #app button { color: inherit; }
 #app button:focus-visible, #app [role="button"]:focus-visible,
@@ -105,14 +99,42 @@
 #app [dir="rtl"] .om-scr :is([style*="IBM Plex Mono"]):not(svg *):not(.om-heat *) { letter-spacing: normal !important; }
 .account, body[data-signed="yes"] .account { position: absolute; top: 16px; }
 @media (max-width: 860px) {
-  #app .om-main { margin-inline-start: 0 !important; padding: 64px 16px 104px !important; }
+  #app .om-main {
+    margin-inline-start: 0 !important;
+    /* 64px of targets + 12px of the bar's own padding + the safe area + 24px
+       of breathing room. Derived from the bar rather than guessed at, so the
+       two cannot drift apart. */
+    padding: 64px 16px calc(100px + env(safe-area-inset-bottom)) !important;
+  }
+  /* The bottom bar. Edge to edge, sitting ON the bottom edge.
+   *
+   * A second rule further down used to float it 10px clear of all four sides
+   * with a 22px radius and a hard-coded blue shadow — on a warm palette, and
+   * after the shadows became `none`. Floating it also put the phone's own
+   * home indicator underneath a rounded corner. It is one rule now.
+   *
+   * 64px targets: the five destinations are the most-tapped controls on the
+   * site and were 60px with an 11px label. `env(safe-area-inset-bottom)` keeps
+   * the last row clear of the home indicator, and `--rail-clearance` below
+   * gives the page the SAME number to pad with, so the bar never covers the
+   * end of a screen. */
   #app .om-rail {
-    inset: auto 0 0 !important; width: 100% !important; padding: 8px 4px calc(8px + env(safe-area-inset-bottom)) !important;
+    inset: auto 0 0 !important; width: 100% !important;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom)) !important;
     border-top: 1px solid var(--rule) !important; background: var(--surface) !important;
+    border-radius: 0 !important; box-shadow: none !important;
     overflow: visible !important; display: block !important;
   }
   #app .journal-nav { display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0 !important; width: 100%; }
-  #app .journal-nav button { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 8px 2px; min-width: 0; min-height: 60px; font-size: 11px; }
+  #app .journal-nav button {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; padding: 8px 2px; min-width: 0; min-height: 64px;
+    font-size: 12px !important; line-height: 18px; border-radius: 12px;
+  }
+  /* The label is the target's name; it must not be clipped into an ellipsis
+     on a 375px screen, where five columns leave 75px each. */
+  #app .journal-nav button > span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #app .journal-nav svg { width: 22px; height: 22px; }
   .journal-toolbar { gap: 8px; padding-bottom: 16px; }
   .journal-wordmark { flex: 1; }
   .journal-toolbar .journal-search { order: 3; min-width: 0; width: 100%; }
@@ -195,9 +217,13 @@
 }
 
 /* Visual islands: retain index histories as the home page's focal point. */
-#app [data-theme="light"] { --bg:#edf1f6; --surface:#fcfdff; --glass:#fcfdff; --ink:#1e2d42; --t2:#4a5b73; --faint:#62718a; --sunk:#f0f4f9; --rule:#dce4ed; --edge:#e0e6ef; --edgeIn:#e7edf4; --sh:0 8px 28px -14px #253e6333; --shLift:0 14px 34px -14px #253e6344; }
-#app [data-theme="dark"] { --bg:#121c2a; --surface:#1d2a3d; --glass:#1d2a3d; --ink:#edf3fc; --t2:#bfcbdf; --faint:#a6b5cd; --sunk:#24344b; --rule:#344660; --edge:#30415a; --edgeIn:#2b3b52; --up:#79d9ad; --down:#ffa193; }
-#app .om-rail { inset-block:20px !important; inset-inline-start:16px !important; border-radius:26px !important; box-shadow:var(--sh); background:var(--surface) !important; }
+
+
+/* Desktop only. This carried no media query, so a phone got a rail inset
+   16px from the side and 20px from the top and bottom — which is what put
+   the bottom bar 20px clear of the screen edge and rounded its corners
+   over the home indicator, whatever the mobile block above said. */
+@media (min-width:861px) { #app .om-rail { inset-block:20px !important; inset-inline-start:16px !important; border-radius:26px !important; background:var(--surface) !important; } }
 .journal-toolbar { border:0; }
 .journal-wordmark > span { display:none; }
 .journal-intro { display:flex; align-items:baseline; justify-content:space-between; gap:8px 20px; flex-wrap:wrap; max-width:none; padding:0; }
@@ -246,7 +272,6 @@ body[data-signed="no"] .account { position:relative !important; inset:auto !impo
 @media (max-width:860px) {
   #app .om-main { padding-top:24px !important; }
   body[data-signed="yes"] #app .om-main { padding-top:64px !important; }
-  #app .om-rail { inset:auto 10px 10px !important; width:calc(100% - 20px) !important; border-radius:22px !important; box-shadow:0 4px 24px #12203826 !important; }
   .journal-intro h1 { width:100%; font-size:27px !important; }
   #app .om-idx { grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; }
   #app .om-idx > div { padding:18px !important; }
@@ -262,23 +287,10 @@ body[data-signed="no"] .account { position:relative !important; inset:auto !impo
 }
 
 /* A more tactile market dashboard. Colour carries data; motion acknowledges input. */
-#app [data-theme="light"] {
-  --radius-island:34px; --radius-control:20px;
-  --bg:#eef1f7; --accent:#a7431d; --faint:#586983;
-  --mosaic-up:#cfeddb; --mosaic-up-ink:#205d40;
-  --mosaic-down:#f7d8d1; --mosaic-down-ink:#8c3528;
-  --island-peach:#fff0e4; --island-mint:#e6f4ef;
-  --sh:0 12px 34px -22px #41577d48, inset 0 1px 0 #ffffffc9;
-}
-#app [data-theme="dark"] {
-  --radius-island:34px; --radius-control:20px;
-  --mosaic-up:#294d43; --mosaic-up-ink:#a1e8c4;
-  --mosaic-down:#593d42; --mosaic-down-ink:#ffc0b4;
-  --island-peach:#3a3030; --island-mint:#213b3c;
-  --sh:0 14px 34px -20px #0008, inset 0 1px 0 #ffffff0c;
-}
+
+
 #app .om-main { margin-inline-start:238px !important; padding-inline:28px !important; }
-#app .om-rail { width:204px !important; border-radius:32px !important; }
+@media (min-width:861px) { #app .om-rail { width:204px !important; border-radius:32px !important; } }
 #app .om-scr > section, #app .om-scr > div[style*="background:var(--surface)"],
 #app .om-idx > div, #app .island, #app .om-table, #app .om-search {
   border-radius:var(--radius-island) !important; box-shadow:var(--sh) !important;
@@ -406,7 +418,6 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 @media (max-width:1100px) { .island-board { grid-template-columns:1fr 1fr; } .island-move-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 @media (max-width:860px) {
   #app .om-main { margin-inline-start:0 !important; padding-inline:16px !important; }
-  #app .om-rail { width:calc(100% - 20px) !important; border-radius:28px !important; }
   .journal-intro h1 { font-size:30px !important; }
   .quick-paths { gap:8px; }
   .quick-paths > button { padding:12px; gap:8px; border-radius:22px; }
