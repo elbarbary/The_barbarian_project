@@ -347,6 +347,10 @@
     "meaning": "The initiative establishes a technical training framework between Australia and the Egyptian Mineral Resources Authority to transfer operational expertise in mining sciences and regulatory oversight.",
     "meaning_ar": "تؤسس المبادرة إطاراً للتدريب الفني بين أستراليا وهيئة الثروة المعدنية لنقل الخبرات التشغيلية في علوم التعدين وآليات الرقابة التنظيمية."
   },
+  "افتتاح 9 مشروعات في “السخنه الصناعيه” باستثمارات 85 مليون دولار": {
+    "meaning": "The commissioning of nine industrial projects adds new operating production lines and increases capital asset deployment within the Sokhna Industrial Zone.",
+    "meaning_ar": "يضيف تشغيل تسعة مشروعات خطوط إنتاج صناعية جديدة ويرفع من حجم الأصول الرأسمالية العاملة داخل المنطقة الصناعية بالسخنة."
+  },
   "افتتاح المرحله الاولي من مصنع “ديزايني دورز” للابواب الخشبيه ب12 مليون دولار": {
     "meaning": "The commissioning of the initial phase represents the deployment of $12 million in capital expenditure into domestic manufacturing, adding operational production capacity to the local building materials and wood processing supply chain.",
     "meaning_ar": "يمثل تشغيل المرحلة الأولى ضخ نفقات رأسمالية بقيمة 12 مليون دولار في التصنيع المحلي، مما يضيف طاقة إنتاجية تشغيلية إلى سلاسل إمداد مواد البناء والصناعات الخشبية."
@@ -726,6 +730,10 @@
   "تراجع مبيعات التجزيه بمنطقه اليورو 0.6% خلال يوليو مخالفه التوقعات": {
     "meaning": "Retail sales data measures consumer spending on final goods, and a 0.6% contraction reflects an active decline in household goods consumption and retail turnover across the Eurozone economy for the period.",
     "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي على السلع النهائية، ويشير انكماشها بنسبة 0.6% إلى تراجع فعلي في وتيرة استهلاك الأسر وحجم التداول التجاري داخل منطقة اليورو خلال تلك الفترة."
+  },
+  "ترامب يشعل حرب الرسوم مع كندا.. 50% علي واردات ب20 مليار دولار و«اوتاوا» ترد": {
+    "meaning": "Tariffs impose a direct border tax on imported cross-border goods, raising landed procurement costs for importers and triggering reciprocal trade barriers on corresponding export categories.",
+    "meaning_ar": "تفرض الرسوم الجمركية ضريبة مباشرة على السلع المستوردة عبر الحدود، مما يرفع تكلفة التوريد على المستوردين ويؤدي إلى تطبيق تدابير تجارية انتقامية مماثلة على قطاعات التصدير المتبادلة."
   },
   "ترامب يضغط لخفض الفايده ويهدد بوقف التجاره مع الدول التي لديها فوايض": {
     "meaning": "Lowering central bank interest rates alters sovereign borrowing costs and currency valuation dynamics, while restricting trade with surplus nations establishes cross-border tariff barriers and regulates bilateral import and export volumes.",
@@ -1363,6 +1371,10 @@
   "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
     "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
     "meaning_ar": "تتضمن المبادرة الإدارية المشتركة تبسيط إجراءات التراخيص الصناعية، وتقنين أوضاع الأراضي، وتنسيق ربط المرافق والخدمات للمنشآت القائمة في منطقتي جرزا وعرب أبوساعد."
+  },
+  "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
+    "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
+    "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
   },
   "ڤاليو تطلق رسميا اول مرحله من اعمالها في الاردن": {
     "meaning": "This operational rollout establishes cross-border geographic expansion, deploying the company's consumer finance technology platform and merchant partner network into the Jordanian market.",
