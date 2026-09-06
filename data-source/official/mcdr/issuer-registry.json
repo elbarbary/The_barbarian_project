@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-06T05:33:45.899906+00:00",
+  "fetchedAt": "2026-09-06T09:36:25.745839+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "b27569acbe839c53deba739407fad4398a04b58332ad77c1066fd8530e8da943",
+  "sourceSha256": "73ec7fe751faebd522af679906a04b977cbfc4a57da791872f8b2421ed62e11a",
   "issuers": [
     {
       "isin": "EGS01041C010",
@@ -15,6 +15,10 @@
     {
       "isin": "EGS02021C011",
       "issuerName": "Ismailia Misr Poultry Co."
+    },
+    {
+      "isin": "EGS02091C014",
+      "issuerName": "Mansoura Poultry"
     },
     {
       "isin": "EGS02211C018",
@@ -81,6 +85,10 @@
       "issuerName": "M.B for Engineering and Contracting"
     },
     {
+      "isin": "EGS23111C015",
+      "issuerName": "Al Nasr For Civil Works"
+    },
+    {
       "isin": "EGS23141C012",
       "issuerName": "Crestmark Contracting and Real Estate Development"
     },
@@ -107,6 +115,10 @@
     {
       "isin": "EGS30351C018",
       "issuerName": "East Delta Mills"
+    },
+    {
+      "isin": "EGS30361C017",
+      "issuerName": "North Cairo Flour Mills Company"
     },
     {
       "isin": "EGS30401C011",
@@ -169,8 +181,16 @@
       "issuerName": "Eastern Company For Tobacco"
     },
     {
+      "isin": "EGS370O1C013",
+      "issuerName": "National Printing Company"
+    },
+    {
       "isin": "EGS370W1C013",
       "issuerName": "Delta Co. For Printing and Packaging"
+    },
+    {
+      "isin": "EGS380G1C011",
+      "issuerName": "Minapharm Pharmaceutical"
     },
     {
       "isin": "EGS380P1C010",
@@ -189,12 +209,20 @@
       "issuerName": "Egyptian Chemical Industries \" KIMA \""
     },
     {
+      "isin": "EGS38211C016",
+      "issuerName": "Misr Chemical Industries Company"
+    },
+    {
       "isin": "EGS38321C013",
       "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
     },
     {
       "isin": "EGS38341C011",
       "issuerName": "Alexandria For Pharmaceuticals Chemical Industries"
+    },
+    {
+      "isin": "EGS38351C010",
+      "issuerName": "Mempheis Pharmaceutical And Chemical Industries"
     },
     {
       "isin": "EGS38381C017",
@@ -209,6 +237,10 @@
       "issuerName": "Kafr El Zayat Pesticides And Chemicals"
     },
     {
+      "isin": "EGS38421C011",
+      "issuerName": "Misr for Oil & Soap Company"
+    },
+    {
       "isin": "EGS385S1C012",
       "issuerName": "Ferchem masr Fertilizers and Chemicals"
     },
@@ -219,6 +251,10 @@
     {
       "isin": "EGS39022C016",
       "issuerName": "(ENPPI)"
+    },
+    {
+      "isin": "EGS39061C014",
+      "issuerName": "Misr Petroleum Company"
     },
     {
       "isin": "EGS3C001C012",
@@ -337,6 +373,10 @@
       "issuerName": "Damietta Container and Cargo Handling"
     },
     {
+      "isin": "EGS44012C010",
+      "issuerName": "Maridive and Oil Services Co. ( MARIDIVE )"
+    },
+    {
       "isin": "EGS44031C010",
       "issuerName": "Canal Shipping Agencies"
     },
@@ -369,8 +409,16 @@
       "issuerName": "Geos For Trading and Contracting"
     },
     {
+      "isin": "EGS52041C018",
+      "issuerName": "NORTH UPPER EGYPT FOR DEVELOPMENT & AGRiCULTURAL PRODUCTION"
+    },
+    {
       "isin": "EGS520D1C015",
       "issuerName": "International Company Fertilizer Chemicals"
+    },
+    {
+      "isin": "EGS53051C016",
+      "issuerName": "Egypt Free Shops co."
     },
     {
       "isin": "EGS540S1C014",
@@ -431,6 +479,14 @@
     {
       "isin": "EGS63031C016",
       "issuerName": "Delta Insurance Company"
+    },
+    {
+      "isin": "EGS63041C015",
+      "issuerName": "Mohandes Insurance Company"
+    },
+    {
+      "isin": "EGS632D1C010",
+      "issuerName": "Misr Life Insurance"
     },
     {
       "isin": "EGS65071C010",
@@ -557,6 +613,14 @@
       "issuerName": "E.F.G Holding"
     },
     {
+      "isin": "EGS69182C011",
+      "issuerName": "Naeem Holding for Investments"
+    },
+    {
+      "isin": "EGS69191C012",
+      "issuerName": "REACAP Financial Investment Co."
+    },
+    {
       "isin": "EGS691D1C018",
       "issuerName": "C I Capital Holding For Financial Investments"
     },
@@ -605,6 +669,10 @@
       "issuerName": "Hassan Hllam Investments & Venture Capital s a e"
     },
     {
+      "isin": "EGS70081C012",
+      "issuerName": "Misr Hotels Company"
+    },
+    {
       "isin": "EGS70311C013",
       "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
     },
@@ -617,6 +685,10 @@
       "issuerName": "Egyptian Resorts Company-ERC"
     },
     {
+      "isin": "EGS70P91C010",
+      "issuerName": "Marsa Marsa Alam For Development Tourism"
+    },
+    {
       "isin": "EGS70R91C016",
       "issuerName": "El Wadi for International & Investment Development"
     },
@@ -627,6 +699,10 @@
     {
       "isin": "EGS72201C014",
       "issuerName": "CAIRO FOR EDUCATIONAL Services"
+    },
+    {
+      "isin": "EGS729F1C012",
+      "issuerName": "The Egyptian Co. Modern Education System"
     },
     {
       "isin": "EGS729J1C018",
@@ -677,6 +753,18 @@
       "issuerName": "eDigits Consulting"
     },
     {
+      "isin": "EGS75011C014",
+      "issuerName": "MM GROUP FOR INDUSTRY AND INTERNATIONAL TRADE"
+    },
+    {
+      "isin": "EGS78021C010",
+      "issuerName": "Egyptian Media Production City Company"
+    },
+    {
+      "isin": "EGS79031C018",
+      "issuerName": "MISR TRAVEL"
+    },
+    {
       "isin": "EGS7AB21C014",
       "issuerName": "IMPERIAL FOR TOURISTIC CAMPS"
     },
@@ -723,11 +811,14 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 154,
-    "exactIsinsQueried": 160,
+    "matchedAtMcdr": 176,
+    "exactIsinsQueried": 185,
     "confirmedNotFoundAfterExactSearch": {
+      "NBCC": "EGS220N1C016",
       "AIDC": "EGS65R01C015",
+      "NFCI": "EGS5ACC1C014",
       "EGSA": "EGS48022C015",
+      "MMHC": "EGS651F1C014",
       "CCAPP": "EGS73541P048",
       "ASPI_r3": "EGS924G1C014",
       "LUTS_r1": "EGS924K1C018",
@@ -735,7 +826,6 @@
     },
     "transportErrors": {},
     "notYetIndividuallyQueried": {
-      "NBCC": "EGS220N1C016",
       "SAUD": "EGS60101C010",
       "SPIN": "EGS32041C013",
       "RREI": "EGS65011C016",
@@ -744,39 +834,16 @@
       "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
       "NMIN": "EGS14041C015",
-      "NFCI": "EGS5ACC1C014",
       "SWDY": "EGS3G0Z1C014",
       "SIEG": "EGS3C9X1C016",
       "PHAR": "EGS38081C013",
-      "MPRC": "EGS78021C010",
-      "MMHC": "EGS651F1C014",
       "OBRI": "EGS65551C011",
       "SPHT": "EGS70H02C014",
       "NIPH": "EGS38331C012",
       "UEGC": "EGS21531C016",
       "ZEOT": "EGS38251C012",
-      "MTIE": "EGS75011C014",
-      "MPCO": "EGS02091C014",
-      "MOIL": "EGS44012C010",
-      "MMAT": "EGS70P91C010",
-      "MPCI": "EGS38351C010",
       "WCDF": "EGS30421C019",
-      "MIPH": "EGS380G1C011",
-      "MICH": "EGS38211C016",
-      "MFSC": "EGS53051C016",
-      "MFPC": "EGS39061C014",
-      "MHOT": "EGS70081C012",
-      "MLIC": "EGS632D1C010",
-      "MOSC": "EGS38421C011",
-      "MITR": "EGS79031C018",
-      "MOIN": "EGS63041C015",
-      "NAHO": "EGS69182C011",
-      "NARE": "EGS69191C012",
-      "NCCW": "EGS23111C015",
       "NHPS": "EGS65131C012",
-      "NAPR": "EGS370O1C013",
-      "MILS": "EGS30361C017",
-      "NEDA": "EGS52041C018",
       "NINH": "EGS72011C017",
       "OFH": "EGS696S1C016",
       "OCAP": "EGS699Z1C014",
@@ -824,7 +891,6 @@
       "TANM": "EGS21EB1C011",
       "TAQA": "EGS490S1C014",
       "RMDA": "EGS381B1C015",
-      "MOED": "EGS729F1C012",
       "UBEE": "EGS600M1C017",
       "TRTO": "EGS79072C012",
       "TYCN": "EGS67331C016",

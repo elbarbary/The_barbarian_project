@@ -1728,5 +1728,265 @@
       }
     ],
     "fetchedAt": "2026-09-06T05:33:45.548425+00:00"
+  },
+  "EGS39061C014": {
+    "ticker": "MFPC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS39061C014",
+        "issuerName": "Misr Petroleum Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:36.517778+00:00"
+  },
+  "EGS53051C016": {
+    "ticker": "MFSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS53051C016",
+        "issuerName": "Egypt Free Shops co."
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:38.696118+00:00"
+  },
+  "EGS70081C012": {
+    "ticker": "MHOT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70081C012",
+        "issuerName": "Misr Hotels Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:40.857696+00:00"
+  },
+  "EGS38211C016": {
+    "ticker": "MICH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38211C016",
+        "issuerName": "Misr Chemical Industries Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:42.939614+00:00"
+  },
+  "EGS30361C017": {
+    "ticker": "MILS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30361C017",
+        "issuerName": "North Cairo Flour Mills Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:45.083345+00:00"
+  },
+  "EGS380G1C011": {
+    "ticker": "MIPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS380G1C011",
+        "issuerName": "Minapharm Pharmaceutical"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:47.259104+00:00"
+  },
+  "EGS79031C018": {
+    "ticker": "MITR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS79031C018",
+        "issuerName": "MISR TRAVEL"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:48.927786+00:00"
+  },
+  "EGS632D1C010": {
+    "ticker": "MLIC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS632D1C010",
+        "issuerName": "Misr Life Insurance"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:50.726757+00:00"
+  },
+  "EGS70P91C010": {
+    "ticker": "MMAT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70P91C010",
+        "issuerName": "Marsa Marsa Alam For Development Tourism"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:52.819607+00:00"
+  },
+  "EGS651F1C014": {
+    "ticker": "MMHC",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-06T09:35:54.911739+00:00"
+  },
+  "EGS729F1C012": {
+    "ticker": "MOED",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS729F1C012",
+        "issuerName": "The Egyptian Co. Modern Education System"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:57.062194+00:00"
+  },
+  "EGS44012C010": {
+    "ticker": "MOIL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS44012C010",
+        "issuerName": "Maridive and Oil Services Co. ( MARIDIVE )"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:35:59.146325+00:00"
+  },
+  "EGS63041C015": {
+    "ticker": "MOIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS63041C015",
+        "issuerName": "Mohandes Insurance Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:01.331031+00:00"
+  },
+  "EGS38421C011": {
+    "ticker": "MOSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38421C011",
+        "issuerName": "Misr for Oil & Soap Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:03.657693+00:00"
+  },
+  "EGS38351C010": {
+    "ticker": "MPCI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38351C010",
+        "issuerName": "Mempheis Pharmaceutical And Chemical Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:05.319801+00:00"
+  },
+  "EGS02091C014": {
+    "ticker": "MPCO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS02091C014",
+        "issuerName": "Mansoura Poultry"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:07.125098+00:00"
+  },
+  "EGS78021C010": {
+    "ticker": "MPRC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS78021C010",
+        "issuerName": "Egyptian Media Production City Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:08.818240+00:00"
+  },
+  "EGS75011C014": {
+    "ticker": "MTIE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS75011C014",
+        "issuerName": "MM GROUP FOR INDUSTRY AND INTERNATIONAL TRADE"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:10.902270+00:00"
+  },
+  "EGS69182C011": {
+    "ticker": "NAHO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69182C011",
+        "issuerName": "Naeem Holding for Investments"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:13.095391+00:00"
+  },
+  "EGS370O1C013": {
+    "ticker": "NAPR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS370O1C013",
+        "issuerName": "National Printing Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:15.212736+00:00"
+  },
+  "EGS69191C012": {
+    "ticker": "NARE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69191C012",
+        "issuerName": "REACAP Financial Investment Co."
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:16.890558+00:00"
+  },
+  "EGS220N1C016": {
+    "ticker": "NBCC",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-06T09:36:18.941781+00:00"
+  },
+  "EGS23111C015": {
+    "ticker": "NCCW",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS23111C015",
+        "issuerName": "Al Nasr For Civil Works"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:21.009538+00:00"
+  },
+  "EGS52041C018": {
+    "ticker": "NEDA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS52041C018",
+        "issuerName": "NORTH UPPER EGYPT FOR DEVELOPMENT & AGRiCULTURAL PRODUCTION"
+      }
+    ],
+    "fetchedAt": "2026-09-06T09:36:23.203795+00:00"
+  },
+  "EGS5ACC1C014": {
+    "ticker": "NFCI",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-06T09:36:25.393737+00:00"
   }
 }

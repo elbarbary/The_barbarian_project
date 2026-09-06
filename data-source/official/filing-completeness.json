@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-06T05:34:37.428354+00:00",
+  "builtAt": "2026-09-06T09:37:26.516900+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192024,
-    "withoutTickerInHeading": 36070,
-    "tickerNotInThisDirectory": 28859,
-    "attributedToAnIssuer": 127095,
+    "items": 192043,
+    "withoutTickerInHeading": 36073,
+    "tickerNotInThisDirectory": 28860,
+    "attributedToAnIssuer": 127110,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-03",
-        "items": 135,
-        "expected": 135,
+        "harvested": "2026-09-06",
+        "items": 154,
+        "expected": 154,
         "status": "complete"
       }
     ],
@@ -1841,7 +1841,10 @@
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
     "items": 562,
-    "failures": {}
+    "failures": {
+      "fra_news": "curl: (28) Operation timed out after 60001 milliseconds with 0 bytes received\n",
+      "companies_decrees": "curl: (56) Recv failure: Connection reset by peer\n"
+    }
   },
   "issuers": [
     {
@@ -1860,9 +1863,9 @@
     },
     {
       "ticker": "ABUK",
-      "egxFilingCount": 658,
-      "latestEgxFilingId": "294044",
-      "latestEgxFilingAt": "2026-08-30T12:38:26",
+      "egxFilingCount": 659,
+      "latestEgxFilingId": "294351",
+      "latestEgxFilingAt": "2026-09-06T10:29:17",
       "candidateIssuerWebsite": "https://www.abuqir.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile",
       "websiteStatus": {
@@ -2192,9 +2195,9 @@
     },
     {
       "ticker": "AMIA",
-      "egxFilingCount": 501,
-      "latestEgxFilingId": "294264",
-      "latestEgxFilingAt": "2026-09-02T11:53:52",
+      "egxFilingCount": 502,
+      "latestEgxFilingId": "294341",
+      "latestEgxFilingAt": "2026-09-06T09:49:59",
       "candidateIssuerWebsite": "https://www.amic-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
       "websiteStatus": null,
@@ -2520,9 +2523,9 @@
     },
     {
       "ticker": "CLHO",
-      "egxFilingCount": 653,
-      "latestEgxFilingId": "293697",
-      "latestEgxFilingAt": "2026-08-23T09:06:40",
+      "egxFilingCount": 657,
+      "latestEgxFilingId": "294354",
+      "latestEgxFilingAt": "2026-09-06T10:35:36",
       "candidateIssuerWebsite": "https://www.cleopatrahospitals.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CLHO/profile",
       "websiteStatus": null,
@@ -2640,9 +2643,9 @@
     },
     {
       "ticker": "DEIN",
-      "egxFilingCount": 593,
-      "latestEgxFilingId": "294261",
-      "latestEgxFilingAt": "2026-09-02T10:33:35",
+      "egxFilingCount": 597,
+      "latestEgxFilingId": "294344",
+      "latestEgxFilingAt": "2026-09-06T09:55:07",
       "candidateIssuerWebsite": "https://www.delta-ins.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
       "websiteStatus": null,
@@ -3068,9 +3071,9 @@
     },
     {
       "ticker": "EXPA",
-      "egxFilingCount": 787,
-      "latestEgxFilingId": "293824",
-      "latestEgxFilingAt": "2026-08-24T13:58:05",
+      "egxFilingCount": 788,
+      "latestEgxFilingId": "294331",
+      "latestEgxFilingAt": "2026-09-06T08:54:59",
       "candidateIssuerWebsite": "https://www.ebank.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EXPA/profile",
       "websiteStatus": null,
@@ -3118,9 +3121,9 @@
     },
     {
       "ticker": "FNAR",
-      "egxFilingCount": 400,
-      "latestEgxFilingId": "294090",
-      "latestEgxFilingAt": "2026-08-31T09:43:06",
+      "egxFilingCount": 401,
+      "latestEgxFilingId": "294337",
+      "latestEgxFilingAt": "2026-09-06T09:41:43",
       "candidateIssuerWebsite": "https://www.alfanar-eg.net/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/FNAR/profile",
       "websiteStatus": null,
@@ -3834,9 +3837,9 @@
     },
     {
       "ticker": "MOIN",
-      "egxFilingCount": 925,
-      "latestEgxFilingId": "293714",
-      "latestEgxFilingAt": "2026-08-23T09:46:39",
+      "egxFilingCount": 926,
+      "latestEgxFilingId": "294334",
+      "latestEgxFilingAt": "2026-09-06T09:23:46",
       "candidateIssuerWebsite": "https://www.mohins.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOIN/profile",
       "websiteStatus": null,
@@ -4606,9 +4609,9 @@
     },
     {
       "ticker": "TAQA",
-      "egxFilingCount": 137,
-      "latestEgxFilingId": "294015",
-      "latestEgxFilingAt": "2026-08-30T10:38:42",
+      "egxFilingCount": 139,
+      "latestEgxFilingId": "294345",
+      "latestEgxFilingAt": "2026-09-06T10:02:48",
       "candidateIssuerWebsite": "https://www.taqa.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/TAQA/profile",
       "websiteStatus": null,

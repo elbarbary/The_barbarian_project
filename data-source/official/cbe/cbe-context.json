@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "fetchedAt": "2026-09-06T05:32:46.960293+00:00",
+  "fetchedAt": "2026-09-06T09:35:33.156312+00:00",
   "sources": {
     "exchangeRates": "https://www.cbe.org.eg/en/economic-research/statistics/cbe-exchange-rates",
     "interbank": "https://www.cbe.org.eg/en/economic-research/statistics/daily-interbank-rates-and-volumes"
@@ -116,7 +116,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.19513000000000003
           },
           {
             "date": "06/09",
@@ -161,7 +161,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.19699999999999998
           },
           {
             "date": "06/09",
@@ -388,7 +388,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 17889.0
           },
           {
             "date": "06/09",
@@ -433,7 +433,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 2000.0
           },
           {
             "date": "06/09",
@@ -478,7 +478,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "06/09",
@@ -523,7 +523,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "06/09",
@@ -568,7 +568,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "06/09",
@@ -613,7 +613,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 0.0
           },
           {
             "date": "06/09",
@@ -658,7 +658,7 @@
           },
           {
             "date": "03/09",
-            "value": null
+            "value": 19889.0
           },
           {
             "date": "06/09",
