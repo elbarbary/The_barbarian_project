@@ -104,7 +104,7 @@
     /* 64px of targets + 12px of the bar's own padding + the safe area + 24px
        of breathing room. Derived from the bar rather than guessed at, so the
        two cannot drift apart. */
-    padding: 64px 16px calc(100px + env(safe-area-inset-bottom)) !important;
+    padding: 64px 16px calc(110px + env(safe-area-inset-bottom)) !important;
   }
   /* The bottom bar. Edge to edge, sitting ON the bottom edge.
    *
@@ -119,13 +119,25 @@
    * gives the page the SAME number to pad with, so the bar never covers the
    * end of a screen. */
   #app .om-rail {
-    inset: auto 0 0 !important; width: 100% !important;
-    padding: 6px 4px calc(6px + env(safe-area-inset-bottom)) !important;
-    border-top: 1px solid var(--rule) !important; background: var(--surface) !important;
-    border-radius: 24px 24px 0 0 !important; box-shadow: 0 -6px 24px rgba(25,44,60,.04) !important;
-    border-inline: 0 !important; border-bottom: 0 !important;
-    padding-inline: max(4px, env(safe-area-inset-left)) max(4px, env(safe-area-inset-right)) !important;
+    /* An island, clear of all four edges.
+       It was edge-to-edge and square-cornered, then edge-to-edge with two
+       rounded top corners. Floating is what it was originally and what it
+       reads as: a control that sits ON the page rather than a strip the page
+       ends at. The inline inset is `max(10px, safe-area)` so a landscape
+       notch pushes it clear rather than under. */
+    inset: auto max(10px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right)) !important;
+    width: auto !important;
+    padding: 6px 4px !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--rule) !important;
+    border-radius: 26px !important;
+    /* Enough shadow to lift it off the page underneath, on a warm palette
+       where a hard blue shadow looked like a bruise. */
+    box-shadow: 0 6px 24px rgba(25, 44, 60, .10), 0 1px 2px rgba(25, 44, 60, .05) !important;
     overflow: visible !important; display: block !important;
+    /* The bar is nudged by navbar.js while Safari's toolbar is moving, and a
+       transition would turn every correction into a visible slide. */
+    transition: none !important;
   }
   #app .journal-nav { display: grid !important; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 0 !important; width: 100%; }
   #app .journal-nav button {

@@ -36,6 +36,10 @@ function boot(overrides = {}) {
     openSignIn:()=>{},signOut:async()=>{}, location:{search:''},
     localStorage:{getItem:()=>null,setItem:()=>{}},
     window:{addEventListener:()=>{}},console:{warn:()=>{}},
+    // main.js pins the bottom bar to the visual viewport on boot. This
+    // harness strips imports and supplies them as globals, so a new
+    // import has to be named here or main.js throws before it mounts.
+    pinBottomBar:()=>()=>{},
   });
   return { c:component, identity, live, document, mounted:()=>mounted,
     async ready() {

@@ -6,6 +6,7 @@ import { whoami, openSignIn, signOut } from './auth.js';
 import * as watch from './watchlist.js';
 import { readRoute, connectNavigation } from './navigation.js';
 import { readResponse } from './requests.js';
+import { pinBottomBar } from './navbar.js';
 
 const root = document.getElementById('app');
 const component = new Component({ accent: 'var(--accent)' });
@@ -451,3 +452,7 @@ document.getElementById('signout').onclick = async () => {
     }
   });
 })();
+
+/* Keep the bottom bar on the bottom edge while iOS Safari's toolbar moves.
+   A no-op anywhere the visual and layout viewports agree. */
+pinBottomBar();
