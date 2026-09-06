@@ -58,6 +58,8 @@ export function explorer(component, companies, ar) {
     // the way in; the table lives only on the screen that shows all of it.
     rows:isVolume?volumeRows:sorted.map(row),
     compareLabel:ar?'قارن السوق':'Compare the market',
+    resultsLabel:ar?'اعرض جدول النتائج':'Show results table',
+    selectionLabel:primary.label+' · '+(st.rankAscending?(ar?'الأقل أولاً':'Lowest first'):(ar?'الأعلى أولاً':'Highest first'))+(secondary?' + '+secondary.label:''),
     rankColumns:active,
     columns:isVolume?[
       {label:ar?'الحجم النسبي':'Relative volume',unit:'×'}, {label:ar?'حجم الجلسة':'Session volume',unit:ar?'أسهم':'shares'},

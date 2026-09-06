@@ -86,6 +86,18 @@ test('§8 the Home ranking panel renders controls and a launcher, never a ranked
   assert.ok(!panel.includes('explorer-table'),'a table of ranked companies is back on Home');
   assert.ok(!panel.includes('columnheader">#'),'a rank column is back on Home');
   assert.ok(!panel.includes('explorer.preview')&&!panel.includes('explorer.rows'),'Home is drawing ranked rows');
-  assert.ok(panel.includes('{{ explorer.compareLabel }}'),'the way into the full table is missing');
+  assert.ok(panel.includes('{{ explorer.resultsLabel }}'),'the explicit results action is missing');
+  assert.match(panel, /<button[^>]*class="results-button"[^>]*onClick="{{ explorer.open }}"/, 'results must be a working keyboard-accessible button');
   assert.ok(panel.includes('{{ explorer.metrics }}'),'the measure controls should stay');
+});
+
+test('four market measures stay visible without expanding Home details',async()=>{
+  const {readFile}=await import('node:fs/promises');
+  const html=await readFile(new URL('../../public/esthmr/template.html',import.meta.url),'utf8');
+  const measures=html.indexOf('class="market-measures"');
+  const details=html.indexOf('<sc-if value="{{ showHomeDetails }}">');
+  assert.ok(measures>0 && measures<details);
+  assert.ok(html.slice(measures,details).includes('list="{{ screen.tests }}"'));
+  const home=html.slice(0,details);
+  for(const field of ['p.buy','p.sell','p.buyW','p.sellW']) assert.ok(home.includes('{{ '+field+' }}'),field);
 });

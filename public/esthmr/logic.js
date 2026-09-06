@@ -2187,8 +2187,8 @@ export class Component extends Base {
           // against the other. A bar drawn to a shared maximum would say the
           // larger side was the market, which it is not — every pound bought
           // is a pound sold.
-          buyW: Math.max(1.5, p.buyPercent || 0).toFixed(2) + '%',
-          sellW: Math.max(1.5, p.sellPercent || 0).toFixed(2) + '%',
+          buyW: Math.max(0, Math.min(100, p.buyPercent || 0)).toFixed(2) + '%',
+          sellW: Math.max(0, Math.min(100, p.sellPercent || 0)).toFixed(2) + '%',
           hasSides: typeof p.buy === 'number' || typeof p.sell === 'number',
           // Net against the widest net on the row, so the three are comparable
           // at a glance and a net buyer reads differently from a net seller.
@@ -2201,7 +2201,8 @@ export class Component extends Base {
         bands: d.bands.map((b) => ({
           label: ar ? b.labelAr : b.label,
           net: this.signed(b.net / 1e6, 1), netColor: this.dcol(b.net),
-          cells: b.cells.map((c) => ({
+          cells: b.cells.map((c, i) => ({
+            party: d.parties[i] ? partyName(d.parties[i]) : '',
             net: this.signed(typeof c.net === 'number' ? c.net / 1e6 : null, 1),
             color: this.dcol(c.net),
             buy: money(c.buy), sell: money(c.sell),
@@ -3146,6 +3147,11 @@ export class Component extends Base {
         error: ar ? 'التغييرات على هذا الجهاز فقط؛ لم تُحفظ في الحساب.' : 'Changes are on this device only; account save failed.' })[st.watchStatus] || '',
       retryWatch: () => this.onRetryWatch && this.onRetryWatch(),
       explorer: marketExplorer,
+      comparisonNotesLabel: ar ? 'ملاحظات المقارنة' : 'Comparison notes',
+      buyingLabel: ar ? 'شراء' : 'Buying', sellingLabel: ar ? 'بيع' : 'Selling',
+      exchangeIntro: ar ? 'المؤشرات والعملات والسلع — الأرقام وسياقها في مكان واحد.' : 'Indices, currencies and commodities—the numbers and their context, together.',
+      dotsIntro: ar ? 'تتبّع الأخبار والإفصاحات وحركة التداول حول الشركة، ثم افتح المستندات الأصلية.' : 'Follow the news, filings and trading activity around a company, then open the original evidence.',
+      dotsSteps: ar ? ['١ · اختر شركة','٢ · اتبع التسلسل الزمني','٣ · اقرأ المصادر'] : ['1 · Choose a company','2 · Follow the timeline','3 · Read the sources'],
       marketVisibleCount: marketExplorer.isExplorer ? marketExplorer.count : rows.length,
       insightBusy: busy.slice(0, 4),
       insightBusyNote: ar ? 'حجم الجلسة ÷ الحجم المعتاد · مقياس للنشاط فقط' : 'Session volume ÷ usual volume · activity measure only',

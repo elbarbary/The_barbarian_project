@@ -11,7 +11,7 @@
   font: 400 13.5px/1.5 "IBM Plex Sans", system-ui, sans-serif;
 }
 .gate p { margin: 0; max-width: 74ch; }
-.gate strong { color: #FF8340; font-weight: 600; }
+.gate strong { color: #86CFD2; font-weight: 600; }
 /* The way in, and the way out. 44px, because they are what a thumb is
    reaching for and they were 135x29 — comfortably under the 44x44 a finger
    needs, on the two controls that decide whether a reader sees real data. */
@@ -19,9 +19,9 @@
   font: 500 14px/1 "IBM Plex Sans", system-ui, sans-serif;
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer;
-  background: #E8621C; color: #1B1917; border: 0;
+  background: #126B75; color: #fff; border: 0;
 }
-.gate-cta:hover { background: #FF8340; }
+.gate-cta:hover { background: #105963; }
 
 /* The banner is hidden HERE, not by main.js setting `bar.hidden = true`.
    `hidden` is only a user-agent rule — `[hidden] { display: none }` — and any

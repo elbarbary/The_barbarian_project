@@ -338,7 +338,44 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 .volume-preview-row strong { padding:6px 10px; background:var(--sunk); color:var(--accent); border-radius:10px; font-size:20px; }
 .volume-preview-row > span:nth-child(3) { font-size:12px; }
 .volume-preview-row:hover, .explorer-table [role="row"]:hover { background:var(--sunk); }
-.ranking-panel { min-width:0; padding:24px; background:var(--surface); border:1px solid var(--edgeIn); border-radius:26px; }
+.ranking-panel { min-width:0; padding:24px; background:var(--surface); border:1px solid var(--edgeIn); border-radius:32px; }
+.ranking-launch { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-top:24px; padding-top:20px; border-top:1px solid var(--rule); }
+.ranking-launch > span { font-size:15px; font-weight:600; }
+.ranking-launch small { display:block; font-size:12px; font-weight:400; color:var(--faint); margin-top:6px; }
+#app .results-button { display:flex; align-items:center; justify-content:center; gap:24px; min-height:52px; padding:12px 24px; border:0; border-radius:18px; background:var(--accent); color:var(--surface); font-weight:600; cursor:pointer; }
+.ranking-notes { margin-top:16px; color:var(--faint); font-size:12px; }
+.ranking-notes summary { cursor:pointer; padding:8px 0; }
+.investor-party { padding-bottom:16px; border-bottom:1px solid var(--rule); }
+.investor-party .investor-summary-row { border:0; }
+.trade-side { display:grid; grid-template-columns:52px minmax(40px,1fr) 90px; align-items:center; gap:12px; margin-top:8px; font-size:12px; }
+.trade-side > div { height:8px; background:var(--sunk); border-radius:8px; overflow:hidden; }
+.trade-side i { display:block; height:100%; border-radius:8px; }
+.trade-side b { text-align:end; font-variant-numeric:tabular-nums; }
+.trade-shares { display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:8px; font-size:11px; color:var(--faint); }
+#app .market-measures { border-radius:32px !important; padding:24px !important; margin-top:0 !important; }
+.market-measures > div:first-child > div:first-child { font:600 24px var(--font-heading) !important; }
+.context-intro { order:1; padding:16px 24px; border-radius:28px; background:var(--accTint); }
+.context-intro p { margin:0; font-size:15px; line-height:1.7; max-width:75ch; }
+.screen-crossings > :not(:first-child), .screen-exchange > :not(:first-child) { order:2; }
+.screen-crossings > div:nth-child(2), .screen-exchange > div:nth-child(2) { order:0; }
+.evidence-path { display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+.evidence-path span { padding:8px 16px; background:var(--surface); border-radius:16px; font-size:12px; }
+#app .om-dots-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,350px),1fr)) !important; gap:24px !important; }
+#app .om-dots-grid article { border-radius:32px !important; }
+#app .exchange-rates { grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:16px !important; }
+#app .exchange-rates > div { border-radius:28px !important; padding:24px !important; }
+#app .exchange-rates svg { height:76px; width:100%; }
+#app .screen-exchange > section { border-radius:32px !important; }
+@media (max-width:860px) {
+  #app .exchange-rates { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  #app .exchange-rates > div { padding:16px !important; }
+  .ranking-launch > *, #app .results-button { width:100%; }
+  .context-intro { padding:16px; }
+  .evidence-path { gap:8px; }
+  .evidence-path span { padding:8px 12px; }
+  #app .screen-exchange > section > div { grid-template-columns:1fr 1fr !important; gap:12px !important; }
+  #app .screen-exchange > section > div > div:last-child { grid-column:1 / -1; }
+}
 .ranking-panel h2 { font:600 clamp(21px,2.3vw,28px)/1.3 var(--font-heading); margin:0; letter-spacing:-.025em; }
 .ranking-controls { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:20px; }
 .ranking-controls button { min-height:44px; border:1px solid var(--rule); border-radius:12px; padding:8px 14px; background:transparent; cursor:pointer; font-size:13px !important; }
@@ -363,6 +400,15 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 .investor-detail-cell b { color:var(--ink); font-size:13px; font-weight:500; white-space:nowrap; }
 .investor-breakdown > div:nth-child(2) { overflow-x:auto; }
 .investor-breakdown > div:nth-child(2) > div { min-width:660px; }
+.investor-cell-title { display:none; }
+.investor-detail-cell .trade-buy b { color:var(--up); }
+.investor-detail-cell .trade-sell b { color:var(--down); }
+@media (max-width:700px) {
+  .investor-breakdown > div:nth-child(2) > div:first-child { display:none !important; }
+  .investor-breakdown > div:nth-child(2) > div { min-width:0; grid-template-columns:1fr !important; gap:12px !important; }
+  .investor-detail-cell { background:var(--sunk); padding:16px; border-radius:18px; }
+  .investor-cell-title { display:block; color:var(--ink); font-size:14px; margin-bottom:4px; }
+}
 @media (max-width:650px) {
   .ranking-panel { padding:18px 14px; }
   .investor-summary-grid { grid-template-columns:1fr; gap:14px; }
