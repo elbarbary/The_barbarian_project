@@ -1119,3 +1119,70 @@ test('a wrong token is still refused, and a right one still works', async () => 
   assert.equal(ok.status, 200);
   assert.equal(ok.headers.get('cache-control'), 'no-store');
 });
+
+/* Ejecting a reader, which was impossible until 6 Sep 2026.
+ *
+ * A session here is a stateless HMAC token: the server never stored it, so
+ * deleting an account does not end its access — the cookie works for the rest
+ * of its thirty days. The only instrument was rotating SESSION_SECRET, which
+ * ends every session; signing out 104 readers to eject one automated sign-up
+ * is not proportionate. */
+test('deleting an account also ends the session it is holding', async () => {
+  const { forgetBlocked } = await import('../index.js');
+  const e = env({ STATUS_TOKEN: 'admin-token' });
+  await e.ESTHMR_AUTH.put('users:all', JSON.stringify(['reader@example.com', 'bot@uberip.com']));
+  await e.ESTHMR_AUTH.put('user:bot@uberip.com', JSON.stringify({ email: 'bot@uberip.com' }));
+  const cookie = { cookie: `esthmr_session=${await token('bot@uberip.com')}` };
+  forgetBlocked();
+
+  // Before: a valid signature, and the gate opens.
+  assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers: cookie })).status, 200);
+
+  const gone = await call(e, 'https://esthmr.com/esthmr/api/auth/users?email=bot@uberip.com',
+    { method: 'DELETE', headers: { authorization: 'Bearer admin-token' } });
+  assert.equal(gone.status, 200);
+  assert.deepEqual(await gone.json(), { removed: 'bot@uberip.com', blocked: true });
+
+  // After: the SAME cookie, the same valid signature, and no longer a reader.
+  assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers: cookie })).status, 401,
+    'a deleted account kept its session');
+  // And the gated data is shut to it too, not just /auth/me.
+  assert.equal((await call(e, 'https://thebarbarianproject.com/data/v1/companies.json',
+    { headers: cookie })).status, 401);
+  // Off the list as well.
+  const list = await call(e, 'https://esthmr.com/esthmr/api/auth/users',
+    { headers: { authorization: 'Bearer admin-token' } });
+  assert.deepEqual((await list.json()).users, ['reader@example.com']);
+});
+
+test('ejecting one reader does not sign out the others', async () => {
+  // The whole point of not rotating SESSION_SECRET.
+  const { forgetBlocked } = await import('../index.js');
+  const e = env({ STATUS_TOKEN: 'admin-token' });
+  await e.ESTHMR_AUTH.put('users:all', JSON.stringify(['keeper@example.com', 'bot@uberip.com']));
+  forgetBlocked();
+  await call(e, 'https://esthmr.com/esthmr/api/auth/users?email=bot@uberip.com',
+    { method: 'DELETE', headers: { authorization: 'Bearer admin-token' } });
+  const keeper = { cookie: `esthmr_session=${await token('keeper@example.com')}` };
+  assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers: keeper })).status, 200);
+});
+
+test('a blocked address cannot simply sign up again', async () => {
+  const { forgetBlocked } = await import('../index.js');
+  const e = env({ STATUS_TOKEN: 'admin-token' });
+  await e.ESTHMR_AUTH.put('users:blocked', JSON.stringify(['bot@example.com']));
+  forgetBlocked();
+  // Even a freshly minted, perfectly valid token for that address is refused.
+  const fresh = { cookie: `esthmr_session=${await token('bot@example.com')}` };
+  assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers: fresh })).status, 401);
+});
+
+test('a storage failure on the blocklist does not sign the site out', async () => {
+  const { forgetBlocked } = await import('../index.js');
+  const e = env();
+  forgetBlocked();
+  e.ESTHMR_AUTH.get = async () => { throw new Error('kv down'); };
+  const headers = { cookie: `esthmr_session=${await token('reader@example.com')}` };
+  assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers })).status, 200,
+    'a KV wobble signed every reader out');
+});

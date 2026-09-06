@@ -158,6 +158,44 @@ function cookieValue(request, name) {
   return null;
 }
 
+/* Readers who have been ejected, and why this needs a cache.
+ *
+ * A session here is a stateless HMAC token carrying an address and an expiry,
+ * so nothing on the server knows it exists and deleting an account does NOT
+ * end its access — the cookie keeps working for the rest of its thirty days.
+ * Until now the only way to end one session was to rotate `SESSION_SECRET`,
+ * which ends EVERY session: on 6 Sep 2026 that meant signing out 104 readers
+ * to eject one automated sign-up. That is not a proportionate instrument.
+ *
+ * So a small blocklist, read from KV and held in the isolate for a minute.
+ * Per-request KV reads are what the data gate was moved OFF (a signed-in page
+ * load is 33 documents, and the free plan allows 1,000 writes a day), so this
+ * is one read per isolate per minute rather than one per request. A minute is
+ * the longest an ejected reader keeps working, which is the right trade
+ * against making every page load pay for a list that is almost always empty.
+ */
+const BLOCKED_KEY = 'users:blocked';
+const BLOCKED_TTL = 60000;
+let blockedCache = { at: 0, set: null };
+
+export async function blockedReaders(env) {
+  const now = Date.now();
+  if (blockedCache.set && now - blockedCache.at < BLOCKED_TTL) return blockedCache.set;
+  try {
+    const held = await env.ESTHMR_AUTH.get(BLOCKED_KEY, 'json');
+    const set = new Set(Array.isArray(held) ? held.map((e) => String(e).toLowerCase()) : []);
+    blockedCache = { at: now, set };
+    return set;
+  } catch {
+    // A storage wobble must not sign the whole site out. The blocklist is a
+    // deny of last resort, not the gate; the gate is the signature above.
+    return blockedCache.set || new Set();
+  }
+}
+
+/** For tests, and for a deploy that must not serve a minute of stale denials. */
+export function forgetBlocked() { blockedCache = { at: 0, set: null }; }
+
 async function session(request, env) {
   if (!env.SESSION_SECRET) return null;
   // A browser carries the session in an httpOnly cookie it cannot read. A
@@ -165,11 +203,16 @@ async function session(request, env) {
   // token and presents it as a bearer. Same token, same signature, same
   // expiry — only the envelope differs.
   const header = request.headers.get('authorization') || '';
+  let who = null;
   if (header.startsWith('Bearer ')) {
-    const who = await unsign(header.slice(7).trim(), env.SESSION_SECRET);
-    if (who) return who;
+    who = await unsign(header.slice(7).trim(), env.SESSION_SECRET);
   }
-  return unsign(cookieValue(request, COOKIE), env.SESSION_SECRET);
+  if (!who) who = await unsign(cookieValue(request, COOKIE), env.SESSION_SECRET);
+  if (!who) return null;
+  // A valid signature is not the same as a welcome reader.
+  const blocked = await blockedReaders(env);
+  if (blocked.has(String(who.e || '').toLowerCase())) return null;
+  return who;
 }
 
 /** The platform's own limiter, where there is one. Returns true when over.
@@ -1192,9 +1235,46 @@ async function api(request, env, url, ctx) {
   }
 
   if (path === '/auth/users') {
-    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
+    // GET reads the list, DELETE ejects one reader. Nothing else: the guard
+    // stays a closed set rather than becoming "not POST".
+    if (request.method !== 'GET' && request.method !== 'DELETE') {
+      return json({ error: 'method' }, 405, { allow: 'GET, DELETE' });
+    }
     const refused = await admin(request, env, url, ip);
     if (refused) return refused;
+
+    /* DELETE ejects a reader: off the list, and off the site.
+     *
+     * Deleting the record alone would not end their access — the session is a
+     * signed token the server never stored, so it keeps working until it
+     * expires. Both halves happen here, and the blocklist is the half that
+     * bites: the address is refused at `session()` even holding a valid
+     * cookie, which is what makes this different from tidying a list.
+     *
+     * The address stays on the blocklist after the record is gone. That is
+     * deliberate — a throwaway address that has been ejected once should not
+     * be able to sign up again and be handed a fresh token.
+     */
+    if (request.method === 'DELETE') {
+      const target = normalise(url.searchParams.get('email') || '');
+      if (!EMAIL.test(target)) return json({ error: 'email' }, 400);
+      try {
+        await env.ESTHMR_AUTH.delete(`user:${target}`);
+        const held = await env.ESTHMR_AUTH.get('users:all', 'json');
+        const users = (Array.isArray(held) ? held : []).filter((e) => normalise(e) !== target);
+        await env.ESTHMR_AUTH.put('users:all', JSON.stringify(users));
+        const blocked = await env.ESTHMR_AUTH.get(BLOCKED_KEY, 'json');
+        const list = Array.isArray(blocked) ? blocked : [];
+        if (!list.some((e) => normalise(e) === target)) list.push(target);
+        await env.ESTHMR_AUTH.put(BLOCKED_KEY, JSON.stringify(list));
+      } catch (error) {
+        return json({ error: 'could not remove the account' }, 503,
+          { 'cache-control': 'no-store' });
+      }
+      forgetBlocked();          // this isolate stops honouring them at once
+      return json({ removed: target, blocked: true }, 200, { 'cache-control': 'no-store' });
+    }
+
     const targetEmail = normalise(url.searchParams.get('email') || '');
     if (targetEmail) {
       const user = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get(`user:${targetEmail}`, 'json') : null;
