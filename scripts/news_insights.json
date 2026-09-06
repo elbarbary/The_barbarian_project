@@ -203,6 +203,10 @@
     "meaning": "The General Petroleum Company (GPC) adds 12 new oil and gas discoveries to its exploration portfolio during the 2025/2026 fiscal year, expanding its proven hydrocarbon asset base and operational drilling footprint.",
     "meaning_ar": "تضيف الشركة العامة للبترول 12 كشفاً جديداً للنفط والغاز إلى محفظتها الاستكشافية خلال العام المالي 2025/2026، مما يوسع قاعدة أصولها الهيدروكربونية المؤكدة ونطاق عمليات الحفر التابعة لها."
   },
+  "«كالتف» لدعم الابتكار تخطط لجمع 10 ملايين دولار لصندوقها الثاني «Tectonic Ventures»": {
+    "meaning": "Capital raising for a venture fund expands the firm's assets under management and establishes a dedicated liquidity pool for direct equity allocations in target startups.",
+    "meaning_ar": "تتمثل هذه الخطوة في تجميع سيولة نقدية جديدة ضمن صندوق استثمار رأس مال المخاطر لتوسيع حجم الأصول المدارة والمخصصة لتمويل حصص الملكية في الشركات الناشئة المستهدفة."
+  },
   "«لي فارما» الهنديه تدرس انشاء مصنع للخامات الدواييه في مصر": {
     "meaning": "Establishing an active pharmaceutical ingredient (API) facility represents an upstream integration in the domestic drug manufacturing supply chain, transitioning component sourcing from direct importation to local chemical synthesis.",
     "meaning_ar": "يمثل إنشاء مصنع للمواد الخام الدوائية تكاملاً رأسياً في سلاسل إمداد تصنيع الدواء محلياً، حيث يحول توفير المكونات الفعالة من الاستيراد المباشر إلى مسار التصنيع والإنتاج المحلي."
@@ -210,6 +214,10 @@
   "«لينج لونج» تدشن مجمعا صناعيا متكاملا لانتاج اطارات السيارات باستثمارات 2 مليار دولار": {
     "meaning": "A direct capital deployment of $2 billion to establish a dedicated tire manufacturing complex introduces large-scale domestic production capacity to Egypt's automotive supply chain.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة ملياري دولار لإنشاء مجمع صناعي لإطارات السيارات إضافة لطاقات إنتاجية محلية واسعة النطاق داخل سلاسل إمداد قطاع السيارات في مصر."
+  },
+  "«ميديكس» لحلول معالجه المياه تستهدف 130 مليون جنيه مبيعات": {
+    "meaning": "Setting a sales target of EGP 130 million establishes the operational contracting volume and procurement capacity for Medex's water treatment systems and services.",
+    "meaning_ar": "يحدد استهداف مبيعات بقيمة 130 مليون جنيه حجم التعاقدات التشغيلية والقدرة التوريدية لشركة ميديكس في قطاع أنظمة ومعالجة المياه."
   },
   "«ميناء سفاجا» يستقبل 30 الف طن الومنيوم قادمه من اندونيسيا": {
     "meaning": "The arrival of 30,000 tons of imported aluminum at Safaga Port supplies the domestic industrial and metallurgical manufacturing sector with raw material inventory through maritime freight channels.",
@@ -999,6 +1007,10 @@
     "meaning": "Long-term environmental planning for national afforestation structures municipal and state infrastructure expenditures, establishing multi-year procurement frameworks for agricultural nurseries, irrigation systems, and landscape contracting services.",
     "meaning_ar": "يحدد التخطيط البيئي طويل المدى لملف التشجير أطر الإنفاق الحكومي والمحلي على البنية التحتية، من خلال وضع جداول توريد وتوريدات تعاقدية متعددة السنوات للمشاتل الزراعية وشبكات الري وشركات الصيانة والتنسيق."
   },
+  "ساروج كومار جها يكتب: 28% من موازنات المياه لا تنفق.. اين تتعطل الاستثمارات؟": {
+    "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
+    "meaning_ar": "يعكس عدم إنفاق 28% من مخصصات قطاع المياه ضعف معدلات استغلال الإنفاق الرأسمالي المتاح، وذلك نتيجة معوقات إجرائية وإدارية في ترسية وتنفيذ مشروعات البنية التحتية."
+  },
   "سعر الدينار الكويتي اليوم الاحد 6-9-2026 بدايه التعاملات": {
     "meaning": "Opening foreign exchange quotations set the benchmark conversion rates for the Kuwaiti Dinar across Egyptian commercial banks, governing the immediate clearing of bilateral trade invoices and cross-border remittances.",
     "meaning_ar": "يحدد نشر أسعار صرف العملات الأجنبية في بداية التعاملات السعر المرجعي لتحويل الدينار الكويتي بالبنوك المصرية، وتُنفذ بناءً عليه عمليات المقاصة الفورية للتحويلات النقدية وتسوية المعاملات التجارية المشتركة."
@@ -1387,6 +1399,10 @@
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
+  },
+  "هل فقد وادي السيليكون ثقه الجمهور في الذكاء الاصطناعي؟": {
+    "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
+    "meaning_ar": "يؤدي التدقيق العام في ممارسات قطاع التكنولوجيا إلى تعديل معدلات تبني المستهلكين للمنتجات وإعادة تقييم تخصيص رؤوس الأموال الموجهة لأبحاث وبنية الذكاء الاصطناعي التحتية."
   },
   "هيوماين السعوديه تبدا خطوات طرح اسهمها للاكتتاب العام": {
     "meaning": "An initial public offering (IPO) process involves listing a company's shares on a public exchange to raise equity capital from institutional and retail investors, transitioning the firm from private ownership to a publicly traded entity subject to regulatory disclosure requirements.",
