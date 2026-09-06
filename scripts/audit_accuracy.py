@@ -121,11 +121,25 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
                   **({"rate": rate} if rate else {}))
 
     pe, eps = row.get("pe"), row.get("eps")
+    # `close` here is `market.json`'s, which moves through the session; the
+    # multiple is derived once when this directory is rebuilt. Dividing one by
+    # the other compares two different moments and calls the gap a
+    # contradiction — on 6 Sep 2026 that failed every build from mid-session,
+    # with SIPC's 133.75 (off a close of 5.35) read against 6.30 after a 20%
+    # move. The memory of `share_count_agrees` is the same lesson: an internal
+    # consistency test stops being one the moment it reaches across sources.
+    #
+    # So it is checked against `pe_close`, the price the ratio was actually
+    # divided from, which `build_market_api` now publishes beside it. Where
+    # that is absent — a directory written before this — there is nothing to
+    # check against and nothing is claimed, rather than a fault invented from
+    # a price the ratio never saw.
+    basis = row.get("pe_close")
     if isinstance(pe, (int, float)) and isinstance(eps, (int, float)) and eps != 0 \
-            and isinstance(close, (int, float)):
-        if not near(pe, close / eps):
+            and isinstance(basis, (int, float)):
+        if not near(pe, basis / eps):
             fault("pe_vs_eps", "the multiple does not divide out against the EPS beside it",
-                  pe=pe, eps=eps, close=close, implied=round(close / eps, 2))
+                  pe=pe, eps=eps, close=basis, implied=round(basis / eps, 2))
 
     if doc:
         if doc.get("sector") and row.get("sector") and doc["sector"] != row["sector"]:

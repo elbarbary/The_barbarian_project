@@ -62,6 +62,12 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # 15 minutes. The longest successful run on record is 4.2;
+    # runs every 15 minutes and holds a concurrency group, so a wedge here delays news rather than one build.
+    # No workflow here had a ceiling until 6 Sep 2026, when a stalled
+    # exchange held publish-app-data for 71 minutes on its way to
+    # GitHub's six-hour default.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 

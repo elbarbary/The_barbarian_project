@@ -905,6 +905,21 @@ def build(scan_path: pathlib.Path, write_fixtures: bool,
                 **({"median_volume_20d": normal_volume} if normal_volume else {}),
                 **({"pe": pe} if pe is not None else {}),
                 **({"pe_period": pe_period} if pe is not None else {}),
+                # The price the multiple was divided from.
+                #
+                # Without it the ratio is uncheckable: this document is
+                # rebuilt a few times a day and `market.json` every hour of
+                # the session, so by mid-afternoon the P/E here has been
+                # derived from one price and sits beside another. On 6 Sep
+                # 2026 SIPC's published 133.75 came off a close of 5.35 while
+                # the market document said 6.30 — a 20% move, and a reader
+                # dividing the two numbers we showed them got 157.5.
+                #
+                # The accuracy audit was reading the multiple against
+                # `market.json`'s close and calling the gap a contradiction,
+                # which failed every build from mid-session onward. It is not
+                # a contradiction; it is a missing denominator. Here it is.
+                **({"pe_close": round(close, 4)} if pe is not None and close else {}),
                 **({"eps": eps} if eps is not None else {}),
                 **({"eps_period": eps_period} if eps is not None else {}),
                 **(

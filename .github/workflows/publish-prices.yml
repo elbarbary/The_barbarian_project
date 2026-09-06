@@ -73,6 +73,12 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # 25 minutes. The longest successful run on record is 7.3;
+    # the market scan is the slow part and has run to 6.4 minutes on its own.
+    # No workflow here had a ceiling until 6 Sep 2026, when a stalled
+    # exchange held publish-app-data for 71 minutes on its way to
+    # GitHub's six-hour default.
+    timeout-minutes: 25
     steps:
       # A full checkout, no sparse or partial. `build_fixtures.py` hashes the
       # real published bytes — including `companies/` and `prices/`, which have

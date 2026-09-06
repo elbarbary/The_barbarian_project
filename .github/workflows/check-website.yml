@@ -50,6 +50,12 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # 10 minutes. The longest successful run on record is 0.9;
+    # tests only, no network beyond the checkout.
+    # No workflow here had a ceiling until 6 Sep 2026, when a stalled
+    # exchange held publish-app-data for 71 minutes on its way to
+    # GitHub's six-hour default.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 

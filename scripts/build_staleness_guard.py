@@ -57,6 +57,31 @@ TRADING_WEEKDAYS = {6, 0, 1, 2, 3}
 # today's only once the session has been open an hour.
 SESSION_UP_HOUR_UTC = 8
 
+
+def sessions_between(newest: datetime.date, today: datetime.date) -> int:
+    """How many TRADING days old the archive is — not how many calendar days.
+
+    The weekend is not staleness. Counting calendar days made Thursday's
+    archive read as three days behind every Sunday morning, which trips the
+    `behind >= 2` branch before the local harvest's first run of the week has
+    happened — and cost two red builds on 6 Sep 2026 at 05:34 and 05:41 UTC,
+    for an archive that was exactly as current as the exchange had left it.
+
+    Counted forward over trading weekdays only, so Thursday to Sunday is one
+    session and Thursday to Tuesday is three. A genuinely frozen archive still
+    climbs at the same rate it always did; it just no longer gains two days
+    every weekend for nothing.
+    """
+    if newest >= today:
+        return 0
+    days = 0
+    day = newest
+    while day < today:
+        day += datetime.timedelta(days=1)
+        if day.weekday() in TRADING_WEEKDAYS:
+            days += 1
+    return days
+
 FIX = (
     "   Fix: re-run the harvest from a residential IP —\n"
     "     python3 scripts/harvest_egx_beta.py --filings --from {month} --to {month}\n"
@@ -178,7 +203,7 @@ def check(today: datetime.date | None = None,
               + FIX.format(month=month), file=sys.stderr)
         return 1
 
-    behind = (today - newest).days
+    behind = sessions_between(newest, today)
     if behind >= 2 or (behind >= 1 and hour_utc >= SESSION_UP_HOUR_UTC):
         seen = f"last harvested {harvested}" if harvested else "never harvested"
         print(
