@@ -28,7 +28,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile",
   "record": {
-   "filings": 658,
+   "filings": 659,
    "first_filing": "2010-01-17",
    "trading_suspensions": 6,
    "trading_resumptions": 5,
@@ -549,7 +549,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AMIA/profile",
   "record": {
-   "filings": 501,
+   "filings": 502,
    "first_filing": "2012-02-27",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
@@ -591,7 +591,7 @@
    "trading_resumptions": 4,
    "capital_increases": 0,
    "general_assemblies": 52,
-   "periods_reported": 66,
+   "periods_reported": 67,
    "loss_making_periods": 6
   },
   "generated": "2026-08-24"
@@ -1259,13 +1259,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CLHO/profile",
   "record": {
-   "filings": 653,
+   "filings": 657,
    "first_filing": "2016-04-13",
    "trading_suspensions": 10,
    "trading_resumptions": 10,
    "capital_increases": 6,
-   "general_assemblies": 50,
-   "periods_reported": 51,
+   "general_assemblies": 51,
+   "periods_reported": 52,
    "loss_making_periods": 0
   },
   "generated": "2026-08-24"
@@ -1538,7 +1538,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
   "record": {
-   "filings": 596,
+   "filings": 597,
    "first_filing": "2010-01-06",
    "trading_suspensions": 8,
    "trading_resumptions": 9,
@@ -6123,7 +6123,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/TAQA/profile",
   "record": {
-   "filings": 138,
+   "filings": 139,
    "first_filing": "2023-06-04",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
