@@ -1004,6 +1004,10 @@
     "meaning": "Establishing a USD 10 million polyester yarn plant in Sokhna adds operational manufacturing capacity for synthetic textile inputs in the industrial zone.",
     "meaning_ar": "يضيف إنشاء مصنع لإنتاج خيوط البوليستر باستثمارات تبلغ 10 ملايين دولار في السخنة طاقة تصنيع محلية لمدخلات الغزل والنسيج ضمن المنطقة الصناعية."
   },
+  "مصنع صيني لصناعه الفرش ومنتجات الابواب في السخنه باستثمارات 10 ملايين دولار": {
+    "meaning": "The project injects $10 million in foreign direct investment into the Suez Canal Economic Zone to establish a manufacturing facility for door components and weatherstripping, expanding the local industrial base for building materials.",
+    "meaning_ar": "يضخ المشروع 10 ملايين دولار كاستثمار أجنبي مباشر في المنطقة الاقتصادية لقناة السويس لإنشاء منشأة لتصنيع مستلزمات الأبواب وموانع التسريب، مما يوسع القاعدة الصناعية المحلية لمنتجات مواد البناء."
+  },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
     "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
@@ -1083,6 +1087,10 @@
   "وزير الصحه يتفقد المخزون الاستراتيجي من المستلزمات الطبيه": {
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
     "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
+  },
+  "وزير الصناعه ومحافظ الجيزه يبحثان تقنين الاوضاع بمنطقتي جرزا وعرب ابوساعد الصناعيتين": {
+    "meaning": "Regularising industrial zones integrates informal manufacturing units into the formal economy, providing facilities with legal operating licences, utility connections, and access to regulated industrial infrastructure.",
+    "meaning_ar": "يؤدي تقنين أوضاع المناطق الصناعية إلى دمج المنشآت الإنتاجية غير الرسمية في الاقتصاد الرسمي، وتزويد المصانع بتراخيص التشغيل القانونية وربطها بالمرافق والبنية التحتية المنظمة."
   },
   "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
     "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
