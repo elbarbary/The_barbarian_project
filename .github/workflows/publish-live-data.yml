@@ -103,11 +103,6 @@ jobs:
         run: |
           python3 scripts/build_news_api.py || true
           python3 scripts/build_rates_api.py || true
-          # Pure local arithmetic over the feeds above and the filings the
-          # daily job left behind — no network, so it costs nothing to keep
-          # current. Without it a headline that lands at ten in the morning
-          # cannot cross with a filing until the next daily run.
-          python3 scripts/build_connections_api.py || true
           # Disclosures. The note that used to sit at the foot of this file
           # said these could not run here because they need Scrapling driving
           # a real Chromium — EGX serves a 7 KB stub to anything that is not a
@@ -125,6 +120,25 @@ jobs:
           # That is fine and deliberate: with no Scrapling installed the script
           # prints why and exits 0, leaving the last good document in place.
           python3 scripts/build_disclosures_api.py || true
+
+          # Connections crosses the two feeds above, and it READS
+          # `disclosures/latest.json` rather than the archive — so it has to
+          # run after the line that writes it, not before.
+          #
+          # It ran before it for as long as both have been in this job. The
+          # comment it carried ("the filings the daily job left behind") was
+          # true when only the daily build wrote disclosures; disclosures was
+          # added here afterwards, below it, and nothing moved this down. So
+          # every run crossed today's headlines against the PREVIOUS run's
+          # filings, and the two documents were committed together looking
+          # like one answer. It stayed invisible while no filing arrived
+          # between runs, and surfaced the moment the local harvest pushed
+          # one: on 6 Sep 2026 PRDC's insider filing was in the archive and in
+          # the disclosures feed, and absent from the connections built beside
+          # it — which is `test_connections` failing, four CI runs red, and
+          # the published crossing for EHDR missing a company that belonged
+          # in it.
+          python3 scripts/build_connections_api.py || true
 
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app

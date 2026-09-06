@@ -255,3 +255,47 @@ class PublishedTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BuildOrderTest(unittest.TestCase):
+    """Connections reads the disclosures feed, so it must be built after it.
+
+    `build_connections_api.py` loads `public/data/v1/disclosures/latest.json`
+    — the published feed, not the archive. Any job that writes that feed and
+    then builds crossings in the wrong order publishes a pair that disagrees
+    with itself, and `PublishedTest` above is what notices.
+
+    That is not hypothetical. `publish-live-data.yml` ran connections BEFORE
+    disclosures for as long as both were in it, so every run crossed today's
+    headlines against the previous run's filings. Nothing showed while no
+    filing arrived between runs. On 6 Sep 2026 the local harvest pushed one,
+    PRDC's insider filing reached the archive and the disclosures feed and was
+    missing from the connections committed beside it, and four CI runs went
+    red on the test above.
+
+    Parsed with a regex rather than PyYAML, as `test_prices_workflow` does and
+    for the same reason: the runner has no PyYAML, and a test that skips on
+    the machine it protects is not a test.
+    """
+
+    WORKFLOWS = REPO / ".github" / "workflows"
+
+    def test_connections_is_never_built_before_the_feed_it_reads(self):
+        for path in sorted(self.WORKFLOWS.glob("*.yml")):
+            source = path.read_text(encoding="utf-8")
+            if "build_connections_api.py" not in source:
+                continue
+            with self.subTest(workflow=path.name):
+                self.assertIn("build_disclosures_api.py", source,
+                              f"{path.name} builds crossings from a feed it never writes")
+                self.assertLess(
+                    source.index("python3 scripts/build_disclosures_api.py"),
+                    source.index("python3 scripts/build_connections_api.py"),
+                    f"{path.name} crosses today's headlines against "
+                    "the previous run's filings")
+
+    def test_the_daily_build_keeps_the_same_order(self):
+        source = (REPO / "scripts" / "build_all.py").read_text(encoding="utf-8")
+        self.assertLess(source.index('"build_disclosures_api.py"'),
+                        source.index('"build_connections_api.py"'),
+                        "build_all builds crossings before the filings they cross")
