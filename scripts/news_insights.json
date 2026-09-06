@@ -15,6 +15,10 @@
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
   },
+  "4 كيانات تفوز بصادرات القطن في الاسبوع الاخير": {
+    "meaning": "Four trading companies secure export batches of Egyptian cotton through the weekly auction system, allocating domestic crop inventory for international shipment fulfillment.",
+    "meaning_ar": "يمثل فوز أربع شركات بمزادات التصدير الأسبوعية تخصيصاً لكميات من محصول القطن المحلي للتوريد الخارجي عبر منظومة التداول والمزادات العلنية."
+  },
   "500 مكتب بريد تستقبل طلبات تحديث بيانات البطاقات التموينيه المتوقفه": {
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
@@ -302,6 +306,10 @@
   "اسعار الفضه في مصر تهبط 2.89% خلال اسبوع.. عيار 999 يسجل 104.75 جنيه": {
     "meaning": "Domestic silver prices adjust according to movements in international metal spot benchmarks and the local USD/EGP exchange rate, repricing raw bullion and manufacturing inputs across the local market.",
     "meaning_ar": "تتحدد أسعار الفضة في السوق المحلي وفقاً لتغيرات الأسعار الفورية في البورصات العالمية وسعر صرف الجنيه مقابل الدولار، مما يعيد تسعير السبائك ومدخلات التصنيع."
+  },
+  "اسعار القطن المصري تتباين في البورصات العالميه": {
+    "meaning": "Egyptian cotton export contracts reflect differing pricing benchmarks across international commodity exchanges, driven by staple-length grade classifications, regional delivery terms, and shifting arbitrage differentials.",
+    "meaning_ar": "تعكس عقود تصدير القطن المصري تفاوتًا في مستويات التسعير عبر البورصات السلعية العالمية، استنادًا إلى تصنيفات رتبة وجودة التيلة، واختلاف شروط التسليم الجغرافية، وفروق أسعار المراجحة بين الأسواق."
   },
   "اسعار الكتاكيت اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily chick prices represent the baseline input cost for poultry farm production cycles, determined by the interaction of hatchery supply volumes and feed costs across the domestic livestock value chain.",
@@ -1000,6 +1008,10 @@
     "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
     "meaning_ar": "تعني التدفقات الخارجة الصافية تجاوز إجمالي طلبات الاسترداد لحجم الاكتتابات الجديدة في صناديق الأسهم الأمريكية خلال فترة محددة، حيث يقوم مديرو الصناديق بتغطية هذه الاستردادات عبر استخدام الفوائض النقدية أو تسييل أجزاء من الأوراق المالية في المحافظ."
   },
+  "صناعه الاسمده تدعم الامن الغذايي وتفتح افاقا جديده للتصدير": {
+    "meaning": "The domestic fertilizer manufacturing sector operates a dual-distribution model, supplying chemical inputs directly to local agricultural producers while routing surplus production volumes into international export channels.",
+    "meaning_ar": "يعمل قطاع تصنيع الأسمدة المحلي وفق آلية توزيع تشمل توفير المدخلات الكيماوية لمنتجي المحاصيل الزراعية محلياً، مع توجيه فائض الإنتاج إلى قنوات التصدير الدولية."
+  },
   "صندوق CDP وبنك الاسكندريه يوقعان اتفاقيه ضمان لمحافظ القروض بقيمه حتي 30 مليون يورو": {
     "meaning": "The agreement establishes a risk-sharing mechanism where CDP provides credit default guarantee coverage of up to EUR 30 million on designated loan portfolios originated by Bank of Alexandria.",
     "meaning_ar": "تؤسس هذه الاتفاقية آلية لتوزيع المخاطر الائتمانية، حيث يقدم صندوق CDP تغطية ضد مخاطر تعثر السداد لمحفظة قروض محددة يصدرها بنك الإسكندرية بقيمة تصل إلى 30 مليون يورو."
@@ -1131,6 +1143,10 @@
   "مدبولي يفتتح مصنعين لتجهيز سيارات الاسعاف وتجميع اجهزه الاسنان باستثمارات 16 مليون دولار": {
     "meaning": "The deployment of $16 million in direct capital expenditure establishes domestic assembly lines for ambulance outfitting and dental equipment, shifting the supply chain from fully finished imports to localized component integration.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة 16 مليون دولار إضافة خطوط إنتاج وتجميع محلية لتجهيز سيارات الإسعاف ومعدات الأسنان، محولاً سلسلة التوريد من استيراد المنتجات كاملة الصنع إلى التجميع والتجهيز المحلي."
+  },
+  "مديرو الثروات يديرون ظهورهم لارتفاع الاسهم الاوروبيه": {
+    "meaning": "Wealth managers reallocate capital away from rising European equities into other asset classes or regional markets, adjusting portfolio exposure according to institutional mandates.",
+    "meaning_ar": "يُعيد مديرو الثروات توجيه السيولة ورؤوس الأموال بعيداً عن الأسهم الأوروبية الصاعدة نحو فئات أصول أو أسواق أخرى، وذلك لتعديل نسب أوزان المحافظ المالية وفقاً للأطر المؤسسية المعتمدة."
   },
   "مساعد وزير الصناعه للشيون الاستراتيجيه: صناعه السيارات منظومه متكامله وقاطره لنمو قطاعات عديده": {
     "meaning": "The automotive industry operates as a multi-tier manufacturing ecosystem that sources inputs from domestic feeding industries, including metallurgy, plastics, electronics, and glass manufacturing. Assembly operations generate backward supply chain linkages across these industrial segments.",
@@ -1435,6 +1451,10 @@
   "“كينجدوم” الصينيه تعتزم تشغيل مصنع للكتان في مصر الربع الاول 2027": {
     "meaning": "The setup establishes an industrial manufacturing base for flax processing within the Egyptian textiles sector, scheduled for commercial operation in the first quarter of 2027.",
     "meaning_ar": "يُمثّل هذا الإجراء إنشاء قاعدة تصنيع صناعية لمعالجة الكتان داخل قطاع الغزل والنسيج المصري، والمحدد بدء تشغيلها التجاري في الربع الأول من عام 2027."
+  },
+  "“مدن للتطوير”: ضخ 16.5 مليار جنيه بالانشاءات في 3 مشروعات بالقاهره": {
+    "meaning": "The company allocates and deploys 16.5 billion EGP in capital expenditures directly into construction activities across three active real estate developments in Cairo, advancing operational build rates and contractor procurement.",
+    "meaning_ar": "توجه الشركة وتضخ نفقات رأسمالية بقيمة 16.5 مليار جنيه مباشرة في الأعمال الإنشائية عبر ثلاثة مشروعات عقارية في القاهرة، مما يرفع وتيرة التنفيذ الميداني والتعاقدات مع المقاولين."
   },
   "“نور” طلعت مصطفي تشعل السوشيال ميديا.. اشاده بالاعلان والتزام الشركه في التسليم": {
     "meaning": "Adherence to delivery schedules in off-plan real estate operationalizes the conversion of unearned revenue into recognized revenue upon unit handover, while promotional campaigns register as selling and marketing expenditures.",
