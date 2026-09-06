@@ -115,6 +115,10 @@
     "meaning": "The General Authority for Roads and Bridges offers state-owned land plots through a public-private partnership framework, granting private developers long-term development, operation, or usufruct rights over public infrastructure-adjacent real estate.",
     "meaning_ar": "تطرح الهيئة العامة للطرق والكباري مساحات من الأراضي المملوكة للدولة عبر نموذج الشراكة مع القطاع الخاص، مما يمنح المطورين حقوق تطوير الأصول العقارية المجاورة للبنية التحتية وتشغيلها بنظام حق الانتفاع."
   },
+  "«العامه للبترول» تحقق 12 كشفا بتروليا خلال العام المالي 2025/2026": {
+    "meaning": "The General Petroleum Company (GPC) adds 12 new oil and gas discoveries to its exploration portfolio during the 2025/2026 fiscal year, expanding its proven hydrocarbon asset base and operational drilling footprint.",
+    "meaning_ar": "تضيف الشركة العامة للبترول 12 كشفاً جديداً للنفط والغاز إلى محفظتها الاستكشافية خلال العام المالي 2025/2026، مما يوسع قاعدة أصولها الهيدروكربونية المؤكدة ونطاق عمليات الحفر التابعة لها."
+  },
   "«لي فارما» الهنديه تدرس انشاء مصنع للخامات الدواييه في مصر": {
     "meaning": "Establishing an active pharmaceutical ingredient (API) facility represents an upstream integration in the domestic drug manufacturing supply chain, transitioning component sourcing from direct importation to local chemical synthesis.",
     "meaning_ar": "يمثل إنشاء مصنع للمواد الخام الدوائية تكاملاً رأسياً في سلاسل إمداد تصنيع الدواء محلياً، حيث يحول توفير المكونات الفعالة من الاستيراد المباشر إلى مسار التصنيع والإنتاج المحلي."
@@ -691,6 +695,10 @@
     "meaning": "Early trading sessions for newly listed shares often reflect an initial price discovery mechanism as open-market supply and demand dynamics adjust from initial offering levels.",
     "meaning_ar": "تعكس جلسات التداول الأولى للأسهم حديثة الإدراج آلية اكتشاف السعر الأولي، حيث تتكيف قوى العرض والطلب في السوق المفتوحة مقارنة بمستويات الطرح الأولي."
   },
+  "سي اي كابيتال تستهدف اطلاق صندوق تحوط للاسهم": {
+    "meaning": "Launching an equity hedge fund introduces an alternative investment structure that utilizes long and short positions alongside derivatives to manage market exposure. This operational step expands the financial institution's asset management product lineup under local capital market regulations.",
+    "meaning_ar": "يمثل إطلاق صندوق تحوط للأسهم توفير أداة استثمارية تعتمد على استراتيجيات المراكز الشرائية والبيعية والمشتقات لإدارة التعرض لمخاطر السوق، مما يوسع محفظة منتجات إدارة الأصول للمؤسسة المالية وفقاً للقواعد المنظمة لسوق المال."
+  },
   "سياتل تايمز ونيوزداي تقاضيان اوبن ايه اي ومايكروسوفت بتهمه انتهاك حقوق النشر": {
     "meaning": "Copyright litigation by news publishers against artificial intelligence developers introduces legal liability and directly involves the intellectual property licensing framework for training datasets.",
     "meaning_ar": "تفرض الدعاوى القضائية المتعلقة بحقوق النشر والمرفوعة من المؤسسات الإعلامية ضد مطوري الذكاء الاصطناعي التزامات قانونية مباشرة تتعلق بأطر ترخيص الملكية الفكرية لبيانات التدريب."
@@ -867,6 +875,10 @@
   "مصر وباكستان توكدان اهميه تنفيذ مذكره التفاهم بين واشنطن وطهران لاحتواء التصعيد": {
     "meaning": "Regional geopolitical de-escalation frameworks directly affect sovereign risk premiums and the operational continuity of cross-border trade and maritime energy corridors.",
     "meaning_ar": "تؤثر أطر التهدئة الجيوسياسية الإقليمية بشكل مباشر على علاوات المخاطر السيادية والاستمرارية التشغيلية لحركة التجارة العابرة للحدود وممرات نقل الطاقة البحرية."
+  },
+  "مصر وعمان تبحثان تعزيز التجاره عبر خط بحري مباشر": {
+    "meaning": "Direct maritime shipping routes connect Egyptian and Omani ports via point-to-point freight transport, eliminating intermediate transshipment hubs in bilateral maritime logistics.",
+    "meaning_ar": "يربط الخط الملاحي المباشر بين الموانئ المصرية والعُمانية عبر مسارات شحن محددة دون المرور بمحطات ترانزيت وسيطة في سلاسل الإمداد الثنائية."
   },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
