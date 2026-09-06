@@ -136,6 +136,23 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # A ceiling, because this job holds a concurrency group.
+    #
+    # On 6 Sep 2026 the exchange stalled SSL handshakes rather than refusing
+    # them, and the collectors did what they are told to do: `beta.request`
+    # allows five attempts at a 150-second timeout with jittered backoff, then
+    # a headless-browser fallback — fifteen to twenty minutes per call, and
+    # index constituents makes that call once per index. The run sat on one
+    # step for 71 minutes and was heading for GitHub's six-hour default, with
+    # `cancel-in-progress: false` holding every later run behind it. One bad
+    # spell at the exchange became a blocked pipeline rather than one failed
+    # build.
+    #
+    # Each individual timeout is sensible; what was missing was a ceiling on
+    # the whole. 100 minutes: the median run is 41 and the longest that has
+    # ever succeeded is 80, so this cannot fail a healthy build, and the
+    # staleness guard already handles "the exchange did not answer" correctly.
+    timeout-minutes: 100
 
     steps:
       - uses: actions/checkout@v4
