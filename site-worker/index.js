@@ -219,6 +219,69 @@ const CHALLENGED = new Set([
   'http://localhost:8438', 'http://127.0.0.1:8438',
 ]);
 
+/* Addresses that exist in order to be thrown away.
+ *
+ * The gate on this site is one email round trip, which the Worker has always
+ * said out loud: "minting another costs an email round trip". A throwaway
+ * inbox makes that cost nothing. On 6 Sep 2026 a headless Chrome on an
+ * Alibaba Cloud address in Hong Kong signed up as
+ * `esthmrexplore<unix timestamp>@uberip.com` — the site's own name, the word
+ * explore, and a clock reading — read the overview documents for six hours,
+ * and probed for an endpoint we do not have and a DELETE we do not allow.
+ * It took no company data. The next one might.
+ *
+ * This is a floor, not a wall. These services rotate domains faster than any
+ * committed list can follow, and the list is deliberately short: every entry
+ * is a service whose whole purpose is disposability, so a real reader is
+ * never refused by it. Anything cleverer — scoring the local part, demanding
+ * an MX record — risks turning away somebody with an unusual but real
+ * address, and a reader who cannot sign in is a worse outcome than a bot who
+ * can.
+ */
+const DISPOSABLE = new Set([
+  'uberip.com',
+  'mailinator.com', 'guerrillamail.com', 'sharklasers.com', 'grr.la',
+  '10minutemail.com', 'tempmail.com', 'temp-mail.org', 'yopmail.com',
+  'trashmail.com', 'dispostable.com', 'maildrop.cc', 'getnada.com',
+  'throwawaymail.com', 'fakemailgenerator.com', 'inboxkitten.com',
+  'emailondeck.com', 'mohmal.com', 'moakt.com', 'tempmailo.com',
+  'mailnesia.com', 'spamgourmet.com', 'discard.email', 'mailde.de',
+  'burnermail.io', 'anonaddy.me', 'mytemp.email', 'tmpmail.org',
+]);
+
+/** The throwaway service this address belongs to, or null. */
+export function disposable(email) {
+  const at = String(email || '').lastIndexOf('@');
+  if (at < 0) return null;
+  const domain = String(email).slice(at + 1).trim().toLowerCase();
+  if (!domain) return null;
+  if (DISPOSABLE.has(domain)) return domain;
+  // `mail.mailinator.com` is the same service as `mailinator.com`; matching
+  // only the exact string would be a one-character bypass.
+  for (const known of DISPOSABLE) {
+    if (domain.endsWith(`.${known}`)) return known;
+  }
+  return null;
+}
+
+/* A client claiming to be a browser that cannot be one.
+ *
+ * `mustSolve` holds a request to the challenge when its Origin is one of our
+ * own pages, because a browser cannot suppress Origin on a cross-origin POST.
+ * The corollary was never enforced: a POST carrying `Mozilla/... Chrome/...`
+ * and NO Origin is not a browser, whatever it says. The phone app is not
+ * caught by this — it sends neither an Origin nor a browser user agent — and
+ * neither is curl, which does not pretend to be Chrome.
+ *
+ * To be plain about what this does and does not do: it would NOT have stopped
+ * the Hong Kong client above, which ran the page's own JavaScript and so sent
+ * a real Origin. It closes the cheaper door beside it.
+ */
+export function spoofedBrowser(origin, userAgent) {
+  if (String(origin || '').trim()) return false;
+  return /\b(Mozilla|Chrome|Safari|Firefox|Edge?|OPR)\b/i.test(String(userAgent || ''));
+}
+
 /** Whether this request must present a solved challenge. */
 export function mustSolve(origin, hasSecret) {
   if (!hasSecret) return false;              // unconfigured means unenforced
@@ -1121,7 +1184,17 @@ async function api(request, env, url, ctx) {
      * worst, and still gets in. The per-EMAIL ceiling is untouched either
      * way, because that is the one protecting a stranger's inbox.
      */
-    const challenged = mustSolve(request.headers.get('origin'), Boolean(env.TURNSTILE_SECRET));
+    // A throwaway address is refused outright rather than rationed: unlike a
+    // reader whose challenge widget will not load, there is no version of this
+    // request that deserves to succeed.
+    const throwaway = disposable(email);
+    if (throwaway) {
+      console.log('refused a disposable address at', throwaway);
+      return json({ error: 'disposable email' }, 403);
+    }
+    const challenged = Boolean(env.TURNSTILE_SECRET)
+      && (mustSolve(request.headers.get('origin'), true)
+        || spoofedBrowser(request.headers.get('origin'), request.headers.get('user-agent')));
     const passed = challenged ? await solved(env, body.turnstile, ip) : true;
     if (!passed && await overLimit(env, 'unsolved', ip, LIMITS.codePerIpUnsolved)) {
       return json({ error: 'too many requests' }, 429);

@@ -1012,3 +1012,58 @@ test('the gate still refuses a reader with no session before touching the asset 
   assert.equal(answer.status, 401);
   assert.equal(asked, 0, 'the asset layer was consulted for an anonymous reader');
 });
+
+/* The gate is one email round trip, and a throwaway inbox makes that free.
+ *
+ * On 6 Sep 2026 a headless Chrome on an Alibaba Cloud address in Hong Kong
+ * signed up as `esthmrexplore1788699119@uberip.com` — this site's name, the
+ * word explore, and a unix timestamp — held a session for six hours, read the
+ * overview documents, and probed for an endpoint we do not have and a DELETE
+ * we do not allow. It took no company data; the account cost it nothing.
+ */
+test('a throwaway address cannot open an account', async () => {
+  const { disposable } = await import('../index.js');
+  // The one that actually signed up, and the shapes around it.
+  assert.equal(disposable('esthmrexplore1788699119@uberip.com'), 'uberip.com');
+  assert.equal(disposable('x@MAILINATOR.COM'), 'mailinator.com', 'case must not be a bypass');
+  assert.equal(disposable('x@mail.mailinator.com'), 'mailinator.com',
+    'a subdomain is the same service');
+  // And a reader is never refused by it.
+  for (const real of ['reader@gmail.com', 'a@aucegypt.edu', 'someone@yozo.ai',
+                      'x@esthmr.com', 'me@my-own-domain.co.uk', 'a@mailinator.company.com']) {
+    assert.equal(disposable(real), null, real);
+  }
+  assert.equal(disposable(''), null);
+  assert.equal(disposable('not-an-address'), null);
+});
+
+test('the sign-up endpoint refuses one, and says why', async () => {
+  const e = env();
+  const answer = await call(e, 'https://esthmr.com/esthmr/api/auth/request', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ email: 'esthmrexplore1788699119@uberip.com' }),
+  });
+  assert.equal(answer.status, 403);
+  assert.equal((await answer.json()).error, 'disposable email');
+  // Nothing was sent and nothing was stored: no code, no inbox, no cost.
+  assert.equal(e.ESTHMR_AUTH.store.size, 0, 'a code was minted for a throwaway address');
+});
+
+/* The corollary `mustSolve` never enforced. A browser cannot suppress Origin
+ * on a cross-origin POST — so a POST that carries a browser's user agent and
+ * NO Origin is not a browser. The phone app sends neither, and curl does not
+ * claim to be Chrome; both are untouched. */
+test('a client claiming to be a browser without an Origin is held to the challenge', async () => {
+  const { spoofedBrowser } = await import('../index.js');
+  const chrome = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
+    + 'HeadlessChrome/152.0.0.0 Safari/537.36';
+  assert.equal(spoofedBrowser('', chrome), true);
+  assert.equal(spoofedBrowser(null, chrome), true);
+  // A real browser on our own page sends one, and `mustSolve` already has it.
+  assert.equal(spoofedBrowser('https://esthmr.com', chrome), false);
+  // The app and curl: no Origin, but no browser costume either.
+  assert.equal(spoofedBrowser(null, 'Dart/3.5 (dart:io)'), false);
+  assert.equal(spoofedBrowser(null, 'curl/8.7.1'), false);
+  assert.equal(spoofedBrowser(null, ''), false);
+});

@@ -106,10 +106,14 @@ const REASONS = {
     'too many requests': 'طلبات كثيرة. جرّب بعد قليل.',
     'too many attempts': 'محاولات كثيرة. جرّب بعد قليل.',
     'could not send the code': 'تعذّر إرسال الرمز. جرّب مرة أخرى.',
+    // A throwaway inbox cannot be told apart from a real one by looking at
+    // it, so the sentence says what to do rather than what went wrong.
+    'disposable email': 'هذا العنوان من خدمة بريد مؤقت. استخدم بريدك الدائم لتصلك الرموز.',
   },
   en: {
     email: 'That email does not look right.',
     code: 'The code is six digits.',
+    'disposable email': 'That is a temporary-mail service. Use a permanent address so the codes reach you.',
   },
 };
 
