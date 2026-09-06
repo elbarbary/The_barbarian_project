@@ -79,6 +79,10 @@
     "meaning": "An increase in consolidated revenues reflects operational growth across Cleopatra Hospital Group's combined network of medical facilities, driven by higher patient volumes, expanded bed capacities, or adjusted pricing across its healthcare services.",
     "meaning_ar": "تعكس القفزة في الإيرادات المجمعة نمواً تشغيلياً عبر شبكة المنشآت الطبية التابعة لمجموعة مستشفيات كليوباترا، والناتج عن زيادة أعداد المرضى أو توسيع الطاقة الاستيعابية للأسرّة أو تعديل أسعار الخدمات الصحية المقدمة."
   },
+  "delta insurance consolidated profits drop in h1 2026": {
+    "meaning": "A decline in consolidated profits for an insurer reflects a contraction in net underwriting results, driven by higher claims paid and operational expenses, or lower net investment returns across the parent and subsidiary entities.",
+    "meaning_ar": "يعكس تراجع الأرباح المجمعة لشركة التأمين انخفاضاً في نتائج الاكتتاب التأميني جراء ارتفاع التعويضات المسددة والتكاليف التشغيلية، أو تراجع عوائد المحفظة الاستثمارية للشركة الأم وتابعيها."
+  },
   "egypt and chinese linglong tire sign mou for industrial complex": {
     "meaning": "The memorandum of understanding establishes a preliminary framework for foreign direct investment to construct a localized tire manufacturing facility in Egypt. This arrangement links international industrial manufacturing capacity directly with domestic automotive supply chains.",
     "meaning_ar": "تحدد مذكرة التفاهم إطاراً أولياً لتدفقات الاستثمار الأجنبي المباشر لإنشاء مجمع محلي لتصنيع الإطارات في مصر. ويربط هذا الترتيب بين القدرات التصنيعية العالمية وسلاسل التوريد المحلية لقطاع السيارات."
@@ -996,6 +1000,10 @@
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
     "meaning_ar": "المتابعة الحكومية للمخزون الاستراتيجي للمستلزمات الطبية ترصد مستويات التوريد وجداول الشراء والجاهزية التشغيلية للمخازن ضمن سلاسل إمداد القطاع الصحي."
   },
+  "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
+    "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
+    "meaning_ar": "تتضمن المبادرة الإدارية المشتركة تبسيط إجراءات التراخيص الصناعية، وتقنين أوضاع الأراضي، وتنسيق ربط المرافق والخدمات للمنشآت القائمة في منطقتي جرزا وعرب أبوساعد."
+  },
   "​الرقابه الماليه تعتمد اضافه نشاط “بيع الطاقه الكهرباييه ل”فيركيم”": {
     "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
     "meaning_ar": "تتيح الموافقة الرقابية للشركة تعديل غرضها المؤسسي لإدراج نشاط بيع وتوزيع الطاقة الكهربائية، مما يدمج عمليات توليد وتوريد الكهرباء ضمن أنشطتها التشغيلية المرخصة رسمياً."
@@ -1003,6 +1011,10 @@
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
     "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
+  },
+  "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
+    "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
+    "meaning_ar": "سجلت شركة الدلتا للتأمين صافي أرباح قدره 302.1 مليون جنيه خلال النصف الأول، وهو ما يعكس الفائض التشغيلي المحقق من أنشطة الاكتتاب التأميني مضافاً إليه عوائد استثمار المحفظة المالية للشركة."
   },
   "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
     "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
