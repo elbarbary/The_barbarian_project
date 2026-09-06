@@ -247,6 +247,13 @@ export function stampAge(writeTime, now = new Date()) {
 }
 
 /** The exchange's rows, keyed by ticker. Same shape the scanner produces. */
+/** The move from one price to another, as a percent, or null if it cannot be. */
+function changePercent(price, previous) {
+  if (typeof price !== 'number' || typeof previous !== 'number') return null;
+  if (!(previous > 0)) return null;
+  return Number((((price - previous) / previous) * 100).toFixed(4));
+}
+
 export function cleanEgx(rows) {
   const quotes = {};
   let writeTime = null;
@@ -261,9 +268,23 @@ export function cleanEgx(rows) {
       h: round(row.high),
       l: round(row.low),
       v: typeof row.volume === 'number' ? Math.round(row.volume) : null,
-      // Percent, as the exchange gives it — the same unit the scanner uses
-      // and the opposite of the fraction the published documents store.
-      ch: typeof row.chgPer === 'number' ? Number(row.chgPer.toFixed(4)) : null,
+      // Percent — the same unit the scanner uses, and the opposite of the
+      // fraction the published documents store. DERIVED, not taken.
+      //
+      // The exchange sends two different numbers: `lastPrice`, the last trade,
+      // which is what `c` is, and `chgPer`, which it computes from
+      // `closePrice` — a volume-weighted average of the whole session so far.
+      // Serving one beside the other put a percentage next to a price it did
+      // not describe on 153 of the 288 quotes on 6 Sep 2026: APSW at 8.70
+      // against an 8.50 previous close was served as 0.00%, and TRTO, actually
+      // down 1.23%, was served as UP 1.23%. Every raw row agreed with
+      // closePrice (218/218) and only a quarter with lastPrice.
+      //
+      // So it is computed from the two figures actually served. They cannot
+      // disagree with each other, whatever the exchange's own average is
+      // doing, and a reader adding the percentage to the previous close lands
+      // on the price in front of them.
+      ch: changePercent(last, row.prevClose),
       pc: round(row.prevClose),
       // Two figures the scanner has no column for.
       t: typeof row.trades === 'number' ? Math.round(row.trades) : null,

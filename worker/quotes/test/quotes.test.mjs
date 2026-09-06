@@ -27,12 +27,47 @@ test('a row becomes the same shape the vendor produces, plus what it adds', () =
   const { quotes, writeTime } = cleanEgx([ROW]);
   assert.deepEqual(quotes.COMI, {
     c: 137.4, o: 138.1, h: 138.9, l: 137.1, v: 1585899,
-    ch: -0.51, pc: 138.1, t: 1496, val: 216331844, s: 'egx',
+    ch: -0.5069, pc: 138.1, t: 1496, val: 216331844, s: 'egx',
   });
   assert.equal(writeTime, '202608311218');
   // Percent, like the scanner — NOT the fraction the published documents
   // store. Mixing the two multiplies every move on the exchange by a hundred.
-  assert.equal(quotes.COMI.ch, -0.51);
+  assert.equal(quotes.COMI.ch, -0.5069);
+  // And derived from this row's own two prices, not copied from `chgPer`:
+  // the exchange sent -0.51 for this row and the truth is -0.5069.
+  assert.equal(quotes.COMI.ch, Number((((137.4 - 138.1) / 138.1) * 100).toFixed(4)));
+});
+
+/* The percent has to describe the price it is printed beside.
+ *
+ * `chgPer` is the exchange's own move on `closePrice`, a volume-weighted
+ * average of the session; `c` is `lastPrice`, the last trade. Serving one
+ * against the other put a wrong percentage on 153 of 288 quotes on 6 Sep 2026,
+ * and these two are from that feed. */
+test('the percent is computed from the price served, not from the exchange average', () => {
+  const { quotes } = cleanEgx([
+    // Traded up 2.35% and the exchange's own figure said nothing had moved.
+    { reuters: 'APSW.CA', lastPrice: 8.70, prevClose: 8.50, chgPer: 0 },
+    // Down 1.23%, published as UP 1.23% — a sign the reader cannot recover.
+    { reuters: 'TRTO.CA', lastPrice: 0.080, prevClose: 0.081, chgPer: 1.23 },
+  ]);
+  assert.equal(quotes.APSW.ch, 2.3529);
+  assert.equal(quotes.TRTO.ch, -1.2346);
+  for (const q of Object.values(quotes)) {
+    assert.ok(Math.sign(q.ch) === Math.sign(q.c - q.pc),
+      'the percent disagrees in sign with the price beside it');
+  }
+});
+
+test('a percent is not invented when there is nothing to measure against', () => {
+  const { quotes } = cleanEgx([
+    { reuters: 'AAAA.CA', lastPrice: 10, prevClose: 0, chgPer: 5 },     // no base
+    { reuters: 'BBBB.CA', lastPrice: 10, prevClose: null, chgPer: 5 },  // none sent
+    { reuters: 'CCCC.CA', lastPrice: 10, prevClose: -1, chgPer: 5 },    // nonsense
+  ]);
+  // A newly listed share with no previous close says nothing rather than
+  // repeating a number that describes some other price.
+  for (const t of ['AAAA', 'BBBB', 'CCCC']) assert.equal(quotes[t].ch, null, t);
 });
 
 test('what is not a quote is not kept', () => {
