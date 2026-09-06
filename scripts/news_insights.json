@@ -407,6 +407,10 @@
     "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة العائد الدوري المحقق على الأصول المقومة بالنقد الأجنبي، حيث تقوم المحافظ المصرفية بإدارة فوائض السيولة الأجنبية عبر حيازة هذه الأدوات ذات العائد الثابت."
   },
+  "البورصه السلعيه تبيع 1000 طن «قمح ديورم» في اول جلسه تداول": {
+    "meaning": "The Egyptian Mercantile Exchange (EGYCOMEX) activates spot trading for durum wheat, executing transactions between state suppliers and registered private sector mills through an electronic auction system.",
+    "meaning_ar": "تُدرج البورصة المصرية للسلع قمح الديورم ضمن منصتها للتداول الإلكتروني، حيث تُنفذ عمليات التداول الفوري بين الموردين والمطاحن المسجلة عبر منظومة المزايدة المباشرة."
+  },
   "البورصه المصريه تنهي تعاملات الاحد بالمنطقه الخضراء والثلاثيني يصعد": {
     "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
     "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
@@ -1024,6 +1028,10 @@
     "meaning": "The statement refers to the structural macroeconomic adjustments and monetary policy frameworks in place to manage external shocks and liquidity fluctuations.",
     "meaning_ar": "يشير التصريح إلى الأطر الهيكلية للاقتصاد الكلي وسياسات إدارة السيولة المتبعة للتعامل مع الصدمات الخارجية والتقلبات الاقتصادية."
   },
+  "علاء سبع مع حابي بودكاست – الرحله – الموسم الثاني الحلقه 12": {
+    "meaning": "This is a media broadcast featuring industry commentary from an investment figure, which disseminates qualitative sector insights without changing the capital structure or operational metrics of listed entities.",
+    "meaning_ar": "يمثل هذا محتوى إعلامياً يتضمن رؤى وتحليلات من أحد خبراء الاستثمار، حيث يوفر معلومات نوعية حول السوق دون إحداث تغيير في الهياكل التمويلية أو المؤشرات التشغيلية للشركات."
+  },
   "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
     "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
@@ -1311,6 +1319,10 @@
   "وزير الصناعه ومحافظ الجيزه: تسهيلات جديده لدعم مستثمري جرزا وعرب ابوساعد": {
     "meaning": "The joint administrative initiative provides streamlined industrial licensing, land tenure regularisation, and utility infrastructure coordination for operating facilities in the Girza and Arab Abu Saed zones.",
     "meaning_ar": "تتضمن المبادرة الإدارية المشتركة تبسيط إجراءات التراخيص الصناعية، وتقنين أوضاع الأراضي، وتنسيق ربط المرافق والخدمات للمنشآت القائمة في منطقتي جرزا وعرب أبوساعد."
+  },
+  "ڤاليو تطلق رسميا اول مرحله من اعمالها في الاردن": {
+    "meaning": "This operational rollout establishes cross-border geographic expansion, deploying the company's consumer finance technology platform and merchant partner network into the Jordanian market.",
+    "meaning_ar": "يمثل هذا الإطلاق توسعاً جغرافياً خارجياً للشركة عبر تفعيل منصتها التكنولوجية للتمويل الاستهلاكي وشبكة التجار التابعة لها داخل السوق الأردني."
   },
   "​الرقابه الماليه تعتمد اضافه نشاط “بيع الطاقه الكهرباييه ل”فيركيم”": {
     "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
