@@ -123,6 +123,10 @@
     "meaning": "Establishing a petroleum products storage depot expands midstream logistics infrastructure, adding liquid fuel inventory capacity and physical distribution facilities within the Greater Cairo consumption area.",
     "meaning_ar": "يُمثّل إنشاء مستودع لتخزين المنتجات البترولية توسعاً في البنية التحتية للخدمات اللوجستية، حيث يضيف سعات لتخزين وتوزيع الوقود السائل ضمن النطاق الجغرافي والاستهلاكي للقاهرة الكبرى."
   },
+  "valmore holding revenues up 13 percent yoy in h1 2026": {
+    "meaning": "A 13 percent year-over-year revenue increase in the first half reflects higher top-line receipts compared to the same period of the prior year, driven by higher sales volumes, pricing adjustments, or increased operational throughput across subsidiary operations.",
+    "meaning_ar": "يعكس نمو الإيرادات بنسبة 13% على أساس سنوي خلال النصف الأول ارتفاع إجمالي المتحصلات التشغيلية مقارنة بالفترة نفسها من العام السابق، نتيجة زيادة أحجام المبيعات، أو تعديل أسعار السلع والخدمات، أو اتساع النشاط التشغيلي للشركات التابعة."
+  },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
@@ -467,6 +471,10 @@
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
     "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
   },
+  "المركزي: صعود السيوله المحليه M2 لتسجل 15.49 تريليون جنيه بنهايه يوليو 2026": {
+    "meaning": "The expansion in M2 money supply represents an increase in total currency in circulation outside the banking sector alongside local and foreign currency demand and time deposits. This reflects the current volume of total liquid monetary assets managed within the domestic banking system.",
+    "meaning_ar": "يمثل ارتفاع المعروض النقدي (M2) زيادة في إجمالي النقد المتداول خارج القطاع المصرفي بالإضافة إلى الودائع الجارية وغير الجارية بالعملتين المحلية والأجنبية، مما يعكس الحجم الكلي للأصول النقدية السائلة المدارة داخل الجهاز المصرفي."
+  },
   "النفط يتجه لمكاسب اسبوعيه بفعل توترات ايران": {
     "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية المرتبطة بدولة رئيسية منتجة للنفط إلى إضافة علاوة مخاطر العرض إلى الأسعار القياسية العالمية، مما ينعكس على تكاليف استيراد الطاقة وأسعار مدخلات الإنتاج للقطاعات المرتبطة."
@@ -771,6 +779,10 @@
     "meaning": "Automotive distributors establish retail pricing and trim specifications for incoming vehicle model years, reflecting current cost structures, currency dynamics, and import or local assembly parameters.",
     "meaning_ar": "يحدد وكلاء وموزعو السيارات الأسعار الرسمية والمواصفات الفنية للطرازات الجديدة، بما يعكس هياكل التكلفة القائمة، وحركة أسعار الصرف، ومحددات الاستيراد أو التجميع المحلي."
   },
+  "سلامه الغذاء: 210 الاف طن صادرات غذاييه خلال اسبوع.. والسودان اكبر الاسواق المستقبله": {
+    "meaning": "The data reflects the weekly volume of Egyptian agro-food exports clearing the National Food Safety Authority (NFSA) inspection standards, with regional trade corridors—predominantly Sudan—serving as the primary destination for these shipments.",
+    "meaning_ar": "تعكس البيانات حجم الصادرات الغذائية المصرية التي استوفت معايير الفحص لدى الهيئة القومية لسلامة الغذاء خلال أسبوع، حيث تمثل المعابر والأسواق الإقليمية، وفي مقدمتها السودان، وجهة الاستقبال الرئيسية لهذه الشحنات."
+  },
   "سهم تسلا يرتفع 7% مع ترقب اطلاق سياره سايبركاب": {
     "meaning": "Product unveilings price in market-clearing demand adjustments based on the introduction of new vehicle segments into the company's product line.",
     "meaning_ar": "تعكس حركة الأسعار تسعير السوق لإضافة فئات مركبات جديدة إلى خطوط إنتاج الشركة."
@@ -811,6 +823,10 @@
   "صادرات كوريا الجنوبيه تتجاوز الرقم القياسي السنوي عند 709.4 مليار دولار": {
     "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
     "meaning_ar": "يعكس تسجيل الصادرات السنوية لمستويات قياسية ارتفاع إجمالي الشحنات الموجهة للأسواق الخارجية من السلع الصناعية، مما يوسع الميزان التجاري ويزيد من المقبوضات بالعملات الأجنبية."
+  },
+  "صافي الاصول الاجنبيه للقطاع المصرفي يتجاوز 28.4 مليار دولار خلال يوليو": {
+    "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
+    "meaning_ar": "يمثل صافي الأصول الأجنبية إجمالي الأصول بالعملات الأجنبية لدى البنك المركزي والبنوك التجارية مطروحاً منها الالتزامات الأجنبية المستحقة، ويعكس هذا الرقم مركزاً مالياً موجباً تتجاوز فيه الأصول الأجنبية حجم الخصوم والالتزامات الخارجية للقطاع المصرفي."
   },
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.63%": {
     "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
