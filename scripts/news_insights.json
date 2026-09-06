@@ -151,9 +151,17 @@
     "meaning": "Establishing a petroleum products storage depot expands midstream logistics infrastructure, adding liquid fuel inventory capacity and physical distribution facilities within the Greater Cairo consumption area.",
     "meaning_ar": "يُمثّل إنشاء مستودع لتخزين المنتجات البترولية توسعاً في البنية التحتية للخدمات اللوجستية، حيث يضيف سعات لتخزين وتوزيع الوقود السائل ضمن النطاق الجغرافي والاستهلاكي للقاهرة الكبرى."
   },
+  "usd trades below 51 on september 6": {
+    "meaning": "The exchange rate for the US dollar sits under 51 Egyptian pounds in the banking system, which determines the local currency cost of foreign currency settlements for importers and foreign-denominated obligations.",
+    "meaning_ar": "يتداول سعر صرف الدولار الأمريكي دون مستوى 51 جنيهاً مصرياً في القطاع المصرفي، وهو ما يحدد تكلفة التسويات بالعملة الأجنبية والالتزامات المقومة بها بالعملة المحلية للمستوردين والشركات."
+  },
   "valmore holding revenues up 13 percent yoy in h1 2026": {
     "meaning": "A 13 percent year-over-year revenue increase in the first half reflects higher top-line receipts compared to the same period of the prior year, driven by higher sales volumes, pricing adjustments, or increased operational throughput across subsidiary operations.",
     "meaning_ar": "يعكس نمو الإيرادات بنسبة 13% على أساس سنوي خلال النصف الأول ارتفاع إجمالي المتحصلات التشغيلية مقارنة بالفترة نفسها من العام السابق، نتيجة زيادة أحجام المبيعات، أو تعديل أسعار السلع والخدمات، أو اتساع النشاط التشغيلي للشركات التابعة."
+  },
+  "valu advances jordan expansion via bnpl payment solutions": {
+    "meaning": "The expansion extends valu's consumer finance infrastructure and 'buy now, pay later' technology into the Jordanian market, deploying its credit underwriting and payment platform outside Egypt.",
+    "meaning_ar": "توسع هذه الخطوة البنية التحتية للتمويل الاستهلاكي وتكنولوجيا 'الشراء الآن والدفع لاحقاً' الخاصة بشركة 'فاليو' إلى السوق الأردني، عبر تشغيل منصتها للتقييم الائتماني والمدفوعات خارج مصر."
   },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
