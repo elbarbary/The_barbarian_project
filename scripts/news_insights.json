@@ -275,6 +275,10 @@
     "meaning": "The initiative establishes a technical training framework between Australia and the Egyptian Mineral Resources Authority to transfer operational expertise in mining sciences and regulatory oversight.",
     "meaning_ar": "تؤسس المبادرة إطاراً للتدريب الفني بين أستراليا وهيئة الثروة المعدنية لنقل الخبرات التشغيلية في علوم التعدين وآليات الرقابة التنظيمية."
   },
+  "افتتاح مصنع “اف تكس” لخيوط البوليستر في “تيدا” باستثمارات 10 ملايين دولار": {
+    "meaning": "The commissioning of the facility adds new domestic manufacturing capacity for polyester yarn within the TEDA industrial zone, expanding the local textile supply chain infrastructure.",
+    "meaning_ar": "يُمثل تشغيل المصنع إضافة طاقة تصنيعية محلية جديدة لخيوط البوليستر داخل منطقة «تيدا» الصناعية، مما يوسع البنية التحتية لسلسلة إمداد قطاع الغزل والنسيج."
+  },
   "الاتحاد الاوروبي يدرس حظر تصدير النفايات وخرده الالومنيوم": {
     "meaning": "An export restriction on European aluminum scrap retains secondary raw material within the EU market, which alters global scrap trade flows and affects input procurement dynamics for international recyclers and smelters.",
     "meaning_ar": "يُبقي فرض قيود على تصدير خردة الألومنيوم الأوروبية المواد الخام الثانوية داخل السوق الأوروبية، مما يغير مسارات التجارة العالمية للخردة ويؤثر على آليات توريد المدخلات لشركات الصهر وإعادة التدوير دولياً."
@@ -976,6 +980,10 @@
     "meaning": "International sukuk issuance provides foreign currency debt financing on the balance sheet, expanding the bank's liquidity pool in US dollars through Sharia-compliant fixed-income instruments.",
     "meaning_ar": "يمثل طرح الصكوك الدولية أداة تمويل بالعملة الأجنبية تُدرج ضمن التزامات الميزانية العمومية، حيث توفر سيولة مقومة بالدولار الأمريكي عبر أدوات دين متوافقة مع الشريعة الإسلامية."
   },
+  "مصنع جديد لانتاج خيوط البوليستر في السخنه باستثمارات 10 ملايين دولار": {
+    "meaning": "Establishing a USD 10 million polyester yarn plant in Sokhna adds operational manufacturing capacity for synthetic textile inputs in the industrial zone.",
+    "meaning_ar": "يضيف إنشاء مصنع لإنتاج خيوط البوليستر باستثمارات تبلغ 10 ملايين دولار في السخنة طاقة تصنيع محلية لمدخلات الغزل والنسيج ضمن المنطقة الصناعية."
+  },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
     "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
@@ -1019,6 +1027,10 @@
   "واشنطن تصعد شروطها وايران ترفض الخضوع": {
     "meaning": "Geopolitical friction between the US and Iran maintains elevated risk premiums in global energy markets and alters maritime freight insurance rates in regional trade corridors.",
     "meaning_ar": "يؤدي التوتر الجيوسياسي بين الولايات المتحدة وإيران إلى استمرار علاوات المخاطر المرتفعة في أسواق الطاقة العالمية وتغيير تسعير وثائق التأمين على الشحن البحري في الممرات التجارية بالمنطقة."
+  },
+  "ودايع الشركات بالدولار في كوريا الجنوبيه تسجل مستوي قياسيا": {
+    "meaning": "A record high in corporate US dollar deposits reflects that domestic firms retain their foreign currency export earnings and hold larger foreign-denominated cash balances on their balance sheets to settle international trade and debt obligations.",
+    "meaning_ar": "يعكس تسجيل الودائع الدولارية للشركات مستويات قياسية احتفاظ الشركات المحلية بحصائل صادراتها وتراكم السيولة بالعملات الأجنبية في ميزانياتها العمومية لتغطية متطلبات التجارة الدولية والالتزامات الخارجية."
   },
   "وزاره الدوله للاعلام تبدا التنسيق مع الوزارات لتحقيق تدفق ودقه المعلومات لوسايل الاعلام": {
     "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
@@ -1103,6 +1115,10 @@
   "“اودن” تشتري 2.8 مليون سهم *المصريين للاسكان”": {
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
     "meaning_ar": "تعكس هذه العملية زيادة في حصة ملكية وحقوق تصويت شركة أودن داخل شركة المصريين للإسكان والتنمية، مما يغير هيكل المساهمين ويؤثر على نسبة الأسهم حرة التداول في البورصة."
+  },
+  "“بايونيرز بروبرتيز” تشتري 2.5 مليون سهم خزينه": {
+    "meaning": "This transaction reallocates corporate cash reserves to absorb existing shares from the open market, which are then held on the balance sheet as non-voting treasury shares and deducted from total equity.",
+    "meaning_ar": "تتضمن هذه العملية استخدام السيولة النقدية للشركة لاسترداد جزء من أسهمها المتداولة في السوق المفتوح، حيث تُدرج في الميزانية العمومية كأسهم خزينة غير مصوتة وتُخصم من إجمالي حقوق الملكية."
   },
   "“بايونيرز بروبرتيز” تشتري 230 الف سهم خزينه": {
     "meaning": "This transaction entails acquiring 230,000 treasury shares, which reduces the volume of actively circulating shares in the market and adjusts the equity structure on the balance sheet.",
