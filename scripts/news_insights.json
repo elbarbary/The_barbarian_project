@@ -127,6 +127,10 @@
     "meaning": "The commissioning of this manufacturing facility establishes local industrial capacity for artificial turf within the Suez Canal Economic Zone, integrating domestic production with the zone's export and logistics infrastructure.",
     "meaning_ar": "يُضيف تشغيل هذا المرفق الصناعي قدرات تصنيع محلية للنجيل الصناعي داخل المنطقة الاقتصادية لقناة السويس، مما يربط الإنتاج المحلي بالبنية التحتية اللوجستية والتصديرية للمنطقة."
   },
+  "madbouly inaugurates white stone egypt mining calcium carbonate plant in sokhna": {
+    "meaning": "The inauguration expands domestic mineral processing capacity by converting raw calcium carbonate into industrial-grade materials within the Sokhna industrial zone.",
+    "meaning_ar": "يوسع افتتاح المصنع الطاقة الإنتاجية المحلية لمعالجة الخامات التعدينية عبر تحويل كربونات الكالسيوم إلى مدخلات صناعية داخل المنطقة الصناعية بالسخنة."
+  },
   "madbouly opens natrans fertilizer factory in sczone": {
     "meaning": "The commissioning of a new fertilizer manufacturing facility in the Suez Canal Economic Zone expands industrial production capacity and integrates supply chain operations near key maritime trade routes.",
     "meaning_ar": "يؤدي تشغيل مصنع جديد للأسمدة في المنطقة الاقتصادية لقناة السويس إلى زيادة الطاقة الإنتاجية الصناعية وربط سلاسل التوريد بالممرات الملاحية الرئيسية."
@@ -202,6 +206,14 @@
   "ارتفاع موشر \"ازدهار الخدمات اللوجستيه\" في الصين الي 50.9% في اغسطس": {
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
     "meaning_ar": "يعكس تجاوز المؤشر لمستوى 50% وجود قطاع الخدمات اللوجستية الصيني في نطاق التوسع التشغيلي، وهو ما يرصد حركة تدفق الشحن، ومعدلات إشغال المستودعات، وسرعة دوران البضائع عبر سلاسل الإمداد."
+  },
+  "ارتفاع موشرات البورصه المصريه بشكل جماعي في ختام تعاملات الاحد": {
+    "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
+    "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
+  },
+  "استثمارات مصنع اف تكس لخيوط البوليستر": {
+    "meaning": "Capital investments in the F-Tex polyester yarn facility direct funds toward expanding industrial manufacturing capacity, installing specialized machinery, and supplying synthetic fibers directly to domestic textile supply chains.",
+    "meaning_ar": "توجّه الاستثمارات الرأسمالية في مصنع «أف تكس» لخيوط البوليستر الأموال نحو توسيع الطاقة التصنيعية وتركيب خطوط إنتاج متخصصة لتوريد الألياف الصناعية إلى سلاسل إمداد الغزل والنسيج المحلية."
   },
   "استجابه لتصريحات بشان اسعار الفايده..عوايد سندات الخزانه الامريكيه تتراجع الخميس": {
     "meaning": "Lower US Treasury yields reflect higher bond prices following monetary policy commentary, setting the global benchmark rate for sovereign and corporate debt pricing.",
@@ -711,6 +723,10 @@
     "meaning": "Total billionaire wealth represents the aggregated market valuation of equity holdings in publicly traded and private enterprises, real estate, and financial assets priced across global capital markets.",
     "meaning_ar": "يمثل إجمالي ثروات المليارديرات القيمة السوقية المجمعة لحصص الملكية في الشركات المدرجة والخاصة والأصول المالية والرأسمالية المقومة بالأسعار الجارية في الأسواق العالمية."
   },
+  "جهاد عطيه: 100 كيلو جرام حجم انتاج مركز الملاذ الامن من الفضه يوميا": {
+    "meaning": "This operational metric establishes the current daily refining and manufacturing capacity of the facility, supplying 100 kilograms of processed silver to the local precious metals market per day.",
+    "meaning_ar": "يحدد هذا المؤشر التشغيلي الطاقة الإنتاجية اليومية الحالية للمنشأة في صقل وتصنيع الفضة، والتي تضخ 100 كيلوجرام يومياً في سوق المعادن الثمينة المحلي."
+  },
   "جهاز تنميه المشروعات يشارك في معرض الصين الدولي": {
     "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
     "meaning_ar": "توفر المشاركة في المعارض التجارية الدولية منصات عرض للمشروعات الصغيرة والمتوسطة المحلية وتربط المنتجين المحليين بالأسواق والمشترين الخارجيين عبر قنوات تواصل مباشر."
@@ -750,6 +766,10 @@
   "دويتشه بنك: العملات المستقره قد تدعم الطلب علي اصول الخزانه الامريكيه": {
     "meaning": "Stablecoin issuers back the value of their tokens by holding liquid reserve assets, which consist primarily of short-term US Treasury bills and cash equivalents.",
     "meaning_ar": "يقوم مصدرو العملات المستقرة بتغطية قيمة رموزهم الرقمية عبر الاحتفاظ بأصول احتياطية سائلة، تتكون أساساً من أذون الخزانة الأمريكية قصيرة الأجل والنقد وما يعادله."
+  },
+  "دويتشه بنك: المركزي الاوروبي قد يواصل رفع الفايده اذا استمرت ضغوط الاسعار": {
+    "meaning": "Central bank interest rate hikes tighten monetary conditions to absorb excess liquidity and counter inflation, which raises the cost of euro-denominated borrowing in global financial markets.",
+    "meaning_ar": "تعتمد البنوك المركزية آلية رفع أسعار الفائدة لامتصاص السيولة النقدية ومواجهة التضخم، وهو ما يرفع تكلفة الاقتراض المقوم باليورو في الأسواق المالية."
   },
   "دويتشه بنك: امريكا تراهن علي ترميز الاصول لتعزيز قوه الدولار": {
     "meaning": "Asset tokenization represents traditional financial assets as digital tokens on distributed ledger networks, using dollar-denominated instruments and stablecoins as the primary medium of exchange and settlement.",
@@ -838,6 +858,10 @@
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
+  },
+  "سعر اليورو في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
+    "meaning": "Stability in the euro's exchange rate reflects steady supply and demand dynamics across the local banking sector, keeping import and foreign currency settlement costs unchanged for European trade transactions.",
+    "meaning_ar": "يعكس استقرار سعر صرف اليورو توازن قوى العرض والطلب داخل القطاع المصرفي المحلي، مما يُبقي على تكاليف الاستيراد والتسويات بالعملة الأجنبية للمعاملات التجارية الأوروبية دون تغيير."
   },
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. تراجع طفيف": {
     "meaning": "A marginal decline in the euro exchange rate against the Egyptian pound reflects daily foreign exchange fluctuations within the official banking sector, adjusting the settlement cost for euro-denominated import transactions and foreign debt service obligations.",
@@ -1060,6 +1084,10 @@
     "meaning": "This initiative integrates in-flight connectivity and biometric data transmission with EgyptAir Hospital's ground medical infrastructure, enabling real-time clinical assessment of passengers during flights.",
     "meaning_ar": "يربط تطبيق المتابعة الطبية عن بُعد بين أنظمة نقل البيانات الحيوية على متن الطائرات والكوادر الطبية بالمستشفى، مما يتيح التقييم الصحي المباشر للمسافرين أثناء الرحلات الجوية."
   },
+  "مشروع لصناعه الابواب الخشبيه في السخنه باستثمارات 20 مليون دولار": {
+    "meaning": "The deployment of $20 million in capital expenditures establishes a dedicated wooden door manufacturing facility in the Sokhna industrial zone, expanding domestic building materials production capacity.",
+    "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة 20 مليون دولار إنشاء مصنع مخصص لإنتاج الأبواب الخشبية في المنطقة الصناعية بالسخنة، مما يرفع الطاقة الإنتاجية المحلية في قطاع مواد البناء."
+  },
   "مصانع الصلصه تعاني من شحيه المعروض من الطماطم": {
     "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
     "meaning_ar": "يؤدي نقص المعروض من محصول الطماطم الخام إلى تقييد توافر المدخلات الإنتاجية لمصانع الصلصة، مما يؤثر على معدلات التشغيل وتكاليف توريد المواد الخام في قطاع الصناعات الغذائية."
@@ -1075,6 +1103,10 @@
   "مصر تعتزم اصدار سندات دوليه بنحو 3 مليارات دولار خلال 2026-2027": {
     "meaning": "International sovereign bond issuances act as external debt financing mechanisms that supply foreign currency to the state treasury and create fixed-rate debt service liabilities on the government balance sheet.",
     "meaning_ar": "يُعد طرح السندات السيادية الدولية آلية تمويل عبر الاقتراض الخارجي توفر السيولة بالنقد الأجنبي للخزانة العامة، وتترتب عليها التزامات لسداد أعباء الدين ذات العائد الثابت في الموازنة العامة."
+  },
+  "مصر تعتزم تطوير اليه لتمويل مشروعات البنيه التحتيه بالعمله المحليه": {
+    "meaning": "The mechanism establishes a framework for funding infrastructure assets through Egyptian pound-denominated debt instruments and credit facilities, structuring project obligations in domestic currency rather than foreign exchange.",
+    "meaning_ar": "تؤسس الآلية إطاراً لتمويل أصول البنية التحتية عبر أدوات دين وتسهيلات ائتمانية مقومة بالجنيه المصري، مما يجعل هيكلة الالتزامات المالية للمشروعات قائمة بالعملة المحلية بدلاً من العملات الأجنبية."
   },
   "مصر للطيران تطلق اولي رحلاتها الجويه الي زنجبار بتنزانيا": {
     "meaning": "Operating direct flights to Zanzibar adds a scheduled destination to the carrier's African network and allocates active fleet capacity to the East Africa corridor.",
@@ -1223,6 +1255,10 @@
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
     "meaning_ar": "سجلت شركة الدلتا للتأمين صافي أرباح قدره 302.1 مليون جنيه خلال النصف الأول، وهو ما يعكس الفائض التشغيلي المحقق من أنشطة الاكتتاب التأميني مضافاً إليه عوائد استثمار المحفظة المالية للشركة."
+  },
+  "“الرقابه الماليه” تشكل مجموعه عمل لتعزيز المسووليه المجتمعيه": {
+    "meaning": "The Financial Regulatory Authority (FRA) forms a dedicated working group to draft regulatory frameworks and standards for corporate social responsibility (CSR) and ESG integration across non-banking financial institutions and listed entities.",
+    "meaning_ar": "تُشكّل الهيئة العامة للرقابة المالية مجموعة عمل متخصصة لوضع الأطر والمعايير التنظيمية المنظمة لممارسات المسؤولية المجتمعية والحوكمة البيئية والاجتماعية للشركات المقيدة والمؤسسات المالية غير المصرفية."
   },
   "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
     "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
