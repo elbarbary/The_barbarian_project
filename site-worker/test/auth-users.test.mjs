@@ -133,10 +133,19 @@ test('/auth/users admin endpoint checks authorization and returns users list or 
   assert.equal(authData.count, 2);
   assert.deepEqual(authData.users, ['alpha@esthmr.com', 'beta@esthmr.com']);
 
-  // 3. Authorized via query param token
+  // 3. The token in the URL is REFUSED, correct value or not.
+  //
+  // This asserted 200 when the endpoint accepted `?token=`. It is a 400 now:
+  // a secret in a query string is a secret in shell history, in browser
+  // history, in a referrer and in any log that keeps a query — and on
+  // 6 Sep 2026 that was why nine successful reads of this list could not be
+  // told apart, in analytics, from any other GET. The refusal deliberately
+  // does not depend on whether the value was right, or the endpoint becomes
+  // an oracle for the token it is refusing.
   const queryReq = new Request('https://esthmr.com/esthmr/api/auth/users?token=super-secret-admin-token');
   const queryRes = await worker.fetch(queryReq, env);
-  assert.equal(queryRes.status, 200);
+  assert.equal(queryRes.status, 400);
+  assert.match((await queryRes.json()).error, /Authorization header/);
 
   // 4. Query specific user
   const userReq = new Request('https://esthmr.com/esthmr/api/auth/users?email=alpha@esthmr.com', {

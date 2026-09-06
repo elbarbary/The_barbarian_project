@@ -1067,3 +1067,55 @@ test('a client claiming to be a browser without an Origin is held to the challen
   assert.equal(spoofedBrowser(null, 'curl/8.7.1'), false);
   assert.equal(spoofedBrowser(null, ''), false);
 });
+
+/* The user list is the only thing this Worker serves that is people rather
+ * than market data, and it was the least-defended door on it. Found on
+ * 6 Sep 2026 while reading the logs for scrapers. */
+const ADMIN = 'https://esthmr.com/esthmr/api/auth/users';
+
+test('the admin token is refused in a URL, right or wrong', async () => {
+  // A secret in a query string is a secret in shell history, in browser
+  // history, in a referrer, and in any log that keeps a query. The refusal
+  // must not depend on whether the value was correct, or the endpoint
+  // becomes an oracle for the token it just told you not to send that way.
+  const e = env({ STATUS_TOKEN: 'the-real-one' });
+  for (const token of ['the-real-one', 'a-wrong-one']) {
+    const answer = await call(e, `${ADMIN}?token=${token}`);
+    assert.equal(answer.status, 400, token);
+    assert.match((await answer.json()).error, /Authorization header/);
+  }
+  // The header still works.
+  const ok = await call(e, ADMIN, { headers: { authorization: 'Bearer the-real-one' } });
+  assert.equal(ok.status, 200);
+});
+
+test('the session-signing secret is not an admin password', async () => {
+  /* It used to be the fallback: `env.STATUS_TOKEN || env.SESSION_SECRET`.
+     That secret signs every session cookie, so one deleted binding collapsed
+     two roles into one — and anyone holding the admin password could then
+     forge a session for any address. Unset means unavailable. */
+  const e = env({ SESSION_SECRET: SECRET });          // no STATUS_TOKEN
+  const answer = await call(e, ADMIN, { headers: { authorization: `Bearer ${SECRET}` } });
+  assert.equal(answer.status, 503, 'the session secret opened the user list');
+  assert.notEqual(answer.status, 200);
+});
+
+test('the user list is rate limited like everything else on this Worker', async () => {
+  const e = env({ STATUS_TOKEN: 'the-real-one' });
+  const headers = { authorization: 'Bearer wrong', 'cf-connecting-ip': '203.0.113.9' };
+  let refused = 0;
+  for (let i = 0; i < 30; i += 1) {
+    const answer = await call(e, ADMIN, { headers });
+    if (answer.status === 429) refused += 1;
+  }
+  assert.ok(refused > 0, 'the token space can be walked without a single 429');
+});
+
+test('a wrong token is still refused, and a right one still works', async () => {
+  const e = env({ STATUS_TOKEN: 'the-real-one' });
+  assert.equal((await call(e, ADMIN, { headers: { authorization: 'Bearer nope' } })).status, 401);
+  assert.equal((await call(e, ADMIN)).status, 401);
+  const ok = await call(e, ADMIN, { headers: { authorization: 'Bearer the-real-one' } });
+  assert.equal(ok.status, 200);
+  assert.equal(ok.headers.get('cache-control'), 'no-store');
+});

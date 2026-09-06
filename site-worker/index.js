@@ -66,6 +66,9 @@ const LIMITS = {
   // locked all of them out for what one of them did.
   codePerIpUnsolved: { max: 6, window: 3600 },
   verifyPerEmail: { max: 8, window: 900 },
+  // The admin endpoints. Generous for a person reading their own user list,
+  // and a hard stop on anything walking the token space.
+  adminPerIp: { max: 20, window: 3600 },
   // The data gate is on the platform's limiter now (see `overRate`) and no
   // longer reads this. Kept as the record of what the ceiling used to be:
   // 1,500 an hour, at the cost of a KV write per document fetched.
@@ -100,6 +103,21 @@ function b64(text) {
 
 export async function sha256(text) {
   return b64url(await crypto.subtle.digest('SHA-256', enc.encode(text)));
+}
+
+/** Two secrets compared without leaking their length or prefix by timing.
+ *
+ * `unsign` was moved to `crypto.subtle.verify` this morning for exactly this
+ * reason; the admin check beside it was still a plain `!==`. Over a network
+ * the practical risk is small, but the standard is already set in this file.
+ */
+function timingSafe(a, b) {
+  const left = enc.encode(String(a));
+  const right = enc.encode(String(b));
+  if (left.length !== right.length) return false;
+  let diff = 0;
+  for (let i = 0; i < left.length; i += 1) diff |= left[i] ^ right[i];
+  return diff === 0;
 }
 
 async function hmacKey(secret) {
@@ -1130,15 +1148,53 @@ async function api(request, env, url, ctx) {
     return json({ error: 'method' }, 405);
   }
 
-  if (path === '/auth/users') {
-    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
-    const secret = env.STATUS_TOKEN || env.SESSION_SECRET;
+  /* The two endpoints that answer with reader identities rather than market
+   * data, and the only ones on this Worker whose blast radius is people.
+   *
+   * Three things were wrong with the check they shared, all found on
+   * 6 Sep 2026 while reading the logs for scrapers.
+   *
+   * It accepted the secret in the QUERY STRING as well as the header. A
+   * secret in a URL is a secret in shell history, in browser history, in a
+   * referrer, and in every request log that keeps a query — and it is why the
+   * nine successful reads of the user list that day could not be told apart,
+   * in analytics, from any other GET. Header only now. The token is being
+   * rotated alongside this change because it may have travelled that way.
+   *
+   * It fell back to `SESSION_SECRET` when `STATUS_TOKEN` was unset. That
+   * secret signs every session cookie on the site; making it double as an
+   * admin password means one deleted binding silently collapses two roles
+   * into one, and anyone who learns the admin password can then forge a
+   * session for any address. Unset now means 503, which is what it already
+   * said it would do.
+   *
+   * And it was not rate limited at all, while the sign-in endpoints beside it
+   * carry four separate ceilings — the least-defended door in front of the
+   * most sensitive data.
+   */
+  async function admin(request, env, url, ip) {
+    const secret = env.STATUS_TOKEN;
     if (!secret) return json({ error: 'not configured' }, 503);
-    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '')
-      || url.searchParams.get('token') || '';
-    if (!offered || offered !== secret) {
+    if (url.searchParams.has('token')) {
+      // Said plainly rather than silently ignored: whoever is holding it this
+      // way needs to stop, and the answer must not depend on whether the
+      // value happened to be right.
+      return json({ error: 'the token goes in the Authorization header' }, 400);
+    }
+    if (await overLimit(env, 'admin', ip, LIMITS.adminPerIp)) {
+      return json({ error: 'too many requests' }, 429);
+    }
+    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
+    if (!offered || !timingSafe(offered, secret)) {
       return json({ error: 'unauthorized' }, 401);
     }
+    return null;                      // null means "carry on"
+  }
+
+  if (path === '/auth/users') {
+    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
+    const refused = await admin(request, env, url, ip);
+    if (refused) return refused;
     const targetEmail = normalise(url.searchParams.get('email') || '');
     if (targetEmail) {
       const user = env.ESTHMR_AUTH ? await env.ESTHMR_AUTH.get(`user:${targetEmail}`, 'json') : null;
@@ -1151,13 +1207,8 @@ async function api(request, env, url, ctx) {
   }
 
   if (path === '/auth/sync-resend') {
-    const secret = env.STATUS_TOKEN || env.SESSION_SECRET;
-    if (!secret) return json({ error: 'not configured' }, 503);
-    const offered = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '')
-      || url.searchParams.get('token') || '';
-    if (!offered || offered !== secret) {
-      return json({ error: 'unauthorized' }, 401);
-    }
+    const refusedSync = await admin(request, env, url, ip);
+    if (refusedSync) return refusedSync;
     const report = await syncFromResend(env, ctx);
     return json(report, 200, { 'cache-control': 'no-store' });
   }
