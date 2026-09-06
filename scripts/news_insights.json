@@ -319,6 +319,10 @@
     "meaning": "The initiative establishes a technical training framework between Australia and the Egyptian Mineral Resources Authority to transfer operational expertise in mining sciences and regulatory oversight.",
     "meaning_ar": "تؤسس المبادرة إطاراً للتدريب الفني بين أستراليا وهيئة الثروة المعدنية لنقل الخبرات التشغيلية في علوم التعدين وآليات الرقابة التنظيمية."
   },
+  "افتتاح المرحله الاولي من مصنع “ديزايني دورز” للابواب الخشبيه ب12 مليون دولار": {
+    "meaning": "The commissioning of the initial phase represents the deployment of $12 million in capital expenditure into domestic manufacturing, adding operational production capacity to the local building materials and wood processing supply chain.",
+    "meaning_ar": "يمثل تشغيل المرحلة الأولى ضخ نفقات رأسمالية بقيمة 12 مليون دولار في التصنيع المحلي، مما يضيف طاقة إنتاجية تشغيلية إلى سلاسل إمداد مواد البناء والصناعات الخشبية."
+  },
   "افتتاح مصنع “اف تكس” لخيوط البوليستر في “تيدا” باستثمارات 10 ملايين دولار": {
     "meaning": "The commissioning of the facility adds new domestic manufacturing capacity for polyester yarn within the TEDA industrial zone, expanding the local textile supply chain infrastructure.",
     "meaning_ar": "يُمثل تشغيل المصنع إضافة طاقة تصنيعية محلية جديدة لخيوط البوليستر داخل منطقة «تيدا» الصناعية، مما يوسع البنية التحتية لسلسلة إمداد قطاع الغزل والنسيج."
@@ -1159,6 +1163,10 @@
   "مصنع جديد لانتاج خيوط البوليستر في السخنه باستثمارات 10 ملايين دولار": {
     "meaning": "Establishing a USD 10 million polyester yarn plant in Sokhna adds operational manufacturing capacity for synthetic textile inputs in the industrial zone.",
     "meaning_ar": "يضيف إنشاء مصنع لإنتاج خيوط البوليستر باستثمارات تبلغ 10 ملايين دولار في السخنة طاقة تصنيع محلية لمدخلات الغزل والنسيج ضمن المنطقة الصناعية."
+  },
+  "مصنع جديد لتكنولوجيا مواد البناء في السخنه باستثمارات 10 ملايين دولار": {
+    "meaning": "The project commits direct capital expenditure toward establishing a new manufacturing facility in the Sokhna industrial zone, adding physical capacity to the domestic building materials supply chain.",
+    "meaning_ar": "يوجّه المشروع نفقات رأسمالية مباشرة لإنشاء منشأة تصنيع جديدة في المنطقة الصناعية بالسخنة، مما يضيف طاقة إنتاجية مادية إلى سلاسل إمداد مواد البناء المحلية."
   },
   "مصنع صيني لصناعه الفرش ومنتجات الابواب في السخنه باستثمارات 10 ملايين دولار": {
     "meaning": "The project injects $10 million in foreign direct investment into the Suez Canal Economic Zone to establish a manufacturing facility for door components and weatherstripping, expanding the local industrial base for building materials.",
