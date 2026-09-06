@@ -75,6 +75,10 @@
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
   },
+  "egypt outsourcing sector entering a new era of higher value growth": {
+    "meaning": "The outsourcing sector shifts operational focus from basic customer support and business process outsourcing (BPO) to specialized knowledge process outsourcing (KPO), software engineering, and high-complexity technical services. This structural transition relies on skilled labor to deliver export-oriented digital and professional services.",
+    "meaning_ar": "يتحول قطاع التعهيد من خدمات الدعم الفني وخدمة العملاء التقليدية إلى مجالات التعهيد القائم على المعرفة وهندسة البرمجيات والخدمات التقنية المتخصصة. يعتمد هذا النموذج التشغيلي على الكفاءات المؤهلة لتقديم خدمات تصديرية ورقمية ذات تعقيد فني أعلى."
+  },
   "el sisi directs state bodies to adopt greening cairo project": {
     "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
     "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
@@ -514,6 +518,10 @@
   "تقرير: اوروبا تضع اموال البنوك المركزيه في قلب الاسواق المرمزه": {
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
+  },
+  "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
+    "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
+    "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية للمشروعات الصغيرة والمتوسطة التابعة مساحات عرض وتسويق مباشرة للشركات الأجنبية وشبكات التوزيع الخارجية."
   },
   "توقعات بتعافي الوظايف الامريكيه وسط ترقب قرار الفيدرالي بشان الفايده": {
     "meaning": "US employment metrics serve as primary inputs for Federal Reserve interest rate policy, which directly determines international capital flows and USD liquidity pricing across emerging markets such as Egypt.",
