@@ -535,6 +535,10 @@
     "meaning": "The collapse of a major real estate developer exposes private credit funds to non-performing debt assets and prompts direct lenders to reprice risk across non-bank lending portfolios.",
     "meaning_ar": "يؤدي انهيار مطور عقاري إلى تعريض صناديق الائتمان الخاص لأصول ديون متعثرة، ويدفع جهات الإقراض المباشر إلى إعادة تسعير المخاطر عبر محافظ التمويل غير المصرفي."
   },
+  "اي صاغه تطلق منظومه موحده لتداول سبايك 3 شركات مصريه وسعوديه": {
+    "meaning": "The unified system centralizes the quotation, ordering, and settlement of standardized bullion products from three Egyptian and Saudi precious metal producers under a single trading interface.",
+    "meaning_ar": "توحد المنظومة عمليات التسعير وعرض وتنفيذ تداولات سبائك الذهب التابعة للشركات الثلاث المصرية والسعودية عبر واجهة تداول رقمية موحدة."
+  },
   "ايرادات اغسطس القياسيه ب29 مليار دولار تعزز توقعات فوكسكون لربع ثالث قوي": {
     "meaning": "Monthly revenue figures provide the primary accounting data used to compile top-line financial results for the quarterly reporting period in electronics manufacturing.",
     "meaning_ar": "تُشكل بيانات الإيرادات الشهرية الأساس المحاسبي المباشر لاحتساب إجمالي نتائج الأعمال المالية للفترة الربع سنوية في قطاع تصنيع الإلكترونيات."
@@ -1232,6 +1236,10 @@
     "meaning": "This transaction represents an equity stake acquisition that increases Odin's ownership and voting interest in Egyptians for Housing & Development, altering the firm's shareholder structure and reducing the volume of freely traded shares on the exchange.",
     "meaning_ar": "تعكس هذه العملية زيادة في حصة ملكية وحقوق تصويت شركة أودن داخل شركة المصريين للإسكان والتنمية، مما يغير هيكل المساهمين ويؤثر على نسبة الأسهم حرة التداول في البورصة."
   },
+  "“اي اف چي هيرميس” تتيح التحقق الرقمي للاجانب عبر جوازات السفر الالكترونيه": {
+    "meaning": "EFG Hermes integrates digital biometric passport verification into its onboarding infrastructure, establishing a remote identity authentication mechanism for foreign investors without physical branch verification.",
+    "meaning_ar": "تدمج 'إي إف چي هيرميس' تقنية التحقق الرقمي من جوازات السفر البيومترية ضمن بنيتها التحتية لتسجيل العملاء، مما يوفر آلية للتحقق من هوية المستثمرين الأجانب عن بُعد دون الحاجة إلى التواجد الفعلي في الفروع."
+  },
   "“بايونيرز بروبرتيز” تشتري 2.5 مليون سهم خزينه": {
     "meaning": "This transaction reallocates corporate cash reserves to absorb existing shares from the open market, which are then held on the balance sheet as non-voting treasury shares and deducted from total equity.",
     "meaning_ar": "تتضمن هذه العملية استخدام السيولة النقدية للشركة لاسترداد جزء من أسهمها المتداولة في السوق المفتوح، حيث تُدرج في الميزانية العمومية كأسهم خزينة غير مصوتة وتُخصم من إجمالي حقوق الملكية."
@@ -1239,6 +1247,10 @@
   "“بايونيرز بروبرتيز” تشتري 230 الف سهم خزينه": {
     "meaning": "This transaction entails acquiring 230,000 treasury shares, which reduces the volume of actively circulating shares in the market and adjusts the equity structure on the balance sheet.",
     "meaning_ar": "تمثل هذه العملية استرداد الشركة لعدد 230 ألف سهم لتصبح أسهم خزينة، مما يقلص كمية الأسهم المتاحة للتداول في السوق ويعدل هيكل حقوق الملكية في الميزانية العمومية."
+  },
+  "“بي شين تاي شان” لتكنولوجيا مواد البناء تفتتح مصنعا في السخنه باستثمارات 10 ملايين دولار": {
+    "meaning": "Establishing a new manufacturing facility deploys direct capital expenditure into building materials production and creates a localized operational base in the Sokhna industrial zone.",
+    "meaning_ar": "يمثل تدشين المنشأة الصناعية الجديدة ضخاً لنفقات رأسمالية مباشرة في تصنيع مواد البناء وتأسيساً لقاعدة إنتاجية محلية في منطقة السخنة الصناعية."
   },
   "“ترامب” يدفع الحلفاء بعيدا عن امريكا": {
     "meaning": "Changes in international trade and geopolitical policies lead partner nations to diversify trade agreements, bilateral settlement currencies, and cross-border supply chains to decrease reliance on a single market.",
