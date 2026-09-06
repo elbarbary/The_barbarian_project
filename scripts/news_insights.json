@@ -35,6 +35,10 @@
     "meaning": "The arrival of 45.8 thousand tonnes of yellow corn at Damietta Port adds to the raw material supply for the domestic animal feed, poultry, and food processing industries.",
     "meaning_ar": "يضيف وصول 45.8 ألف طن من الذرة الصفراء إلى ميناء دمياط كميات جديدة من المواد الخام الموجهة لقطاعات الأعلاف والدواجن والصناعات الغذائية المحلية."
   },
+  "50 الف زاير للمهرجان الوطني للسلع في موسمه الثالث": {
+    "meaning": "High visitor footfall at commercial commodity exhibitions operates as a direct-to-consumer distribution channel, facilitating immediate inventory turnover for participating suppliers and producers outside traditional retail networks.",
+    "meaning_ar": "يمثل الإقبال الجماهيري على المعارض السلعية قناة توزيع مباشرة من المنتجين والموردين إلى المستهلكين، مما يحقق تصريفاً للمخزون السلعي خارج شبكات التجزئة الوسيطة."
+  },
   "500 مكتب بريد تستقبل طلبات تحديث بيانات البطاقات التموينيه المتوقفه": {
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
@@ -482,6 +486,10 @@
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
+  },
+  "الحكومه تقترب من طرح «الامل الشريف للبلاستيك» بالبورصه ديسمبر المقبل": {
+    "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
+    "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
   },
   "الحكومه توافق علي تجديد بروتوكول تنفيذ مشروعات مصر الرقميه لمده 3 سنوات": {
     "meaning": "Extending the Digital Egypt project protocol establishes a continuous three-year operational framework for contracted technology firms to supply digital transformation and IT infrastructure services to government entities.",
@@ -1176,6 +1184,10 @@
     "meaning": "Labor dispute resolution procedures enforce corporate compliance with Egyptian labor laws, directly affecting operating expense structures, legal provisions, and human resource management costs across businesses.",
     "meaning_ar": "تحدد إجراءات تسوية النزاعات العمالية آليات الامتثال لقانون العمل المصري، وهو ما ينعكس مباشرة على هيكل المصروفات التشغيلية والمخصصات القانونية وتكاليف إدارة الموارد البشرية لدى الشركات."
   },
+  "كيف تلتحق بمراكز التدريب التابعه لوزاره العمل .. تعرف علي الشروط وخطوات التسجيل": {
+    "meaning": "Vocational training centers run by the Ministry of Labor process applicant enrollment through standardized technical criteria, supplying trained labor directly to local industries.",
+    "meaning_ar": "تعمل مراكز التدريب المهني التابعة لوزارة العمل على تسجيل وتأهيل الكوادر وفق معايير فنية محددة لتزويد القطاعات الإنتاجية المحلية بالعمالة المدربة."
+  },
   "كيف يتحول سوق الملابس الرياضه من نزيف استيرادي الي صناعه للتصدير؟": {
     "meaning": "This transition involves replacing imported finished sportswear with domestic manufacturing capacity, utilizing local textile supply chains to serve both the domestic market and foreign buyers.",
     "meaning_ar": "يتمثل هذا التحول في إحلال المنتجات تامة الصنع المستوردة في قطاع الملابس الرياضية عبر إنشاء قدرات تصنيع محلي، مع الاعتماد على سلاسل إمداد الغزل والنسيج لتلبية متطلبات السوق المحلي والأسواق الخارجية."
@@ -1288,6 +1300,10 @@
     "meaning": "Operating direct flights to Zanzibar adds a scheduled destination to the carrier's African network and allocates active fleet capacity to the East Africa corridor.",
     "meaning_ar": "يضيف تشغيل رحلات جوية مباشرة إلى زنجبار مساراً منتظماً لشبكة خطوط الشركة في إفريقيا ويخصص جزءاً من السعة التشغيلية لأسطولها باتجاه شرق إفريقيا."
   },
+  "مصر والاردن توكدان حرصهما علي تطوير التعاون ودفع اليه التعاون الثلاثي مع العراق": {
+    "meaning": "The trilateral mechanism establishes an intergovernmental operational framework for cross-border infrastructure, energy grid interconnections, and regional trade logistics between Egypt, Jordan, and Iraq.",
+    "meaning_ar": "تؤسس آلية التعاون الثلاثي إطاراً تشغيلياً حكومياً مشتركاً لمشاريع البنية التحتية، والربط الكهربائي، والخدمات اللوجستية للتبادل التجاري بين مصر والأردن والعراق."
+  },
   "مصر والبوسنه تعززان التعاون في الصناعات الدفاعيه": {
     "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
     "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
@@ -1361,9 +1377,8 @@
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
   },
   "نقيب الفلاحين: مفيش دوله في العالم تاكل 20 مليون طن قمح في السنه": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "High national wheat consumption requires reliance on both local harvests and international grain imports, directly linking state food subsidy expenditures and foreign exchange allocations to global agricultural commodity procurement.",
+    "meaning_ar": "يربط ارتفاع معدلات استهلاك القمح المحلي بين تلبية احتياجات منظومة الدعم السلعي عبر التوريد المحلي واستيراد الحبوب، وما يستلزمه ذلك من تدبير للنقد الأجنبي وتخصيصات الموازنة العامة."
   },
   "نموا بمبيعات كونكريت فاشون بنهايه يونيو": {
     "meaning": "Concrete Fashion records an increase in top-line revenue through higher volumes of apparel sold or adjusted unit pricing across its retail and export operations as of the period ending in June.",
