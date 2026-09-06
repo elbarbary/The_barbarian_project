@@ -751,6 +751,10 @@
     "meaning": "The US Federal Reserve's benchmark policy rate sets the cost of US dollar borrowing globally and determines the yield differential between dollar assets and emerging market debt instruments.",
     "meaning_ar": "تحدد أسعار الفائدة المرجعية لمجلس الاحتياطي الفيدرالي تكلفة الاقتراض بالدولار الأمريكي عالمياً، وتشكل الفارق في العائد بين الأصول الدولارية وأدوات الدين في الأسواق الناشئة."
   },
+  "تركيا تتوقع تراجع التضخم الي 28.4% خلال 2026 و21% في 2027": {
+    "meaning": "Official medium-term inflation projections reflect macroeconomic planning assumptions tied to monetary tightening paths and fiscal consolidation frameworks.",
+    "meaning_ar": "تعكس المستهدفات الرسمية للتضخم متوسط الأجل افتراضات التخطيط الاقتصادي الكلي المرتبطة بمسارات التشديد النقدي وأطر ضبط الأوضاع المالية العامة."
+  },
   "تركيا تخفض توقعات النمو في 2027 وسط حديث عن انتخابات مبكره": {
     "meaning": "Official macroeconomic forecast revisions update multi-year fiscal targets and baseline planning parameters within government budgetary frameworks during shifts in political timelines.",
     "meaning_ar": "يمثل تعديل التوقعات الاقتصادية الرسمية إعادة ضبط للمستهدفات المالية ومعايير التخطيط المالي ضمن الموازنة الحكومية في ظل تغيرات الجداول الزمنية السياسية."
@@ -1395,6 +1399,10 @@
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
+  },
+  "يوني كريديت: تقليص الاعتماد علي الدولار يعيد تشكيل الطلب علي سندات الخزانه الامريكيه": {
+    "meaning": "Central banks and international institutions reallocate foreign exchange reserves away from the US dollar into alternative currencies and assets, directly altering the composition and geographical distribution of institutional buying for US sovereign debt instruments.",
+    "meaning_ar": "تعيد البنوك المركزية والمؤسسات الدولية توزيع احتياطياتها من النقد الأجنبي بعيداً عن الدولار الأمريكي نحو عملات وأصول بديلة، مما يغير التركيبة الهيكلية والتوزيع الجغرافي للمشترين المؤسسيين لأدوات الدين السيادي الأمريكي."
   },
   "ڤاليو تطلق رسميا اول مرحله من اعمالها في الاردن": {
     "meaning": "This operational rollout establishes cross-border geographic expansion, deploying the company's consumer finance technology platform and merchant partner network into the Jordanian market.",
