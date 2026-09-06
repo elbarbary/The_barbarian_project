@@ -115,6 +115,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "madbouly inaugurates beixin taishan egypt building materials factory in sokhna": {
+    "meaning": "The inauguration of the manufacturing facility adds industrial production capacity for building materials within the Suez Canal Economic Zone and expands foreign direct asset deployment in the domestic construction inputs sector.",
+    "meaning_ar": "يضيف افتتاح المنشأة الصناعية طاقة إنتاجية جديدة لمواد البناء داخل المنطقة الاقتصادية لقناة السويس، ويزيد من حجم الأصول الأجنبية المباشرة في قطاع مدخلات البناء المحلي."
+  },
   "madbouly inaugurates f tex polyester yarn factory in sczone": {
     "meaning": "The commissioning of the F-Tex facility expands domestic manufacturing capacity for polyester yarn and synthetic textile inputs within the Suez Canal Economic Zone.",
     "meaning_ar": "يضيف تشغيل مصنع \"إف تكس\" طاقة تصنيع محلية لإنتاج خيوط البوليستر ومدخلات الغزل الصناعي داخل المنطقة الاقتصادية لقناة السويس."
@@ -234,6 +238,10 @@
   "اسعار الحديد في مصر خلال سبتمبر 2026.. حديد عز عند 39850 جنيها": {
     "meaning": "The announced factory-gate price for Ezz Steel sets the monthly benchmark for local rebar distribution, directly determining the raw material procurement costs for domestic construction projects.",
     "meaning_ar": "يحدد السعر المعلن لحديد عز من أرض المصنع السعر المرجعي الشهري لتوزيع حديد التسليح محلياً، وهو ما يحدد تكاليف توريد المواد الخام لمشروعات التشييد والبناء المحلية."
+  },
+  "اسعار الخضار والفاكهه اليوم في مصر.. تحديث سوق العبور": {
+    "meaning": "Obour Market functions as the primary wholesale price-discovery hub for fresh produce in Egypt, where daily spot clearing prices establish the baseline input costs for downstream retail food supply chains.",
+    "meaning_ar": "يمثل سوق العبور المنظومة المركزية لتسعير السلع الزراعية بالجملة في مصر، حيث تحدد أسعار التداول الفورية اليومية التكلفة الأساسية لسلاسل إمداد وتوزيع التجزئة الغذائية."
   },
   "اسعار الخضروات والفاكهه اليوم الاحد 6-9-2026": {
     "meaning": "Daily vegetable and fruit prices reflect wholesale market supply and demand conditions, logistics costs, and seasonal harvest volumes that directly influence the consumer price index (CPI) food basket component.",
@@ -695,6 +703,10 @@
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
   },
+  "تقرير: صمود اقتصاد اوروبا يدعم الايتمان.. ومخاطر الدين تهدد البنوك": {
+    "meaning": "Economic resilience sustains corporate cash flows and debt-servicing capacity, while high sovereign debt levels directly increase valuation and default risks on commercial banks' sovereign bond portfolios.",
+    "meaning_ar": "يؤدي صمود الأداء الاقتصادي إلى استقرار التدفقات النقدية وقدرة الشركات على سداد التزاماتها، في حين تفرض مستويات الديون المرتفعة مخاطر ائتمانية وتذبذبات في تقييم محافظ السندات السيادية لدى البنوك."
+  },
   "تقييم بنك القاهره يرتفع": {
     "meaning": "An increase in Banque du Caire's valuation reflects higher assessed net asset value or updated multiples applied to its financial fundamentals by market assessors.",
     "meaning_ar": "يعكس ارتفاع تقييم بنك القاهرة زيادة في القيمة الصافية المقدرة لأصوله أو تطبيق مضاعفات تقييم أعلى على مؤشراته المالية الأساسية من قبل جهات التقييم."
@@ -854,6 +866,10 @@
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
     "meaning_ar": "تؤدي زيادة أسعار الفائدة الأمريكية إلى رفع تكلفة الفرصة البديلة لحيازة الذهب كأصل عديم العائد وتعزيز قوة الدولار، مما يضغط سلبًا على تسعير السلع المقومة بالعملة الأمريكية."
+  },
+  "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
+    "meaning": "The closing stability of the Saudi Riyal against the Egyptian Pound reflects a balance between foreign currency supply and demand within the banking system, fixing daily settlement rates for bilateral trade invoices, remittance conversions, and religious travel operational costs.",
+    "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي أمام الجنيه المصري عند الإغلاق توازن المعروض والطلب على العملة داخل القطاع المصرفي، مما يثبت أسعار التسوية اليومية لفواتير التبادل التجاري، وتحويلات العاملين، والتكاليف التشغيلية لبرامج السفر الديني."
   },
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
