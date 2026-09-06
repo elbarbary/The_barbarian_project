@@ -302,15 +302,27 @@ async function doc(path) {
  */
 const QUOTES = 'https://quotes.thebarbarianproject.com/quotes.json';
 
+/** How long the live feed may take before the page stops waiting for it.
+ *
+ * `live()` awaits this beside the directory and the market document, and
+ * until now it was a bare fetch with no deadline: a quotes Worker that
+ * accepted the connection and never answered held every signed-in screen
+ * blank behind it — an OPTIONAL feed blocking the data it was meant to
+ * decorate. Every other read on this page had a deadline; this one did not.
+ * Six seconds is long enough for a slow phone and short enough that the
+ * exchange's own numbers are never more than that far behind a dead overlay. */
+export const QUOTES_DEADLINE_MS = 6000;
+
 /** The live snapshot, or null. Never throws: a price feed that is down must
  *  cost the page its freshness, not its contents. */
-async function liveQuotes() {
+export async function liveQuotes(deadline = QUOTES_DEADLINE_MS) {
   try {
-    const response = await fetch(QUOTES, { mode: 'cors' });
-    if (!response.ok) return null;
-    const body = await response.json();
-    if (!body || !body.quotes || body.stale) return null;
-    return body.session && body.session.open ? body : null;
+    return await readResponse(QUOTES, { mode: 'cors' }, async (response) => {
+      if (!response.ok) return null;
+      const body = await response.json();
+      if (!body || !body.quotes || body.stale) return null;
+      return body.session && body.session.open ? body : null;
+    }, deadline);
   } catch {
     return null;
   }

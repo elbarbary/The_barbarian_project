@@ -1336,11 +1336,34 @@ async function serve(request, env, url, ctx) {
      * Both fail open, for the reason `overRate` gives: a limiter must not be
      * able to take the site down. The gate itself is the session, not this. */
     const ip = request.headers.get('cf-connecting-ip') || 'unknown';
-    if (await overRate(env, `data:${who.e}`)
-        || await overRate(env, `data-ip:${ip}`, 'DATA_IP_LIMIT')) {
-      return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
-    }
+    // Ask the asset layer FIRST, and only spend allowance on a document that
+    // is actually delivered.
+    //
+    // The limiters used to run before this fetch, so a revalidation that came
+    // back 304 — no body, nothing read — cost the account exactly what a full
+    // download did. The header below tells the browser to revalidate every
+    // read, and the asset layer answers those with 304 (ETags are emitted and
+    // honoured), so a reader returning to a screen they had already seen was
+    // charged for data they were never sent. On a 33-document boot against a
+    // 90-a-minute ceiling that is what turned a second look at the site into
+    // a 429. A 304 delivers no data, so it is not what the ceiling guards.
+    //
+    // The property that matters is unchanged: when the account IS over, the
+    // body fetched here is discarded and the reader gets the 429, not the
+    // document. The fetch itself is the platform's own asset store, not a
+    // KV read or an upstream call — cheap enough that asking before charging
+    // costs nothing worth counting.
     const answer = await env.ASSETS.fetch(request);
+    if (answer.status !== 304) {
+      if (await overRate(env, `data:${who.e}`)
+          || await overRate(env, `data-ip:${ip}`, 'DATA_IP_LIMIT')) {
+        // The document was produced and is not being sent. Say so to the
+        // stream rather than dropping the reference: a discarded body is not
+        // a cancelled one, and the platform keeps it open until it is.
+        try { await answer.body?.cancel(); } catch { /* already closed */ }
+        return json({ error: 'slow down' }, 429, { 'cache-control': 'no-store' });
+      }
+    }
     const headers = new Headers(answer.headers);
     // `private` keeps it out of shared caches, and `no-cache` means the
     // browser may keep a copy but must revalidate before using it — so every

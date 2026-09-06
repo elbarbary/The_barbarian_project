@@ -126,10 +126,9 @@
         </div>
       </section>
       <section class="ranking-panel">
-        <header class="island-heading"><div><h2>{{ explorer.title }}</h2><p class="insight-caption">{{ explorer.subtitle }}</p></div><button type="button" onClick="{{ explorer.open }}">{{ browseLabel }} →</button></header>
+        <header class="island-heading"><div><h2>{{ explorer.title }}</h2><p class="insight-caption">{{ explorer.subtitle }}</p></div><button type="button" onClick="{{ explorer.open }}">{{ explorer.compareLabel }} →</button></header>
         <div class="ranking-controls"><sc-for list="{{ explorer.metrics }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for><button type="button" onClick="{{ explorer.toggleDirection }}">{{ explorer.directionLabel }}</button></div>
         <div class="ranking-controls ranking-pairs"><span>{{ explorer.pairLabel }}</span><sc-for list="{{ explorer.pairs }}" as="m"><button type="button" aria-pressed="{{ m.selected }}" onClick="{{ m.go }}">{{ m.label }}</button></sc-for></div>
-        <div class="explorer-scroll" tabindex="0"><div class="explorer-table" role="table" aria-label="{{ explorer.title }}"><div role="row"><span role="columnheader">#</span><span role="columnheader">{{ explorer.companyLabel }}</span><sc-for list="{{ explorer.rankColumns }}" as="m"><span role="columnheader">{{ m.label }}<small>{{ m.unit }}</small></span></sc-for></div><sc-for list="{{ explorer.preview }}" as="r"><div role="row"><span role="cell">{{ r.rank }}</span><span role="rowheader"><button type="button" onClick="{{ r.go }}">{{ r.ticker }} <small>{{ r.name }}</small></button></span><sc-for list="{{ r.cells }}" as="v"><span role="cell">{{ v.value }}<small>{{ v.note }}</small></span></sc-for></div></sc-for></div></div>
         <p class="insight-caption">{{ explorer.coverage }} · {{ explorer.note }}</p>
       </section>
       <div class="island-board">

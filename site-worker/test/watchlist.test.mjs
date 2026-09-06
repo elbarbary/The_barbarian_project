@@ -945,3 +945,70 @@ test('a signed payload that is not a session is refused', async () => {
     assert.equal(res.status, 401, `accepted as a session: ${JSON.stringify(payload)}`);
   }
 });
+
+/* What the ceiling counts.
+ *
+ * Both limiters used to run BEFORE the asset fetch, so a revalidation that
+ * came back 304 — no body, nothing read — cost the account exactly what a
+ * download did. The gate tells the browser to revalidate every read, and the
+ * asset layer answers those with 304, so a reader returning to a screen they
+ * had already seen was charged for data they were never sent: on a
+ * 33-document boot against 90 a minute, a second look at the site was a 429.
+ * A 304 delivers no data, and the ceiling guards data. */
+function assetsAnswering(status) {
+  return { async fetch() {
+    return status === 304
+      ? new Response(null, { status: 304, headers: { etag: '"same"' } })
+      : new Response('served', { status: 200, headers: { etag: '"same"' } });
+  } };
+}
+
+test('a 304 revalidation spends none of the allowance', async () => {
+  const charged = [];
+  const e = env({
+    ASSETS: assetsAnswering(304),
+    DATA_LIMIT: { limit: async ({ key }) => { charged.push(key); return { success: true }; } },
+    DATA_IP_LIMIT: { limit: async ({ key }) => { charged.push(key); return { success: true }; } },
+  });
+  const headers = { ...(await bearer('reader@example.com')), 'if-none-match': '"same"' };
+  const answer = await call(e, 'https://thebarbarianproject.com/data/v1/companies.json', { headers });
+  assert.equal(answer.status, 304);
+  assert.deepEqual(charged, [], 'a reader was charged for a document they were not sent');
+  // The privacy header the author chose is still on it: revalidate every time.
+  assert.equal(answer.headers.get('cache-control'), 'private, no-cache');
+});
+
+test('a delivered document still spends one, on both ceilings', async () => {
+  const charged = [];
+  const e = env({
+    ASSETS: assetsAnswering(200),
+    DATA_LIMIT: { limit: async ({ key }) => { charged.push(key); return { success: true }; } },
+    DATA_IP_LIMIT: { limit: async ({ key }) => { charged.push(key); return { success: true }; } },
+  });
+  const answer = await call(e, 'https://thebarbarianproject.com/data/v1/companies.json',
+    { headers: await bearer('reader@example.com') });
+  assert.equal(answer.status, 200);
+  assert.deepEqual(charged.map((k) => k.split(':')[0]).sort(), ['data', 'data-ip']);
+});
+
+test('over the ceiling, the reader gets the 429 and never the document the asset layer already produced', async () => {
+  // Asking the asset layer first must not mean handing its answer over. The
+  // body it produced is discarded; the reader sees the refusal.
+  const e = env({
+    ASSETS: assetsAnswering(200),
+    DATA_LIMIT: { limit: async () => ({ success: false }) },
+  });
+  const answer = await call(e, 'https://thebarbarianproject.com/data/v1/companies.json',
+    { headers: await bearer('reader@example.com') });
+  assert.equal(answer.status, 429);
+  assert.notEqual(await answer.text(), 'served', 'the document leaked past the ceiling');
+  assert.equal(answer.headers.get('cache-control'), 'no-store');
+});
+
+test('the gate still refuses a reader with no session before touching the asset layer', async () => {
+  let asked = 0;
+  const e = env({ ASSETS: { async fetch() { asked += 1; return new Response('served', { status: 200 }); } } });
+  const answer = await call(e, 'https://thebarbarianproject.com/data/v1/companies.json');
+  assert.equal(answer.status, 401);
+  assert.equal(asked, 0, 'the asset layer was consulted for an anonymous reader');
+});

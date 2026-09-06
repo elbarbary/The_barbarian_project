@@ -51,7 +51,13 @@ export function explorer(component, companies, ar) {
     companyLabel:ar?'الشركة':'Company',
     directionLabel:st.rankAscending?(ar?'الأقل أولاً ↑':'Lowest first ↑'):(ar?'الأعلى أولاً ↓':'Highest first ↓'),
     toggleDirection:()=>component.setState({rankAscending:!st.rankAscending}),
-    preview:sorted.slice(0,5).map(row), rows:isVolume?volumeRows:sorted.map(row),
+    // No `preview` here any more. A five-row cut of a ranked list, on the
+    // Home screen, is a shortlist of named companies rendered as a lead — the
+    // shape the publisher may not put in front of a reader, whichever measure
+    // the reader chose and however it is worded. Home keeps the controls and
+    // the way in; the table lives only on the screen that shows all of it.
+    rows:isVolume?volumeRows:sorted.map(row),
+    compareLabel:ar?'قارن السوق':'Compare the market',
     rankColumns:active,
     columns:isVolume?[
       {label:ar?'الحجم النسبي':'Relative volume',unit:'×'}, {label:ar?'حجم الجلسة':'Session volume',unit:ar?'أسهم':'shares'},
