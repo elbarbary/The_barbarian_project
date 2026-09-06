@@ -31,6 +31,10 @@
     "meaning": "Four trading companies secure export batches of Egyptian cotton through the weekly auction system, allocating domestic crop inventory for international shipment fulfillment.",
     "meaning_ar": "يمثل فوز أربع شركات بمزادات التصدير الأسبوعية تخصيصاً لكميات من محصول القطن المحلي للتوريد الخارجي عبر منظومة التداول والمزادات العلنية."
   },
+  "45.8 الف طن ذره صفراء واردات ميناء دمياط خلال 24 ساعه": {
+    "meaning": "The arrival of 45.8 thousand tonnes of yellow corn at Damietta Port adds to the raw material supply for the domestic animal feed, poultry, and food processing industries.",
+    "meaning_ar": "يضيف وصول 45.8 ألف طن من الذرة الصفراء إلى ميناء دمياط كميات جديدة من المواد الخام الموجهة لقطاعات الأعلاف والدواجن والصناعات الغذائية المحلية."
+  },
   "500 مكتب بريد تستقبل طلبات تحديث بيانات البطاقات التموينيه المتوقفه": {
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
@@ -1376,6 +1380,10 @@
     "meaning": "A record high in corporate US dollar deposits reflects that domestic firms retain their foreign currency export earnings and hold larger foreign-denominated cash balances on their balance sheets to settle international trade and debt obligations.",
     "meaning_ar": "يعكس تسجيل الودائع الدولارية للشركات مستويات قياسية احتفاظ الشركات المحلية بحصائل صادراتها وتراكم السيولة بالعملات الأجنبية في ميزانياتها العمومية لتغطية متطلبات التجارة الدولية والالتزامات الخارجية."
   },
+  "وزاره الخارجيه تتابع حادث سير حافله تقل معتمرين بالقرب من مكه المكرمه": {
+    "meaning": "This non-financial diplomatic report addresses consular emergency procedures following a transport incident, carrying no direct operational, balance sheet, or structural mechanism for EGX-listed companies.",
+    "meaning_ar": "يتناول هذا البيان الدبلوماسي غير المالي إجراءات المتابعة القنصلية لحادث سير، دون أن يترتب عليه أي أثر تشغيلي أو مالي مباشر على الشركات المقيدة في البورصة المصرية."
+  },
   "وزاره الدوله للاعلام تبدا التنسيق مع الوزارات لتحقيق تدفق ودقه المعلومات لوسايل الاعلام": {
     "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
     "meaning_ar": "يضع هذا التنسيق المؤسسي إطار عمل مركزي بين الجهات الحكومية للإفصاح عن المعلومات الرسمية وإدارة قنوات التواصل الإعلامي."
@@ -1427,6 +1435,10 @@
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
+  },
+  "وزير قطاع الاعمال البريطاني يستبعد تقديم خطه انقاذ مالي ل”جاكوار لاند روفر”": {
+    "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
+    "meaning_ar": "استبعاد الدعم المالي الحكومي يُلزم شركة تصنيع السيارات بالاعتماد الكامل على مصادر السيولة الخاصة، أو الاقتراض التجاري، أو إعادة الهيكلة التشغيلية الداخلية للوفاء بالتزاماتها."
   },
   "يوني كريديت: 4 تريليونات دولار انكشاف صناديق التحوط علي سندات الخزانه": {
     "meaning": "This metric measures the aggregate nominal volume and leveraged positioning held by hedge funds in sovereign debt markets. It represents the scale of balance sheet allocations and collateralized financing tied to government securities.",
