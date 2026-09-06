@@ -7,12 +7,12 @@
  "sector": "Real Estate",
  "sector_ar": "عقارات",
  "market": {
-  "last_close": 2.55,
+  "last_close": 2.54,
   "date": "2026-09-06",
   "open": 2.57,
   "high": 2.58,
-  "low": 2.53,
-  "volume": 891921
+  "low": 2.52,
+  "volume": 2291079
  },
  "price_history": [
   {
@@ -1318,20 +1318,20 @@
  ],
  "profile": {
   "shares_outstanding": 1151285400,
-  "perf_1w": 6.2499999999999964,
-  "perf_1m": 16.972477064220165,
-  "perf_3m": 37.09677419354837,
-  "avg_volume_30d": 11908180.7,
-  "relative_volume_10d": 0.05173850780015777,
+  "perf_1w": 5.833333333333338,
+  "perf_1m": 16.5137614678899,
+  "perf_3m": 36.55913978494623,
+  "avg_volume_30d": 11954819.3,
+  "relative_volume_10d": 0.13290079358180562,
   "median_volume_20d": 6928694,
   "rv20": 1.8705354861969659,
   "normal_value_30d": 14596531.125,
   "five_session_change": 7.08333333333333,
   "history_bars": 120,
-  "market_cap": 2901239208.0,
+  "market_cap": 2924264916.0,
   "market_cap_source": "EGX",
-  "trades": 152,
-  "turnover": 4266363,
+  "trades": 248,
+  "turnover": 6812574,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

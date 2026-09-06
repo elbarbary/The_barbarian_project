@@ -7,12 +7,12 @@
  "sector": "Building Materials",
  "sector_ar": "مواد البناء",
  "market": {
-  "last_close": 34.2,
+  "last_close": 34.5,
   "date": "2026-09-06",
   "open": 33.62,
-  "high": 34.2,
+  "high": 34.9,
   "low": 33.62,
-  "volume": 30742
+  "volume": 177299
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 53342513,
   "free_float": 0.31071299999999996,
   "float_shares": 16574212.241768997,
-  "perf_1w": 3.5735917625681393,
-  "perf_1m": -0.5235602094240829,
-  "perf_3m": 10.144927536231892,
-  "avg_volume_30d": 422985.23333333334,
-  "relative_volume_10d": 0.05773658392567081,
+  "perf_1w": 4.48213204118715,
+  "perf_1m": 0.3490401396160484,
+  "perf_3m": 11.111111111111109,
+  "avg_volume_30d": 427870.4666666667,
+  "relative_volume_10d": 0.33298544640678907,
   "median_volume_20d": 348308,
   "rv20": 0.6460833515164739,
   "normal_value_30d": 9901647.4,
   "five_session_change": 1.8170805572380155,
   "history_bars": 120,
-  "market_cap": 1821113393.82,
+  "market_cap": 1846717800.06,
   "market_cap_source": "EGX",
-  "trades": 58,
-  "turnover": 1213461,
+  "trades": 242,
+  "turnover": 6587694,
   "shares_outstanding_source": "EGX"
  },
  "financials": {
