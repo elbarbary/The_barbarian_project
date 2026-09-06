@@ -1144,6 +1144,10 @@
     "meaning": "A sovereign credit rating of AA reflects high creditworthiness and low default risk, while removing the issuer from the negative watch list stabilizes its credit outlook under the rating agency's assessment framework.",
     "meaning_ar": "يعكس التصنيف الائتماني السيادي عند مستوى AA جدارة ائتمانية مرتفعة ومخاطر تخلف منخفضة عن السداد، بينما يمثل رفع الدولة من قائمة المراقبة السلبية تثبيتاً لنظرتها الائتمانية وفق معايير وكالة التصنيف."
   },
+  "قبل ما تسافر.. 7 خطوات للتاكد من عقد العمل بالخارج": {
+    "meaning": "Verification of foreign employment contracts operates as an administrative compliance mechanism that validates cross-border hiring documentation and legal workforce migration under regulatory oversight.",
+    "meaning_ar": "يمثل التحقق من عقود العمل بالخارج إجراءً إداريًا تنظيميًا لتوثيق ومطابقة شروط التشغيل عبر الحدود والتحقق من قانونية التعاقدات ضمن الأطر الرسمية لوزارة العمل."
+  },
   "قناه بنما تخفض عدد السفن العابره بسبب ظاهره ال نينيو المناخيه": {
     "meaning": "Reducing daily vessel transit slots at the Panama Canal constrains throughput capacity on trans-oceanic maritime routes, altering cargo allocation across global shipping networks and alternative maritime corridors.",
     "meaning_ar": "يؤدي تقليص عدد السفن اليومية العابرة لقناة بنما إلى تقييد الطاقة الاستيعابية لحركة النقل البحري وتغيير توزيع حركة الشحن عبر الممرات الملاحية الدولية البديلة."
@@ -1167,6 +1171,10 @@
   "كيف تتاكد من سلامه زجاجه المياه المعباه قبل شرايها؟ 4 خطوات لحمايه صحتك": {
     "meaning": "Consumer verification standards interface directly with packaging compliance, product traceability, and quality assurance protocols enforced across the bottled water and consumer beverages sector.",
     "meaning_ar": "ترتبط معايير الفحص والتحقق لدى المستهلكين مباشرةً ببروتوكولات الامتثال للتعبئة والتغليف، وتتبع المنتجات، وضمان الجودة المطبقة في قطاع الأغذية والمشروبات المعبأة."
+  },
+  "كيف تقاضي صاحب العمل .. خطوات الحصول علي حقوقك وفقا للقانون": {
+    "meaning": "Labor dispute resolution procedures enforce corporate compliance with Egyptian labor laws, directly affecting operating expense structures, legal provisions, and human resource management costs across businesses.",
+    "meaning_ar": "تحدد إجراءات تسوية النزاعات العمالية آليات الامتثال لقانون العمل المصري، وهو ما ينعكس مباشرة على هيكل المصروفات التشغيلية والمخصصات القانونية وتكاليف إدارة الموارد البشرية لدى الشركات."
   },
   "كيف يتحول سوق الملابس الرياضه من نزيف استيرادي الي صناعه للتصدير؟": {
     "meaning": "This transition involves replacing imported finished sportswear with domestic manufacturing capacity, utilizing local textile supply chains to serve both the domestic market and foreign buyers.",
@@ -1351,6 +1359,11 @@
   "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
+  },
+  "نقيب الفلاحين: مفيش دوله في العالم تاكل 20 مليون طن قمح في السنه": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
   },
   "نموا بمبيعات كونكريت فاشون بنهايه يونيو": {
     "meaning": "Concrete Fashion records an increase in top-line revenue through higher volumes of apparel sold or adjusted unit pricing across its retail and export operations as of the period ending in June.",
