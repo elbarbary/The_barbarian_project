@@ -607,6 +607,11 @@
     "meaning": "The US Federal Reserve's benchmark policy rate sets the cost of US dollar borrowing globally and determines the yield differential between dollar assets and emerging market debt instruments.",
     "meaning_ar": "تحدد أسعار الفائدة المرجعية لمجلس الاحتياطي الفيدرالي تكلفة الاقتراض بالدولار الأمريكي عالمياً، وتشكل الفارق في العائد بين الأصول الدولارية وأدوات الدين في الأسواق الناشئة."
   },
+  "تركيا تخفض توقعات النمو في 2027 وسط حديث عن انتخابات مبكره": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
+  },
   "تركيا تعيد احياء خطه خصخصه جسرين شهيرين وطرق سريعه": {
     "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
     "meaning_ar": "تنقل خصخصة البنية التحتية حقوق الإدارة التشغيلية والصيانة وتحصيل رسوم المرور الخاصة بالجسور والطرق السريعة المملوكة للدولة إلى شركات امتياز من القطاع الخاص مقابل رسوم امتياز تُسدد للحكومة."
@@ -723,6 +728,10 @@
     "meaning": "The service integrates cross-border remittance flows directly into domestic banking infrastructure and mobile wallets, routing foreign transfers into automated digital settlements rather than physical cash pickups.",
     "meaning_ar": "تربط هذه الخدمة تدفقات الحوالات المالية الواردة من الخارج بالبنية التحتية للحسابات المصرفية والمحافظ الإلكترونية المحلية، مما يحول مسار استلام الأموال إلى تسوية رقمية مباشرة دون الحاجة للصرف النقدي."
   },
+  "ريمت تطلق خدمه ويسترن يونيون للايداع المباشر للحوالات الوارده الي الحسابات والمحافظ الالكترونيه": {
+    "meaning": "The integration connects Western Union's inbound remittance network directly to local bank accounts and mobile wallets through RAYA's subsidiary (Rayat / Remat), automating the settlement and routing of cross-border transfers into domestic digital endpoints.",
+    "meaning_ar": "يربط هذا التكامل شبكة الحوالات الواردة لشركة ويسترن يونيون مباشرة بالحسابات المصرفية والمحافظ الإلكترونية المحلية عبر منصة ريمت، مما يتيح التسوية الآلية وتوجيه التحويلات المالية عبر الحدود إلى نقاط الاستلام الرقمية المحلية."
+  },
   "رييس البورصه: 450 الف مستثمر جديد انضموا للسوق خلال ال8 اشهر الاخيره": {
     "meaning": "An influx of 450,000 new registered market participants expands the exchange's investor base and broadens the distribution of domestic trading accounts across listed instruments.",
     "meaning_ar": "يؤدي انضمام 450 ألف متعامل جديد إلى توسيع قاعدة المستثمرين في البورصة وزيادة انتشار حسابات التداول المحلية عبر الأوراق المالية المقيدة."
@@ -730,6 +739,10 @@
   "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
+  },
+  "رييس الوزراء يفتتح مصنع للاسمده في السخنه باستثمارات 10 ملايين دولار": {
+    "meaning": "The commissioning of a $10 million fertilizer facility in Ain Sokhna adds domestic production capacity and expands local industrial asset infrastructure within the chemical sector.",
+    "meaning_ar": "يضيف تشغيل مصنع الأسمدة في العين السخنة باستثمارات 10 ملايين دولار طاقة إنتاجية محلية جديدة ويوسع البنية التحتية للأصول الصناعية في قطاع الكيماويات."
   },
   "رييس الوزراء يفتتح مصنع “ليجيالونج” للفرش باستثمارات 10 ملايين دولار": {
     "meaning": "The commissioning of the facility deploys $10 million in foreign direct industrial capital, establishing domestic manufacturing capacity for mattresses and related furnishings.",
@@ -988,6 +1001,10 @@
     "meaning": "International sovereign bond issuances act as external debt financing mechanisms that supply foreign currency to the state treasury and create fixed-rate debt service liabilities on the government balance sheet.",
     "meaning_ar": "يُعد طرح السندات السيادية الدولية آلية تمويل عبر الاقتراض الخارجي توفر السيولة بالنقد الأجنبي للخزانة العامة، وتترتب عليها التزامات لسداد أعباء الدين ذات العائد الثابت في الموازنة العامة."
   },
+  "مصر للطيران تطلق اولي رحلاتها الجويه الي زنجبار بتنزانيا": {
+    "meaning": "Operating direct flights to Zanzibar adds a scheduled destination to the carrier's African network and allocates active fleet capacity to the East Africa corridor.",
+    "meaning_ar": "يضيف تشغيل رحلات جوية مباشرة إلى زنجبار مساراً منتظماً لشبكة خطوط الشركة في إفريقيا ويخصص جزءاً من السعة التشغيلية لأسطولها باتجاه شرق إفريقيا."
+  },
   "مصر والبوسنه تعززان التعاون في الصناعات الدفاعيه": {
     "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
     "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
@@ -1055,6 +1072,10 @@
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
+  },
+  "هيوماين السعوديه تبدا خطوات طرح اسهمها للاكتتاب العام": {
+    "meaning": "An initial public offering (IPO) process involves listing a company's shares on a public exchange to raise equity capital from institutional and retail investors, transitioning the firm from private ownership to a publicly traded entity subject to regulatory disclosure requirements.",
+    "meaning_ar": "تتضمن إجراءات الطرح العام الأولي إدراج أسهم الشركة في البورصة لجمع رأس مال ملكية من المستثمرين المؤسسيين والأفراد، مما ينقل الشركة من الملكية الخاصة إلى كيان مدرج يخضع لمتطلبات الإفصاح والتنظيم المالي."
   },
   "هييه الدواء المصريه تنفي ما تم تداوله بشان اشتراطات جديده لترخيص الصيدليات": {
     "meaning": "The regulatory clarification maintains the existing licensing procedures and operational requirements for retail pharmacies, leaving the sector's administrative barriers to entry and compliance costs unchanged.",
