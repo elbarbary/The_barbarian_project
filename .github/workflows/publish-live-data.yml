@@ -35,6 +35,12 @@ on:
       - 'scripts/build_news_api.py'
       - 'scripts/build_rates_api.py'
       - 'scripts/news_insights.py'
+      # The news build imports these two, and a fix to one of them took the
+      # build down without being able to trigger it: the change that broke
+      # publishing landed, ran nothing, and the next scheduled tick found it.
+      - 'scripts/cloud_translate.py'
+      - 'scripts/translations.py'
+      - 'scripts/macro_types.py'
       - '.github/workflows/publish-live-data.yml'
 
   workflow_dispatch:

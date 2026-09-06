@@ -167,6 +167,32 @@ def enrich(items: list[dict], limit: int = 15) -> int:
     generated = 0
     changed = False
 
+    # 0. Re-check what is already on the item.
+    #
+    # `merge_with_published` brings a story back from the last published
+    # document carrying the meaning it was published WITH, and the fill below
+    # skips any item that already has one — so a published insight was
+    # immortal. Retiring the Iraq/agriculture forecast in the store did
+    # nothing: it was still on the live feed on the next run, because it never
+    # came from the store again. `build_news_api` already makes this argument
+    # about scoring — "a stored item is re-scored from scratch, so a change to
+    # the rules reaches the archive on the next run" — and the §8 rules are the
+    # ones where it matters most. Drop both languages together; half an item is
+    # worse than none.
+    retired = 0
+    for item in items:
+        broke = next((macro_types.directive(item[f]) or macro_types.speculative(item[f])
+                      for f in ("meaning", "meaning_ar")
+                      if item.get(f) and (macro_types.directive(item[f])
+                                          or macro_types.speculative(item[f]))), None)
+        if broke:
+            item.pop("meaning", None)
+            item.pop("meaning_ar", None)
+            retired += 1
+    if retired:
+        print(f"   news insights: {retired} published insight(s) withdrawn "
+              f"— they do not pass the rules now in force")
+
     # 1. Fill from cache first for all items
     for item in items:
         if item.get("meaning"):

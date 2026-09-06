@@ -302,6 +302,51 @@ class CacheTest(unittest.TestCase):
             news_insights.enrich([{"headline": "first story"}], limit=5)
 
 
+class RetroactiveTest(unittest.TestCase):
+    """A tightened rule has to reach what is already published.
+
+    `merge_with_published` returns a story to the feed carrying the meaning it
+    was published with, and the fill pass skips any item that already has one.
+    So retiring the Iraq/agriculture forecast in the store changed nothing: it
+    was still on the live feed on the next run, because it never came from the
+    store again. `build_news_api` already argues this for scoring — a stored
+    item is re-scored from scratch so a rule change reaches the archive — and
+    §8 is where it matters most.
+    """
+
+    def test_a_published_forecast_is_withdrawn_on_the_next_run(self):
+        carried = [{"headline": "old story",
+                    "meaning": "The deal will boost revenue next year.",
+                    "meaning_ar": "من المتوقع أن تزيد الإيرادات."}]
+        with mock.patch.object(news_insights.gemini, "available", return_value=False), \
+             redirect_stdout(io.StringIO()):
+            news_insights.enrich(carried, limit=0)
+        self.assertNotIn("meaning", carried[0], "a forecast survived the rule that bans it")
+        self.assertNotIn("meaning_ar", carried[0])
+
+    def test_arabic_alone_withdraws_both_halves(self):
+        # Half an item — an English insight beside a blank Arabic one — is
+        # worse than none, and the Arabic reader is the default reader here.
+        carried = [{"headline": "old story",
+                    "meaning": "The plant adds a second line.",
+                    "meaning_ar": "من شأنه أن يعزز الطلب على منتجات الشركة."}]
+        with mock.patch.object(news_insights.gemini, "available", return_value=False), \
+             redirect_stdout(io.StringIO()):
+            news_insights.enrich(carried, limit=0)
+        self.assertNotIn("meaning", carried[0])
+        self.assertNotIn("meaning_ar", carried[0])
+
+    def test_a_clean_published_insight_is_left_alone(self):
+        # The other half: this must not quietly empty the feed it just filled.
+        carried = [{"headline": "old story",
+                    "meaning": "Localising production adds a second line.",
+                    "meaning_ar": "يضيف توطين الإنتاج خط تصنيع ثانياً."}]
+        with mock.patch.object(news_insights.gemini, "available", return_value=False), \
+             redirect_stdout(io.StringIO()):
+            news_insights.enrich(carried, limit=0)
+        self.assertEqual(carried[0]["meaning"], "Localising production adds a second line.")
+
+
 class CredentialTest(unittest.TestCase):
     """The job that writes the insights must be able to pay for them.
 
