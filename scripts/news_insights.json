@@ -127,6 +127,10 @@
     "meaning": "The commissioning of this manufacturing facility establishes local industrial capacity for artificial turf within the Suez Canal Economic Zone, integrating domestic production with the zone's export and logistics infrastructure.",
     "meaning_ar": "يُضيف تشغيل هذا المرفق الصناعي قدرات تصنيع محلية للنجيل الصناعي داخل المنطقة الاقتصادية لقناة السويس، مما يربط الإنتاج المحلي بالبنية التحتية اللوجستية والتصديرية للمنطقة."
   },
+  "madbouly opens natrans fertilizer factory in sczone": {
+    "meaning": "The commissioning of a new fertilizer manufacturing facility in the Suez Canal Economic Zone expands industrial production capacity and integrates supply chain operations near key maritime trade routes.",
+    "meaning_ar": "يؤدي تشغيل مصنع جديد للأسمدة في المنطقة الاقتصادية لقناة السويس إلى زيادة الطاقة الإنتاجية الصناعية وربط سلاسل التوريد بالممرات الملاحية الرئيسية."
+  },
   "paytabs to acquire amazon payment services mena operations": {
     "meaning": "This acquisition consolidates digital payment processing infrastructure and merchant portfolios across the MENA region under a single fintech operator.",
     "meaning_ar": "تدمج عملية الاستحواذ هذه البنية التحتية لمعالجة المدفوعات الرقمية ومحافظ التجار في منطقة الشرق الأوسط وشمال أفريقيا تحت مظلة مشغل تكنولوجيا مالية واحد."
@@ -362,6 +366,10 @@
   "البنوك الصينيه تشتري سندات الخزانه الامريكيه مع ارتفاع عوايدها مجددا": {
     "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة العائد الدوري المحقق على الأصول المقومة بالنقد الأجنبي، حيث تقوم المحافظ المصرفية بإدارة فوائض السيولة الأجنبية عبر حيازة هذه الأدوات ذات العائد الثابت."
+  },
+  "البورصه المصريه تنهي تعاملات الاحد بالمنطقه الخضراء والثلاثيني يصعد": {
+    "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
+    "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
   },
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
@@ -695,6 +703,10 @@
     "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
     "meaning_ar": "توفر المشاركة في المعارض التجارية الدولية منصات عرض للمشروعات الصغيرة والمتوسطة المحلية وتربط المنتجين المحليين بالأسواق والمشترين الخارجيين عبر قنوات تواصل مباشر."
   },
+  "جولدين ارينا: افتتاح 4 مراكز بيع خلال العام الجاري": {
+    "meaning": "The addition of four retail outlets expands the company's direct distribution network and physical point-of-sale footprint across the market.",
+    "meaning_ar": "يؤدي افتتاح أربعة مراكز بيع إلى توسيع شبكة التوزيع المباشر للشركة وزيادة عدد نقاط البيع الفعلية في السوق."
+  },
   "جون سعد: دليل ضوابط التمويل الاستهلاكي يغلق الثغرات ويرفع انضباط السوق": {
     "meaning": "The consumer finance regulatory guide establishes standardized compliance and operational requirements for non-bank financial institutions, defining uniform credit assessment rules and contract terms across the sector.",
     "meaning_ar": "يضع دليل ضوابط التمويل الاستهلاكي معايير تشغيلية وإلزامية موحدة للمؤسسات المالية غير المصرفية، محددًا قواعد التقييم الائتماني وشروط التعاقد عبر القطاع."
@@ -912,6 +924,10 @@
     "meaning": "This headline reports a personal social event and contains no operational, financial, or corporate mechanisms impacting capital markets or listed companies.",
     "meaning_ar": "يتناول هذا الخبر مناسبة اجتماعية وشخصية، ولا يتضمن أي آليات تشغيلية أو مالية تؤثر على الشركات المدرجة أو أسواق المال."
   },
+  "علاء سبع في حابي بودكاست: مصر اصبحت اكثر قدره علي التعامل مع الازمات": {
+    "meaning": "The statement refers to the structural macroeconomic adjustments and monetary policy frameworks in place to manage external shocks and liquidity fluctuations.",
+    "meaning_ar": "يشير التصريح إلى الأطر الهيكلية للاقتصاد الكلي وسياسات إدارة السيولة المتبعة للتعامل مع الصدمات الخارجية والتقلبات الاقتصادية."
+  },
   "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
     "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
@@ -1003,6 +1019,10 @@
   "مخاوف من تراجع محصول الكاكاو الغاني مع الطقس المتقلب والامراض": {
     "meaning": "Adverse weather conditions and crop diseases in Ghana contract raw agricultural supply, directly affecting input availability and procurement dynamics across global chocolate and food processing supply chains.",
     "meaning_ar": "تؤدي التقلبات الجوية والأمراض الزراعية في غانا إلى تقليص المعروض من المحاصيل، مما يؤثر مباشرة على وفرة المواد الخام وتكاليف التوريد ضمن سلاسل إمداد الصناعات الغذائية وصناعة الشوكولاتة عالمياً."
+  },
+  "مدبولي يفتتح مصنع لانتاج كربونات الكالسيوم": {
+    "meaning": "The inauguration expands domestic industrial capacity for calcium carbonate, providing locally manufactured raw materials for downstream sectors such as plastics, paints, and construction chemicals.",
+    "meaning_ar": "يضيف افتتاح المصنع طاقة إنتاجية محلية جديدة لكربونات الكالسيوم، مما يوفر خامات وسيطة محلية الصنع للقطاعات الصناعية مثل البلاستيك والدهانات وكيماويات البناء."
   },
   "مساعد وزير الصناعه للشيون الاستراتيجيه: صناعه السيارات منظومه متكامله وقاطره لنمو قطاعات عديده": {
     "meaning": "The automotive industry operates as a multi-tier manufacturing ecosystem that sources inputs from domestic feeding industries, including metallurgy, plastics, electronics, and glass manufacturing. Assembly operations generate backward supply chain linkages across these industrial segments.",
