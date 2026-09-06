@@ -1,16 +1,28 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-05T09:13:53.470714+00:00",
+  "fetchedAt": "2026-09-06T05:33:45.899906+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "5b05f10034b9c49a52c8918fd8e2a3254133dccd6782b4d79f17b45074036f49",
+  "sourceSha256": "b27569acbe839c53deba739407fad4398a04b58332ad77c1066fd8530e8da943",
   "issuers": [
+    {
+      "isin": "EGS01041C010",
+      "issuerName": "Ismailia National Co. For Food Industries"
+    },
     {
       "isin": "EGS01081C016",
       "issuerName": "The General Co. For Land Reclamation"
     },
     {
+      "isin": "EGS02021C011",
+      "issuerName": "Ismailia Misr Poultry Co."
+    },
+    {
       "isin": "EGS02211C018",
       "issuerName": "Egyptian Poultry Company"
+    },
+    {
+      "isin": "EGS02291C010",
+      "issuerName": "nahrelkhair for investing and devolpment"
     },
     {
       "isin": "EGS07061C012",
@@ -21,12 +33,24 @@
       "issuerName": "Atlas for Investment & food Industries"
     },
     {
+      "isin": "EGS07661C019",
+      "issuerName": "Lotus for Agricultural Investments and Development"
+    },
+    {
+      "isin": "EGS07911C018",
+      "issuerName": "KORRA"
+    },
+    {
       "isin": "EGS07DR1C012",
       "issuerName": "Go Green For Agricultural Investment And Development"
     },
     {
       "isin": "EGS10001C013",
       "issuerName": "Asec for Mining"
+    },
+    {
+      "isin": "EGS102S1C014",
+      "issuerName": "Iron & Steel for Mines & Quarries"
     },
     {
       "isin": "EGS21351C019",
@@ -51,6 +75,10 @@
     {
       "isin": "EGS22171C010",
       "issuerName": "Industrial and Engineering Projects"
+    },
+    {
+      "isin": "EGS221V1C015",
+      "issuerName": "M.B for Engineering and Contracting"
     },
     {
       "isin": "EGS23141C012",
@@ -101,6 +129,10 @@
       "issuerName": "Edita Food Industries S.A.E"
     },
     {
+      "isin": "EGS30901C010",
+      "issuerName": "Juhayna Food Industries"
+    },
+    {
       "isin": "EGS32161C019",
       "issuerName": "Goldentex Wool Co."
     },
@@ -111,6 +143,10 @@
     {
       "isin": "EGS32331C018",
       "issuerName": "Arab Polvara Spinning & Weaving Company"
+    },
+    {
+      "isin": "EGS33061C010",
+      "issuerName": "(EL-Nasr Clothing & Textiles Co.( KABO"
     },
     {
       "isin": "EGS33321C018",
@@ -169,6 +205,10 @@
       "issuerName": "Kahira Pharmaceuticals"
     },
     {
+      "isin": "EGS38411C012",
+      "issuerName": "Kafr El Zayat Pesticides And Chemicals"
+    },
+    {
       "isin": "EGS385S1C012",
       "issuerName": "Ferchem masr Fertilizers and Chemicals"
     },
@@ -179,6 +219,10 @@
     {
       "isin": "EGS39022C016",
       "issuerName": "(ENPPI)"
+    },
+    {
+      "isin": "EGS3C001C012",
+      "issuerName": "middle east glass manufacturing"
     },
     {
       "isin": "EGS3C071C015",
@@ -193,12 +237,36 @@
       "issuerName": "The Arab Ceramic Co. - ceramica remas"
     },
     {
+      "isin": "EGS3C161C014",
+      "issuerName": "LECICO EGYPT S.A.E"
+    },
+    {
+      "isin": "EGS3C371C019",
+      "issuerName": "Misr Beni-suef Cement Company"
+    },
+    {
+      "isin": "EGS3C391C017",
+      "issuerName": "Misr Cement co. ( QENA )"
+    },
+    {
+      "isin": "EGS3C4L1C015",
+      "issuerName": "Medical Packaging Co."
+    },
+    {
       "isin": "EGS3C6P1C019",
       "issuerName": "Al Nahda Industries Co."
     },
     {
+      "isin": "EGS3C6Q1C018",
+      "issuerName": "El Nasr Glass and Crystal Company"
+    },
+    {
       "isin": "EGS3D031C018",
       "issuerName": "Arab Aluminium Co."
+    },
+    {
+      "isin": "EGS3D061C015",
+      "issuerName": "Iron & Steel Egyptian Company"
     },
     {
       "isin": "EGS3D0A1C010",
@@ -293,6 +361,10 @@
       "issuerName": "Intro Utilities"
     },
     {
+      "isin": "EGS512O1C012",
+      "issuerName": "Ibn Sina Pharma"
+    },
+    {
       "isin": "EGS51LQ1C018",
       "issuerName": "Geos For Trading and Contracting"
     },
@@ -385,6 +457,10 @@
       "issuerName": "Egyptians For Housing & Development Co."
     },
     {
+      "isin": "EGS65441C015",
+      "issuerName": "Mena For Touristic & Real state Investment"
+    },
+    {
       "isin": "EGS65461C013",
       "issuerName": "Gharbia Islamic Company For Urban Development"
     },
@@ -395,6 +471,10 @@
     {
       "isin": "EGS65541C012",
       "issuerName": "CIRA Education"
+    },
+    {
+      "isin": "EGS65571C019",
+      "issuerName": "Misr City For Housing And Urbanization"
     },
     {
       "isin": "EGS65591C017",
@@ -465,6 +545,10 @@
       "issuerName": "Elorouba Securities"
     },
     {
+      "isin": "EGS69011C012",
+      "issuerName": "Securities And Cairo National Company For Investment"
+    },
+    {
       "isin": "EGS69021C011",
       "issuerName": "El Ahly for Investment And Development"
     },
@@ -503,6 +587,10 @@
     {
       "isin": "EGS694B1C017",
       "issuerName": "EGYPTIAN REAL ESTATE FUND"
+    },
+    {
+      "isin": "EGS696Z1C017",
+      "issuerName": "Odin Investment Fund"
     },
     {
       "isin": "EGS697S1C015",
@@ -559,6 +647,10 @@
     {
       "isin": "EGS738I1C018",
       "issuerName": "Contact Financial Holding"
+    },
+    {
+      "isin": "EGS739Z1C016",
+      "issuerName": "Marseilia Al Masreia Al Khalegeya Real EState Investment"
     },
     {
       "isin": "EGS743O1C013",
@@ -621,74 +713,55 @@
       "issuerName": "ِAct Financial"
     },
     {
+      "isin": "EGS7D971C011",
+      "issuerName": "Macro Group For pharmaceuticals (Macro Capital)"
+    },
+    {
       "isin": "EGS7DNR1C019",
       "issuerName": "Well Med For Medical Tourism"
     }
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 130,
-    "exactIsinsQueried": 135,
+    "matchedAtMcdr": 154,
+    "exactIsinsQueried": 160,
     "confirmedNotFoundAfterExactSearch": {
       "AIDC": "EGS65R01C015",
       "EGSA": "EGS48022C015",
       "CCAPP": "EGS73541P048",
       "ASPI_r3": "EGS924G1C014",
+      "LUTS_r1": "EGS924K1C018",
       "EGCN": "EGS65861C014"
     },
     "transportErrors": {},
     "notYetIndividuallyQueried": {
       "NBCC": "EGS220N1C016",
       "SAUD": "EGS60101C010",
-      "KRDI": "EGS02291C010",
       "SPIN": "EGS32041C013",
       "RREI": "EGS65011C016",
       "POUL": "EGS02051C018",
       "PRCL": "EGS3C111C019",
-      "KASABF": "EGS696Z1C017",
       "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
       "NMIN": "EGS14041C015",
-      "KNGC": "EGS3C6Q1C018",
       "NFCI": "EGS5ACC1C014",
       "SWDY": "EGS3G0Z1C014",
       "SIEG": "EGS3C9X1C016",
-      "MAAL": "EGS739Z1C016",
       "PHAR": "EGS38081C013",
-      "IRON": "EGS3D061C015",
       "MPRC": "EGS78021C010",
-      "KWIN": "EGS69011C012",
       "MMHC": "EGS651F1C014",
-      "KABO": "EGS33061C010",
       "OBRI": "EGS65551C011",
       "SPHT": "EGS70H02C014",
       "NIPH": "EGS38331C012",
       "UEGC": "EGS21531C016",
       "ZEOT": "EGS38251C012",
-      "ISPH": "EGS512O1C012",
-      "ISMQ": "EGS102S1C014",
-      "ISMA": "EGS02021C011",
-      "INFI": "EGS01041C010",
-      "JUFO": "EGS30901C010",
-      "KORA": "EGS07911C018",
-      "KZPC": "EGS38411C012",
-      "LCSW": "EGS3C161C014",
-      "LUTS": "EGS07661C019",
-      "MBEG": "EGS221V1C015",
       "MTIE": "EGS75011C014",
-      "MCRO": "EGS7D971C011",
-      "MASR": "EGS65571C019",
       "MPCO": "EGS02091C014",
       "MOIL": "EGS44012C010",
       "MMAT": "EGS70P91C010",
-      "MEPA": "EGS3C4L1C015",
       "MPCI": "EGS38351C010",
-      "MENA": "EGS65441C015",
       "WCDF": "EGS30421C019",
-      "MEGM": "EGS3C001C012",
       "MIPH": "EGS380G1C011",
-      "MBSC": "EGS3C371C019",
-      "MCQE": "EGS3C391C017",
       "MICH": "EGS38211C016",
       "MFSC": "EGS53051C016",
       "MFPC": "EGS39061C014",
@@ -744,7 +817,6 @@
       "SVCE": "EGS3C351C011",
       "SPMD": "EGS73BR1C013",
       "YAYT": "EGS3E7F1C016",
-      "LUTS_r1": "EGS924K1C018",
       "SCTS": "EGS740C1C010",
       "TMGH": "EGS691S1C011",
       "TWSA": "EGS7D231C010",

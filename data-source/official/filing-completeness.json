@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-05T09:14:54.024135+00:00",
+  "builtAt": "2026-09-06T05:34:37.428354+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
     "items": 192024,
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 561,
+    "items": 562,
     "failures": {}
   },
   "issuers": [

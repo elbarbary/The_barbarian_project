@@ -1458,5 +1458,275 @@
       }
     ],
     "fetchedAt": "2026-09-05T09:13:53.119012+00:00"
+  },
+  "EGS01041C010": {
+    "ticker": "INFI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS01041C010",
+        "issuerName": "Ismailia National Co. For Food Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:32:51.753709+00:00"
+  },
+  "EGS3D061C015": {
+    "ticker": "IRON",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3D061C015",
+        "issuerName": "Iron & Steel Egyptian Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:32:54.538572+00:00"
+  },
+  "EGS02021C011": {
+    "ticker": "ISMA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS02021C011",
+        "issuerName": "Ismailia Misr Poultry Co."
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:32:57.184625+00:00"
+  },
+  "EGS102S1C014": {
+    "ticker": "ISMQ",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS102S1C014",
+        "issuerName": "Iron & Steel for Mines & Quarries"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:32:59.383302+00:00"
+  },
+  "EGS512O1C012": {
+    "ticker": "ISPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS512O1C012",
+        "issuerName": "Ibn Sina Pharma"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:01.869630+00:00"
+  },
+  "EGS30901C010": {
+    "ticker": "JUFO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30901C010",
+        "issuerName": "Juhayna Food Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:04.200119+00:00"
+  },
+  "EGS33061C010": {
+    "ticker": "KABO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS33061C010",
+        "issuerName": "(EL-Nasr Clothing & Textiles Co.( KABO"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:06.609255+00:00"
+  },
+  "EGS696Z1C017": {
+    "ticker": "KASABF",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS696Z1C017",
+        "issuerName": "Odin Investment Fund"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:08.688268+00:00"
+  },
+  "EGS3C6Q1C018": {
+    "ticker": "KNGC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C6Q1C018",
+        "issuerName": "El Nasr Glass and Crystal Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:10.921555+00:00"
+  },
+  "EGS07911C018": {
+    "ticker": "KORA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS07911C018",
+        "issuerName": "KORRA"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:12.870793+00:00"
+  },
+  "EGS02291C010": {
+    "ticker": "KRDI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS02291C010",
+        "issuerName": "nahrelkhair for investing and devolpment"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:14.957977+00:00"
+  },
+  "EGS69011C012": {
+    "ticker": "KWIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69011C012",
+        "issuerName": "Securities And Cairo National Company For Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:16.983324+00:00"
+  },
+  "EGS38411C012": {
+    "ticker": "KZPC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38411C012",
+        "issuerName": "Kafr El Zayat Pesticides And Chemicals"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:19.026693+00:00"
+  },
+  "EGS3C161C014": {
+    "ticker": "LCSW",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C161C014",
+        "issuerName": "LECICO EGYPT S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:21.145135+00:00"
+  },
+  "EGS07661C019": {
+    "ticker": "LUTS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS07661C019",
+        "issuerName": "Lotus for Agricultural Investments and Development"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:23.248414+00:00"
+  },
+  "EGS924K1C018": {
+    "ticker": "LUTS_r1",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-06T05:33:25.683542+00:00"
+  },
+  "EGS739Z1C016": {
+    "ticker": "MAAL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS739Z1C016",
+        "issuerName": "Marseilia Al Masreia Al Khalegeya Real EState Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:28.155506+00:00"
+  },
+  "EGS65571C019": {
+    "ticker": "MASR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65571C019",
+        "issuerName": "Misr City For Housing And Urbanization"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:30.205854+00:00"
+  },
+  "EGS221V1C015": {
+    "ticker": "MBEG",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS221V1C015",
+        "issuerName": "M.B for Engineering and Contracting"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:33.050927+00:00"
+  },
+  "EGS3C371C019": {
+    "ticker": "MBSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C371C019",
+        "issuerName": "Misr Beni-suef Cement Company"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:35.076468+00:00"
+  },
+  "EGS3C391C017": {
+    "ticker": "MCQE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C391C017",
+        "issuerName": "Misr Cement co. ( QENA )"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:37.336027+00:00"
+  },
+  "EGS7D971C011": {
+    "ticker": "MCRO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS7D971C011",
+        "issuerName": "Macro Group For pharmaceuticals (Macro Capital)"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:39.364251+00:00"
+  },
+  "EGS3C001C012": {
+    "ticker": "MEGM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C001C012",
+        "issuerName": "middle east glass manufacturing"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:41.463971+00:00"
+  },
+  "EGS65441C015": {
+    "ticker": "MENA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65441C015",
+        "issuerName": "Mena For Touristic & Real state Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:43.469330+00:00"
+  },
+  "EGS3C4L1C015": {
+    "ticker": "MEPA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C4L1C015",
+        "issuerName": "Medical Packaging Co."
+      }
+    ],
+    "fetchedAt": "2026-09-06T05:33:45.548425+00:00"
   }
 }
