@@ -366,11 +366,37 @@ jobs:
               git rebase --abort || true
               return 1
             fi
-            # During a rebase "theirs" is the commit being replayed, which is
-            # this build's output.
+            # During a rebase "theirs" is the commit being replayed — this
+            # job's output — and "ours" is what is already on main.
+            #
+            # Taking theirs unconditionally means the job that pushes LAST
+            # wins, and this one runs for about an hour, so on 6 Sep 2026 it
+            # published a sixteen-minute-old snapshot over the fifteen-minute
+            # lane's fresher one: news went backward twelve minutes, the newest
+            # story was un-published, and three of that morning's filings were
+            # deleted while the exchange was still listing them. The documents
+            # know which of them is newer; the jobs do not. So they are asked.
+            # Anything the resolver has no opinion about keeps the old rule.
             echo "$unmerged" | while read -r f; do
-              git checkout --theirs -- "$f" 2>/dev/null || git checkout --ours -- "$f" 2>/dev/null || true
+              side=none
+              tmp=$(mktemp -d)
+              if git show ":2:$f" > "$tmp/ours" 2>/dev/null \
+                 && git show ":3:$f" > "$tmp/theirs" 2>/dev/null; then
+                verdict=$(python3 scripts/resolve_generated.py \
+                            "$tmp/ours" "$tmp/theirs" "$tmp/merged-$(basename "$f")" \
+                          2>/dev/null || echo 'none  the resolver failed')
+                side=${verdict%% *}
+                echo "   $f -> $verdict"
+              fi
+              case "$side" in
+                ours)   git checkout --ours   -- "$f" 2>/dev/null || true ;;
+                theirs) git checkout --theirs -- "$f" 2>/dev/null || true ;;
+                merged) cp "$tmp/merged-$(basename "$f")" "$f" ;;
+                *)      git checkout --theirs -- "$f" 2>/dev/null \
+                        || git checkout --ours -- "$f" 2>/dev/null || true ;;
+              esac
               git add "$f"
+              rm -rf "$tmp"
             done
             GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || true
             # The fingerprint has to describe the bytes that actually ended up
