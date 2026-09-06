@@ -571,7 +571,7 @@
    "trading_resumptions": 0,
    "capital_increases": 0,
    "general_assemblies": 2,
-   "periods_reported": 1,
+   "periods_reported": 2,
    "loss_making_periods": 0
   },
   "generated": "2026-08-24"
@@ -1538,13 +1538,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
   "record": {
-   "filings": 594,
+   "filings": 596,
    "first_filing": "2010-01-06",
    "trading_suspensions": 8,
    "trading_resumptions": 9,
    "capital_increases": 1,
    "general_assemblies": 73,
-   "periods_reported": 66,
+   "periods_reported": 67,
    "loss_making_periods": 2
   },
   "generated": "2026-08-24"
@@ -2594,7 +2594,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/FNAR/profile",
   "record": {
-   "filings": 400,
+   "filings": 401,
    "first_filing": "2013-01-20",
    "trading_suspensions": 4,
    "trading_resumptions": 4,
@@ -4221,7 +4221,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MOIN/profile",
   "record": {
-   "filings": 925,
+   "filings": 926,
    "first_filing": "2010-02-15",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
