@@ -12,9 +12,13 @@
 }
 .gate p { margin: 0; max-width: 74ch; }
 .gate strong { color: #FF8340; font-weight: 600; }
+/* The way in, and the way out. 44px, because they are what a thumb is
+   reaching for and they were 135x29 — comfortably under the 44x44 a finger
+   needs, on the two controls that decide whether a reader sees real data. */
 .gate-cta, .account button {
-  font: 500 13px/1 "IBM Plex Sans", system-ui, sans-serif;
-  padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  font: 500 14px/1 "IBM Plex Sans", system-ui, sans-serif;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer;
   background: #E8621C; color: #1B1917; border: 0;
 }
 .gate-cta:hover { background: #FF8340; }
@@ -40,9 +44,18 @@ body[data-signed="yes"] .gate { display: none; }
 }
 body[data-signed="yes"] .account { top: 18px; }
 body[data-signed="yes"] #signin,
-body[data-signed="no"]  #signout { display: none; }
+body[data-signed="no"]  #signout,
+/* Signed out there is no address to print, and #who now carries an author
+   `display` of its own — so the state needs a rule, not just the attribute. */
+body[data-signed="no"]  #who { display: none; }
+/* The account controls are hidden BY ATTRIBUTE in main.js as well as by the
+   two rules above, and they gained an author `display` when they were made
+   44px — which is exactly how the demo banner and the sign-in steps each
+   ended up ignoring `hidden` for months. The guard, once, for all three. */
+#who[hidden], #signin[hidden], #signout[hidden] { display: none !important; }
 .account #who {
-  padding: 7px 12px; border-radius: 999px;
+  display: inline-flex; align-items: center; min-height: 44px;
+  padding: 0 14px; border-radius: 999px;
   background: var(--surface); border: 1px solid var(--edgeIn);
   max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
@@ -75,7 +88,7 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
   font: 400 15px/1.55 "IBM Plex Sans", system-ui, sans-serif;
 }
 .si-sheet h2 { margin: 0 0 6px;
-  font: 600 21px/1.15 "Bricolage Grotesque", system-ui, sans-serif; }
+  font: 600 21px/1.25 "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif; }
 .si-lead { margin: 0 0 18px; color: var(--t2, #5C554F); font-size: 13.6px; }
 .si-step { display: grid; gap: 8px; }
 /* The same trap the demo banner fell into, in the other file nobody scanned.
@@ -87,14 +100,16 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 .si-step[hidden] { display: none; }
 .si-step label { font-size: 12px; letter-spacing: .04em; text-transform: uppercase;
   color: var(--faint, #6E6761); font-family: "IBM Plex Mono", monospace; }
+/* 48px on everything the reader types into or presses in the sheet. The
+   input was 43px and the submit 37px; a mis-tap here costs the sign-in. */
 .si-step input {
   font: 400 16px/1.2 "IBM Plex Sans", system-ui, sans-serif;
-  padding: 11px 13px; border-radius: 10px;
+  min-height: 48px; padding: 12px 14px; border-radius: 10px;
   border: 1px solid var(--rule, rgba(27,25,23,.22)); background: var(--sunk, #fff); color: var(--ink, #1B1917);
 }
 #si-code { font-family: "IBM Plex Mono", monospace; letter-spacing: .3em; }
 .si-step button[type=submit] {
-  margin-top: 4px; padding: 11px 16px; border: 0; border-radius: 10px;
+  margin-top: 4px; min-height: 48px; padding: 12px 18px; border: 0; border-radius: 10px;
   background: var(--accent, #B84305); color: #fff; cursor: pointer;
   font: 500 14.5px/1 "IBM Plex Sans", system-ui, sans-serif;
   transition: opacity .15s;
@@ -102,15 +117,22 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 .si-step button[type=submit]:hover { opacity: .9; }
 .si-step button[type=submit]:disabled { opacity: .5; cursor: default; }
 .si-back { margin-top: 2px; background: none; border: 0; cursor: pointer;
-  color: var(--faint, #6E6761); font-size: 12.5px; text-decoration: underline; }
+  display: inline-flex; align-items: center; align-self: start; min-height: 44px; padding: 0 4px;
+  color: var(--faint, #6E6761); font-size: 13px; text-decoration: underline; }
 .si-back:hover { color: var(--ink); }
 .si-turnstile { min-height: 65px; display: flex; justify-content: center; }
 .si-error { margin: 12px 0 0; color: var(--down, #A3402F); font-size: 13px; }
 .si-error[hidden] { display: none; }
-.si-close { position: absolute; top: 10px; inset-inline-end: 12px;
+/* 25x24 before this, in the corner of a sheet, which is the hardest target
+   on the site to hit and the one a reader reaches for to get out of it. The
+   glyph stays the same size; the button around it is now 44x44. */
+.si-close { position: absolute; top: 6px; inset-inline-end: 6px;
+  display: grid; place-items: center; width: 44px; height: 44px;
   background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer;
-  color: var(--faint, #6E6761); }
-.si-close:hover { color: var(--ink); }
+  border-radius: 999px; color: var(--faint, #6E6761); }
+.si-close:hover { background: var(--sunk); color: var(--ink); }
+.si-close[hidden] { display: none; }
+.si-back[hidden] { display: none; }
 :focus-visible { outline: 2px solid var(--accent, #B84305); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 

@@ -150,31 +150,71 @@ export function openSignIn(onDone, lang) {
 
   const steps = wrap.querySelectorAll('.si-step');
   const error = wrap.querySelector('.si-error');
-  const close = () => wrap.remove();
-  const said = (WORDS[lang] ? lang : 'ar');
-  /** Whatever the widget currently holds, or '' if it holds nothing. */
-  const token = () => {
-    try {
-      return (widgetId !== null && window.turnstile
-        ? window.turnstile.getResponse(widgetId) : '') || '';
-    } catch { return ''; }
-  };
-  const fail = (message) => {
-    error.textContent = (REASONS[said] || {})[message] || message;
-    error.hidden = false;
-  };
-  const step = (name) => {
-    steps.forEach((f) => { f.hidden = f.dataset.step !== name; });
-    error.hidden = true;
-    wrap.querySelector(name === 'email' ? '#si-email' : '#si-code').focus();
+  /* Closing the sheet, and undoing everything opening it did.
+   *
+   * `close` used to be `wrap.remove()` and nothing else, while the Escape
+   * handler below removed itself ONLY when Escape was the thing that closed
+   * the sheet. Close it with the × or the scrim — which is how it is usually
+   * closed — and the listener stayed on `document` for the life of the page,
+   * one more each time the sheet was opened. Every one of them still held a
+   * `close` bound to a `wrap` no longer in the document, so a later Escape
+   * ran them all against detached nodes.
+   *
+   * Focus is put back where it came from, because a reader who dismisses a
+   * dialog and finds the caret at the top of the document has lost their
+   * place — and a keyboard reader has lost it completely. */
+  const opener = document.activeElement;
+  const close = () => {
+    document.removeEventListener('keydown', onKey, true);
+    wrap.remove();
+    if (opener && document.contains(opener) && typeof opener.focus === 'function') {
+      opener.focus();
+    }
   };
 
-  wrap.querySelector('.si-close').onclick = close;
-  wrap.querySelector('.si-scrim').onclick = close;
-  wrap.querySelector('.si-back').onclick = () => step('email');
-  document.addEventListener('keydown', function esc(e) {
-    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
-  });
+  /* Escape closes; Tab stays inside.
+   *
+   * The sheet says `role="dialog"` and `aria-modal="true"`, which tells a
+   * screen reader that the rest of the page is inert — but nothing was making
+   * that true. Fifty-one focusable controls behind the scrim were still in the
+   * tab order, so a keyboard or switch reader tabbed straight out of a modal
+   * they were told was modal, into a page they could not see, and typed into a
+   * search box behind a scrim. `aria-modal` is a promise; this keeps it.
+   *
+   * Captured, so it runs before anything inside the sheet can stop it. */
+  const focusable = () => [...wrap.querySelectorAll(
+    'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])',
+  )].filter((el) => el.offsetParent !== null || el === document.activeElement);
+  /* Tab is moved by hand, every time.
+   *
+   * Two gentler versions of this did not hold. Wrapping only at the first and
+   * last of `focusable()` assumes the browser walks the sheet in the order
+   * `querySelectorAll` returns, and with the challenge widget present it does
+   * not: a Tab out of the email field went past the submit button to `body`,
+   * because the widget's hidden input and iframe sit in the ring between them.
+   * A `focusin` backstop then failed for a plainer reason — tabbing past the
+   * last control leaves the document altogether, so nothing receives focus and
+   * `focusin` never fires at all.
+   *
+   * So the ring is not predicted or corrected: it is the list below, walked
+   * here, with the default suppressed. `aria-modal="true"` is on this sheet,
+   * and this is what makes it true. */
+  function onKey(e) {
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab') return;
+    const inside = focusable();
+    if (!inside.length) return;
+    e.preventDefault();
+    const at = inside.indexOf(document.activeElement);
+    const step = e.shiftKey ? -1 : 1;
+    // Focus outside the sheet enters at the near end rather than the far one.
+    const next = at === -1
+      ? (e.shiftKey ? inside.length - 1 : 0)
+      : (at + step + inside.length) % inside.length;
+    inside[next].focus();
+  }
+
+  document.addEventListener('keydown', onKey, true);
 
   /* The widget, rendered explicitly so its id can be kept and reset.
    *
