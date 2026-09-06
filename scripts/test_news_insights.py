@@ -362,3 +362,45 @@ class PublishedInsightsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TranslationFallbackTest(unittest.TestCase):
+    """The news document must be written even when nothing can translate.
+
+    On 6 Sep 2026 the news feed froze for two hours and the runs stayed green.
+    Giving `publish-live-data.yml` a Vertex token so it could write news
+    insights made `cloud_translate.available()` — which answered
+    `gemini.available()` — return True on a runner holding no API key. Cloud
+    Translation takes `?key=` and nothing else, so `translate()` raised
+    `GeminiUnavailable` while building the URL; `english_for` catches only
+    `TranslateUnavailable`; and the exception reached `main()` before
+    `latest.json` was written. `|| true` hid it.
+    """
+
+    def test_the_translator_reports_its_own_credential(self):
+        import cloud_translate
+        with mock.patch.object(cloud_translate.gemini, "_key",
+                               side_effect=cloud_translate.gemini.GeminiUnavailable("no key")):
+            self.assertFalse(cloud_translate.available(),
+                             "it claims to be reachable without the key it uses")
+
+    def test_a_missing_key_is_a_translate_refusal_not_a_gemini_one(self):
+        # Whatever the caller guarded on, this module raises the type its
+        # callers catch. This is the assertion that keeps the feed publishing.
+        import cloud_translate
+        with mock.patch.object(cloud_translate.gemini, "_key",
+                               side_effect=cloud_translate.gemini.GeminiUnavailable("no key")):
+            with self.assertRaises(cloud_translate.TranslateUnavailable):
+                cloud_translate.translate(["عنوان عربي"])
+
+    def test_headlines_stay_arabic_rather_than_stopping_the_build(self):
+        import cloud_translate
+        import translations
+        with mock.patch.object(cloud_translate.gemini, "_key",
+                               side_effect=cloud_translate.gemini.GeminiUnavailable("no key")), \
+             mock.patch.object(translations.gemini, "available", return_value=False), \
+             mock.patch.object(translations, "_load", return_value={}), \
+             mock.patch.object(translations, "_save", lambda *a, **k: None), \
+             redirect_stdout(io.StringIO()):
+            rendered = translations.english_for(["عنوان عربي جديد"], label="headlines")
+        self.assertEqual(rendered, {}, "it should return nothing, not raise")

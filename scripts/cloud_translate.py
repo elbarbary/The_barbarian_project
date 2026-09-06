@@ -48,7 +48,27 @@ class TranslateUnavailable(RuntimeError):
 
 
 def available() -> bool:
-    return gemini.available()
+    """Whether THIS service can be called — which is not `gemini.available()`.
+
+    That function is true when either a Vertex token or an API key is present,
+    because the models it serves accept either. Cloud Translation is a REST
+    endpoint that takes `?key=` and nothing else, so a machine holding only a
+    Vertex token can reach Gemini and cannot reach this.
+
+    Answering `gemini.available()` here took the news feed down for two hours
+    on 6 Sep 2026. Handing publish-live-data.yml a Vertex token — so it could
+    finally write news insights — made this return True on a runner with no
+    API key, `translate()` raised `GeminiUnavailable` from inside the URL it
+    was building, `english_for` was only catching `TranslateUnavailable`, and
+    the exception came up through `build_news_api.main()` before it wrote
+    `latest.json`. The step ends in `|| true`, so the run stayed green and the
+    published feed simply stopped moving.
+    """
+    try:
+        gemini._key()
+        return True
+    except gemini.GeminiUnavailable:
+        return False
 
 
 def translate(texts: list[str]) -> dict[str, str]:
@@ -62,6 +82,14 @@ def translate(texts: list[str]) -> dict[str, str]:
     if not texts:
         return {}
 
+    # Belt and braces: whatever `available()` said, this module raises its own
+    # exception type. A caller that guards on the wrong predicate gets a
+    # refusal it knows how to handle, not one that escapes it.
+    try:
+        key = gemini._key()
+    except gemini.GeminiUnavailable as error:
+        raise TranslateUnavailable(str(error)) from error
+
     out: dict[str, str] = {}
     for start in range(0, len(texts), BATCH):
         batch = texts[start : start + BATCH]
@@ -70,7 +98,7 @@ def translate(texts: list[str]) -> dict[str, str]:
             + [("source", "ar"), ("target", "en"), ("format", "text")]
         ).encode()
         request = urllib.request.Request(
-            f"{ENDPOINT}?key={gemini._key()}",
+            f"{ENDPOINT}?key={key}",
             data=body,
             headers={"content-type": "application/x-www-form-urlencoded"},
         )
