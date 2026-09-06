@@ -23,6 +23,26 @@
     "meaning": "Establishing structured bilateral working tracks sets up standardized administrative channels for institutional coordination between Egyptian and Chinese entities on industrial projects, trade agreements, and joint infrastructure initiatives.",
     "meaning_ar": "يؤسس تحديد مسارات العمل الثنائية قنوات إدارية منظمة للتنسيق المؤسسي بين الكيانات المصرية والصينية في مجالات المشاريع الصناعية والاتفاقيات التجارية والمبادرات الاستثمارية المشتركة."
   },
+  "CI Capital Asset Management plans to launch Egypt’s first equity hedge fund": {
+    "meaning": "The establishment of an equity hedge fund introduces alternative investment strategies, including long and short equity positions and derivative hedging techniques, to the domestic asset management industry alongside conventional long-only funds.",
+    "meaning_ar": "يُدخل إنشاء صندوق تحوط للأسهم استراتيجيات استثمارية بديلة، تشمل مراكز الشراء والبيع على المكشوف وأدوات التحوط، إلى قطاع إدارة الأصول المحلي بجانب صناديق الاستثمار التقليدية."
+  },
+  "Egypt is fixing how deals get executed, but what pushes investors offshore runs deeper than the reforms on the table": {
+    "meaning": "Regulatory adjustments to transaction execution procedures address the operational mechanics of domestic deal settlement, while cross-border capital structuring decisions reflect broader macro fundamentals such as foreign exchange liquidity and repatriation frameworks.",
+    "meaning_ar": "تتعامل التعديلات التنظيمية لإجراءات تنفيذ الصفقات مع الجوانب التشغيلية لتسوية المعاملات محلياً، بينما تعتمد قرارات هيكلة رؤوس الأموال عبر الحدود على محددات اقتصادية أوسع تشمل سيولة النقد الأجنبي وأطر تحويل الأرباح للخارج."
+  },
+  "Five years into RISE, safety metric frozen as World Bank ratchets up fiduciary risk on Egypt’s railway loan": {
+    "meaning": "An elevated fiduciary risk rating tied to multilateral railway financing triggers tighter loan conditionality, enhanced oversight procedures, and potential delays in capital disbursements for infrastructure modernisation projects.",
+    "meaning_ar": "يؤدي رفع تصنيف المخاطر الائتمانية والرقابية المرتبطة بتمويلات السكك الحديدية الدولية إلى تشديد شروط الإقراض، وزيادة إجراءات الرقابة، وربما إبطاء صرف الدفعات التمويلية المخصصة لمشروعات تحديث البنية التحتية."
+  },
+  "Foreign press sees Xi’s Cairo stop through the US-China rivalry": {
+    "meaning": "Bilateral diplomatic engagements between Egypt and China frame sovereign infrastructure financing arrangements, industrial zone concessions in the Suez Canal corridor, and inter-central bank trade settlement mechanisms.",
+    "meaning_ar": "تؤطر اللقاءات الدبلوماسية الثنائية بين مصر والصين آليات تمويل مشاريع البنية التحتية السيادية، وامتيازات المناطق الصناعية في محور قناة السويس، وترتيبات التسوية التجارية بين البنوك المركزية."
+  },
+  "Hospitals have the data. Few have the informatics to use it": {
+    "meaning": "Healthcare providers possess raw clinical and operational data assets but lack the specialized health informatics infrastructure required to process and integrate them into management and treatment workflows.",
+    "meaning_ar": "تمتلك منشآت الرعاية الصحية أصول البيانات السريرية والتشغيلية، لكنها تفتقر إلى البنية التحتية المتخصصة في المعلوماتية الصحية اللازمة لمعالجة هذه البيانات ودمجها في مسارات الإدارة والعلاج."
+  },
   "Insider trading blackout now runs on the earnings calendar only": {
     "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
     "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
@@ -30,6 +50,10 @@
   "Meet Egyptian 3D concrete printing company Layn’s Zeyad Zein": {
     "meaning": "3D concrete printing introduces additive manufacturing technology to the domestic construction and building materials sector, automating on-site material deposition and altering standard construction supply chains.",
     "meaning_ar": "يُدخل قطاع الطباعة الخرسانية ثلاثية الأبعاد تقنيات التصنيع المضاف إلى قطاع التشييد ومواد البناء المحلي، مما يؤتمت عمليات صب الخرسانة ويغير سلاسل الإمداد الإنشائية التقليدية."
+  },
+  "Nawy Now offloaded another EGP 633 mn of mortgages to a fund, freeing up balance-sheet capacity": {
+    "meaning": "This transaction transfers mortgage receivables from the company's books to a specialized fund, converting long-term illiquid assets into immediate liquid capital and removing debt from the balance sheet.",
+    "meaning_ar": "تتضمن هذه العملية تحويل محافظ التمويل العقاري من الدفاتر المالية للشركة إلى صندوق متخصص، مما يحول الأصول طويلة الأجل غير السائلة إلى سيولة نقدية مباشرة ويزيل هذه الالتزامات من الميزانية العمومية."
   },
   "Ridley Scott’s The Dog Stars is a well-acted post-apocalyptic film, but predictable": {
     "meaning": "Critical media reception serves as a consumer performance metric in the film and entertainment distribution industry, where operational activity centers on box office releases and content licensing.",
@@ -39,6 +63,10 @@
     "meaning": "This highlights product differentiation and operational service standards within the food and beverage (F&B) consumer sector operating in the New Cairo commercial market.",
     "meaning_ar": "يوضح هذا تميز المنتجات ومستويات التشغيل وجودة الخدمة في قطاع الأغذية والمشروبات الاستهلاكي العامل بالسوق التجاري في القاهرة الجديدة."
   },
+  "USD 2.1 tn in capex from GCC is going to self-reliance + resilience -BlackRock": {
+    "meaning": "Gulf Cooperation Council entities allocate capital expenditures toward domestic infrastructure, localized supply chains, and industrial capacity rather than cross-border asset accumulation.",
+    "meaning_ar": "تُوجّه مؤسسات دول مجلس التعاون الخليجي النفقات الرأسمالية نحو البنية التحتية المحلية، وتوطين سلاسل الإمداد، وتعزيز القدرات الصناعية بدلاً من مراكمة الأصول الخارجية."
+  },
   "Why NPR’s Book of the Day is worth adding to your daily listening": {
     "meaning": "Daily short-form podcast programming operates as a digital content distribution model, connecting media networks with the book publishing sector through audio streaming channels.",
     "meaning_ar": "يعمل البث الصوتي القصير اليومي كنموذج لتوزيع المحتوى الرقمي، حيث يربط بين شبكات الإعلام وقطاع نشر الكتب عبر قنوات البث الرقمي."
@@ -46,6 +74,14 @@
   "back to school pre university education in focus": {
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
+  },
+  "el sisi directs state bodies to adopt greening cairo project": {
+    "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
+    "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
+  },
+  "fra issues first comprehensive guide to consumer finance companies": {
+    "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
+    "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
@@ -231,6 +267,10 @@
     "meaning": "Disruptions to maritime energy transport affect global crude logistics by increasing geopolitical risk premiums on oil benchmarks and raising marine freight insurance rates across regional shipping corridors.",
     "meaning_ar": "تؤثر الاضطرابات في النقل البحري للطاقة على سلاسل إمداد النفط العالمية عبر زيادة علاوة المخاطر الجيوسياسية في أسعار الخام ورفع تكاليف التأمين على الشحن البحري في الممرات الإقليمية."
   },
+  "الحاصلات الزراعيه تتجاوز اعباء الشحن ب«صفر جمارك» للتوسع في الصين": {
+    "meaning": "Zero-customs tariff arrangements on agricultural exports to China offset logistics and freight expenses incurred along the export supply chain.",
+    "meaning_ar": "تعمل الإعفاءات الجمركية الكاملة على صادرات الحاصلات الزراعية إلى الصين على موازنة تكاليف الشحن والخدمات اللوجستية لسلسلة التوريد."
+  },
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
@@ -248,9 +288,8 @@
     "meaning_ar": "تؤدي بيانات سوق العمل الأمريكي الأقوى من المتوقع إلى ترسيخ أسعار الفائدة المرتفعة على الدولار، مما يرفع مؤشر العملة الأمريكية مقابل العملات العالمية ويوجه تدفقات رؤوس الأموال نحو الأصول المقومة بالدولار."
   },
   "الدولار ينتعش مع تجاوز نمو الوظايف الامريكيه التوقعات": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 2
+    "meaning": "Stronger-than-expected US employment data reinforces higher US interest rate benchmarks, increasing global demand for dollar-denominated assets and altering foreign exchange dynamics across international markets.",
+    "meaning_ar": "تعكس بيانات التوظيف الأمريكية الأعلى من التقديرات متانة سوق العمل وتدعم مستويات الفائدة المرتفعة لدى الفيدرالي الأمريكي، مما يرفع الطلب على الأصول المقومة بالدولار ويؤثر على أسعار صرف العملات عالمياً."
   },
   "الذهب يتجه لمكاسب اسبوعيه طفيفه وسط ترقب بيانات الوظايف الامريكيه": {
     "meaning": "Gold prices trade with narrow weekly gains as market participants price in interest rate expectations ahead of official US employment data.",
@@ -319,6 +358,10 @@
   "الطماطم ب25 جنيها.. اسعار الخضراوات والفاكهه اليوم الجمعه 4-9-2026": {
     "meaning": "Changes in daily retail prices for fresh produce reflect seasonal agricultural supply dynamics, logistics costs, and wholesale market liquidity, which directly influence household food consumption and headline CPI inflation trends.",
     "meaning_ar": "تعكس تغيرات أسعار تجزئة الخضراوات والفاكهة اليومية ديناميكيات المعروض الزراعي الموسمي وتكاليف النقل واللوجستيات، وهو ما يؤثر بشكل مباشر على الإنفاق الاستهلاكي للأسر ومؤشرات التضخم العام."
+  },
+  "العدد 400": {
+    "meaning": "The publication of issue number 400 represents a recurring media or reporting milestone within standard operational scheduling, carrying no direct impact on underlying corporate capital structures or market trading mechanics.",
+    "meaning_ar": "يمثل إصدار العدد رقم 400 علامة توثيقية دورية ضمن جداول النشر والمتابعة المعتادة، دون أن يترتب عليه أي تغيير في الهياكل التمويلية للشركات أو آليات التداول في السوق."
   },
   "العريان يتوقع استمرار موجه بيع السندات الحكوميه العالميه وارتفاع العوايد": {
     "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
@@ -595,7 +638,7 @@
   "سيتي جروب يوجل توقع خفض الفايده الامريكيه الي يونيو 2027": {
     "meaning": "",
     "meaning_ar": "",
-    "refused": 2
+    "refused": 3
   },
   "سيطره امريكا علي نفط فنزويلا تهدد مليارات الدولارات المستحقه للصين": {
     "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
