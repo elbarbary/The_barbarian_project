@@ -427,6 +427,10 @@
     "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
   },
+  "الرقابه الماليه تشكل مجموعه عمل لتعزيز مبادي المسيوليه المجتمعيه في الانشطه غير المصرفيه": {
+    "meaning": "The Financial Regulatory Authority establishes a working group to develop regulatory frameworks and standards for corporate social responsibility across non-banking financial institutions.",
+    "meaning_ar": "تُشكل الهيئة العامة للرقابة المالية مجموعة عمل لوضع أطر ومعايير تنظيمية للمسئولية المجتمعية تطبقها المؤسسات العاملة في القطاع المالي غير المصرفي."
+  },
   "الرقابه الماليه تصدر اول دليل شامل لقواعد وضوابط شركات التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority unifies the operational, licensing, risk management, and consumer protection standards for consumer finance companies into a single standardized regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط الترخيص وإدارة المخاطر وحماية المتعاملين لشركات التمويل الاستهلاكي ضمن إطار تنظيمي موحد وشامل."
@@ -587,6 +591,10 @@
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
     "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
   },
+  "بنك مصر يوفر افضل الحلول من خلال تمويل «اكسبريس» للمشروعات الصغيره والمتوسطه": {
+    "meaning": "Banque Misr provides small and medium-sized enterprises with streamlined debt financing products through its Express loan program, supplying working capital and operational liquidity directly to eligible businesses under standardized lending procedures.",
+    "meaning_ar": "يقدم بنك مصر تسهيلات ائتمانية مبسطة للمشروعات الصغيرة والمتوسطة عبر برنامج تمويل «إكسبريس»، مما يتيح السيولة التشغيلية ورأس المال العامل للشركات المستوفية للشروط وفق إجراءات إقراض قياسية."
+  },
   "بورتو السخنه تنطلق الي عصر جديد": {
     "meaning": "The headline refers to operational restructuring, renovation, or a new phase of project delivery and service management at the Porto Sokhna real estate development.",
     "meaning_ar": "يشير العنوان إلى تنفيذ خطة لإعادة الهيكلة التشغيلية، أو أعمال التجديد، أو إطلاق مرحلة جديدة من التسليمات وإدارة الخدمات في مشروع بورتو السخنة العقاري."
@@ -682,6 +690,10 @@
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
     "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية للمشروعات الصغيرة والمتوسطة التابعة مساحات عرض وتسويق مباشرة للشركات الأجنبية وشبكات التوزيع الخارجية."
+  },
+  "توسعات جديده لمصنع الاسمده بالسخنه": {
+    "meaning": "Physical plant expansions add production lines and operational capacity to fertilizer manufacturing facilities, altering capital expenditure allocations and industrial output volumes.",
+    "meaning_ar": "تتضمن التوسعات الإنشائية للمصانع إضافة خطوط إنتاج وطاقات تشغيلية جديدة لمنشآت تصنيع الأسمدة، مما يغير من هيكل النفقات الرأسمالية وأحجام الإنتاج الصناعي."
   },
   "توقعات بتعافي الوظايف الامريكيه وسط ترقب قرار الفيدرالي بشان الفايده": {
     "meaning": "US employment metrics serve as primary inputs for Federal Reserve interest rate policy, which directly determines international capital flows and USD liquidity pricing across emerging markets such as Egypt.",
@@ -1052,6 +1064,10 @@
     "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
     "meaning_ar": "يؤدي نقص المعروض من محصول الطماطم الخام إلى تقييد توافر المدخلات الإنتاجية لمصانع الصلصة، مما يؤثر على معدلات التشغيل وتكاليف توريد المواد الخام في قطاع الصناعات الغذائية."
   },
+  "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
+    "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
+    "meaning_ar": "تعمل منتديات GS1 على مواءمة عمليات تجارة التجزئة واللوجستيات والتجارة الإلكترونية المحلية مع المعايير الدولية الموحدة لتكويد المنتجات، وبروتوكولات تتبع سلاسل الإمداد، وأنظمة مزامنة البيانات الرقمية."
+  },
   "مصر تستهدف اصدارات دوليه بقيمه 3 مليارات دولار خلال العام المالي 2026/2027": {
     "meaning": "The Ministry of Finance schedules foreign-currency debt issuances in international capital markets to cover external financing requirements for the specified fiscal year.",
     "meaning_ar": "تدرج وزارة المالية أدوات دين بالعملة الأجنبية في الأسواق الدولية لتغطية الاحتياجات التمويلية الخارجية خلال العام المالي المحدد."
@@ -1319,5 +1335,9 @@
   "“وول ستريت” تترقب بيانات التضخم لتحديد مسار اسعار الفايده الامريكيه": {
     "meaning": "Inflation metrics serve as primary benchmark data for central bank monetary policy decisions, directly governing sovereign interest rates, corporate borrowing costs, and valuation discount rates across equity markets.",
     "meaning_ar": "تُعد مؤشرات التضخم البيانات الأساسية الموجهة لقرارات السياسة النقدية للبنوك المركزية، حيث تُحدد أسعار الفائدة تكاليف الاقتراض ومعدلات الخصم المالي في أسواق الأسهم."
+  },
+  "“ڤاليو” تعلن الاطلاق الرسمي لعملياتها في الاردن بعد اشهر من التشغيل التمهيدي": {
+    "meaning": "The company transitions its consumer finance operations in Jordan from a pilot phase to full commercial deployment, establishing active point-of-sale and digital financing infrastructure outside its domestic Egyptian market.",
+    "meaning_ar": "تنتقل الشركة بخدمات التمويل الاستهلاكي في الأردن من المرحلة التجريبية إلى التشغيل التجاري الكامل، مما يُفعل البنية التحتية لنقاط البيع والتمويل الرقمي خارج سوقها المحلي في مصر."
   }
 }
