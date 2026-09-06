@@ -16,8 +16,8 @@
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
   },
   "3 بنوك تضخ 50 مليون جنيه في مصنع «جرانتي» الجديد بقويسنا": {
-    "meaning": "This represents a syndicated financing arrangement where three commercial banks co-fund the capital expenditure for a new manufacturing facility in Quesna, distributing credit exposure while providing the project with debt capital.",
-    "meaning_ar": "يمثل هذا ترتيباً تمويلياً مشتركاً تقدم من خلاله ثلاثة بنوك تجارية تمويلاً مشتركاً للنفقات الرأسمالية لإنشاء مصنع جديد في قويسنا، مما يوزع المخاطر الائتمانية ويوفر التمويل بالدين للمشروع."
+    "meaning": "This transaction represents syndicated debt financing where three commercial banks provide EGP 50 million in capital expenditure funding to establish a new manufacturing facility in Quesna, expanding the company's fixed asset base and industrial capacity.",
+    "meaning_ar": "يمثل هذا الإجراء تمويلاً مصرفياً مشتركاً تقدم من خلاله ثلاثة بنوك 50 مليون جنيه لتمويل النفقات الرأسمالية لإنشاء مصنع جديد في قويسنا، مما يرفع الأصول الثابتة والطاقة الإنتاجية التشغيلية للشركة."
   },
   "3 دول اسيويه تهمين علي شحنات القطن المصري منذ بدايه الموسم": {
     "meaning": "Export data shows that the volume of Egyptian raw cotton exports is currently concentrated among three Asian buyer markets, which absorb the majority of outbound shipments for the current agricultural season.",
@@ -750,6 +750,10 @@
   "تركيا تخفض توقعات النمو في 2027 وسط حديث عن انتخابات مبكره": {
     "meaning": "Official macroeconomic forecast revisions update multi-year fiscal targets and baseline planning parameters within government budgetary frameworks during shifts in political timelines.",
     "meaning_ar": "يمثل تعديل التوقعات الاقتصادية الرسمية إعادة ضبط للمستهدفات المالية ومعايير التخطيط المالي ضمن الموازنة الحكومية في ظل تغيرات الجداول الزمنية السياسية."
+  },
+  "تركيا تخفض توقعات النمو لعام 2027 في اطار الموازنه بين الاسعار والتوسع الاقتصادي": {
+    "meaning": "Lowering medium-term growth projections reflects the application of restrictive monetary and fiscal measures designed to stabilize general price levels, shifting policy priority toward cooling aggregate domestic demand over GDP expansion.",
+    "meaning_ar": "يعكس خفض تقديرات النمو للمدى المتوسط تطبيق سياسات نقدية ومالية انكماشية تستهدف استقرار الأسعار، حيث تُمنح الأولوية لكبح مستويات الطلب المحلي بدلاً من تسريع وتيرة التوسع الاقتصادي."
   },
   "تركيا تعيد احياء خطه خصخصه جسرين شهيرين وطرق سريعه": {
     "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
