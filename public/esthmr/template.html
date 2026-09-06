@@ -105,7 +105,7 @@
       <section class="insight-shelf">
         <h2>{{ insightHeading }}</h2>
         <div class="insight-grid">
-          <article class="insight-card">
+          <article class="insight-card insight-investors">
             <header class="island-heading"><h3>{{ L.investorsWho }}</h3><button type="button" onClick="{{ goInvestors }}">{{ L.investorsOpen }} →</button></header>
             <sc-if value="{{ investors }}">
               <p class="insight-caption">{{ investors.asOfLine }}</p>
@@ -117,9 +117,10 @@
             </sc-if>
             <sc-if value="{{ noInvestors }}"><p class="insight-caption">{{ insightMissing }}</p></sc-if>
           </article>
-          <article class="insight-card">
+          <article class="insight-card insight-volume">
             <header class="island-heading"><h3>{{ L.busiest }}</h3><button type="button" onClick="{{ explorer.openVolume }}">{{ browseLabel }} →</button></header>
-            <sc-for list="{{ insightBusy }}" as="b"><button type="button" class="volume-preview-row" onClick="{{ b.go }}"><span><b>{{ b.ticker }}</b><small>{{ b.name }}</small></span><strong>{{ b.rv }}</strong><span style="color:{{ b.color }}">{{ b.pct }}</span><span aria-hidden="true">↗</span></button></sc-for>
+            <p class="insight-caption volume-session">{{ busyWhen }}</p>
+            <sc-for list="{{ insightBusy }}" as="b"><button type="button" class="volume-preview-row" onClick="{{ b.go }}"><span><b>{{ b.ticker }}</b><small>{{ b.name }}</small></span><span class="volume-multiple"><strong>{{ b.rv }}</strong><small>{{ insightBusyDate }}</small></span><span style="color:{{ b.color }}">{{ b.pct }}</span><span aria-hidden="true">↗</span></button></sc-for>
             <sc-if value="{{ noBusy }}"><p class="insight-caption">{{ L.nothingUnusual }}</p></sc-if>
             <p class="insight-caption">{{ insightBusyNote }}</p>
           </article>
@@ -128,8 +129,7 @@
       <sc-if value="{{ screen }}">
         <section class="market-measures" style="margin-top:18px;padding:20px 22px 18px;border-radius:20px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shCard)">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
-            <div style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:600;letter-spacing:-.02em">{{ L.screenTitle }}</div>
-            <div onClick="{{ screen.open }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)" style-hover="opacity:.75">{{ L.screenOpen }} →</div>
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0">{{ L.screenTitle }}</h2>
           </div>
           <div style="margin-top:7px;font-size:13px;color:var(--t2);line-height:1.6;max-width:62ch;text-wrap:pretty">{{ L.screenSub }}</div>
           <div style="margin-top:5px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ screen.universe }}</div>
@@ -147,16 +147,16 @@
           <sc-if value="{{ screen.howOn }}">
             <div style="margin-top:11px;font-size:11.5px;color:var(--faint);line-height:1.55;max-width:70ch;text-wrap:pretty">{{ L.screenBarsShort }}</div>
           </sc-if>
-          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
+          <div class="market-measure-grid" style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(186px,1fr));gap:20px 22px">
             <sc-for list="{{ screen.tests }}" as="t" hint-placeholder-count="4">
               <div>
                 <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
                   <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">{{ t.label }}</span>
                   <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--faint);white-space:nowrap">{{ t.of }}</span>
                 </div>
-                <sc-if value="{{ screen.howOn }}">
-                  <div style="margin-top:4px;font-size:11px;color:var(--t2);line-height:1.5;text-wrap:pretty">{{ t.what }}</div>
-                </sc-if>
+                <p class="measure-threshold">{{ t.threshold }}</p>
+                <p class="measure-meaning">{{ t.what }}</p>
+                <sc-if value="{{ screen.howOn }}"><p class="measure-detail">{{ t.text }}</p></sc-if>
 
                 <sc-if value="{{ t.hasDist }}">
                   <!-- One column per slice of the measure, height = how many
@@ -183,6 +183,7 @@
                 </sc-if>
 
                 <div style="margin-top:7px;min-height:15px;font-size:10.5px;color:var(--faint);line-height:1.45">{{ t.foot }}</div>
+                <sc-if value="{{ t.canOpen }}"><button type="button" class="measure-open" onClick="{{ t.open }}">{{ screen.exploreLabel }} →</button></sc-if>
               </div>
             </sc-for>
           </div>
@@ -212,7 +213,7 @@
           <p class="mosaic-note">{{ mosaicNote }}</p>
           <div class="market-mosaic"><sc-for list="{{ mosaicTiles }}" as="m">
             <button type="button" onClick="{{ m.go }}" title="{{ m.name }}" aria-label="{{ m.name }} {{ m.pct }}" style="background:{{ m.tileBg }};color:{{ m.tileInk }}">
-              <span>{{ m.ticker }}</span><strong>{{ m.pct }}</strong>
+              <span>{{ m.ticker }}</span><strong>{{ m.pct }}</strong><small class="mosaic-company" dir="auto">{{ m.name }}</small>
             </button>
           </sc-for></div>
           <sc-if value="{{ noMosaic }}"><p>{{ L.nothingYet }}</p></sc-if>

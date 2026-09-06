@@ -456,17 +456,17 @@ export class Component extends Base {
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
       ratioFilter:'Filter on a filed ratio', ratioValue:'value', ratioAnd:'and', ratioClear:'Clear',
-      screenTitle:'The market, on four measures',
-      screenSub:'One panel per measure, drawn over the companies that published that figure, with the market\u2019s own middle marked.',
-      screenBarsShort:'Each column counts the companies whose figure lands in that slice. The upright rule is the market\u2019s own middle.',
+      screenTitle:'Four ways to understand the market',
+      screenSub:'Compare earnings, trading activity, cash and upcoming filings. Each count covers one measure independently; it is not a company rating.',
+      screenBarsShort:'Each column counts companies in a slice of the measure. The upright line marks the threshold stated on that card: the market median for earnings and volume, and 1× for cash conversion.',
       screenLead:'Four lines drawn on the exchange\u2019s own medians, and how much of the market sits inside each. Every line is read from the market; none is chosen here.',
       screenUniverse:'{n} companies on file',
       screenPeShort:'Price to earnings', screenVolShort:'30-day volume',
       screenCashShort:'Cash conversion', screenActionShort:'No filing due',
       screenOver:'{n} outside the range drawn',
-      screenNamedSide:'the side this measure names', screenMedianMark:'market median',
+      screenNamedSide:'companies on the stated side', screenMedianMark:'comparison threshold',
       screenBars:'Each column is how many companies fall in that slice of the measure, and the mark is the market\u2019s own middle. Filled columns are the side of the middle the line names. Nothing is ranked and no company is a column.',
-      screenOf:'{n} of {of}',
+      screenOf:'{n} of {of} companies',
       screenSilent:'{n} published no figure to test',
       screenQuestion:'Sitting on one side of the middle is a question, not an answer: it says where a figure falls against the rest of the market, and nothing about whether that is good. No company is named here. A measure is applied on the table, where it is the reader\u2019s to change.',
       screenPeWhat:'What a share costs against a year of the profit the company filed.',
@@ -766,16 +766,16 @@ export class Component extends Base {
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
       ratioFilter:'تصفية على نسبة مُفصح عنها', ratioValue:'القيمة', ratioAnd:'و', ratioClear:'مسح',
-      screenTitle:'فحص السوق عبر ٤ مقاييس استثمارية',
-      screenSub:'لوحة لكل مقياس، مرسومة على الشركات التي أفصحت عن ذلك الرقم، مع تحديد وسط السوق.',
-      screenBarsShort:'كل عمود يعدّ الشركات التي يقع رقمها في تلك الشريحة، والخط القائم هو وسيط السوق نفسه.',
+      screenTitle:'٤ زوايا لفهم السوق',
+      screenSub:'قارن الربحية ونشاط التداول والنقد والإفصاحات المرتقبة. كل عدد يخص مقياساً واحداً، وليس تقييماً مجمّعاً أو توصية.',
+      screenBarsShort:'كل عمود يعدّ الشركات في شريحة من المقياس. الخط يحدد حد المقارنة المكتوب في البطاقة: وسيط السوق للربحية والحجم، و١× للتحويل النقدي.',
       screenUniverse:'{n} شركة في السجل',
       screenPeShort:'مكرر الربحية (P/E)', screenVolShort:'حجم التداول ٣٠ يوماً',
       screenCashShort:'جودة التدفق النقدي', screenActionShort:'لا إفصاح مرتقب',
       screenOver:'{n} خارج المدى المرسوم',
-      screenNamedSide:'الجانب الذي يسمّيه المقياس', screenMedianMark:'وسيط السوق',
+      screenNamedSide:'الشركات على الجانب المذكور', screenMedianMark:'حد المقارنة',
       screenBars:'كل عمود هو عدد الشركات الواقعة في تلك الشريحة من المقياس، والعلامة هي وسط السوق نفسه. الأعمدة المملوءة هي الجانب الذي يسمّيه الخط. لا ترتيب هنا، ولا عمود يمثل شركة بعينها.',
-      screenOf:'{n} من {of}',
+      screenOf:'{n} من {of} شركة',
       screenSilent:'{n} لم تُفصح عن رقم يُختبر',
       screenQuestion:'الوقوع على جانب من الوسط سؤال وليس حكمًا: يوضح أين تقع أرقام الشركة بالنسبة لبقية السوق، ولا يمثل توصية. لا يُفضل هنا سهم على آخر، ويُطبق المقياس على الجدول حيث يملك القارئ كامل التحكم.',
       screenPeWhat:'كم يكلّف السهم مقابل ربح سنة كما أفصحت عنه الشركة.',
@@ -3179,6 +3179,7 @@ export class Component extends Base {
       dotsSteps: ar ? ['١ · اختر شركة','٢ · اتبع التسلسل الزمني','٣ · اقرأ المصادر'] : ['1 · Choose a company','2 · Follow the timeline','3 · Read the sources'],
       marketVisibleCount: marketExplorer.isExplorer ? marketExplorer.count : rows.length,
       insightBusy: busy.slice(0, 4),
+      insightBusyDate: D.marketDate ? this.shortDate(D.marketDate) : '—',
       insightBusyNote: ar ? 'حجم الجلسة ÷ الحجم المعتاد · مقياس للنشاط فقط' : 'Session volume ÷ usual volume · activity measure only',
       insightMissing: ar ? 'لم تصل بيانات هذا القسم بعد. افتحه للاطلاع على التغطية.' : 'No data loaded for this section yet. Open it to check coverage.',
       insightMeasuresNote: ar ? 'أين يقع متوسط السوق؟ وما الذي يتقاطع في البيانات؟' : 'Where does the market sit—and which signals overlap?',
@@ -3349,6 +3350,19 @@ export class Component extends Base {
         const haveVol = all.filter((c) => typeof c.avgVolume === 'number');
         const haveCash = all.filter((c) => typeof cash(c) === 'number');
         const line = (n, label, what, text, inside, base, dist) => {
+          const id = ['pe', 'vol', 'cash', 'due'][Number(n) - 1];
+          const chip = chipDefs.find(c => c.id === id);
+          const thresholds = ar ? [
+            'مكرر ربحية ' + pe.toFixed(1) + '× أو أقل (وسيط السوق)',
+            'حجم يومي ' + this.num(vol, 0) + ' سهم أو أكثر (وسيط السوق)',
+            'نقد التشغيل يعادل صافي الربح أو يزيد عليه (١×)',
+            cal.length ? 'لا موعد في التقويم المنشور' : 'لا توجد بيانات تقويم للمقارنة',
+          ] : [
+            'P/E ≤ ' + pe.toFixed(1) + '× (market median)',
+            'Daily volume ≥ ' + this.num(vol, 0) + ' shares (market median)',
+            'Operating cash ≥ net profit (1×)',
+            cal.length ? 'No date in the published calendar' : 'No calendar data to compare',
+          ];
           const silent = base < all.length
             ? L.screenSilent.replace('{n}', this.num(all.length - base, 0)) : '';
           // One short line under each drawing, carrying both the companies
@@ -3358,6 +3372,12 @@ export class Component extends Base {
           const foot = [silent, dist && dist.over].filter(Boolean).join(' · ');
           return {
             n, label, what, text,
+            threshold: thresholds[Number(n) - 1],
+            canOpen: Boolean(chip && base),
+            open: () => {
+              if (chip && base) this.setState({ screen: 'market', marketMode: '', sector: 'All', q: '',
+                rqs: [{ ...chip.clause, id: chip.id }] });
+            },
             of: L.screenOf.replace('{n}', this.num(inside, 0)).replace('{of}', this.num(base, 0)),
             width: base ? ((inside / base) * 100).toFixed(1) + '%' : '0%',
             silent, hasSilent: Boolean(silent),
@@ -3367,6 +3387,7 @@ export class Component extends Base {
         };
         return {
           universe: L.screenUniverse.replace('{n}', this.num(all.length, 0)),
+          exploreLabel: ar ? 'استكشف هذه الشركات' : 'Explore these companies',
           // The definitions fold away. The subtitle does not: the card was
           // opaque once already, and hiding the one sentence that says what it
           // is would put it straight back. What folds is the per-measure
@@ -3387,7 +3408,7 @@ export class Component extends Base {
                  haveCash.length
                    ? histogram(haveCash.map(cash), 1, false, false) : null),
             line('4', L.screenActionShort, cal.length ? L.screenActionWhat : L.screenActionWhatNone, cal.length ? L.screenAction : L.screenActionNone,
-                 all.filter((c) => !due.has(c.ticker)).length, all.length, null),
+                 cal.length ? all.filter((c) => !due.has(c.ticker)).length : 0, cal.length ? all.length : 0, null),
           ],
           // The same line, on the table, where the reader owns it.
           //
