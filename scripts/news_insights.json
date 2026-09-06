@@ -147,6 +147,10 @@
     "meaning": "The company's semi-annual financial results record a 42% year-over-year rise in net profit, reflecting higher operational output, realized product pricing, or operating margin efficiency during the six-month period.",
     "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة نموًا بنسبة 42% في صافي الأرباح مقارنة بالفترة المقابلة من العام السابق، وهو ما يعكس زيادة في حجم الإنتاج التشغيلي، أو أسعار بيع المنتجات، أو كفاءة هوامش التشغيل خلال فترة الستة أشهر."
   },
+  "ارباح “كليوباترا” تتراجع 34.4% في النصف الاول": {
+    "meaning": "Cleopatra Hospital Group records a 34.4% year-over-year decline in bottom-line net profit for the first half of the year, reflecting higher operational expenses, financing costs, or compressed margins relative to total revenues during the period.",
+    "meaning_ar": "سجلت مجموعة مستشفيات كليوباترا تراجعاً في صافي أرباح النصف الأول بنسبة 34.4% على أساس سنوي، مما يعكس ارتفاع التكاليف التشغيلية أو أعباء التمويل مقارنة بحجم الإيرادات المحققة خلال تلك الفترة."
+  },
   "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
     "meaning_ar": "يؤدي نقص قدرات التكرير إلى تقليص المعروض من المشتقات البترولية، مما يرفع أسعار الوقود ويزيد تكاليف النقل والتشغيل المباشرة عبر سلاسل التوريد."
@@ -346,6 +350,10 @@
   "الذهب يهبط مع توقعات رفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
+  },
+  "الرقابه الماليه تصدر اول دليل شامل لقواعد وضوابط شركات التمويل الاستهلاكي": {
+    "meaning": "The Financial Regulatory Authority unifies the operational, licensing, risk management, and consumer protection standards for consumer finance companies into a single standardized regulatory framework.",
+    "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط الترخيص وإدارة المخاطر وحماية المتعاملين لشركات التمويل الاستهلاكي ضمن إطار تنظيمي موحد وشامل."
   },
   "الرقابه الماليه تصدر اول دليل شامل لقواعد وضوابط نشاط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority (FRA) establishes a unified regulatory handbook consolidating operating standards, licensing conditions, and compliance rules for consumer finance companies.",
@@ -675,9 +683,17 @@
     "meaning": "Long-term environmental planning for national afforestation structures municipal and state infrastructure expenditures, establishing multi-year procurement frameworks for agricultural nurseries, irrigation systems, and landscape contracting services.",
     "meaning_ar": "يحدد التخطيط البيئي طويل المدى لملف التشجير أطر الإنفاق الحكومي والمحلي على البنية التحتية، من خلال وضع جداول توريد وتوريدات تعاقدية متعددة السنوات للمشاتل الزراعية وشبكات الري وشركات الصيانة والتنسيق."
   },
+  "سعر الدينار الكويتي اليوم الاحد 6-9-2026 بدايه التعاملات": {
+    "meaning": "Opening foreign exchange quotations set the benchmark conversion rates for the Kuwaiti Dinar across Egyptian commercial banks, governing the immediate clearing of bilateral trade invoices and cross-border remittances.",
+    "meaning_ar": "يحدد نشر أسعار صرف العملات الأجنبية في بداية التعاملات السعر المرجعي لتحويل الدينار الكويتي بالبنوك المصرية، وتُنفذ بناءً عليه عمليات المقاصة الفورية للتحويلات النقدية وتسوية المعاملات التجارية المشتركة."
+  },
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
     "meaning_ar": "تؤدي زيادة أسعار الفائدة الأمريكية إلى رفع تكلفة الفرصة البديلة لحيازة الذهب كأصل عديم العائد وتعزيز قوة الدولار، مما يضغط سلبًا على تسعير السلع المقومة بالعملة الأمريكية."
+  },
+  "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
+    "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
+    "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
   },
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. تراجع طفيف": {
     "meaning": "A marginal decline in the euro exchange rate against the Egyptian pound reflects daily foreign exchange fluctuations within the official banking sector, adjusting the settlement cost for euro-denominated import transactions and foreign debt service obligations.",
@@ -728,6 +744,10 @@
     "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
     "meaning_ar": "يعكس تسجيل الصادرات السنوية لمستويات قياسية ارتفاع إجمالي الشحنات الموجهة للأسواق الخارجية من السلع الصناعية، مما يوسع الميزان التجاري ويزيد من المقبوضات بالعملات الأجنبية."
   },
+  "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.63%": {
+    "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
+    "meaning_ar": "يوضح الخبر تسجيل جلسة التداول الصباحية تفوقاً في أحجام عروض الشراء على عروض البيع عبر الأسهم المقيدة، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.63% بالتوازي مع صعود باقي مؤشرات السوق."
+  },
   "صناديق الاسهم الامريكيه تشهد سحوبات للاسبوع الثاني علي التوالي": {
     "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
     "meaning_ar": "تعني التدفقات الخارجة الصافية تجاوز إجمالي طلبات الاسترداد لحجم الاكتتابات الجديدة في صناديق الأسهم الأمريكية خلال فترة محددة، حيث يقوم مديرو الصناديق بتغطية هذه الاستردادات عبر استخدام الفوائض النقدية أو تسييل أجزاء من الأوراق المالية في المحافظ."
@@ -775,6 +795,10 @@
   "قيمه الاصدار الثاني من صندوق الدخل الثابت": {
     "meaning": "The second issuance of a fixed-income fund defines the total capital value of newly offered units deployed into debt securities, such as treasury bills, sovereign bonds, and corporate debt instruments.",
     "meaning_ar": "يحدد الإصدار الثاني لصندوق الدخل الثابت القيمة الإجمالية للوثائق الجديدة المطروحة لتوجيه السيولة المجمعة نحو أدوات الدين مثل أذون الخزانة والسندات الحكومية وسندات الشركات."
+  },
+  "كمال الدسوقي: القطاع الخاص حجر الزاويه في تنفيذ برنامج التحول الاقتصادي": {
+    "meaning": "Economic transformation programs rely on private sector enterprises for capital expenditure, industrial production capacity, and employment allocation alongside state-led structural reforms.",
+    "meaning_ar": "تعتمد برامج التحول الاقتصادي على شركات القطاع الخاص في الإنفاق الرأسمالي، وتوفير الطاقة الإنتاجية الصناعية، وتوزيع العمالة بالتوازي مع الإصلاحات الهيكلية الحكومية."
   },
   "كندا تفقد 41.7 الف وظيفه قبل بدء تاثير الرسوم الامريكيه الجديده": {
     "meaning": "Employment data shows a contraction of 41.7 thousand jobs in the Canadian labor market prior to the implementation of new US trade tariffs, reflecting pre-existing workforce reductions across affected economic sectors.",
@@ -895,6 +919,10 @@
   "مصر وعمان تبحثان تعزيز التجاره عبر خط بحري مباشر": {
     "meaning": "Direct maritime shipping routes connect Egyptian and Omani ports via point-to-point freight transport, eliminating intermediate transshipment hubs in bilateral maritime logistics.",
     "meaning_ar": "يربط الخط الملاحي المباشر بين الموانئ المصرية والعُمانية عبر مسارات شحن محددة دون المرور بمحطات ترانزيت وسيطة في سلاسل الإمداد الثنائية."
+  },
+  "مصرف الراجحي يجمع 600 مليون دولار من طرح صكوك دوليه": {
+    "meaning": "International sukuk issuance provides foreign currency debt financing on the balance sheet, expanding the bank's liquidity pool in US dollars through Sharia-compliant fixed-income instruments.",
+    "meaning_ar": "يمثل طرح الصكوك الدولية أداة تمويل بالعملة الأجنبية تُدرج ضمن التزامات الميزانية العمومية، حيث توفر سيولة مقومة بالدولار الأمريكي عبر أدوات دين متوافقة مع الشريعة الإسلامية."
   },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
