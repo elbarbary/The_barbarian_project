@@ -264,6 +264,11 @@ STEPS = [
     # network, so it is safe in CI. Best-effort: a checkout without the harvest
     # (data-source/egx-beta/) simply produces an empty calendar rather than
     # failing the build.
+    # Sessions where a share traded far more than it usually does, and the
+    # date each one happened on. Reads the committed daily bars off disk — no
+    # network — and is best-effort, so a checkout without `data-source/prices/`
+    # leaves the published document alone.
+    ("Unusual volume", "build_volume_events.py", True),
     ("Calendar", "build_calendar.py", False),
     # Every filing a company ever lodged, on its own page. Reads the committed
     # harvest off disk — no network — and is best-effort so a checkout without
