@@ -220,6 +220,51 @@ export function openSignIn(onDone, lang) {
 
   document.addEventListener('keydown', onKey, true);
 
+  /* The three helpers the sheet is driven by, and the controls that call them.
+   *
+   * These were deleted wholesale by the commit that added the focus trap
+   * above — `step`, `fail`, `token` and the `said` they read, along with the
+   * close, scrim and back wiring. Nothing referenced them at parse time, so
+   * the file still loaded and the sheet still drew; the failure was entirely
+   * at the first click. `token()` threw a ReferenceError INSIDE the submit's
+   * try block, before `requestCode` was reached, so no request was made, no
+   * mail was sent, the code step never appeared — and the catch called
+   * `fail`, which was equally undefined, so the reader was shown nothing at
+   * all. A dead button with no error on a page that looked fine.
+   *
+   * `said` picks the language the reasons are written in, falling back to
+   * Arabic the same way the sheet's own copy does. */
+  const said = (WORDS[lang] ? lang : 'ar');
+
+  /* Whatever the challenge widget is currently holding, or an empty string.
+   * Never throws: a widget that failed to render must not be the thing that
+   * stops a submit, because the server decides whether a token was required. */
+  const token = () => {
+    try {
+      return (widgetId !== null && window.turnstile
+        ? window.turnstile.getResponse(widgetId) : '') || '';
+    } catch { return ''; }
+  };
+
+  /* The server's reply, in the reader's language. Mapped by the exact string,
+   * so a reply nobody has translated still shows rather than being swallowed. */
+  const fail = (message) => {
+    error.textContent = (REASONS[said] || {})[message] || message;
+    error.hidden = false;
+  };
+
+  /* Show one step and hide the other, clear any stale error, and put the caret
+   * in the field the reader now has to fill. */
+  const step = (name) => {
+    steps.forEach((f) => { f.hidden = f.dataset.step !== name; });
+    error.hidden = true;
+    wrap.querySelector(name === 'email' ? '#si-email' : '#si-code').focus();
+  };
+
+  wrap.querySelector('.si-close').onclick = close;
+  wrap.querySelector('.si-scrim').onclick = close;
+  wrap.querySelector('.si-back').onclick = () => step('email');
+
   /* The widget, rendered explicitly so its id can be kept and reset.
    *
    * Failing to load must not lock a reader out: the server only insists on a
