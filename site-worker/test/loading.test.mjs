@@ -113,3 +113,27 @@ test('request deadline includes a stalled response body', async () => {
     await assert.rejects(readResponse('/slow',{},r=>r.json(),5),/aborted/);
   } finally {globalThis.fetch=original;}
 });
+
+/* The load a reader walked away from.
+ *
+ * Signing out installs the demo. If the exchange documents already in flight
+ * for the account are still allowed to land when they arrive, the screen fills
+ * with the previous reader's companies on a page whose banner says nobody is
+ * signed in. Version the load, or the race decides which one the reader sees. */
+test('market data in flight when a reader signs out never reaches the screen', async () => {
+  const app = boot();
+  // Identity only: the account's documents are still on their way.
+  app.identity.resolve('reader@example.com');
+  await tick();
+  assert.equal(app.c.state.dataLoading, true, 'the account load has not finished');
+
+  await app.document.getElementById('signout').onclick();
+  assert.equal(app.c.data().demo, true, 'signing out shows the demo');
+
+  app.live.resolve({ demo: false, companies: [{ ticker: 'PRIVATE' }], series: [], fins: [] });
+  await tick();
+  assert.equal(app.c.data().demo, true, 'a signed-out screen must stay on the demo');
+  assert.equal(app.c.state.dataLoading, false, 'the spinner outlived the load it belonged to');
+  assert.equal((app.c.data().companies || []).some((c) => c.ticker === 'PRIVATE'), false,
+    'the signed-out reader was shown the account\u2019s companies');
+});

@@ -902,3 +902,46 @@ test('a refusal is not cached for a week', async () => {
     assert.equal(stored.length, 0, 'a 502 kept for a week outlives its cause');
   } finally { globalThis.fetch = orig; globalThis.caches = origCaches; }
 });
+
+/* The cookie was rewritten to verify with Web Crypto instead of comparing two
+ * base64 strings, and to check the payload's shape. Both halves need proving,
+ * and the first one twice: a cookie minted by the sign() that is running in
+ * production today must still open the door after this deploys, or every
+ * signed-in reader is quietly logged out by an upgrade. */
+test('a session minted by the deployed signer still opens the door, in either envelope', async () => {
+  const live = await token('reader@example.com');
+  const e = { SESSION_SECRET: SECRET, ESTHMR_AUTH: kv() };
+  for (const headers of [
+    { cookie: `esthmr_session=${live}` },
+    { cookie: `esthmr_session=${encodeURIComponent(live)}` },   // as the Worker sets it
+    { cookie: `cf_clearance=x; esthmr_session=${live}; other=1` },
+    { authorization: `Bearer ${live}` },                        // the phone app's envelope
+  ]) {
+    const res = await worker.fetch(new Request('https://esthmr.com/esthmr/api/auth/me',
+      { headers }), e, { waitUntil: () => {} });
+    assert.equal(res.status, 200, `a valid session was refused: ${JSON.stringify(headers)}`);
+    assert.equal((await res.json()).email, 'reader@example.com');
+  }
+});
+
+test('a signed payload that is not a session is refused', async () => {
+  // Signature valid, contents not: no address, an address that is not one, an
+  // expiry that is not a number. Without the shape check the first two put
+  // `undefined` where every downstream KV key expects an account — `wl:undefined`
+  // is one shared watchlist for everyone holding such a token.
+  const e = { SESSION_SECRET: SECRET, ESTHMR_AUTH: kv() };
+  const forged = async (payload) => {
+    const body = b64url(new TextEncoder().encode(JSON.stringify(payload)));
+    const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(SECRET),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(body));
+    return `${body}.${b64url(new Uint8Array(mac))}`;
+  };
+  const soon = Math.floor(Date.now() / 1000) + 3600;
+  for (const payload of [{ x: soon }, { e: 'not-an-address', x: soon },
+    { e: 'reader@example.com', x: 'forever' }, { e: 'r'.repeat(300) + '@e.com', x: soon }]) {
+    const res = await worker.fetch(new Request('https://esthmr.com/esthmr/api/auth/me',
+      { headers: { cookie: `esthmr_session=${await forged(payload)}` } }), e, { waitUntil: () => {} });
+    assert.equal(res.status, 401, `accepted as a session: ${JSON.stringify(payload)}`);
+  }
+});
