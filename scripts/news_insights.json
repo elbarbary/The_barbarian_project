@@ -103,6 +103,10 @@
     "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
     "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
   },
+  "electro cable egypt records blocktrading deal on egx": {
+    "meaning": "A block trading deal involves the execution of a high-volume share transaction at a pre-arranged price via the EGX deals market. This mechanism transfers substantial equity stakes between institutional or major investors outside the standard continuous auction order book.",
+    "meaning_ar": "تُمثل صفقات الحجم الكبير تنفيذ معاملات على كميات ضخمة من الأسهم بسعر متفق عليه مسبقاً عبر سوق الصفقات في البورصة المصرية. وتعمل هذه الآلية على نقل ملكية حصص كبيرة بين كبار المستثمرين خارج دفتر أوامر التداول المستمر المعتاد."
+  },
   "fra and egypt post sign protocol to digitize official correspondence through bareedi": {
     "meaning": "The protocol integrates Egypt Post's Bareedi digital postal service into the Financial Regulatory Authority's operational workflow for delivering legally recognized, registered electronic notifications and correspondence to regulated non-banking financial entities.",
     "meaning_ar": "يدمج البروتوكول خدمة 'بريدي' التابعة للبريد المصري ضمن منظومة عمل الهيئة العامة للرقابة المالية لإرسال المراسلات والإخطارات الإلكترونية المسجلة ذات الحجية القانونية إلى الجهات المالية غير المصرفية الخاضعة لرقابتها."
@@ -342,6 +346,10 @@
   "الحاصلات الزراعيه تتجاوز اعباء الشحن ب«صفر جمارك» للتوسع في الصين": {
     "meaning": "Zero-customs tariff arrangements on agricultural exports to China offset logistics and freight expenses incurred along the export supply chain.",
     "meaning_ar": "تعمل الإعفاءات الجمركية الكاملة على صادرات الحاصلات الزراعية إلى الصين على موازنة تكاليف الشحن والخدمات اللوجستية لسلسلة التوريد."
+  },
+  "الحكومه تبحث تقنين اوضاع المستثمرين في منطقتي جرزا وعرب ابوساعد الصناعيتين": {
+    "meaning": "Regularizing investor status transitions industrial operations into the formal economy, providing operating facilities with official licensing, legal land tenure, and integration into standard regulatory and utility frameworks.",
+    "meaning_ar": "يتمثل تقنين أوضاع المستثمرين في نقل المنشآت الصناعية إلى الاقتصاد الرسمي، مما يمنح المصانع القائمة تراخيص تشغيل معتمدة وسندات حيازة قانونية للأراضي مع إدراجها ضمن الأطر التنظيمية والمرافق العامة."
   },
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
@@ -762,6 +770,10 @@
   "سياتل تايمز ونيوزداي تقاضيان اوبن ايه اي ومايكروسوفت بتهمه انتهاك حقوق النشر": {
     "meaning": "Copyright litigation by news publishers against artificial intelligence developers introduces legal liability and directly involves the intellectual property licensing framework for training datasets.",
     "meaning_ar": "تفرض الدعاوى القضائية المتعلقة بحقوق النشر والمرفوعة من المؤسسات الإعلامية ضد مطوري الذكاء الاصطناعي التزامات قانونية مباشرة تتعلق بأطر ترخيص الملكية الفكرية لبيانات التدريب."
+  },
+  "سيتي بنك يتوقع تجاوز اسعار اليورانيوم 100 دولار خلال 3 اشهر": {
+    "meaning": "Global investment bank commodity research models supply-demand balances and long-term utility contracting in nuclear fuel markets, establishing benchmark cost references for uranium.",
+    "meaning_ar": "ترصد أبحاث بنوك الاستثمار العالمية لسلع الطاقة توازنات العرض والطلب وعقود الشراء في أسواق الوقود النووي، محددةً مراجع التكلفة القياسية لخام اليورانيوم."
   },
   "سيتي جروب يوجل توقع خفض الفايده الامريكيه الي يونيو 2027": {
     "meaning": "",
