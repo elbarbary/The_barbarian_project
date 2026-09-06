@@ -551,6 +551,10 @@
     "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
     "meaning_ar": "تؤدي مبيعات السندات السيادية العالمية إلى انخفاض أسعارها وارتفاع عوائدها بحكم العلاقة العكسية بين السعر والعائد، مما يرفع تكاليف الاقتراض القياسية في أسواق الدين الدولية."
   },
+  "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 12.81%": {
+    "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
+    "meaning_ar": "يُعد هذا الإجراء تخفيضاً في نسبة ملكية مساهم رئيسي في رأس مال الشركة لتصل إلى 12.81%، مما يعيد تشكيل هيكل الملكية وحصص التصويت بين المساهمين."
+  },
   "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
     "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
@@ -866,6 +870,10 @@
   "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
+  },
+  "رييس الوزراء يفتتح توسعات مصنع لانظمه الاضاءه الحديثه باستثمارات 7.5 مليون دولار": {
+    "meaning": "The capital expenditure of $7.5 million expands existing physical manufacturing infrastructure and adds industrial capacity for modern lighting equipment.",
+    "meaning_ar": "يمثل ضخ الاستثمارات الرأسمالية البالغة 7.5 مليون دولار توسعة للبنية التحتية التصنيعية القائمة وإضافة طاقات تشغيلية لإنتاج أنظمة الإضاءة الحديثة."
   },
   "رييس الوزراء يفتتح مصنع للاسمده في السخنه باستثمارات 10 ملايين دولار": {
     "meaning": "The commissioning of a $10 million fertilizer facility in Ain Sokhna adds domestic production capacity and expands local industrial asset infrastructure within the chemical sector.",
