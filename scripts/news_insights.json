@@ -99,6 +99,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "taqa arabia to invest in petroleum products storage depot in greater cairo": {
+    "meaning": "Establishing a petroleum products storage depot expands midstream logistics infrastructure, adding liquid fuel inventory capacity and physical distribution facilities within the Greater Cairo consumption area.",
+    "meaning_ar": "يُمثّل إنشاء مستودع لتخزين المنتجات البترولية توسعاً في البنية التحتية للخدمات اللوجستية، حيث يضيف سعات لتخزين وتوزيع الوقود السائل ضمن النطاق الجغرافي والاستهلاكي للقاهرة الكبرى."
+  },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
@@ -543,6 +547,10 @@
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
   },
+  "تقييم بنك القاهره يرتفع": {
+    "meaning": "An increase in Banque du Caire's valuation reflects higher assessed net asset value or updated multiples applied to its financial fundamentals by market assessors.",
+    "meaning_ar": "يعكس ارتفاع تقييم بنك القاهرة زيادة في القيمة الصافية المقدرة لأصوله أو تطبيق مضاعفات تقييم أعلى على مؤشراته المالية الأساسية من قبل جهات التقييم."
+  },
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
     "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية للمشروعات الصغيرة والمتوسطة التابعة مساحات عرض وتسويق مباشرة للشركات الأجنبية وشبكات التوزيع الخارجية."
@@ -550,6 +558,10 @@
   "توقعات بتعافي الوظايف الامريكيه وسط ترقب قرار الفيدرالي بشان الفايده": {
     "meaning": "US employment metrics serve as primary inputs for Federal Reserve interest rate policy, which directly determines international capital flows and USD liquidity pricing across emerging markets such as Egypt.",
     "meaning_ar": "تُشكّل مؤشرات الوظائف الأمريكية مدخلات رئيسية لقرارات الفائدة لدى مجلس الاحتياطي الفيدرالي، والتي تحدد مسار تدفقات رؤوس الأموال الدولية وتكلفة تسعير سيولة الدولار في الأسواق الناشئة ومنها مصر."
+  },
+  "توقعات برفع الفايده الاوروبيه مجددا وسط ترقب اشارات بشان زياده ثالثه": {
+    "meaning": "Higher European interest rates increase borrowing costs on euro-denominated debt and alter foreign currency capital flows across emerging markets.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة الأوروبية إلى زيادة تكلفة الاقتراض للديون المقومة باليورو وإعادة توجيه تدفقات رؤوس الأموال بالعملات الأجنبية في الأسواق الناشئة."
   },
   "توقيع مذكره تفاهم لاقامه قاعده لتخطيط وانشاء مصانع السيارات في مصر": {
     "meaning": "This memorandum of understanding establishes a collaborative framework for designing and developing automotive manufacturing facilities within the domestic market.",
