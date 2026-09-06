@@ -292,3 +292,23 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
 @media (max-width: 860px) {
   .om-heat { aspect-ratio: 3 / 4 !important; }
 }
+
+/* HOME'S TWO COLUMNS END TOGETHER.
+   The left column holds the busiest shares and the largest moves; the right
+   holds what to read now and the largest by market value. They were laid out
+   `align-items:start`, so each ran to its own natural length and the shorter
+   one stopped ~360px early, leaving a ragged step across the bottom of the
+   page. Most of that gap is now closed by content — the busiest list is eight
+   rows rather than nine, the market-value list twelve rather than five — and
+   the stretch below takes up whatever a day's data leaves over, so the two
+   always finish level.
+   Desktop only. Under 861px shell.css collapses this grid to one column, and
+   there is nothing left to line up. */
+@media (min-width: 861px) {
+  #app .home-cols { align-items: stretch !important; }
+  #app .home-col { min-height: 100%; }
+  /* The last card in each column absorbs the slack. The taller column sets
+     the height, so its own last card grows by nothing. */
+  #app .home-col > section:last-child,
+  #app .home-col > sc-if:last-child > section { flex: 1 1 auto; }
+}

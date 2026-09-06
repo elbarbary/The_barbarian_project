@@ -440,8 +440,8 @@
            fix is not to finish the sentence — a completed "17 companies pass
            all four" over the same pills would be worse than the bug. -->
 
-      <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
-        <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <div class="home-cols" style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:16px;align-items:start">
+        <div class="home-col" style="display:flex;flex-direction:column;gap:16px;min-width:0">
           <sc-if value="{{ showBusy }}">
           <!-- Which shares changed hands far more than they usually do. Above
                the movers on purpose: a big move on ordinary volume is a price,
@@ -449,9 +449,16 @@
                OURS and the note underneath says so — the exchange publishes
                none. -->
           <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 10px 14px">
-            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px">
+            <div style="display:flex;align-items:center;gap:9px;padding:0 14px 14px;flex-wrap:wrap">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3.4 16.6 8.2 9.4l4 3.4 3.2-5.4 4.2 6.2M3 20.6h18"></path></svg>
               <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.busiest }}</div>
+              <!-- The session the column of multiples was measured in. On the
+                   heading rather than on every row, because all eight share
+                   one session and eight copies of one date is noise; at the
+                   top of the card it is read before the numbers are. -->
+              <sc-if value="{{ busyWhen }}">
+                <div style="margin-inline-start:auto;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.06em;color:var(--t2);white-space:nowrap;padding:3px 9px;border-radius:999px;background:var(--sunk);border:1px solid var(--edgeIn)">{{ busyWhen }}</div>
+              </sc-if>
             </div>
             <sc-for list="{{ busy }}" as="m" hint-placeholder-count="9">
               <div onClick="{{ m.go }}" style="cursor:pointer;min-width:0;display:grid;grid-template-columns:52px minmax(30px,1fr) minmax(44px,58px) minmax(50px,88px) minmax(56px,92px);align-items:center;gap:8px;padding:11px 12px;border-radius:14px;transition:background .15s" style-hover="background:var(--sunk)">
@@ -500,7 +507,7 @@
           </section>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="home-col" style="display:flex;flex-direction:column;gap:16px;min-width:0">
           <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 20px 8px">
             <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)">{{ L.readNow }}</div>
             <sc-for list="{{ readNow }}" as="r" hint-placeholder-count="3">

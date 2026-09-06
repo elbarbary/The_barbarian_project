@@ -292,7 +292,22 @@ export class Component extends Base {
       showMore:'Show more',
       busiest:'Traded with abnormal volume',
       volumeKicker:'Traded {ratio}\u00d7 its usual volume',
-      busyCut:'The {shown} busiest of {all} that traded at twice their own normal volume today. Sorting the market table by volume shows the rest.',
+      // WHICH SESSION THE MULTIPLE BELONGS TO.
+      // The card printed "17.5\u00d7" beside a company name and nothing else.
+      // A multiple with no day attached reads as a standing property of the
+      // share rather than a fact about one session, and a reader checking
+      // the list across a week sees familiar names and concludes it is
+      // frozen. It is not: the volume is THIS session's, over the median of
+      // the twenty before it.
+      // Two phrasings, because the number means different things at the two
+      // times. After the close it is one whole day against twenty whole
+      // days. Mid-session it is PART of a day against twenty whole ones, so
+      // it can only climb until the bell — 3.2\u00d7 at eleven and 3.2\u00d7 at
+      // the close are not the same reading, and the card says which one is
+      // on screen.
+      busyOn:'Close of {date}',
+      busyOnLive:'{date} session, so far',
+      busyCut:'The {shown} busiest of {all} that traded at twice their own normal volume on {date}. Sorting the market table by volume shows the rest.',
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
@@ -617,7 +632,9 @@ export class Component extends Base {
       showMore:'عرض المزيد',
       busiest:'أنشط الأسهم (أحجام تداول استثنائية)',
       volumeKicker:'تداول {ratio}\u00d7 حجمه المعتاد',
-      busyCut:'الأسهم الأكثر نشاطاً: {shown} من {all} شركة تداولت اليوم بأكثر من ضعف متوسط حجمها المعتاد.',
+      busyOn:'إغلاق {date}',
+      busyOnLive:'جلسة {date} حتى الآن',
+      busyCut:'الأسهم الأكثر نشاطاً: {shown} من {all} شركة تداولت في جلسة {date} بأكثر من ضعف متوسط حجمها المعتاد.',
       nothingUnusual:'لا توجد أحجام تداول استثنائية اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه استثنائي.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد إحصائي يضعه هذا التطبيق لا البورصة لتسليط الضوء على النشاط الاستثنائي دون أن يمثل ذلك حكماً أو توصية.',
@@ -1583,7 +1600,11 @@ export class Component extends Base {
     // now, and says what it is.
     const watchlist = D.companies.slice()
       .sort((a, b) => (b.cap || 0) - (a.cap || 0))
-      .slice(0, 5).map(mkRow);
+      // Twelve rather than five. The column beside this one runs ~360px
+      // longer, and the honest way to close that is more of a list that HAS
+      // more — 284 companies are ranked here and five was an arbitrary cut —
+      // rather than padding a card with empty space to meet it.
+      .slice(0, 12).map(mkRow);
 
     // Which shares changed hands far more than they usually do. Twice their
     // own twenty-session median is the line, and it is OURS rather than the
@@ -1592,7 +1613,11 @@ export class Component extends Base {
     // question worth asking, not an answer (§8): nothing here says why the
     // volume was there or what to do about it.
     const BUSY_AT = 2;
-    const BUSY_SHOWN = 9;
+    // Eight, not nine: this card and "What to read now" sit side by side, and
+    // Read now can only ever hold three (a first-since, a silence, and the
+    // expected-filings count — `readNowCards` builds no fourth). One row less
+    // here is most of what closed a 101px step between two cards on one line.
+    const BUSY_SHOWN = 8;
     // Every company that cleared the line, before the block takes nine of
     // them. Counted because the nine were presented as though they were the
     // whole list: on 31 August sixty-four companies traded at twice their own
@@ -3553,11 +3578,22 @@ export class Component extends Base {
       busy, hasBusy: busy.length > 0, noBusy: busyMeasured > 0 && busy.length === 0,
       showBusy: busy.length > 0 || busyMeasured > 0,
       busyNote: busy.length ? L.busyWorkings + ' ' + L.busyYardstick : '',
+      // The session these multiples were measured in, drawn on the card.
+      // Empty when the date is unknown rather than filled with today's — the
+      // exchange's last published session is often not the current day, and a
+      // multiple stamped with the wrong day is worse than one with none.
+      busyWhen: (() => {
+        const day = this.longDate(D.marketDate);
+        if (!busy.length || !day) return '';
+        return (D.isClose && !D.livePrices ? L.busyOn : L.busyOnLive)
+          .replace('{date}', day);
+      })(),
       // Said out loud, because a list that is a slice and does not say so is a
       // list that claims to be all of them.
       busyCut: busyAll.length > busy.length
         ? L.busyCut.replace('{shown}', String(busy.length))
             .replace('{all}', String(busyAll.length))
+            .replace('{date}', this.longDate(D.marketDate) || '—')
         : '',
       hasBusyCut: busyAll.length > busy.length,
       hasBreadth: Boolean(breadth),
