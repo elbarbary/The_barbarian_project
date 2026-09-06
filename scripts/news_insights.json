@@ -75,6 +75,10 @@
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
   },
+  "egypt and chinese linglong tire sign mou for industrial complex": {
+    "meaning": "The memorandum of understanding establishes a preliminary framework for foreign direct investment to construct a localized tire manufacturing facility in Egypt. This arrangement links international industrial manufacturing capacity directly with domestic automotive supply chains.",
+    "meaning_ar": "تحدد مذكرة التفاهم إطاراً أولياً لتدفقات الاستثمار الأجنبي المباشر لإنشاء مجمع محلي لتصنيع الإطارات في مصر. ويربط هذا الترتيب بين القدرات التصنيعية العالمية وسلاسل التوريد المحلية لقطاع السيارات."
+  },
   "egypt outsourcing sector entering a new era of higher value growth": {
     "meaning": "The outsourcing sector shifts operational focus from basic customer support and business process outsourcing (BPO) to specialized knowledge process outsourcing (KPO), software engineering, and high-complexity technical services. This structural transition relies on skilled labor to deliver export-oriented digital and professional services.",
     "meaning_ar": "يتحول قطاع التعهيد من خدمات الدعم الفني وخدمة العملاء التقليدية إلى مجالات التعهيد القائم على المعرفة وهندسة البرمجيات والخدمات التقنية المتخصصة. يعتمد هذا النموذج التشغيلي على الكفاءات المؤهلة لتقديم خدمات تصديرية ورقمية ذات تعقيد فني أعلى."
@@ -110,6 +114,10 @@
   "اتحاد منتجي الدواجن: سعر كيلو الفراخ ب65 جنيه وطبق البيض ب60 تسليم المزرعه": {
     "meaning": "The Poultry Producers Association sets baseline wholesale farm-gate prices for live chicken at EGP 65 per kilogram and egg crates at EGP 60, establishing the direct production-level cost basis before intermediary distribution, transport, and retail markups are applied across the supply chain.",
     "meaning_ar": "يحدد اتحاد منتجي الدواجن أسعار تسليم المزرعة للكيلو من الدواجن الحية عند 65 جنيهاً ولطبق البيض عند 60 جنيهاً، وهو ما يمثل التكلفة الأساسية عند مستوى الإنتاج قبل إضافة هوامش النقل والتوزيع وتجارة التجزئة في سلاسل الإمداد."
+  },
+  "اتفاقيه ضمان بين صندوق القروض الايطالي": {
+    "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
+    "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
   },
   "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
@@ -266,6 +274,10 @@
   "البنوك الصينيه تشتري سندات الخزانه الامريكيه مع ارتفاع عوايدها مجددا": {
     "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة العائد الدوري المحقق على الأصول المقومة بالنقد الأجنبي، حيث تقوم المحافظ المصرفية بإدارة فوائض السيولة الأجنبية عبر حيازة هذه الأدوات ذات العائد الثابت."
+  },
+  "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
+    "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
+    "meaning_ar": "تعتمد المؤشرات الفنية للسوق على مستوى 55,000 نقطة كنقطة دعم محورية، حيث يحدد حجم التداول واستقرار الأسعار عند هذا المستوى أو أعلاه مدى توازن قوى الشراء الحالية في مواجهة ضغوط البيع."
   },
   "البيتكوين تهبط دون 80 الف دولار بعد تقرير الوظايف الامريكي": {
     "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
@@ -740,6 +752,10 @@
     "meaning": "This public tender offers concession and operational rights for local beach facilities to commercial operators under a fixed three-year lease framework.",
     "meaning_ar": "يمثل هذا الطرح مزايدة عامة لمنح حقوق استغلال وتشغيل منشآت الشواطئ للشركات بموجب عقود إيجار محددة بمدة ثلاث سنوات."
   },
+  "محمد المهندس: الصناعه تحتاج الي نظره عميقه لاحتياجاتها": {
+    "meaning": "The statement addresses operational conditions in the industrial sector, which involve assessing supply chain inputs, production costs, licensing procedures, and local manufacturing requirements.",
+    "meaning_ar": "يتناول التصريح المتطلبات التشغيلية للقطاع الصناعي، والتي تشمل دراسة مدخلات سلاسل الإمداد، وتكاليف الإنتاج، وإجراءات التراخيص، واحتياجات التصنيع المحلي."
+  },
   "محمد عوض: نستهدف تحويل الشراكه المصريه الايطاليه الي مشروعات واستثمارات ملموسه": {
     "meaning": "The statement reflects efforts to convert bilateral diplomatic and economic agreements between Egypt and Italy into foreign direct investment (FDI) inflows, industrial joint ventures, and localized infrastructure projects.",
     "meaning_ar": "يعكس التصريح التوجه نحو تحويل الاتفاقيات الاقتصادية الثنائية بين مصر وإيطاليا إلى تدفقات استثمار أجنبي مباشر، ومشاريع صناعية مشتركة، وتوسعات تشغيلية ملموسة."
@@ -803,6 +819,10 @@
   "مصر وايطاليا تستهدفان مضاعفه التجاره والاستثمارات خلال السنوات المقبله": {
     "meaning": "Expanding bilateral trade and investment targets between Egypt and Italy can increase cross-border capital inflows and export volumes, particularly across energy, manufacturing, and agribusiness sectors operating between the two markets.",
     "meaning_ar": "يؤدي استهداف مضاعفة التجارة والاستثمارات الثنائية بين مصر وإيطاليا إلى زيادة تدفقات رؤوس الأموال وحجم الصادرات، لا سيما في قطاعات الطاقة والتصنيع والحاصلات الزراعية المرتبطة بالتبادل التجاري بين البلدين."
+  },
+  "مصر وباكستان توكدان اهميه تنفيذ مذكره التفاهم بين واشنطن وطهران لاحتواء التصعيد": {
+    "meaning": "Regional geopolitical de-escalation frameworks directly affect sovereign risk premiums and the operational continuity of cross-border trade and maritime energy corridors.",
+    "meaning_ar": "تؤثر أطر التهدئة الجيوسياسية الإقليمية بشكل مباشر على علاوات المخاطر السيادية والاستمرارية التشغيلية لحركة التجارة العابرة للحدود وممرات نقل الطاقة البحرية."
   },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
