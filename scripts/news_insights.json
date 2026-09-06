@@ -703,6 +703,10 @@
     "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
     "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
   },
+  "روهان فرنانديز يتولي منصب رييس مجلس الاداره والمدير التنفيذي لشركه جنرال موتورز مصر وافريقيا": {
+    "meaning": "A change in executive leadership places operational governance, regional manufacturing coordination, and supply chain oversight for Egypt and African markets under a new management mandate.",
+    "meaning_ar": "يضع تغيير القيادة التنفيذية الحوكمة التشغيلية وتنسيق عمليات التصنيع الإقليمية وإدارة سلاسل الإمداد لأسواق مصر وإفريقيا تحت مظلة إدارة جديدة."
+  },
   "ريمت تطلق خدمه الايداع المباشر لحوالات ويسترن يونيون في الحسابات البنكيه والمحافظ الالكترونيه": {
     "meaning": "The service integrates cross-border remittance flows directly into domestic banking infrastructure and mobile wallets, routing foreign transfers into automated digital settlements rather than physical cash pickups.",
     "meaning_ar": "تربط هذه الخدمة تدفقات الحوالات المالية الواردة من الخارج بالبنية التحتية للحسابات المصرفية والمحافظ الإلكترونية المحلية، مما يحول مسار استلام الأموال إلى تسوية رقمية مباشرة دون الحاجة للصرف النقدي."
@@ -839,6 +843,10 @@
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
     "meaning_ar": "يؤدي تأجيل الجمعية العامة لشركة ابن سينا فارما لعدم اكتمال النصاب القانوني إلى إرجاء التصويت الرسمي والقرارات المؤسسية بشأن بنود جدول الأعمال، مثل اعتماد القوائم المالية أو توزيعات الأرباح، لحين انعقاد الاجتماع الثاني وفقاً للضوابط القانونية."
+  },
+  "فشل انعقاد عموميه “الاهرام للطباعه” لعدم اكتمال النصاب القانوني بعد ازمه المزاد": {
+    "meaning": "The lack of a legal quorum postpones the company's General Assembly, which suspends formal shareholder voting on agenda items and requires rescheduling the meeting pursuant to corporate governance regulations.",
+    "meaning_ar": "يؤدي عدم اكتمال النصاب القانوني إلى تأجيل انعقاد الجمعية العامة للشركة، مما يعلق التصويت الرسمي للمساهمين على بنود جدول الأعمال ويتطلب إعادة الدعوة للانعقاد وفقاً للضوابط المنظمة."
   },
   "فيتش تبقي تصنيف قطر عند AA وترفع اسمها من قايمه المراقبه السلبيه": {
     "meaning": "A sovereign credit rating of AA reflects high creditworthiness and low default risk, while removing the issuer from the negative watch list stabilizes its credit outlook under the rating agency's assessment framework.",
@@ -1088,6 +1096,10 @@
     "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
     "meaning_ar": "تُصنف البيانات الرسمية إيطاليا في المرتبة الرابعة بين أكبر مصادر الاستثمار الأجنبي المباشر في مصر برأسمال تراكمي يبلغ 23.4 مليار دولار، يتركز بصورة أساسية في قطاعات الطاقة والتصنيع والبنية التحتية."
   },
+  "“الفنار للمقاولات” تتعاقد علي تنفيذ اعمال ترابيه في راس الحكمه ب11.6 مليون جنيه": {
+    "meaning": "This agreement assigns earthwork and site preparation operations in Ras El Hekma to Al Fanar Contracting, adding 11.6 million EGP in contract value to the company's active construction backlog.",
+    "meaning_ar": "يقضي هذا التعاقد بإسناد أعمال الحفر وتسوية التربة في رأس الحكمة لشركة الفنار للمقاولات، مما يضيف قيمة تعاقدية قدرها 11.6 مليون جنيه إلى محفظة العمليات الإنشائية قيد التنفيذ بالشركة."
+  },
   "“المركزي الاوروبي” يتجه لرفع الفايده مجددا وسط تضخم يتجاوز 3%": {
     "meaning": "Raising interest rates by the European Central Bank increases the cost of borrowing in euros and tightens liquidity in international markets, which affects foreign exchange differentials and global trade financing costs.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي الأوروبي إلى زيادة تكلفة الاقتراض باليورو وتشديد السيولة في الأسواق الدولية، مما يؤثر على فروق أسعار الصرف وتكاليف تمويل التجارة العالمية."
@@ -1095,6 +1107,10 @@
   "“المركزي” يحذر من استهداف عملاء “انستاباي”": {
     "meaning": "The Central Bank of Egypt enforces operational security directives across the national Instant Payment Network (InstaPay) to mitigate electronic fraud and protect digital banking infrastructure. This operational framework mandates adherence to strict cybersecurity protocols and customer data verification mechanisms across participating banks.",
     "meaning_ar": "يُفعّل البنك المركزي المصري توجيهات الأمان التشغيلي عبر شبكة المدفوعات اللحظية (إنستاباي) للحد من الاحتيال الإلكتروني وتأمين البنية التحتية المصرفية الرقمية. يُلزم هذا الإطار التشغيلي البنوك المشاركة بتطبيق بروتوكولات الأمن السيبراني وآليات التحقق من بيانات العملاء."
+  },
+  "“الملتقي العربي” تعتمد دراسه القيمه العادله لسهم “التوفيق للتاجير”": {
+    "meaning": "The board of a parent company formally approves an independent valuation benchmark for a subsidiary's equity, establishing an official baseline for corporate transactions, internal accounting adjustments, and regulatory disclosure requirements.",
+    "meaning_ar": "يمثل هذا الإجراء اعتماد مجلس إدارة الشركة الأم لتقييم مالي مستقل لأسهم شركتها التابعة، مما يحدد أساساً حسابياً رسمياً للصفقات المؤسسية والمعالجات الدفترية ومتطلبات الإفصاح التنظيمي."
   },
   "“الوزراء” يستعرض تفاصيل الطرح الجديد للوحدات السكنيه بنظام الايجار": {
     "meaning": "The government operates a state-sponsored residential program that offers public housing units under structured lease agreements as an alternative to direct ownership models.",
