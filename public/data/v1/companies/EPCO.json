@@ -8,7 +8,7 @@
  "sector_ar": "أغذية و مشروبات و تبغ",
  "market": {
   "last_close": 11.09,
-  "date": "2026-09-03",
+  "date": "2026-09-06",
   "open": 11.1,
   "high": 11.3,
   "low": 11.07,
@@ -802,7 +802,7 @@
   },
   {
    "date": "2026-03-30",
-   "close": 8.32,
+   "close": 8.31,
    "volume": 559795
   },
   {
@@ -997,7 +997,7 @@
   },
   {
    "date": "2026-06-02",
-   "close": 9.09,
+   "close": 9.1,
    "volume": 339080
   },
   {
@@ -1212,7 +1212,7 @@
   },
   {
    "date": "2026-08-05",
-   "close": 11.15,
+   "close": 11.11,
    "volume": 760782
   },
   {
@@ -1323,22 +1323,16 @@
   "perf_3m": 21.20218579234972,
   "avg_volume_30d": 2002893.5666666767,
   "relative_volume_10d": 0.37892867969257016,
-  "history_bars": 0,
-  "market_cap": 472101300.0,
-  "market_cap_source": "EGX",
-  "trades": 300,
-  "turnover": 5415527,
   "median_volume_20d": 1559966,
   "rv20": 0.3111484481072023,
   "normal_value_30d": 15974911.93,
-  "five_session_change": -0.8936550491510209
+  "five_session_change": -0.8936550491510209,
+  "history_bars": 120,
+  "market_cap": 472101300.0,
+  "market_cap_source": "EGX",
+  "trades": 300,
+  "turnover": 5415527
  },
- "profile_carried": [
-  "five_session_change",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {
