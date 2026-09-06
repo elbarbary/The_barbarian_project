@@ -15,6 +15,10 @@
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
   },
+  "3 دول اسيويه تهمين علي شحنات القطن المصري منذ بدايه الموسم": {
+    "meaning": "Export data shows that the volume of Egyptian raw cotton exports is currently concentrated among three Asian buyer markets, which absorb the majority of outbound shipments for the current agricultural season.",
+    "meaning_ar": "تُظهر بيانات التصدير تركز الجانب الأكبر من شحنات القطن المصري الخام لدى ثلاث أسواق آسيوية تستحوذ على معظم الكميات المشحونة منذ بداية الموسم الزراعي الحالي."
+  },
   "4 كيانات تفوز بصادرات القطن في الاسبوع الاخير": {
     "meaning": "Four trading companies secure export batches of Egyptian cotton through the weekly auction system, allocating domestic crop inventory for international shipment fulfillment.",
     "meaning_ar": "يمثل فوز أربع شركات بمزادات التصدير الأسبوعية تخصيصاً لكميات من محصول القطن المحلي للتوريد الخارجي عبر منظومة التداول والمزادات العلنية."
@@ -747,6 +751,10 @@
     "meaning": "The government issues foreign-currency debt instruments, including Chinese renminbi-denominated Panda bonds, to secure $3 billion in external budget financing during the current fiscal year.",
     "meaning_ar": "تُصدر الحكومة أدوات دين بالعملة الأجنبية، بما في ذلك سندات الباندا المقومة باليوان الصيني، لتوفير تمويل خارجي للموازنة العامة بقيمة 3 مليارات دولار خلال العام المالي الحالي."
   },
+  "تعرف علي حصيله صادرات القطن منذ بدايه الموسم": {
+    "meaning": "The headline refers to cumulative export data for Egyptian raw cotton over the current agricultural season, which reflects foreign currency inflows into the agricultural and textile export sectors and tracks inventory clearance from local spinning mills and export aggregators.",
+    "meaning_ar": "يشير العنوان إلى البيانات التراكمية لصادرات القطن المصري الخام منذ بداية الموسم الزراعي الحالي، وهو ما يعكس تدفقات النقد الأجنبي لقطاع تصدير الحاصلات الزراعية والغزل، ويوضح وتيرة تصريف المخزون لدى المجمعين والمحالج."
+  },
   "تقرير: 400 مليار دولار تدفقات اجنبيه الي الاسهم الامريكيه في الربع الثاني": {
     "meaning": "Foreign portfolio inflows represent the transfer and allocation of non-domestic capital into US-listed equity securities, expanding cross-border ownership of shares within the US stock market during the quarter.",
     "meaning_ar": "تمثل التدفقات الأجنبية حركة رؤوس الأموال الدولية الوافدة من خارج الولايات المتحدة والموجهة لحيازة الأسهم المدرجة في الأسواق المالية الأمريكية خلال الربع الثاني."
@@ -758,6 +766,10 @@
   "تقرير: اوروبا تضع اموال البنوك المركزيه في قلب الاسواق المرمزه": {
     "meaning": "European central banks integrate wholesale central bank digital currency (wCBDC) directly into distributed ledger technology (DLT) platforms for the settlement of tokenised financial assets. This operational framework provides central bank money as the primary risk-free settlement asset for on-chain institutional transactions.",
     "meaning_ar": "تدمج البنوك المركزية الأوروبية أموال البنك المركزي الرقمية المخصصة للمؤسسات مباشرة في منصات تقنية السجلات الموزعة لتسوية الأصول المالية المرمّزة. وتوفر هذه الآلية التشغيلية أموال البنك المركزي كأصل تسوية أساسي وخالٍ من المخاطر للمعاملات المؤسسية على شبكات البلوكتشين."
+  },
+  "تقرير: تصدير 64 الف طن قطن منذ بدايه الموسم": {
+    "meaning": "This indicates the cumulative volume of raw cotton cleared for export markets by local trading and ginning companies since the start of the current harvest season.",
+    "meaning_ar": "يوضح هذا الحجم التراكمي لمحصول القطن الخام الموجه إلى أسواق التصدير عبر شركات التجارة والحلج المحلية منذ بداية الموسم الحالي."
   },
   "تقرير: صمود اقتصاد اوروبا يدعم الايتمان.. ومخاطر الدين تهدد البنوك": {
     "meaning": "Economic resilience sustains corporate cash flows and debt-servicing capacity, while high sovereign debt levels directly increase valuation and default risks on commercial banks' sovereign bond portfolios.",
@@ -1023,6 +1035,10 @@
   "ضربات متبادله بين الولايات المتحده وايران تستهدف ناقلات نفط وسفنا حربيه": {
     "meaning": "Military conflicts targeting maritime vessels disrupt commercial shipping lanes, raising maritime insurance premiums and altering fuel and cargo transport routes for global trade.",
     "meaning_ar": "تؤدي النزاعات العسكرية التي تستهدف السفن البحرية إلى اضطراب الممرات الملاحية التجارية، مما يرفع أقساط التأمين البحري ويغير مسارات نقل الوقود والبضائع للتجارة العالمية."
+  },
+  "ظاهره “ال نينيو” تهدد انتاج الشاي ومعيشه الالاف من سكان نيلجيري الهنديه": {
+    "meaning": "El Niño weather patterns create climate disruptions that alter agricultural yields in primary tea-producing regions like India's Nilgiris, directly affecting raw material supply volumes in global commodity markets.",
+    "meaning_ar": "تتسبب الظروف المناخية المصاحبة لظاهرة 'إل نينيو' في تقلبات تؤثر على حجم المحاصيل الزراعية في مناطق إنتاج الشاي الرئيسية مثل نيلجيري بالهند، مما ينعكس مباشرة على معروض المواد الخام في أسواق السلع العالمية."
   },
   "عاجل.. الرقابه الماليه تصدر دليلا شاملا لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
@@ -1311,6 +1327,10 @@
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
     "meaning_ar": "يؤدي هذا الإجراء التشغيلي إلى زيادة الطاقة الاستيعابية وكثافة الرحلات عبر شبكة النقل العام، لاستيعاب الزيادة الموسمية في أعداد الركاب وتعزيز الإيرادات التشغيلية لهيئات السكك الحديدية والمترو."
+  },
+  "وزير الخارجيه: نتطلع لتعزيز الاستثمارات المصريه وتسهيل نفاذ المنتجات الدواييه الي غينيا": {
+    "meaning": "Government-level trade diplomacy of this type involves negotiating cross-border regulatory approvals, bilateral trade protocols, and distribution frameworks for domestic pharmaceutical manufacturers entering African export markets.",
+    "meaning_ar": "تتضمن الدبلوماسية التجارية الحكومية من هذا النوع التفاوض على الموافقات التنظيمية العابرة للحدود، والبروتوكولات التجارية الثنائية، وأطر التوزيع لشركات تصنيع الدواء المحلية في أسواق التصدير الأفريقية."
   },
   "وزير الخزانه الامريكي يتوقع هبوط النفط الي 40 دولارا بعد انتهاء الحرب": {
     "meaning": "Crude oil prices function as a primary determinant of fuel import costs and state energy subsidy burdens, directly setting production input costs for energy-intensive sectors including petrochemicals, transportation, and heavy manufacturing.",
