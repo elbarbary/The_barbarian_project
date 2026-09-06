@@ -115,6 +115,14 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "madbouly inaugurates f tex polyester yarn factory in sczone": {
+    "meaning": "The commissioning of the F-Tex facility expands domestic manufacturing capacity for polyester yarn and synthetic textile inputs within the Suez Canal Economic Zone.",
+    "meaning_ar": "يضيف تشغيل مصنع \"إف تكس\" طاقة تصنيع محلية لإنتاج خيوط البوليستر ومدخلات الغزل الصناعي داخل المنطقة الاقتصادية لقناة السويس."
+  },
+  "madbouly inaugurates lijialong factory in sczone": {
+    "meaning": "The inauguration marks the transition of Lijialong's facility in the Suez Canal Economic Zone (SCZone) into active operations, adding industrial production capacity to the zone's manufacturing base.",
+    "meaning_ar": "يمثل الافتتاح دخول منشأة شركة ليجيالونغ في المنطقة الاقتصادية لقناة السويس مرحلة التشغيل الفعلي، مما يضيف طاقة إنتاجية صناعية إلى القاعدة التصنيعية بالمنطقة."
+  },
   "paytabs to acquire amazon payment services mena operations": {
     "meaning": "This acquisition consolidates digital payment processing infrastructure and merchant portfolios across the MENA region under a single fintech operator.",
     "meaning_ar": "تدمج عملية الاستحواذ هذه البنية التحتية لمعالجة المدفوعات الرقمية ومحافظ التجار في منطقة الشرق الأوسط وشمال أفريقيا تحت مظلة مشغل تكنولوجيا مالية واحد."
@@ -335,6 +343,10 @@
     "meaning": "Brand valuation quantifies the financial worth of an institution's intangible assets and market positioning, reflecting National Bank of Egypt's balance sheet scale and dominant retail deposit base within the domestic banking sector.",
     "meaning_ar": "يعكس تقييم العلامة التجارية القيمة المالية للأصول غير الملموسة والمكانة السوقية للمؤسسة، وهو ما يرتبط بحجم المركز المالي للبنك الأهلي المصري وحصته السوقية في قاعدة الودائع والتجزئة المصرفية محلياً."
   },
+  "البنك الاهلي يسلم الجوايز للفايزين ضمن حمله \"فرصه من ذهب\"": {
+    "meaning": "The distribution of prizes marks the execution phase of a retail banking promotional campaign, recording marketing expenses against operating costs while fulfilling contractual incentive programs tied to customer accounts and retail transactions.",
+    "meaning_ar": "يمثل تسليم الجوائز المرحلة التنفيذية لحملة ترويجية في قطاع التجزئة المصرفية، حيث تُقيد هذه التكاليف ضمن المصروفات التسويقية والتشغيلية للبنك التزاماً ببرامج الحوافز المرتبطة بحسابات العملاء والتعاملات المصرفية."
+  },
   "البنوك الصينيه تشتري سندات الخزانه الامريكيه مع ارتفاع عوايدها مجددا": {
     "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة العائد الدوري المحقق على الأصول المقومة بالنقد الأجنبي، حيث تقوم المحافظ المصرفية بإدارة فوائض السيولة الأجنبية عبر حيازة هذه الأدوات ذات العائد الثابت."
@@ -342,6 +354,10 @@
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
     "meaning_ar": "تعتمد المؤشرات الفنية للسوق على مستوى 55,000 نقطة كنقطة دعم محورية، حيث يحدد حجم التداول واستقرار الأسعار عند هذا المستوى أو أعلاه مدى توازن قوى الشراء الحالية في مواجهة ضغوط البيع."
+  },
+  "البورصه واكاديميه السادات توسعان نطاق بروتوكول التعاون ليضم شركات الوساطه والجهات المقيده": {
+    "meaning": "The expanded protocol incorporates brokerage firms and listed companies into joint professional training and capacity-building programs between the Egyptian Exchange and Sadat Academy for Administrative Sciences.",
+    "meaning_ar": "يتضمن البروتوكول الموسع إدراج شركات الوساطة والشركات المقيدة ضمن برامج التدريب المهني وبناء القدرات المشتركة بين البورصة المصرية وأكاديمية السادات للعلوم الإدارية."
   },
   "البيتكوين تهبط دون 80 الف دولار بعد تقرير الوظايف الامريكي": {
     "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
@@ -608,9 +624,8 @@
     "meaning_ar": "تحدد أسعار الفائدة المرجعية لمجلس الاحتياطي الفيدرالي تكلفة الاقتراض بالدولار الأمريكي عالمياً، وتشكل الفارق في العائد بين الأصول الدولارية وأدوات الدين في الأسواق الناشئة."
   },
   "تركيا تخفض توقعات النمو في 2027 وسط حديث عن انتخابات مبكره": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "Official macroeconomic forecast revisions update multi-year fiscal targets and baseline planning parameters within government budgetary frameworks during shifts in political timelines.",
+    "meaning_ar": "يمثل تعديل التوقعات الاقتصادية الرسمية إعادة ضبط للمستهدفات المالية ومعايير التخطيط المالي ضمن الموازنة الحكومية في ظل تغيرات الجداول الزمنية السياسية."
   },
   "تركيا تعيد احياء خطه خصخصه جسرين شهيرين وطرق سريعه": {
     "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
@@ -727,6 +742,10 @@
   "ريمت تطلق خدمه الايداع المباشر لحوالات ويسترن يونيون في الحسابات البنكيه والمحافظ الالكترونيه": {
     "meaning": "The service integrates cross-border remittance flows directly into domestic banking infrastructure and mobile wallets, routing foreign transfers into automated digital settlements rather than physical cash pickups.",
     "meaning_ar": "تربط هذه الخدمة تدفقات الحوالات المالية الواردة من الخارج بالبنية التحتية للحسابات المصرفية والمحافظ الإلكترونية المحلية، مما يحول مسار استلام الأموال إلى تسوية رقمية مباشرة دون الحاجة للصرف النقدي."
+  },
+  "ريمت تطلق خدمه ويسترن يونيون للايداع": {
+    "meaning": "This launch integrates Western Union's international remittance network with local collection channels, routing inbound cross-border funds directly into recipient bank accounts and digital wallets through the electronic payment infrastructure.",
+    "meaning_ar": "يربط إطلاق هذه الخدمة شبكة التحويلات المالية الدولية لشركة ويسترن يونيون بقنوات الإيداع المحلية، مما يتيح توجيه الأموال الواردة من الخارج مباشرة إلى الحسابات المصرفية والمحافظ الإلكترونية عبر بنية المدفوعات التابعة للشركة."
   },
   "ريمت تطلق خدمه ويسترن يونيون للايداع المباشر للحوالات الوارده الي الحسابات والمحافظ الالكترونيه": {
     "meaning": "The integration connects Western Union's inbound remittance network directly to local bank accounts and mobile wallets through RAYA's subsidiary (Rayat / Remat), automating the settlement and routing of cross-border transfers into domestic digital endpoints.",
@@ -1228,6 +1247,10 @@
   "“كينجدوم” الصينيه تعتزم تشغيل مصنع للكتان في مصر الربع الاول 2027": {
     "meaning": "The setup establishes an industrial manufacturing base for flax processing within the Egyptian textiles sector, scheduled for commercial operation in the first quarter of 2027.",
     "meaning_ar": "يُمثّل هذا الإجراء إنشاء قاعدة تصنيع صناعية لمعالجة الكتان داخل قطاع الغزل والنسيج المصري، والمحدد بدء تشغيلها التجاري في الربع الأول من عام 2027."
+  },
+  "“نور” طلعت مصطفي تشعل السوشيال ميديا.. اشاده بالاعلان والتزام الشركه في التسليم": {
+    "meaning": "Adherence to delivery schedules in off-plan real estate operationalizes the conversion of unearned revenue into recognized revenue upon unit handover, while promotional campaigns register as selling and marketing expenditures.",
+    "meaning_ar": "يعكس الالتزام بجداول التسليم في المشروعات العقارية آلية تحويل الإيرادات المؤجلة إلى إيرادات محققة ومثبتة دفترياً عند التسليم الفعلي للوحدات، بينما تُسجل الحملات الترويجية كبند ضمن المصروفات التسويقية."
   },
   "“هيوماين” السعوديه تبدا في استقطاب فريق للتحضير للطرح العام": {
     "meaning": "Recruiting a dedicated preparation team establishes the internal corporate governance, financial reporting, and compliance framework necessary to fulfill public listing and regulatory requirements.",
