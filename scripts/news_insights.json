@@ -575,6 +575,10 @@
     "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
     "meaning_ar": "تؤثر بيانات تقرير الوظائف الأمريكي على توقعات أسعار الفائدة ومستويات السيولة العالمية، مما ينعكس مباشرة على التقييمات السعرية للأصول عالية المخاطر مثل العملات المشفرة."
   },
+  "الجبلي يدعو للاستفاده من وفود الاعمال الماليزيه وتحويل اللقاءات الي نتايج ملموسه": {
+    "meaning": "Bilateral trade delegations facilitate direct business-to-business engagement, formalizing cross-border supply chain agreements, commercial partnerships, and joint venture frameworks between local and international enterprises.",
+    "meaning_ar": "تتيح وفود الأعمال الثنائية إطاراً للتواصل المباشر بين الشركات، وتعمل على إبرام اتفاقيات التوريد والشراكات التجارية وتأسيس المشروعات المشتركة بين المؤسسات المحلية والدولية."
+  },
   "الجيش الامريكي يعلن استهداف 3 ناقلات نفط ايرانيه": {
     "meaning": "Disruptions to maritime energy transport affect global crude logistics by increasing geopolitical risk premiums on oil benchmarks and raising marine freight insurance rates across regional shipping corridors.",
     "meaning_ar": "تؤثر الاضطرابات في النقل البحري للطاقة على سلاسل إمداد النفط العالمية عبر زيادة علاوة المخاطر الجيوسياسية في أسعار الخام ورفع تكاليف التأمين على الشحن البحري في الممرات الإقليمية."
@@ -898,6 +902,11 @@
   "تراجع احتياطيات اليابان بقيمه 79.60 مليار دولار بعد تدخل قياسي لدعم الين": {
     "meaning": "Foreign exchange intervention involves the central bank liquidating foreign currency reserve assets to purchase the domestic currency on the open market, which directly reduces total official foreign reserves on the central bank's balance sheet.",
     "meaning_ar": "تتضمن عمليات التدخل في سوق الصرف الأجنبي قيام البنك المركزي ببيع أصول من احتياطيات النقد الأجنبي لشراء العملة المحلية من السوق المفتوحة، مما يترتب عليه خفض إجمالي رصيد الاحتياطيات الرسمية المسجلة في ميزانيته العمومية."
+  },
+  "تراجع اسعار الذهب العالميه مع تنامي توقعات رفع الفايده في امريكا": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
   },
   "تراجع اسعار الذهب قبيل صدور تقرير الوظايف في امريكا": {
     "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
@@ -1268,6 +1277,10 @@
   "شراكه بين سيتي ايدج ومدن مصر لتقديم خدمات اداره المنشات في مشروعات بالعلمين الجديده": {
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
+  },
+  "شريف الجبلي: مصر تتحول الي مركز اقليمي للتجاره والخدمات الماليه والذكاء الاصطناعي": {
+    "meaning": "Developing regional hubs in trade, financial services, and artificial intelligence relies on expanding cross-border logistics infrastructure, integrating digital payment networks, and establishing local data and computing centers.",
+    "meaning_ar": "يعتمد التحول إلى مركز إقليمي للتجارة والخدمات المالية والذكاء الاصطناعي على توسيع البنية التحتية اللوجستية العابرة للحدود، وربط شبكات المدفوعات الرقمية، وتأسيس مراكز محلية للبيانات والحوسبة."
   },
   "صادرات القطن تتجاوز 205 ملايين دولار منذ انطلاق الموسم و25 شركه تتصدر المشهد": {
     "meaning": "Cotton export values exceeding $205 million reflect cross-border commercial transactions executed by 25 domestic trading and ginning companies within the agricultural export sector.",
