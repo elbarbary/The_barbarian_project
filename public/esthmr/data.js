@@ -208,6 +208,32 @@ export function demo() {
     crossings: {
       days: 4, threshold: 2, updatedAt: '2026-08-27T11:48:00Z',
       axis: ['2026-08-24', '2026-08-25', '2026-08-26', '2026-08-27'],
+      windowStart: '2026-08-24', windowEnd: '2026-08-27', total: 2,
+      // Home's front page, in the demo's own numbers. Every sentence here is
+      // written for the demo and names no real company; the signed-out shape
+      // carries the card without borrowing a live document's words.
+      frontpage: {
+        newestDay: '2026-08-27',
+        feeds: {
+          news: { newest: '2026-08-27', oldest: '2026-08-22', items: 6 },
+          filings: { newest: '2026-08-27', oldest: '2026-08-01', items: 31, companies: 12 },
+          market: { date: '2026-08-27', is_close: true },
+        },
+        day: { date: '2026-08-27', filings: 2, stories: 1 },
+        week: { from: '2026-08-21', to: '2026-08-27', filings: 9, stories: 6, news_from: '2026-08-22', both: 2 },
+        since: { from: '2026-08-01', filings: 31, companies: 12 },
+        touched: [companies[0].ticker, companies[10].ticker],
+        sentences: {
+          count: 'Two companies turned up in more than one place between {from} and {to}.',
+          countAr: 'شركتان ظهرتا في أكثر من مكان بين {from} و{to}.',
+          day: '2 filings and 1 story on {date}.',
+          dayAr: 'إفصاحان وخبر واحد يوم {date}.',
+          week: '9 filings and 6 stories in the seven days to {date} (stories from {nfrom}). Two companies appeared in both the stories and the filings.',
+          weekAr: 'تسعة إفصاحات وستة أخبار في الأيام السبعة حتى {date} (الأخبار من {nfrom}). شركتان وردتا في الأخبار وفي الإفصاحات معًا.',
+          since: '31 filings from 12 companies since {ffrom}.',
+          sinceAr: '31 إفصاحًا من 12 شركة منذ {ffrom}.',
+        },
+      },
       items: [
         {
           ticker: companies[0].ticker, name: companies[0].name.en, nameAr: companies[0].name.ar,
@@ -221,13 +247,13 @@ export function demo() {
           pct: companies[0].pct, ratio: companies[0].rv,
           peers: [companies[1].ticker, companies[4].ticker], sameSector: 1,
           strands: [
-            { kind: 'filing', id: 'demo-000293', date: '2026-08-24', link: '',
+            { kind: 'filing', id: 'demo-000293', date: '2026-08-24', link: '', titleOk: true,
               title: `${companies[0].name.en} announces its results for the period ended 30 June 2026`,
               titleAr: `${companies[0].name.ar} تعلن نتائج أعمالها عن الفترة المنتهية ٣٠ يونيو ٢٠٢٦` },
-            { kind: 'filing', id: 'demo-000291', date: '2026-08-24', link: '',
+            { kind: 'filing', id: 'demo-000291', date: '2026-08-24', link: '', titleOk: true,
               title: `${companies[0].name.en} — board of directors' resolutions`,
               titleAr: `${companies[0].name.ar} — قرارات مجلس إدارة الشركة` },
-            { kind: 'news', id: 'demo-wire-1', date: '2026-08-26', link: '',
+            { kind: 'news', id: 'demo-wire-1', date: '2026-08-26', link: '', titleOk: true,
               title: `${companies[0].name.en} widens its loss at the end of March 2026`,
               titleAr: `${companies[0].name.ar} تفاقم خسائرها بنهاية مارس ٢٠٢٦` },
             { kind: 'session', id: 'demo-session-1', date: '2026-08-27', link: '',
@@ -245,10 +271,10 @@ export function demo() {
           pct: companies[10].pct, ratio: companies[10].rv,
           peers: [], sameSector: 0,
           strands: [
-            { kind: 'filing', id: 'demo-000288', date: '2026-08-25', link: '',
+            { kind: 'filing', id: 'demo-000288', date: '2026-08-25', link: '', titleOk: true,
               title: `${companies[10].name.en} — board of directors' resolutions`,
               titleAr: `${companies[10].name.ar} — قرارات مجلس إدارة الشركة` },
-            { kind: 'news', id: 'demo-wire-2', date: '2026-08-27', link: '',
+            { kind: 'news', id: 'demo-wire-2', date: '2026-08-27', link: '', titleOk: true,
               title: `${companies[10].name.en} approves a capital increase`,
               titleAr: `${companies[10].name.ar} توافق على زيادة رأس المال` },
           ],
@@ -1199,22 +1225,55 @@ export async function connections() {
   if (!items.length) return null;
   const days = d.window_days || 4;
 
-  // The window every crossing is plotted against: the newest strand date any
-  // of them carries, back `days`. Taken off the strands rather than off the
-  // clock, so a document published on Friday is not drawn as three days old
-  // because a reader opened the page on Monday.
-  const dates = items.flatMap((i) => (i.strands || []).map((s) => s.date)).filter(Boolean).sort();
-  const last = dates[dates.length - 1] || '';
-  const axis = [];
-  if (last) {
-    const end = new Date(last + 'T00:00:00Z').getTime();
-    for (let k = days - 1; k >= 0; k--) {
-      axis.push(new Date(end - k * 86400000).toISOString().slice(0, 10));
+  // The window every crossing is plotted against: the one the builder
+  // published, anchored on the newest published day. Never the clock, so a
+  // document published on Friday is not drawn as three days old because a
+  // reader opened the page on Monday. A document from before the window was
+  // published falls back to the newest strand date any crossing carries.
+  const axisFrom = (start, end) => {
+    const out = [];
+    if (!start || !end) return out;
+    const t0 = new Date(start + 'T00:00:00Z').getTime(), t1 = new Date(end + 'T00:00:00Z').getTime();
+    if (isNaN(t0) || isNaN(t1)) return out;
+    for (let t = t0; t <= t1; t += 86400000) out.push(new Date(t).toISOString().slice(0, 10));
+    return out;
+  };
+  let axis = d.window_start && d.window_end ? axisFrom(d.window_start, d.window_end) : [];
+  if (!axis.length) {
+    const dates = items.flatMap((i) => (i.strands || []).map((s) => s.date)).filter(Boolean).sort();
+    const last = dates[dates.length - 1] || '';
+    if (last) {
+      const end = new Date(last + 'T00:00:00Z').getTime();
+      for (let k = days - 1; k >= 0; k--) {
+        axis.push(new Date(end - k * 86400000).toISOString().slice(0, 10));
+      }
     }
   }
 
+  // What Home reads: the builder's counts and sentences, with their date
+  // placeholders still in them. Nothing here is composed on the client.
+  const fp = d.frontpage || null;
+  const S = (fp && fp.sentences) || {};
+  const F = (fp && fp.feeds) || {};
+
   return {
     days, threshold: d.threshold ?? 2, axis, updatedAt: d.updated_at || null,
+    windowStart: d.window_start || axis[0] || '',
+    windowEnd: d.window_end || axis[axis.length - 1] || '',
+    // The set is complete: total is the builder's count of what it published,
+    // and the reader's count of the same list.
+    total: typeof d.total === 'number' ? d.total : items.length,
+    frontpage: fp ? {
+      newestDay: fp.newest_day || '',
+      feeds: { news: F.news || {}, filings: F.filings || {}, market: F.market || {} },
+      day: fp.day || {}, week: fp.week || {}, since: fp.since || {}, touched: fp.touched || [],
+      sentences: {
+        count: S.count || '', countAr: S.count_ar || '',
+        day: S.day || '', dayAr: S.day_ar || '',
+        week: S.week || '', weekAr: S.week_ar || '',
+        since: S.since || '', sinceAr: S.since_ar || '',
+      },
+    } : null,
     items: items.map((i) => ({
       ticker: i.ticker,
       name: i.name || '', nameAr: i.name_ar || i.name || '',
@@ -1238,6 +1297,14 @@ export async function connections() {
         kind: s.kind, id: s.id || '', date: s.date || '',
         title: s.title || '', titleAr: s.title_ar || s.title || '',
         link: s.link || '', ratio: typeof s.ratio === 'number' ? s.ratio : null,
+        // The builder vets every title against the three guards and marks
+        // the result; a title it refused is never edited, only not shown.
+        // Only a title the builder marked true is shown: an absent flag is a
+        // document nobody vetted, and unvetted is not shown either — the
+        // kind, the date and the link stay. (§8: a headline is press text and
+        // can carry a forecast; the flag is the only thing standing between
+        // it and the landing screen.)
+        titleOk: s.title_ok === true,
       })),
     })),
   };

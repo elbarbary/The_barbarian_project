@@ -452,6 +452,20 @@ export class Component extends Base {
       dotsWorkings:'Three feeds are read for the same {days} days: what the exchange published, what the press wrote, and what the shares did. A company is listed here when at least two of them carry it. Nothing on the card is new \u2014 every thread links back to the document it came from.',
       dotsYardstick:'Two threads is common. Three \u2014 a filing, a story and a session outside its own normal \u2014 happens to a handful of companies a week. A crossing is a question, not an answer: it says a company was busy in more than one way, and nothing about whether that was good.',
       dotsOpen:'Open the company',
+      // ── the front page (Home) ──
+      // Plain words on purpose. "Crossing", "thread", "window" and "feed" are
+      // the pipeline's vocabulary and live on the crossings screen; the landing
+      // card says what happened in the words a reader already has.
+      fpTitle:'Turned up in more than one place',
+      fpNewest:'Newest published day: {date}',
+      fpNotYet:'Nothing published for {date} yet.',
+      fpSkew:'Stories to {ndate} · this card to {cdate}.',
+      fpOn:'On {date}',
+      fpBefore:'Earlier: {from} – {to}',
+      fpBeforeOne:'Earlier: {date}',
+      fpNoneOn:'No company had turned up in more than one place on {date} as of the {time} build.',
+      fpNoName:'Name not in the directory',
+      fpYardstick:'Turning up in more than one place is a question, not an answer: it says a company was busy in more than one way, and nothing about whether that was good.',
       marketTitle:'The market', searchPlaceholder:'Search {n} companies — English or Arabic',
       foldNote:'Search folds Arabic orthography: أ إ آ ٱ → ا, ة → ه, ى ئ → ي, ؤ → و, harakat and tatweel stripped on both sides.',
       marketFoot:'Sorting and filtering act on figures as filed. No ranking of companies is published.',
@@ -762,6 +776,19 @@ export class Component extends Base {
       dotsWorkings:'نقرأ ثلاثة مصادر عن {days} من الأيام نفسها: ما أفصحت عنه البورصة، وما كتبته الصحافة، وما فعله السهم. وتُدرج الشركة هنا إذا ظهرت في اثنين منها على الأقل. لا شيء في البطاقة جديد \u2014 كل خيط يعود إلى المستند الذي جاء منه.',
       dotsYardstick:'خيطان أمر معتاد. أما ثلاثة \u2014 إفصاح وخبر وتداول خارج المعتاد \u2014 فيحدث لعدد قليل من الشركات في الأسبوع. التقاطع سؤال وليس حكمًا: يقول إن الشركة كانت نشطة بأكثر من طريقة، ولا يقول إن ذلك جيد.',
       dotsOpen:'افتح صفحة الشركة',
+      // ── الصفحة الأولى ──
+      // Count agreement is never done here: every counted noun arrives from
+      // the builder already agreed.
+      fpTitle:'ظهرت في أكثر من مكان',
+      fpNewest:'أحدث يوم منشور: {date}',
+      fpNotYet:'لم يُنشر شيء عن {date} بعد.',
+      fpSkew:'الأخبار حتى {ndate} · هذه البطاقة حتى {cdate}.',
+      fpOn:'يوم {date}',
+      fpBefore:'قبل ذلك: {from} – {to}',
+      fpBeforeOne:'قبل ذلك: {date}',
+      fpNoneOn:'لم تظهر أي شركة في أكثر من مكان يوم {date} حتى تحديث {time}.',
+      fpNoName:'الاسم غير متاح في الدليل',
+      fpYardstick:'الظهور في أكثر من مكان سؤال وليس حكمًا: يقول إن الشركة كانت نشطة بأكثر من طريقة، ولا يقول إن ذلك جيد.',
       marketTitle:'السوق', searchPlaceholder:'ابحث في {n} شركة — بالعربية أو الإنجليزية',
       foldNote:'يوحّد البحث الإملاء العربي: أ إ آ ٱ ← ا، ة ← ه، ى ئ ← ي، ؤ ← و، مع حذف الحركات والتطويل من الطرفين.',
       marketFoot:'الترتيب والتصفية يتمّان على الأرقام كما وردت في الإفصاح. لا يُنشر أي تصنيف للشركات.',
@@ -2150,6 +2177,119 @@ export class Component extends Base {
     const crossWorkings = D.crossings
       ? L.dotsWorkings.replace('{days}', String(D.crossings.days || 4)) : '';
 
+    // ── the front page: the crossings, on Home ───────────────────────────
+    //
+    // Every company that appeared in more than one place inside the four
+    // newest published days, in two calendar tiers, alphabetical inside each.
+    // Nothing here is composed: the sentences are the builder's and the only
+    // substitution is a date label. The tiers are dates, not merit — "had a
+    // thread dated the newest day" is a calendar predicate, and no measure
+    // enters any comparator. The set is the document's whole set: no cap.
+    const fp = (() => {
+      const src = D.crossings;
+      const items = (src && src.items) || [];
+      const off = { fpShow: false, fpEmpty: true, fpTiers: [], fpHasFresh: false, fpFresh: '',
+        fpHasSentence: false, fpSentence: '', fpShowNone: false, fpNoneLine: '',
+        fpHasCounts: false, fpCounts: '' };
+      if (!items.length) return off;
+      const axis = src.axis || [];
+      const front = src.frontpage || { feeds: { news: {}, filings: {}, market: {} }, since: {}, sentences: {} };
+      const feeds = front.feeds || {};
+      const newsFeed = feeds.news || {}, filingsFeed = feeds.filings || {};
+      const newestDay = front.newestDay || src.windowEnd || axis[axis.length - 1] || '';
+      const from = src.windowStart || axis[0] || '';
+      const to = src.windowEnd || axis[axis.length - 1] || '';
+      const prevDay = (iso) => {
+        const t = new Date(iso + 'T00:00:00Z').getTime();
+        return isNaN(t) ? '' : new Intl.DateTimeFormat('en-CA',
+          { timeZone: 'UTC', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t - 86400000));
+      };
+      // The one substitution the client makes: a date placeholder becomes a
+      // date label. Counts arrive from the builder already agreed.
+      const fill = (text, map) => Object.keys(map)
+        .reduce((t, k) => t.split('{' + k + '}').join(map[k]), text || '');
+      const dates = {
+        from: this.dayLabel(from), to: this.dayLabel(to), date: this.dayLabel(newestDay),
+        fdate: this.dayLabel(filingsFeed.newest), sdate: this.dayLabel(newsFeed.newest),
+        nfrom: this.dayLabel(newsFeed.oldest), ffrom: this.dayLabel((front.since || {}).from),
+      };
+      // The reader's date in Cairo. Tests set `state.today`; the page never
+      // anchors anything else on the clock.
+      const today = st.today || new Intl.DateTimeFormat('en-CA',
+        { timeZone: 'Africa/Cairo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+      const feedNewest = (D.feed || []).reduce((m, r) => (r.date > m ? r.date : m), '');
+      const behind = Boolean(newestDay) && today > newestDay;
+      const skew = Boolean(feedNewest) && feedNewest > newestDay;
+      const fresh = [
+        behind ? L.fpNewest.replace('{date}', dates.date) : '',
+        behind && !skew ? L.fpNotYet.replace('{date}', this.dayLabel(today)) : '',
+        skew ? L.fpSkew.replace('{ndate}', this.dayLabel(feedNewest)).replace('{cdate}', dates.date) : '',
+      ].filter(Boolean).join(' \u00b7 ');
+      const row = (item) => {
+        const known = D.companies.some((c) => c.ticker === item.ticker);
+        const strands = item.strands || [];
+        const newest = strands.reduce((m, s) => (s.date > m ? s.date : m), '');
+        // The day's document: the newest non-session strand, the exchange's
+        // own filing before a story on a tie; shown only when it is dated the
+        // newest day. An older document is not the day's.
+        const docs = strands.filter((s) => s.kind !== 'session')
+          .sort((a, b) => b.date.localeCompare(a.date)
+            || (a.kind === 'filing' ? 0 : 1) - (b.kind === 'filing' ? 0 : 1));
+        const ev = docs[0] && docs[0].date === newestDay ? docs[0] : null;
+        const name = ar ? item.nameAr : item.name;
+        const isToday = Boolean(newest) && newest === newestDay;
+        return {
+          ticker: item.ticker, mono: item.ticker,
+          monoSize: item.ticker.length <= 4 ? '12px' : item.ticker.length === 5 ? '10.5px' : '9px',
+          // A ticker the directory lacks keeps its row, under a name that
+          // says so in the reader's language.
+          name: name || L.fpNoName, hasName: Boolean(name),
+          day: this.dayLabel(newest), isToday,
+          dayColor: isToday ? 'var(--accent)' : 'var(--faint)',
+          dots: (item.kinds || []).map((k) => ({ color: (STRAND[k] || STRAND.filing)[1] })),
+          why: ar ? item.whyAr : item.why,
+          hasEvidence: Boolean(ev),
+          evidenceLabel: ev ? (STRAND[ev.kind] || STRAND.filing)[0] : '',
+          evidenceDay: ev ? this.dayLabel(ev.date) : '',
+          // A title the builder refused is not shown and never edited; the
+          // kind, the date and the link stay.
+          hasEvidenceTitle: Boolean(ev && ev.titleOk && (ar ? ev.titleAr : ev.title)),
+          evidenceTitle: ev && ev.titleOk ? (ar ? ev.titleAr : ev.title) || '' : '',
+          evidenceHref: ev && ev.link ? ev.link : null,
+          go: known ? () => this.setState({ screen: 'company', ticker: item.ticker }) : null,
+          noGo: !known, arrow: known ? '\u2197' : '',
+        };
+      };
+      const rows = items.map(row).sort((a, b) => a.ticker.localeCompare(b.ticker));
+      const todayRows = rows.filter((r) => r.isToday);
+      const earlier = rows.filter((r) => !r.isToday);
+      const earlierTo = prevDay(newestDay);
+      const tiers = [];
+      if (todayRows.length) {
+        tiers.push({ key: 'today', cls: 'fp-today', label: L.fpOn.replace('{date}', dates.date), rows: todayRows });
+      }
+      if (earlier.length) {
+        tiers.push({ key: 'earlier', cls: 'fp-earlier', rows: earlier,
+          label: from === earlierTo ? L.fpBeforeOne.replace('{date}', dates.from)
+            : L.fpBefore.replace('{from}', dates.from).replace('{to}', this.dayLabel(earlierTo)) });
+      }
+      const S = front.sentences || {};
+      const pick = (k) => fill(ar ? S[k + 'Ar'] : S[k], dates);
+      const counts = ['day', 'week', 'since'].map(pick).filter(Boolean).join(' ');
+      const sentence = pick('count');
+      return {
+        fpShow: true, fpEmpty: false, fpTiers: tiers,
+        fpHasFresh: Boolean(fresh), fpFresh: fresh,
+        fpHasSentence: Boolean(sentence), fpSentence: sentence,
+        // A statement about the document at its build time, never a claim of
+        // absence in the world; and not made at all when the news feed has
+        // moved past the card.
+        fpShowNone: !todayRows.length && !skew,
+        fpNoneLine: L.fpNoneOn.replace('{date}', dates.date).replace('{time}', this.clock(src.updatedAt)),
+        fpHasCounts: Boolean(counts), fpCounts: counts,
+      };
+    })();
+
     // ── who bought and who sold ──────────────────────────────────────────
     //
     // The exchange's own split, which it has always published and nothing here
@@ -3186,7 +3326,7 @@ export class Component extends Base {
       openConnections: this.go('crossings'),
       revealHomeDetails: () => this.setState({ showHomeDetails: true }),
       snapshotMoves: movers.slice(0, 6),
-      snapshotStories: readNow.slice(0, 2),
+      ...fp,
       goToday: this.go('today'),
       detailLabel: ar ? 'التفاصيل والمصادر' : 'Details & sources',
       browseLabel: ar ? 'عرض الكل' : 'View all',

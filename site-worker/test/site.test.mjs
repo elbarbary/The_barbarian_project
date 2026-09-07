@@ -2921,6 +2921,25 @@ test('the demo cites no filing it does not have', () => {
 
 const CROSS = {
   days: 4, threshold: 2, axis: ['2026-08-24', '2026-08-25', '2026-08-26', '2026-08-27'],
+  windowStart: '2026-08-24', windowEnd: '2026-08-27', total: 1,
+  frontpage: {
+    newestDay: '2026-08-27',
+    feeds: { news: { newest: '2026-08-27', oldest: '2026-08-22', items: 5 },
+             filings: { newest: '2026-08-27', oldest: '2026-08-01', items: 20, companies: 9 },
+             market: { date: '2026-08-27', is_close: true } },
+    day: { date: '2026-08-27', filings: 1, stories: 1 },
+    week: { from: '2026-08-21', to: '2026-08-27', filings: 5, stories: 5, news_from: '2026-08-22', both: 1 },
+    since: { from: '2026-08-01', filings: 20, companies: 9 },
+    touched: ['AAAA'],
+    sentences: {
+      count: 'One company turned up in more than one place between {from} and {to}.',
+      countAr: 'شركة واحدة ظهرت في أكثر من مكان بين {from} و{to}.',
+      day: '1 filing and 1 story on {date}.', dayAr: 'إفصاح واحد وخبر واحد يوم {date}.',
+      week: '5 filings and 5 stories in the seven days to {date} (stories from {nfrom}). One company appeared in both the stories and the filings.',
+      weekAr: 'خمسة إفصاحات وخمسة أخبار في الأيام السبعة حتى {date} (الأخبار من {nfrom}). شركة واحدة وردت في الأخبار وفي الإفصاحات معًا.',
+      since: '20 filings from 9 companies since {ffrom}.', sinceAr: '20 إفصاحًا من تسع شركات منذ {ffrom}.',
+    },
+  },
   items: [{
     ticker: 'AAAA', name: 'A', nameAr: 'أ', sector: 'Finance', sectorAr: 'التمويل والخدمات المالية',
     kinds: ['filing', 'news', 'session'],
@@ -3020,11 +3039,18 @@ test('the document reader keeps every thread and drops nothing', async () => {
   delete globalThis.fetch;
   assert.equal(doc.items.length, raw.items.length);
   assert.equal(doc.days, raw.window_days);
-  // The window ends on the newest strand any crossing carries, so a document
-  // read on a later day is not drawn as if nothing had happened since.
-  const newest = raw.items.flatMap((i) => i.strands.map((s) => s.date)).sort().pop();
-  assert.equal(doc.axis[doc.axis.length - 1], newest);
+  // The axis is the document's own window — anchored by the builder on the
+  // newest published day, never on the clock or on the strands — so a document
+  // read on a later day is not drawn as if nothing had happened since, and a
+  // day the feeds reached without any crossing is still drawn. Every strand
+  // lands on a cell of it.
+  assert.equal(doc.axis[0], raw.window_start);
+  assert.equal(doc.axis[doc.axis.length - 1], raw.window_end);
   assert.equal(doc.axis.length, raw.window_days);
+  const strandDates = raw.items.flatMap((i) => i.strands.map((s) => s.date));
+  for (const day of strandDates) assert.ok(doc.axis.includes(day), `${day} falls off the axis`);
+  const newest = strandDates.sort().pop();
+  assert.ok(newest <= raw.window_end, 'a strand is newer than the window it is drawn in');
   raw.items.forEach((row, i) => {
     assert.equal(doc.items[i].strands.length, row.strands.length,
       `${row.ticker} lost a thread`);

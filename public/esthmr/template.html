@@ -239,13 +239,45 @@
             </button>
           </sc-for></div>
         </section>
-        <section class="island island-stories">
-          <header class="island-heading"><h2>{{ L.readNow }}</h2><button type="button" onClick="{{ goToday }}">{{ browseLabel }} ↗</button></header>
-          <sc-for list="{{ snapshotStories }}" as="r"><button type="button" class="island-story" onClick="{{ r.go }}">
-            <span class="island-story-kind" style="color:{{ r.kindColor }};background:{{ r.tint }}">{{ r.kind }}</span>
-            <span class="island-story-title">{{ r.title }}</span><span class="island-story-stamp">{{ r.stamp }}</span>
-          </button></sc-for>
-          <sc-if value="{{ noReadNow }}"><p>{{ L.nothingYet }}</p></sc-if>
+        <!-- ── The front page: every company that turned up in more than one
+             place inside the four newest published days, in two calendar
+             tiers, alphabetical inside each. The sentences are the builder's;
+             the client fills in date labels and nothing else. No percent, no
+             colour, no ratio badge: the multiple is prose inside a past-tense
+             sentence. Nothing here toggles `hidden`. -->
+        <section class="island island-crossings">
+          <header class="island-heading"><h2>{{ L.fpTitle }}</h2><button type="button" onClick="{{ openConnections }}">{{ L.dotsLabel }} ↗</button></header>
+          <sc-if value="{{ fpHasFresh }}"><p class="fp-fresh">{{ fpFresh }}</p></sc-if>
+          <sc-if value="{{ fpHasSentence }}"><p class="fp-sentence">{{ fpSentence }}</p></sc-if>
+          <sc-for list="{{ fpTiers }}" as="t">
+            <h3 class="fp-tier">{{ t.label }}</h3>
+            <div class="fp-rows"><sc-for list="{{ t.rows }}" as="x" hint-placeholder-count="4">
+              <article class="fp-row {{ t.cls }}">
+                <button type="button" class="fp-id" onClick="{{ x.go }}" disabled="{{ x.noGo }}">
+                  <span class="fp-tile" style="font-size:{{ x.monoSize }}">{{ x.mono }}</span>
+                  <span class="fp-name" dir="auto">{{ x.name }}</span>
+                  <span class="fp-meta">
+                    <span class="fp-day" style="color:{{ x.dayColor }}">{{ x.day }}</span>
+                    <span class="fp-dots"><sc-for list="{{ x.dots }}" as="p" hint-placeholder-count="2"><span class="fp-dot" style="background:{{ p.color }}"></span></sc-for><span class="fp-arrow">{{ x.arrow }}</span></span>
+                  </span>
+                </button>
+                <p class="fp-why">{{ x.why }}</p>
+                <sc-if value="{{ x.hasEvidence }}">
+                  <a class="fp-evidence" href="{{ x.evidenceHref }}" target="_blank" rel="noopener">
+                    <span class="fp-evidence-kind">{{ x.evidenceLabel }} · {{ x.evidenceDay }}</span>
+                    <sc-if value="{{ x.hasEvidenceTitle }}"><span class="fp-evidence-title" dir="auto">{{ x.evidenceTitle }}</span></sc-if>
+                  </a>
+                </sc-if>
+              </article>
+            </sc-for></div>
+          </sc-for>
+          <sc-if value="{{ fpShowNone }}"><p class="fp-none">{{ fpNoneLine }}</p></sc-if>
+          <sc-if value="{{ fpHasCounts }}"><p class="fp-counts">{{ fpCounts }}</p></sc-if>
+          <sc-if value="{{ fpShow }}">
+            <div class="fp-legend"><span>{{ L.dotsLegend }}</span><sc-for list="{{ crossLegend }}" as="g" hint-placeholder-count="3"><span class="fp-legend-item"><span class="fp-dot" style="background:{{ g.color }}"></span>{{ g.label }}</span></sc-for></div>
+            <p class="fp-yard">{{ L.fpYardstick }}</p>
+          </sc-if>
+          <sc-if value="{{ fpEmpty }}"><p>{{ L.nothingYet }}</p></sc-if>
         </section>
       </div>
       <button type="button" class="island-details-toggle" onClick="{{ toggleHomeDetails }}" aria-expanded="{{ showHomeDetails }}">{{ detailLabel }} <span>⌄</span></button>
