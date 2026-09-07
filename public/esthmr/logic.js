@@ -146,6 +146,7 @@ export class Component extends Base {
     insiderViewMode: 'table',
     audioPlaying: false, audioItem: '', filtersOpen: false, sectorQuery: '', preferencesOpen: false,
     calcInvest: 100000, calcPrice: 50, calcDividend: 4.5,
+    simTicker: 'BTFH', simStrategy: 'daily', simRange: '2Y', simCapital: 50000, includeThndrSub: false,
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
     // ARRAYS, and renamed from `rq`/`frq` on purpose.
@@ -4282,6 +4283,10 @@ export class Component extends Base {
       isToolsTabCalc: st.toolsTab === 'calc',
       isToolsTabGuide: st.toolsTab === 'guide',
       onSimStockSelect: (e) => this.setState({ simTicker: e.target.value }),
+      toggleThndrSub: () => this.setState({ includeThndrSub: !st.includeThndrSub }),
+      setSimDaily: () => this.setState({ simStrategy: 'daily' }),
+      setSimLump: () => this.setState({ simStrategy: 'lump' }),
+      setSimDca: () => this.setState({ simStrategy: 'dca' }),
       setMonthly1k: () => this.setState({ simMonthly: 1000 }),
       setMonthly2_5k: () => this.setState({ simMonthly: 2500 }),
       setMonthly5k: () => this.setState({ simMonthly: 5000 }),

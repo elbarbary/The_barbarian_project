@@ -839,6 +839,10 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   border: 2px solid var(--accent);
   box-shadow: 0 4px 20px rgba(18, 107, 117, 0.12);
 }
+.sim-broker-card.beltone {
+  border: 1.5px solid #2563EB;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.08);
+}
 
 .sim-metric-pill {
   display: flex;
