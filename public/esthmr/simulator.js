@@ -423,14 +423,14 @@ export function simulatorExplorer(component, D, ar, React) {
       title: ar ? 'محاكي عوائد ورسوم التداول' : 'Trading & App Fee Simulator',
       lead: ar
         ? 'قارن عوائد الشراء والبيع بالجنيه عبر تطبيقات ومنصات السمسرة المصرية (ثندر، هيرميس، مباشر، بلتون، سي آي كابيتال، البنوك) بعد خصم العمولات والحد الأدنى ورسوم البورصة والمقاصة والرقابة.'
-        : 'Compare net buy & sell returns across Egyptian trading apps and brokers (Thndr, EFG Hermes, Mubasher, Beltone, CI Capital, Banks) factoring in exact commissions, ticket minimums, MCDR clearing, and EGX fees.',
+        : 'Compare net trading returns across Egyptian trading apps and brokers (Thndr, EFG Hermes, Mubasher, Beltone, CI Capital, Banks) factoring in exact commissions, ticket minimums, MCDR clearing, and EGX fees.',
       stockSelectLabel: ar ? 'اختر السهم من البورصة المصرية' : 'Select EGX Stock',
       strategyLabel: ar ? 'نمط الاستثمار والتكرار' : 'Investment Strategy & Frequency',
-      lumpLabel: ar ? 'دفعة واحدة (شراء وبيع)' : 'Lump Sum (Single Buy & Sell)',
+      lumpLabel: ar ? 'دفعة واحدة (شراء وبيع)' : 'Lump Sum (Entry & Liquidation)',
       dcaLabel: ar ? 'استثمار شهري دوري (DCA)' : 'Monthly Recurring DCA',
       capitalLabel: ar ? 'رأس المال المستثمر (جنيه)' : 'Invested Capital (EGP)',
       monthlyLabel: ar ? 'مبلغ الاستثمار الشهري (جنيه)' : 'Monthly Amount (EGP)',
-      horizonLabel: ar ? 'الفترة الزمنية وتاريخ الشراء والبيع' : 'Time Horizon & Date Range',
+      horizonLabel: ar ? 'الفترة الزمنية وتاريخ الشراء والبيع' : 'Time Horizon & Execution Window',
       comparisonTitle: ar ? 'مقارنة صافي العائد والمحفظة بين التطبيقات' : 'Net Outcome & Fee Comparison Across Apps',
       winnerNotice: ar
         ? `الخيار الأوفر لهذه العملية هو ${bestBroker.nameAr}، بفرق توفير رسوم ${fmtNum(feeDifference)} ج.م مقارنة بأعلى منصة.`
@@ -445,17 +445,17 @@ export function simulatorExplorer(component, D, ar, React) {
       brokerFeeLabel: ar ? 'عمولة سمسرة' : 'Broker Comm',
       regFeeLabel: ar ? 'رسوم بورصة ومقاصة' : 'Reg & MCDR',
       feeDragLabel: ar ? 'نسبة الهدر بالرسوم' : 'Fee Drag',
-      sharesLabel: ar ? 'عدد الأسهم' : 'Shares Bought',
+      sharesLabel: ar ? 'عدد الأسهم' : 'Shares Acquired',
       execLabel: ar ? 'عدد العمليات' : 'Executions',
       searchPlaceholder: ar ? 'ابحث باسم أو رمز أي سهم...' : 'Search stock name or ticker...',
-      lumpDesc: ar ? 'عملية شراء واحدة في بداية الفترة وعملية بيع في نهايتها.' : 'Single buy execution at start, single sell at exit.',
-      dcaDesc: ar ? 'شراء شهري منتظم في نهاية كل شهر، ثم تسييل المحفظة بالكامل.' : 'Periodic monthly purchases at month closes, liquidated at exit.',
-      buyPrefix: ar ? 'دخول:' : 'Buy:',
-      sellPrefix: ar ? 'خروج:' : 'Sell:',
+      lumpDesc: ar ? 'عملية شراء واحدة في بداية الفترة وعملية بيع في نهايتها.' : 'Single entry execution at start, full liquidation at exit.',
+      dcaDesc: ar ? 'شراء شهري منتظم في نهاية كل شهر، ثم تسييل المحفظة بالكامل.' : 'Periodic monthly acquisitions at month closes, liquidated at exit.',
+      buyPrefix: ar ? 'دخول:' : 'Entry:',
+      sellPrefix: ar ? 'خروج:' : 'Exit:',
       trajectoryTitle: ar ? 'مسار السهم السعري الفعلي خلال الفترة المحاكاة' : 'Actual Historical Stock Price Trajectory',
       rawPriceMove: ar ? 'تغير السعر الخام' : 'raw price move',
-      firstBuyPrefix: ar ? 'نقطة الشراء الأولى: ' : 'First Buy: ',
-      finalSellPrefix: ar ? 'نقطة البيع والتسييل: ' : 'Final Sell: ',
+      firstBuyPrefix: ar ? 'نقطة الشراء الأولى: ' : 'First Entry: ',
+      finalSellPrefix: ar ? 'نقطة البيع والتسييل: ' : 'Final Exit: ',
       savePrefix: ar ? 'وفر ' : 'Save '
     }
   };

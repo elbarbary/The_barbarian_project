@@ -3701,7 +3701,7 @@ export class Component extends Base {
     const marketExplorer = explorer(this, D.companies, ar);
     const pairsData = pairsExplorer(this, D, ar, React);
     const valData = valuationExplorer(this, D, ar, React);
-    const simData = simulatorExplorer(this, D, ar, React);
+    const simData = (st.screen === 'tools') ? simulatorExplorer(this, D, ar, React) : { L: {} };
     const storyPeriod = st.storyPeriod || 'week';
     const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
     const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
