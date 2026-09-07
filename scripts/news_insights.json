@@ -167,6 +167,10 @@
     "meaning": "The memorandum of understanding establishes a preliminary framework between Egypt and Jiangsu Changhong to develop an automotive engineering base, structuring the operational parameters for automotive industrial infrastructure and manufacturing.",
     "meaning_ar": "تُرسخ مذكرة التفاهم إطاراً أولياً بين مصر وشركة جيانغسو تشانغهونغ لإنشاء قاعدة للهندسة وصناعة السيارات، محددةً الأطر التشغيلية للبنية التحتية الصناعية وعمليات تصنيع السيارات."
   },
+  "egypt net international reserves rise in august 2026": {
+    "meaning": "An increase in net international reserves expands the Central Bank of Egypt's foreign currency assets relative to its short-term foreign liabilities, providing foreign exchange liquidity to cover import requirements and meet sovereign external debt service payments.",
+    "meaning_ar": "تؤدي زيادة صافي الاحتياطيات الدولية إلى توسيع أصول النقد الأجنبي لدى البنك المركزي المصري مقابل الالتزامات الخارجية قصيرة الأجل، مما يتيح سيولة من العملات الأجنبية لتغطية المتطلبات الاستيرادية والوفاء بمدفوعات خدمة الدين الخارجي السيادي."
+  },
   "egypt outsourcing sector entering a new era of higher value growth": {
     "meaning": "The outsourcing sector shifts operational focus from basic customer support and business process outsourcing (BPO) to specialized knowledge process outsourcing (KPO), software engineering, and high-complexity technical services. This structural transition relies on skilled labor to deliver export-oriented digital and professional services.",
     "meaning_ar": "يتحول قطاع التعهيد من خدمات الدعم الفني وخدمة العملاء التقليدية إلى مجالات التعهيد القائم على المعرفة وهندسة البرمجيات والخدمات التقنية المتخصصة. يعتمد هذا النموذج التشغيلي على الكفاءات المؤهلة لتقديم خدمات تصديرية ورقمية ذات تعقيد فني أعلى."
@@ -747,6 +751,10 @@
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
     "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
   },
+  "الكندوز ب450 جنيها .. اسعار اللحوم البلديه اليوم الاثنين 7-9-2026": {
+    "meaning": "Retail meat pricing establishes the current spot transaction rate for domestic beef in consumer markets, reflecting prevailing livestock supply costs, feed inputs, and local distribution expenses.",
+    "meaning_ar": "يحدد تسعير اللحوم البلدية مستويات المعاملات الفورية للمستهلك في السوق المحلي، بما يعكس التكاليف القائمة لمدخلات الأعلاف، وتربية الماشية، ونفقات سلاسل التوزيع والتجزئة."
+  },
   "الماليه والصناعيه المصريه تحقق 343.8 مليون جنيه ارباحا مستقله بالنصف الاول بارتفاع 42%": {
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
     "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
@@ -908,9 +916,8 @@
     "meaning_ar": "تتضمن عمليات التدخل في سوق الصرف الأجنبي قيام البنك المركزي ببيع أصول من احتياطيات النقد الأجنبي لشراء العملة المحلية من السوق المفتوحة، مما يترتب عليه خفض إجمالي رصيد الاحتياطيات الرسمية المسجلة في ميزانيته العمومية."
   },
   "تراجع اسعار الذهب العالميه مع تنامي توقعات رفع الفايده في امريكا": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 2
+    "meaning": "Higher US interest rates increase yields on fixed-income assets and strengthen the US dollar, which raises the opportunity cost of holding non-yielding bullion and puts downward pressure on global gold prices.",
+    "meaning_ar": "تؤدي معدلات الفائدة المرتفعة في الولايات المتحدة إلى زيادة عوائد أدوات الدخل الثابت وقوة الدولار، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب الخالي من العائد ويضغط سلباً على أسعاره العالمية."
   },
   "تراجع اسعار الذهب قبيل صدور تقرير الوظايف في امريكا": {
     "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
