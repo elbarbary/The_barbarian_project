@@ -359,6 +359,10 @@
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
     "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
   },
+  "اسعار السمك اليوم الاثنين 7-9-2026 في مصر": {
+    "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
+    "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
+  },
   "اسعار السمك اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "This indicates regular market updates on wholesale and retail seafood commodity prices, reflecting local aquaculture supply levels, fuel logistics costs, and consumer demand in Egypt's food and protein sector.",
     "meaning_ar": "يشير ذلك إلى المتابعة الدورية لأسعار تداول الأسماك بالجملة والتجزئة، والتي تعكس مستويات المعروض من الاستزراع السمكي، وتكاليف النقل والخدمات اللوجستية، وحجم الطلب الاستهلاكي في قطاع السلع الغذائية بمصر."
@@ -366,6 +370,10 @@
   "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
+    "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
+    "meaning_ar": "يعكس تسعير بورصة الدواجن اليومي أسعار التداول الفورية من أرض المزرعة، والتي تتحدد بناءً على تكاليف الأعلاف الحالية، ومصروفات التشغيل، ومستويات المعروض المتاح في السوق المحلي."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الجمعه 4-9-2026": {
     "meaning": "This headline reflects daily pricing updates in the local poultry exchange, which directly affect operating revenue and profit margins for agribusiness and poultry producers based on prevailing feed costs and supply-demand dynamics.",
