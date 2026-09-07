@@ -1364,6 +1364,10 @@
     "meaning": "Official opening exchange rate data for the Saudi Riyal reflects the current interbank foreign currency pricing mechanism, determining the direct transaction costs for bilateral trade settlements, travel expenditures, and cross-border remittances between Egypt and Saudi Arabia.",
     "meaning_ar": "تعكس بيانات أسعار صرف الريال السعودي في بداية التعاملات آلية تسعير العملات الأجنبية في سوق المعاملات بين البنوك (الإنتربنك)، والتي تحدد التكلفة المباشرة لتسوية المعاملات التجارية ونفقات السفر والتحويلات المالية بين مصر والمملكة العربية السعودية."
   },
+  "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
+    "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. استقرار صباحي": {
     "meaning": "Stable morning exchange rates for the Saudi Riyal in the Egyptian banking sector reflect a balance between market liquidity and currency demand for bilateral trade, remittances, and travel operations.",
     "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي في البنوك المصرية توازن السيولة المعروضة مع مستويات الطلب على العملة لتغطية المعاملات التجارية البينية والتحويلات ونفقات السفر."
@@ -1375,6 +1379,10 @@
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
+  },
+  "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. ختام التعاملات": {
+    "meaning": "The Euro exchange rate at the close of trading establishes the official valuation for clearing European trade invoices, calculating foreign-denominated obligations, and updating commercial bank foreign asset positions.",
+    "meaning_ar": "يحدد سعر صرف اليورو في ختام التعاملات القيمة الرسمية لتسوية الفواتير التجارية الأوروبية، واحتساب الالتزامات بالعملة الأجنبية، وتحديث مراكز الأصول الأجنبية لدى البنوك التجارية."
   },
   "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. زياده جديده": {
     "meaning": "An increase in the EUR/EGP exchange rate raises the local currency cost of importing European goods, services, and raw materials, while expanding the Egyptian pound value of euro-denominated receivables, export revenues, and debt service obligations.",
@@ -1673,6 +1681,10 @@
     "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
     "meaning_ar": "يمثل إنجاز حزم البنية التحتية الريفية انتقال شركات المقاولات ومواد البناء من مرحلة التنفيذ الإنشائي إلى مراحل التسليم النهائي والمطالبات المالية وضمان الأعمال."
   },
+  "مدبولي: نواصل اعاده هيكله الشركات المملوكه للدوله لتحسين ادايها وتعظيم الاستفاده من اصولها": {
+    "meaning": "State-owned enterprise restructuring involves auditing corporate balance sheets, reorganizing administrative and operating models, and reallocating capital or real estate assets across public sector portfolios.",
+    "meaning_ar": "تتضمن إعادة هيكلة الشركات المملوكة للدولة مراجعة الميزانيات العمومية، وإعادة تنظيم النماذج الإدارية والتشغيلية، وإعادة توزيع الأصول الرأسمالية والعقارية ضمن محفظة القطاع العام."
+  },
   "مديرو الثروات يديرون ظهورهم لارتفاع الاسهم الاوروبيه": {
     "meaning": "Wealth managers reallocate capital away from rising European equities into other asset classes or regional markets, adjusting portfolio exposure according to institutional mandates.",
     "meaning_ar": "يُعيد مديرو الثروات توجيه السيولة ورؤوس الأموال بعيداً عن الأسهم الأوروبية الصاعدة نحو فئات أصول أو أسواق أخرى، وذلك لتعديل نسب أوزان المحافظ المالية وفقاً للأطر المؤسسية المعتمدة."
@@ -1849,6 +1861,10 @@
     "meaning": "Concrete Fashion records an increase in top-line revenue through higher volumes of apparel sold or adjusted unit pricing across its retail and export operations as of the period ending in June.",
     "meaning_ar": "تسجل شركة كونكريت فاشون زيادة في إجمالي إيرادات المبيعات عبر تصريف كميات أكبر من منتجات الملابس أو تعديل أسعار بيع الوحدات في عمليات التجزئة والتصدير بنهاية فترة يونيو."
   },
+  "نوفو نورديسك توقف تجربتين لدواء القلب بعد فشل تجربه رييسيه": {
+    "meaning": "The discontinuation of clinical trials halts the research and development pipeline for this specific cardiovascular drug indication, limiting capital allocation and clinical resources dedicated to these studies.",
+    "meaning_ar": "يؤدي إيقاف التجارب السريرية إلى تجميد مسار البحث والتطوير المخصص لهذا العقار لعلاج أمراض القلب، مما يوقف تخصيص الموارد الرأسمالية والسريرية الموجهة لهذه الدراسات."
+  },
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
@@ -1972,6 +1988,10 @@
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
     "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
+  },
+  "“اقتصاديه القناه” تطرح مخازن وورش ميناء غرب بورسعيد للشراكه مع القطاع الخاص": {
+    "meaning": "The Suez Canal Economic Zone tenders logistics assets, specifically warehouses and workshops at West Port Said Port, under public-private partnership (PPP) models, transferring the management, operation, and utilization of these facilities to private sector operators.",
+    "meaning_ar": "تطرح الهيئة العامة للمنطقة الاقتصادية لقناة السويس أصولاً لوجستية تشمل مخازن وورش صيانة بميناء غرب بورسعيد بنظام الشراكة مع القطاع الخاص، حيث يتولى مشغلو القطاع الخاص إدارة هذه المرافق وتشغيلها وتقديم الخدمات المرتبطة بها."
   },
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
