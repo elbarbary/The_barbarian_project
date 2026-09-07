@@ -15,6 +15,10 @@
     "meaning": "Cross-border mail-order commerce operates through direct consumer-to-retailer communication, long-term customer relationship management, and international logistics fulfillment for specialized inventory.",
     "meaning_ar": "تعمل تجارة الطلبات البريدية عبر الحدود من خلال التواصل المباشر بين المستهلك وبائع التجزئة، وإدارة علاقات العملاء طويلة الأجل، وعمليات الشحن واللوجستيات الدولية للبضائع المتخصصة."
   },
+  "20 شركه مصريه تتنافس علي توريد 800 الف طن اسمده للهند": {
+    "meaning": "Egyptian fertilizer producers are participating in an international export tender to supply 800,000 metric tons of product to the Indian market, allocating domestic industrial output toward bulk foreign trade.",
+    "meaning_ar": "تشارك شركات الأسمدة المصرية في مناقصة تصدير دولية لتوريد 800 ألف طن متري من المنتجات إلى السوق الهندية، مما يوجه جزءاً من الإنتاج الصناعي المحلي نحو التجارة الخارجية."
+  },
   "235 مليون دولار مشتريات الاجانب في ادوات الدين المصريه بالسوق الثانوي": {
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
@@ -619,6 +623,10 @@
     "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
     "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
   },
+  "البورصه المصريه تنهي جلسه اليوم علي تباين في الموشرات": {
+    "meaning": "A mixed close across indices reflects divergent trading activity, where capital flows and price movements differ between large-cap institutional equities and small-to-mid-cap stocks within the same session.",
+    "meaning_ar": "يشير التباين في أداء المؤشرات إلى اختلاف مسارات الأسعار وتوزيع السيولة النقدية بين الأسهم القيادية وأسهم الشركات الصغيرة والمتوسطة خلال جلسة التداول."
+  },
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
     "meaning_ar": "تعتمد المؤشرات الفنية للسوق على مستوى 55,000 نقطة كنقطة دعم محورية، حيث يحدد حجم التداول واستقرار الأسعار عند هذا المستوى أو أعلاه مدى توازن قوى الشراء الحالية في مواجهة ضغوط البيع."
@@ -831,6 +839,10 @@
     "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
     "meaning_ar": "تؤدي مبيعات السندات السيادية العالمية إلى انخفاض أسعارها وارتفاع عوائدها بحكم العلاقة العكسية بين السعر والعائد، مما يرفع تكاليف الاقتراض القياسية في أسواق الدين الدولية."
   },
+  "العمل: 1018 فرصه جديده في 3 محافظات بالتعاون مع 7 شركات خاصه": {
+    "meaning": "The Ministry of Labor coordinates with seven private-sector companies to facilitate the direct recruitment and absorption of 1,018 workers across three governorates.",
+    "meaning_ar": "تنسق وزارة العمل مع سبع شركات من القطاع الخاص لتسهيل التوظيف المباشر واستيعاب 1018 عاملاً في ثلاث محافظات."
+  },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 12.81%": {
     "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
     "meaning_ar": "يُعد هذا الإجراء تخفيضاً في نسبة ملكية مساهم رئيسي في رأس مال الشركة لتصل إلى 12.81%، مما يعيد تشكيل هيكل الملكية وحصص التصويت بين المساهمين."
@@ -926,6 +938,10 @@
   "ايطاليا: الناتج المحلي يقترب من تحقيق نمو بنسبه 1% في عام 2026": {
     "meaning": "Gross Domestic Product metrics measure aggregate economic output and baseline commercial activity within an external sovereign market. For international trade partners, foreign GDP data serves as an operational benchmark for economic capacity and cross-border trade activity.",
     "meaning_ar": "يقيس مؤشر الناتج المحلي الإجمالي حجم الإنتاج الكلي والنشاط الاقتصادي الأساسي داخل الأسواق الخارجية، ويمثل معياراً مرجعياً لتتبع مستويات الطاقة الاقتصادية وحركة التبادل التجاري الدولي."
+  },
+  "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
+    "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
+    "meaning_ar": "يتطلب تطوير مراكز البيانات العملاقة تخصيص قدرات كهربائية كبرى، مما يربط ما يصل إلى 500 ميجاوات من البنية التحتية للطاقة بمرافق الاستضافة الرقمية في المنطقة."
   },
   "باستثمارات 7.5 مليون دولار.. رييس الوزراء يفتتح توسعات شركه سيراج بمصنع \"فلير\" لانظمه الاضاءه الحديثه": {
     "meaning": "The deployment of $7.5 million in capital expenditure allocates funding directly into physical production assets and modern lighting manufacturing lines at the facility.",
@@ -1244,6 +1260,10 @@
     "meaning": "Bilateral labor agreements establish structured regulatory channels for skilled cross-border workforce deployment and align domestic vocational training standards with foreign labor market requirements.",
     "meaning_ar": "تؤسس الاتفاقيات العمالية الثنائية أطراً تنظيمية رسمية لانتقال الكوادر الفنية عبر الحدود، وتربط معايير التدريب المهني المحلية باحتياجات سوق العمل الخارجي."
   },
+  "رداد: نعمل علي منظومه متكامله لضمان حقوق وحمايه العمال المنزليين في مصر": {
+    "meaning": "Establishing an integrated regulatory framework for domestic labor formalizes contractual arrangements, bringing an informal segment of the workforce under the oversight of national labor regulations and social insurance systems.",
+    "meaning_ar": "يؤدي وضع منظومة تنظيمية متكاملة للعمالة المنزلية إلى مأسسة العلاقات التعاقدية وإدراج هذا القطاع غير الرسمي تحت إشراف تشريعات العمل ومنظومة التأمينات الاجتماعية."
+  },
   "رسوم الانتقالات الصيفيه لنجوم كاس العالم تبلغ 3.3 مليار دولار": {
     "meaning": "This reflects substantial capital circulation and liquidity deployment within the global sports entertainment industry, directly impacting football clubs' revenue streams, intangible asset valuations, and player-related operational expenditures.",
     "meaning_ar": "يعكس ذلك تدفقات رأسمالية وسيولة نقدية ضخمة داخل قطاع الترفيه الرياضي العالمي، مما يؤثر بشكل مباشر على إيرادات أندية كرة القدم، وتقييم الأصول غير الملموسة، والمصروفات التشغيلية المرتبطة بعقود اللاعبين."
@@ -1468,6 +1488,10 @@
   "طارق الهوبي : التحول الرقمي ينتقل الي منظومه ضريبيه اكثر شفافيه وعداله": {
     "meaning": "Digital transformation in the tax administration operates through electronic invoicing, automated filing systems, and integrated transaction data to track commercial activities across the market.",
     "meaning_ar": "يعتمد التحول الرقمي في الإدارة الضريبية على الفاتورة الإلكترونية، وأنظمة الإقرار المميكنة، والربط المباشر لبيانات المعاملات لتتبع الأنشطة التجارية في السوق."
+  },
+  "طول دوره العايد وغياب الخبرات يقللان جاذبيه قطاع الرعايه الصحيه الحرجه": {
+    "meaning": "Critical healthcare facilities require high initial capital expenditure for specialized medical equipment alongside extended payback periods, while operational execution relies on scarce specialized technical expertise.",
+    "meaning_ar": "تتطلب منشآت الرعاية الصحية الحرجة نفقات رأسمالية أولية مرتفعة للأجهزة الطبية المتخصصة مع فترات استرداد طويلة لرأس المال، بينما يعتمد التشغيل على كوادر فنية متخصصة تتسم بمحدودية الوفرة."
   },
   "ظاهره “ال نينيو” تهدد انتاج الشاي ومعيشه الالاف من سكان نيلجيري الهنديه": {
     "meaning": "El Niño weather patterns create climate disruptions that alter agricultural yields in primary tea-producing regions like India's Nilgiris, directly affecting raw material supply volumes in global commodity markets.",
@@ -2036,6 +2060,10 @@
   "“سيتي جروب” يرجي توقعاته لخفض الفايده الامريكيه الي 2027": {
     "meaning": "The shift in monetary policy expectations maintains higher global benchmark interest rates for an extended period, which sets cross-border funding costs and sovereign borrowing yields at elevated levels.",
     "meaning_ar": "يؤدي تعديل توقعات السياسة النقدية إلى استمرار أسعار الفائدة القياسية العالمية المرتفعة لفترة أطول، مما يحدد تكاليف التمويل عبر الحدود وعوائد الاقتراض السيادي عند مستويات مرتفعة."
+  },
+  "“شي ان” تفقد 5 مليارات دولار من قيمتها السوقيه منذ الادراج في هونج كونج": {
+    "meaning": "A decline in market capitalization reflects a decrease in the secondary market trading price of the company's shares multiplied by its total outstanding shares since its listing.",
+    "meaning_ar": "يعكس انخفاض القيمة السوقية تراجع سعر تداول أسهم الشركة في السوق الثانوية مضروباً في إجمالي عدد أسهمها القائمة منذ تاريخ إدراجها."
   },
   "“عبدالغفار” ل”البورصه”: “الصحه” تستثمر 1.9 مليار جنيه لاضافه الفي حضانه بنهايه 2030": {
     "meaning": "The Ministry of Health allocates EGP 1.9 billion in public capital expenditure through 2030 to expand neonatal intensive care infrastructure by 2,000 incubators, directing state funding into medical equipment procurement and healthcare facility capacity.",
