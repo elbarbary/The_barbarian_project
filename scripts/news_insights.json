@@ -383,6 +383,10 @@
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
     "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
   },
+  "ازمه الوقود تضاعف مبيعات السيارات الكهرباييه في روسيا": {
+    "meaning": "Traditional fuel supply constraints drive consumer substitution toward alternative powertrains, directly shifting automotive retail volumes from internal combustion engine vehicles to electric models.",
+    "meaning_ar": "تؤدي اختناقات إمدادات الوقود التقليدي إلى تحول نمط الاستهلاك نحو بدائل الطاقة، مما ينعكس في زيادة حصة مبيعات السيارات الكهربائية مقارنة بمركبات الاحتراق الداخلي."
+  },
   "استثمارات مصنع اف تكس لخيوط البوليستر": {
     "meaning": "Capital investments in the F-Tex polyester yarn facility direct funds toward expanding industrial manufacturing capacity, installing specialized machinery, and supplying synthetic fibers directly to domestic textile supply chains.",
     "meaning_ar": "توجّه الاستثمارات الرأسمالية في مصنع «أف تكس» لخيوط البوليستر الأموال نحو توسيع الطاقة التصنيعية وتركيب خطوط إنتاج متخصصة لتوريد الألياف الصناعية إلى سلاسل إمداد الغزل والنسيج المحلية."
@@ -458,6 +462,10 @@
   "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
+  },
+  "اسعار الغاز الاوروبي ترتفع 2% مع تصاعد مخاطر مضيق هرمز ونقص المخزونات": {
+    "meaning": "Geopolitical risks in key maritime transit corridors combined with lower storage levels tighten available energy buffers, which adds a risk premium to natural gas benchmark pricing.",
+    "meaning_ar": "تؤدي المخاطر الجيوسياسية في الممرات الملاحية الحيوية بالتزامن مع تراجع مستويات التخزين إلى تقليص هوامش الإمداد المتاحة، مما يضيف علاوة مخاطر إلى الأسعار القياسية للغاز الطبيعي."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
