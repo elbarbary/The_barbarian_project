@@ -307,6 +307,10 @@
     "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
   },
+  "احتياطيات اليابان تهبط 79.6 مليار دولار في اغسطس": {
+    "meaning": "A decline in foreign exchange reserves reflects central bank balance sheet adjustments driven by foreign exchange market interventions, revaluations of foreign securities, or external payment settlements.",
+    "meaning_ar": "يعكس انخفاض احتياطيات النقد الأجنبي تسويات في الميزانية العمومية للبنك المركزي ناتجة عن التدخلات في سوق الصرف، أو إعادة تقييم الأصول والسندات الأجنبية، أو سداد التزامات دولية."
+  },
   "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
     "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
@@ -719,6 +723,10 @@
     "meaning": "Bilateral strategic and security coordination between Egypt and Saudi Arabia provides the foundational framework for cross-border capital flows, sovereign investment partnerships, and intergovernmental financial arrangements between both economies.",
     "meaning_ar": "يشكل التنسيق الأمني والسياسي الثنائي بين مصر والمملكة العربية السعودية الإطار الحاكم لتدفقات رؤوس الأموال العابرة للحدود، والشراكات الاستثمارية السيادية، والترتيبات المالية الحكومية المشتركة بين البلدين."
   },
+  "السيسي يوكد ضروره توفير تعليم عالي الجوده من خلال الاستثمار في العنصر البشري": {
+    "meaning": "Capital allocation toward education and human capital involves directing public and private expenditures into educational infrastructure, curriculum development, and vocational training frameworks, which directly engages the operational capacity of the education services sector and the labor supply chain.",
+    "meaning_ar": "يتضمن الاستثمار في رأس المال البشري توجيه النفقات الرأسمالية الحكومية والخاصة نحو البنية التحتية للتعليم وتطوير المناهج والتدريب المهني، وهو ما يرتبط مباشرة بالطاقة التشغيلية لقطاع الخدمات التعليمية وسلاسل إمداد سوق العمل."
+  },
   "السيوله المحليه M2 ترتفع الي 15.5 تريليون جنيه بنهايه يوليو": {
     "meaning": "An increase in domestic liquidity (M2) to 15.5 trillion EGP represents an expansion in the broad money supply circulating within the banking sector and the economy, comprising currency in circulation and total deposits in local and foreign currencies.",
     "meaning_ar": "يمثل ارتفاع السيولة المحلية (M2) إلى 15.5 تريليون جنيه توسعاً في إجمالي المعروض النقدي المتداول في القطاع المصرفي والاقتصاد، والذي يضم النقد المتداول خارج البنوك وإجمالي الودائع بالعملتين المحلية والأجنبية."
@@ -802,6 +810,10 @@
   "الماليه والصناعيه المصريه تحقق 343.8 مليون جنيه ارباحا مستقله بالنصف الاول بارتفاع 42%": {
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
     "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
+  },
+  "المركزي الصيني يعزز مشترياته من الذهب للشهر السادس": {
+    "meaning": "The continuous accumulation of gold by the People's Bank of China reallocates the composition of its official foreign exchange reserves, increasing the share of non-currency reserve assets relative to foreign currency holdings.",
+    "meaning_ar": "تؤدي الزيادة المستمرة في حيازة بنك الشعب الصيني من الذهب إلى إعادة هيكلة مكونات احتياطياته الأجنبية الرسمية عبر رفع حصة الأصول غير النقدية مقارنة بالأرصدة من العملات الأجنبية."
   },
   "المركزي: صعود السيوله المحليه M2 لتسجل 15.49 تريليون جنيه بنهايه يوليو 2026": {
     "meaning": "The expansion in M2 money supply represents an increase in total currency in circulation outside the banking sector alongside local and foreign currency demand and time deposits. This reflects the current volume of total liquid monetary assets managed within the domestic banking system.",
@@ -1092,6 +1104,10 @@
     "meaning": "Total billionaire wealth represents the aggregated market valuation of equity holdings in publicly traded and private enterprises, real estate, and financial assets priced across global capital markets.",
     "meaning_ar": "يمثل إجمالي ثروات المليارديرات القيمة السوقية المجمعة لحصص الملكية في الشركات المدرجة والخاصة والأصول المالية والرأسمالية المقومة بالأسعار الجارية في الأسواق العالمية."
   },
+  "جمعيه رجال الاعمال تفتتح منتدي الاعمال المصري الموريشي وتبحث فرص تعزيز الاستثمار": {
+    "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
+    "meaning_ar": "تُعد منتديات الأعمال الثنائية منصات مؤسسية للتواصل المباشر بين الشركات عبر الحدود، وتبادل المعلومات حول الأطر التنظيمية، وتحديد الشراكات التجارية المشتركة بين البلدين."
+  },
   "جهاد عطيه: 100 كيلو جرام حجم انتاج مركز الملاذ الامن من الفضه يوميا": {
     "meaning": "This operational metric establishes the current daily refining and manufacturing capacity of the facility, supplying 100 kilograms of processed silver to the local precious metals market per day.",
     "meaning_ar": "يحدد هذا المؤشر التشغيلي الطاقة الإنتاجية اليومية الحالية للمنشأة في صقل وتصنيع الفضة، والتي تضخ 100 كيلوجرام يومياً في سوق المعادن الثمينة المحلي."
@@ -1111,6 +1127,10 @@
   "جون سعد: دليل ضوابط التمويل الاستهلاكي يغلق الثغرات ويرفع انضباط السوق": {
     "meaning": "The consumer finance regulatory guide establishes standardized compliance and operational requirements for non-bank financial institutions, defining uniform credit assessment rules and contract terms across the sector.",
     "meaning_ar": "يضع دليل ضوابط التمويل الاستهلاكي معايير تشغيلية وإلزامية موحدة للمؤسسات المالية غير المصرفية، محددًا قواعد التقييم الائتماني وشروط التعاقد عبر القطاع."
+  },
+  "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
+    "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
+    "meaning_ar": "يعكس هذا الحجم من الإنفاق توجيه تدفقات رأسمالية ضخمة من قِبل شركات التكنولوجيا نحو البنية التحتية للحوسبة، ومراكز البيانات، وتوريد الأجهزة المتخصصة، والبحث والتطوير."
   },
   "خبيره تمويل: مصر تستطيع خفض تكلفه الدين ب «سندات طريق الحرير»": {
     "meaning": "Silk Road bonds (Panda bonds) are renminbi-denominated debt instruments issued in the Chinese onshore market, offering sovereign issuers an alternative funding venue with interest rates linked to Chinese market benchmarks rather than US dollar or euro rates.",
@@ -1704,6 +1724,10 @@
   "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
+  },
+  "نشطاء الصحه في الهند يصعدون ضد تحذيرات الاغذيه المعباه امام المحكمه العليا": {
+    "meaning": "Legal escalation regarding front-of-package labelling mandates introduces regulatory compliance adjustments and packaging redesign costs for packaged food manufacturers.",
+    "meaning_ar": "يفرض التصعيد القضائي بشأن ملصقات التحذير على الأغذية المعبأة تعديلات في الامتثال التنظيمي وتكاليف إعادة تصميم التغليف لشركات الصناعات الغذائية."
   },
   "نقيب الفلاحين: مفيش دوله في العالم تاكل 20 مليون طن قمح في السنه": {
     "meaning": "High national wheat consumption requires reliance on both local harvests and international grain imports, directly linking state food subsidy expenditures and foreign exchange allocations to global agricultural commodity procurement.",
