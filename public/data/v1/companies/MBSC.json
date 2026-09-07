@@ -7,12 +7,12 @@
  "sector": "Building Materials",
  "sector_ar": "مواد البناء",
  "market": {
-  "last_close": 425,
+  "last_close": 427.98,
   "date": "2026-09-07",
   "open": 404.02,
-  "high": 425,
+  "high": 427.98,
   "low": 404.02,
-  "volume": 83761
+  "volume": 85583
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 55022327,
   "free_float": 0.14335,
   "float_shares": 7887450.57545,
-  "perf_1w": 5.45644028684152,
-  "perf_1m": 67.83824342468999,
-  "perf_3m": 53.79048308304685,
-  "avg_volume_30d": 220354.53333333274,
-  "relative_volume_10d": 0.6037999439170549,
+  "perf_1w": 6.19587603285279,
+  "perf_1m": 69.01508569623255,
+  "perf_3m": 54.86882576442916,
+  "avg_volume_30d": 220415.26666666608,
+  "relative_volume_10d": 0.6169340218031459,
   "median_volume_20d": 128631.5,
   "rv20": 0.7324644430019086,
   "normal_value_30d": 35127705.84,
