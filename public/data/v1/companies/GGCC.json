@@ -8,18 +8,13 @@
  "sector_ar": "مقاولات و إنشاءات هندسية",
  "market": {
   "last_close": 0.874,
-  "date": "2026-09-06",
+  "date": "2026-09-07",
   "open": 0.867,
   "high": 0.886,
   "low": 0.865,
   "volume": 26520529
  },
  "price_history": [
-  {
-   "date": "2025-07-30",
-   "close": 0.52,
-   "volume": 13525141
-  },
   {
    "date": "2025-07-31",
    "close": 0.54,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-03",
    "close": 0.867,
    "volume": 40853961
+  },
+  {
+   "date": "2026-09-06",
+   "close": 0.874,
+   "volume": 26520529
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 101.84757505773672,
   "avg_volume_30d": 50194539.93333333,
   "relative_volume_10d": 0.4793919850292123,
-  "median_volume_20d": 49428253.5,
-  "rv20": 0.8265305388546654,
-  "normal_value_30d": 48168027.54,
-  "five_session_change": -9.875259875259868,
+  "median_volume_20d": 46551508.5,
+  "rv20": 0.569702891582987,
+  "normal_value_30d": 44633694.03,
+  "five_session_change": -7.415254237288127,
   "history_bars": 120,
   "market_cap": 1891397180.0,
   "market_cap_source": "EGX",

@@ -8,18 +8,13 @@
  "sector_ar": "سياحة وترفيه",
  "market": {
   "last_close": 357.71,
-  "date": "2026-09-06",
+  "date": "2026-09-07",
   "open": 358.55,
   "high": 362,
   "low": 341,
   "volume": 7479
  },
  "price_history": [
-  {
-   "date": "2025-07-23",
-   "close": 111.71,
-   "volume": 4309
-  },
   {
    "date": "2025-07-27",
    "close": 111.71,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-03",
    "close": 362.0,
    "volume": 870
+  },
+  {
+   "date": "2026-09-06",
+   "close": 357.71,
+   "volume": 7479
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 72.68163166787352,
   "avg_volume_30d": 7309.200000000001,
   "relative_volume_10d": 1.983819628647215,
-  "median_volume_20d": 5624.5,
-  "rv20": 0.15468041603698107,
+  "median_volume_20d": 4789.5,
+  "rv20": 1.5615408706545568,
   "normal_value_30d": 1996999.505,
-  "five_session_change": 4.3197602374571265,
+  "five_session_change": 3.7321656420368887,
   "history_bars": 120,
   "market_cap": 9067948500.0,
   "market_cap_source": "EGX",

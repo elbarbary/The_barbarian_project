@@ -8,18 +8,13 @@
  "sector_ar": "خدمات مالية غير مصرفية",
  "market": {
   "last_close": 0.438,
-  "date": "2026-09-06",
+  "date": "2026-09-07",
   "open": 0.43,
   "high": 0.447,
   "low": 0.43,
   "volume": 59056815
  },
  "price_history": [
-  {
-   "date": "2025-07-30",
-   "close": 0.2406,
-   "volume": 253277466
-  },
   {
    "date": "2025-07-31",
    "close": 0.2406,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-03",
    "close": 0.43,
    "volume": 133652101
+  },
+  {
+   "date": "2026-09-06",
+   "close": 0.438,
+   "volume": 59056815
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 23.033707865168545,
   "avg_volume_30d": 107268395.93333332,
   "relative_volume_10d": 0.4951606586602319,
-  "median_volume_20d": 68607772.5,
-  "rv20": 1.948060637007272,
-  "normal_value_30d": 33151812.602,
-  "five_session_change": -10.416666666666663,
+  "median_volume_20d": 76692535.5,
+  "rv20": 0.7700464538690339,
+  "normal_value_30d": 33997646.3495,
+  "five_session_change": -7.789473684210524,
   "history_bars": 120,
   "market_cap": 876000000.0,
   "market_cap_source": "EGX",
