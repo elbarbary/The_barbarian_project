@@ -471,7 +471,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AMER/profile",
   "record": {
-   "filings": 796,
+   "filings": 797,
    "first_filing": "2010-11-09",
    "trading_suspensions": 13,
    "trading_resumptions": 10,
@@ -2188,7 +2188,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ELEC/profile",
   "record": {
-   "filings": 999,
+   "filings": 1000,
    "first_filing": "2010-02-01",
    "trading_suspensions": 17,
    "trading_resumptions": 16,
@@ -2397,12 +2397,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EPPK/profile",
   "record": {
-   "filings": 853,
+   "filings": 857,
    "first_filing": "2010-03-15",
-   "trading_suspensions": 31,
-   "trading_resumptions": 30,
+   "trading_suspensions": 32,
+   "trading_resumptions": 31,
    "capital_increases": 0,
-   "general_assemblies": 78,
+   "general_assemblies": 79,
    "periods_reported": 60,
    "loss_making_periods": 31
   },
@@ -5626,7 +5626,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SDTI/profile",
   "record": {
-   "filings": 483,
+   "filings": 484,
    "first_filing": "2010-03-30",
    "trading_suspensions": 6,
    "trading_resumptions": 6,
