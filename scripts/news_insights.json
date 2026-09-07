@@ -903,6 +903,10 @@
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
     "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
   },
+  "المختبر التنظيمي يتلقي 49 مشروعا تكنولوجيا خلال عام": {
+    "meaning": "The regulatory sandbox operates as a controlled testing environment where financial authorities assess the compliance and operational models of 49 financial technology applications under existing regulatory frameworks.",
+    "meaning_ar": "يعمل المختبر التنظيمي كبيئة اختبار خاضعة للرقابة تقوم من خلالها الهيئات التنظيمية بفحص نماذج التشغيل ومدى التزام 49 مشروعاً للتكنولوجيا المالية بالمعايير والأطر الرقابية السارية."
+  },
   "المركزي الصيني يعزز مشترياته من الذهب للشهر السادس": {
     "meaning": "The continuous accumulation of gold by the People's Bank of China reallocates the composition of its official foreign exchange reserves, increasing the share of non-currency reserve assets relative to foreign currency holdings.",
     "meaning_ar": "تؤدي الزيادة المستمرة في حيازة بنك الشعب الصيني من الذهب إلى إعادة هيكلة مكونات احتياطياته الأجنبية الرسمية عبر رفع حصة الأصول غير النقدية مقارنة بالأرصدة من العملات الأجنبية."
@@ -1740,6 +1744,10 @@
   "محمد عوض: نستهدف تحويل الشراكه المصريه الايطاليه الي مشروعات واستثمارات ملموسه": {
     "meaning": "The statement reflects efforts to convert bilateral diplomatic and economic agreements between Egypt and Italy into foreign direct investment (FDI) inflows, industrial joint ventures, and localized infrastructure projects.",
     "meaning_ar": "يعكس التصريح التوجه نحو تحويل الاتفاقيات الاقتصادية الثنائية بين مصر وإيطاليا إلى تدفقات استثمار أجنبي مباشر، ومشاريع صناعية مشتركة، وتوسعات تشغيلية ملموسة."
+  },
+  "محمد فريد: الابتكار يفتح مجالات جديده في التامين والاستثمار والتكنولوجيا الماليه": {
+    "meaning": "Technological innovation in non-banking financial activities establishes digital infrastructure for insurance underwriting, automated investment services, and fintech solutions regulated by the Financial Regulatory Authority.",
+    "meaning_ar": "يؤسس الابتكار التكنولوجي في الأنشطة المالية غير المصرفية بنية تحتية رقمية لعمليات الاكتتاب التأميني، وإدارة الاستثمارات آلياً، وتطبيقات التكنولوجيا المالية الخاضعة لرقابة الهيئة العامة للرقابة المالية."
   },
   "محمود عصمت: الربط الكهربايي مع ايطاليا يعزز مكانه مصر كمركز اقليمي للطاقه": {
     "meaning": "Cross-border electricity interconnection infrastructure links the national power transmission grid with European markets, establishing bilateral transmission capacity for energy trade.",
