@@ -175,6 +175,10 @@
     "meaning": "The outsourcing sector shifts operational focus from basic customer support and business process outsourcing (BPO) to specialized knowledge process outsourcing (KPO), software engineering, and high-complexity technical services. This structural transition relies on skilled labor to deliver export-oriented digital and professional services.",
     "meaning_ar": "يتحول قطاع التعهيد من خدمات الدعم الفني وخدمة العملاء التقليدية إلى مجالات التعهيد القائم على المعرفة وهندسة البرمجيات والخدمات التقنية المتخصصة. يعتمد هذا النموذج التشغيلي على الكفاءات المؤهلة لتقديم خدمات تصديرية ورقمية ذات تعقيد فني أعلى."
   },
+  "egypt seeks deeper aiib partnership to fund climate resilient infrastructure": {
+    "meaning": "The framework secures multilateral concessional financing and credit facilities from the Asian Infrastructure Investment Bank (AIIB) to direct capital toward domestic green infrastructure and public works projects.",
+    "meaning_ar": "يوفر هذا الإطار تمويلات ميسرة وتسهيلات ائتمانية متعددة الأطراف من البنك الآسيوي للاستثمار في البنية التحتية لتوجيه رؤوس الأموال نحو مشروعات البنية التحتية الخضراء والأشغال العامة المحلية."
+  },
   "el sisi directs state bodies to adopt greening cairo project": {
     "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
     "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
@@ -298,6 +302,10 @@
   "«ميناء سفاجا» يستقبل 30 الف طن الومنيوم قادمه من اندونيسيا": {
     "meaning": "The arrival of 30,000 tons of imported aluminum at Safaga Port supplies the domestic industrial and metallurgical manufacturing sector with raw material inventory through maritime freight channels.",
     "meaning_ar": "يمثل استقبال ميناء سفاجا لشحنة تبلغ 30 ألف طن من الألومنيوم المستورد إمداداً تشغيلياً لقطاع الصناعات التحويلية والمعدنية المحلي بالمواد الخام عبر خطوط الشحن البحري."
+  },
+  "ابو ظبي الاسلامي مصر يفتتح مدرسه بالنزهه الجديده": {
+    "meaning": "The bank deploys capital into community infrastructure development under its corporate social responsibility (CSR) framework, allocating non-operating expenditures to educational assets.",
+    "meaning_ar": "يوجه البنك جزءاً من مخصصات المسؤولية المجتمعية للشركات نحو تطوير البنية التحتية التعليمية، وهو ما يمثل توزيعاً للنفقات غير التشغيلية على مشروعات التنمية المجتمعية."
   },
   "اتحاد منتجي الدواجن: سعر كيلو الفراخ ب65 جنيه وطبق البيض ب60 تسليم المزرعه": {
     "meaning": "The Poultry Producers Association sets baseline wholesale farm-gate prices for live chicken at EGP 65 per kilogram and egg crates at EGP 60, establishing the direct production-level cost basis before intermediary distribution, transport, and retail markups are applied across the supply chain.",
@@ -639,6 +647,10 @@
     "meaning": "The project allocates public infrastructure expenditures directly to the landscaping, agricultural supply, and urban contracting sectors.",
     "meaning_ar": "يوجّه المشروع مخصصات الإنفاق على البنية التحتية العامة مباشرة نحو قطاعات التشجير، والتوريدات الزراعية، والمقاولات العامة."
   },
+  "الحكومه تبدا تنفيذ خطه “تخضير القاهره” بتشجير الطريق الدايري": {
+    "meaning": "This initiative executes state-funded public works contracts for landscaping, municipal tree supply, and irrigation infrastructure along major transport corridors.",
+    "meaning_ar": "تفعّل هذه المبادرة عقود أشغال عامة ممولة حكومياً لتوريد الأشجار وأعمال التشجير وتمديد شبكات الري على طول المحاور المرورية الرئيسية."
+  },
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
@@ -818,6 +830,10 @@
   "المركزي: صعود السيوله المحليه M2 لتسجل 15.49 تريليون جنيه بنهايه يوليو 2026": {
     "meaning": "The expansion in M2 money supply represents an increase in total currency in circulation outside the banking sector alongside local and foreign currency demand and time deposits. This reflects the current volume of total liquid monetary assets managed within the domestic banking system.",
     "meaning_ar": "يمثل ارتفاع المعروض النقدي (M2) زيادة في إجمالي النقد المتداول خارج القطاع المصرفي بالإضافة إلى الودائع الجارية وغير الجارية بالعملتين المحلية والأجنبية، مما يعكس الحجم الكلي للأصول النقدية السائلة المدارة داخل الجهاز المصرفي."
+  },
+  "الموسسات الدوليه ترصد تحسن اداء السندات المصريه": {
+    "meaning": "An improvement in sovereign bond performance reflects rising secondary market prices and declining yields, which narrows the state's sovereign credit spread against international benchmarks.",
+    "meaning_ar": "يعكس تحسن أداء السندات السيادية ارتفاع أسعار تداولها في السوق الثانوية وتراجع عوائدها، مما يقلص الفارق بين عائد الدين السيادي والمؤشرات القياسية الدولية."
   },
   "النفط يتجه لمكاسب اسبوعيه بفعل توترات ايران": {
     "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
@@ -1035,6 +1051,10 @@
   "تركيا تعيد احياء خطه خصخصه جسرين شهيرين وطرق سريعه": {
     "meaning": "Infrastructure privatization transfers the operational management, maintenance, and toll collection rights of state-owned bridges and highways to private concessionaires in exchange for concession fees paid to the government.",
     "meaning_ar": "تنقل خصخصة البنية التحتية حقوق الإدارة التشغيلية والصيانة وتحصيل رسوم المرور الخاصة بالجسور والطرق السريعة المملوكة للدولة إلى شركات امتياز من القطاع الخاص مقابل رسوم امتياز تُسدد للحكومة."
+  },
+  "تسارع نمو اقتصاد منطقه اليورو خلال الربع الثاني من 2026": {
+    "meaning": "An acceleration in Eurozone GDP growth represents higher aggregate output and industrial activity across member states, which defines baseline external trade and foreign currency demand for trade partners, including Egyptian export and import sectors.",
+    "meaning_ar": "يمثل تسارع نمو الناتج المحلي الإجمالي لمنطقة اليورو ارتفاعاً في إجمالي الناتج والنشاط الصناعي عبر الدول الأعضاء، وهو ما يحدد حركة التجارة الخارجية وحجم تدفقات النقد الأجنبي للشركاء التجاريين، بما في ذلك قطاعات التصدير والاستيراد في مصر."
   },
   "تشديد الدخول والخروج ينذر بعوده طوابير الانتظار علي حدود الاتحاد الاوروبي": {
     "meaning": "Tighter border controls introduce operational processing delays at European Union entry and exit points, extending transit times for cross-border logistics and freight transport.",
@@ -1388,6 +1408,10 @@
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.63%": {
     "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
     "meaning_ar": "يوضح الخبر تسجيل جلسة التداول الصباحية تفوقاً في أحجام عروض الشراء على عروض البيع عبر الأسهم المقيدة، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.63% بالتوازي مع صعود باقي مؤشرات السوق."
+  },
+  "صفقه النفط بين فنزويلا وامريكا قد تخالف القانون": {
+    "meaning": "Legal scrutiny surrounding bilateral crude supply agreements introduces regulatory risks that affect the compliance procedures of involved energy companies and the operational flow of cross-border oil shipments.",
+    "meaning_ar": "يفرض التدقيق القانوني حول اتفاقيات توريد النفط الخام الثنائية مخاطر تنظيمية تؤثر على إجراءات الامتثال لشركات الطاقة المعنية والتدفق التشغيلي لشحنات النفط عبر الحدود."
   },
   "صناديق الاسهم الامريكيه تشهد سحوبات للاسبوع الثاني علي التوالي": {
     "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
