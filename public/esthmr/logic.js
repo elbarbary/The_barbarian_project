@@ -1,4 +1,7 @@
 import { explorer } from './explorer.js';
+import { marketStory } from './market-story.js';
+import { pairsExplorer } from './pairs.js';
+import { valuationExplorer } from './valuation.js';
 /* The screens, ported from the Claude Design canvas.
  *
  * Everything below `class Component` is the design's own logic, carried over
@@ -1406,7 +1409,9 @@ export class Component extends Base {
       watchlist:'M12 3.6 14.6 9l5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.8 9.4 9z',
       // Tiles of unequal size, which is the whole idea of the screen.
       search:'M10.6 3.8a6.8 6.8 0 1 0 0 13.6 6.8 6.8 0 0 0 0-13.6M15.6 15.6 20.4 20.4',
-      heat:'M3.6 3.6h9.6v7.2H3.6zM15 3.6h5.4v4.2H15zM15 9.6h5.4v10.8H15zM3.6 12.6h5.4v7.8H3.6zM10.8 12.6h2.4v7.8h-2.4z'
+      heat:'M3.6 3.6h9.6v7.2H3.6zM15 3.6h5.4v4.2H15zM15 9.6h5.4v10.8H15zM3.6 12.6h5.4v7.8H3.6zM10.8 12.6h2.4v7.8h-2.4z',
+      pairs:'M3 17l6-6 4 4 8-8M3 7l6 6 4-4 8 8',
+      valuation:'M3 3v18h18M7 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm7-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm3 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'
     };
 
     // market table
@@ -3221,6 +3226,8 @@ export class Component extends Base {
       ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
+      ['valuation', ar?'التقييم والديون':'Valuation & Debt', ''],
+      ['pairs', ar?'مقارنة الأزواج':'Pairs & Spreads', ''],
       // "Calendar" described the grid; what a reader comes here for is the
       // filings, so it is named for them.
       ['calendar', ar?'الإفصاحات':'Disclosures', ''],
@@ -3251,7 +3258,7 @@ export class Component extends Base {
     // Organize by the reader's task, keeping every existing screen reachable.
     const groups = [
       { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home'] },
-      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'company', 'investors', 'exchange'] },
+      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'company', 'investors', 'exchange'] },
       { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
       { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
       { id: 'tools', label: ar ? 'الأدوات' : 'Tools', screens: ['tools'] },
@@ -3266,7 +3273,28 @@ export class Component extends Base {
       }));
 
     const marketExplorer = explorer(this, D.companies, ar);
+    const pairsData = pairsExplorer(this, D, ar, React);
+    const valData = valuationExplorer(this, D, ar, React);
+    const storyPeriod = st.storyPeriod || 'week';
+    const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
+    const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
+      allowText:text=>!DIRECTIVE.test(text)});
+    story.periods = [['today',ar?'اليوم':'Today'],['week',ar?'هذا الأسبوع':'This week'],['month',ar?'هذا الشهر':'This month']]
+      .map(([id,label])=>({label,selected:storyPeriod===id,go:()=>this.setState({storyPeriod:id,storyShown:12})}));
+    story.kinds = [['all',ar?'معاً':'Together'],['news',ar?'الأخبار':'News'],['filing',ar?'الإفصاحات':'Filings']]
+      .map(([id,label])=>({label,selected:storyKind===id,go:()=>this.setState({storyKind:id,storyShown:12,
+        screen:st.screen==='calendar'&&id!=='filing'?'crossings':st.screen})}));
+    story.cards = story.cards.map(c=>({...c,go:()=>this.setState({screen:'company',ticker:c.ticker})}));
+    story.preview = story.cards.slice(0,3);
+    story.shown = story.cards.slice(0,st.storyShown||12);
+    story.hasMore = story.cards.length>story.shown.length;
+    story.more = ()=>this.setState({storyShown:(st.storyShown||12)+12});
+    story.showMoreLabel = ar?'اعرض شركات أكثر':'Show more companies';
+    story.open = ()=>this.setState({screen:'crossings',storyKind:'all'});
+    story.openFilings = ()=>this.setState({screen:'calendar',storyKind:'filing'});
+    story.range = story.from+' — '+story.to;
     const out = {
+      story, showStoryHub:!st.dataLoading&&!st.dataError&&(st.screen==='crossings'||st.screen==='calendar'),
       L, theme: st.theme, dir: ar ? 'rtl' : 'ltr',
       primaryNav, secondaryNav: secondaryNav.length > 1 ? secondaryNav : [],
       navigationLabel: ar ? 'التنقل الرئيسي' : 'Main navigation',
@@ -3285,6 +3313,8 @@ export class Component extends Base {
         })),
       quickActions: [
         {label: ar ? 'استكشف الشركات' : 'Explore companies', note: ar ? 'أرقام، رسوم، وإفصاحات' : 'Figures, charts & filings', icon: ICON.market, go: this.go('market')},
+        {label: ar ? 'خريطة التقييم والديون' : 'Valuation & Debt Map', note: ar ? 'مكررات الربحية مع عبء الديون' : 'P/E multiples factored by debt', icon: ICON.valuation, go: this.go('valuation')},
+        {label: ar ? 'مقارنة الأزواج' : 'Pairs & Spreads', note: ar ? 'معايرة الأسهم المتنافسة' : 'Normalize competing peers', icon: ICON.pairs, go: this.go('pairs')},
         {label: ar ? 'قائمة متابعتك' : 'Your watchlist', note: ar ? 'شركاتك في مكان واحد' : 'Your companies, together', icon: ICON.watchlist, go: this.go('watchlist')},
       ],
       openHeat: this.go('heat'),
@@ -3811,6 +3841,9 @@ export class Component extends Base {
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
       isWatchlist: st.screen === 'watchlist', isTools: st.screen === 'tools',
       goTools: this.go('tools'),
+      isPairs: st.screen === 'pairs', isValuation: st.screen === 'valuation',
+      pairsData, valData,
+      goPairs: this.go('pairs'), goValuation: this.go('valuation'),
       isHeat: st.screen === 'heat',
       heatTabs, heatBlocks, heatTiles,
       heatZoomed: Boolean(heatZoom),

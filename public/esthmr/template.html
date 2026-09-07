@@ -68,6 +68,27 @@
   <sc-if value="{{ extrasError }}"><div class="feed-status" role="status">{{ extrasErrorLabel }}<button type="button" onClick="{{ retryData }}">{{ retryLabel }}</button></div></sc-if>
   <sc-if value="{{ watchStatus }}"><div class="watch-save-status" role="status" data-status="{{ watchStatus }}">{{ watchStatusLabel }}<sc-if value="{{ watchSaveError }}"><button type="button" onClick="{{ retryWatch }}">{{ retryLabel }}</button></sc-if></div></sc-if>
   <!-- ══ HOME ══ -->
+  <sc-if value="{{ showStoryHub }}">
+    <section class="story-hub">
+      <header class="island-heading"><div><h2>{{ story.title }}</h2><p>{{ story.subtitle }}</p></div></header>
+      <div class="story-periods"><sc-for list="{{ story.periods }}" as="p"><button type="button" aria-pressed="{{ p.selected }}" onClick="{{ p.go }}">{{ p.label }}</button></sc-for><small dir="ltr">{{ story.range }}</small></div>
+      <div class="story-totals"><span><strong>{{ story.news }}</strong>{{ story.newsLabel }}</span><i aria-hidden="true">＋</i><span><strong>{{ story.filings }}</strong>{{ story.filingLabel }}</span><i aria-hidden="true">↔</i><span><strong>{{ story.linked }}</strong>{{ story.linkedLabel }}</span></div>
+      <div class="story-periods story-kinds"><sc-for list="{{ story.kinds }}" as="k"><button type="button" aria-pressed="{{ k.selected }}" onClick="{{ k.go }}">{{ k.label }}</button></sc-for></div>
+      <p class="story-foot">{{ story.relationNote }}</p>
+      <div class="story-company-grid"><sc-for list="{{ story.shown }}" as="c"><article class="story-company">
+        <header><button type="button" class="story-company-open" onClick="{{ c.go }}"><span class="story-ticker">{{ c.ticker }}</span><strong>{{ c.name }}</strong><span aria-hidden="true">↗</span></button><small>{{ c.date }}</small></header>
+        <p class="story-relation">{{ c.relation }}</p>
+        <div class="story-source-count"><span>{{ c.news }} {{ story.newsLabel }}</span><span>{{ c.filings }} {{ story.filingLabel }}</span></div>
+        <sc-if value="{{ c.hasSession }}"><p class="story-session">{{ c.session }}</p></sc-if>
+        <sc-for list="{{ c.preview }}" as="e"><div class="story-event"><span class="story-event-kind" style="color:{{ e.color }}">{{ e.label }} · {{ e.date }}</span><sc-if value="{{ e.hasLink }}"><a href="{{ e.href }}" target="_blank" rel="noopener">{{ e.title }} ↗</a></sc-if><sc-if value="{{ e.noLink }}"><span>{{ e.title }}</span></sc-if><small>{{ e.source }}</small></div></sc-for>
+        <sc-if value="{{ c.hasMore }}"><details><summary>{{ story.moreLabel }}</summary><sc-for list="{{ c.evidence }}" as="e"><div class="story-event"><span class="story-event-kind">{{ e.label }} · {{ e.date }}</span><sc-if value="{{ e.hasLink }}"><a href="{{ e.href }}" target="_blank" rel="noopener">{{ e.title }} ↗</a></sc-if><sc-if value="{{ e.noLink }}"><span>{{ e.title }}</span></sc-if><small>{{ e.source }}</small></div></sc-for></details></sc-if>
+      </article></sc-for></div>
+      <sc-if value="{{ story.hasMore }}"><button type="button" class="measure-open" onClick="{{ story.more }}">{{ story.showMoreLabel }}</button></sc-if>
+      <sc-if value="{{ story.general.length }}"><details class="story-general"><summary>{{ story.generalLabel }}</summary><sc-for list="{{ story.general }}" as="e"><div class="story-event"><span class="story-event-kind">{{ e.label }} · {{ e.date }}</span><sc-if value="{{ e.hasLink }}"><a href="{{ e.href }}" target="_blank" rel="noopener">{{ e.title }} ↗</a></sc-if><sc-if value="{{ e.noLink }}"><span>{{ e.title }}</span></sc-if><small>{{ e.source }}</small></div></sc-for></details></sc-if>
+      <sc-if value="{{ story.empty }}"><p class="story-empty">{{ story.emptyLabel }}</p></sc-if>
+      <p class="story-foot">{{ story.coverage }}</p>
+    </section>
+  </sc-if>
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:20px">
       <header class="journal-intro">
@@ -582,6 +603,7 @@
         <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">{{ feedCount }}</div>
       </div>
 
+      <button type="button" class="story-news-entry" onClick="{{ story.open }}"><strong>{{ story.title }}</strong><span>{{ story.openLabel }} ↗</span></button>
       <!-- A grid, not a column. Forty stories stacked one to a row is a
            scroll; the same forty three across is a page you can scan, and a
            headline is short enough that the extra width was going to the
@@ -665,6 +687,7 @@
        one after the other in a single column, the second reads as a preamble
        to the first. -->
   <sc-if value="{{ isCrossings }}">
+    <details class="story-archive"><summary>{{ story.legacyLabel }}</summary>
     <div class="om-scr screen-crossings" style="display:flex;flex-direction:column;gap:16px">
       <header class="context-intro"><p>{{ dotsIntro }}</p><div class="evidence-path"><sc-for list="{{ dotsSteps }}" as="step"><span>{{ step }}</span></sc-for></div></header>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0">
@@ -883,6 +906,7 @@
         </section>
       </sc-if>
     </div>
+    </details>
   </sc-if>
 
   <!-- ══ MARKET ══ -->
@@ -1989,9 +2013,10 @@
   <sc-if value="{{ isCalendar }}">
     <sc-if value="{{ archiveLoading }}"><div class="feed-status" role="status">{{ archiveLoadingLabel }}</div></sc-if>
     <sc-if value="{{ archiveError }}"><div class="feed-status" role="status">{{ archiveErrorLabel }}<button type="button" onClick="{{ retryArchive }}">{{ retryLabel }}</button></div></sc-if>
+    <details class="story-archive"><summary>{{ story.calendarLabel }}</summary>
     <div class="om-scr screen-calendar" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
-        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ L.calendarTitle }}</h1>
+        <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ story.calendarLabel }}</h1>
         <div style="display:flex;gap:3px;padding:4px;border-radius:14px;background:var(--glass);backdrop-filter:blur(18px);border:1px solid var(--edge);box-shadow:var(--shPill)">
           <sc-for list="{{ months }}" as="m" hint-placeholder-count="4">
             <div onClick="{{ m.go }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:7px 13px;border-radius:11px;color:{{ m.color }};background:{{ m.bg }};box-shadow:{{ m.sh }}">{{ m.label }}<span style="color:var(--faint);margin-inline-start:7px;font-size:9.5px;opacity:.8">· {{ m.count }}</span></div>
@@ -2145,6 +2170,7 @@
         </div>
       </div>
     </div>
+    </details>
   </sc-if>
 
   <!-- ══ EXCHANGE ══ -->
@@ -2439,6 +2465,212 @@
   <div style="padding:18px 14px;color:var(--faint);font-size:13px">{{ L.nothingYet }}</div>
 </sc-if>
 
+    </div>
+  </sc-if>
+
+  <!-- ══ PAIRS EXPLORER ══ -->
+  <sc-if value="{{ isPairs }}">
+    <div class="om-scr screen-pairs" style="display:flex;flex-direction:column;gap:20px">
+      <!-- Title row -->
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0;flex-wrap:wrap">
+        <div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">ESTHMR · MARKET INEFFICIENCY</div>
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:46px;font-weight:600;letter-spacing:-.04em;line-height:1.05;margin:0">{{ pairsData.title }}</h1>
+          <p style="margin:10px 0 0;font-size:14.5px;color:var(--t2);line-height:1.6;max-width:76ch;text-wrap:pretty">{{ pairsData.lead }}</p>
+        </div>
+      </div>
+
+      <!-- Main Interactive Container -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px;position:relative">
+        <!-- Pair Selector Pills -->
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+          <sc-for list="{{ pairsData.pairs }}" as="p">
+            <button type="button" onClick="{{ p.go }}" style="cursor:pointer;padding:8px 14px;border-radius:999px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11.5px;border:1px solid var(--rule);background:{{ p.selected ? 'var(--ink)' : 'var(--sunk)' }};color:{{ p.selected ? 'var(--surface)' : 'var(--t2)' }};font-weight:{{ p.selected ? '600' : '400' }};transition:all .15s">{{ p.label }}</button>
+          </sc-for>
+        </div>
+
+        <!-- Controls Row: Normalization Modes + Time Horizon -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-inline-end:6px">{{ pairsData.normalizeLabel }}</span>
+            <sc-for list="{{ pairsData.normModes }}" as="nm">
+              <button type="button" onClick="{{ nm.go }}" style="cursor:pointer;padding:6px 13px;border-radius:12px;font-size:12px;font-weight:{{ nm.selected ? '600' : '500' }};border:1px solid {{ nm.selected ? 'var(--accent)' : 'var(--edgeIn)' }};background:{{ nm.selected ? 'var(--surface)' : 'transparent' }};color:{{ nm.selected ? 'var(--accent)' : 'var(--t2)' }};box-shadow:{{ nm.selected ? 'var(--shPill)' : 'none' }}">{{ nm.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:4px">
+            <sc-for list="{{ pairsData.ranges }}" as="rg">
+              <button type="button" onClick="{{ rg.go }}" style="cursor:pointer;padding:5px 11px;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:{{ rg.selected ? '600' : '400' }};border:1px solid {{ rg.selected ? 'var(--rule2)' : 'transparent' }};background:{{ rg.selected ? 'var(--surface)' : 'transparent' }};color:{{ rg.selected ? 'var(--ink)' : 'var(--faint)' }}">{{ rg.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Metric badges banner -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px">
+          <div style="padding:14px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ink)">{{ pairsData.t1 }}</span>
+              <span style="font-size:12px;color:var(--t2)">{{ pairsData.name1 }}</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--accent);margin-top:6px">{{ pairsData.curr1 }}</div>
+          </div>
+
+          <div style="padding:14px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:10px;height:10px;border-radius:50%;background:var(--down);display:inline-block"></span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ink)">{{ pairsData.t2 }}</span>
+              <span style="font-size:12px;color:var(--t2)">{{ pairsData.name2 }}</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--down);margin-top:6px">{{ pairsData.curr2 }}</div>
+          </div>
+
+          <div style="padding:14px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)">{{ pairsData.ratioCardLabel }}</div>
+            <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:600;color:var(--ink)">{{ pairsData.ratioText }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--t2)">{{ pairsData.zScoreText }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div style="position:relative;background:var(--surface);border-radius:18px;border:1px solid var(--edgeIn);padding:16px;overflow:hidden">
+          {{ pairsData.chartNode }}
+        </div>
+        <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px;line-height:1.5">{{ pairsData.normExplain }}</div>
+      </section>
+
+      <!-- Editorial Insight & Scorecard Side-by-Side -->
+      <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,1fr);gap:18px;align-items:start">
+        <!-- Editorial Insight Card -->
+        <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
+            <span style="font-size:20px;line-height:1">💡</span>
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:600;margin:0;color:var(--ink)">{{ pairsData.insightTitle }}</h2>
+          </div>
+          <p style="font-size:14px;line-height:1.75;color:var(--t2);margin:0;text-wrap:pretty">{{ pairsData.insight }}</p>
+        </section>
+
+        <!-- Comparative Fundamentals Scorecard -->
+        <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;margin:0;color:var(--ink)">{{ pairsData.scorecardTitle }}</h2>
+            <div style="display:flex;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600">
+              <span style="color:var(--accent)">{{ pairsData.t1 }}</span>
+              <span style="color:var(--down)">{{ pairsData.t2 }}</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ pairsData.scoreRows }}" as="row">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:7px 10px;border-radius:10px;background:{{ row.highlight ? 'var(--sunk)' : 'transparent' }};border:1px solid {{ row.highlight ? 'var(--edgeIn)' : 'transparent' }}">
+                <span style="font-size:12.5px;color:{{ row.highlight ? 'var(--ink)' : 'var(--t2)' }};font-weight:{{ row.highlight ? '600' : '400' }}">{{ row.label }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--accent);min-width:60px;text-align:end">{{ row.v1 }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--down);min-width:60px;text-align:end">{{ row.v2 }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ══ VALUATION & DEBT MAP ══ -->
+  <sc-if value="{{ isValuation }}">
+    <div class="om-scr screen-valuation" style="display:flex;flex-direction:column;gap:20px">
+      <!-- Title row -->
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:6px 8px 0;flex-wrap:wrap">
+        <div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">ESTHMR · ENTERPRISE VALUATION & LEVERAGE</div>
+          <h1 style="font-family:'Bricolage Grotesque',serif;font-size:46px;font-weight:600;letter-spacing:-.04em;line-height:1.05;margin:0">{{ valData.title }}</h1>
+          <p style="margin:10px 0 0;font-size:14.5px;color:var(--t2);line-height:1.6;max-width:76ch;text-wrap:pretty">{{ valData.lead }}</p>
+        </div>
+      </div>
+
+      <!-- Main Visual Container -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px;position:relative">
+        <!-- Sector Filter Pills -->
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:18px">
+          <sc-for list="{{ valData.sectors }}" as="sec">
+            <button type="button" onClick="{{ sec.go }}" style="cursor:pointer;padding:7px 13px;border-radius:999px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11.5px;border:1px solid var(--rule);background:{{ sec.selected ? 'var(--ink)' : 'var(--sunk)' }};color:{{ sec.selected ? 'var(--surface)' : 'var(--t2)' }};font-weight:{{ sec.selected ? '600' : '400' }};transition:all .15s">{{ sec.label }}</button>
+          </sc-for>
+        </div>
+
+        <!-- View Switcher & Quadrant Counters -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 18px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <sc-for list="{{ valData.views }}" as="vw">
+              <button type="button" onClick="{{ vw.go }}" style="cursor:pointer;padding:6px 13px;border-radius:12px;font-size:12px;font-weight:{{ vw.selected ? '600' : '500' }};border:1px solid {{ vw.selected ? 'var(--accent)' : 'var(--edgeIn)' }};background:{{ vw.selected ? 'var(--surface)' : 'transparent' }};color:{{ vw.selected ? 'var(--accent)' : 'var(--t2)' }};box-shadow:{{ vw.selected ? 'var(--shPill)' : 'none' }}">{{ vw.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
+            <span style="color:var(--up);display:flex;align-items:center;gap:4px">● {{ valData.countSafeValue }} {{ valData.safeLabel }}</span>
+            <span style="color:#E69F00;display:flex;align-items:center;gap:4px">● {{ valData.countLeveragedValue }} {{ valData.leveragedLabel }}</span>
+            <span style="color:var(--iris);display:flex;align-items:center;gap:4px">● {{ valData.countQualityClean }} {{ valData.qualityLabel }}</span>
+            <span style="color:var(--down);display:flex;align-items:center;gap:4px">● {{ valData.countFragile }} {{ valData.fragileLabel }}</span>
+          </div>
+        </div>
+
+        <!-- 2D Matrix View -->
+        <sc-if value="{{ valData.isMatrix }}">
+          <div style="position:relative;background:var(--surface);border-radius:18px;border:1px solid var(--edgeIn);padding:16px;overflow:hidden">
+            {{ valData.matrixNode }}
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
+            <span>{{ valData.matrixFootnote1 }}</span>
+            <span>{{ valData.matrixFootnote2 }}</span>
+          </div>
+        </sc-if>
+
+        <!-- Debt-Adjusted Enterprise Multiple Ranking View -->
+        <sc-if value="{{ valData.isRanking }}">
+          <div dir="ltr" style="position:relative;background:var(--surface);border-radius:18px;border:1px solid var(--edgeIn);padding:20px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch">
+            <div style="min-width:620px">
+              {{ valData.rankingNode }}
+            </div>
+          </div>
+          <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
+            {{ valData.rankingFootnote }}
+          </div>
+        </sc-if>
+      </section>
+
+      <!-- Detailed Company Cards Grid -->
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 28px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <h2 style="font-family:'Bricolage Grotesque',serif;font-size:20px;font-weight:600;margin:0;color:var(--ink)">{{ valData.companiesBreakdownTitle }}</h2>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">{{ valData.trackedCountText }}</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+          <sc-for list="{{ valData.companies }}" as="comp">
+            <div onClick="{{ comp.go }}" style="cursor:pointer;padding:16px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);transition:all .15s" style-hover="background:var(--surface);border-color:var(--accent)">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--ink)">{{ comp.ticker }}</span>
+                  <span style="font-size:11.5px;color:var(--t2);margin-inline-start:6px">{{ comp.name }}</span>
+                </div>
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;padding:3px 8px;border-radius:999px;font-weight:600;color:{{ comp.badgeColor }};background:{{ comp.badgeBg }}">{{ comp.badgeLabel }}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)">
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Base P/E</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ink);margin-top:2px">{{ comp.peText }}</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt / Eq</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ink);margin-top:2px">{{ comp.deText }}</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt-Adj Multiple</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--accent);margin-top:2px">{{ comp.peAdjText }}</div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
     </div>
   </sc-if>
 

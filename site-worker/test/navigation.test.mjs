@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readRoute, routeKey, connectNavigation } from '../../public/esthmr/navigation.js';
 
 test('all destinations round-trip and malformed routes are safe', () => {
-  for (const screen of ['home','market','company','today','investors','heat','watchlist','sectors','calendar','exchange','tools','research','crossings']) {
+  for (const screen of ['home','market','company','today','investors','heat','watchlist','sectors','calendar','exchange','tools','research','crossings','pairs','valuation']) {
     assert.equal(readRoute(routeKey({screen, ticker:'COMI', companyPanel:'financials'})).screen, screen);
   }
   assert.deepEqual(readRoute('?view=bogus&ticker=<script>&panel=wrong'),

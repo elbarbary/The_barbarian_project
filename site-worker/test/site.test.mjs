@@ -118,7 +118,7 @@ test('every screen renders in both languages and both themes', () => {
     const c = fresh(lang);
     c.setData(data.demo());
     c.state.theme = theme;
-    for (const screen of ['home','market','company','today','heat','watchlist','sectors','calendar','exchange','tools','research','investors','crossings']) {
+    for (const screen of ['home','market','company','today','heat','watchlist','sectors','calendar','exchange','tools','research','investors','crossings','pairs','valuation']) {
       c.state.screen = screen;
       const v = c.renderVals();
       assert.equal(v.theme, theme);
