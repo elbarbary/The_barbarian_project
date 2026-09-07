@@ -187,6 +187,10 @@
     "meaning": "A block trading deal involves the execution of a high-volume share transaction at a pre-arranged price via the EGX deals market. This mechanism transfers substantial equity stakes between institutional or major investors outside the standard continuous auction order book.",
     "meaning_ar": "تُمثل صفقات الحجم الكبير تنفيذ معاملات على كميات ضخمة من الأسهم بسعر متفق عليه مسبقاً عبر سوق الصفقات في البورصة المصرية. وتعمل هذه الآلية على نقل ملكية حصص كبيرة بين كبار المستثمرين خارج دفتر أوامر التداول المستمر المعتاد."
   },
+  "fertilizers and building materials prices mixed on september 7": {
+    "meaning": "Mixed price movements across fertilizers and building materials reflect divergent input costs, localized supply chain dynamics, and distinct domestic demand conditions across individual industrial commodity segments.",
+    "meaning_ar": "يعكس التباين في أسعار الأسمدة ومواد البناء اختلاف تكاليف المدخلات الإنتاجية، وديناميكيات سلاسل الإمداد، ومستويات الطلب المحلي الخاصة بكل قطاع صناعي على حدة."
+  },
   "fra and egypt post sign protocol to digitize official correspondence through bareedi": {
     "meaning": "The protocol integrates Egypt Post's Bareedi digital postal service into the Financial Regulatory Authority's operational workflow for delivering legally recognized, registered electronic notifications and correspondence to regulated non-banking financial entities.",
     "meaning_ar": "يدمج البروتوكول خدمة 'بريدي' التابعة للبريد المصري ضمن منظومة عمل الهيئة العامة للرقابة المالية لإرسال المراسلات والإخطارات الإلكترونية المسجلة ذات الحجية القانونية إلى الجهات المالية غير المصرفية الخاضعة لرقابتها."
@@ -975,6 +979,10 @@
     "meaning": "Large-cap stocks hold high weighting in market capitalization-weighted indices, so stable trading or inflows into these constituent assets balance out declines in other market segments to steady the benchmark index.",
     "meaning_ar": "تمتلك الأسهم القيادية وزناً نسبياً كبيراً في المؤشرات المرجحة بالقيمة السوقية، مما يجعل استقرار تداولاتها أو تدفق السيولة إليها موازناً لحركات التراجع في القطاعات الأخرى ليحافظ المؤشر العام على مستواه."
   },
+  "بي ان بي باريبا يرفع تقييمه لسندات منطقه اليورو الي «ايجابي»": {
+    "meaning": "An upgraded sovereign credit assessment reflects institutional reassessment of underlying debt issuance fundamentals, debt-servicing metrics, and prevailing interest rate frameworks across eurozone economies.",
+    "meaning_ar": "يعكس رفع التقييم الائتماني للسندات السيادية إعادة تقييم مؤسسية للمؤشرات الأساسية لإصدارات الديون ومعدلات خدمة الدين وأطر أسعار الفائدة السائدة عبر اقتصاديات منطقة اليورو."
+  },
   "بي بي سي: بنك انجلترا من اكبر الجهات الحافظه للذهب في العالم": {
     "meaning": "Central bank gold custody operations involve providing secure vaulting infrastructure and settlement facilities for foreign governments, official institutions, and bullion market participants, anchoring liquidity in the international gold clearing system.",
     "meaning_ar": "تشمل عمليات حفظ الذهب في البنوك المركزية توفير بنية تحتية آمنة للخزائن وخدمات تسوية للحكومات والمؤسسات الرسمية والمتعاملين في سوق السبائك، مما يمثل ركيزة لسيولة نظام المقاصة الدولي للذهب."
@@ -1079,6 +1087,10 @@
   "تشديد الدخول والخروج ينذر بعوده طوابير الانتظار علي حدود الاتحاد الاوروبي": {
     "meaning": "Tighter border controls introduce operational processing delays at European Union entry and exit points, extending transit times for cross-border logistics and freight transport.",
     "meaning_ar": "يؤدي تشديد إجراءات التفتيش على نقاط الدخول والخروج في الاتحاد الأوروبي إلى تأخيرات تشغيلية في المعابر الحدودية، مما يطيل المدد الزمنية لعمليات الشحن ونقل البضائع."
+  },
+  "تضاعف مبيعات السيارات الكهرباييه في روسيا هذا الصيف": {
+    "meaning": "A doubling of electric vehicle sales reflects an increased penetration rate within the automotive retail sector, shifting sales volume and dealer inventory turnover toward alternative-fuel models and charging infrastructure.",
+    "meaning_ar": "يعكس تضاعف مبيعات السيارات الكهربائية ارتفاع معدل انتشار هذه المركبات في قطاع تجارة السيارات، مع تحول أحجام المبيعات ومعدلات دوران المخزون نحو طرازات الوقود البديل ومعدات البنية التحتية للشحن."
   },
   "تضم سندات باندا.. مجلس الوزراء: طرح سندات دوليه باجمالي 3 مليارات دولار خلال العام المالي الحالي": {
     "meaning": "The government issues foreign-currency debt instruments, including Chinese renminbi-denominated Panda bonds, to secure $3 billion in external budget financing during the current fiscal year.",
@@ -1235,6 +1247,10 @@
   "رسوم الانتقالات الصيفيه لنجوم كاس العالم تبلغ 3.3 مليار دولار": {
     "meaning": "This reflects substantial capital circulation and liquidity deployment within the global sports entertainment industry, directly impacting football clubs' revenue streams, intangible asset valuations, and player-related operational expenditures.",
     "meaning_ar": "يعكس ذلك تدفقات رأسمالية وسيولة نقدية ضخمة داخل قطاع الترفيه الرياضي العالمي، مما يؤثر بشكل مباشر على إيرادات أندية كرة القدم، وتقييم الأصول غير الملموسة، والمصروفات التشغيلية المرتبطة بعقود اللاعبين."
+  },
+  "رشا عبد العال: نستعد للتوسع في استخدام الذكاء الاصطناعي لتطوير الخدمات الضريبيه": {
+    "meaning": "The Egyptian Tax Authority integrates artificial intelligence tools into its administrative workflows, automating tax assessment, compliance monitoring, and taxpayer service operations.",
+    "meaning_ar": "تُدرج مصلحة الضرائب المصرية أدوات الذكاء الاصطناعي ضمن منظومة عملها الإدارية لأتمتة عمليات الفحص الضريبي، ومتابعة الالتزام، وتقديم الخدمات للممولين."
   },
   "روسنفت: الصين ساهمت في استقرار اسواق النفط العالميه خلال ازمه هرمز": {
     "meaning": "Large-scale strategic petroleum reserves and diversified import logistics in major consumer nations absorb maritime transit disruptions and maintain equilibrium in physical crude supply chains.",
@@ -1448,6 +1464,10 @@
   "ضربات متبادله بين الولايات المتحده وايران تستهدف ناقلات نفط وسفنا حربيه": {
     "meaning": "Military conflicts targeting maritime vessels disrupt commercial shipping lanes, raising maritime insurance premiums and altering fuel and cargo transport routes for global trade.",
     "meaning_ar": "تؤدي النزاعات العسكرية التي تستهدف السفن البحرية إلى اضطراب الممرات الملاحية التجارية، مما يرفع أقساط التأمين البحري ويغير مسارات نقل الوقود والبضائع للتجارة العالمية."
+  },
+  "طارق الهوبي : التحول الرقمي ينتقل الي منظومه ضريبيه اكثر شفافيه وعداله": {
+    "meaning": "Digital transformation in the tax administration operates through electronic invoicing, automated filing systems, and integrated transaction data to track commercial activities across the market.",
+    "meaning_ar": "يعتمد التحول الرقمي في الإدارة الضريبية على الفاتورة الإلكترونية، وأنظمة الإقرار المميكنة، والربط المباشر لبيانات المعاملات لتتبع الأنشطة التجارية في السوق."
   },
   "ظاهره “ال نينيو” تهدد انتاج الشاي ومعيشه الالاف من سكان نيلجيري الهنديه": {
     "meaning": "El Niño weather patterns create climate disruptions that alter agricultural yields in primary tea-producing regions like India's Nilgiris, directly affecting raw material supply volumes in global commodity markets.",
