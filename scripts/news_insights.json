@@ -383,6 +383,10 @@
     "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
     "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
   },
+  "اسعار الخضروات والفاكهه والطماطم والجوافه اليوم الاثنين 7-9-2026": {
+    "meaning": "Daily price tracking of fresh produce reflects spot supply and demand balances in domestic wholesale and retail agricultural markets, which directly input into the food and non-alcoholic beverages basket of the headline consumer price index (CPI).",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار المحاصيل الزراعية توازنات العرض والطلب الفورية في أسواق الجملة والتجزئة المحلية، وتدخل هذه الأسعار مباشرة في حساب بند الأغذية والمشروبات المكون للرقم القياسي لأسعار المستهلكين."
+  },
   "اسعار الدواجن اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect the prevailing spot rates determined by feed input costs, farm-gate supply levels, and direct consumer distribution channels in the domestic market.",
     "meaning_ar": "تعكس تحديثات أسعار الدواجن اليومية الأسعار الفورية السائدة المحددة بتكاليف الأعلاف، وحجم المعروض من المزارع، وقنوات التوزيع للمستهلك في السوق المحلي."
@@ -932,6 +936,10 @@
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
   },
+  "تراجع الانتاج الصناعي في المانيا باكبر وتيره في عام": {
+    "meaning": "Industrial output data tracks the physical volume of goods produced by factories, mines, and utilities, with a contraction indicating lower aggregate manufacturing activity in Europe's largest economy.",
+    "meaning_ar": "ترصد بيانات الإنتاج الصناعي الحجم الفعلي للسلع المنتجة في قطاعات المصانع والتعدين والمرافق، ويشير انكماشها إلى انخفاض إجمالي النشاط التصنيعي في أكبر اقتصاد أوروبي."
+  },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
@@ -1393,6 +1401,10 @@
     "meaning": "The second issuance of a fixed-income fund defines the total capital value of newly offered units deployed into debt securities, such as treasury bills, sovereign bonds, and corporate debt instruments.",
     "meaning_ar": "يحدد الإصدار الثاني لصندوق الدخل الثابت القيمة الإجمالية للوثائق الجديدة المطروحة لتوجيه السيولة المجمعة نحو أدوات الدين مثل أذون الخزانة والسندات الحكومية وسندات الشركات."
   },
+  "كريتيف انفستمنتس تختتم جولتها التاسيسيه بالتزامات اجماليه اوليه 20 مليون دولار": {
+    "meaning": "Closing a founding round secures formal capital commitments from initial partners, expanding the company's equity base and establishing the liquid funds available for operational deployment.",
+    "meaning_ar": "يُمثل إغلاق الجولة التأسيسية تأمين التزامات رأسمالية من الشركاء الأوائل، مما يرفع قاعدة حقوق الملكية لدى الشركة ويُوفر سيولة نقدية لتنفيذ خطط العمل وتوظيف الأموال."
+  },
   "كمال الدسوقي: القطاع الخاص حجر الزاويه في تنفيذ برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs rely on private sector enterprises for capital expenditure, industrial production capacity, and employment allocation alongside state-led structural reforms.",
     "meaning_ar": "تعتمد برامج التحول الاقتصادي على شركات القطاع الخاص في الإنفاق الرأسمالي، وتوفير الطاقة الإنتاجية الصناعية، وتوزيع العمالة بالتوازي مع الإصلاحات الهيكلية الحكومية."
@@ -1756,6 +1768,10 @@
   "​الرقابه الماليه تعتمد اضافه نشاط “بيع الطاقه الكهرباييه ل”فيركيم”": {
     "meaning": "Regulatory approval allows the company to amend its corporate purpose to include the commercial supply and distribution of electricity, formally integrating power generation and distribution into its authorized operating activities.",
     "meaning_ar": "تتيح الموافقة الرقابية للشركة تعديل غرضها المؤسسي لإدراج نشاط بيع وتوزيع الطاقة الكهربائية، مما يدمج عمليات توليد وتوريد الكهرباء ضمن أنشطتها التشغيلية المرخصة رسمياً."
+  },
+  "“ADIB-Egypt” يفتتح مدرسه “مصرف ابو ظبي الاسلامي بالنزهه الجديده” عقب تطويرها": {
+    "meaning": "The bank allocates non-operating capital to corporate social responsibility (CSR) programs, directing funds toward public education infrastructure and community development projects.",
+    "meaning_ar": "يوجه البنك مخصصات مالية من ميزانية المسؤولية المجتمعية لتطوير البنية التحتية للمدارس الحكومية ومشاريع التنمية المجتمعية."
   },
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
