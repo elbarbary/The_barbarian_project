@@ -790,3 +790,85 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   }
 }
 
+/* ══ TRADING & APP FEE SIMULATOR (TOOLS SECTION) ══ */
+.tools-tab-switcher {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tools-tab-switcher > div {
+  transition: all .15s ease-out;
+}
+.tools-tab-switcher > div:hover {
+  color: var(--ink) !important;
+}
+
+.sim-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 22px 24px;
+  border-radius: 20px;
+  background: var(--sunk);
+  border: 1px solid var(--edgeIn);
+}
+
+.sim-broker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.sim-broker-card {
+  position: relative;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--edgeIn);
+  box-shadow: var(--sh);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.sim-broker-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shLift);
+  border-color: var(--rule);
+}
+.sim-broker-card.winner {
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(18, 107, 117, 0.12);
+}
+
+.sim-metric-pill {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--sunk);
+  border: 1px solid var(--rule2);
+}
+
+@media (max-width: 768px) {
+  .tools-tab-switcher {
+    width: 100% !important;
+    display: flex !important;
+  }
+  .tools-tab-switcher > div {
+    flex: 1 !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 8px 8px !important;
+    font-size: 12px !important;
+  }
+  .sim-controls-grid {
+    grid-template-columns: 1fr !important;
+    padding: 16px !important;
+  }
+  .sim-broker-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+

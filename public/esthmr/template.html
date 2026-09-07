@@ -2698,6 +2698,255 @@
         </div>
       </div>
 
+      <!-- Tools Section Tabs -->
+      <div class="tools-tab-switcher" style="display:inline-flex;align-items:center;gap:6px;padding:5px;border-radius:14px;background:var(--sunk);border:1px solid var(--rule2);align-self:flex-start;margin:2px 8px">
+        <sc-for list="{{ toolsTabs }}" as="tab">
+          <div onClick="{{ tab.go }}" style="cursor:pointer;background:{{ tab.active ? 'var(--surface)' : 'transparent' }};color:{{ tab.active ? 'var(--ink)' : 'var(--t2)' }};border:1px solid {{ tab.active ? 'var(--edgeIn)' : 'transparent' }};box-shadow:{{ tab.active ? 'var(--shLift)' : 'none' }};border-radius:10px;padding:8px 18px;font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:7px;transition:all .15s">
+            <span>{{ tab.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- ══ TAB 1: TRADING & APP FEE SIMULATOR ══ -->
+      <sc-if value="{{ showToolsSim }}">
+        <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:24px;line-height:1">⚡</span>
+              <div>
+                <h2 style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ simData.L.title }}</h2>
+                <p style="margin:4px 0 0;font-size:13.5px;color:var(--t2);line-height:1.5">{{ simData.L.lead }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Grid -->
+          <div class="sim-controls-grid">
+            <!-- 1. Stock Selection -->
+            <div>
+              <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.stockSelectLabel }}</label>
+              
+              <!-- Search box for all 57 stocks -->
+              <input id="sim-stock-search" aria-label="{{ simData.L.stockSelectLabel }}" autocomplete="off" value="{{ simData.searchQuery }}" onChange="{{ simData.onSearchChange }}" placeholder="{{ simData.L.searchPlaceholder }}" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Sans Arabic',sans-serif;font-size:13.5px;outline:none;box-sizing:border-box">
+
+              <!-- Search dropdown matches if typing -->
+              <sc-if value="{{ simData.hasSearchQuery }}">
+                <div style="margin-top:6px;max-height:180px;overflow-y:auto;border-radius:10px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--shLift);padding:4px">
+                  <sc-for list="{{ simData.searchMatches }}" as="sm">
+                    <div onClick="{{ sm.pick }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:8px;transition:background .12s" style-hover="background:var(--sunk)">
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--accent)">{{ sm.ticker }}</span>
+                        <span style="font-size:12.5px;color:var(--ink)">{{ sm.name }}</span>
+                      </div>
+                      <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">{{ sm.years }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- Featured quick-pick ticker pills -->
+              <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;max-height:68px;overflow-y:auto;padding-bottom:2px">
+                <sc-for list="{{ simData.featuredStocks }}" as="fs">
+                  <span onClick="{{ fs.pick }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:{{ fs.isSelected ? 'var(--accent)' : 'var(--surface)' }};color:{{ fs.isSelected ? '#fff' : 'var(--t2)' }};border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;transition:all .12s">{{ fs.ticker }}</span>
+                </sc-for>
+              </div>
+
+              <!-- Active stock display badge -->
+              <div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:6px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--rule2)">
+                <span style="padding:2px 6px;border-radius:4px;background:var(--accTint);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700">{{ simData.ticker }}</span>
+                <span style="font-size:12px;color:var(--ink);font-weight:600">{{ simData.name }}</span>
+                <span style="font-size:11px;color:var(--faint)">({{ simData.sector }})</span>
+              </div>
+            </div>
+
+            <!-- 2. Strategy & Frequency Selection -->
+            <div>
+              <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.strategyLabel }}</label>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:3px;border-radius:12px;background:var(--surface);border:1px solid var(--rule)">
+                <div onClick="{{ simData.setLumpStrategy }}" style="cursor:pointer;padding:8px 10px;border-radius:999px;text-align:center;font-size:12px;font-weight:600;background:{{ simData.isLumpSum ? 'var(--accent)' : 'transparent' }};color:{{ simData.isLumpSum ? '#fff' : 'var(--t2)' }};transition:all .15s">
+                  {{ simData.L.lumpLabel }}
+                </div>
+                <div onClick="{{ simData.setDcaStrategy }}" style="cursor:pointer;padding:8px 10px;border-radius:999px;text-align:center;font-size:12px;font-weight:600;background:{{ simData.isDca ? 'var(--accent)' : 'transparent' }};color:{{ simData.isDca ? '#fff' : 'var(--t2)' }};transition:all .15s">
+                  {{ simData.L.dcaLabel }}
+                </div>
+              </div>
+              <div style="font-size:11px;color:var(--faint);margin-top:10px;line-height:1.4">
+                <sc-if value="{{ simData.isLumpSum }}">
+                  <span>{{ simData.L.lumpDesc }}</span>
+                </sc-if>
+                <sc-if value="{{ simData.isDca }}">
+                  <span>{{ simData.L.dcaDesc }}</span>
+                </sc-if>
+              </div>
+            </div>
+
+            <!-- 3. Capital or Monthly Amount -->
+            <div>
+              <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.isLumpSum ? simData.L.capitalLabel : simData.L.monthlyLabel }}</label>
+              <sc-if value="{{ simData.isLumpSum }}">
+                <input id="sim-capital" aria-label="{{ simData.L.capitalLabel }}" inputmode="numeric" value="{{ simData.capital }}" onChange="{{ simData.onCapitalChange }}" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+                <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">
+                  <sc-for list="{{ simData.capitalPresets }}" as="cp">
+                    <span onClick="{{ cp.pick }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:{{ cp.active ? 'var(--accent)' : 'var(--surface)' }};color:{{ cp.active ? '#fff' : 'var(--t2)' }};border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px">{{ cp.label }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ simData.isDca }}">
+                <input id="sim-monthly" aria-label="{{ simData.L.monthlyLabel }}" inputmode="numeric" value="{{ simData.monthlyAmount }}" onChange="{{ simData.onMonthlyChange }}" style="width:100%;padding:9px 12px;border-radius:11px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;outline:none;box-sizing:border-box">
+                <div style="display:flex;gap:5px;margin-top:8px;flex-wrap:wrap">
+                  <span onClick="{{ setMonthly1k }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">1,000</span>
+                  <span onClick="{{ setMonthly2_5k }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">2,500</span>
+                  <span onClick="{{ setMonthly5k }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">5,000</span>
+                  <span onClick="{{ setMonthly10k }}" style="cursor:pointer;padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--t2)">10,000</span>
+                </div>
+              </sc-if>
+            </div>
+
+            <!-- 4. Time Horizon Presets -->
+            <div>
+              <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.horizonLabel }}</label>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <sc-for list="{{ simData.rangePresets }}" as="rp">
+                  <span onClick="{{ rp.pick }}" style="cursor:pointer;padding:5px 11px;border-radius:999px;background:{{ rp.active ? 'var(--accent)' : 'var(--surface)' }};color:{{ rp.active ? '#fff' : 'var(--t2)' }};border:1px solid var(--rule);font-size:11px;font-weight:600;transition:all .15s">{{ rp.label }}</span>
+                </sc-for>
+              </div>
+              <div style="margin-top:10px;padding:8px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2);font-family:'IBM Plex Mono',monospace;font-size:11px;display:flex;align-items:center;justify-content:space-between">
+                <div><span style="color:var(--faint)">{{ simData.L.buyPrefix }}</span> <span style="font-weight:600;color:var(--ink)">{{ simData.startDateFmt }}</span> (<span style="color:var(--accent)">{{ simData.buyPriceFmt }} ج</span>)</div>
+                <div>➔</div>
+                <div><span style="color:var(--faint)">{{ simData.L.sellPrefix }}</span> <span style="font-weight:600;color:var(--ink)">{{ simData.endDateFmt }}</span> (<span style="color:var(--accent)">{{ simData.sellPriceFmt }} ج</span>)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Sparkline Track & Trajectory -->
+          <div style="margin-top:20px;padding:18px 20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn)">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+              <div style="font-size:13px;font-weight:600;color:var(--ink)">
+                {{ simData.L.trajectoryTitle }}
+              </div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:{{ simData.isPriceUp ? 'var(--up)' : 'var(--down)' }}">
+                {{ simData.rawPriceChangePctFmt }} <span style="font-size:11px;color:var(--faint)">({{ simData.L.rawPriceMove }})</span>
+              </div>
+            </div>
+            <!-- SVG sparkline -->
+            <div style="width:100%;height:140px;position:relative">
+              <svg viewBox="0 0 600 140" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible">
+                <defs>
+                  <linearGradient id="simAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.25"/>
+                    <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+                <path d="{{ simData.areaD }}" fill="url(#simAreaGrad)"/>
+                <path d="{{ simData.lineD }}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- Buy Pin -->
+                <circle cx="{{ simData.buyPin.x }}" cy="{{ simData.buyPin.y }}" r="5" fill="#059669" stroke="var(--surface)" stroke-width="2"/>
+                <!-- Sell Pin -->
+                <circle cx="{{ simData.sellPin.x }}" cy="{{ simData.sellPin.y }}" r="5" fill="#D97706" stroke="var(--surface)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);flex-wrap:wrap;gap:8px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="width:8px;height:8px;border-radius:50%;background:#059669"></span>
+                <span>{{ simData.L.firstBuyPrefix }}{{ simData.startDateFmt }} ({{ simData.buyPriceFmt }} EGP)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="width:8px;height:8px;border-radius:50%;background:#D97706"></span>
+                <span>{{ simData.L.finalSellPrefix }}{{ simData.endDateFmt }} ({{ simData.sellPriceFmt }} EGP)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best Broker Winner Banner -->
+          <div style="margin-top:20px;padding:16px 20px;border-radius:16px;background:rgba(5, 150, 105, 0.08);border:1px solid rgba(5, 150, 105, 0.3);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="font-size:24px;line-height:1">🏆</span>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#059669">
+                  {{ simData.L.winnerNotice }}
+                </div>
+                <div style="font-size:12px;color:var(--t2);margin-top:2px">
+                  {{ simData.L.feeDragNote }}
+                </div>
+              </div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#059669;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid rgba(5, 150, 105, 0.3)">
+              {{ simData.L.savePrefix }}{{ simData.feeDifferenceFmt }} EGP
+            </div>
+          </div>
+
+          <!-- Comparative Broker Outcome Cards Grid -->
+          <div style="margin-top:24px">
+            <h3 style="font-family:'Bricolage Grotesque',serif;font-size:19px;font-weight:600;margin:0 0 16px;color:var(--ink)">{{ simData.L.comparisonTitle }}</h3>
+            <div class="sim-broker-grid">
+              <sc-for list="{{ simData.brokerCards }}" as="bc">
+                <div class="sim-broker-card {{ bc.isWinner ? 'winner' : '' }}" style="background:var(--surface);border-color:{{ bc.isWinner ? 'var(--accent)' : 'var(--edgeIn)' }}">
+                  <!-- Top Row: Name, Badge, Rank -->
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                    <div>
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--faint)">#{{ bc.rankNum }}</span>
+                        <h4 style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:700;margin:0;color:var(--ink)">{{ bc.name }}</h4>
+                        <sc-if value="{{ bc.isWinner }}">
+                          <span style="padding:2px 8px;border-radius:999px;background:#059669;color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em">{{ bc.winnerBadgeText }}</span>
+                        </sc-if>
+                      </div>
+                      <div style="font-size:12px;color:var(--t2);margin-top:3px">{{ bc.tagline }}</div>
+                    </div>
+                    <span style="padding:3px 8px;border-radius:8px;background:{{ bc.bgTint }};color:{{ bc.color }};border:1px solid {{ bc.borderTint }};font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;white-space:nowrap">{{ bc.badge }}</span>
+                  </div>
+
+                  <!-- Net Cash at Exit (The Bottom Line) -->
+                  <div style="padding:14px 16px;border-radius:14px;background:var(--sunk);border:1px solid var(--rule2)">
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)">{{ simData.L.netCashCol }}</div>
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:24px;font-weight:700;color:var(--ink)">
+                        {{ bc.netEndingCashFmt }} <span style="font-size:12px;font-weight:400;color:var(--faint)">EGP</span>
+                      </div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:{{ bc.isProfitPositive ? 'var(--up)' : 'var(--down)' }}">
+                        {{ bc.netReturnPctFmt }}
+                      </div>
+                    </div>
+                    <!-- Net Cash retention visual track -->
+                    <div style="height:6px;width:100%;border-radius:999px;background:var(--rule);overflow:hidden;margin-top:10px">
+                      <div style="height:100%;width:{{ bc.netCashBarWidth }};background:{{ bc.isWinner ? 'var(--accent)' : 'var(--t2)' }};border-radius:999px"></div>
+                    </div>
+                  </div>
+
+                  <!-- Breakdown Metrics Rows -->
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <div class="sim-metric-pill">
+                      <span style="font-size:11px;color:var(--faint)">{{ simData.L.totalFeesCol }}</span>
+                      <strong style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink)">{{ bc.totalFeesFmt }} ج</strong>
+                    </div>
+                    <div class="sim-metric-pill">
+                      <span style="font-size:11px;color:var(--faint)">{{ simData.L.feeDragLabel }}</span>
+                      <strong style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:{{ bc.isWinner ? '#059669' : 'var(--down)' }}">{{ bc.feeDragPctFmt }}</strong>
+                    </div>
+                    <div class="sim-metric-pill">
+                      <span style="font-size:11px;color:var(--faint)">{{ simData.L.brokerFeeLabel }}</span>
+                      <strong style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t2)">{{ bc.brokerFeeFmt }} ج</strong>
+                    </div>
+                    <div class="sim-metric-pill">
+                      <span style="font-size:11px;color:var(--faint)">{{ simData.L.regFeeLabel }}</span>
+                      <strong style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--t2)">{{ bc.regFeeFmt }} ج</strong>
+                    </div>
+                  </div>
+
+                  <!-- Footer Specs: Executions and Shares -->
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--rule2);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">
+                    <div>{{ simData.L.execLabel }}: <strong style="color:var(--ink)">{{ bc.executionsFmt }}</strong></div>
+                    <div>{{ simData.L.sharesLabel }}: <strong style="color:var(--ink)">{{ bc.sharesCountFmt }}</strong></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </sc-if>
+
+      <!-- ══ TAB 2: DIVIDEND & CASH FLOW CALCULATOR ══ -->
+      <sc-if value="{{ showToolsCalc }}">
       <!-- Section 1: Dividend & Cash Flow Calculator -->
       <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
@@ -2801,6 +3050,9 @@
           </article>
         </sc-for></div>
       </section>
+      </sc-if>
+      <!-- ══ TAB 3: PLAIN LANGUAGE VALUATION GUIDE ══ -->
+      <sc-if value="{{ showToolsGuide }}">
       <!-- Section 3: Plain Language Valuation Guide -->
       <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
@@ -2829,6 +3081,7 @@
           {{ L.calcDisclaimer }}
         </div>
       </section>
+      </sc-if>
     </div>
   </sc-if>
 

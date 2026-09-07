@@ -2,6 +2,7 @@ import { explorer } from './explorer.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
+import { simulatorExplorer } from './simulator.js';
 /* The screens, ported from the Claude Design canvas.
  *
  * Everything below `class Component` is the design's own logic, carried over
@@ -3700,6 +3701,7 @@ export class Component extends Base {
     const marketExplorer = explorer(this, D.companies, ar);
     const pairsData = pairsExplorer(this, D, ar, React);
     const valData = valuationExplorer(this, D, ar, React);
+    const simData = simulatorExplorer(this, D, ar, React);
     const storyPeriod = st.storyPeriod || 'week';
     const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
     const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
@@ -4266,6 +4268,24 @@ export class Component extends Base {
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',
       isWatchlist: st.screen === 'watchlist', isTools: st.screen === 'tools',
       goTools: this.go('tools'),
+      simData,
+      toolsTab: st.toolsTab || 'sim',
+      toolsTabs: [
+        { id: 'sim', label: ar ? 'محاكي الرسوم والأداء' : 'Trading & Fee Simulator', active: (st.toolsTab || 'sim') === 'sim', go: () => this.setState({ toolsTab: 'sim' }) },
+        { id: 'calc', label: ar ? 'حاسبة التوزيعات' : 'Dividend Calculator', active: st.toolsTab === 'calc', go: () => this.setState({ toolsTab: 'calc' }) },
+        { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) }
+      ],
+      showToolsSim: (st.toolsTab || 'sim') === 'sim',
+      showToolsCalc: st.toolsTab === 'calc',
+      showToolsGuide: st.toolsTab === 'guide',
+      isToolsTabSim: (st.toolsTab || 'sim') === 'sim',
+      isToolsTabCalc: st.toolsTab === 'calc',
+      isToolsTabGuide: st.toolsTab === 'guide',
+      onSimStockSelect: (e) => this.setState({ simTicker: e.target.value }),
+      setMonthly1k: () => this.setState({ simMonthly: 1000 }),
+      setMonthly2_5k: () => this.setState({ simMonthly: 2500 }),
+      setMonthly5k: () => this.setState({ simMonthly: 5000 }),
+      setMonthly10k: () => this.setState({ simMonthly: 10000 }),
       isPairs: st.screen === 'pairs', isValuation: st.screen === 'valuation',
       pairsData, valData,
       goPairs: this.go('pairs'), goValuation: this.go('valuation'),
