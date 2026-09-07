@@ -58,13 +58,16 @@ export function installChartViewer(root) {
     const hint = document.createElement('p');
     hint.textContent = w[6];
     let state = { scale: 1, x: 0, y: 0 }, width = 0, height = 0;
-    let baseWidth = 0, baseHeight = 0, fitScale = 1, moved = false;
+    let baseWidth = 0, baseHeight = 0, moved = false, frame = 0;
+    const points = [...content.querySelectorAll('[data-valuation-point]')];
+    const chartSvg = content.querySelector('svg');
     const pointers = new Map();
     const oldOverflow = document.body.style.overflow;
     let closed = false;
     function close() {
       if (closed) return;
       closed = true;
+      cancelAnimationFrame(frame);
       observer.disconnect();
       dialog.close();
       dialog.remove();
@@ -87,19 +90,43 @@ export function installChartViewer(root) {
     document.body.style.overflow = 'hidden';
     dialog.showModal();
     function paint() {
+      if (!frame) frame = requestAnimationFrame(draw);
+    }
+    function draw() {
+      frame = 0;
+      if (closed) return;
       state = boundView(state, width, height, baseWidth, baseHeight);
-      content.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale * fitScale})`;
+      // Resize the actual layout, not a composited bitmap. SVG paths are
+      // rasterized at their new resolution; percentage-positioned map tiles
+      // gain real space while their text stays native-sized and crisp.
+      // Page-level mobile map heights use !important. The explorer owns its
+      // dimensions so those fixed preview sizes must not override zoom.
+      content.style.setProperty('width', `${baseWidth * state.scale}px`, 'important');
+      content.style.setProperty('height', `${baseHeight * state.scale}px`, 'important');
+      content.style.setProperty('min-height', '0', 'important');
+      content.style.left = `${state.x}px`;
+      content.style.top = `${state.y}px`;
+      if (chartSvg) {
+        chartSvg.style.width = '100%';
+        chartSvg.style.height = '100%';
+        chartSvg.style.maxHeight = 'none';
+      }
       status.textContent = Math.round(state.scale * 100) + '%';
       minus.disabled = state.scale <= 1; plus.disabled = state.scale >= 8;
       // Semantic scatter zoom: positions spread, but markers and labels stay
       // screen-sized. Ordinary maps/charts retain their existing behaviour.
-      const points = [...content.querySelectorAll('[data-valuation-point]')];
       const occupied = [];
+      const viewport = stage.getBoundingClientRect();
+      const scales = new Map();
+      for (const group of points) {
+        const svg = group.ownerSVGElement;
+        if (!scales.has(svg)) scales.set(svg, svg.getBoundingClientRect().width / svg.viewBox.baseVal.width);
+      }
       for (const group of points) {
         group.querySelectorAll('[data-point-detail]').forEach(label => { label.style.display = 'none'; });
         const [x, y] = group.dataset.valuationPoint.split(',').map(Number);
         const svg = group.ownerSVGElement;
-        const screenScale = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+        const screenScale = scales.get(svg);
         if (!screenScale) continue;
         group.setAttribute('transform', `translate(${x} ${y}) scale(${1 / screenScale}) translate(${-x} ${-y})`);
         const labels = [...group.querySelectorAll('[data-point-label]')];
@@ -112,7 +139,7 @@ export function installChartViewer(root) {
         const box = text.getBBox();
         const background = labels.find(label => label.tagName.toLowerCase() === 'rect');
         if (background) { background.setAttribute('x', box.x - 4); background.setAttribute('width', box.width + 8); }
-        const rect = text.getBoundingClientRect(), viewport = stage.getBoundingClientRect();
+        const rect = text.getBoundingClientRect();
         const visible = rect.right > viewport.left && rect.left < viewport.right && rect.bottom > viewport.top && rect.top < viewport.bottom;
         const overlaps = occupied.some(b => rect.left < b.right + 5 && rect.right + 5 > b.left && rect.top < b.bottom + 4 && rect.bottom + 4 > b.top);
         if (!visible || overlaps) labels.forEach(label => { label.style.display = 'none'; });
@@ -127,10 +154,12 @@ export function installChartViewer(root) {
       width = stage.clientWidth; height = stage.clientHeight;
       baseWidth = Math.max(720, width);
       content.style.width = baseWidth + 'px';
+      content.style.height = source.style.height;
+      content.style.minHeight = source.style.minHeight;
+      if (chartSvg) { chartSvg.style.height = 'auto'; chartSvg.style.maxHeight = 'none'; }
       baseHeight = content.offsetHeight;
       // At 100% the entire chart fits; zoom reveals the original vector detail.
-      const fit = Math.min(width / baseWidth, height / baseHeight, 1);
-      fitScale = fit;
+      const fit = Math.min(width / baseWidth, height / Math.max(1, baseHeight), 1);
       baseWidth *= fit; baseHeight *= fit;
       reset();
     }

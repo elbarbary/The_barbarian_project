@@ -1,6 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { zoomAt, boundView } from '../../public/esthmr/chart-viewer.js';
+
+test('the shared viewer redraws at real dimensions instead of scaling a cached layer', () => {
+  const js = readFileSync(new URL('../../public/esthmr/chart-viewer.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../../public/esthmr/chart-viewer.css', import.meta.url), 'utf8');
+  assert.doesNotMatch(js, /content\.style\.transform\s*=/);
+  assert.doesNotMatch(css, /will-change\s*:\s*transform/);
+  assert.match(js, /setProperty\('height',.*'important'\)/);
+  assert.match(js, /setProperty\('width',.*'important'\)/);
+  assert.match(js, /requestAnimationFrame\(draw\)/);
+  assert.match(js, /cancelAnimationFrame\(frame\)/);
+  assert.doesNotMatch(js, /\bfetch\s*\(|XMLHttpRequest|WebSocket/);
+});
 
 test('zoom preserves the content point under the finger or cursor', () => {
   const before = { scale: 2, x: -140, y: -80 }, p = { x: 180, y: 230 };
