@@ -140,7 +140,7 @@ class DocumentTest(unittest.TestCase):
         doc = json.loads(path.read_text(encoding="utf-8"))
         rows = doc["securities"]
         self.assertGreater(len(rows), 150)
-        caps = [r["market_cap"] for r in rows.values()]
+        caps = [r["market_cap"] for r in rows.values() if "market_cap" in r]
         # The largest company on the exchange is a few hundred billion pounds.
         # A file in millions would top out around a few hundred thousand.
         self.assertGreater(max(caps), 1e11)

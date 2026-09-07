@@ -12,7 +12,10 @@ from __future__ import annotations
 
 import json
 import pathlib
+import sys
 import unittest
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 import build_market_api
 import build_ttm_pe as ttm
