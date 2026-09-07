@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-07T05:33:56.388286+00:00",
+  "fetchedAt": "2026-09-07T10:36:14.773896+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "e90d0f4ff1cf67df1bf7f96b05ae6a405a2bad65f9aba8dd9334fc447b211f3e",
+  "sourceSha256": "c387c6b26ccec2ea79915916bb4479c542e525320c23419c6c25319bc49ac84b",
   "issuers": [
     {
       "isin": "EGS01041C010",
@@ -125,6 +125,10 @@
       "issuerName": "The Arab Dairy Products Co."
     },
     {
+      "isin": "EGS30291C016",
+      "issuerName": "Sharkia National Food Company"
+    },
+    {
       "isin": "EGS30351C018",
       "issuerName": "East Delta Mills"
     },
@@ -135,6 +139,10 @@
     {
       "isin": "EGS30401C011",
       "issuerName": "Central Egypt Flour Mills"
+    },
+    {
+      "isin": "EGS30411C010",
+      "issuerName": "South Cairo and Giza Mills & Bakeries"
     },
     {
       "isin": "EGS30441C017",
@@ -193,6 +201,14 @@
       "issuerName": "Innovation for retail and supplies-ARTIFEX"
     },
     {
+      "isin": "EGS36021C011",
+      "issuerName": "General Company For Paper Industry ( RAKTA )"
+    },
+    {
+      "isin": "EGS36091C014",
+      "issuerName": "Middle East Paper- SIMO"
+    },
+    {
       "isin": "EGS360A1C011",
       "issuerName": "al-ahram for printing and packaging"
     },
@@ -225,6 +241,10 @@
       "issuerName": "OCTOBER PHARMA S.A.E"
     },
     {
+      "isin": "EGS380S1C017",
+      "issuerName": "Sidi Kerir Petrochemical Company"
+    },
+    {
       "isin": "EGS38171C012",
       "issuerName": "Glaxo Smithkline"
     },
@@ -233,12 +253,20 @@
       "issuerName": "Abu Qir Fertilizers and Chemical Industries"
     },
     {
+      "isin": "EGS381B1C015",
+      "issuerName": "Rameda Pharmaceutical"
+    },
+    {
       "isin": "EGS38201C017",
       "issuerName": "Egyptian Chemical Industries \" KIMA \""
     },
     {
       "isin": "EGS38211C016",
       "issuerName": "Misr Chemical Industries Company"
+    },
+    {
+      "isin": "EGS382M1C011",
+      "issuerName": "Sabaa Co. for Pharmaceutical and Chemical Industry"
     },
     {
       "isin": "EGS38321C013",
@@ -289,6 +317,10 @@
       "issuerName": "Misr Petroleum Company"
     },
     {
+      "isin": "EGS3A221C018",
+      "issuerName": "Rubex international for plastic and acrylic manufacturing"
+    },
+    {
       "isin": "EGS3C001C012",
       "issuerName": "middle east glass manufacturing"
     },
@@ -319,6 +351,10 @@
     {
       "isin": "EGS3C391C017",
       "issuerName": "Misr Cement co. ( QENA )"
+    },
+    {
+      "isin": "EGS3C401C014",
+      "issuerName": "Sinai Cement Company"
     },
     {
       "isin": "EGS3C4L1C015",
@@ -445,6 +481,10 @@
       "issuerName": "Intro Utilities"
     },
     {
+      "isin": "EGS51191C012",
+      "issuerName": "Misr Fertilizers - EGYFERT"
+    },
+    {
       "isin": "EGS512O1C012",
       "issuerName": "Ibn Sina Pharma"
     },
@@ -485,8 +525,16 @@
       "issuerName": "Credit Agricole Egypt"
     },
     {
+      "isin": "EGS60081C014",
+      "issuerName": "Qatar National Bank"
+    },
+    {
       "isin": "EGS600K1C019",
       "issuerName": "Banque du Caire"
+    },
+    {
+      "isin": "EGS60101C010",
+      "issuerName": "Al Barka Bank - Egypt"
     },
     {
       "isin": "EGS60111C019",
@@ -495,6 +543,10 @@
     {
       "isin": "EGS60121C018",
       "issuerName": "(C.I.B.)"
+    },
+    {
+      "isin": "EGS60142C014",
+      "issuerName": "SOCIETE Arab International De BanQue"
     },
     {
       "isin": "EGS60182C010",
@@ -531,6 +583,10 @@
     {
       "isin": "EGS632D1C010",
       "issuerName": "Misr Life Insurance"
+    },
+    {
+      "isin": "EGS65011C016",
+      "issuerName": "Arab Investment Real Estate \" ALICO \""
     },
     {
       "isin": "EGS65071C010",
@@ -621,6 +677,14 @@
       "issuerName": "International Co. For Leasing (INCOLEASE)"
     },
     {
+      "isin": "EGS67031C012",
+      "issuerName": "Saudi Egyption Investment & Finance Company"
+    },
+    {
+      "isin": "EGS67032C010",
+      "issuerName": "Saudi Egyption Investment & Finance Company"
+    },
+    {
       "isin": "EGS67181C015",
       "issuerName": "Oden Investment"
     },
@@ -671,6 +735,10 @@
     {
       "isin": "EGS69021C011",
       "issuerName": "El Ahly for Investment And Development"
+    },
+    {
+      "isin": "EGS690C1C010",
+      "issuerName": "Raya Holding"
     },
     {
       "isin": "EGS69101C011",
@@ -749,6 +817,14 @@
       "issuerName": "Misr Hotels Company"
     },
     {
+      "isin": "EGS70271C019",
+      "issuerName": "Remco For Tourism Villages Constrction"
+    },
+    {
+      "isin": "EGS70281C018",
+      "issuerName": "Rowad Tourism Co."
+    },
+    {
       "isin": "EGS70311C013",
       "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
     },
@@ -767,6 +843,10 @@
     {
       "isin": "EGS70431C019",
       "issuerName": "Egyptian Resorts Company-ERC"
+    },
+    {
+      "isin": "EGS70571C012",
+      "issuerName": "Sharm Dreams Co. for touristic InvestmenT"
     },
     {
       "isin": "EGS70P91C010",
@@ -819,6 +899,14 @@
     {
       "isin": "EGS739Z1C016",
       "issuerName": "Marseilia Al Masreia Al Khalegeya Real EState Investment"
+    },
+    {
+      "isin": "EGS740C1C010",
+      "issuerName": "Suez Canal For Technology Settlement"
+    },
+    {
+      "isin": "EGS74191C015",
+      "issuerName": "Raya Customer Experience"
     },
     {
       "isin": "EGS743O1C013",
@@ -907,62 +995,40 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 200,
-    "exactIsinsQueried": 210,
+    "matchedAtMcdr": 222,
+    "exactIsinsQueried": 235,
     "confirmedNotFoundAfterExactSearch": {
       "NBCC": "EGS220N1C016",
       "AIDC": "EGS65R01C015",
+      "SIDC": "EGS38361C019",
       "NFCI": "EGS5ACC1C014",
+      "SIEG": "EGS3C9X1C016",
       "EGSA": "EGS48022C015",
       "MMHC": "EGS651F1C014",
       "OCAP": "EGS699Z1C014",
       "CCAPP": "EGS73541P048",
+      "SINA": "EGS103V1C018",
       "ASPI_r3": "EGS924G1C014",
       "LUTS_r1": "EGS924K1C018",
       "EGCN": "EGS65861C014"
     },
     "transportErrors": {},
     "notYetIndividuallyQueried": {
-      "SAUD": "EGS60101C010",
       "SPIN": "EGS32041C013",
-      "RREI": "EGS65011C016",
-      "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
       "SWDY": "EGS3G0Z1C014",
-      "SIEG": "EGS3C9X1C016",
       "SPHT": "EGS70H02C014",
       "UEGC": "EGS21531C016",
       "ZEOT": "EGS38251C012",
       "WCDF": "EGS30421C019",
-      "SIMO": "EGS36091C014",
-      "QNBE": "EGS60081C014",
-      "RAKT": "EGS36021C011",
-      "RACC": "EGS74191C015",
-      "RAYA": "EGS690C1C010",
-      "RTVC": "EGS70271C019",
-      "ROTO": "EGS70281C018",
-      "RUBX": "EGS3A221C018",
-      "SIPC": "EGS382M1C011",
-      "SMFR": "EGS51191C012",
-      "SEIG": "EGS67031C012",
-      "SEIGA": "EGS67032C010",
-      "SNFC": "EGS30291C016",
-      "SDTI": "EGS70571C012",
-      "SKPC": "EGS380S1C017",
-      "SCEM": "EGS3C401C014",
-      "SINA": "EGS103V1C018",
-      "SAIB": "EGS60142C014",
-      "SCFM": "EGS30411C010",
       "SVCE": "EGS3C351C011",
       "SPMD": "EGS73BR1C013",
       "YAYT": "EGS3E7F1C016",
-      "SCTS": "EGS740C1C010",
       "TMGH": "EGS691S1C011",
       "TWSA": "EGS7D231C010",
       "TALM": "EGS597R1C017",
       "TANM": "EGS21EB1C011",
       "TAQA": "EGS490S1C014",
-      "RMDA": "EGS381B1C015",
       "UBEE": "EGS600M1C017",
       "TRTO": "EGS79072C012",
       "TYCN": "EGS67331C016",

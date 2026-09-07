@@ -2258,5 +2258,265 @@
       }
     ],
     "fetchedAt": "2026-09-07T05:33:56.036000+00:00"
+  },
+  "EGS60081C014": {
+    "ticker": "QNBE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60081C014",
+        "issuerName": "Qatar National Bank"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:09.226998+00:00"
+  },
+  "EGS74191C015": {
+    "ticker": "RACC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS74191C015",
+        "issuerName": "Raya Customer Experience"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:12.466837+00:00"
+  },
+  "EGS36021C011": {
+    "ticker": "RAKT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS36021C011",
+        "issuerName": "General Company For Paper Industry ( RAKTA )"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:16.485434+00:00"
+  },
+  "EGS690C1C010": {
+    "ticker": "RAYA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS690C1C010",
+        "issuerName": "Raya Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:19.168224+00:00"
+  },
+  "EGS381B1C015": {
+    "ticker": "RMDA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS381B1C015",
+        "issuerName": "Rameda Pharmaceutical"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:21.785432+00:00"
+  },
+  "EGS70281C018": {
+    "ticker": "ROTO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70281C018",
+        "issuerName": "Rowad Tourism Co."
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:24.734979+00:00"
+  },
+  "EGS65011C016": {
+    "ticker": "RREI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65011C016",
+        "issuerName": "Arab Investment Real Estate \" ALICO \""
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:27.588063+00:00"
+  },
+  "EGS70271C019": {
+    "ticker": "RTVC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70271C019",
+        "issuerName": "Remco For Tourism Villages Constrction"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:30.614437+00:00"
+  },
+  "EGS3A221C018": {
+    "ticker": "RUBX",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3A221C018",
+        "issuerName": "Rubex international for plastic and acrylic manufacturing"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:33.428145+00:00"
+  },
+  "EGS60142C014": {
+    "ticker": "SAIB",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60142C014",
+        "issuerName": "SOCIETE Arab International De BanQue"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:36.060038+00:00"
+  },
+  "EGS60101C010": {
+    "ticker": "SAUD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS60101C010",
+        "issuerName": "Al Barka Bank - Egypt"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:38.434501+00:00"
+  },
+  "EGS3C401C014": {
+    "ticker": "SCEM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C401C014",
+        "issuerName": "Sinai Cement Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:40.803545+00:00"
+  },
+  "EGS30411C010": {
+    "ticker": "SCFM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30411C010",
+        "issuerName": "South Cairo and Giza Mills & Bakeries"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:43.904156+00:00"
+  },
+  "EGS740C1C010": {
+    "ticker": "SCTS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS740C1C010",
+        "issuerName": "Suez Canal For Technology Settlement"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:46.668256+00:00"
+  },
+  "EGS70571C012": {
+    "ticker": "SDTI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70571C012",
+        "issuerName": "Sharm Dreams Co. for touristic InvestmenT"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:49.019760+00:00"
+  },
+  "EGS67031C012": {
+    "ticker": "SEIG",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67031C012",
+        "issuerName": "Saudi Egyption Investment & Finance Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:51.412220+00:00"
+  },
+  "EGS67032C010": {
+    "ticker": "SEIGA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67032C010",
+        "issuerName": "Saudi Egyption Investment & Finance Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:35:53.761330+00:00"
+  },
+  "EGS38361C019": {
+    "ticker": "SIDC",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-07T10:35:55.978126+00:00"
+  },
+  "EGS3C9X1C016": {
+    "ticker": "SIEG",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-07T10:35:58.340984+00:00"
+  },
+  "EGS36091C014": {
+    "ticker": "SIMO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS36091C014",
+        "issuerName": "Middle East Paper- SIMO"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:36:00.864878+00:00"
+  },
+  "EGS103V1C018": {
+    "ticker": "SINA",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-07T10:36:03.514043+00:00"
+  },
+  "EGS382M1C011": {
+    "ticker": "SIPC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS382M1C011",
+        "issuerName": "Sabaa Co. for Pharmaceutical and Chemical Industry"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:36:06.344981+00:00"
+  },
+  "EGS380S1C017": {
+    "ticker": "SKPC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS380S1C017",
+        "issuerName": "Sidi Kerir Petrochemical Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:36:09.172631+00:00"
+  },
+  "EGS51191C012": {
+    "ticker": "SMFR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS51191C012",
+        "issuerName": "Misr Fertilizers - EGYFERT"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:36:11.929311+00:00"
+  },
+  "EGS30291C016": {
+    "ticker": "SNFC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30291C016",
+        "issuerName": "Sharkia National Food Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T10:36:14.420973+00:00"
   }
 }
