@@ -643,6 +643,10 @@
     "meaning": "The Financial Regulatory Authority (FRA) establishes a unified regulatory handbook consolidating operating standards, licensing conditions, and compliance rules for consumer finance companies.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية دليلاً تنظيمياً موحداً يجمع المعايير التشغيلية وضوابط الترخيص وقواعد الامتثال للشركات العاملة في نشاط التمويل الاستهلاكي."
   },
+  "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه غير مصرفيه باستخدام التكنولوجيا الماليه": {
+    "meaning": "The regulatory approvals authorize four companies to deploy digital platforms and automated systems for non-banking financial operations, including credit assessment, onboarding, and transaction processing under the Financial Regulatory Authority's fintech framework.",
+    "meaning_ar": "تمنح هذه الموافقات الرقابية الشركات الأربع ترخيصاً رسمياً لتشغيل منصات رقمية وأنظمة مؤتمتة لتقديم الخدمات المالية غير المصرفية، بما يشمل التقييم الائتماني والتعاقد وتنفيذ المعاملات وفقاً للأطر التنظيمية للهيئة العامة للرقابة المالية."
+  },
   "الرقابه الماليه توافق علي دعوه عموميه فيركيم مصر للنظر في اضافه نشاط انتاج وبيع الطاقه الكهرباييه": {
     "meaning": "The regulatory approval allows the company to convene its general assembly to amend its corporate purpose, adding power generation and electricity sales to its registered commercial activities.",
     "meaning_ar": "تتيح موافقة الهيئة للشركة دعوة جمعيتها العامة لتعديل غرضها الأساسي بإضافة نشاط توليد وبيع الطاقة الكهربائية إلى سجل أنشطتها التجارية."
@@ -906,7 +910,7 @@
   "تراجع اسعار الذهب العالميه مع تنامي توقعات رفع الفايده في امريكا": {
     "meaning": "",
     "meaning_ar": "",
-    "refused": 1
+    "refused": 2
   },
   "تراجع اسعار الذهب قبيل صدور تقرير الوظايف في امريكا": {
     "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
@@ -1454,6 +1458,10 @@
     "meaning": "Economic transformation programs reallocate capital and policy resources toward manufacturing, agriculture, and industrial activities, shifting the operational base away from consumption-led drivers.",
     "meaning_ar": "تعمل برامج التحول الاقتصادي على إعادة توجيه الموارد التمويلية والسياسات التنظيمية نحو الأنشطة التصنيعية والزراعية والصناعية، مما يغير الهيكل التشغيلي من الاعتماد على الاستهلاك إلى القطاعات الإنتاجية."
   },
+  "محمد علاء الامين العام لموسسه رجال الاعمال المصريين الصينيين نستهدف توطين الصناعه ونقل التكنولوجيا": {
+    "meaning": "Industrial localization and technology transfer involve establishing domestic production facilities and integrating foreign technical expertise into local supply chains. This operational structure substitutes imported finished goods with local assembly and component manufacturing operations.",
+    "meaning_ar": "يتضمن توطين الصناعة ونقل التكنولوجيا إنشاء منشآت إنتاجية محلية ودمج الخبرات الفنية الأجنبية في سلاسل الإمداد والتوريد المحلية. وتعمل هذه الآلية التشغيلية على إحلال السلع تامة الصنع المستوردة بخطوط تجميع وتصنيع للمكونات محلياً."
+  },
   "محمد عوض: نستهدف تحويل الشراكه المصريه الايطاليه الي مشروعات واستثمارات ملموسه": {
     "meaning": "The statement reflects efforts to convert bilateral diplomatic and economic agreements between Egypt and Italy into foreign direct investment (FDI) inflows, industrial joint ventures, and localized infrastructure projects.",
     "meaning_ar": "يعكس التصريح التوجه نحو تحويل الاتفاقيات الاقتصادية الثنائية بين مصر وإيطاليا إلى تدفقات استثمار أجنبي مباشر، ومشاريع صناعية مشتركة، وتوسعات تشغيلية ملموسة."
@@ -1510,6 +1518,10 @@
     "meaning": "Expanding hospital operations into new geographic hubs allocates medical capacity and establishes unit-level contribution benchmarks within the group's consolidated revenue structure.",
     "meaning_ar": "يؤدي توسيع شبكة المستشفيات في نطاقات جغرافية جديدة إلى توزيع الطاقة التشغيلية وتحديد مستهدفات الإيرادات لكل وحدة تشغيلية ضمن القوائم المالية المجمعة للشركة."
   },
+  "مسيول ببنك افراسيا موريشيوس: السوق الافريقيه تمتلك فرصا ضخمه ونركز علي معالجه تحديات المستثمرين": {
+    "meaning": "Cross-border banking institutions in Africa deploy advisory and financial intermediation services to mitigate structural market frictions and facilitate institutional capital allocation across regional jurisdictions.",
+    "meaning_ar": "تقدم المؤسسات المصرفية الإقليمية خدمات الوساطة المالية والاستشارات الاستثمارية العابرة للحدود لمعالجة العقبات الهيكلية وتسهيل حركة تدفق رؤوس الأموال المؤسسية داخل الأسواق الأفريقية."
+  },
   "مشروع لصناعه الابواب الخشبيه في السخنه باستثمارات 20 مليون دولار": {
     "meaning": "The deployment of $20 million in capital expenditures establishes a dedicated wooden door manufacturing facility in the Sokhna industrial zone, expanding domestic building materials production capacity.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة 20 مليون دولار إنشاء مصنع مخصص لإنتاج الأبواب الخشبية في المنطقة الصناعية بالسخنة، مما يرفع الطاقة الإنتاجية المحلية في قطاع مواد البناء."
@@ -1533,6 +1545,10 @@
   "مصر تعتزم تطوير اليه لتمويل مشروعات البنيه التحتيه بالعمله المحليه": {
     "meaning": "The mechanism establishes a framework for funding infrastructure assets through Egyptian pound-denominated debt instruments and credit facilities, structuring project obligations in domestic currency rather than foreign exchange.",
     "meaning_ar": "تؤسس الآلية إطاراً لتمويل أصول البنية التحتية عبر أدوات دين وتسهيلات ائتمانية مقومة بالجنيه المصري، مما يجعل هيكلة الالتزامات المالية للمشروعات قائمة بالعملة المحلية بدلاً من العملات الأجنبية."
+  },
+  "مصر للبترول تتوسع خارجيا وتفتتح منافذ": {
+    "meaning": "The company establishes retail distribution outlets and commercial operations in international markets, broadening its operational footprint and distribution network beyond the domestic market.",
+    "meaning_ar": "تؤسس الشركة منافذ توزيع تجزئة وعمليات تجارية في أسواق خارجية، مما يوسع نطاق شبكة التوزيع الجغرافي والتشغيلي خارج السوق المحلي."
   },
   "مصر للطيران تطلق اولي رحلاتها الجويه الي زنجبار بتنزانيا": {
     "meaning": "Operating direct flights to Zanzibar adds a scheduled destination to the carrier's African network and allocates active fleet capacity to the East Africa corridor.",
