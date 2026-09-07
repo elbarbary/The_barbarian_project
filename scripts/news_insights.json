@@ -319,6 +319,10 @@
     "meaning": "Feed represents the primary direct operational input cost for the poultry and livestock industries, directly impacting production costs, producer operating margins, and end-market protein prices.",
     "meaning_ar": "تمثل الأعلاف عنصر التكلفة التشغيلية المباشرة الرئيسي لقطاعي الدواجن والثروة الحيوانية، مما يؤثر بشكل مباشر على تكلفة الإنتاج وهوامش ربح المربين والمنتجين وأسعار السلع النهائية."
   },
+  "اسعار البيض اليوم الاثنين 7-9-2026 في مصر": {
+    "meaning": "Daily poultry exchange quotes reflect prevailing market prices for table eggs, determined by daily supply volumes from farms against retail consumer demand and input feed costs.",
+    "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية القيمة السوقية الحالية لبيض المائدة، والتي تتحدد بناءً على حجم المعروض اليومي من المزارع مقابل طلب تجزئة المستهلكين وتكاليف الأعلاف."
+  },
   "اسعار البيض اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily egg price updates track spot clearing levels across farms and retail channels, reflecting current feed input costs and market supply balances within the domestic food commodities sector.",
     "meaning_ar": "تعكس نشرات أسعار البيض اليومية مستويات التداول الفورية في المزارع ومنافذ التجزئة، بناءً على تكاليف مدخلات الأعلاف وحجم المعروض المتاح في قطاع السلع الغذائية المحلي."
@@ -639,6 +643,10 @@
     "meaning": "Seawater uranium extraction introduces an unconventional raw material supply source for nuclear fuel cycles, altering global feedstock access and technological distribution between major industrial economies.",
     "meaning_ar": "يمثل استخراج اليورانيوم من مياه البحر مصدراً غير تقليدي لتأمين المواد الخام اللازمة لدورة الوقود النووي، مما يغير آليات توفير الإمدادات والتوزيع التكنولوجي بين الاقتصادات الصناعية الكبرى."
   },
+  "الصين تضخ 53 مليار دولار في البنوك وشركات التامين": {
+    "meaning": "A direct capital injection increases the regulatory capital base and liquidity reserves of recipient banks and insurers, expanding their balance sheet capacity for credit issuance and underwriting activities.",
+    "meaning_ar": "تؤدي عمليات ضخ رؤوس الأموال إلى زيادة الاحتياطيات الرأسمالية التنظيمية والسيولة المتاحة لدى البنوك وشركات التأمين، مما يوسع القدرة التشغيلية لميزانياتها العمومية على منح الائتمان وإصدار وثائق التأمين."
+  },
   "الصين تضخ 57 مليار يوان في 3 شركات تامين حكوميه لتعزيز رووس اموالها": {
     "meaning": "Direct state capital injections increase the equity base and paid-in capital on the balance sheets of insurance firms, directly raising their statutory solvency margins and underwriting capacity.",
     "meaning_ar": "تؤدي عمليات ضخ رؤوس الأموال الحكومية المباشرة إلى زيادة حقوق الملكية ورأس المال المدفوع في الميزانيات العمومية لشركات التأمين، مما يرفع هوامش الملاءة المالية الإلزامية والقدرة الاستيعابية للاكتتاب."
@@ -826,6 +834,10 @@
   "تخصيص 12.53 فدان في سوهاج لانشاء صوامع غلال": {
     "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
     "meaning_ar": "يُعد تخصيص الأراضي لإنشاء صوامع الغلال توسيعاً للبنية التحتية للتخزين الفعلي ودمجاً للخدمات اللوجستية الزراعية ضمن سلاسل إمداد السلع الاستراتيجية."
+  },
+  "تراجع احتياطيات اليابان بقيمه 79.60 مليار دولار بعد تدخل قياسي لدعم الين": {
+    "meaning": "Foreign exchange intervention involves the central bank liquidating foreign currency reserve assets to purchase the domestic currency on the open market, which directly reduces total official foreign reserves on the central bank's balance sheet.",
+    "meaning_ar": "تتضمن عمليات التدخل في سوق الصرف الأجنبي قيام البنك المركزي ببيع أصول من احتياطيات النقد الأجنبي لشراء العملة المحلية من السوق المفتوحة، مما يترتب عليه خفض إجمالي رصيد الاحتياطيات الرسمية المسجلة في ميزانيته العمومية."
   },
   "تراجع اسعار الذهب قبيل صدور تقرير الوظايف في امريكا": {
     "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
@@ -1114,6 +1126,10 @@
   "سعر كرتونه البيض اليوم 5/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Daily price tracking for table eggs reflects the market equilibrium between consumer retail demand and poultry sector operational costs, including feed inputs, transport, and retail distribution margins.",
     "meaning_ar": "يعكس الرصد اليومي لأسعار بيض المائدة التوازن الفعلي في السوق بين الطلب الاستهلاكي وتكاليف التشغيل في قطاع الدواجن، والتي تشمل مدخلات الأعلاف والنقل وهوامش التوزيع للتجزئة."
+  },
+  "سعر كرتونه البيض اليوم 7/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily supply-demand dynamics, feed input costs, and distribution markups within the domestic poultry and food commodities market.",
+    "meaning_ar": "تعكس أسعار بيع كرتونة البيض للمستهلك التغيرات اليومية في قوى العرض والطلب، وتكاليف مدخلات الأعلاف، وهامش التوزيع ضمن سوق الدواجن والسلع الغذائية المحلية."
   },
   "سعر ومواصفات سيارات هيونداي النترا AD موديل 2027": {
     "meaning": "Automotive distributors establish retail pricing and trim specifications for incoming vehicle model years, reflecting current cost structures, currency dynamics, and import or local assembly parameters.",
