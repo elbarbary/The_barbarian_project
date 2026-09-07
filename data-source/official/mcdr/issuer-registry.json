@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-06T09:36:25.745839+00:00",
+  "fetchedAt": "2026-09-07T05:33:56.388286+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "73ec7fe751faebd522af679906a04b977cbfc4a57da791872f8b2421ed62e11a",
+  "sourceSha256": "e90d0f4ff1cf67df1bf7f96b05ae6a405a2bad65f9aba8dd9334fc447b211f3e",
   "issuers": [
     {
       "isin": "EGS01041C010",
@@ -15,6 +15,10 @@
     {
       "isin": "EGS02021C011",
       "issuerName": "Ismailia Misr Poultry Co."
+    },
+    {
+      "isin": "EGS02051C018",
+      "issuerName": "Cairo Poultry Company"
     },
     {
       "isin": "EGS02091C014",
@@ -57,6 +61,10 @@
       "issuerName": "Iron & Steel for Mines & Quarries"
     },
     {
+      "isin": "EGS14041C015",
+      "issuerName": "El Nasr Mining Company"
+    },
+    {
       "isin": "EGS21351C019",
       "issuerName": "Arabia Investments Holding"
     },
@@ -75,6 +83,10 @@
     {
       "isin": "EGS21FG1C015",
       "issuerName": "ALMAZA FOR CONSTRUCTION AND BUILDING AND AGRICULTURAL RECLAMATION"
+    },
+    {
+      "isin": "EGS21FW1C015",
+      "issuerName": "PIONEERS PROPERTIES FOR URBAN DEVELOPMEN"
     },
     {
       "isin": "EGS22171C010",
@@ -145,6 +157,10 @@
       "issuerName": "Juhayna Food Industries"
     },
     {
+      "isin": "EGS30AL1C012",
+      "issuerName": "Obour Land for Food Industries"
+    },
+    {
       "isin": "EGS32161C019",
       "issuerName": "Goldentex Wool Co."
     },
@@ -155,6 +171,10 @@
     {
       "isin": "EGS32331C018",
       "issuerName": "Arab Polvara Spinning & Weaving Company"
+    },
+    {
+      "isin": "EGS33041C012",
+      "issuerName": "Oriental Weavers"
     },
     {
       "isin": "EGS33061C010",
@@ -189,12 +209,20 @@
       "issuerName": "Delta Co. For Printing and Packaging"
     },
     {
+      "isin": "EGS38081C013",
+      "issuerName": "egyptian international pharmaceuticals industries"
+    },
+    {
       "isin": "EGS380G1C011",
       "issuerName": "Minapharm Pharmaceutical"
     },
     {
       "isin": "EGS380P1C010",
       "issuerName": "Alexanderia Minerals Oils Co."
+    },
+    {
+      "isin": "EGS380R1C018",
+      "issuerName": "OCTOBER PHARMA S.A.E"
     },
     {
       "isin": "EGS38171C012",
@@ -215,6 +243,10 @@
     {
       "isin": "EGS38321C013",
       "issuerName": "Arabeya for Pharmaceutical and Chemical Industries"
+    },
+    {
+      "isin": "EGS38331C012",
+      "issuerName": "Nile For Pharmaceuticals And Chemical Industries"
     },
     {
       "isin": "EGS38341C011",
@@ -267,6 +299,10 @@
     {
       "isin": "EGS3C0O1C016",
       "issuerName": "Arabian Cement"
+    },
+    {
+      "isin": "EGS3C111C019",
+      "issuerName": "the general cop.for ceramic and porcelain products"
     },
     {
       "isin": "EGS3C151C015",
@@ -357,12 +393,20 @@
       "issuerName": "Modern Lebanese Egyptian Al-Eshraq For Manufacturing"
     },
     {
+      "isin": "EGS3J7D2C015",
+      "issuerName": "Petroleum Marine Services"
+    },
+    {
       "isin": "EGS3JM11C012",
       "issuerName": "GADWA FOR INDUSTRIAL DEVELOPMENT"
     },
     {
       "isin": "EGS42051C010",
       "issuerName": "Egyptian Transport & Commercial Services Company- EgyTrans"
+    },
+    {
+      "isin": "EGS42101C013",
+      "issuerName": "Port Said Container & Cargo Handling"
     },
     {
       "isin": "EGS42111C012",
@@ -501,6 +545,10 @@
       "issuerName": "EL-Shams Housing & Urbanization"
     },
     {
+      "isin": "EGS65131C012",
+      "issuerName": "National Housing for Professional Syndicates"
+    },
+    {
       "isin": "EGS651B1C018",
       "issuerName": "canadian gulf real estate investment co"
     },
@@ -529,12 +577,20 @@
       "issuerName": "CIRA Education"
     },
     {
+      "isin": "EGS65551C011",
+      "issuerName": "El Obour Co. for Real Estate Investment"
+    },
+    {
       "isin": "EGS65571C019",
       "issuerName": "Misr City For Housing And Urbanization"
     },
     {
       "isin": "EGS65591C017",
       "issuerName": "Heliopolis For Housing & Development"
+    },
+    {
+      "isin": "EGS655L1C012",
+      "issuerName": "Palm Hills Develpment Company s.a.e"
     },
     {
       "isin": "EGS65621C012",
@@ -549,6 +605,10 @@
       "issuerName": "Arab Company For Land Reclamation"
     },
     {
+      "isin": "EGS65851C015",
+      "issuerName": "sixth of october for development & investment co.S.A.E(Sodic"
+    },
+    {
       "isin": "EGS66DU1C015",
       "issuerName": "Alexandria for Investment and Urban Development"
     },
@@ -559,6 +619,10 @@
     {
       "isin": "EGS67001C015",
       "issuerName": "International Co. For Leasing (INCOLEASE)"
+    },
+    {
+      "isin": "EGS67181C015",
+      "issuerName": "Oden Investment"
     },
     {
       "isin": "EGS67191C014",
@@ -621,6 +685,10 @@
       "issuerName": "REACAP Financial Investment Co."
     },
     {
+      "isin": "EGS691A1C011",
+      "issuerName": "Prime Holding s.a.e"
+    },
+    {
       "isin": "EGS691D1C018",
       "issuerName": "C I Capital Holding For Financial Investments"
     },
@@ -641,6 +709,10 @@
       "issuerName": "Grand Investment Capital"
     },
     {
+      "isin": "EGS693V1C014",
+      "issuerName": "Orascom Investment Holding s.a.e"
+    },
+    {
       "isin": "EGS69491M015",
       "issuerName": "EGX 30 INDEX ETF"
     },
@@ -651,6 +723,10 @@
     {
       "isin": "EGS694B1C017",
       "issuerName": "EGYPTIAN REAL ESTATE FUND"
+    },
+    {
+      "isin": "EGS696S1C016",
+      "issuerName": "Orascom Financial Holding"
     },
     {
       "isin": "EGS696Z1C017",
@@ -677,6 +753,14 @@
       "issuerName": "GENERAL EGYPTIAN FOR TOURISM AND HOTELS ( EGOTH )"
     },
     {
+      "isin": "EGS70321C012",
+      "issuerName": "Orascom Development Egypt"
+    },
+    {
+      "isin": "EGS70331C011",
+      "issuerName": "Pyramisa Company For Hotels Tour Villages"
+    },
+    {
       "isin": "EGS70342C018",
       "issuerName": "Golden Pyramids Plaza"
     },
@@ -691,6 +775,10 @@
     {
       "isin": "EGS70R91C016",
       "issuerName": "El Wadi for International & Investment Development"
+    },
+    {
+      "isin": "EGS72011C017",
+      "issuerName": "Nozha International Hospital"
     },
     {
       "isin": "EGS72081C010",
@@ -715,6 +803,10 @@
     {
       "isin": "EGS72FL1C016",
       "issuerName": "Egypt Education Platform"
+    },
+    {
+      "isin": "EGS72XL1C014",
+      "issuerName": "PREMIUM Healthcare Group"
     },
     {
       "isin": "EGS73541C012",
@@ -807,18 +899,23 @@
     {
       "isin": "EGS7DNR1C019",
       "issuerName": "Well Med For Medical Tourism"
+    },
+    {
+      "isin": "EGS95001C011",
+      "issuerName": "Orascom Construction p.l.c"
     }
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 176,
-    "exactIsinsQueried": 185,
+    "matchedAtMcdr": 200,
+    "exactIsinsQueried": 210,
     "confirmedNotFoundAfterExactSearch": {
       "NBCC": "EGS220N1C016",
       "AIDC": "EGS65R01C015",
       "NFCI": "EGS5ACC1C014",
       "EGSA": "EGS48022C015",
       "MMHC": "EGS651F1C014",
+      "OCAP": "EGS699Z1C014",
       "CCAPP": "EGS73541P048",
       "ASPI_r3": "EGS924G1C014",
       "LUTS_r1": "EGS924K1C018",
@@ -829,39 +926,15 @@
       "SAUD": "EGS60101C010",
       "SPIN": "EGS32041C013",
       "RREI": "EGS65011C016",
-      "POUL": "EGS02051C018",
-      "PRCL": "EGS3C111C019",
       "SIDC": "EGS38361C019",
       "SUGR": "EGS30201C015",
-      "NMIN": "EGS14041C015",
       "SWDY": "EGS3G0Z1C014",
       "SIEG": "EGS3C9X1C016",
-      "PHAR": "EGS38081C013",
-      "OBRI": "EGS65551C011",
       "SPHT": "EGS70H02C014",
-      "NIPH": "EGS38331C012",
       "UEGC": "EGS21531C016",
       "ZEOT": "EGS38251C012",
       "WCDF": "EGS30421C019",
-      "NHPS": "EGS65131C012",
-      "NINH": "EGS72011C017",
-      "OFH": "EGS696S1C016",
-      "OCAP": "EGS699Z1C014",
-      "ODIN": "EGS67181C015",
-      "OLFI": "EGS30AL1C012",
-      "OCPH": "EGS380R1C018",
-      "ORAS": "EGS95001C011",
-      "ORHD": "EGS70321C012",
-      "OIH": "EGS693V1C014",
-      "ORWE": "EGS33041C012",
-      "PHDC": "EGS655L1C012",
       "SIMO": "EGS36091C014",
-      "PMSC": "EGS3J7D2C015",
-      "PRDC": "EGS21FW1C015",
-      "POCO": "EGS42101C013",
-      "PHGC": "EGS72XL1C014",
-      "PRMH": "EGS691A1C011",
-      "PHTV": "EGS70331C011",
       "QNBE": "EGS60081C014",
       "RAKT": "EGS36021C011",
       "RACC": "EGS74191C015",
@@ -878,7 +951,6 @@
       "SKPC": "EGS380S1C017",
       "SCEM": "EGS3C401C014",
       "SINA": "EGS103V1C018",
-      "OCDI": "EGS65851C015",
       "SAIB": "EGS60142C014",
       "SCFM": "EGS30411C010",
       "SVCE": "EGS3C351C011",

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T14:31:22.212057+00:00",
+  "updatedAt": "2026-09-07T05:34:45.712175+00:00",
   "publicEgx": {
     "source": "beta.egx market-watch timestamped archive",
     "checkpointObservations": 12,
-    "emptyCaptures": 3,
+    "emptyCaptures": 4,
     "firstCheckpoint": "2026-08-28T15:52:16Z",
     "latestCheckpoint": "2026-09-06T14:29:58Z",
     "fields": {

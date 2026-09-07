@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-06T14:31:25.092914+00:00",
+  "builtAt": "2026-09-07T05:34:48.613582+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192043,
-    "withoutTickerInHeading": 36073,
+    "items": 192071,
+    "withoutTickerInHeading": 36101,
     "tickerNotInThisDirectory": 28860,
     "attributedToAnIssuer": 127110,
     "months": [
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-06",
-        "items": 154,
-        "expected": 154,
+        "items": 182,
+        "expected": 182,
         "status": "complete"
       }
     ],
@@ -1860,9 +1860,9 @@
     },
     {
       "ticker": "ABUK",
-      "egxFilingCount": 659,
-      "latestEgxFilingId": "294351",
-      "latestEgxFilingAt": "2026-09-06T10:29:17",
+      "egxFilingCount": 658,
+      "latestEgxFilingId": "294044",
+      "latestEgxFilingAt": "2026-08-30T12:38:26",
       "candidateIssuerWebsite": "https://www.abuqir.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ABUK/profile",
       "websiteStatus": {
@@ -3558,9 +3558,9 @@
     },
     {
       "ticker": "KWIN",
-      "egxFilingCount": 557,
-      "latestEgxFilingId": "292576",
-      "latestEgxFilingAt": "2026-08-09T09:57:53",
+      "egxFilingCount": 558,
+      "latestEgxFilingId": "294356",
+      "latestEgxFilingAt": "2026-09-06T14:49:52",
       "candidateIssuerWebsite": "https://www.caironational.org/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KWIN/profile",
       "websiteStatus": null,

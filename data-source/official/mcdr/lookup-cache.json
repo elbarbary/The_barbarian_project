@@ -1988,5 +1988,275 @@
     "status": "not_found",
     "rows": [],
     "fetchedAt": "2026-09-06T09:36:25.393737+00:00"
+  },
+  "EGS65131C012": {
+    "ticker": "NHPS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65131C012",
+        "issuerName": "National Housing for Professional Syndicates"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:32:56.313536+00:00"
+  },
+  "EGS72011C017": {
+    "ticker": "NINH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72011C017",
+        "issuerName": "Nozha International Hospital"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:32:59.557948+00:00"
+  },
+  "EGS38331C012": {
+    "ticker": "NIPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38331C012",
+        "issuerName": "Nile For Pharmaceuticals And Chemical Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:02.128759+00:00"
+  },
+  "EGS14041C015": {
+    "ticker": "NMIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS14041C015",
+        "issuerName": "El Nasr Mining Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:04.896506+00:00"
+  },
+  "EGS65551C011": {
+    "ticker": "OBRI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65551C011",
+        "issuerName": "El Obour Co. for Real Estate Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:07.495857+00:00"
+  },
+  "EGS699Z1C014": {
+    "ticker": "OCAP",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-07T05:33:10.200203+00:00"
+  },
+  "EGS65851C015": {
+    "ticker": "OCDI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65851C015",
+        "issuerName": "sixth of october for development & investment co.S.A.E(Sodic"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:12.533191+00:00"
+  },
+  "EGS380R1C018": {
+    "ticker": "OCPH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS380R1C018",
+        "issuerName": "OCTOBER PHARMA S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:15.345962+00:00"
+  },
+  "EGS67181C015": {
+    "ticker": "ODIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67181C015",
+        "issuerName": "Oden Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:17.901198+00:00"
+  },
+  "EGS696S1C016": {
+    "ticker": "OFH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS696S1C016",
+        "issuerName": "Orascom Financial Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:20.419848+00:00"
+  },
+  "EGS693V1C014": {
+    "ticker": "OIH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS693V1C014",
+        "issuerName": "Orascom Investment Holding s.a.e"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:22.761537+00:00"
+  },
+  "EGS30AL1C012": {
+    "ticker": "OLFI",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30AL1C012",
+        "issuerName": "Obour Land for Food Industries"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:24.977371+00:00"
+  },
+  "EGS95001C011": {
+    "ticker": "ORAS",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS95001C011",
+        "issuerName": "Orascom Construction p.l.c"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:27.327504+00:00"
+  },
+  "EGS70321C012": {
+    "ticker": "ORHD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70321C012",
+        "issuerName": "Orascom Development Egypt"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:29.710803+00:00"
+  },
+  "EGS33041C012": {
+    "ticker": "ORWE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS33041C012",
+        "issuerName": "Oriental Weavers"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:31.876278+00:00"
+  },
+  "EGS38081C013": {
+    "ticker": "PHAR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38081C013",
+        "issuerName": "egyptian international pharmaceuticals industries"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:34.628354+00:00"
+  },
+  "EGS655L1C012": {
+    "ticker": "PHDC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS655L1C012",
+        "issuerName": "Palm Hills Develpment Company s.a.e"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:36.779342+00:00"
+  },
+  "EGS72XL1C014": {
+    "ticker": "PHGC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS72XL1C014",
+        "issuerName": "PREMIUM Healthcare Group"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:39.144454+00:00"
+  },
+  "EGS70331C011": {
+    "ticker": "PHTV",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70331C011",
+        "issuerName": "Pyramisa Company For Hotels Tour Villages"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:41.325837+00:00"
+  },
+  "EGS3J7D2C015": {
+    "ticker": "PMSC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3J7D2C015",
+        "issuerName": "Petroleum Marine Services"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:44.105565+00:00"
+  },
+  "EGS42101C013": {
+    "ticker": "POCO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS42101C013",
+        "issuerName": "Port Said Container & Cargo Handling"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:46.691662+00:00"
+  },
+  "EGS02051C018": {
+    "ticker": "POUL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS02051C018",
+        "issuerName": "Cairo Poultry Company"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:49.048687+00:00"
+  },
+  "EGS3C111C019": {
+    "ticker": "PRCL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C111C019",
+        "issuerName": "the general cop.for ceramic and porcelain products"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:51.406970+00:00"
+  },
+  "EGS21FW1C015": {
+    "ticker": "PRDC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21FW1C015",
+        "issuerName": "PIONEERS PROPERTIES FOR URBAN DEVELOPMEN"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:53.586400+00:00"
+  },
+  "EGS691A1C011": {
+    "ticker": "PRMH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691A1C011",
+        "issuerName": "Prime Holding s.a.e"
+      }
+    ],
+    "fetchedAt": "2026-09-07T05:33:56.036000+00:00"
   }
 }
