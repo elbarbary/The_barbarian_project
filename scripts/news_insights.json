@@ -847,6 +847,10 @@
     "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
     "meaning_ar": "يُعد هذا الإجراء تخفيضاً في نسبة ملكية مساهم رئيسي في رأس مال الشركة لتصل إلى 12.81%، مما يعيد تشكيل هيكل الملكية وحصص التصويت بين المساهمين."
   },
+  "القاهره تستضيف موتمر مراكز التجاره العالميه (WTCA) للشرق الاوسط وافريقيا 2026": {
+    "meaning": "Hosting the WTCA regional conference convenes international trade delegations, commercial real estate operators, and business network representatives in Cairo, linking local market participants directly with cross-border trade and logistics infrastructure networks.",
+    "meaning_ar": "تجمع استضافة المؤتمر الإقليمي لرابطة مراكز التجارة العالمية وفود التجارة الدولية ومطوري العقارات التجارية وممثلي شبكات الأعمال في القاهرة، مما يربط الفاعلين في السوق المحلي بشبكات التجارة والخدمات اللوجستية العابرة للحدود."
+  },
   "الكاكاو يتجه لخساره اسبوعيه مع تقييم افاق السوق": {
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
     "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
@@ -898,6 +902,10 @@
   "امريكا تستهدف كيانات تركيه بعقوبات جديده مرتبطه بايران": {
     "meaning": "The imposition of secondary sanctions restricts targeted entities from accessing dollar-clearing systems and international banking networks, halting cross-border trade settlements and supply chain operations tied to sanctioned jurisdictions.",
     "meaning_ar": "يؤدي فرض العقوبات الثانوية إلى حظر وصول الكيانات المستهدفة إلى أنظمة المقاصة بالدولار والشبكات المصرفية الدولية، مما يعطل التسويات التجارية وسلاسل الإمداد المرتبطة بالجهات الخاضعة للعقوبات."
+  },
+  "انتعاش الطلب الصيني علي النفط يرفع الاسعار من الكونغو الي البرازيل": {
+    "meaning": "Higher crude oil intake from Chinese refineries increases global spot market competition, absorbing export volumes and raising benchmark differentials across producing regions including West Africa and Latin America.",
+    "meaning_ar": "يؤدي ارتفاع استهلاك مصافي التكرير الصينية للنفط الخام إلى زيادة التنافس في الأسواق الفورية العالمية، مما يسحب كميات التصدير ويرفع الفروق السعرية للأسعار القياسية في مناطق الإنتاج من غرب إفريقيا إلى أمريكا اللاتينية."
   },
   "انخفاض موشري البحرين العام والاسلامي في ختام التعاملات": {
     "meaning": "The decline in both the Bahrain All Share Index and the Bahrain Islamic Index reflects a net decrease in the market capitalization of listed conventional and Sharia-compliant equities resulting from aggregate daily closing transactions.",
@@ -1660,6 +1668,10 @@
   "مدبولي يفتتح مصنعين لتجهيز سيارات الاسعاف وتجميع اجهزه الاسنان باستثمارات 16 مليون دولار": {
     "meaning": "The deployment of $16 million in direct capital expenditure establishes domestic assembly lines for ambulance outfitting and dental equipment, shifting the supply chain from fully finished imports to localized component integration.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة 16 مليون دولار إضافة خطوط إنتاج وتجميع محلية لتجهيز سيارات الإسعاف ومعدات الأسنان، محولاً سلسلة التوريد من استيراد المنتجات كاملة الصنع إلى التجميع والتجهيز المحلي."
+  },
+  "مدبولي: انتهاء مشروعات 926 قريه ضمن المرحله الاولي من مبادره حياه كريمه": {
+    "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
+    "meaning_ar": "يمثل إنجاز حزم البنية التحتية الريفية انتقال شركات المقاولات ومواد البناء من مرحلة التنفيذ الإنشائي إلى مراحل التسليم النهائي والمطالبات المالية وضمان الأعمال."
   },
   "مديرو الثروات يديرون ظهورهم لارتفاع الاسهم الاوروبيه": {
     "meaning": "Wealth managers reallocate capital away from rising European equities into other asset classes or regional markets, adjusting portfolio exposure according to institutional mandates.",
