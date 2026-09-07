@@ -583,6 +583,10 @@
     "meaning": "The establishment of alternative export and energy routes shifts transport logistics away from vulnerable maritime transit corridors. This operational arrangement reconfigures oil flows through bypass pipelines and utilizes secondary ports and overland infrastructure.",
     "meaning_ar": "يؤدي إنشاء مسارات بديلة إلى إعادة توجيه العمليات اللوجستية لنقل الطاقة والصادرات بعيداً عن الممرات الملاحية المعرضة للمخاطر. ويعتمد هذا الترتيب التشغيلي على استخدام خطوط أنابيب التفافية وشبكات نقل برية وموانئ بديلة لتسيير الشحنات."
   },
+  "الانتهاء من تنفيذ 98 الف وحده ضمن «سكن لكل المصريين» بمدينه حدايق العاصمه": {
+    "meaning": "Completing the construction of large-scale public housing projects shifts contracted real estate and infrastructure volumes from the execution phase to project delivery, closing out procurement and construction billing cycles for participating contractors.",
+    "meaning_ar": "ينقل الانتهاء من تشييد مشروعات الإسكان الاجتماعي الكبرى وحدات البنية التحتية والعقارات من مرحلة التنفيذ إلى مرحلة التسليم، مما يغلق دورات المطالبات المالية لشركات المقاولات المشاركة."
+  },
   "البنك الاهلي يتصدر قايمه اعلي العلامات التجاريه قيمه في مصر ب 717 مليون دولار": {
     "meaning": "Brand valuation quantifies the financial worth of an institution's intangible assets and market positioning, reflecting National Bank of Egypt's balance sheet scale and dominant retail deposit base within the domestic banking sector.",
     "meaning_ar": "يعكس تقييم العلامة التجارية القيمة المالية للأصول غير الملموسة والمكانة السوقية للمؤسسة، وهو ما يرتبط بحجم المركز المالي للبنك الأهلي المصري وحصته السوقية في قاعدة الودائع والتجزئة المصرفية محلياً."
@@ -1473,6 +1477,10 @@
     "meaning": "The lack of a legal quorum postpones the company's General Assembly, which suspends formal shareholder voting on agenda items and requires rescheduling the meeting pursuant to corporate governance regulations.",
     "meaning_ar": "يؤدي عدم اكتمال النصاب القانوني إلى تأجيل انعقاد الجمعية العامة للشركة، مما يعلق التصويت الرسمي للمساهمين على بنود جدول الأعمال ويتطلب إعادة الدعوة للانعقاد وفقاً للضوابط المنظمة."
   },
+  "فول الصويا يضع الصين امام اختبار جديد قبل قمه «شي» و«ترامب»": {
+    "meaning": "Soybean import volumes and tariff policies function as a key bilateral trade mechanism and negotiation benchmark between US agricultural exporters and Chinese commodity purchasers.",
+    "meaning_ar": "تمثل واردات وسياسات تسعير فول الصويا أداة تجارية رئيسية وآلية تفاوضية في حركة السلع الزراعية الثنائية بين المصدرين في الولايات المتحدة والمستوردين في الصين."
+  },
   "فولفو مصر تفتتح صاله العرض ومركز الخدمه الرييسي D5 وتطلق EX90 الكهرباييه": {
     "meaning": "Opening an integrated showroom and service facility expands the brand's physical retail and after-sales maintenance infrastructure in the domestic market, while the rollout of the EX90 introduces a new battery electric vehicle into its commercial product portfolio.",
     "meaning_ar": "يؤدي افتتاح صالة عرض ومركز خدمة متكامل إلى توسيع البنية التحتية لعمليات البيع وخدمات ما بعد البيع في السوق المحلي، بينما يضيف طرح طراز EX90 مركبة كهربائية بالكامل إلى المحفظة التجارية للعلامة."
@@ -1645,6 +1653,10 @@
     "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
     "meaning_ar": "يؤدي نقص المعروض من محصول الطماطم الخام إلى تقييد توافر المدخلات الإنتاجية لمصانع الصلصة، مما يؤثر على معدلات التشغيل وتكاليف توريد المواد الخام في قطاع الصناعات الغذائية."
   },
+  "مصر تبحث توسيع التعاون مع البنك الاسيوي": {
+    "meaning": "Cooperation with the Asian Infrastructure Investment Bank involves securing multilateral development financing and technical assistance for domestic infrastructure, energy, and transportation projects.",
+    "meaning_ar": "يتضمن التعاون مع البنك الآسيوي للاستثمار في البنية التحتية توفير تمويلات تنموية متعددة الأطراف ودعم فني لمشروعات البنية التحتية والطاقة والنقل المحلية."
+  },
   "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
     "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
     "meaning_ar": "تعمل منتديات GS1 على مواءمة عمليات تجارة التجزئة واللوجستيات والتجارة الإلكترونية المحلية مع المعايير الدولية الموحدة لتكويد المنتجات، وبروتوكولات تتبع سلاسل الإمداد، وأنظمة مزامنة البيانات الرقمية."
@@ -1660,6 +1672,10 @@
   "مصر تعتزم تطوير اليه لتمويل مشروعات البنيه التحتيه بالعمله المحليه": {
     "meaning": "The mechanism establishes a framework for funding infrastructure assets through Egyptian pound-denominated debt instruments and credit facilities, structuring project obligations in domestic currency rather than foreign exchange.",
     "meaning_ar": "تؤسس الآلية إطاراً لتمويل أصول البنية التحتية عبر أدوات دين وتسهيلات ائتمانية مقومة بالجنيه المصري، مما يجعل هيكلة الالتزامات المالية للمشروعات قائمة بالعملة المحلية بدلاً من العملات الأجنبية."
+  },
+  "مصر تعتزم وضع اطار تشريعي لحمايه العماله المنزليه": {
+    "meaning": "Establishing a legislative framework for domestic workers transitions this segment from the informal economy into the formal regulatory system, standardizing employment contracts, social insurance contributions, and legal dispute mechanisms.",
+    "meaning_ar": "يؤدي وضع إطار تشريعي للعمالة المنزلية إلى نقل هذا القطاع من الاقتصاد غير الرسمي إلى المنظومة التنظيمية الرسمية، مع توحيد معايير عقود العمل واشتراكات التأمين الاجتماعي وآليات تسوية النزاعات القانونية."
   },
   "مصر للبترول تتوسع خارجيا وتفتتح منافذ": {
     "meaning": "The company establishes retail distribution outlets and commercial operations in international markets, broadening its operational footprint and distribution network beyond the domestic market.",
