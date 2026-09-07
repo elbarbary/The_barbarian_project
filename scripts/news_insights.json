@@ -287,6 +287,10 @@
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
   },
+  "«الزراعه»: توفير تقاوي البطاطس لصغار المزارعين مباشره دون وسطاء": {
+    "meaning": "Direct state distribution of seed potatoes to smallholders establishes a state-managed input supply channel that bypasses private intermediary distributors in the agricultural value chain.",
+    "meaning_ar": "يُمثّل التوزيع المباشر لتقاوي البطاطس لصغار المزارعين عبر الدولة قناة توريد لمستلزمات الإنتاج تديرها جهات حكومية وتتجاوز الوسطاء التجاريين في سلسلة القيمة الزراعية."
+  },
   "«الطرق والكباري» تطرح 32.4 الف متر مربع للشراكه مع القطاع الخاص": {
     "meaning": "The General Authority for Roads and Bridges offers state-owned land plots through a public-private partnership framework, granting private developers long-term development, operation, or usufruct rights over public infrastructure-adjacent real estate.",
     "meaning_ar": "تطرح الهيئة العامة للطرق والكباري مساحات من الأراضي المملوكة للدولة عبر نموذج الشراكة مع القطاع الخاص، مما يمنح المطورين حقوق تطوير الأصول العقارية المجاورة للبنية التحتية وتشغيلها بنظام حق الانتفاع."
@@ -611,6 +615,10 @@
     "meaning": "Declining treasury yields lower discount rates for equity valuation models, while stable oil prices maintain predictable input and energy costs for European corporations.",
     "meaning_ar": "يؤدي تراجع عوائد السندات إلى خفض معدلات الخصم المستخدمة في تقييم الأسهم، بينما يحدد استقرار أسعار النفط تكاليف الطاقة ومدخلات الإنتاج للشركات الأوروبية."
   },
+  "الاسهم الاوروبيه تغلق الاثنين علي تباين وسط تقييم تجدد الاعمال العداييه في الشرق الاوسط": {
+    "meaning": "Geopolitical developments in the Middle East create divergent asset pricing across equity sectors, where energy and defense stocks adjust to commodity supply movements while consumer and transportation sectors react to input and shipping cost fluctuations.",
+    "meaning_ar": "تؤدي التطورات الجيوسياسية في الشرق الأوسط إلى تباين في تسعير الأصول بين القطاعات، حيث تتأثر أسهم الطاقة والدفاع بتحركات إمدادات السلع الأساسية بينما تتأثر قطاعات النقل والاستهلاك بتغير تكاليف المدخلات والشحن."
+  },
   "الاسهم الكوريه تقفز 4.6% .. وجولدمان ساكس يحدد مستهدفا قياسيا لموشر كوسبي": {
     "meaning": "A sharp rise in a benchmark stock index reflects broad-based price appreciation across its constituent listed equities, while investment banks adjust their baseline valuation models in response to corporate earnings data and market liquidity.",
     "meaning_ar": "يمثل الارتفاع الحاد في المؤشر الرئيسي زيادة سعرية واسعة النطاق لأسهم الشركات المدرجة المكونة له، بينما تعدل بنوك الاستثمار نماذج التقييم بناءً على نتائج الأعمال ومستويات السيولة في السوق."
@@ -666,6 +674,10 @@
   "البورصه المصريه تنهي جلسه اليوم علي تباين في الموشرات": {
     "meaning": "A mixed close across indices reflects divergent trading activity, where capital flows and price movements differ between large-cap institutional equities and small-to-mid-cap stocks within the same session.",
     "meaning_ar": "يشير التباين في أداء المؤشرات إلى اختلاف مسارات الأسعار وتوزيع السيولة النقدية بين الأسهم القيادية وأسهم الشركات الصغيرة والمتوسطة خلال جلسة التداول."
+  },
+  "البورصه تختبر حاجز 57 الف نقطه تحت ضغط مبيعات الموسسات": {
+    "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
+    "meaning_ar": "تؤدي عمليات إعادة هيكلة المحافظ والتخارج المؤسسي بأحجام تداول مرتفعة إلى ضغوط سعرية على الأسهم المكونة للمؤشر، مما يدفع المؤشر الرئيسي للتداول عند مستوى 57 ألف نقطة."
   },
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
@@ -1018,6 +1030,10 @@
   "ايطاليا: الناتج المحلي يقترب من تحقيق نمو بنسبه 1% في عام 2026": {
     "meaning": "Gross Domestic Product metrics measure aggregate economic output and baseline commercial activity within an external sovereign market. For international trade partners, foreign GDP data serves as an operational benchmark for economic capacity and cross-border trade activity.",
     "meaning_ar": "يقيس مؤشر الناتج المحلي الإجمالي حجم الإنتاج الكلي والنشاط الاقتصادي الأساسي داخل الأسواق الخارجية، ويمثل معياراً مرجعياً لتتبع مستويات الطاقة الاقتصادية وحركة التبادل التجاري الدولي."
+  },
+  "ايفاد: نعمل في نحو 100 دوله واستثماراتنا تستهدف صغار المزارعين": {
+    "meaning": "The International Fund for Agricultural Development (IFAD) deploys development financing and concessional funding structures across a global network of approximately 100 countries, directly allocating capital toward smallholder agricultural supply chains and rural production infrastructure.",
+    "meaning_ar": "يوجه الصندوق الدولي للتنمية الزراعية (إيفاد) تمويلات تنموية وتسهيلات تمويلية عبر شبكة عالمية تضم نحو 100 دولة، حيث يخصص رأس المال مباشرة لسلاسل الإمداد الزراعية لصغار المزارعين والبنية التحتية للإنتاج الريفي."
   },
   "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
     "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
