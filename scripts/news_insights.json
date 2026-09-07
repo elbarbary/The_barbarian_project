@@ -795,6 +795,10 @@
     "meaning": "The Financial Regulatory Authority expands the regulatory framework for integrating digital onboarding, electronic signatures, and automated processes into non-banking financial institutions. This standardizes technological infrastructure requirements across digital lending, insurance, and asset management platforms.",
     "meaning_ar": "توسع الهيئة العامة للرقابة المالية الإطار التنظيمي لتطبيق آليات التعرف الرقمي على العملاء، والتوقيع الإلكتروني، والعمليات المؤتمتة داخل المؤسسات المالية غير المصرفية، مما يحدد المعايير الفنية للبنية التحتية التكنولوجية عبر منصات التمويل والتأمين وإدارة الأصول."
   },
+  "الرقابه الماليه وستارت اب ايجيبت تتعاونان لتطوير منصه رقميه لدعم الشركات الناشيه": {
+    "meaning": "The Financial Regulatory Authority (FRA) and Startup Egypt establish a shared digital infrastructure that centralizes regulatory compliance, licensing procedures, and operational resources for emerging enterprises.",
+    "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية ومؤسسة ستارت أب إيجيبت بنية تحتية رقمية مشتركة لمركزية إجراءات الامتثال التنظيمي والتراخيص والموارد التشغيلية للشركات الناشئة."
+  },
   "الرييس السيسي يوجه بتبني مشروع لتخضير القاهره وتحويل المساحات المخلاه الي مسطحات خضراء": {
     "meaning": "This presidential directive allocates urban redevelopment activities toward landscaping and environmental contracting, involving public works tenders for contracting firms, nursery suppliers, and irrigation infrastructure providers across cleared municipal land in Cairo.",
     "meaning_ar": "يوجه هذا التكليف الرئاسي أعمال التطوير الحضري نحو قطاعات تنسيق الحدائق والمقاولات البيئية، عبر طرح مناقصات أعمال عامة لشركات المقاولات، وموردي المسطحات الخضراء، وشبكات الري في المساحات المفرغة بمحافظة القاهرة."
@@ -2060,6 +2064,10 @@
   "هييه الدواء تحصل علي التاهيل المسبق من “الصحه العالميه” لمعامل الرقابه الدواييه": {
     "meaning": "WHO prequalification establishes that the Egyptian Drug Authority's quality control laboratories operate in compliance with international pharmaceutical testing and regulatory standards.",
     "meaning_ar": "يمثل التأهيل المسبق من منظمة الصحة العالمية اعتماداً رسمياً لمطابقة معامل الرقابة التابعة لهيئة الدواء المصرية للمعايير الدولية في الفحص والرقابة الدوائية."
+  },
+  "واردات السيارات الملاكي واجزاوها تتراجع 4.2% الي 1.9 مليار دولار خلال 6 اشهر": {
+    "meaning": "A 4.2% decline in passenger car and auto component imports reflects a contraction in foreign currency outflows dedicated to the automotive sector alongside adjusted inventory procurement by domestic vehicle distributors and assemblers.",
+    "meaning_ar": "يعكس تراجع واردات سيارات الركوب ومكوناتها بنسبة 4.2% انخفاضاً في التدفقات النقدية الخارجة بالعملة الأجنبية المخصصة للقطاع، بالتوازي مع تعديل أحجام استيراد المخزون لدى موزعي ومجمعي السيارات في السوق المحلي."
   },
   "واشنطن تصعد شروطها وايران ترفض الخضوع": {
     "meaning": "Geopolitical friction between the US and Iran maintains elevated risk premiums in global energy markets and alters maritime freight insurance rates in regional trade corridors.",
