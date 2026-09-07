@@ -626,6 +626,44 @@
    "prior_period_start": "2025-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294354",
    "ticker": "CLHO"
+  },
+  "294391": {
+   "basis": "consolidated",
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-09-07",
+   "isin": "EGS07061C012",
+   "months": 12,
+   "name_ar": "الدوليه للمحاصيل الزراعيه",
+   "net_profit_egp": 451720633.0,
+   "news_id": "294391",
+   "period": "FY 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2025-07-01",
+   "prior_net_profit_egp": 468995121.0,
+   "prior_period": "FY 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2024-07-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294391",
+   "ticker": "IFAP"
+  },
+  "294392": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-09-07",
+   "isin": "EGS07061C012",
+   "months": 12,
+   "name_ar": "الدوليه للمحاصيل الزراعيه",
+   "net_profit_egp": 432970193.0,
+   "news_id": "294392",
+   "period": "FY 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2025-07-01",
+   "prior_net_profit_egp": 124739821.0,
+   "prior_period": "FY 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2024-07-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294392",
+   "ticker": "IFAP"
   }
  },
  "read": {
@@ -689,6 +727,8 @@
   "294344": "2026-09-06",
   "294347": "2026-09-06",
   "294351": "2026-09-06",
-  "294354": "2026-09-06"
+  "294354": "2026-09-06",
+  "294391": "2026-09-07",
+  "294392": "2026-09-07"
  }
 }

@@ -58,7 +58,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ACAMD/profile",
   "record": {
-   "filings": 490,
+   "filings": 491,
    "first_filing": "2018-06-27",
    "trading_suspensions": 16,
    "trading_resumptions": 14,
@@ -471,7 +471,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AMER/profile",
   "record": {
-   "filings": 795,
+   "filings": 796,
    "first_filing": "2010-11-09",
    "trading_suspensions": 13,
    "trading_resumptions": 10,
@@ -1139,7 +1139,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/CEFM/profile",
   "record": {
-   "filings": 715,
+   "filings": 716,
    "first_filing": "2010-01-13",
    "trading_suspensions": 22,
    "trading_resumptions": 20,
@@ -3300,13 +3300,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/IFAP/profile",
   "record": {
-   "filings": 608,
+   "filings": 611,
    "first_filing": "2010-02-08",
    "trading_suspensions": 10,
    "trading_resumptions": 10,
    "capital_increases": 3,
    "general_assemblies": 77,
-   "periods_reported": 68,
+   "periods_reported": 69,
    "loss_making_periods": 12
   },
   "generated": "2026-08-24"
@@ -3975,7 +3975,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MEPA/profile",
   "record": {
-   "filings": 582,
+   "filings": 583,
    "first_filing": "2011-08-04",
    "trading_suspensions": 17,
    "trading_resumptions": 18,
@@ -4675,12 +4675,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/OCPH/profile",
   "record": {
-   "filings": 463,
+   "filings": 464,
    "first_filing": "2010-02-02",
    "trading_suspensions": 24,
    "trading_resumptions": 21,
    "capital_increases": 0,
-   "general_assemblies": 52,
+   "general_assemblies": 53,
    "periods_reported": 66,
    "loss_making_periods": 0
   },
@@ -6123,7 +6123,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/TAQA/profile",
   "record": {
-   "filings": 139,
+   "filings": 140,
    "first_filing": "2023-06-04",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
