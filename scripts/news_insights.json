@@ -375,6 +375,10 @@
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
     "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
   },
+  "اسعار الذهب العالميه تستقر مع ترقب بيانات التضخم الامريكي": {
+    "meaning": "Global gold spot prices correlate with US dollar strength and interest rate expectations, leading market participants to maintain current position sizes ahead of key macroeconomic inflation releases.",
+    "meaning_ar": "ترتبط أسعار الذهب الفورية عالمياً بقوة الدولار الأمريكي وتوقعات أسعار الفائدة، مما يدفع المتعاملين إلى الإبقاء على أحجام مراكزهم الحالية قبيل صدور البيانات الاقتصادية الكلية للتضخم."
+  },
   "اسعار السمك اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
     "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
@@ -658,6 +662,10 @@
   "الصين تصدر سندات خزانه خاصه بقيمه 44 مليار دولار لتعزيز راسمال موسسات ماليه": {
     "meaning": "The Chinese government issues sovereign debt instruments to raise funds designated for direct equity injections and regulatory capital augmentation in state financial institutions.",
     "meaning_ar": "تُصدر الحكومة الصينية أدوات دين سيادية لجمع سيولة تُوجَّه مباشرةً لزيادة حقوق الملكية وتعزيز رأس المال التنظيمي في المؤسسات المالية الحكومية."
+  },
+  "الصين تضخ 45 مليار دولار لاعاده رسمله بنوك وشركات تامين": {
+    "meaning": "Recapitalization injects direct state funds into the equity base of banks and insurance institutions, altering their balance sheet structure and raising regulatory Tier 1 capital ratios.",
+    "meaning_ar": "تتضمن عملية إعادة الرسملة ضخ أموال حكومية مباشرة ضمن حقوق ملكية البنوك ومؤسسات التأمين، مما يعدل هيكل مراكزها المالية ويرفع نسب رأس المال الرقابي الأساسي لديها."
   },
   "الصين تضخ 53 مليار دولار في البنوك وشركات التامين": {
     "meaning": "A direct capital injection increases the regulatory capital base and liquidity reserves of recipient banks and insurers, expanding their balance sheet capacity for credit issuance and underwriting activities.",
@@ -1132,6 +1140,10 @@
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
     "meaning_ar": "تؤدي زيادة أسعار الفائدة الأمريكية إلى رفع تكلفة الفرصة البديلة لحيازة الذهب كأصل عديم العائد وتعزيز قوة الدولار، مما يضغط سلبًا على تسعير السلع المقومة بالعملة الأمريكية."
   },
+  "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. استقرار صباحي": {
+    "meaning": "Stable morning exchange rates for the Saudi Riyal in the Egyptian banking sector reflect a balance between market liquidity and currency demand for bilateral trade, remittances, and travel operations.",
+    "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي في البنوك المصرية توازن السيولة المعروضة مع مستويات الطلب على العملة لتغطية المعاملات التجارية البينية والتحويلات ونفقات السفر."
+  },
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "The closing stability of the Saudi Riyal against the Egyptian Pound reflects a balance between foreign currency supply and demand within the banking system, fixing daily settlement rates for bilateral trade invoices, remittance conversions, and religious travel operational costs.",
     "meaning_ar": "يعكس استقرار سعر صرف الريال السعودي أمام الجنيه المصري عند الإغلاق توازن المعروض والطلب على العملة داخل القطاع المصرفي، مما يثبت أسعار التسوية اليومية لفواتير التبادل التجاري، وتحويلات العاملين، والتكاليف التشغيلية لبرامج السفر الديني."
@@ -1139,6 +1151,10 @@
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
+  },
+  "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. زياده جديده": {
+    "meaning": "An increase in the EUR/EGP exchange rate raises the local currency cost of importing European goods, services, and raw materials, while expanding the Egyptian pound value of euro-denominated receivables, export revenues, and debt service obligations.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة تكلفة استيراد السلع والخدمات والمواد الخام الأوروبية بالعملة المحلية، بالتوازي مع زيادة القيمة المعادلة بالجنيه للإيرادات التصديرية والالتزامات المالية المقومة باليورو."
   },
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. استقرار بالختام": {
     "meaning": "Stability in the euro's exchange rate reflects steady supply and demand dynamics across the local banking sector, keeping import and foreign currency settlement costs unchanged for European trade transactions.",
@@ -1337,6 +1353,10 @@
     "meaning": "Establishing an industrial tire complex introduces foreign direct investment into Egypt's automotive feeder sector and establishes localized manufacturing capacity for domestic supply and regional export.",
     "meaning_ar": "يمثل إنشاء مجمع لصناعة الإطارات دخول استثمارات أجنبية مباشرة في قطاع الصناعات المغذية للسيارات في مصر، ويوطن قدرات تصنيعية موجهة للتوزيع المحلي والتصدير الإقليمي."
   },
+  "ما بين الارتفاع والخساير .. نتايج شركات اعضاء مجلس اداره البورصه تتباين في النصف الاول": {
+    "meaning": "Semi-annual financial statements reflect divergent operational performance and earnings across listed companies represented on the EGX board, showing mixed outcomes between net profit expansion and net losses based on sector-specific dynamics and cost structures.",
+    "meaning_ar": "تعكس القوائم المالية نصف السنوية تباينًا في الأداء التشغيلي ومستويات الربحية للشركات المقيدة الممثلة في مجلس إدارة البورصة، حيث تسجل بعضها أرباحًا بينما تُظهر أخرى خسائر صافية تبعًا لطبيعة تكاليف وتشغيل كل قطاع."
+  },
   "ماريدايف تتحول للربحيه بقيمه 4.55 مليون دولار بالنصف الاول": {
     "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
     "meaning_ar": "يشير التحول إلى الربحية إلى تجاوز إجمالي الإيرادات التشغيلية المحققة خلال النصف الأول لمجموع المصروفات التشغيلية وتكاليف التمويل والضرائب، مما ينقل النتيجة النهائية في قائمة الدخل من صافي خسارة إلى صافي ربح."
@@ -1408,6 +1428,10 @@
   "مساعد وزير الصناعه: نعمل علي اعاده برنامج قوي لتطوير الموردين في قطاع السيارات": {
     "meaning": "Supplier development programs in the automotive industry establish technical qualification standards and operational frameworks to integrate domestic component manufacturers directly into automotive assembly supply chains.",
     "meaning_ar": "تضع برامج تطوير الموردين في قطاع السيارات معايير التأهيل الفني والأطر التشغيلية لدمج مصنعي المكونات المحلية مباشرة ضمن سلاسل إمداد مصانع تجميع السيارات."
+  },
+  "مساهم يبيع 1.5 مليون سهم “العبوات الطبيه” ب3.27 مليون جنيه": {
+    "meaning": "This transaction represents a secondary market ownership transfer of 1.5 million shares for EGP 3.27 million in cash consideration, altering the company's shareholder structure without changing its total issued capital or balance sheet equity.",
+    "meaning_ar": "تمثل هذه المعاملة نقل ملكية أسهم في السوق الثانوي بقيمة إجمالية قدرها 3.27 مليون جنيه، مما يؤدي إلى تغيير في هيكل الملكية وقاعدة المساهمين دون التأثير على إجمالي رأس مال الشركة المصدر."
   },
   "مساهم يتخارج من “الاهرام للطباعه” بقيمه 1.69 مليون جنيه": {
     "meaning": "A shareholder executed a complete equity divestment in El Ahram for Printing and Packaging with a transaction value of EGP 1.69 million, shifting the company's ownership structure and free-float distribution on the EGX.",
