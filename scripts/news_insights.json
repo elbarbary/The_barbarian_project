@@ -823,6 +823,10 @@
     "meaning": "Central bank gold custody operations involve providing secure vaulting infrastructure and settlement facilities for foreign governments, official institutions, and bullion market participants, anchoring liquidity in the international gold clearing system.",
     "meaning_ar": "تشمل عمليات حفظ الذهب في البنوك المركزية توفير بنية تحتية آمنة للخزائن وخدمات تسوية للحكومات والمؤسسات الرسمية والمتعاملين في سوق السبائك، مما يمثل ركيزة لسيولة نظام المقاصة الدولي للذهب."
   },
+  "بيانات الاحتياطيات ترجح بيع اليابان سندات اميركيه لدعم الين": {
+    "meaning": "Foreign exchange intervention involves a monetary authority liquidating foreign sovereign debt holdings to obtain foreign currency liquidity and acquire domestic currency on the open market, directly altering the composition and balance of official foreign reserves.",
+    "meaning_ar": "تتضمن عمليات التدخل في أسواق الصرف الأجنبي تسييل السلطات النقدية لأصول الاحتياطي من السندات الأجنبية لتوفير سيولة من العملة الصعبة ومبادلتها بالعملة المحلية في السوق المفتوح، مما يغير هيكل وحجم الاحتياطيات الرسمية."
+  },
   "بيانات التضخم تحسم توجهات الفايده الامريكيه وسط ترقب الاسواق": {
     "meaning": "Official inflation data directly dictates the US Federal Reserve's monetary policy adjustments, which determine benchmark interest rate levels and drive international capital movements across emerging and global financial markets.",
     "meaning_ar": "تحدد بيانات التضخم الرسمية مسار السياسة النقدية لمجلس الاحتياطي الفيدرالي الأمريكي، وهو ما يضبط أسعار الفائدة الأساسية ويوجه حركة تدفقات رؤوس الأموال في الأسواق المالية العالمية والناشئة."
@@ -1333,6 +1337,10 @@
     "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
     "meaning_ar": "يشير التحول إلى الربحية إلى تجاوز إجمالي الإيرادات التشغيلية المحققة خلال النصف الأول لمجموع المصروفات التشغيلية وتكاليف التمويل والضرائب، مما ينقل النتيجة النهائية في قائمة الدخل من صافي خسارة إلى صافي ربح."
   },
+  "ماريديف تتحول الي الربحيه المستقله وتحقق 4.5 مليون دولار بنهايه يونيو 2026": {
+    "meaning": "Standalone profitability reflects the financial performance of the parent entity's direct operations, where revenues from core marine and offshore services exceed direct operational costs and financial expenses over the reported period.",
+    "meaning_ar": "يعكس التحول إلى الربحية المستقلة نتائج الأعمال التشغيلية المباشرة للشركة الأم، حيث تتجاوز إيرادات الأنشطة والخدمات الملاحية الأساسية تكاليف التشغيل المباشرة والأعباء التمويلية خلال الفترة المالية المحددة."
+  },
   "متحدث الصحه: الاولويه في اختيار الادويه للاكثر امانا وفاعليه وكفاءه": {
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
     "meaning_ar": "تعتمد المناقصات الحكومية والمشتريات المؤسسية للقطاع الصحي معايير محددة لترسية عقود التوريد تقوم على الفاعلية السريرية، ومعايير الأمان، وكفاءة التكلفة، مما ينظم تدفق المنتجات الدوائية داخل المنظومة الصحية التابعة للدولة."
@@ -1460,6 +1468,10 @@
   "مصر وباكستان توكدان اهميه تنفيذ مذكره التفاهم بين واشنطن وطهران لاحتواء التصعيد": {
     "meaning": "Regional geopolitical de-escalation frameworks directly affect sovereign risk premiums and the operational continuity of cross-border trade and maritime energy corridors.",
     "meaning_ar": "تؤثر أطر التهدئة الجيوسياسية الإقليمية بشكل مباشر على علاوات المخاطر السيادية والاستمرارية التشغيلية لحركة التجارة العابرة للحدود وممرات نقل الطاقة البحرية."
+  },
+  "مصر وتركيا توكدان علي ضروره تكثيف الجهود المشتركه لاحتواء التصعيد في المنطقه": {
+    "meaning": "Bilateral diplomatic coordination on regional security relates to the operational continuity of cross-border supply chains, maritime shipping corridors, and bilateral trade flows between Egypt and Turkey.",
+    "meaning_ar": "يرتبط التنسيق الدبلوماسي الثنائي بشأن الاستقرار الإقليمي باستمرارية تشغيل سلاسل الإمداد، وممرات الشحن والملاحة البحرية، وتدفقات التبادل التجاري بين مصر وتركيا."
   },
   "مصر وعمان تبحثان تعزيز التجاره عبر خط بحري مباشر": {
     "meaning": "Direct maritime shipping routes connect Egyptian and Omani ports via point-to-point freight transport, eliminating intermediate transshipment hubs in bilateral maritime logistics.",
