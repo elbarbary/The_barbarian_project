@@ -35,6 +35,10 @@
     "meaning": "This daily operational throughput reflects current outbound general cargo handling capacity and logistics flow through the Port of Alexandria.",
     "meaning_ar": "يعكس حجم التداول اليومي هذا الطاقة التشغيلية الحالية لمناولة بضائع الصب العام وحركة التدفقات اللوجستية للصادرات عبر ميناء الإسكندرية."
   },
+  "4 تحديات تواجه مراكز البيانات في الفضاء قبل طفره الذكاء الاصطناعي": {
+    "meaning": "Operating orbital data centers for artificial intelligence workloads involves specific structural constraints, including high launch capital expenditures, in-orbit thermal management, radiation shielding requirements, and ground-to-space transmission bandwidth limitations.",
+    "meaning_ar": "يتطلب تشغيل مراكز البيانات الفضائية لمعالجة أعباء عمل الذكاء الاصطناعي التعامل مع محددات هيكلية وتقنية، تشمل النفقات الرأسمالية للإطلاق، والإدارة الحرارية في المدار، وتدريع الإشعاع، وسعات نقل البيانات بين الفضاء والأرض."
+  },
   "4 كيانات تفوز بصادرات القطن في الاسبوع الاخير": {
     "meaning": "Four trading companies secure export batches of Egyptian cotton through the weekly auction system, allocating domestic crop inventory for international shipment fulfillment.",
     "meaning_ar": "يمثل فوز أربع شركات بمزادات التصدير الأسبوعية تخصيصاً لكميات من محصول القطن المحلي للتوريد الخارجي عبر منظومة التداول والمزادات العلنية."
@@ -2152,6 +2156,10 @@
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
+  },
+  "وزير الطيران: تعزيز التعاون مع دول امريكا اللاتينيه في الذكاء الاصطناعي وبناء القدرات": {
+    "meaning": "The aviation sector establishes international technical cooperation frameworks to exchange artificial intelligence technologies and workforce training programs with Latin American counterparts.",
+    "meaning_ar": "يُنشئ قطاع الطيران أُطر تعاون فني دولية لتبادل تطبيقات الذكاء الاصطناعي وبرامج التدريب وبناء القدرات المؤسسية مع دول أمريكا اللاتينية."
   },
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
