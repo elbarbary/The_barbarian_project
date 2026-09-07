@@ -175,6 +175,10 @@
     "meaning": "The inauguration of the manufacturing facility adds industrial production capacity for building materials within the Suez Canal Economic Zone and expands foreign direct asset deployment in the domestic construction inputs sector.",
     "meaning_ar": "يضيف افتتاح المنشأة الصناعية طاقة إنتاجية جديدة لمواد البناء داخل المنطقة الاقتصادية لقناة السويس، ويزيد من حجم الأصول الأجنبية المباشرة في قطاع مدخلات البناء المحلي."
   },
+  "madbouly inaugurates expansion of siraj croup flare factory in sczone": {
+    "meaning": "The expansion adds physical manufacturing capacity to the industrial facility within the Suez Canal Economic Zone, utilizing the special economic zone's trade framework and logistics infrastructure.",
+    "meaning_ar": "تضيف هذه التوسعة طاقة تصنيعية جديدة إلى المنشأة الصناعية داخل المنطقة الاقتصادية لقناة السويس، بالاعتماد على الأطر التجارية والبنية التحتية اللوجستية للمنطقة."
+  },
   "madbouly inaugurates f tex polyester yarn factory in sczone": {
     "meaning": "The commissioning of the F-Tex facility expands domestic manufacturing capacity for polyester yarn and synthetic textile inputs within the Suez Canal Economic Zone.",
     "meaning_ar": "يضيف تشغيل مصنع \"إف تكس\" طاقة تصنيع محلية لإنتاج خيوط البوليستر ومدخلات الغزل الصناعي داخل المنطقة الاقتصادية لقناة السويس."
@@ -334,6 +338,10 @@
   "اسعار الخضروات والفاكهه والبطاطس والطماطم اليوم السبت 5-9-2026": {
     "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
     "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
+  },
+  "اسعار الدواجن اليوم الاثنين 7-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect the prevailing spot rates determined by feed input costs, farm-gate supply levels, and direct consumer distribution channels in the domestic market.",
+    "meaning_ar": "تعكس تحديثات أسعار الدواجن اليومية الأسعار الفورية السائدة المحددة بتكاليف الأعلاف، وحجم المعروض من المزارع، وقنوات التوزيع للمستهلك في السوق المحلي."
   },
   "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
@@ -886,6 +894,10 @@
   "تقييم بنك القاهره يرتفع": {
     "meaning": "An increase in Banque du Caire's valuation reflects higher assessed net asset value or updated multiples applied to its financial fundamentals by market assessors.",
     "meaning_ar": "يعكس ارتفاع تقييم بنك القاهرة زيادة في القيمة الصافية المقدرة لأصوله أو تطبيق مضاعفات تقييم أعلى على مؤشراته المالية الأساسية من قبل جهات التقييم."
+  },
+  "تكنوفيجن تضخ 16 مليون دولار في تصنيع سيارات الاسعاف وتجميع اجهزه الاسنان": {
+    "meaning": "This direct capital deployment allocates $16 million in capital expenditure to establish local assembly and manufacturing operations for ambulance vehicles and dental equipment within the domestic medical equipment sector.",
+    "meaning_ar": "يُمثل هذا الضخ الرأسمالي توجيهاً لاستثمارات بقيمة 16 مليون دولار في الإنفاق الرأسمالي لتأسيس خطوط تصنيع وتجميع محلي لسيارات الإسعاف وتجهيزات طب الأسنان ضمن قطاع الأجهزة والمستلزمات الطبية."
   },
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
