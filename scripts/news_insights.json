@@ -843,6 +843,11 @@
     "meaning": "Gold prices adjust as global market participants reposition ahead of major macroeconomic indicators, with US labor market data directly impacting the US dollar valuation and global bullion trading benchmarks.",
     "meaning_ar": "تتحرك أسعار الذهب عالمياً نتيجة لإعادة تموضع المتعاملين قبل صدور البيانات الاقتصادية الكلية، حيث تؤثر بيانات سوق العمل الأمريكي بشكل مباشر على تقييم الدولار وتسعير المعادن الثمينة."
   },
+  "تراجع اسعار الذهب مع تنامي توقعات رفع الفايده في امريكا": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
+  },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
@@ -1235,6 +1240,10 @@
   "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
     "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
+  },
+  "فاليو تعلن رسميا اولي محطات رحلتها في الاردن": {
+    "meaning": "The expansion marks the company's geographical entry into the Jordanian consumer finance market, operating cross-border non-banking financial services through local operational networks.",
+    "meaning_ar": "يمثل هذا التوسع الدخول الجغرافي للشركة إلى سوق التمويل الاستهلاكي الأردني، وتقديم خدمات مالية غير مصرفية عابرة للحدود عبر شبكات تشغيلية محلية."
   },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
