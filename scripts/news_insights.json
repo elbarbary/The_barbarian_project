@@ -327,6 +327,10 @@
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
     "meaning_ar": "يعكس ارتفاع مؤشرات الأسهم اليابانية بأكثر من 2% نمواً في القيمة السوقية الإجمالية للشركات المدرجة في بورصة طوكيو، مدفوعاً بتدفقات نقدية شرائية وأحجام تداول منفذة خلال الجلسة."
   },
+  "ارتفاع الين الي اعلي مستوياته في 7 اشهر": {
+    "meaning": "A rise in the Japanese yen increases the direct acquisition cost of JPY-denominated imports and raises the local-currency carrying value of yen-denominated liabilities.",
+    "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة التكلفة المباشرة للواردات المسعرة بالين، ورفع القيمة المعادلة بالعملة المحلية للالتزامات والديون القائمة بالعملة اليابانية."
+  },
   "ارتفاع تكاليف الاقتراض في بريطانيا يدفع الاسر الي مراجعه الرهون العقاريه وتكاليف المعيشه": {
     "meaning": "Higher benchmark interest rates raise debt-servicing expenses on variable-rate and refinancing mortgages, increasing the allocation of disposable household income toward interest obligations.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة المرجعية إلى زيادة أعباء خدمة الدين على الرهون العقارية ذات الفائدة المتغيرة وتلك المعاد تمويلها، مما يرفع نسبة الفوائد المسددة من الدخل المتاح للأسر."
@@ -499,6 +503,10 @@
     "meaning": "The expansion of coordinated multilateral financial sanctions restricts cross-border banking transactions, limits foreign currency access, and enforces asset freezes across European and US jurisdictions.",
     "meaning_ar": "يؤدي تنسيق وتوسيع نطاق العقوبات المالية متعددة الأطراف إلى تقييد المعاملات المصرفية عبر الحدود، وتحديد الوصول إلى العملات الأجنبية، وتطبيق تجميد الأصول ضمن النطاقات القضائية للاتحاد الأوروبي والولايات المتحدة."
   },
+  "الاحتياطي الدولي لمصر": {
+    "meaning": "Egypt's net international reserves consist of foreign currencies, gold, and Special Drawing Rights held by the Central Bank to meet external debt obligations and finance sovereign import requirements.",
+    "meaning_ar": "يمثل صافي الاحتياطي الدولي لمصر الأصول من النقد الأجنبي والذهب وحقوق السحب الخاصة المودعة لدى البنك المركزي، وتُستخدم لسداد الالتزامات الخارجية وتمويل واردات السلع الاستراتيجية."
+  },
   "الارجنتين تهدد بفرض عقوبات علي مشاريع نفطيه في محيط جزر فوكلاند": {
     "meaning": "Sanction threats by a sovereign state against offshore energy operations create jurisdictional and regulatory disputes that alter the operating and legal frameworks for concession holders.",
     "meaning_ar": "تؤدي التهديدات بفرض عقوبات سيادية على عمليات الطاقة البحرية إلى نشوء نزاعات تنظيمية وقانونية تغير الأطر التشغيلية لشركات الامتياز."
@@ -619,6 +627,10 @@
     "meaning": "The government allocates public compensation funds to individuals displaced or affected by national infrastructure expansion projects.",
     "meaning_ar": "تخصص الحكومة مخصصات مالية من الموازنة العامة لتعويض الأفراد المتضررين من نزع الملكية لتنفيذ مشروعات البنية التحتية القومية."
   },
+  "الدولار يتعثر رغم ارتفاع رهانات رفع الفايده الامريكيه في سبتمبر": {
+    "meaning": "The US dollar diverges from benchmark interest rate expectations as currency pricing reflects counterbalancing global macroeconomic data and cross-asset capital flows.",
+    "meaning_ar": "يتحرك سعر صرف الدولار الأمريكي بمعزل عن توقعات أسعار الفائدة المرتفعة، حيث تعكس تسعيرات العملة توازنات مدفوعة ببيانات الاقتصاد الكلي وتدفقات السيولة بين الأسواق."
+  },
   "الدولار يرتفع مع تجاوز الوظايف الامريكيه للتوقعات": {
     "meaning": "Stronger-than-expected US labor market data reinforces higher US interest rate benchmarks, strengthening the US dollar index against global currencies and shifting foreign capital flows toward dollar-denominated sovereign assets.",
     "meaning_ar": "تؤدي بيانات سوق العمل الأمريكي الأقوى من المتوقع إلى ترسيخ أسعار الفائدة المرتفعة على الدولار، مما يرفع مؤشر العملة الأمريكية مقابل العملات العالمية ويوجه تدفقات رؤوس الأموال نحو الأصول المقومة بالدولار."
@@ -654,6 +666,10 @@
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه غير مصرفيه باستخدام التكنولوجيا الماليه": {
     "meaning": "The regulatory approvals authorize four companies to deploy digital platforms and automated systems for non-banking financial operations, including credit assessment, onboarding, and transaction processing under the Financial Regulatory Authority's fintech framework.",
     "meaning_ar": "تمنح هذه الموافقات الرقابية الشركات الأربع ترخيصاً رسمياً لتشغيل منصات رقمية وأنظمة مؤتمتة لتقديم الخدمات المالية غير المصرفية، بما يشمل التقييم الائتماني والتعاقد وتنفيذ المعاملات وفقاً للأطر التنظيمية للهيئة العامة للرقابة المالية."
+  },
+  "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه ماليه باستخدام التكنولوجيا": {
+    "meaning": "Regulatory licensing enables four non-banking financial companies to deploy digital platforms and automated infrastructure to deliver financial services under the FRA's supervisory framework.",
+    "meaning_ar": "يتيح هذا الترخيص الرقابي لأربع شركات تفعيل منصات رقمية وبنية تكنولوجية لتقديم الخدمات المالية غير المصرفية ضمن الإطار التنظيمي للهيئة العامة للرقابة المالية."
   },
   "الرقابه الماليه توافق علي دعوه عموميه فيركيم مصر للنظر في اضافه نشاط انتاج وبيع الطاقه الكهرباييه": {
     "meaning": "The regulatory approval allows the company to convene its general assembly to amend its corporate purpose, adding power generation and electricity sales to its registered commercial activities.",
