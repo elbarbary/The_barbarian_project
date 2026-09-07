@@ -198,8 +198,8 @@ export function valuationExplorer(component, D, ar, React) {
   const maxCap = Math.max(1, ...filtered.map(c => c.cap));
   const getRadius = (cap) => {
     const norm = Math.sqrt(Math.max(0, cap) / maxCap);
-    const baseR = zoom >= 2.5 ? 7.5 : 5.5;
-    const maxR = zoom >= 2.5 ? 26 : 22;
+    const baseR = 5.5;
+    const maxR = 22;
     return Math.max(baseR, Math.min(maxR, baseR + norm * (maxR - baseR)));
   };
 
@@ -231,6 +231,8 @@ export function valuationExplorer(component, D, ar, React) {
 
       return React.createElement('g', {
         key: `bubble_g_${i}`,
+        'data-valuation-point': `${cx},${cy}`,
+        'data-company-name': c.name,
         onClick: (e) => {
           if (e && e.stopPropagation) e.stopPropagation();
           component.setState({ valSelectedTicker: isSelected ? null : c.ticker });
@@ -255,8 +257,10 @@ export function valuationExplorer(component, D, ar, React) {
           strokeDasharray: '3 3',
           opacity: 0.9
         }) : null,
-        showLabel ? React.createElement('rect', {
+        React.createElement('rect', {
           key: `bl_bg_${i}`,
+          'data-point-label': 'true',
+          style: { display: showLabel ? '' : 'none' },
           x: pillX,
           y: pillY,
           width: pillW,
@@ -266,9 +270,11 @@ export function valuationExplorer(component, D, ar, React) {
           fillOpacity: isSelected ? 0.96 : 0.92,
           stroke: isSelected ? 'var(--accent)' : 'var(--rule2)',
           strokeWidth: 0.8
-        }) : null,
-        showLabel ? React.createElement('text', {
+        }),
+        React.createElement('text', {
           key: `bt_${i}`,
+          'data-point-label': 'true',
+          style: { display: showLabel ? '' : 'none' },
           x: cx,
           y: pillY + 11.5,
           textAnchor: 'middle',
@@ -276,9 +282,11 @@ export function valuationExplorer(component, D, ar, React) {
           fontSize: 10,
           fontWeight: 600,
           fontFamily: 'monospace'
-        }, c.ticker) : null,
+        }, c.ticker),
+        React.createElement('title', {}, `${c.ticker} · ${c.name} · P/E ${c.pe}x · D/E ${c.de}x`),
         (showLabel && zoom >= 2.5 && cy + r + 24 <= padT + innerH) ? React.createElement('text', {
           key: `bpe_${i}`,
+          'data-point-detail': 'true',
           x: cx,
           y: cy + r + 12,
           textAnchor: 'middle',
@@ -286,7 +294,7 @@ export function valuationExplorer(component, D, ar, React) {
           fontSize: 9.5,
           fontWeight: 500,
           fontFamily: 'monospace'
-        }, `${c.pe}x`) : null
+        }, c.name) : null
       ]);
     });
 
