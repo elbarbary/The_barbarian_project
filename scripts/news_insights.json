@@ -1220,6 +1220,10 @@
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
     "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية للمشروعات الصغيرة والمتوسطة التابعة مساحات عرض وتسويق مباشرة للشركات الأجنبية وشبكات التوزيع الخارجية."
   },
+  "تنميه المشروعات: قطاع المشروعات ورياده الاعمال يستحوذ علي نحو 45% من النشاط الاقتصادي في مصر": {
+    "meaning": "Small and medium-sized enterprises and entrepreneurial ventures account for approximately 45% of Egypt's total economic output, serving as a primary structural component of the domestic production and employment base.",
+    "meaning_ar": "يُشكّل قطاع المشروعات الصغيرة والمتوسطة وريادة الأعمال نحو 45% من إجمالي الناتج والنشاط الاقتصادي في مصر، مما يجعله مكوناً هيكلياً رئيسياً لقاعدة الإنتاج والتشغيل في السوق المحلي."
+  },
   "توسعات جديده لمصنع الاسمده بالسخنه": {
     "meaning": "Physical plant expansions add production lines and operational capacity to fertilizer manufacturing facilities, altering capital expenditure allocations and industrial output volumes.",
     "meaning_ar": "تتضمن التوسعات الإنشائية للمصانع إضافة خطوط إنتاج وطاقات تشغيلية جديدة لمنشآت تصنيع الأسمدة، مما يغير من هيكل النفقات الرأسمالية وأحجام الإنتاج الصناعي."
@@ -1889,6 +1893,10 @@
     "meaning": "Micro, small, and medium enterprises (MSMEs) and entrepreneurial ventures account for a 45% share of aggregate national economic activity. This structure distributes output, commercial transactions, and employment generation across decentralized smaller-scale operating units.",
     "meaning_ar": "تمثل المشروعات الصغيرة والمتوسطة ومتناهية الصغر وريادة الأعمال حصة قدرها 45% من إجمالي النشاط الاقتصادي المحلي، مما يوزع حجم الإنتاج والتعاملات التجارية والتشغيل عبر وحدات إنتاجية صغيرة ولا مركزية."
   },
+  "مصطفي مدبولي : الحكومه تعمل علي تحقيق نمو مستدام يقوده القطاع الخاص": {
+    "meaning": "This policy framework focuses on expanding private enterprise participation across core economic sectors through asset monetization, public-private partnerships, and structural deregulation.",
+    "meaning_ar": "يركز هذا الإطار السياسي على توسيع مشاركة الشركات الخاصة في القطاعات الاقتصادية الرئيسية عبر تسييل الأصول، وشراكات القطاعين العام والخاص، وإعادة الهيكلة التنظيمية."
+  },
   "مصنع جديد لانتاج خيوط البوليستر في السخنه باستثمارات 10 ملايين دولار": {
     "meaning": "Establishing a USD 10 million polyester yarn plant in Sokhna adds operational manufacturing capacity for synthetic textile inputs in the industrial zone.",
     "meaning_ar": "يضيف إنشاء مصنع لإنتاج خيوط البوليستر باستثمارات تبلغ 10 ملايين دولار في السخنة طاقة تصنيع محلية لمدخلات الغزل والنسيج ضمن المنطقة الصناعية."
@@ -1932,6 +1940,10 @@
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
     "meaning_ar": "تعكس مؤشرات قوة سوق العمل انخفاض معدلات البطالة واستمرار الضغوط المرتبطة بالأجور، وهو ما يرتبط بآليات السياسة النقدية للبنوك المركزية القائمة على تطبيق أسعار فائدة مرتفعة لإدارة التضخم."
+  },
+  "نايب رييس الرقابه الماليه: نستهدف تحويل المختبر التنظيمي لمنصه اقليميه للابتكار": {
+    "meaning": "The regulatory sandbox operates as a supervised testing environment under the Financial Regulatory Authority, allowing non-banking financial technology companies to test digital products, operational structures, and regulatory compliance before commercial deployment.",
+    "meaning_ar": "يعمل المختبر التنظيمي كبيئة تجريبية خاضعة لإشراف الهيئة العامة للرقابة المالية، تتيح لشركات التكنولوجيا المالية غير المصرفية اختبار الحلول الرقمية، والجاهزية التشغيلية، ونماذج الامتثال للضوابط قبل طرحها رسمياً في السوق."
   },
   "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
@@ -2004,6 +2016,10 @@
   "وزير الاتصالات: قطاع تكنولوجيا المعلومات يحقق اعلي معدل نمو في تاريخه عند 24.3%": {
     "meaning": "A 24.3% growth rate reflects the largest recorded historical expansion in operational activity, service delivery, and digital infrastructure projects across the information and communications technology sector.",
     "meaning_ar": "يعكس تسجيل معدل نمو بنسبة 24.3% أعلى وتيرة تاريخية في حجم النشاط التشغيلي، وتقديم الخدمات، ومشاريع البنية التحتية الرقمية لقطاع تكنولوجيا المعلومات والاتصالات."
+  },
+  "وزير الاستثمار: نستهدف التعاون بين المختبر التنظيمي و«Trade Tech Sandbox» لدعم المصدرين بالتكنولوجيا": {
+    "meaning": "The initiative links financial and trade technology regulatory sandboxes to test digital solutions for trade procedures and export financing under supervised regulatory frameworks.",
+    "meaning_ar": "تربط المبادرة بين المختبرات التنظيمية للتكنولوجيا المالية وتكنولوجيا التجارة لاختبار الحلول الرقمية الخاصة بالإجراءات التجارية وتمويل الصادرات داخل أطر تنظيمية خاضعة للإشراف."
   },
   "وزير التخطيط: مصر تمتلك امكانات واعده لتوسيع سلاسل القيمه في التصنيع الزراعي والغذايي": {
     "meaning": "Expanding agro-industrial value chains integrates raw agricultural crop inputs directly with midstream processing, packaging, and distribution operations within the domestic supply chain.",
