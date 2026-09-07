@@ -2,7 +2,7 @@
  "generated": "2026-09-07",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 453,
+ "count": 455,
  "estimated": 397,
  "events": [
   {
@@ -664,6 +664,30 @@
    "section": "Corporate Actions",
    "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=293399",
    "id": "egx-293399"
+  },
+  {
+   "date": "2026-09-22",
+   "kind": "ex_dividend",
+   "note": "Ex-dividend — last day to own for the coupon",
+   "ticker": "CICH",
+   "title": "C I Capital Holding For financial Investments (CICH.CA) Declares Cash Dividends",
+   "title_ar": "سي أي كابيتال القابضة للاستثمارات المالية (CICH.CA) تعلن عن توزيع نقدي",
+   "filed": "2026-09-07",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294423",
+   "id": "egx-294423"
+  },
+  {
+   "date": "2026-09-24",
+   "kind": "dividend_payment",
+   "note": "Cash dividend payment",
+   "ticker": "CICH",
+   "title": "C I Capital Holding For financial Investments (CICH.CA) Declares Cash Dividends",
+   "title_ar": "سي أي كابيتال القابضة للاستثمارات المالية (CICH.CA) تعلن عن توزيع نقدي",
+   "filed": "2026-09-07",
+   "section": "Corporate Actions",
+   "link": "https://www.egx.com.eg/en/NewsDetails.aspx?NewsID=294423",
+   "id": "egx-294423"
   },
   {
    "date": "2026-10-26",
