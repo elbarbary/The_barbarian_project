@@ -1,0 +1,100 @@
+{
+  "causal": [
+    {
+      "flags": "i",
+      "pattern": "\\b(because|therefore|hence|thus|as a result|led to|leads? to|leading to|due to|owing to|ahead of|in anticipation of|on the back of|in response to|which (?:means|explains|suggests|signals))\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "[,;]\\s*so\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\bdriv(?:es|ing|en) (?:the|its|their|an?|up|down|higher|lower)\\b"
+    },
+    {
+      "flags": "",
+      "pattern": "بسبب|لذلك|لذا |ولذا |مما أدى|ما أدى|أدى إلى|أدت إلى|يؤدي إلى|تؤدي إلى|نتيجةً|نتيجة ل|على خلفية|قبل إعلان|قبل صدور|استباقًا|تمهيدًا|مما دفع|ما دفع|بفعل |في أعقاب|عقب "
+    }
+  ],
+  "directive": [
+    {
+      "flags": "i",
+      "pattern": "\\b(you|investors|traders|holders|readers)\\s+(should|must|ought|can)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\bshould\\s+(buy|sell|hold|own|exit|enter|add|trim)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "(^|[.!?]\\s+)(buy|sell|hold|avoid|exit)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\b(cheap|expensive|undervalued|overvalued|bargain|overpriced)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\b(an?\\s+)?(opportunity|opportunities)\\s+to\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\b(target price|price target|stop loss|take profit)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\b(we|i)\\s+(recommend|suggest|advise)\\b"
+    },
+    {
+      "flags": "",
+      "pattern": "اشترِ|اشتري|اشتروا|بِع |بيعوا|احتفظ ب"
+    },
+    {
+      "flags": "",
+      "pattern": "(يجب|ينبغي|عليك|عليكم)\\s*(أن\\s*)?(تشتري|تبيع|تحتفظ|الشراء|البيع)"
+    },
+    {
+      "flags": "",
+      "pattern": "توصي[ةا]\\s*(ب|بال)?(شراء|بيع)|نوصي|ننصح"
+    },
+    {
+      "flags": "",
+      "pattern": "هدف السعر|السعر المستهدف|وقف الخسارة|جني الأرباح"
+    },
+    {
+      "flags": "",
+      "pattern": "عائد متوقع|أرباح متوقعة"
+    },
+    {
+      "flags": "",
+      "pattern": "فرصة (شراء|للشراء|استثمارية)"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\bworth (buying|selling|holding|a buy)\\b"
+    },
+    {
+      "flags": "i",
+      "pattern": "\\b(a|an)\\s+(compelling|attractive)\\s+(buy|entry)\\b"
+    },
+    {
+      "flags": "",
+      "pattern": "يستحق (الشراء|البيع|الاقتناء)|جدير بالشراء"
+    }
+  ],
+  "speculative": [
+    {
+      "flags": "i",
+      "pattern": "\\b(will|would|could|may|might|expected to|is expected|are expected|likely|set to|poised to|potentially|potential to|anticipated|projected|forecast(?:ed)?|stands to|going forward|in the future)\\b[^.!?]{0,50}?\\b(increas\\w*|boost\\w*|rais\\w*|lift\\w*|expand\\w*|grow\\w*|improv\\w*|strengthen\\w*|weaken\\w*|driv\\w*|support\\w*|open\\w*|unlock\\w*|reduc\\w*|lower\\w*|compress\\w*|erod\\w*|weigh\\w*|pressur\\w*|benefit\\w*|enhanc\\w*|widen\\w*|narrow\\w*|accelerat\\w*|deepen\\w*|ris(?:e|es|ing)|fall(?:s|ing)?|climb\\w*|declin\\w*|drop\\w*|jump\\w*|surg\\w*|soften\\w*|slow(?:s|ing)?)\\b"
+    },
+    {
+      "flags": "",
+      "pattern": "(من المتوقع|يُتوقع|يتوقع|المتوقع|المرتقب|المحتمل|ربما|سوف|من شأنه|من شأنها|يمهد|تمهد|آفاق|توقعات|قد )[^.!\\u061f]{0,50}?(يزيد|تزيد|زيادة|يرفع|ترفع|رفع |يعزز|تعزز|تعزيز|نمو|ينمو|يحسن|تحسن|تحسين|يخفض|تخفض|خفض |يقلل|تقلل|يدعم|تدعم|دعم |يفتح|تفتح|فتح |يوسع|توسع|توسيع|يتيح|تتيح|إتاحة|يسهم|تسهم)"
+    },
+    {
+      "flags": "i",
+      "pattern": "(share price|stock price|the stock|the shares|valuation|market cap|سعر السهم|سعر أسهم|قيمة السهم|تقييم السهم)[^.!?\\u061f]{0,40}?\\b(will|would|could|may|might|expected to|is expected|are expected|likely|set to|poised to|potentially|potential to|anticipated|projected|forecast(?:ed)?|stands to|going forward|in the future)\\b"
+    }
+  ]
+}

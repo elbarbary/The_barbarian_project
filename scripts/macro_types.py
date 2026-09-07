@@ -418,3 +418,35 @@ def speculative(text: str) -> str | None:
         if found:
             return found.group(0).strip()
     return None
+
+
+# Correlation is not causation and the words that turn one into the other are
+# few. §8.4 bans them by name — "because", "so", "ahead of" — and nothing in
+# this file enforced it: both guards above return None for "It filed, so it is
+# about to move". Scoped to the sentences and titles the crossings publish.
+_CAUSAL_EN = (r"\b(because|therefore|hence|thus|as a result|led to|leads? to|leading to|due to|"
+              r"owing to|ahead of|in anticipation of|on the back of|in response to|"
+              r"which (?:means|explains|suggests|signals))\b")
+CAUSAL = (
+    re.compile(_CAUSAL_EN, re.I),
+    re.compile(r"[,;]\s*so\b", re.I),                         # ", so" the connective; leaves "also", "so far"
+    re.compile(r"\bdriv(?:es|ing|en) (?:the|its|their|an?|up|down|higher|lower)\b", re.I),
+    re.compile("بسبب|لذلك|لذا |ولذا |مما أدى|ما أدى|أدى إلى|أدت إلى|يؤدي إلى|تؤدي إلى|نتيجةً|نتيجة ل|"
+               "على خلفية|قبل إعلان|قبل صدور|استباقًا|تمهيدًا|مما دفع|ما دفع|بفعل |في أعقاب|عقب "),
+)
+
+
+def causal(text: str) -> str | None:
+    """The connective that turns two facts into a cause, or None."""
+    for pattern in CAUSAL:
+        found = pattern.search(text or "")
+        if found:
+            return found.group(0).strip()
+    return None
+
+
+def exported_guards() -> dict:
+    """The three pattern lists as JS-compatible {pattern, flags} — one file, both suites."""
+    def rows(patterns):
+        return [{"pattern": p.pattern, "flags": "i" if p.flags & re.I else ""} for p in patterns]
+    return {"directive": rows(DIRECTIVE), "speculative": rows(SPECULATIVE), "causal": rows(CAUSAL)}

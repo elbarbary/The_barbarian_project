@@ -41,6 +41,10 @@ on:
       - 'scripts/cloud_translate.py'
       - 'scripts/translations.py'
       - 'scripts/macro_types.py'
+      # The crossings builder and the taxonomy it reads. A push that changed
+      # only these used to wait for the next cron tick to go live.
+      - 'scripts/build_connections_api.py'
+      - 'scripts/filing_types.py'
       - '.github/workflows/publish-live-data.yml'
 
   workflow_dispatch:
