@@ -35,17 +35,37 @@ test('simulatorExplorer initializes with COMI and lump sum when specified in sta
   assert.ok(sim.brokerCards.length === 7, '7 brokers compared (including Telda and Beltone)');
 });
 
-test('simulatorExplorer defaults to BTFH on daily trading for 2 years when no state is set', () => {
+test('simulatorExplorer defaults to SWDY on daily close-to-noon trading for 1 year (+200% winner)', () => {
   const comp = { state: {}, setState(patch) { Object.assign(this.state, patch); } };
   const sim = simulatorExplorer(comp, comp.state);
 
-  assert.equal(sim.ticker, 'BTFH', 'defaults to Beltone Financial Holding');
+  assert.equal(sim.ticker, 'SWDY', 'defaults to Elsewedy Electric (+200% winner)');
   assert.equal(sim.strategy, 'daily', 'defaults to daily trading strategy');
-  assert.equal(sim.range, '2Y', 'defaults to 2-year range');
+  assert.equal(sim.timing, 'close_to_noon', 'defaults to Close -> Noon strategy');
+  assert.equal(sim.range, '1Y', 'defaults to 1-year range');
   assert.equal(sim.isDaily, true, 'isDaily flag is true');
+  assert.ok(sim.brokerCards[0].netReturnPct > 200, 'best broker returns over +200% on SWDY');
   assert.ok(sim.brokerCards.some(b => b.id === 'beltone'), 'Beltone broker is present');
   assert.ok(sim.brokerCards.some(b => b.id === 'telda'), 'Telda broker is present');
   assert.ok(sim.multiChartLines.length === 7, '7 colored trajectories plotted');
+  assert.ok(sim.multiChartLines[0].pathD.includes(' C '), 'renders smooth cubic bezier spline');
+});
+
+test('simulatorExplorer supports custom date pickers and execution timing modes', () => {
+  const comp = createMockComponent({
+    simTicker: 'SWDY',
+    simRange: 'CUSTOM',
+    simStartDate: '2025-10-01',
+    simEndDate: '2026-03-01',
+    simTiming: 'close_to_open'
+  });
+  const sim = simulatorExplorer(comp, comp.state);
+
+  assert.equal(sim.timing, 'close_to_open');
+  assert.equal(sim.range, 'CUSTOM');
+  assert.ok(sim.startDate >= '2025-10-01');
+  assert.ok(sim.endDate <= '2026-03-01');
+  assert.ok(sim.totalSessionsCount > 0, 'sessions filtered by custom date range');
 });
 
 test('broker cards rank by net ending cash and highlight the winner', () => {

@@ -2759,7 +2759,7 @@
               </div>
             </div>
 
-            <!-- 2. Strategy & Frequency Selection -->
+            <!-- 2. Strategy & Execution Timing Selection -->
             <div>
               <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.strategyLabel }}</label>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:3px;border-radius:12px;background:var(--surface);border:1px solid var(--rule)">
@@ -2773,6 +2773,22 @@
                   {{ simData.L.dcaLabel }}
                 </div>
               </div>
+
+              <!-- Intraday / Overnight Timing Presets (When to Buy & When to Sell) -->
+              <sc-if value="{{ simData.isDaily }}">
+                <div style="margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2)">
+                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.timingLabel }}</div>
+                  <div style="display:flex;flex-direction:column;gap:4px">
+                    <sc-for list="{{ simData.timingPresets }}" as="tp">
+                      <div onClick="{{ tp.pick }}" style="cursor:pointer;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:600;background:{{ tp.active ? 'var(--accTint)' : 'transparent' }};color:{{ tp.active ? 'var(--accent)' : 'var(--t2)' }};border:1px solid {{ tp.active ? 'var(--accent)' : 'transparent' }};transition:all .12s;display:flex;align-items:center;justify-content:space-between">
+                        <span>{{ tp.label }}</span>
+                        <sc-if value="{{ tp.active }}"><span style="font-size:10px">✓</span></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+
               <div style="font-size:11px;color:var(--faint);margin-top:8px;line-height:1.4">
                 <sc-if value="{{ simData.isDaily }}">
                   <span>{{ simData.L.dailyDesc }}</span>
@@ -2816,7 +2832,7 @@
               </div>
             </div>
 
-            <!-- 4. Time Horizon Presets -->
+            <!-- 4. Time Horizon & Interactive Calendar Date Pickers -->
             <div>
               <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.horizonLabel }}</label>
               <div style="display:flex;gap:5px;flex-wrap:wrap">
@@ -2824,10 +2840,28 @@
                   <span onClick="{{ rp.pick }}" style="cursor:pointer;padding:5px 11px;border-radius:999px;background:{{ rp.active ? 'var(--accent)' : 'var(--surface)' }};color:{{ rp.active ? '#fff' : 'var(--t2)' }};border:1px solid var(--rule);font-size:11px;font-weight:600;transition:all .15s">{{ rp.label }}</span>
                 </sc-for>
               </div>
-              <div style="margin-top:10px;padding:8px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2);font-family:'IBM Plex Mono',monospace;font-size:11px;display:flex;align-items:center;justify-content:space-between">
-                <div><span style="color:var(--faint)">{{ simData.L.buyPrefix }}</span> <span style="font-weight:600;color:var(--ink)">{{ simData.startDateFmt }}</span> (<span style="color:var(--accent)">{{ simData.buyPriceFmt }} ج</span>)</div>
-                <div>➔</div>
-                <div><span style="color:var(--faint)">{{ simData.L.sellPrefix }}</span> <span style="font-weight:600;color:var(--ink)">{{ simData.endDateFmt }}</span> (<span style="color:var(--accent)">{{ simData.sellPriceFmt }} ج</span>)</div>
+
+              <!-- Interactive Custom Date Pickers (Choose when to buy & when to sell) -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+                <div>
+                  <label style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);display:block;margin-bottom:3px">{{ simData.L.startDateLabel }}</label>
+                  <input type="date" aria-label="{{ simData.L.startDateLabel }}" value="{{ simData.startDate }}" min="{{ simData.minDate }}" max="{{ simData.maxDate }}" onChange="{{ simData.onStartDateChange }}" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;outline:none;box-sizing:border-box">
+                </div>
+                <div>
+                  <label style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);display:block;margin-bottom:3px">{{ simData.L.endDateLabel }}</label>
+                  <input type="date" aria-label="{{ simData.L.endDateLabel }}" value="{{ simData.endDate }}" min="{{ simData.minDate }}" max="{{ simData.maxDate }}" onChange="{{ simData.onEndDateChange }}" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;outline:none;box-sizing:border-box">
+                </div>
+              </div>
+
+              <div style="margin-top:8px;padding:6px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2);font-family:'IBM Plex Mono',monospace;font-size:10.5px;display:flex;flex-direction:column;gap:3px">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="color:var(--faint)">{{ simData.L.buyPrefix }} {{ simData.startDateFmt }}</span>
+                  <strong style="color:var(--accent)">{{ simData.buyPriceFmt }} ج</strong>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="color:var(--faint)">{{ simData.L.sellPrefix }} {{ simData.endDateFmt }}</span>
+                  <strong style="color:var(--accent)">{{ simData.sellPriceFmt }} ج</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -2852,7 +2886,7 @@
             </div>
           </div>
 
-          <!-- 1. Multi-Broker Comparative Return Trajectory Chart (All Brokers Plotted Together) -->
+          <!-- 1. Multi-Broker Comparative Return Trajectory Chart (All Brokers Plotted Together with Smooth Curves) -->
           <div style="margin-top:20px;padding:20px 22px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
               <div>
@@ -2864,7 +2898,7 @@
                 </div>
               </div>
               <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--faint)">
-                {{ simData.startDateFmt }} ➔ {{ simData.endDateFmt }}
+                {{ simData.startDateFmt }} ➔ {{ simData.endDateFmt }} · {{ simData.totalSessionsCount }} sessions
               </div>
             </div>
 
@@ -2879,21 +2913,39 @@
               </sc-for>
             </div>
 
-            <!-- SVG Multi-Line Plot -->
-            <div style="width:100%;height:170px;position:relative">
-              <svg viewBox="0 0 640 200" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible">
+            <!-- SVG Multi-Line Plot (Smooth Catmull-Rom Cubic Splines) -->
+            <div style="width:100%;height:220px;position:relative">
+              <svg viewBox="0 0 1000 280" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible" shape-rendering="geometricPrecision">
+                <defs>
+                  <linearGradient id="winnerAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E11D48" stop-opacity="0.16"/>
+                    <stop offset="100%" stop-color="#E11D48" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- Soft Gradient Area for Winner -->
+                <sc-if value="{{ simData.winnerAreaD }}">
+                  <path d="{{ simData.winnerAreaD }}" fill="url(#winnerAreaGrad)"/>
+                </sc-if>
+
+                <!-- Horizontal Reference Gridlines -->
+                <sc-for list="{{ simData.gridLines }}" as="gl">
+                  <line x1="55" y1="{{ gl.y }}" x2="945" y2="{{ gl.y }}" stroke="var(--rule)" stroke-dasharray="4,4" stroke-width="0.8" opacity="0.6"/>
+                  <text x="952" y="{{ gl.y + 3 }}" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">{{ gl.label }}</text>
+                </sc-for>
+
                 <!-- Zero Axis Reference Line -->
-                <line x1="35" y1="{{ simData.zeroAxisY }}" x2="605" y2="{{ simData.zeroAxisY }}" stroke="var(--rule)" stroke-dasharray="3,3" stroke-width="1.2"/>
-                <text x="38" y="{{ simData.zeroAxisY - 4 }}" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">0% ({{ simData.L.zeroLineLabel }})</text>
+                <line x1="55" y1="{{ simData.zeroAxisY }}" x2="945" y2="{{ simData.zeroAxisY }}" stroke="var(--rule)" stroke-dasharray="3,3" stroke-width="1.2"/>
+                <text x="58" y="{{ simData.zeroAxisY - 6 }}" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="var(--faint)">0% ({{ simData.L.zeroLineLabel }})</text>
 
                 <!-- Y-Axis Max & Min Labels -->
-                <text x="608" y="22" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="var(--faint)">{{ simData.chartYMaxFmt }}</text>
-                <text x="608" y="182" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="var(--faint)">{{ simData.chartYMinFmt }}</text>
+                <text x="952" y="24" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">{{ simData.chartYMaxFmt }}</text>
+                <text x="952" y="260" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--faint)">{{ simData.chartYMinFmt }}</text>
 
-                <!-- All Broker Trajectory Lines Plotted with Unique Colors -->
+                <!-- All Broker Trajectory Splines Plotted with Anti-Aliased Vectors -->
                 <sc-for list="{{ simData.multiChartLines }}" as="mcl">
-                  <path d="{{ mcl.pathD }}" fill="none" stroke="{{ mcl.color }}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" opacity="0.92"/>
-                  <circle cx="{{ mcl.endX }}" cy="{{ mcl.endY }}" r="3.5" fill="{{ mcl.color }}" stroke="var(--surface)" stroke-width="1.5"/>
+                  <path d="{{ mcl.pathD }}" fill="none" stroke="{{ mcl.color }}" stroke-width="{{ mcl.isWinner ? '3' : '2' }}" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity="{{ mcl.isWinner ? '1' : '0.85' }}"/>
+                  <circle cx="{{ mcl.endX }}" cy="{{ mcl.endY }}" r="4" fill="{{ mcl.color }}" stroke="var(--surface)" stroke-width="2"/>
                 </sc-for>
               </svg>
             </div>
@@ -2909,8 +2961,8 @@
                 {{ simData.rawPriceChangePctFmt }} <span style="font-size:11px;color:var(--faint)">({{ simData.L.rawPriceMove }})</span>
               </div>
             </div>
-            <div style="width:100%;height:110px;position:relative">
-              <svg viewBox="0 0 600 140" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible">
+            <div style="width:100%;height:120px;position:relative">
+              <svg viewBox="0 0 1000 150" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible" shape-rendering="geometricPrecision">
                 <defs>
                   <linearGradient id="simAreaGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.25"/>
@@ -2918,9 +2970,9 @@
                   </linearGradient>
                 </defs>
                 <path d="{{ simData.areaD }}" fill="url(#simAreaGrad)"/>
-                <path d="{{ simData.lineD }}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-                <circle cx="{{ simData.buyPin.x }}" cy="{{ simData.buyPin.y }}" r="4.5" fill="#059669" stroke="var(--surface)" stroke-width="2"/>
-                <circle cx="{{ simData.sellPin.x }}" cy="{{ simData.sellPin.y }}" r="4.5" fill="#D97706" stroke="var(--surface)" stroke-width="2"/>
+                <path d="{{ simData.lineD }}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                <circle cx="{{ simData.buyPin.x }}" cy="{{ simData.buyPin.y }}" r="5" fill="#059669" stroke="var(--surface)" stroke-width="2"/>
+                <circle cx="{{ simData.sellPin.x }}" cy="{{ simData.sellPin.y }}" r="5" fill="#D97706" stroke="var(--surface)" stroke-width="2"/>
               </svg>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint);flex-wrap:wrap;gap:8px">

@@ -145,8 +145,7 @@ export class Component extends Base {
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
     insiderViewMode: 'table',
     audioPlaying: false, audioItem: '', filtersOpen: false, sectorQuery: '', preferencesOpen: false,
-    calcInvest: 100000, calcPrice: 50, calcDividend: 4.5,
-    simTicker: 'BTFH', simStrategy: 'daily', simRange: '2Y', simCapital: 50000, includeThndrSub: false,
+    simTicker: 'SWDY', simStrategy: 'daily', simTiming: 'close_to_noon', simRange: '1Y', simCapital: 100000, includeThndrSub: false,
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
     // ARRAYS, and renamed from `rq`/`frq` on purpose.
