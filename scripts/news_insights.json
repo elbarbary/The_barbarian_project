@@ -187,6 +187,10 @@
     "meaning": "The protocol integrates Egypt Post's Bareedi digital postal service into the Financial Regulatory Authority's operational workflow for delivering legally recognized, registered electronic notifications and correspondence to regulated non-banking financial entities.",
     "meaning_ar": "يدمج البروتوكول خدمة 'بريدي' التابعة للبريد المصري ضمن منظومة عمل الهيئة العامة للرقابة المالية لإرسال المراسلات والإخطارات الإلكترونية المسجلة ذات الحجية القانونية إلى الجهات المالية غير المصرفية الخاضعة لرقابتها."
   },
+  "fra approves four companies to provide non banking financial services via fintech": {
+    "meaning": "Regulatory licensing grants these entities authorization to originate, distribute, and manage non-banking financial products through digital platforms under Financial Regulatory Authority supervision. This integrates licensed digital delivery channels directly into the formal non-banking financial infrastructure.",
+    "meaning_ar": "يمنح الترخيص الرقابي هذه الشركات الإطار القانوني لإتاحة وإدارة منتجات الأنشطة المالية غير المصرفية عبر منصات رقمية خاضعة لإشراف الهيئة العامة للرقابة المالية، مما يدمج قنوات التوزيع الإلكترونية ضمن البنية التحتية للقطاع المالي غير المصرفي."
+  },
   "fra issues first comprehensive guide to consumer finance companies": {
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
@@ -338,6 +342,10 @@
   "ارتفاع سهم “فولكس فاجن” 9% عقب اتفاق لاعاده الهيكله": {
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
     "meaning_ar": "يعكس ارتفاع السهم استجابة السوق لاتفاق إعادة الهيكلة، والذي يتضمن عادةً خفض التكاليف التشغيلية وإعادة تنظيم الطاقات الإنتاجية وتوجيه رأس المال لتحسين الكفاءة التشغيلية للشركة."
+  },
+  "ارتفاع طفيف للاسهم الصينيه في اولي جلسات الاسبوع": {
+    "meaning": "A slight increase in equity indices during opening weekly trading reflects net capital inflows and executed buy orders outpacing selling volume across Chinese stock exchanges.",
+    "meaning_ar": "يعكس الارتفاع الطفيف في مؤشرات الأسهم خلال الجلسة الافتتاحية للأسبوع تدفقات رأسمالية صافية وتفوقاً لأحجام أوامر الشراء المنفذة على عروض البيع في البورصات الصينية."
   },
   "ارتفاع موشر \"ازدهار الخدمات اللوجستيه\" في الصين الي 50.9% في اغسطس": {
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
@@ -834,6 +842,10 @@
   "ايرادات النفط الروسيه تهبط لادني مستوي في 6 اشهر": {
     "meaning": "A decline in Russian oil revenue reflects lower realized export prices and shipped crude volumes, which directly determines the state's fiscal cash inflows from the hydrocarbon sector.",
     "meaning_ar": "يعكس هبوط إيرادات النفط الروسية تراجع أسعار البيع الفعلية وأحجام الخام المصدر، وهو ما يحدد التدفقات المالية للموازنة العامة من قطاع الطاقة."
+  },
+  "ايرادات مصر للبترول تتجاوز 230 مليار جنيه خلال العام المالي 2025/2026": {
+    "meaning": "Crossing the EGP 230 billion revenue threshold reflects the operational scale of Misr Petroleum's fuel distribution volumes and petroleum product sales across the domestic market.",
+    "meaning_ar": "يعكس تجاوز الإيرادات حاجز 230 مليار جنيه الحجم التشغيلي لمبيعات شركة مصر للبترول وتوزيعها للوقود والمنتجات البترولية في السوق المحلي."
   },
   "ايران تعتزم اعلان منطقه محظوره خارج مضيق هرمز خلال ايام": {
     "meaning": "Declaring an exclusion zone in critical maritime corridors alters commercial shipping routes, maritime insurance risk premiums, and transit logistics for global energy and freight flows.",
@@ -1553,6 +1565,10 @@
     "meaning": "Expanding hospital operations into new geographic hubs allocates medical capacity and establishes unit-level contribution benchmarks within the group's consolidated revenue structure.",
     "meaning_ar": "يؤدي توسيع شبكة المستشفيات في نطاقات جغرافية جديدة إلى توزيع الطاقة التشغيلية وتحديد مستهدفات الإيرادات لكل وحدة تشغيلية ضمن القوائم المالية المجمعة للشركة."
   },
+  "مسوول بوزاره الاستثمار: ترتيبات لزيارات رفيعه المستوي بين مصر وموريشيوس نهايه 2026": {
+    "meaning": "Bilateral government diplomatic arrangements establish the institutional and regulatory framework for cross-border trade, taxation agreements, and capital allocation protocols between two jurisdictions.",
+    "meaning_ar": "تحدد الترتيبات الدبلوماسية الحكومية الثنائية الأطر المؤسسية والتنظيمية الحاكمة لحركة التجارة البينية، واتفاقيات الازدواج الضريبي، وبروتوكولات تدفق رؤوس الأموال بين الدولتين."
+  },
   "مسيول ببنك افراسيا موريشيوس: السوق الافريقيه تمتلك فرصا ضخمه ونركز علي معالجه تحديات المستثمرين": {
     "meaning": "Cross-border banking institutions in Africa deploy advisory and financial intermediation services to mitigate structural market frictions and facilitate institutional capital allocation across regional jurisdictions.",
     "meaning_ar": "تقدم المؤسسات المصرفية الإقليمية خدمات الوساطة المالية والاستشارات الاستثمارية العابرة للحدود لمعالجة العقبات الهيكلية وتسهيل حركة تدفق رؤوس الأموال المؤسسية داخل الأسواق الأفريقية."
@@ -1760,6 +1776,10 @@
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
     "meaning_ar": "يمثل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعبر من خلاله إمدادات خام تتجاوز 9 ملايين برميل يوميًا ترتبط بها سلاسل إمداد الطاقة وحركة الشحن الدولية."
+  },
+  "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
+    "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
+    "meaning_ar": "توفر أطر الشراكة مع بنوك التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية تسهيلات تمويلية ميسرة طويلة الأجل لمشروعات البنية التحتية والتحول الأخضر الحكومية، مما ينوع آليات التمويل الخارجي للإنفاق الرأسمالي السيادي."
   },
   "وزير قطاع الاعمال البريطاني يستبعد تقديم خطه انقاذ مالي ل”جاكوار لاند روفر”": {
     "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
