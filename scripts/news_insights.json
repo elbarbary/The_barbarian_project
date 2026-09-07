@@ -555,6 +555,10 @@
     "meaning": "The expansion of coordinated multilateral financial sanctions restricts cross-border banking transactions, limits foreign currency access, and enforces asset freezes across European and US jurisdictions.",
     "meaning_ar": "يؤدي تنسيق وتوسيع نطاق العقوبات المالية متعددة الأطراف إلى تقييد المعاملات المصرفية عبر الحدود، وتحديد الوصول إلى العملات الأجنبية، وتطبيق تجميد الأصول ضمن النطاقات القضائية للاتحاد الأوروبي والولايات المتحدة."
   },
+  "الاتصالات: نستهدف الوصول الي 8 مليارات دولار صادرات التعهيد بحلول 2028": {
+    "meaning": "The state sets an operational framework to expand business process and IT outsourcing services, where domestic technology centers deliver cross-border services under foreign currency contracts.",
+    "meaning_ar": "تضع الدولة إطاراً تشغيلياً لتوسيع خدمات التعهيد وتكنولوجيا المعلومات، حيث تقدم مراكز التقنية المحلية خدمات عابرة للحدود بموجب عقود مقومة بالنقد الأجنبي."
+  },
   "الاحتياطي الدولي لمصر": {
     "meaning": "Egypt's net international reserves consist of foreign currencies, gold, and Special Drawing Rights held by the Central Bank to meet external debt obligations and finance sovereign import requirements.",
     "meaning_ar": "يمثل صافي الاحتياطي الدولي لمصر الأصول من النقد الأجنبي والذهب وحقوق السحب الخاصة المودعة لدى البنك المركزي، وتُستخدم لسداد الالتزامات الخارجية وتمويل واردات السلع الاستراتيجية."
@@ -2020,6 +2024,10 @@
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
     "meaning_ar": "توفر أطر الشراكة مع بنوك التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية تسهيلات تمويلية ميسرة طويلة الأجل لمشروعات البنية التحتية والتحول الأخضر الحكومية، مما ينوع آليات التمويل الخارجي للإنفاق الرأسمالي السيادي."
+  },
+  "وزير النقل: تسريع تنفيذ مجمع الستوم ببرج العرب لبدء تشغيله في اقرب وقت": {
+    "meaning": "Accelerating project execution advances the operational timeline for Alstom's industrial complex in Borg El Arab, establishing local manufacturing capacity for railway systems and rolling stock.",
+    "meaning_ar": "يُقدّم تسريع وتيرة التنفيذ الجدول الزمني للتشغيل الفعلي لمجمع ألستوم الصناعي في برج العرب، وهو ما يؤسس لطاقة تصنيع محلي لأنظمة السكك الحديدية والوحدات المتحركة."
   },
   "وزير قطاع الاعمال البريطاني يستبعد تقديم خطه انقاذ مالي ل”جاكوار لاند روفر”": {
     "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
