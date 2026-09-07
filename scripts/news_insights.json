@@ -175,6 +175,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "ifap consolidated profits drop in fiscal year 2025 2026": {
+    "meaning": "A decline in consolidated profit reflects lower net earnings across the parent entity and its subsidiaries, resulting from higher operating costs, financing expenses, or changes in revenue during the fiscal period.",
+    "meaning_ar": "يعكس تراجع الأرباح المجمعة انخفاض صافي الدخل عبر الشركة الأم والشركات التابعة لها، نتيجة تغيرات في الإيرادات أو ارتفاع تكاليف التشغيل والتمويل خلال السنة المالية."
+  },
   "madbouly inaugurates beixin taishan egypt building materials factory in sokhna": {
     "meaning": "The inauguration of the manufacturing facility adds industrial production capacity for building materials within the Suez Canal Economic Zone and expands foreign direct asset deployment in the domestic construction inputs sector.",
     "meaning_ar": "يضيف افتتاح المنشأة الصناعية طاقة إنتاجية جديدة لمواد البناء داخل المنطقة الاقتصادية لقناة السويس، ويزيد من حجم الأصول الأجنبية المباشرة في قطاع مدخلات البناء المحلي."
@@ -854,7 +858,7 @@
   "تراجع اسعار الذهب مع تنامي توقعات رفع الفايده في امريكا": {
     "meaning": "",
     "meaning_ar": "",
-    "refused": 2
+    "refused": 3
   },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
@@ -1028,6 +1032,10 @@
     "meaning": "Asset tokenization represents traditional financial assets as digital tokens on distributed ledger networks, using dollar-denominated instruments and stablecoins as the primary medium of exchange and settlement.",
     "meaning_ar": "يتمثل ترميز الأصول في تحويل الأصول المالية التقليدية إلى رموز رقمية على شبكات السجلات الموزعة، مع استخدام الأدوات المالية والعملات المستقرة المقومة بالدولار كوسيط أساسي للتبادل والتسوية."
   },
+  "دي بي ورلد تستثمر 4 مليارات درهم في الشرق الاوسط واوروبا وافريقيا خلال النصف الاول 2026و": {
+    "meaning": "This operational capital allocation deploys funding directly into port, terminal, and logistics infrastructure assets across the company's Middle East, Europe, and Africa networks.",
+    "meaning_ar": "يمثل هذا الإجراء توجيهاً للنفقات الرأسمالية نحو أصول البنية التحتية للموانئ والمحطات وشبكات الإمداد اللوجستي التابعة للشركة في مناطق الشرق الأوسط وأوروبا وإفريقيا."
+  },
   "رجال الاعمال المصريين تبحث فرص الاستثمار واداره الثروات وهيكله الصناديق بين مصر وموريشيوس": {
     "meaning": "Cross-border cooperation in fund structuring and wealth management utilizes established financial center frameworks and bilateral treaties to facilitate the formation of investment vehicles and capital deployment between jurisdictions.",
     "meaning_ar": "تُوظف الشراكات في هيكلة الصناديق وإدارة الثروات الأطر التنظيمية والاتفاقيات الثنائية لتأسيس الأوعية الاستثمارية وتسهيل حركة رؤوس الأموال بين الدولتين."
@@ -1189,6 +1197,10 @@
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
   },
+  "صادرات القطن تتجاوز 205 ملايين دولار منذ انطلاق الموسم و25 شركه تتصدر المشهد": {
+    "meaning": "Cotton export values exceeding $205 million reflect cross-border commercial transactions executed by 25 domestic trading and ginning companies within the agricultural export sector.",
+    "meaning_ar": "تجاوز حصيلة صادرات القطن 205 ملايين دولار يمثل معاملات تجارية خارجية نفذتها 25 شركة محلية تعمل في قطاع تجارة وحليج وتصدير المحاصيل الزراعية."
+  },
   "صادرات كوريا الجنوبيه تتجاوز الرقم القياسي السنوي عند 709.4 مليار دولار": {
     "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
     "meaning_ar": "يعكس تسجيل الصادرات السنوية لمستويات قياسية ارتفاع إجمالي الشحنات الموجهة للأسواق الخارجية من السلع الصناعية، مما يوسع الميزان التجاري ويزيد من المقبوضات بالعملات الأجنبية."
@@ -1316,6 +1328,10 @@
   "لينج لونج الصينيه تستهدف انشاء مجمع اطارات في مصر": {
     "meaning": "Establishing an industrial tire complex introduces foreign direct investment into Egypt's automotive feeder sector and establishes localized manufacturing capacity for domestic supply and regional export.",
     "meaning_ar": "يمثل إنشاء مجمع لصناعة الإطارات دخول استثمارات أجنبية مباشرة في قطاع الصناعات المغذية للسيارات في مصر، ويوطن قدرات تصنيعية موجهة للتوزيع المحلي والتصدير الإقليمي."
+  },
+  "ماريدايف تتحول للربحيه بقيمه 4.55 مليون دولار بالنصف الاول": {
+    "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
+    "meaning_ar": "يشير التحول إلى الربحية إلى تجاوز إجمالي الإيرادات التشغيلية المحققة خلال النصف الأول لمجموع المصروفات التشغيلية وتكاليف التمويل والضرائب، مما ينقل النتيجة النهائية في قائمة الدخل من صافي خسارة إلى صافي ربح."
   },
   "متحدث الصحه: الاولويه في اختيار الادويه للاكثر امانا وفاعليه وكفاءه": {
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
