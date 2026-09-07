@@ -54,7 +54,11 @@ export const React = {
     for (const [name, value] of Object.entries(props || {})) {
       if (value === null || value === undefined || value === false) continue;
       if (name === 'key' || name === 'ref') continue;
-      if (name === 'style' && typeof value === 'object') {
+      if (/^on[A-Z]/.test(name) && typeof value === 'function') {
+        if (typeof el.addEventListener === 'function') {
+          el.addEventListener(name.slice(2).toLowerCase(), value);
+        }
+      } else if (name === 'style' && typeof value === 'object') {
         el.setAttribute('style', styleText(value));
       } else if (name === 'className') {
         el.setAttribute('class', String(value));

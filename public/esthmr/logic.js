@@ -142,6 +142,7 @@ export class Component extends Base {
   // could start. main.js remembers whichever a reader chooses, so the default
   // is only ever the FIRST answer, never an argument.
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
+    insiderViewMode: 'table',
     audioPlaying: false, audioItem: '', filtersOpen: false, sectorQuery: '', preferencesOpen: false,
     calcInvest: 100000, calcPrice: 50, calcDividend: 4.5,
     // One per search surface, so setting a test on the market table does not
@@ -365,6 +366,42 @@ export class Component extends Base {
       investorsAsOf:'Exchange figures as of', investorsTotal:'Value traded in the period:',
       investorsEquities:'The split above counts government bonds and T-bills too. Shares alone:',
       investorsNoIntraday:'The exchange publishes no intraday breakdown, so there is no curve here \u2014 only where the period stands.',
+      investorsTabBoth:'Overview & All', investorsTabMacro:'Macro Breakdown', investorsTabInsiders:'Insider & Treasury Tracker',
+      insiderTitle:'Insider & Treasury Flow Tracker',
+      insiderLead:'Official EGX session filings disclosing insider, board, major shareholder, and treasury share transactions.',
+      insiderRuleBadge:'Articles 29 & 38 · EGX Official Disclosures',
+      insiderFilterAll:'All', insiderFilterBuys:'Purchases', insiderFilterSells:'Sales',
+      insiderFilterTreasury:'Treasury Shares', insiderFilterInsiders:'Board & Insiders', insiderFilterMajor:'Major Holders',
+      insiderSearch:'Search stock or ticker...', insiderClearSearch:'Clear',
+      insiderKpiTotal:'Disclosed Events', insiderKpiBuy:'Insider Purchases', insiderKpiSell:'Insider Sales',
+      insiderKpiTreasury:'Treasury Purchases', insiderKpiActiveFirms:'Active Companies',
+      insiderShares:'shares', insiderTransactions:'filings', insiderOfficialDoc:'Official Filing',
+      insiderEmpty:'No insider or treasury transactions found matching current filters.',
+      insiderDiscloseNote:'Under EGX Listing Rules (Articles 29 & 38), board members, major shareholders (>5%), and connected groups must file post-execution transaction forms. Companies similarly disclose treasury share buybacks, sales, and cancellations.',
+      insiderCrossLink:'Insider & Treasury Tracker',
+      insiderSessionLabel:'Session',
+      insiderColDate:'Session',
+      insiderColCompany:'Company / Ticker',
+      insiderColAction:'Transaction',
+      insiderColParty:'Participant',
+      insiderColVolume:'Volume (Shares)',
+      insiderColFiling:'Filing',
+      insiderOfficialNotice:'Official Disclosure',
+      insiderViewTable:'📋 Transactions Table',
+      insiderViewMap:'🗺️ Activity Map',
+      insiderViewFlow:'📊 Sector Flows',
+      insiderMapLegendBuy:'Net Insider Purchases',
+      insiderMapLegendSell:'Net Insider Sales',
+      insiderMapLegendTreasury:'Treasury Share Programs',
+      insiderMapHint:'Tile size represents total traded shares; color represents net transaction direction.',
+      insiderFlowTitle:'Insider & Treasury Flows by Sector',
+      insiderFlowSubtitle:'Comparative aggregate volume of insider accumulation versus selling across economic sectors.',
+      insiderFlowNet:'Net Volume',
+      insiderFlowBuys:'Purchases',
+      insiderFlowSells:'Sales',
+      insiderFlowTreasury:'Treasury',
+      insiderFlowFirms:'active firms',
+      insiderFlowNoData:'No sector flow data matching current criteria.',
       homeTitle:'The close', homeTitleLive:'The session', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
       // ── the reader's own list ──
@@ -703,6 +740,42 @@ export class Component extends Base {
       investorsAsOf:'بيانات البورصة الرسمية كما في', investorsTotal:'إجمالي قيمة التداول في الفترة:',
       investorsEquities:'الجدول أعلاه يشمل الأسهم والسندات وأذون الخزانة. تعاملات الأسهم المقيدة فقط:',
       investorsNoIntraday:'لا تنشر البورصة تقسيماً لحظياً لفئات المستثمرين خلال ساعات الجلسة، لذا تُعرض أحدث فترة معلنة رسمياً.',
+      investorsTabBoth:'عرض شامل', investorsTabMacro:'توزيع السيولة (كلي)', investorsTabInsiders:'تعاملات الداخليين والخزينة',
+      insiderTitle:'راصد تعاملات الداخليين وأسهم الخزينة',
+      insiderLead:'بيانات وإفصاحات البورصة المصرية الرسمية لتعاملات أعضاء مجالس الإدارة والداخليين وكبار المساهمين والمجموعات المرتبطة وعمليات أسهم الخزينة.',
+      insiderRuleBadge:'المادتان ٢٩ و٣٨ · إفصاحات رسمية معتمدة',
+      insiderFilterAll:'الكل', insiderFilterBuys:'شراء فقط', insiderFilterSells:'مبيعات وتخارج',
+      insiderFilterTreasury:'أسهم الخزينة', insiderFilterInsiders:'أعضاء ومطلعون', insiderFilterMajor:'كبار المساهمين',
+      insiderSearch:'ابحث بالسهم أو الرمز...', insiderClearSearch:'مسح',
+      insiderKpiTotal:'إجمالي الإفصاحات', insiderKpiBuy:'مشتريات الداخليين', insiderKpiSell:'مبيعات الداخليين',
+      insiderKpiTreasury:'شراء أسهم خزينة', insiderKpiActiveFirms:'شركات ذات تعاملات',
+      insiderShares:'سهم', insiderTransactions:'إفصاح / صفقة', insiderOfficialDoc:'المستند الرسمي بالبورصة',
+      insiderEmpty:'لا توجد تعاملات للداخليين أو أسهم الخزينة تطابق معايير التصفية الحالية.',
+      insiderDiscloseNote:'وفق المادتين ٢٩ و٣٨ من قواعد القيد بالبورصة المصرية، يلتزم أعضاء مجلس الإدارة والداخليين وكبار المساهمين (أكثر من ٥٪) والمجموعات المرتبطة بالإفصاح عن تعاملاتهم عقب التنفيذ، وتعلن الشركات عن برامج شراء وبيع أسهم الخزينة لدعم السهم.',
+      insiderCrossLink:'راصد الداخليين والخزينة',
+      insiderSessionLabel:'جلسة',
+      insiderColDate:'الجلسة',
+      insiderColCompany:'السهم والشركة',
+      insiderColAction:'نوع المعاملة',
+      insiderColParty:'صفة المتعامل',
+      insiderColVolume:'عدد الأسهم',
+      insiderColFiling:'المستند',
+      insiderOfficialNotice:'إفصاح رسمي',
+      insiderViewTable:'📋 جدول الصفقات',
+      insiderViewMap:'🗺️ خريطة النشاط',
+      insiderViewFlow:'📊 تدفق القطاعات',
+      insiderMapLegendBuy:'صافي مشتريات داخلية',
+      insiderMapLegendSell:'صافي مبيعات وتخارج',
+      insiderMapLegendTreasury:'شراء أسهم خزينة',
+      insiderMapHint:'حجم المربع يعكس إجمالي الأسهم المتداولة، ولون المربع يعكس اتجاه صافي الصفقات.',
+      insiderFlowTitle:'تدفقات الداخليين وأسهم الخزينة حسب القطاع',
+      insiderFlowSubtitle:'مقارنة إجمالي أحجام مشتريات ومبيعات الداخليين وأسهم الخزينة عبر القطاعات الاقتصادية.',
+      insiderFlowNet:'صافي الأسهم',
+      insiderFlowBuys:'مشتريات',
+      insiderFlowSells:'مبيعات',
+      insiderFlowTreasury:'أسهم خزينة',
+      insiderFlowFirms:'شركات نشطة',
+      insiderFlowNoData:'لا توجد بيانات تدفق قطاعية مطابقة لمعايير البحث الحالية.',
       homeTitle:'إغلاق السوق', homeTitleLive:'تداولات الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أنشط الأسهم تحركاً', readNow:'أبرز الأخبار والإفصاحات', watchlist:'الأكبر وزناً وقيمة سوقية',
       following:'في قائمة المتابعة', follow:'أضف للمتابعة', unfollow:'في قائمة المتابعة',
       // ── قائمة المتابعة ──
@@ -2381,6 +2454,358 @@ export class Component extends Base {
       };
     })();
 
+    // ── Official Insider & Treasury Flow Tracker ──
+    const insiderTracker = (() => {
+      let src = (D.insiders && Array.isArray(D.insiders.items) && D.insiders.items.length > 0)
+        ? D.insiders
+        : null;
+
+      if (!src && D.demo && D.insiders && Array.isArray(D.insiders.items) && D.insiders.items.length > 0) {
+        src = D.insiders;
+      }
+
+      if (!src) return null;
+      const rawItems = src.items || [];
+      const summary = src.summary || {};
+      if (rawItems.length === 0) return null;
+      const filter = st.insiderFilter || 'all';
+      const q = (st.insiderQ || '').trim().toLowerCase();
+
+      const filterOptions = [
+        { id: 'all', label: L.insiderFilterAll, count: rawItems.length,
+          active: filter === 'all',
+          go: () => this.setState({ insiderFilter: 'all' }) },
+        { id: 'purchases', label: L.insiderFilterBuys, count: summary.buyCount || 0,
+          active: filter === 'purchases',
+          go: () => this.setState({ insiderFilter: 'purchases' }) },
+        { id: 'sales', label: L.insiderFilterSells, count: summary.sellCount || 0,
+          active: filter === 'sales',
+          go: () => this.setState({ insiderFilter: 'sales' }) },
+        { id: 'treasury', label: L.insiderFilterTreasury, count: (summary.treasuryBuyCount || 0) + (summary.treasurySellCount || 0),
+          active: filter === 'treasury',
+          go: () => this.setState({ insiderFilter: 'treasury' }) },
+        { id: 'insiders', label: L.insiderFilterInsiders,
+          count: rawItems.filter((r) => r.relationship === 'insider').length,
+          active: filter === 'insiders',
+          go: () => this.setState({ insiderFilter: 'insiders' }) },
+        { id: 'major', label: L.insiderFilterMajor,
+          count: rawItems.filter((r) => r.relationship === 'major_holder' || r.relationship === 'related_party').length,
+          active: filter === 'major',
+          go: () => this.setState({ insiderFilter: 'major' }) },
+      ].map((opt) => ({
+        ...opt,
+        bg: opt.active ? 'var(--sunk)' : 'transparent',
+        color: opt.active ? 'var(--ink)' : 'var(--faint)',
+        border: opt.active ? 'var(--rule)' : 'transparent',
+      }));
+
+      let filtered = rawItems;
+      if (filter === 'purchases') {
+        filtered = filtered.filter((r) => r.action === 'bought' || r.action === 'treasury_purchase');
+      } else if (filter === 'sales') {
+        filtered = filtered.filter((r) => r.action === 'sold' || r.action === 'treasury_sale');
+      } else if (filter === 'treasury') {
+        filtered = filtered.filter((r) => r.relationship === 'treasury' || (r.action && r.action.startsWith('treasury_')));
+      } else if (filter === 'insiders') {
+        filtered = filtered.filter((r) => r.relationship === 'insider');
+      } else if (filter === 'major') {
+        filtered = filtered.filter((r) => r.relationship === 'major_holder' || r.relationship === 'related_party');
+      }
+
+      if (q) {
+        filtered = filtered.filter((r) => {
+          const t = (r.ticker || '').toLowerCase();
+          const cEn = (r.company || '').toLowerCase();
+          const cAr = (r.companyAr || '').toLowerCase();
+          const tit = (r.title || '').toLowerCase();
+          return t.includes(q) || cEn.includes(q) || cAr.includes(q) || tit.includes(q);
+        });
+      }
+
+      const formatShares = (n) => {
+        if (typeof n !== 'number' || isNaN(n)) return '';
+        if (n >= 1e6) return this.num(n / 1e6, 2) + (ar ? ' مليون' : 'M');
+        if (n >= 1e3) return this.num(n / 1e3, 1) + (ar ? ' ألف' : 'k');
+        return this.num(n, 0);
+      };
+
+      const mappedItems = filtered.map((r) => {
+        let actLabel = ar ? (r.actionLabelAr || r.actionLabel) : (r.actionLabel || r.actionLabelAr);
+        let actColor = 'var(--accent)';
+        let actBadgeBg = 'var(--sunk)';
+        let actBadgeBorder = 'var(--rule)';
+        let arrow = '';
+
+        if (r.action === 'bought') {
+          actColor = 'var(--up)';
+          actBadgeBg = 'rgba(34, 197, 94, 0.09)';
+          actBadgeBorder = 'rgba(34, 197, 94, 0.28)';
+          arrow = '↑ ';
+        } else if (r.action === 'sold') {
+          actColor = 'var(--down)';
+          actBadgeBg = 'rgba(239, 68, 68, 0.09)';
+          actBadgeBorder = 'rgba(239, 68, 68, 0.28)';
+          arrow = '↓ ';
+        } else if (r.action === 'treasury_purchase') {
+          actColor = '#0284c7';
+          actBadgeBg = 'rgba(2, 132, 199, 0.09)';
+          actBadgeBorder = 'rgba(2, 132, 199, 0.28)';
+          arrow = '🛡 ';
+        } else if (r.action === 'treasury_sale') {
+          actColor = '#d97706';
+          actBadgeBg = 'rgba(217, 119, 6, 0.09)';
+          actBadgeBorder = 'rgba(217, 119, 6, 0.28)';
+          arrow = '📉 ';
+        } else if (r.action === 'treasury_cancel') {
+          actColor = '#7c3aed';
+          actBadgeBg = 'rgba(124, 58, 237, 0.09)';
+          actBadgeBorder = 'rgba(124, 58, 237, 0.28)';
+          arrow = '✂ ';
+        }
+
+        const coName = ar ? (r.companyAr || r.company || r.ticker || '') : (r.company || r.companyAr || r.ticker || '');
+        const secName = ar ? (r.sectorAr || r.sector || '') : (r.sector || r.sectorAr || '');
+
+        return {
+          id: r.id || '',
+          date: r.date || '',
+          ticker: r.ticker || '',
+          hasTicker: Boolean(r.ticker),
+          company: coName,
+          sector: secName,
+          hasSector: Boolean(secName),
+          action: r.action || '',
+          actionLabel: arrow + (actLabel || ''),
+          actionColor: actColor,
+          actionBadgeBg: actBadgeBg,
+          actionBadgeBorder: actBadgeBorder,
+          relationshipLabel: ar ? (r.relationshipLabelAr || r.relationshipLabel || '') : (r.relationshipLabel || r.relationshipLabelAr || ''),
+          shares: r.shares,
+          hasShares: typeof r.shares === 'number',
+          noShares: typeof r.shares !== 'number',
+          sharesFormatted: typeof r.shares === 'number' ? this.num(r.shares, 0) : '',
+          sharesCompact: formatShares(r.shares),
+          title: ar ? (r.title || r.titleEn || '') : (r.titleEn || r.title || ''),
+          link: r.link || '',
+          hasLink: Boolean(r.link),
+          noLink: !r.link,
+          openCompany: () => {
+            if (r.ticker) this.setState({ screen: 'company', ticker: r.ticker });
+          },
+        };
+      });
+
+      // ── View Mode Options (Table / Map / Sector Flows) ──
+      const viewMode = st.insiderViewMode || 'table';
+      const isTable = viewMode === 'table';
+      const isMap = viewMode === 'map';
+      const isFlow = viewMode === 'flow';
+
+      const viewOptions = [
+        { id: 'table', label: L.insiderViewTable, active: isTable,
+          go: () => this.setState({ insiderViewMode: 'table' }) },
+        { id: 'map', label: L.insiderViewMap, active: isMap,
+          go: () => this.setState({ insiderViewMode: 'map' }) },
+        { id: 'flow', label: L.insiderViewFlow, active: isFlow,
+          go: () => this.setState({ insiderViewMode: 'flow' }) },
+      ].map((opt) => ({
+        ...opt,
+        bg: opt.active ? 'var(--surface)' : 'transparent',
+        color: opt.active ? 'var(--ink)' : 'var(--faint)',
+        border: opt.active ? 'var(--edgeIn)' : 'transparent',
+        sh: opt.active ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
+      }));
+
+      // ── 1. Interactive Activity Treemap (Companies) ──
+      const byCo = new Map();
+      for (const r of filtered) {
+        const tick = r.ticker || (r.company ? r.company.slice(0, 4).toUpperCase() : 'EGX');
+        if (!byCo.has(tick)) {
+          byCo.set(tick, {
+            ticker: tick,
+            company: r.company || tick,
+            companyAr: r.companyAr || tick,
+            sector: r.sector || '',
+            sectorAr: r.sectorAr || '',
+            buyShares: 0,
+            sellShares: 0,
+            treasuryShares: 0,
+            count: 0,
+          });
+        }
+        const entry = byCo.get(tick);
+        entry.count++;
+        const sh = typeof r.shares === 'number' ? r.shares : 0;
+        if (r.action === 'bought') entry.buyShares += sh;
+        else if (r.action === 'sold') entry.sellShares += sh;
+        else if (r.action && r.action.startsWith('treasury_')) entry.treasuryShares += sh;
+      }
+
+      const companyList = Array.from(byCo.values()).map((c) => {
+        const isTreasury = c.treasuryShares > 0 && c.treasuryShares >= c.buyShares && c.treasuryShares >= c.sellShares;
+        const isBuy = !isTreasury && (c.buyShares >= c.sellShares);
+
+        const tint = isTreasury
+          ? { bg: 'rgba(2, 132, 199, 0.12)', border: 'rgba(2, 132, 199, 0.35)', fg: '#0284c7', badge: '🛡 ' + (ar ? 'خزينة' : 'Treasury') }
+          : (isBuy
+            ? { bg: 'rgba(34, 197, 94, 0.12)', border: 'rgba(34, 197, 94, 0.35)', fg: 'var(--up)', badge: '↑ ' + (ar ? 'شراء' : 'Purchases') }
+            : { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.35)', fg: 'var(--down)', badge: '↓ ' + (ar ? 'مبيعات' : 'Sales') });
+
+        const totShares = c.buyShares + c.sellShares + c.treasuryShares;
+        return {
+          ...c,
+          name: ar ? (c.companyAr || c.company) : (c.company || c.companyAr),
+          tint,
+          totShares,
+          value: Math.max(10000, totShares, c.count * 50000),
+        };
+      });
+
+      const rawTiles = squarify(companyList, 0, 0, 100, 100);
+      const mapTiles = rawTiles.map((t) => ({
+        ticker: t.ticker,
+        name: t.name,
+        badge: t.tint.badge,
+        bg: t.tint.bg,
+        border: t.tint.border,
+        fg: t.tint.fg,
+        left: pc(t.x),
+        top: pc(t.y),
+        width: pc(t.w),
+        height: pc(t.h),
+        showTicker: t.w >= 3 && t.h >= 2.5,
+        showName: t.w >= 7 && t.h >= 6.5,
+        showBadge: t.w >= 6 && t.h >= 5.5,
+        showVol: t.w >= 9 && t.h >= 9,
+        volFormatted: formatShares(t.totShares),
+        openCompany: () => {
+          if (t.ticker && !t.ticker.startsWith('DEMO')) this.setState({ screen: 'company', ticker: t.ticker });
+        },
+      }));
+
+      // ── 2. Sector Flows Diverging Comparison ──
+      const bySec = new Map();
+      for (const r of rawItems) {
+        const secKey = ar ? (r.sectorAr || r.sector || 'أخرى') : (r.sector || r.sectorAr || 'Other');
+        if (!bySec.has(secKey)) {
+          bySec.set(secKey, {
+            name: secKey,
+            buyShares: 0,
+            sellShares: 0,
+            treasuryShares: 0,
+            count: 0,
+            tickers: new Set(),
+          });
+        }
+        const entry = bySec.get(secKey);
+        entry.count++;
+        if (r.ticker) entry.tickers.add(r.ticker);
+        const sh = typeof r.shares === 'number' ? r.shares : 0;
+        if (r.action === 'bought') entry.buyShares += sh;
+        else if (r.action === 'sold') entry.sellShares += sh;
+        else if (r.action && r.action.startsWith('treasury_')) entry.treasuryShares += sh;
+      }
+
+      const sectorList = Array.from(bySec.values())
+        .map((s) => ({
+          ...s,
+          tickers: Array.from(s.tickers),
+          totalShares: s.buyShares + s.sellShares + s.treasuryShares,
+          netShares: s.buyShares - s.sellShares,
+        }))
+        .filter((s) => s.totalShares > 0 || s.count > 0)
+        .sort((a, b) => b.totalShares - a.totalShares);
+
+      const maxSectorVol = Math.max(1, ...sectorList.map((s) => Math.max(s.buyShares, s.sellShares, s.treasuryShares)));
+
+      const sectorFlows = sectorList.map((s) => {
+        const isNetBuy = s.netShares > 0;
+        const isNetSell = s.netShares < 0;
+        return {
+          name: s.name,
+          companiesCount: s.tickers.length,
+          totalSharesFormatted: formatShares(s.totalShares),
+          buySharesFormatted: formatShares(s.buyShares),
+          sellSharesFormatted: formatShares(s.sellShares),
+          treasurySharesFormatted: formatShares(s.treasuryShares),
+          hasTreasury: s.treasuryShares > 0,
+          hasBuys: s.buyShares > 0,
+          hasSells: s.sellShares > 0,
+          buyBarWidth: pc((s.buyShares / maxSectorVol) * 100),
+          sellBarWidth: pc((s.sellShares / maxSectorVol) * 100),
+          treasuryBarWidth: pc((s.treasuryShares / maxSectorVol) * 100),
+          netFormatted: (isNetBuy ? '+ ' : (isNetSell ? '- ' : '')) + formatShares(Math.abs(s.netShares)),
+          netColor: isNetBuy ? 'var(--up)' : (isNetSell ? 'var(--down)' : 'var(--faint)'),
+          netBg: isNetBuy ? 'rgba(34,197,94,0.08)' : (isNetSell ? 'rgba(239,68,68,0.08)' : 'var(--sunk)'),
+          netBorder: isNetBuy ? 'rgba(34,197,94,0.25)' : (isNetSell ? 'rgba(239,68,68,0.25)' : 'var(--rule)'),
+          tickerChips: s.tickers.slice(0, 7).map((t) => ({
+            ticker: t,
+            open: () => { if (!t.startsWith('DEMO')) this.setState({ screen: 'company', ticker: t }); },
+          })),
+        };
+      });
+
+      const totalBuyVol = summary.totalBuyShares ? formatShares(summary.totalBuyShares) : '0';
+      const totalSellVol = summary.totalSellShares ? formatShares(summary.totalSellShares) : '0';
+      const treasuryActiveList = (summary.activeTreasuryCompanies || []).join(' · ');
+
+      return {
+        basis: ar ? (src.basisAr || src.basis) : src.basis,
+        source: src.source || '',
+        updatedAt: src.updatedAt || '',
+        latestSession: summary.latestSession || '',
+        totalRecords: summary.totalRecords || rawItems.length,
+        buyCount: summary.buyCount || 0,
+        sellCount: summary.sellCount || 0,
+        treasuryBuyCount: summary.treasuryBuyCount || 0,
+        treasurySellCount: summary.treasurySellCount || 0,
+        totalBuySharesFormatted: totalBuyVol,
+        totalSellSharesFormatted: totalSellVol,
+        activeCompaniesCount: summary.activeCompaniesCount || 0,
+        activeTreasuryList: treasuryActiveList || '—',
+        viewMode,
+        isTable,
+        isMap,
+        isFlow,
+        viewOptions,
+        mapTiles,
+        hasMapTiles: mapTiles.length > 0,
+        noMapTiles: mapTiles.length === 0,
+        sectorFlows,
+        hasSectorFlows: sectorFlows.length > 0,
+        noSectorFlows: sectorFlows.length === 0,
+        filter,
+        filterOptions,
+        q: st.insiderQ || '',
+        hasQ: Boolean(st.insiderQ),
+        onQ: (e) => this.setState({ insiderQ: e.target.value }),
+        clearQ: () => this.setState({ insiderQ: '' }),
+        items: mappedItems,
+        hasItems: mappedItems.length > 0,
+        noItems: mappedItems.length === 0,
+      };
+    })();
+
+    const investorTab = st.investorTab || 'both';
+    const showMacroInvestors = (investorTab === 'macro' || investorTab === 'both') && investors !== null;
+    const showInsiderTracker = (investorTab === 'insiders' || investorTab === 'both') && insiderTracker !== null;
+
+    const investorTabOptions = [
+      { id: 'both', label: L.investorsTabBoth, active: investorTab === 'both',
+        go: () => this.setState({ investorTab: 'both' }) },
+      { id: 'insiders', label: L.investorsTabInsiders, active: investorTab === 'insiders',
+        go: () => this.setState({ investorTab: 'insiders' }) },
+      { id: 'macro', label: L.investorsTabMacro, active: investorTab === 'macro',
+        go: () => this.setState({ investorTab: 'macro' }) },
+    ].map((t) => ({
+      ...t,
+      bg: t.active ? 'var(--sunk)' : 'transparent',
+      color: t.active ? 'var(--ink)' : 'var(--faint)',
+      border: t.active ? 'var(--rule)' : 'transparent',
+      sh: t.active ? 'var(--shPill)' : 'none',
+      boxShadow: t.active ? 'var(--shPill)' : 'none',
+    }));
+
     // ── the same line, period by period ────────────────────────────────
     //
     // The table above is one row per period and four columns; everything else
@@ -3902,7 +4327,10 @@ export class Component extends Base {
       clearWatch: () => { this.onClearWatch && this.onClearWatch(); },
       goMarket: this.go('market'),
       goInvestors: this.go('investors'),
+      goInsiderTracker: () => this.setState({ screen: 'investors', investorTab: 'insiders' }),
       investors, noInvestors: investors === null,
+      investorTab, investorTabOptions, showMacroInvestors, showInsiderTracker,
+      insiderTracker, noInsiderTracker: insiderTracker === null,
       // Bound to the company ON SCREEN rather than to the ticker in the state.
       // They are the same thing live. They are not on the demo, where every
       // company opens the one worked example — so following from there would

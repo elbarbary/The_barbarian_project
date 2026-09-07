@@ -109,6 +109,9 @@ async function load(email) {
       slice(data.disclosureMeanings(), (disclosureMeanings) => ({ disclosureMeanings })),
       slice(data.connections(), (crossings) => ({ crossings })),
       slice(data.investors(), (investors) => ({ investors })),
+      slice(data.insiders ? data.insiders() : Promise.resolve(null), (insiders) => ({
+        insiders: (insiders && Array.isArray(insiders.items) && insiders.items.length > 0) ? insiders : undefined,
+      })),
       slice(data.indices(), (idx) => ({ indexMembers: idx.list })),
       Promise.all([calendar, exchange, attention]).then(([cal, ex, att]) => patch({
         indices: ex ? data.indexCards(ex.indexLevels, att && att.history) : undefined,

@@ -26,7 +26,7 @@ function boot(overrides = {}) {
     news:async()=>[], newsProvenance:async()=>({}), calendar:async()=>({}),
     exchange:async()=>({}), attention:async()=>({}), sectors:async()=>[],
     filedMonths:async()=>[], disclosureMeanings:async()=>[], connections:async()=>[],
-    investors:async()=>({}), indices:async()=>({list:[]}), indexCards:()=>[],readNowCards:()=>[],
+    investors:async()=>({}), insiders:async()=>({}), indices:async()=>({list:[]}), indexCards:()=>[],readNowCards:()=>[],
     companyExtras:async()=>({}), ...overrides };
   vm.runInNewContext(source, { Component, document, data,
     mount:()=> { mounted=true; component.onChange=()=>{}; },

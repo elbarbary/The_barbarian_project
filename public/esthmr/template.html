@@ -604,6 +604,21 @@
       </div>
 
       <button type="button" class="story-news-entry" onClick="{{ story.open }}"><strong>{{ story.title }}</strong><span>{{ story.openLabel }} ↗</span></button>
+
+      <!-- Shortcut to Insider & Treasury Flow Tracker -->
+      <div onClick="{{ goInsiderTracker }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);transition:all .15s" style-hover="border-color:var(--accent);background:var(--sunk)">
+        <div style="display:flex;align-items:center;gap:12px;min-width:0">
+          <span style="font-size:18px;flex:none">🛡</span>
+          <div style="min-width:0">
+            <div style="font-size:13.5px;font-weight:600;color:var(--ink)">{{ L.insiderCrossLink }}</div>
+            <div style="font-size:11.5px;color:var(--t2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ L.insiderLead }}</div>
+          </div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent);flex:none">
+          <span>{{ L.insiderFilterAll }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace">↗</span>
+        </div>
+      </div>
       <!-- A grid, not a column. Forty stories stacked one to a row is a
            scroll; the same forty three across is a page you can scan, and a
            headline is short enough that the extra width was going to the
@@ -1046,11 +1061,384 @@
         </div>
       </div>
 
-      <sc-if value="{{ noInvestors }}">
-        <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:34px 24px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.nothingYet }}</div>
+      <!-- Segmented View Tabs: Overview & All / Insider & Treasury Tracker / Macro Breakdown -->
+      <div style="display:flex;gap:7px;flex-wrap:wrap;padding-inline:8px;margin-top:2px">
+        <sc-for list="{{ investorTabOptions }}" as="t">
+          <div onClick="{{ t.go }}" style="cursor:pointer;display:inline-flex;align-items:baseline;gap:7px;font-size:12.5px;padding:7px 14px;border-radius:999px;color:{{ t.color }};background:{{ t.bg }};border:1px solid {{ t.border }};box-shadow:{{ t.sh }};transition:background .15s,color .15s,border-color .15s" style-hover="border-color:var(--accent)">{{ t.label }}</div>
+        </sc-for>
+      </div>
+
+      <!-- ══ INSIDER & TREASURY FLOW TRACKER ══ -->
+      <sc-if value="{{ showInsiderTracker }}">
+        <section class="insider-tracker-panel" style="display:flex;flex-direction:column;gap:18px">
+          <!-- Double-Bezel Header Card -->
+          <div class="insider-hero-card" style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 26px 22px;position:relative;overflow:hidden">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+              <div style="min-width:0;max-width:72ch">
+                <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">
+                  <span>§</span><span>{{ L.insiderRuleBadge }}</span>
+                </div>
+                <h2 style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1.2;margin:0;color:var(--ink)">{{ L.insiderTitle }}</h2>
+                <div style="font-size:13.5px;color:var(--t2);margin-top:8px;line-height:1.6;text-wrap:pretty">{{ L.insiderLead }}</div>
+              </div>
+              <div style="text-align:end;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint);line-height:1.6">
+                <div>{{ L.insiderSessionLabel }}: <b style="color:var(--ink)">{{ insiderTracker.latestSession }}</b></div>
+                <div>{{ insiderTracker.totalRecords }} {{ L.insiderTransactions }}</div>
+              </div>
+            </div>
+
+            <!-- Bento KPI Metrics -->
+            <div class="insider-kpi-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px">
+              <!-- KPI 1: Disclosed Events -->
+              <div style="border-radius:18px;background:var(--sunk);border:1px solid var(--rule2);padding:14px 16px">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.insiderKpiTotal }}</div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-.03em;color:var(--ink)">{{ insiderTracker.totalRecords }}</span>
+                  <span style="font-size:11.5px;color:var(--t2)">{{ L.insiderTransactions }}</span>
+                </div>
+                <div style="font-size:11px;color:var(--faint);margin-top:4px">{{ insiderTracker.activeCompaniesCount }} {{ L.insiderKpiActiveFirms }}</div>
+              </div>
+
+              <!-- KPI 2: Purchases -->
+              <div style="border-radius:18px;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.2);padding:14px 16px">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--up)">{{ L.insiderKpiBuy }}</div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-.03em;color:var(--up)">{{ insiderTracker.buyCount }}</span>
+                  <span style="font-size:11.5px;color:var(--t2)">{{ L.insiderTransactions }}</span>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink);margin-top:4px">↑ {{ insiderTracker.totalBuySharesFormatted }} <span style="font-family:inherit;font-size:10.5px;color:var(--faint)">{{ L.insiderShares }}</span></div>
+              </div>
+
+              <!-- KPI 3: Sales -->
+              <div style="border-radius:18px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.2);padding:14px 16px">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--down)">{{ L.insiderKpiSell }}</div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-.03em;color:var(--down)">{{ insiderTracker.sellCount }}</span>
+                  <span style="font-size:11.5px;color:var(--t2)">{{ L.insiderTransactions }}</span>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink);margin-top:4px">↓ {{ insiderTracker.totalSellSharesFormatted }} <span style="font-family:inherit;font-size:10.5px;color:var(--faint)">{{ L.insiderShares }}</span></div>
+              </div>
+
+              <!-- KPI 4: Treasury Buybacks -->
+              <div style="border-radius:18px;background:rgba(2,132,199,0.05);border:1px solid rgba(2,132,199,0.2);padding:14px 16px">
+                <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#0284c7">{{ L.insiderKpiTreasury }}</div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:600;letter-spacing:-.03em;color:#0284c7">{{ insiderTracker.treasuryBuyCount }}</span>
+                  <span style="font-size:11.5px;color:var(--t2)">{{ L.insiderTransactions }}</span>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ insiderTracker.activeTreasuryList }}">🛡 {{ insiderTracker.activeTreasuryList }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Header: 3-Way View Switcher & Live Search -->
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 4px">
+            <!-- 3-Way View Switcher: Table | Activity Map | Sector Flows -->
+            <div class="insider-view-switcher" style="display:inline-flex;align-items:center;gap:4px;padding:4px;border-radius:12px;background:var(--sunk);border:1px solid var(--rule2)">
+              <sc-for list="{{ insiderTracker.viewOptions }}" as="vo">
+                <div onClick="{{ vo.go }}" style="cursor:pointer;background:{{ vo.bg }};color:{{ vo.color }};border:1px solid {{ vo.border }};box-shadow:{{ vo.sh }};border-radius:8px;padding:6px 14px;font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .15s" style-hover="color:var(--ink)">
+                  <span>{{ vo.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <!-- Instant Search Box -->
+            <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--rule);box-shadow:var(--shPill);min-width:230px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:14px;height:14px;flex:none"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
+              <input value="{{ insiderTracker.q }}" onInput="{{ insiderTracker.onQ }}" placeholder="{{ L.insiderSearch }}" style="border:none;background:transparent;color:var(--ink);font-family:inherit;font-size:13px;outline:none;width:100%">
+              <sc-if value="{{ insiderTracker.hasQ }}">
+                <span onClick="{{ insiderTracker.clearQ }}" style="cursor:pointer;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;color:var(--accent);text-transform:uppercase">{{ L.insiderClearSearch }}</span>
+              </sc-if>
+            </div>
+          </div>
+
+          <!-- Secondary Filter Pills (Active for Table View) -->
+          <sc-if value="{{ insiderTracker.isTable }}">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:0 4px">
+              <sc-for list="{{ insiderTracker.filterOptions }}" as="f">
+                <div onClick="{{ f.go }}" style="cursor:pointer;display:inline-flex;align-items:baseline;gap:6px;font-size:12px;padding:6px 12px;border-radius:999px;color:{{ f.color }};background:{{ f.bg }};border:1px solid {{ f.border }};transition:all .15s" style-hover="border-color:var(--accent)">
+                  <span>{{ f.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;opacity:.75">{{ f.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <!-- Secondary Filter Pills (Active for Activity Map View) -->
+          <sc-if value="{{ insiderTracker.isMap }}">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:0 4px">
+              <sc-for list="{{ insiderTracker.filterOptions }}" as="f">
+                <div onClick="{{ f.go }}" style="cursor:pointer;display:inline-flex;align-items:baseline;gap:6px;font-size:12px;padding:6px 12px;border-radius:999px;color:{{ f.color }};background:{{ f.bg }};border:1px solid {{ f.border }};transition:all .15s" style-hover="border-color:var(--accent)">
+                  <span>{{ f.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;opacity:.75">{{ f.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <!-- ══ VIEW 1: TRANSACTIONS TABLE ══ -->
+          <sc-if value="{{ insiderTracker.isTable }}">
+            <div>
+              <!-- Empty State -->
+              <sc-if value="{{ insiderTracker.noItems }}">
+                <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:36px 20px;text-align:center;color:var(--faint);font-size:13.5px">
+                  {{ L.insiderEmpty }}
+                </div>
+              </sc-if>
+
+              <!-- Transactions List Table -->
+              <sc-if value="{{ insiderTracker.hasItems }}">
+                <div class="insider-table-wrap" style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);overflow:hidden">
+                  <div class="insider-table-header" style="display:grid;grid-template-columns:105px 180px minmax(130px,1fr) 140px 130px 110px;gap:12px;padding:14px 18px;border-bottom:1px solid var(--rule2);align-items:center">
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.insiderColDate }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.insiderColCompany }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.insiderColAction }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)">{{ L.insiderColParty }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.insiderColVolume }}</div>
+                    <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:end">{{ L.insiderColFiling }}</div>
+                  </div>
+
+                  <div class="insider-rows-list">
+                    <sc-for list="{{ insiderTracker.items }}" as="r">
+                      <div class="insider-row-item" style-hover="background:var(--sunk)">
+                        <!-- Date -->
+                        <div class="insider-cell-date" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint);white-space:nowrap">{{ r.date }}</div>
+
+                        <!-- Company / Ticker -->
+                        <div class="insider-cell-company" style="min-width:0">
+                          <div style="display:flex;align-items:center;gap:6px">
+                            <sc-if value="{{ r.hasTicker }}">
+                              <button type="button" onClick="{{ r.openCompany }}" style="cursor:pointer;border:none;background:var(--sunk);border:1px solid var(--rule);border-radius:6px;padding:2px 6px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--ink)" title="{{ r.ticker }}">{{ r.ticker }}</button>
+                            </sc-if>
+                            <span style="font-size:13px;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ r.company }}">{{ r.company }}</span>
+                          </div>
+                          <sc-if value="{{ r.hasSector }}">
+                            <div style="font-size:10.5px;color:var(--faint);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sector }}</div>
+                          </sc-if>
+                        </div>
+
+                        <!-- Action Badge -->
+                        <div class="insider-cell-action">
+                          <span style="display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:600;color:{{ r.actionColor }};background:{{ r.actionBadgeBg }};border:1px solid {{ r.actionBadgeBorder }};white-space:nowrap">
+                            {{ r.actionLabel }}
+                          </span>
+                        </div>
+
+                        <!-- Relationship -->
+                        <div class="insider-cell-rel">
+                          <span style="display:inline-block;padding:3px 8px;border-radius:6px;background:var(--sunk);border:1px solid var(--rule2);font-size:11px;color:var(--t2);white-space:nowrap">
+                            {{ r.relationshipLabel }}
+                          </span>
+                        </div>
+
+                        <!-- Shares Volume -->
+                        <div class="insider-cell-shares" style="text-align:end">
+                          <sc-if value="{{ r.hasShares }}">
+                            <div style="font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:600;color:var(--ink)">{{ r.sharesFormatted }}</div>
+                            <div style="font-size:10.5px;color:var(--faint)">{{ r.sharesCompact }}</div>
+                          </sc-if>
+                          <sc-if value="{{ r.noShares }}">
+                            <span style="font-size:11.5px;color:var(--faint)">{{ L.insiderOfficialNotice }}</span>
+                          </sc-if>
+                        </div>
+
+                        <!-- Official Document Link -->
+                        <div class="insider-cell-link" style="text-align:end">
+                          <sc-if value="{{ r.hasLink }}">
+                            <a href="{{ r.link }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:3px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--accent);text-decoration:none;padding:4px 8px;border-radius:6px;background:var(--sunk);border:1px solid var(--rule2)" style-hover="border-color:var(--accent)">
+                              <span>{{ L.insiderOfficialDoc }}</span>
+                              <span style="font-family:'IBM Plex Mono',monospace">↗</span>
+                            </a>
+                          </sc-if>
+                          <sc-if value="{{ r.noLink }}">
+                            <span style="font-size:11px;color:var(--faint)">—</span>
+                          </sc-if>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- ══ VIEW 2: ACTIVITY TREEMAP ══ -->
+          <sc-if value="{{ insiderTracker.isMap }}">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <!-- Legend & Map Hint Bar -->
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:2px 4px">
+                <div style="font-size:12px;color:var(--faint);line-height:1.5;max-width:65ch">{{ L.insiderMapHint }}</div>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
+                  <span style="display:inline-flex;align-items:center;gap:5px;color:var(--up)">
+                    <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--up)"></span>
+                    <span>{{ L.insiderMapLegendBuy }}</span>
+                  </span>
+                  <span style="display:inline-flex;align-items:center;gap:5px;color:var(--down)">
+                    <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--down)"></span>
+                    <span>{{ L.insiderMapLegendSell }}</span>
+                  </span>
+                  <span style="display:inline-flex;align-items:center;gap:5px;color:#0284c7">
+                    <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#0284c7"></span>
+                    <span>{{ L.insiderMapLegendTreasury }}</span>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Treemap Canvas -->
+              <sc-if value="{{ insiderTracker.hasMapTiles }}">
+                <div class="insider-treemap-canvas" style="position:relative;width:100%;aspect-ratio:16/10;min-height:480px;border-radius:20px;overflow:hidden;background:var(--sunk);border:1px solid var(--edgeIn);box-shadow:var(--sh)">
+                  <sc-for list="{{ insiderTracker.mapTiles }}" as="t">
+                    <div onClick="{{ t.openCompany }}" title="{{ t.name }} ({{ t.ticker }}) - {{ t.volFormatted }} {{ L.insiderShares }}"
+                         class="insider-map-tile"
+                         style="position:absolute;left:{{ t.left }};top:{{ t.top }};width:{{ t.width }};height:{{ t.height }};background:{{ t.bg }};border:1px solid {{ t.border }};border-radius:7px;padding:7px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;overflow:hidden;transition:all .15s"
+                         style-hover="filter:brightness(1.18);box-shadow:0 4px 14px rgba(0,0,0,0.14);z-index:3">
+                      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:4px">
+                        <sc-if value="{{ t.showTicker }}">
+                          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:{{ t.fg }};line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.ticker }}</span>
+                        </sc-if>
+                        <sc-if value="{{ t.showBadge }}">
+                          <span style="font-size:9.5px;font-weight:600;color:{{ t.fg }};line-height:1;white-space:nowrap;opacity:.9">{{ t.badge }}</span>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{ t.showName }}">
+                        <div style="font-size:11px;color:var(--ink);font-weight:500;line-height:1.25;margin:3px 0;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ t.name }}</div>
+                      </sc-if>
+                      <sc-if value="{{ t.showVol }}">
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--t2);line-height:1">{{ t.volFormatted }} <span style="font-size:9px;color:var(--faint);font-weight:400">{{ L.insiderShares }}</span></div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- Map Empty State -->
+              <sc-if value="{{ insiderTracker.noMapTiles }}">
+                <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:36px 20px;text-align:center;color:var(--faint);font-size:13.5px">
+                  {{ L.insiderEmpty }}
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- ══ VIEW 3: SECTOR FLOWS DIVERGING GRAPH ══ -->
+          <sc-if value="{{ insiderTracker.isFlow }}">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <!-- Flow Header & Legend Card -->
+              <div style="border-radius:20px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:18px 22px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                  <div>
+                    <h3 style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:600;color:var(--ink);margin:0">{{ L.insiderFlowTitle }}</h3>
+                    <div style="font-size:12.5px;color:var(--t2);margin-top:4px;max-width:70ch">{{ L.insiderFlowSubtitle }}</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px">
+                    <span style="display:inline-flex;align-items:center;gap:5px;color:var(--up)">
+                      <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--up)"></span>
+                      <span>{{ L.insiderFlowBuys }}</span>
+                    </span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;color:var(--down)">
+                      <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--down)"></span>
+                      <span>{{ L.insiderFlowSells }}</span>
+                    </span>
+                    <span style="display:inline-flex;align-items:center;gap:5px;color:#0284c7">
+                      <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#0284c7"></span>
+                      <span>{{ L.insiderFlowTreasury }}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Flow Cards Grid -->
+              <sc-if value="{{ insiderTracker.hasSectorFlows }}">
+                <div class="insider-flow-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px">
+                  <sc-for list="{{ insiderTracker.sectorFlows }}" as="sec">
+                    <div class="insider-flow-card" style="border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:16px 18px;display:flex;flex-direction:column;gap:12px">
+                      <!-- Sector Header -->
+                      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+                        <div style="min-width:0">
+                          <div style="font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ sec.name }}">{{ sec.name }}</div>
+                          <div style="font-size:11px;color:var(--faint);margin-top:2px">{{ sec.companiesCount }} {{ L.insiderFlowFirms }} · {{ sec.totalSharesFormatted }} {{ L.insiderShares }}</div>
+                        </div>
+                        <span style="display:inline-flex;align-items:baseline;gap:3px;padding:3px 8px;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:{{ sec.netColor }};background:{{ sec.netBg }};border:1px solid {{ sec.netBorder }};white-space:nowrap">
+                          <span>{{ sec.netFormatted }}</span>
+                        </span>
+                      </div>
+
+                      <!-- Comparative Flow Bars -->
+                      <div style="display:flex;flex-direction:column;gap:8px;background:var(--sunk);border-radius:12px;padding:10px 12px;border:1px solid var(--rule2)">
+                        <!-- Buys Bar -->
+                        <sc-if value="{{ sec.hasBuys }}">
+                          <div style="display:flex;flex-direction:column;gap:3px">
+                            <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2)">
+                              <span style="color:var(--up);font-weight:600">↑ {{ L.insiderFlowBuys }}</span>
+                              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink)">{{ sec.buySharesFormatted }}</span>
+                            </div>
+                            <div style="height:6px;width:100%;background:var(--rule);border-radius:999px;overflow:hidden">
+                              <div style="height:100%;width:{{ sec.buyBarWidth }};background:var(--up);border-radius:999px;transition:width .3s"></div>
+                            </div>
+                          </div>
+                        </sc-if>
+
+                        <!-- Sells Bar -->
+                        <sc-if value="{{ sec.hasSells }}">
+                          <div style="display:flex;flex-direction:column;gap:3px">
+                            <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2)">
+                              <span style="color:var(--down);font-weight:600">↓ {{ L.insiderFlowSells }}</span>
+                              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink)">{{ sec.sellSharesFormatted }}</span>
+                            </div>
+                            <div style="height:6px;width:100%;background:var(--rule);border-radius:999px;overflow:hidden">
+                              <div style="height:100%;width:{{ sec.sellBarWidth }};background:var(--down);border-radius:999px;transition:width .3s"></div>
+                            </div>
+                          </div>
+                        </sc-if>
+
+                        <!-- Treasury Bar -->
+                        <sc-if value="{{ sec.hasTreasury }}">
+                          <div style="display:flex;flex-direction:column;gap:3px">
+                            <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--t2)">
+                              <span style="color:#0284c7;font-weight:600">🛡 {{ L.insiderFlowTreasury }}</span>
+                              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink)">{{ sec.treasurySharesFormatted }}</span>
+                            </div>
+                            <div style="height:6px;width:100%;background:var(--rule);border-radius:999px;overflow:hidden">
+                              <div style="height:100%;width:{{ sec.treasuryBarWidth }};background:#0284c7;border-radius:999px;transition:width .3s"></div>
+                            </div>
+                          </div>
+                        </sc-if>
+                      </div>
+
+                      <!-- Active Tickers Chips in Sector -->
+                      <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+                        <sc-for list="{{ sec.tickerChips }}" as="tc">
+                          <button type="button" onClick="{{ tc.open }}" style="cursor:pointer;border:none;background:var(--sunk);border:1px solid var(--rule);border-radius:6px;padding:2px 6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink);font-weight:600" style-hover="border-color:var(--accent)">{{ tc.ticker }}</button>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- Flow Empty State -->
+              <sc-if value="{{ insiderTracker.noSectorFlows }}">
+                <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:36px 20px;text-align:center;color:var(--faint);font-size:13.5px">
+                  {{ L.insiderFlowNoData }}
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- Regulatory Context & Disclosures Footnote -->
+          <div style="border-radius:18px;background:var(--sunk);border:1px solid var(--rule2);padding:14px 18px;font-size:11.5px;color:var(--faint);line-height:1.6">
+            <div style="font-weight:600;color:var(--t2);margin-bottom:4px">§ {{ L.insiderRuleBadge }}</div>
+            <div>{{ L.insiderDiscloseNote }}</div>
+          </div>
+        </section>
       </sc-if>
 
-      <sc-if value="{{ investors }}">
+      <sc-if value="{{ showMacroInvestors }}">
+        <sc-if value="{{ noInvestors }}">
+          <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:34px 24px;text-align:center;color:var(--faint);font-size:13.5px">{{ L.nothingYet }}</div>
+        </sc-if>
+
+        <sc-if value="{{ investors }}">
         <!-- Share of everything traded, and whether each side ended a net
              buyer or a net seller. The two are different questions: a party
              can be a quarter of the market and still have taken money off the
@@ -1144,6 +1532,7 @@
           <div>{{ L.investorsNoIntraday }}</div>
           <div>{{ investors.source }}</div>
         </div>
+      </sc-if>
       </sc-if>
     </div>
   </sc-if>
@@ -2031,6 +2420,21 @@
            matches on ticker, on either language of the title, and on the
            company's own name from the directory — the archive row carries only
            the ticker. -->
+      <!-- Shortcut to Insider & Treasury Flow Tracker -->
+      <div onClick="{{ goInsiderTracker }}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);transition:all .15s" style-hover="border-color:var(--accent);background:var(--sunk)">
+        <div style="display:flex;align-items:center;gap:12px;min-width:0">
+          <span style="font-size:18px;flex:none">🛡</span>
+          <div style="min-width:0">
+            <div style="font-size:13.5px;font-weight:600;color:var(--ink)">{{ L.insiderCrossLink }}</div>
+            <div style="font-size:11.5px;color:var(--t2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ L.insiderLead }}</div>
+          </div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent);flex:none">
+          <span>{{ L.insiderFilterAll }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace">↗</span>
+        </div>
+      </div>
+
       <div class="om-search" style="border-radius:20px;background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--edge);box-shadow:var(--sh);padding:14px 16px">
         <div style="display:flex;align-items:center;gap:10px">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--faint)" stroke-width="1.7" stroke-linecap="round" style="width:16px;height:16px;flex:none"><path d="M10.6 17.2a6.6 6.6 0 1 0 0-13.2 6.6 6.6 0 0 0 0 13.2M15.4 15.4 20.4 20.4"></path></svg>
@@ -2614,9 +3018,91 @@
 
         <!-- 2D Matrix View -->
         <sc-if value="{{ valData.isMatrix }}">
+          <!-- Interactive Zoom & Horizon Toolbar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 16px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn);margin-bottom:14px">
+            <!-- Zoom Slider & Controls -->
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600">{{ valData.zoomLabel }}</span>
+              <div style="display:flex;align-items:center;gap:6px">
+                <button type="button" onClick="{{ valData.zoomOut }}" aria-label="Zoom out" style="cursor:pointer;width:28px;height:28px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .15s">−</button>
+                <input type="range" min="1" max="4" step="0.25" value="{{ valData.zoomLevel }}" onChange="{{ valData.onZoomChange }}" class="valuation-zoom-slider" style="width:120px" aria-label="{{ valData.zoomLabel }}">
+                <button type="button" onClick="{{ valData.zoomIn }}" aria-label="Zoom in" style="cursor:pointer;width:28px;height:28px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .15s">+</button>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--accent);min-width:32px;text-align:center">{{ valData.zoomText }}</span>
+              </div>
+              <sc-if value="{{ valData.canReset }}">
+                <button type="button" onClick="{{ valData.resetZoom }}" style="cursor:pointer;padding:4px 9px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--t2);font-size:11px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;display:inline-flex;align-items:center;gap:5px;transition:all .15s"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg><span>{{ valData.resetLabel }}</span></button>
+              </sc-if>
+            </div>
+
+            <!-- Zoom Presets -->
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ valData.zoomPresets }}" as="zp">
+                <button type="button" onClick="{{ zp.go }}" style="cursor:pointer;padding:5px 10px;border-radius:999px;font-size:11px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;border:1px solid {{ zp.selected ? 'var(--accent)' : 'var(--rule)' }};background:{{ zp.selected ? 'var(--surface)' : 'transparent' }};color:{{ zp.selected ? 'var(--accent)' : 'var(--t2)' }};font-weight:{{ zp.selected ? '600' : '400' }};box-shadow:{{ zp.selected ? 'var(--shPill)' : 'none' }};transition:all .15s">{{ zp.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- P/E Horizon Pan Bar (Visible when Zoom > 1) -->
+          <sc-if value="{{ valData.hasPan }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:9px 14px;border-radius:12px;background:var(--sunk);border:1px solid var(--edgeIn);margin-bottom:14px;font-size:11.5px">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600">{{ valData.horizonLabel }}</span>
+                <input type="range" min="0" max="1" step="0.02" value="{{ valData.panX }}" onChange="{{ valData.onPanChange }}" class="valuation-zoom-slider" style="width:150px" aria-label="{{ valData.horizonLabel }}">
+                <span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink)">{{ valData.peRangeLabel }}</span>
+              </div>
+              <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--faint)">
+                <span>{{ valData.inViewCountText }}</span>
+                <span style="margin-inline-start:6px">{{ valData.outliersText }}</span>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 2D Matrix Canvas -->
           <div style="position:relative;background:var(--surface);border-radius:18px;border:1px solid var(--edgeIn);padding:16px;overflow:hidden">
             {{ valData.matrixNode }}
           </div>
+
+          <!-- Interactive Company Inspector HUD Card -->
+          <sc-if value="{{ valData.selectedCompany }}">
+            <div style="margin-top:14px;border-radius:18px;background:var(--sunk);border:1.5px solid var(--accent);box-shadow:var(--sh);padding:18px 20px;position:relative">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:var(--ink)">{{ valData.selectedCompany.ticker }}</span>
+                    <span style="font-size:14px;font-weight:600;color:var(--t2)">{{ valData.selectedCompany.name }}</span>
+                    <span style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;padding:3px 9px;border-radius:999px;font-weight:600;color:{{ valData.selectedCompany.badgeColor }};background:{{ valData.selectedCompany.badgeBg }}">{{ valData.selectedCompany.badgeLabel }}</span>
+                  </div>
+                  <div style="font-size:12px;color:var(--faint);margin-top:3px">{{ valData.selectedCompany.sector }}</div>
+                </div>
+                <button type="button" onClick="{{ valData.selectedCompany.closeCompany }}" aria-label="Close" style="cursor:pointer;width:26px;height:26px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);color:var(--faint);font-size:12px;display:flex;align-items:center;justify-content:center">✕</button>
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--edgeIn)">
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Base P/E</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--ink);margin-top:2px">{{ valData.selectedCompany.peText }}</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt / Equity</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--ink);margin-top:2px">{{ valData.selectedCompany.deText }}</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Debt-Adj Multiple</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:var(--accent);margin-top:2px">{{ valData.selectedCompany.peAdjText }}</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--faint);text-transform:uppercase">Market Cap</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--ink);margin-top:3px">{{ valData.selectedCompany.capText }}</div>
+                </div>
+              </div>
+
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:14px">
+                <p style="margin:0;font-size:12.5px;color:var(--t2);line-height:1.55;max-width:70ch">{{ valData.selectedCompany.explanation }}</p>
+                <button type="button" onClick="{{ valData.selectedCompany.goToCompany }}" style="cursor:pointer;padding:7px 14px;border-radius:10px;background:var(--ink);color:var(--surface);font-size:12px;font-weight:600;border:none;white-space:nowrap;display:inline-flex;align-items:center;gap:6px"><span>{{ valData.selectedCompany.ticker }}</span> <span>→</span></button>
+              </div>
+            </div>
+          </sc-if>
+
           <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;color:var(--faint);margin-top:10px">
             <span>{{ valData.matrixFootnote1 }}</span>
             <span>{{ valData.matrixFootnote2 }}</span>

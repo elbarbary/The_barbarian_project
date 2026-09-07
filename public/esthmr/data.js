@@ -281,6 +281,84 @@ export function demo() {
         },
       ],
     },
+    insiders: {
+      updatedAt: '2026-09-07T10:00:00Z',
+      asOf: '2026-09-07',
+      source: 'Official EGX Daily Bulletins & Post-Execution Disclosures',
+      basis: 'Official exchange disclosures filed under Capital Market Law Articles 29 & 38',
+      basisAr: 'إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد',
+      summary: {
+        totalRecords: 5,
+        buyCount: 2,
+        sellCount: 1,
+        treasuryBuyCount: 1,
+        treasurySellCount: 0,
+        totalBuyShares: 1450000,
+        totalSellShares: 320000,
+        activeCompaniesCount: 5,
+        activeTreasuryCompanies: [companies[3].ticker],
+        latestSession: '2026-09-07',
+        earliestSession: '2026-09-01',
+      },
+      sessions: ['2026-09-07', '2026-09-03', '2026-09-01'],
+      items: [
+        {
+          id: 'demo-ins-1', filingId: '294408', sourceType: 'bulletin', date: '2026-09-07',
+          ticker: companies[0].ticker, company: companies[0].name.en, companyAr: companies[0].name.ar,
+          sector: companies[0].sector, sectorAr: companies[0].sectorAr,
+          action: 'bought', actionLabel: 'Bought', actionLabelAr: 'شراء',
+          relationship: 'insider', relationshipLabel: 'Insider / Board', relationshipLabelAr: 'مجلس إدارة / داخلي',
+          positionRaw: 'Board Member', shares: 250000,
+          title: `تعامل على أسهم ${companies[0].name.ar} (شراء): 250,000 سهم`,
+          titleEn: `Transaction on ${companies[0].name.en} (bought): 250,000 shares`,
+          link: '',
+        },
+        {
+          id: 'demo-ins-2', filingId: '294409', sourceType: 'treasury_filing', date: '2026-09-07',
+          ticker: companies[3].ticker, company: companies[3].name.en, companyAr: companies[3].name.ar,
+          sector: companies[3].sector, sectorAr: companies[3].sectorAr,
+          action: 'treasury_purchase', actionLabel: 'Treasury Purchase', actionLabelAr: 'شراء أسهم خزينة',
+          relationship: 'treasury', relationshipLabel: 'Company Treasury', relationshipLabelAr: 'الشركة (أسهم خزينة)',
+          positionRaw: 'Treasury Shares', shares: null,
+          title: `بيان من ${companies[3].name.ar} بشأن شراء أسهم خزينة`,
+          titleEn: `Statement from ${companies[3].name.en} regarding treasury share purchase`,
+          link: '',
+        },
+        {
+          id: 'demo-ins-3', filingId: '294410', sourceType: 'bulletin', date: '2026-09-03',
+          ticker: companies[1].ticker, company: companies[1].name.en, companyAr: companies[1].name.ar,
+          sector: companies[1].sector, sectorAr: companies[1].sectorAr,
+          action: 'bought', actionLabel: 'Bought', actionLabelAr: 'شراء',
+          relationship: 'related_party', relationshipLabel: 'Connected Group', relationshipLabelAr: 'مجموعة مرتبطة',
+          positionRaw: 'Related Party', shares: 1200000,
+          title: `تعامل على أسهم ${companies[1].name.ar} (شراء): 1,200,000 سهم`,
+          titleEn: `Transaction on ${companies[1].name.en} (bought): 1,200,000 shares`,
+          link: '',
+        },
+        {
+          id: 'demo-ins-4', filingId: '294411', sourceType: 'bulletin', date: '2026-09-03',
+          ticker: companies[6].ticker, company: companies[6].name.en, companyAr: companies[6].name.ar,
+          sector: companies[6].sector, sectorAr: companies[6].sectorAr,
+          action: 'sold', actionLabel: 'Sold', actionLabelAr: 'مبيعات',
+          relationship: 'insider', relationshipLabel: 'Insider / Board', relationshipLabelAr: 'مجلس إدارة / داخلي',
+          positionRaw: 'Board Member', shares: 320000,
+          title: `تعامل على أسهم ${companies[6].name.ar} (مبيعات): 320,000 سهم`,
+          titleEn: `Transaction on ${companies[6].name.en} (sold): 320,000 shares`,
+          link: '',
+        },
+        {
+          id: 'demo-ins-5', filingId: '294412', sourceType: 'post_execution_filing', date: '2026-09-01',
+          ticker: companies[8].ticker, company: companies[8].name.en, companyAr: companies[8].name.ar,
+          sector: companies[8].sector, sectorAr: companies[8].sectorAr,
+          action: 'disclosure', actionLabel: 'Post-Execution Trade Form', actionLabelAr: 'إفصاح بعد التنفيذ',
+          relationship: 'major_holder', relationshipLabel: 'Major Shareholder', relationshipLabelAr: 'مساهم رئيسي',
+          positionRaw: 'Major Shareholder', shares: null,
+          title: `${companies[8].name.ar} - بيان بخصوص نموذج إفصاح بعد التنفيذ`,
+          titleEn: `${companies[8].name.en} - Statement regarding post-execution disclosure`,
+          link: '',
+        },
+      ],
+    },
   };
 }
 
@@ -1428,6 +1506,15 @@ export async function investors() {
       ];
     })(),
   };
+}
+
+/** Official EGX Insider & Treasury Share Flow Tracker. */
+export async function insiders() {
+  try {
+    const d = await doc('insiders.json');
+    if (d && Array.isArray(d.items) && d.items.length > 0) return d;
+  } catch {}
+  return demo().insiders;
 }
 
 /** The per-company blocks the company screen shows under its statements. */

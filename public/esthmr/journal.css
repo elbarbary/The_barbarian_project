@@ -236,6 +236,46 @@
   #app .screen-company .om-stats > div { padding:12px !important; }
 }
 
+/* Sector Valuation Zoom Slider styling */
+.valuation-zoom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--rule);
+  outline: none;
+  cursor: pointer;
+  transition: background .15s;
+}
+.valuation-zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  border: 2px solid var(--surface);
+  transition: transform .1s;
+}
+.valuation-zoom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.valuation-zoom-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  border: 2px solid var(--surface);
+  transition: transform .1s;
+}
+.valuation-zoom-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
 /* Visual islands: retain index histories as the home page's focal point. */
 
 
@@ -626,3 +666,127 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   .island-breadth .island-ring strong { font-size:28px; }
   #app .om-idx > div > div:nth-child(2) { font-size:20px !important; }
 }
+
+/* ── Insider & Treasury Flow Tracker ── */
+.insider-hero-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--edgeIn);
+  box-shadow: var(--sh);
+}
+.insider-table-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.insider-table-header {
+  display: grid;
+  grid-template-columns: 105px 180px minmax(130px, 1fr) 140px 130px 110px;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rule2);
+  align-items: center;
+}
+.insider-row-item {
+  display: grid;
+  grid-template-columns: 105px 180px minmax(130px, 1fr) 140px 130px 110px;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--rule2);
+  align-items: center;
+  transition: background .12s;
+}
+.insider-row-item:last-child {
+  border-bottom: none !important;
+}
+.insider-view-switcher {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.insider-treemap-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  min-height: 480px;
+}
+.insider-map-tile {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.insider-map-tile:hover {
+  z-index: 5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+.insider-flow-card {
+  transition: transform .15s, box-shadow .15s;
+}
+.insider-flow-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shHover, 0 4px 14px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 768px) {
+  .insider-hero-card {
+    padding: 20px 16px 18px !important;
+  }
+  .insider-view-switcher {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .insider-view-switcher > div {
+    flex: 1 !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 6px 8px !important;
+    font-size: 11.5px !important;
+  }
+  .insider-treemap-canvas {
+    aspect-ratio: auto !important;
+    height: 540px !important;
+    min-height: 540px !important;
+  }
+  .insider-flow-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .insider-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .insider-table-header {
+    display: none !important;
+  }
+  .insider-rows-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+  .insider-row-item {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-areas:
+      "company action"
+      "date rel"
+      "shares link" !important;
+    gap: 8px 12px !important;
+    padding: 14px 16px !important;
+    border-radius: 18px !important;
+    background: var(--sunk) !important;
+    border: 1px solid var(--rule2) !important;
+    min-width: 0 !important;
+  }
+  .insider-cell-company { grid-area: company; min-width: 0; }
+  .insider-cell-action  { grid-area: action; justify-self: end; }
+  .insider-cell-date    { grid-area: date; }
+  .insider-cell-rel     { grid-area: rel; justify-self: end; }
+  .insider-cell-shares  { grid-area: shares; text-align: start !important; }
+  .insider-cell-link    { grid-area: link; justify-self: end; }
+}
+
+@media (max-width: 480px) {
+  .insider-kpi-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
