@@ -531,6 +531,10 @@
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
     "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
   },
+  "اسعار الذهب العالميه تتباين وسط ترقب لبيانات التضخم الامريكي": {
+    "meaning": "Global gold prices fluctuate based on macroeconomic indicators such as US inflation data, which determine benchmark interest rate environments, currency valuations, and the holding cost of non-yielding assets.",
+    "meaning_ar": "تتذبذب أسعار الذهب العالمية بناءً على مؤشرات الاقتصاد الكلي مثل بيانات التضخم الأمريكية، والتي تحدد أسعار الفائدة المرجعية وقيمة العملة وتكلفة حيازة الأصول غير المدرة للعائد."
+  },
   "اسعار الذهب العالميه تستقر مع ترقب بيانات التضخم الامريكي": {
     "meaning": "Global gold spot prices correlate with US dollar strength and interest rate expectations, leading market participants to maintain current position sizes ahead of key macroeconomic inflation releases.",
     "meaning_ar": "ترتبط أسعار الذهب الفورية عالمياً بقوة الدولار الأمريكي وتوقعات أسعار الفائدة، مما يدفع المتعاملين إلى الإبقاء على أحجام مراكزهم الحالية قبيل صدور البيانات الاقتصادية الكلية للتضخم."
@@ -754,6 +758,10 @@
   "البورصه تصعد 0.72% وسط تداولات بقيمه 15.5 مليار جنيه": {
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
     "meaning_ar": "يرتفع المؤشر الرئيسي للبورصة بنسبة 0.72% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع، مع تسجيل إجمالي قيمة تداولات على الأوراق المالية المقيدة بلغت 15.5 مليار جنيه خلال جلسة التداول."
+  },
+  "البورصه تغرم 6 شركات 240 الف جنيه وتمنحها 15 يوما لاستكمال القوايم الماليه": {
+    "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
+    "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
   },
   "البورصه علي موعد مع تصحيح موقت تمهيدا لاختبار 57000 نقطه": {
     "meaning": "Technical market corrections occur when trading volumes and price levels adjust following sustained upward movements, functioning as an equilibrium mechanism where market participants rebalance positions relative to specific index benchmark levels.",
@@ -1749,6 +1757,10 @@
     "meaning": "The agreement establishes a risk-sharing mechanism where CDP provides credit default guarantee coverage of up to EUR 30 million on designated loan portfolios originated by Bank of Alexandria.",
     "meaning_ar": "تؤسس هذه الاتفاقية آلية لتوزيع المخاطر الائتمانية، حيث يقدم صندوق CDP تغطية ضد مخاطر تعثر السداد لمحفظة قروض محددة يصدرها بنك الإسكندرية بقيمة تصل إلى 30 مليون يورو."
   },
+  "صندوق التقاعد الياباني يدرس مراجعه توزيع اصوله": {
+    "meaning": "The Japanese government pension fund is reviewing its asset allocation strategy to rebalance investment weights across domestic and international equities and bonds.",
+    "meaning_ar": "يقوم صندوق التقاعد الحكومي الياباني بمراجعة استراتيجية توزيع الأصول لإعادة موازنة أوزان المحفظة الاستثمارية بين الأسهم والسندات المحلية والدولية."
+  },
   "ضربات متبادله بين الولايات المتحده وايران تستهدف ناقلات نفط وسفنا حربيه": {
     "meaning": "Military conflicts targeting maritime vessels disrupt commercial shipping lanes, raising maritime insurance premiums and altering fuel and cargo transport routes for global trade.",
     "meaning_ar": "تؤدي النزاعات العسكرية التي تستهدف السفن البحرية إلى اضطراب الممرات الملاحية التجارية، مما يرفع أقساط التأمين البحري ويغير مسارات نقل الوقود والبضائع للتجارة العالمية."
@@ -1824,6 +1836,10 @@
   "فودافون مصر تطلق مركز بيانات بقدره توسعيه تصل الي 200 ميجاوات": {
     "meaning": "Establishing a data center with an expandable capacity of 200 megawatts adds large-scale digital hosting and cloud infrastructure to the operator's operational asset base.",
     "meaning_ar": "يضيف إطلاق مركز بيانات بقدرة توسعية تبلغ 200 ميجاوات بنية تحتية رقمية واسعة النطاق لخدمات الاستضافة والحوسبة السحابية إلى قاعدة الأصول التشغيلية للشركة."
+  },
+  "فودافون والسويدي وكاسافا يطلقون مشروعات": {
+    "meaning": "This consortium combines telecommunications connectivity, electrical engineering, and digital technology platforms to execute joint infrastructure and operational projects.",
+    "meaning_ar": "يمثل هذا التحالف دمجاً بين شبكات الاتصالات والبنية التحتية الكهربائية ومنصات التكنولوجيا الرقمية لتنفيذ مشروعات بنية تحتية وتشغيلية مشتركة."
   },
   "فول الصويا يضع الصين امام اختبار جديد قبل قمه «شي» و«ترامب»": {
     "meaning": "Soybean import volumes and tariff policies function as a key bilateral trade mechanism and negotiation benchmark between US agricultural exporters and Chinese commodity purchasers.",
