@@ -775,6 +775,10 @@
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
     "meaning_ar": "يرتفع المؤشر الرئيسي للبورصة بنسبة 0.72% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع، مع تسجيل إجمالي قيمة تداولات على الأوراق المالية المقيدة بلغت 15.5 مليار جنيه خلال جلسة التداول."
   },
+  "البورصه تعلن قيد سندات خزانه متغيره العايد بقيمه 14.02 مليار جنيه": {
+    "meaning": "Listing variable-rate treasury bonds on the exchange admits state sovereign debt instruments to the secondary trading market, where coupon payments adjust periodically based on benchmark interest rates.",
+    "meaning_ar": "يتيح قيد سندات الخزانة متغيرة العائد تداول أدوات الدين السيادية في السوق الثانوية للبورصة، حيث يتم تعديل العائد الدوري عليها دورياً وفقاً لأسعار الفائدة المرجعية."
+  },
   "البورصه تغرم 6 شركات 240 الف جنيه وتمنحها 15 يوما لاستكمال القوايم الماليه": {
     "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
     "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
@@ -898,6 +902,10 @@
   "الرييس السيسي يوجه بتبني مشروع لتخضير القاهره وتحويل المساحات المخلاه الي مسطحات خضراء": {
     "meaning": "This presidential directive allocates urban redevelopment activities toward landscaping and environmental contracting, involving public works tenders for contracting firms, nursery suppliers, and irrigation infrastructure providers across cleared municipal land in Cairo.",
     "meaning_ar": "يوجه هذا التكليف الرئاسي أعمال التطوير الحضري نحو قطاعات تنسيق الحدائق والمقاولات البيئية، عبر طرح مناقصات أعمال عامة لشركات المقاولات، وموردي المسطحات الخضراء، وشبكات الري في المساحات المفرغة بمحافظة القاهرة."
+  },
+  "الرييس السيسي: اهميه الارتقاء بالتعاون البناء مع قبرص في المجالات التجاريه والاستثماريه": {
+    "meaning": "Bilateral commercial cooperation agreements between Egypt and Cyprus establish institutional frameworks for cross-border trade flows, joint infrastructure coordination, and direct investments between Mediterranean markets.",
+    "meaning_ar": "تؤسس اتفاقيات التعاون التجاري الثنائي بين مصر وقبرص أطراً مؤسسية لحركة التبادل التجاري عبر الحدود، وتنسيق مشروعات البنية التحتية المشتركة، والاستثمارات المباشرة بين أسواق منطقة شرق المتوسط."
   },
   "الرييس السيسي: نتطلع الي تنويع محفظه التعاون مع البنك الاسيوي للاستثمار في البنيه التحتيه": {
     "meaning": "Broadening cooperation with multilateral development institutions like the AIIB provides state and private projects with access to direct financing lines and concessionary lending facilities across multiple infrastructure sectors.",
@@ -1114,6 +1122,10 @@
   "انتعاش الطلب الصيني علي النفط يرفع الاسعار من الكونغو الي البرازيل": {
     "meaning": "Higher crude oil intake from Chinese refineries increases global spot market competition, absorbing export volumes and raising benchmark differentials across producing regions including West Africa and Latin America.",
     "meaning_ar": "يؤدي ارتفاع استهلاك مصافي التكرير الصينية للنفط الخام إلى زيادة التنافس في الأسواق الفورية العالمية، مما يسحب كميات التصدير ويرفع الفروق السعرية للأسعار القياسية في مناطق الإنتاج من غرب إفريقيا إلى أمريكا اللاتينية."
+  },
+  "انتعاش نمو الصادرات الصينيه مع اقتراب الفايض التجاري من 806 مليارات دولار": {
+    "meaning": "An expanding Chinese trade surplus reflects an increase in outbound manufacturing volumes relative to imports, affecting global shipping route utilization, raw material consumption rates, and international trade liquidity flows.",
+    "meaning_ar": "يعكس اتساع الفائض التجاري الصيني ارتفاع حجم الصادرات الصناعية مقارنة بالواردات، مما يحدد معدلات تشغيل خطوط الشحن البحري العالمية، وحجم استهلاك المواد الخام، وحركة السيولة في التجارة الدولية."
   },
   "انخفاض موشري البحرين العام والاسلامي في ختام التعاملات": {
     "meaning": "The decline in both the Bahrain All Share Index and the Bahrain Islamic Index reflects a net decrease in the market capitalization of listed conventional and Sharia-compliant equities resulting from aggregate daily closing transactions.",
@@ -2204,6 +2216,10 @@
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
     "meaning_ar": "تعكس مؤشرات قوة سوق العمل انخفاض معدلات البطالة واستمرار الضغوط المرتبطة بالأجور، وهو ما يرتبط بآليات السياسة النقدية للبنوك المركزية القائمة على تطبيق أسعار فائدة مرتفعة لإدارة التضخم."
+  },
+  "ميدفيرت مصر تنقل 25% من الماليه والصناعيه الي ناس للاستثمارات ضمن اعاده هيكله": {
+    "meaning": "This transaction represents an internal ownership transfer of an equity stake between related holding entities as part of a corporate restructuring process, shifting direct shareholder voting and dividend rights without altering the underlying industrial operations of the target firm.",
+    "meaning_ar": "تُمثل هذه العملية نقل ملكية لحصة أسهم بين كيانات استثمارية تابعة ضمن إعادة هيكلة الشركات، وهو ما يترتب عليه تغيير في التوزيع المباشر لحقوق التصويت والأرباح دون المساس بالعمليات التشغيلية والصناعية للشركة محل الاستحواذ."
   },
   "نايب رييس الرقابه الماليه: نستهدف تحويل المختبر التنظيمي لمنصه اقليميه للابتكار": {
     "meaning": "The regulatory sandbox operates as a supervised testing environment under the Financial Regulatory Authority, allowing non-banking financial technology companies to test digital products, operational structures, and regulatory compliance before commercial deployment.",
