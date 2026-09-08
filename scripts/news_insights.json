@@ -412,9 +412,8 @@
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
   },
   "احتياطيات النقد الاجنبي في الصين ترتفع الي 3.438 تريليون دولار": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "An increase in China's foreign exchange reserves reflects trade surplus inflows, foreign direct investment, and central bank asset valuation adjustments denominated in foreign currencies.",
+    "meaning_ar": "يعكس ارتفاع احتياطيات النقد الأجنبي في الصين تدفقات الفائض التجاري والاستثمار الأجنبي المباشر وتغيرات تقييم الأصول المقومة بالعملات الأجنبية لدى البنك المركزي."
   },
   "احتياطيات اليابان تهبط 79.6 مليار دولار في اغسطس": {
     "meaning": "A decline in foreign exchange reserves reflects central bank balance sheet adjustments driven by foreign exchange market interventions, revaluations of foreign securities, or external payment settlements.",
@@ -555,6 +554,10 @@
   "اسعار الدواجن اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect the prevailing spot rates determined by feed input costs, farm-gate supply levels, and direct consumer distribution channels in the domestic market.",
     "meaning_ar": "تعكس تحديثات أسعار الدواجن اليومية الأسعار الفورية السائدة المحددة بتكاليف الأعلاف، وحجم المعروض من المزارع، وقنوات التوزيع للمستهلك في السوق المحلي."
+  },
+  "اسعار الدواجن اليوم الثلاثاء 8-9-2026 في مصر": {
+    "meaning": "Daily poultry price updates reflect the spot market rates determined by current supply volumes, feed input costs, and farm-gate transactions across the local agricultural sector.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن أسعار السوق الفورية المحددة بناءً على حجم المعروض الحالي، وتكاليف الأعلاف، ومعاملات البيع من المزارع في قطاع الإنتاج الداجني المحلي."
   },
   "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
@@ -943,6 +946,10 @@
   "الرييس السيسي يوجه بتبني مشروع لتخضير القاهره وتحويل المساحات المخلاه الي مسطحات خضراء": {
     "meaning": "This presidential directive allocates urban redevelopment activities toward landscaping and environmental contracting, involving public works tenders for contracting firms, nursery suppliers, and irrigation infrastructure providers across cleared municipal land in Cairo.",
     "meaning_ar": "يوجه هذا التكليف الرئاسي أعمال التطوير الحضري نحو قطاعات تنسيق الحدائق والمقاولات البيئية، عبر طرح مناقصات أعمال عامة لشركات المقاولات، وموردي المسطحات الخضراء، وشبكات الري في المساحات المفرغة بمحافظة القاهرة."
+  },
+  "الرييس السيسي: اقامه الدوله الفلسطينيه المستقله السبيل الوحيد للاستقرار في المنطقه": {
+    "meaning": "Regional geopolitical stability directly determines the sovereign risk premium, cross-border trade flows, and foreign direct investment allocations across Middle Eastern capital markets. Geopolitical de-escalation stabilizes operational environments for supply chains, tourism operations, and infrastructure development in adjacent economies.",
+    "meaning_ar": "يحدد الاستقرار الجيوسياسي الإقليمي بشكل مباشر علاوة المخاطر السيادية، وحركة التجارة عبر الحدود، وتدفقات الاستثمار الأجنبي المباشر في الأسواق المالية بالشرق الأوسط. تسهم التهدئة الإقليمية في تثبيت البيئة التشغيلية لسلاسل الإمداد وقطاعات السياحة وتطوير البنية التحتية في الاقتصادات المجاورة."
   },
   "الرييس السيسي: اهميه الارتقاء بالتعاون البناء مع قبرص في المجالات التجاريه والاستثماريه": {
     "meaning": "Bilateral commercial cooperation agreements between Egypt and Cyprus establish institutional frameworks for cross-border trade flows, joint infrastructure coordination, and direct investments between Mediterranean markets.",
@@ -1850,6 +1857,10 @@
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
   },
+  "شراكه بين “ڤودافون” و”السويدي” و”كاساڤا” لانشاء مركز بيانات باستثمارات مليار دولار": {
+    "meaning": "This joint venture pools capital and technical infrastructure across the telecommunications, industrial, and digital technology sectors to construct large-scale data hosting capacity.",
+    "meaning_ar": "يجمع هذا المشروع المشترك بين رؤوس الأموال والبنية التحتية التقنية لقطاعات الاتصالات والصناعة والتكنولوجيا الرقمية لتأسيس سعة استضافة بيانات واسعة النطاق."
+  },
   "شركتا اكس-برس فيدرز وتي اس لاينز تطلقان خدمات اقليميه جديده": {
     "meaning": "The launch adds maritime shipping routes and scheduled feeder vessel capacity across regional ports, expanding the operational transport network of both carriers.",
     "meaning_ar": "يضيف إطلاق هذه الخدمات مسارات ملاحية منتظمة وطاقة استيعابية لسفن التغذية عبر الموانئ الإقليمية، مما يوسع الشبكة التشغيلية للنقل البحري للشركتين."
@@ -1857,6 +1868,10 @@
   "شريف الجبلي: مصر تتحول الي مركز اقليمي للتجاره والخدمات الماليه والذكاء الاصطناعي": {
     "meaning": "Developing regional hubs in trade, financial services, and artificial intelligence relies on expanding cross-border logistics infrastructure, integrating digital payment networks, and establishing local data and computing centers.",
     "meaning_ar": "يعتمد التحول إلى مركز إقليمي للتجارة والخدمات المالية والذكاء الاصطناعي على توسيع البنية التحتية اللوجستية العابرة للحدود، وربط شبكات المدفوعات الرقمية، وتأسيس مراكز محلية للبيانات والحوسبة."
+  },
+  "صادرات الصين تقفز 25% بدعم الذكاء الاصطناعي.. والفايض التجاري يقترب من تريليون دولار": {
+    "meaning": "The expansion in global demand for AI-related hardware and electronics increases China's export volumes, widening its net trade surplus.",
+    "meaning_ar": "يؤدي ارتفاع حجم صادرات الأجهزة التكنولوجية ومكونات الذكاء الاصطناعي لتلبية الطلب العالمي إلى زيادة إجمالي الصادرات وتوسيع الفائض التجاري السنوي."
   },
   "صادرات القطن تتجاوز 205 ملايين دولار منذ انطلاق الموسم و25 شركه تتصدر المشهد": {
     "meaning": "Cotton export values exceeding $205 million reflect cross-border commercial transactions executed by 25 domestic trading and ginning companies within the agricultural export sector.",
@@ -1945,6 +1960,10 @@
   "علاء سبع مع حابي بودكاست – الرحله – الموسم الثاني الحلقه 12": {
     "meaning": "This is a media broadcast featuring industry commentary from an investment figure, which disseminates qualitative sector insights without changing the capital structure or operational metrics of listed entities.",
     "meaning_ar": "يمثل هذا محتوى إعلامياً يتضمن رؤى وتحليلات من أحد خبراء الاستثمار، حيث يوفر معلومات نوعية حول السوق دون إحداث تغيير في الهياكل التمويلية أو المؤشرات التشغيلية للشركات."
+  },
+  "علاء فاروق : امتداد الخدمات البحثيه الي 18 تجمعا تنمويا في سيناء": {
+    "meaning": "Extending agricultural research services to 18 development clusters in Sinai deploys state technical support, soil analysis, and crop advisory resources directly to farming operations across these targeted regional areas.",
+    "meaning_ar": "يمثل توسيع الخدمات البحثية لتشمل 18 تجمعاً تنموياً في سيناء توفيراً مباشراً للدعم الفني الحكومي وتحاليل التربة والإرشاد الزراعي للأنشطة الإنتاجية في تلك المناطق الجغرافية."
   },
   "عمرو البطريق: منطقه السخنه الصناعيه وجهه جاذبه للاستثمارات المتنوعه": {
     "meaning": "Industrial zones such as Sokhna operate under special economic frameworks that provide integrated logistics, port infrastructure, and regulatory facilities to industrial tenants.",
@@ -2566,6 +2585,10 @@
     "meaning": "The Ministry of Investment and Foreign Trade provides non-reimbursable financing to cover the costs of quality certifications, international standards compliance, and technical readiness for export-oriented enterprises.",
     "meaning_ar": "تقدم وزارة الاستثمار والتجارة الخارجية تمويلاً غير مسترد لتغطية تكاليف الحصول على شهادات الجودة والامتثال للمعايير الدولية والجاهزية الفنية للشركات الموجهة للتصدير."
   },
+  "“الاستثمار”: صندوق مرتقب لتعزيز الشراكات المصريه الافريقيه": {
+    "meaning": "The proposed fund establishes a dedicated financing vehicle that pools capital to co-fund cross-border commercial ventures and joint projects between Egyptian entities and African counterparts.",
+    "meaning_ar": "يوفر الصندوق المقترح أداة تمويل مخصصة لتجميع رؤوس الأموال بهدف التمويل المشترك للمشاريع التجارية والاستثمارية المشتركة بين الكيانات المصرية ونظيراتها الأفريقية."
+  },
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
     "meaning_ar": "سجلت شركة الدلتا للتأمين صافي أرباح قدره 302.1 مليون جنيه خلال النصف الأول، وهو ما يعكس الفائض التشغيلي المحقق من أنشطة الاكتتاب التأميني مضافاً إليه عوائد استثمار المحفظة المالية للشركة."
@@ -2725,6 +2748,10 @@
   "“منثم” تستهدف مضاعفه الاصول تحت ادارتها الي 8 مليارات جنيه خلال 2027": {
     "meaning": "Managing a higher volume of assets under management (AUM) involves aggregating client inflows into underlying money market funds and fixed-income instruments, generating operational revenue through asset-based management fees.",
     "meaning_ar": "تعتمد مضاعفة الأصول المدارة على تجميع تدفقات رؤوس أموال العملاء وتوجيهها نحو صناديق أسواق النقد وأدوات الدخل الثابت، حيث يتولد الدخل التشغيلي عبر تحصيل رسوم إدارة دورية كنسبة من إجمالي الأصول القائمة."
+  },
+  "“ميدفيرت” تنقل 25% من “الماليه والصناعيه” الي “ناس” بقيمه 5 مليارات جنيه": {
+    "meaning": "This transaction executes an off-market equity transfer of a 25% stake in Egyptian Financial & Industrial Company between corporate entities for EGP 5 billion, directly reallocating voting rights and equity ownership within the firm's capital structure.",
+    "meaning_ar": "تمثل هذه الصفقة عملية نقل ملكية لحصة قدرها 25% من أسهم شركة المالية والصناعية المصرية بين كيانات اعتبارية بقيمة 5 مليارات جنيه، مما يعيد توزيع نسب الملكية وحقوق التصويت في هيكل مساهمي الشركة."
   },
   "“نهر الخير”: “الاهلي للزراعات” تسدد قسطا ب19.8 مليون جنيه ل”تنميه الريف”": {
     "meaning": "This transaction reflects the settlement of contractual land acquisition liabilities by Nahr El-Kheir's subsidiary to the Egyptian Countryside Development Company, reducing outstanding long-term obligations on the consolidated balance sheet.",
