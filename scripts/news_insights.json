@@ -19,6 +19,10 @@
     "meaning": "The transaction executes an internal restructuring by transferring a 25% equity stake in Egyptian Financial & Industrial Company between related investment entities, shifting direct ownership and voting rights on the shareholder registry without altering the company's core operations.",
     "meaning_ar": "تنفذ الصفقة إعادة هيكلة ملكية داخلية عبر نقل حصة 25% من أسهم شركة المالية والصناعية المصرية بين كيانات استثمارية مرتبطة، مما يعيد توزيع الملكية المباشرة وحقوق التصويت في سجل المساهمين دون تغيير في العمليات التشغيلية الأساسية للشركة."
   },
+  "%33 نموا بتراخيص السيارات الملاكي اول 8 اشهر من 2026": {
+    "meaning": "A 33% increase in private car licensing reflects higher transaction volumes and vehicle registrations across traffic units, directly linking to automotive distribution inventory turnover, import flow, and consumer auto financing activity.",
+    "meaning_ar": "يعكس نمو تراخيص السيارات الملاكي بنسبة 33% زيادة في حجم مبيعات وتسجيل المركبات لدى وحدات المرور، وهو ما يرتبط بمعدلات تدوير مخزون شبكات توزيع السيارات وتدفقات الاستيراد ونشاط التمويل الاستهلاكي."
+  },
   "1 اكتوبر.. عموميه “شارم دريمز” تناقش اعاده تشكيل مجلس الاداره وعقود المعاوضه": {
     "meaning": "An ordinary general assembly convenes shareholders to vote on corporate governance procedures, specifically the reconstitution of the board of directors and the approval of related-party transactions (contracts of reciprocal interest) pursuant to corporate governance regulations.",
     "meaning_ar": "تنعقد الجمعية العامة العادية لممارسة المساهمين حقوق التصويت على إجراءات الحوكمة، والتي تتضمن إعادة تشكيل مجلس الإدارة والترخيص بعقود المعاوضة مع الأطراف المرتبطة وفقاً للضوابط القانونية المنظمة."
@@ -363,6 +367,10 @@
     "meaning": "The European Bank for Reconstruction and Development (EBRD) establishes a multi-year project financing program targeting corporate, infrastructure, and green transition assets in the local economy through debt, equity, and syndicated credit facilities.",
     "meaning_ar": "يضع البنك الأوروبي لإعادة الإعمار والتنمية برنامجاً تمويلياً متعدد السنوات يوجه سيولة عبر أدوات الدين وحصص الملكية والتسهيلات الائتمانية المشتركة إلى مشروعات البنية التحتية والتحول الأخضر والشركات في السوق المحلي."
   },
+  "«اب تاون 6 اكتوبر» تضخ 15 مليار جنيه لتطوير 10 مدارس جديده غرب القاهره": {
+    "meaning": "This capital allocation represents a direct infrastructure deployment by Uptown 6th of October, expanding private educational capacity in West Cairo through the construction and outfitting of 10 school facilities.",
+    "meaning_ar": "يمثل هذا التخصيص الرأسمالي ضخاً مباشراً في البنية التحتية من قبل شركة «أب تاون 6 أكتوبر»، حيث يوسع الطاقة الاستيعابية للتعليم الخاص في منطقة غرب القاهرة من خلال تشييد وتجهيز 10 منشآت مدرسية."
+  },
   "«الاسكندريه للحاويات» تعتزم شراء 6 جرارات مواني ب40 مليون جنيه": {
     "meaning": "This transaction constitutes a capital expenditure (CapEx) of EGP 40 million on equipment, allocating funds to property, plant, and equipment for internal transport machinery that transfers containers between berths and storage yards.",
     "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً بقيمة 40 مليون جنيه لشراء أصول ومعدات تشغيلية، تُستخدم في عمليات النقل الداخلي للحاويات بين أرصفة الشحن وساحات التخزين داخل المحطة."
@@ -402,6 +410,10 @@
   "«لينج لونج» تدشن مجمعا صناعيا متكاملا لانتاج اطارات السيارات باستثمارات 2 مليار دولار": {
     "meaning": "A direct capital deployment of $2 billion to establish a dedicated tire manufacturing complex introduces large-scale domestic production capacity to Egypt's automotive supply chain.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة ملياري دولار لإنشاء مجمع صناعي لإطارات السيارات إضافة لطاقات إنتاجية محلية واسعة النطاق داخل سلاسل إمداد قطاع السيارات في مصر."
+  },
+  "«مصر للمقاصه» تستهدف تشغيل وعاء «الشورت سيلينج» مطلع نوفمبر": {
+    "meaning": "Misr for Central Clearing, Depository and Registry (MCDR) operates the operational infrastructure and lending pool required for the settlement and execution of short selling transactions on the Egyptian Exchange.",
+    "meaning_ar": "تتولى شركة مصر للمقاصة والإيداع والقيد المركزي إدارة البنية التحتية التشغيلية ووعاء إقراض الأسهم المخصص لتسوية وتنفيذ عمليات البيع على المكشوف في البورصة المصرية."
   },
   "«ميديكس» لحلول معالجه المياه تستهدف 130 مليون جنيه مبيعات": {
     "meaning": "Setting a sales target of EGP 130 million establishes the operational contracting volume and procurement capacity for Medex's water treatment systems and services.",
@@ -602,6 +614,10 @@
   "اسعار الدواجن اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect current spot market rates determined by feed input costs, farm-level operational expenses, and prevailing supply-demand dynamics in the domestic market.",
     "meaning_ar": "تعكس النشرات اليومية لأسعار الدواجن مستويات الأسعار الفورية في السوق المحلي، والتي تتحدد بناءً على تكاليف مدخلات الأعلاف ومصروفات التشغيل في المزارع وتوازنات العرض والطلب."
+  },
+  "اسعار الدواجن واللحوم والبيض اليوم في مصر": {
+    "meaning": "Daily price tracking for poultry, meat, and eggs reflects current spot market transactions and pass-through input costs, primarily feed and logistics, across the domestic livestock and food retail sectors.",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار الدواجن واللحوم والبيض تعاملات السوق الفورية وتكاليف المدخلات التشغيلية الحالية، وخاصة الأعلاف والخدمات اللوجستية، في قطاعي الإنتاج الداجني والحيواني وتجارة التجزئة."
   },
   "اسعار الديزل تسجل مستوي قياسيا في امريكا": {
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
@@ -1852,6 +1868,10 @@
     "meaning": "The headline reports the opening exchange rate of the Saudi Riyal against the Egyptian Pound, which serves as the pricing benchmark for bilateral trade settlement, remittances, and religious tourism costs.",
     "meaning_ar": "يوضح الخبر سعر الصرف الافتتاحي للريال السعودي مقابل الجنيه المصري في البنوك، وهو ما يحدد تكاليف تسوية المعاملات التجارية المتبادلة، وتحويلات العاملين، ونفقات السياحة الدينية."
   },
+  "سعر الريال السعودي اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
+    "meaning": "The end-of-day exchange rate for the Saudi Riyal reflects the closing market-clearing price against the Egyptian Pound, serving as the official benchmark for cross-border settlements, remittance conversions, and bilateral trade accounting.",
+    "meaning_ar": "يعكس سعر صرف الريال السعودي في ختام التعاملات سعر التسوية المرجعي بين الجنيه المصري والريال، ويُستخدم كمقياس رسمي في تسوية المعاملات المالية المباشرة، وتحويلات العاملين، والعمليات التجارية بين البلدين."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
     "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
@@ -2096,6 +2116,10 @@
   "غاده والي: مواجهه الازمات في افريقيا تتطلب التركيز علي الشباب ودعم القطاع الخاص": {
     "meaning": "Economic crisis management frameworks in developing markets involve directing resources toward human capital development and expanding private enterprise financing channels.",
     "meaning_ar": "تعتمد أطر إدارة الأزمات الاقتصادية في الأسواق النامية على توجيه الموارد نحو تنمية رأس المال البشري وتوسيع قنوات تمويل مؤسسات القطاع الخاص."
+  },
+  "فاركو للادويه تستثمر اكثر من مليار جنيه خلال 2026 لانشاء خطوط انتاج جديده ورفع كفاءه الحاليه": {
+    "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
+    "meaning_ar": "يمثل هذا الإجراء توجيه نفقات رأسمالية نحو البنية التحتية التصنيعية، مما يوسع الطاقة التشغيلية عبر إضافة خطوط إنتاج جديدة وتحديث المنشآت القائمة."
   },
   "فاليو تعلن رسميا اولي محطات رحلتها في الاردن": {
     "meaning": "The expansion marks the company's geographical entry into the Jordanian consumer finance market, operating cross-border non-banking financial services through local operational networks.",
@@ -2776,6 +2800,10 @@
   "“ام ان تي- حالا” تستحوذ علي 25% من قطاع التمويل متناهي الصغر": {
     "meaning": "Holding a 25% market share concentrates one-quarter of the total active loan portfolio and financing issuance in the Egyptian non-banking microfinance sector within MNT-Halan's operational platform.",
     "meaning_ar": "تعني هذه الحصة السوقية البالغة 25% تركز ربع إجمالي المحافظ التمويلية القائمة وعمليات المنح في قطاع التمويل متناهي الصغر غير المصرفي بمصر لدى المنصة التشغيلية لشركة «إم إن تي- حالًا»."
+  },
+  "“ام اند بي” تتعاون مع “المختبر التنظيمي” للرقابه الماليه لتعزيز حضوره اقليميا": {
+    "meaning": "The partnership integrates M&P's operational network with the Financial Regulatory Authority's (FRA) regulatory sandbox framework to test and deploy financial technology solutions across regional markets.",
+    "meaning_ar": "تدمج هذه الشراكة الشبكة التشغيلية لشركة «إم آند بي» مع أطر المختبر التنظيمي للهيئة العامة للرقابة المالية لاختبار وتطبيق حلول التكنولوجيا المالية عبر الأسواق الإقليمية."
   },
   "“امريكانا” تبدي اهتمامها بالتعاون مع جهاز مستقبل مصر في مجال الاستثمار الزراعي": {
     "meaning": "The proposed cooperation represents backward integration into agricultural supply chains, securing raw material inputs for food processing operations through state-backed domestic farming projects.",
