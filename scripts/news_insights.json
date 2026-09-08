@@ -419,6 +419,10 @@
     "meaning": "The Poultry Producers Association sets baseline wholesale farm-gate prices for live chicken at EGP 65 per kilogram and egg crates at EGP 60, establishing the direct production-level cost basis before intermediary distribution, transport, and retail markups are applied across the supply chain.",
     "meaning_ar": "يحدد اتحاد منتجي الدواجن أسعار تسليم المزرعة للكيلو من الدواجن الحية عند 65 جنيهاً ولطبق البيض عند 60 جنيهاً، وهو ما يمثل التكلفة الأساسية عند مستوى الإنتاج قبل إضافة هوامش النقل والتوزيع وتجارة التجزئة في سلاسل الإمداد."
   },
+  "اتش اس بي سي يرفع مستهدفه السنوي لموشر اس اند بي 500 الي 8100 نقطه": {
+    "meaning": "Investment banks adjust index benchmark levels based on updated aggregate corporate earnings models and macroeconomic valuation inputs. This revision updates institutional reference metrics utilized for global equity asset allocation.",
+    "meaning_ar": "تُعدّل بنوك الاستثمار تقديرات المؤشرات المعيارية بناءً على تحديث نماذج أرباح الشركات المجمعة ومدخلات التقييم الاقتصادي، مما يحدّث المقاييس المرجعية المستخدمة في توزيع الأصول على الأسهم العالمية."
+  },
   "اتفاقيه ضمان بين صندوق القروض الايطالي": {
     "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
@@ -1234,6 +1238,10 @@
   "الين يصعد لاعلي مستوي في 7 اشهر امام الدولار.. والاسواق تترقب بيانات التضخم الامريكي": {
     "meaning": "The appreciation of the Japanese yen against the US dollar alters foreign exchange conversion rates for cross-border trade and debt settlements, while scheduled US inflation releases serve as the input for pricing interest rate differentials across global currency markets.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الين الياباني أمام الدولار الأمريكي إلى تعديل أسعار التحويل في تسويات التجارة والالتزامات الدولية، بينما تشكل بيانات التضخم الأمريكية المقياس الأساسي لتسعير فروق أسعار الفائدة في أسواق العملات العالمية."
+  },
+  "الين يقفز 4.5% الي اعلي مستوي في 7 اشهر": {
+    "meaning": "A sharp appreciation in the Japanese yen alters foreign exchange parity, raising the direct cost of Japanese imports and capital equipment while revaluing yen-denominated liabilities on corporate balance sheets.",
+    "meaning_ar": "يؤدي الارتفاع الحاد في سعر صرف الين الياباني إلى تعديل تكاليف تسوية المعاملات بالعملات الأجنبية، مما يرفع تكلفة الواردات والمعدات الرأسمالية القادمة من اليابان ويعيد تقييم الالتزامات المقومة بالين في القوائم المالية."
   },
   "اليوم.. افتتاح 9 مشروعات في “اقتصاديه القناه” باستثمارات 84.5 مليون دولار": {
     "meaning": "The launch of these nine projects introduces new operational facilities into the Suez Canal Economic Zone, expanding the zone's active industrial and logistics asset base.",
@@ -2825,6 +2833,10 @@
     "meaning": "The service integrates inward cross-border remittance processing directly into local commercial bank accounts and electronic mobile wallets, automating clearing and settlement between international transfer networks and domestic payment infrastructure.",
     "meaning_ar": "تربط هذه الخدمة معالجة الحوالات المالية الواردة من الخارج مباشرة بالحسابات المصرفية المحلية والمحافظ الإلكترونية، مما يتيح المقاصة والتسوية الآلية بين شبكات التحويل الدولية والبنية التحتية للمدفوعات المحلية."
   },
+  "“سبرينتس” تستهدف تدريب مليون طالب.. وتطلق منصه مدعومه بالذكاء الاصطناعي": {
+    "meaning": "The company expands its operational capacity in the educational technology sector by deploying an artificial intelligence-driven platform to scale up student training volume.",
+    "meaning_ar": "توسع الشركة قدرتها التشغيلية في قطاع تكنولوجيا التعليم عبر إطلاق منصة معتمدة على الذكاء الاصطناعي لزيادة حجم تدريب الطلاب."
+  },
   "“سيتي جروب” يرجي توقعاته لخفض الفايده الامريكيه الي 2027": {
     "meaning": "The shift in monetary policy expectations maintains higher global benchmark interest rates for an extended period, which sets cross-border funding costs and sovereign borrowing yields at elevated levels.",
     "meaning_ar": "يؤدي تعديل توقعات السياسة النقدية إلى استمرار أسعار الفائدة القياسية العالمية المرتفعة لفترة أطول، مما يحدد تكاليف التمويل عبر الحدود وعوائد الاقتراض السيادي عند مستويات مرتفعة."
@@ -2832,6 +2844,10 @@
   "“شي ان” تفقد 5 مليارات دولار من قيمتها السوقيه منذ الادراج في هونج كونج": {
     "meaning": "A decline in market capitalization reflects a decrease in the secondary market trading price of the company's shares multiplied by its total outstanding shares since its listing.",
     "meaning_ar": "يعكس انخفاض القيمة السوقية تراجع سعر تداول أسهم الشركة في السوق الثانوية مضروباً في إجمالي عدد أسهمها القائمة منذ تاريخ إدراجها."
+  },
+  "“صندوق مصر السيادي” يوسس صندوقا صناعيا براس مال مرخص 10 مليارات جنيه": {
+    "meaning": "The Sovereign Fund of Egypt establishes a specialized sub-fund dedicated to the industrial sector with an authorized capital of EGP 10 billion, creating an institutional framework for direct equity deployments, public-private asset partnerships, and targeted capital allocation into domestic manufacturing projects.",
+    "meaning_ar": "يؤسس صندوق مصر السيادي صندوقاً فرعياً متخصصاً في القطاع الصناعي برأس مال مرخص به يبلغ 10 مليارات جنيه، مما يتيح إطاراً مؤسسياً للمساهمات المباشرة، والشراكات الاستثمارية بين القطاعين العام والخاص، وتوجيه السيولة نحو مشاريع التصنيع المحلية."
   },
   "“عبدالغفار” ل”البورصه”: “الصحه” تستثمر 1.9 مليار جنيه لاضافه الفي حضانه بنهايه 2030": {
     "meaning": "The Ministry of Health allocates EGP 1.9 billion in public capital expenditure through 2030 to expand neonatal intensive care infrastructure by 2,000 incubators, directing state funding into medical equipment procurement and healthcare facility capacity.",

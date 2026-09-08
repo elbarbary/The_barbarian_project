@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-09-08T12:31:48.675055+00:00",
+  "updatedAt": "2026-09-08T12:47:04.724155+00:00",
   "asOf": "2026-09-08",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 82,
-    "buyCount": 13,
+    "totalRecords": 83,
+    "buyCount": 14,
     "sellCount": 9,
-    "treasuryBuyCount": 13,
+    "treasuryBuyCount": 14,
     "treasurySellCount": 9,
     "totalBuyShares": 0,
     "totalSellShares": 0,
@@ -36,6 +36,28 @@
     "2026-08-20"
   ],
   "items": [
+    {
+      "id": "filing-294469",
+      "filingId": "294469",
+      "sourceType": "treasury_filing",
+      "date": "2026-09-08",
+      "ticker": "PRDC",
+      "company": "Pioneers Properties for Urban Development",
+      "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+      "sector": "Real Estate",
+      "sectorAr": "عقارات",
+      "action": "treasury_purchase",
+      "actionLabel": "Treasury Purchase",
+      "actionLabelAr": "شراء أسهم خزينة",
+      "relationship": "treasury",
+      "relationshipLabel": "Company Treasury",
+      "relationshipLabelAr": "الشركة (أسهم خزينة)",
+      "positionRaw": "Treasury Shares",
+      "shares": null,
+      "title": "بيان من شركة بايونيرز بروبرتيز للتنمية العمرانية بى ار اى جروب PRE Group (PRDC.CA) بشأن شراء أسهم خزينة",
+      "titleEn": "Statement from Pioneers Properties for Urban Development PRE Group (PRDC.CA) regarding the purchase of treasury shares",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294469"
+    },
     {
       "id": "filing-294465",
       "filingId": "294465",
