@@ -4060,7 +4060,11 @@ export class Component extends Base {
         ['financials', ar ? 'القوائم والتحليل' : 'Financials & analysis', ICON.sectors,
           D.fins?.length ? `${this.num(D.fins.length, 0)} ${ar ? 'فترة مالية' : 'financial periods'}` : (ar ? 'القوائم والنسب' : 'Statements & ratios')],
         ['filings', ar ? 'الإفصاحات' : 'Filings', ICON.today,
-          D.filings?.length ? `${this.num(D.filings.length, 0)} ${ar ? 'إفصاح' : 'disclosures'}` : (ar ? 'المستندات والمصادر' : 'Documents & sources')],
+          /* The archive's count once it is known. It used to read
+             `D.filings.length` — the six the overview carries — so the tab
+             promised "6 disclosures" and opened on 704. Before the archive
+             loads there is no honest number, so it names itself instead. */
+          filingRows.length ? `${this.num(filingRows.length, 0)} ${ar ? 'إفصاح' : 'disclosures'}` : (ar ? 'المستندات والمصادر' : 'Documents & sources')],
       ].map(([id, label, icon, note]) => ({ label, icon, note, current: (st.companyPanel || 'overview') === id ? 'page' : null,
         go: () => this.setState({ companyPanel: id }) })),
       companyInsiderItems,

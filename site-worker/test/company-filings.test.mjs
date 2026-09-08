@@ -134,3 +134,26 @@ test('a company with no archive still lists what it has', async () => {
     'the tab neither listed filings nor said there were none');
   assert.equal(view.filingsLoading, false, 'the tab is stuck loading');
 });
+
+test('the tab counts the archive, not the six the overview carries', async () => {
+  const { view } = await filings('COMI');
+  const tab = view.companySections.find((s) => /الإفصاحات|Filings/.test(s.label));
+  assert.ok(tab, 'the filings tab is gone');
+  const n = Number((String(tab.note).match(/[\d,]+/) || ['0'])[0].replace(/,/g, ''));
+  assert.ok(n > 500, `the tab promises ${n} disclosures and opens on ${view.filingsTotal}`);
+});
+
+test('a filing row is readable on a phone', async () => {
+  const css = await readFile(new URL('../../public/esthmr/journal.css', import.meta.url), 'utf8');
+  const tpl = await readFile(new URL('../../public/esthmr/template.html', import.meta.url), 'utf8');
+  assert.match(tpl, /class="filing-row"/, 'the filing row cannot be addressed by the phone rule');
+  /* Four fixed columns need 300px before the title gets any, so at 390px the
+     title was about fifty pixels wide and every row became a ribbon. */
+  const at = css.indexOf('.filing-row');
+  assert.ok(at > 0, 'no phone layout for filing rows');
+  const query = css.slice(0, at).slice(css.slice(0, at).lastIndexOf('@media'));
+  assert.match(query, /max-width:\s*600px/, 'the phone layout is not inside a width query');
+  const block = css.slice(at, css.indexOf('}', css.indexOf('.filing-id', at)));
+  assert.match(block, /grid-template-columns:\s*1fr auto/, 'the row keeps its four desktop columns');
+  assert.match(block, /\.filing-id\s*\{\s*display:\s*none/, 'the id column still competes with the title');
+});

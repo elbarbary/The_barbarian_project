@@ -875,4 +875,21 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   }
 }
 
-
+/* A filing row on a phone.
+   Four fixed columns — date, title, id, link — need 300px before the title
+   gets anything, so at 390px the title was squeezed into about fifty pixels
+   and "العربية لحليج الأقطان (ACGC.CA) - بيان بخصوص نموذج إفصاح" wrapped into
+   a ribbon four characters wide and a screenful tall. The date and the link
+   share a line, the title gets the width, and the filing id goes: it is a
+   reference number, and the link beside it opens the document itself. */
+@media (max-width: 600px) {
+  #app .filing-row {
+    grid-template-columns: 1fr auto !important;
+    gap: 6px 10px !important;
+    align-items: baseline !important;
+    padding: 12px 14px !important;
+  }
+  #app .filing-row > :nth-child(2) { grid-column: 1 / -1; }
+  #app .filing-row .filing-id { display: none; }
+  #app .filing-row a { justify-self: end; }
+}
