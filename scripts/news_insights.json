@@ -379,6 +379,10 @@
     "meaning": "This transaction constitutes a capital expenditure (CapEx) of EGP 40 million on equipment, allocating funds to property, plant, and equipment for internal transport machinery that transfers containers between berths and storage yards.",
     "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً بقيمة 40 مليون جنيه لشراء أصول ومعدات تشغيلية، تُستخدم في عمليات النقل الداخلي للحاويات بين أرصفة الشحن وساحات التخزين داخل المحطة."
   },
+  "«التخطيط» تستهدف توسيع الشراكات الاستثماريه مع الامارات عبر 5 قطاعات ذات اولويه": {
+    "meaning": "The Ministry of Planning coordinates cross-border capital deployment and joint ventures between Egypt and the UAE across five designated priority sectors.",
+    "meaning_ar": "تنسق وزارة التخطيط تدفقات رؤوس الأموال عبر الحدود والمشروعات المشتركة بين مصر والإمارات ضمن خمسة قطاعات محددة ذات أولوية."
+  },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
@@ -1302,6 +1306,10 @@
   "اليونان وقبرص تدعمان مصر في قضيه نهر النيل وتوكدان اهميه الالتزام الكامل بمبادي القانون الدولي": {
     "meaning": "This diplomatic alignment reflects the tripartite cooperation framework among Egypt, Greece, and Cyprus, which anchors joint cross-border energy, maritime, and infrastructure agreements in the Eastern Mediterranean.",
     "meaning_ar": "يعكس هذا التوافق الدبلوماسي إطار التعاون الثلاثي بين مصر واليونان وقبرص، والذي يشكل أساساً للاتفاقيات المشتركة في مجالات الطاقة والربط البحري والبنية التحتية في منطقة شرق المتوسط."
+  },
+  "ام ان تي تيك القابضه تتقدم بطلب لقيد اسهمها في البورصه المصريه": {
+    "meaning": "Submitting a listing application initiates the regulatory review process to register the company's shares on the Egyptian Exchange, placing the entity under official market disclosure rules and establishing the legal framework for public trading.",
+    "meaning_ar": "يُطلق التقدم بطلب القيد الإجراءات التنظيمية لتسجيل أسهم الشركة في البورصة المصرية، مما يُخضعها لمعايير الإفصاح والحوكمة المنظمة ويؤسس الإطار القانوني لتداول ملكيتها في السوق الرسمي."
   },
   "امريكا تحقق في سلامه سيارات سايبركاب التابعه ل”تسلا”": {
     "meaning": "Regulatory safety investigations involve formal compliance reviews, technical audits, and verification procedures that assess autonomous vehicle systems against federal safety standards.",
