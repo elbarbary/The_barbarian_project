@@ -7,12 +7,12 @@
  "sector": "Building Materials",
  "sector_ar": "مواد البناء",
  "market": {
-  "last_close": 418.64,
+  "last_close": 419,
   "date": "2026-09-08",
   "open": 427.98,
   "high": 428.48,
   "low": 416.56,
-  "volume": 7841
+  "volume": 15156
  },
  "price_history": [
   {
@@ -722,17 +722,17 @@
   },
   {
    "date": "2026-03-05",
-   "close": 273.58,
+   "close": 273.2,
    "volume": 7626
   },
   {
    "date": "2026-03-08",
-   "close": 275.13,
+   "close": 275.99,
    "volume": 12740
   },
   {
    "date": "2026-03-09",
-   "close": 273.34,
+   "close": 273.95,
    "volume": 17170
   },
   {
@@ -752,7 +752,7 @@
   },
   {
    "date": "2026-03-15",
-   "close": 270.81,
+   "close": 270.25,
    "volume": 7932
   },
   {
@@ -762,17 +762,17 @@
   },
   {
    "date": "2026-03-17",
-   "close": 273.59,
+   "close": 273.0,
    "volume": 2003
   },
   {
    "date": "2026-03-18",
-   "close": 272.72,
+   "close": 273.0,
    "volume": 2584
   },
   {
    "date": "2026-03-24",
-   "close": 270.08,
+   "close": 272.0,
    "volume": 14599
   },
   {
@@ -812,7 +812,7 @@
   },
   {
    "date": "2026-04-05",
-   "close": 250.99,
+   "close": 252.0,
    "volume": 64208
   },
   {
@@ -857,12 +857,12 @@
   },
   {
    "date": "2026-04-20",
-   "close": 251.8,
+   "close": 252.0,
    "volume": 37039
   },
   {
    "date": "2026-04-21",
-   "close": 256.01,
+   "close": 255.43,
    "volume": 52972
   },
   {
@@ -1082,7 +1082,7 @@
   },
   {
    "date": "2026-06-30",
-   "close": 237.5,
+   "close": 237.75,
    "volume": 73909
   },
   {
@@ -1142,7 +1142,7 @@
   },
   {
    "date": "2026-07-19",
-   "close": 241.02,
+   "close": 241.37,
    "volume": 48334
   },
   {
@@ -1152,7 +1152,7 @@
   },
   {
    "date": "2026-07-21",
-   "close": 245.67,
+   "close": 245.6,
    "volume": 105676
   },
   {
@@ -1177,12 +1177,12 @@
   },
   {
    "date": "2026-07-29",
-   "close": 245.63,
+   "close": 245.99,
    "volume": 39292
   },
   {
    "date": "2026-07-30",
-   "close": 242.15,
+   "close": 243.89,
    "volume": 33758
   },
   {
@@ -1197,7 +1197,7 @@
   },
   {
    "date": "2026-08-04",
-   "close": 244.27,
+   "close": 244.21,
    "volume": 44134
   },
   {
@@ -1318,31 +1318,24 @@
  ],
  "profile": {
   "shares_outstanding": 55022327,
+  "free_float": 0.14335,
   "float_shares": 7887450.57545,
-  "perf_1w": 2.4321017861512106,
-  "perf_1m": 64.5791563470535,
-  "perf_3m": 51.818676337262005,
-  "avg_volume_30d": 218797.3999999994,
-  "relative_volume_10d": 0.05540943338360061,
-  "history_bars": 0,
-  "market_cap": 23119281358.86,
-  "market_cap_source": "EGX",
-  "trades": 173,
-  "turnover": 3683908,
+  "perf_1w": 2.5201859554685617,
+  "perf_1m": 64.7206824704171,
+  "perf_3m": 51.949229374433365,
+  "avg_volume_30d": 219041.23333333276,
+  "relative_volume_10d": 0.10710182022214652,
   "median_volume_20d": 128631.5,
   "rv20": 0.665334696400182,
   "normal_value_30d": 37132185.18,
   "five_session_change": 4.131386861313868,
-  "free_float": 0.14335,
+  "history_bars": 120,
+  "market_cap": 23008686481.59,
+  "market_cap_source": "EGX",
+  "trades": 272,
+  "turnover": 6407003,
   "shares_outstanding_source": "EGX"
  },
- "profile_carried": [
-  "five_session_change",
-  "free_float",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {
