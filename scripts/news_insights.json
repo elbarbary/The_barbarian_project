@@ -315,6 +315,10 @@
     "meaning": "The expansion extends valu's consumer finance infrastructure and 'buy now, pay later' technology into the Jordanian market, deploying its credit underwriting and payment platform outside Egypt.",
     "meaning_ar": "توسع هذه الخطوة البنية التحتية للتمويل الاستهلاكي وتكنولوجيا 'الشراء الآن والدفع لاحقاً' الخاصة بشركة 'فاليو' إلى السوق الأردني، عبر تشغيل منصتها للتقييم الائتماني والمدفوعات خارج مصر."
   },
+  "value8 petitins amsterdam court to block oci and orascom construction merger": {
+    "meaning": "A shareholder legal petition in the relevant jurisdiction introduces a formal judicial review process to the merger transaction between OCI and Orascom Construction. This legal challenge subjects the execution timeline and statutory approval conditions of the corporate combination to court determination.",
+    "meaning_ar": "تؤدي الدعوى القضائية المرفوعة من أحد المساهمين إلى إخضاع صفقة الاندماج بين شركتي أو سي آي وأوراسكوم للإنشاءات لإجراءات المراجعة القضائية في الاختصاص القانوني المختص، مما يربط الجدول الزمني وشروط الموافقة القانونية للاندماج بقرار المحكمة."
+  },
   "«EBRD»: نامل تجاوز استثماراتنا في مصر 2 مليار يورو بنهايه 2026": {
     "meaning": "The European Bank for Reconstruction and Development (EBRD) establishes a multi-year project financing program targeting corporate, infrastructure, and green transition assets in the local economy through debt, equity, and syndicated credit facilities.",
     "meaning_ar": "يضع البنك الأوروبي لإعادة الإعمار والتنمية برنامجاً تمويلياً متعدد السنوات يوجه سيولة عبر أدوات الدين وحصص الملكية والتسهيلات الائتمانية المشتركة إلى مشروعات البنية التحتية والتحول الأخضر والشركات في السوق المحلي."
@@ -955,6 +959,10 @@
     "meaning": "This headline references the release of a regular periodic edition of the local financial publication Hapi Journal, providing daily market news and macroeconomic updates to market participants.",
     "meaning_ar": "يشير العنوان إلى صدور عدد دوري منتظم من نشرة جريدة حابي الاقتصادية المحلية، والتي تقدم تغطية إخبارية للأسواق المالية والمستجدات الاقتصادية الكلية للمتعاملين."
   },
+  "العدد 1200 من نشره حابي": {
+    "meaning": "This marks a regular publishing milestone for a local business and financial periodical, reflecting ongoing operational continuity in economic news coverage.",
+    "meaning_ar": "يمثل هذا إصداراً دورياً جديداً لنشرة اقتصادية محلية، مما يعكس استمرارية العمليات التشغيلية في التغطية الإخبارية لقطاع الأعمال والأسواق."
+  },
   "العدد 400": {
     "meaning": "The publication of issue number 400 represents a recurring media or reporting milestone within standard operational scheduling, carrying no direct impact on underlying corporate capital structures or market trading mechanics.",
     "meaning_ar": "يمثل إصدار العدد رقم 400 علامة توثيقية دورية ضمن جداول النشر والمتابعة المعتادة، دون أن يترتب عليه أي تغيير في الهياكل التمويلية للشركات أو آليات التداول في السوق."
@@ -1190,6 +1198,10 @@
   "تباين الاسهم الامريكيه عقب صدور تقرير الوظايف": {
     "meaning": "Official employment data provides data points on labor market tightness, causing equity sectors to trade in diverging directions based on their varying sensitivities to benchmark interest rate trajectories.",
     "meaning_ar": "توفر بيانات التوظيف الرسمية مؤشرات حول مرونة سوق العمل، مما يؤدي إلى تباين أداء القطاعات في أسواق الأسهم وفقاً لدرجة تأثر كل قطاع باتجاهات أسعار الفائدة."
+  },
+  "تباين في اداء شركات المطاحن خلال العام المالي 2025/2026": {
+    "meaning": "Performance divergence across milling companies reflects operational differences in procurement costs, production capacities, and the breakdown between subsidized and free-market flour output across individual firms.",
+    "meaning_ar": "يعكس تباين أداء شركات المطاحن اختلافات تشغيلية في تكاليف شراء القمح، والطاقات الإنتاجية، ونسب توزيع الإنتاج بين الدقيق المدعم والدقيق الحر لدى كل شركة."
   },
   "تخصيص 12.53 فدان في سوهاج لانشاء صوامع غلال": {
     "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
@@ -1861,6 +1873,10 @@
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
     "meaning_ar": "تعتمد المناقصات الحكومية والمشتريات المؤسسية للقطاع الصحي معايير محددة لترسية عقود التوريد تقوم على الفاعلية السريرية، ومعايير الأمان، وكفاءة التكلفة، مما ينظم تدفق المنتجات الدوائية داخل المنظومة الصحية التابعة للدولة."
   },
+  "متوسط الفايده علي اذون الخزانه يسجل تراجعات متتاليه ليصل الي %25.058": {
+    "meaning": "Lower treasury bill yields reduce the government's short-term borrowing costs on newly issued debt while lowering the fixed-income return rates available to institutional buyers in the primary market.",
+    "meaning_ar": "يؤدي انخفاض متوسط العائد على أذون الخزانة إلى خفض تكلفة الاقتراض الحكومي قصير الأجل للإصدارات الجديدة، ويقلل في الوقت نفسه معدلات العائد الثابت المتاحة للمؤسسات المكتتبة في السوق الأولي."
+  },
   "مجلس اداره ڤاليو يجدد الثقه في وليد حسونه رييسا تنفيذيا واعضاء اللجنه التنفيذيه لمده 3 سنوات": {
     "meaning": "The extension of the executive committee's term for three years maintains management continuity and keeps existing operational strategies and corporate governance structures in place at the consumer finance firm.",
     "meaning_ar": "يؤدي تمديد تفويض اللجنة التنفيذية لمدة ثلاث سنوات إلى الحفاظ على استمرارية الإدارة واستقرار الهياكل التشغيلية وأطر الحوكمة القائمة في شركة التمويل الاستهلاكي."
@@ -2105,6 +2121,10 @@
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
   },
+  "نزاع قضايي جديد يهدد صفقه اندماج": {
+    "meaning": "Legal disputes surrounding corporate mergers trigger formal procedural reviews, which suspends transaction timelines and records contingent liabilities on corporate balance sheets.",
+    "meaning_ar": "تؤدي النزاعات القضائية المتعلقة بصفقات الاندماج إلى تفعيل مراجعات إجرائية وتنظيمية، مما يوقف الجداول الزمنية للتنفيذ ويدرج التزامات محتملة في القوائم المالية للشركات."
+  },
   "نشطاء الصحه في الهند يصعدون ضد تحذيرات الاغذيه المعباه امام المحكمه العليا": {
     "meaning": "Legal escalation regarding front-of-package labelling mandates introduces regulatory compliance adjustments and packaging redesign costs for packaged food manufacturers.",
     "meaning_ar": "يفرض التصعيد القضائي بشأن ملصقات التحذير على الأغذية المعبأة تعديلات في الامتثال التنظيمي وتكاليف إعادة تصميم التغليف لشركات الصناعات الغذائية."
@@ -2180,6 +2200,10 @@
   "وزير الاستثمار: نستهدف التعاون بين المختبر التنظيمي و«Trade Tech Sandbox» لدعم المصدرين بالتكنولوجيا": {
     "meaning": "The initiative links financial and trade technology regulatory sandboxes to test digital solutions for trade procedures and export financing under supervised regulatory frameworks.",
     "meaning_ar": "تربط المبادرة بين المختبرات التنظيمية للتكنولوجيا المالية وتكنولوجيا التجارة لاختبار الحلول الرقمية الخاصة بالإجراءات التجارية وتمويل الصادرات داخل أطر تنظيمية خاضعة للإشراف."
+  },
+  "وزير التخطيط يبحث مع بنك المشرق تعزيز الخدمات الماليه والمدفوعات الرقميه": {
+    "meaning": "Institutional discussions between government ministries and commercial banks establish operational frameworks for integrating electronic payment infrastructure and expanding digital transaction processing channels across state and institutional services.",
+    "meaning_ar": "تتضمن المباحثات المؤسسية بين الوزارات الحكومية والبنوك التجارية وضع أطر تشغيلية لتكامل البنية التحتية للمدفوعات الإلكترونية وتوسيع قنوات معالجة المعاملات الرقمية عبر الخدمات الحكومية والمؤسسية."
   },
   "وزير التخطيط: مصر تمتلك امكانات واعده لتوسيع سلاسل القيمه في التصنيع الزراعي والغذايي": {
     "meaning": "Expanding agro-industrial value chains integrates raw agricultural crop inputs directly with midstream processing, packaging, and distribution operations within the domestic supply chain.",
