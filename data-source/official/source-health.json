@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-08T05:35:36.396784+00:00",
+  "builtAt": "2026-09-08T09:56:28.985307+00:00",
   "sources": {
     "egxCheckpointArchive": {
       "path": "data-source/egx-beta/snapshot-history/manifest.jsonl",
-      "observedAt": "2026-09-07T10:36:17Z",
-      "observations": 13,
+      "observedAt": "2026-09-08T09:55:33Z",
+      "observations": 14,
       "status": "available",
-      "ageHours": 18.989
+      "ageHours": 0.016
     },
     "ownershipLedger": {
       "path": "data-source/official/ownership/ownership-ledger.json",
@@ -20,23 +20,23 @@
     },
     "fraLedger": {
       "path": "data-source/official/fra/fra-ledger.json",
-      "observedAt": "2026-09-08T05:32:38.489210+00:00",
+      "observedAt": "2026-09-08T09:55:15.760645+00:00",
       "items": 571,
       "status": "available",
-      "ageHours": 0.049
+      "ageHours": 0.02
     },
     "mcdrRegistry": {
       "path": "data-source/official/mcdr/issuer-registry.json",
-      "observedAt": "2026-09-08T05:33:50.161364+00:00",
-      "matchedAtMcdr": 246,
-      "exactIsinsQueried": 260,
-      "notYetIndividuallyQueried": 1,
+      "observedAt": "2026-09-08T09:55:30.305250+00:00",
+      "matchedAtMcdr": 247,
+      "exactIsinsQueried": 261,
+      "notYetIndividuallyQueried": 0,
       "status": "partial",
-      "ageHours": 0.03
+      "ageHours": 0.016
     },
     "filingCompleteness": {
       "path": "data-source/official/filing-completeness.json",
-      "observedAt": "2026-09-08T05:35:36.147697+00:00",
+      "observedAt": "2026-09-08T09:56:28.678711+00:00",
       "issuers": 284,
       "verifiedIrArchives": 0,
       "status": "partial",
@@ -44,10 +44,10 @@
     },
     "cbeContext": {
       "path": "data-source/official/cbe/cbe-context.json",
-      "observedAt": "2026-09-08T05:32:48.313228+00:00",
+      "observedAt": "2026-09-08T09:55:24.832995+00:00",
       "officialFxDate": "07/09/2026",
       "status": "available",
-      "ageHours": 0.047
+      "ageHours": 0.018
     }
   },
   "capabilities": {

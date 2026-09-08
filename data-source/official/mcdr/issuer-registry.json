@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "fetchedAt": "2026-09-08T05:33:50.161364+00:00",
+  "fetchedAt": "2026-09-08T09:55:30.305250+00:00",
   "source": "https://www.mcdr.com.eg/en/members-subscribers/issuing-companies",
-  "sourceSha256": "a34f9306cb53e8130858074f7e8f031039ed7b2eef469cb7613d2f7838a7c2f3",
+  "sourceSha256": "b29bd9b019c514e7f5240baa1aaeea1cb1498e2db99dbbed743c298de8a52c05",
   "issuers": [
     {
       "isin": "EGS01041C010",
@@ -67,6 +67,10 @@
     {
       "isin": "EGS14041C015",
       "issuerName": "El Nasr Mining Company"
+    },
+    {
+      "isin": "EGS21171C011",
+      "issuerName": "Zahraa El-Maadi for Investment & Development"
     },
     {
       "isin": "EGS21351C019",
@@ -1091,8 +1095,8 @@
   ],
   "egxReconciliation": {
     "egxTickersWithIsin": 261,
-    "matchedAtMcdr": 246,
-    "exactIsinsQueried": 260,
+    "matchedAtMcdr": 247,
+    "exactIsinsQueried": 261,
     "confirmedNotFoundAfterExactSearch": {
       "NBCC": "EGS220N1C016",
       "AIDC": "EGS65R01C015",
@@ -1110,9 +1114,7 @@
       "EGCN": "EGS65861C014"
     },
     "transportErrors": {},
-    "notYetIndividuallyQueried": {
-      "ZMID": "EGS21171C011"
-    },
+    "notYetIndividuallyQueried": {},
     "note": "The unfiltered MCDR page is paginated. An ISIN absent from its first page is not treated as missing; only an exact completed search can establish not-found status."
   },
   "publicCoverage": {

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-08T05:35:36.147697+00:00",
+  "builtAt": "2026-09-08T09:56:28.678711+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192110,
-    "withoutTickerInHeading": 36110,
+    "items": 192114,
+    "withoutTickerInHeading": 36111,
     "tickerNotInThisDirectory": 28860,
-    "attributedToAnIssuer": 127140,
+    "attributedToAnIssuer": 127143,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-07",
-        "items": 221,
-        "expected": 221,
+        "harvested": "2026-09-08",
+        "items": 225,
+        "expected": 225,
         "status": "complete"
       }
     ],
@@ -2446,9 +2446,9 @@
     },
     {
       "ticker": "CEFM",
-      "egxFilingCount": 716,
-      "latestEgxFilingId": "294399",
-      "latestEgxFilingAt": "2026-09-07T10:37:01",
+      "egxFilingCount": 717,
+      "latestEgxFilingId": "294428",
+      "latestEgxFilingAt": "2026-09-08T11:27:40",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CEFM/profile",
       "websiteStatus": {
@@ -4312,9 +4312,9 @@
     },
     {
       "ticker": "ROTO",
-      "egxFilingCount": 853,
-      "latestEgxFilingId": "294197",
-      "latestEgxFilingAt": "2026-09-01T09:38:35",
+      "egxFilingCount": 855,
+      "latestEgxFilingId": "294427",
+      "latestEgxFilingAt": "2026-09-08T11:24:22",
       "candidateIssuerWebsite": "https://www.rowadtourism.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ROTO/profile",
       "websiteStatus": null,

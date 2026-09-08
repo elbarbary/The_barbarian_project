@@ -2788,5 +2788,16 @@
       }
     ],
     "fetchedAt": "2026-09-08T05:33:49.808867+00:00"
+  },
+  "EGS21171C011": {
+    "ticker": "ZMID",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21171C011",
+        "issuerName": "Zahraa El-Maadi for Investment & Development"
+      }
+    ],
+    "fetchedAt": "2026-09-08T09:55:29.952352+00:00"
   }
 }
