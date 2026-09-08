@@ -511,6 +511,10 @@
     "meaning": "Lower US Treasury yields reflect higher bond prices following monetary policy commentary, setting the global benchmark rate for sovereign and corporate debt pricing.",
     "meaning_ar": "يعكس انخفاض عوائد سندات الخزانة الأمريكية ارتفاع أسعارها استجابةً لتصريحات السياسة النقدية، وهو ما يحدد السعر المرجعي لتسعير أدوات الدين السيادية وتكاليف اقتراض الشركات عالمياً."
   },
+  "اسعار 7 سلع غذاييه اساسيه اليوم الثلاثاء 8-9-2026 في مصر": {
+    "meaning": "Daily tracking of staple food commodity prices reflects spot retail and wholesale market rates determined by current supply chain inventory and local distribution costs.",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار السلع الغذائية الأساسية أسعار التداول الفورية في أسواق التجزئة والجملة والمحددة وفق مستويات المخزون الحالية وتكاليف سلاسل الإمداد والتوزيع المحلية."
+  },
   "اسعار اعلاف الدواجن والمواشي والبط اليوم الجمعه 4-9-2026": {
     "meaning": "Feed represents the primary direct operational input cost for the poultry and livestock industries, directly impacting production costs, producer operating margins, and end-market protein prices.",
     "meaning_ar": "تمثل الأعلاف عنصر التكلفة التشغيلية المباشرة الرئيسي لقطاعي الدواجن والثروة الحيوانية، مما يؤثر بشكل مباشر على تكلفة الإنتاج وهوامش ربح المربين والمنتجين وأسعار السلع النهائية."
@@ -1070,6 +1074,10 @@
   "العريان يتوقع استمرار موجه بيع السندات الحكوميه العالميه وارتفاع العوايد": {
     "meaning": "Global sovereign bond sell-offs decrease bond prices and mechanically increase bond yields due to their inverse mathematical relationship, which raises benchmark borrowing costs across international capital markets.",
     "meaning_ar": "تؤدي مبيعات السندات السيادية العالمية إلى انخفاض أسعارها وارتفاع عوائدها بحكم العلاقة العكسية بين السعر والعائد، مما يرفع تكاليف الاقتراض القياسية في أسواق الدين الدولية."
+  },
+  "العضو المنتدب لمركز التجاره العالمي بالقاهره: مصر جسر استراتيجي يربط اسواق افريقيا والشرق الاوسط": {
+    "meaning": "Egypt operates as a regional logistics and trade hub, utilizing its geographic location, maritime infrastructure, and regional trade agreements to facilitate cross-border trade flows between Middle Eastern and African markets.",
+    "meaning_ar": "تعمل مصر كمركز لوجستي وتجاري إقليمي يربط بين أسواق الشرق الأوسط وأفريقيا بالاعتماد على موقعها الجغرافي، وبنيتها التحتية الملاحية، والاتفاقيات التجارية لتسهيل حركة التجارة البينية."
   },
   "العمل: 1018 فرصه جديده في 3 محافظات بالتعاون مع 7 شركات خاصه": {
     "meaning": "The Ministry of Labor coordinates with seven private-sector companies to facilitate the direct recruitment and absorption of 1,018 workers across three governorates.",
@@ -1808,6 +1816,10 @@
     "meaning": "Egg carton retail pricing reflects daily supply-demand dynamics, feed input costs, and distribution markups within the domestic poultry and food commodities market.",
     "meaning_ar": "تعكس أسعار بيع كرتونة البيض للمستهلك التغيرات اليومية في قوى العرض والطلب، وتكاليف مدخلات الأعلاف، وهامش التوزيع ضمن سوق الدواجن والسلع الغذائية المحلية."
   },
+  "سعر كرتونه البيض اليوم 8/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "This headline tracks the daily end-consumer retail price point for table eggs in the domestic market, reflecting current supply-and-demand balances and operational cost inputs across the local poultry distribution chain.",
+    "meaning_ar": "يرصد هذا الخبر السعر اليومي النهائي لكرتونة بيض المائدة للمستهلك في السوق المحلية، وهو ما يعكس آليات العرض والطلب وتكاليف التشغيل الحالية عبر سلاسل توزيع الدواجن."
+  },
   "سعر ومواصفات سيارات هيونداي النترا AD موديل 2027": {
     "meaning": "Automotive distributors establish retail pricing and trim specifications for incoming vehicle model years, reflecting current cost structures, currency dynamics, and import or local assembly parameters.",
     "meaning_ar": "يحدد وكلاء وموزعو السيارات الأسعار الرسمية والمواصفات الفنية للطرازات الجديدة، بما يعكس هياكل التكلفة القائمة، وحركة أسعار الصرف، ومحددات الاستيراد أو التجميع المحلي."
@@ -1973,6 +1985,10 @@
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
     "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
   },
+  "عوايد سندات الخزانه الامريكيه تقترب من 5%": {
+    "meaning": "Higher US Treasury bond yields raise the global risk-free benchmark rate, which increases external borrowing costs for emerging markets and drives international capital allocation toward US dollar-denominated sovereign instruments.",
+    "meaning_ar": "يؤدي ارتفاع عوائد سندات الخزانة الأمريكية إلى رفع العائد المرجعي الخالي من المخاطر عالمياً، مما يرفع تكاليف الاقتراض للأسواق الناشئة ويوجه السيولة نحو الأصول السيادية المقومة بالدولار."
+  },
   "غاده والي: مواجهه الازمات في افريقيا تتطلب التركيز علي الشباب ودعم القطاع الخاص": {
     "meaning": "Economic crisis management frameworks in developing markets involve directing resources toward human capital development and expanding private enterprise financing channels.",
     "meaning_ar": "تعتمد أطر إدارة الأزمات الاقتصادية في الأسواق النامية على توجيه الموارد نحو تنمية رأس المال البشري وتوسيع قنوات تمويل مؤسسات القطاع الخاص."
@@ -2040,6 +2056,10 @@
   "كمال الدسوقي: القطاع الخاص حجر الزاويه في تنفيذ برنامج التحول الاقتصادي": {
     "meaning": "Economic transformation programs rely on private sector enterprises for capital expenditure, industrial production capacity, and employment allocation alongside state-led structural reforms.",
     "meaning_ar": "تعتمد برامج التحول الاقتصادي على شركات القطاع الخاص في الإنفاق الرأسمالي، وتوفير الطاقة الإنتاجية الصناعية، وتوزيع العمالة بالتوازي مع الإصلاحات الهيكلية الحكومية."
+  },
+  "كندا تصعد الحرب التجاريه برسوم 50% علي سلع امريكيه": {
+    "meaning": "The imposition of a 50% tariff on imported American goods directly raises the landed import cost of these products in the Canadian market, shifting cross-border pricing and supply chain expenses for bilateral trade operations.",
+    "meaning_ar": "يؤدي فرض رسوم جمركية بنسبة 50% على السلع الأمريكية المستوردة إلى زيادة تكلفة الاستيراد المباشرة لتلك المنتجات في السوق الكندية، مما يغير هيكل التكاليف وسلاسل الإمداد للتبادل التجاري بين البلدين."
   },
   "كندا تفقد 41.7 الف وظيفه قبل بدء تاثير الرسوم الامريكيه الجديده": {
     "meaning": "Employment data shows a contraction of 41.7 thousand jobs in the Canadian labor market prior to the implementation of new US trade tariffs, reflecting pre-existing workforce reductions across affected economic sectors.",
@@ -2276,6 +2296,10 @@
   "مصر والبوسنه تعززان التعاون في الصناعات الدفاعيه": {
     "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
     "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
+  },
+  "مصر واليونان يبحثان تطورات مشروع الربط الكهربايي": {
+    "meaning": "Cross-border electricity interconnection establishes subsea transmission grid infrastructure to transfer power directly between regional energy systems and integrate generation capacities across national markets.",
+    "meaning_ar": "تؤسس مشروعات الربط الكهربائي بنية تحتية لشبكات النقل البحري لنقل الطاقة مباشرة بين منظومات الكهرباء الإقليمية ودمج قدرات التوليد عبر الأسواق الوطنية."
   },
   "مصر وايطاليا تبحثان الربط الكهربايي البيني قدره 3000 ميجاوات": {
     "meaning": "The proposed 3,000 MW subsea electrical interconnection establishes direct grid infrastructure between Egypt and Italy for cross-border power transmission.",
