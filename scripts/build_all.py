@@ -274,6 +274,10 @@ STEPS = [
     # harvest off disk — no network — and is best-effort so a checkout without
     # `data-source/egx-beta/` simply leaves the published documents alone.
     ("Company filings", "build_company_filings.py", False),
+    # Official EGX insider, board, major shareholder, and treasury share tracker.
+    # Combines daily session bulletins with post-execution disclosures and
+    # treasury programs. Runs before the manifest so its version is hashed.
+    ("Insider tracker", "build_insider_tracker.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and
     # both are resumable: whatever the host refuses today is simply first in

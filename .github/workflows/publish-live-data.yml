@@ -150,6 +150,10 @@ jobs:
           # in it.
           python3 scripts/build_connections_api.py || true
 
+          # Official EGX Insider & Treasury Share Tracker.
+          # Ingests any newly disclosed post-execution forms and treasury transactions.
+          python3 scripts/build_insider_tracker.py || true
+
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app
         # its cache is stale. Without this the new JSON sits on the CDN and
@@ -164,10 +168,12 @@ jobs:
           git add public/data/v1/news public/data/v1/rates \
                   public/data/v1/disclosures \
                   public/data/v1/connections.json \
+                  public/data/v1/insiders.json \
                   public/data/v1/manifest.json \
                   app/assets/fixtures/news app/assets/fixtures/rates \
                   app/assets/fixtures/disclosures \
                   app/assets/fixtures/connections.json \
+                  app/assets/fixtures/insiders.json \
                   app/assets/fixtures/manifest.json \
                   scripts/news_insights.json scripts/news_images.json
           if git diff --cached --quiet; then

@@ -74,6 +74,6 @@ export function marketStory(data, {period='week', kind='all', lang='en', now=new
     newsLabel:ar?'أخبار':'News',filingLabel:ar?'إفصاحات':'Filings',linkedLabel:ar?'شركات في المصدرين':'Companies in both',
     openLabel:ar?'افتح القصة والمصادر':'Open the story & sources',moreLabel:ar?'كل المصادر':'All sources',
     companyLabel:ar?'افتح الشركة':'Open company',generalLabel:ar?'أخبار السوق دون شركة محددة':'Market-wide sources',
-    calendarLabel:ar?'أرشيف الإفصاحات والمواعيد':'Filings archive & dates',
+    calendarLabel:ar?'أجندة الإفصاحات والمواعيد':'Release Calendar & Filings',
     legacyLabel:ar?'التسلسل الزمني الأصلي · نافذة مستقلة من أربعة أيام':'Original evidence timelines · separate four-day window'};
 }

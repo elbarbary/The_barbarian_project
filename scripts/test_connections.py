@@ -636,6 +636,9 @@ class CardinalityTest(unittest.TestCase):
         stories = json.loads((api / "news" / "latest.json").read_text(encoding="utf-8"))["items"]
         filings = json.loads((api / "disclosures" / "latest.json").read_text(encoding="utf-8"))["items"]
         market_doc = json.loads((api / "market.json").read_text(encoding="utf-8"))
+        market_feed = doc.get("frontpage", {}).get("feeds", {}).get("market", {})
+        if "is_close" in market_feed:
+            market_doc = dict(market_doc, is_close=market_feed["is_close"])
         directory = json.loads((api / "companies.json").read_text(encoding="utf-8"))["companies"]
         expected = two_kind_set(stories, filings, market_doc, directory,
                                 doc["window_start"], doc["window_end"])

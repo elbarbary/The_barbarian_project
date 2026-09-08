@@ -430,6 +430,10 @@ export class Component extends Base {
       insiderFlowTreasury:'Treasury',
       insiderFlowFirms:'active firms',
       insiderFlowNoData:'No sector flow data matching current criteria.',
+      insiderFilteredFor:'Filtered by stock',
+      insiderShowProfile:'Company Profile',
+      insiderCompanyDeals:'Insider & Treasury Transactions',
+      insiderViewFullTracker:'View in Full Tracker',
       homeTitle:'The close', homeTitleLive:'The session', closeOf:'Official close of', movers:'Largest moves', readNow:'What to read now', watchlist:'Largest by market value',
       following:'Following', follow:'Follow', unfollow:'Following',
       // ── the reader's own list ──
@@ -804,6 +808,10 @@ export class Component extends Base {
       insiderFlowTreasury:'أسهم خزينة',
       insiderFlowFirms:'شركات نشطة',
       insiderFlowNoData:'لا توجد بيانات تدفق قطاعية مطابقة لمعايير البحث الحالية.',
+      insiderFilteredFor:'تصفية حسب السهم',
+      insiderShowProfile:'ملف الشركة',
+      insiderCompanyDeals:'تعاملات الداخليين وأسهم الخزينة',
+      insiderViewFullTracker:'عرض في الراصد الشامل',
       homeTitle:'إغلاق السوق', homeTitleLive:'تداولات الجلسة', closeOf:'الإغلاق الرسمي ليوم', movers:'أنشط الأسهم تحركاً', readNow:'أبرز الأخبار والإفصاحات', watchlist:'الأكبر وزناً وقيمة سوقية',
       following:'في قائمة المتابعة', follow:'أضف للمتابعة', unfollow:'في قائمة المتابعة',
       // ── قائمة المتابعة ──
@@ -2589,6 +2597,11 @@ export class Component extends Base {
           actBadgeBg = 'rgba(124, 58, 237, 0.09)';
           actBadgeBorder = 'rgba(124, 58, 237, 0.28)';
           arrow = '✂ ';
+        } else if (r.action === 'disclosure') {
+          actColor = 'var(--accent)';
+          actBadgeBg = 'var(--irisTint, rgba(99, 102, 241, 0.09))';
+          actBadgeBorder = 'rgba(99, 102, 241, 0.28)';
+          arrow = '📄 ';
         }
 
         const coName = ar ? (r.companyAr || r.company || r.ticker || '') : (r.company || r.companyAr || r.ticker || '');
@@ -2659,10 +2672,12 @@ export class Component extends Base {
             sellShares: 0,
             treasuryShares: 0,
             count: 0,
+            latestLink: '',
           });
         }
         const entry = byCo.get(tick);
         entry.count++;
+        if (r.link && !entry.latestLink) entry.latestLink = r.link;
         const sh = typeof r.shares === 'number' ? r.shares : 0;
         if (r.action === 'bought') entry.buyShares += sh;
         else if (r.action === 'sold') entry.sellShares += sh;
@@ -2671,13 +2686,16 @@ export class Component extends Base {
 
       const companyList = Array.from(byCo.values()).map((c) => {
         const isTreasury = c.treasuryShares > 0 && c.treasuryShares >= c.buyShares && c.treasuryShares >= c.sellShares;
-        const isBuy = !isTreasury && (c.buyShares >= c.sellShares);
+        const isBuy = !isTreasury && (c.buyShares > c.sellShares);
+        const isSell = !isTreasury && (c.sellShares > c.buyShares);
 
         const tint = isTreasury
           ? { bg: 'rgba(2, 132, 199, 0.12)', border: 'rgba(2, 132, 199, 0.35)', fg: '#0284c7', badge: '🛡 ' + (ar ? 'خزينة' : 'Treasury') }
           : (isBuy
             ? { bg: 'rgba(34, 197, 94, 0.12)', border: 'rgba(34, 197, 94, 0.35)', fg: 'var(--up)', badge: '↑ ' + (ar ? 'شراء' : 'Purchases') }
-            : { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.35)', fg: 'var(--down)', badge: '↓ ' + (ar ? 'مبيعات' : 'Sales') });
+            : (isSell
+              ? { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.35)', fg: 'var(--down)', badge: '↓ ' + (ar ? 'مبيعات' : 'Sales') }
+              : { bg: 'rgba(99, 102, 241, 0.12)', border: 'rgba(99, 102, 241, 0.35)', fg: 'var(--accent)', badge: '📄 ' + (ar ? 'إفصاح' : 'Filing') }));
 
         const totShares = c.buyShares + c.sellShares + c.treasuryShares;
         return {
@@ -2686,6 +2704,7 @@ export class Component extends Base {
           tint,
           totShares,
           value: Math.max(10000, totShares, c.count * 50000),
+          latestLink: c.latestLink || '',
         };
       });
 
@@ -2705,8 +2724,17 @@ export class Component extends Base {
         showName: t.w >= 7 && t.h >= 6.5,
         showBadge: t.w >= 6 && t.h >= 5.5,
         showVol: t.w >= 9 && t.h >= 9,
+        showLink: t.w >= 13 && t.h >= 11 && Boolean(t.latestLink),
         volFormatted: formatShares(t.totShares),
+        latestLink: t.latestLink || '',
+        hasLatestLink: Boolean(t.latestLink),
         openCompany: () => {
+          this.setState({
+            insiderViewMode: 'table',
+            insiderQ: t.ticker || t.name,
+          });
+        },
+        openProfile: () => {
           if (t.ticker && !t.ticker.startsWith('DEMO')) this.setState({ screen: 'company', ticker: t.ticker });
         },
       }));
@@ -2768,7 +2796,12 @@ export class Component extends Base {
           netBorder: isNetBuy ? 'rgba(34,197,94,0.25)' : (isNetSell ? 'rgba(239,68,68,0.25)' : 'var(--rule)'),
           tickerChips: s.tickers.slice(0, 7).map((t) => ({
             ticker: t,
-            open: () => { if (!t.startsWith('DEMO')) this.setState({ screen: 'company', ticker: t }); },
+            open: () => {
+              this.setState({
+                insiderViewMode: 'table',
+                insiderQ: t,
+              });
+            },
           })),
         };
       });
@@ -3175,6 +3208,50 @@ export class Component extends Base {
       { date:'2026-03-02', title: ar?'إفصاح عن دعوة الجمعية العامة العادية':'Notice convening the ordinary general assembly', id:'demo-269911', href:'' },
       { date:'2025-11-11', title: ar?'القوائم المالية لتسعة أشهر ٢٠٢٥':'Financial statements for 9M 2025', id:'demo-264880', href:'' }
     ];
+
+    const curTicker = st.ticker || (D.company && D.company.ticker) || '';
+    const companyInsiderItems = (D.insiders && Array.isArray(D.insiders.items) && curTicker)
+      ? D.insiders.items.filter((r) => r.ticker === curTicker).slice(0, 8).map((r) => {
+          let actLabel = ar ? (r.actionLabelAr || r.actionLabel) : (r.actionLabel || r.actionLabelAr);
+          let actColor = 'var(--accent)';
+          let actBadgeBg = 'var(--sunk)';
+          let actBadgeBorder = 'var(--rule)';
+          let arrow = '';
+          if (r.action === 'bought') {
+            actColor = 'var(--up)';
+            actBadgeBg = 'rgba(34, 197, 94, 0.09)';
+            actBadgeBorder = 'rgba(34, 197, 94, 0.28)';
+            arrow = '↑ ';
+          } else if (r.action === 'sold') {
+            actColor = 'var(--down)';
+            actBadgeBg = 'rgba(239, 68, 68, 0.09)';
+            actBadgeBorder = 'rgba(239, 68, 68, 0.28)';
+            arrow = '↓ ';
+          } else if (r.action && r.action.startsWith('treasury_')) {
+            actColor = '#0284c7';
+            actBadgeBg = 'rgba(2, 132, 199, 0.09)';
+            actBadgeBorder = 'rgba(2, 132, 199, 0.28)';
+            arrow = '🛡 ';
+          } else if (r.action === 'disclosure') {
+            actColor = 'var(--accent)';
+            actBadgeBg = 'var(--irisTint, rgba(99, 102, 241, 0.09))';
+            actBadgeBorder = 'rgba(99, 102, 241, 0.28)';
+            arrow = '📄 ';
+          }
+          return {
+            date: r.date || '',
+            actionLabel: arrow + (actLabel || ''),
+            actionColor,
+            actionBadgeBg,
+            actionBadgeBorder,
+            relationshipLabel: ar ? (r.relationshipLabelAr || r.relationshipLabel || '') : (r.relationshipLabel || r.relationshipLabelAr || ''),
+            sharesFormatted: typeof r.shares === 'number' ? this.num(r.shares, 0) : '',
+            hasShares: typeof r.shares === 'number',
+            link: r.link || '',
+            hasLink: Boolean(r.link),
+          };
+        })
+      : [];
 
     // sectors
     // The same sector vocabulary the rest of the demo runs on. These names used
@@ -3682,8 +3759,8 @@ export class Component extends Base {
       ['valuation', ar?'التقييم والديون':'Valuation & Debt', ''],
       ['pairs', ar?'مقارنة الأزواج':'Pairs & Spreads', ''],
       // "Calendar" described the grid; what a reader comes here for is the
-      // filings, so it is named for them.
-      ['calendar', ar?'الإفصاحات':'Disclosures', ''],
+      // filings, so it is named for them in the rail.
+      ['calendar', ar ? 'الإفصاحات' : 'Disclosures', ''],
       // The crossings were a block on Today under the news. They are a
       // different claim — one company in more than one feed at once — and
       // reading them mixed into a headline list buried them.
@@ -3837,6 +3914,16 @@ export class Component extends Base {
           D.filings?.length ? `${this.num(D.filings.length, 0)} ${ar ? 'إفصاح' : 'disclosures'}` : (ar ? 'المستندات والمصادر' : 'Documents & sources')],
       ].map(([id, label, icon, note]) => ({ label, icon, note, current: (st.companyPanel || 'overview') === id ? 'page' : null,
         go: () => this.setState({ companyPanel: id }) })),
+      companyInsiderItems,
+      hasCompanyInsiderItems: companyInsiderItems.length > 0,
+      openInsiderTrackerForCompany: () => {
+        this.setState({
+          screen: 'investors',
+          investorTab: 'insiders',
+          insiderViewMode: 'table',
+          insiderQ: curTicker,
+        });
+      },
       switchCompanyLabel: ar ? 'استكشف شركات أخرى' : 'Explore other companies',
       scenarioTitle: ar ? 'مقارنة افتراضية' : 'Hypothetical comparison',
       scenarioNote: ar ? 'أمثلة حسابية وليست توقعات أو أسعاراً حالية. الأسهم والذهب بفائدة مركبة؛ المثال البنكي دون إعادة استثمار. لا تشمل الرسوم والضرائب.' : 'Calculation examples, not forecasts or current rates. Equity and gold compound; the bank example does not reinvest. Fees and taxes excluded.',

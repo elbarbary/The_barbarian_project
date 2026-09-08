@@ -13,6 +13,7 @@ Publishes to:
 
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import glob
 import json
@@ -402,6 +403,10 @@ def parse_latest_disclosures(by_ticker: dict[str, dict], records: list[dict]) ->
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Build EGX Insider & Treasury flow dataset")
+    parser.add_argument("--check", action="store_true", help="Validate without writing files")
+    args = parser.parse_args()
+
     by_ticker, alias_map = load_company_directory()
     bulletin_records = parse_bulletin_pdfs(alias_map, by_ticker)
     print(f"Parsed {len(bulletin_records)} bulletin transactions", file=sys.stderr)
@@ -411,6 +416,13 @@ def main() -> int:
     print(f"Total unified records: {len(all_records)}", file=sys.stderr)
 
     all_records.sort(key=lambda r: (r.get("date") or "1970-01-01", r.get("ticker") or ""), reverse=True)
+
+    if args.check:
+        if len(all_records) == 0:
+            print("check failed: no insider records found", file=sys.stderr)
+            return 1
+        print(f"check passed: {len(all_records)} insider records ready", file=sys.stderr)
+        return 0
 
     buy_count = sum(1 for r in all_records if r["action"] in ("bought", "treasury_purchase"))
     sell_count = sum(1 for r in all_records if r["action"] in ("sold", "treasury_sale"))

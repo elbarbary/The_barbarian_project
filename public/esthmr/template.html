@@ -1178,7 +1178,23 @@
 
           <!-- ══ VIEW 1: TRANSACTIONS TABLE ══ -->
           <sc-if value="{{ insiderTracker.isTable }}">
-            <div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <!-- Active Filter Banner -->
+              <sc-if value="{{ insiderTracker.hasQ }}">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-radius:14px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);flex-wrap:wrap">
+                  <div style="display:inline-flex;align-items:center;gap:8px;font-size:13px">
+                    <span style="color:var(--faint)">{{ L.insiderFilteredFor }}:</span>
+                    <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);font-weight:700;font-family:'IBM Plex Mono',monospace">
+                      <span>{{ insiderTracker.q }}</span>
+                      <button type="button" onClick="{{ insiderTracker.clearQ }}" style="cursor:pointer;border:none;background:transparent;color:var(--accent);font-weight:700;padding:0 2px" title="{{ L.insiderClearSearch }}">✕</button>
+                    </span>
+                  </div>
+                  <button type="button" onClick="{{ insiderTracker.clearQ }}" style="cursor:pointer;border:none;background:transparent;color:var(--accent);font-size:12px;font-weight:600;padding:4px 8px">
+                    {{ L.insiderFilterAll }} ({{ browseLabel }}) →
+                  </button>
+                </div>
+              </sc-if>
+
               <!-- Empty State -->
               <sc-if value="{{ insiderTracker.noItems }}">
                 <div style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:36px 20px;text-align:center;color:var(--faint);font-size:13.5px">
@@ -1305,6 +1321,18 @@
                       </sc-if>
                       <sc-if value="{{ t.showVol }}">
                         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--t2);line-height:1">{{ t.volFormatted }} <span style="font-size:9px;color:var(--faint);font-weight:400">{{ L.insiderShares }}</span></div>
+                      </sc-if>
+                      <sc-if value="{{ t.showLink }}">
+                        <div style="display:flex;justify-content:flex-end;margin-top:2px">
+                          <a href="{{ t.latestLink }}" target="_blank" rel="noopener noreferrer"
+                             onClick="event.stopPropagation()"
+                             title="{{ L.insiderOfficialDoc }}"
+                             style="display:inline-flex;align-items:center;gap:3px;font-size:9.5px;color:{{ t.fg }};background:rgba(0,0,0,0.06);padding:2px 5px;border-radius:4px;text-decoration:none;font-weight:500;line-height:1"
+                             style-hover="background:rgba(0,0,0,0.14)">
+                            <span>{{ L.insiderOfficialDoc }}</span>
+                            <span style="font-family:'IBM Plex Mono',monospace">↗</span>
+                          </a>
+                        </div>
                       </sc-if>
                     </div>
                   </sc-for>
@@ -2250,6 +2278,46 @@
         <div style="margin:14px 8px 0;color:var(--faint);font-size:11.5px;line-height:1.65;text-wrap:pretty">{{ signalFootnote }}</div>
       </section>
 
+      <!-- Company Insider & Treasury Transactions -->
+      <sc-if value="{{ hasCompanyInsiderItems }}">
+        <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:22px 18px 16px;margin-bottom:16px">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 6px 12px;border-bottom:1px solid var(--rule2);flex-wrap:wrap">
+            <div>
+              <h2 style="font-family:'Bricolage Grotesque',serif;font-size:24px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ L.insiderCompanyDeals }}</h2>
+              <div style="font-size:12px;color:var(--faint);margin-top:4px">{{ L.insiderLead }}</div>
+            </div>
+            <button type="button" onClick="{{ openInsiderTrackerForCompany }}" style="cursor:pointer;border:1px solid var(--rule);background:var(--sunk);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:4px">
+              <span>{{ L.insiderViewFullTracker }}</span>
+              <span>→</span>
+            </button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+            <sc-for list="{{ companyInsiderItems }}" as="ci">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;background:var(--sunk);border:1px solid var(--rule2);flex-wrap:wrap">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint)">{{ ci.date }}</span>
+                  <span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;color:{{ ci.actionColor }};background:{{ ci.actionBadgeBg }};border:1px solid {{ ci.actionBadgeBorder }}">
+                    {{ ci.actionLabel }}
+                  </span>
+                  <span style="font-size:12px;color:var(--t2)">{{ ci.relationshipLabel }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:16px">
+                  <sc-if value="{{ ci.hasShares }}">
+                    <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--ink)">{{ ci.sharesFormatted }} <span style="font-size:10px;color:var(--faint);font-weight:400">{{ L.insiderShares }}</span></span>
+                  </sc-if>
+                  <sc-if value="{{ ci.hasLink }}">
+                    <a href="{{ ci.link }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:3px;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:11px;color:var(--accent);text-decoration:none;padding:3px 8px;border-radius:6px;background:var(--surface);border:1px solid var(--rule)" style-hover="border-color:var(--accent)">
+                      <span>{{ L.insiderOfficialDoc }}</span>
+                      <span style="font-family:'IBM Plex Mono',monospace">↗</span>
+                    </a>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+
       <section style="border-radius:22px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:24px 14px 16px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:0 12px">
           <h2 style="font-family:'Bricolage Grotesque',serif;font-size:29px;font-weight:600;letter-spacing:-.03em;margin:0">{{ L.itsFilings }}</h2>
@@ -2402,7 +2470,6 @@
   <sc-if value="{{ isCalendar }}">
     <sc-if value="{{ archiveLoading }}"><div class="feed-status" role="status">{{ archiveLoadingLabel }}</div></sc-if>
     <sc-if value="{{ archiveError }}"><div class="feed-status" role="status">{{ archiveErrorLabel }}<button type="button" onClick="{{ retryArchive }}">{{ retryLabel }}</button></div></sc-if>
-    <details class="story-archive"><summary>{{ story.calendarLabel }}</summary>
     <div class="om-scr screen-calendar" style="display:flex;flex-direction:column;gap:16px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 8px 0">
         <h1 style="font-family:'Bricolage Grotesque',serif;font-size:50px;font-weight:600;letter-spacing:-.04em;line-height:1;margin:0">{{ story.calendarLabel }}</h1>
@@ -2574,7 +2641,6 @@
         </div>
       </div>
     </div>
-    </details>
   </sc-if>
 
   <!-- ══ EXCHANGE ══ -->
