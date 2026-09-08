@@ -911,6 +911,10 @@
     "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
     "meaning_ar": "تؤدي عمليات إعادة هيكلة المحافظ والتخارج المؤسسي بأحجام تداول مرتفعة إلى ضغوط سعرية على الأسهم المكونة للمؤشر، مما يدفع المؤشر الرئيسي للتداول عند مستوى 57 ألف نقطة."
   },
+  "البورصه تستضيف وفدا اكاديميا كينيا لتعزيز التعاون": {
+    "meaning": "The exchange conducts institutional knowledge-sharing and capacity-building sessions with an academic delegation, establishing institutional links between Egyptian capital market infrastructure and regional educational entities.",
+    "meaning_ar": "تُجري البورصة برامج لتبادل المعرفة وبناء القدرات المؤسسية مع الوفد الأكاديمي، مما ينشئ قنوات تواصل مؤسسية بين منظومة سوق رأس المال المصري والمؤسسات التعليمية الإقليمية."
+  },
   "البورصه تستهدف اختراق قمم جديده بشرط التماسك اعلي 55000 نقطه": {
     "meaning": "Technical market indicators use the 55,000-point threshold as a support benchmark, where trading volumes and price stability at or above this level determine whether current buying momentum offsets selling pressure.",
     "meaning_ar": "تعتمد المؤشرات الفنية للسوق على مستوى 55,000 نقطة كنقطة دعم محورية، حيث يحدد حجم التداول واستقرار الأسعار عند هذا المستوى أو أعلاه مدى توازن قوى الشراء الحالية في مواجهة ضغوط البيع."
@@ -2075,6 +2079,10 @@
   "سهم \"شيبروكيت\" الهنديه يواجه اختبار الربحيه بعد تقليص خساير الربع الاول": {
     "meaning": "Narrowing quarterly losses marks a transition where market evaluation shifts toward operational cost structures and net unit economics to determine baseline profitability.",
     "meaning_ar": "يمثل تقليص الخسائر الفصلية مرحلة تنتقل فيها معايير التقييم السوقي إلى فحص هياكل التكاليف التشغيلية وربحية الوحدة لتحديد الوصول إلى نقطة التعادل المالي."
+  },
+  "سهم انتل يقفز 10% بعد تقارير عن زياده مرتقبه في اسعار المعالجات": {
+    "meaning": "Raising processor prices directly alters the unit selling price across product lines, adjusting the gross realization per unit sold under existing operational cost structures.",
+    "meaning_ar": "يؤدي رفع أسعار المعالجات إلى تعديل مباشر في سعر بيع الوحدة عبر خطوط الإنتاج، مما يغير العائد الإجمالي لكل وحدة مباعة في ظل هياكل التكاليف التشغيلية القائمة."
   },
   "سهم تسلا يرتفع 7% مع ترقب اطلاق سياره سايبركاب": {
     "meaning": "Product unveilings price in market-clearing demand adjustments based on the introduction of new vehicle segments into the company's product line.",
