@@ -2245,6 +2245,10 @@
     "meaning": "Gross domestic product growth coupled with accelerating wage increases reflects expanding aggregate economic output and higher labor costs across corporate income statements, which shifts consumer purchasing power and alters central bank monetary policy parameters.",
     "meaning_ar": "يعكس نمو الناتج المحلي الإجمالي المصحوب بتسارع الأجور زيادة في مجمل النشاط الاقتصادي وارتفاع تكاليف العمالة في القوائم المالية للشركات، وهو ما يعيد تشكيل القوة الشرائية الاستهلاكية ومحددات السياسة النقدية لدى البنك المركزي."
   },
+  "نمو الناتج المحلي لكوريا الجنوبيه باسرع وتيره منذ نصف قرن": {
+    "meaning": "A multi-decade peak in gross domestic product growth reflects an expansion in aggregate national output, industrial activity, and export volumes across the economy.",
+    "meaning_ar": "يعكس تسجيل الناتج المحلي الإجمالي أعلى وتيرة نمو منذ عقود توسعاً في إجمالي الإنتاج القومي والنشاط الصناعي وحجم الصادرات عبر قطاعات الاقتصاد."
+  },
   "نموا بمبيعات كونكريت فاشون بنهايه يونيو": {
     "meaning": "Concrete Fashion records an increase in top-line revenue through higher volumes of apparel sold or adjusted unit pricing across its retail and export operations as of the period ending in June.",
     "meaning_ar": "تسجل شركة كونكريت فاشون زيادة في إجمالي إيرادات المبيعات عبر تصريف كميات أكبر من منتجات الملابس أو تعديل أسعار بيع الوحدات في عمليات التجزئة والتصدير بنهاية فترة يونيو."
@@ -2292,6 +2296,10 @@
   "ودايع الشركات بالدولار في كوريا الجنوبيه تسجل مستوي قياسيا": {
     "meaning": "A record high in corporate US dollar deposits reflects that domestic firms retain their foreign currency export earnings and hold larger foreign-denominated cash balances on their balance sheets to settle international trade and debt obligations.",
     "meaning_ar": "يعكس تسجيل الودائع الدولارية للشركات مستويات قياسية احتفاظ الشركات المحلية بحصائل صادراتها وتراكم السيولة بالعملات الأجنبية في ميزانياتها العمومية لتغطية متطلبات التجارة الدولية والالتزامات الخارجية."
+  },
+  "وزاره الاستثمار تطلق منحه لتاهيل الشركات ورفع قدراتها التصديريه والنفاذ الي الاسواق الخارجيه": {
+    "meaning": "The Ministry of Investment provides non-repayable technical and financial funding to cover company compliance costs, international quality certifications, and market-entry requirements for foreign trade.",
+    "meaning_ar": "تقدم وزارة الاستثمار تمويلاً فنياً ومالياً غير مسترد لتغطية تكاليف توفيق أوضاع الشركات، والحصول على شهادات الجودة الدولية، وتلبية متطلبات النفاذ إلى الأسواق الخارجية."
   },
   "وزاره الخارجيه تتابع حادث سير حافله تقل معتمرين بالقرب من مكه المكرمه": {
     "meaning": "This non-financial diplomatic report addresses consular emergency procedures following a transport incident, carrying no direct operational, balance sheet, or structural mechanism for EGX-listed companies.",
