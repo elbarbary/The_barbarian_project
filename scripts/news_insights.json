@@ -251,6 +251,10 @@
     "meaning": "A block trading deal involves the execution of a high-volume share transaction at a pre-arranged price via the EGX deals market. This mechanism transfers substantial equity stakes between institutional or major investors outside the standard continuous auction order book.",
     "meaning_ar": "تُمثل صفقات الحجم الكبير تنفيذ معاملات على كميات ضخمة من الأسهم بسعر متفق عليه مسبقاً عبر سوق الصفقات في البورصة المصرية. وتعمل هذه الآلية على نقل ملكية حصص كبيرة بين كبار المستثمرين خارج دفتر أوامر التداول المستمر المعتاد."
   },
+  "emerald cuts stake in ieec": {
+    "meaning": "A reduction in equity holding decreases the parent company's ownership percentage and voting control in the investee entity while converting a portion of the asset value into cash or receivables on its balance sheet.",
+    "meaning_ar": "يؤدي خفض الحصة إلى تقليص نسبة ملكية الشركة وحقوق التصويت التابعة لها في الكيان المستثمر فيه، مع تحويل جزء من قيمة هذا الأصل إلى نقدية أو مستحقات في ميزانيتها العمومية."
+  },
   "fertilizers and building materials prices mixed on september 7": {
     "meaning": "Mixed price movements across fertilizers and building materials reflect divergent input costs, localized supply chain dynamics, and distinct domestic demand conditions across individual industrial commodity segments.",
     "meaning_ar": "يعكس التباين في أسعار الأسمدة ومواد البناء اختلاف تكاليف المدخلات الإنتاجية، وديناميكيات سلاسل الإمداد، ومستويات الطلب المحلي الخاصة بكل قطاع صناعي على حدة."
@@ -1007,6 +1011,10 @@
     "meaning": "Expanding total cultivated land to over 10.5 million feddans scales up the domestic agricultural production base and increases operational demand for farming inputs, including fertilizers, seeds, and irrigation infrastructure across the agribusiness sector.",
     "meaning_ar": "يؤدي اتساع إجمالي المساحة المنزرعة لتتجاوز 10.5 مليون فدان إلى توسيع قاعدة الإنتاج الزراعي المحلي وزيادة متطلبات التشغيل للمدخلات الزراعية من أسمدة وبذور وبنية تحتية للري في قطاع الصناعات الزراعية."
   },
+  "الزراعه: تعاون بحثي مع جامعه الصين الزراعيه لتوطين التكنولوجيا وتطوير القطاع": {
+    "meaning": "This bilateral research partnership establishes a framework for technical knowledge transfer and agricultural technology localisation between state institutions and international academic bodies.",
+    "meaning_ar": "تؤسس هذه الشراكة البحثية الثنائية إطاراً لنقل المعرفة الفنية وتوطين التكنولوجيا الزراعية بين المؤسسات الحكومية والجهات الأكاديمية الدولية."
+  },
   "الزراعه: توطين تقاوي البطاطس في مصر يسهم في ضخ استثمارات جديده": {
     "meaning": "Localizing potato seed production substitutes imported agricultural inputs with domestic propagation facilities, shifting capital deployment toward local multiplication infrastructure and domestic supply chains.",
     "meaning_ar": "يرتكز توطين إنتاج تقاوي البطاطس على إحلال المدخلات الزراعية المستوردة بوحدات إكثار محلية، مما يوجه النفقات الرأسمالية نحو تأسيس البنية التحتية الزراعية وسلاسل التوريد داخل السوق المحلي."
@@ -1455,6 +1463,10 @@
   "تراجع مبيعات السيارات في الصين 24% مع اشتداد حرب الاسعار": {
     "meaning": "Intensifying price competition in the automotive sector prompts consumers to delay purchases in anticipation of further discounts, leading to reduced transaction volumes and inventory accumulation at dealerships.",
     "meaning_ar": "يؤدي اشتداد المنافسة السعرية في قطاع السيارات إلى تأجيل المستهلكين لقرارات الشراء انتظاراً لخصومات إضافية، مما يسفر عن انخفاض أحجام المبيعات وتراكم المخزون لدى الوكلاء."
+  },
+  "تراجع موشرات البورصه المصريه بختام التعاملات.. والثلاثيني يهبط 0.80%": {
+    "meaning": "The decline in broad market indices, including the EGX30 benchmark falling by 0.80%, reflects net selling pressure across constituent equities, which reduces aggregate listed market capitalization at the daily market close.",
+    "meaning_ar": "يعكس تراجع المؤشرات الرئيسية، بما في ذلك هبوط مؤشر إيجي إكس 30 بنسبة 0.80%، زيادة في ضغوط البيع على الأسهم المكونة للمؤشر، مما يؤدي إلى انخفاض القيمة السوقية الإجمالية للشركات المدرجة بختام التعاملات اليومية."
   },
   "ترامب يشعل حرب الرسوم مع كندا.. 50% علي واردات ب20 مليار دولار و«اوتاوا» ترد": {
     "meaning": "Tariffs impose a direct border tax on imported cross-border goods, raising landed procurement costs for importers and triggering reciprocal trade barriers on corresponding export categories.",
