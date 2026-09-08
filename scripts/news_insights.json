@@ -683,6 +683,10 @@
     "meaning": "Broad-based weakness in the US dollar counterbalances downward valuation pressure stemming from volatility and higher yields in the UK sovereign debt market, keeping the exchange rate of the currency pair stable.",
     "meaning_ar": "يوازن التراجع العام في سعر صرف الدولار الأمريكي الضغوط النزولية الناتجة عن تقلبات عوائد السندات السيادية البريطانية، مما يحافظ على استقرار تداول زوج العملات في سوق الصرف الأجنبي."
   },
+  "الاسكندريه للخدمات الطبيه: لايم فست بارتنرز تخفض حصتها في الشركه الي 59.4%": {
+    "meaning": "This transaction reallocates equity ownership by lowering the principal shareholder's stake while maintaining its majority voting control above 50%, which adjusts the company's shareholder base and listed free-float structure.",
+    "meaning_ar": "تعيد هذه الصفقة توزيع هيكل الملكية عبر تقليص حصة المساهم الرئيسي مع احتفاظه بالأغلبية وأحقية السيطرة بنسبة تتجاوز 50%، مما يغير تركيبة قاعدة المساهمين ونسبة الأسهم حرة التداول في السوق."
+  },
   "الاسهم الامريكيه تتراجع وتسجل اداء اسبوعيا متباينا": {
     "meaning": "US equity indices experience downward price movements at the close, reflecting divergent weekly performance across different market sectors based on corporate earnings reports and macroeconomic data releases.",
     "meaning_ar": "تشهد مؤشرات الأسهم الأمريكية تراجعاً في أسعارها، وهو ما يعكس تبايناً في الأداء الأسبوعي لمختلف القطاعات الاقتصادية بناءً على نتائج الأعمال الفصلية والبيانات الاقتصادية الكلية الصادرة."
@@ -1331,6 +1335,10 @@
   "تراجع مبيعات التجزيه بمنطقه اليورو 0.6% خلال يوليو مخالفه التوقعات": {
     "meaning": "Retail sales data measures consumer spending on final goods, and a 0.6% contraction reflects an active decline in household goods consumption and retail turnover across the Eurozone economy for the period.",
     "meaning_ar": "تقيس بيانات مبيعات التجزئة حجم الإنفاق الاستهلاكي على السلع النهائية، ويشير انكماشها بنسبة 0.6% إلى تراجع فعلي في وتيرة استهلاك الأسر وحجم التداول التجاري داخل منطقة اليورو خلال تلك الفترة."
+  },
+  "تراجع مبيعات السيارات في الصين 24% مع اشتداد حرب الاسعار": {
+    "meaning": "Intensifying price competition in the automotive sector prompts consumers to delay purchases in anticipation of further discounts, leading to reduced transaction volumes and inventory accumulation at dealerships.",
+    "meaning_ar": "يؤدي اشتداد المنافسة السعرية في قطاع السيارات إلى تأجيل المستهلكين لقرارات الشراء انتظاراً لخصومات إضافية، مما يسفر عن انخفاض أحجام المبيعات وتراكم المخزون لدى الوكلاء."
   },
   "ترامب يشعل حرب الرسوم مع كندا.. 50% علي واردات ب20 مليار دولار و«اوتاوا» ترد": {
     "meaning": "Tariffs impose a direct border tax on imported cross-border goods, raising landed procurement costs for importers and triggering reciprocal trade barriers on corresponding export categories.",
@@ -2009,6 +2017,10 @@
     "meaning": "This public tender offers concession and operational rights for local beach facilities to commercial operators under a fixed three-year lease framework.",
     "meaning_ar": "يمثل هذا الطرح مزايدة عامة لمنح حقوق استغلال وتشغيل منشآت الشواطئ للشركات بموجب عقود إيجار محددة بمدة ثلاث سنوات."
   },
+  "محافظه الجيزه: انطلاق الحمله القوميه للتطعيم ضد الحصبه والحصبه الالمانيه اكتوبر المقبل": {
+    "meaning": "National vaccination campaigns operate through state-financed procurement and centralized distribution of biological products and medical consumables across public healthcare logistics networks.",
+    "meaning_ar": "تعتمد الحملات القومية للتطعيم على التوريد والتمويل الحكومي للقاحات والمستلزمات الطبية وتوزيعها مركزيًا عبر شبكات الرعاية الصحية العامة وسلاسل الإمداد المؤسسية."
+  },
   "محافظه القاهره: خطه لاستعاده الوجه الحضاري للقاهره الكبري خلال الفتره القادمه": {
     "meaning": "Urban restoration plans involve public spending allocations directed toward infrastructure rehabilitation, building renovation, and civil contracting works in targeted districts.",
     "meaning_ar": "تتضمن خطط التطوير الحضاري توجيه مخصصات من الإنفاق العام نحو أعمال تأهيل البنية التحتية، وترميم المباني، ومقاولات الأشغال العامة في المناطق المستهدفة."
@@ -2116,6 +2128,10 @@
   "مصر تبحث توسيع التعاون مع البنك الاسيوي": {
     "meaning": "Cooperation with the Asian Infrastructure Investment Bank involves securing multilateral development financing and technical assistance for domestic infrastructure, energy, and transportation projects.",
     "meaning_ar": "يتضمن التعاون مع البنك الآسيوي للاستثمار في البنية التحتية توفير تمويلات تنموية متعددة الأطراف ودعم فني لمشروعات البنية التحتية والطاقة والنقل المحلية."
+  },
+  "مصر تتعاون مع «OECD» لاعداد الاستراتيجيه الوطنيه للذكاء الاصطناعي": {
+    "meaning": "The partnership aligns Egypt's artificial intelligence regulatory framework and digital governance standards with the policy benchmarks established by the OECD.",
+    "meaning_ar": "تربط هذه الشراكة بين الأطر التنظيمية ومعايير الحوكمة الرقمية للذكاء الاصطناعي في مصر والسياسات المعتمدة لدى منظمة التعاون الاقتصادي والتنمية."
   },
   "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
     "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
@@ -2469,6 +2485,10 @@
     "meaning": "This agreement assigns earthwork and site preparation operations in Ras El Hekma to Al Fanar Contracting, adding 11.6 million EGP in contract value to the company's active construction backlog.",
     "meaning_ar": "يقضي هذا التعاقد بإسناد أعمال الحفر وتسوية التربة في رأس الحكمة لشركة الفنار للمقاولات، مما يضيف قيمة تعاقدية قدرها 11.6 مليون جنيه إلى محفظة العمليات الإنشائية قيد التنفيذ بالشركة."
   },
+  "“القومي لتنظيم الاعلانات” يواصل جولاته لرصد تطبيق المنظومه بمحافظه الجيزه": {
+    "meaning": "Regulatory inspections enforce standardized outdoor advertising rules and licensing compliance for media agencies and billboard operators across Giza.",
+    "meaning_ar": "تفرض الجولات الرقابية تطبيق القواعد الموحدة لتنظيم إعلانات الطرق والتحقق من التزام وكالات الدعاية والإعلان بتراخيص التشغيل في محافظة الجيزة."
+  },
   "“المركزي الاوروبي” يتجه لرفع الفايده مجددا وسط تضخم يتجاوز 3%": {
     "meaning": "Raising interest rates by the European Central Bank increases the cost of borrowing in euros and tightens liquidity in international markets, which affects foreign exchange differentials and global trade financing costs.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي الأوروبي إلى زيادة تكلفة الاقتراض باليورو وتشديد السيولة في الأسواق الدولية، مما يؤثر على فروق أسعار الصرف وتكاليف تمويل التجارة العالمية."
@@ -2528,6 +2548,10 @@
   "“تنظيم الاعلانات” يتدخل لازاله مخالفه في الازبكيه": {
     "meaning": "Regulatory enforcement by municipal advertising authorities enforces licensing compliance and legal space utilization standards on outdoor media operators.",
     "meaning_ar": "تفرض الإجراءات الرقابية لأجهزة تنظيم الإعلانات الالتزام باشتراطات التراخيص والمطابقة القانونية لاستغلال المساحات الإعلانية على الشركات المشغلة."
+  },
+  "“تويوتا تسوشو” تعتزم تجميع فيه جديده في مصر الفتره المقبله": {
+    "meaning": "Expanding local automotive assembly operations entails allocating existing or new assembly lines to process imported knocked-down kits alongside domestic components for a specific vehicle category.",
+    "meaning_ar": "تتضمن عمليات التجميع المحلي للسيارات تخصيص خطوط إنتاج داخل المصانع المحلية لدمج أجزاء ومكونات المركبات المستوردة مع المكونات المحلية لتصنيع فئة محددة."
   },
   "“تيرا باور” الامريكيه تراهن علي بريطانيا باول محطه نوويه خارج امريكا بحلول 2034": {
     "meaning": "The international deployment of advanced nuclear reactor technology establishes cross-border energy infrastructure partnerships and expands proprietary technology licensing outside the domestic market.",
