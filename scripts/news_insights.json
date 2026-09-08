@@ -1047,6 +1047,10 @@
     "meaning": "The Ministry of Labor coordinates with seven private-sector companies to facilitate the direct recruitment and absorption of 1,018 workers across three governorates.",
     "meaning_ar": "تنسق وزارة العمل مع سبع شركات من القطاع الخاص لتسهيل التوظيف المباشر واستيعاب 1018 عاملاً في ثلاث محافظات."
   },
+  "العمل: قبول 240 متقدما للعمل بمشروع محطه الضبعه للطاقه النوويه": {
+    "meaning": "The recruitment of 240 workers provides direct labor allocation to the construction and operational deployment phase of the El Dabaa nuclear energy infrastructure project.",
+    "meaning_ar": "يمثل قبول 240 متقدماً توفيراً وتوجيهاً مباشراً للكوادر والعمالة المحلية نحو مراحل الإنشاء والتنفيذ في مشروع محطة الضبعة للطاقة النووية."
+  },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 12.81%": {
     "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
     "meaning_ar": "يُعد هذا الإجراء تخفيضاً في نسبة ملكية مساهم رئيسي في رأس مال الشركة لتصل إلى 12.81%، مما يعيد تشكيل هيكل الملكية وحصص التصويت بين المساهمين."
@@ -1306,6 +1310,10 @@
   "تباطو نمو النشاط الخدمي في منطقه اليورو لادني مستوي منذ شهرين": {
     "meaning": "A slowdown in Eurozone services growth reflects a deceleration in the expansion rate of business operations and new order volumes across European service industries.",
     "meaning_ar": "يعكس تباطؤ نمو النشاط الخدمي في منطقة اليورو انخفاضاً في وتيرة توسع العمليات التشغيلية وحجم الطلبيات الجديدة لدى شركات قطاع الخدمات الأوروبية."
+  },
+  "تباين اداء الاسهم الصينيه بعد صدور بيانات التجاره": {
+    "meaning": "Official trade balance figures show divergent momentum across export and import sectors, leading equities in export-focused industries to decouple from domestic consumer and import-reliant equities.",
+    "meaning_ar": "تُظهر بيانات الميزان التجاري تفاوتًا في أداء قطاعي الصادرات والواردات، مما يؤدي إلى تباين في حركة أسهم الشركات المعتمدة على التصدير مقارنة بأسهم القطاعات الاستهلاكية وتلك المعتمدة على الاستيراد."
   },
   "تباين الاسهم الامريكيه عقب صدور تقرير الوظايف": {
     "meaning": "Official employment data provides data points on labor market tightness, causing equity sectors to trade in diverging directions based on their varying sensitivities to benchmark interest rate trajectories.",
@@ -1703,6 +1711,10 @@
   "سعر الدينار الكويتي اليوم الاحد 6-9-2026 بدايه التعاملات": {
     "meaning": "Opening foreign exchange quotations set the benchmark conversion rates for the Kuwaiti Dinar across Egyptian commercial banks, governing the immediate clearing of bilateral trade invoices and cross-border remittances.",
     "meaning_ar": "يحدد نشر أسعار صرف العملات الأجنبية في بداية التعاملات السعر المرجعي لتحويل الدينار الكويتي بالبنوك المصرية، وتُنفذ بناءً عليه عمليات المقاصة الفورية للتحويلات النقدية وتسوية المعاملات التجارية المشتركة."
+  },
+  "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
+    "meaning": "Publishing the opening exchange rate establishes the daily baseline valuation for the Kuwaiti Dinar against the Egyptian Pound, which governs the settlement terms for cross-border remittances, bilateral trade, and interbank foreign currency transactions.",
+    "meaning_ar": "يحدد إعلان سعر الصرف الافتتاحي القيمة المرجعية اليومية للدينار الكويتي مقابل الجنيه المصري، وهو ما ينظم شروط تسوية التحويلات النقدية الخارجية، والتبادل التجاري الثنائي، ومعاملات الصرف بين البنوك."
   },
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
