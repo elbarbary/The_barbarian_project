@@ -35,6 +35,10 @@
     "meaning": "This capital allocation represents direct capital expenditure across multiple manufacturing facilities in the Ain Sokhna industrial zone, adding operational physical assets and production infrastructure to the local industrial base.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي إنفاقاً رأسمالياً مباشراً عبر عدة منشآت تصنيعية في منطقة العين السخنة الصناعية، مما يضيف أصولاً تشغيلية مادية وبنية تحتية إنتاجية للقاعدة الصناعية المحلية."
   },
+  "14.6% ارتفاعا في صادرات مصر الي اليونان خلال النصف الاول من 2026": {
+    "meaning": "The expansion in export volumes to Greece increases bilateral trade turnover and reflects higher foreign currency inflows from outbound shipments into the balance of trade.",
+    "meaning_ar": "تؤدي زيادة حجم الصادرات المصرية إلى اليونان إلى رفع وتيرة التبادل التجاري الثنائي وتدفق النقد الأجنبي من الشحنات المصدرة ضمن الميزان التجاري."
+  },
   "20 years of letters between a New York writer and a London bookseller, with not a word wasted": {
     "meaning": "Cross-border mail-order commerce operates through direct consumer-to-retailer communication, long-term customer relationship management, and international logistics fulfillment for specialized inventory.",
     "meaning_ar": "تعمل تجارة الطلبات البريدية عبر الحدود من خلال التواصل المباشر بين المستهلك وبائع التجزئة، وإدارة علاقات العملاء طويلة الأجل، وعمليات الشحن واللوجستيات الدولية للبضائع المتخصصة."
@@ -891,6 +895,10 @@
     "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
     "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
   },
+  "البورصه توقع مذكره تفاهم مع “المصريه للايداع” لوضع خارطه طريق للسوق الحكوميه": {
+    "meaning": "This memorandum of understanding establishes a technical and operational coordination framework between the Egyptian Exchange and the central depository to structure the trading, clearing, and settlement workflows for sovereign and government debt instruments.",
+    "meaning_ar": "تحدد مذكرة التفاهم إطاراً للتنسيق الفني والتشغيلي بين البورصة المصرية وشركة الإيداع والقيد المركزي لتنظيم آليات التداول والمقاصة والتسوية الخاصة بأدوات الدين الحكومية."
+  },
   "البورصه علي موعد مع تصحيح موقت تمهيدا لاختبار 57000 نقطه": {
     "meaning": "Technical market corrections occur when trading volumes and price levels adjust following sustained upward movements, functioning as an equilibrium mechanism where market participants rebalance positions relative to specific index benchmark levels.",
     "meaning_ar": "تحدث حركات التصحيح الفني في السوق عندما يعاد ضبط مستويات الأسعار وأحجام التداول بعد موجات صعود، حيث تعمل كآلية توازن يعيد من خلالها المتعاملون تسوية مراكزهم مقارنة بمستويات مؤشرات محددة."
@@ -1475,6 +1483,10 @@
     "meaning": "Performance divergence across milling companies reflects operational differences in procurement costs, production capacities, and the breakdown between subsidized and free-market flour output across individual firms.",
     "meaning_ar": "يعكس تباين أداء شركات المطاحن اختلافات تشغيلية في تكاليف شراء القمح، والطاقات الإنتاجية، ونسب توزيع الإنتاج بين الدقيق المدعم والدقيق الحر لدى كل شركة."
   },
+  "تجديد تعيين حمدي بدوي مساعدا لرييس الرقابه الماليه": {
+    "meaning": "The reappointment maintains administrative and institutional continuity within the Financial Regulatory Authority, which regulates and oversees Egypt's non-banking financial sector and capital markets.",
+    "meaning_ar": "يُبقي تجديد التعيين على الاستمرارية الإدارية والمؤسسية داخل الهيئة العامة للرقابة المالية المعنية بالإشراف والرقابة على أسواق المال والأنشطة المالية غير المصرفية في مصر."
+  },
   "تجديد تعيين د. محمد عبدالعزيز مساعدا لرييس الهييه العامه للرقابه الماليه": {
     "meaning": "The reappointment maintains administrative and regulatory continuity within the executive leadership of the Financial Regulatory Authority, which oversees non-banking financial markets and institutions in Egypt.",
     "meaning_ar": "يحافظ تجديد التعيين على الاستمرارية الإدارية والتنظيمية داخل القيادة التنفيذية للهيئة العامة للرقابة المالية، المسؤولة عن الإشراف على الأسواق والمؤسسات المالية غير المصرفية في مصر."
@@ -1599,6 +1611,10 @@
   "تعرف علي حصيله صادرات القطن منذ بدايه الموسم": {
     "meaning": "The headline refers to cumulative export data for Egyptian raw cotton over the current agricultural season, which reflects foreign currency inflows into the agricultural and textile export sectors and tracks inventory clearance from local spinning mills and export aggregators.",
     "meaning_ar": "يشير العنوان إلى البيانات التراكمية لصادرات القطن المصري الخام منذ بداية الموسم الزراعي الحالي، وهو ما يعكس تدفقات النقد الأجنبي لقطاع تصدير الحاصلات الزراعية والغزل، ويوضح وتيرة تصريف المخزون لدى المجمعين والمحالج."
+  },
+  "تعرف علي رسوم مكافحه الاغراق الحاليه علي الجبن الهولندي": {
+    "meaning": "Anti-dumping duties apply additional import tariffs on Dutch cheese shipments at Egyptian customs, raising the landed cost of imported dairy products relative to domestically produced alternatives.",
+    "meaning_ar": "تفرض رسوم مكافحة الإغراق تعريفات جمركية إضافية على شحنات الجبن الهولندي في المنافذ الجمركية المصرية، مما يرفع التكلفة النهائية للمنتجات المستوردة مقارنة بالبدائل المصنعة محلياً."
   },
   "تقرير دولي: حصه الصين من الدين الامريكي تهبط من 10% الي 2%": {
     "meaning": "This shift reflects a structural reallocation of China's foreign exchange reserves away from US Treasury securities toward other currencies, physical assets, or alternative sovereign debt instruments, changing the composition of foreign ownership in the US sovereign debt market.",
@@ -2288,6 +2304,10 @@
   "ما بين الارتفاع والخساير .. نتايج شركات اعضاء مجلس اداره البورصه تتباين في النصف الاول": {
     "meaning": "Semi-annual financial statements reflect divergent operational performance and earnings across listed companies represented on the EGX board, showing mixed outcomes between net profit expansion and net losses based on sector-specific dynamics and cost structures.",
     "meaning_ar": "تعكس القوائم المالية نصف السنوية تباينًا في الأداء التشغيلي ومستويات الربحية للشركات المقيدة الممثلة في مجلس إدارة البورصة، حيث تسجل بعضها أرباحًا بينما تُظهر أخرى خسائر صافية تبعًا لطبيعة تكاليف وتشغيل كل قطاع."
+  },
+  "ما مصير الشركات غير المتعاونه في تحقيق مكافحه اغراق الجبن الهولندي؟": {
+    "meaning": "Under trade defense regulations, non-cooperating foreign exporters in anti-dumping investigations face default duties calculated using the highest available tariff rates or 'facts available' rather than their specific operational cost data, directly raising their import clearance costs.",
+    "meaning_ar": "بموجب لوائح المعالجات التجارية، تُطبق على الشركات الأجنبية المصدرة غير المتعاونة في تحقيقات مكافحة الإغراق رسوم حمائية استناداً إلى أعلى الهوامش المتاحة أو قاعدة البيانات المعتمدة بدلاً من بيانات تكاليفها الفعلية، مما يرفع تكلفة التخليص الجمركي لمنتجاتها."
   },
   "ماريدايف تتحول للربحيه بقيمه 4.55 مليون دولار بالنصف الاول": {
     "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
