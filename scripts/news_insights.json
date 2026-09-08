@@ -1271,6 +1271,10 @@
     "meaning": "The launch of these nine projects introduces new operational facilities into the Suez Canal Economic Zone, expanding the zone's active industrial and logistics asset base.",
     "meaning_ar": "يدشن تشغيل هذه المشروعات التسعة أصولاً وطاقات تشغيلية جديدة داخل المنطقة الاقتصادية لقناة السويس، مما يوسع القاعدة الإنتاجية واللوجستية العاملة في المنطقة."
   },
+  "اليونان وقبرص تدعمان مصر في قضيه نهر النيل وتوكدان اهميه الالتزام الكامل بمبادي القانون الدولي": {
+    "meaning": "This diplomatic alignment reflects the tripartite cooperation framework among Egypt, Greece, and Cyprus, which anchors joint cross-border energy, maritime, and infrastructure agreements in the Eastern Mediterranean.",
+    "meaning_ar": "يعكس هذا التوافق الدبلوماسي إطار التعاون الثلاثي بين مصر واليونان وقبرص، والذي يشكل أساساً للاتفاقيات المشتركة في مجالات الطاقة والربط البحري والبنية التحتية في منطقة شرق المتوسط."
+  },
   "امريكا تحقق في سلامه سيارات سايبركاب التابعه ل”تسلا”": {
     "meaning": "Regulatory safety investigations involve formal compliance reviews, technical audits, and verification procedures that assess autonomous vehicle systems against federal safety standards.",
     "meaning_ar": "تتضمن تحقيقات السلامة التنظيمية مراجعات رسمية للامتثال وتدقيقاً فنياً وإجراءات تحقق لتقييم أنظمة المركبات ذاتية القيادة وفقاً لمعايير السلامة المعتمدة."
@@ -1800,6 +1804,10 @@
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
   },
+  "رييس الوزراء يبدا جوله تفقديه بمشروعات تنميه راس الحكمه الجديده": {
+    "meaning": "Government field inspections of national urban developments monitor project execution timelines and coordinate infrastructure delivery across real estate, construction, and utility contractors on site.",
+    "meaning_ar": "تتابع الجولات الميدانية الحكومية لمشروعات التطوير العمراني معدلات التنفيذ على أرض الواقع وتنسق تسليم أعمال البنية التحتية بين شركات المقاولات والتطوير العقاري والمرافق العامة."
+  },
   "رييس الوزراء يفتتح توسعات مصنع لانظمه الاضاءه الحديثه باستثمارات 7.5 مليون دولار": {
     "meaning": "The capital expenditure of $7.5 million expands existing physical manufacturing infrastructure and adds industrial capacity for modern lighting equipment.",
     "meaning_ar": "يمثل ضخ الاستثمارات الرأسمالية البالغة 7.5 مليون دولار توسعة للبنية التحتية التصنيعية القائمة وإضافة طاقات تشغيلية لإنتاج أنظمة الإضاءة الحديثة."
@@ -1859,6 +1867,10 @@
   "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
     "meaning": "Publishing the opening exchange rate establishes the daily baseline valuation for the Kuwaiti Dinar against the Egyptian Pound, which governs the settlement terms for cross-border remittances, bilateral trade, and interbank foreign currency transactions.",
     "meaning_ar": "يحدد إعلان سعر الصرف الافتتاحي القيمة المرجعية اليومية للدينار الكويتي مقابل الجنيه المصري، وهو ما ينظم شروط تسوية التحويلات النقدية الخارجية، والتبادل التجاري الثنائي، ومعاملات الصرف بين البنوك."
+  },
+  "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
+    "meaning": "End-of-day foreign exchange rates establish the official clearing prices for bilateral currency conversions, cross-border trade settlements, and expatriate remittance processing across the banking sector.",
+    "meaning_ar": "تحدد أسعار صرف العملات الأجنبية في ختام التعاملات اليومية أسعار المقاصة الرسمية لتحويلات العملة، وتسوية المعاملات التجارية البينية، ومعالجة تدفقات تحويلات العاملين عبر القطاع المصرفي."
   },
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
@@ -2328,6 +2340,10 @@
   "مدبولي: انتهاء مشروعات 926 قريه ضمن المرحله الاولي من مبادره حياه كريمه": {
     "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
     "meaning_ar": "يمثل إنجاز حزم البنية التحتية الريفية انتقال شركات المقاولات ومواد البناء من مرحلة التنفيذ الإنشائي إلى مراحل التسليم النهائي والمطالبات المالية وضمان الأعمال."
+  },
+  "مدبولي: حريصون علي تذليل التحديات امام مشروعات راس الحكمه لضمان تنفيذها وفق الجداول الزمنيه": {
+    "meaning": "Government administrative intervention directly manages regulatory approvals, infrastructure access, and site logistics to align execution with contracted delivery milestones.",
+    "meaning_ar": "يتضمن هذا التوجيه تدخلاً إدارياً حكومياً لتسريع الإجراءات التنظيمية وتوفير متطلبات البنية التحتية واللوجستيات لمطابقة مراحل التنفيذ مع الجداول الزمنية المحددة."
   },
   "مدبولي: نواصل اعاده هيكله الشركات المملوكه للدوله لتحسين ادايها وتعظيم الاستفاده من اصولها": {
     "meaning": "State-owned enterprise restructuring involves auditing corporate balance sheets, reorganizing administrative and operating models, and reallocating capital or real estate assets across public sector portfolios.",
