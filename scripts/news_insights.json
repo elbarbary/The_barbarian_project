@@ -1367,6 +1367,10 @@
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
     "meaning_ar": "تمثل الأصول المرمّزة أدوات مالية وأصولاً تقليدية تم تحويلها إلى رموز رقمية على شبكات السجلات الموزعة، حيث يبلغ إجمالي قيمتها السوقية عالمياً 40 مليار دولار في الوقت الحالي."
   },
+  "بنك اليابان يتجه لرفع الفايده الي 1.25% لتفادي صدمه الاسواق": {
+    "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
+  },
   "بنك انجلترا: مخاوف تمويل الانفاق الدفاعي توجج اضطرابات اسواق السندات": {
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
     "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
@@ -1863,6 +1867,10 @@
   "سعر الريال السعودي في مصر اليوم الاحد 6/9/2026.. تراجع 6 قروش": {
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
+  },
+  "سعر الريال السعودي في مصر اليوم الثلاثاء 8/9/2026.. ختام التعاملات": {
+    "meaning": "Official end-of-day foreign exchange rate publications reflect the daily settlement prices for the Saudi Riyal against the Egyptian Pound across the banking sector, determining transaction costs for bilateral trade, remittances, and travel expenses.",
+    "meaning_ar": "تعكس أسعار الصرف المنشورة في ختام التعاملات أسعار التسوية اليومية للريال السعودي مقابل الجنيه المصري في القطاع المصرفي، وتحدد تكاليف المعاملات للتجارة البينية والتحويلات ونفقات السفر."
   },
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
