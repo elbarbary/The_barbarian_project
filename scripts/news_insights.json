@@ -887,6 +887,10 @@
     "meaning": "The Financial Regulatory Authority (FRA) establishes a unified regulatory handbook consolidating operating standards, licensing conditions, and compliance rules for consumer finance companies.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية دليلاً تنظيمياً موحداً يجمع المعايير التشغيلية وضوابط الترخيص وقواعد الامتثال للشركات العاملة في نشاط التمويل الاستهلاكي."
   },
+  "الرقابه الماليه تقرر وقف نشاط بيتا كابيتال كونسالتينج لمده 15 يوما": {
+    "meaning": "A regulatory suspension temporarily freezes a financial advisory firm's operating license and services, halting its market transactions while it resolves compliance requirements with the Financial Regulatory Authority.",
+    "meaning_ar": "يُمثّل قرار الإيقاف تجميداً مؤقتاً للترخيص التشغيلي والأنشطة الاستشارية للشركة في السوق لحين استيفاء المتطلبات الرقابية للهيئة العامة للرقابة المالية."
+  },
   "الرقابه الماليه تمنح 4 شركات موافقات لمزاوله انشطه غير مصرفيه باستخدام التكنولوجيا الماليه": {
     "meaning": "The regulatory approvals authorize four companies to deploy digital platforms and automated systems for non-banking financial operations, including credit assessment, onboarding, and transaction processing under the Financial Regulatory Authority's fintech framework.",
     "meaning_ar": "تمنح هذه الموافقات الرقابية الشركات الأربع ترخيصاً رسمياً لتشغيل منصات رقمية وأنظمة مؤتمتة لتقديم الخدمات المالية غير المصرفية، بما يشمل التقييم الائتماني والتعاقد وتنفيذ المعاملات وفقاً للأطر التنظيمية للهيئة العامة للرقابة المالية."
@@ -1051,9 +1055,17 @@
     "meaning": "Cocoa futures experience price adjustments as global commodity markets reassess underlying supply and demand fundamentals, directly determining raw material procurement benchmarks for food and confectionery manufacturers.",
     "meaning_ar": "تشهد أسعار عقود الكاكاو تحركات سوقية ناتجة عن إعادة تقييم توازنات العرض والطلب العالمية، مما يحدد التكلفة المرجعية لتوريد المواد الخام لشركات الصناعات الغذائية والحلويات."
   },
+  "الكبده ب500 جنيه .. اسعار اللحوم وعرق الفلتو اليوم الثلاثاء 8-9-2026": {
+    "meaning": "Daily retail price quotes for meat and livestock products reflect prevailing end-consumer price levels and ongoing input costs across the domestic agricultural supply chain.",
+    "meaning_ar": "تعكس قوائم أسعار التجزئة اليومية للحوم ومنتجات الماشية مستويات الأسعار السائدة للمستهلك النهائي وتكاليف المدخلات الحالية ضمن سلاسل إمداد قطاع الأغذية المحلي."
+  },
   "الكندوز ب450 جنيها .. اسعار اللحوم البلديه اليوم الاثنين 7-9-2026": {
     "meaning": "Retail meat pricing establishes the current spot transaction rate for domestic beef in consumer markets, reflecting prevailing livestock supply costs, feed inputs, and local distribution expenses.",
     "meaning_ar": "يحدد تسعير اللحوم البلدية مستويات المعاملات الفورية للمستهلك في السوق المحلي، بما يعكس التكاليف القائمة لمدخلات الأعلاف، وتربية الماشية، ونفقات سلاسل التوزيع والتجزئة."
+  },
+  "الكويت تصدر مليون برميل نفط يوميا مع تعافي حركه الناقلات عبر هرمز": {
+    "meaning": "The resumption of maritime tanker traffic through the Strait of Hormuz maintains Kuwaiti crude oil export flows at an operational volume of one million barrels per day.",
+    "meaning_ar": "يتيح انتظام حركة ناقلات النفط عبر مضيق هرمز استمرار تدفقات صادرات النفط الخام الكويتي بمعدل تشغيلي يبلغ مليون برميل يومياً."
   },
   "الماليه والصناعيه المصريه تحقق 343.8 مليون جنيه ارباحا مستقله بالنصف الاول بارتفاع 42%": {
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
@@ -2161,9 +2173,17 @@
     "meaning": "The Ministry of Finance schedules foreign-currency debt issuances in international capital markets to cover external financing requirements for the specified fiscal year.",
     "meaning_ar": "تدرج وزارة المالية أدوات دين بالعملة الأجنبية في الأسواق الدولية لتغطية الاحتياجات التمويلية الخارجية خلال العام المالي المحدد."
   },
+  "مصر تستهدف بناء سلاسل امداد افريقيه.. والانتقال من التصدير الي التصنيع المشترك": {
+    "meaning": "Establishing regional supply chains and joint manufacturing involves shifting from finished goods exports to establishing shared industrial operations, sourcing raw materials across borders, and co-locating assembly processes between Egypt and African partner markets.",
+    "meaning_ar": "يتضمن بناء سلاسل إمداد إقليمية والتصنيع المشترك التحول من تصدير المنتجات تامة الصنع إلى إقامة عمليات صناعية مشتركة، وتوريد المواد الخام عبر الحدود، وتوزيع مراحل التجميع بين مصر والأسواق الإفريقية الشريكة."
+  },
   "مصر تعتزم اصدار سندات دوليه بنحو 3 مليارات دولار خلال 2026-2027": {
     "meaning": "International sovereign bond issuances act as external debt financing mechanisms that supply foreign currency to the state treasury and create fixed-rate debt service liabilities on the government balance sheet.",
     "meaning_ar": "يُعد طرح السندات السيادية الدولية آلية تمويل عبر الاقتراض الخارجي توفر السيولة بالنقد الأجنبي للخزانة العامة، وتترتب عليها التزامات لسداد أعباء الدين ذات العائد الثابت في الموازنة العامة."
+  },
+  "مصر تعتزم اطلاق اول صندوق للاستثمار الصناعي الشهر الجاري": {
+    "meaning": "An industrial investment fund pools capital from institutional and private investors into a specialized vehicle that provides direct equity or mezzanine financing to domestic manufacturing companies and industrial projects.",
+    "meaning_ar": "يعمل صندوق الاستثمار الصناعي كوعاء لتجميع رؤوس الأموال من المؤسسات والقطاع الخاص وتوجيهها في صورة حصص ملكية أو تمويل مباشر للمنشآت والمشروعات في قطاع الصناعة التحويلية."
   },
   "مصر تعتزم تطوير اليه لتمويل مشروعات البنيه التحتيه بالعمله المحليه": {
     "meaning": "The mechanism establishes a framework for funding infrastructure assets through Egyptian pound-denominated debt instruments and credit facilities, structuring project obligations in domestic currency rather than foreign exchange.",
@@ -2308,6 +2328,10 @@
   "نوفو نورديسك توقف تجربتين لدواء القلب بعد فشل تجربه رييسيه": {
     "meaning": "The discontinuation of clinical trials halts the research and development pipeline for this specific cardiovascular drug indication, limiting capital allocation and clinical resources dedicated to these studies.",
     "meaning_ar": "يؤدي إيقاف التجارب السريرية إلى تجميد مسار البحث والتطوير المخصص لهذا العقار لعلاج أمراض القلب، مما يوقف تخصيص الموارد الرأسمالية والسريرية الموجهة لهذه الدراسات."
+  },
+  "هبوط الطماطم .. اسعار الخضروات والفاكهه اليوم الثلاثاء 8-9-2026": {
+    "meaning": "Daily price fluctuations in fresh agricultural commodities reflect immediate supply-and-demand dynamics in wholesale and retail markets, where higher incoming harvest volumes lower spot clearing prices.",
+    "meaning_ar": "تعكس التغيرات السعرية اليومية للسلع الزراعية توازن العرض والطلب الفوري في أسواق الجملة والتجزئة، حيث تؤدي زيادة تدفقات المحاصيل الموردة إلى خفض أسعار التداول اللحظية."
   },
   "هبوط واردات الصين من النفط الخام بنسبه 23.4% في اغسطس": {
     "meaning": "A drop in Chinese crude oil imports reflects lower refinery throughput, adjustments in domestic crude inventories, and reduced physical procurement activity by the world's largest oil importer.",
@@ -2473,6 +2497,10 @@
     "meaning": "The bank allocates non-operating capital to corporate social responsibility (CSR) programs, directing funds toward public education infrastructure and community development projects.",
     "meaning_ar": "يوجه البنك مخصصات مالية من ميزانية المسؤولية المجتمعية لتطوير البنية التحتية للمدارس الحكومية ومشاريع التنمية المجتمعية."
   },
+  "“BYD” تستهدف بيع 2.5 مليون سياره في الخارج مع احتدام حرب الاسعار محليا": {
+    "meaning": "Domestic automotive price competition shifts manufacturer sales allocations toward export channels to distribute finished inventory across international markets.",
+    "meaning_ar": "تؤدي المنافسة السعرية في السوق المحلية إلى إعادة توجيه الحصص البيعية للشركة المصنعة نحو قنوات التصدير لتوزيع المخزون عبر الأسواق الخارجية."
+  },
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
     "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
@@ -2480,6 +2508,10 @@
   "“اقتصاديه القناه” تطرح مخازن وورش ميناء غرب بورسعيد للشراكه مع القطاع الخاص": {
     "meaning": "The Suez Canal Economic Zone tenders logistics assets, specifically warehouses and workshops at West Port Said Port, under public-private partnership (PPP) models, transferring the management, operation, and utilization of these facilities to private sector operators.",
     "meaning_ar": "تطرح الهيئة العامة للمنطقة الاقتصادية لقناة السويس أصولاً لوجستية تشمل مخازن وورش صيانة بميناء غرب بورسعيد بنظام الشراكة مع القطاع الخاص، حيث يتولى مشغلو القطاع الخاص إدارة هذه المرافق وتشغيلها وتقديم الخدمات المرتبطة بها."
+  },
+  "“الاستثمار والتجاره” تطلق منحه لدعم تاهيل الشركات المصدره": {
+    "meaning": "The Ministry of Investment and Foreign Trade provides non-reimbursable financing to cover the costs of quality certifications, international standards compliance, and technical readiness for export-oriented enterprises.",
+    "meaning_ar": "تقدم وزارة الاستثمار والتجارة الخارجية تمويلاً غير مسترد لتغطية تكاليف الحصول على شهادات الجودة والامتثال للمعايير الدولية والجاهزية الفنية للشركات الموجهة للتصدير."
   },
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
@@ -2624,6 +2656,10 @@
   "“مدن للتطوير”: ضخ 16.5 مليار جنيه بالانشاءات في 3 مشروعات بالقاهره": {
     "meaning": "The company allocates and deploys 16.5 billion EGP in capital expenditures directly into construction activities across three active real estate developments in Cairo, advancing operational build rates and contractor procurement.",
     "meaning_ar": "توجه الشركة وتضخ نفقات رأسمالية بقيمة 16.5 مليار جنيه مباشرة في الأعمال الإنشائية عبر ثلاثة مشروعات عقارية في القاهرة، مما يرفع وتيرة التنفيذ الميداني والتعاقدات مع المقاولين."
+  },
+  "“منثم” تستهدف مضاعفه الاصول تحت ادارتها الي 8 مليارات جنيه خلال 2027": {
+    "meaning": "Managing a higher volume of assets under management (AUM) involves aggregating client inflows into underlying money market funds and fixed-income instruments, generating operational revenue through asset-based management fees.",
+    "meaning_ar": "تعتمد مضاعفة الأصول المدارة على تجميع تدفقات رؤوس أموال العملاء وتوجيهها نحو صناديق أسواق النقد وأدوات الدخل الثابت، حيث يتولد الدخل التشغيلي عبر تحصيل رسوم إدارة دورية كنسبة من إجمالي الأصول القائمة."
   },
   "“نهر الخير”: “الاهلي للزراعات” تسدد قسطا ب19.8 مليون جنيه ل”تنميه الريف”": {
     "meaning": "This transaction reflects the settlement of contractual land acquisition liabilities by Nahr El-Kheir's subsidiary to the Egyptian Countryside Development Company, reducing outstanding long-term obligations on the consolidated balance sheet.",
