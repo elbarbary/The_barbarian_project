@@ -1,4 +1,5 @@
 import { explorer } from './explorer.js';
+import { SECTOR_AR } from './data.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
@@ -416,6 +417,7 @@ export class Component extends Base {
       insiderColFiling:'Filing',
       insiderOfficialNotice:'Official Disclosure',
       insiderViewTable:'📋 Transactions Table',
+      insiderFlowNoVolume:'filings with no share count disclosed',
       insiderViewMap:'🗺️ Activity Map',
       insiderViewFlow:'📊 Sector Flows',
       insiderMapLegendBuy:'Net Insider Purchases',
@@ -794,6 +796,7 @@ export class Component extends Base {
       insiderColFiling:'المستند',
       insiderOfficialNotice:'إفصاح رسمي',
       insiderViewTable:'📋 جدول الصفقات',
+      insiderFlowNoVolume:'إفصاحات لم تذكر عدد الأسهم',
       insiderViewMap:'🗺️ خريطة النشاط',
       insiderViewFlow:'📊 تدفق القطاعات',
       insiderMapLegendBuy:'صافي مشتريات داخلية',
@@ -2744,9 +2747,23 @@ export class Component extends Base {
       }));
 
       // ── 2. Sector Flows Diverging Comparison ──
+      /* The SAME records the treemap above is drawing.
+       *
+       * This walked `rawItems` while the map walked `filtered`, so choosing a
+       * filter narrowed one view and not the other: "treasury" cut the map to
+       * six companies out of twenty-three records and left every one of the
+       * twenty sectors below it, still totalling all 345. Two panels under one
+       * filter, describing different sets, with nothing saying so. */
       const bySec = new Map();
-      for (const r of rawItems) {
-        const secKey = ar ? (r.sectorAr || r.sector || 'أخرى') : (r.sector || r.sectorAr || 'Other');
+      for (const r of filtered) {
+        // An Arabic sector name, even when the directory has none for this
+        // company. Five tickers carry `sector` with no `sectorAr` — AIH and
+        // FIRE under Finance, FTNS and VERT under Technology Services, UPMS
+        // under Health Services — and they rendered as English words in the
+        // middle of an Arabic column. The site already keeps the translation.
+        const secKey = ar
+          ? (r.sectorAr || SECTOR_AR[r.sector] || r.sector || 'أخرى')
+          : (r.sector || r.sectorAr || 'Other');
         if (!bySec.has(secKey)) {
           bySec.set(secKey, {
             name: secKey,
@@ -2784,6 +2801,15 @@ export class Component extends Base {
         return {
           name: s.name,
           companiesCount: s.tickers.length,
+          /* A sector whose filings disclose no share count is not a sector
+             that traded nothing. Four of them today — Finance, Technology
+             Services, Paper & Packaging, Shipping — carry filings with no
+             number in them, and the card printed a bare "0" over three empty
+             bars, which reads as data that failed to load. It says what it
+             has instead: the filings are there, the volume was not stated. */
+          hasVolume: s.totalShares > 0,
+          noVolume: s.totalShares <= 0,
+          filingsCount: s.count,
           totalSharesFormatted: formatShares(s.totalShares),
           buySharesFormatted: formatShares(s.buyShares),
           sellSharesFormatted: formatShares(s.sellShares),
