@@ -515,6 +515,10 @@
     "meaning": "The announced factory-gate price for Ezz Steel sets the monthly benchmark for local rebar distribution, directly determining the raw material procurement costs for domestic construction projects.",
     "meaning_ar": "يحدد السعر المعلن لحديد عز من أرض المصنع السعر المرجعي الشهري لتوزيع حديد التسليح محلياً، وهو ما يحدد تكاليف توريد المواد الخام لمشروعات التشييد والبناء المحلية."
   },
+  "اسعار الخضار والفاكهه اليوم في مصر.. الثلاثاء 8/9/2026": {
+    "meaning": "Daily agricultural commodity pricing tracks spot market valuations governed by wholesale supply flows, transportation costs, and retail market liquidity across domestic Egyptian distribution hubs.",
+    "meaning_ar": "تعكس أسعار السلع الزراعية اليومية تقييمات السوق الفورية المحددة بناءً على تدفقات المعروض بالجملة وتكاليف النقل ومستويات التداول في أسواق التجزئة المحلية."
+  },
   "اسعار الخضار والفاكهه اليوم في مصر.. تحديث سوق العبور": {
     "meaning": "Obour Market functions as the primary wholesale price-discovery hub for fresh produce in Egypt, where daily spot clearing prices establish the baseline input costs for downstream retail food supply chains.",
     "meaning_ar": "يمثل سوق العبور المنظومة المركزية لتسعير السلع الزراعية بالجملة في مصر، حيث تحدد أسعار التداول الفورية اليومية التكلفة الأساسية لسلاسل إمداد وتوزيع التجزئة الغذائية."
@@ -902,6 +906,10 @@
   "الرقابه الماليه وستارت اب ايجيبت تتعاونان لتطوير منصه رقميه لدعم الشركات الناشيه": {
     "meaning": "The Financial Regulatory Authority (FRA) and Startup Egypt establish a shared digital infrastructure that centralizes regulatory compliance, licensing procedures, and operational resources for emerging enterprises.",
     "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية ومؤسسة ستارت أب إيجيبت بنية تحتية رقمية مشتركة لمركزية إجراءات الامتثال التنظيمي والتراخيص والموارد التشغيلية للشركات الناشئة."
+  },
+  "الرييس السيسي يفتتح النسخه الثانيه من معرض العلمين الدولي للطيران والفضاء 2026": {
+    "meaning": "International aviation and defense exhibitions serve as direct B2B platforms for commercial procurement agreements, defense contracting, technology transfer, and industrial partnership deals between global aerospace manufacturers and local entities.",
+    "meaning_ar": "تعمل معارض الطيران والدفاع الدولية كمنصات مباشرة لإبرام صفقات الشراء التجاري، وعقود التوريد الدفاعي، ونقل التكنولوجيا، والشراكات الصناعية بين مصنعي الفضاء العالميين والجهات المحلية."
   },
   "الرييس السيسي يوجه بتبني مشروع لتخضير القاهره وتحويل المساحات المخلاه الي مسطحات خضراء": {
     "meaning": "This presidential directive allocates urban redevelopment activities toward landscaping and environmental contracting, involving public works tenders for contracting firms, nursery suppliers, and irrigation infrastructure providers across cleared municipal land in Cairo.",
@@ -1324,6 +1332,10 @@
     "meaning": "Broad declines across European benchmark indices reflect market-wide selling pressure, while a 10% drop in a heavily weighted constituent like Novartis directly pulls down both the healthcare sector and composite index levels.",
     "meaning_ar": "يعكس هبوط المؤشرات الأوروبية حركة بيع واسعة النطاق في الأسواق الإقليمية، حيث يؤدي انخفاض سهم ذي وزن نسبي كبير مثل نوفارتس بنسبة 10% إلى الضغط المباشر على مؤشرات قطاع الرعاية الصحية والمؤشرات المركبة العامة."
   },
+  "تراجع جماعي للموشرات بمنتصف التعاملات.. والثلاثيني يهبط بنسبه 0.19%": {
+    "meaning": "Mid-session trading reflects aggregate net selling pressure across listed equities, leading to an intraday decline in benchmark indices with the EGX30 recording a 0.19% decrease.",
+    "meaning_ar": "تعكس تداولات منتصف الجلسة ضغوطاً بيعية على الأسهم المقيدة، مما يؤدي إلى تراجع لحظي في المؤشرات الرئيسية مع تسجيل المؤشر الرئيسي EGX30 انخفاضاً بنسبة 0.19%."
+  },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
@@ -1696,6 +1708,10 @@
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
   },
+  "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
+    "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي في أوروبا جراء اشتداد المنافسة على شحنات الغاز المسال إلى رفع مؤشرات تكلفة الطاقة ومدخلات الإنتاج عالمياً، بما يشمل تكاليف استيراد الغاز المسال ومدخلات التشغيل للقطاعات الصناعية كثيفة الاستهلاك في مصر."
+  },
   "سعر اليورو في مصر اليوم الاثنين 7/9/2026.. ختام التعاملات": {
     "meaning": "The Euro exchange rate at the close of trading establishes the official valuation for clearing European trade invoices, calculating foreign-denominated obligations, and updating commercial bank foreign asset positions.",
     "meaning_ar": "يحدد سعر صرف اليورو في ختام التعاملات القيمة الرسمية لتسوية الفواتير التجارية الأوروبية، واحتساب الالتزامات بالعملة الأجنبية، وتحديث مراكز الأصول الأجنبية لدى البنوك التجارية."
@@ -1808,6 +1824,10 @@
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.63%": {
     "meaning": "The headline reports an opening session where bid volume exceeds ask volume across listed equities, lifting the benchmark EGX30 index by 0.63% alongside the broader market indices.",
     "meaning_ar": "يوضح الخبر تسجيل جلسة التداول الصباحية تفوقاً في أحجام عروض الشراء على عروض البيع عبر الأسهم المقيدة، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.63% بالتوازي مع صعود باقي مؤشرات السوق."
+  },
+  "صفقات الدمج والاستحواذ تعيد رسم خريطه الاستثمار في مصر": {
+    "meaning": "Mergers and acquisitions consolidate corporate assets, shift equity ownership structures, and alter market concentration across operating sectors.",
+    "meaning_ar": "تؤدي صفقات الدمج والاستحواذ إلى تجميع الأصول المؤسسية، وتغيير هياكل الملكية، وتعديل مستويات تركز الحصص السوقية عبر مختلف القطاعات التشغيلية."
   },
   "صفقه النفط بين فنزويلا وامريكا قد تخالف القانون": {
     "meaning": "Legal scrutiny surrounding bilateral crude supply agreements introduces regulatory risks that affect the compliance procedures of involved energy companies and the operational flow of cross-border oil shipments.",
