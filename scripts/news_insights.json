@@ -1443,6 +1443,10 @@
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
     "meaning_ar": "يؤسس البروتوكول بنية تحتية رقمية موحدة بين الهيئة العامة للرقابة المالية والبريد المصري لأتمتة المراسلات الرسمية، مما يقلل التكاليف التشغيلية ويسرع الإجراءات الإدارية داخل القطاع المالي غير المصرفي."
   },
+  "بريطانيا تحذر من تلاعب الذكاء الاصطناعي بسوق الكهرباء": {
+    "meaning": "Automated algorithmic trading systems using artificial intelligence in wholesale electricity markets execute high-frequency bidding strategies, which triggers regulatory scrutiny over pricing mechanisms and physical capacity withholding.",
+    "meaning_ar": "تعتمد أسواق الكهرباء بالجملة على خوارزميات الذكاء الاصطناعي في تنفيذ استراتيجيات عروض الأسعار وإدارة الإمدادات آلياً، مما يضع آليات التسعير الفوري وتوزيع القدرات التشغيلية تحت طائلة الرقابة والتنظيم."
+  },
   "بريطانيا تخفف قواعد الموافقه علي مشروعات البنيه التحتيه لتعزيز الاستثمار": {
     "meaning": "Easing regulatory approval frameworks streamlines the planning process and reduces the administrative lead time required to initiate infrastructure developments.",
     "meaning_ar": "يؤدي تخفيف الأطر التنظيمية للموافقات إلى تبسيط الإجراءات التخطيطية وتقليص المدة الزمنية الإدارية اللازمة لبدء تنفيذ مشروعات البنية التحتية."
@@ -2796,6 +2800,10 @@
   "واردات السيارات الملاكي واجزاوها تتراجع 4.2% الي 1.9 مليار دولار خلال 6 اشهر": {
     "meaning": "A 4.2% decline in passenger car and auto component imports reflects a contraction in foreign currency outflows dedicated to the automotive sector alongside adjusted inventory procurement by domestic vehicle distributors and assemblers.",
     "meaning_ar": "يعكس تراجع واردات سيارات الركوب ومكوناتها بنسبة 4.2% انخفاضاً في التدفقات النقدية الخارجة بالعملة الأجنبية المخصصة للقطاع، بالتوازي مع تعديل أحجام استيراد المخزون لدى موزعي ومجمعي السيارات في السوق المحلي."
+  },
+  "واشنطن تتهم شركات الذكاء الاصطناعي الصينيه بتقطير النماذج الامريكيه": {
+    "meaning": "Model distillation involves using the outputs of established proprietary artificial intelligence systems to train alternative models at reduced research and development expenditure, which raises intellectual property compliance disputes between technology markets.",
+    "meaning_ar": "تتضمن عملية تقطير النماذج استخدام مخرجات أنظمة الذكاء الاصطناعي التأسيسية لتدريب نماذج بديلة بتكاليف بحث وتطوير منخفضة، مما يثير نزاعات تنظيمية تتعلق بحماية حقوق الملكية الفكرية بين الأسواق التكنولوجية."
   },
   "واشنطن تصعد شروطها وايران ترفض الخضوع": {
     "meaning": "Geopolitical friction between the US and Iran maintains elevated risk premiums in global energy markets and alters maritime freight insurance rates in regional trade corridors.",
