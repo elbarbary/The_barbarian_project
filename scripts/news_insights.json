@@ -75,6 +75,10 @@
     "meaning": "High visitor footfall at commercial commodity exhibitions operates as a direct-to-consumer distribution channel, facilitating immediate inventory turnover for participating suppliers and producers outside traditional retail networks.",
     "meaning_ar": "يمثل الإقبال الجماهيري على المعارض السلعية قناة توزيع مباشرة من المنتجين والموردين إلى المستهلكين، مما يحقق تصريفاً للمخزون السلعي خارج شبكات التجزئة الوسيطة."
   },
+  "50.9 الف طن واردات ميناء دمياط من البضايع العامه خلال 24 ساعه": {
+    "meaning": "This metric reflects daily operational throughput at Damietta Port, measuring the volume of imported general cargo processed through Mediterranean maritime logistics infrastructure into domestic supply chains.",
+    "meaning_ar": "يعكس هذا الرقم معدل التشغيل اليومي وحجم التداول في ميناء دمياط، مقيساً كميات البضائع العامة الواردة عبر البنية التحتية للموانئ إلى سلاسل الإمداد المحلية."
+  },
   "500 مكتب بريد تستقبل طلبات تحديث بيانات البطاقات التموينيه المتوقفه": {
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
@@ -1933,6 +1937,10 @@
     "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
     "meaning_ar": "تؤدي السيطرة الأمريكية على الأصول النفطية الفنزويلية إلى تعديل آلية سداد القروض المضمونة بالنفط، مما يعيد توجيه تدفقات الخام والإيرادات النقدية المرتبطة به بعيداً عن الدائنين الصينيين."
   },
+  "شراكه بين «شل للزيوت» و«طاقه للبترول» لتوسيع انتشار منتجاتها في مصر": {
+    "meaning": "This commercial distribution agreement utilizes Taqa Petroleum's retail station network and logistics infrastructure to supply and market Shell-branded lubricants across the Egyptian domestic market.",
+    "meaning_ar": "تعتمد هذه الشراكة التجارية على شبكة محطات الوقود والبنية التحتية اللوجستية التابعة لشركة «طاقة للبترول» لتوزيع وطرح زيوت «شل» في السوق المحلي المصري."
+  },
   "شراكه بين سيتي ايدج ومدن مصر لتقديم خدمات اداره المنشات في مشروعات بالعلمين الجديده": {
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
@@ -2728,6 +2736,10 @@
   "“الوزراء” يستعرض تفاصيل الطرح الجديد للوحدات السكنيه بنظام الايجار": {
     "meaning": "The government operates a state-sponsored residential program that offers public housing units under structured lease agreements as an alternative to direct ownership models.",
     "meaning_ar": "تُدير الحكومة برنامجاً للإسكان العام يتيح وحدات سكنية عبر عقود إيجار محددة الشروط كبديل عن نماذج التمليك المباشر."
+  },
+  "“ام ان تي- حالا” تستحوذ علي 25% من قطاع التمويل متناهي الصغر": {
+    "meaning": "Holding a 25% market share concentrates one-quarter of the total active loan portfolio and financing issuance in the Egyptian non-banking microfinance sector within MNT-Halan's operational platform.",
+    "meaning_ar": "تعني هذه الحصة السوقية البالغة 25% تركز ربع إجمالي المحافظ التمويلية القائمة وعمليات المنح في قطاع التمويل متناهي الصغر غير المصرفي بمصر لدى المنصة التشغيلية لشركة «إم إن تي- حالًا»."
   },
   "“امريكانا” تبدي اهتمامها بالتعاون مع جهاز مستقبل مصر في مجال الاستثمار الزراعي": {
     "meaning": "The proposed cooperation represents backward integration into agricultural supply chains, securing raw material inputs for food processing operations through state-backed domestic farming projects.",
