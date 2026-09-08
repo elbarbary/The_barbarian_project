@@ -2333,6 +2333,10 @@
     "meaning": "Establishing an industrial tire complex introduces foreign direct investment into Egypt's automotive feeder sector and establishes localized manufacturing capacity for domestic supply and regional export.",
     "meaning_ar": "يمثل إنشاء مجمع لصناعة الإطارات دخول استثمارات أجنبية مباشرة في قطاع الصناعات المغذية للسيارات في مصر، ويوطن قدرات تصنيعية موجهة للتوزيع المحلي والتصدير الإقليمي."
   },
+  "ما البيانات المطلوبه من مستوردي الجبن الايدام والجودا في تحقيق مكافحه الاغراق؟": {
+    "meaning": "Trade authorities require importers of Edam and Gouda cheeses to submit cost, pricing, and volume records to assess whether foreign suppliers sell below domestic market value and evaluate material injury to local producers under trade remedy regulations.",
+    "meaning_ar": "تطلب سلطات التجارة من مستوردي جبن الإيدام والجودا تقديم بيانات التكاليف والأسعار والكميات لتحديد ما إذا كان الموردون الأجانب يبيعون بأسعار أقل من قيمتها في الأسواق المحلية، وتقييم وقوع ضرر مادي على المنتجين المحليين وفقاً للوائح المعالجات التجارية."
+  },
   "ما بين الارتفاع والخساير .. نتايج شركات اعضاء مجلس اداره البورصه تتباين في النصف الاول": {
     "meaning": "Semi-annual financial statements reflect divergent operational performance and earnings across listed companies represented on the EGX board, showing mixed outcomes between net profit expansion and net losses based on sector-specific dynamics and cost structures.",
     "meaning_ar": "تعكس القوائم المالية نصف السنوية تباينًا في الأداء التشغيلي ومستويات الربحية للشركات المقيدة الممثلة في مجلس إدارة البورصة، حيث تسجل بعضها أرباحًا بينما تُظهر أخرى خسائر صافية تبعًا لطبيعة تكاليف وتشغيل كل قطاع."
@@ -2597,6 +2601,10 @@
     "meaning": "This project represents a $5 million capital expenditure to establish a domestic manufacturing asset for calcium carbonate in the Sokhna industrial zone, adding local processing capacity for industrial mineral inputs.",
     "meaning_ar": "يمثل المشروع إنفاقاً رأسمالياً بقيمة 5 ملايين دولار لإنشاء أصل تصنيعي محلي لإنتاج كربونات الكالسيوم بالمنطقة الصناعية في السخنة، مما يضيف طاقة تشغيلية محلية لمعالجة الخامات الصناعية."
   },
+  "مع قرب المدارس.. \"كوم الشيخ سلامه\" منبع الشنط باسعار تنافسيه": {
+    "meaning": "Specialized local manufacturing clusters operate as centralized wholesale supply hubs, providing high-volume production and direct-from-source pricing to retail distribution channels during seasonal demand cycles.",
+    "meaning_ar": "تعمل التجمعات الصناعية المحلية المتخصصة كمراكز إمداد رئيسية لتجارة الجملة، حيث توفر إنتاجاً بأحجام كبيرة وأسعاراً مباشرة من المصنع لقنوات التوزيع بالتجزئة تزامناً مع الدورات الاستهلاكية الموسمية."
+  },
   "معيط: جزء كبير من عدم شعور المواطن بالتحسن الاقتصادي بسبب الصدمات الخارجيه": {
     "meaning": "Global macroeconomic shocks, including imported commodity price inflation and exchange rate fluctuations, directly transmit into the domestic cost structure, offsetting the transmission of aggregate fiscal stabilization to consumer-level purchasing power.",
     "meaning_ar": "تنتقل الصدمات الاقتصادية العالمية، كارتفاع أسعار السلع المستوردة وتقلبات أسعار الصرف، مباشرة إلى هيكل التكاليف المحلي، مما يعوض أثر استقرار المؤشرات المالية الكلية على القوة الشرائية للمستهلكين."
@@ -2749,6 +2757,10 @@
     "meaning": "A 24.3% growth rate reflects the largest recorded historical expansion in operational activity, service delivery, and digital infrastructure projects across the information and communications technology sector.",
     "meaning_ar": "يعكس تسجيل معدل نمو بنسبة 24.3% أعلى وتيرة تاريخية في حجم النشاط التشغيلي، وتقديم الخدمات، ومشاريع البنية التحتية الرقمية لقطاع تكنولوجيا المعلومات والاتصالات."
   },
+  "وزير الاستثمار يصدر قرارا بتاسيس «صندوق مصر الفرعي للاستثمار الصناعي»": {
+    "meaning": "This ministerial decree establishes a dedicated sub-fund under the Sovereign Fund of Egypt focused on direct equity and mezzanine financing for industrial assets and manufacturing infrastructure.",
+    "meaning_ar": "يُمثّل هذا القرار الوزاري تأسيس صندوق فرعي تابع لصندوق مصر السيادي يختص بضخ استثمارات مباشرة وشبه رأسمالية في الأصول الصناعية ومشروعات البنية التحتية التصنيعية."
+  },
   "وزير الاستثمار: نستهدف التعاون بين المختبر التنظيمي و«Trade Tech Sandbox» لدعم المصدرين بالتكنولوجيا": {
     "meaning": "The initiative links financial and trade technology regulatory sandboxes to test digital solutions for trade procedures and export financing under supervised regulatory frameworks.",
     "meaning_ar": "تربط المبادرة بين المختبرات التنظيمية للتكنولوجيا المالية وتكنولوجيا التجارة لاختبار الحلول الرقمية الخاصة بالإجراءات التجارية وتمويل الصادرات داخل أطر تنظيمية خاضعة للإشراف."
@@ -2764,6 +2776,10 @@
   "وزير التخطيط: نركز علي 5 قطاعات ذات اولويه لتعزيز النمو عبر اذرع بنك الاستثمار القومي": {
     "meaning": "The state directs capital and project financing through National Investment Bank subsidiaries and investment vehicles into five designated priority sectors.",
     "meaning_ar": "توجّه الدولة التدفقات التمويلية ورؤوس الأموال عبر الأذرع والشركات التابعة لبنك الاستثمار القومي نحو خمسة قطاعات محددة."
+  },
+  "وزير التخطيط: نوسس لمرحله جديده تركز علي “جوده الاستثمار” ونقل التكنولوجيا": {
+    "meaning": "This policy framework shifts public and foreign capital allocation toward high-value-add sectors, requiring direct technology transfer and localized industrial capabilities as criteria for project approvals.",
+    "meaning_ar": "يوجه هذا الإطار السياساتي تخصيص رؤوس الأموال العامة والأجنبية نحو القطاعات ذات القيمة المضافة العالية، مع اعتماد نقل التكنولوجيا وتوطين القدرات الصناعية كمعايير للموافقة على المشروعات."
   },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
