@@ -1616,6 +1616,10 @@
     "meaning": "Anti-dumping duties apply additional import tariffs on Dutch cheese shipments at Egyptian customs, raising the landed cost of imported dairy products relative to domestically produced alternatives.",
     "meaning_ar": "تفرض رسوم مكافحة الإغراق تعريفات جمركية إضافية على شحنات الجبن الهولندي في المنافذ الجمركية المصرية، مما يرفع التكلفة النهائية للمنتجات المستوردة مقارنة بالبدائل المصنعة محلياً."
   },
+  "تعرف علي مهله المستوردين للمشاركه في تحقيق مكافحه اغراق الجبن الهولندي": {
+    "meaning": "Trade authorities establish a formal regulatory timeframe for importers to submit pricing data, import volumes, and operational records as part of an active anti-dumping investigation into Dutch cheese. This procedural step determines market participation in the trade defense process and establishes the factual basis for potential tariff measures on imported dairy products.",
+    "meaning_ar": "تحدد سلطات التجارة مهلة تنظيمية رسمية للمستوردين لتقديم بيانات الأسعار وأحجام الاستيراد والسجلات التشغيلية ضمن تحقيق مكافحة إغراق الجبن الهولندي. تحدد هذه الخطوة الإجرائية مشاركة الأطراف المعنية في مسار المعالجة التجارية، وتشكل الأساس البياني لتقييم فرض تدابير جمركية على منتجات الألبان المستوردة."
+  },
   "تقرير دولي: حصه الصين من الدين الامريكي تهبط من 10% الي 2%": {
     "meaning": "This shift reflects a structural reallocation of China's foreign exchange reserves away from US Treasury securities toward other currencies, physical assets, or alternative sovereign debt instruments, changing the composition of foreign ownership in the US sovereign debt market.",
     "meaning_ar": "يعكس هذا التحول إعادة توزيع هيكلية لاحتياطيات النقد الأجنبي الصينية بعيداً عن سندات الخزانة الأمريكية نحو عملات وأصول مادية وأدوات دين سيادية أخرى، مما يغير هيكل الملكية الأجنبية في سوق الدين السيادي الأمريكي."
@@ -2696,6 +2700,10 @@
   "وزاره الدوله للاعلام تبدا التنسيق مع الوزارات لتحقيق تدفق ودقه المعلومات لوسايل الاعلام": {
     "meaning": "This operational coordination establishes a centralized framework across government entities for official information disclosure and public communication channels.",
     "meaning_ar": "يضع هذا التنسيق المؤسسي إطار عمل مركزي بين الجهات الحكومية للإفصاح عن المعلومات الرسمية وإدارة قنوات التواصل الإعلامي."
+  },
+  "وزاره العمل: تقييم 57 منشاه يثبت تحسن الامتثال لمعايير العمل الدوليه": {
+    "meaning": "The evaluation of enterprise compliance with international labor standards formalizes human capital governance and fulfills standardized regulatory criteria required within global supply chain frameworks.",
+    "meaning_ar": "يوثق تقييم المنشآت مدى مطابقة العمليات التشغيلية لمعايير العمل الدولية، مما يرسخ حوكمة الموارد البشرية ويفي بالاشتراطات التنظيمية المعتمدة ضمن سلاسل التوريد العالمية."
   },
   "وزاره الكهرباء تتراجع عن اشتراط موافقه الهييه الهندسيه لتركيب العدادات الكوديه": {
     "meaning": "Removing the Armed Forces Engineering Authority pre-approval requirement streamlines the administrative process for installing prepayment code meters, accelerating the transition of informal electricity consumption onto formal utility billing systems.",
