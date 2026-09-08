@@ -403,6 +403,10 @@
     "meaning": "An annual sales target of 15% reflects the company's operational plan to increase production volumes, order fulfillment, and distribution of medical packaging products across its client network during the fiscal year.",
     "meaning_ar": "يعكس استهداف نمو المبيعات بنسبة 15% خطة الشركة التشغيلية لزيادة أحجام الإنتاج وتلبية الطلبيات وتوسيع توزيع منتجات العبوات الطبية لشبكة عملائها خلال العام المالي."
   },
+  "«تطوير مصر» تستحوذ علي 150 فدانا بالشراكه في مستقبل سيتي": {
+    "meaning": "The partnership model expands the company's real estate land bank in Mostakbal City while sharing the initial capital expenditure and land-holding costs with the partner.",
+    "meaning_ar": "يضيف نموذج الشراكة مساحة جديدة إلى المحفظة العقارية للشركة في مستقبل سيتي، مع تقاسم النفقات الرأسمالية الأولية وتكاليف حيازة الأرض مع الشريك."
+  },
   "«كالتف» لدعم الابتكار تخطط لجمع 10 ملايين دولار لصندوقها الثاني «Tectonic Ventures»": {
     "meaning": "Capital raising for a venture fund expands the firm's assets under management and establishes a dedicated liquidity pool for direct equity allocations in target startups.",
     "meaning_ar": "تتمثل هذه الخطوة في تجميع سيولة نقدية جديدة ضمن صندوق استثمار رأس مال المخاطر لتوسيع حجم الأصول المدارة والمخصصة لتمويل حصص الملكية في الشركات الناشئة المستهدفة."
@@ -1728,6 +1732,10 @@
     "meaning": "The transition centralizes government ministries and commercial business districts within the New Administrative Capital, consolidating state administrative operations and corporate real estate activity into a single urban hub.",
     "meaning_ar": "يركز هذا التحول المقار الحكومية والوزارية ومناطق الأعمال والمال داخل العاصمة الإدارية الجديدة، مما يجمع إدارة الدولة والأنشطة العقارية التجارية ضمن نطاق جغرافي موحد."
   },
+  "خالد عبدالغفار: ادراج معامل هييه الدواء بقايمه منظمه الصحه العالميه انجاز دولي جديد": {
+    "meaning": "The listing of the Egyptian Drug Authority's laboratories by the World Health Organization establishes international regulatory accreditation for local pharmaceutical testing standards and aligns batch release quality controls with global benchmarks.",
+    "meaning_ar": "يمنح إدراج معامل هيئة الدواء المصرية بقائمة منظمة الصحة العالمية اعتماداً رقابياً دولياً لمعايير فحص الأدوية محلياً، ويوحد ضوابط جودة الإفراج عن التشغيلات مع المعايير القياسية العالمية."
+  },
   "خالد هاشم: اطلاق اول صندوق استثمار صناعي خلال سبتمبر الجاري": {
     "meaning": "An industrial investment fund functions as a specialized capital-pooling vehicle that channels institutional and private financing directly into manufacturing assets, operating facilities, and industrial equity.",
     "meaning_ar": "يُمثل صندوق الاستثمار الصناعي وعاءً مالياً متخصصاً يقوم بتجميع رؤوس الأموال وتوجيه التمويل المباشر وحصص الملكية نحو الأصول التشغيلية والمشروعات في القطاع الصناعي."
@@ -2733,6 +2741,10 @@
     "meaning": "Expanding agro-industrial value chains integrates raw agricultural crop inputs directly with midstream processing, packaging, and distribution operations within the domestic supply chain.",
     "meaning_ar": "يربط توسيع سلاسل القيمة في التصنيع الزراعي بين مدخلات المحاصيل الزراعية الأولية وعمليات المعالجة الغذائية والتعبئة والتوزيع داخل سلاسل التوريد المحلية."
   },
+  "وزير التخطيط: نركز علي 5 قطاعات ذات اولويه لتعزيز النمو عبر اذرع بنك الاستثمار القومي": {
+    "meaning": "The state directs capital and project financing through National Investment Bank subsidiaries and investment vehicles into five designated priority sectors.",
+    "meaning_ar": "توجّه الدولة التدفقات التمويلية ورؤوس الأموال عبر الأذرع والشركات التابعة لبنك الاستثمار القومي نحو خمسة قطاعات محددة."
+  },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
     "meaning_ar": "يؤسس التعاون الفني الثنائي بين مصر ومالي أطرًا مؤسسية لتبادل المعرفة الفنية وتنسيق الإجراءات التنظيمية وبرامج بناء القدرات في قطاع المشروعات الصغيرة والمتوسطة وريادة الأعمال."
@@ -3016,6 +3028,10 @@
   "“مدن للتطوير”: ضخ 16.5 مليار جنيه بالانشاءات في 3 مشروعات بالقاهره": {
     "meaning": "The company allocates and deploys 16.5 billion EGP in capital expenditures directly into construction activities across three active real estate developments in Cairo, advancing operational build rates and contractor procurement.",
     "meaning_ar": "توجه الشركة وتضخ نفقات رأسمالية بقيمة 16.5 مليار جنيه مباشرة في الأعمال الإنشائية عبر ثلاثة مشروعات عقارية في القاهرة، مما يرفع وتيرة التنفيذ الميداني والتعاقدات مع المقاولين."
+  },
+  "“مصر السيادي” يوسس صندوقا للاستثمار الصناعي براسمال مرخص 10 مليارات جنيه": {
+    "meaning": "Establishing this dedicated sub-fund creates a specialized investment vehicle with an authorized capital framework of EGP 10 billion to deploy equity capital and direct investments into domestic manufacturing operations.",
+    "meaning_ar": "يؤسس هذا الإجراء وعاءً استثماريًا متخصصًا برأسمال مرخص يبلغ 10 مليارات جنيه لتوجيه المساهمات الرأسمالية المباشرة والشراكات نحو الأنشطة والمنشآت الصناعية المحلية."
   },
   "“منثم” تستهدف مضاعفه الاصول تحت ادارتها الي 8 مليارات جنيه خلال 2027": {
     "meaning": "Managing a higher volume of assets under management (AUM) involves aggregating client inflows into underlying money market funds and fixed-income instruments, generating operational revenue through asset-based management fees.",
