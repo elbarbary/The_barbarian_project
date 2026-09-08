@@ -535,6 +535,10 @@
     "meaning": "The announced factory-gate price for Ezz Steel sets the monthly benchmark for local rebar distribution, directly determining the raw material procurement costs for domestic construction projects.",
     "meaning_ar": "يحدد السعر المعلن لحديد عز من أرض المصنع السعر المرجعي الشهري لتوزيع حديد التسليح محلياً، وهو ما يحدد تكاليف توريد المواد الخام لمشروعات التشييد والبناء المحلية."
   },
+  "اسعار الخشب اليوم الثلاثاء 8-9-2026 في السوق المحليه": {
+    "meaning": "Daily tracking of domestic timber prices reflects raw material input costs for construction, furniture manufacturing, and real estate development sectors.",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار الأخشاب في السوق المحلية تكاليف مدخلات المواد الخام لقطاعات التشييد والبناء وصناعة الأثاث والتطوير العقاري."
+  },
   "اسعار الخضار والفاكهه اليوم في مصر.. الثلاثاء 8/9/2026": {
     "meaning": "Daily agricultural commodity pricing tracks spot market valuations governed by wholesale supply flows, transportation costs, and retail market liquidity across domestic Egyptian distribution hubs.",
     "meaning_ar": "تعكس أسعار السلع الزراعية اليومية تقييمات السوق الفورية المحددة بناءً على تدفقات المعروض بالجملة وتكاليف النقل ومستويات التداول في أسواق التجزئة المحلية."
@@ -586,6 +590,10 @@
   "اسعار السمك اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
     "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
+  },
+  "اسعار السمك اليوم الثلاثاء 8-9-2026 في مصر": {
+    "meaning": "Daily fish price publications reflect the spot pricing mechanisms in the local wholesale and retail markets, where values are determined by daily catch volumes, aquaculture supply, and transportation costs relative to consumer demand.",
+    "meaning_ar": "تعكس النشرات اليومية لأسعار الأسماك آليات التسعير الفوري في أسواق الجملة والتجزئة، حيث تتحدد الأسعار بناءً على حجم المعروض اليومي من المصايد والمزارع السمكية وتكاليف النقل مقابل حجم الطلب الاستهلاكي."
   },
   "اسعار السمك اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "This indicates regular market updates on wholesale and retail seafood commodity prices, reflecting local aquaculture supply levels, fuel logistics costs, and consumer demand in Egypt's food and protein sector.",
@@ -883,6 +891,10 @@
     "meaning": "The government allocates public compensation funds to individuals displaced or affected by national infrastructure expansion projects.",
     "meaning_ar": "تخصص الحكومة مخصصات مالية من الموازنة العامة لتعويض الأفراد المتضررين من نزع الملكية لتنفيذ مشروعات البنية التحتية القومية."
   },
+  "الخميس.. اخر موعد للتقديم علي 2898 قطعه ارض سكنيه في 17 مدينه جديده": {
+    "meaning": "The Ministry of Housing closes the public application window for 2,898 residential land plots across 17 new urban cities, a primary market allocation mechanism that converts state-held urban land reserves into private development inventory through down-payment deposits.",
+    "meaning_ar": "تغلق وزارة الإسكان باب الحجز لـ 2898 قطعة أرض سكنية في 17 مدينة جديدة، وهي آلية طرح أولي تحول أراضي الدولة المرفقة إلى مطورين وأفراد مقابل سداد مقدمات الحجز وتدفقات السيولة المرتبطة بها."
+  },
   "الدولار يتعثر رغم ارتفاع رهانات رفع الفايده الامريكيه في سبتمبر": {
     "meaning": "The US dollar diverges from benchmark interest rate expectations as currency pricing reflects counterbalancing global macroeconomic data and cross-asset capital flows.",
     "meaning_ar": "يتحرك سعر صرف الدولار الأمريكي بمعزل عن توقعات أسعار الفائدة المرتفعة، حيث تعكس تسعيرات العملة توازنات مدفوعة ببيانات الاقتصاد الكلي وتدفقات السيولة بين الأسواق."
@@ -970,6 +982,10 @@
   "الزراعه: الخريف مرحله مهمه للمحاصيل": {
     "meaning": "The autumn season serves as the operational start of the cultivation cycle for winter crops, dictating the procurement and deployment schedules for agricultural inputs such as seeds and fertilizers across the supply chain.",
     "meaning_ar": "يمثل موسم الخريف البداية التشغيلية لدورة زراعة المحاصيل الشتوية، مما يحدد جداول استخدام وتداول المدخلات الزراعية مثل التقاوي والأسمدة عبر سلاسل الإمداد."
+  },
+  "الزراعه: المساحه المنزرعه تتجاوز 10.5 مليون فدان خلال 2025 – 2026": {
+    "meaning": "Expanding total cultivated land to over 10.5 million feddans scales up the domestic agricultural production base and increases operational demand for farming inputs, including fertilizers, seeds, and irrigation infrastructure across the agribusiness sector.",
+    "meaning_ar": "يؤدي اتساع إجمالي المساحة المنزرعة لتتجاوز 10.5 مليون فدان إلى توسيع قاعدة الإنتاج الزراعي المحلي وزيادة متطلبات التشغيل للمدخلات الزراعية من أسمدة وبذور وبنية تحتية للري في قطاع الصناعات الزراعية."
   },
   "الزراعه: توطين تقاوي البطاطس في مصر يسهم في ضخ استثمارات جديده": {
     "meaning": "Localizing potato seed production substitutes imported agricultural inputs with domestic propagation facilities, shifting capital deployment toward local multiplication infrastructure and domestic supply chains.",
@@ -1547,6 +1563,10 @@
   "جهاد عطيه: 100 كيلو جرام حجم انتاج مركز الملاذ الامن من الفضه يوميا": {
     "meaning": "This operational metric establishes the current daily refining and manufacturing capacity of the facility, supplying 100 kilograms of processed silver to the local precious metals market per day.",
     "meaning_ar": "يحدد هذا المؤشر التشغيلي الطاقة الإنتاجية اليومية الحالية للمنشأة في صقل وتصنيع الفضة، والتي تضخ 100 كيلوجرام يومياً في سوق المعادن الثمينة المحلي."
+  },
+  "جهاز المشروعات يفتح مصدر تمويل جديد باصدار توريق": {
+    "meaning": "Securitization converts the agency's existing loan receivables into tradeable debt instruments backed by the underlying cash flows, providing immediate upfront liquidity against its credit portfolio.",
+    "meaning_ar": "تقوم آلية التوريق بتحويل محفظة مستحقات القروض القائمة لدى الجهاز إلى أدوات دين قابلة للتداول مدعومة بالتدفقات النقدية لتلك القروض، مما يتيح سيولة نقدية فورية مقابل الأصول الائتمانية."
   },
   "جهاز تنميه المشروعات يشارك في معرض الصين الدولي": {
     "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
