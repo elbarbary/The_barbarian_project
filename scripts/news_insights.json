@@ -395,6 +395,10 @@
     "meaning": "The General Petroleum Company (GPC) adds 12 new oil and gas discoveries to its exploration portfolio during the 2025/2026 fiscal year, expanding its proven hydrocarbon asset base and operational drilling footprint.",
     "meaning_ar": "تضيف الشركة العامة للبترول 12 كشفاً جديداً للنفط والغاز إلى محفظتها الاستكشافية خلال العام المالي 2025/2026، مما يوسع قاعدة أصولها الهيدروكربونية المؤكدة ونطاق عمليات الحفر التابعة لها."
   },
+  "«العبوات الطبيه» تستهدف 15% نموا في المبيعات بنهايه العام الجاري": {
+    "meaning": "An annual sales target of 15% reflects the company's operational plan to increase production volumes, order fulfillment, and distribution of medical packaging products across its client network during the fiscal year.",
+    "meaning_ar": "يعكس استهداف نمو المبيعات بنسبة 15% خطة الشركة التشغيلية لزيادة أحجام الإنتاج وتلبية الطلبيات وتوسيع توزيع منتجات العبوات الطبية لشبكة عملائها خلال العام المالي."
+  },
   "«كالتف» لدعم الابتكار تخطط لجمع 10 ملايين دولار لصندوقها الثاني «Tectonic Ventures»": {
     "meaning": "Capital raising for a venture fund expands the firm's assets under management and establishes a dedicated liquidity pool for direct equity allocations in target startups.",
     "meaning_ar": "تتمثل هذه الخطوة في تجميع سيولة نقدية جديدة ضمن صندوق استثمار رأس مال المخاطر لتوسيع حجم الأصول المدارة والمخصصة لتمويل حصص الملكية في الشركات الناشئة المستهدفة."
@@ -762,6 +766,10 @@
   "الارجنتين تهدد بفرض عقوبات علي مشاريع نفطيه في محيط جزر فوكلاند": {
     "meaning": "Sanction threats by a sovereign state against offshore energy operations create jurisdictional and regulatory disputes that alter the operating and legal frameworks for concession holders.",
     "meaning_ar": "تؤدي التهديدات بفرض عقوبات سيادية على عمليات الطاقة البحرية إلى نشوء نزاعات تنظيمية وقانونية تغير الأطر التشغيلية لشركات الامتياز."
+  },
+  "الاستثمار: تاسيس 26.5 الف شركه برووس اموال 97.5 مليار جنيه النصف الاول 2026": {
+    "meaning": "Company establishment data tracks the volume of newly registered legal entities and committed capital entering the formal economy across commercial sectors during the reporting period.",
+    "meaning_ar": "تعكس بيانات تأسيس الشركات حجم الكيانات القانونية المسجلة حديثاً ورؤوس الأموال المصدرة التي تدخل الاقتصاد الرسمي عبر مختلف القطاعات التجارية خلال الفترة المحددة."
   },
   "الاستثمار: نستهدف التعاون بين المختبر التنظيمي و«Trade Tech Sandbox» لدعم المصدرين بالتكنولوجيا": {
     "meaning": "This arrangement links financial and trade regulatory sandboxes to test and deploy digital trade technologies and automated compliance systems for exporters within a controlled supervisory framework.",
@@ -2041,6 +2049,10 @@
     "meaning": "Net foreign assets represent the total foreign currency assets held by the central bank and commercial banks minus their foreign liabilities. A level above $28.4 billion reflects a net surplus balance sheet position where foreign currency holdings exceed external obligations across the banking system.",
     "meaning_ar": "يمثل صافي الأصول الأجنبية إجمالي الأصول بالعملات الأجنبية لدى البنك المركزي والبنوك التجارية مطروحاً منها الالتزامات الأجنبية المستحقة، ويعكس هذا الرقم مركزاً مالياً موجباً تتجاوز فيه الأصول الأجنبية حجم الخصوم والالتزامات الخارجية للقطاع المصرفي."
   },
+  "صرف 8.19 مليار جنيه من مستحقات المصدرين خلال 6 اشهر": {
+    "meaning": "Government export rebate initiatives disburse accrued subsidy dues directly to eligible exporting firms, converting state receivables into immediate liquid cash balances on corporate balance sheets.",
+    "meaning_ar": "تقوم مبادرات رد أعباء الصادرات الحكومية بسداد المستحقات المتأخرة للشركات المصدرة، مما يحول الحسابات المدينة المستحقة لدى الدولة إلى سيولة نقدية في الميزانيات العمومية للشركات."
+  },
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.14%": {
     "meaning": "A collective index rise reflects aggregate buying volume exceeding selling volume across large-cap and broad-market constituent equities during early trading, which adjusts benchmark weighted price levels upward relative to the prior session's close.",
     "meaning_ar": "يعكس الصعود الجماعي للمؤشرات تفوق أحجام الشراء الإجمالية على أحجام البيع عبر الأسهم القيادية وأسهم السوق ككل خلال التداولات المبكرة، مما يؤدي إلى تعديل المستويات السعرية المرجحة للمؤشرات صعوداً مقارنة بإغلاق الجلسة السابقة."
@@ -2560,6 +2572,10 @@
   "نشطاء الصحه في الهند يصعدون ضد تحذيرات الاغذيه المعباه امام المحكمه العليا": {
     "meaning": "Legal escalation regarding front-of-package labelling mandates introduces regulatory compliance adjustments and packaging redesign costs for packaged food manufacturers.",
     "meaning_ar": "يفرض التصعيد القضائي بشأن ملصقات التحذير على الأغذية المعبأة تعديلات في الامتثال التنظيمي وتكاليف إعادة تصميم التغليف لشركات الصناعات الغذائية."
+  },
+  "نص كلمه الرييس السيسي بالقمه المصريه اليونانيه القبرصيه": {
+    "meaning": "Trilateral intergovernmental summits establish a diplomatic and regulatory framework for cross-border energy infrastructure, natural gas transmission, and electricity interconnection projects across the Eastern Mediterranean.",
+    "meaning_ar": "توفر القمم الحكومية الثلاثية إطاراً تنظيمياً ودبلوماسياً لمشروعات البنية التحتية للطاقة العابرة للحدود، ونقل الغاز الطبيعي، والربط الكهربائي في منطقة شرق المتوسط."
   },
   "نقيب الفلاحين: مفيش دوله في العالم تاكل 20 مليون طن قمح في السنه": {
     "meaning": "High national wheat consumption requires reliance on both local harvests and international grain imports, directly linking state food subsidy expenditures and foreign exchange allocations to global agricultural commodity procurement.",
