@@ -591,6 +591,10 @@
     "meaning": "This is a daily commodity pricing bulletin tracking wholesale and retail meat prices, which directly reflect current livestock feed costs, import pricing mechanisms, and immediate supply levels across domestic distribution channels.",
     "meaning_ar": "يمثل هذا رصداً يومياً لأسعار بيع اللحوم بالجملة والتجزئة، والتي تعكس بشكل مباشر تكاليف الأعلاف الحالية، وآليات تسعير الاستيراد، ومستويات المعروض في قنوات التوزيع المحلية."
   },
+  "اسعار النحاس تسجل مستوي قياسيا للجلسه الثانيه علي التوالي": {
+    "meaning": "Copper serves as a primary raw material for industrial and cable manufacturing sectors, where record commodity prices directly elevate procurement costs and expand working capital requirements for producers.",
+    "meaning_ar": "يُعد النحاس مادة خام رئيسية لقطاعات الصناعة وتصنيع الكابلات، حيث تؤدي المستويات القياسية لأسعار السلعة إلى رفع تكاليف الشراء المباشرة وزيادة متطلبات رأس المال العامل لدى الشركات المصنعة."
+  },
   "اسهم الصين تجذب الباحثين عن بديل لرهانات الذكاء الاصطناعي المزدحمه": {
     "meaning": "Capital reallocates from concentrated positions in global artificial intelligence equities toward Chinese equity markets as part of cross-border portfolio rebalancing driven by relative valuation differentials.",
     "meaning_ar": "تتحول تدفقات رؤوس الأموال من المراكز المركزة في أسهم قطاع الذكاء الاصطناعي العالمية نحو الأسهم الصينية، ضمن آلية إعادة موازنة المحافظ الاستثمارية بناءً على الفروق في التقييمات السعرية بين الأسواق."
@@ -750,6 +754,10 @@
   "البورصه تصعد 0.72% وسط تداولات بقيمه 15.5 مليار جنيه": {
     "meaning": "The main stock index advances by 0.72% as executed buy orders outweigh sell orders, with aggregate transaction turnover across listed securities reaching EGP 15.5 billion during the trading session.",
     "meaning_ar": "يرتفع المؤشر الرئيسي للبورصة بنسبة 0.72% نتيجة تفوق أوامر الشراء المنفذة على أوامر البيع، مع تسجيل إجمالي قيمة تداولات على الأوراق المالية المقيدة بلغت 15.5 مليار جنيه خلال جلسة التداول."
+  },
+  "البورصه علي موعد مع تصحيح موقت تمهيدا لاختبار 57000 نقطه": {
+    "meaning": "Technical market corrections occur when trading volumes and price levels adjust following sustained upward movements, functioning as an equilibrium mechanism where market participants rebalance positions relative to specific index benchmark levels.",
+    "meaning_ar": "تحدث حركات التصحيح الفني في السوق عندما يعاد ضبط مستويات الأسعار وأحجام التداول بعد موجات صعود، حيث تعمل كآلية توازن يعيد من خلالها المتعاملون تسوية مراكزهم مقارنة بمستويات مؤشرات محددة."
   },
   "البورصه واكاديميه السادات توسعان نطاق بروتوكول التعاون ليضم شركات الوساطه والجهات المقيده": {
     "meaning": "The expanded protocol incorporates brokerage firms and listed companies into joint professional training and capacity-building programs between the Egyptian Exchange and Sadat Academy for Administrative Sciences.",
