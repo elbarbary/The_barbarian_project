@@ -415,6 +415,10 @@
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
     "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
   },
+  "اداره “الدوليه للمحاصيل” تقترح ترحيل الارباح للعام القادم": {
+    "meaning": "Carrying forward profits retains net earnings within the equity section of the balance sheet as retained earnings rather than distributing cash dividends to shareholders, keeping internal cash within the company.",
+    "meaning_ar": "يعني ترحيل الأرباح إبقاء صافي الدخل المحقق ضمن بند الأرباح المرحلة في حقوق الملكية بالميزانية بدلاً من توزيعه كأرباح نقدية على المساهمين، مما يحافظ على السيولة داخل الشركة."
+  },
   "ارباح “الدوليه للمحاصيل” السنويه تتراجع الي 451.7 مليون جنيه": {
     "meaning": "The decline in annual net profit to 451.7 million EGP reflects a contraction in bottom-line earnings after accounting for operating costs, input prices, and financing expenses across the financial year.",
     "meaning_ar": "يعكس تراجع صافي الأرباح السنوية إلى 451.7 مليون جنيه انخفاضاً في الأرباح الصافية المحققة بعد احتساب تكاليف التشغيل وأسعار مدخلات الإنتاج والمصروفات التمويلية خلال العام المالي."
@@ -450,6 +454,10 @@
   "ارتفاع تكاليف الاقتراض في بريطانيا يدفع الاسر الي مراجعه الرهون العقاريه وتكاليف المعيشه": {
     "meaning": "Higher benchmark interest rates raise debt-servicing expenses on variable-rate and refinancing mortgages, increasing the allocation of disposable household income toward interest obligations.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة المرجعية إلى زيادة أعباء خدمة الدين على الرهون العقارية ذات الفائدة المتغيرة وتلك المعاد تمويلها، مما يرفع نسبة الفوائد المسددة من الدخل المتاح للأسر."
+  },
+  "ارتفاع جماعي للموشرات بمستهل التعاملات.. والثلاثيني يصعد بنسبه 0.31%": {
+    "meaning": "Initial trading shows a net inflow of liquidity across listed equities, leading to price gains in constituents across the main benchmark EGX 30 and broader market indices.",
+    "meaning_ar": "تعكس بداية الجلسة تدفقات نقدية شرائية على الأسهم المقيدة، مما يؤدي إلى تحركات سعرية صاعدة في مكونات مؤشر إيجي إكس 30 والمؤشرات العامة للسوق."
   },
   "ارتفاع سهم “فولكس فاجن” 9% عقب اتفاق لاعاده الهيكله": {
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
@@ -1616,6 +1624,10 @@
     "meaning": "Official opening exchange rate data for the Saudi Riyal reflects the current interbank foreign currency pricing mechanism, determining the direct transaction costs for bilateral trade settlements, travel expenditures, and cross-border remittances between Egypt and Saudi Arabia.",
     "meaning_ar": "تعكس بيانات أسعار صرف الريال السعودي في بداية التعاملات آلية تسعير العملات الأجنبية في سوق المعاملات بين البنوك (الإنتربنك)، والتي تحدد التكلفة المباشرة لتسوية المعاملات التجارية ونفقات السفر والتحويلات المالية بين مصر والمملكة العربية السعودية."
   },
+  "سعر الريال السعودي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
+    "meaning": "The headline reports the opening exchange rate of the Saudi Riyal against the Egyptian Pound, which serves as the pricing benchmark for bilateral trade settlement, remittances, and religious tourism costs.",
+    "meaning_ar": "يوضح الخبر سعر الصرف الافتتاحي للريال السعودي مقابل الجنيه المصري في البنوك، وهو ما يحدد تكاليف تسوية المعاملات التجارية المتبادلة، وتحويلات العاملين، ونفقات السياحة الدينية."
+  },
   "سعر الريال السعودي في مصر اليوم الاثنين 7/9/2026.. ارتفاع بالختام": {
     "meaning": "An increase in the Saudi Riyal exchange rate against the Egyptian Pound directly raises the local currency cost of trade imports, religious travel obligations, and cross-border payment settlements denominated in SAR.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الريال السعودي مقابل الجنيه المصري إلى زيادة التكلفة الفعلية بالعملة المحلية للواردات التجارية ونفقات رحلات العمرة وتسوية المعاملات المالية المحددة بالريال."
@@ -2252,6 +2264,10 @@
   "وزاره النقل ترفع درجه الاستعداد بالسكك الحديديه والمترو استعدادا للعام الدراسي الجديد": {
     "meaning": "This operational measure increases capacity and operating frequency across the public transport network, accommodating higher seasonal passenger volumes and driving ticket revenues for the state-run rail and metro authorities.",
     "meaning_ar": "يؤدي هذا الإجراء التشغيلي إلى زيادة الطاقة الاستيعابية وكثافة الرحلات عبر شبكة النقل العام، لاستيعاب الزيادة الموسمية في أعداد الركاب وتعزيز الإيرادات التشغيلية لهيئات السكك الحديدية والمترو."
+  },
+  "وزير الاتصالات: استراتيجيه وطنيه متكامله لمراكز البيانات وتعزيز السياده الرقميه": {
+    "meaning": "A national data center strategy establishes unified regulatory standards, telecommunications infrastructure requirements, and local data hosting protocols for the information technology sector.",
+    "meaning_ar": "تحدد الاستراتيجية الوطنية لمراكز البيانات أطراً تنظيمية موحدة، واشتراطات للبنية التحتية للاتصالات، وبروتوكولات لاستضافة وحفظ البيانات محلياً لقطاع تكنولوجيا المعلومات."
   },
   "وزير الاتصالات: قطاع تكنولوجيا المعلومات يحقق اعلي معدل نمو في تاريخه عند 24.3%": {
     "meaning": "A 24.3% growth rate reflects the largest recorded historical expansion in operational activity, service delivery, and digital infrastructure projects across the information and communications technology sector.",
