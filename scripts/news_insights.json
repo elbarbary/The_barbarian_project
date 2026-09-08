@@ -1071,6 +1071,10 @@
     "meaning": "A reduction in a major shareholder's equity stake alters the company's ownership structure and shifts voting rights and equity distribution among market participants.",
     "meaning_ar": "يؤدي تخفيض حصة مساهم رئيسي إلى تعديل هيكل الملكية في الشركة وإعادة توزيع حقوق التصويت والأسهم بين المتعاملين في السوق."
   },
+  "المملكه المتحده تتجه لدفع اعلي تكلفه اقتراض في بيع سندات منذ عام 1998": {
+    "meaning": "Higher sovereign bond yields directly elevate the government's debt-servicing expenses and establish a higher risk-free benchmark rate across credit markets.",
+    "meaning_ar": "يؤدي ارتفاع عائد السندات السيادية مباشرة إلى زيادة أعباء خدمة الدين الحكومي ويرفع سعر الفائدة القياسي الخالي من المخاطر في أسواق الائتمان."
+  },
   "الموسسات الدوليه ترصد تحسن اداء السندات المصريه": {
     "meaning": "An improvement in sovereign bond performance reflects rising secondary market prices and declining yields, which narrows the state's sovereign credit spread against international benchmarks.",
     "meaning_ar": "يعكس تحسن أداء السندات السيادية ارتفاع أسعار تداولها في السوق الثانوية وتراجع عوائدها، مما يقلص الفارق بين عائد الدين السيادي والمؤشرات القياسية الدولية."
@@ -1255,6 +1259,10 @@
     "meaning": "Official inflation data directly dictates the US Federal Reserve's monetary policy adjustments, which determine benchmark interest rate levels and drive international capital movements across emerging and global financial markets.",
     "meaning_ar": "تحدد بيانات التضخم الرسمية مسار السياسة النقدية لمجلس الاحتياطي الفيدرالي الأمريكي، وهو ما يضبط أسعار الفائدة الأساسية ويوجه حركة تدفقات رؤوس الأموال في الأسواق المالية العالمية والناشئة."
   },
+  "بيرنا المكسيكيه تستكشف فرص الشراكه والتعاون مع شركات الادويه المصريه": {
+    "meaning": "Partnership explorations between foreign and domestic pharmaceutical companies involve technology transfer frameworks, contract manufacturing agreements, and local distribution channels. These arrangements link multinational drug formulations with existing domestic production capacity and regional supply chains.",
+    "meaning_ar": "تتضمن مباحثات الشراكة بين شركات الأدوية الأجنبية والمحلية أطر نقل التكنولوجيا، واتفاقيات التصنيع التعاقدي، وقنوات التوزيع المحلية، حيث تربط هذه الترتيبات بين تركيبات الأدوية الدولية والطاقات الإنتاجية القائمة وسلاسل التوريد المحلية."
+  },
   "بيسنت: اسعار النفط قد تهبط الي 40 دولارا للبرميل بعد انتهاء الصراع مع ايران": {
     "meaning": "Global crude oil benchmarks incorporate a geopolitical risk premium during regional conflicts, and the cessation of supply disruption risks realigns pricing with baseline global supply-demand balances and marginal extraction costs.",
     "meaning_ar": "تعكس أسعار النفط العالمية علاوة مخاطر جيوسياسية أثناء النزاعات الإقليمية، بينما يعيد انحسار مخاطر انقطاع الإمدادات تسعير الخام وفقاً لتوازنات العرض والطلب الأساسية وتكاليف الإنتاج الحدية."
@@ -1300,9 +1308,17 @@
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
   },
+  "تراجع الاسهم اليابانيه مع ارتفاع الين لاعلي مستوياته منذ فبراير": {
+    "meaning": "A stronger yen reduces the value of Japanese exporters' foreign earnings when converted back into the local currency and raises the price of Japanese goods in international markets, which puts downward pressure on major equity indices.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف الين إلى خفض قيمة الأرباح الخارجية للشركات اليابانية المصدرة عند تحويلها للعملة المحلية، ويزيد من تكلفة منتجاتها في الأسواق العالمية، مما ينعكس بتراجع في مؤشرات الأسهم الرئيسية."
+  },
   "تراجع الانتاج الصناعي في المانيا باكبر وتيره في عام": {
     "meaning": "Industrial output data tracks the physical volume of goods produced by factories, mines, and utilities, with a contraction indicating lower aggregate manufacturing activity in Europe's largest economy.",
     "meaning_ar": "ترصد بيانات الإنتاج الصناعي الحجم الفعلي للسلع المنتجة في قطاعات المصانع والتعدين والمرافق، ويشير انكماشها إلى انخفاض إجمالي النشاط التصنيعي في أكبر اقتصاد أوروبي."
+  },
+  "تراجع الموشرات الاوروبيه وسهم نوفارتس يهبط 10%": {
+    "meaning": "Broad declines across European benchmark indices reflect market-wide selling pressure, while a 10% drop in a heavily weighted constituent like Novartis directly pulls down both the healthcare sector and composite index levels.",
+    "meaning_ar": "يعكس هبوط المؤشرات الأوروبية حركة بيع واسعة النطاق في الأسواق الإقليمية، حيث يؤدي انخفاض سهم ذي وزن نسبي كبير مثل نوفارتس بنسبة 10% إلى الضغط المباشر على مؤشرات قطاع الرعاية الصحية والمؤشرات المركبة العامة."
   },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
