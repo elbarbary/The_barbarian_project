@@ -1,4 +1,8 @@
 {
+  "\"ام اند بي\" توقع مذكره تفاهم مع المختبر التنظيمي ل\"الرقابه الماليه\" لتعزيز حضوره الاقليمي": {
+    "meaning": "This memorandum of understanding enrolls the company in the Financial Regulatory Authority's regulatory sandbox, where financial technology products and services undergo testing in a live, controlled regulatory environment under direct supervisory oversight.",
+    "meaning_ar": "تتيح مذكرة التفاهم للشركة الانضمام إلى المختبر التنظيمي للهيئة العامة للرقابة المالية، حيث يجري اختبار المنتجات ونماذج التكنولوجيا المالية في بيئة تجريبية ورقابية خاضعة للإشراف المباشر."
+  },
   "\"اميرالد للاتصالات\" تخفض حصتها في راسمال المشروعات الصناعيه الي 5.4%": {
     "meaning": "This equity transaction reduces the investing firm's direct ownership interest and associated voting power in the investee company to 5.4%, modifying the investee's overall shareholding structure.",
     "meaning_ar": "تؤدي هذه المعاملة إلى تقليص نسبة الملكية المباشرة وحقوق التصويت للشركة المستثمرة في رأسمال الشركة محل الاستثمار لتصل إلى 5.4%، مما يغير هيكل المساهمين في الشركة."
@@ -503,6 +507,10 @@
     "meaning": "Traditional fuel supply constraints drive consumer substitution toward alternative powertrains, directly shifting automotive retail volumes from internal combustion engine vehicles to electric models.",
     "meaning_ar": "تؤدي اختناقات إمدادات الوقود التقليدي إلى تحول نمط الاستهلاك نحو بدائل الطاقة، مما ينعكس في زيادة حصة مبيعات السيارات الكهربائية مقارنة بمركبات الاحتراق الداخلي."
   },
+  "استثمارات تويوتا تسوشو في مشروعات الطاقه بمصر": {
+    "meaning": "Foreign corporate investment in the energy sector allocates capital and technical expertise to domestic infrastructure projects, operating through public-private partnerships or direct asset development.",
+    "meaning_ar": "يخصص الاستثمار الأجنبي المباشر في قطاع الطاقة رؤوس الأموال والخبرات التقنية لمشروعات البنية التحتية المحلية، وذلك عبر الشراكات بين القطاعين العام والخاص أو التطوير المباشر للأصول."
+  },
   "استثمارات مصنع اف تكس لخيوط البوليستر": {
     "meaning": "Capital investments in the F-Tex polyester yarn facility direct funds toward expanding industrial manufacturing capacity, installing specialized machinery, and supplying synthetic fibers directly to domestic textile supply chains.",
     "meaning_ar": "توجّه الاستثمارات الرأسمالية في مصنع «أف تكس» لخيوط البوليستر الأموال نحو توسيع الطاقة التصنيعية وتركيب خطوط إنتاج متخصصة لتوريد الألياف الصناعية إلى سلاسل إمداد الغزل والنسيج المحلية."
@@ -926,6 +934,10 @@
   "الذهب يهبط مع توقعات رفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the yield on fixed-income dollar assets, raising the opportunity cost of holding non-yielding commodities like gold and exerting downward price pressure on the metal.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة عائد الأصول الدولارية ذات الدخل الثابت، مما يرفع تكلفة الفرصة البديلة لحيازة الذهب كأصل لا يدر عائدًا ويضغط على أسعاره عالميًا."
+  },
+  "الرقابه الماليه تستعرض حصاد عام من دعم الابتكار في التكنولوجيا الماليه غير المصرفيه": {
+    "meaning": "The Financial Regulatory Authority (FRA) issues its annual operational review regarding regulatory sandboxes, licensing frameworks, and digital infrastructure deployed for non-banking financial technology companies.",
+    "meaning_ar": "تستعرض الهيئة العامة للرقابة المالية تقريرها السنوي التشغيلي بشأن البيئات الرقابية التجريبية وأطر التراخيص والبنية التحتية الرقمية المطبقة للشركات العاملة في مجال التكنولوجيا المالية غير المصرفية."
   },
   "الرقابه الماليه تشكل مجموعه عمل لتعزيز مبادي المسيوليه المجتمعيه في الانشطه غير المصرفيه": {
     "meaning": "The Financial Regulatory Authority establishes a working group to develop regulatory frameworks and standards for corporate social responsibility across non-banking financial institutions.",
@@ -1416,6 +1428,10 @@
     "meaning": "Industrial output data tracks the physical volume of goods produced by factories, mines, and utilities, with a contraction indicating lower aggregate manufacturing activity in Europe's largest economy.",
     "meaning_ar": "ترصد بيانات الإنتاج الصناعي الحجم الفعلي للسلع المنتجة في قطاعات المصانع والتعدين والمرافق، ويشير انكماشها إلى انخفاض إجمالي النشاط التصنيعي في أكبر اقتصاد أوروبي."
   },
+  "تراجع الصادرات الالمانيه للمره الاولي منذ يناير": {
+    "meaning": "A drop in German exports reflects reduced outbound trade volumes from Europe's largest manufacturing economy, marking an inflection in monthly trade balance data.",
+    "meaning_ar": "يعكس انخفاض الصادرات الألمانية تراجعاً في أحجام التجارة الخارجية لأكبر اقتصاد صناعي في أوروبا، مسجلاً نقطة تحول في بيانات الميزان التجاري الشهري."
+  },
   "تراجع الموشرات الاوروبيه وسهم نوفارتس يهبط 10%": {
     "meaning": "Broad declines across European benchmark indices reflect market-wide selling pressure, while a 10% drop in a heavily weighted constituent like Novartis directly pulls down both the healthcare sector and composite index levels.",
     "meaning_ar": "يعكس هبوط المؤشرات الأوروبية حركة بيع واسعة النطاق في الأسواق الإقليمية، حيث يؤدي انخفاض سهم ذي وزن نسبي كبير مثل نوفارتس بنسبة 10% إلى الضغط المباشر على مؤشرات قطاع الرعاية الصحية والمؤشرات المركبة العامة."
@@ -1695,6 +1711,10 @@
   "روسيا تعزز صادراتها النفطيه الي الصين عبر القطب الشمالي": {
     "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
     "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
+  },
+  "روهان فرنانديز رييسا لمجلس اداره جنرال موتورز": {
+    "meaning": "Executive leadership appointments at the board level transfer the oversight of corporate strategy, operational governance, and capital allocation directives to the new chairperson.",
+    "meaning_ar": "تنقل التعيينات القيادية على مستوى مجلس الإدارة مسؤوليات الإشراف على الاستراتيجية المؤسسية، والحوكمة التشغيلية، وتوجيهات تخصيص رأس المال إلى رئيس المجلس الجديد."
   },
   "روهان فرنانديز يتولي منصب رييس مجلس الاداره والمدير التنفيذي لشركه جنرال موتورز مصر وافريقيا": {
     "meaning": "A change in executive leadership places operational governance, regional manufacturing coordination, and supply chain oversight for Egypt and African markets under a new management mandate.",
@@ -2556,6 +2576,10 @@
   "وزير الزراعه يستقبل سفير مصر الجديد لدي العراق لبحث تعزيز التعاون": {
     "meaning": "Government-level agricultural coordination with export markets establishes bilateral trade frameworks, facilitating cross-border clearance procedures and phytosanitary protocol alignment for agribusiness companies.",
     "meaning_ar": "يضع التنسيق الزراعي الحكومي المشترك مع الأسواق التصديرية أطر التبادل التجاري الثنائي، مما ينظم إجراءات التخليص الجمركي وتطبيق بروتوكولات الحجر الزراعي لشركات القطاع الزراعي."
+  },
+  "وزير الزراعه يوجه قطاعات الوزاره بالتفاعل الفوري مع طلبات نواب الشعب": {
+    "meaning": "The directive establishes a direct operational channel between the Ministry of Agriculture and parliamentary representatives to process legislative and constituency requests regarding agricultural services and inputs.",
+    "meaning_ar": "يحدد التوجيه قناة تشغيلية مباشرة بين وزارة الزراعة ونواب البرلمان لمتابعة ومعالجة الطلبات الرقابية والخدمية المتعلقة بقطاع الزراعة ومستلزمات الإنتاج."
   },
   "وزير الزراعه: مستعدون لنقل الخبرات في استصلاح الاراضي والري الحديث الي العراق": {
     "meaning": "This framework establishes bilateral technical cooperation in land reclamation and modern irrigation, involving the export of agricultural engineering expertise and operational consulting services between Egypt and Iraq.",
