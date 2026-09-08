@@ -1,0 +1,34 @@
+.simulator-panel{--sim-gap:20px}
+.sim-entry-exit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+.sim-entry-exit label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--t2)}
+.sim-entry-exit select{width:100%;min-width:0;min-height:48px;padding:10px;border-radius:12px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font:inherit}
+.sim-history-status{margin-top:16px;padding:16px;border-radius:18px;background:var(--accTint);font-size:13px;line-height:1.65;color:var(--ink)}
+.sim-history-status p{margin:8px 0;color:var(--t2)}
+.sim-history-status button{min-height:44px;padding:10px 16px;border:1px solid var(--rule);border-radius:12px;color:var(--accent);background:var(--surface);font:inherit;cursor:pointer}
+.simulator-panel .sim-controls-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--sim-gap)}
+.simulator-panel .sim-controls-grid>div{min-width:0;padding:18px;border-radius:20px;background:var(--sunk)}
+.simulator-panel label{line-height:1.6}
+.sim-assumption{font-size:12px;line-height:1.7;color:var(--t2);margin:12px 0 0}
+.sim-data-note{margin:0 0 20px;padding:14px 16px;background:var(--sunk);border:1px solid var(--rule);border-radius:16px;color:var(--t2);font-size:13px;line-height:1.65}
+.sim-timing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px;padding:20px;border:1px solid var(--rule);border-radius:22px;background:var(--surface)}
+.sim-timing-grid label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--t2);min-width:0}
+.sim-timing-grid label input,.sim-timing-grid label select{margin-top:auto}
+.sim-timing-grid input,.sim-timing-grid select{width:100%;min-width:0;box-sizing:border-box;padding:10px 12px;min-height:44px;border:1px solid var(--rule);border-radius:12px;background:var(--sunk);color:var(--ink);font:inherit;font-size:15px}
+.sim-fee-sources{display:flex;flex-wrap:wrap;gap:16px;margin-block:14px;font-size:13px}
+.sim-fee-sources a{color:var(--accent);text-underline-offset:4px}
+.simulator-panel input:focus-visible,.simulator-panel select:focus-visible,.simulator-panel [role=button]:focus-visible{outline:3px solid var(--accent)!important;outline-offset:3px}
+@media(max-width:700px){
+ .simulator-panel{padding:18px 14px!important;border-radius:24px!important}
+ .simulator-panel .sim-controls-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+ .sim-timing-grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:14px;gap:14px}
+ .simulator-panel input:not([type=checkbox]),.simulator-panel select{font-size:16px!important;min-height:44px}
+ .simulator-panel [role=button]{min-height:44px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+}
+
+/* The panel before its module arrives. Same frame as the loaded panel, so the
+   tab does not jump when the simulator replaces it. */
+.simulator-panel.sim-waiting {
+  border-radius: 24px; background: var(--surface); border: 1px solid var(--edgeIn);
+  box-shadow: var(--sh); padding: 26px 28px; color: var(--faint);
+  font-size: 13.5px; line-height: 1.6;
+}

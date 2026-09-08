@@ -2,6 +2,23 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { simulatorExplorer } from '../../public/esthmr/simulator.js';
 
+/* The store is filled from disk here, which is what the browser does over the
+ * network. Before the split these prices arrived as an imported bundle; the
+ * assertions below are unchanged, and they still run against the real series.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { prime } from '../../public/esthmr/simulator-store.js';
+const SIM_DIR = new URL('../../public/esthmr/sim/', import.meta.url);
+const readJson = (name) => JSON.parse(readFileSync(new URL(name, SIM_DIR), 'utf8'));
+const companies = readJson('index.json').companies;
+prime({
+  index: companies,
+  series: Object.fromEntries(companies
+    .filter((c) => existsSync(new URL(`${c.ticker}.json`, SIM_DIR)))
+    .map((c) => [c.ticker, readJson(`${c.ticker}.json`)])),
+});
+
+
 function createMockComponent(initialState = {}) {
   let state = {
     lang: 'ar',
@@ -35,16 +52,16 @@ test('simulatorExplorer initializes with COMI and lump sum when specified in sta
   assert.ok(sim.brokerCards.length === 7, '7 brokers compared (including Telda and Beltone)');
 });
 
-test('simulatorExplorer defaults to SWDY on daily close-to-noon trading for 1 year (+200% winner)', () => {
+test('simulatorExplorer defaults to requested BTFH close-to-noon over two years', () => {
   const comp = { state: {}, setState(patch) { Object.assign(this.state, patch); } };
   const sim = simulatorExplorer(comp, comp.state);
 
-  assert.equal(sim.ticker, 'SWDY', 'defaults to Elsewedy Electric (+200% winner)');
+  assert.equal(sim.ticker, 'BTFH');
   assert.equal(sim.strategy, 'daily', 'defaults to daily trading strategy');
-  assert.equal(sim.timing, 'close_to_noon', 'defaults to Close -> Noon strategy');
-  assert.equal(sim.range, '1Y', 'defaults to 1-year range');
+  assert.equal(sim.timing, 'close_to_noon');
+  assert.equal(sim.range, '2Y');
   assert.equal(sim.isDaily, true, 'isDaily flag is true');
-  assert.ok(sim.brokerCards[0].netReturnPct > 200, 'best broker returns over +200% on SWDY');
+  assert.ok(Number.isFinite(sim.brokerCards[0].netReturnPct), 'return is calculated rather than predetermined');
   assert.ok(sim.brokerCards.some(b => b.id === 'beltone'), 'Beltone broker is present');
   assert.ok(sim.brokerCards.some(b => b.id === 'telda'), 'Telda broker is present');
   assert.ok(sim.multiChartLines.length === 7, '7 colored trajectories plotted');

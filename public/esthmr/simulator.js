@@ -1,4 +1,7 @@
-import { BROKER_PROFILES, SIM_STOCKS, STANDARD_STATUTORY_FEES } from './simulator-data.js';
+import { runSimulation } from './simulator-engine.js';
+import {PRICE_COLUMN, TIME_ORDER} from './simulator-times.js';
+import { BROKER_PROFILES, STANDARD_STATUTORY_FEES } from './simulator-brokers.js';
+import { indexOfCompanies, seriesOf, loadFailed } from './simulator-store.js';
 
 /**
  * Catmull-Rom to Cubic Bézier Spline converter.
@@ -36,20 +39,44 @@ function getCubicBezierSpline(points) {
 export function simulatorExplorer(component, D, ar, React) {
   const st = (component && component.state) ? component.state : {};
 
-  // Default state: Default to SWDY (+200% winner strategy) on daily Close -> 12pm Noon for 1 Year
-  const defaultTicker = SIM_STOCKS['SWDY'] ? 'SWDY' : (SIM_STOCKS['BTFH'] ? 'BTFH' : (SIM_STOCKS['COMI'] ? 'COMI' : Object.keys(SIM_STOCKS)[0]));
+  /* The directory and the one company's prices, from the store.
+   *
+   * Both are fetched, so either can be missing for a frame. `waiting` says so
+   * and the panel draws a line instead of an empty chart; every figure below
+   * is computed from whatever actually arrived, never from a placeholder. */
+  const redraw = () => { if (component && component.setState) component.setState({}); };
+  const SIM_STOCKS = indexOfCompanies(redraw) || {};
+  const haveIndex = Object.keys(SIM_STOCKS).length > 0;
+
+  // User-selected default, not a performance-ranked or recommended strategy.
+  const defaultTicker = SIM_STOCKS['BTFH'] ? 'BTFH' : (Object.keys(SIM_STOCKS)[0] || 'BTFH');
   const selectedTicker = st.simTicker && SIM_STOCKS[st.simTicker] ? st.simTicker : defaultTicker;
   const strategy = st.simStrategy || 'daily'; // 'daily' | 'lump' | 'dca'
-  const timing = st.simTiming || 'close_to_noon'; // 'close_to_noon' | 'close_to_open' | 'open_to_close' | 'close_to_close' | 'open_to_noon' | 'noon_to_close'
-  const range = st.simRange || '1Y'; // '1M' | '3M' | '6M' | '1Y' | '2Y' | 'MAX' | 'CUSTOM'
+  const timing = st.simTiming || 'close_to_noon';
+  const entryTime = st.simEntryTime || (timing.startsWith('open') ? 'open' : timing.startsWith('noon') ? 'noon' : 'close');
+  const exitTime = st.simExitTime || (timing.endsWith('noon') ? 'noon' : timing.endsWith('open') ? 'open' : 'close');
+  const requestedHold = Math.floor(Number(st.simHoldSessions ?? (timing.startsWith('close') ? 1 : 0)) || 0);
+  const holdSessions = Math.max(TIME_ORDER[exitTime] <= TIME_ORDER[entryTime] ? 1 : 0, Math.min(60, requestedHold));
+  const everySessions = Math.max(1, Math.min(60, Math.floor(Number(st.simEverySessions) || 1)));
+  const fillCount = Math.max(1, Math.min(20, Math.floor(Number(st.simFillCount) || 1)));
+  const range = st.simRange || '2Y';
   const capital = Math.max(1000, Number(st.simCapital) || 100000);
   const monthlyAmount = Math.max(200, Number(st.simMonthly) || 2500);
   const includeThndrSub = Boolean(st.includeThndrSub);
 
-  const activeStock = SIM_STOCKS[selectedTicker] || SIM_STOCKS['SWDY'] || SIM_STOCKS['BTFH'] || SIM_STOCKS['COMI'];
+  // The index entry carries the names and the span; the company's own file
+  // carries the prices. Merged so the rest of this function reads one object,
+  // exactly as it did when both came from a single bundle.
+  const companySeries = haveIndex ? seriesOf(selectedTicker, redraw) : null;
+  const indexEntry = SIM_STOCKS[selectedTicker] || SIM_STOCKS['SWDY'] || SIM_STOCKS['BTFH'] || SIM_STOCKS['COMI'] || {};
+  const activeStock = { ...indexEntry, sessions: (companySeries && companySeries.sessions) || [] };
+  const waitingForData = !haveIndex || !companySeries;
 
   // Sessions dataset: [[date, open, noon, close], ...]
-  const stockSessions = activeStock.sessions || [];
+  const usingCloseHistory = st.simHistoryTicker === selectedTicker && entryTime === 'close' && exitTime === 'close';
+  const recovered = (companySeries && companySeries.intraday) || null;
+  const unsupportedCurrency = recovered?.currency && recovered.currency !== 'EGP';
+  const stockSessions = usingCloseHistory ? st.simCloseHistory : (recovered?.sessions || activeStock.sessions || []);
   const earliestDate = stockSessions[0]?.[0] || activeStock.firstDate || '2024-09-01';
   const latestDate = stockSessions[stockSessions.length - 1]?.[0] || activeStock.lastDate || '2026-09-02';
 
@@ -57,9 +84,9 @@ export function simulatorExplorer(component, D, ar, React) {
   let startDate = earliestDate;
   let endDate = latestDate;
 
-  if (range === 'CUSTOM' && st.simStartDate && st.simEndDate) {
-    startDate = st.simStartDate;
-    endDate = st.simEndDate;
+  if (range === 'CUSTOM') {
+    startDate = st.simStartDate || earliestDate;
+    endDate = st.simEndDate || latestDate;
   } else if (range === '1M') {
     startDate = getPastMonthsDate(latestDate, 1);
   } else if (range === '3M') {
@@ -74,23 +101,26 @@ export function simulatorExplorer(component, D, ar, React) {
     startDate = earliestDate;
   }
 
-  // Clamping to stock's actual data bounds
+  const requestedStartDate = startDate;
+  const requestedEndDate = endDate;
+  // Clamping to stock's actual data bounds, disclosed alongside the controls.
   if (startDate < earliestDate) startDate = earliestDate;
   if (endDate > latestDate) endDate = latestDate;
-  if (startDate > endDate) startDate = earliestDate;
+  // An invalid or empty range stays empty instead of silently using other dates.
 
   // Filter sessions within [startDate, endDate]
   let activeSessions = stockSessions.filter(s => s[0] >= startDate && s[0] <= endDate);
-  if (activeSessions.length < 2) {
-    activeSessions = stockSessions.slice(-30);
-    if (activeSessions.length < 2) activeSessions = stockSessions;
-  }
+  const hasSessions = activeSessions.length > 0;
+  const missingExitPrices = hasSessions && (strategy === 'daily'
+    ? !activeSessions.some((s,i)=>s[PRICE_COLUMN[entryTime]]>0 && activeSessions[i+holdSessions]?.[PRICE_COLUMN[exitTime]]>0)
+    : !(activeSessions.at(-1)[PRICE_COLUMN[exitTime]]>0));
+  const rangeClipped = startDate !== requestedStartDate || endDate !== requestedEndDate;
 
   // Compute actual price movement across the window
-  const firstSession = activeSessions[0];
-  const lastSession = activeSessions[activeSessions.length - 1];
-  const buyPrice = firstSession[1] || firstSession[3]; // open or close
-  const sellPrice = lastSession[3]; // close
+  const firstSession = activeSessions[0] || [startDate, 0, 0, 0];
+  const lastSession = activeSessions.at(-1) || [endDate, 0, 0, 0];
+  const buyPrice = firstSession[PRICE_COLUMN[entryTime]] ?? 0;
+  const sellPrice = lastSession[PRICE_COLUMN[exitTime]] ?? 0;
   const rawPriceChangePct = buyPrice > 0 ? (((sellPrice - buyPrice) / buyPrice) * 100) : 0;
 
   // Approximate duration in months for subscription modeling
@@ -98,280 +128,16 @@ export function simulatorExplorer(component, D, ar, React) {
   const startM = parseInt(firstSession[0].slice(5, 7), 10);
   const endY = parseInt(lastSession[0].slice(0, 4), 10);
   const endM = parseInt(lastSession[0].slice(5, 7), 10);
-  const horizonMonths = Math.max(1, (endY - startY) * 12 + (endM - startM) + 1);
+  const horizonMonths = hasSessions ? Math.floor((Date.parse(lastSession[0]) - Date.parse(firstSession[0])) / 86400000 / 30) + 1 : 0;
 
   // ════════════════════════════════════════════════════════════════════════════
   // SIMULATION ENGINE (Active Daily Turnover, Lump Sum, DCA)
   // ════════════════════════════════════════════════════════════════════════════
-  const brokerOutcomes = BROKER_PROFILES.map(broker => {
-    let investedCapital = capital;
-    let grossEndingValue = 0;
-    let netEndingCash = 0;
-    let totalBrokerFee = 0;
-    let totalStatutoryFee = 0;
-    let totalTicketFee = 0;
-    let totalSubFee = 0;
-    let executionCount = 0;
-    let sharesCount = 0;
-    let netProfit = 0;
-    let netReturnPct = 0;
-    let feeDragPct = 0;
-    let avgCostPerShare = buyPrice;
-    let trajectoryPoints = []; // for plotting multi-line series
-
-    if (strategy === 'daily') {
-      // ── Strategy 1: Active Daily Intraday / Overnight Turnover ──
-      // Sessions are formatted as [date, open, noon, close]
-      const totalSess = activeSessions.length;
-      const isNextDay = (timing === 'close_to_noon' || timing === 'close_to_open' || timing === 'close_to_close');
-      const stepCount = isNextDay ? Math.max(1, totalSess - 1) : totalSess;
-      executionCount = stepCount * 2; // 1 Entry + 1 Liquidation per cycle
-
-      let currentCash = capital;
-
-      for (let i = 0; i < stepCount; i++) {
-        let pBuy = 0;
-        let pSell = 0;
-
-        if (timing === 'close_to_noon') {
-          // Buy at Close of day i (2:30 PM) -> Sell at Noon of day i+1 (12:00 PM)
-          pBuy = activeSessions[i][3]; // close
-          pSell = activeSessions[i + 1][2]; // noon
-        } else if (timing === 'close_to_open') {
-          // Buy at Close of day i (2:30 PM) -> Sell at Open of day i+1 (10:00 AM)
-          pBuy = activeSessions[i][3]; // close
-          pSell = activeSessions[i + 1][1]; // open
-        } else if (timing === 'open_to_close') {
-          // Buy at Open of day i (10:00 AM) -> Sell at Close of day i (2:30 PM)
-          pBuy = activeSessions[i][1]; // open
-          pSell = activeSessions[i][3]; // close
-        } else if (timing === 'open_to_noon') {
-          // Buy at Open of day i (10:00 AM) -> Sell at Noon of day i (12:00 PM)
-          pBuy = activeSessions[i][1]; // open
-          pSell = activeSessions[i][2]; // noon
-        } else if (timing === 'noon_to_close') {
-          // Buy at Noon of day i (12:00 PM) -> Sell at Close of day i (2:30 PM)
-          pBuy = activeSessions[i][2]; // noon
-          pSell = activeSessions[i][3]; // close
-        } else {
-          // Default: close_to_close (day i close -> day i+1 close)
-          pBuy = activeSessions[i][3];
-          pSell = activeSessions[i + 1][3];
-        }
-
-        if (!pBuy || pBuy <= 0) pBuy = buyPrice;
-        if (!pSell || pSell <= 0) pSell = pBuy;
-        const ratio = pSell / pBuy;
-
-        // 1. Entry Execution
-        const entryBrokerComm = Math.max(currentCash * broker.brokerPct, broker.brokerMin);
-        const entryTicket = broker.ticketFee;
-        const entryStatutory = currentCash * broker.regPct + broker.mcdrTicket;
-        const entryTotalFee = entryBrokerComm + entryTicket + entryStatutory;
-
-        const netCapitalDeployed = Math.max(0, currentCash - entryTotalFee);
-        const dayShares = pBuy > 0 ? (netCapitalDeployed / pBuy) : 0;
-        sharesCount += dayShares;
-
-        // Gross value at liquidation point
-        const grossLiquidation = netCapitalDeployed * ratio;
-
-        // 2. Liquidation Execution
-        const exitBrokerComm = Math.max(grossLiquidation * broker.brokerPct, broker.brokerMin);
-        const exitTicket = broker.ticketFee;
-        const exitStatutory = grossLiquidation * broker.regPct + broker.mcdrTicket;
-        const exitTotalFee = exitBrokerComm + exitTicket + exitStatutory;
-
-        const netAfterExit = Math.max(0, grossLiquidation - exitTotalFee);
-
-        totalBrokerFee += (entryBrokerComm + exitBrokerComm);
-        totalStatutoryFee += (currentCash * broker.regPct) + (grossLiquidation * broker.regPct);
-        totalTicketFee += (entryTicket + exitTicket + broker.mcdrTicket * 2);
-
-        currentCash = netAfterExit;
-
-        const stepDate = isNextDay ? activeSessions[i + 1][0] : activeSessions[i][0];
-        trajectoryPoints.push({
-          date: stepDate,
-          netCash: currentCash,
-          returnPct: ((currentCash - capital) / capital) * 100
-        });
-      }
-
-      // Thndr subscription if active
-      if (broker.id === 'thndr' && includeThndrSub) {
-        totalSubFee = horizonMonths * (broker.monthlySub || 55.0);
-      }
-
-      const totalFees = totalBrokerFee + totalStatutoryFee + totalTicketFee + totalSubFee;
-      netEndingCash = Math.max(0, currentCash - totalSubFee);
-      netProfit = netEndingCash - capital;
-      netReturnPct = (netProfit / capital) * 100;
-      feeDragPct = (totalFees / capital) * 100;
-      avgCostPerShare = buyPrice;
-      sharesCount = Math.round(sharesCount / (stepCount || 1));
-
-      return {
-        ...broker,
-        investedCapital,
-        grossEndingValue: Math.max(0, capital + netProfit + totalFees),
-        netEndingCash,
-        sharesCount,
-        totalFees,
-        totalBrokerFee,
-        totalStatutoryFee,
-        totalTicketFee,
-        totalSubFee,
-        netProfit,
-        netReturnPct,
-        feeDragPct,
-        executionCount,
-        avgCostPerShare,
-        trajectoryPoints
-      };
-    } else if (strategy === 'lump') {
-      // ── Strategy 2: Lump Sum (Single Entry & Single Liquidation) ──
-      investedCapital = capital;
-      executionCount = 2; // 1 Entry + 1 Exit
-
-      // 1. Entry Execution
-      const buyBrokerComm = Math.max(investedCapital * broker.brokerPct, broker.brokerMin);
-      const buyTicket = broker.ticketFee;
-      const buyStatutory = investedCapital * broker.regPct + broker.mcdrTicket;
-      const buyTotalFee = buyBrokerComm + buyTicket + buyStatutory;
-
-      const netBuyInvested = Math.max(0, investedCapital - buyTotalFee);
-      sharesCount = buyPrice > 0 ? (netBuyInvested / buyPrice) : 0;
-
-      // 2. Liquidation Execution
-      grossEndingValue = sharesCount * sellPrice;
-      const sellBrokerComm = Math.max(grossEndingValue * broker.brokerPct, broker.brokerMin);
-      const sellTicket = broker.ticketFee;
-      const sellStatutory = grossEndingValue * broker.regPct + broker.mcdrTicket;
-      const sellTotalFee = sellBrokerComm + sellTicket + sellStatutory;
-
-      if (broker.id === 'thndr' && includeThndrSub) {
-        totalSubFee = horizonMonths * (broker.monthlySub || 55.0);
-      }
-
-      totalBrokerFee = buyBrokerComm + sellBrokerComm;
-      totalTicketFee = buyTicket + sellTicket;
-      totalStatutoryFee = buyStatutory + sellStatutory;
-      const totalFees = totalBrokerFee + totalTicketFee + totalStatutoryFee + totalSubFee;
-
-      netEndingCash = Math.max(0, grossEndingValue - sellTotalFee - totalSubFee);
-      netProfit = netEndingCash - investedCapital;
-      netReturnPct = (netProfit / investedCapital) * 100;
-      feeDragPct = (totalFees / investedCapital) * 100;
-
-      // Trajectory points across sessions
-      trajectoryPoints = activeSessions.map(s => {
-        const estClose = s[3];
-        const estExitVal = sharesCount * estClose;
-        const estExitComm = Math.max(estExitVal * broker.brokerPct, broker.brokerMin);
-        const estExitStat = estExitVal * broker.regPct + broker.mcdrTicket;
-        const estExitNet = Math.max(0, estExitVal - (estExitComm + estExitStat + broker.ticketFee));
-        const estPnl = estExitNet - investedCapital;
-        return {
-          date: s[0],
-          netCash: estExitNet,
-          returnPct: (estPnl / investedCapital) * 100
-        };
-      });
-
-      return {
-        ...broker,
-        investedCapital,
-        grossEndingValue,
-        netEndingCash,
-        sharesCount: Math.floor(sharesCount),
-        totalFees,
-        totalBrokerFee,
-        totalStatutoryFee,
-        totalTicketFee,
-        totalSubFee,
-        netProfit,
-        netReturnPct,
-        feeDragPct,
-        executionCount,
-        avgCostPerShare: buyPrice,
-        trajectoryPoints
-      };
-    } else {
-      // ── Strategy 3: Monthly DCA (Dollar-Cost Averaging) ──
-      const monthlyBars = activeStock.monthly.filter(b => b[0] >= startDate && b[0] <= endDate);
-      const dcaBars = monthlyBars.length >= 3 ? monthlyBars : activeStock.monthly.slice(-12);
-      const intervalsCount = dcaBars.length;
-      investedCapital = intervalsCount * monthlyAmount;
-      executionCount = intervalsCount + 1; // monthly entries + 1 final liquidation
-
-      let cumShares = 0;
-      let cumInvested = 0;
-
-      for (let i = 0; i < intervalsCount; i++) {
-        const closeP = dcaBars[i][1];
-        const comm = Math.max(monthlyAmount * broker.brokerPct, broker.brokerMin);
-        const stat = monthlyAmount * broker.regPct + broker.mcdrTicket;
-        const ticket = broker.ticketFee;
-        const totalFee = comm + stat + ticket;
-
-        totalBrokerFee += comm;
-        totalStatutoryFee += stat;
-        totalTicketFee += ticket;
-
-        const netInv = Math.max(0, monthlyAmount - totalFee);
-        const sh = closeP > 0 ? (netInv / closeP) : 0;
-        cumShares += sh;
-        cumInvested += monthlyAmount;
-
-        const curVal = cumShares * closeP;
-        trajectoryPoints.push({
-          date: dcaBars[i][0],
-          netCash: curVal,
-          returnPct: cumInvested > 0 ? (((curVal - cumInvested) / cumInvested) * 100) : 0
-        });
-      }
-
-      grossEndingValue = cumShares * sellPrice;
-      const exitComm = Math.max(grossEndingValue * broker.brokerPct, broker.brokerMin);
-      const exitStat = grossEndingValue * broker.regPct + broker.mcdrTicket;
-      const exitTicket = broker.ticketFee;
-      totalBrokerFee += exitComm;
-      totalStatutoryFee += exitStat;
-      totalTicketFee += exitTicket;
-
-      if (broker.id === 'thndr' && includeThndrSub) {
-        totalSubFee = intervalsCount * (broker.monthlySub || 55.0);
-      }
-
-      const totalFees = totalBrokerFee + totalStatutoryFee + totalTicketFee + totalSubFee;
-      netEndingCash = Math.max(0, grossEndingValue - (exitComm + exitStat + exitTicket) - totalSubFee);
-      netProfit = netEndingCash - investedCapital;
-      netReturnPct = investedCapital > 0 ? ((netProfit / investedCapital) * 100) : 0;
-      feeDragPct = investedCapital > 0 ? ((totalFees / investedCapital) * 100) : 0;
-      avgCostPerShare = cumShares > 0 ? (investedCapital / cumShares) : buyPrice;
-      sharesCount = Math.floor(cumShares);
-
-      return {
-        ...broker,
-        investedCapital,
-        grossEndingValue,
-        netEndingCash,
-        sharesCount,
-        totalFees,
-        totalBrokerFee,
-        totalStatutoryFee,
-        totalTicketFee,
-        totalSubFee,
-        netProfit,
-        netReturnPct,
-        feeDragPct,
-        executionCount,
-        avgCostPerShare,
-        trajectoryPoints
-      };
-    }
-  });
+  const brokerOutcomes = BROKER_PROFILES.map(broker => runSimulation({
+    sessions: missingExitPrices || unsupportedCurrency ? [] : activeSessions, broker, capital, monthlyAmount, strategy,
+    entry: entryTime, exit: exitTime, hold: holdSessions, every: everySessions,
+    subscribed: includeThndrSub, fills: fillCount
+  }));
 
   // Sort brokers: highest net ending cash (lowest fee drag) first
   brokerOutcomes.sort((a, b) => b.netEndingCash - a.netEndingCash);
@@ -398,7 +164,7 @@ export function simulatorExplorer(component, D, ar, React) {
       name: ar ? b.nameAr : b.nameEn,
       type: ar ? b.typeAr : b.typeEn,
       badge: ar ? b.badgeAr : b.badge,
-      tagline: ar ? b.taglineAr : b.taglineEn,
+      tagline: (ar ? b.taglineAr : b.taglineEn) + (b.id === 'thndr' ? '' : (ar ? ' · تقدير غير موثق' : ' · unverified estimate')),
       color: b.color,
       bgTint: b.bgTint,
       borderTint: b.borderTint,
@@ -428,7 +194,7 @@ export function simulatorExplorer(component, D, ar, React) {
       executionsFmt: b.executionCount,
       netCashBarWidth: `${netCashPct}%`,
       feeBarWidth: `${feeBarPct}%`,
-      winnerBadgeText: ar ? 'الخيار الأوفر' : 'Best Value',
+      winnerBadgeText: ar ? 'أعلى نتيجة بالمحاكاة' : 'Highest modelled',
       rankNum: idx + 1
     };
   });
@@ -531,7 +297,7 @@ export function simulatorExplorer(component, D, ar, React) {
   const pPadX = 40;
   const pPadY = 18;
 
-  const priceTargetCount = Math.min(100, Math.max(12, activeSessions.length));
+  const priceTargetCount = Math.min(100, activeSessions.length);
   const priceIndices = [];
   for (let i = 0; i < priceTargetCount; i++) {
     const idx = Math.min(activeSessions.length - 1, Math.round((i / (priceTargetCount - 1 || 1)) * (activeSessions.length - 1)));
@@ -606,7 +372,7 @@ export function simulatorExplorer(component, D, ar, React) {
     { id: '1M', label: ar ? 'شهر' : '1 Month', active: range === '1M', pick: () => component.setState({ simRange: '1M', simStartDate: '', simEndDate: '' }) },
     { id: '3M', label: ar ? '٣ أشهر' : '3 Months', active: range === '3M', pick: () => component.setState({ simRange: '3M', simStartDate: '', simEndDate: '' }) },
     { id: '6M', label: ar ? '٦ أشهر' : '6 Months', active: range === '6M', pick: () => component.setState({ simRange: '6M', simStartDate: '', simEndDate: '' }) },
-    { id: '1Y', label: ar ? 'سنة (الأقوى +200%)' : '1 Year (Top +200%)', active: range === '1Y', pick: () => component.setState({ simRange: '1Y', simStartDate: '', simEndDate: '' }) },
+    { id: '1Y', label: ar ? 'سنة' : '1 Year', active: range === '1Y', pick: () => component.setState({ simRange: '1Y', simStartDate: '', simEndDate: '' }) },
     { id: '2Y', label: ar ? 'سنتان' : '2 Years', active: range === '2Y', pick: () => component.setState({ simRange: '2Y', simStartDate: '', simEndDate: '' }) },
     { id: 'MAX', label: ar ? 'أقصى مدى' : 'All History', active: range === 'MAX', pick: () => component.setState({ simRange: 'MAX', simStartDate: '', simEndDate: '' }) }
   ];
@@ -622,31 +388,31 @@ export function simulatorExplorer(component, D, ar, React) {
   const timingPresets = [
     {
       id: 'close_to_noon',
-      label: ar ? '🌟 شراء الإغلاق (2:30 م) ➔ تسييل الظهيرة (12:00 م) [+200% مميز]' : '🌟 Close (2:30 PM) ➔ Noon (12:00 PM) [+200% Top Performer]',
+      label: ar ? '🌟 شراء الإغلاق (2:30 م) ➔ تسييل الظهيرة (12:00 م)' : '🌟 Close (2:30 PM) ➔ Noon (12:00 PM)',
       active: timing === 'close_to_noon',
       desc: ar ? 'شراء عند إغلاق الجلسة وتسييل عند ذروة سيولة الظهيرة في اليوم التالي.' : 'Acquire at session close, liquidate at peak midday liquidity next day.',
-      pick: () => component.setState({ simTiming: 'close_to_noon', simEntryTime: 'close', simExitTime: 'noon' })
+      pick: () => component.setState({ simTiming: 'close_to_noon', simEntryTime: 'close', simExitTime: 'noon', simHoldSessions: 1 })
     },
     {
       id: 'close_to_open',
       label: ar ? '🌅 شراء الإغلاق (2:30 م) ➔ تسييل الافتتاح (10:00 ص) [فجوة الصباح]' : '🌅 Close (2:30 PM) ➔ Open (10:00 AM) [Morning Gap]',
       active: timing === 'close_to_open',
       desc: ar ? 'شراء الإغلاق وتسييل مع جرس الافتتاح لاقتناص الفجوة السعرية الصباحية.' : 'Acquire at close, liquidate at opening bell to capture overnight gaps.',
-      pick: () => component.setState({ simTiming: 'close_to_open', simEntryTime: 'close', simExitTime: 'open' })
+      pick: () => component.setState({ simTiming: 'close_to_open', simEntryTime: 'close', simExitTime: 'open', simHoldSessions: 1 })
     },
     {
       id: 'open_to_close',
       label: ar ? '☀️ شراء الافتتاح (10:00 ص) ➔ تسييل الإغلاق (2:30 م) [جلسة اليوم]' : '☀️ Open (10:00 AM) ➔ Close (2:30 PM) [Intraday]',
       active: timing === 'open_to_close',
       desc: ar ? 'تداول خلال ساعات الجلسة اليومية والتسييل قبل الإغلاق لمنع المخاطر الليلية.' : 'Day trade within the session, liquidating before close to eliminate overnight risk.',
-      pick: () => component.setState({ simTiming: 'open_to_close', simEntryTime: 'open', simExitTime: 'close_same' })
+      pick: () => component.setState({ simTiming: 'open_to_close', simEntryTime: 'open', simExitTime: 'close', simHoldSessions: 0 })
     },
     {
       id: 'close_to_close',
       label: ar ? '🔄 شراء الإغلاق ➔ تسييل إغلاق الغد [تداول 24 ساعة]' : '🔄 Close ➔ Next Close [Full 24h]',
       active: timing === 'close_to_close',
       desc: ar ? 'دورة تداول يومية كاملة من إغلاق جلسة إلى إغلاق الجلسة التالية.' : 'Full daily holding cycle from session close to next session close.',
-      pick: () => component.setState({ simTiming: 'close_to_close', simEntryTime: 'close', simExitTime: 'close_next' })
+      pick: () => component.setState({ simTiming: 'close_to_close', simEntryTime: 'close', simExitTime: 'close', simHoldSessions: 1 })
     }
   ];
 
@@ -654,7 +420,14 @@ export function simulatorExplorer(component, D, ar, React) {
   const entryTimeOptions = [
     { id: 'close', label: ar ? 'عند إغلاق الجلسة (2:30 م)' : 'Market Close (2:30 PM)' },
     { id: 'open', label: ar ? 'عند افتتاح الجلسة (10:00 ص)' : 'Market Open (10:00 AM)' },
-    { id: 'noon', label: ar ? 'عند منتصف التداول (12:00 م)' : 'Midday Noon (12:00 PM)' }
+    { id: '10:30', label: '10:30 AM' },
+    { id: '11:00', label: '11:00 AM' },
+    { id: '11:30', label: '11:30 AM' },
+    { id: 'noon', label: ar ? 'الظهيرة (12:00 م)' : 'Noon (12:00 PM)' },
+    { id: '12:30', label: '12:30 PM' },
+    { id: '13:00', label: '1:00 PM' },
+    { id: '13:30', label: '1:30 PM' },
+    { id: '14:00', label: '2:00 PM' }
   ];
 
   // Exit timing options
@@ -681,6 +454,10 @@ export function simulatorExplorer(component, D, ar, React) {
   }));
 
   return {
+    // True for the frame or two before the picked company's file lands, so
+    // the panel says it is loading rather than drawing an empty chart.
+    waitingForData,
+    dataUnavailable: loadFailed(),
     // Current stock info
     ticker: activeStock.ticker,
     name: ar ? activeStock.nameAr : activeStock.nameEn,
@@ -712,26 +489,47 @@ export function simulatorExplorer(component, D, ar, React) {
     timing,
     timingPresets,
     setTiming: (mode) => component.setState({ simTiming: mode }),
-    entryTime: st.simEntryTime || (timing.startsWith('open') ? 'open' : (timing.startsWith('noon') ? 'noon' : 'close')),
-    exitTime: st.simExitTime || (timing.includes('to_open') ? 'open' : (timing.includes('to_close') ? (timing === 'open_to_close' ? 'close_same' : 'close_next') : 'noon')),
-    entryTimeOptions,
-    exitTimeOptions,
-    onEntryTimeChange: (e) => {
-      const entry = e.target.value;
-      let newTiming = 'close_to_noon';
-      if (entry === 'open') newTiming = 'open_to_close';
-      else if (entry === 'noon') newTiming = 'noon_to_close';
-      component.setState({ simEntryTime: entry, simTiming: newTiming });
+    entryTime, exitTime, holdSessions, everySessions, fillCount,
+    entryTimeOptions: entryTimeOptions.map(o => ({...o, selected:o.id === entryTime})),
+    exitTimeOptions: entryTimeOptions.map(o => ({...o, selected:o.id === exitTime})),
+    missingExitPrices,
+    resultsAvailable: hasSessions && !missingExitPrices && !unsupportedCurrency,
+    unsupportedCurrency,
+    currencyWarning: ar ? 'هذا السهم متداول بعملة غير الجنيه. أوقفنا محاكاة رسوم الجنيه حتى إضافة تحويل العملة والتعريفة المناسبة.' : 'This stock is quoted in a currency other than EGP. The EGP fee simulation is disabled until currency conversion and the applicable tariff are supported.',
+    missingExitLabel: ar ? 'لا يمكن حساب نتيجة الخروج 11:00 صباحاً: لا توجد أسعار تاريخية موثقة لهذا التوقيت. لم نستبدلها بأسعار الظهيرة أو الإغلاق. نحتاج أسعاراً مؤرخة بتوقيت القاهرة لكل جلسة، مع مصدرها وتعديلات إجراءات الشركات.' : '11:00 AM return unavailable: no verified historical prices for this time are loaded. Noon and closing prices have not been substituted. Calculation requires dated Cairo-time quotes for each session, their source and corporate-action treatment.',
+    onEntryTimeChange: e => component.setState({simEntryTime:e.target.value, simExitTime:exitTime, simTiming:'custom'}),
+    onExitTimeChange: e => component.setState({simExitTime:e.target.value, simEntryTime:entryTime, simTiming:'custom'}),
+    onHoldChange: e => component.setState({simHoldSessions:Number(e.target.value)}),
+    onEveryChange: e => component.setState({simEverySessions:Number(e.target.value)}),
+    onFillsChange: e => component.setState({simFillCount:Number(e.target.value)}),
+    dataWarning: ar ? 'مصدر التوقيت: شموع TradingView نصف ساعة، معدّلة وفق طلب splits، بتوقيت القاهرة. سعر التوقيت هو أول تداول داخل الشمعة وليس ضمان تنفيذ في الثانية المحددة. الإغلاق آخر سعر شمعة متاحة. النتائج محاكاة لا عائداً تاريخياً موثقاً؛ التوزيعات وتأثيرات إجراءات الشركات تحتاج مراجعة.' : 'Timing source: TradingView 30-minute bars, requested with splits adjustment, in Africa/Cairo time. Clock-time prices are the first trade in that bar—not guaranteed fills at that exact instant. Close is the last available bar close. Results remain simulations; dividends and corporate-action effects require review.',
+    coverageLabel: `${ar ? 'البيانات المستخدمة' : 'Data used'}: ${firstSession[0]} → ${lastSession[0]} · ${activeSessions.length} ${ar ? 'جلسة مختارة' : 'selected sessions'}`,
+    rangeClipped,
+    clippedLabel: ar ? `الفترة المطلوبة تبدأ ${requestedStartDate}، لكن بيانات التوقيت تبدأ ${earliestDate}. النتيجة للفترة المتاحة فقط.` : `Requested start: ${requestedStartDate}. This timing dataset begins ${earliestDate}; the result covers only the available dates.`,
+    timingHelp: ar ? `اختر الدخول والخروج منفصلين بتوقيت القاهرة. الإغلاق ثم الظهيرة يعني الجلسة التالية. الدورات المتجاوزة لنقص سعر الدخول أو الخروج: ${bestBroker.skippedCycles || 0}. لا نعوض الأسعار المفقودة. الجلسات المختصرة قد لا تتضمن الأوقات المتأخرة.` : `Choose entry and exit independently in Cairo time. Close → noon means the next session. Cycles skipped for missing entry/exit prices: ${bestBroker.skippedCycles || 0}. No prices are interpolated. Shortened sessions may lack later times.`,
+    historyLabel: st.simHistoryLoading ? (ar ? 'جارٍ تحميل التاريخ…' : 'Loading history…') : (ar ? 'تحميل التاريخ الأطول · إغلاق إلى إغلاق' : 'Load longer history · close to close'),
+    historyStatus: st.simHistoryError ? (ar ? 'تعذّر تحميل التاريخ الأطول. حاول مجدداً.' : 'Longer history could not be loaded. Try again.') : usingCloseHistory ? (ar ? 'نستخدم الآن تاريخ الإغلاقات المنشور. اختيار الافتتاح أو الظهيرة يعود لمصدر التوقيت الأقصر.' : 'Using published closing-price history. Choosing open or noon returns to the shorter timing dataset.') : (ar ? 'التاريخ الأقدم متاح بأسعار الإغلاق فقط، وليس بأسعار الظهيرة.' : 'Older history is available at closing prices only—not noon prices.'),
+    loadCloseHistory: async () => {
+      if (component.state.simHistoryLoading) return;
+      component.setState({simHistoryLoading:true, simHistoryError:false});
+      try {
+        const response = await fetch(`/data/v1/prices/${encodeURIComponent(selectedTicker)}.json`);
+        if (!response.ok) throw new Error('History unavailable');
+        const data = await response.json();
+        const sessions = (data.price_history || []).filter(b => /^\d{4}-\d{2}-\d{2}$/.test(b.date) && Number.isFinite(b.close) && b.close > 0)
+          .map(b => [b.date, null, null, b.close]).sort((a,b) => a[0].localeCompare(b[0]));
+        if (!sessions.length) throw new Error('Empty history');
+        if (component.state.simTicker && component.state.simTicker !== selectedTicker) return;
+        component.setState({simHistoryTicker:selectedTicker, simCloseHistory:sessions, simEntryTime:'close', simExitTime:'close', simTiming:'close_to_close', simHoldSessions:1, simRange:'MAX', simStartDate:'', simEndDate:''});
+      } catch { component.setState({simHistoryError:true}); }
+      finally { component.setState({simHistoryLoading:false}); }
     },
-    onExitTimeChange: (e) => {
-      const exit = e.target.value;
-      let newTiming = 'close_to_noon';
-      if (exit === 'open') newTiming = 'close_to_open';
-      else if (exit === 'close_same') newTiming = 'open_to_close';
-      else if (exit === 'close_next') newTiming = 'close_to_close';
-      component.setState({ simExitTime: exit, simTiming: newTiming });
-    },
-
+    hasSessions,
+    noSessions: !hasSessions,
+    holdLabel: ar ? 'جلسات الاحتفاظ (0–60)' : 'Holding sessions (0–60)',
+    everyLabel: ar ? 'بدء دورة كل كم جلسة؟' : 'Start a cycle every N sessions',
+    fillsLabel: ar ? 'تنفيذات متساوية القيمة لكل أمر' : 'Equal-value fills per order',
+    emptyLabel: ar ? 'لا توجد جلسات في الفترة المختارة. عدّل التواريخ.' : 'No sessions in this range. Adjust the dates.',
     // Capital & Recurring
     capital,
     capitalFmt: fmtNum(capital),
@@ -750,7 +548,7 @@ export function simulatorExplorer(component, D, ar, React) {
 
     // Thndr subscription toggle
     includeThndrSub,
-    toggleThndrSub: () => component.setState({ includeThndrSub: !includeThndrSub }),
+    toggleThndrSub: e => component.setState({ includeThndrSub: e?.target ? e.target.checked : !includeThndrSub }),
     horizonMonths,
 
     // Statutory fee breakdown (0.08% standard)
@@ -768,19 +566,20 @@ export function simulatorExplorer(component, D, ar, React) {
     maxDate: latestDate,
     onStartDateChange: (e) => {
       const newStart = e.target.value;
-      component.setState({ simStartDate: newStart, simRange: 'CUSTOM' });
+      component.setState({ simStartDate: newStart, simEndDate: endDate, simRange: 'CUSTOM' });
     },
     onEndDateChange: (e) => {
       const newEnd = e.target.value;
-      component.setState({ simEndDate: newEnd, simRange: 'CUSTOM' });
+      component.setState({ simStartDate: startDate, simEndDate: newEnd, simRange: 'CUSTOM' });
     },
     startDateFmt: firstSession[0],
     endDateFmt: lastSession[0],
-    buyPriceFmt: buyPrice.toFixed(2),
-    sellPriceFmt: sellPrice.toFixed(2),
+    buyPriceFmt: unsupportedCurrency ? '—' : buyPrice.toFixed(2),
+    sellPriceFmt: missingExitPrices || unsupportedCurrency ? '—' : sellPrice.toFixed(2),
     rawPriceChangePctFmt: (rawPriceChangePct >= 0 ? '+' : '') + rawPriceChangePct.toFixed(2) + '%',
     isPriceUp: rawPriceChangePct >= 0,
 
+    brokerOutcomes,
     // Broker outcomes & cards
     brokerCards,
     bestBrokerName: ar ? bestBroker.nameAr : bestBroker.nameEn,
@@ -809,9 +608,7 @@ export function simulatorExplorer(component, D, ar, React) {
     // Labels & UX copy (Strictly compliant with §8 non-directive standards)
     L: {
       title: ar ? 'محاكي عوائد ورسوم التداول' : 'Trading & App Fee Simulator',
-      lead: ar
-        ? 'قارن صافي عوائد العمليات بالجنيه عبر تطبيقات وشركات السمسرة المصرية (بلتون، ثندر، تيلدا، مباشر، هيرميس، سي آي كابيتال، البنوك) بعد خصم الرسوم التنظيمية الموحدة (0.08%) وعمولات كل منصة.'
-        : 'Compare net transaction outcomes across Egyptian brokerage apps (Beltone, Thndr, Telda, Mubasher, EFG Hermes, CI Capital, Banks) factoring in standard 0.08% statutory fees and platform commissions.',
+      lead: ar ? "قارن أثر تكرار التداول وافتراضات الرسوم الحالية على نفس السلسلة السعرية المستوردة." : "Explore how trading frequency and current fee assumptions affect the same imported price series.",
       stockSelectLabel: ar ? 'اختر السهم من البورصة المصرية' : 'Select EGX Stock',
       strategyLabel: ar ? 'نمط الاستثمار وتكرار التداول' : 'Trading Pattern & Frequency',
       timingLabel: ar ? 'توقيت التنفيذ (وقت الدخول ووقت التسييل)' : 'Execution Timing (Entry & Liquidation)',
@@ -826,42 +623,39 @@ export function simulatorExplorer(component, D, ar, React) {
       startDateLabel: ar ? 'تاريخ الدخول:' : 'Entry Date:',
       endDateLabel: ar ? 'تاريخ التسييل:' : 'Exit Date:',
       comparisonTitle: ar ? 'مقارنة صافي المحفظة والرسوم بين المنصات' : 'Net Portfolio & Fee Comparison Across Platforms',
-      winnerNotice: ar
-        ? `الخيار الأوفر لهذه العملية هو ${bestBroker.nameAr}، بفارق توفير رسوم ${fmtNum(feeDifference)} ج.م مقارنة بأعلى منصة.`
-        : `Best value broker is ${bestBroker.nameEn}, saving ${fmtNum(feeDifference)} EGP in fees compared to the highest-cost platform.`,
+      winnerNotice: ar ? "أعلى رصيد محسوب بهذه الافتراضات، وليس مقارنة موثقة لتعريفات الوسطاء." : "Highest modelled ending cash under these assumptions—not a verified broker tariff comparison.",
       feeDragNote: ar
         ? 'تنبيه: التداول المتكرر أو المبالغ الصغيرة يضاعف أثر الحد الأدنى للتذكرة (10-25 ج)، مما يلتهم جزءاً كبيراً من رأس المال مع تراكم مئات العمليات.'
         : 'Note: Frequent trading or small order sizes amplify ticket minimums (10-25 EGP), compounding significant fee drag over hundreds of executions.',
-      statutorySectionTitle: ar ? 'الرسوم التنظيمية الموحدة (0.08% + 2 ج) المطبقة على الجميع' : 'Standard 0.08% Statutory Regulatory Fees Applied Universally',
-      statutorySectionDesc: ar
-        ? 'تسدد هذه النسبة إلزامياً بموجب القانون في كل عملية منفذة لصالح البورصة والمقاصة والرقابة وصناديق الحماية وضمان التسويات، بالتساوي عبر جميع المنصات دون استثناء.'
-        : 'Mandatory statutory fees levied on every transaction for EGX, MCDR clearing, FRA, and investor protection funds, applied equally across all brokers.',
-      statutoryBadge: ar ? 'رسوم تنظيمية موحدة: 0.08% + 2 ج' : 'Statutory Standard: 0.08% + 2 EGP',
-      thndrSubLabel: ar ? 'تضمين اشتراك ثندر إكسبريس (55 ج/شهرياً)' : 'Include Thndr Express Subscription (55 EGP/mo)',
-      thndrSubDesc: ar ? 'يضيف 55 جنيهاً لكل شهر في الفترة الزمنية المحاكاة لحساب الأثر الحقيقي للاشتراك المدفوع.' : 'Adds 55 EGP per month across the horizon to calculate realistic subscription drag.',
+      statutorySectionTitle: ar ? "افتراضات رسوم الجهات الخارجية الحالية" : "Current third-party fee assumptions",
+      statutorySectionDesc: ar ? "وفق جدول رسوم ثندر المنشور: الدمغة تختلف للتداول في نفس الجلسة، وللرقابة حد أدنى لكل تنفيذ. هذه محاكاة بالرسوم الحالية لا بالقوانين التاريخية. عمولات الوسطاء الآخرين تقديرية غير موثقة. لا تشمل الحفظ السنوي والتوزيعات والانزلاق وتأخير الاسترداد." : "Using Thndr’s published Egypt order-fee table: T0 stamp duty differs from later settlement; FRA has a minimum per fill. Applied as a current-fee scenario, not historical tax rates. Other broker commissions are unverified estimates. Annual custody, dividends, slippage and refund delays are excluded.",
+      statutoryBadge: ar ? "نفس الجلسة: 0.055% · لاحقاً: 0.08% قبل الحدود" : "T0: 0.055% · T1+: 0.08% before minima/caps",
+      feeSourceNote: ar ? 'تختلف صفحتا ثندر في وصف العمولة؛ نعتمد جدول رسوم الأوامر: 2 ج + 0.1% خارج الإعفاء. راجع فاتورة التنفيذ للتكلفة الفعلية.' : 'Thndr’s help pages disagree on the commission wording. This model follows the dedicated order-fee table: EGP2 + 0.1% outside the allowance. Check your execution invoice for actual charges.',
+      thndrSubLabel: ar ? "ثندر تريدر · 245 ج / 30 يوماً" : "Thndr Trader · 245 EGP / 30 days",
+      thndrSubDesc: ar ? "50 أمراً مؤهلاً لكل دورة 30 يوماً تبدأ بأول جلسة. الشراء والبيع يُحسبان منفصلين. نحسب رد العمولة فورياً وتظل رسوم الجهات الخارجية. يُخصم الاشتراك من النتائج ويُدفع خارج ميزانية التداول." : "50 eligible orders each 30-day cycle, starting at the first session. Each buy and sell consumes one. Brokerage refunds are modelled immediately; third-party fees remain. Subscription cost is subtracted from results, paid outside the trading budget.",
       brokerCol: ar ? 'منصة التداول' : 'Trading Platform',
       netCashCol: ar ? 'صافي المبلغ بعد التسييل' : 'Net Cash at Liquidation',
       netReturnCol: ar ? 'صافي العائد (%)' : 'Net Return (%)',
       totalFeesCol: ar ? 'إجمالي الرسوم' : 'Total Fees Paid',
       brokerFeeLabel: ar ? 'عمولة السمسرة' : 'Broker Markup',
-      statutoryFeeLabel: ar ? 'رسوم موحدة (0.08%)' : 'Statutory (0.08%)',
+      statutoryFeeLabel: ar ? "رسوم الجهات الخارجية" : "Third-party fees",
       ticketFeeLabel: ar ? 'رسوم الفاتورة' : 'Invoice Ticket',
       feeDragLabel: ar ? 'نسبة الهدر بالرسوم' : 'Fee Drag',
       sharesLabel: ar ? 'الأسهم المنفذة' : 'Executed Shares',
       execLabel: ar ? 'عدد العمليات' : 'Executions',
       searchPlaceholder: ar ? 'ابحث باسم أو رمز أي سهم...' : 'Search stock name or ticker...',
-      dailyDesc: ar ? 'تنفيذ استراتيجية الدخول والتسييل المتكرر مع كل جلسة تداول لحساب العائد الفعلي وتأثير الرسوم التراكمية.' : 'Compounded entry and liquidation strategy executed across sessions to calculate true net return and fee drag.',
+      dailyDesc: ar ? "مراكز متكررة غير متداخلة. لا تموّل حصيلة التسييل دخولاً أسبق منها في نفس الجلسة. التنفيذ وإتاحة التداول في نفس اليوم افتراضات." : "Repeated, non-overlapping positions. Sale proceeds cannot fund an earlier entry in the same session. Execution and T0 availability are assumptions.",
       lumpDesc: ar ? 'عملية دخول واحدة في بداية الفترة وعملية تسييل في نهايتها.' : 'Single entry execution at start, liquidation at exit.',
-      dcaDesc: ar ? 'تنفيذ دخول شهري منتظم في نهاية كل شهر، ثم تسييل المحفظة بالكامل.' : 'Periodic monthly acquisitions at month closes, liquidated at exit.',
+      dcaDesc: ar ? "مساهمة في أول جلسة متاحة من كل شهر، والتسييل عند نهاية الفترة." : "Contribution on the first available session each month; liquidation at the selected end.",
       buyPrefix: ar ? 'دخول:' : 'Entry:',
       sellPrefix: ar ? 'تسييل:' : 'Exit:',
       multiChartTitle: ar ? 'مقارنة مسار العائد الصافي بين مختلف المنصات عبر الزمن' : 'Net Return Trajectory Compared Across Broker Platforms',
       multiChartDesc: ar ? 'يوضح المنحنى تباعد أداء المحفظة بمرور الوقت بسبب التفاوت في العمولات والحدود الدنيا ورسوم الفاتورة والاشتراكات.' : 'Illustrates how portfolio returns diverge over time due to commissions, ticket minimums, invoice fees, and subscriptions.',
-      trajectoryTitle: ar ? 'مسار السهم السعري الفعلي خلال الفترة المحاكاة' : 'Actual Historical Stock Price Trajectory',
+      trajectoryTitle: ar ? "السلسلة السعرية المستوردة · لم تُراجع" : "Imported price series · not audited",
       rawPriceMove: ar ? 'تغير السعر الخام' : 'raw price move',
       firstBuyPrefix: ar ? 'نقطة الدخول الأولى: ' : 'First Entry: ',
       finalSellPrefix: ar ? 'نقطة التسييل الأخيرة: ' : 'Final Exit: ',
-      savePrefix: ar ? 'وفر ' : 'Save ',
+      savePrefix: ar ? 'فرق الرسوم ' : 'Fee difference ',
       zeroLineLabel: ar ? 'نقطة التعادل (0%)' : 'Break-even (0%)',
       beltoneLeadBadge: ar ? 'محاكاة بلتون الافتراضية' : 'Beltone Lead Simulation',
       smoothNotice: ar ? 'منحنى بياني ناعم فائق الدقة' : 'High-Resolution Vector Curve'

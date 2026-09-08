@@ -103,3 +103,11 @@ data-source/official/ownership/
 data-source/official/fra/fra-raw-*.json.gz
 data-source/official/cbe/*.html.gz
 data-source/official/mcdr/issuer-registry-*.json.gz
+
+# Simulator research inputs. The downloads are 13 MB of raw half-hour bars and
+# the two generated modules built from them are another 4 MB; none of it is
+# served. What the site reads is public/esthmr/sim/ — a 13 KB index and one
+# ~54 KB document per company — written by scripts/build_simulator_series.mjs
+# and committed. Re-fetch with scripts/fetch_simulator_intraday.mjs.
+data-source/intraday-research/
+data-source/simulator/

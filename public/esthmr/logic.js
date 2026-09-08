@@ -2,7 +2,34 @@ import { explorer } from './explorer.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
-import { simulatorExplorer } from './simulator.js';
+
+/* The trading simulator, fetched only when somebody opens it.
+ *
+ * `simulator.js` pulls in the broker table and two price datasets, and it was
+ * imported at the top of this file — so every reader on every screen paid for
+ * a tool almost none of them open. Measured on Home before this: 4.13 MB of
+ * simulator modules inside a 5.57 MB page, none of it rendered.
+ *
+ * The import is deferred to the first render that actually needs it. Until it
+ * lands the tools screen draws its heading and a loading line; when it lands
+ * the module is cached here and one empty setState redraws the screen. A
+ * failed fetch resets the promise so opening the tab again retries rather
+ * than leaving a permanently blank panel.
+ */
+let simulatorModule = null;
+let simulatorPending = null;
+let simulatorFailed = false;
+
+function simulatorWhenReady(redraw) {
+  if (simulatorModule) return simulatorModule;
+  if (!simulatorPending) {
+    simulatorFailed = false;
+    simulatorPending = import('./simulator.js')
+      .then((module) => { simulatorModule = module; redraw(); })
+      .catch(() => { simulatorPending = null; simulatorFailed = true; redraw(); });
+  }
+  return null;
+}
 /* The screens, ported from the Claude Design canvas.
  *
  * Everything below `class Component` is the design's own logic, carried over
@@ -145,7 +172,7 @@ export class Component extends Base {
   state = { screen:'home', theme:'light', lang:'ar', range:'1Y', sort:'pct', dir:-1, sector:'All', q:'', open:{}, debtOpen:false, month:'', sector1:'', heat:'ALL', heatSector:'', rateOpen:'',
     insiderViewMode: 'table',
     audioPlaying: false, audioItem: '', filtersOpen: false, sectorQuery: '', preferencesOpen: false,
-    simTicker: 'SWDY', simStrategy: 'daily', simTiming: 'close_to_noon', simRange: '1Y', simCapital: 100000, includeThndrSub: false,
+    simTicker: 'BTFH', simStrategy: 'daily', simTiming: 'close_to_noon', simRange: '2Y', simCapital: 100000, includeThndrSub: false,
     // One per search surface, so setting a test on the market table does not
     // silently reshape the filings list on another screen.
     // ARRAYS, and renamed from `rq`/`frq` on purpose.
@@ -3701,7 +3728,14 @@ export class Component extends Base {
     const marketExplorer = explorer(this, D.companies, ar);
     const pairsData = pairsExplorer(this, D, ar, React);
     const valData = valuationExplorer(this, D, ar, React);
-    const simData = (st.screen === 'tools') ? simulatorExplorer(this, D, ar, React) : { L: {} };
+    // Only the tools screen loads the simulator, and only once.
+    const wantsSim = st.screen === 'tools';
+    const simModule = wantsSim ? simulatorWhenReady(() => this.setState({})) : null;
+    const simData = simModule
+      ? simModule.simulatorExplorer(this, D, ar, React)
+      : { L: {} };
+    const simPending = wantsSim && !simModule && !simulatorFailed;
+    const simUnavailable = wantsSim && simulatorFailed;
     const storyPeriod = st.storyPeriod || 'week';
     const storyKind = st.screen === 'calendar' ? 'filing' : (st.storyKind || 'all');
     const story = marketStory(D, {period:storyPeriod,kind:storyKind,lang:st.lang,
@@ -4275,7 +4309,15 @@ export class Component extends Base {
         { id: 'calc', label: ar ? 'حاسبة التوزيعات' : 'Dividend Calculator', active: st.toolsTab === 'calc', go: () => this.setState({ toolsTab: 'calc' }) },
         { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) }
       ],
-      showToolsSim: (st.toolsTab || 'sim') === 'sim',
+      // The panel is drawn only once its module is here; until then the two
+      // flags below carry the wait, so the tab is never a blank frame.
+      showToolsSim: (st.toolsTab || 'sim') === 'sim' && Boolean(simModule),
+      simPending: simPending && (st.toolsTab || 'sim') === 'sim',
+      simUnavailable: simUnavailable && (st.toolsTab || 'sim') === 'sim',
+      simPendingLabel: ar ? 'جارٍ تحميل المحاكي…' : 'Loading the simulator…',
+      simUnavailableLabel: ar
+        ? 'تعذّر تحميل المحاكي. حدّث الصفحة للمحاولة مرة أخرى.'
+        : 'The simulator could not be loaded. Refresh to try again.',
       showToolsCalc: st.toolsTab === 'calc',
       showToolsGuide: st.toolsTab === 'guide',
       isToolsTabSim: (st.toolsTab || 'sim') === 'sim',

@@ -2708,8 +2708,16 @@
       </div>
 
       <!-- ══ TAB 1: TRADING & APP FEE SIMULATOR ══ -->
+      <!-- The simulator's module is fetched only when this tab is opened, so
+           the panel has a wait and a failure to show as well as a result. -->
+      <sc-if value="{{ simPending }}">
+        <section class="simulator-panel sim-waiting" role="status" aria-live="polite">{{ simPendingLabel }}</section>
+      </sc-if>
+      <sc-if value="{{ simUnavailable }}">
+        <section class="simulator-panel sim-waiting" role="status">{{ simUnavailableLabel }}</section>
+      </sc-if>
       <sc-if value="{{ showToolsSim }}">
-        <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
+        <section class="simulator-panel" style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:26px 28px;position:relative;overflow:hidden">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px">
             <div style="display:flex;align-items:center;gap:10px">
               <span style="font-size:24px;line-height:1">⚡</span>
@@ -2720,6 +2728,11 @@
             </div>
           </div>
 
+          <p class="sim-data-note">{{ simData.dataWarning }}</p>
+          <!-- The picked company's prices are a separate document now, so
+               there is a frame or two before they land. -->
+          <sc-if value="{{ simData.waitingForData }}"><p role="status" aria-live="polite" class="sim-data-note">{{ simPendingLabel }}</p></sc-if>
+          <sc-if value="{{ simData.noSessions }}"><p role="status" class="sim-data-note">{{ simData.emptyLabel }}</p></sc-if>
           <!-- Controls Grid -->
           <div class="sim-controls-grid">
             <!-- 1. Stock Selection -->
@@ -2774,10 +2787,15 @@
                 </div>
               </div>
 
-              <!-- Intraday / Overnight Timing Presets (When to Buy & When to Sell) -->
+              <div class="sim-entry-exit">
+                <label>{{ simData.L.entryTimeLabel }}<select aria-label="{{ simData.L.entryTimeLabel }}" onChange="{{ simData.onEntryTimeChange }}"><sc-for list="{{ simData.entryTimeOptions }}" as="o"><option value="{{ o.id }}" selected="{{ o.selected }}">{{ o.label }}</option></sc-for></select></label>
+                <label>{{ simData.L.exitTimeLabel }}<select aria-label="{{ simData.L.exitTimeLabel }}" onChange="{{ simData.onExitTimeChange }}"><sc-for list="{{ simData.exitTimeOptions }}" as="o"><option value="{{ o.id }}" selected="{{ o.selected }}">{{ o.label }}</option></sc-for></select></label>
+              </div>
+              <p class="sim-assumption">{{ simData.timingHelp }}</p>
+              <!-- Optional shortcuts; independent controls are always visible. -->
               <sc-if value="{{ simData.isDaily }}">
-                <div style="margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2)">
-                  <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.timingLabel }}</div>
+                <details style="margin-top:10px;padding:8px 10px;border-radius:10px;background:var(--surface);border:1px solid var(--rule2)">
+                  <summary>{{ simData.L.timingLabel }}</summary>
                   <div style="display:flex;flex-direction:column;gap:4px">
                     <sc-for list="{{ simData.timingPresets }}" as="tp">
                       <div onClick="{{ tp.pick }}" style="cursor:pointer;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:600;background:{{ tp.active ? 'var(--accTint)' : 'transparent' }};color:{{ tp.active ? 'var(--accent)' : 'var(--t2)' }};border:1px solid {{ tp.active ? 'var(--accent)' : 'transparent' }};transition:all .12s;display:flex;align-items:center;justify-content:space-between">
@@ -2786,7 +2804,7 @@
                       </div>
                     </sc-for>
                   </div>
-                </div>
+                </details>
               </sc-if>
 
               <div style="font-size:11px;color:var(--faint);margin-top:8px;line-height:1.4">
@@ -2828,8 +2846,9 @@
                   <input type="checkbox" id="thndr-sub-chk" checked="{{ simData.includeThndrSub }}" onChange="{{ simData.toggleThndrSub }}" style="accent-color:#059669;cursor:pointer">
                   <span>{{ simData.L.thndrSubLabel }}</span>
                 </label>
-                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">{{ simData.horizonMonths }} mo × 55 EGP</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">{{ simData.horizonMonths }} × 245 EGP</span>
               </div>
+              <p class="sim-assumption">{{ simData.L.thndrSubDesc }}</p>
             </div>
 
             <!-- 4. Time Horizon & Interactive Calendar Date Pickers -->
@@ -2866,7 +2885,20 @@
             </div>
           </div>
 
-          <!-- Standard 0.08% Statutory Fees Banner -->
+          <div class="sim-timing-grid">
+            <sc-if value="{{ simData.isDaily }}">
+              <label>{{ simData.holdLabel }}<input type="number" min="0" max="60" value="{{ simData.holdSessions }}" aria-label="{{ simData.holdLabel }}" onChange="{{ simData.onHoldChange }}"></label>
+              <label>{{ simData.everyLabel }}<input type="number" min="1" max="60" value="{{ simData.everySessions }}" aria-label="{{ simData.everyLabel }}" onChange="{{ simData.onEveryChange }}"></label>
+            </sc-if>
+            <label>{{ simData.fillsLabel }}<input type="number" min="1" max="20" value="{{ simData.fillCount }}" aria-label="{{ simData.fillsLabel }}" onChange="{{ simData.onFillsChange }}"></label>
+          </div>
+          <div class="sim-history-status" role="status" aria-live="polite">
+            <strong>{{ simData.coverageLabel }}</strong>
+            <sc-if value="{{ simData.rangeClipped }}"><p>{{ simData.clippedLabel }}</p></sc-if>
+            <p>{{ simData.historyStatus }}</p>
+            <button type="button" onClick="{{ simData.loadCloseHistory }}">{{ simData.historyLabel }}</button>
+          </div>
+          <!-- Current fee assumptions -->
           <div style="margin-top:18px;padding:14px 18px;border-radius:16px;background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
               <div style="display:flex;align-items:center;gap:8px">
@@ -2876,6 +2908,8 @@
               <span style="padding:2px 8px;border-radius:999px;background:var(--accTint);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;border:1px solid var(--rule)">{{ simData.L.statutoryBadge }}</span>
             </div>
             <p style="margin:4px 0 10px;font-size:12px;color:var(--t2);line-height:1.45">{{ simData.L.statutorySectionDesc }}</p>
+            <p class="sim-assumption">{{ simData.L.feeSourceNote }}</p>
+            <div class="sim-fee-sources"><a href="https://support.thndr.app/en/articles/638558-thndr-order-fees" target="_blank" rel="noopener">Thndr · Order fees ↗</a><a href="https://support.thndr.app/en/articles/657048-thndr-trader-subscription" target="_blank" rel="noopener">Thndr · Trader ↗</a></div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <sc-for list="{{ simData.statutoryItems }}" as="si">
                 <div style="padding:4px 8px;border-radius:8px;background:var(--surface);border:1px solid var(--rule2);font-size:11px;display:flex;align-items:center;gap:5px">
@@ -2886,6 +2920,9 @@
             </div>
           </div>
 
+          <sc-if value="{{ simData.missingExitPrices }}"><p class="sim-data-note" role="status">{{ simData.missingExitLabel }}</p></sc-if>
+          <sc-if value="{{ simData.unsupportedCurrency }}"><p class="sim-data-note" role="status">{{ simData.currencyWarning }}</p></sc-if>
+          <sc-if value="{{ simData.resultsAvailable }}">
           <!-- 1. Multi-Broker Comparative Return Trajectory Chart (All Brokers Plotted Together with Smooth Curves) -->
           <div style="margin-top:20px;padding:20px 22px;border-radius:20px;background:var(--sunk);border:1px solid var(--edgeIn)">
             <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
@@ -3078,6 +3115,7 @@
               </sc-for>
             </div>
           </div>
+          </sc-if>
         </section>
       </sc-if>
 
