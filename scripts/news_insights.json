@@ -415,6 +415,10 @@
     "meaning": "An annual sales target of 15% reflects the company's operational plan to increase production volumes, order fulfillment, and distribution of medical packaging products across its client network during the fiscal year.",
     "meaning_ar": "يعكس استهداف نمو المبيعات بنسبة 15% خطة الشركة التشغيلية لزيادة أحجام الإنتاج وتلبية الطلبيات وتوسيع توزيع منتجات العبوات الطبية لشبكة عملائها خلال العام المالي."
   },
+  "«اير كايرو» توقع عقدا لضم 30 طايره جديده من طراز «ايرباص A320neo»": {
+    "meaning": "This transaction expands the carrier's operating fleet and seat inventory through a long-term capital asset acquisition from the manufacturer. It alters the airline's asset base and fleet composition by integrating modern narrow-body aircraft.",
+    "meaning_ar": "توسع هذه الصفقة الأسطول التشغيلي للشركة وسعتها المقعدية عبر التزام رأسمالي طويل الأجل مع الشركة المصنعة للطائرات، كما تُعدل القاعدة الرأسمالية وهيكل الأسطول بإدراج طائرات حديثة أحادية الممر."
+  },
   "«تطوير مصر» تستحوذ علي 150 فدانا بالشراكه في مستقبل سيتي": {
     "meaning": "The partnership model expands the company's real estate land bank in Mostakbal City while sharing the initial capital expenditure and land-holding costs with the partner.",
     "meaning_ar": "يضيف نموذج الشراكة مساحة جديدة إلى المحفظة العقارية للشركة في مستقبل سيتي، مع تقاسم النفقات الرأسمالية الأولية وتكاليف حيازة الأرض مع الشريك."
@@ -1154,6 +1158,10 @@
   "الشركات السعوديه تتجاوز نظيرتها العالميه في تبني الرقمنه لتطوير التجاره": {
     "meaning": "Higher enterprise adoption rates of digital platforms automate trade settlement, inventory tracking, and supply chain management at a faster pace than international baseline averages.",
     "meaning_ar": "يؤدي ارتفاع معدلات تبني الشركات للمنصات الرقمية إلى أتمتة عمليات التسوية التجارية وتتبع المخزون وإدارة سلاسل الإمداد بوتيرة أسرع من المتوسطات العالمية المرجعية."
+  },
+  "الصحه توقع بروتوكولا مع جهاز الملكيه الفكريه لتعزيز الامن الدوايي": {
+    "meaning": "The protocol establishes a coordination framework between the Ministry of Health and the Intellectual Property Authority to regulate pharmaceutical patent registrations, facilitate the licensing of generic drug formulations, and streamline local manufacturing procedures for active ingredients.",
+    "meaning_ar": "يضع البروتوكول إطاراً للتنسيق بين وزارة الصحة وجهاز الملكية الفكرية لتنظيم تسجيل براءات اختراع الأدوية، وتسهيل ترخيص تركيبات الأدوية المثيلة، وتوحيد إجراءات التصنيع المحلي للمواد الفعالة."
   },
   "الصحه: 25 مليار جنيه تكلفه العلاج علي نفقه الدوله خلال 8 اشهر": {
     "meaning": "State-funded medical expenditures channel public healthcare budget allocations directly into operational claims and procurement volumes for public hospitals and authorized private healthcare providers.",
