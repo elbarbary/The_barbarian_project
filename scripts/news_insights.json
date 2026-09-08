@@ -383,6 +383,10 @@
     "meaning": "The Ministry of Planning coordinates cross-border capital deployment and joint ventures between Egypt and the UAE across five designated priority sectors.",
     "meaning_ar": "تنسق وزارة التخطيط تدفقات رؤوس الأموال عبر الحدود والمشروعات المشتركة بين مصر والإمارات ضمن خمسة قطاعات محددة ذات أولوية."
   },
+  "«التخطيط» تعلن تفعيل «المسار السريع» للتجمعات الصناعيه": {
+    "meaning": "The fast track is an administrative framework that expedites regulatory approvals, licensing, utility connections, and land allocation procedures for enterprises operating within designated industrial clusters.",
+    "meaning_ar": "يُعد «المسار السريع» آلية إدارية تعمل على تسريع إجراءات إصدار التراخيص والموافقات الحكومية وتخصيص الأراضي وتوصيل المرافق للمنشآت العاملة داخل التجمعات الصناعية المحددة."
+  },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
@@ -866,6 +870,10 @@
   "البنك الاهلي يسلم الجوايز للفايزين ضمن حمله \"فرصه من ذهب\"": {
     "meaning": "The distribution of prizes marks the execution phase of a retail banking promotional campaign, recording marketing expenses against operating costs while fulfilling contractual incentive programs tied to customer accounts and retail transactions.",
     "meaning_ar": "يمثل تسليم الجوائز المرحلة التنفيذية لحملة ترويجية في قطاع التجزئة المصرفية، حيث تُقيد هذه التكاليف ضمن المصروفات التسويقية والتشغيلية للبنك التزاماً ببرامج الحوافز المرتبطة بحسابات العملاء والتعاملات المصرفية."
+  },
+  "البنك الاهلي يوقع بروتوكولا مع «ساي شيلد» لتعزيز الامن السيبراني بالذكاء الاصطناعي": {
+    "meaning": "The agreement integrates artificial intelligence technologies into the bank's cybersecurity framework, establishing automated threat-detection infrastructure for digital banking operations.",
+    "meaning_ar": "يُدمج البروتوكول تقنيات الذكاء الاصطناعي ضمن منظومة الأمن السيبراني للبنك، مما يوفر بنية تحتية آلية لرصد التهديدات الرقمية في العمليات المصرفية."
   },
   "البنوك الصينيه تشتري سندات الخزانه الامريكيه مع ارتفاع عوايدها مجددا": {
     "meaning": "A rise in sovereign bond yields increases the fixed-income returns generated on foreign exchange assets. Institutional banking portfolios manage foreign-currency liquidity by holding these fixed-rate sovereign debt instruments.",
@@ -1695,6 +1703,10 @@
   "توقعات رفع الفايده اليابانيه تدفع الين لاعلي مستوي في 7 اشهر": {
     "meaning": "Anticipation of central bank monetary tightening narrows interest rate differentials between the Japanese yen and other major currencies, altering carry trade positions and shifting the spot exchange rate upward.",
     "meaning_ar": "تؤدي توقعات تشديد السياسة النقدية إلى تضييق الفوارق في أسعار الفائدة بين الين الياباني والعملات الرئيسية الأخرى، مما يغير مراكز تجارة الفائدة ويرفع سعر الصرف الفوري للعملة."
+  },
+  "توقيع مذكره تفاهم بين البورصه والشركه المصريه للايداع والقيد المركزي": {
+    "meaning": "This memorandum of understanding establishes an operational coordination framework between the Egyptian Exchange and the central depository for post-trade clearing, settlement, and registry infrastructure.",
+    "meaning_ar": "ترسخ مذكرة التفاهم إطاراً للتنسيق التشغيلي بين البورصة المصرية وشركة الإيداع المركزي فيما يتعلق بالبنية التحتية لعمليات المقاصة والتسوية والقيد بعد التداول."
   },
   "توقيع مذكره تفاهم لاقامه قاعده لتخطيط وانشاء مصانع السيارات في مصر": {
     "meaning": "This memorandum of understanding establishes a collaborative framework for designing and developing automotive manufacturing facilities within the domestic market.",
