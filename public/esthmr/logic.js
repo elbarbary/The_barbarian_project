@@ -3271,9 +3271,16 @@ export class Component extends Base {
           return {
             date: r.date || '',
             actionLabel: arrow + (actLabel || ''),
-            actionColor,
-            actionBadgeBg,
-            actionBadgeBorder,
+            /* Named, not shorthand. `actionColor` and its two neighbours were
+               written as shorthand properties while the variables above are
+               called `actColor`, `actBadgeBg` and `actBadgeBorder` — so this
+               threw a ReferenceError the moment a company had an insider row
+               to draw. `renderVals()` throwing takes the whole page with it:
+               the screen stopped repainting and every control went dead. It
+               killed 89 of 284 company screens, by any route to them. */
+            actionColor: actColor,
+            actionBadgeBg: actBadgeBg,
+            actionBadgeBorder: actBadgeBorder,
             relationshipLabel: ar ? (r.relationshipLabelAr || r.relationshipLabel || '') : (r.relationshipLabel || r.relationshipLabelAr || ''),
             sharesFormatted: typeof r.shares === 'number' ? this.num(r.shares, 0) : '',
             hasShares: typeof r.shares === 'number',
