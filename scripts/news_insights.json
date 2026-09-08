@@ -371,6 +371,10 @@
     "meaning": "The European Bank for Reconstruction and Development (EBRD) establishes a multi-year project financing program targeting corporate, infrastructure, and green transition assets in the local economy through debt, equity, and syndicated credit facilities.",
     "meaning_ar": "يضع البنك الأوروبي لإعادة الإعمار والتنمية برنامجاً تمويلياً متعدد السنوات يوجه سيولة عبر أدوات الدين وحصص الملكية والتسهيلات الائتمانية المشتركة إلى مشروعات البنية التحتية والتحول الأخضر والشركات في السوق المحلي."
   },
+  "«EGX30» يهبط دون 56.2 الف نقطه بعد ملامسه مستوي قياسي في مستهل تعاملات الاسبوع": {
+    "meaning": "The headline reports an intra-day index reversal, where the benchmark EGX30 index touches a historical peak in early weekly trading before declining below the 56,200-point mark due to trading activity across its constituent stocks.",
+    "meaning_ar": "يصف الخبر حركة التداول اللحظية للمؤشر الرئيسي EGX30، حيث بلغ مستوى تاريخياً غير مسبوق في بداية تعاملات الأسبوع ثم تراجع إلى ما دون مستوى 56.2 ألف نقطة نتيجة لتغيرات أسعار الأسهم المكونة له."
+  },
   "«اب تاون 6 اكتوبر» تضخ 15 مليار جنيه لتطوير 10 مدارس جديده غرب القاهره": {
     "meaning": "This capital allocation represents a direct infrastructure deployment by Uptown 6th of October, expanding private educational capacity in West Cairo through the construction and outfitting of 10 school facilities.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي ضخاً مباشراً في البنية التحتية من قبل شركة «أب تاون 6 أكتوبر»، حيث يوسع الطاقة الاستيعابية للتعليم الخاص في منطقة غرب القاهرة من خلال تشييد وتجهيز 10 منشآت مدرسية."
@@ -811,6 +815,10 @@
     "meaning": "US equity indices experience downward price movements at the close, reflecting divergent weekly performance across different market sectors based on corporate earnings reports and macroeconomic data releases.",
     "meaning_ar": "تشهد مؤشرات الأسهم الأمريكية تراجعاً في أسعارها، وهو ما يعكس تبايناً في الأداء الأسبوعي لمختلف القطاعات الاقتصادية بناءً على نتائج الأعمال الفصلية والبيانات الاقتصادية الكلية الصادرة."
   },
+  "الاسهم الاوروبيه تتباين الثلاثاء وسط ترقب لرفع اسعار الفايده من المركزي الاوروبي": {
+    "meaning": "Anticipation of benchmark interest rate hikes adjusts corporate borrowing costs across sectors and alters the discount rates applied in equity valuation models.",
+    "meaning_ar": "يؤدي ترقب رفع أسعار الفائدة الأساسية إلى تعديل تكاليف الاقتراض للشركات عبر القطاعات المختلفة وتغيير معدلات الخصم المطبقة في نماذج تقييم الأسهم."
+  },
   "الاسهم الاوروبيه تتراجع الجمعه بعد صدور بيانات التوظيف الامريكيه القويه": {
     "meaning": "Strong US employment data keeps Federal Reserve interest rates elevated for longer, increasing global yields and triggering equity capital outflows from European markets.",
     "meaning_ar": "تؤدي بيانات التوظيف الأمريكية القوية إلى إبقاء أسعار الفائدة لدى الاحتياطي الفيدرالي مرتفعة لفترة أطول، مما يرفع العوائد العالمية ويدفع تدفقات رؤوس الأموال خارج أسواق الأسهم الأوروبية."
@@ -830,6 +838,10 @@
   "الاسهم الاوروبيه تغلق الاثنين علي تباين وسط تقييم تجدد الاعمال العداييه في الشرق الاوسط": {
     "meaning": "Geopolitical developments in the Middle East create divergent asset pricing across equity sectors, where energy and defense stocks adjust to commodity supply movements while consumer and transportation sectors react to input and shipping cost fluctuations.",
     "meaning_ar": "تؤدي التطورات الجيوسياسية في الشرق الأوسط إلى تباين في تسعير الأصول بين القطاعات، حيث تتأثر أسهم الطاقة والدفاع بتحركات إمدادات السلع الأساسية بينما تتأثر قطاعات النقل والاستهلاك بتغير تكاليف المدخلات والشحن."
+  },
+  "الاسهم الاوروبيه تغلق مستقره وسط ضغوط من ارتفاع النفط": {
+    "meaning": "Rising crude oil prices elevate operational and transport input costs for general industrial sectors while simultaneously raising energy sector revenues, neutralizing broad equity index movements.",
+    "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام إلى زيادة تكاليف المدخلات التشغيلية والنقل للقطاعات الصناعية، بالتوازي مع رفع إيرادات شركات الطاقة، مما يحقق توازناً في حركة مؤشرات الأسهم العامة."
   },
   "الاسهم الكوريه تقفز 4.6% .. وجولدمان ساكس يحدد مستهدفا قياسيا لموشر كوسبي": {
     "meaning": "A sharp rise in a benchmark stock index reflects broad-based price appreciation across its constituent listed equities, while investment banks adjust their baseline valuation models in response to corporate earnings data and market liquidity.",
@@ -914,6 +926,10 @@
   "البورصه تغرم 6 شركات 240 الف جنيه وتمنحها 15 يوما لاستكمال القوايم الماليه": {
     "meaning": "The exchange enforces listing and disclosure rules by levying regulatory fines on non-compliant firms and setting a mandatory grace period to submit complete financial statements.",
     "meaning_ar": "تطبق البورصة قواعد القيد والإفصاح عبر فرض غرامات تنظيمية على الشركات غير الملتزمة وتحديد مهلة إلزامية لتقديم القوائم المالية المستوفاة."
+  },
+  "البورصه توقع مذكره تفاهم مع الشركه المصريه للايداع والقيد لتعزيز كفاءه تداول ادوات الدين الحكوميه": {
+    "meaning": "This agreement establishes direct operational and technical coordination between the Egyptian Exchange (EGX) and the Egyptian Central Securities Depository (ECSD) for the execution, clearing, and settlement workflows of sovereign debt instruments.",
+    "meaning_ar": "تؤسس هذه الاتفاقية إطاراً للتنسيق التشغيلي والتقني بين البورصة المصرية والشركة المصرية للإيداع والقيد لتنظيم عمليات التداول والمقاصة والتسوية لأدوات الدين الحكومية."
   },
   "البورصه توقع مذكره تفاهم مع “المصريه للايداع” لوضع خارطه طريق للسوق الحكوميه": {
     "meaning": "This memorandum of understanding establishes a technical and operational coordination framework between the Egyptian Exchange and the central depository to structure the trading, clearing, and settlement workflows for sovereign and government debt instruments.",
@@ -1515,6 +1531,10 @@
     "meaning": "The reappointment maintains administrative and institutional continuity within the Financial Regulatory Authority, which regulates and oversees Egypt's non-banking financial sector and capital markets.",
     "meaning_ar": "يُبقي تجديد التعيين على الاستمرارية الإدارية والمؤسسية داخل الهيئة العامة للرقابة المالية المعنية بالإشراف والرقابة على أسواق المال والأنشطة المالية غير المصرفية في مصر."
   },
+  "تجديد تعيين حمدي بدوي مساعدا لرييس الهييه العامه للرقابه الماليه": {
+    "meaning": "The reappointment maintains executive leadership continuity at the Financial Regulatory Authority, keeping existing regulatory oversight and administrative workflows intact across non-banking financial markets.",
+    "meaning_ar": "يحافظ تجديد التعيين على استمرارية القيادة التنفيذية في الهيئة العامة للرقابة المالية، مما يُبقي على آليات الرقابة التنظيمية وسير العمل الإداري القائم في الأسواق المالية غير المصرفية."
+  },
   "تجديد تعيين د. محمد عبدالعزيز مساعدا لرييس الهييه العامه للرقابه الماليه": {
     "meaning": "The reappointment maintains administrative and regulatory continuity within the executive leadership of the Financial Regulatory Authority, which oversees non-banking financial markets and institutions in Egypt.",
     "meaning_ar": "يحافظ تجديد التعيين على الاستمرارية الإدارية والتنظيمية داخل القيادة التنفيذية للهيئة العامة للرقابة المالية، المسؤولة عن الإشراف على الأسواق والمؤسسات المالية غير المصرفية في مصر."
@@ -1751,6 +1771,10 @@
   "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
     "meaning_ar": "يعكس هذا الحجم من الإنفاق توجيه تدفقات رأسمالية ضخمة من قِبل شركات التكنولوجيا نحو البنية التحتية للحوسبة، ومراكز البيانات، وتوريد الأجهزة المتخصصة، والبحث والتطوير."
+  },
+  "حمايه المستهلك: 788 حمله رقابيه تضبط 251 طن سلع مخالفه خلال اغسطس": {
+    "meaning": "Regulatory enforcement campaigns conduct market inspections and confiscate non-compliant inventory, directly enforcing legal product standards and circulation controls across wholesale and retail supply chains.",
+    "meaning_ar": "تتضمن الحملات التفتيشية مصادرة البضائع غير المطابقة للمواصفات، مما يطبق المعايير الرقابية والاشتراطات القانونية لتداول السلع داخل سلاسل الإمداد والتجارة المحلية."
   },
   "خالد عباس: الانتهاء من تصميمات المرحله الثانيه للعاصمه الاداريه بنهايه 2026": {
     "meaning": "Completing the master planning and engineering designs for Phase 2 establishes the operational specifications and project scope required prior to launching infrastructure tenders, contractor procurement, and land allocation in the real estate and construction sectors.",
