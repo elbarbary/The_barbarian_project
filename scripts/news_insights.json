@@ -1087,6 +1087,10 @@
     "meaning": "The regulatory sandbox operates as a controlled testing framework where non-banking financial institutions and FinTech entities deploy and validate digital products and operational models under direct supervisory oversight.",
     "meaning_ar": "يوفر المختبر التنظيمي إطار عمل تجريبي خاضع لإشراف الهيئة يتيح للمؤسسات المالية غير المصرفية وشركات التكنولوجيا المالية تشغيل واختبار المنتجات والنماذج الرقمية ضمن محددات رقابية وضوابط محددة."
   },
+  "الرييس التنفيذي للشركه: “فاركو” للادويه تضخ مليار جنيه استثمارات حتي نهايه 2027": {
+    "meaning": "This corporate action allocates EGP 1 billion in capital expenditures across the company's pharmaceutical production infrastructure and operational assets through 2027.",
+    "meaning_ar": "يخصص هذا الإجراء المؤسسي مليار جنيه كمصروفات رأسمالية لتطوير البنية التحتية لإنتاج الأدوية والأصول التشغيلية للشركة حتى عام 2027."
+  },
   "الرييس السيسي يفتتح النسخه الثانيه من معرض العلمين الدولي للطيران والفضاء 2026": {
     "meaning": "International aviation and defense exhibitions serve as direct B2B platforms for commercial procurement agreements, defense contracting, technology transfer, and industrial partnership deals between global aerospace manufacturers and local entities.",
     "meaning_ar": "تعمل معارض الطيران والدفاع الدولية كمنصات مباشرة لإبرام صفقات الشراء التجاري، وعقود التوريد الدفاعي، ونقل التكنولوجيا، والشراكات الصناعية بين مصنعي الفضاء العالميين والجهات المحلية."
@@ -1306,6 +1310,10 @@
   "المشروعات الصناعيه والهندسيه: اميرالد للاتصالات تخفض حصتها في الشركه الي 5.404%": {
     "meaning": "A reduction in a major shareholder's equity stake alters the company's ownership structure and shifts voting rights and equity distribution among market participants.",
     "meaning_ar": "يؤدي تخفيض حصة مساهم رئيسي إلى تعديل هيكل الملكية في الشركة وإعادة توزيع حقوق التصويت والأسهم بين المتعاملين في السوق."
+  },
+  "المصانع الجاهزه.. رهان جديد لتوطين السيارات": {
+    "meaning": "The plug-and-play factory model provides pre-built industrial facilities with connected utilities, enabling automotive manufacturers and parts suppliers to bypass the physical construction phase and install assembly lines directly.",
+    "meaning_ar": "يوفر نموذج المصانع الجاهزة منشآت صناعية مشيدة بالكامل ومزودة بالمرافق، مما يتيح لمصنعي السيارات وموردي المكونات تجاوز مرحلة البناء الإنشائي والبدء مباشرة في تركيب خطوط التجميع."
   },
   "المملكه المتحده تتجه لدفع اعلي تكلفه اقتراض في بيع سندات منذ عام 1998": {
     "meaning": "Higher sovereign bond yields directly elevate the government's debt-servicing expenses and establish a higher risk-free benchmark rate across credit markets.",
@@ -1683,6 +1691,10 @@
   "تشديد الدخول والخروج ينذر بعوده طوابير الانتظار علي حدود الاتحاد الاوروبي": {
     "meaning": "Tighter border controls introduce operational processing delays at European Union entry and exit points, extending transit times for cross-border logistics and freight transport.",
     "meaning_ar": "يؤدي تشديد إجراءات التفتيش على نقاط الدخول والخروج في الاتحاد الأوروبي إلى تأخيرات تشغيلية في المعابر الحدودية، مما يطيل المدد الزمنية لعمليات الشحن ونقل البضائع."
+  },
+  "تصحيح البورصه يختبر شهيه المستثمرين": {
+    "meaning": "A market correction is a downward price adjustment across listed assets following prior gains, reflecting the capacity of current liquidity and trading activity to absorb existing market valuations.",
+    "meaning_ar": "يُعد التصحيح السعري في البورصة حركة تعديل هبوطية للأسهم المدرجة بعد فترات ارتفاع سابقة، ويعكس قدرة السيولة النقدية وأحجام التداول الحالية على استيعاب التقييمات السائدة في السوق."
   },
   "تضاعف مبيعات السيارات الكهرباييه في روسيا هذا الصيف": {
     "meaning": "A doubling of electric vehicle sales reflects an increased penetration rate within the automotive retail sector, shifting sales volume and dealer inventory turnover toward alternative-fuel models and charging infrastructure.",
@@ -3036,6 +3048,10 @@
   "“الملتقي العربي” تعتمد دراسه القيمه العادله لسهم “التوفيق للتاجير”": {
     "meaning": "The board of a parent company formally approves an independent valuation benchmark for a subsidiary's equity, establishing an official baseline for corporate transactions, internal accounting adjustments, and regulatory disclosure requirements.",
     "meaning_ar": "يمثل هذا الإجراء اعتماد مجلس إدارة الشركة الأم لتقييم مالي مستقل لأسهم شركتها التابعة، مما يحدد أساساً حسابياً رسمياً للصفقات المؤسسية والمعالجات الدفترية ومتطلبات الإفصاح التنظيمي."
+  },
+  "“النقل” تقترب من توقيع مذكره انشاء واداره ميناء السادات الجاف": {
+    "meaning": "Signing an agreement to establish and manage the Sadat Dry Port creates a public-private logistics hub that centralizes customs clearance, cargo handling, and container storage away from maritime seaports.",
+    "meaning_ar": "يؤدي توقيع مذكرة إنشاء وإدارة ميناء السادات الجاف إلى إقامة مركز لوجستي يربط بين القطاعين العام والخاص، ويعمل على تجميع عمليات التخليص الجمركي وتداول البضائع وتخزين الحاويات خارج الموانئ البحرية."
   },
   "“الوزراء” يستعرض تفاصيل الطرح الجديد للوحدات السكنيه بنظام الايجار": {
     "meaning": "The government operates a state-sponsored residential program that offers public housing units under structured lease agreements as an alternative to direct ownership models.",
