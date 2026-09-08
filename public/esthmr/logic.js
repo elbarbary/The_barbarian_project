@@ -1,5 +1,6 @@
 import { explorer } from './explorer.js';
 import { SECTOR_AR } from './data.js';
+import { archiveOf, archiveFailed } from './filings-store.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
@@ -138,6 +139,50 @@ export function heatColour(pct) {
 }
 
 export const DIRECTIVE = /\b(buy|sell|hold|avoid|accumulate|overweight|underweight|undervalued|overvalued|cheap|expensive|bargain|verdicts?|recommend\w*|target price|price target|should (buy|sell|own|avoid)|go (long|short)|(long|short) position|will (rise|fall|reach|hit))\b/i;
+
+
+/* How a company's filings are grouped on its Filings tab.
+ *
+ * Two vocabularies describe the same documents. The pipeline classifies what
+ * it can into `event` — results, insider, board — and the exchange's own
+ * `section` names the rest: 42,356 of the archive's rows carry no `event` and
+ * almost all of them carry a section that says the same thing. Both are
+ * folded into one set of groups here, so "Financial Results" and `results`
+ * land together instead of becoming two headings for one idea.
+ *
+ * Order is what a reader looks for, not what the archive holds most of:
+ * the statements first, then who bought and sold, then the corporate actions
+ * that change what a share is, and the routine notices last.
+ */
+const FILING_GROUPS = [
+  ['results', 'Financial statements', 'القوائم المالية والنتائج',
+    ['results'], ['Financial Results']],
+  ['insider', 'Insider and treasury dealing', 'تعاملات الداخليين وأسهم الخزينة',
+    ['insider'], ['Insider Trading Executions/Treasury Stocks']],
+  ['capital', 'Dividends and capital', 'التوزيعات ورأس المال',
+    ['dividend', 'bonus_shares', 'capital_increase', 'capital_decrease', 'capital'],
+    ['Corporate Actions']],
+  ['ownership', 'Ownership', 'هيكل الملكية',
+    ['ownership'], ['Shareholding Structure']],
+  ['assembly', 'General assemblies', 'الجمعيات العامة',
+    ['assembly'], ['General Assemblies']],
+  ['board', 'Board decisions', 'قرارات مجلس الإدارة', ['board'], []],
+  ['trading', 'Listing and trading notices', 'القيد وإشعارات التداول',
+    ['listing', 'halt', 'resume'], ['Trading Notices', 'Listing Announcements']],
+  ['business', 'Contracts, funding and auditors', 'التعاقدات والتمويل والمراجعة',
+    ['contract', 'funding', 'auditor', 'regulator'], []],
+  ['other', 'Other disclosures', 'إفصاحات أخرى', [], ['General']],
+];
+
+/** The group a filing belongs to: its classified type, else the exchange's
+ *  own section, else "other". */
+function filingGroupOf(row) {
+  for (const [id, , , events, sections] of FILING_GROUPS) {
+    if (row.event && events.includes(row.event)) return id;
+    if (!row.event && row.section && sections.includes(row.section)) return id;
+  }
+  return 'other';
+}
 
 /** What the design tool called DCLogic: state, props, and a redraw hook. */
 class Base {
@@ -596,6 +641,11 @@ export class Component extends Base {
       sourceFiling:'Source filing', openSignedDoc:'Open the signed document', showSource:'Where these figures come from', hideSource:'Hide source',
       notCreditRating:'This is not a credit rating. The figures above are stated as filed, with no grade, band or colour attached to them.',
       whatIsUnusual:'What is unusual', itsFilings:'Its filings', egxArchive:'EGX archive', document:'Document',
+      filingsAll:'{n} filings, grouped by what they are',
+      filingsShowAll:'Show all {n}',
+      filingsShowFewer:'Show fewer',
+      filingsLoadingLabel:'Loading the archive…',
+      filingsNone:'No filings on record for this company.',
       sectorsTitle:'Sectors', sectorsWord:'sectors', rose:'rose', fell:'fell', flat:'flat', medianPE:'Median P/E',
       notRead:'not measurable',
       calendarTitle:'Disclosures', filed:'Filed', expected:'Expected', estimate:'Estimate',
@@ -959,6 +1009,11 @@ export class Component extends Base {
       sourceFiling:'الإفصاح المصدر', openSignedDoc:'افتح المستند الموقّع', showSource:'من أين جاءت هذه الأرقام', hideSource:'إخفاء المصدر',
       notCreditRating:'هذا ليس تصنيفاً ائتمانياً. الأرقام أعلاه مذكورة كما وردت، دون درجة أو نطاق أو لون.',
       whatIsUnusual:'أحجام تداول استثنائية', itsFilings:'إفصاحاتها', egxArchive:'أرشيف البورصة', document:'المستند',
+      filingsAll:'{n} إفصاحاً، مرتّبة بحسب نوعها',
+      filingsShowAll:'اعرض الكل ({n})',
+      filingsShowFewer:'اعرض أقل',
+      filingsLoadingLabel:'جارٍ تحميل الأرشيف…',
+      filingsNone:'لا توجد إفصاحات مسجّلة لهذه الشركة.',
       sectorsTitle:'القطاعات', sectorsWord:'قطاعاً', rose:'صعدت', fell:'هبطت', flat:'ثابتة', medianPE:'وسيط م/ر',
       notRead:'غير قابلة للقياس',
       calendarTitle:'الإفصاحات', filed:'مُفصح عنه', expected:'متوقع', estimate:'تقدير',
@@ -2733,7 +2788,12 @@ export class Component extends Base {
         hasLatestLink: Boolean(t.latestLink),
         openCompany: () => {
           if (t.ticker && !t.ticker.startsWith('DEMO')) {
-            this.setState({ screen: 'company', ticker: t.ticker });
+            /* Straight to the filings, with the insider group already open.
+               The reader clicked a tile in a map OF insider dealing; landing
+               them on the price overview makes them hunt for the thing they
+               just pointed at. */
+            this.setState({ screen: 'company', ticker: t.ticker,
+              companyPanel: 'filings', companyFilingGroup: 'insider' });
           } else {
             this.setState({
               insiderViewMode: 'table',
@@ -3240,6 +3300,58 @@ export class Component extends Base {
     ];
 
     const curTicker = st.ticker || (D.company && D.company.ticker) || '';
+
+    /* The company's whole filing archive, grouped, and only once the reader
+       has opened the tab. Six filings used to be the whole panel while the
+       exchange's archive for the same company sat beside it with every
+       document since 2010 — 704 for CIB, 1,140 for Heliopolis Housing.
+       The archive is a median 346 KB, so it is fetched on opening the tab
+       rather than with the company. */
+    const wantsFilings = st.screen === 'company' && st.companyPanel === 'filings';
+    const archiveRows = wantsFilings
+      ? archiveOf(curTicker, () => this.setState({}))
+      : null;
+    const archiveLoading = wantsFilings && archiveRows === null && !archiveFailed(curTicker);
+    /* Falls back to the six the overview already had, so a company with no
+       archive still lists what it has instead of an empty tab. */
+    const filingRows = (archiveRows && archiveRows.length)
+      ? archiveRows
+      : (wantsFilings ? (D.filings || []).map((f) => ({ ...f, event: '', section: '' })) : []);
+
+    const openGroup = st.companyFilingGroup || '';
+    const filingGroups = (() => {
+      if (!filingRows.length) return [];
+      const held = new Map();
+      for (const row of filingRows) {
+        const id = filingGroupOf(row);
+        if (!held.has(id)) held.set(id, []);
+        held.get(id).push(row);
+      }
+      return FILING_GROUPS
+        .filter(([id]) => held.has(id))
+        .map(([id, label, labelAr]) => {
+          const rows = held.get(id);
+          const open = openGroup === id;
+          // Ten is what fits without turning a tab into a scroll; the rest is
+          // one tap away and the count never hides how many there are.
+          const shown = open ? rows : rows.slice(0, 10);
+          return {
+            id, label: ar ? labelAr : label,
+            count: this.num(rows.length, 0),
+            isOpen: open, hasMore: rows.length > shown.length,
+            moreCount: this.num(Math.max(0, rows.length - shown.length), 0),
+            toggle: () => this.setState({ companyFilingGroup: open ? '' : id }),
+            showAllLabel: L.filingsShowAll.replace('{n}', this.num(rows.length, 0)),
+            rows: say(shown, ['title']).map((f) => ({
+              date: f.date || '',
+              title: (ar ? (f.titleAr || f.title) : (f.title || f.titleAr)) || '',
+              id: f.id || '',
+              href: f.href || '',
+              hasHref: Boolean(f.href),
+            })),
+          };
+        });
+    })();
     const companyInsiderItems = (D.insiders && Array.isArray(D.insiders.items) && curTicker)
       ? D.insiders.items.filter((r) => r.ticker === curTicker).slice(0, 8).map((r) => {
           let actLabel = ar ? (r.actionLabelAr || r.actionLabel) : (r.actionLabel || r.actionLabelAr);
@@ -3953,6 +4065,12 @@ export class Component extends Base {
         go: () => this.setState({ companyPanel: id }) })),
       companyInsiderItems,
       hasCompanyInsiderItems: companyInsiderItems.length > 0,
+      filingGroups,
+      hasFilingGroups: filingGroups.length > 0,
+      filingsLoading: archiveLoading,
+      noFilingArchive: wantsFilings && !archiveLoading && filingGroups.length === 0,
+      filingsTotal: this.num(filingRows.length, 0),
+      filingsCountLine: L.filingsAll.replace('{n}', this.num(filingRows.length, 0)),
       openInsiderTrackerForCompany: () => {
         this.setState({
           screen: 'investors',
