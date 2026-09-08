@@ -23,6 +23,10 @@
     "meaning": "An ordinary general assembly convenes shareholders to vote on corporate governance procedures, specifically the reconstitution of the board of directors and the approval of related-party transactions (contracts of reciprocal interest) pursuant to corporate governance regulations.",
     "meaning_ar": "تنعقد الجمعية العامة العادية لممارسة المساهمين حقوق التصويت على إجراءات الحوكمة، والتي تتضمن إعادة تشكيل مجلس الإدارة والترخيص بعقود المعاوضة مع الأطراف المرتبطة وفقاً للضوابط القانونية المنظمة."
   },
+  "10 سبتمبر.. اخر موعد للتقديم علي 2898 قطعه ارض ضمن برنامج مسكن": {
+    "meaning": "The deadline marks the operational closing of the government land allocation window for 2,898 residential plots under the 'Maskan' program, absorbing applicant liquidity and directing land supply directly to individual buyers in the real estate sector.",
+    "meaning_ar": "يمثل هذا الموعد الإغلاق الإجرائي لتلقي طلبات تخصيص 2898 قطعة أرض سكنية ضمن برنامج 'مسكن'، حيث تقوم آلية الطرح الحكومي بامتصاص السيولة النقدية وتوجيه المعروض من الأراضي مباشرة إلى المستفيدين الأفراد في القطاع العقاري."
+  },
   "10 مستثمرين يضخون 100 مليون دولار في مشروعات صناعيه ب «العين السخنه»": {
     "meaning": "This capital allocation represents direct capital expenditure across multiple manufacturing facilities in the Ain Sokhna industrial zone, adding operational physical assets and production infrastructure to the local industrial base.",
     "meaning_ar": "يمثل هذا التخصيص الرأسمالي إنفاقاً رأسمالياً مباشراً عبر عدة منشآت تصنيعية في منطقة العين السخنة الصناعية، مما يضيف أصولاً تشغيلية مادية وبنية تحتية إنتاجية للقاعدة الصناعية المحلية."
@@ -1879,6 +1883,10 @@
   "سعر اليورو في مصر اليوم الاحد 6/9/2026.. تراجع طفيف": {
     "meaning": "A marginal decline in the euro exchange rate against the Egyptian pound reflects daily foreign exchange fluctuations within the official banking sector, adjusting the settlement cost for euro-denominated import transactions and foreign debt service obligations.",
     "meaning_ar": "يعكس التراجع الطفيف في سعر صرف اليورو أمام الجنيه المصري التحركات اليومية لأسعار الصرف في القطاع المصرفي، ويحدد تكلفة التسوية المباشرة للواردات والتزامات خدمة الدين المقومة باليورو."
+  },
+  "سعر اليورو في مصر اليوم الثلاثاء 8/9/2026.. ارتفاع جديد": {
+    "meaning": "An appreciation of the Euro against the Egyptian Pound raises the local currency cost of European imported goods and raw materials, while increasing the nominal debt service obligations for entities holding euro-denominated liabilities.",
+    "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للسلع والمواد الخام المستوردة من أوروبا، كما يرفع قيمة التزامات خدمة الدين المقومة باليورو على الشركات."
   },
   "سعر خام الحديد يتجاوز 100 دولار للطن في سنغافوره": {
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
