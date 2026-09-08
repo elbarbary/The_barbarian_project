@@ -3,6 +3,10 @@
     "meaning": "This equity transaction reduces the investing firm's direct ownership interest and associated voting power in the investee company to 5.4%, modifying the investee's overall shareholding structure.",
     "meaning_ar": "تؤدي هذه المعاملة إلى تقليص نسبة الملكية المباشرة وحقوق التصويت للشركة المستثمرة في رأسمال الشركة محل الاستثمار لتصل إلى 5.4%، مما يغير هيكل المساهمين في الشركة."
   },
+  "\"ايباي\" تزيل اختبارات تحديد جنس الجنين من منصتها": {
+    "meaning": "The platform enforces content and catalog moderation policies by restricting the listing and sale of non-compliant medical products across its digital marketplace.",
+    "meaning_ar": "تطبق المنصة سياسات تدقيق المعروضات الرقمية عبر حظر إدراج وتداول فئات محددة من المنتجات الطبية داخل سوقها الإلكتروني."
+  },
   "\"معيط\": هذه اهم المحاور التي يجب ان تعمل عليها الحكومه بعد انتهاء برنامج «الصندوق» نهايه العام الجاري": {
     "meaning": "Post-program economic policy frameworks transition macroeconomic management from multilateral lending conditions to domestic fiscal discipline, private sector enablement, and structural revenue measures.",
     "meaning_ar": "تعتمد أطر السياسات الاقتصادية لما بعد برامج التمويل الدولي على التحول من الالتزام بشروط المقرضين إلى تطبيق الانضباط المالي المحلي، وتمكين القطاع الخاص، وتنفيذ الإصلاحات الهيكلية للإيرادات العامة."
@@ -407,6 +411,11 @@
     "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
   },
+  "احتياطيات النقد الاجنبي في الصين ترتفع الي 3.438 تريليون دولار": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
+  },
   "احتياطيات اليابان تهبط 79.6 مليار دولار في اغسطس": {
     "meaning": "A decline in foreign exchange reserves reflects central bank balance sheet adjustments driven by foreign exchange market interventions, revaluations of foreign securities, or external payment settlements.",
     "meaning_ar": "يعكس انخفاض احتياطيات النقد الأجنبي تسويات في الميزانية العمومية للبنك المركزي ناتجة عن التدخلات في سوق الصرف، أو إعادة تقييم الأصول والسندات الأجنبية، أو سداد التزامات دولية."
@@ -446,6 +455,10 @@
   "ارتفاع احجام حاويات خط فيسكو بنسبه 22% مع انخفاض حاد في الارباح": {
     "meaning": "An increase in container shipping volumes alongside declining net profits reflects lower average freight rates or higher operating unit costs, whereby volume growth does not fully offset the compression in transport profit margins.",
     "meaning_ar": "يعكس نمو أحجام شحن الحاويات بالتزامن مع تراجع صافي الأرباح انخفاض متوسط أسعار النولون البحري أو ارتفاع تكاليف التشغيل للوحدة، حيث لا يعوض التوسع في الكميات المنقولة تقلص هوامش ربحية الشحن."
+  },
+  "ارتفاع اسعار الغاز الاوروبيه لاعلي مستوياتها منذ يناير 2023": {
+    "meaning": "Higher European natural gas benchmarks raise the pricing base for international LNG contracts, shifting the input cost structure for energy-intensive manufacturing and altering the landed price of imported LNG supplies.",
+    "meaning_ar": "يؤدي ارتفاع المؤشرات القياسية للغاز الطبيعي الأوروبي إلى رفع الأساس السعري لعقود الغاز المسال العالمية، مما يغير هيكل تكاليف التشغيل للمصانع كثيفة الاستهلاك للطاقة ويعدل التكلفة الإجمالية لشحنات الغاز المسال المستوردة."
   },
   "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
@@ -586,6 +599,10 @@
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
     "meaning_ar": "يعكس تسعير بورصة الدواجن اليومي أسعار التداول الفورية من أرض المزرعة، والتي تتحدد بناءً على تكاليف الأعلاف الحالية، ومصروفات التشغيل، ومستويات المعروض المتاح في السوق المحلي."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الثلاثاء 8-9-2026": {
+    "meaning": "Daily poultry exchange quotations reflect wholesale spot prices determined by real-time farm-gate supply volumes and operational feed input costs across the livestock supply chain.",
+    "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية أسعار التداول الفورية للبيع بالجملة، والتي تتحدد بناءً على حجم المعروض من المزارع وتكاليف مدخلات الأعلاف والتشغيل في قطاع الثروة الداجنة."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الجمعه 4-9-2026": {
     "meaning": "This headline reflects daily pricing updates in the local poultry exchange, which directly affect operating revenue and profit margins for agribusiness and poultry producers based on prevailing feed costs and supply-demand dynamics.",
@@ -934,6 +951,10 @@
   "الرييس السيسي: نتطلع الي تنويع محفظه التعاون مع البنك الاسيوي للاستثمار في البنيه التحتيه": {
     "meaning": "Broadening cooperation with multilateral development institutions like the AIIB provides state and private projects with access to direct financing lines and concessionary lending facilities across multiple infrastructure sectors.",
     "meaning_ar": "يتيح توسيع التعاون مع مؤسسات التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية خطوط تمويل مباشرة وتسهيلات ائتمانية ميسرة لمشروعات البنية التحتية في مختلف القطاعات."
+  },
+  "الزراعه : انتاج 79 الف طن تقاوي معتمده لدعم المساحات خلال موسم 2025 – 2026": {
+    "meaning": "The supply of 79,000 tonnes of certified seeds establishes the domestic volume of agricultural inputs allocated for the 2025–2026 planting season, directly providing the primary raw material base for targeted crop acreage.",
+    "meaning_ar": "يوفر إنتاج 79 ألف طن من التقاوي المعتمدة حجم المدخلات الزراعية المحلية المخصصة للموسم الزراعي 2025–2026، مما يشكل قاعدة المواد الخام الأساسية للمساحات المستهدفة."
   },
   "الزراعه: الخريف مرحله مهمه للمحاصيل": {
     "meaning": "The autumn season serves as the operational start of the cultivation cycle for winter crops, dictating the procurement and deployment schedules for agricultural inputs such as seeds and fertilizers across the supply chain.",
@@ -2597,6 +2618,10 @@
     "meaning": "This transaction represents a secondary market equity transfer of 20 million shares, reducing Emerald's ownership stake in Industrial and Engineering Projects Company while converting an equity holding into 23.4 million EGP in cash liquidity on its balance sheet.",
     "meaning_ar": "تمثل هذه العملية نقل ملكية 20 مليون سهم عبر السوق الثانوي، مما يقلص حصة مساهمة شركة إميرالد في شركة المشروعات الصناعية والهندسية ويحول جزءاً من أصولها المالية إلى سيولة نقدية بقيمة 23.4 مليون جنيه في ميزانيتها العمومية."
   },
+  "“اميرالد” تخفض حصتها في “المشروعات الصناعيه” الي 5.4%": {
+    "meaning": "Emerald reduces its equity ownership in Industrial Engineering Company for Construction and Development to 5.4%, which alters the company's shareholder structure and decreases Emerald's voting weight.",
+    "meaning_ar": "تخفض شركة إميرالد نسبة ملكيتها في شركة المشروعات الصناعية والهندسية إلى 5.4%، مما يغير هيكل المساهمين ويقلل من القوة التصويتية لإميرالد في الشركة."
+  },
   "“انثروبيك” تقترب من طرح تاريخي بتقييم تريليوني دولار": {
     "meaning": "An initial public offering at this scale involves listing corporate equity on a public exchange to transition ownership structure from private venture capital to institutional and retail market participants.",
     "meaning_ar": "يتضمن الطرح العام الأولي بهذا الحجم إدراج أسهم الشركة في سوق الأوراق المالية لنقل هيكل الملكية من رأس المال المخاطر الخاص إلى متداولي السوق من المؤسسات والأفراد."
@@ -2684,6 +2709,10 @@
   "“كينجدوم” الصينيه تعتزم تشغيل مصنع للكتان في مصر الربع الاول 2027": {
     "meaning": "The setup establishes an industrial manufacturing base for flax processing within the Egyptian textiles sector, scheduled for commercial operation in the first quarter of 2027.",
     "meaning_ar": "يُمثّل هذا الإجراء إنشاء قاعدة تصنيع صناعية لمعالجة الكتان داخل قطاع الغزل والنسيج المصري، والمحدد بدء تشغيلها التجاري في الربع الأول من عام 2027."
+  },
+  "“لايم فست” تخفض حصتها في “المركز الطبي” الي 59.4%": {
+    "meaning": "This equity transaction reduces LimeVest's ownership and voting rights while maintaining its majority controlling position above 50%. The divestment redistributes equity to other market participants or expands the company's free-float shares on the exchange.",
+    "meaning_ar": "يؤدي هذا التخارج الجزئي إلى تقليص حصة ملكية وحقوق تصويت 'لايم فست' مع احتفاظها بحصة الأغلبية الحاكمة التي تتجاوز 50%. وتعيد المعاملة توزيع الملكية لأطراف أخرى في السوق أو ترفع نسبة الأسهم حرة التداول للشركة في البورصة."
   },
   "“ماريدايف” تتحول لربح 4.55 مليون دولار في النصف الاول": {
     "meaning": "The company's semi-annual financial statements show operating revenues exceeding total operating, financing, and administrative expenses, shifting the bottom-line balance from a net loss to a net profit of $4.55 million.",
