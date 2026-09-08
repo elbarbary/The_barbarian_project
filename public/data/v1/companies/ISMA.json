@@ -7,12 +7,12 @@
  "sector": "Food, Beverages and Tobacco",
  "sector_ar": "أغذية و مشروبات و تبغ",
  "market": {
-  "last_close": 32.11,
+  "last_close": 32.5,
   "date": "2026-09-08",
   "open": 33.5,
   "high": 34.37,
   "low": 31.7,
-  "volume": 379013
+  "volume": 404907
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 89856499,
   "free_float": 0.19851500000000002,
   "float_shares": 17837862.898985002,
-  "perf_1w": -7.490636704119853,
-  "perf_1m": 3.9158576051779965,
-  "perf_3m": 7.0690230076692275,
-  "avg_volume_30d": 745363.6999999986,
-  "relative_volume_10d": 0.5059545065050292,
+  "perf_1w": -6.367041198501875,
+  "perf_1m": 5.177993527508096,
+  "perf_3m": 8.36945648549517,
+  "avg_volume_30d": 746226.8333333319,
+  "relative_volume_10d": 0.5405210939082086,
   "median_volume_20d": 685245.5,
   "rv20": 0.46758570468540106,
   "normal_value_30d": 20246257.54,

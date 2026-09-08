@@ -774,11 +774,11 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ASPI/profile",
   "record": {
-   "filings": 198,
+   "filings": 199,
    "first_filing": "2021-10-11",
    "trading_suspensions": 1,
    "trading_resumptions": 1,
-   "capital_increases": 4,
+   "capital_increases": 5,
    "general_assemblies": 22,
    "periods_reported": 33,
    "loss_making_periods": 4
@@ -1538,7 +1538,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/DEIN/profile",
   "record": {
-   "filings": 597,
+   "filings": 598,
    "first_filing": "2010-01-06",
    "trading_suspensions": 8,
    "trading_resumptions": 9,
@@ -3252,7 +3252,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/IEEC/profile",
   "record": {
-   "filings": 180,
+   "filings": 182,
    "first_filing": "2021-06-28",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
