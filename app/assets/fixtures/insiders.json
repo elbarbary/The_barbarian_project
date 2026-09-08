@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-08T12:21:43.740606+00:00",
+  "updatedAt": "2026-09-08T12:31:48.675055+00:00",
   "asOf": "2026-09-08",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 80,
+    "totalRecords": 82,
     "buyCount": 13,
     "sellCount": 9,
     "treasuryBuyCount": 13,
@@ -36,6 +36,28 @@
     "2026-08-20"
   ],
   "items": [
+    {
+      "id": "filing-294465",
+      "filingId": "294465",
+      "sourceType": "post_execution_filing",
+      "date": "2026-09-08",
+      "ticker": "IEEC",
+      "company": "Industrial & Engineering Enterprises Co.",
+      "companyAr": "المشروعات الصناعية والهندسية",
+      "sector": "Contracting & Construction Engineering",
+      "sectorAr": "مقاولات و إنشاءات هندسية",
+      "action": "disclosure",
+      "actionLabel": "Post-Execution Trade Form",
+      "actionLabelAr": "إفصاح بعد التنفيذ",
+      "relationship": "insider",
+      "relationshipLabel": "Insider / Major Holder",
+      "relationshipLabelAr": "متصل / مساهم رئيسي",
+      "positionRaw": "Post-Implementation Disclosure",
+      "shares": null,
+      "title": "المشروعات الصناعية والهندسية (IEEC.CA) - بيان بخصوص نموذج إفصاح بعد التنفيذ",
+      "titleEn": "Industrial and Engineering Enterprises (IEEC.CA) - Statement regarding a post-execution disclosure form",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294465"
+    },
     {
       "id": "filing-294463",
       "filingId": "294463",
@@ -79,6 +101,28 @@
       "title": "الغربية الاسلامية للتنمية العمرانية (GIHD.CA) - بيان بخصوص نموذج إفصاح بعد التنفيذ",
       "titleEn": "Gharbia Islamic Urban Development (GIHD.CA) - Statement regarding the post-implementation disclosure form",
       "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294440"
+    },
+    {
+      "id": "filing-294467",
+      "filingId": "294467",
+      "sourceType": "post_execution_filing",
+      "date": "2026-09-08",
+      "ticker": "ELWA",
+      "company": "Elwadi for International Investment & Development",
+      "companyAr": "الوادي العالمية للاستثمار والتنمية",
+      "sector": "Travel & Leisure",
+      "sectorAr": "سياحة وترفيه",
+      "action": "disclosure",
+      "actionLabel": "Post-Execution Trade Form",
+      "actionLabelAr": "إفصاح بعد التنفيذ",
+      "relationship": "insider",
+      "relationshipLabel": "Insider / Major Holder",
+      "relationshipLabelAr": "متصل / مساهم رئيسي",
+      "positionRaw": "Post-Implementation Disclosure",
+      "shares": null,
+      "title": "الوادى العالمية للاستثمار و التنمية (ELWA.CA) - بيان بخصوص نموذج إفصاح بعد التنفيذ",
+      "titleEn": "Al Wadi Company for Investment and Development (ELWA.CA) - Statement regarding the post-implementation disclosure form",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294467"
     },
     {
       "id": "filing-294437",

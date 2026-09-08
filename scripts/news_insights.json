@@ -1059,6 +1059,10 @@
     "meaning": "Sector rotation reallocates trading capital across different industry groups, maintaining aggregate market turnover and driving upward movement in the benchmark EGX30 index.",
     "meaning_ar": "تعيد عمليات التدوير القطاعي توزيع السيولة النقدية بين مختلف القطاعات، مما يحافظ على إجمالي قيم التداول في السوق ويدفع مؤشر EGX30 الرئيسي نحو مستويات أعلى."
   },
+  "الشركات السعوديه تتجاوز نظيرتها العالميه في تبني الرقمنه لتطوير التجاره": {
+    "meaning": "Higher enterprise adoption rates of digital platforms automate trade settlement, inventory tracking, and supply chain management at a faster pace than international baseline averages.",
+    "meaning_ar": "يؤدي ارتفاع معدلات تبني الشركات للمنصات الرقمية إلى أتمتة عمليات التسوية التجارية وتتبع المخزون وإدارة سلاسل الإمداد بوتيرة أسرع من المتوسطات العالمية المرجعية."
+  },
   "الصحه: 25 مليار جنيه تكلفه العلاج علي نفقه الدوله خلال 8 اشهر": {
     "meaning": "State-funded medical expenditures channel public healthcare budget allocations directly into operational claims and procurement volumes for public hospitals and authorized private healthcare providers.",
     "meaning_ar": "توجه مخصصات العلاج على نفقة الدولة الإنفاق الحكومي المباشر نحو سداد مستحقات الخدمات الطبية وتوريدات الأدوية في المستشفيات العامة ومقدمي الرعاية الصحية المعتمدين."
@@ -2077,6 +2081,10 @@
     "meaning": "Lowering upfront construction capital expenditures through the procurement of non-fire-rated cladding materials increases structural fire vulnerability, shifting liabilities to operational repair expenses, asset replacement costs, and commercial property insurance claims.",
     "meaning_ar": "يؤدي خفض النفقات الرأسمالية للبناء عبر استخدام مواد واجهات غير مطابقة لمواصفات مقاومة الحريق إلى زيادة المخاطر التشغيلية، مما ينقل الأعباء المالية إلى تكاليف إصلاح الأصول المتضررة وأقساط التأمين التجاري."
   },
+  "فرنسا تحظر استيراد جميع منتجات المستوطنات الاسراييليه في الضفه الغربيه": {
+    "meaning": "This measure restricts market access for goods originating from West Bank settlements by halting customs clearance and commercial distribution within the French market.",
+    "meaning_ar": "يقيد هذا الإجراء النفاذ إلى الأسواق للبضائع القادمة من مستوطنات الضفة الغربية عن طريق وقف التخليص الجمركي والتوزيع التجاري لها داخل السوق الفرنسية."
+  },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
     "meaning_ar": "يؤدي تأجيل الجمعية العامة لشركة ابن سينا فارما لعدم اكتمال النصاب القانوني إلى إرجاء التصويت الرسمي والقرارات المؤسسية بشأن بنود جدول الأعمال، مثل اعتماد القوائم المالية أو توزيعات الأرباح، لحين انعقاد الاجتماع الثاني وفقاً للضوابط القانونية."
@@ -2452,6 +2460,10 @@
   "موشر البورصه الرييسي يتراجع 0.09% والتداولات تتخطي 19 مليار جنيه": {
     "meaning": "A marginal dip in the benchmark EGX30 index alongside trading turnover exceeding EGP 19 billion reflects high daily market liquidity and substantial execution volume across listed securities without significant net directional movement in the headline index.",
     "meaning_ar": "يعكس التراجع الطفيف للمؤشر الرئيسي للبورصة مع تجاوز قيم التداول 19 مليار جنيه سيولة نقدية مرتفعة وحجم تنفيذات واسع على الأوراق المالية المقيدة خلال جلسة التداول دون تسجيل تحرك سعري حاد في الاتجاه العام للمؤشر."
+  },
+  "موشر البورصه الرييسي يتراجع 0.8% والسبعيني ينخفض 1.24%": {
+    "meaning": "The decline in the benchmark EGX30 and the small-and-medium-cap EGX70 indices reflects a broad contraction in aggregate market capitalisation across both blue-chip corporations and mid-tier listed equities during the trading session.",
+    "meaning_ar": "يعكس تراجع مؤشري \"إيجي إكس 30\" الرئيسي و\"إيجي إكس 70\" انخفاضاً واسع النطاق في القيمة السوقية الإجمالية للأسهم القيادية والمتوسطة المدرجة خلال جلسة التداول."
   },
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
