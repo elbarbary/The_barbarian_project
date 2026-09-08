@@ -27,6 +27,10 @@
     "meaning": "Egyptian fertilizer producers are participating in an international export tender to supply 800,000 metric tons of product to the Indian market, allocating domestic industrial output toward bulk foreign trade.",
     "meaning_ar": "تشارك شركات الأسمدة المصرية في مناقصة تصدير دولية لتوريد 800 ألف طن متري من المنتجات إلى السوق الهندية، مما يوجه جزءاً من الإنتاج الصناعي المحلي نحو التجارة الخارجية."
   },
+  "21 سبتمبر.. نهايه حق توزيع 57 قرشا لسهم “سي اي كابيتال”": {
+    "meaning": "September 21 represents the ex-dividend eligibility cutoff date, entitling shareholders holding CI Capital stock at the close of that trading session to a cash dividend distribution of EGP 0.57 per share.",
+    "meaning_ar": "يمثل يوم 21 سبتمبر تاريخ نهاية الحق في التوزيع النقدي، حيث يحصل مساهمو شركة سي آي كابيتال المقيدون بنهاية جلسة ذلك اليوم على توزيعات نقدية بواقع 57 قرشًا لكل سهم."
+  },
   "235 مليون دولار مشتريات الاجانب في ادوات الدين المصريه بالسوق الثانوي": {
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
@@ -1412,6 +1416,10 @@
     "meaning": "This memorandum of understanding establishes a collaborative framework for designing and developing automotive manufacturing facilities within the domestic market.",
     "meaning_ar": "تحدد مذكرة التفاهم هذه إطاراً تعاونياً لتخطيط وتطوير منشآت لتصنيع السيارات داخل السوق المحلي."
   },
+  "تويوتا اليابانيه تعتزم تجميع فيه جديده من سياراتها بمصر الفتره المقبله": {
+    "meaning": "Local automotive assembly expands manufacturing lines to include new completely-knocked-down (CKD) or semi-knocked-down (SKD) operations within domestic facilities. This setup utilizes local component suppliers and operates under domestic manufacturing customs frameworks rather than finished vehicle import duties.",
+    "meaning_ar": "يتضمن التجميع المحلي للسيارات إضافة خطوط إنتاج لتجميع فئات جديدة بنظام الأجزاء المفككة داخل المنشآت الصناعية المحلية. وتعتمد هذه الآلية التشغيلية على موردي المكونات المحلية وتخضع للأطر الجمركية والضريبية الخاصة بالتصنيع المحلي بدلاً من رسوم استيراد السيارات كاملة الصنع."
+  },
   "ثروه مليارديرات العالم تتجاوز 15 تريليون دولار": {
     "meaning": "Total billionaire wealth represents the aggregated market valuation of equity holdings in publicly traded and private enterprises, real estate, and financial assets priced across global capital markets.",
     "meaning_ar": "يمثل إجمالي ثروات المليارديرات القيمة السوقية المجمعة لحصص الملكية في الشركات المدرجة والخاصة والأصول المالية والرأسمالية المقومة بالأسعار الجارية في الأسواق العالمية."
@@ -2492,6 +2500,10 @@
   "“جي بي مورجان” يتوقع رفع المركزي الاوروبي الفايده للمره الثالثه في ديسمبر": {
     "meaning": "A policy rate increase by the European Central Bank raises the benchmark cost of borrowing in euros and alters yield differentials across international debt markets.",
     "meaning_ar": "رفع سعر الفائدة من قبل البنك المركزي الأوروبي يحدد تكلفة إقراض مرجعية أعلى للتمويلات باليورو ويعدل فروق العوائد في أسواق الدين الدولية."
+  },
+  "“رواد” تتكبد خساير 7.6 مليون جنيه في النصف الاول": {
+    "meaning": "The company registers a net loss of EGP 7.6 million for the first half of the year, reflecting total operational and financing expenses that exceed generated revenues during the six-month period.",
+    "meaning_ar": "تسجل الشركة صافي خسائر بقيمة 7.6 مليون جنيه عن النصف الأول من العام، مما يعكس تجاوز إجمالي التكاليف التشغيلية والتمويلية للإيرادات المحققة خلال فترة الستة أشهر."
   },
   "“ريمت” تطلق خدمه الايداع المباشر للحوالات الوارده الي الحسابات البنكيه والمحافظ": {
     "meaning": "The service integrates inward cross-border remittance processing directly into local commercial bank accounts and electronic mobile wallets, automating clearing and settlement between international transfer networks and domestic payment infrastructure.",
