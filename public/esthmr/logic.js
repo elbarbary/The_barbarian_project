@@ -2724,15 +2724,19 @@ export class Component extends Base {
         showName: t.w >= 7 && t.h >= 6.5,
         showBadge: t.w >= 6 && t.h >= 5.5,
         showVol: t.w >= 9 && t.h >= 9,
-        showLink: t.w >= 13 && t.h >= 11 && Boolean(t.latestLink),
+        showLink: t.w >= 7 && t.h >= 5.5 && Boolean(t.latestLink),
         volFormatted: formatShares(t.totShares),
         latestLink: t.latestLink || '',
         hasLatestLink: Boolean(t.latestLink),
         openCompany: () => {
-          this.setState({
-            insiderViewMode: 'table',
-            insiderQ: t.ticker || t.name,
-          });
+          if (t.ticker && !t.ticker.startsWith('DEMO')) {
+            this.setState({ screen: 'company', ticker: t.ticker });
+          } else {
+            this.setState({
+              insiderViewMode: 'table',
+              insiderQ: t.ticker || t.name,
+            });
+          }
         },
         openProfile: () => {
           if (t.ticker && !t.ticker.startsWith('DEMO')) this.setState({ screen: 'company', ticker: t.ticker });

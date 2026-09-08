@@ -26,6 +26,7 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES_FILE = REPO / "public" / "data" / "v1" / "companies.json"
 LATEST_DISCLOSURES = REPO / "public" / "data" / "v1" / "disclosures" / "latest.json"
 PDF_DIR = REPO / "data-source" / "official" / "ownership" / "pdfs"
+BULLETIN_STORE = REPO / "scripts" / "insider_bulletin_rows.json"
 OUT_JSON = REPO / "public" / "data" / "v1" / "insiders.json"
 FIXTURE_JSON = REPO / "app" / "assets" / "fixtures" / "insiders.json"
 
@@ -170,6 +171,21 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -
     records: list[dict] = []
     seen_keys: set[str] = set()
 
+    # 1. Load cached bulletin records if available (vital for ephemeral CI runners where PDFs are gitignored)
+    if BULLETIN_STORE.exists():
+        try:
+            cached = json.loads(BULLETIN_STORE.read_text(encoding="utf-8"))
+            if isinstance(cached, list):
+                for r in cached:
+                    act_norm = "buy" if r.get('action') in ("buy", "bought") else "sell"
+                    k = f"{r.get('date')}:{r.get('ticker') or r.get('company')}:{act_norm}:{r.get('shares')}:{r.get('relationship')}"
+                    if k not in seen_keys:
+                        seen_keys.add(k)
+                        records.append(r)
+        except Exception as e:
+            print(f"Warning loading {BULLETIN_STORE}: {e}", file=sys.stderr)
+
+    # 2. Parse any local PDFs (e.g. from local environment or new downloads)
     for pdf_path in sorted(PDF_DIR.glob("*.pdf")):
         fname = pdf_path.name
         m_filing = re.search(r"egx-(\d+)", fname)
@@ -215,6 +231,13 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -
                 cur_lines.append(line)
         if cur_lines:
             parse_block(cur_lines, session_date, filing_id, fname, pos_start, tx_start, vol_start, alias_map, by_ticker, records, seen_keys)
+
+    # 3. Save accumulated records back to store so CI keeps them
+    if records:
+        try:
+            BULLETIN_STORE.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception as e:
+            print(f"Warning saving {BULLETIN_STORE}: {e}", file=sys.stderr)
 
     return records
 
