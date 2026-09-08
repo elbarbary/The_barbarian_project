@@ -411,6 +411,10 @@
     "meaning": "Cleopatra Hospital Group records a 34.4% year-over-year decline in bottom-line net profit for the first half of the year, reflecting higher operational expenses, financing costs, or compressed margins relative to total revenues during the period.",
     "meaning_ar": "سجلت مجموعة مستشفيات كليوباترا تراجعاً في صافي أرباح النصف الأول بنسبة 34.4% على أساس سنوي، مما يعكس ارتفاع التكاليف التشغيلية أو أعباء التمويل مقارنة بحجم الإيرادات المحققة خلال تلك الفترة."
   },
+  "ارتفاع احجام حاويات خط فيسكو بنسبه 22% مع انخفاض حاد في الارباح": {
+    "meaning": "An increase in container shipping volumes alongside declining net profits reflects lower average freight rates or higher operating unit costs, whereby volume growth does not fully offset the compression in transport profit margins.",
+    "meaning_ar": "يعكس نمو أحجام شحن الحاويات بالتزامن مع تراجع صافي الأرباح انخفاض متوسط أسعار النولون البحري أو ارتفاع تكاليف التشغيل للوحدة، حيث لا يعوض التوسع في الكميات المنقولة تقلص هوامش ربحية الشحن."
+  },
   "ارتفاع اسعار الوقود في اوروبا يهدد بزياده الضغوط التضخميه مع نقص قدرات التكرير": {
     "meaning": "Refinery capacity shortages restrict the supply of refined petroleum products, raising fuel prices and directly increasing transportation and operational input costs across supply chains.",
     "meaning_ar": "يؤدي نقص قدرات التكرير إلى تقليص المعروض من المشتقات البترولية، مما يرفع أسعار الوقود ويزيد تكاليف النقل والتشغيل المباشرة عبر سلاسل التوريد."
@@ -1636,6 +1640,10 @@
   "شراكه بين سيتي ايدج ومدن مصر لتقديم خدمات اداره المنشات في مشروعات بالعلمين الجديده": {
     "meaning": "The agreement establishes an operational partnership to deliver facility management, asset maintenance, and infrastructure support services across designated development projects in New Alamein.",
     "meaning_ar": "تنص هذه الشراكة على إطار تشغيلي مشترك لإدارة وصيانة المرافق وتشغيل الأصول العقارية في مشروعات محددة بمدينة العلمين الجديدة."
+  },
+  "شركتا اكس-برس فيدرز وتي اس لاينز تطلقان خدمات اقليميه جديده": {
+    "meaning": "The launch adds maritime shipping routes and scheduled feeder vessel capacity across regional ports, expanding the operational transport network of both carriers.",
+    "meaning_ar": "يضيف إطلاق هذه الخدمات مسارات ملاحية منتظمة وطاقة استيعابية لسفن التغذية عبر الموانئ الإقليمية، مما يوسع الشبكة التشغيلية للنقل البحري للشركتين."
   },
   "شريف الجبلي: مصر تتحول الي مركز اقليمي للتجاره والخدمات الماليه والذكاء الاصطناعي": {
     "meaning": "Developing regional hubs in trade, financial services, and artificial intelligence relies on expanding cross-border logistics infrastructure, integrating digital payment networks, and establishing local data and computing centers.",
