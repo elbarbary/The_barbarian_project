@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-07T10:37:41.432405+00:00",
+  "builtAt": "2026-09-08T05:35:36.147697+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192096,
-    "withoutTickerInHeading": 36101,
+    "items": 192110,
+    "withoutTickerInHeading": 36110,
     "tickerNotInThisDirectory": 28860,
-    "attributedToAnIssuer": 127135,
+    "attributedToAnIssuer": 127140,
     "months": [
       {
         "month": "2005-01",
@@ -1831,8 +1831,8 @@
       {
         "month": "2026-09",
         "harvested": "2026-09-07",
-        "items": 207,
-        "expected": 207,
+        "items": 221,
+        "expected": 221,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 568,
+    "items": 571,
     "failures": {}
   },
   "issuers": [
@@ -2478,9 +2478,9 @@
     },
     {
       "ticker": "CICH",
-      "egxFilingCount": 412,
-      "latestEgxFilingId": "293712",
-      "latestEgxFilingAt": "2026-08-23T09:37:03",
+      "egxFilingCount": 413,
+      "latestEgxFilingId": "294423",
+      "latestEgxFilingAt": "2026-09-07T16:47:52",
       "candidateIssuerWebsite": "https://www.cicapital.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/CICH/profile",
       "websiteStatus": null,
@@ -3444,9 +3444,9 @@
     },
     {
       "ticker": "INFI",
-      "egxFilingCount": 604,
-      "latestEgxFilingId": "294203",
-      "latestEgxFilingAt": "2026-09-01T10:03:46",
+      "egxFilingCount": 605,
+      "latestEgxFilingId": "294416",
+      "latestEgxFilingAt": "2026-09-07T16:14:00",
       "candidateIssuerWebsite": "https://www.foodico.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/INFI/profile",
       "websiteStatus": null,
@@ -3548,9 +3548,9 @@
     },
     {
       "ticker": "KRDI",
-      "egxFilingCount": 274,
-      "latestEgxFilingId": "294298",
-      "latestEgxFilingAt": "2026-09-03T11:12:52",
+      "egxFilingCount": 275,
+      "latestEgxFilingId": "294415",
+      "latestEgxFilingAt": "2026-09-07T16:09:01",
       "candidateIssuerWebsite": "https://www.nahrelkhair.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/KRDI/profile",
       "websiteStatus": null,
@@ -4222,9 +4222,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 323,
-      "latestEgxFilingId": "294386",
-      "latestEgxFilingAt": "2026-09-07T09:14:51",
+      "egxFilingCount": 324,
+      "latestEgxFilingId": "294422",
+      "latestEgxFilingAt": "2026-09-07T16:44:59",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4778,9 +4778,9 @@
     },
     {
       "ticker": "VLMRA",
-      "egxFilingCount": 15,
-      "latestEgxFilingId": "294327",
-      "latestEgxFilingAt": "2026-09-03T16:35:30",
+      "egxFilingCount": 16,
+      "latestEgxFilingId": "294421",
+      "latestEgxFilingAt": "2026-09-07T16:42:08",
       "candidateIssuerWebsite": "https://www.ekholding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/VLMRA/profile",
       "websiteStatus": null,

@@ -2518,5 +2518,275 @@
       }
     ],
     "fetchedAt": "2026-09-07T10:36:14.420973+00:00"
+  },
+  "EGS70H02C014": {
+    "ticker": "SPHT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS70H02C014",
+        "issuerName": "ElShams Pyramids Co. for Hotels & Touristic Projects s.a.e"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:32:53.059477+00:00"
+  },
+  "EGS32041C013": {
+    "ticker": "SPIN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS32041C013",
+        "issuerName": "Alexandria Spinning & Weaving Company ( SPINALEX )"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:32:56.700961+00:00"
+  },
+  "EGS73BR1C013": {
+    "ticker": "SPMD",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS73BR1C013",
+        "issuerName": "Speed Medical S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:32:59.549839+00:00"
+  },
+  "EGS30201C015": {
+    "ticker": "SUGR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30201C015",
+        "issuerName": "DELTA SUGAR"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:01.950248+00:00"
+  },
+  "EGS3C351C011": {
+    "ticker": "SVCE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3C351C011",
+        "issuerName": "South Valley Cement"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:04.164342+00:00"
+  },
+  "EGS3G0Z1C014": {
+    "ticker": "SWDY",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS3G0Z1C014",
+        "issuerName": "AlSewedy Electric"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:06.219748+00:00"
+  },
+  "EGS597R1C017": {
+    "ticker": "TALM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS597R1C017",
+        "issuerName": "Taaleem Management Services"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:08.450571+00:00"
+  },
+  "EGS21EB1C011": {
+    "ticker": "TANM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21EB1C011",
+        "issuerName": "Tanmiya for Real Estate Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:11.093377+00:00"
+  },
+  "EGS490S1C014": {
+    "ticker": "TAQA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS490S1C014",
+        "issuerName": "Taqa Arabia"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:13.337572+00:00"
+  },
+  "EGS691S1C011": {
+    "ticker": "TMGH",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS691S1C011",
+        "issuerName": "Talaat Mostafa Group Holding"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:15.565770+00:00"
+  },
+  "EGS79072C012": {
+    "ticker": "TRTO",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS79072C012",
+        "issuerName": "Trans Oceans Tours"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:17.941220+00:00"
+  },
+  "EGS7D231C010": {
+    "ticker": "TWSA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS7D231C010",
+        "issuerName": "Tawasoa for Factoring"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:20.192534+00:00"
+  },
+  "EGS67331C016": {
+    "ticker": "TYCN",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS67331C016",
+        "issuerName": "Alexandria National CompanyFor Financial Investment"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:22.611379+00:00"
+  },
+  "EGS600M1C017": {
+    "ticker": "UBEE",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS600M1C017",
+        "issuerName": "The United Bank"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:24.827082+00:00"
+  },
+  "EGS30451C016": {
+    "ticker": "UEFM",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30451C016",
+        "issuerName": "Upper Egypt Mills"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:27.249075+00:00"
+  },
+  "EGS21531C016": {
+    "ticker": "UEGC",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS21531C016",
+        "issuerName": "ElSaeed Contracting & Real Estate Investment Company SCCD"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:29.293991+00:00"
+  },
+  "EGS38161C013": {
+    "ticker": "UNIP",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38161C013",
+        "issuerName": "Universal com.for packagingmaterials andpaper- Unipack"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:31.741289+00:00"
+  },
+  "EGS65061C011": {
+    "ticker": "UNIT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS65061C011",
+        "issuerName": "United For Housing & DEVELOPMENT"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:33.776949+00:00"
+  },
+  "EGS505Z1C018": {
+    "ticker": "VALU",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS505Z1C018",
+        "issuerName": "U Consumer Finance"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:35.730159+00:00"
+  },
+  "EGS69082C013": {
+    "ticker": "VLMR",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69082C013",
+        "issuerName": "Egypt Kuwait Holding S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:37.953423+00:00"
+  },
+  "EGS69081C023": {
+    "ticker": "VLMRA",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS69081C023",
+        "issuerName": "Egypt Kuwait Holding S.A.E"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:40.171170+00:00"
+  },
+  "EGS30421C019": {
+    "ticker": "WCDF",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS30421C019",
+        "issuerName": "MIDDLE & WEST OF DELTA FOR MILLS COMPANY"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:42.634570+00:00"
+  },
+  "EGS01071C017": {
+    "ticker": "WKOL",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS01071C017",
+        "issuerName": "WadI Kom Ombo Land Reclamation"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:45.270623+00:00"
+  },
+  "EGS3E7F1C016": {
+    "ticker": "YAYT",
+    "status": "not_found",
+    "rows": [],
+    "fetchedAt": "2026-09-08T05:33:47.573826+00:00"
+  },
+  "EGS38251C012": {
+    "ticker": "ZEOT",
+    "status": "matched",
+    "rows": [
+      {
+        "isin": "EGS38251C012",
+        "issuerName": "Extracted Oils & Drivatives Company"
+      }
+    ],
+    "fetchedAt": "2026-09-08T05:33:49.808867+00:00"
   }
 }
