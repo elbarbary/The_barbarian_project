@@ -1507,6 +1507,10 @@
     "meaning": "Increased government borrowing requirements to fund defense expenditure expand sovereign debt issuance in the primary market, which generates yield volatility across sovereign bond markets.",
     "meaning_ar": "تؤدي زيادة متطلبات الاقتراض الحكومي لتمويل الإنفاق الدفاعي إلى ارتفاع حجم إصدارات الديون السيادية في السوق الأولية، وهو ما يولد تقلبات في عوائد وأسعار السندات الحكومية."
   },
+  "بنك اوف امريكا يتوقع صعود خام برنت الي 83 دولارا": {
+    "meaning": "Changes in global Brent crude prices directly alter domestic fuel subsidy allocations, industrial feedstock costs, and the foreign currency expenditure required for petroleum imports.",
+    "meaning_ar": "تؤثر تغيرات أسعار خام برنت عالمياً بشكل مباشر على مخصصات دعم الوقود المحلية، وتكاليف مدخلات الإنتاج الصناعي، وحجم الإنفاق بالنقد الأجنبي الموجه لاستيراد المواد البترولية."
+  },
   "بنك مصر يوفر افضل الحلول من خلال تمويل «اكسبريس» للمشروعات الصغيره والمتوسطه": {
     "meaning": "Banque Misr provides small and medium-sized enterprises with streamlined debt financing products through its Express loan program, supplying working capital and operational liquidity directly to eligible businesses under standardized lending procedures.",
     "meaning_ar": "يقدم بنك مصر تسهيلات ائتمانية مبسطة للمشروعات الصغيرة والمتوسطة عبر برنامج تمويل «إكسبريس»، مما يتيح السيولة التشغيلية ورأس المال العامل للشركات المستوفية للشروط وفق إجراءات إقراض قياسية."
@@ -1839,6 +1843,10 @@
   "خالد عباس: العاصمه الاداريه تتحول الي محور لاداره الدوله والاستثمار": {
     "meaning": "The transition centralizes government ministries and commercial business districts within the New Administrative Capital, consolidating state administrative operations and corporate real estate activity into a single urban hub.",
     "meaning_ar": "يركز هذا التحول المقار الحكومية والوزارية ومناطق الأعمال والمال داخل العاصمة الإدارية الجديدة، مما يجمع إدارة الدولة والأنشطة العقارية التجارية ضمن نطاق جغرافي موحد."
+  },
+  "خالد عباس: النظره الاستثماريه لمصر شهدت تحولا جذريا خلال العقد الماضي": {
+    "meaning": "Changes in the broader investment framework reflect structural policy shifts, legislative updates, and state-directed infrastructure programs that alter the operational environment for capital allocation and urban development projects.",
+    "meaning_ar": "تعكس التغيرات في المشهد الاستثماري العام التحولات الهيكلية في السياسات الاقتصادية والتحديثات التشريعية ومشاريع البنية التحتية التي تعيد تشكيل البيئة التشغيلية لتخصيص رؤوس الأموال ومشاريع التطوير العمراني."
   },
   "خالد عبدالغفار: ادراج معامل هييه الدواء بقايمه منظمه الصحه العالميه انجاز دولي جديد": {
     "meaning": "The listing of the Egyptian Drug Authority's laboratories by the World Health Organization establishes international regulatory accreditation for local pharmaceutical testing standards and aligns batch release quality controls with global benchmarks.",
