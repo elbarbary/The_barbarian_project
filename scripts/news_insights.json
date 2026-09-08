@@ -1,4 +1,8 @@
 {
+  "\"اميرالد للاتصالات\" تخفض حصتها في راسمال المشروعات الصناعيه الي 5.4%": {
+    "meaning": "This equity transaction reduces the investing firm's direct ownership interest and associated voting power in the investee company to 5.4%, modifying the investee's overall shareholding structure.",
+    "meaning_ar": "تؤدي هذه المعاملة إلى تقليص نسبة الملكية المباشرة وحقوق التصويت للشركة المستثمرة في رأسمال الشركة محل الاستثمار لتصل إلى 5.4%، مما يغير هيكل المساهمين في الشركة."
+  },
   "\"معيط\": هذه اهم المحاور التي يجب ان تعمل عليها الحكومه بعد انتهاء برنامج «الصندوق» نهايه العام الجاري": {
     "meaning": "Post-program economic policy frameworks transition macroeconomic management from multilateral lending conditions to domestic fiscal discipline, private sector enablement, and structural revenue measures.",
     "meaning_ar": "تعتمد أطر السياسات الاقتصادية لما بعد برامج التمويل الدولي على التحول من الالتزام بشروط المقرضين إلى تطبيق الانضباط المالي المحلي، وتمكين القطاع الخاص، وتنفيذ الإصلاحات الهيكلية للإيرادات العامة."
@@ -1027,6 +1031,10 @@
     "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية المرتبطة بدولة رئيسية منتجة للنفط إلى إضافة علاوة مخاطر العرض إلى الأسعار القياسية العالمية، مما ينعكس على تكاليف استيراد الطاقة وأسعار مدخلات الإنتاج للقطاعات المرتبطة."
   },
+  "النفط يوسع مكاسبه بعد اعلان السعوديه تعرض منشات طاقه لهجمات": {
+    "meaning": "Attacks on major energy infrastructure disrupt crude processing and export capacity, which incorporates an immediate geopolitical supply-risk premium into global benchmark oil prices.",
+    "meaning_ar": "تؤدي الهجمات على البنية التحتية للطاقة إلى تعطيل قدرات معالجة وتصدير الخام، مما يضيف علاوة مخاطر جيوسياسية فورية على أسعار عقود النفط في الأسواق العالمية."
+  },
   "النقل: الانتهاء من تنفيذ مصنع الانظمه الكهرباييه بمجمع الستوم نوفمبر 2026": {
     "meaning": "Establishing the electrical systems factory sets a fixed completion timeline for local rail infrastructure manufacturing, shifting the sourcing of operational components from direct imports to domestic production lines.",
     "meaning_ar": "يحدد الانتهاء من تنفيذ مصنع الأنظمة الكهربائية جدولاً زمنياً للتصنيع المحلي لمكونات السكك الحديدية، مما ينقل توفير الأنظمة التشغيلية من الاستيراد المباشر إلى خطوط الإنتاج المحلية."
@@ -1058,6 +1066,10 @@
   "امريكا تستهدف كيانات تركيه بعقوبات جديده مرتبطه بايران": {
     "meaning": "The imposition of secondary sanctions restricts targeted entities from accessing dollar-clearing systems and international banking networks, halting cross-border trade settlements and supply chain operations tied to sanctioned jurisdictions.",
     "meaning_ar": "يؤدي فرض العقوبات الثانوية إلى حظر وصول الكيانات المستهدفة إلى أنظمة المقاصة بالدولار والشبكات المصرفية الدولية، مما يعطل التسويات التجارية وسلاسل الإمداد المرتبطة بالجهات الخاضعة للعقوبات."
+  },
+  "اميرالد للاتصالات تقلص حصتها في المشروعات الصناعيه والهندسيه": {
+    "meaning": "Emerald for Real Estate Investments executes a partial divestment of its equity stake in Industrial and Engineering Projects, directly reducing its proportional ownership, voting rights, and asset exposure in the investee entity.",
+    "meaning_ar": "تنفذ شركة أميرالد تخفيضاً جزئياً لنسبة مساهمتها في رأسمال شركة المشروعات الصناعية والهندسية، مما يقلص من حصتها في حقوق التصويت والتمثيل المالي في الشركة التابعة."
   },
   "انتعاش الطلب الصيني علي النفط يرفع الاسعار من الكونغو الي البرازيل": {
     "meaning": "Higher crude oil intake from Chinese refineries increases global spot market competition, absorbing export volumes and raising benchmark differentials across producing regions including West Africa and Latin America.",
