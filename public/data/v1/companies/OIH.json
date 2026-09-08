@@ -8,18 +8,13 @@
  "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
  "market": {
   "last_close": 2.05,
-  "date": "2026-09-07",
+  "date": "2026-09-08",
   "open": 2.03,
   "high": 2.05,
   "low": 2,
   "volume": 71358165
  },
  "price_history": [
-  {
-   "date": "2025-07-31",
-   "close": 1.16,
-   "volume": 250990265
-  },
   {
    "date": "2025-08-03",
    "close": 1.12,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-06",
    "close": 2.03,
    "volume": 23221031
+  },
+  {
+   "date": "2026-09-07",
+   "close": 2.05,
+   "volume": 71358165
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 45.39007092198581,
   "avg_volume_30d": 77845296.73333329,
   "relative_volume_10d": 1.1344771488820888,
-  "median_volume_20d": 73575750,
-  "rv20": 0.3156071259892016,
+  "median_volume_20d": 61415809,
+  "rv20": 1.161885940475033,
   "normal_value_30d": 112137214.36,
-  "five_session_change": -3.791469194312802,
+  "five_session_change": 1.4851485148514865,
   "history_bars": 120,
   "market_cap": 10753665771.0,
   "market_cap_source": "EGX",

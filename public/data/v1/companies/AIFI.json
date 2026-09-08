@@ -8,18 +8,13 @@
  "sector_ar": "عقارات",
  "market": {
   "last_close": 2.5,
-  "date": "2026-09-07",
+  "date": "2026-09-08",
   "open": 2.49,
   "high": 2.52,
   "low": 2.47,
   "volume": 3654294
  },
  "price_history": [
-  {
-   "date": "2025-07-31",
-   "close": 2.32,
-   "volume": 3683477
-  },
   {
    "date": "2025-08-03",
    "close": 2.27,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-06",
    "close": 2.49,
    "volume": 9818538
+  },
+  {
+   "date": "2026-09-07",
+   "close": 2.5,
+   "volume": 3654294
   }
  ],
  "profile": {
@@ -1323,10 +1323,10 @@
   "perf_3m": 36.612021857923494,
   "avg_volume_30d": 11971179.499999998,
   "relative_volume_10d": 0.20945939389151022,
-  "median_volume_20d": 7531178,
-  "rv20": 1.3037187542241069,
+  "median_volume_20d": 7752272.5,
+  "rv20": 0.4713835846198647,
   "normal_value_30d": 16320558.404999997,
-  "five_session_change": 1.6326530612244872,
+  "five_session_change": 3.3057851239669533,
   "history_bars": 120,
   "market_cap": 2878213500.0,
   "market_cap_source": "EGX",

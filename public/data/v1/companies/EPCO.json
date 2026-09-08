@@ -8,18 +8,13 @@
  "sector_ar": "أغذية و مشروبات و تبغ",
  "market": {
   "last_close": 11.15,
-  "date": "2026-09-07",
+  "date": "2026-09-08",
   "open": 11.18,
   "high": 11.22,
   "low": 11.04,
   "volume": 308473
  },
  "price_history": [
-  {
-   "date": "2025-07-31",
-   "close": 6.65,
-   "volume": 257851
-  },
   {
    "date": "2025-08-03",
    "close": 6.67,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-06",
    "close": 11.18,
    "volume": 555430
+  },
+  {
+   "date": "2026-09-07",
+   "close": 11.15,
+   "volume": 308473
   }
  ],
  "profile": {
@@ -1324,9 +1324,9 @@
   "avg_volume_30d": 1672569.90000001,
   "relative_volume_10d": 0.3827093054142412,
   "median_volume_20d": 1559966,
-  "rv20": 0.3560526319163366,
-  "normal_value_30d": 15974911.93,
-  "five_session_change": -2.443280977312401,
+  "rv20": 0.19774341235642315,
+  "normal_value_30d": 15058252.79,
+  "five_session_change": -0.17905102954342,
   "history_bars": 120,
   "market_cap": 474655500.0,
   "market_cap_source": "EGX",
