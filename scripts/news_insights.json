@@ -243,6 +243,10 @@
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework that defines licensing requirements, risk management standards, and compliance rules for consumer finance entities in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشيغلياً موحداً يحدد متطلبات الترخيص ومعايير إدارة المخاطر وقواعد الامتثال للشركات العاملة في قطاع التمويل الاستهلاكي في مصر."
   },
+  "fra suspends trading on el ahram for Printing until september 24": {
+    "meaning": "A regulatory trading suspension temporarily halts the execution of all buy and sell orders on the company's shares on the exchange floor. This administrative action freezes secondary market liquidity for the security until specified regulatory inquiries or corporate disclosure requirements are fulfilled.",
+    "meaning_ar": "يؤدي قرار الإيقاف الرقابي للتداول إلى تجميد تنفيذ كافة أوامر البيع والشراء على أسهم الشركة مؤقتاً داخل البورصة، مما يوقف سيولة السهم في السوق الثانوي حتى استيفاء متطلبات الإفصاح أو الإجراءات التنظيمية المقررة من الهيئة."
+  },
   "ifap consolidated profits drop in fiscal year 2025 2026": {
     "meaning": "A decline in consolidated profit reflects lower net earnings across the parent entity and its subsidiaries, resulting from higher operating costs, financing expenses, or changes in revenue during the fiscal period.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة انخفاض صافي الدخل عبر الشركة الأم والشركات التابعة لها، نتيجة تغيرات في الإيرادات أو ارتفاع تكاليف التشغيل والتمويل خلال السنة المالية."
