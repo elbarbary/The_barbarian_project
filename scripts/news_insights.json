@@ -1559,6 +1559,10 @@
     "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
     "meaning_ar": "يُعد تخصيص الأراضي لإنشاء صوامع الغلال توسيعاً للبنية التحتية للتخزين الفعلي ودمجاً للخدمات اللوجستية الزراعية ضمن سلاسل إمداد السلع الاستراتيجية."
   },
+  "تراجع احتياطي النفط الاستراتيجي الامريكي لادني مستوي منذ 1982": {
+    "meaning": "The Strategic Petroleum Reserve (SPR) operates as an emergency crude supply buffer, and reaching multi-decade inventory lows limits the government's capacity to release additional physical volumes into the spot market during supply disruptions.",
+    "meaning_ar": "يعمل احتياطي النفط الاستراتيجي كمخزون طوارئ لتأمين إمدادات الخام، ووصوله إلى هذه المستويات التاريخية المنخفضة يحد من القدرة التشغيلية على ضخ كميات إضافية في السوق الفورية لمواجهة اضطرابات المعروض."
+  },
   "تراجع احتياطيات اليابان بقيمه 79.60 مليار دولار بعد تدخل قياسي لدعم الين": {
     "meaning": "Foreign exchange intervention involves the central bank liquidating foreign currency reserve assets to purchase the domestic currency on the open market, which directly reduces total official foreign reserves on the central bank's balance sheet.",
     "meaning_ar": "تتضمن عمليات التدخل في سوق الصرف الأجنبي قيام البنك المركزي ببيع أصول من احتياطيات النقد الأجنبي لشراء العملة المحلية من السوق المفتوحة، مما يترتب عليه خفض إجمالي رصيد الاحتياطيات الرسمية المسجلة في ميزانيته العمومية."
@@ -2508,6 +2512,10 @@
   "مديرو الثروات يديرون ظهورهم لارتفاع الاسهم الاوروبيه": {
     "meaning": "Wealth managers reallocate capital away from rising European equities into other asset classes or regional markets, adjusting portfolio exposure according to institutional mandates.",
     "meaning_ar": "يُعيد مديرو الثروات توجيه السيولة ورؤوس الأموال بعيداً عن الأسهم الأوروبية الصاعدة نحو فئات أصول أو أسواق أخرى، وذلك لتعديل نسب أوزان المحافظ المالية وفقاً للأطر المؤسسية المعتمدة."
+  },
+  "مرسوم للتطوير تعتزم ضخ استثمارات بقيمه 50 مليار جنيه في مشروع central gate غرب القاهره": {
+    "meaning": "This capital allocation represents a commitment of EGP 50 billion in capital expenditure toward infrastructure, contracting agreements, and construction works for the Central Gate development in West Cairo.",
+    "meaning_ar": "يمثل هذا التخصيص الرأسمالي توجيه إنفاق استثماري بقيمة 50 مليار جنيه نحو أعمال البنية التحتية، والتعاقدات الإنشائية، والتنفيذ الميداني لمشروع \"سنترال جيت\" في غرب القاهرة."
   },
   "مساعد وزير الصناعه للشيون الاستراتيجيه: صناعه السيارات منظومه متكامله وقاطره لنمو قطاعات عديده": {
     "meaning": "The automotive industry operates as a multi-tier manufacturing ecosystem that sources inputs from domestic feeding industries, including metallurgy, plastics, electronics, and glass manufacturing. Assembly operations generate backward supply chain linkages across these industrial segments.",
