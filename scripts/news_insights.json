@@ -2341,6 +2341,10 @@
     "meaning": "A collective index rise reflects aggregate buying volume exceeding selling volume across large-cap and broad-market constituent equities during early trading, which adjusts benchmark weighted price levels upward relative to the prior session's close.",
     "meaning_ar": "يعكس الصعود الجماعي للمؤشرات تفوق أحجام الشراء الإجمالية على أحجام البيع عبر الأسهم القيادية وأسهم السوق ككل خلال التداولات المبكرة، مما يؤدي إلى تعديل المستويات السعرية المرجحة للمؤشرات صعوداً مقارنة بإغلاق الجلسة السابقة."
   },
+  "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.31%": {
+    "meaning": "Early trading shows aggregate buy-side execution across benchmark constituents, lifting the EGX30 index by 0.31% alongside broad-market indicators.",
+    "meaning_ar": "تشهد الجلسة الصباحية تنفيذ صفقات شرائية عبر الأسهم المكونة للمؤشرات الرئيسية، مما يرفع مؤشر إيجي إكس 30 بنسبة 0.31% بالتوازي مع المؤشرات العامة للسوق."
+  },
   "صعود جماعي لموشرات البورصه بالتعاملات الصباحيه والثلاثيني يرتفع 0.41%": {
     "meaning": "A collective rise across market indices reflects an aggregate volume of buy orders exceeding sell orders across major constituent stocks, which increases execution prices and lifts overall market capitalization during the morning session.",
     "meaning_ar": "يعكس الصعود الجماعي لمؤشرات البورصة تفوق طلبات الشراء على عروض البيع عبر شريحة واسعة من الأسهم المكونة للمؤشرات، مما يؤدي إلى تنفيذ الصفقات بأسعار أعلى وارتفاع القيمة السوقية الإجمالية خلال التعاملات الصباحية."

@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-09-09T07:58:12.871545+00:00",
-  "asOf": "2026-09-08",
+  "updatedAt": "2026-09-09T08:17:25.130126+00:00",
+  "asOf": "2026-09-09",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 345,
-    "buyCount": 88,
+    "totalRecords": 346,
+    "buyCount": 89,
     "sellCount": 196,
-    "treasuryBuyCount": 14,
+    "treasuryBuyCount": 15,
     "treasurySellCount": 9,
     "totalBuyShares": 17181334,
     "totalSellShares": 267240934,
@@ -18,10 +18,11 @@
       "MBSC",
       "PRDC"
     ],
-    "latestSession": "2026-09-08",
+    "latestSession": "2026-09-09",
     "earliestSession": "2026-07-06"
   },
   "sessions": [
+    "2026-09-09",
     "2026-09-08",
     "2026-09-07",
     "2026-09-06",
@@ -49,6 +50,28 @@
     "2026-07-06"
   ],
   "items": [
+    {
+      "id": "filing-294501",
+      "filingId": "294501",
+      "sourceType": "treasury_filing",
+      "date": "2026-09-09",
+      "ticker": "PRDC",
+      "company": "Pioneers Properties for Urban Development",
+      "companyAr": "بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب",
+      "sector": "Real Estate",
+      "sectorAr": "عقارات",
+      "action": "treasury_purchase",
+      "actionLabel": "Treasury Purchase",
+      "actionLabelAr": "شراء أسهم خزينة",
+      "relationship": "treasury",
+      "relationshipLabel": "Company Treasury",
+      "relationshipLabelAr": "الشركة (أسهم خزينة)",
+      "positionRaw": "Treasury Shares",
+      "shares": null,
+      "title": "بيان من بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب (PRDC.CA) بشأن شراء أسهم الخزينة",
+      "titleEn": "Statement from Pioneers Properties for Urban Development - PRE (PRDC.CA) regarding the purchase of treasury shares",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294501"
+    },
     {
       "id": "filing-294469",
       "filingId": "294469",
