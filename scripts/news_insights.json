@@ -1555,6 +1555,10 @@
     "meaning": "The plug-and-play factory model provides pre-built industrial facilities with connected utilities, enabling automotive manufacturers and parts suppliers to bypass the physical construction phase and install assembly lines directly.",
     "meaning_ar": "يوفر نموذج المصانع الجاهزة منشآت صناعية مشيدة بالكامل ومزودة بالمرافق، مما يتيح لمصنعي السيارات وموردي المكونات تجاوز مرحلة البناء الإنشائي والبدء مباشرة في تركيب خطوط التجميع."
   },
+  "المصريه للاتصالات تفوز بكاس طايره المعاقين للرجال..و«تمويلي» تفوز ببطوله السيدات": {
+    "meaning": "Participation and victories in corporate and community sports competitions represent corporate social responsibility (CSR) and employee engagement activities, which are managed and funded under standard operational expenditure budgets.",
+    "meaning_ar": "تندرج المشاركة والرعاية في البطولات الرياضية المجتمعية ضمن أنشطة المسؤولية المجتمعية للشركات والتواصل المؤسسي، وتُموَّل من خلال مخصصات المصروفات التشغيلية الدورية."
+  },
   "المملكه المتحده تتجه لدفع اعلي تكلفه اقتراض في بيع سندات منذ عام 1998": {
     "meaning": "Higher sovereign bond yields directly elevate the government's debt-servicing expenses and establish a higher risk-free benchmark rate across credit markets.",
     "meaning_ar": "يؤدي ارتفاع عائد السندات السيادية مباشرة إلى زيادة أعباء خدمة الدين الحكومي ويرفع سعر الفائدة القياسي الخالي من المخاطر في أسواق الائتمان."
@@ -1774,6 +1778,10 @@
   "بنك اوف امريكا يتوقع صعود خام برنت الي 83 دولارا": {
     "meaning": "Changes in global Brent crude prices directly alter domestic fuel subsidy allocations, industrial feedstock costs, and the foreign currency expenditure required for petroleum imports.",
     "meaning_ar": "تؤثر تغيرات أسعار خام برنت عالمياً بشكل مباشر على مخصصات دعم الوقود المحلية، وتكاليف مدخلات الإنتاج الصناعي، وحجم الإنفاق بالنقد الأجنبي الموجه لاستيراد المواد البترولية."
+  },
+  "بنك مصر يواصل تالقه في مسابقات العاب القوي باولمبياد الشركات بالاسكندريه": {
+    "meaning": "This represents internal corporate sports participation and employee engagement activities, which operate within the bank's human resources and public relations budgets without impacting core banking operations.",
+    "meaning_ar": "يمثل هذا الخبر مشاركة في الأنشطة الرياضية والفعاليات العمالية للشركات، والتي تندرج ضمن ميزانيات الموارد البشرية والعلاقات العامة بالبنك دون التأثير على العمليات المصرفية الأساسية."
   },
   "بنك مصر يوفر افضل الحلول من خلال تمويل «اكسبريس» للمشروعات الصغيره والمتوسطه": {
     "meaning": "Banque Misr provides small and medium-sized enterprises with streamlined debt financing products through its Express loan program, supplying working capital and operational liquidity directly to eligible businesses under standardized lending procedures.",
@@ -3013,6 +3021,10 @@
     "meaning": "Cross-border electricity interconnection infrastructure links the national power transmission grid with European markets, establishing bilateral transmission capacity for energy trade.",
     "meaning_ar": "تربط البنية التحتية للربط الكهربائي العابر للحدود شبكة نقل الكهرباء القومية بالأسواق الأوروبية، مما يوفر قدرات نقل ثنائية لتبادل الطاقة."
   },
+  "محمود محيي الدين: قيمه المدن الجديده تقاس بالنشاط الاقتصادي وفرص التنميه وليس بالمباني": {
+    "meaning": "Urban development valuation and economic productivity derive from functional commercial operations, employment generation, and industrial capacity rather than physical construction volume alone.",
+    "meaning_ar": "تتحدد القيمة الاقتصادية للمدن والتنمية العمرانية عبر حجم النشاط التجاري والإنتاجي والتشغيلي القائم بها، بدلاً من الاقتصار على حجم الكتلة البنائية والأصول الإنشائية."
+  },
   "مخاوف الامدادات تدفع اسعار الغاز الاوروبيه لاعلي مستوي في 3 سنوات": {
     "meaning": "Perceived supply chain disruptions lead to elevated global natural gas benchmark prices, directly altering import costs for energy-dependent markets and operating costs for gas-intensive industrial sectors.",
     "meaning_ar": "تؤدي مخاوف تعطل سلاسل الإمداد إلى ارتفاع الأسعار القياسية للغاز الطبيعي عالمياً، مما يغير تكاليف الاستيراد في الأسواق المعتمدة على الطاقة وتكاليف التشغيل في القطاعات الصناعية كثيفة الاستهلاك للغاز."
@@ -3576,6 +3588,10 @@
   "وزير الطيران يبحث مع «LACAC» توظيف الذكاء الاصطناعي في تطوير قطاع النقل الجوي": {
     "meaning": "The discussions focus on technical cooperation between the Ministry of Civil Aviation and the Latin American Civil Aviation Commission (LACAC) regarding the integration of artificial intelligence tools into air traffic management, airport operations, and aviation infrastructure.",
     "meaning_ar": "تركز المباحثات على التعاون الفني بين وزارة الطيران المدني والمنظمة اللاتينية للطيران المدني (LACAC) بشأن دمج أدوات الذكاء الاصطناعي في إدارة الحركة الجوية وعمليات المطارات والبنية التحتية لقطاع الطيران."
+  },
+  "وزير الطيران: تعاون مصري سعودي لتطوير برامج التدريب ورفع جاهزيه كوادر القطاع": {
+    "meaning": "The bilateral framework establishes joint technical training standards and operational knowledge-sharing protocols between Egyptian and Saudi civil aviation entities.",
+    "meaning_ar": "يؤسس هذا التعاون الثنائي إطاراً لتوحيد معايير التدريب الفني وتبادل الخبرات التشغيلية بين مؤسسات الطيران المدني في مصر والسعودية."
   },
   "وزير الطيران: تعزيز التعاون مع دول امريكا اللاتينيه في الذكاء الاصطناعي وبناء القدرات": {
     "meaning": "The aviation sector establishes international technical cooperation frameworks to exchange artificial intelligence technologies and workforce training programs with Latin American counterparts.",
