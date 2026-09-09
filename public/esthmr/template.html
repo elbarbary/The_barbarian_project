@@ -3356,6 +3356,92 @@
         </div>
       </section>
       </sc-if>
+
+      <!-- ══ TAB 4: CRASH FRAGILITY ENGINE V5 ══ -->
+      <sc-if value="{{ showToolsFragility }}">
+      <section style="border-radius:24px;background:var(--surface);border:1px solid var(--edgeIn);box-shadow:var(--sh);padding:28px 30px;position:relative;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+          <div>
+            <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px">ESTHMR · SYSTEMIC RISK RESEARCH (2008–2026)</div>
+            <h2 style="font-family:'Bricolage Grotesque',serif;font-size:26px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--ink)">{{ fragilityData.title }}</h2>
+            <p style="margin:6px 0 0;font-size:14px;color:var(--t2);line-height:1.6;max-width:72ch">{{ fragilityData.subtitle }}</p>
+          </div>
+          <a href="fragility.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;background:var(--ink);color:var(--surface);font-size:13.5px;font-weight:600;text-decoration:none;transition:all .15s" style-hover="opacity:0.9;transform:translateY(-1px)">
+            <span>{{ fragilityData.openFullLabel }}</span>
+          </a>
+        </div>
+
+        <!-- Live Status & Model Deck -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px">
+          <!-- Live Regime Card -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase">Live Status (Today)</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:6px;background:rgba(63,107,82,0.15);color:#235238;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700">
+                  <span style="width:6px;height:6px;border-radius:50%;background:#3F6B52"></span>
+                  {{ fragilityData.liveStatusLabel }}
+                </span>
+              </div>
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-family:'Bricolage Grotesque',serif;font-size:42px;font-weight:700;color:var(--ink);line-height:1">{{ fragilityData.liveScore }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--faint)">/ 1.00 S_V5</span>
+              </div>
+              <p style="font-size:12px;color:var(--t2);margin-top:8px;line-height:1.5">EGX 30 at <strong>{{ fragilityData.livePrice }}</strong> · Entry alert trigger: &ge; 0.920</p>
+            </div>
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px">
+              <div><span style="color:var(--faint)">Engine A (Internal):</span> <strong style="color:var(--ink)">{{ fragilityData.engineA }}</strong></div>
+              <div><span style="color:var(--faint)">Engine B (External):</span> <strong style="color:var(--ink)">{{ fragilityData.engineB }}</strong></div>
+              <div><span style="color:var(--faint)">Stress Groups:</span> <strong style="color:var(--ink)">{{ fragilityData.stressGroups }}</strong></div>
+              <div><span style="color:var(--faint)">Transmission:</span> <strong style="color:var(--accent)">{{ fragilityData.transmission }}</strong></div>
+            </div>
+          </div>
+
+          <!-- 18-Year OOS Backtest Card -->
+          <div style="padding:20px;border-radius:18px;background:var(--sunk);border:1px solid var(--edgeIn);display:flex;flex-direction:column;justify-content:space-between">
+            <div>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase">18-Year OOS Performance (2008–2026)</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">STRICT EARLY RECALL</div>
+                  <div style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:700;color:var(--accent)">{{ fragilityData.recallMetric }}</div>
+                  <div style="font-size:11px;color:var(--t2)">[T&minus;25, T&minus;5] sessions</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">HARD FALSE ALARMS</div>
+                  <div style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:700;color:#235238">{{ fragilityData.hardFaMetric }}</div>
+                  <div style="font-size:11px;color:var(--t2)">Restricted (&le;1.0/yr)</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">WARNING OCCUPANCY</div>
+                  <div style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:700;color:var(--ink)">{{ fragilityData.occupancyMetric }}</div>
+                  <div style="font-size:11px;color:var(--t2)">Market time in alert</div>
+                </div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--faint)">MEDIAN WARNING LEAD</div>
+                  <div style="font-family:'Bricolage Grotesque',serif;font-size:22px;font-weight:700;color:var(--ink)">{{ fragilityData.leadMetric }}</div>
+                  <div style="font-size:11px;color:var(--t2)">Actionable lead time</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--faint)">
+              Precision: <strong style="color:var(--ink)">{{ fragilityData.precisionMetric }}</strong> · Net Utility: <strong style="color:var(--accent)">{{ fragilityData.utilityMetric }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Launch Banner -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;border-radius:14px;background:rgba(18,107,117,0.08);border:1px solid rgba(18,107,117,0.25);flex-wrap:wrap">
+          <div>
+            <strong style="display:block;font-size:14px;color:var(--ink)">استكشف المحاكي التفاعلي بالكامل (Interactive Sandbox)</strong>
+            <span style="font-size:12.5px;color:var(--t2)">جرّب تغيير عتبات التحذير، وشاهد أثر الصدمات اللحظية وسيناريوهات What-If، وافحص تشريح الـ 17 أزمة تاريخية.</span>
+          </div>
+          <a href="fragility.html" style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:10px;background:var(--accent);color:white;font-size:13px;font-weight:600;text-decoration:none">
+            <span>فتح المحاكي ↗</span>
+          </a>
+        </div>
+      </section>
+      </sc-if>
     </div>
   </sc-if>
 

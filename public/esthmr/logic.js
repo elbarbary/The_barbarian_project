@@ -4008,7 +4008,6 @@ export class Component extends Base {
         })),
       quickActions: [
         {label: ar ? 'استكشف الشركات' : 'Explore companies', note: ar ? 'أرقام، رسوم، وإفصاحات' : 'Figures, charts & filings', icon: ICON.market, go: this.go('market')},
-        {label: ar ? 'محرّك الأزمات والهشاشة' : 'Crash Fragility Engine', note: ar ? 'إنذار مبكر للأزمات V5 ومحاكي الضغوط' : 'Early crash warning V5 & stress simulator', icon: ICON.exchange, go: () => { window.location.href = 'fragility.html'; }},
         {label: ar ? 'اتجاهات الأسعار والقمم' : 'Price Trends & Highs', note: ar ? 'رصد القمم السنوية والزخم' : '52W highs & relative strength', icon: ICON.market, go: () => this.setState({screen:'market', marketMode:'trends', trendFilter:''})},
         {label: ar ? 'خريطة التقييم والديون' : 'Valuation & Debt Map', note: ar ? 'مكررات الربحية مع عبء الديون' : 'P/E multiples factored by debt', icon: ICON.valuation, go: this.go('valuation')},
         {label: ar ? 'مقارنة الأزواج' : 'Pairs & Spreads', note: ar ? 'معايرة الأسهم المتنافسة' : 'Normalize competing peers', icon: ICON.pairs, go: this.go('pairs')},
@@ -4564,7 +4563,7 @@ export class Component extends Base {
         { id: 'sim', label: ar ? 'محاكي الرسوم والأداء' : 'Trading & Fee Simulator', active: (st.toolsTab || 'sim') === 'sim', go: () => this.setState({ toolsTab: 'sim' }) },
         { id: 'calc', label: ar ? 'حاسبة التوزيعات' : 'Dividend Calculator', active: st.toolsTab === 'calc', go: () => this.setState({ toolsTab: 'calc' }) },
         { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) },
-        { id: 'fragility', label: ar ? 'محرّك الهشاشة والأزمات' : 'Crash Fragility Engine', active: false, go: () => { window.location.href = 'fragility.html'; } }
+        { id: 'fragility', label: ar ? 'محرّك الهشاشة والأزمات' : 'Crash Fragility Engine', active: st.toolsTab === 'fragility', go: () => this.setState({ toolsTab: 'fragility' }) }
       ],
       // The panel is drawn only once its module is here; until then the two
       // flags below carry the wait, so the tab is never a blank frame.
@@ -4577,9 +4576,31 @@ export class Component extends Base {
         : 'The simulator could not be loaded. Refresh to try again.',
       showToolsCalc: st.toolsTab === 'calc',
       showToolsGuide: st.toolsTab === 'guide',
+      showToolsFragility: st.toolsTab === 'fragility',
+      fragilityData: {
+        title: ar ? 'محرّك الإنذار المبكر للأزمات والهشاشة V5' : 'EGX Fragility Engine V5',
+        subtitle: ar ? 'نموذج ثنائي المحرّكات لاكتشاف الهشاشة الهيكلية والصدمات قبل وقوعها — مجرّب على 18 سنة' : 'Point-in-time dual-engine early warning system tested across 18 years and 4,518 market sessions.',
+        liveScore: '0.45',
+        liveScoreRaw: '0.4528',
+        liveStatusLabel: ar ? 'نطاق طبيعي / أخضر (Benign)' : 'Normal / Green Regime (Benign)',
+        livePrice: '56,280.40',
+        engineA: '0.4528',
+        engineB: '0.2505',
+        stressGroups: '1 / 7',
+        transmission: ar ? 'مفعل ومراقب (Guarded)' : 'Active (Guarded)',
+        recallMetric: '15 / 17 (88.2%)',
+        hardFaMetric: '1.00 / yr',
+        occupancyMetric: '11.49%',
+        precisionMetric: '52.9%',
+        leadMetric: ar ? '16.0 يوم' : '16.0 days',
+        utilityMetric: '+76.55',
+        openFullLabel: ar ? 'فتح محرّك الأزمات ومحاكي الـ 18 سنة التفاعلي ↗' : 'Launch Full Fragility Engine & 18Y Simulator ↗',
+        openFullHref: 'fragility.html'
+      },
       isToolsTabSim: (st.toolsTab || 'sim') === 'sim',
       isToolsTabCalc: st.toolsTab === 'calc',
       isToolsTabGuide: st.toolsTab === 'guide',
+      isToolsTabFragility: st.toolsTab === 'fragility',
       onSimStockSelect: (e) => this.setState({ simTicker: e.target.value }),
       toggleThndrSub: () => this.setState({ includeThndrSub: !st.includeThndrSub }),
       setSimDaily: () => this.setState({ simStrategy: 'daily' }),
