@@ -723,6 +723,10 @@
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
   },
+  "اسعار السمك اليوم في مصر.. الاربعاء 9/9/2026": {
+    "meaning": "Daily fish price tracking reflects prevailing supply conditions across wholesale markets, domestic aquaculture, and marine catch relative to current retail consumer demand in the local food sector.",
+    "meaning_ar": "تعكس المتابعة اليومية لأسعار الأسماك مستويات المعروض المتاحة في أسواق الجملة والإنتاج السمكي المحلي مقابل حجم الطلب الاستهلاكي الحالي في قطاع السلع الغذائية."
+  },
   "اسعار السمك اليوم في مصر.. الثلاثاء 8/9/2026": {
     "meaning": "Daily fish price updates track spot market valuations across wholesale and retail distribution channels, reflecting current supply volumes from local aquaculture and maritime catch against immediate consumer demand.",
     "meaning_ar": "ترصد التحديثات اليومية لأسعار الأسماك تقييمات السوق الفورية عبر قنوات التوزيع بالجملة والتجزئة، مما يعكس حجم المعروض الحالي من الاستزراع السمكي والصيد البحري مقابل الطلب الاستهلاكي المباشر."
@@ -1704,6 +1708,10 @@
     "meaning": "A drop in German exports reflects reduced outbound trade volumes from Europe's largest manufacturing economy, marking an inflection in monthly trade balance data.",
     "meaning_ar": "يعكس انخفاض الصادرات الألمانية تراجعاً في أحجام التجارة الخارجية لأكبر اقتصاد صناعي في أوروبا، مسجلاً نقطة تحول في بيانات الميزان التجاري الشهري."
   },
+  "تراجع الموشرات الاوروبيه مع ارتفاع عوايد السندات الحكوميه": {
+    "meaning": "Higher government bond yields raise the risk-free discount rates applied in equity valuation models and increase sovereign borrowing costs across financial markets.",
+    "meaning_ar": "يؤدي ارتفاع عوائد السندات الحكومية إلى رفع معدلات الخصم الخالية من المخاطر المستخدمة في تقييم الأسهم وزيادة تكلفة الاقتراض السيادي في الأسواق المالية."
+  },
   "تراجع الموشرات الاوروبيه وسهم نوفارتس يهبط 10%": {
     "meaning": "Broad declines across European benchmark indices reflect market-wide selling pressure, while a 10% drop in a heavily weighted constituent like Novartis directly pulls down both the healthcare sector and composite index levels.",
     "meaning_ar": "يعكس هبوط المؤشرات الأوروبية حركة بيع واسعة النطاق في الأسواق الإقليمية، حيث يؤدي انخفاض سهم ذي وزن نسبي كبير مثل نوفارتس بنسبة 10% إلى الضغط المباشر على مؤشرات قطاع الرعاية الصحية والمؤشرات المركبة العامة."
@@ -1711,6 +1719,10 @@
   "تراجع جماعي للموشرات بمنتصف التعاملات.. والثلاثيني يهبط بنسبه 0.19%": {
     "meaning": "Mid-session trading reflects aggregate net selling pressure across listed equities, leading to an intraday decline in benchmark indices with the EGX30 recording a 0.19% decrease.",
     "meaning_ar": "تعكس تداولات منتصف الجلسة ضغوطاً بيعية على الأسهم المقيدة، مما يؤدي إلى تراجع لحظي في المؤشرات الرئيسية مع تسجيل المؤشر الرئيسي EGX30 انخفاضاً بنسبة 0.19%."
+  },
+  "تراجع جماعي لموشرات الاسهم الاوروبيه مع تجاوز النفط مستوي 100 دولار": {
+    "meaning": "Crude oil prices exceeding 100 dollars per barrel raise industrial energy and transportation operating costs for European corporations while tightening broader inflationary pressures across equity markets.",
+    "meaning_ar": "يؤدي تجاوز أسعار النفط الخام مستوى 100 دولار للبرميل إلى رفع تكاليف تشغيل الطاقة والنقل للشركات الأوروبية، بالتزامن مع تزايد الضغوط التضخمية في أسواق الأسهم."
   },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
@@ -3008,6 +3020,10 @@
   "ودايع الشركات بالدولار في كوريا الجنوبيه تسجل مستوي قياسيا": {
     "meaning": "A record high in corporate US dollar deposits reflects that domestic firms retain their foreign currency export earnings and hold larger foreign-denominated cash balances on their balance sheets to settle international trade and debt obligations.",
     "meaning_ar": "يعكس تسجيل الودائع الدولارية للشركات مستويات قياسية احتفاظ الشركات المحلية بحصائل صادراتها وتراكم السيولة بالعملات الأجنبية في ميزانياتها العمومية لتغطية متطلبات التجارة الدولية والالتزامات الخارجية."
+  },
+  "وزاره الاتصالات تستهدف اتاحه 400 خدمه علي منصه مصر الرقميه بحلول 2030": {
+    "meaning": "Expanding the 'Digital Egypt' platform to 400 services involves the procurement and deployment of public IT infrastructure, system integration frameworks, and electronic payment gateways through contracting technology and telecommunications providers.",
+    "meaning_ar": "يتضمن توسيع منصة «مصر الرقمية» لتشمل 400 خدمة إسناد وتنفيذ مشروعات البنية التحتية لتكنولوجيا المعلومات والربط الشبكي وبوابات الدفع الإلكتروني عبر التعاقد مع شركات قطاع الاتصالات والتقنية."
   },
   "وزاره الاستثمار تطلق منحه لتاهيل الشركات ورفع قدراتها التصديريه والنفاذ الي الاسواق الخارجيه": {
     "meaning": "The Ministry of Investment provides non-repayable technical and financial funding to cover company compliance costs, international quality certifications, and market-entry requirements for foreign trade.",
