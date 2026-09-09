@@ -1,1784 +1,1788 @@
 {
  "harvested": "2026-09-09",
  "source": "beta.egx.com.eg /api/bff/egx/market-watch",
- "write_time": "202609091233",
- "count": 220,
+ "write_time": "202609091436",
+ "count": 221,
  "securities": {
   "AALR": {
-   "market_cap": 1977477600.0,
+   "market_cap": 1973701800.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 6510000,
-   "trades": 195,
-   "value": 4128716
+   "trades": 292,
+   "value": 6482275
   },
   "ABUK": {
-   "market_cap": 116029472454.0,
+   "market_cap": 119247255540.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 1261875720,
-   "trades": 1542,
-   "value": 99542307
+   "trades": 3428,
+   "value": 350209116
   },
   "ACAMD": {
-   "market_cap": 2767325956.45,
+   "market_cap": 2793807544.55,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1324079405,
-   "trades": 341,
-   "value": 18277608
+   "trades": 622,
+   "value": 37971521
   },
   "ACAP": {
-   "market_cap": 6808028468.01,
+   "market_cap": 6881154445.11,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 731259771,
-   "trades": 648,
-   "value": 47468426
+   "trades": 1756,
+   "value": 95842162
   },
   "ACGC": {
-   "market_cap": 4344357483.69,
+   "market_cap": 4347217495.2,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 286001151,
-   "trades": 240,
-   "value": 7212288
+   "trades": 353,
+   "value": 11568060
   },
   "ACTF": {
-   "market_cap": 3119219599.86,
+   "market_cap": 3107793887.04,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1142571282,
-   "trades": 497,
-   "value": 10653174
+   "trades": 837,
+   "value": 21698184
   },
   "ADCI": {
-   "market_cap": 3511920000.0,
+   "market_cap": 3501600000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 12000000,
-   "trades": 77,
-   "value": 641576
+   "trades": 117,
+   "value": 1045578
   },
   "ADIB": {
-   "market_cap": 76950000000.0,
+   "market_cap": 77895000000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1500000000,
-   "trades": 1774,
-   "value": 34280204
+   "trades": 2634,
+   "value": 69385250
   },
   "ADPC": {
-   "market_cap": 1967480000.0,
+   "market_cap": 1928130400.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 491870000,
-   "trades": 290,
-   "value": 8761936
+   "trades": 631,
+   "value": 17912233
   },
   "AFDI": {
-   "market_cap": 980820000.0,
+   "market_cap": 985860000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 18000000,
-   "trades": 117,
-   "value": 2483379
+   "trades": 218,
+   "value": 5539321
   },
   "AFMC": {
-   "market_cap": 5526147621.78,
+   "market_cap": 5427801205.56,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 32891778,
-   "trades": 1205,
-   "value": 33584886
+   "trades": 1860,
+   "value": 49635311
   },
   "AIDC": {
-   "market_cap": 1160805880.01,
+   "market_cap": 1149898979.124,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1558128698,
-   "trades": 364,
-   "value": 8705611
+   "trades": 705,
+   "value": 24210948
   },
   "AIFI": {
-   "market_cap": 2832162084.0,
+   "market_cap": 2809136376.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1151285400,
-   "trades": 281,
-   "value": 5357927
+   "trades": 437,
+   "value": 10862392
   },
   "AIHC": {
-   "market_cap": 1255851730.588,
+   "market_cap": 1246502958.4,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1558128698,
-   "trades": 797,
-   "value": 52017018
+   "trades": 1248,
+   "value": 74561757
   },
   "AJWA": {
-   "market_cap": 3617154000.0,
+   "market_cap": 3596053935.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 20095300,
-   "trades": 104,
-   "value": 4875364
+   "trades": 211,
+   "value": 9867404
   },
   "ALCN": {
-   "market_cap": 95254832396.0,
+   "market_cap": 96833971000.0,
    "sector": "Shipping & Transportation Services",
    "sector_ar": "خدمات النقل والشحن",
    "listed_shares": 2979506800,
-   "trades": 375,
-   "value": 6317499
+   "trades": 794,
+   "value": 18569318
   },
   "ALUM": {
    "market_cap": 1197525975.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 42390300,
-   "trades": 166,
-   "value": 4115436
+   "trades": 278,
+   "value": 7151351
   },
   "AMER": {
-   "market_cap": 5028539408.8,
+   "market_cap": 4992427815.2,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 902789840,
-   "trades": 466,
-   "value": 5901316
+   "trades": 1007,
+   "value": 18022463
   },
   "AMES": {
-   "market_cap": 15408640800.0,
+   "market_cap": 15484461096.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 244581600,
-   "trades": 10040,
-   "value": 293605281
+   "trades": 13240,
+   "value": 378055904
   },
   "AMIA": {
-   "market_cap": 9690629247.78,
+   "market_cap": 9557880901.92,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 510570561,
-   "trades": 187,
-   "value": 3660020
+   "trades": 373,
+   "value": 7606838
   },
   "AMII": {
-   "market_cap": 1040205883.56,
+   "market_cap": 1035709316.34,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 74942787,
-   "trades": 702,
-   "value": 29344307
+   "trades": 986,
+   "value": 35969166
   },
   "AMOC": {
-   "market_cap": 18248895000.0,
+   "market_cap": 18584685000.0,
    "sector": "Energy & Support Services",
    "sector_ar": "طاقة وخدمات مساندة",
    "listed_shares": 1291500000,
-   "trades": 2945,
-   "value": 107516165
+   "trades": 4662,
+   "value": 202336113
   },
   "APSW": {
-   "market_cap": 812262475.2,
+   "market_cap": 804767550.4,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 93686560,
-   "trades": 33,
-   "value": 216659
+   "trades": 73,
+   "value": 604199
   },
   "ARAB": {
    "market_cap": 6071352701.06,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 23902963390,
-   "trades": 637,
-   "value": 27834161
+   "trades": 1172,
+   "value": 69136238
   },
   "ARCC": {
-   "market_cap": 28692354240.3,
+   "market_cap": 28489925820.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 374867445,
-   "trades": 448,
-   "value": 5491568
+   "trades": 1012,
+   "value": 16464426
   },
   "AREH": {
-   "market_cap": 612000000.0,
+   "market_cap": 600000000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 400000000,
-   "trades": 440,
-   "value": 16072938
+   "trades": 811,
+   "value": 32052116
   },
   "ASCM": {
-   "market_cap": 3211000000.0,
+   "market_cap": 3200000000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 50000000,
-   "trades": 348,
-   "value": 8782862
+   "trades": 632,
+   "value": 18544860
   },
   "ASPI": {
-   "market_cap": 1684800000.0,
+   "market_cap": 1688700000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 3900000000,
-   "trades": 2788,
-   "value": 115488942
+   "trades": 3458,
+   "value": 144903653
   },
   "ATLC": {
-   "market_cap": 2800000000.0,
+   "market_cap": 2844000000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 400000000,
-   "trades": 446,
-   "value": 9358169
+   "trades": 638,
+   "value": 13670390
   },
   "ATQA": {
-   "market_cap": 15324000000.0,
+   "market_cap": 15600000000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 1200000000,
-   "trades": 957,
-   "value": 38810688
+   "trades": 2233,
+   "value": 139131151
   },
   "AXPH": {
-   "market_cap": 8366150000.0,
+   "market_cap": 8317250000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 5000000,
-   "trades": 135,
-   "value": 2247093
+   "trades": 258,
+   "value": 4700313
   },
   "BINV": {
-   "market_cap": 11378884778.46,
+   "market_cap": 11245683479.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 218362786,
-   "trades": 176,
-   "value": 2561067
+   "trades": 511,
+   "value": 16498885
   },
   "BIOC": {
-   "market_cap": 26053924974.0,
+   "market_cap": 25471831000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 83514200,
-   "trades": 1062,
-   "value": 19100589
+   "trades": 2035,
+   "value": 36220403
   },
   "BONY": {
-   "market_cap": 8661777196.38,
+   "market_cap": 8586783454.42,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1874843549,
-   "trades": 691,
-   "value": 15033896
+   "trades": 1308,
+   "value": 30513116
   },
   "BTFH": {
    "market_cap": 31832777623.68,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 10718106944,
-   "trades": 791,
-   "value": 28969908
+   "trades": 1513,
+   "value": 65399578
   },
   "CAED": {
-   "market_cap": 1512840000.0,
+   "market_cap": 1510320000.0,
    "sector": "Education Services",
    "sector_ar": "خدمات تعليمية",
    "listed_shares": 12000000,
-   "trades": 1419,
-   "value": 25341101
+   "trades": 1777,
+   "value": 31246001
   },
   "CANA": {
-   "market_cap": 43730000000.0,
+   "market_cap": 43390000000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1000000000,
-   "trades": 110,
-   "value": 1405603
+   "trades": 222,
+   "value": 6998647
   },
   "CCAP": {
-   "market_cap": 19813472330.96,
+   "market_cap": 19620483964.1,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 3216472781,
-   "trades": 1721,
-   "value": 428409958
+   "trades": 2933,
+   "value": 862954561
   },
   "CCRS": {
-   "market_cap": 546000000.0,
+   "market_cap": 554400000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 210000000,
-   "trades": 154,
-   "value": 2441437
+   "trades": 376,
+   "value": 8480254
   },
   "CEFM": {
-   "market_cap": 2197250819.4,
+   "market_cap": 2163829756.95,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 14722935,
-   "trades": 171,
-   "value": 3112839
+   "trades": 262,
+   "value": 4792464
   },
   "CERA": {
    "market_cap": 1875937500.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 1078125000,
-   "trades": 2504,
-   "value": 118159968
+   "trades": 3114,
+   "value": 154958634
   },
   "CFGH": {
    "market_cap": 2856896328.825,
    "currency": "US$",
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
-   "trades": 18,
-   "value": 1785134
+   "trades": 33,
+   "value": 2086317
   },
   "CICH": {
-   "market_cap": 13100000000.0,
+   "market_cap": 13030000000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1000000000,
-   "trades": 182,
-   "value": 4867191
+   "trades": 268,
+   "value": 7905204
   },
   "CIEB": {
-   "market_cap": 31900000000.0,
+   "market_cap": 31675000000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1250000000,
-   "trades": 226,
-   "value": 4414419
+   "trades": 366,
+   "value": 7782566
   },
   "CIRA": {
-   "market_cap": 21854637187.5,
+   "market_cap": 22355836867.0,
    "sector": "Education Services",
    "sector_ar": "خدمات تعليمية",
    "listed_shares": 582790325,
-   "trades": 284,
-   "value": 11299936
+   "trades": 510,
+   "value": 22673030
   },
   "CLHO": {
-   "market_cap": 23814464880.12,
+   "market_cap": 23770981377.6,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 1449450084,
-   "trades": 4605,
-   "value": 69106779
+   "trades": 6752,
+   "value": 109533747
   },
   "CNFN": {
-   "market_cap": 5769414680.0,
+   "market_cap": 5757444940.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1196974000,
-   "trades": 91,
-   "value": 4122785
+   "trades": 196,
+   "value": 10018761
   },
   "COMI": {
-   "market_cap": 473348386291.0,
+   "market_cap": 473995362720.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 3405139100,
-   "trades": 3385,
-   "value": 169626964
+   "trades": 5762,
+   "value": 318568474
   },
   "COPR": {
-   "market_cap": 777284663.76,
+   "market_cap": 759941598.24,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 1576642320,
-   "trades": 508,
-   "value": 10901654
+   "trades": 1002,
+   "value": 22341915
   },
   "COSG": {
-   "market_cap": 1191840000.0,
+   "market_cap": 1173120000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 624000000,
-   "trades": 578,
-   "value": 11148969
+   "trades": 855,
+   "value": 19398444
   },
   "CPCI": {
-   "market_cap": 8047238625.0,
+   "market_cap": 8043206343.75,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 14934375,
-   "trades": 88,
-   "value": 836754
+   "trades": 159,
+   "value": 1656226
   },
   "CPME": {
-   "market_cap": 11170371521.0,
+   "market_cap": 11025458593.16,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 301901933,
-   "trades": 20,
-   "value": 15165596
+   "trades": 31,
+   "value": 15597813
   },
   "CRST": {
-   "market_cap": 3468560497.92,
+   "market_cap": 3479785612.8,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 1122511488,
-   "trades": 815,
-   "value": 122740521
+   "trades": 1253,
+   "value": 181412191
   },
   "CSAG": {
-   "market_cap": 12324000000.0,
+   "market_cap": 12504000000.0,
    "sector": "Shipping & Transportation Services",
    "sector_ar": "خدمات النقل والشحن",
    "listed_shares": 300000000,
-   "trades": 131,
-   "value": 2257790
+   "trades": 268,
+   "value": 7293523
   },
   "DAPH": {
-   "market_cap": 3081199176.0,
+   "market_cap": 3057912000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 23522400,
-   "trades": 391,
-   "value": 11885146
+   "trades": 606,
+   "value": 17440777
   },
   "DGTZ": {
    "market_cap": 273240000.0,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 108000000,
-   "trades": 123,
-   "value": 914008
+   "trades": 197,
+   "value": 1522282
   },
   "DOMT": {
-   "market_cap": 8006304329.35,
+   "market_cap": 7980869546.8,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 282608695,
-   "trades": 87,
-   "value": 1591220
+   "trades": 147,
+   "value": 3162274
   },
   "DSCW": {
    "market_cap": 5118737296.61,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 2679967171,
-   "trades": 419,
-   "value": 6919548
+   "trades": 668,
+   "value": 11034900
   },
   "DTPP": {
-   "market_cap": 1690192000.0,
+   "market_cap": 1694504000.0,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 5600000,
-   "trades": 249,
-   "value": 5126357
+   "trades": 435,
+   "value": 9819816
   },
   "EALR": {
-   "market_cap": 1948960000.0,
+   "market_cap": 1945216000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 5200000,
-   "trades": 142,
-   "value": 3380833
+   "trades": 251,
+   "value": 4837597
   },
   "EASB": {
-   "market_cap": 827000000.0,
+   "market_cap": 872000000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 100000000,
-   "trades": 2456,
-   "value": 59635538
+   "trades": 3401,
+   "value": 85088645
   },
   "EAST": {
    "market_cap": 106200000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 3000000000,
-   "trades": 479,
-   "value": 6985176
+   "trades": 2841,
+   "value": 123367125
   },
   "EBSC": {
-   "market_cap": 1134179903.5,
+   "market_cap": 1170766352.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 522663550,
-   "trades": 520,
-   "value": 14132443
+   "trades": 841,
+   "value": 24110402
   },
   "ECAP": {
-   "market_cap": 1776305682.9,
+   "market_cap": 1756035527.96,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 53342513,
-   "trades": 112,
-   "value": 2244492
+   "trades": 217,
+   "value": 5356639
   },
   "EDFM": {
-   "market_cap": 2516580000.0,
+   "market_cap": 2523720000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 6000000,
-   "trades": 49,
-   "value": 452301
+   "trades": 95,
+   "value": 1970858
   },
   "EEII": {
    "market_cap": 629800000.0,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 268000000,
-   "trades": 163,
-   "value": 3243080
+   "trades": 315,
+   "value": 6907996
   },
   "EFIC": {
-   "market_cap": 21711000000.0,
+   "market_cap": 21111000000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 100000000,
-   "trades": 3074,
-   "value": 151514769
+   "trades": 4846,
+   "value": 227058797
   },
   "EFID": {
-   "market_cap": 44632870706.56,
+   "market_cap": 44800873984.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 1400027312,
-   "trades": 1889,
-   "value": 46035271
+   "trades": 3752,
+   "value": 111627426
   },
   "EFIH": {
-   "market_cap": 82333333341.25,
+   "market_cap": 83130666674.66,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 3466666667,
-   "trades": 975,
-   "value": 23993656
+   "trades": 1708,
+   "value": 51018438
   },
   "EGAL": {
-   "market_cap": 153701625000.0,
+   "market_cap": 152839500000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 412500000,
-   "trades": 909,
-   "value": 21151762
+   "trades": 1811,
+   "value": 76838013
   },
   "EGAS": {
-   "market_cap": 8380760351.73,
+   "market_cap": 8457198193.52,
    "sector": "Utilities",
    "sector_ar": "مرافق",
    "listed_shares": 144222343,
-   "trades": 161,
-   "value": 4458302
+   "trades": 312,
+   "value": 7740314
   },
   "EGBE": {
-   "market_cap": 13644936604.97393,
+   "market_cap": 13671534921.942692,
    "currency": "US$",
    "sector": "Banks",
    "sector_ar": "بنوك",
-   "trades": 18,
-   "value": 1662449
+   "trades": 26,
+   "value": 1787777
   },
   "EGCH": {
-   "market_cap": 27971032305.92,
+   "market_cap": 27613448086.1,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 1986578999,
-   "trades": 825,
-   "value": 38026084
+   "trades": 1645,
+   "value": 88881919
   },
   "EGREF": {
-   "market_cap": 514186243.2,
+   "market_cap": 523368140.4,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 18003720,
-   "trades": 349,
-   "value": 5801627
+   "trades": 715,
+   "value": 13984560
   },
   "EGSA": {
+   "market_cap": 17226092544.33747,
    "currency": "US$",
-   "currency_stated": "2026-09-08"
+   "sector": "IT , Media & Communication Services",
+   "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
+   "trades": 5,
+   "value": 151730
   },
   "EGTS": {
-   "market_cap": 18270000000.0,
+   "market_cap": 18259500000.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 1050000000,
-   "trades": 238,
-   "value": 5865967
+   "trades": 411,
+   "value": 18473221
   },
   "EHDR": {
-   "market_cap": 1962240000.0,
+   "market_cap": 1955520000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 672000000,
-   "trades": 141,
-   "value": 3352906
+   "trades": 318,
+   "value": 9387450
   },
   "ELEC": {
-   "market_cap": 6925299379.57,
+   "market_cap": 6859028572.11,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 3313540373,
-   "trades": 804,
-   "value": 27133525
+   "trades": 1442,
+   "value": 57670422
   },
   "ELKA": {
    "market_cap": 3323608555.24,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1856764556,
-   "trades": 334,
-   "value": 6037858
+   "trades": 565,
+   "value": 13744366
   },
   "ELNA": {
    "market_cap": 291178144.56,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 7865428,
-   "trades": 5,
-   "value": 12404
+   "trades": 14,
+   "value": 177619
   },
   "ELSH": {
-   "market_cap": 3099112500.0,
+   "market_cap": 3065081250.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 226875000,
-   "trades": 338,
-   "value": 16818597
+   "trades": 550,
+   "value": 27073412
   },
   "ELWA": {
-   "market_cap": 338520000.0,
+   "market_cap": 327600000.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 182000000,
-   "trades": 70,
-   "value": 1588562
+   "trades": 135,
+   "value": 3885011
   },
   "EMFD": {
-   "market_cap": 78653660304.96,
+   "market_cap": 79470699712.56,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 5446929384,
-   "trades": 452,
-   "value": 27547725
+   "trades": 774,
+   "value": 61385824
   },
   "ENGC": {
-   "market_cap": 6544590000.0,
+   "market_cap": 6434010000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 145500000,
-   "trades": 140,
-   "value": 5453967
+   "trades": 262,
+   "value": 9780941
   },
   "EOSB": {
    "market_cap": 46315000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 29500000,
-   "trades": 18,
-   "value": 45111
+   "trades": 20,
+   "value": 51269
   },
   "EPCO": {
-   "market_cap": 469547100.0,
+   "market_cap": 472101300.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 42570000,
-   "trades": 140,
-   "value": 2097893
+   "trades": 254,
+   "value": 3782986
   },
   "EPPK": {
    "market_cap": 81369600.0,
    "sector": "Paper & Packaging",
    "sector_ar": "ورق ومواد تعبئة و تغليف",
    "listed_shares": 8320000,
-   "trades": 173,
-   "value": 2106397
+   "trades": 217,
+   "value": 2307288
   },
   "ETEL": {
-   "market_cap": 213742435036.0,
+   "market_cap": 215073950884.0,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 1707071600,
-   "trades": 3135,
-   "value": 246145187
+   "trades": 5436,
+   "value": 457650942
   },
   "ETRS": {
-   "market_cap": 2530685441.25,
+   "market_cap": 2514938954.06,
    "sector": "Shipping & Transportation Services",
    "sector_ar": "خدمات النقل والشحن",
    "listed_shares": 224949817,
-   "trades": 148,
-   "value": 5088283
+   "trades": 361,
+   "value": 13372434
   },
   "EXPA": {
-   "market_cap": 29158400000.0,
+   "market_cap": 29076800000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1360000000,
-   "trades": 173,
-   "value": 4798062
+   "trades": 337,
+   "value": 9766108
   },
   "FAIT": {
-   "market_cap": 10823391602.28,
+   "market_cap": 10888905765.6,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 225910908,
-   "trades": 96,
-   "value": 1709925
+   "trades": 215,
+   "value": 6999693
   },
   "FAITA": {
    "market_cap": 20820045304.931896,
    "currency": "US$",
    "sector": "Banks",
    "sector_ar": "بنوك",
-   "trades": 6,
-   "value": 1089070
+   "trades": 20,
+   "value": 2518806
   },
   "FCMD": {
    "market_cap": 817719751.6,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 115171796,
-   "trades": 539,
-   "value": 14741249
+   "trades": 908,
+   "value": 27938758
   },
   "FERC": {
-   "market_cap": 31724000000.0,
+   "market_cap": 32000000000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 400000000,
-   "trades": 174,
-   "value": 4378384
+   "trades": 438,
+   "value": 14612929
   },
   "FWRY": {
-   "market_cap": 65609637679.44,
+   "market_cap": 65405246284.8,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 3406523244,
-   "trades": 1424,
-   "value": 22812972
+   "trades": 2322,
+   "value": 50074954
   },
   "GBCO": {
-   "market_cap": 33965295000.0,
+   "market_cap": 32673550000.0,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 1085500000,
-   "trades": 1586,
-   "value": 71378171
+   "trades": 2204,
+   "value": 154976108
   },
   "GDWA": {
-   "market_cap": 4314324306.11,
+   "market_cap": 4228680151.15,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 5352759685,
-   "trades": 382,
-   "value": 8572308
+   "trades": 1011,
+   "value": 25303512
   },
   "GGCC": {
-   "market_cap": 1824311010.0,
+   "market_cap": 1841623570.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 2164070000,
-   "trades": 307,
-   "value": 3678150
+   "trades": 527,
+   "value": 8249732
   },
   "GGRN": {
-   "market_cap": 2058000000.0,
+   "market_cap": 2030000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 1400000000,
-   "trades": 273,
-   "value": 7837521
+   "trades": 484,
+   "value": 14760039
   },
   "GIHD": {
-   "market_cap": 420300000.0,
+   "market_cap": 410625000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 5625000,
-   "trades": 444,
-   "value": 25421689
+   "trades": 593,
+   "value": 33495102
   },
   "GMCI": {
-   "market_cap": 78238706.04,
+   "market_cap": 78654869.37,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 41616333,
-   "trades": 19,
-   "value": 130221
+   "trades": 31,
+   "value": 375001
   },
   "GOUR": {
-   "market_cap": 6832000000.0,
+   "market_cap": 6812000000.0,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 400000000,
-   "trades": 437,
-   "value": 9405650
+   "trades": 1688,
+   "value": 52574208
   },
   "GPIM": {
-   "market_cap": 2667272716.9,
+   "market_cap": 2699999989.5,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 1636363630,
-   "trades": 193,
-   "value": 3565005
+   "trades": 316,
+   "value": 7798667
   },
   "GPPL": {
    "currency": "US$",
    "currency_stated": "2026-09-08"
   },
   "GRCA": {
-   "market_cap": 600678000.0,
+   "market_cap": 581412000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 7800000,
-   "trades": 911,
-   "value": 31531882
+   "trades": 1600,
+   "value": 51115054
   },
   "GSSC": {
-   "market_cap": 5359200000.0,
+   "market_cap": 5320000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 17500000,
-   "trades": 69,
-   "value": 3442464
+   "trades": 109,
+   "value": 5281734
   },
   "GTEX": {
-   "market_cap": 1056331415.7,
+   "market_cap": 1032323883.525,
    "currency": "US$",
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
-   "trades": 4,
-   "value": 114044
+   "trades": 18,
+   "value": 969130
   },
   "GTWL": {
-   "market_cap": 3412723921.59,
+   "market_cap": 3429435456.3,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 14283363,
-   "trades": 1661,
-   "value": 49254863
+   "trades": 3967,
+   "value": 147016716
   },
   "HDBK": {
-   "market_cap": 122039610000.0,
+   "market_cap": 119436240000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1062600000,
-   "trades": 679,
-   "value": 9766846
+   "trades": 1770,
+   "value": 48544133
   },
   "HELI": {
-   "market_cap": 32162202468.0,
+   "market_cap": 32042044800.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 4005255600,
-   "trades": 558,
-   "value": 56128085
+   "trades": 911,
+   "value": 84423952
   },
   "HRHO": {
-   "market_cap": 37247064627.52,
+   "market_cap": 37117834256.8,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 1435893008,
-   "trades": 360,
-   "value": 13163547
+   "trades": 818,
+   "value": 34267649
   },
   "ICFC": {
-   "market_cap": 2674147500.0,
+   "market_cap": 2796761250.0,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 116775000,
-   "trades": 404,
-   "value": 14213737
+   "trades": 913,
+   "value": 43472662
   },
   "ICID": {
-   "market_cap": 1856000000.0,
+   "market_cap": 1862000000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 100000000,
-   "trades": 132,
-   "value": 3638966
+   "trades": 243,
+   "value": 9742336
   },
   "IDRE": {
-   "market_cap": 1997369915.0,
+   "market_cap": 2007684625.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 36838250,
-   "trades": 72,
-   "value": 1282885
+   "trades": 263,
+   "value": 7931252
   },
   "IEEC": {
-   "market_cap": 1294704000.0,
+   "market_cap": 1283040000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 1458000000,
-   "trades": 2070,
-   "value": 67124538
+   "trades": 3354,
+   "value": 96126493
   },
   "IFAP": {
-   "market_cap": 10622079497.76,
+   "market_cap": 10507703173.58,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 497288366,
-   "trades": 263,
-   "value": 6481143
+   "trades": 638,
+   "value": 17809519
   },
   "INFI": {
-   "market_cap": 3010779695.0,
+   "market_cap": 2989598535.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 20366500,
-   "trades": 303,
-   "value": 6895180
+   "trades": 646,
+   "value": 15748631
   },
   "IRON": {
-   "market_cap": 28241377556.98,
+   "market_cap": 28661432636.52,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 976872278,
-   "trades": 401,
-   "value": 8349091
+   "trades": 1031,
+   "value": 36352673
   },
   "ISMA": {
-   "market_cap": 2887987877.86,
+   "market_cap": 2887089312.87,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 89856499,
-   "trades": 179,
-   "value": 2707611
+   "trades": 358,
+   "value": 6028723
   },
   "ISMQ": {
-   "market_cap": 9026299848.72,
+   "market_cap": 9016531125.94,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 976872278,
-   "trades": 247,
-   "value": 6902900
+   "trades": 796,
+   "value": 29006436
   },
   "ISPH": {
-   "market_cap": 13245120000.0,
+   "market_cap": 13053600000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 1008000000,
-   "trades": 822,
-   "value": 16457086
+   "trades": 2631,
+   "value": 69940016
   },
   "JUFO": {
-   "market_cap": 39847911996.69,
+   "market_cap": 40200938902.53,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 1470945441,
-   "trades": 430,
-   "value": 9798486
+   "trades": 671,
+   "value": 13048672
   },
   "KABO": {
-   "market_cap": 5291181290.17,
+   "market_cap": 5364591489.5,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 564693841,
-   "trades": 233,
-   "value": 7439467
+   "trades": 640,
+   "value": 37682876
   },
   "KASABF": {
-   "market_cap": 208708226.32,
+   "market_cap": 203460243.84,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 20184548,
-   "trades": 514,
-   "value": 23832095
+   "trades": 850,
+   "value": 36550009
   },
   "KORA": {
-   "market_cap": 15255000000.0,
+   "market_cap": 15525000000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 2250000000,
-   "trades": 19265,
-   "value": 934800024
+   "trades": 27879,
+   "value": 1409290879
   },
   "KRDI": {
-   "market_cap": 1716000000.0,
+   "market_cap": 1712100000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 3900000000,
-   "trades": 620,
-   "value": 13348165
+   "trades": 1102,
+   "value": 24562982
   },
   "KWIN": {
-   "market_cap": 975240000.0,
+   "market_cap": 955710000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 10500000,
-   "trades": 751,
-   "value": 21867351
+   "trades": 1068,
+   "value": 28968331
   },
   "KZPC": {
-   "market_cap": 4163150196.0,
+   "market_cap": 4191960924.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 288107280,
-   "trades": 906,
-   "value": 70268821
+   "trades": 1328,
+   "value": 102490832
   },
   "LCSW": {
-   "market_cap": 2800000000.0,
+   "market_cap": 2749600000.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 80000000,
-   "trades": 240,
-   "value": 7228715
+   "trades": 614,
+   "value": 23592373
   },
   "LUTS": {
-   "market_cap": 1227590000.0,
+   "market_cap": 1236900000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 1330000000,
-   "trades": 1722,
-   "value": 34360056
+   "trades": 2861,
+   "value": 70423491
   },
   "MAAL": {
-   "market_cap": 1904132160.0,
+   "market_cap": 1893749760.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 207648000,
-   "trades": 183,
-   "value": 5665962
+   "trades": 294,
+   "value": 8967993
   },
   "MASR": {
-   "market_cap": 17507000000.0,
+   "market_cap": 17549700000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 2135000000,
-   "trades": 3454,
-   "value": 72429791
+   "trades": 4968,
+   "value": 102804687
   },
   "MBEG": {
-   "market_cap": 1379326145.01,
+   "market_cap": 1434013084.68,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 202544221,
-   "trades": 90,
-   "value": 1378366
+   "trades": 192,
+   "value": 3500184
   },
   "MBSC": {
-   "market_cap": 22876082673.52,
+   "market_cap": 23371833839.79,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 55022327,
-   "trades": 260,
-   "value": 6888508
+   "trades": 671,
+   "value": 182736448
   },
   "MCQE": {
-   "market_cap": 23293440000.0,
+   "market_cap": 23094720000.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 96000000,
-   "trades": 221,
-   "value": 3358143
+   "trades": 692,
+   "value": 14017183
   },
   "MCRO": {
-   "market_cap": 6021380175.36,
+   "market_cap": 5850318238.56,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 3421238736,
-   "trades": 2656,
-   "value": 172263676
+   "trades": 3853,
+   "value": 257116329
   },
   "MENA": {
-   "market_cap": 1637809468.95,
+   "market_cap": 1628132603.55,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 241921635,
-   "trades": 53,
-   "value": 318509
+   "trades": 84,
+   "value": 539566
   },
   "MEPA": {
-   "market_cap": 1375500000.0,
+   "market_cap": 1355850000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 655000000,
-   "trades": 1444,
-   "value": 53680216
+   "trades": 1905,
+   "value": 66818464
   },
   "MFPC": {
-   "market_cap": 134802592361.0,
+   "market_cap": 136982378960.88,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 2868140263,
-   "trades": 898,
-   "value": 48434835
+   "trades": 2275,
+   "value": 136277066
   },
   "MFSC": {
-   "market_cap": 4758750000.0,
+   "market_cap": 4745625000.0,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 93750000,
-   "trades": 61,
-   "value": 1279562
+   "trades": 111,
+   "value": 2329424
   },
   "MHOT": {
-   "market_cap": 14311440000.0,
+   "market_cap": 14176800000.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 792000000,
-   "trades": 113,
-   "value": 2020966
+   "trades": 194,
+   "value": 3211271
   },
   "MICH": {
-   "market_cap": 5530443750.0,
+   "market_cap": 5529346875.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 109687500,
-   "trades": 248,
-   "value": 6140014
+   "trades": 423,
+   "value": 12871668
   },
   "MILS": {
-   "market_cap": 2185689000.0,
+   "market_cap": 2172314000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 10700000,
-   "trades": 305,
-   "value": 7539251
+   "trades": 422,
+   "value": 9964122
   },
   "MIPH": {
-   "market_cap": 9477412801.8,
+   "market_cap": 9559643763.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 11780940,
-   "trades": 72,
-   "value": 1538921
+   "trades": 118,
+   "value": 2358106
   },
   "MMAT": {
-   "market_cap": 185000000.0,
+   "market_cap": 194000000.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 50000000,
-   "trades": 1,
-   "value": 3880
+   "trades": 9,
+   "value": 300021
   },
   "MOED": {
-   "market_cap": 821085000.0,
+   "market_cap": 808020000.0,
    "sector": "Education Services",
    "sector_ar": "خدمات تعليمية",
    "listed_shares": 1005000000,
-   "trades": 1025,
-   "value": 33314714
+   "trades": 1886,
+   "value": 59267698
   },
   "MOIL": {
-   "market_cap": 16253297672.246145,
+   "market_cap": 16277305497.463644,
    "currency": "US$",
    "sector": "Energy & Support Services",
    "sector_ar": "طاقة وخدمات مساندة",
-   "trades": 48,
-   "value": 5237116
+   "trades": 72,
+   "value": 7716224
   },
   "MOIN": {
-   "market_cap": 10691200000.0,
+   "market_cap": 10610600000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 260000000,
-   "trades": 785,
-   "value": 22227212
+   "trades": 1174,
+   "value": 35167887
   },
   "MOSC": {
-   "market_cap": 1914780000.0,
+   "market_cap": 1905960000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 6000000,
-   "trades": 48,
-   "value": 877941
+   "trades": 88,
+   "value": 1689631
   },
   "MPCI": {
-   "market_cap": 9668750000.0,
+   "market_cap": 9668295000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 22750000,
-   "trades": 578,
-   "value": 28971845
+   "trades": 1217,
+   "value": 87577853
   },
   "MPCO": {
    "market_cap": 2290000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 1000000000,
-   "trades": 1483,
-   "value": 56646083
+   "trades": 3264,
+   "value": 131949808
   },
   "MPRC": {
-   "market_cap": 7625022300.0,
+   "market_cap": 7547274000.0,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 189630000,
-   "trades": 242,
-   "value": 5158184
+   "trades": 424,
+   "value": 10846181
   },
   "MTIE": {
-   "market_cap": 19373703021.9,
+   "market_cap": 19351043720.12,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 2265930178,
-   "trades": 507,
-   "value": 8097329
+   "trades": 800,
+   "value": 13695817
   },
   "NAHO": {
    "market_cap": 2405793452.997051,
    "currency": "US$",
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
-   "trades": 3,
-   "value": 34729
+   "trades": 18,
+   "value": 1402394
   },
   "NAPR": {
-   "market_cap": 6533375217.46,
+   "market_cap": 6406325402.75,
    "sector": "Paper & Packaging",
    "sector_ar": "ورق ومواد تعبئة و تغليف",
    "listed_shares": 215338669,
-   "trades": 8,
-   "value": 9669
+   "trades": 30,
+   "value": 597704
   },
   "NARE": {
    "market_cap": 2183162870.32,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 127745048,
-   "trades": 128,
-   "value": 3260282
+   "trades": 188,
+   "value": 5644612
   },
   "NCCW": {
-   "market_cap": 1864800000.0,
+   "market_cap": 1796760000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 252000000,
-   "trades": 3637,
-   "value": 157746942
+   "trades": 6468,
+   "value": 273737353
   },
   "NEDA": {
-   "market_cap": 182870064.0,
+   "market_cap": 177790340.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 63496550,
-   "trades": 28,
-   "value": 625933
+   "trades": 61,
+   "value": 1037661
   },
   "NHPS": {
-   "market_cap": 1329440000.0,
+   "market_cap": 1315200000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 16000000,
-   "trades": 230,
-   "value": 5861637
+   "trades": 375,
+   "value": 11157428
   },
   "NINH": {
-   "market_cap": 6978000000.0,
+   "market_cap": 6903000000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 300000000,
-   "trades": 212,
-   "value": 3244442
+   "trades": 425,
+   "value": 7353456
   },
   "NIPH": {
-   "market_cap": 16809500000.0,
+   "market_cap": 16750000000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 50000000,
-   "trades": 1148,
-   "value": 31622081
+   "trades": 2011,
+   "value": 53100486
   },
   "OBRI": {
-   "market_cap": 1312400000.0,
+   "market_cap": 1317600000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 40000000,
-   "trades": 249,
-   "value": 6284505
+   "trades": 430,
+   "value": 10902803
   },
   "OCDI": {
-   "market_cap": 43384729168.9,
+   "market_cap": 42817439991.06,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1289293586,
-   "trades": 181,
-   "value": 3837753
+   "trades": 348,
+   "value": 14645899
   },
   "OCPH": {
-   "market_cap": 6057120000.0,
+   "market_cap": 6176160000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 24000000,
-   "trades": 184,
-   "value": 2061410
+   "trades": 357,
+   "value": 5503781
   },
   "ODIN": {
-   "market_cap": 1734000000.0,
+   "market_cap": 1716000000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 600000000,
-   "trades": 217,
-   "value": 3905948
+   "trades": 377,
+   "value": 6678406
   },
   "OFH": {
-   "market_cap": 5089369106.8,
+   "market_cap": 4996835123.04,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 4626699188,
-   "trades": 783,
-   "value": 77817861
+   "trades": 1253,
+   "value": 112607196
   },
   "OIH": {
-   "market_cap": 11068407208.2,
+   "market_cap": 11173321020.6,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 5245690620,
-   "trades": 1214,
-   "value": 100889045
+   "trades": 1848,
+   "value": 174554830
   },
   "OLFI": {
-   "market_cap": 9184000000.0,
+   "market_cap": 9124000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 400000000,
-   "trades": 458,
-   "value": 4205352
+   "trades": 831,
+   "value": 12760534
   },
   "ORAS": {
-   "market_cap": 94431647402.95,
+   "market_cap": 94699540165.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 110243935,
-   "trades": 1812,
-   "value": 62494503
+   "trades": 4209,
+   "value": 254594062
   },
   "ORHD": {
-   "market_cap": 47355535878.47,
+   "market_cap": 47197269585.25,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1130473523,
-   "trades": 1419,
-   "value": 33354409
+   "trades": 2915,
+   "value": 78270197
   },
   "ORWE": {
-   "market_cap": 18722769594.2,
+   "market_cap": 18563143849.88,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 665107268,
-   "trades": 714,
-   "value": 16580628
+   "trades": 1308,
+   "value": 39703898
   },
   "PHAR": {
-   "market_cap": 21580485310.0,
+   "market_cap": 21465731400.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 168755750,
-   "trades": 872,
-   "value": 25715994
+   "trades": 1675,
+   "value": 52884946
   },
   "PHDC": {
-   "market_cap": 41468755508.5,
+   "market_cap": 41697548642.34,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 2859914173,
-   "trades": 1537,
-   "value": 55903661
+   "trades": 2843,
+   "value": 137195537
   },
   "PHGC": {
-   "market_cap": 2103105395.3,
+   "market_cap": 2079474997.6,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 23630397700,
-   "trades": 347,
-   "value": 7442503
+   "trades": 485,
+   "value": 10599187
   },
   "PHTV": {
-   "market_cap": 8849178000.0,
+   "market_cap": 8858811000.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 25350000,
-   "trades": 19,
-   "value": 254935
+   "trades": 24,
+   "value": 463254
   },
   "POUL": {
-   "market_cap": 18839132928.0,
+   "market_cap": 18709802496.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 479001600,
-   "trades": 387,
-   "value": 4420564
+   "trades": 691,
+   "value": 11859315
   },
   "PRCL": {
-   "market_cap": 1638402727.0,
+   "market_cap": 1596599030.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 50365900,
-   "trades": 112,
-   "value": 1879874
+   "trades": 303,
+   "value": 6212524
   },
   "PRDC": {
-   "market_cap": 8764646839.2,
+   "market_cap": 8691346328.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1047150160,
-   "trades": 278,
-   "value": 5514954
+   "trades": 565,
+   "value": 14043240
   },
   "PRMH": {
    "market_cap": 976500000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 350000000,
-   "trades": 97,
-   "value": 1586187
+   "trades": 250,
+   "value": 6059696
   },
   "QNBE": {
-   "market_cap": 130280596524.36,
+   "market_cap": 127888743032.1,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 2154822966,
-   "trades": 161,
-   "value": 3548651
+   "trades": 360,
+   "value": 10161233
   },
   "RACC": {
-   "market_cap": 2007998516.16,
+   "market_cap": 1998038206.06,
    "sector": "IT , Media & Communication Services",
    "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
    "listed_shares": 199206202,
-   "trades": 281,
-   "value": 4126001
+   "trades": 476,
+   "value": 7496499
   },
   "RAKT": {
    "market_cap": 681000000.0,
    "sector": "Paper & Packaging",
    "sector_ar": "ورق ومواد تعبئة و تغليف",
    "listed_shares": 30000000,
-   "trades": 12,
-   "value": 65012
+   "trades": 17,
+   "value": 76639
   },
   "RAYA": {
-   "market_cap": 30868156907.28,
+   "market_cap": 30654092018.88,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 4281297768,
-   "trades": 634,
-   "value": 12618278
+   "trades": 1200,
+   "value": 26019922
   },
   "RMDA": {
-   "market_cap": 12847405563.52,
+   "market_cap": 12806749216.8,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 2032817336,
-   "trades": 1150,
-   "value": 31102369
+   "trades": 1939,
+   "value": 69139194
   },
   "ROTO": {
-   "market_cap": 745272990.0,
+   "market_cap": 748215996.0,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 17311800,
-   "trades": 178,
-   "value": 5247830
+   "trades": 243,
+   "value": 7673901
   },
   "RREI": {
-   "market_cap": 1069376000.0,
+   "market_cap": 1049664000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 246400000,
-   "trades": 93,
-   "value": 1952014
+   "trades": 311,
+   "value": 8411908
   },
   "RTVC": {
-   "market_cap": 984723273.87,
+   "market_cap": 979787317.61,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 246797813,
-   "trades": 55,
-   "value": 1894026
+   "trades": 102,
+   "value": 2656148
   },
   "RUBX": {
-   "market_cap": 830519271.0,
+   "market_cap": 813908885.58,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 61519946,
-   "trades": 1405,
-   "value": 40673245
+   "trades": 1763,
+   "value": 50943000
   },
   "SAIB": {
    "currency": "US$",
    "currency_stated": "2026-09-07"
   },
   "SAUD": {
-   "market_cap": 16971427294.2,
+   "market_cap": 17036869815.9,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 727139130,
-   "trades": 273,
-   "value": 3903095
+   "trades": 366,
+   "value": 5464086
   },
   "SCEM": {
-   "market_cap": 26214262063.27,
+   "market_cap": 26081247700.0,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 260812477,
-   "trades": 413,
-   "value": 20018953
+   "trades": 755,
+   "value": 52508562
   },
   "SCFM": {
-   "market_cap": 1686600000.0,
+   "market_cap": 1678740000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 6000000,
-   "trades": 88,
-   "value": 2114023
+   "trades": 177,
+   "value": 3943079
   },
   "SCTS": {
-   "market_cap": 56103480000.0,
+   "market_cap": 56085300000.0,
    "sector": "Education Services",
    "sector_ar": "خدمات تعليمية",
    "listed_shares": 90900000,
-   "trades": 34,
-   "value": 622506
+   "trades": 58,
+   "value": 1711456
   },
   "SDTI": {
-   "market_cap": 3950595897.6,
+   "market_cap": 3865819161.6,
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
    "listed_shares": 52985460,
-   "trades": 129,
-   "value": 3129193
+   "trades": 209,
+   "value": 8266989
   },
   "SEIG": {
-   "market_cap": 637950000.0,
+   "market_cap": 631650000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 2500000,
-   "trades": 53,
-   "value": 1244578
+   "trades": 82,
+   "value": 1907600
   },
   "SIPC": {
-   "market_cap": 1540000000.0,
+   "market_cap": 1525000000.0,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 250000000,
-   "trades": 4067,
-   "value": 128943790
+   "trades": 5156,
+   "value": 155337945
   },
   "SKPC": {
-   "market_cap": 21364560000.0,
+   "market_cap": 21013020000.0,
    "sector": "Basic Resources",
    "sector_ar": "موارد أساسية",
    "listed_shares": 1134000000,
-   "trades": 803,
-   "value": 122102269
+   "trades": 1605,
+   "value": 175388302
   },
   "SMFR": {
-   "market_cap": 2440992000.0,
+   "market_cap": 2435040000.0,
    "sector": "Trade & Distributors",
    "sector_ar": "تجارة و موزعون",
    "listed_shares": 9600000,
-   "trades": 227,
-   "value": 4819795
+   "trades": 310,
+   "value": 7306839
   },
   "SNFC": {
-   "market_cap": 1785166336.8,
+   "market_cap": 1783527065.6,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 163927120,
-   "trades": 89,
-   "value": 2399277
+   "trades": 171,
+   "value": 8694907
   },
   "SPHT": {
    "currency": "US$",
    "currency_stated": "2026-09-07"
   },
   "SPIN": {
-   "market_cap": 6958306373.19,
+   "market_cap": 6864518936.33,
    "sector": "Textile & Durables",
    "sector_ar": "منسوجات و سلع معمرة",
    "listed_shares": 360720911,
-   "trades": 238,
-   "value": 4157841
+   "trades": 353,
+   "value": 8934068
   },
   "SPMD": {
-   "market_cap": 753663671.895,
+   "market_cap": 747008805.035,
    "sector": "Health Care & Pharmaceuticals",
    "sector_ar": "رعاية صحية و ادوية",
    "listed_shares": 1663716715,
-   "trades": 207,
-   "value": 3164457
+   "trades": 446,
+   "value": 7601844
   },
   "SUGR": {
-   "market_cap": 8799216881.0,
+   "market_cap": 8760823400.75,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 142198075,
-   "trades": 401,
-   "value": 11506465
+   "trades": 572,
+   "value": 19477672
   },
   "SVCE": {
-   "market_cap": 12027485589.6,
+   "market_cap": 11998550179.2,
    "sector": "Building Materials",
    "sector_ar": "مواد البناء",
    "listed_shares": 964513680,
-   "trades": 1792,
-   "value": 106856108
+   "trades": 3082,
+   "value": 177774991
   },
   "SWDY": {
-   "market_cap": 283507419484.32,
+   "market_cap": 280041663224.4,
    "sector": "Industrial Goods , Services and Automobiles",
    "sector_ar": "خدمات و منتجات صناعية وسيارات",
    "listed_shares": 2139355716,
-   "trades": 1643,
-   "value": 31513853
+   "trades": 4247,
+   "value": 124684207
   },
   "TALM": {
-   "market_cap": 13315434644.74,
+   "market_cap": 13286073157.1,
    "sector": "Education Services",
    "sector_ar": "خدمات تعليمية",
    "listed_shares": 734037191,
-   "trades": 348,
-   "value": 9686012
+   "trades": 686,
+   "value": 20284027
   },
   "TANM": {
-   "market_cap": 916650000.0,
+   "market_cap": 889005000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 145500000,
-   "trades": 802,
-   "value": 19063459
+   "trades": 1037,
+   "value": 23643862
   },
   "TAQA": {
-   "market_cap": 22313837700.0,
+   "market_cap": 21975749250.0,
    "sector": "Utilities",
    "sector_ar": "مرافق",
    "listed_shares": 1352353800,
-   "trades": 766,
-   "value": 26588106
+   "trades": 1306,
+   "value": 39298209
   },
   "TMGH": {
-   "market_cap": 204210790192.6,
+   "market_cap": 204004724814.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 2060653786,
-   "trades": 2382,
-   "value": 206506498
+   "trades": 3889,
+   "value": 342027431
   },
   "TRTO": {
    "market_cap": 388000520.0,
    "currency": "US$",
    "sector": "Travel & Leisure",
    "sector_ar": "سياحة وترفيه",
-   "trades": 41,
-   "value": 1183599
+   "trades": 46,
+   "value": 1271171
   },
   "TWSA": {
-   "market_cap": 821100000.0,
+   "market_cap": 807300000.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 115000000,
-   "trades": 91,
-   "value": 1356410
+   "trades": 166,
+   "value": 2709116
   },
   "TYCN": {
-   "market_cap": 771210000.0,
+   "market_cap": 769642500.0,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 52250000,
-   "trades": 170,
-   "value": 2497782
+   "trades": 293,
+   "value": 4272406
   },
   "UBEE": {
-   "market_cap": 16489000000.0,
+   "market_cap": 17798000000.0,
    "sector": "Banks",
    "sector_ar": "بنوك",
    "listed_shares": 1100000000,
-   "trades": 62,
-   "value": 1235515
+   "trades": 1222,
+   "value": 34062063
   },
   "UEFM": {
-   "market_cap": 3778950000.0,
+   "market_cap": 3665760000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 7000000,
-   "trades": 30,
-   "value": 120989
+   "trades": 54,
+   "value": 459258
   },
   "UEGC": {
-   "market_cap": 1247398498.2,
+   "market_cap": 1254650815.05,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 725231685,
-   "trades": 416,
-   "value": 7938350
+   "trades": 660,
+   "value": 12721914
   },
   "UNIP": {
-   "market_cap": 884496845.916,
+   "market_cap": 882205403.31,
    "sector": "Paper & Packaging",
    "sector_ar": "ورق ومواد تعبئة و تغليف",
    "listed_shares": 2291442606,
-   "trades": 227,
-   "value": 4196466
+   "trades": 403,
+   "value": 9116228
   },
   "UNIT": {
-   "market_cap": 4430672396.66,
+   "market_cap": 4454214757.96,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 235423613,
-   "trades": 41,
-   "value": 769946
+   "trades": 66,
+   "value": 1092834
   },
   "VALU": {
-   "market_cap": 23001413231.16,
+   "market_cap": 22959286100.7,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 2106356523,
-   "trades": 285,
-   "value": 9865896
+   "trades": 504,
+   "value": 17417169
   },
   "VLMR": {
-   "market_cap": 28970565902.301167,
+   "market_cap": 29012982543.446556,
    "currency": "US$",
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
-   "trades": 29,
-   "value": 2663182
+   "trades": 48,
+   "value": 3210442
   },
   "VLMRA": {
-   "market_cap": 11632368812.4,
+   "market_cap": 11484365331.6,
    "sector": "Non-bank financial services",
    "sector_ar": "خدمات مالية غير مصرفية",
    "listed_shares": 352389240,
-   "trades": 1399,
-   "value": 130695777
+   "trades": 1911,
+   "value": 149997616
   },
   "WCDF": {
-   "market_cap": 5151075000.0,
+   "market_cap": 5187525000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 7500000,
-   "trades": 85,
-   "value": 1195257
+   "trades": 118,
+   "value": 1869548
   },
   "WKOL": {
-   "market_cap": 1917104000.0,
+   "market_cap": 1925056000.0,
    "sector": "Contracting & Construction Engineering",
    "sector_ar": "مقاولات و إنشاءات هندسية",
    "listed_shares": 5600000,
-   "trades": 86,
-   "value": 1131211
+   "trades": 148,
+   "value": 2356305
   },
   "ZEOT": {
-   "market_cap": 2784000000.0,
+   "market_cap": 2798000000.0,
    "sector": "Food, Beverages and Tobacco",
    "sector_ar": "أغذية و مشروبات و تبغ",
    "listed_shares": 200000000,
-   "trades": 205,
-   "value": 2920872
+   "trades": 288,
+   "value": 4595130
   },
   "ZMID": {
-   "market_cap": 9460000000.0,
+   "market_cap": 9600000000.0,
    "sector": "Real Estate",
    "sector_ar": "عقارات",
    "listed_shares": 1000000000,
-   "trades": 618,
-   "value": 69400596
+   "trades": 1230,
+   "value": 135357526
   }
  }
 }
