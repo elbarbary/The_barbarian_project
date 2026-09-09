@@ -527,6 +527,10 @@
     "meaning": "The arrival of 30,000 tons of imported aluminum at Safaga Port supplies the domestic industrial and metallurgical manufacturing sector with raw material inventory through maritime freight channels.",
     "meaning_ar": "يمثل استقبال ميناء سفاجا لشحنة تبلغ 30 ألف طن من الألومنيوم المستورد إمداداً تشغيلياً لقطاع الصناعات التحويلية والمعدنية المحلي بالمواد الخام عبر خطوط الشحن البحري."
   },
+  "«نقل القاهره» تطرح 4 فرص استثماريه للشراكه مع القطاع الخاص": {
+    "meaning": "The Cairo Public Transport Authority offers four public-private partnership contracts, distributing operational management and capital expenditure across designated transit assets between the public authority and private sector operators.",
+    "meaning_ar": "تطرح هيئة النقل العام بالقاهرة أربعة عقود للشراكة بين القطاعين العام والخاص، مما يوزع الإدارة التشغيلية والنفقات الرأسمالية لأصول نقل محددة بين الهيئة الحكومية ومشغلي القطاع الخاص."
+  },
   "«نيسان مصر» تفتتح فرعا جديدا في دمياط الجديده بالشراكه مع «AMG Motors»": {
     "meaning": "The expansion relies on an authorized dealership model to add a physical sales and after-sales service point in the Damietta governorate, distributing retail operational costs between the manufacturer and the local partner.",
     "meaning_ar": "يعتمد هذا التوسع على نموذج التوزيع المعتمد لإنشاء مركز للمبيعات وخدمات ما بعد البيع في محافظة دمياط، مما يوزع التكاليف التشغيلية لمنافذ البيع بين الشركة المصنعة والوكيل المحلي."
@@ -1155,6 +1159,10 @@
     "meaning": "The government allocates public compensation funds to individuals displaced or affected by national infrastructure expansion projects.",
     "meaning_ar": "تخصص الحكومة مخصصات مالية من الموازنة العامة لتعويض الأفراد المتضررين من نزع الملكية لتنفيذ مشروعات البنية التحتية القومية."
   },
+  "الحكومه توافق علي مد فتره توفيق اوضاع الاجانب المقيمين بصوره غير شرعيه": {
+    "meaning": "Extending the regularization period maintains the operational window for foreign residents to settle statutory administrative and residency fees in foreign currency via the official banking system, integrating informal resident activity into the formal legal framework.",
+    "meaning_ar": "يُبقي تمديد مهلة توفيق الأوضاع على المسار الإجرائي لسداد رسوم الإقامة والغرامات الإدارية بالعملة الأجنبية عبر القطاع المصرفي الرسمي، مما يدرج المعاملات والعمالة غير المسجلة ضمن الأطر التنظيمية والقانونية."
+  },
   "الخام الامريكي يقفز نحو 3% متجاوزا 94 دولارا": {
     "meaning": "An increase in global crude oil prices directly raises input and transportation costs for energy-intensive manufacturing sectors and increases the fuel import bill for state and private refineries.",
     "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام عالمياً إلى زيادة تكاليف المدخلات والنقل للقطاعات الصناعية كثيفة الاستهلاك للطاقة، ويرفع تكلفة استيراد الوقود لمصافي التكرير الحكومية والخاصة."
@@ -1662,6 +1670,10 @@
   "بريطانيا تخفف قواعد الموافقه علي مشروعات البنيه التحتيه لتعزيز الاستثمار": {
     "meaning": "Easing regulatory approval frameworks streamlines the planning process and reduces the administrative lead time required to initiate infrastructure developments.",
     "meaning_ar": "يؤدي تخفيف الأطر التنظيمية للموافقات إلى تبسيط الإجراءات التخطيطية وتقليص المدة الزمنية الإدارية اللازمة لبدء تنفيذ مشروعات البنية التحتية."
+  },
+  "بريطانيا تصعد ضد اسراييل.. حظر واردات مستوطنات الضفه الغربيه يشعل مواجهه جديده": {
+    "meaning": "UK trade restrictions on goods originating from West Bank settlements restrict market access for targeted agricultural and industrial producers and alter bilateral trade compliance verification procedures.",
+    "meaning_ar": "يؤدي فرض قيود تجارية بريطانية على السلع المنتجة في مستوطنات الضفة الغربية إلى تقييد نفاذ المنتجين المعنيين إلى السوق البريطانية وتغيير إجراءات الامتثال والتحقق الجمركي للتبادل التجاري."
   },
   "بريطانيا تقترض لاجل 30 عاما باعلي عايد منذ 1998 وسط ضغوط ماليه متزايده": {
     "meaning": "Issuing 30-year sovereign bonds at multi-decade high yields reflects elevated long-term borrowing costs for the government and fixes debt service obligations at these higher rates.",
@@ -2336,6 +2348,10 @@
     "meaning": "Official opening exchange rate data for the Saudi Riyal reflects the current interbank foreign currency pricing mechanism, determining the direct transaction costs for bilateral trade settlements, travel expenditures, and cross-border remittances between Egypt and Saudi Arabia.",
     "meaning_ar": "تعكس بيانات أسعار صرف الريال السعودي في بداية التعاملات آلية تسعير العملات الأجنبية في سوق المعاملات بين البنوك (الإنتربنك)، والتي تحدد التكلفة المباشرة لتسوية المعاملات التجارية ونفقات السفر والتحويلات المالية بين مصر والمملكة العربية السعودية."
   },
+  "سعر الريال السعودي اليوم الاربعاء 9-9-2026 في ختام التعاملات": {
+    "meaning": "Daily closing exchange rates establish the official banking valuation of the Saudi Riyal against the Egyptian Pound, serving as the benchmark pricing for bilateral trade settlement, cross-border remittances, and foreign currency accounting.",
+    "meaning_ar": "تحدد أسعار الصرف الختامية اليومية التقييم المصرفي للريال السعودي مقابل الجنيه المصري، وتعمل كمعيار تسعير لتسوية المعاملات التجارية والتحويلات النقدية والمحاسبة بالعملات الأجنبية."
+  },
   "سعر الريال السعودي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
     "meaning": "The headline reports the opening exchange rate of the Saudi Riyal against the Egyptian Pound, which serves as the pricing benchmark for bilateral trade settlement, remittances, and religious tourism costs.",
     "meaning_ar": "يوضح الخبر سعر الصرف الافتتاحي للريال السعودي مقابل الجنيه المصري في البنوك، وهو ما يحدد تكاليف تسوية المعاملات التجارية المتبادلة، وتحويلات العاملين، ونفقات السياحة الدينية."
@@ -2893,6 +2909,10 @@
     "meaning": "Adverse weather conditions and crop diseases in Ghana contract raw agricultural supply, directly affecting input availability and procurement dynamics across global chocolate and food processing supply chains.",
     "meaning_ar": "تؤدي التقلبات الجوية والأمراض الزراعية في غانا إلى تقليص المعروض من المحاصيل، مما يؤثر مباشرة على وفرة المواد الخام وتكاليف التوريد ضمن سلاسل إمداد الصناعات الغذائية وصناعة الشوكولاتة عالمياً."
   },
+  "مد فتره توفيق اوضاع اقامه الاجانب المقيمين بالبلاد بصوره غير شرعيه لمده عام": {
+    "meaning": "Extending the regularization window allows undocumented foreign residents to obtain legal status against the payment of administrative fees in foreign currency deposited through the formal banking system.",
+    "meaning_ar": "يتيح تمديد مهلة توفيق الأوضاع تقنين إقامة المقيمين بصورة غير شرعية مقابل سداد رسوم إدارية بالعملة الأجنبية عبر القنوات المصرفية الرسمية."
+  },
   "مدبولي يتابع تكليفات الرييس بتخضير القاهره ويوجه بتشجير الطريق الدايري": {
     "meaning": "These state-directed urban greening and infrastructure directives involve public procurement allocations for landscaping, agricultural supplies, and municipal contracting services.",
     "meaning_ar": "تتضمن هذه التوجيهات الحكومية الخاصة بالتشجير وتطوير البنية التحتية تخصيصات للمشتريات العامة في مجالات تنسيق الحدائق، والتوريدات الزراعية، وخدمات المقاولات العامة."
@@ -3341,6 +3361,10 @@
     "meaning": "This policy framework shifts public and foreign capital allocation toward high-value-add sectors, requiring direct technology transfer and localized industrial capabilities as criteria for project approvals.",
     "meaning_ar": "يوجه هذا الإطار السياساتي تخصيص رؤوس الأموال العامة والأجنبية نحو القطاعات ذات القيمة المضافة العالية، مع اعتماد نقل التكنولوجيا وتوطين القدرات الصناعية كمعايير للموافقة على المشروعات."
   },
+  "وزير التربيه التعليم يكرم مديري مدرستي القليوبيه.. ويوكد: «معلمو ومديرو مدارس مصر خط احمر»": {
+    "meaning": "This represents an internal administrative action within the public education sector concerning state school management and workforce governance, carrying no direct mechanism for capital markets or commercial enterprises.",
+    "meaning_ar": "يمثل هذا الإجراء نشاطاً إدارياً داخلياً ضمن قطاع التعليم العام يخص إدارة الكوادر والقيادات في المدارس الحكومية، دون وجود آلية تشغيلية ترتبط بسوق المال أو الشركات التجارية."
+  },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
     "meaning_ar": "يؤسس التعاون الفني الثنائي بين مصر ومالي أطرًا مؤسسية لتبادل المعرفة الفنية وتنسيق الإجراءات التنظيمية وبرامج بناء القدرات في قطاع المشروعات الصغيرة والمتوسطة وريادة الأعمال."
@@ -3417,6 +3441,10 @@
     "meaning": "The exclusion of state-backed financial aid requires the automaker to rely entirely on private liquidity sources, commercial borrowing, or internal operational adjustments to manage its obligations.",
     "meaning_ar": "استبعاد الدعم المالي الحكومي يُلزم شركة تصنيع السيارات بالاعتماد الكامل على مصادر السيولة الخاصة، أو الاقتراض التجاري، أو إعادة الهيكلة التشغيلية الداخلية للوفاء بالتزاماتها."
   },
+  "وفد من شركات مقاولات وتطوير عقاري محليه يزور سوريا ولبنان اكتوبر المقبل": {
+    "meaning": "The visit constitutes an operational trade delegation where Egyptian construction and real estate firms engage with regional counterparties to assess foreign project tenders, infrastructure contracts, and cross-border partnership frameworks.",
+    "meaning_ar": "تمثل الزيارة بعثة تجارية تشغيلية تبحث من خلالها شركات المقاولات والتطوير العقاري المصرية مع جهات إقليمية مناقصات المشاريع الخارجية وعقود البنية التحتية وأطر الشراكة المشتركة."
+  },
   "يوني كريديت: 4 تريليونات دولار انكشاف صناديق التحوط علي سندات الخزانه": {
     "meaning": "This metric measures the aggregate nominal volume and leveraged positioning held by hedge funds in sovereign debt markets. It represents the scale of balance sheet allocations and collateralized financing tied to government securities.",
     "meaning_ar": "يمثل هذا المقياس إجمالي القيمة الاسمية ومراكز الرافعة المالية التي تحتفظ بها صناديق التحوط في أسواق الدين السيادي. ويعكس ذلك حجم تخصيصات الميزانية العمومية والتمويلات المرهونة المرتبطة بالأوراق المالية الحكومية."
@@ -3476,6 +3504,10 @@
   "“السيسي” يوكد اهميه دعم موسسات التمويل للاقتصادات الناشيه في مواجهه الصدمات": {
     "meaning": "Multilateral development financing provides foreign currency liquidity and concessionary credit lines to emerging market central banks and governments during external trade and capital balance shocks.",
     "meaning_ar": "يوفر التمويل التنموي متعدد الأطراف سيولة بالنقد الأجنبي وخطوط ائتمان ميسرة للبنوك المركزية والحكومات في الأسواق الناشئة أثناء صدمات موازين التجارة ورؤوس الأموال الخارجية."
+  },
+  "“الشباب والرياضه” يبحث مع “Blue Ribbon” تطوير اداره وتشغيل الانديه": {
+    "meaning": "The Ministry of Youth and Sports discusses public-private partnership frameworks with Blue Ribbon to outsource the management, operations, and facility services of sports clubs to a specialized private entity.",
+    "meaning_ar": "تبحث وزارة الشباب والرياضة أطر الشراكة بين القطاعين العام والخاص مع شركة \"بلو ريبون\" لإسناد مهام الإدارة والتشغيل والخدمات اللوجستية للأندية الرياضية إلى كيان متخصص من القطاع الخاص."
   },
   "“العامه للاستثمار”: ايطاليا رابع اكبر مستثمر اجنبي في مصر ب23.4 مليار دولار": {
     "meaning": "Official data ranks Italy as Egypt's fourth-largest foreign direct investment source with an accumulated capital base of $23.4 billion, concentrated primarily in energy, manufacturing, and infrastructure operations.",
