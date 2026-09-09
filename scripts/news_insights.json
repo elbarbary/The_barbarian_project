@@ -543,6 +543,10 @@
     "meaning": "The bank deploys capital into community infrastructure development under its corporate social responsibility (CSR) framework, allocating non-operating expenditures to educational assets.",
     "meaning_ar": "يوجه البنك جزءاً من مخصصات المسؤولية المجتمعية للشركات نحو تطوير البنية التحتية التعليمية، وهو ما يمثل توزيعاً للنفقات غير التشغيلية على مشروعات التنمية المجتمعية."
   },
+  "اتحاد الصناعات الغذاييه البريطانيه: تحذيرات من عام جديد من ارتفاع اسعار الغذاء": {
+    "meaning": "Persistent global food inflation reflects ongoing supply chain pressures, energy expenses, and elevated agricultural input costs for manufacturers. These cost structures transmit input price increases directly through international wholesale and retail supply networks.",
+    "meaning_ar": "يعكس استمرار التضخم في أسعار الغذاء العالمية ضغوط سلاسل الإمداد وتكاليف الطاقة ومدخلات الإنتاج الزراعي لدى المصنعين، حيث تنتقل هذه التكاليف التشغيلية عبر قنوات التوريد وأسواق الجملة والتجزئة."
+  },
   "اتحاد منتجي الدواجن: سعر كيلو الفراخ ب65 جنيه وطبق البيض ب60 تسليم المزرعه": {
     "meaning": "The Poultry Producers Association sets baseline wholesale farm-gate prices for live chicken at EGP 65 per kilogram and egg crates at EGP 60, establishing the direct production-level cost basis before intermediary distribution, transport, and retail markups are applied across the supply chain.",
     "meaning_ar": "يحدد اتحاد منتجي الدواجن أسعار تسليم المزرعة للكيلو من الدواجن الحية عند 65 جنيهاً ولطبق البيض عند 60 جنيهاً، وهو ما يمثل التكلفة الأساسية عند مستوى الإنتاج قبل إضافة هوامش النقل والتوزيع وتجارة التجزئة في سلاسل الإمداد."
@@ -1218,6 +1222,10 @@
   "الرقابه الماليه تصدر اول دليل شامل لقواعد وضوابط نشاط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority (FRA) establishes a unified regulatory handbook consolidating operating standards, licensing conditions, and compliance rules for consumer finance companies.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية دليلاً تنظيمياً موحداً يجمع المعايير التشغيلية وضوابط الترخيص وقواعد الامتثال للشركات العاملة في نشاط التمويل الاستهلاكي."
+  },
+  "الرقابه الماليه تصدر ضوابط جديده لتنظيم اقتراض الاوراق الماليه بغرض البيع في سوق راس المال": {
+    "meaning": "Securities lending for the purpose of sale establishes a standardized regulatory framework that allows market participants to borrow listed shares from lenders to execute transactions under defined collateral, margin, and settlement requirements.",
+    "meaning_ar": "يضع تنظيم اقتراض الأوراق المالية بغرض البيع إطاراً تنظيمياً يتيح للمتعاملين اقتراض أسهم مقيدة من المقرضين لتنفيذ المعاملات وفق متطلبات محددة للضمانات ونسب الهامش والتسوية."
   },
   "الرقابه الماليه تقرر وقف نشاط بيتا كابيتال كونسالتينج لمده 15 يوما": {
     "meaning": "A regulatory suspension temporarily freezes a financial advisory firm's operating license and services, halting its market transactions while it resolves compliance requirements with the Financial Regulatory Authority.",
@@ -2761,6 +2769,10 @@
     "meaning": "Verification of foreign employment contracts operates as an administrative compliance mechanism that validates cross-border hiring documentation and legal workforce migration under regulatory oversight.",
     "meaning_ar": "يمثل التحقق من عقود العمل بالخارج إجراءً إداريًا تنظيميًا لتوثيق ومطابقة شروط التشغيل عبر الحدود والتحقق من قانونية التعاقدات ضمن الأطر الرسمية لوزارة العمل."
   },
+  "قرار حكومي بضم وزير العمل الي عضويه المجموعه الوزاريه لرياده الاعمال": {
+    "meaning": "The inclusion of the Minister of Labor coordinates workforce regulations, social insurance policies, and employment compliance frameworks directly within the inter-ministerial body governing startups and small enterprises.",
+    "meaning_ar": "يدمج ضم وزير العمل السياسات التنظيمية لبيئة التشغيل وقوانين العمل والتأمينات الاجتماعية بشكل مباشر ضمن أعمال اللجنة الوزارية المعنية بتنظيم قطاع الشركات الناشئة وريادة الأعمال."
+  },
   "قناه بنما تخفض عدد السفن العابره بسبب ظاهره ال نينيو المناخيه": {
     "meaning": "Reducing daily vessel transit slots at the Panama Canal constrains throughput capacity on trans-oceanic maritime routes, altering cargo allocation across global shipping networks and alternative maritime corridors.",
     "meaning_ar": "يؤدي تقليص عدد السفن اليومية العابرة لقناة بنما إلى تقييد الطاقة الاستيعابية لحركة النقل البحري وتغيير توزيع حركة الشحن عبر الممرات الملاحية الدولية البديلة."
@@ -3292,6 +3304,10 @@
   "هيوماين السعوديه تبدا خطوات طرح اسهمها للاكتتاب العام": {
     "meaning": "An initial public offering (IPO) process involves listing a company's shares on a public exchange to raise equity capital from institutional and retail investors, transitioning the firm from private ownership to a publicly traded entity subject to regulatory disclosure requirements.",
     "meaning_ar": "تتضمن إجراءات الطرح العام الأولي إدراج أسهم الشركة في البورصة لجمع رأس مال ملكية من المستثمرين المؤسسيين والأفراد، مما ينقل الشركة من الملكية الخاصة إلى كيان مدرج يخضع لمتطلبات الإفصاح والتنظيم المالي."
+  },
+  "هييه الاستثمار تبحث مع “مجموعه الحبتور” فرص التوسع في مصر": {
+    "meaning": "The General Authority for Investment and Free Zones (GAFI) engages in direct bilateral discussions with multinational conglomerates to present targeted sector portfolios and regulatory incentives for foreign direct investment entry.",
+    "meaning_ar": "تجري الهيئة العامة للاستثمار والمناطق الحرة مباحثات ثنائية مباشرة مع المجموعات الاستثمارية لعرض الفرص المتاحة والحوافز التنظيمية لتدفقات الاستثمار الأجنبي المباشر."
   },
   "هييه الدواء المصريه تنفي ما تم تداوله بشان اشتراطات جديده لترخيص الصيدليات": {
     "meaning": "The regulatory clarification maintains the existing licensing procedures and operational requirements for retail pharmacies, leaving the sector's administrative barriers to entry and compliance costs unchanged.",
