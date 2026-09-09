@@ -595,6 +595,10 @@
     "meaning": "A slight increase in equity indices during opening weekly trading reflects net capital inflows and executed buy orders outpacing selling volume across Chinese stock exchanges.",
     "meaning_ar": "يعكس الارتفاع الطفيف في مؤشرات الأسهم خلال الجلسة الافتتاحية للأسبوع تدفقات رأسمالية صافية وتفوقاً لأحجام أوامر الشراء المنفذة على عروض البيع في البورصات الصينية."
   },
+  "ارتفاع طفيف للاسهم الصينيه مع استقرار اليوان": {
+    "meaning": "Currency stability reduces exchange rate volatility risks for domestic equity valuations, which correlates with modest price gains in local equity markets.",
+    "meaning_ar": "يؤدي استقرار سعر صرف العملة المحلية إلى خفض مخاطر تقلبات أسعار الصرف المرتبطة بتقييمات الأسهم، وهو ما يتزامن مع ارتفاعات طفيفة في أسعار التداول بالأسواق المالية."
+  },
   "ارتفاع موشر \"ازدهار الخدمات اللوجستيه\" في الصين الي 50.9% في اغسطس": {
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
     "meaning_ar": "يعكس تجاوز المؤشر لمستوى 50% وجود قطاع الخدمات اللوجستية الصيني في نطاق التوسع التشغيلي، وهو ما يرصد حركة تدفق الشحن، ومعدلات إشغال المستودعات، وسرعة دوران البضائع عبر سلاسل الإمداد."
@@ -2992,6 +2996,10 @@
   "نوفو نورديسك توقف تجربتين لدواء القلب بعد فشل تجربه رييسيه": {
     "meaning": "The discontinuation of clinical trials halts the research and development pipeline for this specific cardiovascular drug indication, limiting capital allocation and clinical resources dedicated to these studies.",
     "meaning_ar": "يؤدي إيقاف التجارب السريرية إلى تجميد مسار البحث والتطوير المخصص لهذا العقار لعلاج أمراض القلب، مما يوقف تخصيص الموارد الرأسمالية والسريرية الموجهة لهذه الدراسات."
+  },
+  "هاير مصر تضخ استثمارات جديده وتفتتح المرحله الثانيه من مجمع العاشر نوفمبر المقبل": {
+    "meaning": "The expansion represents capital expenditure allocated to industrial capacity, adding a second operational phase to the manufacturing complex in 10th of Ramadan City to expand domestic production lines.",
+    "meaning_ar": "يمثل هذا التوسع إنفاقاً رأسمالياً موجهاً للطاقة الصناعية، حيث يضيف مرحلة تشغيلية ثانية إلى المجمع التصنيعي في مدينة العاشر من رمضان لزيادة خطوط الإنتاج المحلي."
   },
   "هبوط الطماطم .. اسعار الخضروات والفاكهه اليوم الثلاثاء 8-9-2026": {
     "meaning": "Daily price fluctuations in fresh agricultural commodities reflect immediate supply-and-demand dynamics in wholesale and retail markets, where higher incoming harvest volumes lower spot clearing prices.",
