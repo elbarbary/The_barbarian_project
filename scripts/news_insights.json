@@ -955,6 +955,10 @@
     "meaning": "A mixed close across indices reflects divergent trading activity, where capital flows and price movements differ between large-cap institutional equities and small-to-mid-cap stocks within the same session.",
     "meaning_ar": "يشير التباين في أداء المؤشرات إلى اختلاف مسارات الأسعار وتوزيع السيولة النقدية بين الأسهم القيادية وأسهم الشركات الصغيرة والمتوسطة خلال جلسة التداول."
   },
+  "البورصه تتحدي ضغوط المبيعات وجني الارباح لاستعاده المسار الصاعد": {
+    "meaning": "During market sessions characterized by profit-taking, incoming buy orders absorb the volume of executed sell orders, which directly determines the net movement of benchmark indices.",
+    "meaning_ar": "خلال جلسات التداول التي تشهد عمليات جني أرباح، تستوعب طلبات الشراء أحجام أوامر البيع المنفذة، مما يحدد الاتجاه الصافي لحركة مؤشرات السوق."
+  },
   "البورصه تختبر حاجز 57 الف نقطه تحت ضغط مبيعات الموسسات": {
     "meaning": "Institutional portfolio reallocations and high-volume liquidation orders create downward pricing pressure across constituent equities, bringing the benchmark index to the 57,000-point technical threshold.",
     "meaning_ar": "تؤدي عمليات إعادة هيكلة المحافظ والتخارج المؤسسي بأحجام تداول مرتفعة إلى ضغوط سعرية على الأسهم المكونة للمؤشر، مما يدفع المؤشر الرئيسي للتداول عند مستوى 57 ألف نقطة."
@@ -1736,6 +1740,10 @@
     "meaning": "African trade operates through continental trade corridors and regional frameworks that structure cross-border supply chains and export channels for Egyptian commercial and industrial enterprises.",
     "meaning_ar": "تعتمد التجارة الإفريقية على ممرات تجارية عابرة للحدود وأطر إقليمية تُحدد قنوات التصدير وسلاسل الإمداد للشركات التجارية والصناعية المصرية داخل الأسواق القارية."
   },
+  "تسارع التضخم في الصين للمره الاولي منذ ابريل": {
+    "meaning": "An acceleration in China's inflation rate reflects upward price pressures across consumer goods and industrial inputs within the Chinese economy. This price dynamic directly sets the baseline cost structure for global supply chains and international trade reliant on Chinese manufactured goods and raw materials.",
+    "meaning_ar": "يعكس تسارع التضخم في الصين ضغوطاً تصاعدية على أسعار السلع الاستهلاكية ومدخلات الإنتاج داخل السوق الصينية، وهو ما يحدد تكلفة الأساس لسلاسل الإمداد العالمية والتجارة الدولية المعتمدة على السلع والخامات الصينية."
+  },
   "تسارع نمو اقتصاد منطقه اليورو خلال الربع الثاني من 2026": {
     "meaning": "An acceleration in Eurozone GDP growth represents higher aggregate output and industrial activity across member states, which defines baseline external trade and foreign currency demand for trade partners, including Egyptian export and import sectors.",
     "meaning_ar": "يمثل تسارع نمو الناتج المحلي الإجمالي لمنطقة اليورو ارتفاعاً في إجمالي الناتج والنشاط الصناعي عبر الدول الأعضاء، وهو ما يحدد حركة التجارة الخارجية وحجم تدفقات النقد الأجنبي للشركاء التجاريين، بما في ذلك قطاعات التصدير والاستيراد في مصر."
@@ -2076,6 +2084,10 @@
     "meaning": "Operational site visits track project execution milestones, infrastructure development, and workflow integration across state-led agricultural and industrial production facilities.",
     "meaning_ar": "تتضمن الجولات الميدانية متابعة الموقف التنفيذي للبنية التحتية ومسارات العمل ومراحل الإنتاج الفعلي في المشروعات الزراعية والصناعية التابعة للجهاز."
   },
+  "زياده راتب رييس وزراء سنغافوره بمقدار 1.1 مليون دولار سنويا": {
+    "meaning": "Public sector executive compensation adjustments link senior government remuneration to private sector benchmarks, aligning state administrative costs directly with prevailing executive market pay scales.",
+    "meaning_ar": "يعتمد تعديل مخصصات رواتب القيادات الحكومية على ربط أجور القطاع العام بمؤشرات ومتوسطات رواتب كبار التنفيذيين في القطاع الخاص كمعيار للمحاكاة المالية."
+  },
   "ساروج كومار جها يكتب: 28% من موازنات المياه لا تنفق.. اين تتعطل الاستثمارات؟": {
     "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
     "meaning_ar": "يعكس عدم إنفاق 28% من مخصصات قطاع المياه ضعف معدلات استغلال الإنفاق الرأسمالي المتاح، وذلك نتيجة معوقات إجرائية وإدارية في ترسية وتنفيذ مشروعات البنية التحتية."
@@ -2135,6 +2147,10 @@
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي في أوروبا جراء اشتداد المنافسة على شحنات الغاز المسال إلى رفع مؤشرات تكلفة الطاقة ومدخلات الإنتاج عالمياً، بما يشمل تكاليف استيراد الغاز المسال ومدخلات التشغيل للقطاعات الصناعية كثيفة الاستهلاك في مصر."
+  },
+  "سعر اليورو اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
+    "meaning": "The headline tracks the opening foreign exchange spot rate of the Euro against the Egyptian Pound, which serves as a pricing benchmark for international trade settlements, corporate FX exposures, and commercial bank treasury operations.",
+    "meaning_ar": "يرصد العنوان سعر الصرف الفوري لليورو مقابل الجنيه المصري في بداية المعاملات اليومية، وهو السعر المعتمد لتسوية العمليات التجارية الدولية وتقييم الالتزامات بالعملة الأجنبية وتسعير معاملات الخزانة في البنوك."
   },
   "سعر اليورو اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
     "meaning": "The headline tracks the official closing exchange rate of the Euro against the Egyptian Pound, which sets the daily valuation standard for commercial transactions, customs valuations, and foreign currency accounting entries in the banking sector.",
@@ -2236,6 +2252,10 @@
   "سيطره امريكا علي نفط فنزويلا تهدد مليارات الدولارات المستحقه للصين": {
     "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
     "meaning_ar": "تؤدي السيطرة الأمريكية على الأصول النفطية الفنزويلية إلى تعديل آلية سداد القروض المضمونة بالنفط، مما يعيد توجيه تدفقات الخام والإيرادات النقدية المرتبطة به بعيداً عن الدائنين الصينيين."
+  },
+  "سينوبك تتوقع تراجع الطلب علي النفط في الصين بنحو 9% هذا العام": {
+    "meaning": "A reduction in crude oil consumption by major refiners directly decreases refinery processing throughput and lowers total import intake across global energy supply chains.",
+    "meaning_ar": "يؤدي انخفاض استهلاك النفط الخام لدى شركات التكرير الكبرى إلى خفض معدلات التشغيل وتقليص أحجام الواردات عبر سلاسل إمداد الطاقة العالمية."
   },
   "شراكه بين «شل للزيوت» و«طاقه للبترول» لتوسيع انتشار منتجاتها في مصر": {
     "meaning": "This commercial distribution agreement utilizes Taqa Petroleum's retail station network and logistics infrastructure to supply and market Shell-branded lubricants across the Egyptian domestic market.",
