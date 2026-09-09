@@ -7,12 +7,12 @@
  "sector": "Real Estate",
  "sector_ar": "عقارات",
  "market": {
-  "last_close": 2.45,
+  "last_close": 2.44,
   "date": "2026-09-09",
   "open": 2.44,
   "high": 2.48,
   "low": 2.4,
-  "volume": 4199859
+  "volume": 4451348
  },
  "price_history": [
   {
@@ -1318,11 +1318,11 @@
  ],
  "profile": {
   "shares_outstanding": 1151285400,
-  "perf_1w": -1.2096774193548308,
-  "perf_1m": 13.953488372093037,
-  "perf_3m": 33.879781420765035,
-  "avg_volume_30d": 11973612.73333333,
-  "relative_volume_10d": 0.24076425266889684,
+  "perf_1w": -1.612903225806453,
+  "perf_1m": 13.488372093023258,
+  "perf_3m": 33.33333333333332,
+  "avg_volume_30d": 11981995.699999997,
+  "relative_volume_10d": 0.2551812988457919,
   "median_volume_20d": 7752272.5,
   "rv20": 0.3471709747045141,
   "normal_value_30d": 14596531.125,

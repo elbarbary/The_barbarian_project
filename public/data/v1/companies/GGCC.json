@@ -7,12 +7,12 @@
  "sector": "Contracting & Construction Engineering",
  "sector_ar": "مقاولات و إنشاءات هندسية",
  "market": {
-  "last_close": 0.854,
+  "last_close": 0.851,
   "date": "2026-09-09",
   "open": 0.86,
   "high": 0.86,
   "low": 0.84,
-  "volume": 9664740
+  "volume": 9742210
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 2164070000,
   "free_float": 0.324044,
   "float_shares": 701253899.08,
-  "perf_1w": 1.42517814726841,
-  "perf_1m": -28.235294117647054,
-  "perf_3m": 108.29268292682927,
-  "avg_volume_30d": 46901986.93333332,
-  "relative_volume_10d": 0.17612510788887017,
+  "perf_1w": 1.0688836104513073,
+  "perf_1m": -28.487394957983195,
+  "perf_3m": 107.56097560975611,
+  "avg_volume_30d": 46904569.26666666,
+  "relative_volume_10d": 0.17753688017743155,
   "median_volume_20d": 42952006.5,
   "rv20": 0.3534360612466382,
   "normal_value_30d": 39336577.05,

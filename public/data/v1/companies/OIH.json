@@ -7,12 +7,12 @@
  "sector": "IT , Media & Communication Services",
  "sector_ar": "اتصالات و  اعلام و تكنولوجيا المعلومات",
  "market": {
-  "last_close": 2.14,
+  "last_close": 2.13,
   "date": "2026-09-09",
   "open": 2.08,
   "high": 2.14,
   "low": 2.08,
-  "volume": 72398390
+  "volume": 82773141
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 5245690620,
   "free_float": 0.48338700000000007,
   "float_shares": 2535698651.7299404,
-  "perf_1w": 4.39024390243904,
-  "perf_1m": 30.487804878048795,
-  "perf_3m": 57.35294117647059,
-  "avg_volume_30d": 79472250.89999995,
-  "relative_volume_10d": 1.0333015475192329,
+  "perf_1w": 3.902439024390248,
+  "perf_1m": 29.878048780487806,
+  "perf_3m": 56.617647058823515,
+  "avg_volume_30d": 79818075.9333333,
+  "relative_volume_10d": 1.1813745400737181,
   "median_volume_20d": 61415809,
   "rv20": 1.1164600469563137,
   "normal_value_30d": 114632978.94999999,
