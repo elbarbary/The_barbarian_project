@@ -8,7 +8,7 @@ a journalist, or a reader who does not believe us would ask for first.
 `test_sources.py` fails the build if a host appears in `scripts/` and not here,
 so this cannot quietly fall out of date.
 
-Last reviewed: 30 August 2026.
+Last reviewed: 9 September 2026.
 
 ---
 
@@ -57,6 +57,7 @@ prevent.
 | **World Bank Open Data** — `api.worldbank.org` | Egypt's GDP growth, inflation, FDI and remittances | Public API, no key | Open data. Annual and revised, so it is backdrop rather than news |
 | **gold-api.com** — `api.gold-api.com` | Spot gold and silver, intraday | Public endpoint, no key | Used for the live headline; the *history* comes from Investing.com and the two are checked against each other on the same dated session |
 | **open.er-api.com** | The pound against other currencies | Public endpoint, no key | Open exchange-rate data |
+| **Yahoo Finance** — `query1.finance.yahoo.com` | The Fragility Engine's outside-world panel: USD/EGP and CIB's London GDR back to 2001; the global shock series (VIX, EEM, the dollar index, US 10-year, wheat, Brent, WTI); and the emerging-market peer set (Turkey, Argentina, Pakistan, South Africa, Brazil) | The undocumented `v8/finance/chart` endpoint, one request per symbol, no key | **Not a documented API.** It is unversioned, unannounced and can change or refuse without notice, so nothing a reader sees on an EGX price depends on it — it feeds research backdrop only, and the engine is built to be rebuilt when it breaks |
 
 ## News
 
