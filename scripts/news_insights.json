@@ -915,6 +915,10 @@
     "meaning": "Broad-based weakness in the US dollar counterbalances downward valuation pressure stemming from volatility and higher yields in the UK sovereign debt market, keeping the exchange rate of the currency pair stable.",
     "meaning_ar": "يوازن التراجع العام في سعر صرف الدولار الأمريكي الضغوط النزولية الناتجة عن تقلبات عوائد السندات السيادية البريطانية، مما يحافظ على استقرار تداول زوج العملات في سوق الصرف الأجنبي."
   },
+  "الاسكندريه للخدمات الطبيه: لايم فست بارتنرز تخفض حصتها في الشركه الي 56.08%": {
+    "meaning": "A reduction of a major shareholder's equity stake to 56.08% alters the company's ownership structure and expands the proportion of shares held by other market participants while maintaining majority voting control.",
+    "meaning_ar": "يُمثل خفض حصة المساهم الرئيسي إلى 56.08% تغييراً في هيكل ملكية الشركة مع توسيع قاعدة الملكية للمستثمرين الآخرين، مع استمرار احتفاظ المستثمر بحصة الأغلبية وحقوق التصويت والسيطرة."
+  },
   "الاسكندريه للخدمات الطبيه: لايم فست بارتنرز تخفض حصتها في الشركه الي 59.4%": {
     "meaning": "This transaction reallocates equity ownership by lowering the principal shareholder's stake while maintaining its majority voting control above 50%, which adjusts the company's shareholder base and listed free-float structure.",
     "meaning_ar": "تعيد هذه الصفقة توزيع هيكل الملكية عبر تقليص حصة المساهم الرئيسي مع احتفاظه بالأغلبية وأحقية السيطرة بنسبة تتجاوز 50%، مما يغير تركيبة قاعدة المساهمين ونسبة الأسهم حرة التداول في السوق."
@@ -1406,6 +1410,10 @@
   "الفايده علي الرهن العقاري الامريكي تصعد لاعلي مستوي منذ يونيو 2025": {
     "meaning": "Higher US mortgage rates raise the direct cost of borrowing and debt servicing for property buyers, tightening financing conditions across the residential real estate lending market.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة على الرهن العقاري الأمريكي إلى زيادة التكلفة المباشرة للاقتراض وخدمة الدين لمشتري العقارات، مما يشدد شروط التمويل في سوق الإقراض العقاري السكني."
+  },
+  "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 11.8%": {
+    "meaning": "This transaction alters the company's equity ownership structure and voting power distribution, reflecting a partial divestment that shifts the concentration of ownership among major shareholders.",
+    "meaning_ar": "يمثل هذا الإجراء تغييراً في هيكل ملكية الشركة وتوزيع حقوق التصويت، حيث يعكس تخارجاً جزئياً يعيد توزيع نسب الملكية والتركز بين كبار المساهمين."
   },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 12.81%": {
     "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
@@ -2709,6 +2717,10 @@
     "meaning": "The second issuance of a fixed-income fund defines the total capital value of newly offered units deployed into debt securities, such as treasury bills, sovereign bonds, and corporate debt instruments.",
     "meaning_ar": "يحدد الإصدار الثاني لصندوق الدخل الثابت القيمة الإجمالية للوثائق الجديدة المطروحة لتوجيه السيولة المجمعة نحو أدوات الدين مثل أذون الخزانة والسندات الحكومية وسندات الشركات."
   },
+  "كاثرين ثوربيك تكتب: هل تتجاوز النماذج المفتوحه مخاوف الثقه في «الذكاء الاصطناعي الصيني»؟": {
+    "meaning": "Open-source software distribution exposes artificial intelligence model architecture and source code for public auditing, which directly alters technology adoption dynamics and counterparty risk evaluation in cross-border software markets.",
+    "meaning_ar": "يتيح نموذج توزيع البرمجيات مفتوحة المصدر تدقيق الهيكل البرمجي ونظم الذكاء الاصطناعي بشكل علني، مما يغير آليات تبني التكنولوجيا وتقييم مخاطر التعامل التجاري في أسواق البرمجيات الدولية."
+  },
   "كبلر: الصين تصدر اول شحنه حمض كبريتيك منذ مايو": {
     "meaning": "The resumption of Chinese sulfuric acid exports reintroduces physical supply from the world's largest producer into the global seaborne spot market, serving as a primary raw material for phosphate fertilizer production and chemical manufacturing.",
     "meaning_ar": "يمثل استئناف صادرات حمض الكبريتيك الصيني إعادة لتدفقات الإمدادات من أكبر منتج عالمي إلى سوق الشحن الفوري، حيث يُعد مدخلاً إنتاجياً أساسياً في صناعة الأسمدة الفوسفاتية والكيماويات."
@@ -2932,6 +2944,10 @@
   "مساهم يتخارج من “الاهرام للطباعه” بقيمه 1.69 مليون جنيه": {
     "meaning": "A shareholder executed a complete equity divestment in El Ahram for Printing and Packaging with a transaction value of EGP 1.69 million, shifting the company's ownership structure and free-float distribution on the EGX.",
     "meaning_ar": "قام أحد المساهمين بتنفيذ تخارج كامل من هيكل ملكية شركة الأهرام للطباعة والتغليف بقيمة تداول بلغت 1.69 مليون جنيه، مما يعيد توزيع الحصص ونسبة الأسهم حرة التداول في البورصة المصرية."
+  },
+  "مستثمرو صناديق السندات الامريكيه يهربون الي الاجال القصيره مع تصاعد مخاطر الفايده": {
+    "meaning": "Rising interest rate risk increases duration risk on fixed-income portfolios, prompting bond funds to reallocate capital into short-term maturities that carry lower price sensitivity to interest rate changes.",
+    "meaning_ar": "يؤدي تصاعد مخاطر أسعار الفائدة إلى زيادة مخاطر حساسية الأجل (Duration Risk) لمحفظة أدوات الدخل الثابت، مما يدفع صناديق السندات لإعادة توجيه السيولة نحو الآجال القصيرة ذات الحساسية السعرية الأقل لتحركات الفائدة."
   },
   "مستشفي مصر للطيران تستعد لتطبيق المتابعه الطبيه عن بعد للمرضي علي متن الرحلات": {
     "meaning": "This initiative integrates in-flight connectivity and biometric data transmission with EgyptAir Hospital's ground medical infrastructure, enabling real-time clinical assessment of passengers during flights.",
