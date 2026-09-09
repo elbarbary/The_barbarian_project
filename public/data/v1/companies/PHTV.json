@@ -7,12 +7,12 @@
  "sector": "Travel & Leisure",
  "sector_ar": "سياحة وترفيه",
  "market": {
-  "last_close": 346,
+  "last_close": 349,
   "date": "2026-09-09",
   "open": 349.08,
-  "high": 349.08,
+  "high": 349.89,
   "low": 342,
-  "volume": 541
+  "volume": 735
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 25350000,
   "free_float": 0.49403400000000003,
   "float_shares": 12523761.9,
-  "perf_1w": -0.5689982182884126,
-  "perf_1m": -0.5518510002299425,
-  "perf_3m": 68.9288155453569,
-  "avg_volume_30d": 7022.033333333343,
-  "relative_volume_10d": 0.1113420733087736,
+  "perf_1w": 0.29312029426978037,
+  "perf_1m": 0.3104161876293355,
+  "perf_3m": 70.39351625817791,
+  "avg_volume_30d": 7028.50000000001,
+  "relative_volume_10d": 0.15126880569676265,
   "median_volume_20d": 6582,
   "rv20": 0.31479793375873594,
   "normal_value_30d": 2077703.9,
@@ -1332,8 +1332,8 @@
   "history_bars": 120,
   "market_cap": 8849178000.0,
   "market_cap_source": "EGX",
-  "trades": 14,
-  "turnover": 186134
+  "trades": 19,
+  "turnover": 254935
  },
  "financials": {
   "annual": [

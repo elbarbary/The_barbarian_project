@@ -7,12 +7,12 @@
  "sector": "Health Care & Pharmaceuticals",
  "sector_ar": "رعاية صحية و ادوية",
  "market": {
-  "last_close": 805.15,
+  "last_close": 805,
   "date": "2026-09-09",
   "open": 804.43,
   "high": 815,
-  "low": 804.43,
-  "volume": 616
+  "low": 791,
+  "volume": 1748
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 11780940,
   "free_float": 0.42128099999999996,
   "float_shares": 4963086.18414,
-  "perf_1w": 0.8694453840467973,
-  "perf_1m": 1.0593566040340827,
-  "perf_3m": 22.346487562491443,
-  "avg_volume_30d": 6197.63333333333,
-  "relative_volume_10d": 0.10136080167179504,
+  "perf_1w": 0.8506533368411775,
+  "perf_1m": 1.0405291762372713,
+  "perf_3m": 22.323694327523583,
+  "avg_volume_30d": 6235.366666666663,
+  "relative_volume_10d": 0.28762772941931447,
   "median_volume_20d": 3955.5,
   "rv20": 0.7758816837315131,
   "normal_value_30d": 3126736.5,
   "five_session_change": 0.7500000000000062,
   "history_bars": 120,
-  "market_cap": 9540912068.4,
+  "market_cap": 9477412801.8,
   "market_cap_source": "EGX",
-  "trades": 30,
-  "turnover": 648184,
+  "trades": 72,
+  "turnover": 1538921,
   "shares_outstanding_source": "EGX"
  },
  "financials": {
@@ -1781,13 +1781,22 @@
    {
     "period": "H1 2025",
     "net_income": 46.805,
+    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294509",
+    "filed_on": "2026-09-09",
+    "basis": "consolidated",
     "net_income_source": "https://www.egx.com.eg",
     "period_start": "2025-01-01",
     "period_end": "2025-06-30",
     "filed": "2025-09-14",
-    "filing_id": "egx-276242",
-    "basis": "consolidated",
-    "source": "https://www.egx.com.eg"
+    "filing_id": "egx-276242"
+   },
+   {
+    "period": "H1 2026",
+    "net_income": 101.817,
+    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294509",
+    "filed_on": "2026-09-09",
+    "filed": "2026-09-09",
+    "filing_id": "egx-294509"
    },
    {
     "period": "Q1 2014",

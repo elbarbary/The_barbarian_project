@@ -1658,7 +1658,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EASB/profile",
   "record": {
-   "filings": 569,
+   "filings": 570,
    "first_filing": "2010-01-03",
    "trading_suspensions": 10,
    "trading_resumptions": 9,
@@ -1738,13 +1738,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
   "record": {
-   "filings": 683,
+   "filings": 684,
    "first_filing": "2010-02-14",
    "trading_suspensions": 15,
    "trading_resumptions": 14,
    "capital_increases": 0,
    "general_assemblies": 56,
-   "periods_reported": 55,
+   "periods_reported": 57,
    "loss_making_periods": 0
   },
   "generated": "2026-08-24"
@@ -4091,7 +4091,7 @@
    "trading_resumptions": 18,
    "capital_increases": 0,
    "general_assemblies": 81,
-   "periods_reported": 67,
+   "periods_reported": 68,
    "loss_making_periods": 7
   },
   "generated": "2026-08-25"
@@ -4105,13 +4105,13 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MIPH/profile",
   "record": {
-   "filings": 578,
+   "filings": 580,
    "first_filing": "2010-03-31",
    "trading_suspensions": 9,
    "trading_resumptions": 9,
    "capital_increases": 0,
    "general_assemblies": 56,
-   "periods_reported": 62,
+   "periods_reported": 63,
    "loss_making_periods": 3
   },
   "generated": "2026-08-25"
@@ -4207,7 +4207,7 @@
    "trading_resumptions": 4,
    "capital_increases": 2,
    "general_assemblies": 76,
-   "periods_reported": 5,
+   "periods_reported": 7,
    "loss_making_periods": 2
   },
   "generated": "2026-08-25"
@@ -5122,7 +5122,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/POUL/profile",
   "record": {
-   "filings": 613,
+   "filings": 614,
    "first_filing": "2010-01-18",
    "trading_suspensions": 16,
    "trading_resumptions": 14,
