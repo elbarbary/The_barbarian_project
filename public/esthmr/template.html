@@ -2875,7 +2875,7 @@
             <!-- 2. Strategy & Execution Timing Selection -->
             <div>
               <label style="display:block;font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px">{{ simData.L.strategyLabel }}</label>
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:3px;border-radius:12px;background:var(--surface);border:1px solid var(--rule)">
+              <div class="sim-strategy-switch" style="padding:3px;border-radius:12px;background:var(--surface);border:1px solid var(--rule)">
                 <div onClick="{{ simData.setDailyStrategy }}" style="cursor:pointer;padding:7px 8px;border-radius:999px;text-align:center;font-size:11.5px;font-weight:600;background:{{ simData.isDaily ? 'var(--accent)' : 'transparent' }};color:{{ simData.isDaily ? '#fff' : 'var(--t2)' }};transition:all .15s">
                   {{ simData.L.dailyLabel }}
                 </div>
@@ -2961,7 +2961,7 @@
               </div>
 
               <!-- Interactive Custom Date Pickers (Choose when to buy & when to sell) -->
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+              <div class="sim-date-pair" style="margin-top:8px">
                 <div>
                   <label style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;color:var(--faint);display:block;margin-bottom:3px">{{ simData.L.startDateLabel }}</label>
                   <input type="date" aria-label="{{ simData.L.startDateLabel }}" value="{{ simData.startDate }}" min="{{ simData.minDate }}" max="{{ simData.maxDate }}" onChange="{{ simData.onStartDateChange }}" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11.5px;outline:none;box-sizing:border-box">
@@ -3149,9 +3149,9 @@
               <sc-for list="{{ simData.brokerCards }}" as="bc">
                 <div class="sim-broker-card {{ bc.isWinner ? 'winner' : '' }} {{ bc.isBeltone ? 'beltone' : '' }}" style="background:var(--surface);border-color:{{ bc.isWinner ? 'var(--accent)' : (bc.isBeltone ? '#2563EB' : 'var(--edgeIn)') }}">
                   <!-- Top Row: Name, Badge, Rank -->
-                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                  <div class="sim-broker-head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
                     <div>
-                      <div style="display:flex;align-items:center;gap:8px">
+                      <div class="sim-broker-title" style="display:flex;align-items:center;gap:8px">
                         <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--faint)">#{{ bc.rankNum }}</span>
                         <h4 style="font-family:'Bricolage Grotesque',serif;font-size:18px;font-weight:700;margin:0;color:var(--ink)">{{ bc.name }}</h4>
                         <sc-if value="{{ bc.isWinner }}">
@@ -3187,7 +3187,7 @@
                   </div>
 
                   <!-- Breakdown Metrics Rows -->
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <div class="sim-metric-grid">
                     <div class="sim-metric-pill">
                       <span style="font-size:11px;color:var(--faint)">{{ simData.L.totalFeesCol }}</span>
                       <strong style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink)">{{ bc.totalFeesFmt }} ج</strong>

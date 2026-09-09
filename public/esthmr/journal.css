@@ -812,11 +812,43 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   border: 1px solid var(--edgeIn);
 }
 
+/* `minmax(320px, …)` on its own asks for a 320px track in a container that on a
+   390px phone is only 332px wide, and `1fr` is really `minmax(auto, 1fr)` — an
+   `auto` minimum is the item's min-content, so the track resolved to 368.5px
+   inside 332px and every one of the seven broker cards hung 19px past the panel.
+   `min(320px, 100%)` caps the request at the container, and the explicit `0`
+   minimums below stop a long broker name pushing the track back open. */
 .sim-broker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 16px;
 }
+/* A flex or grid child refuses to shrink below its own min-content unless it is
+   told to. Every rule below is that permission, granted where a long Arabic
+   broker name or a six-figure number would otherwise hold a column open — and
+   granted narrowly: a blanket `min-width:0` on every descendant crushed the
+   name block to 32px at 320px, because the nowrap fee badge beside it then took
+   the whole row. So the name block keeps a real flex basis, and the badge wraps
+   underneath it instead. */
+.sim-broker-card { min-width: 0; }
+.sim-broker-head { min-width: 0; flex-wrap: wrap; }
+.sim-broker-head > div { min-width: 0; flex: 1 1 11rem; }
+.sim-broker-title { min-width: 0; flex-wrap: wrap; row-gap: 4px; }
+.sim-broker-title h4 { min-width: 0; overflow-wrap: anywhere; }
+
+/* Three segments across 190px on a 320px phone. `1fr` again means an `auto`
+   minimum, so "Active Trading (Default)" held the row 32px open in English
+   where the shorter Arabic label had fit. The segments wrap their own text
+   instead. */
+.sim-strategy-switch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+.sim-strategy-switch > div { min-width: 0; overflow-wrap: anywhere; }
+
+.sim-date-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.sim-date-pair input { min-width: 0; }
+
+.sim-metric-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.sim-metric-pill { min-width: 0; flex-wrap: wrap; row-gap: 2px; }
+.sim-metric-pill > * { min-width: 0; overflow-wrap: anywhere; }
 
 .sim-broker-card {
   position: relative;
@@ -855,23 +887,29 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
 }
 
 @media (max-width: 768px) {
+  /* `width:100%` on a box that also carries `margin:2px 8px` asks for the full
+     parent width AND 16px beside it, so the row started 8px past its parent and
+     the last tab ended at 325 in a 320 viewport. `align-self:stretch` gets the
+     same full-width row without the double count. And `flex:1` cannot shrink a
+     tab below its own min-content unless told to: "Crash Fragility Engine" is
+     the English label that first exceeded its quarter. */
   .tools-tab-switcher {
-    width: 100% !important;
+    width: auto !important;
+    align-self: stretch !important;
     display: flex !important;
   }
   .tools-tab-switcher > div {
     flex: 1 !important;
+    min-width: 0 !important;
     text-align: center !important;
     justify-content: center !important;
     padding: 8px 8px !important;
     font-size: 12px !important;
   }
+  .tools-tab-switcher > div span { min-width: 0; overflow-wrap: anywhere; }
   .sim-controls-grid {
     grid-template-columns: 1fr !important;
     padding: 16px !important;
-  }
-  .sim-broker-grid {
-    grid-template-columns: 1fr !important;
   }
 }
 
