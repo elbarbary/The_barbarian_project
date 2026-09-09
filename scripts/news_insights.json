@@ -1415,6 +1415,10 @@
     "meaning": "Geopolitical tensions involving a major crude-producing nation introduce supply risk premiums into global benchmark pricing, which directly impacts energy import costs and related sector input pricing.",
     "meaning_ar": "تؤدي التوترات الجيوسياسية المرتبطة بدولة رئيسية منتجة للنفط إلى إضافة علاوة مخاطر العرض إلى الأسعار القياسية العالمية، مما ينعكس على تكاليف استيراد الطاقة وأسعار مدخلات الإنتاج للقطاعات المرتبطة."
   },
+  "النفط يقفز باكثر من 2% .. والخام الامريكي فوق 95 دولارا": {
+    "meaning": "Higher crude oil prices directly raise input, energy, and transportation costs for industrial manufacturing and transport sectors, while increasing baseline revenues for upstream oil and gas exploration companies.",
+    "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام بشكل مباشر إلى زيادة تكاليف الطاقة والمدخلات والنقل للقطاعات الصناعية، بينما يرفع الإيرادات الأساسية لشركات التنقيب والإنتاج في قطاع البترول والغاز."
+  },
   "النفط يوسع مكاسبه بعد اعلان السعوديه تعرض منشات طاقه لهجمات": {
     "meaning": "Attacks on major energy infrastructure disrupt crude processing and export capacity, which incorporates an immediate geopolitical supply-risk premium into global benchmark oil prices.",
     "meaning_ar": "تؤدي الهجمات على البنية التحتية للطاقة إلى تعطيل قدرات معالجة وتصدير الخام، مما يضيف علاوة مخاطر جيوسياسية فورية على أسعار عقود النفط في الأسواق العالمية."
@@ -1875,6 +1879,10 @@
   "تنظيم الاتصالات: 57 مليون اجمالي عدد المحافظ الالكترونيه خلال النصف الاول بنمو 23%": {
     "meaning": "The expansion in e-wallet accounts increases digital transaction volumes across telecommunications operators and banking networks, shifting payment settlements from physical cash to electronic clearing systems.",
     "meaning_ar": "يؤدي ارتفاع عدد المحافظ الإلكترونية إلى زيادة حجم المعاملات الرقمية عبر شبكات شركات الاتصالات والقطاع المصرفي، مما يحول تسوية المدفوعات من النقد السائل إلى أنظمة المقاصة الإلكترونية."
+  },
+  "تنميه التجاره: «للولو ماركت» اول سلسله تجاريه تنضم الي مبادره «التموين» لخفض الاسعار": {
+    "meaning": "Participation in the Ministry of Supply's initiative integrates private retail networks into the state-coordinated commodity pricing framework, whereby participating commercial chains allocate shelf space to sell designated food and consumer staples at fixed discounted margins under government supervision.",
+    "meaning_ar": "يُدرج الانضمام إلى مبادرة وزارة التموين سلاسل التجزئة التجارية الخاصة ضمن منظومة تسعير وتداول السلع الأساسية، حيث تخصص المنافذ المشاركة مساحات بيعية لعرض سلع استهلاكية محددة بهوامش ربح مخفضة تحت إشراف حكومي."
   },
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
@@ -2560,6 +2568,10 @@
   "فيتش تبقي تصنيف قطر عند AA وترفع اسمها من قايمه المراقبه السلبيه": {
     "meaning": "A sovereign credit rating of AA reflects high creditworthiness and low default risk, while removing the issuer from the negative watch list stabilizes its credit outlook under the rating agency's assessment framework.",
     "meaning_ar": "يعكس التصنيف الائتماني السيادي عند مستوى AA جدارة ائتمانية مرتفعة ومخاطر تخلف منخفضة عن السداد، بينما يمثل رفع الدولة من قائمة المراقبة السلبية تثبيتاً لنظرتها الائتمانية وفق معايير وكالة التصنيف."
+  },
+  "فيزا: اكثر من 83% من الشركات المصريه تخطط للاستثمار في التجاره المعتمده علي الوكلاء": {
+    "meaning": "Agent-assisted commerce integrates distributed third-party retail networks and point-of-sale intermediaries to process digital transactions and customer interactions within physical retail channels.",
+    "meaning_ar": "تعتمد التجارة القائمة على الوكلاء على شبكات التجزئة والوسطاء المحليين ونقاط البيع لتنفيذ المعاملات المالية الرقمية والتفاعل مع العملاء عبر القنوات الفعلية."
   },
   "قبل ما تسافر.. 7 خطوات للتاكد من عقد العمل بالخارج": {
     "meaning": "Verification of foreign employment contracts operates as an administrative compliance mechanism that validates cross-border hiring documentation and legal workforce migration under regulatory oversight.",
@@ -3396,6 +3408,10 @@
   "“صندوق مصر السيادي” يوسس صندوقا صناعيا براس مال مرخص 10 مليارات جنيه": {
     "meaning": "The Sovereign Fund of Egypt establishes a specialized sub-fund dedicated to the industrial sector with an authorized capital of EGP 10 billion, creating an institutional framework for direct equity deployments, public-private asset partnerships, and targeted capital allocation into domestic manufacturing projects.",
     "meaning_ar": "يؤسس صندوق مصر السيادي صندوقاً فرعياً متخصصاً في القطاع الصناعي برأس مال مرخص به يبلغ 10 مليارات جنيه، مما يتيح إطاراً مؤسسياً للمساهمات المباشرة، والشراكات الاستثمارية بين القطاعين العام والخاص، وتوجيه السيولة نحو مشاريع التصنيع المحلية."
+  },
+  "“صندوق” تبدا التشغيل الفعلي لمنصتها الرقميه لمقارنه وتحليل صناديق الاستثمار": {
+    "meaning": "The operational launch establishes a digital financial technology platform that aggregates and analyzes performance metrics across Egyptian investment funds, centralizing comparative fund data for market participants.",
+    "meaning_ar": "يمثل هذا الإطلاق التشغيل الفعلي لمنصة تكنولوجيا مالية تجمع وتحلل مؤشرات أداء صناديق الاستثمار المصرية، موفرة قاعدة بيانات رقمية موحدة للمقارنة بين أدوات الاستثمار المتاحة في السوق."
   },
   "“عبدالغفار” ل”البورصه”: “الصحه” تستثمر 1.9 مليار جنيه لاضافه الفي حضانه بنهايه 2030": {
     "meaning": "The Ministry of Health allocates EGP 1.9 billion in public capital expenditure through 2030 to expand neonatal intensive care infrastructure by 2,000 incubators, directing state funding into medical equipment procurement and healthcare facility capacity.",
