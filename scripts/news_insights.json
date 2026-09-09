@@ -915,6 +915,10 @@
     "meaning": "US equity indices experience downward price movements at the close, reflecting divergent weekly performance across different market sectors based on corporate earnings reports and macroeconomic data releases.",
     "meaning_ar": "تشهد مؤشرات الأسهم الأمريكية تراجعاً في أسعارها، وهو ما يعكس تبايناً في الأداء الأسبوعي لمختلف القطاعات الاقتصادية بناءً على نتائج الأعمال الفصلية والبيانات الاقتصادية الكلية الصادرة."
   },
+  "الاسهم الامريكيه تواجه مخاطر صدمات مفاجيه مع اقتراب انتخابات التجديد النصفي": {
+    "meaning": "Political election cycles introduce policy uncertainty regarding taxation, regulatory frameworks, and government spending, which correlates with heightened pricing volatility and repricing of risk across equity markets.",
+    "meaning_ar": "تؤدي الدورات الانتخابية السياسية إلى حالة من عدم اليقين بشأن السياسات الضريبية والأطر التنظيمية والإنفاق الحكومي، وهو ما يرتبط بارتفاع تقلبات التسعير وإعادة تقييم المخاطر في أسواق الأسهم."
+  },
   "الاسهم الاوروبيه تتباين الثلاثاء وسط ترقب لرفع اسعار الفايده من المركزي الاوروبي": {
     "meaning": "Anticipation of benchmark interest rate hikes adjusts corporate borrowing costs across sectors and alters the discount rates applied in equity valuation models.",
     "meaning_ar": "يؤدي ترقب رفع أسعار الفائدة الأساسية إلى تعديل تكاليف الاقتراض للشركات عبر القطاعات المختلفة وتغيير معدلات الخصم المطبقة في نماذج تقييم الأسهم."
@@ -1371,6 +1375,10 @@
     "meaning": "Egypt operates as a regional logistics and trade hub, utilizing its geographic location, maritime infrastructure, and regional trade agreements to facilitate cross-border trade flows between Middle Eastern and African markets.",
     "meaning_ar": "تعمل مصر كمركز لوجستي وتجاري إقليمي يربط بين أسواق الشرق الأوسط وأفريقيا بالاعتماد على موقعها الجغرافي، وبنيتها التحتية الملاحية، والاتفاقيات التجارية لتسهيل حركة التجارة البينية."
   },
+  "العقود الاجله للاسهم الامريكيه تتراجع مع تجاوز النفط 100 دولار للبرميل": {
+    "meaning": "Crude oil prices above $100 per barrel raise operating energy and transportation costs for corporations, while equity index futures reflect current market valuations based on these higher baseline input costs.",
+    "meaning_ar": "يؤدي تجاوز أسعار النفط حاجز 100 دولار للبرميل إلى رفع تكاليف الطاقة والنقل التشغيلية للشركات، بينما تعكس العقود الآجلة لمؤشرات الأسهم تقييمات السوق الحالية بناءً على هذه التكاليف التشغيلية المرتفعة."
+  },
   "العمل: 1018 فرصه جديده في 3 محافظات بالتعاون مع 7 شركات خاصه": {
     "meaning": "The Ministry of Labor coordinates with seven private-sector companies to facilitate the direct recruitment and absorption of 1,018 workers across three governorates.",
     "meaning_ar": "تنسق وزارة العمل مع سبع شركات من القطاع الخاص لتسهيل التوظيف المباشر واستيعاب 1018 عاملاً في ثلاث محافظات."
@@ -1498,6 +1506,10 @@
   "ام ان تي تيك القابضه تتقدم بطلب لقيد اسهمها في البورصه المصريه": {
     "meaning": "Submitting a listing application initiates the regulatory review process to register the company's shares on the Egyptian Exchange, placing the entity under official market disclosure rules and establishing the legal framework for public trading.",
     "meaning_ar": "يُطلق التقدم بطلب القيد الإجراءات التنظيمية لتسجيل أسهم الشركة في البورصة المصرية، مما يُخضعها لمعايير الإفصاح والحوكمة المنظمة ويؤسس الإطار القانوني لتداول ملكيتها في السوق الرسمي."
+  },
+  "امريكا تحظر واردات كنديه وتوسع الحرب التجاريه": {
+    "meaning": "Trade restrictions and import bans directly disrupt established cross-border supply chains and alter international trade flows for targeted commodities. For global markets, these measures reconfigure input procurement routes and create regional pricing disparities between protected domestic markets and external suppliers.",
+    "meaning_ar": "تؤدي القيود التجارية وحظر الاستيراد إلى تعطيل سلاسل الإمداد المباشرة وتعديل مسارات التجارة الدولية للسلع المحددة. وتتسبب هذه الإجراءات في إعادة هيكلة قنوات التوريد وخلق فروق سعرية بين الأسواق المحلية المحمية والموردين الخارجيين."
   },
   "امريكا تحقق في سلامه سيارات سايبركاب التابعه ل”تسلا”": {
     "meaning": "Regulatory safety investigations involve formal compliance reviews, technical audits, and verification procedures that assess autonomous vehicle systems against federal safety standards.",
@@ -1964,6 +1976,10 @@
     "meaning": "Bilateral business forums serve as institutional platforms for direct cross-border corporate networking, information exchange on regulatory frameworks, and identification of joint commercial partnerships between the two countries.",
     "meaning_ar": "تُعد منتديات الأعمال الثنائية منصات مؤسسية للتواصل المباشر بين الشركات عبر الحدود، وتبادل المعلومات حول الأطر التنظيمية، وتحديد الشراكات التجارية المشتركة بين البلدين."
   },
+  "جنرال الكتريك تستحوذ علي CPP مقابل 12 مليار دولار لتامين امدادات محركات الطايرات": {
+    "meaning": "This transaction represents vertical integration within the aerospace supply chain, bringing the production of critical jet engine components directly under internal manufacturing control.",
+    "meaning_ar": "تمثل هذه الصفقة تكاملاً رأسياً ضمن سلاسل إمداد قطاع الطيران، حيث تضع عمليات تصنيع المكونات الحيوية لمحركات الطائرات تحت السيطرة التشغيلية المباشرة للشركة."
+  },
   "جهاد عطيه: 100 كيلو جرام حجم انتاج مركز الملاذ الامن من الفضه يوميا": {
     "meaning": "This operational metric establishes the current daily refining and manufacturing capacity of the facility, supplying 100 kilograms of processed silver to the local precious metals market per day.",
     "meaning_ar": "يحدد هذا المؤشر التشغيلي الطاقة الإنتاجية اليومية الحالية للمنشأة في صقل وتصنيع الفضة، والتي تضخ 100 كيلوجرام يومياً في سوق المعادن الثمينة المحلي."
@@ -2135,6 +2151,10 @@
   "روسيا تعزز صادراتها النفطيه الي الصين عبر القطب الشمالي": {
     "meaning": "Russia routes crude oil shipments to China through the Northern Sea Route, serving as a direct maritime transit corridor between Russian Arctic export terminals and Asian discharge ports.",
     "meaning_ar": "توجه روسيا شحنات النفط الخام إلى الصين عبر طريق بحر الشمال، والذي يعمل كممر ملاحي مباشر يربط بين موانئ التصدير في القطب الشمالي الروسي وموانئ التفريغ في آسيا."
+  },
+  "روسيا: اوروبا تدفع اسعارا باهظه للغاز": {
+    "meaning": "Disruptions in primary pipeline supply routes shift regional procurement toward spot liquefied natural gas (LNG) markets, where pricing reflects higher liquefaction, freight, and regasification costs compared to long-term contracted pipeline deliveries.",
+    "meaning_ar": "يؤدي تعطل إمدادات خطوط الأنابيب الرئيسية إلى تحويل عمليات الشراء الإقليمية نحو أسواق الغاز الطبيعي المسال الفورية، حيث تعكس الأسعار تكاليف إضافية للإسالة والشحن وإعادة التغويز مقارنة بعقود التوريد طويلة الأجل عبر الأنابيب."
   },
   "روهان فرنانديز رييسا لمجلس اداره جنرال موتورز": {
     "meaning": "Executive leadership appointments at the board level transfer the oversight of corporate strategy, operational governance, and capital allocation directives to the new chairperson.",
@@ -2351,6 +2371,10 @@
   "سهم \"شيبروكيت\" الهنديه يواجه اختبار الربحيه بعد تقليص خساير الربع الاول": {
     "meaning": "Narrowing quarterly losses marks a transition where market evaluation shifts toward operational cost structures and net unit economics to determine baseline profitability.",
     "meaning_ar": "يمثل تقليص الخسائر الفصلية مرحلة تنتقل فيها معايير التقييم السوقي إلى فحص هياكل التكاليف التشغيلية وربحية الوحدة لتحديد الوصول إلى نقطة التعادل المالي."
+  },
+  "سهم Chime يقفز 10% بعد صفقه مصرفيه بقيمه 590 مليون دولار": {
+    "meaning": "A $590 million banking transaction integrates new capital or infrastructure assets directly into the company's balance sheet and operational network, with equity valuations adjusting to the execution of the deal.",
+    "meaning_ar": "تُدمج الصفقة المصرفية البالغة قيمتها 590 مليون دولار أصولاً رأسمالية أو بنية تشغيلية جديدة ضمن الميزانية العمومية للشركة، بينما تعكس تقييمات السوق إتمام هذه المعاملة التعاقدية."
   },
   "سهم انتل يقفز 10% بعد تقارير عن زياده مرتقبه في اسعار المعالجات": {
     "meaning": "Raising processor prices directly alters the unit selling price across product lines, adjusting the gross realization per unit sold under existing operational cost structures.",
@@ -2916,6 +2940,10 @@
   "مصر تعتزم وضع اطار تشريعي لحمايه العماله المنزليه": {
     "meaning": "Establishing a legislative framework for domestic workers transitions this segment from the informal economy into the formal regulatory system, standardizing employment contracts, social insurance contributions, and legal dispute mechanisms.",
     "meaning_ar": "يؤدي وضع إطار تشريعي للعمالة المنزلية إلى نقل هذا القطاع من الاقتصاد غير الرسمي إلى المنظومة التنظيمية الرسمية، مع توحيد معايير عقود العمل واشتراكات التأمين الاجتماعي وآليات تسوية النزاعات القانونية."
+  },
+  "مصر تمد فتره توفيق اوضاع الاجانب المقيمين بصوره غير شرعيه": {
+    "meaning": "Extending the regularization deadline enables undocumented foreign residents to settle residence fees and administrative charges in foreign currency through authorized banking channels, channeling administrative payments directly into the formal banking system.",
+    "meaning_ar": "يتيح تمديد مهلة تقنين الأوضاع سداد رسوم الإقامة والتكاليف الإدارية بالعملات الأجنبية عبر القنوات المصرفية المعتمدة، مما يدرج هذه المتحصلات المالية ضمن النظام المصرفي الرسمي."
   },
   "مصر للبترول تتوسع خارجيا وتفتتح منافذ": {
     "meaning": "The company establishes retail distribution outlets and commercial operations in international markets, broadening its operational footprint and distribution network beyond the domestic market.",
