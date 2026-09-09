@@ -433,9 +433,10 @@ export async function liveQuotes(deadline = QUOTES_DEADLINE_MS) {
 }
 
 export async function live() {
-  const [directory, market, manifest, feed] = await Promise.all([
+  const [directory, market, manifest, feed, trendsDoc] = await Promise.all([
     doc('companies.json'), doc('market.json'), doc('manifest.json'),
     liveQuotes(),
+    doc('trends.json').catch(() => null),
   ]);
   const quotes = market.stocks || {};
   const fresh = (feed && feed.quotes) || {};
@@ -537,10 +538,12 @@ export async function live() {
       ratios: c.ratios || null,
       profit: typeof c.net_income === 'number' ? c.net_income : null,
       profitPeriod: c.net_income_period || '',
+      trends: (trendsDoc && trendsDoc.items && trendsDoc.items[c.ticker]) || null,
     };
   });
   return {
     demo: false, companies, series: [], fins: [],
+    trends: (trendsDoc && trendsDoc.items) || {},
     // The stamps the sidebar and every screen header print. These used to be
     // frozen literals carried over from the design — "26 August 2026", built
     // "2026-08-27 11:48 UTC", data_version 771314503e — which meant the page

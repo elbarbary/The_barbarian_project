@@ -389,6 +389,10 @@ export class Component extends Base {
       nothingUnusual:'Nothing unusual today',
       busyWorkings:'Shares traded in the session \u00f7 the median of the last 20 sessions. At 2.0 or above, this app says the day was unusual.',
       busyYardstick:'Twice the usual is the line, and it is this app\u2019s line rather than the exchange\u2019s \u2014 nobody publishes an official one. It is set where it is because a day at twice a company\u2019s normal volume is uncommon enough to be worth a look and common enough to happen without anything being wrong.',
+      trendsTitle:'Price Trends & 52-Week Highs',
+      trendsLead:'Track relative strength, 52-week breakout candidates, and structural price momentum across the Egyptian Exchange.',
+      trendsWorkings:'Measures price distance from 52-week high, trailing 1-year and 3-month returns, and 50-day moving averages across the last 250 trading sessions.',
+      trendsYardstick:'A structural trend radar for relative strength analysis. Breakout alerts highlight historical price action without evaluating or judging individual equities.',
       archiveNote:'Showing the {shown} most recent of {total} filings published in {month}.',
       archiveSearched:'Showing the {shown} most recent of {total} matches across {months} months of the archive, newest first. Pick a month above to narrow it.',
       archiveSearchedMonth:'Showing the {shown} most recent of {total} matches in {month}. Clear the month to search the whole archive.',
@@ -776,6 +780,10 @@ export class Component extends Base {
       nothingUnusual:'لا توجد أحجام تداول استثنائية اليوم',
       busyWorkings:'الأسهم المتداولة في الجلسة \u00f7 وسيط آخر 20 جلسة. وعند 2.0 فأكثر، يصف هذا التطبيق اليوم بأنه استثنائي.',
       busyYardstick:'الضعف هو الحد الفاصل، وهو حد إحصائي يضعه هذا التطبيق لا البورصة لتسليط الضوء على النشاط الاستثنائي دون أن يمثل ذلك حكماً أو توصية.',
+      trendsTitle:'اتجاهات الأسعار وقوة الصعود (Price Trends)',
+      trendsLead:'رصد الأسهم ذات القوة النسبية، واختراق القمم السنوية، والزخم الهيكلي في البورصة المصرية.',
+      trendsWorkings:'حسابات المسافة من القمة السنوية (52 أسبوعاً)، وعوائد سنة و3 أشهر، والمتوسط المتحرك لـ 50 يوماً عبر آخر 250 جلسة.',
+      trendsYardstick:'رادار هيكلي لرصد القوة النسبية والزخم. إشارات الاقتراب من القمم ترصد الحركة السعرية دون إصدار أحكام أو تقييمات للأسهم.',
       archiveNote:'عرض أحدث {shown} من {total} إفصاحاً نُشرت في {month}.',
       archiveSearched:'عرض أحدث {shown} من {total} نتيجة عبر {months} شهراً من الأرشيف، الأحدث أولاً. اختر شهراً بالأعلى لتضييق النطاق.',
       archiveSearchedMonth:'عرض أحدث {shown} من {total} نتيجة في {month}. ألغِ اختيار الشهر للبحث في الأرشيف كاملاً.',
@@ -3951,7 +3959,7 @@ export class Component extends Base {
         label, current: st.screen === id ? 'page' : null, go: this.go(id),
       }));
 
-    const marketExplorer = explorer(this, D.companies, ar);
+    const marketExplorer = explorer(this, D.companies, ar, D.trends);
     const pairsData = pairsExplorer(this, D, ar, React);
     const valData = valuationExplorer(this, D, ar, React);
     // Only the tools screen loads the simulator, and only once.
@@ -4000,6 +4008,7 @@ export class Component extends Base {
         })),
       quickActions: [
         {label: ar ? 'استكشف الشركات' : 'Explore companies', note: ar ? 'أرقام، رسوم، وإفصاحات' : 'Figures, charts & filings', icon: ICON.market, go: this.go('market')},
+        {label: ar ? 'اتجاهات الأسعار والقمم' : 'Price Trends & Highs', note: ar ? 'رصد القمم السنوية والزخم' : '52W highs & relative strength', icon: ICON.market, go: () => this.setState({screen:'market', marketMode:'trends', trendFilter:''})},
         {label: ar ? 'خريطة التقييم والديون' : 'Valuation & Debt Map', note: ar ? 'مكررات الربحية مع عبء الديون' : 'P/E multiples factored by debt', icon: ICON.valuation, go: this.go('valuation')},
         {label: ar ? 'مقارنة الأزواج' : 'Pairs & Spreads', note: ar ? 'معايرة الأسهم المتنافسة' : 'Normalize competing peers', icon: ICON.pairs, go: this.go('pairs')},
         {label: ar ? 'قائمة متابعتك' : 'Your watchlist', note: ar ? 'شركاتك في مكان واحد' : 'Your companies, together', icon: ICON.watchlist, go: this.go('watchlist')},

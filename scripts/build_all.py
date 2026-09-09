@@ -269,6 +269,7 @@ STEPS = [
     # network — and is best-effort, so a checkout without `data-source/prices/`
     # leaves the published document alone.
     ("Unusual volume", "build_volume_events.py", True),
+    ("Price trends", "build_price_trends.py", True),
     ("Calendar", "build_calendar.py", False),
     # Every filing a company ever lodged, on its own page. Reads the committed
     # harvest off disk — no network — and is best-effort so a checkout without

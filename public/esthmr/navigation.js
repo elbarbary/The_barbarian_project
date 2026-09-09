@@ -5,12 +5,18 @@ const RANK_METRICS = new Set(['cap','close','dividend_yield','profit','debt_equi
 
 export function readRoute(search) {
   const params = new URLSearchParams(search);
-  const screen = SCREENS.has(params.get('view')) ? params.get('view') : 'home';
+  const rawScreen = params.get('view');
+  let screen = SCREENS.has(rawScreen) ? rawScreen : (rawScreen === 'trends' ? 'market' : 'home');
+  let marketMode = ['rankings','volume','trends'].includes(params.get('mode')) ? params.get('mode') : '';
+  if (rawScreen === 'trends') {
+    screen = 'market';
+    marketMode = 'trends';
+  }
   const ticker = params.get('ticker') || '';
   const panel = params.get('panel');
   return { screen, ticker: /^[A-Za-z0-9._-]{1,24}$/.test(ticker) ? ticker : '',
     companyPanel: ['overview', 'financials', 'filings'].includes(panel) ? panel : 'overview',
-    marketMode: ['rankings','volume'].includes(params.get('mode')) ? params.get('mode') : '',
+    marketMode,
     rankMetric: RANK_METRICS.has(params.get('rank')) ? params.get('rank') : 'cap',
     rankPair: RANK_METRICS.has(params.get('pair')) ? params.get('pair') : '',
     rankAscending: params.get('order') === 'asc' };
@@ -19,7 +25,7 @@ export function readRoute(search) {
 export function routeKey(state) {
   const p = new URLSearchParams();
   p.set('view', SCREENS.has(state.screen) ? state.screen : 'home');
-  if (state.screen === 'market' && ['rankings','volume'].includes(state.marketMode)) {
+  if (state.screen === 'market' && ['rankings','volume','trends'].includes(state.marketMode)) {
     p.set('mode',state.marketMode);
     if (state.marketMode === 'rankings') {
       if (RANK_METRICS.has(state.rankMetric)) p.set('rank',state.rankMetric);

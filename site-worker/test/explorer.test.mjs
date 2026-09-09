@@ -101,3 +101,30 @@ test('four market measures stay visible without expanding Home details',async()=
   const home=html.slice(0,details);
   for(const field of ['p.buy','p.sell','p.buyW','p.sellW']) assert.ok(home.includes('{{ '+field+' }}'),field);
 });
+
+test('price trends view displays 52W highs, distance, momentum, and filters', () => {
+  const c = fixture();
+  c.data().companies[0].trends = {
+    distHigh52: -1.5, high52: 12.0, low52: 6.0, chg1y: 66.7, chg3m: 20.0,
+    aboveMa50: true, isNearHigh52: true, isNewHigh: false
+  };
+  c.data().companies[1].trends = {
+    distHigh52: -0.2, high52: 10.0, low52: 5.0, chg1y: 100.0, chg3m: 25.0,
+    aboveMa50: true, isNearHigh52: true, isNewHigh: true
+  };
+  c.renderVals().explorer.openTrends();
+  assert.equal(c.state.screen, 'market');
+  assert.equal(c.state.marketMode, 'trends');
+  const v = c.renderVals().explorer;
+  assert.equal(v.isTrends, true);
+  assert.equal(v.isExplorer, true);
+  assert.equal(v.columns.length, 4);
+  assert.equal(v.rows.length, 2);
+  // Default sort is closest to 52W high first (-0.2% before -1.5%)
+  assert.deepEqual(v.rows.map(r => r.ticker), ['BBB', 'AAA']);
+  assert.match(v.rows[0].cells[1].note, /New High/i);
+
+  // Filter by near_high
+  v.trendFilters.find(f => f.id === 'near_high').go();
+  assert.equal(c.state.trendFilter, 'near_high');
+});

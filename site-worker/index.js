@@ -300,14 +300,21 @@ const CHALLENGED = new Set([
  * can.
  */
 const DISPOSABLE = new Set([
-  'uberip.com',
+  'uberip.com', 'bowlfuel.com',
   'mailinator.com', 'guerrillamail.com', 'sharklasers.com', 'grr.la',
+  'guerrillamail.net', 'guerrillamail.org', 'guerrillamail.biz', 'guerrillamailblock.com',
   '10minutemail.com', 'tempmail.com', 'temp-mail.org', 'yopmail.com',
-  'trashmail.com', 'dispostable.com', 'maildrop.cc', 'getnada.com',
+  'trashmail.com', 'trashmail.net', 'trashmail.org', 'dispostable.com',
+  'maildrop.cc', 'getnada.com', 'nada.ltd', 'inboxbear.com', 'dropmail.me',
   'throwawaymail.com', 'fakemailgenerator.com', 'inboxkitten.com',
-  'emailondeck.com', 'mohmal.com', 'moakt.com', 'tempmailo.com',
+  'emailondeck.com', 'mohmal.com', 'mohmal.in', 'moakt.com', 'tempmailo.com',
   'mailnesia.com', 'spamgourmet.com', 'discard.email', 'mailde.de',
   'burnermail.io', 'anonaddy.me', 'mytemp.email', 'tmpmail.org',
+  'crazymailing.com', 'generator.email', 'emailfake.com', 'tempail.com',
+  'inboxclean.com', 'disposablemail.com', 'tempinbox.com', 'tmail.ws',
+  'yomail.info', 'pokemail.net', 'spambog.com', 'spam4.me', 'byom.de',
+  'armyspy.com', 'cuvox.de', 'dayrep.com', 'einrot.com', 'fleckens.hu',
+  'gustr.com', 'jourrapide.com', 'rhyta.com', 'superrito.com', 'teleworm.us',
 ]);
 
 /** The throwaway service this address belongs to, or null. */

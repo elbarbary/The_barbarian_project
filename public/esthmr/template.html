@@ -1004,10 +1004,15 @@
             <p class="insight-caption">{{ explorer.coverage }}</p>
           </sc-if>
           <sc-if value="{{ explorer.isVolume }}"><h2>{{ L.busiest }} <span class="volume-count">{{ explorer.count }}</span></h2><p class="insight-caption">{{ L.busyWorkings }}</p></sc-if>
+          <sc-if value="{{ explorer.isTrends }}">
+            <h2>{{ L.trendsTitle }} <span class="volume-count">{{ explorer.count }}</span></h2><p class="insight-caption">{{ L.trendsLead }}</p>
+            <div class="ranking-controls"><sc-for list="{{ explorer.trendFilters }}" as="f"><button type="button" aria-pressed="{{ f.selected }}" onClick="{{ f.go }}">{{ f.label }}</button></sc-for></div>
+          </sc-if>
           <div class="explorer-scroll" tabindex="0"><div class="explorer-table" role="table" aria-label="{{ explorer.title }}"><div role="row"><span role="columnheader">#</span><span role="columnheader">{{ explorer.companyLabel }}</span><sc-for list="{{ explorer.columns }}" as="m"><span role="columnheader">{{ m.label }}<small>{{ m.unit }}</small></span></sc-for></div><sc-for list="{{ explorer.rows }}" as="r"><div role="row"><span role="cell">{{ r.rank }}</span><span role="rowheader"><button type="button" onClick="{{ r.go }}">{{ r.ticker }} <small>{{ r.name }} · {{ r.sector }}</small></button></span><sc-for list="{{ r.cells }}" as="v"><span role="cell">{{ v.value }}<small>{{ v.note }}</small></span></sc-for></div></sc-for></div></div>
           <sc-if value="{{ explorer.empty }}"><p>{{ L.noMatchBody }}</p></sc-if>
           <sc-if value="{{ explorer.isRanking }}"><p class="insight-caption">{{ explorer.note }}</p></sc-if>
           <sc-if value="{{ explorer.isVolume }}"><p class="insight-caption">{{ L.busyYardstick }}</p></sc-if>
+          <sc-if value="{{ explorer.isTrends }}"><p class="insight-caption">{{ L.trendsYardstick }}</p></sc-if>
         </section>
       </sc-if>
       <sc-if value="{{ explorer.isPrices }}">
