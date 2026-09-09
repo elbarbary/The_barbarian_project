@@ -955,6 +955,10 @@
     "meaning": "The headline indicates an opening market condition where aggregate buying volume exceeds selling volume across the main and secondary benchmark indices (EGX30, EGX70, EGX100), resulting in immediate upward price adjustments across listed equities.",
     "meaning_ar": "يشير العنوان إلى حالة افتتاحية في السوق تفوق فيها أحجام طلبات الشراء عروض البيع عبر المؤشرات الرئيسية والثانوية (EGX30 وEGX70 وEGX100)، مما يؤدي إلى تحركات سعرية فورية نحو الارتفاع في معظم الأسهم المدرجة."
   },
+  "البورصه المصريه ترتفع جماعيا في مستهل تعاملات الاربعاء": {
+    "meaning": "The headline indicates broad-based buying activity across all major market indices at the market open, resulting in simultaneous price increases for constituents across diverse sectors.",
+    "meaning_ar": "يشير الخبر إلى نشاط شرائي واسع النطاق عبر كافة المؤشرات الرئيسية في مستهل جلسة التداول، مما يسفر عن صعود متزامن في أسعار أسهم قطاعات السوق المختلفة."
+  },
   "البورصه المصريه تنهي تعاملات الاحد بالمنطقه الخضراء والثلاثيني يصعد": {
     "meaning": "A positive close for the trading session reflects net buying liquidity exceeding selling volume across listed equities, raising aggregate market capitalisation and lifting the benchmark index.",
     "meaning_ar": "يعكس إغلاق السوق في المنطقة الخضراء تجاوز أحجام الشراء لعروض البيع خلال جلسة التداول، مما يرفع القيمة السوقية الإجمالية للأسهم ويدفع المؤشر الرئيسي للصعود."
@@ -1939,6 +1943,10 @@
   "د. محمد عوض: مصر وايطاليا امام فرصه حقيقيه للانتقال بالشراكه الاقتصاديه الي افاق اكثر تاثيرا": {
     "meaning": "Bilateral economic partnerships between Egypt and Italy involve direct cross-border trade, joint industrial ventures, and technological cooperation across energy, manufacturing, and agricultural sectors.",
     "meaning_ar": "تتضمن الشراكات الاقتصادية الثنائية بين مصر وإيطاليا التبادل التجاري المباشر، والمشروعات الصناعية المشتركة، والتعاون الفني في قطاعات الطاقة والتصنيع والزراعة."
+  },
+  "د. محمود محيي الدين يكتب.. هل تستقيم السوق والاقتصاد اعوج؟": {
+    "meaning": "Financial market efficiency is tied to macroeconomic fundamentals, where structural imbalances in fiscal, monetary, and regulatory frameworks directly govern asset pricing mechanisms and capital allocation.",
+    "meaning_ar": "ترتبط كفاءة أسواق المال بالمؤشرات الاقتصادية الكلية، حيث تؤثر الاختلالات الهيكلية في السياسات المالية والنقدية والتنظيمية بشكل مباشر على آليات تسعير الأصول وتخصيص رؤوس الأموال."
   },
   "د. محمود محيي الدين: لماذا لا يشعر عموم الناس عن حق بتحسن في الموشرات الاقتصاديه الكليه وما هو الحل؟": {
     "meaning": "Macroeconomic indicators reflect aggregate metrics such as headline GDP, currency stabilization, and inflation rates, while household purchasing power depends on the transmission lag of real wage adjustments and consumer price distribution. This structural lag creates a disparity between top-level balance sheet improvements and micro-level disposable income.",
@@ -3356,6 +3364,10 @@
   "“ميدفيرت” تنقل 25% من “الماليه والصناعيه” الي “ناس” بقيمه 5 مليارات جنيه": {
     "meaning": "This transaction executes an off-market equity transfer of a 25% stake in Egyptian Financial & Industrial Company between corporate entities for EGP 5 billion, directly reallocating voting rights and equity ownership within the firm's capital structure.",
     "meaning_ar": "تمثل هذه الصفقة عملية نقل ملكية لحصة قدرها 25% من أسهم شركة المالية والصناعية المصرية بين كيانات اعتبارية بقيمة 5 مليارات جنيه، مما يعيد توزيع نسب الملكية وحقوق التصويت في هيكل مساهمي الشركة."
+  },
+  "“مينا فارم” تتحول لربح 101.8 مليون جنيه في النصف الاول": {
+    "meaning": "A transition from a net loss to a net profit of EGP 101.8 million indicates that operating revenues exceed total manufacturing, operational, and financing costs over the six-month reporting period.",
+    "meaning_ar": "يعكس التحول من الخسائر إلى تحقيق صافي ربح قدره 101.8 مليون جنيه تجاوز الإيرادات التشغيلية لإجمالي تكاليف الإنتاج والمصروفات التشغيلية والتمويلية خلال فترة النصف الأول."
   },
   "“نهر الخير”: “الاهلي للزراعات” تسدد قسطا ب19.8 مليون جنيه ل”تنميه الريف”": {
     "meaning": "This transaction reflects the settlement of contractual land acquisition liabilities by Nahr El-Kheir's subsidiary to the Egyptian Countryside Development Company, reducing outstanding long-term obligations on the consolidated balance sheet.",
