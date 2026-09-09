@@ -319,6 +319,10 @@
     "meaning": "A regulatory trading suspension temporarily halts the execution of all buy and sell orders on the company's shares on the exchange floor. This administrative action freezes secondary market liquidity for the security until specified regulatory inquiries or corporate disclosure requirements are fulfilled.",
     "meaning_ar": "يؤدي قرار الإيقاف الرقابي للتداول إلى تجميد تنفيذ كافة أوامر البيع والشراء على أسهم الشركة مؤقتاً داخل البورصة، مما يوقف سيولة السهم في السوق الثانوي حتى استيفاء متطلبات الإفصاح أو الإجراءات التنظيمية المقررة من الهيئة."
   },
+  "gulf egypt for hotels targets expansion with mixed use sharm el sheikh project": {
+    "meaning": "Developing a mixed-use project in Sharm El Sheikh expands the company's fixed asset base and diversifies its operational real estate portfolio by integrating commercial or residential components alongside hospitality units.",
+    "meaning_ar": "يؤدي تطوير مشروع متعدد الاستخدامات في شرم الشيخ إلى توسيع قاعدة الأصول العقارية للشركة وتنويع محفظتها التشغيلية عبر دمج مساحات تجارية أو سكنية إلى جانب الوحدات الفندقية."
+  },
   "ifap consolidated profits drop in fiscal year 2025 2026": {
     "meaning": "A decline in consolidated profit reflects lower net earnings across the parent entity and its subsidiaries, resulting from higher operating costs, financing expenses, or changes in revenue during the fiscal period.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة انخفاض صافي الدخل عبر الشركة الأم والشركات التابعة لها، نتيجة تغيرات في الإيرادات أو ارتفاع تكاليف التشغيل والتمويل خلال السنة المالية."
@@ -1195,6 +1199,10 @@
     "meaning": "Localizing potato seed production substitutes imported agricultural inputs with domestic propagation facilities, shifting capital deployment toward local multiplication infrastructure and domestic supply chains.",
     "meaning_ar": "يرتكز توطين إنتاج تقاوي البطاطس على إحلال المدخلات الزراعية المستوردة بوحدات إكثار محلية، مما يوجه النفقات الرأسمالية نحو تأسيس البنية التحتية الزراعية وسلاسل التوريد داخل السوق المحلي."
   },
+  "السجق الجملي ب200 جنيه.. اسعار اللحوم اليوم الاربعاء 9-9-2026": {
+    "meaning": "Retail price reporting for livestock products tracks prevailing spot market prices and food cost benchmarks across local domestic supply channels.",
+    "meaning_ar": "يعكس الإعلان عن أسعار التجزئة لمنتجات اللحوم المستويات السعرية الفورية وتكاليف السلع الغذائية الأساسية عبر سلاسل الإمداد والتوزيع المحلية."
+  },
   "السعوديه تعلن استهداف عدد من منشات ومرافق طاقه جنوب المملكه": {
     "meaning": "Attacks on energy infrastructure trigger operational emergency protocols, require technical assessments of asset integrity, and alter logistical flows across regional supply networks.",
     "meaning_ar": "يؤدي استهداف منشآت الطاقة إلى تفعيل بروتوكولات الطوارئ التشغيلية، وإجراء تقييمات فنية لسلامة الأصول، وتعديل المسارات اللوجستية عبر شبكات الإمداد الإقليمية."
@@ -1923,6 +1931,10 @@
   "جون سعد: دليل ضوابط التمويل الاستهلاكي يغلق الثغرات ويرفع انضباط السوق": {
     "meaning": "The consumer finance regulatory guide establishes standardized compliance and operational requirements for non-bank financial institutions, defining uniform credit assessment rules and contract terms across the sector.",
     "meaning_ar": "يضع دليل ضوابط التمويل الاستهلاكي معايير تشغيلية وإلزامية موحدة للمؤسسات المالية غير المصرفية، محددًا قواعد التقييم الائتماني وشروط التعاقد عبر القطاع."
+  },
+  "جي بي اوتو تطرح هافال V7 بسعر يبدا من 1.82 مليون جنيه": {
+    "meaning": "GB Auto adds the Haval V7 to its local passenger vehicle distribution portfolio, establishing an official retail price baseline starting at EGP 1.82 million.",
+    "meaning_ar": "تضيف شركة جي بي أوتو طراز هافال V7 إلى محفظة توزيع سيارات الركوب المحلية، مع تحديد مستوى التسعير الرسمي للبيع بالتجزئة ليبدأ من 1.82 مليون جنيه."
   },
   "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
