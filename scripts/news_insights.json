@@ -1375,6 +1375,10 @@
     "meaning": "Government five-year development plans for small and medium-sized enterprises establish regulatory frameworks, allocate state-directed financing and tax incentives, and set procurement quotas across industrial supply chains.",
     "meaning_ar": "تحدد الخطط الخمسية الحكومية للمشروعات الصغيرة والمتوسطة الأطر التنظيمية، وتوجه التمويل والحوافز الضريبية المعتمدة من الدولة، وتضع معايير المشتريات ضمن سلاسل التوريد الصناعية."
   },
+  "الصين وكوريا الجنوبيه تتفقان علي تسريع مفاوضات اتفاقيه التجاره الحره": {
+    "meaning": "Free trade agreement negotiations establish bilateral frameworks to reduce tariff schedules, eliminate non-tariff barriers, and align regulatory standards governing cross-border goods and services between the two economies.",
+    "meaning_ar": "تحدد مفاوضات اتفاقيات التجارة الحرة أطر عمل ثنائية لخفض التعريفات الجمركية وإزالة الحواجز غير الجمركية ومواءمة المعايير التنظيمية لحركة السلع والخدمات عبر الحدود بين البلدين."
+  },
   "الطرق والكباري تنفي سوء حاله طريق قفط القصير وتوكد استمرار اعمال التطوير": {
     "meaning": "The continuity of infrastructure maintenance on the Qift-Quseir corridor maintains the operational flow of logistics and freight transport between Upper Egypt and the Red Sea mining and trade hubs.",
     "meaning_ar": "يضمن استمرار أعمال الصيانة والتطوير في محور قفط-القصير تدفق حركة النقل والخدمات اللوجستية بين صعيد مصر ومراكز التعدين والتجارة على البحر الأحمر دون انقطاع تشغيلي."
@@ -2072,6 +2076,10 @@
     "meaning": "GB Auto adds the Haval V7 to its local passenger vehicle distribution portfolio, establishing an official retail price baseline starting at EGP 1.82 million.",
     "meaning_ar": "تضيف شركة جي بي أوتو طراز هافال V7 إلى محفظة توزيع سيارات الركوب المحلية، مع تحديد مستوى التسعير الرسمي للبيع بالتجزئة ليبدأ من 1.82 مليون جنيه."
   },
+  "جي بي كوربوريشن تعين نيفين الطاهري عضوا مستقلا بمجلس الاداره": {
+    "meaning": "The appointment of an independent board member adds non-executive oversight to the company's governance structure, aligning corporate management with regulatory board-composition standards on the EGX.",
+    "meaning_ar": "يضيف تعيين عضو مستقل في مجلس الإدارة رقابة غير تنفيذية إلى هيكل حوكمة الشركة، بما يتوافق مع المعايير التنظيمية لتشكيل مجالس الإدارة في البورصة المصرية."
+  },
   "جي بي مورجان: 870 مليار دولار انفاق شركات الذكاء الاصطناعي خلال اخر 12 شهرا": {
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
     "meaning_ar": "يعكس هذا الحجم من الإنفاق توجيه تدفقات رأسمالية ضخمة من قِبل شركات التكنولوجيا نحو البنية التحتية للحوسبة، ومراكز البيانات، وتوريد الأجهزة المتخصصة، والبحث والتطوير."
@@ -2391,6 +2399,10 @@
   "سعر اليورو اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
     "meaning": "The headline tracks the opening foreign exchange spot rate of the Euro against the Egyptian Pound, which serves as a pricing benchmark for international trade settlements, corporate FX exposures, and commercial bank treasury operations.",
     "meaning_ar": "يرصد العنوان سعر الصرف الفوري لليورو مقابل الجنيه المصري في بداية المعاملات اليومية، وهو السعر المعتمد لتسوية العمليات التجارية الدولية وتقييم الالتزامات بالعملة الأجنبية وتسعير معاملات الخزانة في البنوك."
+  },
+  "سعر اليورو اليوم الاربعاء 9-9-2026 في ختام التعاملات": {
+    "meaning": "The closing exchange rate of the Euro against the Egyptian Pound establishes the daily valuation benchmark for pricing European imports, settling cross-border commercial transactions, and revaluing foreign currency balance sheet accounts.",
+    "meaning_ar": "يحدد سعر إغلاق اليورو مقابل الجنيه المصري المعيار اليومي لتسعير الواردات الأوروبية وتسوية المعاملات التجارية الخارجية وإعادة تقييم البنود المقومة بالعملات الأجنبية في القوائم المالية."
   },
   "سعر اليورو اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
     "meaning": "The headline tracks the official closing exchange rate of the Euro against the Egyptian Pound, which sets the daily valuation standard for commercial transactions, customs valuations, and foreign currency accounting entries in the banking sector.",
@@ -3149,6 +3161,10 @@
     "meaning": "Economic transformation programs alter the operational framework for manufacturers through structural adjustments, including industrial incentives, infrastructure updates, and regulatory revisions. These measures directly modify input costs, localized production capacities, and capital allocation models across the industrial sector.",
     "meaning_ar": "تحدد برامج التحول الاقتصادي الأطر التشغيلية للمصنعين عبر تعديلات هيكلية تشمل الحوافز الصناعية، وتحديثات البنية التحتية، والأطر التنظيمية، مما يؤثر على تكاليف المدخلات ونسب المكون المحلي وهياكل تخصيص رأس المال في القطاع الصناعي."
   },
+  "من الساعه 11 مساء اليوم ..انقطاع المياه عن 14 منطقه بحلوان": {
+    "meaning": "Municipal water supply interruptions in industrial and residential zones temporarily disrupt localized commercial operations and increase reliance on secondary water storage infrastructure for facilities in the affected areas.",
+    "meaning_ar": "يؤدي انقطاع إمدادات المياه البلدية في المناطق الصناعية والسكنية إلى تعطيل العمليات التجارية المحلية مؤقتًا وزيادة الاعتماد على البنية التحتية الثانوية لتخزين المياه في المنشآت الواقعة ضمن النطاق المتأثر."
+  },
   "من طابور \"الريان\" الي شاشه الموبايل.. القصه الكامله لسوق المال المصري بين الثمانينيات واليوم": {
     "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
     "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
@@ -3365,6 +3381,10 @@
     "meaning": "This represents an internal administrative action within the public education sector concerning state school management and workforce governance, carrying no direct mechanism for capital markets or commercial enterprises.",
     "meaning_ar": "يمثل هذا الإجراء نشاطاً إدارياً داخلياً ضمن قطاع التعليم العام يخص إدارة الكوادر والقيادات في المدارس الحكومية، دون وجود آلية تشغيلية ترتبط بسوق المال أو الشركات التجارية."
   },
+  "وزير الخارجيه يبحث مع “الاوروبي لاعاده الاعمار” زياده الاستثمارات في مصر": {
+    "meaning": "The European Bank for Reconstruction and Development (EBRD) allocates capital through direct project financing, equity participations, and credit lines channeled to private and public sector infrastructure in Egypt.",
+    "meaning_ar": "يوفر البنك الأوروبي لإعادة الإعمار والتنمية تمويلات رأسمالية عبر إقراض المشروعات المباشر، والمساهمات الرأسمالية، وخطوط الائتمان الموجهة لمشروعات القطاعين الخاص والعام في مصر."
+  },
   "وزير الخارجيه: مستعدون لتبادل الخبرات مع مالي في رياده الاعمال ودعم المشروعات الصغيره والمتوسطه": {
     "meaning": "Bilateral technical cooperation between Egypt and Mali establishes institutional frameworks for knowledge sharing, regulatory alignment, and capacity-building programs across the SME and entrepreneurship sectors.",
     "meaning_ar": "يؤسس التعاون الفني الثنائي بين مصر ومالي أطرًا مؤسسية لتبادل المعرفة الفنية وتنسيق الإجراءات التنظيمية وبرامج بناء القدرات في قطاع المشروعات الصغيرة والمتوسطة وريادة الأعمال."
@@ -3476,6 +3496,10 @@
   "“G42” الاماراتيه تدرس بيع حصه لشركات امريكيه لضمان الوصول للرقايق": {
     "meaning": "Equity divestment to US entities aligns the firm's ownership structure with foreign regulatory and export compliance frameworks to secure advanced semiconductor supply chains.",
     "meaning_ar": "يؤدي التنازل عن حصة ملكية لصالح كيانات أمريكية إلى مواءمة هيكل الملكية مع الأطر التنظيمية وضوابط التصدير الأجنبية لتأمين سلاسل إمداد الرقائق الإلكترونية المتقدمة."
+  },
+  "“اتحاد التامين” يوصي بوضع نظام متكامل وموحد لمكافحه الحرايق والوقايه منها": {
+    "meaning": "The recommendation establishes standardized risk assessment and fire safety protocols across commercial and industrial properties, aligning underwriting guidelines and claim verification procedures across the non-life insurance sector.",
+    "meaning_ar": "تضع هذه التوصية معايير موحدة لتقييم المخاطر وإجراءات السلامة من الحرائق في المنشآت، مما يوحد ضوابط الاكتتاب وإجراءات التحقق من المطالبات لدى شركات التأمين على الممتلكات."
   },
   "“اقتصاديه القناه” تطرح مخازن وورش ميناء غرب بورسعيد للشراكه مع القطاع الخاص": {
     "meaning": "The Suez Canal Economic Zone tenders logistics assets, specifically warehouses and workshops at West Port Said Port, under public-private partnership (PPP) models, transferring the management, operation, and utilization of these facilities to private sector operators.",
