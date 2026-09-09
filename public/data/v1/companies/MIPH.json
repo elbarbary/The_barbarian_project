@@ -8,18 +8,13 @@
  "sector_ar": "رعاية صحية و ادوية",
  "market": {
   "last_close": 806,
-  "date": "2026-09-08",
+  "date": "2026-09-09",
   "open": 797.52,
   "high": 815,
   "low": 780.22,
   "volume": 3069
  },
  "price_history": [
-  {
-   "date": "2025-08-03",
-   "close": 237.99,
-   "volume": 2253
-  },
   {
    "date": "2025-08-04",
    "close": 239.09,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-07",
    "close": 794.1,
    "volume": 477
+  },
+  {
+   "date": "2026-09-08",
+   "close": 806.0,
+   "volume": 3069
   }
  ],
  "profile": {
@@ -1325,10 +1325,10 @@
   "perf_3m": 21.999212908303825,
   "avg_volume_30d": 6201.7999999999965,
   "relative_volume_10d": 0.5184471923778633,
-  "median_volume_20d": 5501,
-  "rv20": 0.0867115069987275,
+  "median_volume_20d": 3955.5,
+  "rv20": 0.7758816837315131,
   "normal_value_30d": 3126736.5,
-  "five_session_change": -1.108343711083437,
+  "five_session_change": 0.7500000000000062,
   "history_bars": 120,
   "market_cap": 9476941564.2,
   "market_cap_source": "EGX",

@@ -8,18 +8,13 @@
  "sector_ar": "تجارة و موزعون",
  "market": {
   "last_close": 259.29,
-  "date": "2026-09-08",
+  "date": "2026-09-09",
   "open": 255.19,
   "high": 274,
   "low": 252,
   "volume": 168615
  },
  "price_history": [
-  {
-   "date": "2025-07-31",
-   "close": 189.23,
-   "volume": 6036
-  },
   {
    "date": "2025-08-03",
    "close": 186.84,
@@ -1314,6 +1309,11 @@
    "date": "2026-09-07",
    "close": 255.19,
    "volume": 46499
+  },
+  {
+   "date": "2026-09-08",
+   "close": 259.29,
+   "volume": 168615
   }
  ],
  "profile": {
@@ -1324,9 +1324,9 @@
   "avg_volume_30d": 96050.00000000003,
   "relative_volume_10d": 5.810303239145417,
   "median_volume_20d": 34902.5,
-  "rv20": 1.3322541365231717,
-  "normal_value_30d": 9133706.835,
-  "five_session_change": -1.5090698571979977,
+  "rv20": 4.83102929589571,
+  "normal_value_30d": 9456261.11,
+  "five_session_change": 0.7694998251136731,
   "history_bars": 120,
   "market_cap": 2489184000.0,
   "market_cap_source": "EGX",
