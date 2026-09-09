@@ -1,0 +1,195 @@
+name: Self-repair
+
+# The build's attempt at its own repair, and one attempt a day at its own
+# improvement. Both end at a pull request; neither can reach a reader.
+#
+# Why a branch and never `main`: Cloudflare deploys this repository from `main`
+# through its own Git integration, one to three minutes after a commit lands.
+# A push to main is a deploy to production. So what this writes is a branch and
+# a pull request, and a person merges it or closes it. There is no path here
+# that publishes anything.
+#
+# What the model may touch is decided in `scripts/ci_selfheal.py`, not here,
+# and it is enforced by tests that fail when the enforcement is removed:
+# never a test file, never the §8 guards, never a published byte, never this
+# workflow. And an edit is kept only if the suite that caught the problem goes
+# green WITHOUT losing tests — deleting the failing test is the one repair that
+# always works and is always wrong.
+#
+# The honest limits, stated because a catalogue that lists only what works is
+# marketing:
+#   - It diagnoses the Python suite. A website-only failure will be reported,
+#     not repaired; the website tests are run as a regression check, because
+#     `public/esthmr/` is writable and a Python fix could break a template.
+#   - It has no shell, no network beyond the model call, and no ability to add
+#     a dependency.
+#   - Most days the improve pass will propose nothing worth merging. That is
+#     the expected outcome, not a fault.
+
+on:
+  # Every workflow that publishes or checks. A failure in any of them is what
+  # the repair pass exists for.
+  workflow_run:
+    workflows:
+      - 'Publish app data'
+      - 'Publish prices'
+      - 'Publish live data'
+      - 'Publish official sources'
+      - 'Check the website'
+    types: [completed]
+
+  # 03:00 UTC, which in the current cron drift means "some time overnight".
+  # Nothing downstream waits on this, so late is merely late.
+  schedule:
+    - cron: '0 3 * * *'
+
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'repair (fix a red suite) or improve (propose one change)'
+        type: choice
+        options: [repair, improve]
+        default: repair
+
+concurrency:
+  # One healer at a time. Two runs proposing edits to the same file would each
+  # prove a green suite the other had not seen.
+  group: self-repair
+  cancel-in-progress: false
+
+permissions:
+  contents: write        # to push the branch
+  pull-requests: write   # to open the PR
+  id-token: write        # Workload Identity Federation, for Vertex
+
+jobs:
+  heal:
+    # A successful upstream run is not an invitation to go looking for work.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The website suite is half the proof gate, so node is not optional here.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Same identity the daily build uses. `continue-on-error` because a
+      # healer that cannot reach the model reports that and stops, which is a
+      # normal outcome rather than a broken run.
+      - name: Authenticate to Google Cloud
+        continue-on-error: true
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: project-8bba98ed-6d90-45af-ab8
+          workload_identity_provider: projects/604618997878/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: esthmr-ci@project-8bba98ed-6d90-45af-ab8.iam.gserviceaccount.com
+          token_format: access_token
+          audience: https://github.com/elbarbary
+
+      - name: Decide the mode
+        id: mode
+        run: |
+          if [ '${{ github.event_name }}' = 'workflow_dispatch' ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ '${{ github.event_name }}' = 'schedule' ]; then
+            echo 'mode=improve' >> "$GITHUB_OUTPUT"
+          else
+            echo 'mode=repair' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Attempt it
+        env:
+          GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+        run: |
+          python3 scripts/ci_selfheal.py \
+            --mode '${{ steps.mode.outputs.mode }}' --out "$RUNNER_TEMP/heal"
+
+      - name: Open a pull request if something survived the gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MODE: ${{ steps.mode.outputs.mode }}
+        run: |
+          set -euo pipefail
+          RESULT="$RUNNER_TEMP/heal/result.json"
+          [ -f "$RESULT" ] || { echo 'no result written'; exit 0; }
+
+          ACTION=$(python3 -c "import json,os;print(json.load(open(os.environ['RESULT']))['action'])")
+          if [ "$ACTION" != 'proposed' ]; then
+            echo "nothing to open a pull request for (action=$ACTION)"
+            python3 -c "import json,os;d=json.load(open(os.environ['RESULT']));print(d.get('why') or d.get('refusal') or d.get('verdict') or '')"
+            exit 0
+          fi
+
+          # One open healer PR at a time. A second would be proposed against a
+          # tree that does not include the first, and reviewing two edits that
+          # each assume the other is absent is worse than reviewing one.
+          #
+          # Matched on the branch prefix, not on a label. A label has to exist
+          # in the repository before it can be applied, `self-repair` does not,
+          # and a dedupe keyed on a label nothing ever carries would find no
+          # open pull request forever and open a new one on every red run.
+          OPEN=$(gh pr list --state open --json headRefName \
+                   --jq '[.[] | select(.headRefName | startswith("self-repair/"))] | length')
+          if [ "${OPEN:-0}" != '0' ]; then
+            echo 'a self-repair pull request is already open — leaving this one unproposed'
+            exit 0
+          fi
+
+          BRANCH="self-repair/${MODE}-$(date -u +%Y%m%d-%H%M%S)"
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$BRANCH"
+          python3 -c "import json,os;[print(f) for f in json.load(open(os.environ['RESULT']))['files']]" \
+            | while read -r f; do git add -- "$f"; done
+          git diff --cached --quiet && { echo 'gate passed but nothing staged'; exit 0; }
+
+          python3 - <<'PY' > "$RUNNER_TEMP/body.md"
+          import json, os
+          d = json.load(open(os.environ['RESULT']))
+          print(f"## What it thinks was wrong\n\n{d.get('diagnosis','—')}\n")
+          print("## Files\n")
+          for f in d['files']:
+              print(f"- `{f}`")
+          if d.get('refused'):
+              print("\n## Edits it was refused\n")
+              for r in d['refused']:
+                  print(f"- {r}")
+          b, a, w = d['before'], d['after'], d.get('website')
+          print(f"\n## Proof\n\n{d['verdict']}\n")
+          print(f"- Python suite before: `ok={b['ok']} ran={b['ran']}`")
+          print(f"- Python suite after: `ok={a['ok']} ran={a['ran']}`")
+          if w:
+              print(f"- Website suite after: `ok={w['ok']} pass={w['ran']}`")
+          print("\nThe edit was kept only because the suite went green without "
+                "losing tests. It has not been read by a person. Nothing here "
+                "is published until this is merged.\n")
+          PY
+
+          git commit -F - <<COMMIT
+          ci(self-repair): ${MODE} pass
+
+          $(python3 -c "import json,os;print(json.load(open(os.environ['RESULT']))['diagnosis'][:400])")
+
+          Proposed by scripts/ci_selfheal.py and kept only because the suite
+          went green without losing tests. Not reviewed by a person.
+
+          Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+          COMMIT
+
+          git push origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" \
+            --title "ci(self-repair): ${MODE} pass" \
+            --body-file "$RUNNER_TEMP/body.md"
+
+      - name: Leave the result in the log either way
+        if: always()
+        run: cat "$RUNNER_TEMP/heal/result.json" 2>/dev/null || echo 'no result file'
