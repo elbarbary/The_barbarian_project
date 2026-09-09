@@ -247,6 +247,10 @@
     "meaning": "The start of the academic year activates annual operational cycles for listed private education operators, educational publishers, and consumer stationery suppliers, involving tuition fee billing and inventory distribution.",
     "meaning_ar": "يتزامن بدء العام الدراسي مع تفعيل الدورات التشغيلية السنوية لمشغلي التعليم الخاص المدرجين ودور النشر التعليمية وموردي الأدوات المكتبية، والتي تشمل تحصيل الرسوم الدراسية وتوزيع المخزون السلعي."
   },
+  "cairo poultry approves aman stake sale, and cairo financial leasing liquidation": {
+    "meaning": "Divesting the equity stake in Aman and initiating the liquidation of Cairo Financial Leasing reallocates balance-sheet capital away from non-core financial services toward primary agribusiness operations while converting investment assets into cash balances.",
+    "meaning_ar": "يُعيد التخارج من حصة شركة \"أمان\" وتصفية شركة \"القاهرة للتأجير التمويلي\" توجيه رأس مال الميزانية العمومية بعيداً عن الخدمات المالية غير الأساسية نحو العمليات التشغيلية الرئيسية للشركة، مع تحويل الأصول الاستثمارية إلى أرصدة نقدية."
+  },
   "cleopatra hospital consolidated revenues leap in h1 2026": {
     "meaning": "An increase in consolidated revenues reflects operational growth across Cleopatra Hospital Group's combined network of medical facilities, driven by higher patient volumes, expanded bed capacities, or adjusted pricing across its healthcare services.",
     "meaning_ar": "تعكس القفزة في الإيرادات المجمعة نمواً تشغيلياً عبر شبكة المنشآت الطبية التابعة لمجموعة مستشفيات كليوباترا، والناتج عن زيادة أعداد المرضى أو توسيع الطاقة الاستيعابية للأسرّة أو تعديل أسعار الخدمات الصحية المقدمة."
@@ -474,6 +478,10 @@
   "«تطوير مصر» تستحوذ علي 150 فدانا بالشراكه في مستقبل سيتي": {
     "meaning": "The partnership model expands the company's real estate land bank in Mostakbal City while sharing the initial capital expenditure and land-holding costs with the partner.",
     "meaning_ar": "يضيف نموذج الشراكة مساحة جديدة إلى المحفظة العقارية للشركة في مستقبل سيتي، مع تقاسم النفقات الرأسمالية الأولية وتكاليف حيازة الأرض مع الشريك."
+  },
+  "«تنميه» تحصد الشهاده الذهبيه لحمايه العملاء وفق معايير «CERISE+SPTF»": {
+    "meaning": "The gold certification confirms the microfinance institution's compliance with international benchmarks for client protection, covering operational transparency, responsible lending, fair pricing, and borrower data privacy.",
+    "meaning_ar": "توثق الشهادة الذهبية التزام مؤسسة التمويل الأصغر بالمعايير الدولية لحماية العملاء، والتي تشمل الشفافية التشغيلية، والإقراض المسؤول، والتسعير العادل، وحماية خصوصية بيانات المقترضين."
   },
   "«كالتف» لدعم الابتكار تخطط لجمع 10 ملايين دولار لصندوقها الثاني «Tectonic Ventures»": {
     "meaning": "Capital raising for a venture fund expands the firm's assets under management and establishes a dedicated liquidity pool for direct equity allocations in target startups.",
@@ -739,6 +747,10 @@
     "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
     "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
   },
+  "اسعار السمك اليوم الاربعاء 9-9-2026 في مصر": {
+    "meaning": "Daily fish price listings reflect current wholesale settlement rates, operational transport expenses, and localized catch volumes distributed across domestic wholesale and retail markets.",
+    "meaning_ar": "تعكس مؤشرات أسعار الأسماك اليومية أسعار التسوية في أسواق الجملة، وتكاليف النقل والتشغيل، وحجم الإمدادات المعروضة من المزارع السمكية والمصايد في السوق المحلي."
+  },
   "اسعار السمك اليوم الثلاثاء 8-9-2026 في مصر": {
     "meaning": "Daily fish price publications reflect the spot pricing mechanisms in the local wholesale and retail markets, where values are determined by daily catch volumes, aquaculture supply, and transportation costs relative to consumer demand.",
     "meaning_ar": "تعكس النشرات اليومية لأسعار الأسماك آليات التسعير الفوري في أسواق الجملة والتجزئة، حيث تتحدد الأسعار بناءً على حجم المعروض اليومي من المصايد والمزارع السمكية وتكاليف النقل مقابل حجم الطلب الاستهلاكي."
@@ -986,6 +998,10 @@
   "البورصه السلعيه تبيع 1000 طن «قمح ديورم» في اول جلسه تداول": {
     "meaning": "The Egyptian Mercantile Exchange (EGYCOMEX) activates spot trading for durum wheat, executing transactions between state suppliers and registered private sector mills through an electronic auction system.",
     "meaning_ar": "تُدرج البورصة المصرية للسلع قمح الديورم ضمن منصتها للتداول الإلكتروني، حيث تُنفذ عمليات التداول الفوري بين الموردين والمطاحن المسجلة عبر منظومة المزايدة المباشرة."
+  },
+  "البورصه المصريه تختتم تعاملات الاربعاء علي تباين في الموشرات": {
+    "meaning": "Divergence across market indices reflects split trading dynamics, where capital flows into large-cap constituents of the main benchmark while small and mid-cap equities move inversely, or vice versa, based on differing liquidity allocation across segments.",
+    "meaning_ar": "يعكس تباين المؤشرات تفاوت اتجاهات السيولة داخل السوق، حيث تتجه التدفقات النقدية نحو أسهم المؤشر الرئيسي في حين تتحرك أسهم الشركات الصغيرة والمتوسطة في اتجاه معاكس، أو العكس، وفقاً لنمط توزيع السيولة بين القطاعات المختلفة."
   },
   "البورصه المصريه ترتفع جماعيا في مستهل تعاملات الاثنين": {
     "meaning": "The headline indicates an opening market condition where aggregate buying volume exceeds selling volume across the main and secondary benchmark indices (EGX30, EGX70, EGX100), resulting in immediate upward price adjustments across listed equities.",
@@ -2989,6 +3005,10 @@
     "meaning": "Economic transformation programs alter the operational framework for manufacturers through structural adjustments, including industrial incentives, infrastructure updates, and regulatory revisions. These measures directly modify input costs, localized production capacities, and capital allocation models across the industrial sector.",
     "meaning_ar": "تحدد برامج التحول الاقتصادي الأطر التشغيلية للمصنعين عبر تعديلات هيكلية تشمل الحوافز الصناعية، وتحديثات البنية التحتية، والأطر التنظيمية، مما يؤثر على تكاليف المدخلات ونسب المكون المحلي وهياكل تخصيص رأس المال في القطاع الصناعي."
   },
+  "من طابور \"الريان\" الي شاشه الموبايل.. القصه الكامله لسوق المال المصري بين الثمانينيات واليوم": {
+    "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
+    "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
+  },
   "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 4-9-2026": {
     "meaning": "Daily train schedules represent the operational transport capacity and logistics grid managed by the national railway authority, facilitating regular passenger mobility and intercity transit across governorates.",
     "meaning_ar": "تمثل مواعيد القطارات اليومية الطاقة التشغيلية لشبكة النقل والخدمات اللوجستية التي تديرها الهيئة القومية لسكك حديد مصر، حيث تنظم حركة نقل الركاب والربط بين المحافظات."
@@ -3020,6 +3040,10 @@
   "ميدفيرت مصر تنقل 25% من الماليه والصناعيه الي ناس للاستثمارات ضمن اعاده هيكله": {
     "meaning": "This transaction represents an internal ownership transfer of an equity stake between related holding entities as part of a corporate restructuring process, shifting direct shareholder voting and dividend rights without altering the underlying industrial operations of the target firm.",
     "meaning_ar": "تُمثل هذه العملية نقل ملكية لحصة أسهم بين كيانات استثمارية تابعة ضمن إعادة هيكلة الشركات، وهو ما يترتب عليه تغيير في التوزيع المباشر لحقوق التصويت والأرباح دون المساس بالعمليات التشغيلية والصناعية للشركة محل الاستحواذ."
+  },
+  "مينا فارم تتحول الي الربحيه المستقله بنهايه يونيو 2026": {
+    "meaning": "Standalone profitability reflects the financial performance of the parent entity's direct operations, excluding the financial results and equity accounting of its subsidiary companies.",
+    "meaning_ar": "تعكس الربحية المستقلة الأداء المالي للعمليات التشغيلية المباشرة للشركة الأم، بمعزل عن النتائج المالية وحقوق الملكية للشركات التابعة."
   },
   "مينا فارم للادويه تتحول للربحيه بقيمه 101.8 مليون جنيه بالنصف الاول": {
     "meaning": "The company's semi-annual financial statements show that total operating revenues exceed combined production, operational, and financing expenses, moving the net bottom line from a deficit to a net surplus of 101.8 million Egyptian pounds.",
