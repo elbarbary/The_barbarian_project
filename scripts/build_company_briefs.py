@@ -67,8 +67,9 @@ PROFILES = pathlib.Path(__file__).resolve().parent / "company_profiles.json"
 
 TICKER = re.compile(r"\(([A-Z0-9]{2,8})\.CA\)")
 
-# gemini-3.7-flash, per million tokens, introductory rate.
-IN_PER_M, OUT_PER_M = 0.75, 3.75
+# The meter rate for `gemini.MODEL`, taken from the module that sets it so a
+# model change cannot leave this budget guard priced for the old one.
+IN_PER_M, OUT_PER_M = gemini.IN_PER_M, gemini.OUT_PER_M
 
 # What goes in front of the model, and why it is not the whole archive.
 #

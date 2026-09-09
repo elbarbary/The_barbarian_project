@@ -48,8 +48,9 @@ REPO = pathlib.Path(__file__).resolve().parent.parent
 SECTORS = REPO / "public" / "data" / "v1" / "sectors"
 STORE = pathlib.Path(__file__).resolve().parent / "sector_reads.json"
 
-# gemini-3.7-flash introductory rate, per million tokens.
-IN_PER_M, OUT_PER_M = 0.75, 3.75
+# The meter rate for `gemini.MODEL`, taken from the module that sets it so a
+# model change cannot leave this budget guard priced for the old one.
+IN_PER_M, OUT_PER_M = gemini.IN_PER_M, gemini.OUT_PER_M
 
 # Plain-language metric names for the prompt.
 NAMES = {

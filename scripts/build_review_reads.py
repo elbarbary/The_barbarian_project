@@ -51,8 +51,9 @@ REVIEW = REPO / "public" / "data" / "v1" / "review"
 DIRECTORY = REPO / "public" / "data" / "v1" / "companies.json"
 STORE = pathlib.Path(__file__).resolve().parent / "review_reads.json"
 
-# gemini-3.7-flash introductory rate, per million tokens.
-IN_PER_M, OUT_PER_M = 0.75, 3.75
+# The meter rate for `gemini.MODEL`, taken from the module that sets it so a
+# model change cannot leave this budget guard priced for the old one.
+IN_PER_M, OUT_PER_M = gemini.IN_PER_M, gemini.OUT_PER_M
 
 # Plain-language names for the prompt — the model should not have to know that
 # `cash_conversion` is a key.

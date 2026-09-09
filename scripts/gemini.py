@@ -86,12 +86,26 @@ OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token"
 # identical answer. Output is the expensive side of the meter, so `THINKING_OFF`
 # below is the difference between pennies and tens of dollars.
 #
-# 3.7 rather than 3.5 because it is **cheaper on both sides of the meter**, not
-# merely newer: $0.75/$3.75 per million in/out against 3.5's $1.50/$9.00. The
-# 3.7 figure is introductory and rises to $1.50/$7.50 on 1 Jan 2027 — still at
-# parity on input and cheaper on output, which is the side this workload
-# actually spends.
-MODEL = "gemini-3.7-flash"
+# 3.8 rather than 3.7, moved 9 Sep 2026. Verified before the switch rather
+# than after: the model is served to this project, answers a real Arabic
+# disclosure headline correctly through `choose`, and — the part that actually
+# had to be checked — still accepts `thinkingBudget: 0`. A newer model that
+# quietly ignored that flag would keep working while costing an order of
+# magnitude more, which is the failure this comment exists to prevent.
+MODEL = "gemini-3.8-flash"
+
+# Per million tokens, in/out. Lives here rather than in each build script
+# because it is a property of MODEL: three scripts used to carry their own copy
+# with "gemini-3.7-flash" written above it, so the first model change would
+# have left three files describing the wrong model's price while still
+# enforcing a budget with it.
+#
+# 3.7's published introductory rate, carried forward: 3.8's rate is not
+# something this pipeline can read — the models endpoint does not serve prices
+# — and it has not been confirmed against the billing console. It is used to
+# stop spending, so being wrong on the cheap side is the expensive direction.
+# Treat it as unconfirmed until somebody checks the console (§ see docs).
+IN_PER_M, OUT_PER_M = 0.75, 3.75
 
 # Translation gets the cheapest model in the generation, deliberately. Turning
 # a headline into English is mechanical work — no reasoning, no judgement, a
