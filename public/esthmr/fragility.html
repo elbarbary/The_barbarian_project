@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ESTHMR · EGX Fragility Engine V5 — Interactive Crash Prediction &amp; Regime Simulator</title>
+<meta name="description" content="A point-in-time dual-engine early warning model for the Egyptian Exchange tested across 18 years and 4,518 market sessions. Simulate parameters, inspect false alarms, and explore forward crash hazard in real-time on ESTHMR.">
+<meta property="og:title" content="ESTHMR · EGX Fragility Engine V5">
+<meta property="og:description" content="Can you predict an EGX crash before it begins? 18 years of out-of-sample empirical research, real-time parameter simulation, and live market fragility status.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://esthmr.com/fragility.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./design.css">
+<link rel="stylesheet" href="./shell.css">
+<script>document.documentElement.classList.add('js')</script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   ESTHMR FRAGILITY ENGINE V5 — INSTITUTIONAL TERMINAL STYLE
+   Plex Sans · Plex Mono · Flat Solid Panels · Precision Geometry
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --fe-bg: var(--bg, #EDF2F7);
+  --fe-surface: var(--surface, #FAFCFE);
+  --fe-ink: var(--ink, #192C3C);
+  --fe-t2: var(--t2, #455B6E);
+  --fe-faint: var(--faint, #607487);
+  --fe-accent: var(--accent, #126B75);
+  --fe-up: var(--up, #3F6B52);
+  --fe-down: var(--down, #A3402F);
+  --fe-edge: var(--edge, rgba(27, 25, 23, 0.10));
+  --fe-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --fe-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --fe-display: 'Bricolage Grotesque', var(--fe-sans);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--fe-sans);
+  background-color: var(--fe-bg);
+  color: var(--fe-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── TERMINAL HEADER ─── */
+.esthmr-topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--fe-surface);
+  border-bottom: 1px solid var(--fe-edge);
+}
+.esthmr-brand {
+  display: flex; align-items: baseline; gap: 10px;
+  text-decoration: none; color: var(--fe-ink);
+}
+.esthmr-logo {
+  font-family: var(--fe-display);
+  font-size: 1.25rem; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--fe-ink);
+}
+.esthmr-subbrand {
+  font-family: var(--fe-mono); font-size: 0.75rem; font-weight: 600;
+  color: var(--fe-accent); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.esthmr-nav {
+  display: flex; align-items: center; gap: 16px;
+}
+.esthmr-nav a {
+  font-size: 0.82rem; font-weight: 500; color: var(--fe-t2);
+  text-decoration: none; padding: 6px 12px; border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.esthmr-nav a:hover, .esthmr-nav a.is-active {
+  color: var(--fe-ink); background: rgba(27, 25, 23, 0.05);
+}
+.esthmr-cta-btn {
+  font-family: var(--fe-sans); font-size: 0.8rem; font-weight: 600;
+  color: white !important; background: var(--fe-accent) !important;
+  border-radius: 999px !important; padding: 6px 16px !important;
+}
+
+/* ─── WRAPPER ─── */
+.fe-shell {
+  max-width: 1280px; margin: 0 auto; padding: clamp(24px, 3vw, 40px) 20px;
+}
+
+/* ─── HERO & LIVE DECK ─── */
+.fe-hero-grid {
+  display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px;
+  align-items: start; margin-bottom: 32px;
+}
+.fe-hero-copy h1 {
+  font-family: var(--fe-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  line-height: 1.1; letter-spacing: -0.035em;
+  margin: 14px 0 16px; color: var(--fe-ink);
+}
+.fe-hero-copy h1 em {
+  font-style: normal; color: var(--fe-accent);
+}
+.fe-hero-lede {
+  font-size: 1.05rem; color: var(--fe-t2); max-width: 58ch; line-height: 1.6;
+}
+.fe-tagbar {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;
+}
+.fe-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600;
+  background: var(--fe-surface); border: 1px solid var(--fe-edge); color: var(--fe-t2);
+  font-family: var(--fe-mono);
+}
+.fe-pulse {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--fe-up);
+  box-shadow: 0 0 0 0 rgba(63, 107, 82, 0.7); animation: fePulse 2s infinite;
+}
+@keyframes fePulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 107, 82, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(63, 107, 82, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 107, 82, 0); }
+}
+
+/* ─── LIVE REGIME CARD ─── */
+.fe-card {
+  background: var(--fe-surface); border: 1px solid var(--fe-edge);
+  border-radius: 14px; padding: 24px;
+}
+.fe-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 14px; border-bottom: 1px solid var(--fe-edge); margin-bottom: 16px;
+}
+.fe-status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px;
+  font-family: var(--fe-mono); font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.fe-pill-green { background: rgba(63, 107, 82, 0.12); color: #235238; border: 1px solid rgba(63, 107, 82, 0.3); }
+.fe-pill-amber { background: rgba(245, 158, 11, 0.12); color: #92400e; border: 1px solid rgba(245, 158, 11, 0.3); }
+.fe-pill-red   { background: rgba(163, 64, 47, 0.12); color: #8A3527; border: 1px solid rgba(163, 64, 47, 0.3); }
+
+.fe-score-dial {
+  display: flex; align-items: baseline; gap: 10px; margin: 10px 0 4px;
+}
+.fe-score-val {
+  font-family: var(--fe-display); font-size: 3.2rem; font-weight: 800; line-height: 1;
+  color: var(--fe-ink);
+}
+.fe-score-sub {
+  font-size: 0.8rem; color: var(--fe-faint); line-height: 1.3;
+}
+.fe-bar-track {
+  width: 100%; height: 8px; border-radius: 4px; background: rgba(27, 25, 23, 0.08);
+  position: relative; overflow: hidden; margin: 12px 0 18px;
+}
+.fe-bar-fill {
+  height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, #3F6B52 0%, #126B75 55%, #A3402F 100%);
+  transition: width 0.35s ease;
+}
+.fe-bar-threshold {
+  position: absolute; top: 0; bottom: 0; width: 2px; background: var(--fe-ink);
+}
+
+.fe-submeters {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0;
+}
+.fe-submeter-box {
+  background: rgba(27, 25, 23, 0.025); border: 1px solid var(--fe-edge);
+  border-radius: 10px; padding: 12px;
+}
+.fe-submeter-box span {
+  display: block; font-family: var(--fe-mono); font-size: 0.68rem; font-weight: 600;
+  color: var(--fe-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px;
+}
+.fe-submeter-box strong {
+  font-family: var(--fe-mono); font-size: 1.15rem; font-weight: 700; color: var(--fe-ink);
+}
+.fe-submeter-box small {
+  display: block; font-size: 0.72rem; color: var(--fe-t2); margin-top: 2px;
+}
+
+/* ─── SCENARIO SANDBOX ─── */
+.fe-scenarios-box {
+  margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--fe-edge);
+}
+.fe-scenarios-box p {
+  font-family: var(--fe-mono); font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--fe-accent); margin-bottom: 8px;
+}
+.fe-scenarios-btns {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.fe-btn-sc {
+  padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 500;
+  background: white; border: 1px solid var(--fe-edge); color: var(--fe-t2);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.fe-btn-sc:hover {
+  background: var(--fe-bg); border-color: var(--fe-accent); color: var(--fe-accent);
+}
+.fe-btn-sc.is-active {
+  background: var(--fe-ink); color: white; border-color: var(--fe-ink);
+}
+
+/* ─── SIMULATOR LAYOUT ─── */
+.fe-sim-card {
+  margin-bottom: 32px;
+}
+.fe-section-header {
+  margin-bottom: 24px;
+}
+.fe-kicker {
+  font-family: var(--fe-mono); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--fe-accent); margin-bottom: 6px;
+}
+.fe-section-header h2 {
+  font-family: var(--fe-display); font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  letter-spacing: -0.03em; color: var(--fe-ink);
+}
+
+/* ─── PRESET BUTTONS ─── */
+.fe-preset-row {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  padding-bottom: 18px; border-bottom: 1px solid var(--fe-edge);
+}
+.fe-btn-preset {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+  background: rgba(27, 25, 23, 0.03); border: 1px solid var(--fe-edge); color: var(--fe-ink);
+  cursor: pointer; transition: all 0.2s ease;
+}
+.fe-btn-preset:hover {
+  background: white; border-color: var(--fe-accent);
+}
+.fe-btn-preset.is-active {
+  background: var(--fe-accent); border-color: var(--fe-accent); color: white;
+}
+.fe-btn-preset span.tag {
+  font-family: var(--fe-mono); font-size: 0.68rem; padding: 2px 6px; border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+}
+.fe-btn-preset.is-active span.tag {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── CONTROLS & KPIS ─── */
+.fe-grid-2 {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px;
+}
+.fe-controls-panel {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.fe-ctl-box {
+  background: rgba(27, 25, 23, 0.02); border: 1px solid var(--fe-edge);
+  border-radius: 10px; padding: 14px;
+}
+.fe-ctl-head {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;
+}
+.fe-ctl-title {
+  font-size: 0.78rem; font-weight: 600; color: var(--fe-ink);
+}
+.fe-ctl-val {
+  font-family: var(--fe-mono); font-size: 0.88rem; font-weight: 700; color: var(--fe-accent);
+}
+.fe-slider-el {
+  width: 100%; height: 5px; -webkit-appearance: none; appearance: none;
+  background: rgba(27, 25, 23, 0.12); border-radius: 4px; outline: none; margin: 8px 0;
+  cursor: pointer;
+}
+.fe-slider-el::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 16px; height: 16px;
+  border-radius: 50%; background: var(--fe-accent); border: 2px solid white;
+  cursor: pointer; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+.fe-ctl-desc {
+  font-size: 0.7rem; color: var(--fe-faint); line-height: 1.35;
+}
+
+/* ─── KPI CARDS ─── */
+.fe-kpi-container {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.fe-kpi-tile {
+  background: white; border: 1px solid var(--fe-edge); border-radius: 10px; padding: 14px 16px;
+}
+.fe-kpi-tile.span-2 {
+  grid-column: span 2; background: #F8FAFB; border-color: rgba(18, 107, 117, 0.25);
+}
+.fe-kpi-lbl {
+  font-family: var(--fe-mono); font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--fe-faint); margin-bottom: 4px;
+}
+.fe-kpi-val {
+  font-family: var(--fe-display); font-size: 1.8rem; font-weight: 800; line-height: 1;
+  color: var(--fe-ink); letter-spacing: -0.03em;
+}
+.fe-kpi-note {
+  font-size: 0.72rem; color: var(--fe-t2); margin-top: 6px; line-height: 1.3;
+}
+.fe-badge-metric {
+  display: inline-block; padding: 2px 6px; border-radius: 4px;
+  font-family: var(--fe-mono); font-size: 0.68rem; font-weight: 700; margin-left: 4px;
+}
+.fe-b-good { background: rgba(63, 107, 82, 0.15); color: #235238; }
+.fe-b-warn { background: rgba(245, 158, 11, 0.15); color: #92400e; }
+.fe-b-alert { background: rgba(163, 64, 47, 0.15); color: #8A3527; }
+
+/* ─── CANVAS TIMELINE ─── */
+.fe-timeline-wrap {
+  margin-top: 24px; background: white; border: 1px solid var(--fe-edge);
+  border-radius: 14px; padding: 20px;
+}
+.fe-timeline-head {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  gap: 12px; margin-bottom: 14px;
+}
+.fe-canvas-box {
+  width: 100%; height: 350px; position: relative; cursor: crosshair;
+}
+#timelineCanvas {
+  width: 100%; height: 100%; display: block;
+}
+.fe-scrubber-tt {
+  position: absolute; top: 12px; left: 12px; pointer-events: none;
+  background: var(--fe-ink); color: white; padding: 8px 12px; border-radius: 6px;
+  font-size: 0.75rem; font-family: var(--fe-mono); line-height: 1.4; display: none; z-index: 10;
+}
+.fe-scrubber-tt strong { color: #86CFD2; }
+
+/* ─── CRISIS GRID ─── */
+.fe-crisis-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 12px; margin-top: 20px;
+}
+.fe-cr-card {
+  background: white; border: 1px solid var(--fe-edge); border-radius: 10px;
+  padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+}
+.fe-cr-head {
+  display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;
+}
+.fe-cr-name {
+  font-family: var(--fe-display); font-size: 0.98rem; font-weight: 700; color: var(--fe-ink);
+}
+.fe-cr-date {
+  font-family: var(--fe-mono); font-size: 0.7rem; color: var(--fe-faint); margin-top: 2px;
+}
+.fe-cr-dd {
+  font-family: var(--fe-mono); font-size: 0.88rem; font-weight: 700; color: var(--fe-down);
+}
+.fe-cr-foot {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 10px; border-top: 1px solid var(--fe-edge);
+}
+
+/* ─── TABLE ─── */
+.fe-table-scroll {
+  overflow-x: auto; margin-top: 18px; border: 1px solid var(--fe-edge); border-radius: 10px;
+  background: white;
+}
+.fe-datatable {
+  width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;
+}
+.fe-datatable th {
+  background: #F8FAFB; padding: 10px 14px; font-family: var(--fe-mono); font-size: 0.72rem;
+  font-weight: 600; color: var(--fe-faint); border-bottom: 1px solid var(--fe-edge);
+  white-space: nowrap; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.fe-datatable td {
+  padding: 10px 14px; border-bottom: 1px solid var(--fe-edge); color: var(--fe-ink);
+}
+.fe-datatable tr:hover td {
+  background: #F4F7F9;
+}
+
+@media (max-width: 900px) {
+  .fe-hero-grid, .fe-grid-2 { grid-template-columns: 1fr; }
+  .fe-controls-panel { grid-template-columns: 1fr; }
+  .fe-canvas-box { height: 260px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ESTHMR BRAND TOPBAR -->
+<header class="esthmr-topbar">
+  <a class="esthmr-brand" href="index.html">
+    <span class="esthmr-logo">ESTHMR</span>
+    <span class="esthmr-subbrand">/ Fragility Engine</span>
+  </a>
+  <nav class="esthmr-nav">
+    <a href="index.html">Terminal</a>
+    <a href="index.html?view=valuation">Valuation &amp; Debt</a>
+    <a href="index.html?view=pairs">Pairs Arbitrage</a>
+    <a href="index.html?view=today">Disclosures</a>
+    <a class="esthmr-cta-btn" href="#simulator">Simulator</a>
+  </nav>
+</header>
+
+<div class="fe-shell">
+  <!-- HERO & LIVE REGIME DECK -->
+  <section class="fe-hero-grid">
+    <div class="fe-hero-copy">
+      <div class="fe-tagbar">
+        <span class="fe-tag"><i class="fe-pulse"></i> Real-time tape: Wednesday 9 September 2026</span>
+        <span class="fe-tag">18-Year OOS Backtest (2008–2026)</span>
+        <span class="fe-tag">4,518 Sessions Evaluated</span>
+      </div>
+
+      <p class="fe-kicker">Point-in-Time Dual Engine Architecture</p>
+      <h1>Can you predict an EGX crash<br><em>before</em> it begins?</h1>
+      <p class="fe-hero-lede">Most crash prediction models leak future information, count the same panic twenty times, or produce constant false alarms. The EGX Fragility Engine V5 is a point-in-time dual-engine model built to detect systemic vulnerability while restricting hard false alarms to &le; 1 per year.</p>
+      
+      <div style="margin-top:20px; display:flex; gap:12px;">
+        <a class="gate-cta" href="#simulator" style="text-decoration:none;">Open Backtest Simulator &darr;</a>
+        <a class="fe-btn-sc" href="#crises" style="text-decoration:none; padding:10px 16px; border-radius:999px; font-weight:600;">Historical Crisis Ledger &rarr;</a>
+      </div>
+    </div>
+
+    <!-- LIVE REGIME AS OF TODAY -->
+    <aside class="fe-card" id="live-regime" aria-label="Current EGX Fragility State">
+      <div class="fe-card-head">
+        <div>
+          <span style="font-family:var(--fe-mono); font-size:0.7rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Live Status</span>
+          <div style="margin-top:4px;">
+            <span class="fe-status-pill fe-pill-green" id="livePill">
+              <span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span>
+              Normal / Green Regime
+            </span>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-family:var(--fe-mono); font-size:0.7rem; color:var(--fe-faint);">EGX 30 Level</span>
+          <strong style="display:block; font-family:var(--fe-mono); font-size:1.15rem;" id="livePrice">56,280.40</strong>
+        </div>
+      </div>
+
+      <div class="fe-score-dial">
+        <span class="fe-score-val" id="liveScore">0.45</span>
+        <span class="fe-score-sub">/ 1.00 Fragility Index ($S_{\text{V5}}$)<br><small style="color:var(--fe-faint);">Alert Trigger: &ge; 0.920</small></span>
+      </div>
+
+      <div class="fe-bar-track">
+        <div class="fe-bar-fill" id="liveBar" style="width: 45.3%;"></div>
+        <div class="fe-bar-threshold" style="left: 92%;" title="Threshold (0.920)"></div>
+      </div>
+
+      <div class="fe-submeters">
+        <div class="fe-submeter-box">
+          <span>Engine A · Internal Fragility</span>
+          <strong id="liveEngineA">0.4528</strong>
+          <small>Breadth, herding, liquidity, NFA</small>
+        </div>
+        <div class="fe-submeter-box">
+          <span>Engine B · External Contagion</span>
+          <strong id="liveEngineB">0.2505</strong>
+          <small>Global VIX, EM panel, EGP basis</small>
+        </div>
+        <div class="fe-submeter-box">
+          <span>Stress Dimensions</span>
+          <strong id="liveStressCount">1 / 7 Groups</strong>
+          <small>Multi-group confirmation</small>
+        </div>
+        <div class="fe-submeter-box">
+          <span>Domestic Transmission</span>
+          <strong id="liveTransmission" style="color:var(--fe-up);">Guarded</strong>
+          <small>Blocks false foreign panic</small>
+        </div>
+      </div>
+
+      <div style="background:rgba(27,25,23,0.03); border:1px solid var(--fe-edge); border-radius:8px; padding:10px; font-size:0.78rem;">
+        <span style="font-family:var(--fe-mono); font-size:0.68rem; font-weight:600; color:var(--fe-faint); text-transform:uppercase;">Forward Drawdown Hazard</span>
+        <div style="display:flex; justify-content:space-between; margin-top:6px;">
+          <span>5-Day Tactical Shock: <strong id="fwd5">3.2%</strong></span>
+          <span>25-Day Drop (&gt;15%): <strong id="fwd25" style="color:var(--fe-up);">9.8% (Benign)</strong></span>
+        </div>
+      </div>
+
+      <!-- FUTURE WHAT-IF STRESS SANDBOX -->
+      <div class="fe-scenarios-box">
+        <p>What-If Stress Sandbox (Forward Scenarios)</p>
+        <div class="fe-scenarios-btns">
+          <button class="fe-btn-sc is-active" data-sc="real">Real Tape (Benign)</button>
+          <button class="fe-btn-sc" data-sc="vix">VIX Shockwave</button>
+          <button class="fe-btn-sc" data-sc="fx">FX Devaluation</button>
+          <button class="fe-btn-sc" data-sc="decay">Breadth Collapse</button>
+          <button class="fe-btn-sc" data-sc="cascade">2008 Cascade</button>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       INTERACTIVE BACKTEST SIMULATOR
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="fe-card fe-sim-card" id="simulator">
+    <div class="fe-section-header">
+      <p class="fe-kicker">Interactive Experimentation Engine</p>
+      <h2>Simulate out-of-sample parameters.<br><span style="font-family:var(--fe-sans); font-size:1.15rem; color:var(--fe-t2); font-weight:400;">Every slider move recalculates across all 4,518 Egyptian sessions (2008–2026) in under 1 millisecond.</span></h2>
+    </div>
+
+    <!-- PRESET BUTTONS -->
+    <div class="fe-preset-row">
+      <span style="font-family:var(--fe-mono); font-size:0.75rem; font-weight:600; color:var(--fe-faint); align-self:center; margin-right:4px;">PRESETS:</span>
+      <button class="fe-btn-preset is-active" data-p="v5-rec">
+        <strong>V5 Recommended (Production)</strong>
+        <span class="tag">15/17 Early · 1.0 Hard FA/yr</span>
+      </button>
+      <button class="fe-btn-preset" data-p="v5-m16">
+        <strong>V5 Matched 16 (High Coverage)</strong>
+        <span class="tag">16/17 Early · 1.44 Hard FA/yr</span>
+      </button>
+      <button class="fe-btn-preset" data-p="v5-sel">
+        <strong>V5 Ultra-Selective (Low Fatigue)</strong>
+        <span class="tag">14/17 Early · 0.61 Hard FA/yr</span>
+      </button>
+      <button class="fe-btn-preset" data-p="v4-base">
+        <strong>V4 Benchmark Baseline</strong>
+        <span class="tag">16/17 Early · 1.94 Hard FA/yr</span>
+      </button>
+      <button class="fe-btn-preset" data-p="b1-vol">
+        <strong>Volatility Baseline (B1)</strong>
+        <span class="tag">13/17 Early · 23.3% Occ</span>
+      </button>
+    </div>
+
+    <div class="fe-grid-2">
+      <!-- SLIDERS -->
+      <div class="fe-controls-panel">
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">Alert Entry (&theta;<sub>enter</sub>)</span>
+            <span class="fe-ctl-val" id="vThEnter">0.920</span>
+          </div>
+          <input type="range" class="fe-slider-el" id="slThEnter" min="0.800" max="0.980" step="0.005" value="0.920">
+          <p class="fe-ctl-desc">Fragility score required over 2 consecutive sessions to trigger RED.</p>
+        </div>
+
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">Hysteresis Exit (&theta;<sub>exit</sub>)</span>
+            <span class="fe-ctl-val" id="vThExit">0.870</span>
+          </div>
+          <input type="range" class="fe-slider-el" id="slThExit" min="0.700" max="0.950" step="0.005" value="0.870">
+          <p class="fe-ctl-desc">System remains in RED alert until score cools down below this point.</p>
+        </div>
+
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">Refractory Cooldown</span>
+            <span class="fe-ctl-val" id="vCooldown">35 days</span>
+          </div>
+          <input type="range" class="fe-slider-el" id="slCooldown" min="0" max="60" step="1" value="35">
+          <p class="fe-ctl-desc">Suppresses duplicate alerts following a completed warning episode.</p>
+        </div>
+
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">Hold Window (Min &ndash; Max)</span>
+            <span class="fe-ctl-val" id="vHold">5 &ndash; 12 days</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <input type="range" class="fe-slider-el" id="slMinHold" min="1" max="15" step="1" value="5" title="Min Hold">
+            <input type="range" class="fe-slider-el" id="slMaxHold" min="6" max="35" step="1" value="12" title="Max Hold">
+          </div>
+          <p class="fe-ctl-desc">Enforces persistence and bounds maximum duration.</p>
+        </div>
+
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">Multi-Group Stress Count</span>
+            <span class="fe-ctl-val" id="vStress">1 group</span>
+          </div>
+          <input type="range" class="fe-slider-el" id="slStress" min="0" max="4" step="1" value="1">
+          <p class="fe-ctl-desc">Confirmation across breadth, illiquidity, FX, volatility, or EM peer.</p>
+        </div>
+
+        <div class="fe-ctl-box">
+          <div class="fe-ctl-head">
+            <span class="fe-ctl-title">5-Day Slope (&Delta;S<sub>5</sub>)</span>
+            <span class="fe-ctl-val" id="vSlope">-0.005</span>
+          </div>
+          <input type="range" class="fe-slider-el" id="slSlope" min="-0.050" max="0.010" step="0.001" value="-0.005">
+          <p class="fe-ctl-desc">Filters out decelerating bull market consolidations.</p>
+        </div>
+
+        <div class="fe-ctl-box" style="grid-column:span 2; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <span class="fe-ctl-title" style="display:block;">Domestic Transmission Guard</span>
+            <p class="fe-ctl-desc">Blocks external shock alerts if domestic EGX market tape shows zero transmission.</p>
+          </div>
+          <input type="checkbox" id="chkTrans" checked style="width:20px; height:20px; cursor:pointer;">
+        </div>
+      </div>
+
+      <!-- KPIS -->
+      <div class="fe-kpi-container">
+        <div class="fe-kpi-tile span-2">
+          <div class="fe-kpi-lbl">Strict Early Recall ([T&minus;25, T&minus;5])</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpRecall">15 / 17 <small style="font-size:1.1rem; color:var(--fe-accent);">(88.2%)</small></div>
+            <span class="fe-badge-metric fe-b-good" id="kpRecallBadge">Target Met</span>
+          </div>
+          <p class="fe-kpi-note">95% Wilson CI: <strong id="kpCi">[65.7%, 96.7%]</strong> · Missed: <span id="kpMiss">0</span> · Late: <span id="kpLate">1</span> · Reactive: <span id="kpReact">1</span></p>
+        </div>
+
+        <div class="fe-kpi-tile">
+          <div class="fe-kpi-lbl">Hard False Alarms / Year</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpHardFa">1.00 <small style="font-size:0.85rem; color:var(--fe-faint);">/ yr</small></div>
+            <span class="fe-badge-metric fe-b-good" id="kpHardFaBadge">&le; 1.0/yr</span>
+          </div>
+          <p class="fe-kpi-note"><span id="kpHardEp">18</span> Hard episodes · Total FA: <strong id="kpTotFa">1.33/yr</strong> (<span id="kpFalseEp">24</span> ep)</p>
+        </div>
+
+        <div class="fe-kpi-tile">
+          <div class="fe-kpi-lbl">Market Warning Occupancy</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpOcc">11.49%</div>
+            <span class="fe-badge-metric fe-b-good" id="kpOccBadge">Low Drag</span>
+          </div>
+          <p class="fe-kpi-note">Days market is in alert · Volatility B1 is <strong>23.3%</strong></p>
+        </div>
+
+        <div class="fe-kpi-tile">
+          <div class="fe-kpi-lbl">Event-Level Precision</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpPrec">52.9%</div>
+            <span class="fe-badge-metric fe-b-good" id="kpPrecBadge">&ge; 50%</span>
+          </div>
+          <p class="fe-kpi-note">True warning episodes: <strong id="kpTrueEp">27</strong> / Total: <span id="kpTotEp">51</span></p>
+        </div>
+
+        <div class="fe-kpi-tile">
+          <div class="fe-kpi-lbl">Median Lead &amp; Bull Drag</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpLead">16.0 <small style="font-size:0.85rem; color:var(--fe-faint);">days</small></div>
+            <span class="fe-badge-metric fe-b-good">Actionable</span>
+          </div>
+          <p class="fe-kpi-note">Median warning lead · Opportunity cost: <strong id="kpOpp">+0.63%</strong></p>
+        </div>
+
+        <div class="fe-kpi-tile span-2">
+          <div class="fe-kpi-lbl">Net Economic Utility Score</div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <div class="fe-kpi-val" id="kpUtil" style="color:var(--fe-accent);">+76.55</div>
+            <span class="fe-badge-metric fe-b-good">Optimal</span>
+          </div>
+          <p class="fe-kpi-note">Objective utility loss function penalizing false alarms, alert duration, and late notices.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANVAS TIMELINE -->
+    <div class="fe-timeline-wrap">
+      <div class="fe-timeline-head">
+        <div>
+          <h3 style="font-family:var(--fe-display); font-size:1.1rem; color:var(--fe-ink);">EGX 30 Index &amp; Dynamic Warning Episodes (2008&ndash;2026)</h3>
+          <p style="font-size:0.75rem; color:var(--fe-faint);">Hover to inspect exact trading sessions, index levels, signal score, and alert states.</p>
+        </div>
+        <div style="display:flex; gap:14px; font-size:0.75rem; font-family:var(--fe-mono);">
+          <span><b style="color:#126B75;">—</b> EGX 30 Index</span>
+          <span><b style="color:rgba(163,64,47,0.8);">■</b> Warning Band</span>
+          <span><b style="color:#3F6B52;">●</b> Crisis Onset</span>
+        </div>
+      </div>
+
+      <div class="fe-canvas-box" id="canvasWrap">
+        <canvas id="timelineCanvas"></canvas>
+        <div class="fe-scrubber-tt" id="scrubberTooltip"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       HISTORICAL CRISIS LEDGER (17 SEVERE EVENTS)
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="fe-card" id="crises" style="margin-bottom:32px;">
+    <div class="fe-section-header">
+      <p class="fe-kicker">Event-Level Validation Ledger</p>
+      <h2>All 17 Severe Historical Crises (2008&ndash;2026)</h2>
+      <p style="font-size:0.85rem; color:var(--fe-t2); margin-top:4px;">Strict evaluation window: alerts must fire in <code>[T_onset &minus; 25, T_onset &minus; 5]</code> to qualify as Early Hits. Alerts in <code>[T&minus;4, T]</code> are Late; alerts after onset are Reactive.</p>
+    </div>
+
+    <div class="fe-crisis-grid" id="crGrid">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FALSE ALARM AUTOPSY & PRECISION FRONTIER
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="fe-card" id="autopsy" style="margin-bottom:32px;">
+    <div class="fe-section-header">
+      <p class="fe-kicker">Empirical Transparency</p>
+      <h2>The False Alarm Autopsy &amp; Pareto Frontier</h2>
+      <p style="font-size:0.85rem; color:var(--fe-t2); margin-top:4px;">Comparing the V5 Pareto Frontier against V4, Realized Volatility B1, and Momentum B2 across 4,518 test sessions.</p>
+    </div>
+
+    <div class="fe-table-scroll">
+      <table class="fe-datatable">
+        <thead>
+          <tr>
+            <th>Model Configuration</th>
+            <th>Early Recall</th>
+            <th>Occupancy</th>
+            <th>Total Ep.</th>
+            <th>False Ep.</th>
+            <th>Hard FA/yr</th>
+            <th>Precision</th>
+            <th>Lead Days</th>
+            <th>Opp Cost</th>
+            <th>Utility Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#F0F7F6; font-weight:600;">
+            <td><strong>V5: Recommended Production</strong></td>
+            <td style="color:var(--fe-up);">15 / 17 (88.2%)</td>
+            <td>11.49%</td>
+            <td>51</td>
+            <td>24</td>
+            <td style="color:var(--fe-up);">1.00 / yr</td>
+            <td>52.9%</td>
+            <td>16.0d</td>
+            <td>+0.38%</td>
+            <td><strong style="color:var(--fe-accent);">+76.55</strong></td>
+          </tr>
+          <tr>
+            <td><strong>V5: Matched-16 High Coverage</strong></td>
+            <td style="color:var(--fe-up);">16 / 17 (94.1%)</td>
+            <td>12.64%</td>
+            <td>64</td>
+            <td>33</td>
+            <td>1.44 / yr</td>
+            <td>48.4%</td>
+            <td>18.5d</td>
+            <td>+1.03%</td>
+            <td>+62.80</td>
+          </tr>
+          <tr>
+            <td><strong>V5: Ultra-Selective (Low Fatigue)</strong></td>
+            <td>14 / 17 (82.4%)</td>
+            <td style="color:var(--fe-up);">7.48%</td>
+            <td>39</td>
+            <td>19</td>
+            <td style="color:var(--fe-up);">0.61 / yr</td>
+            <td>51.3%</td>
+            <td>17.0d</td>
+            <td>-0.15%</td>
+            <td><strong style="color:var(--fe-accent);">+86.45</strong></td>
+          </tr>
+          <tr>
+            <td><strong>V4: Benchmark Baseline</strong></td>
+            <td>16 / 17 (94.1%)</td>
+            <td>13.46%</td>
+            <td>76</td>
+            <td>42</td>
+            <td>1.94 / yr</td>
+            <td>44.7%</td>
+            <td>18.5d</td>
+            <td>+1.46%</td>
+            <td>+40.20</td>
+          </tr>
+          <tr>
+            <td><strong>Baseline B1: Realized Volatility</strong></td>
+            <td>13 / 17 (76.5%)</td>
+            <td>23.30%</td>
+            <td>70</td>
+            <td>35</td>
+            <td>1.60 / yr</td>
+            <td>33.3%</td>
+            <td>16.0d</td>
+            <td>+3.41%</td>
+            <td>+24.30</td>
+          </tr>
+          <tr>
+            <td><strong>Baseline B2: 20-Day Momentum Break</strong></td>
+            <td>9 / 17 (52.9%)</td>
+            <td>28.10%</td>
+            <td>94</td>
+            <td>58</td>
+            <td>2.70 / yr</td>
+            <td>20.5%</td>
+            <td>11.0d</td>
+            <td>+4.80%</td>
+            <td>-18.40</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="text-align:center; padding:24px 0; font-family:var(--fe-mono); font-size:0.75rem; color:var(--fe-faint);">
+    ESTHMR · Egyptian Exchange Intelligence · <a href="index.html" style="color:var(--fe-accent); text-decoration:none;">esthmr.com</a>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CLIENT-SIDE ENGINE SIMULATION SCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  const CRISIS_METADATA = [
+    { id: 12, name: "2008 GFC Wave 1", onset: "2008-05-05", trough: "2008-07-06", dd: -0.2018, onset_idx: 82, trough_idx: 125 },
+    { id: 13, name: "2008 Lehman Crash", onset: "2008-08-06", trough: "2008-10-26", dd: -0.4885, onset_idx: 147, trough_idx: 199 },
+    { id: 14, name: "2009 GFC Aftershock", onset: "2009-01-05", trough: "2009-02-05", dd: -0.2836, onset_idx: 245, trough_idx: 267 },
+    { id: 15, name: "2009 Summer Correction", onset: "2009-06-16", trough: "2009-07-13", dd: -0.1803, onset_idx: 357, trough_idx: 375 },
+    { id: 16, name: "2009 Dubai Debt Shock", onset: "2009-10-26", trough: "2009-11-30", dd: -0.1905, onset_idx: 446, trough_idx: 469 },
+    { id: 17, name: "2010 Eurozone Crisis", onset: "2010-04-27", trough: "2010-05-25", dd: -0.2191, onset_idx: 570, trough_idx: 590 },
+    { id: 18, name: "2011 Jan 25 Revolution", onset: "2011-01-05", trough: "2011-01-27", dd: -0.2169, onset_idx: 743, trough_idx: 757 },
+    { id: 19, name: "2011 Cabinet Reshuffle", onset: "2011-06-19", trough: "2011-08-09", dd: -0.2043, onset_idx: 817, trough_idx: 853 },
+    { id: 20, name: "2011 Maspero Clashes", onset: "2011-09-12", trough: "2011-11-22", dd: -0.2031, onset_idx: 874, trough_idx: 921 },
+    { id: 21, name: "2012 Post-Election Drift", onset: "2012-03-22", trough: "2012-06-19", dd: -0.2056, onset_idx: 1002, trough_idx: 1060 },
+    { id: 22, name: "2012 Constitutional Turmoil", onset: "2012-09-26", trough: "2012-11-28", dd: -0.1933, onset_idx: 1127, trough_idx: 1168 },
+    { id: 23, name: "2015 Foreign FX Squeeze", onset: "2015-05-24", trough: "2015-08-18", dd: -0.1889, onset_idx: 1775, trough_idx: 1831 },
+    { id: 24, name: "2015 Oil Collapse & FX Cap", onset: "2015-10-21", trough: "2016-01-13", dd: -0.1909, onset_idx: 1872, trough_idx: 1930 },
+    { id: 25, name: "2018 Emerging Markets Contagion", onset: "2018-08-30", trough: "2018-10-25", dd: -0.1865, onset_idx: 2570, trough_idx: 2608 },
+    { id: 26, name: "2020 COVID-19 Pandemic", onset: "2020-02-09", trough: "2020-03-09", dd: -0.2215, onset_idx: 2923, trough_idx: 2944 },
+    { id: 27, name: "2022 Ukraine War & Float", onset: "2022-03-23", trough: "2022-06-22", dd: -0.1815, onset_idx: 3441, trough_idx: 3499 },
+    { id: 28, name: "2024 Post-Float Correction", onset: "2024-03-11", trough: "2024-03-31", dd: -0.1947, onset_idx: 3918, trough_idx: 3932 }
+  ];
+
+  // Sliders
+  const slThEnter = document.getElementById('slThEnter');
+  const slThExit = document.getElementById('slThExit');
+  const slCooldown = document.getElementById('slCooldown');
+  const slMinHold = document.getElementById('slMinHold');
+  const slMaxHold = document.getElementById('slMaxHold');
+  const slStress = document.getElementById('slStress');
+  const slSlope = document.getElementById('slSlope');
+  const chkTrans = document.getElementById('chkTrans');
+
+  const vThEnter = document.getElementById('vThEnter');
+  const vThExit = document.getElementById('vThExit');
+  const vCooldown = document.getElementById('vCooldown');
+  const vHold = document.getElementById('vHold');
+  const vStress = document.getElementById('vStress');
+  const vSlope = document.getElementById('vSlope');
+
+  // KPIs
+  const kpRecall = document.getElementById('kpRecall');
+  const kpRecallBadge = document.getElementById('kpRecallBadge');
+  const kpCi = document.getElementById('kpCi');
+  const kpMiss = document.getElementById('kpMiss');
+  const kpLate = document.getElementById('kpLate');
+  const kpReact = document.getElementById('kpReact');
+  const kpHardFa = document.getElementById('kpHardFa');
+  const kpHardFaBadge = document.getElementById('kpHardFaBadge');
+  const kpHardEp = document.getElementById('kpHardEp');
+  const kpTotFa = document.getElementById('kpTotFa');
+  const kpFalseEp = document.getElementById('kpFalseEp');
+  const kpOcc = document.getElementById('kpOcc');
+  const kpOccBadge = document.getElementById('kpOccBadge');
+  const kpPrec = document.getElementById('kpPrec');
+  const kpPrecBadge = document.getElementById('kpPrecBadge');
+  const kpTrueEp = document.getElementById('kpTrueEp');
+  const kpTotEp = document.getElementById('kpTotEp');
+  const kpLead = document.getElementById('kpLead');
+  const kpOpp = document.getElementById('kpOpp');
+  const kpUtil = document.getElementById('kpUtil');
+
+  const crGrid = document.getElementById('crGrid');
+  const canvas = document.getElementById('timelineCanvas');
+  const canvasWrap = document.getElementById('canvasWrap');
+  const tooltip = document.getElementById('scrubberTooltip');
+
+  let series = [];
+  let episodes = CRISIS_METADATA;
+  let T = 0;
+  let evalYears = 18.07;
+  let currentAlerts = null;
+
+  function wilson(k, n) {
+    if (n === 0) return [0, 0];
+    const p = k / n;
+    const z = 1.96;
+    const denom = 1 + (z * z) / n;
+    const center = (p + (z * z) / (2 * n)) / denom;
+    const spread = (z / denom) * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
+    return [Math.max(0, center - spread), Math.min(1, center + spread)];
+  }
+
+  function simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans) {
+    if (!series || series.length === 0) return null;
+
+    const al = new Uint8Array(T);
+    let inRed = false;
+    let redStart = 0;
+    let lastExitRed = -999;
+
+    for (let i = 2; i < T; i++) {
+      const s = series[i][2];
+      const sSlope = series[i][3];
+      const uInt = series[i][4];
+      const uExt = series[i][5];
+      const stressCnt = series[i][6];
+      const hasTrans = series[i][7];
+
+      if (inRed) {
+        al[i] = 1;
+        const holdLen = i - redStart + 1;
+        if (holdLen >= minHold) {
+          if (s < thExit || holdLen >= maxHold) {
+            inRed = false;
+            lastExitRed = i;
+          }
+        }
+      } else {
+        if ((i - lastExitRed) < cooldown) continue;
+        if (series[i][2] < thEnter || series[i - 1][2] < thEnter) continue;
+        if (sSlope < minSlope) continue;
+        if (useTrans && uExt >= thEnter && uInt < thEnter) {
+          if (hasTrans === 0) continue;
+        }
+        if (minStress > 0 && stressCnt < minStress) continue;
+
+        inRed = true;
+        redStart = i;
+        al[i] = 1;
+      }
+    }
+
+    let earlyCount = 0, lateCount = 0, reactCount = 0, missCount = 0;
+    const leads = [];
+    const crisisResults = [];
+
+    for (let c = 0; c < episodes.length; c++) {
+      const ep = episodes[c];
+      const ons = ep.onset_idx;
+      const tr = ep.trough_idx;
+
+      let hasEarly = false, earlyFirst = -1;
+      const earlyStart = Math.max(0, ons - 25);
+      const earlyEnd = Math.max(0, ons - 4);
+      for (let k = earlyStart; k < earlyEnd; k++) {
+        if (al[k] === 1) { hasEarly = true; earlyFirst = k; break; }
+      }
+
+      let hasLate = false, lateFirst = -1;
+      for (let k = Math.max(0, ons - 4); k <= ons; k++) {
+        if (al[k] === 1) { hasLate = true; lateFirst = k; break; }
+      }
+
+      let hasReact = false, reactFirst = -1;
+      for (let k = ons + 1; k <= tr; k++) {
+        if (al[k] === 1) { hasReact = true; reactFirst = k; break; }
+      }
+
+      let status = "MISSED", leadDays = -999, alertDate = null;
+      if (hasEarly) {
+        status = "EARLY"; leadDays = ons - earlyFirst; alertDate = series[earlyFirst][0];
+        earlyCount++; leads.push(leadDays);
+      } else if (hasLate) {
+        status = "LATE"; leadDays = ons - lateFirst; alertDate = series[lateFirst][0];
+        lateCount++;
+      } else if (hasReact) {
+        status = "REACTIVE"; leadDays = ons - reactFirst; alertDate = series[reactFirst][0];
+        reactCount++;
+      } else {
+        missCount++;
+      }
+
+      crisisResults.push({ ...ep, status, leadDays, alertDate });
+    }
+
+    // Clusters
+    const clusters = [];
+    let inEp = false, st = 0, en = 0;
+    for (let i = 0; i < T; i++) {
+      if (al[i] === 1) {
+        if (!inEp) { inEp = true; st = i; en = i; } else en = i;
+      } else {
+        if (inEp) {
+          let nextD = 999;
+          for (let k = i; k < Math.min(T, i + 6); k++) {
+            if (al[k] === 1) { nextD = k - i; break; }
+          }
+          if (nextD > 5) { inEp = false; clusters.push([st, en]); }
+        }
+      }
+    }
+    if (inEp) clusters.push([st, en]);
+
+    let falseClusters = 0, hardFalseClusters = 0, nearMissClusters = 0, trueClusters = 0;
+    let falseWarningDays = 0;
+    const oppCosts = [];
+    const crisisHitCount = {};
+
+    for (let i = 0; i < clusters.length; i++) {
+      const cSt = clusters[i][0];
+      const cEn = clusters[i][1];
+      const dur = cEn - cSt + 1;
+      let isValid = false, matchedEpId = null;
+
+      for (let c = 0; c < episodes.length; c++) {
+        const ep = episodes[c];
+        if ((ep.onset_idx - 25) <= cEn && cSt <= ep.trough_idx) {
+          isValid = true; matchedEpId = ep.id; break;
+        }
+      }
+
+      if (!isValid) {
+        falseClusters++;
+        falseWarningDays += dur;
+        let prod = 1.0;
+        for (let k = cSt; k <= cEn; k++) prod *= (1.0 + series[k][8]);
+        oppCosts.push(prod - 1.0);
+
+        const basePrice = series[cSt][1];
+        let minP = basePrice;
+        for (let k = cSt; k < Math.min(T, cSt + 26); k++) {
+          if (series[k][1] < minP) minP = series[k][1];
+        }
+        if ((minP / basePrice - 1.0) <= -0.08) nearMissClusters++;
+        else hardFalseClusters++;
+      } else {
+        trueClusters++;
+        crisisHitCount[matchedEpId] = (crisisHitCount[matchedEpId] || 0) + 1;
+      }
+    }
+
+    let dupAlerts = 0;
+    for (const k in crisisHitCount) if (crisisHitCount[k] > 1) dupAlerts += (crisisHitCount[k] - 1);
+
+    let sumAl = 0;
+    for (let i = 0; i < T; i++) sumAl += al[i];
+    const occupancy = (sumAl / T) * 100;
+    const precision = clusters.length > 0 ? (trueClusters / clusters.length) * 100 : 0;
+    const faPerYear = falseClusters / evalYears;
+    const hardFaPerYear = hardFalseClusters / evalYears;
+
+    let avgOppCost = 0;
+    if (oppCosts.length > 0) {
+      let sum = 0;
+      for (let i = 0; i < oppCosts.length; i++) sum += oppCosts[i];
+      avgOppCost = (sum / oppCosts.length) * 100;
+    }
+
+    leads.sort((a, b) => a - b);
+    const medianLead = leads.length > 0 ? leads[Math.floor(leads.length / 2)] : 0;
+    const utility = 10.0 * earlyCount - 2.0 * falseClusters - 0.05 * falseWarningDays - 1.0 * dupAlerts - 2.0 * lateCount;
+
+    return {
+      alerts: al, clusters, earlyCount, lateCount, reactCount, missCount,
+      totalCrises: episodes.length, occupancy, totalEpisodes: clusters.length,
+      trueEpisodes: trueClusters, falseEpisodes: falseClusters, hardFalseEpisodes: hardFalseClusters,
+      faPerYear, hardFaPerYear, precision, medianLead, oppCost: avgOppCost, utility, crisisResults
+    };
+  }
+
+  function updateUI(res) {
+    if (!res) return;
+
+    kpRecall.innerHTML = `${res.earlyCount} / ${res.totalCrises} <small style="font-size:1.05rem; color:var(--fe-accent);">(${((res.earlyCount / res.totalCrises) * 100).toFixed(1)}%)</small>`;
+    const ci = wilson(res.earlyCount, res.totalCrises);
+    kpCi.textContent = `[${(ci[0] * 100).toFixed(1)}%, ${(ci[1] * 100).toFixed(1)}%]`;
+    kpMiss.textContent = res.missCount;
+    kpLate.textContent = res.lateCount;
+    kpReact.textContent = res.reactCount;
+
+    kpRecallBadge.className = res.earlyCount >= 15 ? "fe-badge-metric fe-b-good" : "fe-badge-metric fe-b-warn";
+    kpRecallBadge.textContent = res.earlyCount >= 15 ? "Target Met" : "Sub-Optimal";
+
+    kpHardFa.innerHTML = `${res.hardFaPerYear.toFixed(2)} <small style="font-size:0.85rem; color:var(--fe-faint);">/ yr</small>`;
+    kpHardEp.textContent = res.hardFalseEpisodes;
+    kpTotFa.textContent = `${res.faPerYear.toFixed(2)}/yr`;
+    kpFalseEp.textContent = res.falseEpisodes;
+    kpHardFaBadge.className = res.hardFaPerYear <= 1.0 ? "fe-badge-metric fe-b-good" : "fe-badge-metric fe-b-alert";
+
+    kpOcc.textContent = `${res.occupancy.toFixed(2)}%`;
+    kpOccBadge.className = res.occupancy <= 13.0 ? "fe-badge-metric fe-b-good" : "fe-badge-metric fe-b-warn";
+
+    kpPrec.textContent = `${res.precision.toFixed(1)}%`;
+    kpTrueEp.textContent = res.trueEpisodes;
+    kpTotEp.textContent = res.totalEpisodes;
+    kpPrecBadge.className = res.precision >= 50.0 ? "fe-badge-metric fe-b-good" : "fe-badge-metric fe-b-warn";
+
+    kpLead.innerHTML = `${res.medianLead.toFixed(1)} <small style="font-size:0.85rem; color:var(--fe-faint);">days</small>`;
+    kpOpp.textContent = `${res.oppCost >= 0 ? '+' : ''}${res.oppCost.toFixed(2)}%`;
+    kpUtil.textContent = `${res.utility >= 0 ? '+' : ''}${res.utility.toFixed(2)}`;
+
+    renderCrisisScoreboard(res.crisisResults);
+    currentAlerts = res.alerts;
+    drawTimeline();
+  }
+
+  function renderCrisisScoreboard(crises) {
+    crGrid.innerHTML = "";
+    crises.forEach(cr => {
+      const card = document.createElement("div");
+      card.className = "fe-cr-card";
+      let bClass = "fe-b-good", bLbl = "Early Hit", lTxt = `${cr.leadDays}d early`;
+
+      if (cr.status === "LATE") { bClass = "fe-b-warn"; bLbl = "Late"; lTxt = `${cr.leadDays}d late window`; }
+      else if (cr.status === "REACTIVE") { bClass = "fe-b-alert"; bLbl = "Reactive"; lTxt = "Post-onset"; }
+      else if (cr.status === "MISSED") { bClass = "fe-b-alert"; bLbl = "Missed"; lTxt = "No warning"; }
+
+      card.innerHTML = `
+        <div class="fe-cr-head">
+          <div>
+            <div class="fe-cr-name">${cr.name}</div>
+            <div class="fe-cr-date">${cr.onset} &rarr; ${cr.trough}</div>
+          </div>
+          <span class="fe-cr-dd">${(cr.dd * 100).toFixed(1)}%</span>
+        </div>
+        <div class="fe-cr-foot">
+          <span class="fe-badge-metric ${bClass}">${bLbl}</span>
+          <span style="font-family:var(--fe-mono); font-size:0.75rem; color:var(--fe-t2);">${lTxt}</span>
+        </div>
+      `;
+      crGrid.appendChild(card);
+    });
+  }
+
+  function drawTimeline(hoverIdx = -1) {
+    if (!canvas || !series || series.length === 0) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvasWrap.getBoundingClientRect();
+    const w = rect.width, h = rect.height;
+
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
+
+    const padL = 55, padR = 15, padT = 15, padB = 30;
+    const cW = w - padL - padR, cH = h - padT - padB;
+
+    let minP = Infinity, maxP = -Infinity;
+    for (let i = 0; i < T; i++) {
+      if (series[i][1] < minP) minP = series[i][1];
+      if (series[i][1] > maxP) maxP = series[i][1];
+    }
+    const logMin = Math.log(minP * 0.9), logMax = Math.log(maxP * 1.1);
+    function getX(i) { return padL + (i / (T - 1)) * cW; }
+    function getY(p) { return padT + cH - ((Math.log(p) - logMin) / (logMax - logMin)) * cH; }
+
+    // Shaded Alert Bands
+    if (currentAlerts) {
+      ctx.fillStyle = "rgba(163, 64, 47, 0.2)";
+      let inBand = false, sX = 0;
+      for (let i = 0; i < T; i++) {
+        if (currentAlerts[i] === 1) {
+          if (!inBand) { inBand = true; sX = getX(i); }
+        } else {
+          if (inBand) { inBand = false; ctx.fillRect(sX, padT, Math.max(2, getX(i) - sX), cH); }
+        }
+      }
+      if (inBand) ctx.fillRect(sX, padT, Math.max(2, getX(T - 1) - sX), cH);
+    }
+
+    // Grid lines
+    ctx.strokeStyle = "rgba(27, 25, 23, 0.08)";
+    ctx.lineWidth = 1;
+    ctx.font = "10.5px 'IBM Plex Mono', monospace";
+    ctx.fillStyle = "rgba(27, 25, 23, 0.5)";
+
+    [5000, 10000, 20000, 40000].forEach(val => {
+      if (val >= minP && val <= maxP) {
+        const y = getY(val);
+        ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+        ctx.fillText(val.toLocaleString(), 8, y + 3);
+      }
+    });
+
+    // Years
+    ["2008", "2011", "2014", "2017", "2020", "2023", "2026"].forEach(yr => {
+      for (let i = 0; i < T; i++) {
+        if (series[i][0].startsWith(yr + "-01")) {
+          const x = getX(i);
+          ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + cH + 4); ctx.stroke();
+          ctx.fillText(yr, x - 12, padT + cH + 18);
+          break;
+        }
+      }
+    });
+
+    // Price Line
+    ctx.beginPath(); ctx.strokeStyle = "#126B75"; ctx.lineWidth = 1.75;
+    for (let i = 0; i < T; i++) {
+      const x = getX(i), y = getY(series[i][1]);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Crisis Markers
+    episodes.forEach(ep => {
+      const x = getX(ep.onset_idx), y = getY(series[ep.onset_idx][1]);
+      ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = "#3F6B52"; ctx.fill();
+      ctx.strokeStyle = "white"; ctx.lineWidth = 1.5; ctx.stroke();
+    });
+
+    // Scrubber
+    if (hoverIdx >= 0 && hoverIdx < T) {
+      const hX = getX(hoverIdx), hY = getY(series[hoverIdx][1]);
+      ctx.strokeStyle = "rgba(25, 44, 60, 0.5)"; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(hX, padT); ctx.lineTo(hX, padT + cH); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath(); ctx.arc(hX, hY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#A3402F"; ctx.fill();
+      ctx.strokeStyle = "white"; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+
+  canvasWrap.addEventListener('mousemove', e => {
+    if (!series || series.length === 0) return;
+    const rect = canvasWrap.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const padL = 55, padR = 15;
+    const cW = rect.width - padL - padR;
+
+    if (x < padL || x > rect.width - padR) {
+      tooltip.style.display = "none"; drawTimeline(-1); return;
+    }
+
+    const ratio = Math.max(0, Math.min(1, (x - padL) / cW));
+    const idx = Math.floor(ratio * (T - 1));
+    const row = series[idx];
+    drawTimeline(idx);
+
+    const isAl = currentAlerts && currentAlerts[idx] === 1;
+    tooltip.style.display = "block";
+    tooltip.style.left = `${Math.min(rect.width - 210, Math.max(10, x - 100))}px`;
+    tooltip.innerHTML = `
+      <strong>${row[0]}</strong><br>
+      EGX 30: <b>${row[1].toLocaleString()}</b><br>
+      Fragility: <b>${row[2].toFixed(3)}</b> | A: ${row[4].toFixed(2)} B: ${row[5].toFixed(2)}<br>
+      Status: <b style="color:${isAl ? '#A3402F' : '#3F6B52'}">${isAl ? 'RED ALERT' : 'NORMAL'}</b>
+    `;
+  });
+
+  canvasWrap.addEventListener('mouseleave', () => {
+    tooltip.style.display = "none"; drawTimeline(-1);
+  });
+
+  function recompute() {
+    const thEnter = parseFloat(slThEnter.value);
+    const thExit = parseFloat(slThExit.value);
+    const cooldown = parseInt(slCooldown.value);
+    const minHold = parseInt(slMinHold.value);
+    const maxHold = parseInt(slMaxHold.value);
+    const minStress = parseInt(slStress.value);
+    const minSlope = parseFloat(slSlope.value);
+    const useTrans = chkTrans.checked;
+
+    vThEnter.textContent = thEnter.toFixed(3);
+    vThExit.textContent = thExit.toFixed(3);
+    vCooldown.textContent = `${cooldown} days`;
+    vHold.textContent = `${minHold} – ${maxHold} days`;
+    vStress.textContent = `${minStress} group${minStress !== 1 ? 's' : ''}`;
+    vSlope.textContent = minSlope.toFixed(3);
+
+    const res = simulate(thEnter, thExit, minHold, maxHold, cooldown, minStress, minSlope, useTrans);
+    updateUI(res);
+  }
+
+  [slThEnter, slThExit, slCooldown, slMinHold, slMaxHold, slStress, slSlope].forEach(s => s.addEventListener('input', recompute));
+  chkTrans.addEventListener('change', recompute);
+
+  // Presets
+  document.querySelectorAll('.fe-btn-preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.fe-btn-preset').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      const p = btn.dataset.p;
+      if (p === 'v5-rec') {
+        slThEnter.value = 0.920; slThExit.value = 0.870; slCooldown.value = 35;
+        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = -0.005; chkTrans.checked = true;
+      } else if (p === 'v5-m16') {
+        slThEnter.value = 0.925; slThExit.value = 0.875; slCooldown.value = 20;
+        slMinHold.value = 5; slMaxHold.value = 12; slStress.value = 1; slSlope.value = 0.000; chkTrans.checked = true;
+      } else if (p === 'v5-sel') {
+        slThEnter.value = 0.935; slThExit.value = 0.885; slCooldown.value = 50;
+        slMinHold.value = 5; slMaxHold.value = 10; slStress.value = 1; slSlope.value = 0.000; chkTrans.checked = true;
+      } else if (p === 'v4-base') {
+        slThEnter.value = 0.920; slThExit.value = 0.920; slCooldown.value = 20;
+        slMinHold.value = 8; slMaxHold.value = 8; slStress.value = 0; slSlope.value = -0.050; chkTrans.checked = false;
+      } else if (p === 'b1-vol') {
+        slThEnter.value = 0.880; slThExit.value = 0.880; slCooldown.value = 0;
+        slMinHold.value = 1; slMaxHold.value = 15; slStress.value = 0; slSlope.value = -0.050; chkTrans.checked = false;
+      }
+      recompute();
+    });
+  });
+
+  // What-If Scenarios
+  document.querySelectorAll('.fe-btn-sc').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.fe-btn-sc').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      const sc = btn.dataset.sc;
+      const pill = document.getElementById('livePill');
+      const scVal = document.getElementById('liveScore');
+      const bar = document.getElementById('liveBar');
+      const ea = document.getElementById('liveEngineA');
+      const eb = document.getElementById('liveEngineB');
+      const str = document.getElementById('liveStressCount');
+      const tr = document.getElementById('liveTransmission');
+      const f5 = document.getElementById('fwd5');
+      const f25 = document.getElementById('fwd25');
+
+      if (sc === 'real') {
+        pill.className = "fe-status-pill fe-pill-green";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#3F6B52;"></span> Normal / Green Regime';
+        scVal.textContent = "0.45"; bar.style.width = "45.3%";
+        ea.textContent = "0.4528"; eb.textContent = "0.2505";
+        str.textContent = "1 / 7 Groups"; tr.textContent = "Guarded"; tr.style.color = "var(--fe-up)";
+        f5.textContent = "3.2%"; f25.textContent = "9.8% (Benign)"; f25.style.color = "var(--fe-up)";
+      } else if (sc === 'vix') {
+        pill.className = "fe-status-pill fe-pill-amber";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#F59E0B;"></span> Yellow Watch (Untransmitted)';
+        scVal.textContent = "0.88"; bar.style.width = "88.0%";
+        ea.textContent = "0.4810"; eb.textContent = "0.8850";
+        str.textContent = "2 / 7 Groups"; tr.textContent = "Blocked by Guard"; tr.style.color = "var(--fe-amber)";
+        f5.textContent = "12.4%"; f25.textContent = "22.5% (Watch)"; f25.style.color = "var(--fe-amber)";
+      } else if (sc === 'fx') {
+        pill.className = "fe-status-pill fe-pill-amber";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#F59E0B;"></span> Yellow Watch (Macro Strain)';
+        scVal.textContent = "0.84"; bar.style.width = "84.0%";
+        ea.textContent = "0.8420"; eb.textContent = "0.6200";
+        str.textContent = "4 / 7 Groups"; tr.textContent = "Active Strain"; tr.style.color = "var(--fe-amber)";
+        f5.textContent = "18.2%"; f25.textContent = "38.6% (Elevated)"; f25.style.color = "var(--fe-amber)";
+      } else if (sc === 'decay') {
+        pill.className = "fe-status-pill fe-pill-red";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Structural Collapse)';
+        scVal.textContent = "0.94"; bar.style.width = "94.0%";
+        ea.textContent = "0.9480"; eb.textContent = "0.5100";
+        str.textContent = "3 / 7 Groups"; tr.textContent = "Confirmed Internal"; tr.style.color = "var(--fe-down)";
+        f5.textContent = "28.5%"; f25.textContent = "74.2% (High Hazard)"; f25.style.color = "var(--fe-down)";
+      } else if (sc === 'cascade') {
+        pill.className = "fe-status-pill fe-pill-red";
+        pill.innerHTML = '<span style="width:6px; height:6px; border-radius:50%; background:#A3402F;"></span> Red Alert (Dual Engine Shock)';
+        scVal.textContent = "0.99"; bar.style.width = "99.0%";
+        ea.textContent = "0.9920"; eb.textContent = "0.9850";
+        str.textContent = "6 / 7 Groups"; tr.textContent = "Full Transmission"; tr.style.color = "var(--fe-down)";
+        f5.textContent = "48.9%"; f25.textContent = "91.5% (Imminent Crash)"; f25.style.color = "var(--fe-down)";
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => drawTimeline());
+
+  // Resilient data loader for esthmr.com
+  function loadData(url) {
+    return fetch(url).then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    });
+  }
+
+  loadData('/data/v1/backtest/v5_simulation_series.json')
+    .catch(() => loadData('../data/v1/backtest/v5_simulation_series.json'))
+    .catch(() => loadData('data/v1/backtest/v5_simulation_series.json'))
+    .then(d => {
+      series = d.series;
+      if (d.episodes && d.episodes.length > 0) {
+        episodes = d.episodes.map(ep => {
+          const match = CRISIS_METADATA.find(m => m.id === ep.episode_id);
+          return {
+            id: ep.episode_id,
+            name: match ? match.name : `Episode ${ep.episode_id}`,
+            onset: ep.onset_date,
+            trough: ep.trough_date,
+            dd: ep.drawdown,
+            onset_idx: ep.onset_idx_test,
+            trough_idx: ep.trough_idx_test
+          };
+        });
+      }
+      T = series.length;
+      evalYears = T / 250.0;
+      recompute();
+    })
+    .catch(err => {
+      console.warn("Could not load simulation series:", err);
+    });
+
+})();
+</script>
+</body>
+</html>

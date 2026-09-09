@@ -1,0 +1,7 @@
+Tier,TargetBudget,Threshold,RealizedOccupancy,EarlyRecall,EarlyHits,BroadRecall,FalseAlarmsPerYear,MedianLeadDays,MeanOppCostPct
+Budget 5.0% (Ultra-Conservative),0.05,0.985,0.0549,0.4706,8/17,0.4706,0.89,15.5,3.05
+Budget 7.5% (Conservative),0.075,0.97,0.0708,0.5294,9/17,0.5294,1.22,16.0,2.87
+Budget 10.0% (Selective),0.1,0.955,0.0974,0.7059,12/17,0.7647,1.49,15.0,1.09
+Budget 12.0% (Balanced Early),0.12,0.94,0.1116,0.7647,13/17,0.8824,1.83,19.0,0.45
+Budget 15.0% (Recommended Production),0.15,0.92,0.1346,0.9412,16/17,1.0,2.32,18.5,1.46
+Budget 20.0% (High-Sensitivity),0.2,0.9,0.1948,0.9412,16/17,1.0,2.77,20.0,3.1

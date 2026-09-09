@@ -1,0 +1,8 @@
+model_name,early_recall,early_count,total_crises,occupancy_pct,total_episodes,true_episodes,false_episodes,hard_false_episodes,near_miss_episodes,false_alarms_per_year,hard_false_alarms_per_year,event_precision_pct,median_lead_days,opportunity_cost_pct,utility_score
+V5: Ultra-Selective (0.61 Hard FA/yr),0.8235,14,17,7.48,39,20,19,11,8,1.05,0.61,51.3,17.0,-0.15,86.45
+V5: Selective Lean (0.77 Hard FA/yr),0.8235,14,17,7.72,40,20,20,14,6,1.11,0.77,50.0,18.5,1.61,86.0
+V5: Recommended Production (1.00 Hard FA/yr),0.8824,15,17,11.49,51,27,24,18,6,1.33,1.0,52.9,16.0,0.38,76.55
+V5: Balanced High-Lead,0.8824,15,17,10.65,63,32,31,22,9,1.72,1.22,50.8,16.0,0.47,58.9
+V5: Matched-16 Recall (1.44 Hard FA/yr),0.9412,16,17,12.64,64,31,33,26,7,1.83,1.44,48.4,18.5,1.03,62.8
+V5: High-Sensitivity (16/17 Early),0.9412,16,17,12.39,75,36,39,29,10,2.16,1.6,48.0,17.0,1.36,46.3
+V4: Benchmark Baseline (2.32 FA/yr),0.9412,16,17,13.46,76,34,42,35,7,2.32,1.94,44.7,18.5,1.46,40.2

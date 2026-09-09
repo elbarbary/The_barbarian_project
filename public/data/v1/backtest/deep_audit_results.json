@@ -1,0 +1,744 @@
+{
+  "timing_summary": {
+    "ElasticNet_15y": {
+      "early": 11,
+      "late": 0,
+      "reactive": 1,
+      "missed": 5
+    },
+    "B1_Vol": {
+      "early": 13,
+      "late": 0,
+      "reactive": 1,
+      "missed": 3
+    },
+    "B2_Drawdown": {
+      "early": 15,
+      "late": 0,
+      "reactive": 2,
+      "missed": 0
+    },
+    "B4_Composite": {
+      "early": 11,
+      "late": 0,
+      "reactive": 2,
+      "missed": 4
+    }
+  },
+  "event_timing_table": [
+    {
+      "onset_date": "2008-05-05",
+      "trough_date": "2008-07-06",
+      "drawdown": -0.20181187985257631,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2008-05-26",
+          "lead_days": -15,
+          "category": "REACTIVE"
+        },
+        "B1_Vol": {
+          "first_date": "2008-02-05",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2008-05-13",
+          "lead_days": -6,
+          "category": "REACTIVE"
+        },
+        "B4_Composite": {
+          "first_date": "2008-05-15",
+          "lead_days": -8,
+          "category": "REACTIVE"
+        }
+      }
+    },
+    {
+      "onset_date": "2008-08-06",
+      "trough_date": "2008-10-26",
+      "drawdown": -0.4884731683152781,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2008-05-26",
+          "lead_days": 50,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2008-05-15",
+          "lead_days": 57,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2008-05-13",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2008-05-15",
+          "lead_days": 57,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2009-01-05",
+      "trough_date": "2009-02-05",
+      "drawdown": -0.28363783162273204,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2008-09-29",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2008-09-29",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2008-09-29",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2008-09-29",
+          "lead_days": 60,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2009-06-16",
+      "trough_date": "2009-07-13",
+      "drawdown": -0.18034225812620097,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2009-04-27",
+          "lead_days": 36,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B2_Drawdown": {
+          "first_date": "2009-03-22",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        }
+      }
+    },
+    {
+      "onset_date": "2009-10-26",
+      "trough_date": "2009-11-30",
+      "drawdown": -0.19050561759005735,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2009-07-29",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B2_Drawdown": {
+          "first_date": "2009-11-17",
+          "lead_days": -16,
+          "category": "REACTIVE"
+        },
+        "B4_Composite": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        }
+      }
+    },
+    {
+      "onset_date": "2010-04-27",
+      "trough_date": "2010-05-25",
+      "drawdown": -0.21906237504998005,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2010-01-31",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B2_Drawdown": {
+          "first_date": "2010-03-15",
+          "lead_days": 28,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        }
+      }
+    },
+    {
+      "onset_date": "2011-01-05",
+      "trough_date": "2011-01-27",
+      "drawdown": -0.21689612657255275,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2010-10-07",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2011-01-26",
+          "lead_days": -13,
+          "category": "REACTIVE"
+        },
+        "B2_Drawdown": {
+          "first_date": "2010-10-10",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2011-01-26",
+          "lead_days": -13,
+          "category": "REACTIVE"
+        }
+      }
+    },
+    {
+      "onset_date": "2011-06-19",
+      "trough_date": "2011-08-09",
+      "drawdown": -0.20434818917252573,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2011-03-23",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2011-01-27",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2011-01-27",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2011-01-27",
+          "lead_days": 60,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2011-09-12",
+      "trough_date": "2011-11-22",
+      "drawdown": -0.20305147273984459,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2011-06-14",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2011-07-18",
+          "lead_days": 36,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2011-06-14",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2011-07-18",
+          "lead_days": 36,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2012-03-22",
+      "trough_date": "2012-06-19",
+      "drawdown": -0.20559848561411143,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2011-12-25",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2012-02-14",
+          "lead_days": 27,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2011-12-25",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        }
+      }
+    },
+    {
+      "onset_date": "2012-09-26",
+      "trough_date": "2012-11-28",
+      "drawdown": -0.19331288456609463,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2012-06-28",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2012-06-28",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2012-06-28",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2012-06-28",
+          "lead_days": 60,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2015-05-24",
+      "trough_date": "2015-08-18",
+      "drawdown": -0.1889393899529923,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "2015-04-07",
+          "lead_days": 31,
+          "category": "EARLY"
+        },
+        "B1_Vol": {
+          "first_date": "2015-05-03",
+          "lead_days": 15,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2015-04-02",
+          "lead_days": 34,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2015-05-03",
+          "lead_days": 15,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2015-10-21",
+      "trough_date": "2016-01-13",
+      "drawdown": -0.19088320202786757,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B1_Vol": {
+          "first_date": "2015-07-21",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2015-07-16",
+          "lead_days": 60,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2015-07-21",
+          "lead_days": 59,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2018-08-30",
+      "trough_date": "2018-10-25",
+      "drawdown": -0.18649531744142978,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B1_Vol": {
+          "first_date": "2018-05-29",
+          "lead_days": 59,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2018-05-31",
+          "lead_days": 57,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2018-05-31",
+          "lead_days": 57,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2020-02-09",
+      "trough_date": "2020-03-09",
+      "drawdown": -0.22148474933797557,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B1_Vol": {
+          "first_date": "2020-01-05",
+          "lead_days": 24,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2019-12-02",
+          "lead_days": 47,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2020-01-05",
+          "lead_days": 24,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2022-03-23",
+      "trough_date": "2022-06-22",
+      "drawdown": -0.18145660176210476,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B1_Vol": {
+          "first_date": "2022-02-24",
+          "lead_days": 19,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2022-03-07",
+          "lead_days": 12,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2022-03-07",
+          "lead_days": 12,
+          "category": "EARLY"
+        }
+      }
+    },
+    {
+      "onset_date": "2024-03-11",
+      "trough_date": "2024-03-31",
+      "drawdown": -0.1946863791847887,
+      "alerts": {
+        "ElasticNet_15y": {
+          "first_date": "None",
+          "lead_days": -999,
+          "category": "MISSED"
+        },
+        "B1_Vol": {
+          "first_date": "2024-01-31",
+          "lead_days": 28,
+          "category": "EARLY"
+        },
+        "B2_Drawdown": {
+          "first_date": "2024-02-06",
+          "lead_days": 24,
+          "category": "EARLY"
+        },
+        "B4_Composite": {
+          "first_date": "2024-02-06",
+          "lead_days": 24,
+          "category": "EARLY"
+        }
+      }
+    }
+  ],
+  "mcnemar_tests": {
+    "b1": {
+      "b": 4,
+      "c": 6,
+      "p_val": 0.75390625
+    },
+    "b4": {
+      "b": 5,
+      "c": 5,
+      "p_val": 1.0
+    },
+    "b2": {
+      "b": 1,
+      "c": 5,
+      "p_val": 0.21875
+    }
+  },
+  "bootstrap_diff": {
+    "delta_b4_ci": [
+      -0.3529411764705882,
+      0.3529411764705882
+    ],
+    "delta_b1_ci": [
+      -0.47058823529411764,
+      0.23529411764705876
+    ]
+  },
+  "occupancy_sweep": {
+    "ElasticNet_15y": [
+      {
+        "target_occ": 0.05,
+        "actual_occ": 0.050188996220075596,
+        "early_recall": 0.23529411764705882,
+        "full_recall": 0.47058823529411764,
+        "median_lead": 47.5,
+        "false_alarms_yr": 0.8399832003359934,
+        "opp_cost": -0.0008094561080798715
+      },
+      {
+        "target_occ": 0.1,
+        "actual_occ": 0.1001679966400672,
+        "early_recall": 0.4117647058823529,
+        "full_recall": 0.5882352941176471,
+        "median_lead": 58.0,
+        "false_alarms_yr": 1.2074758504829906,
+        "opp_cost": 0.005839180068325805
+      },
+      {
+        "target_occ": 0.15,
+        "actual_occ": 0.1501469970600588,
+        "early_recall": 0.47058823529411764,
+        "full_recall": 0.5882352941176471,
+        "median_lead": 59.5,
+        "false_alarms_yr": 1.2074758504829906,
+        "opp_cost": 0.016920269828139524
+      },
+      {
+        "target_occ": 0.2,
+        "actual_occ": 0.2001259974800504,
+        "early_recall": 0.5294117647058824,
+        "full_recall": 0.7058823529411765,
+        "median_lead": 59.5,
+        "false_alarms_yr": 2.309953800923982,
+        "opp_cost": 0.01808227587763687
+      },
+      {
+        "target_occ": 0.25,
+        "actual_occ": 0.250104997900042,
+        "early_recall": 0.7058823529411765,
+        "full_recall": 0.7647058823529411,
+        "median_lead": 60.0,
+        "false_alarms_yr": 2.7299454010919786,
+        "opp_cost": 0.009869638414033235
+      },
+      {
+        "target_occ": 0.3,
+        "actual_occ": 0.3000839983200336,
+        "early_recall": 0.7058823529411765,
+        "full_recall": 0.8235294117647058,
+        "median_lead": 60.0,
+        "false_alarms_yr": 2.782444351112978,
+        "opp_cost": 0.009805702918726796
+      }
+    ],
+    "ElasticNet_NoDecay": [
+      {
+        "target_occ": 0.05,
+        "actual_occ": 0.050188996220075596,
+        "early_recall": 0.17647058823529413,
+        "full_recall": 0.47058823529411764,
+        "median_lead": 46.5,
+        "false_alarms_yr": 0.7349853002939942,
+        "opp_cost": 0.016427786691451982
+      },
+      {
+        "target_occ": 0.1,
+        "actual_occ": 0.1001679966400672,
+        "early_recall": 0.47058823529411764,
+        "full_recall": 0.5294117647058824,
+        "median_lead": 52.0,
+        "false_alarms_yr": 1.2074758504829906,
+        "opp_cost": 0.005342402579858509
+      },
+      {
+        "target_occ": 0.15,
+        "actual_occ": 0.1501469970600588,
+        "early_recall": 0.47058823529411764,
+        "full_recall": 0.5882352941176471,
+        "median_lead": 59.0,
+        "false_alarms_yr": 1.3649727005459893,
+        "opp_cost": 0.016068132139004217
+      },
+      {
+        "target_occ": 0.2,
+        "actual_occ": 0.2001259974800504,
+        "early_recall": 0.5882352941176471,
+        "full_recall": 0.7647058823529411,
+        "median_lead": 59.0,
+        "false_alarms_yr": 1.8374632507349855,
+        "opp_cost": 0.012863892618174961
+      },
+      {
+        "target_occ": 0.25,
+        "actual_occ": 0.250104997900042,
+        "early_recall": 0.7058823529411765,
+        "full_recall": 0.7647058823529411,
+        "median_lead": 60.0,
+        "false_alarms_yr": 2.2049559008819823,
+        "opp_cost": 0.005867422255569711
+      },
+      {
+        "target_occ": 0.3,
+        "actual_occ": 0.3000839983200336,
+        "early_recall": 0.7647058823529411,
+        "full_recall": 0.8235294117647058,
+        "median_lead": 60.0,
+        "false_alarms_yr": 2.782444351112978,
+        "opp_cost": 0.014410258916388105
+      }
+    ],
+    "B1_Vol": [
+      {
+        "target_occ": 0.05,
+        "actual_occ": 0.050188996220075596,
+        "early_recall": 0.11764705882352941,
+        "full_recall": 0.23529411764705882,
+        "median_lead": 59.5,
+        "false_alarms_yr": 0.4199916001679967,
+        "opp_cost": 0.038153357154319445
+      },
+      {
+        "target_occ": 0.1,
+        "actual_occ": 0.10037799244015119,
+        "early_recall": 0.35294117647058826,
+        "full_recall": 0.6470588235294118,
+        "median_lead": 43.0,
+        "false_alarms_yr": 0.6824863502729946,
+        "opp_cost": 0.0072319823801073
+      },
+      {
+        "target_occ": 0.15,
+        "actual_occ": 0.15035699286014279,
+        "early_recall": 0.35294117647058826,
+        "full_recall": 0.7058823529411765,
+        "median_lead": 55.0,
+        "false_alarms_yr": 1.1024779504409912,
+        "opp_cost": 0.03422297187925006
+      },
+      {
+        "target_occ": 0.2,
+        "actual_occ": 0.2001259974800504,
+        "early_recall": 0.4117647058823529,
+        "full_recall": 0.7647058823529411,
+        "median_lead": 56.0,
+        "false_alarms_yr": 1.2074758504829906,
+        "opp_cost": 0.03586601997802626
+      },
+      {
+        "target_occ": 0.25,
+        "actual_occ": 0.250104997900042,
+        "early_recall": 0.5294117647058824,
+        "full_recall": 0.8235294117647058,
+        "median_lead": 60.0,
+        "false_alarms_yr": 1.5749685006299876,
+        "opp_cost": 0.0495571137998272
+      },
+      {
+        "target_occ": 0.3,
+        "actual_occ": 0.3000839983200336,
+        "early_recall": 0.6470588235294118,
+        "full_recall": 0.8235294117647058,
+        "median_lead": 60.0,
+        "false_alarms_yr": 1.7324653506929864,
+        "opp_cost": 0.04267519040883777
+      }
+    ],
+    "B4_Composite": []
+  },
+  "feature_timeline": [
+    {
+      "feature": "f1_breadth",
+      "first_valid_date": "1998-01-04",
+      "oos_zero_imputed_pct": 0.0
+    },
+    {
+      "feature": "f2_gdr_basis",
+      "first_valid_date": "2001-05-15",
+      "oos_zero_imputed_pct": 0.0
+    },
+    {
+      "feature": "f3_rate_mom",
+      "first_valid_date": "2006-01-02",
+      "oos_zero_imputed_pct": 18.059638807223855
+    },
+    {
+      "feature": "f4_fx_vel",
+      "first_valid_date": "2000-01-02",
+      "oos_zero_imputed_pct": 0.8609827803443931
+    },
+    {
+      "feature": "f4_fx_acc",
+      "first_valid_date": "2000-01-02",
+      "oos_zero_imputed_pct": 0.3569928601427972
+    },
+    {
+      "feature": "f5_hhi",
+      "first_valid_date": "1998-01-04",
+      "oos_zero_imputed_pct": 0.0
+    },
+    {
+      "feature": "f6_herding",
+      "first_valid_date": "2001-07-09",
+      "oos_zero_imputed_pct": 0.041999160016799666
+    },
+    {
+      "feature": "f7_panic",
+      "first_valid_date": "1998-02-03",
+      "oos_zero_imputed_pct": 0.0
+    },
+    {
+      "feature": "f8_illiq",
+      "first_valid_date": "1998-01-04",
+      "oos_zero_imputed_pct": 0.0
+    },
+    {
+      "feature": "f9_ratio",
+      "first_valid_date": "1998-03-31",
+      "oos_zero_imputed_pct": 0.041999160016799666
+    },
+    {
+      "feature": "f10_spread",
+      "first_valid_date": "2017-03-29",
+      "oos_zero_imputed_pct": 51.93196136077278
+    }
+  ]
+}

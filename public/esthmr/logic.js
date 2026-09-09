@@ -3913,10 +3913,10 @@ export class Component extends Base {
       ['watchlist', ar?'المتابَعة':'Watchlist', followed.length ? String(followed.length) : ''],
       ['company', ar?'شركة':'Company', st.ticker || ''],
       ['sectors', ar?'القطاعات':'Sectors', sectorCards.length ? String(sectorCards.length) : ''],
-      ['valuation', ar?'التقييم والديون':'Valuation & Debt', ''],
-      ['pairs', ar?'مقارنة الأزواج':'Pairs & Spreads', ''],
-      // "Calendar" described the grid; what a reader comes here for is the
-      // filings, so it is named for them in the rail.
+      ['valuation', ar ? 'التقييم والديون' : 'Valuation & Debt', ''],
+      ['pairs', ar ? 'فروق الأسعار والتسوية' : 'Pairs & Arbitrage', ''],
+      ['fragility', ar ? 'محرّك الأزمات V5' : 'Crash Fragility V5', ''],
+      ['today', ar ? 'الموجز' : 'Today', ''],
       ['calendar', ar ? 'الإفصاحات' : 'Disclosures', ''],
       // The crossings were a block on Today under the news. They are a
       // different claim — one company in more than one feed at once — and
@@ -3934,7 +3934,7 @@ export class Component extends Base {
     ];
     const nav = navDef.map(([id,label,meta]) => {
       const on = st.screen === id;
-      return { label, meta, icon: ICON[id], go: this.go(id),
+      return { label, meta, icon: ICON[id] || ICON.exchange, go: id === 'fragility' ? () => { window.location.href = 'fragility.html'; } : this.go(id),
         color: on ? 'var(--ink)' : 'var(--t2)', weight: on ? 600 : 400,
         bg: on ? 'var(--activeBg)' : 'transparent',
         shadow: on ? 'var(--shPill)' : 'none',
@@ -3945,7 +3945,7 @@ export class Component extends Base {
     // Organize by the reader's task, keeping every existing screen reachable.
     const groups = [
       { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home'] },
-      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'company', 'investors', 'exchange'] },
+      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange'] },
       { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
       { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
       { id: 'tools', label: ar ? 'الأدوات' : 'Tools', screens: ['tools'] },
@@ -3956,7 +3956,7 @@ export class Component extends Base {
       go: this.go(g.id) }));
     const secondaryNav = navDef.filter(([id]) => activeGroup.screens.includes(id)
       && (id !== 'company' || st.ticker)).map(([id, label]) => ({
-        label, current: st.screen === id ? 'page' : null, go: this.go(id),
+        label, current: st.screen === id ? 'page' : null, go: id === 'fragility' ? () => { window.location.href = 'fragility.html'; } : this.go(id),
       }));
 
     const marketExplorer = explorer(this, D.companies, ar, D.trends);
@@ -4008,6 +4008,7 @@ export class Component extends Base {
         })),
       quickActions: [
         {label: ar ? 'استكشف الشركات' : 'Explore companies', note: ar ? 'أرقام، رسوم، وإفصاحات' : 'Figures, charts & filings', icon: ICON.market, go: this.go('market')},
+        {label: ar ? 'محرّك الأزمات والهشاشة' : 'Crash Fragility Engine', note: ar ? 'إنذار مبكر للأزمات V5 ومحاكي الضغوط' : 'Early crash warning V5 & stress simulator', icon: ICON.exchange, go: () => { window.location.href = 'fragility.html'; }},
         {label: ar ? 'اتجاهات الأسعار والقمم' : 'Price Trends & Highs', note: ar ? 'رصد القمم السنوية والزخم' : '52W highs & relative strength', icon: ICON.market, go: () => this.setState({screen:'market', marketMode:'trends', trendFilter:''})},
         {label: ar ? 'خريطة التقييم والديون' : 'Valuation & Debt Map', note: ar ? 'مكررات الربحية مع عبء الديون' : 'P/E multiples factored by debt', icon: ICON.valuation, go: this.go('valuation')},
         {label: ar ? 'مقارنة الأزواج' : 'Pairs & Spreads', note: ar ? 'معايرة الأسهم المتنافسة' : 'Normalize competing peers', icon: ICON.pairs, go: this.go('pairs')},
@@ -4562,7 +4563,8 @@ export class Component extends Base {
       toolsTabs: [
         { id: 'sim', label: ar ? 'محاكي الرسوم والأداء' : 'Trading & Fee Simulator', active: (st.toolsTab || 'sim') === 'sim', go: () => this.setState({ toolsTab: 'sim' }) },
         { id: 'calc', label: ar ? 'حاسبة التوزيعات' : 'Dividend Calculator', active: st.toolsTab === 'calc', go: () => this.setState({ toolsTab: 'calc' }) },
-        { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) }
+        { id: 'guide', label: ar ? 'دليل النسب والمكررات' : 'Valuation Guide', active: st.toolsTab === 'guide', go: () => this.setState({ toolsTab: 'guide' }) },
+        { id: 'fragility', label: ar ? 'محرّك الهشاشة والأزمات' : 'Crash Fragility Engine', active: false, go: () => { window.location.href = 'fragility.html'; } }
       ],
       // The panel is drawn only once its module is here; until then the two
       // flags below carry the wait, so the tab is never a blank frame.

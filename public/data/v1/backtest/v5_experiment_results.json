@@ -1,0 +1,1261 @@
+{
+  "metadata": {
+    "engine_version": "V5 Precision Engine",
+    "eval_period": "2008-01-01 to 2026-03-09",
+    "eval_years": 18.07,
+    "total_sessions": 6986,
+    "total_crises": 17,
+    "evaluation_window": "[T_onset - 25, T_onset - 5]",
+    "recommended_model_name": "V5: Recommended Production (1.00 Hard FA/yr)",
+    "matched_16_model_name": "V5: Matched-16 Recall (1.44 Hard FA/yr)",
+    "high_selectivity_model_name": "V5: Ultra-Selective (0.61 Hard FA/yr)"
+  },
+  "v4_baseline": {
+    "early": 16,
+    "early_recall": 0.9412,
+    "late": 1,
+    "reactive": 0,
+    "miss": 0,
+    "total_crises": 17,
+    "occ": 13.46,
+    "episodes": 76,
+    "true_ep": 34,
+    "false_ep": 42,
+    "hard_false_ep": 35,
+    "near_miss_ep": 7,
+    "false_warning_days": 336,
+    "duplicate_alerts": 17,
+    "fa_yr": 2.32,
+    "hard_fa_yr": 1.94,
+    "precision": 44.7,
+    "lead": 18.5,
+    "opp_cost": 1.46,
+    "utility": 40.2,
+    "wilson_ci_95": [
+      0.7302,
+      0.9895
+    ],
+    "crises": [
+      {
+        "episode_id": 12,
+        "onset_date": "2008-05-05",
+        "trough_date": "2008-07-06",
+        "drawdown": -0.20181185640866295,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2008-03-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 13,
+        "onset_date": "2008-08-06",
+        "trough_date": "2008-10-26",
+        "drawdown": -0.4884731573662303,
+        "category": "EARLY",
+        "lead_days": 6,
+        "first_alert_date": "2008-07-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 14,
+        "onset_date": "2009-01-05",
+        "trough_date": "2009-02-05",
+        "drawdown": -0.2836377802048401,
+        "category": "EARLY",
+        "lead_days": 20,
+        "first_alert_date": "2008-12-01",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 15,
+        "onset_date": "2009-06-16",
+        "trough_date": "2009-07-13",
+        "drawdown": -0.18034227380023127,
+        "category": "EARLY",
+        "lead_days": 20,
+        "first_alert_date": "2009-05-19",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 16,
+        "onset_date": "2009-10-26",
+        "trough_date": "2009-11-30",
+        "drawdown": -0.19050556766987103,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2009-09-16",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 17,
+        "onset_date": "2010-04-27",
+        "trough_date": "2010-05-25",
+        "drawdown": -0.21906237504998005,
+        "category": "EARLY",
+        "lead_days": 9,
+        "first_alert_date": "2010-04-13",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 18,
+        "onset_date": "2011-01-05",
+        "trough_date": "2011-01-27",
+        "drawdown": -0.21689614829403192,
+        "category": "EARLY",
+        "lead_days": 11,
+        "first_alert_date": "2010-12-21",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 19,
+        "onset_date": "2011-06-19",
+        "trough_date": "2011-08-09",
+        "drawdown": -0.2043481608982145,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2011-05-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 20,
+        "onset_date": "2011-09-12",
+        "trough_date": "2011-11-22",
+        "drawdown": -0.2030514381913744,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2011-08-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 21,
+        "onset_date": "2012-03-22",
+        "trough_date": "2012-06-19",
+        "drawdown": -0.20559845473550553,
+        "category": "EARLY",
+        "lead_days": 19,
+        "first_alert_date": "2012-02-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 22,
+        "onset_date": "2012-09-26",
+        "trough_date": "2012-11-28",
+        "drawdown": -0.19331286457556185,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2012-08-22",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 23,
+        "onset_date": "2015-05-24",
+        "trough_date": "2015-08-18",
+        "drawdown": -0.18893935913644677,
+        "category": "LATE",
+        "lead_days": 1,
+        "first_alert_date": "2015-05-21",
+        "is_early": false,
+        "is_detected": true
+      },
+      {
+        "episode_id": 24,
+        "onset_date": "2015-10-21",
+        "trough_date": "2016-01-13",
+        "drawdown": -0.1908832125781612,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2015-09-09",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 25,
+        "onset_date": "2018-08-30",
+        "trough_date": "2018-10-25",
+        "drawdown": -0.18649529637262963,
+        "category": "EARLY",
+        "lead_days": 9,
+        "first_alert_date": "2018-08-13",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 26,
+        "onset_date": "2020-02-09",
+        "trough_date": "2020-03-09",
+        "drawdown": -0.22148472493401417,
+        "category": "EARLY",
+        "lead_days": 23,
+        "first_alert_date": "2020-01-06",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 27,
+        "onset_date": "2022-03-23",
+        "trough_date": "2022-06-22",
+        "drawdown": -0.18145658164177714,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2022-02-27",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 28,
+        "onset_date": "2024-03-11",
+        "trough_date": "2024-03-31",
+        "drawdown": -0.19468640222179578,
+        "category": "EARLY",
+        "lead_days": 8,
+        "first_alert_date": "2024-02-28",
+        "is_early": true,
+        "is_detected": true
+      }
+    ]
+  },
+  "v5_recommended_production": {
+    "early": 15,
+    "early_recall": 0.8824,
+    "late": 1,
+    "reactive": 1,
+    "miss": 0,
+    "total_crises": 17,
+    "occ": 11.49,
+    "episodes": 51,
+    "true_ep": 27,
+    "false_ep": 24,
+    "hard_false_ep": 18,
+    "near_miss_ep": 6,
+    "false_warning_days": 249,
+    "duplicate_alerts": 11,
+    "fa_yr": 1.33,
+    "hard_fa_yr": 1.0,
+    "precision": 52.9,
+    "lead": 16.0,
+    "opp_cost": 0.38,
+    "utility": 76.55,
+    "wilson_ci_95": [
+      0.6566,
+      0.9671
+    ],
+    "crises": [
+      {
+        "episode_id": 12,
+        "onset_date": "2008-05-05",
+        "trough_date": "2008-07-06",
+        "drawdown": -0.20181185640866295,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2008-03-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 13,
+        "onset_date": "2008-08-06",
+        "trough_date": "2008-10-26",
+        "drawdown": -0.4884731573662303,
+        "category": "EARLY",
+        "lead_days": 8,
+        "first_alert_date": "2008-07-27",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 14,
+        "onset_date": "2009-01-05",
+        "trough_date": "2009-02-05",
+        "drawdown": -0.2836377802048401,
+        "category": "EARLY",
+        "lead_days": 14,
+        "first_alert_date": "2008-12-14",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 15,
+        "onset_date": "2009-06-16",
+        "trough_date": "2009-07-13",
+        "drawdown": -0.18034227380023127,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2009-05-12",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 16,
+        "onset_date": "2009-10-26",
+        "trough_date": "2009-11-30",
+        "drawdown": -0.19050556766987103,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2009-09-16",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 17,
+        "onset_date": "2010-04-27",
+        "trough_date": "2010-05-25",
+        "drawdown": -0.21906237504998005,
+        "category": "EARLY",
+        "lead_days": 17,
+        "first_alert_date": "2010-03-30",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 18,
+        "onset_date": "2011-01-05",
+        "trough_date": "2011-01-27",
+        "drawdown": -0.21689614829403192,
+        "category": "EARLY",
+        "lead_days": 5,
+        "first_alert_date": "2010-12-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 19,
+        "onset_date": "2011-06-19",
+        "trough_date": "2011-08-09",
+        "drawdown": -0.2043481608982145,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2011-05-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 20,
+        "onset_date": "2011-09-12",
+        "trough_date": "2011-11-22",
+        "drawdown": -0.2030514381913744,
+        "category": "EARLY",
+        "lead_days": 24,
+        "first_alert_date": "2011-08-04",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 21,
+        "onset_date": "2012-03-22",
+        "trough_date": "2012-06-19",
+        "drawdown": -0.20559845473550553,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2012-02-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 22,
+        "onset_date": "2012-09-26",
+        "trough_date": "2012-11-28",
+        "drawdown": -0.19331286457556185,
+        "category": "EARLY",
+        "lead_days": 5,
+        "first_alert_date": "2012-09-19",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 23,
+        "onset_date": "2015-05-24",
+        "trough_date": "2015-08-18",
+        "drawdown": -0.18893935913644677,
+        "category": "LATE",
+        "lead_days": 1,
+        "first_alert_date": "2015-05-21",
+        "is_early": false,
+        "is_detected": true
+      },
+      {
+        "episode_id": 24,
+        "onset_date": "2015-10-21",
+        "trough_date": "2016-01-13",
+        "drawdown": -0.1908832125781612,
+        "category": "REACTIVE",
+        "lead_days": -31,
+        "first_alert_date": "2015-12-03",
+        "is_early": false,
+        "is_detected": false
+      },
+      {
+        "episode_id": 25,
+        "onset_date": "2018-08-30",
+        "trough_date": "2018-10-25",
+        "drawdown": -0.18649529637262963,
+        "category": "EARLY",
+        "lead_days": 9,
+        "first_alert_date": "2018-08-13",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 26,
+        "onset_date": "2020-02-09",
+        "trough_date": "2020-03-09",
+        "drawdown": -0.22148472493401417,
+        "category": "EARLY",
+        "lead_days": 23,
+        "first_alert_date": "2020-01-06",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 27,
+        "onset_date": "2022-03-23",
+        "trough_date": "2022-06-22",
+        "drawdown": -0.18145658164177714,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2022-02-27",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 28,
+        "onset_date": "2024-03-11",
+        "trough_date": "2024-03-31",
+        "drawdown": -0.19468640222179578,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2024-02-29",
+        "is_early": true,
+        "is_detected": true
+      }
+    ]
+  },
+  "v5_matched_recall": {
+    "early": 16,
+    "early_recall": 0.9412,
+    "late": 1,
+    "reactive": 0,
+    "miss": 0,
+    "total_crises": 17,
+    "occ": 12.64,
+    "episodes": 64,
+    "true_ep": 31,
+    "false_ep": 33,
+    "hard_false_ep": 26,
+    "near_miss_ep": 7,
+    "false_warning_days": 304,
+    "duplicate_alerts": 14,
+    "fa_yr": 1.83,
+    "hard_fa_yr": 1.44,
+    "precision": 48.4,
+    "lead": 18.5,
+    "opp_cost": 1.03,
+    "utility": 62.8,
+    "wilson_ci_95": [
+      0.7302,
+      0.9895
+    ],
+    "crises": [
+      {
+        "episode_id": 12,
+        "onset_date": "2008-05-05",
+        "trough_date": "2008-07-06",
+        "drawdown": -0.20181185640866295,
+        "category": "EARLY",
+        "lead_days": 19,
+        "first_alert_date": "2008-04-03",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 13,
+        "onset_date": "2008-08-06",
+        "trough_date": "2008-10-26",
+        "drawdown": -0.4884731573662303,
+        "category": "EARLY",
+        "lead_days": 22,
+        "first_alert_date": "2008-07-06",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 14,
+        "onset_date": "2009-01-05",
+        "trough_date": "2009-02-05",
+        "drawdown": -0.2836377802048401,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2008-11-24",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 15,
+        "onset_date": "2009-06-16",
+        "trough_date": "2009-07-13",
+        "drawdown": -0.18034227380023127,
+        "category": "EARLY",
+        "lead_days": 12,
+        "first_alert_date": "2009-05-31",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 16,
+        "onset_date": "2009-10-26",
+        "trough_date": "2009-11-30",
+        "drawdown": -0.19050556766987103,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2009-09-16",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 17,
+        "onset_date": "2010-04-27",
+        "trough_date": "2010-05-25",
+        "drawdown": -0.21906237504998005,
+        "category": "EARLY",
+        "lead_days": 21,
+        "first_alert_date": "2010-03-24",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 18,
+        "onset_date": "2011-01-05",
+        "trough_date": "2011-01-27",
+        "drawdown": -0.21689614829403192,
+        "category": "EARLY",
+        "lead_days": 24,
+        "first_alert_date": "2010-12-01",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 19,
+        "onset_date": "2011-06-19",
+        "trough_date": "2011-08-09",
+        "drawdown": -0.2043481608982145,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2011-05-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 20,
+        "onset_date": "2011-09-12",
+        "trough_date": "2011-11-22",
+        "drawdown": -0.2030514381913744,
+        "category": "EARLY",
+        "lead_days": 9,
+        "first_alert_date": "2011-08-25",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 21,
+        "onset_date": "2012-03-22",
+        "trough_date": "2012-06-19",
+        "drawdown": -0.20559845473550553,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2012-02-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 22,
+        "onset_date": "2012-09-26",
+        "trough_date": "2012-11-28",
+        "drawdown": -0.19331286457556185,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2012-09-02",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 23,
+        "onset_date": "2015-05-24",
+        "trough_date": "2015-08-18",
+        "drawdown": -0.18893935913644677,
+        "category": "LATE",
+        "lead_days": 1,
+        "first_alert_date": "2015-05-21",
+        "is_early": false,
+        "is_detected": true
+      },
+      {
+        "episode_id": 24,
+        "onset_date": "2015-10-21",
+        "trough_date": "2016-01-13",
+        "drawdown": -0.1908832125781612,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2015-09-09",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 25,
+        "onset_date": "2018-08-30",
+        "trough_date": "2018-10-25",
+        "drawdown": -0.18649529637262963,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2018-08-15",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 26,
+        "onset_date": "2020-02-09",
+        "trough_date": "2020-03-09",
+        "drawdown": -0.22148472493401417,
+        "category": "EARLY",
+        "lead_days": 23,
+        "first_alert_date": "2020-01-06",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 27,
+        "onset_date": "2022-03-23",
+        "trough_date": "2022-06-22",
+        "drawdown": -0.18145658164177714,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2022-02-27",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 28,
+        "onset_date": "2024-03-11",
+        "trough_date": "2024-03-31",
+        "drawdown": -0.19468640222179578,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2024-02-29",
+        "is_early": true,
+        "is_detected": true
+      }
+    ]
+  },
+  "v5_high_selectivity": {
+    "early": 14,
+    "early_recall": 0.8235,
+    "late": 2,
+    "reactive": 1,
+    "miss": 0,
+    "total_crises": 17,
+    "occ": 7.48,
+    "episodes": 39,
+    "true_ep": 20,
+    "false_ep": 19,
+    "hard_false_ep": 11,
+    "near_miss_ep": 8,
+    "false_warning_days": 171,
+    "duplicate_alerts": 3,
+    "fa_yr": 1.05,
+    "hard_fa_yr": 0.61,
+    "precision": 51.3,
+    "lead": 17.0,
+    "opp_cost": -0.15,
+    "utility": 86.45,
+    "wilson_ci_95": [
+      0.5897,
+      0.9381
+    ],
+    "crises": [
+      {
+        "episode_id": 12,
+        "onset_date": "2008-05-05",
+        "trough_date": "2008-07-06",
+        "drawdown": -0.20181185640866295,
+        "category": "EARLY",
+        "lead_days": 22,
+        "first_alert_date": "2008-03-31",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 13,
+        "onset_date": "2008-08-06",
+        "trough_date": "2008-10-26",
+        "drawdown": -0.4884731573662303,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2008-06-30",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 14,
+        "onset_date": "2009-01-05",
+        "trough_date": "2009-02-05",
+        "drawdown": -0.2836377802048401,
+        "category": "EARLY",
+        "lead_days": 8,
+        "first_alert_date": "2008-12-22",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 15,
+        "onset_date": "2009-06-16",
+        "trough_date": "2009-07-13",
+        "drawdown": -0.18034227380023127,
+        "category": "LATE",
+        "lead_days": 2,
+        "first_alert_date": "2009-06-14",
+        "is_early": false,
+        "is_detected": true
+      },
+      {
+        "episode_id": 16,
+        "onset_date": "2009-10-26",
+        "trough_date": "2009-11-30",
+        "drawdown": -0.19050556766987103,
+        "category": "EARLY",
+        "lead_days": 25,
+        "first_alert_date": "2009-09-16",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 17,
+        "onset_date": "2010-04-27",
+        "trough_date": "2010-05-25",
+        "drawdown": -0.21906237504998005,
+        "category": "EARLY",
+        "lead_days": 21,
+        "first_alert_date": "2010-03-24",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 18,
+        "onset_date": "2011-01-05",
+        "trough_date": "2011-01-27",
+        "drawdown": -0.21689614829403192,
+        "category": "EARLY",
+        "lead_days": 14,
+        "first_alert_date": "2010-12-16",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 19,
+        "onset_date": "2011-06-19",
+        "trough_date": "2011-08-09",
+        "drawdown": -0.2043481608982145,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2011-05-26",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 20,
+        "onset_date": "2011-09-12",
+        "trough_date": "2011-11-22",
+        "drawdown": -0.2030514381913744,
+        "category": "EARLY",
+        "lead_days": 11,
+        "first_alert_date": "2011-08-23",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 21,
+        "onset_date": "2012-03-22",
+        "trough_date": "2012-06-19",
+        "drawdown": -0.20559845473550553,
+        "category": "EARLY",
+        "lead_days": 16,
+        "first_alert_date": "2012-02-29",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 22,
+        "onset_date": "2012-09-26",
+        "trough_date": "2012-11-28",
+        "drawdown": -0.19331286457556185,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2012-09-02",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 23,
+        "onset_date": "2015-05-24",
+        "trough_date": "2015-08-18",
+        "drawdown": -0.18893935913644677,
+        "category": "LATE",
+        "lead_days": 1,
+        "first_alert_date": "2015-05-21",
+        "is_early": false,
+        "is_detected": true
+      },
+      {
+        "episode_id": 24,
+        "onset_date": "2015-10-21",
+        "trough_date": "2016-01-13",
+        "drawdown": -0.1908832125781612,
+        "category": "REACTIVE",
+        "lead_days": -31,
+        "first_alert_date": "2015-12-03",
+        "is_early": false,
+        "is_detected": false
+      },
+      {
+        "episode_id": 25,
+        "onset_date": "2018-08-30",
+        "trough_date": "2018-10-25",
+        "drawdown": -0.18649529637262963,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2018-08-15",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 26,
+        "onset_date": "2020-02-09",
+        "trough_date": "2020-03-09",
+        "drawdown": -0.22148472493401417,
+        "category": "EARLY",
+        "lead_days": 23,
+        "first_alert_date": "2020-01-06",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 27,
+        "onset_date": "2022-03-23",
+        "trough_date": "2022-06-22",
+        "drawdown": -0.18145658164177714,
+        "category": "EARLY",
+        "lead_days": 18,
+        "first_alert_date": "2022-02-27",
+        "is_early": true,
+        "is_detected": true
+      },
+      {
+        "episode_id": 28,
+        "onset_date": "2024-03-11",
+        "trough_date": "2024-03-31",
+        "drawdown": -0.19468640222179578,
+        "category": "EARLY",
+        "lead_days": 7,
+        "first_alert_date": "2024-02-29",
+        "is_early": true,
+        "is_detected": true
+      }
+    ]
+  },
+  "precision_recall_frontier": [
+    {
+      "model_name": "V5: Ultra-Selective (0.61 Hard FA/yr)",
+      "early_recall": 0.8235,
+      "early_count": 14,
+      "total_crises": 17,
+      "occupancy_pct": 7.48,
+      "total_episodes": 39,
+      "true_episodes": 20,
+      "false_episodes": 19,
+      "hard_false_episodes": 11,
+      "near_miss_episodes": 8,
+      "false_alarms_per_year": 1.05,
+      "hard_false_alarms_per_year": 0.61,
+      "event_precision_pct": 51.3,
+      "median_lead_days": 17.0,
+      "opportunity_cost_pct": -0.15,
+      "utility_score": 86.45
+    },
+    {
+      "model_name": "V5: Selective Lean (0.77 Hard FA/yr)",
+      "early_recall": 0.8235,
+      "early_count": 14,
+      "total_crises": 17,
+      "occupancy_pct": 7.72,
+      "total_episodes": 40,
+      "true_episodes": 20,
+      "false_episodes": 20,
+      "hard_false_episodes": 14,
+      "near_miss_episodes": 6,
+      "false_alarms_per_year": 1.11,
+      "hard_false_alarms_per_year": 0.77,
+      "event_precision_pct": 50.0,
+      "median_lead_days": 18.5,
+      "opportunity_cost_pct": 1.61,
+      "utility_score": 86.0
+    },
+    {
+      "model_name": "V5: Recommended Production (1.00 Hard FA/yr)",
+      "early_recall": 0.8824,
+      "early_count": 15,
+      "total_crises": 17,
+      "occupancy_pct": 11.49,
+      "total_episodes": 51,
+      "true_episodes": 27,
+      "false_episodes": 24,
+      "hard_false_episodes": 18,
+      "near_miss_episodes": 6,
+      "false_alarms_per_year": 1.33,
+      "hard_false_alarms_per_year": 1.0,
+      "event_precision_pct": 52.9,
+      "median_lead_days": 16.0,
+      "opportunity_cost_pct": 0.38,
+      "utility_score": 76.55
+    },
+    {
+      "model_name": "V5: Balanced High-Lead",
+      "early_recall": 0.8824,
+      "early_count": 15,
+      "total_crises": 17,
+      "occupancy_pct": 10.65,
+      "total_episodes": 63,
+      "true_episodes": 32,
+      "false_episodes": 31,
+      "hard_false_episodes": 22,
+      "near_miss_episodes": 9,
+      "false_alarms_per_year": 1.72,
+      "hard_false_alarms_per_year": 1.22,
+      "event_precision_pct": 50.8,
+      "median_lead_days": 16.0,
+      "opportunity_cost_pct": 0.47,
+      "utility_score": 58.9
+    },
+    {
+      "model_name": "V5: Matched-16 Recall (1.44 Hard FA/yr)",
+      "early_recall": 0.9412,
+      "early_count": 16,
+      "total_crises": 17,
+      "occupancy_pct": 12.64,
+      "total_episodes": 64,
+      "true_episodes": 31,
+      "false_episodes": 33,
+      "hard_false_episodes": 26,
+      "near_miss_episodes": 7,
+      "false_alarms_per_year": 1.83,
+      "hard_false_alarms_per_year": 1.44,
+      "event_precision_pct": 48.4,
+      "median_lead_days": 18.5,
+      "opportunity_cost_pct": 1.03,
+      "utility_score": 62.8
+    },
+    {
+      "model_name": "V5: High-Sensitivity (16/17 Early)",
+      "early_recall": 0.9412,
+      "early_count": 16,
+      "total_crises": 17,
+      "occupancy_pct": 12.39,
+      "total_episodes": 75,
+      "true_episodes": 36,
+      "false_episodes": 39,
+      "hard_false_episodes": 29,
+      "near_miss_episodes": 10,
+      "false_alarms_per_year": 2.16,
+      "hard_false_alarms_per_year": 1.6,
+      "event_precision_pct": 48.0,
+      "median_lead_days": 17.0,
+      "opportunity_cost_pct": 1.36,
+      "utility_score": 46.3
+    },
+    {
+      "model_name": "V4: Benchmark Baseline (2.32 FA/yr)",
+      "early_recall": 0.9412,
+      "early_count": 16,
+      "total_crises": 17,
+      "occupancy_pct": 13.46,
+      "total_episodes": 76,
+      "true_episodes": 34,
+      "false_episodes": 42,
+      "hard_false_episodes": 35,
+      "near_miss_episodes": 7,
+      "false_alarms_per_year": 2.32,
+      "hard_false_alarms_per_year": 1.94,
+      "event_precision_pct": 44.7,
+      "median_lead_days": 18.5,
+      "opportunity_cost_pct": 1.46,
+      "utility_score": 40.2
+    }
+  ],
+  "subperiod_robustness": {
+    "pre_2016": {
+      "v4": {
+        "crises": 13,
+        "early_count": 12,
+        "early_recall": 0.9231,
+        "occupancy_pct": 24.13,
+        "episodes": 58,
+        "false_episodes": 31,
+        "fa_per_year": 4.03,
+        "hard_fa_per_year": 3.64,
+        "precision_pct": 46.6
+      },
+      "v5_16": {
+        "crises": 13,
+        "early_count": 12,
+        "early_recall": 0.9231,
+        "occupancy_pct": 23.82,
+        "episodes": 49,
+        "false_episodes": 25,
+        "fa_per_year": 3.25,
+        "hard_fa_per_year": 2.86,
+        "precision_pct": 49.0
+      },
+      "v5_15": {
+        "crises": 13,
+        "early_count": 11,
+        "early_recall": 0.8462,
+        "occupancy_pct": 20.38,
+        "episodes": 36,
+        "false_episodes": 16,
+        "fa_per_year": 2.08,
+        "hard_fa_per_year": 1.69,
+        "precision_pct": 55.6
+      }
+    },
+    "post_2016": {
+      "v4": {
+        "crises": 4,
+        "early_count": 4,
+        "early_recall": 1.0,
+        "occupancy_pct": 5.55,
+        "episodes": 18,
+        "false_episodes": 11,
+        "fa_per_year": 1.06,
+        "hard_fa_per_year": 0.67,
+        "precision_pct": 38.9
+      },
+      "v5_16": {
+        "crises": 4,
+        "early_count": 4,
+        "early_recall": 1.0,
+        "occupancy_pct": 4.35,
+        "episodes": 15,
+        "false_episodes": 8,
+        "fa_per_year": 0.77,
+        "hard_fa_per_year": 0.39,
+        "precision_pct": 46.7
+      },
+      "v5_15": {
+        "crises": 4,
+        "early_count": 4,
+        "early_recall": 1.0,
+        "occupancy_pct": 4.89,
+        "episodes": 15,
+        "false_episodes": 8,
+        "fa_per_year": 0.77,
+        "hard_fa_per_year": 0.48,
+        "precision_pct": 46.7
+      }
+    }
+  },
+  "shock_etiology": {
+    "v4": {
+      "global_shocks_recall": 1.0,
+      "global_shocks_count": "4/4",
+      "domestic_shocks_recall": 0.9231,
+      "domestic_shocks_count": "12/13"
+    },
+    "v5_16": {
+      "global_shocks_recall": 1.0,
+      "global_shocks_count": "4/4",
+      "domestic_shocks_recall": 0.9231,
+      "domestic_shocks_count": "12/13"
+    },
+    "v5_15": {
+      "global_shocks_recall": 1.0,
+      "global_shocks_count": "4/4",
+      "domestic_shocks_recall": 0.8462,
+      "domestic_shocks_count": "11/13"
+    }
+  },
+  "leave_one_crisis_out": [
+    {
+      "excluded_crisis_date": "2008-05-05",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2008-08-06",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2009-01-05",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2009-06-16",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2009-10-26",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2010-04-27",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2011-01-05",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2011-06-19",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2011-09-12",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2012-03-22",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2012-09-26",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2015-05-24",
+      "remaining_crises": 16,
+      "remaining_early_hits": 15,
+      "remaining_early_recall": 0.9375,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2015-10-21",
+      "remaining_crises": 16,
+      "remaining_early_hits": 15,
+      "remaining_early_recall": 0.9375,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2018-08-30",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2020-02-09",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2022-03-23",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    },
+    {
+      "excluded_crisis_date": "2024-03-11",
+      "remaining_crises": 16,
+      "remaining_early_hits": 14,
+      "remaining_early_recall": 0.875,
+      "is_stable": true
+    }
+  ],
+  "statistical_tests": {
+    "mcnemar_v4_vs_v5_15": {
+      "b": 1,
+      "c": 0,
+      "p_value": 1.0
+    },
+    "mcnemar_v4_vs_v5_16": {
+      "b": 0,
+      "c": 0,
+      "p_value": 1.0
+    }
+  },
+  "autopsy_summary": {
+    "total_v4_false_episodes": 42,
+    "near_miss_corrections": 7,
+    "hard_false_alarms": 35,
+    "clusters": {
+      "F_PostCrisis_Contamination": {
+        "count": 14,
+        "pct": 33.3
+      },
+      "G_NearMiss_Correction": {
+        "count": 7,
+        "pct": 16.7
+      },
+      "B_Prolonged_HarmlessRegime": {
+        "count": 6,
+        "pct": 14.3
+      },
+      "D_LocalDeterioration_NoFollowThrough": {
+        "count": 6,
+        "pct": 14.3
+      },
+      "E_Duplicate_PrematureWave": {
+        "count": 4,
+        "pct": 9.5
+      },
+      "C_GlobalStress_NoTransmission": {
+        "count": 4,
+        "pct": 9.5
+      },
+      "G_Other": {
+        "count": 1,
+        "pct": 2.4
+      }
+    }
+  }
+}

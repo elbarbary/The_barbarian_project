@@ -1,0 +1,234 @@
+{
+  "evaluation_period": "2007-01-03 to 2026-09-09",
+  "years": 19.0,
+  "total_test_sessions": 4762,
+  "crises_in_test": 17,
+  "crises_list": [
+    "2008-05-05",
+    "2008-08-06",
+    "2009-01-05",
+    "2009-06-16",
+    "2009-10-26",
+    "2010-04-27",
+    "2011-01-05",
+    "2011-06-19",
+    "2011-09-12",
+    "2012-03-22",
+    "2012-09-26",
+    "2015-05-24",
+    "2015-10-21",
+    "2018-08-30",
+    "2020-02-09",
+    "2022-03-23",
+    "2024-03-11"
+  ],
+  "baselines": {
+    "B1_Vol_UpperQuintile": {
+      "event_recall": 0.765,
+      "crises_total": 17,
+      "crises_detected": 13,
+      "warning_episodes": 56,
+      "false_episodes": 38,
+      "false_alarms_per_year": 1.99,
+      "occupancy_pct": 23.27,
+      "mean_opp_cost_pct": 3.41
+    },
+    "B2_Drawdown_10Pct": {
+      "event_recall": 0.882,
+      "crises_total": 17,
+      "crises_detected": 15,
+      "warning_episodes": 39,
+      "false_episodes": 25,
+      "false_alarms_per_year": 1.31,
+      "occupancy_pct": 33.87,
+      "mean_opp_cost_pct": -3.0
+    },
+    "B3_Below_200SMA": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 25,
+      "false_episodes": 17,
+      "false_alarms_per_year": 0.89,
+      "occupancy_pct": 28.73,
+      "mean_opp_cost_pct": -3.84
+    },
+    "B4_Composite_Vol_DD": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 39,
+      "false_episodes": 22,
+      "false_alarms_per_year": 1.15,
+      "occupancy_pct": 13.06,
+      "mean_opp_cost_pct": -0.62
+    }
+  },
+  "models": {
+    "ElasticNet__no_decay": {
+      "event_recall": 0.765,
+      "crises_total": 17,
+      "crises_detected": 13,
+      "warning_episodes": 57,
+      "false_episodes": 39,
+      "false_alarms_per_year": 2.05,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 0.69,
+      "cutoff_p": 0.576
+    },
+    "DiscreteHazard__no_decay": {
+      "event_recall": 0.706,
+      "crises_total": 17,
+      "crises_detected": 12,
+      "warning_episodes": 48,
+      "false_episodes": 35,
+      "false_alarms_per_year": 1.84,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": -0.01,
+      "cutoff_p": 0.732
+    },
+    "ShallowLightGBM__no_decay": {
+      "event_recall": 0.529,
+      "crises_total": 17,
+      "crises_detected": 9,
+      "warning_episodes": 36,
+      "false_episodes": 29,
+      "false_alarms_per_year": 1.52,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 1.04,
+      "cutoff_p": 0.108
+    },
+    "ElasticNet__decay_7.5y": {
+      "event_recall": 0.706,
+      "crises_total": 17,
+      "crises_detected": 12,
+      "warning_episodes": 58,
+      "false_episodes": 37,
+      "false_alarms_per_year": 1.94,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 1.09,
+      "cutoff_p": 0.552
+    },
+    "DiscreteHazard__decay_7.5y": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 48,
+      "false_episodes": 33,
+      "false_alarms_per_year": 1.73,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": -0.36,
+      "cutoff_p": 0.689
+    },
+    "ShallowLightGBM__decay_7.5y": {
+      "event_recall": 0.471,
+      "crises_total": 17,
+      "crises_detected": 8,
+      "warning_episodes": 35,
+      "false_episodes": 29,
+      "false_alarms_per_year": 1.52,
+      "occupancy_pct": 18.14,
+      "mean_opp_cost_pct": -0.05,
+      "cutoff_p": 0.088
+    },
+    "ElasticNet__decay_12y": {
+      "event_recall": 0.706,
+      "crises_total": 17,
+      "crises_detected": 12,
+      "warning_episodes": 54,
+      "false_episodes": 36,
+      "false_alarms_per_year": 1.89,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 1.71,
+      "cutoff_p": 0.56
+    },
+    "DiscreteHazard__decay_12y": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 50,
+      "false_episodes": 37,
+      "false_alarms_per_year": 1.94,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": -0.38,
+      "cutoff_p": 0.697
+    },
+    "ShallowLightGBM__decay_12y": {
+      "event_recall": 0.471,
+      "crises_total": 17,
+      "crises_detected": 8,
+      "warning_episodes": 30,
+      "false_episodes": 24,
+      "false_alarms_per_year": 1.26,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 0.33,
+      "cutoff_p": 0.096
+    },
+    "ElasticNet__decay_15y": {
+      "event_recall": 0.765,
+      "crises_total": 17,
+      "crises_detected": 13,
+      "warning_episodes": 54,
+      "false_episodes": 37,
+      "false_alarms_per_year": 1.94,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 1.51,
+      "cutoff_p": 0.562
+    },
+    "DiscreteHazard__decay_15y": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 49,
+      "false_episodes": 36,
+      "false_alarms_per_year": 1.89,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 0.1,
+      "cutoff_p": 0.705
+    },
+    "ShallowLightGBM__decay_15y": {
+      "event_recall": 0.529,
+      "crises_total": 17,
+      "crises_detected": 9,
+      "warning_episodes": 33,
+      "false_episodes": 26,
+      "false_alarms_per_year": 1.36,
+      "occupancy_pct": 18.02,
+      "mean_opp_cost_pct": 0.68,
+      "cutoff_p": 0.098
+    },
+    "ElasticNet__decay_20y": {
+      "event_recall": 0.765,
+      "crises_total": 17,
+      "crises_detected": 13,
+      "warning_episodes": 55,
+      "false_episodes": 39,
+      "false_alarms_per_year": 2.05,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 1.29,
+      "cutoff_p": 0.563
+    },
+    "DiscreteHazard__decay_20y": {
+      "event_recall": 0.647,
+      "crises_total": 17,
+      "crises_detected": 11,
+      "warning_episodes": 49,
+      "false_episodes": 36,
+      "false_alarms_per_year": 1.89,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": -0.09,
+      "cutoff_p": 0.711
+    },
+    "ShallowLightGBM__decay_20y": {
+      "event_recall": 0.471,
+      "crises_total": 17,
+      "crises_detected": 8,
+      "warning_episodes": 33,
+      "false_episodes": 27,
+      "false_alarms_per_year": 1.42,
+      "occupancy_pct": 18.0,
+      "mean_opp_cost_pct": 0.8,
+      "cutoff_p": 0.099
+    }
+  }
+}
