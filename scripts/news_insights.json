@@ -111,6 +111,10 @@
     "meaning": "Egypt Post expands its operational role as an administrative service provider by utilizing 500 branches to process data updates for suspended ration cards under the Ministry of Supply's subsidy verification framework.",
     "meaning_ar": "توسع الهيئة القومية للبريد دورها التشغيلي كمقدم للخدمات الإدارية الحكومية من خلال تخصيص 500 مكتب بريد لتحديث بيانات البطاقات التموينية المتوقفة ضمن منظومة التحقق من الدعم التابعة لوزارة التموين."
   },
+  "80 % من الاغذيه المعباه في الهند تحت التهديد": {
+    "meaning": "Stricter food quality standards and regulatory compliance frameworks require widespread recipe reformulations, labeling adjustments, and operational changes across packaged food manufacturing supply chains.",
+    "meaning_ar": "تتطلب الاشتراطات التنظيمية ومعايير سلامة الغذاء في السوق تعديل تركيبات المنتجات وتحديث ملصقات التعبئة والتغليف وإجراء مواءمات تشغيلية عبر سلاسل إمداد تصنيع الأغذية المعبأة."
+  },
   "AI: from strategy to execution": {
     "meaning": "The transition from strategy to execution represents the operational deployment of artificial intelligence infrastructure and software into core business workflows. This process involves capital expenditure allocations for technology procurement, systems integration, and workforce technical onboarding.",
     "meaning_ar": "يمثل الانتقال من الاستراتيجية إلى التنفيذ التطبيق التشغيلي للبنية التحتية والبرمجيات الخاصة بالذكاء الاصطناعي ضمن مسارات العمل الأساسية في الشركات. وتتضمن هذه العملية تخصيص نفقات رأسمالية لشراء التكنولوجيا، ودمج الأنظمة، وتدريب الكوادر الفنية."
@@ -1242,6 +1246,10 @@
   "الرقابه الماليه: المختبر التنظيمي يدعم الابتكار والتحول الرقمي في الانشطه غير المصرفيه": {
     "meaning": "The regulatory sandbox operates as a controlled testing framework where non-banking financial institutions and FinTech entities deploy and validate digital products and operational models under direct supervisory oversight.",
     "meaning_ar": "يوفر المختبر التنظيمي إطار عمل تجريبي خاضع لإشراف الهيئة يتيح للمؤسسات المالية غير المصرفية وشركات التكنولوجيا المالية تشغيل واختبار المنتجات والنماذج الرقمية ضمن محددات رقابية وضوابط محددة."
+  },
+  "الرييس التنفيذي ل«داف»: تطبيق التتبع الدوايي تدريجيا لضمان استقرار توافر الادويه": {
+    "meaning": "A phased track-and-trace rollout introduces digital serialization and verification standards incrementally across pharmaceutical supply chains, distributing operational compliance adjustments across manufacturing and distribution networks without interrupting current logistics flows.",
+    "meaning_ar": "يتضمن التطبيق التدريجي لمنظومة التتبع الدوائي إدخال معايير التسلسل والتحقق الرقمي عبر سلاسل إمداد الدواء على مراحل، مما يوزع متطلبات الامتثال التشغيلي عبر شبكات التصنيع والتوزيع دون إيقاف التدفقات اللوجستية القائمة."
   },
   "الرييس التنفيذي للشركه: “فاركو” للادويه تضخ مليار جنيه استثمارات حتي نهايه 2027": {
     "meaning": "This corporate action allocates EGP 1 billion in capital expenditures across the company's pharmaceutical production infrastructure and operational assets through 2027.",
@@ -3732,6 +3740,10 @@
   "“مينا فارم” تتحول لربح 101.8 مليون جنيه في النصف الاول": {
     "meaning": "A transition from a net loss to a net profit of EGP 101.8 million indicates that operating revenues exceed total manufacturing, operational, and financing costs over the six-month reporting period.",
     "meaning_ar": "يعكس التحول من الخسائر إلى تحقيق صافي ربح قدره 101.8 مليون جنيه تجاوز الإيرادات التشغيلية لإجمالي تكاليف الإنتاج والمصروفات التشغيلية والتمويلية خلال فترة النصف الأول."
+  },
+  "“ميناء الاسكندريه” يبحث تعزيز التعاون مع ميناء توماسينا في مدغشقر": {
+    "meaning": "Bilateral port cooperation establishes direct maritime operational coordination and information sharing on cargo handling routes between Egypt and East African trade hubs.",
+    "meaning_ar": "يحدد التعاون الثنائي بين الموانئ أطر التنسيق التشغيلي البحري وتبادل البيانات اللوجستية لنقل وتداول البضائع بين مصر ومراكز التجارة في شرق إفريقيا."
   },
   "“نهر الخير”: “الاهلي للزراعات” تسدد قسطا ب19.8 مليون جنيه ل”تنميه الريف”": {
     "meaning": "This transaction reflects the settlement of contractual land acquisition liabilities by Nahr El-Kheir's subsidiary to the Egyptian Countryside Development Company, reducing outstanding long-term obligations on the consolidated balance sheet.",
