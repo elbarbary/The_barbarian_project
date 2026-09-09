@@ -39,6 +39,10 @@
     "meaning": "The expansion in export volumes to Greece increases bilateral trade turnover and reflects higher foreign currency inflows from outbound shipments into the balance of trade.",
     "meaning_ar": "تؤدي زيادة حجم الصادرات المصرية إلى اليونان إلى رفع وتيرة التبادل التجاري الثنائي وتدفق النقد الأجنبي من الشحنات المصدرة ضمن الميزان التجاري."
   },
+  "2.96 تريليون جنيه حجم معاملات المحافظ الالكترونيه في النصف الاول بنمو 56%": {
+    "meaning": "The recorded transaction volume reflects the operational processing of digital payments across the national mobile payment network, settling local currency transfers and merchant transactions electronically through licensed banking and fintech infrastructure.",
+    "meaning_ar": "يعكس حجم المعاملات المسجل التشغيل الفعلي للمدفوعات الرقمية عبر شبكة محافظ الهاتف المحمول، وتسوية التحويلات النقدية ومدفوعات التجار إلكترونياً عبر البنية التحتية للبنوك وشركات التكنولوجيا المالية المرخصة."
+  },
   "20 years of letters between a New York writer and a London bookseller, with not a word wasted": {
     "meaning": "Cross-border mail-order commerce operates through direct consumer-to-retailer communication, long-term customer relationship management, and international logistics fulfillment for specialized inventory.",
     "meaning_ar": "تعمل تجارة الطلبات البريدية عبر الحدود من خلال التواصل المباشر بين المستهلك وبائع التجزئة، وإدارة علاقات العملاء طويلة الأجل، وعمليات الشحن واللوجستيات الدولية للبضائع المتخصصة."
@@ -1952,6 +1956,10 @@
     "meaning": "This volume of expenditure reflects large-scale capital deployment by technology firms into computing infrastructure, data centers, specialized hardware procurement, and research operations.",
     "meaning_ar": "يعكس هذا الحجم من الإنفاق توجيه تدفقات رأسمالية ضخمة من قِبل شركات التكنولوجيا نحو البنية التحتية للحوسبة، ومراكز البيانات، وتوريد الأجهزة المتخصصة، والبحث والتطوير."
   },
+  "جيه بي مورجان يوسع اعمال الخدمات المصرفيه للشركات في اليونان": {
+    "meaning": "JPMorgan establishes and broadens its local corporate banking infrastructure and product coverage in Greece, providing lending, cash management, and advisory services directly to domestic corporate entities and institutional clients.",
+    "meaning_ar": "يقوم جيه بي مورجان بتأسيس وتوسيع بنيته التحتية المصرفية للشركات ونطاق خدماته في اليونان، لتقديم التمويل وإدارة النقد والخدمات الاستشارية مباشرة للشركات المحلية والمؤسسات."
+  },
   "حمايه المستهلك: 788 حمله رقابيه تضبط 251 طن سلع مخالفه خلال اغسطس": {
     "meaning": "Regulatory enforcement campaigns conduct market inspections and confiscate non-compliant inventory, directly enforcing legal product standards and circulation controls across wholesale and retail supply chains.",
     "meaning_ar": "تتضمن الحملات التفتيشية مصادرة البضائع غير المطابقة للمواصفات، مما يطبق المعايير الرقابية والاشتراطات القانونية لتداول السلع داخل سلاسل الإمداد والتجارة المحلية."
@@ -2167,6 +2175,10 @@
   "ساروج كومار جها يكتب: 28% من موازنات المياه لا تنفق.. اين تتعطل الاستثمارات؟": {
     "meaning": "An unspent rate of 28% in water sector budgets reflects capital expenditure underutilization driven by administrative, procurement, and execution bottlenecks in infrastructure projects despite allocated funding.",
     "meaning_ar": "يعكس عدم إنفاق 28% من مخصصات قطاع المياه ضعف معدلات استغلال الإنفاق الرأسمالي المتاح، وذلك نتيجة معوقات إجرائية وإدارية في ترسية وتنفيذ مشروعات البنية التحتية."
+  },
+  "سعر الخشب اليوم الاربعاء 9-9-2026 في مصر": {
+    "meaning": "Daily reporting of local wood prices tracks raw material input costs for the construction, finishing, and furniture manufacturing sectors, which operate primarily on imported timber supplies.",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار الأخشاب المحلية تكلفة مدخلات الإنتاج لقطاعات التشييد والتشطيبات وصناعة الأثاث التي تعتمد بالأساس على واردات الأخشاب."
   },
   "سعر الدينار الكويتي اليوم الاثنين 7-9-2026 في بدايه التعاملات": {
     "meaning": "This is a routine foreign exchange rate update reflecting the opening valuation of the Kuwaiti Dinar against the Egyptian Pound across the banking sector. The rate directly determines the conversion cost for cross-border transactions, bilateral trade settlements, and expatriate remittance inflows from Kuwait.",
