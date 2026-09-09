@@ -75,6 +75,10 @@
     "meaning": "This transaction represents syndicated debt financing where three commercial banks provide EGP 50 million in capital expenditure funding to establish a new manufacturing facility in Quesna, expanding the company's fixed asset base and industrial capacity.",
     "meaning_ar": "يمثل هذا الإجراء تمويلاً مصرفياً مشتركاً تقدم من خلاله ثلاثة بنوك 50 مليون جنيه لتمويل النفقات الرأسمالية لإنشاء مصنع جديد في قويسنا، مما يرفع الأصول الثابتة والطاقة الإنتاجية التشغيلية للشركة."
   },
+  "3 دول اسيويه تستحوذ علي صادرات اول اسبوع من موسم القطن الجديد": {
+    "meaning": "Initial raw cotton export allocations are concentrated across three Asian textile manufacturing markets, which serve as the primary destinations absorbing opening harvest volumes through official trade channels and auctions.",
+    "meaning_ar": "يتركز التوزيع التصديري للقطن المصري في بداية الموسم في ثلاثة أسواق تصنيع آسيوية، تمثل الوجهات الرئيسية التي تستقبل كميات الحصاد الأولية عبر المزادات ومنظومة التداول الرسمية."
+  },
   "3 دول اسيويه تهمين علي شحنات القطن المصري منذ بدايه الموسم": {
     "meaning": "Export data shows that the volume of Egyptian raw cotton exports is currently concentrated among three Asian buyer markets, which absorb the majority of outbound shipments for the current agricultural season.",
     "meaning_ar": "تُظهر بيانات التصدير تركز الجانب الأكبر من شحنات القطن المصري الخام لدى ثلاث أسواق آسيوية تستحوذ على معظم الكميات المشحونة منذ بداية الموسم الزراعي الحالي."
@@ -1964,6 +1968,10 @@
     "meaning": "The formation of the Egyptian-Syrian Business Council establishes an institutional framework for direct bilateral coordination between private sector companies in both markets, serving as a channel for trade logistics and cross-border joint ventures.",
     "meaning_ar": "يؤسس تشكيل مجلس الأعمال المصري السوري إطاراً مؤسسياً للتنسيق المباشر بين شركات القطاع الخاص في السوقين، حيث يعمل كقناة للترتيبات اللوجستية التجارية والمشروعات المشتركة العابرة للحدود."
   },
+  "تشكيل مجلس الاعمال المصري السوري برياسه محمد سعده وعضويه خالد ابو بكر": {
+    "meaning": "The establishment of the Egyptian-Syrian Business Council creates a institutional framework for direct business-to-business dialogue, coordination on bilateral trade flows, and facilitation of joint commercial initiatives between Egyptian and Syrian enterprises.",
+    "meaning_ar": "يوفر تشكيل مجلس الأعمال المصري السوري إطاراً مؤسسياً للتنسيق التجاري المباشر بين الشركات وتسهيل حركة التبادل التجاري والمبادرات الاستثمارية المشتركة بين قطاعي الأعمال في البلدين."
+  },
   "تصحيح البورصه يختبر شهيه المستثمرين": {
     "meaning": "A market correction is a downward price adjustment across listed assets following prior gains, reflecting the capacity of current liquidity and trading activity to absorb existing market valuations.",
     "meaning_ar": "يُعد التصحيح السعري في البورصة حركة تعديل هبوطية للأسهم المدرجة بعد فترات ارتفاع سابقة، ويعكس قدرة السيولة النقدية وأحجام التداول الحالية على استيعاب التقييمات السائدة في السوق."
@@ -2896,6 +2904,10 @@
   "ما مصير الشركات غير المتعاونه في تحقيق مكافحه اغراق الجبن الهولندي؟": {
     "meaning": "Under trade defense regulations, non-cooperating foreign exporters in anti-dumping investigations face default duties calculated using the highest available tariff rates or 'facts available' rather than their specific operational cost data, directly raising their import clearance costs.",
     "meaning_ar": "بموجب لوائح المعالجات التجارية، تُطبق على الشركات الأجنبية المصدرة غير المتعاونة في تحقيقات مكافحة الإغراق رسوم حمائية استناداً إلى أعلى الهوامش المتاحة أو قاعدة البيانات المعتمدة بدلاً من بيانات تكاليفها الفعلية، مما يرفع تكلفة التخليص الجمركي لمنتجاتها."
+  },
+  "ما هي ابرز القطاعات الاكثر تاثرا بتبني الذكاء الاصطناعي عالميا؟": {
+    "meaning": "Global adoption of artificial intelligence alters core operating models across sectors such as technology, financial services, and healthcare by automating workflows and shifting operational expenditure toward computational infrastructure and software licensing.",
+    "meaning_ar": "يُغير تبني الذكاء الاصطناعي عالميًا نماذج التشغيل الأساسية في قطاعات مثل التكنولوجيا والخدمات المالية والرعاية الصحية من خلال أتمتة تدفقات العمل وإعادة توجيه النفقات التشغيلية نحو البنية التحتية الحاسوبية وتراخيص البرمجيات."
   },
   "ماريدايف تتحول للربحيه بقيمه 4.55 مليون دولار بالنصف الاول": {
     "meaning": "A transition to net profitability indicates that total operational revenues generated during the six-month period exceed aggregate operating expenses, financing costs, and taxes, shifting the company's bottom-line result on the income statement from a net loss to a net profit.",
