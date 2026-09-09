@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-09T12:32:49.913964+00:00",
+  "updatedAt": "2026-09-09T12:47:51.515842+00:00",
   "asOf": "2026-09-09",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 348,
+    "totalRecords": 349,
     "buyCount": 89,
     "sellCount": 196,
     "treasuryBuyCount": 15,
@@ -93,6 +93,28 @@
       "title": "بيان من بايونيرز بروبرتيز للتنمية العمرانية بي ار اي جروب (PRDC.CA) بشأن شراء أسهم الخزينة",
       "titleEn": "Statement from Pioneers Properties for Urban Development - PRE (PRDC.CA) regarding the purchase of treasury shares",
       "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294501"
+    },
+    {
+      "id": "filing-294525",
+      "filingId": "294525",
+      "sourceType": "post_execution_filing",
+      "date": "2026-09-09",
+      "ticker": "KWIN",
+      "company": "El Kahera El Watania Investment",
+      "companyAr": "القاهرة الوطنية للاستثمار والأوراق المالية",
+      "sector": "Non-bank financial services",
+      "sectorAr": "خدمات مالية غير مصرفية",
+      "action": "disclosure",
+      "actionLabel": "Post-Execution Trade Form",
+      "actionLabelAr": "إفصاح بعد التنفيذ",
+      "relationship": "insider",
+      "relationshipLabel": "Insider / Major Holder",
+      "relationshipLabelAr": "متصل / مساهم رئيسي",
+      "positionRaw": "Post-Implementation Disclosure",
+      "shares": null,
+      "title": "القاهرةالوطنية للاستثماروالاوراق المالية (KWIN.CA) - بيان بخصوص نموذج إفصاح بعد التنفيذ",
+      "titleEn": "Al Kahera National Investment and Securities (KWIN.CA) - Statement regarding the post-execution disclosure form",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294525"
     },
     {
       "id": "filing-294522",

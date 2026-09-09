@@ -63,6 +63,10 @@
     "meaning": "Foreign purchases of treasury instruments in the secondary market reflect foreign currency inflows that convert into local currency to trade existing sovereign debt paper between market participants.",
     "meaning_ar": "تُمثّل مشتريات الأجانب لأدوات الدين في السوق الثانوي تدفقات بالعملة الأجنبية يتم تحويلها إلى العملة المحلية للتداول على الأوراق المالية الحكومية القائمة بين المتعاملين."
   },
+  "26.6 الف طن رصيد صومعه الحبوب بمخازن القطاع الخاص بميناء دمياط": {
+    "meaning": "This figure represents the current operational grain inventory held in private sector storage facilities at Damietta Port, reflecting the active commodity buffer for logistics and supply chain distribution.",
+    "meaning_ar": "يمثل هذا الرقم المخزون التشغيلي الحالي من الحبوب داخل صوامع القطاع الخاص بميناء دمياط، وهو ما يوضح حجم الاحتياطي السلعي المتاح لعمليات الخدمات اللوجستية وسلاسل التوريد."
+  },
   "3 بنوك تضخ 50 مليون جنيه في مصنع «جرانتي» الجديد بقويسنا": {
     "meaning": "This transaction represents syndicated debt financing where three commercial banks provide EGP 50 million in capital expenditure funding to establish a new manufacturing facility in Quesna, expanding the company's fixed asset base and industrial capacity.",
     "meaning_ar": "يمثل هذا الإجراء تمويلاً مصرفياً مشتركاً تقدم من خلاله ثلاثة بنوك 50 مليون جنيه لتمويل النفقات الرأسمالية لإنشاء مصنع جديد في قويسنا، مما يرفع الأصول الثابتة والطاقة الإنتاجية التشغيلية للشركة."
@@ -126,6 +130,10 @@
   "Creative Investments Holding targets heritage food brand after USD 20 mn first close": {
     "meaning": "A fund's first close secures dedicated equity capital, providing direct liquidity for acquiring operational assets and consolidating market share within the food manufacturing sector.",
     "meaning_ar": "يوفر الإغلاق المالي الأولي لصناديق الاستثمار سيولة نقدية مباشرة من رؤوس الأموال المجمعة، مما يتيح توجيه السيولة نحو الاستحواذ على الأصول التشغيلية في قطاع الصناعات الغذائية."
+  },
+  "DeepSeek تقترب من بورصه شنغهاي بتقييم 75 مليار دولار": {
+    "meaning": "An initial public offering on a stock exchange transitions a private entity into a publicly traded company, establishing its market capitalization based on the formal equity valuation at listing.",
+    "meaning_ar": "يمثل الطرح العام الأولي في البورصة تحولاً للشركة من كيان خاص إلى التداول العام، حيث يحدد القيمة السوقية للشركة وفقاً للتقييم المبدئي لأسهمها."
   },
   "EM debt fares well amid US Treasury selloff": {
     "meaning": "Emerging market debt instruments maintain relative price stability and resilient yield spreads during periods of declining US Treasury prices and rising benchmark yields.",
@@ -1115,6 +1123,10 @@
     "meaning": "The government offers administrative, regulatory, or tax frameworks designed to register and integrate offshore-operating Egyptian startups into the domestic jurisdiction, establishing their operational bases and fiscal reporting within the local corporate registry.",
     "meaning_ar": "توفر الحكومة أطراً إدارية وتنظيمية وضريبية لإعادة تسجيل ودمج الشركات الناشئة المصرية المؤسسة بالخارج داخل النطاق المحلي، مما يتيح نقل مقراتها التشغيلية وإدراج قوائمها المالية بالسجل التجاري المصري."
   },
+  "الحكومه تعلن عن تعيين 43 الف معلم دفعه واحده الفتره المقبله": {
+    "meaning": "The appointment of 43,000 public sector teachers increases government operational expenditures and the public payroll allocation within the state budget, while addressing staffing capacity in the public education system.",
+    "meaning_ar": "يؤدي تعيين 43 ألف معلم في القطاع الحكومي إلى زيادة النفقات التشغيلية ومخصصات الأجور في الموازنة العامة للدولة، بالتوازي مع معالجة الطاقة الاستيعابية للكادر الوظيفي في منظومة التعليم العام."
+  },
   "الحكومه تقترب من طرح «الامل الشريف للبلاستيك» بالبورصه ديسمبر المقبل": {
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
     "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
@@ -1590,6 +1602,10 @@
   "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
     "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
     "meaning_ar": "يتطلب تطوير مراكز البيانات العملاقة تخصيص قدرات كهربائية كبرى، مما يربط ما يصل إلى 500 ميجاوات من البنية التحتية للطاقة بمرافق الاستضافة الرقمية في المنطقة."
+  },
+  "باركليز يتوقع وصول موشر اس اند بي 500 الي 8800 نقطه العام المقبل": {
+    "meaning": "Investment bank index projections aggregate corporate earnings estimates, valuation multiples, and macroeconomic models into a quantitative baseline for equity benchmark performance.",
+    "meaning_ar": "تُمثل تقديرات مؤشرات الأسهم الصادرة عن بنوك الاستثمار نماذج تحليلية تُجمّع توقعات أرباح الشركات ومضاعفات التقييم والبيانات الاقتصادية الكلية لتحديد المسار النظري للمؤشر العام."
   },
   "باستثمارات 7.5 مليون دولار.. رييس الوزراء يفتتح توسعات شركه سيراج بمصنع \"فلير\" لانظمه الاضاءه الحديثه": {
     "meaning": "The deployment of $7.5 million in capital expenditure allocates funding directly into physical production assets and modern lighting manufacturing lines at the facility.",
@@ -2300,6 +2316,10 @@
     "meaning": "A decline in the exchange rate of the Saudi Riyal against the Egyptian Pound lowers the local currency cost of transactions denominated in SAR, including religious tourism expenses, bilateral trade imports from Saudi Arabia, and corporate payments to Saudi counterparties.",
     "meaning_ar": "يؤدي تراجع سعر صرف الريال السعودي مقابل الجنيه المصري إلى خفض التكلفة بالعملة المحلية للمعاملات المقومة بالريال، بما في ذلك نفقات السياحة الدينية، والواردات التجارية من المملكة العربية السعودية، والمدفوعات المؤسسية للجهات السعودية."
   },
+  "سعر الريال السعودي في مصر اليوم الاربعاء 9/9/2026": {
+    "meaning": "Exchange rates for the Saudi Riyal against the Egyptian Pound reflect current foreign currency valuations in the banking sector, directly determining the conversion costs for bilateral trade, cross-border remittances, and religious travel expenditures.",
+    "meaning_ar": "تعكس أسعار صرف الريال السعودي مقابل الجنيه المصري التقييمات الحالية للعملة الأجنبية في القطاع المصرفي، وتحدد بشكل مباشر تكاليف التحويل للتبادل التجاري، والتحويلات النقدية، ونفقات السفر."
+  },
   "سعر الريال السعودي في مصر اليوم الثلاثاء 8/9/2026.. ختام التعاملات": {
     "meaning": "Official end-of-day foreign exchange rate publications reflect the daily settlement prices for the Saudi Riyal against the Egyptian Pound across the banking sector, determining transaction costs for bilateral trade, remittances, and travel expenses.",
     "meaning_ar": "تعكس أسعار الصرف المنشورة في ختام التعاملات أسعار التسوية اليومية للريال السعودي مقابل الجنيه المصري في القطاع المصرفي، وتحدد تكاليف المعاملات للتجارة البينية والتحويلات ونفقات السفر."
@@ -2833,6 +2853,10 @@
     "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
     "meaning_ar": "يمثل إنجاز حزم البنية التحتية الريفية انتقال شركات المقاولات ومواد البناء من مرحلة التنفيذ الإنشائي إلى مراحل التسليم النهائي والمطالبات المالية وضمان الأعمال."
   },
+  "مدبولي: تكليفات لكل المحافظات بزياده الرقعه الخضراء والتوسع في زراعه الاشجار": {
+    "meaning": "These government directives allocate municipal procurement budgets toward commercial nurseries, landscaping contractors, and irrigation equipment suppliers across all Egyptian governorates.",
+    "meaning_ar": "توجه هذه التكليفات الحكومية مخصصات المشتريات المحلية في المحافظات نحو المشاتل ومقاولي التشجير وموردي شبكات ومعدات الري."
+  },
   "مدبولي: حريصون علي تذليل التحديات امام مشروعات راس الحكمه لضمان تنفيذها وفق الجداول الزمنيه": {
     "meaning": "Government administrative intervention directly manages regulatory approvals, infrastructure access, and site logistics to align execution with contracted delivery milestones.",
     "meaning_ar": "يتضمن هذا التوجيه تدخلاً إدارياً حكومياً لتسريع الإجراءات التنظيمية وتوفير متطلبات البنية التحتية واللوجستيات لمطابقة مراحل التنفيذ مع الجداول الزمنية المحددة."
@@ -3060,6 +3084,10 @@
   "موشر البورصه الرييسي يتراجع 0.8% والسبعيني ينخفض 1.24%": {
     "meaning": "The decline in the benchmark EGX30 and the small-and-medium-cap EGX70 indices reflects a broad contraction in aggregate market capitalisation across both blue-chip corporations and mid-tier listed equities during the trading session.",
     "meaning_ar": "يعكس تراجع مؤشري \"إيجي إكس 30\" الرئيسي و\"إيجي إكس 70\" انخفاضاً واسع النطاق في القيمة السوقية الإجمالية للأسهم القيادية والمتوسطة المدرجة خلال جلسة التداول."
+  },
+  "موشر البورصه الرييسي يرتفع 0.58% والسبعيني يتراجع 0.31%": {
+    "meaning": "The divergence reflects a session where net capital flows concentrate in EGX30 large-cap constituent stocks, while liquidity simultaneously withdraws from EGX70 small- and medium-cap equities.",
+    "meaning_ar": "يعكس هذا التباين تركز صافي التدفقات النقدية داخل الأسهم القيادية المدرجة بمؤشر إيجي إكس 30، بالتزامن مع تراجع مستويات السيولة وخروجها من أسهم الشركات الصغيرة والمتوسطة في مؤشر إيجي إكس 70."
   },
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
@@ -3484,6 +3512,10 @@
   "“سبرينتس” تستهدف تدريب مليون طالب.. وتطلق منصه مدعومه بالذكاء الاصطناعي": {
     "meaning": "The company expands its operational capacity in the educational technology sector by deploying an artificial intelligence-driven platform to scale up student training volume.",
     "meaning_ar": "توسع الشركة قدرتها التشغيلية في قطاع تكنولوجيا التعليم عبر إطلاق منصة معتمدة على الذكاء الاصطناعي لزيادة حجم تدريب الطلاب."
+  },
+  "“سولف فاست” لحلول التحول الرقمي تتوسع في الشرق الاوسط وافريقيا خلال 2028": {
+    "meaning": "Geographic expansion into Middle Eastern and African markets involves establishing regional operational infrastructure, deploying digital transformation services across cross-border jurisdictions, and expanding the enterprise client base beyond the domestic market.",
+    "meaning_ar": "يتضمن التوسع الجغرافي في أسواق الشرق الأوسط وأفريقيا إنشاء بنية تحتية تشغيلية إقليمية، وتقديم خدمات التحول الرقمي عبر أسواق متعددة، وتوسيع قاعدة العملاء من الشركات خارج السوق المحلي."
   },
   "“سيتي جروب” يرجي توقعاته لخفض الفايده الامريكيه الي 2027": {
     "meaning": "The shift in monetary policy expectations maintains higher global benchmark interest rates for an extended period, which sets cross-border funding costs and sovereign borrowing yields at elevated levels.",
