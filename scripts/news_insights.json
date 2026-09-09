@@ -615,6 +615,10 @@
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
     "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
   },
+  "ازمه الديزل تهدد باستمرار الام الاسعار وتقليص الاستهلاك": {
+    "meaning": "Diesel supply constraints raise logistics, power generation, and manufacturing operating costs across supply chains, which transmits higher input prices to final goods and limits purchasing power.",
+    "meaning_ar": "تؤدي قيود إمدادات السولار إلى رفع التكاليف التشغيلية لشبكات النقل واللوجستيات والتصنيع، مما ينقل زيادات التكلفة إلى السلع النهائية ويؤثر على القوة الشرائية للمستهلكين."
+  },
   "ازمه الوقود تضاعف مبيعات السيارات الكهرباييه في روسيا": {
     "meaning": "Traditional fuel supply constraints drive consumer substitution toward alternative powertrains, directly shifting automotive retail volumes from internal combustion engine vehicles to electric models.",
     "meaning_ar": "تؤدي اختناقات إمدادات الوقود التقليدي إلى تحول نمط الاستهلاك نحو بدائل الطاقة، مما ينعكس في زيادة حصة مبيعات السيارات الكهربائية مقارنة بمركبات الاحتراق الداخلي."
@@ -646,6 +650,10 @@
   "اسعار البيض اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily poultry exchange quotes reflect prevailing market prices for table eggs, determined by daily supply volumes from farms against retail consumer demand and input feed costs.",
     "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية القيمة السوقية الحالية لبيض المائدة، والتي تتحدد بناءً على حجم المعروض اليومي من المزارع مقابل طلب تجزئة المستهلكين وتكاليف الأعلاف."
+  },
+  "اسعار البيض اليوم الاربعاء 9-9-2026 في مصر": {
+    "meaning": "Daily price listings for poultry products reflect immediate supply-and-demand balances, feed input costs, and distribution farm-gate rates within the domestic agricultural market.",
+    "meaning_ar": "تعكس بيانات الأسعار اليومية لمنتجات الدواجن التوازن المباشر بين العرض والطلب وتكاليف الأعلاف وأسعار التداول في المزارع داخل السوق الزراعية المحلية."
   },
   "اسعار البيض اليوم الثلاثاء 8-9-2026 في مصر": {
     "meaning": "Egg prices reflect daily supply-and-demand balances in the poultry sector, shaped by feed production costs, farm-gate pricing, and distribution logistics across local wholesale and retail markets.",
@@ -758,6 +766,10 @@
   "اسعار الفراخ في بورصه الدواجن اليوم الاثنين 7-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect spot farm-gate transaction rates, which operate based on prevailing feed input costs, operational expenses, and immediate supply availability in the domestic market.",
     "meaning_ar": "يعكس تسعير بورصة الدواجن اليومي أسعار التداول الفورية من أرض المزرعة، والتي تتحدد بناءً على تكاليف الأعلاف الحالية، ومصروفات التشغيل، ومستويات المعروض المتاح في السوق المحلي."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الاربعاء 9-9-2026": {
+    "meaning": "Poultry exchange price updates reflect the daily wholesale clearing rates determined by immediate farm-gate supply volumes and operational feed input costs across the local market.",
+    "meaning_ar": "تعكس تحديثات أسعار بورصة الدواجن أسعار التداول اليومية في سوق الجملة، والتي تتحدد بناءً على حجم المعروض من المزارع وتكاليف الأعلاف ومستلزمات الإنتاج في السوق المحلي."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الثلاثاء 8-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect wholesale spot prices determined by real-time farm-gate supply volumes and operational feed input costs across the livestock supply chain.",
@@ -2308,6 +2320,10 @@
     "meaning": "This headline tracks the daily end-consumer retail price point for table eggs in the domestic market, reflecting current supply-and-demand balances and operational cost inputs across the local poultry distribution chain.",
     "meaning_ar": "يرصد هذا الخبر السعر اليومي النهائي لكرتونة بيض المائدة للمستهلك في السوق المحلية، وهو ما يعكس آليات العرض والطلب وتكاليف التشغيل الحالية عبر سلاسل توزيع الدواجن."
   },
+  "سعر كرتونه البيض اليوم 9-9-2026 للمستهلك في السوق المحليه": {
+    "meaning": "Retail egg prices reflect daily supply and demand dynamics in the local poultry sector, driven directly by underlying production costs including imported feed components, energy, and transportation.",
+    "meaning_ar": "تعكس أسعار بيع بيض المائدة للمستهلك التوازن اليومي بين العرض والطلب في قطاع الدواجن المحلي، وتتأثر مباشرة بتكاليف الإنتاج التشغيلية ومدخلات الأعلاف والنقل."
+  },
   "سعر ومواصفات سيارات هيونداي النترا AD موديل 2027": {
     "meaning": "Automotive distributors establish retail pricing and trim specifications for incoming vehicle model years, reflecting current cost structures, currency dynamics, and import or local assembly parameters.",
     "meaning_ar": "يحدد وكلاء وموزعو السيارات الأسعار الرسمية والمواصفات الفنية للطرازات الجديدة، بما يعكس هياكل التكلفة القائمة، وحركة أسعار الصرف، ومحددات الاستيراد أو التجميع المحلي."
@@ -2980,6 +2996,10 @@
   "موجه بيع السندات تعيد توزيع فاتوره الدين عالميا": {
     "meaning": "A widespread drop in bond prices raises benchmark yields, which alters the structure of borrowing costs and debt service obligations for sovereign and corporate issuers across global markets.",
     "meaning_ar": "يؤدي انخفاض أسعار السندات إلى ارتفاع العوائد القياسية، مما يغير هيكل تكاليف الاقتراض وخدمة الدين للجهات السيادية والشركات عبر الأسواق المالية العالمية."
+  },
+  "موسسه البترول الكويتيه تعرض نقل شحنات من سفينه لاخري خارج مضيق هرمز": {
+    "meaning": "Ship-to-ship (STS) cargo transfer outside the Strait of Hormuz establishes an alternative maritime logistics mechanism that shifts crude oil loading operations beyond a regional chokepoint.",
+    "meaning_ar": "يمثل تفريغ ونقل الشحنات من سفينة إلى أخرى خارج مضيق هرمز آلية لوجستية بحرية بديلة تنقل عمليات تحميل وتداول النفط الخام إلى نقاط جغرافية تقع خارج هذا الممر المائي."
   },
   "موشر EGX30 يقترب من 57 الف نقطه.. هل تبدا موجه صعود جديده؟": {
     "meaning": "The headline tracks the benchmark EGX30 index testing the 57,000-point numerical threshold, which measures the aggregate market-capitalization-weighted performance of the 30 most liquid equities traded on the Egyptian Exchange.",
