@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-09T05:35:24.360935+00:00",
+  "builtAt": "2026-09-09T10:00:49.230927+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192185,
-    "withoutTickerInHeading": 36145,
+    "items": 192190,
+    "withoutTickerInHeading": 36146,
     "tickerNotInThisDirectory": 28862,
-    "attributedToAnIssuer": 127178,
+    "attributedToAnIssuer": 127182,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-08",
-        "items": 296,
-        "expected": 296,
+        "harvested": "2026-09-09",
+        "items": 301,
+        "expected": 301,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 576,
+    "items": 580,
     "failures": {}
   },
   "issuers": [
@@ -3740,9 +3740,9 @@
     },
     {
       "ticker": "MILS",
-      "egxFilingCount": 806,
-      "latestEgxFilingId": "294088",
-      "latestEgxFilingAt": "2026-08-31T09:37:54",
+      "egxFilingCount": 807,
+      "latestEgxFilingId": "294502",
+      "latestEgxFilingAt": "2026-09-09T11:20:36",
       "candidateIssuerWebsite": "https://www.northcairomills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MILS/profile",
       "websiteStatus": null,
@@ -3824,9 +3824,9 @@
     },
     {
       "ticker": "MOIL",
-      "egxFilingCount": 775,
-      "latestEgxFilingId": "294388",
-      "latestEgxFilingAt": "2026-09-07T09:22:05",
+      "egxFilingCount": 776,
+      "latestEgxFilingId": "294504",
+      "latestEgxFilingAt": "2026-09-09T11:22:56",
       "candidateIssuerWebsite": "https://www.maridive.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MOIL/profile",
       "websiteStatus": null,
@@ -4222,9 +4222,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 325,
-      "latestEgxFilingId": "294469",
-      "latestEgxFilingAt": "2026-09-08T15:36:45",
+      "egxFilingCount": 326,
+      "latestEgxFilingId": "294501",
+      "latestEgxFilingAt": "2026-09-09T11:16:14",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4534,9 +4534,9 @@
     },
     {
       "ticker": "SPMD",
-      "egxFilingCount": 553,
-      "latestEgxFilingId": "291783",
-      "latestEgxFilingAt": "2026-07-21T15:16:12",
+      "egxFilingCount": 554,
+      "latestEgxFilingId": "294505",
+      "latestEgxFilingAt": "2026-09-09T11:30:27",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
       "websiteStatus": {
