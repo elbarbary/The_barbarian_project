@@ -2317,6 +2317,10 @@
     "meaning": "Digital transformation in the tax administration operates through electronic invoicing, automated filing systems, and integrated transaction data to track commercial activities across the market.",
     "meaning_ar": "يعتمد التحول الرقمي في الإدارة الضريبية على الفاتورة الإلكترونية، وأنظمة الإقرار المميكنة، والربط المباشر لبيانات المعاملات لتتبع الأنشطة التجارية في السوق."
   },
+  "طلبيه جديده من ايرباص": {
+    "meaning": "A new aircraft order represents an expansion of fleet capacity and capital expenditure for the purchasing carrier, while adding to the manufacturer's operational order backlog and production schedule.",
+    "meaning_ar": "تمثل طلبية الطائرات الجديدة توسعاً في السعة التشغيلية للأسطول ونفقات رأسمالية للشركة المشترية، بينما تضيف إلى سجل الطلبات المتراكمة وجداول الإنتاج لدى الشركة المصنعة."
+  },
   "طول دوره العايد وغياب الخبرات يقللان جاذبيه قطاع الرعايه الصحيه الحرجه": {
     "meaning": "Critical healthcare facilities require high initial capital expenditure for specialized medical equipment alongside extended payback periods, while operational execution relies on scarce specialized technical expertise.",
     "meaning_ar": "تتطلب منشآت الرعاية الصحية الحرجة نفقات رأسمالية أولية مرتفعة للأجهزة الطبية المتخصصة مع فترات استرداد طويلة لرأس المال، بينما يعتمد التشغيل على كوادر فنية متخصصة تتسم بمحدودية الوفرة."
@@ -2708,6 +2712,10 @@
   "مصر للبترول تتوسع خارجيا وتفتتح منافذ": {
     "meaning": "The company establishes retail distribution outlets and commercial operations in international markets, broadening its operational footprint and distribution network beyond the domestic market.",
     "meaning_ar": "تؤسس الشركة منافذ توزيع تجزئة وعمليات تجارية في أسواق خارجية، مما يوسع نطاق شبكة التوزيع الجغرافي والتشغيلي خارج السوق المحلي."
+  },
+  "مصر للطيران تبحث مع مطار لندن ستانستد تشغيل رحلات مباشره بين القاهره ولندن": {
+    "meaning": "Operating direct flights to London Stansted adds an additional international route to EgyptAir's network and expands its operational capacity between Cairo and the UK.",
+    "meaning_ar": "يضيف تشغيل رحلات مباشرة إلى مطار لندن ستانستد مساراً دولياً جديداً إلى شبكة خطوط مصر للطيران ويوسع سعتها التشغيلية بين القاهرة والمملكة المتحدة."
   },
   "مصر للطيران تطلق اولي رحلاتها الجويه الي زنجبار بتنزانيا": {
     "meaning": "Operating direct flights to Zanzibar adds a scheduled destination to the carrier's African network and allocates active fleet capacity to the East Africa corridor.",
