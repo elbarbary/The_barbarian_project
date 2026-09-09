@@ -1868,6 +1868,10 @@
     "meaning": "This direct capital deployment allocates $16 million in capital expenditure to establish local assembly and manufacturing operations for ambulance vehicles and dental equipment within the domestic medical equipment sector.",
     "meaning_ar": "يُمثل هذا الضخ الرأسمالي توجيهاً لاستثمارات بقيمة 16 مليون دولار في الإنفاق الرأسمالي لتأسيس خطوط تصنيع وتجميع محلي لسيارات الإسعاف وتجهيزات طب الأسنان ضمن قطاع الأجهزة والمستلزمات الطبية."
   },
+  "تنظيم الاتصالات: 57 مليون اجمالي عدد المحافظ الالكترونيه خلال النصف الاول بنمو 23%": {
+    "meaning": "The expansion in e-wallet accounts increases digital transaction volumes across telecommunications operators and banking networks, shifting payment settlements from physical cash to electronic clearing systems.",
+    "meaning_ar": "يؤدي ارتفاع عدد المحافظ الإلكترونية إلى زيادة حجم المعاملات الرقمية عبر شبكات شركات الاتصالات والقطاع المصرفي، مما يحول تسوية المدفوعات من النقد السائل إلى أنظمة المقاصة الإلكترونية."
+  },
   "تنميه المشروعات يشارك في معرض الصين الدولي لفتح اسواق جديده": {
     "meaning": "Participation in international trade fairs provides affiliated micro, small, and medium enterprises with direct business-to-business (B2B) exhibition space and commercial exposure to foreign buyers and distribution networks.",
     "meaning_ar": "تتيح المشاركة في المعارض التجارية الدولية للمشروعات الصغيرة والمتوسطة التابعة مساحات عرض وتسويق مباشرة للشركات الأجنبية وشبكات التوزيع الخارجية."
@@ -2052,6 +2056,10 @@
     "meaning": "Bilateral labor agreements establish structured regulatory channels for skilled cross-border workforce deployment and align domestic vocational training standards with foreign labor market requirements.",
     "meaning_ar": "تؤسس الاتفاقيات العمالية الثنائية أطراً تنظيمية رسمية لانتقال الكوادر الفنية عبر الحدود، وتربط معايير التدريب المهني المحلية باحتياجات سوق العمل الخارجي."
   },
+  "رداد: البرنامج الوطني للعمل اللايق خطوه مهمه لبناء سوق عمل اكثر عداله واستدامه": {
+    "meaning": "The National Decent Work Program establishes structured labor standards, workforce formalization protocols, and social protection frameworks in alignment with International Labour Organization (ILO) benchmarks.",
+    "meaning_ar": "يحدد البرنامج الوطني للعمل اللائق معايير التوظيف المؤسسي، وأطر الحماية الاجتماعية، وآليات تقنين أوضاع العمالة بالتوافق مع معايير منظمة العمل الدولية."
+  },
   "رداد: نعمل علي منظومه متكامله لضمان حقوق وحمايه العمال المنزليين في مصر": {
     "meaning": "Establishing an integrated regulatory framework for domestic labor formalizes contractual arrangements, bringing an informal segment of the workforce under the oversight of national labor regulations and social insurance systems.",
     "meaning_ar": "يؤدي وضع منظومة تنظيمية متكاملة للعمالة المنزلية إلى مأسسة العلاقات التعاقدية وإدراج هذا القطاع غير الرسمي تحت إشراف تشريعات العمل ومنظومة التأمينات الاجتماعية."
@@ -2167,6 +2175,10 @@
   "سعر الدينار الكويتي اليوم الاحد 6-9-2026 بدايه التعاملات": {
     "meaning": "Opening foreign exchange quotations set the benchmark conversion rates for the Kuwaiti Dinar across Egyptian commercial banks, governing the immediate clearing of bilateral trade invoices and cross-border remittances.",
     "meaning_ar": "يحدد نشر أسعار صرف العملات الأجنبية في بداية التعاملات السعر المرجعي لتحويل الدينار الكويتي بالبنوك المصرية، وتُنفذ بناءً عليه عمليات المقاصة الفورية للتحويلات النقدية وتسوية المعاملات التجارية المشتركة."
+  },
+  "سعر الدينار الكويتي اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
+    "meaning": "Official foreign exchange quotations for the Kuwaiti Dinar establish the daily conversion rates applied by the banking sector for commercial transactions, cross-border remittances, and foreign currency balance sheet valuations.",
+    "meaning_ar": "تحدد أسعار صرف الدينار الكويتي المعلنة أسعار التحويل اليومية المعتمدة لدى القطاع المصرفي لتسوية المعاملات التجارية والتحويلات المالية وتقييم الالتزامات بالعملة الأجنبية."
   },
   "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
     "meaning": "Publishing the opening exchange rate establishes the daily baseline valuation for the Kuwaiti Dinar against the Egyptian Pound, which governs the settlement terms for cross-border remittances, bilateral trade, and interbank foreign currency transactions.",
