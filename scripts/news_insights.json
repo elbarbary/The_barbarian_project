@@ -451,6 +451,10 @@
     "meaning": "This operational expansion scales Accor's hospitality footprint and increases aggregate hotel room supply across the Egyptian tourism sector.",
     "meaning_ar": "يمثل هذا التوسع التشغيلي زيادة في النطاق الجغرافي لشركة «أكور» ورفعاً لإجمالي المعروض من الغرف الفندقية ضمن قطاع الضيافة والسياحة المصري."
   },
+  "«اكور» الفرنسيه تعتزم التوسع في مصر باضافه 25 الف غرفه فندقيه خلال 3 سنوات": {
+    "meaning": "This operational expansion scales the hospitality group's room capacity in the Egyptian market through the execution of new management and franchise contracts across regional properties over a three-year timeline.",
+    "meaning_ar": "يُمثّل هذا التوسع التشغيلي زيادة في الطاقة الاستيعابية الفندقية للمجموعة في السوق المصري عبر إبرام عقود إدارة وحقوق امتياز لمنشآت جديدة على مدى زمني مدته ثلاث سنوات."
+  },
   "«الاسكندريه للحاويات» تعتزم شراء 6 جرارات مواني ب40 مليون جنيه": {
     "meaning": "This transaction constitutes a capital expenditure (CapEx) of EGP 40 million on equipment, allocating funds to property, plant, and equipment for internal transport machinery that transfers containers between berths and storage yards.",
     "meaning_ar": "يمثل هذا الإجراء إنفاقاً رأسمالياً بقيمة 40 مليون جنيه لشراء أصول ومعدات تشغيلية، تُستخدم في عمليات النقل الداخلي للحاويات بين أرصفة الشحن وساحات التخزين داخل المحطة."
@@ -534,6 +538,10 @@
   "«لينج لونج» تدشن مجمعا صناعيا متكاملا لانتاج اطارات السيارات باستثمارات 2 مليار دولار": {
     "meaning": "A direct capital deployment of $2 billion to establish a dedicated tire manufacturing complex introduces large-scale domestic production capacity to Egypt's automotive supply chain.",
     "meaning_ar": "يُمثل ضخ استثمارات رأسمالية بقيمة ملياري دولار لإنشاء مجمع صناعي لإطارات السيارات إضافة لطاقات إنتاجية محلية واسعة النطاق داخل سلاسل إمداد قطاع السيارات في مصر."
+  },
+  "«مستثمرو العاشر» و«الماليه» تطلقان مبادره لتسويه المستحقات التصديريه ل 5 الاف مصنع": {
+    "meaning": "This initiative establishes a framework between the Ministry of Finance and the 10th of Ramadan Investors Association to disburse overdue export subsidy rebates to 5,000 industrial facilities, directly settling government payables and injecting working capital into manufacturing balance sheets.",
+    "meaning_ar": "تؤسس هذه المبادرة آلية بين وزارة المالية وجمعية مستثمري العاشر من رمضان لصرف متأخرات أعباء الصادرات لـ 5 آلاف منشأة صناعية، مما يسوي المستحقات الحكومية ويضخ سيولة نقدية مباشرة ضمن رأس المال العامل للشركات المصنعة."
   },
   "«مصر للمقاصه» تستهدف تشغيل وعاء «الشورت سيلينج» مطلع نوفمبر": {
     "meaning": "Misr for Central Clearing, Depository and Registry (MCDR) operates the operational infrastructure and lending pool required for the settlement and execution of short selling transactions on the Egyptian Exchange.",
@@ -1646,6 +1654,10 @@
   "اوبر تعين بنوكا لترتيب اول طرح لها لسندات دين متعدده الشرايح مقومه باليورو": {
     "meaning": "Mandating investment banks to arrange a multi-tranche euro-denominated debt issuance accesses the European institutional bond market to raise foreign-currency capital across varied maturity profiles.",
     "meaning_ar": "يمثل تفويض بنوك استثمار لترتيب طرح سندات دين متعددة الشرائح مقومة باليورو آلية لدخول سوق السندات المؤسسية الأوروبية وجمع سيولة بالعملة الأجنبية عبر آجال استحقاق مختلفة."
+  },
+  "اول اسبوع تصديري يسجل 2121 طنا من القطن": {
+    "meaning": "The execution of 2,121 tonnes in cotton export shipments marks the commencement of seasonal outflow volumes in the agricultural trading market.",
+    "meaning_ar": "يمثل تنفيذ تصدير 2121 طناً من القطن بدء تدفق أحجام الشحنات التصديرية الموسمية في سوق الحاصلات الزراعية."
   },
   "اي اند مصر تتصدر سوق المحمول: الاقل شكاوي والاسرع استجابه خلال النصف الاول من 2026": {
     "meaning": "Regulatory customer service indicators measure operational support efficiency and response speed across the mobile telecommunications sector under National Telecommunications Regulatory Authority (NTRA) benchmarks.",
