@@ -363,6 +363,10 @@
     "meaning": "Higher revenues reflect an expansion in fuel distribution volumes, refined product sales, or adjustments in regulated petroleum product prices during the fiscal year.",
     "meaning_ar": "تعكس زيادة الإيرادات نمو حجم توزيع الوقود ومبيعات المنتجات البترولية المكررة، أو تعديل أسعار بيع المنتجات البترولية المحددة خلال العام المالي."
   },
+  "mnt tech holding applies to list shares on egx": {
+    "meaning": "An application to list shares on the EGX initiates the regulatory review process with the Financial Regulatory Authority and the exchange to register the company's equity on the public market, transforming it into a publicly traded corporate entity.",
+    "meaning_ar": "يمثل التقدم بطلب لقيد الأسهم في البورصة المصرية بدء إجراءات المراجعة التنظيمية مع الهيئة العامة للرقابة المالية وإدارة البورصة لتسجيل أسهم الشركة في السوق المفتوح، مما يحولها إلى كيان مساهم متداول علنًا."
+  },
   "paytabs to acquire amazon payment services mena operations": {
     "meaning": "This acquisition consolidates digital payment processing infrastructure and merchant portfolios across the MENA region under a single fintech operator.",
     "meaning_ar": "تدمج عملية الاستحواذ هذه البنية التحتية لمعالجة المدفوعات الرقمية ومحافظ التجار في منطقة الشرق الأوسط وشمال أفريقيا تحت مظلة مشغل تكنولوجيا مالية واحد."
@@ -906,6 +910,10 @@
   "الاقتصاد الامريكي يضيف 162 الف وظيفه في اغسطس.. والبطاله تستقر عند 4.1%": {
     "meaning": "US non-farm payroll additions reflect net hiring activity across non-agricultural sectors, while the unemployment rate measures the proportion of the active labor force seeking employment, serving as core macroeconomic indicators for global monetary policy and liquidity conditions.",
     "meaning_ar": "تعكس إضافة الوظائف غير الزراعية صافي نشاط التوظيف عبر القطاعات غير الزراعية في الولايات المتحدة، بينما يقيس معدل البطالة نسبة القوى العاملة النشطة التي تبحث عن عمل، وتُعد هذه الأرقام مؤشرات اقتصادية كلية أساسية للسياسة النقدية والسيولة العالمية."
+  },
+  "الاقتصاد الكوري يضيف 184 الف وظيفه جديده في اغسطس": {
+    "meaning": "The addition of 184,000 jobs in August reflects an expansion in the labor supply absorption across South Korean industrial and service sectors, representing the current monthly rate of operational employment growth.",
+    "meaning_ar": "تعكس إضافة 184 ألف وظيفة في أغسطس اتساعاً في استيعاب المعروض من العمالة عبر القطاعات الصناعية والخدمية في كوريا الجنوبية، وهو ما يمثل المعدل الشهري الحالي لنمو التشغيل الفعلي."
   },
   "الامارات تشارك في منتدي لتنظيم مستحضرات التجميل العالميه": {
     "meaning": "Participation in international regulatory forums establishes direct alignment between domestic cosmetic product standards, safety specifications, and global trade compliance protocols.",
@@ -1586,6 +1594,10 @@
   "بيانات التضخم تحسم توجهات الفايده الامريكيه وسط ترقب الاسواق": {
     "meaning": "Official inflation data directly dictates the US Federal Reserve's monetary policy adjustments, which determine benchmark interest rate levels and drive international capital movements across emerging and global financial markets.",
     "meaning_ar": "تحدد بيانات التضخم الرسمية مسار السياسة النقدية لمجلس الاحتياطي الفيدرالي الأمريكي، وهو ما يضبط أسعار الفائدة الأساسية ويوجه حركة تدفقات رؤوس الأموال في الأسواق المالية العالمية والناشئة."
+  },
+  "بيتي للصناعات الغذاييه تعتزم ضخ 6 مليارات جنيه استثمارات اضافيه في مصر": {
+    "meaning": "Capital expenditure of 6 billion Egyptian pounds expands production lines and manufacturing capacity in the local food and beverage sector.",
+    "meaning_ar": "يخصص هذا الإنفاق الرأسمالي البالغ 6 مليارات جنيه لتوسيع خطوط الإنتاج والطاقة التصنيعية في قطاع الأغذية والمشروبات المحلي."
   },
   "بيرنا المكسيكيه تستكشف فرص الشراكه والتعاون مع شركات الادويه المصريه": {
     "meaning": "Partnership explorations between foreign and domestic pharmaceutical companies involve technology transfer frameworks, contract manufacturing agreements, and local distribution channels. These arrangements link multinational drug formulations with existing domestic production capacity and regional supply chains.",
@@ -2292,6 +2304,10 @@
   "صادرات القطن تتجاوز 205 ملايين دولار منذ انطلاق الموسم و25 شركه تتصدر المشهد": {
     "meaning": "Cotton export values exceeding $205 million reflect cross-border commercial transactions executed by 25 domestic trading and ginning companies within the agricultural export sector.",
     "meaning_ar": "تجاوز حصيلة صادرات القطن 205 ملايين دولار يمثل معاملات تجارية خارجية نفذتها 25 شركة محلية تعمل في قطاع تجارة وحليج وتصدير المحاصيل الزراعية."
+  },
+  "صادرات غير بتروليه خلال النصف الاول": {
+    "meaning": "Non-oil exports measure the foreign currency inflows generated from agricultural, industrial, and manufactured goods produced outside the hydrocarbon sector over a six-month reporting period.",
+    "meaning_ar": "تقيس الصادرات غير البترولية حجم تدفقات النقد الأجنبي الناتجة عن تداول السلع الزراعية والصناعية والتصنيعية خارج قطاع المحروقات خلال فترة إفصاح تمتد لستة أشهر."
   },
   "صادرات كوريا الجنوبيه تتجاوز الرقم القياسي السنوي عند 709.4 مليار دولار": {
     "meaning": "Reaching record annual export volumes reflects higher aggregate cross-border shipments of industrial goods, which expands the national trade balance and increases foreign currency receipts from international trade.",
