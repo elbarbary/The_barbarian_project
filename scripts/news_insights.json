@@ -147,6 +147,10 @@
     "meaning": "Appointing a new Chairman and Managing Director shifts executive leadership and corporate governance responsibilities, placing operational management, local automotive assembly oversight, and supplier relations under new administrative direction.",
     "meaning_ar": "ينقل تعيين رئيس مجلس إدارة وعضو منتدب جديد مسؤوليات القيادة التنفيذية وحوكمة الشركات، مما يضع الإدارة التشغيلية والإشراف على تجميع السيارات محلياً وعلاقات الموردين تحت إدارة جديدة."
   },
+  "Gov’t halts external borrowing for transport projects unless debt committee approves": {
+    "meaning": "The directive centralises the approval of foreign currency financing for transport infrastructure under a specialised debt committee, conditioning project execution on sovereign debt clearance.",
+    "meaning_ar": "يحصر هذا التوجيه الموافقة على التمويلات الخارجية لمشروعات البنية التحتية للنقل في لجنة إدارة الدين العام، مما يربط تنفيذ المشروعات بالحصول على اعتماد سيادي مسبق للاقتراض."
+  },
   "Hospitals have the data. Few have the informatics to use it": {
     "meaning": "Healthcare providers possess raw clinical and operational data assets but lack the specialized health informatics infrastructure required to process and integrate them into management and treatment workflows.",
     "meaning_ar": "تمتلك منشآت الرعاية الصحية أصول البيانات السريرية والتشغيلية، لكنها تفتقر إلى البنية التحتية المتخصصة في المعلوماتية الصحية اللازمة لمعالجة هذه البيانات ودمجها في مسارات الإدارة والعلاج."
@@ -158,6 +162,14 @@
   "Insider trading blackout now runs on the earnings calendar only": {
     "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
     "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
+  },
+  "Local firms are ahead of the global average on digital trade readiness, Standard Chartered finds": {
+    "meaning": "Higher digital trade readiness reflects the integration of electronic documentation, automated customs clearing, and cross-border digital payment systems into local operational workflows.",
+    "meaning_ar": "يعكس ارتفاع الجاهزية للتجارة الرقمية دمج التوثيق الإلكتروني، والتخليص الجمركي المميكن، وأنظمة الدفع الرقمي عبر الحدود ضمن مسارات العمل التشغيلية للشركات المحلية."
+  },
+  "MNT-Halan’s local arm is heading to the EGX": {
+    "meaning": "An initial public offering on the EGX lists a company's shares for public trading on the regulated exchange, which broadens its institutional and retail shareholder base and subjects its financial reporting to local capital market disclosure regulations.",
+    "meaning_ar": "يؤدي الطرح العام في البورصة المصرية إلى إدراج أسهم الشركة للتداول العام في سوق منظمة، مما يوسع قاعدة مساهميها من المؤسسات والأفراد ويخضع قوائمها المالية لقواعد الإفصاح المنظمة لسوق المال المحلي."
   },
   "Meet Egyptian 3D concrete printing company Layn’s Zeyad Zein": {
     "meaning": "3D concrete printing introduces additive manufacturing technology to the domestic construction and building materials sector, automating on-site material deposition and altering standard construction supply chains.",
@@ -179,6 +191,10 @@
     "meaning": "Establishing operations in the Dubai International Financial Centre (DIFC) creates a cross-border financial infrastructure that directly links Egyptian expatriates in the UAE to domestic electronic bill payment and collection networks in Egypt.",
     "meaning_ar": "يؤسس إطلاق العمليات في مركز دبي المالي العالمي قناة للبنية التحتية للمدفوعات عبر الحدود، تربط المغتربين المصريين في الإمارات مباشرة بشبكات سداد الفواتير والتحصيل الإلكتروني المحلية في مصر."
   },
+  "Six Sigma meets supply chain strategy": {
+    "meaning": "Integrating Six Sigma methodologies into supply chain strategy standardizes operational workflows and applies statistical quality control across procurement, manufacturing, and distribution processes.",
+    "meaning_ar": "يؤدي دمج منهجيات \"سيكس سيجما\" في استراتيجية سلاسل الإمداد إلى توحيد تدفقات العمليات التشغيلية وتطبيق معايير الرقابة الإحصائية على الجودة عبر مراحل التوريد والتصنيع والتوزيع."
+  },
   "The business you don’t hear when you press play": {
     "meaning": "Digital streaming platforms operate through backend intellectual property licensing, infrastructure hosting, and automated royalty settlement systems distributed among content creators, aggregators, and service operators.",
     "meaning_ar": "تعمل منصات البث الرقمي من خلال البنية التحتية الخلفية لترخيص حقوق الملكية الفكرية، والاستضافة التقنية، وأنظمة تسوية الإتاوات الآلية بين صانعي المحتوى وشركات التوزيع ومقدمي الخدمة."
@@ -186,6 +202,10 @@
   "The gov’t overhauls drugs pricing with FX band, smaller reference basket, and local production advantage": {
     "meaning": "The updated pricing framework links pharmaceutical prices to foreign exchange movements within a defined band, narrows the international price comparison basket, and assigns a specific pricing differential to domestically manufactured products.",
     "meaning_ar": "تربط منظومة التسعير المحدثة أسعار الأدوية بتحركات أسعار الصرف ضمن نطاق محدد، وتقلص سلة المقارنة السعرية الدولية، وتمنح ميزة سعرية محددة للمنتجات المصنعة محلياً."
+  },
+  "The hedge fund industry's biggest players added USD 224 bn in 20 months": {
+    "meaning": "This indicates an expansion in assets under management (AUM) across top-tier hedge funds, driven by net investor capital inflows and portfolio asset revaluations over the period.",
+    "meaning_ar": "يعكس هذا نمو حجم الأصول المدارة لدى كبرى صناديق التحوط نتيجة صافي التدفقات الرأسمالية للمستثمرين وإعادة تقييم الأصول في المحافظ الاستثمارية خلال تلك الفترة."
   },
   "The little details make the meal at Château Ayadina in New Cairo": {
     "meaning": "This highlights product differentiation and operational service standards within the food and beverage (F&B) consumer sector operating in the New Cairo commercial market.",
