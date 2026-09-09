@@ -671,6 +671,10 @@
     "meaning": "Daily vegetable and fruit prices reflect wholesale market supply and demand conditions, logistics costs, and seasonal harvest volumes that directly influence the consumer price index (CPI) food basket component.",
     "meaning_ar": "تعكس الأسعار اليومية للخضروات والفاكهة مستويات العرض والطلب في أسواق الجملة وتكاليف النقل وحجم الحصاد الموسمي، والتي تشكل معاً المكون الغذائي في المؤشر العام لأسعار المستهلكين."
   },
+  "اسعار الخضروات والفاكهه والباذنجان والزيتون اليوم الاربعاء 9-9-2026": {
+    "meaning": "Daily agricultural commodity price tracking reflects real-time spot market transactions and pricing mechanisms determined by supply chain deliveries and distribution costs in wholesale and retail markets.",
+    "meaning_ar": "يعكس التتبع اليومي لأسعار السلع الزراعية المعاملات الفورية في الأسواق وآليات التسعير المحددة بحجم المعروض وتكاليف التوزيع في أسواق الجملة والتجزئة."
+  },
   "اسعار الخضروات والفاكهه والبطاطس والطماطم اليوم السبت 5-9-2026": {
     "meaning": "Daily agricultural price reporting reflects spot wholesale and retail commodity market valuations based on current supply chain volumes and harvest cycles, serving as a primary component of headline consumer price inflation metrics.",
     "meaning_ar": "تعكس التقارير اليومية لأسعار السلع الزراعية تقييمات أسواق الجملة والتجزئة الحالية وفقاً لحجم المعروض ومواسم الحصاد، وتشكل عنصراً رئيسياً في قياس معدلات التضخم لأسعار المستهلكين."
@@ -3420,6 +3424,10 @@
   "“نور” طلعت مصطفي تشعل السوشيال ميديا.. اشاده بالاعلان والتزام الشركه في التسليم": {
     "meaning": "Adherence to delivery schedules in off-plan real estate operationalizes the conversion of unearned revenue into recognized revenue upon unit handover, while promotional campaigns register as selling and marketing expenditures.",
     "meaning_ar": "يعكس الالتزام بجداول التسليم في المشروعات العقارية آلية تحويل الإيرادات المؤجلة إلى إيرادات محققة ومثبتة دفترياً عند التسليم الفعلي للوحدات، بينما تُسجل الحملات الترويجية كبند ضمن المصروفات التسويقية."
+  },
+  "“هاير للاجهزه الكهرباييه” تفتتح المرحله الثانيه من مجمع “العاشر” نوفمبر المقبل": {
+    "meaning": "The launch of the second phase expands the company's manufacturing footprint in the 10th of Ramadan industrial zone and adds new domestic assembly lines to its existing production complex.",
+    "meaning_ar": "يمثل تدشين المرحلة الثانية توسيعاً للقاعدة التصنيعية في مدينة العاشر من رمضان وإضافة خطوط تجميع وإنتاج جديدة للأجهزة إلى المجمع الصناعي القائم."
   },
   "“هيوماين” السعوديه تبدا في استقطاب فريق للتحضير للطرح العام": {
     "meaning": "Recruiting a dedicated preparation team establishes the internal corporate governance, financial reporting, and compliance framework necessary to fulfill public listing and regulatory requirements.",
