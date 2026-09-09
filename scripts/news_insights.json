@@ -1079,6 +1079,10 @@
     "meaning": "The second phase of the national initiative deploys public capital expenditure into rural infrastructure, contracting, and building materials sectors through 18,900 state-funded projects.",
     "meaning_ar": "توجّه المرحلة الثانية من المبادرة القومية الإنفاق الرأسمالي الحكومي إلى قطاعات البنية التحتية والمقاولات ومواد البناء عبر تنفيذ 18900 مشروع ممول من الدولة."
   },
+  "الحكومه تسعي لجذب الشركات الناشيه المصريه العامله بالخارج للسوق المحليه": {
+    "meaning": "The government offers administrative, regulatory, or tax frameworks designed to register and integrate offshore-operating Egyptian startups into the domestic jurisdiction, establishing their operational bases and fiscal reporting within the local corporate registry.",
+    "meaning_ar": "توفر الحكومة أطراً إدارية وتنظيمية وضريبية لإعادة تسجيل ودمج الشركات الناشئة المصرية المؤسسة بالخارج داخل النطاق المحلي، مما يتيح نقل مقراتها التشغيلية وإدراج قوائمها المالية بالسجل التجاري المصري."
+  },
   "الحكومه تقترب من طرح «الامل الشريف للبلاستيك» بالبورصه ديسمبر المقبل": {
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
     "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
@@ -2091,6 +2095,10 @@
   "رشا عبد العال: نستعد للتوسع في استخدام الذكاء الاصطناعي لتطوير الخدمات الضريبيه": {
     "meaning": "The Egyptian Tax Authority integrates artificial intelligence tools into its administrative workflows, automating tax assessment, compliance monitoring, and taxpayer service operations.",
     "meaning_ar": "تُدرج مصلحة الضرائب المصرية أدوات الذكاء الاصطناعي ضمن منظومة عملها الإدارية لأتمتة عمليات الفحص الضريبي، ومتابعة الالتزام، وتقديم الخدمات للممولين."
+  },
+  "رشا عبدالعال: حزم التيسيرات ترسخ مفهوم الشراكه بين المصلحه والمجتمع الضريبي": {
+    "meaning": "Tax facilitation packages establish administrative frameworks for settling tax disputes, simplifying filing procedures, and standardizing compliance protocols for registered businesses.",
+    "meaning_ar": "تتضمن حزم التيسيرات الضريبية أطراً إدارية لإنهاء النزاعات الضريبية وتبسيط إجراءات تقديم الإقرارات وتوحيد آليات الامتثال للمؤسسات المسجلة."
   },
   "روسنفت: الصين ساهمت في استقرار اسواق النفط العالميه خلال ازمه هرمز": {
     "meaning": "Large-scale strategic petroleum reserves and diversified import logistics in major consumer nations absorb maritime transit disruptions and maintain equilibrium in physical crude supply chains.",
