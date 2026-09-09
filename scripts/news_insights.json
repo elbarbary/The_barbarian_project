@@ -1,4 +1,8 @@
 {
+  "\"العمل\" تحذر الشباب من صفحات وفيديوهات وهميه تروج للسفر الي ايطاليا": {
+    "meaning": "The Ministry of Labor regulates official overseas employment channels and issues public compliance alerts to restrict fraudulent, unlicensed recruitment activities targeting the domestic labor force.",
+    "meaning_ar": "تنظم وزارة العمل قنوات التوظيف والتشغيل بالخارج وتصدر إخطارات رقابية رسمية لمكافحة أنشطة استقدام العمالة غير المرخصة وخارج الأطر القانونية المعتمدة."
+  },
   "\"ام اند بي\" توقع مذكره تفاهم مع المختبر التنظيمي ل\"الرقابه الماليه\" لتعزيز حضوره الاقليمي": {
     "meaning": "This memorandum of understanding enrolls the company in the Financial Regulatory Authority's regulatory sandbox, where financial technology products and services undergo testing in a live, controlled regulatory environment under direct supervisory oversight.",
     "meaning_ar": "تتيح مذكرة التفاهم للشركة الانضمام إلى المختبر التنظيمي للهيئة العامة للرقابة المالية، حيث يجري اختبار المنتجات ونماذج التكنولوجيا المالية في بيئة تجريبية ورقابية خاضعة للإشراف المباشر."
@@ -2840,6 +2844,10 @@
   "مصر تتعاون مع «OECD» لاعداد الاستراتيجيه الوطنيه للذكاء الاصطناعي": {
     "meaning": "The partnership aligns Egypt's artificial intelligence regulatory framework and digital governance standards with the policy benchmarks established by the OECD.",
     "meaning_ar": "تربط هذه الشراكة بين الأطر التنظيمية ومعايير الحوكمة الرقمية للذكاء الاصطناعي في مصر والسياسات المعتمدة لدى منظمة التعاون الاقتصادي والتنمية."
+  },
+  "مصر تتعاون مع شركه صينيه لتطوير محطتي محولات كهرباء بمنطقه القناه": {
+    "meaning": "This agreement brings foreign engineering expertise and capital goods into the domestic utility sector to upgrade transmission infrastructure in the Canal Zone.",
+    "meaning_ar": "يتضمن هذا الاتفاق إدخال خبرات هندسية وسلع رأسمالية أجنبية إلى قطاع المرافق المحلي لتحديث البنية التحتية لنقل الكهرباء في منطقة القناة."
   },
   "مصر تستضيف منتدي GS1 الاقليمي لبحث مستقبل التجاره الرقميه": {
     "meaning": "GS1 forums align domestic retail, logistics, and e-commerce operations with standardized international product identification codes, supply chain traceability protocols, and digital data synchronization systems.",
