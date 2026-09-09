@@ -1011,6 +1011,10 @@
     "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
     "meaning_ar": "تؤثر بيانات تقرير الوظائف الأمريكي على توقعات أسعار الفائدة ومستويات السيولة العالمية، مما ينعكس مباشرة على التقييمات السعرية للأصول عالية المخاطر مثل العملات المشفرة."
   },
+  "التموين تطرح 12 صنفا باسعار مخفضه.. تصل الي 30 سلعه بنهايه الشهر الجاري": {
+    "meaning": "The Ministry of Supply expands its discounted inventory across state-affiliated consumer complexes, distributing 12 basic commodities with scheduled additions reaching 30 items through public retail channels.",
+    "meaning_ar": "تتوسع وزارة التموين في طرح السلع المخفضة عبر المجمعات الاستهلاكية التابعة لها، حيث تضخ 12 سلعة أساسية مع جدولة زيادتها إلى 30 سلعة عبر منافذ التوزيع الحكومية."
+  },
   "الجبلي يدعو للاستفاده من وفود الاعمال الماليزيه وتحويل اللقاءات الي نتايج ملموسه": {
     "meaning": "Bilateral trade delegations facilitate direct business-to-business engagement, formalizing cross-border supply chain agreements, commercial partnerships, and joint venture frameworks between local and international enterprises.",
     "meaning_ar": "تتيح وفود الأعمال الثنائية إطاراً للتواصل المباشر بين الشركات، وتعمل على إبرام اتفاقيات التوريد والشراكات التجارية وتأسيس المشروعات المشتركة بين المؤسسات المحلية والدولية."
@@ -2425,6 +2429,10 @@
     "meaning": "Economic crisis management frameworks in developing markets involve directing resources toward human capital development and expanding private enterprise financing channels.",
     "meaning_ar": "تعتمد أطر إدارة الأزمات الاقتصادية في الأسواق النامية على توجيه الموارد نحو تنمية رأس المال البشري وتوسيع قنوات تمويل مؤسسات القطاع الخاص."
   },
+  "غدا.. انطلاق المرحله الاولي من المبادره الحكوميه لتخفيض اسعار السلع": {
+    "meaning": "Government commodity price reduction initiatives operate through coordinated arrangements between state authorities, producers, and retail networks to apply reduced pricing margins on essential consumer goods alongside logistical and customs clearance facilitation.",
+    "meaning_ar": "تعمل المبادرات الحكومية لخفض الأسعار عبر آليات تنسيقية بين الجهات التنظيمية والمنتجين وشبكات التجزئة لتطبيق هوامش تسعير مخفضة على السلع الأساسية بالتزامن مع تيسيرات في سلاسل الإمداد والإفراج الجمركي."
+  },
   "فاركو للادويه تستثمر اكثر من مليار جنيه خلال 2026 لانشاء خطوط انتاج جديده ورفع كفاءه الحاليه": {
     "meaning": "This transaction represents capital expenditure allocation toward manufacturing infrastructure, expanding operational capacity through new production lines and upgrading existing facilities.",
     "meaning_ar": "يمثل هذا الإجراء توجيه نفقات رأسمالية نحو البنية التحتية التصنيعية، مما يوسع الطاقة التشغيلية عبر إضافة خطوط إنتاج جديدة وتحديث المنشآت القائمة."
@@ -2884,6 +2892,10 @@
   "ميدفيرت مصر تنقل 25% من الماليه والصناعيه الي ناس للاستثمارات ضمن اعاده هيكله": {
     "meaning": "This transaction represents an internal ownership transfer of an equity stake between related holding entities as part of a corporate restructuring process, shifting direct shareholder voting and dividend rights without altering the underlying industrial operations of the target firm.",
     "meaning_ar": "تُمثل هذه العملية نقل ملكية لحصة أسهم بين كيانات استثمارية تابعة ضمن إعادة هيكلة الشركات، وهو ما يترتب عليه تغيير في التوزيع المباشر لحقوق التصويت والأرباح دون المساس بالعمليات التشغيلية والصناعية للشركة محل الاستحواذ."
+  },
+  "مينا فارم للادويه تتحول للربحيه بقيمه 101.8 مليون جنيه بالنصف الاول": {
+    "meaning": "The company's semi-annual financial statements show that total operating revenues exceed combined production, operational, and financing expenses, moving the net bottom line from a deficit to a net surplus of 101.8 million Egyptian pounds.",
+    "meaning_ar": "تُظهر القوائم المالية نصف السنوية للشركة تجاوز إجمالي الإيرادات التشغيلية لمجموع تكاليف الإنتاج والمصروفات التشغيلية والتمويلية، مما يحول صافي نتائج الأعمال من عجز إلى فائض صافٍ قدره 101.8 مليون جنيه مصري."
   },
   "نايب رييس الرقابه الماليه: نستهدف تحويل المختبر التنظيمي لمنصه اقليميه للابتكار": {
     "meaning": "The regulatory sandbox operates as a supervised testing environment under the Financial Regulatory Authority, allowing non-banking financial technology companies to test digital products, operational structures, and regulatory compliance before commercial deployment.",
