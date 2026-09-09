@@ -1,4 +1,8 @@
 {
+  "\"الزراعه\" تستعرض رويه القطاع للعمل اللايق ضمن البرنامج الوطني 2027–2030": {
+    "meaning": "The alignment of the agricultural sector with national decent work frameworks establishes structured labor standards, formal employment guidelines, and social protection mechanisms across agribusiness supply chains.",
+    "meaning_ar": "يحدد موائمة القطاع الزراعي مع أطر العمل اللائق الوطنية معايير تشغيل منظمة وإرشادات للتوظيف الرسمي وآليات للحماية الاجتماعية عبر سلاسل إمداد الصناعات الزراعية."
+  },
   "\"العمل\" تحذر الشباب من صفحات وفيديوهات وهميه تروج للسفر الي ايطاليا": {
     "meaning": "The Ministry of Labor regulates official overseas employment channels and issues public compliance alerts to restrict fraudulent, unlicensed recruitment activities targeting the domestic labor force.",
     "meaning_ar": "تنظم وزارة العمل قنوات التوظيف والتشغيل بالخارج وتصدر إخطارات رقابية رسمية لمكافحة أنشطة استقدام العمالة غير المرخصة وخارج الأطر القانونية المعتمدة."
@@ -962,6 +966,10 @@
   "الاسهم الاوروبيه تغلق مستقره وسط ضغوط من ارتفاع النفط": {
     "meaning": "Rising crude oil prices elevate operational and transport input costs for general industrial sectors while simultaneously raising energy sector revenues, neutralizing broad equity index movements.",
     "meaning_ar": "يؤدي ارتفاع أسعار النفط الخام إلى زيادة تكاليف المدخلات التشغيلية والنقل للقطاعات الصناعية، بالتوازي مع رفع إيرادات شركات الطاقة، مما يحقق توازناً في حركة مؤشرات الأسهم العامة."
+  },
+  "الاسهم القياديه تعيد البورصه الي اعتاب القمه التاريخيه مجددا": {
+    "meaning": "Large-cap equities with high index weightings drive the main benchmark index upward through concentrated trading volume, bringing the index level near its historical high.",
+    "meaning_ar": "تقود الأسهم ذات الوزن النسبي المرتفع المؤشر الرئيسي نحو الصعود عبر تركز أحجام التداول، مما يضع مستوى المؤشر قرب قمته التاريخية."
   },
   "الاسهم الكوريه تقفز 4.6% .. وجولدمان ساكس يحدد مستهدفا قياسيا لموشر كوسبي": {
     "meaning": "A sharp rise in a benchmark stock index reflects broad-based price appreciation across its constituent listed equities, while investment banks adjust their baseline valuation models in response to corporate earnings data and market liquidity.",
@@ -2308,6 +2316,10 @@
     "meaning": "Official foreign exchange quotations for the Kuwaiti Dinar establish the daily conversion rates applied by the banking sector for commercial transactions, cross-border remittances, and foreign currency balance sheet valuations.",
     "meaning_ar": "تحدد أسعار صرف الدينار الكويتي المعلنة أسعار التحويل اليومية المعتمدة لدى القطاع المصرفي لتسوية المعاملات التجارية والتحويلات المالية وتقييم الالتزامات بالعملة الأجنبية."
   },
+  "سعر الدينار الكويتي اليوم الاربعاء 9-9-2026 في ختام التعاملات": {
+    "meaning": "Daily exchange rate reporting reflects the end-of-day official and interbank valuation of the Kuwaiti Dinar against the Egyptian Pound, serving as the benchmark for cross-border settlements, remittance conversions, and bilateral trade pricing.",
+    "meaning_ar": "يعكس تقرير أسعار الصرف اليومية التقييم الختامي الرسمي وسعر التداول بين البنوك للدينار الكويتي مقابل الجنيه المصري، وهو ما يحدد معيار تسوية المعاملات المالية عبر الحدود، وتحويلات العاملين، وتسعير التبادل التجاري الثنائي."
+  },
   "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في بدايه التعاملات": {
     "meaning": "Publishing the opening exchange rate establishes the daily baseline valuation for the Kuwaiti Dinar against the Egyptian Pound, which governs the settlement terms for cross-border remittances, bilateral trade, and interbank foreign currency transactions.",
     "meaning_ar": "يحدد إعلان سعر الصرف الافتتاحي القيمة المرجعية اليومية للدينار الكويتي مقابل الجنيه المصري، وهو ما ينظم شروط تسوية التحويلات النقدية الخارجية، والتبادل التجاري الثنائي، ومعاملات الصرف بين البنوك."
@@ -2816,6 +2828,10 @@
   "ماريديف تتحول الي الربحيه المستقله وتحقق 4.5 مليون دولار بنهايه يونيو 2026": {
     "meaning": "Standalone profitability reflects the financial performance of the parent entity's direct operations, where revenues from core marine and offshore services exceed direct operational costs and financial expenses over the reported period.",
     "meaning_ar": "يعكس التحول إلى الربحية المستقلة نتائج الأعمال التشغيلية المباشرة للشركة الأم، حيث تتجاوز إيرادات الأنشطة والخدمات الملاحية الأساسية تكاليف التشغيل المباشرة والأعباء التمويلية خلال الفترة المالية المحددة."
+  },
+  "مبيعات السيارات في مصر تقفز 29.7% اول 7 اشهر من 2026": {
+    "meaning": "An expansion in automotive sales volumes reflects higher delivery throughput across local dealership networks and increased import and local assembly rates compared to the prior period.",
+    "meaning_ar": "يعكس ارتفاع حجم مبيعات السيارات زيادة في معدلات تسليم المركبات عبر شبكات التوزيع المحلية وارتفاع وتيرة الاستيراد والتجميع المحلي مقارنة بالفترة السابقة."
   },
   "متحدث الصحه: الاولويه في اختيار الادويه للاكثر امانا وفاعليه وكفاءه": {
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
@@ -3332,6 +3348,10 @@
   "وزير الخارجيه: نتطلع لتعزيز الاستثمارات المصريه وتسهيل نفاذ المنتجات الدواييه الي غينيا": {
     "meaning": "Government-level trade diplomacy of this type involves negotiating cross-border regulatory approvals, bilateral trade protocols, and distribution frameworks for domestic pharmaceutical manufacturers entering African export markets.",
     "meaning_ar": "تتضمن الدبلوماسية التجارية الحكومية من هذا النوع التفاوض على الموافقات التنظيمية العابرة للحدود، والبروتوكولات التجارية الثنائية، وأطر التوزيع لشركات تصنيع الدواء المحلية في أسواق التصدير الأفريقية."
+  },
+  "وزير الخارجيه: نتطلع لزياده عمليات ومشروعات البنك الاوروبي في السوق المصريه": {
+    "meaning": "European Bank for Reconstruction and Development (EBRD) engagements provide institutional debt financing, equity contributions, and credit lines to local infrastructure, financial sector, and private corporate projects.",
+    "meaning_ar": "تتضمن عمليات البنك الأوروبي لإعادة الإعمار والتنمية تقديم تمويلات تنموية ومساهمات رأسمالية وخطوط ائتمان لمشروعات البنية التحتية والقطاعين المصرفي والخاص المحلي."
   },
   "وزير الخزانه الامريكي يتوقع هبوط النفط الي 40 دولارا بعد انتهاء الحرب": {
     "meaning": "Crude oil prices function as a primary determinant of fuel import costs and state energy subsidy burdens, directly setting production input costs for energy-intensive sectors including petrochemicals, transportation, and heavy manufacturing.",
