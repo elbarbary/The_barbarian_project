@@ -1692,6 +1692,10 @@
     "meaning": "A stronger yen reduces the value of Japanese exporters' foreign earnings when converted back into the local currency and raises the price of Japanese goods in international markets, which puts downward pressure on major equity indices.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف الين إلى خفض قيمة الأرباح الخارجية للشركات اليابانية المصدرة عند تحويلها للعملة المحلية، ويزيد من تكلفة منتجاتها في الأسواق العالمية، مما ينعكس بتراجع في مؤشرات الأسهم الرئيسية."
   },
+  "تراجع الاسهم اليابانيه مع استمرار ارتفاع الين": {
+    "meaning": "An appreciating Japanese yen decreases the value of overseas earnings when converted back into local currency and raises the price of Japanese exported goods in foreign markets, exerting direct pressure on export-oriented equities.",
+    "meaning_ar": "يؤدي ارتفاع الين الياباني إلى انخفاض قيمة الأرباح المحققة بالخارج عند تحويلها إلى العملة المحلية وزيادة أسعار السلع المصدرة في الأسواق الخارجية، مما يضغط بشكل مباشر على أسهم الشركات المعتمدة على التصدير."
+  },
   "تراجع الانتاج الصناعي في المانيا باكبر وتيره في عام": {
     "meaning": "Industrial output data tracks the physical volume of goods produced by factories, mines, and utilities, with a contraction indicating lower aggregate manufacturing activity in Europe's largest economy.",
     "meaning_ar": "ترصد بيانات الإنتاج الصناعي الحجم الفعلي للسلع المنتجة في قطاعات المصانع والتعدين والمرافق، ويشير انكماشها إلى انخفاض إجمالي النشاط التصنيعي في أكبر اقتصاد أوروبي."
@@ -1891,6 +1895,10 @@
   "جهاز تنميه المشروعات يشارك في معرض الصين الدولي": {
     "meaning": "Participation in international trade fairs provides domestic micro, small, and medium enterprises with direct business-to-business exhibition platforms and links local producers to foreign buyers.",
     "meaning_ar": "توفر المشاركة في المعارض التجارية الدولية منصات عرض للمشروعات الصغيرة والمتوسطة المحلية وتربط المنتجين المحليين بالأسواق والمشترين الخارجيين عبر قنوات تواصل مباشر."
+  },
+  "جوجل تستثمر 15.1 مليار دولار في بنيه الذكاء الاصطناعي في فنلندا": {
+    "meaning": "This transaction represents capital expenditure allocation toward physical data center facilities and computational hardware in the European market.",
+    "meaning_ar": "يمثل هذا التخصيص إنفاقاً رأسمالياً موجهاً لإنشاء مراكز بيانات وتجهيزات حوسبة تقنية في السوق الأوروبية."
   },
   "جولدن ارينا: افتتاح 4 مراكز بيع خلال العام الجاري": {
     "meaning": "The company expands its physical distribution network and direct customer touchpoints by establishing four new commercial outlets.",
