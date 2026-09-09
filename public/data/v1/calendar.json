@@ -6708,6 +6708,23 @@
    "observations": 10
   },
   {
+   "date": "2027-03-30",
+   "kind": "results_expected",
+   "note": "FY results usually filed around now",
+   "ticker": "MILS",
+   "title": "North Cairo Mills Co. — FY results expected",
+   "title_ar": "مطاحن ومخابز شمال القاهرة (مطاحن شمال القاهرة) — نتائج السنة المالية مرتقبة",
+   "filed": "",
+   "section": "Estimated",
+   "link": "",
+   "id": "due-MILS-FY-2026-12-31",
+   "estimated": true,
+   "period_end": "2026-12-31",
+   "window_start": "2027-03-06",
+   "window_end": "2027-04-20",
+   "observations": 13
+  },
+  {
    "date": "2027-03-31",
    "kind": "results_expected",
    "note": "FY results usually filed around now",
@@ -6842,23 +6859,6 @@
    "window_start": "2027-03-14",
    "window_end": "2027-05-30",
    "observations": 4
-  },
-  {
-   "date": "2027-03-31",
-   "kind": "results_expected",
-   "note": "FY results usually filed around now",
-   "ticker": "MILS",
-   "title": "North Cairo Mills Co. — FY results expected",
-   "title_ar": "مطاحن ومخابز شمال القاهرة (مطاحن شمال القاهرة) — نتائج السنة المالية مرتقبة",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-MILS-FY-2026-12-31",
-   "estimated": true,
-   "period_end": "2026-12-31",
-   "window_start": "2027-03-06",
-   "window_end": "2027-04-20",
-   "observations": 12
   },
   {
    "date": "2027-03-31",
