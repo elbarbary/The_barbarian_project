@@ -1403,6 +1403,10 @@
     "meaning": "The recruitment of 240 workers provides direct labor allocation to the construction and operational deployment phase of the El Dabaa nuclear energy infrastructure project.",
     "meaning_ar": "يمثل قبول 240 متقدماً توفيراً وتوجيهاً مباشراً للكوادر والعمالة المحلية نحو مراحل الإنشاء والتنفيذ في مشروع محطة الضبعة للطاقة النووية."
   },
+  "الفايده علي الرهن العقاري الامريكي تصعد لاعلي مستوي منذ يونيو 2025": {
+    "meaning": "Higher US mortgage rates raise the direct cost of borrowing and debt servicing for property buyers, tightening financing conditions across the residential real estate lending market.",
+    "meaning_ar": "يؤدي ارتفاع أسعار الفائدة على الرهن العقاري الأمريكي إلى زيادة التكلفة المباشرة للاقتراض وخدمة الدين لمشتري العقارات، مما يشدد شروط التمويل في سوق الإقراض العقاري السكني."
+  },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 12.81%": {
     "meaning": "A major shareholder reduces its equity ownership in the company to 12.81%, which alters the company's shareholder structure and reallocates voting stakes among market participants.",
     "meaning_ar": "يُعد هذا الإجراء تخفيضاً في نسبة ملكية مساهم رئيسي في رأس مال الشركة لتصل إلى 12.81%، مما يعيد تشكيل هيكل الملكية وحصص التصويت بين المساهمين."
@@ -1498,6 +1502,10 @@
   "اليابان وامريكا تحرزان تقدما في اتفاق استثماري بقيمه 550 مليار دولار": {
     "meaning": "A large-scale bilateral investment agreement establishes formal mechanisms for cross-border capital allocation, joint venture funding, and supply chain integration between participating nations across targeted sectors.",
     "meaning_ar": "يحدد الاتفاق الاستثماري الثنائي آليات رسمية لتوجيه تدفقات رؤوس الأموال عبر الحدود، والتمويل المشترك للمشروعات، والربط التشغيلي لسلاسل التوريد بين الدولتين في قطاعات محددة."
+  },
+  "الين الياباني يصعد لاعلي مستوي في 7 اشهر": {
+    "meaning": "The Japanese yen's appreciation raises the cost of importing Japanese goods, components, and machinery for Egyptian businesses and increases the local-currency debt service on yen-denominated financing facilities.",
+    "meaning_ar": "يؤدي ارتفاع الين الياباني إلى زيادة تكلفة استيراد السلع والآلات والمكونات اليابانية للشركات المصرية، ورفع قيمة خدمة الديون المقومة بالين بالعملة المحلية."
   },
   "الين يصعد 5% في اسبوع ويقترب من اعلي مستوي في 7 اشهر": {
     "meaning": "A sharp appreciation of the Japanese yen raises the settlement cost of yen-denominated liabilities and imports while unwinding cross-currency carry-trade positions across global financial markets.",
@@ -2096,6 +2104,10 @@
     "meaning": "Declining fertility rates alter the demographic structure by changing the ratio of the active labor force relative to dependent aging populations, directly impacting sovereign pension systems and labor supply dynamics.",
     "meaning_ar": "يؤدي انخفاض معدلات الخصوبة إلى تغيير الهيكل الديمغرافي عبر تعديل نسبة القوى العاملة النشطة مقارنة بفئات الإعالة، مما يؤثر على منظومات التقاعد الحكومية وهيكل المعروض من العمالة."
   },
+  "داو الامريكيه تدرس التخارج من شراكه مع ارامكو بقيمه 20 مليار دولار": {
+    "meaning": "An equity exit from a joint venture involves restructuring asset ownership and capital commitments between operating partners in petrochemical manufacturing facilities. This process reconfigures the corporate governance, shareholding base, and ongoing operational financing of the shared chemical complex.",
+    "meaning_ar": "تتضمن دراسة التخارج من الشراكة إعادة هيكلة لحصص الملكية والالتزامات الرأسمالية بين الشركاء في مجمعات التصنيع البتروكيماوي المشتركة. يترتب على هذا الإجراء تعديل في هيكل المساهمين، والحوكمة المؤسسية، وترتيبات التمويل التشغيلي للأصول القائمة."
+  },
   "درجات الحراره غدا.. طقس حار ورطب علي اغلب الانحاء وشديد الحراره جنوبا": {
     "meaning": "Elevated temperatures drive electricity load requirements on the national power grid and operational cooling needs across industrial and agricultural facilities.",
     "meaning_ar": "ترتبط درجات الحرارة المرتفعة بأحمال استهلاك الكهرباء على الشبكة القومية والمتطلبات التشغيلية للتبريد في المنشآت الصناعية والزراعية."
@@ -2473,9 +2485,17 @@
     "meaning": "This bilateral agreement pools capital and technical infrastructure across the Egyptian and Saudi aerospace sectors to co-develop satellite manufacturing assets. The arrangement establishes a joint engineering framework that shares research, development, and operational assembly costs between both markets.",
     "meaning_ar": "تجمع هذه الاتفاقية الثنائية بين رؤوس الأموال والبنية التحتية التقنية في قطاعي الفضاء المصري والسعودي لتطوير أصول تصنيع الأقمار الصناعية بشكل مشترك. وتؤسس هذه الشراكة إطاراً هندسياً يوزع تكاليف البحث والتطوير والتجميع التشغيلي بين الجانبين."
   },
+  "شركات السيارات الكهرباييه تراهن علي الروبوتات الشبيهه بالبشر": {
+    "meaning": "Electric vehicle manufacturers integrate humanoid robotics into assembly lines to automate complex physical tasks and reallocate capital expenditures toward advanced manufacturing infrastructure.",
+    "meaning_ar": "تدمج شركات تصنيع السيارات الكهربائية الروبوتات الشبيهة بالبشر في خطوط التجميع لأتمتة المهام الصناعية وتعديل هيكل تخصيص النفقات الرأسمالية في العمليات التشغيلية."
+  },
   "شركتا اكس-برس فيدرز وتي اس لاينز تطلقان خدمات اقليميه جديده": {
     "meaning": "The launch adds maritime shipping routes and scheduled feeder vessel capacity across regional ports, expanding the operational transport network of both carriers.",
     "meaning_ar": "يضيف إطلاق هذه الخدمات مسارات ملاحية منتظمة وطاقة استيعابية لسفن التغذية عبر الموانئ الإقليمية، مما يوسع الشبكة التشغيلية للنقل البحري للشركتين."
+  },
+  "شركه مدعومه من وادي السيليكون تطلق صاروخا منخفض التكلفه وتستهدف انتاج 12 الف وحده سنويا": {
+    "meaning": "Venture capital backing finances the transition from defense prototype development to high-volume manufacturing, utilizing standardized, low-cost components to establish an annual assembly line capacity of 12,000 units.",
+    "meaning_ar": "يُموّل رأس المال المخاطر الانتقال من مرحلة تطوير النماذج الأولية إلى التصنيع الكمي المكثف، عبر استخدام مكونات معيارية منخفضة التكلفة لتشغيل خط تجميع بطاقة سنوية تبلغ 12 ألف وحدة."
   },
   "شريف الجبلي: مصر تتحول الي مركز اقليمي للتجاره والخدمات الماليه والذكاء الاصطناعي": {
     "meaning": "Developing regional hubs in trade, financial services, and artificial intelligence relies on expanding cross-border logistics infrastructure, integrating digital payment networks, and establishing local data and computing centers.",
@@ -2484,6 +2504,10 @@
   "شعبه المواد الغذاييه: تطوير المحلات المنضمه الي كاري اون علي حساب التاجر": {
     "meaning": "Under this retail partnership model, participating grocery merchants fund their own store upgrades and capital expenditures directly, while the CarryOn platform provides the branding, operational standards, and digital network integration.",
     "meaning_ar": "بموجب هذا النموذج التجاري، يتحمل التجار المنضمون التكاليف الرأسمالية وأعمال التطوير لمتاجرهم بشكل مباشر، بينما تقدم منصة «كاري أون» معايير التشغيل، والهوية التجارية، والربط بالشبكة الرقمية."
+  },
+  "صادرات الذره الارجنتينيه تقفز لمستوي قياسي مع صعود الطلب من مصر وشمال افريقيا": {
+    "meaning": "Egypt's animal feed and poultry processing sectors rely on imported yellow corn to meet domestic production needs, sourcing bulk grain volumes from international agricultural suppliers such as Argentina.",
+    "meaning_ar": "تعتمد صناعة الأعلاف والإنتاج الداجني في مصر على استيراد الذرة الصفراء لتلبية احتياجات التصنيع المحلي، حيث تشكل المناشئ الدولية كالأرجنتين مصدراً رئيساً للإمدادات السلعية."
   },
   "صادرات الصين تقفز 25% بدعم الذكاء الاصطناعي.. والفايض التجاري يقترب من تريليون دولار": {
     "meaning": "The expansion in global demand for AI-related hardware and electronics increases China's export volumes, widening its net trade surplus.",
@@ -3176,6 +3200,10 @@
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
     "meaning_ar": "تتضمن تعديلات قواعد القيد بالبورصة المصرية قيوداً تنظيمية والتزامات إفصاح تحكم التعامل على المعلومات الجوهرية غير المعلنة وتنظم تداولات المطلعين بالشركات المقيدة."
+  },
+  "هل تمثل المعادن الارضيه النادره في الصين سلاحا فعالا ؟": {
+    "meaning": "Control over rare earth mineral processing creates concentration in global supply chains for advanced electronics and clean energy technologies, making access to these raw materials dependent on exporter trade policies.",
+    "meaning_ar": "يؤدي التركز في سلاسل توريد ومعالجة المعادن النادرة إلى ربط الصناعات التكنولوجية ومكونات الطاقة النظيفة بسياسات التصدير لدى الدول المهيمنة على الإنتاج."
   },
   "هل فقد وادي السيليكون ثقه الجمهور في الذكاء الاصطناعي؟": {
     "meaning": "Public scrutiny of technology sector practices alters consumer adoption rates and prompts reassessments of capital allocation toward artificial intelligence research and infrastructure.",
