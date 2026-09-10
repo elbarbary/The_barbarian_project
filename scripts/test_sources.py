@@ -26,6 +26,11 @@ NOT_A_SOURCE = {
     "fonts.gstatic.com",
     "www.w3.org",         # SVG namespaces in generated markup
     "schema.org",
+    # A `$schema` draft URL identifies the shape of a document; it is never
+    # fetched. The fragility engine's manifest generator writes one, and
+    # without this line the catalogue guard would fail the build for an
+    # upstream that is not an upstream.
+    "json-schema.org",
     # Our own host, and the one direction this set exists for: the news builder
     # writes esthmr.com/esthmr/api/img into the document so a thumbnail is
     # fetched by the site rather than by the reader. The pipeline never calls
