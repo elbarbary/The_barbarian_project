@@ -703,6 +703,10 @@
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
     "meaning_ar": "يعكس ارتفاع السهم استجابة السوق لاتفاق إعادة الهيكلة، والذي يتضمن عادةً خفض التكاليف التشغيلية وإعادة تنظيم الطاقات الإنتاجية وتوجيه رأس المال لتحسين الكفاءة التشغيلية للشركة."
   },
+  "ارتفاع طفيف لاسعار الذهب قبل صدور بيانات تضخم امريكيه": {
+    "meaning": "Gold prices adjust as market participants balance positions ahead of US inflation metrics that directly influence the US dollar exchange rate and benchmark interest rates.",
+    "meaning_ar": "تتحرك أسعار الذهب في نطاق محدود مع قيام المتعاملين بتسوية مراكزهم قبيل صدور بيانات التضخم الأمريكية التي تحدد اتجاهات الدولار وأسعار الفائدة العالمية."
+  },
   "ارتفاع طفيف للاسهم الصينيه في اولي جلسات الاسبوع": {
     "meaning": "A slight increase in equity indices during opening weekly trading reflects net capital inflows and executed buy orders outpacing selling volume across Chinese stock exchanges.",
     "meaning_ar": "يعكس الارتفاع الطفيف في مؤشرات الأسهم خلال الجلسة الافتتاحية للأسبوع تدفقات رأسمالية صافية وتفوقاً لأحجام أوامر الشراء المنفذة على عروض البيع في البورصات الصينية."
@@ -2603,6 +2607,10 @@
   "سعر اليورو في مصر اليوم الثلاثاء 8/9/2026.. ارتفاع جديد": {
     "meaning": "An appreciation of the Euro against the Egyptian Pound raises the local currency cost of European imported goods and raw materials, while increasing the nominal debt service obligations for entities holding euro-denominated liabilities.",
     "meaning_ar": "يؤدي ارتفاع سعر صرف اليورو مقابل الجنيه المصري إلى زيادة التكلفة بالعملة المحلية للسلع والمواد الخام المستوردة من أوروبا، كما يرفع قيمة التزامات خدمة الدين المقومة باليورو على الشركات."
+  },
+  "سعر اليورو في مصر اليوم الخميس 10/9/2026": {
+    "meaning": "Official and interbank foreign exchange rates for the Euro against the Egyptian Pound reflect spot currency pricing used to clear import-export settlements and determine balance-sheet valuations of foreign-currency denominated assets and liabilities.",
+    "meaning_ar": "تعكس أسعار صرف اليورو مقابل الجنيه المصري في السوق المصرفية الرسمية تسعير العملة الفوري المستخدم لتسوية المعاملات التجارية وتقييم الأصول والالتزامات المقومة بالعملات الأجنبية في القوائم المالية."
   },
   "سعر خام الحديد يتجاوز 100 دولار للطن في سنغافوره": {
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
