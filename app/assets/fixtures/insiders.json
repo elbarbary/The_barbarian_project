@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-09-10T09:16:58.081485+00:00",
+  "updatedAt": "2026-09-10T09:22:11.835309+00:00",
   "asOf": "2026-09-10",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 351,
+    "totalRecords": 352,
     "buyCount": 91,
-    "sellCount": 196,
+    "sellCount": 197,
     "treasuryBuyCount": 17,
-    "treasurySellCount": 9,
+    "treasurySellCount": 10,
     "totalBuyShares": 17181334,
     "totalSellShares": 267240934,
-    "activeCompaniesCount": 95,
+    "activeCompaniesCount": 96,
     "activeTreasuryCompanies": [
       "MASR",
       "MBSC",
@@ -51,6 +51,28 @@
     "2026-07-06"
   ],
   "items": [
+    {
+      "id": "filing-294557",
+      "filingId": "294557",
+      "sourceType": "treasury_filing",
+      "date": "2026-09-10",
+      "ticker": "TAQA",
+      "company": "TAQA Arabia",
+      "companyAr": "طاقة عربية ش.م.م",
+      "sector": "Utilities",
+      "sectorAr": "مرافق",
+      "action": "treasury_sale",
+      "actionLabel": "Treasury Sale",
+      "actionLabelAr": "مبيعات أسهم خزينة",
+      "relationship": "treasury",
+      "relationshipLabel": "Company Treasury",
+      "relationshipLabelAr": "الشركة (أسهم خزينة)",
+      "positionRaw": "Treasury Shares",
+      "shares": null,
+      "title": "بيان من طاقة عربية (TAQA.CA) بشأن بيع أسهم الخزينة",
+      "titleEn": "A statement from TAQA Arabia (TAQA.CA) regarding the sale of treasury shares",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294557"
+    },
     {
       "id": "filing-294538",
       "filingId": "294538",
