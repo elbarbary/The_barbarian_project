@@ -1599,6 +1599,10 @@
     "meaning": "Government five-year development plans for small and medium-sized enterprises establish regulatory frameworks, allocate state-directed financing and tax incentives, and set procurement quotas across industrial supply chains.",
     "meaning_ar": "تحدد الخطط الخمسية الحكومية للمشروعات الصغيرة والمتوسطة الأطر التنظيمية، وتوجه التمويل والحوافز الضريبية المعتمدة من الدولة، وتضع معايير المشتريات ضمن سلاسل التوريد الصناعية."
   },
+  "الصين والولايات المتحده تتفاوضان لخفض متبادل للرسوم الجمركيه يشمل سلعا ب 30 مليار دولار": {
+    "meaning": "Bilateral tariff reduction negotiations directly alter import duty rates and landing costs for cross-border shipments, modifying trade flows and supply chain pricing across the covered goods sectors.",
+    "meaning_ar": "تعدل مفاوضات الخفض المتبادل للتعريفات الجمركية نسب الرسوم وتكاليف وصول الشحنات عبر الحدود بصورة مباشرة، وهو ما يغير مسارات تدفق التجارة وهياكل تسعير سلاسل الإمداد في قطاعات السلع المشمولة."
+  },
   "الصين وكوريا الجنوبيه تتفقان علي تسريع مفاوضات اتفاقيه التجاره الحره": {
     "meaning": "Free trade agreement negotiations establish bilateral frameworks to reduce tariff schedules, eliminate non-tariff barriers, and align regulatory standards governing cross-border goods and services between the two economies.",
     "meaning_ar": "تحدد مفاوضات اتفاقيات التجارة الحرة أطر عمل ثنائية لخفض التعريفات الجمركية وإزالة الحواجز غير الجمركية ومواءمة المعايير التنظيمية لحركة السلع والخدمات عبر الحدود بين البلدين."
@@ -3976,6 +3980,10 @@
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
     "meaning_ar": "توفر أطر الشراكة مع بنوك التنمية متعددة الأطراف مثل البنك الآسيوي للاستثمار في البنية التحتية تسهيلات تمويلية ميسرة طويلة الأجل لمشروعات البنية التحتية والتحول الأخضر الحكومية، مما ينوع آليات التمويل الخارجي للإنفاق الرأسمالي السيادي."
+  },
+  "وزير الماليه: نتطلع مع تجمع البريكس الي منح اولويه ومساحه اكبر لدعم الاقتصادات الناميه": {
+    "meaning": "Multilateral coordination within the BRICS framework operates through alternative financing channels, including the New Development Bank, and establishes trade settlement mechanisms in local currencies.",
+    "meaning_ar": "يعمل التنسيق متعدد الأطراف ضمن إطار مجموعة البريكس عبر قنوات تمويل بديلة، تشمل بنك التنمية الجديد، ويعتمد آليات لتسوية المعاملات التجارية بالعملات المحلية."
   },
   "وزير النقل: تسريع تنفيذ مجمع الستوم ببرج العرب لبدء تشغيله في اقرب وقت": {
     "meaning": "Accelerating project execution advances the operational timeline for Alstom's industrial complex in Borg El Arab, establishing local manufacturing capacity for railway systems and rolling stock.",
