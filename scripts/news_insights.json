@@ -1943,6 +1943,10 @@
     "meaning": "The reappointment maintains administrative and regulatory continuity within the executive leadership of the Financial Regulatory Authority, which oversees non-banking financial markets and institutions in Egypt.",
     "meaning_ar": "يحافظ تجديد التعيين على الاستمرارية الإدارية والتنظيمية داخل القيادة التنفيذية للهيئة العامة للرقابة المالية، المسؤولة عن الإشراف على الأسواق والمؤسسات المالية غير المصرفية في مصر."
   },
+  "تحديثات الصرف الان.. سعر الريال السعودي اليوم الخميس 10-9-2026": {
+    "meaning": "Official and banking exchange rate quotations track the spot conversion value of the Saudi Riyal against the Egyptian Pound, which directly determines foreign currency settlement costs for bilateral trade, religious tourism services, and the Egyptian Pound valuation of inbound expatriate remittances.",
+    "meaning_ar": "ترصد أسعار الصرف المصرفية والرسمية القيمة الفورية لتحويل الريال السعودي مقابل الجنيه المصري، وهي التي تحدد تكلفة التسويات بالعملة الأجنبية للتبادل التجاري والخدمات السياحية الدينية، فضلاً عن تقييم تحويلات العاملين بالخارج بالعملة المحلية."
+  },
   "تخصيص 12.53 فدان في سوهاج لانشاء صوامع غلال": {
     "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
     "meaning_ar": "يُعد تخصيص الأراضي لإنشاء صوامع الغلال توسيعاً للبنية التحتية للتخزين الفعلي ودمجاً للخدمات اللوجستية الزراعية ضمن سلاسل إمداد السلع الاستراتيجية."
@@ -2279,6 +2283,10 @@
   "خالد هاشم: اطلاق اول صندوق استثمار صناعي خلال سبتمبر الجاري": {
     "meaning": "An industrial investment fund functions as a specialized capital-pooling vehicle that channels institutional and private financing directly into manufacturing assets, operating facilities, and industrial equity.",
     "meaning_ar": "يُمثل صندوق الاستثمار الصناعي وعاءً مالياً متخصصاً يقوم بتجميع رؤوس الأموال وتوجيه التمويل المباشر وحصص الملكية نحو الأصول التشغيلية والمشروعات في القطاع الصناعي."
+  },
+  "خالد هاشم: نسعي لاقامه شراكات صناعيه بين القطاع الخاص المصري والهندي": {
+    "meaning": "Cross-border industrial partnerships pair local manufacturing infrastructure and distribution networks with foreign technical expertise and capital equipment via joint ventures or co-manufacturing frameworks.",
+    "meaning_ar": "تقوم الشراكات الصناعية الدولية على دمج البنية التحتية وشبكات التوزيع المحلية مع الخبرات التقنية والمعدات الرأسمالية الأجنبية من خلال تأسيس مشروعات مشتركة أو اتفاقيات تصنيع تعاقدي."
   },
   "خبيره تمويل: مصر تستطيع خفض تكلفه الدين ب «سندات طريق الحرير»": {
     "meaning": "Silk Road bonds (Panda bonds) are renminbi-denominated debt instruments issued in the Chinese onshore market, offering sovereign issuers an alternative funding venue with interest rates linked to Chinese market benchmarks rather than US dollar or euro rates.",
@@ -2800,6 +2808,10 @@
   "صناديق الاستثمار تواصل حصد المكاسب": {
     "meaning": "Investment funds reflect sustained positive returns driven by increases in the net asset value (NAV) of their underlying equity and fixed-income portfolios in the market.",
     "meaning_ar": "تعكس صناديق الاستثمار استمرار العوائد الإيجابية الناتجة عن ارتفاع صافي قيمة الأصول (NAV) لمحافظها المكونة من الأسهم وأدوات الدخل الثابت المتداولة في السوق."
+  },
+  "صناديق الاستثمار.. شريان حياه للمصانع المتعثره": {
+    "meaning": "Specialized investment funds inject direct equity or mezzanine financing into distressed industrial facilities, providing working capital and restructuring outstanding debt liabilities without immediate liquidation.",
+    "meaning_ar": "تضخ صناديق الاستثمار المتخصصة تمويلات رأسمالية أو شبه رأسمالية في المنشآت الصناعية المتعثرة، موفرةً بذلك رأس المال العامل ومعيدة هيكلة الالتزامات الائتمانية القائمة دون اللجوء إلى التصفية الفورية."
   },
   "صناديق الاسهم الامريكيه تشهد سحوبات للاسبوع الثاني علي التوالي": {
     "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
