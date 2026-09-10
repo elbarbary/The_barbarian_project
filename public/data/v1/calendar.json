@@ -2,8 +2,8 @@
  "generated": "2026-09-10",
  "source": "EGX disclosures — scheduled dates the issuer has filed",
  "past_days": 90,
- "count": 455,
- "estimated": 397,
+ "count": 453,
+ "estimated": 395,
  "events": [
   {
    "date": "2026-06-16",
@@ -1215,23 +1215,6 @@
    "window_start": "2026-11-05",
    "window_end": "2026-11-16",
    "observations": 6
-  },
-  {
-   "date": "2026-11-12",
-   "kind": "results_expected",
-   "note": "9M results usually filed around now",
-   "ticker": "EHDR",
-   "title": "Egyptians Housing Development & Reconstruction — 9M results expected",
-   "title_ar": "المصريين للاسكان والتنمية والتعمير ش م م — نتائج تسعة أشهر مرتقبة",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-EHDR-9M-2026-09-30",
-   "estimated": true,
-   "period_end": "2026-09-30",
-   "window_start": "2026-11-05",
-   "window_end": "2026-11-16",
-   "observations": 12
   },
   {
    "date": "2026-11-12",
@@ -4258,23 +4241,6 @@
    "window_start": "2027-01-19",
    "window_end": "2027-04-01",
    "observations": 7
-  },
-  {
-   "date": "2027-02-22",
-   "kind": "results_expected",
-   "note": "FY results usually filed around now",
-   "ticker": "EHDR",
-   "title": "Egyptians Housing Development & Reconstruction — FY results expected",
-   "title_ar": "المصريين للاسكان والتنمية والتعمير ش م م — نتائج السنة المالية مرتقبة",
-   "filed": "",
-   "section": "Estimated",
-   "link": "",
-   "id": "due-EHDR-FY-2026-12-31",
-   "estimated": true,
-   "period_end": "2026-12-31",
-   "window_start": "2027-02-02",
-   "window_end": "2027-02-28",
-   "observations": 13
   },
   {
    "date": "2027-02-23",
