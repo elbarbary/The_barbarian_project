@@ -635,6 +635,10 @@
     "meaning": "The statement reflects a strategic alliance framework between Elsewedy Electric and Vodafone Egypt, establishing a foundation for capital deployment and operational integration across joint infrastructure, energy, or digital projects.",
     "meaning_ar": "يعكس التصريح إطار شراكة استراتيجية بين السويدي إليكتريك وفودافون مصر، يؤسس لتوظيف رؤوس الأموال والتكامل التشغيلي في مشاريع مشتركة ضمن قطاعات البنية التحتية أو الطاقة أو الخدمات الرقمية."
   },
+  "احمد العتال عن الغاء سيتي سكيب: القطاع لم يعد سوق معارض.. وتكلفه المشاركه مرتفعه": {
+    "meaning": "Real estate developers adjust marketing expenditure by shifting sales strategies away from high-cost physical exhibitions toward direct sales channels and digital brokerage networks.",
+    "meaning_ar": "يُعيد المطورون العقاريون توجيه ميزانيات التسويق عبر التحول من المعارض التقليدية مرتفعة التكلفة إلى قنوات البيع المباشر وشبكات الوساطة الرقمية."
+  },
   "احمد خليفه: المختبر التنظيمي استقبل 49 طلبا للانضمام وقبل 9 مشروعات مبدييا": {
     "meaning": "The regulatory sandbox operates as a controlled testing framework where the Financial Regulatory Authority evaluates non-banking financial technology models against compliance and operational standards prior to full commercial licensing.",
     "meaning_ar": "يعمل المختبر التنظيمي كإطار تجريبي خاضع للرقابة تتولى فيه الهيئة العامة للرقابة المالية تقييم نماذج التكنولوجيا المالية غير المصرفية ومطابقتها للمعايير التشغيلية والرقابية قبل منح التراخيص التجارية الكاملة."
@@ -758,6 +762,10 @@
   "اسعار البيض اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily egg price updates track spot clearing levels across farms and retail channels, reflecting current feed input costs and market supply balances within the domestic food commodities sector.",
     "meaning_ar": "تعكس نشرات أسعار البيض اليومية مستويات التداول الفورية في المزارع ومنافذ التجزئة، بناءً على تكاليف مدخلات الأعلاف وحجم المعروض المتاح في قطاع السلع الغذائية المحلي."
+  },
+  "اسعار البيض اليوم الخميس 10-9-2026 في مصر": {
+    "meaning": "Egg price quotations reflect spot market rates driven by domestic feed input costs, farm-gate production volumes, and poultry distribution expenses.",
+    "meaning_ar": "تعكس أسعار البيض المعلنة تعاملات السوق الفورية القائمة على تكاليف الأعلاف وحجم الإنتاج في المزارع ومصروفات سلاسل التوزيع."
   },
   "اسعار البيض اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily egg price reporting reflects current wholesale farm-gate and retail market clearing rates shaped by poultry feed input costs and daily supply chain distribution volumes.",
