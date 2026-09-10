@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-09-10T05:32:21.746554+00:00",
+  "builtAt": "2026-09-10T09:56:34.437935+00:00",
   "egx": {
     "source": "beta.egx.com.eg news-search",
-    "items": 192221,
-    "withoutTickerInHeading": 36156,
+    "items": 192232,
+    "withoutTickerInHeading": 36157,
     "tickerNotInThisDirectory": 28863,
-    "attributedToAnIssuer": 127202,
+    "attributedToAnIssuer": 127212,
     "months": [
       {
         "month": "2005-01",
@@ -1830,9 +1830,9 @@
       },
       {
         "month": "2026-09",
-        "harvested": "2026-09-09",
-        "items": 332,
-        "expected": 332,
+        "harvested": "2026-09-10",
+        "items": 343,
+        "expected": 343,
         "status": "complete"
       }
     ],
@@ -1840,7 +1840,7 @@
   },
   "fra": {
     "source": "https://fra.gov.eg/wp-json/wp/v2",
-    "items": 593,
+    "items": 596,
     "failures": {}
   },
   "issuers": [
@@ -2086,9 +2086,9 @@
     },
     {
       "ticker": "AJWA",
-      "egxFilingCount": 683,
-      "latestEgxFilingId": "294494",
-      "latestEgxFilingAt": "2026-09-08T16:45:04",
+      "egxFilingCount": 684,
+      "latestEgxFilingId": "294542",
+      "latestEgxFilingAt": "2026-09-10T11:04:13",
       "candidateIssuerWebsite": "https://www.ajwa-egypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/AJWA/profile",
       "websiteStatus": {
@@ -2266,9 +2266,9 @@
     },
     {
       "ticker": "ARAB",
-      "egxFilingCount": 30,
-      "latestEgxFilingId": "294051",
-      "latestEgxFilingAt": "2026-08-30T13:40:13",
+      "egxFilingCount": 31,
+      "latestEgxFilingId": "294543",
+      "latestEgxFilingAt": "2026-09-10T11:13:24",
       "candidateIssuerWebsite": "https://www.ad-holding.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
       "websiteStatus": null,
@@ -2740,9 +2740,9 @@
     },
     {
       "ticker": "EDFM",
-      "egxFilingCount": 685,
-      "latestEgxFilingId": "294514",
-      "latestEgxFilingAt": "2026-09-09T13:43:38",
+      "egxFilingCount": 686,
+      "latestEgxFilingId": "294544",
+      "latestEgxFilingAt": "2026-09-10T11:16:33",
       "candidateIssuerWebsite": "https://www.eastdelta-mills.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
       "websiteStatus": null,
@@ -3148,9 +3148,9 @@
     },
     {
       "ticker": "GBCO",
-      "egxFilingCount": 128,
-      "latestEgxFilingId": "293584",
-      "latestEgxFilingAt": "2026-08-19T12:22:59",
+      "egxFilingCount": 129,
+      "latestEgxFilingId": "294540",
+      "latestEgxFilingAt": "2026-09-10T10:55:32",
       "candidateIssuerWebsite": "https://www.gb-corporation.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GBCO/profile",
       "websiteStatus": null,
@@ -3250,9 +3250,9 @@
     },
     {
       "ticker": "GRCA",
-      "egxFilingCount": 532,
-      "latestEgxFilingId": "293977",
-      "latestEgxFilingAt": "2026-08-26T16:36:52",
+      "egxFilingCount": 533,
+      "latestEgxFilingId": "294541",
+      "latestEgxFilingAt": "2026-09-10T11:00:17",
       "candidateIssuerWebsite": "https://www.grandcapital.com.eg/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
       "websiteStatus": null,
@@ -3640,9 +3640,9 @@
     },
     {
       "ticker": "MBSC",
-      "egxFilingCount": 494,
-      "latestEgxFilingId": "294086",
-      "latestEgxFilingAt": "2026-08-31T09:29:17",
+      "egxFilingCount": 495,
+      "latestEgxFilingId": "294539",
+      "latestEgxFilingAt": "2026-09-10T10:51:21",
       "candidateIssuerWebsite": "https://www.mbccegypt.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/MBSC/profile",
       "websiteStatus": null,
@@ -4222,9 +4222,9 @@
     },
     {
       "ticker": "PRDC",
-      "egxFilingCount": 326,
-      "latestEgxFilingId": "294501",
-      "latestEgxFilingAt": "2026-09-09T11:16:14",
+      "egxFilingCount": 327,
+      "latestEgxFilingId": "294538",
+      "latestEgxFilingAt": "2026-09-10T10:27:05",
       "candidateIssuerWebsite": "https://www.predco.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/PRDC/profile",
       "websiteStatus": null,
@@ -4262,9 +4262,9 @@
     },
     {
       "ticker": "RAKT",
-      "egxFilingCount": 731,
-      "latestEgxFilingId": "294326",
-      "latestEgxFilingAt": "2026-09-03T16:31:38",
+      "egxFilingCount": 732,
+      "latestEgxFilingId": "294547",
+      "latestEgxFilingAt": "2026-09-10T11:24:25",
       "candidateIssuerWebsite": "https://www.rakta-eg.com/",
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/RAKT/profile",
       "websiteStatus": null,
@@ -4534,9 +4534,9 @@
     },
     {
       "ticker": "SPMD",
-      "egxFilingCount": 554,
-      "latestEgxFilingId": "294505",
-      "latestEgxFilingAt": "2026-09-09T11:30:27",
+      "egxFilingCount": 556,
+      "latestEgxFilingId": "294549",
+      "latestEgxFilingAt": "2026-09-10T11:25:59",
       "candidateIssuerWebsite": null,
       "websiteDirectorySource": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
       "websiteStatus": {
