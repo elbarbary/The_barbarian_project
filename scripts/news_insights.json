@@ -379,6 +379,10 @@
     "meaning": "A regulatory trading suspension temporarily halts the execution of all buy and sell orders on the company's shares on the exchange floor. This administrative action freezes secondary market liquidity for the security until specified regulatory inquiries or corporate disclosure requirements are fulfilled.",
     "meaning_ar": "يؤدي قرار الإيقاف الرقابي للتداول إلى تجميد تنفيذ كافة أوامر البيع والشراء على أسهم الشركة مؤقتاً داخل البورصة، مما يوقف سيولة السهم في السوق الثانوي حتى استيفاء متطلبات الإفصاح أو الإجراءات التنظيمية المقررة من الهيئة."
   },
+  "gafi and al habtoor group explore investment opportunities in egypt": {
+    "meaning": "Preliminary discussions between GAFI and a multinational conglomerate involve reviewing available state-sponsored projects, regulatory frameworks, and foreign direct investment incentives across target sectors.",
+    "meaning_ar": "تتضمن المباحثات التمهيدية بين الهيئة العامة للاستثمار ومجموعة دولية استعراض المشروعات المتاحة، والأطر التنظيمية، وحوافز الاستثمار الأجنبي المباشر في القطاعات المستهدفة."
+  },
   "gulf egypt for hotels targets expansion with mixed use sharm el sheikh project": {
     "meaning": "Developing a mixed-use project in Sharm El Sheikh expands the company's fixed asset base and diversifies its operational real estate portfolio by integrating commercial or residential components alongside hospitality units.",
     "meaning_ar": "يؤدي تطوير مشروع متعدد الاستخدامات في شرم الشيخ إلى توسيع قاعدة الأصول العقارية للشركة وتنويع محفظتها التشغيلية عبر دمج مساحات تجارية أو سكنية إلى جانب الوحدات الفندقية."
@@ -806,6 +810,10 @@
   "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
     "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن حركة العرض والطلب وتكاليف الأعلاف ومصروفات التوزيع في قطاع الإنتاج الداجني والغذائي المصري."
+  },
+  "اسعار الدواجن اليوم الخميس 10-9-2026 في مصر": {
+    "meaning": "This headline reports daily spot wholesale and retail prices in the Egyptian poultry sector, reflecting the real-time equilibrium between live bird supply from farms and consumer demand under current feed input costs.",
+    "meaning_ar": "يعرض هذا العنوان أسعار التداول اليومية للدواجن في أسواق الجملة والتجزئة المصرية، وهي تعكس نقطة التوازن الحالية بين المعروض من المزارع وحجم الطلب الاستهلاكي في ظل تكاليف مدخلات الأعلاف القائمة."
   },
   "اسعار الدواجن اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect current spot market rates determined by feed input costs, farm-level operational expenses, and prevailing supply-demand dynamics in the domestic market.",
