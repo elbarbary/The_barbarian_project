@@ -1563,6 +1563,10 @@
     "meaning": "Attacks on energy infrastructure trigger operational emergency protocols, require technical assessments of asset integrity, and alter logistical flows across regional supply networks.",
     "meaning_ar": "يؤدي استهداف منشآت الطاقة إلى تفعيل بروتوكولات الطوارئ التشغيلية، وإجراء تقييمات فنية لسلامة الأصول، وتعديل المسارات اللوجستية عبر شبكات الإمداد الإقليمية."
   },
+  "السكك الحديد تعلن انتظام حركه القطارات علي خط القاهره اسوان": {
+    "meaning": "Regular train operations restore baseline freight and passenger transport capacity along the Upper Egypt logistics corridor, maintaining scheduled supply chain flows for commercial goods and domestic mobility.",
+    "meaning_ar": "تؤدي عودة حركة القطارات إلى انتظام السعة التشغيلية لنقل الركاب والبضائع عبر ممر الصعيد اللوجستي، مما يحافظ على التدفقات المجدولة لسلاسل الإمداد للسلع التجارية والتنقل الداخلي."
+  },
   "السكه الحديد توضح حقيقه ما نشر عن مستوي مقاعد الركاب بالمحطات": {
     "meaning": "The Egyptian National Railways addresses public reports regarding station seating infrastructure, reflecting routine public relations and operational oversight of passenger facilities within the state-owned transport sector.",
     "meaning_ar": "توضح الهيئة القومية لسكك حديد مصر حقيقة ما تم تداوله حول البنية التحتية لمقاعد المحطات، وهو ما يمثل متابعة تشغيلية وإعلامية لمرافق الركاب ضمن قطاع النقل العام."
@@ -2416,9 +2420,17 @@
     "meaning": "The headline refers to cumulative export data for Egyptian raw cotton over the current agricultural season, which reflects foreign currency inflows into the agricultural and textile export sectors and tracks inventory clearance from local spinning mills and export aggregators.",
     "meaning_ar": "يشير العنوان إلى البيانات التراكمية لصادرات القطن المصري الخام منذ بداية الموسم الزراعي الحالي، وهو ما يعكس تدفقات النقد الأجنبي لقطاع تصدير الحاصلات الزراعية والغزل، ويوضح وتيرة تصريف المخزون لدى المجمعين والمحالج."
   },
+  "تعرف علي خطوات الاستعلام عن المخالصه من وزاره العمل": {
+    "meaning": "Digitizing Ministry of Labor clearance inquiries standardizes regulatory compliance verification for corporate administrative workflows and labor audit processes.",
+    "meaning_ar": "تُمكّن خدمة الاستعلام الإلكتروني عن المخالصة من ميكنة إجراءات التحقق من الامتثال التنظيمي للشركات ومطابقتها للمعايير العمالية المقررة."
+  },
   "تعرف علي رسوم مكافحه الاغراق الحاليه علي الجبن الهولندي": {
     "meaning": "Anti-dumping duties apply additional import tariffs on Dutch cheese shipments at Egyptian customs, raising the landed cost of imported dairy products relative to domestically produced alternatives.",
     "meaning_ar": "تفرض رسوم مكافحة الإغراق تعريفات جمركية إضافية على شحنات الجبن الهولندي في المنافذ الجمركية المصرية، مما يرفع التكلفة النهائية للمنتجات المستوردة مقارنة بالبدائل المصنعة محلياً."
+  },
+  "تعرف علي كيفيه تقديم شكوي عماليه الي وزاره العمل": {
+    "meaning": "Official labor complaint channels provide a formal administrative mechanism for resolving industrial disputes, establishing institutional oversight on corporate compliance with employment contracts and labor regulations.",
+    "meaning_ar": "توفر القنوات الرسمية للشكاوى العمالية آلية إدارية لتسوية النزاعات في بيئة العمل، وتفرض رقابة مؤسسية على امتثال الشركات لعقود التوظيف والتشريعات المنظمة للعمل."
   },
   "تعرف علي مهله المستوردين للمشاركه في تحقيق مكافحه اغراق الجبن الهولندي": {
     "meaning": "Trade authorities establish a formal regulatory timeframe for importers to submit pricing data, import volumes, and operational records as part of an active anti-dumping investigation into Dutch cheese. This procedural step determines market participation in the trade defense process and establishes the factual basis for potential tariff measures on imported dairy products.",
@@ -4056,6 +4068,10 @@
   "وزير الاتصالات: قطاع تكنولوجيا المعلومات يحقق اعلي معدل نمو في تاريخه عند 24.3%": {
     "meaning": "A 24.3% growth rate reflects the largest recorded historical expansion in operational activity, service delivery, and digital infrastructure projects across the information and communications technology sector.",
     "meaning_ar": "يعكس تسجيل معدل نمو بنسبة 24.3% أعلى وتيرة تاريخية في حجم النشاط التشغيلي، وتقديم الخدمات، ومشاريع البنية التحتية الرقمية لقطاع تكنولوجيا المعلومات والاتصالات."
+  },
+  "وزير الاتصالات: نستهدف بناء شركات ناشيه مستدامه تتوسع من مصر للاسواق العالميه": {
+    "meaning": "The state's policy directs resources toward the domestic technology ecosystem, establishing incubator infrastructure and cross-border commercial channels for Egyptian technology startups operating in foreign markets.",
+    "meaning_ar": "توجه السياسة الحكومية الموارد نحو منظومة التكنولوجيا المحلية، عبر إنشاء بنية تحتية للحاضنات وتوفير قنوات تجارية عابرة للحدود للشركات الناشئة المصرية العاملة في الأسواق الخارجية."
   },
   "وزير الاستثمار يصدر قرارا بتاسيس «صندوق مصر الفرعي للاستثمار الصناعي»": {
     "meaning": "This ministerial decree establishes a dedicated sub-fund under the Sovereign Fund of Egypt focused on direct equity and mezzanine financing for industrial assets and manufacturing infrastructure.",
