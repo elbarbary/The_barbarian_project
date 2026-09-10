@@ -2116,6 +2116,10 @@
     "meaning": "An appreciating Japanese yen decreases the value of overseas earnings when converted back into local currency and raises the price of Japanese exported goods in foreign markets, exerting direct pressure on export-oriented equities.",
     "meaning_ar": "يؤدي ارتفاع الين الياباني إلى انخفاض قيمة الأرباح المحققة بالخارج عند تحويلها إلى العملة المحلية وزيادة أسعار السلع المصدرة في الأسواق الخارجية، مما يضغط بشكل مباشر على أسهم الشركات المعتمدة على التصدير."
   },
+  "تراجع الاسهم في الصين وهونج كونج مع استمرار الصراع في الشرق الاوسط": {
+    "meaning": "Geopolitical conflicts disrupt global supply chains and elevate shipping and energy costs, triggering widespread risk aversion across international equity markets including China and Hong Kong.",
+    "meaning_ar": "تؤدي النزاعات الجيوسياسية إلى اضطراب سلاسل التوريد العالمية وارتفاع تكاليف الشحن والطاقة، مما يدفع أسواق الأسهم الدولية، بما فيها الصين وهونج كونج، إلى تقليص التعرض للمخاطر."
+  },
   "تراجع الانتاج الصناعي في المانيا باكبر وتيره في عام": {
     "meaning": "Industrial output data tracks the physical volume of goods produced by factories, mines, and utilities, with a contraction indicating lower aggregate manufacturing activity in Europe's largest economy.",
     "meaning_ar": "ترصد بيانات الإنتاج الصناعي الحجم الفعلي للسلع المنتجة في قطاعات المصانع والتعدين والمرافق، ويشير انكماشها إلى انخفاض إجمالي النشاط التصنيعي في أكبر اقتصاد أوروبي."
@@ -2764,6 +2768,10 @@
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
     "meaning_ar": "يُمثل خام الحديد المدخل الأساسي لإنتاج شركات الصلب المتكاملة، حيث يُحدد بشكل مباشر تكلفة المواد الخام عبر سلاسل إمداد الصناعات الثقيلة."
   },
+  "سعر عرض النفط الروسي يقفز مع تضاول خيارات الصين": {
+    "meaning": "Chinese refiners face fewer alternative crude suppliers, concentrating their import volume on Russian grades and allowing sellers to raise spot offer prices.",
+    "meaning_ar": "تواجه مصافي التكرير الصينية محدودية في بدائل استيراد الخام، مما يركز مشترياتها على الشحنات الروسية ويمنح البائعين قدرة على رفع أسعار العروض الفورية."
+  },
   "سعر كرتونه البيض اليوم 10/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances, direct farm-gate production costs such as poultry feed, and wholesale-to-retail transport margins in the domestic market.",
     "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك التوازن اليومي بين العرض والطلب، وتكاليف الإنتاج في المزارع مثل أسعار الأعلاف، بالإضافة إلى هوامش النقل والتوزيع من أسواق الجملة إلى التجزئة."
@@ -3249,6 +3257,10 @@
     "meaning": "Standalone profitability reflects the financial performance of the parent entity's direct operations, where revenues from core marine and offshore services exceed direct operational costs and financial expenses over the reported period.",
     "meaning_ar": "يعكس التحول إلى الربحية المستقلة نتائج الأعمال التشغيلية المباشرة للشركة الأم، حيث تتجاوز إيرادات الأنشطة والخدمات الملاحية الأساسية تكاليف التشغيل المباشرة والأعباء التمويلية خلال الفترة المالية المحددة."
   },
+  "ماونتن ڤيو تطلق المرحله الثانيه من مشروع Mountain View 1.1 في القاهره الجديده": {
+    "meaning": "Launching the second phase of a real estate development releases additional residential inventory onto the primary market and commits working capital to land development and construction works under the project timeline.",
+    "meaning_ar": "يمثل إطلاق المرحلة الثانية من مشروع تطوير عقاري طرح وحدات سكنية إضافية في السوق الأولية، وتوجيه رأس مال عامل نحو أعمال التطوير والإنشاءات المقررة ضمن الجدول الزمني للمشروع."
+  },
   "مبادله الاماراتيه تستثمر مليار دولار في لوكين كوفي مع سنتوريوم كابيتال": {
     "meaning": "A co-investment of this scale injects institutional private equity directly into the target company's capital structure, expanding its cash reserves and allocating equity ownership across institutional asset managers.",
     "meaning_ar": "يضخ هذا الاستثمار المشترك سيولة مؤسسية مباشرة في هيكل حقوق الملكية بالشركة المستهدفة، مما يزيد من أرصدتها النقدية ويوزع حصص الملكية بين مديري الأصول المؤسسيين."
@@ -3692,6 +3704,10 @@
   "نوفو نورديسك توقف تجربتين لدواء القلب بعد فشل تجربه رييسيه": {
     "meaning": "The discontinuation of clinical trials halts the research and development pipeline for this specific cardiovascular drug indication, limiting capital allocation and clinical resources dedicated to these studies.",
     "meaning_ar": "يؤدي إيقاف التجارب السريرية إلى تجميد مسار البحث والتطوير المخصص لهذا العقار لعلاج أمراض القلب، مما يوقف تخصيص الموارد الرأسمالية والسريرية الموجهة لهذه الدراسات."
+  },
+  "نيسان وشيري وام جي ثلاثي قياده مبيعات سيارات الركوب خلال 7 اشهر": {
+    "meaning": "These three automotive brands capture the largest volume share of passenger vehicle registrations through localized assembly operations and established distribution networks in the domestic market.",
+    "meaning_ar": "تستحوذ هذه العلامات التجارية الثلاث على الحصة الكبرى من حجم تسجيلات سيارات الركوب عبر خطوط التجميع المحلي وشبكات التوزيع القائمة في السوق المحلي."
   },
   "هاير مصر تضخ استثمارات جديده وتفتتح المرحله الثانيه من مجمع العاشر نوفمبر المقبل": {
     "meaning": "The expansion represents capital expenditure allocated to industrial capacity, adding a second operational phase to the manufacturing complex in 10th of Ramadan City to expand domestic production lines.",
