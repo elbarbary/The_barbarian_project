@@ -87,6 +87,15 @@ body[data-signed="no"] .om-main { padding-top: 26px !important; }
   box-shadow: var(--shLift, 0 24px 60px -20px rgba(0,0,0,.5));
   font: 400 15px/1.55 "IBM Plex Sans", system-ui, sans-serif;
 }
+/* Google's button is an iframe it renders itself, so it is centred rather
+   than stretched — a width we impose is a width it ignores. The rule below it
+   is a separator, not a heading: the email form under it is the way in that
+   has always worked and is not the fallback. */
+.si-google { display: grid; justify-items: center; gap: 12px; margin: 4px 0 14px; }
+.si-google[hidden] { display: none; }
+.si-or { display: flex; align-items: center; gap: 10px; width: 100%; margin: 0;
+  color: var(--faint); font-size: 11px; }
+.si-or::before, .si-or::after { content: ''; flex: 1; height: 1px; background: var(--rule2); }
 .si-sheet h2 { margin: 0 0 6px;
   font: 600 21px/1.25 "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif; }
 .si-lead { margin: 0 0 18px; color: var(--t2, #5C554F); font-size: 13.6px; }

@@ -67,6 +67,38 @@ export const requestCode = (email, turnstile) =>
   post('/request', turnstile ? { email, turnstile } : { email });
 export const verifyCode = (email, code) => post('/verify', { email, code });
 export const signOut = () => post('/signout');
+/* The credential Google hands the browser, sent on for verification. It is
+   NOT trusted here: the Worker checks its signature against Google's keys,
+   its audience, its issuer and its expiry before it mints anything. */
+export const signInWithGoogle = (credential) => post('/google', { credential });
+
+/** The client id, or null when the site has not been given one. */
+let configPending = null;
+export function authConfig() {
+  if (!configPending) {
+    configPending = readResponse(API + '/config', { credentials: 'same-origin' },
+      async (response) => (response.ok ? response.json() : { google: null }))
+      .catch(() => ({ google: null }));
+  }
+  return configPending;
+}
+
+const GOOGLE_JS = 'https://accounts.google.com/gsi/client';
+let googleReady = null;
+function loadGoogle() {
+  if (googleReady) return googleReady;
+  googleReady = new Promise((resolve, reject) => {
+    if (window.google?.accounts?.id) return resolve(window.google.accounts.id);
+    const tag = document.createElement('script');
+    tag.src = GOOGLE_JS;
+    tag.async = true;
+    tag.defer = true;
+    tag.onload = () => resolve(window.google?.accounts?.id || null);
+    tag.onerror = () => reject(new Error('google'));
+    document.head.appendChild(tag);
+  });
+  return googleReady;
+}
 
 /* The sheet, in both languages. It was written once in English and stayed
  * English after Arabic became the default — so the one screen standing between
@@ -79,6 +111,7 @@ const WORDS = {
     email: 'Email', send: 'Send me a code',
     code: 'The six digits we just sent', go: 'Sign in',
     back: 'Use a different email', busy: 'One moment…', close: 'Close',
+    or: 'or', googleFailed: 'That Google sign-in could not be verified.',
   },
   ar: {
     title: 'اطّلع على البورصة الحقيقية',
@@ -87,6 +120,7 @@ const WORDS = {
     email: 'البريد الإلكتروني', send: 'أرسل لي الرمز',
     code: 'الأرقام الستة التي أرسلناها', go: 'تسجيل الدخول',
     back: 'استخدم بريداً آخر', busy: 'لحظة…', close: 'إغلاق',
+    or: 'أو', googleFailed: 'تعذّر التحقق من تسجيل الدخول عبر جوجل.',
   },
 };
 
@@ -103,6 +137,8 @@ const REASONS = {
     email: 'هذا البريد لا يبدو صحيحاً.',
     code: 'الرمز ستة أرقام.',
     'that code is not right': 'هذا الرمز غير صحيح.',
+    'that sign-in could not be verified': 'تعذّر التحقق من تسجيل الدخول هذا.',
+    'google sign-in is not configured': 'تسجيل الدخول عبر جوجل غير مُفعّل هنا.',
     'too many requests': 'طلبات كثيرة. جرّب بعد قليل.',
     'too many attempts': 'محاولات كثيرة. جرّب بعد قليل.',
     'could not send the code': 'تعذّر إرسال الرمز. جرّب مرة أخرى.',
@@ -133,6 +169,10 @@ export function openSignIn(onDone, lang) {
     <div class="si-sheet" role="dialog" aria-modal="true" aria-labelledby="si-title">
       <h2 id="si-title">${t.title}</h2>
       <p class="si-lead">${t.lead}</p>
+      <div class="si-google" hidden>
+        <div id="si-google-button"></div>
+        <p class="si-or"><span>${t.or}</span></p>
+      </div>
       <form class="si-step" data-step="email">
         <label for="si-email">${t.email}</label>
         <input id="si-email" type="email" autocomplete="email" required dir="ltr"
@@ -327,6 +367,38 @@ export function openSignIn(onDone, lang) {
       busy(steps[1], false, t.go);
     }
   };
+
+  /* The Google button, when the site has a client id and Google's script
+   * loads. Everything about it is best-effort: no id, a blocked script or a
+   * failed render simply leaves the email form as the only way in, which is
+   * the way in that has always worked. A sign-in sheet that shows a broken
+   * button is worse than one that shows none.
+   */
+  authConfig().then(async (config) => {
+    if (!config || !config.google || !wrap.isConnected) return;
+    const slot = wrap.querySelector('.si-google');
+    const id = await loadGoogle().catch(() => null);
+    if (!id || !wrap.isConnected) return;
+    id.initialize({
+      client_id: config.google,
+      callback: async ({ credential }) => {
+        try {
+          const { email: who } = await signInWithGoogle(credential);
+          close();
+          onDone(who);
+        } catch (err) {
+          fail(err.message === 'that sign-in could not be verified'
+            ? t.googleFailed : err.message);
+        }
+      },
+    });
+    id.renderButton(wrap.querySelector('#si-google-button'), {
+      type: 'standard', theme: 'outline', size: 'large',
+      text: 'continue_with', shape: 'pill', width: 280,
+      locale: wrap.dir === 'rtl' ? 'ar' : 'en',
+    });
+    slot.hidden = false;
+  }).catch(() => { /* the email form is still there */ });
 
   step('email');
 }

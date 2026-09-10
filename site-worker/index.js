@@ -387,6 +387,111 @@ async function solved(env, token, ip) {
 }
 
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;
+
+/* ── signing in with Google ───────────────────────────────────────────────
+ *
+ * The browser hands us a credential and says it came from Google. That claim
+ * is worth nothing on its own: anyone can POST this endpoint with a JWT they
+ * wrote themselves, naming any address they like, and the whole point of the
+ * sign-in is that the address belongs to the person using it. So the token is
+ * verified here, against Google's own published keys, before it is allowed to
+ * mint a session.
+ *
+ * Five things have to hold, and each of them is a way in if it is missed:
+ *
+ *   the signature   against the key whose `kid` the header names, fetched from
+ *                   Google's JWKS. Without this the token is just a string
+ *                   somebody typed.
+ *   `aud`           our client id. A valid Google token issued to a DIFFERENT
+ *                   application would otherwise sign its bearer in here.
+ *   `iss`           accounts.google.com. 
+ *   `exp`/`iat`     inside their window, with a small allowance for clock
+ *                   drift and none for a token from the future.
+ *   email_verified  Google will issue a token for an unverified address on a
+ *                   self-managed domain, and an unverified address is a claim
+ *                   about somebody else's mailbox.
+ */
+const GOOGLE_JWKS = 'https://www.googleapis.com/oauth2/v3/certs';
+const GOOGLE_ISSUERS = new Set(['accounts.google.com', 'https://accounts.google.com']);
+const CLOCK_SLACK = 120;               // seconds, both directions
+
+let jwksCache = { at: 0, keys: null };
+
+export async function googleKeys(fetchImpl = fetch, now = Date.now) {
+  // Google rotates these; an hour is well inside the cache-control they send
+  // and keeps a signing-key rotation from locking readers out for a day.
+  if (jwksCache.keys && now() - jwksCache.at < 3600_000) return jwksCache.keys;
+  const response = await fetchImpl(GOOGLE_JWKS);
+  if (!response.ok) throw new Error(`jwks ${response.status}`);
+  const doc = await response.json();
+  const keys = Array.isArray(doc.keys) ? doc.keys : [];
+  if (!keys.length) throw new Error('jwks empty');
+  jwksCache = { at: now(), keys };
+  return keys;
+}
+
+export function resetGoogleKeys() { jwksCache = { at: 0, keys: null }; }
+
+/* The other direction from `b64url` above, which encodes. Named apart from it
+   because a file with two `b64url`s does not parse as a module — and
+   `node --check` reads this file as a script, so it said nothing. */
+const unb64url = (text) => {
+  const pad = String(text).replace(/-/g, '+').replace(/_/g, '/');
+  return Uint8Array.from(atob(pad + '='.repeat((4 - pad.length % 4) % 4)),
+                         (c) => c.charCodeAt(0));
+};
+const decodePart = (part) => JSON.parse(new TextDecoder().decode(unb64url(part)));
+
+/** The verified claims of a Google ID token, or null if it fails any check. */
+export async function verifyGoogleToken(token, clientId, deps = {}) {
+  const fetchImpl = deps.fetch || fetch;
+  const seconds = () => Math.floor((deps.now ? deps.now() : Date.now()) / 1000);
+  if (!clientId || typeof token !== 'string') return null;
+  const parts = token.split('.');
+  if (parts.length !== 3) return null;
+  let header; let claims;
+  try {
+    header = decodePart(parts[0]);
+    claims = decodePart(parts[1]);
+  } catch { return null; }
+  // Belt to the brace below rather than the brace itself: the key is ALWAYS
+  // imported as RSASSA-PKCS1-v1_5, so an HS256 token offering the public key
+  // as its HMAC secret cannot verify whatever this line says. Pinned anyway,
+  // because the day someone makes the import depend on the header is the day
+  // that stops being true.
+  if (header.alg !== 'RS256' || !header.kid) return null;
+
+  let keys;
+  try { keys = await googleKeys(fetchImpl, deps.now || Date.now); }
+  catch { return null; }
+  const jwk = keys.find((k) => k.kid === header.kid && k.alg === 'RS256');
+  if (!jwk) return null;
+
+  let ok = false;
+  try {
+    const key = await crypto.subtle.importKey(
+      'jwk', { ...jwk, ext: true }, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+      false, ['verify']);
+    ok = await crypto.subtle.verify(
+      'RSASSA-PKCS1-v1_5', key, unb64url(parts[2]),
+      new TextEncoder().encode(`${parts[0]}.${parts[1]}`));
+  } catch { return null; }
+  if (!ok) return null;
+
+  const audiences = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
+  if (!audiences.includes(clientId)) return null;
+  if (!GOOGLE_ISSUERS.has(claims.iss)) return null;
+  const now = seconds();
+  if (!(Number(claims.exp) > now - CLOCK_SLACK)) return null;
+  if (Number(claims.iat) > now + CLOCK_SLACK) return null;
+  // `email_verified` arrives as a boolean or the string "true" depending on
+  // the flow. Anything else is not a verified address.
+  const verified = claims.email_verified === true || claims.email_verified === 'true';
+  const email = String(claims.email || '').trim().toLowerCase();
+  if (!verified || !EMAIL.test(email)) return null;
+  return { email, sub: String(claims.sub || ''), name: claims.name || null };
+}
+
 const normalise = (raw) => String(raw || '').trim().toLowerCase();
 
 /* ── the reader's own list ────────────────────────────────────────────────
@@ -1314,6 +1419,15 @@ async function api(request, env, url, ctx) {
     return json(report, 200, { 'cache-control': 'no-store' });
   }
 
+  // Above the POST gate, because the sheet asks this before it has anything
+  // to send. The client id is public by design — it is embedded in every page
+  // that offers the button — and nothing else is exposed here.
+  if (path === '/auth/config') {
+    if (request.method !== 'GET') return json({ error: 'method' }, 405, { allow: 'GET' });
+    return json({ google: env.GOOGLE_CLIENT_ID || null }, 200,
+                { 'cache-control': 'public, max-age=300' });
+  }
+
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
   const body = await smallJson(request);
 
@@ -1390,6 +1504,27 @@ async function api(request, env, url, ctx) {
     // The cookie serves the website; the token in the body serves the app,
     // which has nowhere to put a cookie. A browser simply ignores it.
     return json({ email, token, expires_in: SESSION_DAYS * 86400 }, 200, {
+      'set-cookie': `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; `
+        + `Secure; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}`,
+    });
+  }
+
+  if (path === '/auth/google') {
+    // Off unless the site has been given a client id. A missing id must not
+    // fall through to "accept anything": `verifyGoogleToken` returns null
+    // without one, but saying so here keeps the reason legible.
+    const clientId = env.GOOGLE_CLIENT_ID;
+    if (!clientId) return json({ error: 'google sign-in is not configured' }, 501);
+    if (await overLimit(env, 'google', ip, LIMITS.codePerIp)) {
+      return json({ error: 'too many attempts' }, 429);
+    }
+    const who = await verifyGoogleToken(String(body.credential || ''), clientId);
+    if (!who) return json({ error: 'that sign-in could not be verified' }, 401);
+    await recordUser(env, who.email, ctx);
+    const token = await sign(
+      { e: who.email, x: Math.floor(Date.now() / 1000) + SESSION_DAYS * 86400 },
+      env.SESSION_SECRET);
+    return json({ email: who.email, token, expires_in: SESSION_DAYS * 86400 }, 200, {
       'set-cookie': `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; `
         + `Secure; SameSite=Lax; Max-Age=${SESSION_DAYS * 86400}`,
     });
