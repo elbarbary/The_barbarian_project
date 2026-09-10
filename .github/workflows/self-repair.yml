@@ -86,6 +86,14 @@ jobs:
       # healer that cannot reach the model reports that and stops, which is a
       # normal outcome rather than a broken run.
       - name: Authenticate to Google Cloud
+        # `id: gcp` is load-bearing, not decoration: `gemini.py` reads a Vertex
+        # token from GOOGLE_VERTEX_ACCESS_TOKEN, and its only other route is an
+        # ADC document of type `authorized_user`. Workload Identity Federation
+        # writes an `external_account` document, which that branch rejects — so
+        # without the id, and the env line on the next step that consumes
+        # `steps.gcp.outputs.access_token`, the healer cannot reach the model at
+        # all. It would report "could not get an answer" and exit 0 forever.
+        id: gcp
         continue-on-error: true
         uses: google-github-actions/auth@v2
         with:
@@ -109,6 +117,7 @@ jobs:
       - name: Attempt it
         env:
           GOOGLE_CLOUD_PROJECT: project-8bba98ed-6d90-45af-ab8
+          GOOGLE_VERTEX_ACCESS_TOKEN: ${{ steps.gcp.outputs.access_token }}
         run: |
           python3 scripts/ci_selfheal.py \
             --mode '${{ steps.mode.outputs.mode }}' --out "$RUNNER_TEMP/heal"
@@ -117,9 +126,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           MODE: ${{ steps.mode.outputs.mode }}
+          # In the step's own env, not a shell local. Six lines below read this
+          # back through `os.environ['RESULT']` in a child python3, and a shell
+          # assignment is not exported — every one of them raised KeyError, so
+          # this step died the first time an edit ever survived the gate. It
+          # went unnoticed because all 42 runs to date skipped the whole job.
+          RESULT: ${{ runner.temp }}/heal/result.json
         run: |
           set -euo pipefail
-          RESULT="$RUNNER_TEMP/heal/result.json"
           [ -f "$RESULT" ] || { echo 'no result written'; exit 0; }
 
           ACTION=$(python3 -c "import json,os;print(json.load(open(os.environ['RESULT']))['action'])")

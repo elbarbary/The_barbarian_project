@@ -265,3 +265,100 @@ class FailingModuleTest(unittest.TestCase):
 
     def test_a_line_without_a_dotted_path_still_yields_something(self):
         self.assertEqual(heal.failing_modules("ERROR: test_sources\n"), ["test_sources"])
+
+
+class NormalisationTest(unittest.TestCase):
+    """`lstrip("./")` strips a character SET, not a "./" prefix.
+
+    It ate the leading dot of every dotfile path, so `.github/workflows/...`
+    arrived as `github/workflows/...` and matched neither the deny entry meant
+    to protect it nor the allow entry meant to permit it. The old
+    `test_it_will_not_edit_its_own_workflow` passed straight through that bug,
+    because "refused" was the right answer for the wrong reason — so this file
+    now checks the REASON, not just the verdict.
+    """
+
+    def test_a_leading_dot_survives_normalisation(self):
+        self.assertEqual(heal.normalise(".github/workflows/x.yml"),
+                         ".github/workflows/x.yml")
+
+    def test_a_dot_slash_prefix_is_removed(self):
+        self.assertEqual(heal.normalise("./scripts/x.py"), "scripts/x.py")
+
+    def test_a_tangled_dot_prefix_is_refused_rather_than_cleaned(self):
+        # `.//./scripts/x.py` normalises to `/scripts/x.py` -- absolute. That is
+        # deliberate: a security boundary should refuse an oddly-spelled path,
+        # not tidy it into acceptance. path_allowed rejects it on the leading
+        # slash, and this pins that so a future "cleanup" of normalise cannot
+        # quietly turn a refusal into a permit.
+        self.assertTrue(heal.normalise(".//./scripts/x.py").startswith("/"))
+        ok, why = heal.path_allowed(".//./scripts/x.py")
+        self.assertFalse(ok)
+        self.assertIn("escapes", why)
+
+    def test_redundant_separators_collapse(self):
+        self.assertEqual(heal.normalise("scripts//x.py"), "scripts/x.py")
+        self.assertEqual(heal.normalise("scripts/./x.py"), "scripts/x.py")
+
+    def test_its_own_workflow_is_refused_as_a_guard_not_as_a_stranger(self):
+        ok, why = heal.path_allowed(".github/workflows/self-repair.yml")
+        self.assertFalse(ok)
+        self.assertIn("guard", why)
+
+    def test_other_workflows_stay_editable(self):
+        # The dot bug denied these too, silently removing the healer's ability
+        # to touch any workflow at all.
+        ok, why = heal.path_allowed(".github/workflows/publish-prices.yml")
+        self.assertTrue(ok, why)
+
+    def test_a_dotted_detour_cannot_smuggle_a_test_through(self):
+        for rel in ("scripts/./test_sources.py", "scripts//test_sources.py",
+                    "./scripts/test_sources.py"):
+            ok, _ = heal.path_allowed(rel)
+            self.assertFalse(ok, f"{rel} must be refused")
+
+
+class SelfEditTest(unittest.TestCase):
+    def test_the_healer_may_not_edit_its_own_policy(self):
+        # scripts/ is allowed and this file is not a test, so without an
+        # explicit deny the healer could rewrite the function that decides what
+        # it may rewrite -- judged by the already-imported module, so the suite
+        # would go green and the pull request would look ordinary.
+        ok, why = heal.path_allowed("scripts/ci_selfheal.py")
+        self.assertFalse(ok)
+        self.assertIn("guard", why)
+
+    def test_the_healer_may_not_edit_its_own_tests(self):
+        ok, _ = heal.path_allowed("scripts/test_ci_selfheal.py")
+        self.assertFalse(ok)
+
+
+class SkipAccountingTest(unittest.TestCase):
+    """Silencing a test is the same act as deleting it.
+
+    `Ran N tests` counts skipped ones, so decorating the failing test with
+    `@unittest.skip` turned the suite green with N unchanged -- the gate's
+    count comparison saw no loss and let it through.
+    """
+
+    def s(self, ok, ran, skipped=0):
+        return heal.SuiteResult(ok=ok, ran=ran, output="", skipped=skipped)
+
+    def test_executed_excludes_skips(self):
+        self.assertEqual(self.s(True, 708, 3).executed, 705)
+
+    def test_buying_green_with_a_skip_is_refused(self):
+        passed, why = heal.gate(self.s(False, 708, 1), self.s(True, 708, 2))
+        self.assertFalse(passed)
+        self.assertIn("quieter", why)
+
+    def test_a_real_repair_still_passes(self):
+        passed, why = heal.gate(self.s(False, 708, 1), self.s(True, 708, 1))
+        self.assertTrue(passed, why)
+
+    def test_the_skip_count_is_parsed_from_both_summary_lines(self):
+        for text, want in (("OK (skipped=1)", 1),
+                           ("FAILED (failures=1, skipped=3)", 3),
+                           ("OK", 0)):
+            m = heal.SKIP_RE.search(text)
+            self.assertEqual(int(m.group(1)) if m else 0, want, text)

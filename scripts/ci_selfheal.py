@@ -36,6 +36,7 @@ import argparse
 import dataclasses
 import json
 import pathlib
+import posixpath
 import re
 import subprocess
 import sys
@@ -65,6 +66,13 @@ DENY_PUBLISHED = (
 DENY_PROOF = (
     "scripts/macro_types.py",
     ".github/workflows/self-repair.yml",
+    # Its own policy. `scripts/` is on the ALLOW list and this file is not a
+    # test, so without this line the healer could propose an edit to the very
+    # function deciding what it may edit — and that edit would be judged by the
+    # already-loaded module, so the suite would go green and the PR would look
+    # ordinary.
+    "scripts/ci_selfheal.py",
+    "scripts/test_ci_selfheal.py",
 )
 
 # Credentials, CI identity, and anything that changes who the build is.
@@ -96,9 +104,29 @@ def is_test_path(rel: str) -> bool:
     )
 
 
+def normalise(rel: str) -> str:
+    """Repo-relative POSIX form, without eating a leading dot.
+
+    `str.lstrip("./")` looks like it removes a "./" prefix. It does not: lstrip
+    takes a SET of characters, so it ate the leading dot of every dotfile path
+    too — `.github/workflows/self-repair.yml` arrived here as
+    `github/workflows/...`, which matched neither the deny entry meant to
+    protect it nor the allow entry meant to permit it. The guard's own test
+    still passed, because "refused" was the right answer for the wrong reason.
+    """
+    rel = rel.replace("\\", "/").strip()
+    while rel.startswith("./"):
+        rel = rel[2:]
+    if not rel:
+        return ""
+    # Collapses `a//b` and `a/./b`; leaves `..` alone so the caller can refuse it.
+    rel = posixpath.normpath(rel)
+    return "" if rel == "." else rel
+
+
 def path_allowed(rel: str) -> tuple[bool, str]:
     """May the healer write this path? Returns (allowed, why-not)."""
-    rel = rel.replace("\\", "/").lstrip("./")
+    rel = normalise(rel)
     if not rel or rel.startswith("/") or ".." in rel.split("/"):
         return False, "path escapes the repository"
     if is_test_path(rel):
@@ -120,6 +148,8 @@ def path_allowed(rel: str) -> tuple[bool, str]:
 
 PY_SUITE = ["python3", "-m", "unittest", "discover", "-s", "scripts", "-p", "test_*.py"]
 RAN_RE = re.compile(r"^Ran (\d+) tests? in", re.M)
+# `OK (skipped=1)` / `FAILED (failures=1, skipped=3)`.
+SKIP_RE = re.compile(r"\bskipped=(\d+)")
 
 
 @dataclasses.dataclass
@@ -127,11 +157,23 @@ class SuiteResult:
     ok: bool
     ran: int
     output: str
+    skipped: int = 0
+
+    @property
+    def executed(self) -> int:
+        """Tests that actually ran an assertion.
+
+        `Ran N tests` counts skipped ones, so comparing it alone leaves the
+        gate buyable: decorate the failing test with `@unittest.skip` and the
+        suite turns green with `Ran` unchanged. Silencing a test is the same
+        act as deleting it, and has to be caught by the same rule.
+        """
+        return max(0, self.ran - self.skipped)
 
     @property
     def summary(self) -> str:
         tail = "\n".join(self.output.strip().splitlines()[-40:])
-        return f"ok={self.ok} ran={self.ran}\n{tail}"
+        return f"ok={self.ok} ran={self.ran} skipped={self.skipped}\n{tail}"
 
 
 def run_python_suite(cwd: pathlib.Path | None = None) -> SuiteResult:
@@ -140,7 +182,9 @@ def run_python_suite(cwd: pathlib.Path | None = None) -> SuiteResult:
     )
     out = (proc.stdout or "") + (proc.stderr or "")
     m = RAN_RE.search(out)
-    return SuiteResult(ok=proc.returncode == 0, ran=int(m.group(1)) if m else 0, output=out)
+    s = SKIP_RE.search(out)
+    return SuiteResult(ok=proc.returncode == 0, ran=int(m.group(1)) if m else 0,
+                       output=out, skipped=int(s.group(1)) if s else 0)
 
 
 # The same four globs `check-website.yml` runs. Expanded here rather than
@@ -189,16 +233,19 @@ def gate(before: SuiteResult, after: SuiteResult,
     """
     if not after.ok:
         return False, f"suite still red after the edit ({after.ran} tests ran)"
-    if after.ran < before.ran:
+    if after.executed < before.executed:
         return False, (
-            f"suite went green but lost {before.ran - after.ran} test(s) "
-            f"({before.ran} → {after.ran}). A quieter suite is not a repair."
+            f"suite went green but lost {before.executed - after.executed} "
+            f"executed test(s) ({before.executed} → {after.executed}, "
+            f"skipped {before.skipped} → {after.skipped}). "
+            "A quieter suite is not a repair."
         )
     if node_after is not None and not node_after.ok:
         return False, ("python suite green, but the website tests broke — "
                        "the edit fixed one suite by damaging another")
     node = f", website {node_after.ran} passing" if node_after else ""
-    return True, f"green, {after.ran} tests ran (was {before.ran}){node}"
+    return True, (f"green, {after.executed} tests executed "
+                  f"(was {before.executed}){node}")
 
 
 # ── Asking ───────────────────────────────────────────────────────────────────
@@ -257,7 +304,7 @@ def apply_edits(edits: list[dict]) -> tuple[list[str], list[str]]:
     if len(edits) > MAX_EDITS:
         return [], [f"{len(edits)} edits proposed, more than the {MAX_EDITS} allowed"]
     for e in edits:
-        rel = str(e.get("path", "")).replace("\\", "/").lstrip("./")
+        rel = normalise(str(e.get("path", "")))
         ok, why = path_allowed(rel)
         if not ok:
             refused.append(f"{rel}: {why}")
@@ -530,8 +577,8 @@ def main() -> int:
         "files": written,
         "refused": refused,
         "verdict": verdict,
-        "before": {"ok": before.ok, "ran": before.ran},
-        "after": {"ok": after.ok, "ran": after.ran},
+        "before": {"ok": before.ok, "ran": before.ran, "skipped": before.skipped},
+        "after": {"ok": after.ok, "ran": after.ran, "skipped": after.skipped},
         "website": {"ok": node_after.ok, "ran": node_after.ran} if node_after else None,
     }
     if not passed:
