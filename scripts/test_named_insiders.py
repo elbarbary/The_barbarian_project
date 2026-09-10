@@ -46,8 +46,21 @@ class NameTest(unittest.TestCase):
         """
         for value in ("insider", "Insider", "related parties of insider",
                       "major shareholder", "Treasury Shares",
-                      "شركة مصر بني سويف", "مساهم رئيسي", "أطراف مرتبطة"):
+                      "مساهم رئيسي", "أطراف مرتبطة"):
             self.assertFalse(named.usable_name(value), value)
+
+    def test_a_company_IS_a_usable_name(self):
+        """Deliberate, and a reversal.
+
+        The first rule refused anything starting `شركة`, which threw away
+        Derayah Financial and other real corporate holders. A company can hold
+        shares; whether it is the WRONG company is `is_the_issuer`'s question,
+        not this one's.
+        """
+        for value in ("شركة دراية المالية مساهمة مقفلة",
+                      "شركه اموال العربيه للاقطان",
+                      "Al Hosn Consulting"):
+            self.assertTrue(named.usable_name(value), value)
 
     def test_a_single_word_is_not_a_person(self):
         self.assertFalse(named.usable_name("Mohamed"))
@@ -164,3 +177,53 @@ class CleanNameTest(unittest.TestCase):
                              "ELEC", None)
         self.assertIsNotNone(rec, why)
         self.assertEqual(rec["investorName"], "الحصن للاستشارات")
+
+
+class IssuerTest(unittest.TestCase):
+    """A company can hold shares; the company whose shares they are cannot hold
+    its own in this field.
+
+    The first rule here refused anything starting `شركة`, which threw away
+    Derayah Financial — a real corporate holder — while letting through
+    `شركه اموال العربيه`, the same word spelled with a haa instead of a taa
+    marbuta. The question is not "is this a company" but "is this THE issuer".
+    """
+
+    KABO = "النصر للملابس والمنسوجات - كابو"
+
+    def test_the_issuers_own_name_is_caught(self):
+        self.assertTrue(named.is_the_issuer(
+            "شركة النصر للملابس والمنسوجات كابو", self.KABO))
+
+    def test_a_corporate_holder_is_not_the_issuer(self):
+        for holder in ("شركة دراية المالية مساهمة مقفلة",
+                       "شركه اموال العربيه للاقطان",
+                       "شركه ام جي سي للتجاره والاستثمار العقاري"):
+            self.assertFalse(named.is_the_issuer(holder, self.KABO), holder)
+
+    def test_a_person_is_never_the_issuer(self):
+        self.assertFalse(named.is_the_issuer("ياسر فاروق مصطفى محمد",
+                                             "مصر بنى سويف للاسمنت"))
+
+    def test_spelling_drift_still_matches(self):
+        """Scans swap taa marbuta for haa and drop the article; an issuer that
+        matched only on an exact string would slip straight through."""
+        self.assertTrue(named.is_the_issuer("شركه النصر للملابس والمنسوجات كابو",
+                                            self.KABO))
+
+    def test_an_absent_issuer_never_refuses(self):
+        self.assertFalse(named.is_the_issuer("أي اسم كان", ""))
+
+    def test_vet_refuses_the_issuer_and_keeps_the_holder(self):
+        bad, why = named.vet(reading(investorName="شركة النصر للملابس والمنسوجات كابو"),
+                             "KABO", None, self.KABO)
+        self.assertIsNone(bad)
+        self.assertIn("issuer", why)
+        good, why2 = named.vet(reading(investorName="شركة دراية المالية مساهمة مقفلة"),
+                               "KABO", None, self.KABO)
+        self.assertIsNotNone(good, why2)
+
+    def test_the_issuer_name_comes_off_the_filing_title(self):
+        form = {"titleArabic": "مصر بنى سويف للاسمنت (MBSC.CA) - بيان بخصوص نموذج إفصاح",
+                "title": "Misr Beni Suef Cement (MBSC.CA) - Release Regarding a Disclosure Form"}
+        self.assertEqual(named.issuer_name(form, "MBSC"), "مصر بنى سويف للاسمنت")

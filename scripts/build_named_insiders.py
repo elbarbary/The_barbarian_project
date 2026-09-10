@@ -35,6 +35,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import unicodedata
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
@@ -57,7 +58,7 @@ PROMPT = """This is an Egyptian Exchange post-execution disclosure form
 
 {
   "investorName": "<the NAMED person or entity that traded, exactly as printed, or null>",
-  "investorNameEn": "<a transliteration if the name is Arabic, else null>",
+  "investorNameEn": "<ALWAYS give a Latin transliteration when the name is Arabic; null only if the name is already Latin>",
   "relationship": "<their stated relationship to the company, or null>",
   "company": "<the listed company as printed, or null>",
   "action": "buy | sell | null",
@@ -91,6 +92,46 @@ def fetch_pdf(url: str, into: pathlib.Path) -> bool:
         return False
     # A viewer wrapper is HTML and a few kilobytes; the real thing starts %PDF.
     return into.exists() and into.read_bytes()[:4] == b"%PDF"
+
+
+AGY = pathlib.Path.home() / ".local" / "bin" / "agy"
+
+
+def _json_from(text: str) -> dict | None:
+    raw = (text or "").strip()
+    if raw.startswith("```"):
+        raw = re.sub(r"^```[a-zA-Z]*\n", "", raw)
+        raw = re.sub(r"\n```\s*$", "", raw)
+    start, end = raw.find("{"), raw.rfind("}")
+    if start < 0 or end <= start:
+        return None
+    try:
+        return json.loads(raw[start:end + 1])
+    except json.JSONDecodeError:
+        return None
+
+
+def read_form_agy(pdf: pathlib.Path) -> dict | None:
+    """The local agent, which bills nobody here.
+
+    Checked against Vertex on filing 292249 before being trusted with the rest:
+    same name, same 9,400 shares, same 246.87, same 6.01% -> 5.99%. It returned
+    no transliteration, so the prompt asks for one in as many words.
+    """
+    if not AGY.exists():
+        return None
+    try:
+        proc = subprocess.run(
+            [str(AGY), "--dangerously-skip-permissions",
+             "--add-dir", str(pdf.parent),
+             "--model", "gemini-3.8-flash-low",
+             "--print-timeout", "4m",
+             "-p", f"Read the scanned PDF at {pdf}. {PROMPT}"],
+            capture_output=True, text=True, timeout=330, cwd=str(pdf.parent),
+        )
+    except (subprocess.SubprocessError, OSError):
+        return None
+    return _json_from(proc.stdout)
 
 
 def read_form(pdf: pathlib.Path) -> dict | None:
@@ -134,10 +175,52 @@ def read_form(pdf: pathlib.Path) -> dict | None:
 # the same filing.
 
 ARABIC = re.compile(r"[؀-ۿ]")
-# "insider", "related parties", a company suffix — a role or an issuer, not a
-# person, and the daily summary already carries those.
+# A ROLE is not a name: the daily summary already carries these, and one of
+# them on screen would read as though "insider" were somebody who bought shares.
+#
+# A COMPANY is not on this list, and used not to be deliberately. `شركة` was,
+# which refused Derayah Financial — a real corporate holder — while letting
+# through `شركه اموال العربيه`, the same word spelled with a haa instead of a
+# taa marbuta. Corporate holders are legitimate disclosed parties; what has to
+# be caught is the ISSUER's own name landing in the holder's field, and that is
+# `is_the_issuer` below, which compares against the company the filing is about
+# rather than guessing from a prefix.
 NOT_A_NAME = re.compile(
-    r"^(insider|related part|major|treasury|شركة|مساهم|داخلي|أطراف)", re.I)
+    r"^(insider|related part|major|treasury|مساهم رئيس|داخلي|أطراف مرتبطة)", re.I)
+
+# Arabic spelling drifts across scans — taa marbuta for haa, alef forms, the
+# definite article — so an issuer match is made on a folded skeleton rather than
+# on the exact string.
+_FOLD = str.maketrans({"أ": "ا", "إ": "ا", "آ": "ا", "ة": "ه", "ى": "ي",
+                       "ؤ": "و", "ئ": "ي"})
+_NOISE = re.compile(r"\b(شرك[هة]|مساهمة|مقفلة|ش\.?م\.?م|s\.?a\.?e|co|company|"
+                    r"للاستثمار|القابضة|the|for|and|al|el)\b", re.I)
+
+
+def skeleton(name: str) -> str:
+    s = unicodedata.normalize("NFKC", name or "").casefold().translate(_FOLD)
+    s = _NOISE.sub(" ", s)
+    return " ".join(re.sub(r"[^\w\s]", " ", s).split())
+
+
+def is_the_issuer(name: str, issuer: str) -> bool:
+    """Did the issuer's own name land in the holder's field?
+
+    KABO's form came back with "شركة النصر للملابس والمنسوجات كابو" as the
+    party — that is the listed company, not whoever traded it.
+    """
+    a, b = skeleton(name), skeleton(issuer)
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    aw, bw = set(a.split()), set(b.split())
+    if not aw or not bw:
+        return False
+    # Most of one inside the other, in either direction: a scan drops and adds
+    # words, so exact equality alone would miss the case this exists for.
+    overlap = len(aw & bw) / min(len(aw), len(bw))
+    return overlap >= 0.75
 
 
 
@@ -159,6 +242,27 @@ def clean_name(value: str) -> str:
     return name.strip(" ,-–—:").strip()
 
 
+
+def issuer_name(form: dict, ticker: str) -> str:
+    """The listed company this filing is about, for the issuer check.
+
+    Taken from the filing's own title, which carries it in both scripts, rather
+    than from the directory — the title is what the scan was made from, so the
+    spellings match more often.
+    """
+    for key in ("titleArabic", "title"):
+        raw = (form.get(key) or "").strip()
+        if not raw:
+            continue
+        # "مصر بنى سويف للاسمنت (MBSC.CA) - بيان بخصوص ..." — the company is
+        # everything before the ticker in brackets.
+        cut = raw.split("(" + ticker, 1)[0] if ticker else raw
+        cut = cut.split(" - ", 1)[0].strip()
+        if len(cut) >= 4:
+            return cut
+    return ""
+
+
 def usable_name(value) -> bool:
     if not isinstance(value, str):
         return False
@@ -171,7 +275,8 @@ def usable_name(value) -> bool:
     return len(name.split()) >= 2
 
 
-def vet(reading: dict, expected_ticker: str, summary: dict | None) -> tuple[dict | None, str]:
+def vet(reading: dict, expected_ticker: str, summary: dict | None,
+        issuer: str = "") -> tuple[dict | None, str]:
     """Returns (record, why-refused)."""
     if not isinstance(reading, dict):
         return None, "no object"
@@ -180,6 +285,8 @@ def vet(reading: dict, expected_ticker: str, summary: dict | None) -> tuple[dict
     name = clean_name(reading.get("investorName") or "")
     if not usable_name(name):
         return None, f"not a usable name: {reading.get('investorName')!r}"
+    if issuer and is_the_issuer(name, issuer):
+        return None, f"that is the issuer, not the holder: {name!r}"
 
     shares = reading.get("shares")
     if not isinstance(shares, int) or shares <= 0:
@@ -240,6 +347,9 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=5,
                     help="how many unread filings to attempt this run")
     ap.add_argument("--refresh", default="", help="re-read one filing id")
+    ap.add_argument("--engine", choices=("agy", "vertex"), default="agy",
+                    help="agy is the local agent and costs nothing here; "
+                         "vertex is the metered path the daily build uses")
     args = ap.parse_args()
 
     if not LEDGER.exists():
@@ -277,12 +387,17 @@ def main() -> int:
                 print(f"   {fid} {ticker}: the exchange would not hand over the file")
                 failed += 1
                 continue
-            reading = read_form(pdf)
+            reading = (read_form_agy(pdf) if args.engine == "agy"
+                       else read_form(pdf))
+            # A local agent that is missing or wedged should not silently
+            # publish nothing; fall back rather than report the form unreadable.
+            if reading is None and args.engine == "agy":
+                reading = read_form(pdf)
         if reading is None:
             print(f"   {fid} {ticker}: no answer from the model")
             failed += 1
             continue
-        record, why = vet(reading, ticker, form)
+        record, why = vet(reading, ticker, form, issuer_name(form, ticker))
         if not record:
             refused[fid] = why
             print(f"   {fid} {ticker}: refused — {why}")
