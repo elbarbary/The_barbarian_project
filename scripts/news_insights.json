@@ -1359,6 +1359,10 @@
     "meaning": "A state-led public offering lists an industrial plastics manufacturing company on the Egyptian Exchange, transferring an equity stake into public market trading.",
     "meaning_ar": "طرح عام تقوده الدولة يُدرج شركة لتصنيع البلاستيك في البورصة المصرية، وينقل حصة من ملكيتها إلى التداول العام في سوق الأوراق المالية."
   },
+  "الحكومه توافق علي القيمه العادله المحدثه ل«بنك القاهره» تمهيدا للطرح بالبورصه": {
+    "meaning": "Official approval of the updated asset valuation establishes the statutory pricing baseline required by regulatory authorities to execute an initial public offering on the exchange.",
+    "meaning_ar": "يمثل اعتماد التقييم المحدث للأصول تحديداً للأساس السعري الإلزامي المطلوب من الجهات الرقابية لتنفيذ إجراءات الطرح العام في البورصة."
+  },
   "الحكومه توافق علي تجديد بروتوكول تنفيذ مشروعات مصر الرقميه لمده 3 سنوات": {
     "meaning": "Extending the Digital Egypt project protocol establishes a continuous three-year operational framework for contracted technology firms to supply digital transformation and IT infrastructure services to government entities.",
     "meaning_ar": "يضع تجديد بروتوكول مشروعات مصر الرقمية إطاراً تشغيلياً مستمراً لمدة ثلاث سنوات يتيح لشركات التكنولوجيا المتعاقدة تقديم خدمات التحول الرقمي والبنية التحتية لتكنولوجيا المعلومات للجهات الحكومية."
@@ -2034,6 +2038,10 @@
   "بنك التنميه الصناعيه يتيح تمويل وحدات مشروعات صندوق التنميه الحضريه": {
     "meaning": "The Industrial Development Bank integrates financing products into the Urban Development Fund's housing developments, creating a direct credit channel between the bank's mortgage portfolio and state-backed real estate inventory.",
     "meaning_ar": "يُدرج بنك التنمية الصناعية منتجات تمويلية مخصصة لوحدات صندوق التنمية الحضرية، مما ينشئ قناة ائتمانية مباشرة تربط بين المحفظة العقارية للبنك والأصول السكنية التابعة للصندوق."
+  },
+  "بنك القاهره يرفع عايد الحساب الجاري اليومي الي 17%.. ما المزايا الجديده": {
+    "meaning": "Raising the interest rate on daily current accounts to 17% increases the bank's cost of funds on liquid liabilities while repricing short-term deposit products to align with prevailing central bank policy rates.",
+    "meaning_ar": "يؤدي رفع العائد على الحساب الجاري اليومي إلى 17% إلى زيادة تكلفة الأموال على الالتزامات قصيرة الأجل لدى البنك، مع إعادة تسعير الأوعية الادخارية السائلة لتتواكب مع أسعار الفائدة الأساسية للبنك المركزي."
   },
   "بنك القاهره يرفع عايد حساب ميجا توفير الي 18.5%": {
     "meaning": "Raising interest rates on savings accounts increases the bank's cost of funds while directly setting higher cash return yields for retail deposit liabilities.",
@@ -3192,6 +3200,10 @@
   "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
     "meaning_ar": "تمثل عوائد السندات الأمريكية قصيرة الأجل المعيار الأساسي لتكلفة الاقتراض السيادي، حيث يؤدي ارتفاعها إلى زيادة تكلفة رأس المال عالمياً وتحويل السيولة نحو أدوات الدخل الثابت المقومة بالدولار الأمريكي."
+  },
+  "عوايد السندات البريطانيه طويله الاجل عند اعلي مستوي منذ 28 عاما": {
+    "meaning": "Yields reaching a 28-year peak reflect lower secondary market prices for long-term UK government debt, which sets the long-duration benchmark borrowing cost for the British sovereign and corporate sectors.",
+    "meaning_ar": "وصول العوائد إلى أعلى مستوياتها خلال 28 عاماً يعكس انخفاض أسعار السندات الحكومية البريطانية طويلة الأجل في السوق الثانوية، وهو ما يحدد تكلفة الاقتراض المرجعية طويلة الأجل للقطاعين السيادي والخاص في بريطانيا."
   },
   "عوايد سندات الخزانه الامريكيه تقترب من 5%": {
     "meaning": "Higher US Treasury bond yields raise the global risk-free benchmark rate, which increases external borrowing costs for emerging markets and drives international capital allocation toward US dollar-denominated sovereign instruments.",
