@@ -1139,6 +1139,10 @@
     "meaning": "A multi-month decline in major European equity indices reflects broad asset repricing across European markets, directly influencing global liquidity conditions and cross-border institutional capital allocations.",
     "meaning_ar": "يعكس تراجع مؤشرات الأسهم الأوروبية إلى أدنى مستوياتها منذ عدة أشهر حركة إعادة تسعير عامة للأصول في الأسواق الأوروبية، مما يؤثر مباشرة على سيولة التداول وتوزيع تدفقات رؤوس الأموال المؤسسية الدولية."
   },
+  "الاسهم العالميه ترتفع قبل قرار المركزي الاوروبي ونتايج “اوراكل”": {
+    "meaning": "Global equity prices reflect baseline adjustments as trading desks rebalance positions ahead of benchmark interest rate decisions by the European Central Bank and corporate earnings disclosures from major technology firms.",
+    "meaning_ar": "تعكس أسعار الأسهم العالمية تعديلات في المراكز المالية للمتعاملين لإعادة موازنة المحافظ تزامناً مع قرارات أسعار الفائدة الأساسية للبنك المركزي الأوروبي وإفصاحات النتائج المالية لشركات التكنولوجيا الكبرى."
+  },
   "الاسهم القياديه تعيد البورصه الي اعتاب القمه التاريخيه مجددا": {
     "meaning": "Large-cap equities with high index weightings drive the main benchmark index upward through concentrated trading volume, bringing the index level near its historical high.",
     "meaning_ar": "تقود الأسهم ذات الوزن النسبي المرتفع المؤشر الرئيسي نحو الصعود عبر تركز أحجام التداول، مما يضع مستوى المؤشر قرب قمته التاريخية."
@@ -1718,6 +1722,10 @@
   "المركزي الصيني يعزز مشترياته من الذهب للشهر السادس": {
     "meaning": "The continuous accumulation of gold by the People's Bank of China reallocates the composition of its official foreign exchange reserves, increasing the share of non-currency reserve assets relative to foreign currency holdings.",
     "meaning_ar": "تؤدي الزيادة المستمرة في حيازة بنك الشعب الصيني من الذهب إلى إعادة هيكلة مكونات احتياطياته الأجنبية الرسمية عبر رفع حصة الأصول غير النقدية مقارنة بالأرصدة من العملات الأجنبية."
+  },
+  "المركزي الكوري يحذر من مخاطر المشتقات المرتبطه بشركات الرقايق": {
+    "meaning": "Structured derivative contracts tied to semiconductor equities tie investor payouts directly to single-sector price volatility and concentration risk within the capital market.",
+    "meaning_ar": "تربط عقود المشتقات المالية المهيكلة ذات الصلة بأسهم شركات أشباه الموصلات عوائد المستثمرين مباشرة بتقلبات أسعار قطاع واحد ومخاطر تركز السيولة في السوق المالية."
   },
   "المركزي: صعود السيوله المحليه M2 لتسجل 15.49 تريليون جنيه بنهايه يوليو 2026": {
     "meaning": "The expansion in M2 money supply represents an increase in total currency in circulation outside the banking sector alongside local and foreign currency demand and time deposits. This reflects the current volume of total liquid monetary assets managed within the domestic banking system.",
@@ -3732,6 +3740,10 @@
   "هبوط واردات الصين من النفط الخام بنسبه 23.4% في اغسطس": {
     "meaning": "A drop in Chinese crude oil imports reflects lower refinery throughput, adjustments in domestic crude inventories, and reduced physical procurement activity by the world's largest oil importer.",
     "meaning_ar": "يعكس تراجع واردات الصين من النفط الخام انخفاض معدلات تشغيل مصافي التكرير المحلية وتغيرات في مستويات المخزون وعمليات الشراء الفعلي لدى أكبر مستورد للنفط عالمياً."
+  },
+  "هل ارتفعت اسعار الكتاكيت اليوم 10-9-2026 في مصر؟": {
+    "meaning": "Day-old chick prices represent an initial input cost in the poultry production cycle, determined by hatchery supply levels and breeding stock feed costs.",
+    "meaning_ar": "تمثل أسعار الكتاكيت عمر يوم تكلفة مدخلات أولية في دورة إنتاج الدواجن، وتتحدد بناءً على حجم معروض المفرخات وتكاليف أعلاف أمهات الدواجن."
   },
   "هل تغلق تعديلات قواعد القيد باب استغلال المعلومات الداخليه؟": {
     "meaning": "EGX listing rule amendments introduce regulatory restrictions and reporting obligations designed to control access to material non-public information and govern trading activities by corporate insiders.",
