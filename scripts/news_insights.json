@@ -651,6 +651,10 @@
     "meaning": "Capital flight by high-net-worth individuals involves the cross-border relocation of private wealth and tax residency to jurisdictions with lower fiscal burdens, altering the distribution of global private bank deposits and taxable asset bases.",
     "meaning_ar": "يتضمن انتقال الأفراد ذوي الملاءة المالية العالية تحويل الإقامة الضريبية والأصول الخاصة عبر الحدود نحو ولايات قضائية ذات أعباء مالية منخفضة، مما يعيد توزيع الودائع في البنوك الخاصة والقواعد الضريبية دولياً."
   },
+  "احتمالات رفع الفايده الامريكيه ترتفع الي 70% الاسبوع المقبل": {
+    "meaning": "Higher US policy rates increase yields on dollar-denominated debt instruments, which widens the interest rate differential between foreign assets and emerging market securities, influencing foreign portfolio capital allocations and external debt servicing costs.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة الأمريكية إلى زيادة العائد على أدوات الدين المقومة بالدولار، مما يوسع الفارق بين عوائد الأصول الأجنبية وأوراق الأسواق الناشئة المالية، ويؤثر في تدفقات استثمارات المحافظ الأجنبية وتكلفة خدمة الديون الخارجية."
+  },
   "احتياطيات النقد الاجنبي في الصين ترتفع الي 3.438 تريليون دولار": {
     "meaning": "An increase in China's foreign exchange reserves reflects trade surplus inflows, foreign direct investment, and central bank asset valuation adjustments denominated in foreign currencies.",
     "meaning_ar": "يعكس ارتفاع احتياطيات النقد الأجنبي في الصين تدفقات الفائض التجاري والاستثمار الأجنبي المباشر وتغيرات تقييم الأصول المقومة بالعملات الأجنبية لدى البنك المركزي."
@@ -2931,6 +2935,10 @@
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي في أوروبا جراء اشتداد المنافسة على شحنات الغاز المسال إلى رفع مؤشرات تكلفة الطاقة ومدخلات الإنتاج عالمياً، بما يشمل تكاليف استيراد الغاز المسال ومدخلات التشغيل للقطاعات الصناعية كثيفة الاستهلاك في مصر."
+  },
+  "سعر الفايده علي الرهن العقاري في امريكا يتجاوز 7%": {
+    "meaning": "Mortgage rates exceeding 7% raise the borrowing cost for home financing, increasing monthly debt service expenses for property buyers in the US market.",
+    "meaning_ar": "تجاوز أسعار الفائدة على الرهن العقاري 7% يرفع تكلفة الاقتراض للتمويل السكني، مما يزيد من أعباء خدمة الدين الشهرية على مشتري العقارات في السوق الأمريكي."
   },
   "سعر اليورو اليوم الاربعاء 9-9-2026 في بدايه التعاملات": {
     "meaning": "The headline tracks the opening foreign exchange spot rate of the Euro against the Egyptian Pound, which serves as a pricing benchmark for international trade settlements, corporate FX exposures, and commercial bank treasury operations.",
