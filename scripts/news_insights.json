@@ -1308,8 +1308,8 @@
     "meaning_ar": "تتوسع وزارة التموين في طرح السلع المخفضة عبر المجمعات الاستهلاكية التابعة لها، حيث تضخ 12 سلعة أساسية مع جدولة زيادتها إلى 30 سلعة عبر منافذ التوزيع الحكومية."
   },
   "التموين: خطه متكامله لضبط الاسواق وزياده المعروض من السلع": {
-    "meaning": "The Ministry of Supply's market intervention mechanism involves releasing strategic reserves through state-affiliated distribution channels and stepping up regulatory oversight on merchant inventories and pricing compliance.",
-    "meaning_ar": "تعتمد آلية تدخل وزارة التموين على ضخ مخزونات استراتيجية عبر منافذ التوزيع التابعة للدولة، مع تشديد الرقابة التفتيشية على سلاسل الإمداد ومستويات الأسعار لدى التجار."
+    "meaning": "The Ministry of Supply's market intervention involves injecting strategic commodity reserves through state-affiliated distribution channels and stepping up regulatory oversight on local commercial pricing.",
+    "meaning_ar": "تعتمد خطة وزارة التموين على ضخ كميات إضافية من السلع الاستراتيجية عبر المنافذ التابعة للدولة مع تكثيف الرقابة التفتيشية على سلاسل التداول والأسواق المحلية."
   },
   "الجامعه المصريه اليابانيه تترقب الحصول علي 513 مليون ين من موسسه بطوكيو": {
     "meaning": "This transaction provides official development assistance and academic grant funding denominated in Japanese yen directly to the institution's capital and research budget.",
@@ -3834,8 +3834,8 @@
     "meaning_ar": "يشير الإغلاق المنخفض إلى تنفيذ أحجام التداول الإجمالية عند مستويات سعرية أدنى للأسهم المكونة للمؤشر، مما يسفر عن انكماش يومي في القيمة السوقية الإجمالية للشركات المدرجة به."
   },
   "موشرا البحرين العام والاسلامي يغلقان علي ارتفاع": {
-    "meaning": "An upward close in the Bahrain All Share and Bahrain Islamic indices reflects net positive trading sessions where the aggregate market capitalization of constituent conventional and Sharia-compliant equities increases based on executed closing prices.",
-    "meaning_ar": "يعكس إغلاق مؤشري البحرين العام والإسلامي على ارتفاع تسجيل جلسات تداول إيجابية يرتفع خلالها إجمالي القيمة السوقية للأسهم التقليدية والمتوافقة مع الشريعة المكونة للمؤشرين وفقاً لأسعار الإغلاق المنفذة."
+    "meaning": "The headline reports an upward daily movement in the Bahrain Bourse benchmark and Sharia-compliant indices, reflecting net positive price changes across constituent listed equities during the trading session.",
+    "meaning_ar": "يشير الخبر إلى تسجيل المؤشر العام ومؤشر البحرين الإسلامي مكاسب بنهاية الجلسة، ما يعكس محصلة إيجابية لتغيرات أسعار الأسهم المدرجة المكونة لهما خلال التداولات اليومية."
   },
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
