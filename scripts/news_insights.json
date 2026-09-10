@@ -2027,6 +2027,10 @@
     "meaning": "The Industrial Development Bank integrates financing products into the Urban Development Fund's housing developments, creating a direct credit channel between the bank's mortgage portfolio and state-backed real estate inventory.",
     "meaning_ar": "يُدرج بنك التنمية الصناعية منتجات تمويلية مخصصة لوحدات صندوق التنمية الحضرية، مما ينشئ قناة ائتمانية مباشرة تربط بين المحفظة العقارية للبنك والأصول السكنية التابعة للصندوق."
   },
+  "بنك القاهره يرفع عايد حساب ميجا توفير الي 18.5%": {
+    "meaning": "Raising interest rates on savings accounts increases the bank's funding costs while serving as a balance sheet mechanism to attract domestic retail liquidity within a competitive interest rate environment.",
+    "meaning_ar": "يؤدي رفع الفائدة على حسابات التوفير إلى زيادة تكلفة الأموال لدى البنك، ويُعد أداة لجذب السيولة النقدية من القطاع العائلي داخل الميزانية العمومية في ظل بيئة أسعار الفائدة التنافسية."
+  },
   "بنك اليابان يتجه لرفع الفايده الي 1.25% لتفادي صدمه الاسواق": {
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
     "meaning_ar": "يؤدي رفع أسعار الفائدة من قِبل البنك المركزي إلى زيادة تكلفة الاقتراض بالعملة المحلية وتقليص فوارق العوائد مع العملات الأجنبية، مما يغير آليات تمويل تجارة الفائدة والتدفقات الرأسمالية عبر الحدود."
@@ -3121,6 +3125,10 @@
     "meaning": "El Niño weather patterns create climate disruptions that alter agricultural yields in primary tea-producing regions like India's Nilgiris, directly affecting raw material supply volumes in global commodity markets.",
     "meaning_ar": "تتسبب الظروف المناخية المصاحبة لظاهرة 'إل نينيو' في تقلبات تؤثر على حجم المحاصيل الزراعية في مناطق إنتاج الشاي الرئيسية مثل نيلجيري بالهند، مما ينعكس مباشرة على معروض المواد الخام في أسواق السلع العالمية."
   },
+  "عاجل.. اعتماد منهجيه دراسه القيمه العادله لبنك القاهره": {
+    "meaning": "The formal adoption of a valuation methodology establishes the standardized accounting and financial framework used by independent financial advisors to assess the bank's assets and equity for corporate or regulatory procedures.",
+    "meaning_ar": "يمثل اعتماد منهجية التقييم تحديداً للإطار المحاسبي والمالي المعتمد الذي يستخدمه المستشار المالي المستقل لتسعير أصول البنك وحقوق ملكيته ضمن الإجراءات المؤسسية والتنظيمية."
+  },
   "عاجل.. الاعلان رسميا عن الغاء دوره 2026 من معرض سيتي سكيب مصر": {
     "meaning": "Canceling the 2026 Cityscape Egypt edition removes a primary centralized real estate sales and marketing exhibition platform for participating property developers.",
     "meaning_ar": "يؤدي إلغاء دورة عام 2026 من معرض سيتي سكيب مصر إلى إزالة منصة مركزية لتسويق ومبيعات العقارات لشركات التطوير العقاري المشاركة."
@@ -3548,6 +3556,10 @@
   "مسيول ببنك افراسيا موريشيوس: السوق الافريقيه تمتلك فرصا ضخمه ونركز علي معالجه تحديات المستثمرين": {
     "meaning": "Cross-border banking institutions in Africa deploy advisory and financial intermediation services to mitigate structural market frictions and facilitate institutional capital allocation across regional jurisdictions.",
     "meaning_ar": "تقدم المؤسسات المصرفية الإقليمية خدمات الوساطة المالية والاستشارات الاستثمارية العابرة للحدود لمعالجة العقبات الهيكلية وتسهيل حركة تدفق رؤوس الأموال المؤسسية داخل الأسواق الأفريقية."
+  },
+  "مشاورات امريكيه صينيه لتخفيض تعريفات جمركيه متبادله بقيمه 30 مليار دولار": {
+    "meaning": "Bilateral consultations to lower tariffs alter cross-border trade costs by adjusting the border duties levied on targeted goods between the two economies.",
+    "meaning_ar": "تعدل المشاورات الثنائية لخفض التعريفات الجمركية تكاليف التجارة عبر الحدود من خلال تعديل الرسوم المفروضة على السلع المتبادلة بين الاقتصادين."
   },
   "مشروع لصناعه الابواب الخشبيه في السخنه باستثمارات 20 مليون دولار": {
     "meaning": "The deployment of $20 million in capital expenditures establishes a dedicated wooden door manufacturing facility in the Sokhna industrial zone, expanding domestic building materials production capacity.",
@@ -4068,6 +4080,10 @@
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
     "meaning_ar": "يمنح القرار شركات إلحاق العمالة المصرية بالخارج مهلة توفيق أوضاع مدتها ستة أشهر لمطابقة إجراءاتها التشغيلية وتراخيصها ومتطلباتها القانونية مع معايير وزارة العمل."
+  },
+  "وزير العمل: لدينا خطه للتوسع في الربط الالكتروني مع الدول العربيه": {
+    "meaning": "Cross-border electronic linkage systems centralize labor market data and digitize employment contract authentication and recruitment flows between Egypt and Arab host countries.",
+    "meaning_ar": "تعمل منظومة الربط الإلكتروني العابر للحدود على ميكنة وتوحيد قواعد بيانات سوق العمل وتدقيق عقود التشغيل وإجراءات الاستقدام بين مصر والدول العربية."
   },
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
