@@ -1727,6 +1727,10 @@
     "meaning": "The regulatory sandbox operates as a controlled testing environment where financial authorities assess the compliance and operational models of 49 financial technology applications under existing regulatory frameworks.",
     "meaning_ar": "يعمل المختبر التنظيمي كبيئة اختبار خاضعة للرقابة تقوم من خلالها الهيئات التنظيمية بفحص نماذج التشغيل ومدى التزام 49 مشروعاً للتكنولوجيا المالية بالمعايير والأطر الرقابية السارية."
   },
+  "المركزي التركي يبقي اسعار الفايده دون تغيير عند 37%": {
+    "meaning": "Maintaining the benchmark interest rate at 37% keeps borrowing costs, debt service terms, and banking system liquidity conditions unchanged for Turkish commercial lenders and corporate balance sheets.",
+    "meaning_ar": "يُبقي تثبيت سعر الفائدة الأساسي عند 37% على تكاليف الاقتراض وشروط خدمة الدين ومستويات السيولة في القطاع المصرفي التركي دون تغيير."
+  },
   "المركزي الصيني يرفع احتياطياته من الذهب باكبر وتيره منذ 2023": {
     "meaning": "The People's Bank of China increases the gold allocation within its foreign exchange reserves, altering the sovereign asset composition and central bank bullion holdings.",
     "meaning_ar": "يرفع بنك الشعب الصيني نسبة الذهب ضمن محفظة احتياطياته الأجنبية، مما يغير هيكل الأصول السيادية وحجم حيازات البنك المركزي من المعدن النفيس."
@@ -1738,6 +1742,10 @@
   "المركزي الكوري يحذر من مخاطر المشتقات المرتبطه بشركات الرقايق": {
     "meaning": "Structured derivative contracts tied to semiconductor equities tie investor payouts directly to single-sector price volatility and concentration risk within the capital market.",
     "meaning_ar": "تربط عقود المشتقات المالية المهيكلة ذات الصلة بأسهم شركات أشباه الموصلات عوائد المستثمرين مباشرة بتقلبات أسعار قطاع واحد ومخاطر تركز السيولة في السوق المالية."
+  },
+  "المركزي يحذر من التعامل مع اي روابط الكترونيه مجهوله المصدر": {
+    "meaning": "The Central Bank of Egypt issues a regulatory cybersecurity advisory to mitigate electronic fraud and unauthorized access to customer bank accounts across the banking system.",
+    "meaning_ar": "يُصدر البنك المركزي المصري توجيهات رقابية للأمن السيبراني بهدف مواجهة عمليات الاحتيال الإلكتروني ومنع الاختراقات غير المصرح بها لحسابات العملاء بالقطاع المصرفي."
   },
   "المركزي: صعود السيوله المحليه M2 لتسجل 15.49 تريليون جنيه بنهايه يوليو 2026": {
     "meaning": "The expansion in M2 money supply represents an increase in total currency in circulation outside the banking sector alongside local and foreign currency demand and time deposits. This reflects the current volume of total liquid monetary assets managed within the domestic banking system.",
@@ -1910,6 +1918,10 @@
   "ايران تعتزم اعلان منطقه محظوره خارج مضيق هرمز خلال ايام": {
     "meaning": "Declaring an exclusion zone in critical maritime corridors alters commercial shipping routes, maritime insurance risk premiums, and transit logistics for global energy and freight flows.",
     "meaning_ar": "يؤدي إعلان منطقة محظورة في الممرات الملاحية الحيوية إلى تغيير مسارات الشحن التجاري وتعديل أقساط التأمين البحري ضد المخاطر ولوجستيات عبور شحنات الطاقة والبضائع العالمية."
+  },
+  "ايران تعلق رسوما علي السفن الاجنبيه الناقله لمنتجات الطاقه منها واليها": {
+    "meaning": "The suspension removes transit and port tariffs previously levied on foreign tankers handling Iranian energy cargo, directly altering maritime freight cost calculations for regional energy routes.",
+    "meaning_ar": "يؤدي تعليق هذه الرسوم إلى إلغاء تكاليف العبور والموانئ المفروضة على الناقلات الأجنبية المحملة بمنتجات الطاقة الإيرانية، مما يغير هيكل تسعير الشحن البحري لمسارات الطاقة الإقليمية."
   },
   "ايطاليا تدعو البنوك وشركات الطاقه لدعم الماليه العامه": {
     "meaning": "Government calls for contributions from the banking and energy sectors involve fiscal mechanisms such as solidarity levies, windfall taxes, or pre-paid tax arrangements, transferring liquidity directly from corporate balance sheets to the state treasury.",
@@ -2179,6 +2191,10 @@
   "تراجع جماعي لموشرات الاسهم الاوروبيه مع تجاوز النفط مستوي 100 دولار": {
     "meaning": "Crude oil prices exceeding 100 dollars per barrel raise industrial energy and transportation operating costs for European corporations while tightening broader inflationary pressures across equity markets.",
     "meaning_ar": "يؤدي تجاوز أسعار النفط الخام مستوى 100 دولار للبرميل إلى رفع تكاليف تشغيل الطاقة والنقل للشركات الأوروبية، بالتزامن مع تزايد الضغوط التضخمية في أسواق الأسهم."
+  },
+  "تراجع جماعي لموشرات البورصه المصريه .. وEGX30 ينخفض 0.33%": {
+    "meaning": "Broad declines across indices reflect net capital outflows from equities during the trading session, where downward price adjustments across constituent stocks reduce aggregate market capitalization.",
+    "meaning_ar": "يعكس التراجع الجماعي للمؤشرات خروج صافي تدفقات نقدية من الأسهم خلال جلسة التداول، حيث تؤدي انخفاضات أسعار الأسهم المكونة للمؤشرات إلى تقليص القيمة السوقية الإجمالية."
   },
   "تراجع جماعي لموشرات البورصه في منتصف تعاملات اليوم": {
     "meaning": "A collective decline in market indices reflects a simultaneous decrease in the weighted share prices of listed companies across the exchange, driven by aggregate transaction values where execution prices are lower than previous closing levels during mid-session trading.",
