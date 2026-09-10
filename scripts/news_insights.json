@@ -1991,6 +1991,10 @@
     "meaning": "Large-cap stocks hold high weighting in market capitalization-weighted indices, so stable trading or inflows into these constituent assets balance out declines in other market segments to steady the benchmark index.",
     "meaning_ar": "تمتلك الأسهم القيادية وزناً نسبياً كبيراً في المؤشرات المرجحة بالقيمة السوقية، مما يجعل استقرار تداولاتها أو تدفق السيولة إليها موازناً لحركات التراجع في القطاعات الأخرى ليحافظ المؤشر العام على مستواه."
   },
+  "بورصه السعوديه تتماسك في ختام اسبوع من التحركات المحدوده": {
+    "meaning": "The market index exhibits low price volatility over the trading period, reflecting equilibrium between incoming bid volumes and ask orders across major listed equities.",
+    "meaning_ar": "يُظهر المؤشر العام تقلبات سعرية منخفضة على مدار فترة التداول، مما يعكس توازناً بين أحجام أوامر الشراء وطلبات البيع عبر الأسهم القيادية المدرجة."
+  },
   "بي ان بي باريبا يرفع تقييمه لسندات منطقه اليورو الي «ايجابي»": {
     "meaning": "An upgraded sovereign credit assessment reflects institutional reassessment of underlying debt issuance fundamentals, debt-servicing metrics, and prevailing interest rate frameworks across eurozone economies.",
     "meaning_ar": "يعكس رفع التقييم الائتماني للسندات السيادية إعادة تقييم مؤسسية للمؤشرات الأساسية لإصدارات الديون ومعدلات خدمة الدين وأطر أسعار الفائدة السائدة عبر اقتصاديات منطقة اليورو."
@@ -2151,6 +2155,10 @@
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
+  },
+  "تراجع شح امدادات وقود السفن رغم استمرار ازمه مضيق هرمز": {
+    "meaning": "The easing of marine bunker fuel shortages reflects an operational normalization in regional replenishment and inventory distribution networks, operating independently of transit tensions through the Strait of Hormuz.",
+    "meaning_ar": "يعكس انحسار شح إمدادات وقود السفن انتظاماً تشغيلياً في شبكات التوزيع والتخزين الإقليمية بمعزل عن استمرار التوترات الملاحية في مضيق هرمز."
   },
   "تراجع عوايد سندات الخزانه الامريكيه مع ترقب بيانات الوظايف": {
     "meaning": "Yields on U.S. Treasury securities decrease as debt prices rise, reflecting shifts in sovereign bond market trading prior to the release of official labor market statistics.",
@@ -3960,6 +3968,10 @@
   "وكاله الطاقه الدوليه تتوقع ارتفاع الطلب العالمي علي الفحم 1.2% في 2026": {
     "meaning": "Global coal demand growth establishes international baseline benchmark prices for energy commodities, which directly feeds into the cost structures of energy-intensive local manufacturers, such as cement producers that operate solid-fuel grinding and firing systems.",
     "meaning_ar": "يحدد نمو الطلب العالمي على الفحم مستويات الأسعار المرجعية الدولية لمصادر الطاقة، وهو ما ينعكس مباشرة على هياكل التكاليف التشغيلية للقطاعات الصناعية كثيفة الاستهلاك للطاقة محلياً، مثل مصانع الأسمنت التي تعتمد على نظم الحرق والتشغيل بالوقود الصلب."
+  },
+  "وكاله الطاقه: الطلب العالمي علي الفحم يتجه لتسجيل مستوي قياسي": {
+    "meaning": "Global coal demand directly influences international benchmark energy prices, which form the base input cost for heavy industries such as cement manufacturers relying on imported coal for clinker production.",
+    "meaning_ar": "يؤثر الطلب العالمي على الفحم بشكل مباشر على الأسعار المرجعية الدولية للطاقة، والتي تمثل تكلفة المدخلات الأساسية للصناعات الثقيلة مثل شركات الأسمنت التي تعتمد على الفحم المستورد في إنتاج الكلنكر."
   },
   "يوني كريديت: 4 تريليونات دولار انكشاف صناديق التحوط علي سندات الخزانه": {
     "meaning": "This metric measures the aggregate nominal volume and leveraged positioning held by hedge funds in sovereign debt markets. It represents the scale of balance sheet allocations and collateralized financing tied to government securities.",
