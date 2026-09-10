@@ -2616,6 +2616,10 @@
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
     "meaning_ar": "يُمثل خام الحديد المدخل الأساسي لإنتاج شركات الصلب المتكاملة، حيث يُحدد بشكل مباشر تكلفة المواد الخام عبر سلاسل إمداد الصناعات الثقيلة."
   },
+  "سعر كرتونه البيض اليوم 10/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances, direct farm-gate production costs such as poultry feed, and wholesale-to-retail transport margins in the domestic market.",
+    "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك التوازن اليومي بين العرض والطلب، وتكاليف الإنتاج في المزارع مثل أسعار الأعلاف، بالإضافة إلى هوامش النقل والتوزيع من أسواق الجملة إلى التجزئة."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
@@ -2876,6 +2880,10 @@
   "عمرو البطريق: منطقه السخنه الصناعيه وجهه جاذبه للاستثمارات المتنوعه": {
     "meaning": "Industrial zones such as Sokhna operate under special economic frameworks that provide integrated logistics, port infrastructure, and regulatory facilities to industrial tenants.",
     "meaning_ar": "تعمل المناطق الصناعية مثل السخنة وفق أطر اقتصادية خاصة توفر بنية تحتية لوجستية وموانئ وتسهيلات تنظيمية للشركات الصناعية المتواجدة بها."
+  },
+  "عوايد السندات الامريكيه تواصل الارتفاع رغم مضاعفه الخزانه عمليات اعاده الشراء": {
+    "meaning": "US Treasury buyback operations inject liquidity and absorb older, less liquid securities, yet bond yields reflect broader macroeconomic factors and secondary market pricing driven by benchmark policy rates and primary issuance volume.",
+    "meaning_ar": "تضخ عمليات إعادة الشراء التي تنفذها الخزانة الأمريكية سيولة نقدية وتستوعب الأوراق المالية القديمة الأقل تداولاً، بينما تعكس عوائد السندات آليات التسعير في السوق الثانوية المتأثرة بمعدلات الفائدة القياسية وأحجام الإصدارات الجديدة."
   },
   "عوايد السندات الامريكيه قصيره الاجل عند اعلي مستوي منذ 21 شهرا": {
     "meaning": "Short-term US Treasury yields represent benchmark sovereign borrowing costs, where higher rates increase the baseline cost of global capital and shift liquidity toward fixed-income instruments denominated in US dollars.",
