@@ -867,6 +867,10 @@
     "meaning": "This indicates regular market updates on wholesale and retail seafood commodity prices, reflecting local aquaculture supply levels, fuel logistics costs, and consumer demand in Egypt's food and protein sector.",
     "meaning_ar": "يشير ذلك إلى المتابعة الدورية لأسعار تداول الأسماك بالجملة والتجزئة، والتي تعكس مستويات المعروض من الاستزراع السمكي، وتكاليف النقل والخدمات اللوجستية، وحجم الطلب الاستهلاكي في قطاع السلع الغذائية بمصر."
   },
+  "اسعار السمك اليوم الخميس 10-9-2026 في مصر": {
+    "meaning": "Daily fish price updates reflect wholesale and retail commodity valuations driven by seasonal catch volumes, fuel and transport logistics costs, and spot aquaculture supply dynamics.",
+    "meaning_ar": "تعكس التحديثات اليومية لأسعار الأسماك تقييمات السلع في أسواق الجملة والتجزئة وفقاً لحجم الصيد الموسمي، وتكاليف النقل والوقود، وتدفقات معروض الاستزراع المائي الفورية."
+  },
   "اسعار السمك اليوم السبت 5-9-2026 في مصر": {
     "meaning": "Daily fish price updates reflect spot pricing across wholesale and retail markets, determined by daily supply volumes from aquaculture and commercial landings alongside transportation costs.",
     "meaning_ar": "تعكس تحديثات أسعار الأسماك اليومية مستويات التسعير الفوري في أسواق الجملة والتجزئة، وتحددها أحجام المعروض اليومي من الاستزراع السمكي والصيد إلى جانب تكاليف النقل."
@@ -2769,6 +2773,10 @@
     "meaning": "Legal scrutiny surrounding bilateral crude supply agreements introduces regulatory risks that affect the compliance procedures of involved energy companies and the operational flow of cross-border oil shipments.",
     "meaning_ar": "يفرض التدقيق القانوني حول اتفاقيات توريد النفط الخام الثنائية مخاطر تنظيمية تؤثر على إجراءات الامتثال لشركات الطاقة المعنية والتدفق التشغيلي لشحنات النفط عبر الحدود."
   },
+  "صناديق الاستثمار تواصل حصد المكاسب": {
+    "meaning": "Investment funds reflect sustained positive returns driven by increases in the net asset value (NAV) of their underlying equity and fixed-income portfolios in the market.",
+    "meaning_ar": "تعكس صناديق الاستثمار استمرار العوائد الإيجابية الناتجة عن ارتفاع صافي قيمة الأصول (NAV) لمحافظها المكونة من الأسهم وأدوات الدخل الثابت المتداولة في السوق."
+  },
   "صناديق الاسهم الامريكيه تشهد سحوبات للاسبوع الثاني علي التوالي": {
     "meaning": "Net outflows occur when total investor redemptions exceed new capital subscriptions into US equity funds during a given period. Fund managers process these redemptions by utilizing existing cash reserves or liquidating underlying portfolio equities.",
     "meaning_ar": "تعني التدفقات الخارجة الصافية تجاوز إجمالي طلبات الاسترداد لحجم الاكتتابات الجديدة في صناديق الأسهم الأمريكية خلال فترة محددة، حيث يقوم مديرو الصناديق بتغطية هذه الاستردادات عبر استخدام الفوائض النقدية أو تسييل أجزاء من الأوراق المالية في المحافظ."
@@ -3032,6 +3040,10 @@
   "ماريديف تتحول الي الربحيه المستقله وتحقق 4.5 مليون دولار بنهايه يونيو 2026": {
     "meaning": "Standalone profitability reflects the financial performance of the parent entity's direct operations, where revenues from core marine and offshore services exceed direct operational costs and financial expenses over the reported period.",
     "meaning_ar": "يعكس التحول إلى الربحية المستقلة نتائج الأعمال التشغيلية المباشرة للشركة الأم، حيث تتجاوز إيرادات الأنشطة والخدمات الملاحية الأساسية تكاليف التشغيل المباشرة والأعباء التمويلية خلال الفترة المالية المحددة."
+  },
+  "مبادله الاماراتيه تستثمر مليار دولار في لوكين كوفي مع سنتوريوم كابيتال": {
+    "meaning": "A co-investment of this scale injects institutional private equity directly into the target company's capital structure, expanding its cash reserves and allocating equity ownership across institutional asset managers.",
+    "meaning_ar": "يضخ هذا الاستثمار المشترك سيولة مؤسسية مباشرة في هيكل حقوق الملكية بالشركة المستهدفة، مما يزيد من أرصدتها النقدية ويوزع حصص الملكية بين مديري الأصول المؤسسيين."
   },
   "مبيعات السيارات في مصر تقفز 29.7% اول 7 اشهر من 2026": {
     "meaning": "An expansion in automotive sales volumes reflects higher delivery throughput across local dealership networks and increased import and local assembly rates compared to the prior period.",
