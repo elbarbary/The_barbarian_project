@@ -1133,11 +1133,19 @@ async function api(request, env, url, ctx) {
       return new Response('not an image', { status: 502 });
     }
 
-    /* A thumbnail is tens of kilobytes; the largest in the current feed is
-       under a megabyte. Anything claiming more than this is not a thumbnail,
-       and streaming it would spend bandwidth and cache on one object. */
+    /* A thumbnail is tens of kilobytes; the largest across the 400 items in the
+       current feed measures 206 KB. Anything bigger than this is not a
+       thumbnail, and streaming it would spend bandwidth and a cache entry on
+       one object.
+
+       Two checks, not one. The declared length is the cheap refusal — it costs
+       nothing and rejects before a byte of body moves. But `content-length` is
+       a claim: a chunked response omits it entirely, and the old check read a
+       missing header as 0 and waved the body through unbounded. Every outlet
+       carried today does send one, so this is the allowlist growing safely
+       rather than a bug being fixed. The stream cap is what actually holds. */
     const declared = Number(upstream.headers.get('content-length') || 0);
-    if (declared > 8 * 1024 * 1024) {
+    if (declared > MAX_IMAGE_BYTES) {
       return new Response('too large', { status: 502 });
     }
 
@@ -1150,11 +1158,17 @@ async function api(request, env, url, ctx) {
     });
     const length = upstream.headers.get('content-length');
     if (length) headers.set('content-length', length);
-    const answer = new Response(upstream.body, { status: 200, headers });
+    const answer = new Response(cappedBody(upstream.body, MAX_IMAGE_BYTES),
+                                { status: 200, headers });
     // Stored after the response is on its way, not before it: a reader waits
     // for the picture, not for our bookkeeping. Only 200s are kept — a refusal
     // cached for a week outlives whatever caused it.
-    if (shelf && ctx && typeof ctx.waitUntil === 'function') ctx.waitUntil(shelf.put(key, answer.clone()));
+    // `.catch` because the cap can error the stream mid-flight: a body that
+    // overruns must not also surface as an unhandled rejection, and a
+    // half-written entry is simply not kept.
+    if (shelf && ctx && typeof ctx.waitUntil === 'function') {
+      ctx.waitUntil(Promise.resolve(shelf.put(key, answer.clone())).catch(() => {}));
+    }
     return answer;
   }
 
@@ -1445,6 +1459,31 @@ function imageAllowed(target) {
   // Photon's first path segment is the origin host, optionally with a port.
   const first = target.pathname.split('/').filter(Boolean)[0] || '';
   return IMAGE_HOSTS.has(first.toLowerCase().split(':')[0]);
+}
+
+/* The ceiling a thumbnail may not cross, enforced on the bytes rather than on
+   the claim about them. 2 MB against a measured maximum of 206 KB: generous
+   enough that no picture a carried outlet publishes today is refused, small
+   enough that one object cannot spend the bandwidth of a hundred.
+
+   A missing `content-length` is the case this exists for. It reads as 0, which
+   is under every ceiling, so without a cap on the stream itself a chunked
+   response would be relayed from this origin for as long as it cared to send. */
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
+
+function cappedBody(body, limit) {
+  if (!body || typeof TransformStream !== 'function') return body;
+  let seen = 0;
+  return body.pipeThrough(new TransformStream({
+    transform(chunk, controller) {
+      seen += chunk.byteLength || 0;
+      if (seen > limit) {
+        controller.error(new Error('image body over the ceiling'));
+        return;
+      }
+      controller.enqueue(chunk);
+    },
+  }));
 }
 
 const IMAGE_UA = (

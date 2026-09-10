@@ -1187,3 +1187,68 @@ test('a storage failure on the blocklist does not sign the site out', async () =
   assert.equal((await call(e, 'https://esthmr.com/esthmr/api/auth/me', { headers })).status, 200,
     'a KV wobble signed every reader out');
 });
+
+/* ── the ceiling on a thumbnail ────────────────────────────────────────────
+ *
+ * `content-length` is a claim, not a measurement. The old check read a missing
+ * header as 0 — under every ceiling — so a chunked response would have been
+ * relayed from this origin for as long as it cared to send. Every outlet on
+ * the allowlist sends a length today, which is what makes this the allowlist
+ * growing safely rather than a bug being fixed.
+ */
+test('a declared length over the ceiling is refused before the body moves', async () => {
+  const orig = globalThis.fetch;
+  try {
+    let bodyRead = false;
+    const e = imgEnv(async () => new Response(PNG, {
+      status: 200,
+      headers: { 'content-type': 'image/png', 'content-length': String(3 * 1024 * 1024) },
+    }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://images.alborsaanews.com/2026/09/huge.jpeg'));
+    assert.equal(a.status, 502);
+    assert.equal(bodyRead, false);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('a body that overruns is cut off even with no declared length', async () => {
+  const orig = globalThis.fetch;
+  try {
+    // 3 MB in chunks and no content-length at all — the shape the declared
+    // check cannot see. Finite on purpose: an endless stream would hang the
+    // runner instead of failing it, and would pass whether the cap exists or
+    // not once the assertion never settles.
+    const chunk = new Uint8Array(256 * 1024);
+    let left = 12;
+    const e = imgEnv(async () => new Response(new ReadableStream({
+      pull(controller) {
+        if (left-- <= 0) { controller.close(); return; }
+        controller.enqueue(chunk);
+      },
+    }), { status: 200, headers: { 'content-type': 'image/png' } }));
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://images.alborsaanews.com/2026/09/endless.jpeg'));
+    assert.equal(a.status, 200, 'the headers are already sent by then');
+    // With the cap the stream errors partway; without it the whole 3 MB is
+    // relayed. Written as an equality rather than assert.rejects because the
+    // first attempt threw its own "relayed N bytes" error INSIDE the rejects
+    // matcher, so the matcher passed on the very mutation it was meant to fail.
+    let outcome;
+    try { outcome = (await a.arrayBuffer()).byteLength; }
+    catch { outcome = 'cut off'; }
+    assert.equal(outcome, 'cut off',
+      `the body must be cut off at the ceiling, not relayed whole (got ${outcome} bytes)`);
+  } finally { globalThis.fetch = orig; }
+});
+
+test('an ordinary thumbnail still passes through byte for byte', async () => {
+  const orig = globalThis.fetch;
+  try {
+    const e = imgEnv(okImage);
+    const a = await call(e, 'https://esthmr.com/esthmr/api/img?u='
+      + encodeURIComponent('https://images.alborsaanews.com/2026/09/small.jpeg'));
+    assert.equal(a.status, 200);
+    const got = new Uint8Array(await a.arrayBuffer());
+    assert.deepEqual([...got], [...PNG]);
+  } finally { globalThis.fetch = orig; }
+});
