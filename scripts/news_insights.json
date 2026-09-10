@@ -1967,6 +1967,10 @@
     "meaning": "Declaring an exclusion zone in critical maritime corridors alters commercial shipping routes, maritime insurance risk premiums, and transit logistics for global energy and freight flows.",
     "meaning_ar": "يؤدي إعلان منطقة محظورة في الممرات الملاحية الحيوية إلى تغيير مسارات الشحن التجاري وتعديل أقساط التأمين البحري ضد المخاطر ولوجستيات عبور شحنات الطاقة والبضائع العالمية."
   },
+  "ايران تعلق رسما علي شحن السفن الاجنبيه للنفط والغاز": {
+    "meaning": "The decision waives the maritime tariff previously levied on foreign vessels transporting oil and natural gas within Iranian waters, altering direct operational port and transit charges for international carriers.",
+    "meaning_ar": "يقضي القرار بإلغاء الرسوم البحرية المفروضة على السفن الأجنبية الناقلة للنفط والغاز الطبيعي في المياه الإيرانية، مما يغير تكاليف الشحن المباشرة ورسوم الموانئ والعبور للناقلات الدولية."
+  },
   "ايران تعلق رسوما علي السفن الاجنبيه الناقله لمنتجات الطاقه منها واليها": {
     "meaning": "The suspension removes transit and port tariffs previously levied on foreign tankers handling Iranian energy cargo, directly altering maritime freight cost calculations for regional energy routes.",
     "meaning_ar": "يؤدي تعليق هذه الرسوم إلى إلغاء تكاليف العبور والموانئ المفروضة على الناقلات الأجنبية المحملة بمنتجات الطاقة الإيرانية، مما يغير هيكل تسعير الشحن البحري لمسارات الطاقة الإقليمية."
@@ -2227,6 +2231,10 @@
   "تراجع الاسهم الامريكيه في المستهل مع ترقب بيانات التضخم": {
     "meaning": "Equity prices adjust downward at the market open as market participants reprice assets to reflect interest rate sensitivities ahead of macroeconomic inflation releases.",
     "meaning_ar": "تتراجع أسعار الأسهم عند افتتاح جلسة التداول مع قيام المتعاملين بإعادة تسعير الأصول وفقاً لمحددات أسعار الفائدة قبيل صدور بيانات التضخم الاقتصادية."
+  },
+  "تراجع الاسهم الاوروبيه في الختام بعد قرار رفع الفايده": {
+    "meaning": "Higher benchmark interest rates raise borrowing costs for corporations and discount the present value of future cash flows in equity valuation models.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة القياسية إلى زيادة تكلفة الاقتراض للشركات وخفض القيمة الحالية للتدفقات النقدية المستقبلية في نماذج تقييم الأسهم."
   },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
@@ -3548,6 +3556,10 @@
   "مدبولي: انتهاء مشروعات 926 قريه ضمن المرحله الاولي من مبادره حياه كريمه": {
     "meaning": "The completion of rural infrastructure packages marks the transition of contracting and building materials companies from project execution to inspection, billing, and warranty phases.",
     "meaning_ar": "يمثل إنجاز حزم البنية التحتية الريفية انتقال شركات المقاولات ومواد البناء من مرحلة التنفيذ الإنشائي إلى مراحل التسليم النهائي والمطالبات المالية وضمان الأعمال."
+  },
+  "مدبولي: تطوير نزله السمان يعظم الاستفاده من المقومات الفريده للمنطقه": {
+    "meaning": "Urban redevelopment of Nazlet El-Semman allocates state capital toward upgrading infrastructure, tourism-related services, and commercial real estate around the Giza Pyramids plateau.",
+    "meaning_ar": "يوجه التطوير العمراني لمنطقة نزلة السمان الاستثمارات العامة نحو رفع كفاءة البنية التحتية والخدمات السياحية والأنشطة التجارية المحيطة بهضبة أهرامات الجيزة."
   },
   "مدبولي: تكليفات لكل المحافظات بزياده الرقعه الخضراء والتوسع في زراعه الاشجار": {
     "meaning": "These government directives allocate municipal procurement budgets toward commercial nurseries, landscaping contractors, and irrigation equipment suppliers across all Egyptian governorates.",
