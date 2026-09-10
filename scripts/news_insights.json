@@ -643,6 +643,10 @@
     "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
   },
+  "اثرياء بريطانيا امام خيارات للهجره الي ملاذات ضريبيه اكثر جاذبيه": {
+    "meaning": "Capital flight by high-net-worth individuals involves the cross-border relocation of private wealth and tax residency to jurisdictions with lower fiscal burdens, altering the distribution of global private bank deposits and taxable asset bases.",
+    "meaning_ar": "يتضمن انتقال الأفراد ذوي الملاءة المالية العالية تحويل الإقامة الضريبية والأصول الخاصة عبر الحدود نحو ولايات قضائية ذات أعباء مالية منخفضة، مما يعيد توزيع الودائع في البنوك الخاصة والقواعد الضريبية دولياً."
+  },
   "احتياطيات النقد الاجنبي في الصين ترتفع الي 3.438 تريليون دولار": {
     "meaning": "An increase in China's foreign exchange reserves reflects trade surplus inflows, foreign direct investment, and central bank asset valuation adjustments denominated in foreign currencies.",
     "meaning_ar": "يعكس ارتفاع احتياطيات النقد الأجنبي في الصين تدفقات الفائض التجاري والاستثمار الأجنبي المباشر وتغيرات تقييم الأصول المقومة بالعملات الأجنبية لدى البنك المركزي."
@@ -2136,6 +2140,10 @@
     "meaning": "Crude oil prices exceeding 100 dollars per barrel raise industrial energy and transportation operating costs for European corporations while tightening broader inflationary pressures across equity markets.",
     "meaning_ar": "يؤدي تجاوز أسعار النفط الخام مستوى 100 دولار للبرميل إلى رفع تكاليف تشغيل الطاقة والنقل للشركات الأوروبية، بالتزامن مع تزايد الضغوط التضخمية في أسواق الأسهم."
   },
+  "تراجع جماعي لموشرات البورصه في منتصف تعاملات اليوم": {
+    "meaning": "A collective decline in market indices reflects a simultaneous decrease in the weighted share prices of listed companies across the exchange, driven by aggregate transaction values where execution prices are lower than previous closing levels during mid-session trading.",
+    "meaning_ar": "يعكس التراجع الجماعي للمؤشرات انخفاضاً متزامناً في الأسعار السوقية المرجحة لأسهم الشركات المقيدة، نتيجة تسجيل صفقات تداول بأسعار تقل عن أسعار الإغلاق السابقة في منتصف الجلسة."
+  },
   "تراجع حركه عبور مضيق هرمز الي 4 سفن يوميا": {
     "meaning": "A sharp drop in maritime traffic through the Strait of Hormuz disrupts global energy and commodities supply chains, driving up shipping and insurance costs and putting upward pressure on crude oil and raw material prices.",
     "meaning_ar": "يؤدي تراجع حركة الملاحة عبر مضيق هرمز إلى اضطراب سلاسل إمداد الطاقة والسلع العالمية، مما يرفع تكاليف الشحن والتأمين ويزيد الضغوط الصعودية على أسعار النفط الخام والمواد الأولية."
@@ -2820,6 +2828,10 @@
     "meaning": "Early trading sessions for newly listed shares often reflect an initial price discovery mechanism as open-market supply and demand dynamics adjust from initial offering levels.",
     "meaning_ar": "تعكس جلسات التداول الأولى للأسهم حديثة الإدراج آلية اكتشاف السعر الأولي، حيث تتكيف قوى العرض والطلب في السوق المفتوحة مقارنة بمستويات الطرح الأولي."
   },
+  "سوديك تطلق مرحله جديده من مشروع اوجامي راس الحكمه": {
+    "meaning": "Launching a new phase in an existing real estate development releases additional inventory for contracting, expanding the developer's operational footprint and active construction pipeline on the North Coast.",
+    "meaning_ar": "يؤدي إطلاق مرحلة جديدة في مشروع عقاري قائم إلى طرح مخزون إضافي للتعاقد، مما يوسع النطاق التشغيلي وجدول أعمال الإنشاءات للشركة المطورة في منطقة الساحل الشمالي."
+  },
   "سي اي كابيتال تستهدف اطلاق صندوق تحوط للاسهم": {
     "meaning": "Launching an equity hedge fund introduces an alternative investment structure that utilizes long and short positions alongside derivatives to manage market exposure. This operational step expands the financial institution's asset management product lineup under local capital market regulations.",
     "meaning_ar": "يمثل إطلاق صندوق تحوط للأسهم توفير أداة استثمارية تعتمد على استراتيجيات المراكز الشرائية والبيعية والمشتقات لإدارة التعرض لمخاطر السوق، مما يوسع محفظة منتجات إدارة الأصول للمؤسسة المالية وفقاً للقواعد المنظمة لسوق المال."
@@ -3036,6 +3048,10 @@
   "عمرو البطريق: منطقه السخنه الصناعيه وجهه جاذبه للاستثمارات المتنوعه": {
     "meaning": "Industrial zones such as Sokhna operate under special economic frameworks that provide integrated logistics, port infrastructure, and regulatory facilities to industrial tenants.",
     "meaning_ar": "تعمل المناطق الصناعية مثل السخنة وفق أطر اقتصادية خاصة توفر بنية تحتية لوجستية وموانئ وتسهيلات تنظيمية للشركات الصناعية المتواجدة بها."
+  },
+  "عموميه راكتا تناقش مد فتره التصفيه وتجديد عمل المصفي العام 30 سبتمبر": {
+    "meaning": "Extending the liquidation period and renewing the liquidator's mandate continues the formal legal and operational process of inventorying, valuing, and selling company assets to settle outstanding liabilities under statutory oversight.",
+    "meaning_ar": "يؤدي مد فترة التصفية وتجديد تفويض المصفي القانوني إلى استمرار الإجراءات النظامية لحصر أصول الشركة وتقييمها وبيعها لسداد الالتزامات المالية والديون تحت إشراف الجمعية العامة."
   },
   "عوايد السندات الامريكيه تواصل الارتفاع رغم مضاعفه الخزانه عمليات اعاده الشراء": {
     "meaning": "US Treasury buyback operations inject liquidity and absorb older, less liquid securities, yet bond yields reflect broader macroeconomic factors and secondary market pricing driven by benchmark policy rates and primary issuance volume.",
@@ -3632,6 +3648,10 @@
   "نايب رييس القابضه للكهرباء: لا سحب لعدادات المغتربين.. ومنع الفواتير غير المصوره نهاييا": {
     "meaning": "The operational directive standardizes electricity billing governance by mandating photographic verification for meter readings and retaining inactive meters for expatriates, which establishes data verification controls within state utility revenue collection.",
     "meaning_ar": "يحدد هذا التوجيه التشغيلي آليات حوكمة تحصيل فواتير الكهرباء عبر إلزامية التوثيق المصور لقراءات العدادات مع الإبقاء على عدادات المغتربين، مما يرسخ ضوابط التحقق من البيانات ضمن منظومة تحصيل إيرادات المرافق العامة."
+  },
+  "نايب رييس الوزراء: نتطلع لزياده استثمارات الاوروبي لاعاده الاعمار في السوق المصريه": {
+    "meaning": "Partnerships with multilateral development institutions like the EBRD inject direct foreign financing and long-term concessional lending into domestic infrastructure and private sector projects.",
+    "meaning_ar": "توفر الشراكات مع مؤسسات التنمية متعددة الأطراف مثل البنك الأوروبي لإعادة الإعمار تمويلاً أجنبياً مباشراً وقروضاً ميسرة طويلة الأجل لمشروعات البنية التحتية والقطاع الخاص المحلي."
   },
   "نبيل عماشه: فترات السداد الطويله تحمل العميل والمطور مخاطر مضاعفه": {
     "meaning": "Extended real estate installment plans lengthen the project cash collection cycle and increase developer exposure to construction cost inflation, while tying buyers to multi-year payment obligations across changing macroeconomic conditions.",
