@@ -465,3 +465,94 @@
     flex-direction: column;
   }
 }
+
+
+/* Regulatory Notice Filing Card */
+.ft-event-notice {
+  background: var(--sunk);
+  border: 1px solid var(--edgeIn);
+}
+.ft-event-notice:hover {
+  border-color: var(--edge);
+  background: var(--surface);
+}
+.ft-notice-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.ft-notice-content {
+  margin: 12px 0;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--edgeIn);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ft-notice-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.ft-notice-callout {
+  font-size: 11.5px;
+  color: var(--t2);
+  line-height: 1.5;
+  margin: 0;
+}
+.ft-notice-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--edgeIn);
+  flex-wrap: wrap;
+}
+.ft-filing-ref {
+  font-size: 10.5px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--t2);
+}
+.ft-source-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--edge);
+  text-decoration: none;
+  transition: background-color .15s, border-color .15s;
+}
+.ft-source-btn:hover {
+  background: var(--accent);
+  color: #1b1917;
+  border-color: var(--accent);
+}
+
+.ft-archetype-node, .ft-company-node {
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.ft-archetype-node:hover rect, .ft-company-node:hover rect {
+  stroke: var(--accent) !important;
+  stroke-width: 1.8px !important;
+}
+.ft-node-selected rect {
+  stroke: var(--ink) !important;
+  stroke-width: 2px !important;
+}

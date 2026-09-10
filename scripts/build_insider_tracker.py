@@ -394,6 +394,8 @@ def parse_latest_disclosures(by_ticker: dict[str, dict], records: list[dict]) ->
                     "relationshipLabel": "Company Treasury",
                     "relationshipLabelAr": "الشركة (أسهم خزينة)",
                     "positionRaw": "Treasury Shares",
+                    "investorName": (co_meta.get("name") or ticker or "Company") + " Treasury",
+                    "investorNameAr": "خزينة " + (co_meta.get("nameAr") or ticker or "الشركة"),
                     "shares": None,
                     "title": title,
                     "titleEn": title_en or title,
@@ -424,6 +426,8 @@ def parse_latest_disclosures(by_ticker: dict[str, dict], records: list[dict]) ->
                     "relationshipLabel": "Insider / Major Holder",
                     "relationshipLabelAr": "متصل / مساهم رئيسي",
                     "positionRaw": "Post-Implementation Disclosure",
+                    "investorName": (co_meta.get("name") or ticker or "Company") + " Disclosed Insiders",
+                    "investorNameAr": "داخليو " + (co_meta.get("nameAr") or ticker or "الشركة"),
                     "shares": None,
                     "title": title,
                     "titleEn": title_en or title,
@@ -444,7 +448,7 @@ def main() -> int:
     parse_latest_disclosures(by_ticker, all_records)
     print(f"Total unified records: {len(all_records)}", file=sys.stderr)
 
-    all_records.sort(key=lambda r: (r.get("date") or "1970-01-01", r.get("ticker") or ""), reverse=True)
+    all_records.sort(key=lambda r: (1 if r.get("shares") else 0, r.get("date") or "1970-01-01", r.get("ticker") or ""), reverse=True)
 
     if args.check:
         if len(all_records) == 0:

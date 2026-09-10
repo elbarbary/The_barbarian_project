@@ -49,7 +49,13 @@ export function ownershipRows(data, {ticker='', kind='all', investor='', count=9
       || (b.date || '').localeCompare(a.date || '')
       || String(a.id).localeCompare(String(b.id)));
   }
-  return filtered.sort((a,b)=>(b.date || '').localeCompare(a.date || '') || String(a.id).localeCompare(String(b.id)));
+  return filtered.sort((a, b) => {
+    const aHasShares = finite(a.shares) && a.shares > 0 ? 1 : 0;
+    const bHasShares = finite(b.shares) && b.shares > 0 ? 1 : 0;
+    return (bHasShares - aHasShares)
+      || (b.date || '').localeCompare(a.date || '')
+      || String(a.id).localeCompare(String(b.id));
+  });
 }
 
 // One dated observation per column. Missing values break the line, never zero-fill.
@@ -435,32 +441,66 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
 function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectTicker, ar, t) {
   if (!graph || !graph.links || !graph.links.length) return null;
 
-  const entities = graph.entities || [
-    { id: 'insider', label: 'Board & Insiders', labelAr: 'مجلس إدارة وداخليين' },
-    { id: 'major_holder', label: 'Major Shareholders (>5%)', labelAr: 'مساهمون رئيسيون (>٥٪)' },
-    { id: 'related_party', label: 'Connected Groups', labelAr: 'مجموعات مرتبطة' },
-    { id: 'treasury', label: 'Corporate Treasury', labelAr: 'أسهم خزينة' }
-  ];
+  const allLinks = graph.links;
+  const activeTicker = selectedTicker || allLinks[0]?.target || '';
 
-  // Entity Y anchors (Left Column: x = 160)
-  const entityY = {
-    insider: 60,
-    major_holder: 150,
-    related_party: 240,
-    treasury: 330
-  };
+  // Order links so that active ticker connections are prioritized
+  const activeLinks = allLinks.filter(l => l.target === activeTicker);
+  const otherLinks = allLinks.filter(l => l.target !== activeTicker);
+  const prioritizedLinks = [...activeLinks, ...otherLinks];
 
-  // Select top 8-10 distinct companies from links
-  const distinctTickers = [...new Set(graph.links.map(l => l.target))].slice(0, 8);
-  const compSpacing = 340 / Math.max(1, distinctTickers.length - 1);
-  const companyY = {};
-  distinctTickers.forEach((ticker, idx) => {
-    companyY[ticker] = 50 + idx * compSpacing;
+  // Pick top distinct companies (up to 8)
+  const displayTickers = [];
+  if (activeTicker) displayTickers.push(activeTicker);
+  for (const l of prioritizedLinks) {
+    if (!displayTickers.includes(l.target) && displayTickers.length < 8) {
+      displayTickers.push(l.target);
+    }
+  }
+
+  // Pick top distinct entities (up to 8)
+  const displayEntityIds = [];
+  for (const l of prioritizedLinks) {
+    if (displayTickers.includes(l.target) && !displayEntityIds.includes(l.source) && displayEntityIds.length < 8) {
+      displayEntityIds.push(l.source);
+    }
+  }
+  for (const l of prioritizedLinks) {
+    if (!displayEntityIds.includes(l.source) && displayEntityIds.length < 8) {
+      displayEntityIds.push(l.source);
+    }
+  }
+
+  // Build entity lookup map
+  const entityMap = {};
+  (graph.entities || []).forEach(e => { entityMap[e.id] = e; });
+  allLinks.forEach(l => {
+    if (!entityMap[l.source]) {
+      entityMap[l.source] = {
+        id: l.source,
+        label: l.sourceLabel || l.source,
+        labelAr: l.sourceLabelAr || l.source,
+        ticker: l.target
+      };
+    }
   });
 
-  const activeTicker = selectedTicker || distinctTickers[0];
-  const activeLinks = graph.links.filter(l => l.target === activeTicker);
-  const heroLink = activeLinks[0] || graph.links[0] || {};
+  // Calculate Y anchors
+  const entCount = displayEntityIds.length;
+  const entSpacing = entCount > 1 ? (350 / (entCount - 1)) : 0;
+  const entityY = {};
+  displayEntityIds.forEach((eid, idx) => {
+    entityY[eid] = entCount > 1 ? 45 + idx * entSpacing : 220;
+  });
+
+  const compCount = displayTickers.length;
+  const compSpacing = compCount > 1 ? (350 / (compCount - 1)) : 0;
+  const companyY = {};
+  displayTickers.forEach((tck, idx) => {
+    companyY[tck] = compCount > 1 ? 45 + idx * compSpacing : 220;
+  });
+
+  const heroLink = activeLinks[0] || allLinks.find(l => l.target === activeTicker) || allLinks[0] || {};
   const activeProf = profiles[activeTicker] || {};
 
   return h('div', { className: 'ft-drawing-container ft-web-container' },
@@ -468,8 +508,8 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
       h('div', null,
         h('span', { className: 'ft-drawing-tag' }, t('BIPARTITE RELATIONAL WEB', 'شبكة العلاقات الثنائية')),
         h('h3', null, t('Direct Insider Connections & Stake Weights', 'خريطة صفقات الداخليين وأوزان الحصص')),
-        h('p', null, t('Bezier splines draw the exact connection between Insider Groups and Listed Companies. Spline width indicates % Stake of Company (Hero Metric). Color indicates Accumulation (+) vs Divestment (−).',
-          'الخطوط المنحنية ترسم الصلة المباشرة بين فئات الداخليين والشركات المدرجة. سمك الخط يوضح نسبة الملكية في الشركة. اللون يعبر عن الشراء والاستحواذ (+) مقابل البيع والتخارج (−).'))
+        h('p', null, t('Bezier splines draw the exact connection between Named Insider Entities and Listed Companies. Spline width indicates % Stake of Company (Hero Metric). Color indicates Accumulation (+) vs Divestment (−).',
+          'الخطوط المنحنية ترسم الصلة المباشرة بين الكيانات المتعاملة والشركات المدرجة. سمك الخط يوضح نسبة الملكية في الشركة. اللون يعبر عن الشراء والاستحواذ (+) مقابل البيع والتخارج (−).'))
       ),
       h('div', { className: 'ft-drawing-legend' },
         h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--up)' } }), t('Accumulation (Bought)', 'شراء واستحواذ')),
@@ -478,34 +518,38 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
       )
     ),
     h('svg', {
-      viewBox: '0 0 920 380',
+      viewBox: '0 0 960 440',
       className: 'ft-web-svg',
       role: 'img',
       'aria-label': t('Insider Relational Connection Web', 'شبكة علاقات الداخليين')
     },
       h('defs', null,
         h('linearGradient', { id: 'splineBuy', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: 'var(--accent)', stopOpacity: 0.7 }),
+          h('stop', { offset: '0%', stopColor: 'var(--accent)', stopOpacity: 0.75 }),
           h('stop', { offset: '100%', stopColor: 'var(--up)', stopOpacity: 0.95 })
         ),
         h('linearGradient', { id: 'splineSell', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: 'var(--t2)', stopOpacity: 0.6 }),
+          h('stop', { offset: '0%', stopColor: 'var(--t2)', stopOpacity: 0.65 }),
           h('stop', { offset: '100%', stopColor: 'var(--down)', stopOpacity: 0.95 })
         ),
         h('linearGradient', { id: 'splineTreasury', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: '#c084fc', stopOpacity: 0.6 }),
+          h('stop', { offset: '0%', stopColor: '#c084fc', stopOpacity: 0.7 }),
           h('stop', { offset: '100%', stopColor: '#9333ea', stopOpacity: 0.95 })
         )
       ),
       // Draw Bezier Connection Splines
       h('g', { className: 'ft-web-splines' },
-        graph.links.filter(l => companyY[l.target] !== undefined).map((link, idx) => {
-          const y1 = entityY[link.source] ?? 180;
-          const y2 = companyY[link.target] ?? 180;
+        allLinks.filter(l => entityY[l.source] !== undefined && companyY[l.target] !== undefined).map((link, idx) => {
+          const y1 = entityY[link.source];
+          const y2 = companyY[link.target];
           const isSelected = link.target === activeTicker;
-          const d = `M 180 ${y1.toFixed(1)} C 360 ${y1.toFixed(1)}, 540 ${y2.toFixed(1)}, 720 ${y2.toFixed(1)}`;
-          const strokeWidth = isSelected ? Math.max(3, Math.min(14, (link.grossStakePercent || 1) * 1.6)) : Math.max(1.2, Math.min(6, (link.grossStakePercent || 1) * 0.8));
-          const strokeGrad = link.action?.startsWith('treasury') ? 'url(#splineTreasury)' : (link.action === 'bought' ? 'url(#splineBuy)' : 'url(#splineSell)');
+          const d = `M 264 ${y1.toFixed(1)} C 440 ${y1.toFixed(1)}, 520 ${y2.toFixed(1)}, 696 ${y2.toFixed(1)}`;
+          const strokeWidth = isSelected
+            ? Math.max(3.5, Math.min(13, (link.grossStakePercent || 1) * 1.5))
+            : Math.max(1.4, Math.min(6, (link.grossStakePercent || 1) * 0.7));
+          const strokeGrad = link.action?.startsWith('treasury')
+            ? 'url(#splineTreasury)'
+            : (link.action === 'bought' ? 'url(#splineBuy)' : 'url(#splineSell)');
 
           return h('path', {
             key: `spline-${idx}`,
@@ -514,73 +558,99 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
             stroke: strokeGrad,
             strokeWidth,
             strokeLinecap: 'round',
-            opacity: isSelected ? 1 : 0.28,
+            opacity: isSelected ? 1 : 0.22,
             style: { cursor: 'pointer', transition: 'stroke-width .2s, opacity .2s' },
             onClick: () => onSelectTicker(link.target)
           });
         })
       ),
-      // Left Rail: Insider Archetypes
+      // Left Rail: Actual Named Entities
       h('g', { className: 'ft-web-archetypes' },
-        entities.map(ent => {
-          const cy = entityY[ent.id] || 180;
-          const label = ar ? ent.labelAr : ent.label;
-          return h('g', { key: ent.id, className: 'ft-archetype-node', transform: `translate(30, ${cy - 20})` },
+        displayEntityIds.map(eid => {
+          const ent = entityMap[eid] || { id: eid, label: eid, labelAr: eid };
+          const cy = entityY[eid];
+          const isEntActive = activeLinks.some(l => l.source === eid);
+          const rawLabel = (ar ? (ent.labelAr || ent.label) : (ent.label || ent.labelAr)) || eid;
+          const label = rawLabel.length > 27 ? rawLabel.slice(0, 25) + '…' : rawLabel;
+          const isTreasury = eid.startsWith('treasury') || eid.includes('Treasury');
+          const isMajor = eid.startsWith('major') || eid.includes('Major');
+          const dotColor = isTreasury ? '#a855f7' : (isMajor ? 'var(--accent)' : (isEntActive ? 'var(--up)' : 'var(--t2)'));
+
+          return h('g', {
+            key: eid,
+            className: `ft-archetype-node ${isEntActive ? 'ft-node-selected' : ''}`,
+            transform: `translate(24, ${(cy - 20).toFixed(1)})`,
+            onClick: () => ent.ticker && onSelectTicker(ent.ticker),
+            style: { cursor: 'pointer' }
+          },
+            h('title', null, rawLabel),
             h('rect', {
-              width: 150,
+              width: 240,
               height: 40,
               rx: 10,
               fill: 'var(--surface)',
-              stroke: 'var(--edge)',
-              strokeWidth: 1.2
+              stroke: isEntActive ? 'var(--accent)' : 'var(--edge)',
+              strokeWidth: isEntActive ? 2 : 1
             }),
-            h('circle', { cx: 20, cy: 20, r: 6, fill: 'var(--accent)' }),
+            h('circle', { cx: 16, cy: 20, r: 5, fill: dotColor }),
             h('text', {
-              x: 36,
+              x: 28,
               y: 24,
               fontSize: 10.5,
               fontWeight: 650,
               fill: 'var(--ink)'
-            }, label.length > 20 ? label.slice(0, 18) + '…' : label)
+            }, label)
           );
         })
       ),
       // Right Rail: Listed Companies
       h('g', { className: 'ft-web-companies' },
-        distinctTickers.map(tck => {
+        displayTickers.map(tck => {
           const cy = companyY[tck];
           const isSelected = tck === activeTicker;
           const prof = profiles[tck] || {};
-          const cName = ar ? (prof.name?.ar || tck) : (prof.name?.en || tck);
+          const rawName = ar ? (prof.name?.ar || tck) : (prof.name?.en || tck);
+          const cName = rawName.length > 20 ? rawName.slice(0, 18) + '…' : rawName;
+          const linkForTck = allLinks.find(l => l.target === tck);
+          const stakeVal = linkForTck?.stakePercent;
+          const stakeStr = finite(stakeVal) ? `${stakeVal > 0 ? '+' : ''}${stakeVal.toFixed(2)}%` : '';
 
           return h('g', {
             key: tck,
             className: `ft-company-node ${isSelected ? 'ft-node-selected' : ''}`,
-            transform: `translate(720, ${cy - 18})`,
+            transform: `translate(696, ${(cy - 20).toFixed(1)})`,
             onClick: () => onSelectTicker(tck),
             style: { cursor: 'pointer' }
           },
             h('rect', {
-              width: 170,
-              height: 36,
+              width: 240,
+              height: 40,
               rx: 10,
               fill: isSelected ? 'var(--ink)' : 'var(--surface)',
               stroke: isSelected ? 'var(--ink)' : 'var(--edge)',
               strokeWidth: isSelected ? 2 : 1
             }),
             h('text', {
-              x: 16,
-              y: 22,
-              fontSize: 12,
-              fontWeight: 750,
+              x: 14,
+              y: 25,
+              fontSize: 12.5,
+              fontWeight: 800,
               fill: isSelected ? 'var(--bg)' : 'var(--ink)'
             }, tck),
             h('text', {
               x: 64,
-              y: 22,
+              y: 24,
               fontSize: 10,
-              fill: isSelected ? 'color-mix(in srgb, var(--bg) 75%, transparent)' : 'var(--t2)'
-            }, cName.length > 14 ? cName.slice(0, 12) + '…' : cName)
+              fill: isSelected ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'var(--t2)'
+            }, cName),
+            stakeStr ? h('text', {
+              x: 228,
+              y: 24,
+              textAnchor: 'end',
+              fontSize: 10,
+              fontWeight: 700,
+              fill: isSelected ? 'var(--bg)' : tone(stakeVal)
+            }, stakeStr) : null
           );
         })
       )
@@ -595,25 +665,23 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
               className: 'ft-hero-number',
               style: { color: tone(heroLink.stakePercent || 0) },
               dir: 'ltr'
-            }, `${(heroLink.stakePercent || 0) > 0 ? '+' : ''}${(heroLink.stakePercent || 0).toFixed(2)}%`),
+            }, finite(heroLink.stakePercent) ? `${heroLink.stakePercent > 0 ? '+' : ''}${heroLink.stakePercent.toFixed(2)}%` : (heroLink.actionLabel || '—')),
             h('span', { className: 'ft-hero-scope' }, t('of total share capital', 'من إجمالي رأسمال الشركة'))
           ),
           h('small', { className: 'ft-hero-note' }, t('Percentage in the company is what dictates control and economic impact, far exceeding raw share volume.',
             'نسبة الملكية هي التي تحدد السيطرة والأثر الاقتصادي الحقيقي، وهي أهم بكثير من مجرد عدد الأسهم المجرد.'))
         ),
         h('div', { className: 'ft-hero-side-metrics' },
-          metric(t('Target Company', 'الشركة المستهدفة'), `${activeTicker} · ` + (ar ? (activeProf.name?.ar || activeTicker) : (activeProf.name?.en || activeTicker))),
-          metric(t('Marked Market Value', 'القيمة السوقية المنفذة بسعر اليوم'), compact(heroLink.markedValue) + ' EGP', t('At latest published share price', 'بسعر السهم المنشور الأخير')),
-          metric(t('Disclosed Shares', 'الأسهم المفصح عنها'), compact(Math.abs(heroLink.netShares || 0)) + ' ' + t('shares', 'سهم'), heroLink.latestDate || '')
+          metric(t('Named Entity / Actor', 'الجهة المتعاملة / الداخلي'), ar ? (heroLink.sourceLabelAr || heroLink.sourceLabel || '—') : (heroLink.sourceLabel || heroLink.sourceLabelAr || '—')),
+          metric(t('Target Listed Company', 'الشركة المستهدفة'), `${activeTicker} · ` + (ar ? (activeProf.name?.ar || activeTicker) : (activeProf.name?.en || activeTicker))),
+          metric(t('Marked Market Value', 'القيمة السوقية المنفذة بسعر اليوم'), finite(heroLink.markedValue) ? compact(heroLink.markedValue) + ' EGP' : '—', t('At latest published share price', 'بسعر السهم المنشور الأخير')),
+          metric(t('Disclosed Shares', 'الأسهم المفصح عنها'), finite(heroLink.netShares) ? compact(Math.abs(heroLink.netShares)) + ' ' + t('shares', 'سهم') : (heroLink.actionLabel || t('Regulatory notice', 'إخطار رسمي')), heroLink.latestDate || '')
         )
       )
     )
   );
 }
 
-// ══════════════════════════════════════════════════════════════
-// DRAWING: CUMULATIVE STAKE % PROGRESSION CURVE VS STOCK PRICE
-// ══════════════════════════════════════════════════════════════
 function renderStakeProgressionCurve(stakeHistory, pricePoints, ticker, currency, ar, t) {
   if (!stakeHistory || stakeHistory.length < 1) return null;
 
@@ -1135,15 +1203,59 @@ export function flowTrackers(component, data, ar) {
 
   const tableRow = r => {
     const p = profiles[r.ticker] || {};
+    const hasShares = finite(r.shares) && r.shares > 0;
     const pct = r.referencePercent;
     const actual = finite(r.ownershipBeforePercent) && finite(r.ownershipAfterPercent);
     const dir = direction(r.action);
     const rel = ar ? (r.relationshipLabelAr || r.relationship) : (r.relationshipLabel || r.relationship);
+    const partyName = ar ? (r.investorNameAr || r.investorName) : (r.investorName || r.investorNameAr);
 
-    return h('article', { key: r.id, className: 'ft-event' },
+    if (hasShares) {
+      return h('article', { key: r.id, className: 'ft-event' },
+        h('div', { className: 'ft-event-head' },
+          h('time', null, r.date || t('Date not supplied', 'التاريخ غير متاح')),
+          h('span', { className: 'ft-direction', style: { color: tone(dir) } }, actions[r.action] || r.actionLabel || t('Disclosure', 'إفصاح'))
+        ),
+        h('div', { className: 'ft-event-party' },
+          h('button', {
+            type: 'button',
+            className: 'ft-company-link',
+            disabled: !profiles[r.ticker],
+            onClick: () => component.setState({ screen: 'company', ticker: r.ticker, companyPanel: 'filings' })
+          }, r.ticker || r.company || '—'),
+          h('span', { className: 'ft-party-label' }, partyName || (r.action?.startsWith('treasury_') ? t('Company treasury', 'خزينة الشركة') : t('Insider', 'داخلي'))),
+          h('span', { className: 'ft-rel-pill' }, rel)
+        ),
+        h('div', { className: 'ft-event-numbers' },
+          metric(
+            actual ? t('Disclosed ownership', 'الملكية المفصح عنها') : t('Trade / current share capital', 'الصفقة / عدد الأسهم الحالي'),
+            actual ? `${r.ownershipBeforePercent}% → ${r.ownershipAfterPercent}%` : finite(pct) ? pct.toFixed(4) + '%' : '—',
+            actual ? t('Before → after', 'قبل ← بعد') : t('Reference scale, not ownership change', 'مقياس مرجعي، وليس تغير الملكية'),
+            dir
+          ),
+          metric(t('At latest published price', 'بسعر السهم المنشور الأخير'), compact(r.currentMarkedValue) + ' ' + (p.currency || 'EGP'), p.date || ''),
+          metric(t('Disclosed shares', 'الأسهم المفصح عنها'), compact(r.shares))
+        ),
+        h('div', { className: 'ft-stake-track', 'aria-hidden': 'true' },
+          h('i', { style: { width: finite(pct) ? Math.min(100, Math.max(0, pct)) + '%' : '0%', background: tone(dir) } })
+        ),
+        h('small', { className: 'ft-note' }, t('Track is 0–100% of current shares. Marked value is not the execution amount.', 'الشريط من ٠–١٠٠٪ من الأسهم الحالية. القيمة بسعر اليوم ليست مبلغ التنفيذ.')),
+        safeLink(r.link) ? h('a', { href: safeLink(r.link), target: '_blank', rel: 'noopener noreferrer', className: 'ft-source' }, t('Official disclosure ↗', 'الإفصاح الرسمي ↗')) : null
+      );
+    }
+
+    const noticeTypeLabel = r.action === 'treasury_purchase'
+      ? t('Treasury Purchase Notice', 'إخطار شراء أسهم خزينة')
+      : r.action === 'treasury_sale'
+        ? t('Treasury Sale Notice', 'إخطار بيع أسهم خزينة')
+        : r.action === 'treasury_cancel'
+          ? t('Treasury Cancellation Notice', 'إخطار إعدام أسهم خزينة')
+          : (r.actionLabel || t('Regulatory Filing Notice', 'إخطار إفصاح رسمي'));
+
+    return h('article', { key: r.id, className: 'ft-event ft-event-notice' },
       h('div', { className: 'ft-event-head' },
         h('time', null, r.date || t('Date not supplied', 'التاريخ غير متاح')),
-        h('span', { className: 'ft-direction', style: { color: tone(dir) } }, actions[r.action] || t('Disclosure', 'إفصاح'))
+        h('span', { className: 'ft-notice-badge' }, noticeTypeLabel)
       ),
       h('div', { className: 'ft-event-party' },
         h('button', {
@@ -1152,24 +1264,25 @@ export function flowTrackers(component, data, ar) {
           disabled: !profiles[r.ticker],
           onClick: () => component.setState({ screen: 'company', ticker: r.ticker, companyPanel: 'filings' })
         }, r.ticker || r.company || '—'),
-        h('span', { className: 'ft-party-label' }, r.investorName || (r.action?.startsWith('treasury_') ? t('Company treasury', 'خزينة الشركة') : t('Investor not named', 'اسم المتعامل غير منشور'))),
+        h('span', { className: 'ft-party-label' }, partyName || (r.action?.startsWith('treasury_') ? t('Company treasury', 'خزينة الشركة') : t('Insider', 'داخلي'))),
         h('span', { className: 'ft-rel-pill' }, rel)
       ),
-      h('div', { className: 'ft-event-numbers' },
-        metric(
-          actual ? t('Disclosed ownership', 'الملكية المفصح عنها') : t('Trade / current share capital', 'الصفقة / عدد الأسهم الحالي'),
-          actual ? `${r.ownershipBeforePercent}% → ${r.ownershipAfterPercent}%` : finite(pct) ? pct.toFixed(4) + '%' : '—',
-          actual ? t('Before → after', 'قبل ← بعد') : t('Reference scale, not ownership change', 'مقياس مرجعي، وليس تغير الملكية'),
-          dir
-        ),
-        metric(t('At latest published price', 'بسعر السهم المنشور الأخير'), compact(r.currentMarkedValue) + ' ' + (p.currency || ''), p.date || ''),
-        metric(t('Disclosed shares', 'الأسهم المفصح عنها'), compact(r.shares))
+      h('div', { className: 'ft-notice-content' },
+        h('div', { className: 'ft-notice-title' }, ar ? (r.title || r.titleEn) : (r.titleEn || r.title || noticeTypeLabel)),
+        h('p', { className: 'ft-notice-callout' }, t(
+          'Official market filing announcement. Execution tranches, prices, and volume details are contained in the published filing document.',
+          'إفصاح رسمي منشور عبر البورصة المصرية. تفاصيل كميات التنفيذ والأسعار مدرجة بنص الإشعار الرسمي المرفق.'
+        ))
       ),
-      h('div', { className: 'ft-stake-track', 'aria-hidden': 'true' },
-        h('i', { style: { width: finite(pct) ? Math.min(100, Math.max(0, pct)) + '%' : '0%', background: tone(dir) } })
-      ),
-      h('small', { className: 'ft-note' }, t('Track is 0–100% of current shares. Marked value is not the execution amount.', 'الشريط من ٠–١٠٠٪ من الأسهم الحالية. القيمة بسعر اليوم ليست مبلغ التنفيذ.')),
-      safeLink(r.link) ? h('a', { href: safeLink(r.link), target: '_blank', rel: 'noopener noreferrer', className: 'ft-source' }, t('Official disclosure ↗', 'الإفصاح الرسمي ↗')) : null
+      h('div', { className: 'ft-notice-footer' },
+        h('span', { className: 'ft-filing-ref' }, t('Filing Ref: #', 'رقم الإفصاح: #') + (r.filingId || 'EGX')),
+        safeLink(r.link) ? h('a', {
+          href: safeLink(r.link),
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          className: 'ft-source-btn'
+        }, t('Read Official EGX Filing ↗', 'الاطلاع على الإفصاح الرسمي ↗')) : null
+      )
     );
   };
 

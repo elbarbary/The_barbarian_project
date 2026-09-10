@@ -182,19 +182,55 @@ def build(directory, market, documents, insiders):
             profiles[t]['netStakeChangePercent'] = hist[-1]['cumulativeStake'] if hist else None
             profiles[t]['netMarkedValue'] = round(profiles[t]['netInsiderShares'] * (profiles[t].get('close') or 0), 2) if profiles[t].get('close') else None
 
-    # Compute relational ownership graph (entity -> company links)
-    conn_map = defaultdict(lambda: {'buyShares': 0, 'sellShares': 0, 'events': 0, 'latestDate': ''})
+        # Compute relational ownership graph with ACTUAL NAMED ENTITIES (entity -> company links)
+    conn_map = defaultdict(lambda: {'buyShares': 0, 'sellShares': 0, 'events': 0, 'latestDate': '', 'sourceLabel': '', 'sourceLabelAr': ''})
+    named_entities_dict = {}
+
     for it in events:
         t = it.get('ticker')
-        sh = it.get('shares')
-        if not t or not sh:
+        if not t:
             continue
+        sh = it.get('shares') or 0
         rel = it.get('relationship') or 'insider'
-        act = it.get('action')
+        act = it.get('action') or ''
         dt = it.get('date') or ''
-        k = (rel, t)
-        c = conn_map[k]
+        p = profiles.get(t, {})
+        co_name = (p.get('name') or {}).get('en') or it.get('company') or t
+        co_ar = (p.get('name') or {}).get('ar') or it.get('companyAr') or t
+        inv = it.get('investorName')
+
+        if inv and 'disclosed' not in inv.lower() and 'investor not named' not in inv.lower():
+            ent_id = f"inv-{t}"
+            label = inv
+            label_ar = inv
+        elif 'treasury' in act or rel == 'treasury':
+            ent_id = f"treasury-{t}"
+            label = f"{co_name} Treasury"
+            label_ar = f"خزينة {co_ar}"
+        elif rel == 'major_holder' or 'major' in str(it.get('relationshipLabel', '')).lower():
+            ent_id = f"major-{t}"
+            label = f"{co_name} Major Shareholders"
+            label_ar = f"كبار مساهمي {co_ar}"
+        elif rel == 'related_party' or 'related' in str(it.get('relationshipLabel', '')).lower():
+            ent_id = f"related-{t}"
+            label = f"{co_name} Connected Group"
+            label_ar = f"المجموعة المرتبطة بشركة {co_ar}"
+        else:
+            ent_id = f"insider-{t}"
+            label = f"{co_name} Board & Insiders"
+            label_ar = f"داخليو ومجلس إدارة {co_ar}"
+
+        named_entities_dict[ent_id] = {
+            'id': ent_id,
+            'label': label,
+            'labelAr': label_ar,
+            'ticker': t,
+        }
+
+        c = conn_map[(ent_id, t)]
         c['events'] += 1
+        c['sourceLabel'] = label
+        c['sourceLabelAr'] = label_ar
         if dt > c['latestDate']:
             c['latestDate'] = dt
         if act in ('bought', 'treasury_purchase'):
@@ -203,19 +239,21 @@ def build(directory, market, documents, insiders):
             c['sellShares'] += sh
 
     ownership_links = []
-    for (rel, t), c in conn_map.items():
+    for (ent_id, t), c in conn_map.items():
         p = profiles.get(t, {})
         tot_shares = p.get('shares')
         cls = p.get('close') or 0
         net_sh = c['buyShares'] - c['sellShares']
-        stake_pct = round(net_sh / tot_shares * 100, 3) if positive(tot_shares) else None
-        gross_pct = round((c['buyShares'] + c['sellShares']) / tot_shares * 100, 3) if positive(tot_shares) else None
-        val = round(abs(net_sh) * cls, 2) if cls > 0 else None
+        stake_pct = round(net_sh / tot_shares * 100, 3) if positive(tot_shares) and net_sh != 0 else None
+        gross_pct = round((c['buyShares'] + c['sellShares']) / tot_shares * 100, 3) if positive(tot_shares) and (c['buyShares'] + c['sellShares']) > 0 else None
+        val = round(abs(net_sh) * cls, 2) if cls > 0 and net_sh != 0 else None
         co_name = p.get('name', {}).get('en') or t
         co_ar = p.get('name', {}).get('ar') or t
-        act_summary = 'bought' if net_sh > 0 else ('sold' if net_sh < 0 else 'balanced')
+        act_summary = 'bought' if net_sh > 0 else ('sold' if net_sh < 0 else ('treasury' if 'treasury' in ent_id else 'disclosure'))
         ownership_links.append({
-            'source': rel,
+            'source': ent_id,
+            'sourceLabel': c['sourceLabel'],
+            'sourceLabelAr': c['sourceLabelAr'],
             'target': t,
             'company': co_name,
             'companyAr': co_ar,
@@ -229,8 +267,8 @@ def build(directory, market, documents, insiders):
             'latestDate': c['latestDate'],
         })
 
-    # Sort links by economic magnitude (abs stake % or value)
-    ownership_links.sort(key=lambda l: (abs(l['stakePercent'] or 0), l['markedValue'] or 0), reverse=True)
+    # Sort links by economic magnitude: largest stake % or value first
+    ownership_links.sort(key=lambda l: (abs(l['stakePercent'] or 0), l['markedValue'] or 0, l['eventCount']), reverse=True)
 
     # Attach summary stats to each sector
     for s in sectors.values():
@@ -243,13 +281,12 @@ def build(directory, market, documents, insiders):
             s['sizeWeightedReturn'] = latest.get('change')
             s['velocity'] = latest.get('turnoverToCap')
 
+    # Top entities for graph visualization
+    top_entity_ids = [l['source'] for l in ownership_links]
+    entities_list = [named_entities_dict[eid] for eid in dict.fromkeys(top_entity_ids) if eid in named_entities_dict]
+
     ownership_graph = {
-        'entities': [
-            {'id': 'insider', 'label': 'Board & Insiders', 'labelAr': 'مجلس إدارة وداخليين'},
-            {'id': 'major_holder', 'label': 'Major Shareholders (>5%)', 'labelAr': 'مساهمون رئيسيون (>٥٪)'},
-            {'id': 'related_party', 'label': 'Connected Groups', 'labelAr': 'مجموعات مرتبطة'},
-            {'id': 'treasury', 'label': 'Corporate Treasury', 'labelAr': 'أسهم خزينة'},
-        ],
+        'entities': entities_list,
         'links': ownership_links,
     }
 
