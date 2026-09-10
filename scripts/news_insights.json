@@ -747,6 +747,10 @@
     "meaning": "Currency stability reduces exchange rate volatility risks for domestic equity valuations, which correlates with modest price gains in local equity markets.",
     "meaning_ar": "يؤدي استقرار سعر صرف العملة المحلية إلى خفض مخاطر تقلبات أسعار الصرف المرتبطة بتقييمات الأسهم، وهو ما يتزامن مع ارتفاعات طفيفة في أسعار التداول بالأسواق المالية."
   },
+  "ارتفاع مستويات الشراء والبيع.. اسعار اليورو بختام تعاملات الخميس 10 سبتمبر 2026": {
+    "meaning": "An upward adjustment in both the bid and ask exchange rates reflects a higher local currency cost for acquiring euro liquidity in the interbank foreign exchange market.",
+    "meaning_ar": "يعكس ارتفاع أسعار العرض والطلب زيادة التكلفة الفعلية بالعملة المحلية للحصول على سيولة اليورو في سوق الصرف بين البنوك."
+  },
   "ارتفاع موشر \"ازدهار الخدمات اللوجستيه\" في الصين الي 50.9% في اغسطس": {
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
     "meaning_ar": "يعكس تجاوز المؤشر لمستوى 50% وجود قطاع الخدمات اللوجستية الصيني في نطاق التوسع التشغيلي، وهو ما يرصد حركة تدفق الشحن، ومعدلات إشغال المستودعات، وسرعة دوران البضائع عبر سلاسل الإمداد."
@@ -2187,6 +2191,10 @@
   "تراجع اسعار النحاس بعد بلوغها مستوي قياسي": {
     "meaning": "A decline in global copper prices directly shifts raw material input costs and inventory valuations for industrial consumers, particularly cable manufacturers and infrastructure contractors on the Egyptian exchange.",
     "meaning_ar": "يؤثر تراجع أسعار النحاس عالمياً بصورة مباشرة على تكاليف مدخلات الإنتاج وتقييمات المخزون لدى الشركات الصناعية، لا سيما مصنعي الكابلات ومقاولي البنية التحتية في السوق المصري."
+  },
+  "تراجع الاسهم الامريكيه في المستهل مع ترقب بيانات التضخم": {
+    "meaning": "Equity prices adjust downward at the market open as market participants reprice assets to reflect interest rate sensitivities ahead of macroeconomic inflation releases.",
+    "meaning_ar": "تتراجع أسعار الأسهم عند افتتاح جلسة التداول مع قيام المتعاملين بإعادة تسعير الأصول وفقاً لمحددات أسعار الفائدة قبيل صدور بيانات التضخم الاقتصادية."
   },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
@@ -4036,6 +4044,10 @@
   "وزير الزراعه: مستعدون لنقل الخبرات في استصلاح الاراضي والري الحديث الي العراق": {
     "meaning": "This framework establishes bilateral technical cooperation in land reclamation and modern irrigation, involving the export of agricultural engineering expertise and operational consulting services between Egypt and Iraq.",
     "meaning_ar": "يحدد هذا الإطار آلية للتعاون الفني الثنائي في مجالات استصلاح الأراضي والري الحديث، تتضمن تبادل الخبرات الهندسية الزراعية وتقديم الخدمات الاستشارية والتشغيلية بين مصر والعراق."
+  },
+  "وزير الصحه يتابع مستجدات مشروعات المرحله الاولي لمنظومه التامين الصحي الشامل": {
+    "meaning": "Execution of the Universal Health Insurance system channels state infrastructure procurement directly into hospital upgrades, diagnostic systems, and accredited medical service partnerships across target governorates.",
+    "meaning_ar": "يوجّه تنفيذ منظومة التأمين الصحي الشامل المشتريات والإنفاق الرأسمالي الحكومي مباشرة نحو تحديث المستشفيات وشبكات الفحص الطبي وشراكات الرعاية الصحية المعتمدة داخل المحافظات المحددة."
   },
   "وزير الصحه يتفقد المخزون الاستراتيجي من المستلزمات الطبيه": {
     "meaning": "Government inspection of strategic medical reserves tracks supply chain fulfillment, procurement cycles, and operational inventory levels across public healthcare networks.",
