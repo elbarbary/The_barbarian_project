@@ -1635,9 +1635,9 @@
           </sc-for>
         </div>
 
-        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 4px 3px">
+        <div class="heat-legend-row" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 4px 3px">
           <div style="font-family:'IBM Plex Mono','IBM Plex Sans Arabic',monospace;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)">{{ L.heatLegend }}</div>
-          <div style="display:flex;align-items:center;gap:2px">
+          <div class="heat-legend-scale" style="display:flex;align-items:center;gap:2px">
             <sc-for list="{{ heatKey }}" as="k" hint-placeholder-count="7">
               <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
                 <div style="width:34px;height:11px;background:{{ k.bg }};border-radius:2px"></div>

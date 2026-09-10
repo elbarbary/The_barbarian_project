@@ -790,6 +790,22 @@ body[data-signed="no"] #app .om-main { padding-top:28px !important; }
   }
 }
 
+/* The heat map's colour key.
+   Seven swatches at a fixed 34px, each captioned with a percentage that is
+   WIDER than the swatch — so the column sizes to the caption and the strip's
+   min-content came to 305px inside a 270px row. The row already wraps; the
+   strip did not, and a flex child does not shrink below min-content unless it
+   is told to.
+
+   It was not a local defect. `.om-rail` is `position:fixed` with both `left`
+   and `right` set, so it resolves against the scrollable canvas: the 39px the
+   key overflowed widened that canvas, the rail grew 300px → 314px, over-
+   constrained itself, and in RTL dropped to left:-4. The whole page then
+   scrolled sideways on the one screen. Measured at 320px: 334 → 320. */
+.heat-legend-row,
+.heat-legend-row > div { min-width: 0; }
+.heat-legend-scale { flex-wrap: wrap; justify-content: center; row-gap: 6px; }
+
 /* ══ TRADING & APP FEE SIMULATOR (TOOLS SECTION) ══ */
 .tools-tab-switcher {
   user-select: none;
