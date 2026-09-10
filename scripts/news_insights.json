@@ -19,6 +19,10 @@
     "meaning": "The platform enforces content and catalog moderation policies by restricting the listing and sale of non-compliant medical products across its digital marketplace.",
     "meaning_ar": "تطبق المنصة سياسات تدقيق المعروضات الرقمية عبر حظر إدراج وتداول فئات محددة من المنتجات الطبية داخل سوقها الإلكتروني."
   },
+  "\"طاقه عربيه\" تنفذ بيع 2 مليون سهم خزينه": {
+    "meaning": "The execution transfers 2 million treasury shares back into the open market, which restores these shares to active circulation, increases the company's free float, and records the transaction proceeds in equity.",
+    "meaning_ar": "تؤدي هذه العملية إلى إعادة طرح مليوني سهم من أسهم الخزينة للتداول في السوق المفتوحة، مما يرفع نسبة الأسهم حرة التداول ويثبت المتحصلات النقدية ضمن حقوق الملكية."
+  },
   "\"معيط\": هذه اهم المحاور التي يجب ان تعمل عليها الحكومه بعد انتهاء برنامج «الصندوق» نهايه العام الجاري": {
     "meaning": "Post-program economic policy frameworks transition macroeconomic management from multilateral lending conditions to domestic fiscal discipline, private sector enablement, and structural revenue measures.",
     "meaning_ar": "تعتمد أطر السياسات الاقتصادية لما بعد برامج التمويل الدولي على التحول من الالتزام بشروط المقرضين إلى تطبيق الانضباط المالي المحلي، وتمكين القطاع الخاص، وتنفيذ الإصلاحات الهيكلية للإيرادات العامة."
@@ -535,6 +539,10 @@
     "meaning": "An annual sales target of 15% reflects the company's operational plan to increase production volumes, order fulfillment, and distribution of medical packaging products across its client network during the fiscal year.",
     "meaning_ar": "يعكس استهداف نمو المبيعات بنسبة 15% خطة الشركة التشغيلية لزيادة أحجام الإنتاج وتلبية الطلبيات وتوسيع توزيع منتجات العبوات الطبية لشبكة عملائها خلال العام المالي."
   },
+  "«العربيه العالميه» لمنتجات الحبوب تستهدف 3 مليارات جنيه مبيعات": {
+    "meaning": "Setting a sales target establishes an internal benchmark for annual production volume and distribution capacity within the local grain processing sector.",
+    "meaning_ar": "يحدد استهداف حجم مبيعات معين معياراً تشغيلياً لحجم الإنتاج السنوي والقدرة التوزيعية للشركة ضمن قطاع تصنيع الحبوب المحلي."
+  },
   "«انروبيتش» الهنديه تختار مصر بوابه للتصنيع والتوسع في افريقيا": {
     "meaning": "Establishing manufacturing operations in Egypt sets up local production capacity and utilizes Egyptian regional trade agreements for distribution into African markets.",
     "meaning_ar": "يؤسس إنشاء منشآت تصنيع في مصر طاقة إنتاج محلية ويوظف الاتفاقيات التجارية الإقليمية لمصر في توزيع المنتجات داخل الأسواق الأفريقية."
@@ -654,6 +662,10 @@
   "اداره “الدوليه للمحاصيل” تقترح ترحيل الارباح للعام القادم": {
     "meaning": "Carrying forward profits retains net earnings within the equity section of the balance sheet as retained earnings rather than distributing cash dividends to shareholders, keeping internal cash within the company.",
     "meaning_ar": "يعني ترحيل الأرباح إبقاء صافي الدخل المحقق ضمن بند الأرباح المرحلة في حقوق الملكية بالميزانية بدلاً من توزيعه كأرباح نقدية على المساهمين، مما يحافظ على السيولة داخل الشركة."
+  },
+  "ارباح كيما ترتفع الي 1.79 مليار جنيه خلال العام المالي الماضي": {
+    "meaning": "The expansion in annual net profit to EGP 1.79 billion reflects higher operational revenues relative to production costs and financing expenses at the industrial chemicals producer, increasing total retained equity on the balance sheet.",
+    "meaning_ar": "يعكس ارتفاع صافي الربح السنوي إلى 1.79 مليار جنيه زيادة الإيرادات التشغيلية مقارنة بتكاليف الإنتاج والأعباء التمويلية لشركة الكيماويات، مما يرفع حجم الأرباح المحتجزة ضمن حقوق الملكية في الميزانية العمومية."
   },
   "ارباح “الدوليه للمحاصيل” السنويه تتراجع الي 451.7 مليون جنيه": {
     "meaning": "The decline in annual net profit to 451.7 million EGP reflects a contraction in bottom-line earnings after accounting for operating costs, input prices, and financing expenses across the financial year.",
@@ -855,6 +867,10 @@
     "meaning": "Retail gold prices in the UAE adjust in direct correlation with international spot bullion benchmark rates and local market pricing mechanisms.",
     "meaning_ar": "تتحرك أسعار الذهب في سوق التجزئة بدولة الإمارات بالتوازي المباشر مع أسعار تداول الأونصة في البورصات العالمية وآليات التسعير المحلية."
   },
+  "اسعار الذهب ترتفع وسط تراجع الدولار وترقب بيانات التضخم الامريكيه": {
+    "meaning": "Gold prices reflect an inverse relationship with the US dollar, where a weaker dollar lowers the acquisition cost of dollar-denominated bullion for holders of other currencies.",
+    "meaning_ar": "تعكس أسعار الذهب علاقة عكسية مع الدولار الأمريكي، حيث يؤدي تراجع العملة الأمريكية إلى خفض تكلفة شراء المعدن النفيس المسعر بالدولار لحائزي العملات الأخرى."
+  },
   "اسعار السمك اليوم الاثنين 7-9-2026 في مصر": {
     "meaning": "Daily fish price reporting reflects current spot rates across Egyptian wholesale and retail markets, determined by real-time aquaculture supply, daily fishing yields, transportation logistics, and operational input costs such as feed and fuel.",
     "meaning_ar": "يعكس النشر اليومي لأسعار الأسماك المعدلات الفورية السائدة في أسواق الجملة والتجزئة المصرية، والتي تتحدد بناءً على حجم الصيد اليومي، والمعروض من الاستزراع السمكي، والخدمات اللوجستية للنقل، وتكاليف المدخلات التشغيلية مثل الأعلاف والوقود."
@@ -886,6 +902,10 @@
   "اسعار السمك اليوم في مصر.. الثلاثاء 8/9/2026": {
     "meaning": "Daily fish price updates track spot market valuations across wholesale and retail distribution channels, reflecting current supply volumes from local aquaculture and maritime catch against immediate consumer demand.",
     "meaning_ar": "ترصد التحديثات اليومية لأسعار الأسماك تقييمات السوق الفورية عبر قنوات التوزيع بالجملة والتجزئة، مما يعكس حجم المعروض الحالي من الاستزراع السمكي والصيد البحري مقابل الطلب الاستهلاكي المباشر."
+  },
+  "اسعار الطماطم تكبح صادرات الصلصه والمركزات": {
+    "meaning": "Higher domestic prices for fresh tomatoes increase raw material procurement costs for food processing companies, raising the final production cost of tomato paste and concentrates relative to international market price levels.",
+    "meaning_ar": "يؤدي ارتفاع الأسعار المحلية للطماطم الطازجة إلى زيادة تكاليف شراء المواد الخام لشركات التصنيع الغذائي، مما يرفع تكلفة الإنتاج الإجمالية لمعجون الطماطم والمركزات مقارنة بمستويات الأسعار في الأسواق الدولية."
   },
   "اسعار الغاز الاوروبي ترتفع 2% مع تصاعد مخاطر مضيق هرمز ونقص المخزونات": {
     "meaning": "Geopolitical risks in key maritime transit corridors combined with lower storage levels tighten available energy buffers, which adds a risk premium to natural gas benchmark pricing.",
