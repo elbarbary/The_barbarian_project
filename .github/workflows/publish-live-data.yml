@@ -161,6 +161,33 @@ jobs:
         # every phone keeps serving what it already had.
         run: python3 scripts/build_fixtures.py
 
+      # Placed AFTER the build and BEFORE the commit, which is the whole point.
+      #
+      # This job publishes up to 126 times a day and ran no tests at all, while
+      # the daily build — six to thirteen publishes — runs all of them. The
+      # inversion that matters most is narrower than "no §8 guard": news_insights
+      # enforces §8 at runtime on both fresh and cached items, so a skipped suite
+      # does not by itself let advice through. What it does let through is a
+      # regression IN that guard, and worse:
+      # `test_news_insights.PublishedInsightsTest.test_no_cached_insight_makes_a_forecast`
+      # audits the published `scripts/news_insights.json` cache — and never ran
+      # in the one job that WRITES and commits it.
+      #
+      # Running it before the fetch would audit the PREVIOUS file. Running it
+      # here audits the bytes about to be committed, so a bad one is never
+      # published rather than published and then noticed.
+      #
+      # Scoped to what this job actually writes — news, rates, connections,
+      # insiders, the flow trackers and the §8 guards they lean on. 129 tests,
+      # 1.4s measured, against a 106s median run.
+      - name: Test what is about to be published
+        run: |
+          python3 -m unittest -v \
+            test_news_context test_news_evidence test_news_insights \
+            test_connections test_rates_carry test_rates_dates \
+            test_macro test_flow_trackers
+        working-directory: scripts
+
       - name: Commit if anything moved
         id: commit
         run: |

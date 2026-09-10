@@ -201,3 +201,48 @@ class TheManifestIsLast(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LiveDataGate(unittest.TestCase):
+    """The 15-minute publish must prove what it is about to commit.
+
+    This job publishes up to 126 times a day and ran no tests at all, while the
+    daily build — six to thirteen publishes — ran all of them. The sharpest
+    edge of that inversion:
+    `test_news_insights.PublishedInsightsTest.test_no_cached_insight_makes_a_forecast`
+    audits the published `scripts/news_insights.json` cache and never ran in the
+    one job that writes and commits it.
+    """
+
+    WORKFLOW = HERE.parent / ".github" / "workflows" / "publish-live-data.yml"
+
+    def setUp(self):
+        self.assertTrue(self.WORKFLOW.exists(), "publish-live-data.yml is missing")
+        self.text = self.WORKFLOW.read_text(encoding="utf-8")
+
+    def test_it_runs_the_tests_at_all(self):
+        self.assertIn("python3 -m unittest", self.text)
+
+    def test_the_tests_run_before_the_commit(self):
+        """Order is the point.
+
+        Before the fetch, the same suite would audit the PREVIOUS file and pass
+        while the new one is broken.
+        """
+        gate = self.text.index("python3 -m unittest")
+        commit = self.text.index("Commit if anything moved")
+        self.assertLess(gate, commit,
+                        "the gate must run before the commit, not after it")
+
+    def test_it_covers_the_documents_this_job_writes(self):
+        for module in ("test_news_insights", "test_connections",
+                       "test_rates_dates", "test_flow_trackers", "test_macro"):
+            self.assertIn(module, self.text, f"{module} is not in the gate")
+
+    def test_every_named_module_exists(self):
+        import re
+        block = self.text[self.text.index("python3 -m unittest"):]
+        block = block[:block.index("working-directory")]
+        for name in re.findall(r"\btest_[a-z_]+\b", block):
+            self.assertTrue((HERE / f"{name}.py").exists(),
+                            f"the gate names {name}, which is not a test module")
