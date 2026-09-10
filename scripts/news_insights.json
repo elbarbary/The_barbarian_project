@@ -1879,6 +1879,10 @@
     "meaning": "An expanding Chinese trade surplus reflects an increase in outbound manufacturing volumes relative to imports, affecting global shipping route utilization, raw material consumption rates, and international trade liquidity flows.",
     "meaning_ar": "يعكس اتساع الفائض التجاري الصيني ارتفاع حجم الصادرات الصناعية مقارنة بالواردات، مما يحدد معدلات تشغيل خطوط الشحن البحري العالمية، وحجم استهلاك المواد الخام، وحركة السيولة في التجارة الدولية."
   },
+  "انخفاض موشر بورصه قطر في ختام التعاملات": {
+    "meaning": "A drop in the benchmark index reflects a net decrease in the market capitalisation of its constituent equities by the end of the trading session, where selling volume across key listed firms outweighs executed buying volume.",
+    "meaning_ar": "يعكس تراجع المؤشر الرئيسي انخفاض القيمة السوقية الإجمالية للأسهم المكونة له بنهاية الجلسة، نتيجة لتفوق أحجام عروض البيع المنفذة على طلبات الشراء على أسهم الشركات المدرجة."
+  },
   "انخفاض موشري البحرين العام والاسلامي في ختام التعاملات": {
     "meaning": "The decline in both the Bahrain All Share Index and the Bahrain Islamic Index reflects a net decrease in the market capitalization of listed conventional and Sharia-compliant equities resulting from aggregate daily closing transactions.",
     "meaning_ar": "يعكس انخفاض المؤشر العام ومؤشر البحرين الإسلامي تراجعاً في القيمة السوقية الإجمالية للأسهم التقليدية والمتوافقة مع الشريعة المدرجة، ناتجاً عن محصلة التداولات اليومية عند الإغلاق."
@@ -2010,6 +2014,10 @@
   "بنك استثمار: 40 مليار دولار فقط من الاصول المرمزه عالميا حتي الان": {
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
     "meaning_ar": "تمثل الأصول المرمّزة أدوات مالية وأصولاً تقليدية تم تحويلها إلى رموز رقمية على شبكات السجلات الموزعة، حيث يبلغ إجمالي قيمتها السوقية عالمياً 40 مليار دولار في الوقت الحالي."
+  },
+  "بنك التنميه الصناعيه يتيح تمويل وحدات مشروعات صندوق التنميه الحضريه": {
+    "meaning": "The Industrial Development Bank integrates financing products into the Urban Development Fund's housing developments, creating a direct credit channel between the bank's mortgage portfolio and state-backed real estate inventory.",
+    "meaning_ar": "يُدرج بنك التنمية الصناعية منتجات تمويلية مخصصة لوحدات صندوق التنمية الحضرية، مما ينشئ قناة ائتمانية مباشرة تربط بين المحفظة العقارية للبنك والأصول السكنية التابعة للصندوق."
   },
   "بنك اليابان يتجه لرفع الفايده الي 1.25% لتفادي صدمه الاسواق": {
     "meaning": "Central bank interest rate hikes increase local borrowing costs and narrow yield differentials against foreign currencies, directly altering cross-border carry trade financing and capital flows.",
@@ -2804,6 +2812,10 @@
     "meaning": "Official and parallel market quotations for the Saudi Riyal against the Egyptian Pound establish the current operational conversion rate applied to cross-border remittances, bilateral trade invoicing, and travel expenditures between Egypt and Saudi Arabia.",
     "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري في السوقين الرسمية والموازية سعر التحويل التشغيلي المطبق حالياً على تحويلات العاملين بالخارج، وتسوية الفواتير التجارية البينية، ومصروفات السفر بين مصر والمملكة العربية السعودية."
   },
+  "سعر الريال السعودي في مصر اليوم الخميس 10/9/2026.. ختام التعاملات": {
+    "meaning": "Official end-of-day Saudi Riyal exchange rates establish the baseline valuation for bilateral trade settlements, cross-border remittances, and corporate foreign currency balance sheet conversions within the banking sector.",
+    "meaning_ar": "تحدد أسعار إغلاق الريال السعودي الرسمية القيمة المرجعية لتسوية المعاملات التجارية البينية، وتحويلات العاملين بالخارج، وإعادة تقييم مراكز العملات الأجنبية في القوائم المالية للبنوك والشركات."
+  },
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي في أوروبا جراء اشتداد المنافسة على شحنات الغاز المسال إلى رفع مؤشرات تكلفة الطاقة ومدخلات الإنتاج عالمياً، بما يشمل تكاليف استيراد الغاز المسال ومدخلات التشغيل للقطاعات الصناعية كثيفة الاستهلاك في مصر."
@@ -3356,6 +3368,10 @@
   "مبيعات السيارات في مصر تقفز 29.7% اول 7 اشهر من 2026": {
     "meaning": "An expansion in automotive sales volumes reflects higher delivery throughput across local dealership networks and increased import and local assembly rates compared to the prior period.",
     "meaning_ar": "يعكس ارتفاع حجم مبيعات السيارات زيادة في معدلات تسليم المركبات عبر شبكات التوزيع المحلية وارتفاع وتيرة الاستيراد والتجميع المحلي مقارنة بالفترة السابقة."
+  },
+  "مبيعات سوق السيارات في مصر ترتفع 29.7% خلال اول 7 اشهر من 2026 (جراف)": {
+    "meaning": "The recorded increase reflects higher inventory turnover and distribution volumes across local dealerships compared to the prior period, driven by the operational fulfillment of vehicle assembly quotas and import shipments.",
+    "meaning_ar": "يعكس الارتفاع المسجل زيادة في معدلات دوران المخزون وحجم التوزيع لدى شبكات الوكلاء المحليين مقارنة بالفترة السابقة، نتيجة تدفق حصص تجميع المركبات والشحنات الاستيرادية المنفذة."
   },
   "متحدث الصحه: الاولويه في اختيار الادويه للاكثر امانا وفاعليه وكفاءه": {
     "meaning": "Public healthcare tenders and institutional procurement frameworks allocate pharmaceutical supply contracts based on structured criteria prioritizing clinical efficacy, safety standards, and cost-efficiency metrics across the state-administered medical network.",
