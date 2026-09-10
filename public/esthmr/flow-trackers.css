@@ -6,16 +6,13 @@
 .ft-portal-shell{padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;height:100%;box-sizing:border-box}
 .ft-portal-sector{background:radial-gradient(100% 120% at 90% 0%,color-mix(in srgb,var(--up) 8%,transparent),transparent 65%),var(--surface)}
 .ft-portal-owner{background:radial-gradient(100% 120% at 90% 0%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 65%),var(--surface)}
-
 .ft-eyebrow-line{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
 .ft-eyebrow{font-size:10px;font-weight:750;letter-spacing:.14em;color:var(--t2);text-transform:uppercase}
 .ft-pulse-badge{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--up);background:color-mix(in srgb,var(--up) 12%,transparent);padding:3px 8px;border-radius:12px}
 .ft-pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--up);box-shadow:0 0 8px var(--up)}
 .ft-tag-pill{font-size:9.5px;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:3px 9px;border-radius:12px}
-
 .ft-portal h2{font-size:clamp(23px,2.2vw,30px);letter-spacing:-.03em;margin:6px 0 4px;line-height:1.22;font-weight:750}
 .ft-portal p{font-size:12.5px;color:var(--t2);margin:0 0 16px;line-height:1.55}
-
 /* Portal Hero Visuals */
 .ft-portal-visual{margin:4px 0 16px;background:var(--sunk);border:1px solid var(--edgeIn);border-radius:18px;padding:12px;min-width:0}
 .ft-preview-grid{display:grid;gap:8px}
@@ -25,7 +22,6 @@
 .ft-preview-val{font-size:10.5px;color:var(--t2);font-weight:500}
 .ft-preview-row-center{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
 .ft-preview-badge{font-size:11.5px;font-weight:700;letter-spacing:-.01em}
-
 .ft-owner-stream{padding:10px}
 .ft-stake-feed{display:grid;gap:8px}
 .ft-stake-feed-item{background:var(--surface);border:1px solid var(--edge);border-radius:13px;padding:9px 12px;display:flex;flex-direction:column;gap:5px}
@@ -36,27 +32,21 @@
 .ft-feed-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .ft-stake-badge{font-size:11.5px;font-weight:750;border:1px solid var(--rule2);background:color-mix(in srgb,var(--surface) 60%,transparent);padding:3px 9px;border-radius:10px}
 .ft-feed-value{font-size:11px;color:var(--t2);font-weight:600}
-
 .ft-portal-meta{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;color:var(--t2);margin-top:auto;padding-top:10px}
 .ft-market-turnover{font-weight:650;color:var(--ink)}
-
 .ft-portal-foot{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid var(--edgeIn);margin-top:10px;font-weight:650;font-size:13px}
 .ft-arrow-pill{width:32px;height:32px;border-radius:50%;background:color-mix(in srgb,var(--ink) 6%,transparent);display:grid;place-items:center;font-size:16px;transition:transform .2s ease,background-color .2s ease}
 .ft-portal:hover .ft-arrow-pill{transform:translate(2px,-2px);background:var(--accent);color:#1b1917}
-
 .ft-band{height:8px;display:flex;overflow:hidden;background:var(--rule2);border-radius:16px;direction:ltr}
 .ft-band i{display:block;height:100%;transition:width .3s ease}
-
 /* Full Screen Layouts */
 .ft-screen{margin-block:20px 48px;min-width:0}
 .ft-heading h1{font-size:clamp(30px,3.8vw,44px);letter-spacing:-.035em;margin:10px 0 8px;line-height:1.2;font-weight:750}
 .ft-heading p{color:var(--t2);font-size:14px;margin:0 0 20px}
-
 .ft-market-ribbon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
 .ft-ribbon-card{background:var(--surface);border:1px solid var(--edge);border-radius:18px;padding:16px 20px;display:flex;flex-direction:column;gap:4px}
 .ft-ribbon-card span{font-size:11px;color:var(--t2)}
 .ft-ribbon-card strong{font-size:clamp(20px,2vw,26px);letter-spacing:-.03em;font-weight:700}
-
 .ft-toolbar{display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin:16px 0 24px}
 .ft-pills{display:flex;flex-wrap:wrap;gap:6px}
 .ft-pill,.ft-pagination button,.ft-select select{font:inherit;color:var(--ink);border:1px solid var(--edge);background:var(--surface);border-radius:14px;min-height:42px;padding:8px 14px;cursor:pointer;transition:transform .12s ease,background-color .12s ease}
@@ -64,7 +54,6 @@
 .ft-pill[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:600}
 .ft-select{display:grid;gap:5px;min-width:0;max-width:100%;flex:1 1 180px;font-size:11.5px;color:var(--t2)}
 .ft-select select{width:100%;max-width:100%;font-size:13px}
-
 /* Sector Grid */
 .ft-sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:18px 0 28px}
 .ft-sector-tile{text-align:start;display:grid;gap:10px;border:1px solid var(--edge);border-radius:20px;padding:18px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-width:0;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
@@ -82,21 +71,18 @@
 .ft-velocity-pill{font-size:10px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);padding:2px 7px;border-radius:10px;font-weight:600}
 .ft-tile-meta{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;color:var(--t2)}
 .ft-tile-action{font-size:9.5px;color:var(--faint);text-align:end}
-
 /* Detail Panel */
 .ft-detail{padding:clamp(20px,3vw,34px);background:var(--surface);border:1px solid var(--edge);border-radius:28px;box-shadow:0 12px 40px -16px rgba(0,0,0,0.06);margin-bottom:32px;scroll-margin-top:24px}
 .ft-section-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:16px}
 .ft-section-heading h2{margin:4px 0 0;font-size:26px;letter-spacing:-.03em;font-weight:750}
 .ft-section-heading h3{margin:4px 0 0;font-size:19px;letter-spacing:-.02em;font-weight:700}
 .ft-range-badge{font-size:11px;color:var(--t2);font-family:'IBM Plex Mono',monospace;background:var(--sunk);padding:4px 10px;border-radius:10px;border:1px solid var(--edgeIn)}
-
 .ft-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:18px 0}
 .ft-metrics-sub{border-top:1px solid var(--edgeIn);padding-top:18px;margin-top:4px}
 .ft-metric{display:flex;flex-direction:column;gap:5px;min-width:0}
 .ft-metric>span{font-size:11px;color:var(--t2)}
 .ft-metric strong{font-size:clamp(19px,2.3vw,27px);font-weight:700;letter-spacing:-.03em;text-align:start;overflow-wrap:anywhere}
 .ft-metric small{font-size:10px;color:var(--t2)}
-
 .ft-charts-heading{margin-top:20px}
 .ft-charts-heading h3{margin:0;font-size:18px;font-weight:700}
 .ft-charts-heading p{margin:4px 0 0;font-size:12px;color:var(--t2)}
@@ -109,7 +95,6 @@
 .ft-legend-item i{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor}
 .ft-chart svg{width:100%;display:block;height:auto;margin-top:14px;overflow:visible}
 .ft-chart-dates{display:flex;justify-content:space-between;gap:12px;color:var(--t2);font-size:10px;margin-top:10px;font-family:'IBM Plex Mono',monospace}
-
 /* Stock movements relative to size */
 .ft-stock-breakdown{margin:28px 0 24px;border-top:1px solid var(--edgeIn);padding-top:24px}
 .ft-stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:14px}
@@ -123,26 +108,21 @@
 .ft-stock-metrics span{color:var(--t2)}
 .ft-stock-metrics strong{font-size:12.5px;font-weight:700}
 .ft-stock-metrics small{font-size:9.5px;font-weight:600}
-
 /* Balanced Purchases / Sales */
 .ft-balanced{display:flex;align-items:center;justify-content:space-between;gap:20px;background:var(--sunk);border:1px solid var(--edgeIn);border-radius:18px;padding:18px 24px;margin:24px 0}
 .ft-balanced>b{font-size:32px;font-weight:300;color:var(--t2)}
-
 /* Ownership Lens Elements */
 .ft-thesis-banner{display:flex;align-items:center;gap:18px;background:radial-gradient(90% 120% at 0% 0%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 75%),var(--surface);border:1px solid var(--edge);border-radius:22px;padding:18px 24px;margin-bottom:20px}
 .ft-thesis-icon{width:46px;height:46px;flex:0 0 46px;border-radius:50%;border:1px solid var(--accent);display:grid;place-items:center;font-size:22px;font-weight:300;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
 .ft-thesis-text strong{font-size:14.5px;display:block;margin-bottom:2px}
 .ft-thesis-text p{font-size:12.5px;color:var(--t2);margin:0;line-height:1.55}
-
 .ft-company-ownership-card{background:var(--surface);border:1px solid var(--edge);border-radius:24px;padding:24px;margin-bottom:20px}
-
 .ft-event-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
 .ft-event{border:1px solid var(--edge);border-radius:22px;background:var(--surface);padding:22px;min-width:0;display:flex;flex-direction:column;transition:border-color .15s}
 .ft-event:hover{border-color:var(--accent)}
 .ft-event-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--t2);margin-bottom:12px}
 .ft-direction{font-weight:700}
 .ft-event-party{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.ft-company-link{border:0;background:none;color:var(--ink);padding:0;min-height:36px;font:inherit;font-size:22px;font-weight:750;cursor:pointer}
 .ft-party-label{font-size:12px;color:var(--t2)}
 .ft-rel-pill{font-size:10px;color:var(--ink);background:var(--sunk);border:1px solid var(--edgeIn);padding:2px 8px;border-radius:10px}
 .ft-event-numbers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-block:16px}
@@ -152,7 +132,6 @@
 .ft-stake-track{height:6px;background:var(--rule2);border-radius:6px;overflow:hidden;direction:ltr;margin-block:10px}
 .ft-stake-track i{display:block;height:100%}
 .ft-source{display:inline-flex;align-items:center;font-size:11.5px;color:var(--ink);font-weight:600;text-underline-offset:4px;margin-top:auto;padding-top:10px}
-
 .ft-pagination{display:flex;align-items:center;justify-content:center;gap:18px;font-size:13px;margin:24px 0}
 .ft-pagination button:disabled{opacity:.45;cursor:default}
 .ft-empty{padding:32px;border:1px dashed var(--edge);border-radius:24px;color:var(--t2);font-size:14px;text-align:center}
@@ -160,9 +139,7 @@
 .ft-table{width:100%;border-collapse:collapse;font-size:12px;text-align:start}
 .ft-table th,.ft-table td{padding:12px;border-bottom:1px solid var(--rule2);text-align:start;white-space:nowrap}
 .ft-table thead{position:sticky;top:0;background:var(--surface);color:var(--ink)}
-
 .ft-screen :focus-visible,.ft-portals :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-
 @media(max-width:768px){
   .ft-portals,.ft-charts,.ft-event-grid,.ft-market-ribbon{grid-template-columns:1fr}
   .ft-portals{gap:14px}
@@ -178,23 +155,6 @@
   .ft-portal,.ft-portal:hover{transform:none;transition:none}
   .ft-arrow-pill{transition:none}
 }
-
-
-
-/* ══════════════════════════════════════════════════════════════
-   INTERACTIVE VISUAL DRAWINGS (SECTORS & OWNERSHIP WEB)
-   ══════════════════════════════════════════════════════════════ */
-.ft-drawing-container {
-  background: var(--surface);
-  border: 1px solid var(--edge);
-  border-radius: 26px;
-  padding: clamp(20px, 3vw, 32px);
-  margin-bottom: 28px;
-  box-shadow: 0 12px 36px -16px rgba(0, 0, 0, 0.07);
-  overflow: hidden;
-  position: relative;
-}
-
 .ft-drawing-header {
   display: flex;
   justify-content: space-between;
@@ -203,14 +163,12 @@
   flex-wrap: wrap;
   margin-bottom: 18px;
 }
-
 .ft-drawing-header h3 {
   margin: 6px 0 4px;
   font-size: clamp(19px, 2.2vw, 24px);
   letter-spacing: -0.025em;
   font-weight: 750;
 }
-
 .ft-drawing-header p {
   margin: 0;
   font-size: 12.5px;
@@ -218,7 +176,6 @@
   max-width: 680px;
   line-height: 1.55;
 }
-
 .ft-drawing-tag {
   display: inline-block;
   font-size: 9.5px;
@@ -230,7 +187,6 @@
   padding: 3px 8px;
   border-radius: 8px;
 }
-
 .ft-drawing-legend {
   display: flex;
   align-items: center;
@@ -242,15 +198,13 @@
   border: 1px solid var(--edgeIn);
   font-size: 11px;
 }
-
-.ft-flow-svg, .ft-web-svg, .ft-trajectory-svg {
+.ft-flow-svg, .ft-trajectory-svg {
   width: 100%;
   height: auto;
   display: block;
   margin: 12px 0;
   overflow: visible;
 }
-
 /* Sized Sector Hubs in SVG */
 .ft-hub-node {
   transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.2s ease;
@@ -262,7 +216,6 @@
 .ft-hub-selected circle {
   stroke-width: 2.5px;
 }
-
 /* Focused Sector Capsule */
 .ft-focus-capsule {
   margin-top: 20px;
@@ -300,7 +253,6 @@
   padding: 5px 12px;
   border-radius: 12px;
 }
-
 .ft-satellites-title {
   font-size: 11px;
   color: var(--t2);
@@ -355,30 +307,6 @@
   font-weight: 700;
   margin-top: 2px;
 }
-
-/* Bipartite Web Inspector */
-.ft-web-container {
-  background: radial-gradient(90% 120% at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%), var(--surface);
-}
-.ft-archetype-node rect {
-  transition: stroke 0.2s, fill 0.2s;
-}
-.ft-company-node {
-  transition: transform 0.18s ease;
-}
-.ft-company-node:hover {
-  transform: translate(720px, calc(var(--y, 0px) - 2px));
-}
-.ft-web-splines path:hover {
-  opacity: 1 !important;
-  stroke-width: 6px !important;
-}
-
-.ft-web-inspector {
-  margin-top: 18px;
-  border-top: 1px solid var(--edgeIn);
-  padding-top: 18px;
-}
 .ft-inspector-hero {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
@@ -427,7 +355,6 @@
   grid-template-columns: 1fr;
   gap: 12px;
 }
-
 /* Trajectory Drawing */
 .ft-trajectory-container {
   margin-bottom: 24px;
@@ -441,7 +368,6 @@
   color: var(--t2);
   margin-top: 8px;
 }
-
 /* Home Mini Previews */
 .ft-mini-drawing {
   margin-bottom: 10px;
@@ -458,7 +384,6 @@
   height: 64px;
   display: block;
 }
-
 @media (max-width: 768px) {
   .ft-portals {
     grid-template-columns: 1fr;
@@ -470,8 +395,6 @@
     flex-direction: column;
   }
 }
-
-
 /* Regulatory Notice Filing Card */
 .ft-event-notice {
   background: var(--sunk);
@@ -548,20 +471,10 @@
   color: #1b1917;
   border-color: var(--accent);
 }
-
-.ft-archetype-node, .ft-company-node {
-  cursor: pointer;
-  transition: transform 0.18s ease;
-}
-.ft-archetype-node:hover rect, .ft-company-node:hover rect {
-  stroke: var(--accent) !important;
-  stroke-width: 1.8px !important;
-}
 .ft-node-selected rect {
   stroke: var(--ink) !important;
   stroke-width: 2px !important;
 }
-
 /* ── Named people, and the journey of a stake ─────────────────────────────────
    A row is read left-to-right as a sentence: who, where, from what to what,
    and how many times. The percentages sit in their own column so a reader
@@ -610,7 +523,6 @@
 .ft-person-count { display: flex; gap: 6px; font-size: 10.5px; font-style: normal; }
 .ft-tick-buy { color: var(--up); font-style: normal; }
 .ft-tick-sell { color: var(--down); font-style: normal; }
-
 @media (max-width: 768px) {
   /* Four columns cannot hold an Arabic name, a ticker and two percentages at
      390px. The name takes its own line and the numbers share the next one. */

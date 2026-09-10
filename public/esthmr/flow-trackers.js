@@ -438,269 +438,6 @@ function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
 // ══════════════════════════════════════════════════════════════
 // DRAWING: BIPARTITE RELATIONAL CONNECTION WEB (INTERACTIVE)
 // ══════════════════════════════════════════════════════════════
-function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectTicker, ar, t) {
-  if (!graph || !graph.links || !graph.links.length) return null;
-
-  const allLinks = graph.links;
-  const activeTicker = selectedTicker || allLinks[0]?.target || '';
-
-  // Order links so that active ticker connections are prioritized
-  const activeLinks = allLinks.filter(l => l.target === activeTicker);
-  const otherLinks = allLinks.filter(l => l.target !== activeTicker);
-  const prioritizedLinks = [...activeLinks, ...otherLinks];
-
-  // Pick top distinct companies (up to 8)
-  const displayTickers = [];
-  if (activeTicker) displayTickers.push(activeTicker);
-  for (const l of prioritizedLinks) {
-    if (!displayTickers.includes(l.target) && displayTickers.length < 8) {
-      displayTickers.push(l.target);
-    }
-  }
-
-  // Pick top distinct entities (up to 8)
-  const displayEntityIds = [];
-  for (const l of prioritizedLinks) {
-    if (displayTickers.includes(l.target) && !displayEntityIds.includes(l.source) && displayEntityIds.length < 8) {
-      displayEntityIds.push(l.source);
-    }
-  }
-  for (const l of prioritizedLinks) {
-    if (!displayEntityIds.includes(l.source) && displayEntityIds.length < 8) {
-      displayEntityIds.push(l.source);
-    }
-  }
-
-  // Build entity lookup map
-  const entityMap = {};
-  (graph.entities || []).forEach(e => { entityMap[e.id] = e; });
-  allLinks.forEach(l => {
-    if (!entityMap[l.source]) {
-      entityMap[l.source] = {
-        id: l.source,
-        label: l.sourceLabel || l.source,
-        labelAr: l.sourceLabelAr || l.source,
-        ticker: l.target
-      };
-    }
-  });
-
-  // Calculate Y anchors
-  const entCount = displayEntityIds.length;
-  const entSpacing = entCount > 1 ? (350 / (entCount - 1)) : 0;
-  const entityY = {};
-  displayEntityIds.forEach((eid, idx) => {
-    entityY[eid] = entCount > 1 ? 45 + idx * entSpacing : 220;
-  });
-
-  const compCount = displayTickers.length;
-  const compSpacing = compCount > 1 ? (350 / (compCount - 1)) : 0;
-  const companyY = {};
-  displayTickers.forEach((tck, idx) => {
-    companyY[tck] = compCount > 1 ? 45 + idx * compSpacing : 220;
-  });
-
-  const heroLink = activeLinks[0] || allLinks.find(l => l.target === activeTicker) || allLinks[0] || {};
-  const activeProf = profiles[activeTicker] || {};
-
-  return h('div', { className: 'ft-drawing-container ft-web-container' },
-    h('div', { className: 'ft-drawing-header' },
-      h('div', null,
-        h('span', { className: 'ft-drawing-tag' }, t('BIPARTITE RELATIONAL WEB', 'شبكة العلاقات الثنائية')),
-        h('h3', null, t('Direct Insider Connections & Stake Weights', 'خريطة صفقات الداخليين وأوزان الحصص')),
-        h('p', null, t('Bezier splines draw the exact connection between Named Insider Entities and Listed Companies. Spline width indicates % Stake of Company (Hero Metric). Color indicates Accumulation (+) vs Divestment (−).',
-          'الخطوط المنحنية ترسم الصلة المباشرة بين الكيانات المتعاملة والشركات المدرجة. سمك الخط يوضح نسبة الملكية في الشركة. اللون يعبر عن الشراء والاستحواذ (+) مقابل البيع والتخارج (−).'))
-      ),
-      h('div', { className: 'ft-drawing-legend' },
-        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--up)' } }), t('Accumulation (Bought)', 'شراء واستحواذ')),
-        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--down)' } }), t('Divestment (Sold)', 'بيع وتخارج')),
-        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: '#a855f7' } }), t('Treasury Action', 'عمليات خزينة'))
-      )
-    ),
-    h('svg', {
-      viewBox: '0 0 960 440',
-      className: 'ft-web-svg',
-      role: 'img',
-      'aria-label': t('Insider Relational Connection Web', 'شبكة علاقات الداخليين')
-    },
-      h('defs', null,
-        h('linearGradient', { id: 'splineBuy', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: 'var(--accent)', stopOpacity: 0.75 }),
-          h('stop', { offset: '100%', stopColor: 'var(--up)', stopOpacity: 0.95 })
-        ),
-        h('linearGradient', { id: 'splineSell', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: 'var(--t2)', stopOpacity: 0.65 }),
-          h('stop', { offset: '100%', stopColor: 'var(--down)', stopOpacity: 0.95 })
-        ),
-        h('linearGradient', { id: 'splineTreasury', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
-          h('stop', { offset: '0%', stopColor: '#c084fc', stopOpacity: 0.7 }),
-          h('stop', { offset: '100%', stopColor: '#9333ea', stopOpacity: 0.95 })
-        )
-      ),
-      // Draw Bezier Connection Splines
-      h('g', { className: 'ft-web-splines' },
-        allLinks.filter(l => entityY[l.source] !== undefined && companyY[l.target] !== undefined).map((link, idx) => {
-          const y1 = entityY[link.source];
-          const y2 = companyY[link.target];
-          const isSelected = link.target === activeTicker;
-          const d = `M 264 ${y1.toFixed(1)} C 440 ${y1.toFixed(1)}, 520 ${y2.toFixed(1)}, 696 ${y2.toFixed(1)}`;
-          const strokeWidth = isSelected
-            ? Math.max(3.5, Math.min(13, (link.grossStakePercent || 1) * 1.5))
-            : Math.max(1.4, Math.min(6, (link.grossStakePercent || 1) * 0.7));
-          const strokeGrad = link.action?.startsWith('treasury')
-            ? 'url(#splineTreasury)'
-            : (link.action === 'bought' ? 'url(#splineBuy)' : 'url(#splineSell)');
-
-          return h('path', {
-            key: `spline-${idx}`,
-            d,
-            fill: 'none',
-            stroke: strokeGrad,
-            strokeWidth,
-            strokeLinecap: 'round',
-            opacity: isSelected ? 1 : 0.22,
-            style: { cursor: 'pointer', transition: 'stroke-width .2s, opacity .2s' },
-            onClick: () => onSelectTicker(link.target)
-          });
-        })
-      ),
-      // Left Rail: Actual Named Entities
-      h('g', { className: 'ft-web-archetypes' },
-        displayEntityIds.map(eid => {
-          const ent = entityMap[eid] || { id: eid, label: eid, labelAr: eid };
-          const cy = entityY[eid];
-          const isEntActive = activeLinks.some(l => l.source === eid);
-          const rawLabel = (ar ? (ent.labelAr || ent.label) : (ent.label || ent.labelAr)) || eid;
-          const label = rawLabel.length > 27 ? rawLabel.slice(0, 25) + '…' : rawLabel;
-          const isTreasury = eid.startsWith('treasury') || eid.includes('Treasury');
-          const isMajor = eid.startsWith('major') || eid.includes('Major');
-          const dotColor = isTreasury ? '#a855f7' : (isMajor ? 'var(--accent)' : (isEntActive ? 'var(--up)' : 'var(--t2)'));
-
-          return h('g', {
-            key: eid,
-            className: `ft-archetype-node ${isEntActive ? 'ft-node-selected' : ''}`,
-            transform: `translate(24, ${(cy - 20).toFixed(1)})`,
-            onClick: () => ent.ticker && onSelectTicker(ent.ticker),
-            style: { cursor: 'pointer' }
-          },
-            h('title', null, rawLabel),
-            h('rect', {
-              width: 240,
-              height: 40,
-              rx: 10,
-              fill: 'var(--surface)',
-              stroke: isEntActive ? 'var(--accent)' : 'var(--edge)',
-              strokeWidth: isEntActive ? 2 : 1
-            }),
-            h('circle', { cx: 16, cy: 20, r: 5, fill: dotColor }),
-            h('text', {
-              x: 28,
-              y: 24,
-              fontSize: 10.5,
-              fontWeight: 650,
-              fill: 'var(--ink)',
-              // `direction: ltr` is doing real work here, not tidying.
-              // SVG text takes its base direction from the document, and this
-              // one is `dir=rtl`, so the default `text-anchor: start` puts the
-              // RIGHT edge of the run at x and grows it leftwards: every entity
-              // label began at x=28 and ran out past x=0, off the left edge of
-              // the panel. Measured -3, 0, -3, -11, -7 before this line.
-              // The Arabic still shapes and orders right-to-left inside the
-              // run; what changes is that x is now its left edge, so it grows
-              // into the 240px box instead of out of it.
-              direction: 'ltr',
-              textAnchor: 'start'
-            }, label)
-          );
-        })
-      ),
-      // Right Rail: Listed Companies
-      h('g', { className: 'ft-web-companies' },
-        displayTickers.map(tck => {
-          const cy = companyY[tck];
-          const isSelected = tck === activeTicker;
-          const prof = profiles[tck] || {};
-          const rawName = ar ? (prof.name?.ar || tck) : (prof.name?.en || tck);
-          const cName = rawName.length > 20 ? rawName.slice(0, 18) + '…' : rawName;
-          const linkForTck = allLinks.find(l => l.target === tck);
-          const stakeVal = linkForTck?.stakePercent;
-          const stakeStr = finite(stakeVal) ? `${stakeVal > 0 ? '+' : ''}${stakeVal.toFixed(2)}%` : '';
-
-          return h('g', {
-            key: tck,
-            className: `ft-company-node ${isSelected ? 'ft-node-selected' : ''}`,
-            transform: `translate(696, ${(cy - 20).toFixed(1)})`,
-            onClick: () => onSelectTicker(tck),
-            style: { cursor: 'pointer' }
-          },
-            h('rect', {
-              width: 240,
-              height: 40,
-              rx: 10,
-              fill: isSelected ? 'var(--ink)' : 'var(--surface)',
-              stroke: isSelected ? 'var(--ink)' : 'var(--edge)',
-              strokeWidth: isSelected ? 2 : 1
-            }),
-            // Both of these are placed from the left inside a 240px box, so
-            // both need an explicit direction for the same reason the entity
-            // label above does: under the document's `dir=rtl` the company
-            // name grew leftwards out of x=64 and collided with the ticker
-            // sitting at x=14.
-            h('text', {
-              x: 14,
-              y: 25,
-              fontSize: 12.5,
-              fontWeight: 800,
-              fill: isSelected ? 'var(--bg)' : 'var(--ink)',
-              direction: 'ltr',
-              textAnchor: 'start'
-            }, tck),
-            h('text', {
-              x: 64,
-              y: 24,
-              fontSize: 10,
-              fill: isSelected ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'var(--t2)',
-              direction: 'ltr',
-              textAnchor: 'start'
-            }, cName),
-            stakeStr ? h('text', {
-              x: 228,
-              y: 24,
-              textAnchor: 'end',
-              fontSize: 10,
-              fontWeight: 700,
-              fill: isSelected ? 'var(--bg)' : tone(stakeVal)
-            }, stakeStr) : null
-          );
-        })
-      )
-    ),
-    // Hero Connection Inspector
-    h('div', { className: 'ft-web-inspector' },
-      h('div', { className: 'ft-inspector-hero' },
-        h('div', { className: 'ft-hero-metric-box' },
-          h('span', { className: 'ft-hero-eyebrow' }, t('HERO METRIC: DISCLOSED STAKE % OF COMPANY', 'المقياس الحقيقي: نسبة الحصة في الشركة')),
-          h('div', { className: 'ft-hero-number-row' },
-            h('strong', {
-              className: 'ft-hero-number',
-              style: { color: tone(heroLink.stakePercent || 0) },
-              dir: 'ltr'
-            }, finite(heroLink.stakePercent) ? `${heroLink.stakePercent > 0 ? '+' : ''}${heroLink.stakePercent.toFixed(2)}%` : (heroLink.actionLabel || '—')),
-            h('span', { className: 'ft-hero-scope' }, t('of total share capital', 'من إجمالي رأسمال الشركة'))
-          ),
-          h('small', { className: 'ft-hero-note' }, t('Percentage in the company is what dictates control and economic impact, far exceeding raw share volume.',
-            'نسبة الملكية هي التي تحدد السيطرة والأثر الاقتصادي الحقيقي، وهي أهم بكثير من مجرد عدد الأسهم المجرد.'))
-        ),
-        h('div', { className: 'ft-hero-side-metrics' },
-          metric(t('Named Entity / Actor', 'الجهة المتعاملة / الداخلي'), ar ? (heroLink.sourceLabelAr || heroLink.sourceLabel || '—') : (heroLink.sourceLabel || heroLink.sourceLabelAr || '—')),
-          metric(t('Target Listed Company', 'الشركة المستهدفة'), `${activeTicker} · ` + (ar ? (activeProf.name?.ar || activeTicker) : (activeProf.name?.en || activeTicker))),
-          metric(t('Marked Market Value', 'القيمة السوقية المنفذة بسعر اليوم'), finite(heroLink.markedValue) ? compact(heroLink.markedValue) + ' EGP' : '—', t('At latest published share price', 'بسعر السهم المنشور الأخير')),
-          metric(t('Disclosed Shares', 'الأسهم المفصح عنها'), finite(heroLink.netShares) ? compact(Math.abs(heroLink.netShares)) + ' ' + t('shares', 'سهم') : (heroLink.actionLabel || t('Regulatory notice', 'إخطار رسمي')), heroLink.latestDate || '')
-        )
-      )
-    )
-  );
-}
 
 function renderStakeProgressionCurve(stakeHistory, pricePoints, ticker, currency, ar, t) {
   if (!stakeHistory || stakeHistory.length < 1) return null;
@@ -920,7 +657,11 @@ function renderOwnershipTimeline(doc, ar, t) {
       h('span', { className: 'ft-range-badge', dir: 'ltr' },
         `${points[0].date} → ${points[points.length - 1].date}`)
     ),
-    h('div', { className: 'ft-metric-row' },
+    // `.ft-metrics`, the class the rest of this file uses — a four-column grid
+    // that already collapses to two on a phone. The first version invented
+    // `.ft-metric-row`, which no stylesheet has ever heard of, so the three
+    // figures stacked full-width at 27px each and pushed the chart off-screen.
+    h('div', { className: 'ft-metrics' },
       metric(t('Stake taken up', 'حصص جرى بناؤها'),
              '+' + totalAdded.toFixed(2) + ' pp',
              t('summed across companies', 'مجمّعة عبر شركات مختلفة'), 'var(--up)'),
@@ -1470,15 +1211,12 @@ export function flowTrackers(component, data, ar) {
       renderNamedPeople(people, ar, t,
         tk => component.setState({ ownershipTicker: tk, ownershipInvestor: '', ownershipPage: 0 })),
 
-      // Bipartite Relational Connection Web (Interactive Drawing)
-      d.ownershipGraph ? renderOwnershipConnectionWeb(
-        d.ownershipGraph,
-        profiles,
-        ticker,
-        selectedTck => component.setState({ ownershipTicker: selectedTck, ownershipInvestor: '', ownershipPage: 0 }),
-        ar,
-        t
-      ) : null,
+      // The bipartite connection web stood here and is gone. It drew the same
+      // three facts the list above states outright — who, which company, what
+      // the stake did — as curved splines between two rails of boxes, and a
+      // spline cannot say "2.61% to 7.96%". Its labels also grew out of the
+      // panel in RTL, which is what sent me to read it; fixing them made it
+      // legible without making it useful.
       // Temporal Stake % Progression Curve vs Share Price (Interactive Drawing)
       ticker && stakeHistory.length > 0 ? renderStakeProgressionCurve(stakeHistory, pricePoints, ticker, currency, ar, t) : null,
       h('div', { className: 'ft-toolbar' },
