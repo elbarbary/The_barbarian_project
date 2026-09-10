@@ -639,6 +639,10 @@
     "meaning": "Investment banks adjust index benchmark levels based on updated aggregate corporate earnings models and macroeconomic valuation inputs. This revision updates institutional reference metrics utilized for global equity asset allocation.",
     "meaning_ar": "تُعدّل بنوك الاستثمار تقديرات المؤشرات المعيارية بناءً على تحديث نماذج أرباح الشركات المجمعة ومدخلات التقييم الاقتصادي، مما يحدّث المقاييس المرجعية المستخدمة في توزيع الأصول على الأسهم العالمية."
   },
+  "اتفاق لفض التشابكات الماليه وتسويه المديونيه بين القابضه للقطن والهييه القوميه للتامين الاجتماعي": {
+    "meaning": "This agreement settles cross-institutional liabilities between the two state entities, offsetting accumulated historical debt against assets or scheduled cash transfers on their balance sheets.",
+    "meaning_ar": "يقوم هذا الاتفاق بتسوية الالتزامات المالية المتبادلة بين الكيانين الحكوميين عبر مقاصة المديونيات التاريخية المتراكمة مقابل أصول أو تحويلات نقدية مجدولة في ميزانيات الطرفين."
+  },
   "اتفاقيه ضمان بين صندوق القروض الايطالي": {
     "meaning": "A guarantee agreement with the Italian loan fund provides credit enhancement for funded projects by assuming a portion of the default risk, thereby structuring cross-border financing facilities.",
     "meaning_ar": "توفر اتفاقية الضمان مع صندوق القروض الإيطالي تعزيزاً ائتمانياً للمشروعات الممولة من خلال تحمل جزء من مخاطر التعثر، مما يحدد هيكل التسهيلات التمويلية العابرة للحدود."
@@ -1379,6 +1383,10 @@
     "meaning": "Extending the regularization period maintains the operational window for foreign residents to settle statutory administrative and residency fees in foreign currency via the official banking system, integrating informal resident activity into the formal legal framework.",
     "meaning_ar": "يُبقي تمديد مهلة توفيق الأوضاع على المسار الإجرائي لسداد رسوم الإقامة والغرامات الإدارية بالعملة الأجنبية عبر القطاع المصرفي الرسمي، مما يدرج المعاملات والعمالة غير المسجلة ضمن الأطر التنظيمية والقانونية."
   },
+  "الحكومه: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
+    "meaning": "This clarification defines the governance framework by separating non-binding technical advisory roles from executive policymaking positions within the state administration.",
+    "meaning_ar": "يحدد هذا التوضيح إطار الحوكمة الإدارية عبر الفصل بين المهام الفنية الاستشارية غير الملزمة والمناصب التنفيذية لصنع القرار داخل الجهاز الحكومي."
+  },
   "الحكومه: الموافقه علي سلامه الدراسه المحدثه للقيمه العادله لاسهم بنك القاهره": {
     "meaning": "Official validation of Banque du Caire's updated valuation report satisfies the regulatory precondition established by Egyptian capital market authorities for proceeding with public asset transactions.",
     "meaning_ar": "يُعد اعتماد التقييم المحدث لبنك القاهرة استيفاءً للمتطلبات الإجرائية والتنظيمية التي تحددها هيئات سوق المال المصرية لتنفيذ طروحات الأصول العامة."
@@ -2014,6 +2022,10 @@
   "بكين تضخ 57 مليار يوان في 3 شركات تامين": {
     "meaning": "A direct state capital injection increases the equity base and statutory solvency ratios on the balance sheets of the recipient insurance companies.",
     "meaning_ar": "ترفع عمليات الضخ المالي الحكومي المباشر قاعدة حقوق الملكية ومعدلات الملاءة المالية الإلزامية في الميزانيات العمومية لشركات التأمين المعنية."
+  },
+  "بكين تندد بقانون فرنسي يقمع شركات التجاره الالكترونيه الصينيه": {
+    "meaning": "Regulatory measures of this nature introduce non-tariff barriers, additional compliance costs, or import restrictions on cross-border e-commerce platforms, altering operational frameworks and competitive dynamics between domestic and foreign vendors within the target market.",
+    "meaning_ar": "تفرض هذه الإجراءات التنظيمية حواجز غير جمركية وتكاليف امتثال إضافية أو قيوداً على منصات التجارة الإلكترونية العابرة للحدود، مما يغير أطر العمل التشغيلية والمنافسة السعرية بين الموردين المحليين والأجانب داخل السوق المستهدف."
   },
   "بمشاركه قيادات مجتمع الاعمال.. انطلاق موتمر \"موريشيوس: المركز المالي الدولي\" بالقاهره": {
     "meaning": "The conference serves as a bilateral platform for cross-border financial structuring, providing Egyptian businesses with operational frameworks for corporate holding structures, cross-border tax treaties, and international investment routing through Mauritius.",
