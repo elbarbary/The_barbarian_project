@@ -7,12 +7,12 @@
  "sector": "Contracting & Construction Engineering",
  "sector_ar": "مقاولات و إنشاءات هندسية",
  "market": {
-  "last_close": 0.849,
+  "last_close": 0.86,
   "date": "2026-09-10",
   "open": 0.851,
-  "high": 0.858,
+  "high": 0.877,
   "low": 0.848,
-  "volume": 456114
+  "volume": 4816323
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 2164070000,
   "free_float": 0.324044,
   "float_shares": 701253899.08,
-  "perf_1w": 0.2361275088547818,
-  "perf_1m": -29.249999999999996,
-  "perf_3m": 107.07317073170732,
-  "avg_volume_30d": 46006703.033333324,
-  "relative_volume_10d": 0.008346436815572586,
+  "perf_1w": 1.5348288075560816,
+  "perf_1m": -28.333333333333336,
+  "perf_3m": 109.75609756097562,
+  "avg_volume_30d": 46152043.33333333,
+  "relative_volume_10d": 0.08813396563773311,
   "median_volume_20d": 42952006.5,
   "rv20": 0.22681617912308707,
   "normal_value_30d": 36788889.1155,
   "five_session_change": 0.47225501770955525,
   "history_bars": 120,
-  "market_cap": 1850279850.0,
+  "market_cap": 1863264270.0,
   "market_cap_source": "EGX",
-  "trades": 45,
-  "turnover": 688747
+  "trades": 175,
+  "turnover": 4586246
  },
  "financials": {
   "annual": [

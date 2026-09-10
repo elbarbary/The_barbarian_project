@@ -372,7 +372,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/AJWA/profile",
   "record": {
-   "filings": 684,
+   "filings": 685,
    "first_filing": "2010-01-13",
    "trading_suspensions": 43,
    "trading_resumptions": 41,
@@ -684,7 +684,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
   "record": {
-   "filings": 61,
+   "filings": 62,
    "first_filing": "2022-03-08",
    "trading_suspensions": 0,
    "trading_resumptions": 1,
@@ -1738,7 +1738,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EDFM/profile",
   "record": {
-   "filings": 685,
+   "filings": 686,
    "first_filing": "2010-02-14",
    "trading_suspensions": 15,
    "trading_resumptions": 14,
@@ -2691,12 +2691,12 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GBCO/profile",
   "record": {
-   "filings": 128,
+   "filings": 129,
    "first_filing": "2023-06-21",
    "trading_suspensions": 0,
    "trading_resumptions": 0,
    "capital_increases": 0,
-   "general_assemblies": 7,
+   "general_assemblies": 8,
    "periods_reported": 26,
    "loss_making_periods": 2
   },
@@ -2867,7 +2867,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/GRCA/profile",
   "record": {
-   "filings": 532,
+   "filings": 533,
    "first_filing": "2010-01-31",
    "trading_suspensions": 3,
    "trading_resumptions": 3,
@@ -3846,7 +3846,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/MBSC/profile",
   "record": {
-   "filings": 495,
+   "filings": 496,
    "first_filing": "2010-03-18",
    "trading_suspensions": 7,
    "trading_resumptions": 7,
@@ -5252,7 +5252,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/RAKT/profile",
   "record": {
-   "filings": 731,
+   "filings": 732,
    "first_filing": "2010-01-10",
    "trading_suspensions": 12,
    "trading_resumptions": 13,
@@ -5881,14 +5881,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/SPMD/profile",
   "record": {
-   "filings": 554,
+   "filings": 556,
    "first_filing": "2019-03-31",
    "trading_suspensions": 14,
    "trading_resumptions": 13,
    "capital_increases": 3,
    "general_assemblies": 29,
-   "periods_reported": 28,
-   "loss_making_periods": 15
+   "periods_reported": 29,
+   "loss_making_periods": 16
   },
   "generated": "2026-08-25"
  },
