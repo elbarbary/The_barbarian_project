@@ -114,6 +114,25 @@
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=292980",
    "ticker": "AMES"
   },
+  "293018": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-08-13",
+   "isin": "EGS65211C012",
+   "months": 6,
+   "name_ar": "المجموعه المصريه العقاريه",
+   "net_profit_egp": 2017145.0,
+   "news_id": "293018",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 784721.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293018",
+   "ticker": "AREH"
+  },
   "293025": {
    "basis": null,
    "currency": "جنيه مصرى",
@@ -825,6 +844,7 @@
   "292928": "2026-08-13",
   "292930": "2026-08-13",
   "292980": "2026-08-13",
+  "293018": "2026-08-13",
   "293025": "2026-08-13",
   "293122": "2026-08-13",
   "293132": "2026-08-13",
