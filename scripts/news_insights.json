@@ -1727,6 +1727,10 @@
     "meaning": "The regulatory sandbox operates as a controlled testing environment where financial authorities assess the compliance and operational models of 49 financial technology applications under existing regulatory frameworks.",
     "meaning_ar": "يعمل المختبر التنظيمي كبيئة اختبار خاضعة للرقابة تقوم من خلالها الهيئات التنظيمية بفحص نماذج التشغيل ومدى التزام 49 مشروعاً للتكنولوجيا المالية بالمعايير والأطر الرقابية السارية."
   },
+  "المركزي الاوروبي يرفع اسعار الفايده 25 نقطه اساس الي 2.5%": {
+    "meaning": "A 25-basis-point rate hike by the European Central Bank raises borrowing costs for euro-denominated debt and directly impacts foreign exchange pricing against the Egyptian pound for euro-linked trade and financing obligations.",
+    "meaning_ar": "يؤدي رفع البنك المركزي الأوروبي لأسعار الفائدة بمقدار 25 نقطة أساس إلى زيادة تكاليف الاقتراض للديون المقومة باليورو، ويؤثر مباشرة على تسعير الصرف مقابل الجنيه المصري في المعاملات التجارية والالتزامات التمويلية المرتبطة بالعملة الأوروبية."
+  },
   "المركزي التركي يبقي اسعار الفايده دون تغيير عند 37%": {
     "meaning": "Maintaining the benchmark interest rate at 37% keeps borrowing costs, debt service terms, and banking system liquidity conditions unchanged for Turkish commercial lenders and corporate balance sheets.",
     "meaning_ar": "يُبقي تثبيت سعر الفائدة الأساسي عند 37% على تكاليف الاقتراض وشروط خدمة الدين ومستويات السيولة في القطاع المصرفي التركي دون تغيير."
@@ -2098,6 +2102,10 @@
   "تباين في اداء شركات المطاحن خلال العام المالي 2025/2026": {
     "meaning": "Performance divergence across milling companies reflects operational differences in procurement costs, production capacities, and the breakdown between subsidized and free-market flour output across individual firms.",
     "meaning_ar": "يعكس تباين أداء شركات المطاحن اختلافات تشغيلية في تكاليف شراء القمح، والطاقات الإنتاجية، ونسب توزيع الإنتاج بين الدقيق المدعم والدقيق الحر لدى كل شركة."
+  },
+  "تباين موشرات البورصه المصريه بختام التعاملات .. والثلاثيني ينخفض وحيدا": {
+    "meaning": "The trading session concludes with a performance divergence where net outflows concentrate in large-cap equities tracked by EGX30, while small- and medium-cap constituents experience net positive trading balances.",
+    "meaning_ar": "تُظهر جلسة التداول تبايناً في حركة السيولة، حيث يتركز صافي التخارج في أسهم الشركات القيادية المكونة لمؤشر إيجي إكس 30، في حين تسجل أسهم الشركات الصغيرة والمتوسطة صافي تدفقات إيجابية."
   },
   "تباين موشرات البورصه بمستهل التعاملات…والثلاثيني ينخفض 0.03%": {
     "meaning": "Mixed performance across market indices indicates a divergence in capital allocation, where slight selling pressure in blue-chip constituent stocks of the EGX30 coexists with neutral or positive order flow in small- and mid-cap equities.",
@@ -3504,6 +3512,10 @@
   "مصادر: ارجاء مفاجي لمعرض سيتي سكيب مصر 2026 بسبب انخفاض المشاركه": {
     "meaning": "Postponing a major real estate exhibition suspends a centralized direct sales and marketing platform that brings developers and property buyers together for project launches.",
     "meaning_ar": "يؤدي تأجيل المعرض العقاري إلى تعليق منصة تسويق وبيع مباشر مركزية تجمع بين المطورين العقاريين والمشترين لطرح المشروعات."
+  },
+  "مصافي الصين تتنافس علي خام اسبو الروسي": {
+    "meaning": "Chinese refineries are competing for Russian ESPO crude shipments, a mechanism in which buyers bid for discounted, geographically proximate pipeline and seaborne feedstocks to lower direct refining input costs.",
+    "meaning_ar": "تتنافس مصافي التكرير الصينية على شحنات خام إسبو الروسي، وهي آلية يقدم فيها المشترون عروضاً لشراء لقائم نفطية قريبة جغرافياً ومخفضة السعر لخفض تكاليف مدخلات التكرير المباشرة."
   },
   "مصانع الصلصه تعاني من شحيه المعروض من الطماطم": {
     "meaning": "A shortage in raw tomato supplies directly constrains input availability for paste manufacturing facilities, operating utilization rates, and raw material procurement costs across the food processing sector.",
