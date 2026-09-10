@@ -1359,6 +1359,10 @@
     "meaning": "Extending the Digital Egypt project protocol establishes a continuous three-year operational framework for contracted technology firms to supply digital transformation and IT infrastructure services to government entities.",
     "meaning_ar": "يضع تجديد بروتوكول مشروعات مصر الرقمية إطاراً تشغيلياً مستمراً لمدة ثلاث سنوات يتيح لشركات التكنولوجيا المتعاقدة تقديم خدمات التحول الرقمي والبنية التحتية لتكنولوجيا المعلومات للجهات الحكومية."
   },
+  "الحكومه توافق علي سلامه منهجيه الدراسه المحدثه للقيمه العادله لاسهم بنك القاهره": {
+    "meaning": "Government validation of the valuation methodology establishes the regulatory baseline pricing required for state asset offering procedures under the privatization program.",
+    "meaning_ar": "اعتماد الحكومة لمنهجية التقييم يحدد الأساس السعري التنظيمي المطلوب لاستكمال إجراءات طرح الأصول المملوكة للدولة ضمن برنامج الطروحات الحكومية."
+  },
   "الحكومه توافق علي صرف اعانات اجتماعيه الي 304 حالات متضرره من توسعه الطريق الدايري": {
     "meaning": "The government allocates public compensation funds to individuals displaced or affected by national infrastructure expansion projects.",
     "meaning_ar": "تخصص الحكومة مخصصات مالية من الموازنة العامة لتعويض الأفراد المتضررين من نزع الملكية لتنفيذ مشروعات البنية التحتية القومية."
@@ -1966,6 +1970,10 @@
   "بدء حجز 25 الف وحده سكنيه بنظامي «الايجار» و«المنتهي بالتملك» 20 سبتمبر": {
     "meaning": "The state introduces 25,000 public residential units under fixed lease and rent-to-own models, providing long-term occupancy contracts without immediate full capital outlays by tenants.",
     "meaning_ar": "طرح 25 ألف وحدة سكنية حكومية بنظامي الإيجار العادي والإيجار المنتهي بالتملك، وهو ما يتيح عقود إشغال طويلة الأجل دون سداد كامل القيمة الرأسمالية للوحدة مقدماً."
+  },
+  "بروتوكول تعاون بين Cairo ICT 2026 و«فوربس الشرق الاوسط» لرعايه الدوره 30 من المعرض": {
+    "meaning": "This media partnership agreement establishes Forbes Middle East as the official sponsor and promotional partner for the 30th edition of the Cairo ICT exhibition, integrating international publishing and media coverage into the event's marketing operations.",
+    "meaning_ar": "يمثل هذا الاتفاق شراكة إعلامية تصبح بموجبها «فوربس الشرق الأوسط» راعياً رسمياً وشريكاً ترويجياً للدورة الثلاثين لمعرض Cairo ICT، مما يدمج خدمات النشر والتغطية الإعلامية الدولية ضمن العمليات التسويقية للحدث."
   },
   "بروتوكول تعاون بين الرقابه الماليه والبريد المصري لاتاحه خدمه بريدي للمراسلات الرسميه الالكترونيه": {
     "meaning": "The protocol establishes a standardized digital infrastructure between the Financial Regulatory Authority and Egypt Post to automate official regulatory correspondence, thereby lowering operational transaction costs and accelerating communication workflows across the non-banking financial sector.",
@@ -4048,6 +4056,10 @@
   "وزير الطيران: تعزيز التعاون مع دول امريكا اللاتينيه في الذكاء الاصطناعي وبناء القدرات": {
     "meaning": "The aviation sector establishes international technical cooperation frameworks to exchange artificial intelligence technologies and workforce training programs with Latin American counterparts.",
     "meaning_ar": "يُنشئ قطاع الطيران أُطر تعاون فني دولية لتبادل تطبيقات الذكاء الاصطناعي وبرامج التدريب وبناء القدرات المؤسسية مع دول أمريكا اللاتينية."
+  },
+  "وزير العمل ومحافظ بورسعيد يسلمان عددا من عقود العمل للاشخاص ذوي الهمم": {
+    "meaning": "Distributing these employment contracts reflects enterprise compliance with Egypt's statutory 5% quota for hiring persons with disabilities, aligning corporate payrolls with national labor law requirements.",
+    "meaning_ar": "يعكس تسليم عقود العمل هذه استيفاء المنشآت لنسبة الـ 5% المقررة قانوناً لتشغيل ذوي الإعاقة، بما يضمن توافق سجلات التوظيف بالشركات مع متطلبات قانون العمل المصري."
   },
   "وزير العمل يبحث مع محافط بورسعيد ملفات التشغيل والتدريب والسلامه والصحه المهنيه": {
     "meaning": "Government coordination between the Ministry of Labor and regional governorates standardizes vocational training curricula, labor compliance, and occupational safety audits across local industrial and logistical enterprises.",
