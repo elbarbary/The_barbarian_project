@@ -871,6 +871,10 @@
     "meaning": "Global gold prices fluctuate based on macroeconomic indicators such as US inflation data, which determine benchmark interest rate environments, currency valuations, and the holding cost of non-yielding assets.",
     "meaning_ar": "تتذبذب أسعار الذهب العالمية بناءً على مؤشرات الاقتصاد الكلي مثل بيانات التضخم الأمريكية، والتي تحدد أسعار الفائدة المرجعية وقيمة العملة وتكلفة حيازة الأصول غير المدرة للعائد."
   },
+  "اسعار الذهب العالميه ترتفع مع ضعف الدولار وترقب بيانات امريكيه": {
+    "meaning": "Global gold prices trade in an inverse relationship with the US dollar, where a depreciating dollar decreases the acquisition cost of gold for holders of other currencies and influences raw material input costs for domestic jewelers and bullion traders.",
+    "meaning_ar": "تتحرك أسعار الذهب العالمية في علاقة عكسية مع الدولار الأمريكي، حيث يؤدي تراجع العملة الأمريكية إلى انخفاض تكلفة حيازة المعدن لحاملي العملات الأخرى، مما ينعكس على تكاليف المواد الخام لشركات تصنيع وتجارة الذهب في السوق المحلي."
+  },
   "اسعار الذهب العالميه تستقر مع ترقب بيانات التضخم الامريكي": {
     "meaning": "Global gold spot prices correlate with US dollar strength and interest rate expectations, leading market participants to maintain current position sizes ahead of key macroeconomic inflation releases.",
     "meaning_ar": "ترتبط أسعار الذهب الفورية عالمياً بقوة الدولار الأمريكي وتوقعات أسعار الفائدة، مما يدفع المتعاملين إلى الإبقاء على أحجام مراكزهم الحالية قبيل صدور البيانات الاقتصادية الكلية للتضخم."
@@ -966,6 +970,10 @@
   "اسعار اللحوم الجملي والضاني والبقري والمفروم اليوم الجمعه 4-9-2026": {
     "meaning": "Daily tracking of retail meat prices reflects underlying shifts in livestock supply chains, feed costs, and domestic consumer demand patterns affecting the broader food and protein sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار اللحوم بالتجزئة التغيرات في سلاسل إمداد الثروة الحيوانية وتكاليف الأعلاف ومستويات الطلب الاستهلاكي المحلي المؤثرة على قطاع الصناعات الغذائية والبروتينية."
+  },
+  "اسعار اللحوم المشفيه البلديه والمستورده اليوم الخميس 10-9-2026": {
+    "meaning": "Daily price listings for domestic and imported boneless meat reflect prevailing wholesale supply contracts, import parity costs, and local livestock feed expenses across retail distribution channels.",
+    "meaning_ar": "تعكس لوائح الأسعار اليومية للحوم المشفية البلدية والمستوردة تكاليف عقود التوريد بالجملة، وتكلفة الاستيراد الموازية، ومصروفات الأعلاف المحلية عبر قنوات التوزيع بالتجزئة."
   },
   "اسعار اللحوم اليوم الاحد 6-9-2026 بالمنافذ والهيبر ماركت والجزارات": {
     "meaning": "Tracking daily retail meat prices across distribution channels—such as state-affiliated outlets, modern retail chains, and traditional butchers—reflects current pricing differentials shaped by operational overheads, import versus local sourcing costs, and government supply interventions.",
@@ -1391,6 +1399,10 @@
     "meaning": "The Financial Regulatory Authority expands the regulatory framework for integrating digital onboarding, electronic signatures, and automated processes into non-banking financial institutions. This standardizes technological infrastructure requirements across digital lending, insurance, and asset management platforms.",
     "meaning_ar": "توسع الهيئة العامة للرقابة المالية الإطار التنظيمي لتطبيق آليات التعرف الرقمي على العملاء، والتوقيع الإلكتروني، والعمليات المؤتمتة داخل المؤسسات المالية غير المصرفية، مما يحدد المعايير الفنية للبنية التحتية التكنولوجية عبر منصات التمويل والتأمين وإدارة الأصول."
   },
+  "الرقابه الماليه توقف “سيتي ستارز لتداول الاوراق الماليه“ عن مزاوله النشاط لمده 7 ايام": {
+    "meaning": "A regulatory suspension temporarily halts a brokerage firm's operational license to execute trade orders on the exchange, freezing its client-facing dealing activities for the duration of the sanction.",
+    "meaning_ar": "يؤدي الإيقاف الرقابي إلى تجميد رخصة شركة الوساطة في تنفيذ أوامر التداول بالبورصة بشكل مؤقت، مما يوقف أنشطة التعامل وتنفيذ الصفقات للعملاء طوال مدة الجزاء."
+  },
   "الرقابه الماليه وستارت اب ايجيبت تتعاونان لتطوير منصه رقميه لدعم الشركات الناشيه": {
     "meaning": "The Financial Regulatory Authority (FRA) and Startup Egypt establish a shared digital infrastructure that centralizes regulatory compliance, licensing procedures, and operational resources for emerging enterprises.",
     "meaning_ar": "تؤسس الهيئة العامة للرقابة المالية ومؤسسة ستارت أب إيجيبت بنية تحتية رقمية مشتركة لمركزية إجراءات الامتثال التنظيمي والتراخيص والموارد التشغيلية للشركات الناشئة."
@@ -1510,6 +1522,10 @@
   "الصين تتفوق علي امريكا في معدلات استخراج اليورانيوم من البحر": {
     "meaning": "Seawater uranium extraction introduces an unconventional raw material supply source for nuclear fuel cycles, altering global feedstock access and technological distribution between major industrial economies.",
     "meaning_ar": "يمثل استخراج اليورانيوم من مياه البحر مصدراً غير تقليدي لتأمين المواد الخام اللازمة لدورة الوقود النووي، مما يغير آليات توفير الإمدادات والتوزيع التكنولوجي بين الاقتصادات الصناعية الكبرى."
+  },
+  "الصين تستورد مليون طن فول صويا امريكي قبل قمه “ترامب” و”شي”": {
+    "meaning": "Large-scale agricultural commodity procurement across borders functions through bilateral state-level trade channels and bulk maritime cargo shipping, altering port physical supply volumes and seasonal inventory levels between major trading partners.",
+    "meaning_ar": "تتم عمليات شراء السلع الزراعية الضخمة عبر الحدود من خلال قنوات التبادل التجاري الثنائي والشحن البحري للبضائع الصب، مما يغير حجم الإمدادات الفعلية ومستويات المخزون الموسمي لدى الموانئ بين الشركاء التجاريين الرئيسيين."
   },
   "الصين تصدر سندات خزانه خاصه بقيمه 300 مليار يوان لدعم 8 موسسات ماليه": {
     "meaning": "Special sovereign bond issuances inject state-funded equity and liquidity directly into the balance sheets of designated financial institutions, raising their core capital ratios and absorbing debt.",
@@ -1822,6 +1838,10 @@
   "ايرادات مصر للبترول تتجاوز 230 مليار جنيه خلال العام المالي 2025/2026": {
     "meaning": "Crossing the EGP 230 billion revenue threshold reflects the operational scale of Misr Petroleum's fuel distribution volumes and petroleum product sales across the domestic market.",
     "meaning_ar": "يعكس تجاوز الإيرادات حاجز 230 مليار جنيه الحجم التشغيلي لمبيعات شركة مصر للبترول وتوزيعها للوقود والمنتجات البترولية في السوق المحلي."
+  },
+  "ايرادات “تي اس ام سي” ترتفع لمستوي قياسي خلال اغسطس": {
+    "meaning": "Record monthly revenues at TSMC reflect the delivery volumes of semiconductor wafers and billing cycles across advanced chip manufacturing nodes. In the global tech supply chain, foundry top-line figures serve as a direct accounting measure of hardware production runs commissioned by design clients.",
+    "meaning_ar": "تعكس الإيرادات الشهرية القياسية لشركة «تي إس إم سي» أحجام تسليم رقائق أشباه الموصلات ودورات الفوترة عبر خطوط تصنيع الشرائح المتقدمة. وفي سلاسل إمداد التكنولوجيا العالمية، تمثل إيرادات المسابك مقياساً محاسبياً مباشراً لعمليات الإنتاج الفعلي للأجهزة المتعاقد عليها مع شركات التصميم."
   },
   "ايران تعتزم اعلان منطقه محظوره خارج مضيق هرمز خلال ايام": {
     "meaning": "Declaring an exclusion zone in critical maritime corridors alters commercial shipping routes, maritime insurance risk premiums, and transit logistics for global energy and freight flows.",
@@ -3421,6 +3441,10 @@
     "meaning": "Bilateral defense cooperation establishes institutional frameworks for technology transfer, joint manufacturing, and supply chain coordination between state-affiliated defense industrial entities.",
     "meaning_ar": "يضع التعاون في الصناعات الدفاعية أطراً مؤسسية لنقل التكنولوجيا والتصنيع المشترك وتنسيق سلاسل التوريد بين الكيانات الصناعية الدفاعية التابعة للدولة."
   },
+  "مصر والهند تبحثان تعزيز التعاون الصناعي والاستثماري": {
+    "meaning": "Bilateral industrial cooperation frameworks between Egypt and India involve cross-border joint ventures, technical knowledge transfers, and the establishment of manufacturing facilities in sectors such as chemicals, engineering, and pharmaceuticals.",
+    "meaning_ar": "تتضمن أطر التعاون الصناعي الثنائي بين مصر والهند إنشاء مشروعات مشتركة عابرة للحدود، ونقل المعرفة الفنية، وإقامة منشآت تصنيعية في قطاعات تشمل الصناعات الكيماوية والهندسية والدوائية."
+  },
   "مصر واليونان يبحثان تطورات مشروع الربط الكهربايي": {
     "meaning": "Cross-border electricity interconnection establishes subsea transmission grid infrastructure to transfer power directly between regional energy systems and integrate generation capacities across national markets.",
     "meaning_ar": "تؤسس مشروعات الربط الكهربائي بنية تحتية لشبكات النقل البحري لنقل الطاقة مباشرة بين منظومات الكهرباء الإقليمية ودمج قدرات التوليد عبر الأسواق الوطنية."
@@ -3448,6 +3472,10 @@
   "مصر وعمان تبحثان تعزيز التجاره عبر خط بحري مباشر": {
     "meaning": "Direct maritime shipping routes connect Egyptian and Omani ports via point-to-point freight transport, eliminating intermediate transshipment hubs in bilateral maritime logistics.",
     "meaning_ar": "يربط الخط الملاحي المباشر بين الموانئ المصرية والعُمانية عبر مسارات شحن محددة دون المرور بمحطات ترانزيت وسيطة في سلاسل الإمداد الثنائية."
+  },
+  "مصر و”الفاو” تطلقان مشروعين لتحقيق التنميه الزراعيه الشامله بجنوب سيناء": {
+    "meaning": "The partnership channels technical and financial resources from the UN Food and Agriculture Organization into South Sinai's agribusiness infrastructure, deploying modern irrigation systems and localized agricultural training programs.",
+    "meaning_ar": "تضخ الشراكة موارد فنية وتمويلية من منظمة الأغذية والزراعة للأمم المتحدة في البنية التحتية الزراعية بجنوب سيناء، عبر تطبيق نظم الري الحديث وبرامج التدريب الزراعي الميداني."
   },
   "مصرف الراجحي يجمع 600 مليون دولار من طرح صكوك دوليه": {
     "meaning": "International sukuk issuance provides foreign currency debt financing on the balance sheet, expanding the bank's liquidity pool in US dollars through Sharia-compliant fixed-income instruments.",
@@ -3888,6 +3916,10 @@
   "“الرقابه الماليه” تشكل مجموعه عمل لتعزيز المسووليه المجتمعيه": {
     "meaning": "The Financial Regulatory Authority (FRA) forms a dedicated working group to draft regulatory frameworks and standards for corporate social responsibility (CSR) and ESG integration across non-banking financial institutions and listed entities.",
     "meaning_ar": "تُشكّل الهيئة العامة للرقابة المالية مجموعة عمل متخصصة لوضع الأطر والمعايير التنظيمية المنظمة لممارسات المسؤولية المجتمعية والحوكمة البيئية والاجتماعية للشركات المقيدة والمؤسسات المالية غير المصرفية."
+  },
+  "“الزراعه” تتعاون مع “الفاو” لتطوير قطاع الزيتون في مصر": {
+    "meaning": "This institutional cooperation applies Food and Agriculture Organization technical assistance and standardisation frameworks to local olive farming and post-harvest supply chains.",
+    "meaning_ar": "يُطبق هذا التعاون المؤسسي الدعم الفني وأطر المعايير المعتمدة من منظمة الأغذية والزراعة (الفاو) على سلاسل الإمداد الخاصة بزراعة وإنتاج الزيتون محلياً."
   },
   "“السيادي النرويجي” يتجه لتقليص حيازته من سندات الخزانه الامريكيه": {
     "meaning": "A reduction in sovereign bond holdings represents an asset reallocation process where the sovereign fund decreases its balance-sheet exposure to US dollar-denominated sovereign debt instruments within its global fixed-income portfolio.",
