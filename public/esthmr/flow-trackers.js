@@ -598,7 +598,18 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
               y: 24,
               fontSize: 10.5,
               fontWeight: 650,
-              fill: 'var(--ink)'
+              fill: 'var(--ink)',
+              // `direction: ltr` is doing real work here, not tidying.
+              // SVG text takes its base direction from the document, and this
+              // one is `dir=rtl`, so the default `text-anchor: start` puts the
+              // RIGHT edge of the run at x and grows it leftwards: every entity
+              // label began at x=28 and ran out past x=0, off the left edge of
+              // the panel. Measured -3, 0, -3, -11, -7 before this line.
+              // The Arabic still shapes and orders right-to-left inside the
+              // run; what changes is that x is now its left edge, so it grows
+              // into the 240px box instead of out of it.
+              direction: 'ltr',
+              textAnchor: 'start'
             }, label)
           );
         })
@@ -630,18 +641,27 @@ function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectT
               stroke: isSelected ? 'var(--ink)' : 'var(--edge)',
               strokeWidth: isSelected ? 2 : 1
             }),
+            // Both of these are placed from the left inside a 240px box, so
+            // both need an explicit direction for the same reason the entity
+            // label above does: under the document's `dir=rtl` the company
+            // name grew leftwards out of x=64 and collided with the ticker
+            // sitting at x=14.
             h('text', {
               x: 14,
               y: 25,
               fontSize: 12.5,
               fontWeight: 800,
-              fill: isSelected ? 'var(--bg)' : 'var(--ink)'
+              fill: isSelected ? 'var(--bg)' : 'var(--ink)',
+              direction: 'ltr',
+              textAnchor: 'start'
             }, tck),
             h('text', {
               x: 64,
               y: 24,
               fontSize: 10,
-              fill: isSelected ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'var(--t2)'
+              fill: isSelected ? 'color-mix(in srgb, var(--bg) 80%, transparent)' : 'var(--t2)',
+              direction: 'ltr',
+              textAnchor: 'start'
             }, cName),
             stakeStr ? h('text', {
               x: 228,
