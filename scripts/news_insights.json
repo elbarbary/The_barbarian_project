@@ -2124,6 +2124,10 @@
     "meaning_ar": "",
     "refused": 3
   },
+  "تراجع اسعار النحاس بعد بلوغها مستوي قياسي": {
+    "meaning": "A decline in global copper prices directly shifts raw material input costs and inventory valuations for industrial consumers, particularly cable manufacturers and infrastructure contractors on the Egyptian exchange.",
+    "meaning_ar": "يؤثر تراجع أسعار النحاس عالمياً بصورة مباشرة على تكاليف مدخلات الإنتاج وتقييمات المخزون لدى الشركات الصناعية، لا سيما مصنعي الكابلات ومقاولي البنية التحتية في السوق المصري."
+  },
   "تراجع الاسهم الاوروبيه مع ارتفاع عوايد السندات السياديه": {
     "meaning": "A rise in sovereign bond yields increases benchmark risk-free interest rates, which raises the discount rate applied to corporate equity valuations and increases borrowing costs across capital markets.",
     "meaning_ar": "يؤدي ارتفاع عوائد السندات السيادية إلى زيادة أسعار الفائدة الخالية من المخاطر القياسية، مما يرفع معدل الخصم المطبق في تقييمات أسهم الشركات ويزيد من تكاليف الاقتراض في أسواق المال."
