@@ -82,7 +82,8 @@ class ExitCodes(unittest.TestCase):
     def test_a_source_that_would_not_answer_is_one(self):
         """1 means: publish what succeeded, then mark the run failed."""
         fatal = [n for n, *_ in build_all.STEPS
-                 if n not in build_all.BEST_EFFORT and n not in build_all.CRITICAL]
+                 if n not in build_all.BEST_EFFORT and n not in build_all.CRITICAL
+                 and n not in build_all.NO_PUBLISH]
         self.assertTrue(fatal, "no non-critical fatal step to test with")
         self.assertEqual(self._run({fatal[0]}), 1)
 
@@ -94,6 +95,48 @@ class ExitCodes(unittest.TestCase):
     def test_a_best_effort_step_does_not_fail_the_run_at_all(self):
         for name in list(build_all.BEST_EFFORT)[:3]:
             self.assertEqual(self._run({name}), 0, name)
+
+    def test_our_documents_contradicting_each_other_never_publishes(self):
+        """2, not 1.
+
+        Exit 1 tells the workflow "a source would not answer; every other step
+        produced correct output", and it commits and deploys on that. The
+        accuracy audit failing means something else entirely: the pipeline's own
+        documents disagree about a real, named company. Publishing that and
+        colouring the run red afterwards is the wrong way round.
+        """
+        # Named explicitly, not just iterated: `for name in NO_PUBLISH` passes
+        # vacuously when the set is emptied, which is the one edit this test
+        # exists to catch.
+        self.assertIn("Accuracy audit", build_all.NO_PUBLISH)
+        for name in build_all.NO_PUBLISH:
+            self.assertEqual(self._run({name}), 2, name)
+
+    def test_a_contradiction_still_lets_the_build_finish(self):
+        """NO_PUBLISH is deliberately not CRITICAL.
+
+        CRITICAL stops the build where it stands. Seventeen steps run after the
+        accuracy audit and several rewrite the documents it just checked, so
+        stopping there would both judge a half-built tree and throw away the
+        rest of the run. The refusal belongs at the end, not in the middle.
+        """
+        self.assertTrue(build_all.NO_PUBLISH, "NO_PUBLISH must not be empty")
+        self.assertFalse(build_all.NO_PUBLISH & build_all.CRITICAL)
+        after = [n for n, *_ in build_all.STEPS]
+        for name in build_all.NO_PUBLISH:
+            self.assertIn(name, after)
+            self.assertTrue(after.index(name) < len(after) - 1,
+                            f"{name} is last; the distinction would be moot")
+
+    def test_a_best_effort_skip_is_announced_not_whispered(self):
+        """17 of 44 steps are best-effort.
+
+        A bare print is a grey line in a forty-minute log, so a permanently
+        refused source looked exactly like one that blipped — which is how the
+        disclosures feed sat eight days stale behind four green runs a day.
+        """
+        source = (HERE / "build_all.py").read_text(encoding="utf-8")
+        self.assertIn("::warning title=Best-effort step skipped::", source)
 
     def test_critical_outranks_a_plain_failure(self):
         """Both kinds at once is still 2: the unfit inputs are what matter."""

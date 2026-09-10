@@ -21,6 +21,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import os
 import datetime
 import subprocess
 import sys
@@ -403,6 +404,20 @@ CRITICAL = {
     "Staleness guard",
 }
 
+# Steps whose failure means our OWN documents disagree with each other about a
+# real, named company — not that an upstream would not answer. Exit 1 says "a
+# source refused; everything else is fit to publish", and the workflow commits
+# and deploys on it. That sentence is false here, so these get exit 2 and the
+# Commit step never runs.
+#
+# Not in CRITICAL, which stops the build where it stands: seventeen steps run
+# after the accuracy audit, several of which rewrite the very documents it
+# checked. Stopping there would judge a half-built tree and throw away the rest
+# of the work as well. This finishes the build and refuses to publish it.
+NO_PUBLISH = {
+    "Accuracy audit",
+}
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -410,6 +425,10 @@ def main() -> int:
     args = ap.parse_args()
 
     failed = []
+
+    skipped: list[str] = []
+
+    poisoned: list[str] = []
     stopped = None
     for step in STEPS:
         name, script, supports_check = step[0], step[1], step[2]
@@ -426,9 +445,19 @@ def main() -> int:
         result = subprocess.run(cmd, cwd=HERE.parent)
         if result.returncode != 0:
             if name in BEST_EFFORT:
+                # `::warning::` renders as a run annotation. A bare print does
+                # not: 17 of the 44 steps are best-effort, so a source that is
+                # permanently refused looked exactly like one that blipped —
+                # a grey line in a forty-minute log and a green run. That is
+                # how the disclosures feed sat eight days stale.
+                print(f"::warning title=Best-effort step skipped::{name}: the host "
+                      "would not answer. Published data for this step is unchanged.")
                 print("   the host would not answer — trying again next run")
+                skipped.append(name)
                 continue
             failed.append(name)
+            if name in NO_PUBLISH:
+                poisoned.append(name)
             print(f"   FAILED — previously published data left in place")
             if name in CRITICAL:
                 # No point rebuilding thirty minutes of documents from a source
@@ -462,8 +491,26 @@ def main() -> int:
     #
     #     So the workflow publishes what succeeded and still ends red. Loud and
     #     lossless, rather than the choice between them.
+    if skipped:
+        print(f"build_all: {len(skipped)} best-effort step(s) skipped: "
+              f"{', '.join(skipped)}")
+        summary = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary:
+            try:
+                with open(summary, "a", encoding="utf-8") as fh:
+                    fh.write(f"### {len(skipped)} best-effort step(s) skipped\n\n")
+                    for name in skipped:
+                        fh.write(f"- {name}\n")
+            except OSError:
+                pass
     if stopped:
         print(f"build_all: stopped at a critical step: {stopped}")
+        return 2
+    if poisoned:
+        print(f"::error title=Documents contradict each other::build_all: "
+              f"{', '.join(poisoned)} failed. This is not an upstream refusing; "
+              "it is our own published documents disagreeing about a named "
+              "company. Refusing to publish.")
         return 2
     if failed:
         print(f"build_all: {len(failed)} step(s) did not refresh: {', '.join(failed)}")
