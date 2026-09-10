@@ -1,5 +1,7 @@
 import { React as R } from './react-shim.js';
 
+import * as OM from './ownership-map.js';
+
 const h = R.createElement;
 const finite = v => typeof v === 'number' && Number.isFinite(v);
 const signed = v => finite(v) ? `${v > 0 ? '+' : ''}${v.toFixed(2)}%` : '—';
@@ -687,6 +689,151 @@ function renderOwnershipTimeline(doc, ar, t) {
   );
 }
 
+
+/* ── The ownership map ────────────────────────────────────────────────────────
+ *
+ * Built with the DOM rather than through `h`, because the SVG is redrawn on a
+ * month change and on every focus, and rebuilding a few hundred nodes through
+ * the component's render on each of those would redraw the whole screen with
+ * them. The panel around it is `h` like everything else; only the picture
+ * manages itself.
+ */
+function renderOwnershipMap(doc, ar, t, component, st) {
+  const people = (doc && doc.people) || [];
+  if (people.length < 2) return null;
+
+  const periods = OM.periodsOf(doc);
+  if (!periods.length) return null;
+  const period = periods.includes(st.ownershipPeriod) ? st.ownershipPeriod : periods[periods.length - 1];
+  const prev = periods[periods.indexOf(period) - 1] || null;
+
+  const caps = {};
+  const sectors = {};
+  const nameOf = {};
+  // The CLIENT's shape, not companies.json's. `data.live()` renames
+  // `market_cap` to `cap` and folds the two names into `name:{en,ar}` — read
+  // from the file's field names and every ring comes out at the floor size
+  // with "value unknown" under it, which is exactly what the first draft did.
+  ((component.data() || {}).companies || []).forEach((c) => {
+    if (!c || !c.ticker) return;
+    if (finite(c.cap)) caps[c.ticker] = c.cap;
+    sectors[c.ticker] = (ar ? c.sectorAr : c.sector) || c.sector || '—';
+    const nm = c.name || {};
+    nameOf[c.ticker] = (ar ? (nm.ar || nm.en) : (nm.en || nm.ar)) || c.ticker;
+  });
+  caps.sectorOf = (tk) => sectors[tk] || '—';
+
+  const label = {};
+  people.forEach((p) => { label[p.id] = ar ? (p.name || p.nameEn) : (p.nameEn || p.name); });
+  const labelOf = (id) => label[id] || nameOf[id] || id;
+
+  const stakes = OM.stakesAt(doc, period);
+  const prevStakes = prev ? OM.stakesAt(doc, prev) : null;
+  const model = OM.layout(doc, stakes, caps, 9);
+  const trades = OM.tradesIn(doc, period);
+
+  const host = document.createElement('div');
+  host.className = 'om-map-host';
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'om-map-svg');
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', t('Ownership map', 'خريطة الملكية'));
+  host.appendChild(svg);
+
+  let focused = st.ownershipFocus || null;
+  const paint = () => OM.renderMap(svg, model, {
+    stakes, prevStakes, trades, caps, labelOf, focused, t, ar,
+    onPick: (id) => {
+      focused = focused === id ? null : id;
+      component.setState({ ownershipFocus: focused });
+      paint();
+    },
+  });
+  paint();
+  svg.addEventListener('click', () => {
+    if (!focused) return;
+    focused = null;
+    component.setState({ ownershipFocus: null });
+    paint();
+  });
+
+  const held = Object.entries(stakes)
+    .reduce((acc, [k, pct]) => {
+      const [pid, tk] = k.split('|');
+      const value = finite(caps[tk]) ? (pct / 100) * caps[tk] : 0;
+      acc[pid] = (acc[pid] || 0) + value;
+      return acc;
+    }, {});
+  const biggest = Object.entries(held).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const topValue = biggest.length ? biggest[0][1] : 0;
+  const monthValue = trades.reduce((s, x) => s + (x.value || 0), 0);
+
+  return h('div', { className: 'ft-detail om-panel' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('WHO HOLDS WHAT', 'من يملك ماذا')),
+        h('h3', null, t('Ownership, and where a stake went',
+                        'الملكية، وإلى أين ذهبت الحصة'))
+      ),
+      h('div', { className: 'om-periods' },
+        periods.map(p => h('button', {
+          key: p, type: 'button',
+          className: p === period ? 'om-period om-period-on' : 'om-period',
+          'aria-pressed': p === period ? 'true' : 'false',
+          onClick: () => component.setState({ ownershipPeriod: p, ownershipFocus: null }),
+        }, p))
+      )
+    ),
+    h('div', { className: 'om-map-wrap' },
+      // The host node itself, handed straight to the shim: `createElement`
+      // builds real DOM and its `append` takes a Node as a child, so the map
+      // needs no ref — which is just as well, because the shim drops `ref`.
+      h('div', { className: 'om-map-slot' }, host),
+      h('div', { className: 'om-side' },
+        h('div', { className: 'om-card' },
+          h('h4', null, t('Filed this month', 'إفصاحات هذا الشهر')),
+          h('strong', { dir: 'ltr' }, trades.length
+            ? `${compact(monthValue)} EGP`
+            : t('nothing filed', 'لا إفصاحات')),
+          h('small', null, trades.length
+            ? t(`${trades.length} disclosed trades`, `${trades.length} صفقة مفصح عنها`)
+            : t('no post-execution form this month', 'لا نموذج إفصاح بعد التنفيذ هذا الشهر'))
+        ),
+        h('div', { className: 'om-card' },
+          h('h4', null, t('Largest known holders', 'أكبر الملاك المعروفين')),
+          h('div', { className: 'om-holders' }, biggest.map(([id, v]) => h('button', {
+            key: id, type: 'button',
+            className: 'om-holder-row',
+            onClick: () => { component.setState({ ownershipFocus: id }); },
+          },
+            h('i', { style: { background: OM.hueOf(id) } }),
+            h('span', null, labelOf(id)),
+            h('b', { dir: 'ltr' }, compact(v))
+          )))
+        )
+      )
+    ),
+    h('div', { className: 'om-legend' },
+      h('span', null, t('Ring size is market value; slices are the holders we can name.',
+                        'حجم الحلقة هو القيمة السوقية، والشرائح هم الملاك المعروفون.')),
+      h('span', { className: 'om-legend-none' },
+        t('The unsliced part is ownership nobody had to disclose — not free float.',
+          'الجزء غير المقسّم ملكية لم يُلزم أحد بالإفصاح عنها — وليس أسهم حرة.')),
+      h('span', null, t('The outer arc marks a stake that grew or shrank since last month.',
+                        'القوس الخارجي يشير إلى حصة زادت أو نقصت عن الشهر السابق.')),
+      // Without this the first month reads as a broken map rather than a true
+      // one: 2026-07 carries a single filing, so a single company is all that
+      // had been disclosed by then. The months accumulate what is KNOWN, and
+      // that is not the same thing as the register on that date.
+      h('span', null, t('Each month shows everything disclosed up to it, not the share register on that date — so the map fills in as filings arrive.',
+                        'كل شهر يعرض ما أُفصح عنه حتى تاريخه، لا سجل المساهمين في ذلك اليوم — لذا تمتلئ الخريطة مع ورود الإفصاحات.'))
+    ),
+    h('p', { className: 'ft-note' }, t(
+      'A stake is a percentage of ONE company, so a holder is sized by the value of what they hold and never by a sum of percentages. A company with no published market value is drawn at the smallest size with a dashed centre rather than dropped.',
+      'الحصة نسبة من شركة واحدة، لذا يُقاس المالك بقيمة ما يملكه لا بجمع النسب. الشركة التي لا تُنشر قيمتها السوقية تُرسم بأصغر حجم وبمركز متقطع بدلاً من استبعادها.'))
+  );
+}
+
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
   const st = component.state;
@@ -1207,7 +1354,12 @@ export function flowTrackers(component, data, ar) {
       // had to already suspect an issuer before the page would show anything.
       renderOwnershipTimeline(people, ar, t),
 
-      // Then the people. This is the only place on the site that names one.
+      // The picture, then the same facts as a list. The map answers "who is
+      // around this company" at a glance; the list answers "what happened to
+      // this person's stake", which a picture cannot say in numbers.
+      renderOwnershipMap(people, ar, t, component, st),
+
+      // This is the only place on the site that names a holder.
       renderNamedPeople(people, ar, t,
         tk => component.setState({ ownershipTicker: tk, ownershipInvestor: '', ownershipPage: 0 })),
 
