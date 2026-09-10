@@ -931,6 +931,10 @@
     "meaning": "Daily fish price updates track spot market valuations across wholesale and retail distribution channels, reflecting current supply volumes from local aquaculture and maritime catch against immediate consumer demand.",
     "meaning_ar": "ترصد التحديثات اليومية لأسعار الأسماك تقييمات السوق الفورية عبر قنوات التوزيع بالجملة والتجزئة، مما يعكس حجم المعروض الحالي من الاستزراع السمكي والصيد البحري مقابل الطلب الاستهلاكي المباشر."
   },
+  "اسعار السمك اليوم في مصر.. الخميس 10/9/2026": {
+    "meaning": "Daily wholesale and retail fish price listings reflect prevailing spot-market supply from local aquaculture and marine catches relative to daily consumer demand across Egyptian commodity markets.",
+    "meaning_ar": "تعكس لوائح أسعار الأسماك اليومية في أسواق الجملة والتجزئة حجم المعروض الفوري من المزارع السمكية والمصايد البحرية مقابل معدلات الاستهلاك اليومي في الأسواق المصرية."
+  },
   "اسعار الطماطم تكبح صادرات الصلصه والمركزات": {
     "meaning": "Higher domestic prices for fresh tomatoes increase raw material procurement costs for food processing companies, raising the final production cost of tomato paste and concentrates relative to international market price levels.",
     "meaning_ar": "يؤدي ارتفاع الأسعار المحلية للطماطم الطازجة إلى زيادة تكاليف شراء المواد الخام لشركات التصنيع الغذائي، مما يرفع تكلفة الإنتاج الإجمالية لمعجون الطماطم والمركزات مقارنة بمستويات الأسعار في الأسواق الدولية."
@@ -1262,6 +1266,10 @@
   "البيتكوين تهبط دون 80 الف دولار بعد تقرير الوظايف الامريكي": {
     "meaning": "US employment data influences interest rate expectations and global liquidity conditions, which directly drive valuation adjustments across risk assets, including cryptocurrencies.",
     "meaning_ar": "تؤثر بيانات تقرير الوظائف الأمريكي على توقعات أسعار الفائدة ومستويات السيولة العالمية، مما ينعكس مباشرة على التقييمات السعرية للأصول عالية المخاطر مثل العملات المشفرة."
+  },
+  "التجاره العالميه تستعيد زخمها رغم الضبابيه الجيوسياسيه": {
+    "meaning": "Cross-border cargo volumes and port throughput expand, which raises operational capacity utilization for maritime shipping routes and logistics operators despite prevailing regional political risks.",
+    "meaning_ar": "ترتفع أحجام شحن البضائع عبر الحدود ومعدلات التداول في الموانئ، مما يرفع نسبة التشغيل الفعلي لخطوط الملاحة البحرية والخدمات اللوجستية بالتزامن مع استمرار المخاطر الجيوسياسية."
   },
   "التموين تطرح 12 صنفا باسعار مخفضه.. تصل الي 30 سلعه بنهايه الشهر الجاري": {
     "meaning": "The Ministry of Supply expands its discounted inventory across state-affiliated consumer complexes, distributing 12 basic commodities with scheduled additions reaching 30 items through public retail channels.",
@@ -2054,6 +2062,10 @@
   "تحديثات الصرف الان.. سعر الريال السعودي اليوم الخميس 10-9-2026": {
     "meaning": "Official and banking exchange rate quotations track the spot conversion value of the Saudi Riyal against the Egyptian Pound, which directly determines foreign currency settlement costs for bilateral trade, religious tourism services, and the Egyptian Pound valuation of inbound expatriate remittances.",
     "meaning_ar": "ترصد أسعار الصرف المصرفية والرسمية القيمة الفورية لتحويل الريال السعودي مقابل الجنيه المصري، وهي التي تحدد تكلفة التسويات بالعملة الأجنبية للتبادل التجاري والخدمات السياحية الدينية، فضلاً عن تقييم تحويلات العاملين بالخارج بالعملة المحلية."
+  },
+  "تحركات محدوده للدولار بين الارتفاع والتراجع خلال منتصف التعاملات": {
+    "meaning": "Midday two-way movement in the exchange rate reflects continuous order-matching between foreign currency supply and demand within the interbank market, maintaining pricing within a tight intraday clearing range.",
+    "meaning_ar": "تعكس التحركات العرضية لسعر الصرف في منتصف التعاملات استمرار مطابقة أوامر السيولة النقدية بين العرض والطلب داخل سوق الإنتربنك، مما يحصر التسعير ضمن نطاق تداول يومي ضيق."
   },
   "تخصيص 12.53 فدان في سوهاج لانشاء صوامع غلال": {
     "meaning": "Allocating land for grain silos expands physical storage infrastructure and integrates regional agricultural logistics into the national commodity supply chain.",
@@ -3864,6 +3876,10 @@
   "وزير الطيران: تعزيز التعاون مع دول امريكا اللاتينيه في الذكاء الاصطناعي وبناء القدرات": {
     "meaning": "The aviation sector establishes international technical cooperation frameworks to exchange artificial intelligence technologies and workforce training programs with Latin American counterparts.",
     "meaning_ar": "يُنشئ قطاع الطيران أُطر تعاون فني دولية لتبادل تطبيقات الذكاء الاصطناعي وبرامج التدريب وبناء القدرات المؤسسية مع دول أمريكا اللاتينية."
+  },
+  "وزير العمل يبحث مع محافط بورسعيد ملفات التشغيل والتدريب والسلامه والصحه المهنيه": {
+    "meaning": "Government coordination between the Ministry of Labor and regional governorates standardizes vocational training curricula, labor compliance, and occupational safety audits across local industrial and logistical enterprises.",
+    "meaning_ar": "يضع التنسيق الحكومي بين وزارة العمل والمحافظات أطر عمل موحدة لبرامج التدريب المهني، والتفتيش على السلامة والصحة المهنية، والامتثال لقوانين العمل داخل المنشآت الصناعية واللوجستية."
   },
   "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
     "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",

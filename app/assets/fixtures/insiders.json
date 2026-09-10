@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-10T09:22:11.835309+00:00",
+  "updatedAt": "2026-09-10T09:31:46.046270+00:00",
   "asOf": "2026-09-10",
   "source": "Official EGX Daily Bulletins & Post-Execution Disclosures",
   "basis": "Official exchange disclosures filed under Capital Market Law Articles 29 & 38",
   "basisAr": "إفصاحات رسمية مودعة لدى البورصة وفق المادتين ٢٩ و٣٨ من قواعد القيد",
   "summary": {
-    "totalRecords": 352,
+    "totalRecords": 353,
     "buyCount": 91,
     "sellCount": 197,
     "treasuryBuyCount": 17,
@@ -70,7 +70,7 @@
       "positionRaw": "Treasury Shares",
       "shares": null,
       "title": "بيان من طاقة عربية (TAQA.CA) بشأن بيع أسهم الخزينة",
-      "titleEn": "A statement from TAQA Arabia (TAQA.CA) regarding the sale of treasury shares",
+      "titleEn": "Statement from TAQA Arabia (TAQA.CA) regarding the sale of treasury shares",
       "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294557"
     },
     {
@@ -116,6 +116,28 @@
       "title": "بيان من مصر بنى سويف للاسمنت (MBSC.CA) بشأن شراء أسهم الخزينة",
       "titleEn": "Statement from Misr Beni Suef Cement (MBSC.CA) regarding the purchase of treasury shares",
       "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294539"
+    },
+    {
+      "id": "filing-294558",
+      "filingId": "294558",
+      "sourceType": "post_execution_filing",
+      "date": "2026-09-10",
+      "ticker": "GIHD",
+      "company": "Gharbia Islamic Housing Development",
+      "companyAr": "الغربية الاسلامية للتنمية العمرانية",
+      "sector": "Real Estate",
+      "sectorAr": "عقارات",
+      "action": "disclosure",
+      "actionLabel": "Post-Execution Trade Form",
+      "actionLabelAr": "إفصاح بعد التنفيذ",
+      "relationship": "insider",
+      "relationshipLabel": "Insider / Major Holder",
+      "relationshipLabelAr": "متصل / مساهم رئيسي",
+      "positionRaw": "Post-Implementation Disclosure",
+      "shares": null,
+      "title": "الغربية الاسلامية للتنمية العمرانية (GIHD.CA) - بيان بخصوص نموذج إفصاح بعد التنفيذ",
+      "titleEn": "Gharbia Islamic Urban Development (GIHD.CA) - Statement regarding the post-implementation disclosure form",
+      "link": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294558"
     },
     {
       "id": "filing-294524",
