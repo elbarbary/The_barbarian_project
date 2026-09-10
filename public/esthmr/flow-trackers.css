@@ -71,7 +71,12 @@
 .ft-sector-tile:hover{transform:translateY(-2px);border-color:var(--accent)}
 .ft-sector-tile[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent);background:color-mix(in srgb,var(--surface) 96%,var(--accent))}
 .ft-tile-header{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.ft-tile-title{font-size:13px;font-weight:700;line-height:1.3;flex:1}
+/* `flex:1` grows the title but does not let it shrink: a flex child keeps a
+   min-width of auto, so "مقاولات و إنشاءات هندسية" held the header at 163px
+   inside a 149px content box and the tile clipped its own numbers at 390px. */
+.ft-tile-title{font-size:13px;font-weight:700;line-height:1.3;flex:1;min-width:0;overflow-wrap:anywhere}
+.ft-tile-header,.ft-tile-spark-row,.ft-tile-meta{min-width:0}
+.ft-tile-header>*,.ft-tile-spark-row>*,.ft-tile-meta>*{min-width:0}
 .ft-tile-header strong{font-size:22px;letter-spacing:-.03em}
 .ft-tile-spark-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-block:4px}
 .ft-velocity-pill{font-size:10px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);padding:2px 7px;border-radius:10px;font-weight:600}
