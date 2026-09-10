@@ -280,6 +280,12 @@ STEPS = [
     # Combines daily session bulletins with post-execution disclosures and
     # treasury programs. Runs before the manifest so its version is hashed.
     ("Insider tracker", "build_insider_tracker.py", True),
+    # A few scanned post-execution forms per run, not the whole backlog. Each
+    # one is a model call and the store remembers what it has already read, so
+    # a daily trickle clears new filings without ever re-reading an old one.
+    # The engine is the local agent, which bills nobody.
+    ("Named insiders", "build_named_insiders.py", False, ["--limit", "6", "--engine", "agy"]),
+    ("Insider people", "build_insider_people.py", True),
     ("Sector liquidity and ownership", "build_flow_trackers.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
     # Last, and best-effort. Both read and extend the permanent archive, and
@@ -356,6 +362,12 @@ STEPS = [
 # document going three days without an update because a path did not exist on
 # a runner.
 BEST_EFFORT = {
+    # The exchange serving a scanned attachment, and a model reading it. Both
+    # are outside this build's control, and a form that cannot be fetched today
+    # is simply read tomorrow — the store remembers what it has and what it
+    # refused. `Insider people` below is NOT best-effort: it is a local
+    # transform over that store, and if it fails something is wrong here.
+    "Named insiders",
     "Calendar",
     "Company filings",
     "Disclosures",

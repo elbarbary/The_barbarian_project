@@ -22,6 +22,7 @@ are different claims, and the second one is a lie about a real person.
 
 from __future__ import annotations
 
+import argparse
 import collections
 import datetime as dt
 import json
@@ -48,6 +49,10 @@ def key(name: str) -> str:
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true",
+                    help="build it and report, but write nothing")
+    args = ap.parse_args()
     if not STORE.exists():
         print("no named-insider store yet — run build_named_insiders.py")
         return 0
@@ -162,12 +167,17 @@ def main() -> int:
         "people": rows,
         "timeline": timeline,
     }
+    print(f"   {len(rows)} people, {doc['tradeCount']} trades, "
+          f"{doc['tickerCount']} companies, {len(timeline)} sessions")
+    if args.check:
+        # Everything above ran; only the write is skipped. A dry run that
+        # skipped the work would report a health it never tested.
+        print("   --check: not written")
+        return 0
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     if FIXTURE.parent.exists():
         FIXTURE.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"   {len(rows)} people, {doc['tradeCount']} trades, "
-          f"{doc['tickerCount']} companies, {len(timeline)} sessions")
     print(f"   wrote {OUT.relative_to(REPO)}")
     return 0
 
