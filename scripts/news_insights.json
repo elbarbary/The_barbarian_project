@@ -683,6 +683,10 @@
     "meaning": "The regulatory sandbox operates as a controlled testing framework where the Financial Regulatory Authority evaluates non-banking financial technology models against compliance and operational standards prior to full commercial licensing.",
     "meaning_ar": "يعمل المختبر التنظيمي كإطار تجريبي خاضع للرقابة تتولى فيه الهيئة العامة للرقابة المالية تقييم نماذج التكنولوجيا المالية غير المصرفية ومطابقتها للمعايير التشغيلية والرقابية قبل منح التراخيص التجارية الكاملة."
   },
+  "احمد رستم: نستهدف زياده مساهمه الاستثمار الخاص الي 64% من اجمالي الاستثمارات بحلول 2030": {
+    "meaning": "This target outlines a reallocation of domestic capital expenditures, establishing private sector funding as the primary source of national gross fixed capital formation relative to state-led investments.",
+    "meaning_ar": "يحدد هذا المستهدف إعادة توزيع لنفقات الاستثمار الرأسمالي محلياً، بجعل تمويلات القطاع الخاص المصدر الأساسي لتكوين رأس المال الثابت الإجمالي مقارنة بالاستثمارات الحكومية."
+  },
   "اداره ترامب تهدد بالغاء الاعفاءات الضريبيه للموسسات التعليميه": {
     "meaning": "Revoking tax-exempt status subjects educational institutions to corporate income tax on operating surpluses and investment income, while eliminating the tax deductibility of incoming philanthropic donations.",
     "meaning_ar": "يؤدي إلغاء الإعفاء الضريبي إلى إخضاع المؤسسات التعليمية لضريبة الدخل على الفوائض التشغيلية وعوائد الاستثمار، مع إسقاط ميزة الخصم الضريبي عن التبرعات الموجهة إليها."
@@ -2014,6 +2018,10 @@
   "ايفاد: نعمل في نحو 100 دوله واستثماراتنا تستهدف صغار المزارعين": {
     "meaning": "The International Fund for Agricultural Development (IFAD) deploys development financing and concessional funding structures across a global network of approximately 100 countries, directly allocating capital toward smallholder agricultural supply chains and rural production infrastructure.",
     "meaning_ar": "يوجه الصندوق الدولي للتنمية الزراعية (إيفاد) تمويلات تنموية وتسهيلات تمويلية عبر شبكة عالمية تضم نحو 100 دولة، حيث يخصص رأس المال مباشرة لسلاسل الإمداد الزراعية لصغار المزارعين والبنية التحتية للإنتاج الريفي."
+  },
+  "اين يباع ارخص كيلو لحمه في مصر؟": {
+    "meaning": "State-run consumer complexes and government distribution outlets supply staple proteins, such as meat, below private retail market rates by utilizing direct public procurement channels and subsidized logistics networks.",
+    "meaning_ar": "تعتمد المجمعات الاستهلاكية ومنافذ التوزيع الحكومية على التعاقدات المركزية وشبكات الإمداد العامة لطرح السلع الغذائية الأساسية، كإمدادات اللحوم، بأسعار تقل عن مستويات تجارة التجزئة في السوق الحرة."
   },
   "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
     "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
@@ -3892,6 +3900,10 @@
   "من طابور \"الريان\" الي شاشه الموبايل.. القصه الكامله لسوق المال المصري بين الثمانينيات واليوم": {
     "meaning": "The Egyptian capital market operates on digital brokerage and electronic trading systems accessible via mobile applications, shifting trading operations and retail investor access away from physical presence and traditional paper-based investment arrangements.",
     "meaning_ar": "يعمل سوق المال المصري حالياً عبر أنظمة التداول الإلكتروني وتطبيقات الهواتف الذكية للوساطة المالية، مما ينقل تنفيذ المعاملات ووصول المستثمرين الأفراد من القنوات التقليدية والتعاملات غير الرسمية إلى منصات رقمية منظمة."
+  },
+  "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 10-9-2026": {
+    "meaning": "Domestic train schedules represent the operational transport capacity managed by the Egyptian National Railways, providing public logistical infrastructure for intercity passenger mobility and daily domestic labor movement.",
+    "meaning_ar": "تمثل مواعيد قطارات السكك الحديدية جداول التشغيل اليومية لنقل الركاب التي تديرها الهيئة القومية لسكك حديد مصر، وتعمل كبنية لوجستية لحركة العمالة والتنقل بين القاهرة والمحافظات."
   },
   "مواعيد القطارات المتجهه من القاهره للمحافظات اليوم 4-9-2026": {
     "meaning": "Daily train schedules represent the operational transport capacity and logistics grid managed by the national railway authority, facilitating regular passenger mobility and intercity transit across governorates.",
