@@ -139,6 +139,10 @@
     "meaning": "The establishment of an equity hedge fund introduces alternative investment strategies, including long and short equity positions and derivative hedging techniques, to the domestic asset management industry alongside conventional long-only funds.",
     "meaning_ar": "يُدخل إنشاء صندوق تحوط للأسهم استراتيجيات استثمارية بديلة، تشمل مراكز الشراء والبيع على المكشوف وأدوات التحوط، إلى قطاع إدارة الأصول المحلي بجانب صناديق الاستثمار التقليدية."
   },
+  "Centralized securities lending and borrowing system in testing ahead of November pilot launch,": {
+    "meaning": "A centralized securities lending and borrowing system creates an automated operational framework for institutional participants to loan securities to other market participants against specified collateral. This infrastructure standardizes settlement processing, collateral monitoring, and margin management for active market positions.",
+    "meaning_ar": "يوفر النظام المركزي لإقراض واقتراض الأوراق المالية إطاراً تشغيلياً آلياً يتيح للمؤسسات إعارة الأسهم لأطراف أخرى مقابل ضمانات محددة، حيث تعمل هذه البنية التحتية على توحيد إجراءات التسوية، ومتابعة الضمانات، وإدارة متطلبات الهامش للمراكز القائمة في السوق."
+  },
   "Creative Investments Holding targets heritage food brand after USD 20 mn first close": {
     "meaning": "A fund's first close secures dedicated equity capital, providing direct liquidity for acquiring operational assets and consolidating market share within the food manufacturing sector.",
     "meaning_ar": "يوفر الإغلاق المالي الأولي لصناديق الاستثمار سيولة نقدية مباشرة من رؤوس الأموال المجمعة، مما يتيح توجيه السيولة نحو الاستحواذ على الأصول التشغيلية في قطاع الصناعات الغذائية."
@@ -151,9 +155,21 @@
     "meaning": "Emerging market debt instruments maintain relative price stability and resilient yield spreads during periods of declining US Treasury prices and rising benchmark yields.",
     "meaning_ar": "تحافظ أدوات الدين بالأسواق الناشئة على استقرار نسبي في أسعارها وفروق عوائدها في مواجهة تراجع أسعار سندات الخزانة الأمريكية وارتفاع عوائدها القياسية."
   },
+  "Education minister honors school principals amid inspection tour controversy": {
+    "meaning": "Public recognition of administrative staff during field inspections reflects standard human resources oversight and operational evaluation procedures within the public education framework.",
+    "meaning_ar": "يعكس تكريم الكوادر الإدارية بالتزامن مع الجولات الرقابية آليات التقييم الإداري ومتابعة العمليات التشغيلية المعمول بها داخل منظومة التعليم الحكومي."
+  },
+  "Egypt and India propped up the region’s rising share of global FDI in 1H 2026": {
+    "meaning": "Capital inflows from foreign direct investment enter industrial, energy, and infrastructure operations, expanding the host markets' foreign currency reserves and capital formation metrics.",
+    "meaning_ar": "تتدفق تدفقات رؤوس أموال الاستثمار الأجنبي المباشر إلى المشروعات الصناعية ومشروعات الطاقة والبنية التحتية، وهو ما يرفع نسب تكوين رأس المال الثابت والاحتياطيات الأجنبية في الأسواق المستقبلة."
+  },
   "Egypt is fixing how deals get executed, but what pushes investors offshore runs deeper than the reforms on the table": {
     "meaning": "Regulatory adjustments to transaction execution procedures address the operational mechanics of domestic deal settlement, while cross-border capital structuring decisions reflect broader macro fundamentals such as foreign exchange liquidity and repatriation frameworks.",
     "meaning_ar": "تتعامل التعديلات التنظيمية لإجراءات تنفيذ الصفقات مع الجوانب التشغيلية لتسوية المعاملات محلياً، بينما تعتمد قرارات هيكلة رؤوس الأموال عبر الحدود على محددات اقتصادية أوسع تشمل سيولة النقد الأجنبي وأطر تحويل الأرباح للخارج."
+  },
+  "Egyptian-UK fintech Zeal raises USD 10 mn to back expansion plans": {
+    "meaning": "This equity capital injection increases the company's balance sheet liquidity and paid-in capital, providing funding for operational expansion, hiring, and technology infrastructure without creating debt obligations.",
+    "meaning_ar": "تؤدي هذه الزيادة في رأس المال إلى تعزيز السيولة النقدية ورأس المال المدفوع في الميزانية العمومية، مما يوفر تمويلاً للتوسع التشغيلي والتوظيف والبنية التحتية التقنية دون تحميل الشركة التزامات ديون."
   },
   "Five years into RISE, safety metric frozen as World Bank ratchets up fiduciary risk on Egypt’s railway loan": {
     "meaning": "An elevated fiduciary risk rating tied to multilateral railway financing triggers tighter loan conditionality, enhanced oversight procedures, and potential delays in capital disbursements for infrastructure modernisation projects.",
@@ -179,6 +195,10 @@
     "meaning": "The directive centralises the approval of foreign currency financing for transport infrastructure under a specialised debt committee, conditioning project execution on sovereign debt clearance.",
     "meaning_ar": "يحصر هذا التوجيه الموافقة على التمويلات الخارجية لمشروعات البنية التحتية للنقل في لجنة إدارة الدين العام، مما يربط تنفيذ المشروعات بالحصول على اعتماد سيادي مسبق للاقتراض."
   },
+  "HSBC boosts Swvl’s working capital facility by 110% to USD 1.4 mn": {
+    "meaning": "The expansion of the revolving credit line increases the company's available short-term debt capacity to finance day-to-day operational expenses and manage supplier payables. This adjustment modifies the liability structure on the balance sheet by providing access to higher foreign-currency liquidity.",
+    "meaning_ar": "ترفع زيادة التسهيل الائتماني المتجدد من قدرة الشركة على الاقتراض قصير الأجل لتمويل المصروفات التشغيلية اليومية وإدارة مستحقات الموردين. ويعمل هذا التعديل على تغيير هيكل الالتزامات في الميزانية العمومية من خلال إتاحة سيولة نقدية أكبر بالعملة الأجنبية."
+  },
   "Hospitals have the data. Few have the informatics to use it": {
     "meaning": "Healthcare providers possess raw clinical and operational data assets but lack the specialized health informatics infrastructure required to process and integrate them into management and treatment workflows.",
     "meaning_ar": "تمتلك منشآت الرعاية الصحية أصول البيانات السريرية والتشغيلية، لكنها تفتقر إلى البنية التحتية المتخصصة في المعلوماتية الصحية اللازمة لمعالجة هذه البيانات ودمجها في مسارات الإدارة والعلاج."
@@ -190,6 +210,10 @@
   "Insider trading blackout now runs on the earnings calendar only": {
     "meaning": "Under this rule, trading restrictions for corporate insiders are tied exclusively to the official earnings release schedule rather than event-driven or discretionary blackout windows. This sets fixed, predetermined dates during which insiders cannot execute transactions in company shares around financial reporting disclosures.",
     "meaning_ar": "بموجب هذه القاعدة، ترتبط فترات حظر تداول المطلعين حصرياً بالجدول الزمني الرسمي للإفصاح عن القوائم المالية بدلاً من الفترات المرتبطة بالأحداث الجوهرية غير المحددة، مما يحدد تواريخ مسبقة وثابتة يُمنع خلالها المطلعون من تنفيذ أي تعاملات على أسهم الشركة."
+  },
+  "July auto sales jump 15.6% y-o-y, as buses, trucks outpace passenger cars": {
+    "meaning": "The overall volume growth reflects an operational divergence within the automotive sector, where fleet expansion and corporate logistics drive demand for commercial vehicles while foreign exchange constraints and import quotas limit passenger car inventory.",
+    "meaning_ar": "يعكس هذا النمو في إجمالي المبيعات تباينًا تشغيليًا داخل قطاع السيارات، حيث تقود خطط تحديث أساطيل النقل والخدمات اللوجستية مبيعات المركبات التجارية، في حين تحد قيود الاستيراد وتوافر النقد الأجنبي من المعروض المتاح لسيارات الركوب."
   },
   "Local firms are ahead of the global average on digital trade readiness, Standard Chartered finds": {
     "meaning": "Higher digital trade readiness reflects the integration of electronic documentation, automated customs clearing, and cross-border digital payment systems into local operational workflows.",
@@ -218,6 +242,10 @@
   "Sahl is preparing to launch in DIFC to serve Egyptian expats in the UAE": {
     "meaning": "Establishing operations in the Dubai International Financial Centre (DIFC) creates a cross-border financial infrastructure that directly links Egyptian expatriates in the UAE to domestic electronic bill payment and collection networks in Egypt.",
     "meaning_ar": "يؤسس إطلاق العمليات في مركز دبي المالي العالمي قناة للبنية التحتية للمدفوعات عبر الحدود، تربط المغتربين المصريين في الإمارات مباشرة بشبكات سداد الفواتير والتحصيل الإلكتروني المحلية في مصر."
+  },
+  "Seven courses, one path to senior leadership": {
+    "meaning": "Structured executive training frameworks standardise workforce capability development and internal succession planning within corporate governance systems.",
+    "meaning_ar": "تحدد برامج التدريب التنفيذي المنظمة معايير تطوير الكفاءات المهنية وتخطيط التعاقب الوظيفي الداخلي ضمن نظم الحوكمة المؤسسية."
   },
   "Six Sigma meets supply chain strategy": {
     "meaning": "Integrating Six Sigma methodologies into supply chain strategy standardizes operational workflows and applies statistical quality control across procurement, manufacturing, and distribution processes.",
