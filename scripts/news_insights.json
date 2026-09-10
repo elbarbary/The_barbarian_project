@@ -1731,6 +1731,10 @@
     "meaning": "A 25-basis-point rate hike by the European Central Bank raises borrowing costs for euro-denominated debt and directly impacts foreign exchange pricing against the Egyptian pound for euro-linked trade and financing obligations.",
     "meaning_ar": "يؤدي رفع البنك المركزي الأوروبي لأسعار الفائدة بمقدار 25 نقطة أساس إلى زيادة تكاليف الاقتراض للديون المقومة باليورو، ويؤثر مباشرة على تسعير الصرف مقابل الجنيه المصري في المعاملات التجارية والالتزامات التمويلية المرتبطة بالعملة الأوروبية."
   },
+  "المركزي الاوروبي يرفع الفايده للمره الثانيه هذا العام": {
+    "meaning": "An interest rate hike by the European Central Bank increases borrowing costs for euro-denominated debt and raises financing expenses for companies trading with the eurozone.",
+    "meaning_ar": "يؤدي رفع البنك المركزي الأوروبي لأسعار الفائدة إلى زيادة تكلفة الاقتراض للديون المقومة باليورو، ورفع أعباء التمويل للشركات التي تجري تعاملات تجارية مع منطقة اليورو."
+  },
   "المركزي التركي يبقي اسعار الفايده دون تغيير عند 37%": {
     "meaning": "Maintaining the benchmark interest rate at 37% keeps borrowing costs, debt service terms, and banking system liquidity conditions unchanged for Turkish commercial lenders and corporate balance sheets.",
     "meaning_ar": "يُبقي تثبيت سعر الفائدة الأساسي عند 37% على تكاليف الاقتراض وشروط خدمة الدين ومستويات السيولة في القطاع المصرفي التركي دون تغيير."
@@ -2216,6 +2220,10 @@
     "meaning": "The easing of marine bunker fuel shortages reflects an operational normalization in regional replenishment and inventory distribution networks, operating independently of transit tensions through the Strait of Hormuz.",
     "meaning_ar": "يعكس انحسار شح إمدادات وقود السفن انتظاماً تشغيلياً في شبكات التوزيع والتخزين الإقليمية بمعزل عن استمرار التوترات الملاحية في مضيق هرمز."
   },
+  "تراجع طفيف لعدد طلبات اعانه البطاله الامريكيه": {
+    "meaning": "A decline in initial jobless claims reflects ongoing resilience in the US labor market, which maintains wage pressures and directly informs the Federal Reserve's benchmark interest rate decisions, influencing global foreign currency liquidity and international capital allocation.",
+    "meaning_ar": "يعكس انخفاض طلبات إعانة البطالة استمرار مرونة سوق العمل الأمريكي، وهو ما يُبقي على الضغوط المرتبطة بالأجور ويحدد مسار أسعار الفائدة لدى الاحتياطي الفيدرالي، مما يؤثر على سيولة النقد الأجنبي وحركة تدفقات رؤوس الأموال عالمياً."
+  },
   "تراجع عوايد سندات الخزانه الامريكيه مع ترقب بيانات الوظايف": {
     "meaning": "Yields on U.S. Treasury securities decrease as debt prices rise, reflecting shifts in sovereign bond market trading prior to the release of official labor market statistics.",
     "meaning_ar": "تنخفض عوائد سندات الخزانة الأمريكية مع ارتفاع أسعارها في الأسواق، وهو ما يعكس حركة التداول على أدوات الدين السيادي قبيل صدور البيانات الرسمية لسوق العمل."
@@ -2275,6 +2283,10 @@
   "تسارع التضخم في الصين للمره الاولي منذ ابريل": {
     "meaning": "An acceleration in China's inflation rate reflects upward price pressures across consumer goods and industrial inputs within the Chinese economy. This price dynamic directly sets the baseline cost structure for global supply chains and international trade reliant on Chinese manufactured goods and raw materials.",
     "meaning_ar": "يعكس تسارع التضخم في الصين ضغوطاً تصاعدية على أسعار السلع الاستهلاكية ومدخلات الإنتاج داخل السوق الصينية، وهو ما يحدد تكلفة الأساس لسلاسل الإمداد العالمية والتجارة الدولية المعتمدة على السلع والخامات الصينية."
+  },
+  "تسارع تضخم اسعار المنتجين في امريكا وفقا للتوقعات": {
+    "meaning": "An acceleration in the Producer Price Index reflects rising input costs for domestic manufacturers and suppliers at the wholesale level. This metric tracks intermediate wholesale price pressures prior to their transmission to final consumer retail prices.",
+    "meaning_ar": "يعكس تسارع مؤشر أسعار المنتجين ارتفاع تكاليف المدخلات لدى المصنعين والموردين على مستوى الجملة. يقيس هذا المؤشر الضغوط السعرية الوسيطة في سلاسل الإمداد قبل انتقالها إلى أسعار التجزئة للمستهلك النهائي."
   },
   "تسارع نمو اقتصاد منطقه اليورو خلال الربع الثاني من 2026": {
     "meaning": "An acceleration in Eurozone GDP growth represents higher aggregate output and industrial activity across member states, which defines baseline external trade and foreign currency demand for trade partners, including Egyptian export and import sectors.",
@@ -2564,6 +2576,10 @@
     "meaning": "This operational capital allocation deploys funding directly into port, terminal, and logistics infrastructure assets across the company's Middle East, Europe, and Africa networks.",
     "meaning_ar": "يمثل هذا الإجراء توجيهاً للنفقات الرأسمالية نحو أصول البنية التحتية للموانئ والمحطات وشبكات الإمداد اللوجستي التابعة للشركة في مناطق الشرق الأوسط وأوروبا وإفريقيا."
   },
+  "ديب سييك تستعد لطرح اسهمها في بورصه شنغهاي العام الجاري": {
+    "meaning": "An initial public offering on the Shanghai Stock Exchange transitions the company from private to public ownership by issuing equity shares to institutional and retail investors, which expands the corporate capital base and subjects the firm to public regulatory disclosure requirements.",
+    "meaning_ar": "يمثل الطرح العام الأولي في بورصة شنغهاي تحولاً للشركة من الملكية الخاصة إلى العامة عبر إصدار أسهم للمؤسسات والأفراد، مما يوسع القاعدة الرأسمالية للشركة ويخضعها لمتطلبات الإفصاح والتنظيم المعمول بها في الأسواق المالية."
+  },
   "ديفيد فيكلينج يكتب: هل تنجح واشنطن في “الشحن النووي” دون بكين؟": {
     "meaning": "The article examines international nuclear supply chain dependencies, specifically the operational and trade mechanisms required for developing nuclear energy infrastructure independently of Chinese manufacturing and critical mineral inputs.",
     "meaning_ar": "يتناول المقال سلاسل إمداد الطاقة النووية العالمية، موضحاً الآليات التشغيلية والتجارية اللازمة لتطوير البنية التحتية للطاقة النووية بمعزل عن سلاسل التوريد والمدخلات التصنيعية الصينية."
@@ -2827,6 +2843,10 @@
   "سعر اليورو في مصر اليوم الخميس 10/9/2026": {
     "meaning": "Official and interbank foreign exchange rates for the Euro against the Egyptian Pound reflect spot currency pricing used to clear import-export settlements and determine balance-sheet valuations of foreign-currency denominated assets and liabilities.",
     "meaning_ar": "تعكس أسعار صرف اليورو مقابل الجنيه المصري في السوق المصرفية الرسمية تسعير العملة الفوري المستخدم لتسوية المعاملات التجارية وتقييم الأصول والالتزامات المقومة بالعملات الأجنبية في القوائم المالية."
+  },
+  "سعر اليورو في مصر اليوم الخميس 10/9/2026.. قرب 60 جنيها": {
+    "meaning": "A euro exchange rate approaching 60 Egyptian pounds raises the local-currency cost of European imports and adjusts the conversion rate for foreign currency assets and liabilities denominated in euros on corporate balance sheets.",
+    "meaning_ar": "يؤدي اقتراب سعر صرف اليورو من مستوى 60 جنيهاً مصرياً إلى رفع تكلفة الواردات الأوروبية بالعملة المحلية، وتعديل تقييم الأصول والالتزامات المقومة باليورو في الميزانيات العمومية للشركات."
   },
   "سعر خام الحديد يتجاوز 100 دولار للطن في سنغافوره": {
     "meaning": "Iron ore acts as the primary raw material for integrated steel manufacturers, directly determining input costs across heavy industrial supply chains.",
