@@ -174,3 +174,294 @@
   .ft-arrow-pill{transition:none}
 }
 
+
+
+/* ══════════════════════════════════════════════════════════════
+   INTERACTIVE VISUAL DRAWINGS (SECTORS & OWNERSHIP WEB)
+   ══════════════════════════════════════════════════════════════ */
+.ft-drawing-container {
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 26px;
+  padding: clamp(20px, 3vw, 32px);
+  margin-bottom: 28px;
+  box-shadow: 0 12px 36px -16px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  position: relative;
+}
+
+.ft-drawing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.ft-drawing-header h3 {
+  margin: 6px 0 4px;
+  font-size: clamp(19px, 2.2vw, 24px);
+  letter-spacing: -0.025em;
+  font-weight: 750;
+}
+
+.ft-drawing-header p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--t2);
+  max-width: 680px;
+  line-height: 1.55;
+}
+
+.ft-drawing-tag {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.ft-drawing-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+  background: var(--sunk);
+  border-radius: 12px;
+  border: 1px solid var(--edgeIn);
+  font-size: 11px;
+}
+
+.ft-flow-svg, .ft-web-svg, .ft-trajectory-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px 0;
+  overflow: visible;
+}
+
+/* Sized Sector Hubs in SVG */
+.ft-hub-node {
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.2s ease;
+}
+.ft-hub-node:hover circle {
+  stroke-width: 2.2px;
+  stroke: var(--accent);
+}
+.ft-hub-selected circle {
+  stroke-width: 2.5px;
+}
+
+/* Focused Sector Capsule */
+.ft-focus-capsule {
+  margin-top: 20px;
+  padding: 18px 22px;
+  background: var(--sunk);
+  border: 1px solid var(--edgeIn);
+  border-radius: 20px;
+}
+.ft-focus-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ft-focus-eyebrow {
+  font-size: 9.5px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--t2);
+}
+.ft-focus-head h4 {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 750;
+}
+.ft-focus-pill {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  padding: 5px 12px;
+  border-radius: 12px;
+}
+
+.ft-satellites-title {
+  font-size: 11px;
+  color: var(--t2);
+  margin-bottom: 10px;
+}
+.ft-satellites-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+.ft-satellite-card {
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.ft-satellite-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.ft-satellite-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+}
+.ft-sat-ticker {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.ft-sat-weight {
+  font-size: 10px;
+  color: var(--t2);
+}
+.ft-satellite-mid {
+  font-size: 10.5px;
+  color: var(--t2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ft-satellite-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Bipartite Web Inspector */
+.ft-web-container {
+  background: radial-gradient(90% 120% at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%), var(--surface);
+}
+.ft-archetype-node rect {
+  transition: stroke 0.2s, fill 0.2s;
+}
+.ft-company-node {
+  transition: transform 0.18s ease;
+}
+.ft-company-node:hover {
+  transform: translate(720px, calc(var(--y, 0px) - 2px));
+}
+.ft-web-splines path:hover {
+  opacity: 1 !important;
+  stroke-width: 6px !important;
+}
+
+.ft-web-inspector {
+  margin-top: 18px;
+  border-top: 1px solid var(--edgeIn);
+  padding-top: 18px;
+}
+.ft-inspector-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.ft-hero-metric-box {
+  background: var(--sunk);
+  border: 1px solid var(--edgeIn);
+  border-radius: 20px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ft-hero-eyebrow {
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t2);
+}
+.ft-hero-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.ft-hero-number {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.ft-hero-scope {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.ft-hero-note {
+  font-size: 11px;
+  color: var(--t2);
+  line-height: 1.45;
+}
+.ft-hero-side-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* Trajectory Drawing */
+.ft-trajectory-container {
+  margin-bottom: 24px;
+}
+.ft-trajectory-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--t2);
+  margin-top: 8px;
+}
+
+/* Home Mini Previews */
+.ft-mini-drawing {
+  margin-bottom: 10px;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ft-mini-constellation, .ft-mini-web-svg {
+  width: 100%;
+  height: 64px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .ft-portals {
+    grid-template-columns: 1fr;
+  }
+  .ft-inspector-hero {
+    grid-template-columns: 1fr;
+  }
+  .ft-drawing-header {
+    flex-direction: column;
+  }
+}

@@ -62,7 +62,9 @@ export function linePath(points, key) {
     if (!finite(p[key])) { open = false; return ''; }
     const command = open ? 'L' : 'M';
     open = true;
-    return `${command}${(8 + (i / Math.max(1, points.length - 1)) * 584).toFixed(2)} ${(108 - ((p[key] - lo) / span) * 96).toFixed(2)}`;
+    const x = (8 + (i / Math.max(1, points.length - 1)) * 584).toFixed(2);
+    const y = (108 - ((p[key] - lo) / span) * 96).toFixed(2);
+    return `${command}${x} ${y}`;
   }).filter(Boolean).join(' ');
 }
 
@@ -89,6 +91,26 @@ function areaPath(points, key) {
     const cmds = seg.map((pt, idx) => `${idx === 0 ? 'M' : 'L'}${pt.x.toFixed(2)} ${pt.y.toFixed(2)}`).join(' ');
     return `${cmds} L${last.x.toFixed(2)} 112 L${first.x.toFixed(2)} 112 Z`;
   }).filter(Boolean).join(' ');
+}
+
+function stepLinePath(points, key, width = 600, height = 120, pad = 12) {
+  const vals = (points || []).map(p => p[key]).filter(finite);
+  if (!vals.length) return '';
+  const lo = Math.min(...vals), hi = Math.max(...vals), span = hi - lo || 1;
+  let d = '';
+  let prevX = null, prevY = null;
+  points.forEach((p, i) => {
+    if (!finite(p[key])) return;
+    const x = pad + (i / Math.max(1, points.length - 1)) * (width - 2 * pad);
+    const y = (height - pad) - ((p[key] - lo) / span) * (height - 2 * pad);
+    if (prevX === null) {
+      d += `M${x.toFixed(2)} ${y.toFixed(2)}`;
+    } else {
+      d += ` L${x.toFixed(2)} ${prevY.toFixed(2)} L${x.toFixed(2)} ${y.toFixed(2)}`;
+    }
+    prevX = x; prevY = y;
+  });
+  return d;
 }
 
 function sparklineSvg(points, key, width = 84, height = 24, stroke = 'var(--accent)') {
@@ -148,7 +170,9 @@ function dualChart(points, keyUp, keyDown, title, labelUp, labelDown, format = c
       if (!finite(p[key])) { open = false; return ''; }
       const cmd = open ? 'L' : 'M';
       open = true;
-      return `${cmd}${(8 + (i / Math.max(1, points.length - 1)) * 584).toFixed(2)} ${(108 - ((p[key] - lo) / span) * 96).toFixed(2)}`;
+      const x = (8 + (i / Math.max(1, points.length - 1)) * 584).toFixed(2);
+      const y = (108 - ((p[key] - lo) / span) * 96).toFixed(2);
+      return `${cmd}${x} ${y}`;
     }).filter(Boolean).join(' ');
   };
 
@@ -208,6 +232,495 @@ function band(sec, latest) {
   );
 }
 
+// ══════════════════════════════════════════════════════════════
+// DRAWING: SECTOR CAPITAL GRAVITATIONAL FLOW MAP (INTERACTIVE)
+// ══════════════════════════════════════════════════════════════
+function renderSectorFlowMap(sectors, selectedSector, onSelectSector, ar, t) {
+  if (!sectors || !sectors.length) return null;
+  const activeSector = selectedSector || sectors[0];
+  const members = activeSector.members || [];
+  const topMembers = members.slice(0, 6);
+
+  const displaySectors = sectors.slice(0, 8);
+  const maxCap = Math.max(...displaySectors.map(s => s.cap || 1), 1);
+
+  // Layout hubs along an aesthetic orbital plane
+  const hubs = displaySectors.map((s, idx) => {
+    const isSelected = s.id === activeSector.id;
+    const col = idx % 4;
+    const row = Math.floor(idx / 4);
+    const cx = 110 + col * 230;
+    const cy = 80 + row * 150;
+    const normCap = Math.sqrt((s.cap || 1e9) / maxCap);
+    const r = Math.max(34, Math.min(62, normCap * 58));
+    const net = s.netFlow || 0;
+    const chg = s.latest?.change || 0;
+    return { sector: s, cx, cy, r, isSelected, net, chg };
+  });
+
+  return h('div', { className: 'ft-drawing-container' },
+    h('div', { className: 'ft-drawing-header' },
+      h('div', null,
+        h('span', { className: 'ft-drawing-tag' }, t('INTERACTIVE FLOW SYSTEM', 'نظام التدفق التفاعلي')),
+        h('h3', null, t('Capital Gravitational Map & Member Satellites', 'خريطة الجاذبية الرأسمالية وتوزيع الأسهم')),
+        h('p', null, t('Node size represents Sector Market Cap. Flow conduits stream Inflow (Bought) vs Outflow (Sold). Orbiting satellites show member stocks sized by weight and colored by return.',
+          'حجم الدائرة يمثل القيمة السوقية للقطاع. مسارات السيولة توضح التدفق الداخل (المشتريات) والخارج (المبيعات). الأقمار المدارية تظهر الأسهم بوزنها وعائدها.'))
+      ),
+      h('div', { className: 'ft-drawing-legend' },
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--up)' } }), t('Bought / Inflow', 'شراء / تدفق داخل')),
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--down)' } }), t('Sold / Outflow', 'بيع / تدفق خارج')),
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--accent)' } }), t('Market Cap Weight', 'وزن القيمة السوقية'))
+      )
+    ),
+    h('svg', {
+      viewBox: '0 0 920 310',
+      className: 'ft-flow-svg',
+      role: 'img',
+      'aria-label': t('Capital Gravitational Map', 'خريطة التدفق الرأسمالي')
+    },
+      h('defs', null,
+        h('radialGradient', { id: 'hubGlowUp', cx: '50%', cy: '50%', r: '50%' },
+          h('stop', { offset: '0%', stopColor: 'var(--up)', stopOpacity: 0.35 }),
+          h('stop', { offset: '100%', stopColor: 'var(--up)', stopOpacity: 0 })
+        ),
+        h('radialGradient', { id: 'hubGlowDown', cx: '50%', cy: '50%', r: '50%' },
+          h('stop', { offset: '0%', stopColor: 'var(--down)', stopOpacity: 0.35 }),
+          h('stop', { offset: '100%', stopColor: 'var(--down)', stopOpacity: 0 })
+        )
+      ),
+      // Connection conduits between hubs
+      h('g', { className: 'ft-conduits', 'aria-hidden': 'true' },
+        hubs.map((hub, idx) => {
+          if (idx >= hubs.length - 1) return null;
+          const next = hubs[idx + 1];
+          const d = `M ${hub.cx.toFixed(1)} ${hub.cy.toFixed(1)} Q ${((hub.cx + next.cx) / 2).toFixed(1)} ${(Math.min(hub.cy, next.cy) - 20).toFixed(1)} ${next.cx.toFixed(1)} ${next.cy.toFixed(1)}`;
+          return h('path', {
+            key: `conduit-${idx}`,
+            d,
+            fill: 'none',
+            stroke: 'var(--edgeIn)',
+            strokeWidth: 1.2,
+            strokeDasharray: '4 4',
+            opacity: 0.6
+          });
+        }).filter(Boolean)
+      ),
+      // Sized Sector Hubs
+      h('g', { className: 'ft-hubs' },
+        hubs.map(hub => {
+          const s = hub.sector;
+          const name = ar ? (s.nameAr || s.name) : s.name;
+          const shortName = name.length > 18 ? name.slice(0, 16) + '…' : name;
+          const toneColor = hub.net >= 0 ? 'var(--up)' : 'var(--down)';
+
+          return h('g', {
+            key: s.id,
+            className: `ft-hub-node ${hub.isSelected ? 'ft-hub-selected' : ''}`,
+            onClick: () => onSelectSector(s.id),
+            style: { cursor: 'pointer' },
+            role: 'button',
+            tabIndex: 0,
+            'aria-label': `${name}: Cap ${compact(s.cap)}, Net Flow ${compact(hub.net)}`
+          },
+            // Ambient glow on selected
+            hub.isSelected ? h('circle', {
+              cx: hub.cx,
+              cy: hub.cy,
+              r: hub.r + 14,
+              fill: hub.net >= 0 ? 'url(#hubGlowUp)' : 'url(#hubGlowDown)'
+            }) : null,
+            // Inflow curve arc (Buy side)
+            h('path', {
+              d: `M ${(hub.cx - hub.r).toFixed(1)} ${hub.cy.toFixed(1)} A ${hub.r.toFixed(1)} ${hub.r.toFixed(1)} 0 0 1 ${(hub.cx + hub.r).toFixed(1)} ${hub.cy.toFixed(1)}`,
+              fill: 'none',
+              stroke: 'var(--up)',
+              strokeWidth: hub.isSelected ? 3.5 : 2.2,
+              strokeLinecap: 'round'
+            }),
+            // Outflow curve arc (Sell side)
+            h('path', {
+              d: `M ${(hub.cx + hub.r).toFixed(1)} ${hub.cy.toFixed(1)} A ${hub.r.toFixed(1)} ${hub.r.toFixed(1)} 0 0 1 ${(hub.cx - hub.r).toFixed(1)} ${hub.cy.toFixed(1)}`,
+              fill: 'none',
+              stroke: 'var(--down)',
+              strokeWidth: hub.isSelected ? 3.5 : 2.2,
+              strokeLinecap: 'round'
+            }),
+            // Hub Core Circle
+            h('circle', {
+              cx: hub.cx,
+              cy: hub.cy,
+              r: Math.max(22, hub.r - 4),
+              fill: 'var(--surface)',
+              stroke: hub.isSelected ? toneColor : 'var(--edge)',
+              strokeWidth: hub.isSelected ? 2 : 1
+            }),
+            // Hub Labels
+            h('text', {
+              x: hub.cx,
+              y: hub.cy - 10,
+              textAnchor: 'middle',
+              className: 'ft-hub-label',
+              fontSize: 10.5,
+              fontWeight: 700,
+              fill: 'var(--ink)'
+            }, shortName),
+            h('text', {
+              x: hub.cx,
+              y: hub.cy + 4,
+              textAnchor: 'middle',
+              className: 'ft-hub-cap',
+              fontSize: 9.5,
+              fill: 'var(--t2)',
+              fontFamily: 'monospace'
+            }, compact(s.cap)),
+            h('text', {
+              x: hub.cx,
+              y: hub.cy + 17,
+              textAnchor: 'middle',
+              className: 'ft-hub-net',
+              fontSize: 9.5,
+              fontWeight: 700,
+              fill: toneColor
+            }, (hub.net > 0 ? '+' : '') + compact(hub.net))
+          );
+        })
+      )
+    ),
+    // Focused Sector Telemetry Capsule
+    h('div', { className: 'ft-focus-capsule' },
+      h('div', { className: 'ft-focus-head' },
+        h('div', null,
+          h('span', { className: 'ft-focus-eyebrow' }, t('ACTIVE GRAVITATIONAL HUB', 'القطاع المالي النشط')),
+          h('h4', null, ar ? (activeSector.nameAr || activeSector.name) : activeSector.name)
+        ),
+        h('div', { className: 'ft-focus-actions' },
+          h('span', { className: 'ft-focus-pill', style: { color: tone(activeSector.netFlow || 0) } },
+            t('Net Flow: ', 'صافي التدفق: ') + signed(activeSector.latest?.change || 0) + ' · ' + compact(activeSector.netFlow || 0) + ' EGP'
+          )
+        )
+      ),
+      h('div', { className: 'ft-focus-satellites' },
+        h('div', { className: 'ft-satellites-title' },
+          h('span', null, t('Member Stock Satellites (Weight in Sector vs Return Impact)', 'أقمار الأسهم التابعة (الوزن في القطاع مقابل أثر العائد)'))
+        ),
+        h('div', { className: 'ft-satellites-row' },
+          topMembers.map(m => {
+            const mName = ar ? (m.name?.ar || m.ticker) : (m.name?.en || m.ticker);
+            const mImpact = m.impact ?? 0;
+            return h('div', { key: m.ticker, className: 'ft-satellite-card' },
+              h('div', { className: 'ft-satellite-top' },
+                h('strong', { className: 'ft-sat-ticker' }, m.ticker),
+                h('span', { className: 'ft-sat-weight', dir: 'ltr' }, `${(m.weight || 0).toFixed(1)}% ` + t('wt', 'وزن'))
+              ),
+              h('div', { className: 'ft-satellite-mid' },
+                h('span', { className: 'ft-sat-name' }, mName)
+              ),
+              h('div', { className: 'ft-satellite-bottom' },
+                h('span', { className: 'ft-sat-chg', style: { color: tone(m.change) }, dir: 'ltr' }, signed(m.change)),
+                h('span', { className: 'ft-sat-impact', style: { color: tone(mImpact) }, dir: 'ltr' },
+                  t('Impact: ', 'الأثر: ') + signed(mImpact)
+                )
+              )
+            );
+          })
+        )
+      )
+    )
+  );
+}
+
+// ══════════════════════════════════════════════════════════════
+// DRAWING: BIPARTITE RELATIONAL CONNECTION WEB (INTERACTIVE)
+// ══════════════════════════════════════════════════════════════
+function renderOwnershipConnectionWeb(graph, profiles, selectedTicker, onSelectTicker, ar, t) {
+  if (!graph || !graph.links || !graph.links.length) return null;
+
+  const entities = graph.entities || [
+    { id: 'insider', label: 'Board & Insiders', labelAr: 'مجلس إدارة وداخليين' },
+    { id: 'major_holder', label: 'Major Shareholders (>5%)', labelAr: 'مساهمون رئيسيون (>٥٪)' },
+    { id: 'related_party', label: 'Connected Groups', labelAr: 'مجموعات مرتبطة' },
+    { id: 'treasury', label: 'Corporate Treasury', labelAr: 'أسهم خزينة' }
+  ];
+
+  // Entity Y anchors (Left Column: x = 160)
+  const entityY = {
+    insider: 60,
+    major_holder: 150,
+    related_party: 240,
+    treasury: 330
+  };
+
+  // Select top 8-10 distinct companies from links
+  const distinctTickers = [...new Set(graph.links.map(l => l.target))].slice(0, 8);
+  const compSpacing = 340 / Math.max(1, distinctTickers.length - 1);
+  const companyY = {};
+  distinctTickers.forEach((ticker, idx) => {
+    companyY[ticker] = 50 + idx * compSpacing;
+  });
+
+  const activeTicker = selectedTicker || distinctTickers[0];
+  const activeLinks = graph.links.filter(l => l.target === activeTicker);
+  const heroLink = activeLinks[0] || graph.links[0] || {};
+  const activeProf = profiles[activeTicker] || {};
+
+  return h('div', { className: 'ft-drawing-container ft-web-container' },
+    h('div', { className: 'ft-drawing-header' },
+      h('div', null,
+        h('span', { className: 'ft-drawing-tag' }, t('BIPARTITE RELATIONAL WEB', 'شبكة العلاقات الثنائية')),
+        h('h3', null, t('Direct Insider Connections & Stake Weights', 'خريطة صفقات الداخليين وأوزان الحصص')),
+        h('p', null, t('Bezier splines draw the exact connection between Insider Groups and Listed Companies. Spline width indicates % Stake of Company (Hero Metric). Color indicates Accumulation (+) vs Divestment (−).',
+          'الخطوط المنحنية ترسم الصلة المباشرة بين فئات الداخليين والشركات المدرجة. سمك الخط يوضح نسبة الملكية في الشركة. اللون يعبر عن الشراء والاستحواذ (+) مقابل البيع والتخارج (−).'))
+      ),
+      h('div', { className: 'ft-drawing-legend' },
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--up)' } }), t('Accumulation (Bought)', 'شراء واستحواذ')),
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--down)' } }), t('Divestment (Sold)', 'بيع وتخارج')),
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: '#a855f7' } }), t('Treasury Action', 'عمليات خزينة'))
+      )
+    ),
+    h('svg', {
+      viewBox: '0 0 920 380',
+      className: 'ft-web-svg',
+      role: 'img',
+      'aria-label': t('Insider Relational Connection Web', 'شبكة علاقات الداخليين')
+    },
+      h('defs', null,
+        h('linearGradient', { id: 'splineBuy', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
+          h('stop', { offset: '0%', stopColor: 'var(--accent)', stopOpacity: 0.7 }),
+          h('stop', { offset: '100%', stopColor: 'var(--up)', stopOpacity: 0.95 })
+        ),
+        h('linearGradient', { id: 'splineSell', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
+          h('stop', { offset: '0%', stopColor: 'var(--t2)', stopOpacity: 0.6 }),
+          h('stop', { offset: '100%', stopColor: 'var(--down)', stopOpacity: 0.95 })
+        ),
+        h('linearGradient', { id: 'splineTreasury', x1: '0%', y1: '0%', x2: '100%', y2: '0%' },
+          h('stop', { offset: '0%', stopColor: '#c084fc', stopOpacity: 0.6 }),
+          h('stop', { offset: '100%', stopColor: '#9333ea', stopOpacity: 0.95 })
+        )
+      ),
+      // Draw Bezier Connection Splines
+      h('g', { className: 'ft-web-splines' },
+        graph.links.filter(l => companyY[l.target] !== undefined).map((link, idx) => {
+          const y1 = entityY[link.source] ?? 180;
+          const y2 = companyY[link.target] ?? 180;
+          const isSelected = link.target === activeTicker;
+          const d = `M 180 ${y1.toFixed(1)} C 360 ${y1.toFixed(1)}, 540 ${y2.toFixed(1)}, 720 ${y2.toFixed(1)}`;
+          const strokeWidth = isSelected ? Math.max(3, Math.min(14, (link.grossStakePercent || 1) * 1.6)) : Math.max(1.2, Math.min(6, (link.grossStakePercent || 1) * 0.8));
+          const strokeGrad = link.action?.startsWith('treasury') ? 'url(#splineTreasury)' : (link.action === 'bought' ? 'url(#splineBuy)' : 'url(#splineSell)');
+
+          return h('path', {
+            key: `spline-${idx}`,
+            d,
+            fill: 'none',
+            stroke: strokeGrad,
+            strokeWidth,
+            strokeLinecap: 'round',
+            opacity: isSelected ? 1 : 0.28,
+            style: { cursor: 'pointer', transition: 'stroke-width .2s, opacity .2s' },
+            onClick: () => onSelectTicker(link.target)
+          });
+        })
+      ),
+      // Left Rail: Insider Archetypes
+      h('g', { className: 'ft-web-archetypes' },
+        entities.map(ent => {
+          const cy = entityY[ent.id] || 180;
+          const label = ar ? ent.labelAr : ent.label;
+          return h('g', { key: ent.id, className: 'ft-archetype-node', transform: `translate(30, ${cy - 20})` },
+            h('rect', {
+              width: 150,
+              height: 40,
+              rx: 10,
+              fill: 'var(--surface)',
+              stroke: 'var(--edge)',
+              strokeWidth: 1.2
+            }),
+            h('circle', { cx: 20, cy: 20, r: 6, fill: 'var(--accent)' }),
+            h('text', {
+              x: 36,
+              y: 24,
+              fontSize: 10.5,
+              fontWeight: 650,
+              fill: 'var(--ink)'
+            }, label.length > 20 ? label.slice(0, 18) + '…' : label)
+          );
+        })
+      ),
+      // Right Rail: Listed Companies
+      h('g', { className: 'ft-web-companies' },
+        distinctTickers.map(tck => {
+          const cy = companyY[tck];
+          const isSelected = tck === activeTicker;
+          const prof = profiles[tck] || {};
+          const cName = ar ? (prof.name?.ar || tck) : (prof.name?.en || tck);
+
+          return h('g', {
+            key: tck,
+            className: `ft-company-node ${isSelected ? 'ft-node-selected' : ''}`,
+            transform: `translate(720, ${cy - 18})`,
+            onClick: () => onSelectTicker(tck),
+            style: { cursor: 'pointer' }
+          },
+            h('rect', {
+              width: 170,
+              height: 36,
+              rx: 10,
+              fill: isSelected ? 'var(--ink)' : 'var(--surface)',
+              stroke: isSelected ? 'var(--ink)' : 'var(--edge)',
+              strokeWidth: isSelected ? 2 : 1
+            }),
+            h('text', {
+              x: 16,
+              y: 22,
+              fontSize: 12,
+              fontWeight: 750,
+              fill: isSelected ? 'var(--bg)' : 'var(--ink)'
+            }, tck),
+            h('text', {
+              x: 64,
+              y: 22,
+              fontSize: 10,
+              fill: isSelected ? 'color-mix(in srgb, var(--bg) 75%, transparent)' : 'var(--t2)'
+            }, cName.length > 14 ? cName.slice(0, 12) + '…' : cName)
+          );
+        })
+      )
+    ),
+    // Hero Connection Inspector
+    h('div', { className: 'ft-web-inspector' },
+      h('div', { className: 'ft-inspector-hero' },
+        h('div', { className: 'ft-hero-metric-box' },
+          h('span', { className: 'ft-hero-eyebrow' }, t('HERO METRIC: DISCLOSED STAKE % OF COMPANY', 'المقياس الحقيقي: نسبة الحصة في الشركة')),
+          h('div', { className: 'ft-hero-number-row' },
+            h('strong', {
+              className: 'ft-hero-number',
+              style: { color: tone(heroLink.stakePercent || 0) },
+              dir: 'ltr'
+            }, `${(heroLink.stakePercent || 0) > 0 ? '+' : ''}${(heroLink.stakePercent || 0).toFixed(2)}%`),
+            h('span', { className: 'ft-hero-scope' }, t('of total share capital', 'من إجمالي رأسمال الشركة'))
+          ),
+          h('small', { className: 'ft-hero-note' }, t('Percentage in the company is what dictates control and economic impact, far exceeding raw share volume.',
+            'نسبة الملكية هي التي تحدد السيطرة والأثر الاقتصادي الحقيقي، وهي أهم بكثير من مجرد عدد الأسهم المجرد.'))
+        ),
+        h('div', { className: 'ft-hero-side-metrics' },
+          metric(t('Target Company', 'الشركة المستهدفة'), `${activeTicker} · ` + (ar ? (activeProf.name?.ar || activeTicker) : (activeProf.name?.en || activeTicker))),
+          metric(t('Marked Market Value', 'القيمة السوقية المنفذة بسعر اليوم'), compact(heroLink.markedValue) + ' EGP', t('At latest published share price', 'بسعر السهم المنشور الأخير')),
+          metric(t('Disclosed Shares', 'الأسهم المفصح عنها'), compact(Math.abs(heroLink.netShares || 0)) + ' ' + t('shares', 'سهم'), heroLink.latestDate || '')
+        )
+      )
+    )
+  );
+}
+
+// ══════════════════════════════════════════════════════════════
+// DRAWING: CUMULATIVE STAKE % PROGRESSION CURVE VS STOCK PRICE
+// ══════════════════════════════════════════════════════════════
+function renderStakeProgressionCurve(stakeHistory, pricePoints, ticker, currency, ar, t) {
+  if (!stakeHistory || stakeHistory.length < 1) return null;
+
+  const validStakes = stakeHistory.map(p => p.stake).filter(finite);
+  const minStake = validStakes.length ? Math.min(...validStakes) : 0;
+  const maxStake = validStakes.length ? Math.max(...validStakes) : 1;
+
+  const stepD = stepLinePath(stakeHistory, 'stake', 800, 110, 16);
+
+  return h('div', { className: 'ft-drawing-container ft-trajectory-container' },
+    h('div', { className: 'ft-drawing-header' },
+      h('div', null,
+        h('span', { className: 'ft-drawing-tag' }, t('TEMPORAL STAKE TRAJECTORY', 'مسار الحصة عبر الزمن')),
+        h('h3', null, `${ticker} · ` + t('Cumulative Insider Stake % Progression vs Share Price', 'تراكمي نسبة الملكية عبر الزمن مقابل سعر السهم')),
+        h('p', null, t('Stepped curve traces how insider ownership evolved chronologically, aligned against the published stock price trajectory.',
+          'المنحنى المتدرج يوضح كيف تغيرت نسبة ملكية الداخليين زمنياً مع كل إفصاح مقارنة بمسار سعر السهم.'))
+      ),
+      h('div', { className: 'ft-trajectory-legend' },
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--accent)' } }), t('Cumulative Stake %', 'تراكمي نسبة الملكية ٪')),
+        h('span', { className: 'ft-legend-item' }, h('i', { style: { background: 'var(--ink)' } }), t('Share Price', 'سعر السهم'))
+      )
+    ),
+    h('svg', {
+      viewBox: '0 0 800 130',
+      className: 'ft-trajectory-svg',
+      role: 'img',
+      'aria-label': `${ticker} Stake % Progression`
+    },
+      [20, 65, 110].map(y => h('line', { key: y, x1: 16, x2: 784, y1: y, y2: y, stroke: 'var(--rule2)', strokeWidth: 1 })),
+      stepD ? h('path', {
+        d: stepD,
+        fill: 'none',
+        stroke: 'var(--accent)',
+        strokeWidth: 3,
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round'
+      }) : null,
+      // Data point nodes
+      stakeHistory.map((p, idx) => {
+        if (!finite(p.stake)) return null;
+        const x = 16 + (idx / Math.max(1, stakeHistory.length - 1)) * 768;
+        const y = 110 - ((p.stake - minStake) / (maxStake - minStake || 1)) * 90;
+        return h('g', { key: `pt-${idx}` },
+          h('circle', { cx: x, cy: y, r: 5, fill: 'var(--surface)', stroke: 'var(--accent)', strokeWidth: 2.5 }),
+          h('text', {
+            x,
+            y: y - 8,
+            textAnchor: 'middle',
+            fontSize: 10,
+            fontWeight: 700,
+            fill: 'var(--ink)',
+            fontFamily: 'monospace'
+          }, `${p.stake.toFixed(2)}%`)
+        );
+      }).filter(Boolean)
+    ),
+    h('div', { className: 'ft-trajectory-footer', dir: 'ltr' },
+      h('span', null, stakeHistory[0]?.date || ''),
+      h('span', null, `${t('Range: ', 'المدى: ')}${minStake.toFixed(2)}% → ${maxStake.toFixed(2)}%`),
+      h('span', null, stakeHistory.at(-1)?.date || '')
+    )
+  );
+}
+
+// ══════════════════════════════════════════════════════════════
+// HOME MINI PREVIEWS (LIVING VISUAL DRAWINGS)
+// ══════════════════════════════════════════════════════════════
+function renderHomeSectorConstellation(sectors, ar, t) {
+  const top = (sectors || []).slice(0, 5);
+  return h('div', { className: 'ft-mini-drawing' },
+    h('svg', { viewBox: '0 0 380 90', className: 'ft-mini-constellation', role: 'img', 'aria-hidden': 'true' },
+      // Curved constellation arcs
+      h('path', { d: 'M 40 45 Q 110 15 190 45 T 340 45', fill: 'none', stroke: 'var(--edgeIn)', strokeWidth: 1.5, strokeDasharray: '3 3' }),
+      top.map((s, i) => {
+        const x = 40 + i * 75;
+        const y = 45 + (i % 2 === 0 ? -16 : 16);
+        const r = Math.max(12, Math.min(22, Math.sqrt((s.cap || 1e9) / 1e11) * 20));
+        const color = (s.netFlow || 0) >= 0 ? 'var(--up)' : 'var(--down)';
+        return h('g', { key: s.id || i },
+          h('circle', { cx: x, cy: y, r: r + 3, fill: 'none', stroke: color, strokeWidth: 1.5, opacity: 0.5 }),
+          h('circle', { cx: x, cy: y, r, fill: 'var(--surface)', stroke: 'var(--edge)', strokeWidth: 1 }),
+          h('text', { x, y: y + 3, textAnchor: 'middle', fontSize: 8.5, fontWeight: 700, fill: 'var(--ink)' }, s.name?.slice(0, 3).toUpperCase() || 'SEC')
+        );
+      })
+    )
+  );
+}
+
+function renderHomeOwnershipWeb(links, ar, t) {
+  const topLinks = (links || []).slice(0, 4);
+  return h('div', { className: 'ft-mini-drawing' },
+    h('svg', { viewBox: '0 0 380 90', className: 'ft-mini-web-svg', role: 'img', 'aria-hidden': 'true' },
+      topLinks.map((link, i) => {
+        const y1 = 20 + i * 18;
+        const y2 = 25 + ((i * 2) % 4) * 16;
+        const d = `M 40 ${y1} C 140 ${y1}, 240 ${y2}, 340 ${y2}`;
+        const strokeColor = link.action === 'bought' ? 'var(--up)' : 'var(--down)';
+        return h('g', { key: i },
+          h('path', { d, fill: 'none', stroke: strokeColor, strokeWidth: 2, opacity: 0.75, strokeLinecap: 'round' }),
+          h('circle', { cx: 40, cy: y1, r: 4, fill: 'var(--accent)' }),
+          h('circle', { cx: 340, cy: y2, r: 4, fill: 'var(--ink)' })
+        );
+      })
+    )
+  );
+}
+
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
   const st = component.state;
@@ -218,10 +731,11 @@ export function flowTrackers(component, data, ar) {
   const ready = d?.schemaVersion === 1;
   const preview = ready ? d : data.flowPreview;
   const sectors = preview?.sectors || [];
-  const titleOf = s => ar ? s.nameAr : s.name;
-  const topSectors = [...sectors].sort((a, b) => (b.history?.at(-1)?.value || 0) - (a.history?.at(-1)?.value || 0)).slice(0, 4);
+  const titleOf = s => ar ? (s.nameAr || s.name) : s.name;
+  const topSectors = [...sectors].sort((a, b) => (b.history?.at(-1)?.value || 0) - (a.history?.at(-1)?.value || 0)).slice(0, 5);
   const totalFlow = topSectors.reduce((s, x) => s + (x.history?.at(-1)?.value || 0), 0);
   const topEvents = preview?.topEvents || (d?.events ? d.events.filter(r => finite(r.referencePercent) || finite(r.currentMarkedValue)).slice(0, 8) : []);
+  const topOwnershipLinks = preview?.topOwnershipLinks || (d?.ownershipGraph?.links || []);
 
   const home = h('section', { className: 'ft-portals', 'aria-label': t('Follow the money and ownership', 'تتبّع التداول والملكية') },
     // 1. Sector Liquidity Portal Button (Double-Bezel)
@@ -242,10 +756,10 @@ export function flowTrackers(component, data, ar) {
             h('p', null, t('Where activity meets market size · Advancing vs declining capital.', 'حجم التداول بجوار وزن القطاع · رأس المال الصاعد مقابل الهابط.'))
           ),
           h('div', { className: 'ft-portal-visual' },
+            renderHomeSectorConstellation(sectors, ar, t),
             topSectors.length ? h('div', { className: 'ft-preview-grid' },
-              topSectors.map(s => {
+              topSectors.slice(0, 3).map(s => {
                 const lat = s.history?.at(-1) || {};
-                const hist = s.history || [];
                 return h('div', { key: s.id, className: 'ft-preview-item' },
                   h('div', { className: 'ft-preview-info' },
                     h('span', { className: 'ft-preview-name' }, titleOf(s)),
@@ -254,8 +768,7 @@ export function flowTrackers(component, data, ar) {
                   h('div', { className: 'ft-preview-row-center' },
                     band(s, lat),
                     h('strong', { className: 'ft-preview-badge', dir: 'ltr', style: { color: tone(lat.change) } }, signed(lat.change))
-                  ),
-                  hist.length > 2 ? sparklineSvg(hist, 'value', 84, 20, lat.change > 0 ? 'var(--up)' : 'var(--accent)') : null
+                  )
                 );
               })
             ) : h('div', { className: 'ft-empty-mini' }, t('Sector size · trading value · price movement', 'حجم القطاع · قيمة التداول · حركة السعر'))
@@ -289,8 +802,9 @@ export function flowTrackers(component, data, ar) {
             h('p', null, t('Tracking when insiders change their percentage in companies over time.', 'تتبّع تغير حصص الداخليين في الشركات عبر الزمن.'))
           ),
           h('div', { className: 'ft-portal-visual ft-owner-stream' },
+            renderHomeOwnershipWeb(topOwnershipLinks, ar, t),
             topEvents.length ? h('div', { className: 'ft-stake-feed' },
-              topEvents.slice(0, 3).map(ev => {
+              topEvents.slice(0, 2).map(ev => {
                 const dir = direction(ev.action);
                 const pct = ev.referencePercent;
                 const val = ev.currentMarkedValue;
@@ -489,6 +1003,7 @@ export function flowTrackers(component, data, ar) {
             h('strong', { dir: 'ltr', style: { color: 'var(--down)' } }, compact(totalDecliningVal) + ' EGP')
           )
         ),
+        renderSectorFlowMap(rows, selected, openSector, ar, t),
         h('div', { className: 'ft-toolbar' },
           h('div', { className: 'ft-pills' },
             [1, 5, 20, 60, 120].map(n => button(n + ' ' + t('sessions', 'جلسة'), () => component.setState({ flowRange: n }), count === n))
@@ -596,7 +1111,7 @@ export function flowTrackers(component, data, ar) {
   });
 
   const stakeRows = rows.filter(r => finite(r.ownershipAfterPercent));
-  const stakeHistory = ticker && investor ? [...stakeRows].reverse().map(r => ({ date: r.date, stake: r.ownershipAfterPercent })) : [];
+  const stakeHistory = ticker && investor ? [...stakeRows].reverse().map(r => ({ date: r.date, stake: r.ownershipAfterPercent })) : (profile?.stakeHistory || []);
   const names = new Set(rows.map(r => r.investorName).filter(Boolean));
   const currency = profile?.currency || 'EGP';
   const priceFrom = new Date(Date.parse(d.asOf + 'T00:00:00Z') - (count - 1) * 86400000).toISOString().slice(0, 10);
@@ -673,6 +1188,17 @@ export function flowTrackers(component, data, ar) {
             'تداول مليون سهم في شركة ذات ١٠ ملايين سهم يمثل ١٠٪ من ملكية الشركة، بينما في شركة بـ ١٠ مليارات سهم يمثل ٠.٠١٪ فقط. نسبة الملكية والقيمة السوقية هما المقياس الحقيقي.'))
         )
       ),
+      // Bipartite Relational Connection Web (Interactive Drawing)
+      d.ownershipGraph ? renderOwnershipConnectionWeb(
+        d.ownershipGraph,
+        profiles,
+        ticker,
+        selectedTck => component.setState({ ownershipTicker: selectedTck, ownershipInvestor: '', ownershipPage: 0 }),
+        ar,
+        t
+      ) : null,
+      // Temporal Stake % Progression Curve vs Share Price (Interactive Drawing)
+      ticker && stakeHistory.length > 0 ? renderStakeProgressionCurve(stakeHistory, pricePoints, ticker, currency, ar, t) : null,
       h('div', { className: 'ft-toolbar' },
         select(t('Company', 'الشركة'), ticker, [
           ['', t('All companies', 'كل الشركات')],
@@ -731,7 +1257,7 @@ export function flowTrackers(component, data, ar) {
         )
       ),
       ticker ? chart(pricePoints, 'close', t('Published share price history · ', 'تاريخ سعر السهم المنشور · ') + currency, v => v.toFixed(2), 'var(--accent)', true) : null,
-      stakeHistory.length > 1 ? chart(stakeHistory, 'stake', t('Disclosed stake history · ', 'تاريخ الحصة المفصح عنها · ') + investor, v => v.toFixed(2) + '%', 'var(--accent)', true) : null,
+      stakeHistory.length > 1 && investor ? chart(stakeHistory, 'stake', t('Disclosed stake history · ', 'تاريخ الحصة المفصح عنها · ') + investor, v => v.toFixed(2) + '%', 'var(--accent)', true) : null,
       h('details', { className: 'ft-method' },
         h('summary', null, t('What this can—and cannot—tell you', 'ما الذي توضحه هذه البيانات وما الذي لا توضحه؟')),
         h('p', null, t('This is a disclosure timeline, not a shareholder register. We do not reconstruct a person’s holdings from unnamed trades. Exact ownership changes require verified before/after stakes. A trade divided by today’s shares is only a scale reference: splits, capital changes and treasury cancellations can change that denominator.',
@@ -749,4 +1275,3 @@ export function flowTrackers(component, data, ar) {
     )
   };
 }
-

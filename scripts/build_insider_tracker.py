@@ -162,30 +162,52 @@ def load_company_directory() -> tuple[dict[str, dict], dict[str, str]]:
         canonical("El Wadi For Touristic Investment"): "ELWA",
         canonical("Arab Engineering Industries"): "EEII",
         canonical("Egytrans"): "ETRS",
+        canonical("TMG Holding"): "TMGH",
+        canonical("Heibco for commercial investments & real estate development"): "HBCO",
+        canonical("Heibco for commercial investments"): "HBCO",
+        canonical("International Co For Investment & Development"): "ICID",
+        canonical("International Co For Investment"): "ICID",
+        canonical("Egyptians For Housing Development & Reconstruction"): "EHDR",
+        canonical("Egyptians For Housing"): "EHDR",
+        canonical("MM Group Industrial & International Trade"): "MTIE",
+        canonical("MM Group Industrial & International"): "MTIE",
+        canonical("Universal For Paper and Packaging Material"): "UNIP",
+        canonical("Universal For Paper & Packaging"): "UNIP",
+        canonical("Asec Company for Mining \"ASCOM\""): "ASCM",
+        canonical("FERCHEM MISR CO. FOR FERTILIZERS & CHEMICALS"): "FERC",
+        canonical("FERCHEM MISR CO. FOR"): "FERC",
+        canonical("El-Nile Co. For Pharmaceuticals And Chemical Industries"): "NIPH",
+        canonical("El-Nile Co. For Pharmaceuticals And"): "NIPH",
+        canonical("EGX 30 INDEX ETF"): "EGX30ETF",
+        canonical("Valmore Holding"): "VLMR",
+        canonical("Valmore"): "VLMR",
+        canonical("Utopia For Real Estate & Tourism"): "UTOP",
+        canonical("Memphis Pharmaceuticals"): "MPCI",
+        canonical("Contact Financial Holding ESOP"): "CNFN",
+        canonical("El Nasr Clothes & Textiles (Kabo)"): "KABO",
+        canonical("ODIN Financial Investments"): "ODIN",
     }
     alias_map.update(manual)
     return by_ticker, alias_map
+
+
+def resolve_ticker(co_raw: str, alias_map: dict[str, str]) -> str | None:
+    if not co_raw:
+        return None
+    key = canonical(co_raw)
+    if key in alias_map:
+        return alias_map[key]
+    for a_k, a_tick in alias_map.items():
+        if len(a_k) > 4 and (a_k in key or key in a_k):
+            return a_tick
+    return None
 
 
 def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -> list[dict]:
     records: list[dict] = []
     seen_keys: set[str] = set()
 
-    # 1. Load cached bulletin records if available (vital for ephemeral CI runners where PDFs are gitignored)
-    if BULLETIN_STORE.exists():
-        try:
-            cached = json.loads(BULLETIN_STORE.read_text(encoding="utf-8"))
-            if isinstance(cached, list):
-                for r in cached:
-                    act_norm = "buy" if r.get('action') in ("buy", "bought") else "sell"
-                    k = f"{r.get('date')}:{r.get('ticker') or r.get('company')}:{act_norm}:{r.get('shares')}:{r.get('relationship')}"
-                    if k not in seen_keys:
-                        seen_keys.add(k)
-                        records.append(r)
-        except Exception as e:
-            print(f"Warning loading {BULLETIN_STORE}: {e}", file=sys.stderr)
-
-    # 2. Parse any local PDFs (e.g. from local environment or new downloads)
+    # Parse local PDFs freshly with robust carry-forward
     for pdf_path in sorted(PDF_DIR.glob("*.pdf")):
         fname = pdf_path.name
         m_filing = re.search(r"egx-(\d+)", fname)
@@ -199,40 +221,96 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -
         except Exception:
             continue
 
-        date_m = re.search(r"Session\s*(\d{1,2}/\d{1,2}/(20\d{2}))", text, re.I)
+        date_m = re.search(r"Session\s*(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text, re.I) or re.search(r"(\d{1,2})[/]+(\d{1,2})[/]+(20\d{2})", text)
         session_date = None
         if date_m:
-            day, month, year = int(date_m.group(1).split("/")[0]), int(date_m.group(1).split("/")[1]), int(date_m.group(2))
+            day, month, year = int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))
             session_date = f"{year:04d}-{month:02d}-{day:02d}"
 
-        lines = text.splitlines()
-        pos_start = 42
-        tx_start = 65
-        vol_start = 77
-        for line in lines[:10]:
-            if "Position" in line and "Transaction" in line:
-                p_idx = line.find("Position")
-                t_idx = line.find("Transaction") if "Transaction" in line else line.find("Transa")
-                v_idx = line.find("Volume")
-                if p_idx != -1: pos_start = max(35, p_idx - 6)
-                if t_idx != -1: tx_start = t_idx - 4
-                if v_idx != -1: vol_start = v_idx - 4
-                break
-
-        cur_lines: list[str] = []
-        for line in lines:
-            if "Trading of Insiders" in line or "Company Name" in line or "\x0c" in line:
+        current_company = None
+        for line in text.splitlines():
+            l_s = line.strip()
+            if not l_s or "Trading of Insiders" in l_s or "Company Name" in l_s or "\x0c" in line:
+                if "\x0c" in line:
+                    current_company = None
                 continue
-            if not line.strip():
-                if cur_lines:
-                    parse_block(cur_lines, session_date, filing_id, fname, pos_start, tx_start, vol_start, alias_map, by_ticker, records, seen_keys)
-                    cur_lines = []
-            else:
-                cur_lines.append(line)
-        if cur_lines:
-            parse_block(cur_lines, session_date, filing_id, fname, pos_start, tx_start, vol_start, alias_map, by_ticker, records, seen_keys)
 
-    # 3. Save accumulated records back to store so CI keeps them
+            m_act = re.search(r"\b(buy|sell|sold)\b", line, re.I)
+            m_vol = re.search(r"\b([\d,]{3,})\b", line)
+            m_pos = re.search(r"\b(related parties|insider|main shareholder|major)\b", line, re.I)
+
+            cutoff = m_pos.start() if m_pos else (m_act.start() if m_act else len(line))
+            co_chunk = line[:cutoff].strip()
+            if co_chunk and len(co_chunk) > 2 and not re.match(r"^\d+$", co_chunk):
+                current_company = " ".join(co_chunk.split())
+
+            if m_act and m_vol and current_company:
+                act_str = m_act.group(1).lower()
+                act = "bought" if act_str == "buy" else "sold"
+                try:
+                    shares = int(m_vol.group(1).replace(",", ""))
+                except ValueError:
+                    continue
+
+                pos_raw = m_pos.group(1).lower() if m_pos else "insider"
+                rel = (
+                    "related_party" if "related" in pos_raw else
+                    "major_holder" if ("main" in pos_raw or "major" in pos_raw) else
+                    "insider"
+                )
+
+                ticker = resolve_ticker(current_company, alias_map)
+                co_meta = by_ticker.get(ticker or "", {})
+                comp_display = co_meta.get("name") or current_company
+                comp_ar = co_meta.get("nameAr") or current_company
+
+                k = f"{session_date}:{ticker or current_company}:{act}:{shares}:{rel}"
+                if k in seen_keys:
+                    continue
+                seen_keys.add(k)
+
+                records.append({
+                    "id": f"bulletin-{filing_id}-{len(records) + 1}",
+                    "filingId": filing_id,
+                    "sourceType": "bulletin",
+                    "date": session_date,
+                    "ticker": ticker,
+                    "company": comp_display,
+                    "companyAr": comp_ar,
+                    "sector": co_meta.get("sector") or "",
+                    "sectorAr": co_meta.get("sectorAr") or "",
+                    "action": act,
+                    "actionLabel": "Bought" if act == "bought" else "Sold",
+                    "actionLabelAr": "شراء" if act == "bought" else "مبيعات",
+                    "relationship": rel,
+                    "relationshipLabel": (
+                        "Connected Group" if rel == "related_party" else
+                        "Major Shareholder" if rel == "major_holder" else
+                        "Insider / Board"
+                    ),
+                    "relationshipLabelAr": (
+                        "مجموعة مرتبطة" if rel == "related_party" else
+                        "مساهم رئيسي" if rel == "major_holder" else
+                        "مجلس إدارة / داخلي"
+                    ),
+                    "positionRaw": pos_raw,
+                    "shares": shares,
+                    "title": f"تعامل على أسهم {comp_ar} ({'شراء' if act == 'bought' else 'مبيعات'}): {shares:,} سهم",
+                    "titleEn": f"Transaction on {comp_display} ({act}): {shares:,} shares",
+                    "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={filing_id}" if filing_id != "0" else "",
+                })
+
+    # Fallback to cached store if no PDFs were parsed (e.g. CI runner)
+    if not records and BULLETIN_STORE.exists():
+        try:
+            cached = json.loads(BULLETIN_STORE.read_text(encoding="utf-8"))
+            if isinstance(cached, list):
+                for r in cached:
+                    records.append(r)
+        except Exception as e:
+            print(f"Warning loading cached {BULLETIN_STORE}: {e}", file=sys.stderr)
+
+    # Save fresh records to store so CI keeps them
     if records:
         try:
             BULLETIN_STORE.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -242,187 +320,115 @@ def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -
     return records
 
 
-def parse_block(block_lines: list[str], session_date: str | None, filing_id: str, fname: str,
-                pos_start: int, tx_start: int, vol_start: int,
-                alias_map: dict[str, str], by_ticker: dict[str, dict],
-                records: list[dict], seen_keys: set[str]) -> None:
-    comp_parts = []
-    pos_parts = []
-    action = None
-    shares = None
-
-    for line in block_lines:
-        c_chunk = line[:pos_start].strip()
-        pos_pat = re.compile(r"\b(related parties|insider|main|major)\b", re.I)
-        if pos_pat.search(c_chunk):
-            m = pos_pat.search(c_chunk)
-            p_bleed = c_chunk[m.start():].strip()
-            c_chunk = c_chunk[:m.start()].strip()
-            if p_bleed:
-                pos_parts.append(p_bleed)
-
-        if c_chunk:
-            comp_parts.append(c_chunk)
-
-        p_chunk = line[pos_start:tx_start].strip() if len(line) > pos_start else ""
-        if p_chunk:
-            pos_parts.append(p_chunk)
-
-        rest = line[tx_start:].strip() if len(line) > tx_start else ""
-        m_act = re.search(r"\b(buy|sell|sold)\b", rest, re.I)
-        m_vol = re.search(r"\b([\d,]+)\b", line[vol_start:] if len(line) > vol_start else rest)
-        if m_act:
-            action = "buy" if m_act.group(1).lower() == "buy" else "sell"
-        if m_vol:
-            try:
-                shares = int(m_vol.group(1).replace(",", ""))
-            except ValueError:
-                pass
-
-    if not action or shares is None:
-        return
-
-    company_raw = " ".join(comp_parts).strip(" -")
-    position_raw = " ".join(pos_parts).strip()
-    if not company_raw:
-        return
-
-    key = canonical(company_raw)
-    ticker = alias_map.get(key)
-    if not ticker:
-        for a_k, a_tick in alias_map.items():
-            if len(a_k) > 5 and (a_k in key or key in a_k):
-                ticker = a_tick
-                break
-
-    rel = "insider"
-    pos_lower = position_raw.lower()
-    if "related" in pos_lower:
-        rel = "related_party"
-    elif "major" in pos_lower or "main" in pos_lower:
-        rel = "major_holder"
-
-    dedup_key = f"{session_date}:{ticker or company_raw}:{action}:{shares}:{rel}"
-    if dedup_key in seen_keys:
-        return
-    seen_keys.add(dedup_key)
-
-    co_meta = by_ticker.get(ticker or "", {})
-    records.append({
-        "id": f"bulletin-{filing_id}-{len(records) + 1}",
-        "filingId": filing_id,
-        "sourceType": "bulletin",
-        "date": session_date,
-        "ticker": ticker,
-        "company": co_meta.get("name") or company_raw,
-        "companyAr": co_meta.get("nameAr") or company_raw,
-        "sector": co_meta.get("sector") or "",
-        "sectorAr": co_meta.get("sectorAr") or "",
-        "action": "bought" if action == "buy" else "sold",
-        "actionLabel": "Bought" if action == "buy" else "Sold",
-        "actionLabelAr": "شراء" if action == "buy" else "مبيعات",
-        "relationship": rel,
-        "relationshipLabel": (
-            "Connected Group" if rel == "related_party" else
-            "Major Shareholder" if rel == "major_holder" else
-            "Insider / Board"
-        ),
-        "relationshipLabelAr": (
-            "مجموعة مرتبطة" if rel == "related_party" else
-            "مساهم رئيسي" if rel == "major_holder" else
-            "مجلس إدارة / داخلي"
-        ),
-        "positionRaw": position_raw,
-        "shares": shares,
-        "title": f"تعامل على أسهم {company_raw} ({'شراء' if action == 'buy' else 'مبيعات'}): {shares:,} سهم",
-        "titleEn": f"Transaction on {company_raw} ({'bought' if action == 'buy' else 'sold'}): {shares:,} shares",
-        "link": f"https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID={filing_id}" if filing_id != "0" else "",
-    })
-
-
 def parse_latest_disclosures(by_ticker: dict[str, dict], records: list[dict]) -> None:
-    if not LATEST_DISCLOSURES.exists():
-        return
+    seen_ids = {r.get("id") for r in records if r.get("id")}
+    seen_keys = {f"{r.get('date')}:{r.get('ticker')}:{r.get('action')}" for r in records if r.get("ticker")}
 
-    try:
-        data = json.loads(LATEST_DISCLOSURES.read_text(encoding="utf-8"))
-        items = data.get("items", [])
-    except Exception as e:
-        print(f"Warning loading latest.json: {e}", file=sys.stderr)
-        return
+    files_to_read = []
+    if LATEST_DISCLOSURES.exists():
+        files_to_read.append(LATEST_DISCLOSURES)
+    for p in sorted(REPO.glob("public/data/v1/disclosures/archive/2026-*.json")):
+        if p not in files_to_read:
+            files_to_read.append(p)
 
-    for it in items:
-        title = it.get("title", "")
-        title_en = it.get("title_en", "")
-        date = it.get("date", "")
-        filing_id = it.get("id", "").replace("egx-", "")
-        link = it.get("link", "")
-        tickers = it.get("tickers", [])
-        ticker = tickers[0] if tickers else None
+    for file_p in files_to_read:
+        try:
+            data = json.loads(file_p.read_text(encoding="utf-8"))
+            items = data.get("items", [])
+        except Exception as e:
+            print(f"Warning loading {file_p}: {e}", file=sys.stderr)
+            continue
 
-        if "خزينة" in title:
-            is_buy = "شراء" in title
-            is_sell = "بيع" in title
-            is_cancel = "إعدام" in title or "تخفيض" in title
-            action = "treasury_purchase" if is_buy else "treasury_sale" if is_sell else "treasury_cancel" if is_cancel else "treasury_event"
-            co_meta = by_ticker.get(ticker or "", {})
-            records.append({
-                "id": f"filing-{filing_id}",
-                "filingId": filing_id,
-                "sourceType": "treasury_filing",
-                "date": date,
-                "ticker": ticker,
-                "company": co_meta.get("name") or (ticker or "Treasury Stock"),
-                "companyAr": co_meta.get("nameAr") or (ticker or "أسهم خزينة"),
-                "sector": co_meta.get("sector") or "",
-                "sectorAr": co_meta.get("sectorAr") or "",
-                "action": action,
-                "actionLabel": (
-                    "Treasury Purchase" if action == "treasury_purchase" else
-                    "Treasury Sale" if action == "treasury_sale" else
-                    "Treasury Cancellation" if action == "treasury_cancel" else
-                    "Treasury Notice"
-                ),
-                "actionLabelAr": (
-                    "شراء أسهم خزينة" if action == "treasury_purchase" else
-                    "مبيعات أسهم خزينة" if action == "treasury_sale" else
-                    "إعدام أسهم خزينة" if action == "treasury_cancel" else
-                    "إفصاح أسهم خزينة"
-                ),
-                "relationship": "treasury",
-                "relationshipLabel": "Company Treasury",
-                "relationshipLabelAr": "الشركة (أسهم خزينة)",
-                "positionRaw": "Treasury Shares",
-                "shares": None,
-                "title": title,
-                "titleEn": title_en or title,
-                "link": link,
-            })
+        for it in items:
+            title = it.get("title", "")
+            title_en = it.get("title_en", "")
+            date = it.get("date", "")
+            filing_id = str(it.get("id", "")).replace("egx-", "")
+            link = it.get("link", "")
+            tickers = it.get("tickers", [])
+            ticker = tickers[0] if tickers else None
 
-        elif "إفصاح بعد التنفيذ" in title and ticker:
-            co_meta = by_ticker.get(ticker or "", {})
-            records.append({
-                "id": f"filing-{filing_id}",
-                "filingId": filing_id,
-                "sourceType": "post_execution_filing",
-                "date": date,
-                "ticker": ticker,
-                "company": co_meta.get("name") or ticker,
-                "companyAr": co_meta.get("nameAr") or ticker,
-                "sector": co_meta.get("sector") or "",
-                "sectorAr": co_meta.get("sectorAr") or "",
-                "action": "disclosure",
-                "actionLabel": "Post-Execution Trade Form",
-                "actionLabelAr": "إفصاح بعد التنفيذ",
-                "relationship": "insider",
-                "relationshipLabel": "Insider / Major Holder",
-                "relationshipLabelAr": "متصل / مساهم رئيسي",
-                "positionRaw": "Post-Implementation Disclosure",
-                "shares": None,
-                "title": title,
-                "titleEn": title_en or title,
-                "link": link,
-            })
+            # Attempt to extract ticker from title if not set
+            if not ticker:
+                m_tick = TICKER_RE.search(title)
+                if m_tick:
+                    ticker = m_tick.group(1).upper()
+                elif "فالمور" in title or "VLMR" in title:
+                    ticker = "VLMR"
+
+            if "خزينة" in title:
+                is_buy = "شراء" in title
+                is_sell = "بيع" in title
+                is_cancel = "إعدام" in title or "تخفيض" in title
+                action = "treasury_purchase" if is_buy else "treasury_sale" if is_sell else "treasury_cancel" if is_cancel else "treasury_event"
+                co_meta = by_ticker.get(ticker or "", {})
+                rec_id = f"filing-{filing_id}"
+                if rec_id in seen_ids:
+                    continue
+                seen_ids.add(rec_id)
+
+                records.append({
+                    "id": rec_id,
+                    "filingId": filing_id,
+                    "sourceType": "treasury_filing",
+                    "date": date,
+                    "ticker": ticker,
+                    "company": co_meta.get("name") or (ticker or "Treasury Stock"),
+                    "companyAr": co_meta.get("nameAr") or (ticker or "أسهم خزينة"),
+                    "sector": co_meta.get("sector") or "",
+                    "sectorAr": co_meta.get("sectorAr") or "",
+                    "action": action,
+                    "actionLabel": (
+                        "Treasury Purchase" if action == "treasury_purchase" else
+                        "Treasury Sale" if action == "treasury_sale" else
+                        "Treasury Cancellation" if action == "treasury_cancel" else
+                        "Treasury Notice"
+                    ),
+                    "actionLabelAr": (
+                        "شراء أسهم خزينة" if action == "treasury_purchase" else
+                        "مبيعات أسهم خزينة" if action == "treasury_sale" else
+                        "إعدام أسهم خزينة" if action == "treasury_cancel" else
+                        "إفصاح أسهم خزينة"
+                    ),
+                    "relationship": "treasury",
+                    "relationshipLabel": "Company Treasury",
+                    "relationshipLabelAr": "الشركة (أسهم خزينة)",
+                    "positionRaw": "Treasury Shares",
+                    "shares": None,
+                    "title": title,
+                    "titleEn": title_en or title,
+                    "link": link,
+                })
+
+            elif "إفصاح بعد التنفيذ" in title and ticker:
+                co_meta = by_ticker.get(ticker or "", {})
+                rec_id = f"filing-{filing_id}"
+                if rec_id in seen_ids:
+                    continue
+                seen_ids.add(rec_id)
+
+                records.append({
+                    "id": rec_id,
+                    "filingId": filing_id,
+                    "sourceType": "post_execution_filing",
+                    "date": date,
+                    "ticker": ticker,
+                    "company": co_meta.get("name") or ticker,
+                    "companyAr": co_meta.get("nameAr") or ticker,
+                    "sector": co_meta.get("sector") or "",
+                    "sectorAr": co_meta.get("sectorAr") or "",
+                    "action": "disclosure",
+                    "actionLabel": "Post-Execution Trade Form",
+                    "actionLabelAr": "إفصاح بعد التنفيذ",
+                    "relationship": "insider",
+                    "relationshipLabel": "Insider / Major Holder",
+                    "relationshipLabelAr": "متصل / مساهم رئيسي",
+                    "positionRaw": "Post-Implementation Disclosure",
+                    "shares": None,
+                    "title": title,
+                    "titleEn": title_en or title,
+                    "link": link,
+                })
 
 
 def main() -> int:
