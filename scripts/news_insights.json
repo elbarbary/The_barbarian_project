@@ -759,6 +759,10 @@
     "meaning": "A reading above the 50% threshold places the Chinese logistics sector in expansion territory, reflecting operational activity in freight movement, warehousing capacity utilization, and supply chain turnover rates.",
     "meaning_ar": "يعكس تجاوز المؤشر لمستوى 50% وجود قطاع الخدمات اللوجستية الصيني في نطاق التوسع التشغيلي، وهو ما يرصد حركة تدفق الشحن، ومعدلات إشغال المستودعات، وسرعة دوران البضائع عبر سلاسل الإمداد."
   },
+  "ارتفاع موشر الانتاج الصناعي في ايطاليا خلال يوليو بنسبه 0.7%": {
+    "meaning": "An increase in Italy's industrial production index reflects month-on-month volume expansion across manufacturing, mining, and utility outputs, directly impacting bilateral trade flows with Egyptian importers and exporters of intermediate goods and machinery.",
+    "meaning_ar": "يعكس ارتفاع مؤشر الإنتاج الصناعي في إيطاليا نمواً في أحجام إنتاج قطاعات التصنيع والتعدين والمرافق على أساس شهري، وهو ما يرتبط بحجم التبادل التجاري للسلع الوسيطة والآلات بين السوقين الإيطالي والمصري."
+  },
   "ارتفاع موشرات البورصه المصريه بشكل جماعي في ختام تعاملات الاحد": {
     "meaning": "A collective rise across EGX benchmark indices reflects aggregate net buying liquidity exceeding selling pressure across broad market segments, resulting in an increase in total listed market capitalization at market close.",
     "meaning_ar": "يعكس الارتفاع الجماعي لمؤشرات البورصة المصرية تفوق أحجام السيولة الشرائية على قوى البيع عبر مختلف قطاعات الشركات المقيدة، مما يؤدي إلى زيادة القيمة السوقية الإجمالية للأسهم عند الإغلاق."
@@ -1346,6 +1350,10 @@
   "الحكومه تخطط لطرح سندات «باندا» في الصين ب500 مليون دولار": {
     "meaning": "Panda bonds are Chinese yuan-denominated sovereign debt instruments issued by foreign entities in the Chinese domestic market. This issuance structure utilizes non-traditional debt markets to fulfill foreign financing requirements.",
     "meaning_ar": "تُمثل سندات الباندا أدوات دين سيادية مقومة باليوان الصيني تُصدرها جهات أجنبية داخل السوق المالية المحلية في الصين. وتعمل هذه الآلية على استخدام أسواق دين غير تقليدية لتلبية المتطلبات التمويلية الخارجية."
+  },
+  "الحكومه تستكمل اجراءات فض التشابكات الماليه بين القابضه للغزل والتامينات": {
+    "meaning": "Resolving mutual financial entanglements settles historical cross-debts through cash transfers or asset swaps between the state enterprise and the social insurance authority, restructuring both entities' balance sheets and adjusting their current liabilities.",
+    "meaning_ar": "تتضمن تسوية التشابكات المالية سداد المديونيات المتبادلة تاريخياً عبر تسويات نقدية أو مبادلة أصول بين الشركة القابضة وهيئة التأمينات، مما يعيد هيكلة الميزانيات العمومية للطرفين ويعدل التزاماتهما المتداولة."
   },
   "الحكومه تستهدف تنفيذ 18900 مشروع ضمن المرحله الثانيه لمبادره حياه كريمه": {
     "meaning": "The second phase of the national initiative deploys public capital expenditure into rural infrastructure, contracting, and building materials sectors through 18,900 state-funded projects.",
@@ -3445,6 +3453,10 @@
     "meaning": "The extension of the executive committee's term for three years maintains management continuity and keeps existing operational strategies and corporate governance structures in place at the consumer finance firm.",
     "meaning_ar": "يؤدي تمديد تفويض اللجنة التنفيذية لمدة ثلاث سنوات إلى الحفاظ على استمرارية الإدارة واستقرار الهياكل التشغيلية وأطر الحوكمة القائمة في شركة التمويل الاستهلاكي."
   },
+  "مجلس الوزراء: اعضاء اللجان الاستشاريه ليسوا مستشارين لرييس الوزراء": {
+    "meaning": "This governance clarification defines advisory committees as independent technical bodies without executive authority or public payroll status, separating technical consultation from direct state policy execution.",
+    "meaning_ar": "يوضح هذا التحديد التنظيمي تبعية اللجان الاستشارية كجهات فنية مستقلة دون صلاحيات تنفيذية أو صفة وظيفية حكومية، مما يفصل بين إبداء الرأي الاستشاري والمسؤولية التنفيذية للسياسات العامة."
+  },
   "محافظ القاهره يفتتح المهرجان الوطني للسلع بمشاركه «التموين» و«الزراعه» و«الانتاج الحربي»": {
     "meaning": "This initiative establishes a direct-to-consumer distribution channel by coordinating state entities—Supply, Agriculture, and Military Production—to supply staple goods directly in Cairo, bypassing traditional wholesale and retail intermediary layers.",
     "meaning_ar": "تنشئ هذه المبادرة قناة توزيع مباشرة للمستهلكين من خلال تنسيق جهات حكومية تشمل التموين والزراعة والإنتاج الحربي لتوفير السلع الأساسية في القاهرة، متجاوزةً حلقات الوساطة التقليدية لتجارة الجملة والتجزئة."
@@ -3812,6 +3824,10 @@
   "موشر البورصه الرييسي يرتفع 0.58% والسبعيني يتراجع 0.31%": {
     "meaning": "The divergence reflects a session where net capital flows concentrate in EGX30 large-cap constituent stocks, while liquidity simultaneously withdraws from EGX70 small- and medium-cap equities.",
     "meaning_ar": "يعكس هذا التباين تركز صافي التدفقات النقدية داخل الأسهم القيادية المدرجة بمؤشر إيجي إكس 30، بالتزامن مع تراجع مستويات السيولة وخروجها من أسهم الشركات الصغيرة والمتوسطة في مؤشر إيجي إكس 70."
+  },
+  "موشر سوق الاسهم السعوديه يغلق منخفضا": {
+    "meaning": "A lower close indicates that aggregate trading volume executes at lower price levels across index constituents, resulting in a net daily contraction in the total market capitalization of the tracked equities.",
+    "meaning_ar": "يشير الإغلاق المنخفض إلى تنفيذ أحجام التداول الإجمالية عند مستويات سعرية أدنى للأسهم المكونة للمؤشر، مما يسفر عن انكماش يومي في القيمة السوقية الإجمالية للشركات المدرجة به."
   },
   "موشرات قوه سوق العمل تعزز احتمالات التشديد النقدي في امريكا": {
     "meaning": "Strong labor market indicators reflect low unemployment and persistent wage pressures, which align with central bank monetary policy frameworks that maintain higher benchmark interest rates to manage inflation.",
