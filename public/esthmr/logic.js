@@ -4,6 +4,7 @@ import { archiveOf, archiveFailed } from './filings-store.js';
 import { marketStory } from './market-story.js';
 import { pairsExplorer } from './pairs.js';
 import { valuationExplorer } from './valuation.js';
+import { flowTrackers } from './flow-trackers.js';
 
 /* The trading simulator, fetched only when somebody opens it.
  *
@@ -3925,6 +3926,8 @@ export class Component extends Base {
       // has called this block "what ties these together" all along.
       ['crossings', ar?'ربط النقاط':'Connecting the dots', crossings.length ? String(crossings.length) : ''],
       ['exchange', ar?'البورصة':'Exchange', ''],
+      ['liquidity', ar?'سيولة القطاعات':'Sector liquidity', ''],
+      ['ownership', ar?'عدسة الملكية':'Ownership lens', ''],
       ['tools', ar?'حاسبة المستثمر':'Tools', ''],
       // Only where there is something to open. `studies` is the demo's three
       // mock-up papers and nothing else — no research document is published —
@@ -3945,7 +3948,7 @@ export class Component extends Base {
     // Organize by the reader's task, keeping every existing screen reachable.
     const groups = [
       { id: 'home', label: ar ? 'نظرة عامة' : 'Overview', screens: ['home'] },
-      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange'] },
+      { id: 'market', label: ar ? 'استكشف' : 'Explore', screens: ['market', 'heat', 'sectors', 'valuation', 'pairs', 'fragility', 'company', 'investors', 'exchange', 'liquidity', 'ownership'] },
       { id: 'today', label: ar ? 'الأخبار' : 'News', screens: ['today', 'calendar', 'crossings', 'research'] },
       { id: 'watchlist', label: ar ? 'متابعتي' : 'Watchlist', screens: ['watchlist'] },
       { id: 'tools', label: ar ? 'الأدوات' : 'Tools', screens: ['tools'] },
@@ -4552,6 +4555,8 @@ export class Component extends Base {
       arBg: ar ? 'var(--surface)' : 'transparent', arFg: ar ? 'var(--ink)' : 'var(--t2)', arSh: ar ? 'var(--shPill)' : 'none',
       themeIcon: st.theme === 'light' ? 'M12 4.6V2.8M12 21.2v-1.8M4.6 12H2.8M21.2 12h-1.8M6.8 6.8 5.5 5.5M18.5 18.5l-1.3-1.3M6.8 17.2l-1.3 1.3M18.5 5.5l-1.3 1.3M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8' : 'M20.4 14.6A8.8 8.8 0 0 1 9.4 3.6a8.8 8.8 0 1 0 11 11',
       isHome: st.screen === 'home', isToday: st.screen === 'today', isMarket: st.screen === 'market',
+      flowViews: flowTrackers(this, D, ar),
+      isFlowTracker: st.screen === 'liquidity' || st.screen === 'ownership',
       isCompany: st.screen === 'company', isSectors: st.screen === 'sectors', isCalendar: st.screen === 'calendar',
       isExchange: st.screen === 'exchange', isResearch: st.screen === 'research',
       isInvestors: st.screen === 'investors', isCrossings: st.screen === 'crossings',

@@ -105,6 +105,7 @@ async function load(email) {
       slice(data.news(), (feed) => ({ feed })),
       slice(data.newsProvenance(), (newsProvenance) => ({ newsProvenance })),
       slice(data.sectors(), (sectorCards) => ({ sectorCards })),
+      slice(data.flowPreview(), (flowPreview) => ({ flowPreview })),
       slice(data.filedMonths(), (filedMonths) => ({ filedMonths })),
       slice(data.disclosureMeanings(), (disclosureMeanings) => ({ disclosureMeanings })),
       slice(data.connections(), (crossings) => ({ crossings })),
@@ -322,10 +323,32 @@ document.getElementById('signout').onclick = async () => {
   let seenLoad = loadVersion;
   component.onRetryCompany = () => { loading = null; component.onChange(); };
   const draw = component.onChange;
+  let flowAttemptVersion = -1;
   let lastLang = component.state.lang;
   let lastTheme = component.state.theme || 'light';
   const syncNavigation = connectNavigation(component);
   component.onChange = () => {
+    // Full histories belong to the destination, not the Home payload.
+    // A retry advances loadVersion; a late response cannot cross readers.
+    if (reader && !component.state.dataLoading && !component.data().demo
+        && ['liquidity', 'ownership'].includes(component.state.screen)
+        && !component.data().flowTrackers && flowAttemptVersion !== loadVersion) {
+      const version = loadVersion;
+      const owner = readerVersion;
+      flowAttemptVersion = version;
+      component.state.flowLoading = true;
+      data.flowTrackers().then(flowTrackers => {
+        if (version === loadVersion && owner === readerVersion && reader && !component.data().demo) {
+          component.state.flowLoading = false;
+          component.setData({ ...component.data(), flowTrackers });
+        }
+      }).catch(() => {
+        if (version === loadVersion && owner === readerVersion) {
+          component.state.flowLoading = false;
+          draw();
+        }
+      });
+    }
     if (seenLoad !== loadVersion) {
       seenLoad = loadVersion;
       companyVersion++;

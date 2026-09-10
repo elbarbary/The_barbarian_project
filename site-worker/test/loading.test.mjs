@@ -27,6 +27,8 @@ function boot(overrides = {}) {
     exchange:async()=>({}), attention:async()=>({}), sectors:async()=>[],
     filedMonths:async()=>[], disclosureMeanings:async()=>[], connections:async()=>[],
     investors:async()=>({}), insiders:async()=>({}), indices:async()=>({list:[]}), indexCards:()=>[],readNowCards:()=>[],
+    flowPreview:async()=>({schemaVersion:1,sectors:[],eventCount:0}),
+    flowTrackers:async()=>({schemaVersion:1,sectors:[],events:[]}),
     companyExtras:async()=>({}), ...overrides };
   vm.runInNewContext(source, { Component, document, data,
     mount:()=> { mounted=true; component.onChange=()=>{}; },
@@ -116,6 +118,28 @@ test('request deadline includes a stalled response body', async () => {
       init.signal.addEventListener('abort',()=>reject(new Error('aborted'))))});
     await assert.rejects(readResponse('/slow',{},r=>r.json(),5),/aborted/);
   } finally {globalThis.fetch=original;}
+});
+
+test('flow history is loaded on demand once and retries after failure', async () => {
+  const requests=[];
+  const app=boot({flowTrackers:()=>{const d=defer();requests.push(d);return d.promise;}});
+  await app.ready();assert.equal(requests.length,0);
+  app.c.setState({screen:'liquidity'});assert.equal(requests.length,1);
+  app.c.setState({screen:'ownership'});assert.equal(requests.length,1);
+  requests[0].reject(new Error('offline'));await tick();
+  assert.equal(app.c.state.flowLoading,false);
+  assert.equal(app.c.data().flowTrackers,undefined);
+  app.c.onRetryData();await tick();assert.equal(requests.length,2);
+  requests[1].resolve({schemaVersion:1,sectors:[],events:[]});await tick();
+  assert.equal(app.c.data().flowTrackers.schemaVersion,1);
+});
+
+test('late ownership history never enters the signed-out demo', async () => {
+  const pending=defer();const app=boot({flowTrackers:()=>pending.promise});
+  await app.ready();app.c.setState({screen:'ownership'});
+  await app.document.getElementById('signout').onclick();
+  pending.resolve({schemaVersion:1,events:[{investorName:'private'}]});await tick();
+  assert.equal(app.c.data().demo,true);assert.equal(app.c.data().flowTrackers,undefined);
 });
 
 /* The load a reader walked away from.

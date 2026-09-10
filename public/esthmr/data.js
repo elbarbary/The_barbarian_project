@@ -1512,6 +1512,20 @@ export async function investors() {
 }
 
 /** Official EGX Insider & Treasury Share Flow Tracker. */
+export async function flowTrackers() {
+  const d = await doc('flow-trackers.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.sectors) || !Array.isArray(d.events)) {
+    throw new Error('Invalid flow tracker snapshot');
+  }
+  return d;
+}
+
+export async function flowPreview() {
+  const d = await doc('flow-preview.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.sectors)) throw new Error('Invalid flow preview');
+  return d;
+}
+
 export async function insiders() {
   try {
     const d = await doc('insiders.json');

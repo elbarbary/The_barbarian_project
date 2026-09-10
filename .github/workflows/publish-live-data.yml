@@ -153,6 +153,7 @@ jobs:
           # Official EGX Insider & Treasury Share Tracker.
           # Ingests any newly disclosed post-execution forms and treasury transactions.
           python3 scripts/build_insider_tracker.py || true
+          python3 scripts/build_flow_trackers.py
 
       - name: Refresh the manifest
         # The manifest's per-resource version is what tells an installed app
@@ -169,11 +170,15 @@ jobs:
                   public/data/v1/disclosures \
                   public/data/v1/connections.json \
                   public/data/v1/insiders.json \
+                  public/data/v1/flow-trackers.json \
+                  public/data/v1/flow-preview.json \
                   public/data/v1/manifest.json \
                   app/assets/fixtures/news app/assets/fixtures/rates \
                   app/assets/fixtures/disclosures \
                   app/assets/fixtures/connections.json \
                   app/assets/fixtures/insiders.json \
+                  app/assets/fixtures/flow-trackers.json \
+                  app/assets/fixtures/flow-preview.json \
                   app/assets/fixtures/manifest.json \
                   scripts/news_insights.json scripts/news_images.json
           if git diff --cached --quiet; then

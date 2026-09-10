@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "data_version": "7f7022a7bb25c0b4",
-  "generated_at": "2026-09-10T11:07:52+00:00",
+  "data_version": "710ee0e32fa279ec",
+  "generated_at": "2026-09-10T11:09:12+00:00",
   "market_date": "2026-09-10",
   "versions": {
     "market": 75233128,
@@ -18,6 +18,7 @@
     "review": 44535260,
     "sectors": 6403809,
     "investors": 53194655,
-    "insiders": 7815827
+    "insiders": 7815827,
+    "flow_trackers": 49124515
   }
 }

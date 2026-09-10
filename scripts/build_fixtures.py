@@ -104,6 +104,7 @@ RESOURCES = {
     # installed app could ever learn had changed.
     "investors": ["investors.json"],
     "insiders": ["insiders.json"],
+    "flow_trackers": ["flow-trackers.json", "flow-preview.json"],
 }
 
 # Documents with no manifest counter of their own. They are guarded by

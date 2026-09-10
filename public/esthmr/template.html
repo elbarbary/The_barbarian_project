@@ -89,6 +89,7 @@
       <p class="story-foot">{{ story.coverage }}</p>
     </section>
   </sc-if>
+  <sc-if value="{{ isFlowTracker }}">{{ flowViews.screen }}</sc-if>
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div class="om-scr journal-home" style="display:flex;flex-direction:column;gap:20px">
       <header class="journal-intro">
@@ -123,6 +124,7 @@
 
       </div>
 
+      {{ flowViews.home }}
       <section class="insight-shelf">
         <h2>{{ insightHeading }}</h2>
         <div class="insight-grid">
