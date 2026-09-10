@@ -7,12 +7,12 @@
  "sector": "Non-bank financial services",
  "sector_ar": "خدمات مالية غير مصرفية",
  "market": {
-  "last_close": 2.95,
+  "last_close": 2.97,
   "date": "2026-09-10",
   "open": 2.97,
   "high": 2.98,
   "low": 2.95,
-  "volume": 12297854
+  "volume": 14219289
  },
  "price_history": [
   {
@@ -1320,11 +1320,11 @@
   "shares_outstanding": 10718106944,
   "free_float": 0.31143200000000004,
   "float_shares": 3337961481.783808,
-  "perf_1w": -2.3178807947019813,
-  "perf_1m": -4.530744336569569,
-  "perf_3m": -3.2786885245901525,
-  "avg_volume_30d": 53211172.76666664,
-  "relative_volume_10d": 0.4485368158177245,
+  "perf_1w": -1.6556291390728417,
+  "perf_1m": -3.8834951456310574,
+  "perf_3m": -2.622950819672119,
+  "avg_volume_30d": 53275220.59999998,
+  "relative_volume_10d": 0.5186168750460036,
   "median_volume_20d": 32340747,
   "rv20": 0.6810069353067201,
   "normal_value_30d": 125783813.41499999,
