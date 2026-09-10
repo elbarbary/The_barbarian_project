@@ -903,6 +903,10 @@
     "meaning": "This headline reflects daily pricing updates in the local poultry exchange, which directly affect operating revenue and profit margins for agribusiness and poultry producers based on prevailing feed costs and supply-demand dynamics.",
     "meaning_ar": "يعكس هذا العنوان تحديثات الأسعار اليومية في بورصة الدواجن، والتي تؤثر بشكل مباشر على الإيرادات التشغيلية وهامش ربحية شركات الإنتاج الداجني وفقاً لتكاليف الأعلاف وتوازنات العرض والطلب."
   },
+  "اسعار الفراخ في بورصه الدواجن اليوم الخميس 10-9-2026": {
+    "meaning": "Daily spot prices on the poultry exchange represent the wholesale market-clearing rate determined by current farmgate supply and retail distribution demand. These benchmark figures serve as the base pricing reference across domestic livestock supply chains and consumer retail channels.",
+    "meaning_ar": "تعكس الأسعار الفورية المعلنة في بورصة الدواجن معدلات التداول اليومية في سوق الجملة وفق توازن المعروض من المزارع والطلب لدى الموزعين، وتعمل كمرجع تسعيري لتكاليف الإمداد في منافذ التجزئة بالسوق المحلي."
+  },
   "اسعار الفراخ في بورصه الدواجن اليوم السبت 5-9-2026": {
     "meaning": "The poultry exchange publishes daily spot wholesale prices, establishing the benchmark reference rate for trading live birds between commercial farms, distributors, and retail markets.",
     "meaning_ar": "تحدد بورصة الدواجن الأسعار اليومية الفورية لتداول الدواجن الحية بالجملة، مما يوفر السعر المرجعي المنظم للتعاملات بين المزارع والموزعين ومنافذ البيع بالتجزئة."
@@ -1442,6 +1446,10 @@
   "الشركات السعوديه تتجاوز نظيرتها العالميه في تبني الرقمنه لتطوير التجاره": {
     "meaning": "Higher enterprise adoption rates of digital platforms automate trade settlement, inventory tracking, and supply chain management at a faster pace than international baseline averages.",
     "meaning_ar": "يؤدي ارتفاع معدلات تبني الشركات للمنصات الرقمية إلى أتمتة عمليات التسوية التجارية وتتبع المخزون وإدارة سلاسل الإمداد بوتيرة أسرع من المتوسطات العالمية المرجعية."
+  },
+  "الشركات المصريه تخطط للاستثمار": {
+    "meaning": "Capital allocation toward corporate expansion involves committing balance sheet funds to long-term physical assets, operational capacity, or new project development.",
+    "meaning_ar": "يتضمن تخصيص رأس المال للتوسع المؤسسي توجيه سيولة الميزانية العمومية نحو الأصول الرأسمالية، أو رفع الطاقة التشغيلية، أو تطوير مشاريع جديدة."
   },
   "الصحه توقع بروتوكولا مع جهاز الملكيه الفكريه لتعزيز الامن الدوايي": {
     "meaning": "The protocol establishes a coordination framework between the Ministry of Health and the Intellectual Property Authority to regulate pharmaceutical patent registrations, facilitate the licensing of generic drug formulations, and streamline local manufacturing procedures for active ingredients.",
@@ -2556,6 +2564,10 @@
     "meaning": "Official end-of-day foreign exchange rate publications reflect the daily settlement prices for the Saudi Riyal against the Egyptian Pound across the banking sector, determining transaction costs for bilateral trade, remittances, and travel expenses.",
     "meaning_ar": "تعكس أسعار الصرف المنشورة في ختام التعاملات أسعار التسوية اليومية للريال السعودي مقابل الجنيه المصري في القطاع المصرفي، وتحدد تكاليف المعاملات للتجارة البينية والتحويلات ونفقات السفر."
   },
+  "سعر الريال السعودي في مصر اليوم الخميس 10/9/2026": {
+    "meaning": "Official and parallel market quotations for the Saudi Riyal against the Egyptian Pound establish the current operational conversion rate applied to cross-border remittances, bilateral trade invoicing, and travel expenditures between Egypt and Saudi Arabia.",
+    "meaning_ar": "تحدد أسعار صرف الريال السعودي مقابل الجنيه المصري في السوقين الرسمية والموازية سعر التحويل التشغيلي المطبق حالياً على تحويلات العاملين بالخارج، وتسوية الفواتير التجارية البينية، ومصروفات السفر بين مصر والمملكة العربية السعودية."
+  },
   "سعر الغاز الاوروبي يرتفع صوب ذروه 3 سنوات وسط المنافسه علي الشحنات": {
     "meaning": "Higher European natural gas prices driven by intensified competition for liquefied natural gas (LNG) cargoes directly raise global feedstock and energy benchmarks across energy-importing markets, including Egypt's LNG import costs and industrial production inputs.",
     "meaning_ar": "يؤدي ارتفاع أسعار الغاز الطبيعي في أوروبا جراء اشتداد المنافسة على شحنات الغاز المسال إلى رفع مؤشرات تكلفة الطاقة ومدخلات الإنتاج عالمياً، بما يشمل تكاليف استيراد الغاز المسال ومدخلات التشغيل للقطاعات الصناعية كثيفة الاستهلاك في مصر."
@@ -2824,6 +2836,10 @@
   "عاجل.. الرقابه الماليه تصدر دليلا شاملا لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority establishes a unified regulatory and operational framework defining licensing criteria, credit risk assessment rules, and compliance requirements for consumer finance companies operating in Egypt.",
     "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تنظيمياً وتشغيلياً موحداً يحدد معايير الترخيص، وضوابط التقييم الائتماني، ومتطلبات الامتثال وإدارة المخاطر لشركات التمويل الاستهلاكي في مصر."
+  },
+  "عاجل.. تضخم اسعار المستهلكين بمدن مصر يتباطا الي 14.5% في اغسطس": {
+    "meaning": "A deceleration in urban consumer price inflation to 14.5% reflects a slower pace of price increases across standard consumer baskets, stabilizing wholesale procurement costs and operating expenses across domestic supply chains.",
+    "meaning_ar": "يعكس تباطؤ تضخم أسعار المستهلكين في المدن إلى 14.5% تراجع وتيرة الزيادة في أسعار سلة السلع الاستهلاكية، مما يحد من وتيرة تصاعد تكاليف الشراء بالجملة والمصروفات التشغيلية عبر سلاسل الإمداد المحلية."
   },
   "عاجل.. هييه ميناء الاسكندريه والقابضه للنقل البحري ترفضان بيع حصتيهما في الاسكندريه لتداول الحاويات": {
     "meaning": "This decision preserves the company's current ownership structure and majority state control, keeping its maritime operational management unchanged and halting any transfer of controlling equity to external parties.",
