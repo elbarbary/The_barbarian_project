@@ -7,12 +7,12 @@
  "sector": "Food, Beverages and Tobacco",
  "sector_ar": "أغذية و مشروبات و تبغ",
  "market": {
-  "last_close": 11.7,
+  "last_close": 11.82,
   "date": "2026-09-10",
   "open": 11.09,
   "high": 12.21,
   "low": 11.07,
-  "volume": 7360645
+  "volume": 8156617
  },
  "price_history": [
   {
@@ -782,7 +782,7 @@
   },
   {
    "date": "2026-03-30",
-   "close": 8.32,
+   "close": 8.31,
    "volume": 559795
   },
   {
@@ -977,7 +977,7 @@
   },
   {
    "date": "2026-06-02",
-   "close": 9.09,
+   "close": 9.1,
    "volume": 339080
   },
   {
@@ -1192,7 +1192,7 @@
   },
   {
    "date": "2026-08-05",
-   "close": 11.15,
+   "close": 11.11,
    "volume": 760782
   },
   {
@@ -1318,27 +1318,21 @@
  ],
  "profile": {
   "shares_outstanding": 42570000,
-  "perf_1w": 5.405405405405403,
-  "perf_1m": -6.400000000000006,
-  "perf_3m": 29.999999999999993,
-  "avg_volume_30d": 1815737.3333333433,
-  "relative_volume_10d": 12.4655829334027,
-  "history_bars": 0,
-  "market_cap": 497217600.0,
-  "market_cap_source": "EGX",
-  "trades": 2951,
-  "turnover": 88064992,
+  "perf_1w": 6.486486486486492,
+  "perf_1m": -5.439999999999998,
+  "perf_3m": 31.333333333333332,
+  "avg_volume_30d": 1842269.7333333432,
+  "relative_volume_10d": 13.813597268921722,
   "median_volume_20d": 1130070,
   "rv20": 0.3046041395665755,
   "normal_value_30d": 12688890.95,
-  "five_session_change": -0.09009009009008917
+  "five_session_change": -0.09009009009008917,
+  "history_bars": 120,
+  "market_cap": 498920400.0,
+  "market_cap_source": "EGX",
+  "trades": 3368,
+  "turnover": 97914823
  },
- "profile_carried": [
-  "five_session_change",
-  "median_volume_20d",
-  "normal_value_30d",
-  "rv20"
- ],
  "financials": {
   "annual": [
    {

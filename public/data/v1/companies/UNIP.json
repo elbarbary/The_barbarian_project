@@ -11,8 +11,8 @@
   "date": "2026-09-10",
   "open": 0.385,
   "high": 0.395,
-  "low": 0.383,
-  "volume": 32612625
+  "low": 0.378,
+  "volume": 71418995
  },
  "price_history": [
   {
@@ -1323,17 +1323,17 @@
   "perf_1w": 3.225806451612906,
   "perf_1m": -6.569343065693423,
   "perf_3m": 21.13564668769716,
-  "avg_volume_30d": 76195241.19999997,
-  "relative_volume_10d": 0.4699052431586168,
+  "avg_volume_30d": 77488786.86666663,
+  "relative_volume_10d": 1.0290542454530733,
   "median_volume_20d": 48442446.5,
   "rv20": 0.4876636856067953,
   "normal_value_30d": 18658115.001500003,
   "five_session_change": 3.4946236559139754,
   "history_bars": 120,
-  "market_cap": 877622518.098,
+  "market_cap": 882205403.31,
   "market_cap_source": "EGX",
-  "trades": 232,
-  "turnover": 12923483,
+  "trades": 556,
+  "turnover": 27761146,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

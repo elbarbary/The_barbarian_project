@@ -7,12 +7,12 @@
  "sector": "Non-bank financial services",
  "sector_ar": "خدمات مالية غير مصرفية",
  "market": {
-  "last_close": 2.96,
+  "last_close": 2.95,
   "date": "2026-09-10",
   "open": 2.97,
   "high": 2.98,
   "low": 2.95,
-  "volume": 4238509
+  "volume": 12297854
  },
  "price_history": [
   {
@@ -1320,20 +1320,20 @@
   "shares_outstanding": 10718106944,
   "free_float": 0.31143200000000004,
   "float_shares": 3337961481.783808,
-  "perf_1w": -1.986754966887419,
-  "perf_1m": -4.20711974110032,
-  "perf_3m": -2.9508196721311433,
-  "avg_volume_30d": 52942527.93333331,
-  "relative_volume_10d": 0.15459016920145316,
+  "perf_1w": -2.3178807947019813,
+  "perf_1m": -4.530744336569569,
+  "perf_3m": -3.2786885245901525,
+  "avg_volume_30d": 53211172.76666664,
+  "relative_volume_10d": 0.4485368158177245,
   "median_volume_20d": 32340747,
   "rv20": 0.6810069353067201,
   "normal_value_30d": 125783813.41499999,
   "five_session_change": -1.655629139072845,
   "history_bars": 120,
-  "market_cap": 31725596554.24,
+  "market_cap": 31832777623.68,
   "market_cap_source": "EGX",
-  "trades": 562,
-  "turnover": 15881810,
+  "trades": 1077,
+  "turnover": 42119577,
   "shares_outstanding_source": "EGX"
  },
  "financials": {

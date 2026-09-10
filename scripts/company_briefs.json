@@ -684,14 +684,14 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/ARAB/profile",
   "record": {
-   "filings": 63,
+   "filings": 65,
    "first_filing": "2022-03-08",
    "trading_suspensions": 0,
    "trading_resumptions": 1,
    "capital_increases": 3,
    "general_assemblies": 6,
-   "periods_reported": 22,
-   "loss_making_periods": 6
+   "periods_reported": 23,
+   "loss_making_periods": 5
   },
   "generated": "2026-08-24"
  },
@@ -2038,7 +2038,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/EGCH/profile",
   "record": {
-   "filings": 1041,
+   "filings": 1042,
    "first_filing": "2010-01-27",
    "trading_suspensions": 29,
    "trading_resumptions": 28,
@@ -3330,7 +3330,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/INEG/profile",
   "record": {
-   "filings": 517,
+   "filings": 518,
    "first_filing": "2014-08-27",
    "trading_suspensions": 8,
    "trading_resumptions": 8,
@@ -5052,7 +5052,7 @@
   "story_source": "Mubasher",
   "story_url": "https://english.mubasher.info/markets/EGX/stocks/PHGC/profile",
   "record": {
-   "filings": 150,
+   "filings": 152,
    "first_filing": "2024-11-26",
    "trading_suspensions": 8,
    "trading_resumptions": 7,

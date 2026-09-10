@@ -778,6 +778,44 @@
    "prior_period_start": "2025-01-01",
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294509",
    "ticker": "MIPH"
+  },
+  "294563": {
+   "basis": "standalone",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-09-10",
+   "isin": "EGS694A1C018",
+   "months": 3,
+   "name_ar": "المطورون العرب القابضة",
+   "net_profit_egp": 81428681.0,
+   "news_id": "294563",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 5058760.0,
+   "prior_period": "Q1 2025",
+   "prior_period_end": "2025-03-31",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294563",
+   "ticker": "ARAB"
+  },
+  "294566": {
+   "basis": "consolidated",
+   "currency": "جنيه مصري",
+   "filed_on": "2026-09-10",
+   "isin": "EGS694A1C018",
+   "months": 3,
+   "name_ar": "المطورون العرب القابضة",
+   "net_profit_egp": 35514494.0,
+   "news_id": "294566",
+   "period": "Q1 2026",
+   "period_end": "2026-03-31",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 30418418.0,
+   "prior_period": "Q1 2025",
+   "prior_period_end": "2025-03-31",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=294566",
+   "ticker": "ARAB"
   }
  },
  "read": {
@@ -854,6 +892,8 @@
   "294507": "2026-09-09",
   "294509": "2026-09-09",
   "294546": "2026-09-10",
-  "294549": "2026-09-10"
+  "294549": "2026-09-10",
+  "294563": "2026-09-10",
+  "294566": "2026-09-10"
  }
 }
