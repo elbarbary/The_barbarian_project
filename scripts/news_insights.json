@@ -1135,6 +1135,10 @@
     "meaning": "Strong US employment data keeps Federal Reserve interest rates elevated for longer, increasing global yields and triggering equity capital outflows from European markets.",
     "meaning_ar": "تؤدي بيانات التوظيف الأمريكية القوية إلى إبقاء أسعار الفائدة لدى الاحتياطي الفيدرالي مرتفعة لفترة أطول، مما يرفع العوائد العالمية ويدفع تدفقات رؤوس الأموال خارج أسواق الأسهم الأوروبية."
   },
+  "الاسهم الاوروبيه تتراجع الخميس وسط تقييم قرار رفع الفايده": {
+    "meaning": "Higher benchmark interest rates raise corporate borrowing costs and increase the discount rates applied to equity valuations, leading market participants to reprice asset values across European bourses.",
+    "meaning_ar": "يؤدي رفع أسعار الفائدة القياسية إلى زيادة تكلفة الاقتراض للشركات ورفع معدلات الخصم المستخدمة لتقييم الأسهم، مما يدفع المتعاملين إلى إعادة تسعير الأصول في البورصات الأوروبية."
+  },
   "الاسهم الاوروبيه تتراجع قبل صدور بيانات الوظايف الامريكيه": {
     "meaning": "Equity markets adjust trading volumes and asset pricing ahead of major macroeconomic reports, as US employment data directly influences global benchmark interest rates and international capital allocation.",
     "meaning_ar": "تُعدّل أسواق الأسهم أحجام التداول وتقييمات الأصول قبل صدور التقارير الاقتصادية الكلية الرئيسية، حيث تؤثر بيانات التوظيف الأمريكية بشكل مباشر في مسارات أسعار الفائدة القياسية العالمية وتوزيع رؤوس الأموال الدولية."
@@ -2736,6 +2740,10 @@
     "meaning": "An influx of 450,000 new registered market participants expands the exchange's investor base and broadens the distribution of domestic trading accounts across listed instruments.",
     "meaning_ar": "يؤدي انضمام 450 ألف متعامل جديد إلى توسيع قاعدة المستثمرين في البورصة وزيادة انتشار حسابات التداول المحلية عبر الأوراق المالية المقيدة."
   },
+  "رييس الهييه العربيه للتصنيع: نمتلك خبرات تمتد لسنوات في مجال عمره محركات الطايرات": {
+    "meaning": "Aircraft engine overhaul operations represent high-value industrial maintenance services that rely on specialized technical infrastructure and certified engineering labor, positioning state-owned industrial entities within the domestic aerospace maintenance, repair, and overhaul (MRO) supply chain.",
+    "meaning_ar": "تمثل عمليات عَمْرة محركات الطائرات خدمات صيانة صناعية ذات قيمة مضافة عالية تعتمد على بنية تحتية تقنية متخصصة وعمالة هندسية معتمدة، مما يدرج الكيانات الصناعية التابعة للدولة ضمن سلاسل إمداد خدمات الصيانة والإصلاح والفحص الفني (MRO) لقطاع الطيران محلياً."
+  },
   "رييس الوزراء يبحث مع رييس الرقابه الماليه تطورات القطاع المالي غير المصرفي وجهود حمايه المتعاملين": {
     "meaning": "The meeting involves government oversight of the non-banking financial sector's regulatory framework, covering operational activities such as capital markets, insurance, and non-bank financing alongside institutional market conduct supervision.",
     "meaning_ar": "يتناول الاجتماع المتابعة الحكومية للأطر التنظيمية للقطاع المالي غير المصرفي، والتي تشمل أنشطة أسواق المال والتأمين والتمويل غير المصرفي إلى جانب آليات الرقابة على تعاملات الأسواق."
@@ -4144,6 +4152,10 @@
   "وزير الصناعه يبحث مع شركه اوروبيه اقامه مصنع لانتاج التربه البديله في مصر": {
     "meaning": "Establishing a domestic alternative soil manufacturing plant introduces local agricultural input production and replaces direct import reliance with domestic industrial supply.",
     "meaning_ar": "يؤدي إنشاء مصنع محلي لإنتاج التربة البديلة إلى توفير مدخلات زراعية مصنعة محلياً وإحلال التوريد الصناعي المحلي محل الاعتماد المباشر على الاستيراد."
+  },
+  "وزير الصناعه: الشركات الصغيره والمتوسطه محرك رييسي للتنميه المستدامه": {
+    "meaning": "Small and medium-sized enterprises (SMEs) function as feeder suppliers and subcontracting partners within industrial supply chains, providing operational inputs to larger manufacturing entities.",
+    "meaning_ar": "تعمل الشركات الصغيرة والمتوسطة كموردين وسيطين وشركاء بالباطن ضمن سلاسل التوريد الصناعية، حيث توفر مدخلات تشغيلية لكيانات التصنيع الأكبر."
   },
   "وزير الطاقه الامريكي: اكثر من 9 ملايين برميل نفط تمر يوميا عبر مضيق هرمز": {
     "meaning": "The Strait of Hormuz functions as a critical global maritime transit corridor, handling daily crude flows exceeding 9 million barrels that directly anchor international oil supply chains and energy shipping infrastructure.",
