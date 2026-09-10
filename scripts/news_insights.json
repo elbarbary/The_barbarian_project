@@ -827,6 +827,10 @@
     "meaning": "Daily agricultural commodity pricing tracks spot market valuations governed by wholesale supply flows, transportation costs, and retail market liquidity across domestic Egyptian distribution hubs.",
     "meaning_ar": "تعكس أسعار السلع الزراعية اليومية تقييمات السوق الفورية المحددة بناءً على تدفقات المعروض بالجملة وتكاليف النقل ومستويات التداول في أسواق التجزئة المحلية."
   },
+  "اسعار الخضار والفاكهه اليوم في مصر.. الخميس 10/9/2026": {
+    "meaning": "Daily wholesale and retail produce pricing reflects prevailing local agricultural supply volumes, transport logistics expenses, and wholesale market auction rates across transit hubs.",
+    "meaning_ar": "تعكس الأسعار اليومية لتداول الخضار والفاكهة حجم المعروض الزراعي المحلي، وتكاليف النقل اللوجستي، ومستويات التسعير المحددة عبر مزادات أسواق الجملة المركزية."
+  },
   "اسعار الخضار والفاكهه اليوم في مصر.. تحديث سوق العبور": {
     "meaning": "Obour Market functions as the primary wholesale price-discovery hub for fresh produce in Egypt, where daily spot clearing prices establish the baseline input costs for downstream retail food supply chains.",
     "meaning_ar": "يمثل سوق العبور المنظومة المركزية لتسعير السلع الزراعية بالجملة في مصر، حيث تحدد أسعار التداول الفورية اليومية التكلفة الأساسية لسلاسل إمداد وتوزيع التجزئة الغذائية."
@@ -1759,6 +1763,10 @@
     "meaning": "The US labor market data reflects net non-farm payroll growth alongside an unchanged unemployment rate, serving as a primary macroeconomic indicator for global monetary policy benchmarks and cross-border capital flows.",
     "meaning_ar": "توضح بيانات سوق العمل الأمريكي إضافة صافية في الوظائف غير الزراعية مع ثبات معدل البطالة، وتعمل هذه الأرقام كمؤشر اقتصادي كلي رئيسي يوجه السياسات النقدية العالمية وتدفقات رؤوس الأموال الدولية."
   },
+  "الي اين وصلت اسعار الخشب اليوم الخميس 10-9-2026 في السوق المحليه؟": {
+    "meaning": "Domestic timber prices reflect import parity costs and foreign exchange dynamics, serving as a primary direct input cost for the furniture manufacturing, construction, and finishing sectors.",
+    "meaning_ar": "تعكس أسعار الخشب في السوق المحلية تكاليف الاستيراد وحركة أسعار الصرف، وتمثل عنصر تكلفة تشغيلية مباشر لقطاعات تصنيع الأثاث والتشييد وأعمال التشطيبات."
+  },
   "اليابان وامريكا تحرزان تقدما في اتفاق استثماري بقيمه 550 مليار دولار": {
     "meaning": "A large-scale bilateral investment agreement establishes formal mechanisms for cross-border capital allocation, joint venture funding, and supply chain integration between participating nations across targeted sectors.",
     "meaning_ar": "يحدد الاتفاق الاستثماري الثنائي آليات رسمية لتوجيه تدفقات رؤوس الأموال عبر الحدود، والتمويل المشترك للمشروعات، والربط التشغيلي لسلاسل التوريد بين الدولتين في قطاعات محددة."
@@ -2560,6 +2568,10 @@
     "meaning": "Government field inspections of national urban developments monitor project execution timelines and coordinate infrastructure delivery across real estate, construction, and utility contractors on site.",
     "meaning_ar": "تتابع الجولات الميدانية الحكومية لمشروعات التطوير العمراني معدلات التنفيذ على أرض الواقع وتنسق تسليم أعمال البنية التحتية بين شركات المقاولات والتطوير العقاري والمرافق العامة."
   },
+  "رييس الوزراء يتابع المشروعات الحاليه والمستقبليه في قطاع الطاقه الجديده والمتجدده": {
+    "meaning": "Government reviews of renewable energy pipelines involve monitoring public-private partnership contracts, land allocation frameworks, and grid integration schedules for solar and wind generation assets.",
+    "meaning_ar": "تتضمن المتابعة الحكومية لمشروعات الطاقة المتجددة مراجعة عقود الشراكة بين القطاعين العام والخاص، وأطر تخصيص الأراضي، والجداول الزمنية لربط محطات توليد الرياح والطاقة الشمسية بالشبكة القومية للكهرباء."
+  },
   "رييس الوزراء يشهد حفل افتتاح الدوره الثانيه عشره للالعاب الافريقيه للجامعات": {
     "meaning": "Hosting regional multi-sport events utilizes domestic sports infrastructure and coordinates operational activity across the hospitality, logistics, and transportation sectors.",
     "meaning_ar": "تتضمن استضافة الفعاليات الرياضية الإقليمية تشغيل البنية التحتية الرياضية وتنسيق الأنشطة التشغيلية عبر قطاعات الضيافة والنقل والخدمات اللوجستية."
@@ -2880,6 +2892,10 @@
   "صادرات الذره الارجنتينيه تقفز لمستوي قياسي مع صعود الطلب من مصر وشمال افريقيا": {
     "meaning": "Egypt's animal feed and poultry processing sectors rely on imported yellow corn to meet domestic production needs, sourcing bulk grain volumes from international agricultural suppliers such as Argentina.",
     "meaning_ar": "تعتمد صناعة الأعلاف والإنتاج الداجني في مصر على استيراد الذرة الصفراء لتلبية احتياجات التصنيع المحلي، حيث تشكل المناشئ الدولية كالأرجنتين مصدراً رئيساً للإمدادات السلعية."
+  },
+  "صادرات السيارات الصينيه تتجاوز اجمالي عام 2025 خلال 8 اشهر": {
+    "meaning": "Chinese automotive export volumes in the first eight months of the current cycle exceed the total annual volume of the prior baseline year, reflecting higher factory output allocations to foreign markets and accelerated cross-border shipping throughput.",
+    "meaning_ar": "تجاوزت أحجام صادرات السيارات الصينية خلال الأشهر الثمانية الأولى إجمالي العام السابق، وهو ما يعكس زيادة حصص الإنتاج الموجهة للأسواق الخارجية وتسارع حركة الشحن الدولي للمركبات."
   },
   "صادرات الصين تقفز 25% بدعم الذكاء الاصطناعي.. والفايض التجاري يقترب من تريليون دولار": {
     "meaning": "The expansion in global demand for AI-related hardware and electronics increases China's export volumes, widening its net trade surplus.",
@@ -3428,6 +3444,10 @@
   "مصر تستهدف اصدارات دوليه بقيمه 3 مليارات دولار خلال العام المالي 2026/2027": {
     "meaning": "The Ministry of Finance schedules foreign-currency debt issuances in international capital markets to cover external financing requirements for the specified fiscal year.",
     "meaning_ar": "تدرج وزارة المالية أدوات دين بالعملة الأجنبية في الأسواق الدولية لتغطية الاحتياجات التمويلية الخارجية خلال العام المالي المحدد."
+  },
+  "مصر تستهدف الوصول بقدرات بطاريات تخزين الطاقه الي 14320 ميجاوات/ ساعه بحلول 2029": {
+    "meaning": "Deploying grid-scale battery energy storage systems integrates intermittent renewable energy sources into the national electricity grid and provides frequency regulation and peak load shifting capacity.",
+    "meaning_ar": "يعمل نشر أنظمة بطاريات تخزين الطاقة على دمج المصادر المتجددة المتقطعة في شبكة الكهرباء القومية وتوفير سعات لتنظيم تردد الشبكة وتحويل الأحمال خلال فترات الذروة."
   },
   "مصر تستهدف بناء سلاسل امداد افريقيه.. والانتقال من التصدير الي التصنيع المشترك": {
     "meaning": "Establishing regional supply chains and joint manufacturing involves shifting from finished goods exports to establishing shared industrial operations, sourcing raw materials across borders, and co-locating assembly processes between Egypt and African partner markets.",
