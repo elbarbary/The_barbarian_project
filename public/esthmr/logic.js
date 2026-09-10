@@ -3937,7 +3937,7 @@ export class Component extends Base {
     ];
     const nav = navDef.map(([id,label,meta]) => {
       const on = st.screen === id;
-      return { label, meta, icon: ICON[id] || ICON.exchange, go: id === 'fragility' ? () => { window.location.href = 'fragility.html'; } : this.go(id),
+      return { label, meta, icon: ICON[id] || ICON.exchange, go: id === 'fragility' ? () => { window.location.href = 'fragility'; } : this.go(id),
         color: on ? 'var(--ink)' : 'var(--t2)', weight: on ? 600 : 400,
         bg: on ? 'var(--activeBg)' : 'transparent',
         shadow: on ? 'var(--shPill)' : 'none',
@@ -3959,7 +3959,7 @@ export class Component extends Base {
       go: this.go(g.id) }));
     const secondaryNav = navDef.filter(([id]) => activeGroup.screens.includes(id)
       && (id !== 'company' || st.ticker)).map(([id, label]) => ({
-        label, current: st.screen === id ? 'page' : null, go: id === 'fragility' ? () => { window.location.href = 'fragility.html'; } : this.go(id),
+        label, current: st.screen === id ? 'page' : null, go: id === 'fragility' ? () => { window.location.href = 'fragility'; } : this.go(id),
       }));
 
     const marketExplorer = explorer(this, D.companies, ar, D.trends);
@@ -4600,7 +4600,7 @@ export class Component extends Base {
         leadMetric: ar ? '16.0 يوم' : '16.0 days',
         utilityMetric: '+76.55',
         openFullLabel: ar ? 'فتح محرّك الأزمات ومحاكي الـ 18 سنة التفاعلي ↗' : 'Launch Full Fragility Engine & 18Y Simulator ↗',
-        openFullHref: 'fragility.html'
+        openFullHref: 'fragility'
       },
       isToolsTabSim: (st.toolsTab || 'sim') === 'sim',
       isToolsTabCalc: st.toolsTab === 'calc',

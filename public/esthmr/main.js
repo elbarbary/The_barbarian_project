@@ -227,10 +227,20 @@ document.getElementById('signout').onclick = async () => {
   component.onClearWatch = () => syncWatchlist(watch.clearSynced(reader, watchStatus()));
   component.onRetryWatch = () => watch.retrySynced(reader, watchStatus());
 
-  const template = await readResponse('./template.html', {}, (response) => {
+  // `./template`, not `./template.html`. Cloudflare Assets canonicalises a
+  // `.html` path with a 307 to the extensionless one, so every reader paid a
+  // whole extra round trip before the app could draw anything — on the request
+  // that blocks first paint, and it is never cached away.
+  //
+  // The fallback is not defensive padding: a plain static file server (the way
+  // this directory is served in local development) has no such rewrite and
+  // holds only `template.html`. Production takes the first path and never the
+  // second; local development takes the second.
+  const readTemplate = (path) => readResponse(path, {}, (response) => {
     if (!response.ok) throw new Error('The page template could not load');
     return response.text();
   });
+  const template = await readTemplate('./template').catch(() => readTemplate('./template.html'));
   component.state.dataLoading = true;
   mount(template, root, component);
 
