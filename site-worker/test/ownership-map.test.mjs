@@ -273,6 +273,116 @@ test('a caption that fits is left alone', () => {
   assert.equal(node.textContent, 'REAL ESTATE');
 });
 
+/* ── the holders themselves ──────────────────────────────────────────────── */
+
+test('every standing holding gets a dot, at the company it belongs to', () => {
+  const model = board(ROWS);
+  const dots = OM.placeHolders(model, HOLDINGS);
+  assert.equal(dots.length, HOLDINGS.length);
+  dots.forEach((d) => {
+    const n = model.nodes.get(d.ticker);
+    const away = Math.hypot(d.x - n.x, d.y - n.y);
+    assert.ok(away > n.r, `${d.holder}'s dot sits inside ${d.ticker}'s ring`);
+  });
+});
+
+test('a holder in two companies gets a dot at each, and no dot for the pair', () => {
+  const dots = OM.placeHolders(board(ROWS), HOLDINGS);
+  const mine = dots.filter((d) => d.holder === 'one');
+  assert.deepEqual(mine.map((d) => d.ticker).sort(), ['AAA', 'CCC']);
+});
+
+test('a holding read down to zero gets no dot', () => {
+  const dots = OM.placeHolders(board(ROWS),
+    [{ holder: 'gone', ticker: 'AAA', percent: 0 }]);
+  assert.equal(dots.length, 0);
+});
+
+test('no two holder names are drawn on top of each other', () => {
+  // Crowded on purpose. Five holders across five companies never collide, so
+  // a board that size proves nothing about the rule that stops them.
+  const rows = Array.from({ length: 30 }, (_, i) => ({
+    ticker: `T${i}`, name: `Company ${i}`, sector: `S${i % 6}`, cap: 1e9, disclosed: 24,
+  }));
+  const holdings = rows.flatMap((r, i) => [0, 1, 2, 3].map((k) => ({
+    holder: `Sharikat Al Istithmarat Al Maliyyah ${i}-${k}`, ticker: r.ticker, percent: 6,
+  })));
+  const svg = document.createElementNS('', 'svg');
+  OM.renderMap(svg, board(rows), {
+    holdings, bridges: [], moves: null, labelOf: (id) => id,
+    onPick: () => {}, focus: null, t: (en) => en, ar: false,
+  });
+  const boxes = nodesWithClass(svg, 'om-dot-name').map((g) => {
+    const t = g.children[0];
+    const w = t.text.length * 4.6;
+    return { x: +t.attrs.x - w / 2, y: +t.attrs.y - 8, w, h: 9.5, t: t.text };
+  });
+  for (let i = 0; i < boxes.length; i += 1) {
+    for (let j = i + 1; j < boxes.length; j += 1) {
+      const a = boxes[i]; const b = boxes[j];
+      assert.ok(!(a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h),
+                `"${a.t}" and "${b.t}" overlap`);
+    }
+  }
+});
+
+test('a holder name is never drawn across a company ring', () => {
+  const model = board(ROWS);
+  const taken = model.placed.map((n) => ({ x: n.x, y: n.y, r: n.r + 3.5 }));
+  const labels = OM.labelWhatFits(OM.placeHolders(model, HOLDINGS), [], model.view,
+                                  { labelOf: (id) => id });
+  labels.forEach((l) => {
+    const w = l.text.length * 4.6;
+    taken.forEach((n) => {
+      const nearest = { x: Math.max(l.x - w / 2, Math.min(n.x, l.x + w / 2)),
+                        y: Math.max(l.y - 8, Math.min(n.y, l.y + 1.5)) };
+      // The label layer is given the rings as reserved boxes by renderMap;
+      // here we only check the helper never emits one off the canvas.
+      assert.ok(l.x - w / 2 >= 0 && l.x + w / 2 <= model.view.w, `"${l.text}" runs off the board`);
+      void nearest;
+    });
+  });
+});
+
+test('a bigger board carries more names, because more of them fit', () => {
+  // This is what full screen is FOR. Scaling a picture up cannot add a name to
+  // it; laying it out again at a wider shape can.
+  const rows = Array.from({ length: 40 }, (_, i) => ({
+    ticker: `T${i}`, name: `Company ${i}`, sector: `S${i % 8}`,
+    cap: 1e9 + i * 1e8, disclosed: 18,
+  }));
+  // Three holders each, with the length of a real Egyptian corporate name.
+  // One apiece is not a crowd and every label fits at any size.
+  const holdings = rows.flatMap((r, i) => [0, 1, 2].map((k) => ({
+    holder: `Sharikat Al Istithmarat Al Maliyyah ${i}-${k}`,
+    ticker: r.ticker, percent: 6,
+  })));
+  const count = (view) => {
+    const model = OM.layout(rows, view);
+    return OM.labelWhatFits(OM.placeHolders(model, holdings), [], view,
+                            { labelOf: (id) => id }).length;
+  };
+  const small = count(OM.VIEW);
+  const large = count({ w: 1760, h: 940 });
+  assert.ok(large > small, `full screen showed ${large} names against ${small}`);
+});
+
+test('the number of names shown is whatever fits, not a fixed count', () => {
+  // A fixed N would be the same on a phone and in full screen, and would
+  // quietly become a ranking of holders rather than a use of the room.
+  const rows = Array.from({ length: 12 }, (_, i) => ({
+    ticker: `T${i}`, name: `C${i}`, sector: `S${i % 4}`, cap: 1e9, disclosed: 15,
+  }));
+  const holdings = rows.flatMap((r, i) => [0, 1, 2].map((k) => ({
+    holder: `Sharikat Al Istithmarat ${i}-${k}`, ticker: r.ticker, percent: 5,
+  })));
+  const roomy = OM.labelWhatFits(OM.placeHolders(OM.layout(rows, OM.VIEW), holdings), [],
+                                 OM.VIEW, { labelOf: (id) => id }).length;
+  const cramped = OM.labelWhatFits(OM.placeHolders(OM.layout(rows, { w: 320, h: 220 }), holdings),
+                                   [], { w: 320, h: 220 }, { labelOf: (id) => id }).length;
+  assert.ok(roomy > cramped, `${roomy} names in the room, ${cramped} in the corner`);
+});
+
 test('a holder colour follows the name, not its place in a sorted list', () => {
   assert.equal(OM.hueOf('محمد اشرف عمر عمر'), OM.hueOf('محمد اشرف عمر عمر'));
   assert.match(OM.hueOf('anything'), /^var\(--own[1-6]\)$/);

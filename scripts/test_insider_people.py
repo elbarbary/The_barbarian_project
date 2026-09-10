@@ -183,6 +183,80 @@ class WhatMoved(unittest.TestCase):
                          {"الحصن للاستشارات": "firm", "محمد اشرف عمر عمر": "person"})
 
 
+class NeverShrinks(unittest.TestCase):
+    """A thin store must not overwrite a fat file.
+
+    The readings live outside git. A CI runner rebuilding from an empty store
+    would otherwise replace every named holder on the map with the six forms
+    it managed to read that morning, and report success doing it.
+    """
+
+    def _build_into(self, out, readings, force=False):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            store = root / "store.json"
+            companies_file = root / "companies.json"
+            store.write_text(json.dumps({"readings": {r["filingId"]: r for r in readings}}),
+                             encoding="utf-8")
+            companies_file.write_text(json.dumps({"companies": []}), encoding="utf-8")
+            saved = (bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES)
+            bip.STORE, bip.OUT, bip.COMPANIES = store, out, companies_file
+            bip.FIXTURE = root / "missing" / "fixture.json"
+            try:
+                with contextlib.redirect_stdout(io.StringIO()) as said:
+                    bip.main(["--force"] if force else [])
+                return said.getvalue()
+            finally:
+                bip.STORE, bip.OUT, bip.FIXTURE, bip.COMPANIES = saved
+
+    def _fat(self, out):
+        self._build_into(out, [
+            reading("1", "الحصن للاستشارات", "UNIP", "2026-08-16", 3.01, 0.003),
+            reading("2", "محمد اشرف عمر عمر", "HBCO", "2026-08-17", 12.0, 11.0),
+            reading("3", "وادي للاستشارات", "GGCC", "2026-09-01", 1.5, 0.84),
+        ])
+
+    def test_a_thinner_rebuild_leaves_the_published_file_alone(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._fat(out)
+            self._build_into(out, [reading("9", "محمد اشرف عمر عمر", "HBCO",
+                                           "2026-08-17", 12.0, 11.0)])
+            kept = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual(kept["peopleCount"], 3)
+
+    def test_it_says_why_it_refused(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._fat(out)
+            said = self._build_into(out, [reading("9", "محمد اشرف عمر عمر", "HBCO",
+                                                  "2026-08-17", 12.0, 11.0)])
+            self.assertIn("refusing to publish", said)
+
+    def test_the_same_size_still_publishes(self):
+        # Only a LOSS is refused. A rebuild that names the same holders with
+        # corrected figures has to be able to land.
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._fat(out)
+            self._build_into(out, [
+                reading("1", "الحصن للاستشارات", "UNIP", "2026-08-16", 3.01, 0.5),
+                reading("2", "محمد اشرف عمر عمر", "HBCO", "2026-08-17", 12.0, 11.0),
+                reading("3", "وادي للاستشارات", "GGCC", "2026-09-01", 1.5, 0.84),
+            ])
+            after = json.loads(out.read_text(encoding="utf-8"))
+            self.assertEqual([p["percent"] for p in after["positions"]
+                              if p["ticker"] == "UNIP"], [0.5])
+
+    def test_force_publishes_the_loss_deliberately(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = pathlib.Path(tmp) / "out.json"
+            self._fat(out)
+            self._build_into(out, [reading("9", "محمد اشرف عمر عمر", "HBCO",
+                                           "2026-08-17", 12.0, 11.0)], force=True)
+            self.assertEqual(json.loads(out.read_text(encoding="utf-8"))["peopleCount"], 1)
+
+
 class TheAudit(unittest.TestCase):
     """The published file is checked for the contradiction the merge prevents."""
 

@@ -701,7 +701,15 @@ function renderOwnershipMap(doc, ar, t, component) {
     .filter(([, tickers]) => tickers.length > 1)
     .map(([holder, tickers]) => ({ holder, tickers }));
 
-  const model = OM.layout(rows);
+  // Two boards, not one drawing scaled up. Full screen re-runs the layout at
+  // the wider shape, so the sector cells grow, the slots inside them grow, and
+  // names that had nowhere to go on a 1200-wide board have somewhere to go on
+  // a 1760-wide one. Scaling a picture cannot add a name to it.
+  const BOARDS = {
+    inline: OM.VIEW,
+    full: { w: 1760, h: 940 },
+  };
+  let model = OM.layout(rows, BOARDS.inline);
   const valueOf = (p) => (finite(co[p.ticker] && co[p.ticker].cap)
     ? (p.percent / 100) * co[p.ticker].cap : null);
 
@@ -711,6 +719,10 @@ function renderOwnershipMap(doc, ar, t, component) {
   // every focus, and pushing either through the component's render would
   // repaint the whole screen with it. Playback in particular would re-render
   // the page once a second for as long as it ran.
+  // A stable parent for the board, so full screen can borrow the host and
+  // hand it back to the same place.
+  const slot = document.createElement('div');
+  slot.className = 'om-map-wrap';
   const host = document.createElement('div');
   host.className = 'om-map-host';
   const strip = document.createElement('div');
@@ -734,10 +746,18 @@ function renderOwnershipMap(doc, ar, t, component) {
   const side = document.createElement('div');
   side.className = 'om-side';
   host.append(strip, stage, side);
+  slot.appendChild(host);
 
   let week = null;          // null is the standing board with nothing lit
   let focus = null;
   let timer = null;
+  let big = false;
+  // The window on the board, in the board's own units. Zooming moves this
+  // rather than scaling the element: the vectors stay sharp and, more to the
+  // point, a click still lands where the reader aimed it.
+  let win = null;
+  const board = () => (big ? BOARDS.full : BOARDS.inline);
+  const wholeBoard = () => ({ x: 0, y: 0, w: board().w, h: board().h });
 
   const buttons = [];
   const chip = (key, text, sub) => {
@@ -761,6 +781,26 @@ function renderOwnershipMap(doc, ar, t, component) {
   chip(null, t('Standing', 'الوضع الحالي'), t('all disclosed', 'كل ما أُفصح عنه'));
   weeks.forEach((w) => chip(w.start, ar ? w.labelAr : w.label,
                             t(`${w.moves.length} moved`, `${w.moves.length} تحرّك`)));
+
+  const tool = (glyph, label, onClick, className = 'om-tool') => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = className;
+    b.textContent = glyph;
+    b.setAttribute('aria-label', label);
+    b.title = label;
+    b.addEventListener('click', onClick);
+    return b;
+  };
+  const zoomLabel = document.createElement('output');
+  zoomLabel.className = 'om-zoom-level';
+  zoomLabel.setAttribute('aria-live', 'polite');
+  const zoomIn = tool('+', t('Zoom in', 'تكبير'), () => zoomBy(1.4));
+  const zoomOut = tool('−', t('Zoom out', 'تصغير'), () => zoomBy(1 / 1.4));
+  const resetZoom = tool('⤢', t('Fit the whole board', 'ملء اللوحة'),
+                         () => { win = wholeBoard(); applyWindow(); });
+  const expand = tool('⛶', t('Explore full screen', 'استكشف بملء الشاشة'),
+                      () => toggleFull(), 'om-tool om-expand');
 
   const play = document.createElement('button');
   play.type = 'button';
@@ -789,7 +829,118 @@ function renderOwnershipMap(doc, ar, t, component) {
     setPlayLabel();
   });
   setPlayLabel();
-  if (weeks.length > 1) strip.appendChild(play);
+  const tools = document.createElement('div');
+  // NOT `om-tools`: the shell already owns that class for the rail's own
+  // language and theme controls, and `journal.css` hides it outright with
+  // `#app .om-tools { display: none !important }`. Named that, every zoom
+  // control on this board was present, styled, and invisible.
+  tools.className = 'om-map-tools';
+  if (weeks.length > 1) tools.appendChild(play);
+  tools.append(zoomOut, zoomLabel, zoomIn, resetZoom, expand);
+  strip.appendChild(tools);
+
+  // Wheel to zoom, drag to pan — the same gestures the chart explorer uses,
+  // and the reason the map keeps its own instead of borrowing that one: the
+  // explorer works on a CLONE with its listeners stripped, and half of what
+  // this board is for is clicking a company to see who is in it.
+  scroller.addEventListener('wheel', (e) => {
+    if (!e.ctrlKey && !big && Math.abs(e.deltaY) < 40) return;
+    e.preventDefault();
+    const box = svg.getBoundingClientRect();
+    if (!win) win = wholeBoard();
+    zoomBy(e.deltaY < 0 ? 1.12 : 1 / 1.12, {
+      x: win.x + ((e.clientX - box.left) / box.width) * win.w,
+      y: win.y + ((e.clientY - box.top) / box.height) * win.h,
+    });
+  }, { passive: false });
+
+  let drag = null;
+  svg.addEventListener('pointerdown', (e) => {
+    if (!win || win.w >= board().w) return;      // nothing to pan at full fit
+    drag = { x: e.clientX, y: e.clientY, from: { ...win }, moved: false };
+    svg.setPointerCapture(e.pointerId);
+  });
+  svg.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const box = svg.getBoundingClientRect();
+    const dx = (e.clientX - drag.x) / box.width * win.w;
+    const dy = (e.clientY - drag.y) / box.height * win.h;
+    if (Math.abs(dx) + Math.abs(dy) > 2) drag.moved = true;
+    win.x = drag.from.x - dx;
+    win.y = drag.from.y - dy;
+    applyWindow();
+  });
+  const endDrag = (e) => {
+    if (!drag) return;
+    // A drag that moved is a pan, not a click on whatever was under the
+    // finger when it stopped.
+    const moved = drag.moved;
+    drag = null;
+    if (moved) e.stopPropagation();
+  };
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+
+  // Full screen holds the LIVE board, not a copy of it. The map answers
+  // "who is in this company" by being clicked, and a clone cannot be.
+  const sheet = document.createElement('div');
+  sheet.className = 'om-sheet';
+  sheet.hidden = true;
+  const onKey = (e) => { if (e.key === 'Escape' && big) toggleFull(); };
+  function toggleFull() {
+    big = !big;
+    model = OM.layout(rows, board());
+    win = wholeBoard();
+    expand.textContent = big ? '✕' : '⛶';
+    expand.title = big ? t('Close', 'إغلاق') : t('Explore full screen', 'استكشف بملء الشاشة');
+    expand.setAttribute('aria-label', expand.title);
+    if (big) {
+      sheet.hidden = false;
+      sheet.appendChild(host);
+      document.body.appendChild(sheet);
+      document.body.classList.add('om-sheet-open');
+      document.addEventListener('keydown', onKey);
+    } else {
+      slot.appendChild(host);
+      sheet.hidden = true;
+      sheet.remove();
+      document.body.classList.remove('om-sheet-open');
+      document.removeEventListener('keydown', onKey);
+    }
+    paint();
+  }
+
+  const clampWindow = () => {
+    const full = board();
+    const min = 0.14;                       // about seven times in
+    win.w = Math.max(full.w * min, Math.min(full.w, win.w));
+    win.h = win.w * (full.h / full.w);
+    win.x = Math.max(0, Math.min(full.w - win.w, win.x));
+    win.y = Math.max(0, Math.min(full.h - win.h, win.y));
+  };
+
+  const applyWindow = () => {
+    if (!win) win = wholeBoard();
+    clampWindow();
+    svg.setAttribute('viewBox', `${win.x} ${win.y} ${win.w} ${win.h}`);
+    const full = board();
+    const times = full.w / win.w;
+    if (zoomOut) zoomOut.disabled = times <= 1.001;
+    if (zoomLabel) zoomLabel.textContent = `${times.toFixed(1)}×`;
+  };
+
+  const zoomBy = (factor, at) => {
+    if (!win) win = wholeBoard();
+    const before = { ...win };
+    win.w = before.w / factor;
+    win.h = before.h / factor;
+    // Keep the point under the cursor under the cursor.
+    const fx = at ? (at.x - before.x) / before.w : 0.5;
+    const fy = at ? (at.y - before.y) / before.h : 0.5;
+    win.x = before.x + fx * before.w - fx * win.w;
+    win.y = before.y + fy * before.h - fy * win.h;
+    applyWindow();
+  };
 
   const paint = () => {
     buttons.forEach((b) => {
@@ -798,10 +949,11 @@ function renderOwnershipMap(doc, ar, t, component) {
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     OM.renderMap(svg, model, {
-      holdings: positions, bridges, labelOf, focus, t, ar,
+      holdings: positions, bridges, labelOf, focus, t, ar, dense: big,
       moves: week ? OM.movesIn(doc, week) : null,
       onPick: (id) => { focus = focus === id ? null : id; paint(); },
     });
+    applyWindow();
     drawSide();
   };
 
@@ -971,7 +1123,7 @@ function renderOwnershipMap(doc, ar, t, component) {
     h('p', { className: 'ft-note' }, t(
       'Every company a post-execution form has named a holder in, drawn at the stake that stands today. Pick a week and the holdings that changed in it light up; the board itself does not move.',
       'كل شركة ورد في نموذج إفصاح بعد التنفيذ اسم مالك فيها، مرسومة بالحصة القائمة اليوم. اختر أسبوعاً فتضيء الحصص التي تغيّرت فيه، دون أن تتحرك اللوحة نفسها.')),
-    h('div', { className: 'om-map-wrap' }, host),
+    slot,
     h('div', { className: 'om-legend' },
       h('span', { className: 'om-key om-key-ring' },
         t('A ring is a company, sized by market value; the coloured slices are the holders a filing has named.',

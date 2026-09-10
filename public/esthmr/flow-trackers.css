@@ -559,11 +559,34 @@
 .om-period small { font-size: 9px; opacity: .72; white-space: nowrap; }
 .om-period-on { background: var(--accent); color: var(--surface); }
 .om-period:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.om-play { margin-inline-start: auto; border: 0; cursor: pointer;
-  background: var(--surface); border: 1px solid var(--rule2); color: var(--t2);
-  border-radius: 14px; padding: 0 13px; font-size: 11px; line-height: 1; }
-.om-play:hover { color: var(--accent); border-color: var(--accent); }
-.om-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.om-map-tools { margin-inline-start: auto; display: flex; align-items: stretch;
+  gap: 4px; min-width: 0; }
+.om-play, .om-tool { border: 1px solid var(--rule2); cursor: pointer;
+  background: var(--surface); color: var(--t2); border-radius: 14px;
+  padding: 0 12px; font: inherit; font-size: 12px; line-height: 1;
+  display: grid; place-items: center; min-width: 32px; }
+.om-play:hover, .om-tool:hover { color: var(--accent); border-color: var(--accent); }
+.om-play:focus-visible, .om-tool:focus-visible { outline: 2px solid var(--accent);
+  outline-offset: 2px; }
+.om-tool:disabled { opacity: .35; cursor: default; }
+.om-tool:disabled:hover { color: var(--t2); border-color: var(--rule2); }
+.om-zoom-level { display: grid; place-items: center; min-width: 34px;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--faint); }
+
+/* Full screen holds the live board. It is a plain fixed layer rather than a
+   <dialog> because the board keeps its own click handling and a modal dialog
+   would put the page behind an inert barrier the map's own tooltips sit under. */
+.om-sheet { position: fixed; inset: 0; z-index: 90; background: var(--bg);
+  padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+           max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  overflow: auto; }
+body.om-sheet-open { overflow: hidden; }
+.om-sheet .om-map-host { height: 100%; grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 260px; }
+.om-sheet .om-map-slot { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.om-sheet .om-map-scroll { height: 100%; display: grid; }
+.om-sheet .om-map-svg { height: 100%; width: 100%; }
+.om-sheet .om-side { overflow: auto; }
 
 .om-map-slot { grid-area: stage; min-width: 0; }
 /* Shown only where the board pans — see the narrow-screen block below. */
@@ -571,7 +594,9 @@
   color: var(--faint); }
 .om-map-scroll { min-width: 0; border-radius: 22px; background: var(--sunk);
   border: 1px solid var(--rule2); overflow: hidden; }
-.om-map-svg { width: 100%; height: auto; display: block; }
+.om-map-svg { width: 100%; height: auto; display: block; touch-action: none; }
+.om-map-scroll:has(.om-map-svg) { cursor: grab; }
+.om-map-scroll:active { cursor: grabbing; }
 
 .om-side { grid-area: side; display: grid; gap: 10px; align-content: start;
   min-width: 0; }

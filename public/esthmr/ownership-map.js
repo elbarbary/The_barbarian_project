@@ -171,6 +171,72 @@ export function sliceAngles(list) {
   return { claimed, over, arcs };
 }
 
+/* Where a holder's dot sits.
+ *
+ * On a small orbit around the company they hold, biggest first and clockwise
+ * from the top, so a reader following a ring's slices round finds the dots in
+ * the same order. A holder in more than one company gets a dot at each of
+ * them: a stake is a percentage of ONE company and there is no point on this
+ * board that means "all of what they own".
+ */
+export function placeHolders(model, holdings, opts = {}) {
+  const gap = opts.gap ?? 9;
+  const byTicker = new Map();
+  holdings.forEach((p) => {
+    if (!(p.percent > 0)) return;
+    if (!byTicker.has(p.ticker)) byTicker.set(p.ticker, []);
+    byTicker.get(p.ticker).push(p);
+  });
+  const dots = [];
+  byTicker.forEach((list, ticker) => {
+    const n = model.nodes.get(ticker);
+    if (!n) return;
+    const mine = list.slice().sort((a, b) => b.percent - a.percent);
+    const orbit = n.r + BAND / 2 + gap;
+    mine.forEach((p, i) => {
+      const a = -Math.PI / 2 + (i / mine.length) * TAU;
+      dots.push({
+        ...p,
+        x: n.x + Math.cos(a) * orbit,
+        y: n.y + Math.sin(a) * orbit,
+        r: 2.2 + Math.sqrt(Math.min(p.percent, 100) / 100) * 3.4,
+        node: n,
+      });
+    });
+  });
+  return dots.sort((a, b) => b.percent - a.percent);
+}
+
+/* How many of those dots can be named without a name landing on another.
+ *
+ * Not a top-N: the number that fits is whatever fits, and it changes with the
+ * size of the board. A fixed count would show the same twelve names on a
+ * phone and in full screen, and would quietly become a ranking of holders
+ * rather than a consequence of the room available.
+ */
+export function labelWhatFits(dots, taken, view, opts = {}) {
+  const size = opts.fontSize ?? 8;
+  const per = opts.charWidth ?? 4.6;
+  const lift = opts.lift ?? 5.5;
+  const boxes = taken.slice();
+  const hits = (box) => boxes.some((b) => box.x < b.x + b.w && b.x < box.x + box.w
+                                       && box.y < b.y + b.h && b.y < box.y + box.h);
+  const out = [];
+  dots.forEach((dot) => {
+    const text = opts.labelOf(dot.holder);
+    if (!text) return;
+    const trimmed = text.length > 24 ? `${text.slice(0, 22)}…` : text;
+    const w = trimmed.length * per;
+    const box = { x: dot.x - w / 2, y: dot.y - dot.r - lift - size, w, h: size + 1.5 };
+    if (box.x < 2 || box.x + box.w > view.w - 2 || box.y < 2) return;
+    if (hits(box)) return;
+    boxes.push(box);
+    out.push({ dot, text: trimmed, x: dot.x, y: box.y + size });
+  });
+  return out;
+}
+
+
 export function arcPath(cx, cy, r0, r1, a0, a1) {
   if (!(a1 - a0 > 0.0008)) return '';
   const large = (a1 - a0) > Math.PI ? 1 : 0;
@@ -235,12 +301,14 @@ const compact = (v) => (finite(v) && v > 0
 export function renderMap(svg, model, opts) {
   const { nodes, cells, view } = model;
   const { holdings, bridges, moves, labelOf, onPick, focus, t, ar } = opts;
+  const dense = opts.dense === true;
   while (svg.firstChild) svg.removeChild(svg.firstChild);
   svg.setAttribute('viewBox', `0 0 ${view.w} ${view.h}`);
 
   const gCell = svgEl('g', { class: 'om-cells' }, svg);
   const gBridge = svgEl('g', { class: 'om-bridges' }, svg);
   const gCo = svgEl('g', { class: 'om-cos' }, svg);
+  const gDot = svgEl('g', { class: 'om-dots' }, svg);
   const gPop = svgEl('g', { class: 'om-pop' }, svg);
 
   // What the focus is related to: a company lights its holders, a holder
@@ -399,6 +467,48 @@ export function renderMap(svg, model, opts) {
       cx: n.x, cy: n.y, r: r1 + 8, fill: 'transparent', class: 'om-hit',
     }, g);
     hit.addEventListener('click', (e) => { e.stopPropagation(); onPick(n.ticker); });
+  });
+
+  // ── the holders themselves ────────────────────────────────────────────────
+  //
+  // A dot each, at every company they hold — and a name over as many of them
+  // as the board has room for. The slices already carry the same fact as
+  // colour; this is the half a reader can read out loud.
+  const dots = placeHolders(model, holdings);
+  dots.forEach((dot) => {
+    const g = svgEl('g', {
+      class: `om-dot${cls(dot.holder, dot.ticker)}`, 'data-id': dot.holder,
+    }, gDot);
+    svgEl('circle', {
+      cx: dot.x, cy: dot.y, r: dot.r, fill: hueOf(dot.holder),
+      stroke: 'var(--surface)', 'stroke-width': 1,
+    }, g);
+    const title = svgEl('title', {}, g);
+    title.textContent = `${labelOf(dot.holder)} — ${dot.percent.toFixed(2)}% ${t('of', 'من')} ${dot.ticker}`;
+    g.addEventListener('click', (e) => { e.stopPropagation(); onPick(dot.holder); });
+  });
+
+  // A name may not land on a ring, on a ring's ticker, or on a sector's
+  // caption. The reserved box is the RING, not the text inside it: reserving
+  // only the ticker put "Wadi Lilistithmarat" straight across GGCC's band.
+  const taken = model.placed.map((n) => {
+    const reach = n.r + BAND / 2 + 2;
+    return { x: n.x - reach, y: n.y - reach, w: reach * 2, h: reach * 2 };
+  }).concat(cells.map((c) => ({ x: c.x, y: c.y, w: c.w, h: CELL_LABEL })));
+  labelWhatFits(dots, taken, view, {
+    labelOf, fontSize: dense ? 8.5 : 8, charWidth: dense ? 4.9 : 4.6,
+  }).forEach(({ dot, text, x, y }) => {
+    const g = svgEl('g', {
+      class: `om-dot-name${cls(dot.holder, dot.ticker)}`, 'data-id': dot.holder,
+    }, gDot);
+    const label = svgEl('text', {
+      x, y, 'text-anchor': 'middle', 'font-size': dense ? 8.5 : 8,
+      fill: 'var(--t2)', direction: 'ltr',
+    }, g);
+    label.textContent = text;
+    const title = svgEl('title', {}, g);
+    title.textContent = labelOf(dot.holder);
+    g.addEventListener('click', (e) => { e.stopPropagation(); onPick(dot.holder); });
   });
 
   // ── who is in the company you picked ──────────────────────────────────────

@@ -98,6 +98,8 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
                     help="build it and report, but write nothing")
+    ap.add_argument("--force", action="store_true",
+                    help="publish even if it knows less than what is published")
     args = ap.parse_args(argv)
     if not STORE.exists():
         print("no named-insider store yet — run build_named_insiders.py")
@@ -302,6 +304,27 @@ def main(argv=None) -> int:
         # skipped the work would report a health it never tested.
         print("   --check: not written")
         return 0
+
+    # A rebuild that knows LESS than the file it is replacing is not a rebuild.
+    #
+    # The readings this is built from live outside git, so a machine that has
+    # not collected them — a CI runner, a fresh clone — rebuilds a thinner
+    # document from a thinner store and overwrites months of reading with it.
+    # Six trades would replace a hundred and five, and every ring on the map
+    # would lose its holders, silently, in a build that reported success.
+    if OUT.exists() and not args.force:
+        try:
+            standing = json.loads(OUT.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            standing = {}
+        was = len(standing.get("people") or ())
+        if was > len(rows):
+            print(f"   refusing to publish: {len(rows)} holders would replace "
+                  f"{was} already published. The reading store is thinner than "
+                  f"the file — collect the forms, or pass --force if the loss "
+                  f"is intended.")
+            return 0
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     if FIXTURE.parent.exists():

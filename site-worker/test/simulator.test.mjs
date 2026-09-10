@@ -52,13 +52,20 @@ test('simulatorExplorer initializes with COMI and lump sum when specified in sta
   assert.ok(sim.brokerCards.length === 7, '7 brokers compared (including Telda and Beltone)');
 });
 
-test('simulatorExplorer defaults to requested BTFH close-to-noon over two years', () => {
+test('simulatorExplorer defaults to requested BTFH close-to-11:00 over two years', () => {
   const comp = { state: {}, setState(patch) { Object.assign(this.state, patch); } };
   const sim = simulatorExplorer(comp, comp.state);
 
   assert.equal(sim.ticker, 'BTFH');
   assert.equal(sim.strategy, 'daily', 'defaults to daily trading strategy');
-  assert.equal(sim.timing, 'close_to_noon');
+  assert.equal(sim.timing, 'close_to_11');
+  assert.equal(sim.exitTime, '11:00', 'liquidation defaults to 11:00 AM');
+  // A default that cannot be priced is worse than the one it replaced. The
+  // clock times live only in the intraday set; if the explorer ever falls
+  // back to the four-column daily rows this goes red rather than showing
+  // "11:00 AM return unavailable" to every reader who opens the tool.
+  assert.equal(sim.missingExitPrices, false, '11:00 prices are loaded for the default stock');
+  assert.equal(sim.resultsAvailable, true);
   assert.equal(sim.range, '2Y');
   assert.equal(sim.isDaily, true, 'isDaily flag is true');
   assert.ok(Number.isFinite(sim.brokerCards[0].netReturnPct), 'return is calculated rather than predetermined');

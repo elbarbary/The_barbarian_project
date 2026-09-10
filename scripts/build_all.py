@@ -35,6 +35,18 @@ HERE = Path(__file__).resolve().parent
 _TODAY = datetime.date.today()
 LAST_MONTH = (_TODAY.replace(day=1) - datetime.timedelta(days=1)).strftime("%Y-%m")
 
+
+def _recent_months(count: int) -> list[str]:
+    """The last `count` months, newest last, as --month arguments."""
+    out, cursor = [], _TODAY.replace(day=1)
+    for _ in range(count):
+        out.append(cursor.strftime("%Y-%m"))
+        cursor = (cursor - datetime.timedelta(days=1)).replace(day=1)
+    args = []
+    for month in reversed(out):
+        args += ["--month", month]
+    return args
+
 # (name, script, supports --check, extra arguments)
 #
 # The two EGX-touching steps at the end carry deliberately small limits. The
@@ -280,11 +292,25 @@ STEPS = [
     # Combines daily session bulletins with post-execution disclosures and
     # treasury programs. Runs before the manifest so its version is hashed.
     ("Insider tracker", "build_insider_tracker.py", True),
+    # The queue the two readers below draw from, rebuilt out of the committed
+    # filing archive. Only the document half runs here: growing the ledger's
+    # TRANSACTION table needs --download-pdfs, which drives a headed Chrome
+    # through the exchange's F5 challenge and can only happen on the machine
+    # that has one. Sorting filings into post-execution forms, structure forms
+    # and treasury notices needs nothing but the archive, and without it the
+    # readers below find no new work however many forms the exchange files.
+    ("Ownership ledger", "ownership_ledger.py", False, _recent_months(12)),
     # A few scanned post-execution forms per run, not the whole backlog. Each
     # one is a model call and the store remembers what it has already read, so
     # a daily trickle clears new filings without ever re-reading an old one.
     # The engine is the local agent, which bills nobody.
     ("Named insiders", "build_named_insiders.py", False, ["--limit", "6", "--engine", "agy"]),
+    # The other form, and the one that covers the market rather than a trade:
+    # every listed company files its board and its shareholder structure, so
+    # roughly 245 documents name most of the exchange. Same trickle, same
+    # store-remembers-what-it-read rule.
+    ("Shareholder structure", "build_ownership_structure.py", True,
+     ["--limit", "6", "--engine", "agy"]),
     ("Insider people", "build_insider_people.py", True),
     ("Sector liquidity and ownership", "build_flow_trackers.py", True),
     ("Manifest + fixtures", "build_fixtures.py", False),
@@ -368,6 +394,7 @@ BEST_EFFORT = {
     # refused. `Insider people` below is NOT best-effort: it is a local
     # transform over that store, and if it fails something is wrong here.
     "Named insiders",
+    "Shareholder structure",
     "Calendar",
     "Company filings",
     "Disclosures",

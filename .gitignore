@@ -87,7 +87,19 @@ tmp/
 # and 8 of 2,012 daily-summary disclosures have been downloaded so far. When
 # the ledger has a consumer, the part worth publishing is `transactions` and
 # `coverage`, not the index.
-data-source/official/ownership/
+# The raw captures stay out — the PDFs are the exchange's, and the ledger is
+# derived from the committed filing archive on every run.
+#
+# The CONTENTS are excluded rather than the directory, because git will not
+# re-include a file whose parent directory is excluded and the two lines below
+# would silently do nothing.
+data-source/official/ownership/*
+# ...but not what the model read out of those documents. These two files are
+# months of reading, a call each, over scans that are slow to fetch. Ignored,
+# a CI runner rebuilds the published ownership file from an empty store — six
+# trades replacing a hundred and five, in a build that reports success.
+!data-source/official/ownership/named-insiders.json
+!data-source/official/ownership/shareholder-structure.json
 
 # The raw captures behind the official ledgers.
 #

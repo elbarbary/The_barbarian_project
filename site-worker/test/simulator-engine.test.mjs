@@ -137,5 +137,5 @@ test('failed long-history fetch preserves the chosen strategy',async(t)=>{
   await simulatorExplorer(c,{},false).loadCloseHistory();
   assert.ok(c.state.simHistoryError);
   assert.equal(c.state.simHistoryLoading,false);
-  assert.equal(simulatorExplorer(c,{},false).exitTime,'noon');
+  assert.equal(simulatorExplorer(c,{},false).exitTime,'11:00');
 });

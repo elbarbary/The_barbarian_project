@@ -52,9 +52,17 @@ export function simulatorExplorer(component, D, ar, React) {
   const defaultTicker = SIM_STOCKS['BTFH'] ? 'BTFH' : (Object.keys(SIM_STOCKS)[0] || 'BTFH');
   const selectedTicker = st.simTicker && SIM_STOCKS[st.simTicker] ? st.simTicker : defaultTicker;
   const strategy = st.simStrategy || 'daily'; // 'daily' | 'lump' | 'dca'
-  const timing = st.simTiming || 'close_to_noon';
+  const timing = st.simTiming || 'close_to_11';
   const entryTime = st.simEntryTime || (timing.startsWith('open') ? 'open' : timing.startsWith('noon') ? 'noon' : 'close');
-  const exitTime = st.simExitTime || (timing.endsWith('noon') ? 'noon' : timing.endsWith('open') ? 'open' : 'close');
+  // The default liquidation is 11:00. The clock times are carried in the
+  // intraday set (30-minute bars, Cairo time), which every company in the
+  // picker has; the four-column daily set has only open/noon/close, and a
+  // company that fell back to it says so through `missingExitPrices` rather
+  // than being quietly settled at noon.
+  const exitTime = st.simExitTime
+    || (timing.endsWith('_11') ? '11:00'
+      : timing.endsWith('noon') ? 'noon'
+      : timing.endsWith('open') ? 'open' : 'close');
   const requestedHold = Math.floor(Number(st.simHoldSessions ?? (timing.startsWith('close') ? 1 : 0)) || 0);
   const holdSessions = Math.max(TIME_ORDER[exitTime] <= TIME_ORDER[entryTime] ? 1 : 0, Math.min(60, requestedHold));
   const everySessions = Math.max(1, Math.min(60, Math.floor(Number(st.simEverySessions) || 1)));
@@ -387,8 +395,15 @@ export function simulatorExplorer(component, D, ar, React) {
   // Intraday / Overnight Timing Presets (When to Buy & When to Sell)
   const timingPresets = [
     {
+      id: 'close_to_11',
+      label: ar ? '🌟 شراء الإغلاق (2:30 م) ➔ تسييل 11:00 ص' : '🌟 Close (2:30 PM) ➔ 11:00 AM',
+      active: timing === 'close_to_11',
+      desc: ar ? 'شراء عند إغلاق الجلسة وتسييل في الحادية عشرة صباح اليوم التالي.' : 'Acquire at session close, liquidate at 11:00 AM the next session.',
+      pick: () => component.setState({ simTiming: 'close_to_11', simEntryTime: 'close', simExitTime: '11:00', simHoldSessions: 1 })
+    },
+    {
       id: 'close_to_noon',
-      label: ar ? '🌟 شراء الإغلاق (2:30 م) ➔ تسييل الظهيرة (12:00 م)' : '🌟 Close (2:30 PM) ➔ Noon (12:00 PM)',
+      label: ar ? 'شراء الإغلاق (2:30 م) ➔ تسييل الظهيرة (12:00 م)' : 'Close (2:30 PM) ➔ Noon (12:00 PM)',
       active: timing === 'close_to_noon',
       desc: ar ? 'شراء عند إغلاق الجلسة وتسييل عند ذروة سيولة الظهيرة في اليوم التالي.' : 'Acquire at session close, liquidate at peak midday liquidity next day.',
       pick: () => component.setState({ simTiming: 'close_to_noon', simEntryTime: 'close', simExitTime: 'noon', simHoldSessions: 1 })
@@ -430,13 +445,11 @@ export function simulatorExplorer(component, D, ar, React) {
     { id: '14:00', label: '2:00 PM' }
   ];
 
-  // Exit timing options
-  const exitTimeOptions = [
-    { id: 'noon', label: ar ? 'عند ظهيرة اليوم التالي (12:00 م)' : 'Next Day Noon (12:00 PM)' },
-    { id: 'open', label: ar ? 'عند افتتاح اليوم التالي (10:00 ص)' : 'Next Day Open (10:00 AM)' },
-    { id: 'close_same', label: ar ? 'عند إغلاق نفس اليوم (2:30 م)' : 'Same Day Close (2:30 PM)' },
-    { id: 'close_next', label: ar ? 'عند إغلاق اليوم التالي (2:30 م)' : 'Next Day Close (2:30 PM)' }
-  ];
+  // There is no separate exit list. One stood here with ids `close_same` and
+  // `close_next`, which `PRICE_COLUMN` has never had a column for — wiring the
+  // dropdown to it would have priced every exit at `undefined`. Both menus
+  // offer the same ten clock times; whether the exit falls on the same session
+  // or the next is `holdSessions`, not the id.
 
   // Capital presets
   const capitalPresets = [10000, 25000, 50000, 100000, 250000, 500000].map(v => ({
