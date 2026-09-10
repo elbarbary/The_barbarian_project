@@ -291,6 +291,10 @@
     "meaning": "Securing this contract adds an active infrastructure and execution mandate to the company's operational backlog within the Ras El Hekma development project.",
     "meaning_ar": "يضيف ترسية هذا العقد أعمال بنية تحتية ومسؤوليات تنفيذية جديدة إلى محفظة مشروعات الشركة التشغيلية الجارية ضمن مخطط تطوير رأس الحكمة."
   },
+  "al fanar unveils deal for wadi yemm project in ras el hekma": {
+    "meaning": "The agreement commits Al Fanar to real estate and infrastructure development within the Ras El Hekma coastal zone, deploying capital into land preparation, construction contracting, and utility deployment under the project master plan.",
+    "meaning_ar": "يُلزم هذا الاتفاق شركة الفنار بتنفيذ أعمال التطوير العقاري والبنية التحتية داخل نطاق رأس الحكمة، وتوجيه السيولة نحو تجهيز الأراضي، والتعاقدات الإنشائية، ومد شبكات المرافق وفق المخطط العام للمشروع."
+  },
   "al khair river unit pays installment to egyptian countryside development": {
     "meaning": "Settling the scheduled land installment fulfills a contractual capital liability to the state developer, maintaining legal tenure over the agricultural project assets and reducing the company's cash reserves.",
     "meaning_ar": "يُسدد سداد قسط الأرض التزاماً رأسمالياً مجدولاً لصالح شركة تنمية الريف المصري، مما يُثبت الحيازة القانونية للأصول الزراعية ويُخفض رصيد السيولة النقدية للشركة."
@@ -775,6 +779,10 @@
     "meaning": "Daily tracking of staple food commodity prices reflects spot retail and wholesale market rates determined by current supply chain inventory and local distribution costs.",
     "meaning_ar": "يعكس التتبع اليومي لأسعار السلع الغذائية الأساسية أسعار التداول الفورية في أسواق التجزئة والجملة والمحددة وفق مستويات المخزون الحالية وتكاليف سلاسل الإمداد والتوزيع المحلية."
   },
+  "اسعار اعلاف الدواجن والطيور والمواشي اليوم الخميس 10-9-2026": {
+    "meaning": "Feed prices represent the primary direct input cost for poultry and livestock producers, directly determining the operating expenses of commercial farming and meat production operations.",
+    "meaning_ar": "تمثل أسعار الأعلاف عنصر التكلفة التشغيلية المباشرة الأساسي لمنتجي الدواجن والماشية، حيث تحدد بشكل مباشر المصروفات التشغيلية لمزارع الإنتاج الحيواني والداجني."
+  },
   "اسعار اعلاف الدواجن والمواشي والبط اليوم الجمعه 4-9-2026": {
     "meaning": "Feed represents the primary direct operational input cost for the poultry and livestock industries, directly impacting production costs, producer operating margins, and end-market protein prices.",
     "meaning_ar": "تمثل الأعلاف عنصر التكلفة التشغيلية المباشرة الرئيسي لقطاعي الدواجن والثروة الحيوانية، مما يؤثر بشكل مباشر على تكلفة الإنتاج وهوامش ربح المربين والمنتجين وأسعار السلع النهائية."
@@ -822,6 +830,10 @@
   "اسعار الخضار والفاكهه اليوم في مصر.. تحديث سوق العبور": {
     "meaning": "Obour Market functions as the primary wholesale price-discovery hub for fresh produce in Egypt, where daily spot clearing prices establish the baseline input costs for downstream retail food supply chains.",
     "meaning_ar": "يمثل سوق العبور المنظومة المركزية لتسعير السلع الزراعية بالجملة في مصر، حيث تحدد أسعار التداول الفورية اليومية التكلفة الأساسية لسلاسل إمداد وتوزيع التجزئة الغذائية."
+  },
+  "اسعار الخضروات والفاكهه الخميس 10-9-2026 في سوقي العبور والتجزيه": {
+    "meaning": "Daily wholesale and retail price monitoring reflects supply-demand dynamics and logistics markups across agricultural distribution channels, serving as key input data for household consumption metrics and the food component of the headline consumer price index (CPI).",
+    "meaning_ar": "تعكس المتابعة اليومية لأسعار الجملة والتجزئة ديناميكيات العرض والطلب وهامش تكاليف النقل عبر سلاسل الإمداد الزراعية، كما تشكل بيانات أساسية لمؤشرات الإنفاق العائلي وبند الأغذية ضمن الرقم القياسي العام لأسعار المستهلكين."
   },
   "اسعار الخضروات والفاكهه اليوم الاحد 6-9-2026": {
     "meaning": "Daily vegetable and fruit prices reflect wholesale market supply and demand conditions, logistics costs, and seasonal harvest volumes that directly influence the consumer price index (CPI) food basket component.",
@@ -1154,6 +1166,10 @@
   "الانتهاء من تنفيذ 98 الف وحده ضمن «سكن لكل المصريين» بمدينه حدايق العاصمه": {
     "meaning": "Completing the construction of large-scale public housing projects shifts contracted real estate and infrastructure volumes from the execution phase to project delivery, closing out procurement and construction billing cycles for participating contractors.",
     "meaning_ar": "ينقل الانتهاء من تشييد مشروعات الإسكان الاجتماعي الكبرى وحدات البنية التحتية والعقارات من مرحلة التنفيذ إلى مرحلة التسليم، مما يغلق دورات المطالبات المالية لشركات المقاولات المشاركة."
+  },
+  "الاهرام للطباعه تعلن تسلم مصنعها وتوقف اجراءات بيع الماكينات": {
+    "meaning": "The company regains physical control of its production facility and halts asset liquidation, retaining its machinery on the balance sheet and preserving its operational asset base.",
+    "meaning_ar": "تستعيد الشركة السيطرة الفعلية على منشأتها الإنتاجية وتوقف تسييل الأصول، مما يُبقي على الآلات ضمن ميزانيتها العمومية ويحافظ على قاعدتها التشغيلية."
   },
   "الاهلي المصري يوقع بروتوكول تعاون مع «ساي شيلد» لتعزيز الامن السيبراني وتوظيف الذكاء الاصطناعي": {
     "meaning": "The agreement integrates CyShield's cybersecurity protocols and artificial intelligence technologies into the National Bank of Egypt's digital banking infrastructure.",
@@ -1790,6 +1806,10 @@
   "اميرالد للاتصالات تقلص حصتها في المشروعات الصناعيه والهندسيه": {
     "meaning": "Emerald for Real Estate Investments executes a partial divestment of its equity stake in Industrial and Engineering Projects, directly reducing its proportional ownership, voting rights, and asset exposure in the investee entity.",
     "meaning_ar": "تنفذ شركة أميرالد تخفيضاً جزئياً لنسبة مساهمتها في رأسمال شركة المشروعات الصناعية والهندسية، مما يقلص من حصتها في حقوق التصويت والتمثيل المالي في الشركة التابعة."
+  },
+  "اميك: 29.7% نموا في مبيعات السيارات خلال 7 اشهر": {
+    "meaning": "Automotive Information Council (AMIC) data reports a 29.7% year-on-year increase in automotive unit distribution across Egypt over the seven-month period, reflecting an expansion in registered vehicle transaction volumes and import-assembly clearing activity.",
+    "meaning_ar": "توضح بيانات مجلس معلومات سوق السيارات (أميك) زيادة في حجم تسليمات المركبات في مصر بنسبة 29.7% على أساس سنوي خلال فترة السبعة أشهر، وهو ما يعكس اتساعًا في حجم المعاملات المسجلة وحركة الإفراج عن التجميع والاستيراد."
   },
   "انتعاش الطلب الصيني علي النفط يرفع الاسعار من الكونغو الي البرازيل": {
     "meaning": "Higher crude oil intake from Chinese refineries increases global spot market competition, absorbing export volumes and raising benchmark differentials across producing regions including West Africa and Latin America.",
@@ -3117,6 +3137,10 @@
     "meaning": "The Strait of Hormuz functions as a critical maritime corridor for global oil shipments, where military deployments operate to protect commercial vessels and secure international energy supply routes.",
     "meaning_ar": "يُمثّل مضيق هرمز ممرًا ملاحيًا حيويًا لتدفقات النفط العالمية، حيث تعمل التعزيزات العسكرية على تأمين حركة السفن التجارية وحماية مسارات إمدادات الطاقة الدولية."
   },
+  "كوريا الجنوبيه تقترب من اتفاق استثماري مع امريكا ب100 مليار دولار": {
+    "meaning": "Bilateral investment agreements of this scale involve structured direct capital allocations across specific industrial and manufacturing supply chains between the participating nations.",
+    "meaning_ar": "تتضمن الاتفاقيات الاستثمارية الثنائية بهذا الحجم تخصيصات رأسمالية مباشرة وموجهة عبر سلاسل إمداد صناعية وإنتاجية محددة بين الدولتين المشاركتين."
+  },
   "كيف تتاكد من ترخيص المنشاه قبل شراء منتجات نحل العسل؟": {
     "meaning": "Official facility licensing establishes regulatory oversight and quality standards within the apiculture and food processing sector, segmenting the market between formal registered producers and informal operators.",
     "meaning_ar": "يضع الترخيص الرسمي للمنشآت إطاراً للرقابة التنظيمية ومعايير الجودة في قطاع تربية النحل والتصنيع الغذائي، مما يقسم السوق بين المنتجين المسجلين رسمياً والقطاع غير الرسمي."
@@ -3840,6 +3864,10 @@
   "وزير الطيران: تعزيز التعاون مع دول امريكا اللاتينيه في الذكاء الاصطناعي وبناء القدرات": {
     "meaning": "The aviation sector establishes international technical cooperation frameworks to exchange artificial intelligence technologies and workforce training programs with Latin American counterparts.",
     "meaning_ar": "يُنشئ قطاع الطيران أُطر تعاون فني دولية لتبادل تطبيقات الذكاء الاصطناعي وبرامج التدريب وبناء القدرات المؤسسية مع دول أمريكا اللاتينية."
+  },
+  "وزير العمل يمنح شركات الحاق العماله بالخارج مهله 6 اشهر لتوفيق اوضاعها": {
+    "meaning": "The decision grants foreign employment agencies a six-month regulatory grace period to align operational procedures, licensing requirements, and legal documentation with Ministry of Labor standards.",
+    "meaning_ar": "يمنح القرار شركات إلحاق العمالة المصرية بالخارج مهلة توفيق أوضاع مدتها ستة أشهر لمطابقة إجراءاتها التشغيلية وتراخيصها ومتطلباتها القانونية مع معايير وزارة العمل."
   },
   "وزير الماليه: تعزيز الشراكه مع بنك AIIB لدعم اولويات التنميه والاستثمار": {
     "meaning": "Partnership frameworks with multilateral development lenders like the Asian Infrastructure Investment Bank (AIIB) provide long-term concessional financing facilities for state infrastructure and green transition projects, diversifying external funding mechanisms for sovereign capital expenditures.",
