@@ -1,0 +1,1541 @@
+{
+ "schemaVersion": 1,
+ "generated": "2026-09-10T15:26:49+00:00",
+ "source": "EGX post-execution disclosure forms (نموذج إفصاح بعد التنفيذ)",
+ "basis": "Read from the individual scanned filing, which is the only document that names the party. The daily EGX summary gives the relationship and never the name.",
+ "basisAr": "مقروءة من نموذج الإفصاح بعد التنفيذ، وهو المستند الوحيد الذي يذكر اسم المتعامل. الملخص اليومي للبورصة يذكر صفة المتعامل ولا يذكر اسمه.",
+ "peopleCount": 36,
+ "tradeCount": 47,
+ "tickerCount": 28,
+ "people": [
+  {
+   "id": "ياسر فاروق السعيد محمود العدوي",
+   "name": "ياسر فاروق السعيد محمود العدوي",
+   "nameEn": "Yasser Farouk El Saeed Mahmoud El Adawy",
+   "script": "ar",
+   "tickers": [
+    "KRDI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 80380844.74,
+   "singleCompanyMove": {
+    "ticker": "KRDI",
+    "from": 6.025,
+    "to": 0.628,
+    "change": -5.397
+   },
+   "trades": [
+    {
+     "filingId": "292432",
+     "date": "2026-08-03",
+     "ticker": "KRDI",
+     "company": null,
+     "companyAr": "نهر الخير للتنمية والأستثمار الزراعى والخدمات البيئية",
+     "action": "sell",
+     "shares": 210476158,
+     "price": 0.3819,
+     "value": 80380844.7402,
+     "stakeBefore": 6.025,
+     "stakeAfter": 0.628,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342078_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد محمود حسن جاب الله",
+   "name": "محمد محمود حسن جاب الله",
+   "nameEn": "Mohamed Mahmoud Hassan Gaballah",
+   "script": "ar",
+   "tickers": [
+    "EEII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 34124300.0,
+   "singleCompanyMove": {
+    "ticker": "EEII",
+    "from": 2.611,
+    "to": 7.964,
+    "change": 5.353
+   },
+   "trades": [
+    {
+     "filingId": "292755",
+     "date": "2026-08-11",
+     "ticker": "EEII",
+     "company": null,
+     "companyAr": "العربية للصناعات الهندسية",
+     "action": "buy",
+     "shares": 11890000,
+     "price": 2.87,
+     "value": 34124300.0,
+     "stakeBefore": 2.611,
+     "stakeAfter": 7.964,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342400_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "شركه ام جي سي للتجاره والاستثمار العقاري",
+   "name": "شركه ام جي سي للتجاره والاستثمار العقاري",
+   "nameEn": "Sharikat MGC Lil Tijara Wal Istithmar Al Aaqari MJC",
+   "script": "ar",
+   "tickers": [
+    "MOED"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 35074500.7,
+   "singleCompanyMove": {
+    "ticker": "MOED",
+    "from": 5,
+    "to": 0,
+    "change": -5
+   },
+   "trades": [
+    {
+     "filingId": "293105",
+     "date": "2026-08-13",
+     "ticker": "MOED",
+     "company": null,
+     "companyAr": "المصرية لنظم التعليم الحديثة ش م م",
+     "action": "sell",
+     "shares": 50250001,
+     "price": 0.698,
+     "value": 35074500.698,
+     "stakeBefore": 5,
+     "stakeAfter": 0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342728_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد حامد محمد إبراهيم شريف",
+   "name": "محمد حامد محمد إبراهيم شريف",
+   "nameEn": "Mohamed Hamed Mohamed Ibrahim Sherif",
+   "script": "ar",
+   "tickers": [
+    "OLFI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 480000000.0,
+   "singleCompanyMove": {
+    "ticker": "OLFI",
+    "from": 16.05,
+    "to": 11.05,
+    "change": -5.0
+   },
+   "trades": [
+    {
+     "filingId": "293345",
+     "date": "2026-08-16",
+     "ticker": "OLFI",
+     "company": null,
+     "companyAr": "عبور لاند للصناعات الغذائية",
+     "action": "sell",
+     "shares": 20000000,
+     "price": 24.0,
+     "value": 480000000.0,
+     "stakeBefore": 16.05,
+     "stakeAfter": 11.05,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342890_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمود حسن جاب الله حسان",
+   "name": "محمود حسن جاب الله حسان",
+   "nameEn": "Mahmoud Hassan Gaballah Hassan",
+   "script": "ar",
+   "tickers": [
+    "AREH"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 29458400.0,
+   "singleCompanyMove": {
+    "ticker": "AREH",
+    "from": 5.745,
+    "to": 1.145,
+    "change": -4.6
+   },
+   "trades": [
+    {
+     "filingId": "292558",
+     "date": "2026-08-06",
+     "ticker": "AREH",
+     "company": null,
+     "companyAr": "المجموعة المصرية العقارية",
+     "action": "sell",
+     "shares": 18400000,
+     "price": 1.601,
+     "value": 29458400.0,
+     "stakeBefore": 5.745,
+     "stakeAfter": 1.145,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342172_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "إيهاب شكري رياض",
+   "name": "إيهاب شكري رياض",
+   "nameEn": "Ihab Shokry Riad",
+   "script": "ar",
+   "tickers": [
+    "PHGC"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 92020000.0,
+   "singleCompanyMove": {
+    "ticker": "PHGC",
+    "from": 4.925,
+    "to": 9.453,
+    "change": 4.528
+   },
+   "trades": [
+    {
+     "filingId": "293447",
+     "date": "2026-08-18",
+     "ticker": "PHGC",
+     "company": null,
+     "companyAr": "بريميم هيلثكير جروب",
+     "action": "buy",
+     "shares": 1070000000,
+     "price": 0.086,
+     "value": 92020000.0,
+     "stakeBefore": 4.925,
+     "stakeAfter": 9.453,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343075_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "تولين السيد صابر السيد حميد",
+   "name": "تولين السيد صابر السيد حميد",
+   "nameEn": "Toleen El Sayed Saber El Sayed Hameed",
+   "script": "ar",
+   "tickers": [
+    "RREI"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 67624320.0,
+   "singleCompanyMove": {
+    "ticker": "RREI",
+    "from": 4.28,
+    "to": 0,
+    "change": -4.28
+   },
+   "trades": [
+    {
+     "filingId": "292358",
+     "date": "2026-08-02",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 1900000,
+     "price": 4.7223,
+     "value": 8972370.0,
+     "stakeBefore": 4.28,
+     "stakeAfter": 5.0527,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342025_1.pdf"
+    },
+    {
+     "filingId": "292468",
+     "date": "2026-08-04",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "sell",
+     "shares": 12450000,
+     "price": 4.711,
+     "value": 58651950.0,
+     "stakeBefore": 5.0527,
+     "stakeAfter": 0,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342133_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "جدوى للتنمية الصناعية",
+   "name": "جدوى للتنمية الصناعية",
+   "nameEn": "Gadwa for Industrial Development",
+   "script": "ar",
+   "tickers": [
+    "UNIP"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 32232727.71,
+   "singleCompanyMove": {
+    "ticker": "UNIP",
+    "from": 33.38,
+    "to": 29.91,
+    "change": -3.47
+   },
+   "trades": [
+    {
+     "filingId": "293570",
+     "date": "2026-08-19",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 79586982,
+     "price": 0.405,
+     "value": 32232727.71,
+     "stakeBefore": 33.38,
+     "stakeAfter": 29.91,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343135_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "السيد صابر السيد حميد",
+   "name": "السيد صابر السيد حميد",
+   "nameEn": "El Sayed Saber El Sayed Hameed",
+   "script": "ar",
+   "tickers": [
+    "RREI"
+   ],
+   "tradeCount": 3,
+   "boughtCount": 2,
+   "soldCount": 1,
+   "value": 46054631.85,
+   "singleCompanyMove": {
+    "ticker": "RREI",
+    "from": 0,
+    "to": 3.4,
+    "change": 3.4
+   },
+   "trades": [
+    {
+     "filingId": "292348",
+     "date": "2026-07-29",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 2033948,
+     "price": 4.557,
+     "value": 9268701.036,
+     "stakeBefore": 0,
+     "stakeAfter": 0.825,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342023_1.pdf"
+    },
+    {
+     "filingId": "292381",
+     "date": "2026-08-03",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "buy",
+     "shares": 3500000,
+     "price": 4.683,
+     "value": 16390500.0,
+     "stakeBefore": 3.7,
+     "stakeAfter": 5.12,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342031_1.pdf"
+    },
+    {
+     "filingId": "292751",
+     "date": "2026-08-11",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "sell",
+     "shares": 4227558,
+     "price": 4.8244,
+     "value": 20395430.8152,
+     "stakeBefore": 5.12,
+     "stakeAfter": 3.4,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342366_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "طارق عبد الرازق محمد عبد الغني",
+   "name": "طارق عبد الرازق محمد عبد الغني",
+   "nameEn": "Tarek Abdel Razek Mohamed Abdel Ghani",
+   "script": "ar",
+   "tickers": [
+    "MPCO"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": null,
+   "singleCompanyMove": {
+    "ticker": "MPCO",
+    "from": 3.563,
+    "to": 0.763,
+    "change": -2.8
+   },
+   "trades": [
+    {
+     "filingId": "292251",
+     "date": "2026-08-02",
+     "ticker": "MPCO",
+     "company": null,
+     "companyAr": "المنصورة للدواجن",
+     "action": "sell",
+     "shares": 28000000,
+     "price": null,
+     "value": null,
+     "stakeBefore": 3.563,
+     "stakeAfter": 0.763,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341940_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ايمن اسماعيل صلاح عبد المجيد العبد",
+   "name": "ايمن اسماعيل صلاح عبد المجيد العبد",
+   "nameEn": "Ayman Ismail Salah Abdel Meguid El Abd",
+   "script": "ar",
+   "tickers": [
+    "LUTS"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 25856000.0,
+   "singleCompanyMove": {
+    "ticker": "LUTS",
+    "from": 37.254,
+    "to": 34.847,
+    "change": -2.407
+   },
+   "trades": [
+    {
+     "filingId": "292784",
+     "date": "2026-08-11",
+     "ticker": "LUTS",
+     "company": null,
+     "companyAr": "لوتس للتنمية والاستثمار الزراعى",
+     "action": "sell",
+     "shares": 32000000,
+     "price": 0.808,
+     "value": 25856000.0,
+     "stakeBefore": 37.254,
+     "stakeAfter": 34.847,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342442_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الثغر للتجارة والإنشاءات",
+   "name": "الثغر للتجارة والإنشاءات",
+   "nameEn": "Al Thaghr Lil Tijara Wal Insha'at",
+   "script": "ar",
+   "tickers": [
+    "AMII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 18055000.0,
+   "singleCompanyMove": {
+    "ticker": "AMII",
+    "from": 6.294,
+    "to": 4.62,
+    "change": -1.674
+   },
+   "trades": [
+    {
+     "filingId": "292650",
+     "date": "2026-08-09",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "sell",
+     "shares": 1250000,
+     "price": 14.444,
+     "value": 18055000.0,
+     "stakeBefore": 6.294,
+     "stakeAfter": 4.62,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342129_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "بيت الخبرة القابضة- كامار",
+   "name": "بيت الخبرة القابضة- كامار",
+   "nameEn": "Bayt Al Khebra Al Qabedha - Kamar",
+   "script": "ar",
+   "tickers": [
+    "INFI"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 47802806.52,
+   "singleCompanyMove": {
+    "ticker": "INFI",
+    "from": 12.903,
+    "to": 11.516,
+    "change": -1.387
+   },
+   "trades": [
+    {
+     "filingId": "292723",
+     "date": "2026-08-11",
+     "ticker": "INFI",
+     "company": null,
+     "companyAr": "الاسماعيلية الوطنية للصناعات الغذائية (فوديكو)",
+     "action": "sell",
+     "shares": 150000,
+     "price": 156.133,
+     "value": 23419950.0,
+     "stakeBefore": 12.903,
+     "stakeAfter": 12.166,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342353_1.pdf"
+    },
+    {
+     "filingId": "292889",
+     "date": "2026-08-12",
+     "ticker": "INFI",
+     "company": null,
+     "companyAr": "الاسماعيلية الوطنية للصناعات الغذائية (فوديكو)",
+     "action": "sell",
+     "shares": 132427,
+     "price": 184.123,
+     "value": 24382856.520999998,
+     "stakeBefore": 12.166,
+     "stakeAfter": 11.516,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342512_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "هشام إبراهيم عبدالمنعم النحاس",
+   "name": "هشام إبراهيم عبدالمنعم النحاس",
+   "nameEn": "Hesham Ibrahim Abdel Moneim El Nahas",
+   "script": "ar",
+   "tickers": [
+    "COPR"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 8426000.0,
+   "singleCompanyMove": {
+    "ticker": "COPR",
+    "from": 2.537,
+    "to": 3.805,
+    "change": 1.268
+   },
+   "trades": [
+    {
+     "filingId": "292269",
+     "date": "2026-08-02",
+     "ticker": "COPR",
+     "company": null,
+     "companyAr": "كوبر للاستثمار التجارى و التطوير العقارى",
+     "action": "buy",
+     "shares": 20000000,
+     "price": 0.4213,
+     "value": 8426000.0,
+     "stakeBefore": 2.537,
+     "stakeAfter": 3.805,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341946_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "هشام إبراهيم عبد المنعم النحاس",
+   "name": "هشام إبراهيم عبد المنعم النحاس",
+   "nameEn": "Hesham Ibrahim Abdel Moneim El Nahas",
+   "script": "ar",
+   "tickers": [
+    "COPR"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 8280000.0,
+   "singleCompanyMove": {
+    "ticker": "COPR",
+    "from": 3.805,
+    "to": 2.537,
+    "change": -1.268
+   },
+   "trades": [
+    {
+     "filingId": "292724",
+     "date": "2026-08-11",
+     "ticker": "COPR",
+     "company": null,
+     "companyAr": "كوبر للاستثمار التجارى و التطوير العقارى",
+     "action": "sell",
+     "shares": 20000000,
+     "price": 0.414,
+     "value": 8280000.0,
+     "stakeBefore": 3.805,
+     "stakeAfter": 2.537,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342354_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "شريف محمد يسري سعد زغلول محمد عويضة",
+   "name": "شريف محمد يسري سعد زغلول محمد عويضة",
+   "nameEn": "Sherif Mohamed Yosry Saad Zaghloul Mohamed Oweida",
+   "script": "ar",
+   "tickers": [
+    "RREI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 6781100.0,
+   "singleCompanyMove": {
+    "ticker": "RREI",
+    "from": 4.5,
+    "to": 3.48,
+    "change": -1.02
+   },
+   "trades": [
+    {
+     "filingId": "292555",
+     "date": "2026-08-06",
+     "ticker": "RREI",
+     "company": null,
+     "companyAr": "الاستثمار العقاري العربي - اليكو",
+     "action": "sell",
+     "shares": 1660000,
+     "price": 4.085,
+     "value": 6781100.0,
+     "stakeBefore": 4.5,
+     "stakeAfter": 3.48,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342223_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "نواف بن عبد الله بن ابراهيم بن دابل",
+   "name": "نواف بن عبد الله بن ابراهيم بن دابل",
+   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dabel",
+   "script": "ar",
+   "tickers": [
+    "ASPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 9268500.0,
+   "singleCompanyMove": {
+    "ticker": "ASPI",
+    "from": 5.1,
+    "to": 4.175,
+    "change": -0.925
+   },
+   "trades": [
+    {
+     "filingId": "292753",
+     "date": "2026-08-11",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "sell",
+     "shares": 18500000,
+     "price": 0.501,
+     "value": 9268500.0,
+     "stakeBefore": 5.1,
+     "stakeAfter": 4.175,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342402_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ابراهيم محمد ابراهيم هيبه",
+   "name": "ابراهيم محمد ابراهيم هيبه",
+   "nameEn": "Ibrahim Mohamed Ibrahim Hiba",
+   "script": "ar",
+   "tickers": [
+    "HBCO"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 6550500.0,
+   "singleCompanyMove": {
+    "ticker": "HBCO",
+    "from": 48.025,
+    "to": 47.261,
+    "change": -0.764
+   },
+   "trades": [
+    {
+     "filingId": "292712",
+     "date": "2026-08-10",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "sell",
+     "shares": 550000,
+     "price": 11.91,
+     "value": 6550500.0,
+     "stakeBefore": 48.025,
+     "stakeAfter": 47.261,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342356_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "زالدي للاستثمارت",
+   "name": "زالدي للاستثمارت",
+   "nameEn": "Zaldi Lilistithmarat",
+   "script": "ar",
+   "tickers": [
+    "AMII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 7551500.0,
+   "singleCompanyMove": {
+    "ticker": "AMII",
+    "from": 0,
+    "to": 0.73,
+    "change": 0.73
+   },
+   "trades": [
+    {
+     "filingId": "292662",
+     "date": "2026-08-09",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "buy",
+     "shares": 550000,
+     "price": 13.73,
+     "value": 7551500.0,
+     "stakeBefore": 0,
+     "stakeAfter": 0.73,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342295_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "دعاء علوى فهمى محمد",
+   "name": "دعاء علوى فهمى محمد",
+   "nameEn": "Doaa Alawi Fahmy Mohamed",
+   "script": "ar",
+   "tickers": [
+    "AMPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 592245.0,
+   "singleCompanyMove": {
+    "ticker": "AMPI",
+    "from": 4.979,
+    "to": 5.66,
+    "change": 0.681
+   },
+   "trades": [
+    {
+     "filingId": "293561",
+     "date": "2026-08-19",
+     "ticker": "AMPI",
+     "company": null,
+     "companyAr": "نوفيدا للاستثمار والتكنولوجيا",
+     "action": "buy",
+     "shares": 205000,
+     "price": 2.889,
+     "value": 592245.0,
+     "stakeBefore": 4.979,
+     "stakeAfter": 5.66,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343107_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الثغر للتجارة والانشاءات",
+   "name": "الثغر للتجارة والانشاءات",
+   "nameEn": "Al Thaghr For Trading and Construction",
+   "script": "ar",
+   "tickers": [
+    "AMII"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 5975720.0,
+   "singleCompanyMove": {
+    "ticker": "AMII",
+    "from": 4.626,
+    "to": 5.16,
+    "change": 0.534
+   },
+   "trades": [
+    {
+     "filingId": "292648",
+     "date": "2026-08-09",
+     "ticker": "AMII",
+     "company": null,
+     "companyAr": "العربية للصناعات المعدنية والاستثمارات الصناعية",
+     "action": "buy",
+     "shares": 400000,
+     "price": 14.9393,
+     "value": 5975720.0,
+     "stakeBefore": 4.626,
+     "stakeAfter": 5.16,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342131_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "مصطفي محمد علي عبدالمنعم",
+   "name": "مصطفي محمد علي عبدالمنعم",
+   "nameEn": "Mostafa Mohamed Ali Abdelmonem",
+   "script": "ar",
+   "tickers": [
+    "GIHD"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 1732607.9,
+   "singleCompanyMove": {
+    "ticker": "GIHD",
+    "from": 4.817,
+    "to": 5.333,
+    "change": 0.516
+   },
+   "trades": [
+    {
+     "filingId": "292458",
+     "date": "2026-08-04",
+     "ticker": "GIHD",
+     "company": null,
+     "companyAr": "الغربية الاسلامية للتنمية العمرانية",
+     "action": "buy",
+     "shares": 29000,
+     "price": 59.7451,
+     "value": 1732607.9,
+     "stakeBefore": 4.817,
+     "stakeAfter": 5.333,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342100_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ايهاب خليل خليفه خليفه",
+   "name": "ايهاب خليل خليفه خليفه",
+   "nameEn": "Ihab Khalil Khalifa Khalifa",
+   "script": "ar",
+   "tickers": [
+    "ETRS"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 8662882.8,
+   "singleCompanyMove": {
+    "ticker": "ETRS",
+    "from": 4.6,
+    "to": 5.01,
+    "change": 0.41
+   },
+   "trades": [
+    {
+     "filingId": "293505",
+     "date": "2026-08-18",
+     "ticker": "ETRS",
+     "company": null,
+     "companyAr": "المصرية لخدمات النقل (إيجيترانس)",
+     "action": "buy",
+     "shares": 757245,
+     "price": 11.44,
+     "value": 8662882.799999999,
+     "stakeBefore": 4.6,
+     "stakeAfter": 5.01,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343085_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد حيان عبد العزيز العبان",
+   "name": "محمد حيان عبد العزيز العبان",
+   "nameEn": "Mohamed Hayan Abdel Aziz Al-Aiban",
+   "script": "ar",
+   "tickers": [
+    "UEFM"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 13499000.0,
+   "singleCompanyMove": {
+    "ticker": "UEFM",
+    "from": 18.19,
+    "to": 17.83,
+    "change": -0.36
+   },
+   "trades": [
+    {
+     "filingId": "293556",
+     "date": "2026-08-18",
+     "ticker": "UEFM",
+     "company": null,
+     "companyAr": "مطاحن مصر العليا",
+     "action": "sell",
+     "shares": 25000,
+     "price": 539.96,
+     "value": 13499000.0,
+     "stakeBefore": 18.19,
+     "stakeAfter": 17.83,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343104_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "صندوق استثمار ثاندر للاسهم متعدد الاصدارات الاصدار الاول ثاندر للاستثمار فى اسهم مؤشر egx70t70",
+   "name": "صندوق استثمار ثاندر للاسهم متعدد الاصدارات الاصدار الاول ثاندر للاستثمار فى اسهم مؤشر EGX70T70",
+   "nameEn": "Sundooq Istithmar Thndr Lil'ashum Muta'addid Al-Isdarat Al-Isdar Al-Awwal Thndr Lil'istithmar fi Ashum Mu'ashir EGX70T70",
+   "script": "ar",
+   "tickers": [
+    "ASPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 3331224.22,
+   "singleCompanyMove": {
+    "ticker": "ASPI",
+    "from": 4.72,
+    "to": 5.05,
+    "change": 0.33
+   },
+   "trades": [
+    {
+     "filingId": "293007",
+     "date": "2026-08-13",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 6645171,
+     "price": 0.5013,
+     "value": 3331224.2222999996,
+     "stakeBefore": 4.72,
+     "stakeAfter": 5.05,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342693_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "القلعة للاستشارات المالية",
+   "name": "القلعة للاستشارات المالية",
+   "nameEn": "Al Qalaa Lil Istithmarat Al Maliya",
+   "script": "ar",
+   "tickers": [
+    "ASCM"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 9807000.0,
+   "singleCompanyMove": {
+    "ticker": "ASCM",
+    "from": 51.06,
+    "to": 50.76,
+    "change": -0.3
+   },
+   "trades": [
+    {
+     "filingId": "293433",
+     "date": "2026-08-17",
+     "ticker": "ASCM",
+     "company": null,
+     "companyAr": "اسيك للتعدين \"أسكوم \"",
+     "action": "sell",
+     "shares": 150000,
+     "price": 65.38,
+     "value": 9807000.0,
+     "stakeBefore": 51.06,
+     "stakeAfter": 50.76,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342976_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
+   "name": "بلتون ذو العائد تراكمي للاستثمار في الاسهم (صندوق بلتون بمائة / مائة)",
+   "nameEn": "Beltone Zoo El Aed Tarakomy Lelesstethmar Fi El Ashom (Sondooq Beltone Bema'ah / Ma'ah)",
+   "script": "ar",
+   "tickers": [
+    "ASPI"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 2165448.92,
+   "singleCompanyMove": {
+    "ticker": "ASPI",
+    "from": 7.36,
+    "to": 7.57,
+    "change": 0.21
+   },
+   "trades": [
+    {
+     "filingId": "293006",
+     "date": "2026-08-13",
+     "ticker": "ASPI",
+     "company": null,
+     "companyAr": "اسباير كابيتال القابضة للاستثمارات المالية",
+     "action": "buy",
+     "shares": 4290388,
+     "price": 0.504721,
+     "value": 2165448.9217479997,
+     "stakeBefore": 7.36,
+     "stakeAfter": 7.57,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342696_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "ياسر فاروق مصطفى محمد",
+   "name": "ياسر فاروق مصطفى محمد",
+   "nameEn": "Yasser Farouk Mostafa Mohamed",
+   "script": "ar",
+   "tickers": [
+    "MBSC"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 6004128.0,
+   "singleCompanyMove": {
+    "ticker": "MBSC",
+    "from": 6.01,
+    "to": 6.171,
+    "change": 0.161
+   },
+   "trades": [
+    {
+     "filingId": "292249",
+     "date": "2026-08-02",
+     "ticker": "MBSC",
+     "company": null,
+     "companyAr": "مصر بنى سويف للأسمنت",
+     "action": "sell",
+     "shares": 9400,
+     "price": 246.87,
+     "value": 2320578.0,
+     "stakeBefore": 6.01,
+     "stakeAfter": 5.99,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341942_1.pdf"
+    },
+    {
+     "filingId": "292250",
+     "date": "2026-08-02",
+     "ticker": "MBSC",
+     "company": null,
+     "companyAr": "مصر بنى سويف للأسمنت",
+     "action": "sell",
+     "shares": 15000,
+     "price": 245.57,
+     "value": 3683550.0,
+     "stakeBefore": 6.198,
+     "stakeAfter": 6.171,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/341941_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "name": "نواف بن عبد الله بن ابراهيم بن دايل",
+   "nameEn": "Nawaf bin Abdullah bin Ibrahim bin Dayel",
+   "script": "ar",
+   "tickers": [
+    "GDWA"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 5839200.0,
+   "singleCompanyMove": {
+    "ticker": "GDWA",
+    "from": 5.002,
+    "to": 4.868,
+    "change": -0.134
+   },
+   "trades": [
+    {
+     "filingId": "293573",
+     "date": "2026-08-19",
+     "ticker": "GDWA",
+     "company": null,
+     "companyAr": "جدوى للتنمية الصناعية",
+     "action": "sell",
+     "shares": 7200000,
+     "price": 0.811,
+     "value": 5839200.0,
+     "stakeBefore": 5.002,
+     "stakeAfter": 4.868,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343134_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد ادريس احمد السنوسي معرف",
+   "name": "محمد ادريس احمد السنوسي معرف",
+   "nameEn": "Mohamed Idris Ahmed El Senoussi Moaref",
+   "script": "ar",
+   "tickers": [
+    "DTPP"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 988000,
+   "singleCompanyMove": {
+    "ticker": "DTPP",
+    "from": 21.03,
+    "to": 20.962,
+    "change": -0.068
+   },
+   "trades": [
+    {
+     "filingId": "292512",
+     "date": "2026-08-05",
+     "ticker": "DTPP",
+     "company": null,
+     "companyAr": "دلتا للطباعة والتغليف",
+     "action": "sell",
+     "shares": 4000,
+     "price": 247,
+     "value": 988000,
+     "stakeBefore": 21.03,
+     "stakeAfter": 20.962,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342176_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد تيسير محمد علي طباع",
+   "name": "محمد تيسير محمد علي طباع",
+   "nameEn": "Mohamed Taysir Mohamed Ali Tabbaa",
+   "script": "ar",
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 1,
+   "soldCount": 0,
+   "value": 29120.0,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 4.97,
+    "to": 5.02,
+    "change": 0.05
+   },
+   "trades": [
+    {
+     "filingId": "293446",
+     "date": "2026-08-18",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "buy",
+     "shares": 6500,
+     "price": 4.48,
+     "value": 29120.000000000004,
+     "stakeBefore": 4.97,
+     "stakeAfter": 5.02,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343068_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "أسامة فوزي محمد سعيد",
+   "name": "أسامة فوزي محمد سعيد",
+   "nameEn": "Osama Fawzy Mohamed Saeed",
+   "script": "ar",
+   "tickers": [
+    "FIRE"
+   ],
+   "tradeCount": 1,
+   "boughtCount": 0,
+   "soldCount": 1,
+   "value": 115224.05,
+   "singleCompanyMove": {
+    "ticker": "FIRE",
+    "from": 0.25017,
+    "to": 0.24199,
+    "change": -0.0082
+   },
+   "trades": [
+    {
+     "filingId": "292378",
+     "date": "2026-08-03",
+     "ticker": "FIRE",
+     "company": null,
+     "companyAr": "الأولى للاستثمار والتنمية العقارية",
+     "action": "sell",
+     "shares": 24589,
+     "price": 4.686,
+     "value": 115224.054,
+     "stakeBefore": 0.25017,
+     "stakeAfter": 0.24199,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342028_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "الحصن للاستشارات",
+   "name": "الحصن للاستشارات",
+   "nameEn": "El Hosn Lilistisharat",
+   "script": "ar",
+   "tickers": [
+    "ADPC",
+    "ELEC",
+    "UNIP"
+   ],
+   "tradeCount": 4,
+   "boughtCount": 0,
+   "soldCount": 4,
+   "value": 655552453.58,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "293339",
+     "date": "2026-08-16",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 68890000,
+     "price": 0.424,
+     "value": 29209360.0,
+     "stakeBefore": 3.01,
+     "stakeAfter": 0.003,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342886_1.pdf"
+    },
+    {
+     "filingId": "293427",
+     "date": "2026-08-16",
+     "ticker": "UNIP",
+     "company": null,
+     "companyAr": "يونيفرسال لصناعة مواد التعبئة و التغليف و الورق - يونيباك",
+     "action": "sell",
+     "shares": 68890000,
+     "price": 0.424,
+     "value": 29209360.0,
+     "stakeBefore": 3.01,
+     "stakeAfter": 0.003,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342974_1.pdf"
+    },
+    {
+     "filingId": "293499",
+     "date": "2026-08-18",
+     "ticker": "ELEC",
+     "company": null,
+     "companyAr": "الكابلات الكهربائية المصرية",
+     "action": "sell",
+     "shares": 275000000,
+     "price": 2.09,
+     "value": 574750000.0,
+     "stakeBefore": 19.86,
+     "stakeAfter": 11.561,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343069_1.pdf"
+    },
+    {
+     "filingId": "293596",
+     "date": "2026-08-19",
+     "ticker": "ADPC",
+     "company": null,
+     "companyAr": "العربية لمنتجات الألبان\" آراب ديرى - باندا\" (آراب ديري-باندا)",
+     "action": "sell",
+     "shares": 5149474,
+     "price": 4.3468,
+     "value": 22383733.5832,
+     "stakeBefore": 2.02,
+     "stakeAfter": 1.98,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/343136_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "محمد اشرف عمر عمر",
+   "name": "محمد اشرف عمر عمر",
+   "nameEn": "Mohamed Ashraf Omar Omar",
+   "script": "ar",
+   "tickers": [
+    "HBCO",
+    "OBRI"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 24228744.0,
+   "singleCompanyMove": null,
+   "trades": [
+    {
+     "filingId": "292382",
+     "date": "2026-08-03",
+     "ticker": "HBCO",
+     "company": null,
+     "companyAr": "هيبكو للاستثمارات التجارية والتنمية العقارية",
+     "action": "buy",
+     "shares": 534000,
+     "price": 8.866,
+     "value": 4734444.0,
+     "stakeBefore": 9.986,
+     "stakeAfter": 10.728,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342042_1.pdf"
+    },
+    {
+     "filingId": "292479",
+     "date": "2026-08-04",
+     "ticker": "OBRI",
+     "company": null,
+     "companyAr": "العبور للاستثمار العقارى",
+     "action": "sell",
+     "shares": 600000,
+     "price": 32.4905,
+     "value": 19494300.0,
+     "stakeBefore": 5.75,
+     "stakeAfter": 4.25,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342099_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "رشيد عبده عبد الحليم حسن",
+   "name": "رشيد عبده عبد الحليم حسن",
+   "nameEn": "Rashid Abdo Abdel Halim Hassan",
+   "script": "ar",
+   "tickers": [
+    "AREH"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 1,
+   "soldCount": 1,
+   "value": 94506593.75,
+   "singleCompanyMove": {
+    "ticker": "AREH",
+    "from": 8.656,
+    "to": 8.656,
+    "change": 0.0
+   },
+   "trades": [
+    {
+     "filingId": "292551",
+     "date": "2026-08-06",
+     "ticker": "AREH",
+     "company": null,
+     "companyAr": "المجموعة المصرية العقارية",
+     "action": "sell",
+     "shares": 24263059,
+     "price": 1.626,
+     "value": 39451733.934,
+     "stakeBefore": 8.656,
+     "stakeAfter": 2.59,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342197_1.pdf"
+    },
+    {
+     "filingId": "292559",
+     "date": "2026-08-06",
+     "ticker": "AREH",
+     "company": null,
+     "companyAr": "المجموعة المصرية العقارية",
+     "action": "buy",
+     "shares": 34625698,
+     "price": 1.59,
+     "value": 55054859.82,
+     "stakeBefore": 0,
+     "stakeAfter": 8.656,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342153_1.pdf"
+    }
+   ]
+  },
+  {
+   "id": "تعد للاستثمارات والتنميه ش م م",
+   "name": "تعد للاستثمارات والتنميه ش م م",
+   "nameEn": "Taad Lilistithmarat Wal Tanmiya S.A.E.",
+   "script": "ar",
+   "tickers": [
+    "EPCO"
+   ],
+   "tradeCount": 2,
+   "boughtCount": 0,
+   "soldCount": 2,
+   "value": 40861560.0,
+   "singleCompanyMove": {
+    "ticker": "EPCO",
+    "from": 6.621,
+    "to": 6.621,
+    "change": 0.0
+   },
+   "trades": [
+    {
+     "filingId": "293410",
+     "date": "2026-08-17",
+     "ticker": "EPCO",
+     "company": null,
+     "companyAr": "المصرية للدواجن",
+     "action": "sell",
+     "shares": 1300000,
+     "price": 12.2412,
+     "value": 15913559.999999998,
+     "stakeBefore": 6.621,
+     "stakeAfter": 3.567,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342971_1.pdf"
+    },
+    {
+     "filingId": "293412",
+     "date": "2026-08-17",
+     "ticker": "EPCO",
+     "company": null,
+     "companyAr": "المصرية للدواجن",
+     "action": "sell",
+     "shares": 2100000,
+     "price": 11.88,
+     "value": 24948000.0,
+     "stakeBefore": 11.554,
+     "stakeAfter": 6.621,
+     "source": "https://www.egx.com.eg/downloads/Bulletins/342970_1.pdf"
+    }
+   ]
+  }
+ ],
+ "timeline": [
+  {
+   "date": "2026-07-29",
+   "buys": 1,
+   "sells": 0,
+   "value": 9268701.04,
+   "stakePointsAdded": 0.825,
+   "stakePointsShed": 0.0
+  },
+  {
+   "date": "2026-08-02",
+   "buys": 2,
+   "sells": 3,
+   "value": 23402498.0,
+   "stakePointsAdded": 2.0407,
+   "stakePointsShed": 2.847
+  },
+  {
+   "date": "2026-08-03",
+   "buys": 2,
+   "sells": 2,
+   "value": 101621012.79,
+   "stakePointsAdded": 2.162,
+   "stakePointsShed": 5.4052
+  },
+  {
+   "date": "2026-08-04",
+   "buys": 1,
+   "sells": 2,
+   "value": 79878857.9,
+   "stakePointsAdded": 0.516,
+   "stakePointsShed": 6.5527
+  },
+  {
+   "date": "2026-08-05",
+   "buys": 0,
+   "sells": 1,
+   "value": 988000.0,
+   "stakePointsAdded": 0.0,
+   "stakePointsShed": 0.068
+  },
+  {
+   "date": "2026-08-06",
+   "buys": 1,
+   "sells": 3,
+   "value": 130746093.75,
+   "stakePointsAdded": 8.656,
+   "stakePointsShed": 11.686
+  },
+  {
+   "date": "2026-08-09",
+   "buys": 2,
+   "sells": 1,
+   "value": 31582220.0,
+   "stakePointsAdded": 1.264,
+   "stakePointsShed": 1.674
+  },
+  {
+   "date": "2026-08-10",
+   "buys": 0,
+   "sells": 1,
+   "value": 6550500.0,
+   "stakePointsAdded": 0.0,
+   "stakePointsShed": 0.764
+  },
+  {
+   "date": "2026-08-11",
+   "buys": 1,
+   "sells": 5,
+   "value": 121344180.82,
+   "stakePointsAdded": 5.353,
+   "stakePointsShed": 7.057
+  },
+  {
+   "date": "2026-08-12",
+   "buys": 0,
+   "sells": 1,
+   "value": 24382856.52,
+   "stakePointsAdded": 0.0,
+   "stakePointsShed": 0.65
+  },
+  {
+   "date": "2026-08-13",
+   "buys": 2,
+   "sells": 1,
+   "value": 40571173.84,
+   "stakePointsAdded": 0.54,
+   "stakePointsShed": 5.0
+  },
+  {
+   "date": "2026-08-16",
+   "buys": 0,
+   "sells": 3,
+   "value": 538418720.0,
+   "stakePointsAdded": 0.0,
+   "stakePointsShed": 11.014
+  },
+  {
+   "date": "2026-08-17",
+   "buys": 0,
+   "sells": 3,
+   "value": 50668560.0,
+   "stakePointsAdded": 0.0,
+   "stakePointsShed": 8.287
+  },
+  {
+   "date": "2026-08-18",
+   "buys": 3,
+   "sells": 2,
+   "value": 688961002.8,
+   "stakePointsAdded": 4.988,
+   "stakePointsShed": 8.659
+  },
+  {
+   "date": "2026-08-19",
+   "buys": 1,
+   "sells": 3,
+   "value": 61047906.29,
+   "stakePointsAdded": 0.681,
+   "stakePointsShed": 3.644
+  }
+ ]
+}

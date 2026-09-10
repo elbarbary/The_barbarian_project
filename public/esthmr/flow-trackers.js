@@ -809,6 +809,143 @@ function renderHomeOwnershipWeb(links, ar, t) {
   );
 }
 
+
+/* ── The people, and what their stake did ─────────────────────────────────────
+ *
+ * The daily EGX summary names the RELATIONSHIP and never the party: every row
+ * reads "insider" or "related parties of insider". The individual
+ * post-execution form is the only document that carries a name, a price, and
+ * the stake before and after — and it is a scan, so it is read through the
+ * model and checked before it is published.
+ *
+ * A stake is a percentage OF ONE COMPANY, so a person who traded two issuers
+ * gets no headline move: adding 6% of one company to 2% of another produces a
+ * number that means nothing. The row says which company instead.
+ */
+function renderNamedPeople(doc, ar, t, onPick) {
+  const people = (doc && doc.people) || [];
+  if (!people.length) return null;
+
+  const row = (p) => {
+    const move = p.singleCompanyMove;
+    const primary = ar ? (p.name || p.nameEn) : (p.nameEn || p.name);
+    const secondary = ar ? (p.nameEn && p.nameEn !== primary ? p.nameEn : '') : (p.name !== primary ? p.name : '');
+    const delta = move ? move.change : null;
+    return h('button', {
+      key: p.id,
+      type: 'button',
+      className: 'ft-person-row',
+      onClick: () => p.tickers.length === 1 && onPick(p.tickers[0]),
+      title: p.tickers.join(', ')
+    },
+      h('span', { className: 'ft-person-id' },
+        h('b', null, primary),
+        secondary ? h('small', { dir: p.script === 'ar' ? 'rtl' : 'ltr' }, secondary) : null
+      ),
+      h('span', { className: 'ft-person-where' },
+        p.tickers.slice(0, 3).map(tk => h('code', { key: tk }, tk)),
+        p.tickers.length > 3 ? h('small', null, `+${p.tickers.length - 3}`) : null
+      ),
+      // The percentage, said as a journey rather than a number, because the
+      // journey is the thing the share count cannot tell you.
+      move ? h('span', { className: 'ft-person-move', dir: 'ltr' },
+        h('span', { className: 'ft-stake-from' }, move.from.toFixed(2) + '%'),
+        h('span', { className: 'ft-stake-arrow', 'aria-hidden': 'true' }, '→'),
+        h('span', { className: 'ft-stake-to', style: { color: tone(delta) } }, move.to.toFixed(2) + '%')
+      ) : h('span', { className: 'ft-person-move ft-person-multi' },
+        t(`${p.tickers.length} companies`, `${p.tickers.length} شركات`)),
+      h('span', { className: 'ft-person-count', dir: 'ltr' },
+        p.boughtCount ? h('i', { className: 'ft-tick-buy' }, `▲${p.boughtCount}`) : null,
+        p.soldCount ? h('i', { className: 'ft-tick-sell' }, `▼${p.soldCount}`) : null
+      )
+    );
+  };
+
+  return h('div', { className: 'ft-detail ft-people-panel' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('NAMED IN THE FILING', 'أسماء وردت في الإفصاح')),
+        h('h3', null, t('Who traded, and what it did to their stake',
+                        'من تعامل، وماذا فعل ذلك بحصته'))
+      ),
+      h('span', { className: 'ft-range-badge', dir: 'ltr' },
+        `${doc.peopleCount} · ${doc.tradeCount} · ${doc.tickerCount}`)
+    ),
+    h('p', { className: 'ft-note' }, ar ? doc.basisAr : doc.basis),
+    h('div', { className: 'ft-people-list' }, people.slice(0, 24).map(row)),
+    h('p', { className: 'ft-note' }, t(
+      'Read from the scanned form and kept only when the direction of the stake agrees with the direction of the trade. A person trading more than one company shows no combined figure: percentages of different companies cannot be added.',
+      'مقروءة من النموذج الممسوح ضوئياً، ولا تُحفظ إلا إذا اتفق اتجاه تغير الحصة مع اتجاه الصفقة. من تعامل في أكثر من شركة لا يظهر له رقم مجمَّع: لا يصح جمع نسب شركات مختلفة.'))
+  );
+}
+
+
+/* ── The market-wide ownership timeline ───────────────────────────────────────
+ *
+ * The stake chart on this screen only appeared once a company was chosen, so
+ * the question "which way is insider ownership moving?" could not be asked of
+ * the market at all — a reader had to already suspect a company to see
+ * anything.
+ *
+ * The unit needs care. Each point sums percentage POINTS of company ownership
+ * that changed hands that session, across different issuers. That is a measure
+ * of how much moved, not a stake in anything, and 6% of one company plus 2% of
+ * another is not 8% of the market. The caption says so rather than leaving the
+ * axis to imply otherwise.
+ */
+function renderOwnershipTimeline(doc, ar, t) {
+  const points = (doc && doc.timeline) || [];
+  if (points.length < 2) return null;
+
+  const net = points.map(p => ({
+    date: p.date,
+    added: p.stakePointsAdded,
+    shed: -p.stakePointsShed,
+    net: Number((p.stakePointsAdded - p.stakePointsShed).toFixed(4)),
+    value: p.value,
+  }));
+  const totalAdded = net.reduce((s, p) => s + p.added, 0);
+  // `shed` is already negative, so summing it keeps the sign and the two
+  // headline figures read as a pair: +27.03 against -73.31, not +27.03 against
+  // a bare 73.31 that a reader has to infer the direction of from its colour.
+  const totalShed = net.reduce((s, p) => s + p.shed, 0);
+  const busiest = net.reduce((m, p) => (p.value > (m ? m.value : -1) ? p : m), null);
+
+  return h('div', { className: 'ft-detail ft-timeline-panel' },
+    h('div', { className: 'ft-section-heading' },
+      h('div', null,
+        h('span', { className: 'ft-eyebrow' }, t('ACROSS THE WHOLE MARKET', 'على مستوى السوق')),
+        h('h3', null, t('Which way insider ownership moved', 'إلى أين تتحرك ملكية الداخليين'))
+      ),
+      h('span', { className: 'ft-range-badge', dir: 'ltr' },
+        `${points[0].date} → ${points[points.length - 1].date}`)
+    ),
+    h('div', { className: 'ft-metric-row' },
+      metric(t('Stake taken up', 'حصص جرى بناؤها'),
+             '+' + totalAdded.toFixed(2) + ' pp',
+             t('summed across companies', 'مجمّعة عبر شركات مختلفة'), 'var(--up)'),
+      metric(t('Stake given up', 'حصص جرى التخارج منها'),
+             totalShed.toFixed(2) + ' pp',
+             t('summed across companies', 'مجمّعة عبر شركات مختلفة'), 'var(--down)'),
+      metric(t('Busiest session', 'أعلى جلسة'),
+             busiest ? busiest.date : '—',
+             busiest ? compact(busiest.value) + ' EGP' : '')
+    ),
+    chart(net, 'net',
+          t('Net percentage points of company ownership changing hands, by session',
+            'صافي النقاط المئوية من ملكية الشركات المتداولة، حسب الجلسة'),
+          v => (v > 0 ? '+' : '') + v.toFixed(2) + 'pp',
+          'var(--accent)', true),
+    chart(net, 'value',
+          t('Disclosed value at the filed price · EGP',
+            'القيمة المفصح عنها بسعر التنفيذ · جنيه'),
+          compact, 'var(--t2)', true),
+    h('p', { className: 'ft-note' }, t(
+      'A percentage point here belongs to one company. The series counts how much ownership moved, not a holding in the market: 6% of one issuer and 2% of another do not add to 8% of anything. Sessions with no readable filing are absent rather than zero.',
+      'النقطة المئوية هنا تخص شركة واحدة. تقيس السلسلة حجم ما تغيّر من الملكية وليست حصة في السوق: ٦٪ من شركة و٢٪ من أخرى لا تساوي ٨٪ من شيء. الجلسات بلا إفصاح مقروء غائبة وليست صفراً.'))
+  );
+}
+
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
   const st = component.state;
@@ -1165,6 +1302,9 @@ export function flowTrackers(component, data, ar) {
   if (st.screen !== 'ownership') return { home, screen: null };
 
   const profiles = d.profiles || {};
+  // Its own document, loaded with the extras rather than behind this screen's
+  // lazy fetch: 38 KB, and the only one that carries a person's name.
+  const people = data.insiderPeople || null;
   const ticker = st.ownershipTicker || '';
   const kind = st.ownershipKind || 'all';
   const sort = st.ownershipSort || 'date';
@@ -1321,6 +1461,15 @@ export function flowTrackers(component, data, ar) {
             'تداول مليون سهم في شركة ذات ١٠ ملايين سهم يمثل ١٠٪ من ملكية الشركة، بينما في شركة بـ ١٠ مليارات سهم يمثل ٠.٠١٪ فقط. نسبة الملكية والقيمة السوقية هما المقياس الحقيقي.'))
         )
       ),
+      // The market-wide answer first, because until now this screen could not
+      // give one: every stake chart was behind choosing a company, so a reader
+      // had to already suspect an issuer before the page would show anything.
+      renderOwnershipTimeline(people, ar, t),
+
+      // Then the people. This is the only place on the site that names one.
+      renderNamedPeople(people, ar, t,
+        tk => component.setState({ ownershipTicker: tk, ownershipInvestor: '', ownershipPage: 0 })),
+
       // Bipartite Relational Connection Web (Interactive Drawing)
       d.ownershipGraph ? renderOwnershipConnectionWeb(
         d.ownershipGraph,

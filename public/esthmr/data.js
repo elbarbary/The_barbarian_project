@@ -1526,6 +1526,15 @@ export async function flowPreview() {
   return d;
 }
 
+/** The named parties behind the post-execution filings, and their stakes. */
+export async function insiderPeople() {
+  const d = await doc('insider-people.json');
+  if (d?.schemaVersion !== 1 || !Array.isArray(d.people)) {
+    throw new Error('Invalid insider-people snapshot');
+  }
+  return d;
+}
+
 export async function insiders() {
   try {
     const d = await doc('insiders.json');

@@ -28,6 +28,7 @@ function boot(overrides = {}) {
     filedMonths:async()=>[], disclosureMeanings:async()=>[], connections:async()=>[],
     investors:async()=>({}), insiders:async()=>({}), indices:async()=>({list:[]}), indexCards:()=>[],readNowCards:()=>[],
     flowPreview:async()=>({schemaVersion:1,sectors:[],eventCount:0}),
+    insiderPeople:async()=>({schemaVersion:1,people:[],timeline:[]}),
     flowTrackers:async()=>({schemaVersion:1,sectors:[],events:[]}),
     companyExtras:async()=>({}), ...overrides };
   vm.runInNewContext(source, { Component, document, data,
@@ -164,4 +165,19 @@ test('market data in flight when a reader signs out never reaches the screen', a
   assert.equal(app.c.state.dataLoading, false, 'the spinner outlived the load it belonged to');
   assert.equal((app.c.data().companies || []).some((c) => c.ticker === 'PRIVATE'), false,
     'the signed-out reader was shown the account\u2019s companies');
+});
+
+/* A data module that does not carry a document must not hold the whole screen.
+ *
+ * `slice(data.x(), ...)` evaluates the call BEFORE slice can catch anything, so
+ * an absent function throws out of the entire `Promise.all` and leaves
+ * `extrasLoading` stuck true — every other screen's content held hostage by one
+ * missing document. `data.insiders` is already guarded for this reason; this
+ * pins that the newest one is too. */
+test('an absent optional document does not strand the other extras', async () => {
+  const app = boot({ insiderPeople: undefined });
+  await app.ready();
+  assert.equal(app.c.state.extrasLoading, false,
+    'extras must settle even when a document the build has not published yet is absent');
+  assert.equal(app.c.data().companies.length, 2, 'and the market data still arrives');
 });

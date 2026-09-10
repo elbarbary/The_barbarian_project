@@ -561,3 +561,66 @@
   stroke: var(--ink) !important;
   stroke-width: 2px !important;
 }
+
+/* ── Named people, and the journey of a stake ─────────────────────────────────
+   A row is read left-to-right as a sentence: who, where, from what to what,
+   and how many times. The percentages sit in their own column so a reader
+   scanning down compares stakes with stakes rather than re-reading names. */
+.ft-people-panel .ft-people-list {
+  display: grid;
+  gap: 6px;
+  margin-top: 4px;
+}
+.ft-person-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, .7fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--rule2);
+  border-radius: 14px;
+  background: var(--sunk);
+  color: var(--ink);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ft-person-row:hover { border-color: var(--accent); background: var(--surface); }
+.ft-person-id { display: grid; min-width: 0; }
+.ft-person-id b { font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
+.ft-person-id small { font-size: 10.5px; color: var(--faint); overflow-wrap: anywhere; }
+.ft-person-where { display: flex; flex-wrap: wrap; gap: 4px; min-width: 0; }
+.ft-person-where code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px; font-weight: 600;
+  padding: 2px 6px; border-radius: 6px;
+  background: var(--surface); border: 1px solid var(--rule);
+  color: var(--t2);
+}
+.ft-person-where small { font-size: 10px; color: var(--faint); align-self: center; }
+.ft-person-move {
+  display: flex; align-items: baseline; gap: 6px; min-width: 0;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 650;
+}
+.ft-stake-from { color: var(--faint); }
+.ft-stake-arrow { color: var(--faint); font-size: 11px; }
+.ft-person-multi { font-family: inherit; font-size: 11px; color: var(--faint); font-weight: 500; }
+.ft-person-count { display: flex; gap: 6px; font-size: 10.5px; font-style: normal; }
+.ft-tick-buy { color: var(--up); font-style: normal; }
+.ft-tick-sell { color: var(--down); font-style: normal; }
+
+@media (max-width: 768px) {
+  /* Four columns cannot hold an Arabic name, a ticker and two percentages at
+     390px. The name takes its own line and the numbers share the next one. */
+  .ft-person-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "who who" "where move" "count count";
+    gap: 6px 10px;
+  }
+  .ft-person-id { grid-area: who; }
+  .ft-person-where { grid-area: where; }
+  .ft-person-move { grid-area: move; justify-content: flex-end; }
+  .ft-person-count { grid-area: count; }
+}

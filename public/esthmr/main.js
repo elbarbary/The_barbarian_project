@@ -106,6 +106,17 @@ async function load(email) {
       slice(data.newsProvenance(), (newsProvenance) => ({ newsProvenance })),
       slice(data.sectors(), (sectorCards) => ({ sectorCards })),
       slice(data.flowPreview(), (flowPreview) => ({ flowPreview })),
+      // 38 KB, and the only document that carries a person's name. Eager with
+      // the rest of the extras rather than behind the ownership screen's lazy
+      // load, so the Home card can name somebody without a second round trip.
+      //
+      // Guarded the way `data.insiders` beneath it is, and for the same reason:
+      // `slice(data.x(), ...)` evaluates the call BEFORE slice can catch
+      // anything, so a data module without this function throws out of the
+      // whole Promise.all and leaves `extrasLoading` stuck true — every other
+      // screen's content held by one absent document.
+      slice(data.insiderPeople ? data.insiderPeople() : Promise.resolve(null),
+            (insiderPeople) => ({ insiderPeople: insiderPeople || undefined })),
       slice(data.filedMonths(), (filedMonths) => ({ filedMonths })),
       slice(data.disclosureMeanings(), (disclosureMeanings) => ({ disclosureMeanings })),
       slice(data.connections(), (crossings) => ({ crossings })),
