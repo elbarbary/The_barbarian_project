@@ -1187,6 +1187,10 @@
     "meaning": "Completing the construction of large-scale public housing projects shifts contracted real estate and infrastructure volumes from the execution phase to project delivery, closing out procurement and construction billing cycles for participating contractors.",
     "meaning_ar": "ينقل الانتهاء من تشييد مشروعات الإسكان الاجتماعي الكبرى وحدات البنية التحتية والعقارات من مرحلة التنفيذ إلى مرحلة التسليم، مما يغلق دورات المطالبات المالية لشركات المقاولات المشاركة."
   },
+  "الاهرام للطباعه تتسلم مصنع الشركه وتوقف بيع الماكينات المحجوز عليها": {
+    "meaning": "Regaining control of the factory and halting the sale of seized machinery reinstates productive fixed assets to the company's direct operational control, resolving an active legal encumbrance on its manufacturing equipment.",
+    "meaning_ar": "استعادة السيطرة على المصنع ووقف بيع الآلات المحجوز عليها يعيد الأصول الإنتاجية الثابتة إلى الإدارة التشغيلية المباشرة للشركة، وينهي قيداً قانونياً واقعاً على معداتها الصناعية."
+  },
   "الاهرام للطباعه تعلن تسلم مصنعها وتوقف اجراءات بيع الماكينات": {
     "meaning": "The company regains physical control of its production facility and halts asset liquidation, retaining its machinery on the balance sheet and preserving its operational asset base.",
     "meaning_ar": "تستعيد الشركة السيطرة الفعلية على منشأتها الإنتاجية وتوقف تسييل الأصول، مما يُبقي على الآلات ضمن ميزانيتها العمومية ويحافظ على قاعدتها التشغيلية."
@@ -1978,6 +1982,10 @@
   "بنك ABC مصر يصدر تقرير الافصاح السنوي للاستدامه 2025": {
     "meaning": "Publishing an annual sustainability disclosure report provides standardized non-financial performance data regarding environmental, social, and governance (ESG) practices in accordance with regulatory reporting frameworks.",
     "meaning_ar": "يُوفر إصدار تقرير الإفصاح السنوي للاستدامة بيانات معيارية عن الأداء غير المالي للبنك فيما يتعلق بالممارسات البيئية والاجتماعية والحوكمة (ESG) تماشياً مع متطلبات الإفصاح التنظيمية."
+  },
+  "بنك ABC مصر يضخ 4.5 مليارات جنيه تمويلا مستداما خلال 2025": {
+    "meaning": "This operational allocation directs 4.5 billion EGP of Bank ABC Egypt's credit portfolio toward projects meeting ESG and sustainable finance criteria, expanding the green lending component of its balance sheet.",
+    "meaning_ar": "يخصص هذا الإجراء التشغيلي 4.5 مليارات جنيه من المحفظة الائتمانية لبنك ABC مصر للمشروعات المستوفية لمعايير التمويل المستدام، مما يوسع بند الإقراض الأخضر في ميزانيته العمومية."
   },
   "بنك استثمار: 40 مليار دولار فقط من الاصول المرمزه عالميا حتي الان": {
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
@@ -3192,6 +3200,10 @@
   "كبلر: الصين تصدر اول شحنه حمض كبريتيك منذ مايو": {
     "meaning": "The resumption of Chinese sulfuric acid exports reintroduces physical supply from the world's largest producer into the global seaborne spot market, serving as a primary raw material for phosphate fertilizer production and chemical manufacturing.",
     "meaning_ar": "يمثل استئناف صادرات حمض الكبريتيك الصيني إعادة لتدفقات الإمدادات من أكبر منتج عالمي إلى سوق الشحن الفوري، حيث يُعد مدخلاً إنتاجياً أساسياً في صناعة الأسمدة الفوسفاتية والكيماويات."
+  },
+  "كجوك: نعمل علي تعميق التعاون الاقتصادي والمالي بين تجمع دول «البريكس»": {
+    "meaning": "Institutional coordination within the BRICS framework involves establishing bilateral currency settlement mechanisms, expanding development financing facilities through the New Development Bank, and standardizing intergovernmental cross-border trade protocols.",
+    "meaning_ar": "يتضمن التنسيق المؤسسي داخل تجمع «البريكس» إنشاء آليات تسوية تجارية بالعملات المحلية، وتوسيع تسهيلات التمويل التنموي عبر بنك التنمية الجديد، وتوحيد بروتوكولات التجارة البينية بين الدول الأعضاء."
   },
   "كريتيف انفستمنتس تختتم جولتها التاسيسيه بالتزامات اجماليه اوليه 20 مليون دولار": {
     "meaning": "Closing a founding round secures formal capital commitments from initial partners, expanding the company's equity base and establishing the liquid funds available for operational deployment.",
