@@ -90,8 +90,16 @@ def build(directory, market, documents, insiders):
         sec['capCount'] = sum(m['cap'] is not None for m in members)
         days = defaultdict(list)
         for m in members:
-            for b in m.pop('daily'):
+            daily_bars = m.pop('daily', [])
+            latest_b = daily_bars[-1] if daily_bars else {}
+            m['name'] = profiles.get(m['ticker'], {}).get('name')
+            m['change'] = latest_b.get('change')
+            m['value'] = latest_b.get('value')
+            m['weight'] = round(m['cap'] / sec['cap'] * 100, 2) if positive(m['cap']) and positive(sec['cap']) else None
+            m['impact'] = round(m['weight'] * m['change'] / 100, 4) if positive(m['weight']) and number(m['change']) else None
+            for b in daily_bars:
                 days[b['date']].append((m, b))
+        sec['members'].sort(key=lambda x: (x['cap'] is not None, x['cap'] or 0), reverse=True)
         for date, rows in sorted(days.items())[-130:]:
             values = [b['value'] for _, b in rows if b['value'] is not None]
             weighted = [(m['cap'], b['change']) for m, b in rows
@@ -99,11 +107,24 @@ def build(directory, market, documents, insiders):
             denom = sum(w for w, _ in weighted)
             up = sum(m['cap'] or 0 for m, b in rows if number(b['change']) and b['change'] > 0)
             down = sum(m['cap'] or 0 for m, b in rows if number(b['change']) and b['change'] < 0)
-            sec['history'].append(dict(date=date, value=round(sum(values), 2) if values else None,
+            up_val = sum(b['value'] or 0 for m, b in rows if number(b['change']) and b['change'] > 0 and b['value'] is not None)
+            down_val = sum(b['value'] or 0 for m, b in rows if number(b['change']) and b['change'] < 0 and b['value'] is not None)
+            flat_val = sum(b['value'] or 0 for m, b in rows if number(b['change']) and b['change'] == 0 and b['value'] is not None)
+            up_cnt = sum(1 for m, b in rows if number(b['change']) and b['change'] > 0)
+            down_cnt = sum(1 for m, b in rows if number(b['change']) and b['change'] < 0)
+            flat_cnt = sum(1 for m, b in rows if number(b['change']) and b['change'] == 0)
+            sec_val = round(sum(values), 2) if values else None
+            turnover_to_cap = round(sec_val / sec['cap'] * 100, 4) if (sec_val is not None and positive(sec['cap'])) else None
+            sec['history'].append(dict(date=date, value=sec_val,
                 valueCount=len(values), estimatedCount=sum(b['estimated'] for _, b in rows),
                 change=round(sum(w*r for w, r in weighted)/denom, 5) if denom else None,
                 weightCoverage=round(denom / sec['cap'] * 100, 2) if sec['cap'] else None,
-                upCap=up, downCap=down, flagged=sum(b['flagged'] for _, b in rows)))
+                upCap=up, downCap=down, flagged=sum(b['flagged'] for _, b in rows),
+                upValue=round(up_val, 2) if up_val > 0 else 0,
+                downValue=round(down_val, 2) if down_val > 0 else 0,
+                flatValue=round(flat_val, 2) if flat_val > 0 else 0,
+                upCount=up_cnt, downCount=down_cnt, flatCount=flat_cnt,
+                turnoverToCap=turnover_to_cap))
     # Keep the source record intact; a generic filing is not a zero-share trade.
     events = []
     seen = set()
@@ -126,20 +147,41 @@ def build(directory, market, documents, insiders):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true", help="Validate without writing")
+    args = ap.parse_args()
+
     base = ROOT / 'public/data/v1'
     read = lambda p: json.loads(p.read_text())
     directory = read(base / 'companies.json')
     docs = {c['ticker']: read(base / 'companies' / (c['ticker'] + '.json'))
             for c in directory['companies'] if (base / 'companies' / (c['ticker'] + '.json')).exists()}
     result = build(directory, read(base / 'market.json'), docs, read(base / 'insiders.json'))
+
+    if args.check:
+        print(f"Flow trackers: {len(result['sectors'])} sectors, {len(result['events'])} disclosures (check ok)")
+        return 0
+
     out = base / 'flow-trackers.json'
     # Atomic publication: readers never see half a JSON document.
     tmp = out.with_suffix('.tmp')
     tmp.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n')
     tmp.replace(out)
+
+    top_events = [e for e in result['events'] if number(e.get('referencePercent')) or number(e.get('currentMarkedValue'))]
+    top_events.sort(key=lambda e: (e.get('date') or '', e.get('referencePercent') or 0), reverse=True)
+
     summary = dict(schemaVersion=1, asOf=result['asOf'], eventCount=len(result['events']),
+        topEvents=top_events[:10],
         sectors=[dict(id=s['id'], name=s['name'], nameAr=s['nameAr'], cap=s['cap'],
-                      history=s['history'][-1:]) for s in result['sectors']])
+                      capCount=s['capCount'],
+                      history=s['history'][-15:],
+                      topMembers=[dict(ticker=m['ticker'], name=m.get('name'), cap=m['cap'],
+                                       weight=m.get('weight'), change=m.get('change'),
+                                       impact=m.get('impact'), value=m.get('value'))
+                                  for m in s['members'][:4]])
+                 for s in result['sectors']])
     preview = base / 'flow-preview.json'
     preview_tmp = preview.with_suffix('.tmp')
     preview_tmp.write_text(json.dumps(summary, ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n')
@@ -152,7 +194,8 @@ def main():
         staged.write_bytes(source.read_bytes())
         staged.replace(fixture)
     print(f"Flow trackers: {len(result['sectors'])} sectors, {len(result['events'])} disclosures")
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())
