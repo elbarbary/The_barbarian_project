@@ -355,6 +355,10 @@
     "meaning": "A widening trade deficit reflects a larger gap between the total value of imported goods and exported products, which increases the net outflow of foreign exchange required to settle international transactions.",
     "meaning_ar": "يعكس اتساع العجز التجاري زيادة الفجوة بين القيمة الإجمالية للسلع المستوردة والصادرات، مما يزيد من صافي التدفقات النقدية الخارجة من العملات الأجنبية لتسوية المعاملات التجارية الدولية."
   },
+  "egyptian american enterprise fund cuts stake in fawry": {
+    "meaning": "A major institutional shareholder reduces its equity ownership in the company, which alters the firm's shareholder structure and increases the proportion of shares available in the public free float.",
+    "meaning_ar": "يُخفّض مساهم مؤسسي رئيسي نسبة ملكيته في رأسمال الشركة، مما يغيّر هيكل المساهمين ويرفع نسبة الأسهم المتاحة للتداول الحر في السوق."
+  },
   "el sisi directs state bodies to adopt greening cairo project": {
     "meaning": "Directing state bodies to implement urban greening initiatives allocates public infrastructure expenditure toward landscaping, irrigation networks, environmental services, and associated civil contracting works in Cairo.",
     "meaning_ar": "يوجه تكليف الجهات الحكومية بتنفيذ مبادرات التشجير الحضري مخصصات الإنفاق على البنية التحتية العامة نحو قطاعات تنسيق الحدائق، وشبكات الري، والخدمات البيئية، والمقاولات المدنية المرتبطة بها في القاهرة."
@@ -398,6 +402,10 @@
   "ifap consolidated profits drop in fiscal year 2025 2026": {
     "meaning": "A decline in consolidated profit reflects lower net earnings across the parent entity and its subsidiaries, resulting from higher operating costs, financing expenses, or changes in revenue during the fiscal period.",
     "meaning_ar": "يعكس تراجع الأرباح المجمعة انخفاض صافي الدخل عبر الشركة الأم والشركات التابعة لها، نتيجة تغيرات في الإيرادات أو ارتفاع تكاليف التشغيل والتمويل خلال السنة المالية."
+  },
+  "kima logs profits in fiscal year 2025 2026 audited results": {
+    "meaning": "Audited annual financial results reflect that the company generates revenues exceeding its total operating costs, depreciation, and financing expenses over the fiscal year, thereby adding net positive retained earnings to shareholder equity on the balance sheet.",
+    "meaning_ar": "تعكس القوائم المالية السنوية المدققة تحقيق الشركة إيرادات تفوق إجمالي تكاليف التشغيل والإهلاك والمصروفات التمويلية على مدار العام المالي، مما يضيف أرباحاً محتجزة موجبة إلى حقوق المساهمين في الميزانية العمومية."
   },
   "madbouly inaugurates beixin taishan egypt building materials factory in sokhna": {
     "meaning": "The inauguration of the manufacturing facility adds industrial production capacity for building materials within the Suez Canal Economic Zone and expands foreign direct asset deployment in the domestic construction inputs sector.",
@@ -694,6 +702,10 @@
   "ارتفاع اسعار الوقود يضغط علي المزارعين في بريطانيا والولايات المتحده": {
     "meaning": "Higher fuel prices raise the direct operational costs of agricultural machinery, transport, and energy-intensive inputs for farming businesses.",
     "meaning_ar": "يؤدي ارتفاع أسعار الوقود إلى زيادة تكاليف التشغيل المباشرة للآلات الزراعية وعمليات النقل والمدخلات كثيفة الاستهلاك للطاقة في قطاع الزراعة."
+  },
+  "ارتفاع الاسهم الاوروبيه قبيل صدور قرار الفايده": {
+    "meaning": "Equity prices reflect market positioning and the repricing of capital costs ahead of central bank monetary policy announcements, where interest rate decisions directly establish baseline borrowing costs and corporate valuation discount rates across the economy.",
+    "meaning_ar": "تعكس أسعار الأسهم مراكز التداول وإعادة تسعير تكلفة رأس المال قبيل إعلانات السياسة النقدية للبنوك المركزية، حيث تحدد قرارات أسعار الفائدة تكاليف الاقتراض الأساسية ومعدلات خصم التقييم للشركات في السوق."
   },
   "ارتفاع الاسهم اليابانيه باكثر من 2% في اولي جلسات الاسبوع": {
     "meaning": "A gain of over 2% in Japanese equity benchmarks reflects an upward adjustment in market capitalization across listed equities on the Tokyo exchange, driven by session trading volume and net capital inflows.",
@@ -1106,6 +1118,10 @@
   "الاسهم اليابانيه ترتفع للمره الاولي في 5 جلسات": {
     "meaning": "Japanese equity indices record a positive trading session following four consecutive sessions of net capital outflows and index declines, reflecting intraday purchasing activity across major listed constituents.",
     "meaning_ar": "تسجل مؤشرات الأسهم اليابانية جلسة تداول إيجابية بعد أربع جلسات متتالية من صافي خروج السيولة وتراجع المؤشرات، مما يعكس نشاط شراء خلال الجلسة عبر الشركات الرئيسية المدرجة."
+  },
+  "الاسهم اليابانيه تمحو خسايرها وتنهي الجلسه علي ارتفاع": {
+    "meaning": "Intraday trading dynamics offset early session declines as buying activity absorbs morning sell orders, resulting in higher closing benchmark indices.",
+    "meaning_ar": "تعكس حركة التداول استيعاب طلبات الشراء لضغوط البيع الصباحية على مدار الجلسة، مما يؤدي إلى تعويض التراجعات المبكرة وإغلاق المؤشرات الرئيسية على ارتفاع."
   },
   "الاقتصاد الامريكي يضيف 162 الف وظيفه في اغسطس متجاوزا التوقعات باكثر من 3 اضعاف": {
     "meaning": "Higher-than-expected US non-farm payroll additions reflect elevated labor market activity, which correlates with benchmark interest rate settings and global capital flow allocations.",
@@ -1587,6 +1603,10 @@
     "meaning": "Higher US mortgage rates raise the direct cost of borrowing and debt servicing for property buyers, tightening financing conditions across the residential real estate lending market.",
     "meaning_ar": "يؤدي ارتفاع أسعار الفائدة على الرهن العقاري الأمريكي إلى زيادة التكلفة المباشرة للاقتراض وخدمة الدين لمشتري العقارات، مما يشدد شروط التمويل في سوق الإقراض العقاري السكني."
   },
+  "الفنار للمقاولات تتعاقد علي اعمال انشاييه في راس الحكمه ب156و665 مليون جنيه": {
+    "meaning": "This agreement adds new construction assignments to the company's operational backlog under contracts valued at 156.665 million EGP in the Ras El Hekma development area.",
+    "meaning_ar": "يضيف هذا التعاقد أعمالاً إنشائية جديدة إلى محفظة مشروعات الشركة قيد التنفيذ بقيمة تعاقدية تبلغ 156.665 مليون جنيه ضمن مشروع رأس الحكمة."
+  },
   "القاهره الوطنيه للاستثمار: انتاد تخفض حصتها في الشركه الي 11.8%": {
     "meaning": "This transaction alters the company's equity ownership structure and voting power distribution, reflecting a partial divestment that shifts the concentration of ownership among major shareholders.",
     "meaning_ar": "يمثل هذا الإجراء تغييراً في هيكل ملكية الشركة وتوزيع حقوق التصويت، حيث يعكس تخارجاً جزئياً يعيد توزيع نسب الملكية والتركز بين كبار المساهمين."
@@ -1859,6 +1879,10 @@
     "meaning": "Banque Misr waives administrative fees for account opening and payment card issuance through September 15 as part of central bank-backed financial inclusion initiatives.",
     "meaning_ar": "يعفي بنك مصر العملاء من الرسوم الإدارية لفتح الحسابات وتكاليف إصدار البطاقات المصرفية حتى 15 سبتمبر ضمن فعاليات الشمول المالي المقررة من البنك المركزي."
   },
+  "بنك ABC مصر يصدر تقرير الافصاح السنوي للاستدامه 2025": {
+    "meaning": "Publishing an annual sustainability disclosure report provides standardized non-financial performance data regarding environmental, social, and governance (ESG) practices in accordance with regulatory reporting frameworks.",
+    "meaning_ar": "يُوفر إصدار تقرير الإفصاح السنوي للاستدامة بيانات معيارية عن الأداء غير المالي للبنك فيما يتعلق بالممارسات البيئية والاجتماعية والحوكمة (ESG) تماشياً مع متطلبات الإفصاح التنظيمية."
+  },
   "بنك استثمار: 40 مليار دولار فقط من الاصول المرمزه عالميا حتي الان": {
     "meaning": "Tokenized assets represent traditional financial instruments and real-world assets converted into digital tokens on distributed ledger networks, with the current global market value standing at $40 billion.",
     "meaning_ar": "تمثل الأصول المرمّزة أدوات مالية وأصولاً تقليدية تم تحويلها إلى رموز رقمية على شبكات السجلات الموزعة، حيث يبلغ إجمالي قيمتها السوقية عالمياً 40 مليار دولار في الوقت الحالي."
@@ -1898,6 +1922,10 @@
   "بي بي سي: بنك انجلترا من اكبر الجهات الحافظه للذهب في العالم": {
     "meaning": "Central bank gold custody operations involve providing secure vaulting infrastructure and settlement facilities for foreign governments, official institutions, and bullion market participants, anchoring liquidity in the international gold clearing system.",
     "meaning_ar": "تشمل عمليات حفظ الذهب في البنوك المركزية توفير بنية تحتية آمنة للخزائن وخدمات تسوية للحكومات والمؤسسات الرسمية والمتعاملين في سوق السبائك، مما يمثل ركيزة لسيولة نظام المقاصة الدولي للذهب."
+  },
+  "بيانات : اصول الموسسات الماليه الصينيه تقترب من 84 تريليون دولار": {
+    "meaning": "This aggregate figure represents the total balance sheet scale of China's banking, securities, and insurance sectors, reflecting the volume of capital held and deployed within its financial intermediary system.",
+    "meaning_ar": "يمثل هذا الرقم الإجمالي حجم الميزانيات العمومية المجمعة لقطاعات البنوك والأوراق المالية والتأمين في الصين، وهو ما يعكس حجم رؤوس الأموال المودعة والموجهة عبر منظومة الوساطة المالية لديها."
   },
   "بيانات الاحتياطيات ترجح بيع اليابان سندات اميركيه لدعم الين": {
     "meaning": "Foreign exchange intervention involves a monetary authority liquidating foreign sovereign debt holdings to obtain foreign currency liquidity and acquire domestic currency on the open market, directly altering the composition and balance of official foreign reserves.",
@@ -2733,6 +2761,10 @@
     "meaning": "US control over Venezuelan oil assets directly alters the repayment mechanism for oil-backed loans, redirecting crude flows and related cash revenues away from Chinese state creditors.",
     "meaning_ar": "تؤدي السيطرة الأمريكية على الأصول النفطية الفنزويلية إلى تعديل آلية سداد القروض المضمونة بالنفط، مما يعيد توجيه تدفقات الخام والإيرادات النقدية المرتبطة به بعيداً عن الدائنين الصينيين."
   },
+  "سينرجي كابيتال وناوي ناو تغلقان الاصدار الثاني بقيمه 633 مليون جنيه": {
+    "meaning": "This transaction closes a debt issuance program, providing EGP 633 million in capital to finance operational activities and credit portfolios.",
+    "meaning_ar": "تُغلق هذه المعاملة برنامج إصدار تمويلي يوفّر 633 مليون جنيه لتمويل الأنشطة التشغيلية ومحافظ الائتمان القائمة."
+  },
   "سينوبك تتوقع تراجع الطلب علي النفط في الصين بنحو 9% هذا العام": {
     "meaning": "A reduction in crude oil consumption by major refiners directly decreases refinery processing throughput and lowers total import intake across global energy supply chains.",
     "meaning_ar": "يؤدي انخفاض استهلاك النفط الخام لدى شركات التكرير الكبرى إلى خفض معدلات التشغيل وتقليص أحجام الواردات عبر سلاسل إمداد الطاقة العالمية."
@@ -2848,6 +2880,10 @@
   "صندوق التقاعد الياباني يدرس مراجعه توزيع اصوله": {
     "meaning": "The Japanese government pension fund is reviewing its asset allocation strategy to rebalance investment weights across domestic and international equities and bonds.",
     "meaning_ar": "يقوم صندوق التقاعد الحكومي الياباني بمراجعة استراتيجية توزيع الأصول لإعادة موازنة أوزان المحفظة الاستثمارية بين الأسهم والسندات المحلية والدولية."
+  },
+  "صندوق يبيع 224.8 الف سهم في فوري بقيمه تتجاوز 4.3 مليون جنيه": {
+    "meaning": "An institutional fund executes an equity transaction offloading 224.8 thousand shares of Fawry via the Egyptian Exchange for over 4.3 million EGP, reallocating ownership to other market participants and adjusting the fund's asset exposure.",
+    "meaning_ar": "ينفذ صندوق استثماري عملية تداول على 224.8 ألف سهم من أسهم شركة فوري في البورصة المصرية بقيمة تتجاوز 4.3 مليون جنيه، مما يعيد توزيع هيكل الملكية بين المتعاملين ويعدل حجم انكشاف أصول الصندوق."
   },
   "ضربات متبادله بين الولايات المتحده وايران تستهدف ناقلات نفط وسفنا حربيه": {
     "meaning": "Military conflicts targeting maritime vessels disrupt commercial shipping lanes, raising maritime insurance premiums and altering fuel and cargo transport routes for global trade.",
