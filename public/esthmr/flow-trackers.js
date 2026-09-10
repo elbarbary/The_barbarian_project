@@ -619,77 +619,6 @@ function renderNamedPeople(doc, ar, t, onPick) {
 }
 
 
-/* ── The market-wide ownership timeline ───────────────────────────────────────
- *
- * The stake chart on this screen only appeared once a company was chosen, so
- * the question "which way is insider ownership moving?" could not be asked of
- * the market at all — a reader had to already suspect a company to see
- * anything.
- *
- * The unit needs care. Each point sums percentage POINTS of company ownership
- * that changed hands that session, across different issuers. That is a measure
- * of how much moved, not a stake in anything, and 6% of one company plus 2% of
- * another is not 8% of the market. The caption says so rather than leaving the
- * axis to imply otherwise.
- */
-function renderOwnershipTimeline(doc, ar, t) {
-  const points = (doc && doc.timeline) || [];
-  if (points.length < 2) return null;
-
-  const net = points.map(p => ({
-    date: p.date,
-    added: p.stakePointsAdded,
-    shed: -p.stakePointsShed,
-    net: Number((p.stakePointsAdded - p.stakePointsShed).toFixed(4)),
-    value: p.value,
-  }));
-  const totalAdded = net.reduce((s, p) => s + p.added, 0);
-  // `shed` is already negative, so summing it keeps the sign and the two
-  // headline figures read as a pair: +27.03 against -73.31, not +27.03 against
-  // a bare 73.31 that a reader has to infer the direction of from its colour.
-  const totalShed = net.reduce((s, p) => s + p.shed, 0);
-  const busiest = net.reduce((m, p) => (p.value > (m ? m.value : -1) ? p : m), null);
-
-  return h('div', { className: 'ft-detail ft-timeline-panel' },
-    h('div', { className: 'ft-section-heading' },
-      h('div', null,
-        h('span', { className: 'ft-eyebrow' }, t('ACROSS THE WHOLE MARKET', 'على مستوى السوق')),
-        h('h3', null, t('Which way insider ownership moved', 'إلى أين تتحرك ملكية الداخليين'))
-      ),
-      h('span', { className: 'ft-range-badge', dir: 'ltr' },
-        `${points[0].date} → ${points[points.length - 1].date}`)
-    ),
-    // `.ft-metrics`, the class the rest of this file uses — a four-column grid
-    // that already collapses to two on a phone. The first version invented
-    // `.ft-metric-row`, which no stylesheet has ever heard of, so the three
-    // figures stacked full-width at 27px each and pushed the chart off-screen.
-    h('div', { className: 'ft-metrics' },
-      metric(t('Stake taken up', 'حصص جرى بناؤها'),
-             '+' + totalAdded.toFixed(2) + ' pp',
-             t('summed across companies', 'مجمّعة عبر شركات مختلفة'), 'var(--up)'),
-      metric(t('Stake given up', 'حصص جرى التخارج منها'),
-             totalShed.toFixed(2) + ' pp',
-             t('summed across companies', 'مجمّعة عبر شركات مختلفة'), 'var(--down)'),
-      metric(t('Busiest session', 'أعلى جلسة'),
-             busiest ? busiest.date : '—',
-             busiest ? compact(busiest.value) + ' EGP' : '')
-    ),
-    chart(net, 'net',
-          t('Net percentage points of company ownership changing hands, by session',
-            'صافي النقاط المئوية من ملكية الشركات المتداولة، حسب الجلسة'),
-          v => (v > 0 ? '+' : '') + v.toFixed(2) + 'pp',
-          'var(--accent)', true),
-    chart(net, 'value',
-          t('Disclosed value at the filed price · EGP',
-            'القيمة المفصح عنها بسعر التنفيذ · جنيه'),
-          compact, 'var(--t2)', true),
-    h('p', { className: 'ft-note' }, t(
-      'A percentage point here belongs to one company. The series counts how much ownership moved, not a holding in the market: 6% of one issuer and 2% of another do not add to 8% of anything. Sessions with no readable filing are absent rather than zero.',
-      'النقطة المئوية هنا تخص شركة واحدة. تقيس السلسلة حجم ما تغيّر من الملكية وليست حصة في السوق: ٦٪ من شركة و٢٪ من أخرى لا تساوي ٨٪ من شيء. الجلسات بلا إفصاح مقروء غائبة وليست صفراً.'))
-  );
-}
-
-
 /* ── The ownership map ────────────────────────────────────────────────────────
  *
  * Built with the DOM rather than through `h`, because the SVG is redrawn on a
@@ -698,141 +627,371 @@ function renderOwnershipTimeline(doc, ar, t) {
  * them. The panel around it is `h` like everything else; only the picture
  * manages itself.
  */
-function renderOwnershipMap(doc, ar, t, component, st) {
+function renderOwnershipMap(doc, ar, t, component) {
   const people = (doc && doc.people) || [];
-  if (people.length < 2) return null;
+  // Every position ever filed, INCLUDING the ones read down to zero. A company
+  // whose only named holder has since sold out still belongs on the board as
+  // an empty ring: "nobody discloses a stake here now" and "nobody ever did"
+  // are different facts, and dropping it also loses the week in which they
+  // left — which is exactly the week a reader would want to see.
+  const positions = (doc && doc.positions) || [];
+  const holdings = OM.standing(doc);
+  if (!people.length || positions.length < 2) return null;
 
-  const periods = OM.periodsOf(doc);
-  if (!periods.length) return null;
-  const period = periods.includes(st.ownershipPeriod) ? st.ownershipPeriod : periods[periods.length - 1];
-  const prev = periods[periods.indexOf(period) - 1] || null;
+  const weeks = OM.periodsOf(doc);
 
-  const caps = {};
-  const sectors = {};
-  const nameOf = {};
   // The CLIENT's shape, not companies.json's. `data.live()` renames
   // `market_cap` to `cap` and folds the two names into `name:{en,ar}` — read
   // from the file's field names and every ring comes out at the floor size
   // with "value unknown" under it, which is exactly what the first draft did.
+  const co = {};
   ((component.data() || {}).companies || []).forEach((c) => {
     if (!c || !c.ticker) return;
-    if (finite(c.cap)) caps[c.ticker] = c.cap;
-    sectors[c.ticker] = (ar ? c.sectorAr : c.sector) || c.sector || '—';
     const nm = c.name || {};
-    nameOf[c.ticker] = (ar ? (nm.ar || nm.en) : (nm.en || nm.ar)) || c.ticker;
+    co[c.ticker] = {
+      cap: finite(c.cap) ? c.cap : null,
+      sector: (ar ? c.sectorAr : c.sector) || c.sector || t('Unclassified', 'غير مصنّف'),
+      name: (ar ? (nm.ar || nm.en) : (nm.en || nm.ar)) || c.ticker,
+    };
   });
-  caps.sectorOf = (tk) => sectors[tk] || '—';
 
   const label = {};
-  people.forEach((p) => { label[p.id] = ar ? (p.name || p.nameEn) : (p.nameEn || p.name); });
-  const labelOf = (id) => label[id] || nameOf[id] || id;
+  const kindOf = {};
+  people.forEach((p) => {
+    label[p.id] = ar ? (p.name || p.nameEn) : (p.nameEn || p.name);
+    kindOf[p.id] = p.kind;
+  });
+  const labelOf = (id) => label[id] || (co[id] && co[id].name) || id;
 
-  const stakes = OM.stakesAt(doc, period);
-  const prevStakes = prev ? OM.stakesAt(doc, prev) : null;
-  const model = OM.layout(doc, stakes, caps, 9);
-  const trades = OM.tradesIn(doc, period);
+  // One row per company that anybody has filed a named stake in.
+  const byTicker = new Map();
+  positions.forEach((p) => {
+    const row = byTicker.get(p.ticker) || {
+      ticker: p.ticker,
+      name: (co[p.ticker] && co[p.ticker].name) || p.ticker,
+      sector: (co[p.ticker] && co[p.ticker].sector) || t('Unclassified', 'غير مصنّف'),
+      cap: co[p.ticker] ? co[p.ticker].cap : null,
+      disclosed: 0,
+      holders: [],
+    };
+    row.disclosed += Math.max(p.percent || 0, 0);
+    row.holders.push(p);
+    byTicker.set(p.ticker, row);
+  });
+  const rows = [...byTicker.values()];
+  if (!rows.length) return null;
 
+  // A holder in more than one company. Fifty-nine of the sixty-six are in
+  // exactly one, and for those the slice on the ring already says everything.
+  const spread = new Map();
+  positions.forEach((p) => {
+    const list = spread.get(p.holder) || [];
+    if (!list.includes(p.ticker)) list.push(p.ticker);
+    spread.set(p.holder, list);
+  });
+  // A bridge is a stake somebody still has. Where they have sold out, the
+  // curve would draw a link that no longer exists.
+  const live = new Map();
+  holdings.forEach((p) => {
+    const list = live.get(p.holder) || [];
+    if (!list.includes(p.ticker)) list.push(p.ticker);
+    live.set(p.holder, list);
+  });
+  const bridges = [...live.entries()]
+    .filter(([, tickers]) => tickers.length > 1)
+    .map(([holder, tickers]) => ({ holder, tickers }));
+
+  const model = OM.layout(rows);
+  const valueOf = (p) => (finite(co[p.ticker] && co[p.ticker].cap)
+    ? (p.percent / 100) * co[p.ticker].cap : null);
+
+  // ── the widget ────────────────────────────────────────────────────────────
+  //
+  // Real DOM rather than `h`, because the board is redrawn on every week and
+  // every focus, and pushing either through the component's render would
+  // repaint the whole screen with it. Playback in particular would re-render
+  // the page once a second for as long as it ran.
   const host = document.createElement('div');
   host.className = 'om-map-host';
+  const strip = document.createElement('div');
+  strip.className = 'om-periods';
+  const stage = document.createElement('div');
+  stage.className = 'om-map-slot';
+  // The scroller is inside the framed box, so the hint under it stays put
+  // while the board pans rather than sliding off with it.
+  const scroller = document.createElement('div');
+  scroller.className = 'om-map-scroll';
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'om-map-svg');
   svg.setAttribute('role', 'img');
-  svg.setAttribute('aria-label', t('Ownership map', 'خريطة الملكية'));
-  host.appendChild(svg);
+  svg.setAttribute('aria-label', t('Map of disclosed EGX ownership', 'خريطة الملكية المفصح عنها في البورصة'));
+  scroller.appendChild(svg);
+  const hint = document.createElement('p');
+  hint.className = 'om-pan-hint';
+  hint.textContent = t('Drag the board sideways to see the rest of the market.',
+                       'اسحب اللوحة جانباً لرؤية بقية السوق.');
+  stage.append(scroller, hint);
+  const side = document.createElement('div');
+  side.className = 'om-side';
+  host.append(strip, stage, side);
 
-  let focused = st.ownershipFocus || null;
-  const paint = () => OM.renderMap(svg, model, {
-    stakes, prevStakes, trades, caps, labelOf, focused, t, ar,
-    onPick: (id) => {
-      focused = focused === id ? null : id;
-      component.setState({ ownershipFocus: focused });
-      paint();
-    },
-  });
-  paint();
-  svg.addEventListener('click', () => {
-    if (!focused) return;
-    focused = null;
-    component.setState({ ownershipFocus: null });
+  let week = null;          // null is the standing board with nothing lit
+  let focus = null;
+  let timer = null;
+
+  const buttons = [];
+  const chip = (key, text, sub) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'om-period';
+    b.dataset.key = key === null ? '' : key;
+    const strong = document.createElement('strong');
+    strong.textContent = text;
+    b.appendChild(strong);
+    if (sub) {
+      const small = document.createElement('small');
+      small.textContent = sub;
+      b.appendChild(small);
+    }
+    b.addEventListener('click', () => { stop(); week = key; paint(); });
+    buttons.push(b);
+    strip.appendChild(b);
+    return b;
+  };
+  chip(null, t('Standing', 'الوضع الحالي'), t('all disclosed', 'كل ما أُفصح عنه'));
+  weeks.forEach((w) => chip(w.start, ar ? w.labelAr : w.label,
+                            t(`${w.moves.length} moved`, `${w.moves.length} تحرّك`)));
+
+  const play = document.createElement('button');
+  play.type = 'button';
+  play.className = 'om-play';
+  const setPlayLabel = () => {
+    play.textContent = timer ? '❙❙' : '▶';
+    play.setAttribute('aria-label', timer
+      ? t('Pause', 'إيقاف مؤقت') : t('Play the weeks in order', 'تشغيل الأسابيع بالترتيب'));
+  };
+  const stop = () => { if (timer) { clearInterval(timer); timer = null; } setPlayLabel(); };
+  play.addEventListener('click', () => {
+    if (timer) { stop(); return; }
+    if (!weeks.length) return;
+    week = weeks[0].start;
     paint();
+    timer = setInterval(() => {
+      // Nothing here owns an unmount hook, so the timer checks whether the
+      // board it draws into is still on the page and stops itself when a
+      // language or screen change has replaced it.
+      if (!host.isConnected) { stop(); return; }
+      const at = weeks.findIndex((w) => w.start === week);
+      if (at >= weeks.length - 1) { stop(); return; }
+      week = weeks[at + 1].start;
+      paint();
+    }, 1600);
+    setPlayLabel();
   });
+  setPlayLabel();
+  if (weeks.length > 1) strip.appendChild(play);
 
-  const held = Object.entries(stakes)
-    .reduce((acc, [k, pct]) => {
-      const [pid, tk] = k.split('|');
-      const value = finite(caps[tk]) ? (pct / 100) * caps[tk] : 0;
-      acc[pid] = (acc[pid] || 0) + value;
-      return acc;
-    }, {});
-  const biggest = Object.entries(held).sort((a, b) => b[1] - a[1]).slice(0, 6);
-  const topValue = biggest.length ? biggest[0][1] : 0;
-  const monthValue = trades.reduce((s, x) => s + (x.value || 0), 0);
+  const paint = () => {
+    buttons.forEach((b) => {
+      const on = (b.dataset.key || null) === week;
+      b.classList.toggle('om-period-on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    OM.renderMap(svg, model, {
+      holdings: positions, bridges, labelOf, focus, t, ar,
+      moves: week ? OM.movesIn(doc, week) : null,
+      onPick: (id) => { focus = focus === id ? null : id; paint(); },
+    });
+    drawSide();
+  };
+
+  const card = (title, body) => {
+    const el = document.createElement('div');
+    el.className = 'om-card';
+    const h4 = document.createElement('h4');
+    h4.textContent = title;
+    el.appendChild(h4);
+    body(el);
+    side.appendChild(el);
+    return el;
+  };
+  const row = (parent, colour, text, right, onClick) => {
+    const el = document.createElement(onClick ? 'button' : 'div');
+    el.className = 'om-holder-row';
+    if (onClick) { el.type = 'button'; el.addEventListener('click', onClick); }
+    const dot = document.createElement('i');
+    if (colour) dot.style.background = colour; else dot.style.visibility = 'hidden';
+    const name = document.createElement('span');
+    name.textContent = text;
+    const val = document.createElement('b');
+    val.dir = 'ltr';
+    val.textContent = right;
+    el.append(dot, name, val);
+    parent.appendChild(el);
+  };
+
+  const drawSide = () => {
+    side.textContent = '';
+    const moves = week ? OM.movesIn(doc, week) : null;
+    const chosen = week ? weeks.find((w) => w.start === week) : null;
+
+    if (focus && byTicker.has(focus)) {
+      const r = byTicker.get(focus);
+      // A listed fund's certificates carry a code and no company record, so
+      // the heading would otherwise read "KASABF · KASABF".
+      card(r.name === r.ticker ? r.ticker : `${r.ticker} · ${r.name}`, (el) => {
+        const meta = document.createElement('p');
+        meta.className = 'om-card-meta';
+        meta.textContent = finite(r.cap)
+          ? t(`${compact(r.cap)} EGP market value`, `${compact(r.cap)} ج.م قيمة سوقية`)
+          : t('no published market value', 'لا قيمة سوقية منشورة');
+        el.appendChild(meta);
+        const bar = document.createElement('strong');
+        bar.dir = 'ltr';
+        bar.textContent = `${r.disclosed.toFixed(2)}%`;
+        el.appendChild(bar);
+        const small = document.createElement('small');
+        small.textContent = t('of the company is in hands a filing has named',
+                              'من الشركة في أيدٍ ذكرها إفصاح');
+        el.appendChild(small);
+      });
+      card(t('Named holders', 'الملاك المعروفون'), (el) => {
+        r.holders.slice().sort((a, b) => b.percent - a.percent).forEach((p) => {
+          const mv = moves && moves.get(OM.keyOf(p.holder, p.ticker));
+          const change = mv && finite(mv.change)
+            ? `  ${mv.change > 0 ? '+' : ''}${mv.change.toFixed(2)}` : '';
+          row(el, OM.hueOf(p.holder),
+              `${labelOf(p.holder)} · ${p.asOf}`,
+              `${p.percent.toFixed(2)}%${change}`,
+              () => { focus = p.holder; paint(); });
+        });
+      });
+      return;
+    }
+
+    if (focus && spread.has(focus)) {
+      const mine = positions.filter((p) => p.holder === focus);
+      card(labelOf(focus), (el) => {
+        const meta = document.createElement('p');
+        meta.className = 'om-card-meta';
+        meta.textContent = kindOf[focus] === 'firm'
+          ? t('a company or fund', 'شركة أو صندوق')
+          : t('an individual named in the filing', 'شخص ورد اسمه في الإفصاح');
+        el.appendChild(meta);
+        const strong = document.createElement('strong');
+        strong.dir = 'ltr';
+        const worth = mine.map(valueOf).filter(finite).reduce((s, v) => s + v, 0);
+        strong.textContent = worth > 0 ? `${compact(worth)} EGP` : '—';
+        el.appendChild(strong);
+        const small = document.createElement('small');
+        // The one figure that CAN be added across companies. Percentages
+        // cannot: they are shares of different things.
+        small.textContent = t('market value of the stakes below',
+                              'القيمة السوقية للحصص أدناه');
+        el.appendChild(small);
+      });
+      card(t('Stakes held', 'الحصص المملوكة'), (el) => {
+        mine.slice().sort((a, b) => b.percent - a.percent).forEach((p) => {
+          row(el, OM.hueOf(focus),
+              `${p.ticker} · ${(co[p.ticker] && co[p.ticker].name) || ''}`,
+              `${p.percent.toFixed(2)}%`,
+              () => { focus = p.ticker; paint(); });
+        });
+      });
+      return;
+    }
+
+    card(chosen ? (ar ? chosen.labelAr : chosen.label)
+                : t('Everything disclosed', 'كل ما أُفصح عنه'), (el) => {
+      const strong = document.createElement('strong');
+      strong.dir = 'ltr';
+      strong.textContent = chosen
+        ? `${compact(chosen.value)} EGP`
+        : `${holdings.length}`;
+      el.appendChild(strong);
+      const small = document.createElement('small');
+      // The companies that carry one, not the companies on the board: three of
+      // the rings are there because a named holder has since sold out of them.
+      const withStake = new Set(holdings.map((p) => p.ticker)).size;
+      small.textContent = chosen
+        ? t(`${chosen.moves.length} holdings moved over ${chosen.sessions} sessions`,
+            `${chosen.moves.length} حصة تحركت خلال ${chosen.sessions} جلسة`)
+        : t(`standing stakes across ${withStake} companies`
+            + (rows.length > withStake
+               ? `, and ${rows.length - withStake} more a named holder has left`
+               : ''),
+            `حصة قائمة في ${withStake} شركة`
+            + (rows.length > withStake
+               ? `، و${rows.length - withStake} أخرى خرج منها مالك معلوم`
+               : ''));
+      el.appendChild(small);
+    });
+
+    if (chosen) {
+      card(t('What moved', 'ما الذي تحرّك'), (el) => {
+        chosen.moves.slice(0, 7).forEach((m) => {
+          row(el, OM.hueOf(m.holder),
+              `${m.ticker} · ${labelOf(m.holder)}`,
+              finite(m.change) ? `${m.change > 0 ? '+' : ''}${m.change.toFixed(2)}pp` : '—',
+              () => { focus = m.ticker; paint(); });
+        });
+        if (chosen.moves.length > 7) {
+          const more = document.createElement('small');
+          more.className = 'om-card-more';
+          more.textContent = t(`and ${chosen.moves.length - 7} more`,
+                               `و${chosen.moves.length - 7} غيرها`);
+          el.appendChild(more);
+        }
+      });
+      return;
+    }
+
+    card(t('Who the holders are', 'من هم الملاك'), (el) => {
+      row(el, 'var(--own2)', t('individuals', 'أفراد'), String(doc.personCount || 0));
+      row(el, 'var(--own4)', t('companies and funds', 'شركات وصناديق'), String(doc.firmCount || 0));
+      row(el, 'var(--accent)', t('in more than one company', 'في أكثر من شركة'), String(bridges.length));
+    });
+  };
+
+  paint();
+  svg.addEventListener('click', () => { if (focus) { focus = null; paint(); } });
+
+  const held = holdings.map(valueOf).filter(finite).reduce((s, v) => s + v, 0);
 
   return h('div', { className: 'ft-detail om-panel' },
     h('div', { className: 'ft-section-heading' },
       h('div', null,
-        h('span', { className: 'ft-eyebrow' }, t('WHO HOLDS WHAT', 'من يملك ماذا')),
-        h('h3', null, t('Ownership, and where a stake went',
-                        'الملكية، وإلى أين ذهبت الحصة'))
+        h('span', { className: 'ft-eyebrow' }, t('WHO OWNS THE EXCHANGE', 'من يملك البورصة')),
+        h('h3', null, t('Named ownership across the EGX, and what moved',
+                        'الملكية المعلومة في البورصة، وما الذي تحرّك'))
       ),
-      h('div', { className: 'om-periods' },
-        periods.map(p => h('button', {
-          key: p, type: 'button',
-          className: p === period ? 'om-period om-period-on' : 'om-period',
-          'aria-pressed': p === period ? 'true' : 'false',
-          onClick: () => component.setState({ ownershipPeriod: p, ownershipFocus: null }),
-        }, p))
-      )
-    ),
-    h('div', { className: 'om-map-wrap' },
-      // The host node itself, handed straight to the shim: `createElement`
-      // builds real DOM and its `append` takes a Node as a child, so the map
-      // needs no ref — which is just as well, because the shim drops `ref`.
-      h('div', { className: 'om-map-slot' }, host),
-      h('div', { className: 'om-side' },
-        h('div', { className: 'om-card' },
-          h('h4', null, t('Filed this month', 'إفصاحات هذا الشهر')),
-          h('strong', { dir: 'ltr' }, trades.length
-            ? `${compact(monthValue)} EGP`
-            : t('nothing filed', 'لا إفصاحات')),
-          h('small', null, trades.length
-            ? t(`${trades.length} disclosed trades`, `${trades.length} صفقة مفصح عنها`)
-            : t('no post-execution form this month', 'لا نموذج إفصاح بعد التنفيذ هذا الشهر'))
-        ),
-        h('div', { className: 'om-card' },
-          h('h4', null, t('Largest known holders', 'أكبر الملاك المعروفين')),
-          h('div', { className: 'om-holders' }, biggest.map(([id, v]) => h('button', {
-            key: id, type: 'button',
-            className: 'om-holder-row',
-            onClick: () => { component.setState({ ownershipFocus: id }); },
-          },
-            h('i', { style: { background: OM.hueOf(id) } }),
-            h('span', null, labelOf(id)),
-            h('b', { dir: 'ltr' }, compact(v))
-          )))
-        )
-      )
-    ),
-    h('div', { className: 'om-legend' },
-      h('span', null, t('Ring size is market value; slices are the holders we can name.',
-                        'حجم الحلقة هو القيمة السوقية، والشرائح هم الملاك المعروفون.')),
-      h('span', { className: 'om-legend-none' },
-        t('The unsliced part is ownership nobody had to disclose — not free float.',
-          'الجزء غير المقسّم ملكية لم يُلزم أحد بالإفصاح عنها — وليس أسهم حرة.')),
-      h('span', null, t('The outer arc marks a stake that grew or shrank since last month.',
-                        'القوس الخارجي يشير إلى حصة زادت أو نقصت عن الشهر السابق.')),
-      // Without this the first month reads as a broken map rather than a true
-      // one: 2026-07 carries a single filing, so a single company is all that
-      // had been disclosed by then. The months accumulate what is KNOWN, and
-      // that is not the same thing as the register on that date.
-      h('span', null, t('Each month shows everything disclosed up to it, not the share register on that date — so the map fills in as filings arrive.',
-                        'كل شهر يعرض ما أُفصح عنه حتى تاريخه، لا سجل المساهمين في ذلك اليوم — لذا تمتلئ الخريطة مع ورود الإفصاحات.'))
+      h('span', { className: 'ft-range-badge', dir: 'ltr' },
+        `${rows.length} · ${doc.peopleCount} · ${compact(held)} EGP`)
     ),
     h('p', { className: 'ft-note' }, t(
-      'A stake is a percentage of ONE company, so a holder is sized by the value of what they hold and never by a sum of percentages. A company with no published market value is drawn at the smallest size with a dashed centre rather than dropped.',
-      'الحصة نسبة من شركة واحدة، لذا يُقاس المالك بقيمة ما يملكه لا بجمع النسب. الشركة التي لا تُنشر قيمتها السوقية تُرسم بأصغر حجم وبمركز متقطع بدلاً من استبعادها.'))
+      'Every company a post-execution form has named a holder in, drawn at the stake that stands today. Pick a week and the holdings that changed in it light up; the board itself does not move.',
+      'كل شركة ورد في نموذج إفصاح بعد التنفيذ اسم مالك فيها، مرسومة بالحصة القائمة اليوم. اختر أسبوعاً فتضيء الحصص التي تغيّرت فيه، دون أن تتحرك اللوحة نفسها.')),
+    h('div', { className: 'om-map-wrap' }, host),
+    h('div', { className: 'om-legend' },
+      h('span', { className: 'om-key om-key-ring' },
+        t('A ring is a company, sized by market value; the coloured slices are the holders a filing has named.',
+          'الحلقة شركة، حجمها بالقيمة السوقية، والشرائح الملوّنة ملّاك ذكرهم إفصاح.')),
+      h('span', { className: 'om-key om-key-none' },
+        t('The grey remainder is ownership nobody had to disclose — not free float.',
+          'الجزء الرمادي ملكية لم يُلزم أحد بالإفصاح عنها — وليس أسهماً حرة.')),
+      h('span', { className: 'om-key om-key-arc' },
+        t('An outer arc is what that holding gained or gave up in the chosen week.',
+          'القوس الخارجي هو ما اكتسبته الحصة أو تخلّت عنه في الأسبوع المختار.')),
+      h('span', { className: 'om-key om-key-bridge' },
+        t('A curve joins the companies one holder appears in.',
+          'المنحنى يصل بين الشركات التي يظهر فيها مالك واحد.'))
+    ),
+    h('p', { className: 'ft-note' }, t(
+      'A stake is a percentage of ONE company: nothing here adds two of them together, and a holder in three companies is drawn three times with no combined percentage. Each figure is the closing stake on the most recent form filed for it, not a running total of trades. A company with no published market value is drawn at the smallest size with a dashed centre rather than dropped.',
+      'الحصة نسبة من شركة واحدة: لا شيء هنا يجمع نسبتين، ومن يملك في ثلاث شركات يُرسم ثلاث مرات بلا نسبة مجمّعة. وكل رقم هو الحصة الختامية في أحدث نموذج أُودع عنها، لا حاصل جمع الصفقات. والشركة التي لا تُنشر قيمتها السوقية تُرسم بأصغر حجم وبمركز متقطع بدلاً من استبعادها.'))
   );
 }
+
 
 export function flowTrackers(component, data, ar) {
   const t = (en, arabic) => ar ? arabic : en;
@@ -1349,15 +1508,10 @@ export function flowTrackers(component, data, ar) {
             'تداول مليون سهم في شركة ذات ١٠ ملايين سهم يمثل ١٠٪ من ملكية الشركة، بينما في شركة بـ ١٠ مليارات سهم يمثل ٠.٠١٪ فقط. نسبة الملكية والقيمة السوقية هما المقياس الحقيقي.'))
         )
       ),
-      // The market-wide answer first, because until now this screen could not
-      // give one: every stake chart was behind choosing a company, so a reader
-      // had to already suspect an issuer before the page would show anything.
-      renderOwnershipTimeline(people, ar, t),
-
       // The picture, then the same facts as a list. The map answers "who is
       // around this company" at a glance; the list answers "what happened to
       // this person's stake", which a picture cannot say in numbers.
-      renderOwnershipMap(people, ar, t, component, st),
+      renderOwnershipMap(people, ar, t, component),
 
       // This is the only place on the site that names a holder.
       renderNamedPeople(people, ar, t,

@@ -196,6 +196,34 @@ def audit_one(row: dict, doc: dict | None, quote: dict, today: datetime.date,
 CONTRADICTIONS = ("sector_split", "pe_vs_eps", "profit_split")
 
 
+def audit_ownership(doc: dict | None) -> list[dict]:
+    """Named stakes that add to more than the company they are in.
+
+    Every one of these is one real party read as two: `شركة اموال العربيه
+    للاقطان` and `شركه ...`, one letter apart, each holding 41% of KABO. It is
+    reported and not gated, because the alternative is stopping a whole day's
+    publish — news, prices, every sector — over one scanned form, and the map
+    already marks such a ring on screen instead of quietly scaling it to fit.
+    """
+    if not doc:
+        return []
+    held: dict[str, list] = {}
+    for position in doc.get("positions") or []:
+        if (position.get("percent") or 0) > 0:
+            held.setdefault(position["ticker"], []).append(position)
+    faults = []
+    for ticker, rows in sorted(held.items()):
+        total = sum(r["percent"] for r in rows)
+        if total > 100.0001:
+            faults.append({
+                "ticker": ticker, "kind": "stake_over_100",
+                "detail": (f"named stakes add to {total:.2f}% of the company, "
+                           f"across {len(rows)} holders"),
+                "holders": [r["holder"] for r in rows],
+            })
+    return faults
+
+
 def fx() -> dict[str, float]:
     """Pounds per unit, keyed by the SHORT NAME the exchange files a price under.
 
@@ -235,6 +263,8 @@ def main() -> int:
     for row in rows:
         doc = load(V1 / "companies" / f"{row['ticker']}.json")
         faults += audit_one(row, doc, market.get(row["ticker"]) or {}, today, rates)
+    if not args.ticker:
+        faults += audit_ownership(load(V1 / "insider-people.json"))
 
     if args.json:
         print(json.dumps({"companies": len(rows), "faults": faults}, ensure_ascii=False))

@@ -1,25 +1,35 @@
-/* Who holds what, and where a stake went.
+/* Who owns the Egyptian Exchange, as far as anybody has had to say — and what
+ * moved in a given week.
  *
- * The people list beside this says the same facts in a sentence each. This
- * says them all at once: a company is a ring sized by market value and sliced
- * by the holders we can name; a holder is a node sized by everything they are
- * known to hold; a stake is the line between them, thick in proportion to the
- * percentage. Move between months and the slices move with the filings.
+ * The picture is one board, not one board per period. Every company anybody
+ * has filed a named stake in is drawn every time, at the stake that stands
+ * now; choosing a week does not rebuild the market, it lights up the holdings
+ * that changed in it. An earlier version of this screen accumulated filings
+ * instead, so the first period showed a single company and read as a broken
+ * map rather than a true one.
  *
- * Three honesty rules are built into the drawing rather than written under it.
+ * Four honesty rules are in the drawing rather than written under it.
  *
- * The unsliced part of a ring is NOT free float. It is ownership nobody has
- * had to disclose, which is most of every company on the exchange — the map
- * says "no disclosure" and colours it as absence, because calling it float
- * would claim a fact about the register that this project does not have.
+ * The uncoloured part of a ring is NOT free float. It is ownership nobody has
+ * had to disclose, which is most of every company on this exchange, and the
+ * legend says so — calling it float would claim a fact about the register
+ * that this project does not have.
  *
- * A stake is a percentage OF ONE COMPANY. A holder's size is a currency value,
- * never a summed percentage, because 6% of one issuer and 2% of another do not
- * add to 8% of anything.
+ * A stake is a percentage OF ONE COMPANY. Nothing here adds two of them
+ * together: a holder who appears in three companies is drawn three times and
+ * given no combined percentage, because 6% of one issuer and 2% of another do
+ * not make 8% of anything.
  *
- * And a company with no market value published is drawn at the floor size with
- * its ring left hollow, rather than being dropped or guessed at.
+ * A standing stake is the closing figure of the last form filed on it, which
+ * is a level the document prints. It is not a running total of movements, and
+ * where the last form read it down to zero the holding is drawn as gone
+ * rather than dropped — "sold out" and "never held" are different claims.
+ *
+ * And a company with no published market value keeps its ring at the floor
+ * size with a dashed centre, rather than being guessed at or left out.
  */
+
+import { squarify } from './logic.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const TAU = Math.PI * 2;
@@ -35,166 +45,134 @@ export function svgEl(name, attrs = {}, parent) {
   return node;
 }
 
-/* A holder keeps their colour across sessions and across the two languages, so
- * the hash is over the id — which is the folded name — and never over the
- * position in a sorted list, which changes the moment somebody files. */
+/* A holder keeps their colour across weeks and across both languages, so the
+ * hash is over the id — the name as filed — and never over a position in a
+ * sorted list, which changes the moment somebody else files. */
 export function hueOf(id) {
   let h = 0;
   for (let i = 0; i < id.length; i += 1) h = (h * 31 + id.charCodeAt(i)) >>> 0;
   return `var(--own${(h % 6) + 1})`;
 }
 
-/** Months that actually carry a filing, oldest first. */
+export const keyOf = (holder, ticker) => `${holder}|${ticker}`;
+
+/** Every standing stake: the last filed level, zeros dropped from the board. */
+export function standing(doc) {
+  return ((doc && doc.positions) || []).filter((p) => (p.percent || 0) > 0);
+}
+
+/** The weeks that carry a filing, oldest first. */
 export function periodsOf(doc) {
-  const months = new Set();
-  (doc.people || []).forEach((p) => (p.trades || []).forEach((t) => {
-    if (t.date) months.add(t.date.slice(0, 7));
-  }));
-  return [...months].sort();
+  return ((doc && doc.periods) || []).slice();
 }
 
-/* What each holder held in each company AS AT the end of a month.
- *
- * `stakeAfter` from the person's latest filing in or before that month — not a
- * sum of their trades. A stake is a level the form states outright, and adding
- * up movements would drift away from it with every scan that could not be read.
- */
-export function stakesAt(doc, period) {
-  const latest = new Map();
-  (doc.people || []).forEach((p) => {
-    (p.trades || []).forEach((t) => {
-      if (!t.date || !t.ticker || t.date.slice(0, 7) > period) return;
-      if (!finite(t.stakeAfter)) return;
-      const k = `${p.id}|${t.ticker}`;
-      const held = latest.get(k);
-      if (!held || t.date > held.date) latest.set(k, { date: t.date, pct: t.stakeAfter, person: p });
-    });
-  });
-  const out = {};
-  latest.forEach((v, k) => { if (v.pct > 0) out[k] = v.pct; });
+/** What moved in one week, keyed by holder and company. */
+export function movesIn(doc, start) {
+  const week = ((doc && doc.periods) || []).find((p) => p.start === start);
+  const out = new Map();
+  if (week) week.moves.forEach((m) => out.set(keyOf(m.holder, m.ticker), m));
   return out;
-}
-
-/** Trades filed inside one month, for the arrows. */
-export function tradesIn(doc, period) {
-  const rows = [];
-  (doc.people || []).forEach((p) => (p.trades || []).forEach((t) => {
-    if (t.date && t.date.slice(0, 7) === period) rows.push({ ...t, person: p });
-  }));
-  return rows.sort((a, b) => (b.value || 0) - (a.value || 0));
 }
 
 
 /* ── Where things sit ─────────────────────────────────────────────────────────
  *
- * Deterministic, and that is the requirement rather than a preference. A
- * force-directed layout would settle somewhere slightly different on every
- * render, so a reader stepping from July to August would watch every node
- * drift and be unable to tell which movement was the data. Here the only thing
- * that moves between months is a slice, an arc, and a node's radius.
+ * Deterministic, and that is a requirement rather than a preference. A
+ * force-directed layout settles somewhere slightly different on every render,
+ * so a reader stepping from one week to the next would watch every company
+ * drift and could not tell which movement was the data. Here the board never
+ * moves; only the highlighting does.
  *
- * Companies sit on a ring, ordered by sector so that a sector reads as an arc
- * of the circle; holders sit on a wider ring, each placed at the angle of the
- * company they hold most of, so their line runs inward rather than across.
+ * Sectors are squarified by how many companies they hold, not by their market
+ * value, so every company gets about the same room to be read in. Value is
+ * already carried by the radius of the ring, and letting it drive the cells
+ * too would squeeze eleven small issuers into a corner to make space for one
+ * big one.
  */
-export const VIEW = { w: 960, h: 640 };
+export const VIEW = { w: 1200, h: 760 };
 
-const RING = 9;          // thickness of a company's slice band
-const CO_MIN = 15;       // a company with no published market value
-const CO_MAX = 44;
-const OWN_MIN = 9;
-const OWN_MAX = 30;
+const PAD = 10;
+const CELL_LABEL = 15;
+const BAND = 7;            // thickness of the slice band
+const R_MIN = 15;
+const R_MAX = 34;
 
-export function layout(doc, stakes, caps, limit = 9) {
-  // Companies worth drawing: the ones carrying the most disclosed ownership.
-  const held = {};
-  Object.entries(stakes).forEach(([k, pct]) => {
-    const ticker = k.split('|')[1];
-    held[ticker] = (held[ticker] || 0) + pct;
+export function layout(rows, view = VIEW) {
+  const bySector = new Map();
+  rows.forEach((r) => {
+    if (!bySector.has(r.sector)) bySector.set(r.sector, []);
+    bySector.get(r.sector).push(r);
   });
-  const tickers = Object.keys(held)
-    .sort((a, b) => (held[b] * (caps[b] || 0)) - (held[a] * (caps[a] || 0)))
-    .slice(0, limit);
-  const keep = new Set(tickers);
 
-  const capVals = tickers.map((t) => caps[t]).filter(finite);
+  const cells = squarify(
+    [...bySector.entries()].map(([sector, list]) => ({ sector, list, value: list.length })),
+    PAD, PAD, view.w - PAD * 2, view.h - PAD * 2);
+
+  const capVals = rows.map((r) => r.cap).filter((v) => finite(v) && v > 0);
   const capMax = capVals.length ? Math.max(...capVals) : 0;
-  const coR = (t) => (finite(caps[t]) && capMax > 0
-    ? CO_MIN + Math.sqrt(caps[t] / capMax) * (CO_MAX - CO_MIN)
-    : CO_MIN);
+  const radius = (cap) => (finite(cap) && cap > 0 && capMax > 0
+    ? R_MIN + Math.sqrt(cap / capMax) * (R_MAX - R_MIN)
+    : R_MIN);
 
-  // Sector order keeps same-sector companies adjacent on the ring.
-  const bySector = {};
-  tickers.forEach((t) => {
-    const s = (caps.sectorOf && caps.sectorOf(t)) || '—';
-    (bySector[s] = bySector[s] || []).push(t);
-  });
-  const ordered = [];
-  Object.keys(bySector).sort().forEach((s) => {
-    bySector[s].sort((a, b) => (caps[b] || 0) - (caps[a] || 0))
-      .forEach((t) => ordered.push({ ticker: t, sector: s }));
-  });
-
-  const cx = VIEW.w / 2;
-  const cy = VIEW.h / 2 - 6;
-  const coRing = Math.min(VIEW.h, VIEW.w) * 0.30;
-  const nodes = {};
-  const angleOf = {};
-  ordered.forEach((row, i) => {
-    // Start at the top and go clockwise, so the first sector reads first.
-    const a = -Math.PI / 2 + (i / ordered.length) * TAU;
-    angleOf[row.ticker] = a;
-    nodes[row.ticker] = {
-      kind: 'company', ticker: row.ticker, sector: row.sector,
-      x: cx + Math.cos(a) * coRing, y: cy + Math.sin(a) * coRing,
-      r: coR(row.ticker), hasCap: finite(caps[row.ticker]),
-    };
-  });
-
-  // Holders: value of what they hold, and an angle borrowed from their
-  // largest holding so the line runs inward.
-  const owners = {};
-  Object.entries(stakes).forEach(([k, pct]) => {
-    const [pid, ticker] = k.split('|');
-    if (!keep.has(ticker)) return;
-    const value = finite(caps[ticker]) ? (pct / 100) * caps[ticker] : 0;
-    const o = owners[pid] = owners[pid] || { id: pid, value: 0, anchor: null, best: -1, links: [] };
-    o.value += value;
-    o.links.push({ ticker, pct, value });
-    if (pct > o.best) { o.best = pct; o.anchor = ticker; }
-  });
-  const vals = Object.values(owners).map((o) => o.value).filter((v) => v > 0);
-  const vMax = vals.length ? Math.max(...vals) : 0;
-  const ownR = (v) => (vMax > 0 && v > 0
-    ? OWN_MIN + Math.sqrt(v / vMax) * (OWN_MAX - OWN_MIN)
-    : OWN_MIN);
-
-  // Two rings so labels have somewhere to go: the busier holders outside.
-  const byAnchor = {};
-  Object.values(owners).forEach((o) => {
-    (byAnchor[o.anchor] = byAnchor[o.anchor] || []).push(o);
-  });
-  Object.entries(byAnchor).forEach(([ticker, list]) => {
-    const base = angleOf[ticker] ?? -Math.PI / 2;
-    list.sort((a, b) => b.value - a.value);
-    const spread = Math.min(0.30, 0.10 * list.length);
-    list.forEach((o, i) => {
-      const a = base + (list.length === 1 ? 0 : -spread / 2 + (i / (list.length - 1)) * spread);
-      const ring = coRing + 118 + (i % 2) * 46;
-      nodes[o.id] = {
-        kind: 'holder', id: o.id, value: o.value, links: o.links,
-        x: cx + Math.cos(a) * ring * (VIEW.w / VIEW.h) * 0.72,
-        y: cy + Math.sin(a) * ring * 0.74,
-        r: ownR(o.value), angle: a,
+  const nodes = new Map();
+  const placed = [];
+  cells.forEach((cell) => {
+    const list = cell.list.slice().sort((a, b) => (b.disclosed - a.disclosed) || (b.cap - a.cap));
+    const inner = { x: cell.x, y: cell.y + CELL_LABEL, w: cell.w, h: cell.h - CELL_LABEL };
+    // Columns chosen so the slots come out near square, which is what keeps a
+    // ring from being clipped by a slot that is tall and thin.
+    const cols = Math.max(1, Math.min(list.length,
+      Math.round(Math.sqrt(list.length * (inner.w / Math.max(inner.h, 1)))) || 1));
+    const outRows = Math.ceil(list.length / cols);
+    const slotW = inner.w / cols;
+    const slotH = inner.h / outRows;
+    const room = Math.max(6, Math.min(slotW, slotH) / 2 - 9);
+    list.forEach((r, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      // The last row is centred rather than left-aligned, so a sector of five
+      // in a three-wide grid does not hang two rings off one edge.
+      const inRow = Math.min(cols, list.length - row * cols);
+      const offset = (cols - inRow) * slotW / 2;
+      const node = {
+        ...r,
+        x: inner.x + offset + slotW * (col + 0.5),
+        y: inner.y + slotH * (row + 0.5),
+        r: Math.min(room, radius(r.cap)),
+        hasCap: finite(r.cap) && r.cap > 0,
       };
+      nodes.set(r.ticker, node);
+      placed.push(node);
     });
   });
-  return { nodes, tickers: ordered, cx, cy, RING };
+  return { cells, nodes, placed, view };
 }
 
+/* Where each holder's slice starts and stops on the band.
+ *
+ * Filings that add to more than the company happen: two spellings of one man's
+ * name were read as two holders of HBCO and the ring came to 103.4%. Left
+ * alone the last slice wraps past its own start and draws over the first, and
+ * a ring simply truncated at a full circle looks exactly like a company wholly
+ * in named hands. So the slices are scaled to fit AND the caller is told, which
+ * is the more useful of the two facts.
+ */
+export function sliceAngles(list) {
+  const claimed = list.reduce((sum, p) => sum + (p.percent || 0), 0);
+  const over = claimed > 100.0001;
+  const fit = over ? 100 / claimed : 1;
+  let a0 = -Math.PI / 2;
+  const arcs = list.map((p) => {
+    const a1 = a0 + ((p.percent || 0) * fit) / 100 * TAU;
+    const arc = { p, a0, a1 };
+    a0 = a1;
+    return arc;
+  });
+  return { claimed, over, arcs };
+}
 
-function arcPath(cx, cy, r0, r1, a0, a1) {
-  if (a1 - a0 < 0.0006) return '';
+export function arcPath(cx, cy, r0, r1, a0, a1) {
+  if (!(a1 - a0 > 0.0008)) return '';
   const large = (a1 - a0) > Math.PI ? 1 : 0;
   const P = (r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
   const [x0, y0] = P(r1, a0); const [x1, y1] = P(r1, a1);
@@ -203,161 +181,285 @@ function arcPath(cx, cy, r0, r1, a0, a1) {
        + `L${x2} ${y2}A${r0} ${r0} 0 ${large} 0 ${x3} ${y3}Z`;
 }
 
-/* Edge from rim to rim rather than centre to centre, so a thick line does not
- * bury the node it points at. */
-function edgePath(a, b, bend = 0.16) {
+/* Rim to rim rather than centre to centre, so a curve does not disappear
+ * under the ring it points at. */
+export function edgePath(a, b, bend = 0.18) {
   const dx = b.x - a.x; const dy = b.y - a.y;
   const d = Math.hypot(dx, dy) || 1;
   const ux = dx / d; const uy = dy / d;
-  const s = { x: a.x + ux * a.r, y: a.y + uy * a.r };
-  const e = { x: b.x - ux * b.r, y: b.y - uy * b.r };
+  const s = { x: a.x + ux * (a.r + 4), y: a.y + uy * (a.r + 4) };
+  const e = { x: b.x - ux * (b.r + 4), y: b.y - uy * (b.r + 4) };
   const m = { x: (s.x + e.x) / 2 - uy * d * bend, y: (s.y + e.y) / 2 + ux * d * bend };
-  return { d: `M${s.x} ${s.y}Q${m.x} ${m.y} ${e.x} ${e.y}`,
-           mid: { x: 0.25 * s.x + 0.5 * m.x + 0.25 * e.x,
-                  y: 0.25 * s.y + 0.5 * m.y + 0.25 * e.y } };
+  return {
+    d: `M${s.x} ${s.y}Q${m.x} ${m.y} ${e.x} ${e.y}`,
+    mid: { x: 0.25 * s.x + 0.5 * m.x + 0.25 * e.x,
+           y: 0.25 * s.y + 0.5 * m.y + 0.25 * e.y },
+  };
 }
 
-const money = (v) => (finite(v) && v > 0
+/* Trim a caption to the room it has.
+ *
+ * Measured rather than counted where the browser will measure: an Arabic
+ * glyph at this size is about 3.7px wide and a spaced Latin capital about
+ * 5.6, so one character estimate for both is wrong for one of them, and the
+ * one it was wrong for was Arabic.
+ */
+export function fitText(node, text, room, ar) {
+  node.textContent = text;
+  // A detached element measures zero, which is not a measurement. The board is
+  // built before it is mounted, so every caption "fitted" on the first paint
+  // and SHIPPING & TRANSPORTATION SERVICES ran 48px out of its own cell.
+  const estimate = () => node.textContent.length * (ar ? 3.9 : 5.8);
+  const measure = () => {
+    if (typeof node.getComputedTextLength !== 'function') return estimate();
+    const width = node.getComputedTextLength();
+    return width > 0 ? width : estimate();
+  };
+  if (measure() <= room) return node;
+  let cut = text.length;
+  while (cut > 1) {
+    cut -= 1;
+    node.textContent = `${text.slice(0, cut).trimEnd()}…`;
+    if (measure() <= room) break;
+  }
+  return node;
+}
+
+const compact = (v) => (finite(v) && v > 0
   ? new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(v)
   : '—');
 
+
+/* ── The drawing ──────────────────────────────────────────────────────────── */
+
 export function renderMap(svg, model, opts) {
-  const { nodes, cx, cy } = model;
-  const { stakes, prevStakes, trades, labelOf, onPick, focused, t, ar } = opts;
+  const { nodes, cells, view } = model;
+  const { holdings, bridges, moves, labelOf, onPick, focus, t, ar } = opts;
   while (svg.firstChild) svg.removeChild(svg.firstChild);
-  svg.setAttribute('viewBox', `0 0 ${VIEW.w} ${VIEW.h}`);
+  svg.setAttribute('viewBox', `0 0 ${view.w} ${view.h}`);
 
-  const gEdge = svgEl('g', { class: 'om-edges' }, svg);
+  const gCell = svgEl('g', { class: 'om-cells' }, svg);
+  const gBridge = svgEl('g', { class: 'om-bridges' }, svg);
   const gCo = svgEl('g', { class: 'om-cos' }, svg);
-  const gFlow = svgEl('g', { class: 'om-flows' }, svg);
-  const gOwn = svgEl('g', { class: 'om-owners' }, svg);
+  const gPop = svgEl('g', { class: 'om-pop' }, svg);
 
-  const related = new Set();
-  if (focused) {
-    related.add(focused);
-    Object.keys(stakes).forEach((k) => {
-      const [pid, ticker] = k.split('|');
-      if (pid === focused) related.add(ticker);
-      if (ticker === focused) related.add(pid);
+  // What the focus is related to: a company lights its holders, a holder
+  // lights every company they are in.
+  const lit = new Set();
+  if (focus) {
+    lit.add(focus);
+    holdings.forEach((p) => {
+      if (p.holder === focus) lit.add(p.ticker);
+      if (p.ticker === focus) lit.add(p.holder);
     });
   }
-  const dim = (id) => (focused && !related.has(id) ? 'om-dim' : '');
+  const on = (id) => !focus || lit.has(id);
+  const cls = (...ids) => (focus && !ids.some(on) ? ' om-dim' : '');
 
-  // ── stakes ────────────────────────────────────────────────────────────────
-  Object.entries(stakes).forEach(([k, pct]) => {
-    const [pid, ticker] = k.split('|');
-    const a = nodes[pid]; const b = nodes[ticker];
-    if (!a || !b) return;
-    const { d } = edgePath(a, b);
-    svgEl('path', {
-      d, fill: 'none', stroke: hueOf(pid),
-      'stroke-width': 1 + Math.min(pct, 45) * 0.16,
-      'stroke-linecap': 'round', opacity: 0.4,
-      class: `om-edge ${dim(pid) && dim(ticker) ? 'om-dim' : ''}`,
-    }, gEdge);
+  // ── sector regions ────────────────────────────────────────────────────────
+  cells.forEach((cell) => {
+    const g = svgEl('g', { class: 'om-cell' }, gCell);
+    svgEl('rect', {
+      x: cell.x + 1, y: cell.y + 1, width: Math.max(0, cell.w - 2),
+      height: Math.max(0, cell.h - 2), rx: 12,
+      fill: 'var(--own-cell)', stroke: 'var(--rule)', 'stroke-width': 0.7,
+    }, g);
+    // Centred, because `text-anchor: end` is resolved against the INLINE
+    // direction: with `direction: rtl` it anchors the logical end — the left
+    // side of the rendered text — so every Arabic sector caption ran out of
+    // the right-hand side of its own cell. `middle` means the same thing in
+    // both languages.
+    const label = svgEl('text', {
+      x: cell.x + cell.w / 2, y: cell.y + 13, fill: 'var(--faint)',
+      'font-size': 8.5, 'letter-spacing': ar ? 0 : 0.7, 'font-weight': 600,
+      'text-anchor': 'middle', direction: ar ? 'rtl' : 'ltr',
+    }, g);
+    fitText(label, ar ? cell.sector : cell.sector.toUpperCase(), cell.w - 14, ar);
   });
 
-  // ── companies ─────────────────────────────────────────────────────────────
-  model.tickers.forEach(({ ticker }) => {
-    const n = nodes[ticker];
-    if (!n) return;
-    const g = svgEl('g', { class: `om-co ${dim(ticker)}`, 'data-id': ticker }, gCo);
-    const inner = n.r - RING / 2;
-    const outer = n.r + RING / 2;
+  // ── a holder who is in more than one company ──────────────────────────────
+  //
+  // The only genuinely graph-shaped thing in the data — 59 of the 66 named
+  // holders appear in exactly one company, and for them the slice on the ring
+  // already says everything a separate node would. These seven are drawn as
+  // the curves they are.
+  bridges.forEach((b) => {
+    for (let i = 0; i < b.tickers.length - 1; i += 1) {
+      const a = nodes.get(b.tickers[i]);
+      const c = nodes.get(b.tickers[i + 1]);
+      if (!a || !c) continue;
+      const { d } = edgePath(a, c);
+      svgEl('path', {
+        d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 1.6,
+        'stroke-linecap': 'round', opacity: 0.75,
+        class: `om-bridge${cls(b.holder)}`,
+      }, gBridge);
+    }
+  });
 
-    const mine = Object.keys(stakes).filter((k) => k.split('|')[1] === ticker)
-      .sort((x, y) => stakes[y] - stakes[x]);
-    let a0 = -Math.PI / 2;
-    mine.forEach((k) => {
-      const pid = k.split('|')[0];
-      const a1 = a0 + (stakes[k] / 100) * TAU;
-      const d = arcPath(n.x, n.y, inner, outer, a0, a1);
-      if (d) svgEl('path', { d, fill: hueOf(pid), class: 'om-slice', 'data-o': pid }, g);
-      // Outside the band: did this stake grow or shrink since last month?
-      const was = prevStakes ? prevStakes[k] : undefined;
-      if (prevStakes) {
-        const now = stakes[k];
-        if (was === undefined) {
-          svgEl('path', { d: arcPath(n.x, n.y, outer + 2.5, outer + 5, a0, a1),
-                          fill: 'var(--up)', class: 'om-mark' }, g);
-        } else if (now > was) {
-          const grew = ((now - was) / 100) * TAU;
-          svgEl('path', { d: arcPath(n.x, n.y, outer + 2.5, outer + 5, Math.max(a0, a1 - grew), a1),
-                          fill: 'var(--up)', class: 'om-mark' }, g);
-        } else if (now < was) {
-          const shed = ((was - now) / 100) * TAU;
-          svgEl('path', { d: arcPath(n.x, n.y, outer + 2.5, outer + 5, a1, a1 + shed),
-                          fill: 'var(--down)', class: 'om-mark' }, g);
+  // ── the companies ─────────────────────────────────────────────────────────
+  const byTicker = new Map();
+  holdings.forEach((p) => {
+    if (!byTicker.has(p.ticker)) byTicker.set(p.ticker, []);
+    byTicker.get(p.ticker).push(p);
+  });
+
+  model.placed.forEach((n) => {
+    const g = svgEl('g', { class: `om-co${cls(n.ticker)}`, 'data-id': n.ticker }, gCo);
+    const r0 = n.r - BAND / 2;
+    const r1 = n.r + BAND / 2;
+    const mine = (byTicker.get(n.ticker) || []).slice().sort((a, b) => b.percent - a.percent);
+
+    // Undisclosed first and whole, so a rounding error in the slices can never
+    // leave a hairline of background showing through as if it meant something.
+    svgEl('circle', {
+      cx: n.x, cy: n.y, r: n.r, fill: 'none', stroke: 'var(--ownNone)',
+      'stroke-width': BAND, class: 'om-undisclosed',
+    }, g);
+
+    const { claimed, over, arcs } = sliceAngles(mine);
+    if (over) g.setAttribute('class', `${g.getAttribute('class')} om-over`);
+
+    arcs.forEach(({ p, a0, a1 }) => {
+      const d = arcPath(n.x, n.y, r0, r1, a0, a1);
+      if (d) {
+        svgEl('path', {
+          d, fill: hueOf(p.holder),
+          class: `om-slice${cls(p.holder, n.ticker)}`,
+          'data-o': p.holder,
+        }, g);
+      }
+      // What this holding did in the chosen week, as an arc riding outside
+      // the band: the size of the change, in the same angular units as the
+      // stake itself, so a two-point move looks like two points.
+      const mv = moves && moves.get(keyOf(p.holder, n.ticker));
+      if (mv && finite(mv.change) && Math.abs(mv.change) > 0.0005) {
+        const span = Math.min(Math.abs(mv.change), 100) / 100 * TAU;
+        const grew = mv.change > 0;
+        // Anchored at the slice's leading edge: growth runs back over the
+        // ground it took, a sale runs forward into the ground it gave up.
+        // Neither is clipped to the slice — clipping the growth arc to the
+        // slice's own start silently erased the whole movement wherever the
+        // holder has since sold out, which is the one week a reader looking
+        // at an empty ring actually wants.
+        const arc = grew
+          ? arcPath(n.x, n.y, r1 + 2, r1 + 5, a1 - span, a1)
+          : arcPath(n.x, n.y, r1 + 2, r1 + 5, a1, a1 + span);
+        if (arc) {
+          svgEl('path', {
+            d: arc, fill: grew ? 'var(--up)' : 'var(--down)',
+            class: 'om-move',
+          }, g);
         }
       }
-      a0 = a1;
     });
-    // Everything nobody had to disclose. Not free float, and not coloured as
-    // though it were a holder.
-    svgEl('path', { d: arcPath(n.x, n.y, inner, outer, a0, Math.PI * 1.5 - 0.0001),
-                    fill: 'var(--ownNone)', class: 'om-undisclosed' }, g);
-    svgEl('circle', { cx: n.x, cy: n.y, r: inner - 1, fill: 'var(--surface)' }, g);
-    if (!n.hasCap) {
-      svgEl('circle', { cx: n.x, cy: n.y, r: inner - 1, fill: 'none',
-                        stroke: 'var(--rule)', 'stroke-dasharray': '2 3' }, g);
-    }
-    const tk = svgEl('text', { x: n.x, y: n.y + 1, 'text-anchor': 'middle',
-                               fill: 'var(--ink)', 'font-size': n.r > 26 ? 12 : 10,
-                               'font-weight': 700, direction: 'ltr' }, g);
-    tk.textContent = ticker;
-    const cap = svgEl('text', { x: n.x, y: n.y + 13, 'text-anchor': 'middle',
-                                fill: 'var(--faint)', 'font-size': 9, direction: 'ltr' }, g);
-    cap.textContent = n.hasCap ? money(opts.caps[ticker]) : t('no cap', 'بلا قيمة');
-    const hit = svgEl('circle', { cx: n.x, cy: n.y, r: outer + 7, fill: 'transparent',
-                                  class: 'om-hit' }, g);
-    hit.addEventListener('click', (e) => { e.stopPropagation(); onPick(ticker); });
-  });
 
-  // ── trades filed this month ───────────────────────────────────────────────
-  trades.slice(0, 6).forEach((tr) => {
-    const holder = nodes[tr.person.id];
-    const co = nodes[tr.ticker];
-    if (!holder || !co) return;
-    const from = tr.action === 'buy' ? co : holder;
-    const to = tr.action === 'buy' ? holder : co;
-    const { d, mid } = edgePath(from, to, -0.24);
-    const g = svgEl('g', { class: `om-flow ${dim(tr.person.id) && dim(tr.ticker) ? 'om-dim' : ''}` }, gFlow);
-    svgEl('path', { d, fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1,
-                    'stroke-dasharray': '3 5', opacity: 0.55 }, g);
-    if (finite(tr.value) && tr.value > 0) {
-      const label = `${money(tr.value)} EGP`;
-      const w = label.length * 5.9 + 12;
-      svgEl('rect', { x: mid.x - w / 2, y: mid.y - 9, width: w, height: 18, rx: 9,
-                      fill: 'var(--surface)', stroke: 'var(--rule)' }, g);
-      const tx = svgEl('text', { x: mid.x, y: mid.y + 4, 'text-anchor': 'middle',
-                                 fill: 'var(--t2)', 'font-size': 10, direction: 'ltr' }, g);
-      tx.textContent = label;
-    }
-  });
+    svgEl('circle', {
+      cx: n.x, cy: n.y, r: Math.max(1, r0 - 1), fill: 'var(--surface)',
+      stroke: n.hasCap ? 'none' : 'var(--rule)',
+      'stroke-dasharray': n.hasCap ? null : '2 3',
+    }, g);
 
-  // ── holders ───────────────────────────────────────────────────────────────
-  Object.values(nodes).filter((n) => n.kind === 'holder').forEach((n) => {
-    const g = svgEl('g', { class: `om-owner ${dim(n.id)}`, 'data-id': n.id }, gOwn);
-    svgEl('circle', { cx: n.x, cy: n.y, r: n.r, fill: hueOf(n.id), opacity: 0.92 }, g);
-    // Two lines, 20 user units apart. 12 left them touching at exactly -0.1px
-    // of gap once the 960-wide viewBox is scaled to its container, and 14 —
-    // measured, not guessed — still left nothing between them. At 20 there is
-    // about 4px of real space at the size this actually renders.
-    const above = n.y < cy;
-    const label = svgEl('text', {
-      x: n.x, y: above ? n.y - n.r - 27 : n.y + n.r + 15,
-      'text-anchor': 'middle', fill: 'var(--ink)', 'font-size': 10.5,
+    const moved = mine.some((p) => moves && moves.get(keyOf(p.holder, n.ticker)));
+    if (moved) {
+      svgEl('circle', {
+        cx: n.x, cy: n.y, r: r1 + 7.5, fill: 'none', stroke: 'var(--accent)',
+        'stroke-width': 1, opacity: 0.55, class: 'om-moved-ring',
+      }, g);
+    }
+
+    // The market value goes inside the ring only where the ring is big enough
+    // to hold two lines. At 11 units apart they overlapped by two pixels on
+    // ten of the forty-seven — measured, not eyeballed — and a ticker with a
+    // number sitting on it is worse than a ticker with nothing under it.
+    const wide = n.r > 26;
+    const tk = svgEl('text', {
+      x: n.x, y: n.y + (wide ? -3 : 1), 'text-anchor': 'middle',
+      fill: 'var(--ink)', 'font-size': wide ? 11 : 9.5, 'font-weight': 700,
       direction: 'ltr',
     }, g);
-    const full = labelOf(n.id);
-    label.textContent = full.length > 22 ? `${full.slice(0, 20)}…` : full;
-    const sub = svgEl('text', {
-      x: n.x, y: above ? n.y - n.r - 8 : n.y + n.r + 35,
-      'text-anchor': 'middle', fill: 'var(--faint)', 'font-size': 9, direction: 'ltr',
-    }, g);
-    sub.textContent = n.value > 0 ? `${money(n.value)} EGP` : t('value unknown', 'قيمة غير معروفة');
+    tk.textContent = n.ticker;
+    if (wide) {
+      const sub = svgEl('text', {
+        x: n.x, y: n.y + 12, 'text-anchor': 'middle', fill: 'var(--faint)',
+        'font-size': 8, direction: 'ltr',
+      }, g);
+      sub.textContent = n.hasCap ? compact(n.cap) : t('no size', 'بلا قيمة');
+    }
+
     const title = svgEl('title', {}, g);
-    title.textContent = full;
-    g.addEventListener('click', (e) => { e.stopPropagation(); onPick(n.id); });
+    title.textContent = over
+      ? `${n.ticker} · ${n.name} — `
+        + t(`the filings for this company add to ${claimed.toFixed(1)}%, which is more than the company`,
+            `مجموع الإفصاحات لهذه الشركة ${claimed.toFixed(1)}٪، أي أكثر من الشركة نفسها`)
+      : `${n.ticker} · ${n.name} — `
+        + t(`${claimed.toFixed(1)}% in named hands`,
+            `${claimed.toFixed(1)}٪ بأسماء معلومة`);
+    const hit = svgEl('circle', {
+      cx: n.x, cy: n.y, r: r1 + 8, fill: 'transparent', class: 'om-hit',
+    }, g);
+    hit.addEventListener('click', (e) => { e.stopPropagation(); onPick(n.ticker); });
+  });
+
+  // ── who is in the company you picked ──────────────────────────────────────
+  //
+  // Names only for the focused company, and only then. Sixty-six of them
+  // permanently on the board would bury the board.
+  if (focus && nodes.has(focus)) {
+    popOut(gPop, nodes.get(focus), (byTicker.get(focus) || []), labelOf, onPick, view);
+  } else if (focus) {
+    holdings.filter((p) => p.holder === focus).forEach((p) => {
+      const n = nodes.get(p.ticker);
+      if (n) popOut(gPop, n, [p], labelOf, onPick, view);
+    });
+  }
+}
+
+/* One holder's name pinned beside the ring it belongs to.
+ *
+ * On a plate, because the label sits over whatever the board has in that
+ * direction — another sector's cell, another company's ring — and a name read
+ * against a ring is not read at all. The side is chosen by which one has more
+ * room, and the plate is then pushed back inside the frame if it still hangs
+ * over an edge.
+ */
+function popOut(layer, node, list, labelOf, onPick, view) {
+  const sorted = list.slice().sort((a, b) => b.percent - a.percent).slice(0, 6);
+  const right = node.x < view.w / 2;
+  const top = Math.max(14, Math.min(view.h - 16 * sorted.length - 6,
+                                    node.y - (sorted.length - 1) * 8));
+  sorted.forEach((p, i) => {
+    const y = top + i * 16;
+    const g = svgEl('g', { class: 'om-pin' }, layer);
+    const name = labelOf(p.holder);
+    const label = `${p.percent.toFixed(2)}%  ${name.length > 28 ? `${name.slice(0, 26)}…` : name}`;
+    const text = svgEl('text', {
+      x: 0, y, 'text-anchor': right ? 'start' : 'end', 'font-size': 9.5,
+      fill: 'var(--ink)', direction: 'ltr',
+    });
+    text.textContent = label;
+    // Built detached, measured once it is in the layer: a detached element
+    // reports a length of zero and the plate would come out empty.
+    layer.appendChild(text);
+    const width = (typeof text.getComputedTextLength === 'function'
+      && text.getComputedTextLength() > 0)
+      ? text.getComputedTextLength() : label.length * 5.2;
+    let x = right ? node.x + node.r + 13 : node.x - node.r - 13;
+    if (right) x = Math.min(x, view.w - width - 6);
+    else x = Math.max(x, width + 6);
+    text.setAttribute('x', x);
+    g.appendChild(svgEl('rect', {
+      x: (right ? x : x - width) - 5, y: y - 9.5, width: width + 10, height: 14,
+      rx: 7, class: 'om-pin-plate',
+    }));
+    svgEl('line', {
+      x1: right ? node.x + node.r + 2 : node.x - node.r - 2, y1: node.y,
+      x2: right ? x - 6 : x + 6, y2: y - 3, stroke: hueOf(p.holder),
+      'stroke-width': 0.9, opacity: 0.6,
+    }, g);
+    g.appendChild(text);
+    const title = svgEl('title', {}, g);
+    title.textContent = name;
+    g.addEventListener('click', (e) => { e.stopPropagation(); onPick(p.holder); });
   });
 }

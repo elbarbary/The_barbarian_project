@@ -539,32 +539,52 @@
 
 /* ── The ownership map ────────────────────────────────────────────────────── */
 .om-panel .ft-section-heading { align-items: flex-start; }
-.om-periods { display: flex; gap: 4px; padding: 4px; border-radius: 999px;
-  background: var(--sunk); border: 1px solid var(--rule2); flex-wrap: wrap; }
+
+/* Week strip across the top, board and side panel beneath it. The strip spans
+   both columns because it governs both of them. */
+.om-map-host { display: grid; gap: 12px; min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 232px;
+  grid-template-areas: "strip strip" "stage side"; }
+.om-map-wrap { min-width: 0; }
+.om-periods { grid-area: strip; display: flex; gap: 4px; padding: 4px;
+  border-radius: 18px; background: var(--sunk); border: 1px solid var(--rule2);
+  flex-wrap: wrap; align-items: stretch; min-width: 0; }
 .om-period {
   border: 0; background: transparent; color: var(--t2);
-  font: inherit; font-size: 11.5px; font-family: 'IBM Plex Mono', monospace;
-  padding: 6px 12px; border-radius: 999px; cursor: pointer; min-width: 0;
+  font: inherit; font-family: 'IBM Plex Mono', monospace;
+  padding: 5px 11px; border-radius: 14px; cursor: pointer; min-width: 0;
+  display: grid; gap: 1px; text-align: center; line-height: 1.25;
 }
-.om-period-on { background: var(--accent); color: var(--surface); font-weight: 600; }
+.om-period strong { font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.om-period small { font-size: 9px; opacity: .72; white-space: nowrap; }
+.om-period-on { background: var(--accent); color: var(--surface); }
 .om-period:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.om-play { margin-inline-start: auto; border: 0; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--rule2); color: var(--t2);
+  border-radius: 14px; padding: 0 13px; font-size: 11px; line-height: 1; }
+.om-play:hover { color: var(--accent); border-color: var(--accent); }
+.om-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.om-map-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 12px; }
-.om-map-slot { min-width: 0; border-radius: 22px; background: var(--sunk);
+.om-map-slot { grid-area: stage; min-width: 0; }
+/* Shown only where the board pans — see the narrow-screen block below. */
+.om-pan-hint { display: none; margin: 6px 2px 0; font-size: 10.5px;
+  color: var(--faint); }
+.om-map-scroll { min-width: 0; border-radius: 22px; background: var(--sunk);
   border: 1px solid var(--rule2); overflow: hidden; }
-.om-map-host { display: block; min-width: 0; }
 .om-map-svg { width: 100%; height: auto; display: block; }
 
-.om-side { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.om-side { grid-area: side; display: grid; gap: 10px; align-content: start;
+  min-width: 0; }
 .om-card { padding: 14px 16px; border-radius: 18px; background: var(--sunk);
   border: 1px solid var(--rule2); min-width: 0; }
 .om-card h4 { margin: 0 0 8px; font-size: 10.5px; font-weight: 600; color: var(--faint);
-  letter-spacing: .09em; text-transform: uppercase; }
+  letter-spacing: .09em; text-transform: uppercase; overflow-wrap: anywhere; }
 .om-card strong { display: block; font-size: 21px; font-weight: 700; letter-spacing: -.02em;
   overflow-wrap: anywhere; }
 .om-card small { display: block; margin-top: 5px; font-size: 10.5px; color: var(--t2); }
+.om-card-meta { margin: -4px 0 8px; font-size: 10.5px; color: var(--faint); }
+.om-card-more { display: block; margin-top: 7px; font-size: 10px; color: var(--faint); }
 
-.om-holders { display: grid; gap: 2px; }
 .om-holder-row {
   display: grid; grid-template-columns: 10px minmax(0, 1fr) auto;
   align-items: center; gap: 8px; width: 100%;
@@ -573,29 +593,58 @@
   text-align: start; cursor: pointer; min-width: 0;
 }
 .om-holder-row:last-child { border-bottom: 0; }
-.om-holder-row:hover span { color: var(--accent); }
+button.om-holder-row:hover span { color: var(--accent); }
 .om-holder-row i { width: 10px; height: 10px; border-radius: 50%; display: block; }
 .om-holder-row span { min-width: 0; overflow: hidden; text-overflow: ellipsis;
   white-space: nowrap; }
 .om-holder-row b { font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-  font-weight: 600; color: var(--t2); }
+  font-weight: 600; color: var(--t2); white-space: nowrap; }
 
-.om-legend { display: grid; gap: 5px; margin-top: 12px; font-size: 11px;
+.om-legend { display: grid; gap: 6px; margin-top: 12px; font-size: 11px;
   color: var(--faint); line-height: 1.5; }
-.om-legend-none { color: var(--t2); }
+/* Each line carries the mark it is describing, so the legend can be read
+   against the drawing instead of remembered. */
+.om-key { display: grid; grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px; align-items: start; }
+.om-key::before { content: ''; width: 13px; height: 13px; margin-top: 2px;
+  border-radius: 50%; }
+.om-key-ring::before { border: 3px solid var(--own3); }
+.om-key-none::before { border: 3px solid var(--ownNone); }
+.om-key-arc::before { border: 0; border-radius: 0; height: 4px; margin-top: 6px;
+  background: linear-gradient(90deg, var(--up) 50%, var(--down) 50%); }
+.om-key-bridge::before { border: 0; border-radius: 0; height: 0; margin-top: 8px;
+  border-top: 2px solid var(--own5); }
 
 /* Focus is expressed by fading everything else, so the thing you asked about
    keeps its own colour rather than gaining a highlight nothing else has. */
-.om-dim { opacity: .12; }
-.om-edge, .om-co, .om-owner, .om-flow, .om-slice { transition: opacity .18s ease; }
-.om-co, .om-owner { cursor: pointer; }
-.om-hit { cursor: pointer; }
+.om-dim { opacity: .1; }
+.om-co, .om-slice, .om-bridge { transition: opacity .18s ease; }
+.om-co, .om-hit { cursor: pointer; }
+.om-pin { cursor: pointer; }
+.om-pin:hover text { fill: var(--accent); }
+/* A name read against a ring is not read. The plate is the page's own ground
+   so the label sits on the board rather than in it. */
+.om-pin-plate { fill: var(--surface); stroke: var(--rule2); stroke-width: .7; }
+.om-moved-ring { pointer-events: none; }
 
-@media (max-width: 768px) {
-  /* The side cards go under the map: 220px of panel beside a 960-wide drawing
-     leaves neither of them readable at 390. */
-  .om-map-wrap { grid-template-columns: minmax(0, 1fr); }
-  .om-side { grid-template-columns: 1fr 1fr; display: grid; }
+@media (max-width: 900px) {
+  .om-map-host { grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "strip" "stage" "side"; }
+  /* Two-up rather than a single column of near-empty cards under a wide map. */
+  .om-side { grid-template-columns: 1fr 1fr; }
   .om-legend { font-size: 10.5px; }
-  .om-period { padding: 6px 9px; font-size: 11px; }
+  .om-period { padding: 5px 8px; }
+  .om-period strong { font-size: 10.5px; }
+
+  /* Fifty rings cannot be labelled inside 390 points: squeezed to fit, a
+     ticker renders at three pixels and a ring is an eight-pixel tap target.
+     So the board keeps a width it can be read at and pans inside its own box,
+     and the page itself still never scrolls sideways. The list beside it is
+     the readable interface on a phone; the board is the picture. */
+  .om-map-scroll { overflow-x: auto; overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch; }
+  .om-map-svg { min-width: 880px; }
+  .om-pan-hint { display: block; }
+}
+
 }

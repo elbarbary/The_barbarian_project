@@ -10,8 +10,13 @@ wants and the daily bulletin cannot give them:
             10% of a company with ten million and 0.01% of one with ten
             billion; only the percentage says whether anything happened.
 
-  timeline  the same readings by session, so the market-wide direction is
-            visible without picking a company first.
+  positions where each holder's stake stands NOW — the closing percentage of
+            the last form they filed on that company, which is a level the
+            document states outright rather than a total of movements that
+            would drift with every scan that could not be read.
+
+  periods   the same holdings a trading week at a time, so "what moved" can be
+            asked of the whole market without picking a company first.
 
 Only what a form actually printed. A person with no stake pair contributes to
 neither series rather than being carried at zero — an absent number and a zero
@@ -27,7 +32,8 @@ import collections
 import datetime as dt
 import json
 import pathlib
-import unicodedata
+
+import insider_identity
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 STORE = REPO / "data-source" / "official" / "ownership" / "named-insiders.json"
@@ -37,22 +43,62 @@ COMPANIES = REPO / "public" / "data" / "v1" / "companies.json"
 
 
 def key(name: str) -> str:
-    """One person, one row, whatever the scan's spacing did.
+    """The name exactly as this filing spelled it, minus stray whitespace.
 
-    Names arrive from OCR, so `محمد  أشرف` and `محمد أشرف` are the same man.
-    Normalised and case-folded, never transliterated across scripts: two
-    spellings of one name in two alphabets are not safely the same person and
-    are not merged here.
+    Merging spellings is `insider_identity.resolve`'s job and it needs the
+    original to do it, so nothing is decided here.
     """
-    folded = unicodedata.normalize("NFKC", name or "").casefold()
-    return " ".join(folded.split())
+    return " ".join((name or "").split())
 
 
-def main() -> int:
+def week_of(date: str) -> str:
+    """The Sunday that opens this date's trading week.
+
+    The EGX week runs Sunday to Thursday, so a Monday-anchored week would cut
+    every one of them in half and put a Sunday's filings in with the week
+    before.
+    """
+    day = dt.date.fromisoformat(date)
+    return (day - dt.timedelta(days=(day.weekday() + 1) % 7)).isoformat()
+
+
+_MONTHS_EN = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+_MONTHS_AR = ("يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+              "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر")
+
+
+def week_label(start: str, end: str, months) -> str:
+    a = dt.date.fromisoformat(start)
+    b = dt.date.fromisoformat(end)
+    if a.month == b.month:
+        return f"{a.day}–{b.day} {months[b.month - 1]}"
+    return f"{a.day} {months[a.month - 1]} – {b.day} {months[b.month - 1]}"
+
+
+def _dedupe(trades):
+    """One executed trade, however many times the exchange filed it.
+
+    Two of the readings are the same trade under two filing numbers — same
+    holder, company, session, share count, price and both stake figures. Left
+    in, they double the holder's disclosed value and their trade count.
+    """
+    seen, out = set(), []
+    for t in trades:
+        mark = (t["ticker"], t["date"], t["shares"], t["price"],
+                t["stakeBefore"], t["stakeAfter"], t["action"])
+        if mark in seen:
+            continue
+        seen.add(mark)
+        out.append(t)
+    return out
+
+
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
                     help="build it and report, but write nothing")
-    args = ap.parse_args()
+    args = ap.parse_args(argv)
     if not STORE.exists():
         print("no named-insider store yet — run build_named_insiders.py")
         return 0
@@ -94,9 +140,31 @@ def main() -> int:
             "source": r.get("source"),
         })
 
+    # One holder per party, not one per spelling. Two filings that name the
+    # same person differently are two nodes on the map and two rows in the
+    # list, and their stakes read as separate holdings — `شركة اموال العربيه
+    # للاقطان` and `شركه ...`, one letter apart, made KABO look 82% disclosed
+    # when one firm holds 41% of it.
+    filed = [{"id": k, "nameEn": p.get("nameEn"), "trades": p["trades"]}
+             for k, p in people.items()]
+    groups = insider_identity.resolve(filed)
+
     rows = []
-    for k, p in people.items():
-        trades = sorted(p["trades"], key=lambda t: (t["date"] or "", t["filingId"] or ""))
+    for group in groups:
+        trades = _dedupe(sorted(
+            [t for member in group for t in member["trades"]],
+            key=lambda t: (t["date"] or "", str(t["filingId"] or ""))))
+        # The name as most recently filed, and the fullest rendering when two
+        # forms of one session disagree. Every spelling is kept beside it: the
+        # reader who searches the name they saw on the exchange's site has to
+        # find this row.
+        variants = sorted(
+            group,
+            key=lambda m: (max((t["date"] or "") for t in m["trades"]),
+                           len(m["id"].split())),
+            reverse=True)
+        head = variants[0]
+        source = people[head["id"]]
         paired = [t for t in trades if t["stakeBefore"] is not None and t["stakeAfter"] is not None]
         tickers = sorted({t["ticker"] for t in trades if t["ticker"]})
         # A stake is a percentage OF ONE COMPANY. Summing across companies
@@ -111,8 +179,14 @@ def main() -> int:
                 "change": round(paired[-1]["stakeAfter"] - paired[0]["stakeBefore"], 4),
             }
         rows.append({
-            "id": k,
-            "name": p["name"], "nameEn": p.get("nameEn"), "script": p.get("script"),
+            "id": head["id"],
+            "name": source["name"], "nameEn": head.get("nameEn"),
+            "script": source.get("script"),
+            # A person or a firm, read off the name. The map draws them
+            # differently because "who owns the exchange" is a different
+            # question when the answer is a fund.
+            "kind": "firm" if insider_identity.is_firm(head["id"], head.get("nameEn")) else "person",
+            "aliases": sorted(m["id"] for m in group if m["id"] != head["id"]) or None,
             "tickers": tickers,
             "tradeCount": len(trades),
             "boughtCount": sum(1 for t in trades if t["action"] == "buy"),
@@ -124,32 +198,79 @@ def main() -> int:
     rows.sort(key=lambda r: (
         -abs((r["singleCompanyMove"] or {}).get("change") or 0), -r["tradeCount"]))
 
-    # The market-wide series: one point per session that actually has readings.
-    by_day = collections.defaultdict(lambda: {"buys": 0, "sells": 0, "value": 0.0,
-                                              "stakeAdded": 0.0, "stakeShed": 0.0})
+    # ── where every disclosed stake stands now ───────────────────────────────
+    #
+    # The closing percentage of the most recent form filed on that company —
+    # a level the document prints, not a running total of movements. A holding
+    # read down to zero stays in the list at zero: "sold out" and "never held"
+    # are different facts and the second one is not ours to claim.
+    positions = []
+    for r in rows:
+        by_ticker = collections.defaultdict(list)
+        for t in r["trades"]:
+            if t["ticker"] and t["stakeAfter"] is not None:
+                by_ticker[t["ticker"]].append(t)
+        for ticker, hist in sorted(by_ticker.items()):
+            hist.sort(key=lambda t: (t["date"] or "", str(t["filingId"] or "")))
+            last = hist[-1]
+            positions.append({
+                "holder": r["id"],
+                "kind": r["kind"],
+                "ticker": ticker,
+                "percent": last["stakeAfter"],
+                "asOf": last["date"],
+                "filingId": last["filingId"],
+                "source": last["source"],
+                "openedAt": hist[0]["date"],
+                "openingPercent": hist[0]["stakeBefore"],
+                "history": [{"date": t["date"], "percent": t["stakeAfter"]} for t in hist],
+            })
+    positions.sort(key=lambda p: (-(p["percent"] or 0), p["ticker"]))
+
+    # ── what moved, a trading week at a time ─────────────────────────────────
+    #
+    # Weeks rather than months because the readings are not spread evenly: by
+    # month this is 1 filing, then 88, then 18, and a period selector whose
+    # first stop holds a single form is a broken picture rather than a true
+    # one. A week holds between one and thirty.
+    weeks = collections.defaultdict(lambda: {
+        "buys": 0, "sells": 0, "value": 0.0, "sessions": set(),
+        "moves": collections.OrderedDict()})
     for r in rows:
         for t in r["trades"]:
-            if not t["date"]:
+            if not t["date"] or not t["ticker"]:
                 continue
-            d = by_day[t["date"]]
-            d["buys" if t["action"] == "buy" else "sells"] += 1
-            d["value"] += t["value"] or 0
-            if t["stakeBefore"] is not None and t["stakeAfter"] is not None:
-                delta = t["stakeAfter"] - t["stakeBefore"]
-                if delta >= 0:
-                    d["stakeAdded"] += delta
-                else:
-                    d["stakeShed"] += -delta
-    timeline = [{
-        "date": day,
-        "buys": v["buys"], "sells": v["sells"],
-        "value": round(v["value"], 2),
-        # Percentage points of company ownership changing hands that session,
-        # summed across DIFFERENT companies. A count of how much moved, not a
-        # stake in anything — the label on screen has to say so.
-        "stakePointsAdded": round(v["stakeAdded"], 4),
-        "stakePointsShed": round(v["stakeShed"], 4),
-    } for day, v in sorted(by_day.items())]
+            w = weeks[week_of(t["date"])]
+            w["buys" if t["action"] == "buy" else "sells"] += 1
+            w["value"] += t["value"] or 0
+            w["sessions"].add(t["date"])
+            mv = w["moves"].setdefault((r["id"], t["ticker"]), {
+                "holder": r["id"], "kind": r["kind"], "ticker": t["ticker"],
+                "from": t["stakeBefore"], "to": None, "trades": 0, "value": 0.0,
+            })
+            mv["trades"] += 1
+            mv["value"] += t["value"] or 0
+            if t["stakeAfter"] is not None:
+                mv["to"] = t["stakeAfter"]
+    periods = []
+    for start, w in sorted(weeks.items()):
+        moves = []
+        for mv in w["moves"].values():
+            change = (None if mv["from"] is None or mv["to"] is None
+                      else round(mv["to"] - mv["from"], 4))
+            moves.append({**mv, "value": round(mv["value"], 2), "change": change})
+        moves.sort(key=lambda m: -abs(m["change"] or 0))
+        end = max(w["sessions"])
+        periods.append({
+            "start": start,
+            "end": end,
+            "label": week_label(start, end, _MONTHS_EN),
+            "labelAr": week_label(start, end, _MONTHS_AR),
+            "sessions": len(w["sessions"]),
+            "buys": w["buys"], "sells": w["sells"],
+            "value": round(w["value"], 2),
+            "moves": moves,
+        })
 
     doc = {
         "schemaVersion": 1,
@@ -164,11 +285,18 @@ def main() -> int:
         "peopleCount": len(rows),
         "tradeCount": sum(r["tradeCount"] for r in rows),
         "tickerCount": len({t for r in rows for t in r["tickers"]}),
+        "firmCount": sum(1 for r in rows if r["kind"] == "firm"),
+        "personCount": sum(1 for r in rows if r["kind"] == "person"),
+        "aliasCount": sum(len(r["aliases"] or ()) for r in rows),
         "people": rows,
-        "timeline": timeline,
+        "positions": positions,
+        "periods": periods,
     }
-    print(f"   {len(rows)} people, {doc['tradeCount']} trades, "
-          f"{doc['tickerCount']} companies, {len(timeline)} sessions")
+    live = [p for p in positions if (p["percent"] or 0) > 0]
+    print(f"   {len(rows)} holders ({doc['personCount']} people, "
+          f"{doc['firmCount']} firms, {doc['aliasCount']} spellings merged), "
+          f"{doc['tradeCount']} trades, {doc['tickerCount']} companies")
+    print(f"   {len(live)} standing stakes, {len(periods)} trading weeks")
     if args.check:
         # Everything above ran; only the write is skipped. A dry run that
         # skipped the work would report a health it never tested.
@@ -178,7 +306,7 @@ def main() -> int:
     OUT.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     if FIXTURE.parent.exists():
         FIXTURE.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"   wrote {OUT.relative_to(REPO)}")
+    print(f"   wrote {OUT if REPO not in OUT.parents else OUT.relative_to(REPO)}")
     return 0
 
 
