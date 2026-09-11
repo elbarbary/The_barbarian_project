@@ -300,7 +300,7 @@ const CHALLENGED = new Set([
  * can.
  */
 const DISPOSABLE = new Set([
-  'uberip.com', 'bowlfuel.com',
+  'uberip.com', 'bowlfuel.com', 'necub.com',
   'mailinator.com', 'guerrillamail.com', 'sharklasers.com', 'grr.la',
   'guerrillamail.net', 'guerrillamail.org', 'guerrillamail.biz', 'guerrillamailblock.com',
   '10minutemail.com', 'tempmail.com', 'temp-mail.org', 'yopmail.com',

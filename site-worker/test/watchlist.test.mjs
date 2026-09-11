@@ -1026,6 +1026,7 @@ test('a throwaway address cannot open an account', async () => {
   // The one that actually signed up, and the shapes around it.
   assert.equal(disposable('esthmrexplore1788699119@uberip.com'), 'uberip.com');
   assert.equal(disposable('xebekev311@bowlfuel.com'), 'bowlfuel.com');
+  assert.equal(disposable('kestiterzu@necub.com'), 'necub.com');
   assert.equal(disposable('x@MAILINATOR.COM'), 'mailinator.com', 'case must not be a bypass');
   assert.equal(disposable('x@mail.mailinator.com'), 'mailinator.com',
     'a subdomain is the same service');
