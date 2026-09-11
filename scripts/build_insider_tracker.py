@@ -21,6 +21,9 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
+
+import build_named_insiders as named_insiders
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 COMPANIES_FILE = REPO / "public" / "data" / "v1" / "companies.json"
@@ -201,6 +204,74 @@ def resolve_ticker(co_raw: str, alias_map: dict[str, str]) -> str | None:
         if len(a_k) > 4 and (a_k in key or key in a_k):
             return a_tick
     return None
+
+
+LEDGER = REPO / "data-source" / "official" / "ownership" / "ownership-ledger.json"
+# The exchange answers a steady trickle and resets a burst.
+PAUSE_SECONDS = 2.0
+STOP_AFTER = 8
+
+
+def fetch_bulletins(limit: int = 0) -> int:
+    """Download the session bulletins this machine has never opened.
+
+    Every row on the tracker that says which way a trade went — the direction,
+    the share count, whether it was an insider or a major holder — is read out
+    of one document a session: the exchange's insider-dealings bulletin, pulled
+    through `pdftotext`. Nothing was fetching them. Fourteen had been
+    downloaded by hand and the other two hundred and sixteen sat in the ledger
+    as documents we knew existed and had never opened, so every filing after 19
+    August reached the screen present and silent about what it said.
+
+    Newest first, so a run that is cut short leaves the most recent sessions
+    read rather than the oldest.
+    """
+    if not LEDGER.exists():
+        print("no ownership ledger yet — run ownership_ledger.py", file=sys.stderr)
+        return 0
+    ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    documents = ledger.get("documents") or []
+    if isinstance(documents, dict):
+        documents = list(documents.values())
+    bulletins = [d for d in documents if d.get("kind") == "daily_insider_summary"]
+    bulletins.sort(key=lambda d: d.get("publishedAt") or "", reverse=True)
+
+    PDF_DIR.mkdir(parents=True, exist_ok=True)
+    held = {n.name for n in PDF_DIR.glob("egx-*.pdf")}
+    got = misses = 0
+    for doc in bulletins:
+        filing = str(doc.get("filingId") or "")
+        if not filing or any(n.startswith(f"egx-{filing}-") for n in held):
+            continue
+        # The `_101` attachment is the Latin-headed table `pdftotext -layout`
+        # can be read from; `_1` is the Arabic rendering of the same session.
+        urls = [u for u in (doc.get("attachments") or []) if u.endswith("_101.pdf")]
+        if not urls:
+            continue
+        target = PDF_DIR / f"egx-{filing}-{urls[0].rsplit('/', 1)[-1]}"
+        if named_insiders.fetch_pdf(urls[0], target):
+            held.add(target.name)
+            got, misses = got + 1, 0
+            print(f"   {filing} {(doc.get('publishedAt') or '')[:10]}: bulletin fetched",
+                  file=sys.stderr)
+        else:
+            # A refused fetch writes the challenge page it was served. Left
+            # there, the slot reads as filled and the bulletin is never asked
+            # for again — while `pdftotext` quietly fails on it every build.
+            if target.exists() and target.read_bytes()[:4] != b"%PDF":
+                target.unlink()
+            misses += 1
+            if misses >= STOP_AFTER:
+                print(f"   the exchange stopped answering after {got} — "
+                      f"leaving the rest for the next run", file=sys.stderr)
+                break
+        if limit and got >= limit:
+            break
+        # A burst of fifty-odd is what turns a served document into a
+        # connection reset. One at a time, with a breath between.
+        time.sleep(PAUSE_SECONDS)
+    print(f"   fetched {got} session bulletins", file=sys.stderr)
+    return got
 
 
 def parse_bulletin_pdfs(alias_map: dict[str, str], by_ticker: dict[str, dict]) -> list[dict]:
@@ -438,7 +509,14 @@ def parse_latest_disclosures(by_ticker: dict[str, dict], records: list[dict]) ->
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build EGX Insider & Treasury flow dataset")
     parser.add_argument("--check", action="store_true", help="Validate without writing files")
+    parser.add_argument("--fetch", nargs="?", type=int, const=0, default=None,
+                        metavar="N",
+                        help="download session bulletins this machine has not "
+                             "read yet (all of them, or the newest N)")
     args = parser.parse_args()
+
+    if args.fetch is not None:
+        fetch_bulletins(args.fetch)
 
     by_ticker, alias_map = load_company_directory()
     bulletin_records = parse_bulletin_pdfs(alias_map, by_ticker)
