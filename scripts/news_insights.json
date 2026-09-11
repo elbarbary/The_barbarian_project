@@ -2147,6 +2147,10 @@
     "meaning": "The state introduces 25,000 public residential units under fixed lease and rent-to-own models, providing long-term occupancy contracts without immediate full capital outlays by tenants.",
     "meaning_ar": "طرح 25 ألف وحدة سكنية حكومية بنظامي الإيجار العادي والإيجار المنتهي بالتملك، وهو ما يتيح عقود إشغال طويلة الأجل دون سداد كامل القيمة الرأسمالية للوحدة مقدماً."
   },
+  "بروتوكول بين هييه الانفاق و”ايركايرو” لخدمه الخط الاول للقطار الكهربايي السريع": {
+    "meaning": "The protocol establishes an operational coordination framework between air and high-speed rail transport, linking Air Cairo flight bookings with ground connectivity along the first line of the electric rail network.",
+    "meaning_ar": "يحدد البروتوكول إطاراً للتنسيق التشغيلي والربط البيني بين النقل الجوي والسككي، حيث يربط حجوزات رحلات شركة 'إير كايرو' بالانتقال البري عبر الخط الأول لشبكة القطار الكهربائي السريع."
+  },
   "بروتوكول تعاون بين Cairo ICT 2026 و«فوربس الشرق الاوسط» لرعايه الدوره 30 من المعرض": {
     "meaning": "This media partnership agreement establishes Forbes Middle East as the official sponsor and promotional partner for the 30th edition of the Cairo ICT exhibition, integrating international publishing and media coverage into the event's marketing operations.",
     "meaning_ar": "يمثل هذا الاتفاق شراكة إعلامية تصبح بموجبها «فوربس الشرق الأوسط» راعياً رسمياً وشريكاً ترويجياً للدورة الثلاثين لمعرض Cairo ICT، مما يدمج خدمات النشر والتغطية الإعلامية الدولية ضمن العمليات التسويقية للحدث."
@@ -3244,6 +3248,10 @@
   "شراكات استراتيجيه بين مصر للطيران للخدمات الجويه وشركات وطنيه لتطوير خدمات القطاع": {
     "meaning": "These strategic partnerships integrate domestic suppliers into EgyptAir In-Flight Services' operational supply chain for airline catering and ground logistics, replacing imported inputs with locally sourced catering inventory and technical service agreements.",
     "meaning_ar": "تدمج هذه الشراكات الاستراتيجية الموردين المحليين ضمن سلسلة التوريد التشغيلية لشركة مصر للطيران للخدمات الجوية، حيث تستبدل المدخلات المستوردة بمخزون تموين وتعاقدات خدمات فنية محلية الصنع."
+  },
+  "شراكات استراتيجيه بين مصر للطيران وكيانات وطنيه لتطوير خدمات القطاع": {
+    "meaning": "These strategic partnerships integrate service provision, ground handling, or operational logistics between EgyptAir and domestic entities under joint contractual frameworks. The mechanism coordinates resource sharing and local procurement across state-linked aviation and tourism supply chains.",
+    "meaning_ar": "تدمج هذه الشراكات الاستراتيجية تقديم الخدمات أو المناولة الأرضية أو الخدمات اللوجستية التشغيلية بين مصر للطيران وكيانات محلية بموجب أطر تعاقدية مشتركة، وتعمل الآلية على تنسيق تقاسم الموارد وسلاسل التوريد المحلية ضمن قطاعي الطيران والسياحة."
   },
   "شراكه بين «شل للزيوت» و«طاقه للبترول» لتوسيع انتشار منتجاتها في مصر": {
     "meaning": "This commercial distribution agreement utilizes Taqa Petroleum's retail station network and logistics infrastructure to supply and market Shell-branded lubricants across the Egyptian domestic market.",
