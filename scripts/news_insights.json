@@ -547,6 +547,10 @@
     "meaning": "The fast track is an administrative framework that expedites regulatory approvals, licensing, utility connections, and land allocation procedures for enterprises operating within designated industrial clusters.",
     "meaning_ar": "يُعد «المسار السريع» آلية إدارية تعمل على تسريع إجراءات إصدار التراخيص والموافقات الحكومية وتخصيص الأراضي وتوصيل المرافق للمنشآت العاملة داخل التجمعات الصناعية المحددة."
   },
+  "«الرقابه الماليه» تشكل لجنه لاعداد نموذج موحد للنظام الاساسي لمجمعات التامين": {
+    "meaning": "The Financial Regulatory Authority establishes a standardized operational and governance framework for insurance pools across the sector. This aligns administrative guidelines, risk-sharing structures, and compliance standards across participating underwriters.",
+    "meaning_ar": "تضع الهيئة العامة للرقابة المالية إطاراً تشغيلياً وحوكمياً موحداً لمجمعات التأمين في القطاع، مما يوحد القواعد الإدارية، وهياكل توزيع المخاطر، ومعايير الامتثال بين الشركات المشاركة."
+  },
   "«الرقابه الماليه» تصدر اول دليل شامل لقواعد وضوابط التمويل الاستهلاكي": {
     "meaning": "The Financial Regulatory Authority consolidates operational standards, consumer protection mandates, and credit assessment criteria for non-bank consumer finance providers into a unified regulatory framework.",
     "meaning_ar": "توحد الهيئة العامة للرقابة المالية المعايير التشغيلية وضوابط حماية المستهلك والتقييم الائتماني لمقدمي التمويل الاستهلاكي غير المصرفي ضمن إطار تنظيمي موحد."
@@ -1030,6 +1034,10 @@
   "اسعار الفراخ في بورصه الدواجن اليوم الثلاثاء 8-9-2026": {
     "meaning": "Daily poultry exchange quotations reflect wholesale spot prices determined by real-time farm-gate supply volumes and operational feed input costs across the livestock supply chain.",
     "meaning_ar": "تعكس أسعار بورصة الدواجن اليومية أسعار التداول الفورية للبيع بالجملة، والتي تتحدد بناءً على حجم المعروض من المزارع وتكاليف مدخلات الأعلاف والتشغيل في قطاع الثروة الداجنة."
+  },
+  "اسعار الفراخ في بورصه الدواجن اليوم الجمعه 11-9-2026": {
+    "meaning": "Poultry exchange price bulletins reflect the daily clearing prices set by wholesale farm-gate transactions based on prevailing feed input costs and live-bird supply volumes.",
+    "meaning_ar": "تعكس نشرات أسعار بورصة الدواجن أسعار التداول اليومية في المزارع للبيع بالجملة بناءً على تكاليف الأعلاف وحجم المعروض الحالي من الدواجن الحية."
   },
   "اسعار الفراخ في بورصه الدواجن اليوم الجمعه 4-9-2026": {
     "meaning": "This headline reflects daily pricing updates in the local poultry exchange, which directly affect operating revenue and profit margins for agribusiness and poultry producers based on prevailing feed costs and supply-demand dynamics.",
@@ -3205,6 +3213,10 @@
     "meaning": "A reduction in crude oil consumption by major refiners directly decreases refinery processing throughput and lowers total import intake across global energy supply chains.",
     "meaning_ar": "يؤدي انخفاض استهلاك النفط الخام لدى شركات التكرير الكبرى إلى خفض معدلات التشغيل وتقليص أحجام الواردات عبر سلاسل إمداد الطاقة العالمية."
   },
+  "شراكات استراتيجيه بين مصر للطيران للخدمات الجويه وشركات وطنيه لتطوير خدمات القطاع": {
+    "meaning": "These strategic partnerships integrate domestic suppliers into EgyptAir In-Flight Services' operational supply chain for airline catering and ground logistics, replacing imported inputs with locally sourced catering inventory and technical service agreements.",
+    "meaning_ar": "تدمج هذه الشراكات الاستراتيجية الموردين المحليين ضمن سلسلة التوريد التشغيلية لشركة مصر للطيران للخدمات الجوية، حيث تستبدل المدخلات المستوردة بمخزون تموين وتعاقدات خدمات فنية محلية الصنع."
+  },
   "شراكه بين «شل للزيوت» و«طاقه للبترول» لتوسيع انتشار منتجاتها في مصر": {
     "meaning": "This commercial distribution agreement utilizes Taqa Petroleum's retail station network and logistics infrastructure to supply and market Shell-branded lubricants across the Egyptian domestic market.",
     "meaning_ar": "تعتمد هذه الشراكة التجارية على شبكة محطات الوقود والبنية التحتية اللوجستية التابعة لشركة «طاقة للبترول» لتوزيع وطرح زيوت «شل» في السوق المحلي المصري."
@@ -3452,6 +3464,11 @@
   "فرنسا تحظر استيراد جميع منتجات المستوطنات الاسراييليه في الضفه الغربيه": {
     "meaning": "This measure restricts market access for goods originating from West Bank settlements by halting customs clearance and commercial distribution within the French market.",
     "meaning_ar": "يقيد هذا الإجراء النفاذ إلى الأسواق للبضائع القادمة من مستوطنات الضفة الغربية عن طريق وقف التخليص الجمركي والتوزيع التجاري لها داخل السوق الفرنسية."
+  },
+  "فرنسا تخفض توقعات النمو خلال 2026 الي 0.5%": {
+    "meaning": "",
+    "meaning_ar": "",
+    "refused": 1
   },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
