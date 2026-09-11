@@ -871,6 +871,10 @@
     "meaning": "Egg prices reflect daily supply-and-demand balances in the poultry sector, shaped by feed production costs, farm-gate pricing, and distribution logistics across local wholesale and retail markets.",
     "meaning_ar": "تعكس أسعار البيض التوازن اليومي بين العرض والطلب في قطاع الدواجن، وتتحدد بناءً على تكاليف الأعلاف، وأسعار تسليم المزارع، وتكاليف النقل والتوزيع في أسواق الجملة والتجزئة."
   },
+  "اسعار البيض اليوم الجمعه 11-9-2026 في مصر": {
+    "meaning": "Egg prices in Egypt reflect daily spot transactions influenced by operational poultry feed costs and domestic farm-gate supply levels.",
+    "meaning_ar": "تعكس أسعار البيض في مصر المعاملات الفورية اليومية المتأثرة بتكاليف الأعلاف التشغيلية ومستويات المعروض المحلي من المزارع."
+  },
   "اسعار البيض اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily egg price updates track spot clearing levels across farms and retail channels, reflecting current feed input costs and market supply balances within the domestic food commodities sector.",
     "meaning_ar": "تعكس نشرات أسعار البيض اليومية مستويات التداول الفورية في المزارع ومنافذ التجزئة، بناءً على تكاليف مدخلات الأعلاف وحجم المعروض المتاح في قطاع السلع الغذائية المحلي."
@@ -1310,6 +1314,10 @@
   "البورصه السلعيه تبيع 1000 طن «قمح ديورم» في اول جلسه تداول": {
     "meaning": "The Egyptian Mercantile Exchange (EGYCOMEX) activates spot trading for durum wheat, executing transactions between state suppliers and registered private sector mills through an electronic auction system.",
     "meaning_ar": "تُدرج البورصة المصرية للسلع قمح الديورم ضمن منصتها للتداول الإلكتروني، حيث تُنفذ عمليات التداول الفوري بين الموردين والمطاحن المسجلة عبر منظومة المزايدة المباشرة."
+  },
+  "البورصه المصريه تبحث مع 17 شركه ناشيه فرص التمويل عبر سوق المال": {
+    "meaning": "The Egyptian Exchange engages private startup firms through introductory sessions on listing requirements, direct equity offerings, and small-to-medium enterprise market mechanisms as capital-raising alternatives to venture capital debt and equity financing.",
+    "meaning_ar": "تعقد البورصة المصرية جلسات مع شركات ناشئة خاصة لاستعراض متطلبات القيد، وآليات طرح الأسهم، وقنوات سوق المشروعات الصغيرة والمتوسطة كبدائل لتمويل رؤوس الأموال عبر حقوق الملكية والديون غير المصرفية."
   },
   "البورصه المصريه تختتم تعاملات الاربعاء علي تباين في الموشرات": {
     "meaning": "Divergence across market indices reflects split trading dynamics, where capital flows into large-cap constituents of the main benchmark while small and mid-cap equities move inversely, or vice versa, based on differing liquidity allocation across segments.",
@@ -2138,6 +2146,10 @@
   "بروتوكول تعاون بين النقل والطيران لربط رحلات ايركايرو بالقطار الكهربايي السريع": {
     "meaning": "The protocol establishes an intermodal transport integration system between Air Cairo flights and the high-speed electric rail network through unified ticketing and synchronized transit scheduling.",
     "meaning_ar": "يؤسس البروتوكول منظومة ربط للنقل متعدد الوسائط بين رحلات شركة إير كايرو وشبكة القطار الكهربائي السريع عبر إصدار تذاكر موحدة وجدولة حركة الترانزيت."
+  },
+  "بروتوكول تعاون بين مصر للطيران للخدمات الجويه وEAS لتطوير فندق الترانزيت بمطار القاهره": {
+    "meaning": "The protocol establishes an operational partnership between EgyptAir In-Flight Services and Egyptian Aviation Services (EAS) to upgrade and manage transit hotel infrastructure at Cairo International Airport.",
+    "meaning_ar": "يحدد البروتوكول شراكة تشغيلية بين شركة مصر للطيران للخدمات الجوية والشركة المصرية لخدمات الطيران (EAS) لتطوير وإدارة البنية التحتية لفندق الترانزيت في مطار القاهرة الدولي."
   },
   "بريطانيا تحذر من تلاعب الذكاء الاصطناعي بسوق الكهرباء": {
     "meaning": "Automated algorithmic trading systems using artificial intelligence in wholesale electricity markets execute high-frequency bidding strategies, which triggers regulatory scrutiny over pricing mechanisms and physical capacity withholding.",
@@ -3116,6 +3128,10 @@
     "meaning": "Egg carton retail pricing reflects daily supply-and-demand balances, direct farm-gate production costs such as poultry feed, and wholesale-to-retail transport margins in the domestic market.",
     "meaning_ar": "يعكس سعر كرتونة البيض للمستهلك التوازن اليومي بين العرض والطلب، وتكاليف الإنتاج في المزارع مثل أسعار الأعلاف، بالإضافة إلى هوامش النقل والتوزيع من أسواق الجملة إلى التجزئة."
   },
+  "سعر كرتونه البيض اليوم 11/9/2026 للمستهلك في السوق المحليه": {
+    "meaning": "Egg retail pricing reflects direct input costs, primarily feed and transportation, as poultry supply chain operators transfer wholesale farm-gate rates to consumer distribution networks.",
+    "meaning_ar": "تعكس أسعار بيع البيض للمستهلك التكاليف المباشرة لمدخلات الإنتاج، وبخاصة الأعلاف والنقل، حيث تنقل سلاسل إمداد الدواجن أسعار المزرعة إلى شبكات التوزيع والتجزئة."
+  },
   "سعر كرتونه البيض اليوم 4/9/2026 للمستهلك في السوق المحليه": {
     "meaning": "This reflects the daily domestic retail pricing updates for table eggs, driven by poultry feed supply costs, farm-gate production expenses, and local consumer demand dynamics.",
     "meaning_ar": "يعكس هذا تحديثات أسعار التجزئة اليومية لبيض المائدة في السوق المحلي، والتي تتحدد بناءً على تكاليف الأعلاف ومصروفات الإنتاج في المزارع ومستويات الطلب الاستهلاكي."
@@ -3466,9 +3482,8 @@
     "meaning_ar": "يقيد هذا الإجراء النفاذ إلى الأسواق للبضائع القادمة من مستوطنات الضفة الغربية عن طريق وقف التخليص الجمركي والتوزيع التجاري لها داخل السوق الفرنسية."
   },
   "فرنسا تخفض توقعات النمو خلال 2026 الي 0.5%": {
-    "meaning": "",
-    "meaning_ar": "",
-    "refused": 1
+    "meaning": "Lower official GDP growth projections establish a reduced baseline for national economic expansion and domestic consumption, directly recalibrating sovereign budget planning models and bilateral trade demand metrics.",
+    "meaning_ar": "يحدد خفض التقديرات الرسمية لنمو الناتج المحلي الإجمالي خط أساس أدنى للتوسع الاقتصادي والاستهلاك الداخلي، مما يعيد ضبط نماذج الموازنة العامة ومعايير الطلب التجاري الثنائي."
   },
   "فشل انعقاد عموميه “ابن سينا” لعدم اكتمال النصاب القانوني": {
     "meaning": "The postponement of Ibnsina Pharma's general assembly due to a lack of legal quorum delays formal shareholder voting and corporate approvals on scheduled agenda items, such as dividend distributions, financial statements, or board elections, until a second meeting is convened pursuant to regulatory requirements.",
@@ -4493,6 +4508,10 @@
   "“التخطيط”: تسويه تشابكات ماليه حكوميه بقيمه 298 مليار جنيه خلال اشهر": {
     "meaning": "Resolving cross-governmental financial entanglements functions as an off-market clearing mechanism that nets out reciprocal debts and claims across state-owned entities, utility providers, and the treasury. This operational settlement restructures inter-agency balance sheets and updates institutional accounting positions without requiring direct cash outlays from public budgets.",
     "meaning_ar": "تعمل تسوية التشابكات المالية الحكومية كآلية مقاصة داخلية تجري تسوية للديون والمستحقات المتبادلة بين الهيئات الاقتصادية والشركات العامة والخزانة العامة. وتعدل هذه الإجراءات قيود الميزانيات العمومية للجهات المعنية وتحدث مراكزها المحاسبية دون الحاجة إلى تدفقات نقدية فورية من الموازنة العامة."
+  },
+  "“الخارجيه الصينيه”: بكين مستعده للعمل مع جميع الشركاء في “بريكس”": {
+    "meaning": "BRICS multilateral coordination encompasses bilateral currency settlement mechanisms, institutional development financing via the New Development Bank, and supply chain integration among member states.",
+    "meaning_ar": "يتضمن التنسيق متعدد الأطراف في مجموعة \"بريكس\" آليات للتسوية بالعملات المحلية، وتمويل التنمية عبر بنك التنمية الجديد، وتكاملاً في سلاسل الإمداد بين الدول الأعضاء."
   },
   "“الدلتا للتامين” تربح 302.1 مليون جنيه في النصف الاول": {
     "meaning": "Delta Insurance records a net profit of EGP 302.1 million for the first half of the fiscal period, reflecting the net operational surplus from underwriting activities combined with returns generated on its invested portfolio.",
