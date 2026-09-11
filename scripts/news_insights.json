@@ -779,6 +779,10 @@
     "meaning": "Initial trading shows a net inflow of liquidity across listed equities, leading to price gains in constituents across the main benchmark EGX 30 and broader market indices.",
     "meaning_ar": "تعكس بداية الجلسة تدفقات نقدية شرائية على الأسهم المقيدة، مما يؤدي إلى تحركات سعرية صاعدة في مكونات مؤشر إيجي إكس 30 والمؤشرات العامة للسوق."
   },
+  "ارتفاع حاد في تكاليف الاقتراض طويل الاجل بالولايات المتحده": {
+    "meaning": "Higher long-term U.S. borrowing costs raise global discount rates and expand sovereign debt yields across emerging markets, increasing capital costs for dollar-denominated refinancing and corporate debt issuances.",
+    "meaning_ar": "يؤدي ارتفاع تكاليف الاقتراض طويل الأجل في الولايات المتحدة إلى رفع معدلات الخصم العالمية وعائدات الديون السيادية في الأسواق الناشئة، مما يرفع تكلفة رأس المال لإعادة التمويل وإصدارات سندات الشركات المقومة بالدولار."
+  },
   "ارتفاع سهم “فولكس فاجن” 9% عقب اتفاق لاعاده الهيكله": {
     "meaning": "The share price gain reflects market absorption of a corporate restructuring agreement, which typically involves operational cost reductions, capacity realignment, and capital reallocation to improve operational efficiency.",
     "meaning_ar": "يعكس ارتفاع السهم استجابة السوق لاتفاق إعادة الهيكلة، والذي يتضمن عادةً خفض التكاليف التشغيلية وإعادة تنظيم الطاقات الإنتاجية وتوجيه رأس المال لتحسين الكفاءة التشغيلية للشركة."
@@ -1058,6 +1062,10 @@
   "اسعار اللحوم الجملي والضاني والبقري والمفروم اليوم الجمعه 4-9-2026": {
     "meaning": "Daily tracking of retail meat prices reflects underlying shifts in livestock supply chains, feed costs, and domestic consumer demand patterns affecting the broader food and protein sector.",
     "meaning_ar": "تعكس المتابعة اليومية لأسعار اللحوم بالتجزئة التغيرات في سلاسل إمداد الثروة الحيوانية وتكاليف الأعلاف ومستويات الطلب الاستهلاكي المحلي المؤثرة على قطاع الصناعات الغذائية والبروتينية."
+  },
+  "اسعار اللحوم الحمراء البلديه والمستورده والجمليه اليوم الجمعه 11-9-2026": {
+    "meaning": "Daily price listings for red meat track wholesale and retail input costs, reflecting domestic livestock production expenses and import-driven supply dynamics across the food retail sector.",
+    "meaning_ar": "ترصد القوائم اليومية لأسعار اللحوم الحمراء تكاليف مدخلات الجملة والتجزئة، وتوضح تكاليف الإنتاج الحيواني المحلي وحركة الإمدادات المستوردة في قطاع تجارة السلع الغذائية."
   },
   "اسعار اللحوم المشفيه البلديه والمستورده اليوم الخميس 10-9-2026": {
     "meaning": "Daily price listings for domestic and imported boneless meat reflect prevailing wholesale supply contracts, import parity costs, and local livestock feed expenses across retail distribution channels.",
