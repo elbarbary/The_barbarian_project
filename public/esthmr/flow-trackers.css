@@ -679,6 +679,10 @@ button.om-holder-row:hover span { color: var(--accent); }
 .om-key::before { content: ''; width: 13px; height: 13px; margin-top: 2px;
   border-radius: 50%; }
 .om-key-ring::before { border: 3px solid var(--own3); }
+.om-lake-name { pointer-events: none; }
+.om-lake-name text { paint-order: stroke; stroke: var(--surface); stroke-width: 3px;
+  stroke-linejoin: round; }
+.om-bridge-rest { pointer-events: none; }
 .om-key-none::before { border: 3px solid var(--ownNone); }
 .om-key-arc::before { border: 0; border-radius: 0; height: 4px; margin-top: 6px;
   background: linear-gradient(90deg, var(--up) 50%, var(--down) 50%); }

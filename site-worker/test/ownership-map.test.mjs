@@ -284,10 +284,38 @@ test('a holding read down to zero leaves the board', () => {
   assert.deepEqual(OM.standing(doc).map((p) => p.ticker), ['BBB']);
 });
 
-test('no curve is drawn until a holder is asked about', () => {
-  // Drawn for every multi-company holder at rest they were a texture, not a
-  // fact: a hundred and nineteen curves across twenty-five sector cells.
-  assert.equal(nodesWithClass(draw().svg, 'om-bridge').length, 0);
+test('the market\u2019s cross-holdings are drawn at rest, faintly', () => {
+  const rest = nodesWithClass(draw().svg, 'om-bridge-rest');
+  assert.equal(rest.length, 2, 'two holders in two companies each');
+  assert.ok(rest.every((l) => Number(l.attrs.opacity) < 0.5),
+            'at rest a line is context, not an answer');
+  assert.ok(rest.every((l) => Number(l.attrs['stroke-width']) < 1.2));
+});
+
+test('picking a holder replaces the resting web with that holder\u2019s own lines', () => {
+  const { svg } = draw({ focus: 'one' });
+  assert.equal(nodesWithClass(svg, 'om-bridge-rest').length, 0);
+  const mine = nodesWithClass(svg, 'om-bridge');
+  assert.equal(mine.length, 2);
+  assert.ok(mine.every((l) => Number(l.attrs['stroke-width']) > 1.2));
+});
+
+test('every sector is a lake with its own coastline', () => {
+  const { svg } = draw();
+  const lakes = nodesWithClass(svg, 'om-lake');
+  assert.equal(lakes.length, 3, 'Banks, Real Estate and Food');
+  const shores = lakes.map((g) => g.children.find((c) => c.tag === 'path').attrs.d);
+  assert.equal(new Set(shores).size, 3, 'two sectors share a coastline');
+  shores.forEach((d) => assert.match(d, /^M[\d.]+ [\d.]+C/, 'a shore is not a curve'));
+});
+
+test('a sector\u2019s coastline is the same every time it is drawn', () => {
+  // A random wobble would give the Banks a different shape on every render,
+  // and the whole board is built on nothing moving unless the data moved.
+  const shore = () => nodesWithClass(draw().svg, 'om-lake')
+    .map((g) => g.children.find((c) => c.tag === 'path').attrs.d);
+  assert.deepEqual(shore(), shore());
+  assert.notEqual(OM.seedOf('Banks'), OM.seedOf('Real Estate'));
 });
 
 test('the holder in focus gets a line to each company they hold', () => {
@@ -322,10 +350,35 @@ test('focusing a company fades everything unrelated to it', () => {
   assert.ok(!String(co.attrs.class).includes('om-dim'), 'the focused company was dimmed');
 });
 
-test('focusing a company names its holders on the drawing', () => {
+test('focusing a company seats its holders where they can be read', () => {
+  // Their dots already orbit the ring, so a line between them would be ten
+  // pixels long and say nothing. The seats are out on the water.
   const { svg } = draw({ focus: 'AAA' });
-  assert.equal(nodesWithClass(svg, 'om-pin').length, 1);
-  assert.match(text(nodesWithClass(svg, 'om-pin')[0]), /40\.00%/);
+  const seats = nodesWithClass(svg, 'om-seat');
+  assert.equal(seats.length, 1, 'AAA has one named holder');
+  assert.match(text(seats[0]), /40\.00%/);
+  assert.match(text(seats[0]), /one/);
+});
+
+test('a company shows where its holders are ALSO invested', () => {
+  // "Who is in this company" is half answered until you can see where else
+  // they are. `one` holds AAA and CCC.
+  const { svg } = draw({ focus: 'AAA' });
+  const onward = nodesWithClass(svg, 'om-bridge-onward');
+  assert.equal(onward.length, 1);
+  assert.equal(onward[0].attrs['data-to'], 'CCC');
+});
+
+test('a company whose holder moved this week draws that line as a change', () => {
+  const { svg } = draw({
+    focus: 'AAA',
+    moves: new Map([[OM.keyOf('one', 'AAA'), { holder: 'one', ticker: 'AAA', change: -2.4 }]]),
+  });
+  const inbound = nodesWithClass(svg, 'om-bridge')
+    .filter((l) => l.attrs['data-to'] === 'AAA');
+  assert.equal(inbound.length, 1);
+  assert.equal(inbound[0].attrs.stroke, 'var(--down)');
+  assert.ok(inbound[0].attrs['stroke-dasharray']);
 });
 
 test('nothing is named on the board until something is focused', () => {

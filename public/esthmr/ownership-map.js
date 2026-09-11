@@ -116,6 +116,7 @@ export function layout(rows, view = VIEW) {
 
   const nodes = new Map();
   const placed = [];
+  const lakes = [];
   cells.forEach((cell) => {
     const list = cell.list.slice().sort((a, b) => (b.disclosed - a.disclosed) || (b.cap - a.cap));
     const inner = { x: cell.x, y: cell.y + CELL_LABEL, w: cell.w, h: cell.h - CELL_LABEL };
@@ -134,86 +135,63 @@ export function layout(rows, view = VIEW) {
      * the first, still ordered by disclosed ownership, so a sector of thirty
      * is two rings rather than a crowd.
      */
-    const spread = Math.min(inner.w, inner.h) / 2;
+    // The lake this sector's companies stand around. Elliptical to the cell
+    // it was given, so a wide sector gets a wide lake, with a coastline taken
+    // from its own name.
+    const seed = seedOf(cell.sector);
+    const rx = (inner.w / 2) * 0.74;
+    const ry = (inner.h / 2) * 0.74;
+    const spread = Math.min(rx, ry);
+    lakes.push({ sector: cell.sector, cx, cy, rx, ry, seed, cell });
 
-    /* A sector is a ring of its companies, not a grid of them.
+    /* Companies fill the lake, they do not stand around it.
      *
-     * The grid read as a spreadsheet: "row 2, column 3" says nothing about a
-     * sector. A ring says these belong together and leaves the middle clear —
-     * which is where the sector's name sits and where a spoke can cross
-     * without landing on a company.
-     *
-     * Rings are laid outside-in with a fixed gap, and only ONE company may
-     * stand at the centre. An earlier version dropped everything that did not
-     * fit into a ring of radius zero, which is not a ring: eleven companies
-     * shared a point, and ICMI overlapped KASABF by nine pixels.
+     * A phyllotaxis spiral — the arrangement a sunflower head uses — because
+     * it fills a disc evenly at any count, leaves no ring pattern for the eye
+     * to catch on, and is completely determined by the index. Scaled by the
+     * shore radius at each point's own angle, it fills THIS lake's shape
+     * rather than a circle inscribed in it.
      */
-    const rings = [];
-    let left = list.slice();
-    // Enough rings for everything, spaced evenly. A cell holding a whole
-    // exchange gets many thin rings rather than one impossible circle; the
-    // companies come out small, which is honest about the room they have.
-    const perRing = (r) => Math.max(3, Math.floor((TAU * r) / (R_MIN * 1.7)));
-    let ringCount = 1;
-    while (ringCount < 24) {
-      let room = 0;
-      for (let k = 0; k < ringCount; k += 1) {
-        room += perRing(spread * 0.64 * (1 - k / (ringCount + 0.6)));
-      }
-      if (room >= list.length - 1) break;      // -1: one may sit at the centre
-      ringCount += 1;
-    }
-    for (let k = 0; k < ringCount && left.length; k += 1) {
-      const r = spread * 0.64 * (1 - k / (ringCount + 0.6));
-      if (left.length === 1 && k > 0) break;   // the last one takes the middle
-      const take = Math.min(left.length, perRing(r));
-      rings.push({ radius: r, list: left.slice(0, take) });
-      left = left.slice(take);
-    }
-    if (left.length) rings.push({ radius: 0, list: left.slice(0, 1) });
-    if (left.length > 1) rings[rings.length - 1].list = left;   // nowhere else
-
-    rings.forEach((ring, depth) => {
-      const step = ring.list.length ? TAU / ring.list.length : TAU;
-      const nextIn = rings[depth + 1] ? rings[depth + 1].radius : 0;
-      const inner_r = depth > 0 ? rings[depth - 1].radius : null;
-      // Half the gap to the ring OUTSIDE this one as well. Capping only
-      // against the ring inside let a wide innermost node meet a wide node on
-      // the ring above it wherever their angles happened to line up — which
-      // on the published board they nearly did, at 0.7px.
-      const outward = inner_r === null ? Infinity : (inner_r - ring.radius) / 2 - 2;
-      // The tightest of: half the chord to its neighbour on this ring, half
-      // the gap to the ring inside, and the distance to the cell's edge.
-      // Geometry decides the size, with only a hair of floor: a node that has
-      // to be three pixels to avoid touching its neighbour is drawn at three
-      // pixels. Flooring it higher draws a lie about the room a sector has.
-      const room = ring.radius === 0
-        ? Math.max(1, Math.min(inner_r === null ? spread : inner_r - 2,
-                               outward === Infinity ? spread : outward * 2))
-        : Math.max(1, Math.min(
-          ring.list.length > 1 ? Math.sin(Math.PI / ring.list.length) * ring.radius - 2 : spread,
-          (ring.radius - nextIn) / 2 - 2,
-          outward,
-          spread - ring.radius - 2));
-      ring.list.forEach((r, i) => {
-        // Start at the top and go clockwise, so the largest disclosed holding
-        // in a sector is the first thing read.
-        const angle = -Math.PI / 2 + i * step;
-        const node = {
-          ...r,
-          x: ring.radius === 0 ? cx : cx + Math.cos(angle) * ring.radius,
-          y: ring.radius === 0 ? cy : cy + Math.sin(angle) * ring.radius,
-          r: Math.max(6, Math.min(room, radiusOf(r.cap))),
-          hasCap: finite(r.cap) && r.cap > 0,
-          sectorAt: { x: cx, y: cy },
-        };
-        nodes.set(r.ticker, node);
-        placed.push(node);
-      });
+    const GOLDEN = Math.PI * (3 - Math.sqrt(5));
+    list.forEach((r, i) => {
+      const angle = i * GOLDEN - Math.PI / 2;
+      // sqrt spacing keeps the density even from the middle out; the 0.86
+      // keeps the outermost company just inside its own shore.
+      const reach = Math.sqrt((i + 0.5) / list.length) * 0.86 * shoreAt(seed, angle);
+      const node = {
+        ...r,
+        x: cx + Math.cos(angle) * rx * reach,
+        y: cy + Math.sin(angle) * ry * reach,
+        r: Math.max(3, radiusOf(r.cap)),
+        hasCap: finite(r.cap) && r.cap > 0,
+        sectorAt: { x: cx, y: cy },
+      };
+      nodes.set(r.ticker, node);
+      placed.push(node);
     });
   });
 
-  return { cells, nodes, placed, view };
+  /* Nothing may touch anything.
+   *
+   * The ring maths sizes a company against where it EXPECTS its neighbours to
+   * be. On a circle that is exact; on a wobbled shore it is close, and close
+   * put EMFD two and a half pixels into OBRI. So the last word goes to the
+   * positions that were actually produced: no company is drawn wider than
+   * half the distance to its nearest neighbour, whichever lake that neighbour
+   * belongs to. It only binds where things are crowded, so the market-value
+   * scaling survives everywhere else.
+   */
+  placed.forEach((a) => {
+    let nearest = Infinity;
+    placed.forEach((b) => {
+      if (a === b) return;
+      const away = Math.hypot(a.x - b.x, a.y - b.y);
+      if (away < nearest) nearest = away;
+    });
+    if (nearest !== Infinity) a.r = Math.max(2, Math.min(a.r, nearest / 2 - 0.5));
+  });
+
+  return { cells, lakes, nodes, placed, view };
 }
 
 /* Where each holder's slice starts and stops on the band.
@@ -287,6 +265,52 @@ export function placeHolders(model, holdings, opts = {}) {
  * names it, and the register beside the board lists all of them in an order
  * that is stated. Zoom changes how big things are, never who is named.
  */
+
+
+/* A sector is a lake, and its companies stand around the shore.
+ *
+ * A circle was the first try and read as a diagram of a circle: twenty-five
+ * identical rings, and nothing about them said "these are different places".
+ * A lake has a shape of its own, so a reader learns the board the way they
+ * learn a map — by the outline, not by counting cells.
+ *
+ * The outline is three sinusoids summed at a phase taken from the sector's
+ * own name, which makes it irregular, smooth, closed, and the SAME every time
+ * that sector is drawn. A random wobble would give the Banks a different
+ * coastline on every render, and the whole point of this board is that
+ * nothing moves unless the data moved.
+ */
+export function shoreAt(seed, angle) {
+  return 1
+    + 0.15 * Math.sin(angle * 2 + seed * 1.7)
+    + 0.09 * Math.sin(angle * 3 - seed * 2.3)
+    + 0.05 * Math.sin(angle * 5 + seed * 0.9);
+}
+
+export function seedOf(name) {
+  let h = 0;
+  for (let i = 0; i < (name || '').length; i += 1) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+  return (h % 1000) / 1000 * TAU;
+}
+
+/** The shore as a closed, smooth path — Catmull-Rom through sampled points. */
+export function lakePath(cx, cy, rx, ry, seed, samples = 18) {
+  const pts = [];
+  for (let i = 0; i < samples; i += 1) {
+    const a = (i / samples) * TAU;
+    const w = shoreAt(seed, a);
+    pts.push([cx + Math.cos(a) * rx * w, cy + Math.sin(a) * ry * w]);
+  }
+  const at = (i) => pts[(i + pts.length) % pts.length];
+  let d = `M${at(0)[0].toFixed(2)} ${at(0)[1].toFixed(2)}`;
+  for (let i = 0; i < pts.length; i += 1) {
+    const p0 = at(i - 1); const p1 = at(i); const p2 = at(i + 1); const p3 = at(i + 2);
+    d += `C${(p1[0] + (p2[0] - p0[0]) / 6).toFixed(2)} ${(p1[1] + (p2[1] - p0[1]) / 6).toFixed(2)}`
+      + ` ${(p2[0] - (p3[0] - p1[0]) / 6).toFixed(2)} ${(p2[1] - (p3[1] - p1[1]) / 6).toFixed(2)}`
+      + ` ${p2[0].toFixed(2)} ${p2[1].toFixed(2)}`;
+  }
+  return `${d}Z`;
+}
 
 
 export function arcPath(cx, cy, r0, r1, a0, a1) {
@@ -366,6 +390,9 @@ export function renderMap(svg, model, opts) {
 
   const gCell = svgEl('g', { class: 'om-cells' }, svg);
   const gBridge = svgEl('g', { class: 'om-bridges' }, svg);
+  // Above the web, below the companies: a sector's name is the one label a
+  // reader needs before anything else, and 143 resting lines crossed it.
+  const gLakeName = svgEl('g', { class: 'om-lake-names' }, svg);
   const gCo = svgEl('g', { class: 'om-cos' }, svg);
   const gDot = svgEl('g', { class: 'om-dots' }, svg);
   const gName = svgEl('g', { class: 'om-names' }, svg);
@@ -384,41 +411,155 @@ export function renderMap(svg, model, opts) {
   const on = (id) => !focus || lit.has(id);
   const cls = (...ids) => (focus && !ids.some(on) ? ' om-dim' : '');
 
-  // ── sector regions ────────────────────────────────────────────────────────
-  cells.forEach((cell) => {
-    const g = svgEl('g', { class: 'om-cell' }, gCell);
-    svgEl('rect', {
-      x: cell.x + 1, y: cell.y + 1, width: Math.max(0, cell.w - 2),
-      height: Math.max(0, cell.h - 2), rx: 12,
-      fill: 'var(--own-cell)', stroke: 'var(--rule)', 'stroke-width': 0.7,
-    }, g);
-    // Centred, because `text-anchor: end` is resolved against the INLINE
-    // direction: with `direction: rtl` it anchors the logical end — the left
-    // side of the rendered text — so every Arabic sector caption ran out of
-    // the right-hand side of its own cell. `middle` means the same thing in
-    // both languages.
-    const label = svgEl('text', {
-      x: cell.x + cell.w / 2, y: cell.y + 13, fill: 'var(--faint)',
-      'font-size': 8.5, 'letter-spacing': ar ? 0 : 0.7, 'font-weight': 600,
-      'text-anchor': 'middle', direction: ar ? 'rtl' : 'ltr',
-    }, g);
-    fitText(label, ar ? cell.sector : cell.sector.toUpperCase(), cell.w - 14, ar);
+  const byTickerAll = new Map();
+  holdings.forEach((p) => {
+    if (!byTickerAll.has(p.ticker)) byTickerAll.set(p.ticker, []);
+    byTickerAll.get(p.ticker).push(p);
   });
 
-  /* Owner, and owned.
+  // ── the lakes ─────────────────────────────────────────────────────────────
+  //
+  // Water, not a shaded rectangle: a soft fall from the middle to the shore,
+  // and a rim a shade deeper than the fill. Both come from the same two
+  // tokens the rest of the board uses, so the lake changes with the theme
+  // instead of carrying a colour of its own.
+  const defs = svgEl('defs', {}, svg);
+  const water = svgEl('radialGradient', {
+    id: 'om-water', cx: '42%', cy: '38%', r: '78%',
+  }, defs);
+  svgEl('stop', { offset: '0%', 'stop-color': 'var(--own-shallow)' }, water);
+  svgEl('stop', { offset: '100%', 'stop-color': 'var(--own-deep)' }, water);
+
+  model.lakes.forEach((lake) => {
+    const g = svgEl('g', { class: 'om-lake' }, gCell);
+    const shore = lakePath(lake.cx, lake.cy, lake.rx, lake.ry, lake.seed);
+    svgEl('path', { d: shore, fill: 'url(#om-water)', class: 'om-water' }, g);
+    // The shoreline itself, and one line inside it — the way a map draws the
+    // shallows without drawing anything that is not there.
+    svgEl('path', {
+      d: shore, fill: 'none', stroke: 'var(--own-shore)', 'stroke-width': 1,
+    }, g);
+    svgEl('path', {
+      d: lakePath(lake.cx, lake.cy, lake.rx * 0.93, lake.ry * 0.93, lake.seed),
+      fill: 'none', stroke: 'var(--own-shore)', 'stroke-width': 0.5,
+      opacity: 0.55,
+    }, g);
+
+    // The name sits on the water above the companies, not in a corner and
+    // not in the middle, which is now full of them.
+    const plate = svgEl('g', { class: 'om-lake-name' }, gLakeName);
+    const label = svgEl('text', {
+      x: lake.cx, y: lake.cy - lake.ry * shoreAt(lake.seed, -Math.PI / 2) - 5,
+      fill: 'var(--faint)', 'font-size': 9,
+      'letter-spacing': ar ? 0 : 0.6, 'font-weight': 600,
+      'text-anchor': 'middle', direction: ar ? 'rtl' : 'ltr',
+    }, plate);
+    fitText(label, ar ? lake.sector : lake.sector.toUpperCase(),
+            lake.rx * 1.9, ar);
+  });
+
+  /* The lines are there at rest too.
    *
-   * A holder has a dot at every company they hold, because a stake is a
-   * percentage of ONE company and there is no point on this board that means
-   * "everything they own". But when one holder is asked about, the question
-   * changes from "what is in this company" to "what does this person hold",
-   * and for that they need somewhere to stand: a single node, with a line to
-   * each company, each line tagged with the stake it carries.
-   *
-   * The travelling dot is the direction. A line between two things says they
-   * are related; a dot leaving the owner and arriving at the company says
-   * which way the holding runs. It is suppressed for readers who have asked
-   * their machine for less motion.
+   * They were taken out because 119 curves across 25 lakes read as a texture
+   * rather than a fact — which is true, and the owner has now asked for them
+   * back twice, which settles it. The compromise is weight: at rest they are
+   * thin and faint, the shape of the market's cross-holdings without
+   * competing with it; in focus one holder's lines come forward at full
+   * strength with the stakes tagged on them.
    */
+  if (!focus) {
+    bridges.forEach((b) => {
+      for (let i = 0; i < b.tickers.length - 1; i += 1) {
+        const from = nodes.get(b.tickers[i]);
+        const to = nodes.get(b.tickers[i + 1]);
+        if (!from || !to) continue;
+        const { d } = edgePath(from, to, 0.16);
+        svgEl('path', {
+          d, fill: 'none', stroke: hueOf(b.holder), 'stroke-width': 0.7,
+          'stroke-linecap': 'round', opacity: 0.22, class: 'om-bridge om-bridge-rest',
+        }, gBridge);
+        const drift = svgEl('circle', {
+          r: 1.7, fill: hueOf(b.holder), opacity: 0.55, class: 'om-flow-dot',
+        }, gBridge);
+        svgEl('animateMotion', {
+          dur: `${(3.4 + ((i + b.tickers.length) % 4) * 0.6).toFixed(1)}s`,
+          repeatCount: 'indefinite', path: d,
+        }, drift);
+      }
+    });
+  }
+
+  /* A company's own connections, when the company is the thing asked about.
+   *
+   * Its holders' dots orbit it already, so a line between them would be ten
+   * pixels long and say nothing. Instead each holder is given a seat out on
+   * the water at a readable distance, with a line in to the company, their
+   * name on it and their stake at the end — the mirror of the holder view.
+   *
+   * And where one of those holders is in OTHER companies, that line is drawn
+   * too: the question "who is in this company" is half answered until you can
+   * see where else they are.
+   */
+  const heldBy = focus && byTickerAll.has(focus)
+    ? byTickerAll.get(focus).filter((p) => p.percent > 0) : [];
+  if (heldBy.length) {
+    const n = nodes.get(focus);
+    const ordered = heldBy.slice().sort((a, b) => b.percent - a.percent);
+    const orbit = Math.max(64, n.r + 52);
+    ordered.forEach((p, i) => {
+      const angle = -Math.PI / 2 + (i / ordered.length) * TAU;
+      const seatAt = {
+        x: Math.max(70, Math.min(view.w - 70, n.x + Math.cos(angle) * orbit * 1.25)),
+        y: Math.max(24, Math.min(view.h - 24, n.y + Math.sin(angle) * orbit * 0.78)),
+        r: 6,
+      };
+      const { d } = edgePath(seatAt, n, 0.08);
+      const mv = moves && moves.get(keyOf(p.holder, focus));
+      const changed = mv && finite(mv.change) && Math.abs(mv.change) > 0.0005;
+      const colour = changed
+        ? (mv.change > 0 ? 'var(--up)' : 'var(--down)') : hueOf(p.holder);
+      svgEl('path', {
+        d, fill: 'none', stroke: colour, 'stroke-width': changed ? 1.8 : 1.5,
+        'stroke-dasharray': changed ? '5 4' : null,
+        'stroke-linecap': 'round', opacity: 0.85, class: 'om-bridge',
+        'data-to': focus,
+      }, gBridge);
+      const travel = svgEl('circle', { r: 2.4, fill: colour, class: 'om-flow-dot' }, gBridge);
+      svgEl('animateMotion', {
+        dur: `${(2.1 + (i % 3) * 0.4).toFixed(2)}s`, repeatCount: 'indefinite', path: d,
+      }, travel);
+
+      const g = svgEl('g', { class: 'om-seat', 'data-id': p.holder }, gBridge);
+      svgEl('circle', {
+        cx: seatAt.x, cy: seatAt.y, r: seatAt.r, fill: hueOf(p.holder),
+        stroke: 'var(--surface)', 'stroke-width': 1.6,
+      }, g);
+      const name = labelOf(p.holder);
+      const text = svgEl('text', {
+        x: seatAt.x, y: seatAt.y - seatAt.r - 5, 'text-anchor': 'middle',
+        'font-size': 9, fill: 'var(--ink)', direction: 'ltr',
+      }, g);
+      text.textContent = `${stakeText(p.percent)}  `
+        + (name.length > 24 ? `${name.slice(0, 22)}…` : name);
+      const title = svgEl('title', {}, g);
+      title.textContent = `${name} — ${stakeText(p.percent)} ${t('of', 'من')} ${focus}`;
+      g.addEventListener('click', (e) => { e.stopPropagation(); onPick(p.holder); });
+
+      // Where else this holder is.
+      holdings.filter((q) => q.holder === p.holder && q.ticker !== focus && q.percent > 0)
+        .forEach((q) => {
+          const other = nodes.get(q.ticker);
+          if (!other) return;
+          const onward = edgePath(seatAt, other, 0.14);
+          svgEl('path', {
+            d: onward.d, fill: 'none', stroke: hueOf(p.holder), 'stroke-width': 1.1,
+            'stroke-linecap': 'round', opacity: 0.55, class: 'om-bridge om-bridge-onward',
+            'data-to': q.ticker,
+          }, gBridge);
+        });
+    });
+  }
+
   const owned = focus ? holdings.filter((p) => p.holder === focus && p.percent > 0) : [];
   let seat = null;
   if (owned.length) {
@@ -688,12 +829,10 @@ export function renderMap(svg, model, opts) {
   //
   // Names only for the focused company, and only then. Sixty-six of them
   // permanently on the board would bury the board.
-  // Only for a company. A HOLDER in focus is already answered by the seat,
-  // its spokes and the stake tag at each end; pinning the same name again
-  // beside every company said it twice.
-  if (focus && nodes.has(focus)) {
-    popOut(gPop, nodes.get(focus), (byTicker.get(focus) || []), labelOf, onPick, view);
-  }
+  // Nothing is pinned any more. A company in focus now seats its holders out
+  // on the water with their names on the lines, and a holder in focus has a
+  // seat of their own — pinning the same names a third time beside the ring
+  // said them twice over.
 }
 
 /* One holder's name pinned beside the ring it belongs to.
