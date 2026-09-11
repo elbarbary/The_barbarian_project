@@ -943,6 +943,10 @@
     "meaning": "Diesel serves as the primary operational fuel for commercial freight, logistics, and heavy machinery. Record pricing directly raises baseline input costs for global transportation and supply chain operations.",
     "meaning_ar": "يمثل الديزل الوقود الأساسي لقطاعات الشحن التجاري، والخدمات اللوجستية، والمعدات الثقيلة. ويترتب على تسجيل أسعاره لمستويات قياسية ارتفاع مباشر في تكاليف التشغيل الأساسية لعمليات النقل وسلاسل الإمداد العالمية."
   },
+  "اسعار الديزل في امريكا تتجاوز 6 دولارات للجالون للمره الاولي علي الاطلاق": {
+    "meaning": "Diesel serves as the primary fuel for commercial freight and industrial transport, making this price level a direct driver of distribution and logistics expenses across global supply chains.",
+    "meaning_ar": "يُعد الديزل الوقود الأساسي للشحن التجاري والنقل الصناعي، مما يجعل هذا المستوى من الأسعار محركاً مباشراً لنفقات التوزيع والخدمات اللوجستية عبر سلاسل التوريد العالمية."
+  },
   "اسعار الذهب العالميه تتباين وسط ترقب لبيانات التضخم الامريكي": {
     "meaning": "Global gold prices fluctuate based on macroeconomic indicators such as US inflation data, which determine benchmark interest rate environments, currency valuations, and the holding cost of non-yielding assets.",
     "meaning_ar": "تتذبذب أسعار الذهب العالمية بناءً على مؤشرات الاقتصاد الكلي مثل بيانات التضخم الأمريكية، والتي تحدد أسعار الفائدة المرجعية وقيمة العملة وتكلفة حيازة الأصول غير المدرة للعائد."
@@ -1983,6 +1987,10 @@
     "meaning": "An expanding Chinese trade surplus reflects an increase in outbound manufacturing volumes relative to imports, affecting global shipping route utilization, raw material consumption rates, and international trade liquidity flows.",
     "meaning_ar": "يعكس اتساع الفائض التجاري الصيني ارتفاع حجم الصادرات الصناعية مقارنة بالواردات، مما يحدد معدلات تشغيل خطوط الشحن البحري العالمية، وحجم استهلاك المواد الخام، وحركة السيولة في التجارة الدولية."
   },
+  "انخفاض الاسهم اليابانيه مسجله خساير اسبوعيه": {
+    "meaning": "Weekly declines in Japanese equities reflect widespread net capital outflows across Tokyo-listed shares, driven by market revaluations linked to domestic currency fluctuations and interest rate adjustments.",
+    "meaning_ar": "يعكس التراجع الأسبوعي للأسهم اليابانية صافي تدفقات رأسمالية خارجة عبر الشركات المدرجة في بورصة طوكيو، نتيجة لإعادة تسعير السوق المرتبطة بتحركات العملة المحلية وتغيرات أسعار الفائدة."
+  },
   "انخفاض موشر بورصه قطر في ختام التعاملات": {
     "meaning": "A drop in the benchmark index reflects a net decrease in the market capitalisation of its constituent equities by the end of the trading session, where selling volume across key listed firms outweighs executed buying volume.",
     "meaning_ar": "يعكس تراجع المؤشر الرئيسي انخفاض القيمة السوقية الإجمالية للأسهم المكونة له بنهاية الجلسة، نتيجة لتفوق أحجام عروض البيع المنفذة على طلبات الشراء على أسهم الشركات المدرجة."
@@ -2062,6 +2070,10 @@
   "باتاغونيا الارجنتينيه تجذب استثمارات مراكز البيانات الضخمه بقدرات تصل الي 500 ميجاوات": {
     "meaning": "Hyperscale data center developments require substantial grid allocation, securing up to 500 megawatts of dedicated power infrastructure and digital hosting capacity in the region.",
     "meaning_ar": "يتطلب تطوير مراكز البيانات العملاقة تخصيص قدرات كهربائية كبرى، مما يربط ما يصل إلى 500 ميجاوات من البنية التحتية للطاقة بمرافق الاستضافة الرقمية في المنطقة."
+  },
+  "باركليز يتوقع رفع الفايده الاوروبيه في ديسمبر": {
+    "meaning": "Projected changes in European Central Bank interest rates affect global sovereign bond yields and alter euro-denominated debt servicing costs for emerging market corporate and state borrowers.",
+    "meaning_ar": "تؤثر التغيرات المتوقعة في أسعار فائدة البنك المركزي الأوروبي على عوائد السندات السيادية العالمية وتعدل تكاليف خدمة الديون المقومة باليورو للمقترضين من الشركات والحكومات في الأسواق الناشئة."
   },
   "باركليز يتوقع وصول موشر اس اند بي 500 الي 8800 نقطه العام المقبل": {
     "meaning": "Investment bank index projections aggregate corporate earnings estimates, valuation multiples, and macroeconomic models into a quantitative baseline for equity benchmark performance.",
