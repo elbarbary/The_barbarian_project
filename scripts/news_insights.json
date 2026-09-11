@@ -939,6 +939,10 @@
     "meaning": "Daily poultry price updates reflect the spot market rates determined by current supply volumes, feed input costs, and farm-gate transactions across the local agricultural sector.",
     "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن أسعار السوق الفورية المحددة بناءً على حجم المعروض الحالي، وتكاليف الأعلاف، ومعاملات البيع من المزارع في قطاع الإنتاج الداجني المحلي."
   },
+  "اسعار الدواجن اليوم الجمعه 11-9-2026 في مصر": {
+    "meaning": "This headline reports daily spot prices for poultry in the domestic market, reflecting current supply chain costs including feed inputs, farm-gate pricing, and distribution margins.",
+    "meaning_ar": "يعرض هذا العنوان أسعار التداول الفورية اليومية للدواجن في السوق المحلي، والتي تعكس تكاليف سلاسل الإمداد الحالية بما تشمله من أسعار الأعلاف، وتكلفة التسليم من المزارع، وهوامش التوزيع."
+  },
   "اسعار الدواجن اليوم الجمعه 4-9-2026 في مصر": {
     "meaning": "Daily poultry price updates reflect ongoing supply-and-demand dynamics, feed input costs, and distribution expenses across the Egyptian livestock and food production sector.",
     "meaning_ar": "تعكس التحديثات اليومية لأسعار الدواجن حركة العرض والطلب وتكاليف الأعلاف ومصروفات التوزيع في قطاع الإنتاج الداجني والغذائي المصري."
@@ -1867,6 +1871,10 @@
     "meaning": "The company's standalone financial results record a 42% year-on-year increase in net profit for the first half, reaching EGP 343.8 million from its direct core manufacturing and commercial operations.",
     "meaning_ar": "سجلت القوائم المالية المستقلة للشركة نموًا في صافي أرباح النصف الأول بنسبة 42% على أساس سنوي لتصل إلى 343.8 مليون جنيه، الناتجة عن أنشطتها التشغيلية والصناعية المباشرة."
   },
+  "المانيا تقود تحركا جديدا لاستخدام الاصول الروسيه المجمده لتمويل قرض لاوكرانيا": {
+    "meaning": "This structure uses the yields and interest generated from immobilized sovereign assets as debt service collateral to fund a syndicated international loan facility.",
+    "meaning_ar": "تعتمد هذه الآلية على توجيه العوائد والفوائد الناتجة عن الأصول السيادية المجمدة كضمان لسداد خدمة الدين المترتبة على تسهيل ائتماني دولي مشترك."
+  },
   "المجتمعات العمرانيه: ضغوط التكاليف وتقلبات سلاسل الامداد تعيد تشكيل السوق": {
     "meaning": "Cost pressures from raw materials and supply chain disruptions directly alter the operational cost structures, pricing mechanisms, and execution schedules of real estate developers.",
     "meaning_ar": "تؤدي ضغوط تكاليف مواد البناء واضطرابات سلاسل الإمداد إلى تغيير هياكل التكاليف التشغيلية، وآليات التسعير، وجداول تنفيذ المشروعات لدى شركات التطوير العقاري."
@@ -2054,6 +2062,10 @@
   "اوبر تعين بنوكا لترتيب اول طرح لها لسندات دين متعدده الشرايح مقومه باليورو": {
     "meaning": "Mandating investment banks to arrange a multi-tranche euro-denominated debt issuance accesses the European institutional bond market to raise foreign-currency capital across varied maturity profiles.",
     "meaning_ar": "يمثل تفويض بنوك استثمار لترتيب طرح سندات دين متعددة الشرائح مقومة باليورو آلية لدخول سوق السندات المؤسسية الأوروبية وجمع سيولة بالعملة الأجنبية عبر آجال استحقاق مختلفة."
+  },
+  "اوروبا تنفق 7.28 مليار يورو علي الغاز الروسي المسال خلال 8 اشهر": {
+    "meaning": "European utilities continue off-taking Russian liquefied natural gas under existing supply arrangements, directing commercial payments through active maritime energy trade channels to maintain storage inventories.",
+    "meaning_ar": "تستمر شركات المرافق الأوروبية في استلام شحنات الغاز الطبيعي المسال الروسي بموجب ترتيبات التوريد الحالية، مع توجيه المدفوعات التجارية عبر قنوات التجارة البحرية للطاقة لتغذية المخزونات."
   },
   "اول اسبوع تصديري يسجل 2121 طنا من القطن": {
     "meaning": "The execution of 2,121 tonnes in cotton export shipments marks the commencement of seasonal outflow volumes in the agricultural trading market.",
