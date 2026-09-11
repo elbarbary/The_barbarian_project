@@ -190,6 +190,25 @@
    "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293137",
    "ticker": "AMER"
   },
+  "293174": {
+   "basis": null,
+   "currency": "جنيه مصرى",
+   "filed_on": "2026-08-16",
+   "isin": "EGS551D1C017",
+   "months": 6,
+   "name_ar": "بى اى جى للتجارة والاستثمار",
+   "net_profit_egp": 390710.0,
+   "news_id": "293174",
+   "period": "H1 2026",
+   "period_end": "2026-06-30",
+   "period_start": "2026-01-01",
+   "prior_net_profit_egp": 760870.0,
+   "prior_period": "H1 2025",
+   "prior_period_end": "2025-06-30",
+   "prior_period_start": "2025-01-01",
+   "source": "https://www.egx.com.eg/ar/NewsDetails.aspx?NewsID=293174",
+   "ticker": "BIGP"
+  },
   "293208": {
    "basis": null,
    "currency": "جنيه مصرى",
@@ -851,6 +870,7 @@
   "293135": "2026-08-13",
   "293137": "2026-08-13",
   "293169": "2026-08-16",
+  "293174": "2026-08-16",
   "293177": "2026-08-16",
   "293181": "2026-08-16",
   "293208": "2026-08-16",
