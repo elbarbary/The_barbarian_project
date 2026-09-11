@@ -823,6 +823,10 @@
     "meaning": "Lower US Treasury yields reflect higher bond prices following monetary policy commentary, setting the global benchmark rate for sovereign and corporate debt pricing.",
     "meaning_ar": "يعكس انخفاض عوائد سندات الخزانة الأمريكية ارتفاع أسعارها استجابةً لتصريحات السياسة النقدية، وهو ما يحدد السعر المرجعي لتسعير أدوات الدين السيادية وتكاليف اقتراض الشركات عالمياً."
   },
+  "استقرار بختام الاسبوع.. اسعار العملات الاجنبيه والعربيه اليوم الجمعه": {
+    "meaning": "Official foreign exchange rates remain unchanged at commercial banks during the weekend closure, maintaining fixed conversion rates for cross-border trade settlements, corporate treasury valuations, and imported inventory pricing until interbank operations resume.",
+    "meaning_ar": "تثبت أسعار صرف العملات الأجنبية والعربية في البنوك خلال العطلة الأسبوعية، مما يبقي تكاليف تسوية التجارة الخارجية وتقييمات الخزانة وتسعير البضائع المستوردة دون تغيير حتى استئناف التعاملات بين البنوك."
+  },
   "اسراييل تبلغ القنصليه البريطانيه في القدس الشرقيه بوجوب اغلاقها": {
     "meaning": "Geopolitical and diplomatic developments directly factor into regional risk assessments, cross-border diplomatic-trade coordination channels, and institutional risk premia.",
     "meaning_ar": "تؤثر التطورات الدبلوماسية والجيوسياسية بصورة مباشرة في تقييمات المخاطر الإقليمية وقنوات التنسيق التجاري والدبلوماسي عبر الحدود وعلاوات المخاطر المؤسسية."
@@ -2923,6 +2927,14 @@
   "سعر الدينار الكويتي اليوم الثلاثاء 8-9-2026 في ختام التعاملات": {
     "meaning": "End-of-day foreign exchange rates establish the official clearing prices for bilateral currency conversions, cross-border trade settlements, and expatriate remittance processing across the banking sector.",
     "meaning_ar": "تحدد أسعار صرف العملات الأجنبية في ختام التعاملات اليومية أسعار المقاصة الرسمية لتحويلات العملة، وتسوية المعاملات التجارية البينية، ومعالجة تدفقات تحويلات العاملين عبر القطاع المصرفي."
+  },
+  "سعر الدينار الكويتي اليوم الجمعه.. خريطه الاسعار في البنوك الحكوميه والخاصه": {
+    "meaning": "Commercial and state banks update foreign exchange rate boards to reflect interbank foreign currency pricing mechanisms for the Kuwaiti Dinar against the Egyptian Pound, maintaining liquidity operations for cross-border remittances and trade settlements.",
+    "meaning_ar": "تُحَدث البنوك الحكومية والخاصة لوحات أسعار صرف الدينار الكويتي مقابل الجنيه المصري بناءً على آليات تسعير سوق الصرف بين البنوك (الإنتربنك)، لتنفيذ عمليات السيولة المرتبطة بالتحويلات والتسويات التجارية."
+  },
+  "سعر الدينار الكويتي اليوم الخميس 10-9-2026 في نهايه التعاملات": {
+    "meaning": "End-of-day foreign exchange quotations for the Kuwaiti Dinar establish the official clearing rates for cross-border remittances, corporate settlement of bilateral trade, and balance-sheet revaluations in Egyptian pounds.",
+    "meaning_ar": "تحدد أسعار صرف الدينار الكويتي في نهاية التعاملات اليومية أسعار المقاصة الرسمية للتحويلات المالية الخارجية، وتسوية المعاملات التجارية البينية للشركات، وإعادة تقييم الالتزامات والأصول بالجنيه المصري."
   },
   "سعر الذهب العالمي يغلق منخفضا وسط توقعات قويه برفع الفايده الامريكيه": {
     "meaning": "Higher US interest rates increase the opportunity cost of holding non-yielding bullion and strengthen the US dollar, an asset inversely correlated with dollar-denominated gold prices.",
